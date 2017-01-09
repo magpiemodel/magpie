@@ -1,0 +1,610 @@
+# (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
+# authors, and contributors see AUTHORS file
+# This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+# or later. See LICENSE file or go to http://www.gnu.org/licenses/
+# Contact: magpie@pik-potsdam.de
+
+##########################################################
+#### bioenergy outputs ####
+##########################################################
+# Version 2.07, Florian Humpenoeder
+#
+# 2.01, adjusted libraries
+# 2.02, added net trade
+# 2.03, reactivated water related issues
+# 2.04, reactivated rainfed and irrigated yields 
+# 2.05, changed irrigated area share to total irrigated croparea / LPJ yields for y1995
+# 2.06, added global total cost listing
+# 2.07, modified so that it also works without bioenergy demand
+
+##########################################################
+library(luscale)
+library(luplot)
+library(lucode)
+library(lusweave)
+library(magpie)
+#options(error=function()traceback(2))
+
+############################# BASIC CONFIGURATION #############################
+if(!exists("source_include")) {
+  
+  outputdir        <- 'output/'     # title of the run (with date)
+  gdx<-path(outputdir,"fulldata.gdx")
+  title <- "default"
+  latexpath        <-NA              # Latexpath necessary if swclose is performed in the queue
+  #Define arguments that can be read from command line
+  readArgs("outputdir","latexpath","title")
+} else{
+  gdx<-path(outputdir,"fulldata.gdx")
+}
+###############################################################################
+
+sw<-swopen(paste(outputdir,"/",title,"_Bioenergy_outputs.pdf",sep=""))
+swR(sw,options,magclass.verbosity=1)
+#muss vermutlich in den header bzw. template, damit es funktioniert
+#swlatex(sw,"\\hypersetup{pdfpagelayout=SinglePage}")
+#swlatex(sw,"\\hypersetup{pdfpagemode=UseNone}")
+years_all <- getYears(modelstat(gdx))
+
+swlatex(sw,"\\huge")
+swlatex(sw,"\\textbf{Bioenergy outputs}\\newline")
+swlatex(sw,"\\normalsize")
+swlatex(sw,"\\newline")
+swlatex(sw,"\\tableofcontents")
+
+swlatex(sw,"\\newpage")
+swlatex(sw,"\\section{Inputs}")
+
+
+# Food Demand
+#swlatex(sw,"\\newpage")
+swlatex(sw,paste("\\subsection{Food Demand}"))
+food<-dimSums(readGDX(gdx,"im_dem_food", format="first_found"),dims=3)
+dimnames(food)[[3]]<-paste("Food Demand in mio. t DM")
+food_glo <- colSums(food)
+dimnames(food_glo)[[1]]<-"GLO"
+food <- mbind(food,food_glo)
+swfigure(sw,"scratch_plot",food[1:10,years_all,],add=TRUE,ylab=dimnames(food)[[3]],sw_option="width=10")
+swtable(sw,round(food[,years_all,],2),table.placement="H",caption.placement="top",caption=dimnames(food)[[3]],vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
+
+swlatex(sw,paste("\\subsection{Feed Demand}"))
+feed<-dimSums(readGDX(gdx,"ov_dem_feed", format="first_found", select=list(type="level")),dims=c(3,4))
+dimnames(feed)[[3]]<-paste("Feed Demand in mio. t DM")
+feed_glo <- colSums(feed)
+dimnames(feed_glo)[[1]]<-"GLO"
+feed <- mbind(feed,feed_glo)
+swfigure(sw,"scratch_plot",feed[1:10,years_all,],add=TRUE,ylab=dimnames(feed)[[3]],sw_option="width=10")
+swtable(sw,round(feed[,years_all,],2),table.placement="H",caption.placement="top",caption=dimnames(feed)[[3]],vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
+
+# Material Demand
+swlatex(sw,"\\newpage")
+swlatex(sw,paste("\\subsection{Material Demand}"))
+mat<-dimSums(readGDX(gdx,"im_dem_material",format="first_found"),dims=3)
+dimnames(mat)[[3]]<-paste("Material Demand in in mio. t DM")
+mat_glo <- colSums(mat)
+dimnames(mat_glo)[[1]]<-"GLO"
+mat <- mbind(mat,mat_glo)
+swfigure(sw,"scratch_plot",mat[1:10,years_all,],add=TRUE,ylab=dimnames(mat)[[3]],sw_option="width=10")
+swtable(sw,round(mat[,years_all,],2),table.placement="H",caption.placement="top",caption=dimnames(mat)[[3]],vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
+
+# Bioenergy demand
+swlatex(sw,"\\newpage")
+swlatex(sw,paste("\\subsection{Bioenergy Demand}"))
+sm_biodem_level<-readGDX(gdx,"sm_biodem_level","c60_biodem_level", format="first_found")
+dem<-readGDX(gdx,"i60_bioenergy_dem","f60_bioenergy_dem", format="first_found")
+if (sm_biodem_level == 0) dem<-superAggregate(dem,aggr_type="sum",level="glo")
+dimnames(dem)[[3]] <- "Bioenergy demand (EJ)"
+dem <- as.magpie(dem/1000)
+swfigure(sw,"scratch_plot",dem[,intersect(years_all,getYears(dem)),],add=TRUE,ylab=dimnames(dem)[[3]],sw_option="width=10")
+swtable(sw,round(dem[,intersect(years_all,getYears(dem)),],2),table.placement="H",caption.placement="top",caption=dimnames(dem)[[3]],
+        vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
+
+# GHG prices
+swlatex(sw,"\\newpage")
+swlatex(sw,paste("\\subsection{GHG Prices}"))
+
+
+swlatex(sw,"\\subsubsection{CO2 price}")
+co2_c<-readGDX(gdx,"i56_ghg_prices", "i57_ghg_prices","f_ghg_prices", format="first_found")[,,"co2_c"]*12/44
+dimnames(co2_c)[[3]]<-"CO2 price (US Dollar 2004 per ton CO2)"
+swfigure(sw,"scratch_plot",co2_c[,intersect(years_all,getYears(co2_c)),],add=FALSE,ylab=dimnames(co2_c)[[3]],sw_option="width=10")
+swtable(sw,round(co2_c[,intersect(years_all,getYears(co2_c)),],0),table.placement="H",caption.placement="top",caption=dimnames(co2_c)[[3]],
+        vert.lines=1,align="r",hor.lines=1,digits=0,transpose=TRUE)
+
+
+#n2o price
+swlatex(sw,"\\subsubsection{N2O price}")
+n2o_n<-readGDX(gdx,"i56_ghg_prices", "i57_ghg_prices","f_ghg_prices", format="first_found")[,,"n2o_n"]*28/44
+dimnames(n2o_n)[[3]]<-"N2O price (US Dollar 2004 per ton N2O)"
+swfigure(sw,"scratch_plot",n2o_n[,intersect(years_all,getYears(n2o_n)),],add=FALSE,ylab=dimnames(n2o_n)[[3]],sw_option="width=10")
+swtable(sw,round(n2o_n[,intersect(years_all,getYears(n2o_n)),],0),table.placement="H",caption.placement="top",caption=dimnames(n2o_n)[[3]],
+        vert.lines=1,align="r",hor.lines=1,digits=0,transpose=TRUE)
+
+#ch4 price
+swlatex(sw,"\\subsubsection{CH4 price}")
+ch4<-readGDX(gdx,"i56_ghg_prices", "i57_ghg_prices","f_ghg_prices", format="first_found")[,,"ch4"]
+dimnames(ch4)[[3]]<-"CH4 price (US Dollar 2004 per ton CH4)"
+swfigure(sw,"scratch_plot",ch4[,intersect(years_all,getYears(ch4)),],add=FALSE,ylab=dimnames(ch4)[[3]],sw_option="width=10")
+swtable(sw,round(ch4[,intersect(years_all,getYears(ch4)),],0),table.placement="H",caption.placement="top",caption=dimnames(ch4)[[3]],
+        vert.lines=1,align="r",hor.lines=1,digits=0,transpose=TRUE)
+
+swlatex(sw,"\\newpage")
+swlatex(sw,"\\section{MAgPIE outputs}")
+
+# croparea
+swlatex(sw,"\\subsection{Croparea}")
+crop_area <- croparea(gdx,level="reg",crop_aggr=TRUE,water="sum")
+bioenergy_area <- croparea(gdx,level="reg",crops=c("begr","betr"),crop_aggr=TRUE,water="sum")
+other_crop_area <- as.magpie(crop_area-bioenergy_area)
+dimnames(bioenergy_area)[[3]]<-"Bioenergy area mio ha"
+dimnames(other_crop_area)[[3]]<-"Other crop area mio ha"
+bioenergy_area_glo <- colSums(bioenergy_area)
+other_crop_area_glo <- colSums(other_crop_area)
+dimnames(bioenergy_area_glo)[[1]]<-"GLO"
+dimnames(other_crop_area_glo)[[1]]<-"GLO"
+bioenergy_area <- mbind(bioenergy_area,bioenergy_area_glo)
+other_crop_area <- mbind(other_crop_area,other_crop_area_glo)
+all<-mbind(other_crop_area,bioenergy_area)
+swfigure(sw,"scratch_plot",all[1:10,years_all,],add=TRUE,ylab="croparea mio. ha",sw_option="width=10")
+swtable(sw,round(dimSums(all[,years_all,],dims=3),2),table.placement="H",caption.placement="top",caption="Total crop area mio.ha",vert.lines=1,
+        align="r",hor.lines=1,digits=0,transpose=TRUE)
+swtable(sw,round(all[,years_all,2]),table.placement="H",caption.placement="top",caption=dimnames(bioenergy_area)[[3]],vert.lines=1,align="r",
+        hor.lines=1,digits=0,transpose=TRUE)
+swtable(sw,round(all[,years_all,1]),table.placement="H",caption.placement="top",caption=dimnames(other_crop_area)[[3]],vert.lines=1,align="r",
+        hor.lines=1,digits=0,transpose=TRUE)
+
+# Bioenergy production
+swlatex(sw,"\\newpage")
+swlatex(sw,"\\subsection{Bioenergy production}")
+prod<-production(gdx,crops=c("begr","betr"),crop_aggr=FALSE,level="reg",water="sum",unit="EJ")
+prod_glob<-production(gdx,crops=c("begr","betr"),crop_aggr=FALSE,level="glo",water="sum",unit="EJ")
+all <- mbind(prod,prod_glob)
+swfigure(sw,"scratch_plot",all[1:10,years_all,],add=TRUE,ylab="Bioenergy production (EJ)",sw_option="width=10")
+swtable(sw,round(dimSums(all[,years_all,],dims=3),2),table.placement="H",caption.placement="top",caption="Total bioenergy production (EJ)",
+        vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
+swtable(sw,round(all[,years_all,"betr"],2),table.placement="H",caption.placement="top",caption="betr production (EJ)",
+        vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
+swtable(sw,round(all[,years_all,"begr"],2),table.placement="H",caption.placement="top",caption="begr production (EJ)",
+        vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
+
+# landuse pattern
+pre <- readGDX(gdx,"o90_land", format="first_found")
+if(!is.null(pre)) {
+  swlatex(sw,"\\newpage")
+  swlatex(sw,"\\subsection{Land-use pattern}")
+  main <- land(gdx)
+  pre <- superAggregate(dimSums(pre,dims=4),aggr_type="sum",level="reg")
+  swfigure(sw,alloc_plot,main,title="Main | Total land (si0+nsi0 | regional)",fig.orientation="landscape")
+  swfigure(sw,alloc_plot,pre,title="Presolve | Total land (si0+nsi0 | regional)",fig.orientation="landscape")
+  swlatex(sw,"\\newpage")
+  swlatex(sw,"\\subsection{Land-use change}")
+  bioen_pos <- main-pre
+  bioen_pos[bioen_pos < 0] <- 0
+  swfigure(sw,alloc_plot,bioen_pos,title="Positive land-use change due to 2nd gen. bioenergy prod",fig.orientation="landscape")
+  bioen_neg <- main-pre
+  bioen_neg[bioen_neg > 0] <- 0
+  swfigure(sw,alloc_plot,bioen_neg,title="Negative land-use change due to 2nd gen. bioenergy prod",fig.orientation="landscape")  
+} else {
+  swlatex(sw,"\\newpage")
+  swlatex(sw,"\\subsection{Land-use pattern}")
+  main <- land(gdx)
+  swfigure(sw,alloc_plot,dimSums(main,dims=1),title="Total land (si0+nsi0 | global)",fig.orientation="landscape")
+  swfigure(sw,alloc_plot,main,title="Total land (si0+nsi0 | regional)",fig.orientation="landscape")
+}
+
+#costs
+swlatex(sw,"\\newpage")
+swlatex(sw,"\\subsection{Costs - regional}")
+costs <- readGDX(gdx,"ov_cost_reg", format="first_found", select=list(type="level"))/1000
+costs <- mbind(costs,dimSums(costs,dims=1))
+swoutput(sw,costs[,years_all,],"bill. US Dollar",geom="bar",stack=T,color=NULL,facet_x=NULL,stat="sum",scenario=title,plot_level="reg")
+#magpie2ggplot2(costs,stack=T,color=NULL,facet_x=NULL,stat="sum")
+#other crops
+pre_costs <- readGDX(gdx,"o90_cost_reg", format="first_found")
+if(!is.null(pre_costs)) {
+  swlatex(sw,"\\newpage")
+  swlatex(sw,"\\subsubsection{Costs|Bioenergy}")
+  costs <- (readGDX(gdx,"ov_cost_reg", format="first_found", select=list(type="level")) - readGDX(gdx,"o90_cost_reg",  format="first_found"))/1000
+  costs <- mbind(costs,dimSums(costs,dims=1))
+  swoutput(sw,costs[,years_all,],"bill. US Dollar",geom="bar",stack=T,color=NULL,facet_x=NULL,stat="sum",scenario=title,plot_level="reg")
+  
+  swlatex(sw,"\\newpage")
+  swlatex(sw,"\\subsubsection{Costs|Other crops}")
+  costs <- readGDX(gdx,"o90_cost_reg", format="first_found")/1000
+  costs <- mbind(costs,dimSums(costs,dims=1))
+  swoutput(sw,costs[,years_all,],"bill. US Dollar",geom="bar",stack=T,color=NULL,facet_x=NULL,stat="sum",scenario=title,plot_level="reg")
+  #  swtable(sw,round(bio_costs[,years_all,],2),table.placement="H",caption.placement="top",caption=dimnames(bio_costs)[[3]],vert.lines=1,align="r",hor.lines=1,digits=0,transpose=TRUE)
+}  
+
+
+
+#cost listing
+swlatex(sw,"\\newpage")
+swlatex(sw,"\\subsection{Cost listing - global}")
+
+ov_cost_prod <- readGDX(gdx,"ov_cost_prod", format="first_found", select=list(type="level"))
+ov_cost_prod <- as.magpie(round(dimSums(ov_cost_prod,dims=3)))
+ov_cost_prod <- round(superAggregate(ov_cost_prod, aggr_type = "sum", level="glo" ))
+dimnames(ov_cost_prod)[[3]] <- "Production"
+
+ov_cost_transp <- readGDX(gdx,"ov_cost_transp", format="first_found", select=list(type="level"))
+ov_cost_transp <- as.magpie(dimSums(ov_cost_transp,dims=3))
+ov_cost_transp <- round(superAggregate(ov_cost_transp, aggr_type = "sum", level="glo" ))
+dimnames(ov_cost_transp)[[3]] <- "Transport"
+
+ov_cost_trade <- readGDX(gdx,"ov_cost_trade", format="first_found", select=list(type="level"))
+ov_cost_trade <- round(superAggregate(ov_cost_trade, aggr_type = "sum", level="glo" ))
+dimnames(ov_cost_trade)[[3]] <- "Trade"
+
+ov_cost_landcon <- readGDX(gdx,"ov_cost_landcon", format="first_found", select=list(type="level"))
+ov_cost_landcon <- as.magpie(dimSums(ov_cost_landcon,dims=3))
+ov_cost_landcon <- round(superAggregate(ov_cost_landcon, aggr_type = "sum", level="glo" ))
+dimnames(ov_cost_landcon)[[3]] <- "Land conversion"
+
+ov_cost_past <- readGDX(gdx,"ov_cost_past", format="first_found", select=list(type="level"))
+ov_cost_past <- round(superAggregate(ov_cost_past, aggr_type = "sum", level="glo" ))
+dimnames(ov_cost_past)[[3]] <- "Pasture"
+
+ov_cost_AEI <- readGDX(gdx,"ov_cost_AEI", format="first_found", select=list(type="level"))
+ov_cost_AEI <- round(superAggregate(ov_cost_AEI, aggr_type = "sum", level="glo" ))
+dimnames(ov_cost_AEI)[[3]] <- "AEI"
+
+ov_tech_cost <- readGDX(gdx,"ov_tech_cost","ovm_tech_cost", format="first_found", select=list(type="level"))
+ov_tech_cost <- round(superAggregate(ov_tech_cost, aggr_type = "sum", level="glo" ))
+dimnames(ov_tech_cost)[[3]] <- "TC"
+
+ov_maccs_costs <- readGDX(gdx,"ov_maccs_costs", format="first_found", select=list(type="level"))
+ov_maccs_costs <- round(superAggregate(ov_maccs_costs, aggr_type = "sum", level="glo" ))
+dimnames(ov_maccs_costs)[[3]] <- "Landuse mitigation"
+
+ov_emission_costs <- readGDX(gdx,"ov_emission_costs", format="first_found", select=list(type="level"))
+ov_emission_costs <- round(superAggregate(ov_emission_costs, aggr_type = "sum", level="glo" ))
+dimnames(ov_emission_costs)[[3]] <- "GHG emission rights"
+
+ov_cost_fore <- readGDX(gdx,"ov_cost_fore",react="warning", format="first_found", select=list(type="level"))
+ov_cost_fore <- round(superAggregate(ov_cost_fore, aggr_type = "sum", level="glo" ))
+dimnames(ov_cost_fore)[[3]] <- "Afforestation"
+
+ov_cost_cdr <- readGDX(gdx,"ov_cost_cdr", format="first_found", select=list(type="level"))
+ov_cost_cdr <- round(superAggregate(ov_cost_cdr, aggr_type = "sum", level="glo" ))
+dimnames(ov_cost_cdr)[[3]] <- "CDR"
+
+
+all <- mbind(ov_cost_prod,ov_tech_cost,ov_cost_transp,ov_cost_landcon,ov_cost_AEI,ov_maccs_costs,ov_emission_costs,ov_cost_fore,ov_cost_cdr)
+all <- as.magpie(all/1000)
+#magpie2ggplot2(all,stack=T,fill="Data1",color=NULL,stat="sum",labs=c("","Cost Type"))
+swoutput(sw,all[,years_all,],"bill. US Dollar",table=F,geom="bar",stack=T,fill="Data1",color=NULL,stat="sum",labs=c("","Cost Type"),scenario=title)
+swtable(sw,round(all[,years_all,],2),table.placement="H",caption.placement="top",caption="Cost listing (bill. US Dollar)",
+        vert.lines=1,align="r",hor.lines=1,digits=0,transpose=TRUE)
+
+pre_costs <- readGDX(gdx,"o90_cost_reg", format="first_found")
+if(!is.null(pre_costs)) {  
+  #Bioenergy cost listing
+  swlatex(sw,"\\newpage")
+  swlatex(sw,"\\subsubsection{Cost listing|Bioenergy}")
+  pre_costs <- readGDX(gdx,"o90_cost_reg", format="first_found")
+  full_costs <- readGDX(gdx,"ov_cost_reg", format="first_found", select=list(type="level"))
+  bio_costs <- as.magpie(round(full_costs- pre_costs))
+  bio_costs_total <- round(superAggregate(bio_costs, aggr_type = "sum", level="glo" ))
+  dimnames(bio_costs_total)[[3]] <- "Total costs"
+  
+  pre_costs <- readGDX(gdx,"o90_cost_prod", format="first_found")
+  full_costs <- readGDX(gdx,"ov_cost_prod", format="first_found", select=list(type="level"))
+  bio_costs <- as.magpie(full_costs- pre_costs)
+  bio_costs <- as.magpie(round(dimSums(bio_costs,dims=3)))
+  bio_costs_factor <- round(superAggregate(bio_costs, aggr_type = "sum", level="glo" ))
+  dimnames(bio_costs_factor)[[3]] <- "Production"
+  
+  pre_costs <- readGDX(gdx,"o90_cost_transp", format="first_found")
+  full_costs <-readGDX(gdx,"ov_cost_transp", format="first_found", select=list(type="level"))
+  bio_costs <- as.magpie(full_costs- pre_costs)
+  bio_costs <- as.magpie(dimSums(bio_costs,dims=3))
+  bio_costs_transp <- round(superAggregate(bio_costs, aggr_type = "sum", level="glo" ))
+  dimnames(bio_costs_transp)[[3]] <- "Transport"
+  
+  pre_costs <- readGDX(gdx,"o90_cost_landcon", format="first_found")
+  full_costs <- readGDX(gdx,"ov_cost_landcon", format="first_found", select=list(type="level"))
+  bio_costs <- as.magpie(full_costs- pre_costs)
+  bio_costs <- as.magpie(dimSums(bio_costs,dims=3))
+  bio_costs_landcon <- round(superAggregate(bio_costs, aggr_type = "sum", level="glo" ))
+  dimnames(bio_costs_landcon)[[3]] <- "Land conversion"
+  
+  pre_costs <- readGDX(gdx,"o90_tech_cost", format="first_found")
+  full_costs <- readGDX(gdx,"ov_tech_cost","ovm_tech_cost", format="first_found", select=list(type="level"))
+  bio_costs <- as.magpie(full_costs- pre_costs)
+  bio_costs_TC <- round(superAggregate(bio_costs, aggr_type = "sum", level="glo" ))
+  dimnames(bio_costs_TC)[[3]] <- "TC"
+  
+  pre_costs <- readGDX(gdx,"o90_maccs_costs", format="first_found")
+  full_costs <- readGDX(gdx,"ov_maccs_costs", format="first_found", select=list(type="level"))
+  bio_costs <- as.magpie(full_costs- pre_costs)
+  bio_costs_maccs <- round(superAggregate(bio_costs, aggr_type = "sum", level="glo" ))
+  dimnames(bio_costs_maccs)[[3]] <- "Landuse mitigation"
+  
+  pre_costs <- readGDX(gdx,"o90_emission_costs", format="first_found")
+  full_costs <- readGDX(gdx,"ov_emission_costs", format="first_found", select=list(type="level"))
+  bio_costs <- as.magpie(full_costs- pre_costs)
+  bio_costs_emissions <- round(superAggregate(bio_costs, aggr_type = "sum", level="glo" ))
+  dimnames(bio_costs_emissions)[[3]] <- "GHG emission rights"
+  
+  all <- mbind(bio_costs_factor,bio_costs_TC,bio_costs_transp,bio_costs_landcon,bio_costs_maccs,bio_costs_emissions)
+  all <- as.magpie(all/1000)
+  swoutput(sw,all[,years_all,],"bill. US Dollar",table=F,geom="bar",stack=T,fill="Data1",color=NULL,stat="sum",labs=c("","Cost Type"),scenario=title)
+  swtable(sw,round(all[,years_all,],2),table.placement="H",caption.placement="top",caption="Cost listing|Bioenergy (bil. US Dollar)",
+          vert.lines=1,align="r",hor.lines=1,digits=0,transpose=TRUE)
+  
+  #other crop cost listing  
+  swlatex(sw,"\\newpage")
+  swlatex(sw,"\\subsubsection{Cost listing|Other crops}")
+  bio_costs_total <- dimSums(readGDX(gdx,"o90_cost_reg", format="first_found"),dims=1)
+  dimnames(bio_costs_total)[[3]] <- "Total costs"
+  
+  bio_costs_factor <- dimSums(readGDX(gdx,"o90_cost_prod", format="first_found"),dims=c(1,3))
+  dimnames(bio_costs_factor)[[3]] <- "Production"
+  
+  bio_costs_transp <- dimSums(readGDX(gdx,"o90_cost_transp", format="first_found"),dims=c(1,3))
+  dimnames(bio_costs_transp)[[3]] <- "Transport"
+  
+  bio_costs_landcon <- dimSums(readGDX(gdx,"o90_cost_landcon", format="first_found"),dims=c(1,3))
+  dimnames(bio_costs_landcon)[[3]] <- "Land conversion"
+  
+  bio_costs_TC <- dimSums(readGDX(gdx,"o90_tech_cost", format="first_found"),dims=c(1,3))
+  dimnames(bio_costs_TC)[[3]] <- "TC"
+  
+  bio_costs_maccs <- dimSums(readGDX(gdx,"o90_maccs_costs", format="first_found"),dims=c(1,3))
+  dimnames(bio_costs_maccs)[[3]] <- "Landuse mitigation"
+  
+  bio_costs_emissions <- dimSums(readGDX(gdx,"o90_emission_costs", format="first_found"),dims=c(1,3))
+  dimnames(bio_costs_emissions)[[3]] <- "GHG emission rights"
+  
+  all <- mbind(bio_costs_factor,bio_costs_TC,bio_costs_transp,bio_costs_landcon,bio_costs_maccs,bio_costs_emissions)
+  all <- as.magpie(all/1000)
+  swoutput(sw,all[,years_all,],"bill. US Dollar",table=F,geom="bar",stack=T,fill="Data1",color=NULL,stat="sum",labs=c("","Cost Type"),scenario=title)
+  swtable(sw,round(all[,years_all,],2),table.placement="H",caption.placement="top",caption="Cost listing|Other crops (bil. US Dollar)",
+          vert.lines=1,align="r",hor.lines=1,digits=0,transpose=TRUE)
+  
+}  
+
+
+
+remind_costs<-path(outputdir,"bioenergy_costsemu_purpose_reg.rem.csv")
+if (file.exists(remind_costs)) {
+  swlatex(sw,"\\newpage")
+  swlatex(sw,"\\subsection{Bioenergy costs: ReMIND vs. MAgPIE (one diagram)}")
+  remind<-read.magpie(remind_costs)
+  magpie<-bio_costs
+  dimnames(remind)[[3]]<-"ReMIND"
+  dimnames(magpie)[[3]]<-"MAgPIE"
+  remind <- time_interpolate(remind,getYears(magpie))
+  all<-mbind(magpie,remind)
+  swfigure(sw,"scratch_plot",all[,years_all,],add=FALSE,ylab="Bioenergy costs (mio. US Dollar)",sw_option="width=10")
+  swtable(sw,round(remind[,years_all,],2),table.placement="H",caption.placement="top",caption="ReMIND Bioenergy prices (US dollar / GJ)",
+          vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
+}
+
+# Bioenergy prices: MAgPIE
+if(!all(croparea(gdx,crops=c("begr","betr"))==0)){
+  swlatex(sw,"\\newpage")
+  swlatex(sw,"\\subsection{Bioenergy prices: MAgPIE}")
+  price<-prices(gdx,crops=c("begr","betr"),crop_aggr=TRUE,level="reg",unit="GJ")
+  price_glob<-prices(gdx,crops=c("begr","betr"),crop_aggr=TRUE,level="glo",unit="GJ")
+  all <- mbind(price,price_glob)
+  getNames(all) <- "price"
+  swfigure(sw,"scratch_plot",all[1:10,years_all,],add=FALSE,ylab="Bioenergy prices ($2005/GJ)",sw_option="width=10")
+  swtable(sw,round(all[,years_all,],2),table.placement="H",caption.placement="top",caption="MAgPIE bioenergy prices (US dollar / GJ)",
+          vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
+}
+# Bioenergy prices: ReMIND vs. MAgPIE
+remind_prices<-path(outputdir,"bioenergy_priceemu_purpose_reg.rem.csv")
+if (file.exists(remind_prices)) {
+  swlatex(sw,"\\newpage")
+  swlatex(sw,"\\subsection{Bioenergy prices: ReMIND vs. MAgPIE (one diagram)}")
+  remind<-read.magpie(remind_prices)
+  magpie<-prices(gdx,crops=c("begr","betr"),crop_aggr=TRUE,level="reg",unit="GJ")
+  dimnames(remind)[[3]]<-"ReMIND"
+  dimnames(magpie)[[3]]<-"MAgPIE"
+  remind <- time_interpolate(remind,getYears(magpie))
+  all<-mbind(magpie,remind)
+  swfigure(sw,"scratch_plot",all[,years_all,],add=FALSE,ylab="Bioenergy prices ($2005/GJ)",sw_option="width=10")
+  swtable(sw,round(remind[,years_all,],2),table.placement="H",caption.placement="top",caption="ReMIND Bioenergy prices (US dollar / GJ)",
+          vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
+  swlatex(sw,"\\newpage")
+  swlatex(sw,"\\subsection{Bioenergy prices: ReMIND vs. MAgPIE (regional diagrams)}")
+  for (i in getRegions(all)) {
+    swfigure(sw,"scratch_plot",all[i,years_all,],large=TRUE,ylab="Bioenergy prices ($2005/GJ)")
+  }
+}
+if(!all(croparea(gdx,crops=c("begr","betr"))==0)){
+  # Bioenergy Yields
+  swlatex(sw,"\\newpage")
+  swlatex(sw,"\\subsection{Bioenergy Yields}")
+  if(!all(is.na(yields(gdx,crops=c("begr","betr"),level="reg",crop_aggr=TRUE,water="ir")))) {
+    swlatex(sw,"\\subsubsection{rainfed and irrigated}")
+    yld_reg<-yields(gdx,crops=c("begr","betr"),level="reg",crop_aggr=FALSE,water="sum")
+    yld_glo<-yields(gdx,crops=c("begr","betr"),level="glo",crop_aggr=FALSE,water="sum")
+    yld <- mbind(yld_reg,yld_glo)
+    swfigure(sw,"scratch_plot",yld[1:10,years_all,],ylab="Bioenergy yields t/ha - rf and ir",sw_option="width=10")
+    swlatex(sw,"\\newpage")  
+    for (i in dimnames(yld)[[3]]) {
+      swtable(sw,round(yld[,years_all,i],2),table.placement="H",caption.placement="top",caption=paste(i," yields t/ha - rf and ir"),vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
+    }
+    swlatex(sw,"\\newpage")  
+    swlatex(sw,"\\subsubsection{rainfed only}")
+    yld_reg<-yields(gdx,crops=c("begr","betr"),level="reg",crop_aggr=FALSE,water="rf")
+    yld_glo<-yields(gdx,crops=c("begr","betr"),level="glo",crop_aggr=FALSE,water="rf")
+    yld <- mbind(yld_reg,yld_glo)
+    swfigure(sw,"scratch_plot",yld[1:10,years_all,],ylab="Bioenergy yields t/ha - rf",sw_option="width=10")
+ 
+    swlatex(sw,"\\newpage")
+    for (i in dimnames(yld)[[3]]) {
+      swtable(sw,round(yld[,years_all,i],2),table.placement="H",caption.placement="top",caption=paste(i," yields t/ha - rf"),vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
+    }
+    swlatex(sw,"\\newpage")
+    swlatex(sw,"\\subsubsection{irrigated only}")
+    yld_reg<-yields(gdx,crops=c("begr","betr"),level="reg",crop_aggr=FALSE,water="ir")
+    yld_glo<-yields(gdx,crops=c("begr","betr"),level="glo",crop_aggr=FALSE,water="ir")
+    yld <- mbind(yld_reg,yld_glo)
+    swfigure(sw,"scratch_plot",yld[1:10,years_all,],ylab="Bioenergy yields t/ha - ir",sw_option="width=10")
+
+    swlatex(sw,"\\newpage")
+    for (i in dimnames(yld)[[3]]) {
+      swtable(sw,round(yld[,years_all,i],2),table.placement="H",caption.placement="top",caption=paste(i," yields t/ha - ir"),vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
+    }
+  } else {
+    swlatex(sw,"\\subsubsection{rainfed only}")
+    yld_reg<-yields(gdx,crops=c("begr","betr"),level="reg",crop_aggr=FALSE,water="rf")
+    yld_glo<-yields(gdx,crops=c("begr","betr"),level="glo",crop_aggr=FALSE,water="rf")
+    yld <- mbind(yld_reg,yld_glo)
+    swfigure(sw,"scratch_plot",yld_reg[1:10,years_all,],ylab="Bioenergy yields t/ha - rf",sw_option="width=10")
+  
+    swlatex(sw,"\\newpage")
+    for (i in dimnames(yld)[[3]]) {
+      swtable(sw,round(yld[,years_all,i],2),table.placement="H",caption.placement="top",caption=paste(i," yields t/ha - rf"),vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
+    }
+  }
+}
+
+# Irrigated bioenergy area
+swlatex(sw,"\\newpage")
+swlatex(sw,"\\subsection{Irrigated bioenergy area}")
+swlatex(sw,"\\subsubsection{Absolut value (mio. ha)}")
+kbe <- croparea(gdx,level="reg",crops=c("begr","betr"),water="ir")
+swfigure(sw,scratch_plot,kbe[,years_all,],add=TRUE,ylab="Irrigated bioenergy area (mio. ha)",sw_option="width=10")
+kbe_glo <- croparea(gdx,level="glo",crops=c("begr","betr"),water="ir")
+all <- mbind(kbe,kbe_glo)
+swtable(sw,round(all[,years_all,],2),table.placement="H",caption.placement="top",caption="Irrigated bioenergy area (mio. ha)",vert.lines=1,align="r",
+        hor.lines=1,digits=2,transpose=TRUE)
+
+swlatex(sw,"\\newpage")
+swlatex(sw,"\\subsubsection{Share (in terms of total croparea)}")
+kbe <- croparea(gdx,level="reg",crops=c("begr","betr"),water="ir")
+crop_area <- croparea(gdx,level="reg",crop_aggr=TRUE,water="sum")
+ratio_reg <- as.magpie(kbe/crop_area*100)
+dimnames(ratio_reg)[[3]] <- "Bioenergy irrigated area percentage"
+swfigure(sw,scratch_plot,ratio_reg[,years_all,],add=FALSE,ylab=dimnames(ratio_reg)[[3]],sw_option="width=10")
+kbe <- croparea(gdx,level="glo",crops=c("begr","betr"),water="ir")
+crop_area <- croparea(gdx,level="glo",crop_aggr=TRUE,water="sum")
+ratio_glo <- as.magpie(kbe/crop_area*100)
+dimnames(ratio_glo)[[3]] <- "Bioenergy irrigated area percentage"
+ratio <- mbind(ratio_reg,ratio_glo)
+swtable(sw,round(ratio[,years_all,],2),table.placement="H",caption.placement="top",caption="Bioenergy irrigated area percentage (in terms of total croparea)",
+        vert.lines=1,align="r",hor.lines=1,digits=2,transpose=TRUE)
+
+
+#Bioenergy water usage
+swlatex(sw,"\\newpage")
+swlatex(sw,"\\subsection{Bioenergy water usage}")
+water_reg <- water_usage(gdx,level="reg",users=c("begr","betr"),sum=FALSE)
+water_reg <- as.magpie(water_reg/1000)
+swfigure(sw,scratch_plot,water_reg[,years_all,],add=TRUE,ylab="Bioenergy Water usage (bill. cubic metre/yr)",sw_option="width=10")
+water_glo <- water_usage(gdx,level="glo",users=c("begr","betr"),sum=FALSE)
+water_glo <- as.magpie(water_glo/1000)
+water <- mbind(water_reg,water_glo)
+swtable(sw,round(rowSums(water[,years_all,],dims=2),2),table.placement="H",caption.placement="top",
+        caption="Total bioenergy water usage (bill. cubic metre/yr)",vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
+swtable(sw,round(water[,years_all,"betr"],2),table.placement="H",caption.placement="top",
+        caption="betr water usage (bill. cubic metre/yr)",vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
+swtable(sw,round(water[,years_all,"begr"],2),table.placement="H",caption.placement="top",
+        caption="begr water usage (bill. cubic metre/yr)",vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
+
+
+
+# C emissions
+swlatex(sw,"\\newpage")
+swlatex(sw,"\\subsection{C emissions}")
+swlatex(sw,"\\subsubsection{Annual}")
+if (cfg$gms$presolve == "on") {
+  pre_reg <- readGDX(gdx,"o90_emissions_reg", format="first_found")
+  main_reg <- setNames(emissions(gdx,type="co2_c",level="reg",y1995=FALSE),"All crops")
+  pre_reg <- setNames(collapseNames(pre_reg[,,"co2_c"])[,getYears(main_reg),],"Other crops")
+  bioen_reg <- setNames(main_reg - pre_reg,"Bioenergy")
+  all_reg <- mbind(pre_reg,bioen_reg)
+  all <- mbind(all_reg,dimSums(all_reg,dims=1))
+  #  magpie2ggplot2(all_reg,stack=T,facet_x=NULL,color=NULL,stat="sum",alpha="Data1",labs=c("","Region","","LUC emissions"))
+  swoutput(sw,all,unit="Mt C",geom="bar",stack=T,facet_x=NULL,color=NULL,stat="sum",alpha="Data1",labs=c("","Region","","LUC emissions"),plot_level="reg",digits=2)
+} else {
+  main_reg <- emissions(gdx,type="co2_c",level="reg",y1995=FALSE)
+  all <- mbind(main_reg,dimSums(main_reg,dims=1))
+  #  magpie2ggplot2(main_reg,stack=T,facet_x=NULL,color=NULL,stat="sum")
+  swoutput(sw,all,unit="Mt C",geom="bar",stack=T,facet_x=NULL,color=NULL,stat="sum",plot_level="reg",digits=2)
+}
+
+# C emissions cumulative
+swlatex(sw,"\\newpage")
+swlatex(sw,"\\subsubsection{Cumulative}")
+emis_reg <- emissions(gdx,type="co2_c",level="reg",y1995=FALSE,cumulative=T)/1000
+# y1995 <- setYears(emis_reg[,1,],"y1995")
+# y1995[,,] <- 0
+# emis_reg <- mbind(y1995,emis_reg)
+all <- mbind(emis_reg,dimSums(emis_reg,dims=1))
+magpie2ggplot2(emis_reg,stack=T,geom="bar",fill="Region",color=NULL,facet_x=NULL,stat="sum",ylab="Gt C (1995=0)",asDate=T)
+swoutput(sw,all,unit="Gt C (1995=0)",stack=T,geom="bar",fill="Region",color=NULL,facet_x=NULL,stat="sum",asDate=T,plot_level="reg",digits=2)
+
+
+
+# TC
+swlatex(sw,"\\newpage")
+swlatex(sw,"\\subsection{TC}")
+tc_reg<-tc(gdx,level="reg")
+tc_glo<-tc(gdx,level="glo")
+tc_all<-mbind(tc_reg[,years_all,], tc_glo[,years_all,])
+getNames(tc_all) <- "tc"
+swfigure(sw,"scratch_plot",tc_all[,2:length(years_all),],ylab="Annual TC rates",sw_option="width=10")
+swtable(sw,round(tc_all[,2:length(years_all),],3),table.placement="H",caption.placement="top",caption="Annual TC rates",vert.lines=1,align="r",hor.lines=1,
+        digits=3,transpose=TRUE)
+
+
+# Net trade food, feedstock and livestock
+swlatex(sw,"\\newpage")
+swlatex(sw,"\\subsection{Net trade food, feedstock and livestock (kfo + foddr + kli)}")
+swlatex(sw,"Net trade = production - demand\\newline Net trade > 0: Export\\newline Net trade < 0: Import")
+kfo_foddr_kli<-c("tece", "trce", "maiz", "rice_pro", "others", "potato", "cassav_sp", 
+                 "puls_pro", "soybean", "rapeseed", "groundnut", "sunflower", 
+                 "oilpalm", "sugr_beet", "sugr_cane", "foddr", "livst_rum", "livst_pig", "livst_chick", "livst_egg", "livst_milk")
+demand <- readGDX(gdx,"ov_supply", format="first_found")[,,kfo_foddr_kli][,,"level"]
+demand <- dimSums(collapseNames(demand),dims=3)
+prod<-readGDX(gdx,"ov_prod_reg", format="first_found")[,,kfo_foddr_kli][,,"level"]
+prod <- dimSums(collapseNames(prod),dims=3)
+trade <- as.magpie(prod-demand)
+dimnames(trade)[[3]] <- "Net trade"
+swfigure(sw,"scratch_plot",trade,ylab="Net trade (mil. tons DM)",sw_option="width=10")
+swtable(sw,round(trade,0),table.placement="H",caption.placement="top",caption="Net trade (mil. tons DM)",vert.lines=1,align="r",hor.lines=1,digits=0,transpose=TRUE)
+
+
+#Food price indices kfo,kli
+if (any(!is.na(priceIndex(gdx)))) {
+  swlatex(sw,"\\newpage")
+  swlatex(sw,"\\subsection{Food Price Index (kfo,kli)}")
+  swlatex(sw,"Laspeyres-Index: baseyear weighting; shows the development of prices for a fixed basket\\newline")
+  fpi_kfo_lasp<-mbind(priceIndex(gdx,level="reg",crops=c("kfo","kli"),index="lasp"),priceIndex(gdx,level="glo",crops=c("kfo","kli"),index="lasp"))
+  swoutput(sw,fpi_kfo_lasp,unit="Index - 1995=100",facet_x=NULL,color="Region",plot=T,table=T)
+}
+
+swlatex(sw,"\\newpage")
+swlatex(sw,"\\subsection{Food crop yields}")
+
+# Tece Yields
+swlatex(sw,"\\subsubsection{Tece Yields}")
+yld<-yields(gdx,crops="tece",level="reg",crop_aggr=TRUE,water="sum")
+yld_glo<-yields(gdx,crops="tece",level="glo",crop_aggr=TRUE,water="sum")
+yld <- mbind(yld,yld_glo)
+getNames(yld) <-"Yield t/ha"
+swfigure(sw,"scratch_plot",yld[,years_all,],ylab="Tece yields t/ha",height=15,sw_option="width=10")
+swtable(sw,round(yld[,years_all,],2),table.placement="H",caption.placement="top",caption="Tece yields t/ha",vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
+
+# Maiz Yields
+swlatex(sw,"\\newpage")
+swlatex(sw,"\\subsubsection{Maiz Yields}")
+yld<-yields(gdx,crops="maiz",level="reg",crop_aggr=TRUE,water="sum")
+yld_glo<-yields(gdx,crops="maiz",level="glo",crop_aggr=TRUE,water="sum")
+yld <- mbind(yld,yld_glo)
+getNames(yld) <- "Yield t/ha"
+swfigure(sw,"scratch_plot",yld[,years_all,],ylab="Maiz yields t/ha",height=15,sw_option="width=10")
+swtable(sw,round(yld[,years_all,],2),table.placement="H",caption.placement="top",caption="Maiz yields t/ha",vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
+
+
+if(!is.na(latexpath)){
+  swclose(sw,latexpath=latexpath)
+} else{
+  swclose(sw)
+}

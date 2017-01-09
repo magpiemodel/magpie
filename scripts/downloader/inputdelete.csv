@@ -1,0 +1,12 @@
+file;destination
+*-to-*_*.spam;input
+avl_land_*.mz;input
+diagnostics.log;input
+diagnostics.csv;input
+diagnostics_full.log;input
+file2destination.csv;input
+info.txt;input
+ready.rdy;input
+spamplot.pdf;input
+spatial_header.rda;input
+validation.mif;input

@@ -1,0 +1,19 @@
+# (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
+# authors, and contributors see AUTHORS file
+# This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+# or later. See LICENSE file or go to http://www.gnu.org/licenses/
+# Contact: magpie@pik-potsdam.de
+
+name,type,reason
+sm_use_gdx,input,not needed
+sm_maxiter,input,not needed
+vm_cost_glo,input,not needed
+vm_emissions_reg,input,not needed
+vm_cost_reg,input,not needed
+vm_tech_cost,input,not needed
+vm_cost_prod,input,not needed
+vm_cost_transp,input,not needed
+vm_cost_landcon,input,not needed
+vm_maccs_costs,input,not needed
+vm_emission_costs,input,not needed
+vm_land,input,not needed

@@ -1,0 +1,20 @@
+*** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
+*** authors, and contributors see AUTHORS file
+*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+*** or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** Contact: magpie@pik-potsdam.de
+
+
+sets
+***CATEGORY FOR THE TRADED PRODUCTS***
+
+   k_trade(k) production activities for which trade is allowed
+       / tece, maiz, trce, rice_pro, soybean, rapeseed, groundnut, sunflower,
+         oilpalm, puls_pro, potato, cassav_sp, sugr_cane, sugr_beet, others,
+         cottn_pro, livst_rum, livst_pig,
+         livst_chick, livst_egg, livst_milk /
+
+   k_notrade(k) production activities
+       / begr, betr, foddr, pasture /
+
+;

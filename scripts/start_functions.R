@@ -1,0 +1,253 @@
+# (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
+# authors, and contributors see AUTHORS file
+# This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+# or later. See LICENSE file or go to http://www.gnu.org/licenses/
+# Contact: magpie@pik-potsdam.de
+
+start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,report=NULL,sceninreport=NULL,LU_pricing="y2010") {
+  
+  Sys.setlocale(locale="C")
+  maindir <- getwd() 
+  on.exit(setwd(maindir))
+  
+  #Load libraries
+  require(digest)
+  require(lucode)
+  require(magclass)
+  require(tools)
+  require(moinput)
+  
+  lock_id <- model_lock(timeout1=1)
+  on.exit(model_unlock(lock_id),add=TRUE)  
+  
+  if(!is.null(scenario)) cfg <- setScenario(cfg,scenario)
+  cfg <- check_config(cfg)
+  
+  date <- format(Sys.time(), "_%Y-%m-%d_%H.%M.%S")
+  cfg$results_folder <- gsub(":date:",date,cfg$results_folder,fixed=TRUE)
+  cfg$results_folder <- gsub(":title:",cfg$title,cfg$results_folder,fixed=TRUE)
+
+  # Create output folder
+  if (!file.exists(cfg$results_folder)) {
+    dir.create(cfg$results_folder,recursive=TRUE,showWarnings=FALSE)
+	} else stop(paste0("Results folder ",cfg$results_folder," could not be created because is already exists."))
+  
+  # If report and scenname are supplied the data of this scenario in the report will be converted to MAgPIE input
+  if (!is.null(report) && !is.null(sceninreport)) {
+    getReportData(report,sceninreport,LU_pricing)
+    cfg$gms$bioenergy <- "standard"
+    cfg <- setScenario(cfg,"coupling")
+  }
+  
+  #Is the run performed on the cluster?
+	on_cluster <- file.exists('/p/projects/landuse')
+
+  #Set value source_include so that loaded scripts know, that they are 
+  #included as source (instead a load from command line)
+  source_include <- TRUE
+   
+  #update all parameters which contain the levels and marginals
+  #of all variables and equations
+  update_fulldataOutput()
+  #Update module paths in GAMS code
+  update_modules_embedding()
+
+  #configure main.gms based on settings of cfg file
+  manipulateConfig("main.gms",cfg$gms)
+
+  #configure input.gms in all modules based on settings of cfg file
+  l1 <- path("modules",list.dirs("modules/", full.names = FALSE, recursive = FALSE))
+  for(l in l1) {
+    l2 <- path(l,list.dirs(l, full.names = FALSE, recursive = FALSE))
+    for(ll in l2) {
+      if(file.exists(path(ll,"input.gms"))) manipulateConfig(path(ll,"input.gms"),cfg$gms)
+    }
+  }
+  
+  #check all setglobal settings for consistency
+  settingsCheck()
+    
+  #############PROCESSING INPUT DATA#######################################################################
+  
+  #Check whether input data has to be processed or is already processed
+    
+  #Function to extract information from info.txt
+  get_info <- function(file,grep_expression,sep,pattern="",replacement="") {
+    if(!file.exists(file)) return("#MISSING#")
+    file <- readLines(file,warn=FALSE)
+    tmp <- grep(grep_expression,file, value=TRUE)
+    tmp <- strsplit(tmp, sep)
+    tmp <- sapply(tmp, "[[", 2)
+    tmp <- gsub(pattern,replacement,tmp)
+    if(all(!is.na(as.logical(tmp)))) return(as.vector(sapply(tmp,as.logical)))
+    if (all(!(regexpr("[a-zA-Z]",tmp) > 0))) {
+      tmp <- as.numeric(tmp)
+    }
+    return(tmp)
+  }
+    		
+  input_old <- get_info("input/info.txt","^Used data set:",": ")
+
+  
+  if(!setequal(cfg$input,input_old) | cfg$force_download) {
+    source("scripts/downloader/download.R")
+    archive_download(files=cfg$input,
+                     repositories=cfg$repositories,
+                     modelfolder=".",
+                     move=!cfg$debug,
+                     username=cfg$username,
+                     ssh_private_keyfile=cfg$ssh_private_keyfile)
+    if(cfg$recalibrate=="ifneeded") cfg$recalibrate <- TRUE 
+  } else {
+    if(cfg$recalibrate=="ifneeded") cfg$recalibrate <- FALSE
+  }
+  
+    
+  #Create the workspace for validation
+  tmp<-strsplit(cfg$results_folder,"/")[[1]]
+  cfg$val_workspace<-paste(cfg$results_folder,"/",tmp[length(tmp)],".RData",sep="")
+  validation<-list()
+  validation$technical<-list()
+  validation$technical$time<-list()
+  validation$technical$model_setup<-list()
+  validation$technical$input_data<-list()
+  validation$technical$yield_calib<-list()
+  validation$technical$setup_info <- list()
+  save(validation,file= cfg$val_workspace, compress="xz")
+  
+  ####Collect technical information for validation#########################################
+  
+  # get svn info
+  svn_info<-c("### SVN revision ###",try(system("svn info",intern=TRUE),silent=TRUE))
+  # info what files have been modified 
+  svn_info<-c(svn_info,"","### Modifications ###",try(system("svn status",intern=TRUE),silent=TRUE)) 
+  if(codeCheck | interfaceplot) {
+    codeCheck <- codeCheck()
+    if(interfaceplot) modules_interfaceplot(codeCheck)
+  } else codeCheck <- NULL
+  load(cfg$val_workspace)  
+  validation$technical$model_setup <- svn_info
+  validation$technical$modules <- codeCheck
+  validation$technical$last.warning <- attr(codeCheck,"last.warning")
+  validation$technical$setup_info$start_functions <- setup_info()
+  save(validation, file=cfg$val_workspace, compress="xz")
+  rm(validation,svn_info)
+  
+  ########################################################################################################################################################
+   
+  if(cfg$recalibrate){
+    cat("Starting calibration factor calculation!\n")
+    source("scripts/calibration/calc_calib.R")
+    calibrate_magpie(n_maxcalib = cfg$calib_maxiter, 
+                     calib_accuracy = cfg$calib_accuracy, 
+                     area_input = cfg$area_input, 
+                     calibrate_pasture = (cfg$gms$past!="static"), 
+                     damping_factor = cfg$damping_factor, 
+                     calib_file = "modules/14_yields/input/f14_yld_calib.csv", 
+                     data_workspace = cfg$val_workspace,
+                     logoption = 3,
+                     gamspath = ifelse(on_cluster, "/p/system/packages/gams/24.0.1/", "")) 
+    file.copy("calibration_results.pdf", cfg$results_folder, overwrite=TRUE)
+    cat("Calibration factor calculated!\n")
+  }
+    
+    
+  #copy important files into output_folder (before MAgPIE execution)
+  for(file in cfg$files2export$start) try(file.copy(file, cfg$results_folder, overwrite=TRUE))
+    
+  #copy spam files to output folder
+  cfg$files2export$spam <- list.files(path="input/cellular", pattern = "*.spam", full.names=TRUE)
+  for(file in cfg$files2export$spam) file.copy(file, cfg$results_folder, overwrite=TRUE)
+
+  cfg$magpie_folder <- getwd()   
+ 
+  save(cfg,file=path(cfg$results_folder,"config.Rdata"))
+    
+  singleGAMSfile(output=path(cfg$results_folder,"full.gms"))
+  model_unlock(lock_id)
+  on.exit()
+  # Repeat command since on.exit was cleared
+  on.exit(setwd(maindir))  
+  setwd(cfg$results_folder)
+  
+  if(is.na(cfg$sequential)) {
+    if(on_cluster) {
+      cfg$sequential <- FALSE
+    } else {
+      cfg$sequential <- TRUE
+    }
+  }
+  
+  if(!cfg$sequential) {
+    if(on_cluster) {
+      system("sbatch submit.sh") 
+    } else {
+      stop("non-sequential runs are currently only available on the cluster!")
+    }
+  } else {
+    system("Rscript submit.R")  
+  }
+  
+  return(cfg$results_folder)
+}
+
+getReportData <- function(rep,scen,LU_pricing="y2010") {
+  require(lucode)
+  require(magclass)
+  .bioenergy_demand <- function(mag){
+    notGLO <- getRegions(mag)[!(getRegions(mag)=="GLO")]
+    out <- mag[,,"Primary Energy Production|Biomass|Energy Crops (EJ/yr)"]*10^3
+    dimnames(out)[[3]] <- NULL
+    write.magpie(out[notGLO,,],"./modules/60_bioenergy/standard/input/reg.2ndgen_bioenergy_demand.csv")
+  }  
+  .emission_prices <- function(mag){
+    notGLO <- getRegions(mag)[!(getRegions(mag)=="GLO")]
+    out_c <- mag[,,"Price|Carbon (US$2005/t CO2)"]*44/12*0.967 # US$2005/tCO2 -> US$2004/tC
+  	y_zeroprices <-  getYears(mag)<=LU_pricing & getYears(mag)>"y2010"
+	  out_c[,y_zeroprices,]<-0.5*44/12*0.967 # US$2005/tCO2 -> US$2004/tC
+	
+    dimnames(out_c)[[3]] <- "co2_c"
+    
+    out_n2o <- mag[,,"Price|N2O (US$2005/t N2O)"]*44/28*0.967 # US$2005/tN2O -> US$2004/tN
+    dimnames(out_n2o)[[3]] <- "n2o_n"
+    
+    out_ch4 <- mag[,,"Price|CH4 (US$2005/t CH4)"]*0.967 # US$2005/tCH4 -> US$2004/tCH4
+    dimnames(out_ch4)[[3]] <- "ch4"
+    
+    out <- mbind(out_n2o,out_ch4,out_c)
+    write.magpie(out[notGLO,,],"./input/regional/ghg_prices.cs3")
+  }
+  
+  if (length(scen)!=1) stop("getReportData: 'scen' does not contain exactly one scenario.")
+  if (length(intersect(scen,names(rep)))!=1) stop("getReportData: 'scen not contained in 'rep'.")
+  
+  files <- c("./input/regional/ghg_prices.cs3","./modules/60_bioenergy/standard/input/reg.2ndgen_bioenergy_demand.csv")
+  years <- 1990+5*(1:32)
+    for(f in files) suppressWarnings(unlink(f))
+    mag <- rep[[scen]][["MAgPIE"]]
+    if(!("y1995" %in% getYears(mag))){
+    	empty95<-mag[,1,];empty95[,,]<-0;dimnames(empty95)[[2]] <- "y1995"
+    	mag <- mbind(empty95,mag)
+    }
+    mag <- time_interpolate(mag,years)
+    .bioenergy_demand(mag)
+    .emission_prices(mag)
+}
+
+
+start_reportrun <- function (cfg,path_report,inmodel=NULL,sceninreport=NULL,codeCheck=FALSE){
+  rep <- convert.report(path_report,inmodel=inmodel,outmodel="MAgPIE")
+  write.report(rep,"report.mif")
+  if (!is.null(sceninreport))
+      sceninreport <- intersect(sceninreport,names(rep))
+  else
+      sceninreport <- names(rep)
+		
+  for(scen in sceninreport) {
+	cfg$title <- scen
+	cfg       <- setScenario(cfg,substring(scen,first=1,last=4)) # is ment to extract i.e. 'SSP1' from the scenarioname
+	start_run(cfg, report=rep, sceninreport=scen, codeCheck=codeCheck)
+  }  
+}
+
+
