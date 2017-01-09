@@ -24,9 +24,9 @@ performance_start <- function(cfg="default.cfg",modulepath="modules/",id="perfor
   cfg$sequential <- sequential
   cfg$logoption <- 2
   
-  svn <- system("svn info",intern=TRUE) 
-  save(svn,file="svn.rda")
-  cfg$files2export$start <- c(cfg$files2export$start,"svn.rda")
+  git <- system("git rev-parse HEAD",intern=TRUE) 
+  save(git,file="git.rda")
+  cfg$files2export$start <- c(cfg$files2export$start,"git.rda")
  
   #start default run
   cfg$title <- paste(id,"default",sep="__")
@@ -135,9 +135,9 @@ performance_collect <- function(id="performance",results_folder="output/",plot=T
   attr(results,"default_cfg") <- cfg
   attr(results,"id") <- id
   
-  if(file.exists(path(default,"svn.rda"))) {
-    load(path(default,"svn.rda"))
-    attr(results,"svn") <- svn
+  if(file.exists(path(default,"git.rda"))) {
+    load(path(default,"git.rda"))
+    attr(results,"git") <- git
   }
   
   setwd(maindir)
@@ -234,9 +234,9 @@ performance_plot <- function(x) {
   swlatex(sw,"\\section{Results sorted by runtime}")
   sw <- .tmp(sw,x)
 
-  if(!is.null(attr(x,"svn"))){ 
-    swlatex(sw,"\\section{SVN info}")
-    sw <- .tmptable(sw,c(attr(x,"svn"),rep("",length(attr(x,"svn")))))
+  if(!is.null(attr(x,"git"))){ 
+    swlatex(sw,"\\section{GIT info}")
+    sw <- .tmptable(sw,c(attr(x,"git"),rep("",length(attr(x,"git")))))
   }
 
   swlatex(sw,"\\newpage\\section{Full default config}")

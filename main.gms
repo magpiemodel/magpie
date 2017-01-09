@@ -52,7 +52,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Mon Jan 09 13:47:57 2017
+* Last modification (input data): Mon Jan 09 16:19:02 2017
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 

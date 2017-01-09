@@ -49,16 +49,16 @@ input_data<-readLines(path(cfg$results_folder,"info.txt"))
 # extract module info from full.gms
 tmp<-readLines(path(cfg$results_folder,"full.gms"),warn=FALSE,encoding="ASCII")
 lines<-grep(".*MODULE SETUP.*",tmp)[1]:grep(".*MODULE SETUP.*",tmp)[2]
-svn_info<-c("","","### MODULE SETUP ###",grep("\\$",tmp[lines],value=TRUE))
+module_setup<-c("","","### MODULE SETUP ###",grep("\\$",tmp[lines],value=TRUE))
 
 load(cfg$val_workspace)  
 validation$technical$time$magpie.gms <- gams_runtime
 validation$technical$input_data <- input_data
-validation$technical$model_setup <- c(validation$technical$model_setup,svn_info)
+validation$technical$model_setup <- c(validation$technical$model_setup,module_setup)
 if (exists("last.warning")) validation$technical$last.warning <- c(validation$technical$last.warning,last.warning)
 validation$technical$setup_info$model_run <- setup_info()
 save(validation,file=cfg$val_workspace, compress="xz")
-rm(gams_runtime,input_data,svn_info,validation)
+rm(gams_runtime,input_data,module_setup,validation)
 
 
 #Postprocessing / Output Generation

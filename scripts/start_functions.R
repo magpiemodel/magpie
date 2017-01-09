@@ -117,21 +117,21 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,repor
   
   ####Collect technical information for validation#########################################
   
-  # get svn info
-  svn_info<-c("### SVN revision ###",try(system("svn info",intern=TRUE),silent=TRUE))
+  # get git info
+  git_info<-c("### GIT revision ###",try(system("git rev-parse HEAD",intern=TRUE),silent=TRUE))
   # info what files have been modified 
-  svn_info<-c(svn_info,"","### Modifications ###",try(system("svn status",intern=TRUE),silent=TRUE)) 
+  git_info<-c(git_info,"","### Modifications ###",try(system("git status",intern=TRUE),silent=TRUE)) 
   if(codeCheck | interfaceplot) {
     codeCheck <- codeCheck()
     if(interfaceplot) modules_interfaceplot(codeCheck)
   } else codeCheck <- NULL
   load(cfg$val_workspace)  
-  validation$technical$model_setup <- svn_info
+  validation$technical$model_setup <- git_info
   validation$technical$modules <- codeCheck
   validation$technical$last.warning <- attr(codeCheck,"last.warning")
   validation$technical$setup_info$start_functions <- setup_info()
   save(validation, file=cfg$val_workspace, compress="xz")
-  rm(validation,svn_info)
+  rm(validation,git_info)
   
   ########################################################################################################################################################
    

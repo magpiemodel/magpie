@@ -397,8 +397,8 @@ validationPDF <- function(lr_input_folder,additional_input,outputdir,data_worksp
   #########Model version##############
   if(!is.null(validation$technical$model_setup)) { 
     swlatex(swout,"\\subsection{Code settings}")
-    svn<-validation$technical$model_setup
-    swR(swout,"cat",svn,sep='\n')
+    model_setup<-validation$technical$model_setup
+    swR(swout,"cat",model_setup,sep='\n')
   }
   #########Input dataset##############
   if(!is.null(validation$technical$input_data)) { 
