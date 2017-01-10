@@ -96,7 +96,8 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,repor
                      modelfolder=".",
                      move=!cfg$debug,
                      username=cfg$username,
-                     ssh_private_keyfile=cfg$ssh_private_keyfile)
+                     ssh_private_keyfile=cfg$ssh_private_keyfile,
+                     debug=cfg$debug)
     if(cfg$recalibrate=="ifneeded") cfg$recalibrate <- TRUE 
   } else {
     if(cfg$recalibrate=="ifneeded") cfg$recalibrate <- FALSE

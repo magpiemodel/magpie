@@ -31,7 +31,7 @@ getfiledestinations <- function() {
 ################################################################################
 #Define function which loads data from repository and unpacks it
 ################################################################################
-load_unpack <- function(files, repository, username=NULL, ssh_private_keyfile=NULL) {
+load_unpack <- function(files, repository, username=NULL, ssh_private_keyfile=NULL, debug=FALSE) {
   
   if(is.null(username)) username <- getOption("username")
   if(is.null(ssh_private_keyfile)) ssh_private_keyfile <- getOption("ssh_private_keyfile")
@@ -47,13 +47,16 @@ load_unpack <- function(files, repository, username=NULL, ssh_private_keyfile=NU
       cat("  Try",repo,"...")
       path <- paste0(sub("/$","",repo),"/",file)
       if(grepl("://",path)) {
-        require(curl, quietly = TRUE)
-        h <- new_handle(ssh_private_keyfile=ssh_private_keyfile, username=username, verbose=FALSE)
+        require(curl, quietly = !debug)
+        h <- new_handle(ssh_private_keyfile=ssh_private_keyfile, username=username, verbose=debug)
         tmpdir <- tempdir()
         #tmpdir <- "input"
-        tmp <- try(curl_download(path,paste0(tmpdir,"/",file),handle=h),silent = TRUE)
+        tmp <- try(curl_download(path,paste0(tmpdir,"/",file),handle=h),silent = !debug)
         if(is(tmp,"try-error")) {
           cat(" failed!\n")
+          if(debug) {
+            cat(tmp)
+          }
         } else {
           names(files)[i] <- repo
           filepath <- paste0(tmpdir,"/",file)
@@ -274,7 +277,8 @@ archive_download <- function(files=c("GLUES2-sresa2-constant_co2-miub_echo_g_ERB
                              modelfolder=".",
                              move=TRUE,
                              username=NULL,
-                             ssh_private_keyfile=NULL) {
+                             ssh_private_keyfile=NULL,
+                             debug=FALSE) {
   
   require(lucode)
   require(magclass)
@@ -298,7 +302,7 @@ archive_download <- function(files=c("GLUES2-sresa2-constant_co2-miub_echo_g_ERB
   
   ##################### DATA DOWNLOAD #########################################  
   # load data from source and unpack it
-  filemap <- load_unpack(files, repositories, username, ssh_private_keyfile)
+  filemap <- load_unpack(files, repositories, username, ssh_private_keyfile, debug)
   
   low_res  <- get_info("input/info.txt","^\\* Output ?resolution:",": ")
   high_res <- get_info("input/info.txt","^\\* Input ?resolution:",": ")
