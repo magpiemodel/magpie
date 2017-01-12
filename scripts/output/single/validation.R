@@ -32,7 +32,7 @@ library(lucode)
 library(ludata)
 library(lusweave)
 library(luplot)
-library(magpie)
+library(magpie4)
 library(faodata)
 library(validation)
 
@@ -179,41 +179,25 @@ validationPDF <- function(lr_input_folder,additional_input,outputdir,data_worksp
   swlatex(swout,"\\newpage")
   #########Land use change cropland 1995##############
   swlatex(swout,"\\subsection{Land use change in 1995 (reshuffling)}")
-  ovm_land<-land(path(outputdir,additional_input),level="cell",sum=FALSE)[,"y1995",]
-  fm_land<-readGDX(path(outputdir,additional_input),"pm_land_start", format="first_found")[,,getNames(ovm_land)]
-  dimnames(fm_land)[[2]]<-"y1995"
-  diff <- as.magpie(ovm_land - fm_land)
-  contraction <- as.magpie((diff < 0) *diff)
-  expansion <- as.magpie((diff > 0) *diff)
-  contraction_reg <- superAggregate(contraction,level="reg",aggr_type="sum")
-  contraction_glo <- superAggregate(contraction,level="glo",aggr_type="sum")
-  contraction<-mbind(contraction_reg,contraction_glo)
-  expansion_reg <- superAggregate(expansion,level="reg",aggr_type="sum")
-  expansion_glo <- superAggregate(expansion,level="glo",aggr_type="sum")
-  expansion<-mbind(expansion_reg,expansion_glo)
+  land <- land(gdx,level="cell",sum=FALSE)[,"y1995",]
+  land_start <- dimSums(readGDX(gdx,"pm_land_start", format="first_found"),dim=3.2)[,,getNames(land)]
+  dimnames(land_start)[[2]]<-"y1995"
+  diff <- land - land_start
+
+  contraction <- superAggregate((diff < 0) * diff,level="regglo",aggr_type="sum")
+  expansion   <- superAggregate((diff > 0) * diff,level="regglo",aggr_type="sum")
   
-  ovm_land_reg<-superAggregate(ovm_land,level="reg",aggr_type="sum")
-  ovm_land_glo<-superAggregate(ovm_land,level="glo",aggr_type="sum")
-  ovm_land<-mbind(ovm_land_reg,ovm_land_glo)
-  fm_land_reg<-superAggregate(fm_land,level="reg",aggr_type="sum")
-  fm_land_glo<-superAggregate(fm_land,level="glo",aggr_type="sum")
-  fm_land<-mbind(fm_land_reg,fm_land_glo)
+  land <- superAggregate(land,level="regglo",aggr_type="sum")
+  land_start <- superAggregate(land_start,level="regglo",aggr_type="sum")
   
-  croparea<-croparea(path(outputdir,additional_input),water="sum")
-  getNames(croparea)<-"crop"
-  croparea_glo<-croparea(path(outputdir,additional_input),level="glo",water="sum")
-  getNames(croparea_glo)<-"crop"
-  croparea<-mbind(croparea,croparea_glo)
+  croparea <- croparea(gdx,level="regglo",water="sum")
+  getNames(croparea) <- "crop"
   
-  
-  expansion_crop <- expansion[,,"crop"]
-  dimnames(expansion_crop)[[3]]<-"expansion"
-  contraction_crop <- contraction[,,"crop"]
-  dimnames(contraction_crop)[[3]]<-"contraction"
-  net_changes<-ovm_land[,,"crop"]-fm_land[,,"crop"]
-  dimnames(net_changes)[[3]]<-"net changes"
-  gross_changes<-as.magpie(abs(expansion_crop)+abs(contraction_crop))
-  dimnames(gross_changes)[[3]]<-"gross changes"
+  expansion_crop <- setNames(expansion[,,"crop"],"expansion")
+  contraction_crop <- setNames(contraction[,,"crop"],"contraction")
+  net_changes <- setNames(land[,,"crop"] - land_start[,,"crop"], "net changes")
+  gross_changes <- setNames(abs(expansion_crop)+setNames(abs(contraction_crop),NULL), "gross changes")
+
   all<-mbind(expansion_crop,contraction_crop,net_changes,gross_changes)
   swtable(swout,all[,"y1995",],transpose=TRUE,caption.placement="top",caption="Land use change cropland 1995 (Mio. ha)",table.placement="H",vert.lines=1,align="r",hor.lines=1)
   

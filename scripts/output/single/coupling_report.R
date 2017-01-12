@@ -7,7 +7,7 @@
 
 library(gdx)
 library(magclass)
-library(magpie)
+library(magpie4)
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
@@ -27,8 +27,6 @@ if(!exists("source_include")) {
 }
 
 ###############################################################################
-gdx <- gdx_file
-
 
 x <- getReport(gdx_file)
 
