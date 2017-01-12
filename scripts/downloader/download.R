@@ -50,7 +50,7 @@ load_unpack <- function(files, repository, username=NULL, ssh_private_keyfile=NU
         require(curl, quietly = !debug)
         h <- new_handle(ssh_private_keyfile=ssh_private_keyfile, username=username, verbose=debug)
         tmpdir <- tempdir()
-        #tmpdir <- "input"
+        if(debug) tmpdir <- "input"
         tmp <- try(curl_download(path,paste0(tmpdir,"/",file),handle=h),silent = !debug)
         if(is(tmp,"try-error")) {
           cat(" failed!\n")
