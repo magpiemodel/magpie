@@ -15,10 +15,8 @@ calibration_run<-function(putfolder,calib_magpie_name,gamspath="",logoption=3){
   
   # create putfolder for the calib run
   unlink(putfolder,recursive=TRUE)
-  if(!dir.create(putfolder)){
-    stop("Unable to create putfolder")
-  }
-
+  dir.create(putfolder)
+  
   # create a modified magpie.gms for the calibration run
   unlink(paste(calib_magpie_name,".gms",sep=""))
   unlink("fulldata.gdx")
