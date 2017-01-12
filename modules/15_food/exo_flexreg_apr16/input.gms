@@ -18,19 +18,19 @@ $setglobal c15_gdp_scenario  gdp_SSP2
 *             SRES: "gdp_a1", "gdp_a2", "gdp_b1", "gdp_b2"
 
 
-table f15_gdp(t_all,i,gdp_scen15)  GDP per capita (USD 2005 MER per capita per year)
+table f15_gdp_iso(t_all,iso,gdp_scen15)  GDP per capita (USD 2005 MER per capita per year)
 $ondelim
-$include "./modules/15_food/input/f15_gdp.csv"
+$include "./modules/15_food/input/f15_gdp_iso.csv"
+$offdelim;
+
+table f15_pop_iso(t_all,iso,pop_scen15) Population (mio people)
+$ondelim
+$include "./modules/15_food/input/f15_pop_iso.csv"
 $offdelim;
 
 table f15_development_state(t_all,i,gdp_scen15)  state of developement (function of GDP) as share in low middle and high income
 $ondelim
 $include "./modules/15_food/input/fm_development_state.cs3"
-$offdelim;
-
-table f15_pop(t_all,i,pop_scen15) Population (mio people)
-$ondelim
-$include "./modules/15_food/input/f15_pop.csv"
 $offdelim;
 
 table f15_kcal_pc(t_all,i,food_scen15) Per capita calories (kcal per capita per day)

@@ -10,7 +10,8 @@ q15_dummy                        empty constraint that is necessary because empt
 ;
 
 parameters
-i15_pop(t,i)               Population (mio people)
+i15_gdp(t,i)      income in mio US Dollar 05 MER before a price shock
+i15_pop(t,i)      population in mio capita
 im_development_state(t,i)  development state (share in high income level)
 im_gdp_pc(t,i)              GDP per capita (USD)
 i15_kcal_pc_initial(t,i,kall) Food demand without price shock (kcal per capita per day)
