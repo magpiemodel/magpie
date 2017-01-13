@@ -55,6 +55,8 @@ variables
 ;
 
 parameters
+  i15_gdp_iso(t,iso)      income in mio US Dollar 05 MER before a price shock
+  i15_pop_iso(t,iso)      population in mio capita
   i15_gdp(t,i)      income in mio US Dollar 05 MER before a price shock
   i15_pop(t,i)      population in mio capita
   i15_gdp_pc_iso(t,iso)                        income per capita in US Dollar 05 per capita before a price shock
