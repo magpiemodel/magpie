@@ -12,7 +12,7 @@
 #########################################################################################
 library(luplot)
 library(gdx)
-library(magpie)
+library(magpie4)
 library(validation)
 library(lusweave)
 ############################# BASIC CONFIGURATION #############################

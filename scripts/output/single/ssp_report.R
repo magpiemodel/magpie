@@ -7,7 +7,7 @@
 
 library(gdx)
 library(magclass)
-library(magpie)
+library(magpie4)
 library(lucode)
 options("magclass.verbosity" = 1)
 

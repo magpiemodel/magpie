@@ -8,7 +8,7 @@ options("magclass.verbosity" = 1)
 
 library(gdx)
 library(magclass)
-library(magpie)
+library(magpie4)
 library(lucode)
 
 #delivered prices = prices()

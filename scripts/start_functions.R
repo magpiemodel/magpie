@@ -154,7 +154,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,repor
     
     
   #copy important files into output_folder (before MAgPIE execution)
-  for(file in cfg$files2export$start) try(file.copy(file, cfg$results_folder, overwrite=TRUE))
+  for(file in cfg$files2export$start) try(file.copy(Sys.glob(file), cfg$results_folder, overwrite=TRUE))
     
   #copy spam files to output folder
   cfg$files2export$spam <- list.files(path="input/cellular", pattern = "*.spam", full.names=TRUE)

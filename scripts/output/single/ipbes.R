@@ -12,7 +12,7 @@ options(error=function()traceback(2))
 
 library(lucode)
 library(luscale)
-library(magpie)
+library(magpie4)
 library(ludata)
 
 ############################# BASIC CONFIGURATION #######################################

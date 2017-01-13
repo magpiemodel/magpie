@@ -13,7 +13,7 @@
 library(ludata)
 library(luplot)
 library(lusweave)
-library(magpie)
+library(magpie4)
 library(lucode)
 library(validation)
 

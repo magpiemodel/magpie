@@ -11,7 +11,7 @@ options(error=function()traceback(2))
 #Author: FH based on interpolation output script
 
 library(luscale)
-library(magpie)
+library(magpie4)
 library(ludata)
 
 #tmp

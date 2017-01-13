@@ -50,7 +50,7 @@ performance_start <- function(cfg="default.cfg",modulepath="modules/",id="perfor
 }
 
 performance_collect <- function(id="performance",results_folder="output/",plot=TRUE) {
-  require(magpie)
+  require(magpie4)
   require(lucode)
   maindir <- getwd()
   on.exit(setwd(maindir))

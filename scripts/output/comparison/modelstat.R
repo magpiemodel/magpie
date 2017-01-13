@@ -10,7 +10,7 @@
 # Version 1.0, Florian Humpenoeder
 #
 library(lucode)
-library(magpie)
+library(magpie4)
 
 options(error=function()traceback(2))
 

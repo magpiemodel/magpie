@@ -14,7 +14,7 @@
 # 1.03 - new production matrix added (FH)
 # 1.04 - converted to MAgPIE output script
 
-library(magpie)
+library(magpie4)
 library(ludata)
 library(luplot)
 
