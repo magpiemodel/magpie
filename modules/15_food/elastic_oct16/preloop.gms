@@ -1,5 +1,7 @@
-i15_gdp(t,i) = sum(i_to_iso(i,iso),f15_gdp_iso(t,iso,"%c15_gdp_scenario%"));
-i15_pop(t,i) = sum(i_to_iso(i,iso),f15_pop_iso(t,iso,"%c15_pop_scenario%"));
+i15_gdp_iso(t,iso) = f15_gdp_iso(t,iso,"%c15_gdp_scenario%");
+i15_pop_iso(t,iso) = f15_pop_iso(t,iso,"%c15_pop_scenario%");
+i15_gdp(t,i) = sum(i_to_iso(i,iso),i15_gdp_iso(t,iso));
+i15_pop(t,i) = sum(i_to_iso(i,iso),i15_pop_iso(t,iso));
 
 im_gdp_pc(t,i) = i15_gdp(t,i)/i15_pop(t,i);
 im_development_state(t,i) = f15_development_state(t,i,"%c15_gdp_scenario%");
@@ -40,6 +42,5 @@ i15_kcal_pc_initial(t,i,"others")
 f15_kcal_pc(t,i,"%c15_food_scenario%")*
 (1-f15_livestock_share(t,i,"%c15_food_scenario%")-f15_vegfruit_share(t,i,"%c15_food_scenario%"))*
 f15_vegfruit_share(t,i,"%c15_food_scenario%");
-
 
 
