@@ -8,7 +8,7 @@
 
 q16_supply_crops(i2,kcr) ..
                           vm_supply(i2,kcr)
-                          =g=
+                          =e=
                           vm_dem_food(i2,kcr)
                           + sum(kap2, vm_dem_feed(i2,kap2,kcr))
                           + vm_dem_processing(i2,kcr)
@@ -21,7 +21,7 @@ q16_supply_crops(i2,kcr) ..
 
 q16_supply_livestock(i2,kap) ..
                           vm_supply(i2,kap)
-                          =g=
+                          =e=
                           vm_dem_food(i2,kap)
                           + sum(kap2, vm_dem_feed(i2,kap2,kap))
                           + v16_dem_waste(i2,kap)
@@ -32,7 +32,7 @@ q16_supply_livestock(i2,kap) ..
 
 q16_supply_secondary(i2,ksd) ..
                           vm_supply(i2,ksd)
-                          =g=
+                          =e=
                           vm_dem_food(i2,ksd)
                           + sum(kap2, vm_dem_feed(i2,kap2,ksd))
                           + vm_dem_processing(i2,ksd)
@@ -44,7 +44,7 @@ q16_supply_secondary(i2,ksd) ..
 
 q16_supply_residues(i2,kres)..
                           vm_supply(i2,kres)
-                          =g=
+                          =e=
                           sum(kap2, vm_dem_feed(i2,kap2,kres))
                           + sum(ct, pm_dem_material(ct,i2,kres))
                           + vm_dem_bioen(i2,kres)
