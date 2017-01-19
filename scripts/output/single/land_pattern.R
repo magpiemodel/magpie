@@ -9,7 +9,7 @@
 ##########################################################
 # Version 1.0,  Florian Humpenoeder
 
-library(magpie)
+library(magpie4)
 library(luplot)
 
 ############################# BASIC CONFIGURATION #############################

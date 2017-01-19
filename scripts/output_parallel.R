@@ -10,7 +10,7 @@
 library(parallel)
 library(foreach)
 library(doParallel)
-library(magpie)
+library(magpie4)
 no_cores <- detectCores() - 1
 cl <- makeCluster(no_cores,outfile="par_debug.txt")
 

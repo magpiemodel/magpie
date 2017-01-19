@@ -36,7 +36,7 @@ calibration_run<-function(putfolder,calib_magpie_name,gamspath="",logoption=3){
 # function to determine the calibration reference and model output area
 get_calibarea<-function(area_input,gdx_file){
   require(magclass)
-  require(magpie)
+  require(magpie4)
   years<-paste("y",1990:1999,sep="")
   if(area_input=="fao"){
     require(faodata)
@@ -69,7 +69,7 @@ get_calibarea<-function(area_input,gdx_file){
 # Calculate the correction factor and store it in input/regional
 update_calib<-function(gdx_file,area_input="hyde1990",calibrate_pasture=TRUE,damping_factor=0.6, calib_file){
   require(magclass)
-  require(magpie)
+  require(magpie4)
   if(!(modelstat(gdx_file)[1,1,1]%in%c(1,2,7))) stop("Calibration run infeasible")  
   area<-get_calibarea(gdx_file=gdx_file,area_input=area_input)
   area_factor <- area$magpie/area$data

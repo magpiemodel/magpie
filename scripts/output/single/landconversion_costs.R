@@ -11,7 +11,7 @@
 #
 
 ##########################################################
-library(magpie)
+library(magpie4)
 library(luplot)
 library(lusweave)
 ############################# BASIC CONFIGURATION #############################

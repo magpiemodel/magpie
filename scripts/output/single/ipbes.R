@@ -12,7 +12,7 @@ options(error=function()traceback(2))
 
 library(lucode)
 library(luscale)
-library(magpie)
+library(magpie4)
 library(ludata)
 
 ############################# BASIC CONFIGURATION #######################################
@@ -35,8 +35,8 @@ end_year <- 2100
 
 #########################################################################################
 
-t <- readGDX(gdx,"t")
-t <- t[which(t == paste0("y",ref_year)):which(t == paste0("y",end_year))]
+t <- as.integer(substring(readGDX(gdx,"t"),2))
+t <- t[(t >= ref_year) & (t <= end_year)]
 
 #Land inputs
 land_ini_lr<-dimSums(readGDX(gdx,"f10_land","f_land", format="first_found"),dim=3.2)
@@ -46,7 +46,7 @@ land_hr <- interpolate(x=land_lr,x_ini_lr=land_ini_lr,x_ini_hr=land_ini_hr,spam=
 land_hr <- land_hr[,-1,]
 
 #add hyde3.1 data
-print("add hyde 3.1 data")
+cat("...add hyde 3.1 data\n")
 land_hr_hyde <- new.magpie(getCells(land_hr),seq(start_year,1990,by=10),getNames(land_hr),fill = NA)
 land_hr_hyde[,,"crop"] <- hyde$landuse$cropland[,getYears(land_hr_hyde),]
 land_hr_hyde[,,"past"] <- hyde$landuse$pasture[,getYears(land_hr_hyde),]
@@ -63,7 +63,7 @@ land_share_hr[,,"forest"] <- dimSums(land_share_hr[,,"forest"] + land_share_hr[,
 land_share_hr <- land_share_hr[,,c("crop","past","forest","urban","other")]
 land_share_hr <- setNames(land_share_hr,paste0("Land Cover|",c("Cropland","Pasture","Forest","Built-up Area","Other Natural Land")))
 
-print("LandCoverAll")
+cat("...LandCoverAll\n")
 write.magpie(land_share_hr,file_name = path(outputdir,paste0(title,"_LandCoverAll.mz")))    
 write.magpie(land_share_hr,file_name = path(outputdir,paste0(title,"_LandCoverAll.nc")))    
 write.magpie(land_share_hr[,t,],file_name = path(outputdir,paste0(title,"_LandCoverAllNoHist.mz")))    

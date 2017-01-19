@@ -14,7 +14,7 @@ library(lucode)
 library(ludata)
 library(luplot)
 library(lusweave)
-library(magpie)
+library(magpie4)
 library(ggplot2)
 
 ############################# BASIC CONFIGURATION #############################

@@ -10,7 +10,7 @@
 # Version 1.0, Florian Humpen?der
 #
 
-library(magpie)
+library(magpie4)
 library(ludata)
 library(luplot)
 library(ggplot2)

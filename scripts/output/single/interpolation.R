@@ -4,7 +4,6 @@
 # or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # Contact: magpie@pik-potsdam.de
 
-options(error=function()traceback(2))
 #########################################################################
 #### Interpolates land pools from low to high resolution, calculates ####
 #### corresponding spam-files for following disaggregations #############
@@ -18,7 +17,7 @@ options(error=function()traceback(2))
 
 library(lucode)
 library(luscale)
-library(magpie)
+library(magpie4)
 
 ############################# BASIC CONFIGURATION #######################################
 land_lr_file     <- "avl_land.cs3"  

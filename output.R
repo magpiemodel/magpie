@@ -30,10 +30,6 @@
 #load landuse library
 library(lucode)
 
-#Write dump file when error occurs, see help to dump.frames for more information
-#options(error=quote({dump.frames(to.file=TRUE); traceback(); q()}))
-#options(error=recover)
-
 #debug mode
 debug <- FALSE
 
@@ -280,15 +276,19 @@ if (comp==TRUE) {
     for(rout in output){
       name<-paste(rout,".R",sep="")
       if(file.exists(paste("scripts/output/single/",name,sep=""))){
-        print(paste("Executing",name))
+        cat("Executing",name,"...\n")
         tmp.env <- new.env()
         if(debug) {
           sys.source(paste("scripts/output/single/",name,sep=""),envir=tmp.env)         
         } else {
           tmp.error <- try(sys.source(paste("scripts/output/single/",name,sep=""),envir=tmp.env))
-          if(!is.null(tmp.error)) warning("Script ",name," was stopped by an error and not executed properly!")          
+          if(!is.null(tmp.error)) {
+            warning("Script ",name," was stopped by an error and not executed properly!")          
+            cat("...",name,"failed!\n")
+          } else {
+            cat("...",name,"finished successfully!\n")
+          }
         }
-#        rm(list=ls(tmp.env),envir=tmp.env)
         rm(tmp.env)
         gc()
       }
