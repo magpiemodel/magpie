@@ -49,6 +49,7 @@ q16_supply_residues(i2,kres)..
                           + sum(ct, pm_dem_material(ct,i2,kres))
                           + vm_dem_bioen(i2,kres)
                           + v16_dem_waste(i2,kres)
+                          + sum(ct, f16_domestic_balanceflow(ct,i2,kres))
                           ;
 
 q16_supply_pasture(i2) ..  vm_supply(i2,"pasture")
