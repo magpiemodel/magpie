@@ -5,7 +5,7 @@
 # Contact: magpie@pik-potsdam.de
 
 library(magclass)
-library(magpieflexreg)
+library(magpie4)
 library(lucode)
 options("magclass.verbosity" = 1)
 

@@ -16,27 +16,21 @@
 options(error=recover)
 
 library(lucode)
-library(ludata)
 library(lusweave)
 library(luplot)
 library(magpie4)
-library(faodata)
-library(validation)
 library(ggplot2)
 
 ############################# BASIC CONFIGURATION #############################
-#lr_input_folder        <- "../../input/cellular"
 
 if(!exists("source_include")) {
 
   outputdir    <- "C:/Users/mishra/Desktop/R Files"
-  data_workspace        <- "B0.RData"     # title of the run (with date)
   latexpath        <- ""
   title <- "DEMO"
 	
   #Define arguments that can be read from command line
-  readArgs("outputdir","data_workspace","additional_input","latexpath")
-}
+  readArgs("outputdir","additional_input","latexpath")}
 ###############################################################################
 
 validationPDF <- function(outputdir,title) {
@@ -61,13 +55,7 @@ validationPDF <- function(outputdir,title) {
   
   ##### Why Specify explicitly ?? ####
   
-  on.exit(
-    if(!is.na(latexpath)){
-      swclose(swout,clean_output=FALSE,latexpath=latexpath,engine="knitr")
-    }else{
-      swclose(swout,clean_output=FALSE,engine="knitr")
-    }
-  )
+  on.exit(swclose(swout,clean_output=FALSE,engine="knitr"))
   
   ################################################################################
   ############################Write Model outputs#################################

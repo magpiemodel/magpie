@@ -18,6 +18,7 @@
 # 2.07, modified so that it also works without bioenergy demand
 
 ##########################################################
+library(gdx)
 library(luscale)
 library(luplot)
 library(lucode)
