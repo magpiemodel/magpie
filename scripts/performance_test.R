@@ -24,7 +24,7 @@ performance_start <- function(cfg="default.cfg",modulepath="modules/",id="perfor
   cfg$sequential <- sequential
   cfg$logoption <- 2
   
-  git <- system("git rev-parse HEAD",intern=TRUE) 
+  git <- try(system("git rev-parse HEAD",intern=TRUE), silent=TRUE) 
   save(git,file="git.rda")
   cfg$files2export$start <- c(cfg$files2export$start,"git.rda")
  
