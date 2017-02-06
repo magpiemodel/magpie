@@ -11,17 +11,13 @@ library(magpie4)
 
 ############################# BASIC CONFIGURATION #############################
 validation_mif        <- "input/validation.mif"
-
-if(!exists("source_include")) {
-  outputdir    <-"."
-  title<-"dummy"
-}
 ###############################################################################
 
+load(path(outputdir,"config.Rdata"))
 gdx<-path(outputdir,"fulldata.gdx")
 x <- getReport(gdx)
 
-validationpdf(x=x, hist=validation_mif, file=path(outputdir,paste0("dval_",title,".pdf")), style="detailed")
+validationpdf(x=x, hist=validation_mif, file=path(outputdir,paste0("dval_",cfg$title,".pdf")), style="detailed")
 
   
 
