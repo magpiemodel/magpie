@@ -338,7 +338,7 @@ swlatex(sw,"\\newpage")
 swlatex(sw,"\\subsection{C emissions}")
 swlatex(sw,"\\subsubsection{Annual}")
 if (cfg$gms$presolve == "on") {
-  pre_reg <- readGDX(gdx,"o90_emissions_reg", format="first_found")
+  pre_reg <- dimSums(readGDX(gdx,"o90_emissions_reg", format="first_found"),dim=3.1)
   main_reg <- setNames(emisCO2(gdx,level="reg")[,1995,,invert=TRUE],"All crops")
   pre_reg <- setNames(collapseNames(pre_reg[,,"co2_c"])[,getYears(main_reg),],"Other crops")
   bioen_reg <- setNames(main_reg - pre_reg,"Bioenergy")
