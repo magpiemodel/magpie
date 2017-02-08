@@ -1,6 +1,6 @@
 *** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 *** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
@@ -11,15 +11,13 @@
  ov_reward_cdr_aff(t,i,"marginal")                                     = vm_reward_cdr_aff.m(i);
  ov_btm_reg(t,i,emis_source,pollutants,"marginal")                     = vm_btm_reg.m(i,emis_source,pollutants);
  ov_btm_cell(t,j,emis_source,pollutants,"marginal")                    = vm_btm_cell.m(j,emis_source,pollutants);
- ov_emissions_reg(t,i,pollutants,"marginal")                           = vm_emissions_reg.m(i,pollutants);
  ov_emission_costs(t,i,"marginal")                                     = vm_emission_costs.m(i);
- ov56_emis_reg(t,i,emis_source,pollutants,"marginal")                  = v56_emis_reg.m(i,emis_source,pollutants);
+ ov_emissions_reg(t,i,emis_source,pollutants,"marginal")               = vm_emissions_reg.m(i,emis_source,pollutants);
  ov56_emis_cell(t,j,emis_source,pollutants,"marginal")                 = v56_emis_cell.m(j,emis_source,pollutants);
  ov56_emission_costs_reg_yearly(t,i,emis_reg_yearly56,"marginal")      = v56_emission_costs_reg_yearly.m(i,emis_reg_yearly56);
  ov56_emission_costs_reg_oneoff(t,i,emis_reg_oneoff56,"marginal")      = v56_emission_costs_reg_oneoff.m(i,emis_reg_oneoff56);
  ov56_emission_costs_cell_yearly(t,j,emis_cell_yearly56,"marginal")    = v56_emission_costs_cell_yearly.m(j,emis_cell_yearly56);
  ov56_emission_costs_cell_oneoff(t,j,emis_cell_oneoff56,"marginal")    = v56_emission_costs_cell_oneoff.m(j,emis_cell_oneoff56);
- oq56_emis_agg(t,i,pollutants,"marginal")                              = q56_emis_agg.m(i,pollutants);
  oq56_technical_mitigation_reg(t,i,pollutants,emis_source,"marginal")  = q56_technical_mitigation_reg.m(i,pollutants,emis_source);
  oq56_technical_mitigation_cell(t,j,pollutants,emis_source,"marginal") = q56_technical_mitigation_cell.m(j,pollutants,emis_source);
  oq56_cell_to_reg(t,i,pollutants,emis_source,"marginal")               = q56_cell_to_reg.m(i,pollutants,emis_source);
@@ -34,15 +32,13 @@
  ov_reward_cdr_aff(t,i,"level")                                        = vm_reward_cdr_aff.l(i);
  ov_btm_reg(t,i,emis_source,pollutants,"level")                        = vm_btm_reg.l(i,emis_source,pollutants);
  ov_btm_cell(t,j,emis_source,pollutants,"level")                       = vm_btm_cell.l(j,emis_source,pollutants);
- ov_emissions_reg(t,i,pollutants,"level")                              = vm_emissions_reg.l(i,pollutants);
  ov_emission_costs(t,i,"level")                                        = vm_emission_costs.l(i);
- ov56_emis_reg(t,i,emis_source,pollutants,"level")                     = v56_emis_reg.l(i,emis_source,pollutants);
+ ov_emissions_reg(t,i,emis_source,pollutants,"level")                  = vm_emissions_reg.l(i,emis_source,pollutants);
  ov56_emis_cell(t,j,emis_source,pollutants,"level")                    = v56_emis_cell.l(j,emis_source,pollutants);
  ov56_emission_costs_reg_yearly(t,i,emis_reg_yearly56,"level")         = v56_emission_costs_reg_yearly.l(i,emis_reg_yearly56);
  ov56_emission_costs_reg_oneoff(t,i,emis_reg_oneoff56,"level")         = v56_emission_costs_reg_oneoff.l(i,emis_reg_oneoff56);
  ov56_emission_costs_cell_yearly(t,j,emis_cell_yearly56,"level")       = v56_emission_costs_cell_yearly.l(j,emis_cell_yearly56);
  ov56_emission_costs_cell_oneoff(t,j,emis_cell_oneoff56,"level")       = v56_emission_costs_cell_oneoff.l(j,emis_cell_oneoff56);
- oq56_emis_agg(t,i,pollutants,"level")                                 = q56_emis_agg.l(i,pollutants);
  oq56_technical_mitigation_reg(t,i,pollutants,emis_source,"level")     = q56_technical_mitigation_reg.l(i,pollutants,emis_source);
  oq56_technical_mitigation_cell(t,j,pollutants,emis_source,"level")    = q56_technical_mitigation_cell.l(j,pollutants,emis_source);
  oq56_cell_to_reg(t,i,pollutants,emis_source,"level")                  = q56_cell_to_reg.l(i,pollutants,emis_source);
@@ -57,15 +53,13 @@
  ov_reward_cdr_aff(t,i,"upper")                                        = vm_reward_cdr_aff.up(i);
  ov_btm_reg(t,i,emis_source,pollutants,"upper")                        = vm_btm_reg.up(i,emis_source,pollutants);
  ov_btm_cell(t,j,emis_source,pollutants,"upper")                       = vm_btm_cell.up(j,emis_source,pollutants);
- ov_emissions_reg(t,i,pollutants,"upper")                              = vm_emissions_reg.up(i,pollutants);
  ov_emission_costs(t,i,"upper")                                        = vm_emission_costs.up(i);
- ov56_emis_reg(t,i,emis_source,pollutants,"upper")                     = v56_emis_reg.up(i,emis_source,pollutants);
+ ov_emissions_reg(t,i,emis_source,pollutants,"upper")                  = vm_emissions_reg.up(i,emis_source,pollutants);
  ov56_emis_cell(t,j,emis_source,pollutants,"upper")                    = v56_emis_cell.up(j,emis_source,pollutants);
  ov56_emission_costs_reg_yearly(t,i,emis_reg_yearly56,"upper")         = v56_emission_costs_reg_yearly.up(i,emis_reg_yearly56);
  ov56_emission_costs_reg_oneoff(t,i,emis_reg_oneoff56,"upper")         = v56_emission_costs_reg_oneoff.up(i,emis_reg_oneoff56);
  ov56_emission_costs_cell_yearly(t,j,emis_cell_yearly56,"upper")       = v56_emission_costs_cell_yearly.up(j,emis_cell_yearly56);
  ov56_emission_costs_cell_oneoff(t,j,emis_cell_oneoff56,"upper")       = v56_emission_costs_cell_oneoff.up(j,emis_cell_oneoff56);
- oq56_emis_agg(t,i,pollutants,"upper")                                 = q56_emis_agg.up(i,pollutants);
  oq56_technical_mitigation_reg(t,i,pollutants,emis_source,"upper")     = q56_technical_mitigation_reg.up(i,pollutants,emis_source);
  oq56_technical_mitigation_cell(t,j,pollutants,emis_source,"upper")    = q56_technical_mitigation_cell.up(j,pollutants,emis_source);
  oq56_cell_to_reg(t,i,pollutants,emis_source,"upper")                  = q56_cell_to_reg.up(i,pollutants,emis_source);
@@ -80,15 +74,13 @@
  ov_reward_cdr_aff(t,i,"lower")                                        = vm_reward_cdr_aff.lo(i);
  ov_btm_reg(t,i,emis_source,pollutants,"lower")                        = vm_btm_reg.lo(i,emis_source,pollutants);
  ov_btm_cell(t,j,emis_source,pollutants,"lower")                       = vm_btm_cell.lo(j,emis_source,pollutants);
- ov_emissions_reg(t,i,pollutants,"lower")                              = vm_emissions_reg.lo(i,pollutants);
  ov_emission_costs(t,i,"lower")                                        = vm_emission_costs.lo(i);
- ov56_emis_reg(t,i,emis_source,pollutants,"lower")                     = v56_emis_reg.lo(i,emis_source,pollutants);
+ ov_emissions_reg(t,i,emis_source,pollutants,"lower")                  = vm_emissions_reg.lo(i,emis_source,pollutants);
  ov56_emis_cell(t,j,emis_source,pollutants,"lower")                    = v56_emis_cell.lo(j,emis_source,pollutants);
  ov56_emission_costs_reg_yearly(t,i,emis_reg_yearly56,"lower")         = v56_emission_costs_reg_yearly.lo(i,emis_reg_yearly56);
  ov56_emission_costs_reg_oneoff(t,i,emis_reg_oneoff56,"lower")         = v56_emission_costs_reg_oneoff.lo(i,emis_reg_oneoff56);
  ov56_emission_costs_cell_yearly(t,j,emis_cell_yearly56,"lower")       = v56_emission_costs_cell_yearly.lo(j,emis_cell_yearly56);
  ov56_emission_costs_cell_oneoff(t,j,emis_cell_oneoff56,"lower")       = v56_emission_costs_cell_oneoff.lo(j,emis_cell_oneoff56);
- oq56_emis_agg(t,i,pollutants,"lower")                                 = q56_emis_agg.lo(i,pollutants);
  oq56_technical_mitigation_reg(t,i,pollutants,emis_source,"lower")     = q56_technical_mitigation_reg.lo(i,pollutants,emis_source);
  oq56_technical_mitigation_cell(t,j,pollutants,emis_source,"lower")    = q56_technical_mitigation_cell.lo(j,pollutants,emis_source);
  oq56_cell_to_reg(t,i,pollutants,emis_source,"lower")                  = q56_cell_to_reg.lo(i,pollutants,emis_source);

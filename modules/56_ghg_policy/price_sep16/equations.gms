@@ -9,15 +9,8 @@
 *** Calculate emissions for the core
 
 
- q56_emis_agg(i2,pollutants) ..
-                 vm_emissions_reg(i2,pollutants)
-                 =e=
-                 sum(emis_source,
-                     v56_emis_reg(i2,emis_source,pollutants)
-                 );
-
  q56_technical_mitigation_reg(i2,pollutants,emis_source) ..
-                 v56_emis_reg(i2,emis_source,pollutants)
+                 vm_emissions_reg(i2,emis_source,pollutants)
                  =e=
                  vm_btm_reg(i2,emis_source,pollutants)*(1 - sum(ct, im_maccs_mitigation(ct,i2,emis_source,pollutants)))
                  ;
@@ -30,7 +23,7 @@
                 );
 
  q56_cell_to_reg(i2,pollutants,emis_source) ..
-                v56_emis_reg(i2,emis_source,pollutants)
+                vm_emissions_reg(i2,emis_source,pollutants)
                 =e=
                 sum(cell(i2,j2),v56_emis_cell(j2,emis_source,pollutants));
 
@@ -56,7 +49,7 @@
                  v56_emission_costs_reg_yearly(i2,emis_reg_yearly56)
                  =e=
                  sum(pollutants,
-                     v56_emis_reg(i2,emis_reg_yearly56,pollutants) *
+                     vm_emissions_reg(i2,emis_reg_yearly56,pollutants) *
                      f56_emis_policy("%c56_emis_policy%",pollutants,emis_reg_yearly56) *
                      sum(ct, im_pollutant_prices(ct,i2,pollutants))
                  );
@@ -65,7 +58,7 @@
                  v56_emission_costs_reg_oneoff(i2,emis_reg_oneoff56)
                  =g=
                  sum(pollutants,
-                     v56_emis_reg(i2,emis_reg_oneoff56,pollutants)
+                     vm_emissions_reg(i2,emis_reg_oneoff56,pollutants)
                      * m_timestep_length
                      * f56_emis_policy("%c56_emis_policy%",pollutants,emis_reg_oneoff56)
                      * sum(ct, im_pollutant_prices(ct,i2,pollutants)

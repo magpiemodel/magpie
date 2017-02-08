@@ -67,7 +67,7 @@ if((magpie_pre.modelstat > 2 and magpie_pre.modelstat ne 7),
 
 o90_cost_glo(t)            = vm_cost_glo.l;
 o90_cost_reg(t,i)          = vm_cost_reg.l(i);
-o90_emissions_reg(t,i,pollutants) = vm_emissions_reg.l(i,pollutants);
+o90_emissions_reg(t,i,emis_source,pollutants) = vm_emissions_reg.l(i,emis_source,pollutants);
 o90_tech_cost(t,i)         = vm_tech_cost.l(i);
 o90_cost_prod(t,i,k)       = vm_cost_prod.l(i,k);
 o90_cost_transp(t,j,k)     = vm_cost_transp.l(j,k);

@@ -6,9 +6,6 @@
 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
- ov_nr_inorg_fert_costs(t,i,"marginal") = vm_nr_inorg_fert_costs.m(i);
- ov_nr_inorg_fert_costs(t,i,"level")    = vm_nr_inorg_fert_costs.l(i);
- ov_nr_inorg_fert_costs(t,i,"upper")    = vm_nr_inorg_fert_costs.up(i);
- ov_nr_inorg_fert_costs(t,i,"lower")    = vm_nr_inorg_fert_costs.lo(i);
+
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
 

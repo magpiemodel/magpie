@@ -31,7 +31,14 @@ sets
    no3_n
    /
 
-   n_pollutants_direct(pollutants)
+   n_pollutants(pollutants)
+   /
+   n2o_n_direct,n2o_n_indirect,
+   nh3_n, no2_n,
+   no3_n
+   /
+
+   n_pollutants_direct(n_pollutants)
    /
    n2o_n_direct,
    nh3_n, no2_n,
@@ -41,8 +48,7 @@ sets
    pollutant_nh3no2_51(n_pollutants_direct) nitrogen emissins relevant for deposition
    /nh3_n, no2_n/
 
-   emis_source_n51(emis_source)
-   / inorg_fert, man_crop, awms, resid, man_past, som, rice /
+
 
    emis_source_n_cropsoils51(emis_source_n51) activities that lead to emissions
    / inorg_fert, man_crop, resid, som, rice /
