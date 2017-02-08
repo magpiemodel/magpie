@@ -1,6 +1,6 @@
 *** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 *** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
@@ -8,7 +8,7 @@ scalars
   s56_reward_neg_emis reward negative co2 emissions / 0 /
 ;
 
-$setglobal c56_pollutant_prices  SSP2-Ref-SPA0
+$setglobal c56_pollutant_prices  SSP2-26-SPA0
 $setglobal c56_emis_policy  ssp
 $setglobal c56_aff_policy  vegc50
 

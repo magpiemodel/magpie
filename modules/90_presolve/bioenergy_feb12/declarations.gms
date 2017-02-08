@@ -11,7 +11,7 @@ scalars
 parameters
  o90_cost_glo(t)                      total cost of production [magpie_pre] (mio. US$)
  o90_cost_reg(t,i)                    regional cost of production [magpie_pre] (mio. US$)
- o90_emissions_reg(t,i,pollutants)    regional emissions (Tg N2O-N CH4 and CO2-C)
+ o90_emissions_reg(t,i,emis_source,pollutants)    regional emissions (Tg N2O-N CH4 and CO2-C)
  p90_modelstat(t)                     model status of presolve  (-)
  o90_tech_cost(t,i)            price for technological change [magpie_pre] (mio. US$)
  o90_cost_prod(t,i,k)          factor costs [magpie_pre] (mio. US$)

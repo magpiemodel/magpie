@@ -4,5 +4,5 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
- vm_nr_inorg_fert_costs.lo(i) = 0;
- vm_btm_reg.fx(i,emis_source,n_pollutants_direct) = 0;
+ vm_btm_reg.fx(i,emis_source,n_pollutants) = 0;
+

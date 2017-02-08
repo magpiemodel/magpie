@@ -1,6 +1,6 @@
 *** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 *** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
@@ -55,8 +55,8 @@
  q51_emissions_indirect_n2o(i2,emis_source_n51) ..
                  vm_btm_reg(i2,emis_source_n51,"n2o_n_indirect")
                  =e=
-                 sum(pollutant_nh3no2_51,vm_emissions_reg(i2,pollutant_nh3no2_51)) * f51_ipcc_ef("ef_4","best")
-                 + vm_emissions_reg(i2,"no3_n") * f51_ipcc_ef("ef_5","best");
+                 sum(pollutant_nh3no2_51,vm_emissions_reg(i2,emis_source_n51,pollutant_nh3no2_51)) * f51_ipcc_ef("ef_4","best")
+                 + vm_emissions_reg(i2,emis_source_n51,"no3_n") * f51_ipcc_ef("ef_5","best");
 
 
 
