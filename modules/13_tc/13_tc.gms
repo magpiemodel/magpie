@@ -7,5 +7,4 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%tc%" == "endo_JUN16" $include "./modules/13_tc/endo_JUN16.gms"
-$Ifi "%tc%" == "off" $include "./modules/13_tc/off.gms"
 *###################### R SECTION END (MODULETYPES) ############################
