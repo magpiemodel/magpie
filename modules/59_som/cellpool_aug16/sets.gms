@@ -6,7 +6,7 @@
 
 sets
 noncropland59(land)
-/pasture,primforest,secdforest,forestry,urban,other/
+/past, forestry, forest, urban, other/
 
 pools59
 /cropland,noncropland/
@@ -21,8 +21,7 @@ climate59 climate classes of IPCC 2006
 /temperate_dry,temperate_moist,tropical_dry,tropical_moist,tropical_montaine/
 
 clcl climate classification types
-           /
-             BWh  .(tropical_dry) "arid desert hot arid"
+           / BWh  .(tropical_dry) "arid desert hot arid"
              As   .() "equatorial summer dry"
              BSh  .() "arid steppe hot arid"
              Aw   .(tropical_moist) "equatorial winter dry"
