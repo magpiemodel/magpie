@@ -10,7 +10,7 @@ parameters
           i59_tillage_share(i,tillage59)      share of land under tillage clas(1)
           i59_input_share(i,inputs59)         share of land under input class (1)
           i59_cratio(j,kcr)                   ratio of carbon densitiy of land relative to natural vegetaion (1)
-          p59_som_pool(j,pools59) 
+          p59_som_pool(j,pools59)            actual C pool (Tg C) 
 ;
 
 equations

@@ -7,39 +7,39 @@
 $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
+*
 * Used data set: GLUES2-sresa2-constant_co2-miub_echo_g_ERB_rev22.1_h100_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: 5d3c524d42cf9c6181ad18614f55b04c
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-* 
+*
 * Used data set: 690d3718e151be1b450b394c1064b1c5_magpie_rev2.499.tgz
 * md5sum: 68887baed4b76fb16d709eb834ae5693
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
+*
 * Used data set: additional_data.tgz
 * md5sum: 8a4fca1bcc339a8c5b1a579cf180aed1
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-* 
+*
 * Low resolution: h100
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 100
-* 
+*
 * Number of cells per region:
 *   SSA  MEA  OAS  CHA  NEU  EUR  REF  LAM  USA  CAZ  JPN  IND
 *     5    8   10   11    7   10    3   14    6   19    3    4
-* 
+*
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-* 
+*
 * Regions data revision: 2.499
-* 
+*
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/GLUES2/sresa2/constant_co2/miub_echo_g
 * * Additional input folder: /p/projects/landuse/data/input/other/rev22
 * * Land input data set: ERB
 * * Revision: 22.1
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision, land_input = cfg$land_input)
-* 
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: h100
@@ -49,11 +49,11 @@ $title magpie
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = paste0(cfg$base_folder, "/", set_folder,     "_", cfg$high_res, ".tgz"), regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
-* 
-* 
-* 
+*
+*
+*
 * Last modification (input data): Wed Jan 11 14:23:47 2017
-* 
+*
 *###################### R SECTION END (VERSION INFO) ###########################
 
 
@@ -120,7 +120,7 @@ $setglobal water_demand  agr_sector_aug13
 $setglobal water_availability  total_water_aug13
 $setglobal climate  static
 
-$setglobal nr_soil_budget  off
+$setglobal nr_soil_budget off
 $setglobal nitrogen  ipcc2006_sep16
 $setglobal carbon  normal_sep16
 $setglobal methane  ipcc2006_flexreg_apr16

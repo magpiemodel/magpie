@@ -14,7 +14,7 @@ i59_input_share(i,inputs59)=0;
 i59_input_share(i,"medium_input")=1;
 
 i59_cratio(j,kcr) = sum((cell(i,j),tillage59,inputs59,climate59),
-                 sum(clcl_climate59(clcl,climate59),fm_koeppengeiger(j,clcl))
+                 sum(clcl_climate59(clcl,climate59),pm_climate_class(j,clcl))
                  * f59_cratio_landuse(climate59,kcr)
                  * i59_tillage_share(i,tillage59)
                  * f59_cratio_tillage(climate59,tillage59)

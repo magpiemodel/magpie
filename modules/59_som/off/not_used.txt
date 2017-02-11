@@ -5,3 +5,4 @@ vm_landreduction,input,questionnaire
 pcm_land,input,questionnaire
 vm_area,input,questionnaire
 fm_carbon_density,input,questionnaire
+pm_climate_class,input,questionnaire

@@ -12,14 +12,14 @@ $setglobal c50_scen_neff  snupe60_60_starty2010
 *   snupe75_85_starty2010
 
 
-parameter f50_snupe(time,i,scen_neff50)  selected scenario values for soil nitrogen uptake efficiency (1)
+parameter f50_snupe(t_all,i,scen_neff50)  selected scenario values for soil nitrogen uptake efficiency (1)
 /
 $ondelim
 $include "./modules/50_nr_soil_budget/input/f50_snupe.cs4"
 $offdelim
 /;
 
-parameter f50_nr_fix_ndfa(time,i,kcr) Nr fixation rates per ton production in percent of plant dm
+parameter f50_nr_fix_ndfa(t_all,i,kcr) Nr fixation rates per ton production in percent of plant dm
 /
 $ondelim
 $include "./modules/50_nr_soil_budget/input/f50_ndfa.cs4"
@@ -27,7 +27,7 @@ $offdelim
 /;
 
 
-parameter f50_nitrogen_balanceflow(time,i) Balancelfow to account for unrealistically high SNUpEs in Tg Nr
+parameter f50_nitrogen_balanceflow(t_all,i) Balancelfow to account for unrealistically high SNUpEs in Tg Nr
 /
 $ondelim
 $include "./modules/50_nr_soil_budget/input/f50_nitrogen_balanceflow.cs4"

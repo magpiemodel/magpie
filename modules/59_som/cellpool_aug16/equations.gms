@@ -12,7 +12,6 @@ q59_som_target_cropland(j2) ..
 *              + sum(kcr,vm_area(kcr,"irrigated")*vm_carbon_content(j2,"crop")*i59_irrigationbonus
               ;
 
-*pm_climate_class(j,clcl)
 
 q59_som_target_noncropland(j2) ..
               v59_som_target(j2,"noncropland")
