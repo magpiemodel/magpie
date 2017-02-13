@@ -6,7 +6,7 @@
 
 
 
-table f45_koeppengeiger(j,clcl) Koeppen-Geiger climate classification data as shares of cell (-)
+table fm_koeppengeiger(j,clcl) Koeppen-Geiger climate classification data as shares of cell (-)
 $ondelim
 $include "./modules/45_climate/static/input/koeppen_geiger.cs3"
 $offdelim;
