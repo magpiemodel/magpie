@@ -1,15 +1,16 @@
 *** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 *** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
 parameters
           i59_lossrate(t) rate of loss or recovery of SOM pool per timestep
-          p59_carbon_density(time,j,pools59)  carbon density of a hectare of land (t C per ha)
+          p59_carbon_density(t_all,j,pools59)  carbon density of a hectare of land (t C per ha)
           i59_tillage_share(i,tillage59)      share of land under tillage clas(1)
           i59_input_share(i,inputs59)         share of land under input class (1)
           i59_cratio(j,kcr)                   ratio of carbon densitiy of land relative to natural vegetaion (1)
+          p59_som_pool(j,pools59)            actual C pool (Tg C) 
 ;
 
 equations
