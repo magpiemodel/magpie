@@ -5,6 +5,4 @@
 # Contact: magpie@pik-potsdam.de
 
 name,type,reason
-vm_tau,input,questionnaire
-fm_tau1995,input,questionnaire
-im_yields,input,not used
+vm_yld,input,questionnaire

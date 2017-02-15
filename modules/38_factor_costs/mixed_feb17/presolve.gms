@@ -4,6 +4,8 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
+vm_mi.fx(i)=1;
+vm_cost_prod.fx(i,"pasture") = 0;
 
-q14_yield(j2,kve,w) .. vm_yld(j2,kve,w) =e=
-                    sum(ct,im_yields(ct,j2,kve,w))*sum(cell(i2,j2),vm_tau(i2)/fm_tau1995(i2)*vm_mi(i2));
+
+i38_max_yields(i,kcr) = smax((cell(i,j),w),im_yields(t,j,kcr,w));

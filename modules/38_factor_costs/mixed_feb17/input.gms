@@ -5,5 +5,8 @@
 *** Contact: magpie@pik-potsdam.de
 
 
-q14_yield(j2,kve,w) .. vm_yld(j2,kve,w) =e=
-                    sum(ct,im_yields(ct,j2,kve,w))*sum(cell(i2,j2),vm_tau(i2)/fm_tau1995(i2)*vm_mi(i2));
+
+table f38_fac_req(kve,w) Factor requirements (US$04 per ton DM)
+$ondelim
+$include "./modules/38_factor_costs/mixed_feb17/input/f38_fac_req.csv"
+$offdelim;

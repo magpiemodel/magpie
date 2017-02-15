@@ -6,7 +6,7 @@
 
 parameters
 ****** Yields
- i14_yields(t,j,kve,w)           biophysical input yields (excluding technological change) (ton DM per ha)
+ im_yields(t,j,kve,w)           biophysical input yields (excluding technological change) (ton DM per ha)
 ;
 
 positive variables
