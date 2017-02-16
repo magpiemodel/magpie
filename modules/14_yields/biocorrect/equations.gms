@@ -6,4 +6,4 @@
 
 
 q14_yield(j2,kve,w) .. vm_yld(j2,kve,w) =e=
-                    sum(ct,im_yields(ct,j2,kve,w))*sum(cell(i2,j2),vm_tau(i2)/fm_tau1995(i2)*vm_mi(i2));
+                    sum(ct,i14_yields(ct,j2,kve,w))*sum(cell(i2,j2),vm_tau(i2)/fm_tau1995(i2)*vm_mi(i2));

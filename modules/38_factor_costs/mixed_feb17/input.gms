@@ -10,3 +10,8 @@ table f38_fac_req(kve,w) Factor requirements (US$04 per ton DM)
 $ondelim
 $include "./modules/38_factor_costs/mixed_feb17/input/f38_fac_req.csv"
 $offdelim;
+
+table f38_region_yield(i,kcr) Factor requirements (US$04 per ton DM)
+$ondelim
+$include "./modules/38_factor_costs/mixed_feb17/input/f38_region_yield.csv"
+$offdelim;

@@ -6,4 +6,4 @@
 
 * ### nl_fix ###
 
-vm_yld.fx(j,kve,w) = sum(ct,im_yields(ct,j,kve,w))*sum(cell(i,j),vm_tau.l(i)/fm_tau1995(i));
+vm_yld.fx(j,kve,w) = sum(ct,i14_yields(ct,j,kve,w))*sum(cell(i,j),vm_tau.l(i)/fm_tau1995(i));

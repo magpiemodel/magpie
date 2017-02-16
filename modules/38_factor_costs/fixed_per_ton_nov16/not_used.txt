@@ -7,4 +7,3 @@
 name,type,reason
 vm_tau,input,questionnaire
 fm_tau1995,input,questionnaire
-im_yields,input,not used

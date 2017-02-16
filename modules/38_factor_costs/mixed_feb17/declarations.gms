@@ -13,10 +13,6 @@ variables
          vm_cost_prod(i,k)                          factor costs (mio US$)
 ;
 
-parameters
-  i38_max_yields(i,kcr) Maximum yield
-;
-
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_mi(t,i,type)                   Management intensity (1)

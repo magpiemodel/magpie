@@ -6,6 +6,3 @@
 
 vm_mi.fx(i)=1;
 vm_cost_prod.fx(i,"pasture") = 0;
-
-
-i38_max_yields(i,kcr) = smax((cell(i,j),w),im_yields(t,j,kcr,w));
