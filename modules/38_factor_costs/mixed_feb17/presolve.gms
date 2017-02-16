@@ -4,9 +4,5 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-
-
-table f45_koeppengeiger(j,clcl) Koeppen-Geiger climate classification data as shares of cell (-)
-$ondelim
-$include "./modules/45_climate/static/input/koeppen_geiger.cs3"
-$offdelim;
+vm_mi.fx(i)=1;
+vm_cost_prod.fx(i,"pasture") = 0;

@@ -111,7 +111,7 @@ $setglobal urban  static
 $setglobal other  endo_threshold_aug15
 $setglobal land_tax  off_jul16
 
-$setglobal factor_costs  fixed_per_ton_nov16
+$setglobal factor_costs  mixed_feb17
 $setglobal landconversion  gdp_scaled_jun13
 
 $setglobal transport  gtap_nov12

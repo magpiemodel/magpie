@@ -8,7 +8,7 @@ scalars
   s56_reward_neg_emis reward negative co2 emissions / 0 /
 ;
 
-$setglobal c56_pollutant_prices  SSP2-26-SPA0
+$setglobal c56_pollutant_prices  SSP2-Ref-SPA0
 $setglobal c56_emis_policy  ssp
 $setglobal c56_aff_policy  vegc50
 
