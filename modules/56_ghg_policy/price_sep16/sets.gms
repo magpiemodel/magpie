@@ -50,7 +50,7 @@ sets
 
 
 
-   emis_source_n_cropsoils51(emis_source_n51) activities that lead to emissions
+   emis_source_n_cropsoils51(emis_source) activities that lead to emissions
    / inorg_fert, man_crop, resid, som, rice /
 
   ghgscen56 ghg price scenarios
