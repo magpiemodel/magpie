@@ -8,30 +8,30 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 *
-* Used data set: GLUES2-sresa2-constant_co2-miub_echo_g_ERB_rev22.1_h100_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: 5d3c524d42cf9c6181ad18614f55b04c
+* Used data set: GLUES2-sresa2-constant_co2-miub_echo_g_ERB_rev22.1_n200_690d3718e151be1b450b394c1064b1c5.tgz
+* md5sum: 763374ea06f7e3092b62381a4edf6493
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 *
-* Used data set: 690d3718e151be1b450b394c1064b1c5_magpie_rev2.499.tgz
-* md5sum: 68887baed4b76fb16d709eb834ae5693
+* Used data set: magpie_690d3718e151be1b450b394c1064b1c5_rev2.05.tgz
+* md5sum: 363eebcab40d4d4d4ae57f6f6101a363
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 *
-* Used data set: additional_data.tgz
-* md5sum: 8a4fca1bcc339a8c5b1a579cf180aed1
+* Used data set: additional_data_rev1.0.tgz
+* md5sum: 498d060facd4d7099d206c335a29f218
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 *
-* Low resolution: h100
+* Low resolution: n200
 * High resolution: 0.5
 *
-* Total number of cells: 100
+* Total number of cells: 200
 *
 * Number of cells per region:
 *   SSA  MEA  OAS  CHA  NEU  EUR  REF  LAM  USA  CAZ  JPN  IND
-*     5    8   10   11    7   10    3   14    6   19    3    4
+*    25   17   11   13    4    8   46   24   15   32    1    4
 *
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 *
-* Regions data revision: 2.499
+* Regions data revision: 2.05
 *
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/GLUES2/sresa2/constant_co2/miub_echo_g
@@ -42,9 +42,9 @@ $title magpie
 *
 * aggregation settings:
 * * Input resolution: 0.5
-* * Output resolution: h100
+* * Output resolution: n200
 * * Input file: /p/projects/landuse/data/input/archive/GLUES2-sresa2-constant_co2-miub_echo_g_ERB_rev22.1_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/GLUES2-sresa2-constant_co2-miub_echo_g_ERB_rev22.1_h100_690d3718e151be1b450b394c1064b1c5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/GLUES2-sresa2-constant_co2-miub_echo_g_ERB_rev22.1_n200_690d3718e151be1b450b394c1064b1c5.tgz
 * * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
@@ -52,7 +52,7 @@ $title magpie
 *
 *
 *
-* Last modification (input data): Wed Jan 11 14:23:47 2017
+* Last modification (input data): Fri Feb 17 15:38:04 2017
 *
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -78,7 +78,7 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  3
+$setglobal c_timesteps  11
 
 scalars sm_use_gdx   use of gdx files                                      / 2 /
         sm_maxiter   maximal solve iterations if modelstat is > 2        / 100 /
@@ -98,8 +98,8 @@ $setglobal food  exo_flexreg_apr16
 $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 
-$setglobal residues  flexreg_apr16
-$setglobal processing  sector_may15
+$setglobal residues  off
+$setglobal processing  off
 
 $setglobal trade  selfsuff_flexreg_dev
 
@@ -120,12 +120,12 @@ $setglobal water_demand  agr_sector_aug13
 $setglobal water_availability  total_water_aug13
 $setglobal climate  static
 
-$setglobal nr_soil_budget off
+$setglobal nr_soil_budget  exoeff_aug16
 $setglobal nitrogen  ipcc2006_sep16
 $setglobal carbon  normal_sep16
 $setglobal methane  ipcc2006_flexreg_apr16
 $setglobal phosphorus  off
-$setglobal awms  off
+$setglobal awms  ipcc2006_aug16
 $setglobal ghg_policy  price_sep16
 $setglobal maccs  on_sep16
 $setglobal carbon_removal  off_sep16
