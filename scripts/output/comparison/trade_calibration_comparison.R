@@ -30,9 +30,8 @@ additional_input <- "fulldata.gdx"                # Further data that needs to b
 if(!exists("source_include")) {
 
   outputdirs    <-"../../output/default_2013-04-16_15.10.49"
-  latexpath        <- ""
   #Define arguments that can be read from command line
-  readArgs("outputdirs","latexpath")
+  readArgs("outputdirs")
 }
 ###############################################################################
 
@@ -297,13 +296,8 @@ for (i in colnames(costs_magpie)[-grep("reg",colnames(costs_magpie))]){
            col = "blue", pch=8, fig.placement="H")
 }
 
+swclose(swout,clean_output=FALSE,engine="knitr")
 
-
-if(!is.na(latexpath)){
-  swclose(swout,clean_output=FALSE,latexpath=latexpath,engine="knitr")
-}else{
-  swclose(swout,clean_output=FALSE,engine="knitr")
-}
 
 
 

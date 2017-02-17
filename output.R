@@ -33,25 +33,6 @@ library(lucode)
 #debug mode
 debug <- FALSE
 
-###Define arguments that can be read from command line
-if(!exists("source_include")) {
-  readArgs("outputdir","output","comp","remind_dir")
-}
-
-on_new_cluster <- file.exists('/p/projects/landuse')
-on_old_cluster <- file.exists('/iplex/01/landuse') & !on_new_cluster
-
-#Setting relevant paths
-if(on_old_cluster) { #run is performed on the old cluster
-  pythonpath <- '/iplex/01/landuse/bin/python/bin/'
-  latexpath  <- '/iplex/01/sys/applications/texlive/bin/x86_64-linux/'  
-  gamspath   <- '/iplex/01/sys/applications/gams/'
-} else {
-  pythonpath <- ''
-  latexpath  <- ''
-  gamspath   <- ''
-}
-
 get_line <- function(){
 	# gets characters (line) from the terminal of from a connection
 	# and stores it in the return object

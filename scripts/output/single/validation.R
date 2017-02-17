@@ -12,10 +12,17 @@ if(!exists("source_include")) {
   data_workspace        <- "B0.RData"     # title of the run (with date)
   title<-"dummy"
 }
-hist    <- "input/validation.mif"
+hist    <- c(paste0(outputdir, "/validation.mif"), "input/validation.mif")
 file    <- paste0(outputdir, "/", title, "_validation.pdf")
 gdx     <- paste0(outputdir, "/fulldata.gdx")
 runinfo <- data_workspace
 ###############################################################################
 
-validation(gdx=gdx, hist=hist, file = file, runinfo=runinfo)
+#### Choose validation data ###
+# Use first hist file that can be found
+
+for(h in hist) {
+  if(file.exists(h)) break
+}
+
+validation(gdx=gdx, hist=h, file = file, runinfo=runinfo)

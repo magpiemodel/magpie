@@ -17,9 +17,8 @@ options(error=function()traceback(2))
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {  
   outputdirs <- path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
-  latexpath <- NA              # Latexpath necessary if swclose is performed in the queue
   #Define arguments that can be read from command line
-  readArgs("outputdirs","latexpath")
+  readArgs("outputdirs")
 }
 ###############################################################################
 cat("\nStarting output generation\n")

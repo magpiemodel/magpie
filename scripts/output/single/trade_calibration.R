@@ -27,9 +27,8 @@ if(!exists("source_include")) {
   
   gdx <- "fulldata.gdx"
   outputdir  <- "."
-  latexpath < -NA              # Latexpath necessary if swclose is performed in the queue
   #Define arguments that can be read from command line
-  readArgs("outputdir","latexpath")
+  readArgs("outputdir")
 } else {
   gdx<-path(outputdir,"fulldata.gdx")
 }
@@ -254,13 +253,8 @@ for (i in colnames(costs_magpie)[-grep("reg",colnames(costs_magpie))]){
            col = "blue", pch=8, fig.placement="H")
 }
 
+swclose(swout,clean_output=FALSE,engine="knitr")
 
-
-if(!is.na(latexpath)){
-  swclose(swout,clean_output=FALSE,latexpath=latexpath,engine="knitr")
-}else{
-  swclose(swout,clean_output=FALSE,engine="knitr")
-}
 
 
 

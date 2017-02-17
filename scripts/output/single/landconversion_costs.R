@@ -20,9 +20,8 @@ if(!exists("source_include")) {
   gdx    <-'/iplex/01/landuse/users/bonsch/magpie/test_si0/r4373/output/results/fulldata.gdx' 
   outputdir        <- '/iplex/01/landuse/users/bonsch/magpie/test_si0/r4373/output/results'     # title of the run (with date)
   title <- "default"
-  latexpath        <-NA              # Latexpath necessary if swclose is performed in the queue
   #Define arguments that can be read from command line
-  readArgs("outputdir","latexpath","title")
+  readArgs("outputdir","title")
 } else{
   gdx<-path(outputdir,"fulldata.gdx")
 }
@@ -39,8 +38,5 @@ swlatex(sw,"\\normalsize")
 lndcon <- setNames(readGDX(gdx,"p39_lndcon_costs","f39_c_lndcon", format="first_found")[,,c("crop","forestry","forest")],c("crop,past,urban","forestry","forest,other"))
 swoutput(sw,lndcon,unit="[US Dollar per ha]",color="Data1",labs=c("Land type"))
 
-if(!is.na(latexpath)){
-  swclose(sw,latexpath=latexpath)
-} else{
-  swclose(sw)
-}
+swclose(sw)
+

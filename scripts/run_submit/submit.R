@@ -66,7 +66,4 @@ output <- cfg$output
 outputdir <- cfg$results_folder
 sys.source("output.R",envir=new.env())
 
-#zip(path(cfg$results_folder,"full.zip"),path(cfg$results_folder,"full.gms"))
-#unlink(path(cfg$results_folder,"full.gms"))
-
 print(warnings())

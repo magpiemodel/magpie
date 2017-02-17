@@ -18,11 +18,10 @@ if(!exists("source_include")) {
   outputdir        <- 'output/BECCS_REDD_simple_emis_tech_2013-08-05_11.55.46/'     # title of the run (with date)
   gdx<-path(outputdir,"fulldata.gdx")
   title <- "default"
-  latexpath        <-NA              # Latexpath necessary if swclose is performed in the queue
   load(path(outputdir,"config.Rdata"))
   gms <- cfg$gms
   #Define arguments that can be read from command line
-  readArgs("outputdir","latexpath","title")
+  readArgs("outputdir","title")
 } else{
   gdx<-path(outputdir,"fulldata.gdx")
 }

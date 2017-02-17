@@ -20,9 +20,8 @@ library(ggplot2)
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {  
   outputdirs <- "./output/static_irrigation_2012-09-07_12.17.06"
-  latexpath <- NA              # Latexpath necessary if swclose is performed in the queue
   #Define arguments that can be read from command line
-  readArgs("outputdirs","latexpath")
+  readArgs("outputdirs")
 }
 ###############################################################################
 
@@ -232,8 +231,4 @@ swlatex(sw,"\\newpage")
 swlatex(sw,"\\section{Food Price Index (kfo)}")
 swfigure(sw,print,magpie2ggplot(data=food_price_index,ylab="1995=100",text_size=16),sw_option="width=10")
 
-if(!is.na(latexpath)){
-  swclose(sw,latexpath=latexpath)
-} else{
-  swclose(sw)
-}
+swclose(sw)
