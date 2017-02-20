@@ -21,5 +21,5 @@ if(!exists("source_include")) {
 gdx	<- path(outputdir,"fulldata.gdx")
 mif <- path(outputdir, "report.mif")
 report <- getReport(gdx)
-write.report(report, file=mif)
+write.report2(report, file=mif)
 
