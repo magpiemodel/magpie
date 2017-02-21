@@ -9,13 +9,13 @@ library(magpie4)
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
   outputdir    <-"."
-  data_workspace        <- "B0.RData"     # title of the run (with date)
-  title<-"dummy"
 }
+load(paste0(outputdir, "/config.Rdata"))
 hist    <- c(paste0(outputdir, "/validation.mif"), "input/validation.mif")
-file    <- paste0(outputdir, "/", title, "_validation.pdf")
+file    <- paste0(outputdir, "/", cfg$title, "_validation.pdf")
 gdx     <- paste0(outputdir, "/fulldata.gdx")
-runinfo <- data_workspace
+runinfo <- Sys.glob("output/bau__default/*.RData")[1]
+if(is.na(runinfo)) runinfo <- NULL
 ###############################################################################
 
 #### Choose validation data ###
