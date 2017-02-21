@@ -62,8 +62,10 @@ rm(gams_runtime,input_data,module_setup,validation)
 
 
 #Postprocessing / Output Generation
+comp <- FALSE
+submit <- "direct"
 output <- cfg$output
-outputdir <- cfg$results_folder
+outputdirs <- cfg$results_folder
 sys.source("output.R",envir=new.env())
 
 print(warnings())
