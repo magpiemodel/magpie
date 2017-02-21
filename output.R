@@ -97,17 +97,26 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
   }
   
   choose_submit <- function(title="Please choose run submission type") {
+    slurm <- ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE) 
     modes <- c("Direct execution", "Background execution", "SLURM submission", "Debug mode")
+    if(!slurm) modes <- modes[-3]
     cat("\n\n",title,":\n\n")
     cat(paste(1:length(modes), modes, sep=": " ),sep="\n")
     cat("\nNumber: ")
     identifier <- get_line()
     identifier <- as.numeric(strsplit(identifier,",")[[1]])
-    comp <- switch(identifier,
-                   "1" = "direct",
-                   "2" = "background",
-                   "3" = "slurm",
-                   "4" = "debug")
+    if(slurm) {
+      comp <- switch(identifier,
+                     "1" = "direct",
+                     "2" = "background",
+                     "3" = "slurm",
+                     "4" = "debug")
+    } else {
+      comp <- switch(identifier,
+                     "1" = "direct",
+                     "2" = "background",
+                     "3" = "debug")
+    }
     if(is.null(comp)) stop("This type is invalid. Please choose a valid type")
     return(comp)
   }
