@@ -65,7 +65,7 @@ rm(gams_runtime,input_data,module_setup,validation)
 comp <- FALSE
 submit <- "direct"
 output <- cfg$output
-outputdirs <- cfg$results_folder
+outputdirs <- getwd()
 sys.source("output.R",envir=new.env())
 
 print(warnings())
