@@ -25,6 +25,12 @@ for(outputdir in outputdirs) {
     title <- paste0("run",i)
   }
   gdx <- paste0(outputdir, "/fulldata.gdx")
+  if(!is.null(x)) {
+    scenarios <- getNames(x,dim=2)
+    if(title %in% scenarios) {
+      title <- tail(make.unique(c(scenarios,title),sep=""),n=1)
+    }
+  }
   tmp <- getReport(gdx, scenario=sub(".","_",title,fixed = TRUE))
   x <- mbind(x,tmp)
   i <- i+1
