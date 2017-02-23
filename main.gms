@@ -7,39 +7,39 @@
 $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
-*
+* 
 * Used data set: GLUES2-sresa2-constant_co2-miub_echo_g_ERB_rev22.1_h100_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: 5d3c524d42cf9c6181ad18614f55b04c
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-*
+* 
 * Used data set: magpie_690d3718e151be1b450b394c1064b1c5_rev2.04.tgz
 * md5sum: 66d37cdd8b1f936305f2661d872ad43a
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-*
+* 
 * Used data set: additional_data_rev1.01.tgz
 * md5sum: ac06c829276d9d58557b1b2520fa346c
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-*
+* 
 * Low resolution: h100
 * High resolution: 0.5
-*
+* 
 * Total number of cells: 100
-*
+* 
 * Number of cells per region:
 *   SSA  MEA  OAS  CHA  NEU  EUR  REF  LAM  USA  CAZ  JPN  IND
 *     5    8   10   11    7   10    3   14    6   19    3    4
-*
+* 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-*
+* 
 * Regions data revision: 2.04
-*
+* 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/GLUES2/sresa2/constant_co2/miub_echo_g
 * * Additional input folder: /p/projects/landuse/data/input/other/rev22
 * * Land input data set: ERB
 * * Revision: 22.1
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision, land_input = cfg$land_input)
-*
+* 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: h100
@@ -49,11 +49,11 @@ $title magpie
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = paste0(cfg$base_folder, "/", set_folder,     "_", cfg$high_res, ".tgz"), regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
-*
-*
-*
-* Last modification (input data): Thu Feb 23 01:32:13 2017
-*
+* 
+* 
+* 
+* Last modification (input data): Thu Feb 23 02:13:17 2017
+* 
 *###################### R SECTION END (VERSION INFO) ###########################
 
 
