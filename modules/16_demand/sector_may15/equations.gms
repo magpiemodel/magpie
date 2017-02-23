@@ -60,7 +60,8 @@ q16_supply_pasture(i2) ..  vm_supply(i2,"pasture")
 q16_waste_demand(i2,kall) ..
                  v16_dem_waste(i2,kall)
                  =e=
-                 vm_supply(i2,kall) * sum(ct,f16_waste_shr(ct,i2,kall));
+                 vm_supply(i2,kall) * sum(ct,f16_waste_shr(ct,i2,kall))
+                 + sum(kpr,vm_secondary_overproduction(i2,kall,kpr));
 
 q16_seed_demand(i2,kcr) ..
                  vm_dem_seed(i2,kcr)
