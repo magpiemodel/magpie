@@ -130,6 +130,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
         warning("Script ",name, " could not be found. Skip execution!")
         next
       }
+      if(!comp) outputdir <- outputdirs
       cat("Executing",name,"\n")
       if(submit=="direct") {
         tmp.env <- new.env()
@@ -178,8 +179,6 @@ if(!exists("source_include")) {
   comp <- output <- outputdirs <- submit <- NULL
   readArgs("comp","output","outputdirs","submit") 
 }
-
-if(!is.null(outputdirs)) outputdirs <- strsplit(outputdirs,",")[[1]]
 
 runOutputs(comp=comp, output=output, outputdirs = outputdirs, submit=submit)
 
