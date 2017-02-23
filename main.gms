@@ -99,7 +99,7 @@ $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 
 $setglobal residues  flexreg_apr16
-$setglobal processing  sector_may15
+$setglobal processing  coupleproducts_feb17
 
 $setglobal trade  selfsuff_flexreg_dev
 
