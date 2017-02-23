@@ -5,8 +5,9 @@
 *** Contact: magpie@pik-potsdam.de
 
 
+sets
+dm_nr(attributes) dry matter and nr
+/dm, nr/
+;
 
-table f45_koeppengeiger(j,clcl) Koeppen-Geiger climate classification data as shares of cell (-)
-$ondelim
-$include "./modules/45_climate/static/input/koeppen_geiger.cs3"
-$offdelim;
+*** EOF sets.gms ***

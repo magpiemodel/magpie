@@ -6,7 +6,12 @@
 
 
 
-table f45_koeppengeiger(j,clcl) Koeppen-Geiger climate classification data as shares of cell (-)
+table f38_fac_req(kve,w) Factor requirements (US$04 per ton DM)
 $ondelim
-$include "./modules/45_climate/static/input/koeppen_geiger.cs3"
+$include "./modules/38_factor_costs/mixed_feb17/input/f38_fac_req.csv"
+$offdelim;
+
+table f38_region_yield(i,kcr) Factor requirements (US$04 per ton DM)
+$ondelim
+$include "./modules/38_factor_costs/mixed_feb17/input/f38_region_yield.csv"
 $offdelim;

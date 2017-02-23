@@ -20,12 +20,11 @@ library(validation)
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {  
   outputdirs <- c("output/Reference")
-  latexpath <- NA              # Latexpath necessary if swclose is performed in the queue
   xlim <- c(2000,2100)        # limits for x-axis in years
   titles <- c("Reference")        # Titles for the runs
   filename <- paste("./output/MAgPIE_comparison_",basename(getwd()),".pdf",sep="")
   #Define arguments that can be read from command line
-  readArgs("outputdirs","latexpath","xlim","titles","filename")
+  readArgs("outputdirs","xlim","titles","filename")
 }
 ###############################################################################
 #xlim <- c(2000,2100)        # limits for x-axis in years
@@ -1139,8 +1138,5 @@ p <- histoplot2(reg,data_hist=NULL,ylab=ylab,xlim=xlim,pointwidth=pointwidth)
 swfigure(sw, print, p , sw_option = "width=10")
 swoutput(sw,all,unit=ylab,plot=F,digits=2)
 
-if(!is.na(latexpath)){
-  swclose(sw,clean_output=TRUE,latexpath=latexpath)
-} else{
-  swclose(sw,clean_output=TRUE)
-}
+swclose(sw,clean_output=TRUE)
+

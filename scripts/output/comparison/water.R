@@ -20,9 +20,8 @@ library(validation)
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {  
 outputdirs <- c("output/SSP1_450forc_2013-08-26_11.34.57/","output/SSP1_550forc_2013-08-26_11.35.59/")
-  latexpath <- NA              # Latexpath necessary if swclose is performed in the queue
   #Define arguments that can be read from command line
-  readArgs("outputdirs","latexpath")
+  readArgs("outputdirs")
 }
 ###############################################################################
 years <- getYears(modelstat(path(outputdirs[1],"fulldata.gdx")))
@@ -106,9 +105,5 @@ swfigure(sw,print,validationPlot(func=production,level="glo",gdx=gdx,water="ir",
 swfigure(sw,print,validationPlot(func=production,level="reg",gdx=gdx,water="ir",crop_aggr=TRUE),fig.placement="H",fig.orientation="landscape",tex_caption="Irrigated Production [mio tDM]")
 #magpie2ggplot2(reg_all,facet_x="Scenario",fill="Region",color=NULL,geom="area",stack=T,alpha="Data1")
 
+swclose(sw)
 
-if(!is.na(latexpath)){
-  swclose(sw,latexpath=latexpath)
-} else{
-  swclose(sw)
-}

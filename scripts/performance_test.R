@@ -64,21 +64,24 @@ performance_collect <- function(id="performance",results_folder="output/",plot=T
  
   .modelstats <- function(f,colMeans=TRUE) {
     logfile <- path(f,"full.log")
-    tmp <- readLines(logfile)
-    p1 <- "---   ([^ ]*) rows  ([^ ]*) columns  ([^ ]*) non-zeroes"
-    p2 <- "---   ([^ ]*) nl-code  ([^ ]*) nl-non-zeroes"
-    l1 <- grep(p1,tmp,value=TRUE)
-    l2 <- grep(p2,tmp,value=TRUE)
+    if(file.exists(logfile)) {
+      tmp <- readLines(logfile)
+      p1 <- "---   ([^ ]*) rows  ([^ ]*) columns  ([^ ]*) non-zeroes"
+      p2 <- "---   ([^ ]*) nl-code  ([^ ]*) nl-non-zeroes"
+      l1 <- grep(p1,tmp,value=TRUE)
+      l2 <- grep(p2,tmp,value=TRUE)
     
-    if(length(l1)==0 & length(l2)==0) return(NA)
+      if(length(l1)==0 & length(l2)==0) return(NA)
     
-    rows <- max(as.integer(gsub(",","",gsub(p1,"\\1",l1))))
-    columns <- max(as.integer(gsub(",","",gsub(p1,"\\2",l1))))
-    nonzeroes <- max(as.integer(gsub(",","",gsub(p1,"\\3",l1))))
+      rows <- max(as.integer(gsub(",","",gsub(p1,"\\1",l1))))
+      columns <- max(as.integer(gsub(",","",gsub(p1,"\\2",l1))))
+      nonzeroes <- max(as.integer(gsub(",","",gsub(p1,"\\3",l1))))
     
-    nlcode <- max(as.integer(gsub(",","",gsub(p2,"\\1",l2))))
-    nlnonzeroes <- max(as.integer(gsub(",","",gsub(p2,"\\2",l2))))
-    
+      nlcode <- max(as.integer(gsub(",","",gsub(p2,"\\1",l2))))
+      nlnonzeroes <- max(as.integer(gsub(",","",gsub(p2,"\\2",l2))))
+    } else {
+      rows <- columns <- nonzeroes <- nlcode <- nlnonzeroes <- NA
+    }
     out <- cbind(rows,columns,nonzeroes,nlcode,nlnonzeroes)
     rownames(out) <- paste("max",1:dim(out)[1],sep="")
     if(colMeans) out <- colMeans(out)
@@ -101,7 +104,7 @@ performance_collect <- function(id="performance",results_folder="output/",plot=T
   .gettime <- function(rdata) {
     load(rdata)
     tmp <- as.double(validation$technical$time$magpie.gms,unit="mins")   
-    return(tmp)
+    return(ifelse(length(tmp)==0,NA,tmp))
   }
   
   results <- NULL
@@ -173,7 +176,7 @@ performance_plot <- function(x) {
   swlatex(sw,"\\section{General information}")
   swlatex(sw,"\\subsection{Settings default run}")
   
-  sw <- .tmptable(sw,x$info[x$more_info =="default"])
+  sw <- .tmptable(sw,x$info[x$default])
   
   swlatex(sw,"\\subsection{Run information default run}")
   tmp <- x[x$more_info=="default",][1,c("runtime","rows","columns","nonzeroes","nlcode","nlnonzeroes")]

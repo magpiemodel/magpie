@@ -62,11 +62,10 @@ rm(gams_runtime,input_data,module_setup,validation)
 
 
 #Postprocessing / Output Generation
+comp <- FALSE
+submit <- "direct"
 output <- cfg$output
-outputdir <- cfg$results_folder
+outputdirs <- getwd()
 sys.source("output.R",envir=new.env())
-
-#zip(path(cfg$results_folder,"full.zip"),path(cfg$results_folder,"full.gms"))
-#unlink(path(cfg$results_folder,"full.gms"))
 
 print(warnings())

@@ -28,11 +28,10 @@ prev_year        <- "y1985"            #timestep before calculations in MAgPIE
 if(!exists("source_include")) {
   sum_spam_file    <- "0.5-to-h1000_sum.spam"
   outputdir        <- "/iplex/01/landuse/users/bonsch/projects/Papers/Alex_foley/rev7702_base1995/output/h1000/HadGEM2_ES-rcp2p6/BAU"
-  latexpath        <-NA              # Latexpath necessary if swclose is performed in the queue
   title<-"test"
   rev<-20
   #Define arguments that can be read from command line
-  readArgs("sum_spam_file","outputdir","latexpath","title",rev)
+  readArgs("sum_spam_file","outputdir","title",rev)
 } else{
   rev<-floor(cfg$rev)
 }
@@ -193,9 +192,7 @@ out<-as.magpie(out)
 swlatex(swout,"\\section{WSI on cluster level}")
 swfigure(swout,plotmap_discrete,out[,"y1995",1],legend_breaks=c(0,0.1,0.2,0.4,0.8,1),colours=c(colorRampPalette(colors=c("blue","orange"))(5),"red"),legendname="index",title="Water withdrawal over availability 1995 ",fig.placement="H",sw_option="width=11.69",fig.width=0.8)
 if(dim(out)[2]>=6)swfigure(swout,plotmap_discrete,out[,6,1],legend_breaks=c(0,0.1,0.2,0.4,0.8,1),colours=c(colorRampPalette(colors=c("blue","orange"))(5),"red"),legendname="index",title=paste("Water withdrawal over availability in ",getYears(out)[6],sep=""),fig.placement="H",sw_option="width=11.69",fig.width=0.8)
-if(!is.na(latexpath)){
-  swclose(swout,latexpath=latexpath)
-} else{
-  swclose(swout,clean_output=TRUE)
-}
+
+swclose(swout,clean_output=TRUE)
+
 

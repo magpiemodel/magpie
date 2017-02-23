@@ -6,7 +6,6 @@
 
 
 
-table f45_koeppengeiger(j,clcl) Koeppen-Geiger climate classification data as shares of cell (-)
-$ondelim
-$include "./modules/45_climate/static/input/koeppen_geiger.cs3"
-$offdelim;
+vm_res_biomass_ag.fx(i,kcr,attributes) = 0;
+vm_res_biomass_bg.fx(i,kcr,dm_nr) = 0;
+vm_res_recycling.fx(i,npk) = 0;

@@ -23,9 +23,8 @@ if(!exists("source_include")) {
   
   gdx <- "fulldata.gdx"
   outputdir  <- "DIR of the run"
-  latexpath < -NA              # Latexpath necessary if swclose is performed in the queue
   #Define arguments that can be read from command line
-  readArgs("outputdir","latexpath")
+  readArgs("outputdir")
 } else {
   gdx<-path(outputdir,"fulldata.gdx")
 }
