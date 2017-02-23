@@ -130,6 +130,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
         warning("Script ",name, " could not be found. Skip execution!")
         next
       }
+      if(!comp) outputdir <- outputdirs
       cat("Executing",name,"\n")
       if(submit=="direct") {
         tmp.env <- new.env()
