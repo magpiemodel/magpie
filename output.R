@@ -180,7 +180,5 @@ if(!exists("source_include")) {
   readArgs("comp","output","outputdirs","submit") 
 }
 
-if(!is.null(outputdirs)) outputdirs <- strsplit(outputdirs,",")[[1]]
-
 runOutputs(comp=comp, output=output, outputdirs = outputdirs, submit=submit)
 
