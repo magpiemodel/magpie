@@ -120,12 +120,12 @@ $setglobal water_demand  agr_sector_aug13
 $setglobal water_availability  total_water_aug13
 $setglobal climate  static
 
-$setglobal nr_soil_budget  off
+$setglobal nr_soil_budget  exoeff_aug16
 $setglobal nitrogen  ipcc2006_sep16
 $setglobal carbon  normal_sep16
 $setglobal methane  ipcc2006_flexreg_apr16
 $setglobal phosphorus  off
-$setglobal awms  off
+$setglobal awms  ipcc2006_aug16
 $setglobal ghg_policy  price_sep16
 $setglobal maccs  on_sep16
 $setglobal carbon_removal  off_sep16
