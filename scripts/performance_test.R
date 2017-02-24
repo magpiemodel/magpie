@@ -179,7 +179,7 @@ performance_plot <- function(x) {
   sw <- .tmptable(sw,x$info[x$default])
   
   swlatex(sw,"\\subsection{Run information default run}")
-  tmp <- x[x$more_info=="default",][1,c("runtime","rows","columns","nonzeroes","nlcode","nlnonzeroes")]
+  tmp <- x[x$default,][1,c("runtime","rows","columns","nonzeroes","nlcode","nlnonzeroes")]
   tmp2 <- cbind(format(round(as.vector(as.matrix(tmp)),0),nsmall=0),names(tmp))
   rownames(tmp2) <- names(tmp)
   colnames(tmp2) <- c("data","description")
@@ -196,7 +196,7 @@ performance_plot <- function(x) {
   swlatex(sw,"\\newpage")
   
   #remove default run from results
-  x <- x[x$more_info!="default",]
+  x <- x[!x$default,]
   
   tmp <- x$info[x$more_info =="compilation error"]
   if(length(tmp)>0){

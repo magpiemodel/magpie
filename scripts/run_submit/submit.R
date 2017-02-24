@@ -31,6 +31,8 @@ cat("\nMAgPIE run finished!\n")
 # write the config file in the output_folder: config.log
 write(capture.output(cfg), file="config.log")
 
+runfolder <- getwd()
+
 setwd(maindir)
 
 #Set value source_include so that loaded scripts know, that they are 
@@ -65,7 +67,7 @@ rm(gams_runtime,input_data,module_setup,validation)
 comp <- FALSE
 submit <- "direct"
 output <- cfg$output
-outputdirs <- getwd()
+outputdirs <- runfolder
 sys.source("output.R",envir=new.env())
 
 print(warnings())
