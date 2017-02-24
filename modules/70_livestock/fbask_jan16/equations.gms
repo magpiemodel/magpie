@@ -1,13 +1,13 @@
 *** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 *** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
 
 
  q70_feed(i2,kap,kall) .. vm_dem_feed(i2,kap,kall)
-                   =g=
+                   =e=
                    vm_prod_reg(i2,kap)*sum(ct,f70_feed_baskets(ct,i2,kap,kall))
                    + sum(ct,f70_feed_balanceflow(ct,i2,kap,kall))
                    ;
