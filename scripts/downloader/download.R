@@ -21,11 +21,11 @@ getfiledestinations <- function() {
   files <- dir(pattern="files$",recursive = TRUE)
   out <- NULL
   for(f in files) {
-    tmp <- grep("^\\*",readLines(f),invert=TRUE,value=TRUE)
+    tmp <- grep("^\\*",readLines(f, warn = FALSE),invert=TRUE,value=TRUE)
     add <- data.frame(file=tmp,destination=dirname(f),stringsAsFactors = FALSE)
     out <- rbind(out,add)
   }
-  return(out)
+  return(out[out[[1]]!="",])
 }
 
 ################################################################################
