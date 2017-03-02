@@ -29,7 +29,7 @@ equations
 parameters
  ov_cost_bioen(t,i,type)                 negative bioenergy production costs = revenue (mio. US$)
  ov_dem_bioen(t,i,kall,type)             regional bioenergy demand  (mio. ton DM)
- ov60_convexhull(t,i,kcr,type)
+ ov60_convexhull(t,i,kcr,type)           
  oq60_bioenergy_glo(t,type)              global bioenergy demand
  oq60_bioenergy_reg(t,i,type)            regional bioenergy demand
  oq60_1st_bioenergy(t,i,type)            1st bioenergy demand on the regional level
