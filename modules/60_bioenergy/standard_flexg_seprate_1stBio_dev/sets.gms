@@ -11,6 +11,11 @@ sets
    scen1st60 first generation bioenergy scenarios
        / const2020, const2030, phaseout2020 /
 
+   bioen1st60  1st bioenergy products
+       / biogas,ethanol,oils/
+
+   subbioen1st60(bioen1st60)
+
    scen2nd60 second generation bioenergy scenarios
       / SSP1-Ref-SPA0, SSP2-Ref-SPA0, SSP5-Ref-SPA0,
         SSP1-20-SPA0, SSP1-26-SPA0, SSP1-37-SPA0, SSP1-45-SPA0,

@@ -21,8 +21,6 @@ positive variables
 equations
  q60_bioenergy_glo                 global bioenergy demand
  q60_bioenergy_reg(i)              regional bioenergy demand
- q60_1st_bioenergy(i)              1st bioenergy demand on the regional level
- q60_1st_bioenergy_convexhull(i)   convexhull constraint for the 1st bioenergy
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

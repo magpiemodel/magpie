@@ -35,7 +35,7 @@ $offdelim
 $setglobal c60_1stgen_biodem  const2020
 *   options:  "const2020", "const2030", "phaseout2020"
 
-table f60_dem_1stgen_bioen(t_all,i,scen1st60) 1st generation bioenergy demand (PJ per year) from IEA
+table f60_dem_1stgen_bioen(t_all,i,scen1st60,bioen1st60) 1st generation bioenergy demand (PJ per year) from IEA
 $ondelim
 $include "./modules/60_bioenergy/input/f60_dem_1stgen_bioen_new.cs3"
 $offdelim

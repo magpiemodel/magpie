@@ -10,8 +10,3 @@ q60_bioenergy_glo.. sum((kbe60,i2), vm_dem_bioen(i2,kbe60)*fm_attributes("ge",kb
 
 q60_bioenergy_reg(i2).. sum(kbe60, vm_dem_bioen(i2,kbe60)*fm_attributes("ge",kbe60))
           =g= sum(ct,i60_bioenergy_dem(ct,i2))*sm_use_bioenergy*c60_biodem_level;
-
-q60_1st_bioenergy(i2).. sum(kcr,vm_dem_bioen(i2,kcr)*fm_attributes("ge",kcr)*v60_convexhull(i2,kcr))
-          =g= sum(ct,f60_dem_1stgen_bioen(ct,i2,"%c60_1stgen_biodem%"))*sm_use_bioenergy*c60_biodem_level;
-
-q60_1st_bioenergy_convexhull(i2)..sum(kcr,v60_convexhull(i2,kcr)) =e= 1;

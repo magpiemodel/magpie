@@ -7,8 +7,8 @@
 
 *fix bioenergy demand to given values
 vm_dem_bioen.fx(i,kall) = 0;
-* vm_dem_bioen.fx(i,k) = f60_dem_1stgen_bioen(t,i,"%c60_1stgen_biodem%",k);
-
+*vm_dem_bioen.fx(i,k) = f60_dem_1stgen_bioen(t,i,"%c60_1stgen_biodem%",k);
+vm_dem_processing(i,subbioen1st60) = i60_bioenergy1stgen_dem(ct,i,subbioen1st60);
 *relax boundaries for all crops which belong to kbe60 as their demand is
 *calculated separately (see equations)
 vm_dem_bioen.up(i,kbe60) = Inf;
