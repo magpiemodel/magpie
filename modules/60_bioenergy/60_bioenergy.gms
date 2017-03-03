@@ -6,6 +6,5 @@
 
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%bioenergy%" == "standard_flexg_seprate_1stBio_dev" $include "./modules/60_bioenergy/standard_flexg_seprate_1stBio_dev.gms"
 $Ifi "%bioenergy%" == "standard_flexreg_apr16" $include "./modules/60_bioenergy/standard_flexreg_apr16.gms"
 *###################### R SECTION END (MODULETYPES) ############################
