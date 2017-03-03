@@ -15,7 +15,7 @@
 
 sets
 
-   i all economic regions /SSA,MEA,OAS,CHA,NEU,EUR,REF,LAM,USA,CAZ,JPN,IND/
+   i all economic regions /SSA,MEA,OAS,CHA,NEU,EUR,REF,LAM,USA,CAZ,IND/
 
    iso list of iso countries /
        ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
@@ -45,33 +45,31 @@ sets
        VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 
    j number of LPJ cells /
-       SSA_1*SSA_5,
-       MEA_6*MEA_13,
-       OAS_14*OAS_23,
-       CHA_24*CHA_34,
-       NEU_35*NEU_41,
-       EUR_42*EUR_51,
-       REF_52*REF_54,
-       LAM_55*LAM_68,
-       USA_69*USA_74,
-       CAZ_75*CAZ_93,
-       JPN_94*JPN_96,
-       IND_97*IND_100/
+       SSA_1*SSA_12,
+       MEA_13*MEA_30,
+       OAS_31*OAS_54,
+       CHA_55*CHA_75,
+       NEU_76*NEU_87,
+       EUR_88*EUR_105,
+       REF_106*REF_113,
+       LAM_114*LAM_148,
+       USA_149*USA_159,
+       CAZ_160*CAZ_192,
+       IND_193*IND_200/
 
    cell(i,j) number of LPJ cells per region i
       /
-       SSA . SSA_1*SSA_5
-       MEA . MEA_6*MEA_13
-       OAS . OAS_14*OAS_23
-       CHA . CHA_24*CHA_34
-       NEU . NEU_35*NEU_41
-       EUR . EUR_42*EUR_51
-       REF . REF_52*REF_54
-       LAM . LAM_55*LAM_68
-       USA . USA_69*USA_74
-       CAZ . CAZ_75*CAZ_93
-       JPN . JPN_94*JPN_96
-       IND . IND_97*IND_100
+       SSA . SSA_1*SSA_12
+       MEA . MEA_13*MEA_30
+       OAS . OAS_31*OAS_54
+       CHA . CHA_55*CHA_75
+       NEU . NEU_76*NEU_87
+       EUR . EUR_88*EUR_105
+       REF . REF_106*REF_113
+       LAM . LAM_114*LAM_148
+       USA . USA_149*USA_159
+       CAZ . CAZ_160*CAZ_192
+       IND . IND_193*IND_200
       /
 
    i_to_iso(i,iso) mapping regions to iso countries
@@ -83,7 +81,6 @@ sets
        EUR . (IRL,ITA,JEY,LTU,LUX,LVA,MLT,NLD,POL,PRT)
        EUR . (ROU,SVK,SVN,SWE)
        IND . (IND)
-       JPN . (JPN)
        LAM . (ABW,AIA,ARG,ATA,ATG,BES,BHS,BLM,BLZ,BMU)
        LAM . (BOL,BRA,BRB,BVT,CHL,COL,CRI,CUB,CUW,CYM)
        LAM . (DMA,DOM,ECU,FLK,GLP,GRD,GTM,GUF,GUY,HND)
@@ -96,10 +93,10 @@ sets
        NEU . (ALB,AND,BIH,CHE,GRL,ISL,LIE,MCO,MKD,MNE)
        NEU . (NOR,SJM,SMR,SRB,TUR,VAT)
        OAS . (AFG,ASM,ATF,BGD,BRN,BTN,CCK,COK,CXR,FJI)
-       OAS . (FSM,GUM,IDN,IOT,KHM,KIR,KOR,LAO,LKA,MDV)
-       OAS . (MHL,MMR,MNG,MNP,MYS,NCL,NFK,NIU,NPL,NRU)
-       OAS . (PAK,PCN,PHL,PLW,PNG,PRK,PYF,SGP,SLB,THA)
-       OAS . (TKL,TLS,TON,TUV,UMI,VNM,VUT,WLF,WSM)
+       OAS . (FSM,GUM,IDN,IOT,JPN,KHM,KIR,KOR,LAO,LKA)
+       OAS . (MDV,MHL,MMR,MNG,MNP,MYS,NCL,NFK,NIU,NPL)
+       OAS . (NRU,PAK,PCN,PHL,PLW,PNG,PRK,PYF,SGP,SLB)
+       OAS . (THA,TKL,TLS,TON,TUV,UMI,VNM,VUT,WLF,WSM)
        REF . (ARM,AZE,BLR,GEO,KAZ,KGZ,MDA,RUS,TJK,TKM)
        REF . (UKR,UZB)
        SSA . (AGO,BDI,BEN,BFA,BWA,CAF,CIV,CMR,COD,COG)
