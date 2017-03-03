@@ -7,6 +7,7 @@
 
 parameters
  i60_bioenergy_dem(t,i)   bioenergy demand (regional) (10^6 GJ per year)
+ i60_bioenergy1stgen_dem(t,i,subbioen1st60)   1stgen bioenergy demand (regional) (PJ per year)
 ;
 
 variables
@@ -15,7 +16,6 @@ variables
 
 positive variables
  vm_dem_bioen(i,kall)               regional bioenergy demand  (mio. ton DM)
- v60_convexhull(i,kcr)
 ;
 
 equations
@@ -25,12 +25,9 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_bioen(t,i,type)                 negative bioenergy production costs = revenue (mio. US$)
- ov_dem_bioen(t,i,kall,type)             regional bioenergy demand  (mio. ton DM)
- ov60_convexhull(t,i,kcr,type)           
- oq60_bioenergy_glo(t,type)              global bioenergy demand
- oq60_bioenergy_reg(t,i,type)            regional bioenergy demand
- oq60_1st_bioenergy(t,i,type)            1st bioenergy demand on the regional level
- oq60_1st_bioenergy_convexhull(t,i,type) convexhull constraint for the 1st bioenergy
+ ov_cost_bioen(t,i,type)      negative bioenergy production costs = revenue (mio. US$)
+ ov_dem_bioen(t,i,kall,type)  regional bioenergy demand  (mio. ton DM)
+ oq60_bioenergy_glo(t,type)   global bioenergy demand
+ oq60_bioenergy_reg(t,i,type) regional bioenergy demand
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
