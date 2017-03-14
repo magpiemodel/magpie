@@ -97,7 +97,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
   }
   
   choose_submit <- function(title="Please choose run submission type") {
-    slurm <- ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE) 
+    slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
     modes <- c("Direct execution", "Background execution", "SLURM submission", "Debug mode")
     if(!slurm) modes <- modes[-3]
     cat("\n\n",title,":\n\n")

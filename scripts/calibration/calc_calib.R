@@ -9,7 +9,7 @@
 # ***              based on a pre run of magpie                     ***
 # *********************************************************************
 
-calibration_run<-function(putfolder,calib_magpie_name,gamspath="",logoption=3){
+calibration_run<-function(putfolder,calib_magpie_name,logoption=3){
 
   require(lucode)
   
@@ -29,7 +29,7 @@ calibration_run<-function(putfolder,calib_magpie_name,gamspath="",logoption=3){
   file.copy(paste(calib_magpie_name,".gms",sep=""),putfolder)
 
   # execute calibration run
-  system(paste(gamspath,"gams ",calib_magpie_name,".gms"," -PUTDIR ./",putfolder," -LOGOPTION=",logoption,sep=""),wait=TRUE)
+  system(paste("gams ",calib_magpie_name,".gms"," -PUTDIR ./",putfolder," -LOGOPTION=",logoption,sep=""),wait=TRUE)
   file.copy("fulldata.gdx",putfolder)
 }
 
@@ -99,8 +99,7 @@ calibrate_magpie <- function(n_maxcalib = 1,
                              calib_file = "modules/14_yields/input/f14_yld_calib.csv", 
                              putfolder = "calib_run", 
                              data_workspace = NULL,
-                             logoption = 3,
-                             gamspath = "") {
+                             logoption = 3) {
 
   require(magclass)
   require(lusweave)
@@ -110,7 +109,7 @@ calibrate_magpie <- function(n_maxcalib = 1,
   
   for(i in 1:n_maxcalib){
     cat(paste("\nStarting calibration iteration",i,"\n"))
-    calibration_run(putfolder=putfolder, calib_magpie_name=calib_magpie_name, gamspath=gamspath, logoption=logoption)
+    calibration_run(putfolder=putfolder, calib_magpie_name=calib_magpie_name, logoption=logoption)
     new_calib <- update_calib(gdx_file=paste0(putfolder,"/fulldata.gdx"),area_input=area_input,calibrate_pasture=calibrate_pasture,damping_factor=damping_factor, calib_file=calib_file)
     if(i==1){
       calib_hist <- setYears(new_calib[[1]],"y1995")

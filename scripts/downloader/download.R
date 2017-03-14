@@ -78,7 +78,7 @@ load_unpack <- function(files, repository, username=NULL, ssh_private_keyfile=NU
       warning(file," could not be found in any of the specified repositories!")
     } else {
       anydatafound <- TRUE
-      md5sum[[files[i]]] <- md5sum(filepath)
+      md5sum[[files[i]]] <- tools::md5sum(filepath)
       untar(filepath,exdir="input")
     }
   }  
