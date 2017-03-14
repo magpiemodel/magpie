@@ -6,90 +6,81 @@
 
 start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,report=NULL,sceninreport=NULL,LU_pricing="y2010") {
   
+  if (!requireNamespace("lucode", quietly = TRUE)) {
+    stop("Package \"lucode\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
+  
   Sys.setlocale(locale="C")
   maindir <- getwd() 
   on.exit(setwd(maindir))
+
+  lock_id <- lucode::model_lock(timeout1=1)
+  on.exit(lucode::model_unlock(lock_id), add=TRUE)  
   
-  #Load libraries
-  require(digest)
-  require(lucode)
-  require(magclass)
-  require(tools)
-  require(moinput)
-  
-  lock_id <- model_lock(timeout1=1)
-  on.exit(model_unlock(lock_id),add=TRUE)  
-  
-  if(!is.null(scenario)) cfg <- setScenario(cfg,scenario)
-  cfg <- check_config(cfg)
+  if(!is.null(scenario)) cfg <- lucode::setScenario(cfg,scenario)
+  cfg <- lucode::check_config(cfg)
   
   date <- format(Sys.time(), "_%Y-%m-%d_%H.%M.%S")
-  cfg$results_folder <- gsub(":date:",date,cfg$results_folder,fixed=TRUE)
-  cfg$results_folder <- gsub(":title:",cfg$title,cfg$results_folder,fixed=TRUE)
+  cfg$results_folder <- gsub(":date:", date, cfg$results_folder, fixed=TRUE)
+  cfg$results_folder <- gsub(":title:", cfg$title, cfg$results_folder, fixed=TRUE)
 
   # Create output folder
   if (!file.exists(cfg$results_folder)) {
-    dir.create(cfg$results_folder,recursive=TRUE,showWarnings=FALSE)
+    dir.create(cfg$results_folder, recursive=TRUE, showWarnings=FALSE)
 	} else stop(paste0("Results folder ",cfg$results_folder," could not be created because is already exists."))
   
   # If report and scenname are supplied the data of this scenario in the report will be converted to MAgPIE input
   if (!is.null(report) && !is.null(sceninreport)) {
-    getReportData(report,sceninreport,LU_pricing)
+    getReportData(report, sceninreport, LU_pricing)
     cfg$gms$bioenergy <- "standard"
-    cfg <- setScenario(cfg,"coupling")
+    cfg <- lucode::setScenario(cfg,"coupling")
   }
   
-  #Is the run performed on the cluster?
-	on_cluster <- file.exists('/p/projects/landuse')
-
-  #Set value source_include so that loaded scripts know, that they are 
-  #included as source (instead a load from command line)
-  source_include <- TRUE
-   
   #update all parameters which contain the levels and marginals
   #of all variables and equations
-  update_fulldataOutput()
+  lucode::update_fulldataOutput()
   #Update module paths in GAMS code
-  update_modules_embedding()
+  lucode::update_modules_embedding()
 
   #configure main.gms based on settings of cfg file
-  manipulateConfig("main.gms",cfg$gms)
+  lucode::manipulateConfig("main.gms", cfg$gms)
 
   #configure input.gms in all modules based on settings of cfg file
-  l1 <- path("modules",list.dirs("modules/", full.names = FALSE, recursive = FALSE))
+  l1 <- lucode::path("modules", list.dirs("modules/", full.names = FALSE, recursive = FALSE))
   for(l in l1) {
-    l2 <- path(l,list.dirs(l, full.names = FALSE, recursive = FALSE))
+    l2 <- lucode::path(l, list.dirs(l, full.names = FALSE, recursive = FALSE))
     for(ll in l2) {
-      if(file.exists(path(ll,"input.gms"))) manipulateConfig(path(ll,"input.gms"),cfg$gms)
+      if(file.exists(lucode::path(ll, "input.gms"))) lucode::manipulateConfig(lucode::path(ll, "input.gms"), cfg$gms)
     }
   }
   
   #check all setglobal settings for consistency
-  settingsCheck()
+  lucode::settingsCheck()
     
   #############PROCESSING INPUT DATA#######################################################################
   
   #Check whether input data has to be processed or is already processed
     
   #Function to extract information from info.txt
-  get_info <- function(file,grep_expression,sep,pattern="",replacement="") {
+  get_info <- function(file, grep_expression, sep, pattern="", replacement="") {
     if(!file.exists(file)) return("#MISSING#")
-    file <- readLines(file,warn=FALSE)
-    tmp <- grep(grep_expression,file, value=TRUE)
+    file <- readLines(file, warn=FALSE)
+    tmp <- grep(grep_expression, file, value=TRUE)
     tmp <- strsplit(tmp, sep)
     tmp <- sapply(tmp, "[[", 2)
-    tmp <- gsub(pattern,replacement,tmp)
-    if(all(!is.na(as.logical(tmp)))) return(as.vector(sapply(tmp,as.logical)))
+    tmp <- gsub(pattern, replacement ,tmp)
+    if(all(!is.na(as.logical(tmp)))) return(as.vector(sapply(tmp, as.logical)))
     if (all(!(regexpr("[a-zA-Z]",tmp) > 0))) {
       tmp <- as.numeric(tmp)
     }
     return(tmp)
   }
     		
-  input_old <- get_info("input/info.txt","^Used data set:",": ")
+  input_old <- get_info("input/info.txt", "^Used data set:", ": ")
 
   
-  if(!setequal(cfg$input,input_old) | cfg$force_download) {
+  if(!setequal(cfg$input, input_old) | cfg$force_download) {
     source("scripts/downloader/download.R")
     archive_download(files=cfg$input,
                      repositories=cfg$repositories,
@@ -104,35 +95,30 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,repor
   }
   
     
-  #Create the workspace for validation
-  tmp<-strsplit(cfg$results_folder,"/")[[1]]
-  cfg$val_workspace<-paste(cfg$results_folder,"/",tmp[length(tmp)],".RData",sep="")
-  validation<-list()
-  validation$technical<-list()
-  validation$technical$time<-list()
-  validation$technical$model_setup<-list()
-  validation$technical$input_data<-list()
-  validation$technical$yield_calib<-list()
-  validation$technical$setup_info <- list()
-  save(validation,file= cfg$val_workspace, compress="xz")
-  
-  ####Collect technical information for validation#########################################
+  #### Collect technical information for validation #########################################
   
   # get git info
-  git_info<-c("### GIT revision ###",try(system("git rev-parse HEAD",intern=TRUE),silent=TRUE))
-  # info what files have been modified 
-  git_info<-c(git_info,"","### Modifications ###",try(system("git status",intern=TRUE),silent=TRUE)) 
+  git_info <- c("### GIT revision ###", 
+                try(system("git rev-parse HEAD", intern=TRUE), silent=TRUE),
+                "", "### Modifications ###", 
+                try(system("git status", intern=TRUE), silent=TRUE)) 
   if(codeCheck | interfaceplot) {
-    codeCheck <- codeCheck()
-    if(interfaceplot) modules_interfaceplot(codeCheck)
+    codeCheck <- lucode::codeCheck()
+    if(interfaceplot) lucode::modules_interfaceplot(codeCheck)
   } else codeCheck <- NULL
-  load(cfg$val_workspace)  
-  validation$technical$model_setup <- git_info
-  validation$technical$modules <- codeCheck
-  validation$technical$last.warning <- attr(codeCheck,"last.warning")
-  validation$technical$setup_info$start_functions <- setup_info()
-  save(validation, file=cfg$val_workspace, compress="xz")
-  rm(validation,git_info)
+ 
+  #Create the workspace for validation
+  tmp <- strsplit(cfg$results_folder,"/")[[1]]
+  cfg$val_workspace <- paste(cfg$results_folder,"/",tmp[length(tmp)],".RData",sep="")
+  validation <- list(technical=list(time=list(), 
+                                    model_setup = git_info,
+                                    modules = codeCheck,
+                                    input_data = list(),
+                                    yield_calib = list(),
+                                    setup_info = list(start_functions = lucode::setup_info()),
+                                    last.warning = attr(codeCheck,"last.warning")))
+  save(validation, file= cfg$val_workspace, compress="xz")
+ 
   
   ########################################################################################################################################################
    
@@ -146,8 +132,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,repor
                      damping_factor = cfg$damping_factor, 
                      calib_file = "modules/14_yields/input/f14_yld_calib.csv", 
                      data_workspace = cfg$val_workspace,
-                     logoption = 3,
-                     gamspath = ifelse(on_cluster, "/p/system/packages/gams/24.0.1/", "")) 
+                     logoption = 3) 
     file.copy("calibration_results.pdf", cfg$results_folder, overwrite=TRUE)
     cat("Calibration factor calculated!\n")
   }
@@ -162,39 +147,35 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,repor
 
   cfg$magpie_folder <- getwd()   
  
-  save(cfg,file=path(cfg$results_folder,"config.Rdata"))
+  save(cfg, file=path(cfg$results_folder, "config.Rdata"))
     
-  singleGAMSfile(output=path(cfg$results_folder,"full.gms"))
-  model_unlock(lock_id)
-  on.exit()
-  # Repeat command since on.exit was cleared
-  on.exit(setwd(maindir))  
+  lucode::singleGAMSfile(output=lucode::path(cfg$results_folder, "full.gms"))
+  lucode::model_unlock(lock_id)
+
+  on.exit(setwd(maindir))
   setwd(cfg$results_folder)
   
-  if(is.na(cfg$sequential)) {
-    if(on_cluster) {
-      cfg$sequential <- FALSE
-    } else {
-      cfg$sequential <- TRUE
-    }
-  }
+  #Is SLURM available?
+  slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
   
-  if(!cfg$sequential) {
-    if(on_cluster) {
-      system("sbatch submit.sh") 
-    } else {
-      stop("non-sequential runs are currently only available on the cluster!")
-    }
+  if(is.na(cfg$sequential)) cfg$sequential <- !slurm
+  
+  if(slurm & !cfg$sequential) {
+    system("sbatch submit.sh") 
   } else {
-    system("Rscript submit.R")  
+    system("Rscript submit.R", wait=cfg$sequential)
   }
   
   return(cfg$results_folder)
 }
 
 getReportData <- function(rep,scen,LU_pricing="y2010") {
-  require(lucode)
-  require(magclass)
+  
+  if (!requireNamespace("magclass", quietly = TRUE)) {
+    stop("Package \"magclass\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
+
   .bioenergy_demand <- function(mag){
     notGLO <- getRegions(mag)[!(getRegions(mag)=="GLO")]
     out <- mag[,,"Primary Energy Production|Biomass|Energy Crops (EJ/yr)"]*10^3
@@ -224,21 +205,29 @@ getReportData <- function(rep,scen,LU_pricing="y2010") {
   
   files <- c("./input/regional/ghg_prices.cs3","./modules/60_bioenergy/standard/input/reg.2ndgen_bioenergy_demand.csv")
   years <- 1990+5*(1:32)
-    for(f in files) suppressWarnings(unlink(f))
-    mag <- rep[[scen]][["MAgPIE"]]
-    if(!("y1995" %in% getYears(mag))){
-    	empty95<-mag[,1,];empty95[,,]<-0;dimnames(empty95)[[2]] <- "y1995"
-    	mag <- mbind(empty95,mag)
-    }
-    mag <- time_interpolate(mag,years)
-    .bioenergy_demand(mag)
-    .emission_prices(mag)
+  for(f in files) suppressWarnings(unlink(f))
+  mag <- rep[[scen]][["MAgPIE"]]
+  if(!("y1995" %in% getYears(mag))){
+  	empty95<-mag[,1,];empty95[,,]<-0;dimnames(empty95)[[2]] <- "y1995"
+  	mag <- mbind(empty95,mag)
+  }
+  mag <- time_interpolate(mag,years)
+  .bioenergy_demand(mag)
+  .emission_prices(mag)
 }
 
 
-start_reportrun <- function (cfg,path_report,inmodel=NULL,sceninreport=NULL,codeCheck=FALSE){
-  rep <- convert.report(path_report,inmodel=inmodel,outmodel="MAgPIE")
-  write.report(rep,"report.mif")
+start_reportrun <- function (cfg, path_report, inmodel=NULL, sceninreport=NULL, codeCheck=FALSE){
+  if (!requireNamespace("magclass", quietly = TRUE)) {
+    stop("Package \"magclass\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
+  if (!requireNamespace("lucode", quietly = TRUE)) {
+    stop("Package \"lucode\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
+  rep <- magclass::convert.report(path_report,inmodel=inmodel,outmodel="MAgPIE")
+  magclass::write.report(rep,"report.mif")
   if (!is.null(sceninreport))
       sceninreport <- intersect(sceninreport,names(rep))
   else
@@ -246,7 +235,7 @@ start_reportrun <- function (cfg,path_report,inmodel=NULL,sceninreport=NULL,code
 		
   for(scen in sceninreport) {
 	cfg$title <- scen
-	cfg       <- setScenario(cfg,substring(scen,first=1,last=4)) # is ment to extract i.e. 'SSP1' from the scenarioname
+	cfg       <- lucode::setScenario(cfg,substring(scen,first=1,last=4)) # is ment to extract i.e. 'SSP1' from the scenarioname
 	start_run(cfg, report=rep, sceninreport=scen, codeCheck=codeCheck)
   }  
 }

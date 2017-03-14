@@ -13,18 +13,9 @@ load("config.Rdata")
 
 maindir <- cfg$magpie_folder
 
-#Is the run performed on the cluster?
-on_cluster <- file.exists('/p/projects/landuse')
-#Setting relevant paths
-if(on_cluster) { #run is performed on the cluster
-  gamspath <- '/p/system/packages/gams/24.0.1/'
-} else {
-  gamspath   <- ''
-}
-
 cat("\nStarting MAgPIE...\n")
 begin<-Sys.time()
-system(paste(gamspath,"gams full.gms -lf=full.log -lo=",cfg$logoption,sep=""))
+system(paste("gams full.gms -lf=full.log -lo=",cfg$logoption,sep=""))
 gams_runtime<-Sys.time()-begin  #calculate runtime info
 cat("\nMAgPIE run finished!\n")
 
