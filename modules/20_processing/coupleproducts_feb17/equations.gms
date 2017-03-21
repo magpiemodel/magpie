@@ -37,8 +37,3 @@ q20_processing_substitution(i2,dm_ge_nr) ..
         sum((ksd,kpr), v20_secondary_substitutes(i2,ksd,kpr) * fm_attributes(dm_ge_nr,ksd) );
 * eventually make processing shares more flexible, e.g. by turning it into a variable that
 * has to add up to one, with lower and upper bounds for each specific value
-
-
-* er muss die möglichkeit haben brans ohne food zu  produzieren
-* er muss die möglichkeit haben öl zu produzieren ohne mais für food zu produzieren
-* keine produktionen sollten in den bilanzen verloren gehen
