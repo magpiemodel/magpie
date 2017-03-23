@@ -19,7 +19,6 @@ inputs59
 
 climate59 climate classes of IPCC 2006
 /temperate_dry,temperate_moist,tropical_dry,tropical_moist/
-* no tropical montaine because mapping with koeppen was not possible
 
 clcl_climate59(clcl,climate59) climate classification types
            /

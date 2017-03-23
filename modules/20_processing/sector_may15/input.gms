@@ -7,7 +7,6 @@
 
 
 table f20_processing_balanceflow(t_all,i,ksd) processing balanceflow  (Mt DM)
-*to correct inconsistencies between heterogeneous conversion factors between countries
 $ondelim
 $include "./modules/20_processing/sector_may15/input/f20_processing_balanceflow.cs3"
 $offdelim

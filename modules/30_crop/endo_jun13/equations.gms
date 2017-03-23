@@ -7,7 +7,6 @@
  q30_cropland(j2)  ..
    sum((kcr,w), vm_area(j2,kcr,w)) =e= vm_land(j2,"crop","si0");
 
-*Rotational constraints:
  q30_rotation_max(j2,crpmax30,w) ..
    sum((crp_kcr30(crpmax30,kcr)), vm_area(j2,kcr,w)) =l=
                          sum(kcr, vm_area(j2,kcr,w))*f30_rotation_max_shr(crpmax30);

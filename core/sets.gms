@@ -302,12 +302,4 @@ sets
 
 ;
 
-***###############################################################################
-***######################## R SECTION START (MODULES) ###############################
-*** THIS CODE IS CREATED AUTOMATICALLY, DO NOT MODIFY THESE LINES DIRECTLY
-*** ANY DIRECT MODIFICATION WILL BE LOST AFTER NEXT MODEL START
-
-***######################### R SECTION END (MODULES) ################################
-***###############################################################################
-
 *** EOF sets.gms ***

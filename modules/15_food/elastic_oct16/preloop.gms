@@ -15,8 +15,6 @@ i15_prices_initial_kcal(iso,kfo)$(f15_nutrition_attributes("y1995",kfo,"kcal")>0
 
 p15_prices_kcal(t,iso,kfo)=i15_prices_initial_kcal(iso,kfo);
 
-* to be replaced by iso data:
-
 f15_staples_kcal_structure_iso(t,iso,kst)$sum(kst2,f15_staples_kcal_structure_iso(t,iso,kst)=0) = sum(i_to_iso(i,iso),f15_staples_kcal_structure(t,i,kst));
 f15_livestock_kcal_structure_iso(t,iso,kap)$sum(kst2,f15_livestock_kcal_structure_iso(t,iso,kap)=0) = sum(i_to_iso(i,iso),f15_livestock_kcal_structure(t,i,kap));
 
@@ -42,5 +40,3 @@ i15_kcal_pc_initial(t,i,"others")
 f15_kcal_pc(t,i,"%c15_food_scenario%")*
 (1-f15_livestock_share(t,i,"%c15_food_scenario%")-f15_vegfruit_share(t,i,"%c15_food_scenario%"))*
 f15_vegfruit_share(t,i,"%c15_food_scenario%");
-
-

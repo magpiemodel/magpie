@@ -5,10 +5,6 @@
 *** Contact: magpie@pik-potsdam.de
 
 sets
-***PRODUCTS***
-
-
-
    ksd(kall) secondary products
    /oils,oilcakes,sugar,molasses,alcohol,ethanol,distillers_grain,brans,scp,fibres/
 
@@ -38,7 +34,6 @@ sets
        / tece, maiz, trce, rice_pro, soybean, rapeseed, groundnut, sunflower,
          oilpalm, puls_pro, potato, cassav_sp, sugr_cane, sugr_beet, others,
          foddr, cottn_pro, begr, betr /
-
 ;
 
 alias(kap,kap2);

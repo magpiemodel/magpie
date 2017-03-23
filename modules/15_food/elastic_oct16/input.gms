@@ -32,31 +32,26 @@ table f15_kcal_pc(t_all,i,food_scen15) Per capita calories (kcal per capita per 
 $ondelim
 $include "./modules/15_food/input/f15_kcal_pc.csv"
 $offdelim;
-*i16_kcal_pc(t,i) = f16_kcal_pc(t,i,"%c16_demand_scenario%")
 
 table f15_livestock_share(t_all,i,food_scen15)  Share of livestock calories within diet (1)
 $ondelim
 $include "./modules/15_food/input/f15_livestock_share.csv"
 $offdelim;
-*i16_livestock_share(t,i) = f16_livestock_share(t,i,"%c16_demand_scenario%")
 
 table f15_vegfruit_share(t_all,i,food_scen15)   Share of vegetable and fruit calories within diet (1)
 $ondelim
 $include "./modules/15_food/input/f15_vegfruit_share.csv"
 $offdelim;
-*i16_vegfruit_share(t,i) = f16_vegfruit_share(t,i,"%c16_demand_scenario%")
 
 table f15_staples_kcal_structure(t_all,i,kst)     Share of a staple product within total staples (1)
 $ondelim
 $include "./modules/15_food/input/f15_staples_kcal_structure.cs3"
 $offdelim;
-*i16_staples_kcal_structure(t,i,kst) = f16_staples_kcal_structure(t,i,kst,"%c16_demand_scenario%")
 
 table f15_livestock_kcal_structure(t_all,i,kap)   Share of a livestock product within total staples (1)
 $ondelim
 $include "./modules/15_food/input/f15_livestock_kcal_structure.cs3"
 $offdelim;
-*i16_livestock_kcal_structure(t,i,kli) = f16_livestock_kcal_structure(t,i,kli,"%c16_demand_scenario%")
 
 table f15_household_balance_flow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of inhomogenous products and processes in statistics (Mio t DM)
 $ondelim
@@ -68,21 +63,18 @@ $ondelim
 $include "./modules/15_food/input/f15_nutrition_attributes.cs3"
 $offdelim;
 
+
 *** Food Demand Model
-
-
 
 table f15_staples_kcal_structure_iso(t_all,iso,kst)     Share of a staple product within total staples (1)
 $ondelim
 $include "./modules/15_food/input/f15_staples_kcal_structure_iso.cs3"
 $offdelim;
-*i16_staples_kcal_structure(t,i,kst) = f16_staples_kcal_structure(t,i,kst,"%c16_demand_scenario%")
 
 table f15_livestock_kcal_structure_iso(t_all,iso,kap)   Share of a livestock product within total staples (1)
 $ondelim
 $include "./modules/15_food/input/f15_livestock_kcal_structure_iso.cs3"
 $offdelim;
-*i16_livestock_kcal_structure(t,i,kli) = f16_livestock_kcal_structure(t,i,kli,"%c16_demand_scenario%")
 
 parameter f15_prices_initial(kall) Food prices in initialisation period (USD05 per ton DM)
 /

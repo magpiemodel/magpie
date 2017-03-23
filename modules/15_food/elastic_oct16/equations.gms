@@ -20,13 +20,11 @@ q15_aim ..
           v15_objective
           =e=
           sum(iso,v15_income_pc_real_iso(iso));
-*           sum(iso,v15_kcal_pc_iso(iso));
 
 q15_aim_standalone ..
           v15_objective_standalone
           =e=
-*          sum((i2,kall),vm_dem_food(i2,kall));
-           sum(iso,v15_kcal_pc_iso(iso));
+          sum(iso,v15_kcal_pc_iso(iso));
 
 q15_budget(iso) ..
          sum(ct,i15_gdp_pc_iso(ct,iso))
@@ -45,16 +43,12 @@ q15_real_income(iso) ..
 q15_food_kcal(iso) ..
          v15_kcal_pc_iso(iso)
          =e=
-*          1400*v15_income_pc_real_iso(iso)**0.06;
          sum(ct,exp(2.825+m_year(ct)*0.002131)*v15_income_pc_real_iso(iso)**(0.162+m_year(ct)*(-0.00003124)));
-*         sum(ct,exp(2.825+m_year(ct)*0.002131)*i15_income_pc_nominal_iso(ct,iso)**(0.162+m_year(ct)*(-0.00003124)));
 
 q15_food_ls(iso) ..
          v15_livestock_share_iso(iso)
          =e=
-*        0.2
          sum(ct,
-*           exp(-30.673 + 4.497 * log(v15_income_pc_real_iso(iso))+0.01604 * log(v15_income_pc_real_iso(iso))*m_year(ct))
                  (1.372/100 - 5.295 /1000000* m_year(ct)) * v15_income_pc_real_iso(iso)**0.5
                  * exp(-(-1.102 /10000 + 6.404  / 100000000 * m_year(ct))*v15_income_pc_real_iso(iso))
          );

@@ -27,12 +27,7 @@
  q51_emissions_som(i2,n_pollutants_direct)..
                  vm_btm_reg(i2,"som",n_pollutants_direct)
                  =e=
-*                 vm_som(i2)
-                  0
-                 * f51_ef_n_soil(n_pollutants_direct,"som");
-
-* compared to earlier implementations I now neglect lower emission factor for fertilizer applied on rice for reasons of simplifcation.
-
+                  0;
 
 ** animal waste management
  q51_emissionbal_awms(i2,n_pollutants_direct) ..
@@ -57,11 +52,5 @@
                  =e=
                  sum(pollutant_nh3no2_51,vm_emissions_reg(i2,emis_source_n51,pollutant_nh3no2_51)) * f51_ipcc_ef("ef_4","best")
                  + vm_emissions_reg(i2,emis_source_n51,"no3_n") * f51_ipcc_ef("ef_5","best");
-
-
-
-
-
-********* Indirect Emissions
 
 *** EOF constraints.gms ***

@@ -40,12 +40,6 @@ loop (t,
       display "Year";
       display ct;
 
-
-* redefine preprocessed data using only the information for the current time step
-* this is necessary because every parameter used in a constraint must not
-* contain the time t explicitly (parameters are marked with "c" for "current").
-
-
 $batinclude "./modules/include.gms" presolve
 
 * intersolve for food demand model

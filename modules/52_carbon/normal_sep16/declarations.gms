@@ -4,12 +4,9 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-* Here you can put your additional declarations
-
 positive variables
  vm_carbon_stock(j,land,c_pools)             carbon in vegetation soil and litter for different land types (Mio tC)
 ;
-
 
 parameters
  pm_carbon_density_ac(t,j,ac,c_pools)  carbon density for ac and c_pools (tC per ha)
@@ -18,11 +15,8 @@ parameters
 ;
 
 equations
-
  q52_co2c(j,emis_source_co2_land)             cellular aggregation of land pool emissions
-
 ;
-
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters

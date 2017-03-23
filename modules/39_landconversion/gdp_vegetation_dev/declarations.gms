@@ -1,12 +1,10 @@
 *** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 *** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
 equations
-* q39_cost_establish_annuity(j,land) Calculation of cellular annuity costs of land-use establishment
-* q39_cost_landclear_annuity(j,land) Calculation of cellular annuity costs of land clearing
  q39_cost_landcon_annuity(j,land) Calculation of cellular annuity costs of landconversion
  q39_cost_landcon(j,land)        Calculation of cellular landconversion costs
 ;
@@ -16,18 +14,16 @@ variables
 ;
 
 positive variable
-* v39_cost_establish_annuity(j,land) annuity costs of land-use establishment in the current timestep (mio. US$)
-* v39_cost_landclear_annuity(j,land) annuity costs of land clearing in the current timestep
  v39_cost_landcon_annuity(j,land) annuity costs of landconversion in the current timestep (mio. US$)
 ;
 
 scalar
-s39_min_gdp                           minimum gdp_pc of all regions in 1995 [US$ per capita]
-s39_max_gdp                           maximum gdp_pc of all regions in 1995 [US$ per capita]
+ s39_min_gdp                           minimum gdp_pc of all regions in 1995 [US$ per capita]
+ s39_max_gdp                           maximum gdp_pc of all regions in 1995 [US$ per capita]
 ;
 
 parameters
-p39_max_carbon(i,land)	          maximum vegetation carbon density per region
+p39_max_carbon(i,land)	              maximum vegetation carbon density per region
 p39_landclear_a                       parameter a for land clearing costs calculation
 i39_landclear_gdp(bound39)            cost estimates for land clearing costs
 p39_landclear_b                       parameter b for land clearing costs calculation

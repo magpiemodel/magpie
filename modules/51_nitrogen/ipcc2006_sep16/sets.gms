@@ -4,9 +4,7 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-* Here you can define module-specific sets
 sets
-
    emis_uncertainty51 different estimates for emission parameters
    /best,low, high/
 
@@ -26,5 +24,4 @@ sets
      urban_vegc, urban_litc, urban_soilc,
      other_vegc, other_litc, other_soilc,
      beccs/
-
 ;

@@ -5,18 +5,12 @@
 *** Contact: magpie@pik-potsdam.de
 
 
-***PRODUCTION***
-
  q31_prod(j2) .. vm_prod(j2,"pasture")
                 =e=
                 sum(si, vm_land(j2,"past",si))*vm_yld(j2,"pasture","rainfed");
 
-***CARBON***
-
  q31_carbon(j2,c_pools) .. vm_carbon_stock(j2,"past",c_pools)
                           =e=
                           sum((si,ct), vm_land(j2,"past",si)*fm_carbon_density(ct,j2,"past",c_pools));
-
-
 
 *** EOF constraints.gms ***

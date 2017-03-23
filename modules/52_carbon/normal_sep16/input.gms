@@ -8,8 +8,6 @@ $setglobal c52_carbon_scenario  nocc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
 
-
-****** C Content Density
 table fm_carbon_density(t_all,j,land,c_pools) LPJ carbon density for land and carbon pools (tC per ha)
 $ondelim
 $include "./modules/52_carbon/input/lpj_carbon_stocks.cs3"

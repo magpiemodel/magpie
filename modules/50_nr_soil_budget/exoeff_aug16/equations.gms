@@ -4,17 +4,11 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-********************************************************************************
-*****************************OBJECTIVE FUNCTION*********************************
-
-
-****** Nutrient constraint
 
  q50_nr_cost_fert(i2) ..
                  vm_nr_inorg_fert_costs(i2)
                  =e=
                  vm_nr_inorg_fert_reg(i2) * 600
-* f50_inorg_fert_costs_1995(i2,"nr")
                  ;
 
  q50_managament_nitrogen(i2,kcr) .. vm_mi(i2)
@@ -30,7 +24,6 @@
                    + sum(kli, vm_manure(i2, kli, "stubble_grazing","nr"))
                    + vm_nr_inorg_fert_reg(i2)
                    + sum(cell(i2,j2),vm_nr_som(j2))*0
-*                   + v50_nr_dep_crop(i2)
                  )
                  =g=
                  sum(kcr,v50_nr_withdrawals(i2,kcr));

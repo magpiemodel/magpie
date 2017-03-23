@@ -35,5 +35,3 @@ q20_processing_substitution(i2,dm_ge_nr) ..
         sum(kpr, v20_dem_processing(i2,"substitutes",kpr) * fm_attributes(dm_ge_nr,kpr))
         =g=
         sum((ksd,kpr), v20_secondary_substitutes(i2,ksd,kpr) * fm_attributes(dm_ge_nr,ksd) );
-* eventually make processing shares more flexible, e.g. by turning it into a variable that
-* has to add up to one, with lower and upper bounds for each specific value

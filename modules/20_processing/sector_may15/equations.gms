@@ -1,6 +1,6 @@
 *** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 *** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
@@ -27,6 +27,3 @@ q20_processing(i2,kpr,ksd) ..
         =g=
        (vm_prod_reg(i2,ksd) - sum(ct,f20_processing_balanceflow(ct,i2,ksd)))
         *sum(ct,f20_processing_shares(ct,i2,ksd,kpr));
-
-* eventually make processing shares more flexible, e.g. by turning it into a variable that
-* has to add up to one, with lower and upper bounds for each specific value

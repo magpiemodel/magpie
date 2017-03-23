@@ -1,14 +1,12 @@
 *** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 *** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
 
 sets
-***CATEGORY FOR THE TRADED PRODUCTS***
 *sets need to be adopted to new categories
-
    k_notrade(kall) production activities
        / oilpalm, foddr, pasture, res_cereals, res_fibrous, res_nonfibrous /
 * oilpalm not traded, only its oil and oilcake due to FAOSTAT complications, and as trade is little

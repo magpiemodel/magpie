@@ -8,7 +8,6 @@ p32_land_fore(t,j,ac,si,"after") =
          v32_land.l(j,"new",si)$(ord(ac) = 1)
          + sum(ac_land32(ac,land32)$(not sameas(land32,"new") AND pc32_land_fore(j,land32,si) > 0),(v32_land.l(j,land32,si)/pc32_land_fore(j,land32,si))*p32_land_fore(t,j,ac,si,"before"))$(ord(ac) > 1);
 
-*****bgc and bph effects***************************************************
  p32_carbon_stock_vegc(t,j) = sum(land32, sum(si, v32_land.l(j,land32,si))*pc32_carbon_density(j,land32,"vegc"));
  p32_cdr_aff_vegc(t,j) = p32_carbon_stock_vegc(t,j)$(ord(t) = 1) + (p32_carbon_stock_vegc(t,j) - p32_carbon_stock_vegc(t-1,j))$(ord(t) > 1);
  p32_bgc_cooling_aff_vegc(t,j) = -p32_cdr_aff_vegc(t,j)*0.0021;

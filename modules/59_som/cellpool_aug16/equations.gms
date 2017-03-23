@@ -9,7 +9,6 @@ q59_som_target_cropland(j2) ..
               v59_som_target(j2,"cropland")
               =e=
               sum((kcr,w), vm_area(j2,kcr,w) * i59_cratio(j2,kcr)) * sum(ct,fm_carbon_density(ct,j2,"crop","soilc"))
-*              + sum(kcr,vm_area(kcr,"irrigated")*vm_carbon_content(j2,"crop")*i59_irrigationbonus
               ;
 
 

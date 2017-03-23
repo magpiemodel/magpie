@@ -6,7 +6,6 @@ v15_demand_quantity.fx(iso,knf)=0;
 *** Price-demand model is calculated the first time, using standard prices
 
 * helping the solver by starting from reasonable values
-*v15_kcal_pc_iso.lo(iso)=1000;
 v15_income_pc_real_iso.lo(iso)=1;
 v15_income_pc_real_iso.fx(iso)=i15_gdp_pc_iso(t,iso);
 
@@ -29,9 +28,6 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
 v15_income_pc_real_iso.lo(iso)=1;
 v15_income_pc_real_iso.up(iso)=Inf;
 
-* p15_kcal_pc_iso_initial(t,iso) = v15_kcal_pc_iso.l(iso);
-* p15_livestock_share_iso_initial(t,iso) =  v15_livestock_share_iso.l(iso);
-* p15_vegfruit_share_iso_initial(t,iso) = v15_vegfruit_share_iso.l(iso);
  p15_demand_quantity_iso_initial(t,iso,kfo)=v15_demand_quantity.l(iso,kfo);
  p15_demand_nonfood_iso_initial(t,iso)=v15_demand_nonfood.l(iso);
  p15_income_pc_real_iso_initial(t,iso)=v15_income_pc_real_iso.l(iso);

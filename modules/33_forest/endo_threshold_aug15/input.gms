@@ -9,7 +9,6 @@ scalars
   s33_deforest_policy Switch for upper limit on deforestation based on historic deforestation rates    / 0 /
 ;
 
-*Cellular Input
 table f33_ifft(j,si) ifft forest area [mio. ha]
 $ondelim
 $include "./modules/33_forest/input/avl_land_ifft.cs2"

@@ -4,7 +4,6 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-*Cellular Input
 table f33_ifft(j,si) ifft forest area [mio. ha]
 $ondelim
 $include "./modules/33_forest/input/avl_land_ifft.cs2"
@@ -15,4 +14,3 @@ $ondelim
 $include "./modules/33_forest/input/fm_forest_change.csv"
 $offdelim
 ;
-

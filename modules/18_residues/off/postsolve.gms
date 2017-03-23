@@ -1,12 +1,8 @@
 *** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 *** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
-
-****** Residues
-
-*** EOF postsolve.gms ***
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_res_biomass_ag(t,i,kcr,attributes,"marginal") = vm_res_biomass_ag.m(i,kcr,attributes);
@@ -22,4 +18,3 @@
  ov_res_biomass_bg(t,i,kcr,dm_nr,"lower")         = vm_res_biomass_bg.lo(i,kcr,dm_nr);
  ov_res_recycling(t,i,npk,"lower")                = vm_res_recycling.lo(i,npk);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
-

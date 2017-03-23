@@ -1,6 +1,6 @@
 *** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 *** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
@@ -24,7 +24,7 @@ vm_land.l(j,"other",si) = pcm_land(j,"other",si);
 *set boundaries
 v35_land.lo(j,"new",si) = 0;
 v35_land.up(j,"new",si) = Inf;
-	
+
 v35_land.lo(j,"grow",si) = pc35_land(j,"grow",si)*sum(cell(i,j), p35_protect_other(t,i));
 v35_land.up(j,"grow",si) = pc35_land(j,"grow",si);
 m_boundfix(v35_land,(j,"grow",si),l,10e-5);
@@ -36,7 +36,7 @@ m_boundfix(v35_land,(j,"old",si),l,10e-5);
 if((ord(t) = 1),
 *highest carbon density 1st time step to account for reshuffling
 	p35_carbon_density(t,j,land35,c_pools) = pm_carbon_density_ac(t,j,"acx",c_pools);
-else	
+else
 *calculate carbon density
 	p35_carbon_density(t,j,"new",c_pools) = pm_carbon_density_ac(t,j,"ac0",c_pools);
 	p35_carbon_density(t,j,"grow",c_pools) = m_weightedmean(pm_carbon_density_ac(t,j,ac,c_pools),p35_land(t,j,ac,si,"before"),(ac_land35(ac,"grow"),si));
@@ -45,6 +45,6 @@ else
 
 pc35_carbon_density(j,land35,c_pools) = p35_carbon_density(t,j,land35,c_pools);
 
-*carbon stock correction
+*carbon stock update
 pcm_carbon_stock(j,"other",c_pools) = sum(land35, pc35_carbon_density(j,land35,c_pools)*sum(si, pc35_land(j,land35,si)));
 vm_carbon_stock.l(j,"other",c_pools) = pcm_carbon_stock(j,"other",c_pools);

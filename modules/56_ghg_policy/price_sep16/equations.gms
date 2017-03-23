@@ -8,7 +8,6 @@
 
 *** Calculate emissions for the core
 
-
  q56_technical_mitigation_reg(i2,pollutants,emis_source) ..
                  vm_emissions_reg(i2,emis_source,pollutants)
                  =e=

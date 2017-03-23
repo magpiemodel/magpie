@@ -1,6 +1,6 @@
 *** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 *** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
@@ -8,8 +8,7 @@
 vm_tau.lo(i) =    pc13_tau(i);
 vm_tau.up(i) = 10*pc13_tau(i);
 
-*educated guess for vm_tau.l:
-
+* educated guess for vm_tau.l:
 vm_tau.l(i) = pc13_tau(i)*(1+pc13_tcguess(i))**m_yeardiff(t);
 
 vm_tech_cost.up(i) = 10e9;

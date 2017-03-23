@@ -1,26 +1,18 @@
 *** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 *** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-* Here you can put your additional declarations
-
 equations
-
-*** emissions
  q51_emissions_inorg_fert(i,n_pollutants_direct) detailed n2o constraint for inorganic fertilizer before technical mitigation
  q51_emissions_man_crop(i,n_pollutants_direct)  detailed n2o constraint for manure on cropland before technical mitigation
  q51_emissions_resid(i,n_pollutants_direct)      detailed n2o constraint for residues before technical mitigation
  q51_emissions_som(i,n_pollutants_direct)        detailed n2o constraint for soil organic matter loss before technical mitigation
-* q51_emissions_rice_bonus(i) detailed n2o constraint for rice bonus before technical mitigation
  q51_emissionbal_man_past(i,n_pollutants_direct)   detailed n2o constraint for manure on pasture land before technical mitigation
  q51_emissionbal_awms(i,n_pollutants_direct)       detailed n2o constraint for animal waste management systems before technical mitigation
  q51_emissions_indirect_n2o(i,emis_source_n51) estimates indirect emissions from volatilisation and leaching
-
 ;
-
-*** EOF declarations.gms ***
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters

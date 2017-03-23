@@ -1,6 +1,6 @@
 *** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 *** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
@@ -20,8 +20,6 @@ positive variables
 
 
 equations
-
-*** nutrients
  q55_bal_intake_grazing_pasture(i,kli, npk) nutrient balance for intake of grazing animals on pastures
  q55_bal_intake_confinement(i,kli, npk) nutrient balance for intake in confinement
  q55_bal_intake_grazing_cropland(i,kli, npk) nutrient balance for intake of grazing animals on cropland
