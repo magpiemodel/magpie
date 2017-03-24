@@ -14,8 +14,6 @@ $offlisting
 $setglobal c_timesteps  3
 
 scalars sm_use_gdx   use of gdx files                                      / 2 /
-        sm_maxiter   maximal solve iterations if modelstat is > 2        / 100 /
-        s_maxdiff    max diff between lp and nlp solution  (mio. USD)   / 1000 /
         sm_invest_horizon investment time horizon (years)                 / 30 /
 ;
 

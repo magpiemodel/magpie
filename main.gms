@@ -7,39 +7,39 @@
 $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
+*
 * Used data set: GLUES2-sresa2-constant_co2-miub_echo_g_ERB_rev22.1_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
 * md5sum: c84bb19e7df3eeae224a9db164126812
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-* 
+*
 * Used data set: magpie_8a828c6ed5004e77d1ba2025e8ea2261_rev2.08.tgz
 * md5sum: 961273a8e86e881074c12cf0f161b3ae
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
+*
 * Used data set: additional_data_rev1.01.tgz
 * md5sum: ac06c829276d9d58557b1b2520fa346c
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-* 
+*
 * Low resolution: h200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   SSA  MEA  OAS  CHA  NEU  EUR  REF  LAM  USA  CAZ  IND
 *    12   18   24   21   12   18    8   35   11   33    8
-* 
+*
 * Regionscode: 8a828c6ed5004e77d1ba2025e8ea2261
-* 
+*
 * Regions data revision: 2.08
-* 
+*
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/GLUES2/sresa2/constant_co2/miub_echo_g
 * * Additional input folder: /p/projects/landuse/data/input/other/rev22
 * * Land input data set: ERB
 * * Revision: 22.1
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision, land_input = cfg$land_input)
-* 
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: h200
@@ -49,11 +49,11 @@ $title magpie
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = paste0(cfg$base_folder, "/", set_folder,     "_", cfg$high_res, ".tgz"), regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
-* 
-* 
-* 
+*
+*
+*
 * Last modification (input data): Tue Mar 14 16:47:28 2017
-* 
+*
 *###################### R SECTION END (VERSION INFO) ###########################
 
 
@@ -82,7 +82,6 @@ $setglobal c_timesteps  3
 
 scalars sm_use_gdx   use of gdx files                                      / 2 /
         sm_maxiter   maximal solve iterations if modelstat is > 2        / 100 /
-        s_maxdiff    max diff between lp and nlp solution  (mio. USD)   / 1000 /
 ;
 ********************************************************************************
 

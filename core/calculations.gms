@@ -91,7 +91,7 @@ $if exist "magpie_y2150.gdx"  if(sameas(t,"y2150"), Execute_Loadpoint "magpie_y2
 
 **************start solve loop**************
            s_counter = 0;
-           pm_modelstat = NA;
+           pm_modelstat = 1;
 
            repeat(
 
@@ -104,13 +104,13 @@ $batinclude "./modules/include.gms" nl_fix
 $batinclude "./modules/include.gms" l_solve
 $batinclude "./modules/include.gms" nl_release
 
-               if((pm_modelstat <> 1 and pm_modelstat <> NA),
+               if((pm_modelstat <> 1),
 $batinclude "./modules/include.gms" nl_relax
                );
 
                    display pm_modelstat;
                    s_counter = s_counter + 1 ;
-               until(pm_modelstat = 1  or pm_modelstat = NA or s_counter >= sm_maxiter)
+               until(pm_modelstat = 1 or s_counter >= sm_maxiter)
              );
 
              magpie.trylinear = 0;
@@ -125,7 +125,7 @@ $batinclude "./modules/include.gms" nl_solve
 
              display s_counter;
 
-             until (sm_obj_diff <= s_maxdiff or s_counter >= sm_maxiter)
+             until (pm_modelstat <= 2 or s_counter >= sm_maxiter)
            );
 ***************end solve loop***************
 
