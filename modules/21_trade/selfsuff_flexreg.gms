@@ -6,10 +6,10 @@
 
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/21_trade/selfsuff_flexreg_dev/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/21_trade/selfsuff_flexreg_dev/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/21_trade/selfsuff_flexreg_dev/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/21_trade/selfsuff_flexreg_dev/equations.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/21_trade/selfsuff_flexreg_dev/preloop.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/21_trade/selfsuff_flexreg_dev/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/21_trade/selfsuff_flexreg/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/21_trade/selfsuff_flexreg/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/21_trade/selfsuff_flexreg/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/21_trade/selfsuff_flexreg/equations.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/21_trade/selfsuff_flexreg/preloop.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/21_trade/selfsuff_flexreg/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
