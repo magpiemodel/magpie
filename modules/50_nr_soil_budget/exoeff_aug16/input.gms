@@ -4,7 +4,7 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-$setglobal c50_scen_neff  snupe65_70_starty2010
+$setglobal c50_scen_neff  snupe60_60_starty2010
 *   options:   snupe55_55_starty1990,snupe60_60_starty1990,snupe65_70_starty1990,
 *   snupe65_70_starty2010,snupe60_60_starty2010,snupe55_60_starty2010,
 *   snupe70_75_starty2010,snupe75_80_starty2010,snupe80_85_starty2010

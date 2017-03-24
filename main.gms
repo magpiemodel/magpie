@@ -81,7 +81,7 @@ $offlisting
 $setglobal c_timesteps  3
 
 scalars sm_use_gdx   use of gdx files                                      / 2 /
-        sm_maxiter   maximal solve iterations if modelstat is > 2        / 100 /
+        sm_maxiter   maximal solve iterations if modelstat is > 2        / 30 /
 ;
 ********************************************************************************
 
