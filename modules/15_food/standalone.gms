@@ -13,8 +13,8 @@ $offlisting
 
 $setglobal c_timesteps  3
 
-scalars sm_use_gdx   use of gdx files                                      / 2 /
-        sm_invest_horizon investment time horizon (years)                 / 30 /
+scalars
+  sm_invest_horizon investment time horizon (years)                 / 30 /
 ;
 
 *******************************END MODULE SETUP*********************************

@@ -47,12 +47,11 @@ $batinclude "./modules/include.gms" presolve
 
       while(sm_intersolve = 0,
 
-* Loading gdx-files (sm_use_gdx>0)
-           if((sm_use_gdx > 0),
+         if((s_use_gdx > 0),
 $if exist "magpie_y1995.gdx"  if(sameas(t,"y1995"), Execute_Loadpoint "magpie_y1995.gdx"; );
-           );
+         );
 
-           if((sm_use_gdx = 2),
+         if((s_use_gdx = 2),
 $if exist "magpie_y2000.gdx"  if(sameas(t,"y2000"), Execute_Loadpoint "magpie_y2000.gdx"; );
 $if exist "magpie_y2005.gdx"  if(sameas(t,"y2005"), Execute_Loadpoint "magpie_y2005.gdx"; );
 $if exist "magpie_y2010.gdx"  if(sameas(t,"y2010"), Execute_Loadpoint "magpie_y2010.gdx"; );
@@ -110,7 +109,7 @@ $batinclude "./modules/include.gms" nl_relax
 
                    display pm_modelstat;
                    s_counter = s_counter + 1 ;
-               until(pm_modelstat = 1 or s_counter >= sm_maxiter)
+               until(pm_modelstat = 1 or s_counter >= s_maxiter)
              );
 
              magpie.trylinear = 0;
@@ -119,13 +118,13 @@ $batinclude "./modules/include.gms" nl_solve
 
 
 * write extended run information in list file in the case that the final solution is infeasible
-             if((s_counter >= sm_maxiter and pm_modelstat > 2 and pm_modelstat ne 7),
+             if((s_counter >= s_maxiter and pm_modelstat > 2 and pm_modelstat ne 7),
                magpie.solprint = 1
              );
 
              display s_counter;
 
-             until (pm_modelstat <= 2 or s_counter >= sm_maxiter)
+             until (pm_modelstat <= 2 or s_counter >= s_maxiter)
            );
 ***************end solve loop***************
 

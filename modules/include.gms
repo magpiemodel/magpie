@@ -47,7 +47,6 @@ $include "./modules/60_bioenergy/60_bioenergy.gms"
 $include "./modules/62_material/62_material.gms"
 $include "./modules/70_livestock/70_livestock.gms"
 $include "./modules/80_optimization/80_optimization.gms"
-$include "./modules/90_presolve/90_presolve.gms"
 *######################## R SECTION END (MODULES) ##############################
 
 *** EOF include.gms ***

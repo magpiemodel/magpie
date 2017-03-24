@@ -5,9 +5,9 @@
 *** Contact: magpie@pik-potsdam.de
 
  q11_cost_glo .. vm_cost_glo =e=
-                          sum(i2, vm_cost_reg(i2));
+                          sum(i2, v11_cost_reg(i2));
 
- q11_cost_reg(i2) .. vm_cost_reg(i2)
+ q11_cost_reg(i2) .. v11_cost_reg(i2)
                    =e=
                    sum(k, vm_cost_prod(i2,k))
                    + sum((cell(i2,j2),land), vm_cost_landcon(j2,land))

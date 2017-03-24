@@ -52,7 +52,7 @@ $title magpie
 *
 *
 *
-* Last modification (input data): Tue Mar 14 16:47:28 2017
+* Last modification (input data): Fri Mar 24 16:09:16 2017
 *
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -80,8 +80,8 @@ $offlisting
 
 $setglobal c_timesteps  3
 
-scalars sm_use_gdx   use of gdx files                                      / 2 /
-        sm_maxiter   maximal solve iterations if modelstat is > 2        / 30 /
+scalars s_use_gdx   use of gdx files                                       / 2 /
+        s_maxiter   maximal solve iterations if modelstat is > 2          / 30 /
 ;
 ********************************************************************************
 
@@ -135,8 +135,6 @@ $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 
 $setglobal optimization  lp_nlp_glo_jan15
-
-$setglobal presolve  off
 
 ****************************END MODULE SETUP************************************
 

@@ -7,3 +7,4 @@
 name,type,reason
 vm_dem_food,input,questionnaire
 vm_prod_reg,input,questionnaire
+fm_attributes,input,questionnaire

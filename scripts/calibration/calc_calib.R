@@ -25,7 +25,7 @@ calibration_run<-function(putfolder,calib_magpie_name,logoption=3){
     stop(paste("Unable to create",paste(calib_magpie_name,".gms",sep="")))
   }
   manipulateConfig(paste(calib_magpie_name,".gms",sep=""),c_timesteps=1)
-  manipulateConfig(paste(calib_magpie_name,".gms",sep=""),sm_use_gdx=0)
+  manipulateConfig(paste(calib_magpie_name,".gms",sep=""),s_use_gdx=0)
   file.copy(paste(calib_magpie_name,".gms",sep=""),putfolder)
 
   # execute calibration run

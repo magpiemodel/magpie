@@ -5,3 +5,4 @@
 # Contact: magpie@pik-potsdam.de
 
 name,type,reason
+fm_attributes,input,questionnaire
