@@ -1,12 +1,12 @@
 # (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 # authors, and contributors see AUTHORS file
-# This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+# This file is part of MAgPIE and licensed under GNU AGPL Version 3
 # or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # Contact: magpie@pik-potsdam.de
 
-##########################################################
+##############################################
 #### irrigation paper scenario comparison ####
-##########################################################
+##############################################
 # Version 1.0, Florian Humpen?der
 #
 
@@ -18,7 +18,7 @@ library(magpie4)
 library(ggplot2)
 
 ############################# BASIC CONFIGURATION #############################
-if(!exists("source_include")) {  
+if(!exists("source_include")) {
   outputdirs <- "./output/static_irrigation_2012-09-07_12.17.06"
   #Define arguments that can be read from command line
   readArgs("outputdirs")
@@ -60,70 +60,70 @@ for (i in 1:length(outputdirs)) {
     l<-readLines(path(outputdirs[i],config))
     title <- strsplit(grep("title +<-",l,value=TRUE),"\"")[[1]][2]
   }
-  
+
   #gdx file
   gdx<-path(outputdirs[i],"fulldata.gdx")
-  
+
   print("bio_prod")
   bio_prod[[title]] <- production(gdx,crops="kbe",water="sum",unit="EJ")[,years,]
-  
+
   print("bio_costs")
   if(!is.null(readGDX(gdx,"o90_cost_reg", format="first_found", react="silent"))) {
     pre_costs <- readGDX(gdx,"o90_cost_reg", format="first_found")
     full_costs <- readGDX(gdx,"ov_cost_reg", format="first_found")[,,"level"]
     bio_costs[[title]] <- as.magpie(round(full_costs - pre_costs)/1000)
   }
-  
+
   print("total_costs")
   total_costs[[title]] <- readGDX(gdx,"ov_cost_glo", format="first_found", select=list(type="level"))/1000
- 
+
   print("bio_prices")
   bio_prices[[title]] <- prices(gdx,level="glo",crops="kbe",crop_aggr=T,unit="GJ")[,years,]
-  
+
   print("bio_yields_rf")
   bio_yields_rf[[title]] <- yields(gdx,crops="begr",water="rf")[,years,]
-  
+
   print("bio_yields_ir")
   bio_yields_ir[[title]] <- yields(gdx,crops="begr",water="ir")[,years,]
-  
+
   print("water_bio_crops")
   water_kbe[[title]] <- as.magpie(water_usage(gdx,users="kbe",sum=T)[,years,]/1000)
 
   print("water_food_crops")
   water_kfo[[title]] <- as.magpie(water_usage(gdx,users="kfo",sum=T)[,years,]/1000)
-  
+
   print("water_prices")
   water_prices[[title]] <- water_price(gdx)[,years,]
-  
+
   print("net trade food crops")
   net_trade_kfo[[title]] <- as.magpie(dimSums(demand(gdx,commodities="kfo"),dims=3) - production(gdx,crops="kfo",water="sum"))[,years,]
-  
+
   print("c_emissions")
   c_emissions[[title]] <- emissions(gdx,y1995=T)[,years[-1],]
-  
+
   print("tc")
   tc_rates[[title]] <- tc(gdx)[,years[-1],]
-  
+
   print("food_price_index")
   food_price_index[[title]] <- priceIndex(gdx)[,years,]
-  
+
   print("food crop production")
   food_prod_ir[[title]] <- production(gdx,crops="kfo",water="ir",unit="EJ")[,years,]
-  
+
   print("food crop production -ir")
   bio_prod_ir[[title]] <- production(gdx,crops="kbe",water="ir",unit="EJ")[,years,]
-  
+
   print("water intensity")
   water_int_kfo[[title]] <- as.magpie(water_usage(gdx,users="kfo",sum=T)[,years,] / (production(gdx,crops="kfo",water="ir",unit="EJ")[,years,] * 1000))
   water_int_kbe[[title]] <- as.magpie(water_usage(gdx,users="kbe",sum=T)[,years,] / (production(gdx,crops="kbe",water="ir",unit="EJ")[,years,] * 1000))
-  
+
   print("water productivity")
   water_prod_kfo[[title]] <- as.magpie((production(gdx,crops="kfo",water="ir",unit="EJ")[,years,] * 1000) / water_usage(gdx,users="kfo",sum=T)[,years,])
   water_prod_kbe[[title]] <- as.magpie((production(gdx,crops="kbe",water="ir",unit="EJ")[,years,] * 1000) / water_usage(gdx,users="kbe",sum=T)[,years,])
-  
+
   print("bio_water_usage_shr")
-  bio_water_usage_shr[[title]] <- as.magpie(water_usage(gdx,users="kbe",sum=T)/water_usage(gdx,users="agriculture",sum=T)*100)[,years,]  
-  
+  bio_water_usage_shr[[title]] <- as.magpie(water_usage(gdx,users="kbe",sum=T)/water_usage(gdx,users="agriculture",sum=T)*100)[,years,]
+
 }
 print("Starting output generation")
 sw<-swopen("./output/irrigation_comparison.pdf")

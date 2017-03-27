@@ -1,12 +1,12 @@
 # (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 # authors, and contributors see AUTHORS file
-# This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+# This file is part of MAgPIE and licensed under GNU AGPL Version 3
 # or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # Contact: magpie@pik-potsdam.de
 
-##########################################################
+#####################################
 #### Trade calibration comparison####
-##########################################################
+#####################################
 # Version 1.0
 # Xiaoxi Wang
 # compare calibrated trade volumes and transport costs
@@ -24,7 +24,7 @@ library(gdx)
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  
+
   gdx <- "fulldata.gdx"
   outputdir  <- "."
   #Define arguments that can be read from command line
@@ -47,7 +47,7 @@ share <- function(gdx=NULL,x,type="import",data.type="magpie"){
     }
   }
   if (is.numeric(x)){
-    df <-x 
+    df <-x
   }
     total <- colSums(colSums(df,dim=1),dim=1)
   if(type=="import"){
@@ -115,9 +115,6 @@ import_share_gtap <- reshape_share(import_share_gtap,type ="import",var.names = 
 export_share_gtap <- reshape_share(export_share_gtap,type="export",var.names=gtap_crops,data.type = "gtap",timevar="trc")
 bilateral_share_gtap <- reshape_share(bilateral_share_gtap,type="bilateral",var.names = gtap_crops,data.type = "gtap",timevar="trc")
 
-
-
-# dm_content <- inp(gdx[[1]], "f21_DM_content")
 gtap.magpie1 <- list()
 gtap.magpie1[["cereals"]] <- c("tece","maiz","trce")
 gtap.magpie1[["rice"]] <- c("rice_pro")
@@ -136,7 +133,7 @@ for(j in 1:length(gtap.magpie1)) {
   if (length(gtap.magpie1[[j]]) == 1) {tmp[,,names(gtap.magpie1)[[j]]] <-bilateral_magpie[,,gtap.magpie1[[j]]]}
   else{tmp[,,names(gtap.magpie1)[[j]]] <- dimSums(bilateral_magpie[,,gtap.magpie1[[j]]])}
 }
-  
+
 bilateral_share_magpie <- share(x=tmp,type = "bilateral",data.type = "magpie")
 export_share_magpie<- share(x=tmp,type = "export",data.type = "magpie")
 import_share_magpie <- share(x=tmp,type = "import",data.type = "magpie")
@@ -160,10 +157,6 @@ n <- dim(export_share_gtap)[1]*(dim(export_share_gtap)[2]-1)
 obs <- as.vector(as.matrix(export_share_gtap[,-grep("reg",dimnames(export_share_gtap)[[2]])]))
 mod1 <- as.vector(as.matrix(export_share_magpie[,-grep("reg",dimnames(export_share_magpie)[[2]])]))
 
-
-# png(filename=path(outputdir,"prep_todd_summed_export_1995_test.png"),width=6, height=6, units="in", res=500)
-# performance_wx()
-# dev.off()
 swfigure(swout,performancePlot,pdata=mod1,odata=obs,
          ylab = "MAgPIE [%]",xlab = "GTAP [%]",measures=c("Pearson"),na.rm=T,col="blue",
          tex_caption = "Share of export volumes w.r.t. total trade flows of each GTAP commodity")
@@ -191,7 +184,7 @@ vars <-   names(bilateral_share_magpie[,-grep("reg",dimnames(bilateral_share_mag
 for (i in vars){
   obs <- as.vector(as.matrix(bilateral_share_gtap[,-grep("reg",dimnames(bilateral_share_gtap)[[2]])][i]))
   mod1 <- as.vector(as.matrix(bilateral_share_magpie[,-grep("reg",dimnames(bilateral_share_magpie)[[2]])][i]))
-  
+
   swfigure(swout,performancePlot,pdata=mod1,odata=obs,
            ylab = "MAgPIE [%]",xlab = "GTAP [%]",measures=c("Pearson"),na.rm=T,col="blue",
            tex_caption = paste("Share of bilateral trade volumes w.r.t. total trade flows of GTAP commodity for", i, sep=" ")
@@ -204,21 +197,6 @@ for (i in vars){
 #****************************
 costs_gtap <- inp(gdx,"f21_transp_costs", react="warning", as.magpie = F)
 costs_magpie <- inp(gdx,"p21_transp_costs", react="warning", as.magpie = F)
-
-# obsolete mapping for old input data used for trade calibration
-# gtap.magpie2 <- list()
-# gtap.magpie2[["rice_t"]] <- c("rice_pro")
-# gtap.magpie2[["cereals_t"]] <- c("tece","trce","maiz")
-# gtap.magpie2[["puls_t"]] <- c("puls_pro")
-# gtap.magpie2[["roots_t"]] <- c("potato","cassav_sp")
-# gtap.magpie2[["others_t"]] <- c("others")
-# gtap.magpie2[["oilcrops_t"]] <- c("soybean","groundnut","rapeseed","sunflower","oilpalm")
-# gtap.magpie2[["sugar_t"]] <- c("sugr_cane","sugr_beet")
-# gtap.magpie2[["meat_rumi_t"]] <- c("livst_rum")
-# gtap.magpie2[["milk_t"]] <- c("livst_milk")
-# gtap.magpie2[["meat_nonr_t"]] <- c("livst_pig","livst_chick","livst_egg")
-# gtap.magpie2[["cottn_t"]] <- c("cottn_pro")
-# gtap.magpie2[["kbe_t"]] <- c("begr","betr")
 
 tmp <- costs_magpie
 for(i in 1:length(gtap.magpie1)) {
@@ -238,9 +216,6 @@ swfigure(swout,performancePlot, pdata=mod,odata=obs,measures=c("Pearson"),na.rm=
          ylab = "MAgPIE [Mio. USD]",xlab = "GTAP [Mio. USD]", tex_caption ="Calibrated transport costs",
          col = "blue", pch=8, fig.placement="H")
 
-#           performancePlot(pdata=mod,odata=obs,measures=c("Pearson"),na.rm=T,ylab = "MAgPIE [Mio. USD]",xlab = "GTAP [Mio. USD]", 
-#                           col = "blue", pch=8, fig.placement="H", main="Calibrated transport costs in 1995")
-
 swlatex(swout,"\\subsection{Calibration of trade costs for each MAgPIE commodity}")
 
 
@@ -254,7 +229,3 @@ for (i in colnames(costs_magpie)[-grep("reg",colnames(costs_magpie))]){
 }
 
 swclose(swout,clean_output=FALSE,engine="knitr")
-
-
-
-

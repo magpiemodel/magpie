@@ -1,12 +1,12 @@
 # (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 # authors, and contributors see AUTHORS file
-# This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+# This file is part of MAgPIE and licensed under GNU AGPL Version 3
 # or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # Contact: magpie@pik-potsdam.de
 
-##########################################################
+#########################
 #### check modelstat ####
-##########################################################
+#########################
 # Version 1.0, Florian Humpenoeder
 #
 library(lucode)
@@ -15,7 +15,7 @@ library(magpie4)
 options(error=function()traceback(2))
 
 ############################# BASIC CONFIGURATION #############################
-if(!exists("source_include")) {  
+if(!exists("source_include")) {
   outputdirs <- path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
   #Define arguments that can be read from command line
   readArgs("outputdirs")
@@ -39,7 +39,7 @@ for (i in 1:length(outputdirs)) {
 write.magpie(out,paste("./output/modelstat_",basename(getwd()),".csv",sep=""))
 if (!is.null(missing)) {
   cat("\nList of folders with missing fulldata.gdx\n")
-  print(missing)  
+  print(missing)
 }
 if (all(out==2)) {
   cat("\nGood news! No time steps with modelstat different from 2 found!\n")

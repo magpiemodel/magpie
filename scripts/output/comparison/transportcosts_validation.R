@@ -1,14 +1,13 @@
 # (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 # authors, and contributors see AUTHORS file
-# This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+# This file is part of MAgPIE and licensed under GNU AGPL Version 3
 # or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # Contact: magpie@pik-potsdam.de
 
-##########################################################
+####################################
 #### transport costs validation ####
-##########################################################
-# Version 1.0, Florian Humpen?der
-#
+####################################
+# Version 1.0, Florian Humpenoeder
 
 library(magpie4)
 library(ludata)
@@ -16,7 +15,7 @@ library(luplot)
 library(ggplot2)
 
 ############################# BASIC CONFIGURATION #############################
-if(!exists("source_include")) {  
+if(!exists("source_include")) {
   outputdirs <- "./output/static_irrigation_2012-09-07_12.17.06"
   #Define arguments that can be read from command line
   readArgs("outputdirs")
@@ -31,7 +30,7 @@ MAgPIE2GTAP <- function(gdx,gtap=F) {
   cft.rel[["pdr"]] <- c("rice_pro")
   cft.rel[["wht"]] <- c("tece")
   cft.rel[["gro"]] <- c("maiz","trce","begr","betr")
-  cft.rel[["v_f"]] <- c("others","potato","cassav_sp","puls_pro")              
+  cft.rel[["v_f"]] <- c("others","potato","cassav_sp","puls_pro")
   cft.rel[["osd"]] <- c("soybean","oilpalm","rapeseed","sunflower","groundnut")
   cft.rel[["c_b"]] <- c("sugr_beet","sugr_cane")
   cft.rel[["ocr"]] <- c("foddr")
@@ -73,11 +72,11 @@ for (i in 1:length(outputdirs)) {
     gms$scenarios <- strsplit(grep("(cfg\\$|)gms\\$scenarios +<-",l,value=TRUE),"\"")[[1]][2]
     title_list[[title]] <- title
   }
-  
+
   #gdx file
   gdx<-path(outputdirs[i],"fulldata.gdx")
-  
-  #trasport costs
+
+  #transport costs
   all_costs[[title]] <- MAgPIE2GTAP(gdx,gtap=F)
 }
 
