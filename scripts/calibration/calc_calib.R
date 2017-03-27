@@ -48,7 +48,7 @@ get_calibarea<-function(gdx_file){
   return(list(magpie=magpie,data=data))
 }
 
-# Calculate the correction factor and store it in input/regional
+# Calculate the correction factor and save it
 update_calib<-function(gdx_file,calibrate_pasture=TRUE,damping_factor=0.6, calib_file){
   require(magclass)
   require(magpie4)
@@ -129,7 +129,7 @@ calibrate_magpie <- function(n_maxcalib = 1,
   }
   swclose(swout)
 
-  # delete the calib_magpie_gms in the main folder
+  # delete calib_magpie_gms in the main folder
   unlink(paste0(calib_magpie_name,".*"))
   unlink("fulldata.gdx")
 

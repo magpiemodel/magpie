@@ -1,15 +1,15 @@
 # (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 # authors, and contributors see AUTHORS file
-# This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+# This file is part of MAgPIE and licensed under GNU AGPL Version 3
 # or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # Contact: magpie@pik-potsdam.de
 
 # *********************************************************************
-# ***   This script downloads biophysical input data from archive   ***
+# ***   This script downloads model input data                      ***
 # ***       and applies corresponding changes to gams code          ***
 # *********************************************************************
 
-# New version based on tgz files
+# New version is based on tgz files
 
 library(magclass)
 library(lucode)
@@ -32,10 +32,10 @@ getfiledestinations <- function() {
 #Define function which loads data from repository and unpacks it
 ################################################################################
 load_unpack <- function(files, repository, username=NULL, ssh_private_keyfile=NULL, debug=FALSE) {
-  
+
   if(is.null(username)) username <- getOption("username")
   if(is.null(ssh_private_keyfile)) ssh_private_keyfile <- getOption("ssh_private_keyfile")
-  
+
   cat("Load data from repository\n")
   anydatafound <- FALSE
   md5sum <- list()
@@ -61,7 +61,7 @@ load_unpack <- function(files, repository, username=NULL, ssh_private_keyfile=NU
           names(files)[i] <- repo
           filepath <- paste0(tmpdir,"/",file)
           cat(" success!\n")
-          break        
+          break
         }
       } else {
         if(file.exists(path)) {
@@ -81,7 +81,7 @@ load_unpack <- function(files, repository, username=NULL, ssh_private_keyfile=NU
       md5sum[[files[i]]] <- tools::md5sum(filepath)
       untar(filepath,exdir="input")
     }
-  }  
+  }
   if(!anydatafound) stop("None of the provided input data files could be found! In the case of remote access: Did you provide proper username and ssh_private_keyfile?")
   attr(files,"md5") <- md5sum
   return(files)
@@ -101,7 +101,7 @@ delete_olddata <- function(x) {
   names(x) <- map$destination
   for(i in 1:length(x)) {
     outputpath <- Sys.glob(path(names(x)[i],x[i]))
-    for(file in outputpath) file.remove(file)  
+    for(file in outputpath) file.remove(file)
   }
 }
 ################################################################################
@@ -121,13 +121,13 @@ copy_input <- function(x, sourcepath, low_res, move=FALSE) {
   if(move) {
     cat("\nStart moving input files:\n")
   } else {
-    cat("\nStart copying input files:\n")    
+    cat("\nStart copying input files:\n")
   }
   nmax <- max(nchar(x))
   require(magclass)
   for(i in 1:length(x)) {
     outputpath <- path(names(x)[i],x[i])
-    if(file.exists(outputpath)) file.remove(outputpath)  
+    if(file.exists(outputpath)) file.remove(outputpath)
     inputpath <- paste0(sourcepath,"/",x[i])
     if(!file.exists(inputpath)) {
       inputpath <- Sys.glob(sub("^(.*)\\.[^\\.]*$", paste0(sourcepath,"/\\1_",low_res,".*"), x[i]))
@@ -135,15 +135,15 @@ copy_input <- function(x, sourcepath, low_res, move=FALSE) {
         stop("Problem determining the proper input path for file", x[i], "(more than one possible path found)")
       } else if(length(inputpath)==0) {
         warning("File ", x[i]," seems to be missing!")
-        cat("   ",format(x[i],width=nmax)," ->  FAILED!\n") 
+        cat("   ",format(x[i],width=nmax)," ->  FAILED!\n")
         next
-      }      
+      }
     }
     copy.magpie(inputpath,outputpath)
     if(move & !(i != length(x) &  (x[i] %in% x[i+1:length(x)]))) {
         file.remove(inputpath)
     }
-    cat("   ",format(x[i],width=nmax)," -> ",outputpath, "\n") 
+    cat("   ",format(x[i],width=nmax)," -> ",outputpath, "\n")
   }
   cat("\n")
 }
@@ -159,7 +159,7 @@ update_sets <- function(cpr,map) {
     cells <- c(cells,paste(names(cpr)[i],"_",j+1,"*",names(cpr)[i],"_",j+cpr[i],sep=""))
     j <- j+cpr[i]
   }
-  
+
   .tmp <- function(x,prefix="", suffix1="", suffix2=" /", collapse=",", n=10) {
     content <- NULL
     tmp <- lapply(split(x, ceiling(seq_along(x)/n)),paste,collapse=collapse)
@@ -170,7 +170,7 @@ update_sets <- function(cpr,map) {
     }
     return(content)
   }
-  
+
   subject <- 'SETS'
   modification_warning <- c(
     '*THIS CODE IS CREATED AUTOMATICALLY, DO NOT MODIFY THESE LINES DIRECTLY',
@@ -178,27 +178,27 @@ update_sets <- function(cpr,map) {
     '*CHANGES CAN BE DONE USING THE INPUT DOWNLOADER UNDER SCRIPTS/DOWNLOAD',
     '*THERE YOU CAN ALSO FIND ADDITIONAL INFORMATION')
   content <- c(modification_warning,'','sets','')
-  
+
   content <- c(content,paste('   i all economic regions /',paste(names(cpr),collapse=','),'/',sep=''),'')
-  
+
   # write iso set with nice formatting (10 countries per line)
   tmp <- lapply(split(map$CountryCode, ceiling(seq_along(map$CountryCode)/10)),paste,collapse=",")
   content <- c(content,'   iso list of iso countries /')
   content <- c(content, .tmp(map$CountryCode, suffix1=",", suffix2=" /"))
-  
+
   content <- c(content,  '', paste('   j number of LPJ cells /\n       ',paste(cells,collapse=',\n       '),'/',sep=''),'',
                '   cell(i,j) number of LPJ cells per region i','      /')
   for(i in 1:length(cpr)) {
     content <- c(content,paste('       ',names(cpr)[i],' . ',cells[i],sep=''))
   }
   content <- c(content,'      /','')
-  
+
   content <- c(content,'   i_to_iso(i,iso) mapping regions to iso countries','      /')
   for(i in levels(map$RegionCode)) {
     content <- c(content, .tmp(map$CountryCode[map$RegionCode==i], prefix=paste0(i," . ("), suffix1=")", suffix2=")"))
-    
+
   }
-  content <- c(content,'      /',';') 
+  content <- c(content,'      /',';')
   replace_in_file("core/sets.gms",content,subject)
 }
 ################################################################################
@@ -211,7 +211,7 @@ update_info <- function(datasets, low_res, high_res, cpr,
   require(lucode)
   info <- readLines('input/info.txt')
   subject <- 'VERSION INFO'
-  
+
   useddata <- NULL
   for(i in 1:length(datasets)) {
     if(is.na(names(datasets)[i])) {
@@ -224,8 +224,8 @@ update_info <- function(datasets, low_res, high_res, cpr,
                     paste('Repository:',names(datasets)[i]))
     }
   }
-  
-  
+
+
   content <- c(useddata,
                '',
                paste('Low resolution:',low_res),
@@ -248,7 +248,7 @@ update_info <- function(datasets, low_res, high_res, cpr,
                paste('Last modification (input data):',date()),
                '')
   writeLines(content,'input/info.txt')
-  replace_in_file("main.gms",paste('*',content),subject)  
+  replace_in_file("main.gms",paste('*',content),subject)
 }
 ################################################################################
 
@@ -279,53 +279,53 @@ archive_download <- function(files=c("GLUES2-sresa2-constant_co2-miub_echo_g_ERB
                              username=NULL,
                              ssh_private_keyfile=NULL,
                              debug=FALSE) {
-  
+
   require(lucode)
   require(magclass)
   warnings <- NULL
-  
+
   cdir <- getwd()
   setwd(modelfolder)
   on.exit(setwd(cdir))
-  
+
   ################## GENERAL CLEAN UP ###################################
-  # delete old input files to avoid mixed inputs in the case that data 
+  # delete old input files to avoid mixed inputs in the case that data
   # download fails at some point
   file2destination <- getfiledestinations()
-  
+
   cat("\nDelete old data in input folders ... ")
   # delete files which will be copied/moved later on with copy_input
   delete_olddata(file2destination)
   # delete additional files not treated by copy_input
   delete_olddata("scripts/downloader/inputdelete.csv")
   cat("done!\n\n")
-  
-  ##################### DATA DOWNLOAD #########################################  
+
+  ##################### DATA DOWNLOAD #########################################
   # load data from source and unpack it
   filemap <- load_unpack(files, repositories, username, ssh_private_keyfile, debug)
-  
+
   low_res  <- get_info("input/info.txt","^\\* Output ?resolution:",": ")
   high_res <- get_info("input/info.txt","^\\* Input ?resolution:",": ")
-  
+
   ################## COPY MAGPIE INPUT FILES ###################################
   # In the following input files in MAgPIE format are converted (if required) to
-  # csX files and copied into the corresponding input folders. In this step also the
-  # resolution information in the file name (if existing) is removed to allow a resolution-
-  # indepedent gams-sourcecode.
+  # csX files and copied into the corresponding input folders. In this step also
+  # the resolution information in the file name (if existing) is removed to
+  # allow a resolution-indepedent gams-sourcecode.
 
   copy_input(file2destination, "input", low_res, move)
-  
-    
+
+
   ###################### MANIPULATE GAMS FILES ###################################
-  # In the following the GAMS sourcecode files magpie.gms and sourcecode/sets.gms
-  # are manipulated. Therefore some information about the number of cells per 
+  # In the following the GAMS sourcecode files magpie.gms and core/sets.gms
+  # are manipulated. Therefore some information about the number of cells per
   # region is required (CPR). This information is gained by extracting it from
-  # the avl_land.cs3 input file (any other cellular file could be used as well). 
-  # This information is then transfered to update_info, which is 
-  # updating the general information in magpie.gms and input/info.txt 
-  # and update_sets, which is updating the resolution- and region-depending 
-  # sets in sourcecode/sets.gms
-  
+  # the avl_land.cs3 input file (any other cellular file could be used as well).
+  # This information is then transfered to update_info, which is
+  # updating the general information in magpie.gms and input/info.txt
+  # and update_sets, which is updating the resolution- and region-depending
+  # sets in core/sets.gms
+
   tmp <- read.magpie("modules/10_land/input/avl_land.cs3")
   cpr <- getCPR(tmp)
   # read spatial_header, map, reg_revision and regionscode
