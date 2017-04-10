@@ -1,6 +1,6 @@
 # (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 # authors, and contributors see AUTHORS file
-# This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+# This file is part of MAgPIE and licensed under GNU AGPL Version 3
 # or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # Contact: magpie@pik-potsdam.de
 
@@ -13,14 +13,13 @@ options("magclass.verbosity" = 1)
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  
-  gdx    <-'fulldata.gdx' 
-  output_folder        <- 'output/SSP5_Baseline' 
+
+  gdx    <-'fulldata.gdx'
+  output_folder        <- 'output/SSP5_Baseline'
   output_folder        <- 'output/ssp5_sugar_cons__2016-01-28_18.39.43'
   gdx<-path(output_folder,"fulldata.gdx")
-  #setwd("/Users/flo/Documents/PIK/MAgPIE/6383")
-  title <- "TEST" 
-  
+  title <- "TEST"
+
   #Define arguments that can be read from command line
   readArgs("gdx_file","output_folder","title")
 } else{
@@ -33,7 +32,7 @@ print(paste0("Starting SCP report for ",title))
 
 
 
-  
+
 
 library(magpiesets)
 
@@ -102,12 +101,6 @@ products[,,"livst_all"]<-tmp
 
 fbask<-out/products
 fbask2<-round(fbask,2)[,c("y2005","y2050")]
-
-#write.magpie(collapseNames(fbask2[,,"nr"]),file_name = "fbask_nr.csv",file_type = "cs3")
-#fbask3<-round(fbask,2)[,c("y2005","y2050")]
-#write.magpie(collapseNames(fbask3[,,"dm"]),file_name = "fbask_dm.csv",file_type = "cs3")
-
-#write.report(rep_magpie,file=path("output/scp_jun16.csv"),scenario=title,model="MAgPIE",append=TRUE)
 
 #write report
 write.report(fbask2,file=path("output/scp_feed_jun16.csv"),scenario=title,model="MAgPIE",append=TRUE)

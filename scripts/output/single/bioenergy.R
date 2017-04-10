@@ -1,18 +1,18 @@
 # (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 # authors, and contributors see AUTHORS file
-# This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+# This file is part of MAgPIE and licensed under GNU AGPL Version 3
 # or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # Contact: magpie@pik-potsdam.de
 
-##########################################################
+###########################
 #### bioenergy outputs ####
-##########################################################
+###########################
 # Version 2.07, Florian Humpenoeder
 #
 # 2.01, adjusted libraries
 # 2.02, added net trade
 # 2.03, reactivated water related issues
-# 2.04, reactivated rainfed and irrigated yields 
+# 2.04, reactivated rainfed and irrigated yields
 # 2.05, changed irrigated area share to total irrigated croparea / LPJ yields for y1995
 # 2.06, added global total cost listing
 # 2.07, modified so that it also works without bioenergy demand
@@ -27,7 +27,7 @@ library(magpie4)
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  
+
   outputdir        <- 'output/'     # title of the run (with date)
   gdx<-path(outputdir,"fulldata.gdx")
   title <- "default"
@@ -40,9 +40,6 @@ if(!exists("source_include")) {
 
 sw<-swopen(paste(outputdir,"/",title,"_Bioenergy_outputs.pdf",sep=""))
 swR(sw,options,magclass.verbosity=1)
-#muss vermutlich in den header bzw. template, damit es funktioniert
-#swlatex(sw,"\\hypersetup{pdfpagelayout=SinglePage}")
-#swlatex(sw,"\\hypersetup{pdfpagemode=UseNone}")
 years_all <- getYears(modelstat(gdx))
 
 swlatex(sw,"\\huge")
@@ -56,7 +53,6 @@ swlatex(sw,"\\section{Inputs}")
 
 
 # Food Demand
-#swlatex(sw,"\\newpage")
 swlatex(sw,paste("\\subsection{Food Demand}"))
 food <- demand(gdx,product_aggr = TRUE, type="Food", level="regglo")
 dimnames(food)[[3]]<-paste("Food Demand in mio. t DM")
@@ -174,7 +170,7 @@ if(!is.null(pre)) {
   swfigure(sw,alloc_plot,bioen_pos,title="Positive land-use change due to 2nd gen. bioenergy prod",fig.orientation="landscape")
   bioen_neg <- main-pre
   bioen_neg[bioen_neg > 0] <- 0
-  swfigure(sw,alloc_plot,bioen_neg,title="Negative land-use change due to 2nd gen. bioenergy prod",fig.orientation="landscape")  
+  swfigure(sw,alloc_plot,bioen_neg,title="Negative land-use change due to 2nd gen. bioenergy prod",fig.orientation="landscape")
 } else {
   swlatex(sw,"\\newpage")
   swlatex(sw,"\\subsection{Land-use pattern}")
@@ -189,7 +185,7 @@ swlatex(sw,"\\subsection{Costs - regional}")
 costs <- readGDX(gdx,"ov_cost_reg", format="first_found", select=list(type="level"))/1000
 costs <- mbind(costs,dimSums(costs,dim=1))
 swoutput(sw,costs[,years_all,],"bill. US Dollar",geom="bar",stack=T,color=NULL,facet_x=NULL,stat="sum",scenario=title,plot_level="reg")
-#magpie2ggplot2(costs,stack=T,color=NULL,facet_x=NULL,stat="sum")
+
 #other crops
 pre_costs <- readGDX(gdx,"o90_cost_reg", format="first_found", react="silent")
 if(!is.null(pre_costs)) {
@@ -198,14 +194,13 @@ if(!is.null(pre_costs)) {
   costs <- (readGDX(gdx,"ov_cost_reg", format="first_found", select=list(type="level")) - readGDX(gdx,"o90_cost_reg",  format="first_found"))/1000
   costs <- mbind(costs,dimSums(costs,dim=1))
   swoutput(sw,costs[,years_all,],"bill. US Dollar",geom="bar",stack=T,color=NULL,facet_x=NULL,stat="sum",scenario=title,plot_level="reg")
-  
+
   swlatex(sw,"\\newpage")
   swlatex(sw,"\\subsubsection{Costs|Other crops}")
   costs <- readGDX(gdx,"o90_cost_reg", format="first_found")/1000
   costs <- mbind(costs,dimSums(costs,dim=1))
   swoutput(sw,costs[,years_all,],"bill. US Dollar",geom="bar",stack=T,color=NULL,facet_x=NULL,stat="sum",scenario=title,plot_level="reg")
-  #  swtable(sw,round(bio_costs[,years_all,],2),table.placement="H",caption.placement="top",caption=dimnames(bio_costs)[[3]],vert.lines=1,align="r",hor.lines=1,digits=0,transpose=TRUE)
-}  
+}
 
 
 
@@ -215,7 +210,6 @@ swlatex(sw,"\\subsection{Cost listing - global}")
 
 all <- costs(gdx, sum=FALSE,level="glo")
 all <- round(all)/1000
-#magpie2ggplot2(all,stack=T,fill="Data1",color=NULL,stat="sum",labs=c("","Cost Type"))
 swoutput(sw,all[,years_all,],"bill. US Dollar",table=F,geom="bar",stack=T,fill="Data1",color=NULL,stat="sum",labs=c("","Cost Type"),scenario=title)
 swtable(sw,round(all[,years_all,],2),table.placement="H",caption.placement="top",caption="Cost listing (bill. US Dollar)",
         vert.lines=1,align="r",hor.lines=1,digits=0,transpose=TRUE)
@@ -260,15 +254,15 @@ if(!all(croparea(gdx, products=c("begr","betr")) == 0)){
     swlatex(sw,"\\subsubsection{rainfed and irrigated}")
     yld <- yields(gdx, products=c("begr","betr"), level="regglo", product_aggr=FALSE)
     swfigure(sw,"scratch_plot",yld["GLO",,,invert=TRUE][,years_all,],ylab="Bioenergy yields t/ha - rf and ir",sw_option="width=10")
-    swlatex(sw,"\\newpage")  
+    swlatex(sw,"\\newpage")
     for (i in dimnames(yld)[[3]]) {
       swtable(sw,round(yld[,years_all,i],2),table.placement="H",caption.placement="top",caption=paste(i," yields t/ha - rf and ir"),vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
     }
-    swlatex(sw,"\\newpage")  
+    swlatex(sw,"\\newpage")
     swlatex(sw,"\\subsubsection{rainfed only}")
     yld <- yields(gdx, products=c("begr","betr"), level="regglo", product_aggr=FALSE, water_aggr=FALSE)[,,"rainfed",drop=TRUE]
     swfigure(sw,"scratch_plot",yld["GLO",,,invert=TRUE][,years_all,],ylab="Bioenergy yields t/ha - rf",sw_option="width=10")
- 
+
     swlatex(sw,"\\newpage")
     for (i in dimnames(yld)[[3]]) {
       swtable(sw,round(yld[,years_all,i],2),table.placement="H",caption.placement="top",caption=paste(i," yields t/ha - rf"),vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
@@ -286,7 +280,7 @@ if(!all(croparea(gdx, products=c("begr","betr")) == 0)){
     swlatex(sw,"\\subsubsection{rainfed only}")
     yld <- yields(gdx, products=c("begr","betr"), level="regglo", product_aggr=FALSE, water_aggr=FALSE)[,,"rainfed",drop=TRUE]
     swfigure(sw,"scratch_plot",yld["GLO",,,invert=TRUE][,years_all,],ylab="Bioenergy yields t/ha - rf",sw_option="width=10")
-  
+
     swlatex(sw,"\\newpage")
     for (i in dimnames(yld)[[3]]) {
       swtable(sw,round(yld[,years_all,i],2),table.placement="H",caption.placement="top",caption=paste(i," yields t/ha - rf"),vert.lines=1,align="r",hor.lines=1,transpose=TRUE)
@@ -344,11 +338,9 @@ if (cfg$gms$presolve == "on") {
   bioen_reg <- setNames(main_reg - pre_reg,"Bioenergy")
   all_reg <- mbind(pre_reg,bioen_reg)
   all <- mbind(all_reg,dimSums(all_reg,dim=1))
-  #  magpie2ggplot2(all_reg,stack=T,facet_x=NULL,color=NULL,stat="sum",alpha="Data1",labs=c("","Region","","LUC emissions"))
   swoutput(sw,all,unit="Mt C",geom="bar",stack=T,facet_x=NULL,color=NULL,stat="sum",alpha="Data1",labs=c("","Region","","LUC emissions"),plot_level="reg",digits=2)
 } else {
   all <- emisCO2(gdx,level="regglo")[,1995,,invert=TRUE]
-  #  magpie2ggplot2(main_reg,stack=T,facet_x=NULL,color=NULL,stat="sum")
   swoutput(sw,all,unit="Mt C",geom="bar",stack=T,facet_x=NULL,color=NULL,stat="sum",plot_level="reg",digits=2)
 }
 
@@ -376,8 +368,8 @@ swtable(sw,round(tc_all[,2:length(years_all),],3),table.placement="H",caption.pl
 swlatex(sw,"\\newpage")
 swlatex(sw,"\\subsection{Net trade food, feedstock and livestock (kfo + foddr + kli)}")
 swlatex(sw,"Net trade = production - demand\\newline Net trade > 0: Export\\newline Net trade < 0: Import")
-kfo_foddr_kli<-c("tece", "trce", "maiz", "rice_pro", "others", "potato", "cassav_sp", 
-                 "puls_pro", "soybean", "rapeseed", "groundnut", "sunflower", 
+kfo_foddr_kli<-c("tece", "trce", "maiz", "rice_pro", "others", "potato", "cassav_sp",
+                 "puls_pro", "soybean", "rapeseed", "groundnut", "sunflower",
                  "oilpalm", "sugr_beet", "sugr_cane", "foddr", "livst_rum", "livst_pig", "livst_chick", "livst_egg", "livst_milk")
 demand <- readGDX(gdx,"ov_supply", format="first_found")[,,kfo_foddr_kli][,,"level"]
 demand <- dimSums(collapseNames(demand),dim=3)

@@ -1,14 +1,13 @@
 # (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 # authors, and contributors see AUTHORS file
-# This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+# This file is part of MAgPIE and licensed under GNU AGPL Version 3
 # or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # Contact: magpie@pik-potsdam.de
 
-##########################################################
+##################################################
 #### MAgPIE scenario comparison water results ####
-##########################################################
+##################################################
 # Version 1.0, Markus Bonsch
-#
 
 library(ludata)
 library(luplot)
@@ -18,7 +17,7 @@ library(lucode)
 library(validation)
 
 ############################# BASIC CONFIGURATION #############################
-if(!exists("source_include")) {  
+if(!exists("source_include")) {
 outputdirs <- c("output/SSP1_450forc_2013-08-26_11.34.57/","output/SSP1_550forc_2013-08-26_11.35.59/")
   #Define arguments that can be read from command line
   readArgs("outputdirs")
@@ -45,11 +44,10 @@ for (i in 1:length(outputdirs)) {
     gms$scenarios <- strsplit(grep("(cfg\\$|)gms\\$scenarios +<-",l,value=TRUE),"\"")[[1]][2]
     title_list[[title]] <- title
   }
-  gdx[[title]] <- path(outputdirs[i],"fulldata.gdx")  
+  gdx[[title]] <- path(outputdirs[i],"fulldata.gdx")
 }
 
 print("Starting output generation")
-#sw<-swopen("./output/MAgPIE_comparison.pdf")
 sw<-swopen(paste("./output/water_results_",basename(getwd()),".pdf",sep=""))
 swlatex(sw,"\\huge")
 swlatex(sw,"\\textbf{MAgPIE scenario comparison water results}\\newline")
@@ -76,8 +74,6 @@ swlatex(sw,"\\newpage")
 swlatex(sw,"\\section{TC}")
 swfigure(sw,print,validationPlot(func=tau,level="glo",gdx=gdx,index=TRUE),fig.placement="H",fig.orientation="landscape")
 swfigure(sw,print,validationPlot(func=tau,level="reg",gdx=gdx,index=TRUE),fig.placement="H",fig.orientation="landscape")
-#magpie2ggplot2(reg_all,facet_x="Scenario",fill="Region",color=NULL,geom="area",stack=T,alpha="Data1")
-
 
 swlatex(sw,"\\newpage")
 swlatex(sw,"\\section{Croparea}")
@@ -85,25 +81,20 @@ swfigure(sw,print,validationPlot(func=land,types="crop",level="glo",gdx=gdx),fig
 swtable(sw,read_all(gdx,land,types="crop",level="glo",as.list=FALSE),caption="Global cropland mio ha")
 swfigure(sw,print,validationPlot(func=land,types="crop",level="reg",gdx=gdx),fig.placement="H",fig.orientation="landscape")
 swtable(sw,read_all(gdx,land,types="crop",level="reg",as.list=FALSE)[,1,],caption="Regional cropland 1995mio ha")
-#magpie2ggplot2(reg_all,facet_x="Scenario",fill="Region",color=NULL,geom="area",stack=T,alpha="Data1")
 
 swlatex(sw,"\\newpage")
 swlatex(sw,"\\section{Agricultural Water Withdrawals}")
 swfigure(sw,print,validationPlot(func=water_usage,level="glo",gdx=gdx,users="agriculture"),fig.placement="H",fig.orientation="landscape")
 swfigure(sw,print,validationPlot(func=water_usage,level="reg",gdx=gdx,users="agriculture"),fig.placement="H",fig.orientation="landscape")
-#magpie2ggplot2(reg_all,facet_x="Scenario",fill="Region",color=NULL,geom="area",stack=T,alpha="Data1")
 
 swlatex(sw,"\\newpage")
 swlatex(sw,"\\section{Irrigated area}")
 swfigure(sw,print,validationPlot(func=croparea,level="glo",gdx=gdx,water="ir",crop_aggr=TRUE),fig.placement="H",fig.orientation="landscape")
 swfigure(sw,print,validationPlot(func=croparea,level="reg",gdx=gdx,water="ir",crop_aggr=TRUE),fig.placement="H",fig.orientation="landscape")
-#magpie2ggplot2(reg_all,facet_x="Scenario",fill="Region",color=NULL,geom="area",stack=T,alpha="Data1")
 
 swlatex(sw,"\\newpage")
 swlatex(sw,"\\section{Irrigated production}")
 swfigure(sw,print,validationPlot(func=production,level="glo",gdx=gdx,water="ir",crop_aggr=TRUE),fig.placement="H",fig.orientation="landscape",tex_caption="Irrigated Production [mio tDM]")
 swfigure(sw,print,validationPlot(func=production,level="reg",gdx=gdx,water="ir",crop_aggr=TRUE),fig.placement="H",fig.orientation="landscape",tex_caption="Irrigated Production [mio tDM]")
-#magpie2ggplot2(reg_all,facet_x="Scenario",fill="Region",color=NULL,geom="area",stack=T,alpha="Data1")
 
 swclose(sw)
-

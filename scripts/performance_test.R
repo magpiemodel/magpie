@@ -1,6 +1,6 @@
 # (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 # authors, and contributors see AUTHORS file
-# This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+# This file is part of MAgPIE and licensed under GNU AGPL Version 3
 # or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # Contact: magpie@pik-potsdam.de
 
@@ -9,7 +9,7 @@ source("scripts/start_functions.R")
 
 performance_start <- function(cfg="default.cfg",modulepath="modules/",id="performance",sequential=NA) {
   require(lucode)
-  
+
   if(!is.list(cfg)) {
     if(is.character(cfg)) {
       source(path("config",cfg),local=TRUE)
@@ -18,24 +18,23 @@ performance_start <- function(cfg="default.cfg",modulepath="modules/",id="perfor
       stop("Wrong input format: cfg is neither a list nor a character!")
     }
   }
-  
+
   cfg$results_folder <- "output/:title:"
 
   cfg$sequential <- sequential
   cfg$logoption <- 2
-  
-  git <- try(system("git rev-parse HEAD",intern=TRUE), silent=TRUE) 
+
+  git <- try(system("git rev-parse HEAD",intern=TRUE), silent=TRUE)
   save(git,file="git.rda")
   cfg$files2export$start <- c(cfg$files2export$start,"git.rda")
- 
+
   #start default run
   cfg$title <- paste(id,"default",sep="__")
   cat(cfg$title,"\n")
   start_run(cfg)
-  
+
   m <- getModules(modulepath)
-  for(i in 1:dim(m)[1]) {
-  #for(i in c(1,3,4)) {    
+  for(i in 1:dim(m)[1]) { 
     default <- cfg$gms[[m[i,"name"]]]
     r <- strsplit(m[i,"realizations"],",")[[1]]
     r <- r[r!=default]  #remove default case
@@ -45,8 +44,8 @@ performance_start <- function(cfg="default.cfg",modulepath="modules/",id="perfor
       cat(cfg$title,"\n")
       start_run(cfg, codeCheck=FALSE)
     }
-    cfg$gms[[m[i,"name"]]] <- default  
-  } 
+    cfg$gms[[m[i,"name"]]] <- default
+  }
 }
 
 performance_collect <- function(id="performance",results_folder="output/",plot=TRUE) {
@@ -61,7 +60,7 @@ performance_collect <- function(id="performance",results_folder="output/",plot=T
   if(length(default)==0) stop("No default folder found which fits to the given id (",id,")")
   folders <- folders[-tmp]
   if(length(folders)==0) stop("No folders found which fit to the given id (",id,")")
- 
+
   .modelstats <- function(f,colMeans=TRUE) {
     logfile <- path(f,"full.log")
     if(file.exists(logfile)) {
@@ -70,13 +69,13 @@ performance_collect <- function(id="performance",results_folder="output/",plot=T
       p2 <- "---   ([^ ]*) nl-code  ([^ ]*) nl-non-zeroes"
       l1 <- grep(p1,tmp,value=TRUE)
       l2 <- grep(p2,tmp,value=TRUE)
-    
+
       if(length(l1)==0 & length(l2)==0) return(NA)
-    
+
       rows <- max(as.integer(gsub(",","",gsub(p1,"\\1",l1))))
       columns <- max(as.integer(gsub(",","",gsub(p1,"\\2",l1))))
       nonzeroes <- max(as.integer(gsub(",","",gsub(p1,"\\3",l1))))
-    
+
       nlcode <- max(as.integer(gsub(",","",gsub(p2,"\\1",l2))))
       nlnonzeroes <- max(as.integer(gsub(",","",gsub(p2,"\\2",l2))))
     } else {
@@ -87,26 +86,26 @@ performance_collect <- function(id="performance",results_folder="output/",plot=T
     if(colMeans) out <- colMeans(out)
     return(out)
   }
-  
+
   .infescheck <- function(gdx) {
     if(!file.exists(gdx)) return(3)
     tmp <- modelstat(gdx)
     if(any(tmp!=2 & tmp!=7)) {
       x <- 2
     } else if(any(tmp!=2 & tmp==7)) {
-      x <- 1      
+      x <- 1
     } else {
-      x <- 0            
+      x <- 0
     }
     return(x)
   }
-  
+
   .gettime <- function(rdata) {
     load(rdata)
-    tmp <- as.double(validation$technical$time$magpie.gms,unit="mins")   
+    tmp <- as.double(validation$technical$time$magpie.gms,unit="mins")
     return(ifelse(length(tmp)==0,NA,tmp))
   }
-  
+
   results <- NULL
   infes <- list()
   for(f in folders){
@@ -121,8 +120,8 @@ performance_collect <- function(id="performance",results_folder="output/",plot=T
     ms <- .modelstats(default,colMeans=TRUE)
     tmp <- data.frame(module=n,realization=cfg$gms[[n]],default=TRUE,runtime=.gettime(path(default,default,ftype="RData")),infes=.infescheck(path(default,"fulldata.gdx")),
                       rows=ms["rows"],columns=ms["columns"],nonzeroes=ms["nonzeroes"],nlcode=ms["nlcode"],nlnonzeroes=ms["nlnonzeroes"])
-    results <- rbind(results,tmp)    
-  }  
+    results <- rbind(results,tmp)
+  }
   results$info <- paste(results$module,results$realization,sep=": ")
   results$relative_runtime <- results$runtime/results[results$default,"runtime"][1] - 1
   results$more_info[results$default] <- "default"
@@ -137,12 +136,12 @@ performance_collect <- function(id="performance",results_folder="output/",plot=T
   results$relative_nlnonzeroes <- results$nlnonzeroes/results[results$default,"nlnonzeroes"][1] - 1
   attr(results,"default_cfg") <- cfg
   attr(results,"id") <- id
-  
+
   if(file.exists(path(default,"git.rda"))) {
     load(path(default,"git.rda"))
     attr(results,"git") <- git
   }
-  
+
   setwd(maindir)
   if(plot) performance_plot(results)
   return(results)
@@ -152,32 +151,32 @@ performance_collect <- function(id="performance",results_folder="output/",plot=T
 performance_plot <- function(x) {
   require(ggplot2)
   require(lusweave)
-  
+
   .create_plot <- function(x,weight="relative_runtime",label="runtime/default_runtime2") {
     p <- ggplot(x, aes_string(x="info",weight=weight,fill="module")) + geom_bar(position="dodge")+coord_flip()+labs(y=label,x="",size=2)
     p <- p +  geom_text(aes(y=0,label=more_info), hjust=0, size = 3) + theme(legend.position="none")
     print(p)
   }
-  
+
   .tmptable <- function(sw,tmp) {
     nrow <- ceiling(length(tmp)/2)
     if(nrow*2 > length(tmp)) tmp <- c(tmp,"")
     swtable(sw,matrix(tmp,nrow),align="l",include.colnames=FALSE,include.rownames=FALSE,vert.lines=0,hor.lines=0)
     return(sw)
   }
-  
+
   sw_option <- "width=11,height=12"
-  
+
   sw <- swopen(paste("performance_check_",attr(x,"id"),".pdf",sep=""))
   swlatex(sw,c("\\title{Performance test results}","\\author{Model Operations Group}","\\maketitle","\\tableofcontents"))
 
   swlatex(sw,"\\newpage")
-  
+
   swlatex(sw,"\\section{General information}")
   swlatex(sw,"\\subsection{Settings default run}")
-  
+
   sw <- .tmptable(sw,x$info[x$default])
-  
+
   swlatex(sw,"\\subsection{Run information default run}")
   tmp <- x[x$default,][1,c("runtime","rows","columns","nonzeroes","nlcode","nlnonzeroes")]
   tmp2 <- cbind(format(round(as.vector(as.matrix(tmp)),0),nsmall=0),names(tmp))
@@ -189,15 +188,15 @@ performance_plot <- function(x) {
                             " (max of all optimizations)",
                             " (max of all optimizations)",
                             " (max of all optimizations)")
-  
+
   swtable(sw,tmp2,align="r")
-  
-  
+
+
   swlatex(sw,"\\newpage")
-  
+
   #remove default run from results
   x <- x[!x$default,]
-  
+
   tmp <- x$info[x$more_info =="compilation error"]
   if(length(tmp)>0){
     swlatex(sw,"\\subsection{Compilation errors}")
@@ -211,7 +210,7 @@ performance_plot <- function(x) {
     swlatex(sw,"\\subsection{Infeasible solutions}")
     sw <- .tmptable(sw,tmp)
   }
-  
+
   .tmp <- function(sw,x) {
     swlatex(sw,"\\subsection{relative runtime}")
     swfigure(sw,.create_plot,x,weight="relative_runtime",label="runtime relative to default run",sw_option=sw_option)
@@ -227,17 +226,17 @@ performance_plot <- function(x) {
     swfigure(sw,.create_plot,x,weight="relative_nlnonzeroes",label="No. of NL nonzeroes relative to default",sw_option=sw_option)
     return(sw)
   }
-  
+
   swlatex(sw,"\\section{Results sorted by module}")
   sw <- .tmp(sw,x)
-  
+
   x <- x[order(x$runtime,decreasing=TRUE),]
   x$info <- factor(x$info,x$info)
-  
+
   swlatex(sw,"\\section{Results sorted by runtime}")
   sw <- .tmp(sw,x)
 
-  if(!is.null(attr(x,"git"))){ 
+  if(!is.null(attr(x,"git"))){
     swlatex(sw,"\\section{GIT info}")
     sw <- .tmptable(sw,c(attr(x,"git"),rep("",length(attr(x,"git")))))
   }
@@ -250,9 +249,8 @@ performance_plot <- function(x) {
     tmp <- tmp[-(1:n)]
   }
   sw <- .tmptable(sw,c(names(tmp),tmp))
- 
+
 
 
   swclose(sw)
 }
-

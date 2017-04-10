@@ -1,13 +1,13 @@
 # (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 # authors, and contributors see AUTHORS file
-# This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+# This file is part of MAgPIE and licensed under GNU AGPL Version 3
 # or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # Contact: magpie@pik-potsdam.de
 
 options(error=function()traceback(2))
-#########################################################################
+######################################
 #### LUC4C output script #############
-#########################################################################
+######################################
 #Author: FH based on interpolation output script
 
 library(lucode)
@@ -30,13 +30,12 @@ if(!file.exists(path(outputdir,"cell.land_0.5.mz"))) stop(paste("cell.land_0.5.m
 gdx<-path(outputdir,"fulldata.gdx")
 cfg<-path(outputdir,"config.Rdata")
 
-#t_lim <- c(2005,2100)
 years <- getYears(modelstat(gdx),as.integer = TRUE)
 if (exists("t_lim")) years <- years[c(head(which(years>=t_lim[1]),n=1):tail(which(years<=t_lim[2]),n=1))]
 
 sourceDir <- function(path, trace = TRUE, ...) {
   for (nm in list.files(path, pattern = "\\.[RrSsQq]$")) {
-    if(trace) cat(nm,":")           
+    if(trace) cat(nm,":")
     source(file.path(path, nm), ...)
     if(trace) cat("\n")
   }
@@ -62,7 +61,7 @@ for (y in years) {
   tmp[is.na(tmp)|is.infinite(tmp)] <- 0
   getNames(tmp) <- "organic and inorganic N fertilizer (kg-per-ha-of-gridcell-area)"
   N_use_ha_hr <- mbind2(N_use_ha_hr,tmp)
-} 
+}
 
 #tN = 10^6 gN, ha = 10^4 m^2 -> tN/ha * 100 = gN/m^2
 #kg/ha * 0.1 = gN/m^2
@@ -80,7 +79,7 @@ for (y in years) {
   tmp[is.na(tmp)|is.infinite(tmp)] <- 0
   getNames(tmp) <- "organic and inorganic N fertilizer (kg-per-ha-of-cropland-area)"
   N_use_ha_hr <- mbind2(N_use_ha_hr,tmp)
-} 
+}
 
 #tN = 10^6 gN, ha = 10^4 m^2 -> tN/ha * 100 = gN/m^2
 #kg/ha * 0.1 = gN/m^2
@@ -103,7 +102,7 @@ for (y in years) {
   tmp[is.na(tmp)|is.infinite(tmp)] <- 0
   getNames(tmp) <- "organic and inorganic N fertilizer (kg-per-ha-of-gridcell-area)"
   N_losses_ha_hr <- mbind2(N_losses_ha_hr,tmp)
-} 
+}
 
 #tN = 10^6 gN, ha = 10^4 m^2 -> tN/ha * 100 = gN/m^2
 #kg/ha * 0.1 = gN/m^2
@@ -121,7 +120,7 @@ for (y in years) {
   tmp[is.na(tmp)|is.infinite(tmp)] <- 0
   getNames(tmp) <- "organic and inorganic N fertilizer (kg-per-ha-of-cropland-area)"
   N_losses_ha_hr <- mbind2(N_losses_ha_hr,tmp)
-} 
+}
 
 #tN = 10^6 gN, ha = 10^4 m^2 -> tN/ha * 100 = gN/m^2
 #kg/ha * 0.1 = gN/m^2

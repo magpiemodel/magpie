@@ -1,21 +1,20 @@
 # (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 # authors, and contributors see AUTHORS file
-# This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+# This file is part of MAgPIE and licensed under GNU AGPL Version 3
 # or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # Contact: magpie@pik-potsdam.de
 
 
-##########################################################
+###############################################
 #### Calculates some water related outputs ####
-##########################################################
+###############################################
 # Version 1.0, Markus bonsch
-#########################################################################################
-library(luplot)
+################################################################################
 library(gdx)
 library(magpie4)
 library(validation)
 library(lusweave)
-############################# BASIC CONFIGURATION #############################
+############################# BASIC CONFIGURATION ##############################
 additional_input<-"/iplex/01/landuse/data/input/other/"
 lr_input_folder        <- "modules/10_land/input"
 AEI_lr_file<-"avl_irrig.cs2"
@@ -97,7 +96,6 @@ swfigure(swout,grid.draw,validationPlot(func=water_usage,gdx=gdx,users="agricult
 # Regional water availability
 swlatex(swout,"\\section{Available water}")
 wat_avail<-round(water_avail(gdx,sum=FALSE),digits=6)
-#dimnames(wat_avail)[[3]]<-"available water"
 watavail_glo<-round(colSums(wat_avail),digits=6)
 dimnames(watavail_glo)[[1]]<-"GLO.11"
 wat_avail<-mbind(wat_avail,watavail_glo)
@@ -132,7 +130,7 @@ if(file.exists(hr_input_folder)){
     NAEI_ini_hr<-as.magpie(rowSums(read.magpie(path(lr_input_folder,land_hr_file)))-AEI_ini_hr); dimnames(NAEI_ini_hr)[[2]]<-prev_year; dimnames(NAEI_ini_hr)[[3]]<-"NAEI"
     AEI_ini_hr<-mbind(AEI_ini_hr,NAEI_ini_hr)
     AEI_hr<-interpolate(x=AEI_out,x_ini_lr=AEI_ini_lr,x_ini_hr=AEI_ini_hr,spam=path(outputdir,sum_spam_file))
-    
+
     swlatex(swout,"\\section{Cellular area equipped for irrigation}")
     if(any(is.infinite(range(AEI_hr[,"y1995",1])))|any(is.na(range(AEI_hr[,"y1995",1])))){
       swlatex(swout,"No plot created because of infinite limits")
@@ -179,8 +177,6 @@ if(dim(wat_price)[2]>=6){
   }
 }
 
-
-#WSI
 num<-water_usage(gdx,level="cell",sum=TRUE,digits=10)
 num<-reshape_file(num,spam=path(outputdir,sum_spam_file))
 den<-water_avail(gdx,level="cell",sum=TRUE,digits=10)
@@ -194,5 +190,3 @@ swfigure(swout,plotmap_discrete,out[,"y1995",1],legend_breaks=c(0,0.1,0.2,0.4,0.
 if(dim(out)[2]>=6)swfigure(swout,plotmap_discrete,out[,6,1],legend_breaks=c(0,0.1,0.2,0.4,0.8,1),colours=c(colorRampPalette(colors=c("blue","orange"))(5),"red"),legendname="index",title=paste("Water withdrawal over availability in ",getYears(out)[6],sep=""),fig.placement="H",sw_option="width=11.69",fig.width=0.8)
 
 swclose(swout,clean_output=TRUE)
-
-

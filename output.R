@@ -1,6 +1,6 @@
 # (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 # authors, and contributors see AUTHORS file
-# This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+# This file is part of MAgPIE and licensed under GNU AGPL Version 3
 # or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # Contact: magpie@pik-potsdam.de
 
@@ -8,14 +8,13 @@
 #### MAgPIE output generation ####
 ##########################################################
 
-#load landuse library
 library(lucode)
 
 runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
 
   get_line <- function(){
-    # gets characters (line) from the terminal of from a connection
-    # and stores it in the return object
+    # gets characters (line) from the terminal or from a connection
+    # and returns it
     if(interactive()){
       s <- readline()
     } else {
@@ -25,7 +24,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
     }
     return(s);
   }
-  
+
   choose_folder <- function(folder,title="Please choose a folder") {
     tmp <- base::list.dirs(folder,recursive=TRUE)
     dirs <- NULL
@@ -50,7 +49,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
       cat("\nInsert the search pattern or the regular expression: ")
       pattern <- get_line()
       id <- grep(pattern=pattern, dirs[-1])
-      # lists all chosen directories and ask for the confirmation of the made choice
+      # lists all directories matching the pattern and ask for confirmation
       cat("\n\nYou have chosen the following directories:\n")
       cat(paste(1:length(id), dirs[id+1], sep=": "), sep="\n")
       cat("\nAre you sure these are the right directories?(y/n): ")
@@ -60,7 +59,6 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
       } else {
         choose_folder(folder,title)
       }
-      # 
     } else if(any(dirs[identifier] == "all")){
       identifier <- 2:length(dirs)
       return(paste0(folder,"/",dirs[identifier]))
@@ -68,7 +66,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
       return(paste0(folder,"/",dirs[identifier]))
     }
   }
-  
+
   choose_module <- function(Rfolder,title="Please choose an outputmodule") {
     module <- gsub("\\.R$","",grep("\\.R$",list.files(Rfolder), value=TRUE))
     cat("\n\n",title,":\n\n")
@@ -79,7 +77,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
     if (any(!(identifier %in% 1:length(module)))) stop("This choice (",identifier,") is not possible. Please type in a number between 1 and ",length(module))
     return(module[identifier])
   }
-  
+
   choose_mode <- function(title="Please choose the output mode") {
     modes <- c("Output for single run ","Comparison across runs")
     cat("\n\n",title,":\n\n")
@@ -93,9 +91,9 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
       return(TRUE)
     } else {
       stop("This mode is invalid. Please choose a valid mode")
-    }  
+    }
   }
-  
+
   choose_submit <- function(title="Please choose run submission type") {
     slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
     modes <- c("Direct execution", "Background execution", "SLURM submission", "Debug mode")
@@ -120,9 +118,9 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
     if(is.null(comp)) stop("This type is invalid. Please choose a valid type")
     return(comp)
   }
-  
+
   runsubmit <- function(output, outputdirs, comp, script_path) {
-    # Execute output scripts over all choosen folders
+    # run output scripts over all choosen folders
     for(rout in output){
       name   <- paste0(rout,".R")
       script <- paste0(script_path,name)
@@ -135,7 +133,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
       if(submit=="direct") {
         tmp.env <- new.env()
         tmp.error <- try(sys.source(script,envir=tmp.env))
-        if(!is.null(tmp.error)) warning("Script ",name," was stopped by an error and not executed properly!")    
+        if(!is.null(tmp.error)) warning("Script ",name," was stopped by an error and not executed properly!")
         rm(tmp.env)
       } else if(submit=="background") {
         system(paste0("Rscript output.R outputdirs=",paste(outputdirs,collapse=",")," comp=",comp,"  output=",rout," submit=direct &> ",format(Sys.time(), "blog_out-%Y-%H-%M-%S-%OS3.log")," &"))
@@ -150,19 +148,19 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
       }
     }
   }
-  
-  
+
+
   if(is.null(comp))       comp       <- choose_mode("Please choose the output mode")
   if(is.null(outputdirs)) outputdirs <- choose_folder("./output","Please choose the runs to be used for output generation")
   if(is.null(output))     output     <- choose_module(ifelse(comp,"./scripts/output/comparison","./scripts/output/single"),
                                                       "Please choose the output modules to be used for output generation")
   if(is.null(submit))     submit     <- choose_submit("Please choose a run submission type")
-  
-  #Set value source_include so that loaded scripts know, that they are 
+
+  #Set value source_include so that loaded scripts know, that they are
   #included as source (instead of a load from command line)
   source_include <- TRUE
-  
-  
+
+
   if (comp) {
     cat("Output comparsion mode\n")
     runsubmit(output, outputdirs, TRUE, "scripts/output/comparison/")
@@ -175,10 +173,9 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
   }
 }
 
-if(!exists("source_include")) { 
+if(!exists("source_include")) {
   comp <- output <- outputdirs <- submit <- NULL
-  readArgs("comp","output","outputdirs","submit") 
+  readArgs("comp","output","outputdirs","submit")
 }
 
 runOutputs(comp=comp, output=output, outputdirs = outputdirs, submit=submit)
-

@@ -1,13 +1,13 @@
 # (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 # authors, and contributors see AUTHORS file
-# This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+# This file is part of MAgPIE and licensed under GNU AGPL Version 3
 # or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # Contact: magpie@pik-potsdam.de
 
 options(error=function()traceback(2))
-#########################################################################
+######################################
 #### ipbes output script #############
-#########################################################################
+######################################
 #Author: FH based on interpolation output script
 
 library(lucode)
@@ -20,7 +20,7 @@ if(!exists("source_include")) {
   sum_spam_file    <- "0.5-to-h1000_sum.spam"
   title       <- "REF-noCC"
   outputdir       <- "output/h1000/REF-noCC/"
-  
+
   ###Define arguments that can be read from command line
   readArgs("sum_spam_file","outputdir","title")
 }
@@ -64,7 +64,7 @@ land_share_hr <- land_share_hr[,,c("crop","past","forest","urban","other")]
 land_share_hr <- setNames(land_share_hr,paste0("Land Cover|",c("Cropland","Pasture","Forest","Built-up Area","Other Natural Land")))
 
 cat("...LandCoverAll\n")
-write.magpie(land_share_hr,file_name = path(outputdir,paste0(title,"_LandCoverAll.mz")))    
-write.magpie(land_share_hr,file_name = path(outputdir,paste0(title,"_LandCoverAll.nc")))    
-write.magpie(land_share_hr[,t,],file_name = path(outputdir,paste0(title,"_LandCoverAllNoHist.mz")))    
-write.magpie(land_share_hr[,t,],file_name = path(outputdir,paste0(title,"_LandCoverAllNoHist.nc")))    
+write.magpie(land_share_hr,file_name = path(outputdir,paste0(title,"_LandCoverAll.mz")))
+write.magpie(land_share_hr,file_name = path(outputdir,paste0(title,"_LandCoverAll.nc")))
+write.magpie(land_share_hr[,t,],file_name = path(outputdir,paste0(title,"_LandCoverAllNoHist.mz")))
+write.magpie(land_share_hr[,t,],file_name = path(outputdir,paste0(title,"_LandCoverAllNoHist.nc")))

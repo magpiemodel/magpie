@@ -4,7 +4,8 @@
 # or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # Contact: magpie@pik-potsdam.de
 
-start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,report=NULL,sceninreport=NULL,LU_pricing="y2010") {
+start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
+                      report=NULL,sceninreport=NULL,LU_pricing="y2010") {
 
   if (!requireNamespace("lucode", quietly = TRUE)) {
     stop("Package \"lucode\" needed for this function to work. Please install it.",
@@ -28,41 +29,46 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,repor
   # Create output folder
   if (!file.exists(cfg$results_folder)) {
     dir.create(cfg$results_folder, recursive=TRUE, showWarnings=FALSE)
-	} else stop(paste0("Results folder ",cfg$results_folder," could not be created because is already exists."))
-
-  # If report and scenname are supplied the data of this scenario in the report will be converted to MAgPIE input
+	} else {
+    stop(paste0("Results folder ",cfg$results_folder,
+                " could not be created because is already exists."))
+  }
+  # If report and scenname are supplied the data of this scenario in the report
+  # will be converted to MAgPIE input
   if (!is.null(report) && !is.null(sceninreport)) {
     getReportData(report, sceninreport, LU_pricing)
     cfg$gms$bioenergy <- "standard"
     cfg <- lucode::setScenario(cfg,"coupling")
   }
 
-  #update all parameters which contain the levels and marginals
-  #of all variables and equations
+  # update all parameters which contain the levels and marginals
+  # of all variables and equations
   lucode::update_fulldataOutput()
-  #Update module paths in GAMS code
+  # Update module paths in GAMS code
   lucode::update_modules_embedding()
 
-  #configure main.gms based on settings of cfg file
+  # configure main.gms based on settings of cfg file
   lucode::manipulateConfig("main.gms", cfg$gms)
 
-  #configure input.gms in all modules based on settings of cfg file
-  l1 <- lucode::path("modules", list.dirs("modules/", full.names = FALSE, recursive = FALSE))
+  # configure input.gms in all modules based on settings of cfg file
+  l1 <- lucode::path("modules", list.dirs("modules/", full.names = FALSE,
+                                          recursive = FALSE))
   for(l in l1) {
     l2 <- lucode::path(l, list.dirs(l, full.names = FALSE, recursive = FALSE))
     for(ll in l2) {
-      if(file.exists(lucode::path(ll, "input.gms"))) lucode::manipulateConfig(lucode::path(ll, "input.gms"), cfg$gms)
+      if(file.exists(lucode::path(ll, "input.gms"))) {
+        lucode::manipulateConfig(lucode::path(ll, "input.gms"), cfg$gms)
+      }
     }
   }
 
   #check all setglobal settings for consistency
   lucode::settingsCheck()
 
-  #############PROCESSING INPUT DATA#######################################################################
+  ############# PROCESSING INPUT DATA ##########################################
+  # Check whether input data has to be processed or is already processed
 
-  #Check whether input data has to be processed or is already processed
-
-  #Function to extract information from info.txt
+  # Function to extract information from info.txt
   get_info <- function(file, grep_expression, sep, pattern="", replacement="") {
     if(!file.exists(file)) return("#MISSING#")
     file <- readLines(file, warn=FALSE)
@@ -95,7 +101,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,repor
   }
 
 
-  #### Collect technical information for validation #########################################
+  #### Collect technical information for validation ############################
 
   # get git info
   git_info <- c("### GIT revision ###",
@@ -107,26 +113,27 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,repor
     if(interfaceplot) lucode::modules_interfaceplot(codeCheck)
   } else codeCheck <- NULL
 
-  #Create the workspace for validation
+  # Create the workspace for validation
   tmp <- strsplit(cfg$results_folder,"/")[[1]]
-  cfg$val_workspace <- paste(cfg$results_folder,"/",tmp[length(tmp)],".RData",sep="")
+  cfg$val_workspace <- paste(cfg$results_folder,"/",tmp[length(tmp)],
+                             ".RData",sep="")
   validation <- list(technical=list(time=list(),
-                                    model_setup = git_info,
-                                    modules = codeCheck,
-                                    input_data = list(),
-                                    yield_calib = list(),
-                                    setup_info = list(start_functions = lucode::setup_info()),
-                                    last.warning = attr(codeCheck,"last.warning")))
+                      model_setup = git_info,
+                      modules = codeCheck,
+                      input_data = list(),
+                      yield_calib = list(),
+                      setup_info = list(start_functions = lucode::setup_info()),
+                      last.warning = attr(codeCheck,"last.warning")))
   save(validation, file= cfg$val_workspace, compress="xz")
 
 
-  ########################################################################################################################################################
+  ##############################################################################
 
   if(cfg$recalibrate){
     cat("Starting calibration factor calculation!\n")
     source("scripts/calibration/calc_calib.R")
     calibrate_magpie(n_maxcalib = cfg$calib_maxiter,
-                     calib_accuracy = cfg$calib_accuracy, 
+                     calib_accuracy = cfg$calib_accuracy,
                      calibrate_pasture = (cfg$gms$past!="static"),
                      damping_factor = cfg$damping_factor,
                      calib_file = "modules/14_yields/input/f14_yld_calib.csv",
@@ -137,12 +144,17 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,repor
   }
 
 
-  #copy important files into output_folder (before MAgPIE execution)
-  for(file in cfg$files2export$start) try(file.copy(Sys.glob(file), cfg$results_folder, overwrite=TRUE))
+  # copy important files into output_folder (before MAgPIE execution)
+  for(file in cfg$files2export$start) {
+    try(file.copy(Sys.glob(file), cfg$results_folder, overwrite=TRUE))
+  }
 
-  #copy spam files to output folder
-  cfg$files2export$spam <- list.files(path="input/cellular", pattern = "*.spam", full.names=TRUE)
-  for(file in cfg$files2export$spam) file.copy(file, cfg$results_folder, overwrite=TRUE)
+  # copy spam files to output folder
+  cfg$files2export$spam <- list.files(path="input/cellular", pattern = "*.spam",
+                                      full.names=TRUE)
+  for(file in cfg$files2export$spam) {
+    file.copy(file, cfg$results_folder, overwrite=TRUE)
+  }
 
   cfg$magpie_folder <- getwd()
 
@@ -234,7 +246,8 @@ start_reportrun <- function (cfg, path_report, inmodel=NULL, sceninreport=NULL, 
 
   for(scen in sceninreport) {
 	cfg$title <- scen
-	cfg       <- lucode::setScenario(cfg,substring(scen,first=1,last=4)) # is ment to extract i.e. 'SSP1' from the scenarioname
+  # extract scenario from scenarioname and apply it
+	cfg       <- lucode::setScenario(cfg,substring(scen,first=1,last=4))
 	start_run(cfg, report=rep, sceninreport=scen, codeCheck=codeCheck)
   }
 }
