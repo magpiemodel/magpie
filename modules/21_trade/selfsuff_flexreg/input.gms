@@ -10,17 +10,17 @@ $setglobal c21_trade_liberalization  regionalized
 
 table f21_self_suff(t_all,i,k_trade) regional self-sufficiency rates (1)
 $ondelim
-$include "./modules/21_trade/selfsuff_flexreg_dev/input/f21_trade_self_suff.cs3"
+$include "./modules/21_trade/selfsuff_flexreg/input/f21_trade_self_suff.cs3"
 $offdelim;
 
 table f21_exp_shr(t_all,i,k_trade) regional and crop-specific export share (1)
 $ondelim
-$include "./modules/21_trade/selfsuff_flexreg_dev/input/f21_trade_export_share.cs3"
+$include "./modules/21_trade/selfsuff_flexreg/input/f21_trade_export_share.cs3"
 $offdelim;
 
 table f21_trade_balanceflow(t_all,k_trade) domestic balance flows (mio. ton DM)
 $ondelim
-$include "./modules/21_trade/selfsuff_flexreg_dev/input/f21_trade_balanceflow.cs3"
+$include "./modules/21_trade/selfsuff_flexreg/input/f21_trade_balanceflow.cs3"
 $offdelim;
 
 table f21_trade_bal_reduction_annual(t_all,kall) trade balance reduction (1)
