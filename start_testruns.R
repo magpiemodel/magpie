@@ -50,7 +50,6 @@ cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
 start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck)
 
 
-
 cfg$title <- "h12"
 cfg$input <- buildInputVector(regionmapping = "h12")
 cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"     
