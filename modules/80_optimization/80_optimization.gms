@@ -7,6 +7,7 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%optimization%" == "lp_nlp_glo_jan15" $include "./modules/80_optimization/lp_nlp_glo_jan15.gms"
+$Ifi "%optimization%" == "lp_nlp_nash_apr17" $include "./modules/80_optimization/lp_nlp_nash_apr17.gms"
 $Ifi "%optimization%" == "lp_only_glo_feb16" $include "./modules/80_optimization/lp_only_glo_feb16.gms"
 $Ifi "%optimization%" == "nlp_only_glo_jan15" $include "./modules/80_optimization/nlp_only_glo_jan15.gms"
 *###################### R SECTION END (MODULETYPES) ############################
