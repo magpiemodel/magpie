@@ -6,7 +6,7 @@
 
 
 $setglobal phase %1
-
+$onrecurse
 *######################## R SECTION START (MODULES) ############################
 $include "./modules/10_land/10_land.gms"
 $include "./modules/11_costs/11_costs.gms"
@@ -48,5 +48,5 @@ $include "./modules/62_material/62_material.gms"
 $include "./modules/70_livestock/70_livestock.gms"
 $include "./modules/80_optimization/80_optimization.gms"
 *######################## R SECTION END (MODULES) ##############################
-
+$offrecurse
 *** EOF include.gms ***

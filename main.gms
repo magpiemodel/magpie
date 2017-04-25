@@ -56,8 +56,6 @@ $title magpie
 *
 *###################### R SECTION END (VERSION INFO) ###########################
 
-
-
 $offupper
 $offsymxref
 $offsymlist
@@ -80,8 +78,8 @@ $offlisting
 
 $setglobal c_timesteps  3
 
-scalars s_use_gdx   use of gdx files                                       / 2 /
-        s_maxiter   maximal solve iterations if modelstat is > 2          / 30 /
+scalars
+  s_use_gdx   use of gdx files                                       / 2 /
 ;
 ********************************************************************************
 
@@ -134,7 +132,7 @@ $setglobal bioenergy  standard_flexreg_apr16
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 
-$setglobal optimization  lp_nlp_glo_jan15
+$setglobal optimization  lp_nlp_apr17
 
 ****************************END MODULE SETUP************************************
 

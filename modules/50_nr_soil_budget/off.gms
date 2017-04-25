@@ -13,10 +13,8 @@ $Ifi "%phase%" == "equations" $include "./modules/50_nr_soil_budget/off/equation
 $Ifi "%phase%" == "scaling" $include "./modules/50_nr_soil_budget/off/scaling.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/50_nr_soil_budget/off/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/50_nr_soil_budget/off/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/50_nr_soil_budget/off/postsolve.gms"
 $Ifi "%phase%" == "nl_fix" $include "./modules/50_nr_soil_budget/off/nl_fix.gms"
-$Ifi "%phase%" == "l_solve" $include "./modules/50_nr_soil_budget/off/l_solve.gms"
 $Ifi "%phase%" == "nl_release" $include "./modules/50_nr_soil_budget/off/nl_release.gms"
 $Ifi "%phase%" == "nl_relax" $include "./modules/50_nr_soil_budget/off/nl_relax.gms"
-$Ifi "%phase%" == "nl_solve" $include "./modules/50_nr_soil_budget/off/nl_solve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/50_nr_soil_budget/off/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

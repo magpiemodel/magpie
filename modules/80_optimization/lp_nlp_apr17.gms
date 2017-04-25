@@ -6,6 +6,7 @@
 
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "declarations" $include "./modules/80_optimization/lp_only_glo_feb16/declarations.gms"
-$Ifi "%phase%" == "l_solve" $include "./modules/80_optimization/lp_only_glo_feb16/l_solve.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/80_optimization/lp_nlp_apr17/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/80_optimization/lp_nlp_apr17/input.gms"
+$Ifi "%phase%" == "solve" $include "./modules/80_optimization/lp_nlp_apr17/solve.gms"
 *######################## R SECTION END (PHASES) ###############################

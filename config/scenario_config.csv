@@ -17,7 +17,7 @@ c60_2ndgen_biodem;;;SSP2-Ref-SPA0;SSP2-Ref-SPA0;SSP2-Ref-SPA0;SSP2-Ref-SPA0;SSP1
 c62_material_scenario;;;A1;A2;B1;B2;SSP1;SSP2;SSP3;SSP4;SSP5;B2;SSP2_lowcal;SSP2_lowls;SSP2;SSP2;SSP2_waste;SSP1_boundary;SSP2_boundary;SSP3_boundary;SSP4_boundary;SSP5_boundary;ssp2_high_yvonne;ssp2_low_yvonne;ssp2_lowest_yvonne;SSP2;;;
 c60_biodem_level;;;;;;;;;;;;;;;;;;;;;;;;;;;1;0;
 c_timesteps;;;;;;;;;;;;;;;;;;;;;;;;;;;less_TS;12;
-s_maxiter;;;;;;;;;;;;;;;;;;;;;;;;;;;;10;
+s80_maxiter;;;;;;;;;;;;;;;;;;;;;;;;;;;;10;
 c14_yields_scenario;cc;nocc;;;;;;;;;;;;;;;;;;;;;;;;;;;
 c42_watdem_scenario;cc;nocc;;;;;;;;;;;;;;;;;;;;;;;;;;;
 c43_watavail_scenario;cc;nocc;;;;;;;;;;;;;;;;;;;;;;;;;;;
