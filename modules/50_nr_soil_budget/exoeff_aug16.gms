@@ -10,11 +10,6 @@ $Ifi "%phase%" == "sets" $include "./modules/50_nr_soil_budget/exoeff_aug16/sets
 $Ifi "%phase%" == "declarations" $include "./modules/50_nr_soil_budget/exoeff_aug16/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/50_nr_soil_budget/exoeff_aug16/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/50_nr_soil_budget/exoeff_aug16/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/50_nr_soil_budget/exoeff_aug16/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/50_nr_soil_budget/exoeff_aug16/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/50_nr_soil_budget/exoeff_aug16/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/50_nr_soil_budget/exoeff_aug16/postsolve.gms"
-$Ifi "%phase%" == "nl_fix" $include "./modules/50_nr_soil_budget/exoeff_aug16/nl_fix.gms"
-$Ifi "%phase%" == "nl_release" $include "./modules/50_nr_soil_budget/exoeff_aug16/nl_release.gms"
-$Ifi "%phase%" == "nl_relax" $include "./modules/50_nr_soil_budget/exoeff_aug16/nl_relax.gms"
 *######################## R SECTION END (PHASES) ###############################
