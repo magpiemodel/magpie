@@ -11,7 +11,7 @@ $Ifi "%phase%" == "declarations" $include "./modules/14_yields/biocorrect/declar
 $Ifi "%phase%" == "input" $include "./modules/14_yields/biocorrect/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/14_yields/biocorrect/equations.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/14_yields/biocorrect/preloop.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/14_yields/biocorrect/postsolve.gms"
 $Ifi "%phase%" == "nl_fix" $include "./modules/14_yields/biocorrect/nl_fix.gms"
 $Ifi "%phase%" == "nl_release" $include "./modules/14_yields/biocorrect/nl_release.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/14_yields/biocorrect/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

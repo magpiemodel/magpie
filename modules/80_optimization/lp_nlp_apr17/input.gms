@@ -4,11 +4,6 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-parameters
-	pm_modelstat        modelstat indicator
-	p80_modelstat(t)	modelstat
-;
-
 scalars
- 	s80_obj_linear   linear objective value
+        s80_maxiter   maximal solve iterations if modelstat is > 2          / 30 /
 ;

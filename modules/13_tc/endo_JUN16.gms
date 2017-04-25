@@ -13,8 +13,8 @@ $Ifi "%phase%" == "equations" $include "./modules/13_tc/endo_JUN16/equations.gms
 $Ifi "%phase%" == "scaling" $include "./modules/13_tc/endo_JUN16/scaling.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/13_tc/endo_JUN16/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/13_tc/endo_JUN16/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/13_tc/endo_JUN16/postsolve.gms"
 $Ifi "%phase%" == "nl_fix" $include "./modules/13_tc/endo_JUN16/nl_fix.gms"
 $Ifi "%phase%" == "nl_release" $include "./modules/13_tc/endo_JUN16/nl_release.gms"
 $Ifi "%phase%" == "nl_relax" $include "./modules/13_tc/endo_JUN16/nl_relax.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/13_tc/endo_JUN16/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
