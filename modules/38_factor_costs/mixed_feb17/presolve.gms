@@ -4,5 +4,4 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-vm_mi.fx(i)=1;
 vm_cost_prod.fx(i,"pasture") = 0;

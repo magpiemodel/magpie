@@ -11,10 +11,6 @@
                  vm_nr_inorg_fert_reg(i2) * 600
                  ;
 
- q50_managament_nitrogen(i2,kcr) .. vm_mi(i2)
-                                         =n=
-                                   (1-v50_nr_eff(i2));
-
  q50_nr_bal_crp(i2) ..
                  v50_nr_eff(i2) *
                  (

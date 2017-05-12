@@ -1,6 +1,6 @@
 *** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 *** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
@@ -9,14 +9,12 @@ equations
 ;
 
 variables
-         vm_mi(i)                               Management intensity (1)
-         vm_cost_prod(i,k)                          factor costs (mio US$)   
+         vm_cost_prod(i,k)                          factor costs (mio US$)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_mi(t,i,type)                   Management intensity (1)
- ov_cost_prod(t,i,k,type)          factor costs (mio US$)   
+ ov_cost_prod(t,i,k,type)          factor costs (mio US$)
  oq38_cost_prod_crop(t,i,kcr,type) regional factor input costs for plant production
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

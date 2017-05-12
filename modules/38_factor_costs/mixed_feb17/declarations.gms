@@ -9,13 +9,11 @@ equations
 ;
 
 variables
-         vm_mi(i)                               Management intensity (1)
          vm_cost_prod(i,k)                          factor costs (mio US$)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_mi(t,i,type)                   Management intensity (1)
  ov_cost_prod(t,i,k,type)          factor costs (mio US$)
  oq38_cost_prod_crop(t,i,kcr,type) regional factor input costs for plant production
 ;
