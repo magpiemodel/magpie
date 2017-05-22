@@ -94,6 +94,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
                      move=!cfg$debug,
                      username=cfg$username,
                      ssh_private_keyfile=cfg$ssh_private_keyfile,
+                     ssh_public_keyfile=cfg$ssh_public_keyfile,
                      debug=cfg$debug)
     if(cfg$recalibrate=="ifneeded") cfg$recalibrate <- TRUE
   } else {

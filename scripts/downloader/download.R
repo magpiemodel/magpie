@@ -31,10 +31,11 @@ getfiledestinations <- function() {
 ################################################################################
 #Define function which loads data from repository and unpacks it
 ################################################################################
-load_unpack <- function(files, repository, username=NULL, ssh_private_keyfile=NULL, debug=FALSE) {
+load_unpack <- function(files, repository, username=NULL, ssh_private_keyfile=NULL, ssh_public_keyfile=NULL, debug=FALSE) {
 
   if(is.null(username)) username <- getOption("username")
   if(is.null(ssh_private_keyfile)) ssh_private_keyfile <- getOption("ssh_private_keyfile")
+  if(is.null(ssh_public_keyfile)) ssh_public_keyfile <- getOption("ssh_public_keyfile")
 
   cat("Load data from repository\n")
   anydatafound <- FALSE
@@ -48,7 +49,11 @@ load_unpack <- function(files, repository, username=NULL, ssh_private_keyfile=NU
       path <- paste0(sub("/$","",repo),"/",file)
       if(grepl("://",path)) {
         require(curl, quietly = !debug)
-        h <- new_handle(ssh_private_keyfile=ssh_private_keyfile, username=username, verbose=debug)
+        if(is.null(ssh_public_keyfile)) {
+          h <- new_handle(ssh_private_keyfile=ssh_private_keyfile, username=username, verbose=debug)
+        } else {
+          h <- new_handle(ssh_private_keyfile=ssh_private_keyfile, ssh_public_keyfile=ssh_public_keyfile, username=username, verbose=debug)
+        }
         tmpdir <- tempdir()
         if(debug) tmpdir <- "input"
         tmp <- try(curl_download(path,paste0(tmpdir,"/",file),handle=h),silent = !debug)
@@ -278,6 +283,7 @@ archive_download <- function(files=c("GLUES2-sresa2-constant_co2-miub_echo_g_ERB
                              move=TRUE,
                              username=NULL,
                              ssh_private_keyfile=NULL,
+                             ssh_public_keyfile=NULL,
                              debug=FALSE) {
 
   require(lucode)
@@ -302,7 +308,7 @@ archive_download <- function(files=c("GLUES2-sresa2-constant_co2-miub_echo_g_ERB
 
   ##################### DATA DOWNLOAD #########################################
   # load data from source and unpack it
-  filemap <- load_unpack(files, repositories, username, ssh_private_keyfile, debug)
+  filemap <- load_unpack(files, repositories, username, ssh_private_keyfile, ssh_public_keyfile, debug)
 
   low_res  <- get_info("input/info.txt","^\\* Output ?resolution:",": ")
   high_res <- get_info("input/info.txt","^\\* Input ?resolution:",": ")
