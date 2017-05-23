@@ -22,7 +22,6 @@ positive variables
 
 equations
  q10_land(j,si)                    land conversion constraint
- q10_lu_miti(j)                    land constraint for land-based mitigation
  q10_landexpansion(j,land,si)      land expansion constraint
  q10_landreduction(j,land,si)      land reduction constraint
  q10_landdiff                      land difference constraint
@@ -35,7 +34,6 @@ parameters
  ov_landexpansion(t,j,land,si,type)   land expansion (mio. ha)
  ov_landreduction(t,j,land,si,type)   land reduction (mio. ha)
  oq10_land(t,j,si,type)               land conversion constraint
- oq10_lu_miti(t,j,type)               land constraint for land-based mitigation
  oq10_landexpansion(t,j,land,si,type) land expansion constraint
  oq10_landreduction(t,j,land,si,type) land reduction constraint
  oq10_landdiff(t,type)                land difference constraint

@@ -20,8 +20,3 @@
  q10_land(j2,si) .. sum(land, vm_land(j2,land,si))
                    =e=
                    sum(land, pcm_land(j2,land,si));
-
- q10_lu_miti(j2) .. sum(w, vm_area(j2,"begr",w) + vm_area(j2,"betr",w)) +
-                                            sum(si, vm_land(j2,"forestry",si) - f10_land(j2,"forestry",si))
-                           =l=
-                           s10_lu_miti_shr*sum((land,si), pcm_land(j2,land,si));
