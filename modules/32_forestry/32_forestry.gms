@@ -6,6 +6,6 @@
 
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%forestry%" == "affore_vegc_apr16" $include "./modules/32_forestry/affore_vegc_apr16.gms"
+$Ifi "%forestry%" == "affore_vegc_dec16" $include "./modules/32_forestry/affore_vegc_dec16.gms"
 $Ifi "%forestry%" == "static_sep16" $include "./modules/32_forestry/static_sep16.gms"
 *###################### R SECTION END (MODULETYPES) ############################
