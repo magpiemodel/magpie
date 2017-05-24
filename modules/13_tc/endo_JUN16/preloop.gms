@@ -15,4 +15,4 @@ $endif
 pc13_tau(i)      = fm_tau1995(i);
 pc13_tcguess(i)  = f13_tcguess(i);
 
-i13_land(i)      = sum((si,cell(i,j)),pm_land_start(j,"crop", si));
+i13_land(i)      = sum(cell(i,j),pm_land_start(j,"crop"));

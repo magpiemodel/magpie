@@ -6,9 +6,6 @@
 
 sets
 
-	land33 forest land types 
-	  /ifft, modnat/
-
 	scen33 forest protection scenario
 	  /low, medium, high/
   

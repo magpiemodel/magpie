@@ -5,5 +5,5 @@
 *** Contact: magpie@pik-potsdam.de
 
 
-vm_land.fx(j,"urban",si) = pcm_land(j,"urban",si);
+vm_land.fx(j,"urban") = pcm_land(j,"urban");
 vm_carbon_stock.fx(j,"urban",c_pools) = 0;

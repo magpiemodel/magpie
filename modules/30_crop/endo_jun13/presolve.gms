@@ -4,11 +4,7 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-vm_land.fx(j,"crop","nsi0") = 0;
-
-vm_land.lo(j,"crop","si0") = 0;
-vm_land.up(j,"crop","si0") = Inf;
-
+vm_area.fx(j,"begr","irrigated")=0;
 vm_area.fx(j,"begr","irrigated")=0;
 vm_area.fx(j,"betr","irrigated")=0;
 

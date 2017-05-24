@@ -5,13 +5,13 @@
 *** Contact: magpie@pik-potsdam.de
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
- ov_landdiff_other(t,"marginal")     = vm_landdiff_other.m;
- ov35_land(t,j,land35,si,"marginal") = v35_land.m(j,land35,si);
- ov_landdiff_other(t,"level")        = vm_landdiff_other.l;
- ov35_land(t,j,land35,si,"level")    = v35_land.l(j,land35,si);
- ov_landdiff_other(t,"upper")        = vm_landdiff_other.up;
- ov35_land(t,j,land35,si,"upper")    = v35_land.up(j,land35,si);
- ov_landdiff_other(t,"lower")        = vm_landdiff_other.lo;
- ov35_land(t,j,land35,si,"lower")    = v35_land.lo(j,land35,si);
+ ov_landdiff_other(t,"marginal")  = vm_landdiff_other.m;
+ ov35_land(t,j,land35,"marginal") = v35_land.m(j,land35);
+ ov_landdiff_other(t,"level")     = vm_landdiff_other.l;
+ ov35_land(t,j,land35,"level")    = v35_land.l(j,land35);
+ ov_landdiff_other(t,"upper")     = vm_landdiff_other.up;
+ ov35_land(t,j,land35,"upper")    = v35_land.up(j,land35);
+ ov_landdiff_other(t,"lower")     = vm_landdiff_other.lo;
+ ov35_land(t,j,land35,"lower")    = v35_land.lo(j,land35);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
 

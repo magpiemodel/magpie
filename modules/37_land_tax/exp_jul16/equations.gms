@@ -6,7 +6,7 @@
 
 q37_cost_landtax_annuity(j2,land_ag) .. v37_cost_landtax_annuity(j2,land_ag)
         						=g=
- (sum(si ,vm_land(j2,land_ag,si) - pcm_land(j2,land_ag,si)))*sum(ct, f37_land_tax(ct))/sum(cell(i2,j2),pm_annuity_due(i2));
+ (vm_land(j2,land_ag) - pcm_land(j2,land_ag))*sum(ct, f37_land_tax(ct))/sum(cell(i2,j2),pm_annuity_due(i2));
 
 q37_cost_landtax(j2,land_ag) .. vm_cost_landtax(j2,land_ag)
                           =e=

@@ -10,12 +10,12 @@ parameters
 
 positive variables
   vm_landdiff_forest          aggregated difference in forest land compared to previous timestep (mio. ha)
-  v33_land(j,land33,si)       forest area for each cell (ifft and semi_nat) [mio. ha]
+  v33_land(j,land33)       forest area for each cell (ifft and semi_nat) [mio. ha]
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_landdiff_forest(t,type)    aggregated difference in forest land compared to previous timestep (mio. ha)
- ov33_land(t,j,land33,si,type) forest area for each cell (ifft and semi_nat) [mio. ha]
+ ov_landdiff_forest(t,type) aggregated difference in forest land compared to previous timestep (mio. ha)
+ ov33_land(t,j,land33,type) forest area for each cell (ifft and semi_nat) [mio. ha]
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

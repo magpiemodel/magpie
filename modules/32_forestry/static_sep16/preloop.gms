@@ -8,11 +8,11 @@ vm_cost_fore.fx(i) = 0;
 vm_cdr_aff.fx(j,emis_source_co2_forestry) = 0;
 
 *fix forestry land
-v32_land.fx(j,"new",si) = 0;
-v32_land.fx(j,"prot",si) = 0;
-v32_land.fx(j,"grow",si) = 0;
-v32_land.fx(j,"old",si) = pcm_land(j,"forestry",si);
-vm_land.fx(j,"forestry",si) = sum(land32, v32_land.l(j,land32,si));
+v32_land.fx(j,"new") = 0;
+v32_land.fx(j,"prot") = 0;
+v32_land.fx(j,"grow") = 0;
+v32_land.fx(j,"old") = pcm_land(j,"forestry");
+vm_land.fx(j,"forestry") = sum(land32, v32_land.l(j,land32));
 
 vm_landdiff_forestry.fx = 0;
 

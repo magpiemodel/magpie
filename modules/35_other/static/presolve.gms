@@ -7,7 +7,7 @@
 pc35_carbon_density(j,c_pools) = fm_carbon_density(t,j,"other",c_pools);
 
 *carbon stock update
-pcm_carbon_stock(j,"other",c_pools) = sum(si, vm_land.l(j,"other",si))*pc35_carbon_density(j,c_pools);
+pcm_carbon_stock(j,"other",c_pools) = vm_land.l(j,"other")*pc35_carbon_density(j,c_pools);
 
 vm_carbon_stock.fx(j,"other",c_pools) =
-          sum(si, vm_land.l(j,"other",si))*pc35_carbon_density(j,c_pools);
+          vm_land.l(j,"other")*pc35_carbon_density(j,c_pools);

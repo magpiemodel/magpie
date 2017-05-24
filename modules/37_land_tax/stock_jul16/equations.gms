@@ -6,5 +6,5 @@
 
 q37_cost_landtax(j2,land_ag) .. vm_cost_landtax(j2,land_ag)
                           =e=
- sum(si, vm_land(j2,land_ag,si))*sum(ct, f37_land_tax(ct));
+ vm_land(j2,land_ag)*sum(ct, f37_land_tax(ct));
  

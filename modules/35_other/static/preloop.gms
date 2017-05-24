@@ -5,11 +5,11 @@
 *** Contact: magpie@pik-potsdam.de
 
 *fix other land
-v35_land.fx(j,"new",si) = 0;
-v35_land.fx(j,"grow",si) = 0;
-v35_land.fx(j,"old",si) = pcm_land(j,"other",si);
-vm_land.fx(j,"other",si) = sum(land35, v35_land.l(j,land35,si));
+v35_land.fx(j,"new") = 0;
+v35_land.fx(j,"grow") = 0;
+v35_land.fx(j,"old") = pcm_land(j,"other");
+vm_land.fx(j,"other") = sum(land35, v35_land.l(j,land35));
 
 vm_landdiff_other.fx = 0;
 
-pm_recovered_forest(t,j,ac,si) = 0;
+pm_recovered_forest(t,j,ac) = 0;
