@@ -1,0 +1,15 @@
+
+#ignore files created for a magpie calibration run
+calib_run/
+magpie_calib.*
+
+#ignore input files
+*.cs*
+*.mz
+input/
+
+#ignore outputs
+*.gdx
+output/
+
+
