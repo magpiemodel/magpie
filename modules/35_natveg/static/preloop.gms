@@ -10,6 +10,5 @@ v35_other.fx(j,"grow") = 0;
 v35_other.fx(j,"old") = pcm_land(j,"other");
 vm_land.fx(j,"other") = sum(land35, v35_other.l(j,land35));
 
-vm_landdiff_other.fx = 0;
+vm_landdiff_natveg.fx = 0;
 
-pm_recovered_forest(t,j,ac) = 0;

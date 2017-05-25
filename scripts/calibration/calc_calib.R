@@ -39,7 +39,7 @@ get_calibarea<-function(gdx_file){
   require(magpie4)
   require(gdx)
   require(luscale)
-  data <- dimSums(readGDX(gdx_file,"pm_land_start")[,,c("crop","past")],dim=3.2)
+  data <- readGDX(gdx_file,"pm_land_start")[,,c("crop","past")]
   data <- superAggregate(data,"sum",level="reg")
   magpie <- land(gdx_file)[,,c("crop","past")]
   if(nregions(magpie)!=nregions(data) | !all(getRegions(magpie) %in% getRegions(data))) {
