@@ -4,16 +4,12 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-sets
+*fix other land
+v35_other.fx(j,"new") = 0;
+v35_other.fx(j,"grow") = 0;
+v35_other.fx(j,"old") = pcm_land(j,"other");
+vm_land.fx(j,"other") = sum(land35, v35_other.l(j,land35));
 
-	scen33 forest protection scenario
-	  /low, medium, high/
-  
-  	scen33_to_dev(scen33,dev)
-      /	low		. (lic)
-       	medium	. (mic)
-       	high	. (hic) /
+vm_landdiff_other.fx = 0;
 
-;
-
-*** EOF sets.gms ***
+pm_recovered_forest(t,j,ac) = 0;

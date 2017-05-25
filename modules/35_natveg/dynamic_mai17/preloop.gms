@@ -4,17 +4,14 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-**interface boundaries
-vm_land.lo(j,"other") = 0;
-vm_land.up(j,"other") = Inf;
-
 *calculate age class share for each forest land type
 ac_land35(ac,land35) = no;
 ac_land35(ac,"new")  = yes$(ord(ac) = 1);
 ac_land35(ac,"grow") = yes$(ord(ac) > 1 AND ord(ac) < card(ac));
 ac_land35(ac,"old")  = yes$(ord(ac) = card(ac));
 
-i35_land(j,ac) = 0;
-i35_land(j,"acx") = pcm_land(j,"other");
+i35_secdforest(j,ac) = 0;
+i35_secdforest(j,"acx") = pcm_land(j,"secdforest");
 
-pm_recovered_forest(t,j,ac) = 0;
+i35_other(j,ac) = 0;
+i35_other(j,"acx") = pcm_land(j,"other");

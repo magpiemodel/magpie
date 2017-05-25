@@ -6,7 +6,6 @@
 
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%land_tax%" == "exp_jul16" $include "./modules/37_land_tax/exp_jul16.gms"
-$Ifi "%land_tax%" == "off_jul16" $include "./modules/37_land_tax/off_jul16.gms"
-$Ifi "%land_tax%" == "stock_jul16" $include "./modules/37_land_tax/stock_jul16.gms"
+$Ifi "%natveg%" == "dynamic_mai17" $include "./modules/35_natveg/dynamic_mai17.gms"
+$Ifi "%natveg%" == "static" $include "./modules/35_natveg/static.gms"
 *###################### R SECTION END (MODULETYPES) ############################

@@ -12,8 +12,7 @@
 
  q10_landdiff .. vm_landdiff =e= sum((j2,land), vm_landexpansion(j2,land)
                                                 + vm_landreduction(j2,land))
-                                 + vm_landdiff_other
-                                 + vm_landdiff_forest
+                                 + vm_landdiff_natveg
                                  + vm_landdiff_forestry;
 
 

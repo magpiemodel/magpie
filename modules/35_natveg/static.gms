@@ -6,8 +6,9 @@
 
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "declarations" $include "./modules/37_land_tax/stock_jul16/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/37_land_tax/stock_jul16/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/37_land_tax/stock_jul16/equations.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/37_land_tax/stock_jul16/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/35_natveg/static/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/35_natveg/static/declarations.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/35_natveg/static/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/35_natveg/static/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/35_natveg/static/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
