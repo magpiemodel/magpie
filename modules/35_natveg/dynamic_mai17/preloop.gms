@@ -15,3 +15,5 @@ i35_secdforest(j,"acx") = pcm_land(j,"secdforest");
 
 i35_other(j,ac) = 0;
 i35_other(j,"acx") = pcm_land(j,"other");
+
+p35_protect_shr(t,j,prot_type) = 0;

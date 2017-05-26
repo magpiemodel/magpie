@@ -4,6 +4,8 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
+$setglobal c35_protect_scenario  WDPA
+
 table f35_land_hist(j,land) historic land use in y850 [mio. ha]
 $ondelim
 $include "./modules/35_natveg/input/avl_land_hist.cs3"

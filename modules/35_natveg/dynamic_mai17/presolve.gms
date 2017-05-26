@@ -33,8 +33,44 @@ v35_other.l(j,land35) = pc35_other(j,land35);
 pcm_land(j,"other") = sum(land35, pc35_other(j,land35));
 vm_land.l(j,"other") = pcm_land(j,"other");
 
+*** Forest protection (WDPA areas and different conservation priority areas)
+* calc protection share for primforest, secdforest and other land
+pc35_natveg_old(j) = pcm_land(j,"primforest") + pc35_secdforest(j,"old") + pc35_other(j,"old");
+p35_protect_shr(t,j,prot_type)$(pc35_natveg_old(j) > 0) = f35_protect_area(j,prot_type)/pc35_natveg_old(j);
+p35_protect_shr(t,j,prot_type)$(p35_protect_shr(t,j,prot_type) > 1) = 1;
+p35_protect_shr(t,j,prot_type)$(p35_protect_shr(t,j,prot_type) < 0) = 0;
+
+* protection scenarios
+$ifthen "%c35_protect_scenario%" == "none"
+  p35_save_primforest(t,j) = 0;
+  p35_save_secdforest(t,j) = 0;
+  p35_save_other(t,j) = 0;
+$elseif "%c35_protect_scenario%" == "full"
+  p35_save_primforest(t,j) = pcm_land(j,"primforest");
+  p35_save_secdforest(t,j) = pcm_land(j,"secdforest");
+  p35_save_other(t,j) = pcm_land(j,"other");
+$elseif "%c35_protect_scenario%" == "WDPA"
+  p35_save_primforest(t,j) = p35_protect_shr(t,j,"WDPA")*pcm_land(j,"primforest");
+  p35_save_secdforest(t,j) = p35_protect_shr(t,j,"WDPA")*pc35_secdforest(j,"old");
+  p35_save_other(t,j) = p35_protect_shr(t,j,"WDPA")*pc35_other(j,"old");
+$else
+* conservation priority scenarios start in 2020, in addition to WDPA protection
+  if ((sameas(t,"y1995") or sameas(t,"y2000") or sameas(t,"y2005") or sameas(t,"y2010") or sameas(t,"y2015")),
+  p35_save_primforest(t,j) = p35_protect_shr(t,j,"WDPA")*pcm_land(j,"primforest");
+  p35_save_secdforest(t,j) = p35_protect_shr(t,j,"WDPA")*pc35_secdforest(j,"old");
+  p35_save_other(t,j) = p35_protect_shr(t,j,"WDPA")*pc35_other(j,"old");
+  else
+  p35_save_primforest(t,j) = (p35_protect_shr(t,j,"WDPA")+p35_protect_shr(t,j,"%c35_protect_scenario%"))*pcm_land(j,"primforest");
+  p35_save_secdforest(t,j) = (p35_protect_shr(t,j,"WDPA")+p35_protect_shr(t,j,"%c35_protect_scenario%"))*pc35_secdforest(j,"old");
+  p35_save_other(t,j) = (p35_protect_shr(t,j,"WDPA")+p35_protect_shr(t,j,"%c35_protect_scenario%"))*pc35_other(j,"old");
+  p35_save_primforest(t,j)$(p35_save_primforest(t,j) > pcm_land(j,"primforest")) = pcm_land(j,"primforest");
+  p35_save_secdforest(t,j)$(p35_save_secdforest(t,j) > pc35_secdforest(j,"old")) = pc35_secdforest(j,"old");
+  p35_save_other(t,j)$(p35_save_other(t,j) > pc35_other(j,"old")) = pc35_other(j,"old");
+  );
+$endif
+
 *set boundaries primforest
-vm_land.lo(j,"primforest") = 0;
+vm_land.lo(j,"primforest") = p35_save_primforest(t,j);
 vm_land.up(j,"primforest") = pcm_land(j,"primforest");
 m_boundfix(vm_land,(j,"primforest"),l,10e-5);
 
@@ -45,7 +81,7 @@ v35_secdforest.lo(j,"grow") = 0;
 v35_secdforest.up(j,"grow") = pc35_secdforest(j,"grow");
 m_boundfix(v35_secdforest,(j,"grow"),l,10e-5);
 
-v35_secdforest.lo(j,"old") = 0;
+v35_secdforest.lo(j,"old") = p35_save_secdforest(t,j);
 v35_secdforest.up(j,"old") = pc35_secdforest(j,"old");
 m_boundfix(v35_secdforest,(j,"old"),l,10e-5);
 
@@ -57,7 +93,7 @@ v35_other.lo(j,"grow") = 0;
 v35_other.up(j,"grow") = pc35_other(j,"grow");
 m_boundfix(v35_other,(j,"grow"),l,10e-5);
 
-v35_other.lo(j,"old") = 0;
+v35_other.lo(j,"old") = p35_save_other(t,j);
 v35_other.up(j,"old") = pc35_other(j,"old");
 m_boundfix(v35_other,(j,"old"),l,10e-5);
 
