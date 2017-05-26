@@ -4,3 +4,14 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
+table f35_land_hist(j,land) historic land use in y850 [mio. ha]
+$ondelim
+$include "./modules/35_natveg/input/avl_land_hist.cs3"
+$offdelim
+;
+
+table f35_protect_area(j,prot_type) conservation priority areas [mio. ha]
+$ondelim
+$include "./modules/35_natveg/input/protect_area.cs3"
+$offdelim
+;

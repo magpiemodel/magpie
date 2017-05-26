@@ -9,4 +9,8 @@ sets
     / new, grow, old /
       
    ac_land35(ac,land35) mapping between age classes and aggregated land types
+
+   prot_type conservation priority areas 
+   / BH, CPD, FF, LW, WDPA /
+
 ;
