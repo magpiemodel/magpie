@@ -4,11 +4,15 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
+*secdforest age class calculation
+v35_secdforest.l(j,land35)$(ord(t) = 1) = 0$(not sameas(land35,"old")) + vm_land.l(j,"secdforest")$(sameas(land35,"old"));
+p35_secdforest(t,j,ac,"after")$(ord(t) = 1) = 0$(not sameas(ac,"acx")) + vm_land.l(j,"secdforest")$(sameas(ac,"acx"));
+
 p35_secdforest(t,j,ac,"after")$(ord(t) > 1) =
         v35_secdforest.l(j,"new")$(ord(ac) = 1)
         + sum(ac_land35(ac,land35)$(not sameas(land35,"new") AND pc35_secdforest(j,land35) > 0),(v35_secdforest.l(j,land35)/pc35_secdforest(j,land35))*p35_secdforest(t,j,ac,"before"))$(ord(ac) > 1);
 
-*in 1st time step all other land is in highest age-class
+*other land age class calculation
 v35_other.l(j,land35)$(ord(t) = 1) = 0$(not sameas(land35,"old")) + vm_land.l(j,"other")$(sameas(land35,"old"));
 p35_other(t,j,ac,"after")$(ord(t) = 1) = 0$(not sameas(ac,"acx")) + vm_land.l(j,"other")$(sameas(ac,"acx"));
 
