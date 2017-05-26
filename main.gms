@@ -9,15 +9,15 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
 * Used data set: GLUES2-sresa2-constant_co2-miub_echo_g_rev23_n200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
-* md5sum: fdce703be5d2063c1e622edc2a5999e1
+* md5sum: 998865a1ac769d7f60c70d7374b5688e
 * Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/data
 * 
 * Used data set: magpie_8a828c6ed5004e77d1ba2025e8ea2261_rev2.08.tgz
 * md5sum: 961273a8e86e881074c12cf0f161b3ae
 * Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/data
 * 
-* Used data set: additional_data_rev1.01.tgz
-* md5sum: ac06c829276d9d58557b1b2520fa346c
+* Used data set: additional_data_rev2.00.tgz
+* md5sum: 7032359b9834689c681e0fdd1e5f9d0f
 * Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/data
 * 
 * Low resolution: n200
@@ -51,7 +51,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Wed May 24 11:17:26 2017
+* Last modification (input data): Fri May 26 19:25:05 2017
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 

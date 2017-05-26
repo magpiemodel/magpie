@@ -13,8 +13,9 @@ positive variables
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_landdiff_natveg(t,type)  aggregated difference in other land compared to previous timestep (mio. ha)
- ov35_other(t,j,land35,type) natveg land pools (mio. ha)
+ ov35_secdforest(t,j,land35,type) secdforest (mio. ha)
+ ov35_other(t,j,land35,type)      other land (mio. ha)
+ ov_landdiff_natveg(t,type)       aggregated difference in other land compared to previous timestep (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 
