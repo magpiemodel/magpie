@@ -4,18 +4,29 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-*secdforest age class calculation
+* In the 1st timestep there is a lot of reshuffling resulting in increase of v35_other(j,"new")
+* This would result in quite some carbon uptake (negative emissions) due to regrowth of vegetation
+* Therefore, we reset age-classes after the 1st time step
 v35_secdforest.l(j,land35)$(ord(t) = 1) = 0$(not sameas(land35,"old")) + vm_land.l(j,"secdforest")$(sameas(land35,"old"));
 p35_secdforest(t,j,ac,"after")$(ord(t) = 1) = 0$(not sameas(ac,"acx")) + vm_land.l(j,"secdforest")$(sameas(ac,"acx"));
 
+v35_other.l(j,land35)$(ord(t) = 1) = 0$(not sameas(land35,"old")) + vm_land.l(j,"other")$(sameas(land35,"old"));
+p35_other(t,j,ac,"after")$(ord(t) = 1) = 0$(not sameas(ac,"acx")) + vm_land.l(j,"other")$(sameas(ac,"acx"));
+
+* Abandoned land is in v35_other(j,"new")
+* Use historic grid-cell share of forest in year 850 (from LUH2v2) for distribution between secdforest and other
+* Replacement for former carbon density threshold
+p35_hist_fore_shr(j) = (f35_land_hist(j,"primforest") + f35_land_hist(j,"secdforest"))/sum(land, f35_land_hist(j,land));
+v35_secdforest.l(j,"new") = p35_hist_fore_shr(j)*v35_other.l(j,"new");
+v35_other.l(j,"new") = (1 - p35_hist_fore_shr(j))*v35_other.l(j,"new");
+
+*secdforest age class calculation
 p35_secdforest(t,j,ac,"after")$(ord(t) > 1) =
         v35_secdforest.l(j,"new")$(ord(ac) = 1)
         + sum(ac_land35(ac,land35)$(not sameas(land35,"new") AND pc35_secdforest(j,land35) > 0),(v35_secdforest.l(j,land35)/pc35_secdforest(j,land35))*p35_secdforest(t,j,ac,"before"))$(ord(ac) > 1);
 
-*other land age class calculation
-v35_other.l(j,land35)$(ord(t) = 1) = 0$(not sameas(land35,"old")) + vm_land.l(j,"other")$(sameas(land35,"old"));
-p35_other(t,j,ac,"after")$(ord(t) = 1) = 0$(not sameas(ac,"acx")) + vm_land.l(j,"other")$(sameas(ac,"acx"));
 
+*other land age class calculation
 p35_other(t,j,ac,"after")$(ord(t) > 1) =
         v35_other.l(j,"new")$(ord(ac) = 1)
         + sum(ac_land35(ac,land35)$(not sameas(land35,"new") AND pc35_other(j,land35) > 0),(v35_other.l(j,land35)/pc35_other(j,land35))*p35_other(t,j,ac,"before"))$(ord(ac) > 1);

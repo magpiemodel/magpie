@@ -22,6 +22,7 @@ parameters
  p35_save_primforest(t,j) save primforest (mio. ha)
  p35_save_secdforest(t,j) save secdforest (mio. ha)
  p35_save_other(t,j) save other land (mio. ha)
+ p35_hist_fore_shr(j) historic grid-cell share of forest in year 850 (from LUH2v2) 
 ;
 
 equations
