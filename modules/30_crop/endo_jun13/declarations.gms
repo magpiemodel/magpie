@@ -10,6 +10,7 @@ positive variables
 
 equations
  q30_cropland(j)                 crop conversion constraint
+ q30_suitability(j)              suitability constraint
  q30_rotation_max(j,crp30,w)     local rotational constraints
  q30_rotation_min(j,crp30,w)     local rotational constraints (minimum)
  q30_prod(j,kcr)                 production constraint for vegetal products
@@ -20,6 +21,7 @@ equations
 parameters
  ov_area(t,j,kcr,w,type)             agricultural production area (mio. ha)
  oq30_cropland(t,j,type)             crop conversion constraint
+ oq30_suitability(t,j,type)          suitability constraint
  oq30_rotation_max(t,j,crp30,w,type) local rotational constraints
  oq30_rotation_min(t,j,crp30,w,type) local rotational constraints (minimum)
  oq30_prod(t,j,kcr,type)             production constraint for vegetal products

@@ -1,4 +1,0 @@
-name,type,reason
-pcm_land, input, not needed
-pm_annuity_due, input, not needed
-sm_invest_horizon, input, not needed

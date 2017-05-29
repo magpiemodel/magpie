@@ -4,7 +4,7 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-vm_land.fx(j,"past",si) = pcm_land(j,"past",si);
+vm_land.fx(j,"past") = pcm_land(j,"past");
 
 vm_carbon_stock.fx(j,"past",c_pools) =
-          sum(si, pcm_land(j,"past",si)*fm_carbon_density(t,j,"past",c_pools));
+          pcm_land(j,"past")*fm_carbon_density(t,j,"past",c_pools);

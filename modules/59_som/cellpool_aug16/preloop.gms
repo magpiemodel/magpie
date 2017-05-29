@@ -22,7 +22,7 @@ i59_cratio(j,kcr) = sum((cell(i,j),tillage59,inputs59,climate59),
                  * i59_input_share(i,inputs59)
                  * f59_cratio_inputs(climate59,inputs59));
 
-p59_som_pool(j,"cropland") = sum(si, pcm_land(j,"crop",si)) * i59_cratio(j,"tece") * sum(ct,fm_carbon_density(ct,j,"crop","soilc"));
-p59_som_pool(j,"noncropland") =  sum((noncropland59,si),pcm_land(j,noncropland59,si)*sum(ct,fm_carbon_density(ct,j,noncropland59,"soilc")));
+p59_som_pool(j,"cropland") = pcm_land(j,"crop") * i59_cratio(j,"tece") * sum(ct,fm_carbon_density(ct,j,"crop","soilc"));
+p59_som_pool(j,"noncropland") =  sum((noncropland59),pcm_land(j,noncropland59)*sum(ct,fm_carbon_density(ct,j,noncropland59,"soilc")));
 
 p59_carbon_density(t,j,pools59)=0;

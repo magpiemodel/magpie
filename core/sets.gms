@@ -45,31 +45,31 @@ sets
        VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 
    j number of LPJ cells /
-       SSA_1*SSA_12,
-       MEA_13*MEA_30,
-       OAS_31*OAS_54,
-       CHA_55*CHA_75,
-       NEU_76*NEU_87,
-       EUR_88*EUR_105,
-       REF_106*REF_113,
-       LAM_114*LAM_148,
-       USA_149*USA_159,
-       CAZ_160*CAZ_192,
-       IND_193*IND_200/
+       SSA_1*SSA_25,
+       MEA_26*MEA_42,
+       OAS_43*OAS_54,
+       CHA_55*CHA_67,
+       NEU_68*NEU_71,
+       EUR_72*EUR_79,
+       REF_80*REF_125,
+       LAM_126*LAM_149,
+       USA_150*USA_164,
+       CAZ_165*CAZ_196,
+       IND_197*IND_200/
 
    cell(i,j) number of LPJ cells per region i
       /
-       SSA . SSA_1*SSA_12
-       MEA . MEA_13*MEA_30
-       OAS . OAS_31*OAS_54
-       CHA . CHA_55*CHA_75
-       NEU . NEU_76*NEU_87
-       EUR . EUR_88*EUR_105
-       REF . REF_106*REF_113
-       LAM . LAM_114*LAM_148
-       USA . USA_149*USA_159
-       CAZ . CAZ_160*CAZ_192
-       IND . IND_193*IND_200
+       SSA . SSA_1*SSA_25
+       MEA . MEA_26*MEA_42
+       OAS . OAS_43*OAS_54
+       CHA . CHA_55*CHA_67
+       NEU . NEU_68*NEU_71
+       EUR . EUR_72*EUR_79
+       REF . REF_80*REF_125
+       LAM . LAM_126*LAM_149
+       USA . USA_150*USA_164
+       CAZ . CAZ_165*CAZ_196
+       IND . IND_197*IND_200
       /
 
    i_to_iso(i,iso) mapping regions to iso countries
@@ -191,7 +191,7 @@ sets
 
 ***LAND POOLS***
    land land pools
-        / crop, past, forestry, forest, urban, other /
+        / crop, past, forestry, primforest, secdforest, urban, other /
 
   land_ag(land) agricultural land
                   / crop, past /
@@ -237,8 +237,8 @@ sets
      crop_vegc, crop_litc, crop_soilc,
      past_vegc, past_litc, past_soilc,
      forestry_vegc, forestry_litc, forestry_soilc,
-     forest_vegc, forest_litc, forest_soilc,
-     urban_vegc, urban_litc, urban_soilc,
+     primforest_vegc, primforest_litc, primforest_soilc,
+secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, urban_soilc,
      other_vegc, other_litc, other_soilc,
      beccs/
 
@@ -250,16 +250,16 @@ sets
    / crop_vegc, crop_litc, crop_soilc,
      past_vegc, past_litc, past_soilc,
      forestry_vegc, forestry_litc, forestry_soilc,
-     forest_vegc, forest_litc, forest_soilc,
-     urban_vegc, urban_litc, urban_soilc,
+     primforest_vegc, primforest_litc, primforest_soilc,
+secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, urban_soilc,
      other_vegc, other_litc, other_soilc /
 
    emis_source_co2_land(emis_source_cell) land pool CO2 emission sources
    / crop_vegc, crop_litc, crop_soilc,
      past_vegc, past_litc, past_soilc,
      forestry_vegc, forestry_litc, forestry_soilc,
-     forest_vegc, forest_litc, forest_soilc,
-     urban_vegc, urban_litc, urban_soilc,
+     primforest_vegc, primforest_litc, primforest_soilc,
+secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, urban_soilc,
      other_vegc, other_litc, other_soilc /
 
    emis_source_co2_forestry(emis_source_cell) forestry land CO2 emission sources
@@ -283,9 +283,12 @@ sets
    forestry_vegc    . (forestry) . (vegc)
    forestry_litc    . (forestry) . (litc)
    forestry_soilc   . (forestry) . (soilc)
-   forest_vegc      . (forest) . (vegc)
-   forest_litc      . (forest) . (litc)
-   forest_soilc     . (forest) . (soilc)
+   primforest_vegc  . (primforest) . (vegc)
+   primforest_litc  . (primforest) . (litc)
+   primforest_soilc . (primforest) . (soilc)
+   secdforest_vegc  . (secdforest) . (vegc)
+   secdforest_litc  . (secdforest) . (litc)
+   secdforest_soilc . (secdforest) . (soilc)
    urban_vegc       . (urban) . (vegc)
    urban_litc       . (urban) . (litc)
    urban_soilc      . (urban) . (soilc)

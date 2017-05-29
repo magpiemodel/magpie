@@ -6,6 +6,6 @@
 
 pc32_carbon_density(j,c_pools) = fm_carbon_density(t,j,"forestry",c_pools);
 
-vm_carbon_stock.fx(j,"forestry",c_pools) = sum(si, vm_land.l(j,"forestry",si))*pc32_carbon_density(j,c_pools);
+vm_carbon_stock.fx(j,"forestry",c_pools) = vm_land.l(j,"forestry")*pc32_carbon_density(j,c_pools);
 
 *** EOF presolve.gms ***

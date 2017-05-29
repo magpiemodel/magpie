@@ -24,5 +24,4 @@
                    + vm_cost_cdr(i2)
                    + vm_cost_bioen(i2)
                    + vm_processing_costs(i2)
-                   + sum((cell(i2,j2),land_ag), vm_cost_landtax(j2,land_ag))
                    ;

@@ -4,7 +4,6 @@ c15_pop_scenario;;;pop_a1;pop_a2;pop_b1;pop_b2;pop_SSP1;pop_SSP2;pop_SSP3;pop_SS
 c15_gdp_scenario;;;gdp_a1;gdp_a2;gdp_b1;gdp_b2;gdp_SSP1;gdp_SSP2;gdp_SSP3;gdp_SSP4;gdp_SSP5;gdp_B2;gdp_SSP2;gdp_SSP2;gdp_SSP2;gdp_SSP2;gdp_SSP2;gdp_SSP1;gdp_SSP2;gdp_SSP3;gdp_SSP3;gdp_SSP3;gdp_SSP2;gdp_SSP2;gdp_SSP2;gdp_SSP2;;;
 c15_food_scenario;;;A1;A2;B1;B2;SSP1;SSP2;SSP3;SSP4;SSP5;B2;SSP2_lowcal;SSP2_lowls;SSP2;SSP2;SSP2_waste;SSP1_boundary;SSP2_boundary;SSP3_boundary;SSP4_boundary;SSP5_boundary;ssp2_high_yvonne;ssp2_low_yvonne;ssp2_lowest_yvonne;SSP2;;;
 c21_trade_liberalization;;;globalized;regionalized;globalized;regionalized;globalized;regionalized;fragmented;globalized;globalized;regionalized;regionalized;regionalized;regionalized;regionalized;regionalized;globalized;regionalized;fragmented;globalized;globalized;regionalized;regionalized;regionalized;regionalized;;;
-c33_forest_protection;;;low;low;high;high;high;medium;low;mixed;medium;high;medium;medium;medium;medium;medium;high;medium;low;mixed;medium;low;high;high;medium;;;
 s42_reserved_fraction;;;0.5;0.5;0.5;0.5;0.5;0.5;0.5;0.5;0.5;0.5;0.5;0.5;0.5;0.5;0.5;0.5;0.5;0.5;0.5;0.5;0.5;0.5;0.5;0.5;;;
 s42_watdem_nonagr_scenario;;;1;2;3;1;3;1;2;2;2;3;1;1;1;1;1;3;1;2;2;2;1;1;1;1;;;
 s42_irrig_eff_scenario;;;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;1;2;3;3;1;;;

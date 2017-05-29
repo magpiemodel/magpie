@@ -6,7 +6,7 @@
 
 sets
 noncropland59(land)
-/past, forestry, forest, urban, other/
+/past, forestry, primforest, secdforest, urban, other/
 
 pools59
 /cropland,noncropland/

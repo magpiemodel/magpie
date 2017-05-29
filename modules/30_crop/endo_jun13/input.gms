@@ -19,3 +19,9 @@ $ondelim
 $include "./modules/30_crop/endo_jun13/input/f30_rotation_min.csv"
 $offdelim
 /;
+
+table f30_land_si(j,si) si0 and nsi0 land [mio. ha]
+$ondelim
+$include "./modules/30_crop/endo_jun13/input/avl_land_si.cs3"
+$offdelim
+;

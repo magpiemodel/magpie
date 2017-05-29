@@ -4,4 +4,4 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-vm_land.l(j,land,si) = pcm_land(j,land,si);
+vm_land.l(j,land) = pcm_land(j,land);

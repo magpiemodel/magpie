@@ -20,8 +20,8 @@ sets
      crop_vegc, crop_litc, crop_soilc,
      past_vegc, past_litc, past_soilc,
      forestry_vegc, forestry_litc, forestry_soilc,
-     forest_vegc, forest_litc, forest_soilc,
-     urban_vegc, urban_litc, urban_soilc,
+     primforest_vegc, primforest_litc, primforest_soilc,
+secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, urban_soilc,
      other_vegc, other_litc, other_soilc,
      beccs/
 ;

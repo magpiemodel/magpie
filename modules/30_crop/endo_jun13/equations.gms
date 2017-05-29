@@ -5,7 +5,10 @@
 *** Contact: magpie@pik-potsdam.de
 
  q30_cropland(j2)  ..
-   sum((kcr,w), vm_area(j2,kcr,w)) =e= vm_land(j2,"crop","si0");
+   sum((kcr,w), vm_area(j2,kcr,w)) =e= vm_land(j2,"crop");
+
+ q30_suitability(j2)  ..
+   vm_land(j2,"crop") =l= f30_land_si(j2,"si0");
 
  q30_rotation_max(j2,crpmax30,w) ..
    sum((crp_kcr30(crpmax30,kcr)), vm_area(j2,kcr,w)) =l=
@@ -19,4 +22,4 @@
   vm_prod(j2,kcr) =e= sum(w, vm_area(j2,kcr,w)*vm_yld(j2,kcr,w));
 
  q30_carbon(j2,c_pools) .. vm_carbon_stock(j2,"crop",c_pools) =e=
-             sum(si, vm_land(j2,"crop",si)*sum(ct,fm_carbon_density(ct,j2,"crop",c_pools)));
+             vm_land(j2,"crop")*sum(ct,fm_carbon_density(ct,j2,"crop",c_pools));
