@@ -7,7 +7,10 @@
 sets
   land35 natveg land pools
     / new, grow, old /
-      
+ 
+   pol35 afforestation policy type
+    / none, npi, indc/
+     
    ac_land35(ac,land35) mapping between age classes and aggregated land types
 
    prot_type conservation priority areas 

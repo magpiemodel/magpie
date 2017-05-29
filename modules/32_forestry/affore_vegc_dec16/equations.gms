@@ -11,6 +11,8 @@ q32_cost_fore_ac(i2) .. vm_cost_fore(i2) =e=
  q32_land(j2) .. vm_land(j2,"forestry") =e=
                        sum(land32, v32_land(j2,land32));
 
+ q32_aff_pol(j2) .. v32_land(j2,"new_indc") =e= sum(ct, p32_aff_pol_timestep(ct,j2));
+
  q32_max_aff .. sum((j2), vm_land(j2,"forestry")-pm_land_start(j2,"forestry")) =l= 
 					s32_max_aff_area;
 
@@ -19,7 +21,7 @@ q32_cost_fore_ac(i2) .. vm_cost_fore(i2) =e=
                         sum(land32, v32_land(j2,land32)*sum(ct, p32_carbon_density(ct,j2,land32,c_pools)));
 
 
- q32_diff .. vm_landdiff_forestry =e= sum((j2),v32_land(j2,"new")
+ q32_diff .. vm_landdiff_forestry =e= sum((j2),v32_land(j2,"new") + v32_land(j2,"new_indc")
                                           + pcm_land(j2,"forestry")
                                           - v32_land(j2,"prot")
                                           - v32_land(j2,"grow")

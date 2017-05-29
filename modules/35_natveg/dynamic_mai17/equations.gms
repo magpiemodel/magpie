@@ -21,6 +21,11 @@
            sum(land35, v35_other(j2,land35)*sum(ct, p35_carbon_density_other(ct,j2,land35,c_pools)));
 
 
+ q35_min_forest(j2) .. vm_land(j2,"primforest") + vm_land(j2,"secdforest") =g= sum(ct, p35_min_forest(ct,j2));
+
+ q35_min_cstock(j2) .. sum(c_pools, vm_carbon_stock(j2,"primforest",c_pools) + vm_carbon_stock(j2,"secdforest",c_pools)) =g= sum(ct, p35_min_cstock(ct,j2));
+
+
  q35_diff .. vm_landdiff_natveg =e= sum(j2, v35_other(j2,"new")
                                           + v35_secdforest(j2,"new")
                                           + pcm_land(j2,"primforest")
