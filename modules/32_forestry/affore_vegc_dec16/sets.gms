@@ -6,6 +6,6 @@ sets
   land32 forestry land pools
     / new, prot, grow, old/
 
-   j_ac_land32(j,ac,land32) mapping cell - age class forest - land type - fkt
+   ac_land32(ac,land32) mapping age class - land type
 ;
 *** EOF sets.gms ***
