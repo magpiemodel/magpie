@@ -28,10 +28,14 @@ p35_secdforest(t,j,ac,"before") = p35_secdforest(t,j,ac,"before") + p35_recovere
 *calculate new v35_secdforest.l
 pc35_secdforest(j,land35) = sum(ac_land35(ac,land35), p35_secdforest(t,j,ac,"before"));
 v35_secdforest.l(j,land35) = pc35_secdforest(j,land35);
+pcm_land(j,"secdforest") = sum(land35, pc35_secdforest(j,land35));
+vm_land.l(j,"secdforest") = sum(land35, pc35_secdforest(j,land35));
 
 *calculate new v35_other.l
 pc35_other(j,land35) = sum(ac_land35(ac,land35), p35_other(t,j,ac,"before"));
 v35_other.l(j,land35) = pc35_other(j,land35);
+pcm_land(j,"other") = sum(land35, pc35_other(j,land35));
+vm_land.l(j,"other") = sum(land35, pc35_other(j,land35));
 
 *** Forest protection (WDPA areas and different conservation priority areas)
 * calc protection share for primforest, secdforest and other land
