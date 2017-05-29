@@ -17,3 +17,5 @@ i35_other(j,ac) = 0;
 i35_other(j,"acx") = pcm_land(j,"other");
 
 p35_protect_shr(t,j,prot_type) = 0;
+
+p35_recovered_forest(t,j,ac) = 0;

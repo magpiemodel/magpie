@@ -13,13 +13,6 @@ p35_secdforest(t,j,ac,"after")$(ord(t) = 1) = 0$(not sameas(ac,"acx")) + vm_land
 v35_other.l(j,land35)$(ord(t) = 1) = 0$(not sameas(land35,"old")) + vm_land.l(j,"other")$(sameas(land35,"old"));
 p35_other(t,j,ac,"after")$(ord(t) = 1) = 0$(not sameas(ac,"acx")) + vm_land.l(j,"other")$(sameas(ac,"acx"));
 
-* Abandoned land is in v35_other(j,"new")
-* Use historic grid-cell share of forest in year 850 (from LUH2v2) for distribution between secdforest and other
-* Replacement for former carbon density threshold
-p35_hist_fore_shr(j) = (f35_land_hist(j,"primforest") + f35_land_hist(j,"secdforest"))/sum(land, f35_land_hist(j,land));
-v35_secdforest.l(j,"new") = p35_hist_fore_shr(j)*v35_other.l(j,"new");
-v35_other.l(j,"new") = (1 - p35_hist_fore_shr(j))*v35_other.l(j,"new");
-
 *secdforest age class calculation
 p35_secdforest(t,j,ac,"after")$(ord(t) > 1) =
         v35_secdforest.l(j,"new")$(ord(ac) = 1)

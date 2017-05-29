@@ -20,6 +20,10 @@ else
                   + p35_secdforest(t-1,j,ac,"after")$(ord(ac) = card(ac));
 );
 
+*calculate recovered forest based on carbon density threshold; if carbon density > 20 tC/ha then shift from other land to forest land pool
+p35_recovered_forest(t,j,ac)$(not sameas(ac,"acx")) = p35_other(t,j,ac,"before")$(pm_carbon_density_ac(t,j,ac,"vegc") > 20);
+p35_other(t,j,ac,"before") = p35_other(t,j,ac,"before") - p35_recovered_forest(t,j,ac);
+p35_secdforest(t,j,ac,"before") = p35_secdforest(t,j,ac,"before") + p35_recovered_forest(t,j,ac);
 
 *calculate new v35_secdforest.l
 pc35_secdforest(j,land35) = sum(ac_land35(ac,land35), p35_secdforest(t,j,ac,"before"));
