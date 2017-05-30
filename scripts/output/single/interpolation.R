@@ -16,8 +16,9 @@
 # 1.03: introduced function interpolate, all possible input is read from the GDX file now
 
 library(lucode)
-library(luscale)
 library(magpie4)
+library(luscale)
+source("/p/projects/rd3mod/R/libraries/svn/luscale/R/interpolate.R")
 
 ############################# BASIC CONFIGURATION #######################################
 land_lr_file     <- "avl_land.cs3"  
@@ -38,6 +39,23 @@ if(!exists("source_include")) {
   readArgs("sum_spam_file","outputdir","title")
 }
 #########################################################################################
+# Function to extract information from info.txt
+get_info <- function(file, grep_expression, sep, pattern="", replacement="") {
+  if(!file.exists(file)) return("#MISSING#")
+  file <- readLines(file, warn=FALSE)
+  tmp <- grep(grep_expression, file, value=TRUE)
+  tmp <- strsplit(tmp, sep)
+  tmp <- sapply(tmp, "[[", 2)
+  tmp <- gsub(pattern, replacement ,tmp)
+  if(all(!is.na(as.logical(tmp)))) return(as.vector(sapply(tmp, as.logical)))
+  if (all(!(regexpr("[a-zA-Z]",tmp) > 0))) {
+    tmp <- as.numeric(tmp)
+  }
+  return(tmp)
+}
+low_res  <- get_info(paste0(outputdir,"/info.txt"),"^\\* Output ?resolution:",": ")
+sum_spam_file <- paste0("0.5-to-",low_res,"_sum.spam")
+print(sum_spam_file)
 
 gdx<-path(outputdir,"fulldata.gdx")
 land_ini_lr<-readGDX(gdx,"f10_land","f_land", format="first_found")
