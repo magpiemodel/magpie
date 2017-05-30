@@ -6,18 +6,18 @@
 
 
 positive variables
- vm_dem_feed(i,kap,kfeed)          regional feed demand including byproducts (Mt DM)
+ vm_dem_feed(i,kap,kagri)          regional feed demand including byproducts (Mt DM)
 ;
 
 equations
- q70_feed(i,kap,kfeed)             regional feed demand
- q70_cost_prod_liv(i,kfeed)         regional factor input costs for livestock production
+ q70_feed(i,kap,kagri)             regional feed demand
+ q70_cost_prod_liv(i,kagri)         regional factor input costs for livestock production
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_dem_feed(t,i,kap,kfeed,type)  regional feed demand including byproducts (Mt DM)
- oq70_feed(t,i,kap,kfeed,type)    regional feed demand
- oq70_cost_prod_liv(t,i,kfeed,type) regional factor input costs for livestock production
+ ov_dem_feed(t,i,kap,kagri,type)  regional feed demand including byproducts (Mt DM)
+ oq70_feed(t,i,kap,kagri,type)    regional feed demand
+ oq70_cost_prod_liv(t,i,kagri,type) regional factor input costs for livestock production
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
