@@ -1,3 +1,6 @@
+### base_run directory
+base_run <- "base_run"
+
 #spatial_header
 load(paste0(base_run,"/spatial_header.rda"))
 
