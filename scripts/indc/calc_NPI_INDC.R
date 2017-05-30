@@ -17,9 +17,9 @@ res  <- get_info(paste0(base_run,"/info.txt"),"^\\* Output ?resolution:",": ")
 load(paste0(base_run,"/spatial_header.rda"))
 
 #read in dummy files
-ad_pol <- read.magpie("input/indc_ad_pol_0.5.mz")
-aff_pol <- read.magpie("input/indc_aff_pol_0.5.mz")
-emis_pol <- read.magpie("input/indc_emis_pol_0.5.mz")
+ad_pol <- read.magpie("data_in/indc_ad_pol_0.5.mz")
+aff_pol <- read.magpie("data_in/indc_aff_pol_0.5.mz")
+emis_pol <- read.magpie("data_in/indc_emis_pol_0.5.mz")
 getCells(ad_pol) <- spatial_header
 getCells(aff_pol) <- spatial_header
 getCells(emis_pol) <- spatial_header
@@ -371,14 +371,14 @@ aff_pol_lr <- speed_aggregate(aff_pol,rel = paste0(base_run,"/0.5-to-",res,"_sum
 emis_pol_lr <- speed_aggregate(emis_pol,rel = paste0(base_run,"/0.5-to-",res,"_sum.spam"))
 
 #write files
-write.magpie(ad_pol_lr,file_name = "output/indc_ad_pol.cs3")
-write.magpie(aff_pol_lr,file_name = "output/indc_aff_pol.cs3")
-write.magpie(emis_pol_lr,file_name = "output/indc_emis_pol.cs3")
+write.magpie(ad_pol_lr,file_name = "data_out/indc_ad_pol.cs3")
+write.magpie(aff_pol_lr,file_name = "data_out/indc_aff_pol.cs3")
+write.magpie(emis_pol_lr,file_name = "data_out/indc_emis_pol.cs3")
 
 #copy files
-file.copy("output/indc_ad_pol.cs3","../../modules/35_natveg/input/indc_ad_pol.cs3",overwrite = TRUE)
-file.copy("output/indc_aff_pol.cs3","../../modules/32_forestry/input/indc_aff_pol.cs3",overwrite = TRUE)
-file.copy("output/indc_emis_pol.cs3","../../modules/35_natveg/input/indc_emis_pol.cs3",overwrite = TRUE)
+file.copy("data_out/indc_ad_pol.cs3","../../modules/35_natveg/input/indc_ad_pol.cs3",overwrite = TRUE)
+file.copy("data_out/indc_aff_pol.cs3","../../modules/32_forestry/input/indc_aff_pol.cs3",overwrite = TRUE)
+file.copy("data_out/indc_emis_pol.cs3","../../modules/35_natveg/input/indc_emis_pol.cs3",overwrite = TRUE)
 
 ### save country data as R object ###
-save("npi_pol_deforest","npi_pol_afforest","npi_pol_emis","indc_pol_deforest","indc_pol_afforest","indc_pol_emis",file = "output/npi_indc_country.RData")
+save("npi_pol_deforest","npi_pol_afforest","npi_pol_emis","indc_pol_deforest","indc_pol_afforest","indc_pol_emis",file = "data_out/npi_indc_country.RData")
