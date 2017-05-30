@@ -5,16 +5,14 @@ library(magpie4)
 #library(lucode)
 library(madrat)
 library(luscale)
-source("calcFunctions.R")
 
 ### base_run directory
 base_run <- "base_run"
 
+source("calcFunctions.R")
+
 #low_res
 res  <- get_info(paste0(base_run,"/info.txt"),"^\\* Output ?resolution:",": ")
-
-#spatial_header
-load(paste0(base_run,"/spatial_header.rda"))
 
 #read in dummy files
 ad_pol <- read.magpie("data_in/indc_ad_pol_0.5.mz")

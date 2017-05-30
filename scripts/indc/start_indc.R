@@ -67,6 +67,7 @@ start_indc_preprocessing <- function(cfg="config/default.cfg",base_folder="scrip
 		lucode::singleGAMSfile(output=lucode::path(cfg$results_folder, "full.gms"))
 		lucode::model_unlock(lock_id)
 		
+		print(mainfolder)
 		on.exit(setwd(mainfolder))
 		setwd(cfg$results_folder)
 		

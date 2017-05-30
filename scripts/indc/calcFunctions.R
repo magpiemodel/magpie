@@ -1,3 +1,6 @@
+#spatial_header
+load(paste0(base_run,"/spatial_header.rda"))
+
 mapping<-toolMappingFile(type="cell",name="CountryToCellMapping.csv",readcsv=TRUE)  
 countries<-unique(mapping$iso)
 
