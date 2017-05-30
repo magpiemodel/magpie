@@ -9,16 +9,16 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
 * Used data set: GLUES2-sresa2-constant_co2-miub_echo_g_rev23_n200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
-* md5sum: 998865a1ac769d7f60c70d7374b5688e
-* Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/data
+* md5sum: a5a816f1740aaccfb492db41bff115a5
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
-* Used data set: magpie_8a828c6ed5004e77d1ba2025e8ea2261_rev2.08.tgz
-* md5sum: 961273a8e86e881074c12cf0f161b3ae
-* Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/data
+* Used data set: magpie_8a828c6ed5004e77d1ba2025e8ea2261_rev2.496.tgz
+* md5sum: 8c7931a2778b681f2cb1837f644dc264
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
 * Used data set: additional_data_rev2.00.tgz
 * md5sum: 7032359b9834689c681e0fdd1e5f9d0f
-* Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/data
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Low resolution: n200
 * High resolution: 0.5
@@ -31,7 +31,7 @@ $title magpie
 * 
 * Regionscode: 8a828c6ed5004e77d1ba2025e8ea2261
 * 
-* Regions data revision: 2.08
+* Regions data revision: 2.496
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/GLUES2/sresa2/constant_co2/miub_echo_g
@@ -51,7 +51,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Fri May 26 19:25:05 2017
+* Last modification (input data): Mon May 29 15:55:03 2017
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 

@@ -1,5 +1,8 @@
 
 
+*
+vm_supply.fx(i2,kforestry) = 0;
+
 *boundaries afforestation mask
 v32_land.lo(j,"new") = 0;
 v32_land.up(j,"new") = f32_aff_mask(j) * sum(land, pcm_land(j,land));

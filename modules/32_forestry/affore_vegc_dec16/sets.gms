@@ -1,11 +1,14 @@
 sets
 ***FORESTRY COST TYPES***
-   fcosts32 forestry factor cost types 
-   	/ recur,mon /
+   fcosts32 forestry factor cost types
+           / recur,mon /
 
   land32 forestry land pools
     / new, prot, grow, old/
 
    ac_land32(ac,land32) mapping age class - land type
+
+   kforestry(kall) forestry products
+   / wood, woodfuel /
 ;
 *** EOF sets.gms ***
