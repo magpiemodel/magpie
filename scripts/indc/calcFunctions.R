@@ -1,9 +1,23 @@
+mapping<-toolMappingFile(type="cell",name="CountryToCellMapping.csv",readcsv=TRUE)  
+countries<-unique(mapping$iso)
+
+get_info <- function(file, grep_expression, sep, pattern="", replacement="") {
+  if(!file.exists(file)) return("#MISSING#")
+  file <- readLines(file, warn=FALSE)
+  tmp <- grep(grep_expression, file, value=TRUE)
+  tmp <- strsplit(tmp, sep)
+  tmp <- sapply(tmp, "[[", 2)
+  tmp <- gsub(pattern, replacement ,tmp)
+  if(all(!is.na(as.logical(tmp)))) return(as.vector(sapply(tmp, as.logical)))
+  if (all(!(regexpr("[a-zA-Z]",tmp) > 0))) {
+    tmp <- as.numeric(tmp)
+  }
+  return(tmp)
+}
+
 ### create indc_pol file
 create_indc <- function() {
-  mapping_file <- "mappings/cell/CountryToCellMapping.csv"
-  mapping<-read.csv(mapping_file, as.is=TRUE, sep=";")
-  countries<-unique(mapping$CountryCode)
-  
+
   indc_pol <- new.magpie(countries,NULL,c("indc",           #INDC exists: 0 FALSE, 1 TRUE
                                           "targettype",     #INDC target type: 1 baseyear (e.g. 2005), 2 baseline (i.e. MAgPIE BAU scenario)
                                           "baseyear",       #Baseyear (target type 1) / starting year (target type 2) for INDC calculation
@@ -26,14 +40,6 @@ calc_flows <- function(stock,im_years) {
 ### calc indc policy
 calc_indc <- function(indc_pol,magpie_bau_stock,affore=FALSE,im_years) {
   
-  #round magpie_bau_stock
-  #magpie_bau_stock <- floor(magpie_bau_stock/0.0000001)*0.0000001
-  
-  #read in mapping
-  mapping_file <- "mappings/cell/CountryToCellMapping.csv"
-  mapping<-read.csv(mapping_file, as.is=TRUE, sep=";")
-  countries<-unique(mapping$CountryCode)
-
   #get Years
   y <- getYears(magpie_bau_stock,as.integer = TRUE)
   tmp <- seq(y[length(y)]+5,2150,by=5)
@@ -41,7 +47,7 @@ calc_indc <- function(indc_pol,magpie_bau_stock,affore=FALSE,im_years) {
   im_years <- mbind(im_years, new.magpie("GLO",tmp,NULL,5))
   
   #include country information in cells
-  getCells(magpie_bau_stock) <- mapping$CountryCell
+  getCells(magpie_bau_stock) <- mapping$celliso
   
   #extent magpie_bau_stock beyond 2030
   magpie_bau_stock_extent <- new.magpie(getCells(magpie_bau_stock), tmp, getNames(magpie_bau_stock), 0) 
@@ -58,7 +64,7 @@ calc_indc <- function(indc_pol,magpie_bau_stock,affore=FALSE,im_years) {
   if(!affore) magpie_bau_stock[setdiff(countries,indc_true),,] <- 0
   
   #create magpie_ref_flow object
-  magpie_ref_flow <- new.magpie(mapping$CountryCell,getYears(magpie_bau_stock),NULL,0)
+  magpie_ref_flow <- new.magpie(mapping$celliso,getYears(magpie_bau_stock),NULL,0)
   
   #flows are only needed if affore=FALSE
   if(!affore) {
@@ -66,7 +72,7 @@ calc_indc <- function(indc_pol,magpie_bau_stock,affore=FALSE,im_years) {
     magpie_bau_flow <- calc_flows(magpie_bau_stock,im_years)
     #account only for positive flows
     magpie_bau_flow[magpie_bau_flow < 0] <- 0
-    getCells(magpie_bau_flow) <- mapping$CountryCell
+    getCells(magpie_bau_flow) <- mapping$celliso
   }
   
   #calculate transition over time (as share)
@@ -103,20 +109,20 @@ calc_indc <- function(indc_pol,magpie_bau_stock,affore=FALSE,im_years) {
   }
   
   #reset cellular mapping to MAgPIE format
-  if(!affore) getCells(magpie_ref_flow) <- mapping$X
-  if(!affore) getCells(magpie_bau_flow) <- mapping$X
-  getCells(magpie_bau_stock) <- mapping$X
+  if(!affore) getCells(magpie_ref_flow) <- mapping$cell
+  if(!affore) getCells(magpie_bau_flow) <- mapping$cell
+  getCells(magpie_bau_stock) <- mapping$cell
 
   #calculate the reduction target in absolute numbers
   if (affore) {
-      magpie_indc <- speed_aggregate(x = magpie_indc,rel = mapping, to = "X", from = "CountryCode",weight = dimSums(magpie_bau_stock[,2005,c("crop","past")]))
+      magpie_indc <- speed_aggregate(x = magpie_indc,rel = mapping, to = "cell", from = "iso",weight = dimSums(magpie_bau_stock[,2005,c("crop","past")]))
 #      magpie_indc <- magpie_indc + collapseNames(magpie_bau_stock[,,"forestry"])
   } else {
-    magpie_indc <- speed_aggregate(x=magpie_indc, rel=mapping, to="X", from="CountryCode")
+    magpie_indc <- speed_aggregate(x=magpie_indc, rel=mapping, to="cell", from="iso")
     magpie_indc <- magpie_indc * magpie_ref_flow * im_years + magpie_bau_stock
   }
   
-  #getCells(magpie_indc) <- mapping$X
+  getCells(magpie_indc) <- spatial_header
   
   # #check
   # print("MAgPIE BAU")

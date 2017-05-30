@@ -24,8 +24,7 @@ clean_indc <- function(x) {
   x <- dcast(x, Region ~ Data1, value.var="Value")
   return(x)
 }
-load("npi_all.RData")
-load("indc_all.RData")
+load("output/npi_indc_country.RData")
 ```
 
 ## Reduced deforestation (%)

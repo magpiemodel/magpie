@@ -1,36 +1,165 @@
-### calcINDC 
-## calculates input for MAgPIE INDC runs based on MAgPIE BAU runs and INDC documents
+### calcNPI  
+## calculates input for MAgPIE NPI runs based on MAgPIE BAU runs and NPI documents
 
-library(magpie)
-source("calcINDCfunctions.R")
-mapping_file <- "mappings/cell/CountryToCellMapping.csv"
-mapping<-read.csv(mapping_file, as.is=TRUE, sep=";")
-countries<-unique(mapping$CountryCode)
+library(magpie4)
+#library(lucode)
+library(madrat)
+library(luscale)
+source("calcFunctions.R")
 
-### set resolution
-if(exists("cfg")) res <- cfg$low_res else res <- "n600"
-if(!file.exists(res)) dir.create(res)
+### base_run directory
+base_run <- "base_run"
 
-### BAU directory
-# bau_dir <- "BAU"
-bau_dir <- paste0("Base","_",res)
+#low_res
+res  <- get_info(paste0(base_run,"/info.txt"),"^\\* Output ?resolution:",": ")
+
+#spatial_header
+load(paste0(base_run,"/spatial_header.rda"))
+
+#read in dummy files
+ad_pol <- read.magpie("input/indc_ad_pol_0.5.mz")
+aff_pol <- read.magpie("input/indc_aff_pol_0.5.mz")
+emis_pol <- read.magpie("input/indc_emis_pol_0.5.mz")
+getCells(ad_pol) <- spatial_header
+getCells(aff_pol) <- spatial_header
+getCells(emis_pol) <- spatial_header
 
 ### Read in data from MAgPIE BAU run (0.5 degree)
-gdx <- paste0(bau_dir,"/fulldata.gdx")
-im_years <- readGDX(gdx,"im_years")
-y <- getYears(im_years,as.integer = TRUE)
+gdx <- paste0(base_run, "/fulldata.gdx")
+y <- getYears(land(gdx),as.integer = TRUE)
+im_years <- c(0,diff(y))
+names(im_years) <- y
+im_years <- as.magpie(im_years)
+
+#read in land cover (stock) from BAU
+magpie_bau_land <- read.magpie(paste0(base_run,"/cell.land_0.5.mz"))[,-1,]
+#add country mapping
+getCells(magpie_bau_land) <- mapping$celliso
+
+#calc deforestation rate (flow)
+magpie_bau_forest <- dimSums(magpie_bau_land[,,c("primforest","secdforest")],dim=3)
+getCells(magpie_bau_forest) <- mapping$celliso
+
+#read in forest carbon stock
+#magpie_bau_cstock <- dimSums(readGDX(gdx,"ov_carbon_stock",select=list(type="level"))[,,c("primforest","secdforest")],dim=3)
+#magpie_bau_cstock <- speed_aggregate(magpie_bau_cstock, rel=paste0(base_run,"/0.5-to-",res,"_area_weighted_mean.spam"))
+magpie_bau_cstock <- magpie_bau_forest
+magpie_bau_cstock[,,] <- 0
+getCells(magpie_bau_cstock) <- mapping$celliso
+
+
+### create NPI input files
+
+## BEGIN reduce deforestation
+## minimum forest stock based on NPI documents
+
+#create npi_pol_deforest object
+npi_pol_deforest <- create_indc()
+
+#set reduction targets at country level
+#percentage: 0 = no reduction, 1 = full reduction of deforestation 
+
+#Australia
+npi_pol_deforest["AUS",1,] <- c(1,1,2010,2010,1) #increase 20,000 hectares afforestation by 2020 -> zero deforestation 
+#Brazil 
+npi_pol_deforest["BRA",1,] <- c(1,1,2005,2030,1) #Reforestation of 12 mn ha by 2030 -> zero deforestation 
+#China
+npi_pol_deforest["CHN",1,] <- c(1,2,2005,2005,1) #23.04% forest coverage by 2020 -> assume no deforestation
+#India
+npi_pol_deforest["IND",1,] <- c(1,2,2005,2005,1) #+ 5 million ha (2005-2030) -> assume no deforestation
+#Mexico
+# tmp <- dimSums(magpie_bau_emis["MEX",2020,], dim=1)*44/12
+npi_pol_deforest["MEX",1,] <- c(1,1,2005,2030,1) # 8.75 MtCO2e reduction in 2018 below BAU from deforestation and forest degradation --> 0
+
+#Calc minimum forest stock in NPI scenario; result is in 0.5 degree resolution; Unit is Mha
+ad_pol_npi <- calc_indc(npi_pol_deforest,magpie_bau_forest,affore=FALSE,im_years=im_years)
+ad_pol[,getYears(ad_pol_npi),"npi"] <- ad_pol_npi
+
+## END reduce deforestation
+
+
+## BEGIN afforestation
+## minimum forestry stock based on NPI documents
+
+#create npi_pol_afforest object
+npi_pol_afforest <- create_indc()
+
+#set afforestation targets at country level in Mha
+
+#Australia
+npi_pol_afforest["AUS",1,] <- c(1,1,2010,2020,0.02) #20,000 hectares afforestation by 2020
+#Brazil
+npi_pol_afforest["BRA",1,] <- c(1,1,2005,2030,12) #Reforestation of 12 mn ha by 2030
+#China
+tmp <- dimSums(magpie_bau_land["CHN",2005,],dim=c(1,3))*0.2304 - dimSums(magpie_bau_land["CHN",2005,c("primforest","secdforest","forestry")],dim=c(1,3))
+tmp[tmp<0] <- 0
+npi_pol_afforest["CHN",1,] <- c(1,1,2005,2020,tmp) #23.04% forest coverage by 2020 --> 50 Mha afforestation is needed
+#India
+npi_pol_afforest["IND",1,] <- c(1,1,2005,2030,5) #Forest coverage (area) | Increase	5.00E+06	ha	from 2005 to 2030
+
+
+# Calc minimum forestry stock in NPI scenario; result is in 0.5 degree resolution; Unit is Mha
+aff_pol_npi <- calc_indc(npi_pol_afforest,magpie_bau_land,affore=TRUE,im_years=im_years)
+aff_pol[,getYears(aff_pol_npi),"npi"] <- aff_pol_npi
+
+## END afforestation
+
+## BEGIN LUC CO2 emission reduction
+## minimum carbon stock based on NPI documents
+
+#create npi_pol_emis object
+npi_pol_emis <- create_indc()
+
+#set reduction targets at country level
+#percentage: 0 = no reduction, 1 = full reduction of LUC emissions 
+#Japan
+npi_pol_emis["JPN",,] <- c(1,1,2005,2020,0.028)
+#EU28 economy-wide target: 20% reduction by 2020 compared to 1990
+npi_pol_emis["AUT",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["BEL",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["BGR",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["HRV",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["CYP",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["CZE",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["DNK",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["EST",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["FIN",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["FRA",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["DEU",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["GRC",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["HUN",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["IRL",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["ITA",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["LVA",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["LTU",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["LUX",,] <- c(1,1,2005,2020,0.2)
+#npi_pol_emis["MLT",,] <- c(1,1,2005,2020,0.2) - doesnt't exist in MAgPIE country set
+npi_pol_emis["NLD",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["POL",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["PRT",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["ROU",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["SVK",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["SVN",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["ESP",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["SWE",,] <- c(1,1,2005,2020,0.2)
+npi_pol_emis["GBR",,] <- c(1,1,2005,2020,0.2)
+
+# Calc minimum carbon stock in NPI scenario; result is in 0.5 degree resolution; Unit is MtC
+emis_pol_npi <- calc_indc(npi_pol_emis,magpie_bau_cstock,affore=FALSE,im_years=im_years)
+emis_pol[,getYears(emis_pol_npi),"npi"] <- emis_pol_npi
+
+## END LUC CO2 emission reduction
+
+### END create NPI input files
+
+
+#--------------------------------#
 
 
 ### create INDC input files
 
 ## BEGIN reduce deforestation
 ## minimum forest stock based on INDC documents
-
-#read in forest cover (stock) from BAU
-magpie_bau_land <- read.magpie(paste0(bau_dir,"/cell.land_0.5.mz"))[,-1,]
-#calc deforestation rate (flow)
-magpie_bau_forest <- setNames(magpie_bau_land[,,"forest"],NULL)
-getCells(magpie_bau_forest) <- mapping$CountryCell
 
 #create indc_pol_deforest object
 indc_pol_deforest <- create_indc()
@@ -60,30 +189,17 @@ indc_pol_deforest["LAO",,] <- c(1,2,2005,2005,1) #increasing forest cover to a t
 #Mali?
 
 #Calc minimum forest stock in indc scenario; result is in 0.5 degree resolution; Unit is Mha
-magpie_indc_forest <- calc_indc(indc_pol_deforest,magpie_bau_forest,affore=FALSE, im_years=im_years)
-#Set all values before 2015 to zero or to NPI values
-# aggregate to cluster level
-magpie_indc_forest <- speed_aggregate(magpie_indc_forest,rel = paste0(bau_dir,"/0.5-to-",res,"_sum.spam"))
-# copy the values til 2010 from the NPI files
-if(file.exists(paste0(res,"/npi_forest.cs2"))){
-	npi_forest <- read.magpie(paste0(res,"/npi_forest.cs2"))
-	magpie_indc_forest[,c(1995,2005,2010),] <- npi_forest[,c(1995,2005,2010),]
-} else stop("Run caclNPI! These scenario do not exist.")
+ad_pol_indc <- calc_indc(indc_pol_deforest,magpie_bau_forest,affore=FALSE, im_years=im_years)
+ad_pol[,getYears(ad_pol_indc),"indc"] <- ad_pol_indc
 
-# write file
-write.magpie(magpie_indc_forest,file_name = paste0(res,"/indc_forest.cs2"))
-file.copy(paste0(res,"/indc_forest.cs2"),"../../modules/33_forest/input/f33_indc_forest.cs2",overwrite = TRUE)
+#Set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
+ad_pol[,c(1995,2005,2010),"indc"] <- ad_pol[,c(1995,2005,2010),"npi"]
 
 ## END reduce deforestation
 
 
 ## BEGIN afforestation
 ## minimum forestry stock based on INDC documents
-
-#read in forest cover (stock) from BAU
-magpie_bau_land <- read.magpie(paste0(bau_dir,"/cell.land_0.5.mz"))[,-1,]
-#add country mapping
-getCells(magpie_bau_land) <- mapping$CountryCell
 
 #create indc_pol_afforest object
 indc_pol_afforest <- create_indc()
@@ -93,45 +209,37 @@ indc_pol_afforest["AUS",1,] <- c(1,1,2010,2020,0.02) #20,000 hectares afforestat
 #Brazil
 indc_pol_afforest["BRA",1,] <- c(1,1,2005,2030,12) #Reforestation of 12 mn ha by 2030
 #China
-tmp <- dimSums(magpie_bau_land["CHN",2005,],dim=c(1,3))*0.2304 - dimSums(magpie_bau_land["CHN",2005,c("forest","forestry")],dim=c(1,3))
+tmp <- dimSums(magpie_bau_land["CHN",2005,],dim=c(1,3))*0.2304 - dimSums(magpie_bau_land["CHN",2005,c("primforest","secdforest","forestry")],dim=c(1,3))
+tmp[tmp<0] <- 0
 indc_pol_afforest["CHN",,] <- c(1,1,2005,2020,tmp) #23.04% forest coverage by 2020 --> 50 Mha afforestation is needed
 #India
-tmp <- dimSums(magpie_bau_land["IND",2005,],dim=c(1,3))*0.33 - dimSums(magpie_bau_land["IND",2005,c("forest","forestry")],dim=c(1,3))
+tmp <- dimSums(magpie_bau_land["IND",2005,],dim=c(1,3))*0.33 - dimSums(magpie_bau_land["IND",2005,c("primforest","secdforest","forestry")],dim=c(1,3))
+tmp[tmp<0] <- 0
 indc_pol_afforest["IND",,] <- c(1,1,2005,2030,tmp) #long term goal (2030) is to bring 33% of its geographical area under forest cover eventually -> 41 Mha
 #Cambodia
-tmp <- dimSums(magpie_bau_land["KHM",2005,],dim=c(1,3))*0.6 - dimSums(magpie_bau_land["KHM",2005,c("forest","forestry")],dim=c(1,3))
+tmp <- dimSums(magpie_bau_land["KHM",2005,],dim=c(1,3))*0.6 - dimSums(magpie_bau_land["KHM",2005,c("primforest","secdforest","forestry")],dim=c(1,3))
+tmp[tmp<0] <- 0
 indc_pol_afforest["KHM",,] <- c(1,1,2005,2030,tmp) #increasse forest cover to 60% of national land area by 2030 and maintain afterwards -> add 1.8 Mha by 2030
 #Chile
 indc_pol_afforest["CHL",,] <- c(1,1,2005,2030,0.1) #reforest 100,000 hectares by 2030
 #Ecuador
 indc_pol_afforest["ECU",,] <- c(1,1,2005,2025,1.3) #restore 500,000 additional hectares until 2017 and increase this total by 100,000 hectares per year until 2025
 #Lao People's Democratic Republic
-tmp <- dimSums(magpie_bau_land["LAO",2005,],dim=c(1,3))*0.7 - dimSums(magpie_bau_land["LAO",2005,c("forest","forestry")],dim=c(1,3))
+tmp <- dimSums(magpie_bau_land["LAO",2005,],dim=c(1,3))*0.7 - dimSums(magpie_bau_land["LAO",2005,c("primforest","secdforest","forestry")],dim=c(1,3))
+tmp[tmp<0] <- 0
 indc_pol_afforest["LAO",,] <- c(1,1,2005,2020,tmp) #increasing forest cover to a total of 70% of land area by 2020, and maintaining it at that level going forward.
-#restore magpie cellular mapping
-getCells(magpie_bau_land) <- mapping$X
 
 # Calc minimum forestry stock in indc scenario; result is in 0.5 degree resolution; Unit is Mha
-magpie_indc_aff <- calc_indc(indc_pol_afforest,magpie_bau_land,affore=TRUE, im_years=im_years)
-# aggregate to cluster level
-magpie_indc_aff <- speed_aggregate(magpie_indc_aff,rel = paste0(bau_dir,"/0.5-to-",res,"_sum.spam"))
-# copy the values til 2010 from the NPI files
-if(file.exists(paste0(res,"/npi_aff.cs2"))){
-	npi_aff <- read.magpie(paste0(res,"/npi_aff.cs2"))
-	magpie_indc_aff[,c(1995,2005,2010),] <- npi_aff[,c(1995,2005,2010),]
-} else stop("Run caclNPI! These scenario do not exist.")
-# write file
-write.magpie(magpie_indc_aff,file_name = paste0(res,"/indc_aff.cs2"))
-file.copy(paste0(res,"/indc_aff.cs2"),"../../modules/32_forestry/input/f32_indc_aff.cs2",overwrite = TRUE)
+aff_pol_indc <- calc_indc(indc_pol_afforest,magpie_bau_land,affore=TRUE, im_years=im_years)
+aff_pol[,getYears(aff_pol_indc),"indc"] <- aff_pol_indc
+
+#Set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
+aff_pol[,c(1995,2005,2010),"indc"] <- aff_pol[,c(1995,2005,2010),"npi"]
 
 ## END afforestation
 
 ## BEGIN LUC CO2 emission reduction
 ## minimum carbon stock based on INDC documents
-
-#read in forest carbon stock
-magpie_bau_cstock <- dimSums(readGDX(gdx,"ov_carbon_stock",select=list(type="level"))[,,"forest"],dim=3)
-magpie_bau_cstock <- speed_aggregate(magpie_bau_cstock, rel=paste0(bau_dir,"/0.5-to-",res,"_area_weighted_mean.spam"))
 
 #create indc_pol_emis object
 indc_pol_emis <- create_indc()
@@ -245,21 +353,32 @@ indc_pol_emis["SWE",,] <- c(1,1,2005,2030,0.4)
 indc_pol_emis["GBR",,] <- c(1,1,2005,2030,0.4)
 
 # Calc minimum carbon stock in indc scenario; result is in 0.5 degree resolution; Unit is MtC
-magpie_indc_cstock <- calc_indc(indc_pol_emis,magpie_bau_cstock, im_years=im_years)
+emis_pol_indc <- calc_indc(indc_pol_emis,magpie_bau_cstock, im_years=im_years)
+emis_pol[,getYears(emis_pol_indc),"indc"] <- emis_pol_indc
 
-#aggregate to cluster level
-magpie_indc_cstock <- speed_aggregate(magpie_indc_cstock,rel = paste0(bau_dir,"/0.5-to-",res,"_sum.spam"))
+#Set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
+emis_pol[,c(1995,2005,2010),"indc"] <- emis_pol[,c(1995,2005,2010),"npi"]
 
-# copy the values til 2010 from the NPI files
-if(file.exists(paste0(res,"/npi_cstock.cs2"))){
-	npi_cstock <- read.magpie(paste0(res,"/npi_cstock.cs2"))
-	magpie_indc_cstock[,c(1995,2005,2010),] <- npi_cstock[,c(1995,2005,2010),]
-} else stop("Run caclNPI! These scenario do not exist.")
-
-#write file
-write.magpie(magpie_indc_cstock,file_name = paste0(res,"/indc_cstock.cs2"))
-file.copy(paste0(res,"/indc_cstock.cs2"),"../../modules/33_forest/input/f33_indc_cstock.cs2",overwrite = TRUE)
 ## END LUC CO2 emission constraint
 
-### save data as R object ###
-save("indc_pol_deforest","indc_pol_afforest","indc_pol_emis",file = "indc_all.RData")
+### END create INDC input files
+
+#------------------------------------#
+
+#aggregate to cluster level
+ad_pol_lr <- speed_aggregate(ad_pol,rel = paste0(base_run,"/0.5-to-",res,"_sum.spam"))
+aff_pol_lr <- speed_aggregate(aff_pol,rel = paste0(base_run,"/0.5-to-",res,"_sum.spam"))
+emis_pol_lr <- speed_aggregate(emis_pol,rel = paste0(base_run,"/0.5-to-",res,"_sum.spam"))
+
+#write files
+write.magpie(ad_pol_lr,file_name = "output/indc_ad_pol.cs3")
+write.magpie(aff_pol_lr,file_name = "output/indc_aff_pol.cs3")
+write.magpie(emis_pol_lr,file_name = "output/indc_emis_pol.cs3")
+
+#copy files
+file.copy("output/indc_ad_pol.cs3","../../modules/35_natveg/input/indc_ad_pol.cs3",overwrite = TRUE)
+file.copy("output/indc_aff_pol.cs3","../../modules/32_forestry/input/indc_aff_pol.cs3",overwrite = TRUE)
+file.copy("output/indc_emis_pol.cs3","../../modules/35_natveg/input/indc_emis_pol.cs3",overwrite = TRUE)
+
+### save country data as R object ###
+save("npi_pol_deforest","npi_pol_afforest","npi_pol_emis","indc_pol_deforest","indc_pol_afforest","indc_pol_emis",file = "output/npi_indc_country.RData")
