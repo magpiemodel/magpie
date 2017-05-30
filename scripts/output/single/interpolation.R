@@ -84,6 +84,10 @@ if(!exists("source_include")) {
   readArgs("sum_spam_file","outputdir","title")
 }
 #########################################################################################
+load(paste0(outputdir, "/config.Rdata"))
+title <- cfg$title
+print(title)
+
 # Function to extract information from info.txt
 get_info <- function(file, grep_expression, sep, pattern="", replacement="") {
   if(!file.exists(file)) return("#MISSING#")
