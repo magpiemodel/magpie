@@ -213,7 +213,7 @@ sets
 
 *** Nutrients
    attributes product attributes
-   /dm,ge,nr,p,k,wm/
+   /dm,ge,nr,p,k,wm,c/
 * dry matter, gross energy, reactive nitrogen, phosphorus, potash, wet matters
 
    nutrients(attributes) product attributes
