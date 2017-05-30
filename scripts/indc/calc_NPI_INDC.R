@@ -41,10 +41,8 @@ magpie_bau_forest <- dimSums(magpie_bau_land[,,c("primforest","secdforest")],dim
 getCells(magpie_bau_forest) <- mapping$celliso
 
 #read in forest carbon stock
-#magpie_bau_cstock <- dimSums(readGDX(gdx,"ov_carbon_stock",select=list(type="level"))[,,c("primforest","secdforest")],dim=3)
-#magpie_bau_cstock <- speed_aggregate(magpie_bau_cstock, rel=paste0(base_run,"/0.5-to-",res,"_area_weighted_mean.spam"))
-magpie_bau_cstock <- magpie_bau_forest
-magpie_bau_cstock[,,] <- 0
+magpie_bau_cstock <- dimSums(readGDX(gdx,"ov_carbon_stock",select=list(type="level"))[,,c("primforest","secdforest")],dim=3)
+magpie_bau_cstock <- speed_aggregate(magpie_bau_cstock, rel=paste0(base_run,"/0.5-to-",res,"_area_weighted_mean.spam"))
 getCells(magpie_bau_cstock) <- mapping$celliso
 
 
