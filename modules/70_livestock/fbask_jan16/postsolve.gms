@@ -7,16 +7,16 @@
 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
- ov_dem_feed(t,i,kap,kagri,"marginal")  = vm_dem_feed.m(i,kap,kagri);
- oq70_feed(t,i,kap,kagri,"marginal")    = q70_feed.m(i,kap,kagri);
- oq70_cost_prod_liv(t,i,kli,"marginal") = q70_cost_prod_liv.m(i,kli);
- ov_dem_feed(t,i,kap,kagri,"level")     = vm_dem_feed.l(i,kap,kagri);
- oq70_feed(t,i,kap,kagri,"level")       = q70_feed.l(i,kap,kagri);
- oq70_cost_prod_liv(t,i,kli,"level")    = q70_cost_prod_liv.l(i,kli);
- ov_dem_feed(t,i,kap,kagri,"upper")     = vm_dem_feed.up(i,kap,kagri);
- oq70_feed(t,i,kap,kagri,"upper")       = q70_feed.up(i,kap,kagri);
- oq70_cost_prod_liv(t,i,kli,"upper")    = q70_cost_prod_liv.up(i,kli);
- ov_dem_feed(t,i,kap,kagri,"lower")     = vm_dem_feed.lo(i,kap,kagri);
- oq70_feed(t,i,kap,kagri,"lower")       = q70_feed.lo(i,kap,kagri);
- oq70_cost_prod_liv(t,i,kli,"lower")    = q70_cost_prod_liv.lo(i,kli);
+ ov_dem_feed(t,i,kap,kall,"marginal")    = vm_dem_feed.m(i,kap,kall);
+ oq70_feed(t,i,kap,kall,"marginal")      = q70_feed.m(i,kap,kall);
+ oq70_cost_prod_liv(t,i,kall,"marginal") = q70_cost_prod_liv.m(i,kall);
+ ov_dem_feed(t,i,kap,kall,"level")       = vm_dem_feed.l(i,kap,kall);
+ oq70_feed(t,i,kap,kall,"level")         = q70_feed.l(i,kap,kall);
+ oq70_cost_prod_liv(t,i,kall,"level")    = q70_cost_prod_liv.l(i,kall);
+ ov_dem_feed(t,i,kap,kall,"upper")       = vm_dem_feed.up(i,kap,kall);
+ oq70_feed(t,i,kap,kall,"upper")         = q70_feed.up(i,kap,kall);
+ oq70_cost_prod_liv(t,i,kall,"upper")    = q70_cost_prod_liv.up(i,kall);
+ ov_dem_feed(t,i,kap,kall,"lower")       = vm_dem_feed.lo(i,kap,kall);
+ oq70_feed(t,i,kap,kall,"lower")         = q70_feed.lo(i,kap,kall);
+ oq70_cost_prod_liv(t,i,kall,"lower")    = q70_cost_prod_liv.lo(i,kall);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################

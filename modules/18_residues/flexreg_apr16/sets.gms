@@ -8,7 +8,7 @@
 sets
 
 dm_nr(attributes) dry matter and nr
-/dm, nr/
+/dm, nr, c/
 
 pk18(npk)
 /p, k/
