@@ -18,7 +18,52 @@
 library(lucode)
 library(magpie4)
 library(luscale)
-source("/p/projects/rd3mod/R/libraries/svn/luscale/R/interpolate.R")
+
+interpolate<-function(x,x_ini_lr,x_ini_hr,spam,add_avail_hr=NULL,prev_year="y1985"){
+  if(!is.magpie(x) || !is.magpie(x_ini_lr)|| !is.magpie(x_ini_hr)) stop("x, x_ini_lr and x_ini_hr have to be magpie objects")
+  if(nregions(x)!=nregions(x_ini_lr)) stop("x and x_ini_lr have to be of the same spatial aggregation")
+  if(nyears(x_ini_lr)>1 || nyears(x_ini_hr)>1) stop("Initialization data must only have one timestep")
+  if(!all(getNames(x)==getNames(x_ini_lr))||!all(getNames(x)==getNames(x_ini_hr))) stop("dimnames[[3]] of x, x_ini_lr and x_ini_hr have to be the same")
+  if(!is.null(add_avail_hr)){ 
+    stop("The add_avail functionality is deprecated and can't be used anymore")
+  }
+  
+  getYears(x_ini_hr) <- prev_year
+  getYears(x_ini_lr) <- prev_year
+  lr<-mbind(x_ini_lr,x)
+  #Test if the total sum is constant
+  if(is.null(add_avail_hr)){
+    test<-dimSums(lr,dim=c(1,3.1))[,2:nyears(lr),]- setYears(dimSums(lr,dim=c(1,3.1))[,1:nyears(lr)-1,],getYears(lr)[2:nyears(lr)])
+    if(max(test)>0.1||min(test)< -0.1) warning("Total stock is not constant over time. See help for details")
+  }
+  #calculate reduction and extension shares which then can be disaggregated
+  diff <- as.array(lr[,2:nyears(lr),]-setYears(lr[,1:(nyears(lr)-1),],getYears(lr)[2:nyears(lr)]))
+  less <- diff; less[less>0] <- 0
+  more <- diff; more[more<0] <- 0
+  reduct <- -less/(lr[,1:(nyears(lr)-1),]+10^-100)
+  avail <- rowSums(more,dims=2)
+  extent <- as.magpie(more)
+  for(e in getNames(extent)) extent[,,e] <- more[,,e]/(avail+10^-100)
+  #disaggregate shares
+  if(is.character(spam)){
+    if(!file.exists(spam))stop("spam file ",spam," not found")
+    rel <- read.spam(spam)
+  }
+  reduct_hr <- speed_aggregate(as.magpie(reduct),t(rel))
+  extent_hr <- speed_aggregate(as.magpie(extent),t(rel))
+  
+  #calculate land pools in high res (hr)
+  hr <- new.magpie(dimnames(reduct_hr)[[1]],c(prev_year,dimnames(reduct_hr)[[2]]),dimnames(reduct_hr)[[3]])
+  if(is.null(add_avail_hr)){
+    add_avail_hr<-array(0,dim=c(dim(reduct_hr)[1:2],1),dimnames=list(dimnames(reduct_hr)[[1]],dimnames(reduct_hr)[[2]],"add_avail_hr"))
+  }
+  add_avail_hr<-as.array(add_avail_hr)
+  dimnames(x_ini_hr)[[1]] <- dimnames(reduct_hr)[[1]]
+  hr[,prev_year,] <- x_ini_hr
+  
+  for(y in 2:nyears(hr)) hr[,y,] <- (1-reduct_hr[,y-1,])*setYears(hr[,y-1,],getYears(reduct_hr)[y-1]) + (rowSums(reduct_hr[,y-1,]*setYears(hr[,y-1,],getYears(reduct_hr)[y-1]))+add_avail_hr[,y-1,])*extent_hr[,y-1,]
+  return(hr)
+}
 
 ############################# BASIC CONFIGURATION #######################################
 land_lr_file     <- "avl_land.cs3"  
