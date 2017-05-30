@@ -36,11 +36,7 @@ start_indc_preprocessing <- function(cfg="config/default.cfg",base_folder="scrip
 		              try(system("git rev-parse HEAD", intern=TRUE), silent=TRUE),
 		              "", "### Modifications ###",
 		              try(system("git status", intern=TRUE), silent=TRUE))
-		if(codeCheck | interfaceplot) {
-		  codeCheck <- lucode::codeCheck()
-		  if(interfaceplot) lucode::modules_interfaceplot(codeCheck)
-		} else codeCheck <- NULL
-		
+
 		# Create the workspace for validation
 		cfg$val_workspace <- paste(cfg$results_folder,"/",cfg$title,".RData",sep="")
 		validation <- list(technical=list(time=list(),
