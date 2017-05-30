@@ -30,9 +30,9 @@ prev_year        <- "y1985"            #timestep before calculations in MAgPIE
 in_folder        <- "modules/10_land/input"
 
 if(!exists("source_include")) {
-  sum_spam_file    <- "0.5-to-h600_sum.spam"
-  title       <- "REF-NoCC"
-  outputdir       <- "output/h600/REF-NoCC/"
+  sum_spam_file    <- "0.5-to-n200_sum.spam"
+  title       <- "base_run"
+  outputdir       <- "output/base_run"
   
   ###Define arguments that can be read from command line
   readArgs("sum_spam_file","outputdir","title")
@@ -40,9 +40,9 @@ if(!exists("source_include")) {
 #########################################################################################
 
 gdx<-path(outputdir,"fulldata.gdx")
-land_ini_lr<-dimSums(readGDX(gdx,"f10_land","f_land", format="first_found"),dim=3.2)
+land_ini_lr<-readGDX(gdx,"f10_land","f_land", format="first_found")
 land_lr<-land(gdx,sum=FALSE,level="cell")
-land_ini_hr<-dimSums(read.magpie(path(in_folder,land_hr_file)),dim=3.2)
+land_ini_hr<-read.magpie(path(in_folder,land_hr_file))
 if(any(land_ini_hr < 0)) {
   warning(paste0("Negative values in inital high resolution dataset detected and set to 0. Check the file ",land_hr_file))
   land_ini_hr[which(land_ini_hr < 0,arr.ind = T)] <- 0
@@ -61,7 +61,7 @@ reshape_folder(outputdir)
 #get rid of y1985
 land_hr <- land_hr[,-1,]
 #total crop tpye specific croparea
-area <- croparea(gdx,level="cell",crops=NULL,water="all",crop_aggr=FALSE)
+area <- croparea(gdx,level="cell",products="kcr",product_aggr=FALSE,water_aggr = FALSE)
 #share of crop types in terms of croparea
 area_share <- area/dimSums(area,dim=c(3.1,3.2))
 #set inf to 0
