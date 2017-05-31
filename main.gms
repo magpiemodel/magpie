@@ -9,11 +9,15 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
 * Used data set: GLUES2-sresa2-constant_co2-miub_echo_g_rev23_n200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
-* md5sum: a5a816f1740aaccfb492db41bff115a5
+* md5sum: 5f6a33ee3a752acf1718a11ad42270e1
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Used data set: magpie_8a828c6ed5004e77d1ba2025e8ea2261_rev2.496.tgz
 * md5sum: 8c7931a2778b681f2cb1837f644dc264
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* 
+* Used data set: 1stgen_bioenergy_patch.tgz
+* md5sum: e2df30c9f4d5a3f1fe49ce44a3aa3b9b
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
 * Used data set: additional_data_rev2.01.tgz
@@ -51,7 +55,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Tue May 30 14:53:05 2017
+* Last modification (input data): Wed May 31 14:16:11 2017
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -125,7 +129,7 @@ $setglobal maccs  on_sep16
 $setglobal carbon_removal  off_sep16
 $setglobal som  off
 
-$setglobal bioenergy  standard_flexreg_apr16
+$setglobal bioenergy  standard_flexreg_may17
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 

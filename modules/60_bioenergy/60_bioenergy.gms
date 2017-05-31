@@ -6,5 +6,5 @@
 
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%bioenergy%" == "standard_flexreg_apr16" $include "./modules/60_bioenergy/standard_flexreg_apr16.gms"
+$Ifi "%bioenergy%" == "standard_flexreg_may17" $include "./modules/60_bioenergy/standard_flexreg_may17.gms"
 *###################### R SECTION END (MODULETYPES) ############################

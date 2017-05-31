@@ -10,7 +10,7 @@ scalars
 
 $setglobal c56_pollutant_prices  SSP2-Ref-SPA0
 $setglobal c56_emis_policy  ssp
-$setglobal c56_aff_policy  vegc50
+$setglobal c56_aff_policy  vegc33
 
 table f56_pollutant_prices(t_all,i,pollutants,ghgscen56) ghg certificate prices (US$ 2004 per Mg N2O-N CH4 and CO2-C)
 $ondelim

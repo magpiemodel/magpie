@@ -1,6 +1,6 @@
 *** (C) 2008-2017 Potsdam Institute for Climate Impact Research (PIK),
 *** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
@@ -34,8 +34,8 @@ $offdelim
 $setglobal c60_1stgen_biodem  const2020
 *   options:  "const2020", "const2030", "phaseout2020"
 
-table f60_dem_1stgen_bioen(t_all,i,scen1st60,k) 1st generation bioenergy demand (million ton dry matter) [IIASA]
+table f60_1stgen_bioenergy_dem(t_all,i,scen1st60,kall) 1st generation bioenergy demand (10^6 GJ per year) [Lotze Campen (2014)]
 $ondelim
-$include "./modules/60_bioenergy/input/f60_dem_1stgen_bioen.cs3"
+$include "./modules/60_bioenergy/input/f60_1stgen_bioenergy_dem.cs3"
 $offdelim
 ;
