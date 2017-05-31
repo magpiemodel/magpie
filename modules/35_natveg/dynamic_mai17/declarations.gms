@@ -55,5 +55,7 @@ parameters
  oq35_carbon_secdforest(t,j,c_pools,type) secdforest carbon content calculation
  oq35_carbon_other(t,j,c_pools,type)      other land carbon content calculation
  oq35_diff(t,type)                        aggregated difference in other land compared to previous timestep (mio. ha)
+ oq35_min_forest(t,j,type)                minimum forest constraint
+ oq35_min_cstock(t,j,type)                minimum	cstock constraint
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

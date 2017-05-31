@@ -41,5 +41,6 @@ parameters
  oq32_carbon(t,j,c_pools,type)                   forestry carbon stock calculation
  oq32_diff(t,type)                               aggregated difference in forestry land compared to previous timestep (mio. ha)        
  oq32_max_aff(t,type)                            maximum total global afforestation
+ oq32_aff_pol(t,j,type)                          afforestation policy constraint
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

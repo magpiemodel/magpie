@@ -160,7 +160,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
   if(cfg$recalc_indc){
     cat("Starting NPI/INDC recalculation!\n")
     source("scripts/indc/start_indc.R")
-    start_indc_preprocessing(cfg,base_folder="scripts/indc/base_run")
+    start_indc_preprocessing(cfg,base_run_dir="scripts/indc/base_run",maindir=maindir)
     cat("NPI/INDC recalculation successful!\n")
   }
   

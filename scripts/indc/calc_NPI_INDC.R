@@ -44,8 +44,10 @@ magpie_bau_cstock <- speed_aggregate(magpie_bau_cstock, rel=paste0(base_run,"/0.
 getCells(magpie_bau_cstock) <- mapping$celliso
 
 
+print("NPI input data preparation")
 ### create NPI input files
 
+print("NPI AD policy")
 ## BEGIN reduce deforestation
 ## minimum forest stock based on NPI documents
 
@@ -74,6 +76,7 @@ ad_pol[,getYears(ad_pol_npi),"npi"] <- ad_pol_npi
 ## END reduce deforestation
 
 
+print("NPI AFF policy")
 ## BEGIN afforestation
 ## minimum forestry stock based on NPI documents
 
@@ -100,6 +103,7 @@ aff_pol[,getYears(aff_pol_npi),"npi"] <- aff_pol_npi
 
 ## END afforestation
 
+print("NPI EMIS policy")
 ## BEGIN LUC CO2 emission reduction
 ## minimum carbon stock based on NPI documents
 
@@ -151,9 +155,10 @@ emis_pol[,getYears(emis_pol_npi),"npi"] <- emis_pol_npi
 
 #--------------------------------#
 
-
+print("INDC input data preparation")
 ### create INDC input files
 
+print("INDC AD policy")
 ## BEGIN reduce deforestation
 ## minimum forest stock based on INDC documents
 
@@ -194,6 +199,7 @@ ad_pol[,c(1995,2005,2010),"indc"] <- ad_pol[,c(1995,2005,2010),"npi"]
 ## END reduce deforestation
 
 
+print("INDC AFF policy")
 ## BEGIN afforestation
 ## minimum forestry stock based on INDC documents
 
@@ -234,6 +240,7 @@ aff_pol[,c(1995,2005,2010),"indc"] <- aff_pol[,c(1995,2005,2010),"npi"]
 
 ## END afforestation
 
+print("INDC EMIS policy")
 ## BEGIN LUC CO2 emission reduction
 ## minimum carbon stock based on INDC documents
 

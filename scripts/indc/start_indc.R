@@ -1,12 +1,6 @@
 
-start_indc_preprocessing <- function(cfg="config/default.cfg",base_folder="scripts/indc/base_run",mainfolder=".",renew_base=FALSE)  {
+start_indc_preprocessing <- function(cfg="config/default.cfg",base_run_dir="scripts/indc/base_run",maindir=maindir,renew_base=FALSE)  {
 
-  #change to the model mainfolder
-  cwd <- getwd()
-  on.exit(setwd(cwd))
-  setwd(mainfolder)
-  mainfolder <- getwd()
-  
   require(lucode)
   source("scripts/start_functions.R")
 
@@ -14,19 +8,25 @@ start_indc_preprocessing <- function(cfg="config/default.cfg",base_folder="scrip
     source(cfg, local=TRUE)
   }
 
-  if(renew_base & dir.exists(base_folder)){
-    unlink(base_folder,recursive = TRUE)
+  if(renew_base & dir.exists(base_run_dir)){
+    unlink(base_run_dir,recursive = TRUE)
+  } else {
+    print(paste0("Trying to use existing base_run_dir ",base_run_dir, " for NPI/INDC recalculation!"))
+    if(!file.exists(paste0(base_run_dir,"/fulldata.gdx"))) {
+      print(paste0(base_run_dir,"/fulldata.gdx does not exist. Deleting ",base_run_dir))
+      unlink(base_run_dir,recursive = TRUE)
+    } else print("success")
+      
   }
 
-  if(!dir.exists(base_folder) | renew_base) {
+  if(!dir.exists(base_run_dir) | renew_base) {
     cfg$title <- "SSP2_BASE"
     cfg <- setScenario(cfg,c("SSP2","BASE"))
 		cfg$gms$c_timesteps <- "recalc_indc"
     cfg$sequential <- TRUE
-    cfg$results_folder <- base_folder
+    cfg$results_folder <- base_run_dir
 		cfg$output <- c("validation","interpolation")
-    #start_run(cfg,codeCheck=FALSE)
-		
+
 		dir.create(cfg$results_folder, recursive=TRUE, showWarnings=FALSE)
 		
 		#### Collect technical information for validation ############################
@@ -65,17 +65,15 @@ start_indc_preprocessing <- function(cfg="config/default.cfg",base_folder="scrip
 		save(cfg, file=path(cfg$results_folder, "config.Rdata"))
 		
 		lucode::singleGAMSfile(output=lucode::path(cfg$results_folder, "full.gms"))
-		lucode::model_unlock(lock_id)
-		
-		print(mainfolder)
-		on.exit(setwd(mainfolder))
-		setwd(cfg$results_folder)
-		
-		system("Rscript submit.R", wait=cfg$sequential)
-    
-  }
 
+		print("Starting MAgPIE base_run for NPI/INDC recalculation")
+		on.exit(setwd(maindir))
+		setwd(cfg$results_folder)
+		system("Rscript submit.R", wait=cfg$sequential)
+		setwd(maindir)
+  }
   setwd("scripts/indc")
+  print("Running calc_NPI_INDC.R")
   source("calc_NPI_INDC.R", local=TRUE)
-  setwd(mainfolder)
+  setwd(maindir)
 }

@@ -3,7 +3,7 @@ $setglobal c32_aff_mask  noboreal
 $setglobal c32_aff_policy  none
 
 scalars
-	s32_max_aff_area 	maximum total global afforestation in Mha    / 0 /
+	s32_max_aff_area 	maximum total global afforestation in Mha    / Inf /
 ;
 
 parameters

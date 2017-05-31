@@ -10,12 +10,26 @@
 ######################################
 
 library(lucode)
+library(magclass)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
-source("scripts/indc/start.R")
 
 #start MAgPIE run
-#start_run(cfg,codeCheck=FALSE)
+source("config/default.cfg")
+cfg$results_folder <- "output/:title:"
+cfg$gms$c_timesteps <- "recalc_indc"
 
-start_indc_preprocessing()
+cfg$title <- "SSP2_BASE"
+cfg <- setScenario(cfg,c("SSP2","BASE"))
+start_run(cfg,codeCheck=FALSE)
+
+cfg$recalibrate <- FALSE
+
+cfg$title <- "SSP2_NPI"
+cfg <- setScenario(cfg,c("SSP2","NPI"))
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- "SSP2_INDC"
+cfg <- setScenario(cfg,c("SSP2","INDC"))
+start_run(cfg,codeCheck=FALSE)
