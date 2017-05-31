@@ -29,11 +29,13 @@ p35_secdforest(t,j,ac,"before") = p35_secdforest(t,j,ac,"before") + p35_recovere
 pc35_secdforest(j,land35) = sum(ac_land35(ac,land35), p35_secdforest(t,j,ac,"before"));
 v35_secdforest.l(j,land35) = pc35_secdforest(j,land35);
 vm_land.l(j,"secdforest") = sum(land35, pc35_secdforest(j,land35));
+pcm_land(j,"secdforest") = sum(land35, pc35_secdforest(j,land35));
 
 *calculate new v35_other.l
 pc35_other(j,land35) = sum(ac_land35(ac,land35), p35_other(t,j,ac,"before"));
 v35_other.l(j,land35) = pc35_other(j,land35);
 vm_land.l(j,"other") = sum(land35, pc35_other(j,land35));
+pcm_land(j,"other") = sum(land35, pc35_other(j,land35));
 
 *** Forest protection (WDPA areas and different conservation priority areas)
 * calc protection share for primforest, secdforest and other land
@@ -112,3 +114,6 @@ else
 	p35_carbon_density_other(t,j,"grow",c_pools) = m_weightedmean(pm_carbon_density_ac(t,j,ac,c_pools),p35_other(t,j,ac,"before"),(ac_land35(ac,"grow")));
 	p35_carbon_density_other(t,j,"old",c_pools) = pm_carbon_density_ac(t,j,"acx",c_pools);
 );
+
+p35_min_forest(t,j)$(p35_min_forest(t,j) > vm_land.l(j,"primforest") + vm_land.l(j,"secdforest")) = vm_land.l(j,"primforest") + vm_land.l(j,"secdforest");
+p35_min_cstock(t,j)$(p35_min_cstock(t,j) > sum(c_pools, vm_carbon_stock.l(j,"primforest",c_pools) + vm_carbon_stock.l(j,"secdforest",c_pools))) = sum(c_pools, vm_carbon_stock.l(j,"primforest",c_pools) + vm_carbon_stock.l(j,"secdforest",c_pools));
