@@ -4,8 +4,11 @@ scalars
 
 parameters
  p32_carbon_density(t,j,land32,c_pools) carbon density for land32 and c_pools (tC per ha)
- p32_land_fore(t,j,ac,when)   Forestry land for each cell wood type and age class before and after optimization (mio. ha)
- pc32_land_fore(j,land32)        Forestry land per forestry land type initialization of the optimization (mio. ha)
+ p32_land(t,j,ac,when)   Forestry land for each cell wood type and age class before and after optimization (mio. ha)
+ pc32_land(j,land32)        Forestry land per forestry land type initialization of the optimization (mio. ha)
+ p32_aff_pot(t,j)                   potential afforestation area (Mha)
+ p32_aff_pol_timestep(t,j)			indc afforestation per time step (Mha)
+ p32_aff_pol(t,j)			indc forest stock (Mha)
 ;
 
 positive variables
@@ -22,6 +25,7 @@ equations
  q32_carbon(j,c_pools)                 forestry carbon stock calculation
  q32_diff                   aggregated difference in forestry land compared to previous timestep (mio. ha)        
  q32_max_aff					maximum total global afforestation
+ q32_aff_pol(j)					afforestation policy constraint
 ;
 
 
@@ -37,5 +41,6 @@ parameters
  oq32_carbon(t,j,c_pools,type)                   forestry carbon stock calculation
  oq32_diff(t,type)                               aggregated difference in forestry land compared to previous timestep (mio. ha)        
  oq32_max_aff(t,type)                            maximum total global afforestation
+ oq32_aff_pol(t,j,type)                          afforestation policy constraint
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

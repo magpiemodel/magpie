@@ -1,7 +1,7 @@
 *after(ac) = growth_rate(flt)*before(ac)
-p32_land_fore(t,j,ac,"after") =
-         v32_land.l(j,"new")$(ord(ac) = 1)
-         + sum(ac_land32(ac,land32)$(not sameas(land32,"new") AND pc32_land_fore(j,land32) > 0),(v32_land.l(j,land32)/pc32_land_fore(j,land32))*p32_land_fore(t,j,ac,"before"))$(ord(ac) > 1);
+p32_land(t,j,ac,"after") =
+         (v32_land.l(j,"new")+v32_land.l(j,"new_indc"))$(ord(ac) = 1)
+         + sum(ac_land32(ac,land32)$(not sameas(land32,"new") AND not sameas(land32,"new_indc") AND pc32_land(j,land32) > 0),(v32_land.l(j,land32)/pc32_land(j,land32))*p32_land(t,j,ac,"before"))$(ord(ac) > 1);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_cost_fore(t,i,"marginal")                          = vm_cost_fore.m(i);
@@ -14,6 +14,7 @@ p32_land_fore(t,j,ac,"after") =
  oq32_carbon(t,j,c_pools,"marginal")                   = q32_carbon.m(j,c_pools);
  oq32_diff(t,"marginal")                               = q32_diff.m;
  oq32_max_aff(t,"marginal")                            = q32_max_aff.m;
+ oq32_aff_pol(t,j,"marginal")                          = q32_aff_pol.m(j);
  ov_cost_fore(t,i,"level")                             = vm_cost_fore.l(i);
  ov32_land(t,j,land32,"level")                         = v32_land.l(j,land32);
  ov_landdiff_forestry(t,"level")                       = vm_landdiff_forestry.l;
@@ -24,6 +25,7 @@ p32_land_fore(t,j,ac,"after") =
  oq32_carbon(t,j,c_pools,"level")                      = q32_carbon.l(j,c_pools);
  oq32_diff(t,"level")                                  = q32_diff.l;
  oq32_max_aff(t,"level")                               = q32_max_aff.l;
+ oq32_aff_pol(t,j,"level")                             = q32_aff_pol.l(j);
  ov_cost_fore(t,i,"upper")                             = vm_cost_fore.up(i);
  ov32_land(t,j,land32,"upper")                         = v32_land.up(j,land32);
  ov_landdiff_forestry(t,"upper")                       = vm_landdiff_forestry.up;
@@ -34,6 +36,7 @@ p32_land_fore(t,j,ac,"after") =
  oq32_carbon(t,j,c_pools,"upper")                      = q32_carbon.up(j,c_pools);
  oq32_diff(t,"upper")                                  = q32_diff.up;
  oq32_max_aff(t,"upper")                               = q32_max_aff.up;
+ oq32_aff_pol(t,j,"upper")                             = q32_aff_pol.up(j);
  ov_cost_fore(t,i,"lower")                             = vm_cost_fore.lo(i);
  ov32_land(t,j,land32,"lower")                         = v32_land.lo(j,land32);
  ov_landdiff_forestry(t,"lower")                       = vm_landdiff_forestry.lo;
@@ -44,5 +47,6 @@ p32_land_fore(t,j,ac,"after") =
  oq32_carbon(t,j,c_pools,"lower")                      = q32_carbon.lo(j,c_pools);
  oq32_diff(t,"lower")                                  = q32_diff.lo;
  oq32_max_aff(t,"lower")                               = q32_max_aff.lo;
+ oq32_aff_pol(t,j,"lower")                             = q32_aff_pol.lo(j);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
 
