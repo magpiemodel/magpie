@@ -12,4 +12,7 @@ input/
 *.gdx
 output/
 
+#ignore R support files
+.Rhistory
+
 
