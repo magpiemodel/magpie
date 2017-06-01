@@ -63,14 +63,14 @@ q15_food_kcal_livestock(iso,kap) ..
          v15_demand_quantity(iso,kap)
          =e=
          v15_kcal_pc_iso(iso) * v15_livestock_share_iso(iso)
-         * sum(ct,f15_livestock_kcal_structure_iso(ct,iso,kap));
+         * sum(ct,i15_livestock_kcal_structure_iso(ct,iso,kap));
 
 q15_food_kcal_staples(iso,kst) ..
          v15_demand_quantity(iso,kst)
          =e=
          v15_kcal_pc_iso(iso) *
          (1 - v15_livestock_share_iso(iso) - v15_vegfruit_share_iso(iso))
-         * sum(ct,f15_staples_kcal_structure_iso(ct,iso,kst)) ;
+         * sum(ct,i15_staples_kcal_structure_iso(ct,iso,kst)) ;
 
 q15_food_kcal_vegetables(iso) ..
          v15_demand_quantity(iso,"others")
