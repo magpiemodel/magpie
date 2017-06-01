@@ -84,7 +84,7 @@ $offdelim
 /;
 
 
-parameter f15_price_index(t_all) Food prices in initialisation period (USD05 per ton DM)
+parameter f15_price_index(t_all) Food prices index in initialisation period (USD05 per ton DM)
 /
 $ondelim
 $include "./modules/15_food/input/f15_prices_index.csv"

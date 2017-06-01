@@ -64,6 +64,8 @@ parameters
   o15_prices_kcal(t,iso,kall)                  prices from magpie after optimization in US Dollar 05 per daily kcal
   i15_prices_initial_kcal(iso,kfo)             initial prices that capture the approximate level of prices in 1961-2010 in US Dollar 05
   i15_pop_iso(t,iso)                           population on country level(Mio heads)
+  i15_staples_kcal_structure_iso(t,iso,kst)    Share of a staple product within total staples (1)
+  i15_livestock_kcal_structure_iso(t,iso,kap)  Share of a livestock product within total staples (1)
   p15_modelstat(t)                             model solver status
   p15_iteration_counter(t)                     number of iterations required for reaching an equilibrium between food demand model and magpie
 

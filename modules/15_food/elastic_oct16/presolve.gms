@@ -1,5 +1,5 @@
 
-
+* calculated 
 vm_dem_food.fx(i,knf)=0;
 v15_demand_quantity.fx(iso,knf)=0;
 
