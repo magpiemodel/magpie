@@ -23,8 +23,8 @@ cfg$gms$c_timesteps <- 11
 buildInputVector <- function(regionmapping   = "h11",
                              archive_name    = "GLUES2-sresa2-constant_co2-miub_echo_g",
                              resolution      = "h200", 
-                             archive_rev     = "23", 
-                             madrat_rev      = "2.496",
+                             archive_rev     = "23.1", 
+                             madrat_rev      = "2.5",
                              additional_data = "additional_data_rev2.01.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
