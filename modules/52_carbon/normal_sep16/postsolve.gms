@@ -4,7 +4,7 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-pcm_carbon_stock(j,land,c_pools) = vm_carbon_stock.l(j,land,c_pools);
+pc52_carbon_stock(j,land,c_pools) = vm_carbon_stock.l(j,land,c_pools);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_carbon_stock(t,j,land,c_pools,"marginal")   = vm_carbon_stock.m(j,land,c_pools);

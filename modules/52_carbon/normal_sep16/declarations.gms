@@ -10,7 +10,7 @@ positive variables
 
 parameters
  pm_carbon_density_ac(t,j,ac,c_pools)  carbon density for ac and c_pools (tC per ha)
- pcm_carbon_stock(j,land,c_pools)     current carbon in vegetation soil and litter for different land types (Mio tC)
+ pc52_carbon_stock(j,land,c_pools)     current carbon in vegetation soil and litter for different land types (Mio tC)
  pc52_carbon_density_start(t,j,c_pools)  carbon density for new land in other(tC per ha)
 ;
 
