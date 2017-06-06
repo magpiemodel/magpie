@@ -21,8 +21,6 @@ start_indc_preprocessing <- function(cfg="config/default.cfg",base_run_dir="scri
 
   if(!dir.exists(base_run_dir) | renew_base) {
     cfg$title <- "base_run"
-    cfg <- setScenario(cfg,scenario="BASE")
-		cfg$gms$c_timesteps <- "recalc_indc"
 		cfg$sequential <- TRUE
     cfg$results_folder <- base_run_dir
 		cfg$output <- c("validation","interpolation")
@@ -62,14 +60,22 @@ start_indc_preprocessing <- function(cfg="config/default.cfg",base_run_dir="scri
 		
 		cfg$magpie_folder <- getwd()
 		
-		save(cfg, file=path(cfg$results_folder, "config.Rdata"))
-		
-		# reconfigure main.gms based on modified cfg object
-		lucode::manipulateConfig("main.gms", cfg$gms)
-		
 		# create full.gms
 		lucode::singleGAMSfile(output=lucode::path(cfg$results_folder, "full.gms"))
 
+		# change cfg$gms settings for NPI/INDC base_run
+		cfg$gms$c_timesteps <- "recalc_indc"
+		cfg$gms$c32_aff_policy <- "none"
+		cfg$gms$c35_ad_policy <- "none"
+		cfg$gms$c35_emis_policy <- "none"
+		save(cfg, file=path(cfg$results_folder, "config.Rdata"))
+		
+		# manually modify full.gms of NPI/INDC base_run (to avoid changes of gms files in main directory)
+		manipulateConfig(lucode::path(cfg$results_folder, "full.gms"),c_timesteps="recalc_indc")
+		manipulateConfig(lucode::path(cfg$results_folder, "full.gms"),c32_aff_policy="none")
+		manipulateConfig(lucode::path(cfg$results_folder, "full.gms"),c35_ad_policy="none")
+		manipulateConfig(lucode::path(cfg$results_folder, "full.gms"),c35_emis_policy="none")
+		
 		print("Starting MAgPIE base_run for NPI/INDC recalculation")
 		on.exit(setwd(maindir))
 		setwd(cfg$results_folder)

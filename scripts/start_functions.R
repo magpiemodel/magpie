@@ -168,8 +168,6 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
     source("scripts/indc/start_indc.R")
     start_indc_preprocessing(cfg,base_run_dir="scripts/indc/base_run",maindir=maindir)
     cat("NPI/INDC recalculation successful!\n")
-    # revert settings in main.gms (because some settings are overwritten by start_indc_preprocessing)
-    lucode::manipulateConfig("main.gms", cfg$gms)
   }
   
   # copy important files into output_folder (before MAgPIE execution)
