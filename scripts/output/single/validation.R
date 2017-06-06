@@ -13,6 +13,7 @@ if(!exists("source_include")) {
 load(paste0(outputdir, "/config.Rdata"))
 hist    <- c(paste0(outputdir, "/validation.mif"), "input/validation.mif")
 file    <- paste0(outputdir, "/", cfg$title, "_validation.pdf")
+reportfile <- paste0(outputdir, "/", cfg$title, "_report.mif")
 gdx     <- paste0(outputdir, "/fulldata.gdx")
 runinfo <- Sys.glob("output/bau__default/*.RData")[1]
 if(is.na(runinfo)) runinfo <- NULL
@@ -25,4 +26,4 @@ for(h in hist) {
   if(file.exists(h)) break
 }
 
-validation(gdx=gdx, hist=h, file = file, runinfo=runinfo)
+validation(gdx=gdx, hist=h, file = file, runinfo=runinfo, reportfile=reportfile)
