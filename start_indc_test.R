@@ -18,7 +18,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
-cfg$gms$c_timesteps <- "recalc_indc"
+cfg$gms$c_timesteps <- 11
 
 cfg$title <- "SSP2_BASE"
 cfg <- setScenario(cfg,c("SSP2","BASE"))

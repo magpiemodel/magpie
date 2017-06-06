@@ -20,10 +20,10 @@ start_indc_preprocessing <- function(cfg="config/default.cfg",base_run_dir="scri
   }
 
   if(!dir.exists(base_run_dir) | renew_base) {
-    cfg$title <- "SSP2_BASE"
-    cfg <- setScenario(cfg,c("SSP2","BASE"))
+    cfg$title <- "base_run"
+    cfg <- setScenario(cfg,scenario="BASE")
 		cfg$gms$c_timesteps <- "recalc_indc"
-    cfg$sequential <- TRUE
+		cfg$sequential <- TRUE
     cfg$results_folder <- base_run_dir
 		cfg$output <- c("validation","interpolation")
 
@@ -64,6 +64,10 @@ start_indc_preprocessing <- function(cfg="config/default.cfg",base_run_dir="scri
 		
 		save(cfg, file=path(cfg$results_folder, "config.Rdata"))
 		
+		# reconfigure main.gms based on modified cfg object
+		lucode::manipulateConfig("main.gms", cfg$gms)
+		
+		# create full.gms
 		lucode::singleGAMSfile(output=lucode::path(cfg$results_folder, "full.gms"))
 
 		print("Starting MAgPIE base_run for NPI/INDC recalculation")
