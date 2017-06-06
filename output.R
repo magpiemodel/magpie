@@ -139,6 +139,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
         system(paste0("Rscript output.R outputdirs=",paste(outputdirs,collapse=",")," comp=",comp,"  output=",rout," submit=direct &> ",format(Sys.time(), "blog_out-%Y-%H-%M-%S-%OS3.log")," &"))
       } else if(submit=="slurm") {
         system(paste0("srun --qos=short --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --time=100 Rscript output.R outputdirs=",paste(outputdirs,collapse=",")," comp=",comp,"  output=",rout," submit=direct &"))
+        Sys.sleep(0.5)
       } else if(submit=="debug") {
         tmp.env <- new.env()
         sys.source(script,envir=tmp.env)
