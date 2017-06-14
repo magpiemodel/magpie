@@ -1,6 +1,6 @@
 # (C) 2008-2017 Potsdam Institute for Climate Impact Research (PIK),
 # authors, and contributors see AUTHORS file
-# This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+# This file is part of MAgPIE and licensed under GNU AGPL Version 3
 # or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # Contact: magpie@pik-potsdam.de
 
@@ -18,12 +18,11 @@ source("config/default.cfg")
 #set defaults
 scenario <- "SSP2"
 codeCheck <- FALSE
-cfg$gms$c_timesteps <- 11
 
 buildInputVector <- function(regionmapping   = "h11",
                              archive_name    = "GLUES2-sresa2-constant_co2-miub_echo_g",
-                             resolution      = "h200", 
-                             archive_rev     = "23.1", 
+                             resolution      = "h200",
+                             archive_rev     = "23.1",
                              madrat_rev      = "2.5",
                              additional_data = "additional_data_rev2.01.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
@@ -39,51 +38,81 @@ buildInputVector <- function(regionmapping   = "h11",
 
 cfg$title <- "default"
 cfg$input <- buildInputVector()
-cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"     
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"  
+cfg$gms$c_timesteps <- 11
+cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
+start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck)
+
+cfg$title <- "timesteps"
+cfg$input <- buildInputVector()
+cfg$gms$c_timesteps <- "test_TS"
+cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
 start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck)
 
 cfg$title <- "default_rcp26"
 cfg$input <- buildInputVector()
-cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"     
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"  
+cfg$gms$c_timesteps <- 11
+cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
 start_run(cfg=cfg,scenario=c(scenario,"BASE"),codeCheck=codeCheck)
+
+cfg$title <- "timesteps_rcp26"
+cfg$input <- buildInputVector()
+cfg$gms$c_timesteps <- "test_TS"
+cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
+start_run(cfg=cfg,scenario=c(scenario,"BASE"),codeCheck=codeCheck)
+
+cfg$title <- "globio_rcp26"
+cfg$input <- buildInputVector()
+cfg$gms$c_timesteps <- 11
+cfg$gms$c60_biodem_level <- 0
+cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
+start_run(cfg=cfg,scenario=c(scenario,"BASE"),codeCheck=codeCheck)
+cfg$gms$c60_biodem_level <- 1
 
 cfg$title <- "npi_rcp26"
 cfg$input <- buildInputVector()
-cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"     
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"  
+cfg$gms$c_timesteps <- 11
+cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
 start_run(cfg=cfg,scenario=c(scenario,"NPI"),codeCheck=codeCheck)
 
 cfg$title <- "indc_rcp26"
 cfg$input <- buildInputVector()
-cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"     
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"  
+cfg$gms$c_timesteps <- 11
+cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
 start_run(cfg=cfg,scenario=c(scenario,"INDC"),codeCheck=codeCheck)
 
 cfg$title <- "h12"
 cfg$input <- buildInputVector(regionmapping = "h12")
-cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"     
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0" 
+cfg$gms$c_timesteps <- 11
+cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
 start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck)
 
 cfg$title <- "h12_rcp26"
 cfg$input <- buildInputVector(regionmapping = "h12")
-cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"     
+cfg$gms$c_timesteps <- 11
+cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
 start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck)
 
 cfg$title <- "mag"
 cfg$input <- buildInputVector(regionmapping = "mag")
-cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"     
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"  
+cfg$gms$c_timesteps <- 11
+cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
 start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck)
 
 
 ### Cluster resolution tests ###
-
-cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"     
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"  
+cfg$gms$c_timesteps <- 11
+cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
 
 for(res in c("n200","h100","n100")) {
   cfg$title <- res
@@ -95,15 +124,14 @@ for(res in c("n200","h100","n100")) {
 
 cfg$title <- "bau"
 cfg$input <- buildInputVector()
-cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"     
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"  
+cfg$gms$c_timesteps <- 11
+cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
 performance_start(cfg=cfg, id=cfg$title, sequential=NA)
 
 cfg$title <- "rcp26"
 cfg$input <- buildInputVector()
-cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"     
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"  
+cfg$gms$c_timesteps <- 11
+cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
 performance_start(cfg=cfg, id=cfg$title, sequential=NA)
-
-
-
