@@ -1,4 +1,4 @@
-	MAgPIE release 3.1
+	MAgPIE 4.1-develop
 
   <https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpie>
 
@@ -59,7 +59,7 @@ the model. start.R can be also used as a template for an own, customized start
 script.
 
 HOW TO CONTRIBUTE
-	We are interested in working with you! Just contact us through github
+	We are interested in working with you! Just contact us through Gitlab
 (https://gitlab.pik-potsdam.de/landuse/magpie) or by mail
 (magpie@pik-potsdam.de) if you have found and/or fixed a bug, developed a new
 model feature, have ideas for further model development, suggestions for
