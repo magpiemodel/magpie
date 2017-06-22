@@ -15,7 +15,7 @@ hist       <- c(paste0(outputdir, "/validation.mif"), "input/validation.mif")
 file       <- paste0(outputdir, "/", cfg$title, "_validation.pdf")
 reportfile <- paste0(outputdir, "/", cfg$title, "_report.mif")
 gdx        <- paste0(outputdir, "/fulldata.gdx")
-runinfo    <- paste0(outputdir, "/", cfg$title, ".RData")
+runinfo    <- paste0(outputdir, "/", cfg$title, "_*.RData")
 ###############################################################################
 
 #### Choose validation data ###
@@ -23,6 +23,14 @@ runinfo    <- paste0(outputdir, "/", cfg$title, ".RData")
 
 for(h in hist) {
   if(file.exists(h)) break
+}
+
+runinfo <- Sys.glob(runinfo)
+if(length(runinfo)>1) {
+  runinfo <- runinfo[1]
+  warnings("More than one runinfo file found. The first one will be used.")
+} else if (length(runinfo)==0) {
+  runinfo <- NULL
 }
 
 validation(gdx=gdx, hist=h, file = file, runinfo=runinfo, reportfile=reportfile)
