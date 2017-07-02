@@ -15,7 +15,7 @@ $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_feed_balanceflow.cs3"
 $offdelim;
 
-table f70_livestock_productivity(t_all,i,kli,scen) Productivity indicator for livestock production (t FM per animal)
+table f70_livestock_productivity(t_all,i,sys,scen) Productivity indicator for livestock production (t FM per animal)
 $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_livestock_productivity.cs3"
 $offdelim;
