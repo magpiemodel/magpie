@@ -1,4 +1,4 @@
-*** (C) 2008-2017 Potsdam Institute for Climate Impact Research (PIK),
+*** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
 *** authors, and contributors see AUTHORS file
 *** This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
@@ -20,5 +20,11 @@ $offdelim
 table f59_cratio_inputs(climate59,inputs59) ratio of soil c SOM relative to natural vegetation soilcs for different input intensity
 $ondelim
 $include "./modules/59_som/cellpool_aug16/input/f59_ch5_F_I.csv"
+$offdelim
+;
+
+table f59_som_initialisation_pools(t_all,j, pools59) Initialisation pools for soil organic carbon (Mt C)
+$ondelim
+$include "./modules/59_som/cellpool_aug16/input/f59_som_initialisation_pools.cs3"
 $offdelim
 ;
