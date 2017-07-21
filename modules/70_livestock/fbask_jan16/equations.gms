@@ -15,5 +15,5 @@
                             =e=
                             vm_prod_reg(i2,kli)*(
                                f70_cost_regr(kli,"cost_regr_a")
-                               + f70_cost_regr(kli,"cost_regr_b") * sum((ct,scen, sys_to_kli(sys,kli)),f70_livestock_productivity(ct,i2,sys,scen))
+                               + f70_cost_regr(kli,"cost_regr_b") * sum((ct, sys_to_kli(sys,kli)),f70_livestock_productivity(ct,i2,sys,"%c50_feed_scen%"))
                             );
