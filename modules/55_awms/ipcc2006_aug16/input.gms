@@ -10,7 +10,7 @@ $setglobal c55_scen_conf  SSP2
 *             SRES: "A1", "A2", "B1", "B2"
 
 
-parameter f55_slaughter_feed_share(t_all,i,kap,attributes) share of feed that is incorprated in animal biomass (1)
+parameter f55_slaughter_feed_share(t_all,i,kap,attributes,feed_scen) share of feed that is incorprated in animal biomass (1)
 /
 $ondelim
 $include "./modules/55_awms/ipcc2006_aug16/input/f55_slaughter_feed_share.cs4"
