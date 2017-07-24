@@ -14,6 +14,10 @@ equations
  q70_cost_prod_liv(i,kall)         regional factor input costs for livestock production
 ;
 
+parameters
+ im_slaughter_feed_share(t_all,i,kap,attributes) share of feed that is incorprated in animal biomass (1)
+;
+
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_dem_feed(t,i,kap,kall,type)    regional feed demand including byproducts (Mt DM)

@@ -36,7 +36,7 @@ variables
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov59_som_target(t,j,pools59,type)       long-term target state of C pool (Tg C)
- ov59_som_pool(t,j,pools59,type)         soil organic matter pool (Tg C)
+ ov59_som_pool(t,j,pools59,type)         soil organic matter pool (Tg C)   
  ov59_som_transfer_to_cropland(t,j,type) transfer of SOM from other land to cropland (Tg C)
  ov_nr_som(t,j,type)                     release of soil organic matter (Tg Nr)
  oq59_som_target_cropland(t,j,type)      estimates the long-term target state of cropland
