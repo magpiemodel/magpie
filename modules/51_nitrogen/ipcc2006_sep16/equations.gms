@@ -16,7 +16,7 @@
  q51_emissions_inorg_fert(i2,n_pollutants_direct)..
                  vm_btm_reg(i2,"inorg_fert",n_pollutants_direct)
                  =e=
-                 vm_nr_inorg_fert_reg(i2)
+                 sum(land_ag,vm_nr_inorg_fert_reg(i2,land_ag))
                  * f51_ef_n_soil(n_pollutants_direct,"inorg_fert");
 
  q51_emissions_resid(i2,n_pollutants_direct)..
@@ -27,7 +27,7 @@
  q51_emissions_som(i2,n_pollutants_direct)..
                  vm_btm_reg(i2,"som",n_pollutants_direct)
                  =e=
-                  0;
+                 sum(cell(i2,j2),vm_nr_som(j2)) * f51_ef_n_soil(n_pollutants_direct,"som");
 
 ** animal waste management
  q51_emissionbal_awms(i2,n_pollutants_direct) ..

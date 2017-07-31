@@ -22,3 +22,9 @@ $ondelim
 $include "./modules/59_som/cellpool_aug16/input/f59_ch5_F_I.csv"
 $offdelim
 ;
+
+table f59_som_initialisation_pools(t_all,j, pools59) Initialisation pools for soil organic carbon (Mt C)
+$ondelim
+$include "./modules/59_som/cellpool_aug16/input/f59_som_initialisation_pools.cs3"
+$offdelim
+;
