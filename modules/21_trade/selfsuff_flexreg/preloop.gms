@@ -7,7 +7,7 @@
 
 
 *set vm_cost_trade zero in order to avoid a free variable
-vm_cost_trade.fx(i)               = 0;
+* vm_cost_trade.fx(i)               = 0;
 
 
 i21_trade_bal_reduction("y1995",k_trade) = 1;

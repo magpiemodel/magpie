@@ -27,3 +27,7 @@
  q21_excess_supply(i2,k_trade)..   v21_excess_prod(i2,k_trade)
                           =e=
                           v21_excess_dem(k_trade)*sum(ct,f21_exp_shr(ct,i2,k_trade));
+
+ q21_cost_trade(i2)..  vm_cost_trade(i2)
+                       =e=
+                         sum(k_trade_crop, s21_crop_cost * v21_excess_prod(i2,k_trade_crop)) + sum(k_trade_livestock, s21_livestock_cost *  v21_excess_prod(i2,k_trade_livestock));
