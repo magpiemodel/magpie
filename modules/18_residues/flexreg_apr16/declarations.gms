@@ -45,6 +45,7 @@ parameters
  oq18_translate(t,i,kres,attributes,type)        transforms the multiple crop residues into kres
  oq18_res_recycling_nr(t,i,type)                 nutrient recycling nr
  oq18_res_recycling_pk(t,i,pk18,type)            nutrient recycling pk
+ oq18_cost_prod_res(t,i,kres,type)               production costs of harvesting crop residues
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 
