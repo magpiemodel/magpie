@@ -35,7 +35,7 @@
  q55_bal_manure(i2,kli,awms,npk) ..
          vm_manure(i2, kli, awms,npk)
          =e=
-         v55_feed_intake(i2, kli, awms,npk) * (1-sum(ct,f55_slaughter_feed_share(ct,i2,kli,npk,"%c50_feed_scen%")));
+         v55_feed_intake(i2, kli, awms,npk) * (1-sum(ct,im_slaughter_feed_share(ct,i2,kli,npk)));
 
   q55_manure_confinement(i2,kli,awms_conf,npk) ..
          vm_manure_confinement(i2,kli,awms_conf, npk) =e=

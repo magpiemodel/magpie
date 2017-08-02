@@ -8,8 +8,8 @@ sets
    cost_regr Cost regression parameters
     /cost_regr_a,cost_regr_b/
 
-   feed_scen  scenarios
-       / ssp1,ssp2,ssp3,ssp4,ssp5,ConstantFuture /
+   feed_scen70  scenarios
+       / ssp1,ssp2,ssp3,ssp4,ssp5,constant /
 
    sys
      /sys_pig, sys_beef, sys_chicken, sys_hen, sys_dairy/

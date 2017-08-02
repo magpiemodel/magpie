@@ -8,46 +8,42 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: GLUES2-sresa2-constant_co2-miub_echo_g_rev23_n200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
-* md5sum: 5f6a33ee3a752acf1718a11ad42270e1
+* Used data set: GLUES2-sresa2-constant_co2-miub_echo_g_rev24_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
+* md5sum: 8e140aeecb333860275d76b5405c0b63
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
-* Used data set: magpie_8a828c6ed5004e77d1ba2025e8ea2261_rev2.496.tgz
-* md5sum: 8c7931a2778b681f2cb1837f644dc264
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
-* Used data set: 1stgen_bioenergy_patch.tgz
-* md5sum: e2df30c9f4d5a3f1fe49ce44a3aa3b9b
+* Used data set: magpie_8a828c6ed5004e77d1ba2025e8ea2261_rev2.83.tgz
+* md5sum: 757d3a4c02c36adff9f49056188da5ce
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
 * Used data set: additional_data_rev2.01.tgz
 * md5sum: 91b3f6d88358d09ce062677bbb088cb9
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
-* Low resolution: n200
+* Low resolution: h200
 * High resolution: 0.5
 * 
 * Total number of cells: 200
 * 
 * Number of cells per region:
 *   SSA  MEA  OAS  CHA  NEU  EUR  REF  LAM  USA  CAZ  IND
-*    25   17   12   13    4    8   46   24   15   32    4
+*    12   18   24   21   12   18    8   35   11   33    8
 * 
 * Regionscode: 8a828c6ed5004e77d1ba2025e8ea2261
 * 
-* Regions data revision: 2.496
+* Regions data revision: 2.83
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/GLUES2/sresa2/constant_co2/miub_echo_g
-* * Additional input folder: /p/projects/landuse/data/input/other/rev23
-* * Revision: 23
+* * Additional input folder: /p/projects/landuse/data/input/other/rev24
+* * Revision: 24
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
 * 
 * aggregation settings:
 * * Input resolution: 0.5
-* * Output resolution: n200
-* * Input file: /p/projects/landuse/data/input/archive/GLUES2-sresa2-constant_co2-miub_echo_g_rev23_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/GLUES2-sresa2-constant_co2-miub_echo_g_rev23_n200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
+* * Output resolution: h200
+* * Input file: /p/projects/landuse/data/input/archive/GLUES2-sresa2-constant_co2-miub_echo_g_rev24_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/GLUES2-sresa2-constant_co2-miub_echo_g_rev24_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
 * * Regionscode: 8a828c6ed5004e77d1ba2025e8ea2261
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
@@ -55,7 +51,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Wed May 31 14:16:11 2017
+* Last modification (input data): Mon Jul 24 15:08:09 2017
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -105,7 +101,7 @@ $setglobal trade  selfsuff_flexreg
 
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
-$setglobal forestry  static_sep16
+$setglobal forestry  affore_vegc_dec16
 $setglobal urban  static
 $setglobal natveg  dynamic_mai17
 
