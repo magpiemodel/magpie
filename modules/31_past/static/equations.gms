@@ -5,14 +5,6 @@
 *** Contact: magpie@pik-potsdam.de
 
 
- q31_prod(j2) .. vm_prod(j2,"pasture")
-                =e=
-                vm_land(j2,"past")*vm_yld(j2,"pasture","rainfed");
-
- q31_carbon(j2,c_pools) .. vm_carbon_stock(j2,"past",c_pools)
-                          =e=
-                          sum(ct, vm_land(j2,"past")*fm_carbon_density(ct,j2,"past",c_pools));
-
  q31_cost_prod_pasture(i2) .. vm_cost_prod(i2,"pasture")
                             =e=
                             vm_prod_reg(i2,"pasture")*1;

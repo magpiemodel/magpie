@@ -8,6 +8,7 @@
 equations
  q31_prod(j)              cellular pasture production constraint
  q31_carbon(j,c_pools)    carbon content calculation for pasture
+ q31_cost_prod_pasture(i) costs for putting animals on pastures
 ;
 
 

@@ -8,8 +8,8 @@ equations
  q38_cost_prod_crop(i,kcr)         regional factor input costs for plant production
 ;
 
-variables
-         vm_cost_prod(i,k)                          factor costs (mio US$)
+positive variables
+         vm_cost_prod(i,kall)                          factor costs (mio US$)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

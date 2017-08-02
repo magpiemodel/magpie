@@ -23,7 +23,7 @@ $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_livestock_productivity.cs3"
 $offdelim;
 
-table f70_cost_regr(kli,cost_regr) factor requirements livestock (US$04 per ton DM (A) and US$ (B))
+table f70_cost_regr(kap,cost_regr) factor requirements livestock (US$04 per ton DM (A) and US$ (B))
 $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_capit_liv_regr.csv"
 $offdelim
