@@ -12,6 +12,11 @@ positive variables
 equations
  q70_feed(i,kap,kall)             regional feed demand
  q70_cost_prod_liv(i,kall)         regional factor input costs for livestock production
+ q70_cost_prod_fish(i)               regional factor input costs for fish production
+;
+
+parameters
+ im_slaughter_feed_share(t_all,i,kap,attributes) share of feed that is incorprated in animal biomass (1)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -19,5 +24,6 @@ parameters
  ov_dem_feed(t,i,kap,kall,type)    regional feed demand including byproducts (Mt DM)
  oq70_feed(t,i,kap,kall,type)      regional feed demand
  oq70_cost_prod_liv(t,i,kall,type) regional factor input costs for livestock production
+ oq70_cost_prod_fish(t,i,type)     regional factor input costs for fish production
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

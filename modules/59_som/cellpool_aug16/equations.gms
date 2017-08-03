@@ -21,9 +21,10 @@ q59_som_transfer_to_cropland(j2) ..
               v59_som_transfer_to_cropland(j2)
               =e=
               sum(ct,
-              + vm_landexpansion(j2,"crop") * p59_carbon_density(ct,j2,"cropland")
-              - vm_landreduction(j2,"crop") * p59_carbon_density(ct,j2,"noncropland")
+              + vm_landexpansion(j2,"crop") * p59_carbon_density(ct,j2,"noncropland")
+              - vm_landreduction(j2,"crop") * p59_carbon_density(ct,j2,"cropland")
               );
+
 
 q59_som_pool_cropland(j2) ..
              v59_som_pool(j2,"cropland")

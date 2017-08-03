@@ -10,7 +10,7 @@ parameters
           i59_tillage_share(i,tillage59)      share of land under tillage clas(1)
           i59_input_share(i,inputs59)         share of land under input class (1)
           i59_cratio(j,kcr)                   ratio of carbon densitiy of land relative to natural vegetaion (1)
-          p59_som_pool(j,pools59)            actual C pool (Tg C) 
+          p59_som_pool(j,pools59)            actual C pool (Tg C)
 ;
 
 equations
@@ -24,18 +24,19 @@ equations
 
 positive variables
          v59_som_target(j,pools59)          long-term target state of C pool (Tg C)
-         v59_som_pool(j,pools59)            soil organic matter pool (Tg C)
+         v59_som_pool(j,pools59)            soil organic matter pool (Tg C)   
 ;
 
 variables
          v59_som_transfer_to_cropland(j)     transfer of SOM from other land to cropland (Tg C)
-         vm_nr_som(j)                        release of soil organic matter (Tg Nr)
+         vm_nr_som(j)                       release of soil organic matter (Tg Nr)
+
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov59_som_target(t,j,pools59,type)       long-term target state of C pool (Tg C)
- ov59_som_pool(t,j,pools59,type)         soil organic matter pool (Tg C)
+ ov59_som_pool(t,j,pools59,type)         soil organic matter pool (Tg C)   
  ov59_som_transfer_to_cropland(t,j,type) transfer of SOM from other land to cropland (Tg C)
  ov_nr_som(t,j,type)                     release of soil organic matter (Tg Nr)
  oq59_som_target_cropland(t,j,type)      estimates the long-term target state of cropland
