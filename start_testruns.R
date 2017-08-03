@@ -57,6 +57,8 @@ cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
 start_run(cfg=cfg,scenario=c(scenario,"BASE"),codeCheck=codeCheck)
 
+stop("Enough runs!")
+
 cfg$title <- "timesteps_rcp26"
 cfg$input <- buildInputVector()
 cfg$gms$c_timesteps <- "test_TS"
