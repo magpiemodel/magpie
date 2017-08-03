@@ -1,11 +1,12 @@
 
-* calculated 
+* demand for non-food products "knf" is set to 0;
 vm_dem_food.fx(i,knf)=0;
 v15_demand_quantity.fx(iso,knf)=0;
 
 *** Price-demand model is calculated the first time, using standard prices
 
 * helping the solver by starting from reasonable values
+* by setting real income per capita on exogenous gdp per capita
 v15_income_pc_real_iso.lo(iso)=1;
 v15_income_pc_real_iso.fx(iso)=i15_gdp_pc_iso(t,iso);
 
@@ -22,7 +23,7 @@ display p15_modelstat;
 if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
   m15_food_demand.solprint = 1
   Execute_Unload "fulldata.gdx";
-  abort "Food Demand Model became unfeasible. Stop run.";
+  abort "Food Demand Model became infeasible. Stop run.";
 );
 
 v15_income_pc_real_iso.lo(iso)=1;
