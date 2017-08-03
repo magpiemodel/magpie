@@ -36,12 +36,16 @@ buildInputVector <- function(regionmapping   = "h11",
 
 ### Single test runs ###
 
+cfg$force_download <- TRUE
+
 cfg$title <- "default"
 cfg$input <- buildInputVector()
 cfg$gms$c_timesteps <- 11
 cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
 start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck)
+
+cfg$force_download <- FALSE
 
 cfg$title <- "timesteps"
 cfg$input <- buildInputVector()
