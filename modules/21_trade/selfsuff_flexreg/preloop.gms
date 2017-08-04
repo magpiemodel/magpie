@@ -9,9 +9,11 @@
 *set vm_cost_trade zero in order to avoid a free variable
 vm_cost_trade.fx(i)               = 0;
 
+i21_trade_bal_reduction_annual(t) = c21_reduction_%c21_trade_liberalization%;
+i21_trade_bal_reduction_annual(tstart21) = c21_reduction_start;
 
-i21_trade_bal_reduction("y1995",k_trade) = 1;
+i21_trade_bal_reduction("y1995") = 1;
 
 loop (t$(ord(t)>1),
-  i21_trade_bal_reduction(t,k_trade) = i21_trade_bal_reduction(t-1,k_trade)*(1-f21_trade_bal_reduction_annual(t,k_trade))**m_yeardiff(t);
+  i21_trade_bal_reduction(t) = i21_trade_bal_reduction(t-1)*(1-i21_trade_bal_reduction_annual(t))**m_yeardiff(t);
 );
