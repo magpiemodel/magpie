@@ -27,7 +27,7 @@ buildInputVector <- function(regionmapping   = "h11",
                              additional_data = "additional_data_rev3.00.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
-                mag="2da01c534a80df894e0384d999e415d4")
+                mag="c30c1c580039c2b300d86cc46ff4036a")
   archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", mappings[regionmapping], ".tgz")
   madrat  <- paste0("magpie_", mappings[regionmapping], "_rev", madrat_rev, ".tgz")
   return(c(archive,madrat,additional_data))
@@ -36,12 +36,16 @@ buildInputVector <- function(regionmapping   = "h11",
 
 ### Single test runs ###
 
+cfg$force_download <- TRUE
+
 cfg$title <- "default"
 cfg$input <- buildInputVector()
 cfg$gms$c_timesteps <- 11
 cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
 start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck)
+
+cfg$force_download <- FALSE
 
 cfg$title <- "timesteps"
 cfg$input <- buildInputVector()
