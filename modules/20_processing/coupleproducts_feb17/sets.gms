@@ -26,8 +26,8 @@ processing20(processing_subst20)
 kcereals20(kpr)
 /tece,maiz,trce,rice_pro/
 
-no_milling_ginning20(processing20)
-/refining, extracting, distilling, fermentation, breeding /
+no_milling_ginning20(processing_subst20)
+/refining, extracting, distilling, fermentation, breeding, substitutes /
 
 
 

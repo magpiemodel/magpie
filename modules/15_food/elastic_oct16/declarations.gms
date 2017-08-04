@@ -6,7 +6,7 @@
 
 
 equations
-q15_food_demand(i,kall) Food demand
+q15_food_demand(i,kall) Food demand (million Kcal)
 ;
 
 parameters

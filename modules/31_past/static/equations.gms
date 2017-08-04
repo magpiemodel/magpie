@@ -5,6 +5,9 @@
 *** Contact: magpie@pik-potsdam.de
 
 
-v50_nr_eff.fx(i) = f50_snupe(t,i,"%c50_scen_neff%");
-v50_nr_eff_pasture.fx(i) = f50_nue_pasture(t,i,"%c50_scen_neff%");
-ic50_atmospheric_deposition_rates(i,land)=f50_atmospheric_deposition_rates(t,i,land,"%c50_dep_scen%");
+ q31_cost_prod_pasture(i2) .. vm_cost_prod(i2,"pasture")
+                            =e=
+                            vm_prod_reg(i2,"pasture")*1;
+* assuming 1 Dollar per eaten pasture
+
+*** EOF constraints.gms ***

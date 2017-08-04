@@ -4,17 +4,16 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
+
 equations
- q38_cost_prod_crop(i,kcr)         regional factor input costs for plant production
+ q31_cost_prod_pasture(i) costs for putting animals on pastures
 ;
 
-positive variables   
-         vm_cost_prod(i,kall)                          factor costs (mio US$)
-;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_prod(t,i,kall,type)       factor costs (mio US$)
- oq38_cost_prod_crop(t,i,kcr,type) regional factor input costs for plant production
+ oq31_cost_prod_pasture(t,i,type) costs for putting animals on pastures
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
+
+*** EOF declarations.gms ***
