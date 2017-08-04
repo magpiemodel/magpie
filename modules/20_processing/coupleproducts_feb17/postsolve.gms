@@ -16,7 +16,8 @@
  oq20_processing_aggregation_nocereals(t,i,kpr,"marginal")      = q20_processing_aggregation_nocereals.m(i,kpr);
  oq20_processing_aggregation_cereals(t,i,kcereals20,"marginal") = q20_processing_aggregation_cereals.m(i,kcereals20);
  oq20_processing_aggregation_cotton(t,i,"marginal")             = q20_processing_aggregation_cotton.m(i);
- oq20_processing_substitution(t,i,dm_ge_nr,"marginal")          = q20_processing_substitution.m(i,dm_ge_nr);
+ oq20_processing_substitution_oils(t,i,"marginal")              = q20_processing_substitution_oils.m(i);
+ oq20_processing_substitution_brans(t,i,"marginal")             = q20_processing_substitution_brans.m(i);
  ov_dem_processing(t,i,kall,"level")                            = vm_dem_processing.l(i,kall);
  ov20_dem_processing(t,i,processing_subst20,kpr,"level")        = v20_dem_processing.l(i,processing_subst20,kpr);
  ov_processing_costs(t,i,"level")                               = vm_processing_costs.l(i);
@@ -26,7 +27,8 @@
  oq20_processing_aggregation_nocereals(t,i,kpr,"level")         = q20_processing_aggregation_nocereals.l(i,kpr);
  oq20_processing_aggregation_cereals(t,i,kcereals20,"level")    = q20_processing_aggregation_cereals.l(i,kcereals20);
  oq20_processing_aggregation_cotton(t,i,"level")                = q20_processing_aggregation_cotton.l(i);
- oq20_processing_substitution(t,i,dm_ge_nr,"level")             = q20_processing_substitution.l(i,dm_ge_nr);
+ oq20_processing_substitution_oils(t,i,"level")                 = q20_processing_substitution_oils.l(i);
+ oq20_processing_substitution_brans(t,i,"level")                = q20_processing_substitution_brans.l(i);
  ov_dem_processing(t,i,kall,"upper")                            = vm_dem_processing.up(i,kall);
  ov20_dem_processing(t,i,processing_subst20,kpr,"upper")        = v20_dem_processing.up(i,processing_subst20,kpr);
  ov_processing_costs(t,i,"upper")                               = vm_processing_costs.up(i);
@@ -36,7 +38,8 @@
  oq20_processing_aggregation_nocereals(t,i,kpr,"upper")         = q20_processing_aggregation_nocereals.up(i,kpr);
  oq20_processing_aggregation_cereals(t,i,kcereals20,"upper")    = q20_processing_aggregation_cereals.up(i,kcereals20);
  oq20_processing_aggregation_cotton(t,i,"upper")                = q20_processing_aggregation_cotton.up(i);
- oq20_processing_substitution(t,i,dm_ge_nr,"upper")             = q20_processing_substitution.up(i,dm_ge_nr);
+ oq20_processing_substitution_oils(t,i,"upper")                 = q20_processing_substitution_oils.up(i);
+ oq20_processing_substitution_brans(t,i,"upper")                = q20_processing_substitution_brans.up(i);
  ov_dem_processing(t,i,kall,"lower")                            = vm_dem_processing.lo(i,kall);
  ov20_dem_processing(t,i,processing_subst20,kpr,"lower")        = v20_dem_processing.lo(i,processing_subst20,kpr);
  ov_processing_costs(t,i,"lower")                               = vm_processing_costs.lo(i);
@@ -46,5 +49,6 @@
  oq20_processing_aggregation_nocereals(t,i,kpr,"lower")         = q20_processing_aggregation_nocereals.lo(i,kpr);
  oq20_processing_aggregation_cereals(t,i,kcereals20,"lower")    = q20_processing_aggregation_cereals.lo(i,kcereals20);
  oq20_processing_aggregation_cotton(t,i,"lower")                = q20_processing_aggregation_cotton.lo(i);
- oq20_processing_substitution(t,i,dm_ge_nr,"lower")             = q20_processing_substitution.lo(i,dm_ge_nr);
+ oq20_processing_substitution_oils(t,i,"lower")                 = q20_processing_substitution_oils.lo(i);
+ oq20_processing_substitution_brans(t,i,"lower")                = q20_processing_substitution_brans.lo(i);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################

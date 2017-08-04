@@ -19,7 +19,8 @@ equations
      q20_processing_aggregation_nocereals(i,kpr) connecting processing activity to processing flows
      q20_processing_aggregation_cereals(i,kcereals20)    connecting processing activity to fooduse for milling
      q20_processing_aggregation_cotton(i)        connecting processing activity to production for cotton ginning
-     q20_processing_substitution(i,dm_ge_nr)                  substitution of inferior secondary products
+     q20_processing_substitution_oils(i)                  substitution of branoils by other oils
+     q20_processing_substitution_brans(i)                  substitution of brans by cereals   
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -33,6 +34,7 @@ parameters
  oq20_processing_aggregation_nocereals(t,i,kpr,type)      connecting processing activity to processing flows
  oq20_processing_aggregation_cereals(t,i,kcereals20,type) connecting processing activity to fooduse for milling
  oq20_processing_aggregation_cotton(t,i,type)             connecting processing activity to production for cotton ginning
- oq20_processing_substitution(t,i,dm_ge_nr,type)          substitution of inferior secondary products
+ oq20_processing_substitution_oils(t,i,type)              substitution of branoils by other oils
+ oq20_processing_substitution_brans(t,i,type)             substitution of brans by cereals   
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

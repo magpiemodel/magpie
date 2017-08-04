@@ -10,15 +10,15 @@ $title magpie
 * 
 * Used data set: GLUES2-sresa2-constant_co2-miub_echo_g_rev24_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
 * md5sum: 8e140aeecb333860275d76b5405c0b63
-* Repository: /p/projects/landuse/data/input/archive
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Used data set: magpie_8a828c6ed5004e77d1ba2025e8ea2261_rev2.1.tgz
 * md5sum: 3c0e1a4b5debcd841eef7c50768e9cdf
-* Repository: /p/projects/rd3mod/inputdata/output
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
 * Used data set: additional_data_rev3.00.tgz
 * md5sum: fbbcfb42354dadda46fb7b4acb5f0f83
-* Repository: /p/projects/landuse/data/input/archive
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Low resolution: h200
 * High resolution: 0.5
@@ -51,7 +51,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Wed Aug  2 21:52:38 2017
+* Last modification (input data): Thu Aug 03 13:45:25 2017
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -75,7 +75,7 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  11
+$setglobal c_timesteps  3
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /
