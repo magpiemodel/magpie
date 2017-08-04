@@ -23,8 +23,8 @@ buildInputVector <- function(regionmapping   = "h11",
                              archive_name    = "GLUES2-sresa2-constant_co2-miub_echo_g",
                              resolution      = "h200",
                              archive_rev     = "24",
-                             madrat_rev      = "2",
-                             additional_data = "additional_data_rev2.01.tgz") {
+                             madrat_rev      = "2.1",
+                             additional_data = "additional_data_rev3.00.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
                 mag="c30c1c580039c2b300d86cc46ff4036a")
@@ -36,12 +36,16 @@ buildInputVector <- function(regionmapping   = "h11",
 
 ### Single test runs ###
 
+cfg$force_download <- TRUE
+
 cfg$title <- "default"
 cfg$input <- buildInputVector()
 cfg$gms$c_timesteps <- 11
 cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
 start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck)
+
+cfg$force_download <- FALSE
 
 cfg$title <- "timesteps"
 cfg$input <- buildInputVector()
@@ -56,6 +60,8 @@ cfg$gms$c_timesteps <- 11
 cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
 start_run(cfg=cfg,scenario=c(scenario,"BASE"),codeCheck=codeCheck)
+
+stop("Enough runs!")
 
 cfg$title <- "timesteps_rcp26"
 cfg$input <- buildInputVector()

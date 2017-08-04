@@ -3,5 +3,3 @@
 *** This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
-
-vm_cost_prod.fx(i,"pasture") = 0;

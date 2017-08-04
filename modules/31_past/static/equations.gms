@@ -4,5 +4,10 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-im_slaughter_feed_share(t_all,i,kap,attributes) =
-             f70_slaughter_feed_share(t_all,i,kap,attributes,"%c70_feed_scen%");
+
+ q31_cost_prod_pasture(i2) .. vm_cost_prod(i2,"pasture")
+                            =e=
+                            vm_prod_reg(i2,"pasture")*1;
+* assuming 1 Dollar per eaten pasture
+
+*** EOF constraints.gms ***
