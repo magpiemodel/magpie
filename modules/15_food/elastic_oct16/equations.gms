@@ -9,7 +9,7 @@
 q15_food_demand(i2,kfo) ..
                 (vm_dem_food(i2,kfo) + sum(ct,f15_household_balance_flow(ct,i2,kfo,"dm")))
                 * sum(ct,f15_nutrition_attributes(ct,kfo,"kcal"))
-                /365 * 10**6
+                /365 / 10**6
                 =e=
                 sum(ct,i15_pop(ct,i2)) * v15_kcal_pc(i2,kfo)
                 ;
@@ -29,13 +29,13 @@ q15_aim_standalone ..
 q15_budget(iso) ..
          sum(ct,i15_gdp_pc_iso(ct,iso))
          =g=
-         sum((ct,kfo), v15_demand_quantity(iso,kfo)*p15_prices_kcal(ct,iso,kfo))
+         sum((ct,kfo), v15_demand_quantity(iso,kfo)*365*p15_prices_kcal(ct,iso,kfo))
          + v15_demand_nonfood(iso)*s15_prices_nonfood;
 
 q15_real_income(iso) ..
          v15_income_pc_real_iso(iso)
          =e=
-         sum(kfo, v15_demand_quantity(iso,kfo)*i15_prices_initial_kcal(iso,kfo))
+         sum(kfo, v15_demand_quantity(iso,kfo)*365*i15_prices_initial_kcal(iso,kfo))
          + v15_demand_nonfood(iso)*s15_prices_nonfood_initial;
 ;
 

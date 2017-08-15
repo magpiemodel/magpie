@@ -15,8 +15,8 @@ i15_gdp_pc_iso(t,iso)=0;
 i15_gdp_pc_iso(t,iso)$(f15_gdp_iso(t,iso,"%c15_gdp_scenario%")*f15_pop_iso(t,iso,"%c15_pop_scenario%")>0)  = f15_gdp_iso(t,iso,"%c15_gdp_scenario%")/f15_pop_iso(t,iso,"%c15_pop_scenario%");
 i15_gdp_pc_iso(t,iso)$(i15_gdp_pc_iso(t,iso)=0) = sum(i_to_iso(i,iso),im_gdp_pc(t,i));
 
-* initial prices in $US per Kcal/day
-i15_prices_initial_kcal(iso,kfo)$(f15_nutrition_attributes("y1995",kfo,"kcal")>0)=f15_prices_initial(kfo) / f15_nutrition_attributes("y1995",kfo,"kcal")*365/10**6;
+* initial prices in $US per Kcal
+i15_prices_initial_kcal(iso,kfo)$(f15_nutrition_attributes("y1995",kfo,"kcal")>0) = f15_prices_initial(kfo) / f15_nutrition_attributes("y1995",kfo,"kcal")*10**6;
 p15_prices_kcal(t,iso,kfo)=i15_prices_initial_kcal(iso,kfo);
 
 * get share of a staple product within total staples and livestock products, and replace zero shares with reginoal avarages

@@ -41,10 +41,10 @@ equations
 
 
 positive variables
-  v15_demand_quantity(iso,kall)     Quantity of all demanded food products
+  v15_demand_quantity(iso,kall)     Quantity of all demanded food products (Kcal\cap\day)
   v15_livestock_share_iso(iso)         livestock share
   v15_vegfruit_share_iso(iso)         share of vegetables fruits and nuts within diet
-  v15_kcal_pc_iso(iso)              total per capita calories
+  v15_kcal_pc_iso(iso)              total per capita calories (Kcal\cap\day)
 ;
 
 variables
@@ -60,9 +60,9 @@ parameters
   i15_gdp(t,i)      income in mio US Dollar 05 MER before a price shock
   i15_pop(t,i)      population in mio capita
   i15_gdp_pc_iso(t,iso)                        income per capita in US Dollar 05 per capita before a price shock
-  p15_prices_kcal(t,iso,kfo)                   prices from magpie after optimization in US Dollar 05 per daily kcal
-  o15_prices_kcal(t,iso,kall)                  prices from magpie after optimization in US Dollar 05 per daily kcal
-  i15_prices_initial_kcal(iso,kfo)             initial prices that capture the approximate level of prices in 1961-2010 in US Dollar 05
+  p15_prices_kcal(t,iso,kfo)                   prices from magpie after optimization in US Dollar 05 per Kcal ($\Kcal)
+  o15_prices_kcal(t,iso,kall)                  prices from magpie after optimization in US Dollar 05 per Kcal ($\Kcal)
+  i15_prices_initial_kcal(iso,kfo)             initial prices that capture the approximate level of prices in 1961-2010 in US Dollar 05 ($\Kcal)
   i15_pop_iso(t,iso)                           population on country level(Mio heads)
   i15_staples_kcal_structure_iso(t,iso,kst)    Share of a staple product within total staples (1)
   i15_livestock_kcal_structure_iso(t,iso,kap)  Share of a livestock product within total staples (1)
@@ -119,15 +119,15 @@ m15_food_demand.holdfixed = 1 ;
 parameters
  ov_dem_food(t,i,kall,type)               Demand for food (Mt DM)
  ov15_kcal_pc(t,i,kall,type)              Per capita calories (kcal per capita per day)
- ov15_demand_quantity(t,iso,kall,type)    Quantity of all demanded food products
+ ov15_demand_quantity(t,iso,kall,type)    Quantity of all demanded food products (Kcal\cap\day)
  ov15_livestock_share_iso(t,iso,type)     livestock share
  ov15_vegfruit_share_iso(t,iso,type)      share of vegetables fruits and nuts within diet
- ov15_kcal_pc_iso(t,iso,type)             total per capita calories
+ ov15_kcal_pc_iso(t,iso,type)             total per capita calories (Kcal\cap\day)
  ov15_objective(t,type)                   objective term
  ov15_objective_standalone(t,type)        objective term standalone
  ov15_demand_nonfood(t,iso,type)          non-food demand (units)
  ov15_income_pc_real_iso(t,iso,type)      real income per capita (USD)
- oq15_food_demand(t,i,kall,type)          Food demand
+ oq15_food_demand(t,i,kall,type)          Food demand (million Kcal)
  oq15_aim(t,type)                         aim function food demand model
  oq15_aim_standalone(t,type)              aim function standalone model
  oq15_budget(t,iso,type)                  Household Budget Constraint
