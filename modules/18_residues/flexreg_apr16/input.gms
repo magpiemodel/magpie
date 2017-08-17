@@ -40,7 +40,7 @@ $offdelim
 
 table f18_fac_req_kres(kres) Factor requirements (US$04 per ton DM)
 $ondelim
-$include "./modules/31_past/endo_jun13/input/f31_fac_req_past.csv"
+$include "./modules/18_residues/flexreg_apr16/input/f18_fac_req_kres.csv"
 $offdelim;
 
 *** EOF input.gms ***

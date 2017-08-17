@@ -6,7 +6,7 @@
 
 
 equations
- q31_cost_prod_pasture(i) costs for putting animals on pastures
+ q31_cost_prod_past(i) costs for putting animals on pastures
 ;
 
 
