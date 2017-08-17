@@ -13,9 +13,8 @@
                           =e=
                           sum(ct, vm_land(j2,"past")*fm_carbon_density(ct,j2,"past",c_pools));
 
- q31_cost_prod_pasture(i2) .. vm_cost_prod(i2,"pasture")
+ q31_cost_prod_past(i2) .. vm_cost_prod(i2,"pasture")
                             =e=
-                            vm_prod_reg(i2,"pasture")*1;
-* assuming 1 Dollar per eaten pasture
+                            vm_prod_reg(i2,"pasture")*f31_fac_req_past("pasture");
 
 *** EOF constraints.gms ***
