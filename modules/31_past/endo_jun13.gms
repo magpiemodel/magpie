@@ -7,7 +7,7 @@
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "declarations" $include "./modules/31_past/endo_jun13/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/31_past/input/f31_fac_req_past.csv""
+$Ifi "%phase%" == "input" $include "./modules/31_past/endo_jun13/inputgms"
 $Ifi "%phase%" == "equations" $include "./modules/31_past/endo_jun13/equations.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/31_past/endo_jun13/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
