@@ -32,11 +32,9 @@ $include "./modules/18_residues/flexreg_apr16/input/f18_res_use_burn.csv"
 $offdelim;
 
 parameter f18_res_combust_eff(kve)  Combustion efficiency of residue burning (1)
-/
 $ondelim
 $include "./modules/18_residues/input/f18_res_combust_eff.cs4"
-$offdelim
-/;
+$offdelim;
 
 table f18_fac_req_kres(kres) Factor requirements (US$04 per ton DM)
 $ondelim
