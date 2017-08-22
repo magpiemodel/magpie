@@ -6,7 +6,9 @@
 
 
 
-table f31_fac_req_past("pasture") Factor requirements (US$04 per ton DM)
+parameter f31_fac_req_past(pasture) Factor requirements (US$04 per ton DM)
+/
 $ondelim
 $include "./modules/31_past/endo_jun13/input/f31_fac_req_past.csv"
-$offdelim;
+$offdelim
+/;
