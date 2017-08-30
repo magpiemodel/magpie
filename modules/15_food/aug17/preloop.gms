@@ -3,12 +3,12 @@
 
 
 * initial prices in $US per Kcal
-i15_prices_initial_kcal(iso,kfo)$(f15_nutrition_attributes("y1995",kfo,"kcal")>0) = f15_prices_initial(kfo) / f15_nutrition_attributes("y1995",kfo,"kcal")*10**6;
+i15_prices_initial_kcal(iso,kfo)$(f15_nutrition_attributes("y1995",kfo,"kcal")>0) = f15_prices_initial(kfo)
+                                                                                  / (f15_nutrition_attributes("y1995",kfo,"kcal")*10**6);
 p15_prices_kcal(t,iso,kfo)=i15_prices_initial_kcal(iso,kfo);
 
 *** get share of a staple product within total staples and livestock products, and replace zero shares with reginoal avarages
 * first set it to equal shares, just in case there is no population
-
 
 
 i15_staples_kcal_structure_iso(t,iso,kst) =

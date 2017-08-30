@@ -77,7 +77,8 @@ option limrow     = 0 ;
 option decimals   = 3 ;
 option savepoint  = 1 ;
 
-
+*****************************VARIABLE SCALING***********************************
+*$include "./modules/09_drivers/aug17/scaling.gms"
 
 ********************************************************************************
 ****************************PREPROCESSING START*********************************
