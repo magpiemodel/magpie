@@ -33,18 +33,6 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
 
 * estimate regional indicators from demand model
 
- p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_balanceflow(t,iso,kfo);
-
- p15_kcal_pc(t,i,kfo)$(
-     sum(i_to_iso(i,iso),
-       im_pop_iso(t,iso)
-     ) >0 ) =
-                             sum(i_to_iso(i,iso),
-                               p15_kcal_pc_iso(t,iso,kfo)
-                               * im_pop_iso(t,iso)
-                             ) / sum(i_to_iso(i,iso),
-                                 im_pop_iso(t,iso)
-                             );
 
  p15_income_pc_real_ppp(t,i)$(
      sum(i_to_iso(i,iso),
@@ -76,7 +64,6 @@ display "convergence measure:",p15_convergence_measure;
 
 if (p15_convergence_measure(t) > 0.01,
 
-
       display "convergence between MAgPIE and Food Demand Model not yet reached";
       sm_intersolve=0;
 
@@ -87,8 +74,27 @@ if (p15_convergence_measure(t) > 0.01,
       else
         display "Food Demand Model results are returned to MAgPIE";
       );
-       v15_kcal_pc.fx(i,kall)=0;
-       v15_kcal_pc.fx(i,kfo) = p15_kcal_pc(t,i,kfo);
+
+* add balanceflow for calibration
+       p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_balanceflow(t,iso,kfo);
+* set negative values that can occur due to balanceflow to zero
+       p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
+
+* aggregate to regions
+       p15_kcal_pc(t,i,kfo)$(
+         sum(i_to_iso(i,iso),
+           im_pop_iso(t,iso)
+         ) >0 ) =
+                                 sum(i_to_iso(i,iso),
+                                   p15_kcal_pc_iso(t,iso,kfo)
+                                   * im_pop_iso(t,iso)
+                                 ) / sum(i_to_iso(i,iso),
+                                     im_pop_iso(t,iso)
+                                 );
+
+      v15_kcal_pc.fx(i,kall)=0;
+      v15_kcal_pc.fx(i,kfo) = p15_kcal_pc(t,i,kfo);
+
 
       if (p15_modelstat(t) < 3,
          put_utility 'shell' / 'mv m15_food_demand_p.gdx m15_food_demand_' t.tl:0'.gdx';

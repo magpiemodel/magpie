@@ -84,7 +84,7 @@ scalars
 
 *******************************MODULE SETUP*************************************
 
-$setglobal drivers aug17   
+$setglobal drivers  aug17
 $setglobal land  feb15
 $setglobal costs  default
 $setglobal interest_rate  glo_jan16

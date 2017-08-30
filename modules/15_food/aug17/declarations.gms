@@ -79,6 +79,7 @@ parameters
 
 * before shock
 
+ o15_kcal_regression_initial(iso,kfo)        Uncalibrated per-capita demand before price shock (kcal per capita per day)
  p15_kcal_pc_initial(t,i,kall)               Per-capita consumption in food demand model before price shock (kcal per capita per day)
  p15_kcal_pc_iso_initial(t,iso,kfo)          Per-capita consumption in food demand model before price shock on iso level (kcal per capita per day)
  p15_demand_nonfood_iso_initial(t,iso)       non-food per-capita demand (units per capita)
@@ -127,26 +128,26 @@ m15_food_demand.holdfixed = 1 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_dem_food(t,i,kall,type)               Demand for food (Mt DM)
- ov15_kcal_pc(t,i,kall,type)              Per capita calories (kcal per capita per day)
- ov15_demand_quantity(t,iso,kall,type)    Quantity of all demanded food products (Kcal\cap\day)
- ov15_livestock_share_iso(t,iso,type)     livestock share
- ov15_vegfruit_share_iso(t,iso,type)      share of vegetables fruits and nuts within diet
- ov15_kcal_pc_iso(t,iso,type)             total per capita calories (Kcal\cap\day)
- ov15_objective(t,type)                   objective term
- ov15_objective_standalone(t,type)        objective term standalone
- ov15_demand_nonfood(t,iso,type)          non-food demand (units)
- ov15_income_pc_real_iso(t,iso,type)      real income per capita (USD)
- oq15_food_demand(t,i,kall,type)          Food demand (million Kcal)
- oq15_aim(t,type)                         aim function food demand model
- oq15_aim_standalone(t,type)              aim function standalone model
- oq15_budget(t,iso,type)                  Household Budget Constraint
- oq15_real_income(t,iso,type)             Calculation of real income
- oq15_food_kcal(t,iso,type)               Per capita total consumption
- oq15_food_ls(t,iso,type)                 Livestock share
- oq15_food_vegfruit(t,iso,type)           Vegetables and fruits share
- oq15_food_kcal_livestock(t,iso,kap,type) Livestock demand
- oq15_food_kcal_staples(t,iso,kst,type)   plants demand
- oq15_food_kcal_vegetables(t,iso,type)    plants demand
+ ov_dem_food(t,i,kall,type)                Demand for food (Mt DM)
+ ov15_kcal_pc(t,i,kall,type)               Per capita calories (kcal per capita per day)
+ ov15_kcal_regression(t,iso,kall,type)     Uncalibrated regression estimates of calorie demand (Kcal\cap\day)
+ ov15_kcal_regression_total(t,iso,type)    Uncalibrated regression estimates of  total per capita calories (Kcal\cap\day)
+ ov15_livestock_share_iso(t,iso,type)      Uncalibrated regression estimates of  livestock share
+ ov15_vegfruit_share_iso(t,iso,type)       Uncalibrated regression estimates of share of vegetables fruits and nuts within diet
+ ov15_income_pc_real_ppp_iso(t,iso,type)   real income per capita (USD)
+ ov15_demand_nonfood(t,iso,type)           non-food demand (units)
+ ov15_objective(t,type)                    objective term
+ ov15_objective_standalone(t,type)         objective term standalone
+ oq15_food_demand(t,i,kall,type)           Food demand (million Kcal)
+ oq15_aim(t,type)                          aim function food demand model
+ oq15_aim_standalone(t,type)               aim function standalone model
+ oq15_budget(t,iso,type)                   Household Budget Constraint
+ oq15_real_income(t,iso,type)              Calculation of real income
+ oq15_food_kcal(t,iso,type)                Per capita total consumption
+ oq15_food_ls(t,iso,type)                  Livestock share
+ oq15_food_vegfruit(t,iso,type)            Vegetables and fruits share
+ oq15_food_kcal_livestock(t,iso,kap2,type) Livestock demand
+ oq15_food_kcal_staples(t,iso,kst,type)    plants demand
+ oq15_food_kcal_vegetables(t,iso,type)     plants demand
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
