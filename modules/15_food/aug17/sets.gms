@@ -26,16 +26,24 @@ sets
    potato,cassav_sp,sugr_cane,sugr_beet,
    oils,sugar,molasses,alcohol,brans,scp/
 
+   kfo_st(kfo) staple products
+   /
+   tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,puls_pro,
+   potato,cassav_sp,brans,scp/
+
+   kfo_pr(kfo) processed foods including oils sugar alcohol
+   / oils,alcohol,sugar,sugr_cane,sugr_beet,molasses /
+
    knf(kall) non-food products in the sectoral version
    /
    oilpalm,cottn_pro,foddr, pasture, begr, betr,
    oilcakes,ethanol,distillers_grain,fibres,
    res_cereals, res_fibrous, res_nonfibrous,
-   wood, woodfuel  
+   wood, woodfuel
    /
 
    nutrition nutritition attributes
-       /kcal, protein/
+   /kcal, protein/
 
 
 *** Scenarios

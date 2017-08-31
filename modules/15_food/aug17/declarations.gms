@@ -81,12 +81,12 @@ parameters
 
  o15_kcal_regression_initial(iso,kfo)        Uncalibrated per-capita demand before price shock (kcal per capita per day)
  p15_kcal_pc_initial(t,i,kall)               Per-capita consumption in food demand model before price shock (kcal per capita per day)
- p15_kcal_pc_iso_initial(t,iso,kfo)          Per-capita consumption in food demand model before price shock on iso level (kcal per capita per day)
+ p15_kcal_pc_initial_iso(t,iso,kfo)          Per-capita consumption in food demand model before price shock on iso level (kcal per capita per day)
  p15_demand_nonfood_iso_initial(t,iso)       non-food per-capita demand (units per capita)
 
 * after price shock
- p15_kcal_pc_iso           Per-capita consumption in food demand model after price shock (kcal per capita per day)
- p15_kcal_pc(t,i,kall)     Per-capita consumption in food demand model after price shock (kcal per capita per day)
+ p15_kcal_pc_iso(t,iso,kfo)                  Per-capita consumption in food demand model after price shock (kcal per capita per day)
+ p15_kcal_pc(t,i,kall)                       Per-capita consumption in food demand model after price shock (kcal per capita per day)
 
 * calculate diet iteration breakpoint
 

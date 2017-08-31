@@ -1,20 +1,7 @@
 * list of files that are required here
-f15_gdp_iso.csv
-f15_gdp_ppp.csv
-f15_gdp.csv
-f15_household_balanceflow.cs3
-f15_kcal_balanceflow_fadeout.csv
 f15_kcal_pc_iso.csv
-f15_kcal_pc.csv    
-f15_livestock_kcal_structure_iso.cs3
-f15_livestock_kcal_structure.cs3
-f15_livestock_share.csv
-f15_nutrition_attributes.cs3
-f15_pop_iso.csv
-f15_pop.csv
-f15_prices_index.csv
+f15_kcal_balanceflow_fadeout.csv
 f15_prices_initial.csv
-f15_staples_kcal_structure_iso.cs3
-f15_staples_kcal_structure.cs3
-f15_vegfruit_share.csv
-fm_development_state.cs3
+f15_household_balanceflow.cs3
+f15_nutrition_attributes.cs3
+f15_prices_index.csv
