@@ -15,23 +15,24 @@ sets
    others
    /
 
-   kap2(kfo)
-   /
-   livst_rum,livst_pig,livst_chick, livst_egg, livst_milk, fish
-   /
-
    kst(kfo) plant-based staple products in the sectoral version
    /
    tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,puls_pro,
    potato,cassav_sp,sugr_cane,sugr_beet,
    oils,sugar,molasses,alcohol,brans,scp/
 
+
+   kfo_ap(kfo)
+   /
+   livst_rum,livst_pig,livst_chick, livst_egg, livst_milk, fish
+   /
+
    kfo_st(kfo) staple products
    /
    tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,puls_pro,
    potato,cassav_sp,brans,scp/
 
-   kfo_pr(kfo) processed foods including oils sugar alcohol
+   kfo_pf(kfo) processed foods including oils sugar alcohol
    / oils,alcohol,sugar,sugr_cane,sugr_beet,molasses /
 
    knf(kall) non-food products in the sectoral version
@@ -61,5 +62,7 @@ sets
 ;
 
 alias(kst,kst2);
-alias(kap2,kap3);
+alias(kfo_ap,kfo_ap2);
+alias(kfo_st,kfo_st2);
+alias(kfo_pf,kfo_pf2);
 alias(iso,iso2);

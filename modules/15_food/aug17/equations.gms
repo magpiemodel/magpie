@@ -43,42 +43,64 @@ q15_real_income(iso) ..
 
 * Foodtree One
 
-q15_food_kcal(iso) ..
+q15_regression1_kcal(iso) ..
          v15_kcal_regression_total(iso)
          =e=
 *         3000;
          sum(ct,exp(2.825+m_year(ct)*0.002131)*v15_income_pc_real_ppp_iso(iso)**(0.162+m_year(ct)*(-0.00003124)));
 
-q15_food_ls(iso) ..
+q15_regression1_animals(iso) ..
          v15_livestock_share_iso(iso)
          =e=
-*         0.3;
-         sum(ct,
-                 (1.372/100 - 5.295 /1000000* m_year(ct)) * v15_income_pc_real_ppp_iso(iso)**0.5
-                 * exp(-(-1.102 /10000 + 6.404  / 100000000 * m_year(ct))*v15_income_pc_real_ppp_iso(iso))
-         );
+         0.3157*v15_income_pc_real_ppp_iso(iso)/(4151+v15_income_pc_real_ppp_iso(iso));
+*         sum(ct,
+*                 (1.372/100 - 5.295 /1000000* m_year(ct)) * v15_income_pc_real_ppp_iso(iso)**0.5
+*                 * exp(-(-1.102 /10000 + 6.404  / 100000000 * m_year(ct))*v15_income_pc_real_ppp_iso(iso))
+*         );
 
-q15_food_vegfruit(iso) ..
-         v15_vegfruit_share_iso(iso)
+q15_regression1_processed(iso) ..
+         v15_processed_share_iso(iso)
          =e=
-         0.09
+         0.4915*v15_income_pc_real_ppp_iso(iso)/(4273+v15_income_pc_real_ppp_iso(iso));
          ;
 
-q15_food_kcal_livestock(iso,kap2) ..
-         v15_kcal_regression(iso,kap2)
+q15_regression1_vegfruit(iso) ..
+         v15_vegfruit_share_iso(iso)
          =e=
-         v15_kcal_regression_total(iso) * v15_livestock_share_iso(iso)
-         * sum(ct,i15_livestock_kcal_structure_iso(ct,iso,kap2));
+         0.1871*v15_income_pc_real_ppp_iso(iso)/(2987+v15_income_pc_real_ppp_iso(iso));
+         ;
 
-q15_food_kcal_staples(iso,kst) ..
-         v15_kcal_regression(iso,kst)
+
+
+
+q15_foodtree1_kcal_animals(iso,kfo_ap) ..
+         v15_kcal_regression(iso,kfo_ap)
          =e=
-         v15_kcal_regression_total(iso) *
-         (1 - v15_livestock_share_iso(iso) - v15_vegfruit_share_iso(iso))
-         * sum(ct,i15_staples_kcal_structure_iso(ct,iso,kst)) ;
+         v15_kcal_regression_total(iso)
+         * v15_livestock_share_iso(iso)
+         * sum(ct,i15_livestock_kcal_structure_iso(ct,iso,kfo_ap));
 
-q15_food_kcal_vegetables(iso) ..
+q15_foodtree1_kcal_processed(iso,kfo_pf) ..
+         v15_kcal_regression(iso,kfo_pf)
+         =e=
+         v15_kcal_regression_total(iso)
+         * (1 - v15_livestock_share_iso(iso))
+         * v15_processed_share_iso(iso)
+         * sum(ct,i15_processed_kcal_structure_iso(ct,iso,kfo_pf)) ;
+
+q15_foodtree1_kcal_vegetables(iso) ..
          v15_kcal_regression(iso,"others")
          =e=
-         v15_kcal_regression_total(iso) *
-         v15_vegfruit_share_iso(iso);
+         v15_kcal_regression_total(iso)
+         * (1 - v15_livestock_share_iso(iso))
+         * (1 - v15_processed_share_iso(iso))
+         * v15_vegfruit_share_iso(iso);
+
+q15_foodtree1_kcal_staples(iso,kfo_st) ..
+         v15_kcal_regression(iso,kfo_st)
+         =e=
+         v15_kcal_regression_total(iso)
+         * (1 - v15_livestock_share_iso(iso))
+         * (1 - v15_processed_share_iso(iso))
+         * (1 - v15_vegfruit_share_iso(iso))
+         * sum(ct,i15_staples_kcal_structure_iso(ct,iso,kfo_st)) ;
