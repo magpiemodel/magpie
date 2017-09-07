@@ -48,6 +48,7 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
 
 * estimate convergence measure for deciding to stop iteration
 
+
  p15_convergence_measure(t) =smax(i,
                               abs(p15_delta_income_pc_real_ppp(t,i) / p15_lastiteration_delta_income_pc_real_ppp(i)- 1)
                             );
@@ -61,46 +62,52 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
 display "finished iteration number ", p15_iteration_counter;
 display "convergence measure:",p15_convergence_measure;
 
-if (p15_convergence_measure(t) > 0.01,
+if (s15_switch =1,
+  display "elastic demand model is activated";
+  if (p15_convergence_measure(t) > 0.01,
 
-      display "convergence between MAgPIE and Food Demand Model not yet reached";
-      sm_intersolve=0;
+        display "convergence between MAgPIE and Food Demand Model not yet reached";
+        sm_intersolve=0;
 
-      if((p15_iteration_counter(t) >= s15_maxiter),
-        m15_food_demand.solprint = 1
-        Execute_Unload "fulldata.gdx";
-        abort "no convergence between food demand model and magpie reached";
-      else
-        display "Food Demand Model results are returned to MAgPIE";
-      );
+        if((p15_iteration_counter(t) >= s15_maxiter),
+          m15_food_demand.solprint = 1
+          Execute_Unload "fulldata.gdx";
+          abort "no convergence between food demand model and magpie reached";
+        else
+          display "Food Demand Model results are returned to MAgPIE";
+        );
 
-* add balanceflow for calibration
-       p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_balanceflow(t,iso,kfo);
-* set negative values that can occur due to balanceflow to zero
-       p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
+  * add balanceflow for calibration
+         p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_balanceflow(t,iso,kfo);
+  * set negative values that can occur due to balanceflow to zero
+         p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
 
-* aggregate to regions
-       p15_kcal_pc(t,i,kfo)$(
-         sum(i_to_iso(i,iso),
-           im_pop_iso(t,iso)
-         ) >0 ) =
-                                 sum(i_to_iso(i,iso),
-                                   p15_kcal_pc_iso(t,iso,kfo)
-                                   * im_pop_iso(t,iso)
-                                 ) / sum(i_to_iso(i,iso),
-                                     im_pop_iso(t,iso)
-                                 );
+  * aggregate to regions
+         p15_kcal_pc(t,i,kfo)$(
+           sum(i_to_iso(i,iso),
+             im_pop_iso(t,iso)
+           ) >0 ) =
+                                   sum(i_to_iso(i,iso),
+                                     p15_kcal_pc_iso(t,iso,kfo)
+                                     * im_pop_iso(t,iso)
+                                   ) / sum(i_to_iso(i,iso),
+                                       im_pop_iso(t,iso)
+                                   );
 
-      v15_kcal_pc.fx(i,kfo) = p15_kcal_pc(t,i,kfo);
+        v15_kcal_pc.fx(i,kfo) = p15_kcal_pc(t,i,kfo);
 
 
-      if (p15_modelstat(t) < 3,
-         put_utility 'shell' / 'mv m15_food_demand_p.gdx m15_food_demand_' t.tl:0'.gdx';
-      );
+        if (p15_modelstat(t) < 3,
+           put_utility 'shell' / 'mv m15_food_demand_p.gdx m15_food_demand_' t.tl:0'.gdx';
+        );
+
+  else
+
+       sm_intersolve=1;
+       display "Success: convergence between MAgPIE and Food Demand Model reached after ",p15_iteration_counter," iterations";
+  * set back convergence indicators for next timestep
+  );
 
 else
-
-     sm_intersolve=1;
-     display "Success: convergence between MAgPIE and Food Demand Model reached after ",p15_iteration_counter," iterations";
-* set back convergence indicators for next timestep
+display "exogenous demand information is used" ;
 );
