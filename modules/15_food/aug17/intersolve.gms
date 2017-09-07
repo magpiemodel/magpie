@@ -62,7 +62,7 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
 display "finished iteration number ", p15_iteration_counter;
 display "convergence measure:",p15_convergence_measure;
 
-if (s15_switch =1,
+if (s15_elastic_demand =1,
   display "elastic demand model is activated";
   if (p15_convergence_measure(t) > 0.01,
 
@@ -77,12 +77,12 @@ if (s15_switch =1,
           display "Food Demand Model results are returned to MAgPIE";
         );
 
-  * add balanceflow for calibration
+* add balanceflow for calibration
          p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_balanceflow(t,iso,kfo);
-  * set negative values that can occur due to balanceflow to zero
+* set negative values that can occur due to balanceflow to zero
          p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
 
-  * aggregate to regions
+* aggregate to regions
          p15_kcal_pc(t,i,kfo)$(
            sum(i_to_iso(i,iso),
              im_pop_iso(t,iso)
@@ -105,7 +105,7 @@ if (s15_switch =1,
 
        sm_intersolve=1;
        display "Success: convergence between MAgPIE and Food Demand Model reached after ",p15_iteration_counter," iterations";
-  * set back convergence indicators for next timestep
+* set back convergence indicators for next timestep
   );
 
 else
