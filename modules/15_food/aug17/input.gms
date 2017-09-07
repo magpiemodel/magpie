@@ -7,6 +7,9 @@ $setglobal c15_calibscen  fadeout2050
 *   options:   SSP: "SSP1", "SSP2", "SP3", "SSP4", "SSP5"
 *             SRES: "a1", "a2", "b1", "b2"
 
+$setglobal c15_swtich  s15_swtich
+*   options : 0(exogenous demand), 1(elastic demand)
+
 table f15_household_balance_flow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of inhomogenous products and processes in statistics (Mio t DM)
 $ondelim
 $include "./modules/15_food/input/f15_household_balanceflow.cs3"
