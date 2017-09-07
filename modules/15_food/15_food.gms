@@ -6,6 +6,7 @@
 
 
 *###################### R SECTION START (MODULETYPES) ##########################
+$Ifi "%food%" == "aug17" $include "./modules/15_food/aug17.gms"
 $Ifi "%food%" == "elastic_oct16" $include "./modules/15_food/elastic_oct16.gms"
 $Ifi "%food%" == "exo_flexreg_apr16" $include "./modules/15_food/exo_flexreg_apr16.gms"
 *###################### R SECTION END (MODULETYPES) ############################

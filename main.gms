@@ -7,38 +7,38 @@
 $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
+*
 * Used data set: GLUES2-sresa2-constant_co2-miub_echo_g_rev24_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
 * md5sum: 8e140aeecb333860275d76b5405c0b63
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-* 
+*
 * Used data set: magpie_8a828c6ed5004e77d1ba2025e8ea2261_rev2.1.tgz
 * md5sum: 3c0e1a4b5debcd841eef7c50768e9cdf
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
+*
 * Used data set: additional_data_rev3.00.tgz
 * md5sum: fbbcfb42354dadda46fb7b4acb5f0f83
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-* 
+*
 * Low resolution: h200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   SSA  MEA  OAS  CHA  NEU  EUR  REF  LAM  USA  CAZ  IND
 *    12   18   24   21   12   18    8   35   11   33    8
-* 
+*
 * Regionscode: 8a828c6ed5004e77d1ba2025e8ea2261
-* 
+*
 * Regions data revision: 2.1
-* 
+*
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/GLUES2/sresa2/constant_co2/miub_echo_g
 * * Additional input folder: /p/projects/landuse/data/input/other/rev24
 * * Revision: 24
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-* 
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: h200
@@ -48,11 +48,11 @@ $title magpie
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = paste0(cfg$base_folder, "/", set_folder,     "_", cfg$high_res, ".tgz"), regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
-* 
-* 
-* 
+*
+*
+*
 * Last modification (input data): Thu Aug 03 13:45:25 2017
-* 
+*
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
@@ -84,13 +84,14 @@ scalars
 
 *******************************MODULE SETUP*************************************
 
+$setglobal drivers  aug17
 $setglobal land  feb15
 $setglobal costs  default
 $setglobal interest_rate  glo_jan16
 $setglobal tc  endo_JUN16
 $setglobal yields  biocorrect
 
-$setglobal food  exo_flexreg_apr16
+$setglobal food  aug17
 $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 
