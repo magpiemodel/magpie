@@ -119,7 +119,7 @@ else
  p15_kcal_pc_initial_iso(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
  p15_kcal_pc_initial(t,i,kfo) =  p15_kcal_pc(t,i,kfo);
 
- v15_kcal_pc.l(i,kfo) = p15_kcal_pc(t,i,kfo);
+ v15_kcal_pc.fx(i,kfo) = p15_kcal_pc(t,i,kfo);
 
  p15_demand_nonfood_iso_initial(t,iso)  =  v15_demand_nonfood.l(iso);
 
