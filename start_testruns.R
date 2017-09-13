@@ -49,6 +49,12 @@ start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck)
 
 cfg$force_download <- FALSE
 
+cfg$title <- "flex_demand"
+cfg$input <- buildInputVector()
+cfg$gms$c_timesteps <- 11
+cfg$gms$s15_elastic_demand <- 1
+start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck)
+
 cfg$title <- "timesteps"
 cfg$input <- buildInputVector()
 cfg$gms$c_timesteps <- "test_TS"
