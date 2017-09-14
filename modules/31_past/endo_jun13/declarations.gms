@@ -14,9 +14,9 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- oq31_prod(t,j,type)              cellular pasture production constraint
- oq31_carbon(t,j,c_pools,type)    carbon content calculation for pasture
- oq31_cost_prod_pasture(t,i,type) costs for putting animals on pastures
+ oq31_prod(t,j,type)           cellular pasture production constraint
+ oq31_carbon(t,j,c_pools,type) carbon content calculation for pasture
+ oq31_cost_prod_past(t,i,type) costs for putting animals on pastures
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 
