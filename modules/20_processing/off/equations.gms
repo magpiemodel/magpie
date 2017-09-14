@@ -4,5 +4,8 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-ic55_manure_fuel_shr(i,kli)=f55_manure_fuel_shr(t,i,kli,"%c09_gdp_scenario%");
-ic55_awms_shr(i,kli,awms_conf)=  f55_awms_shr(t,i,"%c55_scen_conf%",kli,awms_conf);
+* add high costs for the production of all processing products to disincentivize overproduction
+q20_processing_costs(i2) ..
+        vm_cost_processing(i2)
+        =e=
+        sum(ksd, vm_prod_reg(i2,ksd) * 5000);

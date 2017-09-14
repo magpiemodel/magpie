@@ -8,6 +8,7 @@
 $setglobal phase %1
 $onrecurse
 *######################## R SECTION START (MODULES) ############################
+$include "./modules/09_drivers/09_drivers.gms"
 $include "./modules/10_land/10_land.gms"
 $include "./modules/11_costs/11_costs.gms"
 $include "./modules/12_interest_rate/12_interest_rate.gms"
