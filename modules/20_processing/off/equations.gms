@@ -4,7 +4,8 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-
-vm_dem_processing.fx(i,knpr)=0;
-vm_processing_costs.fx(i)=0;
-vm_secondary_overproduction.fx(i,kall,kpr)=0;
+* add high costs for the production of all processing products to disincentivize overproduction
+q20_processing_costs(i2) ..
+        vm_cost_processing(i2)
+        =e=
+        sum(ksd, vm_prod_reg(i2,ksd) * 5000);

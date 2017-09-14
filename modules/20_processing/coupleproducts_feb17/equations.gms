@@ -42,3 +42,12 @@ q20_processing_substitution_brans(i2) ..
         sum(kcereals20, v20_dem_processing(i2,"substitutes",kcereals20) * fm_attributes("nr",kcereals20))
         =g=
         sum((kcereals20), v20_secondary_substitutes(i2,"brans",kcereals20) * fm_attributes("nr","brans"));
+
+q20_processing_costs(i2) ..
+        vm_cost_processing(i2)
+        =e=
+        sum((ksd,processing20,kpr),
+            v20_dem_processing(i2,processing20,kpr)
+            * sum(ct,f20_processing_conversion_factors(ct,processing20,ksd,kpr))
+            * f20_processing_unitcosts(ksd,kpr)
+        );
