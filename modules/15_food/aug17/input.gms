@@ -4,8 +4,10 @@ $setglobal c15_food_scenario  SSP2
 *            OTHER: "SSP1_boundary", "SSP2_boundary", "SSP3_boundary", "SSP4_boundary", "SSP5_boundary"
 
 $setglobal c15_calibscen  fadeout2050
-*   options:   SSP: "SSP1", "SSP2", "SP3", "SSP4", "SSP5"
-*             SRES: "a1", "a2", "b1", "b2"
+*   options:   fadeout2050
+
+$setglobal c15_rumscen  halving2050
+*   options:   constant, halving2050
 
 scalar s15_elastic_demand  / 0 /
 *   options : 0(exogenous demand), 1(elastic demand)
@@ -50,5 +52,12 @@ $ondelim
 $include "./modules/15_food/input/f15_kcal_balanceflow_fadeout.csv"
 $offdelim
 ;
+
+table f15_ruminant_fadeout(t_all,ruminantfadeoutscen15)
+$ondelim
+$include "./modules/15_food/input/f15_ruminant_fadeout.csv"
+$offdelim
+;
+
 
 *** EOF input.gms ***

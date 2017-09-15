@@ -59,6 +59,9 @@ sets
 
   calibscen15  calibration scenarios for balanceflow
                / fadeout2050 /
+
+  ruminantfadeoutscen15 scenarios for changed composition of livestock products
+               / halving2050, constant /
 ;
 
 alias(kst,kst2);
