@@ -20,7 +20,10 @@ scenario <- "SSP2"
 codeCheck <- FALSE
 
 buildInputVector <- function(regionmapping   = "h11",
-                             archive_name    = "GLUES2-sresa2-constant_co2-miub_echo_g",
+                             project_name    = "GLUES2",
+                             climatescen_name= "sresa2",
+                             co2             = "constant_co2",
+                             climate_model   = "miub_echo_g",
                              resolution      = "h200",
                              archive_rev     = "24",
                              madrat_rev      = "2.61",
@@ -29,11 +32,13 @@ buildInputVector <- function(regionmapping   = "h11",
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
                 mag="c30c1c580039c2b300d86cc46ff4036a")
+  archive_name=paste(project_name,climatescen_name,co2,climate_model,sep="-")
   archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", mappings[regionmapping], ".tgz")
   madrat  <- paste0("magpie_", mappings[regionmapping], "_rev", madrat_rev, ".tgz")
   validation  <- paste0("validation_", mappings[regionmapping], "_rev", validation_rev, ".tgz")
   return(c(archive,madrat,validation,additional_data))
 }
+
 
 
 ### Single test runs ###
