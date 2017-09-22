@@ -9,3 +9,4 @@ im_development_state,input,questionnaire
 fm_attributes,input,questionnaire
 vm_prod_reg,input,questionnaire
 vm_area,input,questionnaire
+vm_cost_prod,input,questionnaire 
