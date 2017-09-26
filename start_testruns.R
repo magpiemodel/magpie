@@ -26,8 +26,8 @@ buildInputVector <- function(regionmapping   = "h11",
                              climate_model   = "miub_echo_g",
                              resolution      = "h200",
                              archive_rev     = "24",
-                             madrat_rev      = "2.61",
-                             validation_rev  = "2.61",
+                             madrat_rev      = "2.11",
+                             validation_rev  = "2.11",
                              additional_data = "additional_data_rev3.14.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
@@ -55,6 +55,16 @@ start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck)
 
 cfg$force_download <- FALSE
 
+cfg$title <- "cc_default"
+cfg$input <- buildInputVector()
+cfg$gms$c_timesteps <- 11
+cfg$gms$s15_elastic_demand <- 0
+cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
+cfg <- setScenario(cfg, "cc")
+start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck)
+cfg <- setScenario(cfg, "nocc")
+
 cfg$title <- "timesteps"
 cfg$input <- buildInputVector()
 cfg$gms$c_timesteps <- "test_TS"
@@ -79,6 +89,16 @@ cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
 start_run(cfg=cfg,scenario=c(scenario,"BASE"),codeCheck=codeCheck)
 
+cfg$title <- "cc_default_rcp26"
+cfg$input <- buildInputVector()
+cfg$gms$c_timesteps <- 11
+cfg$gms$s15_elastic_demand <- 0
+cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
+cfg <- setScenario(cfg, "cc")
+start_run(cfg=cfg,scenario=c(scenario,"BASE"),codeCheck=codeCheck)
+cfg <- setScenario(cfg, "nocc")
+
 cfg$title <- "flex_demand_rcp"
 cfg$input <- buildInputVector()
 cfg$gms$c_timesteps <- 11
@@ -86,8 +106,6 @@ cfg$gms$s15_elastic_demand <- 1
 cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
 start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck)
-
-stop("Enough runs!")
 
 cfg$title <- "timesteps_rcp26"
 cfg$input <- buildInputVector()
