@@ -11,6 +11,8 @@ base_run <- "base_run"
 
 source("calcFunctions.R")
 
+
+
 #low_res
 res  <- get_info(paste0(base_run,"/info.txt"),"^\\* Output ?resolution:",": ")
 
@@ -50,6 +52,19 @@ print("NPI input data preparation")
 print("NPI AD policy")
 ## BEGIN reduce deforestation
 ## minimum forest stock based on NPI documents
+
+
+
+
+
+
+source("gen_csv_npi_indc_pol.R")
+
+
+
+
+
+
 
 #create npi_pol_deforest object
 npi_pol_deforest <- create_indc()
