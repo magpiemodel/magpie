@@ -96,7 +96,7 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 
 
   if(is.null(output))     runscripts     <- choose_module("./scripts/runscripts",
-                                                      "Please choose the output modules to be used for output generation")
+                                                      "Please choose the runscripts to be used for starting model runs")
   if(is.null(submit))     submit     <- choose_submit("Please choose a run submission type")
 
   #Set value source_include so that loaded scripts know, that they are
