@@ -9,7 +9,7 @@ positive variable
  vm_tech_cost(i)                 costs of technological change (mio. US$)
  v13_cost_tc(i)                  technical change costs per region -general (million US$)
  v13_tech_cost_annuity(i)        annuity costs of technological change (mio. US$)
- 
+
 *add
  v13_cost_tc_part1(i)            technical change costs per region -for observed tau (million US$)
  v13_cost_tc_part2(i)            technical change costs per region -for unobserved tau (million US$)
@@ -41,19 +41,13 @@ parameters
 parameters
  ov_tau(t,i,type)                 agricultural land use intensity tau (1)
  ov_tech_cost(t,i,type)           costs of technological change (mio. US$)
- ov13_cost_tc(t,i,type)           technical change costs per region (million US$)
+ ov13_cost_tc(t,i,type)           technical change costs per region -general (million US$)
  ov13_tech_cost_annuity(t,i,type) annuity costs of technological change (mio. US$)
+ ov13_cost_tc_part1(t,i,type)     technical change costs per region -for observed tau (million US$)
+ ov13_cost_tc_part2(t,i,type)     technical change costs per region -for unobserved tau (million US$)
+ ov13_cost_tc_agg(t,i,type)       technical change costs per region -for continuous tau (million US$)
  oq13_tech_cost(t,i,type)         total costs for technological change
  oq13_cost_tc(t,i,type)           costs for technological change
  oq13_tech_cost_annuity(t,i,type) annuity costs for technological change
-
-*add
- ov13_cost_tc_part1(t,i,type)           technical change costs per region-for observed tau (million US$)
- ov13_cost_tc_part2(t,i,type)           technical change costs per region-for unobserved tau (million US$)
- ov13_cost_tc_agg(t,i,type)             technical change costs per region-for continuous tau (million US$)
 ;
-*parameters
-*bound value for part2
-*v13_cost_tc_part2.fx(i2)$(vm_tau(i) < 1.6) = 0 ;
-
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

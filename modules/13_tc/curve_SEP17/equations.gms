@@ -13,8 +13,8 @@
 
  q13_cost_tc_part1(i2)..    v13_cost_tc_part1(i2) =e= i13_tc_factor(i2)*vm_tau(i2)**i13_tc_exponent(i2);
 
- q13_cost_tc_part2(i2)$(vm_tau(i2) > 1.6)..     v13_cost_tc_part2(i2) =e= i13_tc_factor(i2)/500 * (vm_tau(i2)**(i13_tc_exponent(i2) + 2));
-
+ q13_cost_tc_part2(i2)..     v13_cost_tc_part2(i2) =g= i13_tc_factor(i2)/500 * (vm_tau(i2)**(i13_tc_exponent(i2) + 2))
+                                                                           - i13_tc_factor(i2)/500 * (1.6**(i13_tc_exponent(i2) + 2));
 *q13_cost_tc_part2(i2)..     v13_cost_tc_part2(i2) =e= i13_tc_factor(i2)/500*(vm_tau(i2)**(i13_tc_exponent(i2)+2));
 
  q13_cost_tc_agg(i2)..       v13_cost_tc_agg(i2)   =e= v13_cost_tc_part1(i2) + v13_cost_tc_part2(i2);
