@@ -50,7 +50,7 @@ cfg$title <- "SSP2"
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector()
-cfg$recalibrate <- TRUE
+cfg$recalibrate <- FALSE
 start_run(cfg=cfg,codeCheck=codeCheck)
 cfg$recalibrate <- FALSE
 
