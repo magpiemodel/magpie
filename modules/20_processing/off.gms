@@ -8,6 +8,7 @@
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/20_processing/off/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/20_processing/off/declarations.gms"
+$Ifi "%phase%" == "equations" $include "./modules/20_processing/off/equations.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/20_processing/off/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/20_processing/off/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

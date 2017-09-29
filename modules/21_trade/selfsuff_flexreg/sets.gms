@@ -6,6 +6,9 @@
 
 
 sets
+  tstart21(t_all)
+    / y1995, y2000, y2005 /
+
 *sets need to be adopted to new categories
    k_notrade(kall) production activities
        / oilpalm, foddr, pasture, res_cereals, res_fibrous, res_nonfibrous /

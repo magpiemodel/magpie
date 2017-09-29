@@ -1,6 +1,6 @@
 *** (C) 2008-2017 Potsdam Institute for Climate Impact Research (PIK),
 *** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
+*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
@@ -25,6 +25,7 @@ equations
 
   q18_res_recycling_nr(i)                   nutrient recycling nr
   q18_res_recycling_pk(i,pk18)              nutrient recycling pk
+  q18_cost_prod_res(i,kres)                 production costs of harvesting crop residues
 
 ;
 
@@ -44,6 +45,7 @@ parameters
  oq18_translate(t,i,kres,attributes,type)        transforms the multiple crop residues into kres
  oq18_res_recycling_nr(t,i,type)                 nutrient recycling nr
  oq18_res_recycling_pk(t,i,pk18,type)            nutrient recycling pk
+ oq18_cost_prod_res(t,i,kres,type)               production costs of harvesting crop residues
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

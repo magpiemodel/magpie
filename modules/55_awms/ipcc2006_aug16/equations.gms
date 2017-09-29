@@ -29,7 +29,7 @@
  q55_bal_intake_grazing_cropland(i2,kli,npk) ..
          v55_feed_intake(i2, kli, "stubble_grazing",npk)
          =e=
-         sum(kres,vm_dem_feed(i2,kli,kres) * fm_attributes(npk,kres)  * sum(ct,im_development_state(ct,i2))*0.25)
+         sum(kres,vm_dem_feed(i2,kli,kres) * fm_attributes(npk,kres)  * (1 - sum(ct,im_development_state(ct,i2)))*0.25)
          ;
 
  q55_bal_manure(i2,kli,awms,npk) ..
