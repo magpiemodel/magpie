@@ -46,19 +46,21 @@ cfg$gms$s15_elastic_demand <- 1
 
 # clalibration runs
 
-cfg$title <- "SSP2"
-cfg<-lucode::setScenario(cfg,"SSP2")
+cfg$title <- "SUSTAg2"
+cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector()
+cfg$input <- buildInputVector(co2="co2")
 cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
 cfg$recalibrate <- FALSE
 
 #SSP2 family
 
-cfg$title <- "SUSTAg2"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$input <- buildInputVector(co2="co2")
+# SSP2 control run
+cfg$title <- "SSP2"
+cfg<-lucode::setScenario(cfg,"SSP2")
+cfg$input <- buildInputVector(co2="noco2")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg$title <- "SUSTAg2_Ref"
