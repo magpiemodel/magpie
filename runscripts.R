@@ -81,7 +81,7 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
       } else if(submit=="background") {
         stop("dont know what background means. sorry. benni.")
       } else if(submit=="slurm") {
-        system(paste0("srun --qos=short --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --time=100 Rscript ",name))
+        system(paste0("srun --qos=short --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END Rscript ",name))
         Sys.sleep(1)
       } else if(submit=="debug") {
         tmp.env <- new.env()
