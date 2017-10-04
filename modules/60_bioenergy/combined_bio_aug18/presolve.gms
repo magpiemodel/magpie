@@ -6,6 +6,7 @@
 
 
 *fix bioenergy demand to given values
+#what is the difference between these two values? may I simply delete it?
 vm_dem_bioen.fx(i,kall) = 0;
 vm_dem_bioen.fx(i,kall) = f60_1stgen_bioenergy_dem(t,i,"%c60_1stgen_biodem%",kall)
                           /fm_attributes("ge",kall);
@@ -14,6 +15,9 @@ vm_dem_bioen.fx(i,kall) = f60_1stgen_bioenergy_dem(t,i,"%c60_1stgen_biodem%",kal
 *calculated separately (see equations)
 vm_dem_bioen.up(i,kbe60) = Inf;
 vm_dem_bioen.lo(i,kbe60) = 0;
+
+vm_dem_bioen.up(i,kbec60) = Inf;
+vm_dem_bioen.lo(i,kbec60) = 0;
 
 *fix bioenergy revenue to 0
 vm_cost_bioen.fx(i) = 0;

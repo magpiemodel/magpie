@@ -4,8 +4,14 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-$ifthen "%c60_2ndgen_biodem%" == "coupling" i60_bioenergy_dem(t,i) = f60_bioenergy_dem_coupling(t,i);
-$else i60_bioenergy_dem(t,i) = f60_bioenergy_dem(t,i,"%c60_2ndgen_biodem%");
-$endif
+
+# There will be no coupling option, so thi swill not be used
+
+# $ifthen "%c60_2ndgen_biodem%" == "coupling" i60_bioenergy_dem(t,i) = f60_bioenergy_dem_coupling(t,i);
+# $else i60_bioenergy_dem(t,i) = f60_bioenergy_dem(t,i,"%c60_2ndgen_biodem%");
+# $endif
+
+i60_bioenergy_dem(t,i) = f60_bioenergy_combined(t,i,"%c60_combined_biodem%")
+
 * Add minimal bioenergy demand to avoid zero prices
 i60_bioenergy_dem(t,i) = i60_bioenergy_dem(t,i) + 0.01;
