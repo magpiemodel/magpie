@@ -37,4 +37,4 @@ sets
          foddr, cottn_pro, begr, betr /
  ;
 
-alias(kap,kap2);
+alias(kap,kap4);

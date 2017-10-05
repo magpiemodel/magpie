@@ -8,5 +8,4 @@
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%processing%" == "coupleproducts_feb17" $include "./modules/20_processing/coupleproducts_feb17.gms"
 $Ifi "%processing%" == "off" $include "./modules/20_processing/off.gms"
-$Ifi "%processing%" == "sector_may15" $include "./modules/20_processing/sector_may15.gms"
 *###################### R SECTION END (MODULETYPES) ############################

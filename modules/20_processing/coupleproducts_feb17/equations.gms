@@ -31,7 +31,23 @@ q20_processing(i2,kpr,ksd) ..
         - v20_secondary_substitutes(i2,ksd,kpr)
         + vm_secondary_overproduction(i2,ksd,kpr);
 
-q20_processing_substitution(i2,dm_ge_nr) ..
-        sum(kpr, v20_dem_processing(i2,"substitutes",kpr) * fm_attributes(dm_ge_nr,kpr))
+*replacing branoils and germoil by other oils
+q20_processing_substitution_oils(i2) ..
+        v20_dem_processing(i2,"substitutes","oils")
         =g=
-        sum((ksd,kpr), v20_secondary_substitutes(i2,ksd,kpr) * fm_attributes(dm_ge_nr,ksd) );
+        sum((kcereals20), v20_secondary_substitutes(i2,"oils",kcereals20) );
+
+*replacing brans by cereals of same protein value
+q20_processing_substitution_brans(i2) ..
+        sum(kcereals20, v20_dem_processing(i2,"substitutes",kcereals20) * fm_attributes("nr",kcereals20))
+        =g=
+        sum((kcereals20), v20_secondary_substitutes(i2,"brans",kcereals20) * fm_attributes("nr","brans"));
+
+q20_processing_costs(i2) ..
+        vm_cost_processing(i2)
+        =e=
+        sum((ksd,processing20,kpr),
+            v20_dem_processing(i2,processing20,kpr)
+            * sum(ct,f20_processing_conversion_factors(ct,processing20,ksd,kpr))
+            * f20_processing_unitcosts(ksd,kpr)
+        );
