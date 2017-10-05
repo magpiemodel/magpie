@@ -21,7 +21,7 @@
                    + vm_nr_inorg_fert_reg(i2,"crop")
                    + sum(cell(i2,j2),vm_nr_som(j2))*0
                    + sum(ct,f50_nitrogen_balanceflow(ct,i2))
-*                   + nitrogen deposition
+                   + v50_nr_deposition(i2,"crop")
                  )
                  =g=
                  sum(kcr,v50_nr_withdrawals(i2,kcr));
@@ -44,6 +44,7 @@
                      sum(kli,vm_manure(i2, kli, "grazing", "nr"))
                      + vm_nr_inorg_fert_reg(i2,"past")
                      + sum((cell(i2,j2)), vm_land(j2,"past")) * sum(ct,f50_nr_fixation_rates_pasture(ct,i2))
+                     + v50_nr_deposition(i2,"past")
                     )
                     =g=
                     vm_prod_reg(i2,"pasture") * fm_attributes("nr","pasture");

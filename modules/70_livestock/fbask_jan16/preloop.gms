@@ -4,7 +4,5 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-vm_cost_prod.fx(i,"fish") = 0;
-
 im_slaughter_feed_share(t_all,i,kap,attributes) =
              f70_slaughter_feed_share(t_all,i,kap,attributes,"%c70_feed_scen%");

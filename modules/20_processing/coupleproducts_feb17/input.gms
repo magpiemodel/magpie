@@ -20,3 +20,8 @@ table f20_processing_shares(t_all,i,ksd,kpr)   shares of secondary products comi
 $ondelim
 $include "./modules/20_processing/coupleproducts_feb17/input/f20_processing_shares.cs3"
 $offdelim       ;
+
+table f20_processing_unitcosts(ksd,kpr)   costs of transforming x units kpr into 1 unit ksd
+$ondelim
+$include "./modules/20_processing/coupleproducts_feb17/input/f20_processing_unitcosts.cs3"
+$offdelim       ;

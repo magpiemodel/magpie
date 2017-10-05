@@ -5,7 +5,8 @@
 *** Contact: magpie@pik-potsdam.de
 
 parameters
- i21_trade_bal_reduction(t,k_trade)                  trade balance reduction (1)
+ i21_trade_bal_reduction(t)                          trade balance reduction (1)
+ i21_trade_bal_reduction_annual(t_all)        annual trade balance reduction (1)
 ;
 
 positive variables

@@ -17,3 +17,8 @@
                                f70_cost_regr(kli,"cost_regr_a")
                                + f70_cost_regr(kli,"cost_regr_b") * sum((ct, sys_to_kli(sys,kli)),f70_livestock_productivity(ct,i2,sys,"%c70_feed_scen%"))
                             );
+
+  q70_cost_prod_fish(i2) ..  vm_cost_prod(i2,"fish")
+                            =e=
+                            vm_prod_reg(i2,"fish")*
+                            f70_cost_regr("fish","cost_regr_a") ;
