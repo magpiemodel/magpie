@@ -81,6 +81,22 @@ cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
 try(start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck))
 
+cfg$title <- "ssp1"
+cfg$input <- buildInputVector()
+cfg$gms$c_timesteps <- 11
+cfg$gms$s15_elastic_demand <- 0
+cfg$gms$c56_pollutant_prices <- "SSP1-Ref-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP1-Ref-SPA0"
+try(start_run(cfg=cfg,scenario="SSP1",codeCheck=codeCheck))
+
+cfg$title <- "ssp5"
+cfg$input <- buildInputVector()
+cfg$gms$c_timesteps <- 11
+cfg$gms$s15_elastic_demand <- 0
+cfg$gms$c56_pollutant_prices <- "SSP5-Ref-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP5-Ref-SPA0"
+try(start_run(cfg=cfg,scenario="SSP5",codeCheck=codeCheck))
+
 cfg$title <- "default_rcp26"
 cfg$input <- buildInputVector()
 cfg$gms$c_timesteps <- 11
