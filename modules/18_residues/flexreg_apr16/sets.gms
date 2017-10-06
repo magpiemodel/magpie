@@ -16,6 +16,9 @@ pk18(npk)
 dev18
 /high_income,low_income/
 
+nonused18(kcr)
+/sunflower, oilpalm, foddr, begr, betr/
+
 ***Feeding groups***
 
    kres_kcr(kres,kcr)

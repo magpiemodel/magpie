@@ -20,8 +20,8 @@ $title magpie
 * md5sum: 756be82dabbf32a0926b5837b347ab3c
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev3.13.tgz
-* md5sum: 281d1a2c6d38122ad2a4901f4b66e3a4
+* Used data set: additional_data_rev3.14.tgz
+* md5sum: a0703ae951bc9d807af276698cdc1cef
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Low resolution: h200
@@ -55,7 +55,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Thu Sep 14 23:24:15 2017
+* Last modification (input data): Fri Sep 22 10:36:01 2017
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -79,7 +79,7 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  1
+$setglobal c_timesteps  quicktest
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /
