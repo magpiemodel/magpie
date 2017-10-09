@@ -21,6 +21,7 @@ equations
  q21_trade_reg(i,k_trade)                regional trade balances i.e. minimum self-suff ratio
  q21_excess_dem(k_trade)                 global excess demand
  q21_excess_supply(i,k_trade)            regional excess production
+ q21_cost_trade(i)                       trade costs
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
