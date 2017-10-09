@@ -4,12 +4,6 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-scalar
-
-s21_crop_cost                             /1/
-s21_livestock_cost                       /2/
-;
-
 $setglobal c21_trade_liberalization  regionalized
 *   options are "regionalized" and "globalized" and "fragmented"
 
