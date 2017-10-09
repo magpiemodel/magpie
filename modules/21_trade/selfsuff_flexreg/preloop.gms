@@ -7,7 +7,7 @@
 
 
 *set vm_cost_trade zero in order to avoid a free variable
-* vm_cost_trade.fx(i)               = 0;
+vm_cost_trade.fx(i)               = 0;
 
 i21_trade_bal_reduction_annual(t) = c21_reduction_%c21_trade_liberalization%;
 i21_trade_bal_reduction_annual(tstart21) = c21_reduction_start;
