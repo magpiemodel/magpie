@@ -5,11 +5,10 @@
 *** Contact: magpie@pik-potsdam.de
 
 
-q60_bioenergy_glo.. sum(i2, sum(kbe60,   vm_dem_bioen(i2, kbe60)*fm_attributes("ge", kbe60)) +
-                            vm_dem_bioen(i2, "sugr_cane")*fm_attributes("ge", "ethanol")*0.516)
+q60_bioenergy_glo.. sum(i2, sum(kbe60,   vm_dem_bioen(i2, kbe60)*f60_energyfactor("ef", kbe60)))
           =g= sum((ct,i2),i60_bioenergy_dem(ct,i2))*(1-c60_biodem_level);
 
 
-#still to be done
-q60_bioenergy_reg(i2).. sum(kbe60, vm_dem_bioen(i2,kbe60)*fm_attributes("ge",kbe60))
+
+q60_bioenergy_reg(i2).. sum(kbe60, vm_dem_bioen(i2,kbe60)*f60_energyfactor("ef", kbe60))
           =g= sum(ct,i60_bioenergy_dem(ct,i2))*c60_biodem_level;
