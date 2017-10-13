@@ -6,7 +6,7 @@
 
 sets
     kbe60(kcr) bio energy activities
-        / betr, begr, tece, maiz,  soybean, rapeseed, groundnut, sunflower,
+        / betr, begr, tece, maiz, soybean, rapeseed, groundnut, sunflower,
          oilpalm, sugr_cane, cottn_pro /
 
 *   kbec60(kcr) bio energy crop activities

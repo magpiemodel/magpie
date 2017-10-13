@@ -7,8 +7,8 @@
 
 
 
-$ifthen "%c60_2ndgen_biodem%" == "coupling" i60_bioenergy_dem(t,i) = f60_bioenergy_dem_coupling(t,i) + sum(kall, f60_1stgen_bioenergy_dem(t,i,"c60_1stgen_biodem",kall));
-$else i60_bioenergy_dem(t,i) = f60_bioenergy_dem(t,i,"%c60_2ndgen_biodem%") + sum(kall, f60_1stgen_bioenergy_dem(t,i,"c60_1stgen_biodem",kall));
+$ifthen "%c60_2ndgen_biodem%" == "coupling" i60_bioenergy_dem(t,i) = f60_bioenergy_dem_coupling(t,i) + sum(kall, f60_1stgen_bioenergy_dem(t,i,"%c60_1stgen_biodem%",kall));
+$else i60_bioenergy_dem(t,i) = f60_bioenergy_dem(t,i,"%c60_2ndgen_biodem%") + sum(kall, f60_1stgen_bioenergy_dem(t,i,"%c60_1stgen_biodem%",kall));
 $endif
 
 *i60_bioenergy_dem(t,i) = f60_bioenergy_combined(t,i,"%c60_combined_biodem%")
