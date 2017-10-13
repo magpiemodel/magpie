@@ -39,12 +39,12 @@ $include "./modules/60_bioenergy/input/f60_bioenergy_dem.cs3"
 $offdelim
 ;
 
-
-table f60_energyfactor(attributes,kall) Energy factor PJ per Mt DM
+parameter f60_energyfactor(kall) Energy factor PJ per Mt DM
+/
 $ondelim
 $include "./modules/60_bioenergy/input/f60_energyfactor.cs3"
 $offdelim
-;
+/;
 
 
 $setglobal c60_1stgen_biodem  const2020
