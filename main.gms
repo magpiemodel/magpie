@@ -133,6 +133,7 @@ $setglobal som  off
 $setglobal bioenergy  standard_flexreg_may17
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
+$setglobal disagg_lvst  off
 
 $setglobal optimization  lp_nlp_apr17
 

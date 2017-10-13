@@ -4,8 +4,20 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-im_slaughter_feed_share(t_all,i,kap,attributes) =
-             f70_slaughter_feed_share(t_all,i,kap,attributes,"%c70_feed_scen%");
-			 
-im_feed_baskets(t_all,i,kap,kall) =
-             f70_feed_baskets(t_all,i,kap,kall,"%c70_feed_scen%");
+sets
+   kli_rum(kli)
+   /
+   livst_rum, livst_milk
+   /
+
+   kli_mon(kli)
+   /
+   livst_pig, livst_chick, livst_egg
+   /
+
+   kfeed_not_transportable(kall)
+   /
+	res_cereals, res_fibrous, res_nonfibrous, foddr
+   /
+   
+;
