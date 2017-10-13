@@ -40,7 +40,7 @@ $offdelim
 ;
 
 
-table f60_energyfactor(attributes, kall) Energy factor PJ per Mt DM
+table f60_energyfactor(attributes,kall) Energy factor PJ per Mt DM
 $ondelim
 $include "./modules/60_bioenergy/input/f60_energyfactor.cs3"
 $offdelim
