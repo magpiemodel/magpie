@@ -17,7 +17,7 @@ equations
 
 parameters
  im_slaughter_feed_share(t_all,i,kap,attributes) share of feed that is incorprated in animal biomass (1)
- im__feed_baskets(t_all,i,kap,kall,) feed baskets (t DM per t DM livestock product)
+ im_feed_baskets(t_all,i,kap,kall,) feed baskets (t DM per t DM livestock product)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
