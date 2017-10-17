@@ -11,12 +11,12 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
     stop("Package \"lucode\" needed for this function to work. Please install it.",
          call. = FALSE)
   }
-  
+
   if (!requireNamespace("magclass", quietly = TRUE)) {
     stop("Package \"magclass\" needed for this function to work. Please install it.",
          call. = FALSE)
   }
-  
+
 
   Sys.setlocale(locale="C")
   maindir <- getwd()
@@ -106,19 +106,19 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
   } else {
     if(cfg$recalibrate=="ifneeded") cfg$recalibrate <- FALSE
   }
-  
+
   if(cfg$recalc_indc=="ifneeded") {
     aff_pol <- magclass::read.magpie("modules/32_forestry/input/indc_aff_pol.cs3")
     ad_pol <- magclass::read.magpie("modules/35_natveg/input/indc_ad_pol.cs3")
     emis_pol <- magclass::read.magpie("modules/35_natveg/input/indc_emis_pol.cs3")
-    if((all(aff_pol == 0) & (cfg$gms$c32_aff_policy != "none")) | 
+    if((all(aff_pol == 0) & (cfg$gms$c32_aff_policy != "none")) |
        (all(ad_pol == 0) & (cfg$gms$c35_ad_policy != "none")) |
        (all(emis_pol == 0) & (cfg$gms$c35_emis_policy != "none"))
     ) {
       cfg$recalc_indc <- TRUE
     } else cfg$recalc_indc <- FALSE
   }
-  
+
 
 
   #### Collect technical information for validation ############################
@@ -169,7 +169,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
     start_indc_preprocessing(cfg,base_run_dir="scripts/indc/base_run",maindir=maindir)
     cat("NPI/INDC recalculation successful!\n")
   }
-  
+
   # copy important files into output_folder (before MAgPIE execution)
   for(file in cfg$files2export$start) {
     try(file.copy(Sys.glob(file), cfg$results_folder, overwrite=TRUE))
@@ -186,7 +186,8 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
 
   save(cfg, file=path(cfg$results_folder, "config.Rdata"))
 
-  lucode::singleGAMSfile(output=lucode::path(cfg$results_folder, "full.gms"))
+  if(is.null(cfg$model)) cfg$model <- "main.gms"
+  lucode::singleGAMSfile(mainfile=cfg$model, output=lucode::path(cfg$results_folder, "full.gms"))
   lucode::model_unlock(lock_id)
 
   on.exit(setwd(maindir))
