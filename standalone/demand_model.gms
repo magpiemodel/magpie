@@ -15,10 +15,6 @@
 
 $title demand_model_standalone
 
-*##################### R SECTION START (VERSION INFO) ##########################
-*
-*###################### R SECTION END (VERSION INFO) ###########################
-
 $offupper
 $offsymxref
 $offsymlist

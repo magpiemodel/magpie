@@ -15,10 +15,6 @@
 
 $title model_title
 
-*##################### R SECTION START (VERSION INFO) ##########################
-*
-*###################### R SECTION END (VERSION INFO) ###########################
-
 $offupper
 $offsymxref
 $offsymlist
