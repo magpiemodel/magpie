@@ -5,11 +5,10 @@
 *** Contact: magpie@pik-potsdam.de
 
 
- q71_prod_in(j2,kli_rum) .. v71_prod_in(j2,kli_rum)
+ q71_prod_in(j2,kli_rum,kfeed_not_transportable) .. v71_prod_in(j2,kli_rum)
                             =l=
-						    sum(kli_rum_kfeed_not_trans(kli_rum,kfeed_not_transportable),
-							 vm_prod(j2,kfeed_not_transportable) /
-							 sum(ct,i71_share_in_feedmix(ct,j2,kli_rum,kfeed_not_transportable,"dm")))
+							vm_prod(j2,kfeed_not_transportable) /
+							sum(ct,i71_share_in_feedmix(ct,j2,kli_rum,kfeed_not_transportable,"dm"))
 						    ;
 							
 
