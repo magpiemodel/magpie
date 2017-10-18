@@ -8,7 +8,7 @@
 $setglobal c70_feed_scen  ssp2
 *   options:    ssp1,ssp2,ssp3,ssp4,ssp5,constant
 
-table f70_feed_baskets(t_all,i,kap,kall,feed_scen70) feed baskets (t DM per t DM livestock product)
+parameter f70_feed_baskets(t_all,i,kap,kall,feed_scen70) feed baskets (t DM per t DM livestock product)
 $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_feed_baskets.cs3"
 $offdelim;
