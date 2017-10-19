@@ -5,16 +5,16 @@
 *** Contact: magpie@pik-potsdam.de
 
 positive variables
- v71_prod_in(i,kli_rum,kfeed_not_transportable)   intensive ruminant livestock production (mio. ton DM)
- v71_prod_ex(i,kli_rum)                           extensive ruminant livestock production (mio. ton DM)
+ v71_prod_in(j,kli_rum)              intensive ruminant livestock production (mio. ton DM)
+ v71_prod_ex(j,kli_rum)              extensive ruminant livestock production (mio. ton DM)
  ;
  
 equations
- q71_prod_in(j,kli_rum)              production constraint for intensive ruminant livestock products
- q71_prod_ex(j,kli_rum)              production constraint for extensive ruminant livestock products
- q71_prod_reg_ex(i, kli_rum)		 production constraint for regional extensive ruminant livestock products	
- q71_prod_rum_liv(j,kli_rum)         production constraint for ruminant livestock products
- q71_prod_mon_liv(j,kli_mon)         production constraint for monogastrics livestock products
+ q71_prod_in(j,kli_rum)                   production constraint for intensive ruminant livestock products
+ q71_prod_ex(j,kli_rum)                   production constraint for extensive ruminant livestock products
+ q71_prod_reg_ex(i,kli_rum)		          production constraint for regional extensive ruminant livestock products	
+ q71_prod_rum_liv(j,kli_rum)              production constraint for ruminant livestock products
+ q71_prod_mon_liv(j,kli_mon)              production constraint for monogastrics livestock products
  ;
 
 parameters
@@ -25,8 +25,8 @@ parameters
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov71_prod_in(t,i,kli_rum,type)      intensive ruminant livestock production (mio. ton DM)
- ov71_prod_ex(t,i,kli_rum,type)      extensive ruminant livestock production (mio. ton DM)
+ ov71_prod_in(t,j,kli_rum,type)      intensive ruminant livestock production (mio. ton DM)
+ ov71_prod_ex(t,j,kli_rum,type)      extensive ruminant livestock production (mio. ton DM)
  oq71_prod_in(t,j,kli_rum,type)      production constraint for intensive ruminant livestock products
  oq71_prod_ex(t,j,kli_rum,type)      production constraint for extensive ruminant livestock products
  oq71_prod_reg_ex(t,i,kli_rum,type)  production constraint for regional extensive ruminant livestock products	

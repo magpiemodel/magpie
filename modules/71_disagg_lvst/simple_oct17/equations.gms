@@ -5,12 +5,13 @@
 *** Contact: magpie@pik-potsdam.de
 
 
- q71_prod_in(j2,kli_rum,kfeed_not_transportable) .. v71_prod_in(j2,kli_rum)
+ q71_prod_in(j2,kli_rum) .. v71_prod_in(j2,kli_rum)
                             =l=
-							vm_prod(j2,kfeed_not_transportable) /
-							sum(ct,i71_share_in_feedmix(ct,j2,kli_rum,kfeed_not_transportable,"dm"))
+							vm_prod(j2,"foddr") /
+							sum(ct,i71_share_in_feedmix(ct,j2,kli_rum,"foddr","dm"))
 						    ;
-							
+*** no residue production in cluster level avaiable so far
+*** so the equation above is just running for foddr production							
 
 						   
  q71_prod_ex(j2,kli_rum) .. v71_prod_ex(j2,kli_rum)

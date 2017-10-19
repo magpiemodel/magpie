@@ -6,10 +6,9 @@
 
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/70_livestock/fbask_jan16/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/70_livestock/fbask_jan16/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/70_livestock/fbask_jan16/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/70_livestock/fbask_jan16/equations.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/70_livestock/fbask_jan16/preloop.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/70_livestock/fbask_jan16/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/71_disagg_lvst/simple_oct17/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/71_disagg_lvst/simple_oct17/declarations.gms"
+$Ifi "%phase%" == "equations" $include "./modules/71_disagg_lvst/simple_oct17/equations.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/71_disagg_lvst/simple_oct17/preloop.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/71_disagg_lvst/simple_oct17/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

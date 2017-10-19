@@ -15,9 +15,13 @@ sets
    livst_pig, livst_chick, livst_egg
    /
 
-   kfeed_not_transportable(kall)
+   kfeed_no_trans(kall)
    /
 	res_cereals, res_fibrous, res_nonfibrous, foddr
    /
    
-;
+   
+; 
+alias(kall,kall2);
+alias(j,j3);
+alias(cell,cell2);
