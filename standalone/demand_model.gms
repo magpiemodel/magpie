@@ -4,15 +4,6 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-* This is a standalone skeleton which should be used as template
-* if only parts of the model should be run. It contains the basic,
-* structural components of the model.
-* To use it, please copy that file, give it an explaining name and
-* save it in the "models" folder. After that you can modify it based
-* on the given requirements. You can add own code, but also delete
-* code (e.g. the model statement or the provided loops) if these parts
-* are irrelevant for your analysis.
-
 $title demand_model_standalone
 
 $offupper
