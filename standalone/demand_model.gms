@@ -20,11 +20,11 @@ $offsymxref
 $offsymlist
 $offlisting
 
-$setglobal c_timesteps  1
+$setglobal c_timesteps  quicktest
 
 *******************************MODULE SETUP*************************************
-$setglobal drivers aug17
-$setglobal food aug17
+$setglobal drivers  aug17
+$setglobal food  aug17
 
 ***************************PREDEFINED MACROS************************************
 $include "./core/macros.gms"
