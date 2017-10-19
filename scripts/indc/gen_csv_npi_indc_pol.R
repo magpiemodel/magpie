@@ -1,6 +1,7 @@
 ## generate the csv files that contains the policies settings (deforest, afforest, emis) for NPIand INDC.
-## some settings are functions (temp files) of magpie results. So, to avoid misspecicication, 
-## please make all chanchanges to the settings here. Not direct in the csv files.
+## make all chanchanges to the settings here. Not direct in the csv files.
+
+#---------------------------------NPI------------------------------
 
 #create npi_pol_deforest object
 npi_pol_deforest <- create_indc()
@@ -10,8 +11,18 @@ npi_pol_deforest <- create_indc()
 
 #Australia
 npi_pol_deforest["AUS",1,] <- c(1,1,2010,2010,1) #increase 20,000 hectares afforestation by 2020 -> zero deforestation 
-#Brazil 
-npi_pol_deforest["BRA",1,] <- c(1,1,2005,2030,1) #Reforestation of 12 mn ha by 2030 -> zero deforestation 
+#Brazil country level
+#Brazil has no reducing deforestation statment at country level in its iNDC, Brazil has it only regarding to Amazon!
+#Brazil legal amazon level
+#npi_pol_deforest["LAX",1,] <- c(1,1,2005,2030,1) #zero ilegal deforestation in legal amazon by 2030 and compensation for GHG from legal deforestment 
+#npi_pol_deforest["NLX",1,] <- c(1,1,2005,2030,0) 
+#Brazil biomes level
+#npi_pol_deforest["AMX",1,] <- c(1,1,2005,2030,1) #zero ilegal deforestation in amazon biome by 2030 and compensation for GHG from legal deforestment 
+#npi_pol_deforest["ATX",1,] <- c(1,1,2005,2030,0) 
+#npi_pol_deforest["CAX",1,] <- c(1,1,2005,2030,0) 
+#npi_pol_deforest["CEX",1,] <- c(1,1,2005,2030,0) 
+#npi_pol_deforest["PPX",1,] <- c(1,1,2005,2030,0) 
+#npi_pol_deforest["PTX",1,] <- c(1,1,2005,2030,0) 
 #China
 npi_pol_deforest["CHN",1,] <- c(1,2,2005,2005,1) #23.04% forest coverage by 2020 -> assume no deforestation
 #India
@@ -30,7 +41,18 @@ npi_pol_afforest <- create_indc()
 #Australia
 npi_pol_afforest["AUS",1,] <- c(1,1,2010,2020,0.02) #20,000 hectares afforestation by 2020
 #Brazil
-npi_pol_afforest["BRA",1,] <- c(1,1,2005,2030,12) #Reforestation of 12 mn ha by 2030
+#npi_pol_afforest["BRA",1,] <- c(1,1,2005,2030,12) #Reforestation of 12 mn ha by 2030 in Brazil as a whole
+#Brazil legal amazon level 
+#####How to implement this in country level, since this is in absolute value (instead of percentage, as GHG reduction)
+#npi_pol_deforest["LAX",1,] <- c(1,1,2005,2030,x) 
+#npi_pol_deforest["NLX",1,] <- c(1,1,2005,2030,x) 
+#Brazil biomes level
+#npi_pol_deforest["AMX",1,] <- c(1,1,2005,2030,x) 
+#npi_pol_deforest["ATX",1,] <- c(1,1,2005,2030,x) 
+#npi_pol_deforest["CAX",1,] <- c(1,1,2005,2030,x) 
+#npi_pol_deforest["CEX",1,] <- c(1,1,2005,2030,x) 
+#npi_pol_deforest["PPX",1,] <- c(1,1,2005,2030,x) 
+#npi_pol_deforest["PTX",1,] <- c(1,1,2005,2030,x) 
 #China
 tmp <- dimSums(magpie_bau_land["CHN",2005,],dim=c(1,3))*0.2304 - dimSums(magpie_bau_land["CHN",2005,c("primforest","secdforest","forestry")],dim=c(1,3))
 tmp[tmp<0] <- 0
@@ -80,6 +102,9 @@ npi_pol_emis["GBR",,] <- c(1,1,2005,2020,0.2)
 
 write.magpie(npi_pol_emis, file_name = "npi_pol_emis.csv")
 
+
+#---------------------------------INDC------------------------------
+
 #create indc_pol_deforest object
 indc_pol_deforest <- create_indc()
 
@@ -89,7 +114,7 @@ indc_pol_deforest <- create_indc()
 #Australia
 indc_pol_deforest["AUS",,] <- c(1,1,2010,2010,1) #increase 20,000 hectares afforestation by 2020 -> zero deforestation 
 #Brazil
-indc_pol_deforest["BRA",,] <- c(1,1,2005,2030,1) #zero illegal deforestation in 2030
+#indc_pol_deforest["BRA",,] <- c(1,1,2005,2030,1) #zero illegal deforestation in 2030
 #China
 indc_pol_deforest["CHN",,] <- c(1,2,2005,2005,1) #23.04% forest coverage by 2020 -> assume no deforestation
 #India
@@ -115,7 +140,7 @@ indc_pol_afforest <- create_indc()
 #Australia
 indc_pol_afforest["AUS",1,] <- c(1,1,2010,2020,0.02) #20,000 hectares afforestation by 2020
 #Brazil
-indc_pol_afforest["BRA",1,] <- c(1,1,2005,2030,12) #Reforestation of 12 mn ha by 2030
+#indc_pol_afforest["BRA",1,] <- c(1,1,2005,2030,12) #Reforestation of 12 mn ha by 2030
 #China
 tmp <- dimSums(magpie_bau_land["CHN",2005,],dim=c(1,3))*0.2304 - dimSums(magpie_bau_land["CHN",2005,c("primforest","secdforest","forestry")],dim=c(1,3))
 tmp[tmp<0] <- 0
@@ -155,7 +180,17 @@ indc_pol_emis["AGO",,] <- c(1,2,2005,2030,0.35) #economy-wide target: 35% reduct
 #Benin
 indc_pol_emis["BEN",,] <- c(1,2,2005,2030,0.07) #economy-wide target: 7% reduction by 2030 compared to BAU
 #Brazil
-# indc_pol_emis["BRA",,] <- c(1,1,2005,2030,0.37) #economy-wide target: 37% reduction by 2030 compared to 2005
+# indc_pol_emis["BRA",,] <- c(1,1,2005,2025,0.37) #economy-wide target: 37% reduction by 2025 compared to 2005
+#Brazil legal amazon level
+npi_pol_deforest["LAX",1,] <- c(1,1,2005,2025,0.37) #economy-wide target: 37% reduction by 2025 compared to 2005
+npi_pol_deforest["NLX",1,] <- c(1,1,2005,2025,0.37) #economy-wide target: 37% reduction by 2025 compared to 2005
+#Brazil biomes level
+#npi_pol_deforest["AMX",1,] <- c(1,1,2005,2025,0.37) #economy-wide target: 37% reduction by 2025 compared to 2005
+#npi_pol_deforest["CAX",1,] <- c(1,1,2005,2025,0.37) #economy-wide target: 37% reduction by 2025 compared to 2005
+#npi_pol_deforest["CEX",1,] <- c(1,1,2005,2025,0.37) #economy-wide target: 37% reduction by 2025 compared to 2005
+#npi_pol_deforest["PPX",1,] <- c(1,1,2005,2025,0.37) #economy-wide target: 37% reduction by 2025 compared to 2005
+#npi_pol_deforest["PTX",1,] <- c(1,1,2005,2025,0.37) #economy-wide target: 37% reduction by 2025 compared to 2005
+#npi_pol_deforest["ATX",1,] <- c(1,1,2005,2025,0.37) #economy-wide target: 37% reduction by 2025 compared to 2005
 #Cambodia, LULUCF not included in economy-wide target
 #Canada
 indc_pol_emis["CAN",,] <- c(1,1,2005,2030,0.3) #economy-wide target: 30% reduction by 2030 compared to 2005

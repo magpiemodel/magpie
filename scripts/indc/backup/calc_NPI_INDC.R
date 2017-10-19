@@ -60,7 +60,7 @@ npi_pol_deforest <- create_indc()
 #Australia
 npi_pol_deforest["AUS",1,] <- c(1,1,2010,2010,1) #increase 20,000 hectares afforestation by 2020 -> zero deforestation 
 #Brazil 
-npi_pol_deforest["BRA",1,] <- c(1,1,2005,2030,1) #Reforestation of 12 mn ha by 2030 -> zero deforestation 
+#npi_pol_deforest["BRA",1,] <- c(1,1,2005,2030,1) #Reforestation of 12 mn ha by 2030 -> zero deforestation 
 #China
 npi_pol_deforest["CHN",1,] <- c(1,2,2005,2005,1) #23.04% forest coverage by 2020 -> assume no deforestation
 #India
@@ -88,7 +88,7 @@ npi_pol_afforest <- create_indc()
 #Australia
 npi_pol_afforest["AUS",1,] <- c(1,1,2010,2020,0.02) #20,000 hectares afforestation by 2020
 #Brazil
-npi_pol_afforest["BRA",1,] <- c(1,1,2005,2030,12) #Reforestation of 12 mn ha by 2030
+#npi_pol_afforest["BRA",1,] <- c(1,1,2005,2030,12) #Reforestation of 12 mn ha by 2030
 #China
 tmp <- dimSums(magpie_bau_land["CHN",2005,],dim=c(1,3))*0.2304 - dimSums(magpie_bau_land["CHN",2005,c("primforest","secdforest","forestry")],dim=c(1,3))
 tmp[tmp<0] <- 0
@@ -171,7 +171,7 @@ indc_pol_deforest <- create_indc()
 #Australia
 indc_pol_deforest["AUS",,] <- c(1,1,2010,2010,1) #increase 20,000 hectares afforestation by 2020 -> zero deforestation 
 #Brazil
-indc_pol_deforest["BRA",,] <- c(1,1,2005,2030,1) #zero illegal deforestation in 2030
+#indc_pol_deforest["BRA",,] <- c(1,1,2005,2030,1) #zero illegal deforestation in 2030
 #China
 indc_pol_deforest["CHN",,] <- c(1,2,2005,2005,1) #23.04% forest coverage by 2020 -> assume no deforestation
 #India
@@ -209,7 +209,7 @@ indc_pol_afforest <- create_indc()
 #Australia
 indc_pol_afforest["AUS",1,] <- c(1,1,2010,2020,0.02) #20,000 hectares afforestation by 2020
 #Brazil
-indc_pol_afforest["BRA",1,] <- c(1,1,2005,2030,12) #Reforestation of 12 mn ha by 2030
+#indc_pol_afforest["BRA",1,] <- c(1,1,2005,2030,12) #Reforestation of 12 mn ha by 2030
 #China
 tmp <- dimSums(magpie_bau_land["CHN",2005,],dim=c(1,3))*0.2304 - dimSums(magpie_bau_land["CHN",2005,c("primforest","secdforest","forestry")],dim=c(1,3))
 tmp[tmp<0] <- 0

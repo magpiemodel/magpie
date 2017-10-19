@@ -4,8 +4,7 @@ base_run <- "base_run"
 #spatial_header
 load(paste0(base_run,"/spatial_header.rda"))
 
-mapping<-toolMappingFile(type="cell",name="CountryToCellMapping.csv",readcsv=TRUE)  
-countries<-unique(mapping$iso)
+
 
 get_info <- function(file, grep_expression, sep, pattern="", replacement="") {
   if(!file.exists(file)) return("#MISSING#")
@@ -24,6 +23,10 @@ get_info <- function(file, grep_expression, sep, pattern="", replacement="") {
 ### create indc_pol file
 create_indc <- function() {
 
+  mapping<-toolMappingFile(type="cell",name="CountryToCellMapping.csv",readcsv=TRUE)  
+  
+  ### determine the analysis level. The default setting is country level (the "iso" row in the "CountryToCellMapping.csv" file).
+  countries<-unique(mapping$iso_br_la)
   indc_pol <- new.magpie(countries,NULL,c("indc",           #INDC exists: 0 FALSE, 1 TRUE
                                           "targettype",     #INDC target type: 1 baseyear (e.g. 2005), 2 baseline (i.e. MAgPIE BAU scenario)
                                           "baseyear",       #Baseyear (target type 1) / starting year (target type 2) for INDC calculation
@@ -53,6 +56,7 @@ calc_indc <- function(indc_pol,magpie_bau_stock,affore=FALSE,im_years) {
   im_years <- mbind(im_years, new.magpie("GLO",tmp,NULL,5))
   
   #include country information in cells
+  mapping<-toolMappingFile(type="cell",name="CountryToCellMapping.csv",readcsv=TRUE)  
   getCells(magpie_bau_stock) <- mapping$celliso
   
   #extent magpie_bau_stock beyond 2030
@@ -67,7 +71,7 @@ calc_indc <- function(indc_pol,magpie_bau_stock,affore=FALSE,im_years) {
   indc_true <- getRegions(indc_pol)[indc_pol[,,"indc"] == 1]
   
   #set magpie_bau_stock to zero for countries without policies (representing no constraint)
-  if(!affore) magpie_bau_stock[setdiff(countries,indc_true),,] <- 0
+  if(!affore) magpie_bau_stock[setdiff(getRegions(magpie_bau_stock),indc_true),,] <- 0
   
   #create magpie_ref_flow object
   magpie_ref_flow <- new.magpie(mapping$celliso,getYears(magpie_bau_stock),NULL,0)
@@ -121,10 +125,12 @@ calc_indc <- function(indc_pol,magpie_bau_stock,affore=FALSE,im_years) {
 
   #calculate the reduction target in absolute numbers
   if (affore) {
-      magpie_indc <- speed_aggregate(x = magpie_indc,rel = mapping, to = "cell", from = "iso",weight = dimSums(magpie_bau_stock[,2005,c("crop","past")]))
+#      remember to set the argument "from" to the same row used to determine the analysis level in the function create_indc 
+      magpie_indc <- speed_aggregate(x = magpie_indc,rel = mapping, to = "cell", from = "iso_br_la",weight = dimSums(magpie_bau_stock[,2005,c("crop","past")]))
 #      magpie_indc <- magpie_indc + collapseNames(magpie_bau_stock[,,"forestry"])
   } else {
-    magpie_indc <- speed_aggregate(x=magpie_indc, rel=mapping, to="cell", from="iso")
+#      remember to set the argument "from" to the same row used to determine the analysis level in the function create_indc 
+    magpie_indc <- speed_aggregate(x=magpie_indc, rel=mapping, to="cell", from="iso_br_la")
     magpie_indc <- magpie_indc * magpie_ref_flow * im_years + magpie_bau_stock
   }
   
