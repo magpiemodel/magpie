@@ -5,7 +5,8 @@
 *** Contact: magpie@pik-potsdam.de
 
 
- q71_prod_in(j2,kli_rum) .. v71_prod_in(j2,kli_rum)
+ q71_prod_in(j2,kli_rum)$(sum(ct,i71_share_in_feedmix(ct,j2,kli_rum,"foddr","dm")))
+                         .. v71_prod_in(j2,kli_rum)
                             =l=
 							vm_prod(j2,"foddr") /
 							sum(ct,i71_share_in_feedmix(ct,j2,kli_rum,"foddr","dm"))
