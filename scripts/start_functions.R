@@ -184,7 +184,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
 
   cfg$magpie_folder <- getwd()
 
-  save(cfg, file=path(cfg$results_folder, "config.Rdata"))
+  save(cfg, file=lucode::path(cfg$results_folder, "config.Rdata"))
 
   if(is.null(cfg$model)) cfg$model <- "main.gms"
   lucode::singleGAMSfile(mainfile=cfg$model, output=lucode::path(cfg$results_folder, "full.gms"))
