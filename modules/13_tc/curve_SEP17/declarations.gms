@@ -13,7 +13,7 @@ positive variable
 *add
  v13_cost_tc_part1(i)            technical change costs per region -for observed tau (million US$)
  v13_cost_tc_part2(i)            technical change costs per region -for unobserved tau (million US$)
- v13_cost_tc_agg(i)              technical change costs per region -for continuous tau (million US$)
+ 
 ;
 
 equations
@@ -24,7 +24,7 @@ equations
 *add
  q13_cost_tc_part1(i)              costs for technological change (for observed tau)
  q13_cost_tc_part2(i)              costs for technological change (for unobserved tau)
- q13_cost_tc_agg(i)                costs for technological change (for continuous tau)
+ 
  ;
 
 parameters
@@ -45,9 +45,10 @@ parameters
  ov13_tech_cost_annuity(t,i,type) annuity costs of technological change (mio. US$)
  ov13_cost_tc_part1(t,i,type)     technical change costs per region -for observed tau (million US$)
  ov13_cost_tc_part2(t,i,type)     technical change costs per region -for unobserved tau (million US$)
- ov13_cost_tc_agg(t,i,type)       technical change costs per region -for continuous tau (million US$)
  oq13_tech_cost(t,i,type)         total costs for technological change
  oq13_cost_tc(t,i,type)           costs for technological change
  oq13_tech_cost_annuity(t,i,type) annuity costs for technological change
+ oq13_cost_tc_part1(t,i,type)     costs for technological change (for observed tau)
+ oq13_cost_tc_part2(t,i,type)     costs for technological change (for unobserved tau)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

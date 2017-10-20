@@ -10,4 +10,3 @@ v13_tech_cost_annuity.scale(i) = 10e3;
 *add
 v13_cost_tc_part1.scale(i) = 10e6;
 v13_cost_tc_part2.scale(i) = 10e6;
-v13_cost_tc_agg.scale(i)   = 10e6;

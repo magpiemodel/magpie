@@ -4,6 +4,9 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
+scalar s13_tc_exponent extension to the tc-exponent / 1 / ; 
+scalar s13_tc_factor extended to the tc-factort  / 50 / ;
+
 
 parameter fm_tau1995(i) agricultural land use intensity tau in 1995 (1)
 /
