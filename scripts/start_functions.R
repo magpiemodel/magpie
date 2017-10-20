@@ -53,7 +53,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
   # Update module paths in GAMS code
   lucode::update_modules_embedding()
 
-  # configure main.gms based on settings of cfg file
+  # configure main model gms file (cfg$model) based on settings of cfg file
   lucode::manipulateConfig(cfg$model, cfg$gms)
 
   # configure input.gms in all modules based on settings of cfg file
