@@ -58,8 +58,6 @@ option reslim     = 1000000 ;
 option sysout     = Off ;
 option savepoint  = 1 ;
 
-model magpiemini / q15_food_demand, q15_aim_standalone/;
-
 *****************************VARIABLE SCALING***********************************
 $batinclude "./modules/include.gms" scaling
 
@@ -114,9 +112,6 @@ $batinclude "./modules/include.gms" solve
 
 * intersolve for food demand model
   sm_intersolve=1;
-  solve magpiemini USING nlp MINIMIZING v15_objective_standalone;
-
-
 
 $batinclude "./modules/include.gms" intersolve
 
