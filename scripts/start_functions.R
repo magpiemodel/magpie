@@ -53,6 +53,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
   # Update module paths in GAMS code
   lucode::update_modules_embedding()
 
+  if(is.null(cfg$model)) cfg$model <- "main.gms"
   # configure main model gms file (cfg$model) based on settings of cfg file
   lucode::manipulateConfig(cfg$model, cfg$gms)
 
@@ -129,7 +130,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
                 "", "### Modifications ###",
                 try(system("git status", intern=TRUE), silent=TRUE))
   if(codeCheck | interfaceplot) {
-    codeCheck <- lucode::codeCheck()
+    codeCheck <- lucode::codeCheck(core_files=c("core/*.gms",cfg$model), test_switches=(cfg$model=="main.gms"))
     if(interfaceplot) lucode::modules_interfaceplot(codeCheck)
   } else codeCheck <- NULL
 
@@ -186,7 +187,6 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
 
   save(cfg, file=lucode::path(cfg$results_folder, "config.Rdata"))
 
-  if(is.null(cfg$model)) cfg$model <- "main.gms"
   lucode::singleGAMSfile(mainfile=cfg$model, output=lucode::path(cfg$results_folder, "full.gms"))
   lucode::model_unlock(lock_id)
 
