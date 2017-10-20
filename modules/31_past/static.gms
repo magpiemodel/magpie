@@ -6,5 +6,9 @@
 
 
 *####################### R SECTION START (PHASES) ##############################
+$Ifi "%phase%" == "declarations" $include "./modules/31_past/static/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/31_past/static/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/31_past/static/equations.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/31_past/static/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/31_past/static/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

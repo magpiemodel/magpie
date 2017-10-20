@@ -24,7 +24,8 @@ $include "./core/macros.gms"
 ********************************************************************************
 *************************BASIC SETS INDICES***********************************
 $include "./core/sets.gms"
-$include "./modules/15_food/elastic_oct16/sets.gms"
+$include "./modules/09_drivers/aug17/sets.gms"
+$include "./modules/15_food/aug17/sets.gms"
 
 
 sets
@@ -42,17 +43,20 @@ sets
 ********************************************************************************
 **********INTRODUCE CALCULATION PARAMETERS, VARIABLES AND EQUATIONS*************
 $include "./core/declarations.gms"
-$include "./modules/15_food/elastic_oct16/declarations.gms"
+$include "./modules/09_drivers/aug17/declarations.gms"
+$include "./modules/15_food/aug17/declarations.gms"
 ********************************************************************************
 
 *activate stanalone mode
 s15_standalone =1;
 
 *****************************IMPORT DATA FILES**********************************
-$include "./modules/15_food/elastic_oct16/input.gms"
+$include "./modules/09_drivers/aug17/input.gms"
+$include "./modules/15_food/aug17/input.gms"
 ********************************************************************************
 ********************OBJECTIVE FUNCTION & CONSTRAINTS****************************
-$include "./modules/15_food/elastic_oct16/equations.gms"
+$include "./modules/09_drivers/aug17/equations.gms"
+$include "./modules/15_food/aug17/equations.gms"
 ********************************************************************************
 
 model magpiemini /
@@ -74,9 +78,7 @@ option decimals   = 3 ;
 option savepoint  = 1 ;
 
 *****************************VARIABLE SCALING***********************************
-$include "./modules/15_food/elastic_oct16/scaling.gms"
-********************************************************************************
-
+*$include "./modules/09_drivers/aug17/scaling.gms"
 
 ********************************************************************************
 ****************************PREPROCESSING START*********************************
@@ -85,7 +87,8 @@ $include "./modules/15_food/elastic_oct16/scaling.gms"
 *but CANNOT BE INFLUENCED by it.
 
 
-$include "./modules/15_food/elastic_oct16/preloop.gms"
+$include "./modules/09_drivers/aug17/preloop.gms"
+$include "./modules/15_food/aug17/preloop.gms"
 
 *****************************PREPROCESSING END**********************************
 ********************************************************************************
@@ -122,8 +125,8 @@ loop (t,
 * contain the time t explicitly (parameters are marked with "c" for "current").
 
 
-
-$include "./modules/15_food/elastic_oct16/presolve.gms"
+$include "./modules/09_drivers/aug17/presolve.gms"
+$include "./modules/15_food/aug17/presolve.gms"
 
 
 * intersolve for food demand model
@@ -134,13 +137,14 @@ $include "./modules/15_food/elastic_oct16/presolve.gms"
            sm_intersolve=1;
            display "magpiemini";
            solve magpiemini USING nlp MINIMIZING v15_objective_standalone;
-$include "./modules/15_food/elastic_oct16/intersolve.gms"
+$include "./modules/15_food/aug17/intersolve.gms"
 
       );
 
 
 ********************************************************************************
-$include "./modules/15_food/elastic_oct16/postsolve.gms"
+$include "./modules/09_drivers/aug17/postsolve.gms"
+$include "./modules/15_food/aug17/postsolve.gms"
 
 
 *************************OPTIMIZATION PROCESS END*******************************

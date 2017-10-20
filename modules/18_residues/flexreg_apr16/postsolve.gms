@@ -22,6 +22,7 @@
  oq18_translate(t,i,kres,attributes,"marginal")        = q18_translate.m(i,kres,attributes);
  oq18_res_recycling_nr(t,i,"marginal")                 = q18_res_recycling_nr.m(i);
  oq18_res_recycling_pk(t,i,pk18,"marginal")            = q18_res_recycling_pk.m(i,pk18);
+ oq18_cost_prod_res(t,i,kres,"marginal")               = q18_cost_prod_res.m(i,kres);
  ov_res_biomass_ag(t,i,kcr,attributes,"level")         = vm_res_biomass_ag.l(i,kcr,attributes);
  ov_res_biomass_bg(t,i,kcr,dm_nr,"level")              = vm_res_biomass_bg.l(i,kcr,dm_nr);
  ov18_res_ag_removal(t,i,kcr,attributes,"level")       = v18_res_ag_removal.l(i,kcr,attributes);
@@ -35,6 +36,7 @@
  oq18_translate(t,i,kres,attributes,"level")           = q18_translate.l(i,kres,attributes);
  oq18_res_recycling_nr(t,i,"level")                    = q18_res_recycling_nr.l(i);
  oq18_res_recycling_pk(t,i,pk18,"level")               = q18_res_recycling_pk.l(i,pk18);
+ oq18_cost_prod_res(t,i,kres,"level")                  = q18_cost_prod_res.l(i,kres);
  ov_res_biomass_ag(t,i,kcr,attributes,"upper")         = vm_res_biomass_ag.up(i,kcr,attributes);
  ov_res_biomass_bg(t,i,kcr,dm_nr,"upper")              = vm_res_biomass_bg.up(i,kcr,dm_nr);
  ov18_res_ag_removal(t,i,kcr,attributes,"upper")       = v18_res_ag_removal.up(i,kcr,attributes);
@@ -48,6 +50,7 @@
  oq18_translate(t,i,kres,attributes,"upper")           = q18_translate.up(i,kres,attributes);
  oq18_res_recycling_nr(t,i,"upper")                    = q18_res_recycling_nr.up(i);
  oq18_res_recycling_pk(t,i,pk18,"upper")               = q18_res_recycling_pk.up(i,pk18);
+ oq18_cost_prod_res(t,i,kres,"upper")                  = q18_cost_prod_res.up(i,kres);
  ov_res_biomass_ag(t,i,kcr,attributes,"lower")         = vm_res_biomass_ag.lo(i,kcr,attributes);
  ov_res_biomass_bg(t,i,kcr,dm_nr,"lower")              = vm_res_biomass_bg.lo(i,kcr,dm_nr);
  ov18_res_ag_removal(t,i,kcr,attributes,"lower")       = v18_res_ag_removal.lo(i,kcr,attributes);
@@ -61,5 +64,6 @@
  oq18_translate(t,i,kres,attributes,"lower")           = q18_translate.lo(i,kres,attributes);
  oq18_res_recycling_nr(t,i,"lower")                    = q18_res_recycling_nr.lo(i);
  oq18_res_recycling_pk(t,i,pk18,"lower")               = q18_res_recycling_pk.lo(i,pk18);
+ oq18_cost_prod_res(t,i,kres,"lower")                  = q18_cost_prod_res.lo(i,kres);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
 
