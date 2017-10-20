@@ -104,7 +104,6 @@ scalars
  s15_prices_nonfood_initial  nonfood price before shock (US Dollar per unit)  /1/
  s15_year                    current year as integer value  /2000/
  s15_maxiter                 maximum iteration number /5/
- s15_standalone              standalone activated / 0 /
 ;
 
 

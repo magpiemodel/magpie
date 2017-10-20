@@ -40,9 +40,6 @@ sets
 $include "./core/declarations.gms"
 $batinclude "./modules/include.gms" declarations
 
-*activate stanalone mode
-s15_standalone =1;
-
 *****************************IMPORT DATA FILES**********************************
 $batinclude "./modules/include.gms" input
 
@@ -50,6 +47,9 @@ $batinclude "./modules/include.gms" input
 $batinclude "./modules/include.gms" equations
 
 *******************MODEL DEFINITION & SOLVER OPTIONS****************************
+model magpie / all - m15_food_demand /;
+magpie.scaleopt  = 1 ;
+magpie.holdfixed = 1 ;
 
 option lp         = cplex ;
 option nlp        = conopt ;
