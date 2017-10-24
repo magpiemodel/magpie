@@ -2,15 +2,13 @@
 * retrieving interfaces from MAgPIE
 *calculate prices for providing 1 kcal per day of one commodity
 
-if (s15_standalone=1,
+if (magpie.modelstat = NA,
     display "Standalone: taking exogenous demand shock";
+    solve magpiemini USING nlp MINIMIZING v15_objective_standalone;
     p15_prices_kcal(t,iso,kfo)=i15_prices_initial_kcal(iso,kfo)*f15_price_index(t);
-
 else
     display "Coupling: Reading out Marginal Costs from MAgPIE as shock to demand model";
     p15_prices_kcal(t,iso,kfo)=sum(i_to_iso(i,iso), q15_food_demand.m(i,kfo));
-*    o15_prices_kcal(t,iso,kfo)$(f15_nutrition_attributes("y1995",kfo,"kcal")>0)=o15_prices_kcal(t,iso,kfo) / f15_nutrition_attributes("y1995",kfo,"kcal")*365/10**6;
-*    p15_prices_kcal(t,iso,kfo)=o15_prices_kcal(t,iso,kfo);
 );
 
 p15_iteration_counter(t)= p15_iteration_counter(t) + 1;

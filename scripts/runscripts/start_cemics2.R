@@ -44,81 +44,16 @@ buildInputVector <- function(regionmapping   = "h11",
 cfg$gms$c_timesteps <- 7
 cfg$gms$s15_elastic_demand <- 1
 
-# clalibration runs
+#Calibration and final run
 
-cfg$title <- "SUSTAg2"
+cfg$title <- "CEMICS2"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector()
-cfg$input <- buildInputVector(co2="co2")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5")
+cfg$gms$c56_pollutant_prices <- "SSP2-45-SPA2"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-45-SPA2"
 cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
-cfg$recalibrate <- FALSE
 
-#SSP2 family
 
-# SSP2 control run
-cfg$title <- "SSP2"
-cfg<-lucode::setScenario(cfg,"SSP2")
-cfg$input <- buildInputVector(co2="noco2")
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-cfg$title <- "SUSTAg2_Ref"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0")
-cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-cfg$title <- "SUSTAg2_nocc"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$input <- buildInputVector(co2="noco2")
-cfg<-lucode::setScenario(cfg,"nocc")
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-cfg$title <- "SUSTAg2_co2fix"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$input <- buildInputVector(co2="noco2")
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-cfg$title <- "SUSTAg2_Ref_co2fix"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$input <- buildInputVector(co2="noco2",climatescen_name="rcp6p0")
-cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-cfg$title <- "SUSTAg2_fixedperton"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$gms$factor_costs="fixed_per_ton_nov16"
-cfg$input <- buildInputVector(co2="co2")
-start_run(cfg=cfg,codeCheck=codeCheck)
-cfg$gms$factor_costs="mixed_feb17"
-
-# SSP1 family
-
-cfg$title <- "SUSTAg1"
-cfg<-lucode::setScenario(cfg,"SUSTAg1")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6")
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-# SSP3 family
-
-cfg$title <- "SUSTAg3"
-cfg<-lucode::setScenario(cfg,"SUSTAg3")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0")
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-# SSP4 family
-
-cfg$title <- "SUSTAg4"
-cfg<-lucode::setScenario(cfg,"SUSTAg4")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5")
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-# SSP5 family
-
-cfg$title <- "SUSTAg5"
-cfg<-lucode::setScenario(cfg,"SUSTAg5")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5")
-start_run(cfg=cfg,codeCheck=codeCheck)
