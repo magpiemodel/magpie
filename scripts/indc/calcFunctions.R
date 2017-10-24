@@ -25,7 +25,8 @@ create_indc <- function() {
 
   mapping<-toolMappingFile(type="cell",name="CountryToCellMapping.csv",readcsv=TRUE)  
   
-  ### determine the analysis level. The default setting is country level (the "iso" row in the "CountryToCellMapping.csv" file).
+  ### determine the analysis level. The default setting is country level (the "iso" column in the "CountryToCellMapping.csv" file).
+  ### see lines 130 and 132
   countries<-unique(mapping$iso_br_la)
   indc_pol <- new.magpie(countries,NULL,c("indc",           #INDC exists: 0 FALSE, 1 TRUE
                                           "targettype",     #INDC target type: 1 baseyear (e.g. 2005), 2 baseline (i.e. MAgPIE BAU scenario)
