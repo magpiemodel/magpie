@@ -32,7 +32,7 @@ names(im_years) <- y
 im_years <- as.magpie(im_years)
 
 #defining mapping object for land cover stock,  def rate and  forest carbon stock
-mapping<-toolMappingFile(type="cell",name="CountryToCellMapping.csv",readcsv=TRUE)
+mapping<-toolMappingFile(type="cell",name="CountryToCellMapping_BRA.csv",readcsv=TRUE)
 
 #read in land cover (stock) from BAU
 magpie_bau_land <- read.magpie(paste0(base_run,"/cell.land_0.5.mz"))[,-1,]
@@ -49,7 +49,7 @@ magpie_bau_cstock <- speed_aggregate(magpie_bau_cstock, rel=paste0(base_run,"/0.
 getCells(magpie_bau_cstock) <- mapping$celliso
 
 
-source("gen_csv_npi_indc_pol.R")
+source("gen_csv_npi_indc_pol_hastags.R")
 
 
 print("NPI input data preparation")
