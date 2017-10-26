@@ -20,7 +20,7 @@ npi_pol_deforest <- create_indc()
 #npi_pol_deforest["AMX",1,] <- c(1,1,2000,2020,0.8) #Reduce deforestation in Legal Amazon in 80% in 2020 from the average value from 1996 to 2005.
 #npi_pol_deforest["CEX",1,] <- c(1,1,2005,2020,0.4) #Reduce deforestation in Cerrado biome in 40% in 2020 from the average value from 1999 to 2008.
 #Brazil legal amazon over biomes
-npi_pol_deforest["LAX",1,] <- c(1,1,2000,2020,0.8) #Reduce deforestation in Legal Amazon in 80% in 2020 from the average value from 1996 to 2005.
+npi_pol_deforest["LAX",1,] <- c(1,1,2005,2020,0.8) #Reduce deforestation in Legal Amazon in 80% in 2020 from the average value from 1996 to 2005.
 npi_pol_deforest["CEX",1,] <- c(1,1,2005,2020,0.4) #Reduce deforestation in Cerrado biome in 40% in 2020 from the average value from 1999 to 2008.
 #Brazil legal amazon intersection cerrado (LCX)
 #npi_pol_deforest["LAX",1,] <- c(1,1,2000,2020,0.8) #Reduce deforestation in Legal Amazon in 80% in 2020 from the average value from 1996 to 2005.
