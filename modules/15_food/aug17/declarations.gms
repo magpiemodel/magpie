@@ -104,7 +104,6 @@ scalars
  s15_prices_nonfood_initial  nonfood price before shock (US Dollar per unit)  /1/
  s15_year                    current year as integer value  /2000/
  s15_maxiter                 maximum iteration number /5/
- s15_standalone              standalone activated / 0 /
 ;
 
 
@@ -127,6 +126,9 @@ m15_food_demand.scaleopt  = 1 ;
 m15_food_demand.solprint  = 1 ;
 m15_food_demand.holdfixed = 1 ;
 
+model magpiemini /
+      q15_food_demand,
+      q15_aim_standalone/;
 
 
 

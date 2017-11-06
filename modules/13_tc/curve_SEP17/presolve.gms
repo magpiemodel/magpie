@@ -4,5 +4,15 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-vm_nr_inorg_fert_reg.fx(i,land_ag) = 0;
-vm_nr_inorg_fert_costs.fx(i) = 0;
+
+vm_tau.lo(i) =    pc13_tau(i);
+vm_tau.up(i) = 10*pc13_tau(i);
+
+* educated guess for vm_tau.l:
+vm_tau.l(i) = pc13_tau(i)*(1+pc13_tcguess(i))**m_yeardiff(t);
+
+vm_tech_cost.up(i) = 10e9;
+
+p13_tech_cost_past(t,i)$(ord(t) = 1) = 0;
+
+pc13_tech_cost_past(i) = p13_tech_cost_past(t,i);
