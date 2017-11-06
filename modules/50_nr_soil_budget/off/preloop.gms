@@ -4,5 +4,5 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-vm_nr_inorg_fert_reg.fx(i) = 0;
+vm_nr_inorg_fert_reg.fx(i,land_ag) = 0;
 vm_nr_inorg_fert_costs.fx(i) = 0;

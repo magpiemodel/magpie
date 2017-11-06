@@ -142,10 +142,10 @@ area_hi <- area_share_hi*setNames(land_hr[,,"crop"],NULL)
 #calculate share of crop types in terms of total cell size
 area_share_hi <- area_hi/dimSums(land_hr,dim=3.1)
 #write share of crop types in terms of total cell size
-write.magpie(area_share_hi,path(outputdir,paste(title,croparea_hr_share_out_file,sep="_")),comment="cell share")
-write.magpie(area_share_hi,path(outputdir,paste(title,sub(".mz",".nc",croparea_hr_share_out_file),sep="_")),comment="cell share")
+write.magpie(area_share_hi,path(outputdir,paste(croparea_hr_share_out_file,sep="_")),comment="cell share")
+write.magpie(area_share_hi,path(outputdir,paste(sub(".mz",".nc",croparea_hr_share_out_file),sep="_")),comment="cell share")
 #calculate share of land pools in terms of tatal cell size
 land_hr <- land_hr/dimSums(land_hr,dim=3.1)
 #write landpool shares
-write.magpie(land_hr,path(outputdir,paste(title,land_hr_share_out_file,sep="_")),comment="cell share")
-write.magpie(land_hr,path(outputdir,paste(title,sub(".mz",".nc",land_hr_share_out_file),sep="_")),comment="cell share")
+write.magpie(land_hr,path(outputdir,paste(land_hr_share_out_file,sep="_")),comment="cell share")
+write.magpie(land_hr,path(outputdir,paste(sub(".mz",".nc",land_hr_share_out_file),sep="_")),comment="cell share")

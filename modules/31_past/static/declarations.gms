@@ -6,13 +6,13 @@
 
 
 equations
- q31_cost_prod_pasture(i) costs for putting animals on pastures
+ q31_cost_prod_past(i) costs for putting animals on pastures
 ;
 
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- oq31_cost_prod_pasture(t,i,type) costs for putting animals on pastures
+ oq31_cost_prod_past(t,i,type) costs for putting animals on pastures
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

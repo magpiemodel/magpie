@@ -16,8 +16,8 @@
 
  q21_trade_reg(i2,k_trade)..     vm_prod_reg(i2,k_trade)
                           =g=
-                          (vm_supply(i2,k_trade) + v21_excess_prod(i2,k_trade))*sum(ct,i21_trade_bal_reduction(ct,k_trade))$(sum(ct,f21_self_suff(ct,i2,k_trade) >= 1))
-                          + vm_supply(i2,k_trade)*sum(ct,f21_self_suff(ct,i2,k_trade))*sum(ct,i21_trade_bal_reduction(ct,k_trade))$(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
+                          (vm_supply(i2,k_trade) + v21_excess_prod(i2,k_trade))*sum(ct,i21_trade_bal_reduction(ct))$(sum(ct,f21_self_suff(ct,i2,k_trade) >= 1))
+                          + vm_supply(i2,k_trade)*sum(ct,f21_self_suff(ct,i2,k_trade))*sum(ct,i21_trade_bal_reduction(ct))$(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
 
  q21_excess_dem(k_trade).. v21_excess_dem(k_trade)
                    =e=

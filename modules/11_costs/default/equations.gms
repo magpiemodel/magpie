@@ -9,7 +9,7 @@
 
  q11_cost_reg(i2) .. v11_cost_reg(i2)
                    =e=
-                   sum(k, vm_cost_prod(i2,k))
+                   sum(kall, vm_cost_prod(i2,kall))
                    + sum((cell(i2,j2),land), vm_cost_landcon(j2,land))
                    + sum((cell(i2,j2),k), vm_cost_transp(j2,k))
                    + vm_tech_cost(i2)
@@ -24,4 +24,5 @@
                    + vm_cost_cdr(i2)
                    + vm_cost_bioen(i2)
                    + vm_processing_costs(i2)
+                   + vm_cost_processing(i2)
                    ;
