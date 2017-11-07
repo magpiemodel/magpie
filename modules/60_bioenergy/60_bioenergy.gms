@@ -8,4 +8,5 @@
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%bioenergy%" == "combined_bio_aug18" $include "./modules/60_bioenergy/combined_bio_aug18.gms"
 $Ifi "%bioenergy%" == "standard_flexreg_may17" $include "./modules/60_bioenergy/standard_flexreg_may17.gms"
+$Ifi "%bioenergy%" == "bioenergyspecialized_nov17" $include "./modules/60_bioenergy/bioenergyspecialized_nov17.gms"
 *###################### R SECTION END (MODULETYPES) ############################
