@@ -6,7 +6,7 @@
 
 
 parameters
- i60_bioenergy_dem(t,i)   bioenergy demand (regional) (10^6 GJ per year)
+ i60_bioenergy_dem(t,i)   bioenergy demand that can be specialized (regional) (10^6 GJ per year)
 ;
 
 variables
@@ -18,8 +18,10 @@ positive variables
 ;
 
 equations
- q60_bioenergy_glo                 global bioenergy demand
- q60_bioenergy_reg(i)              regional bioenergy demand
+ q60_bioenergy_glo                 global specialized bioenergy demand
+ q60_bioenergy_reg(i)              regional specialized bioenergy demand
+ q60_bioenergy_sum_glo(kall)       total global bioenergy demand
+ q60_bioenergy_sum_reg(i, kall)    total regional bioenergy demand
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

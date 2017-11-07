@@ -13,6 +13,7 @@ positive variables
   v20_secondary_substitutes(i,ksd,kpr) substitutes for inferior secondary products (Mt DM)
   vm_secondary_overproduction(i,kall,kpr) overproduction of secondary couple products (Mt Dm)
   vm_cost_processing(i)            processing costs (Million USD05)
+  vm_bioenergy_specialized(i,ksd,kpr)  demand for bioenergy (1st and 2nd generation) that can be specialized (Mt DM)
 ;
 
 equations

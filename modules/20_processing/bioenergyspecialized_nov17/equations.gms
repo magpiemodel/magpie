@@ -20,16 +20,20 @@ q20_processing_aggregation_cotton(i2) ..
         =e=
         v20_dem_processing(i2,"ginning","cottn_pro");
 
+	
 q20_processing(i2,kpr,ksd) ..
         sum(processing20,
             v20_dem_processing(i2,processing20,kpr)
             * sum(ct,f20_processing_conversion_factors(ct,processing20,ksd,kpr))
         )
         =e=
-       (vm_prod_reg(i2,ksd) - sum(ct,f20_processing_balanceflow(ct,i2,ksd)))
+       (vm_prod_reg(i2,ksd) - sum(kpr, vm_bioenergy_specialized
+(i2,ksd,kpr)) - sum(ct,f20_processing_balanceflow(ct,i2,ksd)))
         *sum(ct,f20_processing_shares(ct,i2,ksd,kpr))
+        + vm_bioenergy_specialized(i2,ksd,kpr)
         - v20_secondary_substitutes(i2,ksd,kpr)
         + vm_secondary_overproduction(i2,ksd,kpr);
+	
 
 *replacing branoils and germoil by other oils
 q20_processing_substitution_oils(i2) ..
