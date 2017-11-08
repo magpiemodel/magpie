@@ -6,5 +6,5 @@
 
 
 scalars
-  s31_fac_req_past  Factor requirements (US$04 per ton DM)                / 1 /
+  s31_fac_req_past  Factor requirements (USD04 per ton DM)                / 1 /
 ;
