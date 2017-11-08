@@ -66,6 +66,16 @@ cfg$gms$c15_rumscen <- "constant"
 try(start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck))
 cfg$gms$c15_rumscen <- "halving2050"
 
+cfg$title <- "pastcost0"
+cfg$input <- buildInputVector()
+cfg$gms$c_timesteps <- 11
+cfg$gms$s15_elastic_demand <- 0
+cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
+cfg$gms$s31_fac_req_past  <- 0  
+try(start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck))
+cfg$gms$s31_fac_req_past  <- 1  
+
 cfg$title <- "cc_default"
 cfg$input <- buildInputVector()
 cfg$gms$c_timesteps <- 11
@@ -163,6 +173,8 @@ cfg$gms$c_timesteps <- 11
 cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
 try(start_run(cfg=cfg,scenario=c(scenario,"INDC"),codeCheck=codeCheck))
+
+stop()
 
 cfg$title <- "h12"
 cfg$input <- buildInputVector(regionmapping = "h12")
