@@ -83,7 +83,7 @@ start_indc_preprocessing <- function(cfg="config/default.cfg",base_run_dir="scri
 		setwd(maindir)
   }
   setwd("scripts/indc")
-  print("Running calc_NPI_INDC.R")
-  source("calc_NPI_INDC.R", local=TRUE)
+  print("Running calc_NPI_INDC_shorter_by_reading_csv.R")
+  source("calc_NPI_INDC_shorter_by_reading_csv.R", local=TRUE)
   setwd(maindir)
 }

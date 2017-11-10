@@ -69,6 +69,8 @@ npi_pol_deforest["IND",1,] <- c(1,2,2005,2005,1) #+ 5 million ha (2005-2030) -> 
 # tmp <- dimSums(magpie_bau_emis["MEX",2020,], dim=1)*44/12
 npi_pol_deforest["MEX",1,] <- c(1,1,2005,2030,1) # 8.75 MtCO2e reduction in 2018 below BAU from deforestation and forest degradation --> 0
 
+write.magpie(npi_pol_deforest, file_name = "npi_pol_deforest.csv")
+
 #Calc minimum forest stock in NPI scenario; result is in 0.5 degree resolution; Unit is Mha
 ad_pol_npi <- calc_indc(npi_pol_deforest,magpie_bau_forest,affore=FALSE,im_years=im_years)
 ad_pol[,getYears(ad_pol_npi),"npi"] <- ad_pol_npi
@@ -95,6 +97,9 @@ tmp[tmp<0] <- 0
 npi_pol_afforest["CHN",1,] <- c(1,1,2005,2020,tmp) #23.04% forest coverage by 2020 --> 50 Mha afforestation is needed
 #India
 npi_pol_afforest["IND",1,] <- c(1,1,2005,2030,5) #Forest coverage (area) | Increase	5.00E+06	ha	from 2005 to 2030
+
+
+write.magpie(npi_pol_afforest, file_name = "npi_pol_afforest.csv")
 
 
 # Calc minimum forestry stock in NPI scenario; result is in 0.5 degree resolution; Unit is Mha
@@ -144,6 +149,9 @@ npi_pol_emis["ESP",,] <- c(1,1,2005,2020,0.2)
 npi_pol_emis["SWE",,] <- c(1,1,2005,2020,0.2)
 npi_pol_emis["GBR",,] <- c(1,1,2005,2020,0.2)
 
+write.magpie(npi_pol_emis, file_name = "npi_pol_emis.csv")
+
+
 # Calc minimum carbon stock in NPI scenario; result is in 0.5 degree resolution; Unit is MtC
 emis_pol_npi <- calc_indc(npi_pol_emis,magpie_bau_cstock,affore=FALSE,im_years=im_years)
 emis_pol[,getYears(emis_pol_npi),"npi"] <- emis_pol_npi
@@ -189,6 +197,8 @@ indc_pol_deforest["ECU",,] <- c(1,2,2005,2005,1) #restore 500,000 additional hec
 indc_pol_deforest["LAO",,] <- c(1,2,2005,2005,1) #increasing forest cover to a total of 70% of land area by 2020, and maintaining it at that level going forward -> assume no deforestation
 #Mali?
 
+write.magpie(indc_pol_deforest, file_name = "indc_pol_deforest.csv")
+
 #Calc minimum forest stock in indc scenario; result is in 0.5 degree resolution; Unit is Mha
 ad_pol_indc <- calc_indc(indc_pol_deforest,magpie_bau_forest,affore=FALSE, im_years=im_years)
 ad_pol[,getYears(ad_pol_indc),"indc"] <- ad_pol_indc
@@ -230,6 +240,8 @@ indc_pol_afforest["ECU",,] <- c(1,1,2005,2025,1.3) #restore 500,000 additional h
 tmp <- dimSums(magpie_bau_land["LAO",2005,],dim=c(1,3))*0.7 - dimSums(magpie_bau_land["LAO",2005,c("primforest","secdforest","forestry")],dim=c(1,3))
 tmp[tmp<0] <- 0
 indc_pol_afforest["LAO",,] <- c(1,1,2005,2020,tmp) #increasing forest cover to a total of 70% of land area by 2020, and maintaining it at that level going forward.
+
+write.magpie(indc_pol_afforest, file_name = "indc_pol_afforest.csv")
 
 # Calc minimum forestry stock in indc scenario; result is in 0.5 degree resolution; Unit is Mha
 aff_pol_indc <- calc_indc(indc_pol_afforest,magpie_bau_land,affore=TRUE, im_years=im_years)
@@ -354,6 +366,8 @@ indc_pol_emis["SVN",,] <- c(1,1,2005,2030,0.4)
 indc_pol_emis["ESP",,] <- c(1,1,2005,2030,0.4)
 indc_pol_emis["SWE",,] <- c(1,1,2005,2030,0.4)
 indc_pol_emis["GBR",,] <- c(1,1,2005,2030,0.4)
+
+write.magpie(indc_pol_emis, file_name = "indc_pol_emis.csv")
 
 # Calc minimum carbon stock in indc scenario; result is in 0.5 degree resolution; Unit is MtC
 emis_pol_indc <- calc_indc(indc_pol_emis,magpie_bau_cstock, im_years=im_years)
