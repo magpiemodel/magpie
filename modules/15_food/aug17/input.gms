@@ -6,8 +6,8 @@ $setglobal c15_food_scenario  SSP2
 $setglobal c15_calibscen  fadeout2050
 *   options:   fadeout2050
 
-$setglobal c15_rumscen  halving2050
-*   options:   constant, halving2050
+$setglobal c15_rumscen  mixed
+*   options:   constant, halving2050, mixed
 
 scalar s15_elastic_demand  / 0 /;
 *   options : 0(exogenous demand), 1(elastic demand)
