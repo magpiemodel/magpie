@@ -5,18 +5,20 @@ if (sum(sameas(t_past,t),1) = 1,
 * first set it to equal shares, just in case there is no population
 
 
-     i15_livestock_kcal_structure_iso(t,iso,kfo_ap) =
+     i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap) =
                                  sum(iso2, f15_kcal_pc_iso(t,iso2,kfo_ap)*im_pop_iso(t,iso2))/
                                  (
                                    sum((kfo_ap2,iso2),(f15_kcal_pc_iso(t,iso2,kfo_ap2)*im_pop_iso(t,iso2)))
                                    +10**(-5)
                                  );
 
-     i15_livestock_kcal_structure_iso(t,iso,kfo_ap)$sum(kfo_ap2,f15_kcal_pc_iso(t,iso,kfo_ap2)>0)=
+     i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap)$sum(kfo_ap2,f15_kcal_pc_iso(t,iso,kfo_ap2)>0)=
                                  f15_kcal_pc_iso(t,iso,kfo_ap) /
                                  sum(kfo_ap2,f15_kcal_pc_iso(t,iso,kfo_ap2)
 *                                10**(-5) required to avoid unlogical division by zero error.
                                  );
+
+    i15_livestock_kcal_structure_iso(t,iso,kfo_ap) = i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap);                        
 
      i15_processed_kcal_structure_iso(t,iso,kfo_pf) =
                                sum(iso2, f15_kcal_pc_iso(t,iso2,kfo_pf)*im_pop_iso(t,iso2)) /
@@ -52,12 +54,12 @@ if (sum(sameas(t_past,t),1) = 1,
 * keep staples and livestock structure constant for future projections
      i15_staples_kcal_structure_iso(t,iso,kfo_st) =i15_staples_kcal_structure_iso(t-1,iso,kfo_st);
      i15_processed_kcal_structure_iso(t,iso,kfo_pf) =i15_processed_kcal_structure_iso(t-1,iso,kfo_pf);
-     i15_livestock_kcal_structure_iso(t,iso,kfo_ap) =i15_livestock_kcal_structure_iso(t-1,iso,kfo_ap);
+     i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap) =i15_livestock_kcal_structure_iso_raw(t-1,iso,kfo_ap);
      i15_livestock_kcal_structure_iso(t,iso,"livst_chick") =
-                                      i15_livestock_kcal_structure_iso(t,iso,"livst_chick")
-                                      + i15_livestock_kcal_structure_iso(t,iso,"livst_rum") * (1-f15_ruminant_fadeout(t,"%c15_rumscen%"));
+                                      i15_livestock_kcal_structure_iso_raw(t,iso,"livst_chick")
+                                      + i15_livestock_kcal_structure_iso_raw(t,iso,"livst_rum") * (1-f15_ruminant_fadeout(t,"%c15_rumscen%"));
      i15_livestock_kcal_structure_iso(t,iso,"livst_rum") =
-                                      i15_livestock_kcal_structure_iso(t,iso,"livst_rum") * f15_ruminant_fadeout(t,"%c15_rumscen%");
+                                      i15_livestock_kcal_structure_iso_raw(t,iso,"livst_rum") * f15_ruminant_fadeout(t,"%c15_rumscen%");
 
 
  );

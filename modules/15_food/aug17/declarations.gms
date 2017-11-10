@@ -71,7 +71,8 @@ parameters
 * diet structure
 
  i15_staples_kcal_structure_iso(t,iso,kfo_st)    Share of a staple product within total staples (1)
- i15_livestock_kcal_structure_iso(t,iso,kfo_ap)  Share of a livestock product within total staples (1)
+ i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap)  Share of a livestock product within total staples (uncorrected for future changes in shares) (1)
+ i15_livestock_kcal_structure_iso(t,iso,kfo_ap)  Share of a livestock product within total staples (corrected) (1)
  i15_processed_kcal_structure_iso                Share of a processed product within total staples (1)
  i15_staples_kcal_iso_tmp(t,iso)    Intermediate calculation do not use elsewhere
  i15_livestock_kcal_iso_tmp(t,iso)  Intermediate calculation do not use elsewhere
