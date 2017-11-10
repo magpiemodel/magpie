@@ -28,31 +28,31 @@ $title magpie
 * md5sum: a0703ae951bc9d807af276698cdc1cef
 * Repository: /p/projects/landuse/data/input/archive
 * 
-* Low resolution: h500
+* Low resolution: h200
 * High resolution: 0.5
 * 
-* Total number of cells: 500
+* Total number of cells: 200
 * 
 * Number of cells per region:
-*   SSA  MEA  OAS  CHA  NEU  EUR  REF  LAM  BRA  USA  CAZ  IND
-*    49   39   61   42   29   42   20  101    9   26   69   13
+*   SSA  MEA  OAS  CHA  NEU  EUR  REF  LAM  USA  CAZ  IND
+*    12   18   24   21   12   18    8   35   11   33    8
 * 
-* Regionscode: aaa114f4a4d052204b1ffdb43e7d53e5
+* Regionscode: 8a828c6ed5004e77d1ba2025e8ea2261
 * 
 * Regions data revision: 2.101
 * 
 * lpj2magpie settings:
-* * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/glues2_sres/miub_echo_g/a2/constant_co2
+* * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/GLUES2/sresa2/constant_co2/miub_echo_g
 * * Additional input folder: /p/projects/landuse/data/input/other/rev24
-* * Revision: 24.142
+* * Revision: 24
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
 * 
 * aggregation settings:
 * * Input resolution: 0.5
-* * Output resolution: h500
-* * Input file: /p/projects/landuse/data/input/archive/glues2_sres-miub_echo_g-a2-constant_co2_rev24.142_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/glues2_sres-miub_echo_g-a2-constant_co2_rev24.142_h500_aaa114f4a4d052204b1ffdb43e7d53e5.tgz
-* * Regionscode: aaa114f4a4d052204b1ffdb43e7d53e5
+* * Output resolution: h200
+* * Input file: /p/projects/landuse/data/input/archive/GLUES2-sresa2-constant_co2-miub_echo_g_rev24_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/GLUES2-sresa2-constant_co2-miub_echo_g_rev24_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
+* * Regionscode: 8a828c6ed5004e77d1ba2025e8ea2261
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = paste0(cfg$base_folder, "/", set_folder,     "_", cfg$high_res, ".tgz"), regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
@@ -83,7 +83,7 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  7
+$setglobal c_timesteps  quicktest
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /
@@ -134,7 +134,7 @@ $setglobal maccs  on_sep16
 $setglobal carbon_removal  off_sep16
 $setglobal som  off
 
-$setglobal bioenergy  combined_bio_aug18
+$setglobal bioenergy  standard_flexreg_may17
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 

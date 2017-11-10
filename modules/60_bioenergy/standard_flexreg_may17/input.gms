@@ -6,7 +6,7 @@
 
 
 scalars
-  c60_biodem_level  bioenergy demand level (1: regional 0: global)  / 0 /
+  c60_biodem_level  bioenergy demand level (1: regional 0: global)  / 1 /
 ;
 
 $setglobal c60_2ndgen_biodem  SSP2-Ref-SPA0
