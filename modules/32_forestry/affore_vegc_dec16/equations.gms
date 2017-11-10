@@ -13,8 +13,8 @@ q32_cost_fore_ac(i2) .. vm_cost_fore(i2) =e=
 
  q32_aff_pol(j2) .. v32_land(j2,"new_indc") =e= sum(ct, p32_aff_pol_timestep(ct,j2));
 
- q32_max_aff .. sum((j2), vm_land(j2,"forestry")-pm_land_start(j2,"forestry")) =l=
-                                        s32_max_aff_area;
+ q32_max_aff .. sum((j2), vm_land(j2,"forestry")-pm_land_start(j2,"forestry")) =l= 
+					s32_max_aff_area;
 
 *****Carbon stocks**************************************************************
  q32_carbon(j2,c_pools)  .. vm_carbon_stock(j2,"forestry",c_pools) =e=
