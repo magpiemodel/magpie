@@ -1,0 +1,88 @@
+=CCONOPT 3         24.8.4 r60966 Released Apr 10, 2017 WEI x86 64bit/MS Windows 
+=0CONOPT 3         24.8.4 r60966 Released Apr 10, 2017 WEI x86 64bit/MS Windows 
+=1
+ 
+ 
+    C O N O P T 3   version 3.17C
+    Copyright (C)   ARKI Consulting and Development A/S
+                    Bagsvaerdvej 246 A
+                    DK-2880 Bagsvaerd, Denmark
+ 
+=2
+    1  INPUT                                                                  (DEFAULT)
+    2  BRANCH * MAJERR MINERR JACERR                                          (DEFAULT)
+    3  OPTIMIZE                                                               (DEFAULT)
+    4  BRANCH * * * * * * MAJERR                                              (DEFAULT)
+    5  OUTPUT                                                                 (DEFAULT)
+    6  EXIT                                                                   (DEFAULT)
+    7  MAJERR MESSAGE MAJOR ERROR - TERMINATE                                 (DEFAULT)
+    8  EXIT                                                                   (DEFAULT)
+    9  MINERR MESSAGE MINOR ERROR - TERMINATE                                 (DEFAULT)
+   10  EXIT                                                                   (DEFAULT)
+   11  JACERR MESSAGE FUNCTION OR DERIVATIVE ERROR                            (DEFAULT)
+   12  OUTPUT                                                                 (DEFAULT)
+   13  EXIT                                                                   (DEFAULT)
+ 
+  ***  Line    1  INPUT
+ 
+  ***  Line    0  SET       LFEERR   =           0
+ 
+  ***  Line    0  SET       LFITER   =     1000000
+ 
+  ***  Line    0  SET       RVTIME   =      1000000.000
+=1
+ 
+    The model has 150103 variables and 107672 constraints
+    with 435731 Jacobian elements, 22242 of which are nonlinear.
+    The Hessian of the Lagrangian has 11 elements on the diagonal,
+    14611 elements below the diagonal, and 14822 nonlinear variables.
+=2
+ 
+  ***  Line    2  BRANCH with Lbranch =  1
+ 
+  ***  Line    3  OPTIMIZE
+ 
+Search for a first feasible solution
+ 
+ 
+   Iter Phase Ninf   Infeasibility   RGmax    NSB   Step InItr MX OK
+      0   0        7.7558484596E-07 (Input point)
+=1
+ 
+                   Pre-triangular equations:   15313
+                   Post-triangular equations:  64681
+                   Definitional equations:     16341
+ 
+=2
+      1   0        1.9983595736E-09 (After pre-processing)
+      2   0        1.4896368888E-12 (After scaling)
+ 
+ ** Feasible solution. Value of objective =   0.179231519086
+ 
+Search for an optimal solution.
+ 
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+      3   3        1.7905318123E-01 5.7E-04    16 1.0E+00    3 T  T
+      4   3        1.7895496806E-01 4.2E-03    21 1.0E+00    8 T  T
+      5   3        1.7895496806E-01 2.0E-02    39 0.0E+00    9 F  F
+      6   3        1.7890878805E-01 5.6E-02    24 1.0E+00    4 T  T
+      7   3        1.7889438207E-01 1.5E-03    25 7.0E-01    9 F  T
+      8   3        1.7873162274E-01 1.5E-03    33 1.0E+00    6 T  T
+      9   3        1.7871898287E-01 4.7E-04    46 1.0E+00   12 F  T
+     10   3        1.7871706450E-01 3.0E-04    67 1.0E+00   10 T  T
+     11   3        1.7870354952E-01 3.4E-01    57 6.0E-01   11 F  F
+     12   3        1.7867024238E-01 3.0E-03    57 1.0E+00    5 T  T
+     13   3        1.7866496957E-01 2.8E-03    52 2.7E-01    8 T  T
+     14   3        1.7865736732E-01 2.7E-03    54 3.7E-01    8 T  T
+     15   3        1.7865093246E-01 2.6E-03    54 1.0E+00    8 T  T
+     16   3        1.7861206297E-01 7.3E-04    73 1.0E+00   11 F  T
+     17   3        1.7860975709E-01 1.1E-01    70 3.9E-01   12 F  F
+     18   3        1.7860963140E-01 1.4E-01    66 6.4E-06      T  T
+     19   3        1.7860963332E-01 5.3E-03    65 1.1E-05      F  F
+     20   3        1.7860961931E-01 2.9E-02    65 2.6E-05      F  T
+     21   4        1.7860961931E-01 2.5E-04   115 0.0E+00      T  T
+     22   4        1.7860961927E-01 2.5E-04    65 1.8E-04      F  T
+ 
+   Iter Phase Ninf     Objective     RGmax    NSB   Step InItr MX OK
+     23   4        1.786096

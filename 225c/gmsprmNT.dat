@@ -1,0 +1,16 @@
+Input=C:\Users\nutzer\Documents\magpie4\magpie_calib.gms
+Output=C:\Users\nutzer\Documents\magpie4\magpie_calib.lst
+Action=R
+SubSys=C:\GAMS\win64\24.8\gmscmpnt.txt
+ScrDir=C:\Users\nutzer\Documents\magpie4\225c\
+SysDir=C:\GAMS\win64\24.8\
+CurDir=C:\Users\nutzer\Documents\magpie4\
+WorkDir=C:\Users\nutzer\Documents\magpie4\
+PutDir=C:\Users\nutzer\Documents\magpie4\./calib_run\
+GridDir=C:\Users\nutzer\Documents\magpie4\225c\
+ScriptNext=225c\gamsnext.cmd
+ScriptFrst="@echo off"
+LogOption=3
+AppendOut=1
+LibIncDir=C:\GAMS\win64\24.8\inclib\
+SysIncDir=C:\GAMS\win64\24.8\
