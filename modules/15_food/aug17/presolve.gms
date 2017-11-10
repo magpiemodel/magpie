@@ -18,7 +18,7 @@ if (sum(sameas(t_past,t),1) = 1,
 *                                10**(-5) required to avoid unlogical division by zero error.
                                  );
 
-    i15_livestock_kcal_structure_iso(t,iso,kfo_ap) = i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap);                        
+    i15_livestock_kcal_structure_iso(t,iso,kfo_ap) = i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap);
 
      i15_processed_kcal_structure_iso(t,iso,kfo_pf) =
                                sum(iso2, f15_kcal_pc_iso(t,iso2,kfo_pf)*im_pop_iso(t,iso2)) /
@@ -57,9 +57,9 @@ if (sum(sameas(t_past,t),1) = 1,
      i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap) =i15_livestock_kcal_structure_iso_raw(t-1,iso,kfo_ap);
      i15_livestock_kcal_structure_iso(t,iso,"livst_chick") =
                                       i15_livestock_kcal_structure_iso_raw(t,iso,"livst_chick")
-                                      + i15_livestock_kcal_structure_iso_raw(t,iso,"livst_rum") * (1-f15_ruminant_fadeout(t,"%c15_rumscen%"));
+                                      + i15_livestock_kcal_structure_iso_raw(t,iso,"livst_rum") * (1-i15_ruminant_fadeout(t));
      i15_livestock_kcal_structure_iso(t,iso,"livst_rum") =
-                                      i15_livestock_kcal_structure_iso_raw(t,iso,"livst_rum") * f15_ruminant_fadeout(t,"%c15_rumscen%");
+                                      i15_livestock_kcal_structure_iso_raw(t,iso,"livst_rum") * i15_ruminant_fadeout(t);
 
 
  );
