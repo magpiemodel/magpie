@@ -16,12 +16,12 @@ $title magpie
 * md5sum: facdffc422989f8b95d563813cb137bf
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: magpie_8a828c6ed5004e77d1ba2025e8ea2261_rev2.101.tgz
-* md5sum: 0fcf66d061e8ba1ac46e89c6695e990c
+* Used data set: magpie_8a828c6ed5004e77d1ba2025e8ea2261_rev2.103.tgz
+* md5sum: e4ddecdafeee45e3c56ed8c09a01e76d
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: validation_8a828c6ed5004e77d1ba2025e8ea2261_rev2.101.tgz
-* md5sum: 50d1d18d8ed3475746158093643c266a
+* Used data set: validation_8a828c6ed5004e77d1ba2025e8ea2261_rev2.103.tgz
+* md5sum: 86cf09540c44ab428450242ea1a284fa
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Used data set: additional_data_rev3.14.tgz
@@ -39,7 +39,7 @@ $title magpie
 * 
 * Regionscode: 8a828c6ed5004e77d1ba2025e8ea2261
 * 
-* Regions data revision: 2.101
+* Regions data revision: 2.103
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/GLUES2/sresa2/constant_co2/miub_echo_g
@@ -59,7 +59,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Wed Nov  8 11:21:32 2017
+* Last modification (input data): Fri Nov 10 20:09:51 2017
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
