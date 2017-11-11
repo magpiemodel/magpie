@@ -54,7 +54,8 @@ if (sum(sameas(t_past,t),1) = 1,
 * keep staples and livestock structure constant for future projections
      i15_staples_kcal_structure_iso(t,iso,kfo_st) =i15_staples_kcal_structure_iso(t-1,iso,kfo_st);
      i15_processed_kcal_structure_iso(t,iso,kfo_pf) =i15_processed_kcal_structure_iso(t-1,iso,kfo_pf);
-     i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap) =i15_livestock_kcal_structure_iso_raw(t-1,iso,kfo_ap);
+     i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap) = i15_livestock_kcal_structure_iso_raw(t-1,iso,kfo_ap);
+     i15_livestock_kcal_structure_iso(t,iso,kfo_ap)     = i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap);
      i15_livestock_kcal_structure_iso(t,iso,"livst_chick") =
                                       i15_livestock_kcal_structure_iso_raw(t,iso,"livst_chick")
                                       + i15_livestock_kcal_structure_iso_raw(t,iso,"livst_rum") * (1-i15_ruminant_fadeout(t));
