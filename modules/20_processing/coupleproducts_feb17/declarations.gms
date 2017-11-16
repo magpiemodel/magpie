@@ -28,7 +28,6 @@ equations
 parameters
  ov_dem_processing(t,i,kall,type)                         demand for processing use
  ov20_dem_processing(t,i,processing_subst20,kpr,type)     demand for processing use by process
- ov_processing_costs(t,i,type)                            costs of food processing
  ov20_secondary_substitutes(t,i,ksd,kpr,type)             substitutes for inferior secondary products (Mt DM)
  ov_secondary_overproduction(t,i,kall,kpr,type)           overproduction of secondary couple products (Mt Dm)
  ov_cost_processing(t,i,type)                             processing costs (Million USD05)
