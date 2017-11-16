@@ -11,7 +11,6 @@ equations
 
 positive variables
   vm_dem_processing(i,kall)          demand for processing use
-  vm_processing_costs(i)            costs of food processing
   vm_secondary_overproduction(i,kall,kpr) overproduction of secondary couple products (Mt Dm)
   vm_cost_processing(i)            processing costs (Million USD05)
 ;
