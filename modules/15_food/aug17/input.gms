@@ -47,13 +47,13 @@ $offdelim
 /;
 
 
-table f15_kcal_balanceflow_fadeout(t_all,calibscen15)
+table f15_kcal_balanceflow_fadeout(t_all,calibscen15) balanceflow fadeout (-)
 $ondelim
 $include "./modules/15_food/input/f15_kcal_balanceflow_fadeout.csv"
 $offdelim
 ;
 
-table f15_ruminant_fadeout(t_all,ruminantfadeoutscen15)
+table f15_ruminant_fadeout(t_all,ruminantfadeoutscen15) ruminant fadeout scenario (-)
 $ondelim
 $include "./modules/15_food/input/f15_ruminant_fadeout.csv"
 $offdelim
