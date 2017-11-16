@@ -9,6 +9,5 @@
 $Ifi "%phase%" == "declarations" $include "./modules/38_factor_costs/fixed_per_ton_nov16/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/38_factor_costs/fixed_per_ton_nov16/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/38_factor_costs/fixed_per_ton_nov16/equations.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/38_factor_costs/fixed_per_ton_nov16/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/38_factor_costs/fixed_per_ton_nov16/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
