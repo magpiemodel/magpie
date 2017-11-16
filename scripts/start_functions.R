@@ -147,6 +147,14 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
                       last.warning = attr(codeCheck,"last.warning")))
   save(validation, file= cfg$val_workspace, compress="xz")
 
+  lucode::runstatistics(file=paste0(cfg$results_folder,"/runstatistics.rda"),
+                        user=Sys.info()[["user"]],
+                        model="MAgPIE",
+                        date=date,
+                        version_management="git",
+                        revision=try(system("git rev-parse HEAD", intern=TRUE), silent=TRUE),
+                        status=try(system("git status", intern=TRUE), silent=TRUE))
+
 
   ##############################################################################
 
