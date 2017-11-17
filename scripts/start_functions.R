@@ -150,8 +150,6 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
 
   lucode::runstatistics(file = paste0(cfg$results_folder,"/runstatistics.rda"),
                         user = Sys.info()[["user"]],
-                        model = "MAgPIE",
-                        model_version = "4.0",
                         date = rundate,
                         version_management = "git",
                         revision = try(system("git rev-parse HEAD", intern=TRUE), silent=TRUE),
