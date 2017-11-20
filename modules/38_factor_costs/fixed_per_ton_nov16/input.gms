@@ -6,7 +6,7 @@
 
 
 
-table f38_fac_req(kve,w) Factor requirements (US$04 per ton DM)
+table f38_fac_req(kcr,w) Factor requirements (US$04 per ton DM)
 $ondelim
 $include "./modules/38_factor_costs/fixed_per_ton_nov16/input/f38_fac_req.csv"
 $offdelim;
