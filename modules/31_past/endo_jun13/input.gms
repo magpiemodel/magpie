@@ -5,10 +5,6 @@
 *** Contact: magpie@pik-potsdam.de
 
 
-
-parameter f31_fac_req_past  Factor requirements (US$04 per ton DM)
-/
-$ondelim
-$include "./modules/31_past/input/f31_fac_req_past.csv"
-$offdelim
-/;
+scalars
+  s31_fac_req_past  Factor requirements (USD04 per ton DM)                / 1 /
+;
