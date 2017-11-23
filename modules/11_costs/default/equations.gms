@@ -23,6 +23,5 @@
                    + vm_cost_fore(i2)
                    + vm_cost_cdr(i2)
                    + vm_cost_bioen(i2)
-                   + vm_processing_costs(i2)
                    + vm_cost_processing(i2)
                    ;

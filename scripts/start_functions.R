@@ -28,7 +28,8 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
   if(!is.null(scenario)) cfg <- lucode::setScenario(cfg,scenario)
   cfg <- lucode::check_config(cfg)
 
-  date <- format(Sys.time(), "_%Y-%m-%d_%H.%M.%S")
+  rundate <- Sys.time()
+  date <- format(rundate, "_%Y-%m-%d_%H.%M.%S")
   cfg$results_folder <- gsub(":date:", date, cfg$results_folder, fixed=TRUE)
   cfg$results_folder <- gsub(":title:", cfg$title, cfg$results_folder, fixed=TRUE)
 
@@ -146,6 +147,14 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
                       setup_info = list(start_functions = lucode::setup_info()),
                       last.warning = attr(codeCheck,"last.warning")))
   save(validation, file= cfg$val_workspace, compress="xz")
+
+  lucode::runstatistics(file = paste0(cfg$results_folder,"/runstatistics.rda"),
+                        user = Sys.info()[["user"]],
+                        date = rundate,
+                        version_management = "git",
+                        revision = try(system("git rev-parse HEAD", intern=TRUE), silent=TRUE),
+                        revision_date = try(as.POSIXct(system("git show -s --format=%ci", intern=TRUE), silent=TRUE)),
+                        status = try(system("git status", intern=TRUE), silent=TRUE))
 
 
   ##############################################################################

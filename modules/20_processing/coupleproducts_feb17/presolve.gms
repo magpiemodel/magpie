@@ -6,7 +6,6 @@
 
 
 vm_dem_processing.fx(i,knpr)=0;
-vm_processing_costs.fx(i)=0;
 
 vm_secondary_overproduction.fx(i2,kall,kpr)=0;
 vm_secondary_overproduction.up(i2,ksd,kpr)=Inf;
