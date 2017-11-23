@@ -17,13 +17,13 @@ source("config/default.cfg")
 #set defaults
 codeCheck <- FALSE
 
-buildInputVector <- function(regionmapping   = "h11",
+buildInputVector <- function(regionmapping   = "sim4nexus",
                              project_name    = "isimip_rcp",
                              climatescen_name= "rcp2p6",
                              co2             = "noco2",
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "h200",
-                             archive_rev     = "24",
+                             archive_rev     = "24.1",
                              madrat_rev      = "2.61",
                              validation_rev  = "2.61",
                              additional_data = "additional_data_rev3.14.tgz") {
