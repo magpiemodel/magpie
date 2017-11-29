@@ -67,8 +67,8 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 cfg$title <- "SUSTAg2_Ref"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0")
-cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA2"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA2"
+cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg$title <- "SUSTAg2_nocc"
@@ -85,8 +85,8 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 cfg$title <- "SUSTAg2_Ref_co2fix"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$input <- buildInputVector(co2="noco2",climatescen_name="rcp6p0")
-cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA2"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA2"
+cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg$title <- "SUSTAg2_fixedperton"
