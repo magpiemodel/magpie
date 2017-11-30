@@ -6,5 +6,6 @@
 
 
 *###################### R SECTION START (MODULETYPES) ##########################
+$Ifi "%tc%" == "curve_SEP17" $include "./modules/13_tc/curve_SEP17.gms"
 $Ifi "%tc%" == "endo_JUN16" $include "./modules/13_tc/endo_JUN16.gms"
 *###################### R SECTION END (MODULETYPES) ############################
