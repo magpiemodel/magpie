@@ -11,7 +11,6 @@ equations
 
 positive variables
   vm_dem_processing(i,kall)          demand for processing use
-  vm_processing_costs(i)            costs of food processing
   vm_secondary_overproduction(i,kall,kpr) overproduction of secondary couple products (Mt Dm)
   vm_cost_processing(i)            processing costs (Million USD05)
 ;
@@ -19,7 +18,6 @@ positive variables
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_dem_processing(t,i,kall,type)               demand for processing use
- ov_processing_costs(t,i,type)                  costs of food processing
  ov_secondary_overproduction(t,i,kall,kpr,type) overproduction of secondary couple products (Mt Dm)
  ov_cost_processing(t,i,type)                   processing costs (Million USD05)
  oq20_processing_costs(t,i,type)                processing costs

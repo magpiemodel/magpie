@@ -55,6 +55,7 @@ cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
 cfg$recalibrate <- FALSE
 
+
 #SSP2 family
 
 # SSP2 control run
@@ -95,6 +96,7 @@ cfg$input <- buildInputVector(co2="co2")
 start_run(cfg=cfg,codeCheck=codeCheck)
 cfg$gms$factor_costs="mixed_feb17"
 
+
 # SSP1 family
 
 cfg$title <- "SUSTAg1"
@@ -122,3 +124,6 @@ cfg$title <- "SUSTAg5"
 cfg<-lucode::setScenario(cfg,"SUSTAg5")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5")
 start_run(cfg=cfg,codeCheck=codeCheck)
+
+
+### bioenergy experiments
