@@ -26,18 +26,17 @@ buildInputVector <- function(regionmapping   = "h11",
                              climate_model   = "miub_echo_g",
                              resolution      = "h200",
                              archive_rev     = "24",
-                             madrat_rev      = "2.103",
-                             validation_rev  = "2.103",
-                             additional_data = "additional_data_rev3.14.tgz") {
+                             madrat_rev      = "3.1",
+                             validation_rev  = "3.1",
+                             additional_data = "additional_data_rev3.16.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
                 mag="c30c1c580039c2b300d86cc46ff4036a")
   archive_name=paste(project_name,climatescen_name,co2,climate_model,sep="-")
   archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", mappings[regionmapping], ".tgz")
-  madrat_backup <- paste0("magpie_", mappings[regionmapping], "_rev", "2.13", ".tgz")
   madrat  <- paste0("magpie_", mappings[regionmapping], "_rev", madrat_rev, ".tgz")
   validation  <- paste0("validation_", mappings[regionmapping], "_rev", validation_rev, ".tgz")
-  return(c(archive,madrat_backup,madrat,validation,additional_data))
+  return(c(archive,madrat,validation,additional_data))
 }
 
 
@@ -174,7 +173,7 @@ cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
 try(start_run(cfg=cfg,scenario=c(scenario,"INDC"),codeCheck=codeCheck))
 
-stop()
+#stop()
 
 cfg$title <- "h12"
 cfg$input <- buildInputVector(regionmapping = "h12")
