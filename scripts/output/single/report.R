@@ -11,15 +11,16 @@ options("magclass.verbosity" = 1)
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  
   outputdir <- "/p/projects/landuse/users/miodrag/projects/tests/flexreg/output/H12_setup1_2016-11-23_12.38.56/"
-    
   readArgs("outputdir")
 } 
+
+load(paste0(outputdir, "/config.Rdata"))
+gdx	<- path(outputdir,"fulldata.gdx")
+mif <- paste0(outputdir, "/report_", cfg$title, ".mif")
 ###############################################################################
 
-gdx	<- path(outputdir,"fulldata.gdx")
-mif <- path(outputdir, "report.mif")
+
 report <- getReport(gdx)
 write.report2(report, file=mif)
 
