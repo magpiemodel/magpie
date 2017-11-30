@@ -10,10 +10,11 @@ library(magpie4)
 if(!exists("source_include")) {
   outputdir    <-"."
 }
+
 load(paste0(outputdir, "/config.Rdata"))
 hist       <- c(paste0(outputdir, "/validation.mif"), "input/validation.mif")
 file       <- paste0(outputdir, "/", cfg$title, "_validation.pdf")
-reportfile <- paste0(outputdir, "/", cfg$title, "_report.mif")
+reportfile <- paste0(outputdir, "/report_", cfg$title, ".mif")
 gdx        <- paste0(outputdir, "/fulldata.gdx")
 runinfo    <- paste0(outputdir, "/", cfg$title, "_*.RData")
 ###############################################################################
