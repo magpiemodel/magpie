@@ -199,6 +199,7 @@ update_sets <- function(cpr,map) {
   content <- c(content,'      /','')
 
   content <- c(content,'   i_to_iso(i,iso) mapping regions to iso countries','      /')
+  map$RegionCode <- as.factor(map$RegionCode)
   for(i in levels(map$RegionCode)) {
     content <- c(content, .tmp(map$CountryCode[map$RegionCode==i], prefix=paste0(i," . ("), suffix1=")", suffix2=")"))
 
