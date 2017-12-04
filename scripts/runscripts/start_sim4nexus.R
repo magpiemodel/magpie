@@ -44,7 +44,7 @@ buildInputVector <- function(regionmapping   = "sim4nexus",
 #general settings
 cfg$gms$c_timesteps <- 7
 cfg$gms$s15_elastic_demand <- 1
-cfg$food <- "intake_dez17"
+cfg$gms$food <- "intake_dez17"
 
 # clalibration runs
 
@@ -90,13 +90,6 @@ cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
-cfg$title <- "SUSTAg2_fixedperton"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$gms$factor_costs="fixed_per_ton_nov16"
-cfg$input <- buildInputVector(co2="co2")
-start_run(cfg=cfg,codeCheck=codeCheck)
-cfg$gms$factor_costs="mixed_feb17"
-
 # SSP1 family
 
 cfg$title <- "SUSTAg1"
@@ -124,3 +117,15 @@ cfg$title <- "SUSTAg5"
 cfg<-lucode::setScenario(cfg,"SUSTAg5")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5")
 start_run(cfg=cfg,codeCheck=codeCheck)
+
+
+### different calibration
+
+cfg$title <- "SUSTAg2_fixedperton"
+cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg$gms$factor_costs="fixed_per_ton_nov16"
+cfg$input <- buildInputVector(co2="co2")
+cfg$recalibrate <- TRUE
+start_run(cfg=cfg,codeCheck=codeCheck)
+cfg$recalibrate <- FALSE
+cfg$gms$factor_costs="mixed_feb17"
