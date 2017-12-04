@@ -7,4 +7,5 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%food%" == "aug17" $include "./modules/15_food/aug17.gms"
+$Ifi "%food%" == "intake_dez17" $include "./modules/15_food/intake_dez17.gms"
 *###################### R SECTION END (MODULETYPES) ############################

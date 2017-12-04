@@ -24,8 +24,8 @@ buildInputVector <- function(regionmapping   = "sim4nexus",
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "h200",
                              archive_rev     = "24.1",
-                             madrat_rev      = "2.105",
-                             validation_rev  = "2.105",
+                             madrat_rev      = "3.3",
+                             validation_rev  = "3.3",
                              additional_data = "additional_data_rev3.16.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
@@ -44,6 +44,7 @@ buildInputVector <- function(regionmapping   = "sim4nexus",
 #general settings
 cfg$gms$c_timesteps <- 7
 cfg$gms$s15_elastic_demand <- 1
+cfg$food <- "intake_dez17"
 
 # clalibration runs
 
