@@ -38,8 +38,6 @@ buildInputVector <- function(regionmapping   = "sim4nexus",
   return(c(archive,madrat,validation,additional_data))
 }
 
-
-
 ### Single runs ###
 #general settings
 cfg$gms$c_timesteps <- 7
@@ -51,11 +49,12 @@ cfg$gms$food <- "intake_dez17"
 cfg$title <- "SUSTAg2"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$force_download <- TRUE
-cfg$input <- buildInputVector()
+cfg$gms$factor_costs="fixed_per_ton_nov16"
 cfg$input <- buildInputVector(co2="co2")
 cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
 cfg$recalibrate <- FALSE
+
 
 #SSP2 family
 
@@ -119,13 +118,13 @@ cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 
-### different calibration
+### mixed 
 
-cfg$title <- "SUSTAg2_fixedperton"
+cfg$title <- "SUSTAg2_mixedfactorcosts"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$gms$factor_costs="fixed_per_ton_nov16"
 cfg$input <- buildInputVector(co2="co2")
 cfg$recalibrate <- TRUE
+cfg$gms$factor_costs="mixed_feb17"
 start_run(cfg=cfg,codeCheck=codeCheck)
 cfg$recalibrate <- FALSE
-cfg$gms$factor_costs="mixed_feb17"
+cfg$gms$factor_costs="fixed_per_ton_nov16"
