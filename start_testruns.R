@@ -223,27 +223,3 @@ cfg$gms$c_timesteps <- 11
 cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
 try(performance_start(cfg=cfg, id=cfg$title, sequential=NA))
-
-# extra tests
-
-cfg$force_download <- TRUE
-
-cfg$title <- "factorperton"
-cfg$input <- buildInputVector()
-cfg$gms$factor_costs <- "fixed_per_ton_nov16"
-cfg$gms$c_timesteps <- 11
-cfg$gms$s15_elastic_demand <- 0
-cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
-try(start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck))
-
-cfg$force_download <- FALSE
-
-cfg$title <- "factorperton_rcp26"
-cfg$input <- buildInputVector()
-cfg$gms$factor_costs <- "fixed_per_ton_nov16"
-cfg$gms$c_timesteps <- 11
-cfg$gms$s15_elastic_demand <- 0
-cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
-try(start_run(cfg=cfg,scenario=c(scenario,"BASE"),codeCheck=codeCheck))
