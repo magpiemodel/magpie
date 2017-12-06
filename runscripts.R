@@ -39,8 +39,16 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 
   choose_submit <- function(title="Please choose run submission type") {
     slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
-    modes <- c("Direct execution", "Background execution", "SLURM submission", "Debug mode")
-    if(!slurm) modes <- modes[-3]
+    modes <- c("Direct execution", 
+               "Background execution", 
+               "SLURM submission", 
+               "SLURM submission (16GB memory)",
+               "SLURM submission (32GB memory)",
+               "SLURM submission (medium)", 
+               "SLURM submission (16GB memory, medium)",
+               "SLURM submission (32GB memory, medium)",
+               "Debug mode")
+    if(!slurm) modes <- modes[-3:-8]
     cat("\n\n",title,":\n\n")
     cat(paste(1:length(modes), modes, sep=": " ),sep="\n")
     cat("\nNumber: ")
@@ -51,7 +59,12 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
                      "1" = "direct",
                      "2" = "background",
                      "3" = "slurm",
-                     "4" = "debug")
+                     "4" = "slurm16gb",
+                     "5" = "slurm32gb",
+                     "6" = "slurmmedium",
+                     "7" = "slurm16gbmedium",
+                     "8" = "slurm32gbmedium",
+                     "9" = "debug")
     } else {
       comp <- switch(identifier,
                      "1" = "direct",
@@ -62,9 +75,8 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
     return(comp)
   }
 
-  runsubmit <- function(output) {
-    # run output scripts over all choosen folders
-    for(rout in output){
+  runsubmit <- function(runscripts, submit) {
+    for(rout in runscripts){
       name   <- paste0("./scripts/runscripts/",rout,".R")
 
       if(!file.exists(name)) {
@@ -73,15 +85,32 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
       }
 
       cat("Executing",name,"\n")
+      srun_command <- paste0("srun --job-name=",rout," --output=",rout,"-%j.out --mail-type=END")
       if(submit=="direct") {
         tmp.env <- new.env()
         tmp.error <- try(sys.source(name,envir=tmp.env))
         if(!is.null(tmp.error)) warning("Script ",name," was stopped by an error and not executed properly!")
         rm(tmp.env)
       } else if(submit=="background") {
-        stop("dont know what background means. sorry. benni.")
+        log <- format(Sys.time(), paste0(rout,"-%Y-%H-%M-%S-%OS3.log"))
+        system2("Rscript",name, stderr = log, stdout = log, wait=FALSE)
       } else if(submit=="slurm") {
-        system(paste0("srun --qos=short --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END Rscript ",name))
+        system(paste0(srun_command," --qos=short Rscript ",name), wait=FALSE)
+        Sys.sleep(1)
+      } else if(submit=="slurm16gb") {
+        system(paste0(srun_command," --qos=short --mem-per-cpu=16000 Rscript ",name), wait=FALSE)
+        Sys.sleep(1)
+      } else if(submit=="slurm32gb") {
+        system(paste0(srun_command," --qos=short --mem-per-cpu=32000 Rscript ",name), wait=FALSE)
+        Sys.sleep(1)
+      } else if(submit=="slurmmedium") {
+        system(paste0(srun_command," --qos=medium Rscript ",name), wait=FALSE)
+        Sys.sleep(1)
+      } else if(submit=="slurm16gbmedium") {
+        system(paste0(srun_command," --qos=medium --mem-per-cpu=16000 Rscript ",name), wait=FALSE)
+        Sys.sleep(1)
+      } else if(submit=="slurm32gbmedium") {
+        system(paste0(srun_command," --qos=medium --mem-per-cpu=32000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="debug") {
         tmp.env <- new.env()
@@ -95,21 +124,14 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 
 
 
-  if(is.null(output))     runscripts     <- choose_module("./scripts/runscripts",
-                                                      "Please choose the runscripts to be used for starting model runs")
+  if(is.null(runscripts)) runscripts <- choose_module("./scripts/runscripts",
+                                                      "Please choose the runscript to be used for starting model runs")
   if(is.null(submit))     submit     <- choose_submit("Please choose a run submission type")
 
-  #Set value source_include so that loaded scripts know, that they are
-  #included as source (instead of a load from command line)
-  source_include <- TRUE
-
-  runsubmit(runscripts)
-
+  runsubmit(runscripts, submit)
 }
 
-if(!exists("source_include")) {
-  comp <- output <- outputdirs <- submit <- NULL
-  readArgs("runscripts","submit")
-}
 
+runscripts <- submit <- NULL
+readArgs("runscripts","submit")
 runOutputs(runscripts=runscripts, submit=submit)
