@@ -89,7 +89,7 @@ display p15_modelstat;
 if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
   m15_food_demand.solprint = 1
   Execute_Unload "fulldata.gdx";
-  abort "Food Demand Model became infeasible. Stop run.";
+  abort "Food Demand Model became infeasible already during initialisation run. Stop run.";
 );
 
 * releasing real per capita binding for later runs that include shocks
