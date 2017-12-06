@@ -46,14 +46,10 @@ cfg$gms$food <- "intake_dez17"
 
 # clalibration runs
 
-cfg$title <- "SUSTAg2_Ref"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg$title <- "SUSTAg1"
+cfg<-lucode::setScenario(cfg,"SUSTAg1")
 cfg$force_download <- TRUE
-cfg$gms$factor_costs="fixed_per_ton_nov16"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0")
-cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6")
 cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
 cfg$recalibrate <- FALSE

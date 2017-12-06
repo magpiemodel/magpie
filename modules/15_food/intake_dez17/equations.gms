@@ -97,7 +97,7 @@ q15_regression1_vegfruit(iso) ..
          v15_vegfruit_share_iso(iso)
          =e=
 * SSP1
-$ifthen "%c15_food_scenario%"=="SSP1"   (-0.08718+0.03839*v15_income_pc_real_ppp_iso(iso)**0.19036)
+$ifthen "%c15_food_scenario%"=="SSP1"   (0.03839*v15_income_pc_real_ppp_iso(iso)**0.19036)
 * SSP2
 $elseif "%c15_food_scenario%"=="SSP2"   (0.0294+0.1871*v15_income_pc_real_ppp_iso(iso)/(6805+v15_income_pc_real_ppp_iso(iso)))
 * SSP3
