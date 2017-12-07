@@ -54,9 +54,11 @@ config/scenario_config.csv
 
 HOW TO RUN
 	To run the model execute "Rscript start.R" in the main folder of the model.
-Make sure that the config file and scenario are set correctly before starting
-the model. start.R can be also used as a template for an own, customized start
-script.
+This will give you a list of available run scripts you can choose from. You can
+also add your own run scripts by saving them in the folder scripts/start. To run
+a single model run with settings as stated in default.cfg you can choose start
+script "default". Make sure that the config file has been set correctly before
+starting the model. 
 
 HOW TO CONTRIBUTE
 	We are interested in working with you! Just contact us through Gitlab
