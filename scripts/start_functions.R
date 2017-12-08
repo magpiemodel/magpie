@@ -104,9 +104,6 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
                      ssh_private_keyfile=cfg$ssh_private_keyfile,
                      ssh_public_keyfile=cfg$ssh_public_keyfile,
                      debug=cfg$debug)
-    if(cfg$recalibrate=="ifneeded") cfg$recalibrate <- TRUE
-  } else {
-    if(cfg$recalibrate=="ifneeded") cfg$recalibrate <- FALSE
   }
 
   if(cfg$recalc_indc=="ifneeded") {
@@ -159,6 +156,13 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
 
   ##############################################################################
 
+  # Yield calibration
+  calib_file <- "modules/14_yields/input/f14_yld_calib.csv"
+  if(!file.exists(calib_file)) stop("Yield calibration file missing!")
+  if(cfg$recalibrate=="ifneeded") {
+    # recalibrate if all calibration factors are 1, otherwise don't
+    cfg$recalibrate <- all(magclass::read.magpie(calib_file)==1)
+  }
   if(cfg$recalibrate){
     cat("Starting calibration factor calculation!\n")
     source("scripts/calibration/calc_calib.R")
@@ -166,7 +170,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
                      calib_accuracy = cfg$calib_accuracy,
                      calibrate_pasture = (cfg$gms$past!="static"),
                      damping_factor = cfg$damping_factor,
-                     calib_file = "modules/14_yields/input/f14_yld_calib.csv",
+                     calib_file = calib_file,
                      data_workspace = cfg$val_workspace,
                      logoption = 3)
     file.copy("calibration_results.pdf", cfg$results_folder, overwrite=TRUE)
@@ -227,7 +231,7 @@ getReportData <- function(rep,scen,LU_pricing="y2010") {
     notGLO <- getRegions(mag)[!(getRegions(mag)=="GLO")]
     out <- mag[,,"Primary Energy Production|Biomass|Energy Crops (EJ/yr)"]*10^3
     dimnames(out)[[3]] <- NULL
-    write.magpie(out[notGLO,,],"./modules/60_bioenergy/standard/input/reg.2ndgen_bioenergy_demand.csv")
+    write.magpie(out[notGLO,,],"./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
   }
   .emission_prices <- function(mag){
     notGLO <- getRegions(mag)[!(getRegions(mag)=="GLO")]
@@ -237,20 +241,23 @@ getReportData <- function(rep,scen,LU_pricing="y2010") {
 
     dimnames(out_c)[[3]] <- "co2_c"
 
-    out_n2o <- mag[,,"Price|N2O (US$2005/t N2O)"]*44/28*0.967 # US$2005/tN2O -> US$2004/tN
-    dimnames(out_n2o)[[3]] <- "n2o_n"
+    out_n2o_direct <- mag[,,"Price|N2O (US$2005/t N2O)"]*44/28*0.967 # US$2005/tN2O -> US$2004/tN
+    dimnames(out_n2o_direct)[[3]] <- "n2o_n_direct"
+
+    out_n2o_indirect <- mag[,,"Price|N2O (US$2005/t N2O)"]*44/28*0.967 # US$2005/tN2O -> US$2004/tN
+    dimnames(out_n2o_indirect)[[3]] <- "n2o_n_indirect"
 
     out_ch4 <- mag[,,"Price|CH4 (US$2005/t CH4)"]*0.967 # US$2005/tCH4 -> US$2004/tCH4
     dimnames(out_ch4)[[3]] <- "ch4"
 
-    out <- mbind(out_n2o,out_ch4,out_c)
-    write.magpie(out[notGLO,,],"./input/regional/ghg_prices.cs3")
+    out <- mbind(out_n2o_direct,out_n2o_indirect,out_ch4,out_c)
+    write.magpie(out[notGLO,,],"./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3")
   }
 
   if (length(scen)!=1) stop("getReportData: 'scen' does not contain exactly one scenario.")
   if (length(intersect(scen,names(rep)))!=1) stop("getReportData: 'scen not contained in 'rep'.")
 
-  files <- c("./input/regional/ghg_prices.cs3","./modules/60_bioenergy/standard/input/reg.2ndgen_bioenergy_demand.csv")
+  files <- c("./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3","./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
   years <- 1990+5*(1:32)
   for(f in files) suppressWarnings(unlink(f))
   mag <- rep[[scen]][["MAgPIE"]]

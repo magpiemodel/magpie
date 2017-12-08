@@ -24,9 +24,9 @@ buildInputVector <- function(regionmapping   = "sim4nexus",
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "h200",
                              archive_rev     = "24.1",
-                             madrat_rev      = "2.105",
-                             validation_rev  = "2.105",
-                             additional_data = "additional_data_rev3.15.tgz") {
+                             madrat_rev      = "3.3",
+                             validation_rev  = "3.3",
+                             additional_data = "additional_data_rev3.16.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
                 mag="c30c1c580039c2b300d86cc46ff4036a",
@@ -38,63 +38,24 @@ buildInputVector <- function(regionmapping   = "sim4nexus",
   return(c(archive,madrat,validation,additional_data))
 }
 
-
-
 ### Single runs ###
 #general settings
 cfg$gms$c_timesteps <- 7
 cfg$gms$s15_elastic_demand <- 1
+cfg$gms$food <- "intake_dez17"
 
 # clalibration runs
 
 cfg$title <- "SUSTAg2"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$force_download <- TRUE
-cfg$input <- buildInputVector()
+cfg$gms$factor_costs="fixed_per_ton_nov16"
 cfg$input <- buildInputVector(co2="co2")
 cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
 cfg$recalibrate <- FALSE
 
-#SSP2 family
 
-# SSP2 control run
-cfg$title <- "SSP2"
-cfg<-lucode::setScenario(cfg,"SSP2")
-cfg$input <- buildInputVector(co2="noco2")
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-cfg$title <- "SUSTAg2_Ref"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0")
-cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-cfg$title <- "SUSTAg2_nocc"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$input <- buildInputVector(co2="noco2")
-cfg<-lucode::setScenario(cfg,"nocc")
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-cfg$title <- "SUSTAg2_co2fix"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$input <- buildInputVector(co2="noco2")
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-cfg$title <- "SUSTAg2_Ref_co2fix"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$input <- buildInputVector(co2="noco2",climatescen_name="rcp6p0")
-cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-cfg$title <- "SUSTAg2_fixedperton"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$gms$factor_costs="fixed_per_ton_nov16"
-cfg$input <- buildInputVector(co2="co2")
-start_run(cfg=cfg,codeCheck=codeCheck)
-cfg$gms$factor_costs="mixed_feb17"
 
 # SSP1 family
 
@@ -123,3 +84,57 @@ cfg$title <- "SUSTAg5"
 cfg<-lucode::setScenario(cfg,"SUSTAg5")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5")
 start_run(cfg=cfg,codeCheck=codeCheck)
+
+
+#SSP2 family
+
+# SSP2 control run
+cfg$title <- "SSP2"
+cfg<-lucode::setScenario(cfg,"SSP2")
+cfg$input <- buildInputVector(co2="noco2")
+start_run(cfg=cfg,codeCheck=codeCheck)
+
+cfg$title <- "SUSTAg2_Ref"
+cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0")
+cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
+cfg$recalibrate <- TRUE
+start_run(cfg=cfg,codeCheck=codeCheck)
+cfg$recalibrate <- FALSE
+
+cfg$title <- "SUSTAg2_nocc"
+cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg$input <- buildInputVector(co2="noco2")
+cfg<-lucode::setScenario(cfg,"nocc")
+cfg$recalibrate <- TRUE
+start_run(cfg=cfg,codeCheck=codeCheck)
+cfg$recalibrate <- FALSE
+
+cfg$title <- "SUSTAg2_co2fix"
+cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg$input <- buildInputVector(co2="noco2")
+cfg$recalibrate <- TRUE
+start_run(cfg=cfg,codeCheck=codeCheck)
+cfg$recalibrate <- FALSE
+
+cfg$title <- "SUSTAg2_Ref_co2fix"
+cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg$input <- buildInputVector(co2="noco2",climatescen_name="rcp6p0")
+cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
+cfg$recalibrate <- TRUE
+start_run(cfg=cfg,codeCheck=codeCheck)
+cfg$recalibrate <- FALSE
+
+
+### mixed 
+
+cfg$title <- "SUSTAg2_mixedfactorcosts"
+cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg$input <- buildInputVector(co2="co2")
+cfg$gms$factor_costs="mixed_feb17"
+cfg$recalibrate <- TRUE
+start_run(cfg=cfg,codeCheck=codeCheck)
+cfg$recalibrate <- FALSE
+cfg$gms$factor_costs="fixed_per_ton_nov16"
