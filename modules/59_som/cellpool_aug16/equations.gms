@@ -30,21 +30,21 @@ q59_som_pool_cropland(j2) ..
              v59_som_pool(j2,"cropland")
               =e=
               sum(ct,
-                (1-i59_lossrate(ct)) *  v59_som_target(j2,"cropland") +
-                 i59_lossrate(ct) * (p59_som_pool(j2,"cropland") + v59_som_transfer_to_cropland(j2))
+                i59_lossrate(ct) *  v59_som_target(j2,"cropland") +
+                 (1-i59_lossrate(ct)) * (p59_som_pool(j2,"cropland") + v59_som_transfer_to_cropland(j2))
               );
 
 q59_som_pool_noncropland(j2) ..
                v59_som_pool(j2,"noncropland")
                =e=
                sum(ct,
-                 (1-i59_lossrate(ct)) * v59_som_target(j2,"noncropland") +
-                  i59_lossrate(ct) * (p59_som_pool(j2,"noncropland") - v59_som_transfer_to_cropland(j2))
+                 i59_lossrate(ct) * v59_som_target(j2,"noncropland") +
+                  (1-i59_lossrate(ct)) * (p59_som_pool(j2,"noncropland") - v59_som_transfer_to_cropland(j2))
                );
 
 q59_nr_som(j2) ..
            vm_nr_som(j2)
-           =e=
+           =e=		  
            sum(ct,i59_lossrate(ct)) * (
              p59_som_pool(j2,"cropland")
              + v59_som_transfer_to_cropland(j2)
