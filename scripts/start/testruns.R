@@ -10,6 +10,7 @@
 ##########################################################
 
 library(lucode)
+library(magpie4)
 
 source("scripts/start_functions.R")
 source("scripts/performance_test.R")
@@ -26,8 +27,9 @@ buildInputVector <- function(regionmapping   = "h11",
                              climate_model   = "miub_echo_g",
                              resolution      = "h200",
                              archive_rev     = "24",
-                             madrat_rev      = "3.1",
-                             validation_rev  = "3.1",
+                             madrat_rev      = "3.3",
+                             validation_rev  = "3.3",
+                             calibration     = NULL,
                              additional_data = "additional_data_rev3.16.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
@@ -36,7 +38,7 @@ buildInputVector <- function(regionmapping   = "h11",
   archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", mappings[regionmapping], ".tgz")
   madrat  <- paste0("magpie_", mappings[regionmapping], "_rev", madrat_rev, ".tgz")
   validation  <- paste0("validation_", mappings[regionmapping], "_rev", validation_rev, ".tgz")
-  return(c(archive,madrat,validation,additional_data))
+  return(c(archive,madrat,validation,calibration,additional_data))
 }
 
 
@@ -53,6 +55,7 @@ cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
 try(start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck))
 
+default_calibration <- submitCalibration("ValidationDefault")
 cfg$force_download <- FALSE
 
 cfg$title <- "rum_const"
@@ -71,9 +74,9 @@ cfg$gms$c_timesteps <- 11
 cfg$gms$s15_elastic_demand <- 0
 cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
-cfg$gms$s31_fac_req_past  <- 0  
+cfg$gms$s31_fac_req_past  <- 0
 try(start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck))
-cfg$gms$s31_fac_req_past  <- 1  
+cfg$gms$s31_fac_req_past  <- 1
 
 cfg$title <- "cc_default"
 cfg$input <- buildInputVector()
@@ -181,6 +184,7 @@ cfg$gms$c_timesteps <- 11
 cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
 try(start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck))
+try(submitCalibration("ValidationH12"))
 
 cfg$title <- "h12_rcp26"
 cfg$input <- buildInputVector(regionmapping = "h12")
@@ -195,7 +199,7 @@ cfg$gms$c_timesteps <- 11
 cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
 try(start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck))
-
+try(submitCalibration("ValidationMag"))
 
 ### Cluster resolution tests ###
 cfg$gms$c_timesteps <- 11
@@ -206,19 +210,20 @@ for(res in c("n200","h100","n100")) {
   cfg$title <- res
   cfg$input <- buildInputVector(resolution = res)
   try(start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck))
+  try(submitCalibration(paste0("Validation",res)))
 }
 
 ### Performance tests ###
 
 cfg$title <- "bau"
-cfg$input <- buildInputVector()
+cfg$input <- buildInputVector(calibration=default_calibration)
 cfg$gms$c_timesteps <- 11
 cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
 try(performance_start(cfg=cfg, id=cfg$title, sequential=NA))
 
 cfg$title <- "rcp26"
-cfg$input <- buildInputVector()
+cfg$input <- buildInputVector(calibration=default_calibration)
 cfg$gms$c_timesteps <- 11
 cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"

@@ -104,9 +104,6 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
                      ssh_private_keyfile=cfg$ssh_private_keyfile,
                      ssh_public_keyfile=cfg$ssh_public_keyfile,
                      debug=cfg$debug)
-    if(cfg$recalibrate=="ifneeded") cfg$recalibrate <- TRUE
-  } else {
-    if(cfg$recalibrate=="ifneeded") cfg$recalibrate <- FALSE
   }
 
   if(cfg$recalc_indc=="ifneeded") {
@@ -159,6 +156,13 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
 
   ##############################################################################
 
+  # Yield calibration
+  calib_file <- "modules/14_yields/input/f14_yld_calib.csv"
+  if(!file.exists(calib_file)) stop("Yield calibration file missing!")
+  if(cfg$recalibrate=="ifneeded") {
+    # recalibrate if all calibration factors are 1, otherwise don't
+    cfg$recalibrate <- all(magclass::read.magpie(calib_file)==1)
+  }
   if(cfg$recalibrate){
     cat("Starting calibration factor calculation!\n")
     source("scripts/calibration/calc_calib.R")
@@ -166,7 +170,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
                      calib_accuracy = cfg$calib_accuracy,
                      calibrate_pasture = (cfg$gms$past!="static"),
                      damping_factor = cfg$damping_factor,
-                     calib_file = "modules/14_yields/input/f14_yld_calib.csv",
+                     calib_file = calib_file,
                      data_workspace = cfg$val_workspace,
                      logoption = 3)
     file.copy("calibration_results.pdf", cfg$results_folder, overwrite=TRUE)
@@ -247,7 +251,7 @@ getReportData <- function(rep,scen,LU_pricing="y2010") {
     dimnames(out_ch4)[[3]] <- "ch4"
 
     out <- mbind(out_n2o_direct,out_n2o_indirect,out_ch4,out_c)
-    write.magpie(out[notGLO,,],"./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3")    
+    write.magpie(out[notGLO,,],"./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3")
   }
 
   if (length(scen)!=1) stop("getReportData: 'scen' does not contain exactly one scenario.")
