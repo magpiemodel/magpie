@@ -7,4 +7,5 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%yields%" == "biocorrect" $include "./modules/14_yields/biocorrect.gms"
+$Ifi "%yields%" == "staticpasture" $include "./modules/14_yields/staticpasture.gms"
 *###################### R SECTION END (MODULETYPES) ############################
