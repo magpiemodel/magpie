@@ -80,8 +80,7 @@ pkgs <- c(ggplot2,
 					magpie4,
 					magpiesets,
 					lusweave,
-					luscale,
-					luplot)
+					luscale)
 install.packages(pkgs)
 ```
 
