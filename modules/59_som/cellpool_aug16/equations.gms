@@ -49,4 +49,4 @@ q59_nr_som(j2) ..
              p59_som_pool(j2,"cropland")
              + v59_som_transfer_to_cropland(j2)
              - v59_som_target(j2,"cropland")
-           )/15;
+           )/15 * 1/m_timestep_length;
