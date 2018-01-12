@@ -20,7 +20,8 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_yld(t,j,kve,w,type)     yields (variable because of technical change) (ton DM per ha)
- oq14_yield(t,j,kve,w,type) yields
+ ov_yld(t,j,kve,w,type)          yields (variable because of technical change) (ton DM per ha)
+ oq14_yield_crop(t,j,kcr,w,type) crop yields
+ oq14_yield_past(t,j,w,type)     pasture yields
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
