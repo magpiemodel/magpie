@@ -78,6 +78,19 @@ cfg$gms$s31_fac_req_past  <- 0
 try(start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck))
 cfg$gms$s31_fac_req_past  <- 1
 
+
+for(ps in c(0,25,50,75)) {
+  cfg$gms$s14_yld_past_switch <- ps/100
+  cfg$title <- paste0("past_switch",ps)
+  cfg$input <- buildInputVector()
+  cfg$gms$c_timesteps <- 11
+  cfg$gms$s15_elastic_demand <- 0
+  cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
+  cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
+  try(start_run(cfg=cfg,scenario=scenario,codeCheck=codeCheck))
+}
+cfg$gms$s14_yld_past_switch <- 1
+
 cfg$title <- "cc_default"
 cfg$input <- buildInputVector()
 cfg$gms$c_timesteps <- 11
