@@ -31,10 +31,10 @@ sets
    kfo_st(kfo) staple products
    /
    tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,puls_pro,
-   potato,cassav_sp,brans,scp/
+   potato,cassav_sp,sugr_cane,sugr_beet,molasses,brans,scp/
 
    kfo_pf(kfo) processed foods including oils sugar alcohol
-   / oils,alcohol,sugar,sugr_cane,sugr_beet,molasses /
+   / oils,alcohol,sugar /
 
    knf(kall) non-food products in the sectoral version
    /
