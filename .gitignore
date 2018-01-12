@@ -1,18 +1,16 @@
 
 #ignore files created for a magpie calibration run
-calib_run/
+/calib_run/
 magpie_calib.*
 
 #ignore input files
 *.cs*
 *.mz
-input/
+/input/
 
 #ignore outputs
 *.gdx
-output/
+/output/
 
 #ignore R support files
 .Rhistory
-
-
