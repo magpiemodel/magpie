@@ -5,10 +5,9 @@ Besides distribution and software-as-a-service applications the source code
 should also be made available in the events of model based publications or
 model-based consulting.
 
-The name 'MAgPIE' should only be used for model versions which are either
-identical to versions in the official main repository at
-https://gitlab.pik-potsdam.de/landuse/magpie or with explicit agreement of the
-copyright holder (magpie@pik-potsdam.de).
+When using a modified version of *MAgPIE* add a suffix to the name to allow
+distinguishing the different versions (format **MAgPIE-XYZ** with **XYZ** being a placeholder for the suffix).
+
 
 --------------------------------------------------------------------------------
 
