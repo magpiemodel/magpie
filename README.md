@@ -116,6 +116,16 @@ If a new R package is added as dependency this package should fulfill the follow
 
 For other dependencies comparable measures should apply. When a dependency is added this dependency should be added to the *HOW TO INSTALL* section in the README file of the model framework (mentioning the depencendy and explaining how it can be installed). If not all requirements can be fulfilled by the new dependency this case should be discussed with the model maintainer (magpie@pik-potsdam.de) to find a good solution for it.
 
+# Input Data
+
+In order to allow other researchers to reproduce and use work done with MAgPIE one needs to make sure that all components necessary to perform a run can be shared. One of these components is the input data. As proprietary data usually does not allow its free distribution it should generally be avoided.
+
+When adding a new data source, make sure that it can be freely shared with others. If this is not the case please consider using a different source or solution.
+
+Data preparation should ideally be performed with the **madrat** data processing framework (https://github.com/pik-piam/madrat). This makes sure that the processing is reproducible and links properly to the already existing data processing for MAgPIE.
+
+In case that these recommendations can not be followed we would be happy if you could discuss that issue with the MAgPIE development team (magpie@pik-potsdam.de).
+
 ## CONTACT
 magpie@pik-potsdam.de
 
