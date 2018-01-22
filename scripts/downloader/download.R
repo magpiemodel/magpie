@@ -159,6 +159,16 @@ copy_input <- function(x, sourcepath, low_res, move=FALSE) {
 ################################################################################
 update_sets <- function(cpr,map) {
   require(lucode)
+
+  reg1 <- unique(map$RegionCode)
+  reg2 <- names(cpr)
+   if(!all(union(reg1,reg2) %in% intersect(reg1,reg2))) {
+     stop("Inconsistent region information!",
+          "\n cpr info: ",paste(reg1,collapse=", "),
+          "\n spatial header info: ", paste(reg1,collapse=", "))
+   }
+
+
   j <- 0; cells <- NULL
   for(i in 1:length(cpr)) {
     cells <- c(cells,paste(names(cpr)[i],"_",j+1,"*",names(cpr)[i],"_",j+cpr[i],sep=""))
