@@ -164,7 +164,7 @@ update_sets <- function(cpr,map) {
   reg2 <- names(cpr)
    if(!all(union(reg1,reg2) %in% intersect(reg1,reg2))) {
      stop("Inconsistent region information!",
-          "\n cpr info: ",paste(reg1,collapse=", "),
+          "\n cpr info: ",paste(reg2,collapse=", "),
           "\n spatial header info: ", paste(reg1,collapse=", "))
    }
 
