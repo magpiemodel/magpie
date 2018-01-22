@@ -22,7 +22,8 @@ The model documentation can be found at
 https://redmine.pik-potsdam.de/projects/magpie/wiki/.
 
 Please pay attentions to the MAgPIE Coding Etiquette when you modify the code.
-The Coding Etiquette you find at https://redmine.pik-potsdam.de/projects/pik-model-operations/wiki/Coding_Etiquette
+The Coding Etiquette you find at
+https://redmine.pik-potsdam.de/projects/pik-model-operations/wiki/Coding_Etiquette
 The Coding Etiquette explains also the used name conventions and other
 structural characteristics.
 
@@ -42,21 +43,25 @@ Besides distribution and software-as-a-service applications the source code
 should also be made available in the events of model based publications or
 model-based consulting.
 
-When using a modified version of *MAgPIE* add a suffix to the name to allow
-distinguishing the different versions (format **MAgPIE-XYZ** with **XYZ** being a placeholder for the suffix).
+When using a modified version of **MAgPIE** add a suffix to the name to allow
+distinguishing versions (format **MAgPIE-xyz**).
 
 ## HOW TO INSTALL
 
-MAgPIE requires *GAMS* (https://www.gams.com/) including licenses for the solvers *CONOPT* and *CPLEX* for its core calculations. Please make sure that
+MAgPIE requires *GAMS* (https://www.gams.com/) including licenses for the
+solvers *CONOPT* and *CPLEX* for its core calculations. Please make sure that
 the GAMS installation path is added to the PATH variable of the system.
 
-In addition *R* (https://www.r-project.org/) is required for pre- and postprocessing and run management (needs to be added to the PATH variable
+In addition *R* (https://www.r-project.org/) is required for pre- and
+postprocessing and run management (needs to be added to the PATH variable
 as well).
 
 For R some packages are required to run MAgPIE. All except of one (`gdxrrw`) are
 either distributed via the offical R CRAN or via a separate repository hosted at
 PIK (PIK-CRAN). Before proceeding PIK-CRAN should be added to the list of
-available repositories via: `options(repos = c(CRAN = "@CRAN@", rd3mod_repo = "http://www.pik-potsdam.de/rd3mod/R/"))`.
+available repositories via:
+`options(repos = c(CRAN = "@CRAN@",
+         rd3mod_repo = "http://www.pik-potsdam.de/rd3mod/R/"))`.
 
 The `gdxrrw` package has to be downloaded directly from GAMS via
 ```
@@ -107,24 +112,47 @@ possible futures. Join us doing so!
 
 ## DEPENDENCIES
 
-Model dependencies **must be publicly available** and should be Open Source. Development aim is to rather minimize than expand dependencies on non-free and/or non open source software. That means that besides currently existing dependencies on GAMS, the GDXRRW R package and the corresponding solvers there should be no additional dependencies of this kind and that these existing dependencies should be resolved in the future if possible.
+Model dependencies **must be publicly available** and should be Open Source.
+Development aim is to rather minimize than expand dependencies on non-free
+and/or non open source software. That means that besides currently existing
+dependencies on GAMS, the GDXRRW R package and the corresponding solvers there
+should be no additional dependencies of this kind and that these existing
+dependencies should be resolved in the future if possible.
 
-If a new R package is added as dependency this package should fulfill the following requirements:
+If a new R package is added as dependency this package should fulfill the
+following requirements:
 * The package is published under an Open Source license
-* The package is distributed through CRAN or PIK-CRAN (the PIK-based, but publicly available package repository).
-* The package source code is available through a public, version controlled repository such as GitHub
+* The package is distributed through CRAN or PIK-CRAN (the PIK-based,
+  but publicly available package repository).
+* The package source code is available through a public, version controlled
+  repository such as GitHub
 
-For other dependencies comparable measures should apply. When a dependency is added this dependency should be added to the *HOW TO INSTALL* section in the README file of the model framework (mentioning the depencendy and explaining how it can be installed). If not all requirements can be fulfilled by the new dependency this case should be discussed with the model maintainer (magpie@pik-potsdam.de) to find a good solution for it.
+For other dependencies comparable measures should apply. When a dependency is
+added this dependency should be added to the *HOW TO INSTALL* section in the
+README file of the model framework (mentioning the depencendy and explaining
+how it can be installed). If not all requirements can be fulfilled by the new
+dependency this case should be discussed with the model maintainer
+(magpie@pik-potsdam.de) to find a good solution for it.
 
 # Input Data
 
-In order to allow other researchers to reproduce and use work done with MAgPIE one needs to make sure that all components necessary to perform a run can be shared. One of these components is the input data. As proprietary data usually does not allow its free distribution it should generally be avoided.
+In order to allow other researchers to reproduce and use work done with MAgPIE
+one needs to make sure that all components necessary to perform a run can be
+shared. One of these components is the input data. As proprietary data usually
+does not allow its free distribution it should generally be avoided.
 
-When adding a new data source, make sure that it can be freely shared with others. If this is not the case please consider using a different source or solution.
+When adding a new data source, make sure that it can be freely shared with
+others. If this is not the case please consider using a different source or
+solution.
 
-Data preparation should ideally be performed with the **madrat** data processing framework (https://github.com/pik-piam/madrat). This makes sure that the processing is reproducible and links properly to the already existing data processing for MAgPIE.
+Data preparation should ideally be performed with the **madrat** data processing
+framework (https://github.com/pik-piam/madrat). This makes sure that the
+processing is reproducible and links properly to the already existing data
+processing for MAgPIE.
 
-In case that these recommendations can not be followed we would be happy if you could discuss that issue with the MAgPIE development team (magpie@pik-potsdam.de).
+In case that these recommendations can not be followed we would be happy if you
+could discuss that issue with the MAgPIE development team
+(magpie@pik-potsdam.de).
 
 ## CONTACT
 magpie@pik-potsdam.de
