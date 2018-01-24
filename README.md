@@ -43,8 +43,9 @@ Besides distribution and software-as-a-service applications the source code
 should also be made available in the events of model based publications or
 model-based consulting.
 
-When using a modified version of **MAgPIE** add a suffix to the name to allow
-distinguishing versions (format **MAgPIE-xyz**).
+When using a modified version of **MAgPIE** which is not identical to versions
+in the official main repository at https://github.com/magpiemodel add a suffix
+to the name to allow distinguishing versions (format **MAgPIE-suffix**).
 
 ## HOW TO INSTALL
 
@@ -101,14 +102,14 @@ script "default". Make sure that the config file has been set correctly before
 starting the model.
 
 ## HOW TO CONTRIBUTE
-We are interested in working with you! Just contact us through Gitlab
-(https://gitlab.pik-potsdam.de/landuse/magpie) or by mail
-(magpie@pik-potsdam.de) if you have found and/or fixed a bug, developed a new
-model feature, have ideas for further model development, suggestions for
-improvements or anything else. We are open to any kind of contribution. Our aim
-is to develop an open, transparent and meaningful model of the agricultural land
-use sector to get a better understanding of the underlying processes and
-possible futures. Join us doing so!
+We are interested in working with you! Just contact us through GitHub
+(https://github.com/magpiemodel) or by mail (magpie@pik-potsdam.de) if you have
+found and/or fixed a bug, developed a new model feature, have ideas for further
+model development, suggestions for improvements or anything else. We are open to
+any kind of contribution. Our aim is to develop an open, transparent and
+meaningful model of the agricultural land use sector to get a better
+understanding of the underlying processes and possible futures. Join us doing
+so!
 
 ## DEPENDENCIES
 
@@ -166,4 +167,4 @@ Please contact magpie@pik-potsdam.de
 See file `AUTHORS`
 
 ## CHANGELOG
-See log on GitLab (https://gitlab.pik-potsdam.de/landuse/magpie)
+See log on GitHub (https://github.com/magpiemodel)
