@@ -1,7 +1,12 @@
+
+*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  Contact: magpie@pik-potsdam.de
+* get the scenario GDP & Populaiton data for iso countries
+
 im_physical_inactivity(t,iso,sex,age_group) = f09_physical_inactivity(t,iso,"%c09_gdp_scenario%",sex,age_group);
 im_demography(t,iso,sex,age_group) = f09_demography(t,iso,"%c09_gdp_scenario%",sex,age_group)+0.000001;
 
-* get the scenario GDP & Populaiton data for iso countries
 i09_gdp_ppp_iso(t,iso) = f09_gdp_ppp_iso(t,iso,"%c09_gdp_scenario%");
 i09_gdp_mer_iso(t,iso) = f09_gdp_mer_iso(t,iso,"%c09_gdp_scenario%");
 im_pop_iso(t,iso) = f09_pop_iso(t,iso,"%c09_pop_scenario%");
