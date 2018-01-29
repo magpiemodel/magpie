@@ -1,8 +1,8 @@
-# (C) 2008-2017 Potsdam Institute for Climate Impact Research (PIK),
-# authors, and contributors see AUTHORS file
-# This file is part of MAgPIE and licensed under GNU AGPL Version 3
-# or later. See LICENSE file or go to http://www.gnu.org/licenses/
-# Contact: magpie@pik-potsdam.de
+# |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+# |  authors, and contributors see AUTHORS file
+# |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+# |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+# |  Contact: magpie@pik-potsdam.de
 
 # *********************************************************************
 # ***   This script downloads model input data                      ***
@@ -159,6 +159,16 @@ copy_input <- function(x, sourcepath, low_res, move=FALSE) {
 ################################################################################
 update_sets <- function(cpr,map) {
   require(lucode)
+
+  reg1 <- unique(map$RegionCode)
+  reg2 <- names(cpr)
+   if(!all(union(reg1,reg2) %in% intersect(reg1,reg2))) {
+     stop("Inconsistent region information!",
+          "\n cpr info: ",paste(reg2,collapse=", "),
+          "\n spatial header info: ", paste(reg1,collapse=", "))
+   }
+
+
   j <- 0; cells <- NULL
   for(i in 1:length(cpr)) {
     cells <- c(cells,paste(names(cpr)[i],"_",j+1,"*",names(cpr)[i],"_",j+cpr[i],sep=""))

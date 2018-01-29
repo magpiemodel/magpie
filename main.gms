@@ -1,8 +1,8 @@
-*** (C) 2008-2017 Potsdam Institute for Climate Impact Research (PIK),
-*** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** or later. See LICENSE file or go to http://www.gnu.org/licenses/
-*** Contact: magpie@pik-potsdam.de
+*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+*** |  authors, and contributors see AUTHORS file
+*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  Contact: magpie@pik-potsdam.de
 
 $title magpie
 
@@ -99,7 +99,7 @@ $setglobal interest_rate  glo_jan16
 $setglobal tc  endo_JUN16
 $setglobal yields  biocorrect
 
-$setglobal food  aug17
+$setglobal food  intake_dez17
 $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 
@@ -114,7 +114,7 @@ $setglobal forestry  affore_vegc_dec16
 $setglobal urban  static
 $setglobal natveg  dynamic_mai17
 
-$setglobal factor_costs  mixed_feb17
+$setglobal factor_costs  fixed_per_ton_nov16
 $setglobal landconversion  gdp_scaled_jun13
 
 $setglobal transport  gtap_nov12

@@ -1,13 +1,13 @@
-*** (C) 2008-2017 Potsdam Institute for Climate Impact Research (PIK),
-*** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** or later. See LICENSE file or go to http://www.gnu.org/licenses/
-*** Contact: magpie@pik-potsdam.de
+*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+*** |  authors, and contributors see AUTHORS file
+*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  Contact: magpie@pik-potsdam.de
 
 
 * ASSUMPTION:lossrate of 15% per year
 * resulting in 44% in 5 years, 80% in 10 years and 96% in 20 years
-i59_lossrate(t)=0.85**m_yeardiff(t);
+i59_lossrate(t)=1-0.85**m_yeardiff(t);
 
 i59_tillage_share(i,tillage59)=0;
 i59_tillage_share(i,"full_tillage")=1;
