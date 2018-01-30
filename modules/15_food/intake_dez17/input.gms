@@ -32,7 +32,7 @@ $offdelim;
 
 table f15_intake_standardized_pc_iso(t_all,iso,pop_scen15)  Intake requirements of a standardized weight population dependent on dempgraphic structure (kcal per captia per day)
 $ondelim
-$include "./modules/15_food/input/f15_intake_standardized_pc_iso.csv"
+$include "./modules/15_food/input/f15_intake_standardized_pc_bodyweight_iso.csv"
 $offdelim;
 
 
