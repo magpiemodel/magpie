@@ -6,4 +6,6 @@
 
 * ### nl_fix ###
 
-vm_yld.fx(j,kve,w) = sum(ct,i14_yields(ct,j,kve,w))*sum(cell(i,j),vm_tau.l(i)/fm_tau1995(i));
+vm_yld.fx(j,kcr,w) = sum(ct,i14_yields(ct,j,kcr,w))*sum(cell(i,j),vm_tau.l(i)/fm_tau1995(i));
+vm_yld.fx(j,"pasture",w) = sum(ct,i14_yields(ct,j,"pasture",w))*((1-s14_yld_past_switch) + s14_yld_past_switch*sum(cell(i,j),vm_tau.l(i)/fm_tau1995(i)));
+
