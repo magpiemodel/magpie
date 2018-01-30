@@ -9,5 +9,8 @@
 $Ifi "%phase%" == "sets" $include "./modules/62_material/exo_flexreg_apr16/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/62_material/exo_flexreg_apr16/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/62_material/exo_flexreg_apr16/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/62_material/exo_flexreg_apr16/equations.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/62_material/exo_flexreg_apr16/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/62_material/exo_flexreg_apr16/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/62_material/exo_flexreg_apr16/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

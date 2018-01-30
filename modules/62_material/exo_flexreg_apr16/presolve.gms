@@ -4,4 +4,9 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-pm_dem_material(t,i,kall) = f62_dem_material_total(t,i,"%c62_material_scenario%")* f62_dem_material_structure(t,i,kall);
+
+if (sum(sameas(t_past,t),1) = 1,
+  s62_historical=1;
+else
+ s62_historical=0;
+);
