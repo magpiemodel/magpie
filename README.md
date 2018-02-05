@@ -133,7 +133,7 @@ how it can be installed). If not all requirements can be fulfilled by the new
 dependency this case should be discussed with the model maintainer
 (magpie@pik-potsdam.de) to find a good solution for it.
 
-# Input Data
+## INPUT DATA
 
 In order to allow other researchers to reproduce and use work done with MAgPIE
 one needs to make sure that all components necessary to perform a run can be
