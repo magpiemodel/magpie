@@ -48,7 +48,6 @@ in the official main repository at https://github.com/magpiemodel add a suffix
 to the name to allow distinguishing versions (format **MAgPIE-suffix**).
 
 ## HOW TO INSTALL
-
 MAgPIE requires *GAMS* (https://www.gams.com/) including licenses for the
 solvers *CONOPT* and *CPLEX* for its core calculations. Please make sure that
 the GAMS installation path is added to the PATH variable of the system.
@@ -112,7 +111,6 @@ understanding of the underlying processes and possible futures. Join us doing
 so!
 
 ## DEPENDENCIES
-
 Model dependencies **must be publicly available** and should be Open Source.
 Development aim is to rather minimize than expand dependencies on non-free
 and/or non open source software. That means that besides currently existing
