@@ -40,11 +40,11 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
     stop(paste0("Results folder ",cfg$results_folder,
                 " could not be created because is already exists."))
   }
-  # If report and scenname are supplied the data of this scenario in the report
-  # will be converted to MAgPIE input
+  # If report and scenname are available the data of this scenario in the report
+  # will be converted to MAgPIE input, saved to the respective input folders
+  # and used as input by the model
   if (!is.null(report) && !is.null(sceninreport)) {
     getReportData(report, sceninreport, LU_pricing)
-    cfg$gms$bioenergy <- "standard"
     cfg <- lucode::setScenario(cfg,"coupling")
   }
 
