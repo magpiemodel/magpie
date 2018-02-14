@@ -25,18 +25,30 @@ source("scripts/indc/start_indc.R")
 start_indc_preprocessing(cfg, policyregions="iso")
 
 #start MAgPIE run
-cfg$results_folder <- paste0("output/:title:_",gsub(".","_",indc,fixed=TRUE))
-cfg$gms$c_timesteps <- "5year_ge"
+cfg$gms$c_timesteps <- 11
 
 cfg$title <- "SSP2_BASE"
 cfg <- setScenario(cfg,c("SSP2","BASE"))
 start_run(cfg,codeCheck=FALSE)
 
+if(cfg$force_download == TRUE) cfg$force_download <- FALSE
+
+cfg$recalc_indc <- "ifneeded"
 
 cfg$title <- "SSP2_NPI"
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 start_run(cfg,codeCheck=FALSE)
 
+cfg$recalc_indc <- FALSE
+
 cfg$title <- "SSP2_INDC"
 cfg <- setScenario(cfg,c("SSP2","INDC"))
+start_run(cfg,codeCheck=FALSE)
+
+# china 1995 test
+
+cfg$recalc_indc <- TRUE
+
+cfg$title <- "SSP2_NPI_chn_ad_1995"
+cfg <- setScenario(cfg,c("SSP2","NPI"))
 start_run(cfg,codeCheck=FALSE)
