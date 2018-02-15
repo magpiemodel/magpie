@@ -44,7 +44,6 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
   # will be converted to MAgPIE input
   if (!is.null(report) && !is.null(sceninreport)) {
     getReportData(report, sceninreport, LU_pricing)
-    cfg$gms$bioenergy <- "standard"
     cfg <- lucode::setScenario(cfg,"coupling")
   }
 
