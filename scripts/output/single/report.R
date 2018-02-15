@@ -17,10 +17,10 @@ if(!exists("source_include")) {
 
 load(paste0(outputdir, "/config.Rdata"))
 gdx	<- path(outputdir,"fulldata.gdx")
-mif <- paste0(outputdir, "/report_", cfg$title, ".mif")
+mif <- paste0(outputdir, "/report.mif")
 ###############################################################################
 
 
-report <- getReport(gdx)
+report <- getReport(gdx,scenario = cfg$title)
 write.report2(report, file=mif)
 
