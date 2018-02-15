@@ -66,7 +66,7 @@ get_info <- function(file, grep_expression, sep, pattern="", replacement=""){
 
 ## calculates input for MAgPIE NPI and INDC runs based on MAgPIE BAU runs and NPI documents
 calc_NPI_INDC <- function(base_run="base_run" # base run name in the INDC folder
-                         ,policyregions="bra" # column with regions for policy definition in country2cell.rda
+                         ,policyregions="iso" # column with regions for policy definition in country2cell.rda
                          ){
 
   require(lucode)
@@ -84,9 +84,8 @@ calc_NPI_INDC <- function(base_run="base_run" # base run name in the INDC folder
   ##############################################################################
 
   gdx <- path(base_run,"fulldata.gdx")
-  res <- get_info(paste0(base_run,"/info.txt"),"^\\* Output ?resolution:",": ")
 
-  #read in land cover (stock) from BAU
+  #read in cellular land cover (stock) from BAU
   magpie_bau_land <- read.magpie(paste0(base_run,"/cell.land_0.5.mz"))[,-1,]
   getRegionList(magpie_bau_land) <-  pol_mapping
 
@@ -262,7 +261,6 @@ calc_policy <- function(policy,magpie_bau_stock,affore=FALSE,im_years,pol_mappin
     magpie_bau_flow <- calc_flows(magpie_bau_stock,im_years)
     #account only for positive flows
     magpie_bau_flow[magpie_bau_flow < 0] <- 0
-    getCells(magpie_bau_flow) <- getCells(magpie_bau_stock)
   }
 
   #calculate transition over time (as share)
