@@ -28,9 +28,17 @@ $ondelim
 $include "./modules/09_drivers/input/f09_pop_iso.csv"
 $offdelim;
 
-
 table f09_development_state(t_all,i,gdp_scen09)  state of developement (function of GDP) as share in low middle and high income
 $ondelim
 $include "./modules/09_drivers/input/f09_development_state.cs3"
 $offdelim;
 
+table f09_demography(t_all,iso,pop_scen09,sex,age_group) Population (mio people)
+$ondelim
+$include "./modules/09_drivers/input/f09_demography.cs3"
+$offdelim;
+
+table f09_physical_inactivity(t_all,iso,gdp_scen09,sex,age_group) Share of population which is physically inacative (people per people)
+$ondelim
+$include "./modules/09_drivers/input/f09_physical_inactivity.cs3"
+$offdelim;

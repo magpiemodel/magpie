@@ -1,9 +1,12 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
+
 *** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 * get the scenario GDP & Populaiton data for iso countries
+
+im_physical_inactivity(t,iso,sex,age_group) = f09_physical_inactivity(t,iso,"%c09_gdp_scenario%",sex,age_group);
+im_demography(t,iso,sex,age_group) = f09_demography(t,iso,"%c09_gdp_scenario%",sex,age_group)+0.000001;
+
 i09_gdp_ppp_iso(t,iso) = f09_gdp_ppp_iso(t,iso,"%c09_gdp_scenario%");
 i09_gdp_mer_iso(t,iso) = f09_gdp_mer_iso(t,iso,"%c09_gdp_scenario%");
 im_pop_iso(t,iso) = f09_pop_iso(t,iso,"%c09_pop_scenario%");
@@ -40,4 +43,3 @@ im_development_state(t,i) = f09_development_state(t,i,"%c09_gdp_scenario%");
 im_gdp_pc_ppp_iso(t,iso)=0;
 im_gdp_pc_ppp_iso(t,iso)$(i09_gdp_ppp_iso(t,iso)*im_pop_iso(t,iso)>0)  = i09_gdp_ppp_iso(t,iso)/im_pop_iso(t,iso);
 im_gdp_pc_ppp_iso(t,iso)$(im_gdp_pc_ppp_iso(t,iso)=0) = sum(i_to_iso(i,iso), im_gdp_pc_ppp(t,i));
-

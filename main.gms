@@ -125,7 +125,7 @@ $setglobal climate  static
 
 $setglobal nr_soil_budget  exoeff_aug16
 $setglobal nitrogen  ipcc2006_sep16
-$setglobal carbon  normal_sep16
+$setglobal carbon  normal_dec17
 $setglobal methane  ipcc2006_flexreg_apr16
 $setglobal phosphorus  off
 $setglobal awms  ipcc2006_aug16

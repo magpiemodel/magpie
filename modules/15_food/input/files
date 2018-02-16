@@ -1,8 +1,3 @@
-| (C) 2008-2017 Potsdam Institute for Climate Impact Research (PIK),
-| authors, and contributors see AUTHORS file
-| This file is part of MAgPIE and licensed under GNU AGPL Version 3
-| or later. See LICENSE file or go to http://www.gnu.org/licenses/
-| Contact: magpie@pik-potsdam.de
 * list of files that are required here
 f15_kcal_pc_iso.csv
 f15_kcal_balanceflow_fadeout.csv
@@ -11,4 +6,7 @@ f15_household_balanceflow.cs3
 f15_nutrition_attributes.cs3
 f15_prices_index.csv
 f15_ruminant_fadeout.csv
-f15_intake_standardized_pc_iso.csv
+f15_intake_standardized_pc_bodyweight_iso.csv
+f15_intake_standardized_pc_BMI_iso.csv
+f15_schofield_parameters.cs3
+f15_bodyheight_historical.cs3

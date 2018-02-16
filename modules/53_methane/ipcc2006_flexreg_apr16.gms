@@ -10,7 +10,6 @@ $Ifi "%phase%" == "sets" $include "./modules/53_methane/ipcc2006_flexreg_apr16/s
 $Ifi "%phase%" == "declarations" $include "./modules/53_methane/ipcc2006_flexreg_apr16/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/53_methane/ipcc2006_flexreg_apr16/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/53_methane/ipcc2006_flexreg_apr16/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/53_methane/ipcc2006_flexreg_apr16/scaling.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/53_methane/ipcc2006_flexreg_apr16/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/53_methane/ipcc2006_flexreg_apr16/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/53_methane/ipcc2006_flexreg_apr16/postsolve.gms"
