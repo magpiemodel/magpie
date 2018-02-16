@@ -5,8 +5,15 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
+* Checking, if the corrected soil carbon for topsoil (0-30cm) is used in lpj_carbon_stocks
+
+if((sum(j, sum(land, pm_land_start(j,land)) * fm_carbon_density("y1995",j,"other","soilc"))) > 1200000,
+  abort "SOM-Module can just be used with soil carbon stock for topsoil(0-30cm). Switch to appropriate ISIMIP-data. Stop run.";
+);
+
 * ASSUMPTION:lossrate of 15% per year
 * resulting in 44% in 5 years, 80% in 10 years and 96% in 20 years
+
 i59_lossrate(t)=1-0.85**m_yeardiff(t);
 
 i59_tillage_share(i,tillage59)=0;
