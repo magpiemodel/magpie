@@ -8,15 +8,17 @@
 q59_som_target_cropland(j2) ..
               v59_som_target(j2,"cropland")
               =e=
-              sum((kcr,w), vm_area(j2,kcr,w) * i59_cratio(j2,kcr)) * sum(ct,fm_carbon_density(ct,j2,"other","soilc"))
+              sum((kcr,w), vm_area(j2,kcr,w) * i59_cratio(j2,kcr)) * sum(ct,fm_topsoilc_density(ct,j2))
               ;
 
 
 q59_som_target_noncropland(j2) ..
               v59_som_target(j2,"noncropland")
               =e=
-              sum((noncropland59),vm_land(j2,noncropland59)*sum(ct,fm_carbon_density(ct,j2,noncropland59,"soilc")));
+              sum((noncropland59), vm_land(j2,noncropland59)) * sum(ct,fm_topsoilc_density(ct,j2))
+			  ;
 
+			  
 q59_som_transfer_to_cropland(j2) ..
               v59_som_transfer_to_cropland(j2)
               =e=
