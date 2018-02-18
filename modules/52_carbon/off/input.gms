@@ -16,10 +16,3 @@ $offdelim
 $if "%c52_carbon_scenario%" == "nocc" fm_carbon_density(t_all,j,land,c_pools) = fm_carbon_density("y1995",j,land,c_pools);
 m_fillmissingyears(fm_carbon_density,"j,land,c_pools");
 
-parameter fm_topsoilc_density(t_all,j) LPJ topsoil carbon density for natural vegetation (tC per ha)
-$ondelim
-$include "./modules/52_carbon/input/lpj_carbon_topsoil.cs3"
-$offdelim
-;
-$if "%c52_carbon_scenario%" == "nocc" fm_topsoilc_density(t_all,j) = fm_topsoilc_density("y1995",j);
-m_fillmissingyears(fm_topsoilc_density,"j");

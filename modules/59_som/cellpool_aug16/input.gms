@@ -28,3 +28,20 @@ $ondelim
 $include "./modules/59_som/cellpool_aug16/input/f59_som_initialisation_pools.cs3"
 $offdelim
 ;
+
+$setglobal c59_som_scenario  nocc
+*   options:   cc  (climate change)
+*             nocc (no climate change)
+
+parameters f59_topsoilc_density(t_all,j) LPJ topsoil carbon density for natural vegetation (tC per ha)
+/
+$ondelim
+$include "./modules/52_carbon/input/lpj_carbon_topsoil.cs3"
+$offdelim
+/
+;
+$if "%c59_som_scenario%" == "nocc" f59_topsoilc_density(t_all,j) = f59_topsoilc_density("y1995",j);
+m_fillmissingyears(f59_topsoilc_density,"j");
+
+
+
