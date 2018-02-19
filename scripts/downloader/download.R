@@ -173,6 +173,10 @@ update_info <- function(datasets, low_res, high_res, cpr,
                   paste('Repository:',datasets[dataset,"repo"]))
   }
 
+  warnings <- attr(datasets,"warnings")
+  if(!is.null(warnings)) {
+    warnings <- capture.output(warnings)
+  }
 
   content <- c(useddata,
                '',
@@ -191,7 +195,7 @@ update_info <- function(datasets, low_res, high_res, cpr,
                '',
                info,
                '',
-               attr(datasets,"warnings"),
+               warnings,
                '',
                paste('Last modification (input data):',date()),
                '')
