@@ -59,6 +59,14 @@ $batinclude "./modules/include.gms" nl_relax
 
   solve magpie USING nlp MINIMIZING vm_cost_glo;
 
+* if solve stopped with an error, try it again with conopt3
+  if((magpie.modelstat = 13),
+    display "WARNING: Modelstat 13 | retry with CONOPT3!";
+    option nlp = conopt;
+    solve magpie USING nlp MINIMIZING vm_cost_glo;
+    option nlp = conopt4;
+  );
+
   p80_modelstat(t) = magpie.modelstat;
 
   display "s80_obj_linear";
