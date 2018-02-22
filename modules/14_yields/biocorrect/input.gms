@@ -9,7 +9,7 @@ $setglobal c14_yields_scenario  nocc
 *             nocc (no climate change)
 
 scalars
-  s14_yld_past_switch  switch determing the effectivity of translating crop tc into pasture yield increase       / 1 /
+  s14_yld_past_switch  switch determing the effectivity of translating crop tc into pasture yield increase       / 0 /
 ;
 
 ******* Calibration factor
