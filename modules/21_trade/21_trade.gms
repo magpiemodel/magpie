@@ -9,4 +9,5 @@
 $Ifi "%trade%" == "free_apr16" $include "./modules/21_trade/free_apr16.gms"
 $Ifi "%trade%" == "off" $include "./modules/21_trade/off.gms"
 $Ifi "%trade%" == "selfsuff_flexreg" $include "./modules/21_trade/selfsuff_flexreg.gms"
+$Ifi "%trade%" == "selfsuff_flexreg_cost" $include "./modules/21_trade/selfsuff_flexreg_cost.gms"  
 *###################### R SECTION END (MODULETYPES) ############################
