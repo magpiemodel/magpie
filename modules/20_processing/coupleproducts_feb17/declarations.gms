@@ -1,15 +1,14 @@
-*** (C) 2008-2017 Potsdam Institute for Climate Impact Research (PIK),
-*** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** or later. See LICENSE file or go to http://www.gnu.org/licenses/
-*** Contact: magpie@pik-potsdam.de
+*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+*** |  authors, and contributors see AUTHORS file
+*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  Contact: magpie@pik-potsdam.de
 
 
 
 positive variables
   vm_dem_processing(i,kall)          demand for processing use
   v20_dem_processing(i,processing_subst20,kpr) demand for processing use by process
-  vm_processing_costs(i)            costs of food processing
   v20_secondary_substitutes(i,ksd,kpr) substitutes for inferior secondary products (Mt DM)
   vm_secondary_overproduction(i,kall,kpr) overproduction of secondary couple products (Mt Dm)
   vm_cost_processing(i)            processing costs (Million USD05)
@@ -29,7 +28,6 @@ equations
 parameters
  ov_dem_processing(t,i,kall,type)                         demand for processing use
  ov20_dem_processing(t,i,processing_subst20,kpr,type)     demand for processing use by process
- ov_processing_costs(t,i,type)                            costs of food processing
  ov20_secondary_substitutes(t,i,ksd,kpr,type)             substitutes for inferior secondary products (Mt DM)
  ov_secondary_overproduction(t,i,kall,kpr,type)           overproduction of secondary couple products (Mt Dm)
  ov_cost_processing(t,i,type)                             processing costs (Million USD05)

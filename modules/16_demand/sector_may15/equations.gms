@@ -1,8 +1,8 @@
-*** (C) 2008-2017 Potsdam Institute for Climate Impact Research (PIK),
-*** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** or later. See LICENSE file or go to http://www.gnu.org/licenses/
-*** Contact: magpie@pik-potsdam.de
+*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+*** |  authors, and contributors see AUTHORS file
+*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  Contact: magpie@pik-potsdam.de
 
 
 
@@ -12,7 +12,7 @@ q16_supply_crops(i2,kcr) ..
                           vm_dem_food(i2,kcr)
                           + sum(kap4, vm_dem_feed(i2,kap4,kcr))
                           + vm_dem_processing(i2,kcr)
-                          + sum(ct, pm_dem_material(ct,i2,kcr))
+                          + vm_dem_material(i2,kcr)
                           + vm_dem_bioen(i2,kcr)
                           + vm_dem_seed(i2,kcr)
                           + v16_dem_waste(i2,kcr)
@@ -25,7 +25,7 @@ q16_supply_livestock(i2,kap) ..
                           vm_dem_food(i2,kap)
                           + sum(kap4, vm_dem_feed(i2,kap4,kap))
                           + v16_dem_waste(i2,kap)
-                          + sum(ct, pm_dem_material(ct,i2,kap))
+                          + vm_dem_material(i2,kap)
                           + sum(ct, f16_domestic_balanceflow(ct,i2,kap))
                           ;
 
@@ -37,7 +37,7 @@ q16_supply_secondary(i2,ksd) ..
                           + sum(kap4, vm_dem_feed(i2,kap4,ksd))
                           + vm_dem_processing(i2,ksd)
                           + v16_dem_waste(i2,ksd)
-                          + sum(ct, pm_dem_material(ct,i2,ksd))
+                          + vm_dem_material(i2,ksd)
                           + vm_dem_bioen(i2,ksd)
                           + sum(ct, f16_domestic_balanceflow(ct,i2,ksd))
                           ;
@@ -46,7 +46,7 @@ q16_supply_residues(i2,kres)..
                           vm_supply(i2,kres)
                           =e=
                           sum(kap4, vm_dem_feed(i2,kap4,kres))
-                          + sum(ct, pm_dem_material(ct,i2,kres))
+                          + vm_dem_material(i2,kres)
                           + vm_dem_bioen(i2,kres)
                           + v16_dem_waste(i2,kres)
                           + sum(ct, f16_domestic_balanceflow(ct,i2,kres))

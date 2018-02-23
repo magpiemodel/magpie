@@ -1,8 +1,8 @@
-# (C) 2008-2017 Potsdam Institute for Climate Impact Research (PIK),
-# authors, and contributors see AUTHORS file
-# This file is part of MAgPIE and licensed under GNU AGPL Version 3
-# or later. See LICENSE file or go to http://www.gnu.org/licenses/
-# Contact: magpie@pik-potsdam.de
+# |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+# |  authors, and contributors see AUTHORS file
+# |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+# |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+# |  Contact: magpie@pik-potsdam.de
 
 start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
                       report=NULL,sceninreport=NULL,LU_pricing="y2010") {
@@ -28,7 +28,8 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
   if(!is.null(scenario)) cfg <- lucode::setScenario(cfg,scenario)
   cfg <- lucode::check_config(cfg)
 
-  date <- format(Sys.time(), "_%Y-%m-%d_%H.%M.%S")
+  rundate <- Sys.time()
+  date <- format(rundate, "_%Y-%m-%d_%H.%M.%S")
   cfg$results_folder <- gsub(":date:", date, cfg$results_folder, fixed=TRUE)
   cfg$results_folder <- gsub(":title:", cfg$title, cfg$results_folder, fixed=TRUE)
 
@@ -39,11 +40,11 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
     stop(paste0("Results folder ",cfg$results_folder,
                 " could not be created because is already exists."))
   }
-  # If report and scenname are supplied the data of this scenario in the report
-  # will be converted to MAgPIE input
+  # If report and scenname are available the data of this scenario in the report
+  # will be converted to MAgPIE input, saved to the respective input folders
+  # and used as input by the model
   if (!is.null(report) && !is.null(sceninreport)) {
     getReportData(report, sceninreport, LU_pricing)
-    cfg$gms$bioenergy <- "standard"
     cfg <- lucode::setScenario(cfg,"coupling")
   }
 
@@ -98,14 +99,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
     archive_download(files=cfg$input,
                      repositories=cfg$repositories,
                      modelfolder=".",
-                     move=!cfg$debug,
-                     username=cfg$username,
-                     ssh_private_keyfile=cfg$ssh_private_keyfile,
-                     ssh_public_keyfile=cfg$ssh_public_keyfile,
                      debug=cfg$debug)
-    if(cfg$recalibrate=="ifneeded") cfg$recalibrate <- TRUE
-  } else {
-    if(cfg$recalibrate=="ifneeded") cfg$recalibrate <- FALSE
   }
 
   if(cfg$recalc_indc=="ifneeded") {
@@ -147,9 +141,24 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
                       last.warning = attr(codeCheck,"last.warning")))
   save(validation, file= cfg$val_workspace, compress="xz")
 
+  lucode::runstatistics(file = paste0(cfg$results_folder,"/runstatistics.rda"),
+                        user = Sys.info()[["user"]],
+                        date = rundate,
+                        version_management = "git",
+                        revision = try(system("git rev-parse HEAD", intern=TRUE), silent=TRUE),
+                        revision_date = try(as.POSIXct(system("git show -s --format=%ci", intern=TRUE), silent=TRUE)),
+                        status = try(system("git status", intern=TRUE), silent=TRUE))
+
 
   ##############################################################################
 
+  # Yield calibration
+  calib_file <- "modules/14_yields/input/f14_yld_calib.csv"
+  if(!file.exists(calib_file)) stop("Yield calibration file missing!")
+  if(cfg$recalibrate=="ifneeded") {
+    # recalibrate if all calibration factors are 1, otherwise don't
+    cfg$recalibrate <- all(magclass::read.magpie(calib_file)==1)
+  }
   if(cfg$recalibrate){
     cat("Starting calibration factor calculation!\n")
     source("scripts/calibration/calc_calib.R")
@@ -157,7 +166,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
                      calib_accuracy = cfg$calib_accuracy,
                      calibrate_pasture = (cfg$gms$past!="static"),
                      damping_factor = cfg$damping_factor,
-                     calib_file = "modules/14_yields/input/f14_yld_calib.csv",
+                     calib_file = calib_file,
                      data_workspace = cfg$val_workspace,
                      logoption = 3)
     file.copy("calibration_results.pdf", cfg$results_folder, overwrite=TRUE)
@@ -218,7 +227,7 @@ getReportData <- function(rep,scen,LU_pricing="y2010") {
     notGLO <- getRegions(mag)[!(getRegions(mag)=="GLO")]
     out <- mag[,,"Primary Energy Production|Biomass|Energy Crops (EJ/yr)"]*10^3
     dimnames(out)[[3]] <- NULL
-    write.magpie(out[notGLO,,],"./modules/60_bioenergy/standard/input/reg.2ndgen_bioenergy_demand.csv")
+    write.magpie(out[notGLO,,],"./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
   }
   .emission_prices <- function(mag){
     notGLO <- getRegions(mag)[!(getRegions(mag)=="GLO")]
@@ -228,20 +237,23 @@ getReportData <- function(rep,scen,LU_pricing="y2010") {
 
     dimnames(out_c)[[3]] <- "co2_c"
 
-    out_n2o <- mag[,,"Price|N2O (US$2005/t N2O)"]*44/28*0.967 # US$2005/tN2O -> US$2004/tN
-    dimnames(out_n2o)[[3]] <- "n2o_n"
+    out_n2o_direct <- mag[,,"Price|N2O (US$2005/t N2O)"]*44/28*0.967 # US$2005/tN2O -> US$2004/tN
+    dimnames(out_n2o_direct)[[3]] <- "n2o_n_direct"
+
+    out_n2o_indirect <- mag[,,"Price|N2O (US$2005/t N2O)"]*44/28*0.967 # US$2005/tN2O -> US$2004/tN
+    dimnames(out_n2o_indirect)[[3]] <- "n2o_n_indirect"
 
     out_ch4 <- mag[,,"Price|CH4 (US$2005/t CH4)"]*0.967 # US$2005/tCH4 -> US$2004/tCH4
     dimnames(out_ch4)[[3]] <- "ch4"
 
-    out <- mbind(out_n2o,out_ch4,out_c)
-    write.magpie(out[notGLO,,],"./input/regional/ghg_prices.cs3")
+    out <- mbind(out_n2o_direct,out_n2o_indirect,out_ch4,out_c)
+    write.magpie(out[notGLO,,],"./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3")
   }
 
   if (length(scen)!=1) stop("getReportData: 'scen' does not contain exactly one scenario.")
   if (length(intersect(scen,names(rep)))!=1) stop("getReportData: 'scen not contained in 'rep'.")
 
-  files <- c("./input/regional/ghg_prices.cs3","./modules/60_bioenergy/standard/input/reg.2ndgen_bioenergy_demand.csv")
+  files <- c("./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3","./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
   years <- 1990+5*(1:32)
   for(f in files) suppressWarnings(unlink(f))
   mag <- rep[[scen]][["MAgPIE"]]
