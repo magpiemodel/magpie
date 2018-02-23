@@ -1,3 +1,8 @@
+*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+*** |  authors, and contributors see AUTHORS file
+*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  Contact: magpie@pik-potsdam.de
 *****Costs**********************************************************************
 q32_cost_fore_ac(i2) .. vm_cost_fore(i2) =e=
                                    sum((cell(i2,j2),land32,fcosts32)$(not sameas(land32,"old")), v32_land(j2,land32)*f32_fac_req_ha(i2,fcosts32));

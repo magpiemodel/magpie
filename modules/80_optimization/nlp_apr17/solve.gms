@@ -1,3 +1,8 @@
+*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+*** |  authors, and contributors see AUTHORS file
+*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  Contact: magpie@pik-potsdam.de
 **************start solve loop**************
 s80_counter = 0;
 p80_modelstat(t) = 1;
@@ -5,6 +10,14 @@ p80_modelstat(t) = 1;
 repeat(
 
   solve magpie USING nlp MINIMIZING vm_cost_glo;
+
+  * if solve stopped with an error, try it again with conopt3
+    if((magpie.modelstat = 13),
+      display "WARNING: Modelstat 13 | retry with CONOPT3!";
+      option nlp = conopt;
+      solve magpie USING nlp MINIMIZING vm_cost_glo;
+      option nlp = conopt4;
+    );
 
   p80_modelstat(t) = magpie.modelstat;
 

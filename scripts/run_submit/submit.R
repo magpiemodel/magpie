@@ -1,11 +1,12 @@
-# (C) 2008-2017 Potsdam Institute for Climate Impact Research (PIK),
-# authors, and contributors see AUTHORS file
-# This file is part of MAgPIE and licensed under GNU AGPL Version 3
-# or later. See LICENSE file or go to http://www.gnu.org/licenses/
-# Contact: magpie@pik-potsdam.de
+# |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+# |  authors, and contributors see AUTHORS file
+# |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+# |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+# |  Contact: magpie@pik-potsdam.de
 
 library(magclass)
 library(lucode)
+library(magpie4)
 
 options(error=function()traceback(2))
 
@@ -22,8 +23,14 @@ cat("\nMAgPIE run finished!\n")
 # write the config file in the output_folder: config.log
 write(capture.output(cfg), file="config.log")
 
-runfolder <- getwd()
+lucode::runstatistics(file       = "runstatistics.rda",
+                      modelstat  = magpie4::modelstat("fulldata.gdx"),
+                      config     = cfg,
+                      runtime    = gams_runtime,
+                      setup_info = lucode::setup_info(),
+                      submit     = cfg$runstatistics)
 
+runfolder <- getwd()
 setwd(maindir)
 
 #Set value source_include so that loaded scripts know, that they are
