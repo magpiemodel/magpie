@@ -80,7 +80,7 @@ copy_input <- function(x, sourcepath, low_res, move=FALSE) {
         next
       }
     }
-    copy.magpie(inputpath,outputpath)
+    copy.magpie(inputpath, outputpath, round=8)
     if(move & !(i != length(x) &  (x[i] %in% x[i+1:length(x)]))) {
         file.remove(inputpath)
     }
