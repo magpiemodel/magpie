@@ -1,7 +1,27 @@
+## Functions for the policy targets calculations
+
+get_info <- function(file, grep_expression, sep, pattern="", replacement=""){
+  if(!file.exists(file)) return("#MISSING#")
+  file <- readLines(file, warn=FALSE)
+  tmp <- grep(grep_expression, file, value=TRUE)
+  tmp <- strsplit(tmp, sep)
+  tmp <- sapply(tmp, "[[", 2)
+  tmp <- gsub(pattern, replacement ,tmp)
+  if(all(!is.na(as.logical(tmp)))) return(as.vector(sapply(tmp, as.logical)))
+  if (all(!(regexpr("[a-zA-Z]",tmp) > 0))){
+    tmp <- as.numeric(tmp)
+  }
+  return(tmp)
+}
+
 ## The main function that starts the npi-indc preprocessing
 start_indc_preprocessing <- function(cfg="config/default.cfg",base_run_dir="scripts/indc/base_run",maindir=".",renew_base=FALSE, policyregions="iso"){
 
   require(lucode)
+  require(magclass)
+  require(gdx)
+  require(luscale)
+  
   source(path(maindir,"scripts/start_functions.R"))
 
   if(is.character(cfg)) {
@@ -16,7 +36,7 @@ start_indc_preprocessing <- function(cfg="config/default.cfg",base_run_dir="scri
   } else if(dir.exists(base_run_dir) & !renew_base){
     cat("Trying to use existing base_run_dir ",base_run_dir, " for NPI/INDC recalculation!\n", sep="")
     # check for the existing files necessary for the calculation
-    if(!file.exists(paste0(base_run_dir,"/fulldata.gdx"))) {
+    if(!file.exists(path(base_run_dir,"fulldata.gdx"))) {
       cat(base_run_dir,"/fulldata.gdx does not exist. Deleting and renewing ",base_run_dir,"\n", sep="")
       unlink(base_run_dir,recursive = TRUE)
     } else if(!file.exists(path(base_run_dir,"info.txt"))){
@@ -41,6 +61,24 @@ start_indc_preprocessing <- function(cfg="config/default.cfg",base_run_dir="scri
 		start_run(cfg, codeCheck=TRUE)
     cat("New base_run executed!\n")
   }
+  
+  # write files from the base_run to be stored in the archives 
+  if(file.exists(path(base_run_dir,"fulldata.gdx")) & 
+     file.exists(path(base_run_dir,"cell.land_0.5.mz"))){
+    
+    gdx <- path(base_run_dir,"fulldata.gdx")
+    res <- get_info(path(base_run_dir,"info.txt"),"^\\* Output ?resolution:",": ")
+    
+    #read in cellular land cover (stock) from BAU
+    magpie_bau_land <- read.magpie(path(base_run_dir,"cell.land_0.5.mz"))[,-1,]
+    write.magpie(magpie_bau_land, path(maindir,"scripts/indc/policies/magpie_bau_land.mz"))
+    
+    #calc forest carbon stocks
+    magpie_bau_cstock <- dimSums(readGDX(gdx,"ov_carbon_stock",select=list(type="level"))[,,c("primforest","secdforest")],dim=3)
+    magpie_bau_cstock <- speed_aggregate(magpie_bau_cstock, 
+                                         rel=paste0(base_run_dir,"/0.5-to-",res,"_area_weighted_mean.spam"))
+    write.magpie(magpie_bau_cstock, path(maindir,"scripts/indc/policies/magpie_bau_cstock.mz"))
+  }
 
   setwd("scripts/indc")
   cat("Running calc_NPI_INDC.R\n")
@@ -50,23 +88,10 @@ start_indc_preprocessing <- function(cfg="config/default.cfg",base_run_dir="scri
   setwd("../..")
 }
 
-get_info <- function(file, grep_expression, sep, pattern="", replacement=""){
-  if(!file.exists(file)) return("#MISSING#")
-  file <- readLines(file, warn=FALSE)
-  tmp <- grep(grep_expression, file, value=TRUE)
-  tmp <- strsplit(tmp, sep)
-  tmp <- sapply(tmp, "[[", 2)
-  tmp <- gsub(pattern, replacement ,tmp)
-  if(all(!is.na(as.logical(tmp)))) return(as.vector(sapply(tmp, as.logical)))
-  if (all(!(regexpr("[a-zA-Z]",tmp) > 0))){
-    tmp <- as.numeric(tmp)
-  }
-  return(tmp)
-}
-
-## calculates input for MAgPIE NPI and INDC runs based on MAgPIE BAU runs and NPI documents
-calc_NPI_INDC <- function(base_run="base_run" # base run name in the INDC folder
-                         ,policyregions="iso" # column with regions for policy definition in country2cell.rda
+## calculates policy targets as input for MAgPIE NPI and NDC runs based on 
+## MAgPIE BAU pre-calculated files in the /policies/. folder
+## the function runs in the scripts/policy/. directory
+calc_NPI_INDC <- function(policyregions="iso" # column with regions for policy definition in country2cell.rda
                          ){
 
   require(lucode)
@@ -74,35 +99,31 @@ calc_NPI_INDC <- function(base_run="base_run" # base run name in the INDC folder
   require(magpie4)
   require(luscale)
 
-
-
   # load the cell mapping policy
   pol_mapping <- readRDS("policies/country2cell.rds")[,policyregions]
 
   ##############################################################################
-  ##########          Information from the base_run               ##############
+  ##########          Information from the base_run files         ##############
   ##############################################################################
 
-  gdx <- path(base_run,"fulldata.gdx")
-
-  #read in cellular land cover (stock) from BAU
-  magpie_bau_land <- read.magpie(paste0(base_run,"/cell.land_0.5.mz"))[,-1,]
+  #read in cellular land cover (stock) from the archived base_run data 
+  magpie_bau_land <- read.magpie("policies/magpie_bau_land.mz")
   getRegionList(magpie_bau_land) <-  pol_mapping
 
   #calc deforestation rate (flow)
   magpie_bau_forest <- dimSums(magpie_bau_land[,,c("primforest","secdforest")],dim=3)
   getNames(magpie_bau_forest) <- "forest"
 
-  #calc forest carbon stocks
-  magpie_bau_cstock <- dimSums(readGDX(gdx,"ov_carbon_stock",select=list(type="level"))[,,c("primforest","secdforest")],dim=3)
-  magpie_bau_cstock <- speed_aggregate(magpie_bau_cstock, rel=paste0(base_run,"/0.5-to-",res,"_area_weighted_mean.spam"))
+  # read in forest carbon stocks from the archived base_run data
+  magpie_bau_cstock <- read.magpie("policies/magpie_bau_cstock.mz")
   getRegionList(magpie_bau_cstock) <-  pol_mapping
 
-
   #get Years and time periods
-  tp <- timePeriods(gdx)
+  tp <- getYears(magpie_bau_land, as.integer=TRUE)
+  t_periods <- c(1, sapply(seq_along(tp[-1]), function(i) tp[i+1] - tp[i]))
+  tpp <- setYears(as.magpie(t_periods, temporal=TRUE), paste0("y", tp))
   tmp <- new.magpie(years=seq(2035,2150,5),fill=5)
-  im_years <- mbind(tp, tmp)
+  im_years <- mbind(tpp, tmp)
 
   ##############################################################################
   ##########    Structure of policy .csv files                    ##############
@@ -119,14 +140,14 @@ calc_NPI_INDC <- function(base_run="base_run" # base run name in the INDC folder
   cat("NPI AD policy\n")
   npi_ad <- read.magpie(path("policies","npi_pol_deforest.csv"))
   npi_ad <- calc_policy(npi_ad,magpie_bau_forest,affore=FALSE,im_years=im_years,
-                        pol_mapping=pol_mapping, base_run=base_run)
+                        pol_mapping=pol_mapping)
   getNames(npi_ad) <- "npi"
 
 
   cat("INDC AD policy\n")
   indc_ad <- read.magpie(path("policies","indc_pol_deforest.csv"))
   indc_ad <- calc_policy(indc_ad,magpie_bau_forest,affore=FALSE,im_years=im_years,
-                        pol_mapping=pol_mapping, base_run=base_run)
+                        pol_mapping=pol_mapping)
   getNames(indc_ad) <- "indc"
   #Set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
   indc_ad[,which(getYears(indc_ad,as.integer=TRUE)<2015),] <- npi_ad[,which(getYears(npi_ad,as.integer=TRUE)<2015),]
@@ -146,7 +167,7 @@ calc_NPI_INDC <- function(base_run="base_run" # base run name in the INDC folder
   npi_aff <- calc_target(npi_aff,iso="BDI",magpie_bau_land,goal=0.2) #long term goal (2025) to have 20% of its geographical area under forest cover
   npi_aff <- calc_target(npi_aff,iso="CHN",magpie_bau_land,goal=0.2304) #23.04% forest coverage by 2020 --> 50 Mha afforestation is neede
   npi_aff <- calc_policy(npi_aff,magpie_bau_land,affore=TRUE,im_years=im_years,
-                        pol_mapping=pol_mapping, base_run=base_run)
+                        pol_mapping=pol_mapping)
   getNames(npi_aff) <- "npi"
 
   cat("INDC AFF policy\n")
@@ -162,7 +183,7 @@ calc_NPI_INDC <- function(base_run="base_run" # base run name in the INDC folder
   indc_aff <- calc_target(indc_aff,iso="THA",magpie_bau_land,goal=0.4)
   indc_aff <- calc_target(indc_aff,iso="VNM",magpie_bau_land,goal=0.45)
   indc_aff <- calc_policy(indc_aff,magpie_bau_land,affore=TRUE,im_years=im_years,
-                         pol_mapping=pol_mapping, base_run=base_run)
+                         pol_mapping=pol_mapping)
   getNames(indc_aff) <- "indc"
   #set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
   indc_aff[,which(getYears(indc_aff,as.integer=TRUE)<2015),] <- npi_aff[,which(getYears(npi_aff,as.integer=TRUE)<2015),]
@@ -178,13 +199,13 @@ calc_NPI_INDC <- function(base_run="base_run" # base run name in the INDC folder
   cat("NPI EMIS policy\n")
   npi_emis <- read.magpie(path("policies","npi_pol_emis.csv"))
   npi_emis <- calc_policy(npi_emis,magpie_bau_cstock,affore=FALSE,im_years=im_years,
-                        pol_mapping=pol_mapping, base_run=base_run)
+                        pol_mapping=pol_mapping)
   getNames(npi_emis) <- "npi"
 
   cat("INDC EMIS policy\n")
   indc_emis <- read.magpie(path("policies","indc_pol_emis.csv"))
   indc_emis <- calc_policy(indc_emis,magpie_bau_cstock,affore=FALSE,im_years=im_years,
-                         pol_mapping=pol_mapping, base_run=base_run)
+                         pol_mapping=pol_mapping)
   getNames(indc_emis) <- "indc"
   #set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
   indc_emis[,which(getYears(indc_emis,as.integer=TRUE)<2015),] <- npi_emis[,which(getYears(npi_emis,as.integer=TRUE)<2015),]
@@ -231,7 +252,7 @@ calc_flows <- function(stock,im_years) {
 }
 
 ### calc indc policy
-calc_policy <- function(policy,magpie_bau_stock,affore=FALSE,im_years,pol_mapping,base_run="base_run") {
+calc_policy <- function(policy,magpie_bau_stock,affore=FALSE,im_years,pol_mapping) {
 
   #extent magpie_bau_stock beyond 2030
   magpie_bau_stock_extent <- new.magpie(getCells(magpie_bau_stock),
@@ -242,6 +263,7 @@ calc_policy <- function(policy,magpie_bau_stock,affore=FALSE,im_years,pol_mappin
   rm(magpie_bau_stock_extent)
 
   #Initialize magpie_policy with 0 (country level)
+  #This is a return object of this function and contains policy targets at cluster level
   magpie_policy <- new.magpie(unique(pol_mapping),getYears(im_years),NULL,0)
 
   #only countries with a policy need constraint
@@ -265,7 +287,7 @@ calc_policy <- function(policy,magpie_bau_stock,affore=FALSE,im_years,pol_mappin
 
   #calculate transition over time (as share)
   for (i in policy_countries) {
-    cat(round(which(policy_countries == i)/length(policy_countries)*100),"%\n")
+    cat(i,round(which(policy_countries==i)/length(policy_countries)*100),"%\n")
     #get baseyear and targetyear
     baseyear <- c(policy[i,,"baseyear"]) #default 2005
     targetyear <- c(policy[i,,"targetyear"])
@@ -306,12 +328,12 @@ calc_policy <- function(policy,magpie_bau_stock,affore=FALSE,im_years,pol_mappin
     magpie_policy <- magpie_policy * magpie_ref_flow * im_years + magpie_bau_stock
   }
 
-  load(path(base_run,"/spatial_header.rda"))
+  load("../../input/spatial_header.rda")
   getCells(magpie_policy) <- spatial_header
 
-  res_out <- get_info(paste0(base_run,"/info.txt"),"^\\* Output ?resolution:",": ")
-  res_high <- get_info(paste0(base_run,"/info.txt"),"^\\* Input ?resolution:",": ")
-  spam_file <- path(base_run,paste0(res_high,"-to-",res_out,"_sum.spam"))
+  res_out <- get_info("../../input/info.txt","^\\* Output ?resolution:",": ")
+  res_high <- get_info("../../input/info.txt","^\\* Input ?resolution:",": ")
+  spam_file <- path("../../input",paste0(res_high,"-to-",res_out,"_sum.spam"))
   magpie_policy <- speed_aggregate(magpie_policy,spam_file)
 
   return(magpie_policy)
