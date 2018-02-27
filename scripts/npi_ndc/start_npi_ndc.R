@@ -155,7 +155,7 @@ calc_NPI_NDC <- function(policyregions="iso" # column with regions for policy de
   #write AD policies
   none_pol <- npi_ad; none_pol[] <- 0; getNames(none_pol) <- "none"
   ad_pol <- mbind(none_pol,npi_ad,ndc_ad)
-  write.magpie(ad_pol, "policies/ndc_ad_pol.cs3")
+  write.magpie(ad_pol, "policies/npi_ndc_ad_pol.cs3")
 
   ## END reduce deforestation
 
@@ -190,7 +190,7 @@ calc_NPI_NDC <- function(policyregions="iso" # column with regions for policy de
 
   #write AFF policies
   aff_pol <- mbind(none_pol,npi_aff,ndc_aff)
-  write.magpie(aff_pol, "policies/ndc_aff_pol.cs3")
+  write.magpie(aff_pol, "policies/npi_ndc_aff_pol.cs3")
 
   ## END afforestation
 
@@ -212,14 +212,14 @@ calc_NPI_NDC <- function(policyregions="iso" # column with regions for policy de
 
   #write EMIS policies
   emis_pol <- mbind(none_pol,npi_emis,ndc_emis)
-  write.magpie(emis_pol, "policies/ndc_emis_pol.cs3")
+  write.magpie(emis_pol, "policies/npi_ndc_emis_pol.cs3")
 
   ## END LUC CO2 emission reduction
 
   #copy files
-  file.copy("policies/ndc_ad_pol.cs3","../../modules/35_natveg/input/ndc_ad_pol.cs3",overwrite = TRUE)
-  file.copy("policies/ndc_aff_pol.cs3","../../modules/32_forestry/input/ndc_aff_pol.cs3",overwrite = TRUE)
-  file.copy("policies/ndc_emis_pol.cs3","../../modules/35_natveg/input/ndc_emis_pol.cs3",overwrite = TRUE)
+  file.copy("policies/npi_ndc_ad_pol.cs3","../../modules/35_natveg/input/npi_ndc_ad_pol.cs3",overwrite = TRUE)
+  file.copy("policies/npi_ndc_aff_pol.cs3","../../modules/32_forestry/input/npi_ndc_aff_pol.cs3",overwrite = TRUE)
+  file.copy("policies/npi_ndc_emis_pol.cs3","../../modules/35_natveg/input/npi_ndc_emis_pol.cs3",overwrite = TRUE)
 }
 
 ### calculates targets
