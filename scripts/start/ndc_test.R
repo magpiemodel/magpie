@@ -30,6 +30,6 @@ cfg$title <- "SSP2_NPI"
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "SSP2_INDC"
-cfg <- setScenario(cfg,c("SSP2","INDC"))
+cfg$title <- "SSP2_NDC"
+cfg <- setScenario(cfg,c("SSP2","NDC"))
 start_run(cfg,codeCheck=FALSE)

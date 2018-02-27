@@ -1,4 +1,4 @@
-;cc;nocc;SSP1;SSP2;SSP3;SSP4;SSP5;BASE;NPI;INDC;coupling;emulator;input;SUSTAg1;SUSTAg2;SUSTAg3;SUSTAg4;SUSTAg5
+;cc;nocc;SSP1;SSP2;SSP3;SSP4;SSP5;BASE;NPI;NDC;coupling;emulator;input;SUSTAg1;SUSTAg2;SUSTAg3;SUSTAg4;SUSTAg5
 c09_pop_scenario;;;SSP1;SSP2;SSP3;SSP4;SSP5;;;;;;;SSP1;SSP2;SSP3;SSP4;SSP5
 c09_gdp_scenario;;;SSP1;SSP2;SSP3;SSP4;SSP5;;;;;;;SSP1;SSP2;SSP3;SSP4;SSP5
 c12_interest_rate;;;low;medium;high;mixed;low;;;;;;;low;medium;high;mixed;low

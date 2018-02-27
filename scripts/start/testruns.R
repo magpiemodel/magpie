@@ -182,12 +182,12 @@ cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
 try(start_run(cfg=cfg,scenario=c(scenario,"NPI"),codeCheck=codeCheck))
 
-cfg$title <- "indc_rcp26"
+cfg$title <- "ndc_rcp26"
 cfg$input <- buildInputVector()
 cfg$gms$c_timesteps <- 11
 cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
-try(start_run(cfg=cfg,scenario=c(scenario,"INDC"),codeCheck=codeCheck))
+try(start_run(cfg=cfg,scenario=c(scenario,"NDC"),codeCheck=codeCheck))
 
 #stop()
 
