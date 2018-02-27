@@ -26,8 +26,8 @@ $include "./modules/32_forestry/input/f32_fac_req_ha.csv"
 $offdelim
 ;
 
-table f32_aff_pol(t_all,j,pol32) npi+indc afforestation policy (Mha new forest wrt to 2010)
+table f32_aff_pol(t_all,j,pol32) npi+ndc afforestation policy (Mha new forest wrt to 2010)
 $ondelim
-$include "./modules/32_forestry/input/indc_aff_pol.cs3"
+$include "./modules/32_forestry/input/ndc_aff_pol.cs3"
 $offdelim
 ;

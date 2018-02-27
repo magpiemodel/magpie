@@ -5,8 +5,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 *after(ac) = growth_rate(flt)*before(ac)
 p32_land(t,j,ac,"after") =
-         (v32_land.l(j,"new")+v32_land.l(j,"new_indc"))$(ord(ac) = 1)
-         + sum(ac_land32(ac,land32)$(not sameas(land32,"new") AND not sameas(land32,"new_indc") AND pc32_land(j,land32) > 0),(v32_land.l(j,land32)/pc32_land(j,land32))*p32_land(t,j,ac,"before"))$(ord(ac) > 1);
+         (v32_land.l(j,"new")+v32_land.l(j,"new_ndc"))$(ord(ac) = 1)
+         + sum(ac_land32(ac,land32)$(not sameas(land32,"new") AND not sameas(land32,"new_ndc") AND pc32_land(j,land32) > 0),(v32_land.l(j,land32)/pc32_land(j,land32))*p32_land(t,j,ac,"before"))$(ord(ac) > 1);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_cost_fore(t,i,"marginal")                          = vm_cost_fore.m(i);
@@ -54,4 +54,3 @@ p32_land(t,j,ac,"after") =
  oq32_max_aff(t,"lower")                               = q32_max_aff.lo;
  oq32_aff_pol(t,j,"lower")                             = q32_aff_pol.lo(j);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
-

@@ -102,16 +102,16 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
                      debug=cfg$debug)
   }
 
-  if(cfg$recalc_indc=="ifneeded") {
-    aff_pol <- magclass::read.magpie("modules/32_forestry/input/indc_aff_pol.cs3")
-    ad_pol <- magclass::read.magpie("modules/35_natveg/input/indc_ad_pol.cs3")
-    emis_pol <- magclass::read.magpie("modules/35_natveg/input/indc_emis_pol.cs3")
+  if(cfg$recalc_npi_ndc=="ifneeded") {
+    aff_pol <- magclass::read.magpie("modules/32_forestry/input/ndc_aff_pol.cs3")
+    ad_pol <- magclass::read.magpie("modules/35_natveg/input/ndc_ad_pol.cs3")
+    emis_pol <- magclass::read.magpie("modules/35_natveg/input/ndc_emis_pol.cs3")
     if((all(aff_pol == 0) & (cfg$gms$c32_aff_policy != "none")) |
        (all(ad_pol == 0) & (cfg$gms$c35_ad_policy != "none")) |
        (all(emis_pol == 0) & (cfg$gms$c35_emis_policy != "none"))
     ) {
-      cfg$recalc_indc <- TRUE
-    } else cfg$recalc_indc <- FALSE
+      cfg$recalc_npi_ndc <- TRUE
+    } else cfg$recalc_npi_ndc <- FALSE
   }
 
 
@@ -173,11 +173,11 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
     cat("Calibration factor calculated!\n")
   }
 
-  if(cfg$recalc_indc){
-    cat("Starting NPI/INDC recalculation!\n")
-    source("scripts/indc/start_indc.R")
-    start_indc_preprocessing(cfg,base_run_dir="scripts/indc/base_run",maindir=maindir)
-    cat("NPI/INDC recalculation successful!\n")
+  if(cfg$recalc_npi_ndc){
+    cat("Starting NPI/NDC recalculation!\n")
+    source("scripts/npi_ndc/start_npi_ndc.R")
+    start_npi_ndc_preprocessing(cfg,base_run_dir="scripts/npi_ndc/base_run",maindir=maindir)
+    cat("NPI/NDC recalculation successful!\n")
   }
 
   # copy important files into output_folder (before MAgPIE execution)
