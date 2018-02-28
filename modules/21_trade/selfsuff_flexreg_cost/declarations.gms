@@ -15,6 +15,7 @@ positive variables
  v21_excess_dem(k_trade)                 global excess demand (mio. ton DM)
  v21_excess_prod(i,k_trade)              regional excess production (mio. ton DM)
  vm_cost_trade(i)                        transport costs and taxes for the bilateral trade (Mio US$)
+ v21_cost_trade_reg(i,k_trade)
 ;
 
 equations
@@ -24,18 +25,21 @@ equations
  q21_excess_dem(k_trade)                 global excess demand
  q21_excess_supply(i,k_trade)            regional excess production
  q21_cost_trade(i)                       trade costs
+ q21_cost_trade_reg(i,k_trade)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov21_excess_dem(t,k_trade,type)      global excess demand (mio. ton DM)
- ov21_excess_prod(t,i,k_trade,type)   regional excess production (mio. ton DM)
- ov_cost_trade(t,i,type)              transport costs and taxes for the bilateral trade (Mio US$)
- oq21_trade_glo(t,k_trade,type)       Global production > demand constraint
- oq21_notrade(t,i,k_notrade,type)     fix of not traded commodities
- oq21_trade_reg(t,i,k_trade,type)     regional trade balances i.e. minimum self-suff ratio
- oq21_excess_dem(t,k_trade,type)      global excess demand
- oq21_excess_supply(t,i,k_trade,type) regional excess production
- oq21_cost_trade(t,i,type)            trade costs
+ ov21_excess_dem(t,k_trade,type)       global excess demand (mio. ton DM)
+ ov21_excess_prod(t,i,k_trade,type)    regional excess production (mio. ton DM)
+ ov_cost_trade(t,i,type)               transport costs and taxes for the bilateral trade (Mio US$)
+ ov21_cost_trade_reg(t,i,k_trade,type) 
+ oq21_trade_glo(t,k_trade,type)        Global production > demand constraint
+ oq21_notrade(t,i,k_notrade,type)      fix of not traded commodities
+ oq21_trade_reg(t,i,k_trade,type)      regional trade balances i.e. minimum self-suff ratio
+ oq21_excess_dem(t,k_trade,type)       global excess demand
+ oq21_excess_supply(t,i,k_trade,type)  regional excess production
+ oq21_cost_trade(t,i,type)             trade costs
+ oq21_cost_trade_reg(t,i,k_trade,type) 
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
