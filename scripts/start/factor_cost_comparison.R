@@ -59,5 +59,14 @@ cfg$title <- "per_ton"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$gms$factor_costs="fixed_per_ton_nov16"
 cfg$input <- buildInputVector(co2="co2")
+cfg$recalibrate <- TRUE
+start_run(cfg=cfg,codeCheck=codeCheck)
+cfg$gms$factor_costs="mixed_feb17"
+
+cfg$title <- "sticky"
+cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg$gms$factor_costs="sticky_feb18"
+cfg$input <- buildInputVector(co2="co2")
+cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
 cfg$gms$factor_costs="mixed_feb17"
