@@ -24,6 +24,9 @@ sets
    parameters15 schonfield equation parameters
    /slope, intercept/
 
+   parameters_intake15 intake equation parameters
+   /saturation,halfsaturation,intercept/
+
    kfo(kall) all products in the sectoral version
    /
    tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,puls_pro,
