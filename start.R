@@ -27,9 +27,18 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 
 
   choose_module <- function(Rfolder,title="Please choose an outputmodule") {
+    forder <- paste0(Rfolder,"/order.cfg")
+    if(file.exists(forder)) {
+      order <- grep("(#|^$)",readLines(forder),invert=TRUE,value=TRUE)
+      if(length(order)==0) order <- NULL
+    } else {
+      order <- NULL
+    }
     module <- gsub("\\.R$","",grep("\\.R$",list.files(Rfolder), value=TRUE))
+    #sort modules based on order.cfg
+    module <- intersect(union(order,module),module)
     cat("\n\n",title,":\n\n")
-    cat(paste(1: length(module), module, sep=": " ),sep="\n")
+    cat(paste(1: length(module), gsub("_"," ",module,fixed=TRUE), sep=": " ),sep="\n")
     cat("\nNumber: ")
     identifier <- get_line()
     identifier <- as.numeric(strsplit(identifier,",")[[1]])
