@@ -20,11 +20,15 @@ equations
          q59_som_pool_cropland(j)           actual C pool in croplands
          q59_som_pool_noncropland(j)        actual C pool in non-croplands
          q59_nr_som(j)                      soil organic matter loss
-;
+         q59_crop_expansion(j)              cropland expansion 
+         q59_crop_reduction(j)              cropland reduction 
+		 ;
 
 positive variables
          v59_som_target(j,pools59)          long-term target state of C pool (Tg C)
-         v59_som_pool(j,pools59)            soil organic matter pool (Tg C)   
+         v59_som_pool(j,pools59)            soil organic matter pool (Tg C)
+         v59_crop_expansion(j)               crop land expansion (mio. ha)
+         v59_crop_reduction(j)               land reduction (mio. ha)		 
 ;
 
 variables

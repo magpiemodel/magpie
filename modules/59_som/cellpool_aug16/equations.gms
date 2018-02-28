@@ -18,13 +18,25 @@ q59_som_target_noncropland(j2) ..
               sum((noncropland59), vm_land(j2,noncropland59)) * sum(ct,f59_topsoilc_density(ct,j2))
 			  ;
 
+q59_crop_expansion(j2) ..	
+ 	          v59_crop_expansion(j2)
+			  =e=
+			  vm_land(j2,"crop") - pcm_land(j2,"crop")
+			  ;
+			  
+
+q59_crop_reduction(j2) ..	
+ 	          v59_crop_reduction(j2)
+			  =e=
+			  pcm_land(j2,"crop") - vm_land(j2,"crop")
+			  ;
 			  
 q59_som_transfer_to_cropland(j2) ..
               v59_som_transfer_to_cropland(j2)
               =e=
-              sum(ct,
-              + vm_landexpansion(j2,"crop") * p59_carbon_density(ct,j2,"noncropland")
-              - vm_landreduction(j2,"crop") * p59_carbon_density(ct,j2,"cropland")
+              sum(ct, 
+              + v59_crop_expansion(j2) * p59_carbon_density(ct,j2,"noncropland")
+              - v59_crop_reduction(j2) * p59_carbon_density(ct,j2,"cropland")
               );
 
 
