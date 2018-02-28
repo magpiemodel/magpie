@@ -42,26 +42,44 @@ q15_real_income(iso) ..
 
 * Foodtree One
 
-q15_regression1_kcal(iso) ..
+q15_regression_kcal(iso) ..
          v15_kcal_regression_total(iso)
          =e=
-         sum(ct,p15_kcal_requirement_average(ct,iso))
-         + (
+         sum((sex,age_group,ct),
 * SSP1
 *$ifthen "%c15_food_scenario%"=="SSP1"   (0.765 + 0.00649*v15_income_pc_real_ppp_iso(iso)**0.5*exp(0.00001465*v15_income_pc_real_ppp_iso(iso)))
-$ifthen "%c15_food_scenario%"=="SSP1"   (-299 + 13.1 * v15_income_pc_real_ppp_iso(iso)**0.5*exp(-1.715e-05*v15_income_pc_real_ppp_iso(iso)))
+$ifthen "%c15_food_scenario%"=="SSP1"   (1.2123 * v15_kcal_intake_regression(iso,sex,age_group))
 * SSP2
-$elseif "%c15_food_scenario%"=="SSP2"   (-285 + 1.414e+03*v15_income_pc_real_ppp_iso(iso)/(v15_income_pc_real_ppp_iso(iso)+2.872e+03))
+$elseif "%c15_food_scenario%"=="SSP2"   (2.07*v15_kcal_intake_regression(iso,sex,age_group) -1.898e+03 )
 * SSP3
-$elseif "%c15_food_scenario%"=="SSP3"   (-2305.294 - 1.219e+03 * v15_income_pc_real_ppp_iso(iso)**(-0.0995))
+$elseif "%c15_food_scenario%"=="SSP3"   (2.07*v15_kcal_intake_regression(iso,sex,age_group) -1.898e+03 )
 * SSP4
-$elseif "%c15_food_scenario%"=="SSP2"   (-285 + 1.414e+03*v15_income_pc_real_ppp_iso(iso)/(v15_income_pc_real_ppp_iso(iso)+2.872e+03))
+$elseif "%c15_food_scenario%"=="SSP4"   (1.2123 * v15_kcal_intake_regression(iso,sex,age_group))
 * SSP5
-$elseif "%c15_food_scenario%"=="SSP3"   (-2305.294 - 1.219e+03 * v15_income_pc_real_ppp_iso(iso)**(-0.0995))
+$elseif "%c15_food_scenario%"=="SSP5"   (2.07*v15_kcal_intake_regression(iso,sex,age_group) -1.898e+03 )
 $endif
-         );
 
-q15_regression1_animals(iso) ..
+              * im_demography(ct,iso,sex,age_group)
+         )/sum((sex,age_group,ct),
+              im_demography(ct,iso,sex,age_group)
+         )
+         ;
+
+q15_regression_intake(iso,sex,age_group) ..
+         v15_kcal_intake_regression(iso,sex,age_group)
+         =e=
+         sum(ct,p15_kcal_requirement(ct,iso,sex,age_group))*
+         (
+            f15_intake_regression_parameters(sex,age_group,"saturation")*v15_income_pc_real_ppp_iso(iso)
+            /(f15_intake_regression_parameters(sex,age_group,"halfsaturation")+v15_income_pc_real_ppp_iso(iso))
+            +f15_intake_regression_parameters(sex,age_group,"intercept")
+         )
+         +sum(ct,p15_intake_balanceflow(ct,iso,sex,age_group))
+         ;
+
+
+
+q15_regression_animals(iso) ..
          v15_livestock_share_iso(iso)
          =e=
 * SSP1
@@ -77,7 +95,7 @@ $elseif "%c15_food_scenario%"=="SSP5"   (0.006383*v15_income_pc_real_ppp_iso(iso
 $endif
          ;
 
-q15_regression1_processed(iso) ..
+q15_regression_processed(iso) ..
          v15_processed_share_iso(iso)
          =e=
 * SSP1
@@ -93,7 +111,7 @@ $elseif "%c15_food_scenario%"=="SSP5"   (0.009508*v15_income_pc_real_ppp_iso(iso
 $endif
          ;
 
-q15_regression1_vegfruit(iso) ..
+q15_regression_vegfruit(iso) ..
          v15_vegfruit_share_iso(iso)
          =e=
 * SSP1
@@ -112,14 +130,14 @@ $endif
 
 
 
-q15_foodtree1_kcal_animals(iso,kfo_ap) ..
+q15_foodtree_kcal_animals(iso,kfo_ap) ..
          v15_kcal_regression(iso,kfo_ap)
          =e=
          v15_kcal_regression_total(iso)
          * v15_livestock_share_iso(iso)
          * sum(ct,i15_livestock_kcal_structure_iso(ct,iso,kfo_ap));
 
-q15_foodtree1_kcal_processed(iso,kfo_pf) ..
+q15_foodtree_kcal_processed(iso,kfo_pf) ..
          v15_kcal_regression(iso,kfo_pf)
          =e=
          v15_kcal_regression_total(iso)
@@ -127,7 +145,7 @@ q15_foodtree1_kcal_processed(iso,kfo_pf) ..
          * v15_processed_share_iso(iso)
          * sum(ct,i15_processed_kcal_structure_iso(ct,iso,kfo_pf)) ;
 
-q15_foodtree1_kcal_vegetables(iso) ..
+q15_foodtree_kcal_vegetables(iso) ..
          v15_kcal_regression(iso,"others")
          =e=
          v15_kcal_regression_total(iso)
@@ -135,7 +153,7 @@ q15_foodtree1_kcal_vegetables(iso) ..
          * (1 - v15_processed_share_iso(iso))
          * v15_vegfruit_share_iso(iso);
 
-q15_foodtree1_kcal_staples(iso,kfo_st) ..
+q15_foodtree_kcal_staples(iso,kfo_st) ..
          v15_kcal_regression(iso,kfo_st)
          =e=
          v15_kcal_regression_total(iso)
