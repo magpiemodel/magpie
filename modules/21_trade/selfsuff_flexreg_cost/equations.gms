@@ -28,8 +28,9 @@
                           =e=
                           v21_excess_dem(k_trade)*sum(ct,f21_exp_shr(ct,i2,k_trade));
 
- q21_cost_trade(i2)..  vm_cost_trade(i2)
+ q21_cost_trade_reg(i2,k_trade)..  v21_cost_trade_reg(i2,k_trade)
                        =g=
-                          sum(k_trade,
-                          (i21_trade_margin(i2,k_trade) + i21_trade_tariff(i2,k_trade))*(vm_prod_reg(i2,k_trade)-vm_supply(i2,k_trade))
-                          );
+                          (i21_trade_margin(i2,k_trade) + i21_trade_tariff(i2,k_trade))*(vm_prod_reg(i2,k_trade)-vm_supply(i2,k_trade));
+
+
+ q21_cost_trade(i2)..          vm_cost_trade(i2) =e= sum(k_trade,v21_cost_trade_reg(i2,k_trade));
