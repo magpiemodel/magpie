@@ -1,8 +1,8 @@
-# |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-# |  authors, and contributors see AUTHORS file
-# |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-# |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
-# |  Contact: magpie@pik-potsdam.de
+# | (C) 2008-2017 Potsdam Institute for Climate Impact Research (PIK),
+# | authors, and contributors see AUTHORS file
+# | This file is part of MAgPIE and licensed under GNU AGPL Version 3
+# | or later. See LICENSE file or go to http://www.gnu.org/licenses/
+# | Contact: magpie@pik-potsdam.de
 
 ##########################################################
 #### MAgPIE output generation ####
@@ -25,11 +25,17 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
     return(s);
   }
 
-  choose_folder <- function(folder,title="Please choose a folder") {
-    tmp <- base::list.dirs(folder,recursive=TRUE)
-    dirs <- NULL
-    for (i in 1:length(tmp)) {
-      if (file.exists(path(tmp[i],"full.gms"))) dirs <- c(dirs,sub("./output/","",tmp[i]))
+  choose_folder <- function(title="Please choose a folder") {
+    # try to use find because it is significantly quicker than list.dirs
+    tmp <- try(system("find ./output -name 'fulldata.gdx'", intern=TRUE,  ignore.stderr = TRUE), silent=TRUE)
+    if("try-error" %in% class(tmp)) {
+      tmp <- base::list.dirs("./output/",recursive=TRUE)
+      dirs <- NULL
+      for (i in 1:length(tmp)) {
+        if (file.exists(path(tmp[i],"fulldata.gdx"))) dirs <- c(dirs,sub("./output/","",tmp[i]))
+      }
+    } else {
+      dirs <- sub("fulldata.gdx","",sub("./output/","",tmp, fixed=TRUE), fixed=TRUE)
     }
     dirs <- c("all",dirs)
     cat("\n\n",title,":\n\n")
@@ -55,15 +61,15 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
       cat("\nAre you sure these are the right directories?(y/n): ")
       answer <- get_line()
       if(answer=="y"){
-        return(paste0(folder,"/",dirs[id+1]))
+        return(paste0("./output/",dirs[id+1]))
       } else {
-        choose_folder(folder,title)
+        choose_folder(title)
       }
     } else if(any(dirs[identifier] == "all")){
       identifier <- 2:length(dirs)
-      return(paste0(folder,"/",dirs[identifier]))
+      return(paste0("./output/",dirs[identifier]))
     } else {
-      return(paste0(folder,"/",dirs[identifier]))
+      return(paste0("./output/",dirs[identifier]))
     }
   }
 
@@ -152,7 +158,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
 
 
   if(is.null(comp))       comp       <- choose_mode("Please choose the output mode")
-  if(is.null(outputdirs)) outputdirs <- choose_folder("./output","Please choose the runs to be used for output generation")
+  if(is.null(outputdirs)) outputdirs <- choose_folder("Please choose the runs to be used for output generation")
   if(is.null(output))     output     <- choose_module(ifelse(comp,"./scripts/output/comparison","./scripts/output/single"),
                                                       "Please choose the output modules to be used for output generation")
   if(is.null(submit))     submit     <- choose_submit("Please choose a run submission type")
