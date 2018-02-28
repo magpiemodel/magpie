@@ -32,6 +32,12 @@ $include "./modules/15_food/input/f15_kcal_pc_iso.csv"
 $offdelim;
 
 
+table f15_intake_pc_observed_iso(t_all,iso,sex,age_group)  Observed per-capita calorie intake in the past (kcal per captia per day)
+$ondelim
+$include "./modules/15_food/input/f15_intake_pc_observed_iso.cs3"
+$offdelim;
+
+
 parameter f15_prices_initial(kall) Food prices in initialisation period (USD05 per ton DM)
 /
 $ondelim
@@ -76,6 +82,12 @@ $offdelim;
 table f15_schofield_parameters(sex,age_group, parameters15) Schofield equation parameters (-)
 $ondelim
 $include "./modules/15_food/input/f15_schofield_parameters.cs3"
+$offdelim
+;
+
+table f15_intake_regression_parameters(sex,age_group, parameters_intake15) Self-estimated income equation parameters (-)
+$ondelim
+$include "./modules/15_food/input/f15_intake_regression_parameters.cs3"
 $offdelim
 ;
 
