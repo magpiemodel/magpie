@@ -18,6 +18,7 @@ cfg$gms$c_timesteps <- 7
 
 cfg$title <- "fix_som_test"
 cfg$gms$som <- "cellpool_aug16"
+cfg$gms$c59_som_scenario  <- "cc"   # def = "nocc"
 
 start_run(cfg=cfg,codeCheck=TRUE)
 
