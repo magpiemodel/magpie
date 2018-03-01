@@ -187,7 +187,9 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
   if(cfg$recalc_npi_ndc){
     cat("Starting NPI/NDC recalculation!\n")
     source("scripts/npi_ndc/start_npi_ndc.R")
+    setwd("scripts/npi_ndc")
     calc_NPI_NDC(policyregions=cfg$policyregions)
+    setwd("../..")
     cat("NPI/NDC recalculation successful!\n")
   }
 
