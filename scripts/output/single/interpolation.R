@@ -24,10 +24,10 @@ interpolate<-function(x,x_ini_lr,x_ini_hr,spam,add_avail_hr=NULL,prev_year="y198
   if(nregions(x)!=nregions(x_ini_lr)) stop("x and x_ini_lr have to be of the same spatial aggregation")
   if(nyears(x_ini_lr)>1 || nyears(x_ini_hr)>1) stop("Initialization data must only have one timestep")
   if(!all(getNames(x)==getNames(x_ini_lr))||!all(getNames(x)==getNames(x_ini_hr))) stop("dimnames[[3]] of x, x_ini_lr and x_ini_hr have to be the same")
-  if(!is.null(add_avail_hr)){ 
+  if(!is.null(add_avail_hr)){
     stop("The add_avail functionality is deprecated and can't be used anymore")
   }
-  
+
   getYears(x_ini_hr) <- prev_year
   getYears(x_ini_lr) <- prev_year
   lr<-mbind(x_ini_lr,x)
@@ -51,7 +51,7 @@ interpolate<-function(x,x_ini_lr,x_ini_hr,spam,add_avail_hr=NULL,prev_year="y198
   }
   reduct_hr <- speed_aggregate(as.magpie(reduct),t(rel))
   extent_hr <- speed_aggregate(as.magpie(extent),t(rel))
-  
+
   #calculate land pools in high res (hr)
   hr <- new.magpie(dimnames(reduct_hr)[[1]],c(prev_year,dimnames(reduct_hr)[[2]]),dimnames(reduct_hr)[[3]])
   if(is.null(add_avail_hr)){
@@ -60,13 +60,13 @@ interpolate<-function(x,x_ini_lr,x_ini_hr,spam,add_avail_hr=NULL,prev_year="y198
   add_avail_hr<-as.array(add_avail_hr)
   dimnames(x_ini_hr)[[1]] <- dimnames(reduct_hr)[[1]]
   hr[,prev_year,] <- x_ini_hr
-  
+
   for(y in 2:nyears(hr)) hr[,y,] <- (1-reduct_hr[,y-1,])*setYears(hr[,y-1,],getYears(reduct_hr)[y-1]) + (rowSums(reduct_hr[,y-1,]*setYears(hr[,y-1,],getYears(reduct_hr)[y-1]))+add_avail_hr[,y-1,])*extent_hr[,y-1,]
   return(hr)
 }
 
 ############################# BASIC CONFIGURATION #######################################
-land_lr_file     <- "avl_land.cs3"  
+land_lr_file     <- "avl_land.cs3"
 land_hr_file     <- "avl_land_0.5.mz"
 land_hr_out_file <- "cell.land_0.5.mz"
 land_hr_share_out_file <- "cell_land_0.5_share.mz"
@@ -79,7 +79,7 @@ if(!exists("source_include")) {
   sum_spam_file    <- "0.5-to-n200_sum.spam"
   title       <- "base_run"
   outputdir       <- "output/base_run"
-  
+
   ###Define arguments that can be read from command line
   readArgs("sum_spam_file","outputdir","title")
 }
@@ -143,9 +143,9 @@ area_hi <- area_share_hi*setNames(land_hr[,,"crop"],NULL)
 area_share_hi <- area_hi/dimSums(land_hr,dim=3.1)
 #write share of crop types in terms of total cell size
 write.magpie(area_share_hi,path(outputdir,paste(croparea_hr_share_out_file,sep="_")),comment="cell share")
-write.magpie(area_share_hi,path(outputdir,paste(sub(".mz",".nc",croparea_hr_share_out_file),sep="_")),comment="cell share")
+write.magpie(area_share_hi,path(outputdir,paste(sub(".mz",".nc",croparea_hr_share_out_file),sep="_")),comment="cell share", verbose=FALSE)
 #calculate share of land pools in terms of tatal cell size
 land_hr <- land_hr/dimSums(land_hr,dim=3.1)
 #write landpool shares
 write.magpie(land_hr,path(outputdir,paste(land_hr_share_out_file,sep="_")),comment="cell share")
-write.magpie(land_hr,path(outputdir,paste(sub(".mz",".nc",land_hr_share_out_file),sep="_")),comment="cell share")
+write.magpie(land_hr,path(outputdir,paste(sub(".mz",".nc",land_hr_share_out_file),sep="_")),comment="cell share", verbose=FALSE)

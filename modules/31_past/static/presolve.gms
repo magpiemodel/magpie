@@ -8,3 +8,5 @@ vm_land.fx(j,"past") = pcm_land(j,"past");
 
 vm_carbon_stock.fx(j,"past",c_pools) =
           pcm_land(j,"past")*fm_carbon_density(t,j,"past",c_pools);
+
+vm_cost_prod.fx(i,"pasture") = 0;

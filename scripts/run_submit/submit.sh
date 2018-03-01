@@ -4,7 +4,7 @@
 #SBATCH --job-name=mag-run
 #SBATCH --output=full.log
 #SBATCH --mail-type=END
-#SBATCH --mem-per-cpu=8000
+#SBATCH --cpus-per-task=3
 
 Rscript submit.R
 

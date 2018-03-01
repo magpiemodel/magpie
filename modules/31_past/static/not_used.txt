@@ -7,6 +7,4 @@
 name,type,reason
 vm_prod, input, not needed
 vm_yld, input, not needed
-
 vm_prod_reg,input,questionnaire
-vm_cost_prod,input,questionnaire
