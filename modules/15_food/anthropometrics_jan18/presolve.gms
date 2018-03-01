@@ -1,5 +1,4 @@
 
-
 if (sum(sameas(t_past,t),1) = 1,
 
 *** get share of a staple product within total staples and livestock products, and replace zero shares with reginoal avarages
@@ -78,6 +77,7 @@ if (sum(sameas(t_past,t),1) = 1,
 
    p15_bodyheight(t,iso,sex,age_group,estimates15) = f15_bodyheight(t,iso,sex,age_group);
 
+
 else
 
     p15_bodyheight(t,iso,sex,age_group,"preliminary") = p15_bodyheight(t-1,iso,sex,age_group,"final");
@@ -116,15 +116,15 @@ else
      p15_bodyheight(t,iso,"F","10--14","preliminary")=p15_bodyheight(t,iso,"M","15--19","preliminary")/163*154;
 
 );
+display "test4";
 
-display "hello29";
 
 *### estimate standardized food requirement
 p15_bodyweight_healthy(t,iso,sex,age_group)= 22.5* (p15_bodyheight(t,iso,sex,age_group,"preliminary")/100)**2;
-p15_bodyweight_healthy(t,iso,sex,"0--4")= 16* (p15_bodyheight(t,iso,sex,"0--4","preliminary")/100)**2;
-p15_bodyweight_healthy(t,iso,sex,"5--9")= 16* (p15_bodyheight(t,iso,sex,"0--4","preliminary")/100)**2;
-p15_bodyweight_healthy(t,iso,sex,"10--14")= 18* (p15_bodyheight(t,iso,sex,"0--4","preliminary")/100)**2;
-p15_bodyweight_healthy(t,iso,sex,"15--19")= 21* (p15_bodyheight(t,iso,sex,"0--4","preliminary")/100)**2;
+p15_bodyweight_healthy(t,iso,sex,"0--4")   = 16*   (p15_bodyheight(t,iso,sex,"0--4","preliminary")   /100)**2;
+p15_bodyweight_healthy(t,iso,sex,"5--9")   = 16*   (p15_bodyheight(t,iso,sex,"5--9","preliminary")   /100)**2;
+p15_bodyweight_healthy(t,iso,sex,"10--14") = 18*   (p15_bodyheight(t,iso,sex,"10--14","preliminary") /100)**2;
+p15_bodyweight_healthy(t,iso,sex,"15--19") = 21*   (p15_bodyheight(t,iso,sex,"15--19","preliminary") /100)**2;
 
 *physical activity levels in PAL relative to Basic metabolic rate (BMR)
 p15_physical_activity_level(t,iso,sex,age_group)=
@@ -136,14 +136,28 @@ p15_kcal_requirement(t,iso,sex,age_group)=
                         + f15_schofield_parameters(sex,age_group, "slope")*p15_bodyweight_healthy(t,iso,sex,age_group))
                         * p15_physical_activity_level(t,iso,sex,age_group);
 
-p15_kcal_requirement_average(ct,iso)=
-                        sum((sex,age_group),
-                             p15_kcal_requirement(ct,iso,sex,age_group)
-                             * im_demography(ct,iso,sex,age_group)
-                        )/sum((sex,age_group),
-                             im_demography(ct,iso,sex,age_group)
-                        );
 
+
+if (sum(sameas(t_past,t),1) = 1,
+
+   p15_bodyheight(t,iso,sex,age_group,estimates15) = f15_bodyheight(t,iso,sex,age_group);
+
+   p15_intake_balanceflow(t,iso,sex,age_group) =
+      f15_intake_pc_observed_iso(t,iso,sex,age_group)-
+      p15_kcal_requirement(t,iso,sex,age_group)*
+      (
+          f15_intake_regression_parameters(sex,age_group,"saturation")*im_gdp_pc_ppp_iso(t,iso)
+          /(f15_intake_regression_parameters(sex,age_group,"halfsaturation")+im_gdp_pc_ppp_iso(t,iso))
+          +f15_intake_regression_parameters(sex,age_group,"intercept")
+      );
+
+   p15_intake_balanceflow_lastcalibrationyear(iso,sex,age_group)=p15_intake_balanceflow(t,iso,sex,age_group);
+else
+    p15_intake_balanceflow(t,iso,sex,age_group) =  p15_intake_balanceflow_lastcalibrationyear(iso,sex,age_group)   * f15_kcal_balanceflow_fadeout(t,"%c15_calibscen%");
+);
+
+     display  p15_kcal_growth_food ;
+     display  p15_intake_balanceflow;
 
 *###### Estimation of food demand using a first run of the food demand model with unshocked prices.
 
@@ -222,4 +236,3 @@ else
  p15_demand_nonfood_iso_initial(t,iso)  =  v15_demand_nonfood.l(iso);
 
  o15_kcal_regression_initial(iso,kfo)=v15_kcal_regression.l(iso,kfo);
-
