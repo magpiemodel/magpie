@@ -4,4 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_cost_AEI.scale(i) = 10e4;
+
+ q38_cost_prod_crop(i2,kcr) .. vm_cost_prod(i2,kcr)
+                            =e=
+                            vm_prod_reg(i2,kcr) * f38_fac_req_per_ton(kcr);
