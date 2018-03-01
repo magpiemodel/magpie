@@ -173,10 +173,21 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
     cat("Calibration factor calculated!\n")
   }
 
+  # NPI/NDC policyes calculations
+  baserun_files <- c("scripts/npi_ndc/policies/magpie_bau_land.mz",
+                     "scripts/npi_ndc/policies/magpie_bau_cstock.mz")
+  if(!any(file.exists(baserun_files))) stop("Base_run archived files missing!")
+  if(cfg$recalc_base_run){9
+    cat("Starting base_run recalculation for NPI and NDC`!\n")
+    source("scripts/npi_ndc/start_npi_ndc.R")
+    start_npi_ndc_preprocessing(cfg,base_run_dir="scripts/npi_ndc/base_run",maindir=maindir)
+    cat("NPI/NDC base_run recalculation successful!\n")
+  }
+
   if(cfg$recalc_npi_ndc){
     cat("Starting NPI/NDC recalculation!\n")
     source("scripts/npi_ndc/start_npi_ndc.R")
-    start_npi_ndc_preprocessing(cfg,base_run_dir="scripts/npi_ndc/base_run",maindir=maindir)
+    calc_NPI_NDC(policyregions=cfg$policyregions)
     cat("NPI/NDC recalculation successful!\n")
   }
 
