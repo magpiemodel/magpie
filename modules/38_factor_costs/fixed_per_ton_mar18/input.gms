@@ -5,7 +5,10 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
- q38_cost_prod_crop(i2,kcr) .. vm_cost_prod(i2,kcr)
-                            =e=
-                            sum((cell(i2,j2), w), vm_area(j2,kcr,w)*vm_yld(j2,kcr,w)
-                                                           *f38_fac_req(kcr,w));
+
+parameter f38_fac_req_per_ton(kcr) Factor requirements (US$04 per ton DM)
+/
+$ondelim
+$include "./modules/38_factor_costs/input/f38_fac_req_per_ton.csv"
+$offdelim
+/;

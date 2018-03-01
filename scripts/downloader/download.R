@@ -18,7 +18,10 @@ library(lucode)
 #Create file2destination mapping based on information from the model
 ################################################################################
 getfiledestinations <- function() {
-  files <- dir(pattern="files$",recursive = TRUE)
+  folders <- base::list.dirs(recursive=FALSE, full.names=FALSE)
+  folders <- grep("^(\\.|225|output|calib_run|figure)",folders, invert=TRUE, value=TRUE)
+  files <- NULL
+  for(f in folders) files <- c(files,dir(path=f,pattern="^files$",recursive = TRUE, full.names=TRUE))
   out <- NULL
   for(f in files) {
     tmp <- grep("^\\*",readLines(f, warn = FALSE),invert=TRUE,value=TRUE)
@@ -34,7 +37,7 @@ getfiledestinations <- function() {
 delete_olddata <- function(x) {
   if(is.character(x)) {
     if(!file.exists(x)) stop("Cannot find file mapping!")
-    map <- read.csv(x, sep = ";", stringsAsFactors = FALSE)
+    map <- read.csv(x, sep = ";", stringsAsFactors = FALSE), comment.char = "#")
   } else {
     map <- x
   }
@@ -80,7 +83,7 @@ copy_input <- function(x, sourcepath, low_res, move=FALSE) {
         next
       }
     }
-    copy.magpie(inputpath,outputpath)
+    copy.magpie(inputpath, outputpath, round=8)
     if(move & !(i != length(x) &  (x[i] %in% x[i+1:length(x)]))) {
         file.remove(inputpath)
     }
@@ -173,6 +176,10 @@ update_info <- function(datasets, low_res, high_res, cpr,
                   paste('Repository:',datasets[dataset,"repo"]))
   }
 
+  warnings <- attr(datasets,"warnings")
+  if(!is.null(warnings)) {
+    warnings <- capture.output(warnings)
+  }
 
   content <- c(useddata,
                '',
@@ -191,7 +198,7 @@ update_info <- function(datasets, low_res, high_res, cpr,
                '',
                info,
                '',
-               attr(datasets,"warnings"),
+               warnings,
                '',
                paste('Last modification (input data):',date()),
                '')

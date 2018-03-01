@@ -28,14 +28,15 @@ equations
   q15_aim_standalone     aim function standalone model
   q15_budget(iso)        Household Budget Constraint
   q15_real_income(iso)   Calculation of real income
-  q15_regression1_kcal(iso)     Per capita total consumption
-  q15_regression1_animals(iso)       Livestock share
-  q15_regression1_processed(iso)       Processed share
-  q15_regression1_vegfruit(iso) Vegetables and fruits share
-  q15_foodtree1_kcal_animals(iso,kfo_ap)  Demand for animal products
-  q15_foodtree1_kcal_processed(iso,kfo_pf) Demand for processed products
-  q15_foodtree1_kcal_staples(iso,kfo_st)     Demand for staple products
-  q15_foodtree1_kcal_vegetables(iso)     Demand for vegetable and fruits products
+  q15_regression_kcal(iso)     Per capita total consumption
+  q15_regression_animals(iso)       Livestock share
+  q15_regression_processed(iso)       Processed share
+  q15_regression_vegfruit(iso) Vegetables and fruits share
+  q15_foodtree_kcal_animals(iso,kfo_ap)  Demand for animal products
+  q15_foodtree_kcal_processed(iso,kfo_pf) Demand for processed products
+  q15_foodtree_kcal_staples(iso,kfo_st)     Demand for staple products
+  q15_foodtree_kcal_vegetables(iso)     Demand for vegetable and fruits products
+  q15_regression_intake(iso,sex,age_group)   intake regressions
 
 ;
 
@@ -47,6 +48,7 @@ positive variables
   v15_processed_share_iso(iso)        Uncalibrated regression estimates of  processed share
   v15_vegfruit_share_iso(iso)       Uncalibrated regression estimates of share of vegetables fruits and nuts within diet
   v15_income_pc_real_ppp_iso(iso)    real income per capita (USD)
+  v15_kcal_intake_regression(iso,sex,age_group) Uncalibrated regression estimate for per-capita intake (kcal)
 ;
 
 variables
@@ -57,7 +59,7 @@ variables
 
 ;
 
-scalar s15_count ;
+scalar s15_count counter for creating average consumption over the length between timesteps;
 
 parameters
 * technical
@@ -80,7 +82,6 @@ parameters
 
 * diet structure
   p15_kcal_requirement(t,iso,sex,age_group)   Intake requirements of a standardized BMI population dependent on physical activity and body size (kcal per captia per day)
-  p15_kcal_requirement_average(t,iso)     Intake requirements of a standardized BMI population dependent on demographic structure, physical activity and body size (kcal per captia per day)
   p15_kcal_regression(t, iso, kfo)        Uncalibrated regression estimates of calorie demand (Kcal per cap per day)
 
  i15_ruminant_fadeout(t_all) ruminant fadeout share (1)
@@ -95,6 +96,8 @@ parameters
 * diet calibration
   p15_kcal_balanceflow(t,iso,kfo)               balanceflow to diverge from mean calories of regressions
   p15_kcal_balanceflow_lastcalibrationyear(iso,kfo) the balanceflow for the last year with observations
+  p15_intake_balanceflow(t,iso,sex,age_group)   balanceflow to diverge from mean calories of regressions
+  p15_intake_balanceflow_lastcalibrationyear(iso,sex,age_group)  the balanceflow for the last year with observations
 
 * before shock
 
@@ -128,14 +131,15 @@ model m15_food_demand /
       q15_aim,
       q15_budget,
       q15_real_income,
-      q15_regression1_kcal,
-      q15_regression1_animals,
-      q15_regression1_processed,
-      q15_regression1_vegfruit,
-      q15_foodtree1_kcal_animals,
-      q15_foodtree1_kcal_processed,
-      q15_foodtree1_kcal_staples,
-      q15_foodtree1_kcal_vegetables/;
+      q15_regression_kcal,
+      q15_regression_intake,
+      q15_regression_animals,
+      q15_regression_processed,
+      q15_regression_vegfruit,
+      q15_foodtree_kcal_animals,
+      q15_foodtree_kcal_processed,
+      q15_foodtree_kcal_staples,
+      q15_foodtree_kcal_vegetables/;
 
 m15_food_demand.optfile   = 0 ;
 m15_food_demand.scaleopt  = 1 ;
@@ -151,29 +155,31 @@ model magpiemini /
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_dem_food(t,i,kall,type)                       Demand for food (Mt DM)
- ov15_kcal_pc(t,i,kfo,type)                       Per capita calories (kcal per capita per day)
- ov15_kcal_regression(t,iso,kfo,type)             Uncalibrated regression estimates of calorie demand (Kcal per cap per day)
- ov15_kcal_regression_total(t,iso,type)           Uncalibrated regression estimates of  total per capita calories (Kcal per cap per day)
- ov15_livestock_share_iso(t,iso,type)             Uncalibrated regression estimates of  livestock share
- ov15_processed_share_iso(t,iso,type)             Uncalibrated regression estimates of  processed share
- ov15_vegfruit_share_iso(t,iso,type)              Uncalibrated regression estimates of share of vegetables fruits and nuts within diet
- ov15_income_pc_real_ppp_iso(t,iso,type)          real income per capita (USD)
- ov15_demand_nonfood(t,iso,type)                  non-food demand (units)
- ov15_objective(t,type)                           objective term
- ov15_objective_standalone(t,type)                objective term standalone
- oq15_food_demand(t,i,kfo,type)                   Food demand (million Kcal)
- oq15_aim(t,type)                                 aim function food demand model
- oq15_aim_standalone(t,type)                      aim function standalone model
- oq15_budget(t,iso,type)                          Household Budget Constraint
- oq15_real_income(t,iso,type)                     Calculation of real income
- oq15_regression1_kcal(t,iso,type)                Per capita total consumption
- oq15_regression1_animals(t,iso,type)             Livestock share
- oq15_regression1_processed(t,iso,type)           Processed share
- oq15_regression1_vegfruit(t,iso,type)            Vegetables and fruits share
- oq15_foodtree1_kcal_animals(t,iso,kfo_ap,type)   Demand for animal products
- oq15_foodtree1_kcal_processed(t,iso,kfo_pf,type) Demand for processed products
- oq15_foodtree1_kcal_staples(t,iso,kfo_st,type)   Demand for staple products
- oq15_foodtree1_kcal_vegetables(t,iso,type)       Demand for vegetable and fruits products
+ ov_dem_food(t,i,kall,type)                            Demand for food (Mt DM)
+ ov15_kcal_pc(t,i,kfo,type)                            Per capita calories (kcal per capita per day)
+ ov15_kcal_regression(t,iso,kfo,type)                  Uncalibrated regression estimates of calorie demand (Kcal per cap per day)
+ ov15_kcal_regression_total(t,iso,type)                Uncalibrated regression estimates of  total per capita calories (Kcal per cap per day)
+ ov15_livestock_share_iso(t,iso,type)                  Uncalibrated regression estimates of  livestock share
+ ov15_processed_share_iso(t,iso,type)                  Uncalibrated regression estimates of  processed share
+ ov15_vegfruit_share_iso(t,iso,type)                   Uncalibrated regression estimates of share of vegetables fruits and nuts within diet
+ ov15_income_pc_real_ppp_iso(t,iso,type)               real income per capita (USD)
+ ov15_kcal_intake_regression(t,iso,sex,age_group,type) Uncalibrated regression estimate for per-capita intake (kcal)
+ ov15_demand_nonfood(t,iso,type)                       non-food demand (units)
+ ov15_objective(t,type)                                objective term
+ ov15_objective_standalone(t,type)                     objective term standalone
+ oq15_food_demand(t,i,kfo,type)                        Food demand (million Kcal)
+ oq15_aim(t,type)                                      aim function food demand model
+ oq15_aim_standalone(t,type)                           aim function standalone model
+ oq15_budget(t,iso,type)                               Household Budget Constraint
+ oq15_real_income(t,iso,type)                          Calculation of real income
+ oq15_regression_kcal(t,iso,type)                      Per capita total consumption
+ oq15_regression_animals(t,iso,type)                   Livestock share
+ oq15_regression_processed(t,iso,type)                 Processed share
+ oq15_regression_vegfruit(t,iso,type)                  Vegetables and fruits share
+ oq15_foodtree_kcal_animals(t,iso,kfo_ap,type)         Demand for animal products
+ oq15_foodtree_kcal_processed(t,iso,kfo_pf,type)       Demand for processed products
+ oq15_foodtree_kcal_staples(t,iso,kfo_st,type)         Demand for staple products
+ oq15_foodtree_kcal_vegetables(t,iso,type)             Demand for vegetable and fruits products
+ oq15_regression_intake(t,iso,sex,age_group,type)      intake regressions
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

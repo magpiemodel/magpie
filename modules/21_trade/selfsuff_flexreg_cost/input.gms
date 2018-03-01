@@ -12,6 +12,7 @@ scalars
   c21_reduction_regionalized regionalized annual trade balance reduction / 0.005  /
   c21_reduction_globalized   globalized annual trade balance reduction   / 0.01   /
   c21_reduction_fragmented   fragmented annual trade balance reduction   / 0      /
+  s21_trade_tariff                                                       / 0 /
 ;
 
 table f21_self_suff(t_all,i,kall) regional self-sufficiency rates (1)
@@ -28,3 +29,15 @@ table f21_trade_balanceflow(t_all,kall) domestic balance flows (mio. ton DM)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_balanceflow.cs3"
 $offdelim;
+
+table f21_trade_margin(i,kall) costs of freight and insurance (USD per DMT)
+$ondelim
+$include "./modules/21_trade/input/f21_trade_margin.cs3"
+$offdelim
+;
+
+table f21_trade_tariff(i,kall) specific duty tariffs (USD per DMT)
+$ondelim
+$include "./modules/21_trade/input/f21_trade_tariff.cs3"
+$offdelim
+;
