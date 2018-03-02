@@ -47,6 +47,15 @@ default <- function(cfg, calibration=NULL) {
   return(submitCalibration("ValidationDefault"))
 }
 
+
+mixed_factor <- function(cfg, calibration=NULL) {
+  cfg$title <- "mixed_factor"
+  cfg$input <- buildInputVector(calibration=calibration)
+  cfg$gms$factor_costs <- "mixed_feb17"
+  try(start_run(cfg=cfg, codeCheck=FALSE))
+  return(submitCalibration("ValidationMixedFactor"))
+}
+
 performance_bau <- function(cfg, calibration=NULL) {
   cfg$title <- "bau"
   cfg$input <- buildInputVector(calibration=calibration)
@@ -218,6 +227,8 @@ cfg <- setScenario(cfg,"SSP2")
 ### test runs ###
 
 default_calibration <- default(cfg)
+
+mixed_factor(cfg)
 
 #cc_default(cfg, default_calibration)
 default_rcp26(cfg, default_calibration)
