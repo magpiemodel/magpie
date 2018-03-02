@@ -37,7 +37,7 @@ getfiledestinations <- function() {
 delete_olddata <- function(x) {
   if(is.character(x)) {
     if(!file.exists(x)) stop("Cannot find file mapping!")
-    map <- read.csv(x, sep = ";", stringsAsFactors = FALSE), comment.char = "#")
+    map <- read.csv(x, sep = ";", stringsAsFactors = FALSE, comment.char = "#")
   } else {
     map <- x
   }
@@ -247,7 +247,7 @@ archive_download <- function(files=c("GLUES2-sresa2-constant_co2-miub_echo_g_ERB
   # delete files which will be copied/moved later on with copy_input
   delete_olddata(file2destination)
   # delete additional files not treated by copy_input
-  delete_olddata("scripts/downloader/inputdelete.csv")
+  delete_olddata("scripts/downloader/inputdelete.cfg")
   cat("done!\n\n")
 
   ##################### DATA DOWNLOAD #########################################
