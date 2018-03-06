@@ -47,6 +47,15 @@ default <- function(cfg, calibration=NULL) {
   return(submitCalibration("ValidationDefault"))
 }
 
+cutyieldcalib <- function(cfg) {
+  x <- magclass::read.magpie("modules/14_yields/input/f14_yld_calib.csv")
+  x[as.vector(x[,,"crop"]>1),,"crop"] <- 1
+  magclass::write.magpie(x,"modules/14_yields/input/f14_yld_calib.csv")
+  calibration <- submitCalibration("ValidationYieldCalibCutoff")
+  cfg$title <- "cutyieldcalib"
+  cfg$input <- buildInputVector(calibration=calibration)
+  try(start_run(cfg=cfg, codeCheck=FALSE))
+}
 
 mixed_factor <- function(cfg) {
   cfg$title <- "mixed_factor"
@@ -251,6 +260,7 @@ cfg <- setScenario(cfg,"SSP2")
 
 default_calibration <- default(cfg)
 
+cutyieldcalib(cfg)
 mixed_factor(cfg)
 
 #cc_default(cfg, default_calibration)
