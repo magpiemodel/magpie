@@ -48,9 +48,10 @@ default <- function(cfg, calibration=NULL) {
 }
 
 
-mixed_factor <- function(cfg, calibration=NULL) {
+mixed_factor <- function(cfg) {
   cfg$title <- "mixed_factor"
-  cfg$input <- buildInputVector(calibration=calibration)
+  cfg$recalibrate <- TRUE
+  cfg$input <- buildInputVector()
   cfg$gms$factor_costs <- "mixed_feb17"
   try(start_run(cfg=cfg, codeCheck=FALSE))
   return(submitCalibration("ValidationMixedFactor"))
@@ -100,7 +101,7 @@ cc_default <- function(cfg, calibration=NULL) {
   try(start_run(cfg=cfg, codeCheck=FALSE))
 }
 
-timesteps <- function(cfg, calibration=NULL) { 
+timesteps <- function(cfg, calibration=NULL) {
   cfg$title <- "timesteps"
   cfg$input <- buildInputVector(calibration=calibration)
   cfg$gms$c_timesteps <- "test_TS"
@@ -113,7 +114,7 @@ flex_demand <- function(cfg, calibration=NULL) {
   cfg$gms$s15_elastic_demand <- 1
   try(start_run(cfg=cfg, codeCheck=FALSE))
 }
-  
+
 ssp1 <- function(cfg, calibration=NULL) {
   cfg$title <- "ssp1"
   cfg$input <- buildInputVector(calibration=calibration)
@@ -142,7 +143,17 @@ cc_default_rcp26 <- function(cfg, calibration=NULL) {
   cfg <- setScenario(cfg, "cc")
   try(start_run(cfg=cfg, codeCheck=FALSE))
 }
-  
+
+cc_co2_rcp26 <- function(cfg, calibration=NULL) {
+  cfg$title <- "cc_co2_rcp26"
+  cfg$input <- buildInputVector(calibration=calibration,co2="co2")
+  cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
+  cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
+  cfg <- setScenario(cfg, "cc")
+  try(start_run(cfg=cfg, codeCheck=FALSE))
+}
+
+
 flex_demand_rcp26 <- function(cfg, calibration=NULL) {
   cfg$title <- "flex_demand_rcp"
   cfg$input <- buildInputVector(calibration=calibration)
@@ -170,6 +181,18 @@ globio_rcp26 <- function(cfg, calibration=NULL) {
   try(start_run(cfg=cfg, codeCheck=FALSE))
 }
 
+npi <- function(cfg, calibration=NULL) {
+  cfg$title <- "npi"
+  cfg$input <- buildInputVector(calibration=calibration)
+  try(start_run(cfg=cfg,scenario="NPI",codeCheck=FALSE))
+}
+
+indc <- function(cfg, calibration=NULL) {
+  cfg$title <- "indc"
+  cfg$input <- buildInputVector(calibration=calibration)
+  try(start_run(cfg=cfg,scenario="INDC",codeCheck=FALSE))
+}
+
 npi_rcp26 <- function(cfg, calibration=NULL) {
   cfg$title <- "npi_rcp26"
   cfg$input <- buildInputVector(calibration=calibration)
@@ -193,7 +216,7 @@ h12 <- function(cfg) {
   return(submitCalibration("h12Default"))
 }
 
-h12_rcp26 <- function(cfg, calibration=NULL) { 
+h12_rcp26 <- function(cfg, calibration=NULL) {
   cfg$title <- "h12_rcp26"
   cfg$input <- buildInputVector(regionmapping = "h12", calibration=calibration)
   cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
@@ -233,6 +256,7 @@ mixed_factor(cfg)
 #cc_default(cfg, default_calibration)
 default_rcp26(cfg, default_calibration)
 cc_default_rcp26(cfg, default_calibration)
+cc_co2_rcp26(cfg, default_calibration)
 
 performance_bau(cfg, default_calibration)
 performance_rcp26(cfg, default_calibration)
@@ -253,6 +277,9 @@ ssp5(cfg, default_calibration)
 
 globio_rcp26(cfg, default_calibration)
 
+npi(cfg, default_calibration)
+indc(cfg, default_calibration)
+
 npi_rcp26(cfg, default_calibration)
 indc_rcp26(cfg, default_calibration)
 
@@ -262,4 +289,3 @@ h12_calibration <- h12(cfg)
 h12_rcp26(cfg, h12_calibration)
 
 mag(cfg)
-
