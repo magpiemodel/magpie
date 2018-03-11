@@ -31,7 +31,7 @@ performance_start <- function(cfg="default.cfg",modulepath="modules/",id="perfor
   #start default run
   cfg$title <- paste(id,"default",sep="__")
   cat(cfg$title,"\n")
-  start_run(cfg)
+  try(start_run(cfg))
 
   m <- getModules(modulepath)
   for(i in 1:dim(m)[1]) { 
@@ -42,7 +42,7 @@ performance_start <- function(cfg="default.cfg",modulepath="modules/",id="perfor
       cfg$gms[[m[i,"name"]]] <- j
       cfg$title <- paste(id,m[i,"name"],j,sep="__")
       cat(cfg$title,"\n")
-      start_run(cfg, codeCheck=FALSE)
+      try(start_run(cfg, codeCheck=FALSE))
     }
     cfg$gms[[m[i,"name"]]] <- default
   }
