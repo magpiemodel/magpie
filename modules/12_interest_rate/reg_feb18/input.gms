@@ -12,7 +12,7 @@ scalars
 
 parameter f12_interest_bound(bound12) lower and higher bounds of interest rates
 $ondelim
-$include "./modules/12_interest_rate/input/f12_interest_rate_bound.csv"
+$include "./modules/12_interest_rate/input/f12_interest_rate_bound.cs3"
 $offdelim
 ;
 
