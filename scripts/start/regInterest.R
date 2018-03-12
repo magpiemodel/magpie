@@ -35,7 +35,7 @@ buildInputVector <- function(regionmapping   = "h11",
   archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", mappings[regionmapping], ".tgz")
   madrat  <- paste0("rev", madrat_rev, "_", mappings[regionmapping], "_magpie.tgz")
   validation  <- paste0("rev", validation_rev, "_", mappings[regionmapping], "_validation.tgz")
-  return(c(archive,madrat,validation,calibration,input_reg_interest))
+  return(c(archive,madrat,validation,calibration,additional_data,input_reg_interest))
 }
 
 
