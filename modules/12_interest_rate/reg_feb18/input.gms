@@ -10,9 +10,9 @@ scalars
   sm_invest_horizon investment time horizon (years)                 / 30 /
 ;
 
-table f12_interest(t,scen12) real interest rate scenarios
+parameter f12_interest_bound(bound12) lower and higher bounds of interest rates
 $ondelim
-$include "./modules/12_interest_rate/input/f12_interest_rate_bound.cs3"
+$include "./modules/12_interest_rate/input/f12_interest_rate_bound.csv"
 $offdelim
 ;
 
