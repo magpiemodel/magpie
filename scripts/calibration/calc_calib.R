@@ -49,7 +49,7 @@ get_calibarea<-function(gdx_file){
 }
 
 # Calculate the correction factor and save it
-update_calib<-function(gdx_file,calibrate_pasture=TRUE,damping_factor=0.6, calib_file){
+update_calib<-function(gdx_file,calibrate_pasture=TRUE,damping_factor=0.6, calib_file, crop_max=1){
   require(magclass)
   require(magpie4)
   if(!(modelstat(gdx_file)[1,1,1]%in%c(1,2,7))) stop("Calibration run infeasible")
@@ -62,12 +62,18 @@ update_calib<-function(gdx_file,calibrate_pasture=TRUE,damping_factor=0.6, calib
   calib_factor <- damping_factor*(calib_factor-1) + 1
   old_calib<-read.magpie(calib_file)
   calib_factor <- old_calib * calib_factor
+
+  if(!is.null(crop_max)) {
+    calib_factor_new[,,"crop"][calib_factor[,,"crop"]>crop_max] <- crop_max
+    calib_factor[,,"crop"][calib_factor[,,"crop"]>crop_max] <- crop_max
+  }
+
   comment <- c(" description: Regional yield calibration file",
                " unit: -",
                " note: All values in the file are set to 1 if a new regional setup is used.",
                " origin: scripts/calibration/calc_calib.R (path relative to model main directory)",
                paste0(" creation date: ",date()))
-  write.magpie(setYears(calib_factor,NULL), calib_file, comment = comment)
+  write.magpie(round(setYears(calib_factor,NULL),2), calib_file, comment = comment)
   return(list(calib_factor_new ,tc_factor, area_factor))
 }
 

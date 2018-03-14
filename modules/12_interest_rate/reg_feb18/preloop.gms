@@ -6,14 +6,13 @@
 
 
 *******Income Country Grouping based on World Bank definitions
-t_to_i_to_dev(t,i,dev) = no;
-t_to_i_to_dev(t,i,"lic") = yes$(im_gdp_pc_ppp(t,i) <= 1045);
-t_to_i_to_dev(t,i,"mic") = yes$(im_gdp_pc_ppp(t,i) > 1045 AND im_gdp_pc_ppp(t,i) < 12746);
-t_to_i_to_dev(t,i,"hic") = yes$(im_gdp_pc_ppp(t,i) >= 12746);
+s12_min_dev = smin(i,f09_development_state("y1995",i,"%c09_gdp_scenario%"));
+s12_max_dev = smax(i,f09_development_state("y1995",i,"%c09_gdp_scenario%"));
+s12_slope_a = (f12_interest_bound("y1995","high")-f12_interest_bound("y1995","low"))/(s12_min_dev-s12_max_dev);
+s12_intercept_b = f12_interest_bound("y1995","high")-s12_slope_a*s12_min_dev;
+p12_interest(t,i) = s12_slope_a *f09_development_state(t,i,"%c09_gdp_scenario%") + s12_intercept_b;
 
 $ifthen "%c12_interest_rate%" == "coupling" p12_interest(t,i) = f12_interest_coupling(t);
-$elseif "%c12_interest_rate%" == "mixed" p12_interest(t,i) = sum(t_to_i_to_dev("y1995",i,dev), sum(scen12_to_dev(scen12,dev), f12_interest(t,scen12)));
-$else p12_interest(t,i) = f12_interest(t,"%c12_interest_rate%");
 $endif
 
 p12_annuity_due(t,i) = m_annuity_due(p12_interest(t,i),sm_invest_horizon);
