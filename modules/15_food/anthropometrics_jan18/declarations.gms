@@ -10,12 +10,11 @@ equations
 ;
 
 parameters
-i15_kcal_pc_initial(t,i,kfo) Food demand without price shock and with calibration (kcal per capita per day)
+  i15_kcal_pc_initial(t,i,kfo) Food demand without price shock and with calibration (kcal per capita per day)
 ;
 
 positive variables
-vm_dem_food(i,kall)       Demand for food (Mt DM)
-v15_kcal_pc(i,kfo)       Per capita calories (kcal per capita per day)
+  vm_dem_food(i,kall)       Demand for food (Mt DM)
 ;
 
 
@@ -156,7 +155,6 @@ model magpiemini /
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_dem_food(t,i,kall,type)                            Demand for food (Mt DM)
- ov15_kcal_pc(t,i,kfo,type)                            Per capita calories (kcal per capita per day)
  ov15_kcal_regression(t,iso,kfo,type)                  Uncalibrated regression estimates of calorie demand (Kcal per cap per day)
  ov15_kcal_regression_total(t,iso,type)                Uncalibrated regression estimates of  total per capita calories (Kcal per cap per day)
  ov15_livestock_share_iso(t,iso,type)                  Uncalibrated regression estimates of  livestock share

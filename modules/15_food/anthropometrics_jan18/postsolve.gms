@@ -1,7 +1,6 @@
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_dem_food(t,i,kall,"marginal")                            = vm_dem_food.m(i,kall);
- ov15_kcal_pc(t,i,kfo,"marginal")                            = v15_kcal_pc.m(i,kfo);
  ov15_kcal_regression(t,iso,kfo,"marginal")                  = v15_kcal_regression.m(iso,kfo);
  ov15_kcal_regression_total(t,iso,"marginal")                = v15_kcal_regression_total.m(iso);
  ov15_livestock_share_iso(t,iso,"marginal")                  = v15_livestock_share_iso.m(iso);
@@ -27,7 +26,6 @@
  oq15_foodtree_kcal_vegetables(t,iso,"marginal")             = q15_foodtree_kcal_vegetables.m(iso);
  oq15_regression_intake(t,iso,sex,age_group,"marginal")      = q15_regression_intake.m(iso,sex,age_group);
  ov_dem_food(t,i,kall,"level")                               = vm_dem_food.l(i,kall);
- ov15_kcal_pc(t,i,kfo,"level")                               = v15_kcal_pc.l(i,kfo);
  ov15_kcal_regression(t,iso,kfo,"level")                     = v15_kcal_regression.l(iso,kfo);
  ov15_kcal_regression_total(t,iso,"level")                   = v15_kcal_regression_total.l(iso);
  ov15_livestock_share_iso(t,iso,"level")                     = v15_livestock_share_iso.l(iso);
@@ -53,7 +51,6 @@
  oq15_foodtree_kcal_vegetables(t,iso,"level")                = q15_foodtree_kcal_vegetables.l(iso);
  oq15_regression_intake(t,iso,sex,age_group,"level")         = q15_regression_intake.l(iso,sex,age_group);
  ov_dem_food(t,i,kall,"upper")                               = vm_dem_food.up(i,kall);
- ov15_kcal_pc(t,i,kfo,"upper")                               = v15_kcal_pc.up(i,kfo);
  ov15_kcal_regression(t,iso,kfo,"upper")                     = v15_kcal_regression.up(iso,kfo);
  ov15_kcal_regression_total(t,iso,"upper")                   = v15_kcal_regression_total.up(iso);
  ov15_livestock_share_iso(t,iso,"upper")                     = v15_livestock_share_iso.up(iso);
@@ -79,7 +76,6 @@
  oq15_foodtree_kcal_vegetables(t,iso,"upper")                = q15_foodtree_kcal_vegetables.up(iso);
  oq15_regression_intake(t,iso,sex,age_group,"upper")         = q15_regression_intake.up(iso,sex,age_group);
  ov_dem_food(t,i,kall,"lower")                               = vm_dem_food.lo(i,kall);
- ov15_kcal_pc(t,i,kfo,"lower")                               = v15_kcal_pc.lo(i,kfo);
  ov15_kcal_regression(t,iso,kfo,"lower")                     = v15_kcal_regression.lo(iso,kfo);
  ov15_kcal_regression_total(t,iso,"lower")                   = v15_kcal_regression_total.lo(iso);
  ov15_livestock_share_iso(t,iso,"lower")                     = v15_livestock_share_iso.lo(iso);
