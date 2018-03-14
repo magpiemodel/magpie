@@ -96,8 +96,6 @@ if (s15_elastic_demand =1,
                                        im_pop_iso(t,iso)
                                    );
 
-        v15_kcal_pc.fx(i,kfo) = p15_kcal_pc(t,i,kfo);
-
 
         if (p15_modelstat(t) < 3,
            put_utility 'shell' / 'mv m15_food_demand_p.gdx m15_food_demand_' t.tl:0'.gdx';
