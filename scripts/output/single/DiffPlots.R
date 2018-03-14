@@ -34,7 +34,9 @@ getNames(modout_croparea,dim=2) <- reportingnames(getNames(modout_croparea,dim=2
 hist_croparea <- calcOutput("ValidCellularCroparea",aggregate=FALSE)
 
 ## Writing netcdf files
+writeLines("\nWriting historical data to nc file\n")
 write.magpie(hist_croparea,file_name=paste0(outputdir,"/hist_CA.nc"),comment="historical crop area")
+writeLines("\nWriting model output to nc file\n")
 write.magpie(modout_croparea,file_name=paste0(outputdir,"/modout_CA.nc"),comment="model output crop area")
 
 sw<-swopen(paste0(outputdir,"/Crop_Scpecific_Diff_Plots.pdf"))
@@ -67,6 +69,7 @@ if( namediff > 0){
       colors <- c("red4","red","cadetblue1","green","green4")
       for(y in 1:length(yrs)){
         diff <- model[[yrs[y]]]-hist[[yrs[y]]]
+        cat(paste0("Processing diff map :",var," --- ",gsub("X","",yrs[y]),"\n"))
         swfigure(sw,"plot",diff,sw_option="width=10,height=6",tex_caption = paste0("Diff plot for ",var," in ",gsub("X","",yrs[y])),breaks=breakpoints, col=colors)
       }
     }
