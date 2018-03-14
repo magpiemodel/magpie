@@ -58,42 +58,22 @@ q15_regression_intake(iso,sex,age_group) ..
 q15_regression_kcal(iso) ..
          v15_kcal_regression_total(iso)
          =e=
-         sum((sex,age_group,ct),
-* SSP1
-$ifthen "%c15_food_scenario%"=="SSP1"   (v15_kcal_intake_regression(iso,sex,age_group)*(1+61.61*v15_income_pc_real_ppp_iso(iso)/(7.989e+05+v15_income_pc_real_ppp_iso(iso))))
-* SSP2
-$elseif "%c15_food_scenario%"=="SSP2"   (v15_kcal_intake_regression(iso,sex,age_group)*(1+0.3757*v15_income_pc_real_ppp_iso(iso)/(2721+v15_income_pc_real_ppp_iso(iso))))
-* SSP3
-$elseif "%c15_food_scenario%"=="SSP3"   (v15_kcal_intake_regression(iso,sex,age_group)*(1+0.04924*v15_income_pc_real_ppp_iso(iso)/(196.8+v15_income_pc_real_ppp_iso(iso))))
-* SSP4
-$elseif "%c15_food_scenario%"=="SSP4"   (v15_kcal_intake_regression(iso,sex,age_group)*(0.3757*v15_income_pc_real_ppp_iso(iso)/(2731+v15_income_pc_real_ppp_iso(iso))))
-* SSP5
-$elseif "%c15_food_scenario%"=="SSP5"   (v15_kcal_intake_regression(iso,sex,age_group)*(0.3757*v15_income_pc_real_ppp_iso(iso)/(2731+v15_income_pc_real_ppp_iso(iso))))
-$endif
-
-              * im_demography(ct,iso,sex,age_group)
-         )/sum((sex,age_group,ct),
-              im_demography(ct,iso,sex,age_group)
-         )
-         ;
+         sum((sex,age_group,ct),v15_kcal_intake_regression(iso,sex,age_group)
+         *(i15_par("kcal","a") + i15_par("kcal","b")*v15_income_pc_real_ppp_iso(iso)
+         /(i15_par("kcal","c") + v15_income_pc_real_ppp_iso(iso)**i15_par("kcal","d")))
+         * im_demography(ct,iso,sex,age_group))
+         /sum((sex,age_group,ct), im_demography(ct,iso,sex,age_group));
 
 
 
   q15_regression_animals(iso) ..
          v15_livestock_share_iso(iso)
          =e=
-* SSP1
-$ifthen "%c15_food_scenario%"=="SSP1"   (58.59*v15_income_pc_real_ppp_iso(iso)/(1.358e+06+v15_income_pc_real_ppp_iso(iso)**1.5))
-* SSP2
-$elseif "%c15_food_scenario%"=="SSP2"   (0.3162*v15_income_pc_real_ppp_iso(iso)/(4078+v15_income_pc_real_ppp_iso(iso)))
-* SSP3
-$elseif "%c15_food_scenario%"=="SSP3"   (0.1117*v15_income_pc_real_ppp_iso(iso)/(1.143e+03+v15_income_pc_real_ppp_iso(iso)**0.9))
-* SSP4
-$elseif "%c15_food_scenario%"=="SSP4"   (0.3162*v15_income_pc_real_ppp_iso(iso)/(4078+v15_income_pc_real_ppp_iso(iso)))
-* SSP5
-$elseif "%c15_food_scenario%"=="SSP5"   (0.3162*v15_income_pc_real_ppp_iso(iso)/(4078+v15_income_pc_real_ppp_iso(iso)))
-$endif
-         ;
+         i15_par("livs","a") + i15_par("livs","b")*v15_income_pc_real_ppp_iso(iso)
+         /(i15_par("livs","c") + v15_income_pc_real_ppp_iso(iso)**i15_par("livs","d"));
+
+
+
 
 q15_regression_processed(iso) ..
          v15_processed_share_iso(iso)
@@ -110,6 +90,9 @@ $elseif "%c15_food_scenario%"=="SSP4"   (95.61*v15_income_pc_real_ppp_iso(iso)/(
 $elseif "%c15_food_scenario%"=="SSP5"   (95.61*v15_income_pc_real_ppp_iso(iso)/(1.523e+06+v15_income_pc_real_ppp_iso(iso)**1.5))
 $endif
          ;
+
+
+
 
 q15_regression_vegfruit(iso) ..
          v15_vegfruit_share_iso(iso)

@@ -74,7 +74,12 @@ sets
    nutrition nutritition attributes
    /kcal, protein/
 
+  type15
+      / kcal, livs, proc, vegf /
 
+  par15
+      / a, b, c, d /
+      
 *** Scenarios
    food_scen15  scenarios
        / SSP1, SSP2, SSP3, SSP4, SSP5,

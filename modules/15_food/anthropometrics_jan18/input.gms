@@ -25,6 +25,10 @@ $offdelim;
 
 *** Food Demand Model
 
+table f15_parameters(type15,food_scen15,par15)  Food regression parameters (USD per cap or -)
+$ondelim
+$include "./modules/15_food/input/f15_parameters.csv"
+$offdelim;
 
 table f15_kcal_pc_iso(t_all,iso,kfo)  Observed per-capita calories in the past (kcal per captia per day)
 $ondelim
