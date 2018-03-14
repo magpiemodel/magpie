@@ -67,7 +67,7 @@ if( namediff > 0){
       colors <- c("red4","red","cadetblue1","green","green4")
       for(y in 1:length(yrs)){
         diff <- model[[yrs[y]]]-hist[[yrs[y]]]
-        swfigure(sw,"plot",diff,sw_option="width=10,height=6",tex_caption = paste0("Diff plot for ",var," in ",gsub("X","",yrs[y])))
+        swfigure(sw,"plot",diff,sw_option="width=10,height=6",tex_caption = paste0("Diff plot for ",var," in ",gsub("X","",yrs[y])),breaks=breakpoints, col=colors)
       }
     }
   }
