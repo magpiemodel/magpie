@@ -39,11 +39,12 @@ write.magpie(modout_croparea,file_name=paste0(outputdir,"/modout_CA.nc"),comment
 
 sw<-swopen(paste0(outputdir,"/Crop_Scpecific_Diff_Plots.pdf"))
 
+swlatex(sw,c("\\title{Difference plots}","\\author{PIK Landuse Group}"))
 swlatex(sw,"\\huge")
 swlatex(sw,"\\textbf{Difference plots (Model output-Historical)}\\newline")
 swlatex(sw,"\\normalsize")
 swlatex(sw,"\\newline")
-swlatex(sw,"\\tableofcontents")
+#swlatex(sw,"\\tableofcontents")
 swlatex(sw,"\\newpage")
 
 namediff <- length(setdiff(names(nc_open(paste0(outputdir,"/hist_CA.nc"))$var),names(nc_open(paste0(outputdir,"/modout_CA.nc"))$var)))
