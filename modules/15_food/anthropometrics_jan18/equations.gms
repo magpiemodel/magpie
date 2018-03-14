@@ -58,88 +58,46 @@ q15_regression_intake(iso,sex,age_group) ..
 q15_regression_kcal(iso) ..
          v15_kcal_regression_total(iso)
          =e=
-         sum((sex,age_group,ct),v15_kcal_intake_regression(iso,sex,age_group)
-         *(i15_par("kcal","a") + i15_par("kcal","b")*v15_income_pc_real_ppp_iso(iso)
-         /(i15_par("kcal","c") + v15_income_pc_real_ppp_iso(iso)**i15_par("kcal","d")))
+         sum((sex,age_group,ct), v15_kcal_intake_regression(iso,sex,age_group)
+         *(i15_par("kcal","a") + v15_share(iso, "kcal"))
          * im_demography(ct,iso,sex,age_group))
          /sum((sex,age_group,ct), im_demography(ct,iso,sex,age_group));
 
 
-
-  q15_regression_animals(iso) ..
-         v15_livestock_share_iso(iso)
-         =e=
-         i15_par("livs","a") + i15_par("livs","b")*v15_income_pc_real_ppp_iso(iso)
-         /(i15_par("livs","c") + v15_income_pc_real_ppp_iso(iso)**i15_par("livs","d"));
-
-
-
-
-q15_regression_processed(iso) ..
-         v15_processed_share_iso(iso)
-         =e=
-* SSP1
-$ifthen "%c15_food_scenario%"=="SSP1"   (95.61*v15_income_pc_real_ppp_iso(iso)/(1.523e+06+v15_income_pc_real_ppp_iso(iso)**1.5))
-* SSP2
-$elseif "%c15_food_scenario%"=="SSP2"   (0.4884*v15_income_pc_real_ppp_iso(iso)/(4039+v15_income_pc_real_ppp_iso(iso)))
-* SSP3
-$elseif "%c15_food_scenario%"=="SSP3"   (0.1715*v15_income_pc_real_ppp_iso(iso)/(1039+v15_income_pc_real_ppp_iso(iso)**0.9))
-* SSP4
-$elseif "%c15_food_scenario%"=="SSP4"   (95.61*v15_income_pc_real_ppp_iso(iso)/(1.523e+06+v15_income_pc_real_ppp_iso(iso)**1.5))
-* SSP5
-$elseif "%c15_food_scenario%"=="SSP5"   (95.61*v15_income_pc_real_ppp_iso(iso)/(1.523e+06+v15_income_pc_real_ppp_iso(iso)**1.5))
-$endif
-         ;
-
-
-
-
-q15_regression_vegfruit(iso) ..
-         v15_vegfruit_share_iso(iso)
-         =e=
-* SSP1
-$ifthen "%c15_food_scenario%"=="SSP1"   (0.02333*v15_income_pc_real_ppp_iso(iso)/(325.1+v15_income_pc_real_ppp_iso(iso)**0.8))
-* SSP2
-$elseif "%c15_food_scenario%"=="SSP2"   (0.1868*v15_income_pc_real_ppp_iso(iso)/(4.432e+03+v15_income_pc_real_ppp_iso(iso)))
-* SSP3
-$elseif "%c15_food_scenario%"=="SSP3"   (1.509*v15_income_pc_real_ppp_iso(iso)/(4.829e+04+v15_income_pc_real_ppp_iso(iso)**1.2))
-* SSP4
-$elseif "%c15_food_scenario%"=="SSP4"   (0.1868*v15_income_pc_real_ppp_iso(iso)/(4.432e+03+v15_income_pc_real_ppp_iso(iso)))
-* SSP5
-$elseif "%c15_food_scenario%"=="SSP5"   (0.02333*v15_income_pc_real_ppp_iso(iso)/(325.1+v15_income_pc_real_ppp_iso(iso)**0.8))
-$endif
-         ;
-
-
+  q15_regression(iso, type15) ..
+     v15_share(iso, type15)
+                =e=
+                i15_par(type15,"b")*v15_income_pc_real_ppp_iso(iso)
+                /(i15_par(type15,"c") + v15_income_pc_real_ppp_iso(iso)**i15_par(type15,"d"));
 
 q15_foodtree_kcal_animals(iso,kfo_ap) ..
          v15_kcal_regression(iso,kfo_ap)
          =e=
          v15_kcal_regression_total(iso)
-         * v15_livestock_share_iso(iso)
+         * v15_share(iso, "livs")
          * sum(ct,i15_livestock_kcal_structure_iso(ct,iso,kfo_ap));
 
 q15_foodtree_kcal_processed(iso,kfo_pf) ..
          v15_kcal_regression(iso,kfo_pf)
          =e=
          v15_kcal_regression_total(iso)
-         * (1 - v15_livestock_share_iso(iso))
-         * v15_processed_share_iso(iso)
+         * (1 - v15_share(iso, "livs"))
+         * v15_share(iso, "proc")
          * sum(ct,i15_processed_kcal_structure_iso(ct,iso,kfo_pf)) ;
 
 q15_foodtree_kcal_vegetables(iso) ..
          v15_kcal_regression(iso,"others")
          =e=
          v15_kcal_regression_total(iso)
-         * (1 - v15_livestock_share_iso(iso))
-         * (1 - v15_processed_share_iso(iso))
-         * v15_vegfruit_share_iso(iso);
+         * (1 - v15_share(iso, "livs"))
+         * (1 - v15_share(iso, "proc"))
+         * v15_share(iso, "vegf");
 
 q15_foodtree_kcal_staples(iso,kfo_st) ..
          v15_kcal_regression(iso,kfo_st)
          =e=
          v15_kcal_regression_total(iso)
-         * (1 - v15_livestock_share_iso(iso))
-         * (1 - v15_processed_share_iso(iso))
-         * (1 - v15_vegfruit_share_iso(iso))
+         * (1 - v15_share(iso, "livs"))
+         * (1 - v15_share(iso, "proc"))
+         * (1 - v15_share(iso, "vegf"))
          * sum(ct,i15_staples_kcal_structure_iso(ct,iso,kfo_st)) ;

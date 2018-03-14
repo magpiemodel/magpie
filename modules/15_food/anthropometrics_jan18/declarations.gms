@@ -28,24 +28,19 @@ equations
   q15_budget(iso)        Household Budget Constraint
   q15_real_income(iso)   Calculation of real income
   q15_regression_kcal(iso)     Per capita total consumption
-  q15_regression_animals(iso)       Livestock share
-  q15_regression_processed(iso)       Processed share
-  q15_regression_vegfruit(iso) Vegetables and fruits share
+  q15_regression(iso, type15)  Share regressions
   q15_foodtree_kcal_animals(iso,kfo_ap)  Demand for animal products
   q15_foodtree_kcal_processed(iso,kfo_pf) Demand for processed products
   q15_foodtree_kcal_staples(iso,kfo_st)     Demand for staple products
   q15_foodtree_kcal_vegetables(iso)     Demand for vegetable and fruits products
   q15_regression_intake(iso,sex,age_group)   intake regressions
-
 ;
 
 
 positive variables
   v15_kcal_regression(iso,kfo)     Uncalibrated regression estimates of calorie demand (Kcal per cap per day)
   v15_kcal_regression_total(iso)     Uncalibrated regression estimates of  total per capita calories (Kcal per cap per day)
-  v15_livestock_share_iso(iso)       Uncalibrated regression estimates of  livestock share
-  v15_processed_share_iso(iso)        Uncalibrated regression estimates of  processed share
-  v15_vegfruit_share_iso(iso)       Uncalibrated regression estimates of share of vegetables fruits and nuts within diet
+  v15_share(iso, type15)       Uncalibrated regression estimates of kcal shares (-)
   v15_income_pc_real_ppp_iso(iso)    real income per capita (USD per cap)
   v15_kcal_intake_regression(iso,sex,age_group) Uncalibrated regression estimate for per-capita intake (kcal)
 ;
@@ -159,10 +154,8 @@ parameters
  ov_dem_food(t,i,kall,type)                            Demand for food (Mt DM)
  ov15_kcal_regression(t,iso,kfo,type)                  Uncalibrated regression estimates of calorie demand (Kcal per cap per day)
  ov15_kcal_regression_total(t,iso,type)                Uncalibrated regression estimates of  total per capita calories (Kcal per cap per day)
- ov15_livestock_share_iso(t,iso,type)                  Uncalibrated regression estimates of  livestock share
- ov15_processed_share_iso(t,iso,type)                  Uncalibrated regression estimates of  processed share
- ov15_vegfruit_share_iso(t,iso,type)                   Uncalibrated regression estimates of share of vegetables fruits and nuts within diet
- ov15_income_pc_real_ppp_iso(t,iso,type)               real income per capita (USD)
+ ov15_share(t,iso,type15,type)                         Uncalibrated regression estimates of kcal shares (-)
+ ov15_income_pc_real_ppp_iso(t,iso,type)               real income per capita (USD per cap)
  ov15_kcal_intake_regression(t,iso,sex,age_group,type) Uncalibrated regression estimate for per-capita intake (kcal)
  ov15_demand_nonfood(t,iso,type)                       non-food demand (units)
  ov15_objective(t,type)                                objective term
@@ -173,9 +166,7 @@ parameters
  oq15_budget(t,iso,type)                               Household Budget Constraint
  oq15_real_income(t,iso,type)                          Calculation of real income
  oq15_regression_kcal(t,iso,type)                      Per capita total consumption
- oq15_regression_animals(t,iso,type)                   Livestock share
- oq15_regression_processed(t,iso,type)                 Processed share
- oq15_regression_vegfruit(t,iso,type)                  Vegetables and fruits share
+ oq15_regression(t,iso,type15,type)                    Share regressions
  oq15_foodtree_kcal_animals(t,iso,kfo_ap,type)         Demand for animal products
  oq15_foodtree_kcal_processed(t,iso,kfo_pf,type)       Demand for processed products
  oq15_foodtree_kcal_staples(t,iso,kfo_st,type)         Demand for staple products
