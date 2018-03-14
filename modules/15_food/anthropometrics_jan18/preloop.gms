@@ -37,3 +37,5 @@ p15_lastiteration_delta_income_pc_real_ppp(i)=1;
 $ifthen "%c15_rumscen%" == "mixed" i15_ruminant_fadeout(t) = (f15_ruminant_fadeout(t,"constant") + f15_ruminant_fadeout(t,"halving2050"))/2;
 $else i15_ruminant_fadeout(t) = f15_ruminant_fadeout(t,"%c15_rumscen%");
 $endif
+
+v15_share.up(iso, type15) = 1; 
