@@ -18,7 +18,10 @@ library(lucode)
 #Create file2destination mapping based on information from the model
 ################################################################################
 getfiledestinations <- function() {
-  files <- dir(pattern="files$",recursive = TRUE)
+  folders <- base::list.dirs(recursive=FALSE, full.names=FALSE)
+  folders <- grep("^(\\.|225|output|calib_run|figure)",folders, invert=TRUE, value=TRUE)
+  files <- NULL
+  for(f in folders) files <- c(files,dir(path=f,pattern="^files$",recursive = TRUE, full.names=TRUE))
   out <- NULL
   for(f in files) {
     tmp <- grep("^\\*",readLines(f, warn = FALSE),invert=TRUE,value=TRUE)
@@ -34,7 +37,7 @@ getfiledestinations <- function() {
 delete_olddata <- function(x) {
   if(is.character(x)) {
     if(!file.exists(x)) stop("Cannot find file mapping!")
-    map <- read.csv(x, sep = ";", stringsAsFactors = FALSE)
+    map <- read.csv(x, sep = ";", stringsAsFactors = FALSE, comment.char = "#")
   } else {
     map <- x
   }
@@ -244,7 +247,7 @@ archive_download <- function(files=c("GLUES2-sresa2-constant_co2-miub_echo_g_ERB
   # delete files which will be copied/moved later on with copy_input
   delete_olddata(file2destination)
   # delete additional files not treated by copy_input
-  delete_olddata("scripts/downloader/inputdelete.csv")
+  delete_olddata("scripts/downloader/inputdelete.cfg")
   cat("done!\n\n")
 
   ##################### DATA DOWNLOAD #########################################
