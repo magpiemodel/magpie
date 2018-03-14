@@ -21,8 +21,11 @@ sets
    estimates15
    /preliminary,final/
 
-   parameters15 schonfield equation parameters
+   parameters15 schofield equation parameters
    /slope, intercept/
+
+   schofield_parameters15 schofield equation parameters with height
+   /height, weight, intercept/
 
    parameters_intake15 intake equation parameters
    /saturation,halfsaturation,intercept/
