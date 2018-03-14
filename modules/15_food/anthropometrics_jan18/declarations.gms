@@ -46,7 +46,7 @@ positive variables
   v15_livestock_share_iso(iso)       Uncalibrated regression estimates of  livestock share
   v15_processed_share_iso(iso)        Uncalibrated regression estimates of  processed share
   v15_vegfruit_share_iso(iso)       Uncalibrated regression estimates of share of vegetables fruits and nuts within diet
-  v15_income_pc_real_ppp_iso(iso)    real income per capita (USD)
+  v15_income_pc_real_ppp_iso(iso)    real income per capita (USD per cap)
   v15_kcal_intake_regression(iso,sex,age_group) Uncalibrated regression estimate for per-capita intake (kcal)
 ;
 
@@ -65,6 +65,7 @@ parameters
  p15_modelstat(t)                             model solver status
  p15_iteration_counter(t)                     number of iterations required for reaching an equilibrium between food demand model and magpie
  p15_convergence_measure(t)                   convergence measure to decide for continuation or stop of food_demand - magpie iteration
+ i15_par(type15,par15)                        food regression parameters
 
 *prices
  p15_prices_kcal(t,iso,kfo)                   prices from magpie after optimization in US Dollar 05 per Kcal ($\Kcal)
@@ -128,6 +129,7 @@ scalars
 
 model m15_food_demand /
       q15_aim,
+      q15_aim_standalone,
       q15_budget,
       q15_real_income,
       q15_regression_kcal,
@@ -145,7 +147,7 @@ m15_food_demand.scaleopt  = 1 ;
 m15_food_demand.solprint  = 1 ;
 m15_food_demand.holdfixed = 1 ;
 
-model magpiemini /
+model m15_magpiemini /
       q15_food_demand,
       q15_aim_standalone/;
 
