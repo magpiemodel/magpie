@@ -63,6 +63,8 @@ if( namediff > 0){
       hist <- brick(paste0(outputdir,"/hist_CA.nc"),varname=var)
       model <- brick(paste0(outputdir,"/modout_CA.nc"),varname=var)
       yrs <- intersect(names(hist),names(model))
+      breakpoints <- c(-0.10,-0.05,-0.01,0.01,0.05,0.10)
+      colors <- c("red4","red","cadetblue1","green","green4")
       for(y in 1:length(yrs)){
         diff <- model[[yrs[y]]]-hist[[yrs[y]]]
         swfigure(sw,"plot",diff,sw_option="width=10,height=6",tex_caption = paste0("Diff plot for ",var," in ",gsub("X","",yrs[y])))
