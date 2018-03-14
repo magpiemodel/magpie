@@ -25,16 +25,16 @@ gdx        <- paste0(outputdir, "/fulldata.gdx")
 
 ###############################################################################
 setConfig(forcecache=TRUE)
-## Historical data
+## Model output
 modout_croparea <- croparea(gdx,level="grid",products="kcr",product_aggr=FALSE,spamfiledirectory = outputdir,water_aggr=FALSE)
 getNames(modout_croparea,dim=1) <- reportingnames(getNames(modout_croparea,dim=1))
 getNames(modout_croparea,dim=2) <- reportingnames(getNames(modout_croparea,dim=2))
 
-## Model output
+## Historical data
 hist_croparea <- calcOutput("ValidCellularCroparea",aggregate=FALSE)
 
 ## Writing netcdf files
-write.magpie(hist_croparea,file_name=paste0(outputdir,"/hist_CA.nc"),comment="historical crop area") 
+write.magpie(hist_croparea,file_name=paste0(outputdir,"/hist_CA.nc"),comment="historical crop area")
 write.magpie(modout_croparea,file_name=paste0(outputdir,"/modout_CA.nc"),comment="model output crop area")
 
 sw<-swopen(paste0(outputdir,"/Crop_Scpecific_Diff_Plots.pdf"))
@@ -53,7 +53,7 @@ if( namediff > 0){
 } else {
   crops <- unique(gsub( "/.*$", "", names(nc_open(paste0(outputdir,"/hist_CA.nc"))$var)))
   irrig <- unique(gsub(".*/","",names(nc_open(paste0(outputdir,"/hist_CA.nc"))$var)))
-  
+
   for (i in crops) {
     swlatex(sw,"\\section{",i,"}")
     for (j in irrig) {
