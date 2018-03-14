@@ -9,7 +9,7 @@ $setglobal c15_calibscen  fadeout2050
 $setglobal c15_rumscen  mixed
 *   options:   constant, halving2050, mixed
 
-scalar s15_elastic_demand  / 0 /;
+scalar s15_elastic_demand  / 1 /;
 *   options : 0(exogenous demand), 1(elastic demand)
 
 table f15_household_balance_flow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of inhomogenous products and processes in statistics (Mio t DM)
