@@ -7,4 +7,5 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%interest_rate%" == "glo_jan16" $include "./modules/12_interest_rate/glo_jan16.gms"
+$Ifi "%interest_rate%" == "reg_feb18" $include "./modules/12_interest_rate/reg_feb18.gms"
 *###################### R SECTION END (MODULETYPES) ############################

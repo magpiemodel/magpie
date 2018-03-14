@@ -23,10 +23,10 @@ buildInputVector <- function(regionmapping   = "h11",
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "h200",
                              archive_rev     = "26.2",
-                             madrat_rev      = "3.8",
-                             validation_rev  = "3.8",
+                             madrat_rev      = "3.12",
+                             validation_rev  = "3.12",
                              calibration     = NULL,
-                             additional_data = "additional_data_rev3.18.tgz") {
+                             additional_data = "additional_data_rev3.21.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
                 mag="c30c1c580039c2b300d86cc46ff4036a")
@@ -47,10 +47,20 @@ default <- function(cfg, calibration=NULL) {
   return(submitCalibration("ValidationDefault"))
 }
 
-
-mixed_factor <- function(cfg, calibration=NULL) {
-  cfg$title <- "mixed_factor"
+cutyieldcalib <- function(cfg) {
+  x <- magclass::read.magpie("modules/14_yields/input/f14_yld_calib.csv")
+  x[as.vector(x[,,"crop"]>1),,"crop"] <- 1
+  magclass::write.magpie(x,"modules/14_yields/input/f14_yld_calib.csv")
+  calibration <- submitCalibration("ValidationYieldCalibCutoff")
+  cfg$title <- "cutyieldcalib"
   cfg$input <- buildInputVector(calibration=calibration)
+  try(start_run(cfg=cfg, codeCheck=FALSE))
+}
+
+mixed_factor <- function(cfg) {
+  cfg$title <- "mixed_factor"
+  cfg$recalibrate <- TRUE
+  cfg$input <- buildInputVector()
   cfg$gms$factor_costs <- "mixed_feb17"
   try(start_run(cfg=cfg, codeCheck=FALSE))
   return(submitCalibration("ValidationMixedFactor"))
@@ -100,7 +110,7 @@ cc_default <- function(cfg, calibration=NULL) {
   try(start_run(cfg=cfg, codeCheck=FALSE))
 }
 
-timesteps <- function(cfg, calibration=NULL) { 
+timesteps <- function(cfg, calibration=NULL) {
   cfg$title <- "timesteps"
   cfg$input <- buildInputVector(calibration=calibration)
   cfg$gms$c_timesteps <- "test_TS"
@@ -113,7 +123,7 @@ flex_demand <- function(cfg, calibration=NULL) {
   cfg$gms$s15_elastic_demand <- 1
   try(start_run(cfg=cfg, codeCheck=FALSE))
 }
-  
+
 ssp1 <- function(cfg, calibration=NULL) {
   cfg$title <- "ssp1"
   cfg$input <- buildInputVector(calibration=calibration)
@@ -134,6 +144,15 @@ default_rcp26 <- function(cfg, calibration=NULL) {
   try(start_run(cfg=cfg, codeCheck=FALSE))
 }
 
+mixed_rcp26 <- function(cfg, calibration=NULL) {
+  cfg$title <- "mixed_rcp26"
+  cfg$input <- buildInputVector(calibration=calibration)
+  cfg$gms$factor_costs <- "mixed_feb17"
+  cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
+  cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
+  try(start_run(cfg=cfg, codeCheck=FALSE))
+}
+
 cc_default_rcp26 <- function(cfg, calibration=NULL) {
   cfg$title <- "cc_default_rcp26"
   cfg$input <- buildInputVector(calibration=calibration)
@@ -142,7 +161,17 @@ cc_default_rcp26 <- function(cfg, calibration=NULL) {
   cfg <- setScenario(cfg, "cc")
   try(start_run(cfg=cfg, codeCheck=FALSE))
 }
-  
+
+cc_co2_rcp26 <- function(cfg, calibration=NULL) {
+  cfg$title <- "cc_co2_rcp26"
+  cfg$input <- buildInputVector(calibration=calibration,co2="co2")
+  cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
+  cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
+  cfg <- setScenario(cfg, "cc")
+  try(start_run(cfg=cfg, codeCheck=FALSE))
+}
+
+
 flex_demand_rcp26 <- function(cfg, calibration=NULL) {
   cfg$title <- "flex_demand_rcp"
   cfg$input <- buildInputVector(calibration=calibration)
@@ -170,6 +199,18 @@ globio_rcp26 <- function(cfg, calibration=NULL) {
   try(start_run(cfg=cfg, codeCheck=FALSE))
 }
 
+npi <- function(cfg, calibration=NULL) {
+  cfg$title <- "npi"
+  cfg$input <- buildInputVector(calibration=calibration)
+  try(start_run(cfg=cfg,scenario="NPI",codeCheck=FALSE))
+}
+
+indc <- function(cfg, calibration=NULL) {
+  cfg$title <- "indc"
+  cfg$input <- buildInputVector(calibration=calibration)
+  try(start_run(cfg=cfg,scenario="INDC",codeCheck=FALSE))
+}
+
 npi_rcp26 <- function(cfg, calibration=NULL) {
   cfg$title <- "npi_rcp26"
   cfg$input <- buildInputVector(calibration=calibration)
@@ -193,7 +234,7 @@ h12 <- function(cfg) {
   return(submitCalibration("h12Default"))
 }
 
-h12_rcp26 <- function(cfg, calibration=NULL) { 
+h12_rcp26 <- function(cfg, calibration=NULL) {
   cfg$title <- "h12_rcp26"
   cfg$input <- buildInputVector(regionmapping = "h12", calibration=calibration)
   cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
@@ -227,39 +268,45 @@ cfg <- setScenario(cfg,"SSP2")
 ### test runs ###
 
 default_calibration <- default(cfg)
+default_rcp26(cfg, default_calibration)
 
-mixed_factor(cfg)
+mixed_calibration <- mixed_factor(cfg)
+mixed_rcp26(cfg, mixed_calibration)
+
+#cutyieldcalib(cfg)
 
 #cc_default(cfg, default_calibration)
-default_rcp26(cfg, default_calibration)
-cc_default_rcp26(cfg, default_calibration)
+#cc_default_rcp26(cfg, default_calibration)
+#cc_co2_rcp26(cfg, default_calibration)
 
-performance_bau(cfg, default_calibration)
-performance_rcp26(cfg, default_calibration)
+#performance_bau(cfg, default_calibration)
+#performance_rcp26(cfg, default_calibration)
 
-rum_const(cfg, default_calibration)
+#rum_const(cfg, default_calibration)
 
-pastcost0(cfg, default_calibration)
-pastswitch(cfg, default_calibration)
+#pastcost0(cfg, default_calibration)
+#pastswitch(cfg, default_calibration)
 
-timesteps(cfg, default_calibration)
+#timesteps(cfg, default_calibration)
 #timesteps_rcp26(cfg, default_calibration)
 
-flex_demand(cfg, default_calibration)
-flex_demand_rcp26(cfg, default_calibration)
+#flex_demand(cfg, default_calibration)
+#flex_demand_rcp26(cfg, default_calibration)
 
-ssp1(cfg, default_calibration)
-ssp5(cfg, default_calibration)
+#ssp1(cfg, default_calibration)
+#ssp5(cfg, default_calibration)
 
-globio_rcp26(cfg, default_calibration)
+#globio_rcp26(cfg, default_calibration)
 
-npi_rcp26(cfg, default_calibration)
-indc_rcp26(cfg, default_calibration)
+#npi(cfg, default_calibration)
+#indc(cfg, default_calibration)
 
-clusterres(cfg, default_calibration)
+#npi_rcp26(cfg, default_calibration)
+#indc_rcp26(cfg, default_calibration)
 
-h12_calibration <- h12(cfg)
-h12_rcp26(cfg, h12_calibration)
+#clusterres(cfg, default_calibration)
 
-mag(cfg)
+#h12_calibration <- h12(cfg)
+#h12_rcp26(cfg, h12_calibration)
 
+#mag(cfg)
