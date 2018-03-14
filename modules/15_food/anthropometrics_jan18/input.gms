@@ -79,9 +79,15 @@ $offdelim;
 */
 *;
 
-table f15_schofield_parameters(sex,age_group, parameters15) Schofield equation parameters (-)
+*table f15_schofield_parameters(sex,age_group, parameters15) Schofield equation parameters (-)
+*$ondelim
+*$include "./modules/15_food/input/f15_schofield_parameters.cs3"
+*$offdelim
+*;
+
+table f15_schofield_parameters_height(sex,age_group, schofield_parameters15) Schofield equation parameters (-)
 $ondelim
-$include "./modules/15_food/input/f15_schofield_parameters.cs3"
+$include "./modules/15_food/input/f15_schofield_parameters_height.cs3"
 $offdelim
 ;
 

@@ -116,7 +116,7 @@ else
      p15_bodyheight(t,iso,"F","10--14","preliminary")=p15_bodyheight(t,iso,"M","15--19","preliminary")/163*154;
 
 );
-display "test4";
+
 
 
 *### estimate standardized food requirement
@@ -132,10 +132,10 @@ p15_physical_activity_level(t,iso,sex,age_group)=
                             +(1-im_physical_inactivity(t,iso,sex,age_group)) * 1.76
                             ;
 p15_kcal_requirement(t,iso,sex,age_group)=
-                        (f15_schofield_parameters(sex,age_group, "intercept")
-                        + f15_schofield_parameters(sex,age_group, "slope")*p15_bodyweight_healthy(t,iso,sex,age_group))
+                        (f15_schofield_parameters_height(sex,age_group, "intercept")
+                        + f15_schofield_parameters_height(sex,age_group, "height")*p15_bodyheight(t,iso,sex,age_group,"preliminary")/100
+                        + f15_schofield_parameters_height(sex,age_group, "weight")*p15_bodyweight_healthy(t,iso,sex,age_group))
                         * p15_physical_activity_level(t,iso,sex,age_group);
-
 
 
 if (sum(sameas(t_past,t),1) = 1,
@@ -156,8 +156,6 @@ else
     p15_intake_balanceflow(t,iso,sex,age_group) =  p15_intake_balanceflow_lastcalibrationyear(iso,sex,age_group)   * f15_kcal_balanceflow_fadeout(t,"%c15_calibscen%");
 );
 
-     display  p15_kcal_growth_food ;
-     display  p15_intake_balanceflow;
 
 *###### Estimation of food demand using a first run of the food demand model with unshocked prices.
 
