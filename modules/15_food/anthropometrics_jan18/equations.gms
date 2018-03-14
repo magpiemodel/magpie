@@ -58,8 +58,8 @@ q15_regression_intake(iso,sex,age_group) ..
 q15_regression_kcal(iso) ..
          v15_kcal_regression_total(iso)
          =e=
-         sum((sex,age_group,ct), v15_kcal_intake_regression(iso,sex,age_group)
-         *(i15_par("kcal","a") + v15_share(iso, "kcal"))
+         (i15_par("kcal","a") + v15_share(iso, "kcal"))
+         * sum((sex,age_group,ct), v15_kcal_intake_regression(iso,sex,age_group)
          * im_demography(ct,iso,sex,age_group))
          /sum((sex,age_group,ct), im_demography(ct,iso,sex,age_group));
 
