@@ -1,0 +1,73 @@
+# (C) 2008-2017 Potsdam Institute for Climate Impact Research (PIK),
+# authors, and contributors see AUTHORS file
+# This file is part of MAgPIE and licensed under GNU AGPL Version 3
+# or later. See LICENSE file or go to http://www.gnu.org/licenses/
+# Contact: magpie@pik-potsdam.de
+
+library(gdx)
+library(luscale)
+library(luplot)
+library(lucode)
+library(lusweave)
+library(magpie4)
+library(ncdf4)
+library(raster)
+library(magpiesets)
+library(moinput)
+library(mrvalidation)
+
+############################# BASIC CONFIGURATION #############################
+if(!exists("source_include")) {
+  outputdir    <-"."
+}
+
+gdx        <- paste0(outputdir, "/fulldata.gdx")
+
+###############################################################################
+setConfig(forcecache=TRUE)
+## Historical data
+modout_croparea <- croparea(gdx,level="grid",products="kcr",product_aggr=FALSE,spamfiledirectory = outputdir,water_aggr=FALSE)
+getNames(modout_croparea,dim=1) <- reportingnames(getNames(modout_croparea,dim=1))
+getNames(modout_croparea,dim=2) <- reportingnames(getNames(modout_croparea,dim=2))
+
+## Model output
+hist_croparea <- calcOutput("ValidCellularCroparea",aggregate=FALSE)
+
+## Writing netcdf files
+write.magpie(hist_croparea,file_name=paste0(outputdir,"/hist_CA.nc"),comment="historical crop area") 
+write.magpie(modout_croparea,file_name=paste0(outputdir,"/modout_CA.nc"),comment="model output crop area")
+
+sw<-swopen(paste0(outputdir,"/Crop_Scpecific_Diff_Plots.pdf"))
+
+swlatex(sw,"\\huge")
+swlatex(sw,"\\textbf{Difference plots (Model output-Historical)}\\newline")
+swlatex(sw,"\\normalsize")
+swlatex(sw,"\\newline")
+swlatex(sw,"\\tableofcontents")
+swlatex(sw,"\\newpage")
+
+namediff <- length(setdiff(names(nc_open(paste0(outputdir,"/hist_CA.nc"))$var),names(nc_open(paste0(outputdir,"/modout_CA.nc"))$var)))
+
+if( namediff > 0){
+  stop("Names don't match for model output and historical data.")
+} else {
+  crops <- unique(gsub( "/.*$", "", names(nc_open(paste0(outputdir,"/hist_CA.nc"))$var)))
+  irrig <- unique(gsub(".*/","",names(nc_open(paste0(outputdir,"/hist_CA.nc"))$var)))
+  
+  for (i in crops) {
+    swlatex(sw,"\\section{",i,"}")
+    for (j in irrig) {
+      var=paste0(i,"/",j)
+      swlatex(sw,paste0("\\subsection{",j,"}"))
+      hist <- brick(paste0(outputdir,"/hist_CA.nc"),varname=var)
+      model <- brick(paste0(outputdir,"/modout_CA.nc"),varname=var)
+      yrs <- intersect(names(hist),names(model))
+      for(y in 1:length(yrs)){
+        diff <- model[[yrs[y]]]-hist[[yrs[y]]]
+        swfigure(sw,"plot",diff,sw_option="width=10",tex_caption = paste0("Diff plot for ",var," in ",gsub("X","",yrs[y])))
+      }
+    }
+  }
+
+}
+swclose(sw)
