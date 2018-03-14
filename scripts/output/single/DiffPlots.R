@@ -46,7 +46,7 @@ swlatex(sw,"\\huge")
 swlatex(sw,"\\textbf{Difference plots (Model output-Historical)}\\newline")
 swlatex(sw,"\\normalsize")
 swlatex(sw,"\\newline")
-#swlatex(sw,"\\tableofcontents")
+swlatex(sw,"\\tableofcontents")
 swlatex(sw,"\\newpage")
 
 namediff <- length(setdiff(names(nc_open(paste0(outputdir,"/hist_CA.nc"))$var),names(nc_open(paste0(outputdir,"/modout_CA.nc"))$var)))
