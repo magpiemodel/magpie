@@ -21,8 +21,11 @@ sets
    estimates15
    /preliminary,final/
 
-   parameters15 schonfield equation parameters
+   parameters15 schofield equation parameters
    /slope, intercept/
+
+   schofield_parameters15 schofield equation parameters with height
+   /height, weight, intercept/
 
    parameters_intake15 intake equation parameters
    /saturation,halfsaturation,intercept/
@@ -71,6 +74,13 @@ sets
    nutrition nutritition attributes
    /kcal, protein/
 
+  par15
+      / intercept,saturation,halfsaturation,non_saturation /
+* intercept + saturation give the max value if non-saturation is 1
+* halfsaturation is the gdp until which half of saturation is reached
+
+  demand_subsystem15
+      / overconsumption,livestockshare,processedshare,vegfruitshare /
 
 *** Scenarios
    food_scen15  scenarios
