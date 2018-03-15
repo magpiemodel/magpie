@@ -28,7 +28,7 @@ equations
   q15_budget(iso)        Household Budget Constraint
   q15_real_income(iso)   Calculation of real income
   q15_regression_kcal(iso)     Per capita total consumption
-  q15_regression(iso, type15)  Share regressions
+  q15_regression(iso, demand_subsystem15)  Share regressions
   q15_foodtree_kcal_animals(iso,kfo_ap)  Demand for animal products
   q15_foodtree_kcal_processed(iso,kfo_pf) Demand for processed products
   q15_foodtree_kcal_staples(iso,kfo_st)     Demand for staple products
@@ -40,7 +40,7 @@ equations
 positive variables
   v15_kcal_regression(iso,kfo)     Uncalibrated regression estimates of calorie demand (Kcal per cap per day)
   v15_kcal_regression_total(iso)     Uncalibrated regression estimates of  total per capita calories (Kcal per cap per day)
-  v15_share(iso, type15)       Uncalibrated regression estimates of kcal shares (-)
+  v15_share(iso, demand_subsystem15)       Uncalibrated regression estimates of kcal shares (-)
   v15_income_pc_real_ppp_iso(iso)    real income per capita (USD per cap)
   v15_kcal_intake_regression(iso,sex,age_group) Uncalibrated regression estimate for per-capita intake (kcal)
 ;
@@ -60,7 +60,7 @@ parameters
  p15_modelstat(t)                             model solver status
  p15_iteration_counter(t)                     number of iterations required for reaching an equilibrium between food demand model and magpie
  p15_convergence_measure(t)                   convergence measure to decide for continuation or stop of food_demand - magpie iteration
- i15_par(type15,par15)                        food regression parameters
+ i15_par(demand_subsystem15,par15)                        food regression parameters
 
 *prices
  p15_prices_kcal(t,iso,kfo)                   prices from magpie after optimization in US Dollar 05 per Kcal ($\Kcal)
@@ -152,7 +152,7 @@ parameters
  ov_dem_food(t,i,kall,type)                            Demand for food (Mt DM)
  ov15_kcal_regression(t,iso,kfo,type)                  Uncalibrated regression estimates of calorie demand (Kcal per cap per day)
  ov15_kcal_regression_total(t,iso,type)                Uncalibrated regression estimates of  total per capita calories (Kcal per cap per day)
- ov15_share(t,iso,type15,type)                         Uncalibrated regression estimates of kcal shares (-)
+ ov15_share(t,iso,demand_subsystem15,type)                         Uncalibrated regression estimates of kcal shares (-)
  ov15_income_pc_real_ppp_iso(t,iso,type)               real income per capita (USD per cap)
  ov15_kcal_intake_regression(t,iso,sex,age_group,type) Uncalibrated regression estimate for per-capita intake (kcal)
  ov15_demand_nonfood(t,iso,type)                       non-food demand (units)
@@ -164,7 +164,7 @@ parameters
  oq15_budget(t,iso,type)                               Household Budget Constraint
  oq15_real_income(t,iso,type)                          Calculation of real income
  oq15_regression_kcal(t,iso,type)                      Per capita total consumption
- oq15_regression(t,iso,type15,type)                    Share regressions
+ oq15_regression(t,iso,demand_subsystem15,type)                    Share regressions
  oq15_foodtree_kcal_animals(t,iso,kfo_ap,type)         Demand for animal products
  oq15_foodtree_kcal_processed(t,iso,kfo_pf,type)       Demand for processed products
  oq15_foodtree_kcal_staples(t,iso,kfo_st,type)         Demand for staple products

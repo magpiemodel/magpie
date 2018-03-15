@@ -74,12 +74,14 @@ sets
    nutrition nutritition attributes
    /kcal, protein/
 
-  type15
-      / kcal, livs, proc, vegf /
-
   par15
-      / a, b, c, d /
-      
+      / intercept,saturation,halfsaturation,non_saturation /
+* intercept + saturation give the max value if non-saturation is 1
+* halfsaturation is the gdp until which half of saturation is reached
+
+  demand_subsystem15
+      / overconsumption,livestockshare,processedshare,vegfruitshare /
+
 *** Scenarios
    food_scen15  scenarios
        / SSP1, SSP2, SSP3, SSP4, SSP5,
