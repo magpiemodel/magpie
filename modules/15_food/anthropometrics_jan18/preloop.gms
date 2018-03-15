@@ -1,5 +1,7 @@
 
 
+i15_demand_regression_parameters(demand_subsystem15,par15) = f15_demand_regression_parameters(demand_subsystem15,"%c15_food_scenario%",par15);
+
 p15_bodyheight(t,iso,sex,age_group,estimates15) = f15_bodyheight(t,iso,sex,age_group);
 
 * calculating growth food for historical period
@@ -35,4 +37,3 @@ p15_lastiteration_delta_income_pc_real_ppp(i)=1;
 $ifthen "%c15_rumscen%" == "mixed" i15_ruminant_fadeout(t) = (f15_ruminant_fadeout(t,"constant") + f15_ruminant_fadeout(t,"halving2050"))/2;
 $else i15_ruminant_fadeout(t) = f15_ruminant_fadeout(t,"%c15_rumscen%");
 $endif
-

@@ -25,6 +25,10 @@ $offdelim;
 
 *** Food Demand Model
 
+table f15_demand_regression_parameters(demand_subsystem15,food_scen15,par15)  Food regression parameters (USD per cap or kcal per capita per day or -)
+$ondelim
+$include "./modules/15_food/input/f15_demand_regression_parameters.cs3"
+$offdelim;
 
 table f15_kcal_pc_iso(t_all,iso,kfo)  Observed per-capita calories in the past (kcal per captia per day)
 $ondelim
@@ -79,9 +83,15 @@ $offdelim;
 */
 *;
 
-table f15_schofield_parameters(sex,age_group, parameters15) Schofield equation parameters (-)
+*table f15_schofield_parameters(sex,age_group, parameters15) Schofield equation parameters (-)
+*$ondelim
+*$include "./modules/15_food/input/f15_schofield_parameters.cs3"
+*$offdelim
+*;
+
+table f15_schofield_parameters_height(sex,age_group, schofield_parameters15) Schofield equation parameters (-)
 $ondelim
-$include "./modules/15_food/input/f15_schofield_parameters.cs3"
+$include "./modules/15_food/input/f15_schofield_parameters_height.cs3"
 $offdelim
 ;
 
