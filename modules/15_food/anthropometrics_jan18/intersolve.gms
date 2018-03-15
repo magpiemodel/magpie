@@ -62,7 +62,7 @@ display "convergence measure:",p15_convergence_measure;
 
 if (s15_elastic_demand =1,
   display "elastic demand model is activated";
-  if (p15_convergence_measure(t) > 0.01,
+  if (p15_convergence_measure(t) > 0.05,
 
         display "convergence between MAgPIE and Food Demand Model not yet reached";
         sm_intersolve=0;

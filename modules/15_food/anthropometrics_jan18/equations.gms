@@ -25,6 +25,7 @@ q15_aim_standalone ..
           =e=
           sum(iso,v15_kcal_regression_total(iso));
 
+
 q15_budget(iso) ..
          sum((ct,kfo), v15_kcal_regression(iso,kfo)*365*p15_prices_kcal(ct,iso,kfo))
          + v15_demand_nonfood(iso)*s15_prices_nonfood
