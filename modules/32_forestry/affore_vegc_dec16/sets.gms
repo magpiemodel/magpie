@@ -9,10 +9,10 @@ sets
            / recur,mon /
 
   land32 forestry land pools
-    / new, new_indc, prot, grow, old/
+    / new, new_ndc, prot, grow, old/
 
   pol32 afforestation policy type
-    / none, npi, indc/
+    / none, npi, ndc/
 
    ac_land32(ac,land32) mapping age class - land type
 

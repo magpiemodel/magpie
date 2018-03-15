@@ -14,14 +14,14 @@ $include "./modules/35_natveg/input/protect_area.cs3"
 $offdelim
 ;
 
-table f35_min_forest(t_all,j,pol35) npi+indc avoided deforestation policy (minimum forest stock in Mha)
+table f35_min_forest(t_all,j,pol35) npi+ndc avoided deforestation policy (minimum forest stock in Mha)
 $ondelim
-$include "./modules/35_natveg/input/indc_ad_pol.cs3"
+$include "./modules/35_natveg/input/npi_ndc_ad_pol.cs3"
 $offdelim
 ;
 
-table f35_min_cstock(t_all,j,pol35) npi+indc emission reduction policy (minimum carbon stock in tC)
+table f35_min_cstock(t_all,j,pol35) npi+ndc emission reduction policy (minimum carbon stock in tC)
 $ondelim
-$include "./modules/35_natveg/input/indc_emis_pol.cs3"
+$include "./modules/35_natveg/input/npi_ndc_emis_pol.cs3"
 $offdelim
 ;
