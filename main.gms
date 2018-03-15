@@ -7,42 +7,46 @@
 $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
-*
+* 
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev26.2_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
 * md5sum: b6065fc8f3038ecac5d6a5c30cd667a6
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-*
+* 
 * Used data set: rev3.8_8a828c6ed5004e77d1ba2025e8ea2261_magpie.tgz
 * md5sum: 499e98b75fe9d6e4ad70f5fb25834ea2
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-*
+* 
 * Used data set: rev3.8_8a828c6ed5004e77d1ba2025e8ea2261_validation.tgz
 * md5sum: 9bf1ebf52b39178b9185fa2def40e678
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-*
+* 
 * Used data set: additional_data_rev3.20.tgz
 * md5sum: 899237497d0794ec10bc707c29f4e867
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-*
+* 
+* Used data set: food_demand.tgz
+* md5sum: b2edc5b477636a7383db6f417859f43a
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* 
 * Low resolution: h200
 * High resolution: 0.5
-*
+* 
 * Total number of cells: 200
-*
+* 
 * Number of cells per region:
 *   SSA  MEA  OAS  CHA  NEU  EUR  REF  LAM  USA  CAZ  IND
 *    11   15   21   20    8   15    5   58   10   31    6
-*
+* 
 * Regionscode: 8a828c6ed5004e77d1ba2025e8ea2261
-*
+* 
 * Regions data revision: 3.8
-*
+* 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/noco2
 * * Additional input folder: /p/projects/landuse/data/input/other/rev26
 * * Revision: 26.2
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-*
+* 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: h200
@@ -52,11 +56,11 @@ $title magpie
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = paste0(cfg$base_folder, "/", set_folder,     "_", cfg$high_res, ".tgz"), regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
-*
-*
-*
-* Last modification (input data): Fri Mar 09 16:02:06 2018
-*
+* 
+* 
+* 
+* Last modification (input data): Thu Mar 15 10:07:10 2018
+* 
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper

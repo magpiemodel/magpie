@@ -25,7 +25,7 @@ $offdelim;
 
 *** Food Demand Model
 
-table f15_parameters(type15,food_scen15,par15)  Food regression parameters (USD per cap or -)
+table f15_parameters(demand_subsystem15,food_scen15,par15)  Food regression parameters (USD per cap or -)
 $ondelim
 $include "./modules/15_food/input/f15_parameters.cs3"
 $offdelim;

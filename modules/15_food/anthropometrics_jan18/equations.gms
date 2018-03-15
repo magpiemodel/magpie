@@ -58,46 +58,47 @@ q15_regression_intake(iso,sex,age_group) ..
 q15_regression_kcal(iso) ..
          v15_kcal_regression_total(iso)
          =e=
-         (i15_par("kcal","a") + v15_share(iso, "kcal"))
+         ( v15_share(iso, "overconsumption"))
          * sum((sex,age_group,ct), v15_kcal_intake_regression(iso,sex,age_group)
          * im_demography(ct,iso,sex,age_group))
          /sum((sex,age_group,ct), im_demography(ct,iso,sex,age_group));
 
 
-  q15_regression(iso, type15) ..
-     v15_share(iso, type15)
+  q15_regression(iso, demand_subsystem15) ..
+     v15_share(iso, demand_subsystem15)
                 =e=
-                i15_par(type15,"b")*v15_income_pc_real_ppp_iso(iso)
-                /(i15_par(type15,"c") + v15_income_pc_real_ppp_iso(iso)**i15_par(type15,"d"));
+                i15_par(demand_subsystem15,"intercept") +
+                i15_par(demand_subsystem15,"saturation") * v15_income_pc_real_ppp_iso(iso)
+                /(i15_par(demand_subsystem15,"halfsaturation") + v15_income_pc_real_ppp_iso(iso)**i15_par(demand_subsystem15,"non_saturation"));
 
 q15_foodtree_kcal_animals(iso,kfo_ap) ..
          v15_kcal_regression(iso,kfo_ap)
          =e=
          v15_kcal_regression_total(iso)
-         * v15_share(iso, "livs")
+         * v15_share(iso, "livestockshare")
          * sum(ct,i15_livestock_kcal_structure_iso(ct,iso,kfo_ap));
 
 q15_foodtree_kcal_processed(iso,kfo_pf) ..
          v15_kcal_regression(iso,kfo_pf)
          =e=
          v15_kcal_regression_total(iso)
-         * (1 - v15_share(iso, "livs"))
-         * v15_share(iso, "proc")
+         * (1 - v15_share(iso, "livestockshare"))
+         * v15_share(iso, "processedshare")
          * sum(ct,i15_processed_kcal_structure_iso(ct,iso,kfo_pf)) ;
 
 q15_foodtree_kcal_vegetables(iso) ..
          v15_kcal_regression(iso,"others")
          =e=
          v15_kcal_regression_total(iso)
-         * (1 - v15_share(iso, "livs"))
-         * (1 - v15_share(iso, "proc"))
-         * v15_share(iso, "vegf");
+         * (1 - v15_share(iso, "livestockshare"))
+         * (1 - v15_share(iso, "processedshare"))
+         * v15_share(iso, "vegfruitshare");
 
 q15_foodtree_kcal_staples(iso,kfo_st) ..
          v15_kcal_regression(iso,kfo_st)
          =e=
          v15_kcal_regression_total(iso)
-         * (1 - v15_share(iso, "livs"))
-         * (1 - v15_share(iso, "proc"))
-         * (1 - v15_share(iso, "vegf"))
+         * (1 - v15_share(iso, "livestockshare"))
+         * (1 - v15_share(iso, "processedshare"))
+         * (1 - v15_share(iso, "vegfruitshare"))
          * sum(ct,i15_staples_kcal_structure_iso(ct,iso,kfo_st)) ;
