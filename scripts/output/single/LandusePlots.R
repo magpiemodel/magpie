@@ -48,6 +48,7 @@ for (i in LU) {
   swlatex(sw,"\\section{",i,"}")
   breakpoints <- c(0,0.1,0.2,0.3)
   for (j in getYears(modout_landuse)) {
+    cat(paste0(":::",LU," ",j,"\n"))
     swfigure(sw,"plotmap2",sw_option="width=10,height=6",
              modout_landuse[,j,i], title = paste0(i),legend_breaks = breakpoints,
              lowcol = "white",midcol = "red",highcol = "green",
