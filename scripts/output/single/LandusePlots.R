@@ -32,7 +32,7 @@ gdx        <- paste0(outputdir, "/fulldata.gdx")
 modout_landuse <- land(gdx,level="grid",spamfiledirectory = outputdir)
 getNames(modout_landuse,dim=1) <- reportingnames(getNames(modout_landuse,dim = 1))
 
-sw<-swopen(paste0(outputdir,"/LU_Plots.pdf"))
+sw<-swopen(paste0(outputdir,"/AreaPlots_LU.pdf"))
 
 swlatex(sw,c("\\title{LU plots}","\\author{PIK Landuse Group}"))
 swlatex(sw,"\\huge")

@@ -32,7 +32,7 @@ gdx        <- paste0(outputdir, "/fulldata.gdx")
 modout_croparea <- croparea(gdx,level="grid",products="kcr",product_aggr=FALSE,spamfiledirectory = outputdir,water_aggr=TRUE)
 getNames(modout_croparea,dim=1) <- reportingnames(getNames(modout_croparea,dim = 1))
 
-sw<-swopen(paste0(outputdir,"/Crop_Specific_Plots.pdf"))
+sw<-swopen(paste0(outputdir,"/AreaPlots_Crops.pdf"))
 
 swlatex(sw,c("\\title{Crop specific plots}","\\author{PIK Landuse Group}"))
 swlatex(sw,"\\huge")

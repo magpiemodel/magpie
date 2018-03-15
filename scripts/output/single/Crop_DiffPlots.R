@@ -39,7 +39,7 @@ write.magpie(hist_croparea,file_name=paste0(outputdir,"/hist_CA.nc"),comment="hi
 writeLines("\nWriting model output to nc file\n")
 write.magpie(modout_croparea,file_name=paste0(outputdir,"/modout_CA.nc"),comment="model output crop area")
 
-sw<-swopen(paste0(outputdir,"/Crop_Scpecific_Diff_Plots.pdf"))
+sw<-swopen(paste0(outputdir,"/DiffPlot_Crops.pdf"))
 
 swlatex(sw,c("\\title{Difference plots}","\\author{PIK Landuse Group}"))
 swlatex(sw,"\\huge")
