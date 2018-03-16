@@ -77,11 +77,22 @@ update_calib<-function(gdx_file,calibrate_pasture=TRUE,calibrate_cropland=TRUE,d
   write.magpie(round(setYears(calib_factor,NULL),2), calib_file, comment = comment)
   
   ### write down current calib factors (and area_factors) for tracking
-  calib_factor <- add_dimension(calib_factor, dim=3.1, add="iteration", nm=calibration_step)
-  write.magpie(round(setYears(calib_factor,NULL),2), "track_yield_calib.csv", append = TRUE)
+
+  if(calibration_step==1){
+    calib_factor <- add_dimension(calib_factor, dim=3.1, add="iteration", nm=calibration_step)
+    write.magpie(round(setYears(calib_factor,NULL),2), "track_yield_calib.csv")
+    
+    track_area_factor <- add_dimension(area_factor, dim=3.1, add="iteration", nm=calibration_step)
+    write.magpie(round(setYears(track_area_factor,NULL),2), "track_yield_calib_area_factors.csv")
+  }
+  else{
+    calib_factor <- add_dimension(calib_factor, dim=3.1, add="iteration", nm=calibration_step)
+    write.magpie(round(setYears(calib_factor,NULL),2), "track_yield_calib.csv", append = TRUE)
+    
+    track_area_factor <- add_dimension(area_factor, dim=3.1, add="iteration", nm=calibration_step)
+    write.magpie(round(setYears(track_area_factor,NULL),2), "track_yield_calib_area_factors.csv", append = TRUE)
+  }
   
-  track_area_factor <- add_dimension(area_factor, dim=3.1, add="iteration", nm=calibration_step)
-  write.magpie(round(setYears(track_area_factor,NULL),2), "track_yield_calib_area_factors.csv", append = TRUE)
   
   return(list(calib_factor_new ,tc_factor, area_factor))
 }
