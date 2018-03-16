@@ -136,7 +136,7 @@ calibrate_magpie <- function(n_maxcalib = 1,
     swlatex(swout,paste("\\subsection{Area reference}"))
     area <- get_calibarea(gdx_file=paste0(putfolder,"/fulldata.gdx"))[["data"]]
     swtable(swout,area[,,type],caption="External cropland area information for calibration",transpose=T,digits=4,table.placement="H")
-    final_calib <- as.array(read.magpie(calib_file))
+    final_calib <- read.magpie(calib_file)
     swtable(swout,final_calib[,,type],caption="Final yield calibration factors",transpose=T,digits=4,table.placement="H")
     swlatex(swout,paste("\\subsection{Total factor}"))
     swtable(swout,out_calib[,,1,drop=F],caption="Calibration factors calculated in each iteration",transpose=T,digits=4,table.placement="H")
@@ -144,7 +144,7 @@ calibrate_magpie <- function(n_maxcalib = 1,
     swtable(swout,out_tc[,,1,drop=F],caption="Contribution of tc to calibration factors calculated in each iteration",transpose=T,digits=4,table.placement="H")
     swlatex(swout,paste("\\subsection{Area factor}"))
     swtable(swout,out_area[,,1,drop=F],caption="Contribution of area to calibration factors calculated in each iteration",transpose=T,digits=4,table.placement="H")
-  }
+ } 
   swclose(swout)
 
   # delete calib_magpie_gms in the main folder
