@@ -27,7 +27,7 @@ buildInputVector <- function(regionmapping   = "h11",
                              validation_rev  = "3.13",
                              calibration     = NULL,
                              additional_data = "additional_data_rev3.24.tgz",
-                             npi_base        = "npi_ndc_base_fixed.tgz") {
+                             npi_base        = "npi_ndc_rev3.0.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
                 mag="c30c1c580039c2b300d86cc46ff4036a")
@@ -61,7 +61,7 @@ cutyieldcalib <- function(cfg) {
 mixed_factor <- function(cfg) {
   cfg$title <- "mixed_factor"
   cfg$recalibrate <- TRUE
-  cfg$input <- buildInputVector(npi_base = "npi_ndc_base_mixed.tgz")
+  cfg$input <- buildInputVector(npi_base = "npi_ndc_rev3.0.tgz")
   cfg$gms$factor_costs <- "mixed_feb17"
   try(start_run(cfg=cfg, codeCheck=FALSE))
   return(submitCalibration("ValidationMixedFactor"))
@@ -147,7 +147,7 @@ default_rcp26 <- function(cfg, calibration=NULL) {
 
 mixed_rcp26 <- function(cfg, calibration=NULL) {
   cfg$title <- "mixed_rcp26"
-  cfg$input <- buildInputVector(calibration=calibration, npi_base = "npi_ndc_base_mixed.tgz")
+  cfg$input <- buildInputVector(calibration=calibration, npi_base = "npi_ndc_rev3.0.tgz")
   cfg$gms$factor_costs <- "mixed_feb17"
   cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
   cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
