@@ -49,7 +49,7 @@ get_calibarea<-function(gdx_file){
 }
 
 # Calculate the correction factor and save it
-update_calib<-function(gdx_file,calibrate_pasture=TRUE,damping_factor=0.6, calib_file, crop_max=1){
+update_calib<-function(gdx_file,calibrate_pasture=TRUE,calibrate_cropland=TRUE,damping_factor=0.6, calib_file, crop_max=1, calibration_step=""){
   require(magclass)
   require(magpie4)
   if(!(modelstat(gdx_file)[1,1,1]%in%c(1,2,7))) stop("Calibration run infeasible")
@@ -58,6 +58,7 @@ update_calib<-function(gdx_file,calibrate_pasture=TRUE,damping_factor=0.6, calib
   tc_factor <- (tc(gdx_file)+1)[,"y1995",]
   calib_factor<-area_factor * tc_factor
   if(calibrate_pasture==FALSE) calib_factor[,,"past"] <- 1
+  if(calibrate_cropland==FALSE) calib_factor[,,"crop"] <- 1
   calib_factor_new <- calib_factor
   calib_factor <- damping_factor*(calib_factor-1) + 1
   old_calib<-read.magpie(calib_file)
@@ -74,6 +75,14 @@ update_calib<-function(gdx_file,calibrate_pasture=TRUE,damping_factor=0.6, calib
                " origin: scripts/calibration/calc_calib.R (path relative to model main directory)",
                paste0(" creation date: ",date()))
   write.magpie(round(setYears(calib_factor,NULL),2), calib_file, comment = comment)
+  
+  ### write down current calib factors (and area_factors) for tracking
+  calib_factor <- add_dimension(calib_factor, dim=3.1, add="iteration", nm=calibration_step)
+  write.magpie(round(setYears(calib_factor,NULL),2), "track_yield_calib.csv", append = TRUE)
+  
+  track_area_factor <- add_dimension(area_factor, dim=3.1, add="iteration", nm=calibration_step)
+  write.magpie(round(setYears(track_area_factor,NULL),2), "track_yield_calib_area_factors.csv", append = TRUE)
+  
   return(list(calib_factor_new ,tc_factor, area_factor))
 }
 
@@ -81,6 +90,7 @@ update_calib<-function(gdx_file,calibrate_pasture=TRUE,damping_factor=0.6, calib
 calibrate_magpie <- function(n_maxcalib = 1,
                              calib_accuracy = 0.1,
                              calibrate_pasture = FALSE,
+                             calibrate_cropland = TRUE,
                              calib_magpie_name = "magpie_calib",
                              damping_factor = 0.6,
                              calib_file = "modules/14_yields/input/f14_yld_calib.csv",
@@ -97,7 +107,7 @@ calibrate_magpie <- function(n_maxcalib = 1,
   for(i in 1:n_maxcalib){
     cat(paste("\nStarting calibration iteration",i,"\n"))
     calibration_run(putfolder=putfolder, calib_magpie_name=calib_magpie_name, logoption=logoption)
-    new_calib <- update_calib(gdx_file=paste0(putfolder,"/fulldata.gdx"),calibrate_pasture=calibrate_pasture,damping_factor=damping_factor, calib_file=calib_file)
+    new_calib <- update_calib(gdx_file=paste0(putfolder,"/fulldata.gdx"),calibrate_pasture=calibrate_pasture,calibrate_cropland=calibrate_cropland,damping_factor=damping_factor, calib_file=calib_file, calibration_step=i)
     if(i==1){
       calib_hist <- setYears(new_calib[[1]],"y1995")
       tc_hist <- setYears(new_calib[[2]],"y1995")
@@ -126,6 +136,8 @@ calibrate_magpie <- function(n_maxcalib = 1,
     swlatex(swout,paste("\\subsection{Area reference}"))
     area <- get_calibarea(gdx_file=paste0(putfolder,"/fulldata.gdx"))[["data"]]
     swtable(swout,area[,,type],caption="External cropland area information for calibration",transpose=T,digits=4,table.placement="H")
+    final_calib <- as.array(read.magpie(calib_file))
+    swtable(swout,final_calib[,,type],caption="Final yield calibration factors",transpose=T,digits=4,table.placement="H")
     swlatex(swout,paste("\\subsection{Total factor}"))
     swtable(swout,out_calib[,,1,drop=F],caption="Calibration factors calculated in each iteration",transpose=T,digits=4,table.placement="H")
     swlatex(swout,paste("\\subsection{TC factor}"))
