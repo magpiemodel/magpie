@@ -36,7 +36,7 @@ sw<-swopen(paste0(outputdir,"/AreaPlots_Crops.pdf"))
 
 swlatex(sw,c("\\title{Crop specific plots}","\\author{PIK Landuse Group}"))
 swlatex(sw,"\\huge")
-swlatex(sw,"\\textbf{Difference plots (Model output-Historical)}\\newline")
+swlatex(sw,"\\textbf{Crop plots}\\newline")
 swlatex(sw,"\\normalsize")
 swlatex(sw,"\\newline")
 swlatex(sw,"\\tableofcontents")

@@ -36,7 +36,7 @@ sw<-swopen(paste0(outputdir,"/AreaPlots_LU.pdf"))
 
 swlatex(sw,c("\\title{LU plots}","\\author{PIK Landuse Group}"))
 swlatex(sw,"\\huge")
-swlatex(sw,"\\textbf{Difference plots (Model output-Historical)}\\newline")
+swlatex(sw,"\\textbf{LU plots}\\newline")
 swlatex(sw,"\\normalsize")
 swlatex(sw,"\\newline")
 swlatex(sw,"\\tableofcontents")

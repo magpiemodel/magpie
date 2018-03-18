@@ -41,9 +41,9 @@ write.magpie(modout_croparea,file_name=paste0(outputdir,"/modout_CA.nc"),comment
 
 sw<-swopen(paste0(outputdir,"/DiffPlot_Crops.pdf"))
 
-swlatex(sw,c("\\title{Difference plots}","\\author{PIK Landuse Group}"))
+swlatex(sw,c("\\title{Difference plots (Crops)}","\\author{PIK Landuse Group}"))
 swlatex(sw,"\\huge")
-swlatex(sw,"\\textbf{Difference plots (Model output-Historical)}\\newline")
+swlatex(sw,"\\textbf{Difference plots for Crops (Model output-Historical)}\\newline")
 swlatex(sw,"\\normalsize")
 swlatex(sw,"\\newline")
 swlatex(sw,"\\tableofcontents")
