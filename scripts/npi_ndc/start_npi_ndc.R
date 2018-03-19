@@ -54,11 +54,13 @@ start_npi_ndc_preprocessing <- function(cfg="config/default.cfg",base_run_dir="s
     cfg$results_folder <- base_run_dir
 		cfg$output <- c("interpolation")
 		cfg$gms$c_timesteps <- "recalc_npi_ndc"
+    cfg$recalc_base_run <- FALSE
+    cfg$recalc_npi_ndc <- FALSE
 		cfg <- setScenario(cfg,"SSP2")
 		cfg <- setScenario(cfg,"BASE")
 
 		cat("Starting MAgPIE base_run for NPI/NDC recalculation\n")
-		start_run(cfg, codeCheck=TRUE)
+		start_run(cfg, codeCheck=TRUE, lock_model=FALSE)
     cat("New base_run executed!\n")
   }
 
