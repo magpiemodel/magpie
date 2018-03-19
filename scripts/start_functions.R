@@ -5,7 +5,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
-                      report=NULL,sceninreport=NULL,LU_pricing="y2010") {
+                      report=NULL,sceninreport=NULL,LU_pricing="y2010", lock_model=TRUE) {
 
   if (!requireNamespace("lucode", quietly = TRUE)) {
     stop("Package \"lucode\" needed for this function to work. Please install it.",
@@ -22,8 +22,10 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
   maindir <- getwd()
   on.exit(setwd(maindir))
 
-  lock_id <- lucode::model_lock(timeout1=1)
-  on.exit(lucode::model_unlock(lock_id), add=TRUE)
+  if(lock_model) {
+    lock_id <- lucode::model_lock(timeout1=1)
+    on.exit(lucode::model_unlock(lock_id), add=TRUE)
+  }
 
   if(!is.null(scenario)) cfg <- lucode::setScenario(cfg,scenario)
   cfg <- lucode::check_config(cfg)
@@ -175,10 +177,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
   }
 
   # NPI/NDC policyes calculations
-  baserun_files <- c("scripts/npi_ndc/policies/magpie_bau_land.mz",
-                     "scripts/npi_ndc/policies/magpie_bau_cstock.mz")
-  if(!any(file.exists(baserun_files))) stop("Base_run archived files missing!")
-  if(cfg$recalc_base_run){9
+  if(cfg$recalc_base_run){
     cat("Starting base_run recalculation for NPI and NDC`!\n")
     source("scripts/npi_ndc/start_npi_ndc.R")
     start_npi_ndc_preprocessing(cfg,base_run_dir="scripts/npi_ndc/base_run",maindir=maindir)
@@ -186,6 +185,9 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
   }
 
   if(cfg$recalc_npi_ndc){
+    baserun_files <- c("scripts/npi_ndc/policies/magpie_bau_land.mz",
+                       "scripts/npi_ndc/policies/magpie_bau_cstock.mz")
+    if(!any(file.exists(baserun_files))) stop("Base_run archived files missing!")
     cat("Starting NPI/NDC recalculation!\n")
     source("scripts/npi_ndc/start_npi_ndc.R")
     setwd("scripts/npi_ndc")
@@ -211,9 +213,11 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
   save(cfg, file=lucode::path(cfg$results_folder, "config.Rdata"))
 
   lucode::singleGAMSfile(mainfile=cfg$model, output=lucode::path(cfg$results_folder, "full.gms"))
-  lucode::model_unlock(lock_id)
+  if(lock_model) {
+    lucode::model_unlock(lock_id)
+    on.exit(setwd(maindir))
+  }
 
-  on.exit(setwd(maindir))
   setwd(cfg$results_folder)
 
   #Is SLURM available?
