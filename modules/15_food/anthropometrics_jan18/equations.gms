@@ -18,27 +18,18 @@ q15_food_demand(i2,kfo) ..
 q15_aim ..
           v15_objective
           =e=
-          sum(iso,v15_income_pc_real_ppp_iso(iso));
+          sum(iso,v15_income_pc_real_ppp_iso(iso) - 10**6*v15_income_balance(iso));
 
 q15_aim_standalone ..
           v15_objective_standalone
           =e=
           sum(iso,v15_kcal_regression_total(iso));
 
-
 q15_budget(iso) ..
-         sum((ct,kfo), v15_kcal_regression(iso,kfo)*365*p15_prices_kcal(ct,iso,kfo))
-         + v15_demand_nonfood(iso)*s15_prices_nonfood
-         =e=
-         sum(ct,im_gdp_pc_ppp_iso(ct,iso))
-         ;
-
-q15_real_income(iso) ..
          v15_income_pc_real_ppp_iso(iso)
          =e=
-         sum((kfo), v15_kcal_regression(iso,kfo)*365*i15_prices_initial_kcal(iso,kfo))
-         + v15_demand_nonfood(iso)*s15_prices_nonfood_initial;
-;
+         sum((ct,kfo), v15_kcal_regression(iso,kfo)*365*(i15_prices_initial_kcal(iso,kfo)-p15_prices_kcal(ct,iso,kfo)))
+         + sum(ct,im_gdp_pc_ppp_iso(ct,iso)) + v15_income_balance(iso);
 
 
 * Foodtree One
