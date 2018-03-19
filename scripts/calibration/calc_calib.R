@@ -75,25 +75,25 @@ update_calib<-function(gdx_file,calibrate_pasture=TRUE,calibrate_cropland=TRUE,d
                " origin: scripts/calibration/calc_calib.R (path relative to model main directory)",
                paste0(" creation date: ",date()))
   write.magpie(round(setYears(calib_factor,NULL),2), calib_file, comment = comment)
-  
+
   ### write down current calib factors (and area_factors) for tracking
 
   if(calibration_step==1){
     calib_factor <- add_dimension(calib_factor, dim=3.1, add="iteration", nm=calibration_step)
     write.magpie(round(setYears(calib_factor,NULL),2), "track_yield_calib.csv")
-    
+
     track_area_factor <- add_dimension(area_factor, dim=3.1, add="iteration", nm=calibration_step)
     write.magpie(round(setYears(track_area_factor,NULL),2), "track_yield_calib_area_factors.csv")
   }
   else{
     calib_factor <- add_dimension(calib_factor, dim=3.1, add="iteration", nm=calibration_step)
     write.magpie(round(setYears(calib_factor,NULL),2), "track_yield_calib.csv", append = TRUE)
-    
+
     track_area_factor <- add_dimension(area_factor, dim=3.1, add="iteration", nm=calibration_step)
     write.magpie(round(setYears(track_area_factor,NULL),2), "track_yield_calib_area_factors.csv", append = TRUE)
   }
-  
-  
+
+
   return(list(calib_factor_new ,tc_factor, area_factor))
 }
 
@@ -107,7 +107,8 @@ calibrate_magpie <- function(n_maxcalib = 1,
                              calib_file = "modules/14_yields/input/f14_yld_calib.csv",
                              putfolder = "calib_run",
                              data_workspace = NULL,
-                             logoption = 3) {
+                             logoption = 3,
+                             debug = FALSE) {
 
   require(magclass)
   require(lusweave)
@@ -118,6 +119,7 @@ calibrate_magpie <- function(n_maxcalib = 1,
   for(i in 1:n_maxcalib){
     cat(paste("\nStarting calibration iteration",i,"\n"))
     calibration_run(putfolder=putfolder, calib_magpie_name=calib_magpie_name, logoption=logoption)
+    if(debug) file.copy(paste0(putfolder,"/fulldata.gdx"),paste0("fulldata_calib",i,".gdx"))
     new_calib <- update_calib(gdx_file=paste0(putfolder,"/fulldata.gdx"),calibrate_pasture=calibrate_pasture,calibrate_cropland=calibrate_cropland,damping_factor=damping_factor, calib_file=calib_file, calibration_step=i)
     if(i==1){
       calib_hist <- setYears(new_calib[[1]],"y1995")
@@ -155,7 +157,7 @@ calibrate_magpie <- function(n_maxcalib = 1,
     swtable(swout,out_tc[,,1,drop=F],caption="Contribution of tc to calibration factors calculated in each iteration",transpose=T,digits=4,table.placement="H")
     swlatex(swout,paste("\\subsection{Area factor}"))
     swtable(swout,out_area[,,1,drop=F],caption="Contribution of area to calibration factors calculated in each iteration",transpose=T,digits=4,table.placement="H")
- } 
+ }
   swclose(swout)
 
   # delete calib_magpie_gms in the main folder
