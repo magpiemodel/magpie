@@ -96,7 +96,6 @@ parameters
  o15_kcal_regression_initial(iso,kfo)        Uncalibrated per-capita demand before price shock (kcal per capita per day)
  p15_kcal_pc_initial(t,i,kfo)               Per-capita consumption in food demand model before price shock (kcal per capita per day)
  p15_kcal_pc_initial_iso(t,iso,kfo)          Per-capita consumption in food demand model before price shock on iso level (kcal per capita per day)
- p15_demand_nonfood_iso_initial(t,iso)       non-food per-capita demand (units per capita)
 
 * after price shock
  p15_kcal_pc_iso(t,iso,kfo)                 Per-capita consumption in food demand model after price shock (kcal per capita per day)
@@ -120,7 +119,6 @@ model m15_food_demand /
       q15_aim,
       q15_aim_standalone,
       q15_budget,
-      q15_real_income,
       q15_regression_kcal,
       q15_regression_intake,
       q15_regression,
