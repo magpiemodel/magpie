@@ -181,7 +181,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
   if(cfg$recalc_base_run){
     cat("Starting base_run recalculation for NPI and NDC`!\n")
     source("scripts/npi_ndc/start_npi_ndc.R")
-    start_npi_ndc_preprocessing(cfg,base_run_dir="scripts/npi_ndc/base_run",maindir=maindir)
+    start_npi_ndc_preprocessing(cfg,base_run_dir="scripts/npi_ndc/base_run",maindir=maindir,renew_base=TRUE)
     cat("NPI/NDC base_run recalculation successful!\n")
   }
 
