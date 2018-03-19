@@ -171,7 +171,8 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
                      damping_factor = cfg$damping_factor,
                      calib_file = calib_file,
                      data_workspace = cfg$val_workspace,
-                     logoption = 3)
+                     logoption = 3,
+                     debug = cfg$debug)
     file.copy("calibration_results.pdf", cfg$results_folder, overwrite=TRUE)
     cat("Calibration factor calculated!\n")
   }
