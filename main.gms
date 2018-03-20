@@ -8,20 +8,24 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev26.2_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
-* md5sum: b6065fc8f3038ecac5d6a5c30cd667a6
+* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev28_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
+* md5sum: d2e7023d165d5dcfc81077b9972b1bb9
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
-* Used data set: rev3.12_8a828c6ed5004e77d1ba2025e8ea2261_magpie.tgz
-* md5sum: ccd2134ba40ea12f1834af7a764fe27e
+* Used data set: rev3.13_8a828c6ed5004e77d1ba2025e8ea2261_magpie.tgz
+* md5sum: a099efb3f17edb5ba7d09288a9270146
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev3.12_8a828c6ed5004e77d1ba2025e8ea2261_validation.tgz
-* md5sum: 9213d9259972d0cd95b904958d8775b1
+* Used data set: rev3.13_8a828c6ed5004e77d1ba2025e8ea2261_validation.tgz
+* md5sum: ab506e1d37701d5ed3d4040840289bf2
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev3.22.tgz
-* md5sum: d10d7af70f6f082cb0cf46b44506fb30
+* Used data set: additional_data_rev3.24.tgz
+* md5sum: 902b5ba1aef279493e5ce102fade55d8
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* 
+* Used data set: npi_ndc_base_fixed.tgz
+* md5sum: 48b65ce6fb537c37cd5018f9942c8eaf
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Low resolution: h200
@@ -35,19 +39,19 @@ $title magpie
 * 
 * Regionscode: 8a828c6ed5004e77d1ba2025e8ea2261
 * 
-* Regions data revision: 3.12
+* Regions data revision: 3.13
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/noco2
-* * Additional input folder: /p/projects/landuse/data/input/other/rev26
-* * Revision: 26.2
+* * Additional input folder: /p/projects/landuse/data/input/other/rev28
+* * Revision: 28
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
 * 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: h200
-* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev26.2_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev26.2_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
+* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev28_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev28_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
 * * Regionscode: 8a828c6ed5004e77d1ba2025e8ea2261
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
@@ -55,7 +59,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Wed Mar 14 11:52:54 2018
+* Last modification (input data): Tue Mar 20 15:38:09 2018
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -95,7 +99,7 @@ $setglobal interest_rate  glo_jan16
 $setglobal tc  endo_JUN16
 $setglobal yields  biocorrect
 
-$setglobal food  intake_dez17
+$setglobal food  anthropometrics_jan18
 $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 
