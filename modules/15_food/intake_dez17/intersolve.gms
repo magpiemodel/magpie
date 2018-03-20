@@ -101,7 +101,7 @@ if (s15_elastic_demand =1,
 
 
         if (p15_modelstat(t) < 3,
-           put_utility 'shell' / 'mv m15_food_demand_p.gdx m15_food_demand_' t.tl:0'.gdx';
+           put_utility 'shell' / 'mv -f m15_food_demand_p.gdx m15_food_demand_' t.tl:0'.gdx';
         );
 
   else
