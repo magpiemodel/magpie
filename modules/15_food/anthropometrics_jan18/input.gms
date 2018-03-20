@@ -12,7 +12,7 @@ $setglobal c15_rumscen  mixed
 scalar s15_elastic_demand  / 1 /;
 *   options : 0(exogenous demand), 1(elastic demand
 
-scalar s15_maxiter maximum iteration number /5/;
+scalar s15_maxiter maximum iteration number / 5 /;
 
 table f15_household_balance_flow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of inhomogenous products and processes in statistics (Mio t DM)
 $ondelim
