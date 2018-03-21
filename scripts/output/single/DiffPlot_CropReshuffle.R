@@ -39,8 +39,10 @@ write.magpie(hist_croparea,file_name=paste0(outputdir,"/hist_CA.mz"),comment="hi
 writeLines("\nWriting model output to spatially explicit file\n")
 write.magpie(modout_croparea,file_name=paste0(outputdir,"/modout_CA.mz"),comment="model output crop area")
 
+# Open a sweave stream
 sw<-swopen(paste0(outputdir,"/DiffPlot_CropReshuffling.pdf"))
 
+# Aesthetics
 swlatex(sw,"\\huge")
 swlatex(sw,"\\textbf{Reshuffling information for Crops (Model output-Historical)}\\newline")
 swlatex(sw,"\\normalsize")
@@ -48,19 +50,25 @@ swlatex(sw,"\\newline")
 swlatex(sw,"\\tableofcontents")
 swlatex(sw,"\\newpage")
 
+# Read back the historical and model data
 hist <- read.magpie(paste0(outputdir,"/hist_CA.mz"))
 model <- read.magpie(paste0(outputdir,"/modout_CA.mz"))
 
+# Historical data cells are having an ISO first name here so set that to cells from model data
 getCells(hist) <- getCells(model)
 
+# Check if the names match between model and historical data
 namediff <- length(setdiff(getNames(model),getNames(hist)))
 
 if( namediff > 0){
   stop("Names don't match for model output and historical data.")
 } else {
+  # Extract crop names
   crops <- getNames(hist,dim = 1)
+  # Extract Irrigation type
   irrig <- getNames(hist,dim = 2)
 
+  ## Start plotting for each crop
   for (i in crops) {
     swlatex(sw,"\\section{",i,"}")
     for (j in irrig) {
@@ -69,6 +77,7 @@ if( namediff > 0){
       hist_temp <- hist[,,var]
       model_temp <- model[,,var]
 
+      # Only need common years
       yrs <- intersect(getYears(hist_temp),getYears(model_temp))
      for(y in yrs){
         cat(j,i,"in",y,"\n")
