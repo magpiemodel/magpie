@@ -10,7 +10,13 @@ magpie_calib.*
 
 #ignore outputs
 *.gdx
+*.rda
+*.opt
+*.lst
 /output/
 
 #ignore R support files
 .Rhistory
+
+#ignore documentation folder
+/doc
