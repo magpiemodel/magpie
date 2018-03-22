@@ -24,7 +24,6 @@ positive variables
 
 equations
   q15_aim                aim function food demand model
-  q15_aim_standalone     aim function standalone model
   q15_budget(iso)        Household Budget Constraint
   q15_real_income(iso)   Calculation of real income
   q15_regression_kcal(iso)     Per capita total consumption
@@ -49,7 +48,6 @@ variables
 
   v15_demand_nonfood(iso)            non-food demand (units)
   v15_objective                      objective term
-  v15_objective_standalone           objective term standalone
 
 ;
 
@@ -77,6 +75,7 @@ parameters
 
 * diet structure
   p15_kcal_requirement(t,iso,sex,age_group)   Intake requirements of a standardized BMI population dependent on physical activity and body size (kcal per captia per day)
+  p15_kcal_pregnancy(t,iso,sex,age_group)  additional energy requirements for pregnant and lactating femals (kcal per capita per day)
   p15_kcal_regression(t, iso, kfo)        Uncalibrated regression estimates of calorie demand (Kcal per cap per day)
 
  i15_ruminant_fadeout(t_all) ruminant fadeout share (1)
@@ -124,7 +123,6 @@ scalars
 
 model m15_food_demand /
       q15_aim,
-      q15_aim_standalone,
       q15_budget,
       q15_real_income,
       q15_regression_kcal,
@@ -140,11 +138,6 @@ m15_food_demand.scaleopt  = 1 ;
 m15_food_demand.solprint  = 1 ;
 m15_food_demand.holdfixed = 1 ;
 
-model m15_magpiemini /
-      q15_food_demand,
-      q15_aim_standalone/;
-
-
 
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -152,19 +145,17 @@ parameters
  ov_dem_food(t,i,kall,type)                            Demand for food (Mt DM)
  ov15_kcal_regression(t,iso,kfo,type)                  Uncalibrated regression estimates of calorie demand (Kcal per cap per day)
  ov15_kcal_regression_total(t,iso,type)                Uncalibrated regression estimates of  total per capita calories (Kcal per cap per day)
- ov15_share(t,iso,demand_subsystem15,type)                         Uncalibrated regression estimates of kcal shares (-)
+ ov15_regression(t,iso,demand_subsystem15,type)        Uncalibrated regression estimates of kcal shares (-)
  ov15_income_pc_real_ppp_iso(t,iso,type)               real income per capita (USD per cap)
  ov15_kcal_intake_regression(t,iso,sex,age_group,type) Uncalibrated regression estimate for per-capita intake (kcal)
  ov15_demand_nonfood(t,iso,type)                       non-food demand (units)
  ov15_objective(t,type)                                objective term
- ov15_objective_standalone(t,type)                     objective term standalone
  oq15_food_demand(t,i,kfo,type)                        Food demand (million Kcal)
  oq15_aim(t,type)                                      aim function food demand model
- oq15_aim_standalone(t,type)                           aim function standalone model
  oq15_budget(t,iso,type)                               Household Budget Constraint
  oq15_real_income(t,iso,type)                          Calculation of real income
  oq15_regression_kcal(t,iso,type)                      Per capita total consumption
- oq15_regression(t,iso,demand_subsystem15,type)                    Share regressions
+ oq15_regression(t,iso,demand_subsystem15,type)        Share regressions
  oq15_foodtree_kcal_animals(t,iso,kfo_ap,type)         Demand for animal products
  oq15_foodtree_kcal_processed(t,iso,kfo_pf,type)       Demand for processed products
  oq15_foodtree_kcal_staples(t,iso,kfo_st,type)         Demand for staple products

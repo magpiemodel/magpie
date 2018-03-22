@@ -137,6 +137,15 @@ p15_kcal_requirement(t,iso,sex,age_group)=
                         + f15_schofield_parameters_height(sex,age_group, "weight")*p15_bodyweight_healthy(t,iso,sex,age_group))
                         * p15_physical_activity_level(t,iso,sex,age_group);
 
+* pregnancy and lactation requires extra intake. We distribute the newborns among reproductive women and multuply with extra energy requirements
+p15_kcal_pregnancy(t,iso,sex,age_group)=0;
+p15_kcal_pregnancy(t,iso,"F",reproductive)$sum(reproductive2, im_demography(t,iso,"F",reproductive2)>0) =
+                   sum(sex,im_demography(t,iso,sex,"0--4")/5)/
+                   sum(reproductive2, im_demography(t,iso,"F",reproductive2))
+                   * ((40/66)*845 + (26/66)*675)
+                   ;
+
+
 
 if (sum(sameas(t_past,t),1) = 1,
 

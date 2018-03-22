@@ -20,11 +20,6 @@ q15_aim ..
           =e=
           sum(iso,v15_income_pc_real_ppp_iso(iso));
 
-q15_aim_standalone ..
-          v15_objective_standalone
-          =e=
-          sum(iso,v15_kcal_regression_total(iso));
-
 
 q15_budget(iso) ..
          sum((ct,kfo), v15_kcal_regression(iso,kfo)*365*p15_prices_kcal(ct,iso,kfo))
@@ -46,7 +41,7 @@ q15_real_income(iso) ..
 q15_regression_intake(iso,sex,age_group) ..
          v15_kcal_intake_regression(iso,sex,age_group)
          =e=
-         sum(ct,p15_kcal_requirement(ct,iso,sex,age_group))*
+         sum(ct,p15_kcal_requirement(ct,iso,sex,age_group)+ p15_kcal_pregnancy(ct,iso,sex,age_group))*
          (
             f15_intake_regression_parameters(sex,age_group,"saturation")*v15_income_pc_real_ppp_iso(iso)
             /(f15_intake_regression_parameters(sex,age_group,"halfsaturation")+v15_income_pc_real_ppp_iso(iso))

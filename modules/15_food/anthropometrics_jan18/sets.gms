@@ -18,6 +18,9 @@ sets
        60--64, 65--69, 70--74, 75--79
        80--84,85--89,90--94,95--99,100+ /
 
+   reproductive(age_group) reproductive age groups
+   /20--24, 25--29, 30--34, 35--39/
+
    estimates15
    /preliminary,final/
 
@@ -107,3 +110,4 @@ alias(kfo_ap,kfo_ap2);
 alias(kfo_st,kfo_st2);
 alias(kfo_pf,kfo_pf2);
 alias(iso,iso2);
+alias(reproductive,reproductive2);

@@ -129,10 +129,6 @@ m15_food_demand.scaleopt  = 1 ;
 m15_food_demand.solprint  = 1 ;
 m15_food_demand.holdfixed = 1 ;
 
-model magpiemini /
-      q15_food_demand,
-      q15_aim_standalone/;
-
 
 
 
