@@ -3,8 +3,7 @@
 *calculate prices for providing 1 kcal per day of one commodity
 
 if (magpie.modelstat = NA,
-    display "Standalone: taking exogenous demand shock (running m15_magpiemini)";
-    solve m15_magpiemini USING nlp MINIMIZING v15_objective_standalone;
+    q15_food_demand.m(i,kfo)=0;
     p15_prices_kcal(t,iso,kfo)=i15_prices_initial_kcal(iso,kfo)*f15_price_index(t);
 else
     display "Coupling: Reading out Marginal Costs from MAgPIE as shock to demand model";
