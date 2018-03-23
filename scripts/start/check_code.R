@@ -4,9 +4,10 @@
 # |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # |  Contact: magpie@pik-potsdam.de
 
-# Order of start scripts...Scripts not mentioned here will be shown alphabetically
-# after the ones specified below
 
-default
-check_code
-download_data_only
+######################################
+#### Script to check MAgPIE code  ####
+######################################
+
+library(lucode)
+codeCheck()
