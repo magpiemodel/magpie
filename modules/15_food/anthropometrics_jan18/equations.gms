@@ -47,7 +47,6 @@ q15_regression_intake(iso,sex,age_group) ..
             /(f15_intake_regression_parameters(sex,age_group,"halfsaturation")+v15_income_pc_real_ppp_iso(iso))
             +f15_intake_regression_parameters(sex,age_group,"intercept")
          )
-         +sum(ct,p15_intake_balanceflow(ct,iso,sex,age_group))
          ;
 
 
@@ -60,7 +59,7 @@ q15_regression_kcal(iso) ..
          /sum((sex,age_group,ct), im_demography(ct,iso,sex,age_group));
 
 
-  q15_regression(iso, demand_subsystem15) ..
+q15_regression(iso, demand_subsystem15) ..
          v15_regression(iso, demand_subsystem15)
          =e=
          i15_demand_regression_parameters(demand_subsystem15,"intercept") +
