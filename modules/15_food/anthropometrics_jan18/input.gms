@@ -14,6 +14,8 @@ scalar s15_elastic_demand  / 1 /;
 
 scalar s15_maxiter maximum iteration number / 5 /;
 
+scalar s15_convergence convergence criteria   / 0.05 /;
+
 table f15_household_balance_flow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of inhomogenous products and processes in statistics (Mio t DM)
 $ondelim
 $include "./modules/15_food/input/f15_household_balanceflow.cs3"
