@@ -19,4 +19,6 @@ magpie_calib.*
 .Rhistory
 
 #ignore documentation folder
-/doc
+/doc/*/
+/doc/*.pdf
+/doc/*.rds
