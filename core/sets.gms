@@ -135,8 +135,10 @@ sets time_annual annual extended vector
       y2145, y2150 /
 
     t_past(t_all) timesteps with observed data
-        / y1965, y1970, y1975, y1980, y1985, y1990,
-      y1995, y2000, y2005, y2010 /
+        / y1965, y1970, y1975
+*        ,y1980, y1985, y1990,
+*      y1995, y2000, y2005, y2010
+        /
 ;
 
 set t(t_all) used time periods

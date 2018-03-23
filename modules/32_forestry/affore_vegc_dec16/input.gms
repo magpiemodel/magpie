@@ -5,7 +5,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 $setglobal c32_aff_mask  noboreal
 * options: unrestricted, noboreal, onlytropical
-$setglobal c32_aff_policy  none
+$setglobal c32_aff_policy  npi
 
 scalars
 	s32_max_aff_area 	maximum total global afforestation in Mha    / Inf /

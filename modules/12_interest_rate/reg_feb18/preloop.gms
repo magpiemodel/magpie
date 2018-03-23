@@ -6,11 +6,11 @@
 
 
 *******Income Country Grouping based on World Bank definitions
-s12_min_dev = smin(i,f09_development_state("y1995",i,"%c09_gdp_scenario%"));
-s12_max_dev = smax(i,f09_development_state("y1995",i,"%c09_gdp_scenario%"));
+s12_min_dev = smin(i,im_development_state("y1995",i));
+s12_max_dev = smax(i,im_development_state("y1995",i));
 s12_slope_a = (f12_interest_bound("y1995","high")-f12_interest_bound("y1995","low"))/(s12_min_dev-s12_max_dev);
 s12_intercept_b = f12_interest_bound("y1995","high")-s12_slope_a*s12_min_dev;
-p12_interest(t,i) = s12_slope_a *f09_development_state(t,i,"%c09_gdp_scenario%") + s12_intercept_b;
+p12_interest(t,i) = s12_slope_a *im_development_state(t,i) + s12_intercept_b;
 
 $ifthen "%c12_interest_rate%" == "coupling" p12_interest(t,i) = f12_interest_coupling(t);
 $endif

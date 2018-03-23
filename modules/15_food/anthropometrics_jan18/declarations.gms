@@ -25,7 +25,6 @@ positive variables
 equations
   q15_aim                aim function food demand model
   q15_budget(iso)        Household Budget Constraint
-  q15_real_income(iso)   Calculation of real income
   q15_regression_kcal(iso)     Per capita total consumption
   q15_regression(iso, demand_subsystem15)  Share regressions
   q15_foodtree_kcal_animals(iso,kfo_ap)  Demand for animal products
@@ -41,14 +40,12 @@ positive variables
   v15_kcal_regression_total(iso)     Uncalibrated regression estimates of  total per capita calories (Kcal per cap per day)
   v15_regression(iso, demand_subsystem15)       Uncalibrated regression estimates of kcal shares (-)
   v15_income_pc_real_ppp_iso(iso)    real income per capita (USD per cap)
+  v15_income_balance(iso)            balance variable to balance cases in which reduction in income beats gdp pc (USD per cap)
   v15_kcal_intake_regression(iso,sex,age_group) Uncalibrated regression estimate for per-capita intake (kcal)
 ;
 
 variables
-
-  v15_demand_nonfood(iso)            non-food demand (units)
   v15_objective                      objective term
-
 ;
 
 scalar s15_count counter for creating average consumption over the length between timesteps;
@@ -98,7 +95,6 @@ parameters
  o15_kcal_regression_initial(iso,kfo)        Uncalibrated per-capita demand before price shock (kcal per capita per day)
  p15_kcal_pc_initial(t,i,kfo)               Per-capita consumption in food demand model before price shock (kcal per capita per day)
  p15_kcal_pc_initial_iso(t,iso,kfo)          Per-capita consumption in food demand model before price shock on iso level (kcal per capita per day)
- p15_demand_nonfood_iso_initial(t,iso)       non-food per-capita demand (units per capita)
 
 * after price shock
  p15_kcal_pc_iso(t,iso,kfo)                 Per-capita consumption in food demand model after price shock (kcal per capita per day)
@@ -113,10 +109,7 @@ parameters
 ;
 
 scalars
- s15_prices_nonfood          nonfood price (US Dollar per unit)  /1/
- s15_prices_nonfood_initial  nonfood price before shock (US Dollar per unit)  /1/
  s15_year                    current year as integer value  /2000/
- s15_maxiter                 maximum iteration number /5/
 ;
 
 
@@ -124,7 +117,6 @@ scalars
 model m15_food_demand /
       q15_aim,
       q15_budget,
-      q15_real_income,
       q15_regression_kcal,
       q15_regression_intake,
       q15_regression,
@@ -147,13 +139,12 @@ parameters
  ov15_kcal_regression_total(t,iso,type)                Uncalibrated regression estimates of  total per capita calories (Kcal per cap per day)
  ov15_regression(t,iso,demand_subsystem15,type)        Uncalibrated regression estimates of kcal shares (-)
  ov15_income_pc_real_ppp_iso(t,iso,type)               real income per capita (USD per cap)
+ ov15_income_balance(t,iso,type)                       balance variable to balance cases in which reduction in income beats gdp pc (USD per cap)
  ov15_kcal_intake_regression(t,iso,sex,age_group,type) Uncalibrated regression estimate for per-capita intake (kcal)
- ov15_demand_nonfood(t,iso,type)                       non-food demand (units)
  ov15_objective(t,type)                                objective term
  oq15_food_demand(t,i,kfo,type)                        Food demand (million Kcal)
  oq15_aim(t,type)                                      aim function food demand model
  oq15_budget(t,iso,type)                               Household Budget Constraint
- oq15_real_income(t,iso,type)                          Calculation of real income
  oq15_regression_kcal(t,iso,type)                      Per capita total consumption
  oq15_regression(t,iso,demand_subsystem15,type)        Share regressions
  oq15_foodtree_kcal_animals(t,iso,kfo_ap,type)         Demand for animal products

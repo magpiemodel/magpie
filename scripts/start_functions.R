@@ -4,7 +4,7 @@
 # |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # |  Contact: magpie@pik-potsdam.de
 
-start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
+start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
                       report=NULL,sceninreport=NULL,LU_pricing="y2010", lock_model=TRUE) {
 
   if (!requireNamespace("lucode", quietly = TRUE)) {
@@ -125,9 +125,10 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
                 try(system("git rev-parse HEAD", intern=TRUE), silent=TRUE),
                 "", "### Modifications ###",
                 try(system("git status", intern=TRUE), silent=TRUE))
-  if(codeCheck | interfaceplot) {
-    codeCheck <- lucode::codeCheck(core_files=c("core/*.gms",cfg$model), test_switches=(cfg$model=="main.gms"))
-    if(interfaceplot) lucode::modules_interfaceplot(codeCheck)
+  if(codeCheck) {
+    codeCheck <- lucode::codeCheck(core_files=c("core/*.gms",cfg$model),
+                                   test_switches=(cfg$model=="main.gms"),
+                                   strict=!cfg$developer_mode)
   } else codeCheck <- NULL
 
   # Create the workspace for validation
@@ -171,7 +172,8 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
                      damping_factor = cfg$damping_factor,
                      calib_file = calib_file,
                      data_workspace = cfg$val_workspace,
-                     logoption = 3)
+                     logoption = 3,
+                     debug = cfg$debug)
     file.copy("calibration_results.pdf", cfg$results_folder, overwrite=TRUE)
     cat("Calibration factor calculated!\n")
   }

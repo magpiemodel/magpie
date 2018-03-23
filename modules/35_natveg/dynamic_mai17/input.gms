@@ -5,8 +5,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 $setglobal c35_protect_scenario  WDPA
-$setglobal c35_ad_policy  none
-$setglobal c35_emis_policy  none
+$setglobal c35_ad_policy  npi
+$setglobal c35_emis_policy  npi
 
 table f35_protect_area(j,prot_type) conservation priority areas [mio. ha]
 $ondelim

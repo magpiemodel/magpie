@@ -61,18 +61,10 @@ display "convergence measure:",p15_convergence_measure;
 
 if (s15_elastic_demand =1,
   display "elastic demand model is activated";
-  if (p15_convergence_measure(t) > 0.05,
+  if ((p15_convergence_measure(t) > s15_convergence and p15_iteration_counter(t) <= s15_maxiter),
 
         display "convergence between MAgPIE and Food Demand Model not yet reached";
         sm_intersolve=0;
-
-        if((p15_iteration_counter(t) >= s15_maxiter),
-          m15_food_demand.solprint = 1
-          Execute_Unload "fulldata.gdx";
-          abort "no convergence between food demand model and magpie reached";
-        else
-          display "Food Demand Model results are returned to MAgPIE";
-        );
 
 * saving regression outcome for postprocessing
 
@@ -98,11 +90,13 @@ if (s15_elastic_demand =1,
 
 
         if (p15_modelstat(t) < 3,
-           put_utility 'shell' / 'mv m15_food_demand_p.gdx m15_food_demand_' t.tl:0'.gdx';
+           put_utility 'shell' / 'mv -f m15_food_demand_p.gdx m15_food_demand_' t.tl:0'.gdx';
         );
 
+  elseif(p15_iteration_counter(t) > s15_maxiter),
+      sm_intersolve=1;
+      display "Warning: convergence between MAgPIE and Food Demand Model not reached after ",p15_iteration_counter," iterations. Continue to next time step!";
   else
-
        sm_intersolve=1;
        display "Success: convergence between MAgPIE and Food Demand Model reached after ",p15_iteration_counter," iterations";
 * set back convergence indicators for next timestep
