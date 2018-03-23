@@ -47,7 +47,7 @@ q13_cost_tc(i2) ..
 *' Relative technological change costs v13_cost_tc are calculated as a
 *' heuristically derived power function of the land use intensity vm_tau for
 *' the investment-yield-ratio (Figure 3) multiplied by the initial, regional
-*' crop areas in 1995 f13_crop and shifted 15 years into the future using the
+*' crop areas in 1995 pm_land_start and shifted 15 years into the future using the
 *' region specific interest rate pm_interest. The shifting is performed
 *' because investments into technological change require on average 15 years of
 *' research before a yield increase is achieved, but the model has to see costs
@@ -63,7 +63,7 @@ q13_tech_cost_annuity(i2) ..
 *' In order to get the full investments required for the desired intensification
 *' the relative technological change costs are multiplied with the given
 *' intensification rate. These full costs are then distributed over an estimated
-*' planning horizon (sm_invest_horizon) with the annuity approach and the
+*' planning horizon sm_invest_horizon with the annuity approach and the
 *' corresponding annuity factor pm_annuity_due(i).
 
 q13_tech_cost(i2) ..

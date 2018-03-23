@@ -6,8 +6,8 @@
 
 
 parameters
- pm_land_start(j,land)         areas of different land pools and types (si0 and nsi0) from initialization [mio. ha]
- pcm_land(j,land)              area of different land types in the previous timestep (mio. ha)
+ pm_land_start(j,land)         land initialization areas (mio. ha)
+ pcm_land(j,land)              land areas of previous time step (mio. ha)
 ;
 
 variables
