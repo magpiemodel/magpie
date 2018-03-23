@@ -1,3 +1,0 @@
-name,type,reason
-im_physical_inactivity,input,questionnaire
-im_demography,input,questionnaire

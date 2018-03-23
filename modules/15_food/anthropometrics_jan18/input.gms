@@ -10,7 +10,7 @@ $setglobal c15_rumscen  mixed
 *   options:   constant, halving2050, mixed
 
 scalar s15_elastic_demand  / 1 /;
-*   options : 0(exogenous demand), 1(elastic demand
+*   options : 0(exogenous demand), 1(elastic demand)
 
 scalar s15_maxiter maximum iteration number / 5 /;
 
@@ -76,20 +76,6 @@ table f15_bodyheight(t_all,iso,sex,age_group)      body height in cm
 $ondelim
 $include "./modules/15_food/input/f15_bodyheight_historical.cs3"
 $offdelim;
-
-*parameter f15_BMI_standardized(sex,age_group) standardized BMI (-)
-*/
-*$ondelim
-*$include "./modules/15_food/input/f15_schofield_parameters.cs3"
-*$offdelim
-*/
-*;
-
-*table f15_schofield_parameters(sex,age_group, parameters15) Schofield equation parameters (-)
-*$ondelim
-*$include "./modules/15_food/input/f15_schofield_parameters.cs3"
-*$offdelim
-*;
 
 table f15_schofield_parameters_height(sex,age_group, schofield_parameters15) Schofield equation parameters (-)
 $ondelim
