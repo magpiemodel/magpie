@@ -12,6 +12,10 @@ $setglobal c15_rumscen  mixed
 scalar s15_elastic_demand  / 1 /;
 *   options : 0(exogenous demand), 1(elastic demand)
 
+scalar s15_calibrate / 1 /;
+* options: 1 (calibrated), 2 (pure regression outcomes)
+* only for per-capita calories, not for e.g. calibration of transformation parameters between per-capita calories in dm
+
 table f15_household_balance_flow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of inhomogenous products and processes in statistics (Mio t DM)
 $ondelim
 $include "./modules/15_food/input/f15_household_balanceflow.cs3"

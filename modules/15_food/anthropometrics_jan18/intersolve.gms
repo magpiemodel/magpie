@@ -74,12 +74,13 @@ if (s15_elastic_demand =1,
           display "Food Demand Model results are returned to MAgPIE";
         );
 
-* saving regression outcome for height regression
+* saving regression outcome for postprocessing
 
          p15_kcal_regression(t, iso, kfo)=v15_kcal_regression.l(iso, kfo);
 
+* estimating calibrated values for height regression
 * add balanceflow for calibration
-         p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_balanceflow(t,iso,kfo);
+         p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_balanceflow(t,iso,kfo) * s15_calibrate;
 * set negative values that can occur due to balanceflow to zero
          p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
 
@@ -172,5 +173,5 @@ if (sum(sameas(t_past,t),1) = 1,
   p15_bodyheight(t,iso,sex,age_groups_new_estimated15,"final") = f15_bodyheight(t,iso,sex,age_groups_new_estimated15);
 else
   p15_bodyheight_balanceflow(t,iso,sex,age_groups_new_estimated15)=p15_bodyheight_balanceflow(t-1,iso,sex,age_groups_new_estimated15);
-  p15_bodyheight(t,iso,sex,age_groups_new_estimated15,"final")=p15_bodyheight(t,iso,sex,age_groups_new_estimated15,"final")+p15_bodyheight_balanceflow(t,iso,sex,age_groups_new_estimated15);
+  p15_bodyheight(t,iso,sex,age_groups_new_estimated15,"final")=p15_bodyheight(t,iso,sex,age_groups_new_estimated15,"final")+p15_bodyheight_balanceflow(t,iso,sex,age_groups_new_estimated15)*s15_calibrate;
 );

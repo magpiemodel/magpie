@@ -152,8 +152,8 @@ if (sum(sameas(t_past,t),1) = 1,
    p15_bodyheight(t,iso,sex,age_group,estimates15) = f15_bodyheight(t,iso,sex,age_group);
 
    p15_intake_balanceflow(t,iso,sex,age_group) =
-      f15_intake_pc_observed_iso(t,iso,sex,age_group)-
-      p15_kcal_requirement(t,iso,sex,age_group)*
+      f15_intake_pc_observed_iso(t,iso,sex,age_group) -
+      (p15_kcal_requirement(t,iso,sex,age_group)+ p15_kcal_pregnancy(t,iso,sex,age_group))*
       (
           f15_intake_regression_parameters(sex,age_group,"saturation")*im_gdp_pc_ppp_iso(t,iso)
           /(f15_intake_regression_parameters(sex,age_group,"halfsaturation")+im_gdp_pc_ppp_iso(t,iso))
@@ -162,7 +162,7 @@ if (sum(sameas(t_past,t),1) = 1,
 
    p15_intake_balanceflow_lastcalibrationyear(iso,sex,age_group)=p15_intake_balanceflow(t,iso,sex,age_group);
 else
-    p15_intake_balanceflow(t,iso,sex,age_group) =  p15_intake_balanceflow_lastcalibrationyear(iso,sex,age_group)   * f15_kcal_balanceflow_fadeout(t,"%c15_calibscen%");
+    p15_intake_balanceflow(t,iso,sex,age_group) =  p15_intake_balanceflow_lastcalibrationyear(iso,sex,age_group) * f15_kcal_balanceflow_fadeout(t,"%c15_calibscen%");
 );
 
 
@@ -212,13 +212,13 @@ if (sum(sameas(t_past,t),1) = 1,
     p15_kcal_balanceflow(t,iso,kfo)$(f15_kcal_pc_iso(t,iso,kfo)>0) = f15_kcal_pc_iso(t,iso,kfo) - v15_kcal_regression.l(iso, kfo);
     p15_kcal_balanceflow_lastcalibrationyear(iso,kfo) = p15_kcal_balanceflow(t,iso,kfo);
 else
-    p15_kcal_balanceflow(t,iso,kfo) = p15_kcal_balanceflow_lastcalibrationyear(iso,kfo) * f15_kcal_balanceflow_fadeout(t,"%c15_calibscen%")
+    p15_kcal_balanceflow(t,iso,kfo) = p15_kcal_balanceflow_lastcalibrationyear(iso,kfo) * f15_kcal_balanceflow_fadeout(t,"%c15_calibscen%");
 );
 
 
 
 * add balanceflow for calibration
-       p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_balanceflow(t,iso,kfo);
+       p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_balanceflow(t,iso,kfo) * s15_calibrate;
 * set negative values that can occur due to balanceflow to zero
        p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
 
