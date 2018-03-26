@@ -4,6 +4,14 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 **************start solve loop**************
+
+*' @code This is the the straightforward and previous default version.
+*' In this realization the model is solved directly using nonlinear optimization.
+*' If the optimization returns an infeasible solution the solve is repeated,
+*' either until a feasible solution is found or the maximum number of iterations
+*' as defined in `s80_maxiter` is reached.
+
+
 s80_counter = 0;
 p80_modelstat(t) = 1;
 
@@ -24,7 +32,6 @@ repeat(
   display "vm_cost_glo.l";
   display vm_cost_glo.l;
 
-
 * write extended run information in list file in the case that the final solution is infeasible
   if((s80_counter >= s80_maxiter and p80_modelstat(t) > 2 and p80_modelstat(t) ne 7),
     magpie.solprint = 1
@@ -34,6 +41,8 @@ repeat(
 
   until (p80_modelstat(t) <= 2 or s80_counter >= s80_maxiter)
 );
+
+*' @stop
 
 if ((p80_modelstat(t) < 3),
   put_utility 'shell' / 'mv -f magpie_p.gdx magpie_' t.tl:0'.gdx';

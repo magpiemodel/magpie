@@ -5,10 +5,10 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
-	p80_modelstat(t)	modelstat indicator
+	p80_modelstat(t)	modelstat indicator (1)
 ;
 
 scalars
-  s80_counter                  counter (-)
- 	s80_obj_linear   linear objective value
+  s80_counter      counter (1)
+ 	s80_obj_linear   linear objective value (Mio. USD)
 ;
