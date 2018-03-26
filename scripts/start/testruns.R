@@ -40,10 +40,10 @@ buildInputVector <- function(regionmapping   = "h11",
 
 ### test run definitions ###
 
-default <- function(cfg, calibration=NULL) {
+default <- function(cfg, title="default", calibration=NULL, ...) {
   cfg$force_download <- TRUE
-  cfg$title <- "default"
-  cfg$input <- buildInputVector(calibration=calibration)
+  cfg$title <- title
+  cfg$input <- buildInputVector(calibration=calibration, ...)
   try(start_run(cfg=cfg, codeCheck=FALSE))
   return(submitCalibration("ValidationDefault"))
 }
@@ -58,10 +58,10 @@ cutyieldcalib <- function(cfg) {
   try(start_run(cfg=cfg, codeCheck=FALSE))
 }
 
-mixed_factor <- function(cfg) {
-  cfg$title <- "mixed_factor"
+mixed_factor <- function(cfg, title="mixed_factor", ...) {
+  cfg$title <- title
   cfg$recalibrate <- TRUE
-  cfg$input <- buildInputVector(npi_base = "npi_ndc_base_mixed.tgz")
+  cfg$input <- buildInputVector(npi_base = "npi_ndc_base_mixed.tgz", ...)
   cfg$gms$factor_costs <- "mixed_feb17"
   try(start_run(cfg=cfg, codeCheck=FALSE))
   return(submitCalibration("ValidationMixedFactor"))
@@ -137,16 +137,16 @@ ssp5 <- function(cfg, calibration=NULL) {
   try(start_run(cfg=cfg,scenario="SSP5",codeCheck=FALSE))
 }
 
-default_rcp26 <- function(cfg, calibration=NULL) {
-  cfg$title <- "default_rcp26"
+default_rcp26 <- function(cfg, title="default_rcp26", calibration=NULL, ...) {
+  cfg$title <- title
   cfg$input <- buildInputVector(calibration=calibration)
   cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
   cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
   try(start_run(cfg=cfg, codeCheck=FALSE))
 }
 
-mixed_rcp26 <- function(cfg, calibration=NULL) {
-  cfg$title <- "mixed_rcp26"
+mixed_rcp26 <- function(cfg, title="mixed_rcp26", calibration=NULL, ...) {
+  cfg$title <- title
   cfg$input <- buildInputVector(calibration=calibration, npi_base = "npi_ndc_base_mixed.tgz")
   cfg$gms$factor_costs <- "mixed_feb17"
   cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
@@ -266,10 +266,16 @@ cfg <- setScenario(cfg,"SSP2")
 ### test runs ###
 
 default_calibration <- default(cfg)
-default_rcp26(cfg, default_calibration)
+default_rcp26(cfg, calibration=default_calibration)
 
 mixed_calibration <- mixed_factor(cfg)
-mixed_rcp26(cfg, mixed_calibration)
+mixed_rcp26(cfg, calibration=mixed_calibration)
+
+default_calibration <- default(cfg, title="default326", additional_data = "additional_data_rev3.26.tgz")
+default_rcp26(cfg, calibration=default_calibration, title="rcp26_326", additional_data = "additional_data_rev3.26.tgz")
+
+mixed_calibration <- mixed_factor(cfg, title="mixed326", additional_data = "additional_data_rev3.26.tgz")
+mixed_rcp26(cfg, calibration=mixed_calibration, title="mixed_rcp26_326", additional_data = "additional_data_rev3.26.tgz")
 
 #cutyieldcalib(cfg)
 
