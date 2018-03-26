@@ -4,6 +4,13 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 **************start solve loop**************
+
+*' @code In this realization an approach is used which was initially
+*' suggested by Todd Munson. Instead of direct start with the nonlinear solve,
+*' a linear version of the model is solved beforehand. In order to linearize
+*' the model nonlinear terms are fixed to best guesses for the respective values.
+*' After linear optimization the nonlinear optimization is run.
+
 s80_counter = 0;
 p80_modelstat(t) = 1;
 
@@ -34,7 +41,10 @@ $batinclude "./modules/include.gms" nl_fix
 * Optimal or feasible solution
       s80_obj_linear = vm_cost_glo.l;
     elseif (magpie.modelstat = 2),
-      abort "It seems that not all nonlinear terms have been fixed for the linear solve. Please check that all realizations with nonlinear terms provide a nl_fix.gms and a nl_release.gms which fix and release the corresponding nonlinear terms for the linear solve!";
+      abort "It seems that not all nonlinear terms have been fixed for the
+             linear solve. Please check that all realizations with nonlinear
+             terms provide a nl_fix.gms and a nl_release.gms which fix and
+             release the corresponding nonlinear terms for the linear solve!";
     else
 * Something is wrong with the solution
       s80_obj_linear =  Inf;
@@ -95,3 +105,8 @@ if ((p80_modelstat(t) > 2 and p80_modelstat(t) ne 7),
 );
 
 ***************end solve loop***************
+
+*' @limitations This realization requires that all used module realizations with
+*' nonlinear terms provide a nl_fix.gms and nl_release.gms which fix and release
+*' the nonlinear terms. If this is missing and there are still active nonlinear
+*' terms in the linear solve attempt the model will be stopped with an error.

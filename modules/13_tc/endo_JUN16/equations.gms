@@ -4,7 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @realization The endo realization stands for endogenous implementation of
+*' @equations The endo realization stands for endogenous implementation of
 *' technological change and land use intensification. The intensification rates
 *' are calculated endogenously based on an interplay between land use intensity
 *' $\tau$ and technological change costs. This module realization contains the

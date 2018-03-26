@@ -5,5 +5,5 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-        s80_maxiter   maximal solve iterations if modelstat is > 2          / 30 /
+        s80_maxiter   maximal solve iterations if modelstat is > 2 (1)    / 30 /
 ;
