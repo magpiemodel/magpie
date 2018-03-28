@@ -12,13 +12,14 @@ source("config/default.cfg")
 ##################### General settings ########################
 ###############################################################
 
-reg <- read.csv2(cfg$regionmapping) # read regional resolution, used for ghg tax
 cfg$results_folder  <- "output/:title:"
 cfg$output          <- "report" #unique(c(cfg$output,"remind","bioenergy","coupling_report","david"))
 
 # Download bioenergy demand scenarios
 filemap <- lucode::download_unpack(input="emulator.tgz", targetdir="input", repositories=list("/p/projects/landuse/data/input/archive"=NULL), debug=FALSE)
 demand <- readRDS("input/emulator.Rdata")
+#reg <- read.csv2(cfg$regionmapping) # read regional resolution, used for ghg tax
+reg <- list(RegionCode = getRegions(demand))
 
 scenarios <- read.csv2("config/scenario_config_emulator.csv",strip.white=TRUE)
 scenarios <- subset(scenarios, subset=(start == "1"))
@@ -68,8 +69,7 @@ write.ghgtax <- function(co2tax_2025=NULL,regions=NULL,out="./modules/56_ghg_pol
 
 for (scen in rownames(scenarios)) {
   
-  # Bioenergy demands
-
+  cat("\n################ Scenario",scen,"################\n")
   # Configure MAgPIE
   # Set scenario
   cfg<-setScenario(cfg,scenario=as.character(scenarios[scen,"SSP"]))
@@ -90,6 +90,7 @@ for (scen in rownames(scenarios)) {
   } else {
     # If none of the built-in GHG price scenarios was chosen, provide GHG prices
     cfg$gms$c56_pollutant_prices <- "coupling"
+    cat("Writing GHG tax scenario",scenarios[scen,"co2tax_name"],"\n\n")
     write.ghgtax(co2tax_2025=scenarios[scen,"co2tax_2025"],regions=unique(reg$RegionCode))
   }
 
@@ -97,11 +98,10 @@ for (scen in rownames(scenarios)) {
   expname <- paste0(scenarios[scen,"SSP"],"-",scenarios[scen,"co2tax_name"])
 
   # Copy bioenergy demand files and start runs
-  for(r in getNames(demand) {
+  for(r in getNames(demand)) {
     cfg$title <- paste(expname,r,sep="-")
-    cat("\n###################\n",cfg$title,"\n###################\n",sep="")
-    cat(" Writing bioenergy demand scenario",r,"to MAgPIE.\n")
-    write.magpie(demand[,,r], filename = "./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
+    cat(cfg$title,"Writing bioenergy demand scenario",r,"\n")
+    write.magpie(setNames(demand[,,r],NULL), file_name = "./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
     #manipulateConfig("scripts/run_submit/submit.sh","--job-name"=cfg$title,line_endings = "NOTwin")
     #start_run(cfg,codeCheck=FALSE)
   }
