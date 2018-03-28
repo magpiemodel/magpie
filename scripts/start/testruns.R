@@ -26,7 +26,7 @@ buildInputVector <- function(regionmapping   = "h11",
                              madrat_rev      = "3.13",
                              validation_rev  = "3.13",
                              calibration     = NULL,
-                             additional_data = "additional_data_rev3.25.tgz",
+                             additional_data = "additional_data_rev3.26.tgz",
                              npi_base        = "npi_ndc_base_fixed.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
@@ -271,11 +271,6 @@ default_rcp26(cfg, calibration=default_calibration)
 mixed_calibration <- mixed_factor(cfg)
 mixed_rcp26(cfg, calibration=mixed_calibration)
 
-default_calibration <- default(cfg, title="default326", additional_data = "additional_data_rev3.26.tgz")
-default_rcp26(cfg, calibration=default_calibration, title="rcp26_326", additional_data = "additional_data_rev3.26.tgz")
-
-mixed_calibration <- mixed_factor(cfg, title="mixed326", additional_data = "additional_data_rev3.26.tgz")
-mixed_rcp26(cfg, calibration=mixed_calibration, title="mixed_rcp26_326", additional_data = "additional_data_rev3.26.tgz")
 
 #cutyieldcalib(cfg)
 
