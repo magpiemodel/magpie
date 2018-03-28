@@ -49,6 +49,7 @@ cfg$gms$c_timesteps <- 12
 
 cfg$title <- "INMS2"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg$gms$s15_elastic_demand = 0
 cfg$gms$c56_pollutant_prices <- "SSP2-60-SPA2"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-60-SPA2"
 cfg$force_download <- TRUE
