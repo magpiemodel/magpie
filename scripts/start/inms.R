@@ -26,7 +26,8 @@ buildInputVector <- function(regionmapping   = "h11",
                              archive_rev     = "28",
                              madrat_rev      = "3.13",
                              validation_rev  = "3.13",
-                             additional_data = "additional_data_rev3.26.tgz") {
+                             additional_data = "additional_data_rev3.26.tgz",
+                             npi="npi_ndc_base_fixed.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
                 mag="c30c1c580039c2b300d86cc46ff4036a",
@@ -35,7 +36,7 @@ buildInputVector <- function(regionmapping   = "h11",
   archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", mappings[regionmapping], ".tgz")
   madrat  <- paste0("rev", madrat_rev,"_", mappings[regionmapping], "_magpie.tgz")
   validation  <- paste0("rev",validation_rev,"_", mappings[regionmapping], "_validation", ".tgz")
-  return(c(archive,madrat,validation,additional_data))
+  return(c(archive,madrat,validation,additional_data,npi))
 }
 
 
