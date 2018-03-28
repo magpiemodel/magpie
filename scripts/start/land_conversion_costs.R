@@ -20,30 +20,18 @@ cfg$gms$c_timesteps <- "test_TS"
 
 cfg$recalibrate <- TRUE
 
-cfg$title <- "gdp_scaled_jun13"
-cfg$gms$landconversion <- "gdp_scaled_jun13"
+cfg$title <- "gdp_vegc_low"
+manipulateConfig("modules/39_landconversion/gdp_vegc_mar18/input.gms",c39_cost_scenario="low")
+cfg$gms$landconversion <- "gdp_vegc_mar18"
 try(start_run(cfg=cfg, codeCheck=FALSE))
 
-cfg$recalibrate <- FALSE
-
 cfg$title <- "gdp_vegc_medium"
-manipulateConfig("modules/39_landconversion/gdp_vegetation_dev/input.gms",c39_cost_scenario="medium")
-cfg$gms$landconversion <- "gdp_vegetation_dev"
+manipulateConfig("modules/39_landconversion/gdp_vegc_mar18/input.gms",c39_cost_scenario="medium")
+cfg$gms$landconversion <- "gdp_vegc_mar18"
 try(start_run(cfg=cfg, codeCheck=FALSE))
 
 cfg$title <- "gdp_vegc_high"
-manipulateConfig("modules/39_landconversion/gdp_vegetation_dev/input.gms",c39_cost_scenario="high")
-cfg$gms$landconversion <- "gdp_vegetation_dev"
+manipulateConfig("modules/39_landconversion/gdp_vegc_mar18/input.gms",c39_cost_scenario="high")
+cfg$gms$landconversion <- "gdp_vegc_mar18"
 try(start_run(cfg=cfg, codeCheck=FALSE))
 
-cfg$recalibrate <- TRUE
-
-cfg$title <- "gdp_vegc_medium_recal"
-manipulateConfig("modules/39_landconversion/gdp_vegetation_dev/input.gms",c39_cost_scenario="medium")
-cfg$gms$landconversion <- "gdp_vegetation_dev"
-try(start_run(cfg=cfg, codeCheck=FALSE))
-
-cfg$title <- "gdp_vegc_high_recal"
-manipulateConfig("modules/39_landconversion/gdp_vegetation_dev/input.gms",c39_cost_scenario="high")
-cfg$gms$landconversion <- "gdp_vegetation_dev"
-try(start_run(cfg=cfg, codeCheck=FALSE))
