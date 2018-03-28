@@ -13,7 +13,14 @@ source("config/default.cfg")
 ###############################################################
 
 cfg$results_folder  <- "output/:title:"
-cfg$output          <- "report" #unique(c(cfg$output,"remind","bioenergy","coupling_report","david"))
+cfg$output          <- c("report","emu20_single_remulator") #unique(c(cfg$output,"remind","bioenergy","coupling_report","david"))
+
+# use "old" regions: c30c1c580039c2b300d86cc46ff4036a
+cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev28_h200_c30c1c580039c2b300d86cc46ff4036a.tgz", 
+               "rev3.13_c30c1c580039c2b300d86cc46ff4036a_magpie.tgz",
+               "rev3.13_c30c1c580039c2b300d86cc46ff4036a_validation.tgz",
+               "additional_data_rev3.24.tgz",
+               "npi_ndc_base_fixed.tgz")
 
 # Download bioenergy demand scenarios
 filemap <- lucode::download_unpack(input="emulator.tgz", targetdir="input", repositories=list("/p/projects/landuse/data/input/archive"=NULL), debug=FALSE)
@@ -98,12 +105,12 @@ for (scen in rownames(scenarios)) {
   expname <- paste0(scenarios[scen,"SSP"],"-",scenarios[scen,"co2tax_name"])
 
   # Copy bioenergy demand files and start runs
-  for(r in getNames(demand)) {
+  for(r in getNames(demand)) { ## as.character(c(1:9,73))
     cfg$title <- paste(expname,r,sep="-")
     cat(cfg$title,"Writing bioenergy demand scenario",r,"\n")
     write.magpie(setNames(demand[,,r],NULL), file_name = "./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
-    #manipulateConfig("scripts/run_submit/submit.sh","--job-name"=cfg$title,line_endings = "NOTwin")
-    #start_run(cfg,codeCheck=FALSE)
+    manipulateConfig("scripts/run_submit/submit.sh","--job-name"=cfg$title,line_endings = "NOTwin")
+    start_run(cfg,codeCheck=FALSE)
   }
 }
 
