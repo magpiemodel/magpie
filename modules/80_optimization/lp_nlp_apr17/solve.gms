@@ -41,10 +41,11 @@ $batinclude "./modules/include.gms" nl_fix
 * Optimal or feasible solution
       s80_obj_linear = vm_cost_glo.l;
     elseif (magpie.modelstat = 2),
-      abort "It seems that not all nonlinear terms have been fixed for the
-             linear solve. Please check that all realizations with nonlinear
-             terms provide a nl_fix.gms and a nl_release.gms which fix and
-             release the corresponding nonlinear terms for the linear solve!";
+      display "It seems that not all nonlinear terms have been fixed for the";
+      display "linear solve. Please check that all realizations with nonlinear";
+      display "terms provide a nl_fix.gms and a nl_release.gms which fix and";
+      display "release the corresponding nonlinear terms for the linear solve!";
+      abort "Unfixed nonlinear terms in linear solve!"
     else
 * Something is wrong with the solution
       s80_obj_linear =  Inf;
