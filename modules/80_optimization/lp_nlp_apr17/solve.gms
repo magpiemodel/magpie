@@ -5,46 +5,52 @@
 *** |  Contact: magpie@pik-potsdam.de
 **************start solve loop**************
 
-*' @code In this realization an approach is used which was initially
-*' suggested by Todd Munson. Instead of direct start with the nonlinear solve,
-*' a linear version of the model is solved beforehand. In order to linearize
-*' the model nonlinear terms are fixed to best guesses for the respective values.
-*' After linear optimization the nonlinear optimization is run.
 
 s80_counter = 0;
 p80_modelstat(t) = 1;
 
 repeat(
+
   magpie.trylinear = 1;
 
 * repeat linear solve under relaxed conditions if linear model is infeasible
    repeat(
 
+*' @code All nonlinear terms are fixed to buest guess values through `nl_fix.gms`
+*' which need to be provided by each module realization which contains nonlinear
+*' terms.
+
 $batinclude "./modules/include.gms" nl_fix
 
-* ### l_solve ###
+*' After fixing the linear model is solved. Via setting `magpie.trylinear = 1`
+*' the following statement starts a linear solve if no non-linearities
+*' remain in the model.
 
     solve magpie USING nlp MINIMIZING vm_cost_glo;
 
-* ### Second optimization which makes sure that the optimum is chosen    ###
-* ### for which the difference in land changes compared to the previous  ###
-* ### timestep is minimized.                                             ###
-* ### for better overall performance only executed if model was feasible ###
+*' A second optimization makes sure that the optimum is chosen for which
+*' the difference in land changes compared to the previous timestep is
+*' minimized. This is achieved by setting the calculated total costs of the
+*' previous optimization as upper bound and minimizing the land differences.
+
     if((magpie.modelstat=1 or magpie.modelstat = 7),
       vm_cost_glo.up = vm_cost_glo.l;
       solve magpie USING nlp MINIMIZING vm_landdiff;
       vm_cost_glo.up = Inf;
     );
 
+*' @stop
+
 * Check the linear solve.
     if ((magpie.modelstat = 1 or magpie.modelstat = 7),
 * Optimal or feasible solution
       s80_obj_linear = vm_cost_glo.l;
     elseif (magpie.modelstat = 2),
-      abort "It seems that not all nonlinear terms have been fixed for the
-             linear solve. Please check that all realizations with nonlinear
-             terms provide a nl_fix.gms and a nl_release.gms which fix and
-             release the corresponding nonlinear terms for the linear solve!";
+      display "It seems that not all nonlinear terms have been fixed for the";
+      display "linear solve. Please check that all realizations with nonlinear";
+      display "terms provide a nl_fix.gms and a nl_release.gms which fix and";
+      display "release the corresponding nonlinear terms for the linear solve!";
+      abort "Unfixed nonlinear terms in linear solve!"
     else
 * Something is wrong with the solution
       s80_obj_linear =  Inf;
@@ -52,11 +58,21 @@ $batinclude "./modules/include.gms" nl_fix
 
     p80_modelstat(t) = magpie.modelstat;
 
+*' @code After the linear solve all nonlinear variables are released again.
+
 $batinclude "./modules/include.gms" nl_release
+
+*' In case that no feasible solution for the linear model is found the best
+*' guess estimates for the fixations of nonlinear terms are slightly relaxed
+*' to increase the likelihood of finding a feasible solution and the linear
+*' solve is repeated. Such as fixation and release rules also the relaxation
+*' rules must be provided by the corresponding module realizations.
 
     if((p80_modelstat(t) <> 1),
 $batinclude "./modules/include.gms" nl_relax
     );
+
+*' @stop
 
     display p80_modelstat;
     s80_counter = s80_counter + 1 ;
@@ -67,7 +83,12 @@ $batinclude "./modules/include.gms" nl_relax
 
 * ### nl_solve ###
 
+*' @code Finally, the optimized, linear solution is used as starting point for
+*' the nonlinear solve and the model is solved in its full complexity.
+
   solve magpie USING nlp MINIMIZING vm_cost_glo;
+
+*' @stop
 
 * if solve stopped with an error, try it again with conopt3
   if((magpie.modelstat = 13),
@@ -105,8 +126,3 @@ if ((p80_modelstat(t) > 2 and p80_modelstat(t) ne 7),
 );
 
 ***************end solve loop***************
-
-*' @limitations This realization requires that all used module realizations with
-*' nonlinear terms provide a nl_fix.gms and nl_release.gms which fix and release
-*' the nonlinear terms. If this is missing and there are still active nonlinear
-*' terms in the linear solve attempt the model will be stopped with an error.

@@ -22,7 +22,7 @@ c60_biodem_level;;;;;;;;;;;1;0;;;;;;
 c62_material_scenario;;;SSP1;SSP2;SSP3;SSP4;SSP5;;;;;;;SSP1;SSP2;SSP3;SSP4;SSP5
 c70_feed_scen;;;ssp1;ssp2;ssp3;ssp4;ssp5;;;;;;;ssp1;ssp2;ssp3;ssp4;ssp5
 s80_maxiter;;;;;;;;;;;;10;;;;;;
-c_timesteps;;;;;;;;;;;less_TS;12;;;;;;
+c_timesteps;;;;;;;;;;;less_TS;less_TS;;;;;;
 c14_yields_scenario;cc;nocc;;;;;;;;;;;;cc;cc;cc;cc;cc
 c42_watdem_scenario;cc;nocc;;;;;;;;;;;;cc;cc;cc;cc;cc
 c43_watavail_scenario;cc;nocc;;;;;;;;;;;;cc;cc;cc;cc;cc
