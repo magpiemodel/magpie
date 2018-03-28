@@ -5,19 +5,14 @@
 *** |  Contact: magpie@pik-potsdam.de
 **************start solve loop**************
 
-*' @code This is the the straightforward and previous default version.
-*' In this realization the model is solved directly using nonlinear optimization.
-*' If the optimization returns an infeasible solution the solve is repeated,
-*' either until a feasible solution is found or the maximum number of iterations
-*' as defined in `s80_maxiter` is reached.
-
-
 s80_counter = 0;
 p80_modelstat(t) = 1;
 
 repeat(
 
+*' @code
   solve magpie USING nlp MINIMIZING vm_cost_glo;
+*' @stop
 
 * if solve stopped with an error, try it again with conopt3
     if((magpie.modelstat = 13),
