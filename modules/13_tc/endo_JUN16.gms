@@ -4,6 +4,40 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @description The endo realization stands for endogenous implementation of
+*' technological change and land use intensification. The intensification rates
+*' are calculated endogenously based on an interplay between land use intensity
+*' $\tau$ and technological change costs (as shown schematically in the figure
+*' below). This module realization contains the implementation as described
+*' in @dietrich_forecasting_2014 with two minor modifications:
+*'
+*'   * rates of previous investment decisions which still have to be paid are
+*'     added to the technological change costs
+*'   * the planning horizon for investments is unified over all investments in
+*'     the model.
+*'
+*' ![Implementation of technological change in MAgPIE
+*' [@dietrich_forecasting_2014]](tc_schematic.png){ width=60% }
+*'
+*' Initial land use intensity $\tau$ values for the year 2000 come from
+*' @dietrich_measuring_2012 and are shown below.
+*'
+*' ![$\tau$-factors in world regions & global (GLO) for the year 2000.
+*' [@dietrich_measuring_2012]](tau_regional.png){ width=60% }
+*'
+*' Investments into technological change (TC) trigger land use intensification
+*' ($\tau$) which triggers in turn yields increases. How much intensification an
+*' investment can trigger depends on the investment-yield ratio which depends
+*' again on the current agricultural land use intensity. The higher the current
+*' intensity level, the more expensive the additional intensification will
+*' become. The interaction between land use intensity and production costs per
+*' area as shown in the schematic is not covered by this module and can be found
+*' instead in [38_factor_costs].
+
+*' @limitations This module significantly reduces the overall computational
+*' performance of the model since these endogenous calculations are highly
+*' computational intensive.
+
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/13_tc/endo_JUN16/sets.gms"
