@@ -6,11 +6,15 @@ library(luplot)
 library(ggplot2)
 library(remulator)
 
-#load("output/CDL_base-base-6/config.Rdata")
-
 ########################################################################################################
 ######################################## S E T T I N G S ###############################################
 ########################################################################################################
+if(!exists("source_include")) {
+  outputdir <- NULL
+  readArgs("outputdir")
+} 
+
+load(paste0(outputdir, "/config.Rdata"))
 
 results_path <- "output"
 
@@ -58,7 +62,8 @@ for (scen in scenarios) {
     single_scenario_paths <- gsub("\\/fulldata\\.gdx","",single_scenario_paths)
     needle <- paste0(scen,"-([0-9]{1,2}$)")
     single_scenario_paths <- single_scenario_paths[grepl(needle,single_scenario_paths)]
-    if (emulator_runs_complete(single_scenario_paths,runnumbers = c(1:9,73))) { # c(6,7,59:60,64:73)
+    cat("Checking if these are the complete set of runs:",single_scenario_paths,"\n")
+    if (emulator_runs_complete(single_scenario_paths,runnumbers = c(1:73))) { # c(6,7,59:60,64:73)
       cat("All 73 runs for",scen,"have finished.\n")
       mag_res <- read_and_combine(single_scenario_paths,outfile = outfile)
       data_available <- TRUE
@@ -96,6 +101,8 @@ if (!is.null(x)) {
   
   # 2. Normally, where production (x) is zero resulting prices (y) are NA -> set production to NA where prices are NA
   x[,,"Demand|Bioenergy|++|2nd generation (EJ/yr)"][is.na(x[,,"Prices|Bioenergy (US$05/GJ)"])] <- NA
+  
+  x[,,"Modelstatus (-)"] <- x["GLO",,"Modelstatus (-)"]
 
   ########################################################################################################
   ################################ C A L C U L A T E   E M U L A T O R ###################################
