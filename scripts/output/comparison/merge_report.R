@@ -27,6 +27,7 @@ missing <- NULL
 
 if(file.exists("output/report_comp.csv")) file.rename("output/report_comp.csv","output/report_comp.bak")
 
+rep <- NULL
 for (i in 1:length(outputdirs)) {
   print(paste("Processing",outputdirs[i]))
   #gdx file
@@ -40,9 +41,13 @@ for (i in 1:length(outputdirs)) {
     getNames(a,dim=1) <- scen
     #add to reporting csv file
     write.report2(a,file="output/report_comp.csv",append=TRUE,ndigit = 4,skipempty = FALSE)
+    #add to rep object
+    rep <- mbind(rep,a)
   } else missing <- c(missing,outputdirs[i])
 }
 if (!is.null(missing)) {
   cat("\nList of folders with missing report.mif\n")
   print(missing)
 }
+
+if(!is.null(rep)) saveRDS(rep,file = "output/report_comp.rda")
