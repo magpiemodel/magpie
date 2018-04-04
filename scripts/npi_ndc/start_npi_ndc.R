@@ -56,7 +56,9 @@ start_npi_ndc_preprocessing <- function(cfg="config/default.cfg",base_run_dir="s
 		cfg$gms$c_timesteps <- "recalc_npi_ndc"
     cfg$recalc_base_run <- FALSE
     cfg$recalc_npi_ndc <- FALSE
-		cfg <- setScenario(cfg,"SSP2")
+    cfg$force_download <- FALSE
+    cfg$recalibrate <- FALSE
+    cfg <- setScenario(cfg,"SSP2")
 		cfg <- setScenario(cfg,"BASE")
 
 		cat("Starting MAgPIE base_run for NPI/NDC recalculation\n")

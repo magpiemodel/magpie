@@ -20,52 +20,67 @@ cfg$gms$c_timesteps <- "test_TS"
 cfg$output <- c("report","validation")
 #cfg$gms$s15_elastic_demand = 0
 
-## runs with per ton costs
-cfg$gms$factor_costs <- "fixed_per_ton_mar18"
-### BEGIN first run
 
-cfg$force_download <- TRUE
+#cfg$force_download <- TRUE
 cfg$recalibrate <- TRUE
 cfg$recalc_base_run <- TRUE
 
+## run with per ton costs
+cfg$gms$factor_costs <- "fixed_per_ton_mar18"
 cfg$title <- "gdp_vegc_high_fixed"
 cfg$gms$c39_cost_scenario <- "high"
 cfg$gms$landconversion <- "gdp_vegc_mar18"
 try(start_run(cfg=cfg, codeCheck=FALSE))
+file.copy(from = "scripts/npi_ndc/policies/npi_ndc_base_fixed.tgz",to = "output/npi_ndc_base_fixed.tgz", overwrite = TRUE)
 
-cfg$force_download <- FALSE
-# cfg$recalibrate <- FALSE
-cfg$recalc_base_run <- FALSE
-### END first run
+## run with mixed costs
+cfg$gms$factor_costs <- "mixed_feb17"
+cfg$title <- "gdp_vegc_high_mixed"
+cfg$gms$c39_cost_scenario <- "high"
+cfg$gms$landconversion <- "gdp_vegc_mar18"
+try(start_run(cfg=cfg, codeCheck=FALSE))
+file.copy(from = "scripts/npi_ndc/policies/npi_ndc_base_fixed.tgz",to = "output/npi_ndc_base_mixed.tgz", overwrite = TRUE)
 
-# cfg$title <- "gdp_vegc_medium_fixed"
-# cfg$gms$landconversion <- "gdp_vegc_mar18"
-# cfg$gms$c39_cost_scenario <- "medium"
-# try(start_run(cfg=cfg, codeCheck=FALSE))
-# 
-# cfg$title <- "gdp_vegc_low_fixed"
-# cfg$gms$landconversion <- "gdp_vegc_mar18"
-# cfg$gms$c39_cost_scenario <- "low"
-# try(start_run(cfg=cfg, codeCheck=FALSE))
-# 
-# 
-# ## runs with mixed costs
-# cfg$gms$factor_costs <- "mixed_feb17"
-# 
-# cfg$title <- "gdp_vegc_high_mixed"
-# cfg$gms$c39_cost_scenario <- "high"
-# cfg$gms$landconversion <- "gdp_vegc_mar18"
-# try(start_run(cfg=cfg, codeCheck=FALSE))
-# 
-# cfg$title <- "gdp_vegc_medium_mixed"
-# cfg$gms$landconversion <- "gdp_vegc_mar18"
-# cfg$gms$c39_cost_scenario <- "medium"
-# try(start_run(cfg=cfg, codeCheck=FALSE))
-# 
-# cfg$title <- "gdp_vegc_low_mixed"
-# cfg$gms$landconversion <- "gdp_vegc_mar18"
-# cfg$gms$c39_cost_scenario <- "low"
-# try(start_run(cfg=cfg, codeCheck=FALSE))
+#other fixed runs
+cfg$gms$factor_costs <- "fixed_per_ton_mar18"
+cfg$title <- "gdp_vegc_medium_fixed"
+cfg$gms$landconversion <- "gdp_vegc_mar18"
+cfg$gms$c39_cost_scenario <- "medium"
+try(start_run(cfg=cfg, codeCheck=FALSE))
 
+cfg$gms$factor_costs <- "fixed_per_ton_mar18"
+cfg$title <- "gdp_vegc_low_fixed"
+cfg$gms$landconversion <- "gdp_vegc_mar18"
+cfg$gms$c39_cost_scenario <- "low"
+try(start_run(cfg=cfg, codeCheck=FALSE))
+
+#other mixed runs
+cfg$gms$factor_costs <- "mixed_feb17"
+cfg$title <- "gdp_vegc_medium_mixed"
+cfg$gms$landconversion <- "gdp_vegc_mar18"
+cfg$gms$c39_cost_scenario <- "medium"
+try(start_run(cfg=cfg, codeCheck=FALSE))
+
+cfg$gms$factor_costs <- "mixed_feb17"
+cfg$title <- "gdp_vegc_low_mixed"
+cfg$gms$landconversion <- "gdp_vegc_mar18"
+cfg$gms$c39_cost_scenario <- "low"
+try(start_run(cfg=cfg, codeCheck=FALSE))
+
+
+##runs with past TC set to 1
+cfg$gms$factor_costs <- "fixed_per_ton_mar18"
+cfg$title <- "gdp_vegc_high_fixed_pastTC1"
+cfg$gms$s14_yld_past_switch <- 1
+cfg$gms$c39_cost_scenario <- "high"
+cfg$gms$landconversion <- "gdp_vegc_mar18"
+try(start_run(cfg=cfg, codeCheck=FALSE))
+
+cfg$gms$factor_costs <- "mixed_feb17"
+cfg$title <- "gdp_vegc_high_mixed_pastTC1"
+cfg$gms$s14_yld_past_switch <- 1
+cfg$gms$c39_cost_scenario <- "high"
+cfg$gms$landconversion <- "gdp_vegc_mar18"
+try(start_run(cfg=cfg, codeCheck=FALSE))
 
 
