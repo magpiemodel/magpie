@@ -1,0 +1,163 @@
+library(magclass)
+library(lucode)
+library(lusweave)
+library(magpie)
+library(luplot)
+library(ggplot2)
+library(remulator)
+
+########################################################################################################
+######################################## S E T T I N G S ###############################################
+########################################################################################################
+if(!exists("source_include")) {
+  outputdir <- NULL
+  readArgs("outputdir")
+} 
+
+load(paste0(outputdir, "/config.Rdata"))
+
+results_path <- "output"
+
+emu_path <- file.path(results_path,"emulator")
+if(!dir.exists(emu_path)) dir.create(emu_path)
+
+########################################################################################################
+#################################### C O L L E C T   D A T A ###########################################
+########################################################################################################
+
+# extract scenario name by removing number at the end of run name: "CDL_base-base-9" -> "CDL_base-base"
+scenarios <- gsub("(.*)-[0-9]{1,2}$","\\1",cfg$title)
+# if user chose multiple runs from the same scenario remove duplicated scenarios
+scenarios <- unique(scenarios)
+
+# create empty object that will take all results
+x <- NULL
+
+# For all scenarios read data of all runs and compile into the single magpie object "x"
+for (scen in scenarios) {
+
+  outfile <- paste0(emu_path,"/magpie_results_",scen,".Rdata")
+  
+  # If all 73 MAgPIE runs for this scenario are finished:
+  # Read MAgPIE reports and modelstat for all runs of the list of scenarios,
+  # combine into one object, and save to Rdata file
+  data_available <- FALSE
+  
+  cat("Checking if results have already been compiled and saved to",outfile,"\n")
+  if(file.exists(outfile)) {
+    # if results have already been collected and saved for this scenario load them
+    cat("Results found. Loading them.\n")
+    load(outfile) # expecting mag_res as the only object in this file
+    data_available <- TRUE
+  } else {
+    cat("No previously compiled results found.\nChecking if all runs for",scen,"have finished\n")
+    # otherwise check if all runs are finished and if yes collect the results and save them to a Rdata file
+    # list all subdirectories of results_path
+    #single_scenario_paths <- base::list.dirs(results_path,recursive=FALSE,full.names=TRUE)
+    
+    # Find paths to all finished runs for this scenario. Use existence of fulldata.gdx as indicator.
+    # Remove fulldata.gdx from paths
+    # Pick only those that are like scenario followed by one ore two digits, i.e. "scenario_name-xx", with xx = 1...73
+    single_scenario_paths <- Sys.glob(paste0(results_path,"/",scen,"-*/fulldata.gdx"))
+    single_scenario_paths <- gsub("\\/fulldata\\.gdx","",single_scenario_paths)
+    needle <- paste0(scen,"-([0-9]{1,2}$)")
+    single_scenario_paths <- single_scenario_paths[grepl(needle,single_scenario_paths)]
+    cat("Checking if these are the complete set of runs:",single_scenario_paths,"\n")
+    if (emulator_runs_complete(single_scenario_paths,runnumbers = c(1:73))) { # c(6,7,59:60,64:73)
+      cat("All 73 runs for",scen,"have finished.\n")
+      mag_res <- read_and_combine(single_scenario_paths,outfile = outfile)
+      data_available <- TRUE
+    } else {
+      cat("NOT all 73 runs for",scen,"have finished yet. Nothing will be done.")
+    }
+  }
+  
+  # compile data of mutiple scenarios in x
+  if (data_available) {
+      x <- mbind(x,mag_res)
+  }
+}
+
+
+if (!is.null(x)) {
+  ########################################################################################################
+  ################################ Prepare data for bioenergy emulator ###################################
+  ########################################################################################################
+  
+  # Bring object to format that is required by emulator
+  # add sample dimension by replacing -63 with .63
+  getNames(x,dim=1) <- gsub("-([0-9]{1,2}$)",".\\1",getNames(x,dim=1))
+  getSets(x) <- c("region","year","scenario","sample","model","variable")
+
+  x <- x[,"y1995",,invert=TRUE]
+  
+  # Demand|Bioenergy|++|2nd generation (EJ/yr)
+  # Prices|Bioenergy (US$05/GJ)
+  
+  # Clean data
+  # 1. Exclude points with zero production (there are cases where production is zero but there is a price)
+  x[,,"Demand|Bioenergy|++|2nd generation (EJ/yr)"][x[,,"Demand|Bioenergy|++|2nd generation (EJ/yr)"]==0] <- NA
+  x[,,"Prices|Bioenergy (US$05/GJ)"][is.na(x[,,"Demand|Bioenergy|++|2nd generation (EJ/yr)"])] <- NA
+  
+  # 2. Normally, where production (x) is zero resulting prices (y) are NA -> set production to NA where prices are NA
+  x[,,"Demand|Bioenergy|++|2nd generation (EJ/yr)"][is.na(x[,,"Prices|Bioenergy (US$05/GJ)"])] <- NA
+  
+  x[,,"Modelstatus (-)"] <- x["GLO",,"Modelstatus (-)"]
+
+  ########################################################################################################
+  ################################ C A L C U L A T E   E M U L A T O R ###################################
+  ########################################################################################################
+  
+  # vars <- c("Demand|Bioenergy|++|2nd generation (EJ/yr)",
+  #           "Prices|Bioenergy (US$05/GJ)",
+  #           "Modelstatus (-)")
+  # 
+  # y <- x[,,vars]
+  # 
+  # # Make up model data for fitting: If in current year not enough data is availalbe copy it from other years
+  # # Criteria for "enough" data available: 
+  # # number of 
+  # #  1. non-zero and
+  # #  2. feasible and 
+  # #  3. unique and 
+  # #  4. non-NA elements 
+  # # > n
+  # 
+  # # 1. non-zero: set zero elements to NA
+  # # has been done before -> does not have to be checked here
+  # 
+  # # 2. feasible: set data to NA in infeasible years and the years after
+  # y <- mute_infes(data = y, name="Modelstatus (-)", infeasible = 5)
+  # 
+  # # 3. unique elements: set duplicated samples to NA
+  # y <- mute_duplicated(y)
+  # 
+  # # 4. non-NA: find number of non-NA elements
+  # n_exist <- as.magpie(apply(unwrap(y),c(1,2,3,5,6),function(x)sum(!is.na(x))))
+  # nodata <- n_exist[,,"Demand|Bioenergy|++|2nd generation (EJ/yr)"]<1
+  # 
+  # # Finally: Copy data from other years where data is not availalbe
+  # z <- fill_missing_years(y,nodata)
+  
+  # Calculate emulator
+  fc <- emulator(data=x,
+           name_x="Demand|Bioenergy|++|2nd generation (EJ/yr)",
+           name_y="Prices|Bioenergy (US$05/GJ)",
+           name_modelstat="Modelstatus (-)",
+           treat_as_feasible = c(2,7),
+           n_suff = 5,
+           fill = FALSE,
+           output_path = emu_path,
+           create_pdf=TRUE,
+           initial_values = c(0,0,1),     
+           lower=c(0,0,1))
+  print(fc)
+  print(attributes(fc))
+}
+
+regionscode <- attributes(mag_res)$regionscode  
+
+for (scen in getNames(fc,dim="scenario")) {
+ # write fit coefficients to REMIND input file
+ write.magpie(fc,file_name = paste0("f30_bioen_price_",scen,"_",regionscode,".cs4r"), file_folder = emu_path)
+}

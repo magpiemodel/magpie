@@ -6,8 +6,16 @@
 
 *' @title Optimization
 *'
-*' @description This module provides takes care of the model optimization of
+*' @description This module takes care of the model optimization of
 *' the main model, allowing for switching between optimization procedures.
+*' It has been introduced to play with different ways to affect the runtime
+*' performance of the model via more optimized model solution strategies.
+*' The interfaces to the rest of the model are quite limited as it only requires
+*' the variables to be optimized `vm_cost_glo` and `vm_landdiff` as direct input
+*' The latter was introduced to select out of a range of cost optimal patterns
+*' that one which is closest to the pattern of the previous time step. While
+*' CONOPT returns this solution by default, CPLEX usually returns another
+*' solution. `vm_landdiff` allows for harmonizing the solution choice.
 *'
 *' @authors Jan Philipp Dietrich, Todd Munson
 

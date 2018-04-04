@@ -7,11 +7,15 @@
 * In the 1st timestep there is a lot of reshuffling resulting in increase of v35_other(j,"new")
 * This would result in quite some carbon uptake (negative emissions) due to regrowth of vegetation
 * Therefore, we reset age-classes after the 1st time step
-v35_secdforest.l(j,land35)$(ord(t) = 1) = 0$(not sameas(land35,"old")) + vm_land.l(j,"secdforest")$(sameas(land35,"old"));
-p35_secdforest(t,j,ac,"after")$(ord(t) = 1) = 0$(not sameas(ac,"acx")) + vm_land.l(j,"secdforest")$(sameas(ac,"acx"));
-
 v35_other.l(j,land35)$(ord(t) = 1) = 0$(not sameas(land35,"old")) + vm_land.l(j,"other")$(sameas(land35,"old"));
 p35_other(t,j,ac,"after")$(ord(t) = 1) = 0$(not sameas(ac,"acx")) + vm_land.l(j,"other")$(sameas(ac,"acx"));
+vm_carbon_stock.l(j,"other",c_pools)$(ord(t) = 1) = sum(land35, v35_other.l(j,land35)*p35_carbon_density_other(t,j,land35,c_pools));
+
+***can be removed for secdforest
+*v35_secdforest.l(j,land35)$(ord(t) = 1) = 0$(not sameas(land35,"old")) + vm_land.l(j,"secdforest")$(sameas(land35,"old"));
+*p35_secdforest(t,j,ac,"after")$(ord(t) = 1) = 0$(not sameas(ac,"acx")) + vm_land.l(j,"secdforest")$(sameas(ac,"acx"));
+*vm_carbon_stock.l(j,"secdforest",c_pools)$(ord(t) = 1) = sum(land35, v35_secdforest.l(j,land35)*p35_carbon_density_secdforest(t,j,land35,c_pools));
+
 
 *secdforest age class calculation
 p35_secdforest(t,j,ac,"after")$(ord(t) > 1) =
