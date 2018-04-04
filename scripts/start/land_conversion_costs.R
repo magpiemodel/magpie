@@ -17,58 +17,55 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 cfg$gms$c_timesteps <- "test_TS"
+cfg$output <- c("report","validation")
 #cfg$gms$s15_elastic_demand = 0
-#cfg$force_download <- TRUE
 
+## runs with per ton costs
+cfg$gms$factor_costs <- "fixed_per_ton_mar18"
+### BEGIN first run
+
+cfg$force_download <- TRUE
 cfg$recalibrate <- TRUE
-cfg$title <- "gdp_vegc_high"
-cfg$gms$c39_cost_scenario <- "high"
-cfg$gms$landconversion <- "gdp_vegc_mar18"
-try(start_run(cfg=cfg, codeCheck=FALSE))
-cfg$recalibrate <- FALSE
+cfg$recalc_base_run <- TRUE
 
-cfg$title <- "gdp_vegc_high2"
-cfg$gms$c39_cost_scenario <- "high2"
-cfg$gms$landconversion <- "gdp_vegc_mar18"
-try(start_run(cfg=cfg, codeCheck=FALSE))
-
-cfg$title <- "gdp_vegc_medium"
-cfg$gms$landconversion <- "gdp_vegc_mar18"
-cfg$gms$c39_cost_scenario <- "medium"
-try(start_run(cfg=cfg, codeCheck=FALSE))
-
-cfg$title <- "gdp_vegc_low"
-cfg$gms$landconversion <- "gdp_vegc_mar18"
-cfg$gms$c39_cost_scenario <- "low"
-try(start_run(cfg=cfg, codeCheck=FALSE))
-
-cfg$gms$c_timesteps <- "TS_benni"
-cfg$title <- "gdp_vegc_high_y2000"
-cfg$gms$c39_cost_scenario <- "high"
-cfg$gms$landconversion <- "gdp_vegc_mar18"
-try(start_run(cfg=cfg, codeCheck=FALSE))
-cfg$gms$c_timesteps <- "test_TS"
-
-
-cfg$recalibrate <- TRUE
-
-cfg$title <- "gdp_vegc_high_recal"
+cfg$title <- "gdp_vegc_high_fixed"
 cfg$gms$c39_cost_scenario <- "high"
 cfg$gms$landconversion <- "gdp_vegc_mar18"
 try(start_run(cfg=cfg, codeCheck=FALSE))
 
-cfg$title <- "gdp_vegc_high2_recal"
-cfg$gms$c39_cost_scenario <- "high2"
-cfg$gms$landconversion <- "gdp_vegc_mar18"
-try(start_run(cfg=cfg, codeCheck=FALSE))
+cfg$force_download <- FALSE
+# cfg$recalibrate <- FALSE
+cfg$recalc_base_run <- FALSE
+### END first run
 
-cfg$title <- "gdp_vegc_medium_recal"
-cfg$gms$landconversion <- "gdp_vegc_mar18"
-cfg$gms$c39_cost_scenario <- "medium"
-try(start_run(cfg=cfg, codeCheck=FALSE))
+# cfg$title <- "gdp_vegc_medium_fixed"
+# cfg$gms$landconversion <- "gdp_vegc_mar18"
+# cfg$gms$c39_cost_scenario <- "medium"
+# try(start_run(cfg=cfg, codeCheck=FALSE))
+# 
+# cfg$title <- "gdp_vegc_low_fixed"
+# cfg$gms$landconversion <- "gdp_vegc_mar18"
+# cfg$gms$c39_cost_scenario <- "low"
+# try(start_run(cfg=cfg, codeCheck=FALSE))
+# 
+# 
+# ## runs with mixed costs
+# cfg$gms$factor_costs <- "mixed_feb17"
+# 
+# cfg$title <- "gdp_vegc_high_mixed"
+# cfg$gms$c39_cost_scenario <- "high"
+# cfg$gms$landconversion <- "gdp_vegc_mar18"
+# try(start_run(cfg=cfg, codeCheck=FALSE))
+# 
+# cfg$title <- "gdp_vegc_medium_mixed"
+# cfg$gms$landconversion <- "gdp_vegc_mar18"
+# cfg$gms$c39_cost_scenario <- "medium"
+# try(start_run(cfg=cfg, codeCheck=FALSE))
+# 
+# cfg$title <- "gdp_vegc_low_mixed"
+# cfg$gms$landconversion <- "gdp_vegc_mar18"
+# cfg$gms$c39_cost_scenario <- "low"
+# try(start_run(cfg=cfg, codeCheck=FALSE))
 
-cfg$title <- "gdp_vegc_low_recal"
-cfg$gms$landconversion <- "gdp_vegc_mar18"
-cfg$gms$c39_cost_scenario <- "low"
-try(start_run(cfg=cfg, codeCheck=FALSE))
+
 
