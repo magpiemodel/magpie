@@ -71,15 +71,25 @@ start_npi_ndc_preprocessing <- function(cfg="config/default.cfg",base_run_dir="s
     gdx <- path(base_run_dir,"fulldata.gdx")
     res <- get_info(path(base_run_dir,"info.txt"),"^\\* Output ?resolution:",": ")
 
+    #make directory for storing baseline files
+    bsl_dir <- path(maindir,"scripts/npi_ndc/policies/npi_ndc_base_fixed")
+    dir.create(bsl_dir)
+
     #read in cellular land cover (stock) from BAU
     magpie_bau_land <- read.magpie(path(base_run_dir,"cell.land_0.5.mz"))[,-1,]
     write.magpie(magpie_bau_land, path(maindir,"scripts/npi_ndc/policies/magpie_bau_land.mz"))
+    write.magpie(magpie_bau_land, path(bsl_dir,"magpie_bau_land.mz"))
 
     #calc forest carbon stocks
     magpie_bau_cstock <- dimSums(readGDX(gdx,"ov_carbon_stock",select=list(type="level"))[,,c("primforest","secdforest")],dim=3)
     magpie_bau_cstock <- speed_aggregate(magpie_bau_cstock,
                                          rel=paste0(base_run_dir,"/0.5-to-",res,"_area_weighted_mean.spam"))
     write.magpie(magpie_bau_cstock, path(maindir,"scripts/npi_ndc/policies/magpie_bau_cstock.mz"))
+    write.magpie(magpie_bau_cstock, path(bsl_dir,"magpie_bau_cstock.mz"))
+
+    # tar files
+    tardir(bsl_dir,"scripts/npi_ndc/policies/npi_ndc_base_fixed.tgz")
+    unlink(bsl_dir, recursive=TRUE, force=TRUE)
   }
 
   setwd("scripts/npi_ndc")
