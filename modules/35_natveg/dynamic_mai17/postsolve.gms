@@ -4,29 +4,26 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+if((ord(t) = 1),
 * In the 1st timestep there is a lot of reshuffling resulting in increase of v35_other(j,"new")
 * This would result in quite some carbon uptake (negative emissions) due to regrowth of vegetation
-* Therefore, we reset age-classes after the 1st time step
-v35_other.l(j,land35)$(ord(t) = 1) = 0$(not sameas(land35,"old")) + vm_land.l(j,"other")$(sameas(land35,"old"));
-p35_other(t,j,ac,"after")$(ord(t) = 1) = 0$(not sameas(ac,"acx")) + vm_land.l(j,"other")$(sameas(ac,"acx"));
-vm_carbon_stock.l(j,"other",c_pools)$(ord(t) = 1) = sum(land35, v35_other.l(j,land35)*p35_carbon_density_other(t,j,land35,c_pools));
-
-***can be removed for secdforest
-*v35_secdforest.l(j,land35)$(ord(t) = 1) = 0$(not sameas(land35,"old")) + vm_land.l(j,"secdforest")$(sameas(land35,"old"));
-*p35_secdforest(t,j,ac,"after")$(ord(t) = 1) = 0$(not sameas(ac,"acx")) + vm_land.l(j,"secdforest")$(sameas(ac,"acx"));
-*vm_carbon_stock.l(j,"secdforest",c_pools)$(ord(t) = 1) = sum(land35, v35_secdforest.l(j,land35)*p35_carbon_density_secdforest(t,j,land35,c_pools));
-
-
-*secdforest age class calculation
-p35_secdforest(t,j,ac,"after")$(ord(t) > 1) =
-        v35_secdforest.l(j,"new")$(ord(ac) = 1)
-        + sum(ac_land35(ac,land35)$(not sameas(land35,"new") AND pc35_secdforest(j,land35) > 0),(v35_secdforest.l(j,land35)/pc35_secdforest(j,land35))*p35_secdforest(t,j,ac,"before"))$(ord(ac) > 1);
-
-
+* Therefore, we reset age-classes after the optimization of the 1st time step
+	v35_other.l(j,land35) = 0;
+	v35_other.l(j,"old") = vm_land.l(j,"other");
+	p35_other(t,j,ac,"after") = 0;
+	p35_other(t,j,"acx","after") = vm_land.l(j,"other");
+	vm_carbon_stock.l(j,"other",c_pools) = sum(land35, v35_other.l(j,land35)*p35_carbon_density_other(t,j,land35,c_pools));
+else
 *other land age class calculation
-p35_other(t,j,ac,"after")$(ord(t) > 1) =
+	p35_other(t,j,ac,"after") =
         v35_other.l(j,"new")$(ord(ac) = 1)
         + sum(ac_land35(ac,land35)$(not sameas(land35,"new") AND pc35_other(j,land35) > 0),(v35_other.l(j,land35)/pc35_other(j,land35))*p35_other(t,j,ac,"before"))$(ord(ac) > 1);
+);
+
+*secdforest age class calculation
+p35_secdforest(t,j,ac,"after") =
+        v35_secdforest.l(j,"new")$(ord(ac) = 1)
+        + sum(ac_land35(ac,land35)$(not sameas(land35,"new") AND pc35_secdforest(j,land35) > 0),(v35_secdforest.l(j,land35)/pc35_secdforest(j,land35))*p35_secdforest(t,j,ac,"before"))$(ord(ac) > 1);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov35_secdforest(t,j,land35,"marginal")         = v35_secdforest.m(j,land35);

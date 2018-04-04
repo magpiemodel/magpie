@@ -74,7 +74,7 @@ start_npi_ndc_preprocessing <- function(cfg="config/default.cfg",base_run_dir="s
     res <- get_info(path(base_run_dir,"info.txt"),"^\\* Output ?resolution:",": ")
 
     #make directory for storing baseline files
-    bsl_dir <- path(maindir,"scripts/npi_ndc/policies/npi_ndc_base_fixed")
+    bsl_dir <- path(maindir,"scripts/npi_ndc/policies/npi_ndc_base")
     dir.create(bsl_dir)
 
     #read in cellular land cover (stock) from BAU
@@ -90,7 +90,7 @@ start_npi_ndc_preprocessing <- function(cfg="config/default.cfg",base_run_dir="s
     write.magpie(magpie_bau_cstock, path(bsl_dir,"magpie_bau_cstock.mz"))
 
     # tar files
-    tardir(bsl_dir,"scripts/npi_ndc/policies/npi_ndc_base_fixed.tgz")
+    tardir(bsl_dir,"scripts/npi_ndc/policies/npi_ndc_base.tgz")
     unlink(bsl_dir, recursive=TRUE, force=TRUE)
   }
 
