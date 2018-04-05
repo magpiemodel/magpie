@@ -15,6 +15,8 @@ library(lucode)
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
+cfg <- setScenario(cfg,"SSP2")
+
 cfg$results_folder <- "output/:title:"
 cfg$gms$c_timesteps <- "test_TS"
 cfg$output <- c("report","validation","interpolation","LU_DiffPlots","LandusePlots")
@@ -31,7 +33,7 @@ cfg$title <- "gdp_vegc_high_fixed"
 cfg$gms$c39_cost_scenario <- "high"
 cfg$gms$landconversion <- "gdp_vegc_mar18"
 try(start_run(cfg=cfg, codeCheck=FALSE))
-file.copy(from = "scripts/npi_ndc/policies/npi_ndc_base.tgz",to = "output/npi_ndc_base_fixed.tgz", overwrite = TRUE)
+file.copy(from = "scripts/npi_ndc/policies/npi_ndc_base.tgz",to = "output/npi_ndc_base_SSP2_fixed.tgz", overwrite = TRUE)
 
 ## run with mixed costs
 cfg$gms$factor_costs <- "mixed_feb17"
@@ -39,7 +41,7 @@ cfg$title <- "gdp_vegc_high_mixed"
 cfg$gms$c39_cost_scenario <- "high"
 cfg$gms$landconversion <- "gdp_vegc_mar18"
 try(start_run(cfg=cfg, codeCheck=FALSE))
-file.copy(from = "scripts/npi_ndc/policies/npi_ndc_base.tgz",to = "output/npi_ndc_base_mixed.tgz", overwrite = TRUE)
+file.copy(from = "scripts/npi_ndc/policies/npi_ndc_base.tgz",to = "output/npi_ndc_base_SSP2_mixed.tgz", overwrite = TRUE)
 
 #other fixed runs
 cfg$gms$factor_costs <- "fixed_per_ton_mar18"
