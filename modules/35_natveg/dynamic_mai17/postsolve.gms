@@ -12,7 +12,6 @@ if((ord(t) = 1),
 	v35_other.l(j,"old") = vm_land.l(j,"other");
 	p35_other(t,j,ac,"after") = 0;
 	p35_other(t,j,"acx","after") = vm_land.l(j,"other");
-	vm_carbon_stock.l(j,"other",c_pools) = sum(land35, v35_other.l(j,land35)*p35_carbon_density_other(t,j,land35,c_pools));
 else
 *other land age class calculation
 	p35_other(t,j,ac,"after") =
