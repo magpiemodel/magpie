@@ -85,4 +85,55 @@ cfg$gms$c39_cost_scenario <- "high"
 cfg$gms$landconversion <- "gdp_vegc_mar18"
 try(start_run(cfg=cfg, codeCheck=FALSE))
 
+#reset
+cfg$gms$s14_yld_past_switch <- 0.25
 
+##runs without WDPA protection 
+cfg$gms$factor_costs <- "fixed_per_ton_mar18"
+cfg$title <- "gdp_vegc_high_fixed_noWDPA"
+cfg$gms$c35_protect_scenario <- "none"
+cfg$gms$c39_cost_scenario <- "high"
+cfg$gms$landconversion <- "gdp_vegc_mar18"
+try(start_run(cfg=cfg, codeCheck=FALSE))
+
+cfg$gms$factor_costs <- "mixed_feb17"
+cfg$title <- "gdp_vegc_high_mixed_noWDPA"
+cfg$gms$c35_protect_scenario <- "none"
+cfg$gms$c39_cost_scenario <- "high"
+cfg$gms$landconversion <- "gdp_vegc_mar18"
+try(start_run(cfg=cfg, codeCheck=FALSE))
+
+#reset
+cfg$gms$c35_protect_scenario <- "WDPA"
+
+##runs without NPI
+cfg$gms$factor_costs <- "fixed_per_ton_mar18"
+cfg$title <- "gdp_vegc_high_fixed_noNPI"
+cfg <- setScenario(cfg,"BASE")
+cfg$gms$c39_cost_scenario <- "high"
+cfg$gms$landconversion <- "gdp_vegc_mar18"
+try(start_run(cfg=cfg, codeCheck=FALSE))
+
+cfg$gms$factor_costs <- "mixed_feb17"
+cfg$title <- "gdp_vegc_high_mixed_noNPI"
+cfg <- setScenario(cfg,"BASE")
+cfg$gms$c39_cost_scenario <- "high"
+cfg$gms$landconversion <- "gdp_vegc_mar18"
+try(start_run(cfg=cfg, codeCheck=FALSE))
+
+##runs without NPI and WDPA
+cfg$gms$factor_costs <- "fixed_per_ton_mar18"
+cfg$title <- "gdp_vegc_high_fixed_noNPI_noWDPA"
+cfg <- setScenario(cfg,"BASE")
+cfg$gms$c35_protect_scenario <- "none"
+cfg$gms$c39_cost_scenario <- "high"
+cfg$gms$landconversion <- "gdp_vegc_mar18"
+try(start_run(cfg=cfg, codeCheck=FALSE))
+
+cfg$gms$factor_costs <- "mixed_feb17"
+cfg$title <- "gdp_vegc_high_mixed_noNPI_noWDPA"
+cfg <- setScenario(cfg,"BASE")
+cfg$gms$c35_protect_scenario <- "none"
+cfg$gms$c39_cost_scenario <- "high"
+cfg$gms$landconversion <- "gdp_vegc_mar18"
+try(start_run(cfg=cfg, codeCheck=FALSE))
