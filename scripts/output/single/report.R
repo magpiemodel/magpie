@@ -7,6 +7,7 @@
 library(magclass)
 library(magpie4)
 library(lucode)
+library(quitte)
 options("magclass.verbosity" = 1)
 
 ############################# BASIC CONFIGURATION #############################
@@ -18,9 +19,11 @@ if(!exists("source_include")) {
 load(paste0(outputdir, "/config.Rdata"))
 gdx	<- path(outputdir,"fulldata.gdx")
 mif <- paste0(outputdir, "/report.mif")
+rda <- paste0(outputdir, "/report.rda")
 ###############################################################################
 
 
 report <- getReport(gdx,scenario = cfg$title)
 write.report2(report, file=mif)
+saveRDS(as.quitte(report),file=rda)
 
