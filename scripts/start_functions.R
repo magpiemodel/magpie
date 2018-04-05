@@ -184,8 +184,23 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
     source("scripts/npi_ndc/start_npi_ndc.R")
     start_npi_ndc_preprocessing(cfg,base_run_dir="scripts/npi_ndc/base_run",maindir=maindir,renew_base=TRUE)
     cat("NPI/NDC base_run recalculation successful!\n")
+    
+    # BEGIN bugfix, there might be a more elegant solution for this
     # re-configure main model gms file (cfg$model) based on settings of cfg file after recalc_base_run
     lucode::manipulateConfig(cfg$model, cfg$gms)
+    # re-configure input.gms in all modules based on settings of cfg file after recalc_base_run
+    l1 <- lucode::path("modules", list.dirs("modules/", full.names = FALSE,
+                                            recursive = FALSE))
+    for(l in l1) {
+      l2 <- lucode::path(l, list.dirs(l, full.names = FALSE, recursive = FALSE))
+      for(ll in l2) {
+        if(file.exists(lucode::path(ll, "input.gms"))) {
+          lucode::manipulateConfig(lucode::path(ll, "input.gms"), cfg$gms)
+        }
+      }
+    }
+    # END bugfix
+    
   }
 
   if(cfg$recalc_npi_ndc){

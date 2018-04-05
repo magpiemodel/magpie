@@ -18,7 +18,7 @@ source("config/default.cfg")
 cfg <- setScenario(cfg,"SSP2")
 
 cfg$results_folder <- "output/:title:"
-cfg$gms$c_timesteps <- "test_TS"
+cfg$gms$c_timesteps <- "TS_benni"
 cfg$output <- c("report","validation","interpolation","LU_DiffPlots","LandusePlots")
 #cfg$gms$s15_elastic_demand = 0
 
