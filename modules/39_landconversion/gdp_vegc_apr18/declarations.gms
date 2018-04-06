@@ -41,7 +41,7 @@ p39_landclear_costs(t,j,land)         land clearing costs
 pc39_landclear_costs(j,land)          current land clearing costs
 p39_cost_landcon_past(t,j,land)       costs for landconversion from the past [million US$]
 pc39_cost_landcon_past(j,land)        current costs for landconversion from the past [million US$]
-pc39_carbon_density(j)	  		  current carbon density
+pc39_carbon_density(j,land)	  		  current carbon density
 ;
 
 
