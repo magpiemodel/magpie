@@ -27,7 +27,7 @@ buildInputVector <- function(regionmapping   = "h11",
                              madrat_rev      = "3.15",
                              validation_rev  = "3.15",
                              additional_data = "additional_data_rev3.26.tgz",
-                             npi="npi_ndc_base_fixed.tgz") {
+                             npi="npi_ndc_base_SSP2_fixed.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
                 mag="c30c1c580039c2b300d86cc46ff4036a",
@@ -55,6 +55,10 @@ cfg$gms$c56_pollutant_prices <- "SSP2-60-SPA2"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-60-SPA2"
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0",regionmapping="inms2")
+cfg$recalc_npi_ndc <- FALSE
+cfg$gms$c32_aff_policy <- "none"
+cfg$gms$c35_ad_policy <- "none"
+cfg$gms$c35_emis_policy <- "none" 
 cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
 cfg$recalibrate <- FALSE
