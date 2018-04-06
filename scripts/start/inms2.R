@@ -48,13 +48,13 @@ cfg$gms$c_timesteps <- 12
 
 # clalibration runs
 
-cfg$title <- "INMS2_casestudies"
+cfg$title <- "INMS2"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$gms$s15_elastic_demand = 1
 cfg$gms$c56_pollutant_prices <- "SSP2-60-SPA2"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-60-SPA2"
 cfg$force_download <- TRUE
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0",regionmapping="inms")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0",regionmapping="inms2")
 cfg$recalc_npi_ndc <- FALSE
 cfg$gms$c32_aff_policy <- "none"
 cfg$gms$c35_ad_policy <- "none"
@@ -67,16 +67,16 @@ cfg$recalibrate <- FALSE
 #SSP1,5 family
 
 
-cfg$title <- "INMS1_casestudies"
+cfg$title <- "INMS1"
 cfg<-lucode::setScenario(cfg,"SUSTAg1")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6",regionmapping="inms")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6",regionmapping="inms2")
 cfg$gms$c56_pollutant_prices <- "SSP5-26-SPA5"
 cfg$gms$c60_2ndgen_biodem    <- "SSP5-26-SPA5"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
-cfg$title <- "INMS5_casestudies"
+cfg$title <- "INMS5"
 cfg<-lucode::setScenario(cfg,"SUSTAg5")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms2")
 cfg$gms$c56_pollutant_prices <- "SSP1-45-SPA1"
 cfg$gms$c60_2ndgen_biodem    <- "SSP1-45-SPA1"
 start_run(cfg=cfg,codeCheck=codeCheck)
