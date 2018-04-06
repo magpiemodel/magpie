@@ -6,11 +6,13 @@
 
 
 ** Costs for land clearing for natveg (determined by average regional carbon density)
-pc39_carbon_density(i)$(sum((cell(i,j),land_natveg), vm_land.l(j,land_natveg)) > 0) = sum((cell(i,j),land_natveg), vm_carbon_stock.l(j,land_natveg,"vegc"))/sum((cell(i,j),land_natveg), vm_land.l(j,land_natveg));
+pc39_carbon_density(j)$(sum(land_natveg, vm_land.l(j,land_natveg)) > 0) = sum(land_natveg, vm_carbon_stock.l(j,land_natveg,"vegc"))/sum(land_natveg, vm_land.l(j,land_natveg));
 
 ** Minimal and maximal average carbon density across regions
-s39_min_carbon = smin(i,pc39_carbon_density(i));
-s39_max_carbon = smax(i,pc39_carbon_density(i));
+*s39_min_carbon = smin(j,fm_carbon_density(t,j,"primforest","vegc"));
+*s39_max_carbon = smax(j,fm_carbon_density(t,j,"primforest","vegc"));
+s39_min_carbon = smin(j,pc39_carbon_density(j));
+s39_max_carbon = smax(j,pc39_carbon_density(j));
 
 * slope of the function
 p39_landclear_a$(s39_max_carbon-s39_min_carbon > 0) = (i39_landclear_gdp("high_gdp")-i39_landclear_gdp("low_gdp"))/(s39_max_carbon-s39_min_carbon);
@@ -19,10 +21,10 @@ p39_landclear_a$(s39_max_carbon-s39_min_carbon > 0) = (i39_landclear_gdp("high_g
 p39_landclear_b = i39_landclear_gdp("low_gdp")-p39_landclear_a*s39_min_carbon;
 
 * Costs for land clearing
-pc39_landclear_costs(i,land_natveg) = p39_landclear_a*pc39_carbon_density(i)+p39_landclear_b;
+pc39_landclear_costs(j,land_natveg) = p39_landclear_a*pc39_carbon_density(j)+p39_landclear_b;
 
 * just to see what is happening
-p39_landclear_costs(t,i,land) = pc39_landclear_costs(i,land);
+p39_landclear_costs(t,j,land) = pc39_landclear_costs(j,land);
 
 pc39_establish_costs(i,land) = p39_establish_costs(t,i,land);
 

@@ -37,11 +37,11 @@ p39_establish_a(land)                 parameter a for establishing costs calcula
 p39_establish_b(land)                 parameter b for establishing costs calculation
 p39_establish_costs(t,i,land)         establishing costs [US$ per ha]
 pc39_establish_costs(i,land)          current establishing costs [US$ per ha]
-p39_landclear_costs(t,i,land)         land clearing costs
-pc39_landclear_costs(i,land)          current land clearing costs
+p39_landclear_costs(t,j,land)         land clearing costs
+pc39_landclear_costs(j,land)          current land clearing costs
 p39_cost_landcon_past(t,j,land)       costs for landconversion from the past [million US$]
 pc39_cost_landcon_past(j,land)        current costs for landconversion from the past [million US$]
-pc39_carbon_density(i)	  		  current carbon density
+pc39_carbon_density(j)	  		  current carbon density
 ;
 
 
