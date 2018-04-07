@@ -55,6 +55,8 @@ cfg$gms$c56_pollutant_prices <- "SSP2-60-SPA2"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-60-SPA2"
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0",regionmapping="inms2")
+#cfg$gms$som<-"cellpool_aug16"
+cfg$gms$factor_costs <- "sticky_feb18"
 cfg$recalc_npi_ndc <- FALSE
 cfg$gms$c32_aff_policy <- "none"
 cfg$gms$c35_ad_policy <- "none"
