@@ -15,7 +15,7 @@
 
 sets
 
-   i all economic regions /SSA,MEA,OAS,CHA,NEU,EUR,REF,LAM,USA,CAZ,IND/
+   i all economic regions /SSA,MEA,OAS,CHA,IND,REF,NEU,EUR,LAM,USA,CAZ/
 
    iso list of iso countries /
        ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
@@ -45,31 +45,31 @@ sets
        VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 
    j number of LPJ cells /
-       SSA_1*SSA_11,
-       MEA_12*MEA_26,
-       OAS_27*OAS_47,
-       CHA_48*CHA_67,
-       NEU_68*NEU_75,
-       EUR_76*EUR_90,
-       REF_91*REF_95,
-       LAM_96*LAM_153,
-       USA_154*USA_163,
-       CAZ_164*CAZ_194,
-       IND_195*IND_200/
+       SSA_1*SSA_10,
+       MEA_11*MEA_25,
+       OAS_26*OAS_47,
+       CHA_48*CHA_66,
+       IND_67*IND_74,
+       REF_75*REF_79,
+       NEU_80*NEU_87,
+       EUR_88*EUR_102,
+       LAM_103*LAM_159,
+       USA_160*USA_170,
+       CAZ_171*CAZ_200/
 
    cell(i,j) number of LPJ cells per region i
       /
-       SSA . SSA_1*SSA_11
-       MEA . MEA_12*MEA_26
-       OAS . OAS_27*OAS_47
-       CHA . CHA_48*CHA_67
-       NEU . NEU_68*NEU_75
-       EUR . EUR_76*EUR_90
-       REF . REF_91*REF_95
-       LAM . LAM_96*LAM_153
-       USA . USA_154*USA_163
-       CAZ . CAZ_164*CAZ_194
-       IND . IND_195*IND_200
+       SSA . SSA_1*SSA_10
+       MEA . MEA_11*MEA_25
+       OAS . OAS_26*OAS_47
+       CHA . CHA_48*CHA_66
+       IND . IND_67*IND_74
+       REF . REF_75*REF_79
+       NEU . NEU_80*NEU_87
+       EUR . EUR_88*EUR_102
+       LAM . LAM_103*LAM_159
+       USA . USA_160*USA_170
+       CAZ . CAZ_171*CAZ_200
       /
 
    i_to_iso(i,iso) mapping regions to iso countries

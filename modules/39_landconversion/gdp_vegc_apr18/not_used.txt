@@ -1,6 +1,7 @@
 name,type,reason
 "pcm_land", input, not needed
-"fm_carbon_density",input,not needed
+"vm_carbon_stock", input, not needed
+"vm_land", input, not needed
 
 
 
