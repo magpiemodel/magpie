@@ -27,42 +27,26 @@ cfg$output <- c("report","validation","interpolation","LU_DiffPlots","LandusePlo
 cfg$recalibrate <- TRUE
 cfg$recalc_base_run <- TRUE
 
-cfg$gms$s14_yld_past_switch <- 0.75
-cfg$gms$landconversion <- "gdp_vegc_apr18"
 
-## run with per ton costs
-cfg$gms$factor_costs <- "fixed_per_ton_mar18"
-cfg$title <- "LChighNEW_fixed"
-cfg$gms$c39_cost_scenario <- "high"
-try(start_run(cfg=cfg, codeCheck=FALSE))
-file.copy(from = "scripts/npi_ndc/policies/npi_ndc_base.tgz",to = "output/npi_ndc_base_SSP2_fixed.tgz", overwrite = TRUE)
-
-## run with mixed costs
-cfg$gms$factor_costs <- "mixed_feb17"
-cfg$title <- "LChighNEW_mixed"
-cfg$gms$c39_cost_scenario <- "high"
-try(start_run(cfg=cfg, codeCheck=FALSE))
-file.copy(from = "scripts/npi_ndc/policies/npi_ndc_base.tgz",to = "output/npi_ndc_base_SSP2_mixed.tgz", overwrite = TRUE)
-
-#other fixed runs
-cfg$gms$factor_costs <- "fixed_per_ton_mar18"
-cfg$title <- "LCmediumNEW_fixed"
-cfg$gms$c39_cost_scenario <- "medium"
-try(start_run(cfg=cfg, codeCheck=FALSE))
-
-cfg$gms$factor_costs <- "fixed_per_ton_mar18"
-cfg$title <- "LClowNEW_fixed"
-cfg$gms$c39_cost_scenario <- "low"
-try(start_run(cfg=cfg, codeCheck=FALSE))
-
-#other mixed runs
-cfg$gms$factor_costs <- "mixed_feb17"
-cfg$title <- "LCmediumNEW_mixed"
-cfg$gms$c39_cost_scenario <- "medium"
-try(start_run(cfg=cfg, codeCheck=FALSE))
-
-cfg$gms$factor_costs <- "mixed_feb17"
-cfg$title <- "LClowNEW_mixed"
-cfg$gms$c39_cost_scenario <- "low"
-try(start_run(cfg=cfg, codeCheck=FALSE))
-
+for (factor_cost in c("fixed_per_ton_mar18","mixed_feb17")) {
+  for (pastTC in c(0.25,0.5,0.75,1)) {
+    for (lccost in c("gdp_vegc_mar18","gdp_vegc_apr18")) {
+      cfg$gms$factor_costs <- factor_cost
+      cfg$gms$s14_yld_past_switch <- pastTC
+      cfg$gms$landconversion <- lccost
+      if (lccost == "gdp_vegc_mar18") {
+        cfg$title <- paste0(substr(factor_cost,1,5),"_TC",pastTC*100,"_LCdefault")
+        try(start_run(cfg=cfg, codeCheck=FALSE))
+      } else if (lccost == "gdp_vegc_apr18"){
+        for (c39_cost_establish in c("low","medium","high")) {
+          for (c39_cost_landclear in c("low","medium","high")) {
+            manipulateConfig("modules/39_landconversion/gdp_vegc_apr18/input.gms",c39_cost_establish=c39_cost_establish)
+            manipulateConfig("modules/39_landconversion/gdp_vegc_apr18/input.gms",c39_cost_landclear=c39_cost_landclear)
+            cfg$title <- paste0(substr(factor_cost,1,5),"_TC",pastTC*100,"_LC",c39_cost_establish,c39_cost_landclear)
+            try(start_run(cfg=cfg, codeCheck=FALSE))
+          }
+        }
+      }
+    }
+  }
+}
