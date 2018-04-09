@@ -28,8 +28,8 @@ cfg$recalibrate <- TRUE
 cfg$recalc_base_run <- TRUE
 
 
-for (factor_cost in c("fixed_per_ton_mar18","mixed_feb17")) {
-  for (pastTC in c(0.25,0.5,0.75,1)) {
+for (factor_cost in c("mixed_feb17")) {
+  for (pastTC in c(0.25,0.5,0.75)) {
     for (lccost in c("gdp_vegc_mar18","gdp_vegc_apr18")) {
       cfg$gms$factor_costs <- factor_cost
       cfg$gms$s14_yld_past_switch <- pastTC
