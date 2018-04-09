@@ -22,7 +22,7 @@ buildInputVector <- function(regionmapping   = "h11",
                              co2             = "noco2",
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "h200",
-                             archive_rev     = "28",
+                             archive_rev     = "29",
                              madrat_rev      = "3.15",
                              validation_rev  = "3.15",
                              calibration     = NULL,
@@ -228,9 +228,9 @@ indc_rcp26 <- function(cfg, calibration=NULL) {
   try(start_run(cfg=cfg,scenario="INDC",codeCheck=FALSE))
 }
 
-h12 <- function(cfg) {
+h12 <- function(cfg, calibration=NULL) {
   cfg$title <- "h12"
-  cfg$input <- buildInputVector(regionmapping = "h12")
+  cfg$input <- buildInputVector(regionmapping = "h12", calibration=calibration)
   try(start_run(cfg=cfg, codeCheck=FALSE))
   return(submitCalibration("h12Default"))
 }
@@ -243,10 +243,10 @@ h12_rcp26 <- function(cfg, calibration=NULL) {
   try(start_run(cfg=cfg, codeCheck=FALSE))
 }
 
-mixed_h12 <- function(cfg) {
+mixed_h12 <- function(cfg, calibration=NULL) {
   cfg$title <- "mixed_h12"
   cfg$gms$factor_costs <- "mixed_feb17"
-  cfg$input <- buildInputVector(regionmapping = "h12", npi_base = "npi_ndc_base_SSP2_mixed.tgz")
+  cfg$input <- buildInputVector(regionmapping = "h12", npi_base = "npi_ndc_base_SSP2_mixed.tgz", calibration=calibration)
   try(start_run(cfg=cfg, codeCheck=FALSE))
   return(submitCalibration("h12Default"))
 }
