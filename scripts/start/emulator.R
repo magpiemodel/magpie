@@ -24,7 +24,14 @@ cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev28_h200_c30c1c580039c2b3
 
 # Download bioenergy demand scenarios
 filemap <- lucode::download_unpack(input="emulator.tgz", targetdir="input", repositories=list("/p/projects/landuse/data/input/archive"=NULL), debug=FALSE)
-demand <- readRDS("input/emulator.Rdata")
+d <- readRDS("input/emulator.Rdata")
+demand <- time_interpolate(d,interpolated_year=seq(1995,2100,5),extrapolation_type="constant")
+getSets(demand) <- getSets(d)
+# add years after 2100
+demand <- add_columns(demand,dim = 2.1,addnm = c("y2110","y2130","y2150"))
+# keep demand constant after 2100
+demand[,c("y2110","y2130","y2150"),] <- setYears(demand[,"y2100",])
+
 #reg <- read.csv2(cfg$regionmapping) # read regional resolution, used for ghg tax
 reg <- list(RegionCode = getRegions(demand))
 
@@ -47,7 +54,7 @@ write.ghgtax <- function(co2tax_2025=NULL,regions=NULL,out="./modules/56_ghg_pol
   if(is.null(regions))     stop("Please supply regions for ghg tax.")
 
   # construct combination of exponential tax (5% increase) until 2060 and linear continuation thereafter (using the slope of 2055-2060)
-  time <- seq(1995,2105,5)
+  time <- seq(1995,2100,5)
   co2tax <- as.numeric(co2tax_2025) * 1.05 ^(time-2025)
   names(co2tax)<-time
   slope <- (co2tax["2060"] - co2tax["2055"]) / (2060 - 2055)
@@ -62,6 +69,10 @@ write.ghgtax <- function(co2tax_2025=NULL,regions=NULL,out="./modules/56_ghg_pol
   
   # set ghg prices before 2020 to zero
   ghgtax[,getYears(ghgtax)<"y2020",] <- 0
+  # add years after 2100
+  ghgtax <- add_columns(ghgtax,dim = 2.1,addnm = c("y2110","y2130","y2150"))
+  # keep ghgtax constant after 2100
+  ghgtax[,c("y2110","y2130","y2150"),] <- setYears(ghgtax[,"y2100",])
   
   write.magpie(ghgtax,file_name = out)
 
@@ -105,7 +116,7 @@ for (scen in rownames(scenarios)) {
   expname <- paste0(scenarios[scen,"SSP"],"-",scenarios[scen,"co2tax_name"])
 
   # Copy bioenergy demand files and start runs
-  for(r in getNames(demand)) { ## as.character(c(1:9,73))
+  for(r in getNames(demand)) { # as.character(c(1:9,73))
     cfg$title <- paste(expname,r,sep="-")
     cat(cfg$title,"Writing bioenergy demand scenario",r,"\n")
     write.magpie(setNames(demand[,,r],NULL), file_name = "./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
