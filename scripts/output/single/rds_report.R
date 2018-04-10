@@ -18,7 +18,7 @@ if(!exists("source_include")) {
 
 load(paste0(outputdir, "/config.Rdata"))
 gdx	<- path(outputdir,"fulldata.gdx")
-rda <- paste0(outputdir, "/",make.names(paste0("report_",outputdir)),".rda")
+rda <- paste0(outputdir, "/",make.names(paste0("report_",normalizePath(outputdir))),".rda")
 ###############################################################################
 
 
