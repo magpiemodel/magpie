@@ -4,6 +4,7 @@
 
 library(lucode)
 library(magpie4)
+library(txtplot)
 
 source("scripts/start_functions.R")
 source("config/default.cfg")
@@ -74,6 +75,11 @@ write.ghgtax <- function(co2tax_2025=NULL,regions=NULL,out="./modules/56_ghg_pol
   # keep ghgtax constant after 2100
   ghgtax[,c("y2110","y2130","y2150"),] <- setYears(ghgtax[,"y2100",])
   
+  # create textplot
+  for_plot <- ghgtax[1,,"co2_c"] / 0.967 * 12/44 # convert unit back just for plotting
+  #for_plot <- for_plot[,c("y1995","y2110","y2130","y2150"),,invert=TRUE]
+  txtplot(as.numeric(gsub("y","",getYears(for_plot))),for_plot,ylab="US$2005/tCO2")
+  
   write.magpie(ghgtax,file_name = out)
 
   #library(ggplot2)
@@ -119,6 +125,10 @@ for (scen in rownames(scenarios)) {
   for(r in getNames(demand)) { # as.character(c(1:9,73))
     cfg$title <- paste(expname,r,sep="-")
     cat(cfg$title,"Writing bioenergy demand scenario",r,"\n")
+    # create text plot
+    for_plot <- dimSums(demand[,,r]/1000,dim=1)
+    #for_plot <- for_plot[,c("y1995","y2110","y2130","y2150"),,invert=TRUE]
+    txtplot(as.numeric(gsub("y","",getYears(for_plot))),for_plot,ylab="EJ/yr")
     write.magpie(setNames(demand[,,r],NULL), file_name = "./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
     manipulateConfig("scripts/run_submit/submit.sh","--job-name"=cfg$title,line_endings = "NOTwin")
     start_run(cfg,codeCheck=FALSE)
