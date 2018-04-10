@@ -9,12 +9,12 @@ library(remulator)
 ########################################################################################################
 ######################################## S E T T I N G S ###############################################
 ########################################################################################################
-# if(!exists("source_include")) {
-#   outputdir <- NULL
-#   readArgs("outputdir")
-# } 
-# 
-# load(paste0(outputdir, "/config.Rdata"))
+ if(!exists("source_include")) {
+   outputdir <- NULL
+   readArgs("outputdir")
+ } 
+ 
+load(paste0(outputdir, "/config.Rdata"))
 
 #setwd("~/Documents/0_GIT/magpie")
 #cfg<-list(title="SSP2-26-1")
@@ -167,13 +167,13 @@ if (!is.null(x)) {
            lower=c(0,0,1))
   print(fc)
   print(attributes(fc))
-}
 
-regionscode <- attributes(mag_res)$regionscode  
+  regionscode <- attributes(mag_res)$regionscode  
 
-# write fit coefficients to REMIND input file
-for (scen in getNames(fc,dim="scenario")) {
-  write.magpie(fc,file_name = paste0("f30_bioen_price_",scen,"_",regionscode,".cs4r"), file_folder = file.path(emu_path,scen))
+  # write fit coefficients to REMIND input file
+  for (scen in getNames(fc,dim="scenario")) {
+    write.magpie(fc,file_name = paste0("f30_bioen_price_",scen,"_",regionscode,".cs4r"), file_folder = file.path(emu_path,scen))
+  }
 }
 
 # unlock the model
