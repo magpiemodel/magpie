@@ -18,7 +18,7 @@ parameters
  pc35_secdforest(j,land35)   secdforest per age class (mio. ha)
  pc35_other(j,land35)   other land per age class (mio. ha)
  pc35_natveg_old(j) natveg area (mio. ha)
- p35_protect_shr(t,j,prot_type) protection share for primforest, secdforest and other land
+ p35_protect_shr(t,j,prot_type) protection share for primforest secdforest and other land
  p35_save_primforest(t,j) save primforest (mio. ha)
  p35_save_secdforest(t,j) save secdforest (mio. ha)
  p35_save_other(t,j) save other land (mio. ha)
