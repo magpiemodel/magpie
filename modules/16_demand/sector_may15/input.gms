@@ -16,7 +16,7 @@ $ondelim
 $include "./modules/16_demand/sector_may15/input/f16_waste_shr.csv"
 $offdelim;
 
-table fm_attributes(attributes,kall) ton X per ton DM except gross energy where it is PJ per Mt DM
+table fm_attributes(attributes,kall) ton X per ton DM except gross energy where it is GJ per tDM
 $ondelim
 $include "./modules/16_demand/sector_may15/input/fm_attributes.cs3"
 $offdelim;
