@@ -4,6 +4,9 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @description In the aug17 realization, inputs are taken into the module and directly 
+*' delivered to the other modules that require the data.
+
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/09_drivers/aug17/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/09_drivers/aug17/declarations.gms"

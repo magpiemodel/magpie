@@ -16,12 +16,12 @@ $ondelim
 $include "./modules/16_demand/sector_may15/input/f16_waste_shr.csv"
 $offdelim;
 
-table fm_attributes(attributes,kall) ton X per ton DM except gross energy where it is PJ per Mt DM
+table fm_attributes(attributes,kall) ton X per ton DM except gross energy where it is PJ per mio ton DM
 $ondelim
 $include "./modules/16_demand/sector_may15/input/fm_attributes.cs3"
 $offdelim;
 
-table f16_domestic_balanceflow(t_all,i,kall) balance flow fo inconsistencies between domestic supply and use in FAO in Mt DM
+table f16_domestic_balanceflow(t_all,i,kall) balance flow for inconsistencies between domestic supply and use in FAO in mio ton DM
 $ondelim
 $include "./modules/16_demand/sector_may15/input/f16_domestic_balanceflow.csv"
 $offdelim;

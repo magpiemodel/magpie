@@ -4,6 +4,10 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @description In this realization the transport of goods is assumed to be free of charge.
+*' Correspondingly transportation costs is fixed to 0.
+*'
+*' @limitations No simulation of transportation (transportation free of charge).
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "declarations" $include "./modules/40_transport/off/declarations.gms"
