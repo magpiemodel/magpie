@@ -4,6 +4,13 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @description In the off_sep16 realization, carbon dioxide removal costs and 
+*' emissions before technical mitigation are set to 0. Thus, there is no economic incentive 
+*' to remove carbon from the atmosphere.
+*'
+*' @limitations The representation of carbon removal mechanisms might be relevant for 
+*' developing countries reducing emissions from the land use change sector 
+*' if they are part of the UN-REDD Programme. 
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "declarations" $include "./modules/58_carbon_removal/off_sep16/declarations.gms"

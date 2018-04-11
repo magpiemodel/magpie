@@ -4,6 +4,15 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @title Transport
+*'
+*' @description The transport module simulates the intraregional transportation of agricultural products between 
+*' producer site and the next city centre (market). It covers the transport of inputs such as fertilizers 
+*' to the production site as well as the transport of products to the market. Calculations are based on 
+*' cellular and global parameters and returns the corresponding cellular transport costs 
+*' which are then used by the Costs module. 
+*'
+*' @authors Jan Philipp Dietrich, Florian Humpenöder, Benjamin Bodirsky, Isabelle Weindl, Michael Krause.
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%transport%" == "gtap_nov12" $include "./modules/40_transport/gtap_nov12.gms"
