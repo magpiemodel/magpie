@@ -18,12 +18,17 @@ $include "./modules/56_ghg_policy/input/f56_pollutant_prices.cs3"
 $offdelim
 ;
 
-$if "%c56_pollutant_prices%" == "coupling" table f56_pollutant_prices_coupling(t_all,i,pollutants) ghg certificate prices (US$ 2004 per Mg N2O-N CH4 and CO2-C)
+$if "%c56_pollutant_prices%" == "coupling" table f56_pollutant_prices_coupling(t_all,i,pollutants) regional ghg certificate prices (US$ 2004 per Mg N2O-N CH4 and CO2-C)
 $if "%c56_pollutant_prices%" == "coupling" $ondelim
 $if "%c56_pollutant_prices%" == "coupling" $include "./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3"
 $if "%c56_pollutant_prices%" == "coupling" $offdelim
 $if "%c56_pollutant_prices%" == "coupling" ;
 
+$if "%c56_pollutant_prices%" == "emulator" table f56_pollutant_prices_emulator(t_all,pollutants) global ghg certificate prices (US$ 2004 per Mg N2O-N CH4 and CO2-C)
+$if "%c56_pollutant_prices%" == "emulator" $ondelim
+$if "%c56_pollutant_prices%" == "emulator" $include "./modules/56_ghg_policy/input/f56_pollutant_prices_emulator.cs3"
+$if "%c56_pollutant_prices%" == "emulator" $offdelim
+$if "%c56_pollutant_prices%" == "emulator" ;
 
 table f56_emis_policy(scen56,pollutants_all,emis_source) emission policy scenarios
 $ondelim

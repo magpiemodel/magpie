@@ -9,12 +9,19 @@ library(remulator)
 ########################################################################################################
 ######################################## S E T T I N G S ###############################################
 ########################################################################################################
-if(!exists("source_include")) {
-  outputdir <- NULL
-  readArgs("outputdir")
-} 
-
+ if(!exists("source_include")) {
+   outputdir <- NULL
+   readArgs("outputdir")
+ } 
+ 
 load(paste0(outputdir, "/config.Rdata"))
+
+#setwd("~/Documents/0_GIT/magpie")
+#cfg<-list(title="SSP2-26-1")
+
+# lock the model (other emulaotr scripts have to wait until this one finished)
+lock_id <- lucode::model_lock(file=".lockemu")
+#on.exit(lucode::model_unlock(lock_id), add=TRUE)
 
 results_path <- "output"
 
@@ -36,19 +43,21 @@ x <- NULL
 # For all scenarios read data of all runs and compile into the single magpie object "x"
 for (scen in scenarios) {
 
-  outfile <- paste0(emu_path,"/magpie_results_",scen,".Rdata")
+  if(!dir.exists(file.path(emu_path,scen))) dir.create(file.path(emu_path,scen))
+
+  outfile <- paste0(emu_path,"/",scen,"/data_raw_magpie_output_",scen,".Rdata")
   
   # If all 73 MAgPIE runs for this scenario are finished:
   # Read MAgPIE reports and modelstat for all runs of the list of scenarios,
   # combine into one object, and save to Rdata file
-  data_available <- FALSE
+  raw_data_available <- FALSE
   
   cat("Checking if results have already been compiled and saved to",outfile,"\n")
   if(file.exists(outfile)) {
     # if results have already been collected and saved for this scenario load them
     cat("Results found. Loading them.\n")
     load(outfile) # expecting mag_res as the only object in this file
-    data_available <- TRUE
+    raw_data_available <- TRUE
   } else {
     cat("No previously compiled results found.\nChecking if all runs for",scen,"have finished\n")
     # otherwise check if all runs are finished and if yes collect the results and save them to a Rdata file
@@ -58,27 +67,32 @@ for (scen in scenarios) {
     # Find paths to all finished runs for this scenario. Use existence of fulldata.gdx as indicator.
     # Remove fulldata.gdx from paths
     # Pick only those that are like scenario followed by one ore two digits, i.e. "scenario_name-xx", with xx = 1...73
-    single_scenario_paths <- Sys.glob(paste0(results_path,"/",scen,"-*/fulldata.gdx"))
-    single_scenario_paths <- gsub("\\/fulldata\\.gdx","",single_scenario_paths)
+    single_scenario_paths <- Sys.glob(paste0(results_path,"/",scen,"-*/report.mif"))
+    single_scenario_paths <- gsub("\\/report\\.mif","",single_scenario_paths)
     needle <- paste0(scen,"-([0-9]{1,2}$)")
     single_scenario_paths <- single_scenario_paths[grepl(needle,single_scenario_paths)]
-    cat("Checking if these are the complete set of runs:",single_scenario_paths,"\n")
+    print(single_scenario_paths)
     if (emulator_runs_complete(single_scenario_paths,runnumbers = c(1:73))) { # c(6,7,59:60,64:73)
       cat("All 73 runs for",scen,"have finished.\n")
       mag_res <- read_and_combine(single_scenario_paths,outfile = outfile)
-      data_available <- TRUE
+      raw_data_available <- TRUE
     } else {
       cat("NOT all 73 runs for",scen,"have finished yet. Nothing will be done.")
     }
   }
   
-  # compile data of mutiple scenarios in x
-  if (data_available) {
-      x <- mbind(x,mag_res)
+  # check if emulator has already been generated for this scenario
+  fitted_data_available <- file.exists(paste0(emu_path,"/",scen,"/data_postfit_",scen,".Rdata"))
+  if (fitted_data_available) {
+    cat("Emulator has already been generated for",scen,"and will not be regenerated.\n")
+  } else if (raw_data_available) {
+    # compile data of mutiple scenarios in x
+    x <- mbind(x,mag_res)
   }
 }
 
-
+# If for one of the scenarios raw data was available but no fit x is not NULL anymore and contains the 
+# raw data of the missing scenario for which the fits will be generated below.
 if (!is.null(x)) {
   ########################################################################################################
   ################################ Prepare data for bioenergy emulator ###################################
@@ -153,11 +167,15 @@ if (!is.null(x)) {
            lower=c(0,0,1))
   print(fc)
   print(attributes(fc))
+
+  regionscode <- attributes(mag_res)$regionscode  
+
+  # write fit coefficients to REMIND input file
+  for (scen in getNames(fc,dim="scenario")) {
+    write.magpie(fc,file_name = paste0("f30_bioen_price_",scen,"_",regionscode,".cs4r"), file_folder = file.path(emu_path,scen))
+  }
 }
 
-regionscode <- attributes(mag_res)$regionscode  
+# unlock the model
+lucode::model_unlock(lock_id,file=".lockemu")
 
-for (scen in getNames(fc,dim="scenario")) {
- # write fit coefficients to REMIND input file
- write.magpie(fc,file_name = paste0("f30_bioen_price_",scen,"_",regionscode,".cs4r"), file_folder = emu_path)
-}
