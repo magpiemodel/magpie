@@ -67,8 +67,8 @@ for (scen in scenarios) {
     # Find paths to all finished runs for this scenario. Use existence of fulldata.gdx as indicator.
     # Remove fulldata.gdx from paths
     # Pick only those that are like scenario followed by one ore two digits, i.e. "scenario_name-xx", with xx = 1...73
-    single_scenario_paths <- Sys.glob(paste0(results_path,"/",scen,"-*/magpie_y2150.gdx"))
-    single_scenario_paths <- gsub("\\/magpie_y2150\\.gdx","",single_scenario_paths)
+    single_scenario_paths <- Sys.glob(paste0(results_path,"/",scen,"-*/report.mif"))
+    single_scenario_paths <- gsub("\\/report\\.mif","",single_scenario_paths)
     needle <- paste0(scen,"-([0-9]{1,2}$)")
     single_scenario_paths <- single_scenario_paths[grepl(needle,single_scenario_paths)]
     print(single_scenario_paths)
@@ -178,4 +178,4 @@ if (!is.null(x)) {
 
 # unlock the model
 lucode::model_unlock(lock_id,file=".lockemu")
-on.exit(setwd(maindir))
+

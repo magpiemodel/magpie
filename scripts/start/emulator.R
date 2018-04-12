@@ -16,12 +16,13 @@ source("config/default.cfg")
 cfg$results_folder  <- "output/:title:"
 cfg$output          <- c("report","emu20_single_remulator") #unique(c(cfg$output,"remind","bioenergy","coupling_report","david"))
 
-# use "old" regions: c30c1c580039c2b300d86cc46ff4036a
-cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev28_h200_c30c1c580039c2b300d86cc46ff4036a.tgz", 
-               "rev3.13_c30c1c580039c2b300d86cc46ff4036a_magpie.tgz",
-               "rev3.13_c30c1c580039c2b300d86cc46ff4036a_validation.tgz",
-               "additional_data_rev3.24.tgz",
-               "npi_ndc_base_fixed.tgz")
+# use old regions: c30c1c580039c2b300d86cc46ff4036a
+# use H12 regions: 690d3718e151be1b450b394c1064b1c5
+cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev29_h200_690d3718e151be1b450b394c1064b1c5.tgz", 
+               "rev3.15_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
+               "rev3.15_690d3718e151be1b450b394c1064b1c5_validation.tgz",
+               "additional_data_rev3.27.tgz",
+               "npi_ndc_base_SSP2_mixed.tgz")
 
 # Download bioenergy demand scenarios
 filemap <- lucode::download_unpack(input="emulator.tgz", targetdir="input", repositories=list("/p/projects/landuse/data/input/archive"=NULL), debug=FALSE)
@@ -34,9 +35,9 @@ demand <- add_columns(demand,dim = 2.1,addnm = c("y2110","y2130","y2150"))
 demand[,c("y2110","y2130","y2150"),] <- setYears(demand[,"y2100",])
 
 #reg <- read.csv2(cfg$regionmapping) # read regional resolution, used for ghg tax
-reg <- list(RegionCode = getRegions(demand))
+reg <- list(RegionCode = "GLO")
 
-scenarios <- read.csv2("config/scenario_config_emulator.csv",strip.white=TRUE)
+scenarios <- read.csv2("config/scenario_config_emulator.csv",strip.white=TRUE,stringsAsFactors=FALSE)
 scenarios <- subset(scenarios, subset=(start == "1"))
 
 ###############################################################
@@ -44,7 +45,7 @@ scenarios <- subset(scenarios, subset=(start == "1"))
 ###############################################################
 
 # calculate expoLinear tax with transition in 2060
-write.ghgtax <- function(co2tax_2025=NULL,regions=NULL,out="./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3") {
+write.ghgtax <- function(co2tax_2025=NULL,regions=NULL,out="./modules/56_ghg_policy/input/f56_pollutant_prices_emulator.cs3") {
   
   # First year with global uniform CO2 price is 2025
   # Values taken from reporting in /p/projects/remind/runs/r7034/
@@ -76,6 +77,7 @@ write.ghgtax <- function(co2tax_2025=NULL,regions=NULL,out="./modules/56_ghg_pol
   ghgtax[,c("y2110","y2130","y2150"),] <- setYears(ghgtax[,"y2100",])
   
   # create textplot
+  cat("CO2 price in 2025:",as.numeric(co2tax_2025),"\n")
   for_plot <- ghgtax[1,,"co2_c"] / 0.967 * 12/44 # convert unit back just for plotting
   #for_plot <- for_plot[,c("y1995","y2110","y2130","y2150"),,invert=TRUE]
   txtplot(as.numeric(gsub("y","",getYears(for_plot))),for_plot,ylab="US$2005/tCO2")
@@ -113,8 +115,8 @@ for (scen in rownames(scenarios)) {
     # *             coupling
   } else {
     # If none of the built-in GHG price scenarios was chosen, provide GHG prices
-    cfg$gms$c56_pollutant_prices <- "coupling"
-    cat("Writing GHG tax scenario",scenarios[scen,"co2tax_name"],"\n\n")
+    cfg$gms$c56_pollutant_prices <- "emulator"
+    cat("Writing GHG tax scenario",scenarios[scen,"co2tax_name"],"\n")
     write.ghgtax(co2tax_2025=scenarios[scen,"co2tax_2025"],regions=unique(reg$RegionCode))
   }
 
@@ -122,14 +124,16 @@ for (scen in rownames(scenarios)) {
   expname <- paste0(scenarios[scen,"SSP"],"-",scenarios[scen,"co2tax_name"])
 
   # Copy bioenergy demand files and start runs
-  for(r in getNames(demand)) { # as.character(c(1:9,73))
+  for(r in getNames(demand)) {
+  #for(r in as.character(c(1))) { 
     cfg$title <- paste(expname,r,sep="-")
     cat(cfg$title,"Writing bioenergy demand scenario",r,"\n")
     # create text plot
-    for_plot <- dimSums(demand[,,r]/1000,dim=1)
+    dem <- dimSums(demand[,,r],dim=1)
+    for_plot <- dem/1000
     #for_plot <- for_plot[,c("y1995","y2110","y2130","y2150"),,invert=TRUE]
     txtplot(as.numeric(gsub("y","",getYears(for_plot))),for_plot,ylab="EJ/yr")
-    write.magpie(setNames(demand[,,r],NULL), file_name = "./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
+    write.magpie(setNames(dem,NULL), file_name = "./modules/60_bioenergy/input/glo.2ndgen_bioenergy_demand.csv")
     manipulateConfig("scripts/run_submit/submit.sh","--job-name"=cfg$title,line_endings = "NOTwin")
     start_run(cfg,codeCheck=FALSE)
   }
