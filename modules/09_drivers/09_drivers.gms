@@ -7,6 +7,8 @@
 *' @title Drivers
 *'
 *' @description The Drivers module aggregates exogenous inputs to be delivered to other modules.
+*'
+*' @authors 
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%drivers%" == "aug17" $include "./modules/09_drivers/aug17.gms"
