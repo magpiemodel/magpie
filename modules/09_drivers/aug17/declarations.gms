@@ -20,11 +20,11 @@ parameters
   i09_gdp_ppp_iso(t,iso)      		income (Mio USD05 PPP before a price shock)
   i09_gdp_ppp(t,i)      			income (Mio USD05 PPP before a price shock)
 
-  im_gdp_pc_ppp(t,i)              	GDP per capita (USD05 PPP)
-  im_gdp_pc_ppp_iso(t,iso)          income per capita (USD05 PPP per capita before a price shock)
+  im_gdp_pc_ppp(t,i)              	GDP per capita (USD05 PPP per capita)
+  im_gdp_pc_ppp_iso(t,iso)          income per capita (USD05 PPP before a price shock per capita)
 
 * Development State
-  im_development_state(t,i)  					development state (share in high income level)
-  im_physical_inactivity(t,iso,sex,age_group)  	Share of population which is physically inactive (people per people)
+  im_development_state(t,i)  					development state in high income level (1)
+  im_physical_inactivity(t,iso,sex,age_group)  	Share of population which is physically inactive (1)
   im_demography(t,iso,sex,age_group) 			Population by groups (Mio people)
 ;
