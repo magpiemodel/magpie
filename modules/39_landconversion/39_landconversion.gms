@@ -7,5 +7,6 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%landconversion%" == "gdp_scaled_jun13" $include "./modules/39_landconversion/gdp_scaled_jun13.gms"
+$Ifi "%landconversion%" == "gdp_vegc_apr18" $include "./modules/39_landconversion/gdp_vegc_apr18.gms"
 $Ifi "%landconversion%" == "gdp_vegc_mar18" $include "./modules/39_landconversion/gdp_vegc_mar18.gms"
 *###################### R SECTION END (MODULETYPES) ############################

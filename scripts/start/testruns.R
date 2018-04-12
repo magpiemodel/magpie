@@ -22,12 +22,12 @@ buildInputVector <- function(regionmapping   = "h11",
                              co2             = "noco2",
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "h200",
-                             archive_rev     = "28",
-                             madrat_rev      = "3.13",
-                             validation_rev  = "3.13",
+                             archive_rev     = "29",
+                             madrat_rev      = "3.15",
+                             validation_rev  = "3.15",
                              calibration     = NULL,
-                             additional_data = "additional_data_rev3.26.tgz",
-                             npi_base        = "npi_ndc_base_fixed.tgz") {
+                             additional_data = "additional_data_rev3.27.tgz",
+                             npi_base        = "npi_ndc_base_SSP2_fixed.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
                 mag="c30c1c580039c2b300d86cc46ff4036a")
@@ -61,7 +61,7 @@ cutyieldcalib <- function(cfg) {
 mixed_factor <- function(cfg, title="mixed_factor", ...) {
   cfg$title <- title
   cfg$recalibrate <- TRUE
-  cfg$input <- buildInputVector(npi_base = "npi_ndc_base_mixed.tgz", ...)
+  cfg$input <- buildInputVector(npi_base = "npi_ndc_base_SSP2_mixed.tgz", ...)
   cfg$gms$factor_costs <- "mixed_feb17"
   try(start_run(cfg=cfg, codeCheck=FALSE))
   return(submitCalibration("ValidationMixedFactor"))
@@ -147,7 +147,7 @@ default_rcp26 <- function(cfg, title="default_rcp26", calibration=NULL, ...) {
 
 mixed_rcp26 <- function(cfg, title="mixed_rcp26", calibration=NULL, ...) {
   cfg$title <- title
-  cfg$input <- buildInputVector(calibration=calibration, npi_base = "npi_ndc_base_mixed.tgz")
+  cfg$input <- buildInputVector(calibration=calibration, npi_base = "npi_ndc_base_SSP2_mixed.tgz")
   cfg$gms$factor_costs <- "mixed_feb17"
   cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
   cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
@@ -228,9 +228,9 @@ indc_rcp26 <- function(cfg, calibration=NULL) {
   try(start_run(cfg=cfg,scenario="INDC",codeCheck=FALSE))
 }
 
-h12 <- function(cfg) {
+h12 <- function(cfg, calibration=NULL) {
   cfg$title <- "h12"
-  cfg$input <- buildInputVector(regionmapping = "h12")
+  cfg$input <- buildInputVector(regionmapping = "h12", calibration=calibration)
   try(start_run(cfg=cfg, codeCheck=FALSE))
   return(submitCalibration("h12Default"))
 }
@@ -238,6 +238,23 @@ h12 <- function(cfg) {
 h12_rcp26 <- function(cfg, calibration=NULL) {
   cfg$title <- "h12_rcp26"
   cfg$input <- buildInputVector(regionmapping = "h12", calibration=calibration)
+  cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
+  cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
+  try(start_run(cfg=cfg, codeCheck=FALSE))
+}
+
+mixed_h12 <- function(cfg, calibration=NULL) {
+  cfg$title <- "mixed_h12"
+  cfg$gms$factor_costs <- "mixed_feb17"
+  cfg$input <- buildInputVector(regionmapping = "h12", npi_base = "npi_ndc_base_SSP2_mixed.tgz", calibration=calibration)
+  try(start_run(cfg=cfg, codeCheck=FALSE))
+  return(submitCalibration("h12Default"))
+}
+
+mixed_h12_rcp26 <- function(cfg, calibration=NULL) {
+  cfg$title <- "mixed_h12_rcp26"
+  cfg$gms$factor_costs <- "mixed_feb17"
+  cfg$input <- buildInputVector(regionmapping = "h12", calibration=calibration, npi_base = "npi_ndc_base_SSP2_mixed.tgz")
   cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
   cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
   try(start_run(cfg=cfg, codeCheck=FALSE))
@@ -258,6 +275,16 @@ clusterres <- function(cfg, calibration=NULL) {
   }
 }
 
+mixed_clusterres <- function(cfg, calibration=NULL) {
+  for(res in c("n200","h100","n100","h600","h1000","h2000")) {
+    cfg$title <- paste0("mixed_",res)
+    cfg$gms$factor_costs <- "mixed_feb17"
+    cfg$input <- buildInputVector(resolution = res, calibration=calibration, npi_base = "npi_ndc_base_SSP2_mixed.tgz")
+    try(start_run(cfg=cfg, codeCheck=FALSE))
+  }
+}
+
+
 ### General settings ###
 cfg$gms$c_timesteps <- 11
 cfg <- setScenario(cfg,"SSP2")
@@ -271,6 +298,14 @@ default_rcp26(cfg, calibration=default_calibration)
 mixed_calibration <- mixed_factor(cfg)
 mixed_rcp26(cfg, calibration=mixed_calibration)
 
+clusterres(cfg,calibration=default_calibration)
+mixed_clusterres(cfg,calibration=mixed_calibration)
+
+h12(cfg,calibration=default_calibration)
+h12_rcp26(cfg,calibration=default_calibration)
+
+mixed_h12(cfg,calibration=mixed_calibration)
+mixed_h12_rcp26(cfg,calibration=mixed_calibration)
 
 #cutyieldcalib(cfg)
 
