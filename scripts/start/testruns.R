@@ -48,6 +48,14 @@ default <- function(cfg, title="default", calibration=NULL, ...) {
   return(submitCalibration("ValidationDefault"))
 }
 
+landcon <- function(cfg, calibration=NULL, ...) {
+  cfg$force_download <- TRUE
+  cfg$title <- "landconv3"
+  cfg$gms$landconversion <- "gdp_scaled_jun13"
+  cfg$input <- buildInputVector(calibration=calibration, ...)
+  try(start_run(cfg=cfg, codeCheck=FALSE))
+}
+
 cutyieldcalib <- function(cfg) {
   x <- magclass::read.magpie("modules/14_yields/input/f14_yld_calib.csv")
   x[as.vector(x[,,"crop"]>1),,"crop"] <- 1
@@ -306,6 +314,8 @@ h12_rcp26(cfg,calibration=default_calibration)
 
 mixed_h12(cfg,calibration=mixed_calibration)
 mixed_h12_rcp26(cfg,calibration=mixed_calibration)
+
+landcon(cfg,calibration=default_calibration)
 
 #cutyieldcalib(cfg)
 
