@@ -18,9 +18,19 @@ if(!exists("source_include")) {
 
 load(paste0(outputdir, "/config.Rdata"))
 gdx	<- path(outputdir,"fulldata.gdx")
-rda <- paste0(outputdir, "/",make.names(paste0("report_",normalizePath(outputdir))),".rda")
+rds <- paste0(outputdir, "/report.rds")
+runstatistics <- path(outputdir,"/runstatistics.rds")
+resultsarchive <- "/p/projects/rd3mod/www/magpie"
 ###############################################################################
 
 
 report <- getReport(gdx,scenario = cfg$title)
-saveRDS(as.quitte(report),file=rda)
+q <- as.quitte(report)
+saveRDS(q,file=rds)
+
+if(file.exists(runstatistics) & folder.exists(resultsarchive)) {
+  stats <- list()
+  load(runstatistics)
+  if(!is.null(stats$id))
+  saveRDS(q,file=paste0(resultsarchive,"/",stats$id,".rds"))
+}
