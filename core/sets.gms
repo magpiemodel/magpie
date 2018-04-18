@@ -143,6 +143,7 @@ sets time_annual annual extended vector
 
 set t(t_all) used time periods
 $If "%c_timesteps%"== "less_TS" /y1995,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100,y2110,y2130,y2150/;
+$If "%c_timesteps%"== "coup2100" /y1995,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100/;
 $If "%c_timesteps%"== "test_TS" /y1995,y2005,y2010,y2020,y2030,y2040,y2050,y2070,y2090,y2110,y2130,y2150/;
 $If "%c_timesteps%"== "recalc_npi_ndc" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030/;
 $If "%c_timesteps%"== "TS_benni" /y1995,y2000,y2005,y2010,y2020,y2030,y2040,y2050/;
