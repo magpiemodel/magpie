@@ -4,6 +4,18 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
+*' @description This realization
+*' calculates annual land-related CO2 emissions as 
+*' difference of carbon stocks between the current and the previous time step. 
+*' The realization provides carbon density information on cellular level to all 
+*' land modules ([30_crop], [31_past], [32_forestry], [34_urban] and [35_natveg]), 
+*' which return land type specific carbon stocks to the carbon module. The realization
+*' also provides carbon density for different age-classes, based on a 
+*' chapman-richards volume growth model, to the land modules [32_forestry] and [35_natveg] 
+*' [@humpenoder_investigating_2014].
+
+*' @limitations CO2 emissions in the 1st time step (1995) are not meaningful because 
+*' carbon stock information prior to 1995 is not available
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/52_carbon/normal_dec17/sets.gms"
