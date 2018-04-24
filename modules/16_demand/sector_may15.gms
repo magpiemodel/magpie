@@ -5,9 +5,10 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description In the sector_may15 realization, demand is calculated as the sum of
-*' demand for all products coming from the modules material, bioenergy, livestock,
-*' food and production. It also delivers data to the modules bioenergy, trade, processing, 
-*' residues, awms, nr_soil_budget, forestry, and methane.
+*' demand for all products coming from the modules [62_material], 
+*' [60_bioenergy], [70_livestock], [15_food] and [17_production]. 
+*' It also delivers data to the modules [60_bioenergy], [21_trade], [20_processing], 
+*' [18_residues], [55_awms], [50_nr_soil_budget], [32_forestry], and [53_methane].
 *'
 *' @limitations Food demand projections enter the model as exogenous scenarios. Such an 
 *' inelastic representation cannot capture impacts of i.e. bioenergy production or policies 

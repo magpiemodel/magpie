@@ -6,12 +6,12 @@
 
 
 variables
- vm_cost_cdr(i)                             carbon dioxide removal costs (Mio US$) 
+ vm_cost_cdr(i)                             carbon dioxide removal costs (mio. USD) 
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_cdr(t,i,type) carbon dioxide removal costs (Mio US$) 
+ ov_cost_cdr(t,i,type) carbon dioxide removal costs (mio. USD) 
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 
