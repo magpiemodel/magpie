@@ -5,11 +5,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- i42_wat_req_k(t,j,k)       LPJ annual water demand for irrigation (m^3 per ha per year) + Livestock demand (m^3 per ton)
- ic42_wat_req_k(j,k)        LPJ annual water demand for irrigation (m^3 per ha per year) + Livestock demand (m^3 per ton)
- i42_env_flows(t,j)         environmental flow requirements if a protection policy is in place (mio m^3)
- i42_env_flows_base(t,j)    environmental flow requirements if no protection policy is in place  (mio m^3)
- ic42_env_flow_policy(i)       Determines if environmental flow protection is enforced in the current time step (logical)
+ i42_wat_req_k(t,j,k)       	LPJ annual water demand for irrigation (m^3 per ha per year) + Livestock demand (m^3 per ton)
+ ic42_wat_req_k(j,k)        	LPJ annual water demand for irrigation (m^3 per ha per year) + Livestock demand (m^3 per ton)
+ i42_env_flows(t,j)         	environmental flow requirements if a protection policy is in place (mio. m^3)
+ i42_env_flows_base(t,j)    	environmental flow requirements if no protection policy is in place  (mio. m^3)
+ ic42_env_flow_policy(i)        Determines if environmental flow protection is enforced in the current time step (logical)
  i42_env_flow_policy(t,i)       Determines if environmental flow protection is enforced (logical)
 ;
 
@@ -18,13 +18,13 @@ equations
 ;
 
 positive variables
-  vm_watdem(wat_dem,j)                        amount of water needed in different sectors(mio. m^3)
-  v42_irrig_eff(j)             Irrigation efficiency
+  vm_watdem(wat_dem,j)               Water needed in different sectors (mio. m^3)
+  v42_irrig_eff(j)                   Irrigation efficiency
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_watdem(t,wat_dem,j,type)         amount of water needed in different sectors(mio. m^3)
+ ov_watdem(t,wat_dem,j,type)         amount of water needed in different sectors (mio. m^3)
  ov42_irrig_eff(t,j,type)            Irrigation efficiency
  oq42_water_demand(t,wat_dem,j,type) Water consumption in different sectors
 ;

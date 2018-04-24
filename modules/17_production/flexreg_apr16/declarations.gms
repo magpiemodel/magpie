@@ -5,8 +5,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 positive variables
- vm_prod(j,k)                    production in each cell (mio. ton DM)
- vm_prod_reg(i,kall)                regional aggregated production (mio. ton DM)
+ vm_prod(j,k)                    production in each cell (mio. tDM)
+ vm_prod_reg(i,kall)                regional aggregated production (mio. tDM)
 ;
 
 equations
@@ -15,8 +15,8 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_prod(t,j,k,type)        production in each cell (mio. ton DM)
- ov_prod_reg(t,i,kall,type) regional aggregated production (mio. ton DM)
+ ov_prod(t,j,k,type)        production in each cell (mio. tDM)
+ ov_prod_reg(t,i,kall,type) regional aggregated production (mio. tDM)
  oq17_prod_reg(t,i,k,type)  regional production
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
