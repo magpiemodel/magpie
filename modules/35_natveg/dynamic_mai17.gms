@@ -4,10 +4,28 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In the dynamic_mai17 realization, the development of natural vegetation is modeled dynamically.
-*' The initialization spatial distribution in 1995 is based on the LUH2 data set [@hurtt_harmonization_inprep].
+*' @description In the dynamic_mai17 realization, land and carbon stock dynamics of 
+*' natural vegetation are modeled endogenously.
+*' The initial spatial distribution of the sub-land-types primary forest, 
+*' secondary forest and other natural land is based on the 
+*' LUH2 data set [@hurtt_harmonization_inprep].
 
-*' @limitations natural vegetation land and carbon stock are static over time
+*' General rules
+*' Within the optimization, primary and secondary forests can only decrease 
+*' (e.g. for cropland expansion).
+*' In contrast, other natural land can decrease and increase within the optimization. 
+*' For instance, other natural land increases if agricultural land is abandoned.
+*' An increase of other natural land is associated with natural succession,
+*' modelled by age-class growth, which results in increasing carbon stocks.
+*' Interaction with other land modules.
+
+*' carbon threshold other land -> secondary forest
+*' ndc/npi forest and carbon stock
+*' biodiv protection
+
+
+
+*' @limitations Wood harvest in natural forests is currently not accounted for.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/35_natveg/dynamic_mai17/sets.gms"
