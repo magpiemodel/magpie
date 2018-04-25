@@ -310,7 +310,11 @@ calc_policy <- function(policy,magpie_bau_stock,affore=FALSE,im_years,pol_mappin
     y_pol_forever <- y[y>= targetyear]
 
     #set bau stock before baseyear to zero - reflecting no policy
-    if(!affore) magpie_bau_stock[i,getYears(magpie_bau_stock,as.integer=TRUE)<baseyear,] <- 0
+    # and also fix to the target year level in the subsequent timesteps
+    if(!affore) {
+      magpie_bau_stock[i,getYears(magpie_bau_stock,as.integer=TRUE)<baseyear,] <- 0
+      magpie_bau_stock[i,getYears(magpie_bau_stock,as.integer=TRUE)>targetyear,] <- setYears(magpie_bau_stock[i,targetyear,],NULL)
+    }
 
     #set target in targetyear
     #percentage: 0 = no reduction, 1 = full reduction of deforestation/emissions;

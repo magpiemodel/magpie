@@ -294,7 +294,7 @@ mixed_clusterres <- function(cfg, calibration=NULL) {
 
 
 ### General settings ###
-cfg$gms$c_timesteps <- 11
+cfg$gms$c_timesteps <- "coup2100"
 cfg <- setScenario(cfg,"SSP2")
 
 

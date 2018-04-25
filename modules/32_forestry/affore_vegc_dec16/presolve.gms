@@ -52,6 +52,8 @@ else
 *calculate v32_land.l
 v32_land.l(j,land32) = sum(ac_land32(ac,land32), p32_land(t,j,ac,"before"));
 pc32_land(j,land32) = v32_land.l(j,land32);
+vm_land.l(j,"forestry") = sum(land32, pc32_land(j,land32));
+pcm_land(j,"forestry") = sum(land32, pc32_land(j,land32));
 
 *set boundaries
 v32_land.fx(j,"prot") = pc32_land(j,"prot");
