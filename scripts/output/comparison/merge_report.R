@@ -48,4 +48,4 @@ if (!is.null(missing)) {
   print(missing)
 }
 
-if(file.exists("output/report_comp.csv")) saveRDS(read.quitte("output/report_comp.csv"),file = "output/report_comp.rda")
+if(file.exists("output/report_comp.csv")) saveRDS(read.quitte("output/report_comp.csv"),file = "output/report_comp.rds")
