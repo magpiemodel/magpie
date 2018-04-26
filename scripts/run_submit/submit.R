@@ -16,7 +16,7 @@ maindir <- cfg$magpie_folder
 
 cat("\nStarting MAgPIE...\n")
 begin<-Sys.time()
-system(paste("gams full.gms -lf=full.log -lo=",cfg$logoption,sep=""))
+system(paste("gams full.gms -errmsg=1 -lf=full.log -lo=",cfg$logoption,sep=""))
 gams_runtime<-Sys.time()-begin  #calculate runtime info
 cat("\nMAgPIE run finished!\n")
 
