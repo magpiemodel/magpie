@@ -29,7 +29,7 @@ calibration_run<-function(putfolder,calib_magpie_name,logoption=3){
   file.copy(paste(calib_magpie_name,".gms",sep=""),putfolder)
 
   # execute calibration run
-  system(paste("gams ",calib_magpie_name,".gms"," -PUTDIR ./",putfolder," -LOGOPTION=",logoption,sep=""),wait=TRUE)
+  system(paste("gams ",calib_magpie_name,".gms"," -errmsg=1 -PUTDIR ./",putfolder," -LOGOPTION=",logoption,sep=""),wait=TRUE)
   file.copy("fulldata.gdx",putfolder)
 }
 
