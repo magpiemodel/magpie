@@ -19,7 +19,7 @@
 
 ** END NDC **
 
-*
+* Afforestation not used for harvesting to fulfil demand i.e., supply = 0
 vm_supply.fx(i2,kforestry) = 0;
 
 *boundaries afforestation mask
