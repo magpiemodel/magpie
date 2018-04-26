@@ -4,6 +4,13 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @title Forestry
+*'
+*' @description The Forestry module describes the constraints under which managed
+*' forest (age-class forest) exists. At the same time it calculates the
+*' corresponding carbon stocks.
+*'
+*' @authors Florian Humpenöder
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%forestry%" == "affore_vegc_dec16" $include "./modules/32_forestry/affore_vegc_dec16.gms"

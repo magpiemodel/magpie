@@ -3,34 +3,35 @@
 *** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
+
 scalars
- s32_shift number of 5-year age-classes corresponding to current time step length
+ s32_shift                 Number of 5-year age-classes corresponding to current time step length
 ;
 
 parameters
- p32_carbon_density(t,j,land32,c_pools) carbon density for land32 and c_pools (tC per ha)
- p32_land(t,j,ac,when)   Forestry land for each cell wood type and age class before and after optimization (mio. ha)
- pc32_land(j,land32)        Forestry land per forestry land type initialization of the optimization (mio. ha)
- p32_aff_pot(t,j)                   potential afforestation area (Mha)
- p32_aff_pol_timestep(t,j)			ndc afforestation per time step (Mha)
- p32_aff_pol(t,j)			ndc forest stock (Mha)
+ p32_carbon_density(t,j,land32,c_pools) Carbon density for land32 and c_pools (tC per ha)
+ p32_land(t,j,ac,when)                  Forestry land for each cell wood type and age class before and after optimization (mio. ha)
+ pc32_land(j,land32)                    Forestry land per forestry land type initialization of the optimization (mio. ha)
+ p32_aff_pot(t,j)                       Potential afforestation area (mio. ha)
+ p32_aff_pol_timestep(t,j)			        NDC afforestation per time step (mio. ha)
+ p32_aff_pol(t,j)			                  NDC forest stock (mio. ha)
 ;
 
 positive variables
- vm_cost_fore(i)                             Afforestation costs (Mio US$)
- v32_land(j,land32)              forestry land pools (mio. ha)
- vm_landdiff_forestry          aggregated difference in forestry land compared to previous timestep (mio. ha)
- vm_cdr_aff(j,emis_source_co2_forestry)   			  total CDR from afforestation (new and existing areas) between t+1 and t=sm_invest_horizon (Tg CO2-C)
+ vm_cost_fore(i)                        Afforestation costs (mio. USD)
+ v32_land(j,land32)                     Forestry land pools (mio. ha)
+ vm_landdiff_forestry                   Aggregated difference in forestry land compared to previous timestep (mio. ha)
+ vm_cdr_aff(j,emis_source_co2_forestry) Total CDR from afforestation (new and existing areas) between t+1 and t=sm_invest_horizon (Tg CO2-C)
 ;
 
 equations
- q32_cost_fore_ac(i)             total forestry costs constraintt
- q32_land(j)                      land constraint
- q32_cdr_aff(j,emis_source_co2_forestry) 	calculation of CDR from afforestation
- q32_carbon(j,c_pools)                 forestry carbon stock calculation
- q32_diff                   aggregated difference in forestry land compared to previous timestep (mio. ha)
- q32_max_aff					maximum total global afforestation
- q32_aff_pol(j)					afforestation policy constraint
+ q32_cost_fore_ac(i)                      Total forestry costs constraintt
+ q32_land(j)                              Land constraint
+ q32_cdr_aff(j,emis_source_co2_forestry) 	Calculation of CDR from afforestation
+ q32_carbon(j,c_pools)                    Forestry carbon stock calculation
+ q32_diff                                 Aggregated difference in forestry land compared to previous timestep (mio. ha)
+ q32_max_aff					                    Maximum total global afforestation
+ q32_aff_pol(j)					                  Afforestation policy constraint
 ;
 
 
