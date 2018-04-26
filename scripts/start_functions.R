@@ -5,7 +5,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
-                      report=NULL,sceninreport=NULL,LU_pricing="y2010", lock_model=TRUE, force=FALSE) {
+                      report=NULL,sceninreport=NULL,LU_pricing="y2010", lock_model=TRUE) {
 
   if (!requireNamespace("lucode", quietly = TRUE)) {
     stop("Package \"lucode\" needed for this function to work. Please install it.",
@@ -37,19 +37,11 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
 
   # Create output folder
   if (!file.exists(cfg$results_folder)) {
-    dir.create(cfg$results_folder, recursive = TRUE, showWarnings = FALSE)
-  } else if (!force) {
-    stop(paste0("Results folder ",cfg$results_folder," could not be created because it already exists."))
-  } else {
-    cat("Deleting results folder because it alreay exists:",cfg$results_folder,"\n")
-    unlink(cfg$results_folder, recursive = TRUE)
-    dir.create(cfg$results_folder, recursive = TRUE, showWarnings = FALSE)
+    dir.create(cfg$results_folder, recursive=TRUE, showWarnings=FALSE)
+	} else {
+    stop(paste0("Results folder ",cfg$results_folder,
+                " could not be created because is already exists."))
   }
- 
-  
-  
-  
-  
   # If report and scenname are available the data of this scenario in the report
   # will be converted to MAgPIE input, saved to the respective input folders
   # and used as input by the model
