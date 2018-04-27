@@ -4,6 +4,15 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @title Processing
+*' @description The processing module calculates the quantity of secondary products that
+*' are generated during the processing of raw products (primary plant agricultural commodities in this case),
+*' and the demand for those secondary products.
+
+*' @authors Benjamin Bodirsky, Amsalu Woldie Yalew
+
+
+
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%processing%" == "coupleproducts_feb17" $include "./modules/20_processing/coupleproducts_feb17.gms"
