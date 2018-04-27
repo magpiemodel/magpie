@@ -5,21 +5,21 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 positive variables
- vm_cost_fore(i)                             Afforestation costs (Mio US$)
- vm_landdiff_forestry             aggregated difference in forestry land compared to previous timestep (mio. ha)
- v32_land(j,land32)              forestry land pools (mio. ha)
- vm_cdr_aff(j,emis_source_co2_forestry)                             total CDR from afforestation (new and existing areas) between t+1 and t=sm_invest_horizon (Tg CO2-C)
+ vm_cost_fore(i)                          Afforestation costs (mio. USD)
+ vm_landdiff_forestry                     Aggregated difference in forestry land compared to previous timestep (mio. ha)
+ v32_land(j,land32)                       Forestry land pools (mio. ha)
+ vm_cdr_aff(j,emis_source_co2_forestry)   Total CDR from afforestation (new and existing areas) between t+1 and t=sm_invest_horizon (Tg CO2-C)
 ;
 
 parameters
- pc32_carbon_density(j,c_pools) carbon density in optimization (tC per ha)
+ pc32_carbon_density(j,c_pools)           Carbon density in optimization (tC per ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_fore(t,i,type)                        Afforestation costs (Mio US$)
- ov_landdiff_forestry(t,type)                  aggregated difference in forestry land compared to previous timestep (mio. ha)
- ov32_land(t,j,land32,type)                    forestry land pools (mio. ha)
- ov_cdr_aff(t,j,emis_source_co2_forestry,type) total CDR from afforestation (new and existing areas) between t+1 and t=sm_invest_horizon (Tg CO2-C)
+ ov_cost_fore(t,i,type)                        Afforestation costs (mio. USD)
+ ov_landdiff_forestry(t,type)                  Aggregated difference in forestry land compared to previous timestep (mio. ha)
+ ov32_land(t,j,land32,type)                    Forestry land pools (mio. ha)
+ ov_cdr_aff(t,j,emis_source_co2_forestry,type) Total CDR from afforestation (new and existing areas) between t+1 and t=sm_invest_horizon (Tg CO2-C)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
