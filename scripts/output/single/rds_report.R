@@ -26,11 +26,18 @@ resultsarchive <- "/p/projects/rd3mod/www/magpie"
 
 report <- getReport(gdx,scenario = cfg$title)
 q <- as.quitte(report)
+if(all(is.na(q$value))) stop("No values in reporting!")
+
 saveRDS(q,file=rds)
 
 if(file.exists(runstatistics) & dir.exists(resultsarchive)) {
   stats <- list()
   load(runstatistics)
-  if(!is.null(stats$id))
-  saveRDS(q,file=paste0(resultsarchive,"/",stats$id,".rds"))
+  if(!is.null(stats$id)) {
+    saveRDS(q,file=paste0(resultsarchive,"/",stats$id,".rds"))
+    cwd <- getwd()
+    setwd(resultsarchive)
+    system("ls *.rds > files")
+    setwd(cwd)
+  }
 }

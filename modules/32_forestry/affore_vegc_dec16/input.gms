@@ -8,10 +8,10 @@ $setglobal c32_aff_mask  noboreal
 $setglobal c32_aff_policy  npi
 
 scalars
-	s32_max_aff_area 	maximum total global afforestation in Mha    / Inf /
+	s32_max_aff_area 	maximum total global afforestation in (mio. ha)    / Inf /
 ;
 
-parameter f32_aff_mask(j) afforestation mask (binary)
+parameter f32_aff_mask(j) afforestation mask (1)
 /
 $ondelim
 $Ifi "%c32_aff_mask%" == "unrestricted" $include "./modules/32_forestry/input/aff_unrestricted.cs2"
@@ -20,13 +20,13 @@ $Ifi "%c32_aff_mask%" == "onlytropical" $include "./modules/32_forestry/input/af
 $offdelim
 /;
 
-table f32_fac_req_ha(i,fcosts32) Afforestation factor requirement costs (US Dollar 2004 per ha)
+table f32_fac_req_ha(i,fcosts32) Afforestation factor requirement costs  per ha (USD)
 $ondelim
 $include "./modules/32_forestry/input/f32_fac_req_ha.csv"
 $offdelim
 ;
 
-table f32_aff_pol(t_all,j,pol32) npi+ndc afforestation policy (Mha new forest wrt to 2010)
+table f32_aff_pol(t_all,j,pol32) npi+ndc afforestation policy i.e, new forest wrt to 2010 (mio. ha)
 $ondelim
 $include "./modules/32_forestry/input/npi_ndc_aff_pol.cs3"
 $offdelim
