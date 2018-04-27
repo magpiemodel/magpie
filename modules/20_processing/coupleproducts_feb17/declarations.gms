@@ -7,10 +7,10 @@
 
 
 positive variables
-  vm_dem_processing(i,kall)          demand for processing use
-  v20_dem_processing(i,processing_subst20,kpr) demand for processing use by process
+  vm_dem_processing(i,kall)          demand for processing use (Mt DM)
+  v20_dem_processing(i,processing_subst20,kpr) demand for processing use by process (Mt DM)
   v20_secondary_substitutes(i,ksd,kpr) substitutes for inferior secondary products (Mt DM)
-  vm_secondary_overproduction(i,kall,kpr) overproduction of secondary couple products (Mt Dm)
+  vm_secondary_overproduction(i,kall,kpr) overproduction of secondary couple products (Mt DM)
   vm_cost_processing(i)            processing costs (Million USD05)
 ;
 
