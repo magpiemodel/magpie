@@ -30,27 +30,36 @@ cfg$gms$c60_2ndgen_biodem <- "SSP2-26-SPA0"
 cfg$recalibrate <- TRUE
 cfg$recalc_base_run <- TRUE
 
-## runs with per ton costs
-cfg$gms$factor_costs <- "fixed_per_ton_mar18"
 
-cfg$gms$c60_biodem_level <- 1
-cfg$title <- "bioen_reg_fixed"
-try(start_run(cfg=cfg, codeCheck=FALSE))
+cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev29_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz",
+               "rev3.15_8a828c6ed5004e77d1ba2025e8ea2261_magpie.tgz",
+               "rev3.15_8a828c6ed5004e77d1ba2025e8ea2261_validation.tgz",
+               "additional_data_rev3.27.tgz",
+               "npi_ndc_base_SSP2_fixed.tgz")
 
-cfg$gms$c60_biodem_level <- 0
-cfg$title <- "bioen_glo_fixed"
-try(start_run(cfg=cfg, codeCheck=FALSE))
-
-
-
-## run with mixed costs
+cfg$title <- "fcostBIOold_mixed"
 cfg$gms$factor_costs <- "mixed_feb17"
-
-cfg$gms$c60_biodem_level <- 1
-cfg$title <- "bioen_reg_mixed"
 try(start_run(cfg=cfg, codeCheck=FALSE))
 
-cfg$gms$c60_biodem_level <- 0
-cfg$title <- "bioen_glo_mixed"
+cfg$title <- "fcostBIOold_fixed"
+cfg$gms$factor_costs <- "fixed_per_ton_mar18"
 try(start_run(cfg=cfg, codeCheck=FALSE))
+
+
+
+cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev29_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz",
+               "rev3.15_8a828c6ed5004e77d1ba2025e8ea2261_magpie.tgz",
+               "rev3.15_8a828c6ed5004e77d1ba2025e8ea2261_validation.tgz",
+               "additional_data_rev3.28.tgz",
+               "npi_ndc_base_SSP2_fixed.tgz")
+
+cfg$title <- "fcostBIOnew_mixed"
+cfg$gms$factor_costs <- "mixed_feb17"
+try(start_run(cfg=cfg, codeCheck=FALSE))
+file.copy(from = "scripts/npi_ndc/policies/npi_ndc_base.tgz",to = "output/npi_ndc_base_SSP2_mixed.tgz", overwrite = TRUE)
+
+cfg$title <- "fcostBIOnew_fixed"
+cfg$gms$factor_costs <- "fixed_per_ton_mar18"
+try(start_run(cfg=cfg, codeCheck=FALSE))
+file.copy(from = "scripts/npi_ndc/policies/npi_ndc_base.tgz",to = "output/npi_ndc_base_SSP2_fixed.tgz", overwrite = TRUE)
 
