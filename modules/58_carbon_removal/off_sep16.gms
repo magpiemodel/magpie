@@ -8,8 +8,8 @@
 *' emissions before technical mitigation are set to 0. Thus, there is no economic incentive 
 *' to remove carbon from the atmosphere.
 *'
-*' @limitations The representation of carbon removal mechanisms might be relevant for 
-*' developing countries reducing emissions from the land use change sector 
+*' @limitations The lack of representation of carbon removal mechanisms might be relevant for 
+*' developing countries reducing emissions from the land use change sector, especially  
 *' if they are part of the UN-REDD Programme. 
 
 *####################### R SECTION START (PHASES) ##############################

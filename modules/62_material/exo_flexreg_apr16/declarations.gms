@@ -15,7 +15,7 @@ parameters
 ;
 
 positive variables
-  vm_dem_material(i,kall)         Demand for material usage (Mt DM)
+  vm_dem_material(i,kall)         Demand for material usage (mio. tDM)
 ;
 
 equations

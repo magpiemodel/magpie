@@ -6,12 +6,12 @@
 
 
 variables
- vm_cost_transp(j,k)                        transportation costs (mio US$)
+ vm_cost_transp(j,k)                        transportation costs (mio. USD)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_transp(t,j,k,type) transportation costs (mio US$)
+ ov_cost_transp(t,j,k,type) 				transportation costs (mio. USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 
