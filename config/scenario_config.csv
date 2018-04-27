@@ -14,9 +14,9 @@ s42_irrig_eff_scenario;;;1;1;1;1;1;;;;;;;1;1;1;1;1
 c42_env_flow_policy;;;on;off;off;mixed;on;;;;;;;on;off;off;mixed;on
 s42_env_flow_scenario;;;2;2;2;2;2;;;;;;;2;2;2;2;2
 c50_scen_neff;;;neff65_70_starty2010;neff60_60_starty2010;neff55_60_starty2010;neff65_70_starty2010;neff55_60_starty2010;;;;;;;neff65_70_starty2010;neff60_60_starty2010;neff55_60_starty2010;neff65_70_starty2010;neff55_60_starty2010
-c56_pollutant_prices;;;;;;;;;;;coupling;emulator;coupling;SSP1-26-SPA1;SSP2-26-SPA2;SSP2-60-SPA2;SSP2-45-SPA2;SSP5-45-SPA5
+c56_pollutant_prices;;;;;;;;SSP2-Ref-SPA0;;;coupling;emulator;coupling;SSP1-26-SPA1;SSP2-26-SPA2;SSP2-60-SPA2;SSP2-45-SPA2;SSP5-45-SPA5
 maccs;;;;;;;;;;;;;;on_sep16;on_sep16;on_sep16;on_sep16;on_sep16
-c60_2ndgen_biodem;;;;;;;;;;;coupling;emulator;coupling;SSP1-20-SPA1;SSP2-26-SPA2;SSP2-60-SPA2;SSP2-45-SPA2;SSP5-45-SPA5
+c60_2ndgen_biodem;;;;;;;;SSP2-Ref-SPA0;;;coupling;emulator;coupling;SSP1-20-SPA1;SSP2-26-SPA2;SSP2-60-SPA2;SSP2-45-SPA2;SSP5-45-SPA5
 c60_1stgen_biodem;;;phaseout2020;const2020;const2030;const2020;phaseout2020;;;;;;;phaseout2020;const2020;const2030;const2020;phaseout2020
 c60_biodem_level;;;;;;;;;;;1;0;;;;;;
 c62_material_scenario;;;SSP1;SSP2;SSP3;SSP4;SSP5;;;;;;;SSP1;SSP2;SSP3;SSP4;SSP5
