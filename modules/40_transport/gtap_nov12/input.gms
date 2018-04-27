@@ -5,7 +5,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
-f40_distance(j) transport distance to urban center (minutes)
+f40_distance(j) transport distance to urban center (Minutes)
 /
 $ondelim
 $include "./modules/40_transport/input/transport_distance.cs2"
@@ -13,7 +13,7 @@ $offdelim
 /
 ;
 
-parameter f40_transport_costs(k) Transport costs (US$04 per ton DM per minute)
+parameter f40_transport_costs(k) transport costs 2004 per tDM per minute (USD)
 /
 $ondelim
 $include "./modules/40_transport/gtap_nov12/input/f40_transport_costs.csv"

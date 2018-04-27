@@ -6,11 +6,13 @@
 
 *' @title Transport
 *'
-*' @description The transport module simulates the intraregional transportation of agricultural products between 
-*' producer site and the next city centre (market). It covers the transport of inputs such as fertilizers 
-*' to the production site as well as the transport of products to the market. Calculations are based on 
-*' cellular and global parameters and returns the corresponding cellular transport costs 
-*' which are then used by the Costs module. 
+*' @description The [40_transport] module simulates the intraregional 
+*' transportation of agricultural products between producer site 
+*' and the next city centre (market). It covers the transport of 
+*' inputs such as fertilizers to the production site as well as 
+*' the transport of products to the market. Calculations are based 
+*' on cellular and global parameters and returns the corresponding 
+*' cellular transport costs which are then used by the [11_costs] module. 
 *'
 *' @authors Jan Philipp Dietrich, Florian Humpenöder, Benjamin Bodirsky, Isabelle Weindl, Michael Krause.
 

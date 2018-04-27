@@ -9,8 +9,8 @@
 *' @description The demand module calculates the demand for all commodities that 
 *' has to be fulfilled by the model. In addition, it returns some other basic 
 *' information needed for demand calculations but also needed by other modules. 
-*' A description of food demand scenarios that enter the model can be found in 
-*' bodirsky_global_2015-1, bodirsky_n2o_2012 and valin_fooddemand_2013.
+*' A description of food demand scenarios that enter the model can be found
+*' in @bodirsky_global_2015-1, @bodirsky_n2o_2012 and @valin_fooddemand_2013.
 *'
 *' @authors Isabelle Weindl, Benjamin Bodirsky, Jan Philipp Dietrich.
 
