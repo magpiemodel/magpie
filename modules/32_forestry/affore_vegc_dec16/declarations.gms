@@ -25,28 +25,28 @@ positive variables
 ;
 
 equations
- q32_cost_fore_ac(i)                      Total forestry costs constraintt
- q32_land(j)                              Land constraint
- q32_cdr_aff(j,emis_source_co2_forestry) 	Calculation of CDR from afforestation
- q32_carbon(j,c_pools)                    Forestry carbon stock calculation
+ q32_cost_fore_ac(i)                      Total forestry costs constraint (mio. USD)
+ q32_land(j)                              Land constraint (mio. ha)
+ q32_cdr_aff(j,emis_source_co2_forestry) 	Calculation of CDR from afforestation (Tg CO2-C)
+ q32_carbon(j,c_pools)                    Forestry carbon stock calculation (mio. tC)
  q32_diff                                 Aggregated difference in forestry land compared to previous timestep (mio. ha)
- q32_max_aff					                    Maximum total global afforestation
- q32_aff_pol(j)					                  Afforestation policy constraint
+ q32_max_aff					                    Maximum total global afforestation (mio. ha)
+ q32_aff_pol(j)					                  Afforestation policy constraint (mio. ha)
 ;
 
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_fore(t,i,type)                          Afforestation costs (Mio US$)
+ ov_cost_fore(t,i,type)                          Afforestation costs (mio. USD)
  ov32_land(t,j,land32,type)                      forestry land pools (mio. ha)
  ov_landdiff_forestry(t,type)                    aggregated difference in forestry land compared to previous timestep (mio. ha)
  ov_cdr_aff(t,j,emis_source_co2_forestry,type)   total CDR from afforestation (new and existing areas) between t+1 and t=sm_invest_horizon (Tg CO2-C)
- oq32_cost_fore_ac(t,i,type)                     total forestry costs constraintt
- oq32_land(t,j,type)                             land constraint
- oq32_cdr_aff(t,j,emis_source_co2_forestry,type) calculation of CDR from afforestation
- oq32_carbon(t,j,c_pools,type)                   forestry carbon stock calculation
+ oq32_cost_fore_ac(t,i,type)                     total forestry costs constraint (Mio USD)
+ oq32_land(t,j,type)                             land constraint (mio. ha)
+ oq32_cdr_aff(t,j,emis_source_co2_forestry,type) calculation of CDR from afforestation (Tg CO2-C)
+ oq32_carbon(t,j,c_pools,type)                   forestry carbon stock calculation (mio. tc)
  oq32_diff(t,type)                               aggregated difference in forestry land compared to previous timestep (mio. ha)
- oq32_max_aff(t,type)                            maximum total global afforestation
- oq32_aff_pol(t,j,type)                          afforestation policy constraint
+ oq32_max_aff(t,type)                            maximum total global afforestation (mio. ha)
+ oq32_aff_pol(t,j,type)                          afforestation policy constraint (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
