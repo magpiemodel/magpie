@@ -41,7 +41,7 @@ parameters
  ov32_land(t,j,land32,type)                      forestry land pools (mio. ha)
  ov_landdiff_forestry(t,type)                    aggregated difference in forestry land compared to previous timestep (mio. ha)
  ov_cdr_aff(t,j,emis_source_co2_forestry,type)   total CDR from afforestation (new and existing areas) between t+1 and t=sm_invest_horizon (Tg CO2-C)
- oq32_cost_fore_ac(t,i,type)                     total forestry costs constraint (Mio USD)
+ oq32_cost_fore_ac(t,i,type)                     total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                             land constraint (mio. ha)
  oq32_cdr_aff(t,j,emis_source_co2_forestry,type) calculation of CDR from afforestation (Tg CO2-C)
  oq32_carbon(t,j,c_pools,type)                   forestry carbon stock calculation (mio. tc)
