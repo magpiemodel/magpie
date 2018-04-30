@@ -28,7 +28,7 @@ $ondelim
 $include "./modules/09_drivers/input/f09_pop_iso.csv"
 $offdelim;
 
-table f09_development_state(t_all,i,gdp_scen09) State of development as function of GDP in low, middle and high income (1)
+table f09_development_state(t_all,i,gdp_scen09) State of development as function of GDP in low middle and high income (1)
 $ondelim
 $include "./modules/09_drivers/input/f09_development_state.cs3"
 $offdelim;
