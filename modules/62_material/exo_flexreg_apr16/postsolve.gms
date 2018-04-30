@@ -1,5 +1,5 @@
 
-
+* Resetting the parameters based on each time step optimization to be used in next step.
 if (sum(sameas(t_past,t),1) = 1,
  p62_dem_material_last_historical(i,kall) = f62_dem_material(t,i,kall);
  p62_dem_food_last_historical(i)=  sum(kfo, vm_dem_food.l(i,kfo));
