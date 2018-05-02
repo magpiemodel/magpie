@@ -42,7 +42,7 @@ $setglobal c42_watdem_scenario  nocc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
 
-table f42_wat_req_kve(t_all,j,kve) LPJ annual water demand for irrigation (m^3 per ha per year)
+table f42_wat_req_kve(t_all,j,kve) LPJ annual water demand for irrigation per ha per year (m^3)
 $ondelim
 $include "./modules/42_water_demand/input/lpj_airrig.cs2"
 $offdelim
@@ -50,7 +50,7 @@ $offdelim
 $if "%c42_watdem_scenario%" == "nocc" f42_wat_req_kve(t_all,j,kve) = f42_wat_req_kve("y1995",j,kve);
 m_fillmissingyears(f42_wat_req_kve,"j,kve");
 
-parameter f42_wat_req_kli(kli) Average water requirements of livestock commodities per region (m^3 per ton DM per year)
+parameter f42_wat_req_kli(kli) Average water requirements of livestock commodities per region per tDM per year(m^3)
 /
 $ondelim
 $include "./modules/42_water_demand/input/f42_wat_req_fao.csv"
