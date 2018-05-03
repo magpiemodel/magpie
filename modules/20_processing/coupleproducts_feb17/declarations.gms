@@ -26,11 +26,11 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_dem_processing(t,i,kall,type)                         demand for processing use
+ ov_dem_processing(t,i,kall,type)                         demand for processing use (mio. tDM)
  ov20_dem_processing(t,i,processing_subst20,kpr,type)     demand for processing use by process
  ov20_secondary_substitutes(t,i,ksd,kpr,type)             substitutes for inferior secondary products (mio. tDM)
  ov_secondary_overproduction(t,i,kall,kpr,type)           overproduction of secondary couple products (mio. tDM)
- ov_cost_processing(t,i,type)                             processing costs (Million USD05)
+ ov_cost_processing(t,i,type)                             processing costs 2005 (mio. USD)
  oq20_processing(t,i,kpr,ksd,type)                        processing equation
  oq20_processing_aggregation_nocereals(t,i,kpr,type)      connecting processing activity to processing flows
  oq20_processing_aggregation_cereals(t,i,kcereals20,type) connecting processing activity to fooduse for milling

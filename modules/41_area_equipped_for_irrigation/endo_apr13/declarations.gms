@@ -29,9 +29,9 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_AEI(t,i,type)           irrigation expansion costs (mio. USD)
- ov41_cost_AEI_annuity(t,i,type) annuity costs of AEI expansion in the current timestep (mio. USD)
- ov41_AEI(t,j,type)              area equipped for irrigation in each gridcell (mio ha)
+ ov_cost_AEI(t,i,type)           Irrigation expansion costs (mio. USD)
+ ov41_cost_AEI_annuity(t,i,type) Annuity costs of AEI expansion in the current timestep (mio. USD)
+ ov41_AEI(t,j,type)              Area equipped for irrigation in each gridcell (mio ha)
  oq41_area_irrig(t,j,type)       irrigation area constraint
  oq41_cost_AEI_annuity(t,i,type) Calculation of annuity costs of AEI expansion
  oq41_cost_AEI(t,i,type)         Calculation of costs of irrigation area expansion
