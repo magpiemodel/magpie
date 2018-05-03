@@ -15,7 +15,7 @@
 
 
 *' The factor requirement costs `vm_cost_prod` are the product of the volume of production (area times yield) and fixed per tone factor costs.
-+' by multiplying the quantity of production with `vm_area` times `vm_yld`.
+*' by multiplying the quantity of production with `vm_area` times `vm_yld`.
 *' The crop-and-water specific factor costs per tone of production `f38_fac_req`
 *' are obtained from a cross-sectional regression linking part of value-added costs from GTAP6
 *' (see also and crop production and area harvested from FAO.
