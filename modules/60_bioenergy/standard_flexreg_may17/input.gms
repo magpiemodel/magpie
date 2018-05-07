@@ -9,7 +9,7 @@ scalars
   c60_biodem_level  bioenergy demand level (1: regional 0: global)  / 1 /
 ;
 
-$setglobal c60_2ndgen_biodem  SSP2-26-SPA0
+$setglobal c60_2ndgen_biodem  SSP2-Ref-SPA0
 *   options:  SSP1-Ref-SPA0, SSP2-Ref-SPA0, SSP5-Ref-SPA0,
 *             SSP1-26-SPA0, SSP1-37-SPA0, SSP1-45-SPA0,
 *             SSP2-26-SPA0, SSP2-37-SPA0, SSP2-45-SPA0, SSP2-60-SPA0,

@@ -15,12 +15,12 @@ parameters
 ;
 
 equations
- q52_co2c(j,emis_source_co2_land)             cellular aggregation of land pool emissions
+ q52_co2c_emis(j,emis_co2)             cellular aggregation of land pool emissions
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_carbon_stock(t,j,land,c_pools,type)   carbon in vegetation soil and litter for different land types (Mio tC)
- oq52_co2c(t,j,emis_source_co2_land,type) cellular aggregation of land pool emissions
+ ov_carbon_stock(t,j,land,c_pools,type) carbon in vegetation soil and litter for different land types (Mio tC)
+ oq52_co2c_emis(t,j,emis_co2,type)      cellular aggregation of land pool emissions
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
