@@ -9,7 +9,7 @@ variables
 ;
 
 positive variables
- vm_carbon_stock(j,land,c_pools)        "carbon stock in vegetation, soil and litter for different land types (Mio tC)"
+ vm_carbon_stock(j,land,c_pools)        carbon stock in vegetation soil and litter for different land types (Mio tC)
 ;
 
 parameters
@@ -26,7 +26,7 @@ equations
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov52_carbon_stock_diff(t,j,land,c_pools,type) difference in carbon stocks between current and previous time step (Mio tC)
- ov_carbon_stock(t,j,land,c_pools,type)        "carbon stock in vegetation soil and litter for different land types (Mio tC)"
+ ov_carbon_stock(t,j,land,c_pools,type)        carbon stock in vegetation soil and litter for different land types (Mio tC)
  oq52_co2c_emis(t,j,emis_co2,type)             calculation of annual CO2 emissions
  oq52_carbon_stock_diff(t,j,land,c_pools,type) calculation carbon stock difference
 ;
