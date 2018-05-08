@@ -17,6 +17,7 @@ equations
 
 parameters
  im_slaughter_feed_share(t_all,i,kap,attributes) share of feed that is incorprated in animal biomass (1)
+ im_livestock_productivity(t_all,i,sys)                  productivity indicator for livestock production (t FM per animal)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

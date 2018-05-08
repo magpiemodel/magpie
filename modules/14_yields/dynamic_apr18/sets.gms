@@ -4,8 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-im_slaughter_feed_share(t_all,i,kap,attributes) =
-             f70_slaughter_feed_share(t_all,i,kap,attributes,"%c70_feed_scen%");
-
-im_livestock_productivity(t_all,i,sys) =
-             f70_livestock_productivity(t_all,i,sys,"%c70_feed_scen%");
+sets
+  ltype14 calibration land type
+       / crop, past /
+;
