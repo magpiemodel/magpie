@@ -1,3 +1,4 @@
+option nlp = conopt
 
 * retrieving interfaces from MAgPIE
 *calculate prices for providing 1 kcal per day of one commodity
