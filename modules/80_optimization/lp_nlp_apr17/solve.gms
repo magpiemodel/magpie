@@ -5,9 +5,41 @@
 *** |  Contact: magpie@pik-potsdam.de
 **************start solve loop**************
 
-
 s80_counter = 0;
 p80_modelstat(t) = 1;
+
+*** solver settings 
+
+magpie.optfile   = s80_optfile ;
+magpie.scaleopt  = 1 ;
+magpie.solprint  = 0 ;
+magpie.holdfixed = 1 ;
+
+* linear solver
+option lp         = cplex ;
+option qcp        = cplex ;
+$onecho > cplex.opt
+$offecho
+
+* non-linear solver
+$ifthen "%c80_nlp_solver%" == "conopt3"
+  option nlp        = conopt ;
+$elseif "%c80_nlp_solver%" == "conopt4"
+  option nlp        = conopt4;
+$elseif "%c80_nlp_solver%" == "conopt4+cplex"
+  option nlp        = conopt4;
+  s80_add_cplex     = 1;
+$elseif "%c80_nlp_solver%" == "conopt4+conopt3"
+  option nlp        = conopt4; 
+  s80_add_conopt3   = 1;
+$endif
+
+$onecho > conopt4.opt
+Lin_Method = 1
+Tol_Obj_Change = 1.0e-5
+Lim_Iteration = 1000
+$offecho
+
 
 repeat(
 
@@ -90,6 +122,14 @@ $batinclude "./modules/include.gms" nl_relax
 
 *' @stop
 
+* if s80_add_conopt3 is 1 add additional solve statement for conopt3
+    if(("%s80_add_conopt3%" == 1),
+      display "Additional solve with CONOPT3!";
+      option nlp = conopt;
+      solve magpie USING nlp MINIMIZING vm_cost_glo;
+      option nlp = conopt4;
+    );
+
 * if solve stopped with an error, try it again with conopt3
   if((magpie.modelstat = 13),
     display "WARNING: Modelstat 13 | retry with CONOPT3!";
@@ -116,6 +156,22 @@ $batinclude "./modules/include.gms" nl_relax
   until (p80_modelstat(t) <= 2 or s80_counter >= s80_maxiter)
 );
 
+* if s80_add_cplex is 1 add additional solve statement for cplex
+    if(("%s80_add_cplex%" == 1),
+      magpie.trylinear = 1;
+      $batinclude "./modules/include.gms" nl_fix
+      solve magpie USING nlp MINIMIZING vm_cost_glo;
+      $batinclude "./modules/include.gms" nl_release
+
+      if((magpie.modelstat=1 or magpie.modelstat = 7),
+        vm_cost_glo.up = vm_cost_glo.l;
+        solve magpie USING nlp MINIMIZING vm_landdiff;
+        vm_cost_glo.up = Inf;
+      );
+	  
+	  magpie.trylinear = 0;
+    );
+
 if ((p80_modelstat(t) < 3),
   put_utility 'shell' / 'mv -f magpie_p.gdx magpie_' t.tl:0'.gdx';
 );
@@ -124,5 +180,6 @@ if ((p80_modelstat(t) > 2 and p80_modelstat(t) ne 7),
   Execute_Unload "fulldata.gdx";
   abort "no feasible solution found!";
 );
+
 
 ***************end solve loop***************

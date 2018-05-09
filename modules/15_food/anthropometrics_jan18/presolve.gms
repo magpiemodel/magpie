@@ -1,3 +1,4 @@
+option nlp = conopt
 
 if (sum(sameas(t_past,t),1) = 1,
 
