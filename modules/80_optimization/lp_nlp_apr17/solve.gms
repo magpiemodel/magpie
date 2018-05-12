@@ -123,7 +123,7 @@ $batinclude "./modules/include.gms" nl_relax
 *' @stop
 
 * if s80_add_conopt3 is 1 add additional solve statement for conopt3
-    if(("%s80_add_conopt3%" == 1),
+    if((s80_add_conopt3 = 1),
       display "Additional solve with CONOPT3!";
       option nlp = conopt;
       solve magpie USING nlp MINIMIZING vm_cost_glo;
@@ -157,20 +157,24 @@ $batinclude "./modules/include.gms" nl_relax
 );
 
 * if s80_add_cplex is 1 add additional solve statement for cplex
-    if(("%s80_add_cplex%" == 1),
-      magpie.trylinear = 1;
-      $batinclude "./modules/include.gms" nl_fix
-      solve magpie USING nlp MINIMIZING vm_cost_glo;
-      $batinclude "./modules/include.gms" nl_release
+if((s80_add_cplex = 1),
+     
+magpie.trylinear = 1;
 
-      if((magpie.modelstat=1 or magpie.modelstat = 7),
-        vm_cost_glo.up = vm_cost_glo.l;
-        solve magpie USING nlp MINIMIZING vm_landdiff;
-        vm_cost_glo.up = Inf;
-      );
+$batinclude "./modules/include.gms" nl_fix
+
+solve magpie USING nlp MINIMIZING vm_cost_glo;
+
+$batinclude "./modules/include.gms" nl_release
+
+if((magpie.modelstat=1 or magpie.modelstat = 7),
+  vm_cost_glo.up = vm_cost_glo.l;
+  solve magpie USING nlp MINIMIZING vm_landdiff;
+  vm_cost_glo.up = Inf;
+);
 	  
-	  magpie.trylinear = 0;
-    );
+magpie.trylinear = 0;
+);
 
 if ((p80_modelstat(t) < 3),
   put_utility 'shell' / 'mv -f magpie_p.gdx magpie_' t.tl:0'.gdx';

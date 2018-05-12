@@ -10,23 +10,23 @@ $title magpie
 * 
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev29_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
 * md5sum: 567e160f9b7585716f86b68c3b1f3f3e
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* Repository: /p/projects/landuse/data/input/archive
 * 
 * Used data set: rev3.15_8a828c6ed5004e77d1ba2025e8ea2261_magpie.tgz
 * md5sum: 2c6009e8dbfb9f328261b238bf2a43ac
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Used data set: rev3.15_8a828c6ed5004e77d1ba2025e8ea2261_validation.tgz
 * md5sum: 25f0922007290714128a42527ced7570
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Used data set: additional_data_rev3.28.tgz
 * md5sum: 7f08b001444b565472e8d769724dc32b
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* Repository: /p/projects/landuse/data/input/archive
 * 
 * Used data set: npi_ndc_base_SSP2_mixed.tgz
-* md5sum: db502b45079bcec923b1b36c2cb2a88c
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* md5sum: 7c2b9e1fce6a4fdb957e3994a321a2e8
+* Repository: /p/projects/landuse/data/input/archive
 * 
 * Low resolution: h200
 * High resolution: 0.5
@@ -59,7 +59,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Mon May  7 13:00:26 2018
+* Last modification (input data): Thu May 10 09:09:27 2018
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -95,7 +95,7 @@ scalars
 $setglobal drivers  aug17
 $setglobal land  feb15
 $setglobal costs  default
-$setglobal interest_rate  glo_jan16
+$setglobal interest_rate  reg_feb18
 $setglobal tc  endo_JUN16
 $setglobal yields  biocorrect
 
@@ -106,7 +106,7 @@ $setglobal production  flexreg_apr16
 $setglobal residues  flexreg_apr16
 $setglobal processing  coupleproducts_feb17
 
-$setglobal trade  selfsuff_flexreg
+$setglobal trade  selfsuff_flexreg_cost
 
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
@@ -166,24 +166,6 @@ $batinclude "./modules/include.gms" equations
 
 *******************MODEL DEFINITION & SOLVER OPTIONS****************************
 model magpie / all - m15_food_demand /;
-
-magpie.optfile   = 1 ;
-magpie.scaleopt  = 1 ;
-magpie.solprint  = 0 ;
-magpie.holdfixed = 1 ;
-
-option lp         = cplex ;
-option qcp        = cplex ;
-$onecho > cplex.opt
-
-$offecho
-
-option nlp        = conopt4 ;
-$onecho > conopt4.opt
-Lin_Method = 1
-Tol_Obj_Change = 1.0e-5
-Lim_Iteration = 1000
-$offecho
 
 option iterlim    = 1000000 ;
 option reslim     = 1000000 ;
