@@ -5,6 +5,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-if((ord(t)=1),
-  vm_yld.fx(j,"pasture",w) =  i14_yields("y1995",j,"pasture",w);
-);
+*if((ord(t)=1),
+*  vm_yld.fx(j,"pasture",w) =  i14_yields("y1995",j,"pasture",w);
+*);

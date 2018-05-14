@@ -9,12 +9,12 @@
 vm_yld.lo(j,kve,w) = 0;
 vm_yld.up(j,kve,w) = Inf;
 
-v14_ani_stocks.lo(i,sys) = 0;
-v14_ani_stocks.up(i,sys) = Inf;
-
-v14_graz_ani.lo(i) = 0;
-v14_graz_ani.up(i) = Inf;
-
-v14_incr_graz_ani.lo(i) = 0;
-v14_incr_graz_ani.up(i) = Inf;
+*v14_ani_stocks.lo(i,sys) = 0;
+*v14_ani_stocks.up(i,sys) = Inf;
+*
+*v14_graz_ani.lo(i) = 0;
+*v14_graz_ani.up(i) = Inf;
+*
+*v14_incr_graz_ani.lo(i) = 0;
+*v14_incr_graz_ani.up(i) = Inf;
 

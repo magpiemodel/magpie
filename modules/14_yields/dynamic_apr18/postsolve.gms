@@ -6,12 +6,12 @@
 
 
 pc14_pyld(j,w) = vm_yld.l(j,"pasture",w); 
-pc14_graz_ani(i) = v14_graz_ani.l(i);
 
 p14_ani_stocks(t,i,sys) = v14_ani_stocks.l(i,sys);
 pc14_dairy_cattle(i) = p14_ani_stocks(t,i,"sys_dairy");
 pc14_beef_cattle(i) = p14_ani_stocks(t,i,"sys_beef");
 
+pc14_graz_ani(i) = v14_graz_ani.l(i);
 
 
 
