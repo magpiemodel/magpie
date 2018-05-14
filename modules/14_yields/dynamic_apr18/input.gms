@@ -19,11 +19,6 @@ $ondelim
 $include "./modules/14_yields/input/f14_yld_calib.csv"
 $offdelim;
 
-table f14_cattle_herd_hist(t_past,i) Regional cattle herd for historical time steps (million animals)
-$ondelim
-$include "./modules/14_yields/input/f14_cattle_herd_hist.csv"
-$offdelim;
-
 table f14_yields(t_all,j,kve,w) LPJ potential yields per cell (rainfed and irrigated) [ton dry matter per ha]
 $ondelim
 $include "./modules/14_yields/input/lpj_yields.cs3"
