@@ -20,7 +20,7 @@ load(paste0(outputdir, "/config.Rdata"))
 gdx	<- path(outputdir,"fulldata.gdx")
 rds <- paste0(outputdir, "/report.rds")
 runstatistics <- paste0(outputdir,"/runstatistics.rda")
-resultsarchive <- "/p/projects/rd3mod/www/magpie"
+resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 ###############################################################################
 
 
@@ -37,7 +37,7 @@ if(file.exists(runstatistics) & dir.exists(resultsarchive)) {
     saveRDS(q,file=paste0(resultsarchive,"/",stats$id,".rds"))
     cwd <- getwd()
     setwd(resultsarchive)
-    system("ls *.rds > files")
+    system("ls 1*.rds > files")
     setwd(cwd)
   }
 }
