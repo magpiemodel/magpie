@@ -134,7 +134,7 @@ m15_food_demand.holdfixed = 1 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_dem_food(t,i,kall,type)                            Demand for food (Mt DM)
+ ov_dem_food(t,i,kall,type)                            Demand for food (mio. tDM)
  ov15_kcal_regression(t,iso,kfo,type)                  Uncalibrated regression estimates of calorie demand (Kcal per cap per day)
  ov15_kcal_regression_total(t,iso,type)                Uncalibrated regression estimates of  total per capita calories (Kcal per cap per day)
  ov15_regression(t,iso,demand_subsystem15,type)        Uncalibrated regression estimates of kcal shares (-)

@@ -18,8 +18,8 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov43_watavail(t,wat_src,j,type)  Water available from different sources (mio. m^3)
- oq43_water(t,j,type)             Local seasonal water constraints (mio. m^3)
+ ov43_watavail(t,wat_src,j,type) Water available from different sources (mio. m^3)
+ oq43_water(t,j,type)            Local seasonal water constraints (mio. m^3)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

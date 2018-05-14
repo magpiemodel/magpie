@@ -264,7 +264,7 @@ secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, 
 secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, urban_soilc,
      other_vegc, other_litc, other_soilc /
 
-   emis_source_co2_land(emis_source_cell) land pool CO2 emission sources
+   emis_co2(emis_source_cell) land pool CO2 emission sources
    / crop_vegc, crop_litc, crop_soilc,
      past_vegc, past_litc, past_soilc,
      forestry_vegc, forestry_litc, forestry_soilc,
@@ -283,7 +283,7 @@ secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, 
 
 ***RELATIONSHIPS BETWEEN DIFFERENT SETS***
 
-  emis_co2_to_land(emis_source_co2_land,land,c_pools)
+  emis_land(emis_co2,land,c_pools)
   /crop_vegc        . (crop) . (vegc)
    crop_litc        . (crop) . (litc)
    crop_soilc       . (crop) . (soilc)

@@ -11,7 +11,7 @@ variables
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_transp(t,j,k,type) 				transportation costs (mio. USD)
+ ov_cost_transp(t,j,k,type) transportation costs (mio. USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

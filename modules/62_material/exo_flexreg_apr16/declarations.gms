@@ -24,7 +24,7 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_dem_material(t,i,kall,type)               Demand for material usage (mio. tDM)
- oq62_dem_material(t,i,kall,type)             Estimating material demand (mio. tDM)
+ ov_dem_material(t,i,kall,type)   Demand for material usage (mio. tDM)
+ oq62_dem_material(t,i,kall,type) Estimating material demand (mio. tDM)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
