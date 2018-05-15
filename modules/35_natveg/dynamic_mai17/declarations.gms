@@ -9,39 +9,39 @@ scalars
 ;
 
 parameters
- p35_carbon_density_secdforest(t,j,land35,c_pools) Carbon density secdforest (tC per ha)
- p35_carbon_density_other(t,j,land35,c_pools) Carbon density other land (tC per ha)
- i35_secdforest(j,ac)      inital secdforest [mio. ha]
- i35_other(j,ac)          inital other land [mio. ha]
- p35_secdforest(t,j,ac,when)   secdforest per age class before and after optimization (mio. ha)
- p35_other(t,j,ac,when)   other land per age class before and after optimization (mio. ha)
- pc35_secdforest(j,land35)   secdforest per age class (mio. ha)
- pc35_other(j,land35)   other land per age class (mio. ha)
- pc35_natveg_old(j) natveg area (mio. ha)
- p35_protect_shr(t,j,prot_type) protection share for primforest secdforest and other land
- p35_save_primforest(t,j) save primforest (mio. ha)
- p35_save_secdforest(t,j) save secdforest (mio. ha)
- p35_save_other(t,j) save other land (mio. ha)
- p35_recovered_forest(t,j,ac) recovered forest (mio. ha)
- p35_min_forest(t,j) Mha
- p35_min_cstock(t,j) Mha
+ p35_carbon_density_secdforest(t,j,land35,c_pools) carbon density secdforest (tC per ha)
+ p35_carbon_density_other(t,j,land35,c_pools) 	   carbon density other land (tC per ha)
+ i35_secdforest(j,ac)							   inital secdforest (mio. ha)
+ i35_other(j,ac)								   inital other land (mio. ha)
+ p35_secdforest(t,j,ac,when)  secdforest per age class before and after optimization (mio. ha)
+ p35_other(t,j,ac,when)   	  other land per age class before and after optimization (mio. ha)
+ pc35_secdforest(j,land35)    secdforest per aggregated age class (mio. ha)
+ pc35_other(j,land35)   	  other land per aggregated age class (mio. ha)
+ pc35_natveg_old(j) 		  natveg area in highest age class (mio. ha)
+ p35_protect_shr(t,j,prot_type) protection share for primforest secdforest and other land (1)
+ p35_save_primforest(t,j) 		primforest protection (mio. ha)
+ p35_save_secdforest(t,j)		secdforest protection (mio. ha)
+ p35_save_other(t,j)			other land protection (mio. ha)
+ p35_recovered_forest(t,j,ac) 	recovered forest (mio. ha)
+ p35_min_forest(t,j) 			minimum forest land stock (Mha)
+ p35_min_cstock(t,j) 			minimum natveg carbon stock (MtC)
 ;
 
 equations
  q35_land_secdforest(j)       		   secdforest land pool calculation
  q35_land_other(j)       		       other land pool calculation
- q35_carbon_primforest(j,c_pools)      primforest carbon content calculation
- q35_carbon_secdforest(j,c_pools)      secdforest carbon content calculation
- q35_carbon_other(j,c_pools)      	   other land carbon content calculation
- q35_diff                aggregated difference in other land compared to previous timestep (mio. ha)
- q35_min_forest(j)			minimum forest constraint
- q35_min_cstock(j)			minimum	cstock constraint
+ q35_carbon_primforest(j,c_pools)      primforest carbon stock calculation
+ q35_carbon_secdforest(j,c_pools)      secdforest carbon stock calculation
+ q35_carbon_other(j,c_pools)      	   other land carbon stock calculation
+ q35_diff                			   difference in natveg land
+ q35_min_forest(j)					   minimum forest land constraint
+ q35_min_cstock(j)					   minimum natveg carbon stock constraint
 ;
 
 positive variables
-  v35_secdforest(j,land35) secdforest (mio. ha)
-  v35_other(j,land35)      other land (mio. ha)
-  vm_landdiff_natveg       aggregated difference in other land compared to previous timestep (mio. ha)
+  v35_secdforest(j,land35) detailed stock of secdforest (mio. ha)
+  v35_other(j,land35)      detailed stock of other land (mio. ha)
+  vm_landdiff_natveg       aggregated difference in natveg land compared to previous timestep (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
