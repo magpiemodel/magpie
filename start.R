@@ -37,9 +37,9 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
     module <- gsub("\\.R$","",grep("\\.R$",list.files(Rfolder), value=TRUE))
     #sort modules based on order.cfg
     module <- intersect(union(order,module),module)
-    cat("\n\n",title,":\n\n")
+    cat("\n",title,":\n", sep="")
     cat(paste(1: length(module), gsub("_"," ",module,fixed=TRUE), sep=": " ),sep="\n")
-    cat("\nNumber: ")
+    cat("Number: ")
     identifier <- get_line()
     identifier <- as.numeric(strsplit(identifier,",")[[1]])
     if (any(!(identifier %in% 1:length(module)))) stop("This choice (",identifier,") is not possible. Please type in a number between 1 and ",length(module))
@@ -48,19 +48,19 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 
   choose_submit <- function(title="Please choose run submission type") {
     slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
-    modes <- c("Direct execution", 
-               "Background execution", 
-               "SLURM submission", 
+    modes <- c("Direct execution",
+               "Background execution",
+               "SLURM submission",
                "SLURM submission (16GB memory)",
                "SLURM submission (32GB memory)",
-               "SLURM submission (medium)", 
+               "SLURM submission (medium)",
                "SLURM submission (16GB memory, medium)",
                "SLURM submission (32GB memory, medium)",
                "Debug mode")
     if(!slurm) modes <- modes[-3:-8]
-    cat("\n\n",title,":\n\n")
+    cat("\n",title,":\n", sep="")
     cat(paste(1:length(modes), modes, sep=": " ),sep="\n")
-    cat("\nNumber: ")
+    cat("Number: ")
     identifier <- get_line()
     identifier <- as.numeric(strsplit(identifier,",")[[1]])
     if(slurm) {
@@ -134,13 +134,13 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 
 
   if(is.null(runscripts)) runscripts <- choose_module("./scripts/start",
-                                                      "Please choose the runscript to be used for starting model runs")
-  if(is.null(submit))     submit     <- choose_submit("Please choose a run submission type")
+                                                      "Choose start script")
+  if(is.null(submit))     submit     <- choose_submit("Choose submission type")
 
   runsubmit(runscripts, submit)
 }
 
 
 runscripts <- submit <- NULL
-readArgs("runscripts","submit")
+readArgs("runscripts","submit", .silent=TRUE)
 runOutputs(runscripts=runscripts, submit=submit)
