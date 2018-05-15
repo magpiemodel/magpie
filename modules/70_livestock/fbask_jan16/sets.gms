@@ -14,6 +14,13 @@ sets
    sys
      /sys_pig, sys_beef, sys_chicken, sys_hen, sys_dairy/
 
+   sys_meat(sys)
+     /sys_pig, sys_beef, sys_chicken/
+
+   sys_nonmeat(sys)
+     /sys_hen, sys_dairy/
+
+
   sys_to_kli(sys,kli)
   /sys_pig    . livst_pig
    sys_beef    . livst_rum
