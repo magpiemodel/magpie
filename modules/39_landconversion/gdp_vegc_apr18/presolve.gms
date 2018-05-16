@@ -7,7 +7,6 @@
 pc39_establish_costs(i,land) = p39_establish_costs(t,i,land);
 pc39_landclear_costs(j,land) = p39_landclear_costs(t,j,land);
 
-p39_cost_landcon_past(t,j,land)$(ord(t) = 1) = 0;
 pc39_cost_landcon_past(j,land) = p39_cost_landcon_past(t,j,land);
 
 display pc39_establish_costs;

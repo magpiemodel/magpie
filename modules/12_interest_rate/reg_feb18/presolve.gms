@@ -5,4 +5,3 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 pm_interest(i) = p12_interest(t,i);
-pm_annuity_due(i) = p12_annuity_due(t,i);
