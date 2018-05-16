@@ -29,13 +29,12 @@ q13_cost_tc(i2) ..
 *' for the same overall intensity boost.
 
 q13_tech_cost_annuity(i2) ..
- v13_tech_cost_annuity(i2) =e= (vm_tau(i2)/pc13_tau(i2)-1) * v13_cost_tc(i2)/pm_annuity_due(i2);
+ v13_tech_cost_annuity(i2) =e= (vm_tau(i2)/pc13_tau(i2)-1) * v13_cost_tc(i2)*pm_interest(i2);
 
 *' In order to get the full investments required for the desired intensification
 *' the relative technological change costs are multiplied with the given
-*' intensification rate. These full costs are then distributed over an estimated
-*' planning horizon `sm_invest_horizon` with the annuity approach and the
-*' corresponding annuity factor `pm_annuity_due(i)`.
+*' intensification rate. These full costs are then distributed over an infinite time horizon
+*' by multiplication with the interest rate `pm_interest(i)` (annuity with infinite time horizon).
 
 q13_tech_cost(i2) ..
   vm_tech_cost(i2) =e= v13_tech_cost_annuity(i2) + pc13_tech_cost_past(i2);
