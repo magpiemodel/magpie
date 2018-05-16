@@ -20,13 +20,13 @@ q32_cost_fore_ac(i2) .. vm_cost_fore(i2) =e=
 *****forestry emissions seen in maccs module****************************************
 q32_cdr_aff(j2,emis_source_co2_forestry) ..
 vm_cdr_aff(j2,emis_source_co2_forestry) =e=
-sum((ac,emis_co2_to_forestry(emis_source_co2_forestry,c_pools))$(ord(ac) > 1 AND (ord(ac)-1) <= sm_invest_horizon/5),
+sum((ac,emis_co2_to_forestry(emis_source_co2_forestry,c_pools))$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planing_horizon/5),
 v32_land(j2,"new") *
 (sum(ct, pm_carbon_density_ac(ct,j2,ac,c_pools)) -
 sum(ct, pm_carbon_density_ac(ct,j2,ac-1,c_pools))));
 
 *' interface `vm_cdr_aff` calculates Carbon dioxide removal from afforestation
-*' by (new and existing forest areas) between t+1 and t=`sm_invest_horizon`.
+*' by (new and existing forest areas) between t+1 and t=`s32_planing_horizon`.
 *' This is calculated from the forestry land CO2 emissions of the "Newly" planted
 *' trees multiplied by the Difference between the age-class and carbon pool
 *' dependent carbon density of consecutive age classes.

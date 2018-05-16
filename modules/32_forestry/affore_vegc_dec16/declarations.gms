@@ -21,7 +21,7 @@ positive variables
  vm_cost_fore(i)                        Afforestation costs (mio. USD)
  v32_land(j,land32)                     Forestry land pools (mio. ha)
  vm_landdiff_forestry                   Aggregated difference in forestry land compared to previous timestep (mio. ha)
- vm_cdr_aff(j,emis_source_co2_forestry) Total CDR from afforestation (new and existing areas) between t+1 and t=sm_invest_horizon CO2-C (mio. t)
+ vm_cdr_aff(j,emis_source_co2_forestry) Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon CO2-C (mio. t)
 ;
 
 equations
@@ -40,7 +40,7 @@ parameters
  ov_cost_fore(t,i,type)                          Afforestation costs (mio. USD)
  ov32_land(t,j,land32,type)                      Forestry land pools (mio. ha)
  ov_landdiff_forestry(t,type)                    Aggregated difference in forestry land compared to previous timestep (mio. ha)
- ov_cdr_aff(t,j,emis_source_co2_forestry,type)   Total CDR from afforestation (new and existing areas) between t+1 and t=sm_invest_horizon CO2-C (mio. t)
+ ov_cdr_aff(t,j,emis_source_co2_forestry,type)   Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon CO2-C (mio. t)
  oq32_cost_fore_ac(t,i,type)                     Total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                             Land constraint (mio. ha)
  oq32_cdr_aff(t,j,emis_source_co2_forestry,type) Calculation of CDR from afforestation in terms of CO2-C (mio. t)

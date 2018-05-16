@@ -4,7 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-m_annuity_costs_update(p13_tech_cost_past(t2,i), v13_tech_cost_annuity.l(i), sm_invest_horizon)
+p13_tech_cost_past(t2,i) = p13_tech_cost_past(t2,i) + v13_tech_cost_annuity.l(i);
 
 if((ord(t)>1),
  pc13_tcguess(i) = (vm_tau.l(i)/pc13_tau(i))**(1/m_yeardiff(t)) - 1;

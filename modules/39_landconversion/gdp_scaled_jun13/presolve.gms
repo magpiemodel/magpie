@@ -6,5 +6,4 @@
 
 pc39_lndcon_costs(i,land) = p39_lndcon_costs(t,i,land);
 
-p39_cost_landcon_past(t,j,land)$(ord(t) = 1) = 0;
 pc39_cost_landcon_past(j,land) = p39_cost_landcon_past(t,j,land);

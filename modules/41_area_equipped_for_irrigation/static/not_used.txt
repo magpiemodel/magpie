@@ -4,5 +4,4 @@
 # |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
-sm_invest_horizon, input, not needed
-pm_annuity_due, input, not needed
+pm_interest, input, not needed
