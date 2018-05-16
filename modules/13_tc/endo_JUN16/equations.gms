@@ -29,7 +29,8 @@ q13_cost_tc(i2) ..
 *' for the same overall intensity boost.
 
 q13_tech_cost_annuity(i2) ..
- v13_tech_cost_annuity(i2) =e= (vm_tau(i2)/pc13_tau(i2)-1) * v13_cost_tc(i2)*pm_interest(i2);
+ v13_tech_cost_annuity(i2) =e= (vm_tau(i2)/pc13_tau(i2)-1) * v13_cost_tc(i2)
+                               * pm_interest(i2);
 
 *' In order to get the full investments required for the desired intensification
 *' the relative technological change costs are multiplied with the given
