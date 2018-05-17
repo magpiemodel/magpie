@@ -37,10 +37,9 @@
 *' Components of regional costs are:
 *' Factor costs [38_factor_costs]
 *' land conversion costs [39_landconversion]
-*' transportation costs [40_transport]
+*' Transportation costs [40_transport]
 *' Technological costs [13_tc]
 *' Inorganic fertilizers [50_nr_soil_budget]
-*' Minearal fertilizers [54_phosphorous]
 *' Emission costs [56_ghg_policy]
 *' Rewareds for CDR from afforestation (Benefits as negative costs) [56_ghg_policy]
 *' Abatement costs [57_maccs]
