@@ -16,9 +16,9 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_glo(t,type)     total costs of production         (mio. USD)
- ov11_cost_reg(t,i,type) regional costs                    (mio. USD)
- oq11_cost_glo(t,type)   objective function                (mio. USD)
- oq11_cost_reg(t,i,type) regional cost constraint          (mio. USD)
+ ov_cost_glo(t,type)     total costs of production (mio. USD)
+ ov11_cost_reg(t,i,type) regional costs            (mio. USD)
+ oq11_cost_glo(t,type)   objective function        (mio. USD)
+ oq11_cost_reg(t,i,type) regional cost constraint  (mio. USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

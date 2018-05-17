@@ -33,7 +33,11 @@ equations
  q35_carbon_primforest(j,c_pools)      primforest carbon stock calculation
  q35_carbon_secdforest(j,c_pools)      secdforest carbon stock calculation
  q35_carbon_other(j,c_pools)      	   other land carbon stock calculation
- q35_diff                			   difference in natveg land
+ q35_landdiff              			   difference in natveg land
+ q35_other_expansion(j,land35)		   other land expansion
+ q35_other_reduction(j,land35)		   other land reduction
+ q35_secdforest_reduction(j,land35)   secdforest reduction
+ q35_primforest_reduction(j)   	   primforest reduction
  q35_min_forest(j)					   minimum forest land constraint
  q35_min_cstock(j)					   minimum natveg carbon stock constraint
 ;
@@ -42,20 +46,32 @@ positive variables
   v35_secdforest(j,land35) detailed stock of secdforest (mio. ha)
   v35_other(j,land35)      detailed stock of other land (mio. ha)
   vm_landdiff_natveg       aggregated difference in natveg land compared to previous timestep (mio. ha)
+  v35_other_expansion(j,land35) other land expansion compared to previous timestep (mio. ha)
+  v35_other_reduction(j,land35) other land reduction compared to previous timestep (mio. ha)
+  v35_secdforest_reduction(j,land35) secdforest reduction compared to previous timestep (mio. ha)
+  v35_primforest_reduction(j) primforest reduction compared to previous timestep (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov35_secdforest(t,j,land35,type)         detailed stock of secdforest (mio. ha)
- ov35_other(t,j,land35,type)              detailed stock of other land (mio. ha)
- ov_landdiff_natveg(t,type)               aggregated difference in natveg land compared to previous timestep (mio. ha)
- oq35_land_secdforest(t,j,type)           secdforest land pool calculation
- oq35_land_other(t,j,type)                other land pool calculation
- oq35_carbon_primforest(t,j,c_pools,type) primforest carbon stock calculation
- oq35_carbon_secdforest(t,j,c_pools,type) secdforest carbon stock calculation
- oq35_carbon_other(t,j,c_pools,type)      other land carbon stock calculation
- oq35_diff(t,type)                        difference in natveg land
- oq35_min_forest(t,j,type)                minimum forest land constraint
- oq35_min_cstock(t,j,type)                minimum natveg carbon stock constraint
+ ov35_secdforest(t,j,land35,type)            detailed stock of secdforest (mio. ha)
+ ov35_other(t,j,land35,type)                 detailed stock of other land (mio. ha)
+ ov_landdiff_natveg(t,type)                  aggregated difference in natveg land compared to previous timestep (mio. ha)
+ ov35_other_expansion(t,j,land35,type)      other land expansion compared to previous timestep (mio. ha)
+ ov35_other_reduction(t,j,land35,type)      other land reduction compared to previous timestep (mio. ha)
+ ov35_secdforest_reduction(t,j,land35,type) secdforest reduction compared to previous timestep (mio. ha)
+ ov35_primforest_reduction(t,j,type)        primforest reduction compared to previous timestep (mio. ha)
+ oq35_land_secdforest(t,j,type)              secdforest land pool calculation
+ oq35_land_other(t,j,type)                   other land pool calculation
+ oq35_carbon_primforest(t,j,c_pools,type)    primforest carbon stock calculation
+ oq35_carbon_secdforest(t,j,c_pools,type)    secdforest carbon stock calculation
+ oq35_carbon_other(t,j,c_pools,type)         other land carbon stock calculation
+ oq35_landdiff(t,type)                       difference in natveg land
+ oq35_other_expansion(t,j,land35,type)      other land expansion
+ oq35_other_reduction(t,j,land35,type)      other land reduction
+ oq35_secdforest_reduction(t,j,land35,type) secdforest reduction
+ oq35_primforest_reduction(t,j,type)        primforest reduction
+ oq35_min_forest(t,j,type)                   minimum forest land constraint
+ oq35_min_cstock(t,j,type)                   minimum natveg carbon stock constraint
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
