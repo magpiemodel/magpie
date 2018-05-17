@@ -5,7 +5,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
- s32_shift                 Number of 5-year age-classes corresponding to current time step length
+ s32_shift                 Number of 5-year age-classes corresponding to current time step length (1)
 ;
 
 parameters
