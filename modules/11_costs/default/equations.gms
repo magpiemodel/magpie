@@ -4,8 +4,13 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @equations
+
  q11_cost_glo .. vm_cost_glo =e=
                           sum(i2, v11_cost_reg(i2));
+
+*' The global costs of production are represented by the sum of
+*' regional production costs of different production activities.
 
  q11_cost_reg(i2) .. v11_cost_reg(i2)
                    =e=
@@ -25,3 +30,23 @@
                    + vm_cost_bioen(i2)
                    + vm_cost_processing(i2)
                    ;
+
+*' Total regional production cost calculation is based on the sum total of different
+*' MAgPIE production activities. These individual costs are calculated by various
+*' cost interfaces which are in turn calculated inside their respective modules.
+*' Components of regional costs are:
+*' Factor costs [38_factor_costs]
+*' land conversion costs [39_landconversion]
+*' transportation costs [40_transport]
+*' Technological costs [13_tc]
+*' Inorganic fertilizers [50_nr_soil_budget]
+*' Minearal fertilizers [54_phosphorous]
+*' Emission costs [56_ghg_policy]
+*' Rewareds for CDR from afforestation (Benefits as negative costs) [56_ghg_policy]
+*' Abatement costs [57_maccs]
+*' Irrigation expansion costs [41_area_equipped_for_irrigation]
+*' Trade costs (Transport and bilateral trade) [21_trade]
+*' Forestry related costs (afforestation) [32_forestry]
+*' Carbon dioxide removal costs [58_carbon_removal]
+*' Bioenergy costs [60_bioenergy]
+*' Processing costs [20_processing]
