@@ -12,7 +12,7 @@ scalars
 ;
 
 
-$setglobal c80_nlp_solver  conopt4
+$setglobal c80_nlp_solver  conopt4+conopt3
 *   options:   (conopt3):         conopt3
 *              (conopt4):         conopt4
 *              (conopt4+cplex):   conopt4 followed by cplex with landdiff optimization 
