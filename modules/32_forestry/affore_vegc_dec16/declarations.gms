@@ -5,7 +5,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
- s32_shift                 Number of 5-year age-classes corresponding to current time step length
+ s32_shift                 Number of 5-year age-classes corresponding to current time step length (1)
 ;
 
 parameters
@@ -13,7 +13,7 @@ parameters
  p32_land(t,j,ac,when)                  Forestry land for each cell wood type and age class before and after optimization (mio. ha)
  pc32_land(j,land32)                    Forestry land per forestry land type initialization of the optimization (mio. ha)
  p32_aff_pot(t,j)                       Potential afforestation area (mio. ha)
- p32_aff_pol_timestep(t,j)			        NDC afforestation per time step (mio. ha)
+ p32_aff_pol_timestep(t,j)			        Nationally Determined Contributions i.e. NDC afforestation per time step (mio. ha)
  p32_aff_pol(t,j)			                  NDC forest stock (mio. ha)
 ;
 
