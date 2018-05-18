@@ -9,6 +9,7 @@ $setglobal c32_aff_policy  npi
 
 scalars
 	s32_max_aff_area 	maximum total global afforestation in (mio. ha)    / Inf /
+	s32_planing_horizon afforestation planing horizon (years)              / 30 /
 ;
 
 parameter f32_aff_mask(j) afforestation mask (1)
@@ -26,7 +27,7 @@ $include "./modules/32_forestry/input/f32_fac_req_ha.csv"
 $offdelim
 ;
 
-table f32_aff_pol(t_all,j,pol32) npi+ndc afforestation policy i.e, new forest wrt to 2010 (mio. ha)
+table f32_aff_pol(t_all,j,pol32) npi+ndc afforestation policy i.e. new forest wrt to 2010 (mio. ha)
 $ondelim
 $include "./modules/32_forestry/input/npi_ndc_aff_pol.cs3"
 $offdelim

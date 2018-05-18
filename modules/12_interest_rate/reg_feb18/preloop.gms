@@ -14,5 +14,3 @@ p12_interest(t,i) = s12_slope_a *im_development_state(t,i) + s12_intercept_b;
 
 $ifthen "%c12_interest_rate%" == "coupling" p12_interest(t,i) = f12_interest_coupling(t);
 $endif
-
-p12_annuity_due(t,i) = m_annuity_due(p12_interest(t,i),sm_invest_horizon);

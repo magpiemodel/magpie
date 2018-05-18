@@ -5,4 +5,4 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-vm_btm_cell.fx(j,emis_source_co2_land,"co2_c") = 0;
+vm_btm_cell.fx(j,emis_co2,"co2_c") = 0;

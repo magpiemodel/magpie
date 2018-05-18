@@ -33,7 +33,7 @@ $offdelim;
 
 *** Food Demand Model
 
-table f15_demand_regression_parameters(demand_subsystem15,food_scen15,par15)  Food regression parameters (USD per cap or kcal per capita per day or -)
+table f15_demand_regr_paras(demand_subsys15,food_scen15,par15)  Food regression parameters (USD per cap or kcal per capita per day or -)
 $ondelim
 $include "./modules/15_food/input/f15_demand_regression_parameters.cs3"
 $offdelim;
@@ -89,7 +89,7 @@ $include "./modules/15_food/input/f15_schofield_parameters_height.cs3"
 $offdelim
 ;
 
-table f15_intake_regression_parameters(sex,age_group, parameters_intake15) Self-estimated income equation parameters (-)
+table f15_intake_regr_paras(sex,age_group, parameters_intake15) Self-estimated income equation parameters (-)
 $ondelim
 $include "./modules/15_food/input/f15_intake_regression_parameters.cs3"
 $offdelim

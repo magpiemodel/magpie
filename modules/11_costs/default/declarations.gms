@@ -6,19 +6,19 @@
 
 variables
  vm_cost_glo                     total costs of production (mio. USD)
- v11_cost_reg(i)                 regional costs (mio. USD)
+ v11_cost_reg(i)                 regional costs            (mio. USD)
 ;
 
 equations
- q11_cost_glo                    objective function
- q11_cost_reg(i)                 regional cost constraint
+ q11_cost_glo                    objective function        (mio. USD)
+ q11_cost_reg(i)                 regional cost constraint  (mio. USD)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_cost_glo(t,type)     total costs of production (mio. USD)
- ov11_cost_reg(t,i,type) regional costs (mio. USD)
- oq11_cost_glo(t,type)   objective function
- oq11_cost_reg(t,i,type) regional cost constraint
+ ov11_cost_reg(t,i,type) regional costs            (mio. USD)
+ oq11_cost_glo(t,type)   objective function        (mio. USD)
+ oq11_cost_reg(t,i,type) regional cost constraint  (mio. USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

@@ -61,7 +61,7 @@ either distributed via the offical R CRAN or via a separate repository hosted at
 PIK (PIK-CRAN). Before proceeding PIK-CRAN should be added to the list of
 available repositories via:
 `options(repos = c(CRAN = "@CRAN@",
-         rd3mod_repo = "http://www.pik-potsdam.de/rd3mod/R/"))`.
+         pik = "http://rse.pik-potsdam.de/r/packages"))`.
 
 The `gdxrrw` package has to be downloaded directly from GAMS via
 ```

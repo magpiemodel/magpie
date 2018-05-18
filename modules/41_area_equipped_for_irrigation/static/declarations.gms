@@ -5,11 +5,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 variables
- vm_cost_AEI(i)                              irrigation expansion costs (mio. US$)
+ vm_cost_AEI(i)                  irrigation expansion costs (mio. USD)
 ;
 
 positive variables
- v41_AEI(j)                                   area equipped for irrigation in each gridcell (mio ha.)
+ v41_AEI(j)                      area equipped for irrigation in each gridcell (mio ha)
 ;
 
 equations
@@ -18,8 +18,8 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_AEI(t,i,type)     irrigation expansion costs (mio. US$)
- ov41_AEI(t,j,type)        area equipped for irrigation in each gridcell (mio ha.)
+ ov_cost_AEI(t,i,type)     irrigation expansion costs (mio. USD)
+ ov41_AEI(t,j,type)        area equipped for irrigation in each gridcell (mio ha)
  oq41_area_irrig(t,j,type) irrigation area constraint
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

@@ -4,7 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description This is the the straightforward and previously default version.
+*' @description
 *' In this realization the model is solved directly using nonlinear optimization.
 *' If the optimization returns an infeasible solution the solve is repeated,
 *' either until a feasible solution is found or the maximum number of iterations
