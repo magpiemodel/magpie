@@ -29,7 +29,7 @@ s42_env_flow_scenario              Environmental flow protection scenario.      
 *                                                                          s42_env_flow_fraction has no effect.
 
 s42_env_flow_base_fraction         Fraction of available water that                                                 / 0.05 /
-*                                                                    is reserved for the environment if
+*                                                                   is reserved for the environment if
 *                                                                   no EFR protection policy is implemented (determined in the file
 *                                                                   EFR_protection_policy.csv)
 s42_env_flow_fraction              Fraction of available water that is reserved for under protection policies / 0.2 /
@@ -40,7 +40,7 @@ $setglobal c42_watdem_scenario  nocc
 *             nocc (no climate change)
 
 
-table f42_wat_req_kve(t_all,j,kve) LPJ annual water demand for irrigation (m^3 per ha per year)
+table f42_wat_req_kve(t_all,j,kve) LPJ annual water demand for irrigation per ha per year (m^3)
 $ondelim
 $include "./modules/42_water_demand/input/lpj_airrig.cs2"
 $offdelim
@@ -49,7 +49,7 @@ $if "%c42_watdem_scenario%" == "nocc" f42_wat_req_kve(t_all,j,kve) = f42_wat_req
 m_fillmissingyears(f42_wat_req_kve,"j,kve");
 
 
-parameter f42_wat_req_kli(kli) Average water requirements of livestock commodities per region (m^3 per ton DM per year)
+parameter f42_wat_req_kli(kli) Average water requirements of livestock commodities per region per tDM per year (m^3)
 /
 $ondelim
 $include "./modules/42_water_demand/input/f42_wat_req_fao.csv"

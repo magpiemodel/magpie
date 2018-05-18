@@ -5,6 +5,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
+*' @description The default realization of costs module calculates global production
+*' costs with a constarint of production always fulfilling the demand.
+
+*' @limitations
+
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "declarations" $include "./modules/11_costs/default/declarations.gms"
 $Ifi "%phase%" == "equations" $include "./modules/11_costs/default/equations.gms"

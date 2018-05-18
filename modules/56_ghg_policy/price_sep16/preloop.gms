@@ -27,6 +27,3 @@ p56_ghg_price_growth_rate(t,i,pollutants)$(p56_ghg_price_growth_rate(t,i,polluta
 p56_ghg_price_growth_rate(t,i,pollutants)$(p56_ghg_price_growth_rate(t,i,pollutants) < p56_ghg_price_growth_rate_avg(i,pollutants)-0.01) = p56_ghg_price_growth_rate_avg(i,pollutants)-0.01;
 *account for special case if average growth rate is very low (<= 1%)
 p56_ghg_price_growth_rate(t,i,pollutants)$(p56_ghg_price_growth_rate(t,i,pollutants) = 0) = p56_ghg_price_growth_rate_avg(i,pollutants);
-*calculate annuity factor for ghg emission costs
-p56_ghg_price_annuity(t,i,pollutants) = 1;
-p56_ghg_price_annuity(t,i,pollutants)$(p56_ghg_price_growth_rate(t,i,pollutants) > 0) = m_annuity_due(p56_ghg_price_growth_rate(t,i,pollutants),sm_invest_horizon);

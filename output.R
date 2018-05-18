@@ -38,10 +38,10 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
       dirs <- sub("fulldata.gdx","",sub("./output/","",tmp, fixed=TRUE), fixed=TRUE)
     }
     dirs <- c("all",dirs)
-    cat("\n\n",title,":\n\n")
+    cat("\n",title,":\n", sep="")
     cat(paste(1:length(dirs), dirs, sep=": " ),sep="\n")
     cat(paste(length(dirs)+1, "Search by the pattern.\n", sep=": "))
-    cat("\nNumber: ")
+    cat("Number: ")
     identifier <- get_line()
     identifier <- strsplit(identifier,",")[[1]]
     tmp <- NULL
@@ -75,9 +75,9 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
 
   choose_module <- function(Rfolder,title="Please choose an outputmodule") {
     module <- gsub("\\.R$","",grep("\\.R$",list.files(Rfolder), value=TRUE))
-    cat("\n\n",title,":\n\n")
+    cat("\n",title,":\n",sep="")
     cat(paste(1: length(module), module, sep=": " ),sep="\n")
-    cat("\nNumber: ")
+    cat("Number: ")
     identifier <- get_line()
     identifier <- as.numeric(strsplit(identifier,",")[[1]])
     if (any(!(identifier %in% 1:length(module)))) stop("This choice (",identifier,") is not possible. Please type in a number between 1 and ",length(module))
@@ -86,9 +86,9 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
 
   choose_mode <- function(title="Please choose the output mode") {
     modes <- c("Output for single run ","Comparison across runs")
-    cat("\n\n",title,":\n\n")
+    cat("\n",title,":\n",sep="")
     cat(paste(1:length(modes), modes, sep=": " ),sep="\n")
-    cat("\nNumber: ")
+    cat("Number: ")
     identifier <- get_line()
     identifier <- as.numeric(strsplit(identifier,",")[[1]])
     if (identifier==1) {
@@ -104,9 +104,9 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
     slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
     modes <- c("Direct execution", "Background execution", "SLURM submission", "Debug mode")
     if(!slurm) modes <- modes[-3]
-    cat("\n\n",title,":\n\n")
+    cat("\n",title,":\n",sep="")
     cat(paste(1:length(modes), modes, sep=": " ),sep="\n")
-    cat("\nNumber: ")
+    cat("Number: ")
     identifier <- get_line()
     identifier <- as.numeric(strsplit(identifier,",")[[1]])
     if(slurm) {
@@ -157,11 +157,11 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
   }
 
 
-  if(is.null(comp))       comp       <- choose_mode("Please choose the output mode")
-  if(is.null(outputdirs)) outputdirs <- choose_folder("Please choose the runs to be used for output generation")
+  if(is.null(comp))       comp       <- choose_mode("Choose output type")
+  if(is.null(outputdirs)) outputdirs <- choose_folder("Choose runs")
   if(is.null(output))     output     <- choose_module(ifelse(comp,"./scripts/output/comparison","./scripts/output/single"),
-                                                      "Please choose the output modules to be used for output generation")
-  if(is.null(submit))     submit     <- choose_submit("Please choose a run submission type")
+                                                      "Choose output scripts")
+  if(is.null(submit))     submit     <- choose_submit("Choose submission type")
 
   #Set value source_include so that loaded scripts know, that they are
   #included as source (instead of a load from command line)
@@ -182,7 +182,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
 
 if(!exists("source_include")) {
   comp <- output <- outputdirs <- submit <- NULL
-  readArgs("comp","output","outputdirs","submit")
+  readArgs("comp","output","outputdirs","submit", .silent=TRUE)
 }
 
 runOutputs(comp=comp, output=output, outputdirs = outputdirs, submit=submit)

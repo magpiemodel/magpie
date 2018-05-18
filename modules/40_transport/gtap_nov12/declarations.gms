@@ -14,7 +14,7 @@ variables
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_transp(t,j,k,type)      			transportation costs (mio. USD)
- oq40_cost_transport(t,j,k,type) 			cellular transport costs for k (mio. USD)
+ ov_cost_transp(t,j,k,type)      transportation costs (mio. USD)
+ oq40_cost_transport(t,j,k,type) cellular transport costs for k (mio. USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

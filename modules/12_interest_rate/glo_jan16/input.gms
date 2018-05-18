@@ -6,10 +6,6 @@
 
 $setglobal c12_interest_rate  medium
 
-scalars
-  sm_invest_horizon investment time horizon (years)                 / 30 /
-;
-
 table f12_interest(t_all,scen12) real interest rate scenarios
 $ondelim
 $include "./modules/12_interest_rate/input/f12_interest_rate.cs3"

@@ -61,7 +61,7 @@
                      * m_timestep_length
                      * f56_emis_policy("%c56_emis_policy%",pollutants,emis_reg_oneoff56)
                      * sum(ct, im_pollutant_prices(ct,i2,pollutants)
-                     / p56_ghg_price_annuity(ct,i2,pollutants))
+                     * p56_ghg_price_growth_rate(ct,i2,pollutants))
                  );
 
 
@@ -84,7 +84,7 @@
                      * f56_emis_policy("%c56_emis_policy%",pollutants,emis_cell_oneoff56)
                      * sum((ct,cell(i2,j2)),
                          im_pollutant_prices(ct,i2,pollutants)
-                         / p56_ghg_price_annuity(ct,i2,pollutants))
+                         * p56_ghg_price_growth_rate(ct,i2,pollutants))
                  );
 
 * expected revenue for CDR from afforestation
@@ -101,4 +101,4 @@
                  vm_cdr_aff(j2,emis_source_co2_forestry) *
                  f56_aff_policy(emis_source_co2_forestry,"%c56_aff_policy%") *
                  sum((ct,cell(i2,j2)),
-                 im_pollutant_prices(ct,i2,"co2_c")/p56_ghg_price_annuity(ct,i2,"co2_c"));
+                 im_pollutant_prices(ct,i2,"co2_c")*p56_ghg_price_growth_rate(ct,i2,"co2_c"));

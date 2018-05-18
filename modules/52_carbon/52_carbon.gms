@@ -13,6 +13,5 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%carbon%" == "normal_dec17" $include "./modules/52_carbon/normal_dec17.gms"
-$Ifi "%carbon%" == "normal_sep16" $include "./modules/52_carbon/normal_sep16.gms"
 $Ifi "%carbon%" == "off" $include "./modules/52_carbon/off.gms"
 *###################### R SECTION END (MODULETYPES) ############################

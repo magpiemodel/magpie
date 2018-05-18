@@ -8,7 +8,6 @@ parameters
  im_pollutant_prices(t_all,i,pollutants)  ghg or pollution certificate prices (US$ 2004 per Mg N2O-N CH4 and CO2-C)
  p56_ghg_price_growth_rate(t,i,pollutants)  ghg certificate price growth rate
  p56_ghg_price_growth_rate_avg(i,pollutants)  ghg certificate price growth rate average over time
- p56_ghg_price_annuity(t,i,pollutants) annuity factor for co2 emission costs
 ;
 
 equations

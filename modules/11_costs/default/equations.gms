@@ -4,12 +4,14 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
- q11_cost_glo .. vm_cost_glo =e=
-                          sum(i2, v11_cost_reg(i2));
+*' @equations
 
- q11_cost_reg(i2) .. v11_cost_reg(i2)
-                   =e=
-                   sum(kall, vm_cost_prod(i2,kall))
+ q11_cost_glo .. vm_cost_glo =e= sum(i2, v11_cost_reg(i2));
+
+*' The global costs of production are represented by the sum of
+*' regional production costs of different production activities.
+
+ q11_cost_reg(i2) .. v11_cost_reg(i2) =e= sum(kall, vm_cost_prod(i2,kall))
                    + sum((cell(i2,j2),land), vm_cost_landcon(j2,land))
                    + sum((cell(i2,j2),k), vm_cost_transp(j2,k))
                    + vm_tech_cost(i2)
@@ -25,3 +27,22 @@
                    + vm_cost_bioen(i2)
                    + vm_cost_processing(i2)
                    ;
+
+*' Total regional production cost calculation is based on the sum of different
+*' MAgPIE production activities. These individual costs are calculated by various
+*' cost interfaces which are in turn calculated inside their respective modules.
+*' Different components of regional costs are as follows:
+*' Factor costs [38_factor_costs],
+*' land conversion costs [39_landconversion],
+*' Transportation costs [40_transport],
+*' Technological costs [13_tc],
+*' Inorganic fertilizers [50_nr_soil_budget],
+*' Emission costs [56_ghg_policy],
+*' Rewarded CDR from afforestation (Benefits as negative costs) [56_ghg_policy],
+*' Abatement costs [57_maccs],
+*' Irrigation expansion costs [41_area_equipped_for_irrigation],
+*' Trade costs (Transport and bilateral trade) [21_trade],
+*' Forestry related costs (afforestation) [32_forestry],
+*' Carbon dioxide removal costs [58_carbon_removal],
+*' Bioenergy costs [60_bioenergy],
+*' Processing costs [20_processing].

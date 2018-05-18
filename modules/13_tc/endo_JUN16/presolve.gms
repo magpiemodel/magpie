@@ -13,6 +13,4 @@ vm_tau.l(i) = pc13_tau(i)*(1+pc13_tcguess(i))**m_yeardiff(t);
 
 vm_tech_cost.up(i) = 10e9;
 
-p13_tech_cost_past(t,i)$(ord(t) = 1) = 0;
-
 pc13_tech_cost_past(i) = p13_tech_cost_past(t,i);

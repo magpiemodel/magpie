@@ -4,7 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-sets
-   c_process processes causing c emissions
-   /luc,vegdyn,cc/
-;
+
+*if((ord(t)=1),
+*  vm_yld.fx(j,"pasture",w) =  i14_yields("y1995",j,"pasture",w);
+*);

@@ -17,5 +17,5 @@
 
  q38_croparea_investment_annuity(i2,kcr) ..
    v38_croparea_investment_annuity(i2,kcr) =e= sum((cell(i2,j2)), v38_croparea_investment(j2,kcr)
-                          )/pm_annuity_due(i2)
+                          )*pm_interest(i2)/(1+pm_interest(i2))
                           ;

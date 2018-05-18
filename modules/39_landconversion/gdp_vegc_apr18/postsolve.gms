@@ -4,9 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-
-m_annuity_costs_update(p39_cost_landcon_past(t2,j,land), v39_cost_landcon_annuity.l(j,land), sm_invest_horizon)
-
+p39_cost_landcon_past(t2,j,land) = p39_cost_landcon_past(t2,j,land) + v39_cost_landcon_annuity.l(j,land);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_cost_landcon(t,j,land,"marginal")           = vm_cost_landcon.m(j,land);
