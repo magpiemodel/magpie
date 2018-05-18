@@ -9,12 +9,12 @@ positive variables
 ;
 
 equations
- q30_cropland(j)                 crop conversion constraint
- q30_suitability(j)              suitability constraint
- q30_rotation_max(j,crp30,w)     local rotational constraints
- q30_rotation_min(j,crp30,w)     local rotational constraints (minimum)
- q30_prod(j,kcr)                 production constraint for vegetal products
- q30_carbon(j,c_pools)           cropland carbon content calculation soilc
+ q30_cropland(j)                 total cropland calculation (mio. ha)
+ q30_suitability(j)              suitability constraint (mio. ha)
+ q30_rotation_max(j,crp30,w)     local maximum rotational constraints (mio. ha)
+ q30_rotation_min(j,crp30,w)     local minimum rotational constraints (mio. ha)
+ q30_prod(j,kcr)                 production of cropped products (mio. tDM)
+ q30_carbon(j,c_pools)           cropland carbon content calculation (mio. tC)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
