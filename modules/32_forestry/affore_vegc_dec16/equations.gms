@@ -49,7 +49,7 @@ sum(ct, pm_carbon_density_ac(ct,j2,ac-1,c_pools))));
 
  q32_max_aff .. sum((j2), vm_land(j2,"forestry")-pm_land_start(j2,"forestry"))
                 =l=
-					      s32_max_aff_area;
+				s32_max_aff_area - sum(ct, p32_aff_togo(ct));
 
 *' The maximum area allowed to be dedicated towards afforestation
 *' is calculated by the difference between the area of forestry land type and
@@ -66,12 +66,15 @@ sum(ct, pm_carbon_density_ac(ct,j2,ac-1,c_pools))));
 *' the area weighted mean of `p32_carbon_density_ac` i.e `p32_carbon_density`.
 *' `p32_carbon_density_ac` is age-class and carbon pool dependent carbon density.
 
- q32_diff .. vm_landdiff_forestry =e= sum((j2),v32_land(j2,"new")
-                                          + v32_land(j2,"new_ndc")
-                                          + pcm_land(j2,"forestry")
-                                          - v32_land(j2,"prot")
-                                          - v32_land(j2,"grow")
-                                          - v32_land(j2,"old"));
+ q32_land_diff .. vm_landdiff_forestry =e= sum((j2,land32),
+ 					  v32_land_expansion(j2,land32)
+ 					+ v32_land_reduction(j2,land32));
+
+ q32_land_expansion(j2,land32) .. 
+ 	v32_land_expansion(j2,land32) =g= v32_land(j2,land32) - pc32_land(j2,land32);
+
+ q32_land_reduction(j2,land32) .. 
+ 	v32_land_reduction(j2,land32) =g= pc32_land(j2,land32) - v32_land(j2,land32);
 
 *' The aggregated difference in forestry land compared to previous timestep is
 *' calculated as a sum of area available in protected, grown and old forests
