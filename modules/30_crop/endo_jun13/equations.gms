@@ -25,15 +25,14 @@
 *' crop which can be produced on average over time:
    
  q30_rotation_max(j2,crpmax30,w) ..
-   sum((crp_kcr30(crpmax30,kcr)), 
-   vm_area(j2,kcr,w)) =l= sum(kcr, vm_area(j2,kcr,w))
-														 * f30_rotation_max_shr(crpmax30);
+   sum((crp_kcr30(crpmax30,kcr)), vm_area(j2,kcr,w)) =l= 
+     sum(kcr, vm_area(j2,kcr,w)) * f30_rotation_max_shr(crpmax30);
 
 *' On the other hand it reflects boundary conditions such as minimum self sufficiency constraints: 
 						 
  q30_rotation_min(j2,crpmin30,w) ..
-   sum((crp_kcr30(crpmin30,kcr)), vm_area(j2,kcr,w)) =g= sum(kcr, vm_area(j2,kcr,w))
-														 * f30_rotation_min_shr(crpmin30);
+   sum((crp_kcr30(crpmin30,kcr)), vm_area(j2,kcr,w)) =g= 
+     sum(kcr, vm_area(j2,kcr,w)) * f30_rotation_min_shr(crpmin30);
 
 
 *' Agricultural production is also calculated straightforward by multiplying area 
@@ -41,11 +40,12 @@
 *' rainfed and irrigated areas is summed up to one cellular production:
 
  q30_prod(j2,kcr) ..
-  vm_prod(j2,kcr) =e= sum(w, vm_area(j2,kcr,w)*vm_yld(j2,kcr,w));
+  vm_prod(j2,kcr) =e= sum(w, vm_area(j2,kcr,w) * vm_yld(j2,kcr,w));
 
 *' Due to the high uncertainty in 2nd generation bioenergy production, irrigated 
 *' production of bioenergy is deactivated (see presolve statements of crop realization).
 
 *' The carbon content of the different carbon pools are calculated as a total for all cropland :
- q30_carbon(j2,c_pools) .. vm_carbon_stock(j2,"crop",c_pools) =e=  vm_land(j2,"crop") 
-                                                                   * sum(ct,fm_carbon_density(ct,j2,"crop",c_pools));
+ q30_carbon(j2,c_pools) .. 
+ vm_carbon_stock(j2,"crop",c_pools) =e= 
+   vm_land(j2,"crop") * sum(ct,fm_carbon_density(ct,j2,"crop",c_pools));
