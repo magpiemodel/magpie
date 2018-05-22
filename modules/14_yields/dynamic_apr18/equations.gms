@@ -27,11 +27,11 @@ q14_grazing_animals(i2) .. v14_graz_ani(i2) =e= v14_ani_stocks(i2,"sys_beef");
 *
     
                
-*q14_animal_stocks(i2,sys) .. v14_ani_stocks(i2,sys) =e=
-*                   sum((sys_to_kli(sys,kli)), vm_prod_reg(i2,kli))/sum(ct,im_livestock_productivity(ct,i2,sys));   
-
 q14_animal_stocks(i2,sys) .. v14_ani_stocks(i2,sys) =e=
-                   sum((sys_to_kli(sys,kli)), vm_supply(i2,kli))/sum(ct,im_livestock_productivity(ct,i2,sys));   
+                   sum((sys_to_kli(sys,kli)), vm_prod_reg(i2,kli))/sum(ct,im_livestock_productivity(ct,i2,sys));   
+
+*q14_animal_stocks(i2,sys) .. v14_ani_stocks(i2,sys) =e=
+*                   sum((sys_to_kli(sys,kli)), vm_supply(i2,kli))/sum(ct,im_livestock_productivity(ct,i2,sys));   
 
 
 
