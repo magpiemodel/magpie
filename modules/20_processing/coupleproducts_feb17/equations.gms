@@ -5,9 +5,10 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @equations
-*' The equations below show the aggregation of secondary products from non-cereal(through fermentation, breeding, distilling)
-*' , cereals (through milling process), and cotton (through ginning process).
-*'  The need to have multiple equations(or separate equations for each process)
+*' The equations below show the aggregation of secondary products from non-cereal
+*' (through fermentation, breeding, distilling), cereals (through milling
+*' process), and cotton (through ginning process).
+*' The need to have multiple equations (or separate equations for each process)
 *' in this regard is meant to replicate the structure of FAOSTAT.
 
 q20_processing_aggregation_nocereals(i2,kpr) ..
@@ -17,11 +18,11 @@ sum(no_milling_ginning20,v20_dem_processing(i2,no_milling_ginning20,kpr));
 
 *' The demand for processing use`vm_dem_processing` is calculated
 *' by aggregating the demand for processing use by process `v20_dem_processing`.
-*' This equation calculates secondary products from non-cereals crops
-*' ,for example, as bio-energy crops and oil crops.
+*' This equation calculates secondary products from non-cereals crops,
+*' for example, as bio-energy crops and oil crops.
 
 q20_processing_aggregation_cereals(i2,kcereals20) ..
-  vm_dem_food(i2,kcereals20) =e= 
+  vm_dem_food(i2,kcereals20) =e=
   v20_dem_processing(i2,"milling",kcereals20);
 
 *' The demand for processing by process `v20_dem_processing` of milling
@@ -30,7 +31,7 @@ q20_processing_aggregation_cereals(i2,kcereals20) ..
 *' also not counted as processing but derived from food use of cereals.
 
 q20_processing_aggregation_cotton(i2) ..
- vm_prod_reg(i2,"cottn_pro") =e= 
+ vm_prod_reg(i2,"cottn_pro") =e=
  v20_dem_processing(i2,"ginning","cottn_pro");
 
 

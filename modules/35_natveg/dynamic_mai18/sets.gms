@@ -4,7 +4,16 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+sets
+  land35 natveg land pools
+    / new, grow, old /
 
-parameters
- pm_climate_class(j,clcl) Koeppen-Geiger climate classification on the simulation cluster level (1)
+   pol35 afforestation policy type
+    / none, npi, ndc/
+
+   ac_land35(ac,land35) mapping between age classes and aggregated land types
+
+   prot_type conservation priority areas
+   / BH, CPD, FF, LW, WDPA /
+
 ;

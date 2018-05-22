@@ -6,7 +6,7 @@
 
 
 scalars
-  c60_biodem_level  bioenergy demand level (1: regional 0: global)  / 1 /
+  c60_biodem_level  bioenergy demand level indicator 1 for regional and 0 for global demand   (1)   / 1 /
 ;
 
 $setglobal c60_2ndgen_biodem  SSP2-Ref-SPA0
@@ -33,7 +33,7 @@ $if "%c60_2ndgen_biodem%" == "emulator" $offdelim
 $if "%c60_2ndgen_biodem%" == "emulator" /
 $if "%c60_2ndgen_biodem%" == "emulator" ;
 
-table f60_bioenergy_dem(t_all,i,scen2nd60) Bioenergy demand (regional) (10^6 GJ per year)
+table f60_bioenergy_dem(t_all,i,scen2nd60) annual bioenergy demand (regional) (10^6 GJ)
 $ondelim
 $include "./modules/60_bioenergy/input/f60_bioenergy_dem.cs3"
 $offdelim
@@ -42,7 +42,7 @@ $offdelim
 $setglobal c60_1stgen_biodem  const2020
 *   options:  "const2020", "const2030", "phaseout2020"
 
-table f60_1stgen_bioenergy_dem(t_all,i,scen1st60,kall) 1st generation bioenergy demand (10^6 GJ per year) [Lotze Campen (2014)]
+table f60_1stgen_bioenergy_dem(t_all,i,scen1st60,kall) annual 1st generation bioenergy demand (10^6 GJ)
 $ondelim
 $include "./modules/60_bioenergy/input/f60_1stgen_bioenergy_dem.cs3"
 $offdelim

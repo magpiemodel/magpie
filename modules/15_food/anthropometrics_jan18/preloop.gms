@@ -1,6 +1,6 @@
 
 
-i15_demand_regression_parameters(demand_subsystem15,par15) = f15_demand_regression_parameters(demand_subsystem15,"%c15_food_scenario%",par15);
+i15_demand_regr_paras(demand_subsys15,par15) = f15_demand_regr_paras(demand_subsys15,"%c15_food_scenario%",par15);
 
 p15_bodyheight(t,iso,sex,age_group,estimates15) = f15_bodyheight(t,iso,sex,age_group);
 
