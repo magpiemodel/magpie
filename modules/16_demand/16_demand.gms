@@ -12,6 +12,11 @@
 *' A description of food demand scenarios that enter the model can be found
 *' in @bodirsky_global_2015-1, @bodirsky_n2o_2012 and @valin_fooddemand_2013.
 *'
+*' Unit for `fm_attributes(attributes,kall)` is usually 
+*' ton X per ton DM, except for gross energy where unit is PJ per mio. tDM.
+*' The units depend on the dimensions of the object, and all
+*' units need to be provided. 
+*'
 *' @authors Isabelle Weindl, Benjamin Bodirsky, Jan Philipp Dietrich.
 
 *###################### R SECTION START (MODULETYPES) ##########################
