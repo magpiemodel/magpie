@@ -6,8 +6,7 @@
 
 pc41_AEI_start(j)=v41_AEI.l(j);
 
-m_annuity_costs_update(p41_cost_AEI_past(t2,i), v41_cost_AEI_annuity.l(i), sm_invest_horizon)
-
+p41_cost_AEI_past(t2,i) = p41_cost_AEI_past(t2,i) + v41_cost_AEI_annuity.l(i);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_cost_AEI(t,i,"marginal")           = vm_cost_AEI.m(i);

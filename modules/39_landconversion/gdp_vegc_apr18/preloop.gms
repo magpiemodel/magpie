@@ -4,6 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+p39_cost_landcon_past(t,j,land) = 0;
 
 ** Costs of establishment (determined by GDP)
 

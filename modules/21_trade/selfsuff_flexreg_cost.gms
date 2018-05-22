@@ -4,6 +4,11 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @description This realization is similar to selfsuff_flexreg. The only difference is that trade costs
+*' are taken into account.
+
+*' @limitations This realization depends on predetermined self-sufficiency rates and export shares,
+*' which leads to a relative fixed trade pattern. 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/21_trade/selfsuff_flexreg_cost/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/21_trade/selfsuff_flexreg_cost/declarations.gms"
