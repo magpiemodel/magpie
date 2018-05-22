@@ -4,9 +4,9 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In this realization the transport 
+*' @description In this realization the transport
 *' of goods is assumed to be free of charge.
-*' Correspondingly transportation costs is fixed to 0.
+*' Correspondingly transportation costs are fixed to 0.
 *'
 *' @limitations No simulation of transportation (transportation free of charge).
 

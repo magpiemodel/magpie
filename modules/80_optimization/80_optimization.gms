@@ -11,11 +11,11 @@
 *' It has been introduced to play with different ways to affect the runtime
 *' performance of the model via more optimized model solution strategies.
 *' The interfaces to the rest of the model are quite limited as it only requires
-*' the variables to be optimized `vm_cost_glo` and `vm_landdiff` as direct input
+*' the variables to be optimized `vm_cost_glo` (total costs) and `vm_landdiff`
+*' (gross land use changes compared to last time step) as direct input.
 *' The latter was introduced to select out of a range of cost optimal patterns
 *' that one which is closest to the pattern of the previous time step. While
-*' CONOPT returns this solution by default, CPLEX usually returns another
-*' solution. `vm_landdiff` allows for harmonizing the solution choice.
+*' CONOPT returns this solution by default, CPLEX does not.
 *'
 *' @authors Jan Philipp Dietrich, Todd Munson
 

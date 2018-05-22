@@ -6,5 +6,5 @@
 
 name,type,reason
 vm_yld,input,questionnaire
-pm_annuity_due,input,questionnaire
+pm_interest,input,questionnaire
 vm_prod_reg,input,questionnaire

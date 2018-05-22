@@ -20,12 +20,12 @@ $title magpie
 * md5sum: 25f0922007290714128a42527ced7570
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev3.28.tgz
-* md5sum: 7f08b001444b565472e8d769724dc32b
+* Used data set: additional_data_rev3.29.tgz
+* md5sum: 50641134e888257613ad60cb2e242b3f
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Used data set: npi_ndc_base_SSP2_mixed.tgz
-* md5sum: db502b45079bcec923b1b36c2cb2a88c
+* md5sum: 7c2b9e1fce6a4fdb957e3994a321a2e8
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Low resolution: h200
@@ -59,7 +59,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Mon May  7 13:00:26 2018
+* Last modification (input data): Fri May 18 10:23:25 2018
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -83,7 +83,7 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  quicktest
+$setglobal c_timesteps  10
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /
@@ -95,7 +95,7 @@ scalars
 $setglobal drivers  aug17
 $setglobal land  feb15
 $setglobal costs  default
-$setglobal interest_rate  glo_jan16
+$setglobal interest_rate  reg_feb18
 $setglobal tc  endo_JUN16
 $setglobal yields  biocorrect
 
@@ -106,13 +106,13 @@ $setglobal production  flexreg_apr16
 $setglobal residues  flexreg_apr16
 $setglobal processing  coupleproducts_feb17
 
-$setglobal trade  selfsuff_flexreg
+$setglobal trade  selfsuff_flexreg_cost
 
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
 $setglobal forestry  affore_vegc_dec16
 $setglobal urban  static
-$setglobal natveg  dynamic_mai17
+$setglobal natveg  dynamic_mai18
 
 $setglobal factor_costs  mixed_feb17
 $setglobal landconversion  gdp_vegc_mar18
@@ -166,24 +166,6 @@ $batinclude "./modules/include.gms" equations
 
 *******************MODEL DEFINITION & SOLVER OPTIONS****************************
 model magpie / all - m15_food_demand /;
-
-magpie.optfile   = 1 ;
-magpie.scaleopt  = 1 ;
-magpie.solprint  = 0 ;
-magpie.holdfixed = 1 ;
-
-option lp         = cplex ;
-option qcp        = cplex ;
-$onecho > cplex.opt
-
-$offecho
-
-option nlp        = conopt4 ;
-$onecho > conopt4.opt
-Lin_Method = 1
-Tol_Obj_Change = 1.0e-5
-Lim_Iteration = 1000
-$offecho
 
 option iterlim    = 1000000 ;
 option reslim     = 1000000 ;

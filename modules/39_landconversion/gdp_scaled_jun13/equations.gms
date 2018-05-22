@@ -7,7 +7,7 @@
 q39_cost_landcon_annuity(j2,land) ..
                                                          v39_cost_landcon_annuity(j2,land)
                           =g=
- (vm_land(j2,land) - pcm_land(j2,land))*sum(cell(i2,j2),pc39_lndcon_costs(i2,land))/sum(cell(i2,j2),pm_annuity_due(i2));
+ (vm_land(j2,land) - pcm_land(j2,land))*sum(cell(i2,j2),pc39_lndcon_costs(i2,land))*sum(cell(i2,j2),pm_interest(i2)/(1+pm_interest(i2)));
 
  q39_cost_landcon(j2,land) .. vm_cost_landcon(j2,land)
                           =e=
