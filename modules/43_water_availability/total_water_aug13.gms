@@ -6,7 +6,7 @@
 
 
 *' The calculation of available water as described below happens 
-*' in the MAgPIE preprocessing. See lpj2magpie for further details.
+*' in the MAgPIE preprocessing.
 *' This realization only considers renewable water resources, i.e. 
 *' runoff generated from precipitation. All runoff is assumed to 
 *' enter rivers, neglecting groundwater recharge. Other water resources
