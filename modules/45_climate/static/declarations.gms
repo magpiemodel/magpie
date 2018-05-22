@@ -6,5 +6,5 @@
 
 
 parameters
- pm_climate_class(j,clcl) Koeppen-Geiger climate classification data as shares of cell (-)
+ pm_climate_class(j,clcl) Koeppen-Geiger climate classification on the simulation cluster level (1)
 ;
