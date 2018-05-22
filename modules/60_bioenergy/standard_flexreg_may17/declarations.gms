@@ -6,11 +6,11 @@
 
 
 parameters
- i60_bioenergy_dem(t,i)   			Regional bioenergy demand per year (10^6 GJ)
+ i60_bioenergy_dem(t,i)   			regional bioenergy demand per year (10^6 GJ)
 ;
 
 variables
- vm_cost_bioen(i)                   negative bioenergy production costs = revenue (mio. USD)
+ vm_cost_bioen(i)                   regional bioenergy production costs (mio. USD)
 ;
 
 positive variables
@@ -24,7 +24,7 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_bioen(t,i,type)      negative bioenergy production costs = revenue (mio. USD)
+ ov_cost_bioen(t,i,type)      regional bioenergy production costs (mio. USD)
  ov_dem_bioen(t,i,kall,type)  regional bioenergy demand  (mio. tDM)
  oq60_bioenergy_glo(t,type)   global bioenergy demand
  oq60_bioenergy_reg(t,i,type) regional bioenergy demand
