@@ -82,7 +82,7 @@ sets
 * intercept + saturation give the max value if non-saturation is 1
 * halfsaturation is the gdp until which half of saturation is reached
 
-  demand_subsystem15
+  demand_subsys15
       / overconsumption,livestockshare,processedshare,vegfruitshare /
 
 *** Scenarios

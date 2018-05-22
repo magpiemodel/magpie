@@ -10,23 +10,23 @@ $title magpie
 * 
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev29_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
 * md5sum: 567e160f9b7585716f86b68c3b1f3f3e
-* Repository: /p/projects/landuse/data/input/archive
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Used data set: rev3.15_8a828c6ed5004e77d1ba2025e8ea2261_magpie.tgz
 * md5sum: 2c6009e8dbfb9f328261b238bf2a43ac
-* Repository: /p/projects/rd3mod/inputdata/output
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
 * Used data set: rev3.15_8a828c6ed5004e77d1ba2025e8ea2261_validation.tgz
 * md5sum: 25f0922007290714128a42527ced7570
-* Repository: /p/projects/rd3mod/inputdata/output
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev3.28.tgz
-* md5sum: 7f08b001444b565472e8d769724dc32b
-* Repository: /p/projects/landuse/data/input/archive
+* Used data set: additional_data_rev3.29.tgz
+* md5sum: 50641134e888257613ad60cb2e242b3f
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Used data set: npi_ndc_base_SSP2_mixed.tgz
 * md5sum: 7c2b9e1fce6a4fdb957e3994a321a2e8
-* Repository: /p/projects/landuse/data/input/archive
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Low resolution: h200
 * High resolution: 0.5
@@ -59,7 +59,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Thu May 10 09:09:27 2018
+* Last modification (input data): Fri May 18 10:23:25 2018
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -83,7 +83,7 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  quicktest
+$setglobal c_timesteps  10
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /
@@ -112,7 +112,7 @@ $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
 $setglobal forestry  affore_vegc_dec16
 $setglobal urban  static
-$setglobal natveg  dynamic_mai17
+$setglobal natveg  dynamic_mai18
 
 $setglobal factor_costs  mixed_feb17
 $setglobal landconversion  gdp_vegc_mar18

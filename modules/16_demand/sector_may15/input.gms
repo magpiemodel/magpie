@@ -6,7 +6,7 @@
 
 
 
-table f16_seed_shr(t_all,i,kcr) seed share relative to production from FAO-FBS (1) 
+table f16_seed_shr(t_all,i,kcr) seed share relative to production from FAO-FBS (1)
 $ondelim
 $include "./modules/16_demand/sector_may15/input/f16_seed_shr.csv"
 $offdelim;
@@ -16,7 +16,7 @@ $ondelim
 $include "./modules/16_demand/sector_may15/input/f16_waste_shr.csv"
 $offdelim;
 
-table fm_attributes(attributes,kall) see description of [16_demand] (ton X per tDM - PJ per mio. tDM)
+table fm_attributes(attributes,kall) conversion factors (X per tDM)
 $ondelim
 $include "./modules/16_demand/sector_may15/input/fm_attributes.cs3"
 $offdelim;

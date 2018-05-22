@@ -178,8 +178,8 @@ calc_NPI_NDC <- function(policyregions="iso" # column with regions for policy de
   cat("NPI AFF policy\n")
   npi_aff <- read.magpie(path("policies","npi_pol_afforest.csv"))
   # fill out for additional target calculations
-  npi_aff <- calc_target(npi_aff,iso="BDI",magpie_bau_land,goal=0.2) #long term goal (2025) to have 20% of its geographical area under forest cover
-  npi_aff <- calc_target(npi_aff,iso="CHN",magpie_bau_land,goal=0.2304) #23.04% forest coverage by 2020 --> 50 Mha afforestation is neede
+  # npi_aff <- calc_target(npi_aff,iso="BDI",magpie_bau_land,goal=0.2) #long term goal (2025) to have 20% of its geographical area under forest cover
+  # npi_aff <- calc_target(npi_aff,iso="CHN",magpie_bau_land,goal=0.2304) #23.04% forest coverage by 2020 --> 50 Mha afforestation is neede
   npi_aff <- calc_policy(npi_aff,magpie_bau_land,affore=TRUE,im_years=im_years,
                         pol_mapping=pol_mapping)
   getNames(npi_aff) <- "npi"
