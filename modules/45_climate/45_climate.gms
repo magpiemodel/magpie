@@ -4,6 +4,14 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @title Climate
+*'
+*' @description The climate module provides information about the present
+*' climate classes in the different cells (as share of the total cell).
+*' This information is used by other modules to choose climate class depending
+*' factors such as growth parameters correctly (e.g. used in [35_natveg]).
+*'
+*' @authors Jan Philipp Dietrich
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%climate%" == "static" $include "./modules/45_climate/static.gms"
