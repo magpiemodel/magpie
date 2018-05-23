@@ -18,15 +18,15 @@ positive variables
 ;
 
 equations
- q60_bioenergy_glo                 global bioenergy demand
- q60_bioenergy_reg(i)              regional bioenergy demand
+ q60_bioenergy_glo                 global bioenergy demand (10^6 GJ)
+ q60_bioenergy_reg(i)              regional bioenergy demand (10^6 GJ)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_cost_bioen(t,i,type)      regional bioenergy production costs (mio. USD)
  ov_dem_bioen(t,i,kall,type)  regional bioenergy demand  (mio. tDM)
- oq60_bioenergy_glo(t,type)   global bioenergy demand
- oq60_bioenergy_reg(t,i,type) regional bioenergy demand
+ oq60_bioenergy_glo(t,type)   global bioenergy demand (10^6 GJ)
+ oq60_bioenergy_reg(t,i,type) regional bioenergy demand (10^6 GJ)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
