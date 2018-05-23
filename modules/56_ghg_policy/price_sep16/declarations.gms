@@ -29,8 +29,8 @@ positive variables
 ;
 
 variables
- vm_btm_reg(i,emis_source,pollutants)          emissions before technical mitigation (Tg N2O-N CH4 and CO2-C)
- vm_btm_cell(j,emis_source,pollutants)     emissions before technical mitigation (Tg N2O-N CH4 and CO2-C)
+ vm_btm_reg(i,emis_source,pollutants)          see description of [58_carbon_removal] (Tg N2O - Tg CH4 - Tg CO2)
+ vm_btm_cell(j,emis_source,pollutants)     see description of [58_carbon_removal] (Tg N2O - Tg CH4 - Tg CO2)
  vm_emission_costs(i)                       Costs for emission pollution rights (mio. US$)
  vm_emissions_reg(i,emis_source,pollutants)           regional emissions by emission source after technical mitigation (Tg N2O-N CH4 C)
  v56_emis_cell(j,emis_source,pollutants)                       cellular emissions by emission source after technical mitigation (Tg N CH4 C)
