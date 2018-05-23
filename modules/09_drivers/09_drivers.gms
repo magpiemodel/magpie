@@ -6,7 +6,12 @@
 
 *' @title Drivers
 *'
-*' @description The Drivers module aggregates exogenous inputs to be delivered to other modules.
+*' @description The Drivers module provide input drivers
+*' which are used by several other modules in the model. This module 
+*' aggregates mainly inputs related to population and gdp, but not limited 
+*' to it. When a input is only required in one module or realization, 
+*' the input driver is provided directly in the module that demands it 
+*' instead of in the [09_drivers] module. 
 *'
 *' @authors Benjamin Leon Bodirsky
 

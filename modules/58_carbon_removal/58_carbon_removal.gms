@@ -14,6 +14,11 @@
 *' Because the objective function of MAgPIE is the minimization of total global costs, 
 *' the negative price on carbon emissions serves as incentive for the deployment of CDRs. 
 *'
+*' `vm_btm_reg (i,emis_source,pollutants)` and `vm_btm_cell (i,emis_source,pollutants)`
+*' are emissions before technical mitigation. Its units are Tg N2O for N, Tg CH4 for CH4 
+*' and Tg CO2 for C. The units depend on the dimensions of the object, and all units 
+*' need to be provided.
+*' 
 *' @authors Florian Humpenöder, Jan Philipp Dietrich.
 
 *###################### R SECTION START (MODULETYPES) ##########################
