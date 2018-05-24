@@ -20,12 +20,12 @@ scalar s15_maxiter maximum iteration number / 5 /;
 
 scalar s15_convergence convergence criteria   / 0.05 /;
 
-table f15_household_balance_flow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of inhomogenous products and processes in statistics (Mio t DM)
+table f15_household_balance_flow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of inhomogenous products and processes in statistics (mio. t DM)
 $ondelim
 $include "./modules/15_food/input/f15_household_balanceflow.cs3"
 $offdelim;
 
-table f15_nutrition_attributes(t_all,kall,nutrition) nutrition attributes of fooditems dedicated for fooduse (million kcal or protein per ton DM)
+table f15_nutrition_attributes(t_all,kall,nutrition) nutrition attributes of fooditems dedicated for fooduse (mio. kcal per t DM | t Protein per ton DM)
 $ondelim
 $include "./modules/15_food/input/f15_nutrition_attributes.cs3"
 $offdelim;
@@ -33,12 +33,17 @@ $offdelim;
 
 *** Food Demand Model
 
-table f15_demand_regr_paras(demand_subsys15,food_scen15,par15)  Food regression parameters (USD per cap or kcal per capita per day or -)
+
+* Unit for `f15_demand_regr_paras` is
+* kcal/capita/day for saturation and intercept, and
+* USD05/capita for halfsaturation
+
+table f15_demand_regr_paras(demand_subsys15,food_scen15,par15)  Food regression parameters (-)
 $ondelim
 $include "./modules/15_food/input/f15_demand_regression_parameters.cs3"
 $offdelim;
 
-table f15_kcal_pc_iso(t_all,iso,kfo)  Observed per-capita calories in the past (kcal per captia per day)
+table f15_kcal_pc_iso(t_all,iso,kfo)  Observed per-capita calories in the past (kcal per capita per day)
 $ondelim
 $include "./modules/15_food/input/f15_kcal_pc_iso.csv"
 $offdelim;
@@ -50,7 +55,7 @@ $include "./modules/15_food/input/f15_intake_pc_observed_iso.cs3"
 $offdelim;
 
 
-parameter f15_prices_initial(kall) Food prices in initialisation period (USD05 per ton DM)
+parameter f15_prices_initial(kall) Food prices in initialisation period (USD05 per t DM)
 /
 $ondelim
 $include "./modules/15_food/input/f15_prices_initial.csv"
@@ -58,7 +63,7 @@ $offdelim
 /;
 
 
-parameter f15_price_index(t_all) Food prices index in initialisation period (USD05 per ton DM)
+parameter f15_price_index(t_all) Food prices index in initialisation period (USD05 per t DM)
 /
 $ondelim
 $include "./modules/15_food/input/f15_prices_index.csv"
@@ -66,19 +71,19 @@ $offdelim
 /;
 
 
-table f15_kcal_balanceflow_fadeout(t_all,calibscen15) balanceflow fadeout (-)
+table f15_kcal_balanceflow_fadeout(t_all,calibscen15) balanceflow fadeout (1)
 $ondelim
 $include "./modules/15_food/input/f15_kcal_balanceflow_fadeout.csv"
 $offdelim
 ;
 
-table f15_ruminant_fadeout(t_all,ruminantfadeoutscen15) ruminant fadeout scenario (-)
+table f15_ruminant_fadeout(t_all,ruminantfadeoutscen15) ruminant fadeout scenario (1)
 $ondelim
 $include "./modules/15_food/input/f15_ruminant_fadeout.csv"
 $offdelim
 ;
 
-table f15_bodyheight(t_all,iso,sex,age_group)      body height in cm
+table f15_bodyheight(t_all,iso,sex,age_group)      body height (cm)
 $ondelim
 $include "./modules/15_food/input/f15_bodyheight_historical.cs3"
 $offdelim;
