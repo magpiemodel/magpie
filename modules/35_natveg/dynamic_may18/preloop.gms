@@ -4,7 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*calculate age class share for each forest land type
+*define mapping between ac and land35
 ac_land35(ac,land35) = no;
 ac_land35(ac,"new")  = yes$(ord(ac) = 1);
 ac_land35(ac,"grow") = yes$(ord(ac) > 1 AND ord(ac) < card(ac));
