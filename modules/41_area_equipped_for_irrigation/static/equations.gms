@@ -4,6 +4,10 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
- q41_area_irrig(j2) .. sum(kcr, vm_area(j2,kcr,"irrigated"))
-                            =l=
-                            v41_AEI(j2);
+ 
+ *' equations
+ *' total irrigated crop area has to be lower than the static value `v41_AEI`
+ 
+ q41_area_irrig(j2) .. 
+ sum(kcr, vm_area(j2,kcr,"irrigated")) =l=
+ v41_AEI(j2);
