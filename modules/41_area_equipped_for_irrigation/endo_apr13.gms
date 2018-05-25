@@ -21,12 +21,12 @@
 *' The region mapping is as follows:
 *'
 *' ![Mapping between MAgPIE regions and the regions in 
-*' @worldbank_irrigation_1995](regions.PNG){ width=60% }
+*' [@worldbank_irrigation_1995]](regions.png){ width=60% }
 *'
 *' These costs converge linearly towards Europe until 2050.
 *'
 *' ![Unit costs for AEI expansion in MAgPIE
-*' ](Unitcosts.PNG){ width=60% }
+*' ](unitcosts.png){ width=60% }
 *'
 *' @limitations This realization increases model complexity.
 
