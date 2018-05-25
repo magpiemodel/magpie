@@ -12,9 +12,9 @@
    sum((kcr,w), vm_area(j2,kcr,w)) =e= vm_land(j2,"crop");
 
 *' We assume that crop production can only take place on suitable cropland area; 
-*' we use the suitability index (SI) to exclude areas from cropland production that 
-*' have low suitability, e.g. due to strong slopes (Krause et al 2013). 
-*' The cultivated area therefore has to be greater than the "si0" cropland area:
+*' we use a suitability index (SI) map from @ramankutty_suitability_2002 to exclude areas 
+*' from cropland production that have low suitability, e.g. due to strong slopes.
+*' The cultivated area therefore has to be smaller than the "si0" cropland area:
 
  q30_suitability(j2)  ..
    vm_land(j2,"crop") =l= f30_land_si(j2,"si0");
