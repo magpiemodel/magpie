@@ -8,13 +8,13 @@ $setglobal c39_cost_scenario  high
 * options: low, medium, high
 
 
-table f39_landclear_gdp(cost_estimate39,bound39) lower and upper bound for land clearing costs in inital timestep ($US per ha)
+table f39_landclear_gdp(cost_estimate39,bound39) global range of land clearing costs in inital timestep (US$ per hectare)
 $ondelim
 $include "./modules/39_landconversion/gdp_vegc_may18/input/f39_landclear_gdp.csv"
 $offdelim;
 
 
-table f39_establish_gdp(land,cost_estimate39,bound39) lower and upper bound for land establishing costs in inital timestep ($US per ha)
+table f39_establish_gdp(land,cost_estimate39,bound39) global range of land establishment costs in inital timestep (US$ per hectare) 
 $ondelim
 $include "./modules/39_landconversion/gdp_vegc_may18/input/f39_establish_gdp.cs3"
 $offdelim;
