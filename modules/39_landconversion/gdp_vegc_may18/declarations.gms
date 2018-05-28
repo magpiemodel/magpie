@@ -23,7 +23,7 @@ s39_max_gdp                           maximum gdp_pc of all regions in 1995 [US$
 ;
 
 parameters
-p39_max_vegc_reg(i)		max vegc regional (tC/ha)
+p39_max_vegc_reg(i)						max vegc regional (tC per ha)
 p39_landclear_a                       parameter a for land clearing costs calculation
 i39_landclear_gdp(bound39)            cost estimates for land clearing costs
 p39_landclear_b                       parameter b for land clearing costs calculation
