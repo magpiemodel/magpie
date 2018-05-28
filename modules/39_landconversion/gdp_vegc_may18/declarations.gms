@@ -5,12 +5,12 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 equations
- q39_cost_landcon_annuity(j,land) Calculation of cellular annuity costs of landconversion
- q39_cost_landcon(j,land)        Calculation of cellular landconversion costs
+ q39_cost_landcon_annuity(j,land)	Calculation of cellular annuity costs of landconversion
+ q39_cost_landcon(j,land)        	Calculation of cellular landconversion costs
 ;
 
 variables
- vm_cost_landcon(j,land)                    landconversion costs  (mio US$)
+ vm_cost_landcon(j,land)            landconversion costs  (mio US$)
 ;
 
 positive variable
@@ -18,28 +18,30 @@ positive variable
 ;
 
 scalar
-s39_min_gdp                           minimum gdp_pc of all regions in 1995 [US$ per capita]
-s39_max_gdp                           maximum gdp_pc of all regions in 1995 [US$ per capita]
+s39_min_gdp                           minimum gdp_pc of all regions in 1995 (US$ per capita)
+s39_max_gdp                           maximum gdp_pc of all regions in 1995 (US$ per capita)
 ;
 
 parameters
-p39_max_vegc_reg(i)						max vegc regional (tC per ha)
-p39_landclear_a                       parameter a for land clearing costs calculation
-i39_landclear_gdp(bound39)            cost estimates for land clearing costs
-p39_landclear_b                       parameter b for land clearing costs calculation
-i39_establish_gdp(land,bound39)       cost estimates for land clearing costs
-p39_establish_a(land)                 parameter a for establishing costs calculation
-p39_establish_b(land)                 parameter b for establishing costs calculation
-pc39_vegc_fact(j)                factor that reduces costs depending on vegetation density
-p39_establish_costs_reg(t,i,land)	  regional est cost
-p39_establish_costs(t,j,land)         establishing costs [US$ per ha]
-pc39_establish_costs(j,land)          current establishing costs [US$ per ha]
-p39_landclear_costs_reg(t,i,land)		reg land clearing cost
-p39_landclear_costs(t,j,land)         land clearing costs
-pc39_landclear_costs(j,land)          current land clearing costs
-p39_cost_landcon_past(t,j,land)       costs for landconversion from the past [million US$]
-pc39_cost_landcon_past(j,land)        current costs for landconversion from the past [million US$]
-pc39_vegc_carbon_density(j,land)	  current carbon density
+i39_landclear_gdp(bound39)            global range of land clearing costs (US$ per hectare)
+p39_landclear_a                       intercept for land clearing costs calculation
+p39_landclear_b                       slope for land clearing costs calculation
+p39_landclear_costs_reg(t,i,land)	  regional land clearing costs (US$ per hectare)
+p39_landclear_costs(t,j,land)         cellular land clearing costs (US$ per hectare)
+pc39_landclear_costs(j,land)          current cellular land clearing costs (US$ per hectare)
+
+i39_establish_gdp(land,bound39)       global range of land establishment costs (US$ per hectare)
+p39_establish_a(land)                 intercept for establishment costs calculation
+p39_establish_b(land)                 slope for establishment costs calculation
+p39_establish_costs_reg(t,i,land)	  regional establishment costs (US$ per hectare)
+p39_establish_costs(t,j,land)         cellular establishment costs (US$ per hectare)
+pc39_establish_costs(j,land)          current cellular establishing costs (US$ per hectare)
+
+p39_max_vegc_reg(i)					  maximum regional vegetation carbon density (tC per ha)
+pc39_vegc_fact(j)                	  scaling factor that reduces clearing costs depending on vegetation density (-)
+
+p39_cost_landcon_past(t,j,land)       costs for landconversion from the past (mio US$)
+pc39_cost_landcon_past(j,land)        current costs for landconversion from the past (mio US$)
 ;
 
 

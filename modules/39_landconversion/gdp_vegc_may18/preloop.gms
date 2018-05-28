@@ -16,9 +16,9 @@ $Ifi "%c39_cost_scenario%" == "medium" i39_landclear_gdp(bound39) = f39_landclea
 $Ifi "%c39_cost_scenario%" == "high" i39_landclear_gdp(bound39) = f39_landclear_gdp("high_estimate",bound39);
 
 *' @code
-*' Regional establishment cost for agricultural land (cropland and pasture) and forestry 
+*' Regional land establishment and clearing costs
 *' are derived by scaling a global range of establishment 
-*' cost `i39_establish_gdp` with regional GDP per capita `im_gdp_pc_mer`. 
+*' `i39_establish_gdp` and clearing `i39_landclear_gdp` costs with regional GDP per capita `im_gdp_pc_mer`. 
 *'
 *' Determine global minimum and maximum GDP per capita in 1995:
 s39_min_gdp = smin(i,im_gdp_pc_mer("y1995",i));
@@ -31,49 +31,43 @@ s39_max_gdp = smax(i,im_gdp_pc_mer("y1995",i));
 *' For future time steps, establishment cost scaled with the GDP per capita trajectory.
 p39_establish_a(land) = (i39_establish_gdp(land,"high_gdp")
 						- i39_establish_gdp(land,"low_gdp")) / (s39_max_gdp-s39_min_gdp);
-p39_establish_b(land) = i39_establish_gdp(land,"low_gdp") - p39_establish_a(land) * s39_min_gdp;
+p39_establish_b(land) = i39_establish_gdp(land,"low_gdp")
+					    - p39_establish_a(land) * s39_min_gdp;
 p39_establish_costs_reg(t,i,land) = p39_establish_a(land) * im_gdp_pc_mer(t,i)
-								+p39_establish_b(land);
-*' Assume identical establishment cost in all cells belonging to a region. 
+									+ p39_establish_b(land);
+*' Assume identical land establishment costs in all cells belonging to a region. 
 p39_establish_costs(t,j,land) = sum(cell(i,j), p39_establish_costs_reg(t,i,land));
 *' @stop
 
 *' @code
-*' Spatially explicit costs for land clearing (primary forest, secondary forest and other natural land) 
-*' are derived by scaling a global range of clearing 
-*' cost `i39_clearing_gdp` with regional GDP per capita `im_gdp_pc_mer` and 
-*' spatially explicit vegetation carbon density. 
-*'
-*' @stop
-
-display i39_landclear_gdp;
-
-** NEW: costs are corrected so that region with the
-* slope of the gdp function
-p39_landclear_a =  (i39_landclear_gdp("high_gdp")-i39_landclear_gdp("low_gdp"))/(s39_max_gdp-s39_min_gdp);
-
-* intercept of the gdp function
+*' The calculation of regional land clearing costs follows the same rules as described for establishment costs above.
+p39_landclear_a =  (i39_landclear_gdp("high_gdp")
+				   - i39_landclear_gdp("low_gdp"))/(s39_max_gdp-s39_min_gdp);
 p39_landclear_b = i39_landclear_gdp("low_gdp")-p39_landclear_a*s39_min_gdp;
-
-* Costs for land clearing.
 p39_landclear_costs_reg(t,i,land) = 0;
-p39_landclear_costs_reg(t,i,land_natveg) = p39_landclear_a*im_gdp_pc_mer(t,i)+p39_landclear_b;
-
-*' Assume identical cost in all cells belonging to a region. 
+p39_landclear_costs_reg(t,i,land_natveg) = p39_landclear_a*im_gdp_pc_mer(t,i)
+										   + p39_landclear_b;
+*' Assume identical land clearing costs in all cells belonging to a region. 
 p39_landclear_costs(t,j,land) = sum(cell(i,j), p39_landclear_costs_reg(t,i,land));
 
+*' Land clearing costs are additionally scaled with spatially explicit vegetation carbon density.
+
+*' Determine maximum vegetation carbon density in each region.
 p39_max_vegc_reg(i) = smax(cell(i,j), fm_carbon_density("y1995",j,"primforest","vegc"));
-
-display p39_max_vegc_reg;
-
-* factor that lowers the costs depending on the carbon density of the vegetation in relation to the maximum carbon density in the region
+*'
+*' Calculate reduction factor for land clearing costs. The cell with the highest 
+*' vegetation carbon density in a region has the highest clearing costs in this regions.
+*' The clearing costs in all other cells of this region will be reduced based on the ratio
+*' of spatially explicit vegetation carbon density `fm_carbon_density` and maximum regional 
+*' vegetation carbon density `p39_max_vegc_reg`.
 pc39_vegc_fact(j) = 1;
-pc39_vegc_fact(j) = sum(cell(i,j),(fm_carbon_density("y1995",j,"primforest","vegc")/p39_max_vegc_reg(i)$(p39_max_vegc_reg(i)>0)));
-
-display pc39_vegc_fact;
-
-p39_landclear_costs(t,j,land_natveg) = p39_landclear_costs(t,j,land_natveg) * pc39_vegc_fact(j);
-
+pc39_vegc_fact(j) = sum(cell(i,j),(fm_carbon_density("y1995",j,"primforest","vegc")
+						/ p39_max_vegc_reg(i)$(p39_max_vegc_reg(i)>0)));
+*'
+*' Apply the scaling factor `pc39_vegc_fact`.
+p39_landclear_costs(t,j,land_natveg) = p39_landclear_costs(t,j,land_natveg) 
+									   * pc39_vegc_fact(j);
+*' @stop
 
 **
 
