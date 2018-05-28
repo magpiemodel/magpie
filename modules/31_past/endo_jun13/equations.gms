@@ -4,17 +4,27 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @equations
 
- q31_prod(j2) .. vm_prod(j2,"pasture")
-                =e=
-                vm_land(j2,"past")*vm_yld(j2,"pasture","rainfed");
+*' Production of pasture biomass is restricted to pasture area which is
+*' delivered as module output together with the resulting geographically
+*' explicit production of pasture biomass. Cellular production is calculated by
+*' multiplying pasture area `vm_land` with cellular rainfed pasture yields
+*' `vm_yld` which are delivered by the module [14_yields]:
 
- q31_carbon(j2,c_pools) .. vm_carbon_stock(j2,"past",c_pools)
-                          =e=
-                          sum(ct, vm_land(j2,"past")*fm_carbon_density(ct,j2,"past",c_pools));
+q31_prod(j2) ..
+ vm_prod(j2,"pasture") =e= vm_land(j2,"past")*vm_yld(j2,"pasture","rainfed");
 
- q31_cost_prod_past(i2) .. vm_cost_prod(i2,"pasture")
-                            =e=
-                            vm_prod_reg(i2,"pasture")*s31_fac_req_past;
+*' On the basis of the required pasture area, cellular carbon stocks are calculated:
+
+q31_carbon(j2,c_pools) ..
+ vm_carbon_stock(j2,"past",c_pools) =e=
+         sum(ct, vm_land(j2,"past")*fm_carbon_density(ct,j2,"past",c_pools));
+
+*' Costs associated with maintenance and management of pastures are scaled with
+*' regional utilization of biomass from pastures:
+
+q31_cost_prod_past(i2) ..
+ vm_cost_prod(i2,"pasture") =e= vm_prod_reg(i2,"pasture")*s31_fac_req_past;
 
 *** EOF constraints.gms ***
