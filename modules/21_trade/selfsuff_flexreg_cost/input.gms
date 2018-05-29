@@ -8,7 +8,7 @@ $setglobal c21_trade_liberalization  regionalized
 *   options are "regionalized" and "globalized" and "fragmented"
 
 scalars
-  c21_reduction_start  initial annual trade balance reduction            / 0.0025 /
+  c21_reduction_start  fixing initial annual trade balance reduction to historical levels / 0 /
   c21_reduction_regionalized regionalized annual trade balance reduction / 0.005  /
   c21_reduction_globalized   globalized annual trade balance reduction   / 0.01   /
   c21_reduction_fragmented   fragmented annual trade balance reduction   / 0      /
