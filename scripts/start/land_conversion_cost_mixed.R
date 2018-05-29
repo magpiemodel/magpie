@@ -25,7 +25,6 @@ cfg$output <- c("report","validation","interpolation","LU_DiffPlots","LandusePlo
 
 #cfg$force_download <- TRUE
 cfg$recalibrate <- TRUE
-cfg$recalc_base_run <- TRUE
 
 
 for (factor_cost in c("mixed_feb17")) {

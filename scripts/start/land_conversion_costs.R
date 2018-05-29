@@ -25,7 +25,6 @@ cfg$output <- c("report","validation","interpolation","LU_DiffPlots","LandusePlo
 
 #cfg$force_download <- TRUE
 cfg$recalibrate <- TRUE
-cfg$recalc_base_run <- TRUE
 
 ## run with per ton costs
 cfg$gms$factor_costs <- "fixed_per_ton_mar18"
@@ -88,7 +87,7 @@ try(start_run(cfg=cfg, codeCheck=FALSE))
 #reset
 cfg$gms$s14_yld_past_switch <- 0.25
 
-##runs without WDPA protection 
+##runs without WDPA protection
 cfg$gms$factor_costs <- "fixed_per_ton_mar18"
 cfg$title <- "fixed_noWDPA"
 cfg$gms$c35_protect_scenario <- "none"

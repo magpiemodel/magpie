@@ -20,8 +20,8 @@ $title magpie
 * md5sum: 25f0922007290714128a42527ced7570
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev3.29.tgz
-* md5sum: 50641134e888257613ad60cb2e242b3f
+* Used data set: additional_data_rev3.30.tgz
+* md5sum: 4b07d3a83fdab96fd690fcb411a7e062
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Used data set: npi_ndc_base_SSP2_mixed.tgz
@@ -59,7 +59,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Fri May 18 10:23:25 2018
+* Last modification (input data): Fri May 25 07:10:14 2018
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
