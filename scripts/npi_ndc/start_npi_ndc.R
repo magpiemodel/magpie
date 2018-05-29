@@ -243,7 +243,8 @@ calc_policy <- function(policy,stock,pol_type="aff",pol_mapping, weight=NULL) {
         ref_flow[i,,] <- flow[i,,]
       } else stop("unknow targettype; needs to be 1 or 2")
     } else if(pol_type=="emis"){
-      stock[i,tp<=baseyear,] <- NA
+      # stock[i,tp<=baseyear,] <- NA
+      stock[i,tp<=baseyear,] <- 0
       magpie_policy[i,,] <- stock[i,,]*(1-magpie_policy[i])
       # magpie_policy[i,,][is.na(magpie_policy[i])] <- Inf
     }
@@ -260,8 +261,8 @@ calc_policy <- function(policy,stock,pol_type="aff",pol_mapping, weight=NULL) {
     # magpie_policy[setdiff(getRegions(magpie_policy),policy_countries),,] <- Inf
     magpie_policy <- speed_aggregate(x=magpie_policy, rel=rel, weight=weight)
     # magpie_policy[is.nan(magpie_policy)] <- Inf
-    magpie_policy[setdiff(getRegions(magpie_policy),policy_countries),,] <- Inf
-    magpie_policy[is.na(magpie_policy)] <- Inf
+    # magpie_policy[setdiff(getRegions(magpie_policy),policy_countries),,] <- Inf
+    # magpie_policy[is.na(magpie_policy)] <- Inf
   }
 
   load("../../input/spatial_header.rda")
