@@ -24,5 +24,4 @@ cfg$title <- "SSP2_BAU"
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "SSP2_BAU_recalcBaseRun"
-cfg$recalc_base_run <- TRUE
 start_run(cfg,codeCheck=FALSE)

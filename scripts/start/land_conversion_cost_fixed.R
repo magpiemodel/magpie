@@ -25,8 +25,6 @@ cfg$output <- c("report","validation","interpolation","LU_DiffPlots","LandusePlo
 
 #cfg$force_download <- TRUE
 cfg$recalibrate <- TRUE
-cfg$recalc_base_run <- TRUE
-
 
 for (factor_cost in c("fixed_per_ton_mar18")) {
   for (pastTC in c(0.25,0.5,0.75)) {
