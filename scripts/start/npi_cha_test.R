@@ -19,10 +19,11 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$gms$c_timesteps <- "coup2100"
+cfg$gms$landconversion <- "gdp_vegc_may18"
 
-cfg$title <- "SSP2_BAU"
+cfg$title <- "age_class_acx"
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "SSP2_BAU_recalcBaseRun"
-cfg$recalc_base_run <- TRUE
+cfg$title <- "age_class_ini"
+cfg$gms$natveg  <- "dynamic_jun18"
 start_run(cfg,codeCheck=FALSE)
