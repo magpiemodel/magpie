@@ -183,9 +183,6 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
 
   # NPI/NDC policyes calculations
   if(cfg$recalc_npi_ndc){
-    baserun_files <- c("scripts/npi_ndc/policies/magpie_bau_land.mz",
-                       "scripts/npi_ndc/policies/magpie_bau_cstock.mz")
-    if(!any(file.exists(baserun_files))) stop("Base_run archived files missing!")
     cat("Starting NPI/NDC recalculation!\n")
     source("scripts/npi_ndc/start_npi_ndc.R")
     setwd("scripts/npi_ndc")
