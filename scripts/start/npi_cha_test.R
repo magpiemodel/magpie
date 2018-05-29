@@ -21,6 +21,8 @@ cfg$results_folder <- "output/:title:"
 cfg$gms$c_timesteps <- "coup2100"
 cfg$gms$landconversion <- "gdp_vegc_may18"
 
+cfg$recalibrate <- TRUE
+
 cfg$title <- "age_class_acx"
 start_run(cfg,codeCheck=FALSE)
 
