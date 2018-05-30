@@ -15,7 +15,7 @@ variables
 ;
 
 positive variables
- vm_land(j,land)                   areas of the different land types (mio.ha)
+ vm_land(j,land)                  areas of the different land types (mio.ha)
  vm_landexpansion(j,land)         land expansion (mio. ha)
  vm_landreduction(j,land)         land reduction (mio. ha)
 ;
