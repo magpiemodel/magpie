@@ -26,6 +26,6 @@ cfg$recalibrate <- FALSE
 # cfg$title <- "age_class_acx"
 # start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "age_class_ini3"
+cfg$title <- "age_class_ini4"
 cfg$gms$natveg  <- "dynamic_jun18"
 start_run(cfg,codeCheck=FALSE)
