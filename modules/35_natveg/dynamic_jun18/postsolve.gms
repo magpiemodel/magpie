@@ -4,10 +4,16 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+if((ord(t) = 1),
+p35_other(t,j,ac_new,"after") = v35_other.l(j,"new");
+p35_other(t,j,ac_grow,"after") = i35_ageclass_shr_grow(j,ac_grow) * v35_other.l(j,"grow");
+p35_other(t,j,ac_old,"after") = v35_other.l(j,"old");
+else
 *other land age class calculation
 	p35_other(t,j,ac,"after") =
         v35_other.l(j,"new")$(ord(ac) = 1)
         + sum(ac_land35(ac,land35)$(not sameas(land35,"new") AND pc35_other(j,land35) > 0),(v35_other.l(j,land35)/pc35_other(j,land35))*p35_other(t,j,ac,"before"))$(ord(ac) > 1);
+);
 
 *secdforest age class calculation
 p35_secdforest(t,j,ac,"after") =

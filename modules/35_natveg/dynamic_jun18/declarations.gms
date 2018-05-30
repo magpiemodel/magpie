@@ -26,9 +26,9 @@ parameters
  p35_min_forest(t,j) 			minimum forest land stock (Mha)
  p35_min_cstock(t,j) 			minimum natveg carbon stock (MtC)
  i35_ageclass_area(j,ac)		age classes from Poulter et al dataset (Mha)
- i35_secdforest_ageclass_area(j,ac) secdforest age class area (Mha)
- i35_secdforest_ageclass_shr(j,ac) secdforest age class share (-)
- i35_other_ageclass_shr(j,ac)     other age class share (-)
+ i35_ageclass_shr(j,ac)     other age class share (-)
+ i35_ageclass_area_grow(j,ac) secdforest age class area (Mha)
+ i35_ageclass_shr_grow(j,ac) secdforest age class share (-)
 ;
 
 equations
