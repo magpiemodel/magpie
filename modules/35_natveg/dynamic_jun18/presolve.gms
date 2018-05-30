@@ -102,6 +102,7 @@ $endif
 vm_land.lo(j,"primforest") = p35_save_primforest(t,j);
 vm_land.up(j,"primforest") = vm_land.l(j,"primforest");
 m_boundfix(vm_land,(j,"primforest"),l,10e-5);
+vm_land.fx(j,"primforest")$(ord(t) = 1) = vm_land.l(j,"primforest");
 *' 
 v35_secdforest.fx(j,"new") = 0;
 v35_secdforest.lo(j,"grow") = 0;
@@ -110,6 +111,7 @@ m_boundfix(v35_secdforest,(j,"grow"),l,10e-5);
 v35_secdforest.lo(j,"old") = p35_save_secdforest(t,j);
 v35_secdforest.up(j,"old") = pc35_secdforest(j,"old");
 m_boundfix(v35_secdforest,(j,"old"),l,10e-5);
+v35_secdforest.fx(j,land35)$(ord(t) = 1) = pc35_secdforest(j,land35);
 *' 
 v35_other.lo(j,"new") = 0;
 v35_other.up(j,"new") = Inf;
