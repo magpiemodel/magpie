@@ -12,16 +12,16 @@ ac_land35(ac,"old")  = yes$(ord(ac) = card(ac));
 
 i35_ageclass_area(j,ac) = sum(ac_to_ac_poulter(ac,ac_poulter), f35_ageclass_area(j,ac_poulter));
 
-i35_secdforest_ageclass_shr(j,ac) = 1/card(ac);
-i35_secdforest_ageclass_area(j,ac) = i35_ageclass_area(j,ac)$(not sameas(ac,"acx"));
-i35_secdforest_ageclass_shr(j,ac)$(sum(ac2, i35_secdforest_ageclass_area(j,ac2)) > 0) = 
-		i35_secdforest_ageclass_area(j,ac)/sum(ac2, i35_secdforest_ageclass_area(j,ac2));
-i35_secdforest(j,ac) = i35_secdforest_ageclass_shr(j,ac) * pcm_land(j,"secdforest");
+i35_ageclass_area_grow(j,ac) = i35_ageclass_area(j,ac)$(not sameas(ac,"acx"));
+i35_ageclass_shr_grow(j,ac) = 1/card(ac);
+i35_ageclass_shr_grow(j,ac)$(sum(ac2, i35_ageclass_area_grow(j,ac2)) > 0) = 
+		i35_ageclass_area_grow(j,ac)/sum(ac2, i35_ageclass_area_grow(j,ac2));
+i35_secdforest(j,ac) = i35_ageclass_shr_grow(j,ac) * pcm_land(j,"secdforest");
 
-i35_other_ageclass_shr(j,ac) = 1/card(ac);
-i35_other_ageclass_shr(j,ac)$(sum(ac2, i35_ageclass_area(j,ac2)) > 0) = 
+i35_ageclass_shr(j,ac) = 1/card(ac);
+i35_ageclass_shr(j,ac)$(sum(ac2, i35_ageclass_area(j,ac2)) > 0) = 
 		i35_ageclass_area(j,ac)/sum(ac2, i35_ageclass_area(j,ac2));
-i35_other(j,ac) = i35_other_ageclass_shr(j,ac) * pcm_land(j,"other");
+i35_other(j,ac) = i35_ageclass_shr(j,ac) * pcm_land(j,"other");
 
 p35_protect_shr(t,j,prot_type) = 0;
 
