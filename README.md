@@ -1,5 +1,7 @@
 # MAgPIE 4.0-beta
 
+This is an unvalidated beta version. Do not use it for productive runs!
+
   <https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpie>
 
 ## WHAT IS MAGPIE?
