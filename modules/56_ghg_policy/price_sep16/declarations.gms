@@ -20,11 +20,11 @@ equations
  q56_emission_costs_cell_yearly(j,emis_cell_yearly56) calculation of costs pollution rights from emissions occuring yearly
  q56_emission_costs_cell_oneoff(j,emis_cell_oneoff56) calculation of costs pollution rights occuring only once in time
  q56_reward_cdr_aff_reg(i) reward for CDR from afforestation
- q56_reward_cdr_aff(j,emis_source_co2_forestry) reward for CDR from afforestation
+ q56_reward_cdr_aff(j,co2_forestry) reward for CDR from afforestation
 ;
 
 positive variables
- v56_reward_cdr_aff(j,emis_source_co2_forestry)  reward for CDR from afforestation (mio. US$)
+ v56_reward_cdr_aff(j,co2_forestry)  reward for CDR from afforestation (mio. US$)
  vm_reward_cdr_aff(i)                            reward for CDR from afforestation (mio. US$)
 ;
 
@@ -42,7 +42,7 @@ variables
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov56_reward_cdr_aff(t,j,emis_source_co2_forestry,type)          reward for CDR from afforestation (mio. US$)
+ ov56_reward_cdr_aff(t,j,co2_forestry,type)          reward for CDR from afforestation (mio. US$)
  ov_reward_cdr_aff(t,i,type)                                     reward for CDR from afforestation (mio. US$)
  ov_btm_reg(t,i,emis_source,pollutants,type)                     emissions before technical mitigation (Tg N2O-N CH4 and CO2-C)
  ov_btm_cell(t,j,emis_source,pollutants,type)                    emissions before technical mitigation (Tg N2O-N CH4 and CO2-C)
@@ -62,6 +62,6 @@ parameters
  oq56_emission_costs_cell_yearly(t,j,emis_cell_yearly56,type)    calculation of costs pollution rights from emissions occuring yearly
  oq56_emission_costs_cell_oneoff(t,j,emis_cell_oneoff56,type)    calculation of costs pollution rights occuring only once in time
  oq56_reward_cdr_aff_reg(t,i,type)                               reward for CDR from afforestation
- oq56_reward_cdr_aff(t,j,emis_source_co2_forestry,type)          reward for CDR from afforestation
+ oq56_reward_cdr_aff(t,j,co2_forestry,type)          reward for CDR from afforestation
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

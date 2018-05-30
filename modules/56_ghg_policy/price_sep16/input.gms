@@ -36,7 +36,7 @@ $include "./modules/56_ghg_policy/input/f56_emis_policy.csv"
 $offdelim
 ;
 
-table f56_aff_policy(emis_source_co2_forestry,aff56) afforestation policy scenarios
+table f56_aff_policy(co2_forestry,aff56) afforestation policy scenarios
 $ondelim
 $include "./modules/56_ghg_policy/input/f56_aff_policy.csv"
 $offdelim

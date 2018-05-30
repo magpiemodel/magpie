@@ -91,14 +91,14 @@
  q56_reward_cdr_aff_reg(i2) ..
                  vm_reward_cdr_aff(i2)
                  =e=
-                 sum((emis_source_co2_forestry,cell(i2,j2)),
-                 v56_reward_cdr_aff(j2,emis_source_co2_forestry)
+                 sum((co2_forestry,cell(i2,j2)),
+                 v56_reward_cdr_aff(j2,co2_forestry)
                  );
 
- q56_reward_cdr_aff(j2,emis_source_co2_forestry) ..
-                 v56_reward_cdr_aff(j2,emis_source_co2_forestry)
+ q56_reward_cdr_aff(j2,co2_forestry) ..
+                 v56_reward_cdr_aff(j2,co2_forestry)
                  =e=
-                 vm_cdr_aff(j2,emis_source_co2_forestry) *
-                 f56_aff_policy(emis_source_co2_forestry,"%c56_aff_policy%") *
+                 vm_cdr_aff(j2,co2_forestry) *
+                 f56_aff_policy(co2_forestry,"%c56_aff_policy%") *
                  sum((ct,cell(i2,j2)),
                  im_pollutant_prices(ct,i2,"co2_c")*p56_ghg_price_growth_rate(ct,i2,"co2_c"));

@@ -5,7 +5,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 vm_cost_fore.fx(i) = 0;
-vm_cdr_aff.fx(j,emis_source_co2_forestry) = 0;
+vm_cdr_aff.fx(j,co2_forestry) = 0;
 
 *fix forestry land
 v32_land.fx(j,"new") = 0;
