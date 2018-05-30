@@ -111,11 +111,17 @@ v35_secdforest.lo(j,"old") = p35_save_secdforest(t,j);
 v35_secdforest.up(j,"old") = pc35_secdforest(j,"old");
 m_boundfix(v35_secdforest,(j,"old"),l,10e-5);
 *' 
+if((ord(t) = 1),
+v35_other.fx(j,"new") = 0;
+v35_other.lo(j,"grow") = 0;
+v35_other.up(j,"grow") = Inf;
+else
 v35_other.lo(j,"new") = 0;
 v35_other.up(j,"new") = Inf;
 v35_other.lo(j,"grow") = 0;
 v35_other.up(j,"grow") = pc35_other(j,"grow");
 m_boundfix(v35_other,(j,"grow"),l,10e-5);
+);
 v35_other.lo(j,"old") = p35_save_other(t,j);
 v35_other.up(j,"old") = pc35_other(j,"old");
 m_boundfix(v35_other,(j,"old"),l,10e-5);

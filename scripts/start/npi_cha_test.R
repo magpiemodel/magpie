@@ -21,11 +21,11 @@ cfg$results_folder <- "output/:title:"
 cfg$gms$c_timesteps <- "coup2100"
 cfg$gms$landconversion <- "gdp_vegc_may18"
 
-cfg$recalibrate <- TRUE
+cfg$recalibrate <- FALSE
 
-cfg$title <- "age_class_acx"
-start_run(cfg,codeCheck=FALSE)
+# cfg$title <- "age_class_acx"
+# start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "age_class_ini"
+cfg$title <- "age_class_ini2"
 cfg$gms$natveg  <- "dynamic_jun18"
 start_run(cfg,codeCheck=FALSE)
