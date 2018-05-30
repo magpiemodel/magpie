@@ -111,17 +111,11 @@ v35_secdforest.lo(j,"old") = p35_save_secdforest(t,j);
 v35_secdforest.up(j,"old") = pc35_secdforest(j,"old");
 m_boundfix(v35_secdforest,(j,"old"),l,10e-5);
 *' 
-if((ord(t) = 1),
-v35_other.fx(j,"new") = 0;
-v35_other.lo(j,"grow") = 0;
-v35_other.up(j,"grow") = Inf;
-else
 v35_other.lo(j,"new") = 0;
 v35_other.up(j,"new") = Inf;
 v35_other.lo(j,"grow") = 0;
 v35_other.up(j,"grow") = pc35_other(j,"grow");
 m_boundfix(v35_other,(j,"grow"),l,10e-5);
-);
 v35_other.lo(j,"old") = p35_save_other(t,j);
 v35_other.up(j,"old") = pc35_other(j,"old");
 m_boundfix(v35_other,(j,"old"),l,10e-5);
@@ -129,12 +123,17 @@ m_boundfix(v35_other,(j,"old"),l,10e-5);
 
 *calculate carbon density
 *highest carbon density 1st time step to account for reshuffling
+if((ord(t) = 1),
+	p35_carbon_density_secdforest(t,j,land35,c_pools) = pm_carbon_density_ac(t,j,"acx",c_pools);
+	p35_carbon_density_other(t,j,land35,c_pools) = pm_carbon_density_ac(t,j,"acx",c_pools);
+else
 	p35_carbon_density_secdforest(t,j,"new",c_pools) = pm_carbon_density_ac(t,j,"ac0",c_pools);
 	p35_carbon_density_secdforest(t,j,"grow",c_pools) = m_weightedmean(pm_carbon_density_ac(t,j,ac,c_pools),p35_secdforest(t,j,ac,"before"),(ac_land35(ac,"grow")));
 	p35_carbon_density_secdforest(t,j,"old",c_pools) = pm_carbon_density_ac(t,j,"acx",c_pools);
 	p35_carbon_density_other(t,j,"new",c_pools) = pm_carbon_density_ac(t,j,"ac0",c_pools);
 	p35_carbon_density_other(t,j,"grow",c_pools) = m_weightedmean(pm_carbon_density_ac(t,j,ac,c_pools),p35_other(t,j,ac,"before"),(ac_land35(ac,"grow")));
 	p35_carbon_density_other(t,j,"old",c_pools) = pm_carbon_density_ac(t,j,"acx",c_pools);
+);
 
 p35_min_forest(t,j)$(p35_min_forest(t,j) > vm_land.l(j,"primforest") + vm_land.l(j,"secdforest")) = vm_land.l(j,"primforest") + vm_land.l(j,"secdforest");
 p35_min_cstock(t,j)$(p35_min_cstock(t,j) > sum(c_pools, vm_carbon_stock.l(j,"primforest",c_pools) + vm_carbon_stock.l(j,"secdforest",c_pools))) = sum(c_pools, vm_carbon_stock.l(j,"primforest",c_pools) + vm_carbon_stock.l(j,"secdforest",c_pools));

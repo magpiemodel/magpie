@@ -5,9 +5,13 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 if((ord(t) = 1),
-p35_other(t,j,ac_new,"after") = v35_other.l(j,"new");
-p35_other(t,j,ac_grow,"after") = i35_ageclass_shr_grow(j,ac_grow) * v35_other.l(j,"grow");
-p35_other(t,j,ac_old,"after") = v35_other.l(j,"old");
+* In the 1st timestep there is a lot of reshuffling resulting in increase of v35_other(j,"new").
+* This would result in quite some carbon uptake (negative emissions) due to regrowth of vegetation.
+* Therefore, we reset age-classes after the optimization of the 1st time step.
+	v35_other.l(j,land35) = 0;
+	v35_other.l(j,"old") = vm_land.l(j,"other");
+	p35_other(t,j,ac,"after") = 0;
+	p35_other(t,j,"acx","after") = vm_land.l(j,"other");
 else
 *other land age class calculation
 	p35_other(t,j,ac,"after") =
