@@ -4,6 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @title Agricultural waste management system
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%awms%" == "ipcc2006_aug16" $include "./modules/55_awms/ipcc2006_aug16.gms"

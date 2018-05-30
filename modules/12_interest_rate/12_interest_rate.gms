@@ -4,6 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @title Interest rate
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%interest_rate%" == "glo_jan16" $include "./modules/12_interest_rate/glo_jan16.gms"

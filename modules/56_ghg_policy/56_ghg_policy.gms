@@ -4,6 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @title Green house gas policy
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%ghg_policy%" == "price_sep16" $include "./modules/56_ghg_policy/price_sep16.gms"

@@ -4,6 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @title Phosphorous
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%phosphorus%" == "off" $include "./modules/54_phosphorus/off.gms"

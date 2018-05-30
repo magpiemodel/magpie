@@ -4,6 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @title Marginal abatement cost curve
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%maccs%" == "off_jul16" $include "./modules/57_maccs/off_jul16.gms"

@@ -4,6 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @title Nitrogen soil budget
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%nr_soil_budget%" == "exoeff_aug16" $include "./modules/50_nr_soil_budget/exoeff_aug16.gms"

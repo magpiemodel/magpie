@@ -4,6 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @title Yields
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%yields%" == "biocorrect" $include "./modules/14_yields/biocorrect.gms"

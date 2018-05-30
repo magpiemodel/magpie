@@ -4,6 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @title Methane
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%methane%" == "ipcc2006_flexreg_apr16" $include "./modules/53_methane/ipcc2006_flexreg_apr16.gms"

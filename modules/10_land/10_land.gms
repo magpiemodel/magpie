@@ -4,6 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @title Land
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%land%" == "feb15" $include "./modules/10_land/feb15.gms"
