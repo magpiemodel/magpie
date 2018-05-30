@@ -7,7 +7,7 @@
 *' @title Material
 *'
 *' @description The material module describes the demand for material usage
-*'based on historical data.
+*'based on historical data. 
 *' @authors Benjamin Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################

@@ -10,8 +10,8 @@ scalar
 ;
 
 parameters
-  p62_dem_material_last_historical(i,kall)    Material demand in last historical timestep (mio. tDM)
-  p62_dem_food_last_historical(i)             Food demand in last historical timestep (mio. tDM)
+  p62_dem_material_lh(i,kall)    Material demand in last historical timestep (mio. tDM)
+  p62_dem_food_lh(i)             Food demand in last historical timestep (mio. tDM)
 ;
 
 positive variables
