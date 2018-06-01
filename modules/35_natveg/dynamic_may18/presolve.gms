@@ -11,14 +11,15 @@ if((ord(t) = 1),
 	p35_secdforest(t,j,ac,"before") = i35_secdforest(j,ac);
 	p35_other(t,j,ac,"before") = i35_other(j,ac);
 else
-	p35_other(t,j,ac,"before") =
-	    0$(ord(ac) = 1)
-        + p35_other(t-1,j,ac-s35_shift,"after")$(ord(ac) > 1 AND ord(ac) < card(ac))
-        + p35_other(t-1,j,ac,"after")$(ord(ac) = card(ac));
-	p35_secdforest(t,j,ac,"before") =
-		0$(ord(ac) = 1)
-        + p35_secdforest(t-1,j,ac-s35_shift,"after")$(ord(ac) > 1 AND ord(ac) < card(ac))
-        + p35_secdforest(t-1,j,ac,"after")$(ord(ac) = card(ac));
+	p35_other(t,j,ac,"before")$(ac.off < s35_shift) = 0;
+    p35_other(t,j,ac,"before")$(ac.off >= s35_shift) = p35_other(t-1,j,ac-s35_shift,"after");
+    p35_other(t,j,"acx","before") = p35_other(t,j,"acx","before")
+                  + sum(ac$(ord(ac) > card(ac)-s35_shift), p35_other(t-1,j,ac,"after"));
+
+	p35_secdforest(t,j,ac,"before")$(ac.off < s35_shift) = 0;
+    p35_secdforest(t,j,ac,"before")$(ac.off >= s35_shift) = p35_secdforest(t-1,j,ac-s35_shift,"after");
+    p35_secdforest(t,j,"acx","before") = p35_secdforest(t,j,"acx","before")
+                  + sum(ac$(ord(ac) > card(ac)-s35_shift), p35_secdforest(t-1,j,ac,"after"));
 );
 *' @stop
 
