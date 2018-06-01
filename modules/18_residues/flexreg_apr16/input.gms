@@ -26,9 +26,9 @@ $ondelim
 $include "./modules/18_residues/flexreg_apr16/input/f18_cgf.csv"
 $offdelim;
 
-table f18_res_use_burn(dev18,kcr) minimum use of residues for a certain use (to be replaced by endogenous calcs) (1)
+table f18_res_use_burn_phaseout(t_all,dev18,kcr) minimum and maximum burn share use for residues developing over time (1)
 $ondelim
-$include "./modules/18_residues/flexreg_apr16/input/f18_res_use_burn.csv"
+$include "./modules/18_residues/flexreg_apr16/input/f18_res_use_burn_phaseout.cs3"
 $offdelim;
 
 parameter f18_res_combust_eff(kve)  Combustion efficiency of residue burning (1)
