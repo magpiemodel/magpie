@@ -8,20 +8,20 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev29_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
-* md5sum: 567e160f9b7585716f86b68c3b1f3f3e
+* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev30_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
+* md5sum: 3808a8dcb0c704f65a6bb173e259d5a7
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Used data set: rev3.15_8a828c6ed5004e77d1ba2025e8ea2261_magpie.tgz
-* md5sum: 2c6009e8dbfb9f328261b238bf2a43ac
+* md5sum: 82a3dc0dc98f734cc0e272a04e7eafc0
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
 * Used data set: rev3.15_8a828c6ed5004e77d1ba2025e8ea2261_validation.tgz
-* md5sum: 25f0922007290714128a42527ced7570
+* md5sum: 61f03961601001ee63070e761c998b49
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev3.29.tgz
-* md5sum: 50641134e888257613ad60cb2e242b3f
+* Used data set: additional_data_rev3.30.tgz
+* md5sum: 8843442b21be0e7dc4820378f0285634
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Used data set: npi_ndc_base_SSP2_mixed.tgz
@@ -43,15 +43,15 @@ $title magpie
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/noco2
-* * Additional input folder: /p/projects/landuse/data/input/other/rev29
-* * Revision: 29
+* * Additional input folder: /p/projects/landuse/data/input/other/rev30
+* * Revision: 30
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
 * 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: h200
-* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev29_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev29_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
+* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev30_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev30_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz
 * * Regionscode: 8a828c6ed5004e77d1ba2025e8ea2261
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
@@ -59,7 +59,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Fri May 18 10:23:25 2018
+* Last modification (input data): Fri Jun  1 10:36:38 2018
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 

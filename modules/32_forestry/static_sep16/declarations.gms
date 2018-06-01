@@ -17,9 +17,9 @@ parameters
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_fore(t,i,type)                        Afforestation costs (mio. USD)
- ov_landdiff_forestry(t,type)                  Aggregated difference in forestry land compared to previous timestep (mio. ha)
- ov32_land(t,j,land32,type)                    Forestry land pools (mio. ha)
+ ov_cost_fore(t,i,type)            Afforestation costs (mio. USD)
+ ov_landdiff_forestry(t,type)      Aggregated difference in forestry land compared to previous timestep (mio. ha)
+ ov32_land(t,j,land32,type)        Forestry land pools (mio. ha)
  ov_cdr_aff(t,j,co2_forestry,type) Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

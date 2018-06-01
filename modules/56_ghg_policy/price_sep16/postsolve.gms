@@ -7,7 +7,7 @@
 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
- ov56_reward_cdr_aff(t,j,co2_forestry,"marginal")          = v56_reward_cdr_aff.m(j,co2_forestry);
+ ov56_reward_cdr_aff(t,j,co2_forestry,"marginal")                      = v56_reward_cdr_aff.m(j,co2_forestry);
  ov_reward_cdr_aff(t,i,"marginal")                                     = vm_reward_cdr_aff.m(i);
  ov_btm_reg(t,i,emis_source,pollutants,"marginal")                     = vm_btm_reg.m(i,emis_source,pollutants);
  ov_btm_cell(t,j,emis_source,pollutants,"marginal")                    = vm_btm_cell.m(j,emis_source,pollutants);
@@ -27,8 +27,8 @@
  oq56_emission_costs_cell_yearly(t,j,emis_cell_yearly56,"marginal")    = q56_emission_costs_cell_yearly.m(j,emis_cell_yearly56);
  oq56_emission_costs_cell_oneoff(t,j,emis_cell_oneoff56,"marginal")    = q56_emission_costs_cell_oneoff.m(j,emis_cell_oneoff56);
  oq56_reward_cdr_aff_reg(t,i,"marginal")                               = q56_reward_cdr_aff_reg.m(i);
- oq56_reward_cdr_aff(t,j,co2_forestry,"marginal")          = q56_reward_cdr_aff.m(j,co2_forestry);
- ov56_reward_cdr_aff(t,j,co2_forestry,"level")             = v56_reward_cdr_aff.l(j,co2_forestry);
+ oq56_reward_cdr_aff(t,j,co2_forestry,"marginal")                      = q56_reward_cdr_aff.m(j,co2_forestry);
+ ov56_reward_cdr_aff(t,j,co2_forestry,"level")                         = v56_reward_cdr_aff.l(j,co2_forestry);
  ov_reward_cdr_aff(t,i,"level")                                        = vm_reward_cdr_aff.l(i);
  ov_btm_reg(t,i,emis_source,pollutants,"level")                        = vm_btm_reg.l(i,emis_source,pollutants);
  ov_btm_cell(t,j,emis_source,pollutants,"level")                       = vm_btm_cell.l(j,emis_source,pollutants);
@@ -48,8 +48,8 @@
  oq56_emission_costs_cell_yearly(t,j,emis_cell_yearly56,"level")       = q56_emission_costs_cell_yearly.l(j,emis_cell_yearly56);
  oq56_emission_costs_cell_oneoff(t,j,emis_cell_oneoff56,"level")       = q56_emission_costs_cell_oneoff.l(j,emis_cell_oneoff56);
  oq56_reward_cdr_aff_reg(t,i,"level")                                  = q56_reward_cdr_aff_reg.l(i);
- oq56_reward_cdr_aff(t,j,co2_forestry,"level")             = q56_reward_cdr_aff.l(j,co2_forestry);
- ov56_reward_cdr_aff(t,j,co2_forestry,"upper")             = v56_reward_cdr_aff.up(j,co2_forestry);
+ oq56_reward_cdr_aff(t,j,co2_forestry,"level")                         = q56_reward_cdr_aff.l(j,co2_forestry);
+ ov56_reward_cdr_aff(t,j,co2_forestry,"upper")                         = v56_reward_cdr_aff.up(j,co2_forestry);
  ov_reward_cdr_aff(t,i,"upper")                                        = vm_reward_cdr_aff.up(i);
  ov_btm_reg(t,i,emis_source,pollutants,"upper")                        = vm_btm_reg.up(i,emis_source,pollutants);
  ov_btm_cell(t,j,emis_source,pollutants,"upper")                       = vm_btm_cell.up(j,emis_source,pollutants);
@@ -69,8 +69,8 @@
  oq56_emission_costs_cell_yearly(t,j,emis_cell_yearly56,"upper")       = q56_emission_costs_cell_yearly.up(j,emis_cell_yearly56);
  oq56_emission_costs_cell_oneoff(t,j,emis_cell_oneoff56,"upper")       = q56_emission_costs_cell_oneoff.up(j,emis_cell_oneoff56);
  oq56_reward_cdr_aff_reg(t,i,"upper")                                  = q56_reward_cdr_aff_reg.up(i);
- oq56_reward_cdr_aff(t,j,co2_forestry,"upper")             = q56_reward_cdr_aff.up(j,co2_forestry);
- ov56_reward_cdr_aff(t,j,co2_forestry,"lower")             = v56_reward_cdr_aff.lo(j,co2_forestry);
+ oq56_reward_cdr_aff(t,j,co2_forestry,"upper")                         = q56_reward_cdr_aff.up(j,co2_forestry);
+ ov56_reward_cdr_aff(t,j,co2_forestry,"lower")                         = v56_reward_cdr_aff.lo(j,co2_forestry);
  ov_reward_cdr_aff(t,i,"lower")                                        = vm_reward_cdr_aff.lo(i);
  ov_btm_reg(t,i,emis_source,pollutants,"lower")                        = vm_btm_reg.lo(i,emis_source,pollutants);
  ov_btm_cell(t,j,emis_source,pollutants,"lower")                       = vm_btm_cell.lo(j,emis_source,pollutants);
@@ -90,5 +90,5 @@
  oq56_emission_costs_cell_yearly(t,j,emis_cell_yearly56,"lower")       = q56_emission_costs_cell_yearly.lo(j,emis_cell_yearly56);
  oq56_emission_costs_cell_oneoff(t,j,emis_cell_oneoff56,"lower")       = q56_emission_costs_cell_oneoff.lo(j,emis_cell_oneoff56);
  oq56_reward_cdr_aff_reg(t,i,"lower")                                  = q56_reward_cdr_aff_reg.lo(i);
- oq56_reward_cdr_aff(t,j,co2_forestry,"lower")             = q56_reward_cdr_aff.lo(j,co2_forestry);
+ oq56_reward_cdr_aff(t,j,co2_forestry,"lower")                         = q56_reward_cdr_aff.lo(j,co2_forestry);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
