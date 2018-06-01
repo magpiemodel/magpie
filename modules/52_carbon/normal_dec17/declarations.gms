@@ -31,10 +31,10 @@ equations
 parameters
  ov52_carbon_stock_net_change(t,j,land,c_pools,type) net change in carbon stocks compared to previous time step (Mio tC)
  ov_carbon_stock(t,j,land,c_pools,type)              carbon stock in vegetation soil and litter for different land types (Mio tC)
- ov52_carbon_stock_expansion(t,j,land,c_pools,type) carbon stock expansion compared to previous time step (Mio tC)
- ov52_carbon_stock_reduction(t,j,land,c_pools,type) carbon stock reduction compared to previous time step (Mio tC)
- oq52_carbon_stock_expansion(t,j,land,c_pools,type) calculation carbon stock expansion
- oq52_carbon_stock_reduction(t,j,land,c_pools,type) calculation carbon stock reduction
+ ov52_carbon_stock_expansion(t,j,land,c_pools,type)  carbon stock expansion compared to previous time step (Mio tC)
+ ov52_carbon_stock_reduction(t,j,land,c_pools,type)  carbon stock reduction compared to previous time step (Mio tC)
+ oq52_carbon_stock_expansion(t,j,land,c_pools,type)  calculation carbon stock expansion
+ oq52_carbon_stock_reduction(t,j,land,c_pools,type)  calculation carbon stock reduction
  oq52_carbon_stock_net_change(t,j,land,c_pools,type) calculation net carbon stock change
  oq52_co2c_emis(t,j,emis_co2,type)                   calculation of annual CO2 emissions
 ;
