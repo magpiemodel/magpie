@@ -8,7 +8,7 @@
 
 *' Annual CO2 emissions are calculated as difference in carbon stocks between the current 
 *' and the previous time step, and divided by time step length (e.g. 5 or 10 years).
-
+*'
 *' Carbon stock expansion and reduction between the current and the previous time step.
 
  q52_carbon_stock_expansion(j2,land,c_pools) ..
