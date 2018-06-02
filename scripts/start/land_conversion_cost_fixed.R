@@ -25,7 +25,7 @@ cfg$gms$factor_costs <- "fixed_per_ton_mar18"
 
 for(low in c(1000,2000,4000,5000,6000,8000)) {
   for (high in c(10000,12000,14000,16000,18000,20000)) {
-    cfg$title <- paste("lcost",low,high,"mixed",sep="_")
+    cfg$title <- paste("lcost",low,high,"fixed",sep="_")
     cfg$gms$landconversion <- "gdp_vegc_may18"
     a <- read.magpie("modules/39_landconversion/gdp_vegc_may18/input/f39_landclear_gdp.csv")
     a[,,"high_estimate.low_gdp"] <- low
