@@ -200,7 +200,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
     setwd("scripts/npi_ndc")
     calc_NPI_NDC(policyregions=cfg$policyregions)
 		# create a pdf overview of the policies 
-		rmarkdown::render("npi_ndc_policies.Rmd")
+		# rmarkdown::render("npi_ndc_policies.Rmd")
     setwd("../..")
     cat("NPI/NDC recalculation successful!\n")
   }
