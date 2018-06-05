@@ -21,7 +21,7 @@ $title magpie
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
 * Used data set: additional_data_rev3.30.tgz
-* md5sum: 8843442b21be0e7dc4820378f0285634
+* md5sum: 4b07d3a83fdab96fd690fcb411a7e062
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Used data set: npi_ndc_base_SSP2_mixed.tgz

@@ -28,7 +28,6 @@ cfg$gms$c60_2ndgen_biodem <- "SSP2-26-SPA0"
 
 #cfg$force_download <- TRUE
 cfg$recalibrate <- TRUE
-cfg$recalc_base_run <- TRUE
 
 
 cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev29_h200_8a828c6ed5004e77d1ba2025e8ea2261.tgz",
@@ -62,4 +61,3 @@ cfg$title <- "fcostBIOnew_fixed"
 cfg$gms$factor_costs <- "fixed_per_ton_mar18"
 try(start_run(cfg=cfg, codeCheck=FALSE))
 file.copy(from = "scripts/npi_ndc/policies/npi_ndc_base.tgz",to = "output/npi_ndc_base_SSP2_fixed.tgz", overwrite = TRUE)
-
