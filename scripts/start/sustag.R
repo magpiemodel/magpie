@@ -41,15 +41,16 @@ buildInputVector <- function(regionmapping   = "h11",
 ### Single runs ###
 #general settings
 cfg$gms$c_timesteps <- 12
+cfg$input <- buildInputVector(regionmapping="h11")
+cfg$output <- c(cfg$output,"sustag_report")
 
 # clalibration runs
 
 cfg$title <- "SUSTAg2"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$force_download <- TRUE
-cfg$input <- buildInputVector(regionmapping="h11")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6")
-cfg$recalibrate <- TRUE
+cfg$recalibrate <- FALSE
 start_run(cfg=cfg,codeCheck=codeCheck)
 cfg$recalibrate <- FALSE
 
