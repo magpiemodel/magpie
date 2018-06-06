@@ -5,7 +5,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- im_maccs_mitigation(t,i,emis_source,pollutants)     technical mitigation of GHG emissions (based on the CO2 price in t)
+ im_maccs_mitigation(t,i,emis_source,pollutants)     technical mitigation of GHG emissions (percent reduction)
 ;
 
 positive variables

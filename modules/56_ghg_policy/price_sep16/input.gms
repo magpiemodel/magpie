@@ -5,7 +5,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-  s56_reward_neg_emis reward negative co2 emissions / 0 /
+  s56_reward_neg_emis "reward negative co2 emissions (-Inf) or not (0)" / 0 /
 ;
 
 $setglobal c56_pollutant_prices  SSP2-Ref-SPA0
@@ -30,11 +30,15 @@ $if "%c56_pollutant_prices%" == "emulator" $include "./modules/56_ghg_policy/inp
 $if "%c56_pollutant_prices%" == "emulator" $offdelim
 $if "%c56_pollutant_prices%" == "emulator" ;
 
+*' `f56_emis_policy` contains scenarios determining for each gas and source whether it is priced or not.
+
 table f56_emis_policy(scen56,pollutants_all,emis_source) emission policy scenarios
 $ondelim
 $include "./modules/56_ghg_policy/input/f56_emis_policy.csv"
 $offdelim
 ;
+
+*' `f56_aff_policy` contains scenarios determining for the three sources (vegetation, litter, soil) the share of co2 that will be priced.
 
 table f56_aff_policy(co2_forestry,aff56) afforestation policy scenarios
 $ondelim
