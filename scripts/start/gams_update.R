@@ -21,6 +21,7 @@ cfg$results_folder <- "output/:title:"
 cfg$gms$c_timesteps <- "coup2100"
 
 for (solver in c("conopt4+conopt3","conopt4+cplex","conopt4","conopt3")) {
-  cfg$title <- solver
+  cfg$title <- paste("t2",solver,sep="_")
+  cfg$gms$c80_nlp_solver <- solver
   start_run(cfg,codeCheck=FALSE)
 }
