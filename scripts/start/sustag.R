@@ -23,37 +23,65 @@ buildInputVector <- function(regionmapping   = "h11",
                              co2             = "noco2",
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "h200",
-                             archive_rev     = "24",
-                             madrat_rev      = "2.61",
-                             validation_rev  = "2.61",
-                             additional_data = "additional_data_rev3.14.tgz") {
+                             archive_rev     = "30",
+                             madrat_rev      = "4",
+                             validation_rev  = "4",
+                             additional_data = "additional_data_rev3.30.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
-                mag="c30c1c580039c2b300d86cc46ff4036a")
+                mag="c30c1c580039c2b300d86cc46ff4036a",
+                capri="e7e72fddc44cc3d546af7b038c651f51")
   archive_name=paste(project_name,climate_model,climatescen_name,co2,sep="-")
   archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", mappings[regionmapping], ".tgz")
-  madrat  <- paste0("magpie_", mappings[regionmapping], "_rev", madrat_rev, ".tgz")
-  validation  <- paste0("validation_", mappings[regionmapping], "_rev", validation_rev, ".tgz")
+  madrat  <- paste0("rev", madrat_rev,"_", mappings[regionmapping], "_magpie", ".tgz")
+  validation  <- paste0("rev", validation_rev,"_", mappings[regionmapping], "_validation", ".tgz")
   return(c(archive,madrat,validation,additional_data))
 }
 
-
-
 ### Single runs ###
 #general settings
-cfg$gms$c_timesteps <- 7
-cfg$gms$s15_elastic_demand <- 1
+cfg$gms$c_timesteps <- 12
+cfg$input <- buildInputVector(regionmapping="h11")
+cfg$output <- c(cfg$output,"sustag_report")
 
 # clalibration runs
 
 cfg$title <- "SUSTAg2"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$force_download <- TRUE
-cfg$input <- buildInputVector()
-cfg$input <- buildInputVector(co2="co2")
-cfg$recalibrate <- TRUE
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6")
+cfg$recalibrate <- FALSE
 start_run(cfg=cfg,codeCheck=codeCheck)
 cfg$recalibrate <- FALSE
+
+# SSP1 family
+
+cfg$title <- "SUSTAg1"
+cfg<-lucode::setScenario(cfg,"SUSTAg1")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6")
+start_run(cfg=cfg,codeCheck=codeCheck)
+
+# SSP3 family
+
+cfg$title <- "SUSTAg3"
+cfg<-lucode::setScenario(cfg,"SUSTAg3")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0")
+start_run(cfg=cfg,codeCheck=codeCheck)
+
+# SSP4 family
+
+cfg$title <- "SUSTAg4"
+cfg<-lucode::setScenario(cfg,"SUSTAg4")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5")
+start_run(cfg=cfg,codeCheck=codeCheck)
+
+# SSP5 family
+
+cfg$title <- "SUSTAg5"
+cfg<-lucode::setScenario(cfg,"SUSTAg5")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5")
+start_run(cfg=cfg,codeCheck=codeCheck)
+
 
 
 #SSP2 family
@@ -97,33 +125,6 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 cfg$gms$factor_costs="mixed_feb17"
 
 
-# SSP1 family
-
-cfg$title <- "SUSTAg1"
-cfg<-lucode::setScenario(cfg,"SUSTAg1")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6")
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-# SSP3 family
-
-cfg$title <- "SUSTAg3"
-cfg<-lucode::setScenario(cfg,"SUSTAg3")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0")
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-# SSP4 family
-
-cfg$title <- "SUSTAg4"
-cfg<-lucode::setScenario(cfg,"SUSTAg4")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5")
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-# SSP5 family
-
-cfg$title <- "SUSTAg5"
-cfg<-lucode::setScenario(cfg,"SUSTAg5")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5")
-start_run(cfg=cfg,codeCheck=codeCheck)
 
 
 ### bioenergy experiments

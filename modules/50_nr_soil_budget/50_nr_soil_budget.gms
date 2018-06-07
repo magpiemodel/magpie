@@ -6,6 +6,11 @@
 
 *' @title Nitrogen soil budget
 
+*' @description The module 50_nr_soil_budget balances the nitrogen flows for crop land soils and pasture soils 
+*' and calculates the resulting demand for inorganic fertilizer and associated costs.
+ 
+*' @authors Benjamin Bodirsky
+
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%nr_soil_budget%" == "exoeff_aug16" $include "./modules/50_nr_soil_budget/exoeff_aug16.gms"
 $Ifi "%nr_soil_budget%" == "off" $include "./modules/50_nr_soil_budget/off.gms"
