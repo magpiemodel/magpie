@@ -6,7 +6,7 @@
 
 scalars
 
-s42_watdem_nonagr_scenario         scenario for non agricultural water demand from WATERGAP                  / 1 /
+s42_watdem_nonagr_scenario         scenario for non agricultural water demand from WATERGAP                  / 3 /
 *                                                                                1: SSP 2
 *                                                                                2: A2
 *                                                                                3: B1
@@ -75,7 +75,7 @@ $offdelim
 $if "%c42_watdem_scenario%" == "nocc" f42_env_flows(t_all,j) = f42_env_flows("y1995",j);
 m_fillmissingyears(f42_env_flows,"j");
 
-$setglobal c42_env_flow_policy  off
+$setglobal c42_env_flow_policy  on
 
 table f42_env_flow_policy(t_all,scen42) EFP policies
 $ondelim

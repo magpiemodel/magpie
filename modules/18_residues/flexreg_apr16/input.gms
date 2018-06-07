@@ -4,6 +4,8 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+$setglobal c18_burn_scen  phaseout
+*   options:    phaseout,constant
 
 table f18_multicropping(t_all,i) values above one indicate multicropping - below one fallow land (area harvested by physical area)
 $ondelim
@@ -26,9 +28,9 @@ $ondelim
 $include "./modules/18_residues/flexreg_apr16/input/f18_cgf.csv"
 $offdelim;
 
-table f18_res_use_burn_phaseout(t_all,dev18,kcr) minimum and maximum burn share use for residues developing over time (1)
+table f18_res_use_burn(t_all,burn_scen18,dev18,kcr) minimum and maximum burn share use for residues developing over time (1)
 $ondelim
-$include "./modules/18_residues/flexreg_apr16/input/f18_res_use_burn_phaseout.cs3"
+$include "./modules/18_residues/flexreg_apr16/input/f18_res_use_burn.cs3"
 $offdelim;
 
 parameter f18_res_combust_eff(kve)  Combustion efficiency of residue burning (1)

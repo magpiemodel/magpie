@@ -4,7 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-$ifthen "%c42_env_flow_policy%" == "mixed" i42_env_flow_policy(t,i) = sum(t_to_i_to_dev("y1995",i,dev), sum(scen42_to_dev(scen42,dev), f42_env_flow_policy(t,scen42)));
+$ifthen "%c42_env_flow_policy%" == "mixed" i42_env_flow_policy(t,i) = im_development_state(t,i) * f42_env_flow_policy(t,"on");
 $else i42_env_flow_policy(t,i) = f42_env_flow_policy(t,"%c42_env_flow_policy%");
 $endif
 

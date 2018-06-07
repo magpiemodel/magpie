@@ -16,6 +16,9 @@ pk18(npk)
 dev18
 /high_income,low_income/
 
+burn_scen18
+/constant,phaseout/
+
 nonused18(kcr)
 /sunflower, oilpalm, foddr, begr, betr/
 

@@ -29,6 +29,9 @@ equations
 
 ;
 
+parameters
+ i18_res_use_burn(t_all,dev18,kcr)         share of residues burned on field (1)
+;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
