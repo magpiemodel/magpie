@@ -5,6 +5,4 @@
 # |  Contact: magpie@pik-potsdam.de
 
 name,type,reason
-vm_yld,input,questionnaire
-pm_interest,input,questionnaire
 vm_prod_reg,input,questionnaire
