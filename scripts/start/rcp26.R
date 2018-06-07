@@ -20,12 +20,29 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$gms$c_timesteps <- "coup2100"
 
-cfg$title <- "SSP2-Ref-SPA0"
+
+cfg$gms$c80_nlp_solver <- "conopt4"
+
+cfg$title <- "SSP2-Ref_conopt4"
 cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
 cfg$gms$c60_2ndgen_biodem <- "SSP2-Ref-SPA0"
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "SSP2-26-SPA0"
+cfg$title <- "SSP2-26_conopt4"
 cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
 cfg$gms$c60_2ndgen_biodem <- "SSP2-26-SPA0"
 start_run(cfg,codeCheck=FALSE)
+
+
+cfg$gms$c80_nlp_solver <- "conopt4+conopt3"
+
+cfg$title <- "SSP2-Ref_conopt43"
+cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
+cfg$gms$c60_2ndgen_biodem <- "SSP2-Ref-SPA0"
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- "SSP2-26_conopt43"
+cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
+cfg$gms$c60_2ndgen_biodem <- "SSP2-26-SPA0"
+start_run(cfg,codeCheck=FALSE)
+
