@@ -7,7 +7,7 @@
 
 positive variables
  vm_nr_inorg_fert_reg(i,land_ag)  inorganic fertilizer application (Tg nutrient)
- vm_nr_inorg_fert_costs(i)        cost of inorganic fertilizers (10^6 USD/yr)
+ vm_nr_inorg_fert_costs(i)        cost of inorganic fertilizers (mio USD per year)
  v50_nr_eff(i)                    cropland nutrient uptake efficiency (Tg nutrient)
  v50_nr_eff_pasture(i)            pasture nutrient uptake efficiency (Tg nutrient)
  v50_nr_withdrawals(i,kcr)        withdrawals of Nr from soils (Tg nutrient)
