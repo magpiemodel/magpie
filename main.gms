@@ -55,7 +55,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Wed Jun  6 16:25:23 2018
+* Last modification (input data): Thu Jun  7 12:54:00 2018
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -79,7 +79,7 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  10
+$setglobal c_timesteps  coup2100
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /
@@ -93,7 +93,7 @@ $setglobal land  feb15
 $setglobal costs  default
 $setglobal interest_rate  reg_feb18
 $setglobal tc  endo_JUN16
-$setglobal yields  biocorrect
+$setglobal yields  dynamic_apr18
 
 $setglobal food  anthropometrics_jan18
 $setglobal demand  sector_may15

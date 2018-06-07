@@ -28,12 +28,12 @@ parameters
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_nr_inorg_fert_reg(t,i,land_ag,type) inorganic fertilizer application (Tg Nutrients)
- ov_nr_inorg_fert_costs(t,i,type)       cost of inorganic fertiliuers (Million USD)
+ ov_nr_inorg_fert_reg(t,i,land_ag,type) inorganic fertilizer application (Tg nutrient)
+ ov_nr_inorg_fert_costs(t,i,type)       cost of inorganic fertilizers (mio USD per year)
  ov50_nr_eff(t,i,type)                  cropland nutrient uptake efficiency (Tg nutrient)
  ov50_nr_eff_pasture(t,i,type)          pasture nutrient uptake efficiency (Tg nutrient)
- ov50_nr_withdrawals(t,i,kcr,type)      withdrawals of Nr from soils (Tg Nutrients)
- ov50_nr_deposition(t,i,land,type)      atmospheric deposition (Tg Nr)
+ ov50_nr_withdrawals(t,i,kcr,type)      withdrawals of Nr from soils (Tg nutrient)
+ ov50_nr_deposition(t,i,land,type)      atmospheric deposition (Tg nutrient)
  oq50_nr_cost_fert(t,i,type)            fertilizer costs
  oq50_nr_bal_crp(t,i,type)              cropland nutrient inputs have to equal withdrawals and losses
  oq50_nr_withdrawals(t,i,kcr,type)      calculating nr withdrawals
