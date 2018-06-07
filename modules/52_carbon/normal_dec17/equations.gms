@@ -31,6 +31,6 @@
  q52_co2c_emis(j2,emis_co2) ..
                  vm_btm_cell(j2,emis_co2,"co2_c") =e=
                  sum(emis_land(emis_co2,land,c_pools), 
-                 v52_carbon_stock_net_change(j2,land,c_pools)/m_timestep_length);
+                 -v52_carbon_stock_net_change(j2,land,c_pools)/m_timestep_length);
 
 *** EOF constraints.gms ***
