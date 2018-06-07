@@ -60,7 +60,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
     if(is.null(cfg$model)) cfg$model <- "main.gms"
     # configure main model gms file (cfg$model) based on settings of cfg file
     lucode::manipulateConfig(cfg$model, cfg$gms)
-    
+
     # configure input.gms in all modules based on settings of cfg file
     l1 <- lucode::path("modules", list.dirs("modules/", full.names = FALSE,
                                             recursive = FALSE))
@@ -182,19 +182,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   }
 
   # NPI/NDC policyes calculations
-  if(cfg$recalc_base_run){
-    cat("Starting base_run recalculation for NPI and NDC`!\n")
-    source("scripts/npi_ndc/start_npi_ndc.R")
-    start_npi_ndc_preprocessing(cfg,base_run_dir="scripts/npi_ndc/base_run",maindir=maindir,renew_base=TRUE)
-    cat("NPI/NDC base_run recalculation successful!\n")
-    # re-configure model code based on settings of cfg file after recalc_base_run
-    apply_cfg(cfg)
-  }
-
   if(cfg$recalc_npi_ndc){
-    baserun_files <- c("scripts/npi_ndc/policies/magpie_bau_land.mz",
-                       "scripts/npi_ndc/policies/magpie_bau_cstock.mz")
-    if(!any(file.exists(baserun_files))) stop("Base_run archived files missing!")
     cat("Starting NPI/NDC recalculation!\n")
     source("scripts/npi_ndc/start_npi_ndc.R")
     setwd("scripts/npi_ndc")

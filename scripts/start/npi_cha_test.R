@@ -23,9 +23,5 @@ cfg$gms$landconversion <- "gdp_vegc_may18"
 
 cfg$recalibrate <- FALSE
 
-# cfg$title <- "age_class_acx"
-# start_run(cfg,codeCheck=FALSE)
-
-cfg$title <- "age_class_ini4"
-cfg$gms$natveg  <- "dynamic_jun18"
+cfg$title <- "SSP2_BAU_recalcBaseRun"
 start_run(cfg,codeCheck=FALSE)

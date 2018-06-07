@@ -4,6 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @description The price_sep16 realization applies the growth rate of the CO2 price to one-off emissions to yield annual costs.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/56_ghg_policy/price_sep16/sets.gms"

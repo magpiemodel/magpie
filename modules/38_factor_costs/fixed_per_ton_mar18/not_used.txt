@@ -7,6 +7,4 @@
 name,type,reason
 vm_tau,input,questionnaire
 fm_tau1995,input,questionnaire
-pm_interest,input,questionnaire
-vm_yld,input,questionnaire
 vm_area,input,questionnaire
