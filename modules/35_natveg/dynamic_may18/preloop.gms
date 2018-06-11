@@ -20,5 +20,5 @@ p35_protect_shr(t,j,prot_type) = 0;
 
 p35_recovered_forest(t,j,ac) = 0;
 
-p35_min_forest(t,j) = f35_min_forest(t,j,"%c35_ad_policy%");
-p35_min_cstock(t,j) = f35_min_cstock(t,j,"%c35_emis_policy%");
+p35_min_forest(t,j) = f35_min_land_stock(t,j,"%c35_ad_policy%","forest");
+p35_min_other(t,j) = f35_min_land_stock(t,j,"%c35_ad_policy%","other");

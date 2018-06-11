@@ -60,7 +60,6 @@ cfg$gms$factor_costs <- "sticky_feb18"
 cfg$recalc_npi_ndc <- FALSE
 cfg$gms$c32_aff_policy <- "none"
 cfg$gms$c35_ad_policy <- "none"
-cfg$gms$c35_emis_policy <- "none" 
 cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
 cfg$recalibrate <- FALSE

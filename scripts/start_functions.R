@@ -110,10 +110,8 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   if(cfg$recalc_npi_ndc=="ifneeded") {
     aff_pol <- magclass::read.magpie("modules/32_forestry/input/npi_ndc_aff_pol.cs3")
     ad_pol <- magclass::read.magpie("modules/35_natveg/input/npi_ndc_ad_pol.cs3")
-    emis_pol <- magclass::read.magpie("modules/35_natveg/input/npi_ndc_emis_pol.cs3")
     if((all(aff_pol == 0) & (cfg$gms$c32_aff_policy != "none")) |
-       (all(ad_pol == 0) & (cfg$gms$c35_ad_policy != "none")) |
-       (all(emis_pol == 0) & (cfg$gms$c35_emis_policy != "none"))
+       (all(ad_pol == 0) & (cfg$gms$c35_ad_policy != "none")))
     ) {
       cfg$recalc_npi_ndc <- TRUE
     } else cfg$recalc_npi_ndc <- FALSE
@@ -187,7 +185,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
     source("scripts/npi_ndc/start_npi_ndc.R")
     setwd("scripts/npi_ndc")
     calc_NPI_NDC(policyregions=cfg$policyregions)
-		# create a pdf overview of the policies 
+		# create a pdf overview of the policies
 		# rmarkdown::render("npi_ndc_policies.Rmd")
     setwd("../..")
     cat("NPI/NDC recalculation successful!\n")

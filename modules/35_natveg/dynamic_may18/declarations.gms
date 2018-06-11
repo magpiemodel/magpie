@@ -23,8 +23,8 @@ parameters
  p35_save_secdforest(t,j)		secdforest protection (mio. ha)
  p35_save_other(t,j)			other land protection (mio. ha)
  p35_recovered_forest(t,j,ac) 	recovered forest (mio. ha)
- p35_min_forest(t,j) 			minimum forest land stock (Mha)
- p35_min_cstock(t,j) 			minimum natveg carbon stock (MtC)
+ p35_min_forest(t,j) 			minimum forest stock in npi and ndc policies (Mha)
+ p35_min_other(t,j)      minimum other land stock in npi and ndc policies (Mha)
 ;
 
 equations
@@ -39,7 +39,7 @@ equations
  q35_secdforest_reduction(j,land35)   secdforest reduction
  q35_primforest_reduction(j)   	   primforest reduction
  q35_min_forest(j)					   minimum forest land constraint
- q35_min_cstock(j)					   minimum natveg carbon stock constraint
+ q35_min_other(j)              minimum other land constraint
 ;
 
 positive variables
@@ -72,6 +72,6 @@ parameters
  oq35_secdforest_reduction(t,j,land35,type) secdforest reduction
  oq35_primforest_reduction(t,j,type)        primforest reduction
  oq35_min_forest(t,j,type)                  minimum forest land constraint
- oq35_min_cstock(t,j,type)                  minimum natveg carbon stock constraint
+ oq35_min_other(t,j,type)                   minimum other land constraint
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

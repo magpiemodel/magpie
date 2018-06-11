@@ -7,7 +7,7 @@ c21_trade_liberalization;;;globalized;regionalized;fragmented;globalized;globali
 forestry;;;;;;;;affore_vegc_dec16;affore_vegc_dec16;affore_vegc_dec16;;;;affore_vegc_dec16;affore_vegc_dec16;affore_vegc_dec16;affore_vegc_dec16;affore_vegc_dec16
 c32_aff_policy;;;;;;;;none;npi;ndc;;;;;;;;
 c35_ad_policy;;;;;;;;none;npi;ndc;;;;;;;;
-c35_emis_policy;;;;;;;;none;npi;ndc;;;;;;;;
+c35_aolc_policy;;;;;;;;none;npi;ndc;;;;;;;;
 s42_reserved_fraction;;;0.5;0.5;0.5;0.5;0.5;;;;;;;0.5;0.5;0.5;0.5;0.5
 s42_watdem_nonagr_scenario;;;3;1;2;2;2;;;;;;;3;1;2;2;2
 s42_irrig_eff_scenario;;;1;1;1;1;1;;;;;;;1;1;1;1;1
