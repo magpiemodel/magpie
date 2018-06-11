@@ -109,7 +109,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
 
   if(cfg$recalc_npi_ndc=="ifneeded") {
     aff_pol <- magclass::read.magpie("modules/32_forestry/input/npi_ndc_aff_pol.cs3")
-    ad_pol <- magclass::read.magpie("modules/35_natveg/input/npi_ndc_ad_pol.cs3")
+    ad_pol <- magclass::read.magpie("modules/35_natveg/input/npi_ndc_ad_aolc_pol.cs3")
     if((all(aff_pol == 0) & (cfg$gms$c32_aff_policy != "none")) |
        (all(ad_pol == 0) & (cfg$gms$c35_ad_policy != "none")))
     ) {
