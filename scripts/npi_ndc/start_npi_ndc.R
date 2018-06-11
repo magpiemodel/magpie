@@ -123,9 +123,9 @@ calc_NPI_NDC <- function(policyregions="iso"){
   ## END afforestation
   
   #copy files
-  file.copy("policies/npi_ndc_ad_aolc_pol.cs4",
+  file.copy("policies/npi_ndc_ad_aolc_pol.cs3",
             "../../modules/35_natveg/input/npi_ndc_ad_aolc_pol.cs3",overwrite = TRUE)
-  file.copy("policies/npi_ndc_aff_pol.cs4",
+  file.copy("policies/npi_ndc_aff_pol.cs3",
             "../../modules/32_forestry/input/npi_ndc_aff_pol.cs3",overwrite = TRUE)
 }
 
