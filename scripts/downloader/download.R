@@ -276,7 +276,7 @@ archive_download <- function(files=c("GLUES2-sresa2-constant_co2-miub_echo_g_ERB
   # and update_sets, which is updating the resolution- and region-depending
   # sets in core/sets.gms
 
-  tmp <- read.magpie("modules/10_land/input/avl_land.cs3")
+  tmp <- read.magpie("modules/10_land/input/avl_land_t.cs3")
   cpr <- getCPR(tmp)
   # read spatial_header, map, reg_revision and regionscode
   load("input/spatial_header.rda")
