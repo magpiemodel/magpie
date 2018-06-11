@@ -107,19 +107,19 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
         system(paste0(srun_command," --qos=short Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="slurm16gb") {
-        system(paste0(srun_command," --qos=short --mem-per-cpu=16000 Rscript ",name), wait=FALSE)
+        system(paste0(srun_command," --qos=short --mem=16000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="slurm32gb") {
-        system(paste0(srun_command," --qos=short --mem-per-cpu=32000 Rscript ",name), wait=FALSE)
+        system(paste0(srun_command," --qos=short --mem=32000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="slurmmedium") {
         system(paste0(srun_command," --qos=medium Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="slurm16gbmedium") {
-        system(paste0(srun_command," --qos=medium --mem-per-cpu=16000 Rscript ",name), wait=FALSE)
+        system(paste0(srun_command," --qos=medium --mem=16000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="slurm32gbmedium") {
-        system(paste0(srun_command," --qos=medium --mem-per-cpu=32000 Rscript ",name), wait=FALSE)
+        system(paste0(srun_command," --qos=medium --mem=32000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="debug") {
         tmp.env <- new.env()
