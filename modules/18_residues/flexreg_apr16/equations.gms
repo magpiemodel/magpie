@@ -24,8 +24,8 @@
    q18_res_field_burn(i2,kcr,attributes) ..
                   v18_res_ag_burn(i2,kcr,attributes)
                   =e=
-                  sum(ct, im_development_state(ct,i2) * f18_res_use_burn("high_income",kcr)
-                  + (1-im_development_state(ct,i2)) * f18_res_use_burn("low_income",kcr))
+                  sum(ct, im_development_state(ct,i2) * i18_res_use_burn(ct,"high_income",kcr)
+                  + (1-im_development_state(ct,i2)) * i18_res_use_burn(ct,"low_income",kcr))
                   * vm_res_biomass_ag(i2,kcr,attributes);
 
   q18_translate(i2,kres,attributes)..

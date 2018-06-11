@@ -4,6 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+$setglobal c12_interest_rate  medium
 
 table f12_interest_bound(t,bound12) lower and higher bounds of interest rates
 $ondelim
