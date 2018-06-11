@@ -66,8 +66,8 @@ interpolate<-function(x,x_ini_lr,x_ini_hr,spam,add_avail_hr=NULL,prev_year="y198
 }
 
 ############################# BASIC CONFIGURATION #######################################
-land_lr_file     <- "avl_land.cs3"
-land_hr_file     <- "avl_land_0.5.mz"
+land_lr_file     <- "avl_land_t.cs3"
+land_hr_file     <- "avl_land_t_0.5.mz"
 land_hr_out_file <- "cell.land_0.5.mz"
 land_hr_share_out_file <- "cell_land_0.5_share.mz"
 croparea_hr_share_out_file <- "cell_croparea_0.5_share.mz"
@@ -107,9 +107,9 @@ sum_spam_file <- paste0("0.5-to-",low_res,"_sum.spam")
 print(sum_spam_file)
 
 gdx<-path(outputdir,"fulldata.gdx")
-land_ini_lr<-readGDX(gdx,"f10_land","f_land", format="first_found")
+land_ini_lr<-readGDX(gdx,"f10_land","f_land", format="first_found")[,"y1995",]
 land_lr<-land(gdx,sum=FALSE,level="cell")
-land_ini_hr<-read.magpie(path(in_folder,land_hr_file))
+land_ini_hr<-read.magpie(path(in_folder,land_hr_file))[,"y1995",]
 if(any(land_ini_hr < 0)) {
   warning(paste0("Negative values in inital high resolution dataset detected and set to 0. Check the file ",land_hr_file))
   land_ini_hr[which(land_ini_hr < 0,arr.ind = T)] <- 0
