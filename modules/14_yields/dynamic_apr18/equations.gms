@@ -11,7 +11,7 @@ q14_yield_crop(j2,kcr,w) .. vm_yld(j2,kcr,w) =e=
 
 ***PASTURE YIELD CALCULATIONS*******************************************
 q14_yield_past(j2,w) .. vm_yld(j2,"pasture",w) =e=
-                      sum(ct$(not sameas(ct,"y1995")), pc14_pyld(j2,w)*(s14_pyld_intercept + s14_pyld_slope*sum(cell(i2,j2),v14_incr_graz_ani(i2))))
+                      sum(ct$(not sameas(ct,"y1995")), pc14_pyld(j2,w)*(s14_pyld_intercept + sum(cell(i2,j2),f14_pyld_slope_reg(i2)*v14_incr_graz_ani(i2))))
                     + sum(ct$sameas(ct,"y1995"),pc14_pyld(j2,w));
 
 
