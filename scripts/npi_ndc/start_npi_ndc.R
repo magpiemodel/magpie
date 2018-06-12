@@ -40,7 +40,7 @@ calc_NPI_NDC <- function(policyregions="iso" # column with regions for policy de
   emis_flow <- emis_flow[,,"historical.PRIMAPhist.Emissions|CO2|Land|Land-use Change (Mt CO2/yr)"]
 
   #read in cellular carbon stocks from lpj for decarbonizatoin policy constraints calculation
-  avl_land <- read.magpie("../../modules/10_land/input/avl_land_0.5.mz")
+  avl_land          <- setYears(read.magpie("../../modules/10_land/input/avl_land_t_0.5.mz")[,1,], NULL)
   lpj_carbon_density <- setYears(read.magpie("../../modules/52_carbon/input/lpj_carbon_stocks_0.5.mz")[,1,],NULL)
   getCells(lpj_carbon_density) <- getCells(avl_land)
   carbon_stock <- avl_land*lpj_carbon_density
