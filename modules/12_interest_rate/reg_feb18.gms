@@ -1,4 +1,12 @@
+*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+*** |  authors, and contributors see AUTHORS file
+*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  Contact: magpie@pik-potsdam.de
 
+*' @description The reg_feb18 realization is the default setting,
+*' in which the interest rate depends on the development state which is calcuated based on GDP per capita.
+*' Thus interest rates are regional specific and temporally dynamic. 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/12_interest_rate/reg_feb18/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/12_interest_rate/reg_feb18/declarations.gms"
