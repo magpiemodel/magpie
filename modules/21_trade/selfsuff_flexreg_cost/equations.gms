@@ -20,7 +20,7 @@
                           + vm_supply(i2,k_trade)*sum(ct,f21_self_suff(ct,i2,k_trade))*sum(ct,i21_trade_bal_reduction(ct))$(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
 
  q21_excess_dem(k_trade).. v21_excess_dem(k_trade)
-                   =e=
+                   =g=
                    sum(i2, vm_supply(i2,k_trade)*(1 - sum(ct,f21_self_suff(ct,i2,k_trade)))$(sum(ct,f21_self_suff(ct,i2,k_trade)) < 1))
                    + sum(ct,f21_trade_balanceflow(ct,k_trade));
 
