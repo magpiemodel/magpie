@@ -6,9 +6,9 @@
 
 *' @description  Agricultural water demand
 *' Water demand for agriculture is endogenously calculated based on irrigated cropland
-*' `vm_area(j,kcr,"irrigated")` and livestock production 
+*' `vm_area(j,kcr,"irrigated")` and livestock production
 *'
-*' Irrigation water demand per hectare for each crop category and cluster 
+*' Irrigation water demand per hectare for each crop category and cluster
 *' is provided by the LPJml model. This parameter refers to the water that
 *' has to be applied to the field, i.e. it includes losses due to evaporation on the field but
 *' does not include losses during the water transport from source to field.
@@ -19,9 +19,9 @@
 *'    *A global static value is applied. It is the global weighted average of water losses from
 *' source to field (conveyance efficiency times management factor) from @PIK_report104_2007.
 *' Irrigated area from @siebert_FAO_2007 has been used as aggregation weight.
-*' 
+*'
 *'    *A regression between country values of conveyance efficiency times management factor from
-*' @PIK_report104_2007 and GDP is performed. 
+*' @PIK_report104_2007 and GDP is performed.
 *'
 *' ![Irrigation efficiency evolution with GDP for the SSP2 scenario.
 *'  ](irrigation_efficiency.png){ width=60% }
@@ -45,7 +45,7 @@
 *'   *Environmental flow requirements (EFR) are calculated from LPJ1 inputs according
 *' to an algorithm by  @smakhtin_water_2004 on cluster level. Due to the
 *' fact that MAgPIE only considers available blue water during the growing period of
-*' the plants [43_water_availability], EFR are also only calculated during this growing 
+*' the plants [43_water_availability], EFR are also only calculated during this growing
 *' period. These are reserved in addition to `s42_protected_fraction`.
 *' In the case of the absence of an environmental flow protection policy, a base protection
 *' can be specified: `s42_env_flow_base_fraction`. It defaults to 5 % of available water.
@@ -53,7 +53,7 @@
 *' Where and when a potential environmental flow protection policy takes effect is determined
 *' in the file EFR_protection_policy.csv in the input folder of the water demand module.
 *'
-*'@limitations The module uses conveyance efficiency times management factor for irrigation efficiency.
+*' @limitations The module uses conveyance efficiency times management factor for irrigation efficiency.
 *' Therefore, the management factor is double accounted because it is already considered in lpj airrig.
 *' The module realization does not consider annual water balances but only water balances during the
 *' growing period of crops. This period differs between cells.

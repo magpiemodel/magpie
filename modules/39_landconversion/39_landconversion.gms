@@ -5,8 +5,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @title Land Conversion Costs
-*' The land conversion cost module calculates costs for the conversion 
-*' from one land type to another (e.g. conversion from forest to cropland). 
+
+*' @description The land conversion cost module calculates costs for the conversion
+*' from one land type to another (e.g. conversion from forest to cropland).
 *' Expansion of agricultural land plays an important role for the overall model dynamics,
 *' in particular in terms of CO2 emissions from land-use change.
 *'
