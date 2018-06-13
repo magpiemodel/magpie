@@ -114,7 +114,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
     aolc_pol    <- ad_aolc_pol[,,"other"]
     if((all(aff_pol == 0)   & (cfg$gms$c32_aff_policy != "none")) |
        (all(ad_pol == 0)    & (cfg$gms$c35_ad_policy != "none"))  |
-       (all(aolc_poll == 0) & (cfg$gms$c35_aolc_policy != "none")))
+       (all(aolc_pol == 0) & (cfg$gms$c35_aolc_policy != "none")))
     {
       cfg$recalc_npi_ndc <- TRUE
     } else cfg$recalc_npi_ndc <- FALSE
