@@ -12,10 +12,12 @@ parameters
 
 positive variables
  vm_carbon_stock(j,land,c_pools)             carbon in vegetation soil and litter for different land types (Mio tC)
+ vm_carbon_stock_reduction(j,land,c_pools)	reduction in carbon stocks compared to previous time step (Mio tC)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_carbon_stock(t,j,land,c_pools,type) carbon in vegetation soil and litter for different land types (Mio tC)
+ ov_carbon_stock(t,j,land,c_pools,type)           carbon in vegetation soil and litter for different land types (Mio tC)
+ ov_carbon_stock_reduction(t,j,land,c_pools,type) reduction in carbon stocks compared to previous time step (Mio tC)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
