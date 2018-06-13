@@ -28,10 +28,8 @@ calc_NPI_NDC <- function(policyregions="iso"){
   ##########          Information from the reference observed data   ###########
   ##############################################################################
 
-  setConfig(forcecache=TRUE)
-  #read in cellular land cover (stock) from moinput
-  land_stock <- calcOutput("LanduseInitialisation", land="new", aggregate = FALSE, selectyears=seq(1995,2015,5), cellular=TRUE)
-  getRegionList(land_stock) <-  pol_mapping
+  #read in cellular land cover (stock) from landuse initialization
+  land_stock <- read.magpie("../../modules/10_land/input/avl_land_t_0.5.mz")
 
   forest_stock <- dimSums(land_stock[,,c("primforest","secdforest","forestry")], dim=3)
   getNames(forest_stock) <- "forest"
