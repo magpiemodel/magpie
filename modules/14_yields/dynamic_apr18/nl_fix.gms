@@ -10,7 +10,7 @@ vm_yld.fx(j,kcr,w) = sum(ct,i14_yields(ct,j,kcr,w))*sum(cell(i,j),vm_tau.l(i)/fm
 
 
 vm_yld.fx(j,"pasture",w) =
-                      sum(ct$(not sameas(ct,"y1995")), pc14_pyld(j,w)*(s14_pyld_intercept + s14_pyld_slope*1.1))
+                      sum(ct$(not sameas(ct,"y1995")), pc14_pyld(j,w)*(s14_pyld_intercept + sum(cell(i2,j2),f14_pyld_slope_reg(i2))*1.1))
                     + sum(ct$sameas(ct,"y1995"),pc14_pyld(j,w));
 
 *vm_yld.fx(j,"pasture",w) = pc14_pyld(j,w) * (s14_pyld_intercept + s14_pyld_slope*1.1 );
