@@ -159,6 +159,18 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
 
   ##############################################################################
 
+  # NPI/NDC policyes calculations
+  if(cfg$recalc_npi_ndc){
+    cat("Starting NPI/NDC recalculation!\n")
+    source("scripts/npi_ndc/start_npi_ndc.R")
+    setwd("scripts/npi_ndc")
+    calc_NPI_NDC(policyregions=cfg$policyregions)
+		# create a pdf overview of the policies
+		# rmarkdown::render("npi_ndc_policies.Rmd")
+    setwd("../..")
+    cat("NPI/NDC recalculation successful!\n")
+  }
+
   # Yield calibration
   calib_file <- "modules/14_yields/input/f14_yld_calib.csv"
   if(!file.exists(calib_file)) stop("Yield calibration file missing!")
@@ -180,18 +192,6 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
                      debug = cfg$debug)
     file.copy("calibration_results.pdf", cfg$results_folder, overwrite=TRUE)
     cat("Calibration factor calculated!\n")
-  }
-
-  # NPI/NDC policyes calculations
-  if(cfg$recalc_npi_ndc){
-    cat("Starting NPI/NDC recalculation!\n")
-    source("scripts/npi_ndc/start_npi_ndc.R")
-    setwd("scripts/npi_ndc")
-    calc_NPI_NDC(policyregions=cfg$policyregions)
-		# create a pdf overview of the policies
-		# rmarkdown::render("npi_ndc_policies.Rmd")
-    setwd("../..")
-    cat("NPI/NDC recalculation successful!\n")
   }
 
   # copy important files into output_folder (before MAgPIE execution)
