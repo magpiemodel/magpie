@@ -108,13 +108,14 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   }
 
   if(cfg$recalc_npi_ndc=="ifneeded") {
-    aff_pol <- magclass::read.magpie("modules/32_forestry/input/npi_ndc_aff_pol.cs3")
-    ad_pol <- magclass::read.magpie("modules/35_natveg/input/npi_ndc_ad_pol.cs3")
-    emis_pol <- magclass::read.magpie("modules/35_natveg/input/npi_ndc_emis_pol.cs3")
-    if((all(aff_pol == 0) & (cfg$gms$c32_aff_policy != "none")) |
-       (all(ad_pol == 0) & (cfg$gms$c35_ad_policy != "none")) |
-       (all(emis_pol == 0) & (cfg$gms$c35_emis_policy != "none"))
-    ) {
+    aff_pol     <- magclass::read.magpie("modules/32_forestry/input/npi_ndc_aff_pol.cs3")
+    ad_aolc_pol <- magclass::read.magpie("modules/35_natveg/input/npi_ndc_ad_aolc_pol.cs3")
+    ad_pol     <- ad_aolc_pol[,,"forest"]
+    aolc_pol    <- ad_aolc_pol[,,"other"]
+    if((all(aff_pol == 0)   & (cfg$gms$c32_aff_policy != "none")) |
+       (all(ad_pol == 0)    & (cfg$gms$c35_ad_policy != "none"))  |
+       (all(aolc_pol == 0) & (cfg$gms$c35_aolc_policy != "none")))
+    {
       cfg$recalc_npi_ndc <- TRUE
     } else cfg$recalc_npi_ndc <- FALSE
   }
@@ -158,6 +159,18 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
 
   ##############################################################################
 
+  # NPI/NDC policyes calculations
+  if(cfg$recalc_npi_ndc){
+    cat("Starting NPI/NDC recalculation!\n")
+    source("scripts/npi_ndc/start_npi_ndc.R")
+    setwd("scripts/npi_ndc")
+    calc_NPI_NDC(policyregions=cfg$policyregions)
+		# create a pdf overview of the policies
+		# rmarkdown::render("npi_ndc_policies.Rmd")
+    setwd("../..")
+    cat("NPI/NDC recalculation successful!\n")
+  }
+
   # Yield calibration
   calib_file <- "modules/14_yields/input/f14_yld_calib.csv"
   if(!file.exists(calib_file)) stop("Yield calibration file missing!")
@@ -179,18 +192,6 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
                      debug = cfg$debug)
     file.copy("calibration_results.pdf", cfg$results_folder, overwrite=TRUE)
     cat("Calibration factor calculated!\n")
-  }
-
-  # NPI/NDC policyes calculations
-  if(cfg$recalc_npi_ndc){
-    cat("Starting NPI/NDC recalculation!\n")
-    source("scripts/npi_ndc/start_npi_ndc.R")
-    setwd("scripts/npi_ndc")
-    calc_NPI_NDC(policyregions=cfg$policyregions)
-		# create a pdf overview of the policies 
-		# rmarkdown::render("npi_ndc_policies.Rmd")
-    setwd("../..")
-    cat("NPI/NDC recalculation successful!\n")
   }
 
   # copy important files into output_folder (before MAgPIE execution)

@@ -16,4 +16,7 @@ sets
    prot_type conservation priority areas
    / BH, CPD, FF, LW, WDPA /
 
+   pol_stock35 land stocks for npi and ndc policies
+   /forest, other/
+
 ;
