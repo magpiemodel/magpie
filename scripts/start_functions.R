@@ -108,10 +108,13 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   }
 
   if(cfg$recalc_npi_ndc=="ifneeded") {
-    aff_pol <- magclass::read.magpie("modules/32_forestry/input/npi_ndc_aff_pol.cs3")
-    ad_pol <- magclass::read.magpie("modules/35_natveg/input/npi_ndc_ad_aolc_pol.cs3")
-    if((all(aff_pol == 0) & (cfg$gms$c32_aff_policy != "none")) |
-       (all(ad_pol == 0) & (cfg$gms$c35_ad_policy != "none")))
+    aff_pol     <- magclass::read.magpie("modules/32_forestry/input/npi_ndc_aff_pol.cs3")
+    ad_aolc_pol <- magclass::read.magpie("modules/35_natveg/input/npi_ndc_ad_aolc_pol.cs3")
+    ad_pol     <- ad_aolc_pol[,,"forest"]
+    aolc_pol    <- ad_aolc_pol[,,"other"]
+    if((all(aff_pol == 0)   & (cfg$gms$c32_aff_policy != "none")) |
+       (all(ad_pol == 0)    & (cfg$gms$c35_ad_policy != "none"))  |
+       (all(aolc_poll == 0) & (cfg$gms$c35_aolc_policy != "none")))
     {
       cfg$recalc_npi_ndc <- TRUE
     } else cfg$recalc_npi_ndc <- FALSE
