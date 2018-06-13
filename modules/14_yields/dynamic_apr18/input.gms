@@ -10,7 +10,6 @@ $setglobal c14_yields_scenario  nocc
 
 scalars
   s14_pyld_intercept     intercept of linear relationship determining pasture intensification               / 0.24 /
-  s14_pyld_slope         slope of linear relationship determining pasture intensification                   / 0.78 /
 ;
 
 ******* Calibration factor
@@ -32,6 +31,6 @@ m_fillmissingyears(f14_yields,"j,kve,w");
 parameter f14_pyld_slope_reg(i) regional slope of linear relationship determining pasture intensification (1)
 /
 $ondelim
-$include "./modules/14_yields/input/f_pyld_slope_reg.cs4"
+$include "./modules/14_yields/input/f14_pyld_slope_reg.cs4"
 $offdelim
 /;
