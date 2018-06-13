@@ -4,7 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c39_cost_scenario  high
+$setglobal c39_cost_scenario  medium
 * options: low, medium, high
 
 
