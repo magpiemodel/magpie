@@ -4,6 +4,8 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+s31_fac_req_past = 0;
+
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  oq31_prod(t,j,"marginal")           = q31_prod.m(j);
  oq31_carbon(t,j,c_pools,"marginal") = q31_carbon.m(j,c_pools);

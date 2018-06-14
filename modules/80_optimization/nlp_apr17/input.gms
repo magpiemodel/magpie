@@ -7,3 +7,7 @@
 scalars
         s80_maxiter   maximal solve iterations if modelstat is > 2 (1)    / 30 /
 ;
+
+$setglobal c80_nlp_solver  conopt4
+*   options:   (conopt3):         conopt3
+*              (conopt4):         conopt4

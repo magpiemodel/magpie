@@ -6,9 +6,13 @@
 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
- ov_carbon_stock(t,j,land,c_pools,"marginal") = vm_carbon_stock.m(j,land,c_pools);
- ov_carbon_stock(t,j,land,c_pools,"level")    = vm_carbon_stock.l(j,land,c_pools);
- ov_carbon_stock(t,j,land,c_pools,"upper")    = vm_carbon_stock.up(j,land,c_pools);
- ov_carbon_stock(t,j,land,c_pools,"lower")    = vm_carbon_stock.lo(j,land,c_pools);
+ ov_carbon_stock(t,j,land,c_pools,"marginal")           = vm_carbon_stock.m(j,land,c_pools);
+ ov_carbon_stock_reduction(t,j,land,c_pools,"marginal") = vm_carbon_stock_reduction.m(j,land,c_pools);
+ ov_carbon_stock(t,j,land,c_pools,"level")              = vm_carbon_stock.l(j,land,c_pools);
+ ov_carbon_stock_reduction(t,j,land,c_pools,"level")    = vm_carbon_stock_reduction.l(j,land,c_pools);
+ ov_carbon_stock(t,j,land,c_pools,"upper")              = vm_carbon_stock.up(j,land,c_pools);
+ ov_carbon_stock_reduction(t,j,land,c_pools,"upper")    = vm_carbon_stock_reduction.up(j,land,c_pools);
+ ov_carbon_stock(t,j,land,c_pools,"lower")              = vm_carbon_stock.lo(j,land,c_pools);
+ ov_carbon_stock_reduction(t,j,land,c_pools,"lower")    = vm_carbon_stock_reduction.lo(j,land,c_pools);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
 

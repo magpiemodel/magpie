@@ -5,6 +5,14 @@
 *** |  Contact: magpie@pik-potsdam.de
 **************start solve loop**************
 
+$ifthen "%c80_nlp_solver%" == "conopt3"
+  option nlp        = conopt ;
+$elseif "%c80_nlp_solver%" == "conopt4"
+  option nlp        = conopt4;
+$else
+  abort "c80_nlp_solver setting not supported in nlp_apr17 realization!";
+$endif
+
 s80_counter = 0;
 p80_modelstat(t) = 1;
 

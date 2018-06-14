@@ -37,8 +37,9 @@ p39_establish_costs_reg(t,i,land)	  regional establishment costs (US$ per hectar
 p39_establish_costs(t,j,land)         cellular establishment costs (US$ per hectare)
 pc39_establish_costs(j,land)          current cellular establishing costs (US$ per hectare)
 
-p39_max_vegc_reg(i)					  maximum regional vegetation carbon density (tC per ha)
-pc39_vegc_fact(j)                	  scaling factor that reduces clearing costs depending on vegetation density (-)
+p39_carbon_density(t,j,land,c_pools)	  actual vegetation carbon density in natveg (tC per ha)
+p39_max_vegc_reg(t,i)					  maximum regional vegetation carbon density (tC per ha)
+p39_vegc_fact(t,j,land)                	  scaling factor that reduces clearing costs depending on vegetation density (-)
 
 p39_cost_landcon_past(t,j,land)       costs for landconversion from the past (mio US$)
 pc39_cost_landcon_past(j,land)        current costs for landconversion from the past (mio US$)
