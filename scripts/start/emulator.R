@@ -123,8 +123,15 @@ for (scen in rownames(scenarios)) {
   # Compose string with scenario name
   expname <- paste0(scenarios[scen,"SSP"],"-",scenarios[scen,"co2tax_name"])
 
+  # run numbers sorted in descending by runtime (taken from former SSP2-26 emulator runs)
+  runtime_order <- c("4","17","34","12","11","22","32","15","21","2","58","18","20","16","19",
+  "31","67","41","48","54","65","47","13","44","70","28","52","53","62","36","40","9","14","46",
+  "10","29","38","71","57","50","60","37","64","69","68","51","61","5","27","7","66","6","49",
+  "35","45","59","56","24","72","25","63","42","30","1","55","43","26","3","39","73","23","33","8")
+  # the intersect command in the for-loop below keeps the order of the vector given first  
+  
   # Copy bioenergy demand files and start runs
-  for(r in getNames(demand)) {
+  for(r in intersect(runtime_order,getNames(demand))) {
   #for(r in as.character(c(1))) { 
     cfg$title <- paste(expname,r,sep="-")
     cat(cfg$title,"Writing bioenergy demand scenario",r,"\n")
