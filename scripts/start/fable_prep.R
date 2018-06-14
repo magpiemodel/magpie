@@ -37,9 +37,15 @@ buildInputVector <- function(regionmapping   = "aus",
   return(c(archive,madrat,validation,calibration,additional_data))
 }
 
+calib_date <- "14Jun18"
+
 for(x in c("aus","bra","cha","eth","ind","usa")) {
+#for(x in "usa")
+  calibration <- paste0("calibration_",x,"_",calib_date,".tgz")
+  #calibration <- NULL
   cfg$title <- x
-  cfg$input <- buildInputVector(regionmapping=x)
-  start_run(cfg=cfg)
-  submitCalibration(x)
+  cfg$input <- buildInputVector(regionmapping=x, calibration=calibration)
+  publish_data(input=cfg, name=paste0("testdata_",x))
+  #start_run(cfg=cfg)
+  #submitCalibration(x)
 }
