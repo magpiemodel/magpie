@@ -31,8 +31,8 @@ start_run(cfg,codeCheck=FALSE)
 cfg$recalc_npi_ndc <- FALSE
 cfg$recalibrate <- FALSE
 
-for(low in c(5,10,20)) {
-  for (high in c(50,100,1000,10000)) {
+for(low in c(1,2,4,8)) {
+  for (high in c(600,700,800)) {
     cfg$title <- paste("LC",low,high,sep="_")
     cfg$gms$landconversion <- "gdp_vegc_may18"
     a <- read.magpie("modules/39_landconversion/gdp_vegc_may18/input/f39_landclear_gdp.csv")
