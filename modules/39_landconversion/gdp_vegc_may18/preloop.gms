@@ -49,27 +49,4 @@ p39_landclear_costs_reg(t,i,land_natveg) = p39_landclear_a*im_gdp_pc_mer(t,i)
 										   + p39_landclear_b;
 *' Assume identical land clearing costs in all cells belonging to a region. 
 p39_landclear_costs(t,j,land) = sum(cell(i,j), p39_landclear_costs_reg(t,i,land));
-
-*' Land clearing costs are additionally scaled with spatially explicit vegetation carbon density.
-
-*' Determine maximum vegetation carbon density in each region.
-p39_max_vegc_reg(i) = smax(cell(i,j), fm_carbon_density("y1995",j,"primforest","vegc"));
-*'
-*' Calculate reduction factor for land clearing costs. The cell with the highest 
-*' vegetation carbon density in a region has the highest clearing costs in this regions.
-*' The clearing costs in all other cells of this region will be reduced based on the ratio
-*' of spatially explicit vegetation carbon density `fm_carbon_density` and maximum regional 
-*' vegetation carbon density `p39_max_vegc_reg`.
-pc39_vegc_fact(j) = 1;
-pc39_vegc_fact(j) = sum(cell(i,j),(fm_carbon_density("y1995",j,"primforest","vegc")
-						/ p39_max_vegc_reg(i)$(p39_max_vegc_reg(i)>0)));
-*'
-*' Apply the scaling factor `pc39_vegc_fact`.
-p39_landclear_costs(t,j,land_natveg) = p39_landclear_costs(t,j,land_natveg) 
-									   * pc39_vegc_fact(j);
 *' @stop
-
-**
-
-
-
