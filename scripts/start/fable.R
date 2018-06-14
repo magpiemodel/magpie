@@ -31,7 +31,7 @@ buildInputVector <- function(regionmapping   = "aus",
                 ind="4431b698acab987e1dedd3a714231643",
                 usa="2b409196626ee246982f5ec87323c01a")
   archive_name=paste(project_name,climate_model,climatescen_name,co2,sep="-")
-  archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", mappings[regionmapping], ".tgz")
+  archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", toupper(regionmapping),"3_",mappings[regionmapping], ".tgz")
   madrat  <- paste0("rev", madrat_rev, "_", mappings[regionmapping], "_magpie.tgz")
   validation  <- paste0("rev", validation_rev, "_", mappings[regionmapping], "_validation.tgz")
   return(c(archive,madrat,validation,calibration,additional_data))
