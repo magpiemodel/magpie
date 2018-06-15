@@ -20,8 +20,8 @@ trends in food demand are derived from a cross-country regression analysis, base
 on future scenarios on GDP and population growth.
 
 ## DOCUMENTATION
-The model documentation can be found at
-https://redmine.pik-potsdam.de/projects/magpie/wiki/.
+An incomplete preview of the model documentation for version 4 can be found at
+https://rse.pik-potsdam.de/magpie/version4_documentation_preview/
 
 Please pay attentions to the MAgPIE Coding Etiquette when you modify the code.
 The Coding Etiquette you find at
