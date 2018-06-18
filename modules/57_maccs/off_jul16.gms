@@ -4,6 +4,9 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @description Technical mitigation is not considered in this realization.
+
+*' @limitations It is unrealistic to assume no technical mitigation attempts.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/57_maccs/off_jul16/sets.gms"
