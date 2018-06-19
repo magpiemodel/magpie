@@ -52,10 +52,10 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
                "Background execution",
                "SLURM submission",
                "SLURM submission (16GB memory)",
-               "SLURM submission (32GB memory)",
+               "SLURM submission (on broadwell)",
                "SLURM submission (medium)",
                "SLURM submission (16GB memory, medium)",
-               "SLURM submission (32GB memory, medium)",
+               "SLURM submission (on broadwell, medium)",
                "Debug mode")
     if(!slurm) modes <- modes[-3:-8]
     cat("\n",title,":\n", sep="")
@@ -69,10 +69,10 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
                      "2" = "background",
                      "3" = "slurm",
                      "4" = "slurm16gb",
-                     "5" = "slurm32gb",
+                     "5" = "slurmbroadwell",
                      "6" = "slurmmedium",
                      "7" = "slurm16gbmedium",
-                     "8" = "slurm32gbmedium",
+                     "8" = "slurmbroadwellmedium",
                      "9" = "debug")
     } else {
       comp <- switch(identifier,
@@ -109,8 +109,8 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
       } else if(submit=="slurm16gb") {
         system(paste0(srun_command," --qos=short --mem=16000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
-      } else if(submit=="slurm32gb") {
-        system(paste0(srun_command," --qos=short --mem=32000 Rscript ",name), wait=FALSE)
+      } else if(submit=="slurmbroadwell") {
+        system(paste0(srun_command," --partition=broadwell --qos=short --mem=32000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="slurmmedium") {
         system(paste0(srun_command," --qos=medium Rscript ",name), wait=FALSE)
@@ -118,8 +118,8 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
       } else if(submit=="slurm16gbmedium") {
         system(paste0(srun_command," --qos=medium --mem=16000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
-      } else if(submit=="slurm32gbmedium") {
-        system(paste0(srun_command," --qos=medium --mem=32000 Rscript ",name), wait=FALSE)
+      } else if(submit=="slurmbroadwellmedium") {
+        system(paste0(srun_command," --partition=broadwell --qos=medium --mem=32000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="debug") {
         tmp.env <- new.env()
