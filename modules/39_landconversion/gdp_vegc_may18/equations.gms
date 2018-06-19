@@ -6,12 +6,13 @@
 
 *' @equations
 *' Establishment costs apply on expansion of cropland, pasture and forestry.
-*' Clearing costs apply on reduction of primary forest, secondary forest and other natural land.
+*' Clearing costs apply on reduction of carbon stock in primary forest, secondary forest 
+*' and other natural land.
 *' The sum of establishment and clearing costs in the current time step 
 *' is multiplied with an annuity factor to distribute these costs over time. 
 q39_cost_landcon_annuity(j2,land) .. v39_cost_landcon_annuity(j2,land) =e=
-	(vm_landexpansion(j2,land)*pc39_establish_costs(j2,land)
- 	+ vm_carbon_stock_reduction(j2,land,"vegc")*pc39_landclear_costs(j2,land))
+	(vm_landexpansion(j2,land)*pc39_establish(j2,land)
+ 	+ vm_carbon_stock_reduction(j2,land,"vegc")*pc39_landclear(j2,land))
  	* sum(cell(i2,j2),pm_interest(i2)/(1+pm_interest(i2)));
 
 *' Land conversion costs in the current time step consist of 
