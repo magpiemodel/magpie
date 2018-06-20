@@ -23,8 +23,8 @@ cfg$results_folder <- "output/:title:"
 for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
   for (rcp in c("Ref","26")) {
     cfg <- setScenario(cfg,ssp)
-    cfg$gms$c56_pollutant_prices <- paste(ssp,rcp,"SPA0",sep="-")
-    cfg$gms$c60_2ndgen_biodem <- paste(ssp,rcp,"SPA0",sep="-")
+    cfg$gms$c56_pollutant_prices <- paste(if(ssp %in% c("SSP3","SSP4")) "SSP2" else ssp,rcp,"SPA0",sep="-")
+    cfg$gms$c60_2ndgen_biodem <- paste(if(ssp %in% c("SSP3","SSP4")) "SSP2" else ssp,rcp,"SPA0",sep="-")
     cfg$title <- paste(ssp,rcp,sep="_")
     start_run(cfg,codeCheck=FALSE)
   }
