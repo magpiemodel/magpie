@@ -28,5 +28,5 @@ q60_bioenergy_reg(i2).. sum(kbe60, vm_dem_bioen(i2,kbe60)*fm_attributes("ge",kbe
 
 q60_res_2ndgenBE(i2) .. 
   sum(kres, vm_dem_bioen(i2,kres) * fm_attributes("ge",kres)
-            - sum(ct,i60_1stgen_bioenergy_dem(ct,i2,kres))) =g= 
-  sum(ct,i60_res_2ndgenBE_dem(ct,i2))
+            - sum(ct,f60_1stgen_bioenergy_dem(ct,i2,"%c60_1stgen_biodem%",kres))) =g= 
+  sum(ct,i60_res_2ndgenBE_dem(ct,i2));
