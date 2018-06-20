@@ -23,23 +23,19 @@ s39_max_gdp                           maximum gdp_pc of all regions in 1995 (US$
 ;
 
 parameters
-i39_landclear_gdp(bound39)            global range of land clearing costs (US$ per hectare)
+i39_landclear_gdp(bound39)            global range of land clearing costs (US$ per ton C)
 p39_landclear_a                       intercept for land clearing costs calculation
 p39_landclear_b                       slope for land clearing costs calculation
-p39_landclear_costs_reg(t,i,land)	  regional land clearing costs (US$ per hectare)
-p39_landclear_costs(t,j,land)         cellular land clearing costs (US$ per hectare)
-pc39_landclear_costs(j,land)          current cellular land clearing costs (US$ per hectare)
+p39_landclear_reg(t,i,land)	  		  regional land clearing costs (US$ per ton C)
+p39_landclear(t,j,land)         	  cellular land clearing costs (US$ per ton C)
+pc39_landclear(j,land)          	  current cellular land clearing costs (US$ per ton C)
 
 i39_establish_gdp(land,bound39)       global range of land establishment costs (US$ per hectare)
 p39_establish_a(land)                 intercept for establishment costs calculation
 p39_establish_b(land)                 slope for establishment costs calculation
-p39_establish_costs_reg(t,i,land)	  regional establishment costs (US$ per hectare)
-p39_establish_costs(t,j,land)         cellular establishment costs (US$ per hectare)
-pc39_establish_costs(j,land)          current cellular establishing costs (US$ per hectare)
-
-p39_carbon_density(t,j,land,c_pools)	  actual vegetation carbon density in natveg (tC per ha)
-p39_max_vegc_reg(t,i)					  maximum regional vegetation carbon density (tC per ha)
-p39_vegc_fact(t,j,land)                	  scaling factor that reduces clearing costs depending on vegetation density (-)
+p39_establish_reg(t,i,land)	  		  regional establishment costs (US$ per hectare)
+p39_establish(t,j,land)         	  cellular establishment costs (US$ per hectare)
+pc39_establish(j,land)          	  current cellular establishing costs (US$ per hectare)
 
 p39_cost_landcon_past(t,j,land)       costs for landconversion from the past (mio US$)
 pc39_cost_landcon_past(j,land)        current costs for landconversion from the past (mio US$)
