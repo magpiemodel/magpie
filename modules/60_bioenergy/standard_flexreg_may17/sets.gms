@@ -6,7 +6,7 @@
 
 sets
    kbe60(kcr) bio energy activities
-        / betr, begr /
+        / betr, begr, res_cereals, res_fibrous, res_nonfibrous /
 
    scen1st60 first generation bioenergy scenarios
        / const2020, const2030, phaseout2020 /
@@ -20,3 +20,6 @@ sets
         SSP2-20-SPA2, SSP2-26-SPA2, SSP2-37-SPA2, SSP2-45-SPA2, SSP2-60-SPA2,
         SSP5-20-SPA5, SSP5-26-SPA5, SSP5-37-SPA5, SSP5-45-SPA5, SSP5-60-SPA5, SSP5-OS-SPA5 /
 ;
+
+   scen2ndres60 residues for second generation bioenergy scenarios
+       / ssp1, ssp2, ssp3, ssp4, ssp5, off /

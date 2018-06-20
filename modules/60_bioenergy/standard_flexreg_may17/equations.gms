@@ -25,3 +25,8 @@ q60_bioenergy_reg(i2).. sum(kbe60, vm_dem_bioen(i2,kbe60)*fm_attributes("ge",kbe
 *' act the same way: In both cases the equation just makes sure that the sum
 *' over all second generation energy crop of the bioenergy demand is greater or
 *' equal to the demand actually given by the input file $i60\_bioenergy\_dem$.
+
+q60_res_2ndgenBE(i2) .. 
+  sum(kres, vm_dem_bioen(i2,kres) * fm_attributes("ge",kres)
+            - sum(ct,i60_1stgen_bioenergy_dem(ct,i2,kres))) =g= 
+  sum(ct,i60_res_2ndgenBE_dem(ct,i2))
