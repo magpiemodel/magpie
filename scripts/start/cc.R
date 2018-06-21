@@ -36,7 +36,8 @@ cfg$gms$c60_2ndgen_biodem <- "SSP2-Ref-SPA0"
 cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp6p0-noco2_rev32_h200_690d3718e151be1b450b394c1064b1c5.tgz",
                "rev3.25_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
                "rev3.25_690d3718e151be1b450b394c1064b1c5_validation.tgz",
-               "additional_data_rev3.35.tgz")
+               "additional_data_rev3.36.tgz",
+               "calibration_H12_16Jun18.tgz")
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "SSP2_Ref_RCP60_co2"
@@ -45,7 +46,8 @@ cfg$gms$c60_2ndgen_biodem <- "SSP2-Ref-SPA0"
 cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp6p0-co2_rev32_h200_690d3718e151be1b450b394c1064b1c5.tgz",
                "rev3.25_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
                "rev3.25_690d3718e151be1b450b394c1064b1c5_validation.tgz",
-               "additional_data_rev3.35.tgz")
+               "additional_data_rev3.36.tgz",
+               "calibration_H12_16Jun18.tgz")
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "SSP2_26_RCP26_noco2"
@@ -54,7 +56,8 @@ cfg$gms$c60_2ndgen_biodem <- "SSP2-26-SPA0"
 cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev32_h200_690d3718e151be1b450b394c1064b1c5.tgz",
                "rev3.25_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
                "rev3.25_690d3718e151be1b450b394c1064b1c5_validation.tgz",
-               "additional_data_rev3.35.tgz")
+               "additional_data_rev3.36.tgz",
+               "calibration_H12_16Jun18.tgz")
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "SSP2_26_RCP26_co2"
@@ -63,5 +66,6 @@ cfg$gms$c60_2ndgen_biodem <- "SSP2-26-SPA0"
 cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev32_h200_690d3718e151be1b450b394c1064b1c5.tgz",
                "rev3.25_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
                "rev3.25_690d3718e151be1b450b394c1064b1c5_validation.tgz",
-               "additional_data_rev3.35.tgz")
+               "additional_data_rev3.36.tgz",
+               "calibration_H12_16Jun18.tgz")
 start_run(cfg,codeCheck=FALSE)

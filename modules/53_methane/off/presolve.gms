@@ -4,5 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @code
+*' Methane emission from agricultural sources equals to zero.
 
  vm_btm_reg.fx(i,emis_source,"ch4") = 0;

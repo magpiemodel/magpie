@@ -4,6 +4,11 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @description This realization is simple and accounts no methane emissions.
+*' We acknowledge this is unrealistic. It is presented here for mere comparison and completeness.
+*'
+*' @limitations It is unrealistic to consider zero methane emissions and to ignore it from a model
+*' such as MAgPIE which is meant to assess impacts of agricultural production on environment.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/53_methane/off/sets.gms"

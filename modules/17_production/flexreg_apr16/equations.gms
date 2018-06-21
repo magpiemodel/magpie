@@ -4,6 +4,11 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-q17_prod_reg(i2,k) .. vm_prod_reg(i2,k)
-                  =e=
-                     sum(cell(i2,j2), vm_prod(j2,k));
+*' @equations
+
+q17_prod_reg(i2,k) .. 
+vm_prod_reg(i2,k) =e= sum(cell(i2,j2), vm_prod(j2,k));
+
+*' The equation above describes regional production of a MAgPIE plant commodity `vm_prod_reg`
+*' as a sum of the cellular production `vm_prod` of the same commodity.
+					 

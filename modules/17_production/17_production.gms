@@ -6,6 +6,11 @@
 
 *' @title Production
 
+*' @description The production module calculates regional production of
+*' MAgPIE commodities for which cellular production is available.
+
+*' @authors
+
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%production%" == "flexreg_apr16" $include "./modules/17_production/flexreg_apr16.gms"
 *###################### R SECTION END (MODULETYPES) ############################
