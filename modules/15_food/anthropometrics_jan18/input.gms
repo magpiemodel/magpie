@@ -9,9 +9,9 @@ $setglobal c15_calibscen  fadeout2050
 $setglobal c15_rumscen  mixed
 *   options:   constant, halving2050, mixed
 
-scalar s15_elastic_demand  elastic demand switch (1=elastic, 0=exogenous) (1) / 1 /;
+scalar s15_elastic_demand  elastic demand switch (1=elastic 0=exogenous) (1) / 1 /;
 
-scalar s15_calibrate calibration switch (1=calibrated, 2=pure regresssion outcomes) / 1 /;
+scalar s15_calibrate calibration switch (1=calibrated 2=pure regresssion outcomes) / 1 /;
 * only for per-capita calories, not for e.g. calibration of transformation parameters between per-capita calories in dm
 
 scalar s15_maxiter maximum iteration number / 5 /;
