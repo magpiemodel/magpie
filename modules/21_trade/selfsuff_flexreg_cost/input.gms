@@ -12,7 +12,7 @@ scalars
   c21_reduction_regionalized regionalized annual trade balance reduction / 0.005  /
   c21_reduction_globalized   globalized annual trade balance reduction   / 0.01   /
   c21_reduction_fragmented   fragmented annual trade balance reduction   / 0      /
-  s21_trade_tariff                                                       / 0 /
+  s21_trade_tariff trade tariff switch (1=on, 0=off)                     / 0 /
 ;
 
 table f21_self_suff(t_all,i,kall) regional self-sufficiency rates (1)
