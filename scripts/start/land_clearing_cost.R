@@ -19,13 +19,19 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 
-#SSPs
-for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
-  for (rcp in c("Ref","26")) {
-    cfg <- setScenario(cfg,ssp)
-    cfg$gms$c56_pollutant_prices <- paste(ssp,rcp,"SPA0",sep="-")
-    cfg$gms$c60_2ndgen_biodem <- paste(ssp,rcp,"SPA0",sep="-")
-    cfg$title <- paste(ssp,rcp,sep="_")
+cfg$recalibrate <- TRUE
+
+for(low in c(1,2,4,8,10,15,20,25,30)) {
+  for (high in c(100,200,400,500,600,700,800,900,1000,1500)) {
+    cfg$title <- paste("LC",low,high,sep="_")
+    a <- read.magpie("modules/39_landconversion/gdp_vegc_may18/input/f39_landclear_gdp.csv")
+    a[,,"low_gdp"] <- low
+    a[,,"high_gdp"] <- high
+    write.magpie(a,"modules/39_landconversion/gdp_vegc_may18/input/f39_landclear_gdp.cs3")
+    file.rename("modules/39_landconversion/gdp_vegc_may18/input/f39_landclear_gdp.cs3","modules/39_landconversion/gdp_vegc_may18/input/f39_landclear_gdp.csv")
     start_run(cfg,codeCheck=FALSE)
+    cfg$recalc_npi_ndc <- FALSE
   }
 }
+
+

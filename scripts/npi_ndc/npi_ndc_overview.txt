@@ -1,0 +1,101 @@
+NPI/NDC policies 
+MAgPIE 
+Thu Jun 21 16:26:01 2018 
+ 
+##---------------------------------------------------------------------------- 
+## Avoiding Deforestation - AD (%) 
+## percentage protection: 0 = no protection, 1 = full protection 
+## Ref: BaseYear (1), Baseline (2) 
+ 
+############## 
+### NPI AD ### 
+############## 
+   dummy   targettype   baseyear   targetyear   target
+     LAX            1       2005         2020      0.8
+     CEX            1       2005         2020      0.4
+     CHN            2       1995         1995      1.0
+     IND            2       2005         2005      1.0
+     MEX            1       2005         2030      1.0
+     AUS            1       2010         2010      1.0
+ 
+############## 
+### NDC AD ### 
+############## 
+   dummy   targettype   baseyear   targetyear   target
+     LAX            1       2015         2030   1.0000
+     BEN            1       2005         2030   0.1024
+     NAM            2       2015         2030   0.0598
+     CHN            2       1995         1995   1.0000
+     IND            2       2005         2005   1.0000
+     LAO            2       2005         2005   1.0000
+     KHM            2       2005         2005   1.0000
+     MEX            1       2005         2030   1.0000
+     ECU            2       2005         2005   1.0000
+     CHL            2       2005         2005   1.0000
+     BRA            1       2005         2030   1.0000
+     AUS            1       2010         2010   1.0000
+ 
+##---------------------------------------------------------------------------- 
+## Avoiding Other Land Conversion - AOLC (%) 
+## percentage protection: 0 = no protection, 1 = full protection 
+## Ref: BaseYear (1), Baseline (2) 
+ 
+################ 
+### NPI AOLC ### 
+################ 
+   dummy   targettype   baseyear   targetyear   target
+     CHN            2       1995         1995        1
+ 
+################ 
+### NDC AOLC ### 
+################ 
+   dummy   targettype   baseyear   targetyear   target
+     CHN            2       1995         1995        1
+ 
+##---------------------------------------------------------------------------- 
+## Afforestation - AFF (Mha) 
+## Ref: BaseYear (1), Baseline (2) 
+ 
+############### 
+### NPI AFF ### 
+############### 
+   dummy   targettype   baseyear   targetyear   target
+     LAX            1       2010         2020     1.74
+     CEX            1       2010         2020     0.45
+     OTX            1       2010         2020     0.81
+     CHN            1       2005         2020    40.00
+     IND            1       2005         2030     5.00
+     ECU            1       2005         2015     0.30
+     PAN            1       2015         2035     1.00
+     BRA            1       2010         2020     3.00
+     MAR            1       2015         2020     0.20
+     AUS            1       2010         2020     0.02
+ 
+############### 
+### NDC AFF ### 
+############### 
+   dummy   targettype   baseyear   targetyear    target
+     LAX            1       2015         2030    6.9400
+     CEX            1       2015         2030    1.8100
+     OTX            1       2015         2030    3.2400
+     SEN            1       2010         2035    0.5598
+     NAM            1       2020         2030    0.0300
+     BDI            1       2005         2025    0.4500
+     CHN            1       2005         2020   18.7500
+     IND            1       2005         2030   34.6800
+     LAO            1       2005         2020    0.0000
+     THA            1       2005         2030    3.6900
+     KHM            1       2005         2030    0.1400
+     VNM            1       2005         2030    1.1400
+     BLR            1       2005         2030    0.0400
+     GEO            1       2005         2030    0.0015
+     ARM            1       2005         2050    0.2600
+     ECU            1       2015         2025    1.0000
+     HND            1       2015         2030    1.0000
+     PAN            1       2015         2035    1.0000
+     CHL            1       2005         2030    0.1000
+     HTI            1       2015         2030    0.0375
+     BRA            1       2005         2030   12.0000
+     BOL            1       2005         2030    0.0000
+     MAR            1       2015         2020    0.2000
+     AUS            1       2010         2020    0.0200

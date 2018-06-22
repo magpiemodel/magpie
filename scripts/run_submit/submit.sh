@@ -5,6 +5,7 @@
 #SBATCH --output=full.log
 #SBATCH --mail-type=END
 #SBATCH --cpus-per-task=3
+#SBATCH --partition=standard,broadwell
 
 Rscript submit.R
 
