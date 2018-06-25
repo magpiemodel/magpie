@@ -17,7 +17,7 @@ get_info <- function(file, grep_expression, sep, pattern="", replacement=""){
 ## calculates policy for protecting different land pools from land use change
 calc_NPI_NDC <- function(policyregions="iso"){
 
-  require(moinput)
+  require(magclass)
   require(luscale)
   require(lucode)
 
@@ -45,32 +45,78 @@ calc_NPI_NDC <- function(policyregions="iso"){
   # "target"         #Policy target value in % (e.g. allowed deforestation in % in targetyear; afforestation in Mha in case of affore=TRUE)
   ##############################################################################
 
+  
+  # output file for formated writing of the npi/ndc policies
+  fname <- "npi_ndc_overview.txt"
+  if(file.exists(fname)) unlink(fname, force=TRUE)
+  file.create(fname)
+  # quick way of writing in the file line by line
+  addline <- function(x){
+    cat(paste(x,"\n"), file=fname, append=TRUE)
+  }
+  addtable <- function(x){
+    capture.output(print(x, print.gap=3, row.names=FALSE), file=fname, append=TRUE)
+  }
+  
   pol_def <- read.csv("policies/policy_definitions.csv")
 
-  ## BEGIN avoid deforestation policy
+  addline("NPI/NDC policies")
+  addline("MAgPIE")
+  addline(date())
+  
+  addline("")
+  addline("##----------------------------------------------------------------------------")
+  addline("## Avoiding Deforestation - AD (%)")
+  addline("## percentage protection: 0 = no protection, 1 = full protection")
+  addline("## Ref: BaseYear (1), Baseline (2)")
+  
   cat("NPI AD policy\n")
+  addline("")
+  addline("##############")
+  addline("### NPI AD ###")
+  addline("##############")
   npi_ad <- droplevels(subset(pol_def, policy=="npi" & landpool=="forest"))
+  addtable(npi_ad[,c(-2,-3)])
   npi_ad <- calc_policy(npi_ad,forest_stock,pol_type="ad",pol_mapping=pol_mapping)
   getNames(npi_ad) <- "npi.forest"
 
   cat("NDC AD policy\n")
+  addline("")
+  addline("##############")
+  addline("### NDC AD ###")
+  addline("##############")
   ndc_ad <- droplevels(subset(pol_def, policy=="ndc" & landpool=="forest"))
+  addtable(ndc_ad[,c(-2,-3)])
   ndc_ad <- calc_policy(ndc_ad,forest_stock,pol_type="ad",pol_mapping=pol_mapping)
   getNames(ndc_ad) <- "ndc.forest"
   #Set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
   ndc_ad[,which(getYears(ndc_ad,as.integer=TRUE)<2015),] <-
     npi_ad[,which(getYears(npi_ad,as.integer=TRUE)<2015),]
 
-  ## END avoid deforestation
 
-  ## BEGIN avoid other land conversion policy
+  addline("")
+  addline("##----------------------------------------------------------------------------")
+  addline("## Avoiding Other Land Conversion - AOLC (%)")
+  addline("## percentage protection: 0 = no protection, 1 = full protection")
+  addline("## Ref: BaseYear (1), Baseline (2)")
+  
   cat("NPI AOLC policy\n")
+  addline("")
+  addline("################")
+  addline("### NPI AOLC ###")
+  addline("################")
   npi_aolc <- droplevels(subset(pol_def, policy=="npi" & landpool=="other"))
+  addtable(npi_aolc[,c(-2,-3)])
   npi_aolc <- calc_policy(npi_aolc,land_stock[,,"other"],pol_type="ad",pol_mapping=pol_mapping)
   getNames(npi_aolc) <- "npi.other"
 
   cat("NDC AOLC policy\n")
+  addline("")
+  addline("################")
+  addline("### NDC AOLC ###")
+  addline("################")
   ndc_aolc <- droplevels(subset(pol_def, policy=="ndc" & landpool=="other"))
+  addtable(ndc_aolc[,c(-2,-3)])
   ndc_aolc <- calc_policy(ndc_aolc,land_stock[,,"other"],pol_type="ad",pol_mapping=pol_mapping)
   getNames(ndc_aolc) <- "ndc.other"
   #Set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
@@ -84,15 +130,27 @@ calc_NPI_NDC <- function(policyregions="iso"){
   ad_aolc_pol <- mbind(none_ad_aolc_pol,npi_ad,npi_aolc,ndc_ad,ndc_aolc)
   write.magpie(ad_aolc_pol, "policies/npi_ndc_ad_aolc_pol.cs3")
 
-  ## BEGIN afforestation
-
+  addline("")
+  addline("##----------------------------------------------------------------------------")
+  addline("## Afforestation - AFF (Mha)")
+  addline("## Ref: BaseYear (1), Baseline (2)")
+  
   cat("NPI AFF policy\n")
+  addline("")
+  addline("###############")
+  addline("### NPI AFF ###")
+  addline("###############")
   npi_aff <- droplevels(subset(pol_def, policy=="npi" & landpool=="affore"))
+  addtable(npi_aff[,c(-2,-3)])
   npi_aff <- calc_policy(npi_aff,land_stock,pol_type="aff",pol_mapping=pol_mapping,
                          weight=dimSums(land_stock[,2005,c("crop","past")]))
   getNames(npi_aff) <- "npi"
 
   cat("NDC AFF policy\n")
+  addline("")
+  addline("###############")
+  addline("### NDC AFF ###")
+  addline("###############")
   ndc_aff <- droplevels(subset(pol_def, policy=="ndc" & landpool=="affore"))
   ndc_aff <- calc_target(ndc_aff,iso="ARM",land_stock,goal=0.201)
   ndc_aff <- calc_target(ndc_aff,iso="BLR",land_stock,goal=0.41)
@@ -104,6 +162,7 @@ calc_NPI_NDC <- function(policyregions="iso"){
   ndc_aff <- calc_target(ndc_aff,iso="LAO",land_stock,goal=0.7)
   ndc_aff <- calc_target(ndc_aff,iso="THA",land_stock,goal=0.4)
   ndc_aff <- calc_target(ndc_aff,iso="VNM",land_stock,goal=0.45)
+  addtable(ndc_aff[,c(-2,-3)])
   ndc_aff <- calc_policy(ndc_aff,land_stock,pol_type="aff",pol_mapping=pol_mapping,
                          weight=dimSums(land_stock[,2005,c("crop","past")]))
   getNames(ndc_aff) <- "ndc"
@@ -117,8 +176,6 @@ calc_NPI_NDC <- function(policyregions="iso"){
   getNames(none_aff_pol) <- "none"
   aff_pol <- mbind(none_aff_pol,npi_aff,ndc_aff)
   write.magpie(aff_pol, "policies/npi_ndc_aff_pol.cs3")
-
-  ## END afforestation
 
   #copy files
   file.copy("policies/npi_ndc_ad_aolc_pol.cs3",

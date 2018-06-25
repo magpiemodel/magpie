@@ -10,6 +10,7 @@
 ######################################
 
 library(lucode)
+library(magpie4)
 library(magclass)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
@@ -18,10 +19,10 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
-cfg$gms$c_timesteps <- "coup2100"
-
-for (solver in c("conopt4+conopt3","conopt4+cplex","conopt4","conopt3")) {
-  cfg$title <- paste("t2",solver,sep="_")
-  cfg$gms$c80_nlp_solver <- solver
-  start_run(cfg,codeCheck=FALSE)
-}
+cfg$recalibrate <- TRUE
+cfg$title <- "calib_run"
+cfg$gms$c_timesteps <- 1
+cfg$output <- c("report")
+cfg$sequential <- TRUE
+start_run(cfg,codeCheck=FALSE)
+submitCalibration("H12")
