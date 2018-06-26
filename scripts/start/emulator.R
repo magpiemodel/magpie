@@ -64,6 +64,7 @@ write.ghgtax <- function(co2tax_2025=NULL,regions=NULL,out="./modules/56_ghg_pol
 
   ghgtax <- new.magpie(cells_and_regions = regions,years = time,fill = NA,sets = c("regions","years","gas"),names = c("n2o_n_direct","n2o_n_indirect","ch4","co2_c"))
   
+  # unit defined in modules/56_ghg_policy/input/f56_pollutant_prices.cs3: US$ 2004 per Mg N2O-N CH4 and CO2-C
   ghgtax[,,"co2_c"]          <- as.magpie(co2tax) * 0.967 * 44/12       # US$2005/tCO2 -> US$2004/tC
   ghgtax[,,"ch4"]            <- as.magpie(co2tax) * 0.967 * 25          # US$2005/tCO2 -> US$2004/tCH4
   ghgtax[,,"n2o_n_direct"]   <- as.magpie(co2tax) * 0.967 * 44/28 * 300 # US$2005/tCO2 -> US$2004/tN
