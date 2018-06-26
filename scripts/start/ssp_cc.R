@@ -18,6 +18,8 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
+cfg$gms$s21_trade_tariff <- 1
+cfg$recalibrate <- TRUE
 
 #SSPs
 for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
@@ -27,6 +29,7 @@ for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
     cfg$gms$c60_2ndgen_biodem <- paste(if(ssp %in% c("SSP3","SSP4")) "SSP2" else ssp,rcp,"SPA0",sep="-")
     cfg$title <- paste(ssp,rcp,sep="_")
     start_run(cfg,codeCheck=FALSE)
+    cfg$recalibrate <- FALSE
   }
 }
 
