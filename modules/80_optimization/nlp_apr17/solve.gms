@@ -18,10 +18,11 @@ p80_modelstat(t) = 1;
 magpie.optfile   = s80_optfile ;
 
 $onecho > conopt4.opt
-Tol_Obj_Change = 1.0e-5
+Tol_Obj_Change = 3.0e-8
 $offecho
 
 repeat(
+   s80_counter = s80_counter + 1 ;
 
 *' @code
   solve magpie USING nlp MINIMIZING vm_cost_glo;
