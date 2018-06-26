@@ -15,7 +15,13 @@ $endif
 
 s80_counter = 0;
 p80_modelstat(t) = 1;
+
+*** solver settings
+
 magpie.optfile   = s80_optfile ;
+magpie.scaleopt  = 1 ;
+magpie.solprint  = 0 ;
+magpie.holdfixed = 1 ;
 
 $onecho > conopt4.opt
 Tol_Obj_Change = 3.0e-8
