@@ -15,6 +15,11 @@ $endif
 
 s80_counter = 0;
 p80_modelstat(t) = 1;
+magpie.optfile   = s80_optfile ;
+
+$onecho > conopt4.opt
+Tol_Obj_Change = 1.0e-5
+$offecho
 
 repeat(
 
