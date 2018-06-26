@@ -18,11 +18,11 @@ cfg$output          <- c("report","emulator") #unique(c(cfg$output,"remind","bio
 
 # use old regions: c30c1c580039c2b300d86cc46ff4036a
 # use H12 regions: 690d3718e151be1b450b394c1064b1c5
-cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev29_h200_690d3718e151be1b450b394c1064b1c5.tgz", 
-               "rev3.15_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
-               "rev3.15_690d3718e151be1b450b394c1064b1c5_validation.tgz",
-               "additional_data_rev3.28.tgz",
-               "npi_ndc_base_SSP2_fixed.tgz")
+#cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev29_h200_690d3718e151be1b450b394c1064b1c5.tgz", 
+#               "rev3.15_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
+#               "rev3.15_690d3718e151be1b450b394c1064b1c5_validation.tgz",
+#               "additional_data_rev3.28.tgz",
+#               "npi_ndc_base_SSP2_fixed.tgz")
 
 # Download bioenergy demand scenarios
 filemap <- lucode::download_unpack(input="emulator.tgz", targetdir="input", repositories=list("/p/projects/landuse/data/input/archive"=NULL), debug=FALSE)
