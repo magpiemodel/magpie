@@ -133,7 +133,7 @@ model m15_food_demand /
 
 m15_food_demand.optfile   = 0 ;
 m15_food_demand.scaleopt  = 1 ;
-m15_food_demand.solprint  = 1 ;
+m15_food_demand.solprint  = 0 ;
 m15_food_demand.holdfixed = 1 ;
 
 

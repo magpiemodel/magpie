@@ -1,4 +1,4 @@
-option nlp = conopt
+option nlp = conopt4
 
 
 *' @code
