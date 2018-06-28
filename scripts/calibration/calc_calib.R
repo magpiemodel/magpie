@@ -33,8 +33,8 @@ calibration_run<-function(putfolder,calib_magpie_name,logoption=3){
   file.copy("fulldata.gdx",putfolder)
 }
 
-# function to determine the calibration reference and model output area
-get_calibarea<-function(gdx_file){
+# get ratio between modelled area and reference area
+get_areacalib <- function(gdx_file) {
   require(magclass)
   require(magpie4)
   require(gdx)
@@ -45,7 +45,25 @@ get_calibarea<-function(gdx_file){
   if(nregions(magpie)!=nregions(data) | !all(getRegions(magpie) %in% getRegions(data))) {
     stop("Regions in MAgPIE do not agree with regions in reference calibration area data set!")
   }
-  return(list(magpie=magpie,data=data))
+  return(magpie/data)
+}
+
+get_yieldcalib <- function(gdx_file) {
+  require(magclass)
+  require(gdx)
+  require(luscale)
+
+  prep <- function(x) {
+    # use maiz as surrogate for all crops
+    elem <- c("maiz","pasture")
+    y <- collapseNames(x[,,"rainfed"][,,elem])
+    getNames(y) <- c("crop","past")
+    return(superAggregate(y,level="reg",aggr_type="mean", na.rm=TRUE))
+  }
+
+  y_ini <- prep(readGDX(gdx_file,"i14_yields"))
+  y     <- prep(readGDX(gdx_file,"vm_yld")[,,"l"])
+  return(y/y_ini)
 }
 
 # Calculate the correction factor and save it
@@ -53,21 +71,17 @@ update_calib<-function(gdx_file,calibrate_pasture=TRUE,calibrate_cropland=TRUE,d
   require(magclass)
   require(magpie4)
   if(!(modelstat(gdx_file)[1,1,1]%in%c(1,2,7))) stop("Calibration run infeasible")
-  area<-get_calibarea(gdx_file=gdx_file)
-  area_factor <- area$magpie/area$data
-  tc_factor <- (tc(gdx_file)+1)[,"y1995",]
-  calib_factor<-area_factor * tc_factor
-  if(calibrate_pasture==FALSE) calib_factor[,,"past"] <- 1
-  if(calibrate_cropland==FALSE) calib_factor[,,"crop"] <- 1
-  calib_factor_new <- calib_factor
-  calib_factor <- damping_factor*(calib_factor-1) + 1
-  old_calib<-read.magpie(calib_file)
-  calib_factor <- old_calib * calib_factor
 
-  if(!is.null(crop_max)) {
-    calib_factor_new[,,"crop"][calib_factor[,,"crop"]>crop_max] <- crop_max
-    calib_factor[,,"crop"][calib_factor[,,"crop"]>crop_max] <- crop_max
-  }
+  area_factor  <- get_areacalib(gdx_file)
+  tc_factor    <- get_yieldcalib(gdx_file)
+  calib_correction <- area_factor * tc_factor
+
+  old_calib        <- read.magpie(calib_file)
+  calib_factor     <- old_calib * damping_factor*(calib_correction-1) + 1
+
+  if(!is.null(crop_max)) calib_factor[,,"crop"][calib_factor[,,"crop"] > crop_max]  <- crop_max
+  if(calibrate_pasture==FALSE)  calib_factor[,,"past"] <- 1
+  if(calibrate_cropland==FALSE) calib_factor[,,"crop"] <- 1
 
   comment <- c(" description: Regional yield calibration file",
                " unit: -",
@@ -77,24 +91,17 @@ update_calib<-function(gdx_file,calibrate_pasture=TRUE,calibrate_cropland=TRUE,d
   write.magpie(round(setYears(calib_factor,NULL),2), calib_file, comment = comment)
 
   ### write down current calib factors (and area_factors) for tracking
-
-  if(calibration_step==1){
-    calib_factor <- add_dimension(calib_factor, dim=3.1, add="iteration", nm=calibration_step)
-    write.magpie(round(setYears(calib_factor,NULL),2), "track_yield_calib.csv")
-
-    track_area_factor <- add_dimension(area_factor, dim=3.1, add="iteration", nm=calibration_step)
-    write.magpie(round(setYears(track_area_factor,NULL),2), "track_yield_calib_area_factors.csv")
-  }
-  else{
-    calib_factor <- add_dimension(calib_factor, dim=3.1, add="iteration", nm=calibration_step)
-    write.magpie(round(setYears(calib_factor,NULL),2), "track_yield_calib.csv", append = TRUE)
-
-    track_area_factor <- add_dimension(area_factor, dim=3.1, add="iteration", nm=calibration_step)
-    write.magpie(round(setYears(track_area_factor,NULL),2), "track_yield_calib_area_factors.csv", append = TRUE)
+  write_log <- function(x,file,calibration_step) {
+      x <- add_dimension(x, dim=3.1, add="iteration", nm=calibration_step)
+      write.magpie(round(setYears(calib_factor,NULL),2), file, append = (calibration_step!=1))
   }
 
+  write_log(calib_factor,     "calib_factor.cs3"     , calibration_step)
+  write_log(calib_correction, "calib_correction.cs3" , calibration_step)
+  write_log(area_factor,      "calib_area_factor.cs3", calibration_step)
+  write_log(tc_factor,        "calib_tc_factor.cs3"  , calibration_step)
 
-  return(list(calib_factor_new ,tc_factor, area_factor))
+  return(calib_correction)
 }
 
 
@@ -111,67 +118,22 @@ calibrate_magpie <- function(n_maxcalib = 1,
                              debug = FALSE) {
 
   require(magclass)
-  require(lusweave)
-
-  begin<-Sys.time()
-  swout <- swopen("calibration_results.pdf")
 
   for(i in 1:n_maxcalib){
     cat(paste("\nStarting calibration iteration",i,"\n"))
     calibration_run(putfolder=putfolder, calib_magpie_name=calib_magpie_name, logoption=logoption)
     if(debug) file.copy(paste0(putfolder,"/fulldata.gdx"),paste0("fulldata_calib",i,".gdx"))
     new_calib <- update_calib(gdx_file=paste0(putfolder,"/fulldata.gdx"),calibrate_pasture=calibrate_pasture,calibrate_cropland=calibrate_cropland,damping_factor=damping_factor, calib_file=calib_file, calibration_step=i)
-    if(i==1){
-      calib_hist <- setYears(new_calib[[1]],"y1995")
-      tc_hist <- setYears(new_calib[[2]],"y1995")
-      area_hist <- setYears(new_calib[[3]],"y1995")
-    } else{
-      calib_hist <- mbind(calib_hist,setYears(new_calib[[1]],getYears(calib_hist,as.integer=T)[i-1]+10))
-      tc_hist <- mbind(tc_hist,setYears(new_calib[[2]],getYears(tc_hist,as.integer=T)[i-1]+10))
-      area_hist <- mbind(area_hist,setYears(new_calib[[3]],getYears(area_hist,as.integer=T)[i-1]+10))
-    }
-    if(all(abs(1-new_calib[[1]]) < calib_accuracy)){
+    if(all(abs(1-new_calib) < calib_accuracy)){
       cat("\n\nCalibration accuracy reached after ",i," iterations\n\n")
       swlatex(swout,paste("Calibration accuracy reached after ",i," of ",n_maxcalib,"possible iterations\n\n"))
       break
     }
   }
 
-  # Create a pdf with output information
-  for(type in c("crop","past")){
-    out_calib <- as.array(calib_hist[,,type])
-    dimnames(out_calib)[[2]] <- (i-dim(out_calib)[2]+1):i
-    out_tc <- as.array(tc_hist)
-    dimnames(out_tc)[[2]]<-(i-dim(out_tc)[2]+1):i
-    out_area <- as.array(area_hist[,,type])
-    dimnames(out_area)[[2]]<-(i-dim(out_area)[2]+1):i
-    swlatex(swout,paste("\\section{",type,"}"))
-    swlatex(swout,paste("\\subsection{Area reference}"))
-    area <- get_calibarea(gdx_file=paste0(putfolder,"/fulldata.gdx"))[["data"]]
-    swtable(swout,area[,,type],caption="External cropland area information for calibration",transpose=T,digits=4,table.placement="H")
-    final_calib <- read.magpie(calib_file)
-    swtable(swout,final_calib[,,type],caption="Final yield calibration factors",transpose=T,digits=4,table.placement="H")
-    swlatex(swout,paste("\\subsection{Total factor}"))
-    swtable(swout,out_calib[,,1,drop=F],caption="Calibration factors calculated in each iteration",transpose=T,digits=4,table.placement="H")
-    swlatex(swout,paste("\\subsection{TC factor}"))
-    swtable(swout,out_tc[,,1,drop=F],caption="Contribution of tc to calibration factors calculated in each iteration",transpose=T,digits=4,table.placement="H")
-    swlatex(swout,paste("\\subsection{Area factor}"))
-    swtable(swout,out_area[,,1,drop=F],caption="Contribution of area to calibration factors calculated in each iteration",transpose=T,digits=4,table.placement="H")
- }
-  swclose(swout)
-
   # delete calib_magpie_gms in the main folder
   unlink(paste0(calib_magpie_name,".*"))
   unlink("fulldata.gdx")
 
-  # calculate runtime info
-  runtime<-Sys.time()-begin
-
-  # update validation.RData
-  if(file.exists(data_workspace)){
-    load(data_workspace)
-    validation$technical$time$calibration<-runtime
-    save(validation,file=data_workspace)
-  }
   cat("\ncalibration finished\n")
 }
