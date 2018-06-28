@@ -27,7 +27,7 @@ q14_yield_past(j2,w) ..
 *' animal numbers refer to producing animals. For the meat systems, animal numbers refer to the respective animal herd: 
 q14_animal_stocks(i2,sys) ..
  v14_ani_stocks(i2,sys) =e=
-                   sum((sys_to_kli(sys,kli)), vm_prod_reg(i2,kli))/sum(ct,im_livestock_productivity(ct,i2,sys));   
+                   sum((sys_to_kli(sys,kli)), vm_supply(i2,kli))/sum(ct,im_livestock_productivity(ct,i2,sys));   
  				   
 
 *q14_animal_stocks(i2,sys) .. v14_ani_stocks(i2,sys) =e=
