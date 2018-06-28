@@ -8,11 +8,11 @@ $setglobal c32_aff_mask  noboreal
 $setglobal c32_aff_policy  npi
 
 scalars
-	s32_max_aff_area 	maximum total global afforestation in (mio. ha)    / Inf /
-	s32_planing_horizon afforestation planing horizon (years)            / 30 /
+	s32_max_aff_area 	Maximum total global afforestation in (mio. ha)    / Inf /
+	s32_planing_horizon Afforestation planing horizon (years)            / 30 /
 ;
 
-parameter f32_aff_mask(j) afforestation mask (1)
+parameter f32_aff_mask(j) Afforestation mask (1)
 /
 $ondelim
 $Ifi "%c32_aff_mask%" == "unrestricted" $include "./modules/32_forestry/input/aff_unrestricted.cs2"
@@ -27,7 +27,7 @@ $include "./modules/32_forestry/input/f32_fac_req_ha.csv"
 $offdelim
 ;
 
-table f32_aff_pol(t_all,j,pol32) npi+ndc afforestation policy i.e. new forest wrt 2010 (mio. ha)
+table f32_aff_pol(t_all,j,pol32) NPI+NDC afforestation policy i.e. new forest wrt 2010 (mio. ha)
 $ondelim
 $include "./modules/32_forestry/input/npi_ndc_aff_pol.cs3"
 $offdelim

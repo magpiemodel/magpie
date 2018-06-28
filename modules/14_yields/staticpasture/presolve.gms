@@ -4,4 +4,6 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @code Pasture yields are fixed, such that they are constant over time.
 vm_yld.fx(j,"pasture",w) =  i14_yields(t,j,"pasture",w);
+*' @stop

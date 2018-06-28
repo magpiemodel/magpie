@@ -10,12 +10,12 @@ $setglobal c14_yields_scenario  nocc
 
 
 ******* Calibration factor
-table f14_yld_calib(i,ltype14) Calibration factor for the LPJ yields ()
+table f14_yld_calib(i,ltype14) Calibration factor for the LPJmL yields (1)
 $ondelim
 $include "./modules/14_yields/input/f14_yld_calib.csv"
 $offdelim;
 
-table f14_yields(t_all,j,kve,w) LPJ potential yields per cell (rainfed and irrigated) [ton dry matter per ha]
+table f14_yields(t_all,j,kve,w) LPJ potential yields per cell (rainfed and irrigated) (tDM per ha per yr)
 $ondelim
 $include "./modules/14_yields/input/lpj_yields.cs3"
 $offdelim

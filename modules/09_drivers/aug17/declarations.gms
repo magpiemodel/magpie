@@ -6,25 +6,25 @@
 parameters
 
 * Population
-  im_pop_iso(t,iso)      			population (mio.)
-  im_pop(t,i)      					population (mio.)
+  im_pop_iso(t,iso)      			Population (mio.)
+  im_pop(t,i)      					Population (mio.)
 
 * GDP in MER
-  i09_gdp_mer_iso(t,iso)          	income before a price shock MER (mio. USD)
-  i09_gdp_mer(t,i)     	 			income before a price shock MER (mio. USD)
+  i09_gdp_mer_iso(t,iso)          	Income before a price shock MER (mio. USD)
+  i09_gdp_mer(t,i)     	 			Income before a price shock MER (mio. USD)
 
   im_gdp_pc_mer(t,i)              	GDP in market exchange rate per capita (USD)
-  i09_gdp_pc_mer_iso(t,iso)         income before a price shock per capita (USD)
+  i09_gdp_pc_mer_iso(t,iso)         Income before a price shock per capita (USD)
 
 * GDP in PPP
-  i09_gdp_ppp_iso(t,iso)      		income before a price shock PPP (mio. USD)
-  i09_gdp_ppp(t,i)      			income before a price shock PPP (mio. USD)
+  i09_gdp_ppp_iso(t,iso)      		Income before a price shock PPP (mio. USD)
+  i09_gdp_ppp(t,i)      			Income before a price shock PPP (mio. USD)
 
   im_gdp_pc_ppp(t,i)              	GDP PPP per capita (USD)
-  im_gdp_pc_ppp_iso(t,iso)          income PPP before a price shock per capita  (USD)
+  im_gdp_pc_ppp_iso(t,iso)          Income PPP before a price shock per capita  (USD)
 
 * Development State
-  im_development_state(t,i)  					development state in high income level (1)
+  im_development_state(t,i)  					Development state in high income level (1)
   im_physical_inactivity(t,iso,sex,age_group)  	Share of population which is physically inactive (1)
   im_demography(t,iso,sex,age_group) 			Population by groups (mio.)
 ;

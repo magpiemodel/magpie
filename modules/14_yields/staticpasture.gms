@@ -4,6 +4,10 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @description In this realization, crop yields are again calculated as in 
+*' above realizations ([biocorrect] and [dynamic_apr18]): 
+*'
+*' @limitations There are currently no known limitations of this realization
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/14_yields/staticpasture/sets.gms"
