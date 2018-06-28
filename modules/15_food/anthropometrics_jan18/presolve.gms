@@ -1,4 +1,4 @@
-option nlp = conopt
+option nlp = conopt4
 
 
 *' @code
@@ -149,11 +149,11 @@ else
 
 
 *### estimate standardized food requirement
-p15_bodyweight_healthy(t,iso,sex,age_group)= 21.7* (p15_bodyheight(t,iso,sex,age_group,"preliminary")/100)**2;
+p15_bodyweight_healthy(t,iso,sex,age_group)= 21.75* (p15_bodyheight(t,iso,sex,age_group,"preliminary")/100)**2;
 p15_bodyweight_healthy(t,iso,sex,"0--4")   = 16*   (p15_bodyheight(t,iso,sex,"0--4","preliminary")   /100)**2;
 p15_bodyweight_healthy(t,iso,sex,"5--9")   = 16*   (p15_bodyheight(t,iso,sex,"5--9","preliminary")   /100)**2;
 p15_bodyweight_healthy(t,iso,sex,"10--14") = 18*   (p15_bodyheight(t,iso,sex,"10--14","preliminary") /100)**2;
-p15_bodyweight_healthy(t,iso,sex,"15--19") = 21*   (p15_bodyheight(t,iso,sex,"15--19","preliminary") /100)**2;
+p15_bodyweight_healthy(t,iso,sex,"15--19") = 21.75*   (p15_bodyheight(t,iso,sex,"15--19","preliminary") /100)**2;
 
 *' Physical activity levels (PAL) relative to Basic metabolic rate (BMR) are
 *' estimated based on physical inactivity level and assuming PALs for sedentary

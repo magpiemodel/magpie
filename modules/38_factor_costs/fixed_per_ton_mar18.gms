@@ -4,19 +4,18 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description The fixed_per_ton factor costs realization relates
+*' @description This realization relates
 *' factor costs to volume of production of a given crop.
-*' The latter ([17_production]) depends on area harvested ([30_crop]) and yields ([14_yields]).
-*' In other words, in this implementation/realization, factor costs
+*' The latter [17_production] depends on area harvested  from [30_crop] and yields  from [14_yields].
+*' In other words, in this implementation, factor costs
 *' entirely depend on the volume of production.
-*' As such, in this realization, there no incentives to allocate and concentrate production 
+*' As such, there are no incentives to allocate and concentrate production
 *' into high-productive cells.
 
-
-*' @limitations This realization assumes that within a region,factor costs,
-*' purely depend on the production and are independent of the area under production.
-*' Cases in which the area under production significantly could influence
-*' factors costs are hardly accounted.
+*' @limitations This realization assumes that factor costs, within a region,
+*' purely depend on the production and are independent of the area under cultivation.
+*' By implication, cases in which the harvested area could significantly influence
+*' factors costs are hardly accounted in this realization.
 
 
 *####################### R SECTION START (PHASES) ##############################

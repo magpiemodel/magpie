@@ -33,10 +33,10 @@ p39_establish_a(land) = (i39_establish_gdp(land,"high_gdp")
 						- i39_establish_gdp(land,"low_gdp")) / (s39_max_gdp-s39_min_gdp);
 p39_establish_b(land) = i39_establish_gdp(land,"low_gdp")
 					    - p39_establish_a(land) * s39_min_gdp;
-p39_establish_costs_reg(t,i,land) = p39_establish_a(land) * im_gdp_pc_mer(t,i)
+p39_establish_reg(t,i,land) = p39_establish_a(land) * im_gdp_pc_mer(t,i)
 									+ p39_establish_b(land);
 *' Assume identical land establishment costs in all cells belonging to a region. 
-p39_establish_costs(t,j,land) = sum(cell(i,j), p39_establish_costs_reg(t,i,land));
+p39_establish(t,j,land) = sum(cell(i,j), p39_establish_reg(t,i,land));
 *' @stop
 
 *' @code
@@ -44,9 +44,9 @@ p39_establish_costs(t,j,land) = sum(cell(i,j), p39_establish_costs_reg(t,i,land)
 p39_landclear_a =  (i39_landclear_gdp("high_gdp")
 				   - i39_landclear_gdp("low_gdp"))/(s39_max_gdp-s39_min_gdp);
 p39_landclear_b = i39_landclear_gdp("low_gdp")-p39_landclear_a*s39_min_gdp;
-p39_landclear_costs_reg(t,i,land) = 0;
-p39_landclear_costs_reg(t,i,land_natveg) = p39_landclear_a*im_gdp_pc_mer(t,i)
+p39_landclear_reg(t,i,land) = 0;
+p39_landclear_reg(t,i,land_natveg) = p39_landclear_a*im_gdp_pc_mer(t,i)
 										   + p39_landclear_b;
 *' Assume identical land clearing costs in all cells belonging to a region. 
-p39_landclear_costs(t,j,land) = sum(cell(i,j), p39_landclear_costs_reg(t,i,land));
+p39_landclear(t,j,land) = sum(cell(i,j), p39_landclear_reg(t,i,land));
 *' @stop

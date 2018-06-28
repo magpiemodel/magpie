@@ -50,12 +50,12 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
     slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
     modes <- c("Direct execution",
                "Background execution",
-               "SLURM submission",
-               "SLURM submission (16GB memory)",
-               "SLURM submission (32GB memory)",
-               "SLURM submission (medium)",
-               "SLURM submission (16GB memory, medium)",
-               "SLURM submission (32GB memory, medium)",
+               "SLURM submission (standard/broadwell,short)",
+               "SLURM submission (standard/broadwell,16GB,short)",
+               "SLURM submission (standard/broadwell,32GB,short)",
+               "SLURM submission (standard/broadwell,medium)",
+               "SLURM submission (standard/broadwell,16GB,medium)",
+               "SLURM submission (standard/broadwell,32GB,medium)",
                "Debug mode")
     if(!slurm) modes <- modes[-3:-8]
     cat("\n",title,":\n", sep="")
@@ -67,9 +67,9 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
       comp <- switch(identifier,
                      "1" = "direct",
                      "2" = "background",
-                     "3" = "slurm",
-                     "4" = "slurm16gb",
-                     "5" = "slurm32gb",
+                     "3" = "slurmshort",
+                     "4" = "slurm16gbshort",
+                     "5" = "slurm32gbshort",
                      "6" = "slurmmedium",
                      "7" = "slurm16gbmedium",
                      "8" = "slurm32gbmedium",
@@ -103,23 +103,23 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
       } else if(submit=="background") {
         log <- format(Sys.time(), paste0(rout,"-%Y-%H-%M-%S-%OS3.log"))
         system2("Rscript",name, stderr = log, stdout = log, wait=FALSE)
-      } else if(submit=="slurm") {
-        system(paste0(srun_command," --qos=short Rscript ",name), wait=FALSE)
+      } else if(submit=="slurmshort") {
+        system(paste0(srun_command," --partition=standard,broadwell --qos=short Rscript ",name), wait=FALSE)
         Sys.sleep(1)
-      } else if(submit=="slurm16gb") {
-        system(paste0(srun_command," --qos=short --mem=16000 Rscript ",name), wait=FALSE)
+      } else if(submit=="slurm16gbshort") {
+        system(paste0(srun_command," --partition=standard,broadwell --qos=short --mem=16000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
-      } else if(submit=="slurm32gb") {
-        system(paste0(srun_command," --qos=short --mem=32000 Rscript ",name), wait=FALSE)
+      } else if(submit=="slurm32gbshort") {
+        system(paste0(srun_command," --partition=standard,broadwell --qos=short --mem=32000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="slurmmedium") {
-        system(paste0(srun_command," --qos=medium Rscript ",name), wait=FALSE)
+        system(paste0(srun_command," --partition=standard,broadwell --qos=medium Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="slurm16gbmedium") {
-        system(paste0(srun_command," --qos=medium --mem=16000 Rscript ",name), wait=FALSE)
+        system(paste0(srun_command," --partition=standard,broadwell --qos=medium --mem=16000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="slurm32gbmedium") {
-        system(paste0(srun_command," --qos=medium --mem=32000 Rscript ",name), wait=FALSE)
+        system(paste0(srun_command," --partition=standard,broadwell --qos=medium --mem=32000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="debug") {
         tmp.env <- new.env()

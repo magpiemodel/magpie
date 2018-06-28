@@ -5,10 +5,30 @@
 *** |  Contact: magpie@pik-potsdam.de
 **************start solve loop**************
 
+$ifthen "%c80_nlp_solver%" == "conopt3"
+  option nlp        = conopt ;
+$elseif "%c80_nlp_solver%" == "conopt4"
+  option nlp        = conopt4;
+$else
+  abort "c80_nlp_solver setting not supported in nlp_apr17 realization!";
+$endif
+
 s80_counter = 0;
 p80_modelstat(t) = 1;
 
+*** solver settings
+
+magpie.optfile   = s80_optfile ;
+magpie.scaleopt  = 1 ;
+magpie.solprint  = 0 ;
+magpie.holdfixed = 1 ;
+
+$onecho > conopt4.opt
+Tol_Obj_Change = 3.0e-8
+$offecho
+
 repeat(
+   s80_counter = s80_counter + 1 ;
 
 *' @code
   solve magpie USING nlp MINIMIZING vm_cost_glo;

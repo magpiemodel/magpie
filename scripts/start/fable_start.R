@@ -9,15 +9,8 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-library(lucode)
-
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
 #start MAgPIE run
-source("config/default.cfg")
-cfg$results_folder <- "output/:title:"
-cfg$gms$c_timesteps <- "coup2100"
-
-cfg$title <- "lcost_dynamic"
-start_run(cfg,codeCheck=FALSE)
+start_run(cfg="fable.cfg")

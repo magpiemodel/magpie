@@ -19,4 +19,10 @@ sets
         SSP1-20-SPA1, SSP1-26-SPA1, SSP1-37-SPA1, SSP1-45-SPA1,
         SSP2-20-SPA2, SSP2-26-SPA2, SSP2-37-SPA2, SSP2-45-SPA2, SSP2-60-SPA2,
         SSP5-20-SPA5, SSP5-26-SPA5, SSP5-37-SPA5, SSP5-45-SPA5, SSP5-60-SPA5, SSP5-OS-SPA5 /
+
+   scen2ndres60 residues for second generation bioenergy scenarios
+       / ssp1, ssp2, ssp3, ssp4, ssp5, off /
+
 ;
+
+   

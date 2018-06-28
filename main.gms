@@ -12,17 +12,21 @@ $title magpie
 * md5sum: 8e4890f8378ab182aceb637abf8c2e34
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
-* Used data set: rev3.22_690d3718e151be1b450b394c1064b1c5_magpie.tgz
-* md5sum: 1df91c22579b9d6a14a2549d236ff8f8
+* Used data set: rev3.31_690d3718e151be1b450b394c1064b1c5_magpie.tgz
+* md5sum: 01960e04fd1fd96e94fd7e47a0c4092c
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev3.22_690d3718e151be1b450b394c1064b1c5_validation.tgz
-* md5sum: f3d403e99b1271adb356c352bdce55dc
+* Used data set: rev3.31_690d3718e151be1b450b394c1064b1c5_validation.tgz
+* md5sum: e057db8ca5df1d40537dfa7db1865681
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev3.35.tgz
-* md5sum: 65acbab5e03da5bbc060dd1bcb5e7fe0
+* Used data set: additional_data_rev3.37.tgz
+* md5sum: ccff36cc62228812ef2bf62d148beb4e
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* 
+* Used data set: calibration_H12_25Jun18.tgz
+* md5sum: 201d79bb03d9441def4f14f2be7de75e
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/calibration
 * 
 * Low resolution: h200
 * High resolution: 0.5
@@ -35,7 +39,7 @@ $title magpie
 * 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
-* Regions data revision: 3.22
+* Regions data revision: 3.31
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/noco2
@@ -55,7 +59,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Wed Jun 13 22:09:21 2018
+* Last modification (input data): Tue Jun 26 18:15:15 2018
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 

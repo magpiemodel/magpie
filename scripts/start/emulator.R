@@ -18,11 +18,11 @@ cfg$output          <- c("report","emulator") #unique(c(cfg$output,"remind","bio
 
 # use old regions: c30c1c580039c2b300d86cc46ff4036a
 # use H12 regions: 690d3718e151be1b450b394c1064b1c5
-cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev29_h200_690d3718e151be1b450b394c1064b1c5.tgz", 
-               "rev3.15_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
-               "rev3.15_690d3718e151be1b450b394c1064b1c5_validation.tgz",
-               "additional_data_rev3.28.tgz",
-               "npi_ndc_base_SSP2_fixed.tgz")
+#cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev29_h200_690d3718e151be1b450b394c1064b1c5.tgz", 
+#               "rev3.15_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
+#               "rev3.15_690d3718e151be1b450b394c1064b1c5_validation.tgz",
+#               "additional_data_rev3.28.tgz",
+#               "npi_ndc_base_SSP2_fixed.tgz")
 
 # Download bioenergy demand scenarios
 filemap <- lucode::download_unpack(input="emulator.tgz", targetdir="input", repositories=list("/p/projects/landuse/data/input/archive"=NULL), debug=FALSE)
@@ -64,6 +64,7 @@ write.ghgtax <- function(co2tax_2025=NULL,regions=NULL,out="./modules/56_ghg_pol
 
   ghgtax <- new.magpie(cells_and_regions = regions,years = time,fill = NA,sets = c("regions","years","gas"),names = c("n2o_n_direct","n2o_n_indirect","ch4","co2_c"))
   
+  # unit defined in modules/56_ghg_policy/input/f56_pollutant_prices.cs3: US$ 2004 per Mg N2O-N CH4 and CO2-C
   ghgtax[,,"co2_c"]          <- as.magpie(co2tax) * 0.967 * 44/12       # US$2005/tCO2 -> US$2004/tC
   ghgtax[,,"ch4"]            <- as.magpie(co2tax) * 0.967 * 25          # US$2005/tCO2 -> US$2004/tCH4
   ghgtax[,,"n2o_n_direct"]   <- as.magpie(co2tax) * 0.967 * 44/28 * 300 # US$2005/tCO2 -> US$2004/tN
@@ -123,8 +124,15 @@ for (scen in rownames(scenarios)) {
   # Compose string with scenario name
   expname <- paste0(scenarios[scen,"SSP"],"-",scenarios[scen,"co2tax_name"])
 
+  # run numbers sorted in descending by runtime (taken from former SSP2-26 emulator runs)
+  runtime_order <- c("4","17","34","12","11","22","32","15","21","2","58","18","20","16","19",
+  "31","67","41","48","54","65","47","13","44","70","28","52","53","62","36","40","9","14","46",
+  "10","29","38","71","57","50","60","37","64","69","68","51","61","5","27","7","66","6","49",
+  "35","45","59","56","24","72","25","63","42","30","1","55","43","26","3","39","73","23","33","8")
+  # the intersect command in the for-loop below keeps the order of the vector given first  
+  
   # Copy bioenergy demand files and start runs
-  for(r in getNames(demand)) {
+  for(r in intersect(runtime_order,getNames(demand))) {
   #for(r in as.character(c(1))) { 
     cfg$title <- paste(expname,r,sep="-")
     cat(cfg$title,"Writing bioenergy demand scenario",r,"\n")

@@ -7,7 +7,6 @@
 library(magclass)
 library(lucode)
 library(magpie4)
-library(rmarkdown)
 
 options(error=function()traceback(2))
 

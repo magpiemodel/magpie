@@ -18,37 +18,19 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
-cfg$gms$c_timesteps <- "coup2100"
+
 cfg$recalibrate <- TRUE
-cfg$gms$c80_nlp_solver <- "conopt4"
-cfg$gms$s80_optfile <- 0
 
-cfg$gms$factor_costs <- "mixed_feb17"
-
-cfg$gms$c39_cost_scenario  <- "low"
-cfg$title <- "LC_low"
-start_run(cfg,codeCheck=FALSE)
-cfg$recalc_npi_ndc <- FALSE
-cfg$recalibrate <- FALSE
-
-for(low in c(5,10,20)) {
-  for (high in c(50,100,1000,10000)) {
+for(low in c(1,2,4,8,10,15,20,25,30)) {
+  for (high in c(100,200,400,500,600,700,800,900,1000,1500)) {
     cfg$title <- paste("LC",low,high,sep="_")
-    cfg$gms$landconversion <- "gdp_vegc_may18"
     a <- read.magpie("modules/39_landconversion/gdp_vegc_may18/input/f39_landclear_gdp.csv")
-    a[,,"low_estimate.low_gdp"] <- low
-    a[,,"low_estimate.high_gdp"] <- high
+    a[,,"low_gdp"] <- low
+    a[,,"high_gdp"] <- high
     write.magpie(a,"modules/39_landconversion/gdp_vegc_may18/input/f39_landclear_gdp.cs3")
     file.rename("modules/39_landconversion/gdp_vegc_may18/input/f39_landclear_gdp.cs3","modules/39_landconversion/gdp_vegc_may18/input/f39_landclear_gdp.csv")
-    # a <- read.magpie("modules/39_landconversion/gdp_vegc_may18/input/f39_establish_gdp.cs3")
-    # a[,,"crop.medium_estimate.low_gdp"] <- low
-    # a[,,"crop.medium_estimate.high_gdp"] <- high
-    # a[,,"past.medium_estimate.low_gdp"] <- low/2
-    # a[,,"past.medium_estimate.high_gdp"] <- high/2
-    # write.magpie(a,"modules/39_landconversion/gdp_vegc_may18/input/f39_establish_gdp.cs3")
     start_run(cfg,codeCheck=FALSE)
     cfg$recalc_npi_ndc <- FALSE
-    cfg$recalibrate <- FALSE
   }
 }
 

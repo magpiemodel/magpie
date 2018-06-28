@@ -31,15 +31,21 @@ buildInputVector <- function(regionmapping   = "aus",
                 ind="4431b698acab987e1dedd3a714231643",
                 usa="2b409196626ee246982f5ec87323c01a")
   archive_name=paste(project_name,climate_model,climatescen_name,co2,sep="-")
-  archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", mappings[regionmapping], ".tgz")
+  archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", toupper(regionmapping),"3_",mappings[regionmapping], ".tgz")
   madrat  <- paste0("rev", madrat_rev, "_", mappings[regionmapping], "_magpie.tgz")
   validation  <- paste0("rev", validation_rev, "_", mappings[regionmapping], "_validation.tgz")
   return(c(archive,madrat,validation,calibration,additional_data))
 }
 
+calib_date <- "14Jun18"
+
 for(x in c("aus","bra","cha","eth","ind","usa")) {
+#for(x in "usa")
+  calibration <- paste0("calibration_",x,"_",calib_date,".tgz")
+  #calibration <- NULL
   cfg$title <- x
-  cfg$input <- buildInputVector(regionmapping=x)
-  start_run(cfg=cfg)
-  submitCalibration(x)
+  cfg$input <- buildInputVector(regionmapping=x, calibration=calibration)
+  publish_data(input=cfg, name=paste0("testdata_",x))
+  #start_run(cfg=cfg)
+  #submitCalibration(x)
 }
