@@ -4,6 +4,11 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @description In the [dynamic_apr18] realization, the crop yield calculation is 
+*' identical to above described realization ([biocorrect]).
+*'
+*' @limitations There are currently no known limitations of this realization
+
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/14_yields/dynamic_apr18/sets.gms"

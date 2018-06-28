@@ -6,22 +6,22 @@
 
 parameters
 ****** Yields
- i14_yields(t,j,kve,w)       biophysical input yields (excluding technological change) (ton DM per ha)
+ i14_yields(t,j,kve,w)       Biophysical input yields (excluding technological change) (tDM per ha per yr)
 ;
 
 positive variables
- vm_yld(j,kve,w)             yields (variable because of technical change) (ton DM per ha)
+ vm_yld(j,kve,w)             Yields (variable because of technical change) (tDM per ha per yr)
 ;
 
 equations
- q14_yield_crop(j,kcr,w)    crop yields
- q14_yield_past(j,w)        pasture yields
+ q14_yield_crop(j,kcr,w)    Crop yields (tDM per ha per yr)
+ q14_yield_past(j,w)        Pasture yields (tDM per ha per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_yld(t,j,kve,w,type)          yields (variable because of technical change) (ton DM per ha)
- oq14_yield_crop(t,j,kcr,w,type) crop yields
- oq14_yield_past(t,j,w,type)     pasture yields
+ ov_yld(t,j,kve,w,type)          Yields (variable because of technical change) (tDM per ha per yr)
+ oq14_yield_crop(t,j,kcr,w,type) Crop yields (tDM per ha per yr)
+ oq14_yield_past(t,j,w,type)     Pasture yields (tDM per ha per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

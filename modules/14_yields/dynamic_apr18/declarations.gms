@@ -6,40 +6,40 @@
 
 parameters
 ****** Yields
- i14_yields(t,j,kve,w)            biophysical input yields (excluding technological change) (ton DM per ha)
- pc14_pyld(j,w)                   pasture yields of previous time step (ton DM per ha)
- pc14_graz_ani(i)                 grazing animals of previous time step (million animals)
- p14_ani_stocks(t,i,sys)            animal numbers for all time steps (stock for meat systems or producing animals for egg and dairy systems) (million animals)
- pc14_dairy_cattle(i)             dairy cattle of previous time step (million animals)
- pc14_beef_cattle(i)              animal numbers based on the productivity of beef systems (million animals)
+ i14_yields(t,j,kve,w)            Biophysical input yields (excluding technological change) (tDM per ha per yr)
+ pc14_pyld(j,w)                   Pasture yields of previous time step (tDM per ha per yr)
+ pc14_graz_ani(i)                 Grazing animals of previous time step (mio. animals per yr)
+ p14_ani_stocks(t,i,sys)          Animal numbers for all time steps (stock for meat systems or producing animals for egg and dairy systems) (mio. animals per yr)
+ pc14_dairy_cattle(i)             Dairy cattle of previous time step (mio. animals per yr)
+ pc14_beef_cattle(i)              Animal numbers based on the productivity of beef systems (mio. animals per yr)
 ;
 
 positive variables
- vm_yld(j,kve,w)                  yields (variable because of technical change) (ton DM per ha)
- v14_ani_stocks(i,sys)            animal numbers (stock for meat systems or producing animals for egg and dairy systems) (million animals)
- v14_graz_ani(i)                  grazing animals (million animals)
- v14_incr_graz_ani(i)             increase in grazing animals (1)
+ vm_yld(j,kve,w)                  Yields (variable because of technical change) (tDM per ha per yr)
+ v14_ani_stocks(i,sys)            Animal numbers (stock for meat systems or producing animals for egg and dairy systems) (mio. animals per yr)
+ v14_graz_ani(i)                  Grazing animals (mio. animals per yr)
+ v14_incr_graz_ani(i)             Increase in grazing animals (1)
 ;
 
 equations
- q14_yield_crop(j,kcr,w)          crop yields
- q14_yield_past(j,w)              pasture yields
- q14_animal_stocks(i,sys)         regional animal numbers
- q14_grazing_animals(i)           regional grazing animals
- q14_incr_graz_animals(i)         regional increase in grazing animals (1)
+ q14_yield_crop(j,kcr,w)          Crop yields (tDM per ha per yr)
+ q14_yield_past(j,w)              Pasture yields (tDM per ha per yr)
+ q14_animal_stocks(i,sys)         Regional animal numbers (mio. animals per yr)
+ q14_grazing_animals(i)           Regional grazing animals (mio. animals per yr)
+ q14_incr_graz_animals(i)         Regional increase in grazing animals (1)
 
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_yld(t,j,kve,w,type)           yields (variable because of technical change) (ton DM per ha)
- ov14_ani_stocks(t,i,sys,type)    animal numbers (stock for meat systems or producing animals for egg and dairy systems) (million animals)
- ov14_graz_ani(t,i,type)          grazing animals (million animals)
- ov14_incr_graz_ani(t,i,type)     increase in grazing animals (1)
- oq14_yield_crop(t,j,kcr,w,type)  crop yields
- oq14_yield_past(t,j,w,type)      pasture yields
- oq14_animal_stocks(t,i,sys,type) regional animal numbers
- oq14_grazing_animals(t,i,type)   regional grazing animals
- oq14_incr_graz_animals(t,i,type) regional increase in grazing animals (1)
+ ov_yld(t,j,kve,w,type)           Yields (variable because of technical change) (tDM per ha per yr)
+ ov14_ani_stocks(t,i,sys,type)    Animal numbers (stock for meat systems or producing animals for egg and dairy systems) (mio. animals per yr)
+ ov14_graz_ani(t,i,type)          Grazing animals (mio. animals per yr)
+ ov14_incr_graz_ani(t,i,type)     Increase in grazing animals (1)
+ oq14_yield_crop(t,j,kcr,w,type)  Crop yields (tDM per ha per yr)
+ oq14_yield_past(t,j,w,type)      Pasture yields (tDM per ha per yr)
+ oq14_animal_stocks(t,i,sys,type) Regional animal numbers (mio. animals per yr)
+ oq14_grazing_animals(t,i,type)   Regional grazing animals (mio. animals per yr)
+ oq14_incr_graz_animals(t,i,type) Regional increase in grazing animals (1)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

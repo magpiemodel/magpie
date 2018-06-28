@@ -9,17 +9,17 @@ $setglobal c14_yields_scenario  nocc
 *             nocc (no climate change)
 
 scalars
-  s14_pyld_intercept intercept of linear relationship determining pasture intensification (1)  / 0.24 /
-  s14_pyld_slope     slope of linear relationship determining pasture intensification (1)      / 0.78 /
+  s14_pyld_intercept     Intercept of linear relationship determining pasture intensification    (1)           / 0.24 /
+  s14_pyld_slope         Slope of linear relationship determining pasture intensification        (1)          / 0.78 /
 ;
 
 ******* Calibration factor
-table f14_yld_calib(i,ltype14) Calibration factor for the LPJ yields (1)
+table f14_yld_calib(i,ltype14) Calibration factor for the LPJmL yields (1)
 $ondelim
 $include "./modules/14_yields/input/f14_yld_calib.csv"
 $offdelim;
 
-table f14_yields(t_all,j,kve,w) LPJ potential yields per cell (rainfed and irrigated) (tDM per ha)
+table f14_yields(t_all,j,kve,w) LPJmL potential yields per cell (rainfed and irrigated) (tDM per ha per yr)
 $ondelim
 $include "./modules/14_yields/input/lpj_yields.cs3"
 $offdelim
@@ -29,7 +29,7 @@ $if "%c14_yields_scenario%" == "nocc" f14_yields(t_all,j,kve,w) = f14_yields("y1
 m_fillmissingyears(f14_yields,"j,kve,w");
 
 
-parameter f14_pyld_slope_reg(i) regional slope of linear relationship determining pasture intensification (1)
+parameter f14_pyld_slope_reg(i) Regional slope of linear relationship determining pasture intensification (1)
 /
 $ondelim
 $include "./modules/14_yields/input/f14_pyld_slope_reg.cs4"
