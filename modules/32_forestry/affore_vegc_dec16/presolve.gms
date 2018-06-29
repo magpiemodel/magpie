@@ -43,10 +43,11 @@ s32_shift = m_yeardiff(t)/5;
 if((ord(t) = 1),
     p32_land(t,j,ac,"before") = 0$(not sameas(ac,"acx")) + pcm_land(j,"forestry")$(sameas(ac,"acx"));
 else
-    p32_land(t,j,ac,"before") =
-                      0$(ord(ac) = 1)
-                    + p32_land(t-1,j,ac-s32_shift,"after")$(ord(ac) > 1 AND ord(ac) < card(ac))
-                    + p32_land(t-1,j,ac,"after")$(ord(ac) = card(ac));
+*example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s32_shift = 1)
+    p32_land(t,j,ac,"before")$(ord(ac) > s32_shift) = p32_land(t-1,j,ac-s32_shift,"after");
+*account for cases at the end of the age class set (s32_shift > 1) which are not shifted by the above calculation
+    p32_land(t,j,"acx","before") = p32_land(t,j,"acx","before")
+                  + sum(ac$(ord(ac) > card(ac)-s32_shift), p32_land(t-1,j,ac,"after"));
 );
 
 *calculate v32_land.l
