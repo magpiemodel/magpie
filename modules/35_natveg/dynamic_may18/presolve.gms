@@ -11,13 +11,15 @@ if((ord(t) = 1),
 	p35_secdforest(t,j,ac,"before") = i35_secdforest(j,ac);
 	p35_other(t,j,ac,"before") = i35_other(j,ac);
 else
-	p35_other(t,j,ac,"before")$(ac.off < s35_shift) = 0;
-    p35_other(t,j,ac,"before")$(ac.off >= s35_shift) = p35_other(t-1,j,ac-s35_shift,"after");
+*example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s35_shift = 1)
+    p35_other(t,j,ac,"before")$(ord(ac) > s35_shift) = p35_other(t-1,j,ac-s35_shift,"after");
+*account for cases at the end of the age class set (s35_shift > 1) which are not shifted by the above calculation
     p35_other(t,j,"acx","before") = p35_other(t,j,"acx","before")
                   + sum(ac$(ord(ac) > card(ac)-s35_shift), p35_other(t-1,j,ac,"after"));
 
-	p35_secdforest(t,j,ac,"before")$(ac.off < s35_shift) = 0;
-    p35_secdforest(t,j,ac,"before")$(ac.off >= s35_shift) = p35_secdforest(t-1,j,ac-s35_shift,"after");
+*example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s35_shift = 1)
+    p35_secdforest(t,j,ac,"before")$(ord(ac) > s35_shift) = p35_secdforest(t-1,j,ac-s35_shift,"after");
+*account for cases at the end of the age class set (s35_shift > 1) which are not shifted by the above calculation
     p35_secdforest(t,j,"acx","before") = p35_secdforest(t,j,"acx","before")
                   + sum(ac$(ord(ac) > card(ac)-s35_shift), p35_secdforest(t-1,j,ac,"after"));
 );

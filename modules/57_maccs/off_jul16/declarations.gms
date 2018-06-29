@@ -15,6 +15,6 @@ positive variables
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_maccs_costs(t,i,type)                           costs of technical mitigation of GHG emissions (mio. USD)
+ ov_maccs_costs(t,i,type) costs of technical mitigation of GHG emissions (mio. USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

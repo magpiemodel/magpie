@@ -15,8 +15,8 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_prod(t,j,k,type)        Production in each cell (mio. tDM)
- ov_prod_reg(t,i,kall,type) Regional aggregated production (mio. tDM)
+ ov_prod(t,j,k,type)        Production in each cell (mio. tDM per yr)
+ ov_prod_reg(t,i,kall,type) Regional aggregated production (mio. tDM per yr)
  oq17_prod_reg(t,i,k,type)  Regional production (mio. tDM per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

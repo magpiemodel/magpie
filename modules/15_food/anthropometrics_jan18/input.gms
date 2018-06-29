@@ -16,7 +16,7 @@ scalar s15_calibrate calibration switch (1=calibrated 2=pure regresssion outcome
 
 scalar s15_maxiter maximum iteration number / 5 /;
 
-scalar s15_convergence convergence criteria   / 0.05 /;
+scalar s15_convergence convergence criteria   / 0.005 /;
 
 table f15_household_balance_flow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of inhomogenous products and processes in statistics (mio. t DM)
 $ondelim

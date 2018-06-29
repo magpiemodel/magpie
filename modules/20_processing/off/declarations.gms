@@ -18,8 +18,8 @@ positive variables
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_dem_processing(t,i,kall,type)               demand for processing use (mio.tDM)
- ov_secondary_overproduction(t,i,kall,kpr,type) overproduction of secondary couple products (mio. tDM)
- ov_cost_processing(t,i,type)                   processing costs (mio. USD)
- oq20_processing_costs(t,i,type)                processing costs (mio. USD)
+ ov_secondary_overproduction(t,i,kall,kpr,type) overproduction of secondary couple products (mio.tDM)
+ ov_cost_processing(t,i,type)                   processing costs (mio.USD)
+ oq20_processing_costs(t,i,type)                processing costs (mio.USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

@@ -35,9 +35,7 @@ $elseif "%c80_nlp_solver%" == "conopt4+conopt3"
 $endif
 
 $onecho > conopt4.opt
-Lin_Method = 1
-Tol_Obj_Change = 1.0e-5
-Lim_Iteration = 1000
+Tol_Obj_Change = 3.0e-7
 $offecho
 
 

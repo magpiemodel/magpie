@@ -18,7 +18,6 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
-cfg$recalibrate <- TRUE
 
 for (ssp in c("SSP2","SSP5")) {
   for (rcp in c("Ref","26")) {
