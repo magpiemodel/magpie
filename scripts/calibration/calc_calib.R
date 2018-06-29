@@ -47,7 +47,7 @@ get_areacalib <- function(gdx_file) {
   }
   out <- magpie/data
   out[out==0] <- 1
-  return(out)
+  return(magpiesort(out))
 }
 
 get_yieldcalib <- function(gdx_file) {
@@ -68,7 +68,7 @@ get_yieldcalib <- function(gdx_file) {
 
   out <- y/y_ini
   out[out==0] <- 1
-  return(out)
+  return(magpiesort(out))
 }
 
 # Calculate the correction factor and save it
@@ -82,13 +82,13 @@ update_calib<-function(gdx_file,calibrate_pasture=TRUE,calibrate_cropland=TRUE,d
   calib_correction <- area_factor * tc_factor
   calib_divergence <- abs(calib_correction-1)
 
-  old_calib        <- read.magpie(calib_file)
+  old_calib        <- magpiesort(read.magpie(calib_file))
   calib_factor     <- old_calib * (damping_factor*(calib_correction-1) + 1)
 
   if(!is.null(crop_max)) {
     above_limit <- (calib_factor[,,"crop"] > crop_max)
     calib_factor[,,"crop"][above_limit]  <- crop_max
-    calib_divergence[,,"crop"][above_limit] <- 0
+    calib_divergence[getRegions(calib_factor),,"crop"][above_limit] <- 0
   }
   if(!calibrate_pasture)  {
     calib_factor[,,"past"] <- 1
