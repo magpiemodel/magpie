@@ -16,6 +16,7 @@ i14_yields(t,j,"pasture",w) = i14_yields(t,j,"pasture",w)*sum(cell(i,j),f14_yld_
 
 
 ***INITIALIZATION OF PARAMETERS FOR THE INITIAL TIME STEP**********************
+v14_incr_graz_ani.l(i) = 1;
 pc14_pyld(j,w) = i14_yields("y1995",j,"pasture",w); 
 pc14_graz_ani(i) = 1;
 pc14_beef_cattle(i) = 1;
