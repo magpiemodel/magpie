@@ -45,7 +45,9 @@ get_areacalib <- function(gdx_file) {
   if(nregions(magpie)!=nregions(data) | !all(getRegions(magpie) %in% getRegions(data))) {
     stop("Regions in MAgPIE do not agree with regions in reference calibration area data set!")
   }
-  return(magpie/data)
+  out <- magpie/data
+  out[out==0] <- 1
+  return(out)
 }
 
 get_yieldcalib <- function(gdx_file) {
@@ -63,7 +65,10 @@ get_yieldcalib <- function(gdx_file) {
 
   y_ini <- prep(readGDX(gdx_file,"i14_yields"))
   y     <- prep(readGDX(gdx_file,"vm_yld")[,,"l"])
-  return(y/y_ini)
+
+  out <- y/y_ini
+  out[out==0] <- 1
+  return(out)
 }
 
 # Calculate the correction factor and save it
@@ -93,7 +98,7 @@ update_calib<-function(gdx_file,calibrate_pasture=TRUE,calibrate_cropland=TRUE,d
   ### write down current calib factors (and area_factors) for tracking
   write_log <- function(x,file,calibration_step) {
       x <- add_dimension(x, dim=3.1, add="iteration", nm=calibration_step)
-      write.magpie(round(setYears(calib_factor,NULL),2), file, append = (calibration_step!=1))
+      try(write.magpie(round(setYears(calib_factor,NULL),2), file, append = (calibration_step!=1)))
   }
 
   write_log(calib_factor,     "calib_factor.cs3"     , calibration_step)
