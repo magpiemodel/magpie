@@ -72,7 +72,7 @@ get_yieldcalib <- function(gdx_file) {
 }
 
 # Calculate the correction factor and save it
-update_calib<-function(gdx_file,calibrate_pasture=TRUE,calibrate_cropland=TRUE,damping_factor=0.6, calib_file, crop_max=1, calibration_step=""){
+update_calib<-function(gdx_file,calibrate_pasture=TRUE,calibrate_cropland=TRUE,damping_factor=0.8, calib_file, crop_max=1, calibration_step=""){
   require(magclass)
   require(magpie4)
   if(!(modelstat(gdx_file)[1,1,1]%in%c(1,2,7))) stop("Calibration run infeasible")
@@ -80,13 +80,24 @@ update_calib<-function(gdx_file,calibrate_pasture=TRUE,calibrate_cropland=TRUE,d
   area_factor  <- get_areacalib(gdx_file)
   tc_factor    <- get_yieldcalib(gdx_file)
   calib_correction <- area_factor * tc_factor
+  calib_divergence <- abs(calib_correction-1)
 
   old_calib        <- read.magpie(calib_file)
-  calib_factor     <- old_calib * damping_factor*(calib_correction-1) + 1
+  calib_factor     <- old_calib * (damping_factor*(calib_correction-1) + 1)
 
-  if(!is.null(crop_max)) calib_factor[,,"crop"][calib_factor[,,"crop"] > crop_max]  <- crop_max
-  if(calibrate_pasture==FALSE)  calib_factor[,,"past"] <- 1
-  if(calibrate_cropland==FALSE) calib_factor[,,"crop"] <- 1
+  if(!is.null(crop_max)) {
+    above_limit <- (calib_factor[,,"crop"] > crop_max)
+    calib_factor[,,"crop"][above_limit]  <- crop_max
+    calib_divergence[,,"crop"][above_limit] <- 0
+  }
+  if(!calibrate_pasture)  {
+    calib_factor[,,"past"] <- 1
+    calib_divergence[,,"past"] <- 0
+  }
+  if(!calibrate_cropland) {
+    calib_factor[,,"crop"] <- 1
+    calib_divergence[,,"crop"] <- 0
+  }
 
   comment <- c(" description: Regional yield calibration file",
                " unit: -",
@@ -97,16 +108,17 @@ update_calib<-function(gdx_file,calibrate_pasture=TRUE,calibrate_cropland=TRUE,d
 
   ### write down current calib factors (and area_factors) for tracking
   write_log <- function(x,file,calibration_step) {
-      x <- add_dimension(x, dim=3.1, add="iteration", nm=calibration_step)
-      try(write.magpie(round(setYears(calib_factor,NULL),2), file, append = (calibration_step!=1)))
+    x <- add_dimension(x, dim=3.1, add="iteration", nm=calibration_step)
+    try(write.magpie(round(setYears(x,NULL),2), file, append = (calibration_step!=1)))
   }
 
   write_log(calib_factor,     "calib_factor.cs3"     , calibration_step)
   write_log(calib_correction, "calib_correction.cs3" , calibration_step)
+  write_log(calib_divergence, "calib_divergence.cs3" , calibration_step)
   write_log(area_factor,      "calib_area_factor.cs3", calibration_step)
   write_log(tc_factor,        "calib_tc_factor.cs3"  , calibration_step)
 
-  return(calib_correction)
+  return(calib_divergence)
 }
 
 
@@ -128,10 +140,8 @@ calibrate_magpie <- function(n_maxcalib = 1,
     cat(paste("\nStarting calibration iteration",i,"\n"))
     calibration_run(putfolder=putfolder, calib_magpie_name=calib_magpie_name, logoption=logoption)
     if(debug) file.copy(paste0(putfolder,"/fulldata.gdx"),paste0("fulldata_calib",i,".gdx"))
-    new_calib <- update_calib(gdx_file=paste0(putfolder,"/fulldata.gdx"),calibrate_pasture=calibrate_pasture,calibrate_cropland=calibrate_cropland,damping_factor=damping_factor, calib_file=calib_file, calibration_step=i)
-    if(all(abs(1-new_calib) < calib_accuracy)){
-      cat("\n\nCalibration accuracy reached after ",i," iterations\n\n")
-      swlatex(swout,paste("Calibration accuracy reached after ",i," of ",n_maxcalib,"possible iterations\n\n"))
+    calib_divergence <- update_calib(gdx_file=paste0(putfolder,"/fulldata.gdx"),calibrate_pasture=calibrate_pasture,calibrate_cropland=calibrate_cropland,damping_factor=damping_factor, calib_file=calib_file, calibration_step=i)
+    if(all(calib_divergence < calib_accuracy)){
       break
     }
   }
