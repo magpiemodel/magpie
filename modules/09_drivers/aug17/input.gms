@@ -13,17 +13,17 @@ $setglobal c09_gdp_scenario  SSP2
 *             SRES: "a1", "a2", "b1", "b2"
 
 
-table f09_gdp_ppp_iso(t_all,iso,gdp_scen09) GDP PPP (mio. USD05)
+table f09_gdp_ppp_iso(t_all,iso,gdp_scen09) GDP (mio. USD05PPP per yr)
 $ondelim
 $include "./modules/09_drivers/input/f09_gdp_ppp_iso.csv"
 $offdelim;
 
-table f09_gdp_mer_iso(t_all,iso,gdp_scen09)  GDP MER (mio. USD05MER)
+table f09_gdp_mer_iso(t_all,iso,gdp_scen09)  GDP (mio. USD05MER per yr)
 $ondelim
 $include "./modules/09_drivers/input/f09_gdp_mer_iso.csv"
 $offdelim;
 
-table f09_pop_iso(t_all,iso,pop_scen09) Population (mio. capita)
+table f09_pop_iso(t_all,iso,pop_scen09) Population (mio. capita per yr)
 $ondelim
 $include "./modules/09_drivers/input/f09_pop_iso.csv"
 $offdelim;
@@ -33,7 +33,7 @@ $ondelim
 $include "./modules/09_drivers/input/f09_development_state.cs3"
 $offdelim;
 
-table f09_demography(t_all,iso,pop_scen09,sex,age_group) Population (mio. capita)
+table f09_demography(t_all,iso,pop_scen09,sex,age_group) Population (mio. capita per yr)
 $ondelim
 $include "./modules/09_drivers/input/f09_demography.cs3"
 $offdelim;

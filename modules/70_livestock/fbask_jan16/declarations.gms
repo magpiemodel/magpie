@@ -6,7 +6,7 @@
 
 
 positive variables
- vm_dem_feed(i,kap,kall)          Regional feed demand including byproducts (mio. tDM)
+ vm_dem_feed(i,kap,kall)          Regional feed demand including byproducts (mio. tDM per yr)
 ;
 
 equations
@@ -22,7 +22,7 @@ parameters
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_dem_feed(t,i,kap,kall,type)    Regional feed demand including byproducts (mio. tDM)
+ ov_dem_feed(t,i,kap,kall,type)    Regional feed demand including byproducts (mio. tDM per yr)
  oq70_feed(t,i,kap,kall,type)      Regional feed demand
  oq70_cost_prod_liv(t,i,kall,type) Regional factor input costs for livestock production
  oq70_cost_prod_fish(t,i,type)     Regional factor input costs for fish production

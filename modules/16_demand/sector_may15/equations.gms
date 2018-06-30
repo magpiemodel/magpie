@@ -6,6 +6,8 @@
 
 *' @equations
 *'
+*' Not all demands are relevant for each product group therefore we distinguish
+*' into diverse product groups and demand types, according to the equations below.
 *' Supply balance for crops, livestock, secondary products and crop residues are calculated 
 *' as the summation of the according demand for food, feed, processing products, 
 *' material, bioenergy, seed, waste and the domestic balance flow. Demand for 

@@ -14,7 +14,7 @@ parameters
 ;
 
 positive variables
-  vm_dem_food(i,kall)       Demand for food (mio. tDM)
+  vm_dem_food(i,kall)       Demand for food (mio. tDM per yr)
 ;
 
 

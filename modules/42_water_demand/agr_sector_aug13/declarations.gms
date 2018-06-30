@@ -18,13 +18,13 @@ equations
 ;
 
 positive variables
-  vm_watdem(wat_dem,j)               Water needed in different sectors (mio m^3)
+  vm_watdem(wat_dem,j)               Water needed in different sectors (mio m^3 per yr)
   v42_irrig_eff(j)                   Irrigation efficiency
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_watdem(t,wat_dem,j,type)         Water needed in different sectors (mio m^3)
+ ov_watdem(t,wat_dem,j,type)         Water needed in different sectors (mio m^3 per yr)
  ov42_irrig_eff(t,j,type)            Irrigation efficiency
  oq42_water_demand(t,wat_dem,j,type) Water consumption in different sectors
 ;

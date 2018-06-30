@@ -6,30 +6,30 @@
 
 
 parameters
- i60_bioenergy_dem(t,i)   			regional bioenergy demand per year (10^6 GJ)
- i60_res_2ndgenBE_dem(t,i)				regional residue demand for 2nd generation bioenergy per year (10^6 GJ)
+ i60_bioenergy_dem(t,i)   			Regional bioenergy demand per year (10^6 GJ per yr)
+ i60_res_2ndgenBE_dem(t,i)			Regional residue demand for 2nd generation bioenergy per year (10^6 GJ per yr)
 ;
 
 variables
- vm_cost_bioen(i)                   regional bioenergy production costs (mio. USD)
+ vm_cost_bioen(i)                   Regional bioenergy production costs (mio. USD05 per yr)
 ;
 
 positive variables
- vm_dem_bioen(i,kall)               regional bioenergy demand  (mio. tDM)
+ vm_dem_bioen(i,kall)               Regional bioenergy demand  (mio. tDM per yr)
 ;
 
 equations
- q60_bioenergy_glo                 global bioenergy demand (10^6 GJ)
- q60_bioenergy_reg(i)              regional bioenergy demand (10^6 GJ)
- q60_res_2ndgenBE(i)             regional residue demand for 2nd generation bioenergy (10^6 GJ) 
+ q60_bioenergy_glo                 	Global bioenergy demand (10^6 GJ)
+ q60_bioenergy_reg(i)              	Regional bioenergy demand (10^6 GJ)
+ q60_res_2ndgenBE(i)       			Regional residue demand for 2nd generation bioenergy (10^6 GJ) 
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_bioen(t,i,type)      regional bioenergy production costs (mio. USD)
- ov_dem_bioen(t,i,kall,type)  regional bioenergy demand  (mio. tDM)
- oq60_bioenergy_glo(t,type)   global bioenergy demand (10^6 GJ)
- oq60_bioenergy_reg(t,i,type) regional bioenergy demand (10^6 GJ)
- oq60_res_2ndgenBE(t,i,type)  regional residue demand for 2nd generation bioenergy (10^6 GJ) 
+ ov_cost_bioen(t,i,type)      Regional bioenergy production costs (mio. USD)
+ ov_dem_bioen(t,i,kall,type)  Regional bioenergy demand  (mio. tDM)
+ oq60_bioenergy_glo(t,type)   Global bioenergy demand (10^6 GJ)
+ oq60_bioenergy_reg(t,i,type) Regional bioenergy demand (10^6 GJ)
+ oq60_res_2ndgenBE(t,i,type)  Regional residue demand for 2nd generation bioenergy (10^6 GJ) 
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
