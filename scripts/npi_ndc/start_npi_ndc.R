@@ -152,16 +152,6 @@ calc_NPI_NDC <- function(policyregions="iso"){
   addline("### NDC AFF ###")
   addline("###############")
   ndc_aff <- droplevels(subset(pol_def, policy=="ndc" & landpool=="affore"))
-  ndc_aff <- calc_target(ndc_aff,iso="ARM",land_stock,goal=0.201)
-  ndc_aff <- calc_target(ndc_aff,iso="BLR",land_stock,goal=0.41)
-  ndc_aff <- calc_target(ndc_aff,iso="BOL",land_stock)
-  ndc_aff <- calc_target(ndc_aff,iso="BDI",land_stock,goal=0.2) #long term goal (2025) to have 20% of its geographical area under forest cover
-  ndc_aff <- calc_target(ndc_aff,iso="CHN",land_stock,goal=0.2304)
-  ndc_aff <- calc_target(ndc_aff,iso="IND",land_stock,goal=0.33)
-  ndc_aff <- calc_target(ndc_aff,iso="KHM",land_stock,goal=0.6)
-  ndc_aff <- calc_target(ndc_aff,iso="LAO",land_stock,goal=0.7)
-  ndc_aff <- calc_target(ndc_aff,iso="THA",land_stock,goal=0.4)
-  ndc_aff <- calc_target(ndc_aff,iso="VNM",land_stock,goal=0.45)
   addtable(ndc_aff[,c(-2,-3)])
   ndc_aff <- calc_policy(ndc_aff,land_stock,pol_type="aff",pol_mapping=pol_mapping,
                          weight=dimSums(land_stock[,2005,c("crop","past")]))
@@ -182,25 +172,6 @@ calc_NPI_NDC <- function(policyregions="iso"){
             "../../modules/35_natveg/input/npi_ndc_ad_aolc_pol.cs3",overwrite = TRUE)
   file.copy("policies/npi_ndc_aff_pol.cs3",
             "../../modules/32_forestry/input/npi_ndc_aff_pol.cs3",overwrite = TRUE)
-}
-
-
-### calculates targets
-calc_target <- function(pol=npi_aff,iso="BDI",stock=land_stock,goal=1){
-  baseyear <- pol[which(pol$dummy==iso),"baseyear"]
-  targetyear <- pol[which(pol$dummy==iso),"targetyear"]
-  if(iso=="BOL"){
-    tmp <- 4.5 - dimSums(stock[iso,baseyear,c("primforest","secdforest","forestry")],dim=c(1,3))
-  } else if(iso=="PAN"){
-    tmp <- dimSums(stock[iso,,c("primforest","secdforest","forestry")],dim=c(1,3))*1.1
-  } else{
-    tmp <- dimSums(stock[iso,baseyear,],dim=c(1,3))*goal -
-      dimSums(stock[iso,baseyear,c("primforest","secdforest","forestry")],dim=c(1,3))
-  }
-  tmp[tmp<0] <- 0
-  pol[which(pol$dummy==iso),"target"] <- round(tmp,2)
-
-  return(pol)
 }
 
 ### calc flow function
