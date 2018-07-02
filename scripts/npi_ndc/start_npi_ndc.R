@@ -45,7 +45,7 @@ calc_NPI_NDC <- function(policyregions="iso"){
   # "target"         #Policy target value in % (e.g. allowed deforestation in % in targetyear; afforestation in Mha in case of affore=TRUE)
   ##############################################################################
 
-  
+
   # output file for formated writing of the npi/ndc policies
   fname <- "npi_ndc_overview.txt"
   if(file.exists(fname)) unlink(fname, force=TRUE)
@@ -57,19 +57,19 @@ calc_NPI_NDC <- function(policyregions="iso"){
   addtable <- function(x){
     capture.output(print(x, print.gap=3, row.names=FALSE), file=fname, append=TRUE)
   }
-  
+
   pol_def <- read.csv("policies/policy_definitions.csv")
 
   addline("NPI/NDC policies")
   addline("MAgPIE")
   addline(date())
-  
+
   addline("")
   addline("##----------------------------------------------------------------------------")
   addline("## Avoiding Deforestation - AD (%)")
   addline("## percentage protection: 0 = no protection, 1 = full protection")
   addline("## Ref: BaseYear (1), Baseline (2)")
-  
+
   cat("NPI AD policy\n")
   addline("")
   addline("##############")
@@ -90,8 +90,8 @@ calc_NPI_NDC <- function(policyregions="iso"){
   ndc_ad <- calc_policy(ndc_ad,forest_stock,pol_type="ad",pol_mapping=pol_mapping)
   getNames(ndc_ad) <- "ndc.forest"
   #Set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
-  ndc_ad[,which(getYears(ndc_ad,as.integer=TRUE)<2015),] <-
-    npi_ad[,which(getYears(npi_ad,as.integer=TRUE)<2015),]
+  ndc_ad[,which(getYears(ndc_ad,as.integer=TRUE)<=2015),] <-
+    npi_ad[,which(getYears(npi_ad,as.integer=TRUE)<=2015),]
 
 
   addline("")
@@ -99,7 +99,7 @@ calc_NPI_NDC <- function(policyregions="iso"){
   addline("## Avoiding Other Land Conversion - AOLC (%)")
   addline("## percentage protection: 0 = no protection, 1 = full protection")
   addline("## Ref: BaseYear (1), Baseline (2)")
-  
+
   cat("NPI AOLC policy\n")
   addline("")
   addline("################")
@@ -120,8 +120,8 @@ calc_NPI_NDC <- function(policyregions="iso"){
   ndc_aolc <- calc_policy(ndc_aolc,land_stock[,,"other"],pol_type="ad",pol_mapping=pol_mapping)
   getNames(ndc_aolc) <- "ndc.other"
   #Set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
-  ndc_aolc[,which(getYears(ndc_aolc,as.integer=TRUE)<2015),] <-
-    npi_aolc[,which(getYears(npi_aolc,as.integer=TRUE)<2015),]
+  ndc_aolc[,which(getYears(ndc_aolc,as.integer=TRUE)<=2015),] <-
+    npi_aolc[,which(getYears(npi_aolc,as.integer=TRUE)<=2015),]
 
   #write AD and AOLC policies together
   none_ad_aolc_pol <- mbind(npi_ad,npi_aolc)
@@ -134,7 +134,7 @@ calc_NPI_NDC <- function(policyregions="iso"){
   addline("##----------------------------------------------------------------------------")
   addline("## Afforestation - AFF (Mha)")
   addline("## Ref: BaseYear (1), Baseline (2)")
-  
+
   cat("NPI AFF policy\n")
   addline("")
   addline("###############")
@@ -167,8 +167,8 @@ calc_NPI_NDC <- function(policyregions="iso"){
                          weight=dimSums(land_stock[,2005,c("crop","past")]))
   getNames(ndc_aff) <- "ndc"
   #set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
-  ndc_aff[,which(getYears(ndc_aff,as.integer=TRUE)<2015),] <-
-    npi_aff[,which(getYears(npi_aff,as.integer=TRUE)<2015),]
+  ndc_aff[,which(getYears(ndc_aff,as.integer=TRUE)<=2015),] <-
+    npi_aff[,which(getYears(npi_aff,as.integer=TRUE)<=2015),]
 
   #write AFF policies
   none_aff_pol <- npi_aff
