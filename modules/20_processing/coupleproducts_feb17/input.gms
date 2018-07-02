@@ -6,7 +6,7 @@
 
 
 
-table f20_processing_balanceflow(t_all,i,ksd) processing balanceflow  (Mt DM)
+table f20_processing_balanceflow(t_all,i,ksd) processing balanceflow  (mio. tDM)
 $ondelim
 $include "./modules/20_processing/coupleproducts_feb17/input/f20_processing_balanceflow.cs3"
 $offdelim
@@ -21,7 +21,7 @@ $ondelim
 $include "./modules/20_processing/coupleproducts_feb17/input/f20_processing_shares.cs3"
 $offdelim       ;
 
-table f20_processing_unitcosts(ksd,kpr)   costs of transforming x units kpr into 1 unit ksd
+table f20_processing_unitcosts(ksd,kpr)   costs of transforming x units kpr into 1 unit ksd (USD per tDM)
 $ondelim
 $include "./modules/20_processing/coupleproducts_feb17/input/f20_processing_unitcosts.cs3"
 $offdelim       ;

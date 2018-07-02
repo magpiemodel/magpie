@@ -4,9 +4,12 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @description In this realization
+*' annual land-related CO2 emissions are assumed zero.
+
+*' @limitations CO2 emissions are assumed zero
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/52_carbon/off/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/52_carbon/off/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/52_carbon/off/input.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/52_carbon/off/preloop.gms"

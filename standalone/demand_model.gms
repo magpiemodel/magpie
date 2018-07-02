@@ -1,8 +1,8 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
-*** |  Contact: magpie@pik-potsdam.de
+*** (C) 2008-2017 Potsdam Institute for Climate Impact Research (PIK),
+*** authors, and contributors see AUTHORS file
+*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
+*** or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** Contact: magpie@pik-potsdam.de
 
 $title demand_model_standalone
 
@@ -11,11 +11,11 @@ $offsymxref
 $offsymlist
 $offlisting
 
-$setglobal c_timesteps  quicktest
+$setglobal c_timesteps  pastandfuture
 
 *******************************MODULE SETUP*************************************
 $setglobal drivers  aug17
-$setglobal food  aug17
+$setglobal food  anthropometrics_jan18
 
 ***************************PREDEFINED MACROS************************************
 $include "./core/macros.gms"
@@ -36,6 +36,7 @@ sets
    /
 ;
 
+
 **********INTRODUCE CALCULATION PARAMETERS, VARIABLES AND EQUATIONS*************
 $include "./core/declarations.gms"
 $batinclude "./modules/include.gms" declarations
@@ -52,7 +53,7 @@ magpie.scaleopt  = 1 ;
 magpie.holdfixed = 1 ;
 
 option lp         = cplex ;
-option nlp        = conopt ;
+option nlp        = conopt4 ;
 option iterlim    = 1000000 ;
 option reslim     = 1000000 ;
 option sysout     = Off ;

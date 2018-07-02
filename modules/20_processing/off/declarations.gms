@@ -6,20 +6,20 @@
 
 
 equations
-  q20_processing_costs(i)    processing costs
+  q20_processing_costs(i)                        processing costs (mio.USD)
 ;
 
 positive variables
-  vm_dem_processing(i,kall)          demand for processing use
-  vm_secondary_overproduction(i,kall,kpr) overproduction of secondary couple products (Mt Dm)
-  vm_cost_processing(i)            processing costs (Million USD05)
+  vm_dem_processing(i,kall)                      demand for processing use (mio.tDM)
+  vm_secondary_overproduction(i,kall,kpr)        overproduction of secondary couple products (mio.tDM)
+  vm_cost_processing(i)                          processing costs (mio.USD)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_dem_processing(t,i,kall,type)               demand for processing use
- ov_secondary_overproduction(t,i,kall,kpr,type) overproduction of secondary couple products (Mt Dm)
- ov_cost_processing(t,i,type)                   processing costs (Million USD05)
- oq20_processing_costs(t,i,type)                processing costs
+ ov_dem_processing(t,i,kall,type)               demand for processing use (mio.tDM)
+ ov_secondary_overproduction(t,i,kall,kpr,type) overproduction of secondary couple products (mio.tDM)
+ ov_cost_processing(t,i,type)                   processing costs (mio.USD)
+ oq20_processing_costs(t,i,type)                processing costs (mio.USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

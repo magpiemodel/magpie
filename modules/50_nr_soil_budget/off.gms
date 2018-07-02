@@ -4,6 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @description This realization sets the demand for inorganic fertilizer and associated costs to zero.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "declarations" $include "./modules/50_nr_soil_budget/off/declarations.gms"

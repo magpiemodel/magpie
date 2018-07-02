@@ -5,9 +5,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
-	p80_modelstat(t)	modelstat indicator
+	p80_modelstat(t)	modelstat indicator (1)
 ;
 
 scalars
-  s80_counter                  counter (-)
+  s80_counter       counter (1)
 ;

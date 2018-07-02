@@ -18,11 +18,20 @@ sets
        60--64, 65--69, 70--74, 75--79
        80--84,85--89,90--94,95--99,100+ /
 
+   reproductive(age_group) reproductive age groups
+   /20--24, 25--29, 30--34, 35--39/
+
    estimates15
    /preliminary,final/
 
-   parameters15 schonfield equation parameters
+   parameters15 schofield equation parameters
    /slope, intercept/
+
+   schofield_parameters15 schofield equation parameters with height
+   /height, weight, intercept/
+
+   parameters_intake15 intake equation parameters
+   /saturation,halfsaturation,intercept/
 
    kfo(kall) all products in the sectoral version
    /
@@ -68,6 +77,13 @@ sets
    nutrition nutritition attributes
    /kcal, protein/
 
+  par15
+      / intercept,saturation,halfsaturation,non_saturation /
+* intercept + saturation give the max value if non-saturation is 1
+* halfsaturation is the gdp until which half of saturation is reached
+
+  demand_subsys15
+      / overconsumption,livestockshare,processedshare,vegfruitshare /
 
 *** Scenarios
    food_scen15  scenarios
@@ -94,3 +110,4 @@ alias(kfo_ap,kfo_ap2);
 alias(kfo_st,kfo_st2);
 alias(kfo_pf,kfo_pf2);
 alias(iso,iso2);
+alias(reproductive,reproductive2);

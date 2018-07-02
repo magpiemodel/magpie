@@ -5,64 +5,63 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- im_pollutant_prices(t_all,i,pollutants)  ghg or pollution certificate prices (US$ 2004 per Mg N2O-N CH4 and CO2-C)
- p56_ghg_price_growth_rate(t,i,pollutants)  ghg certificate price growth rate
- p56_ghg_price_growth_rate_avg(i,pollutants)  ghg certificate price growth rate average over time
- p56_ghg_price_annuity(t,i,pollutants) annuity factor for co2 emission costs
+ im_pollutant_prices(t_all,i,pollutants)      certificate prices for N2O-N CH4 CO2-C (US$2004 per Mg)
+ p56_ghg_price_growth_rate(t,i,pollutants)    growth rate of certificate price 
+ p56_ghg_price_growth_rate_avg(i,pollutants)  average over time of growth rate of certificate price
 ;
 
 equations
- q56_technical_mitigation_reg(i,pollutants,emis_source)  application of maccs on emission sources
- q56_technical_mitigation_cell(j,pollutants,emis_source)  application of maccs on emission sources
- q56_cell_to_reg(i,pollutants,emis_source)      aggregation to regional emissions
- q56_emission_costs(i)  calculation of total costs for pollution rights
- q56_emission_costs_reg_yearly(i,emis_reg_yearly56) calculation of costs pollution rights from emissions occuring yearly
- q56_emission_costs_reg_oneoff(i,emis_reg_oneoff56) calculation of costs pollution rights occuring only once in time
- q56_emission_costs_cell_yearly(j,emis_cell_yearly56) calculation of costs pollution rights from emissions occuring yearly
- q56_emission_costs_cell_oneoff(j,emis_cell_oneoff56) calculation of costs pollution rights occuring only once in time
- q56_reward_cdr_aff_reg(i) reward for CDR from afforestation
- q56_reward_cdr_aff(j,emis_source_co2_forestry) reward for CDR from afforestation
+ q56_technical_mitigation_reg(i,pollutants,emis_source)   application of maccs on emissions
+ q56_technical_mitigation_cell(j,pollutants,emis_source)  application of maccs on emissions
+ q56_cell_to_reg(i,pollutants,emis_source)                aggregation to regional emissions
+ q56_emission_costs(i)                                    calculation of total emission costs
+ q56_emission_costs_reg_yearly(i,emis_reg_yearly56)       calculation of regional costs for annual emissions
+ q56_emission_costs_reg_oneoff(i,emis_reg_oneoff56)       calculation of regional costs for emissions occuring only once in time
+ q56_emission_costs_cell_yearly(j,emis_cell_yearly56)     calculation of cellular costs for annual emissions
+ q56_emission_costs_cell_oneoff(j,emis_cell_oneoff56)     calculation of cellular costs for emissions occuring only once in time
+ q56_reward_cdr_aff_reg(i)                                regional revenues for carbon captured by afforestation
+ q56_reward_cdr_aff(j,co2_forestry)                       cellular revenues for carbon captured by afforestation
 ;
 
 positive variables
- v56_reward_cdr_aff(j,emis_source_co2_forestry)  reward for CDR from afforestation (mio. US$)
- vm_reward_cdr_aff(i)                            reward for CDR from afforestation (mio. US$)
+ v56_reward_cdr_aff(j,co2_forestry)  regional revenues for carbon captured by afforestation (10^6 US$ per yr)
+ vm_reward_cdr_aff(i)                cellular revenues for carbon captured by afforestation (10^6 US$ per yr)
 ;
 
 variables
- vm_btm_reg(i,emis_source,pollutants)          emissions before technical mitigation (Tg N2O-N CH4 and CO2-C)
- vm_btm_cell(j,emis_source,pollutants)     emissions before technical mitigation (Tg N2O-N CH4 and CO2-C)
- vm_emission_costs(i)                       Costs for emission pollution rights (mio. US$)
- vm_emissions_reg(i,emis_source,pollutants)           regional emissions by emission source after technical mitigation (Tg N2O-N CH4 C)
- v56_emis_cell(j,emis_source,pollutants)                       cellular emissions by emission source after technical mitigation (Tg N CH4 C)
- v56_emission_costs_reg_yearly(i,emis_reg_yearly56)          costs for pollution (mio. US$) from emissions occuring yearly
- v56_emission_costs_reg_oneoff(i,emis_reg_oneoff56)          costs for pollution (mio. US$) from emissions occuring only once in time
- v56_emission_costs_cell_yearly(j,emis_cell_yearly56)          costs for pollution (mio. US$) from emissions occuring yearly
- v56_emission_costs_cell_oneoff(j,emis_cell_oneoff56)          costs for pollution (mio. US$) from emissions occuring only once in time
+ vm_btm_reg(i,emis_source,pollutants)                        Regional emissions before technical mitigation (x per yr)
+ vm_btm_cell(j,emis_source,pollutants)                       Cellular emissions before technical mitigation (x per yr)
+ vm_emission_costs(i)                                        Costs for emission rights for pollutants and greenhouse gases (10^6 US$05 per yr)
+ vm_emissions_reg(i,emis_source,pollutants)                  Regional emissions by source and gas after technical mitigation N CH4 C (Tg per yr)
+ v56_emis_cell(j,emis_source,pollutants)                     Cellular emissions by source and gas after technical mitigation N CH4 C (Tg per yr)
+ v56_emission_costs_reg_yearly(i,emis_reg_yearly56)          Costs for emissions occuring yearly (10^6 USD05 per yr)
+ v56_emission_costs_reg_oneoff(i,emis_reg_oneoff56)          Costs for emissions occuring only once in time (10^6 USD05 per yr)
+ v56_emission_costs_cell_yearly(j,emis_cell_yearly56)        Costs for emissions occuring yearly (10^6 USD05 per yr)
+ v56_emission_costs_cell_oneoff(j,emis_cell_oneoff56)        Costs for emissions occuring only once in time (10^6 USD05 per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov56_reward_cdr_aff(t,j,emis_source_co2_forestry,type)          reward for CDR from afforestation (mio. US$)
- ov_reward_cdr_aff(t,i,type)                                     reward for CDR from afforestation (mio. US$)
- ov_btm_reg(t,i,emis_source,pollutants,type)                     emissions before technical mitigation (Tg N2O-N CH4 and CO2-C)
- ov_btm_cell(t,j,emis_source,pollutants,type)                    emissions before technical mitigation (Tg N2O-N CH4 and CO2-C)
- ov_emission_costs(t,i,type)                                     Costs for emission pollution rights (mio. US$)
- ov_emissions_reg(t,i,emis_source,pollutants,type)               regional emissions by emission source after technical mitigation (Tg N2O-N CH4 C)
- ov56_emis_cell(t,j,emis_source,pollutants,type)                 cellular emissions by emission source after technical mitigation (Tg N CH4 C)
- ov56_emission_costs_reg_yearly(t,i,emis_reg_yearly56,type)      costs for pollution (mio. US$) from emissions occuring yearly
- ov56_emission_costs_reg_oneoff(t,i,emis_reg_oneoff56,type)      costs for pollution (mio. US$) from emissions occuring only once in time
- ov56_emission_costs_cell_yearly(t,j,emis_cell_yearly56,type)    costs for pollution (mio. US$) from emissions occuring yearly
- ov56_emission_costs_cell_oneoff(t,j,emis_cell_oneoff56,type)    costs for pollution (mio. US$) from emissions occuring only once in time
- oq56_technical_mitigation_reg(t,i,pollutants,emis_source,type)  application of maccs on emission sources
- oq56_technical_mitigation_cell(t,j,pollutants,emis_source,type) application of maccs on emission sources
- oq56_cell_to_reg(t,i,pollutants,emis_source,type)               aggregation to regional emissions
- oq56_emission_costs(t,i,type)                                   calculation of total costs for pollution rights
- oq56_emission_costs_reg_yearly(t,i,emis_reg_yearly56,type)      calculation of costs pollution rights from emissions occuring yearly
- oq56_emission_costs_reg_oneoff(t,i,emis_reg_oneoff56,type)      calculation of costs pollution rights occuring only once in time
- oq56_emission_costs_cell_yearly(t,j,emis_cell_yearly56,type)    calculation of costs pollution rights from emissions occuring yearly
- oq56_emission_costs_cell_oneoff(t,j,emis_cell_oneoff56,type)    calculation of costs pollution rights occuring only once in time
- oq56_reward_cdr_aff_reg(t,i,type)                               reward for CDR from afforestation
- oq56_reward_cdr_aff(t,j,emis_source_co2_forestry,type)          reward for CDR from afforestation
+ ov56_reward_cdr_aff(t,j,co2_forestry,type)                      Regional revenues for carbon captured by afforestation (10^6 USD05 per yr)
+ ov_reward_cdr_aff(t,i,type)                                     Cellular revenues for carbon captured by afforestation (10^6 USD05 per yr)
+ ov_btm_reg(t,i,emis_source,pollutants,type)                     Regional emissions before technical mitigation in N2O for N CH4 for CH4 and CO2 for C (Tg per yr)
+ ov_btm_cell(t,j,emis_source,pollutants,type)                    Cellular emissions before technical mitigation in N2O for N CH4 for CH4 and CO2 for C (Tg per yr)
+ ov_emission_costs(t,i,type)                                     Costs for emission rights for pollutants and greenhouse gases (10^6 USD05 per yr)
+ ov_emissions_reg(t,i,emis_source,pollutants,type)               Regional emissions by source and gas after technical mitigation N CH4 C (Tg per yr)
+ ov56_emis_cell(t,j,emis_source,pollutants,type)                 Cellular emissions by source and gas after technical mitigation N CH4 C (Tg per yr)
+ ov56_emission_costs_reg_yearly(t,i,emis_reg_yearly56,type)      Costs for emissions occurring yearly (10^6 USD05 per yr)
+ ov56_emission_costs_reg_oneoff(t,i,emis_reg_oneoff56,type)      Costs for emissions occurring only once in time (10^6 USD05 per yr)
+ ov56_emission_costs_cell_yearly(t,j,emis_cell_yearly56,type)    Costs for emissions occurring yearly (10^6 USD05 per yr)
+ ov56_emission_costs_cell_oneoff(t,j,emis_cell_oneoff56,type)    Costs for emissions occurring only once in time (10^6 USD05 per yr)
+ oq56_technical_mitigation_reg(t,i,pollutants,emis_source,type)  Application of maccs on emissions
+ oq56_technical_mitigation_cell(t,j,pollutants,emis_source,type) Application of maccs on emissions
+ oq56_cell_to_reg(t,i,pollutants,emis_source,type)               Aggregation to regional emissions
+ oq56_emission_costs(t,i,type)                                   Calculation of total emission costs
+ oq56_emission_costs_reg_yearly(t,i,emis_reg_yearly56,type)      Calculation of regional costs for annual emissions
+ oq56_emission_costs_reg_oneoff(t,i,emis_reg_oneoff56,type)      Calculation of regional costs for emissions occurring only once in time
+ oq56_emission_costs_cell_yearly(t,j,emis_cell_yearly56,type)    Calculation of cellular costs for annual emissions
+ oq56_emission_costs_cell_oneoff(t,j,emis_cell_oneoff56,type)    Calculation of cellular costs for emissions occurring only once in time
+ oq56_reward_cdr_aff_reg(t,i,type)                               Regional revenues for carbon captured by afforestation
+ oq56_reward_cdr_aff(t,j,co2_forestry,type)                      Cellular revenues for carbon captured by afforestation
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

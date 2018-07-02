@@ -4,8 +4,8 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-table f10_land(j,land) Different land type areas (si0 and nsi0) [mio. ha]
+table f10_land(t_ini10,j,land) Different land type areas (mio. ha)
 $ondelim
-$include "./modules/10_land/input/avl_land.cs3"
+$include "./modules/10_land/input/avl_land_t.cs3"
 $offdelim
 ;

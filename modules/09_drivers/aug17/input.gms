@@ -13,32 +13,32 @@ $setglobal c09_gdp_scenario  SSP2
 *             SRES: "a1", "a2", "b1", "b2"
 
 
-table f09_gdp_ppp_iso(t_all,iso,gdp_scen09)  GDP per capita (USD 2005 PPP per capita per year)
+table f09_gdp_ppp_iso(t_all,iso,gdp_scen09) GDP (mio. USD05PPP per yr)
 $ondelim
 $include "./modules/09_drivers/input/f09_gdp_ppp_iso.csv"
 $offdelim;
 
-table f09_gdp_mer_iso(t_all,iso,gdp_scen09)  GDP per capita (USD 2005 MER per capita per year)
+table f09_gdp_mer_iso(t_all,iso,gdp_scen09)  GDP (mio. USD05MER per yr)
 $ondelim
 $include "./modules/09_drivers/input/f09_gdp_mer_iso.csv"
 $offdelim;
 
-table f09_pop_iso(t_all,iso,pop_scen09) Population (mio people)
+table f09_pop_iso(t_all,iso,pop_scen09) Population (mio. capita per yr)
 $ondelim
 $include "./modules/09_drivers/input/f09_pop_iso.csv"
 $offdelim;
 
-table f09_development_state(t_all,i,gdp_scen09)  state of developement (function of GDP) as share in low middle and high income
+table f09_development_state(t_all,i,gdp_scen09) State of development as function of GDP in low middle and high income (1)
 $ondelim
 $include "./modules/09_drivers/input/f09_development_state.cs3"
 $offdelim;
 
-table f09_demography(t_all,iso,pop_scen09,sex,age_group) Population (mio people)
+table f09_demography(t_all,iso,pop_scen09,sex,age_group) Population (mio. capita per yr)
 $ondelim
 $include "./modules/09_drivers/input/f09_demography.cs3"
 $offdelim;
 
-table f09_physical_inactivity(t_all,iso,gdp_scen09,sex,age_group) Share of population which is physically inacative (people per people)
+table f09_physical_inactivity(t_all,iso,gdp_scen09,sex,age_group) Share of population which is physically inactive (1)
 $ondelim
 $include "./modules/09_drivers/input/f09_physical_inactivity.cs3"
 $offdelim;

@@ -4,6 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @title Nitrogen
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%nitrogen%" == "ipcc2006_sep16" $include "./modules/51_nitrogen/ipcc2006_sep16.gms"

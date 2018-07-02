@@ -4,7 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-
+*' @description  Agricultural trade is fully liberalized. 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/21_trade/free_apr16/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/21_trade/free_apr16/declarations.gms"

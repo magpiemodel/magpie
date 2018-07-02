@@ -27,10 +27,19 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 
 
   choose_module <- function(Rfolder,title="Please choose an outputmodule") {
+    forder <- paste0(Rfolder,"/order.cfg")
+    if(file.exists(forder)) {
+      order <- grep("(#|^$)",readLines(forder),invert=TRUE,value=TRUE)
+      if(length(order)==0) order <- NULL
+    } else {
+      order <- NULL
+    }
     module <- gsub("\\.R$","",grep("\\.R$",list.files(Rfolder), value=TRUE))
-    cat("\n\n",title,":\n\n")
-    cat(paste(1: length(module), module, sep=": " ),sep="\n")
-    cat("\nNumber: ")
+    #sort modules based on order.cfg
+    module <- intersect(union(order,module),module)
+    cat("\n",title,":\n", sep="")
+    cat(paste(1: length(module), gsub("_"," ",module,fixed=TRUE), sep=": " ),sep="\n")
+    cat("Number: ")
     identifier <- get_line()
     identifier <- as.numeric(strsplit(identifier,",")[[1]])
     if (any(!(identifier %in% 1:length(module)))) stop("This choice (",identifier,") is not possible. Please type in a number between 1 and ",length(module))
@@ -39,28 +48,28 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 
   choose_submit <- function(title="Please choose run submission type") {
     slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
-    modes <- c("Direct execution", 
-               "Background execution", 
-               "SLURM submission", 
-               "SLURM submission (16GB memory)",
-               "SLURM submission (32GB memory)",
-               "SLURM submission (medium)", 
-               "SLURM submission (16GB memory, medium)",
-               "SLURM submission (32GB memory, medium)",
+    modes <- c("Direct execution",
+               "Background execution",
+               "SLURM submission (standard/broadwell,short)",
+               "SLURM submission (standard/broadwell,16GB,short)",
+               "SLURM submission (standard/broadwell,32GB,short)",
+               "SLURM submission (standard/broadwell,medium)",
+               "SLURM submission (standard/broadwell,16GB,medium)",
+               "SLURM submission (standard/broadwell,32GB,medium)",
                "Debug mode")
     if(!slurm) modes <- modes[-3:-8]
-    cat("\n\n",title,":\n\n")
+    cat("\n",title,":\n", sep="")
     cat(paste(1:length(modes), modes, sep=": " ),sep="\n")
-    cat("\nNumber: ")
+    cat("Number: ")
     identifier <- get_line()
     identifier <- as.numeric(strsplit(identifier,",")[[1]])
     if(slurm) {
       comp <- switch(identifier,
                      "1" = "direct",
                      "2" = "background",
-                     "3" = "slurm",
-                     "4" = "slurm16gb",
-                     "5" = "slurm32gb",
+                     "3" = "slurmshort",
+                     "4" = "slurm16gbshort",
+                     "5" = "slurm32gbshort",
                      "6" = "slurmmedium",
                      "7" = "slurm16gbmedium",
                      "8" = "slurm32gbmedium",
@@ -94,23 +103,23 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
       } else if(submit=="background") {
         log <- format(Sys.time(), paste0(rout,"-%Y-%H-%M-%S-%OS3.log"))
         system2("Rscript",name, stderr = log, stdout = log, wait=FALSE)
-      } else if(submit=="slurm") {
-        system(paste0(srun_command," --qos=short Rscript ",name), wait=FALSE)
+      } else if(submit=="slurmshort") {
+        system(paste0(srun_command," --partition=standard,broadwell --qos=short Rscript ",name), wait=FALSE)
         Sys.sleep(1)
-      } else if(submit=="slurm16gb") {
-        system(paste0(srun_command," --qos=short --mem-per-cpu=16000 Rscript ",name), wait=FALSE)
+      } else if(submit=="slurm16gbshort") {
+        system(paste0(srun_command," --partition=standard,broadwell --qos=short --mem=16000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
-      } else if(submit=="slurm32gb") {
-        system(paste0(srun_command," --qos=short --mem-per-cpu=32000 Rscript ",name), wait=FALSE)
+      } else if(submit=="slurm32gbshort") {
+        system(paste0(srun_command," --partition=standard,broadwell --qos=short --mem=32000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="slurmmedium") {
-        system(paste0(srun_command," --qos=medium Rscript ",name), wait=FALSE)
+        system(paste0(srun_command," --partition=standard,broadwell --qos=medium Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="slurm16gbmedium") {
-        system(paste0(srun_command," --qos=medium --mem-per-cpu=16000 Rscript ",name), wait=FALSE)
+        system(paste0(srun_command," --partition=standard,broadwell --qos=medium --mem=16000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="slurm32gbmedium") {
-        system(paste0(srun_command," --qos=medium --mem-per-cpu=32000 Rscript ",name), wait=FALSE)
+        system(paste0(srun_command," --partition=standard,broadwell --qos=medium --mem=32000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="debug") {
         tmp.env <- new.env()
@@ -125,13 +134,13 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 
 
   if(is.null(runscripts)) runscripts <- choose_module("./scripts/start",
-                                                      "Please choose the runscript to be used for starting model runs")
-  if(is.null(submit))     submit     <- choose_submit("Please choose a run submission type")
+                                                      "Choose start script")
+  if(is.null(submit))     submit     <- choose_submit("Choose submission type")
 
   runsubmit(runscripts, submit)
 }
 
 
 runscripts <- submit <- NULL
-readArgs("runscripts","submit")
+readArgs("runscripts","submit", .silent=TRUE)
 runOutputs(runscripts=runscripts, submit=submit)

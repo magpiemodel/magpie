@@ -4,6 +4,10 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @description
+*' Calculation of first and second generation bioenergy demand on the regional
+*' level.
+*'
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/60_bioenergy/standard_flexreg_may17/sets.gms"

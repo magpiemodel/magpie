@@ -6,12 +6,12 @@
 
 
 
-table f38_fac_req(kcr,w) Factor requirements (US$04 per ton DM)
+table f38_fac_req(kcr,w) factor requirement costs (USD per tDM)
 $ondelim
-$include "./modules/38_factor_costs/mixed_feb17/input/f38_fac_req.csv"
+$include "./modules/38_factor_costs/input/f38_fac_req.csv"
 $offdelim;
 
-table f38_region_yield(i,kcr) Factor requirements (US$04 per ton DM)
+table f38_region_yield(i,kcr) regional crop yields (tDM per ha)
 $ondelim
 $include "./modules/38_factor_costs/mixed_feb17/input/f38_region_yield.csv"
 $offdelim;

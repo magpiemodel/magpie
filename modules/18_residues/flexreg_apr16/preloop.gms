@@ -5,3 +5,4 @@
 *** |  Contact: magpie@pik-potsdam.de
 
  
+i18_res_use_burn(t_all,dev18,kcr) = f18_res_use_burn(t_all,"%c18_burn_scen%",dev18,kcr);

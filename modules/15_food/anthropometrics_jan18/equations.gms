@@ -4,142 +4,126 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-
+*' @equations
 
 q15_food_demand(i2,kfo) ..
                 (vm_dem_food(i2,kfo) + sum(ct, f15_household_balance_flow(ct,i2,kfo,"dm")))
-                * sum(ct,(f15_nutrition_attributes(ct,kfo,"kcal") * 10**6))
-                =g=
-                sum(ct,im_pop(ct,i2)) * v15_kcal_pc(i2,kfo) * 365
+                * sum(ct,(f15_nutrition_attributes(ct,kfo,"kcal") * 10**6)) =g=
+                sum(ct,im_pop(ct,i2) * p15_kcal_pc(ct,i2,kfo)) * 365
                 ;
 
-**** ### Elastic Food Demand
+*' The constraint transforms the fooduse of agricultural products into per-capita
+*' food demand.
+*' vm_dem_food is the fooduse of agricultural products. Its measured in tons dry matter
+*' before processing. Multiplying with the nutrition attributes provides the equivalent
+*' in calories. While nutrition attributes are assumed to be globally the same
+*' (assumption of homogeneous products), a regional balanceflow is used to account
+*' for current differences in food processing, where some regions get different calories
+*' from the same fooduse quantitiy. Depending on the inputdata, the balanceflow
+*' may fade out in the future, which implies actual homogeneous products.
+
+*' The subsequent equations belong to the standalone food demand model, which is
+*' executed before MAgPIE or iterated with MAgPIE. They are excluded from the run
+*' of MAgPIE itself.
 
 q15_aim ..
-          v15_objective
-          =e=
-          sum(iso,v15_income_pc_real_ppp_iso(iso));
+          v15_objective =e=
+          sum(iso,v15_income_pc_real_ppp_iso(iso)
+          - 10**6*v15_income_balance(iso));
 
-q15_aim_standalone ..
-          v15_objective_standalone
-          =e=
-          sum(iso,v15_kcal_regression_total(iso));
+*' In principle, the food demand model has only one solution which satifies all
+*' equations. The objective could therefore be choosen arbirtrarily, and the
+*' solver just finds the single solution.
+*' However, if the model is executed outside its domain
+*' (e.g. with extreme price shocks), it can happen that real income turns
+*' negative (because the increase in food value exceeds the available income).
+*' To avoid this case, we allow for a punishment term v15_income_balance, which
+*' increases the real income, but which negatively affects the maximized
+*' objective variable, disincentivizing its use in cases where not needed.
+
 
 q15_budget(iso) ..
-         sum((ct,kfo), v15_kcal_regression(iso,kfo)*365*p15_prices_kcal(ct,iso,kfo))
-         + v15_demand_nonfood(iso)*s15_prices_nonfood
-         =e=
-         sum(ct,im_gdp_pc_ppp_iso(ct,iso))
+         v15_income_pc_real_ppp_iso(iso) =e=
+         sum((ct,kfo), v15_kcal_regression(iso,kfo)*365
+         *(i15_prices_initial_kcal(iso,kfo)-p15_prices_kcal(ct,iso,kfo)))
+         + sum(ct,im_gdp_pc_ppp_iso(ct,iso)) + v15_income_balance(iso);
+
+*' The budget constraint calculates the real income after an eventual price
+*' shock. The basic assumption is that increasing prices reduce real income,
+*' while decreasing prices increase real income.
+*' Through this income effect, higher prices reduce the food demand.
+*' The income before the food price shock is im_gdp_pc_ppp.
+*' Its reduced by the change in value of the demanded calories under changed
+*' prices.
+*' In the following, the real income is used to determine food intake,
+*' food demand as well as dietary composition.
+
+q15_regression_intake(iso,sex,age_group) ..
+         v15_kcal_intake_regression(iso,sex,age_group) =e=
+         sum(ct,p15_kcal_requirement(ct,iso,sex,age_group)
+         + p15_kcal_pregnancy(ct,iso,sex,age_group))
+         * ((f15_intake_regr_paras(sex,age_group,"saturation")*v15_income_pc_real_ppp_iso(iso))
+            /(f15_intake_regr_paras(sex,age_group,"halfsaturation")+v15_income_pc_real_ppp_iso(iso))
+            +f15_intake_regr_paras(sex,age_group,"intercept"))
          ;
 
-q15_real_income(iso) ..
-         v15_income_pc_real_ppp_iso(iso)
-         =e=
-         sum((kfo), v15_kcal_regression(iso,kfo)*365*i15_prices_initial_kcal(iso,kfo))
-         + v15_demand_nonfood(iso)*s15_prices_nonfood_initial;
-;
+*' Food intake is based on food requirement (the calories requried for a
+*' normalized bodymass index under a given body height), and a regression
+*' based on income which estimates how much the actual intake is relative to
+*' the requried intake.
 
 
-* Foodtree One
+q15_regression_kcal(iso) ..
+         v15_kcal_regression_total(iso) =e=
+         v15_regression(iso, "overconsumption")
+         * sum((sex,age_group,ct), v15_kcal_intake_regression(iso,sex,age_group)
+         * im_demography(ct,iso,sex,age_group))
+         / sum((sex,age_group,ct), im_demography(ct,iso,sex,age_group));
 
-q15_regression1_kcal(iso) ..
+*' Food demand is based on food intake and a regression
+*' based on income which estimates how much the actual demand is relative to
+*' the requried intake.
+*' The difference between demand and intake is food waste (not explcitly
+*' mentioned in this equation)
+
+q15_regression(iso, demand_subsys15) ..
+         v15_regression(iso, demand_subsys15) =e=
+         i15_demand_regr_paras(demand_subsys15,"intercept")
+         + (i15_demand_regr_paras(demand_subsys15,"saturation") * v15_income_pc_real_ppp_iso(iso))
+         / (i15_demand_regr_paras(demand_subsys15,"halfsaturation") + v15_income_pc_real_ppp_iso(iso)**i15_demand_regr_paras(demand_subsys15,"non_saturation"));
+
+*' This equation estimates key dietary composition regression factors,
+*' such as the share of animal products, empty calories, or
+*' fruit vegetables and nuts. In the subsequent equations, those parameters
+*' are used to determine the dietary composition using an hirachical tree:
+*' Total calories are first divided into animal and plant based; the plant-based
+*' are further divided into processed empty calories and nutritious calories
+*' and so on.
+
+q15_foodtree_kcal_animals(iso,kfo_ap) ..
+         v15_kcal_regression(iso,kfo_ap) =e=
          v15_kcal_regression_total(iso)
-         =e=
-         sum(ct,p15_kcal_requirement_average(ct,iso))
-         + (
-* SSP1
-*$ifthen "%c15_food_scenario%"=="SSP1"   (0.765 + 0.00649*v15_income_pc_real_ppp_iso(iso)**0.5*exp(0.00001465*v15_income_pc_real_ppp_iso(iso)))
-$ifthen "%c15_food_scenario%"=="SSP1"   (-299 + 13.1 * v15_income_pc_real_ppp_iso(iso)**0.5*exp(-1.715e-05*v15_income_pc_real_ppp_iso(iso)))
-* SSP2
-$elseif "%c15_food_scenario%"=="SSP2"   (-285 + 1.414e+03*v15_income_pc_real_ppp_iso(iso)/(v15_income_pc_real_ppp_iso(iso)+2.872e+03))
-* SSP3
-$elseif "%c15_food_scenario%"=="SSP3"   (-2305.294 - 1.219e+03 * v15_income_pc_real_ppp_iso(iso)**(-0.0995))
-* SSP4
-$elseif "%c15_food_scenario%"=="SSP2"   (-285 + 1.414e+03*v15_income_pc_real_ppp_iso(iso)/(v15_income_pc_real_ppp_iso(iso)+2.872e+03))
-* SSP5
-$elseif "%c15_food_scenario%"=="SSP3"   (-2305.294 - 1.219e+03 * v15_income_pc_real_ppp_iso(iso)**(-0.0995))
-$endif
-         );
-
-q15_regression1_animals(iso) ..
-         v15_livestock_share_iso(iso)
-         =e=
-* SSP1
-$ifthen "%c15_food_scenario%"=="SSP1"   (0.0547 + exp(-2.578e-05*v15_income_pc_real_ppp_iso(iso)) - exp(-4.969e-05 *v15_income_pc_real_ppp_iso(iso)))
-* SSP2
-$elseif "%c15_food_scenario%"=="SSP2"   (0.316*v15_income_pc_real_ppp_iso(iso)/(4070+v15_income_pc_real_ppp_iso(iso)))
-* SSP3
-$elseif "%c15_food_scenario%"=="SSP3"   (0.006383*v15_income_pc_real_ppp_iso(iso)**0.373124)
-* SSP4
-$elseif "%c15_food_scenario%"=="SSP4"   (0.006383*v15_income_pc_real_ppp_iso(iso)**0.373124)
-* SSP5
-$elseif "%c15_food_scenario%"=="SSP5"   (0.006383*v15_income_pc_real_ppp_iso(iso)**0.373124)
-$endif
-         ;
-
-q15_regression1_processed(iso) ..
-         v15_processed_share_iso(iso)
-         =e=
-* SSP1
-$ifthen "%c15_food_scenario%"=="SSP1"   (0.100 + exp(-1.535e-05*v15_income_pc_real_ppp_iso(iso)) - exp(-4.482e-05 *v15_income_pc_real_ppp_iso(iso)))
-* SSP2
-$elseif "%c15_food_scenario%"=="SSP2"   (0.4878*v15_income_pc_real_ppp_iso(iso)/(4023+v15_income_pc_real_ppp_iso(iso)))
-* SSP3
-$elseif "%c15_food_scenario%"=="SSP3"   (0.009508*v15_income_pc_real_ppp_iso(iso)**0.378022)
-* SSP4
-$elseif "%c15_food_scenario%"=="SSP4"   (0.4878*v15_income_pc_real_ppp_iso(iso)/(4023+v15_income_pc_real_ppp_iso(iso)))
-* SSP5
-$elseif "%c15_food_scenario%"=="SSP5"   (0.009508*v15_income_pc_real_ppp_iso(iso)**0.378022)
-$endif
-         ;
-
-q15_regression1_vegfruit(iso) ..
-         v15_vegfruit_share_iso(iso)
-         =e=
-* SSP1
-$ifthen "%c15_food_scenario%"=="SSP1"   (0.03839*v15_income_pc_real_ppp_iso(iso)**0.19036)
-* SSP2
-$elseif "%c15_food_scenario%"=="SSP2"   (0.0294+0.1871*v15_income_pc_real_ppp_iso(iso)/(6805+v15_income_pc_real_ppp_iso(iso)))
-* SSP3
-$elseif "%c15_food_scenario%"=="SSP3"   (4.399e-02 + exp(-2.731e-05*v15_income_pc_real_ppp_iso(iso)) - exp(-4.048e-05 *v15_income_pc_real_ppp_iso(iso)))
-* SSP4
-$elseif "%c15_food_scenario%"=="SSP4"   (0.1901*v15_income_pc_real_ppp_iso(iso)/(3053+v15_income_pc_real_ppp_iso(iso)))
-* SSP5
-$elseif "%c15_food_scenario%"=="SSP5"   (-0.08718+0.03839*v15_income_pc_real_ppp_iso(iso)**0.19036)
-$endif
-         ;
-
-
-
-
-q15_foodtree1_kcal_animals(iso,kfo_ap) ..
-         v15_kcal_regression(iso,kfo_ap)
-         =e=
-         v15_kcal_regression_total(iso)
-         * v15_livestock_share_iso(iso)
+         * v15_regression(iso, "livestockshare")
          * sum(ct,i15_livestock_kcal_structure_iso(ct,iso,kfo_ap));
 
-q15_foodtree1_kcal_processed(iso,kfo_pf) ..
-         v15_kcal_regression(iso,kfo_pf)
-         =e=
+q15_foodtree_kcal_processed(iso,kfo_pf) ..
+         v15_kcal_regression(iso,kfo_pf) =e=
          v15_kcal_regression_total(iso)
-         * (1 - v15_livestock_share_iso(iso))
-         * v15_processed_share_iso(iso)
+         * (1 - v15_regression(iso, "livestockshare"))
+         * v15_regression(iso, "processedshare")
          * sum(ct,i15_processed_kcal_structure_iso(ct,iso,kfo_pf)) ;
 
-q15_foodtree1_kcal_vegetables(iso) ..
-         v15_kcal_regression(iso,"others")
-         =e=
+q15_foodtree_kcal_vegetables(iso) ..
+         v15_kcal_regression(iso,"others") =e=
          v15_kcal_regression_total(iso)
-         * (1 - v15_livestock_share_iso(iso))
-         * (1 - v15_processed_share_iso(iso))
-         * v15_vegfruit_share_iso(iso);
+         * (1 - v15_regression(iso, "livestockshare"))
+         * (1 - v15_regression(iso, "processedshare"))
+         * v15_regression(iso, "vegfruitshare");
 
-q15_foodtree1_kcal_staples(iso,kfo_st) ..
-         v15_kcal_regression(iso,kfo_st)
-         =e=
+q15_foodtree_kcal_staples(iso,kfo_st) ..
+         v15_kcal_regression(iso,kfo_st) =e=
          v15_kcal_regression_total(iso)
-         * (1 - v15_livestock_share_iso(iso))
-         * (1 - v15_processed_share_iso(iso))
-         * (1 - v15_vegfruit_share_iso(iso))
+         * (1 - v15_regression(iso, "livestockshare"))
+         * (1 - v15_regression(iso, "processedshare"))
+         * (1 - v15_regression(iso, "vegfruitshare"))
          * sum(ct,i15_staples_kcal_structure_iso(ct,iso,kfo_st)) ;

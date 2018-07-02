@@ -4,8 +4,8 @@
 # |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # |  Contact: magpie@pik-potsdam.de
 
-start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
-                      report=NULL,sceninreport=NULL,LU_pricing="y2010") {
+start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
+                      report=NULL,sceninreport=NULL,LU_pricing="y2010", lock_model=TRUE) {
 
   if (!requireNamespace("lucode", quietly = TRUE)) {
     stop("Package \"lucode\" needed for this function to work. Please install it.",
@@ -22,8 +22,10 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
   maindir <- getwd()
   on.exit(setwd(maindir))
 
-  lock_id <- lucode::model_lock(timeout1=1)
-  on.exit(lucode::model_unlock(lock_id), add=TRUE)
+  if(lock_model) {
+    lock_id <- lucode::model_lock(timeout1=1)
+    on.exit(lucode::model_unlock(lock_id), add=TRUE)
+  }
 
   if(!is.null(scenario)) cfg <- lucode::setScenario(cfg,scenario)
   cfg <- lucode::check_config(cfg)
@@ -54,21 +56,24 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
   # Update module paths in GAMS code
   lucode::update_modules_embedding()
 
-  if(is.null(cfg$model)) cfg$model <- "main.gms"
-  # configure main model gms file (cfg$model) based on settings of cfg file
-  lucode::manipulateConfig(cfg$model, cfg$gms)
+  apply_cfg <- function(cfg) {
+    if(is.null(cfg$model)) cfg$model <- "main.gms"
+    # configure main model gms file (cfg$model) based on settings of cfg file
+    lucode::manipulateConfig(cfg$model, cfg$gms)
 
-  # configure input.gms in all modules based on settings of cfg file
-  l1 <- lucode::path("modules", list.dirs("modules/", full.names = FALSE,
-                                          recursive = FALSE))
-  for(l in l1) {
-    l2 <- lucode::path(l, list.dirs(l, full.names = FALSE, recursive = FALSE))
-    for(ll in l2) {
-      if(file.exists(lucode::path(ll, "input.gms"))) {
-        lucode::manipulateConfig(lucode::path(ll, "input.gms"), cfg$gms)
+    # configure input.gms in all modules based on settings of cfg file
+    l1 <- lucode::path("modules", list.dirs("modules/", full.names = FALSE,
+                                            recursive = FALSE))
+    for(l in l1) {
+      l2 <- lucode::path(l, list.dirs(l, full.names = FALSE, recursive = FALSE))
+      for(ll in l2) {
+        if(file.exists(lucode::path(ll, "input.gms"))) {
+          lucode::manipulateConfig(lucode::path(ll, "input.gms"), cfg$gms)
+        }
       }
     }
   }
+  apply_cfg(cfg)
 
   #check all setglobal settings for consistency
   lucode::settingsCheck()
@@ -99,23 +104,20 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
     archive_download(files=cfg$input,
                      repositories=cfg$repositories,
                      modelfolder=".",
-                     move=!cfg$debug,
-                     username=cfg$username,
-                     ssh_private_keyfile=cfg$ssh_private_keyfile,
-                     ssh_public_keyfile=cfg$ssh_public_keyfile,
                      debug=cfg$debug)
   }
 
-  if(cfg$recalc_indc=="ifneeded") {
-    aff_pol <- magclass::read.magpie("modules/32_forestry/input/indc_aff_pol.cs3")
-    ad_pol <- magclass::read.magpie("modules/35_natveg/input/indc_ad_pol.cs3")
-    emis_pol <- magclass::read.magpie("modules/35_natveg/input/indc_emis_pol.cs3")
-    if((all(aff_pol == 0) & (cfg$gms$c32_aff_policy != "none")) |
-       (all(ad_pol == 0) & (cfg$gms$c35_ad_policy != "none")) |
-       (all(emis_pol == 0) & (cfg$gms$c35_emis_policy != "none"))
-    ) {
-      cfg$recalc_indc <- TRUE
-    } else cfg$recalc_indc <- FALSE
+  if(cfg$recalc_npi_ndc=="ifneeded") {
+    aff_pol     <- magclass::read.magpie("modules/32_forestry/input/npi_ndc_aff_pol.cs3")
+    ad_aolc_pol <- magclass::read.magpie("modules/35_natveg/input/npi_ndc_ad_aolc_pol.cs3")
+    ad_pol     <- ad_aolc_pol[,,"forest"]
+    aolc_pol    <- ad_aolc_pol[,,"other"]
+    if((all(aff_pol == 0)   & (cfg$gms$c32_aff_policy != "none")) |
+       (all(ad_pol == 0)    & (cfg$gms$c35_ad_policy != "none"))  |
+       (all(aolc_pol == 0) & (cfg$gms$c35_aolc_policy != "none")))
+    {
+      cfg$recalc_npi_ndc <- TRUE
+    } else cfg$recalc_npi_ndc <- FALSE
   }
 
 
@@ -127,9 +129,10 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
                 try(system("git rev-parse HEAD", intern=TRUE), silent=TRUE),
                 "", "### Modifications ###",
                 try(system("git status", intern=TRUE), silent=TRUE))
-  if(codeCheck | interfaceplot) {
-    codeCheck <- lucode::codeCheck(core_files=c("core/*.gms",cfg$model), test_switches=(cfg$model=="main.gms"))
-    if(interfaceplot) lucode::modules_interfaceplot(codeCheck)
+  if(codeCheck) {
+    codeCheck <- lucode::codeCheck(core_files=c("core/*.gms",cfg$model),
+                                   test_switches=(cfg$model=="main.gms"),
+                                   strict=!cfg$developer_mode)
   } else codeCheck <- NULL
 
   # Create the workspace for validation
@@ -156,6 +159,16 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
 
   ##############################################################################
 
+  # NPI/NDC policyes calculations
+  if(cfg$recalc_npi_ndc){
+    cat("Starting NPI/NDC recalculation!\n")
+    source("scripts/npi_ndc/start_npi_ndc.R")
+    setwd("scripts/npi_ndc")
+    calc_NPI_NDC(policyregions=cfg$policyregions)
+    setwd("../..")
+    cat("NPI/NDC recalculation successful!\n")
+  }
+
   # Yield calibration
   calib_file <- "modules/14_yields/input/f14_yld_calib.csv"
   if(!file.exists(calib_file)) stop("Yield calibration file missing!")
@@ -169,19 +182,14 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
     calibrate_magpie(n_maxcalib = cfg$calib_maxiter,
                      calib_accuracy = cfg$calib_accuracy,
                      calibrate_pasture = (cfg$gms$past!="static"),
+                     calibrate_cropland = (cfg$calib_cropland),
                      damping_factor = cfg$damping_factor,
                      calib_file = calib_file,
                      data_workspace = cfg$val_workspace,
-                     logoption = 3)
+                     logoption = 3,
+                     debug = cfg$debug)
     file.copy("calibration_results.pdf", cfg$results_folder, overwrite=TRUE)
     cat("Calibration factor calculated!\n")
-  }
-
-  if(cfg$recalc_indc){
-    cat("Starting NPI/INDC recalculation!\n")
-    source("scripts/indc/start_indc.R")
-    start_indc_preprocessing(cfg,base_run_dir="scripts/indc/base_run",maindir=maindir)
-    cat("NPI/INDC recalculation successful!\n")
   }
 
   # copy important files into output_folder (before MAgPIE execution)
@@ -201,9 +209,11 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,interfaceplot=FALSE,
   save(cfg, file=lucode::path(cfg$results_folder, "config.Rdata"))
 
   lucode::singleGAMSfile(mainfile=cfg$model, output=lucode::path(cfg$results_folder, "full.gms"))
-  lucode::model_unlock(lock_id)
+  if(lock_model) {
+    lucode::model_unlock(lock_id)
+    on.exit(setwd(maindir))
+  }
 
-  on.exit(setwd(maindir))
   setwd(cfg$results_folder)
 
   #Is SLURM available?

@@ -6,11 +6,11 @@
 
 
 variables
- vm_p_fert_costs(i)              costs for mineral fertilizers
+ vm_p_fert_costs(i)              costs for mineral fertilizers (mio. USD)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_p_fert_costs(t,i,type) costs for mineral fertilizers
+ ov_p_fert_costs(t,i,type) costs for mineral fertilizers (mio. USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

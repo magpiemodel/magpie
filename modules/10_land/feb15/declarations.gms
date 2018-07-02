@@ -6,36 +6,36 @@
 
 
 parameters
- pm_land_start(j,land)         areas of different land pools and types (si0 and nsi0) from initialization [mio. ha]
- pcm_land(j,land)              area of different land types in the previous timestep (mio. ha)
+ pm_land_start(j,land)         Land initialization areas (mio. ha)
+ pcm_land(j,land)              Land areas of previous time step (mio. ha)
 ;
 
 variables
- vm_landdiff    aggregated difference in land between current and previous timestep (mio. ha)
+ vm_landdiff    Aggregated difference in land between current and previous time step (mio. ha)
 ;
 
 positive variables
- vm_land(j,land)                   areas of the different land types (mio.ha)
- vm_landexpansion(j,land)         land expansion (mio. ha)
- vm_landreduction(j,land)         land reduction (mio. ha)
+ vm_land(j,land)                  Areas of the different land types (mio. ha)
+ vm_landexpansion(j,land)         Land expansion (mio. ha)
+ vm_landreduction(j,land)         Land reduction (mio. ha)
 ;
 
 equations
- q10_land(j)                    land conversion constraint
- q10_landexpansion(j,land)      land expansion constraint
- q10_landreduction(j,land)      land reduction constraint
- q10_landdiff                      land difference constraint
+ q10_land(j)                    Land conversion constraint (mio. ha)
+ q10_landexpansion(j,land)      Land expansion constraint (mio. ha)
+ q10_landreduction(j,land)      Land reduction constraint (mio. ha)
+ q10_landdiff                   Land difference constraint (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_landdiff(t,type)               aggregated difference in land between current and previous timestep (mio. ha)
- ov_land(t,j,land,type)            areas of the different land types (mio.ha)
- ov_landexpansion(t,j,land,type)   land expansion (mio. ha)
- ov_landreduction(t,j,land,type)   land reduction (mio. ha)
- oq10_land(t,j,type)               land conversion constraint
- oq10_landexpansion(t,j,land,type) land expansion constraint
- oq10_landreduction(t,j,land,type) land reduction constraint
- oq10_landdiff(t,type)             land difference constraint
+ ov_landdiff(t,type)               Aggregated difference in land between current and previous time step (mio. ha)
+ ov_land(t,j,land,type)            Areas of the different land types (mio. ha)
+ ov_landexpansion(t,j,land,type)   Land expansion (mio. ha)
+ ov_landreduction(t,j,land,type)   Land reduction (mio. ha)
+ oq10_land(t,j,type)               Land conversion constraint (mio. ha)
+ oq10_landexpansion(t,j,land,type) Land expansion constraint (mio. ha)
+ oq10_landreduction(t,j,land,type) Land reduction constraint (mio. ha)
+ oq10_landdiff(t,type)             Land difference constraint (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

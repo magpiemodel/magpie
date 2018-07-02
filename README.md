@@ -1,5 +1,7 @@
 # MAgPIE 4.0-beta
 
+This is an unvalidated beta version. Do not use it for productive runs!
+
   <https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpie>
 
 ## WHAT IS MAGPIE?
@@ -18,8 +20,8 @@ trends in food demand are derived from a cross-country regression analysis, base
 on future scenarios on GDP and population growth.
 
 ## DOCUMENTATION
-The model documentation can be found at
-https://redmine.pik-potsdam.de/projects/magpie/wiki/.
+An incomplete preview of the model documentation for version 4 can be found at
+https://rse.pik-potsdam.de/magpie/version4_documentation_preview/
 
 Please pay attentions to the MAgPIE Coding Etiquette when you modify the code.
 The Coding Etiquette you find at
@@ -60,30 +62,51 @@ For R some packages are required to run MAgPIE. All except of one (`gdxrrw`) are
 either distributed via the offical R CRAN or via a separate repository hosted at
 PIK (PIK-CRAN). Before proceeding PIK-CRAN should be added to the list of
 available repositories via:
-`options(repos = c(CRAN = "@CRAN@",
-         rd3mod_repo = "http://www.pik-potsdam.de/rd3mod/R/"))`.
+```
+options(repos = c(CRAN = "@CRAN@", pik = "http://rse.pik-potsdam.de/r/packages"))
+```
 
 The `gdxrrw` package has to be downloaded directly from GAMS via
 ```
 download.file("https://support.gams.com/_media/gdxrrw:gdxrrw_1.0.2.zip",
               "gdxrrw_1.0.2.zip")
+install.packages(“reshape2”)
 install.packages("gdxrrw_1.0.2.zip",repos = NULL)
 ```
+In some cases it can happen that `gdxrrw` does not return an error message during
+installation but also did not install properly. To verify a successful
+installation try to load the package via `library(gdxrrw)`.
+
+--------------------------------------------------------------------------------
+
+If loading of the package fails you need to install the package from source.
+Under Windows this requires to install Rtools
+(https://cran.r-project.org/bin/windows/Rtools/) and to add it to the PATH
+variable. After that you can run the following lines of code:
+
+```
+download.file("https://support.gams.com/_media/gdxrrw:gdxrrw_1.0.2.tar.gz",
+              "gdxrrw_1.0.2.tar.gz")
+install.packages("gdxrrw_1.0.2.tar.gz",repos = NULL, type="source")
+```
+
+--------------------------------------------------------------------------------
+
 
 After that all remaining packages can be installed via `install.packages`
 
 ```
-pkgs <- c(ggplot2,
-          curl,
-					gdx,
-          magclass,
-					madrat,
-					mip,
-					lucode,
-					magpie4,
-					magpiesets,
-					lusweave,
-					luscale)
+pkgs <- c("ggplot2",
+          "curl",
+          "gdx",
+          "magclass",
+          "madrat",
+          "mip",
+          "lucode",
+          "magpie4",
+          "magpiesets",
+          "lusweave",
+          "luscale")
 install.packages(pkgs)
 ```
 
@@ -93,7 +116,8 @@ the same structure). New model scenarios can be created by adding a column to
 `config/scenario_config.csv`
 
 ## HOW TO RUN
-To run the model execute `Rscript start.R` in the main folder of the model.
+To run the model execute `Rscript start.R` (or `source("start.R")` from within
+R) in the main folder of the model.
 This will give you a list of available run scripts you can choose from. You can
 also add your own run scripts by saving them in the folder scripts/start. To run
 a single model run with settings as stated in default.cfg you can choose start

@@ -4,6 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @code
 
  vm_p_fert_costs.fx(i)=0;
 

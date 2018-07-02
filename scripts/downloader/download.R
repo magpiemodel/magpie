@@ -18,7 +18,10 @@ library(lucode)
 #Create file2destination mapping based on information from the model
 ################################################################################
 getfiledestinations <- function() {
-  files <- dir(pattern="files$",recursive = TRUE)
+  folders <- base::list.dirs(recursive=FALSE, full.names=FALSE)
+  folders <- grep("^(\\.|225|output|calib_run|figure)",folders, invert=TRUE, value=TRUE)
+  files <- NULL
+  for(f in folders) files <- c(files,dir(path=f,pattern="^files$",recursive = TRUE, full.names=TRUE))
   out <- NULL
   for(f in files) {
     tmp <- grep("^\\*",readLines(f, warn = FALSE),invert=TRUE,value=TRUE)
@@ -29,76 +32,12 @@ getfiledestinations <- function() {
 }
 
 ################################################################################
-#Define function which loads data from repository and unpacks it
-################################################################################
-load_unpack <- function(files, repository, username=NULL, ssh_private_keyfile=NULL, ssh_public_keyfile=NULL, debug=FALSE) {
-
-  if(is.null(username)) username <- getOption("username")
-  if(is.null(ssh_private_keyfile)) ssh_private_keyfile <- getOption("ssh_private_keyfile")
-  if(is.null(ssh_public_keyfile)) ssh_public_keyfile <- getOption("ssh_public_keyfile")
-
-  cat("Load data from repository\n")
-  anydatafound <- FALSE
-  md5sum <- list()
-  for(i in 1:length(files)) {
-    file <- files[i]
-    cat(" Search for",file,"...\n")
-    filepath <- NULL
-    for(repo in repository) {
-      cat("  Try",repo,"...")
-      path <- paste0(sub("/$","",repo),"/",file)
-      if(grepl("://",path)) {
-        require(curl, quietly = !debug)
-        if(is.null(ssh_public_keyfile)) {
-          h <- new_handle(ssh_private_keyfile=ssh_private_keyfile, username=username, verbose=debug)
-        } else {
-          h <- new_handle(ssh_private_keyfile=ssh_private_keyfile, ssh_public_keyfile=ssh_public_keyfile, username=username, verbose=debug)
-        }
-        tmpdir <- tempdir()
-        if(debug) tmpdir <- "input"
-        tmp <- try(curl_download(path,paste0(tmpdir,"/",file),handle=h),silent = !debug)
-        if(is(tmp,"try-error")) {
-          cat(" failed!\n")
-          if(debug) {
-            cat(tmp)
-          }
-        } else {
-          names(files)[i] <- repo
-          filepath <- paste0(tmpdir,"/",file)
-          cat(" success!\n")
-          break
-        }
-      } else {
-        if(file.exists(path)) {
-          names(files)[i] <- repo
-          filepath <- path
-          cat(" success!\n")
-          break
-        } else {
-          cat(" failed!\n")
-        }
-      }
-    }
-    if(is.null(filepath)) {
-      warning(file," could not be found in any of the specified repositories!")
-    } else {
-      anydatafound <- TRUE
-      md5sum[[files[i]]] <- tools::md5sum(filepath)
-      untar(filepath,exdir="input")
-    }
-  }
-  if(!anydatafound) stop("None of the provided input data files could be found! In the case of remote access: Did you provide proper username and ssh_private_keyfile?")
-  attr(files,"md5") <- md5sum
-  return(files)
-}
-
-################################################################################
 #Delete data provided in mapping
 ################################################################################
 delete_olddata <- function(x) {
   if(is.character(x)) {
     if(!file.exists(x)) stop("Cannot find file mapping!")
-    map <- read.csv(x, sep = ";", stringsAsFactors = FALSE)
+    map <- read.csv(x, sep = ";", stringsAsFactors = FALSE, comment.char = "#")
   } else {
     map <- x
   }
@@ -144,7 +83,7 @@ copy_input <- function(x, sourcepath, low_res, move=FALSE) {
         next
       }
     }
-    copy.magpie(inputpath,outputpath)
+    copy.magpie(inputpath, outputpath, round=8)
     if(move & !(i != length(x) &  (x[i] %in% x[i+1:length(x)]))) {
         file.remove(inputpath)
     }
@@ -229,18 +168,18 @@ update_info <- function(datasets, low_res, high_res, cpr,
   subject <- 'VERSION INFO'
 
   useddata <- NULL
-  for(i in 1:length(datasets)) {
-    if(is.na(names(datasets)[i])) {
-      warnings <- c(warnings,paste0("WARNING: Requested input data file ",datasets[i]," not found and therefore ignored!"))
-    } else {
-      useddata <- c(useddata,
-                    '',
-                    paste('Used data set:',datasets[i]),
-                    paste('md5sum:',attr(datasets,"md5")[[datasets[i]]]),
-                    paste('Repository:',names(datasets)[i]))
-    }
+  for(dataset in rownames(datasets)) {
+    useddata <- c(useddata,
+                  '',
+                  paste('Used data set:',dataset),
+                  paste('md5sum:',datasets[dataset,"md5"]),
+                  paste('Repository:',datasets[dataset,"repo"]))
   }
 
+  warnings <- attr(datasets,"warnings")
+  if(!is.null(warnings)) {
+    warnings <- capture.output(warnings)
+  }
 
   content <- c(useddata,
                '',
@@ -286,15 +225,9 @@ get_info <- function(file,grep_expression,sep,pattern="",replacement="") {
 
 archive_download <- function(files=c("GLUES2-sresa2-constant_co2-miub_echo_g_ERB_rev22.1_n200_690d3718e151be1b450b394c1064b1c5.tgz",
                                      "690d3718e151be1b450b394c1064b1c5_magpie_rev2.499.tgz"),
-                             repositories=c("/p/projects/landuse/data/input/raw_data",
-                                            "/p/projects/rd3mod/inputdata/output",
-                                            "scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/raw_data",
-                                            "scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output"),
+                             repositories=list("/p/projects/landuse/data/input/raw_data"=NULL,
+                                               "/p/projects/rd3mod/inputdata/output"=NULL),
                              modelfolder=".",
-                             move=TRUE,
-                             username=NULL,
-                             ssh_private_keyfile=NULL,
-                             ssh_public_keyfile=NULL,
                              debug=FALSE) {
 
   require(lucode)
@@ -314,12 +247,12 @@ archive_download <- function(files=c("GLUES2-sresa2-constant_co2-miub_echo_g_ERB
   # delete files which will be copied/moved later on with copy_input
   delete_olddata(file2destination)
   # delete additional files not treated by copy_input
-  delete_olddata("scripts/downloader/inputdelete.csv")
+  delete_olddata("scripts/downloader/inputdelete.cfg")
   cat("done!\n\n")
 
   ##################### DATA DOWNLOAD #########################################
   # load data from source and unpack it
-  filemap <- load_unpack(files, repositories, username, ssh_private_keyfile, ssh_public_keyfile, debug)
+  filemap <- lucode::download_unpack(input=files, targetdir="input", repositories=repositories, debug=FALSE)
 
   low_res  <- get_info("input/info.txt","^\\* Output ?resolution:",": ")
   high_res <- get_info("input/info.txt","^\\* Input ?resolution:",": ")
@@ -330,7 +263,7 @@ archive_download <- function(files=c("GLUES2-sresa2-constant_co2-miub_echo_g_ERB
   # the resolution information in the file name (if existing) is removed to
   # allow a resolution-indepedent gams-sourcecode.
 
-  copy_input(file2destination, "input", low_res, move)
+  copy_input(file2destination, "input", low_res, !debug)
 
 
   ###################### MANIPULATE GAMS FILES ###################################
@@ -343,7 +276,7 @@ archive_download <- function(files=c("GLUES2-sresa2-constant_co2-miub_echo_g_ERB
   # and update_sets, which is updating the resolution- and region-depending
   # sets in core/sets.gms
 
-  tmp <- read.magpie("modules/10_land/input/avl_land.cs3")
+  tmp <- read.magpie("modules/10_land/input/avl_land_t.cs3")
   cpr <- getCPR(tmp)
   # read spatial_header, map, reg_revision and regionscode
   load("input/spatial_header.rda")

@@ -1,4 +1,13 @@
+option nlp = conopt4
 
+
+*' @code
+*' Within the major foodgroups determined by the regressions
+*' '(animal calories, empty calories, fruits, vegetable and nut calories as well as staple calories)
+*' we assume that the relative share of individual products (e.g. eggss with animal calories) stay
+*' the same. An exception is the demand for ruminant meat, which declines in the course of the
+*' century at the cost of chicken meat.
+*' @stop
 
 if (sum(sameas(t_past,t),1) = 1,
 
@@ -66,6 +75,20 @@ if (sum(sameas(t_past,t),1) = 1,
  );
 
 
+*' @code
+*' The calculations are exectued in the following order:
+*'
+*' In the beginning of each timestep, the bodyheight is estimated based on the diets
+*' of the previous 15 years. In case the timestep length exceed 5 years, the consumption
+*' is extrapolated using the last two timesteps.
+*' Bodyheight is estimated using the consumption of proteins and fats, in our case
+*' the foodgroups animal products, pulses and oils.
+*' To estimate the body size of underaged (0--14 years), we scale the WHO body height
+*' recommendations for underaged with the divergence of the 15--19 year olds.
+*' The bodyheight estimates are repeated again at the end of the timestep to improve
+*' the results of the extrapolation for cases where timestep length exceeds 5 years.
+*' @stop
+
 * ###### ANTHROPOMETRIC ESIMTATES
 * ### Preliminary calculation of bodyweight based on food availability of last 3 timesteps
 * ### This may diverge from final calcuation in the case where timesteplength exceeds 5 years
@@ -77,6 +100,7 @@ if (sum(sameas(t_past,t),1) = 1,
 if (sum(sameas(t_past,t),1) = 1,
 
    p15_bodyheight(t,iso,sex,age_group,estimates15) = f15_bodyheight(t,iso,sex,age_group);
+
 
 else
 
@@ -117,35 +141,72 @@ else
 
 );
 
-display "hello29";
+
+*' @code
+*' Food requirements are estimated based on healthy bodyweight, assuming a BMI of 21.75 for adults,
+*' and lower ones for underaged.
+
+
 
 *### estimate standardized food requirement
-p15_bodyweight_healthy(t,iso,sex,age_group)= 22.5* (p15_bodyheight(t,iso,sex,age_group,"preliminary")/100)**2;
-p15_bodyweight_healthy(t,iso,sex,"0--4")= 16* (p15_bodyheight(t,iso,sex,"0--4","preliminary")/100)**2;
-p15_bodyweight_healthy(t,iso,sex,"5--9")= 16* (p15_bodyheight(t,iso,sex,"0--4","preliminary")/100)**2;
-p15_bodyweight_healthy(t,iso,sex,"10--14")= 18* (p15_bodyheight(t,iso,sex,"0--4","preliminary")/100)**2;
-p15_bodyweight_healthy(t,iso,sex,"15--19")= 21* (p15_bodyheight(t,iso,sex,"0--4","preliminary")/100)**2;
+p15_bodyweight_healthy(t,iso,sex,age_group)= 21.75* (p15_bodyheight(t,iso,sex,age_group,"preliminary")/100)**2;
+p15_bodyweight_healthy(t,iso,sex,"0--4")   = 16*   (p15_bodyheight(t,iso,sex,"0--4","preliminary")   /100)**2;
+p15_bodyweight_healthy(t,iso,sex,"5--9")   = 16*   (p15_bodyheight(t,iso,sex,"5--9","preliminary")   /100)**2;
+p15_bodyweight_healthy(t,iso,sex,"10--14") = 18*   (p15_bodyheight(t,iso,sex,"10--14","preliminary") /100)**2;
+p15_bodyweight_healthy(t,iso,sex,"15--19") = 21.75*   (p15_bodyheight(t,iso,sex,"15--19","preliminary") /100)**2;
 
-*physical activity levels in PAL relative to Basic metabolic rate (BMR)
+*' Physical activity levels (PAL) relative to Basic metabolic rate (BMR) are
+*' estimated based on physical inactivity level and assuming PALs for sedentary
+*' or medium-active populations of 1.53 and 1.76.
 p15_physical_activity_level(t,iso,sex,age_group)=
                             im_physical_inactivity(t,iso,sex,age_group) * 1.53
                             +(1-im_physical_inactivity(t,iso,sex,age_group)) * 1.76
                             ;
+*' Healthy body weight, age and sex are used to determine healthy Basal Metabolic Rate (BMR).
+*' Healthy BMR multiplied by PAL gibes the food requirements.
+
 p15_kcal_requirement(t,iso,sex,age_group)=
-                        (f15_schofield_parameters(sex,age_group, "intercept")
-                        + f15_schofield_parameters(sex,age_group, "slope")*p15_bodyweight_healthy(t,iso,sex,age_group))
+                        (f15_schofield_parameters_height(sex,age_group, "intercept")
+                        + f15_schofield_parameters_height(sex,age_group, "height")*p15_bodyheight(t,iso,sex,age_group,"preliminary")/100
+                        + f15_schofield_parameters_height(sex,age_group, "weight")*p15_bodyweight_healthy(t,iso,sex,age_group))
                         * p15_physical_activity_level(t,iso,sex,age_group);
 
-p15_kcal_requirement_average(ct,iso)=
-                        sum((sex,age_group),
-                             p15_kcal_requirement(ct,iso,sex,age_group)
-                             * im_demography(ct,iso,sex,age_group)
-                        )/sum((sex,age_group),
-                             im_demography(ct,iso,sex,age_group)
-                        );
+*' pregnancy and lactation requires extra intake. We distribute the newborns among reproductive women and multuply with extra energy requirements
+p15_kcal_pregnancy(t,iso,sex,age_group)=0;
+p15_kcal_pregnancy(t,iso,"F",reproductive)$sum(reproductive2, im_demography(t,iso,"F",reproductive2)>0) =
+                   sum(sex,im_demography(t,iso,sex,"0--4")/5)/
+                   sum(reproductive2, im_demography(t,iso,"F",reproductive2))
+                   * ((40/66)*845 + (26/66)*675)
+                   ;
+*' @stop
+
+
+* the following calcuation of p15_intake_balanceflow is only required for postprocessing.
+if (sum(sameas(t_past,t),1) = 1,
+
+   p15_bodyheight(t,iso,sex,age_group,estimates15) = f15_bodyheight(t,iso,sex,age_group);
+
+   p15_intake_balanceflow(t,iso,sex,age_group) =
+      f15_intake_pc_observed_iso(t,iso,sex,age_group) -
+      (p15_kcal_requirement(t,iso,sex,age_group)+ p15_kcal_pregnancy(t,iso,sex,age_group))*
+      (
+          f15_intake_regr_paras(sex,age_group,"saturation")*im_gdp_pc_ppp_iso(t,iso)
+          /(f15_intake_regr_paras(sex,age_group,"halfsaturation")+im_gdp_pc_ppp_iso(t,iso))
+          +f15_intake_regr_paras(sex,age_group,"intercept")
+      );
+
+   p15_intake_balanceflow_lastcalibrationyear(iso,sex,age_group)=p15_intake_balanceflow(t,iso,sex,age_group);
+else
+    p15_intake_balanceflow(t,iso,sex,age_group) =  p15_intake_balanceflow_lastcalibrationyear(iso,sex,age_group) * f15_kcal_balanceflow_fadeout(t,"%c15_calibscen%");
+);
 
 
 *###### Estimation of food demand using a first run of the food demand model with unshocked prices.
+
+*' @code
+*' Before MAgPIE is executed, the food demand model is executed the first time
+*' with unshocked prices.
+*' @stop
 
 * demand for non-food products "knf" is set to 0;
 vm_dem_food.fx(i,knf)=0;
@@ -184,22 +245,32 @@ p15_kcal_regression(t, iso, kfo)=v15_kcal_regression.l(iso, kfo);
 
 * deriving calibration values
 
-
+*' @code
+*' Food demand is calibrated to meet the historical food demand. For this purpose,
+*' we calculate in the historical period with observations the residual between
+*' the regression and the observation. When the historical period ends, the
+*' calibarion balanceflow is fixed at the value of the last period.
 
 if (sum(sameas(t_past,t),1) = 1,
     p15_kcal_balanceflow(t,iso,kfo)$(f15_kcal_pc_iso(t,iso,kfo)=0) = 0;
     p15_kcal_balanceflow(t,iso,kfo)$(f15_kcal_pc_iso(t,iso,kfo)>0) = f15_kcal_pc_iso(t,iso,kfo) - v15_kcal_regression.l(iso, kfo);
     p15_kcal_balanceflow_lastcalibrationyear(iso,kfo) = p15_kcal_balanceflow(t,iso,kfo);
 else
-    p15_kcal_balanceflow(t,iso,kfo) = p15_kcal_balanceflow_lastcalibrationyear(iso,kfo) * f15_kcal_balanceflow_fadeout(t,"%c15_calibscen%")
+    p15_kcal_balanceflow(t,iso,kfo) = p15_kcal_balanceflow_lastcalibrationyear(iso,kfo) * f15_kcal_balanceflow_fadeout(t,"%c15_calibscen%");
 );
 
 
-
-* add balanceflow for calibration
-       p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_balanceflow(t,iso,kfo);
-* set negative values that can occur due to balanceflow to zero
+*' The balanceflow is added to the regression value
+       p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_balanceflow(t,iso,kfo) * s15_calibrate;
+*' Eventual negative values that can occur due to balanceflow are set to zero
        p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
+
+*' Finally, the country-level parameter p15_kcal_pc_iso is aggregated to
+*' regional level into the parameter p15_kcal_pc. This parameter is provided
+*' to constraint q15_food_demand in the MAgPIE model, which defines
+*' the demand for food.
+*' Now, MAgPIE is executed.
+*' @stop
 
 * aggregate to regions
  p15_kcal_pc(t,i,kfo)$(
@@ -217,9 +288,4 @@ else
  p15_kcal_pc_initial_iso(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
  p15_kcal_pc_initial(t,i,kfo) =  p15_kcal_pc(t,i,kfo);
 
- v15_kcal_pc.fx(i,kfo) = p15_kcal_pc(t,i,kfo);
-
- p15_demand_nonfood_iso_initial(t,iso)  =  v15_demand_nonfood.l(iso);
-
  o15_kcal_regression_initial(iso,kfo)=v15_kcal_regression.l(iso,kfo);
-

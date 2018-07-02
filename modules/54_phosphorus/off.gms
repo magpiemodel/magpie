@@ -4,6 +4,10 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @description This is the current default implementation of the module.
+*' It deactivates calculations related to the phosphorus module.
+
+*' @limitations The realization is under development yet.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "declarations" $include "./modules/54_phosphorus/off/declarations.gms"

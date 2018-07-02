@@ -28,21 +28,21 @@ $offdelim
 /;
 
 
-parameter f50_nr_fix_ndfa(t_all,i,kcr) Nr fixation rates per ton production in percent of plant dm
+parameter f50_nr_fix_ndfa(t_all,i,kcr) Nr fixation rates per ton dry matter plant production (% per tDM)
 /
 $ondelim
 $include "./modules/50_nr_soil_budget/input/f50_ndfa.cs4"
 $offdelim
 /;
 
-parameter f50_nitrogen_balanceflow(t_all,i) Balancelfow to account for unrealistically high SNUpEs on croplands in Tg Nr
+parameter f50_nitrogen_balanceflow(t_all,i) Balancelfow to account for unrealistically high SNUpEs on croplands (Tg N per yr)
 /
 $ondelim
 $include "./modules/50_nr_soil_budget/input/f50_nitrogen_balanceflow.cs4"
 $offdelim
 /;
 
-parameter f50_nitrogen_balanceflow_pasture(t_all,i) Balancelfow to account for unrealistically high NUE on pastures in Tg Nr
+parameter f50_nitrogen_balanceflow_pasture(t_all,i) Balancelfow to account for unrealistically high NUE on pastures (Tg N per yr)
 /
 $ondelim
 $include "./modules/50_nr_soil_budget/input/f50_nitrogen_balanceflow_pasture.cs4"
@@ -50,21 +50,21 @@ $offdelim
 /;
 
 
-parameter f50_nr_fix_area(kcr) Nr fixation rates per area in t per ha
+parameter f50_nr_fix_area(kcr) Nr fixation rates per area (t per ha)
 /
 $ondelim
 $include "./modules/50_nr_soil_budget/input/f50_fixation_freeliving.cs4"
 $offdelim
 /;
 
-parameter f50_nr_fixation_rates_pasture(t_all,i) Nr fixation rates per area in t per ha for pastures
+parameter f50_nr_fixation_rates_pasture(t_all,i) Nr fixation rates per pasture area (t per ha)
 /
 $ondelim
 $include "./modules/50_nr_soil_budget/input/f50_nitrogen_fixation_rates_pasture.cs4"
 $offdelim
 /;
 
-parameter f50_atmospheric_deposition_rates(t_all,i,land,dep_scen50) Nr deposition rates per area in t per ha for land types
+parameter f50_atmospheric_deposition_rates(t_all,i,land,dep_scen50) Nr deposition rates per area (t per ha)
 /
 $ondelim
 $include "./modules/50_nr_soil_budget/input/f50_atmospheric_deposition_rates.cs4"

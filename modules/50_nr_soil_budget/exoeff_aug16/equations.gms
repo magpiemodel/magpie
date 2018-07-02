@@ -4,13 +4,12 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @equations
 
- q50_nr_cost_fert(i2) ..
-                 vm_nr_inorg_fert_costs(i2)
-                 =e=
-                 sum(land_ag,vm_nr_inorg_fert_reg(i2,land_ag)) * 600
-                 ;
 
+*' For cropland the equation `q50_nr_bal_crp` balances the withdrawls (see below) with the share of all 
+*' incoming fluxes that can be uptaken by the crop land. Since all other inflows except `vm_nr_inorg_fert_reg`
+*' are given (by other modules) this equation defines the amount of inorganic fertilizer required.
  q50_nr_bal_crp(i2) ..
                  v50_nr_eff(i2) *
                  (
@@ -26,6 +25,9 @@
                  =g=
                  sum(kcr,v50_nr_withdrawals(i2,kcr));
 
+
+*' Withdrawls from crop land consist of nitrogen that can not be fixed by crop production
+*' or by residues (above and below ground), less the nitrogen inflow from seeds.
  q50_nr_withdrawals(i2,kcr) ..
                  v50_nr_withdrawals(i2,kcr)
                  =e=
@@ -38,6 +40,13 @@
                  - vm_dem_seed(i2,kcr)  * fm_attributes("nr",kcr)
                  ;
 
+
+*' For pasture land the equation `q50_nr_bal_pasture` balances nitrogen discharge from pasture production 
+*' with the share of all inflows that can be uptaken by pasture land such as manure, plant fixation, and atmospheric deposition. 
+*' In contrast to crop land where the nitrogen fixation rates are crop specific (applied to 
+*' ton dry matter of crops produces) for paste the fixation rates are given per area.
+*' Again, this equation defines the amount of inorganic fertilizer required (`vm_nr_inorg_fert_reg`),
+*' since all other influxes are given (by other modules).
  q50_nr_bal_pasture(i2) ..
                     v50_nr_eff_pasture(i2) *
                     (
@@ -49,7 +58,16 @@
                     =g=
                     vm_prod_reg(i2,"pasture") * fm_attributes("nr","pasture");
 
+*' For both crop land and pasture land, this equation gives the amount of nitrogen deposited from the atmosphere.  
  q50_nr_deposition(i2,land) ..
                      v50_nr_deposition(i2,land)
                      =e=
                      sum(cell(i2,j2),ic50_atmospheric_deposition_rates(i2,land) * vm_land(j2,land));
+
+*' Having calculated the amount of nitrogen fertilizer required (see above) now the resulting cost are derived. They 
+*' are part of the objective function.
+ q50_nr_cost_fert(i2) ..
+                 vm_nr_inorg_fert_costs(i2)
+                 =e=
+                 sum(land_ag,vm_nr_inorg_fert_reg(i2,land_ag)) * 600
+                 ;

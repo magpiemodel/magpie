@@ -11,6 +11,7 @@
 #
 library(lucode)
 library(magclass)
+library(quitte)
 
 options(error=function()traceback(2))
 
@@ -46,3 +47,5 @@ if (!is.null(missing)) {
   cat("\nList of folders with missing report.mif\n")
   print(missing)
 }
+
+if(file.exists("output/report_comp.csv")) saveRDS(read.quitte("output/report_comp.csv"),file = "output/report_comp.rds")
