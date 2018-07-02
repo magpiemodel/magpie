@@ -20,14 +20,14 @@ q59_som_target_noncropland(j2) ..
 
 q59_crop_expansion(j2) ..	
  	          v59_crop_expansion(j2)
-			  =e=
+			  =g=
 			  vm_land(j2,"crop") - pcm_land(j2,"crop")
 			  ;
 			  
 
 q59_crop_reduction(j2) ..	
  	          v59_crop_reduction(j2)
-			  =e=
+			  =g=
 			  pcm_land(j2,"crop") - vm_land(j2,"crop")
 			  ;
 			  
