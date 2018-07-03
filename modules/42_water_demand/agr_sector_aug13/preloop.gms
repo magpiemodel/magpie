@@ -4,10 +4,6 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-$ifthen "%c42_env_flow_policy%" == "mixed" i42_env_flow_policy(t,i) = im_development_state(t,i) * f42_env_flow_policy(t,"on");
-$else i42_env_flow_policy(t,i) = f42_env_flow_policy(t,"%c42_env_flow_policy%");
-$endif
-
 i42_wat_req_k(t,j,kve) = f42_wat_req_kve(t,j,kve);
 i42_env_flows(t,j) = f42_env_flows(t,j);
 
