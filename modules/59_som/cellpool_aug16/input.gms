@@ -4,6 +4,10 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+scalars
+  s59_punish_cropdiff  Punishment costs per croparea squared (USD05 per (mio. ha)^2)                / 10000 /
+;
+
 
 table f59_cratio_landuse(climate59,kcr) ratio of soil c SOM relative to natural vegetation soilcs for different landuse
 $ondelim
