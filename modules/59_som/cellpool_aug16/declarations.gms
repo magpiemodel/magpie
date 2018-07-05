@@ -29,12 +29,12 @@ positive variables
          v59_som_pool(j,pools59)             soil organic matter pool (Tg C)
          v59_crop_expansion(j)               crop land expansion (mio. ha)
          v59_crop_reduction(j)               land reduction (mio. ha)
-         vm_punish_overrate_cropdiff(i)	     punishment costs for overrated cropland difference (mio. USD05 per yr)  
 ;
 
 variables
          v59_som_transfer_to_cropland(j)     transfer of SOM from other land to cropland (Tg C)
          vm_nr_som(j)                        release of soil organic matter (Tg Nr)
+         vm_costs_overrate_cropdiff(i)	     punishment costs for overrated cropland difference (mio. USD05 per yr)  
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -42,16 +42,17 @@ parameters
  ov59_som_target(t,j,pools59,type)       long-term target state of C pool (Tg C)
  ov59_som_pool(t,j,pools59,type)         soil organic matter pool (Tg C)
  ov59_crop_expansion(t,j,type)           crop land expansion (mio. ha)
- ov59_crop_reduction(t,j,type)           land reduction (mio. ha)		 
+ ov59_crop_reduction(t,j,type)           land reduction (mio. ha)
  ov59_som_transfer_to_cropland(t,j,type) transfer of SOM from other land to cropland (Tg C)
  ov_nr_som(t,j,type)                     release of soil organic matter (Tg Nr)
+ ov_costs_overrate_cropdiff(t,i,type)    punishment costs for overrated cropland difference (mio. USD05 per yr)  
  oq59_som_target_cropland(t,j,type)      estimates the long-term target state of cropland
  oq59_som_target_noncropland(t,j,type)   estimates the long-term target state of noncropland
  oq59_som_transfer_to_cropland(t,j,type) estimates the transfer of carbonpools due to land conversion
  oq59_som_pool_cropland(t,j,type)        actual C pool in croplands
  oq59_som_pool_noncropland(t,j,type)     actual C pool in non-croplands
  oq59_nr_som(t,j,type)                   soil organic matter loss
- oq59_crop_expansion(t,j,type)           cropland expansion 
- oq59_crop_reduction(t,j,type)           cropland reduction 
+ oq59_crop_diff(t,j,type)                cropland difference
+ oq59_crop_diff_constraint(t,i,type)     cropland difference constraint 
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

@@ -20,15 +20,15 @@ q59_som_target_noncropland(j2) ..
 
 q59_crop_diff(j2)  ..	
 
- 	          v59_crop_reduction(j2) - v59_crop_expansion(j2) =e=
-
+ 	          v59_crop_reduction(j2) - v59_crop_expansion(j2) 
+                  =e=
                   pcm_land(j2,"crop") - vm_land(j2,"crop")
 ;
 
 q59_crop_diff_constraint(i2) ..	
  	          sum(cell(i2,j2),v59_crop_reduction(j2)*v59_crop_expansion(j2)*s59_punish_cropdiff) 
                   =e= 
-                  vm_punish_overrate_cropdiff(i2);
+                  vm_costs_overrate_cropdiff(i2); 
 
 			  
 q59_som_transfer_to_cropland(j2) ..
