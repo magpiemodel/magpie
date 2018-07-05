@@ -21,17 +21,14 @@ q14_yield_past(j2,w) ..
                       sum(ct$(not sameas(ct,"y1995")), pc14_pyld(j2,w)
 					* (s14_pyld_intercept + sum(cell(i2,j2),f14_pyld_slope_reg(i2)*v14_incr_graz_ani(i2))))
                     + sum(ct$sameas(ct,"y1995"),pc14_pyld(j2,w));
+
 *' The increase of grazing animals is derived from the following three equations.
 *'
 *' (1) Animal stocks are calculated based on the productivity indicators. For the milk and the egg systems,
 *' animal numbers refer to producing animals. For the meat systems, animal numbers refer to the respective animal herd: 
 q14_animal_stocks(i2,sys) ..
  v14_ani_stocks(i2,sys) =e=
-                   sum((sys_to_kli(sys,kli)), vm_supply(i2,kli))/sum(ct,im_livestock_productivity(ct,i2,sys));   
- 				   
-
-*q14_animal_stocks(i2,sys) .. v14_ani_stocks(i2,sys) =e=
-*                   sum((sys_to_kli(sys,kli)), vm_supply(i2,kli))/sum(ct,im_livestock_productivity(ct,i2,sys)); 
+                   sum((sys_to_kli(sys,kli)), vm_supply(i2,kli))/sum(ct,im_livestock_productivity(ct,i2,sys));   				   
 
 *' (2) Grazing animals are defined by the cattle stock:
 q14_grazing_animals(i2) .. 
