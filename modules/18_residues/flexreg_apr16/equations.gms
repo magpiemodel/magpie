@@ -4,7 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-
+*' @equations
 
  q18_prod_res_ag_reg(i2,kcr,attributes) ..
                  vm_res_biomass_ag(i2,kcr,attributes)
@@ -58,10 +58,10 @@
                   );
 
 
- q18_cost_prod_res(i2,kres) .. 
+ q18_cost_prod_res(i2,kres) ..
                   vm_cost_prod(i2,kres)
                   =e=
                   vm_prod_reg(i2,kres)*f18_fac_req_kres(kres);
-				  
+
 
 *** EOF constraints.gms ***

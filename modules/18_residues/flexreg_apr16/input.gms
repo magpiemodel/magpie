@@ -12,13 +12,13 @@ $ondelim
 $include "./modules/18_residues/input/f18_multicropping.csv"
 $offdelim;
 
-table f18_attributes_residue_ag(attributes,kve) Nutrient content of aboveground crop residues (X per DM)
+table f18_attributes_residue_ag(attributes,kve) Nutrient content of aboveground crop residues in respective attribute units (X per DM)
 $ondelim
 $include "./modules/18_residues/input/f18_attributes_residue_ag.csv"
 $offdelim;
 
 
-table f18_attributes_residue_bg(dm_nr,kve) Nutrient content of belowground crop residues (X per DM)
+table f18_attributes_residue_bg(dm_nr,kve) Nutrient content of belowground crop residues in reactive nitorgen and carbon units (X per DM)
 $ondelim
 $include "./modules/18_residues/input/f18_attributes_residue_bg.csv"
 $offdelim;
