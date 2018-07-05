@@ -44,9 +44,9 @@ pc39_cost_landcon_past(j,land)        current costs for landconversion from the 
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_landcon(t,j,land,type)           landconversion costs  (mio US$)
- ov39_cost_landcon_annuity(t,j,land,type) annuity costs of landconversion in the current timestep (mio. US$)
- oq39_cost_landcon_annuity(t,j,land,type) Calculation of cellular annuity costs of landconversion
- oq39_cost_landcon(t,j,land,type)         Calculation of cellular landconversion costs
+ ov_cost_landcon(t,j,land,type)           landconversion costs (mio USD per yr)
+ ov39_cost_landcon_annuity(t,j,land,type) annuity costs of landconversion in the current timestep (mio USD per yr)
+ oq39_cost_landcon_annuity(t,j,land,type) Calculation of cellular annuity costs of landconversion (mio USD per yr)
+ oq39_cost_landcon(t,j,land,type)         Calculation of cellular landconversion costs (mio USD per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
