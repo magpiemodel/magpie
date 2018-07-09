@@ -12,13 +12,13 @@ $ondelim
 $include "./modules/18_residues/input/f18_multicropping.csv"
 $offdelim;
 
-table f18_attributes_residue_ag(attributes,kve) Nutrient content of aboveground crop residues in respective attribute units (X per DM)
+table f18_attributes_residue_ag(attributes,kve) Nutrient content of aboveground crop residues in respective attribute units DM GJ Nr P K WM C (X per DM)
 $ondelim
 $include "./modules/18_residues/input/f18_attributes_residue_ag.csv"
 $offdelim;
 
 
-table f18_attributes_residue_bg(dm_nr,kve) Nutrient content of belowground crop residues in reactive nitorgen and carbon units (X per DM)
+table f18_attributes_residue_bg(dm_nr,kve) Nutrient content of belowground crop residues in reactive nitorgen and carbon units Nr C (X per DM)
 $ondelim
 $include "./modules/18_residues/input/f18_attributes_residue_bg.csv"
 $offdelim;
@@ -40,7 +40,7 @@ $include "./modules/18_residues/input/f18_res_combust_eff.cs4"
 $offdelim
 /;
 
-parameter f18_fac_req_kres(kres) Factor requirements (USD per tDM)
+parameter f18_fac_req_kres(kres) Factor requirements (USD05MER per tDM)
 /
 $ondelim
 $include "./modules/18_residues/flexreg_apr16/input/f18_fac_req_kres.csv"
