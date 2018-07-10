@@ -8,8 +8,8 @@
  q71_prod_in(j2,kli_rum)$(sum(ct,i71_share_in_feedmix(ct,j2,kli_rum,"foddr","dm")))
                          .. v71_prod_in(j2,kli_rum)
                             =l=
-							vm_prod(j2,"foddr") /
-							sum(ct,i71_share_in_feedmix(ct,j2,kli_rum,"foddr","dm"))
+							vm_prod(j2,"foddr") / 
+							sum((ct, cell(i,j)),im_feed_baskets(t_all,i,kli_rum,"foddr"))
 						    ;
 *** no residue production in cluster level avaiable so far
 *** so the equation above is just running for foddr production							
@@ -18,7 +18,7 @@
  q71_prod_ex(j2,kli_rum) .. v71_prod_ex(j2,kli_rum)
                             =l=
 						    vm_prod(j2,"pasture") /
-							sum(ct,i71_share_in_feedmix(ct,j2,kli_rum,"pasture","dm"))
+							sum((ct, cell(i,j)),im_feed_baskets(t_all,i,kli_rum,"pasture"))
 						    ;
 						   
  
