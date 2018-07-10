@@ -1,8 +1,8 @@
-*** (C) 2008-2017 Potsdam Institute for Climate Impact Research (PIK),
-*** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** or later. See LICENSE file or go to http://www.gnu.org/licenses/
-*** Contact: magpie@pik-potsdam.de
+*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+*** |  authors, and contributors see AUTHORS file
+*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  Contact: magpie@pik-potsdam.de
 
 *************************BASIC SETS (INDICES)***********************************
 
@@ -15,7 +15,7 @@
 
 sets
 
-   i all economic regions /SSA,MEA,OAS,CHA,NEU,EUR,REF,LAM,USA,CAZ,IND/
+   i all economic regions /SSA,MEA,OAS,CHA,IND,REF,NEU,EUR,LAM,USA,CAZ,JPN/
 
    iso list of iso countries /
        ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
@@ -45,31 +45,33 @@ sets
        VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 
    j number of LPJ cells /
-       SSA_1*SSA_12,
-       MEA_13*MEA_30,
-       OAS_31*OAS_54,
-       CHA_55*CHA_75,
-       NEU_76*NEU_87,
-       EUR_88*EUR_105,
-       REF_106*REF_113,
-       LAM_114*LAM_148,
-       USA_149*USA_159,
-       CAZ_160*CAZ_192,
-       IND_193*IND_200/
+       SSA_1*SSA_10,
+       MEA_11*MEA_24,
+       OAS_25*OAS_44,
+       CHA_45*CHA_63,
+       IND_64*IND_71,
+       REF_72*REF_76,
+       NEU_77*NEU_84,
+       EUR_85*EUR_99,
+       LAM_100*LAM_156,
+       USA_157*USA_167,
+       CAZ_168*CAZ_197,
+       JPN_198*JPN_200/
 
    cell(i,j) number of LPJ cells per region i
       /
-       SSA . SSA_1*SSA_12
-       MEA . MEA_13*MEA_30
-       OAS . OAS_31*OAS_54
-       CHA . CHA_55*CHA_75
-       NEU . NEU_76*NEU_87
-       EUR . EUR_88*EUR_105
-       REF . REF_106*REF_113
-       LAM . LAM_114*LAM_148
-       USA . USA_149*USA_159
-       CAZ . CAZ_160*CAZ_192
-       IND . IND_193*IND_200
+       SSA . SSA_1*SSA_10
+       MEA . MEA_11*MEA_24
+       OAS . OAS_25*OAS_44
+       CHA . CHA_45*CHA_63
+       IND . IND_64*IND_71
+       REF . REF_72*REF_76
+       NEU . NEU_77*NEU_84
+       EUR . EUR_85*EUR_99
+       LAM . LAM_100*LAM_156
+       USA . USA_157*USA_167
+       CAZ . CAZ_168*CAZ_197
+       JPN . JPN_198*JPN_200
       /
 
    i_to_iso(i,iso) mapping regions to iso countries
@@ -81,6 +83,7 @@ sets
        EUR . (IRL,ITA,JEY,LTU,LUX,LVA,MLT,NLD,POL,PRT)
        EUR . (ROU,SVK,SVN,SWE)
        IND . (IND)
+       JPN . (JPN)
        LAM . (ABW,AIA,ARG,ATA,ATG,BES,BHS,BLM,BLZ,BMU)
        LAM . (BOL,BRA,BRB,BVT,CHL,COL,CRI,CUB,CUW,CYM)
        LAM . (DMA,DOM,ECU,FLK,GLP,GRD,GTM,GUF,GUY,HND)
@@ -93,10 +96,10 @@ sets
        NEU . (ALB,AND,BIH,CHE,GRL,ISL,LIE,MCO,MKD,MNE)
        NEU . (NOR,SJM,SMR,SRB,TUR,VAT)
        OAS . (AFG,ASM,ATF,BGD,BRN,BTN,CCK,COK,CXR,FJI)
-       OAS . (FSM,GUM,IDN,IOT,JPN,KHM,KIR,KOR,LAO,LKA)
-       OAS . (MDV,MHL,MMR,MNG,MNP,MYS,NCL,NFK,NIU,NPL)
-       OAS . (NRU,PAK,PCN,PHL,PLW,PNG,PRK,PYF,SGP,SLB)
-       OAS . (THA,TKL,TLS,TON,TUV,UMI,VNM,VUT,WLF,WSM)
+       OAS . (FSM,GUM,IDN,IOT,KHM,KIR,KOR,LAO,LKA,MDV)
+       OAS . (MHL,MMR,MNG,MNP,MYS,NCL,NFK,NIU,NPL,NRU)
+       OAS . (PAK,PCN,PHL,PLW,PNG,PRK,PYF,SGP,SLB,THA)
+       OAS . (TKL,TLS,TON,TUV,UMI,VNM,VUT,WLF,WSM)
        REF . (ARM,AZE,BLR,GEO,KAZ,KGZ,MDA,RUS,TJK,TKM)
        REF . (UKR,UZB)
        SSA . (AGO,BDI,BEN,BFA,BWA,CAF,CIV,CMR,COD,COG)
@@ -135,18 +138,21 @@ sets time_annual annual extended vector
       y2145, y2150 /
 
     t_past(t_all) timesteps with observed data
-        / y1965, y1970, y1975, y1980, y1985, y1990,
-      y1995, y2000, y2005, y2010 /
+        / y1965, y1970, y1975,
+         y1980, y1985, y1990,
+         y1995, y2000, y2005, y2010
+        /
 ;
 
 set t(t_all) used time periods
 $If "%c_timesteps%"== "less_TS" /y1995,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100,y2110,y2130,y2150/;
+$If "%c_timesteps%"== "coup2100" /y1995,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100/;
 $If "%c_timesteps%"== "test_TS" /y1995,y2005,y2010,y2020,y2030,y2040,y2050,y2070,y2090,y2110,y2130,y2150/;
-$If "%c_timesteps%"== "recalc_indc" /y1995,y2005,y2010,y2015,y2020,y2025,y2030/;
 $If "%c_timesteps%"== "TS_benni" /y1995,y2000,y2005,y2010,y2020,y2030,y2040,y2050/;
 $If "%c_timesteps%"== "TS_WB" /y1995,y2000,y2005,y2010,y2020,y2030,y2040,y2050,y2060,y2070,y2080/;
 $If "%c_timesteps%"== "5year_fh" /y1995,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2065,y2070,y2075,y2080,y2085,y2090,y2095,y2100/;
 $If "%c_timesteps%"== "5year" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2065,y2070,y2075,y2080,y2085,y2090,y2095,y2100/;
+$If "%c_timesteps%"== "5year2050" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050/;
 $If "%c_timesteps%"== "quicktest" /y1995,y2010,y2025/;
 $If "%c_timesteps%"== "1" /y1995/;
 $If "%c_timesteps%"== "2" /y1995,y2000/;
@@ -261,7 +267,7 @@ secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, 
 secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, urban_soilc,
      other_vegc, other_litc, other_soilc /
 
-   emis_source_co2_land(emis_source_cell) land pool CO2 emission sources
+   emis_co2(emis_source_cell) land pool CO2 emission sources
    / crop_vegc, crop_litc, crop_soilc,
      past_vegc, past_litc, past_soilc,
      forestry_vegc, forestry_litc, forestry_soilc,
@@ -269,7 +275,7 @@ secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, 
 secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, urban_soilc,
      other_vegc, other_litc, other_soilc /
 
-   emis_source_co2_forestry(emis_source_cell) forestry land CO2 emission sources
+   co2_forestry(emis_source_cell) forestry land CO2 emission sources
    /forestry_vegc, forestry_litc, forestry_soilc/
 
    c_pools carbon pools
@@ -280,7 +286,7 @@ secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, 
 
 ***RELATIONSHIPS BETWEEN DIFFERENT SETS***
 
-  emis_co2_to_land(emis_source_co2_land,land,c_pools)
+  emis_land(emis_co2,land,c_pools)
   /crop_vegc        . (crop) . (vegc)
    crop_litc        . (crop) . (litc)
    crop_soilc       . (crop) . (soilc)
@@ -304,7 +310,7 @@ secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, 
    other_soilc      . (other) . (soilc)
    /
 
-   emis_co2_to_forestry(emis_source_co2_forestry,c_pools)
+   emis_co2_to_forestry(co2_forestry,c_pools)
   /forestry_vegc    . (vegc)
    forestry_litc    . (litc)
    forestry_soilc   . (soilc)

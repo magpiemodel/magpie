@@ -11,11 +11,11 @@ $offsymxref
 $offsymlist
 $offlisting
 
-$setglobal c_timesteps  quicktest
+$setglobal c_timesteps  pastandfuture
 
 *******************************MODULE SETUP*************************************
 $setglobal drivers  aug17
-$setglobal food  aug17
+$setglobal food  anthropometrics_jan18
 
 ***************************PREDEFINED MACROS************************************
 $include "./core/macros.gms"
@@ -36,6 +36,7 @@ sets
    /
 ;
 
+
 **********INTRODUCE CALCULATION PARAMETERS, VARIABLES AND EQUATIONS*************
 $include "./core/declarations.gms"
 $batinclude "./modules/include.gms" declarations
@@ -52,7 +53,7 @@ magpie.scaleopt  = 1 ;
 magpie.holdfixed = 1 ;
 
 option lp         = cplex ;
-option nlp        = conopt ;
+option nlp        = conopt4 ;
 option iterlim    = 1000000 ;
 option reslim     = 1000000 ;
 option sysout     = Off ;
