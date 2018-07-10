@@ -6,6 +6,6 @@
 
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%disagg_lvst%" == "simple_oct17" $include "./modules/71_disagg_lvst/simple_oct17.gms"
 $Ifi "%disagg_lvst%" == "off" $include "./modules/71_disagg_lvst/off.gms"
+$Ifi "%disagg_lvst%" == "simple_oct17" $include "./modules/71_disagg_lvst/simple_oct17.gms"
 *###################### R SECTION END (MODULETYPES) ############################

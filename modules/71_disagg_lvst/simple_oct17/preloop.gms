@@ -8,10 +8,6 @@ i71_share_in_feedmix_reg(t_all,i,kli,kall,dm_ge_nr) =
 			 	 im_feed_baskets(t_all,i,kli,kall)*fm_attributes(dm_ge_nr,kall)/ 
 	    sum(kall2,im_feed_baskets(t_all,i,kli,kall2)*fm_attributes(dm_ge_nr,kall2))
 	   ;
-	   
-i71_feed_baskets_cell(t_all,j,kli,kall) =	   
-	   sum(cell(i,j),im_feed_baskets(t_all,i,kli,kall))
-	   ;
 	
 i71_share_in_feedmix(t_all,j,kli,kall,dm_ge_nr) =	   
 	   sum(cell(i,j),i71_share_in_feedmix_reg(t_all,i,kli,kall,dm_ge_nr))
