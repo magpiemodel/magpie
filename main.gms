@@ -12,16 +12,16 @@ $title magpie
 * md5sum: 8e4890f8378ab182aceb637abf8c2e34
 * Repository: /p/projects/landuse/data/input/archive
 * 
-* Used data set: rev3.33_690d3718e151be1b450b394c1064b1c5_magpie.tgz
-* md5sum: 2b2daa8f7ef1240f3858524994acc159
+* Used data set: rev3.34_690d3718e151be1b450b394c1064b1c5_magpie.tgz
+* md5sum: 2d6db82fa55dafc8b2bfbb850a911130
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev3.33_690d3718e151be1b450b394c1064b1c5_validation.tgz
-* md5sum: aded61ee11a17c6c68d2756e6d1abb2c
+* Used data set: rev3.34_690d3718e151be1b450b394c1064b1c5_validation.tgz
+* md5sum: 3beb910069401cffafd2e4f3fe74733a
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev3.38.tgz
-* md5sum: d2ef4311aaab0f57a8397584cc0b04e6
+* Used data set: additional_data_rev3.40.tgz
+* md5sum: 35682397ae23721967537305ce112c27
 * Repository: /p/projects/landuse/data/input/archive
 * 
 * Used data set: calibration_H12_29Jun18.tgz
@@ -39,7 +39,7 @@ $title magpie
 * 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
-* Regions data revision: 3.33
+* Regions data revision: 3.34
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/noco2
@@ -59,7 +59,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Mon Jul  2 15:59:14 2018
+* Last modification (input data): Tue Jul 10 12:25:31 2018
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 

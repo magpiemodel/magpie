@@ -4,10 +4,10 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c39_cost_scenario_establish  medium
-* options: off, low, medium, high
+$setglobal c39_cost_scenario_establish  high
+* options: off, low, medium, high, veryhigh
 $setglobal c39_cost_scenario_clearing  medium
-* options: off, low, medium, high
+* options: off, verylow, low, medium, high
 
 
 table f39_landclear_gdp(cost_estimate39,bound39) global range of land clearing costs in inital timestep (US$ per ton C)
