@@ -10,7 +10,6 @@ $setglobal c14_yields_scenario  nocc
 
 scalars
   s14_pyld_intercept     Intercept of linear relationship determining pasture intensification    (1)           / 0.24 /
-  s14_pyld_slope         Slope of linear relationship determining pasture intensification        (1)          / 0.78 /
 ;
 
 ******* Calibration factor

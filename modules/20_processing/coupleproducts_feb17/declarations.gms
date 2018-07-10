@@ -30,7 +30,7 @@ parameters
  ov20_dem_processing(t,i,processing_subst20,kpr,type)     Demand for processing use by process (mio. tDM per yr)
  ov20_secondary_substitutes(t,i,ksd,kpr,type)             Substitutes for inferior secondary products (mio. tDM per yr)
  ov_secondary_overproduction(t,i,kall,kpr,type)           Overproduction of secondary couple products (mio. tDM per yr)
- ov_cost_processing(t,i,type)                             Processing costs (mio. USD05 per yr)
+ ov_cost_processing(t,i,type)                             Processing costs (mio. USD)
  oq20_processing(t,i,kpr,ksd,type)                        Processing equation (mio. tDM per yr)
  oq20_processing_aggregation_nocereals(t,i,kpr,type)      Connecting processing activity to processing flows (mio. tDM per yr)
  oq20_processing_aggregation_cereals(t,i,kcereals20,type) Connecting processing activity to food use for milling (mio. tDM per yr)

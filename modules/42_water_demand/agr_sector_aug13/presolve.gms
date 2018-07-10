@@ -4,6 +4,19 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+if (sum(sameas(t_past,t),1) = 1,    
+
+i42_env_flow_policy(t,i) = f42_env_flow_policy(t,"off");
+
+else
+
+$ifthen "%c42_env_flow_policy%" == "mixed" i42_env_flow_policy(t,i) = im_development_state(t,i) * f42_env_flow_policy(t,"on");
+$else i42_env_flow_policy(t,i) = f42_env_flow_policy(t,"%c42_env_flow_policy%");
+$endif
+
+);
+
+
 * Agricultural water demand
 ic42_wat_req_k(j,k) = i42_wat_req_k(t,j,k);
 ic42_env_flow_policy(i) = i42_env_flow_policy(t,i);
