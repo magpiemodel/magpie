@@ -7,15 +7,17 @@
 p39_cost_landcon_past(t,j,land) = 0;
 
 ** set the global range of establishment and clearing cost depending on the scenario
-$Ifi "%c39_cost_scenario_establish%" == "off" i39_establish_gdp(land,bound39) = 0;
-$Ifi "%c39_cost_scenario_establish%" == "low" i39_establish_gdp(land,bound39) = f39_establish_gdp(land,"low_estimate",bound39);
-$Ifi "%c39_cost_scenario_establish%" == "medium" i39_establish_gdp(land,bound39) = f39_establish_gdp(land,"medium_estimate",bound39);
-$Ifi "%c39_cost_scenario_establish%" == "high" i39_establish_gdp(land,bound39) = f39_establish_gdp(land,"high_estimate",bound39);
+$Ifi "%c39_cost_scenario_establish%" == "off"      i39_establish_gdp(land,bound39) = 0;
+$Ifi "%c39_cost_scenario_establish%" == "low"      i39_establish_gdp(land,bound39) = f39_establish_gdp(land,"low_estimate",bound39);
+$Ifi "%c39_cost_scenario_establish%" == "medium"   i39_establish_gdp(land,bound39) = f39_establish_gdp(land,"medium_estimate",bound39);
+$Ifi "%c39_cost_scenario_establish%" == "high"     i39_establish_gdp(land,bound39) = f39_establish_gdp(land,"high_estimate",bound39);
+$Ifi "%c39_cost_scenario_establish%" == "veryhigh" i39_establish_gdp(land,bound39) = f39_establish_gdp(land,"veryhigh_estimate",bound39);
 
-$Ifi "%c39_cost_scenario_clearing%" == "off" i39_landclear_gdp(bound39) = 0;
-$Ifi "%c39_cost_scenario_clearing%" == "low" i39_landclear_gdp(bound39) = f39_landclear_gdp("low_estimate",bound39);
-$Ifi "%c39_cost_scenario_clearing%" == "medium" i39_landclear_gdp(bound39) = f39_landclear_gdp("medium_estimate",bound39);
-$Ifi "%c39_cost_scenario_clearing%" == "high" i39_landclear_gdp(bound39) = f39_landclear_gdp("high_estimate",bound39);
+$Ifi "%c39_cost_scenario_clearing%" == "off"     i39_landclear_gdp(bound39) = 0;
+$Ifi "%c39_cost_scenario_clearing%" == "verylow" i39_landclear_gdp(bound39) = f39_landclear_gdp("verylow_estimate",bound39);
+$Ifi "%c39_cost_scenario_clearing%" == "low"     i39_landclear_gdp(bound39) = f39_landclear_gdp("low_estimate",bound39);
+$Ifi "%c39_cost_scenario_clearing%" == "medium"  i39_landclear_gdp(bound39) = f39_landclear_gdp("medium_estimate",bound39);
+$Ifi "%c39_cost_scenario_clearing%" == "high"    i39_landclear_gdp(bound39) = f39_landclear_gdp("high_estimate",bound39);
 
 *' @code
 *' Regional land establishment and clearing costs
