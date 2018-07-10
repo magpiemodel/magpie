@@ -15,7 +15,7 @@
  q10_landexpansion(j2,land) ..
         vm_landexpansion(j2,land) =g= vm_land(j2,land)-pcm_land(j2,land);
  q10_landreduction(j2,land) ..
-        vm_landreduction(j2,land) =g= pcm_land(j2,land)-vm_land(j2,land);
+        v10_landreduction(j2,land) =g= pcm_land(j2,land)-vm_land(j2,land);
 		
 *' The gross changes in land are calculated based on land expansion, land 
 *' contraction and additional information from within the modules [35_natveg]
@@ -23,7 +23,7 @@
 		
  q10_landdiff ..
 		vm_landdiff =e= sum((j2,land), vm_landexpansion(j2,land)
-                                 + vm_landreduction(j2,land))
+                                 + v10_landreduction(j2,land))
                                  + vm_landdiff_natveg
                                  + vm_landdiff_forestry;
 
