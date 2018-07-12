@@ -26,6 +26,7 @@
                    + vm_cost_cdr(i2)
                    + vm_cost_bioen(i2)
                    + vm_cost_processing(i2)
+                   + vm_costs_overrate_cropdiff(i2)
                    ;
 
 *' Total regional production cost calculation is based on the sum of different
@@ -45,4 +46,5 @@
 *' Forestry related costs (afforestation) [32_forestry],
 *' Carbon dioxide removal costs [58_carbon_removal],
 *' Bioenergy costs [60_bioenergy],
-*' Processing costs [20_processing].
+*' Processing costs [20_processing],
+*' Punish costs for overrate cropland differences [59_som].

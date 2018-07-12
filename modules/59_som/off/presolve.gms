@@ -5,3 +5,4 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 vm_nr_som.fx(j)=0;
+vm_costs_overrate_cropdiff.fx(i)=0;  
