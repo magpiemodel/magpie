@@ -12,4 +12,5 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%food%" == "anthropometrics_jan18" $include "./modules/15_food/anthropometrics_jan18.gms"
+$Ifi "%food%" == "bmi_share_jul18" $include "./modules/15_food/bmi_share_jul18.gms"
 *###################### R SECTION END (MODULETYPES) ############################

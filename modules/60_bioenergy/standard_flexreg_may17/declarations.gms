@@ -26,8 +26,8 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_bioen(t,i,type)      Regional bioenergy production costs (mio. USD)
- ov_dem_bioen(t,i,kall,type)  Regional bioenergy demand  (mio. tDM)
+ ov_cost_bioen(t,i,type)      Regional bioenergy production costs (mio. USD05 per yr)
+ ov_dem_bioen(t,i,kall,type)  Regional bioenergy demand  (mio. tDM per yr)
  oq60_bioenergy_glo(t,type)   Global bioenergy demand (10^6 GJ)
  oq60_bioenergy_reg(t,i,type) Regional bioenergy demand (10^6 GJ)
  oq60_res_2ndgenBE(t,i,type)  Regional residue demand for 2nd generation bioenergy (10^6 GJ) 
