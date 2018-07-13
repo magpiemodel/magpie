@@ -25,3 +25,5 @@ $ondelim
 $include "./modules/40_transport/gtap_nov12/input/f40_transport_costs.csv"
 $offdelim
 /;
+
+f40_transport_costs("pasture") = s40_pasture_transport_costs;
