@@ -73,56 +73,54 @@ q15_regr_bmi_shr(iso,sex,age_overgroup15,bmi_regr_type15) ..
 
 *' Then we apply these regression shares to an hierarchical tree structure
 
-q15_bmi_shr_verylow(iso,sex,age_group) ..
-        v15_bmi_shr(iso,sex,age_group,"verylow") + v15_bmi_shr_calib(iso,sex,age_group,"verylow")
+q15_bmi_shr_verylow(iso,sex,age_overgroup15) ..
+        v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"verylow")
         =e=
-        sum(agegroup2overgroup(age_overgroup15,age_group),
-                v15_bmi_shr_regr(iso,sex,age_overgroup15,"low")
-                * v15_bmi_shr_regr(iso,sex,age_overgroup15,"lowsplit")
-        );
+        v15_bmi_shr_regr(iso,sex,age_overgroup15,"low")
+        * v15_bmi_shr_regr(iso,sex,age_overgroup15,"lowsplit")
+        ;
 
-q15_bmi_shr_low(iso,sex,age_group) ..
-        v15_bmi_shr(iso,sex,age_group,"low") + v15_bmi_shr_calib(iso,sex,age_group,"low")
+q15_bmi_shr_low(iso,sex,age_overgroup15) ..
+        v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"low")
         =e=
-        sum(agegroup2overgroup(age_overgroup15,age_group),
-                v15_bmi_shr_regr(iso,sex,age_overgroup15,"low")
-                * (1- v15_bmi_shr_regr(iso,sex,age_overgroup15,"lowsplit"))
-        );
+        v15_bmi_shr_regr(iso,sex,age_overgroup15,"low")
+        * (1- v15_bmi_shr_regr(iso,sex,age_overgroup15,"lowsplit"))
+        ;
 
-q15_bmi_shr_medium_high(iso,sex,age_group) ..
-        v15_bmi_shr(iso,sex,age_group,"mediumhigh") + v15_bmi_shr_calib(iso,sex,age_group,"mediumhigh")
+q15_bmi_shr_medium_high(iso,sex,age_overgroup15) ..
+        v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"mediumhigh")
         =e=
-        sum(agegroup2overgroup(age_overgroup15,age_group),
-                (1-v15_bmi_shr_regr(iso,sex,age_overgroup15,"low")
-                -v15_bmi_shr_regr(iso,sex,age_overgroup15,"high"))
-                * v15_bmi_shr_regr(iso,sex,age_overgroup15,"mediumsplit")
-        );
+        (1-v15_bmi_shr_regr(iso,sex,age_overgroup15,"low")
+        -v15_bmi_shr_regr(iso,sex,age_overgroup15,"high"))
+        * v15_bmi_shr_regr(iso,sex,age_overgroup15,"mediumsplit")
+        ;
 
-q15_bmi_shr_high(iso,sex,age_group) ..
-        v15_bmi_shr(iso,sex,age_group,"high") + v15_bmi_shr_calib(iso,sex,age_group,"high")
+q15_bmi_shr_high(iso,sex,age_overgroup15) ..
+        v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"high")
         =e=
-        sum(agegroup2overgroup(age_overgroup15,age_group),
-                v15_bmi_shr_regr(iso,sex,age_overgroup15,"high")
-                * (1-v15_bmi_shr_regr(iso,sex,age_overgroup15,"highsplit"))
-        );
+        v15_bmi_shr_regr(iso,sex,age_overgroup15,"high")
+        * (1-v15_bmi_shr_regr(iso,sex,age_overgroup15,"highsplit"))
+        ;
 
-q15_bmi_shr_veryhigh(iso,sex,age_group) ..
-        v15_bmi_shr(iso,sex,age_group,"veryhigh")+ v15_bmi_shr_calib(iso,sex,age_group,"veryhigh")
+q15_bmi_shr_veryhigh(iso,sex,age_overgroup15) ..
+        v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"veryhigh")
+        =e=
+        v15_bmi_shr_regr(iso,sex,age_overgroup15,"high")
+        * v15_bmi_shr_regr(iso,sex,age_overgroup15,"highsplit")
+        ;
+
+q15_bmi_shr_agg(iso,sex,age_group,bmi_group15) ..
+        v15_bmi_shr(iso,sex,age_group,bmi_group15)
         =e=
         sum(agegroup2overgroup(age_overgroup15,age_group),
-                v15_bmi_shr_regr(iso,sex,age_overgroup15,"high")
-                * v15_bmi_shr_regr(iso,sex,age_overgroup15,"highsplit")
-        );
+          v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"veryhigh")
+        )
+        + v15_bmi_shr_calib(iso,sex,age_group,bmi_group15) ;
 
 q15_bmi_shr_medium(iso,sex,age_group) ..
         sum(bmi_group15, v15_bmi_shr(iso,sex,age_group,bmi_group15))
-        =g=
+        =e=
         1;
-
-*        v15_bmi_shr(iso,sex,age_group,"medium") + v15_bmi_shr_calib(iso,sex,age_group,"medium")
-*        =e=
-*        1-sum(bmi_group_est15, v15_bmi_shr(iso,sex,age_group,bmi_group_est15))
-*        ;
 
 *' We want to calibrate BMI shares to historical values while avoiding
 *' negative values or values exceeding 1
@@ -148,7 +146,6 @@ q51_bmi_shr_calib(iso,sex,age_group,bmi_group_est15)..
         + 100 * (
           v15_bmi_shr_calib(iso,sex,age_group,bmi_group_est15)-sum(ct,i15_bmi_shr_calib(ct,iso,sex,age_group,bmi_group_est15))
         )$(sum(ct,i15_bmi_shr_calib(ct,iso,sex,age_group,bmi_group_est15))<0)
-        + 10*v15_bmi_shr(iso,sex,age_group,"medium")
         =e=
         v15_calib_punishment(iso,sex,age_group,bmi_group_est15);
 
