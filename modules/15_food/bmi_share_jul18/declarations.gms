@@ -29,11 +29,13 @@ equations
   q15_regr_bmi_shr(iso,sex,age_overgroup15,bmi_regr_type15) estimates regression parameters for BMI regression shares (capita per capita)
   q15_bmi_shr_verylow(iso,sex,age_overgroup15)  estimates bmi share for population groups (capita per capita)
   q15_bmi_shr_low(iso,sex,age_overgroup15)       estimates bmi share for population groups (capita per capita)
+  q15_bmi_shr_medium(iso,sex,age_overgroup15)     estimates bmi share for population groups (capita per capita)
   q15_bmi_shr_medium_high(iso,sex,age_overgroup15)     estimates bmi share for population groups (capita per capita)
   q15_bmi_shr_high(iso,sex,age_overgroup15)      estimates bmi share for population groups  (capita per capita)
   q15_bmi_shr_veryhigh(iso,sex,age_overgroup15)   estimates bmi share for population groups  (capita per capita)
   q15_bmi_shr_agg(iso,sex,age_group,bmi_group15)     disaggregates age groups from overarchign groups (cpatia per capita)
-  q15_bmi_shr_medium(iso,sex,age_group)      estimates bmi share for population groups  (capita per capita)
+
+  q15_bmi_shr(iso,sex,age_group)      estimates bmi share for population groups  (capita per capita)
 
 
   q51_bmi_shr_calib_high(iso,sex,age_group,bmi_group_est15)   estimates bmi share for population groups (capita per capita)
@@ -61,12 +63,13 @@ positive variables
   v15_bmi_shr_regr(iso,sex,age_overgroup15,bmi_regr_type15) BMI shares for regression categories (capita per capita)
   v15_bmi_shr(iso,sex,age_group,bmi_group15) share of population groups belonging to a certain bmi_group (capita per capita)
   v15_bmi_shr_overgroups(iso,sex,age_overgroup15,bmi_group15) share of population groups belonging to a certain bmi_group (capita per capita)
-  v15_bmi_shr_calib(iso,sex,age_group,bmi_group15) calibration parameter to meet historical BMI shares if possiblee (capita per capita)
   v15_calib_punishment(iso,sex,age_group,bmi_group15)  punishment to disinventivice but allow for divergence from calibration (USD05MER)
 ;
 
 variables
   v15_objective                      objective term (USD05)
+  v15_bmi_shr_calib(iso,sex,age_group,bmi_group15) calibration parameter to meet historical BMI shares if possiblee (capita per capita)
+
 ;
 
 scalar s15_count counter for creating average consumption over the length between timesteps;
@@ -146,10 +149,14 @@ model m15_food_demand /
       q15_regr_bmi_shr,
       q15_bmi_shr_verylow,
       q15_bmi_shr_low,
+      q15_bmi_shr_medium,
       q15_bmi_shr_medium_high,
       q15_bmi_shr_high,
       q15_bmi_shr_veryhigh,
-      q15_bmi_shr_medium,
+
+      q15_bmi_shr,
+
+      q15_bmi_shr_agg,
 
       q51_bmi_shr_calib_high,
       q51_bmi_shr_calib_low,
@@ -165,6 +172,8 @@ model m15_food_demand /
       q15_foodtree_kcal_vegetables
   /;
 
+
+
 *' In contrast, the equation q15_food_demand does only belong to MAgPIE, but
 *' not to the food demand model.
 *' @stop
@@ -178,37 +187,40 @@ m15_food_demand.holdfixed = 1 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_dem_food(t,i,kall,type)                                        Demand for food (mio. tDM per yr)
- ov15_kcal_regr(t,iso,kfo,type)                                    Uncalibrated regression estimates of calorie demand (kcal per cap per day)
- ov15_kcal_regr_total(t,iso,type)                                  Uncalibrated regression estimates of  total per capita calories (kcal per cap per day)
- ov15_regr(t,iso,demand_subsys15,type)                             Uncalibrated regression estimates of kcal shares (-)
- ov15_income_pc_real_ppp_iso(t,iso,type)                           real income per capita (USD per cap)
- ov15_income_balance(t,iso,type)                                   balance variable to balance cases in which reduction in income beats gdp pc (USD05 per cap)
- ov15_kcal_intake_total_regr(t,iso,type)                           Intake (kcal per cap per day)
- ov15_bmi_shr_regr(t,iso,sex,age_overgroup15,bmi_regr_type15,type) BMI shares for regression categories (capita per capita)
- ov15_bmi_shr(t,iso,sex,age_group,bmi_group15,type)                share of population groups belonging to a certain bmi_group (capita per capita)
- ov15_bmi_shr_calib(t,iso,sex,age_group,bmi_group15,type)          calibration parameter to meet historical BMI shares if possiblee (capita per capita)
- ov15_calib_punishment(t,iso,sex,age_group,bmi_group15,type)       punishment to disinventivice but allow for divergence from calibration (USD05MER)
- ov15_objective(t,type)                                            objective term (USD05)
- oq15_food_demand(t,i,kfo,type)                                    Food demand (mio. kcal)
- oq15_aim(t,type)                                                  aim function food demand model (mio. USD05)
- oq15_budget(t,iso,type)                                           Household Budget Constraint (USD05 per capita per day)
- oq15_regr_bmi_shr(t,iso,sex,age_overgroup15,bmi_regr_type15,type) estimates regression parameters for BMI regression shares (capita per capita)
- oq15_bmi_shr_verylow(t,iso,sex,age_group,type)                    estimates bmi share for population groups (capita per capita)
- oq15_bmi_shr_low(t,iso,sex,age_group,type)                        estimates bmi share for population groups (capita per capita)
- oq15_bmi_shr_medium_high(t,iso,sex,age_group,type)                estimates bmi share for population groups (capita per capita)
- oq15_bmi_shr_high(t,iso,sex,age_group,type)                       estimates bmi share for population groups  (capita per capita)
- oq15_bmi_shr_veryhigh(t,iso,sex,age_group,type)                   estimates bmi share for population groups  (capita per capita)
- oq15_bmi_shr_medium(t,iso,sex,age_group,type)                     estimates bmi share for population groups  (capita per capita)
- oq51_bmi_shr_calib_high(t,iso,sex,age_group,bmi_group_est15,type) estimates bmi share for population groups (capita per capita)
- oq51_bmi_shr_calib_low(t,iso,sex,age_group,bmi_group_est15,type)  estimates bmi share for population groups (capita per capita)
- oq51_bmi_shr_calib(t,iso,sex,age_group,bmi_group_est15,type)      estimates bmi share for population groups (USD05MER)
- oq15_intake(t,iso,type)                                           Intake estimation for country total (kcal per capita per day)
- oq15_regr_kcal(t,iso,type)                                        Per capita total consumption (kcal per capita per day)
- oq15_regr(t,iso,demand_subsys15,type)                             Share regressions  (kcal per kcal)
- oq15_foodtree_kcal_animals(t,iso,kfo_ap,type)                     Demand for animal products  (kcal per capita per day)
- oq15_foodtree_kcal_processed(t,iso,kfo_pf,type)                   Demand for processed products  (kcal per capita per day)
- oq15_foodtree_kcal_staples(t,iso,kfo_st,type)                     Demand for staple products  (kcal per capita per day)
- oq15_foodtree_kcal_vegetables(t,iso,type)                         Demand for vegetable and fruits products  (kcal per capita per day)
+ ov_dem_food(t,i,kall,type)                                          Demand for food (mio. tDM per yr)
+ ov15_kcal_regr(t,iso,kfo,type)                                      Uncalibrated regression estimates of calorie demand (kcal per cap per day)
+ ov15_kcal_regr_total(t,iso,type)                                    Uncalibrated regression estimates of  total per capita calories (kcal per cap per day)
+ ov15_regr(t,iso,demand_subsys15,type)                               Uncalibrated regression estimates of kcal shares (-)
+ ov15_income_pc_real_ppp_iso(t,iso,type)                             real income per capita (USD per cap)
+ ov15_income_balance(t,iso,type)                                     balance variable to balance cases in which reduction in income beats gdp pc (USD05 per cap)
+ ov15_kcal_intake_total_regr(t,iso,type)                             Intake (kcal per cap per day)
+ ov15_bmi_shr_regr(t,iso,sex,age_overgroup15,bmi_regr_type15,type)   BMI shares for regression categories (capita per capita)
+ ov15_bmi_shr(t,iso,sex,age_group,bmi_group15,type)                  share of population groups belonging to a certain bmi_group (capita per capita)
+ ov15_bmi_shr_overgroups(t,iso,sex,age_overgroup15,bmi_group15,type) share of population groups belonging to a certain bmi_group (capita per capita)
+ ov15_calib_punishment(t,iso,sex,age_group,bmi_group15,type)         punishment to disinventivice but allow for divergence from calibration (USD05MER)
+ ov15_objective(t,type)                                              objective term (USD05)
+ ov15_bmi_shr_calib(t,iso,sex,age_group,bmi_group15,type)            calibration parameter to meet historical BMI shares if possiblee (capita per capita)
+ oq15_food_demand(t,i,kfo,type)                                      Food demand (mio. kcal)
+ oq15_aim(t,type)                                                    aim function food demand model (mio. USD05)
+ oq15_budget(t,iso,type)                                             Household Budget Constraint (USD05 per capita per day)
+ oq15_regr_bmi_shr(t,iso,sex,age_overgroup15,bmi_regr_type15,type)   estimates regression parameters for BMI regression shares (capita per capita)
+ oq15_bmi_shr_verylow(t,iso,sex,age_overgroup15,type)                estimates bmi share for population groups (capita per capita)
+ oq15_bmi_shr_low(t,iso,sex,age_overgroup15,type)                    estimates bmi share for population groups (capita per capita)
+ oq15_bmi_shr_medium(t,iso,sex,age_overgroup15,type)                 estimates bmi share for population groups (capita per capita)
+ oq15_bmi_shr_medium_high(t,iso,sex,age_overgroup15,type)            estimates bmi share for population groups (capita per capita)
+ oq15_bmi_shr_high(t,iso,sex,age_overgroup15,type)                   estimates bmi share for population groups  (capita per capita)
+ oq15_bmi_shr_veryhigh(t,iso,sex,age_overgroup15,type)               estimates bmi share for population groups  (capita per capita)
+ oq15_bmi_shr_agg(t,iso,sex,age_group,bmi_group15,type)              disaggregates age groups from overarchign groups (cpatia per capita)
+ oq15_bmi_shr(t,iso,sex,age_group,type)                              estimates bmi share for population groups  (capita per capita)
+ oq51_bmi_shr_calib_high(t,iso,sex,age_group,bmi_group_est15,type)   estimates bmi share for population groups (capita per capita)
+ oq51_bmi_shr_calib_low(t,iso,sex,age_group,bmi_group_est15,type)    estimates bmi share for population groups (capita per capita)
+ oq51_bmi_shr_calib(t,iso,sex,age_group,bmi_group_est15,type)        estimates bmi share for population groups (USD05MER)
+ oq15_intake(t,iso,type)                                             Intake estimation for country total (kcal per capita per day)
+ oq15_regr_kcal(t,iso,type)                                          Per capita total consumption (kcal per capita per day)
+ oq15_regr(t,iso,demand_subsys15,type)                               Share regressions  (kcal per kcal)
+ oq15_foodtree_kcal_animals(t,iso,kfo_ap,type)                       Demand for animal products  (kcal per capita per day)
+ oq15_foodtree_kcal_processed(t,iso,kfo_pf,type)                     Demand for processed products  (kcal per capita per day)
+ oq15_foodtree_kcal_staples(t,iso,kfo_st,type)                       Demand for staple products  (kcal per capita per day)
+ oq15_foodtree_kcal_vegetables(t,iso,type)                           Demand for vegetable and fruits products  (kcal per capita per day)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

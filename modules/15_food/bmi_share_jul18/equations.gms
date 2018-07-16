@@ -87,6 +87,14 @@ q15_bmi_shr_low(iso,sex,age_overgroup15) ..
         * (1- v15_bmi_shr_regr(iso,sex,age_overgroup15,"lowsplit"))
         ;
 
+q15_bmi_shr_medium(iso,sex,age_overgroup15) ..
+        v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"medium")
+        =e=
+        (1-v15_bmi_shr_regr(iso,sex,age_overgroup15,"low")
+        -v15_bmi_shr_regr(iso,sex,age_overgroup15,"high"))
+        * (1-v15_bmi_shr_regr(iso,sex,age_overgroup15,"mediumsplit"))
+        ;
+
 q15_bmi_shr_medium_high(iso,sex,age_overgroup15) ..
         v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"mediumhigh")
         =e=
@@ -109,25 +117,27 @@ q15_bmi_shr_veryhigh(iso,sex,age_overgroup15) ..
         * v15_bmi_shr_regr(iso,sex,age_overgroup15,"highsplit")
         ;
 
+q15_bmi_shr(iso,sex,age_group) ..
+        sum(bmi_group15, v15_bmi_shr(iso,sex,age_group,bmi_group15))
+        =e=
+        1;
+
 q15_bmi_shr_agg(iso,sex,age_group,bmi_group15) ..
         v15_bmi_shr(iso,sex,age_group,bmi_group15)
         =e=
         sum(agegroup2overgroup(age_overgroup15,age_group),
-          v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"veryhigh")
+          v15_bmi_shr_overgroups(iso,sex,age_overgroup15,bmi_group15)
         )
         + v15_bmi_shr_calib(iso,sex,age_group,bmi_group15) ;
-
-q15_bmi_shr_medium(iso,sex,age_group) ..
-        sum(bmi_group15, v15_bmi_shr(iso,sex,age_group,bmi_group15))
-        =e=
-        1;
 
 *' We want to calibrate BMI shares to historical values while avoiding
 *' negative values or values exceeding 1
 *' The following equations punish a divergence from previously
 *' estimated calibration factors with additional costs. They only
-*' allow for a reduction of calibration factors. The reduced
-*' category will be shifted into the middle BMI share group.
+*' allow for a reduction of calibration factors. The constraints
+*' do not punish a change in the sahre of the category "medium", such that
+*' the reduced category will be shifted into the middle BMI share group.
+
 
 q51_bmi_shr_calib_high(iso,sex,age_group,bmi_group_est15)$(sum(ct,i15_bmi_shr_calib(ct,iso,sex,age_group,bmi_group_est15))>=0)..
         v15_bmi_shr_calib(iso,sex,age_group,bmi_group_est15)
