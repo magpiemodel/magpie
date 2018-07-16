@@ -12,6 +12,8 @@ $Ifi "%c39_cost_scenario_establish%" == "low"      i39_establish_gdp(land,bound3
 $Ifi "%c39_cost_scenario_establish%" == "medium"   i39_establish_gdp(land,bound39) = f39_establish_gdp(land,"medium_estimate",bound39);
 $Ifi "%c39_cost_scenario_establish%" == "high"     i39_establish_gdp(land,bound39) = f39_establish_gdp(land,"high_estimate",bound39);
 $Ifi "%c39_cost_scenario_establish%" == "veryhigh" i39_establish_gdp(land,bound39) = f39_establish_gdp(land,"veryhigh_estimate",bound39);
+$Ifi "%c39_cost_scenario_establish%" == "magpie3"     i39_establish_gdp(land,bound39) = f39_establish_gdp(land,"magpie3",bound39);
+$Ifi "%c39_cost_scenario_establish%" == "pure_estab" i39_establish_gdp(land,bound39) = f39_establish_gdp(land,"pure_estab",bound39);
 
 $Ifi "%c39_cost_scenario_clearing%" == "off"     i39_landclear_gdp(bound39) = 0;
 $Ifi "%c39_cost_scenario_clearing%" == "verylow" i39_landclear_gdp(bound39) = f39_landclear_gdp("verylow_estimate",bound39);
