@@ -38,15 +38,16 @@ buildInputVector <- function(regionmapping   = "aus",
   return(c(archive,madrat,validation,calibration,additional_data))
 }
 
-#calib_date <- "14Jun18"
+calib_date <- "15Jul18"
 
 for(x in c("aus","bra","cha","eth","idn","ind","usa")) {
-  #calibration <- paste0("calibration_",x,"_",calib_date,".tgz")
-  calibration <- NULL
+  calibration <- ifelse(exists("calib_date") && !is.null(calib_date),paste0("calibration_",x,"_",calib_date,".tgz"), NULL)
   cfg$title <- x
   cfg$input <- buildInputVector(regionmapping=x, calibration=calibration)
-  start_run(cfg=cfg)
-  calib <- submitCalibration(x)
-  cfg$input <- c(cfg$input,calib)
+  if(is.null(calibration)){
+    start_run(cfg=cfg)
+    calib <- submitCalibration(x)
+    cfg$input <- c(cfg$input,calib)
+  }
   publish_data(input=cfg, name=paste0("testdata2_",x), target=".")
 }
