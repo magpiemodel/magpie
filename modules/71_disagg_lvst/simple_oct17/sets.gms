@@ -20,7 +20,7 @@ sets
 	res_cereals, res_fibrous, res_nonfibrous, foddr
    /
    
-   kforage(kall)
+   kforage(k)
    /
 	pasture, foddr
    /
