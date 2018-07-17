@@ -9,8 +9,8 @@ variables
  ;
  
 equations
- q71_feed_rum_liv(j2,kforage)             production constraint for ruminant livestock products
- q71_balanceflow_constrain(i2,kforage)    balanceflow constraint for cluster forage feed products 
+ q71_feed_rum_liv(j,kforage)             production constraint for ruminant livestock products
+ q71_balanceflow_constrain(i,kforage)    balanceflow constraint for cluster forage feed products 
  q71_prod_mon_liv(j,kli_mon)              production constraint for monogastrics livestock products
  ;
 
@@ -20,12 +20,9 @@ parameters
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov71_prod_in(t,j,kli_rum,type)      intensive ruminant livestock production (mio. ton DM)
- ov71_prod_ex(t,j,kli_rum,type)      extensive ruminant livestock production (mio. ton DM)
- oq71_prod_in(t,j,kli_rum,type)      production constraint for intensive ruminant livestock products
- oq71_prod_ex(t,j,kli_rum,type)      production constraint for extensive ruminant livestock products
- oq71_prod_reg_ex(t,i,kli_rum,type)  production constraint for regional extensive ruminant livestock products	
- oq71_prod_rum_liv(t,j,kli_rum,type) production constraint for ruminant livestock products
- oq71_prod_mon_liv(t,j,kli_mon,type) production constraint for monogastrics livestock products
+ ov71_feed_balanceflow(t,j,kli_rum,kforage,type) cluster feed balance flow for forage feed for ruminant livestock (mio. t DM)
+ oq71_feed_rum_liv(t,j2,kforage,type)            production constraint for ruminant livestock products
+ oq71_balanceflow_constrain(t,i2,kforage,type)   balanceflow constraint for cluster forage feed products 
+ oq71_prod_mon_liv(t,j,kli_mon,type)             production constraint for monogastrics livestock products
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
