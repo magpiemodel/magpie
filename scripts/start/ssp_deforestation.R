@@ -29,7 +29,7 @@ cfg$force_download <- TRUE
 for(reg in c("BRA","H12")) {
   if(reg=="BRA"){
     cellcode <- "n500_BRA18_LAM26_ROW01"
-    regionsocde <- "d49a7a8baaab0edc754ebfc09462be0a"
+    regionscode <- "d49a7a8baaab0edc754ebfc09462be0a"
   } else if(reg=="H12") {
     cellcode <- "h200"
     regionscode <- "690d3718e151be1b450b394c1064b1c5"
