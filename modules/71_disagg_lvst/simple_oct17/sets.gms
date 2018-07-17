@@ -20,8 +20,12 @@ sets
 	res_cereals, res_fibrous, res_nonfibrous, foddr
    /
    
+   kforage(kall)
+   /
+	pasture, foddr
+   /
+   
    
 ; 
-alias(kall,kall2);
 alias(j,j3);
 alias(cell,cell2);

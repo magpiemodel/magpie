@@ -4,22 +4,17 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-positive variables
- v71_prod_in(j,kli_rum)              intensive ruminant livestock production (mio. ton DM)
- v71_prod_ex(j,kli_rum)              extensive ruminant livestock production (mio. ton DM)
+variables
+ v71_feed_balanceflow(j,kli_rum,kforage)  cluster feed balance flow for forage feed for ruminant livestock (mio. t DM)
  ;
  
 equations
- q71_prod_in(j,kli_rum)                   production constraint for intensive ruminant livestock products
- q71_prod_ex(j,kli_rum)                   production constraint for extensive ruminant livestock products
- q71_prod_reg_ex(i,kli_rum)		          production constraint for regional extensive ruminant livestock products	
- q71_prod_rum_liv(j,kli_rum)              production constraint for ruminant livestock products
+ q71_feed_rum_liv(j2,kforage)             production constraint for ruminant livestock products
+ q71_balanceflow_constrain(i2,kforage)    balanceflow constraint for cluster forage feed products 
  q71_prod_mon_liv(j,kli_mon)              production constraint for monogastrics livestock products
  ;
 
 parameters
- i71_share_in_feedmix_reg(t_all,i,kli,kall,dm_ge_nr) regional share of products in feedmix (1)
- i71_share_in_feedmix(t_all,j,kli,kall,dm_ge_nr)     share of products in feedmix (1)
  i71_urban_area_share(j)                             share of urban area within a region (1)
 ;
 

@@ -13,7 +13,7 @@ $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_feed_baskets.cs3"
 $offdelim;
 
-table f70_feed_balanceflow(t_all,i,kap,kall) Balanceflow in mio ton DM to balance difference between estimated feed baskets and FAO
+table fm_feed_balanceflow(t_all,i,kap,kall) Balanceflow in mio ton DM to balance difference between estimated feed baskets and FAO
 $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_feed_balanceflow.cs3"
 $offdelim;
