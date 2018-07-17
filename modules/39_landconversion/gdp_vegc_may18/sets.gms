@@ -6,7 +6,9 @@
 
 sets
   cost_estimate39 cost estimate for land clearing costs
-  / verylow_estimate, low_estimate, medium_estimate, high_estimate, veryhigh_estimate, magpie3, pure_estab /
+  / corrected_estimate, verylow_estimate, low_estimate,
+    medium_estimate, high_estimate, veryhigh_estimate,
+    magpie3, pure_estab /
 
   bound39 bound for land conversion costs
     / low_gdp, high_gdp /
