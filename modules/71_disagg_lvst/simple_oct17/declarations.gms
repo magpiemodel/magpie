@@ -20,9 +20,9 @@ parameters
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov71_feed_balanceflow(t,j,kli_rum,kforage,type) cluster feed balance flow for forage feed for ruminant livestock (mio. t DM)
- oq71_feed_rum_liv(t,j,kforage,type)             production constraint for ruminant livestock products
- oq71_balanceflow_constrain(t,i,kforage,type)    balanceflow constraint for cluster forage feed products 
- oq71_prod_mon_liv(t,j,kli_mon,type)             production constraint for monogastrics livestock products
+ ov71_feed_balanceflow(t,j,kli_rum,kforage,type)      cluster feed balance flow for forage feed for ruminant livestock (mio. t DM)
+ oq71_feed_rum_liv(t,j,kforage,type)                  production constraint for ruminant livestock products
+ oq71_balanceflow_constrain(t,i,kli_rum,kforage,type) balanceflow constraint for cluster forage feed products 
+ oq71_prod_mon_liv(t,j,kli_mon,type)                  production constraint for monogastrics livestock products
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
