@@ -6,12 +6,14 @@
 
 variables
  v71_feed_balanceflow(j,kli_rum,kforage)  cluster feed balance flow for forage feed for ruminant livestock (mio. t DM)
+ v71_prod_rum(j,kli_rum,kforage)          production of pasture and fodder fet ruminants within a cluster
  ;
  
 equations
  q71_feed_rum_liv(j,kforage)                     production constraint for ruminant livestock products
  q71_balanceflow_constrain(i,kli_rum,kforage)    balanceflow constraint for cluster forage feed products 
  q71_prod_mon_liv(j,kli_mon)                     production constraint for monogastrics livestock products
+ q71_sum_rum_liv(j2,kli_rum)                     total production of pasture and fodder fet ruminants
  ;
 
 parameters
