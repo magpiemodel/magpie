@@ -30,9 +30,7 @@ q15_aim ..
           v15_objective =e=
           sum(iso,
           - 10**6*v15_income_balance(iso))
-          - sum((iso,sex,age_group,bmi_group15),
-           v15_calib_punishment(iso,sex,age_group,bmi_group15)
-          );
+          ;
 
 *' In principle, the food demand model has only one solution which satifies all
 *' equations. The objective could therefore be choosen arbirtrarily, and the
@@ -65,7 +63,7 @@ q15_budget(iso) ..
 *' regression in an hierachrical tree. First we estimate the regression shares:
 
 q15_regr_bmi_shr(iso,sex,age_overgroup15,bmi_regr_type15) ..
-        v15_bmi_shr_regr(iso,sex,age_overgroup15,bmi_regr_type15)
+        v15_regr_overgroups(iso,sex,age_overgroup15,bmi_regr_type15)
         =e=
         f15_bmi_shr_regr_paras(sex,age_overgroup15,bmi_regr_type15,"intercept")
         + (f15_bmi_shr_regr_paras(sex,age_overgroup15,bmi_regr_type15,"saturation") * v15_income_pc_real_ppp_iso(iso))
@@ -76,92 +74,57 @@ q15_regr_bmi_shr(iso,sex,age_overgroup15,bmi_regr_type15) ..
 q15_bmi_shr_verylow(iso,sex,age_overgroup15) ..
         v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"verylow")
         =e=
-        v15_bmi_shr_regr(iso,sex,age_overgroup15,"low")
-        * v15_bmi_shr_regr(iso,sex,age_overgroup15,"lowsplit")
+        v15_regr_overgroups(iso,sex,age_overgroup15,"low")
+        * v15_regr_overgroups(iso,sex,age_overgroup15,"lowsplit")
         ;
 
 q15_bmi_shr_low(iso,sex,age_overgroup15) ..
         v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"low")
         =e=
-        v15_bmi_shr_regr(iso,sex,age_overgroup15,"low")
-        * (1- v15_bmi_shr_regr(iso,sex,age_overgroup15,"lowsplit"))
+        v15_regr_overgroups(iso,sex,age_overgroup15,"low")
+        * (1- v15_regr_overgroups(iso,sex,age_overgroup15,"lowsplit"))
         ;
 
 q15_bmi_shr_medium(iso,sex,age_overgroup15) ..
         v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"medium")
         =e=
-        (1-v15_bmi_shr_regr(iso,sex,age_overgroup15,"low")
-        -v15_bmi_shr_regr(iso,sex,age_overgroup15,"high"))
-        * (1-v15_bmi_shr_regr(iso,sex,age_overgroup15,"mediumsplit"))
+        (1-v15_regr_overgroups(iso,sex,age_overgroup15,"low")
+        -v15_regr_overgroups(iso,sex,age_overgroup15,"high"))
+        * (1-v15_regr_overgroups(iso,sex,age_overgroup15,"mediumsplit"))
         ;
 
 q15_bmi_shr_medium_high(iso,sex,age_overgroup15) ..
         v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"mediumhigh")
         =e=
-        (1-v15_bmi_shr_regr(iso,sex,age_overgroup15,"low")
-        -v15_bmi_shr_regr(iso,sex,age_overgroup15,"high"))
-        * v15_bmi_shr_regr(iso,sex,age_overgroup15,"mediumsplit")
+        (1-v15_regr_overgroups(iso,sex,age_overgroup15,"low")
+        -v15_regr_overgroups(iso,sex,age_overgroup15,"high"))
+        * v15_regr_overgroups(iso,sex,age_overgroup15,"mediumsplit")
         ;
 
 q15_bmi_shr_high(iso,sex,age_overgroup15) ..
         v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"high")
         =e=
-        v15_bmi_shr_regr(iso,sex,age_overgroup15,"high")
-        * (1-v15_bmi_shr_regr(iso,sex,age_overgroup15,"highsplit"))
+        v15_regr_overgroups(iso,sex,age_overgroup15,"high")
+        * (1-v15_regr_overgroups(iso,sex,age_overgroup15,"highsplit"))
         ;
 
 q15_bmi_shr_veryhigh(iso,sex,age_overgroup15) ..
         v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"veryhigh")
         =e=
-        v15_bmi_shr_regr(iso,sex,age_overgroup15,"high")
-        * v15_bmi_shr_regr(iso,sex,age_overgroup15,"highsplit")
+        v15_regr_overgroups(iso,sex,age_overgroup15,"high")
+        * v15_regr_overgroups(iso,sex,age_overgroup15,"highsplit")
         ;
 
 *' From BMI shares of the large overgroups, we disaggregate to
-*' age-specific subgroups, and calibrate the estiamtes to match
-*' past observations. 
+*' age-specific subgroups.
 
 q15_bmi_shr_agg(iso,sex,age_group,bmi_group15) ..
-        v15_bmi_shr(iso,sex,age_group,bmi_group15)
+        v15_bmi_shr_regr(iso,sex,age_group,bmi_group15)
         =e=
         sum(agegroup2overgroup(age_overgroup15,age_group),
           v15_bmi_shr_overgroups(iso,sex,age_overgroup15,bmi_group15)
-        )
-        + v15_bmi_shr_calib(iso,sex,age_group,bmi_group15) ;
+        );
 
-q15_bmi_shr(iso,sex,age_group) ..
-        sum(bmi_group15, v15_bmi_shr(iso,sex,age_group,bmi_group15))
-        =e=
-        1;
-
-*' We want to calibrate BMI shares to historical values while avoiding
-*' negative values or values exceeding 1
-*' The following equations punish a divergence from previously
-*' estimated calibration factors with additional costs. They only
-*' allow for a reduction of calibration factors. The constraints
-*' do not punish a change in the sahre of the category "medium", such that
-*' the reduced category will be shifted into the middle BMI share group.
-
-
-q51_bmi_shr_calib_high(iso,sex,age_group,bmi_group_est15)$(sum(ct,i15_bmi_shr_calib(ct,iso,sex,age_group,bmi_group_est15))>=0)..
-        v15_bmi_shr_calib(iso,sex,age_group,bmi_group_est15)
-        =l=
-        sum(ct,i15_bmi_shr_calib(ct,iso,sex,age_group,bmi_group_est15));
-
-q51_bmi_shr_calib_low(iso,sex,age_group,bmi_group_est15)$(sum(ct,i15_bmi_shr_calib(ct,iso,sex,age_group,bmi_group_est15))<0)..
-        v15_bmi_shr_calib(iso,sex,age_group,bmi_group_est15)
-        =g=
-        sum(ct,i15_bmi_shr_calib(ct,iso,sex,age_group,bmi_group_est15));
-
-q51_bmi_shr_calib(iso,sex,age_group,bmi_group_est15)..
-        100*(
-          sum(ct,i15_bmi_shr_calib(ct,iso,sex,age_group,bmi_group_est15))-v15_bmi_shr_calib(iso,sex,age_group,bmi_group_est15)
-        )$(sum(ct,i15_bmi_shr_calib(ct,iso,sex,age_group,bmi_group_est15))>=0)
-        + 100 * (
-          v15_bmi_shr_calib(iso,sex,age_group,bmi_group_est15)-sum(ct,i15_bmi_shr_calib(ct,iso,sex,age_group,bmi_group_est15))
-        )$(sum(ct,i15_bmi_shr_calib(ct,iso,sex,age_group,bmi_group_est15))<0)
-        =e=
-        v15_calib_punishment(iso,sex,age_group,bmi_group_est15);
 
 *' Food intake is estimated based on BMI distribution, typical intakes for
 *' BMI groups, demographic structure and extra energy requirements for
@@ -171,7 +134,7 @@ q15_intake(iso)..
          v15_kcal_intake_total_regr(iso) =e=
          (
            sum((ct, sex, age_group, bmi_group15),
-               v15_bmi_shr(iso,sex,age_group,bmi_group15)*
+               v15_bmi_shr_regr(iso,sex,age_group,bmi_group15)*
                im_demography(ct,iso,sex,age_group) *
                i15_intake(ct,iso,sex,age_group,bmi_group15)
            ) + sum(ct,i15_kcal_pregnancy(ct,iso))

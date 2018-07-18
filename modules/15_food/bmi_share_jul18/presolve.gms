@@ -269,7 +269,8 @@ p15_kcal_regr(t, iso, kfo)=v15_kcal_regr.l(iso, kfo);
 * deriving calibration values
 
 *' @code
-*' Food demand is calibrated to meet the historical food demand. For this purpose,
+*' Food demand and BMIis calibrated to meet the historical food demand.
+*' For this purpose,
 *' we calculate in the historical period with observations the residual between
 *' the regression and the observation. When the historical period ends, the
 *' calibarion balanceflow is fixed at the value of the last period.
@@ -278,21 +279,50 @@ if (sum(sameas(t_past,t),1) = 1,
     p15_kcal_balanceflow(t,iso,kfo)$(f15_kcal_pc_iso(t,iso,kfo)=0) = 0;
     p15_kcal_balanceflow(t,iso,kfo)$(f15_kcal_pc_iso(t,iso,kfo)>0) = f15_kcal_pc_iso(t,iso,kfo) - v15_kcal_regr.l(iso, kfo);
     p15_kcal_balanceflow_lastcalibrationyear(iso,kfo) = p15_kcal_balanceflow(t,iso,kfo);
+    i15_bmi_shr_calib(t,iso,sex,age_group,bmi_group15) =
+                      f15_bmi_shr_past(t,iso,age_group,sex,bmi_group15) -
+                      v15_bmi_shr_regr.l(iso,sex,age_group,bmi_group15);
+    i15_bmi_shr_calib_lastcalibrationyear(iso,sex,age_group,bmi_group15)=
+                      i15_bmi_shr_calib(t,iso,sex,age_group,bmi_group15);
+
 else
     p15_kcal_balanceflow(t,iso,kfo) = p15_kcal_balanceflow_lastcalibrationyear(iso,kfo) * f15_kcal_balanceflow_fadeout(t,"%c15_calibscen%");
+*' The divergence of the BMI from the historical data is kept constant over time
+*' or fadet out.
+   i15_bmi_shr_calib(t,iso,sex,age_group,bmi_group15) =
+                     i15_bmi_shr_calib_lastcalibrationyear(iso,sex,age_group,bmi_group15)
+                     * f15_kcal_balanceflow_fadeout(t,"%c15_calibscen%");
 );
 
-
 *' The balanceflow is added to the regression value
-       p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regr.l(iso,kfo) + p15_kcal_balanceflow(t,iso,kfo) * s15_calibrate;
+   p15_kcal_pc_iso(t,iso,kfo) =
+          v15_kcal_regr.l(iso,kfo) + p15_kcal_balanceflow(t,iso,kfo) * s15_calibrate;
+   p15_bmi_shr(t,iso,sex,age_group,bmi_group15) =
+           v15_bmi_shr_regr.l(iso,sex,age_group,bmi_group15)+
+           i15_bmi_shr_calib(t,iso,sex,age_group,bmi_group15);
 *' Eventual negative values that can occur due to balanceflow are set to zero
-       p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
+   p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
+*' The bmi shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
+   p15_bmi_shr(t,iso,sex,age_group,bmi_group15)$(p15_bmi_shr(t,iso,sex,age_group,bmi_group15)<0) = 0;
+   p15_bmi_shr(t,iso,sex,age_group,bmi_group15)$(p15_bmi_shr(t,iso,sex,age_group,bmi_group15)>1) = 1;
+*' The mismatch is balanced by moving the exceeding quantities into the middle BMI group.
+   p15_bmi_shr(t,iso,sex,age_group,"medium")=
+      1 - (sum(bmi_group15, p15_bmi_shr(t,iso,sex,age_group,bmi_group15)) - p15_bmi_shr(t,iso,sex,age_group,"medium"));
 
-*' Finally, the country-level parameter p15_kcal_pc_iso is aggregated to
+*' We recalculate the intake with the new values
+   p15_kcal_intake_total(t,iso) =
+         (
+           sum((sex, age_group, bmi_group15),
+               p15_bmi_shr(t,iso,sex,age_group,bmi_group15)*
+               im_demography(t,iso,sex,age_group) *
+               i15_intake(t,iso,sex,age_group,bmi_group15)
+           ) + i15_kcal_pregnancy(t,iso)
+         )/sum((sex,age_group), im_demography(t,iso,sex,age_group));
+
+*' The country-level parameter p15_kcal_pc_iso is aggregated to
 *' regional level into the parameter p15_kcal_pc. This parameter is provided
 *' to constraint q15_food_demand in the MAgPIE model, which defines
 *' the demand for food.
-*' Now, MAgPIE is executed.
 *' @stop
 
 * aggregate to regions
@@ -312,3 +342,7 @@ else
  p15_kcal_pc_initial(t,i,kfo) =  p15_kcal_pc(t,i,kfo);
 
  o15_kcal_regr_initial(iso,kfo)=v15_kcal_regr.l(iso,kfo);
+
+*' @code
+*' Now, MAgPIE is executed.
+*' @stop
