@@ -3,8 +3,8 @@ $setglobal c15_food_scenario  SSP2
 *             SRES: "A1", "A2", "B1", "B2"
 *            OTHER: "SSP1_boundary", "SSP2_boundary", "SSP3_boundary", "SSP4_boundary", "SSP5_boundary"
 
-$setglobal c15_calibscen  fadeout2050
-*   options:   fadeout2050
+$setglobal c15_calibscen  constant
+*   options:   constant, fadeout2050
 
 $setglobal c15_rumscen  mixed
 *   options:   constant, halving2050, mixed

@@ -96,6 +96,7 @@ parameters
   i15_bmi_shr_regr_pre(t,iso,sex,age_overgroup15,bmi_regr_type15)   BMI regression share precalculation based on regression parameters required for calibration (capita per capita)
   i15_bmi_shr_pre(t,iso,sex,age_overgroup15,bmi_group15) BMI share precalculation based on regression parameters required for calibration (capita per capita)
   i15_bmi_shr_calib(t,iso,sex,age_group,bmi_group15) calibration parameters to meet historical BMI shares (capita per capita)
+  i15_bmi_shr_calib_lastcalibrationyear(iso,sex,age_group,bmi_group15) calibration parameters of the last year with historical observatiosn (capita per capita)
 
 * diet structure
   i15_intake(t,iso,sex,age_group,bmi_group15) Mean intake by population group (kcal per capita per day)

@@ -203,16 +203,18 @@ if (sum(sameas(t_past,t),1) = 1,
 
 
    i15_bmi_shr_calib(t,iso,sex,age_group,bmi_group15)   =
-   f15_bmi_shr_past(t,iso,age_group,sex,bmi_group15) - 
+   f15_bmi_shr_past(t,iso,age_group,sex,bmi_group15) -
    sum(agegroup2overgroup(age_overgroup15,age_group),
        i15_bmi_shr_pre(t,iso,sex,age_overgroup15,bmi_group15)
    );
+
+   i15_bmi_shr_calib_lastcalibrationyear(iso,sex,age_group,bmi_group15)=i15_bmi_shr_calib(t,iso,sex,age_group,bmi_group15);
 
 else
 *' The divergence of the BMI from the historical data is kept constant over time
 *' or fadet out.
    i15_bmi_shr_calib(t,iso,sex,age_group,bmi_group15) =
-   i15_bmi_shr_calib(t-1,iso,sex,age_group,bmi_group15)
+   i15_bmi_shr_calib_lastcalibrationyear(iso,sex,age_group,bmi_group15)
    * f15_kcal_balanceflow_fadeout(t,"%c15_calibscen%");
 );
 *' pregnancy and lactation requires extra intake. We distribute the newborns among reproductive women and multuply with extra energy requirements

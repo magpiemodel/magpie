@@ -117,10 +117,9 @@ q15_bmi_shr_veryhigh(iso,sex,age_overgroup15) ..
         * v15_bmi_shr_regr(iso,sex,age_overgroup15,"highsplit")
         ;
 
-q15_bmi_shr(iso,sex,age_group) ..
-        sum(bmi_group15, v15_bmi_shr(iso,sex,age_group,bmi_group15))
-        =e=
-        1;
+*' From BMI shares of the large overgroups, we disaggregate to
+*' age-specific subgroups, and calibrate the estiamtes to match
+*' past observations. 
 
 q15_bmi_shr_agg(iso,sex,age_group,bmi_group15) ..
         v15_bmi_shr(iso,sex,age_group,bmi_group15)
@@ -129,6 +128,11 @@ q15_bmi_shr_agg(iso,sex,age_group,bmi_group15) ..
           v15_bmi_shr_overgroups(iso,sex,age_overgroup15,bmi_group15)
         )
         + v15_bmi_shr_calib(iso,sex,age_group,bmi_group15) ;
+
+q15_bmi_shr(iso,sex,age_group) ..
+        sum(bmi_group15, v15_bmi_shr(iso,sex,age_group,bmi_group15))
+        =e=
+        1;
 
 *' We want to calibrate BMI shares to historical values while avoiding
 *' negative values or values exceeding 1
