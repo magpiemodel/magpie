@@ -11,7 +11,7 @@ q71_feed_rum_liv(j2,kforage) .. vm_prod(j2,kforage) =e=
 
 q71_balanceflow_constrain(i2,kli_rum,kforage) ..
    sum(ct, fm_feed_balanceflow(ct,i2,kli_rum,kforage)) =e=
-   sum(cell(i2,j2)), v71_feed_balanceflow(j2,kli_rum,kforage))
+   sum(cell(i2,j2), v71_feed_balanceflow(j2,kli_rum,kforage))
    ;
  
 	 
