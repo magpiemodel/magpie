@@ -109,6 +109,8 @@ pkgs <- c("ggplot2",
           "luscale")
 install.packages(pkgs)
 ```
+For post-processing model outputs *Latex* is required (https://www.latex-project.org/get/). To be seen by the model it also needs to
+added to the PATH variable of your system. 
 
 ## HOW TO CONFIGURE
 Model run settings are set in `config/default.cfg` (or another config file of
