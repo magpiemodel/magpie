@@ -4,7 +4,5 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-i71_urban_area_share(j) =
-       pm_land_start(j,"urban")/sum(cell(i,j),sum(cell2(i,j3),pm_land_start(j3,"urban"))) 
-	   ;
-
+v71_feed_balanceflow.lo(j,kli_rum,kforage)$(sum(cell(i,j),fm_feed_balanceflow(t,i,kli_rum,kforage)) > 0) = 0;
+v71_feed_balanceflow.up(j,kli_rum,kforage)$(sum(cell(i,j),fm_feed_balanceflow(t,i,kli_rum,kforage)) < 0) = 0;
