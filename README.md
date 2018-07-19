@@ -63,7 +63,7 @@ either distributed via the offical R CRAN or via a separate repository hosted at
 PIK (PIK-CRAN). Before proceeding PIK-CRAN should be added to the list of
 available repositories via:
 ```
-options(repos = c(CRAN = "@CRAN@", pik = "http://rse.pik-potsdam.de/r/packages"))
+options(repos = c(getOption("repos"), pik = "https://rse.pik-potsdam.de/r/packages"))
 ```
 
 The `gdxrrw` package has to be downloaded directly from GAMS via
