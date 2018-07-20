@@ -39,7 +39,7 @@ for(reg in c("BRA","H12")) {
   cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev33_",cellcode,"_",regionscode,".tgz"),
                  paste0("rev3.35_",regionscode,"_magpie.tgz"),
                  paste0("rev3.35_",regionscode,"_validation.tgz"),
-                 "additional_data_rev3.43.tgz")
+                 "additional_data_rev3.44.tgz")
   
   for (ssp in c("SSP2")) {
     for (rcp in c("ref","26")){
