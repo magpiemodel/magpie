@@ -62,67 +62,68 @@ q15_budget(iso) ..
 *' First we estimate the BMI distribution within the population, using
 *' regression in an hierachrical tree. First we estimate the regression shares:
 
-q15_regr_bmi_shr(iso,sex,age_overgroup15,bmi_regr_type15) ..
-        v15_regr_overgroups(iso,sex,age_overgroup15,bmi_regr_type15)
+q15_regr_bmi_shr(iso,sex,agegroup15,bmi_regr_type15) ..
+        v15_regr_overgroups(iso,sex,agegroup15,bmi_regr_type15)
         =e=
-        f15_bmi_shr_regr_paras(sex,age_overgroup15,bmi_regr_type15,"intercept")
-        + (f15_bmi_shr_regr_paras(sex,age_overgroup15,bmi_regr_type15,"saturation") * v15_income_pc_real_ppp_iso(iso))
-        / (f15_bmi_shr_regr_paras(sex,age_overgroup15,bmi_regr_type15,"halfsaturation") + v15_income_pc_real_ppp_iso(iso));
+        f15_bmi_shr_regr_paras(sex,agegroup15,bmi_regr_type15,"intercept")
+        + (f15_bmi_shr_regr_paras(sex,agegroup15,bmi_regr_type15,"saturation") * v15_income_pc_real_ppp_iso(iso))
+        / (f15_bmi_shr_regr_paras(sex,agegroup15,bmi_regr_type15,"halfsaturation") + v15_income_pc_real_ppp_iso(iso));
 
 *' Then we apply these regression shares to an hierarchical tree structure
 
-q15_bmi_shr_verylow(iso,sex,age_overgroup15) ..
-        v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"verylow")
+q15_bmi_shr_verylow(iso,sex,agegroup15) ..
+        v15_bmi_shr_overgroups(iso,sex,agegroup15,"verylow")
         =e=
-        v15_regr_overgroups(iso,sex,age_overgroup15,"low")
-        * v15_regr_overgroups(iso,sex,age_overgroup15,"lowsplit")
+        v15_regr_overgroups(iso,sex,agegroup15,"low")
+        * v15_regr_overgroups(iso,sex,agegroup15,"lowsplit")
         ;
 
-q15_bmi_shr_low(iso,sex,age_overgroup15) ..
-        v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"low")
+q15_bmi_shr_low(iso,sex,agegroup15) ..
+        v15_bmi_shr_overgroups(iso,sex,agegroup15,"low")
         =e=
-        v15_regr_overgroups(iso,sex,age_overgroup15,"low")
-        * (1- v15_regr_overgroups(iso,sex,age_overgroup15,"lowsplit"))
+        v15_regr_overgroups(iso,sex,agegroup15,"low")
+        * (1- v15_regr_overgroups(iso,sex,agegroup15,"lowsplit"))
         ;
 
-q15_bmi_shr_medium(iso,sex,age_overgroup15) ..
-        v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"medium")
+q15_bmi_shr_medium(iso,sex,agegroup15) ..
+        v15_bmi_shr_overgroups(iso,sex,agegroup15,"medium")
         =e=
-        (1-v15_regr_overgroups(iso,sex,age_overgroup15,"low")
-        -v15_regr_overgroups(iso,sex,age_overgroup15,"high"))
-        * (1-v15_regr_overgroups(iso,sex,age_overgroup15,"mediumsplit"))
+        (1-v15_regr_overgroups(iso,sex,agegroup15,"low")
+        -v15_regr_overgroups(iso,sex,agegroup15,"high"))
+        * (1-v15_regr_overgroups(iso,sex,agegroup15,"mediumsplit"))
         ;
 
-q15_bmi_shr_medium_high(iso,sex,age_overgroup15) ..
-        v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"mediumhigh")
+q15_bmi_shr_medium_high(iso,sex,agegroup15) ..
+        v15_bmi_shr_overgroups(iso,sex,agegroup15,"mediumhigh")
         =e=
-        (1-v15_regr_overgroups(iso,sex,age_overgroup15,"low")
-        -v15_regr_overgroups(iso,sex,age_overgroup15,"high"))
-        * v15_regr_overgroups(iso,sex,age_overgroup15,"mediumsplit")
+        (1-v15_regr_overgroups(iso,sex,agegroup15,"low")
+        -v15_regr_overgroups(iso,sex,agegroup15,"high"))
+        * v15_regr_overgroups(iso,sex,agegroup15,"mediumsplit")
         ;
 
-q15_bmi_shr_high(iso,sex,age_overgroup15) ..
-        v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"high")
+q15_bmi_shr_high(iso,sex,agegroup15) ..
+        v15_bmi_shr_overgroups(iso,sex,agegroup15,"high")
         =e=
-        v15_regr_overgroups(iso,sex,age_overgroup15,"high")
-        * (1-v15_regr_overgroups(iso,sex,age_overgroup15,"highsplit"))
+        v15_regr_overgroups(iso,sex,agegroup15,"high")
+        * (1-v15_regr_overgroups(iso,sex,agegroup15,"highsplit"))
         ;
 
-q15_bmi_shr_veryhigh(iso,sex,age_overgroup15) ..
-        v15_bmi_shr_overgroups(iso,sex,age_overgroup15,"veryhigh")
+q15_bmi_shr_veryhigh(iso,sex,agegroup15) ..
+        v15_bmi_shr_overgroups(iso,sex,agegroup15,"veryhigh")
         =e=
-        v15_regr_overgroups(iso,sex,age_overgroup15,"high")
-        * v15_regr_overgroups(iso,sex,age_overgroup15,"highsplit")
+        v15_regr_overgroups(iso,sex,agegroup15,"high")
+        * v15_regr_overgroups(iso,sex,agegroup15,"highsplit")
         ;
+
 
 *' From BMI shares of the large overgroups, we disaggregate to
 *' age-specific subgroups.
 
-q15_bmi_shr_agg(iso,sex,age_group,bmi_group15) ..
-        v15_bmi_shr_regr(iso,sex,age_group,bmi_group15)
+q15_bmi_shr_agg(iso,sex,age,bmi_group15) ..
+        v15_bmi_shr_regr(iso,sex,age,bmi_group15)
         =e=
-        sum(agegroup2overgroup(age_overgroup15,age_group),
-          v15_bmi_shr_overgroups(iso,sex,age_overgroup15,bmi_group15)
+        sum(agegroup2age(agegroup15,age),
+          v15_bmi_shr_overgroups(iso,sex,agegroup15,bmi_group15)
         );
 
 
@@ -133,12 +134,12 @@ q15_bmi_shr_agg(iso,sex,age_group,bmi_group15) ..
 q15_intake(iso)..
          v15_kcal_intake_total_regr(iso) =e=
          (
-           sum((ct, sex, age_group, bmi_group15),
-               v15_bmi_shr_regr(iso,sex,age_group,bmi_group15)*
-               im_demography(ct,iso,sex,age_group) *
-               i15_intake(ct,iso,sex,age_group,bmi_group15)
+           sum((ct, sex, age, bmi_group15),
+               v15_bmi_shr_regr(iso,sex,age,bmi_group15)*
+               im_demography(ct,iso,sex,age) *
+               i15_intake(ct,iso,sex,age,bmi_group15)
            ) + sum(ct,i15_kcal_pregnancy(ct,iso))
-         )/sum((sex,age_group,ct), im_demography(ct,iso,sex,age_group));
+         )/sum((sex,age,ct), im_demography(ct,iso,sex,age));
 
 
 *' Food demand is based on food intake and a regression

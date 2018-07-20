@@ -4,8 +4,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 * get the scenario GDP & Populaiton data for iso countries
 
-im_physical_inactivity(t,iso,sex,age_group) = f09_physical_inactivity(t,iso,"%c09_gdp_scenario%",sex,age_group);
-im_demography(t,iso,sex,age_group) = f09_demography(t,iso,"%c09_gdp_scenario%",sex,age_group)+0.000001;
+im_physical_inactivity(t,iso,sex,age) = f09_physical_inactivity(t,iso,"%c09_gdp_scenario%",sex,age);
+im_demography(t,iso,sex,age) = f09_demography(t,iso,"%c09_gdp_scenario%",sex,age)+0.000001;
 
 i09_gdp_ppp_iso(t,iso) = f09_gdp_ppp_iso(t,iso,"%c09_gdp_scenario%");
 i09_gdp_mer_iso(t,iso) = f09_gdp_mer_iso(t,iso,"%c09_gdp_scenario%");

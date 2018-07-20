@@ -41,17 +41,17 @@ $ondelim
 $include "./modules/15_food/input/f15_demand_regression_parameters.cs3"
 $offdelim;
 
-table f15_bmi_shr_regr_paras(sex, age_overgroup15, bmi_regr_type15, parameters15)  BMI share regression parameters (-)
+table f15_bmi_shr_regr_paras(sex, agegroup15, bmi_regr_type15, parameters15)  BMI share regression parameters (-)
 $ondelim
-$include "./modules/15_food/input/f15_bmi_shr_regr_paras.csv"
+$include "./modules/15_food/input/f15_bmi_shr_regr_paras.cs3"
 $offdelim;
 
-table f15_bmi(sex,age_group,bmi_group15) mean body mass index for each bmi group (kg per m2)
+table f15_bmi(sex,age,bmi_group15) mean body mass index for each bmi group (kg per m2)
 $ondelim
 $include "./modules/15_food/input/f15_bmi.cs3"
 $offdelim;
 
-table f15_bmi_shr_past(t,iso,age_group,sex,bmi_group15) mean body mass index for each bmi group (kg per m2)
+table f15_bmi_shr_past(t,iso,age,sex,bmi_group15) mean body mass index for each bmi group (kg per m2)
 $ondelim
 $include "./modules/15_food/input/f15_bmi_shr_past.cs3"
 $offdelim;
@@ -63,7 +63,7 @@ $include "./modules/15_food/input/f15_kcal_pc_iso.csv"
 $offdelim;
 
 
-table f15_intake_pc_observed_iso(t_all,iso,sex,age_group)  Observed per-capita calorie intake in the past (kcal per captia per day)
+table f15_intake_pc_observed_iso(t_all,iso,sex,age)  Observed per-capita calorie intake in the past (kcal per captia per day)
 $ondelim
 $include "./modules/15_food/input/f15_intake_pc_observed_iso.cs3"
 $offdelim;
@@ -97,12 +97,12 @@ $include "./modules/15_food/input/f15_ruminant_fadeout.csv"
 $offdelim
 ;
 
-table f15_bodyheight(t_all,iso,sex,age_group)      body height (cm)
+table f15_bodyheight(t_all,iso,sex,age)      body height (cm)
 $ondelim
 $include "./modules/15_food/input/f15_bodyheight_historical.cs3"
 $offdelim;
 
-table f15_schofield_parameters_height(sex,age_group, schofield_parameters15) Schofield equation parameters (-)
+table f15_schofield_parameters_height(sex,age, schofield_parameters15) Schofield equation parameters (-)
 $ondelim
 $include "./modules/15_food/input/f15_schofield_parameters_height.cs3"
 $offdelim

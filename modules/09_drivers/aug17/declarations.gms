@@ -25,6 +25,6 @@ parameters
 
 * Development State
   im_development_state(t,i)  					Development state in high income level (1)
-  im_physical_inactivity(t,iso,sex,age_group)  	Share of population which is physically inactive (1)
-  im_demography(t,iso,sex,age_group) 			Population by groups (mio. per yr)
+  im_physical_inactivity(t,iso,sex,age)  	Share of population which is physically inactive (1)
+  im_demography(t,iso,sex,age) 			Population by groups (mio. per yr)
 ;

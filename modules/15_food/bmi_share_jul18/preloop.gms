@@ -2,7 +2,7 @@
 
 i15_demand_regr_paras(demand_subsys15,par15) = f15_demand_regr_paras(demand_subsys15,"%c15_food_scenario%",par15);
 
-p15_bodyheight(t,iso,sex,age_group,estimates15) = f15_bodyheight(t,iso,sex,age_group);
+p15_bodyheight(t,iso,sex,age,estimates15) = f15_bodyheight(t,iso,sex,age);
 
 * calculating growth food for historical period
 * in case it starts before period use values of first timestep
