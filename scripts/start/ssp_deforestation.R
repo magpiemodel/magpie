@@ -28,14 +28,20 @@ cfg$force_download <- TRUE
 #SSPs
 for(reg in c("BRA","H12")) {
   if(reg=="BRA"){
+	## Brazil run with 500 clusters and extra weight to region BRA
     cellcode <- "n500_BRA18_LAM26_ROW01"
     regionscode <- "d49a7a8baaab0edc754ebfc09462be0a"
   } else if(reg=="H12") {
+	## 12 region run with 200 clusters
     cellcode <- "h200"
     regionscode <- "690d3718e151be1b450b394c1064b1c5"
   } else {
     stop("Unknown region setting!")
   }
+  
+  ## Test for artificial NPI policy for Japan. 
+  ## forest_pro is forest protection in JPN
+  ## forest_nopro is no NPI in JPN with older version of additional_data_rev3.43
   
   forest_pro <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev33_",cellcode,"_",regionscode,".tgz"),
                          paste0("rev3.35_",regionscode,"_magpie.tgz"),
@@ -46,11 +52,20 @@ for(reg in c("BRA","H12")) {
                          paste0("rev3.35_",regionscode,"_validation.tgz"),
                          "additional_data_rev3.43.tgz")
   
+  ## Three SSP scenarios to analyse
   for (ssp in c("SSP2","SSP1","SSP5")) {
+  ## reference and mitigation runs (without co2 fertilization)
     for (rcp in c("ref","26")){
      #if(rcp=="26" && ssp %in% c("SSP3","SSP4")) next
-      for(tc in c("lg","ptc")) {
+	 
+	 ## lg is livestock gridded implementation by Kristine. ptc15 is pasture transport cost of 0.15 by Geanderson
+      for(tc in c("lg","ptc15")) {
+	  
+	  ## JPNfp is forest protection in JPN related to forest_pro
+	  ## JPNdf is no forest protection in JPN related to forest_nopro
         for(jpn in c("JPNfp","JPNdf")){
+		
+		## Two realization for Tau implementation.
           for(tau in c("endo_JUN16","endo_jun18")){
             
             cfg$title <- paste(reg,tc,jpn,tau,ssp,rcp,sep="_")
@@ -77,6 +92,7 @@ for(reg in c("BRA","H12")) {
               cfg$gms$disagg_lvst <- "simple_oct17" 
             } else stop("Unknown transport cost setting!")
             
+			## Submit the runs
             start_run(cfg,codeCheck=FALSE)
           }  
         }
