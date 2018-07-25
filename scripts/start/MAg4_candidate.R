@@ -26,8 +26,6 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
-cfg$recalibrate <- TRUE
-cfg$force_download <- TRUE
 
 #specify the title flag for all the scenarios
 #flag <- ""
@@ -65,6 +63,7 @@ for(reg in c("H12")) {
             cfg$gms$disagg_lvst <- "simple_oct17" 
                        
             start_run(cfg,codeCheck=FALSE)
+			
           }  
         }
       }
