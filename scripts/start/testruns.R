@@ -66,8 +66,8 @@ default <- function(cfg, func=mixed, ...) {
 default_rcp26 <- function(cfg, func=mixed, ...) {
   cfg$title <- "default_rcp26"
   cfg <- func(cfg, ...)
-  cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
-  cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
+  cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-REMIND-MAGPIE"
+  cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
   try(start_run(cfg=cfg, codeCheck=FALSE))
 }
 
@@ -80,8 +80,8 @@ performance_bau <- function(cfg, func=mixed, ...) {
 performance_rcp26 <- function(cfg, func=mixed, ...) {
   cfg$title <- "rcp26"
   cfg <- func(cfg,...)
-  cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
-  cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
+  cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-REMIND-MAGPIE"
+  cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
   try(performance_start(cfg=cfg, id=cfg$title, sequential=NA))
 }
 
@@ -114,8 +114,8 @@ ssp5 <- function(cfg, func=mixed, ...) {
 cc_rcp26 <- function(cfg, func=mixed, ...) {
   cfg$title <- "cc_rcp26"
   cfg <- func(cfg,...)
-  cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
-  cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
+  cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-REMIND-MAGPIE"
+  cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
   cfg <- setScenario(cfg, "cc")
   try(start_run(cfg=cfg, codeCheck=FALSE))
 }
@@ -123,8 +123,8 @@ cc_rcp26 <- function(cfg, func=mixed, ...) {
 cc_co2_rcp26 <- function(cfg, func=mixed, ...) {
   cfg$title <- "cc_co2_rcp26"
   cfg <- func(cfg, co2="co2", ...)
-  cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
-  cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
+  cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-REMIND-MAGPIE"
+  cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
   cfg <- setScenario(cfg, "cc")
   try(start_run(cfg=cfg, codeCheck=FALSE))
 }
@@ -138,8 +138,8 @@ indc <- function(cfg, func=mixed, ...) {
 indc_rcp26 <- function(cfg, func=mixed, ...) {
   cfg$title <- "indc_rcp26"
   cfg <- func(cfg,...)
-  cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
-  cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
+  cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-REMIND-MAGPIE"
+  cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
   try(start_run(cfg=cfg,scenario="INDC",codeCheck=FALSE))
 }
 
@@ -153,8 +153,8 @@ h12 <- function(cfg, func=mixed, ...) {
 h12_rcp26 <- function(cfg, func=mixed, ...) {
   cfg$title <- "h12_rcp26"
   cfg <- func(cfg, regionmapping = "h12", ...)
-  cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
-  cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA0"
+  cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-REMIND-MAGPIE"
+  cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
   try(start_run(cfg=cfg, codeCheck=FALSE))
 }
 
@@ -182,22 +182,19 @@ for(func in c(mixed,fixed)){
 
   performance_bau(cfg, func, calibration=calibration)
   performance_rcp26(cfg, func, calibration=calibration)
-  
+
   cc_default(cfg, func, calibration=calibration)
   cc_rcp26(cfg, func, calibration=calibration)
   cc_co2_rcp26(cfg, func, calibration=calibration)
-  
+
   timesteps(cfg, func, calibration=calibration)
-  
+
   ssp1(cfg, func, calibration=calibration)
   ssp5(cfg, func, calibration=calibration)
-  
+
   indc(cfg, func, calibration=calibration)
   indc_rcp26(cfg, func, calibration=calibration)
-  
+
   h12calibration <-h12(cfg, func)
   h12_rcp26(cfg, func, calibration=h12calibration)
 }
-
-
-
