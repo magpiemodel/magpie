@@ -41,8 +41,9 @@ for(reg in c("H12")) {
                          paste0("rev3.36_",regionscode,"_validation.tgz"),
                          "additional_data_rev3.45.tgz")
   
+  ### better use scenario_config for such complicated settings!
   for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
-    for (rcp in c("ref","26")){
+    for (rcp in c("Ref","26")){
      #if(rcp=="26" && ssp %in% c("SSP3","SSP4")) next
       for(tc in c("lg")) {
         for(jpn in c("JPNfp")){
@@ -51,7 +52,15 @@ for(reg in c("H12")) {
             cfg$title <- paste(ssp,rcp,sep="_")
             
             cfg <- setScenario(cfg,c(ssp,if(rcp=="ref") "NPI" else "NDC"))
-            cfg$gms$c56_pollutant_prices <- paste(if(ssp %in% c("SSP3","SSP4")) "SSP2" else ssp,rcp,"SPA0",sep="-")
+            if(rcp=="Ref"){spa="SPA0"}else{spa=paste0("SPA",substring(ssp,4,5))}
+            if(ssp%in%c("SSP1","SSP2","SSP5")){
+              model="REMIND-MAgPIE"
+            } else if (ssp=="SSP3"){
+              model="AIM-CGE"
+            } else {
+              model="GCAM4"
+            }
+            cfg$gms$c56_pollutant_prices <- paste(ssp,rcp,spa,"V15",model,sep="-")
             cfg$gms$c60_2ndgen_biodem <- paste(if(ssp %in% c("SSP3","SSP4")) "SSP2" else ssp,rcp,"SPA0",sep="-")
             
             cfg$gms$tc <- tau

@@ -20,12 +20,12 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 
 cfg$title <- "Base"
-cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
+cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
 cfg$gms$c60_2ndgen_biodem <- "SSP2-Ref-SPA0"
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "Pol"
-cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
+cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0-V15-REMIND-MAGPIE"
 cfg$gms$c60_2ndgen_biodem <- "SSP2-26-SPA0"
 start_run(cfg,codeCheck=FALSE)
 

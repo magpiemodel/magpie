@@ -34,10 +34,10 @@ for (res in c("h200","h600","h1000")) {
                        "rev3.17_8a828c6ed5004e77d1ba2025e8ea2261_validation.tgz",
                        "additional_data_rev3.32.tgz")
         if (scen == "Base") {
-          cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
+          cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
           cfg$gms$c60_2ndgen_biodem <- "SSP2-Ref-SPA0"
         } else {
-          cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0"
+          cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA0-V15-REMIND-MAGPIE"
           cfg$gms$c60_2ndgen_biodem <- "SSP2-26-SPA0"
         } 
         if (food == "E1") cfg$gms$s15_elastic_demand <- 1 else cfg$gms$s15_elastic_demand <- 0
