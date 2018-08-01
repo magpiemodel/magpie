@@ -18,12 +18,12 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
-cfg$recalibrate <- TRUE
 
 cfg$gms$landconversion <- "gdp_vegc_may18"
 cfg$title <- "lcc_default"
 start_run(cfg,codeCheck=FALSE)
 
+cfg$recalibrate <- TRUE
 cfg$gms$landconversion <- "global_static_aug18"
 for (est in c(1000,2000,3000,4000,5000,6000,8000,10000,12000,14000,16000,20000)) {
   for (cl in c(1,2,3,4,5,10,15,20,30,40,50,75)) {
