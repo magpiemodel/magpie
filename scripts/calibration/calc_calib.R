@@ -72,7 +72,7 @@ get_yieldcalib <- function(gdx_file) {
 }
 
 # Calculate the correction factor and save it
-update_calib<-function(gdx_file,calibrate_pasture=TRUE,calibrate_cropland=TRUE,damping_factor=0.8, calib_file, crop_max=1, calibration_step=""){
+update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,calibrate_cropland=TRUE,damping_factor=0.8, calib_file, crop_max=1, calibration_step=""){
   require(magclass)
   require(magpie4)
   if(!(modelstat(gdx_file)[1,1,1]%in%c(1,2,7))) stop("Calibration run infeasible")
@@ -99,26 +99,31 @@ update_calib<-function(gdx_file,calibrate_pasture=TRUE,calibrate_cropland=TRUE,d
     calib_divergence[,,"crop"] <- 0
   }
 
-  comment <- c(" description: Regional yield calibration file",
-               " unit: -",
-               " note: All values in the file are set to 1 if a new regional setup is used.",
-               " origin: scripts/calibration/calc_calib.R (path relative to model main directory)",
-               paste0(" creation date: ",date()))
-  write.magpie(round(setYears(calib_factor,NULL),2), calib_file, comment = comment)
-
   ### write down current calib factors (and area_factors) for tracking
   write_log <- function(x,file,calibration_step) {
     x <- add_dimension(x, dim=3.1, add="iteration", nm=calibration_step)
     try(write.magpie(round(setYears(x,NULL),2), file, append = (calibration_step!=1)))
   }
 
-  write_log(calib_factor,     "calib_factor.cs3"     , calibration_step)
   write_log(calib_correction, "calib_correction.cs3" , calibration_step)
   write_log(calib_divergence, "calib_divergence.cs3" , calibration_step)
   write_log(area_factor,      "calib_area_factor.cs3", calibration_step)
   write_log(tc_factor,        "calib_tc_factor.cs3"  , calibration_step)
 
-  return(calib_divergence)
+  # in case of sufficient convergence, stop here (no additional update of
+  # calibration factors!)
+  if(all(calib_divergence < calib_accuracy)) return(TRUE)
+
+  comment <- c(" description: Regional yield calibration file",
+               " unit: -",
+               paste0(" note: Calibration step ",calibration_step),
+               " origin: scripts/calibration/calc_calib.R (path relative to model main directory)",
+               paste0(" creation date: ",date()))
+  write.magpie(round(setYears(calib_factor,NULL),2), calib_file, comment = comment)
+
+  write_log(calib_factor,     "calib_factor.cs3"     , calibration_step)
+
+  return(FALSE)
 }
 
 
@@ -140,8 +145,8 @@ calibrate_magpie <- function(n_maxcalib = 1,
     cat(paste("\nStarting calibration iteration",i,"\n"))
     calibration_run(putfolder=putfolder, calib_magpie_name=calib_magpie_name, logoption=logoption)
     if(debug) file.copy(paste0(putfolder,"/fulldata.gdx"),paste0("fulldata_calib",i,".gdx"))
-    calib_divergence <- update_calib(gdx_file=paste0(putfolder,"/fulldata.gdx"),calibrate_pasture=calibrate_pasture,calibrate_cropland=calibrate_cropland,damping_factor=damping_factor, calib_file=calib_file, calibration_step=i)
-    if(all(calib_divergence < calib_accuracy)){
+    done <- update_calib(gdx_file=paste0(putfolder,"/fulldata.gdx"),calib_accuracy=calib_accuracy, calibrate_pasture=calibrate_pasture,calibrate_cropland=calibrate_cropland,damping_factor=damping_factor, calib_file=calib_file, calibration_step=i)
+    if(done){
       break
     }
   }
