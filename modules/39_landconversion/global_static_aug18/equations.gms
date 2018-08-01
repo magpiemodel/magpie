@@ -11,8 +11,8 @@
 *' The sum of establishment and clearing costs in the current time step 
 *' is multiplied with an annuity factor to distribute these costs over time. 
 q39_cost_landcon_annuity(j2,land) .. v39_cost_landcon_annuity(j2,land) =e=
-	(vm_landexpansion(j2,land_establish39)*s39_cost_establish;
- 	+ vm_carbon_stock_reduction(j2,land_clearing39,"vegc")*s39_cost_clearing)
+	(vm_landexpansion(j2,land)*i39_cost_establish(land)
+ 	+ vm_carbon_stock_reduction(j2,land,"vegc")*i39_cost_clearing(land))
  	* sum(cell(i2,j2),pm_interest(i2)/(1+pm_interest(i2)));
 
 *' Land conversion costs in the current time step consist of 

@@ -17,7 +17,6 @@
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/39_landconversion/global_static_aug18/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/39_landconversion/global_static_aug18/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/39_landconversion/global_static_aug18/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/39_landconversion/global_static_aug18/equations.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/39_landconversion/global_static_aug18/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/39_landconversion/global_static_aug18/presolve.gms"

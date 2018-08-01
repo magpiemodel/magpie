@@ -23,6 +23,8 @@ scalar
 ;
 
 parameters
+ i39_cost_establish(land)			   global land establishment costs (USD per hectare)
+ i39_cost_clearing(land)               global land clearing costs (USD per ton C)
  p39_cost_landcon_past(t,j,land)       costs for landconversion from the past (mio USD per yr)
  pc39_cost_landcon_past(j,land)        current costs for landconversion from the past (mio USD per yr)
 ;

@@ -8,7 +8,7 @@ scalars
   s56_reward_neg_emis "reward negative co2 emissions (-Inf) or not (0)" / 0 /
 ;
 
-$setglobal c56_pollutant_prices  SSP2-60-SPA2-V15-MESSAGE-GLOBIOM
+$setglobal c56_pollutant_prices  SSP2-Ref-SPA0-V15-REMIND-MAGPIE
 $setglobal c56_emis_policy  ssp
 $setglobal c56_aff_policy  vegc33
 
