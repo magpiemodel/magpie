@@ -6,7 +6,7 @@
 
 sets
    land_establish39(land)
-        / crop, past, foresty /
+        / crop, past, forestry /
 
    land_clearing39(land)
         / primforest, secdforest, other /
