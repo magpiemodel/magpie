@@ -4,9 +4,9 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c39_cost_scenario_establish  high
+$setglobal c39_cost_scenario_establish  magpie3
 * options: off, low, medium, high, veryhigh, magpie3, pure_estab
-$setglobal c39_cost_scenario_clearing  medium
+$setglobal c39_cost_scenario_clearing  corrected
 * options: off, verylow, low, medium, high, corrected
 
 

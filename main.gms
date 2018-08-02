@@ -8,25 +8,25 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev32_h200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: 8e4890f8378ab182aceb637abf8c2e34
-* Repository: /p/projects/landuse/data/input/archive
+* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev33_h200_690d3718e151be1b450b394c1064b1c5.tgz
+* md5sum: 6839aaeaad4503631f6238cb3350c4ac
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
-* Used data set: rev3.34_690d3718e151be1b450b394c1064b1c5_magpie.tgz
-* md5sum: 2d6db82fa55dafc8b2bfbb850a911130
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: rev4.1_690d3718e151be1b450b394c1064b1c5_magpie.tgz
+* md5sum: cd610fa1ad137cc25be25a8f6f32c261
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev3.34_690d3718e151be1b450b394c1064b1c5_validation.tgz
-* md5sum: 3beb910069401cffafd2e4f3fe74733a
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: rev4.1_690d3718e151be1b450b394c1064b1c5_validation.tgz
+* md5sum: 66ef83d77b3c0e2fb9d49d245d837673
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev3.40.tgz
-* md5sum: 35682397ae23721967537305ce112c27
-* Repository: /p/projects/landuse/data/input/archive
+* Used data set: additional_data_rev3.45.tgz
+* md5sum: ebd4fa812bfcfcf8ea32dae6a9d4d775
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
-* Used data set: calibration_H12_29Jun18.tgz
-* md5sum: 8a3c9a5a849e5f96ecdd545b410aee43
-* Repository: /p/projects/landuse/data/input/calibration
+* Used data set: calibration_H12_02Aug18.tgz
+* md5sum: 174486a33e31e4f030a7189333649868
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/calibration
 * 
 * Low resolution: h200
 * High resolution: 0.5
@@ -39,27 +39,27 @@ $title magpie
 * 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
-* Regions data revision: 3.34
+* Regions data revision: 4.1
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/noco2
-* * Additional input folder: /p/projects/landuse/data/input/other/rev32
-* * Revision: 32
+* * Additional input folder: /p/projects/landuse/data/input/other/rev33
+* * Revision: 33
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
 * 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: h200
-* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev32_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev32_h200_690d3718e151be1b450b394c1064b1c5.tgz
+* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev33_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev33_h200_690d3718e151be1b450b394c1064b1c5.tgz
 * * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
-* * Call: aggregation(input_file = paste0(cfg$base_folder, "/", set_folder,     "_", cfg$high_res, ".tgz"), regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
+* * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
 * 
 * 
 * 
-* Last modification (input data): Tue Jul 10 12:25:31 2018
+* Last modification (input data): Thu Aug  2 11:19:46 2018
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -96,7 +96,7 @@ $setglobal drivers  aug17
 $setglobal land  feb15
 $setglobal costs  default
 $setglobal interest_rate  reg_feb18
-$setglobal tc  endo_JUN16
+$setglobal tc  endo_jun18
 $setglobal yields  dynamic_apr18
 
 $setglobal food  anthropometrics_jan18
@@ -115,7 +115,7 @@ $setglobal urban  static
 $setglobal natveg  dynamic_may18
 
 $setglobal factor_costs  mixed_feb17
-$setglobal landconversion  gdp_vegc_may18
+$setglobal landconversion  global_static_aug18
 
 $setglobal transport  gtap_nov12
 $setglobal area_equipped_for_irrigation  endo_apr13
@@ -137,7 +137,7 @@ $setglobal som  off
 $setglobal bioenergy  standard_flexreg_may17
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
-$setglobal disagg_lvst  off
+$setglobal disagg_lvst  simple_oct17
 
 $setglobal optimization  nlp_apr17
 
