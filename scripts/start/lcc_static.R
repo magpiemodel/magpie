@@ -18,18 +18,18 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
-
-cfg$gms$landconversion <- "gdp_vegc_may18"
-cfg$title <- "lcc_default"
-start_run(cfg,codeCheck=FALSE)
-
 cfg$recalibrate <- TRUE
+
 cfg$gms$landconversion <- "global_static_aug18"
-for (est in c(1000,2000,3000,4000,5000,6000,8000,10000,12000,14000,16000,20000)) {
-  for (cl in c(1,2,3,4,5,10,15,20,30,40,50,75)) {
-    cfg$title <- paste0("lcc_est",est,"_cl",cl)
+for (est in c(3000,4000,5000,6000,7000,8000,9000,10000)) {
+  for (cl in c(0,1,5,10,20)) {
+    cfg$title <- paste0("lcc3_est",est,"_cl",cl)
     manipulateConfig("modules/39_landconversion/global_static_aug18/preloop.gms",s39_cost_establish=est)
     manipulateConfig("modules/39_landconversion/global_static_aug18/preloop.gms",s39_cost_clearing=cl)
     start_run(cfg,codeCheck=FALSE)
   }
 }
+
+cfg$gms$landconversion <- "gdp_vegc_may18"
+cfg$title <- "lcc3_old"
+start_run(cfg,codeCheck=FALSE)
