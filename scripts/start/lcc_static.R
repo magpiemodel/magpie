@@ -21,9 +21,9 @@ cfg$results_folder <- "output/:title:"
 #cfg$recalibrate <- TRUE
 
 cfg$gms$landconversion <- "global_static_aug18"
-for (est in c(7000,7500,8000)) {
-  for (cl in c(5,3)) {
-    cfg$title <- paste0("lcc4_est",est,"_cl",cl)
+for (est in c(8000,7500,7000,6500,6000)) {
+  for (cl in c(5,3,1,0)) {
+    cfg$title <- paste0("lcc5_est",est,"_cl",cl)
     manipulateConfig("modules/39_landconversion/global_static_aug18/preloop.gms",s39_cost_establish=est)
     manipulateConfig("modules/39_landconversion/global_static_aug18/preloop.gms",s39_cost_clearing=cl)
     start_run(cfg,codeCheck=FALSE)
@@ -32,5 +32,5 @@ for (est in c(7000,7500,8000)) {
 
 cfg$recalibrate <- TRUE
 cfg$gms$landconversion <- "gdp_vegc_may18"
-cfg$title <- "lcc4_old"
+cfg$title <- "lcc5_old"
 start_run(cfg,codeCheck=FALSE)
