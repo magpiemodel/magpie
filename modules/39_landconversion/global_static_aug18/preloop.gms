@@ -4,7 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-s39_cost_establish = 10000;
+s39_cost_establish = 8000;
 s39_cost_clearing = 5;
 
 i39_cost_establish(land) = 0;
