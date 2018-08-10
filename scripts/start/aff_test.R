@@ -19,13 +19,32 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 
-cfg$title <- "Base"
+cfg$title <- "SSP2_Ref"
 cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
 cfg$gms$c60_2ndgen_biodem <- "SSP2-Ref-SPA0"
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "Pol"
+cfg$title <- "SSP2_26_Aff33"
 cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-REMIND-MAGPIE"
 cfg$gms$c60_2ndgen_biodem <- "SSP2-26-SPA2"
+cfg$gms$c56_aff_policy <- "vegc33"
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- "SSP2_26_Aff50"
+cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-REMIND-MAGPIE"
+cfg$gms$c60_2ndgen_biodem <- "SSP2-26-SPA2"
+cfg$gms$c56_aff_policy <- "vegc50"
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- "SSP2_26_Aff75"
+cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-REMIND-MAGPIE"
+cfg$gms$c60_2ndgen_biodem <- "SSP2-26-SPA2"
+cfg$gms$c56_aff_policy <- "vegc75"
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- "SSP2_26_Aff100"
+cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-REMIND-MAGPIE"
+cfg$gms$c60_2ndgen_biodem <- "SSP2-26-SPA2"
+cfg$gms$c56_aff_policy <- "vegc100"
 start_run(cfg,codeCheck=FALSE)
 
