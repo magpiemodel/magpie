@@ -51,7 +51,7 @@ $ondelim
 $include "./modules/15_food/input/f15_bmi.cs3"
 $offdelim;
 
-table f15_bmi_shr_past(t,iso,age,sex,bmi_group15) mean body mass index for each bmi group (kg per m2)
+table f15_bmi_shr_past(t_all,iso,age,sex,bmi_group15) mean body mass index for each bmi group (kg per m2)
 $ondelim
 $include "./modules/15_food/input/f15_bmi_shr_past.cs3"
 $offdelim;
