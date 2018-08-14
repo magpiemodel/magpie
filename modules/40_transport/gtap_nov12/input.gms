@@ -4,6 +4,12 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+
+scalars
+  s40_pasture_transport_costs  Transport costs for pasture (USD05 per tDM per min per yr)     / 0 /
+;
+
+
 parameters
 f40_distance(j) Transport distance to urban center (min)
 /
@@ -19,3 +25,5 @@ $ondelim
 $include "./modules/40_transport/gtap_nov12/input/f40_transport_costs.csv"
 $offdelim
 /;
+
+f40_transport_costs("pasture") = s40_pasture_transport_costs;

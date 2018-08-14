@@ -106,13 +106,54 @@ for (scen in rownames(scenarios)) {
   # Choose GHG tax scenario
   if (scenarios[scen,"co2tax_2025"] == "built-in") {
     cfg$gms$c56_pollutant_prices <- scenarios[scen,"co2tax_name"]
-    # *   options:  SSP1-Ref-SPA0, SSP2-Ref-SPA0, SSP5-Ref-SPA0,
-    # *             SSP1-26-SPA0,  SSP1-37-SPA0,  SSP1-45-SPA0,
-    # *             SSP2-26-SPA0,  SSP2-37-SPA0,  SSP2-45-SPA0, SSP2-60-SPA0,
-    # *             SSP5-26-SPA0,  SSP5-37-SPA0,  SSP5-45-SPA0, SSP5-60-SPA0,
-    # *             SSP1-26-SPA1,  SSP1-37-SPA1,  SSP1-45-SPA1,
-    # *             SSP2-26-SPA2,  SSP2-37-SPA2,  SSP2-45-SPA2, SSP2-60-SPA2,
-    # *             SSP5-26-SPA5,  SSP5-37-SPA5,  SSP5-45-SPA5, SSP5-60-SPA5,
+    # *   options:  
+    # * "SSP1-20-SPA1-V15-IMAGE",
+    # * "SSP1-26-SPA1-V15-IMAGE"  ,
+    # * "SSP1-34-SPA1-V15-IMAGE"  ,
+    # * "SSP1-45-SPA1-V15-IMAGE" ,
+    # * "SSP1-Ref-SPA0-V15-IMAGE",
+    #
+    # * "SSP1-20-SPA1-V15-REMIND-MAGPIE",
+    # * "SSP1-26-SPA1-V15-REMIND-MAGPIE"  ,
+    # * "SSP1-34-SPA1-V15-REMIND-MAGPIE"  ,
+    # * "SSP1-37-SPA1-V15-REMIND-MAGPIE",
+    # * "SSP1-45-SPA1-V15-REMIND-MAGPIE" ,
+    # * "SSP1-Ref-SPA0-V15-REMIND-MAGPIE",
+    #
+    # * "SSP2-18-SPA2-V15-MESSAGE-GLOBIOM" ,
+    # * "SSP2-19-SPA2-V15-MESSAGE-GLOBIOM",
+    # * "SSP2-20-SPA2-V15-MESSAGE-GLOBIOM",
+    # * "SSP2-26-SPA2-V15-MESSAGE-GLOBIOM",
+    # * "SSP2-34-SPA2-V15-MESSAGE-GLOBIOM",
+    # * "SSP2-45-SPA2-V15-MESSAGE-GLOBIOM",
+    # * "SSP2-60-SPA2-V15-MESSAGE-GLOBIOM",
+    # * "SSP2-Ref-SPA0-V15-MESSAGE-GLOBIOM",
+    #
+    # * "SSP2-20-SPA2-V15-REMIND-MAGPIE",
+    # * "SSP2-26-SPA2-V15-REMIND-MAGPIE",
+    # * "SSP2-34-SPA2-V15-REMIND-MAGPIE",
+    # * "SSP2-37-SPA2-V15-REMIND-MAGPIE",
+    # * "SSP2-45-SPA2-V15-REMIND-MAGPIE",
+    # * "SSP2-60-SPA2-V15-REMIND-MAGPIE",
+    # * "SSP2-Ref-SPA0-V15-REMIND-MAGPIE",
+    #
+    # * "SSP3-34-SPA3-V15-AIM-CGE",
+    # * "SSP3-45-SPA3-V15-AIM-CGE",
+    # * "SSP3-60-SPA3-V15-AIM-CGE",
+    #
+    # * "SSP4-26-SPA4-V15-GCAM4",
+    # * "SSP4-34-SPA4-V15-GCAM4",
+    # * "SSP4-45-SPA4-V15-GCAM4",
+    # * "SSP4-60-SPA4-V15-GCAM4",
+    # * "SSP4-Ref-SPA0-V15-GCAM4",
+    #
+    # * "SSP5-20-SPA5-V15-REMIND-MAGPIE",
+    # * "SSP5-26-SPA5-V15-REMIND-MAGPIE",
+    # * "SSP5-34-SPA5-V15-REMIND-MAGPIE",
+    # * "SSP5-37-SPA5-V15-REMIND-MAGPIE",
+    # * "SSP5-45-SPA5-V15-REMIND-MAGPIE",
+    # * "SSP5-60-SPA5-V15-REMIND-MAGPIE",
+    # * "SSP5-Ref-SPA0-V15-REMIND-MAGPIE"
     # *             coupling
   } else {
     # If none of the built-in GHG price scenarios was chosen, provide GHG prices

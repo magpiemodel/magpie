@@ -140,23 +140,5 @@ m15_food_demand.holdfixed = 1 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_dem_food(t,i,kall,type)                      Demand for food (mio. tDM per yr)
- ov15_kcal_regression(t,iso,kfo,type)            Uncalibrated regression estimates of calorie demand (kcal per cap per day)
- ov15_kcal_regression_total(t,iso,type)          Uncalibrated regression estimates of  total per capita calories (kcal per cap per day)
- ov15_regression(t,iso,demand_subsys15,type)     Uncalibrated regression estimates of kcal shares (-)
- ov15_income_pc_real_ppp_iso(t,iso,type)         real income per capita (USD per cap)
- ov15_income_balance(t,iso,type)                 balance variable to balance cases in which reduction in income beats gdp pc (USD05 per cap)
- ov15_kcal_intake_regression(t,iso,sex,age,type) Uncalibrated regression estimate for per-capita intake (kcal per cap per day)
- ov15_objective(t,type)                          objective term (USD05)
- oq15_food_demand(t,i,kfo,type)                  Food demand (mio. kcal)
- oq15_aim(t,type)                                aim function food demand model (mio. USD05)
- oq15_budget(t,iso,type)                         Household Budget Constraint (USD05 per capita per day)
- oq15_regression_kcal(t,iso,type)                Per capita total consumption (kcal per capita per day)
- oq15_regression(t,iso,demand_subsys15,type)     Share regressions  (kcal per kcal)
- oq15_foodtree_kcal_animals(t,iso,kfo_ap,type)   Demand for animal products  (kcal per capita per day)
- oq15_foodtree_kcal_processed(t,iso,kfo_pf,type) Demand for processed products  (kcal per capita per day)
- oq15_foodtree_kcal_staples(t,iso,kfo_st,type)   Demand for staple products  (kcal per capita per day)
- oq15_foodtree_kcal_vegetables(t,iso,type)       Demand for vegetable and fruits products  (kcal per capita per day)
- oq15_regression_intake(t,iso,sex,age,type)      intake regressions  (kcal per capita per day)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

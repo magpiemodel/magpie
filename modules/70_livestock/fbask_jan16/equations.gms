@@ -11,12 +11,12 @@
 *' inconsistencies with the FAO inventory of national feed use in the case of
 *' crops as well as consideration of alternative feed sources that reduce e.g.
 *' the demand for grazed biomass like scavenging and roadside grazing are
-*' balanced out by the parameter `f70_feed_balanceflow`.
+*' balanced out by the parameter `fm_feed_balanceflow`.
 
 q70_feed(i2,kap,kall) ..
  vm_dem_feed(i2,kap,kall) =g= vm_prod_reg(i2,kap)
      *sum(ct,f70_feed_baskets(ct,i2,kap,kall,"%c70_feed_scen%"))
-     +sum(ct,f70_feed_balanceflow(ct,i2,kap,kall));
+     +sum(ct,fm_feed_balanceflow(ct,i2,kap,kall));
 
 *' Factor requirement costs (e.g. labour, capital, but without costs for feed)
 *' of livestock production depend on the amount of production and the per-unit

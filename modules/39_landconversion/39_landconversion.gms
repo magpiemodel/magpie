@@ -15,4 +15,5 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%landconversion%" == "gdp_vegc_may18" $include "./modules/39_landconversion/gdp_vegc_may18.gms"
+$Ifi "%landconversion%" == "global_static_aug18" $include "./modules/39_landconversion/global_static_aug18.gms"
 *###################### R SECTION END (MODULETYPES) ############################

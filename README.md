@@ -63,7 +63,7 @@ either distributed via the offical R CRAN or via a separate repository hosted at
 PIK (PIK-CRAN). Before proceeding PIK-CRAN should be added to the list of
 available repositories via:
 ```
-options(repos = c(CRAN = "@CRAN@", pik = "http://rse.pik-potsdam.de/r/packages"))
+options(repos = c(CRAN = "@CRAN@", pik = "https://rse.pik-potsdam.de/r/packages"))
 ```
 
 The `gdxrrw` package has to be downloaded directly from GAMS via
@@ -109,6 +109,8 @@ pkgs <- c("ggplot2",
           "luscale")
 install.packages(pkgs)
 ```
+For post-processing model outputs *Latex* is required (https://www.latex-project.org/get/). To be seen by the model it also needs to
+added to the PATH variable of your system. 
 
 ## HOW TO CONFIGURE
 Model run settings are set in `config/default.cfg` (or another config file of

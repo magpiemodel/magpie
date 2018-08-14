@@ -6,11 +6,13 @@
 
 variables
          vm_nr_som(j)                        release of soil organic matter (Tg Nr)
+         vm_costs_overrate_cropdiff(i)	     punishment costs for overrated cropland difference (mio. USD05 per yr)  
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_nr_som(t,j,type) release of soil organic matter (Tg Nr)
+ ov_nr_som(t,j,type)                  release of soil organic matter (Tg Nr)
+ ov_costs_overrate_cropdiff(t,i,type) punishment costs for overrated cropland difference (mio. USD05 per yr)  
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

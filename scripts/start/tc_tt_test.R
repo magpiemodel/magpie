@@ -25,7 +25,15 @@ for (ssp in c("SSP2","SSP5")) {
       for (tt in c("TToff","TTon")) {
         cfg$title <- paste(ssp,rcp,tc,tt,sep="_")
         cfg <- setScenario(cfg,ssp)
-        cfg$gms$c56_pollutant_prices <- paste(if(ssp %in% c("SSP3","SSP4")) "SSP2" else ssp,rcp,"SPA0",sep="-")
+        if(rcp=="Ref"){spa="SPA0"}else{spa=paste0("SPA",substring(ssp,4,5))}
+            if(ssp%in%c("SSP1","SSP2","SSP5")){
+              model="REMIND-MAgPIE"
+            } else if (ssp=="SSP3"){
+              model="AIM-CGE"
+            } else {
+              model="GCAM4"
+            }
+        cfg$gms$c56_pollutant_prices <- paste(ssp,rcp,spa,"V15",model,sep="-")
         cfg$gms$c60_2ndgen_biodem <- paste(if(ssp %in% c("SSP3","SSP4")) "SSP2" else ssp,rcp,"SPA0",sep="-")
         cfg$gms$tc <- if(tc=="TCold") "endo_JUN16" else if (tc=="TCnew") "endo_jun18"
         cfg$gms$s21_trade_tariff <- if(tt=="TToff") 0 else if (tt=="TTon") 1
