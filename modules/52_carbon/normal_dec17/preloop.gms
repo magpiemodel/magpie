@@ -11,7 +11,9 @@ vm_carbon_stock.l(j,land,c_pools) = fm_carbon_density("y1995",j,land,c_pools)*pc
 pc52_carbon_stock(j,land,c_pools) = vm_carbon_stock.l(j,land,c_pools);
 
 *age-class carbon density start values
-pc52_carbon_density_start(t,j,c_pools) = fm_carbon_density(t,j,"past",c_pools);
+pc52_carbon_density_start(t,j,"vegc") = 0;
+pc52_carbon_density_start(t,j,"litc") = fm_carbon_density(t,j,"past","litc");
+pc52_carbon_density_start(t,j,"soilc") = fm_carbon_density(t,j,"past","soilc");
 
 *calculate vegetation age-class carbon density in current time step with chapman richards equation
 pm_carbon_density_ac(t,j,ac,"vegc") = m_growth_vegc(pc52_carbon_density_start(t,j,"vegc"),fm_carbon_density(t,j,"other","vegc"),sum(clcl,pm_climate_class(j,clcl)*f52_growth_par(clcl,"k")),sum(clcl,pm_climate_class(j,clcl)*f52_growth_par(clcl,"m")),(ord(ac)-1));
