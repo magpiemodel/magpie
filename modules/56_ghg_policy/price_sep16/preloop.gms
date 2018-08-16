@@ -18,6 +18,8 @@ v56_emission_costs_cell_oneoff.lo(j2,emis_cell_oneoff56) = s56_reward_neg_emis;
 *http://de.wikihow.com/Berechnung-einer-Wachstumsrate#/Bild:Calculate-Growth-Rate-Step-6.jpg
 p56_ghg_price_growth_rate(t,i,pollutants) = 0;
 p56_ghg_price_growth_rate(t,i,pollutants)$(ord(t)>1 AND im_pollutant_prices(t-1,i,pollutants) > 0) = (im_pollutant_prices(t,i,pollutants)/im_pollutant_prices(t-1,i,pollutants))**(1/m_yeardiff(t))-1;
+*remove negative values
+p56_ghg_price_growth_rate(t,i,pollutants)$(p56_ghg_price_growth_rate(t,i,pollutants) <= 0) = 0;
 *remove values exceeding 10%
 p56_ghg_price_growth_rate(t,i,pollutants)$(p56_ghg_price_growth_rate(t,i,pollutants) > 0.1) = 0.1;
 *calculate average growth rate over time
