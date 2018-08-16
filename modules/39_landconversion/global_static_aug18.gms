@@ -5,14 +5,13 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description
-*'In the global_static_aug18 realisation, per hectare land conversion costs are separated into 
+*' In the global_static_aug18 realisation, per hectare land conversion costs are separated into 
 *' costs for expansion of cropland, pasture and forestry (establishment costs) and 
-*' costs for reduction of primary forest, secondary forest and other natural land (clearing costs).
-*' Due to limited data availability for land conversion costs we scale a global range of 
-*' costs from the literature with regional GDP per capita and 
-*' spatially explicit vegetation carbon density @kreidenweis_pasture_2018.
+*' costs for clearing of primary forest, secondary forest and other natural land (clearing costs).
+*' We assume a global cost factor of 8000 USD/ha (static over time) for establishment of managed land. 
+*' For clearing of natural vegetation we assume a global static cost factor of 5 USD/tC (based on @kreidenweis_pasture_2018). 
 *'
-*' @limitations Data availability for per hectare land conversion costs is very limited.
+*' @limitations Data availability for land conversion costs is very limited.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/39_landconversion/global_static_aug18/sets.gms"
