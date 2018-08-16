@@ -106,7 +106,7 @@ $setglobal production  flexreg_apr16
 $setglobal residues  flexreg_apr16
 $setglobal processing  coupleproducts_feb17
 
-$setglobal trade  selfsuff_flexreg_cost
+$setglobal trade  selfsuff_tariff
 
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
