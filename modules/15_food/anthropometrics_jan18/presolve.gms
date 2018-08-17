@@ -181,12 +181,12 @@ p15_kcal_pregnancy(t,iso,"F",reproductive)$sum(reproductive2, im_demography(t,is
 *' @stop
 
 
-* the following calcuation of p15_intake_balanceflow is only required for postprocessing.
+* the following calcuation of p15_intake_calib is only required for postprocessing.
 if (sum(sameas(t_past,t),1) = 1,
 
    p15_bodyheight(t,iso,sex,age,estimates15) = f15_bodyheight(t,iso,sex,age);
 
-   p15_intake_balanceflow(t,iso,sex,age) =
+   p15_intake_calib(t,iso,sex,age) =
       f15_intake_pc_observed_iso(t,iso,sex,age) -
       (p15_kcal_requirement(t,iso,sex,age)+ p15_kcal_pregnancy(t,iso,sex,age))*
       (
@@ -195,9 +195,9 @@ if (sum(sameas(t_past,t),1) = 1,
           +f15_intake_regr_paras(sex,age,"intercept")
       );
 
-   p15_intake_balanceflow_lastcalibrationyear(iso,sex,age)=p15_intake_balanceflow(t,iso,sex,age);
+   p15_intake_calib_lastcalibrationyear(iso,sex,age)=p15_intake_calib(t,iso,sex,age);
 else
-    p15_intake_balanceflow(t,iso,sex,age) =  p15_intake_balanceflow_lastcalibrationyear(iso,sex,age) * f15_kcal_balanceflow_fadeout(t,"%c15_calibscen%");
+    p15_intake_calib(t,iso,sex,age) =  p15_intake_calib_lastcalibrationyear(iso,sex,age) * f15_kcal_calib_fadeout(t,"%c15_calibscen%");
 );
 
 
@@ -249,19 +249,29 @@ p15_kcal_regression(t, iso, kfo)=v15_kcal_regression.l(iso, kfo);
 *' Food demand is calibrated to meet the historical food demand. For this purpose,
 *' we calculate in the historical period with observations the residual between
 *' the regression and the observation. When the historical period ends, the
-*' calibarion balanceflow is fixed at the value of the last period.
+*' calibarion parameter is fixed at the value of the last period.
+*' Additionally, we also need a balanceflow, which accounts for the mismatch
+*' of demand estimates (for all countries) and the countries with FAOSTAT data
+*' (only a subset), such that FAOSTAT data is still met.
 
 if (sum(sameas(t_past,t),1) = 1,
-    p15_kcal_balanceflow(t,iso,kfo)$(f15_kcal_pc_iso(t,iso,kfo)=0) = 0;
-    p15_kcal_balanceflow(t,iso,kfo)$(f15_kcal_pc_iso(t,iso,kfo)>0) = f15_kcal_pc_iso(t,iso,kfo) - v15_kcal_regression.l(iso, kfo);
-    p15_kcal_balanceflow_lastcalibrationyear(iso,kfo) = p15_kcal_balanceflow(t,iso,kfo);
+    p15_kcal_calib(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))=0) = 0;
+    p15_balanceflow_kcal_iso(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))>0) = 0;
+    p15_kcal_calib(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))>0) = f15_kcal_pc_iso(t,iso,kfo) - v15_kcal_regression.l(iso, kfo);
+    p15_balanceflow_kcal_iso(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))=0) = f15_kcal_pc_iso(t,iso,kfo) - v15_kcal_regression.l(iso, kfo);
+
+    p15_kcal_calib_lastcalibrationyear(iso,kfo) = p15_kcal_calib(t,iso,kfo);
+    p15_balanceflow_kcal_lastcalibrationyear(iso,kfo) = p15_balanceflow_kcal_iso(t,iso,kfo);
 else
-    p15_kcal_balanceflow(t,iso,kfo) = p15_kcal_balanceflow_lastcalibrationyear(iso,kfo) * f15_kcal_balanceflow_fadeout(t,"%c15_calibscen%");
+*' The divergence of the kcal from the historical data is eventually faded out
+    p15_kcal_calib(t,iso,kfo) = p15_kcal_calib_lastcalibrationyear(iso,kfo) * f15_kcal_calib_fadeout(t,"%c15_calibscen%");
+*' The divergence of the kcal of countries with no data is kept constant over time
+    p15_balanceflow_kcal_iso(t,iso,kfo) = p15_balanceflow_kcal_lastcalibrationyear(iso,kfo);
 );
 
 
 *' The balanceflow is added to the regression value
-       p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_balanceflow(t,iso,kfo) * s15_calibrate;
+       p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_calib(t,iso,kfo) * s15_calibrate;
 *' Eventual negative values that can occur due to balanceflow are set to zero
        p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
 
@@ -283,6 +293,18 @@ else
              ) / sum(i_to_iso(i,iso),
                  im_pop_iso(t,iso)
              );
+
+ p15_balanceflow_kcal(t,i,kfo)$(
+    sum(i_to_iso(i,iso),
+       im_pop_iso(t,iso)
+    ) >0 ) =
+             sum(i_to_iso(i,iso),
+               p15_balanceflow_kcal_iso(t,iso,kfo)
+               * im_pop_iso(t,iso)
+             ) / sum(i_to_iso(i,iso),
+                 im_pop_iso(t,iso)
+             );
+
 
 
  p15_kcal_pc_initial_iso(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);

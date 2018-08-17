@@ -137,6 +137,7 @@ sets
 ;
 
 alias(kst,kst2);
+alias(kfo,kfo2);
 alias(kfo_ap,kfo_ap2);
 alias(kfo_st,kfo_st2);
 alias(kfo_pf,kfo_pf2);

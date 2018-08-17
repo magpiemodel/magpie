@@ -92,7 +92,7 @@ if (s15_elastic_demand * (1-sum(sameas(t_past,t),1)) =1,
 
 * estimating calibrated values for height regression
 * add balanceflow for calibration
-         p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_balanceflow(t,iso,kfo) * s15_calibrate;
+         p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_calib(t,iso,kfo) * s15_calibrate;
 * set negative values that can occur due to balanceflow to zero
          p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
 

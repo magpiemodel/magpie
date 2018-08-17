@@ -85,10 +85,13 @@ parameters
  i15_livestock_kcal_iso_tmp(t,iso)  Intermediate calculation do not use elsewhere (kcal per cap per day)
 
 * diet calibration
-  p15_kcal_balanceflow(t,iso,kfo)               balanceflow to diverge from mean calories of regressions (kcal per cap per day)
-  p15_kcal_balanceflow_lastcalibrationyear(iso,kfo) the balanceflow for the last year with observations (kcal per cap per day)
-  p15_intake_balanceflow(t,iso,sex,age)   balanceflow to diverge from mean calories of regressions (kcal per cap per day)
-  p15_intake_balanceflow_lastcalibrationyear(iso,sex,age)  the balanceflow for the last year with observations (kcal per cap per day)
+  p15_kcal_calib(t,iso,kfo)               calibration parameter to diverge from mean calories of regressions (kcal per cap per day)
+  p15_kcal_calib_lastcalibrationyear(iso,kfo) the balanceflow for the last year with observations (kcal per cap per day)
+  p15_balanceflow_kcal(t,i,kfo)          balanceflow for mismatch between FAOSTAT and demand estimates (kcal per capita per day)
+  p15_balanceflow_kcal_iso(t,iso,kfo)    balanceflow for mismatch between FAOSTAT and demand estimates (kcal per capita per day)
+  p15_balanceflow_kcal_lastcalibrationyear(iso,kfo) balanceflow of last historic timestep for mismatch between FAOSTAT and demand estimates (kcal per capita per day)
+  p15_intake_calib(t,iso,sex,age)   calibration parameter to diverge from mean calories of regressions (kcal per cap per day)
+  p15_intake_calib_lastcalibrationyear(iso,sex,age)  the calibration parameter for the last year with observations (kcal per cap per day)
 
 * before shock
 

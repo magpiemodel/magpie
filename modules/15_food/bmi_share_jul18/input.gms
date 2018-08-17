@@ -85,7 +85,7 @@ $offdelim
 /;
 
 
-table f15_kcal_balanceflow_fadeout(t_all,calibscen15) balanceflow fadeout (1)
+table f15_kcal_calib_fadeout(t_all,calibscen15) calibration fadeout (1)
 $ondelim
 $include "./modules/15_food/input/f15_kcal_balanceflow_fadeout.csv"
 $offdelim

@@ -92,8 +92,8 @@ if (s15_elastic_demand * (1-sum(sameas(t_past,t),1)) =1,
 
 * estimating calibrated values for height regression
 * add balanceflow for calibration
-         p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regr.l(iso,kfo) + p15_kcal_balanceflow(t,iso,kfo) * s15_calibrate;
-* set negative values that can occur due to balanceflow to zero
+         p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regr.l(iso,kfo) + p15_kcal_calib(t,iso,kfo) * s15_calibrate;
+* set negative values that can occur due to calibration to zero
          p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
 
 * aggregate to regions
@@ -198,11 +198,11 @@ p15_bodyheight(t,iso,"F","10--14","final")=p15_bodyheight(t,iso,"M","15--19","fi
 
 if (sum(sameas(t_past,t),1) = 1,
 * for historical period only use estimate to calibrate balanceflow but use historical data for values
-  p15_bodyheight_balanceflow(t,iso,sex,age_new_estimated15) = f15_bodyheight(t,iso,sex,age_new_estimated15) - p15_bodyheight(t,iso,sex,age_new_estimated15,"final");
+  p15_bodyheight_calib(t,iso,sex,age_new_estimated15) = f15_bodyheight(t,iso,sex,age_new_estimated15) - p15_bodyheight(t,iso,sex,age_new_estimated15,"final");
   p15_bodyheight(t,iso,sex,age_new_estimated15,"final") = f15_bodyheight(t,iso,sex,age_new_estimated15);
 else
-  p15_bodyheight_balanceflow(t,iso,sex,age_new_estimated15)=p15_bodyheight_balanceflow(t-1,iso,sex,age_new_estimated15);
-  p15_bodyheight(t,iso,sex,age_new_estimated15,"final")=p15_bodyheight(t,iso,sex,age_new_estimated15,"final")+p15_bodyheight_balanceflow(t,iso,sex,age_new_estimated15)*s15_calibrate;
+  p15_bodyheight_calib(t,iso,sex,age_new_estimated15)=p15_bodyheight_calib(t-1,iso,sex,age_new_estimated15);
+  p15_bodyheight(t,iso,sex,age_new_estimated15,"final")=p15_bodyheight(t,iso,sex,age_new_estimated15,"final")+p15_bodyheight_calib(t,iso,sex,age_new_estimated15)*s15_calibrate;
 );
 
 *' @stop

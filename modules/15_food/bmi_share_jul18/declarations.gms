@@ -9,10 +9,6 @@ equations
   q15_food_demand(i,kfo) Food demand (mio. kcal)
 ;
 
-parameters
-  i15_kcal_pc_initial(t,i,kfo) Food demand without price shock and with calibration (kcal per capita per day)
-;
-
 positive variables
   vm_dem_food(i,kall)       Demand for food (mio. tDM per yr)
 ;
@@ -79,7 +75,7 @@ parameters
   p15_bmi_shr(t,iso,sex,age,bmi_group15)      calibrated estimates bmi share for population groups  (capita per capita)
   p15_bodyheight(t,iso,sex,age,estimates15)     body height (cm per capita)
   p15_bodyweight(t,iso,sex,age,bmi_group15) body weight (kg per capita)
-  p15_bodyheight_balanceflow(t,iso,sex,age_new_estimated15)               balanceflow for calibrating regional differences (cm)
+  p15_bodyheight_calib(t,iso,sex,age_new_estimated15)               calibration factor for regional differences in height (cm)
   p15_kcal_growth_food(t_all,iso,underaged15)  average per-capita consumption of growth relevant food items in the last 3 5-year steps (kcal per capita per day)
   p15_physical_activity_level(t,iso,sex,age)    physical activity levels in PAL relative to Basic metabolic rate BMR (kcal per kcal)
   i15_bmi_shr_regr_pre(t,iso,sex,agegroup15,bmi_regr_type15)   BMI regression share precalculation based on regression parameters required for calibration (capita per capita)
@@ -103,8 +99,11 @@ parameters
  i15_livestock_kcal_iso_tmp(t,iso)  Intermediate calculation do not use elsewhere (kcal per cap per day)
 
 * diet calibration
-  p15_kcal_balanceflow(t,iso,kfo)               balanceflow to diverge from mean calories of regressions (kcal per cap per day)
-  p15_kcal_balanceflow_lastcalibrationyear(iso,kfo) the balanceflow for the last year with observations (kcal per cap per day)
+  p15_kcal_calib(t,iso,kfo)               balanceflow to diverge from mean calories of regressions (kcal per cap per day)
+  p15_kcal_calib_lastcalibrationyear(iso,kfo) the calibration factor for the last year with observations (kcal per cap per day)
+  p15_balanceflow_kcal(t,i,kfo)          balanceflow for mismatch between FAOSTAT and demand estimates (kcal per capita per day)
+  p15_balanceflow_kcal_iso(t,iso,kfo)    balanceflow for mismatch between FAOSTAT and demand estimates (kcal per capita per day)
+  p15_balanceflow_kcal_lastcalibrationyear(iso,kfo) balanceflow of last historic timestep for mismatch between FAOSTAT and demand estimates (kcal per capita per day)
 
 * before shock
 

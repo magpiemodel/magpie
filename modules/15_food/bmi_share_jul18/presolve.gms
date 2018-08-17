@@ -215,7 +215,7 @@ else
 *' or fadet out.
    i15_bmi_shr_calib(t,iso,sex,age,bmi_group15) =
    i15_bmi_shr_calib_lastcalibrationyear(iso,sex,age,bmi_group15)
-   * f15_kcal_balanceflow_fadeout(t,"%c15_calibscen%");
+   * f15_kcal_calib_fadeout(t,"%c15_calibscen%");
 );
 *' pregnancy and lactation requires extra intake. We distribute the newborns among reproductive women and multuply with extra energy requirements
 i15_kcal_pregnancy(t,iso)=sum(sex,im_demography(t,iso,sex,"0--4")/5) * ((40/66)*845 + (26/66)*675);
@@ -273,12 +273,20 @@ p15_kcal_regr(t, iso, kfo)=v15_kcal_regr.l(iso, kfo);
 *' For this purpose,
 *' we calculate in the historical period with observations the residual between
 *' the regression and the observation. When the historical period ends, the
-*' calibarion balanceflow is fixed at the value of the last period.
+*' calibarion factor is fixed at the value of the last period.
+*' Additionally, we also need a balanceflow, which accounts for the mismatch
+*' of demand estimates (for all countries) and the countries with FAOSTAT data
+*' (only a subset), such that FAOSTAT data is still met.
 
 if (sum(sameas(t_past,t),1) = 1,
-    p15_kcal_balanceflow(t,iso,kfo)$(f15_kcal_pc_iso(t,iso,kfo)=0) = 0;
-    p15_kcal_balanceflow(t,iso,kfo)$(f15_kcal_pc_iso(t,iso,kfo)>0) = f15_kcal_pc_iso(t,iso,kfo) - v15_kcal_regr.l(iso, kfo);
-    p15_kcal_balanceflow_lastcalibrationyear(iso,kfo) = p15_kcal_balanceflow(t,iso,kfo);
+    p15_kcal_calib(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))=0) = 0;
+    p15_balanceflow_kcal_iso(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))>0) = 0;
+    p15_kcal_calib(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))>0) = f15_kcal_pc_iso(t,iso,kfo) - v15_kcal_regr.l(iso, kfo);
+    p15_balanceflow_kcal_iso(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))=0) = f15_kcal_pc_iso(t,iso,kfo) - v15_kcal_regr.l(iso, kfo);
+
+    p15_kcal_calib_lastcalibrationyear(iso,kfo) = p15_kcal_calib(t,iso,kfo);
+    p15_balanceflow_kcal_lastcalibrationyear(iso,kfo) = p15_balanceflow_kcal_iso(t,iso,kfo);
+
     i15_bmi_shr_calib(t,iso,sex,age,bmi_group15) =
                       f15_bmi_shr_past(t,iso,age,sex,bmi_group15) -
                       v15_bmi_shr_regr.l(iso,sex,age,bmi_group15);
@@ -286,21 +294,25 @@ if (sum(sameas(t_past,t),1) = 1,
                       i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
 
 else
-    p15_kcal_balanceflow(t,iso,kfo) = p15_kcal_balanceflow_lastcalibrationyear(iso,kfo) * f15_kcal_balanceflow_fadeout(t,"%c15_calibscen%");
+*' The divergence of the kcal from the historical data is eventually faded out
+    p15_kcal_calib(t,iso,kfo) = p15_kcal_calib_lastcalibrationyear(iso,kfo) * f15_kcal_calib_fadeout(t,"%c15_calibscen%");
+*' The divergence of the kcal of countries with no data is kept constant over time
+    p15_balanceflow_kcal_iso(t,iso,kfo) = p15_balanceflow_kcal_lastcalibrationyear(iso,kfo);
+
 *' The divergence of the BMI from the historical data is kept constant over time
 *' or fadet out.
    i15_bmi_shr_calib(t,iso,sex,age,bmi_group15) =
                      i15_bmi_shr_calib_lastcalibrationyear(iso,sex,age,bmi_group15)
-                     * f15_kcal_balanceflow_fadeout(t,"%c15_calibscen%");
+                     * f15_kcal_calib_fadeout(t,"%c15_calibscen%");
 );
 
-*' The balanceflow is added to the regression value
+*' The calib is added to the regression value
    p15_kcal_pc_iso(t,iso,kfo) =
-          v15_kcal_regr.l(iso,kfo) + p15_kcal_balanceflow(t,iso,kfo) * s15_calibrate;
+          v15_kcal_regr.l(iso,kfo) + p15_kcal_calib(t,iso,kfo) * s15_calibrate;
    p15_bmi_shr(t,iso,sex,age,bmi_group15) =
            v15_bmi_shr_regr.l(iso,sex,age,bmi_group15)+
            i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
-*' Eventual negative values that can occur due to balanceflow are set to zero
+*' Eventual negative values that can occur due to calib are set to zero
    p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
 *' The bmi shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
    p15_bmi_shr(t,iso,sex,age,bmi_group15)$(p15_bmi_shr(t,iso,sex,age,bmi_group15)<0) = 0;
@@ -332,6 +344,17 @@ else
     ) >0 ) =
              sum(i_to_iso(i,iso),
                p15_kcal_pc_iso(t,iso,kfo)
+               * im_pop_iso(t,iso)
+             ) / sum(i_to_iso(i,iso),
+                 im_pop_iso(t,iso)
+             );
+
+ p15_balanceflow_kcal(t,i,kfo)$(
+    sum(i_to_iso(i,iso),
+       im_pop_iso(t,iso)
+    ) >0 ) =
+             sum(i_to_iso(i,iso),
+               p15_balanceflow_kcal_iso(t,iso,kfo)
                * im_pop_iso(t,iso)
              ) / sum(i_to_iso(i,iso),
                  im_pop_iso(t,iso)
