@@ -56,6 +56,7 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
                "SLURM submission (standard/broadwell,medium)",
                "SLURM submission (standard/broadwell,16GB,medium)",
                "SLURM submission (standard/broadwell,32GB,medium)",
+               "SLURM submission (standard/broadwell,Priority)",
                "Debug mode")
     if(!slurm) modes <- modes[-3:-8]
     cat("\n",title,":\n", sep="")
@@ -73,7 +74,8 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
                      "6" = "slurmmedium",
                      "7" = "slurm16gbmedium",
                      "8" = "slurm32gbmedium",
-                     "9" = "debug")
+                     "9" = "slurmpriority",
+                     "10" = "debug")
     } else {
       comp <- switch(identifier,
                      "1" = "direct",
@@ -120,6 +122,9 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
         Sys.sleep(1)
       } else if(submit=="slurm32gbmedium") {
         system(paste0(srun_command," --partition=standard,broadwell --qos=medium --mem=32000 Rscript ",name), wait=FALSE)
+        Sys.sleep(1)
+      } else if(submit=="slurmpriority") {
+        system(paste0(srun_command," --partition=standard,broadwell --qos=priority Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="debug") {
         tmp.env <- new.env()
