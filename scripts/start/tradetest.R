@@ -22,6 +22,7 @@ start_run(cfg=cfg)
 
 cfg$gms$trade <- "selfsuff_reduced"
 
+
 for(i in c(   "free2000",
               "regionalized",
               "globalized",
@@ -31,7 +32,7 @@ for(i in c(   "free2000",
               "lib80_60_60",
               "lib80_90_90")){
   cfg$title <- paste0("tradetest_",i)
-  
+  cfg$gms$c21_trade_liberalization = i
   start_run(cfg=cfg)
   
 }
