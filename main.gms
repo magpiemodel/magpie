@@ -12,12 +12,12 @@ $title magpie
 * md5sum: 6839aaeaad4503631f6238cb3350c4ac
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 *
-* Used data set: rev4.4_690d3718e151be1b450b394c1064b1c5_magpie.tgz
-* md5sum: 0bfe598b21f5563f9323d39c432b7049
+* Used data set: rev4.7_690d3718e151be1b450b394c1064b1c5_magpie.tgz
+* md5sum: 0cfee59876838816e073d822739e3989
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 *
-* Used data set: rev4.4_690d3718e151be1b450b394c1064b1c5_validation.tgz
-* md5sum: 66e152bca850121c095499ed9ed52715
+* Used data set: rev4.7_690d3718e151be1b450b394c1064b1c5_validation.tgz
+* md5sum: 24fff4c832a4f7f33ada644b76c0a527
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 *
 * Used data set: additional_data_rev3.49.tgz
@@ -39,7 +39,7 @@ $title magpie
 *
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 *
-* Regions data revision: 4.4
+* Regions data revision: 4.7
 *
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/noco2
@@ -59,7 +59,7 @@ $title magpie
 *
 *
 *
-* Last modification (input data): Tue Aug 14 17:33:09 2018
+* Last modification (input data): Tue Aug 21 14:40:18 2018
 *
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -106,7 +106,7 @@ $setglobal production  flexreg_apr16
 $setglobal residues  flexreg_apr16
 $setglobal processing  coupleproducts_feb17
 
-$setglobal trade  selfsuff_tariff
+$setglobal trade  selfsuff_reduced
 
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
