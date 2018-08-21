@@ -106,25 +106,25 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
         log <- format(Sys.time(), paste0(rout,"-%Y-%H-%M-%S-%OS3.log"))
         system2("Rscript",name, stderr = log, stdout = log, wait=FALSE)
       } else if(submit=="slurmshort") {
-        system(paste0(srun_command," --partition=standard,broadwell --qos=short Rscript ",name), wait=FALSE)
+        system(paste0(srun_command," --partition=standard --qos=short Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="slurm16gbshort") {
-        system(paste0(srun_command," --partition=standard,broadwell --qos=short --mem=16000 Rscript ",name), wait=FALSE)
+        system(paste0(srun_command," --partition=standard --qos=short --mem=16000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="slurm32gbshort") {
-        system(paste0(srun_command," --partition=standard,broadwell --qos=short --mem=32000 Rscript ",name), wait=FALSE)
+        system(paste0(srun_command," --partition=standard --qos=short --mem=32000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="slurmmedium") {
-        system(paste0(srun_command," --partition=standard,broadwell --qos=medium Rscript ",name), wait=FALSE)
+        system(paste0(srun_command," --partition=standard --qos=medium Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="slurm16gbmedium") {
-        system(paste0(srun_command," --partition=standard,broadwell --qos=medium --mem=16000 Rscript ",name), wait=FALSE)
+        system(paste0(srun_command," --partition=standard --qos=medium --mem=16000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="slurm32gbmedium") {
-        system(paste0(srun_command," --partition=standard,broadwell --qos=medium --mem=32000 Rscript ",name), wait=FALSE)
+        system(paste0(srun_command," --partition=standard --qos=medium --mem=32000 Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="slurmpriority") {
-        system(paste0(srun_command," --partition=standard,broadwell --qos=priority Rscript ",name), wait=FALSE)
+        system(paste0(srun_command," --partition=standard --qos=priority Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="debug") {
         tmp.env <- new.env()
