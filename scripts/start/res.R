@@ -21,10 +21,10 @@ cfg$results_folder <- "output/:title:"
 cfg$recalibrate <- TRUE
 cfg$calib_maxiter <- 3
 
-low_res <- "n200"
+low_res <- "n500"
 for(res in c(low_res,paste0(low_res,"_LAM2"),paste0(low_res,"_LAM3"),paste0(low_res,"_LAM4"),paste0(low_res,"_LAM5"),paste0(low_res,"_LAM6"))) {
   cfg$title <- res
-  cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-noco2_rev33_",res,"_690d3718e151be1b450b394c1064b1c5.tgz"),
+  cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev33_",res,"_690d3718e151be1b450b394c1064b1c5.tgz"),
                  "rev4.61_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
                  "rev4.61_690d3718e151be1b450b394c1064b1c5_validation.tgz",
                  "additional_data_rev3.49.tgz",
