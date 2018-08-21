@@ -12,13 +12,8 @@
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
+
 source("config/default.cfg")
-
-
-cfg$title <- "default"
-#start MAgPIE run
-start_run(cfg=cfg)
-
 
 cfg$gms$trade <- "selfsuff_reduced"
 
@@ -36,3 +31,10 @@ for(i in c(   "free2000",
   start_run(cfg=cfg)
   
 }
+
+source("config/default.cfg")
+
+
+cfg$title <- "default"
+#start MAgPIE run
+start_run(cfg=cfg)
