@@ -108,6 +108,13 @@ if (s15_elastic_demand * (1-sum(sameas(t_past,t),1)) =1,
                                        im_pop_iso(t,iso)
                                    );
 
+* we calibrate countries with zero food demand according to FAOSTAT
+* down to zero to match FAO values-
+* Values are rounded to avoid path dependencies of MAgPIE solver
+       p15_kcal_pc_calibrated(t,i,kfo)=p15_kcal_pc(t,i,kfo)+p15_balanceflow_kcal(t,i,kfo);
+       p15_kcal_pc_calibrated(t,i,kfo)=round(p15_kcal_pc_calibrated(t,i,kfo),2);
+       p15_kcal_pc_calibrated(t,i,kfo)$(p15_kcal_pc_calibrated(t,i,kfo)<0)=0;
+
 
         if (p15_modelstat(t) < 3,
            put_utility 'shell' / 'mv -f m15_food_demand_p.gdx m15_food_demand_' t.tl:0'.gdx';

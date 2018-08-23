@@ -102,6 +102,7 @@ parameters
 * after price shock
  p15_kcal_pc_iso(t,iso,kfo)                 Per-capita consumption in food demand model after price shock (kcal per capita per day)
  p15_kcal_pc(t,i,kfo)                       Per-capita consumption in food demand model after price shock (kcal per capita per day)
+ p15_kcal_pc_calibrated(t,i,kfo)            Calibrated per-capita consumption in food demand model after price shock (kcal per capita per day)
 
 * calculate diet iteration breakpoint
 
