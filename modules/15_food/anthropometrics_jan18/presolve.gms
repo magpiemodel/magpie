@@ -286,6 +286,6 @@ else
 
 
  p15_kcal_pc_initial_iso(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
- p15_kcal_pc_initial(t,i,kfo) =  p15_kcal_pc(t,i,kfo);
+ pm_kcal_pc_initial(t,i,kfo) =  p15_kcal_pc(t,i,kfo);
 
  o15_kcal_regression_initial(iso,kfo)=v15_kcal_regression.l(iso,kfo);

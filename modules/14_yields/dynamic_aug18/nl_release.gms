@@ -4,4 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+* ### nl_release ###
 
+vm_yld.lo(j,kve,w) = 0;
+vm_yld.up(j,kve,w) = Inf;

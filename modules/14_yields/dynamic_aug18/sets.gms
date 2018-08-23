@@ -4,4 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-
+sets
+  ltype14 calibration land type
+       / crop, past /
+;
