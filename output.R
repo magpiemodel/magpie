@@ -102,15 +102,21 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
 
   choose_submit <- function(title="Please choose run submission type") {
     slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
-    modes <- c("Direct execution", "Background execution", "SLURM submission", "Debug mode")
-    if(!slurm) modes <- modes[-3]
+    modes <- c("Direct execution", "Background execution", "SLURM (default)", "SLURM priority", "Debug mode")
+    if(slurm) {
+      cat("\nCurrent cluster utilization:\n")
+      system("sclass")
+      cat("\n")
+    } else {
+     modes <- modes[-3:-4]
+    }
     cat("\n",title,":\n",sep="")
     cat(paste(1:length(modes), modes, sep=": " ),sep="\n")
     cat("Number: ")
     identifier <- get_line()
     identifier <- as.numeric(strsplit(identifier,",")[[1]])
     if(slurm) {
-      system(sclass)
+      system("sclass")
       comp <- switch(identifier,
                      "1" = "direct",
                      "2" = "background",
@@ -180,7 +186,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
   } else {
     cat("Run postprocessing mode\n")
     for (outputdir in outputdirs) {
-      cat(paste("\nSubmit output generation for",outputdir,"\n\n"))
+      cat(paste("\nSubmit output generation for",outputdir,"\n"))
       runsubmit(output, outputdir, FALSE, "scripts/output/single/")
     }
   }
