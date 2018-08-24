@@ -102,13 +102,13 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
 
   choose_submit <- function(title="Please choose run submission type") {
     slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
-    modes <- c("Direct execution", "Background execution", "SLURM (default)", "SLURM priority", "Debug mode")
+    modes <- c("SLURM (default)", "SLURM priority","Direct execution", "Background execution", "Debug mode")
     if(slurm) {
       cat("\nCurrent cluster utilization:\n")
       system("sclass")
       cat("\n")
     } else {
-     modes <- modes[-3:-4]
+     modes <- modes[-1:-2]
     }
     cat("\n",title,":\n",sep="")
     cat(paste(1:length(modes), modes, sep=": " ),sep="\n")
@@ -118,11 +118,11 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
     if(slurm) {
       system("sclass")
       comp <- switch(identifier,
-                     "1" = "direct",
-                     "2" = "background",
-                     "3" = "slurm default",
-                     "4" = "slurm priority",
-                     "4" = "debug")
+                     "1" = "slurm default",
+                     "2" = "slurm priority",
+                     "3" = "direct",
+                     "4" = "background",
+                     "5" = "debug")
       
     } else {
       comp <- switch(identifier,
@@ -144,7 +144,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
         next
       }
       if(!comp) outputdir <- outputdirs
-      cat("Executing",name,"\n")
+      cat(" -> ",name)
       if(submit=="direct") {
         tmp.env <- new.env()
         tmp.error <- try(sys.source(script,envir=tmp.env))
@@ -186,10 +186,11 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
   } else {
     cat("Run postprocessing mode\n")
     for (outputdir in outputdirs) {
-      cat(paste("\nSubmit output generation for",outputdir,"\n"))
+      cat(paste("\nSubmit",outputdir))
       runsubmit(output, outputdir, FALSE, "scripts/output/single/")
     }
   }
+  cat("\n\n")
 }
 
 if(!exists("source_include")) {
