@@ -11,7 +11,7 @@ scalars
   s21_trade_tariff trade tariff switch (1=on 0=off)                      / 1 /
 ;
 
-table f21_trade_bal_reduction(t_all,trade_regime21) share of inelastic trade pool (1)
+table f21_trade_bal_reduction(t_all,trade_groups21,trade_regime21) share of inelastic trade pool (1)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_bal_reduction.cs3"
 $offdelim;

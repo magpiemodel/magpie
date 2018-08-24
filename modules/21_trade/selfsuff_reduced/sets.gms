@@ -22,15 +22,34 @@ sets
    livst_rum, livst_pig,livst_chick, livst_egg, livst_milk, fish
    /
 
+* We limit trade of secondary products as this allows for extreme specialisation
+* in the implementation. Exception is sugar, where we allow the secondary product
+* trade but not the primary as primaries are hardly traded in reality
+   k_hardtrade21(k_trade) products where trade should be limited
+   /
+   sugr_cane,sugr_beet,
+   oils,oilcakes,alcohol,ethanol,distillers_grain,brans,scp,fibres,
+   livst_rum, livst_pig,livst_chick, livst_egg, livst_milk, fish
+   /
+
    trade_regime21
    /
    free2000,
    regionalized,
    globalized,
    fragmented,
-   lib_70_70_70,
-   lib80_80_80,
-   lib80_60_60,
-   lib80_90_90
+   a909090,
+   a908080,
+   a909595,
+   a808080,
+   a806060,
+   a809090,
+   l909090r808080,
+   l908080r806060,
+   l909595r809090
    /
+
+   trade_groups21
+   / easytrade,hardtrade /
+
 ;

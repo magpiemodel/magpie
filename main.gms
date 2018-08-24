@@ -7,42 +7,42 @@
 $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
+*
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev33_n200_LAM2_OAS2_SSA2_CAZ05_REF05_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: ff205117852f6c15b8ea4d08bb5ee723
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-* 
+*
 * Used data set: rev4.8_690d3718e151be1b450b394c1064b1c5_magpie.tgz
 * md5sum: c778b38d5eecb0ae8fbdfd2ce5ebe383
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
+*
 * Used data set: additional_data_rev3.52.tgz
 * md5sum: 682a4529fe18538b00096c2fd233e12f
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-* 
+*
 * Used data set: calibration_H12_21Aug18.tgz
 * md5sum: 213d25e29a37581be572d9fba356f6ef
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/calibration
-* 
+*
 * Low resolution: n200_LAM2_OAS2_SSA2_CAZ05_REF05
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   SSA  MEA  OAS  CHA  IND  REF  NEU  EUR  LAM  USA  CAZ  JPN
 *    47   14   20   12    3   21    3    7   44   13   15    1
-* 
+*
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-* 
+*
 * Regions data revision: 4.8
-* 
+*
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
 * * Additional input folder: /p/projects/landuse/data/input/other/rev33
 * * Revision: 33
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-* 
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: n200_LAM2_OAS2_SSA2_CAZ05_REF05
@@ -52,11 +52,11 @@ $title magpie
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
-* 
-* 
-* 
+*
+*
+*
 * Last modification (input data): Thu Aug 23 15:54:36 2018
-* 
+*
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
@@ -102,7 +102,7 @@ $setglobal production  flexreg_apr16
 $setglobal residues  flexreg_apr16
 $setglobal processing  coupleproducts_feb17
 
-$setglobal trade  selfsuff_flexreg_cost
+$setglobal trade  selfsuff_reduced
 
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13

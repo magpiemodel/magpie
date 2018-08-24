@@ -5,7 +5,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- i21_trade_bal_reduction(t_all)                          trade balance reduction (1)
+ i21_trade_bal_reduction(t_all,k_trade)         trade balance reduction (1)
  i21_trade_margin(i,k_trade)                    trade margins
  i21_trade_tariff(i,k_trade)                    trade tariffs
 ;
