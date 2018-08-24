@@ -48,17 +48,18 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 
   choose_submit <- function(title="Please choose run submission type") {
     slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
-    modes <- c("Direct execution",
+    modes <- c("SLURM priority",
+               "SLURM standby",
+               "Direct execution",
                "Background execution",
-               "SLURM submission (standard,short)",
-               "SLURM submission (standard,16GB,short)",
-               "SLURM submission (standard,32GB,short)",
-               "SLURM submission (standard,medium)",
-               "SLURM submission (standard,16GB,medium)",
-               "SLURM submission (standard,32GB,medium)",
-               "SLURM submission (standard,priority)",
                "Debug mode")
-    if(!slurm) modes <- modes[-3:-8]
+    if(slurm) {
+      cat("\nCurrent cluster utilization:\n")
+      system("sclass")
+      cat("\n")
+    } else {
+      modes <- grep("SLURM",modes,invert=TRUE,value=TRUE)
+    }
     cat("\n",title,":\n", sep="")
     cat(paste(1:length(modes), modes, sep=": " ),sep="\n")
     cat("Number: ")
@@ -66,16 +67,11 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
     identifier <- as.numeric(strsplit(identifier,",")[[1]])
     if(slurm) {
       comp <- switch(identifier,
-                     "1" = "direct",
-                     "2" = "background",
-                     "3" = "slurmshort",
-                     "4" = "slurm16gbshort",
-                     "5" = "slurm32gbshort",
-                     "6" = "slurmmedium",
-                     "7" = "slurm16gbmedium",
-                     "8" = "slurm32gbmedium",
-                     "9" = "slurmpriority",
-                     "10" = "debug")
+                     "1" = "slurmpriority",
+                     "2" = "slurmstandby",
+                     "3" = "direct",
+                     "4" = "background",
+                     "5" = "debug")
     } else {
       comp <- switch(identifier,
                      "1" = "direct",
@@ -105,26 +101,11 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
       } else if(submit=="background") {
         log <- format(Sys.time(), paste0(rout,"-%Y-%H-%M-%S-%OS3.log"))
         system2("Rscript",name, stderr = log, stdout = log, wait=FALSE)
-      } else if(submit=="slurmshort") {
-        system(paste0(srun_command," --partition=standard --qos=short Rscript ",name), wait=FALSE)
-        Sys.sleep(1)
-      } else if(submit=="slurm16gbshort") {
-        system(paste0(srun_command," --partition=standard --qos=short --mem=16000 Rscript ",name), wait=FALSE)
-        Sys.sleep(1)
-      } else if(submit=="slurm32gbshort") {
-        system(paste0(srun_command," --partition=standard --qos=short --mem=32000 Rscript ",name), wait=FALSE)
-        Sys.sleep(1)
-      } else if(submit=="slurmmedium") {
-        system(paste0(srun_command," --partition=standard --qos=medium Rscript ",name), wait=FALSE)
-        Sys.sleep(1)
-      } else if(submit=="slurm16gbmedium") {
-        system(paste0(srun_command," --partition=standard --qos=medium --mem=16000 Rscript ",name), wait=FALSE)
-        Sys.sleep(1)
-      } else if(submit=="slurm32gbmedium") {
-        system(paste0(srun_command," --partition=standard --qos=medium --mem=32000 Rscript ",name), wait=FALSE)
-        Sys.sleep(1)
       } else if(submit=="slurmpriority") {
-        system(paste0(srun_command," --partition=standard --qos=priority Rscript ",name), wait=FALSE)
+        system(paste0(srun_command," --qos=priority Rscript ",name), wait=FALSE)
+        Sys.sleep(1)
+      } else if(submit=="slurmstandby") {
+        system(paste0(srun_command," --qos=standby Rscript ",name), wait=FALSE)
         Sys.sleep(1)
       } else if(submit=="debug") {
         tmp.env <- new.env()
