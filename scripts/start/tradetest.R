@@ -20,8 +20,8 @@ cfg$gms$trade <- "selfsuff_reduced"
 
 for(i in c(
   "free2000","regionalized","globalized","fragmented",
-  "a909090","a908080","a909595","a808080","a806060","a809090",
-  "l909090r808080","l908080r806060","l909595r809090")){
+  "a909090","a908080","a909595","a808080","a807070","a809090",
+  "l909090r808080","l908080r807070","l909595r809090")){
   cfg$title <- paste0("tradetest_",i)
   cfg$gms$c21_trade_liberalization = i
   start_run(cfg=cfg)

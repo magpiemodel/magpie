@@ -15,3 +15,4 @@ if ((s21_trade_tariff=1),
 elseif (s21_trade_tariff=0),
     i21_trade_tariff(i2,k_trade) = 0;
 );
+
