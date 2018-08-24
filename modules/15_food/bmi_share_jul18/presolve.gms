@@ -312,6 +312,7 @@ else
    p15_bmi_shr(t,iso,sex,age,bmi_group15) =
            v15_bmi_shr_regr.l(iso,sex,age,bmi_group15)+
            i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
+
 *' Eventual negative values that can occur due to calib are set to zero
    p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
 *' The bmi shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
@@ -365,6 +366,13 @@ else
  p15_kcal_pc_initial(t,i,kfo) =  p15_kcal_pc(t,i,kfo);
 
  o15_kcal_regr_initial(iso,kfo)=v15_kcal_regr.l(iso,kfo);
+
+* Finally, we calibrate countries with zero food demand according to FAOSTAT
+* down to zero to match FAO values-
+* Values are rounded to avoid path dependencies of MAgPIE solver
+ p15_kcal_pc_calibrated(t,i,kfo)=p15_kcal_pc(t,i,kfo)+p15_balanceflow_kcal(t,i,kfo);
+ p15_kcal_pc_calibrated(t,i,kfo)=round(p15_kcal_pc_calibrated(t,i,kfo),2);
+ p15_kcal_pc_calibrated(t,i,kfo)$(p15_kcal_pc_calibrated(t,i,kfo)<0)=0;
 
 *' @code
 *' Now, MAgPIE is executed.

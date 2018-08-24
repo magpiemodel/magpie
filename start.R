@@ -50,13 +50,13 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
     slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
     modes <- c("Direct execution",
                "Background execution",
-               "SLURM submission (standard/broadwell,short)",
-               "SLURM submission (standard/broadwell,16GB,short)",
-               "SLURM submission (standard/broadwell,32GB,short)",
-               "SLURM submission (standard/broadwell,medium)",
-               "SLURM submission (standard/broadwell,16GB,medium)",
-               "SLURM submission (standard/broadwell,32GB,medium)",
-               "SLURM submission (standard/broadwell,Priority)",
+               "SLURM submission (standard,short)",
+               "SLURM submission (standard,16GB,short)",
+               "SLURM submission (standard,32GB,short)",
+               "SLURM submission (standard,medium)",
+               "SLURM submission (standard,16GB,medium)",
+               "SLURM submission (standard,32GB,medium)",
+               "SLURM submission (standard,priority)",
                "Debug mode")
     if(!slurm) modes <- modes[-3:-8]
     cat("\n",title,":\n", sep="")

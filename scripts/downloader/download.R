@@ -28,6 +28,7 @@ getfiledestinations <- function() {
     add <- data.frame(file=tmp,destination=dirname(f),stringsAsFactors = FALSE)
     out <- rbind(out,add)
   }
+  out <- as.data.frame(lapply(out,trimws),stringsAsFactors=FALSE)
   return(out[out[[1]]!="",])
 }
 
