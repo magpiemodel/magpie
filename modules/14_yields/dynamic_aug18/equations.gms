@@ -16,12 +16,25 @@ q14_yield_crop(j2,kcr,w) ..
 *' in the crop sector, but to the increase in the number of grazing animals in this realization.
 *' 
 *' Pasture yields are calculated using a linear function that depends on the increase of grazing animals: 
+
+
+q14_past_mngmnt_factor(i2) ..
+ v14_past_mngmnt_factor(i2) =e= sum(  (ct,t2),
+                (
+		p14_pyield_corr(t2,i2)$(sum(sameas(t_past,t2),1) = 1)
+                +( ( (s14_pyld_intercept + f14_pyld_slope_reg(i2)*v14_incr_graz_ani(i2)**(5/(m_year(t2)-m_year(t2-1))) 
+		)**((m_year(t2)-m_year(t2-1))/5) )
+		*pc14_past_mngmnt_factor(i2))$(sum(sameas(t_past,t2),1) <> 1)
+                )
+		$sameas(ct,t2) );
+
+
 q14_yield_past(j2,w) ..
- vm_yld(j2,"pasture",w) =e= sum(  (ct,t2),
-                (pc14_pyld(j2,w)$(ord(t2)=1)
-                +(pc14_pyld(j2,w)*(s14_pyld_intercept + sum(cell(i2,j2),f14_pyld_slope_reg(i2)
-                *v14_incr_graz_ani(i2)**(5/(m_year(t2)-m_year(t2-1))) ))**((m_year(t2)-m_year(t2-1))/5) )$(ord(t2)>1)
-                )$sameas(ct,t2) );
+ vm_yld(j2,"pasture",w) =e= sum(ct,i14_yields(ct,j2,"pasture",w))*sum(cell(i2,j2),v14_past_mngmnt_factor(i2));
+
+
+
+
 
 *' The increase of grazing animals is derived from the following three equations.
 *'
