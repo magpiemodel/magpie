@@ -110,11 +110,14 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
     identifier <- get_line()
     identifier <- as.numeric(strsplit(identifier,",")[[1]])
     if(slurm) {
+      system(sclass)
       comp <- switch(identifier,
                      "1" = "direct",
                      "2" = "background",
-                     "3" = "slurm",
+                     "3" = "slurm default",
+                     "4" = "slurm priority",
                      "4" = "debug")
+      
     } else {
       comp <- switch(identifier,
                      "1" = "direct",
@@ -143,8 +146,11 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
         rm(tmp.env)
       } else if(submit=="background") {
         system(paste0("Rscript output.R outputdirs=",paste(outputdirs,collapse=",")," comp=",comp,"  output=",rout," submit=direct &> ",format(Sys.time(), "blog_out-%Y-%H-%M-%S-%OS3.log")," &"))
-      } else if(submit=="slurm") {
-        system(paste0("srun --qos=short --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --time=200 --mem-per-cpu=8000 Rscript output.R outputdirs=",paste(outputdirs,collapse=",")," comp=",comp,"  output=",rout," submit=direct &"))
+      } else if(submit=="slurm default") {
+        system(paste0("srun --qos=standby --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --time=200 --mem-per-cpu=8000 Rscript output.R outputdirs=",paste(outputdirs,collapse=",")," comp=",comp,"  output=",rout," submit=direct &"))
+        Sys.sleep(1)
+      } else if(submit=="slurm priority") {
+        system(paste0("srun --qos=priority --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --mem-per-cpu=8000 Rscript output.R outputdirs=",paste(outputdirs,collapse=",")," comp=",comp,"  output=",rout," submit=direct &"))
         Sys.sleep(1)
       } else if(submit=="debug") {
         tmp.env <- new.env()
