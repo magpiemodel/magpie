@@ -13,14 +13,9 @@ i14_yields(t,j,"betr",w) = i14_yields(t,j,"betr",w)*sum(cell(i,j),fm_tau1995(i))
 ***MANAGEMENT CORRECTION FACTOR FOR PASTURE ACCOUNTING FOR REGIONAL DIFFERENCES IN MANAGEMENT***
 p14_yields_LPJ_reg(t,i) = (sum(cell(i,j),i14_yields(t,j,"pasture","rainfed")*pm_land_start(j,"past"))/sum(cell(i,j),pm_land_start(j,"past")) );
 
+p14_pyield_corr(t,i) = (f14_pyld_hist(t,i)/p14_yields_LPJ_reg(t,i))$(sum(sameas(t_past,t),1) = 1)
+			+ (f14_pyld_hist("y2010",i)/p14_yields_LPJ_reg("y2010",i))$(sum(sameas(t_past,t),1) <> 1);
 
-if (sum(sameas(t_past,t),1) = 1,
-	p14_pyield_corr(t,i) = f14_pyld_hist(t,i)/p14_yields_LPJ_reg(t,i);
-	
-else
-	p14_pyield_corr(t,i) = f14_pyld_hist("y2010",i)/p14_yields_LPJ_reg("y2010",i);
-
-);
 **!!!!!*i14_yields(t,j,"pasture",w) = i14_yields(t,j,"pasture",w)*sum(cell(i,j),p14_pyield_corr(t,i));
 
 
