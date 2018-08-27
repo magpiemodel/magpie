@@ -7,7 +7,7 @@
 parameters
  i14_yields(t,j,kve,w)               Biophysical input yields (excluding technological change) (tDM per ha per yr)
  p14_ani_stocks(t,i,sys)             Animal numbers for all time steps (stock for meat systems or producing animals for egg and dairy systems) (mio. animals per yr)
- p14_yields_LPJ_reg(t,i)             Regional average input yields aggregated from clusters with initial pasture area as weights (tDM per ha per yr)
+ p14_yields_LPJ_reg(t_all,i)             Regional average input yields aggregated from clusters with initial pasture area as weights (tDM per ha per yr)
  p14_pyield_corr(t,i)                Regional pasture management corection for historical time steps (1)
  pc14_past_mngmnt_factor(i)          Regional pasture management factor of previous time step (1)
  pc14_graz_ani(i)                    Grazing animals of previous time step (mio. animals per yr)
