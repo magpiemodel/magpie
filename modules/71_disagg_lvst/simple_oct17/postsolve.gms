@@ -4,9 +4,6 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-v71_feed_balanceflow.lo(j,kli_rum,kforage)= -Inf;
-v71_feed_balanceflow.up(j,kli_rum,kforage)= Inf;
-
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov71_feed_balanceflow(t,j,kli_rum,kforage,"marginal")      = v71_feed_balanceflow.m(j,kli_rum,kforage);
  ov71_prod_rum(t,j,kli_rum,kforage,"marginal")              = v71_prod_rum.m(j,kli_rum,kforage);
