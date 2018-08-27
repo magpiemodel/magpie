@@ -1,6 +1,5 @@
 name,type,reason
 im_livestock_productivity,input,questionnaire
 vm_supply,input,questionnaire
-im_pop,input,questionnaire
-pm_kcal_pc_initial,input,questionnaire
 pm_land_start,input,questionnaire
+pm_past_mngmnt_factor,input,questionnaire

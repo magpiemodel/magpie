@@ -8,10 +8,6 @@ $setglobal c14_yields_scenario  nocc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
 
-scalars
-  s14_pyld_intercept     Intercept of linear relationship determining pasture intensification (1)        / 0.24 /
-;
-
 ******* Calibration factor
 table f14_yld_calib(i,ltype14) Calibration factor for the LPJmL yields (1)
 $ondelim
@@ -31,11 +27,3 @@ table f14_pyld_hist(t_all,i) Modelled regional pasture yields in the past (tDM p
 $ondelim
 $include "./modules/14_yields/input/f14_pasture_yields_hist.csv"
 $offdelim;
-
-
-parameter f14_pyld_slope_reg(i) Regional slope of linear relationship determining pasture intensification (1)
-/
-$ondelim
-$include "./modules/14_yields/input/f14_pyld_slope_reg.cs4"
-$offdelim
-/;

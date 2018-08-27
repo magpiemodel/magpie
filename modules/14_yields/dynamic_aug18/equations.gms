@@ -13,46 +13,10 @@ q14_yield_crop(j2,kcr,w) ..
 
 ***PASTURE YIELD CALCULATIONS*******************************************
 *' In contrast to the [biocorrect] realization, pasture yields are not linked to yield increases
-*' in the crop sector, but to the increase in the number of grazing animals in this realization.
-*' 
-*' Pasture yields are calculated using a linear function that depends on the increase of grazing animals: 
-
-
-q14_past_mngmnt_factor(i2) ..
- v14_past_mngmnt_factor(i2) =e= sum(  (ct,t2),
-                (
-		p14_pyield_corr(t2,i2)$(sum(sameas(t_past,t2),1) = 1)
-                +( ( (s14_pyld_intercept + f14_pyld_slope_reg(i2)*v14_incr_graz_ani(i2)**(5/(m_year(t2)-m_year(t2-1))) 
-		)**((m_year(t2)-m_year(t2-1))/5) )
-		*pc14_past_mngmnt_factor(i2))$(sum(sameas(t_past,t2),1) <> 1)
-                )
-		$sameas(ct,t2) );
-
+*' in the crop sector, but to an exogenous pasture management factor: 
 
 q14_yield_past(j2,w) ..
- vm_yld(j2,"pasture",w) =e= sum(ct,i14_yields(ct,j2,"pasture",w))*sum(cell(i2,j2),v14_past_mngmnt_factor(i2));
-
-
-
-
-
-*' The increase of grazing animals is derived from the following three equations.
-*'
-*' (1) Animal stocks are calculated based on the productivity indicators. For the milk and the egg systems,
-*' animal numbers refer to producing animals. For the meat systems, animal numbers refer to the respective animal herd: 
-q14_animal_stocks(i2,sys) ..
- v14_ani_stocks(i2,sys) =e=
-                   sum(ct,im_pop(ct,i2)*pm_kcal_pc_initial(ct,i2,"livst_rum")
-		   /im_livestock_productivity(ct,i2,sys));   
-				   
-*' (2) Grazing animals are defined by the cattle stock:
-q14_grazing_animals(i2) .. 
- v14_graz_ani(i2) =e= v14_ani_stocks(i2,"sys_beef");
-
-*' (3) The increase of grazing animals is calculated using the previous time step:
-q14_incr_graz_animals(i2) ..
- v14_incr_graz_ani(i2)  =e=  
-				v14_graz_ani(i2)/pc14_beef_cattle(i2);
+ vm_yld(j2,"pasture",w) =l= sum(ct,i14_yields(ct,j2,"pasture",w)*sum(cell(i2,j2),pm_past_mngmnt_factor(ct,i2)));
 
 
 
