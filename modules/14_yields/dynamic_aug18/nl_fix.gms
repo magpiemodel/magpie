@@ -9,8 +9,8 @@
 vm_yld.fx(j,kcr,w) = sum(ct,i14_yields(ct,j,kcr,w))*sum(cell(i,j),vm_tau.l(i)/fm_tau1995(i));
 
 
-vm_yld.fx(j,"pasture",w) = sum(ct$(not sameas(ct,"y1995")), pc14_pyld(j,w)*(s14_pyld_intercept + sum(cell(i,j),f14_pyld_slope_reg(i)*v14_incr_graz_ani.l(i))))
-                    + sum(ct$sameas(ct,"y1995"),pc14_pyld(j,w));
+v14_past_mngmnt_factor.fx(i) = 1.1;
+vm_yld.fx(j,"pasture",w) = sum(ct,i14_yields(ct,j,"pasture",w))*sum(cell(i,j),pm_past_mngmnt_factor(ct,i));
 
 
 

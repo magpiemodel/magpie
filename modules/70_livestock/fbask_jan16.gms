@@ -79,5 +79,6 @@ $Ifi "%phase%" == "declarations" $include "./modules/70_livestock/fbask_jan16/de
 $Ifi "%phase%" == "input" $include "./modules/70_livestock/fbask_jan16/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/70_livestock/fbask_jan16/equations.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/70_livestock/fbask_jan16/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/70_livestock/fbask_jan16/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/70_livestock/fbask_jan16/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
