@@ -37,6 +37,7 @@ parameters
  oq21_trade_glo(t,k_trade,type)        Global production > demand constraint
  oq21_notrade(t,i,k_notrade,type)      fix of not traded commodities
  oq21_trade_reg(t,i,k_trade,type)      regional trade balances i.e. minimum self-suff ratio
+ oq21_trade_reg_up(t,i,k_trade,type)   regional trade balance maximum self suff ratio
  oq21_excess_dem(t,k_trade,type)       global excess demand
  oq21_excess_supply(t,i,k_trade,type)  regional excess production
  oq21_cost_trade(t,i,type)             trade costs

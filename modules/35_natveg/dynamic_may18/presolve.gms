@@ -61,8 +61,7 @@ pcm_land(j,"other") = sum(land35, pc35_other(j,land35));
 
 *** Forest protection (WDPA areas and different conservation priority areas)
 * calc protection share for primforest, secdforest and other land
-pc35_natveg_old(j) = vm_land.l(j,"primforest") + pc35_secdforest(j,"old") + pc35_other(j,"old");
-p35_protect_shr(t,j,prot_type)$(pc35_natveg_old(j) > 0) = f35_protect_area(j,prot_type)/pc35_natveg_old(j);
+p35_protect_shr(t,j,prot_type)$(sum(land_natveg, pm_land_start(j,land_natveg)) > 0) = f35_protect_area(j,prot_type)/sum(land_natveg, pm_land_start(j,land_natveg));
 p35_protect_shr(t,j,prot_type)$(p35_protect_shr(t,j,prot_type) > 1) = 1;
 p35_protect_shr(t,j,prot_type)$(p35_protect_shr(t,j,prot_type) < 0) = 0;
 

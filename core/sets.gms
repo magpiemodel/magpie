@@ -15,7 +15,7 @@
 
 sets
 
-   i all economic regions /SSA,MEA,OAS,CHA,IND,REF,NEU,EUR,LAM,USA,CAZ,JPN/
+   i all economic regions /CAZ,CHA,EUR,IND,JPN,LAM,MEA,NEU,OAS,REF,SSA,USA/
 
    iso list of iso countries /
        ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
@@ -45,33 +45,33 @@ sets
        VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 
    j number of LPJ cells /
-       SSA_1*SSA_47,
-       MEA_48*MEA_61,
-       OAS_62*OAS_81,
-       CHA_82*CHA_93,
-       IND_94*IND_96,
-       REF_97*REF_117,
-       NEU_118*NEU_120,
-       EUR_121*EUR_127,
-       LAM_128*LAM_171,
-       USA_172*USA_184,
-       CAZ_185*CAZ_199,
-       JPN_200*JPN_200/
+       CAZ_1*CAZ_28,
+       CHA_29*CHA_52,
+       EUR_53*EUR_62,
+       IND_63*IND_69,
+       JPN_70*JPN_72,
+       LAM_73*LAM_125,
+       MEA_126*MEA_142,
+       NEU_143*NEU_150,
+       OAS_151*OAS_172,
+       REF_173*REF_179,
+       SSA_180*SSA_190,
+       USA_191*USA_200/
 
    cell(i,j) number of LPJ cells per region i
       /
-       SSA . SSA_1*SSA_47
-       MEA . MEA_48*MEA_61
-       OAS . OAS_62*OAS_81
-       CHA . CHA_82*CHA_93
-       IND . IND_94*IND_96
-       REF . REF_97*REF_117
-       NEU . NEU_118*NEU_120
-       EUR . EUR_121*EUR_127
-       LAM . LAM_128*LAM_171
-       USA . USA_172*USA_184
-       CAZ . CAZ_185*CAZ_199
-       JPN . JPN_200*JPN_200
+       CAZ . CAZ_1*CAZ_28
+       CHA . CHA_29*CHA_52
+       EUR . EUR_53*EUR_62
+       IND . IND_63*IND_69
+       JPN . JPN_70*JPN_72
+       LAM . LAM_73*LAM_125
+       MEA . MEA_126*MEA_142
+       NEU . NEU_143*NEU_150
+       OAS . OAS_151*OAS_172
+       REF . REF_173*REF_179
+       SSA . SSA_180*SSA_190
+       USA . USA_191*USA_200
       /
 
    i_to_iso(i,iso) mapping regions to iso countries
@@ -207,6 +207,9 @@ sets
 
   land_ag(land) agricultural land
                   / crop, past /
+  
+  land_natveg(land) natveg land types
+        / primforest, secdforest, other /
 
    si suitability classes
         / si0, nsi0 /
