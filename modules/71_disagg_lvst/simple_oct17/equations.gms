@@ -16,7 +16,7 @@ q71_feed_rum_liv(j2,kforage) ..
                  sum(kli_rum, v71_prod_rum(j2,kli_rum,kforage)
                  * sum((ct,cell(i2,j2),kforage2),im_feed_baskets(ct,i2,kli_rum,kforage2))*
 				 ( 1 + sum((ct,cell(i2,j2)), fm_feed_balanceflow(ct,i2,kli_rum,kforage)/ 
-				           (im_feed_baskets(ct,i2,kli_rum,kforage) * vm_prod_reg(i2,kli_rum) + 10**(-5)))));
+				           (im_feed_baskets(ct,i2,kli_rum,kforage) * vm_prod_reg(i2,kli_rum) + 10**(-6)))));
 
 				 
 *' Cellular ruminant production has to equal regional ruminant production.
