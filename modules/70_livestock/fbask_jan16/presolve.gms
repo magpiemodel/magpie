@@ -11,7 +11,7 @@
 *' products as well as the related changes in cattle stocks are calculated: 
 
 p70_cattle_stock_proxy(t,i) = im_pop(t,i)*pm_kcal_pc_initial(t,i,"livst_rum")
-		              /im_livestock_productivity(t,i,"sys_beef");   
+		              /i70_livestock_productivity(t,i,"sys_beef");   
 				   
 p70_incr_cattle(t,i)  =  1$(ord(t)=1)
 			+ (p70_cattle_stock_proxy(t,i)/p70_cattle_stock_proxy(t-1,i))$(ord(t)>1);

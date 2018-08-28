@@ -17,7 +17,7 @@ equations
 
 parameters
  im_slaughter_feed_share(t_all,i,kap,attributes)  Share of feed that is incorporated in animal biomass (1)
- im_livestock_productivity(t_all,i,sys)           Productivity indicator for livestock production (t FM per animal per yr)
+ i70_livestock_productivity(t_all,i,sys)          Productivity indicator for livestock production (t FM per animal per yr)
  im_feed_baskets(t_all,i,kap,kall)                Feed baskets (t DM per t DM livestock product)
  p70_cattle_stock_proxy(t,i)                      Proxy for cattle stocks needed to fullfil domestic food demand (mio. animals per yr)
  p70_incr_cattle(t,i)                             Change in estimated cattle stocks attributed to food demand projections (1)
