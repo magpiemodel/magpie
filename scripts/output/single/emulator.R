@@ -10,7 +10,7 @@ library(remulator)
 ######################################## Define function ###############################################
 ########################################################################################################
 
-collect_data_and_make_emulator <- function(outputdir) { 
+collect_data_and_make_emulator <- function(outputdir,name_of_fit="linear") {
   load(paste0(outputdir, "/config.Rdata"))
 
   #setwd("~/Documents/0_GIT/magpie")
@@ -79,7 +79,7 @@ collect_data_and_make_emulator <- function(outputdir) {
     }
     
     # check if emulator has already been generated for this scenario
-    fitted_data_available <- file.exists(paste0(emu_path,"/",scen,"/data_postfit_",scen,".Rdata"))
+    fitted_data_available <- file.exists(paste0(emu_path,"/",scen,"/",name_of_fit,"/data_postfit_",scen,".Rdata"))
     if (fitted_data_available) {
       cat("Emulator has already been generated for",scen,"and will not be regenerated.\n")
     } else if (raw_data_available) {
@@ -114,6 +114,14 @@ collect_data_and_make_emulator <- function(outputdir) {
     x[,,"Demand|Bioenergy|++|2nd generation (EJ/yr)"][is.na(x[,,"Prices|Bioenergy (US$05/GJ)"])] <- NA
     
     x[,,"Modelstatus (-)"] <- x["GLO",,"Modelstatus (-)"]
+
+    # Convert units to REMIND units
+    TWa_2_EJ <- 365.25*24*3600/1E6
+    tmp1 <- x[,,"Demand|Bioenergy|++|2nd generation (EJ/yr)"] / TWa_2_EJ      # EJ   -> TWa
+    tmp2 <- x[,,"Prices|Bioenergy (US$05/GJ)"]                * TWa_2_EJ/1000 # $/GJ -> T$/TWa 
+    getNames(tmp1,dim=4) <- gsub("EJ/yr","TWa/yr",   getNames(tmp1,dim=4),fixed=TRUE)
+    getNames(tmp2,dim=4) <- gsub("US$05/GJ","T$/TWa",getNames(tmp2,dim=4),fixed=TRUE)
+    x <- mbind(x,tmp1,tmp2)
 
     ###############################################################
     ############# C A L C U L A T E   E M U L A T O R #############
@@ -152,14 +160,15 @@ collect_data_and_make_emulator <- function(outputdir) {
     
     # Calculate emulator
     fc <- emulator(data=x,
-             name_x="Demand|Bioenergy|++|2nd generation (EJ/yr)",
-             name_y="Prices|Bioenergy (US$05/GJ)",
+             name_x="Demand|Bioenergy|++|2nd generation (TWa/yr)",
+             name_y="Prices|Bioenergy (T$/TWa)",
              name_modelstat="Modelstatus (-)",
              userfun=function(param,x)return(param[[1]] + param[[2]] * x),
              treat_as_feasible = c(2,7),
              n_suff = 5,
-             fill = FALSE,
+             fill = TRUE,
              output_path = emu_path,
+             fitname = name_of_fit,
              create_pdf=TRUE,
              initial_values = c(0,0),     
              lower=c(0,0))
@@ -170,7 +179,7 @@ collect_data_and_make_emulator <- function(outputdir) {
 
     # write fit coefficients to REMIND input file
     for (scen in getNames(fc,dim="scenario")) {
-      write.magpie(fc,file_name = paste0("f30_bioen_price_",scen,"_",regionscode,".cs4r"), file_folder = file.path(emu_path,scen))
+      write.magpie(fc,file_name = paste0("f30_bioen_price_",scen,"_",regionscode,".cs4r"), file_folder = file.path(emu_path,scen,name_of_fit))
     }
   }
 }
@@ -184,4 +193,4 @@ collect_data_and_make_emulator <- function(outputdir) {
    readArgs("outputdir")
  } 
 
-collect_data_and_make_emulator(outputdir)
+collect_data_and_make_emulator(outputdir,name_of_fit="linear")
