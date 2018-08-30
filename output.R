@@ -102,19 +102,28 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
 
   choose_submit <- function(title="Please choose run submission type") {
     slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
-    modes <- c("Direct execution", "Background execution", "SLURM submission", "Debug mode")
-    if(!slurm) modes <- modes[-3]
+    modes <- c("SLURM (default)", "SLURM priority","Direct execution", "Background execution", "Debug mode")
+    if(slurm) {
+      cat("\nCurrent cluster utilization:\n")
+      system("sclass")
+      cat("\n")
+    } else {
+     modes <- modes[-1:-2]
+    }
     cat("\n",title,":\n",sep="")
     cat(paste(1:length(modes), modes, sep=": " ),sep="\n")
     cat("Number: ")
     identifier <- get_line()
     identifier <- as.numeric(strsplit(identifier,",")[[1]])
     if(slurm) {
+      system("sclass")
       comp <- switch(identifier,
-                     "1" = "direct",
-                     "2" = "background",
-                     "3" = "slurm",
-                     "4" = "debug")
+                     "1" = "slurm default",
+                     "2" = "slurm priority",
+                     "3" = "direct",
+                     "4" = "background",
+                     "5" = "debug")
+      
     } else {
       comp <- switch(identifier,
                      "1" = "direct",
@@ -135,7 +144,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
         next
       }
       if(!comp) outputdir <- outputdirs
-      cat("Executing",name,"\n")
+      cat(" -> ",name)
       if(submit=="direct") {
         tmp.env <- new.env()
         tmp.error <- try(sys.source(script,envir=tmp.env))
@@ -143,8 +152,11 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
         rm(tmp.env)
       } else if(submit=="background") {
         system(paste0("Rscript output.R outputdirs=",paste(outputdirs,collapse=",")," comp=",comp,"  output=",rout," submit=direct &> ",format(Sys.time(), "blog_out-%Y-%H-%M-%S-%OS3.log")," &"))
-      } else if(submit=="slurm") {
-        system(paste0("srun --qos=short --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --time=200 --mem-per-cpu=8000 Rscript output.R outputdirs=",paste(outputdirs,collapse=",")," comp=",comp,"  output=",rout," submit=direct &"))
+      } else if(submit=="slurm default") {
+        system(paste0("srun --qos=standby --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --time=200 --mem-per-cpu=8000 Rscript output.R outputdirs=",paste(outputdirs,collapse=",")," comp=",comp,"  output=",rout," submit=direct &"))
+        Sys.sleep(1)
+      } else if(submit=="slurm priority") {
+        system(paste0("srun --qos=priority --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --mem-per-cpu=8000 Rscript output.R outputdirs=",paste(outputdirs,collapse=",")," comp=",comp,"  output=",rout," submit=direct &"))
         Sys.sleep(1)
       } else if(submit=="debug") {
         tmp.env <- new.env()
@@ -174,10 +186,11 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
   } else {
     cat("Run postprocessing mode\n")
     for (outputdir in outputdirs) {
-      cat(paste("\nSubmit output generation for",outputdir,"\n\n"))
+      cat(paste("\nSubmit",outputdir))
       runsubmit(output, outputdir, FALSE, "scripts/output/single/")
     }
   }
+  cat("\n\n")
 }
 
 if(!exists("source_include")) {

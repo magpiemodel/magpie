@@ -97,7 +97,7 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 cfg$title <- "SUSTAg2_Ref"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0")
-cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
+cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
 cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
@@ -121,7 +121,7 @@ cfg$recalibrate <- FALSE
 cfg$title <- "SUSTAg2_Ref_co2fix"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$input <- buildInputVector(co2="noco2",climatescen_name="rcp6p0")
-cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0"
+cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
 cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)

@@ -99,34 +99,34 @@ if (sum(sameas(t_past,t),1) = 1,
 
 if (sum(sameas(t_past,t),1) = 1,
 
-   p15_bodyheight(t,iso,sex,age_group,estimates15) = f15_bodyheight(t,iso,sex,age_group);
+   p15_bodyheight(t,iso,sex,age,estimates15) = f15_bodyheight(t,iso,sex,age);
 
 
 else
 
-    p15_bodyheight(t,iso,sex,age_group,"preliminary") = p15_bodyheight(t-1,iso,sex,age_group,"final");
-    p15_kcal_growth_food(t,iso,age_groups_underaged15) = p15_kcal_growth_food(t-1,iso,age_groups_underaged15);
+    p15_bodyheight(t,iso,sex,age,"preliminary") = p15_bodyheight(t-1,iso,sex,age,"final");
+    p15_kcal_growth_food(t,iso,age_underaged15) = p15_kcal_growth_food(t-1,iso,age_underaged15);
 
     s15_count=m_yeardiff(t);
 * avoid fake 1yr timestep in 1995
     if(s15_count<5,s15_count=5);
     For (s15_count = 1 to (m_yeardiff(t)/5),
 
-* circular move of age_groups by 5 years
+* circular move of age by 5 years
 * to find out about ++1 search for help on Circular Lag and Lead Operators in Assignments
-          p15_bodyheight(t,iso,sex,age_group++1,"preliminary") = p15_bodyheight(t,iso,sex,age_group,"preliminary");
+          p15_bodyheight(t,iso,sex,age++1,"preliminary") = p15_bodyheight(t,iso,sex,age,"preliminary");
 
 * replace age groups of 18 year olds
           p15_bodyheight(t,iso,"F","15--19","preliminary") =
                  126.4*
-                 (sum(age_groups_underaged15,
-                   p15_kcal_growth_food(t,iso,age_groups_underaged15)
+                 (sum(age_underaged15,
+                   p15_kcal_growth_food(t,iso,age_underaged15)
                  )/3)**0.03464
                  ;
           p15_bodyheight(t,iso,"M","15--19","preliminary") =
                  131.8*
-                 (sum(age_groups_underaged15,
-                   p15_kcal_growth_food(t,iso,age_groups_underaged15)
+                 (sum(age_underaged15,
+                   p15_kcal_growth_food(t,iso,age_underaged15)
                  )/3)**0.03975
                  ;
      );
@@ -149,7 +149,7 @@ else
 
 
 *### estimate standardized food requirement
-p15_bodyweight_healthy(t,iso,sex,age_group)= 21.75* (p15_bodyheight(t,iso,sex,age_group,"preliminary")/100)**2;
+p15_bodyweight_healthy(t,iso,sex,age)= 21.75* (p15_bodyheight(t,iso,sex,age,"preliminary")/100)**2;
 p15_bodyweight_healthy(t,iso,sex,"0--4")   = 16*   (p15_bodyheight(t,iso,sex,"0--4","preliminary")   /100)**2;
 p15_bodyweight_healthy(t,iso,sex,"5--9")   = 16*   (p15_bodyheight(t,iso,sex,"5--9","preliminary")   /100)**2;
 p15_bodyweight_healthy(t,iso,sex,"10--14") = 18*   (p15_bodyheight(t,iso,sex,"10--14","preliminary") /100)**2;
@@ -158,21 +158,21 @@ p15_bodyweight_healthy(t,iso,sex,"15--19") = 21.75*   (p15_bodyheight(t,iso,sex,
 *' Physical activity levels (PAL) relative to Basic metabolic rate (BMR) are
 *' estimated based on physical inactivity level and assuming PALs for sedentary
 *' or medium-active populations of 1.53 and 1.76.
-p15_physical_activity_level(t,iso,sex,age_group)=
-                            im_physical_inactivity(t,iso,sex,age_group) * 1.53
-                            +(1-im_physical_inactivity(t,iso,sex,age_group)) * 1.76
+p15_physical_activity_level(t,iso,sex,age)=
+                            im_physical_inactivity(t,iso,sex,age) * 1.53
+                            +(1-im_physical_inactivity(t,iso,sex,age)) * 1.76
                             ;
 *' Healthy body weight, age and sex are used to determine healthy Basal Metabolic Rate (BMR).
 *' Healthy BMR multiplied by PAL gibes the food requirements.
 
-p15_kcal_requirement(t,iso,sex,age_group)=
-                        (f15_schofield_parameters_height(sex,age_group, "intercept")
-                        + f15_schofield_parameters_height(sex,age_group, "height")*p15_bodyheight(t,iso,sex,age_group,"preliminary")/100
-                        + f15_schofield_parameters_height(sex,age_group, "weight")*p15_bodyweight_healthy(t,iso,sex,age_group))
-                        * p15_physical_activity_level(t,iso,sex,age_group);
+p15_kcal_requirement(t,iso,sex,age)=
+                        (f15_schofield_parameters_height(sex,age, "intercept")
+                        + f15_schofield_parameters_height(sex,age, "height")*p15_bodyheight(t,iso,sex,age,"preliminary")/100
+                        + f15_schofield_parameters_height(sex,age, "weight")*p15_bodyweight_healthy(t,iso,sex,age))
+                        * p15_physical_activity_level(t,iso,sex,age);
 
 *' pregnancy and lactation requires extra intake. We distribute the newborns among reproductive women and multuply with extra energy requirements
-p15_kcal_pregnancy(t,iso,sex,age_group)=0;
+p15_kcal_pregnancy(t,iso,sex,age)=0;
 p15_kcal_pregnancy(t,iso,"F",reproductive)$sum(reproductive2, im_demography(t,iso,"F",reproductive2)>0) =
                    sum(sex,im_demography(t,iso,sex,"0--4")/5)/
                    sum(reproductive2, im_demography(t,iso,"F",reproductive2))
@@ -181,23 +181,23 @@ p15_kcal_pregnancy(t,iso,"F",reproductive)$sum(reproductive2, im_demography(t,is
 *' @stop
 
 
-* the following calcuation of p15_intake_balanceflow is only required for postprocessing.
+* the following calcuation of p15_intake_calib is only required for postprocessing.
 if (sum(sameas(t_past,t),1) = 1,
 
-   p15_bodyheight(t,iso,sex,age_group,estimates15) = f15_bodyheight(t,iso,sex,age_group);
+   p15_bodyheight(t,iso,sex,age,estimates15) = f15_bodyheight(t,iso,sex,age);
 
-   p15_intake_balanceflow(t,iso,sex,age_group) =
-      f15_intake_pc_observed_iso(t,iso,sex,age_group) -
-      (p15_kcal_requirement(t,iso,sex,age_group)+ p15_kcal_pregnancy(t,iso,sex,age_group))*
+   p15_intake_calib(t,iso,sex,age) =
+      f15_intake_pc_observed_iso(t,iso,sex,age) -
+      (p15_kcal_requirement(t,iso,sex,age)+ p15_kcal_pregnancy(t,iso,sex,age))*
       (
-          f15_intake_regr_paras(sex,age_group,"saturation")*im_gdp_pc_ppp_iso(t,iso)
-          /(f15_intake_regr_paras(sex,age_group,"halfsaturation")+im_gdp_pc_ppp_iso(t,iso))
-          +f15_intake_regr_paras(sex,age_group,"intercept")
+          f15_intake_regr_paras(sex,age,"saturation")*im_gdp_pc_ppp_iso(t,iso)
+          /(f15_intake_regr_paras(sex,age,"halfsaturation")+im_gdp_pc_ppp_iso(t,iso))
+          +f15_intake_regr_paras(sex,age,"intercept")
       );
 
-   p15_intake_balanceflow_lastcalibrationyear(iso,sex,age_group)=p15_intake_balanceflow(t,iso,sex,age_group);
+   p15_intake_calib_lastcalibrationyear(iso,sex,age)=p15_intake_calib(t,iso,sex,age);
 else
-    p15_intake_balanceflow(t,iso,sex,age_group) =  p15_intake_balanceflow_lastcalibrationyear(iso,sex,age_group) * f15_kcal_balanceflow_fadeout(t,"%c15_calibscen%");
+    p15_intake_calib(t,iso,sex,age) =  p15_intake_calib_lastcalibrationyear(iso,sex,age) * f15_kcal_calib_fadeout(t,"%c15_calibscen%");
 );
 
 
@@ -249,19 +249,29 @@ p15_kcal_regression(t, iso, kfo)=v15_kcal_regression.l(iso, kfo);
 *' Food demand is calibrated to meet the historical food demand. For this purpose,
 *' we calculate in the historical period with observations the residual between
 *' the regression and the observation. When the historical period ends, the
-*' calibarion balanceflow is fixed at the value of the last period.
+*' calibarion parameter is fixed at the value of the last period.
+*' Additionally, we also need a balanceflow, which accounts for the mismatch
+*' of demand estimates (for all countries) and the countries with FAOSTAT data
+*' (only a subset), such that FAOSTAT data is still met.
 
 if (sum(sameas(t_past,t),1) = 1,
-    p15_kcal_balanceflow(t,iso,kfo)$(f15_kcal_pc_iso(t,iso,kfo)=0) = 0;
-    p15_kcal_balanceflow(t,iso,kfo)$(f15_kcal_pc_iso(t,iso,kfo)>0) = f15_kcal_pc_iso(t,iso,kfo) - v15_kcal_regression.l(iso, kfo);
-    p15_kcal_balanceflow_lastcalibrationyear(iso,kfo) = p15_kcal_balanceflow(t,iso,kfo);
+    p15_kcal_calib(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))=0) = 0;
+    p15_balanceflow_kcal_iso(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))>0) = 0;
+    p15_kcal_calib(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))>0) = f15_kcal_pc_iso(t,iso,kfo) - v15_kcal_regression.l(iso, kfo);
+    p15_balanceflow_kcal_iso(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))=0) = f15_kcal_pc_iso(t,iso,kfo) - v15_kcal_regression.l(iso, kfo);
+
+    p15_kcal_calib_lastcalibrationyear(iso,kfo) = p15_kcal_calib(t,iso,kfo);
+    p15_balanceflow_kcal_lastcalibrationyear(iso,kfo) = p15_balanceflow_kcal_iso(t,iso,kfo);
 else
-    p15_kcal_balanceflow(t,iso,kfo) = p15_kcal_balanceflow_lastcalibrationyear(iso,kfo) * f15_kcal_balanceflow_fadeout(t,"%c15_calibscen%");
+*' The divergence of the kcal from the historical data is eventually faded out
+    p15_kcal_calib(t,iso,kfo) = p15_kcal_calib_lastcalibrationyear(iso,kfo) * f15_kcal_calib_fadeout(t,"%c15_calibscen%");
+*' The divergence of the kcal of countries with no data is kept constant over time
+    p15_balanceflow_kcal_iso(t,iso,kfo) = p15_balanceflow_kcal_lastcalibrationyear(iso,kfo);
 );
 
 
 *' The balanceflow is added to the regression value
-       p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_balanceflow(t,iso,kfo) * s15_calibrate;
+       p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_calib(t,iso,kfo) * s15_calibrate;
 *' Eventual negative values that can occur due to balanceflow are set to zero
        p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
 
@@ -284,8 +294,29 @@ else
                  im_pop_iso(t,iso)
              );
 
+ p15_balanceflow_kcal(t,i,kfo)$(
+    sum(i_to_iso(i,iso),
+       im_pop_iso(t,iso)
+    ) >0 ) =
+             sum(i_to_iso(i,iso),
+               p15_balanceflow_kcal_iso(t,iso,kfo)
+               * im_pop_iso(t,iso)
+             ) / sum(i_to_iso(i,iso),
+                 im_pop_iso(t,iso)
+             );
+
+
 
  p15_kcal_pc_initial_iso(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
- p15_kcal_pc_initial(t,i,kfo) =  p15_kcal_pc(t,i,kfo);
+ pm_kcal_pc_initial(t,i,kfo) =  p15_kcal_pc(t,i,kfo);
 
  o15_kcal_regression_initial(iso,kfo)=v15_kcal_regression.l(iso,kfo);
+
+
+
+* Finally, we calibrate countries with zero food demand according to FAOSTAT
+* down to zero to match FAO values-
+* Values are rounded to avoid path dependencies of MAgPIE solver
+ p15_kcal_pc_calibrated(t,i,kfo)=p15_kcal_pc(t,i,kfo)+p15_balanceflow_kcal(t,i,kfo);
+ p15_kcal_pc_calibrated(t,i,kfo)=round(p15_kcal_pc_calibrated(t,i,kfo),2);
+ p15_kcal_pc_calibrated(t,i,kfo)$(p15_kcal_pc_calibrated(t,i,kfo)<0)=0;

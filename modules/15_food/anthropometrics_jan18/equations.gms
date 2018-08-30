@@ -9,7 +9,7 @@
 q15_food_demand(i2,kfo) ..
                 (vm_dem_food(i2,kfo) + sum(ct, f15_household_balance_flow(ct,i2,kfo,"dm")))
                 * sum(ct,(f15_nutrition_attributes(ct,kfo,"kcal") * 10**6)) =g=
-                sum(ct,im_pop(ct,i2) * p15_kcal_pc(ct,i2,kfo)) * 365
+                sum(ct,im_pop(ct,i2) * p15_kcal_pc_calibrated(ct,i2,kfo)) * 365
                 ;
 
 *' The constraint transforms the fooduse of agricultural products into per-capita
@@ -58,13 +58,13 @@ q15_budget(iso) ..
 *' In the following, the real income is used to determine food intake,
 *' food demand as well as dietary composition.
 
-q15_regression_intake(iso,sex,age_group) ..
-         v15_kcal_intake_regression(iso,sex,age_group) =e=
-         sum(ct,p15_kcal_requirement(ct,iso,sex,age_group)
-         + p15_kcal_pregnancy(ct,iso,sex,age_group))
-         * ((f15_intake_regr_paras(sex,age_group,"saturation")*v15_income_pc_real_ppp_iso(iso))
-            /(f15_intake_regr_paras(sex,age_group,"halfsaturation")+v15_income_pc_real_ppp_iso(iso))
-            +f15_intake_regr_paras(sex,age_group,"intercept"))
+q15_regression_intake(iso,sex,age) ..
+         v15_kcal_intake_regression(iso,sex,age) =e=
+         sum(ct,p15_kcal_requirement(ct,iso,sex,age)
+         + p15_kcal_pregnancy(ct,iso,sex,age))
+         * ((f15_intake_regr_paras(sex,age,"saturation")*v15_income_pc_real_ppp_iso(iso))
+            /(f15_intake_regr_paras(sex,age,"halfsaturation")+v15_income_pc_real_ppp_iso(iso))
+            +f15_intake_regr_paras(sex,age,"intercept"))
          ;
 
 *' Food intake is based on food requirement (the calories requried for a
@@ -76,9 +76,9 @@ q15_regression_intake(iso,sex,age_group) ..
 q15_regression_kcal(iso) ..
          v15_kcal_regression_total(iso) =e=
          v15_regression(iso, "overconsumption")
-         * sum((sex,age_group,ct), v15_kcal_intake_regression(iso,sex,age_group)
-         * im_demography(ct,iso,sex,age_group))
-         / sum((sex,age_group,ct), im_demography(ct,iso,sex,age_group));
+         * sum((sex,age,ct), v15_kcal_intake_regression(iso,sex,age)
+         * im_demography(ct,iso,sex,age))
+         / sum((sex,age,ct), im_demography(ct,iso,sex,age));
 
 *' Food demand is based on food intake and a regression
 *' based on income which estimates how much the actual demand is relative to

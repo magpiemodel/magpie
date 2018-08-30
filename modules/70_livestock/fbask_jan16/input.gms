@@ -8,12 +8,16 @@
 $setglobal c70_feed_scen  ssp2
 *   options:    ssp1,ssp2,ssp3,ssp4,ssp5,constant
 
-table f70_feed_baskets(t_all,i,kap,kall,feed_scen70) feed baskets (t DM per t DM livestock product)
+scalars
+  s70_pyld_intercept     Intercept of linear relationship determining pasture intensification (1)        / 0.24 /
+;
+
+table f70_feed_baskets(t_all,i,kap,kall,feed_scen70) Feed baskets (t DM per t DM livestock product)
 $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_feed_baskets.cs3"
 $offdelim;
 
-table f70_feed_balanceflow(t_all,i,kap,kall) Balanceflow in mio ton DM to balance difference between estimated feed baskets and FAO
+table fm_feed_balanceflow(t_all,i,kap,kall) Balanceflow in mio ton DM to balance difference between estimated feed baskets and FAO
 $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_feed_balanceflow.cs3"
 $offdelim;
@@ -23,16 +27,24 @@ $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_livestock_productivity.cs3"
 $offdelim;
 
-table f70_cost_regr(kap,cost_regr) factor requirements livestock (US$04 per ton DM (A) and US$ (B))
+table f70_cost_regr(kap,cost_regr) Factor requirements livestock (US$04 per ton DM (A) and US$ (B))
 $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_capit_liv_regr.csv"
 $offdelim
 ;
 
-parameter f70_slaughter_feed_share(t_all,i,kap,attributes,feed_scen70) share of feed that is incorprated in animal biomass (1)
+parameter f70_slaughter_feed_share(t_all,i,kap,attributes,feed_scen70) Share of feed that is incorprated in animal biomass (1)
 /
 $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_slaughter_feed_share.cs4"
 $offdelim
 /
 ;
+
+parameter f70_pyld_slope_reg(i) Regional slope of linear relationship determining pasture intensification (1)
+/
+$ondelim
+$include "./modules/70_livestock/fbask_jan16/input/f70_pyld_slope_reg.cs4"
+$offdelim
+/;
+

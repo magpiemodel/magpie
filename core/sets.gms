@@ -15,7 +15,7 @@
 
 sets
 
-   i all economic regions /SSA,MEA,OAS,CHA,IND,REF,NEU,EUR,LAM,USA,CAZ,JPN/
+   i all economic regions /CAZ,CHA,EUR,IND,JPN,LAM,MEA,NEU,OAS,REF,SSA,USA/
 
    iso list of iso countries /
        ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
@@ -45,33 +45,33 @@ sets
        VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 
    j number of LPJ cells /
-       SSA_1*SSA_10,
-       MEA_11*MEA_24,
-       OAS_25*OAS_44,
-       CHA_45*CHA_63,
-       IND_64*IND_71,
-       REF_72*REF_76,
-       NEU_77*NEU_84,
-       EUR_85*EUR_99,
-       LAM_100*LAM_156,
-       USA_157*USA_167,
-       CAZ_168*CAZ_197,
-       JPN_198*JPN_200/
+       CAZ_1*CAZ_28,
+       CHA_29*CHA_52,
+       EUR_53*EUR_62,
+       IND_63*IND_69,
+       JPN_70*JPN_72,
+       LAM_73*LAM_125,
+       MEA_126*MEA_142,
+       NEU_143*NEU_150,
+       OAS_151*OAS_172,
+       REF_173*REF_179,
+       SSA_180*SSA_190,
+       USA_191*USA_200/
 
    cell(i,j) number of LPJ cells per region i
       /
-       SSA . SSA_1*SSA_10
-       MEA . MEA_11*MEA_24
-       OAS . OAS_25*OAS_44
-       CHA . CHA_45*CHA_63
-       IND . IND_64*IND_71
-       REF . REF_72*REF_76
-       NEU . NEU_77*NEU_84
-       EUR . EUR_85*EUR_99
-       LAM . LAM_100*LAM_156
-       USA . USA_157*USA_167
-       CAZ . CAZ_168*CAZ_197
-       JPN . JPN_198*JPN_200
+       CAZ . CAZ_1*CAZ_28
+       CHA . CHA_29*CHA_52
+       EUR . EUR_53*EUR_62
+       IND . IND_63*IND_69
+       JPN . JPN_70*JPN_72
+       LAM . LAM_73*LAM_125
+       MEA . MEA_126*MEA_142
+       NEU . NEU_143*NEU_150
+       OAS . OAS_151*OAS_172
+       REF . REF_173*REF_179
+       SSA . SSA_180*SSA_190
+       USA . USA_191*USA_200
       /
 
    i_to_iso(i,iso) mapping regions to iso countries
@@ -145,12 +145,11 @@ sets time_annual annual extended vector
 ;
 
 set t(t_all) used time periods
-$If "%c_timesteps%"== "less_TS" /y1995,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100,y2110,y2130,y2150/;
-$If "%c_timesteps%"== "coup2100" /y1995,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100/;
-$If "%c_timesteps%"== "test_TS" /y1995,y2005,y2010,y2020,y2030,y2040,y2050,y2070,y2090,y2110,y2130,y2150/;
+$If "%c_timesteps%"== "less_TS" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100,y2110,y2130,y2150/;
+$If "%c_timesteps%"== "coup2100" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100/;
+$If "%c_timesteps%"== "test_TS" /y1995,y2000,y2005,y2010,y2020,y2030,y2040,y2050,y2070,y2090,y2110,y2130,y2150/;
 $If "%c_timesteps%"== "TS_benni" /y1995,y2000,y2005,y2010,y2020,y2030,y2040,y2050/;
 $If "%c_timesteps%"== "TS_WB" /y1995,y2000,y2005,y2010,y2020,y2030,y2040,y2050,y2060,y2070,y2080/;
-$If "%c_timesteps%"== "5year_fh" /y1995,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2065,y2070,y2075,y2080,y2085,y2090,y2095,y2100/;
 $If "%c_timesteps%"== "5year" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2065,y2070,y2075,y2080,y2085,y2090,y2095,y2100/;
 $If "%c_timesteps%"== "5year2050" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050/;
 $If "%c_timesteps%"== "quicktest" /y1995,y2010,y2025/;
@@ -172,7 +171,7 @@ $If "%c_timesteps%"=="15" /y1995,y2000,y2010,y2020,y2030,y2040,y2050,y2060,y2070
 $If "%c_timesteps%"=="16" /y1995,y2000,y2010,y2020,y2030,y2040,y2050,y2060,y2070,y2080,y2090,y2100,y2110,y2120,y2130,y2140/;
 $If "%c_timesteps%"=="17" /y1995,y2000,y2010,y2020,y2030,y2040,y2050,y2060,y2070,y2080,y2090,y2100,y2110,y2120,y2130,y2140,y2150/;
 $If "%c_timesteps%"=="past" /y1965,y1970,y1975,y1980,y1985,y1990,y1995,y2000,y2005,y2010/;
-$If "%c_timesteps%"=="pastandfuture" /y1965,y1970,y1975,y1980,y1985,y1990,y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100/;
+$If "%c_timesteps%"=="pastandfuture" /y1965,y1970,y1975,y1980,y1985,y1990,y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2065,y2070,y2075,y2080,y2085,y2090,y2095,y2100/;
 set ct(t) current time period;
 
 alias(t,t2);
@@ -208,6 +207,9 @@ sets
 
   land_ag(land) agricultural land
                   / crop, past /
+  
+  land_natveg(land) natveg land types
+        / primforest, secdforest, other /
 
    si suitability classes
         / si0, nsi0 /

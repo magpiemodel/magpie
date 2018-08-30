@@ -31,7 +31,7 @@ equations
   q15_foodtree_kcal_processed(iso,kfo_pf) Demand for processed products  (kcal per capita per day)
   q15_foodtree_kcal_staples(iso,kfo_st)     Demand for staple products  (kcal per capita per day)
   q15_foodtree_kcal_vegetables(iso)     Demand for vegetable and fruits products  (kcal per capita per day)
-  q15_regression_intake(iso,sex,age_group)   intake regressions  (kcal per capita per day)
+  q15_regression_intake(iso,sex,age)   intake regressions  (kcal per capita per day)
 ;
 
 
@@ -41,7 +41,7 @@ positive variables
   v15_regression(iso, demand_subsys15)       Uncalibrated regression estimates of kcal shares (-)
   v15_income_pc_real_ppp_iso(iso)    real income per capita (USD per cap)
   v15_income_balance(iso)            balance variable to balance cases in which reduction in income beats gdp pc (USD05 per cap)
-  v15_kcal_intake_regression(iso,sex,age_group) Uncalibrated regression estimate for per-capita intake (kcal per cap per day)
+  v15_kcal_intake_regression(iso,sex,age) Uncalibrated regression estimate for per-capita intake (kcal per cap per day)
 ;
 
 variables
@@ -64,15 +64,15 @@ parameters
 
 * anthropometrics
 
-  p15_bodyheight(t,iso,sex,age_group,estimates15)     body height (cm)
-  p15_bodyheight_balanceflow(t,iso,sex,age_groups_new_estimated15)               balanceflow for calibrating regional differences (cm)
-  p15_kcal_growth_food(t_all,iso,age_groups_underaged15)  average per-capita consumption of growth relevant food items in the last 3 5-year steps (kcal per capita per day)
-  p15_bodyweight_healthy(t,iso,sex,age_group)         healhty bodyweight under healthy BMI (kg per capita)
-  p15_physical_activity_level(t,iso,sex,age_group)    physical activity levels in PAL relative to Basic metabolic rate BMR (kcal per kcal)
+  p15_bodyheight(t,iso,sex,age,estimates15)     body height (cm)
+  p15_bodyheight_balanceflow(t,iso,sex,age_new_estimated15)               balanceflow for calibrating regional differences (cm)
+  p15_kcal_growth_food(t_all,iso,age_underaged15)  average per-capita consumption of growth relevant food items in the last 3 5-year steps (kcal per capita per day)
+  p15_bodyweight_healthy(t,iso,sex,age)         healhty bodyweight under healthy BMI (kg per capita)
+  p15_physical_activity_level(t,iso,sex,age)    physical activity levels in PAL relative to Basic metabolic rate BMR (kcal per kcal)
 
 * diet structure
-  p15_kcal_requirement(t,iso,sex,age_group)   Intake requirements of a standardized BMI population dependent on physical activity and body size (kcal per captia per day)
-  p15_kcal_pregnancy(t,iso,sex,age_group)  additional energy requirements for pregnant and lactating femals (kcal per capita per day)
+  p15_kcal_requirement(t,iso,sex,age)   Intake requirements of a standardized BMI population dependent on physical activity and body size (kcal per captia per day)
+  p15_kcal_pregnancy(t,iso,sex,age)  additional energy requirements for pregnant and lactating femals (kcal per capita per day)
   p15_kcal_regression(t, iso, kfo)        Uncalibrated regression estimates of calorie demand (kcal per cap per day)
 
  i15_ruminant_fadeout(t_all) ruminant fadeout share (1)
@@ -85,20 +85,24 @@ parameters
  i15_livestock_kcal_iso_tmp(t,iso)  Intermediate calculation do not use elsewhere (kcal per cap per day)
 
 * diet calibration
-  p15_kcal_balanceflow(t,iso,kfo)               balanceflow to diverge from mean calories of regressions (kcal per cap per day)
-  p15_kcal_balanceflow_lastcalibrationyear(iso,kfo) the balanceflow for the last year with observations (kcal per cap per day)
-  p15_intake_balanceflow(t,iso,sex,age_group)   balanceflow to diverge from mean calories of regressions (kcal per cap per day)
-  p15_intake_balanceflow_lastcalibrationyear(iso,sex,age_group)  the balanceflow for the last year with observations (kcal per cap per day)
+  p15_kcal_calib(t,iso,kfo)               calibration parameter to diverge from mean calories of regressions (kcal per cap per day)
+  p15_kcal_calib_lastcalibrationyear(iso,kfo) the balanceflow for the last year with observations (kcal per cap per day)
+  p15_balanceflow_kcal(t,i,kfo)          balanceflow for mismatch between FAOSTAT and demand estimates (kcal per capita per day)
+  p15_balanceflow_kcal_iso(t,iso,kfo)    balanceflow for mismatch between FAOSTAT and demand estimates (kcal per capita per day)
+  p15_balanceflow_kcal_lastcalibrationyear(iso,kfo) balanceflow of last historic timestep for mismatch between FAOSTAT and demand estimates (kcal per capita per day)
+  p15_intake_calib(t,iso,sex,age)   calibration parameter to diverge from mean calories of regressions (kcal per cap per day)
+  p15_intake_calib_lastcalibrationyear(iso,sex,age)  the calibration parameter for the last year with observations (kcal per cap per day)
 
 * before shock
 
  o15_kcal_regression_initial(iso,kfo)        Uncalibrated per-capita demand before price shock (kcal per capita per day)
- p15_kcal_pc_initial(t,i,kfo)               Per-capita consumption in food demand model before price shock (kcal per capita per day)
+ pm_kcal_pc_initial(t,i,kfo)                 Per-capita consumption in food demand model before price shock (kcal per capita per day)
  p15_kcal_pc_initial_iso(t,iso,kfo)          Per-capita consumption in food demand model before price shock on iso level (kcal per capita per day)
 
 * after price shock
  p15_kcal_pc_iso(t,iso,kfo)                 Per-capita consumption in food demand model after price shock (kcal per capita per day)
  p15_kcal_pc(t,i,kfo)                       Per-capita consumption in food demand model after price shock (kcal per capita per day)
+ p15_kcal_pc_calibrated(t,i,kfo)            Calibrated per-capita consumption in food demand model after price shock (kcal per capita per day)
 
 * calculate diet iteration breakpoint
 
@@ -140,23 +144,23 @@ m15_food_demand.holdfixed = 1 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_dem_food(t,i,kall,type)                            Demand for food (mio. tDM per yr)
- ov15_kcal_regression(t,iso,kfo,type)                  Uncalibrated regression estimates of calorie demand (kcal per cap per day)
- ov15_kcal_regression_total(t,iso,type)                Uncalibrated regression estimates of  total per capita calories (kcal per cap per day)
- ov15_regression(t,iso,demand_subsys15,type)           Uncalibrated regression estimates of kcal shares (-)
- ov15_income_pc_real_ppp_iso(t,iso,type)               real income per capita (USD per cap)
- ov15_income_balance(t,iso,type)                       balance variable to balance cases in which reduction in income beats gdp pc (USD05 per cap)
- ov15_kcal_intake_regression(t,iso,sex,age_group,type) Uncalibrated regression estimate for per-capita intake (kcal per cap per day)
- ov15_objective(t,type)                                objective term (USD05)
- oq15_food_demand(t,i,kfo,type)                        Food demand (mio. kcal)
- oq15_aim(t,type)                                      aim function food demand model (mio. USD05)
- oq15_budget(t,iso,type)                               Household Budget Constraint (USD05 per capita per day)
- oq15_regression_kcal(t,iso,type)                      Per capita total consumption (kcal per capita per day)
- oq15_regression(t,iso,demand_subsys15,type)           Share regressions  (kcal per kcal)
- oq15_foodtree_kcal_animals(t,iso,kfo_ap,type)         Demand for animal products  (kcal per capita per day)
- oq15_foodtree_kcal_processed(t,iso,kfo_pf,type)       Demand for processed products  (kcal per capita per day)
- oq15_foodtree_kcal_staples(t,iso,kfo_st,type)         Demand for staple products  (kcal per capita per day)
- oq15_foodtree_kcal_vegetables(t,iso,type)             Demand for vegetable and fruits products  (kcal per capita per day)
- oq15_regression_intake(t,iso,sex,age_group,type)      intake regressions  (kcal per capita per day)
+ ov_dem_food(t,i,kall,type)                      Demand for food (mio. tDM per yr)
+ ov15_kcal_regression(t,iso,kfo,type)            Uncalibrated regression estimates of calorie demand (kcal per cap per day)
+ ov15_kcal_regression_total(t,iso,type)          Uncalibrated regression estimates of  total per capita calories (kcal per cap per day)
+ ov15_regression(t,iso,demand_subsys15,type)     Uncalibrated regression estimates of kcal shares (-)
+ ov15_income_pc_real_ppp_iso(t,iso,type)         real income per capita (USD per cap)
+ ov15_income_balance(t,iso,type)                 balance variable to balance cases in which reduction in income beats gdp pc (USD05 per cap)
+ ov15_kcal_intake_regression(t,iso,sex,age,type) Uncalibrated regression estimate for per-capita intake (kcal per cap per day)
+ ov15_objective(t,type)                          objective term (USD05)
+ oq15_food_demand(t,i,kfo,type)                  Food demand (mio. kcal)
+ oq15_aim(t,type)                                aim function food demand model (mio. USD05)
+ oq15_budget(t,iso,type)                         Household Budget Constraint (USD05 per capita per day)
+ oq15_regression_kcal(t,iso,type)                Per capita total consumption (kcal per capita per day)
+ oq15_regression(t,iso,demand_subsys15,type)     Share regressions  (kcal per kcal)
+ oq15_foodtree_kcal_animals(t,iso,kfo_ap,type)   Demand for animal products  (kcal per capita per day)
+ oq15_foodtree_kcal_processed(t,iso,kfo_pf,type) Demand for processed products  (kcal per capita per day)
+ oq15_foodtree_kcal_staples(t,iso,kfo_st,type)   Demand for staple products  (kcal per capita per day)
+ oq15_foodtree_kcal_vegetables(t,iso,type)       Demand for vegetable and fruits products  (kcal per capita per day)
+ oq15_regression_intake(t,iso,sex,age,type)      intake regressions  (kcal per capita per day)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

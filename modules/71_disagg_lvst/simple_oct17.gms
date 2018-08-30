@@ -10,5 +10,6 @@ $Ifi "%phase%" == "sets" $include "./modules/71_disagg_lvst/simple_oct17/sets.gm
 $Ifi "%phase%" == "declarations" $include "./modules/71_disagg_lvst/simple_oct17/declarations.gms"
 $Ifi "%phase%" == "equations" $include "./modules/71_disagg_lvst/simple_oct17/equations.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/71_disagg_lvst/simple_oct17/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/71_disagg_lvst/simple_oct17/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/71_disagg_lvst/simple_oct17/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

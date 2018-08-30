@@ -5,20 +5,20 @@
 *** Contact: magpie@pik-potsdam.de
 
 sets
-   age_groups_underaged15(age_group)
+   age_underaged15(age)
    /0--4,5--9,10--14/
 
-   age_groups_new_estimated15(age_group)
+   age_new_estimated15(age)
    /0--4,5--9,10--14,15--19/
 
-   age_groups_adult15(age_group) Age groups for adult population
+   age_adult15(age) Age groups for adult population
        /  15--19,
        20--24, 25--29, 30--34, 35--39,
        40--44, 45--49, 50--54, 55--59,
        60--64, 65--69, 70--74, 75--79
        80--84,85--89,90--94,95--99,100+ /
 
-   reproductive(age_group) reproductive age groups
+   reproductive(age) reproductive age groups
    /20--24, 25--29, 30--34, 35--39/
 
    estimates15
@@ -106,6 +106,7 @@ sets
 ;
 
 alias(kst,kst2);
+alias(kfo,kfo2);    
 alias(kfo_ap,kfo_ap2);
 alias(kfo_st,kfo_st2);
 alias(kfo_pf,kfo_pf2);

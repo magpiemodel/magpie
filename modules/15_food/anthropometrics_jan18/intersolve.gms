@@ -92,7 +92,7 @@ if (s15_elastic_demand * (1-sum(sameas(t_past,t),1)) =1,
 
 * estimating calibrated values for height regression
 * add balanceflow for calibration
-         p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_balanceflow(t,iso,kfo) * s15_calibrate;
+         p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_calib(t,iso,kfo) * s15_calibrate;
 * set negative values that can occur due to balanceflow to zero
          p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
 
@@ -107,6 +107,13 @@ if (s15_elastic_demand * (1-sum(sameas(t_past,t),1)) =1,
                                    ) / sum(i_to_iso(i,iso),
                                        im_pop_iso(t,iso)
                                    );
+
+* we calibrate countries with zero food demand according to FAOSTAT
+* down to zero to match FAO values-
+* Values are rounded to avoid path dependencies of MAgPIE solver
+       p15_kcal_pc_calibrated(t,i,kfo)=p15_kcal_pc(t,i,kfo)+p15_balanceflow_kcal(t,i,kfo);
+       p15_kcal_pc_calibrated(t,i,kfo)=round(p15_kcal_pc_calibrated(t,i,kfo),2);
+       p15_kcal_pc_calibrated(t,i,kfo)$(p15_kcal_pc_calibrated(t,i,kfo)<0)=0;
 
 
         if (p15_modelstat(t) < 3,
@@ -131,8 +138,8 @@ display "exogenous demand information is used" ;
 
 if(ord(t)>1,
 * start from bodyheight structure of last period
-   p15_bodyheight(t,iso,sex,age_group,"final") = p15_bodyheight(t-1,iso,sex,age_group,"final");
-   p15_kcal_growth_food(t,iso,age_groups_underaged15) = p15_kcal_growth_food(t-1,iso,age_groups_underaged15);
+   p15_bodyheight(t,iso,sex,age,"final") = p15_bodyheight(t-1,iso,sex,age,"final");
+   p15_kcal_growth_food(t,iso,age_underaged15) = p15_kcal_growth_food(t-1,iso,age_underaged15);
 );
 
 s15_count=m_yeardiff(t);
@@ -140,13 +147,13 @@ if(s15_count<5,s15_count=5);
 
 For (s15_count = 1 to (m_yeardiff(t)/5),
 
-* circular move of age_groups by 5 years
+* circular move of age by 5 years
 * to find out about ++1 search for help on Circular Lag and Lead Operators in Assignments
-   p15_bodyheight(t,iso,sex,age_group++1,"final") = p15_bodyheight(t,iso,sex,age_group,"final");
+   p15_bodyheight(t,iso,sex,age++1,"final") = p15_bodyheight(t,iso,sex,age,"final");
 
 *  move on consumption agegroups by 5 years
-   p15_kcal_growth_food(t,iso,age_groups_underaged15++1)=
-            p15_kcal_growth_food(t,iso,age_groups_underaged15);
+   p15_kcal_growth_food(t,iso,age_underaged15++1)=
+            p15_kcal_growth_food(t,iso,age_underaged15);
 
 *  consumption is calculated as linear interpolation between timesteps
    p15_kcal_growth_food(t,iso,"0--4") =
@@ -162,14 +169,14 @@ For (s15_count = 1 to (m_yeardiff(t)/5),
 *' years.
    p15_bodyheight(t,iso,"F","15--19","final") =
                      126.4*
-                     (sum(age_groups_underaged15,
-                       p15_kcal_growth_food(t,iso,age_groups_underaged15)
+                     (sum(age_underaged15,
+                       p15_kcal_growth_food(t,iso,age_underaged15)
                      )/3)**0.03464
                      ;
    p15_bodyheight(t,iso,"M","15--19","final") =
                      131.8*
-                     (sum(age_groups_underaged15,
-                       p15_kcal_growth_food(t,iso,age_groups_underaged15)
+                     (sum(age_underaged15,
+                       p15_kcal_growth_food(t,iso,age_underaged15)
                      )/3)**0.03975
                      ;
 *' @stop
@@ -198,11 +205,11 @@ p15_bodyheight(t,iso,"F","10--14","final")=p15_bodyheight(t,iso,"M","15--19","fi
 
 if (sum(sameas(t_past,t),1) = 1,
 * for historical period only use estimate to calibrate balanceflow but use historical data for values
-  p15_bodyheight_balanceflow(t,iso,sex,age_groups_new_estimated15) = f15_bodyheight(t,iso,sex,age_groups_new_estimated15) - p15_bodyheight(t,iso,sex,age_groups_new_estimated15,"final");
-  p15_bodyheight(t,iso,sex,age_groups_new_estimated15,"final") = f15_bodyheight(t,iso,sex,age_groups_new_estimated15);
+  p15_bodyheight_balanceflow(t,iso,sex,age_new_estimated15) = f15_bodyheight(t,iso,sex,age_new_estimated15) - p15_bodyheight(t,iso,sex,age_new_estimated15,"final");
+  p15_bodyheight(t,iso,sex,age_new_estimated15,"final") = f15_bodyheight(t,iso,sex,age_new_estimated15);
 else
-  p15_bodyheight_balanceflow(t,iso,sex,age_groups_new_estimated15)=p15_bodyheight_balanceflow(t-1,iso,sex,age_groups_new_estimated15);
-  p15_bodyheight(t,iso,sex,age_groups_new_estimated15,"final")=p15_bodyheight(t,iso,sex,age_groups_new_estimated15,"final")+p15_bodyheight_balanceflow(t,iso,sex,age_groups_new_estimated15)*s15_calibrate;
+  p15_bodyheight_balanceflow(t,iso,sex,age_new_estimated15)=p15_bodyheight_balanceflow(t-1,iso,sex,age_new_estimated15);
+  p15_bodyheight(t,iso,sex,age_new_estimated15,"final")=p15_bodyheight(t,iso,sex,age_new_estimated15,"final")+p15_bodyheight_balanceflow(t,iso,sex,age_new_estimated15)*s15_calibrate;
 );
 
 *' @stop

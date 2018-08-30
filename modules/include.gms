@@ -45,6 +45,7 @@ $include "./modules/59_som/59_som.gms"
 $include "./modules/60_bioenergy/60_bioenergy.gms"
 $include "./modules/62_material/62_material.gms"
 $include "./modules/70_livestock/70_livestock.gms"
+$include "./modules/71_disagg_lvst/71_disagg_lvst.gms"
 $include "./modules/80_optimization/80_optimization.gms"
 *######################## R SECTION END (MODULES) ##############################
 $offrecurse

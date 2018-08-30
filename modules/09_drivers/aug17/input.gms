@@ -33,12 +33,12 @@ $ondelim
 $include "./modules/09_drivers/input/f09_development_state.cs3"
 $offdelim;
 
-table f09_demography(t_all,iso,pop_scen09,sex,age_group) Population (mio. capita per yr)
+table f09_demography(t_all,iso,pop_scen09,sex,age) Population (mio. capita per yr)
 $ondelim
 $include "./modules/09_drivers/input/f09_demography.cs3"
 $offdelim;
 
-table f09_physical_inactivity(t_all,iso,gdp_scen09,sex,age_group) Share of population which is physically inactive (1)
+table f09_physical_inactivity(t_all,iso,gdp_scen09,sex,age) Share of population which is physically inactive (1)
 $ondelim
 $include "./modules/09_drivers/input/f09_physical_inactivity.cs3"
 $offdelim;

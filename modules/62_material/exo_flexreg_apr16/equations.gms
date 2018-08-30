@@ -16,7 +16,7 @@
 
  q62_dem_material(i2,kall) ..
                       vm_dem_material(i2,kall)
-                      =g=
+                      =e=
                       sum(ct,f62_dem_material(ct,i2,kall))*s62_historical
                       +
                       (p62_dem_material_lh(i2,kall)*

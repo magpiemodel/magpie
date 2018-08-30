@@ -47,7 +47,7 @@ $include "./modules/15_food/input/f15_kcal_pc_iso.csv"
 $offdelim;
 
 
-table f15_intake_pc_observed_iso(t_all,iso,sex,age_group)  Observed per-capita calorie intake in the past (kcal per captia per day)
+table f15_intake_pc_observed_iso(t_all,iso,sex,age)  Observed per-capita calorie intake in the past (kcal per captia per day)
 $ondelim
 $include "./modules/15_food/input/f15_intake_pc_observed_iso.cs3"
 $offdelim;
@@ -69,7 +69,7 @@ $offdelim
 /;
 
 
-table f15_kcal_balanceflow_fadeout(t_all,calibscen15) balanceflow fadeout (1)
+table f15_kcal_calib_fadeout(t_all,calibscen15) balanceflow fadeout (1)
 $ondelim
 $include "./modules/15_food/input/f15_kcal_balanceflow_fadeout.csv"
 $offdelim
@@ -81,18 +81,18 @@ $include "./modules/15_food/input/f15_ruminant_fadeout.csv"
 $offdelim
 ;
 
-table f15_bodyheight(t_all,iso,sex,age_group)      body height (cm)
+table f15_bodyheight(t_all,iso,sex,age)      body height (cm)
 $ondelim
 $include "./modules/15_food/input/f15_bodyheight_historical.cs3"
 $offdelim;
 
-table f15_schofield_parameters_height(sex,age_group, schofield_parameters15) Schofield equation parameters (-)
+table f15_schofield_parameters_height(sex,age, schofield_parameters15) Schofield equation parameters (-)
 $ondelim
 $include "./modules/15_food/input/f15_schofield_parameters_height.cs3"
 $offdelim
 ;
 
-table f15_intake_regr_paras(sex,age_group, parameters_intake15) Self-estimated income equation parameters (-)
+table f15_intake_regr_paras(sex,age, parameters_intake15) Self-estimated income equation parameters (-)
 $ondelim
 $include "./modules/15_food/input/f15_intake_regression_parameters.cs3"
 $offdelim
