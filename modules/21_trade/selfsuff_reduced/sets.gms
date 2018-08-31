@@ -10,7 +10,7 @@ sets
 
 *sets need to be adopted to new categories
    k_notrade(kall) production activities
-       / oilpalm, foddr, pasture, res_cereals, res_fibrous, res_nonfibrous /
+       / oilpalm, foddr, pasture, res_cereals, res_fibrous, res_nonfibrous,wood,woodfuel /
 * oilpalm not traded, only its oil and oilcake due to FAOSTAT complications, and as trade is little
 * foddr is not traded as too bulky
 * pasture ist not traded as too bulky
