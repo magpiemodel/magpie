@@ -28,7 +28,6 @@ sets
    k_hardtrade21(k_trade) products where trade should be limited
    /
    sugr_cane,sugr_beet,
-   oils,oilcakes,alcohol,ethanol,distillers_grain,brans,scp,fibres,
    livst_rum, livst_pig,livst_chick, livst_egg, livst_milk, fish
    /
 
