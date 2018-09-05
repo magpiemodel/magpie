@@ -53,8 +53,8 @@ parameters
  oq32_cdr_aff(t,j,co2_forestry,type)  Calculation of CDR from afforestation in terms of CO2-C (mio. t)
  oq32_carbon(t,j,c_pools,type)        Forestry carbon stock calculation C (mio. t)
  oq32_land_diff(t,type)               Aggregated difference in forestry land compared to previous timestep (mio. ha)
- oq32_land_expansion(t,j,land32,type) Forestry land expansion
- oq32_land_reduction(t,j,land32,type) Forestry land reduction
+ oq32_land_expansion(t,j,land32,type) Forestry land expansion (mio. ha)
+ oq32_land_reduction(t,j,land32,type) Forestry land reduction (mio. ha)
  oq32_max_aff(t,type)                 Maximum total global afforestation (mio. ha)
  oq32_aff_pol(t,j,type)               Afforestation policy constraint (mio. ha)
 ;

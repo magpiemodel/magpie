@@ -63,7 +63,8 @@ sum(ct, pm_carbon_density_ac(ct,j2,ac-1,c_pools))));
 
 *****Carbon stocks**************************************************************
 *' Forestry carbon stocks are calculated as the product of forestry land with the area
-*' weighted mean of `p32_carbon_density_ac` (i.e `p32_carbon_density`).
+*' weighted mean of carbon density for forest land and carbon pools (in tC per ha)
+*' (i.e `p32_carbon_density`).
 
  q32_carbon(j2,c_pools)  .. vm_carbon_stock(j2,"forestry",c_pools)
                          =e=

@@ -31,13 +31,17 @@ v32_land.fx(j,"new")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
 
 **land
 *calculate age class share for each forest land type
+*' @code
+*' Dynamic set mapping betwwen age calsses and forest land types depending on
+*' which time frame they belong to.
+
 ac_land32(ac,land32) = no;
 ac_land32(ac,"new")  = yes$(ord(ac) = 1);
 ac_land32(ac,"new_ndc") = yes$(ord(ac) = 1);
 ac_land32(ac,"prot") = yes$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planing_horizon/5);
 ac_land32(ac,"grow") = yes$((ord(ac)-1) > s32_planing_horizon/5 AND ord(ac) < card(ac));
 ac_land32(ac,"old")  = yes$(ord(ac) = card(ac));
-
+*' @stop
 *shift age-classes according to time step length
 s32_shift = m_yeardiff(t)/5;
 if((ord(t) = 1),
