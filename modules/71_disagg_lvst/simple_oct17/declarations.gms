@@ -14,19 +14,15 @@ positive variables
  
 equations
  q71_feed_rum_liv(j,kforage)                production constraint for ruminant livestock products
- q71_balanceflow_constrain(j,kli_rum,kforage)    balanceflow constraint for cluster forage feed products
+ q71_balanceflow_constraint(j,kli_rum,kforage)    balanceflow constraint for cluster forage feed products
  q71_prod_mon_liv(j,kli_mon)                production constraint for monogastrics livestock products
  q71_sum_rum_liv(j,kli_rum)                 total production of pasture and fodder fet ruminants
- ;
+;
 
 parameters
  i71_urban_area_share(j)                    share of urban area within a region (1)
- pc71_prod_reg(i,kli_rum)                   regional ruminant production of previous time step (mio. tDM per yr)
 ;
 
-scalars
- s71_lp_nlp									switch to change between linear (1) and non-linear (0) version of q71_feed_rum_liv
-;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
