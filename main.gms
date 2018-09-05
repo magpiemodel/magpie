@@ -24,8 +24,8 @@ $title magpie
 * md5sum: 7470017806bc592840883bd75f771482
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
-* Used data set: calibration_H12_c200_28Aug18.tgz
-* md5sum: 862d0cae716ff78385dd57970e561e7f
+* Used data set: calibration_H12_c200_29Aug18.tgz
+* md5sum: a71530714bb31e49c3f1c82870cea4c5
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/calibration
 * 
 * Low resolution: c200
@@ -59,7 +59,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Wed Aug 29 17:38:06 2018
+* Last modification (input data): Tue Sep 04 11:15:56 2018
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -97,7 +97,7 @@ $setglobal land  feb15
 $setglobal costs  default
 $setglobal interest_rate  reg_feb18
 $setglobal tc  endo_jun18
-$setglobal yields  dynamic_apr18
+$setglobal yields  dynamic_aug18
 
 $setglobal food  anthropometrics_jan18
 $setglobal demand  sector_may15

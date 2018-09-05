@@ -4,6 +4,16 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @description
+*' The nitrogen module calculates nitrogeneous emissions before technical
+*' mitigation, including N2O, NOx, NH3, NO3- and N2.
+*' The model receives information on nitrogen flows from [50_soil_budget],
+*' [55_awms], [18_residues], [59_som], and it provides the emissions to the
+*' module [56_ghg_policy].
+*' Emission estimates are largely based on the IPCC 2006 Guidelines for
+*' National Greenhouse Gas Inventories.
+*'
+*' @authors Benjamin Leon Bodirsky
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/51_nitrogen/ipcc2006_sep16/sets.gms"

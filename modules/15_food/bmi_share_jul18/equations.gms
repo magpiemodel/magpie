@@ -133,14 +133,16 @@ q15_bmi_shr_agg(iso,sex,age,bmi_group15) ..
 *' pregnancy and lactation (estimated based on the new-born population size)
 
 q15_intake(iso)..
-         v15_kcal_intake_total_regr(iso) =e=
-         (
-           sum((ct, sex, age, bmi_group15),
-               v15_bmi_shr_regr(iso,sex,age,bmi_group15)*
-               im_demography(ct,iso,sex,age) *
-               i15_intake(ct,iso,sex,age,bmi_group15)
-           ) + sum(ct,i15_kcal_pregnancy(ct,iso))
-         )/sum((sex,age,ct), im_demography(ct,iso,sex,age));
+         v15_kcal_intake_total_regr(iso)
+         * sum((sex,age,ct), im_demography(ct,iso,sex,age))
+         =e=
+         sum((ct, sex, age, bmi_group15),
+           v15_bmi_shr_regr(iso,sex,age,bmi_group15)*
+           im_demography(ct,iso,sex,age) *
+           i15_intake(ct,iso,sex,age,bmi_group15)
+         )
+         + sum(ct,i15_kcal_pregnancy(ct,iso))
+         ;
 
 
 *' Food demand is based on food intake and a regression
