@@ -14,20 +14,20 @@
                  vm_manure_recycling(i2,"nr")
                  * f51_ef_n_soil(n_pollutants_direct,"man_crop");
 
-*' Inorganic fertilizers...
+*' inorganic fertilizers...
  q51_emissions_inorg_fert(i2,n_pollutants_direct)..
                  vm_btm_reg(i2,"inorg_fert",n_pollutants_direct)
                  =e=
                  sum(land_ag,vm_nr_inorg_fert_reg(i2,land_ag))
                  * f51_ef_n_soil(n_pollutants_direct,"inorg_fert");
 
-*' Inorganic fertilizers...
+*' crop residues decaying on fields...
  q51_emissions_resid(i2,n_pollutants_direct)..
                  vm_btm_reg(i2,"resid",n_pollutants_direct)
                  =e=
                  vm_res_recycling(i2,"nr") * f51_ef_n_soil(n_pollutants_direct,"resid");
 
-*' Soil organic matter loss...
+*' soil organic matter loss...
  q51_emissions_som(i2,n_pollutants_direct)..
                  vm_btm_reg(i2,"som",n_pollutants_direct)
                  =e=
@@ -53,7 +53,8 @@
 
 *' Additionally to the direct emissions, part of the NH3 and NOx emissions
 *' as well as the leached NO3
-*' later result in indirect emissions of N2O.
+*' later result in indirect emissions of N2O when they are redeposited,
+*' nitrified and dinitrified.
  q51_emissions_indirect_n2o(i2,emis_source_n51) ..
                  vm_btm_reg(i2,emis_source_n51,"n2o_n_indirect")
                  =e=

@@ -130,7 +130,7 @@ q15_bmi_shr_agg(iso,sex,age,bmi_group15) ..
 
 *' Food intake is estimated based on BMI distribution, typical intakes for
 *' BMI groups, demographic structure and extra energy requirements for
-*' pregnancy and lactation (estimated based on the new-born population size)
+*' pregnancy and lactation (estimated based on the new-born population size).
 
 q15_intake(iso)..
          v15_kcal_intake_total_regr(iso)

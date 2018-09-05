@@ -8,6 +8,7 @@
 *' @description
 *' The nitrogen module calculates nitrogeneous emissions before technical
 *' mitigation, including N2O, NOx, NH3, NO3- and N2.
+*' @authors Benjamin Leon Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%nitrogen%" == "ipcc2006_sep16" $include "./modules/51_nitrogen/ipcc2006_sep16.gms"
