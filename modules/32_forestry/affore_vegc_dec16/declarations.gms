@@ -13,8 +13,8 @@ parameters
  p32_land(t,j,ac,when)                  Forestry land for each cell wood type and age class before and after optimization (mio. ha)
  pc32_land(j,land32)                    Forestry land per forestry land type initialization of the optimization (mio. ha)
  p32_aff_pot(t,j)                       Potential afforestation area (mio. ha)
- p32_aff_pol_timestep(t,j)			    NDC afforestation per time step (mio. ha)
- p32_aff_pol(t,j)			            NDC cumulative afforestion target (mio. ha)
+ p32_aff_pol_timestep(t,j)			    Nationally Determined Contributions afforestation per time step (mio. ha)
+ p32_aff_pol(t,j)			            Nationally Determined Contributions cumulative afforestion target (mio. ha)
  p32_aff_togo(t)              			Remaining NDC afforestation wrt to the max NDC target over time (Mha)
 ;
 
@@ -33,8 +33,8 @@ equations
  q32_cdr_aff(j,co2_forestry)  Calculation of CDR from afforestation in terms of CO2-C (mio. t)
  q32_carbon(j,c_pools)                    Forestry carbon stock calculation C (mio. t)
  q32_land_diff                            Aggregated difference in forestry land compared to previous timestep (mio. ha)
- q32_land_expansion(j,land32)		   	  Forestry land expansion
- q32_land_reduction(j,land32)		   	  Forestry land reduction
+ q32_land_expansion(j,land32)		   	  Forestry land expansion (mio. ha)
+ q32_land_reduction(j,land32)		   	  Forestry land reduction (mio. ha)
  q32_max_aff					          Maximum total global afforestation (mio. ha)
  q32_aff_pol(j)					          Afforestation policy constraint (mio. ha)
 ;
