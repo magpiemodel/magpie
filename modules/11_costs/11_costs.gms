@@ -11,7 +11,7 @@
 *' production in a recursive dynamic way. The interface variable `vm_cost_glo`
 *' is used for this purpose. The model optimizes the production activities
 *' accordingly to make sure that all the demand and supply constraints are met
-*' while minizing the global production costs.
+*' while minimizing the global production costs.
 
 *' @authors Benjamin Leon Bodirsky, Florian Humpenöder, Jan Philipp Dietrich
 

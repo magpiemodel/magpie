@@ -7,8 +7,8 @@
 *' @description In the exo_flexreg_apr16 realisation, Demand for material usage
 *' is calculated based on historical material demand or historical material demand
 *' combined with the relationship to food demand calculated by `vm_dem_food` interface
-*' in food module ()[15_food]). Observed material demand is fed as an exogenous
-*' input to the material module based on historical data.
+*' in food module([15_food]). Observed material demand is fed as an input to the
+*' material module based on historical data.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/62_material/exo_flexreg_apr16/sets.gms"
