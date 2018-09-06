@@ -25,7 +25,6 @@
 *'
 *' @authors Benjamin Leon Bodirsky, Jan Philipp Dietrich
 
-
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/15_food/bmi_share_jul18/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/15_food/bmi_share_jul18/declarations.gms"
