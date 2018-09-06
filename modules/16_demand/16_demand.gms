@@ -6,17 +6,15 @@
 
 *' @title Demand
 *'
-*' @description The demand module calculates the demand for all commodities that 
-*' has to be fulfilled by the model. In addition, it returns some other basic 
-*' information needed for demand calculations but also needed by other modules. 
+*' @description The demand module calculates the demand for all commodities that
+*' has to be fulfilled by the model. In addition, it returns some other basic
+*' information needed for demand calculations but also needed by other modules.
 *' A description of food demand scenarios that enter the model can be found
 *' in @bodirsky_global_2015-1, @bodirsky_n2o_2012 and @valin_fooddemand_2013.
 *'
-*' Unit for `fm_attributes(attributes,kall)` is
-*' ton per tDM for all products except for gross energy 
-*' where unit is PJ per mio. tDM.
-*' The units depend on the dimensions of the object, and all
-*' units need to be provided. 
+*' Unit for `fm_attributes(attributes,kall)` is ton per tDM for all products
+*' except for gross energy where unit is PJ per mio. tDM. The units depend on the
+*' dimensions of the object.
 *'
 *' @authors Isabelle Weindl, Benjamin Bodirsky, Jan Philipp Dietrich.
 

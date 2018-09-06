@@ -16,7 +16,7 @@ $ondelim
 $include "./modules/16_demand/sector_may15/input/f16_waste_shr.csv"
 $offdelim;
 
-table fm_attributes(attributes,kall) Conversion factors (x per mio. tDM per yr)
+table fm_attributes(attributes,kall) Conversion factors per mio. tDM per yr (1)
 $ondelim
 $include "./modules/16_demand/sector_may15/input/fm_attributes.cs3"
 $offdelim;
