@@ -18,7 +18,7 @@ scalar s15_maxiter maximum iteration number / 5 /;
 
 scalar s15_convergence convergence criteria   / 0.005 /;
 
-table f15_household_balance_flow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of inhomogenous products and processes in statistics (mio. t DM)
+table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of inhomogenous products and processes in statistics (mio. t DM)
 $ondelim
 $include "./modules/15_food/input/f15_household_balanceflow.cs3"
 $offdelim;
@@ -41,7 +41,7 @@ $ondelim
 $include "./modules/15_food/input/f15_demand_regression_parameters.cs3"
 $offdelim;
 
-table f15_bmi_shr_paras(sex, agegroup15, bmi_tree15, parameters15)  BMI share regression parameters (-)
+table f15_bmi_shr_paras(sex, agegroup15, bmi_tree15, paras_b15)  BMI share regression parameters (-)
 $ondelim
 $include "./modules/15_food/input/f15_bmi_shr_regr_paras.cs3"
 $offdelim;

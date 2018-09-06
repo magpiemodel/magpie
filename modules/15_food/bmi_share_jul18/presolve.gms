@@ -121,13 +121,13 @@ else
                  126.4*
                  (sum(underaged15,
                    p15_kcal_growth_food(t,iso,underaged15)
-                 )/3)**0.03464
+                 )/3)**0.03467
                  ;
           p15_bodyheight(t,iso,"M","15--19","preliminary") =
                  131.8*
                  (sum(underaged15,
                    p15_kcal_growth_food(t,iso,underaged15)
-                 )/3)**0.03975
+                 )/3)**0.03978
                  ;
      );
 *adjust body weight of kids proportional to over18 population

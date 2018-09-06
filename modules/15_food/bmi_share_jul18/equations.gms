@@ -7,7 +7,7 @@
 *' @equations
 
 q15_food_demand(i2,kfo) ..
-                (vm_dem_food(i2,kfo) + sum(ct, f15_household_balance_flow(ct,i2,kfo,"dm")))
+                (vm_dem_food(i2,kfo) + sum(ct, f15_household_balanceflow(ct,i2,kfo,"dm")))
                 * sum(ct,(f15_nutrition_attributes(ct,kfo,"kcal") * 10**6)) =g=
                 sum(ct,im_pop(ct,i2) * 365
                 * (p15_kcal_pc(ct,i2,kfo)+p15_balanceflow_kcal(ct,i2,kfo))
@@ -66,9 +66,9 @@ q15_budget(iso) ..
 q15_regr_bmi_shr(iso,sex,agegroup15,bmi_tree15) ..
         v15_regr_overgroups(iso,sex,agegroup15,bmi_tree15)
         =e=
-        f15_bmi_shr_paras(sex,agegroup15,bmi_tree15,"intercept")
-        + (f15_bmi_shr_paras(sex,agegroup15,bmi_tree15,"saturation") * v15_income_pc_real_ppp_iso(iso))
-        / (f15_bmi_shr_paras(sex,agegroup15,bmi_tree15,"halfsaturation") + v15_income_pc_real_ppp_iso(iso));
+        i15_bmi_intercept(sex,agegroup15,bmi_tree15)
+        + (i15_bmi_saturation(sex,agegroup15,bmi_tree15) * v15_income_pc_real_ppp_iso(iso))
+        / (i15_bmi_halfsat(sex,agegroup15,bmi_tree15) + v15_income_pc_real_ppp_iso(iso));
 
 *' Then we apply these regression shares to an hierarchical tree structure
 
@@ -162,9 +162,9 @@ q15_regr_kcal(iso) ..
 
 q15_regr(iso, regr15) ..
          v15_demand_regr(iso, regr15) =e=
-         i15_demand_paras(regr15,"intercept")
-         + (i15_demand_paras(regr15,"saturation") * v15_income_pc_real_ppp_iso(iso))
-         / (i15_demand_paras(regr15,"halfsaturation") + v15_income_pc_real_ppp_iso(iso)**i15_demand_paras(regr15,"non_saturation"));
+         i15_dem_intercept(regr15)
+         + (i15_dem_saturation(regr15) * v15_income_pc_real_ppp_iso(iso))
+         / (i15_dem_halfsat(regr15) + v15_income_pc_real_ppp_iso(iso)**i15_dem_nonsat(regr15));
 
 *' In the subsequent equations, those parameters
 *' are used to determine the dietary composition using an hirachical tree:

@@ -61,7 +61,7 @@ sets
    paras_s15 schofield equation parameters
    /slope, intercept/
 
-   parameters15 intake equation parameters
+   paras_b15 intake equation parameters
    /saturation,halfsaturation,intercept/
 
    kfo(kall) all products in the sectoral version
