@@ -13,7 +13,7 @@
 *' material, bioenergy, seed, waste and the domestic balance flow.
 *' Demand for seed, waste and the domestic balance flow are calculated internally
 *' within the [16_demand] module, while the other relevent demand values are taken
-*' from other modules. More information about the underlying connections can be q16_seed_demand
+*' from other modules. More information about the underlying connections can be seen
 *' from the interface plot made available with this document.
 
 q16_supply_crops(i2,kcr) ..
