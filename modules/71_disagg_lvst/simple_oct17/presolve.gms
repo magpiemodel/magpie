@@ -7,4 +7,4 @@
 v71_feed_balanceflow.lo(j,kli_rum,kforage)$(sum(cell(i,j),fm_feed_balanceflow(t,i,kli_rum,kforage)) > 0) = 0;
 v71_feed_balanceflow.up(j,kli_rum,kforage)$(sum(cell(i,j),fm_feed_balanceflow(t,i,kli_rum,kforage)) < 0) = 0;
 v71_feed_balanceflow.fx(j,kli_rum,kforage)$(sum(cell(i,j),fm_feed_balanceflow(t,i,kli_rum,kforage)) = 0) = 0;
-v71_feed_balanceflow.fx(j,kli_rum,kforage)$(pcm_land(j,"pasture")=0) = 0;
+v71_feed_balanceflow.fx(j,kli_rum,kforage)$(pcm_land(j,"past")=0) = 0;
