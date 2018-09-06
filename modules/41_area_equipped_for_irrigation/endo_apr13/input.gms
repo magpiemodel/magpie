@@ -11,7 +11,7 @@ $offdelim
 ;
 
 parameters
-f41_irrig(j) available area equipped for irrigation (mio ha) [AVL]
+f41_irrig(j) available area equipped for irrigation [AVL] (mio. ha) 
 /
 $ondelim
 $include "./modules/41_area_equipped_for_irrigation/input/avl_irrig.cs2"

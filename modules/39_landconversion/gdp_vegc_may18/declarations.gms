@@ -24,15 +24,15 @@ s39_max_gdp                           maximum gdp_pc of all regions in 1995 (USD
 
 parameters
 i39_landclear_gdp(bound39)            global range of land clearing costs (USD per ton C)
-p39_landclear_a                       intercept for land clearing costs calculation
-p39_landclear_b                       slope for land clearing costs calculation
+p39_landclear_a                       intercept for land clearing costs calculation (1)
+p39_landclear_b                       slope for land clearing costs calculation (1)
 p39_landclear_reg(t,i,land)	  		  regional land clearing costs (USD per ton C)
 p39_landclear(t,j,land)         	  cellular land clearing costs (USD per ton C)
 pc39_landclear(j,land)          	  current cellular land clearing costs (USD per ton C)
 
 i39_establish_gdp(land,bound39)       global range of land establishment costs (USD per hectare)
-p39_establish_a(land)                 intercept for establishment costs calculation
-p39_establish_b(land)                 slope for establishment costs calculation
+p39_establish_a(land)                 intercept for establishment costs calculation (1)
+p39_establish_b(land)                 slope for establishment costs calculation (1)
 p39_establish_reg(t,i,land)	  		  regional establishment costs (USD per hectare)
 p39_establish(t,j,land)         	  cellular establishment costs (USD per hectare)
 pc39_establish(j,land)          	  current cellular establishing costs (USD per hectare)

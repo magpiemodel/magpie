@@ -7,7 +7,7 @@
 
 positive variables
  vm_nr_inorg_fert_reg(i,land_ag)  inorganic fertilizer application (Tg N per yr)
- vm_nr_inorg_fert_costs(i)        cost of inorganic fertilizers (10^6 US$ per yr)
+ vm_nr_inorg_fert_costs(i)        cost of inorganic fertilizers (mio. USD per yr)
  v50_nr_eff(i)                    cropland nutrient uptake efficiency (Tg N per yr)
  v50_nr_eff_pasture(i)            pasture nutrient uptake efficiency (Tg N per yr)
  v50_nr_withdrawals(i,kcr)        withdrawals of Nr from soils (Tg N per yr)
@@ -15,11 +15,11 @@ positive variables
 ;
 
 equations
- q50_nr_cost_fert(i)        fertilizer costs
- q50_nr_bal_crp(i)          cropland nutrient inputs have to equal withdrawals and losses
- q50_nr_withdrawals(i,kcr)  calculating nr withdrawals
- q50_nr_bal_pasture(i)      nitrogen balance pasture lands
- q50_nr_deposition(i,land)  atmospheric deposition
+ q50_nr_cost_fert(i)        fertilizer costs (mio. USD per yr)
+ q50_nr_bal_crp(i)          cropland nutrient inputs have to equal withdrawals and losses (Tg N per yr)
+ q50_nr_withdrawals(i,kcr)  calculating nr withdrawals (Tg N per yr)
+ q50_nr_bal_pasture(i)      nitrogen balance pasture lands (Tg N per yr)
+ q50_nr_deposition(i,land)  atmospheric deposition (Tg N per yr)
 ;
 
 parameters
