@@ -6,7 +6,7 @@
 
 $setglobal c12_interest_rate  medium
 
-table f12_interest_bound(t,bound12) lower and higher bounds of interest rates
+table f12_interest_bound(t,bound12) lower and higher bounds of interest rates (1)
 $ondelim
 $include "./modules/12_interest_rate/input/f12_interest_rate_bound.cs3"
 $offdelim
