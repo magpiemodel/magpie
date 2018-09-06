@@ -13,13 +13,13 @@ positive variables
 ;
 
 equations
- q41_area_irrig(j)               irrigation area constraint
+ q41_area_irrig(j)               irrigation area constraint (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_cost_AEI(t,i,type)     irrigation expansion costs (mio. USD)
  ov41_AEI(t,j,type)        area equipped for irrigation in each gridcell (mio ha)
- oq41_area_irrig(t,j,type) irrigation area constraint
+ oq41_area_irrig(t,j,type) irrigation area constraint (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

@@ -62,13 +62,13 @@ scalar s15_count counter for creating average consumption over the length betwee
 
 parameters
 * technical
- p15_modelstat(t)                             model solver status (-)
+ p15_modelstat(t)                             model solver status (1)
  p15_iteration_counter(t)                     number of iterations required for reaching an equilibrium between food demand model and magpie (1)
  p15_convergence_measure(t)                   convergence measure to decide for continuation or stop of food_demand - magpie iteration (1)
- i15_dem_intercept(regr15)              food regression parameters intercept (-)
- i15_dem_saturation(regr15)             food regression parameters saturation(-)
- i15_dem_halfsat(regr15)                food regression parameters halfsaturation(-)
- i15_dem_nonsat(regr15)                 food regression parameters nonsaturation(-)
+ i15_dem_intercept(regr15)              food regression parameters intercept (1)
+ i15_dem_saturation(regr15)             food regression parameters saturation(1)
+ i15_dem_halfsat(regr15)                food regression parameters halfsaturation(1)
+ i15_dem_nonsat(regr15)                 food regression parameters nonsaturation(1)
 
 *prices
  p15_prices_kcal(t,iso,kfo)                   prices from magpie after optimization (USD05 per kcal)
@@ -82,9 +82,9 @@ parameters
   p15_kcal_growth_food(t_all,iso,underaged15)  average per-capita consumption of growth relevant food items in the last 3 5-year steps (kcal per capita per day)
   p15_physical_activity_level(t,iso,sex,age)    physical activity levels in PAL relative to Basic metabolic rate BMR (kcal per kcal)
 
-  i15_bmi_intercept(sex,agegroup15,bmi_tree15)   BMI share regression intercept (-)
-  i15_bmi_saturation(sex,agegroup15,bmi_tree15)  BMI share regression saturation (-)
-  i15_bmi_halfsat(sex,agegroup15,bmi_tree15)     BMI share regression halfsaturation (-)
+  i15_bmi_intercept(sex,agegroup15,bmi_tree15)   BMI share regression intercept (1)
+  i15_bmi_saturation(sex,agegroup15,bmi_tree15)  BMI share regression saturation (1)
+  i15_bmi_halfsat(sex,agegroup15,bmi_tree15)     BMI share regression halfsaturation (1)
 
   i15_bmi_shr_regr_pre(t,iso,sex,agegroup15,bmi_tree15)   BMI regression share precalculation based on regression parameters required for calibration (capita per capita)
   i15_bmi_shr_pre(t,iso,sex,agegroup15,bmi_group15) BMI share precalculation based on regression parameters required for calibration (capita per capita)

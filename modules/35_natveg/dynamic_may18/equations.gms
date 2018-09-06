@@ -51,6 +51,10 @@
 *' @stop
 *' Technical calculations needed for reducing differences in land-use patterns between time steps
 
+*' The gross changes in natural vegetation is calculated based on land expansion and
+*' land contraction of other land and land reduction of primary and secondary forest
+*' this information is then passed to the land module ([10_land]):
+
  q35_landdiff .. vm_landdiff_natveg =e=
  					sum((j2,land35),
  							v35_other_expansion(j2,land35)

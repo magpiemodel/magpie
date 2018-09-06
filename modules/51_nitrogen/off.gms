@@ -8,6 +8,7 @@
 *' Emissions are set to zero.
 *'
 *' @authors Benjamin Leon Bodirsky
+
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "declarations" $include "./modules/51_nitrogen/off/declarations.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/51_nitrogen/off/presolve.gms"
