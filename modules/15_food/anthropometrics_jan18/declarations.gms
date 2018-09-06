@@ -38,7 +38,7 @@ equations
 positive variables
   v15_kcal_regression(iso,kfo)     Uncalibrated regression estimates of calorie demand (kcal per cap per day)
   v15_kcal_regression_total(iso)     Uncalibrated regression estimates of  total per capita calories (kcal per cap per day)
-  v15_regression(iso, demand_subsys15)       Uncalibrated regression estimates of kcal shares (-)
+  v15_regression(iso, demand_subsys15)       Uncalibrated regression estimates of kcal shares (1)
   v15_income_pc_real_ppp_iso(iso)    real income per capita (USD per cap)
   v15_income_balance(iso)            balance variable to balance cases in which reduction in income beats gdp pc (USD05 per cap)
   v15_kcal_intake_regression(iso,sex,age) Uncalibrated regression estimate for per-capita intake (kcal per cap per day)
@@ -52,10 +52,10 @@ scalar s15_count counter for creating average consumption over the length betwee
 
 parameters
 * technical
- p15_modelstat(t)                             model solver status (-)
+ p15_modelstat(t)                             model solver status (1)
  p15_iteration_counter(t)                     number of iterations required for reaching an equilibrium between food demand model and magpie (1)
  p15_convergence_measure(t)                   convergence measure to decide for continuation or stop of food_demand - magpie iteration (1)
- i15_demand_regr_paras(demand_subsys15,par15)                        food regression parameters (-)
+ i15_demand_regr_paras(demand_subsys15,par15)                        food regression parameters (1)
 
 *prices
  p15_prices_kcal(t,iso,kfo)                   prices from magpie after optimization in US Dollar 05 per Kcal (USD05\kcal)
@@ -147,7 +147,7 @@ parameters
  ov_dem_food(t,i,kall,type)                      Demand for food (mio. tDM per yr)
  ov15_kcal_regression(t,iso,kfo,type)            Uncalibrated regression estimates of calorie demand (kcal per cap per day)
  ov15_kcal_regression_total(t,iso,type)          Uncalibrated regression estimates of  total per capita calories (kcal per cap per day)
- ov15_regression(t,iso,demand_subsys15,type)     Uncalibrated regression estimates of kcal shares (-)
+ ov15_regression(t,iso,demand_subsys15,type)     Uncalibrated regression estimates of kcal shares (1)
  ov15_income_pc_real_ppp_iso(t,iso,type)         real income per capita (USD per cap)
  ov15_income_balance(t,iso,type)                 balance variable to balance cases in which reduction in income beats gdp pc (USD05 per cap)
  ov15_kcal_intake_regression(t,iso,sex,age,type) Uncalibrated regression estimate for per-capita intake (kcal per cap per day)

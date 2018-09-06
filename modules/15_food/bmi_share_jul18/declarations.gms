@@ -45,7 +45,7 @@ equations
 positive variables
   v15_kcal_regr(iso,kfo)     Uncalibrated regression estimates of calorie demand (kcal per cap per day)
   v15_kcal_regr_total(iso)     Uncalibrated regression estimates of  total per capita calories (kcal per cap per day)
-  v15_demand_regr(iso, regr15)       Uncalibrated regression estimates of kcal shares (-)
+  v15_demand_regr(iso, regr15)       Uncalibrated regression estimates of kcal shares (1)
   v15_income_pc_real_ppp_iso(iso)    real income per capita (USD per cap)
   v15_income_balance(iso)            balance variable to balance cases in which reduction in income beats gdp pc (USD05 per cap)
   v15_kcal_intake_total_regr(iso)  Intake (kcal per cap per day)
@@ -62,10 +62,10 @@ scalar s15_count counter for creating average consumption over the length betwee
 
 parameters
 * technical
- p15_modelstat(t)                             model solver status (-)
+ p15_modelstat(t)                             model solver status (1)
  p15_iteration_counter(t)                     number of iterations required for reaching an equilibrium between food demand model and magpie (1)
  p15_convergence_measure(t)                   convergence measure to decide for continuation or stop of food_demand - magpie iteration (1)
- i15_demand_paras(regr15,par15)                        food regression parameters (-)
+ i15_demand_paras(regr15,par15)                        food regression parameters (1)
 
 *prices
  p15_prices_kcal(t,iso,kfo)                   prices from magpie after optimization (USD05 per kcal)
