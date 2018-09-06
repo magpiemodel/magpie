@@ -28,3 +28,13 @@ $ondelim
 $include "./modules/30_crop/endo_jun13/input/avl_land_si.cs3"
 $offdelim
 ;
+
+
+********* CROPAREA INITIALISATION *******************************************
+
+
+table f30_croparea_initialisation(t_all,j,kcr) Initial croparea (Mha)
+$ondelim
+$include "./modules/38_factor_costs/sticky_feb18/input/f30_croparea_initialisation.cs3"
+$offdelim
+;

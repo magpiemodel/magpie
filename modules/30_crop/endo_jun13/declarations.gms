@@ -4,6 +4,10 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+parameters
+ pcm_area(j,kcr)                 Crop areas of previous time step (mio. ha)
+;
+
 positive variables
  vm_area(j,kcr,w)                Agricultural production area (mio. ha)
 ;

@@ -4,6 +4,9 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*** Croparea Patterns are transferred to next timestep
+pcm_area(j,kcr) = sum(w, vm_area(j2,kcr,w));
+
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_area(t,j,kcr,w,"marginal")             = vm_area.m(j,kcr,w);
  oq30_cropland(t,j,"marginal")             = q30_cropland.m(j);
