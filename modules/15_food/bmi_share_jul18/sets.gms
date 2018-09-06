@@ -40,7 +40,7 @@ sets
        80--84,85--89,90--94,95--99,100+ )
    /
 
-   bmi_regr_type15
+   bmi_tree15
    /low,lowsplit,mediumsplit,high,highsplit/
 
    bmi_group15
@@ -58,8 +58,8 @@ sets
    estimates15
    /preliminary,final/
 
-   schofield_parameters15 schofield equation parameters with height
-   /height, weight, intercept/
+   paras_s15 schofield equation parameters
+   /slope, intercept/
 
    parameters15 intake equation parameters
    /saturation,halfsaturation,intercept/
@@ -113,7 +113,7 @@ sets
 * intercept + saturation give the max value if non-saturation is 1
 * halfsaturation is the gdp until which half of saturation is reached
 
-  demand_subsys15
+ regr15  demand regression types
       / overconsumption,livestockshare,processedshare,vegfruitshare /
 
 *** Scenarios

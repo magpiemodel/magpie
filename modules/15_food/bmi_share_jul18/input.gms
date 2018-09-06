@@ -36,12 +36,12 @@ $offdelim;
 * kcal/capita/day for saturation and intercept, and
 * USD05/capita for halfsaturation
 
-table f15_demand_regr_paras(demand_subsys15,food_scen15,par15)  Food regression parameters (-)
+table f15_demand_paras(regr15,food_scen15,par15)  Food regression parameters (-)
 $ondelim
 $include "./modules/15_food/input/f15_demand_regression_parameters.cs3"
 $offdelim;
 
-table f15_bmi_shr_regr_paras(sex, agegroup15, bmi_regr_type15, parameters15)  BMI share regression parameters (-)
+table f15_bmi_shr_paras(sex, agegroup15, bmi_tree15, parameters15)  BMI share regression parameters (-)
 $ondelim
 $include "./modules/15_food/input/f15_bmi_shr_regr_paras.cs3"
 $offdelim;
@@ -102,9 +102,9 @@ $ondelim
 $include "./modules/15_food/input/f15_bodyheight_historical.cs3"
 $offdelim;
 
-table f15_schofield_parameters_height(sex,age, schofield_parameters15) Schofield equation parameters (-)
+table f15_schofield(sex,age, paras_s15) Schofield equation parameters (-)
 $ondelim
-$include "./modules/15_food/input/f15_schofield_parameters_height.cs3"
+$include "./modules/15_food/input/f15_schofield_parameters.cs3"
 $offdelim
 ;
 
