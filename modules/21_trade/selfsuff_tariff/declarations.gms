@@ -12,9 +12,9 @@ parameters
 positive variables
  v21_excess_dem(k_trade)                 global excess demand (mio. tDM)
  v21_excess_prod(i,k_trade)              regional excess production (mio. tDM)
- vm_cost_trade(i)                        transport costs and taxes for the bilateral trade (Mio USD05MER)
- v21_export(i,k_trade)                  export quantities (Mio t DM)
- v21_import(i,k_trade)                  import quantities (Mio t DM)
+ vm_cost_trade(i)                        transport costs and taxes for the bilateral trade (mio. USD05MER)
+ v21_export(i,k_trade)                  export quantities (mio. tDM)
+ v21_import(i,k_trade)                  import quantities (mio. tDM)
 ;
 
 equations
@@ -24,22 +24,22 @@ equations
  q21_trade_reg(i,k_trade)                Regional self sufficiency constraint
  q21_excess_dem(k_trade)                 global excess demand
  q21_excess_supply(i,k_trade)            regional excess production
- q21_cost_trade(i)                       trade costs (Mio USD05MER)
+ q21_cost_trade(i)                       trade costs (mio. USD05MER)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov21_excess_dem(t,k_trade,type)      global excess demand (mio. tDM)
  ov21_excess_prod(t,i,k_trade,type)   regional excess production (mio. tDM)
- ov_cost_trade(t,i,type)              transport costs and taxes for the bilateral trade (Mio USD05MER)
- ov21_export(t,i,k_trade,type)        export quantities (Mio t DM)
- ov21_import(t,i,k_trade,type)        import quantities (Mio t DM)
+ ov_cost_trade(t,i,type)              transport costs and taxes for the bilateral trade (mio. USD05MER)
+ ov21_export(t,i,k_trade,type)        export quantities (mio. tDM)
+ ov21_import(t,i,k_trade,type)        import quantities (mio. tDM)
  oq21_trade_glo(t,k_trade,type)       Import Export Balance
  oq21_notrade(t,i,k_notrade,type)     fix of not traded commodities
  oq21_trade(t,i,k_trade,type)         Regional trade balance
  oq21_trade_reg(t,i,k_trade,type)     Regional self sufficiency constraint
  oq21_excess_dem(t,k_trade,type)      global excess demand
  oq21_excess_supply(t,i,k_trade,type) regional excess production
- oq21_cost_trade(t,i,type)            trade costs (Mio USD05MER)
+ oq21_cost_trade(t,i,type)            trade costs (mio. USD05MER)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
