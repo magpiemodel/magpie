@@ -7,7 +7,7 @@
 *' @title Climate
 *'
 *' @description The climate module provides information about the present
-*' climate classes in the different cells (as share of the total cell).
+*' climate classes in the different cells (as shares of the total cell).
 *' This information is used by other modules to choose climate class depending
 *' factors such as growth parameters correctly (e.g. used in [35_natveg]).
 *'
