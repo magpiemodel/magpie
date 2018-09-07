@@ -6,7 +6,7 @@
 
 
 positive variables
- vm_cost_trade(i)                            transport costs and taxes for the bilateral trade (Mio US$)
+ vm_cost_trade(i)                            transport costs and taxes for the bilateral trade (Mio USD)
 ;
 
 equations
@@ -15,7 +15,7 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_trade(t,i,type)  transport costs and taxes for the bilateral trade (Mio US$)
+ ov_cost_trade(t,i,type)  transport costs and taxes for the bilateral trade (Mio USD)
  oq21_notrade(t,i,k,type) fix of not traded commodities
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

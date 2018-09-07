@@ -5,7 +5,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-*Abatement options are in 5 US$/tC steps; options at zero price are in the first step
+*Abatement options are in 5 USD/tC steps; options at zero price are in the first step
 i57_mac_step(t,i) = min(201, ceil(im_pollutant_prices(t,i,"co2_c") / 5) + 1);
 
 im_maccs_mitigation(t,i,emis_source,pollutants) = 0;
