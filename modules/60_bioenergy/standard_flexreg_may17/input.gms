@@ -33,7 +33,7 @@ $if "%c60_2ndgen_biodem%" == "emulator" $offdelim
 $if "%c60_2ndgen_biodem%" == "emulator" /
 $if "%c60_2ndgen_biodem%" == "emulator" ;
 
-table f60_bioenergy_dem(t_all,i,scen2nd60) annual bioenergy demand (regional) (10^6 GJ)
+table f60_bioenergy_dem(t_all,i,scen2nd60) annual bioenergy demand (regional) (10^6 GJ per yr)
 $ondelim
 $include "./modules/60_bioenergy/input/f60_bioenergy_dem.cs3"
 $offdelim
@@ -42,7 +42,7 @@ $offdelim
 $setglobal c60_res_2ndgenBE_dem  ssp2
 *   options:    ssp1,ssp2,ssp3,ssp4,ssp5,off
 
-table f60_res_2ndgenBE_dem(t_all,i,scen2ndres60) annual residue demand for 2nd generation bioenergy(regional) (10^6 GJ)
+table f60_res_2ndgenBE_dem(t_all,i,scen2ndres60) annual residue demand for 2nd generation bioenergy(regional) (10^6 GJ per yr)
 $ondelim
 $include "./modules/60_bioenergy/input/f60_2ndgenBE_residue_dem.cs3"
 $offdelim
@@ -52,7 +52,7 @@ $offdelim
 $setglobal c60_1stgen_biodem  const2020
 *   options:  "const2020", "const2030", "phaseout2020"
 
-table f60_1stgen_bioenergy_dem(t_all,i,scen1st60,kall) annual 1st generation bioenergy demand (10^6 GJ)
+table f60_1stgen_bioenergy_dem(t_all,i,scen1st60,kall) annual 1st generation bioenergy demand (10^6 GJ per yr)
 $ondelim
 $include "./modules/60_bioenergy/input/f60_1stgen_bioenergy_dem.cs3"
 $offdelim
