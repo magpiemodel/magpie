@@ -30,19 +30,19 @@ $ondelim
 $include "./modules/21_trade/input/f21_trade_balanceflow.cs3"
 $offdelim;
 
-table f21_trade_margin(i,kall) costs of freight and insurance (USD per DMT)
+table f21_trade_margin(i,kall) costs of freight and insurance (USD per tDM)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_margin.cs3"
 $offdelim
 ;
 
-table f21_tariff_export(i,kall) specific duty tariffs on exports (USD per DMT)
+table f21_tariff_export(i,kall) specific duty tariffs on exports (USD per tDM)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_tariff_export.cs3"
 $offdelim
 ;
 
-table f21_tariff_import(i,kall) specific duty tariffs on imports (USD per DMT)
+table f21_tariff_import(i,kall) specific duty tariffs on imports (USD per tDM)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_tariff_import.cs3"
 $offdelim
