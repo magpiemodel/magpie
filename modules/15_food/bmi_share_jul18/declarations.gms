@@ -180,5 +180,35 @@ m15_food_demand.holdfixed = 1 ;
 
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
-
+parameters
+ ov_dem_food(t,i,kall,type)                                     Demand for food (mio. tDM per yr)
+ ov15_kcal_regr(t,iso,kfo,type)                                 Uncalibrated regression estimates of calorie demand (kcal per cap per day)
+ ov15_kcal_regr_total(t,iso,type)                               Uncalibrated regression estimates of  total per capita calories (kcal per cap per day)
+ ov15_demand_regr(t,iso,regr15,type)                            Uncalibrated regression estimates of kcal shares (-)
+ ov15_income_pc_real_ppp_iso(t,iso,type)                        real income per capita (USD per cap)
+ ov15_income_balance(t,iso,type)                                balance variable to balance cases in which reduction in income beats gdp pc (USD05 per cap)
+ ov15_kcal_intake_total_regr(t,iso,type)                        Intake (kcal per cap per day)
+ ov15_regr_overgroups(t,iso,sex,agegroup15,bmi_tree15,type)     hierarchical tree parameter regressions (capita per capita))
+ ov15_bmi_shr_regr(t,iso,sex,age,bmi_group15,type)              uncalibrated share of population groups belonging to a certain bmi_group (capita per capita)
+ ov15_bmi_shr_overgroups(t,iso,sex,agegroup15,bmi_group15,type) uncalibrated  share of population groups belonging to a certain bmi_group (capita per capita)
+ ov15_objective(t,type)                                         objective term (USD05)
+ oq15_food_demand(t,i,kfo,type)                                 Food demand (mio. kcal)
+ oq15_aim(t,type)                                               aim function food demand model (mio. USD05)
+ oq15_budget(t,iso,type)                                        Household Budget Constraint (USD05 per capita per day)
+ oq15_regr_bmi_shr(t,iso,sex,agegroup15,bmi_tree15,type)        estimates regression parameters for BMI regression shares (capita per capita)
+ oq15_bmi_shr_verylow(t,iso,sex,agegroup15,type)                estimates bmi share for population groups (capita per capita)
+ oq15_bmi_shr_low(t,iso,sex,agegroup15,type)                    estimates bmi share for population groups (capita per capita)
+ oq15_bmi_shr_medium(t,iso,sex,agegroup15,type)                 estimates bmi share for population groups (capita per capita)
+ oq15_bmi_shr_medium_high(t,iso,sex,agegroup15,type)            estimates bmi share for population groups (capita per capita)
+ oq15_bmi_shr_high(t,iso,sex,agegroup15,type)                   estimates bmi share for population groups  (capita per capita)
+ oq15_bmi_shr_veryhigh(t,iso,sex,agegroup15,type)               estimates bmi share for population groups  (capita per capita)
+ oq15_bmi_shr_agg(t,iso,sex,age,bmi_group15,type)               disaggregates age groups from overarchign groups (cpatia per capita)
+ oq15_intake(t,iso,type)                                        Intake estimation for country total (kcal per capita per day)
+ oq15_regr_kcal(t,iso,type)                                     Per capita total consumption (kcal per capita per day)
+ oq15_regr(t,iso,regr15,type)                                   Share regressions  (kcal per kcal)
+ oq15_foodtree_kcal_animals(t,iso,kfo_ap,type)                  Demand for animal products  (kcal per capita per day)
+ oq15_foodtree_kcal_processed(t,iso,kfo_pf,type)                Demand for processed products  (kcal per capita per day)
+ oq15_foodtree_kcal_staples(t,iso,kfo_st,type)                  Demand for staple products  (kcal per capita per day)
+ oq15_foodtree_kcal_vegetables(t,iso,type)                      Demand for vegetable and fruits products  (kcal per capita per day)
+;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

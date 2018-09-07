@@ -7,13 +7,13 @@
 positive variables
 
  vm_nr_inorg_fert_reg(i,land_ag)  inorganic fertilizer application (Tg N per yr)
- vm_nr_inorg_fert_costs(i)        cost of inorganic fertiliuers (10^6 US$ per yr)
+ vm_nr_inorg_fert_costs(i)        cost of inorganic fertiliuers (mio. USD per yr)
 
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_nr_inorg_fert_reg(t,i,land_ag,type) inorganic fertilizer application (Tg N per yr)
- ov_nr_inorg_fert_costs(t,i,type)       cost of inorganic fertiliuers (10^6 US$ per yr)
+ ov_nr_inorg_fert_costs(t,i,type)       cost of inorganic fertiliuers (mio. USD per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

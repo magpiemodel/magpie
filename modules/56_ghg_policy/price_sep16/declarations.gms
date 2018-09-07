@@ -5,7 +5,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- im_pollutant_prices(t_all,i,pollutants)      certificate prices for N2O-N CH4 CO2-C (US$2004 per Mg)
+ im_pollutant_prices(t_all,i,pollutants)      certificate prices for N2O-N CH4 CO2-C (USD2004 per Mg)
  p56_ghg_price_growth_rate(t,i,pollutants)    growth rate of certificate price 
  p56_ghg_price_growth_rate_avg(i,pollutants)  average over time of growth rate of certificate price
 ;
@@ -24,35 +24,35 @@ equations
 ;
 
 positive variables
- v56_reward_cdr_aff(j,co2_forestry)  regional revenues for carbon captured by afforestation (10^6 US$ per yr)
- vm_reward_cdr_aff(i)                cellular revenues for carbon captured by afforestation (10^6 US$ per yr)
+ v56_reward_cdr_aff(j,co2_forestry)  regional revenues for carbon captured by afforestation (mio. USD per yr)
+ vm_reward_cdr_aff(i)                cellular revenues for carbon captured by afforestation (mio. USD per yr)
 ;
 
 variables
  vm_btm_reg(i,emis_source,pollutants)                        Regional emissions before technical mitigation (x per yr)
  vm_btm_cell(j,emis_source,pollutants)                       Cellular emissions before technical mitigation (x per yr)
- vm_emission_costs(i)                                        Costs for emission rights for pollutants and greenhouse gases (10^6 US$05 per yr)
+ vm_emission_costs(i)                                        Costs for emission rights for pollutants and greenhouse gases (mio. USD05 per yr)
  vm_emissions_reg(i,emis_source,pollutants)                  Regional emissions by source and gas after technical mitigation N CH4 C (Tg per yr)
  v56_emis_cell(j,emis_source,pollutants)                     Cellular emissions by source and gas after technical mitigation N CH4 C (Tg per yr)
- v56_emission_costs_reg_yearly(i,emis_reg_yearly56)          Costs for emissions occuring yearly (10^6 USD05 per yr)
- v56_emission_costs_reg_oneoff(i,emis_reg_oneoff56)          Costs for emissions occuring only once in time (10^6 USD05 per yr)
- v56_emission_costs_cell_yearly(j,emis_cell_yearly56)        Costs for emissions occuring yearly (10^6 USD05 per yr)
- v56_emission_costs_cell_oneoff(j,emis_cell_oneoff56)        Costs for emissions occuring only once in time (10^6 USD05 per yr)
+ v56_emission_costs_reg_yearly(i,emis_reg_yearly56)          Costs for emissions occuring yearly (mio. USD05 per yr)
+ v56_emission_costs_reg_oneoff(i,emis_reg_oneoff56)          Costs for emissions occuring only once in time (mio. USD05 per yr)
+ v56_emission_costs_cell_yearly(j,emis_cell_yearly56)        Costs for emissions occuring yearly (mio. USD05 per yr)
+ v56_emission_costs_cell_oneoff(j,emis_cell_oneoff56)        Costs for emissions occuring only once in time (mio. USD05 per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov56_reward_cdr_aff(t,j,co2_forestry,type)                      regional revenues for carbon captured by afforestation (10^6 US$ per yr)
- ov_reward_cdr_aff(t,i,type)                                     cellular revenues for carbon captured by afforestation (10^6 US$ per yr)
+ ov56_reward_cdr_aff(t,j,co2_forestry,type)                      regional revenues for carbon captured by afforestation (mio. USD per yr)
+ ov_reward_cdr_aff(t,i,type)                                     cellular revenues for carbon captured by afforestation (mio. USD per yr)
  ov_btm_reg(t,i,emis_source,pollutants,type)                     Regional emissions before technical mitigation (x per yr)
  ov_btm_cell(t,j,emis_source,pollutants,type)                    Cellular emissions before technical mitigation (x per yr)
- ov_emission_costs(t,i,type)                                     Costs for emission rights for pollutants and greenhouse gases (10^6 US$05 per yr)
+ ov_emission_costs(t,i,type)                                     Costs for emission rights for pollutants and greenhouse gases (mio. USD05 per yr)
  ov_emissions_reg(t,i,emis_source,pollutants,type)               Regional emissions by source and gas after technical mitigation N CH4 C (Tg per yr)
  ov56_emis_cell(t,j,emis_source,pollutants,type)                 Cellular emissions by source and gas after technical mitigation N CH4 C (Tg per yr)
- ov56_emission_costs_reg_yearly(t,i,emis_reg_yearly56,type)      Costs for emissions occuring yearly (10^6 USD05 per yr)
- ov56_emission_costs_reg_oneoff(t,i,emis_reg_oneoff56,type)      Costs for emissions occuring only once in time (10^6 USD05 per yr)
- ov56_emission_costs_cell_yearly(t,j,emis_cell_yearly56,type)    Costs for emissions occuring yearly (10^6 USD05 per yr)
- ov56_emission_costs_cell_oneoff(t,j,emis_cell_oneoff56,type)    Costs for emissions occuring only once in time (10^6 USD05 per yr)
+ ov56_emission_costs_reg_yearly(t,i,emis_reg_yearly56,type)      Costs for emissions occuring yearly (mio. USD05 per yr)
+ ov56_emission_costs_reg_oneoff(t,i,emis_reg_oneoff56,type)      Costs for emissions occuring only once in time (mio. USD05 per yr)
+ ov56_emission_costs_cell_yearly(t,j,emis_cell_yearly56,type)    Costs for emissions occuring yearly (mio. USD05 per yr)
+ ov56_emission_costs_cell_oneoff(t,j,emis_cell_oneoff56,type)    Costs for emissions occuring only once in time (mio. USD05 per yr)
  oq56_technical_mitigation_reg(t,i,pollutants,emis_source,type)  application of maccs on emissions
  oq56_technical_mitigation_cell(t,j,pollutants,emis_source,type) application of maccs on emissions
  oq56_cell_to_reg(t,i,pollutants,emis_source,type)               aggregation to regional emissions

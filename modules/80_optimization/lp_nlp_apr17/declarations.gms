@@ -10,5 +10,5 @@ parameters
 
 scalars
   s80_counter      counter (1)
-  s80_obj_linear   linear objective value (Mio. USD)
+  s80_obj_linear   linear objective value (mio. USD)
 ;

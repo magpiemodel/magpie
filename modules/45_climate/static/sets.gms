@@ -4,6 +4,8 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @code
+
 sets
    clcl climate classification types
            /
@@ -40,5 +42,7 @@ sets
              Csc  "warm temperate summer dry cool summer"
            /
 ;
+
+*' @stop
 
 *** EOF sets.gms ***

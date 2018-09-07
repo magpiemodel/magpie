@@ -24,7 +24,7 @@ $ondelim
 $include "./modules/21_trade/input/f21_trade_export_share.cs3"
 $offdelim;
 
-table f21_trade_balanceflow(t_all,kall) domestic balance flows (mio. ton DM)
+table f21_trade_balanceflow(t_all,kall) domestic balance flows (mio. tDM)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_balanceflow.cs3"
 $offdelim;

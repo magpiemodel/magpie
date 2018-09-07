@@ -18,12 +18,12 @@ scalar s15_maxiter maximum iteration number / 5 /;
 
 scalar s15_convergence convergence criteria   / 0.005 /;
 
-table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of inhomogenous products and processes in statistics (mio. t DM)
+table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of inhomogenous products and processes in statistics (mio. tDM)
 $ondelim
 $include "./modules/15_food/input/f15_household_balanceflow.cs3"
 $offdelim;
 
-table f15_nutrition_attributes(t_all,kall,nutrition) nutrition attributes of fooditems dedicated for fooduse (mio. kcal per t DM | t Protein per ton DM)
+table f15_nutrition_attributes(t_all,kall,nutrition) nutrition attributes of fooditems dedicated for fooduse (mio. kcal per tDM | t Protein per tDM)
 $ondelim
 $include "./modules/15_food/input/f15_nutrition_attributes.cs3"
 $offdelim;
@@ -69,7 +69,7 @@ $include "./modules/15_food/input/f15_intake_pc_observed_iso.cs3"
 $offdelim;
 
 
-parameter f15_prices_initial(kall) Food prices in initialisation period (USD05 per t DM)
+parameter f15_prices_initial(kall) Food prices in initialisation period (USD05 per tDM)
 /
 $ondelim
 $include "./modules/15_food/input/f15_prices_initial.csv"
@@ -77,7 +77,7 @@ $offdelim
 /;
 
 
-parameter f15_price_index(t_all) Food prices index in initialisation period (USD05 per t DM)
+parameter f15_price_index(t_all) Food prices index in initialisation period (USD05 per tDM)
 /
 $ondelim
 $include "./modules/15_food/input/f15_prices_index.csv"

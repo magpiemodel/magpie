@@ -12,9 +12,9 @@ parameters
 ;
 
 positive variables
- v21_excess_dem(k_trade)                 global excess demand (mio. ton DM)
- v21_excess_prod(i,k_trade)              regional excess production (mio. ton DM)
- vm_cost_trade(i)                        transport costs and taxes for the bilateral trade (Mio USD)
+ v21_excess_dem(k_trade)                 global excess demand (mio. tDM)
+ v21_excess_prod(i,k_trade)              regional excess production (mio. tDM)
+ vm_cost_trade(i)                        transport costs and taxes for the bilateral trade (mio. USD)
  v21_cost_trade_reg(i,k_trade)           interregional trade costs (mio. USD)
 ;
 
@@ -30,9 +30,9 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov21_excess_dem(t,k_trade,type)       global excess demand (mio. ton DM)
- ov21_excess_prod(t,i,k_trade,type)    regional excess production (mio. ton DM)
- ov_cost_trade(t,i,type)               transport costs and taxes for the bilateral trade (Mio USD)
+ ov21_excess_dem(t,k_trade,type)       global excess demand (mio. tDM)
+ ov21_excess_prod(t,i,k_trade,type)    regional excess production (mio. tDM)
+ ov_cost_trade(t,i,type)               transport costs and taxes for the bilateral trade (mio. USD)
  ov21_cost_trade_reg(t,i,k_trade,type) interregional trade costs (mio. USD)
  oq21_trade_glo(t,k_trade,type)        Global production > demand constraint
  oq21_notrade(t,i,k_notrade,type)      fix of not traded commodities

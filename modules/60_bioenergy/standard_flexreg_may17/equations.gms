@@ -10,9 +10,7 @@
 *' the following two equations from which always only one is active:
 *' If $c60\_biodem\_level$ is 1 (regional) the right hand side of the first equation
 *' is set to 0, if it is 0 (global) the right hand side of the second equation
-*' is set to 0. In addition both equations are deactivated if $c60\_use\_bioenergy$
 *' is set to 0.
-
 
 q60_bioenergy_glo.. sum((kbe60,i2), vm_dem_bioen(i2,kbe60)*fm_attributes("ge",kbe60))
           =g= sum((ct,i2),i60_bioenergy_dem(ct,i2))*(1-c60_biodem_level);
@@ -30,3 +28,10 @@ q60_res_2ndgenBE(i2) ..
   sum(kres, vm_dem_bioen(i2,kres) * fm_attributes("ge",kres)
             - sum(ct,f60_1stgen_bioenergy_dem(ct,i2,"%c60_1stgen_biodem%",kres))) =g= 
   sum(ct,i60_res_2ndgenBE_dem(ct,i2));
+  
+*' There is additionally some demand of residues for second generation bioenergy 
+*' $i60\_res\_2ndgenBE\_dem$, which is exogenously provided by the estimation that 
+*' roughly 33% of available residues for recycling on cropland can be used for 2nd 
+*' generation bioenergy depending on the SSP scenario, since residue stock and use 
+*' is mainly driven by population and GDP.
+ 

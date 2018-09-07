@@ -4,5 +4,9 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @code
+*' In each cell $j$, the climate class shares $clcl$ sum up to 1.
 
 pm_climate_class(j,clcl) = f45_koeppengeiger(j,clcl);
+
+*' @stop

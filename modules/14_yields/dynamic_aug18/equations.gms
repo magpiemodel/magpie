@@ -7,25 +7,15 @@
 *' @equations
 
 ***CROP YIELD CALCULATIONS**********************************************
-q14_yield_crop(j2,kcr,w) .. 
+q14_yield_crop(j2,kcr,w) ..
  vm_yld(j2,kcr,w) =e= sum(ct,i14_yields(ct,j2,kcr,w))*sum(cell(i2,j2),vm_tau(i2)/fm_tau1995(i2));
 
 
 ***PASTURE YIELD CALCULATIONS*******************************************
 *' In contrast to the [biocorrect] realization, pasture yields are not linked to yield increases
-*' in the crop sector, but to an exogenous pasture management factor: 
+*' in the crop sector, but to an exogenous pasture management factor:
 
 q14_yield_past(j2,w) ..
- vm_yld(j2,"pasture",w) =e= sum(ct,i14_yields(ct,j2,"pasture",w)*sum(cell(i2,j2),pm_past_mngmnt_factor(ct,i2)));
-
-
-
-    
-               
-  
-
-
-
-
-
-
+ vm_yld(j2,"pasture",w) =e=
+ sum(ct,(i14_yields(ct,j2,"pasture",w)
+ *sum(cell(i2,j2),pm_past_mngmnt_factor(ct,i2))));
