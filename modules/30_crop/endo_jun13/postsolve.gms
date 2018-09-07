@@ -5,7 +5,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *** Croparea Patterns are transferred to next timestep
-pcm_area(j,kcr) = sum(w, vm_area(j2,kcr,w));
+pcm_area(j,kcr) = sum(w, vm_area.l(j,kcr,w));
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_area(t,j,kcr,w,"marginal")             = vm_area.m(j,kcr,w);

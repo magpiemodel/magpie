@@ -6,10 +6,12 @@
 
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/71_disagg_lvst/simple_oct17/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/71_disagg_lvst/simple_oct17/declarations.gms"
-$Ifi "%phase%" == "equations" $include "./modules/71_disagg_lvst/simple_oct17/equations.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/71_disagg_lvst/simple_oct17/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/71_disagg_lvst/simple_oct17/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/71_disagg_lvst/simple_oct17/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/71_disagg_lvst/foragebased_aug18/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/71_disagg_lvst/foragebased_aug18/declarations.gms"
+$Ifi "%phase%" == "equations" $include "./modules/71_disagg_lvst/foragebased_aug18/equations.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/71_disagg_lvst/foragebased_aug18/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/71_disagg_lvst/foragebased_aug18/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/71_disagg_lvst/foragebased_aug18/postsolve.gms"
+$Ifi "%phase%" == "nl_fix" $include "./modules/71_disagg_lvst/foragebased_aug18/nl_fix.gms"
+$Ifi "%phase%" == "nl_release" $include "./modules/71_disagg_lvst/foragebased_aug18/nl_release.gms"
 *######################## R SECTION END (PHASES) ###############################
