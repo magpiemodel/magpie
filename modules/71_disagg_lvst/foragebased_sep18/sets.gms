@@ -31,3 +31,4 @@ sets
 alias(j,j3);
 alias(cell,cell2);
 alias(kforage,kforage2);
+alias(w,w2)

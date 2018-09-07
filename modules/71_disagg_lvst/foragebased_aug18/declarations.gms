@@ -10,27 +10,19 @@ variables
 
 positive variables
  v71_prod_rum(j,kli_rum,kforage)            production of pasture and fodder fed ruminants within a cluster
- v71_area_share(j,kforage)                  area ratio of cluster to region for forage categories (1)
 ;
  
 equations
  q71_feed_rum_liv(j,kforage)                production constraint for ruminant livestock products
  q71_balanceflow_constraint(j,kli_rum,kforage)    balanceflow constraint for cluster forage feed products
- q71_past_area_share(j)	                    area ratio of cluster to region for pasture
- q71_foddr_area_share(j)                    area ratio of cluster to region for fodder
  q71_prod_mon_liv(j,kli_mon)                production constraint for monogastrics livestock products
  q71_sum_rum_liv(j,kli_rum)                 total production of pasture and fodder fet ruminants
 ;
 
 parameters
  i71_urban_area_share(j)                    share of urban area within a region (1)
- pc71_area_share(j,kforage)                 area ratio of cluster to region for forage categories of previous timestep (1)
 ;
 
-
-scalars
- s71_lp_fix                                 switch to fix equations to linear relation
-;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
