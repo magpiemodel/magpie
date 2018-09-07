@@ -6,8 +6,8 @@
 
 
 parameters
- i60_bioenergy_dem(t,i)   			Regional bioenergy demand per year (10^6 GJ per yr)
- i60_res_2ndgenBE_dem(t,i)			Regional residue demand for 2nd generation bioenergy per year (10^6 GJ per yr)
+ i60_bioenergy_dem(t,i)   			Regional bioenergy demand per year (mio. GJ per yr)
+ i60_res_2ndgenBE_dem(t,i)			Regional residue demand for 2nd generation bioenergy per year (mio. GJ per yr)
 ;
 
 variables
@@ -19,17 +19,17 @@ positive variables
 ;
 
 equations
- q60_bioenergy_glo                 	Global bioenergy demand (10^6 GJ per yr)
- q60_bioenergy_reg(i)              	Regional bioenergy demand (10^6 GJ per yr)
- q60_res_2ndgenBE(i)       			Regional residue demand for 2nd generation bioenergy (10^6 GJ per yr) 
+ q60_bioenergy_glo                 	Global bioenergy demand (mio. GJ per yr)
+ q60_bioenergy_reg(i)              	Regional bioenergy demand (mio. GJ per yr)
+ q60_res_2ndgenBE(i)       			Regional residue demand for 2nd generation bioenergy (mio. GJ per yr) 
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_cost_bioen(t,i,type)      Regional bioenergy production costs (mio. USD05 per yr)
  ov_dem_bioen(t,i,kall,type)  Regional bioenergy demand  (mio. tDM per yr)
- oq60_bioenergy_glo(t,type)   Global bioenergy demand (10^6 GJ per yr)
- oq60_bioenergy_reg(t,i,type) Regional bioenergy demand (10^6 GJ per yr)
- oq60_res_2ndgenBE(t,i,type)  Regional residue demand for 2nd generation bioenergy (10^6 GJ per yr) 
+ oq60_bioenergy_glo(t,type)   Global bioenergy demand (mio. GJ per yr)
+ oq60_bioenergy_reg(t,i,type) Regional bioenergy demand (mio. GJ per yr)
+ oq60_res_2ndgenBE(t,i,type)  Regional residue demand for 2nd generation bioenergy (mio. GJ per yr) 
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
