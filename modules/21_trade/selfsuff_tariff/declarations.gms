@@ -10,8 +10,8 @@ parameters
 ;
 
 positive variables
- v21_excess_dem(k_trade)                 global excess demand (mio. ton DM)
- v21_excess_prod(i,k_trade)              regional excess production (mio. ton DM)
+ v21_excess_dem(k_trade)                 global excess demand (mio. tDM)
+ v21_excess_prod(i,k_trade)              regional excess production (mio. tDM)
  vm_cost_trade(i)                        transport costs and taxes for the bilateral trade (Mio USD05MER)
  v21_export(i,k_trade)                  export quantities (Mio t DM)
  v21_import(i,k_trade)                  import quantities (Mio t DM)
@@ -29,8 +29,8 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov21_excess_dem(t,k_trade,type)      global excess demand (mio. ton DM)
- ov21_excess_prod(t,i,k_trade,type)   regional excess production (mio. ton DM)
+ ov21_excess_dem(t,k_trade,type)      global excess demand (mio. tDM)
+ ov21_excess_prod(t,i,k_trade,type)   regional excess production (mio. tDM)
  ov_cost_trade(t,i,type)              transport costs and taxes for the bilateral trade (Mio USD05MER)
  ov21_export(t,i,k_trade,type)        export quantities (Mio t DM)
  ov21_import(t,i,k_trade,type)        import quantities (Mio t DM)
