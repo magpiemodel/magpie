@@ -13,16 +13,18 @@ library(lucode)
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
-cfg$recalibrate <- TRUE
-test <- c("foragebased_aug18","foragebased_sep18","simple_oct17")
 
-for(i in (1:3)){
+test <- c("foragebased_aug18","simple_oct17","foragebased_sep18_nocalib","foragebased_sep18")
+
+for(i in (1:4)){
   cfg$title <- paste0("SSP2_REF_",test[i])
-  cfg$gms$disagg_lvst <- test[i]
+  if(i==3) cfg$gms$disagg_lvst <- "foragebased_sep18"
+  if(i==3) cfg$recalibrate <- FALSE
   cfg <- setScenario(cfg,c("SSP2","NPI"))
   cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
   cfg$gms$c60_2ndgen_biodem <- "SSP2-Ref-SPA0"
   start_run(cfg=cfg,codeCheck=FALSE)
+  cfg$recalibrate <- TRUE
 }
 
 
