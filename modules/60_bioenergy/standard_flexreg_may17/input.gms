@@ -19,13 +19,13 @@ $setglobal c60_2ndgen_biodem  SSP2-Ref-SPA0
 *             SSP5-26-SPA5, SSP5-37-SPA5, SSP5-45-SPA5, SSP5-60-SPA5,
 *             coupling
 
-$if "%c60_2ndgen_biodem%" == "coupling" table f60_bioenergy_dem_coupling(t_all,i) Bioenergy demand (regional) (10^6 GJ per year)
+$if "%c60_2ndgen_biodem%" == "coupling" table f60_bioenergy_dem_coupling(t_all,i) Bioenergy demand (regional) (10^6 GJ per yr)
 $if "%c60_2ndgen_biodem%" == "coupling" $ondelim
 $if "%c60_2ndgen_biodem%" == "coupling" $include "./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv"
 $if "%c60_2ndgen_biodem%" == "coupling" $offdelim
 $if "%c60_2ndgen_biodem%" == "coupling" ;
 
-$if "%c60_2ndgen_biodem%" == "emulator" parameter f60_bioenergy_dem_emulator(t_all) Bioenergy demand (global) (10^6 GJ per year)
+$if "%c60_2ndgen_biodem%" == "emulator" parameter f60_bioenergy_dem_emulator(t_all) Bioenergy demand (global) (10^6 GJ per yr)
 $if "%c60_2ndgen_biodem%" == "emulator" /
 $if "%c60_2ndgen_biodem%" == "emulator" $ondelim
 $if "%c60_2ndgen_biodem%" == "emulator" $include "./modules/60_bioenergy/input/glo.2ndgen_bioenergy_demand.csv"

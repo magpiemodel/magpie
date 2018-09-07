@@ -12,6 +12,6 @@ scalars
 ;
 
 parameters
-  pm_interest(i)        current real interest rate in each region (% per year)
-  p12_interest(t,i)          real interest rate in each region and timestep (% per year)
+  pm_interest(i)        current real interest rate in each region (% per yr)
+  p12_interest(t,i)          real interest rate in each region and timestep (% per yr)
 ;
