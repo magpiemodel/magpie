@@ -4,8 +4,9 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description The off realization does not account for any further restriction of the livestock distribution. 
+* ### nl_release ###
 
+v71_feed_balanceflow.lo(j,kli_rum,kforage)= -Inf;
+v71_feed_balanceflow.up(j,kli_rum,kforage)= Inf;
 
-*####################### R SECTION START (PHASES) ##############################
-*######################## R SECTION END (PHASES) ###############################
+s71_lp_fix=0;
