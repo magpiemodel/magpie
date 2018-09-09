@@ -6,47 +6,65 @@
 
 $title magpie
 
+*' @title MAgPIE - Modelling Framework
+*'
+*' @description The *Model of Agricultural Production and its Impact on the
+*' Environment* (MAgPIE) is a global land use allocation model framework, which
+*' is coupled to the grid-based dynamic vegetation model LPJmL
+*' [@bondeau_lpjml_2007], with a spatial resolution of 0.5°x0.5°. It takes
+*' regional economic conditions such as demand for agricultural commodities,
+*' technological development and production costs as well as spatially explicit
+*' data on potential crop yields, land and water constraints (from LPJmL) into
+*' account. Based on these, the model derives specific land use patterns, yields
+*' and total costs of agricultural production for each grid cell. The objective
+*' function of the land use model is to minimize total cost of production for a
+*' given amount of regional food and bioenergy demand. Regional food energy
+*' demand is defined for an exogenously given population in 10 food energy
+*' categories, based on regional diets. Future trends in food demand are derived
+*' from a cross-country regression analysis, based on future scenarios on GDP
+*' and population growth.
+
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
+*
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev33_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: 5d2256d3468874005d263ea29d0ab59e
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-* 
+*
 * Used data set: rev4.9_690d3718e151be1b450b394c1064b1c5_magpie.tgz
 * md5sum: 5052a5f1086199baa0984c1566b5b36c
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
+*
 * Used data set: rev4.9_690d3718e151be1b450b394c1064b1c5_validation.tgz
 * md5sum: a1317526544e705decd622d41b5c620d
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
+*
 * Used data set: additional_data_rev3.53.tgz
 * md5sum: 7470017806bc592840883bd75f771482
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-* 
-* Used data set: calibration_H12_c200_28Aug18.tgz
-* md5sum: 862d0cae716ff78385dd57970e561e7f
+*
+* Used data set: calibration_H12_c200_29Aug18.tgz
+* md5sum: a71530714bb31e49c3f1c82870cea4c5
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/calibration
-* 
+*
 * Low resolution: c200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    28   24   10    7    3   53   17    8   22    7   11   10
-* 
+*
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-* 
+*
 * Regions data revision: 4.9
-* 
+*
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
 * * Additional input folder: /p/projects/landuse/data/input/other/rev33
 * * Revision: 33
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-* 
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
@@ -56,11 +74,11 @@ $title magpie
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
-* 
-* 
-* 
-* Last modification (input data): Wed Aug 29 17:38:06 2018
-* 
+*
+*
+*
+* Last modification (input data): Tue Sep 04 11:15:56 2018
+*
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
@@ -99,7 +117,7 @@ $setglobal interest_rate  reg_feb18
 $setglobal tc  endo_jun18
 $setglobal yields  dynamic_aug18
 
-$setglobal food  anthropometrics_jan18
+$setglobal food  bmi_share_jul18
 $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 

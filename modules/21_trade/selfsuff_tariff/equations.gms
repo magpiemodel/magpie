@@ -43,15 +43,20 @@
  q21_trade_reg(i2,k_trade)..
                   vm_prod_reg(i2,k_trade)
                   =g=
-                  (vm_supply(i2,k_trade) + v21_excess_prod(i2,k_trade))*sum(ct,i21_trade_bal_reduction(ct))$(sum(ct,f21_self_suff(ct,i2,k_trade) >= 1))
-                  + vm_supply(i2,k_trade)*sum(ct,f21_self_suff(ct,i2,k_trade))*sum(ct,i21_trade_bal_reduction(ct))$(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
+                  (vm_supply(i2,k_trade) + v21_excess_prod(i2,k_trade))
+                  *sum(ct,i21_trade_bal_reduction(ct))$(sum(ct,f21_self_suff(ct,i2,k_trade) >= 1))
+                  +
+                  vm_supply(i2,k_trade)*sum(ct,f21_self_suff(ct,i2,k_trade))
+                  *sum(ct,i21_trade_bal_reduction(ct))$(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
 
 *' Excess demand is the sum of all imports from net-importing countries
 
  q21_excess_dem(k_trade).. v21_excess_dem(k_trade)
                    =g=
-                   sum(i2, vm_supply(i2,k_trade)*(1 - sum(ct,f21_self_suff(ct,i2,k_trade)))$(sum(ct,f21_self_suff(ct,i2,k_trade)) < 1))
-                   + sum(ct,f21_trade_balanceflow(ct,k_trade));
+                   sum(i2, vm_supply(i2,k_trade)
+                   *(1 - sum(ct,f21_self_suff(ct,i2,k_trade)))$(sum(ct,f21_self_suff(ct,i2,k_trade)) < 1))
+                   +
+                   sum(ct,f21_trade_balanceflow(ct,k_trade));
 
 *' Excess production is distributing the excess demand to historical exporting
 *' countries according to their historical share within global total exports.

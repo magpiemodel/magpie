@@ -18,12 +18,12 @@ scalar s15_maxiter maximum iteration number / 5 /;
 
 scalar s15_convergence convergence criteria   / 0.005 /;
 
-table f15_household_balance_flow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of inhomogenous products and processes in statistics (mio. t DM)
+table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of inhomogenous products and processes in statistics (mio. tDM)
 $ondelim
 $include "./modules/15_food/input/f15_household_balanceflow.cs3"
 $offdelim;
 
-table f15_nutrition_attributes(t_all,kall,nutrition) nutrition attributes of fooditems dedicated for fooduse (mio. kcal per t DM | t Protein per ton DM)
+table f15_nutrition_attributes(t_all,kall,nutrition) nutrition attributes of fooditems dedicated for fooduse (mio. kcal per tDM | t Protein per tDM)
 $ondelim
 $include "./modules/15_food/input/f15_nutrition_attributes.cs3"
 $offdelim;
@@ -36,12 +36,12 @@ $offdelim;
 * kcal/capita/day for saturation and intercept, and
 * USD05/capita for halfsaturation
 
-table f15_demand_regr_paras(demand_subsys15,food_scen15,par15)  Food regression parameters (-)
+table f15_demand_paras(regr15,food_scen15,par15)  Food regression parameters (-)
 $ondelim
 $include "./modules/15_food/input/f15_demand_regression_parameters.cs3"
 $offdelim;
 
-table f15_bmi_shr_regr_paras(sex, agegroup15, bmi_regr_type15, parameters15)  BMI share regression parameters (-)
+table f15_bmi_shr_paras(sex, agegroup15, bmi_tree15, paras_b15)  BMI share regression parameters (-)
 $ondelim
 $include "./modules/15_food/input/f15_bmi_shr_regr_paras.cs3"
 $offdelim;
@@ -102,9 +102,9 @@ $ondelim
 $include "./modules/15_food/input/f15_bodyheight_historical.cs3"
 $offdelim;
 
-table f15_schofield_parameters_height(sex,age, schofield_parameters15) Schofield equation parameters (-)
+table f15_schofield(sex,age, paras_s15) Schofield equation parameters (-)
 $ondelim
-$include "./modules/15_food/input/f15_schofield_parameters_height.cs3"
+$include "./modules/15_food/input/f15_schofield_parameters.cs3"
 $offdelim
 ;
 

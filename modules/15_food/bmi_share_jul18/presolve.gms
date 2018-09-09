@@ -121,13 +121,13 @@ else
                  126.4*
                  (sum(underaged15,
                    p15_kcal_growth_food(t,iso,underaged15)
-                 )/3)**0.03464
+                 )/3)**0.03467
                  ;
           p15_bodyheight(t,iso,"M","15--19","preliminary") =
                  131.8*
                  (sum(underaged15,
                    p15_kcal_growth_food(t,iso,underaged15)
-                 )/3)**0.03975
+                 )/3)**0.03978
                  ;
      );
 *adjust body weight of kids proportional to over18 population
@@ -159,9 +159,8 @@ p15_physical_activity_level(t,iso,sex,age)=
 
 
 i15_intake(t,iso,sex,age,bmi_group15)=
-                        (f15_schofield_parameters_height(sex,age, "intercept")
-                        + f15_schofield_parameters_height(sex,age, "height")*p15_bodyheight(t,iso,sex,age,"preliminary")/100
-                        + f15_schofield_parameters_height(sex,age, "weight")*p15_bodyweight(t,iso,sex,age,bmi_group15))
+                        (f15_schofield(sex,age, "intercept")
+                        + f15_schofield(sex,age, "slope")*p15_bodyweight(t,iso,sex,age,bmi_group15))
                         * p15_physical_activity_level(t,iso,sex,age);
 
 
@@ -170,10 +169,10 @@ i15_intake(t,iso,sex,age,bmi_group15)=
 *' Within the optimization, it can however be altered to avoid shares below
 *' zero or above 1.
 if (sum(sameas(t_past,t),1) = 1,
-   i15_bmi_shr_regr_pre(t,iso,sex,agegroup15,bmi_regr_type15)  =
-   f15_bmi_shr_regr_paras(sex,agegroup15,bmi_regr_type15,"intercept")
-   + (f15_bmi_shr_regr_paras(sex,agegroup15,bmi_regr_type15,"saturation") * im_gdp_pc_ppp_iso(t,iso))
-   / (f15_bmi_shr_regr_paras(sex,agegroup15,bmi_regr_type15,"halfsaturation") + im_gdp_pc_ppp_iso(t,iso));
+   i15_bmi_shr_regr_pre(t,iso,sex,agegroup15,bmi_tree15)  =
+   f15_bmi_shr_paras(sex,agegroup15,bmi_tree15,"intercept")
+   + (f15_bmi_shr_paras(sex,agegroup15,bmi_tree15,"saturation") * im_gdp_pc_ppp_iso(t,iso))
+   / (f15_bmi_shr_paras(sex,agegroup15,bmi_tree15,"halfsaturation") + im_gdp_pc_ppp_iso(t,iso));
 
    i15_bmi_shr_pre(t,iso,sex,agegroup15,"verylow")   =
       i15_bmi_shr_regr_pre(t,iso,sex,agegroup15,"low")*
@@ -208,13 +207,13 @@ if (sum(sameas(t_past,t),1) = 1,
        i15_bmi_shr_pre(t,iso,sex,agegroup15,bmi_group15)
    );
 
-   i15_bmi_shr_calib_lastcalibrationyear(iso,sex,age,bmi_group15)=i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
+   i15_bmi_shr_calib_lastcalibyear(iso,sex,age,bmi_group15)=i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
 
 else
 *' The divergence of the BMI from the historical data is kept constant over time
 *' or fadet out.
    i15_bmi_shr_calib(t,iso,sex,age,bmi_group15) =
-   i15_bmi_shr_calib_lastcalibrationyear(iso,sex,age,bmi_group15)
+   i15_bmi_shr_calib_lastcalibyear(iso,sex,age,bmi_group15)
    * f15_kcal_calib_fadeout(t,"%c15_calibscen%");
 );
 *' pregnancy and lactation requires extra intake. We distribute the newborns among reproductive women and multuply with extra energy requirements
@@ -284,25 +283,25 @@ if (sum(sameas(t_past,t),1) = 1,
     p15_kcal_calib(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))>0) = f15_kcal_pc_iso(t,iso,kfo) - v15_kcal_regr.l(iso, kfo);
     p15_balanceflow_kcal_iso(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))=0) = f15_kcal_pc_iso(t,iso,kfo) - v15_kcal_regr.l(iso, kfo);
 
-    p15_kcal_calib_lastcalibrationyear(iso,kfo) = p15_kcal_calib(t,iso,kfo);
-    p15_balanceflow_kcal_lastcalibrationyear(iso,kfo) = p15_balanceflow_kcal_iso(t,iso,kfo);
+    p15_kcal_calib_lastcalibyear(iso,kfo) = p15_kcal_calib(t,iso,kfo);
+    p15_balanceflow_kcal_lastcalibyear(iso,kfo) = p15_balanceflow_kcal_iso(t,iso,kfo);
 
     i15_bmi_shr_calib(t,iso,sex,age,bmi_group15) =
                       f15_bmi_shr_past(t,iso,age,sex,bmi_group15) -
                       v15_bmi_shr_regr.l(iso,sex,age,bmi_group15);
-    i15_bmi_shr_calib_lastcalibrationyear(iso,sex,age,bmi_group15)=
+    i15_bmi_shr_calib_lastcalibyear(iso,sex,age,bmi_group15)=
                       i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
 
 else
 *' The divergence of the kcal from the historical data is eventually faded out
-    p15_kcal_calib(t,iso,kfo) = p15_kcal_calib_lastcalibrationyear(iso,kfo) * f15_kcal_calib_fadeout(t,"%c15_calibscen%");
+    p15_kcal_calib(t,iso,kfo) = p15_kcal_calib_lastcalibyear(iso,kfo) * f15_kcal_calib_fadeout(t,"%c15_calibscen%");
 *' The divergence of the kcal of countries with no data is kept constant over time
-    p15_balanceflow_kcal_iso(t,iso,kfo) = p15_balanceflow_kcal_lastcalibrationyear(iso,kfo);
+    p15_balanceflow_kcal_iso(t,iso,kfo) = p15_balanceflow_kcal_lastcalibyear(iso,kfo);
 
 *' The divergence of the BMI from the historical data is kept constant over time
 *' or fadet out.
    i15_bmi_shr_calib(t,iso,sex,age,bmi_group15) =
-                     i15_bmi_shr_calib_lastcalibrationyear(iso,sex,age,bmi_group15)
+                     i15_bmi_shr_calib_lastcalibyear(iso,sex,age,bmi_group15)
                      * f15_kcal_calib_fadeout(t,"%c15_calibscen%");
 );
 

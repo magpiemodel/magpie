@@ -50,14 +50,14 @@ $offdelim
 $if "%c42_watdem_scenario%" == "nocc" f42_wat_req_kve(t_all,j,kve) = f42_wat_req_kve("y1995",j,kve);
 m_fillmissingyears(f42_wat_req_kve,"j,kve");
 
-parameter f42_wat_req_kli(kli) Average water requirements of livestock commodities per region per tDM per year(m^3)
+parameter f42_wat_req_kli(kli) Average water requirements of livestock commodities per region per tDM per year (m^3)
 /
 $ondelim
 $include "./modules/42_water_demand/input/f42_wat_req_fao.csv"
 $offdelim
 /;
 
-table f42_watdem_ineldo(t_all,j,scen_watdem_nonagr,watdem_ineldo) industry electricity and domestic water demand under our socioeconomic scenarios(mio m^3)
+table f42_watdem_ineldo(t_all,j,scen_watdem_nonagr,watdem_ineldo) industry electricity and domestic water demand under our socioeconomic scenarios (mio. m^3)
 $ondelim
 $include "./modules/42_water_demand/input/watdem_nonagr_grper.cs3"
 $offdelim
@@ -65,7 +65,7 @@ $offdelim
 m_fillmissingyears(f42_watdem_ineldo,"j,scen_watdem_nonagr,watdem_ineldo");
 
 parameter
-f42_env_flows(t_all,j) Environmental flow requirements from LPJ and Smakhtin algorithm (mio m^3)
+f42_env_flows(t_all,j) Environmental flow requirements from LPJ and Smakhtin algorithm (mio. m^3)
 /
 $ondelim
 $include "./modules/42_water_demand/input/lpj_envflow_grper.cs2"
@@ -77,7 +77,7 @@ m_fillmissingyears(f42_env_flows,"j");
 
 $setglobal c42_env_flow_policy  off
 
-table f42_env_flow_policy(t_all,scen42) EFP policies
+table f42_env_flow_policy(t_all,scen42) EFP policies (1)
 $ondelim
 $include "./modules/42_water_demand/input/f42_env_flow_policy.cs3"
 $offdelim

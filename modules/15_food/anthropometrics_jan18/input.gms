@@ -18,12 +18,12 @@ scalar s15_maxiter maximum iteration number / 5 /;
 
 scalar s15_convergence convergence criteria   / 0.005 /;
 
-table f15_household_balance_flow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of inhomogenous products and processes in statistics (mio. t DM)
+table f15_household_balance_flow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of inhomogenous products and processes in statistics (mio. tDM)
 $ondelim
 $include "./modules/15_food/input/f15_household_balanceflow.cs3"
 $offdelim;
 
-table f15_nutrition_attributes(t_all,kall,nutrition) nutrition attributes of fooditems dedicated for fooduse (mio. kcal per t DM | t Protein per ton DM)
+table f15_nutrition_attributes(t_all,kall,nutrition) nutrition attributes of fooditems dedicated for fooduse (mio. kcal per tDM | t Protein per tDM)
 $ondelim
 $include "./modules/15_food/input/f15_nutrition_attributes.cs3"
 $offdelim;
@@ -36,7 +36,7 @@ $offdelim;
 * kcal/capita/day for saturation and intercept, and
 * USD05/capita for halfsaturation
 
-table f15_demand_regr_paras(demand_subsys15,food_scen15,par15)  Food regression parameters (-)
+table f15_demand_regr_paras(demand_subsys15,food_scen15,par15)  Food regression parameters (1)
 $ondelim
 $include "./modules/15_food/input/f15_demand_regression_parameters.cs3"
 $offdelim;
@@ -53,7 +53,7 @@ $include "./modules/15_food/input/f15_intake_pc_observed_iso.cs3"
 $offdelim;
 
 
-parameter f15_prices_initial(kall) Food prices in initialisation period (USD05 per t DM)
+parameter f15_prices_initial(kall) Food prices in initialisation period (USD05 per tDM)
 /
 $ondelim
 $include "./modules/15_food/input/f15_prices_initial.csv"
@@ -61,7 +61,7 @@ $offdelim
 /;
 
 
-parameter f15_price_index(t_all) Food prices index in initialisation period (USD05 per t DM)
+parameter f15_price_index(t_all) Food prices index in initialisation period (USD05 per tDM)
 /
 $ondelim
 $include "./modules/15_food/input/f15_prices_index.csv"
@@ -86,13 +86,13 @@ $ondelim
 $include "./modules/15_food/input/f15_bodyheight_historical.cs3"
 $offdelim;
 
-table f15_schofield_parameters_height(sex,age, schofield_parameters15) Schofield equation parameters (-)
+table f15_schofield_parameters_height(sex,age, schofield_parameters15) Schofield equation parameters (1)
 $ondelim
 $include "./modules/15_food/input/f15_schofield_parameters_height.cs3"
 $offdelim
 ;
 
-table f15_intake_regr_paras(sex,age, parameters_intake15) Self-estimated income equation parameters (-)
+table f15_intake_regr_paras(sex,age, parameters_intake15) Self-estimated income equation parameters (1)
 $ondelim
 $include "./modules/15_food/input/f15_intake_regression_parameters.cs3"
 $offdelim

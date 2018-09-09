@@ -12,6 +12,11 @@
 
 p70_cattle_stock_proxy(t,i) = im_pop(t,i)*pm_kcal_pc_initial(t,i,"livst_rum")
 		              /i70_livestock_productivity(t,i,"sys_beef");   
+
+*' Lower bound for p70_cattle_stock_proxy: 20% of initial cattle stock in 1995
+
+p70_cattle_stock_proxy(t,i)$(p70_cattle_stock_proxy(t,i) < 0.2*p70_cattle_stock_proxy("y1995",i)) = 0.2*p70_cattle_stock_proxy("y1995",i);
+
 				   
 p70_incr_cattle(t,i)  =  1$(ord(t)=1)
 			+ (p70_cattle_stock_proxy(t,i)/p70_cattle_stock_proxy(t-1,i))$(ord(t)>1);

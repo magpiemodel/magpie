@@ -21,8 +21,8 @@
                       +
                       (p62_dem_material_lh(i2,kall)*
                            sum(kfo, vm_dem_food.l(i2,kfo))
-                           /(p62_dem_food_lh(i2))
-                      )*(1-s62_historical)
+                           /(p62_dem_food_lh(i2)))
+                      *(1-s62_historical)
                       ;
 
 *' Results are stored in the interface `vm_dem_material`. This interface is then

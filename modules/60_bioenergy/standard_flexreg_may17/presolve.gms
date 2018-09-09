@@ -33,10 +33,7 @@ vm_dem_bioen.fx(i,kall) = f60_1stgen_bioenergy_dem(t,i,"%c60_1stgen_biodem%",kal
 vm_dem_bioen.up(i,kbe60) = Inf;
 vm_dem_bioen.lo(i,kbe60) = 0;
 
-*' There is additionally some demand of residues for second generation bioenergy, which is at the moment 
-*' exogenous provide by the estimation that roughly 33% of available residues for recycling on cropland 
-*' can be used for 2nd generation bioenergy depending on SSPs scenarios, since residue stock and use 
-*' is mainly driven by population and GDP. The upper boundary therefor has to be relaxed as well.
+*' Relax the upper bound for residues.
 
 vm_dem_bioen.up(i,kres) = Inf;
 

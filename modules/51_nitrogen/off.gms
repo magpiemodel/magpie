@@ -4,6 +4,10 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @description
+*' Emissions are set to zero.
+*'
+*' @authors Benjamin Leon Bodirsky
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "declarations" $include "./modules/51_nitrogen/off/declarations.gms"

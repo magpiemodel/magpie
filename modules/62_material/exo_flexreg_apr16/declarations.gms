@@ -6,7 +6,7 @@
 
 
 scalar
-  s62_historical                              switch for turning off historical material demand (1) / 1 /
+  s62_historical                 Switch for turning off historical material demand (1) / 1 /
 ;
 
 parameters
@@ -15,11 +15,11 @@ parameters
 ;
 
 positive variables
-  vm_dem_material(i,kall)                     Demand for material usage (mio. tDM per yr)
+  vm_dem_material(i,kall)        Demand for material usage (mio. tDM per yr)
 ;
 
 equations
-  q62_dem_material(i,kall)                    Estimating material demand (mio. tDM per yr)
+  q62_dem_material(i,kall)       Estimating material demand (mio. tDM per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

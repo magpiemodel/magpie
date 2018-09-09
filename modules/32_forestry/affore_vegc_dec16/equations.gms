@@ -63,7 +63,8 @@ sum(ct, pm_carbon_density_ac(ct,j2,ac-1,c_pools))));
 
 *****Carbon stocks**************************************************************
 *' Forestry carbon stocks are calculated as the product of forestry land with the area
-*' weighted mean of `p32_carbon_density_ac` (i.e `p32_carbon_density`).
+*' weighted mean of carbon density for forest land and carbon pools (in tC per ha)
+*' (i.e `p32_carbon_density`).
 
  q32_carbon(j2,c_pools)  .. vm_carbon_stock(j2,"forestry",c_pools)
                          =e=
@@ -71,6 +72,13 @@ sum(ct, pm_carbon_density_ac(ct,j2,ac-1,c_pools))));
                          sum(ct, p32_carbon_density(ct,j2,land32,c_pools)));
 
 *' `p32_carbon_density_ac` is defined as age-class and carbon pool dependent carbon density.
+
+
+*' The aggregated difference in forestry land compared to previous timestep is
+*' calculated as a sum of area available in protected, grown and old forests
+*' subtracted from the sum of area allocated to new forests, forests planted in
+*' accordance to the NDC promises and forestry land initialization area.
+*' This difference is in total summed over the cells.
 
  q32_land_diff .. vm_landdiff_forestry =e= sum((j2,land32),
  					  v32_land_expansion(j2,land32)
@@ -82,12 +90,7 @@ sum(ct, pm_carbon_density_ac(ct,j2,ac-1,c_pools))));
  q32_land_reduction(j2,land32) ..
  	v32_land_reduction(j2,land32) =g= pc32_land(j2,land32) - v32_land(j2,land32);
 
-*' The aggregated difference in forestry land compared to previous timestep is
-*' calculated as a sum of area available in protected, grown and old forests
-*' subtracted from the sum of area allocated to new forests, forests planted in
-*' accordance to the NDC promises and forestry land initialization area.
-*' This difference is in total summed over the cells. The interface
-*' `vm_landdiff_forestry` is a component of `vm_landdiff` ([10_land])
+*' The interface `vm_landdiff_forestry` is a component of `vm_landdiff` ([10_land])
 *' interface which is the aggregated difference in land between current and
 *' previous timestep i.e.,"land use change"
 

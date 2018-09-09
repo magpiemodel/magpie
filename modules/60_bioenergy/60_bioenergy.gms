@@ -11,8 +11,8 @@
 *' For this calculation it requires
 *' information on gross energy content (provided by [16_demand] module).
 *' 
-*' In addition to calculatiom of bioenergy quantities, the production associated
-*' costs are delivered to the total costs objective in the [11_costs] module.
+*' In addition to calculation of bioenergy quantities, the costs associated with 
+*' the production are provided to the objective function in the [11_costs] module.
 *'
 *' @authors Jan Philipp Dietrich
 

@@ -6,7 +6,7 @@
 
 *' @equations
 
-*' Change of carbon stocks between current and the previous time step.
+*' Change of carbon stocks between the current and the previous time step.
 
  q52_carbon_stock_diff(j2,land,c_pools) ..
                  v52_carbon_stock_diff(j2,land,c_pools) =e=
@@ -16,7 +16,7 @@
                  vm_carbon_stock_reduction(j2,land,c_pools) =g=
                  pc52_carbon_stock(j2,land,c_pools) - vm_carbon_stock(j2,land,c_pools);
 
-*' Annual CO2 emissions are obtained by dividing `-v52_carbon_stock_diff` by 
+*' Annual CO2 emissions are obtained by dividing `v52_carbon_stock_diff` by 
 *' time step length (e.g. 5 or 10 years).
 
  q52_co2c_emis(j2,emis_co2) ..

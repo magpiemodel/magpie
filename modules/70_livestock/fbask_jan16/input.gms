@@ -12,12 +12,12 @@ scalars
   s70_pyld_intercept     Intercept of linear relationship determining pasture intensification (1)        / 0.24 /
 ;
 
-table f70_feed_baskets(t_all,i,kap,kall,feed_scen70) Feed baskets (t DM per t DM livestock product)
+table f70_feed_baskets(t_all,i,kap,kall,feed_scen70) Feed baskets in tDM per tDM livestock product (1)
 $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_feed_baskets.cs3"
 $offdelim;
 
-table fm_feed_balanceflow(t_all,i,kap,kall) Balanceflow in mio ton DM to balance difference between estimated feed baskets and FAO
+table fm_feed_balanceflow(t_all,i,kap,kall) Balanceflow balance difference between estimated feed baskets and FAO (mio. tDM)
 $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_feed_balanceflow.cs3"
 $offdelim;
@@ -27,7 +27,7 @@ $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_livestock_productivity.cs3"
 $offdelim;
 
-table f70_cost_regr(kap,cost_regr) Factor requirements livestock (US$04 per ton DM (A) and US$ (B))
+table f70_cost_regr(kap,cost_regr) Factor requirements livestock (USD04 per tDM (A) and USD (B))
 $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_capit_liv_regr.csv"
 $offdelim
@@ -47,4 +47,3 @@ $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_pyld_slope_reg.cs4"
 $offdelim
 /;
-

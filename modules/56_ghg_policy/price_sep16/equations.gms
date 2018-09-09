@@ -52,29 +52,29 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
  q56_emission_costs(i2) ..
                  vm_emission_costs(i2)
                  =e=
-                 sum(emis_reg_yearly56, v56_emission_costs_reg_yearly(i2,emis_reg_yearly56))
-               + sum(emis_reg_oneoff56, v56_emission_costs_reg_oneoff(i2,emis_reg_oneoff56))
-               + sum((emis_cell_yearly56, cell(i2,j2)), v56_emission_costs_cell_yearly(j2,emis_cell_yearly56))
-               + sum((emis_cell_oneoff56, cell(i2,j2)), v56_emission_costs_cell_oneoff(j2,emis_cell_oneoff56))
+                 sum(emis_reg_yr56, v56_emission_costs_reg_yearly(i2,emis_reg_yr56))
+               + sum(emis_reg_one56, v56_emission_costs_reg_oneoff(i2,emis_reg_one56))
+               + sum((emis_cell_yr56, cell(i2,j2)), v56_emission_costs_cell_yearly(j2,emis_cell_yr56))
+               + sum((emis_cell_one56, cell(i2,j2)), v56_emission_costs_cell_oneoff(j2,emis_cell_one56))
                  ;
 
 * regional calcs
- q56_emission_costs_reg_yearly(i2,emis_reg_yearly56) ..
-                 v56_emission_costs_reg_yearly(i2,emis_reg_yearly56)
+ q56_emission_costs_reg_yearly(i2,emis_reg_yr56) ..
+                 v56_emission_costs_reg_yearly(i2,emis_reg_yr56)
                  =e=
                  sum(pollutants,
-                     vm_emissions_reg(i2,emis_reg_yearly56,pollutants) *
-                     f56_emis_policy("%c56_emis_policy%",pollutants,emis_reg_yearly56) *
+                     vm_emissions_reg(i2,emis_reg_yr56,pollutants) *
+                     f56_emis_policy("%c56_emis_policy%",pollutants,emis_reg_yr56) *
                      sum(ct, im_pollutant_prices(ct,i2,pollutants))
                  );
 
- q56_emission_costs_reg_oneoff(i2,emis_reg_oneoff56) ..
-                 v56_emission_costs_reg_oneoff(i2,emis_reg_oneoff56)
+ q56_emission_costs_reg_oneoff(i2,emis_reg_one56) ..
+                 v56_emission_costs_reg_oneoff(i2,emis_reg_one56)
                  =g=
                  sum(pollutants,
-                     vm_emissions_reg(i2,emis_reg_oneoff56,pollutants)
+                     vm_emissions_reg(i2,emis_reg_one56,pollutants)
                      * m_timestep_length
-                     * f56_emis_policy("%c56_emis_policy%",pollutants,emis_reg_oneoff56)
+                     * f56_emis_policy("%c56_emis_policy%",pollutants,emis_reg_one56)
                      * sum(ct, 
                            im_pollutant_prices(ct,i2,pollutants) 
                            * p56_ghg_price_growth_rate(ct,i2,pollutants)/(1+p56_ghg_price_growth_rate(ct,i2,pollutants)))
@@ -82,22 +82,22 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
 
 
 * cellular calcs
- q56_emission_costs_cell_yearly(j2,emis_cell_yearly56) ..
-                 v56_emission_costs_cell_yearly(j2,emis_cell_yearly56)
+ q56_emission_costs_cell_yearly(j2,emis_cell_yr56) ..
+                 v56_emission_costs_cell_yearly(j2,emis_cell_yr56)
                  =e=
                  sum(pollutants,
-                     v56_emis_cell(j2,emis_cell_yearly56,pollutants) *
-                     f56_emis_policy("%c56_emis_policy%",pollutants,emis_cell_yearly56) *
+                     v56_emis_cell(j2,emis_cell_yr56,pollutants) *
+                     f56_emis_policy("%c56_emis_policy%",pollutants,emis_cell_yr56) *
                      sum((ct,cell(i2,j2)),im_pollutant_prices(ct,i2,pollutants))
                  );
 
- q56_emission_costs_cell_oneoff(j2,emis_cell_oneoff56) ..
-                 v56_emission_costs_cell_oneoff(j2,emis_cell_oneoff56)
+ q56_emission_costs_cell_oneoff(j2,emis_cell_one56) ..
+                 v56_emission_costs_cell_oneoff(j2,emis_cell_one56)
                  =g=
                  sum(pollutants,
-                     v56_emis_cell(j2,emis_cell_oneoff56,pollutants)
+                     v56_emis_cell(j2,emis_cell_one56,pollutants)
                      * m_timestep_length
-                     * f56_emis_policy("%c56_emis_policy%",pollutants,emis_cell_oneoff56)
+                     * f56_emis_policy("%c56_emis_policy%",pollutants,emis_cell_one56)
                      * sum((ct,cell(i2,j2)),
                          im_pollutant_prices(ct,i2,pollutants)
                          * p56_ghg_price_growth_rate(ct,i2,pollutants)/(1+p56_ghg_price_growth_rate(ct,i2,pollutants)))

@@ -4,6 +4,11 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @description
+*' Manure excretion is estimated using a mass balance approach and
+*' based on NPK in feed and N in slaughtered animals (@bodirsky_current_2012.).
+*' Animal waste management is largely based on the IPCC 2006 Guidelines for
+*' National Greenhouse Gas Inventories (@ipcc_2006_2006.).
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/55_awms/ipcc2006_aug16/sets.gms"

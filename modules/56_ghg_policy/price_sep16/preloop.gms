@@ -12,7 +12,7 @@ $else im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices(t_all,i,pol
 $endif
 
 *reward neg emissions depending on s56_reward_neg_emis
-v56_emission_costs_cell_oneoff.lo(j2,emis_cell_oneoff56) = s56_reward_neg_emis;
+v56_emission_costs_cell_oneoff.lo(j2,emis_cell_one56) = s56_reward_neg_emis;
 
 *calculate ghg price growth rate
 *http://de.wikihow.com/Berechnung-einer-Wachstumsrate#/Bild:Calculate-Growth-Rate-Step-6.jpg

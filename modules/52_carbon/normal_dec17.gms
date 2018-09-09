@@ -7,6 +7,9 @@
 *' @description This realization
 *' calculates annual land-related CO2 emissions as 
 *' difference of carbon stocks between the current and the previous time step. 
+*' Land-related CO2 emissions include CO2 emissions from land-use change as well as 
+*' changes in carbon stocks in the terrestrial biosphere due to climate change 
+*' (the later is only included if c52_carbon_scenario = "cc").
 *' The realization provides carbon density information on cellular level to all 
 *' land modules ([30_crop], [31_past], [32_forestry], [34_urban] and [35_natveg]), 
 *' which return land type specific carbon stocks to the carbon module. The realization

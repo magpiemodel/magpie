@@ -7,7 +7,7 @@
 *' @equations
 
 q15_food_demand(i2,kfo) ..
-                (vm_dem_food(i2,kfo) + sum(ct, f15_household_balance_flow(ct,i2,kfo,"dm")))
+                (vm_dem_food(i2,kfo) + sum(ct, f15_household_balanceflow(ct,i2,kfo,"dm")))
                 * sum(ct,(f15_nutrition_attributes(ct,kfo,"kcal") * 10**6)) =g=
                 sum(ct,im_pop(ct,i2) * 365
                 * (p15_kcal_pc(ct,i2,kfo)+p15_balanceflow_kcal(ct,i2,kfo))
@@ -63,12 +63,12 @@ q15_budget(iso) ..
 *' First we estimate the BMI distribution within the population, using
 *' regression in an hierachrical tree. First we estimate the regression shares:
 
-q15_regr_bmi_shr(iso,sex,agegroup15,bmi_regr_type15) ..
-        v15_regr_overgroups(iso,sex,agegroup15,bmi_regr_type15)
+q15_regr_bmi_shr(iso,sex,agegroup15,bmi_tree15) ..
+        v15_regr_overgroups(iso,sex,agegroup15,bmi_tree15)
         =e=
-        f15_bmi_shr_regr_paras(sex,agegroup15,bmi_regr_type15,"intercept")
-        + (f15_bmi_shr_regr_paras(sex,agegroup15,bmi_regr_type15,"saturation") * v15_income_pc_real_ppp_iso(iso))
-        / (f15_bmi_shr_regr_paras(sex,agegroup15,bmi_regr_type15,"halfsaturation") + v15_income_pc_real_ppp_iso(iso));
+        i15_bmi_intercept(sex,agegroup15,bmi_tree15)
+        + (i15_bmi_saturation(sex,agegroup15,bmi_tree15) * v15_income_pc_real_ppp_iso(iso))
+        / (i15_bmi_halfsat(sex,agegroup15,bmi_tree15) + v15_income_pc_real_ppp_iso(iso));
 
 *' Then we apply these regression shares to an hierarchical tree structure
 
@@ -130,17 +130,19 @@ q15_bmi_shr_agg(iso,sex,age,bmi_group15) ..
 
 *' Food intake is estimated based on BMI distribution, typical intakes for
 *' BMI groups, demographic structure and extra energy requirements for
-*' pregnancy and lactation (estimated based on the new-born population size)
+*' pregnancy and lactation (estimated based on the new-born population size).
 
 q15_intake(iso)..
-         v15_kcal_intake_total_regr(iso) =e=
-         (
-           sum((ct, sex, age, bmi_group15),
-               v15_bmi_shr_regr(iso,sex,age,bmi_group15)*
-               im_demography(ct,iso,sex,age) *
-               i15_intake(ct,iso,sex,age,bmi_group15)
-           ) + sum(ct,i15_kcal_pregnancy(ct,iso))
-         )/sum((sex,age,ct), im_demography(ct,iso,sex,age));
+         v15_kcal_intake_total_regr(iso)
+         * sum((sex,age,ct), im_demography(ct,iso,sex,age))
+         =e=
+         sum((ct, sex, age, bmi_group15),
+           v15_bmi_shr_regr(iso,sex,age,bmi_group15)*
+           im_demography(ct,iso,sex,age) *
+           i15_intake(ct,iso,sex,age,bmi_group15)
+         )
+         + sum(ct,i15_kcal_pregnancy(ct,iso))
+         ;
 
 
 *' Food demand is based on food intake and a regression
@@ -151,18 +153,18 @@ q15_intake(iso)..
 
 q15_regr_kcal(iso) ..
          v15_kcal_regr_total(iso) =e=
-         v15_regr(iso, "overconsumption")
+         v15_demand_regr(iso, "overconsumption")
          *v15_kcal_intake_total_regr(iso);
 
 *' This equation estimates key dietary composition regressision factors,
 *' such as the share of animal products, empty calories, or
 *' fruit vegetables and nuts.
 
-q15_regr(iso, demand_subsys15) ..
-         v15_regr(iso, demand_subsys15) =e=
-         i15_demand_regr_paras(demand_subsys15,"intercept")
-         + (i15_demand_regr_paras(demand_subsys15,"saturation") * v15_income_pc_real_ppp_iso(iso))
-         / (i15_demand_regr_paras(demand_subsys15,"halfsaturation") + v15_income_pc_real_ppp_iso(iso)**i15_demand_regr_paras(demand_subsys15,"non_saturation"));
+q15_regr(iso, regr15) ..
+         v15_demand_regr(iso, regr15) =e=
+         i15_dem_intercept(regr15)
+         + (i15_dem_saturation(regr15) * v15_income_pc_real_ppp_iso(iso))
+         / (i15_dem_halfsat(regr15) + v15_income_pc_real_ppp_iso(iso)**i15_dem_nonsat(regr15));
 
 *' In the subsequent equations, those parameters
 *' are used to determine the dietary composition using an hirachical tree:
@@ -173,27 +175,27 @@ q15_regr(iso, demand_subsys15) ..
 q15_foodtree_kcal_animals(iso,kfo_ap) ..
          v15_kcal_regr(iso,kfo_ap) =e=
          v15_kcal_regr_total(iso)
-         * v15_regr(iso, "livestockshare")
+         * v15_demand_regr(iso, "livestockshare")
          * sum(ct,i15_livestock_kcal_structure_iso(ct,iso,kfo_ap));
 
 q15_foodtree_kcal_processed(iso,kfo_pf) ..
          v15_kcal_regr(iso,kfo_pf) =e=
          v15_kcal_regr_total(iso)
-         * (1 - v15_regr(iso, "livestockshare"))
-         * v15_regr(iso, "processedshare")
+         * (1 - v15_demand_regr(iso, "livestockshare"))
+         * v15_demand_regr(iso, "processedshare")
          * sum(ct,i15_processed_kcal_structure_iso(ct,iso,kfo_pf)) ;
 
 q15_foodtree_kcal_vegetables(iso) ..
          v15_kcal_regr(iso,"others") =e=
          v15_kcal_regr_total(iso)
-         * (1 - v15_regr(iso, "livestockshare"))
-         * (1 - v15_regr(iso, "processedshare"))
-         * v15_regr(iso, "vegfruitshare");
+         * (1 - v15_demand_regr(iso, "livestockshare"))
+         * (1 - v15_demand_regr(iso, "processedshare"))
+         * v15_demand_regr(iso, "vegfruitshare");
 
 q15_foodtree_kcal_staples(iso,kfo_st) ..
          v15_kcal_regr(iso,kfo_st) =e=
          v15_kcal_regr_total(iso)
-         * (1 - v15_regr(iso, "livestockshare"))
-         * (1 - v15_regr(iso, "processedshare"))
-         * (1 - v15_regr(iso, "vegfruitshare"))
+         * (1 - v15_demand_regr(iso, "livestockshare"))
+         * (1 - v15_demand_regr(iso, "processedshare"))
+         * (1 - v15_demand_regr(iso, "vegfruitshare"))
          * sum(ct,i15_staples_kcal_structure_iso(ct,iso,kfo_st)) ;

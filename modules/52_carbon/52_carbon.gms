@@ -6,10 +6,10 @@
 
 *' @title Carbon
 *'
-*' @description The carbon module provides annual land-related CO2 emissions for the 
-*' [56_ghg_policy] module. 
+*' @description The carbon module provides annual land-related CO2 emissions for the
+*' [56_ghg_policy] module.
 *'
-*' @authors Benjamin Leon Bodirsky, Florian Humpenöder
+*' @authors Benjamin Leon Bodirsky, Florian Humpenoeder
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%carbon%" == "normal_dec17" $include "./modules/52_carbon/normal_dec17.gms"
