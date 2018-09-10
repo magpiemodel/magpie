@@ -141,8 +141,6 @@ display "exogenous demand information is used" ;
            v15_bmi_shr_regr.l(iso,sex,age,bmi_group15)+
            i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
 
-*' Eventual negative values that can occur due to calib are set to zero
-   p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
 *' The bmi shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
    p15_bmi_shr(t,iso,sex,age,bmi_group15)$(p15_bmi_shr(t,iso,sex,age,bmi_group15)<0) = 0;
    p15_bmi_shr(t,iso,sex,age,bmi_group15)$(p15_bmi_shr(t,iso,sex,age,bmi_group15)>1) = 1;
