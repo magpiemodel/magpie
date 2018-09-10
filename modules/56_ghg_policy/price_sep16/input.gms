@@ -12,7 +12,7 @@ $setglobal c56_pollutant_prices  SSP2-Ref-SPA0-V15-REMIND-MAGPIE
 $setglobal c56_emis_policy  ssp
 $setglobal c56_aff_policy  vegc50
 
-table f56_pollutant_prices(t_all,i,pollutants,ghgscen56) ghg certificate prices for N2O-N CH4 CO2-C (USD2004 per Mg)
+table f56_pollutant_prices(t_all,i,pollutants,ghgscen56) ghg certificate prices for N2O-N CH4 CO2-C (USD2004 per t)
 $ondelim
 $include "./modules/56_ghg_policy/input/f56_pollutant_prices.cs3"
 $offdelim
