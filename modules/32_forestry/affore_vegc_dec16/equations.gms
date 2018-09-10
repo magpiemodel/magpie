@@ -34,10 +34,12 @@ sum(ct, pm_carbon_density_ac(ct,j2,ac-1,c_pools))));
 
 *' This is calculated from the forestry land CO2 emissions of the "newly" planted trees
 *' multiplied by the difference between the age-class and carbon pool dependent carbon
-*' density of consecutive age classes.
+*' density of consecutive age classes. This calculation is however only carried out for
+*' forest age-classes which have non-zero carbon density till the point where the forest
+*' belongs to age-classes less than the planning horizon specified in `s32_planing_horizon`.
 
 *****Land***************************************************
-*' Forestry component of `vm_land` (calculate in [10_land]) interface is set equal to the
+*' Forestry component of `vm_land` (calculated in [10_land]) interface is set equal to the
 *' sum of all kinds of existing forestry land over each cell.
 
  q32_land(j2) ..
@@ -71,7 +73,9 @@ sum(ct, pm_carbon_density_ac(ct,j2,ac-1,c_pools))));
                          sum(land32, v32_land(j2,land32)*
                          sum(ct, p32_carbon_density(ct,j2,land32,c_pools)));
 
-*' `p32_carbon_density_ac` is defined as age-class and carbon pool dependent carbon density.
+*' `p32_carbon_density_ac` is defined as age-class and carbon pool dependent carbon
+*' density and is calculated as the weighted mean of the carbon density for age-classes
+*' and carbon pools (in tC per ha) as defined in the Carbon module ([52_carbon]) of this model.
 
 
 *' The aggregated difference in forestry land compared to previous timestep is
