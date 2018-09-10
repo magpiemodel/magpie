@@ -4,7 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In the aug17 realization, inputs are taken into the module and directly 
+*' @description In the aug17 realization, inputs are taken into the module and are directly 
 *' delivered to the modules that require the data.
 
 *####################### R SECTION START (PHASES) ##############################
