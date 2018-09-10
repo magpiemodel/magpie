@@ -24,7 +24,7 @@ parameters
   im_gdp_pc_ppp_iso(t,iso)          Income before a price shock per capita  (USD05PPP per yr)
 
 * Development State
-  im_development_state(t,i)  					Development state in high income level (1)
-  im_physical_inactivity(t,iso,sex,age)  	Share of population which is physically inactive (1)
-  im_demography(t,iso,sex,age) 			Population by groups (mio. per yr)
+  im_development_state(t,i)  					Development state depending on income level (1)
+  im_physical_inactivity(t,iso,sex,age)  		Share of population which is physically inactive (1)
+  im_demography(t,iso,sex,age) 					Population by groups (mio. per yr)
 ;

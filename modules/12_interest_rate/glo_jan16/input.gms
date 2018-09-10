@@ -6,7 +6,7 @@
 
 $setglobal c12_interest_rate  medium
 
-table f12_interest(t_all,scen12) real interest rate scenarios
+table f12_interest(t_all,scen12) real interest rate scenarios (% per yr)
 $ondelim
 $include "./modules/12_interest_rate/input/f12_interest_rate.cs3"
 $offdelim

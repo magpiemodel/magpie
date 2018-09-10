@@ -5,8 +5,10 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description The reg_feb18 realization is the default setting,
-*' in which the interest rate depends on the development state which is calcuated based on GDP per capita.
-*' Thus interest rates are regional specific and temporally dynamic. 
+*' in which the interest rate depends on the development state `im_development_state`, 
+*' which is calculated based on GDP per capita.
+*' Thus interest rates are regional specific and dynamic over time.
+ 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/12_interest_rate/reg_feb18/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/12_interest_rate/reg_feb18/declarations.gms"
