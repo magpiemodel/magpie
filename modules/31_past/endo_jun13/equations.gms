@@ -13,7 +13,8 @@
 *' `vm_yld` which are delivered by the module [14_yields]:
 
 q31_prod(j2) ..
- vm_prod(j2,"pasture") =e= vm_land(j2,"past")*vm_yld(j2,"pasture","rainfed");
+ vm_prod(j2,"pasture") =e= vm_land(j2,"past")
+ 						   * vm_yld(j2,"pasture","rainfed");
 
 *' On the basis of the required pasture area, cellular carbon stocks are calculated:
 
@@ -25,6 +26,7 @@ q31_carbon(j2,c_pools) ..
 *' regional utilization of biomass from pastures:
 
 q31_cost_prod_past(i2) ..
- vm_cost_prod(i2,"pasture") =e= vm_prod_reg(i2,"pasture")*s31_fac_req_past;
+ vm_cost_prod(i2,"pasture") =e= vm_prod_reg(i2,"pasture")
+ 								* s31_fac_req_past;
 
 *** EOF constraints.gms ***
