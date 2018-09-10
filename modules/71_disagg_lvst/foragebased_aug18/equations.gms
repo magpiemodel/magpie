@@ -63,5 +63,3 @@ q71_prod_mon_liv(j2,kli_mon) ..
                  i71_urban_area_share(j2) *
                  sum(cell(i2,j2),vm_prod_reg(i2,kli_mon))
                  ;
-
-				 *'Shall be improved in the future to also account for croplands or other factors.
