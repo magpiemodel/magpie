@@ -7,8 +7,13 @@
 *' @title Forestry
 *'
 *' @description The Forestry module describes the constraints under which managed
-*' forest (age-class forest) exists. At the same time it calculates the
-*' corresponding carbon stocks.
+*' forest (age-class forest) exists. At the same time it calculates the corresponding
+*' carbon stocks. This module provides the total carbon dioxide removal from afforestation
+*' to the Green House Gases policy module ([56_ghg-policy]), aggregated difference in
+*' forestry land compared to previous timestep to the land module ([10_land]) and also
+*' provides the forestry related costs to the costs module ([11_costs]) while accounting
+*' for drivers in the form of timber demand ([16-demand]), carbon stock and carbon density
+*' ([52_carbon]) and land use levels (i.e., initialization and land use patterns) ([10_land]).
 *'
 *' @authors Florian Humpenöder
 
