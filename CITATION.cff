@@ -17,7 +17,7 @@ authors:
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: weindl@pik-potsdam.de
 
-  - family-names: Humpenöder 
+  - family-names: Humpenöder
     given-names: Florian
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: humpenoeder@pik-potsdam.de
@@ -36,7 +36,7 @@ authors:
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: wang@pik-potsdam.de
 
-  - family-names: Karstens 
+  - family-names: Karstens
     given-names: Kristine
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: karstens@pik-potsdam.de
@@ -46,12 +46,12 @@ authors:
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: mishra@pik-potsdam.de
 
-  - family-names: Klein 
+  - family-names: Klein
     given-names: David
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: dklein@pik-potsdam.de
 
-  - family-names: Ambrósio 
+  - family-names: Ambrósio
     given-names: Geanderson
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: ambrosio@pik-potsdam.de
@@ -61,7 +61,7 @@ authors:
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: araujo@pik-potsdam.de
 
-  - family-names: Biewald 
+  - family-names: Biewald
     given-names: Anne
     affiliation: "Potsdam Institute for Climate Impact Research"
 
@@ -86,4 +86,4 @@ keywords:
   - nlp
   - partial equilibrium
 license: AGPL-3.0-or-later
-url: https://github.com/magpiemodel/magpie
+url: https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpie

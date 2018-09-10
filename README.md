@@ -1,6 +1,4 @@
-# MAgPIE 4.0-beta
-
-This is an unvalidated beta version. Do not use it for productive runs!
+# MAgPIE 4.0
 
   <https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpie>
 
@@ -20,8 +18,14 @@ trends in food demand are derived from a cross-country regression analysis, base
 on future scenarios on GDP and population growth.
 
 ## DOCUMENTATION
-An incomplete preview of the model documentation for version 4 can be found at
-https://rse.pik-potsdam.de/magpie/version4_documentation_preview/
+The model documentation for version 4 can be found at
+https://rse.pik-potsdam.de/doc/magpie/version4/
+
+A most recent version of the documentation can also be extracted from the
+model source code via the R package goxygen
+(https://github.com/pik-piam/goxygen). To extract the documentation, install the
+package and run the main function (goxygen) in the main folder of the model.
+The resulting documentation can be found in the folder "doc".
 
 Please pay attentions to the MAgPIE Coding Etiquette when you modify the code.
 The Coding Etiquette you find at
@@ -49,10 +53,18 @@ When using a modified version of **MAgPIE** which is not identical to versions
 in the official main repository at https://github.com/magpiemodel add a suffix
 to the name to allow distinguishing versions (format **MAgPIE-suffix**).
 
+## SYSTEM REQUIREMENTS
+The model is quite resource heavy and works best on machines with high CPU clock
+and memory. Recommended is a machine with Windows, MacOS or Linux, with at least
+16GB of memory and a Core i7 CPU or similar.
+
 ## HOW TO INSTALL
 MAgPIE requires *GAMS* (https://www.gams.com/) including licenses for the
-solvers *CONOPT* and *CPLEX* for its core calculations. Please make sure that
-the GAMS installation path is added to the PATH variable of the system.
+solvers *CONOPT* and (optionally) *CPLEX* for its core calculations. As the model
+benefits significantly of recent improvements in *GAMS* and *CONOPT4* it is
+recommended to work with the most recent versions of both.
+Please make sure that the GAMS installation path is added to the PATH variable
+of the system.
 
 In addition *R* (https://www.r-project.org/) is required for pre- and
 postprocessing and run management (needs to be added to the PATH variable
@@ -106,11 +118,13 @@ pkgs <- c("ggplot2",
           "magpie4",
           "magpiesets",
           "lusweave",
-          "luscale")
+          "luscale",
+          "goxygen")
 install.packages(pkgs)
 ```
-For post-processing model outputs *Latex* is required (https://www.latex-project.org/get/). To be seen by the model it also needs to
-added to the PATH variable of your system. 
+For post-processing model outputs *Latex* is required
+(https://www.latex-project.org/get/). To be seen by the model it also needs to
+added to the PATH variable of your system.
 
 ## HOW TO CONFIGURE
 Model run settings are set in `config/default.cfg` (or another config file of
@@ -186,6 +200,10 @@ magpie@pik-potsdam.de
 
 ## TROUBLESHOOTING
 Please contact magpie@pik-potsdam.de
+
+## CITATION
+See file CITATION.cff or the documentation of the model for information how
+to cite the model.
 
 ## AUTHORS
 See file `AUTHORS`
