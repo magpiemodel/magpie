@@ -7,7 +7,12 @@
 *' @title Carbon
 *'
 *' @description The carbon module provides annual land-related CO2 emissions for the
-*' [56_ghg_policy] module.
+*' [56_ghg_policy] module. The carbon module provides carbon density information
+*' on cellular level to all land modules ([30_crop], [31_past], [32_forestry],
+*' [34_urban] and [35_natveg]), and in return it gets the current carbon stock
+*' levels from respective land pools. The module also accounts for changes in
+*' terrestrial carbon stocks cause by climate change effects on biosphere [45_climate].   
+*'
 *'
 *' @authors Benjamin Leon Bodirsky, Florian Humpenoeder
 

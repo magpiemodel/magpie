@@ -9,9 +9,9 @@
 *' @description The water demand module determines the water demand in the following
 *' sectors: agriculture, industry, electricity, domestic and ecosystem. 
 *' Different scenarios for different water demand and environmental flow protection are
-*' possible. The module receives information from the [core], and the [30_crop], [16_demand]
+*' possible. The module receives information from the [17_production], [30_crop], [09_drivers]
 *' and [43_water_availability] modules. It passes information to the module [43_water_availability]
-*' and the [core].
+*' and the [11_costs].
 *'
 *' 
 *' 

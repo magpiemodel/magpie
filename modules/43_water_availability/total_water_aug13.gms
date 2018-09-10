@@ -14,11 +14,10 @@
 *' desalination are also not considered. The calculation of available
 *' water per grid cell is based on LPJmL (@bondeau_lpjml_2007) simulations. For
 *' each river basin, total annual runoff in the basin constitutes the
-*' amount of water available in one year. Irrigation water can
-*' however only be supplied to the plants during their growing period.
-*' In order to account for that in MAgPIE, we calculated for each grid
-*' cell the mean growing period over all crops based on LPJmL (@bondeau_lpjml_2007)
-*' sowing and harvesting dates. Some data has been excluded from the calculation:
+*' amount of water available in one year. In order to account for the fact that
+*' water can only be supplied to the plants during the growing period, the mean 
+*' growing period over all crops based on LPJmL sowing and harvesting dates (@bondeau_lpjml_2007)
+*' is calculated in MAgPIE. Some data has been excluded from the calculation:
 *'
 *' * Winter crops in the northern hemisphere (sowing date later than June 
 *' 29th and harvest date later than December 31st) because we assume
@@ -29,7 +28,7 @@
 *' specific crop and the LPJmL (@bondeau_lpjml_2007) growing period simulation
 *' is likely to be distorted.
 *'
-*' Water available for irrigation in each basin thus only consists of the
+*' Therefore, water available for irrigation in each basin only consists of the
 *' total runoff occurring in the mean growing period in all basin cells
 *' except for cells where water storage in terms of dams is present (taken
 *' from @biemans_water_2011). In this case, total annual runoff is available.
