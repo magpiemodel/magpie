@@ -240,7 +240,6 @@ calc_policy <- function(policy,stock,pol_type="aff",pol_mapping, weight=NULL) {
 
     #set reference flow based on target type
     if(pol_type=="ad") {
-      stock[i,tp<baseyear,] <- 0
       stock[i,tp>targetyear,] <- setYears(stock[i,targetyear,],NULL)
       ref_flow <- new.magpie(getCells(stock),getYears(stock),NULL,0)
       if (targettype == 1) {
