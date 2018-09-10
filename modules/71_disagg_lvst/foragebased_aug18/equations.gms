@@ -55,7 +55,8 @@ q71_sum_rum_liv(j2,kli_rum) ..
 *** no residue production in cluster level available so far
 *** so the equation above is just running for fodder production
 
-*' Monogastric livestocks are distributed based on urban area share within a region by  
+*' To account for the above mentioned simple idea, that monogastric livestocks is held close to the population, it is
+*' distributed based on urban area by the formula 
 
 q71_prod_mon_liv(j2,kli_mon) ..
                  vm_prod(j2,kli_mon)
