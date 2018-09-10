@@ -12,6 +12,8 @@
 *' such as shifting investment from one time step to another or distribution of
 *' one-time investments over several time steps (e.g. in the modules 
 *' [13_tc], [39_landconversion] and [41_area_equipped_for_irrigation]).
+*'
+*' @authors Xiaoxi Wang
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%interest_rate%" == "glo_jan16" $include "./modules/12_interest_rate/glo_jan16.gms"
