@@ -7,9 +7,8 @@
 *' @description The foragebased_aug18 realization constrains the cellular ruminant livestock production by 
 *' the feed availability for grazed pasture and fodder crops. This accounts for the fact that pasture and fodder 
 *' (summarized with forage) feed stuff is usually not transported over long distances and by the the same time 
-*' are were essential in livestock diets. The monogastric livestock is distributed following the very simply idea 
+*' is very essential in livestock diets. The monogastric livestock is distributed following the very simply idea 
 *' that these animals are held close to densely populated areas. 
-
 
 *' @limitations Distribution of monogastrics do not account for feed availability within a cell.
 
