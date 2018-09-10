@@ -6,8 +6,8 @@
 
 parameters
  im_pollutant_prices(t_all,i,pollutants)      certificate prices for N2O-N CH4 CO2-C (USD2004 per Mg)
- p56_ghg_price_growth_rate(t,i,pollutants)    growth rate of certificate price (1)
- p56_ghg_price_growth_rate_avg(i,pollutants)  average over time of growth rate of certificate price (1)
+ p56_ghg_price_growth_rate(t,i,pollutants)    growth rate of certificate price (% per yr)
+ p56_ghg_price_growth_rate_avg(i,pollutants)  average over time of growth rate of certificate price (% per yr)
 ;
 
 equations
