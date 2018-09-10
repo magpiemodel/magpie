@@ -4,10 +4,10 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description No representation of crop residues in the model. 
+*' @description No representation of crop residues in the model.
 
-*' @limitations Underestimates the crop demand in some cases, because the crop
-*' residues have to be substituted by harvested crops in future
+*' @limitations Should not be used if emission estimates are required or
+*' climate policies are activated.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/18_residues/off/sets.gms"

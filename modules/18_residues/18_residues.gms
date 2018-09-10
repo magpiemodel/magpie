@@ -10,9 +10,8 @@
 *' (straw etc.) and its subsequent use. Residues can be burned, used for feed,
 *' recycled to soils or used for other purposes (construction, fuel etc).
 *'
-*' The module also calculates how much additional crops have to be
-*' produced in the case that feed requirements for residues exceed the production.
-*' The module is therefore of use for the general model behaviour as well as the nitrogen module. 
+*' The module also calculates the costs of crop residue harvest when it is used
+*' for feed or material usage.                                                     
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%residues%" == "flexreg_apr16" $include "./modules/18_residues/flexreg_apr16.gms"

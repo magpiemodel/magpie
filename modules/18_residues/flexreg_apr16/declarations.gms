@@ -24,7 +24,7 @@ equations
  q18_translate(i,kres,attributes)          Transformation of the multiple crop residues into supply balance crop redisues in respective attribute units DM GJ Nr P K WM C (mio. tX)
 
  q18_res_recycling_nr(i)                   Nutrient recycling of reaactive nitrogen (mio. tNr)
- q18_res_recycling_pk(i,pk18)              Nutrient recycling of potash (mio. tK)
+ q18_res_recycling_pk(i,pk18)              Nutrient recycling of phosphorus and potash (mio. tX)
  q18_cost_prod_res(i,kres)                 Production costs of harvesting crop residues (mio. USD05MER)
 
 ;
@@ -47,7 +47,7 @@ parameters
  oq18_res_field_burn(t,i,kcr,attributes,type)    Fixing of the residues amount burned in a region in respective attribute units DM GJ Nr P K WM C (mio. tX)
  oq18_translate(t,i,kres,attributes,type)        Transformation of the multiple crop residues into supply balance crop redisues in respective attribute units DM GJ Nr P K WM C (mio. tX)
  oq18_res_recycling_nr(t,i,type)                 Nutrient recycling of reaactive nitrogen (mio. tNr)
- oq18_res_recycling_pk(t,i,pk18,type)            Nutrient recycling of potash (mio. tK)
+ oq18_res_recycling_pk(t,i,pk18,type)            Nutrient recycling of phosphorus and potash (mio. tX)
  oq18_cost_prod_res(t,i,kres,type)               Production costs of harvesting crop residues (mio. USD05MER)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
