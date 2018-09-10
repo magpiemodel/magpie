@@ -5,12 +5,12 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- i42_wat_req_k(t,j,k)       	     LPJ annual water demand for irrigation per ha per year (m^3) + Livestock demand per ton (m^3)
- ic42_wat_req_k(j,k)        	     LPJ annual water demand for irrigation per ha per year (m^3) + Livestock demand per ton (m^3)
- i42_env_flows(t,j)                  environmental flow requirements if a protection policy is in place (mio m^3)
- i42_env_flows_base(t,j)    	     environmental flow requirements if no protection policy is in place  (mio m^3)
- ic42_env_flow_policy(i)             Determines if environmental flow protection is enforced in the current time step (logical)
- i42_env_flow_policy(t,i)            Determines if environmental flow protection is enforced (logical)
+ i42_wat_req_k(t,j,k)       	     LPJmL annual water demand for irrigation per ha per year (m^3) + Livestock demand per ton (m^3)
+ ic42_wat_req_k(j,k)        	     LPJmL annual water demand for irrigation per ha per year (m^3) + Livestock demand per ton (m^3)
+ i42_env_flows(t,j)                  Environmental flow requirements if a protection policy is in place (mio. m^3)
+ i42_env_flows_base(t,j)    	     Environmental flow requirements if no protection policy is in place  (mio. m^3)
+ ic42_env_flow_policy(i)             Determines whether environmental flow protection is enforced in the current time step (logical)
+ i42_env_flow_policy(t,i)            Determines whether environmental flow protection is enforced (logical)
 ;
 
 equations
@@ -18,13 +18,13 @@ equations
 ;
 
 positive variables
-  vm_watdem(wat_dem,j)               Water needed in different sectors (mio m^3 per yr)
+  vm_watdem(wat_dem,j)               Water demand from different sectors (mio. m^3 per yr)
   v42_irrig_eff(j)                   Irrigation efficiency
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_watdem(t,wat_dem,j,type)         Water needed in different sectors (mio m^3 per yr)
+ ov_watdem(t,wat_dem,j,type)         Water demand from different sectors (mio. m^3 per yr)
  ov42_irrig_eff(t,j,type)            Irrigation efficiency
  oq42_water_demand(t,wat_dem,j,type) Water consumption in different sectors
 ;

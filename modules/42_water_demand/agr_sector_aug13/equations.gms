@@ -4,7 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' equations
+*' @equations
 
 q42_water_demand("agriculture",j2).. 
  vm_watdem("agriculture",j2)*v42_irrig_eff(j2) =e=
@@ -12,6 +12,6 @@ q42_water_demand("agriculture",j2)..
  + sum(kli,vm_prod(j2,kli)*ic42_wat_req_k(j2,kli)*v42_irrig_eff(j2));
 
 *' `vm_watdem` is composed by irrigation and livestock demand uses.
-*' The factor `v42_irrig_eff` corresponds to the amount of water used
-*' inefficiently in the irrigation process 								
+*' The factor `v42_irrig_eff` corresponds to the amount of water that is used
+*' inefficiently in the irrigation process.					
 									
