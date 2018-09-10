@@ -4,6 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_area(t,j,kcr,w,"marginal")             = vm_area.m(j,kcr,w);
  oq30_cropland(t,j,"marginal")             = q30_cropland.m(j);

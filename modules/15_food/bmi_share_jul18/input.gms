@@ -69,7 +69,7 @@ $include "./modules/15_food/input/f15_intake_pc_observed_iso.cs3"
 $offdelim;
 
 
-parameter f15_prices_initial(kall) Food prices in initialisation period (USD05 per tDM)
+parameter f15_prices_initial(kall) Food prices in initialisation period (USD05 per t DM)
 /
 $ondelim
 $include "./modules/15_food/input/f15_prices_initial.csv"
@@ -77,7 +77,7 @@ $offdelim
 /;
 
 
-parameter f15_price_index(t_all) Food prices index in initialisation period (USD05 per tDM)
+parameter f15_price_index(t_all) Food prices index in initialisation period (USD05 per t DM)
 /
 $ondelim
 $include "./modules/15_food/input/f15_prices_index.csv"

@@ -4,4 +4,23 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-v56_emission_costs_reg_yearly.scale(i,emis_reg_yr56) = 10e5;
+sets
+   kli_rum(kli) ruminant livestock
+   /
+   livst_rum, livst_milk
+   /
+
+   kli_mon(kli) monogastric livestock
+   /
+   livst_pig, livst_chick, livst_egg
+   /
+   
+   kforage(k)
+   /
+	pasture, foddr
+   / 
+; 
+
+alias(j,j3);
+alias(cell,cell2);
+alias(kforage,kforage2);

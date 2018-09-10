@@ -90,23 +90,23 @@ sets
   aff56 afforestation policy scenarios
   / none, all, all50, vegc100, vegc75, vegc50, vegc33, vegc25 /
 
-   emis_cell_oneoff56(emis_source_cell) cellular oneoff emission sources
+   emis_cell_one56(emis_source_cell) cellular oneoff emission sources
    /crop_vegc, crop_litc, crop_soilc, past_vegc, past_litc, past_soilc, forestry_vegc,
    forestry_litc, forestry_soilc, primforest_vegc, primforest_litc, primforest_soilc,
    secdforest_vegc, secdforest_litc, secdforest_soilc,
    urban_vegc, urban_litc, urban_soilc, other_vegc, other_litc, other_soilc/
 
-   emis_reg_yearly56(emis_source_reg) regional yearly emission sources
+   emis_reg_yr56(emis_source_reg) regional yearly emission sources
    /inorg_fert, man_crop, awms, resid, man_past, som,
    rice, ent_ferm,  beccs/
 ;
 
 $onempty
 sets
-   emis_cell_yearly56(emis_source_cell) cellular yearly emission sources
+   emis_cell_yr56(emis_source_cell) cellular yearly emission sources
    / /
 
-   emis_reg_oneoff56(emis_source_reg) regional oneoff emission sources
+   emis_reg_one56(emis_source_reg) regional oneoff emission sources
    / /
  ;
 $offempty
