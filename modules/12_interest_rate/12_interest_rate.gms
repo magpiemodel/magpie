@@ -7,7 +7,7 @@
 *' @title Interest rate
 
 *' @description Interest rates are used in MAgPIE as a risk-accounting 
-*' factor associated with investment activities (Wang et al 2016).
+*' factor associated with investment activities [@wang_taking_2016].
 *' Interest rates are required for inter-temporal calculations in the model
 *' such as shifting investment from one time step to another or distribution of
 *' one-time investments over several time steps (e.g. in the modules 
