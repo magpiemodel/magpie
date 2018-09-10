@@ -10,8 +10,8 @@
 *' that are used by several other modules in the model. This module 
 *' mainly aggregates inputs related to population and GDP, but is not limited 
 *' to these. When an input is only required in one module or realization, 
-*' the input driver is provided directly within the module that demands it 
-*' rather within the [09_drivers] module. 
+*' the input driver is provided directly within the module that demands it, 
+*' rather than within the [09_drivers] module. 
 *'
 *' @authors Benjamin Leon Bodirsky
 

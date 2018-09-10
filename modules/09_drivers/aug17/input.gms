@@ -13,12 +13,12 @@ $setglobal c09_gdp_scenario  SSP2
 *             SRES: "a1", "a2", "b1", "b2"
 
 
-table f09_gdp_ppp_iso(t_all,iso,gdp_scen09) GDP (mio. USD05PPP per yr)
+table f09_gdp_ppp_iso(t_all,iso,gdp_scen09) Income in purchasing power parity (mio. USD05PPP per yr)
 $ondelim
 $include "./modules/09_drivers/input/f09_gdp_ppp_iso.csv"
 $offdelim;
 
-table f09_gdp_mer_iso(t_all,iso,gdp_scen09)  GDP (mio. USD05MER per yr)
+table f09_gdp_mer_iso(t_all,iso,gdp_scen09)  Income in market exchange rates (mio. USD05MER per yr)
 $ondelim
 $include "./modules/09_drivers/input/f09_gdp_mer_iso.csv"
 $offdelim;
