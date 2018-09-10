@@ -6,13 +6,12 @@
 
 *' @equations
 
-*** calculate food demand growth for material demand module
-*' The material demand is set greater than or equal to the historical material
-*' demand when the switch for calculating historical material demand is turned on
-*' (i.e.,`s62_historical` = 1). When `s62_historical` is switched to 0, demand
-*' for material usage is calculated as the product of material demand in last
-*' historical timestep with food demand weighted by the food demand in last
-*' historical timestep.
+*' Estimation of material demand depends on the value set by switch `s62_historical`.
+*' When it is set to 1, the material demand is estimated purely based on the historical
+*' material demand as reported by FAO. When `s62_historical` is switched to 0, the Material
+*' demand is calculated as the scaled version of material demand in last historical timestep
+*' depending on a scaling factor. This scaling factor is calculated as the ratio beween the
+*' food demand from last timestep and the food demand from the last historical time step.
 
  q62_dem_material(i2,kall) ..
                       vm_dem_material(i2,kall)
@@ -25,6 +24,6 @@
                       *(1-s62_historical)
                       ;
 
-*' Results are stored in the interface `vm_dem_material`. This interface is then
+*' Results are stored in the interface `vm_dem_material` and this interface is then
 *' used in demand([16_demand]) module as a part of global supply-demand balance
 *' for crop, livestock, secondary products and residues.

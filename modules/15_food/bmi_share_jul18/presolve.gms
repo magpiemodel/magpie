@@ -308,28 +308,8 @@ else
 *' The calib is added to the regression value
    p15_kcal_pc_iso(t,iso,kfo) =
           v15_kcal_regr.l(iso,kfo) + p15_kcal_calib(t,iso,kfo) * s15_calibrate;
-   p15_bmi_shr(t,iso,sex,age,bmi_group15) =
-           v15_bmi_shr_regr.l(iso,sex,age,bmi_group15)+
-           i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
-
 *' Eventual negative values that can occur due to calib are set to zero
    p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
-*' The bmi shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
-   p15_bmi_shr(t,iso,sex,age,bmi_group15)$(p15_bmi_shr(t,iso,sex,age,bmi_group15)<0) = 0;
-   p15_bmi_shr(t,iso,sex,age,bmi_group15)$(p15_bmi_shr(t,iso,sex,age,bmi_group15)>1) = 1;
-*' The mismatch is balanced by moving the exceeding quantities into the middle BMI group.
-   p15_bmi_shr(t,iso,sex,age,"medium")=
-      1 - (sum(bmi_group15, p15_bmi_shr(t,iso,sex,age,bmi_group15)) - p15_bmi_shr(t,iso,sex,age,"medium"));
-
-*' We recalculate the intake with the new values
-   p15_kcal_intake_total(t,iso) =
-         (
-           sum((sex, age, bmi_group15),
-               p15_bmi_shr(t,iso,sex,age,bmi_group15)*
-               im_demography(t,iso,sex,age) *
-               i15_intake(t,iso,sex,age,bmi_group15)
-           ) + i15_kcal_pregnancy(t,iso)
-         )/sum((sex,age), im_demography(t,iso,sex,age));
 
 *' The country-level parameter p15_kcal_pc_iso is aggregated to
 *' regional level into the parameter p15_kcal_pc. This parameter is provided

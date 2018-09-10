@@ -5,7 +5,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- im_maccs_mitigation(t,i,emis_source,pollutants)     technical mitigation of GHG emissions (1 per 100)
+ im_maccs_mitigation(t,i,emis_source,pollutants)     technical mitigation of GHG emissions (1)
 ;
 
 positive variables
