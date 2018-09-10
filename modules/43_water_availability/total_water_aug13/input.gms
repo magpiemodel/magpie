@@ -9,7 +9,7 @@ $setglobal c43_watavail_scenario  nocc
 *             nocc (no climate change)
 
 parameters
-f43_wat_avail(t_all,j) Surface water available for irrigation per cell from LPJ (mio. m^3 per yr)
+f43_wat_avail(t_all,j) Surface water available for irrigation per cell from LPJmL (mio. m^3 per yr)
 /
 $ondelim
 $include "./modules/43_water_availability/input/lpj_watavail_grper.cs2"

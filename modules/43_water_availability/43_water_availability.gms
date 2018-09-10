@@ -8,8 +8,8 @@
 *'
 *' @description The water availability module determines the water that is available 
 *' in MAgPIE. The following water sources are currently implemented: surface water, 
-*' groundwater, technical (like desalination etc) and ren_ground. Additionally, 
-*' this module hosts the main water constraint that requires water withdrawals 
+*' groundwater, technical (like desalination etc.). Additionally, 
+*' this module includes the main water constraint that requires water withdrawals 
 *' to be smaller or equal to available water. Information is passed to and received 
 *' from the [42_water_demand] module.
 *'
