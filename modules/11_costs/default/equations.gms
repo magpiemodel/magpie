@@ -43,7 +43,6 @@
 *' Irrigation expansion costs [41_area_equipped_for_irrigation],
 *' Trade costs (Transport and bilateral trade) [21_trade],
 *' Forestry related costs (afforestation) [32_forestry],
-*' Carbon dioxide removal costs [58_carbon_removal],
 *' Bioenergy costs [60_bioenergy],
 *' Processing costs [20_processing],
 *' Punish costs for overrate cropland differences [59_som].
