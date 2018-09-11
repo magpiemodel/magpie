@@ -5,13 +5,13 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-  s12_min_dev  minimum development_state of all regions in 1995 (1)
-  s12_max_dev  maximum development_state of all regions in 1995 (1)
-  s12_slope_a        slope of the linear relationship between development_state and interest rate (1)
-  s12_intercept_b    intercept of the linear relationship between development_state and interest rate (1)
+  s12_min_dev  Minimum development_state of all regions in 1995 (1)
+  s12_max_dev  Maximum development_state of all regions in 1995 (1)
+  s12_slope_a        Slope of the linear relationship between development_state and interest rate (1)
+  s12_intercept_b    Intercept of the linear relationship between development_state and interest rate (1)
 ;
 
 parameters
-  pm_interest(i)        current real interest rate in each region (% per yr)
-  p12_interest(t,i)          real interest rate in each region and timestep (% per yr)
+  pm_interest(i)        Current real interest rate in each region (% per yr)
+  p12_interest(t,i)     Real interest rate in each region and timestep (% per yr)
 ;

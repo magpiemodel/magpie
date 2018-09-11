@@ -5,7 +5,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
-f41_irrig(j) available area equipped for irrigation [AVL] (mio. ha)
+f41_irrig(j) Available area equipped for irrigation [AVL] (mio. ha)
 /
 $ondelim
 $include "./modules/41_area_equipped_for_irrigation/input/avl_irrig.cs2"

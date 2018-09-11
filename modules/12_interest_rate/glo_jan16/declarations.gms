@@ -5,6 +5,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
-  pm_interest(i)        current real interest rate in each region (% per yr)
-  p12_interest(t,i)	    real interest rate (% per yr)
+  pm_interest(i)        Current real interest rate in each region (% per yr)
+  p12_interest(t,i)	    Real interest rate (% per yr)
 ;

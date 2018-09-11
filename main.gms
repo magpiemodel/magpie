@@ -21,21 +21,33 @@ $title magpie
 *' technological development and production costs as well as spatially explicit data
 *' on biophysical constraints into account. Geographically explicit data on biophysical
 *' constraints are provided by the Lund-Potsdam-Jena managed land model (LPJmL) 
-*' (@bondeau_lpjml_2007, )
+*' (@bondeau_lpjml_2007, @mueller_projecting_2014) on 0.5° resolution and include e.g.
+*' carbon densities of different vegetation types, agricultural productivity such as
+*' crop yields and water availability for irrigation as. Based on the strong interaction
+*' with LPJmL, MAgPIE can also help to assess the consequences of increased CO2 in the
+*' atmosphere and associated climate change on the land-use sector (@stevanovic_impact_2016)
+*'
+*' Available land types in MAgPIE are cropland, pasture, forest, other land (including
+*' non-forest natural vegetation, abandoned agricultural land and desert) and settlements.
+*' Cropland (rainfed and irrigated), pasture, forest and other land are endogenously
+*' determined, while settlement areas are assumed to be constant over time. The cropland
+*' covers cultivation of different food/feed crop types (e.g. temperate and tropical
+*' cereals, maize, rice, oilseeds, roots), both rainfed and irrigated systems, and two
+*' 2nd generation bioenergy crop types (grassy and woody). The supply of animal food
+*' commodities is divided into five livestock production activities (ruminant meat,
+*' pig meat, poultry meat, eggs and milk) (Weindl et al 2018). The quantity of livestock
+*' production in combination with regional and livestock-specific feed baskets determines
+*' the demand for feed. Spatial distribution of crops and pasture in MAgPIE is guided by
+*' geographically explicit information on vegetation growth and the balance between crop
+*' water demand and water availability, by initial land cover distribution maps as well as
+*' by economic conditions like trade barriers, management intensity and transport costs,
+*' thus integrating information about market access into the decision process where to
+*' allocate cropping activities and livestock production. Parts of the forests and other
+*' natural land can be excluded from conversion into agricultural land if designated for
+*' wood production or located in protected areas (Kreidenweis et al 2018). Due to computational constraints, all model inputs in 0.5 degree resolution can be aggregated to simulation units for the optimization process based on a clustering algorithm (Dietrich et al 2013). 
 
 
-*' [@bondeau_lpjml_2007], with a spatial resolution of 0.5°x0.5°. It takes
-*' regional economic conditions such as demand for agricultural commodities,
-*' technological development and production costs as well as spatially explicit
-*' data on potential crop yields, land and water constraints (from LPJmL) into
-*' account. Based on these, the model derives specific land use patterns, yields
-*' and total costs of agricultural production for each grid cell. The objective
-*' function of the land use model is to minimize total cost of production for a
-*' given amount of regional food and bioenergy demand. Regional food energy
-*' demand is defined for an exogenously given population in 10 food energy
-*' categories, based on regional diets. Future trends in food demand are derived
-*' from a cross-country regression analysis, based on future scenarios on GDP
-*' and population growth.
+
 
 *##################### R SECTION START (VERSION INFO) ##########################
 *
