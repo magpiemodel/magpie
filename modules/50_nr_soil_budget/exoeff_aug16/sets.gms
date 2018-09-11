@@ -17,6 +17,6 @@ neff70_75_starty2010,neff75_80_starty2010,neff80_85_starty2010,
 neff75_85_starty2010 /
 
 dep_scen50
-/rcp26,rcp45,rcp85/
+/history/
 
 ;

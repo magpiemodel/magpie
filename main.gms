@@ -38,60 +38,60 @@ $title magpie
 *' and population growth.
 
 *##################### R SECTION START (VERSION INFO) ##########################
-*
-* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev33_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: 5d2256d3468874005d263ea29d0ab59e
+* 
+* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev34_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* md5sum: b88ddae2ac42d76603bd988337115c64
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-*
-* Used data set: rev4.9_690d3718e151be1b450b394c1064b1c5_magpie.tgz
-* md5sum: 5052a5f1086199baa0984c1566b5b36c
+* 
+* Used data set: rev4.12_690d3718e151be1b450b394c1064b1c5_magpie.tgz
+* md5sum: 69a886994ddc2b793553226c01f33ddf
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-*
-* Used data set: rev4.9_690d3718e151be1b450b394c1064b1c5_validation.tgz
-* md5sum: a1317526544e705decd622d41b5c620d
+* 
+* Used data set: rev4.12_690d3718e151be1b450b394c1064b1c5_validation.tgz
+* md5sum: 6e3b8690af3e4cafa7e1af711d0a95a0
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-*
-* Used data set: additional_data_rev3.53.tgz
-* md5sum: 7470017806bc592840883bd75f771482
+* 
+* Used data set: additional_data_rev3.57.tgz
+* md5sum: ff8090c1d1f74dafafe920dd48a8f1c0
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-*
+* 
 * Used data set: calibration_H12_c200_29Aug18.tgz
 * md5sum: a71530714bb31e49c3f1c82870cea4c5
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/calibration
-*
+* 
 * Low resolution: c200
 * High resolution: 0.5
-*
+* 
 * Total number of cells: 200
-*
+* 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    28   24   10    7    3   53   17    8   22    7   11   10
-*
+* 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-*
-* Regions data revision: 4.9
-*
+* 
+* Regions data revision: 4.12
+* 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
-* * Additional input folder: /p/projects/landuse/data/input/other/rev33
-* * Revision: 33
+* * Additional input folder: /p/projects/landuse/data/input/other/rev34
+* * Revision: 34
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-*
+* 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
-* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev33_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev33_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev34_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev34_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
-*
-*
-*
-* Last modification (input data): Tue Sep 04 11:15:56 2018
-*
+* 
+* 
+* 
+* Last modification (input data): Tue Sep 11 16:26:34 2018
+* 
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
@@ -168,7 +168,7 @@ $setglobal som  off
 $setglobal bioenergy  standard_flexreg_may17
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
-$setglobal disagg_lvst  foragebased_sep18
+$setglobal disagg_lvst  foragebased_aug18
 
 $setglobal optimization  nlp_apr17
 

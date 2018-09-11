@@ -10,8 +10,8 @@ $setglobal c50_scen_neff  neff60_60_starty2010
 *   neff70_75_starty2010,neff75_80_starty2010,neff80_85_starty2010
 *   neff75_85_starty2010
 
-$setglobal c50_dep_scen  rcp26
-*   options:   rcp26, rcp45, rcp85
+$setglobal c50_dep_scen  history
+*   options:   history
 
 parameter f50_snupe(t_all,i,scen_neff50)  selected scenario values for soil nitrogen uptake efficiency (1)
 /
