@@ -34,9 +34,9 @@ v32_land(j2,"new") *
 sum(ct, pm_carbon_density_ac(ct,j2,ac-1,c_pools))));
 
 *' This is considered as the forestry land CO2 emissions of the "newly" planted trees,
-*' represnted by total carbon sequestration capability of the land added to the "new"
-*' forestry land pool depending on the difference between the age-class and carbon pool
-*' dependent carbon density of consecutive age classes (current and previous time step).
+*' represnted by total carbon contained in the land added to the "new" forestry land pool
+*' depending on the difference between the age-class and carbon pool dependent carbon density
+*' of consecutive age classes (current and previous time step).
 *' This calculation is however only carried out for forest age-classes which have non-zero
 *' carbon density till the point where the forest belongs to age-classes which is less
 *' than the planning horizon specified in `s32_planing_horizon`.
