@@ -9,8 +9,21 @@ $title magpie
 *' @title MAgPIE - Modelling Framework
 *'
 *' @description The *Model of Agricultural Production and its Impact on the
-*' Environment* (MAgPIE) is a global land use allocation model framework, which
-*' is coupled to the grid-based dynamic vegetation model LPJmL
+*' Environment* (MAgPIE) is developed and used to assess the competition for 
+*' land and water, and the associated consequences for sustainable development 
+*' under future scenarios of rising food, energy and material demand and production,
+*' climate change and different land related policies. 
+*'
+*' MAgPIE is a global partial equilibrium model of the land-use sector that operates 
+*' in a recursive dynamic mode and incorporates spatially explicit information on 
+*' biophysical constraints into an economic decision making process (@lotze-campen_global_2008).
+*' It takes regional economic conditions such as demand for agricultural commodities,
+*' technological development and production costs as well as spatially explicit data
+*' on biophysical constraints into account. Geographically explicit data on biophysical
+*' constraints are provided by the Lund-Potsdam-Jena managed land model (LPJmL) 
+*' (@bondeau_lpjml_2007, )
+
+
 *' [@bondeau_lpjml_2007], with a spatial resolution of 0.5°x0.5°. It takes
 *' regional economic conditions such as demand for agricultural commodities,
 *' technological development and production costs as well as spatially explicit
