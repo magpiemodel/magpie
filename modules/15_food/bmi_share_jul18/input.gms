@@ -11,12 +11,12 @@ $setglobal c15_rumscen  mixed
 
 scalar s15_elastic_demand  elastic demand switch (1=elastic 0=exogenous) (1) / 1 /;
 
-scalar s15_calibrate calibration switch (1=calibrated 2=pure regresssion outcomes) / 1 /;
+scalar s15_calibrate calibration switch (1=calibrated 2=pure regresssion outcomes) (1) / 1 /;
 * only for per-capita calories, not for e.g. calibration of transformation parameters between per-capita calories in dm
 
-scalar s15_maxiter maximum iteration number / 5 /;
+scalar s15_maxiter maximum iteration number (1) / 5 /;
 
-scalar s15_convergence convergence criteria   / 0.005 /;
+scalar s15_convergence convergence criteria (1) / 0.005 /;
 
 table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of inhomogenous products and processes in statistics (mio. tDM)
 $ondelim
@@ -36,12 +36,12 @@ $offdelim;
 * kcal/capita/day for saturation and intercept, and
 * USD05/capita for halfsaturation
 
-table f15_demand_paras(regr15,food_scen15,par15)  Food regression parameters (-)
+table f15_demand_paras(regr15,food_scen15,par15)  Food regression parameters (X)
 $ondelim
 $include "./modules/15_food/input/f15_demand_regression_parameters.cs3"
 $offdelim;
 
-table f15_bmi_shr_paras(sex, agegroup15, bmi_tree15, paras_b15)  BMI share regression parameters (-)
+table f15_bmi_shr_paras(sex, agegroup15, bmi_tree15, paras_b15)  BMI share regression parameters (X)
 $ondelim
 $include "./modules/15_food/input/f15_bmi_shr_regr_paras.cs3"
 $offdelim;
@@ -69,7 +69,7 @@ $include "./modules/15_food/input/f15_intake_pc_observed_iso.cs3"
 $offdelim;
 
 
-parameter f15_prices_initial(kall) Food prices in initialisation period (USD05 per t DM)
+parameter f15_prices_initial(kall) Food prices in initialisation period (USD05MER per t DM)
 /
 $ondelim
 $include "./modules/15_food/input/f15_prices_initial.csv"
@@ -77,7 +77,7 @@ $offdelim
 /;
 
 
-parameter f15_price_index(t_all) Food prices index in initialisation period (USD05 per t DM)
+parameter f15_price_index(t_all) Food prices index in initialisation period (USD05MER per t DM)
 /
 $ondelim
 $include "./modules/15_food/input/f15_prices_index.csv"

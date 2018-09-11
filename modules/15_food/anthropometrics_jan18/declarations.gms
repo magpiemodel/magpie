@@ -38,8 +38,8 @@ equations
 positive variables
   v15_kcal_regression(iso,kfo)     Uncalibrated regression estimates of calorie demand (kcal per cap per day)
   v15_kcal_regression_total(iso)     Uncalibrated regression estimates of  total per capita calories (kcal per cap per day)
-  v15_regression(iso, demand_subsys15)       Uncalibrated regression estimates of kcal shares (1)
-  v15_income_pc_real_ppp_iso(iso)    real income per capita (USD per cap)
+  v15_regression(iso, demand_subsys15)       Uncalibrated regression estimates of kcal shares (kcal per kcal)
+  v15_income_pc_real_ppp_iso(iso)    real income per capita (USD05X per cap)
   v15_income_balance(iso)            balance variable to balance cases in which reduction in income beats gdp pc (USD05 per cap)
   v15_kcal_intake_regression(iso,sex,age) Uncalibrated regression estimate for per-capita intake (kcal per cap per day)
 ;

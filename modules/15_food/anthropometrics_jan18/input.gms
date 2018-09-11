@@ -36,7 +36,7 @@ $offdelim;
 * kcal/capita/day for saturation and intercept, and
 * USD05/capita for halfsaturation
 
-table f15_demand_regr_paras(demand_subsys15,food_scen15,par15)  Food regression parameters (1)
+table f15_demand_regr_paras(demand_subsys15,food_scen15,par15)  Food regression parameters (X)
 $ondelim
 $include "./modules/15_food/input/f15_demand_regression_parameters.cs3"
 $offdelim;
@@ -53,7 +53,7 @@ $include "./modules/15_food/input/f15_intake_pc_observed_iso.cs3"
 $offdelim;
 
 
-parameter f15_prices_initial(kall) Food prices in initialisation period (USD05 per tDM)
+parameter f15_prices_initial(kall) Food prices in initialisation period (USD05MER per tDM)
 /
 $ondelim
 $include "./modules/15_food/input/f15_prices_initial.csv"
@@ -61,7 +61,7 @@ $offdelim
 /;
 
 
-parameter f15_price_index(t_all) Food prices index in initialisation period (USD05 per tDM)
+parameter f15_price_index(t_all) Food prices index in initialisation period (USD05MER per tDM)
 /
 $ondelim
 $include "./modules/15_food/input/f15_prices_index.csv"

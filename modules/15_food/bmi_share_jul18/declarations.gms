@@ -19,8 +19,8 @@ positive variables
 
 
 equations
-  q15_aim                aim function food demand model (mio. USD05)
-  q15_budget(iso)        Household Budget Constraint (USD05 per capita per day)
+  q15_aim                aim function food demand model (mio. USD05PPP)
+  q15_budget(iso)        Household Budget Constraint (USD05PPP per capita per day)
 
   q15_regr_bmi_shr(iso,sex,agegroup15,bmi_tree15) estimates regression parameters for BMI regression shares (capita per capita)
   q15_bmi_shr_verylow(iso,sex,agegroup15)  estimates bmi share for population groups (capita per capita)
@@ -45,20 +45,20 @@ equations
 positive variables
   v15_kcal_regr(iso,kfo)     Uncalibrated regression estimates of calorie demand (kcal per cap per day)
   v15_kcal_regr_total(iso)     Uncalibrated regression estimates of  total per capita calories (kcal per cap per day)
-  v15_demand_regr(iso, regr15)       Uncalibrated regression estimates of kcal shares (-)
-  v15_income_pc_real_ppp_iso(iso)    real income per capita (USD per cap)
-  v15_income_balance(iso)            balance variable to balance cases in which reduction in income beats gdp pc (USD05 per cap)
-  v15_kcal_intake_total_regr(iso)  Intake (kcal per cap per day)
+  v15_demand_regr(iso, regr15)       Uncalibrated regression estimates of kcal shares (kcal per kcal)
+  v15_income_pc_real_ppp_iso(iso)    real income per capita (USD05PPP per capita)
+  v15_income_balance(iso)            balance variable to balance cases in which reduction in income beats gdp pc (USD05PPP per cap)
+  v15_kcal_intake_total_regr(iso)  Intake (kcal per capita per day)
   v15_regr_overgroups(iso,sex,agegroup15,bmi_tree15)   hierarchical tree parameter regressions (capita per capita))
   v15_bmi_shr_regr(iso,sex,age,bmi_group15) uncalibrated share of population groups belonging to a certain bmi_group (capita per capita)
   v15_bmi_shr_overgroups(iso,sex,agegroup15,bmi_group15) uncalibrated  share of population groups belonging to a certain bmi_group (capita per capita)
 ;
 
 variables
-  v15_objective                      objective term (USD05)
+  v15_objective                      objective term (USD05PPP)
 ;
 
-scalar s15_count counter for creating average consumption over the length between timesteps;
+scalar s15_count loop counter for creating average consumption over the length between timesteps (1);
 
 parameters
 * technical
@@ -71,8 +71,8 @@ parameters
  i15_dem_nonsat(regr15)                 food regression parameters nonsaturation(1)
 
 *prices
- p15_prices_kcal(t,iso,kfo)                   prices from magpie after optimization (USD05 per kcal)
- i15_prices_initial_kcal(iso,kfo)             initial prices that capture the approximate level of prices in 1961-2010 (USD05 per kcal)
+ p15_prices_kcal(t,iso,kfo)                   prices from magpie after optimization (USD05PPP per kcal)
+ i15_prices_initial_kcal(iso,kfo)             initial prices that capture the approximate level of prices in 1961-2010 (USD05PPP per kcal)
 
 * anthropometrics
   p15_bmi_shr(t,iso,sex,age,bmi_group15)      calibrated estimates bmi share for population groups  (capita per capita)
@@ -127,14 +127,14 @@ parameters
 
 * calculate diet iteration breakpoint
 
-  p15_income_pc_real_ppp(t,i)                 regional per-capita income after price shock (USD05 per capita)
+  p15_income_pc_real_ppp(t,i)                 regional per-capita income after price shock (USD05PPP per capita)
   p15_delta_income(t,i)           regional change in per-capita income due to price shock (1)
   p15_lastiteration_delta_income(i) regional change in per-capita income due to price shock of last iteration (1)
 
 ;
 
 scalars
- s15_year                    current year as integer value  /2000/
+ s15_year                    current year as integer value (yr)  /2000/
 ;
 
 *' @code
