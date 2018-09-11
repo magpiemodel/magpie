@@ -5,25 +5,18 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-*' @description This realization assures that irrigated crop production can only take place where
-*' irrigation infrastructure is present. The difference to the static realization is that it allows
-*' the model to endogenously decide on investments to deploy additional irrigation infrastructure,
-*' i.e. to increase the area equipped for irrigation (AEI).Initial values for AEI in 1995 are taken from
-*' @siebert_FAO_2007. Contraction of AEI is not possible.
+*' @description This realization allows the model to endogenously decide on investments to deploy additional
+*' irrigation infrastructure, i.e. to increase the area equipped for irrigation (AEI). Initial values for AEI
+*' in 1995 are taken from @siebert_FAO_2007. Contraction of AEI is not possible.
+*' Irrigated crop production can only take place where irrigation infrastructure is present.
 *'
-*' Investment costs in the current timestep for each region are calculated as the AEI expansion in each
-*' cluster of the region times the regional unit cost per hectare.
-*' MAgPIE has a common planning horizon to which all one time investments are distributed using an annuity
-*' approach. Due to this distribution, part of the costs from previous investments in AEI still entail costs
-*' in the current timestep.
-*'
-*' Unit costs per hectare for AEI expansion are derived from a World Bank study @worldbank_irrigation_1995.
-*' The region mapping is as follows:
+*' Unit costs per hectare for AEI expansion are derived from a World Bank study (@worldbank_irrigation_1995)
+*' and adjusted for the regions used in MAgPIE. The region mapping is as follows:
 *'
 *' ![Mapping between MAgPIE regions and the regions in 
 *' [@worldbank_irrigation_1995]](regions.png){ width=60% }
 *'
-*' These costs converge linearly towards Europe until 2050.
+*' The regional unit costs converge linearly towards the European level until 2050.
 *'
 *' ![Unit costs for AEI expansion in MAgPIE
 *' ](unitcosts.png){ width=60% }

@@ -5,11 +5,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 equations
- q38_cost_prod_crop(i,kcr)               Regional factor input costs for plant production (mio. USD)
+ q38_cost_prod_crop(i,kcr)               Regional factor input costs for plant production (mio. USD05MER)
 ;
 
 positive variables
-         vm_cost_prod(i,kall)            Factor costs (mio. USD)
+         vm_cost_prod(i,kall)            Factor costs (mio. USD05MER)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

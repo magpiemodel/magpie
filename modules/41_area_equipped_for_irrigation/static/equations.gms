@@ -4,10 +4,12 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
- 
- *' equations
- *' total irrigated crop area has to be lower than the static value `v41_AEI`
- 
+*' @equations
+  
  q41_area_irrig(j2) .. 
- sum(kcr, vm_area(j2,kcr,"irrigated")) =l=
- v41_AEI(j2);
+ sum(kcr, vm_area(j2,kcr,"irrigated")) =l= v41_AEI(j2);
+
+*' This realization assures that irrigated crop production can only take place where
+*' irrigation infrastructure is present, i.e. the sum of irrigated cropland `vm_area(j,kcr,"irrigated")`
+*' over all crops in each grid cell has to be less than or equal to the area in this grid cell that is
+*' equipped with irrigation infrastructure (`v41_AEI(j)`).
