@@ -4,8 +4,9 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @code Afforestation costs and total CDR from afforestation (new and existing
-*' areas) between t+1 and t = `s32_planing_horizon` are set to zero.
+*' @code
+*' Afforestation costs and total CDR from afforestation (new and existing areas)
+*' between t+1 and t = `s32_planing_horizon` are set to zero.
 vm_cost_fore.fx(i) = 0;
 vm_cdr_aff.fx(j,co2_forestry) = 0;
 

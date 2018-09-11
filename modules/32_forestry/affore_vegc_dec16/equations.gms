@@ -8,16 +8,17 @@
 
 *****Costs**********************************************************************
 
-*' Costs of an afforestation activity are represented by the product of annual costs for
-*' carrying out maintainence of forestry land (except for old forests) and annual factor
-*' requirement costs.
+*' Costs of an afforestation activity are represented by the total factor costs
+*' for carrying out maintainence of forestry land (except for old forests) depending
+*' on the annual facto requirement costs and the area being dedicated to land pool
+*' belonging to forestry.
 
 q32_cost_fore_ac(i2) ..
 vm_cost_fore(i2) =e= sum((cell(i2,j2),land32,fcosts32)$(not sameas(land32,"old")),
                 v32_land(j2,land32)*f32_fac_req_ha(i2,fcosts32));
 
 *' Interface `vm_cost_fore` is then used in costs ([11_costs]) module as a part of global
-*' production costs calculation.
+*' production costs calculation and optimization.
 
 *****forestry emissions seen in maccs module************************************
 *' Interface `vm_cdr_aff` calculates carbon dioxide removal from afforestation by (new and
@@ -32,15 +33,20 @@ v32_land(j2,"new") *
 (sum(ct, pm_carbon_density_ac(ct,j2,ac,c_pools)) -
 sum(ct, pm_carbon_density_ac(ct,j2,ac-1,c_pools))));
 
-*' This is calculated from the forestry land CO2 emissions of the "newly" planted trees
-*' multiplied by the difference between the age-class and carbon pool dependent carbon
-*' density of consecutive age classes. This calculation is however only carried out for
-*' forest age-classes which have non-zero carbon density till the point where the forest
-*' belongs to age-classes less than the planning horizon specified in `s32_planing_horizon`.
+*' This is considered as the forestry land CO2 emissions of the "newly" planted trees,
+*' represnted by total carbon contained in the land added to the "new" forestry land pool
+*' depending on the difference between the age-class and carbon pool dependent carbon density
+*' of consecutive age classes (current and previous time step).
+*' This calculation is however only carried out for forest age-classes which have non-zero
+*' carbon density till the point where the forest belongs to age-classes which is less
+*' than the planning horizon specified in `s32_planing_horizon`.
 
 *****Land***************************************************
 *' Forestry component of `vm_land` (calculated in [10_land]) interface is set equal to the
-*' sum of all kinds of existing forestry land over each cell.
+*' sum of all kinds of existing forestry land over each cell. The `vm_land` interface is then
+*' used in the land module ([10_land]) in a constraint which specifies that the total amount
+*' of land has to be constant over time. `v32_land` can be considered as a subset of all
+*' land types specified in this model, dealing specifically with managed forests/forestry.
 
  q32_land(j2) ..
  vm_land(j2,"forestry") =e= sum(land32, v32_land(j2,land32));
