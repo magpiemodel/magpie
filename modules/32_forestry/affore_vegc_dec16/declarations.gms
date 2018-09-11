@@ -12,10 +12,10 @@ parameters
  p32_carbon_density(t,j,land32,c_pools) Carbon density for land32 and c_pools (tC per ha)
  p32_land(t,j,ac,when)                  Forestry land for each cell wood type and age class before and after optimization (mio. ha)
  pc32_land(j,land32)                    Forestry land per forestry land type initialization of the optimization (mio. ha)
- p32_aff_pot(t,j)                       Potential afforestation area (mio. ha)
- p32_aff_pol_timestep(t,j)			    Nationally Determined Contributions afforestation per time step (mio. ha)
- p32_aff_pol(t,j)			            Nationally Determined Contributions cumulative afforestion target (mio. ha)
- p32_aff_togo(t)              			Remaining NDC afforestation wrt to the max NDC target over time (Mha)
+ p32_aff_pot(t,j)                       Potential afforestation area on cropland and pasture land (mio. ha)
+ p32_aff_pol(t,j)			            NPI NDC afforestion target as stock (mio. ha)
+ p32_aff_pol_timestep(t,j)			    NPI NDC afforestation target as flow per time step (mio. ha per timestep)
+ p32_aff_togo(t)              			Remaining NPI NDC afforestation wrt to the max NPI NDC target over time (mio. ha)
 ;
 
 positive variables

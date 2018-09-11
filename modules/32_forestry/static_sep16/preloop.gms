@@ -5,24 +5,20 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @code
-*' Afforestation costs and total CDR from afforestation (new and existing areas)
-*' between t+1 and t = `s32_planing_horizon` are set to zero.
+*' Costs and CDR from afforestation are fixed to zero.
 vm_cost_fore.fx(i) = 0;
 vm_cdr_aff.fx(j,co2_forestry) = 0;
 
-*' All forestry land pools are fixed to zero.
-****** fix forestry land
+*' All forestry land pools except "old" are fixed to zero. "old" includes the forestry plantations at 1995 level. 
 v32_land.fx(j,"new") = 0;
 v32_land.fx(j,"prot") = 0;
 v32_land.fx(j,"grow") = 0;
 v32_land.fx(j,"old") = pcm_land(j,"forestry");
 
-*' Forestry part of different land types is fixed to the lower value of total
-*' forestry land pool from the previous time step.
+*' Aggregation of detailed land pools (`land32`).
 vm_land.fx(j,"forestry") = sum(land32, v32_land.l(j,land32));
 
-*' Aggregated difference in forestry land compared to previous timestep is also
-*' fixed to zero.
+*' Difference in forestry land compared to previous timestep is also fixed to zero.
 vm_landdiff_forestry.fx = 0;
 *' @stop
 

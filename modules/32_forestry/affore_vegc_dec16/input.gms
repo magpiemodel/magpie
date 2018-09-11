@@ -8,7 +8,7 @@ $setglobal c32_aff_mask  noboreal
 $setglobal c32_aff_policy  npi
 
 scalars
-	s32_max_aff_area 	Maximum total global afforestation in (mio. ha)    / Inf /
+	s32_max_aff_area 	Maximum global endogenous afforestation (mio. ha)    / Inf /
 	s32_planing_horizon Afforestation planing horizon (years)            / 30 /
 ;
 

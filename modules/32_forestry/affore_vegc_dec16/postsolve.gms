@@ -3,10 +3,18 @@
 *** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
+
+*' @code Documentation of postsolve.gms:
+*'
+*' Disaggregation of forestry land after optimization from `land32`to `ac`.
 *after(ac) = growth_rate(flt)*before(ac)
 p32_land(t,j,ac,"after") =
          (v32_land.l(j,"new")+v32_land.l(j,"new_ndc"))$(ord(ac) = 1)
-         + sum(ac_land32(ac,land32)$(not sameas(land32,"new") AND not sameas(land32,"new_ndc") AND pc32_land(j,land32) > 0),(v32_land.l(j,land32)/pc32_land(j,land32))*p32_land(t,j,ac,"before"))$(ord(ac) > 1);
+         + sum(ac_land32(ac,land32)$(not sameas(land32,"new") 
+         AND not sameas(land32,"new_ndc") 
+         AND pc32_land(j,land32) > 0),
+         (v32_land.l(j,land32)/pc32_land(j,land32))*p32_land(t,j,ac,"before"))$(ord(ac) > 1);
+*' @stop
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_cost_fore(t,i,"marginal")               = vm_cost_fore.m(i);

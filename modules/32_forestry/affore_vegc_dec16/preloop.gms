@@ -3,10 +3,16 @@
 *** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
+
+*' @code Documentation of preloop.gms:
+*'
+*' Select afforestation policy depending on `c32_aff_policy`.
 p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
 
-* adjust the global afforestation limit if npi/ndc aff targets are not yet fully satisfied
+*' Calculate the remaining NPI NDC afforestation wrt to the max NPI NDC target over time.
+*' `p32_aff_togo` is used to adjust `s32_max_aff_area` in the constraint `q32_max_aff`.
 p32_aff_togo(t) = sum(j, smax(t2, p32_aff_pol(t2,j)) - p32_aff_pol(t,j));		
+*' @stop
 
 *initialize parameter 
 p32_land(t,j,ac,when) = 0;
