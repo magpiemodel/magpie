@@ -43,7 +43,10 @@ sum(ct, pm_carbon_density_ac(ct,j2,ac-1,c_pools))));
 
 *****Land***************************************************
 *' Forestry component of `vm_land` (calculated in [10_land]) interface is set equal to the
-*' sum of all kinds of existing forestry land over each cell.
+*' sum of all kinds of existing forestry land over each cell. The `vm_land` interface is then
+*' used in the land module ([10_land]) in a constraint which specifies that the total amount
+*' of land has to be constant over time. `v32_land` can be considered as a subset of all
+*' land types specified in this model, dealing specifically with managed forests/forestry.
 
  q32_land(j2) ..
  vm_land(j2,"forestry") =e= sum(land32, v32_land(j2,land32));
