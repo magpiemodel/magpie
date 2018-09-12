@@ -6,6 +6,9 @@
 
 sets
 
+deposition_source51 source of atmospheric deposition
+/ agricultural_magpie, other_exogenous /
+
 scen_neff50
 /constant,
 neff55_55_starty1990,neff60_60_starty1990,neff65_70_starty1990,
