@@ -9,9 +9,9 @@
 q14_yield_crop(j2,kcr,w) ..
  vm_yld(j2,kcr,w) =e= sum(ct,i14_yields(ct,j2,kcr,w))*sum(cell(i2,j2),vm_tau(i2)/fm_tau1995(i2));
 
-*' Cellular yields of irrigated and rainfed crops are calculated by multiplying
-*' yields at the current time step with the increase of land use intensity
-*' factor $\tau$.
+*' For the current time step of the optimization, cellular yields of irrigated 
+*' and rainfed crops are calculated by multiplying calibarated input yields from 
+*' LPJmL with the intensification rate relative to the initial time step 1995.
 
 q14_yield_past(j2,w) ..
  vm_yld(j2,"pasture",w) =e= sum(ct,i14_yields(ct,j2,"pasture",w))
@@ -20,4 +20,4 @@ q14_yield_past(j2,w) ..
 *' In the case of pasture yields, technological change cannot be fully
 *' translated into yield increases. To account for that, the parameter
 *' `s14_yld_past_switch` is defined to capture a certain magnitude of spillovers
-*' ' and can range from 0 (no spillover) to 1 (full spillover).
+*' that can range from 0 (no spillover) to 1 (full spillover).
