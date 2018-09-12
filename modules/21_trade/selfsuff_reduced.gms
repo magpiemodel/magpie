@@ -12,10 +12,10 @@
 *' In the self-sufficiency pool, regional self-sufficiency ratios `f21_self_suff_seedred_1995(i,k)` defines
 *' how much of the demand of each region `i` for each traded goods `k_trade` has to be met by domestic production.
 *' Self sufficiency ratios smaller than one indicate that the region imports from the world market,
-*' while self-sufficiencies greater than one indicate that the region produces for export.Trade costs
+*' while self-sufficiencies greater than one indicate that the region produces for export. Trade costs
 *' are inlucding trade margins and tariffs are considered.
 
-*' ![mplementation of trade.](trade_pools.png){ width=60% }
+*' ![Implementation of trade.](trade_pools.png){ width=60% }
 
 *' @limitations This realization depends on predetermined self-sufficiency rates and export shares,
 *' which leads to a relative fixed trade pattern. Trade costs are not inlcuded.

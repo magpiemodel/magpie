@@ -4,6 +4,4 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
- q21_notrade(i2,k).. vm_prod_reg(i2,k)
-                         =g=
-                         vm_supply(i2,k);
+ q21_notrade(i2,k).. vm_prod_reg(i2,k) =g= vm_supply(i2,k);

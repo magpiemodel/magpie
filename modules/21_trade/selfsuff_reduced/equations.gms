@@ -10,17 +10,16 @@
 
  q21_trade_glo(k_trade)..
   sum(i2 ,vm_prod_reg(i2,k_trade)) =g=
-  sum(i2, vm_supply(i2,k_trade))
-  + sum(ct,f21_trade_balanceflow(ct,k_trade));
+  sum(i2, vm_supply(i2,k_trade)) + sum(ct,f21_trade_balanceflow(ct,k_trade));
 *'
-*' for non-trade goods, the regional supply should be larger or equal to the regional demand.
+*' For non-trade goods, the regional supply should be larger or equal to the regional demand.
  q21_notrade(i2,k_notrade)..
   vm_prod_reg(i2,k_notrade) =g= vm_supply(i2,k_notrade);
 
 *' This equation indicate the regional trade constraint for the self-sufficiency pool.
 *' The share of regional demand that has to be fulfilled through the self-sufficiency pool
 *' is determined by a trade balance reduction factor for each commodity `i21_trade_bal_reduction(ct,k_trade)`
-*' according to the following equation @schmitz_trading_2012.
+*' according to the following equation [@schmitz_trading_2012].
 *' If the trade balance reduction equals 1, all demand enters the self-sufficiency pool.
 *' If it equals 0, all demand enters the comparative advantage pool.
 
@@ -28,36 +27,39 @@
  q21_trade_reg(i2,k_trade)..
  vm_prod_reg(i2,k_trade) =g=
  (vm_supply(i2,k_trade) + v21_excess_prod(i2,k_trade))
- *sum(ct,i21_trade_bal_reduction(ct,k_trade))$(sum(ct,f21_self_suff(ct,i2,k_trade) >= 1))
- +
- vm_supply(i2,k_trade)*sum(ct,f21_self_suff(ct,i2,k_trade))
- *sum(ct,i21_trade_bal_reduction(ct,k_trade))$(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
+ *sum(ct,i21_trade_bal_reduction(ct,k_trade))
+ $(sum(ct,f21_self_suff(ct,i2,k_trade) >= 1))
+ + vm_supply(i2,k_trade)*sum(ct,f21_self_suff(ct,i2,k_trade))
+ *sum(ct,i21_trade_bal_reduction(ct,k_trade))
+ $(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
 
-*' The upper bound of regional expots are prescribed by deviding the trade balance reduction factor for each commodity
+*' The upper bound of regional exports are prescribed by dividing the trade balance reduction factor for each commodity
 *' `i21_trade_bal_reduction(ct,k_trade)`.
 
  q21_trade_reg_up(i2,k_trade)..
  vm_prod_reg(i2,k_trade) =l=
- ((vm_supply(i2,k_trade) + v21_excess_prod(i2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade)))$(sum(ct,f21_self_suff(ct,i2,k_trade) >= 1))
- +
- (vm_supply(i2,k_trade)*sum(ct,f21_self_suff(ct,i2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade)))$(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
+ ((vm_supply(i2,k_trade) + v21_excess_prod(i2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade)))
+ $(sum(ct,f21_self_suff(ct,i2,k_trade) >= 1))
+ + (vm_supply(i2,k_trade)*sum(ct,f21_self_suff(ct,i2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade)))
+ $(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
 
-*' The global excess demand of each tradeable goods `v21_excess_demad`  equals to
+*' The global excess demand of each tradeable good `v21_excess_demad` equals to
 *' the sum over all the imports of importing regions.
 
  q21_excess_dem(k_trade)..
  v21_excess_dem(k_trade) =g=
- sum(i2, vm_supply(i2,k_trade)*(1 - sum(ct,f21_self_suff(ct,i2,k_trade)))$(sum(ct,f21_self_suff(ct,i2,k_trade)) < 1))
+ sum(i2, vm_supply(i2,k_trade)*(1 - sum(ct,f21_self_suff(ct,i2,k_trade)))
+ $(sum(ct,f21_self_suff(ct,i2,k_trade)) < 1))
  + sum(ct,f21_trade_balanceflow(ct,k_trade));
 
-*' Distributing the global excess demand to exporting regions is based on regional export shares @schmitz_trading_2012.
-*' Export shares are derived from FAO data (see  @schmitz_trading_2012 for details). They are 0 for importing regions.
+*' Distributing the global excess demand to exporting regions is based on regional export shares [@schmitz_trading_2012].
+*' Export shares are derived from FAO data (see @schmitz_trading_2012 for details). They are 0 for importing regions.
 
  q21_excess_supply(i2,k_trade)..
  v21_excess_prod(i2,k_trade) =e=
  v21_excess_dem(k_trade)*sum(ct,f21_exp_shr(ct,i2,k_trade));
 
-* Trade costs are associated with exporting regions. They are a function of dependent on net exports, trade margin, and tariffs.
+* Trade costs are associated with exporting regions. They are dependent on net exports, trade margin, and tariffs.
  q21_cost_trade_reg(i2,k_trade)..
  v21_cost_trade_reg(i2,k_trade) =g=
  (i21_trade_margin(i2,k_trade) + i21_trade_tariff(i2,k_trade))
