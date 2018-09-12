@@ -4,10 +4,12 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In the [dynamic_aug18] realization, the crop yield calculation is 
-*' identical to above described realizations ([biocorrect]) and ([dynamic_apr18]).
+*' @description In the dynamic_aug18 realization, the crop yield calculations 
+*' are identical as in the above described realization (biocorrect).
 *'
-*' @limitations There are currently no known limitations of this realization
+*' @limitations The exogenous implementation of pasture intensification cannot 
+*' capture feedbacks between land scarcity and efforts to improve pasture 
+*' management.
 
 
 *####################### R SECTION START (PHASES) ##############################
