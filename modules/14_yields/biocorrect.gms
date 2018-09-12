@@ -20,7 +20,7 @@
 *' cropland area with data from [@FAOSTAT] on the regional level in the initial 
 *' time step.
 *'
-*' @limitations The magnitude of spill-over effects from technological change in
+*' @limitations The magnitude of spillover effects from technological change in
 *' the crop sector towards improvements in pasture management is very uncertain.
 
 *####################### R SECTION START (PHASES) ##############################
