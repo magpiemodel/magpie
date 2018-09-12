@@ -149,7 +149,7 @@ cfg$recalibrate <- TRUE
 
 #specify the title flag for all the scenarios
 flag <- "bmi"
-cfg$gms$food <- "bmi_share_jul18" 
+cfg$gms$food <- "anthropometrics_jan18" 
 
 #SSPs
 for (ssp in c("SSP2","SSP1","SSP3","SSP4","SSP5")) {
