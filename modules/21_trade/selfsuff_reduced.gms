@@ -18,7 +18,7 @@
 *' ![Implementation of trade.](trade_pools.png){ width=60% }
 
 *' @limitations This realization depends on predetermined self-sufficiency rates and export shares,
-*' which leads to a relative fixed trade pattern. Trade costs are not inlcuded.
+*' which leads to a relative fixed trade pattern.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/21_trade/selfsuff_reduced/sets.gms"

@@ -19,7 +19,7 @@
 *' This equation indicate the regional trade constraint for the self-sufficiency pool.
 *' The share of regional demand that has to be fulfilled through the self-sufficiency pool
 *' is determined by a trade balance reduction factor for each commodity `i21_trade_bal_reduction(ct,k_trade)`
-*' according to the following equation [@schmitz_trading_2012].
+*' according to the following equations [@schmitz_trading_2012].
 *' If the trade balance reduction equals 1, all demand enters the self-sufficiency pool.
 *' If it equals 0, all demand enters the comparative advantage pool.
 
@@ -33,8 +33,7 @@
  *sum(ct,i21_trade_bal_reduction(ct,k_trade))
  $(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
 
-*' The upper bound of regional exports are prescribed by dividing the trade balance reduction factor for each commodity
-*' `i21_trade_bal_reduction(ct,k_trade)`.
+
 
  q21_trade_reg_up(i2,k_trade)..
  vm_prod_reg(i2,k_trade) =l=
@@ -43,7 +42,7 @@
  + (vm_supply(i2,k_trade)*sum(ct,f21_self_suff(ct,i2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade)))
  $(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
 
-*' The global excess demand of each tradeable good `v21_excess_demad` equals to
+*' The global excess demand of each tradable good `v21_excess_demad` equals to
 *' the sum over all the imports of importing regions.
 
  q21_excess_dem(k_trade)..
