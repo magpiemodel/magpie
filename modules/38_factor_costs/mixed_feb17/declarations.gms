@@ -14,7 +14,7 @@ positive variables
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_prod(t,i,kall,type)       factor costs (mio. USD)
- oq38_cost_prod_crop(t,i,kcr,type) regional factor input costs for plant production (mio. USD)
+ ov_cost_prod(t,i,kall,type)       Factor costs (mio. USD05MER)
+ oq38_cost_prod_crop(t,i,kcr,type) Regional factor input costs for plant production (mio. USD05MER)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

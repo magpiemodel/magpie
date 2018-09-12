@@ -18,8 +18,8 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_AEI(t,i,type)     irrigation expansion costs (mio. USD04MER)
- ov41_AEI(t,j,type)        area equipped for irrigation in each gridcell (mio. ha)
- oq41_area_irrig(t,j,type) irrigation area constraint (mio. ha)
+ ov_cost_AEI(t,i,type)     Irrigation expansion costs (mio. USD04MER)
+ ov41_AEI(t,j,type)        Area equipped for irrigation in each grid cell (mio. ha)
+ oq41_area_irrig(t,j,type) Irrigation area constraint (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
