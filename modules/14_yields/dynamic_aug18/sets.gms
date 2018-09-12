@@ -5,6 +5,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-  ltype14 calibration land type
+  ltype14 calibration land types
        / crop, past /
 ;
