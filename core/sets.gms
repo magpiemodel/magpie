@@ -384,7 +384,7 @@ sets
 
 ***RELATIONSHIPS BETWEEN DIFFERENT SETS***
 
-  emis_land(emis_co2,land,c_pools) Relationship between CO2 emissions, land pool and Carbon pools
+  emis_land(emis_co2,land,c_pools) Relationship between CO2 emissions land pool and Carbon pools
   /
   crop_vegc        . (crop) . (vegc)
   crop_litc        . (crop) . (litc)
