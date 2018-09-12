@@ -12,7 +12,7 @@ q14_yield_crop(j2,kcr,w) ..
 
 
 ***PASTURE YIELD CALCULATIONS*******************************************
-*' In contrast to the [biocorrect] realization, pasture yields are not linked to yield increases
+*' In contrast to the biocorrect realization, pasture yields are not linked to yield increases
 *' in the crop sector, but to an exogenous pasture management factor:
 
 q14_yield_past(j2,w) ..
