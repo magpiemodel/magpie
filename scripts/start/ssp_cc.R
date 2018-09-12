@@ -23,7 +23,7 @@ cfg$recalibrate <- FALSE
 #res
 res <- "c400"
 cfg$input[1] <- paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev34_",res,"_690d3718e151be1b450b394c1064b1c5.tgz")
-cfg$input[5] <- paste0("calibration_H12_",res,"_11Sep18.tgz")
+cfg$input[5] <- paste0("calibration_H12_",res,"_12Sep18.tgz")
 
 ### Runs without CC
 
