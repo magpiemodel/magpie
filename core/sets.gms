@@ -20,7 +20,7 @@ sets
 *' is used. The mapping can be changed from the `i_to_iso` set described below
 *' and the new mapping would require a new set of input data.
 
-   i "Economic regions"
+   i Economic regions
    /
    CAZ,CHA,EUR,IND,JPN,LAM,MEA,NEU,OAS,REF,SSA,USA
    /
@@ -33,7 +33,7 @@ sets
 *' MAgPIE 4.0 accounts for 249 countries which are grouped in the different world
 *' regions represented by set `i`.
 
-   iso "Set of countries according to ISO3 code"
+   iso Set of countries according to ISO3 code
    /
    ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
    ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
@@ -62,7 +62,7 @@ sets
    VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE
    /
 
-   j "Number of LPJ cells provided to each region"
+   j Number of LPJ cells provided to each region
    /
    CAZ_1*CAZ_28,
    CHA_29*CHA_52,
@@ -78,7 +78,7 @@ sets
    USA_191*USA_200
    /
 
-   cell(i,j) "Number of LPJ cells per region i"
+   cell(i,j) Number of LPJ cells per region i
    /
    CAZ . CAZ_1*CAZ_28
    CHA . CHA_29*CHA_52
@@ -94,7 +94,7 @@ sets
    USA . USA_191*USA_200
    /
 
-   i_to_iso(i,iso) "Countries mapped to world regions"
+   i_to_iso(i,iso) Countries mapped to world regions
    /
    CAZ . (AUS,CAN,HMD,NZL,SPM)
    CHA . (CHN,HKG,MAC,TWN)
@@ -135,8 +135,8 @@ sets
 *###############################################################################
 
 sets
-        i2(i) "All economic regions (dynamic set)"
-        j2(j) "Number of LPJ cells (dynamic set)"
+        i2(i) All economic regions (dynamic set)
+        j2(j) Number of LPJ cells (dynamic set)
 ;
 i2(i) = yes;
 j2(j) = yes;
@@ -149,12 +149,12 @@ j2(j) = yes;
 *' year, having t2 as alias of t and having ct as current time step.
 
 sets
-  time_annual "Extended annual vector"
+  time_annual Extended annual vector
   /
   y1965*y2150
   /
 
-  t_all "Time periods in 5 year steps"
+  t_all Time periods in 5 year steps
   /
   y1965, y1970, y1975, y1980, y1985, y1990,
   y1995, y2000, y2005, y2010, y2015, y2020,
@@ -165,14 +165,14 @@ sets
   y2145, y2150
   /
 
-  t_past(t_all) "Timesteps with historically observed data"
+  t_past(t_all) Timesteps with historically observed data
   /
   y1965, y1970, y1975, y1980, y1985,
   y1990, y1995, y2000, y2005, y2010
   /
 ;
 
-set t(t_all) "Time period settings which can be used in model run"
+set t(t_all) Time period settings which can be used in model run
 $If "%c_timesteps%"== "less_TS" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100,y2110,y2130,y2150/;
 $If "%c_timesteps%"== "coup2100" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100/;
 $If "%c_timesteps%"== "test_TS" /y1995,y2000,y2005,y2010,y2020,y2030,y2040,y2050,y2070,y2090,y2110,y2130,y2150/;
@@ -200,7 +200,7 @@ $If "%c_timesteps%"=="16" /y1995,y2000,y2010,y2020,y2030,y2040,y2050,y2060,y2070
 $If "%c_timesteps%"=="17" /y1995,y2000,y2010,y2020,y2030,y2040,y2050,y2060,y2070,y2080,y2090,y2100,y2110,y2120,y2130,y2140,y2150/;
 $If "%c_timesteps%"=="past" /y1965,y1970,y1975,y1980,y1985,y1990,y1995,y2000,y2005,y2010/;
 $If "%c_timesteps%"=="pastandfuture" /y1965,y1970,y1975,y1980,y1985,y1990,y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2065,y2070,y2075,y2080,y2085,y2090,y2095,y2100/;
-set ct(t) "Current time period";
+set ct(t) Current time period;
 
 alias(t,t2);
 
@@ -208,7 +208,7 @@ sets
 
 ***Products***
 
-  kall "All products"
+  kall All products
   /
   tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,oilpalm,puls_pro,
   potato,cassav_sp,sugr_cane,sugr_beet,others,cottn_pro,foddr, pasture, begr, betr,
@@ -217,52 +217,52 @@ sets
   res_cereals, res_fibrous, res_nonfibrous, wood, woodfuel
   /
 
-  dev "Economic development status"
+  dev Economic development status
   /
   lic, mic, hic
   /
 
 ***TYPE OF WATER SUPPLY***
-  w "Type of water supply"
+  w Type of water supply
   /
   rainfed, irrigated
   /
 
 ***WATER SOURCES***
-  wat_src "Sources of water"
+  wat_src Sources of water
   /
   surface, ground, technical, ren_ground
   /
 
 ***WATER DEAMND sectors***
-  wat_dem "Sectors demanding water"
+  wat_dem Sectors demanding water
   /
   agriculture, industry, electricity, domestic, ecosystem
   /
 
 ***LAND POOLS***
-  land "All land pools"
+  land All land pools
   /
   crop, past,
   forestry, primforest, secdforest,
   urban, other
   /
 
-  land_ag(land) "Agricultural land types"
+  land_ag(land) Agricultural land types
   /
   crop, past
   /
 
-  land_natveg(land) "Natural vegetation land types"
+  land_natveg(land) Natural vegetation land types
   /
   primforest, secdforest, other
   /
 
-  si "Land suitability classes"
+  si Land suitability classes
   / si0, nsi0 /
 
 ***Forestry**
-  ac "Age classes of forests"
+  ac Age classes of forests
   /
   ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
   ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,ac95,ac100,
@@ -272,7 +272,7 @@ sets
   ac255,ac260,ac265,ac270,ac275,ac280,ac285,ac290,ac295,acx
   /
 
-  when "Temporal location relative to optimization"
+  when Temporal location relative to optimization
   /
   before, after
   /
@@ -280,7 +280,7 @@ sets
 *' Chapman Richards growth function parameters:
 *' `k` is the Empirical growth parameter scaling the absolute growth rate
 *' `m` is the Catabolism rate
-  chap_par "Chapman-Richards parameters for forest growth function"
+  chap_par Chapman Richards parameters for forest growth function
   /
   k, m
   /
@@ -295,34 +295,34 @@ sets
 *'  wm  : Wet matter
 *'  c   : Carbon
 
-  attributes "Product attributes"
+  attributes Product attributes
   /
   dm, ge, nr, p, k, wm, c
   /
 
-  nutrients(attributes) "Product attributes"
+  nutrients(attributes) Product attributes
   /
   dm,ge,nr,p,k
   /
 
-  dm_ge_nr(nutrients) "Attribtues relevant for nutrition"
+  dm_ge_nr(nutrients) Attribtues relevant for nutrition
   /
   dm,ge,nr
   /
 
-  npk(nutrients) "Plant nutrients"
+  npk(nutrients) Plant nutrients
   /
   nr,p,k
   /
 
-  cgf "Parameters for residue production functions"
+  cgf Parameters for residue production functions
   /
   slope, intercept, bg_to_ag
   /
 
 ***Emissions ***
 
-  emis_source "Sources of emission"
+  emis_source Sources of emission
   /
   inorg_fert, man_crop, awms, resid, man_past, som,
   rice, ent_ferm,
@@ -337,14 +337,14 @@ sets
   beccs
   /
 
-  emis_source_reg(emis_source) "Regional emission sources"
+  emis_source_reg(emis_source) Regional emission sources
   /
   inorg_fert, man_crop, awms,
   resid, man_past, som,
   rice, ent_ferm, beccs
   /
 
-  emis_source_cell(emis_source) "Celllular emission sources"
+  emis_source_cell(emis_source) Celllular emission sources
   /
   crop_vegc, crop_litc, crop_soilc,
   past_vegc, past_litc, past_soilc,
@@ -355,7 +355,7 @@ sets
   other_vegc, other_litc, other_soilc
   /
 
-  emis_co2(emis_source_cell) "CO2 emission sources from land pool"
+  emis_co2(emis_source_cell) CO2 emission sources from land pool
   /
   crop_vegc, crop_litc, crop_soilc,
   past_vegc, past_litc, past_soilc,
@@ -366,25 +366,25 @@ sets
   other_vegc, other_litc, other_soilc
   /
 
-  co2_forestry(emis_source_cell) "CO2 emission from forestry"
+  co2_forestry(emis_source_cell) CO2 emission from forestry
   /
   forestry_vegc, forestry_litc, forestry_soilc
   /
 
-  c_pools "Carbon pools"
+  c_pools Carbon pools
   /
   vegc,litc,soilc
   /
 
 ***TECHNICAL STUFF***
-  type "Type of output"
+  type Type of output
   /
   level, marginal, upper, lower
   /
 
 ***RELATIONSHIPS BETWEEN DIFFERENT SETS***
 
-  emis_land(emis_co2,land,c_pools) "Relationship between CO2 emissions, land pool and Carbon pools"
+  emis_land(emis_co2,land,c_pools) Relationship between CO2 emissions, land pool and Carbon pools
   /
   crop_vegc        . (crop) . (vegc)
   crop_litc        . (crop) . (litc)
@@ -409,7 +409,7 @@ sets
   other_soilc      . (other) . (soilc)
   /
 
-  emis_co2_to_forestry(co2_forestry,c_pools) "Relationship between CO2 emissions from forestry and Carbon pools"
+  emis_co2_to_forestry(co2_forestry,c_pools) Relationship between CO2 emissions from forestry and Carbon pools
   /
   forestry_vegc    . (vegc)
   forestry_litc    . (litc)
