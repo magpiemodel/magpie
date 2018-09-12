@@ -9,7 +9,8 @@
 *****Costs**********************************************************************
 
 *' The direct costs of afforestation `vm_cost_fore` include maintenance and monitoring 
-*' costs for newly established plantations ("old" refers to the static forestry sector plantations).
+*' costs for newly established plantations [@sathaye_ghg_2005]. Note that "old" refers 
+*' to the static forestry sector plantations.
 *' In addition, afforestation may cause costs in other parts of the model such 
 *' as costs for technological change [13_tc] or land expansion [39_landconversion].
 

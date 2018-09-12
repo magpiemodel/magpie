@@ -21,7 +21,7 @@ $Ifi "%c32_aff_mask%" == "onlytropical" $include "./modules/32_forestry/input/af
 $offdelim
 /;
 
-table f32_fac_req_ha(i,fcosts32) Afforestation factor requirement costs  per ha (USD)
+table f32_fac_req_ha(i,fcosts32) Afforestation factor requirement costs per ha (USD00MER per ha)
 $ondelim
 $include "./modules/32_forestry/input/f32_fac_req_ha.csv"
 $offdelim
