@@ -15,20 +15,8 @@ sets
        60--64, 65--69, 70--74, 75--79
        80--84,85--89,90--94,95--99,100+ /
 
-   working15(adult15)
-   / 15--19,
-     20--24, 25--29, 30--34, 35--39,
-     40--44, 45--49, 50--54, 55--59/
-
-   retired15(adult15)
-   /60--64, 65--69, 70--74, 75--79
-       80--84,85--89,90--94,95--99,100+ /
-
    agegroup15
    /underaged,working,retired /
-
-   age2_adults15(agegroup15)
-   /working,retired /
 
    agegroup2age(agegroup15,age)
    /
@@ -45,9 +33,6 @@ sets
 
    bmi_group15
    /verylow,low,medium,mediumhigh,high,veryhigh/
-
-   bmi_group_est15(bmi_group15)
-   /verylow,low,mediumhigh,high,veryhigh/
 
    age_new_estimated15(age)
    /0--4,5--9,10--14,15--19/

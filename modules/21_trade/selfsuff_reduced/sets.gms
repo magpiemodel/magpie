@@ -5,8 +5,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-  tstart21(t_all)
-    / y1995, y2000, y2005, y2010 /
 
 *sets need to be adopted to new categories
    k_notrade(kall) production activities
