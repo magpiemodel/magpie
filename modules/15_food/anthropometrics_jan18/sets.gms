@@ -5,18 +5,52 @@
 *** Contact: magpie@pik-potsdam.de
 
 sets
-   age_underaged15(age)
+   underaged15(age)
    /0--4,5--9,10--14/
 
-   age_new_estimated15(age)
-   /0--4,5--9,10--14,15--19/
-
-   age_adult15(age) Age groups for adult population
+   adult15(age) Age groups for adult population
        /  15--19,
        20--24, 25--29, 30--34, 35--39,
        40--44, 45--49, 50--54, 55--59,
        60--64, 65--69, 70--74, 75--79
        80--84,85--89,90--94,95--99,100+ /
+
+   working15(adult15)
+   / 15--19,
+     20--24, 25--29, 30--34, 35--39,
+     40--44, 45--49, 50--54, 55--59/
+
+   retired15(adult15)
+   /60--64, 65--69, 70--74, 75--79
+       80--84,85--89,90--94,95--99,100+ /
+
+   agegroup15
+   /underaged,working,retired /
+
+   age2_adults15(agegroup15)
+   /working,retired /
+
+   agegroup2age(agegroup15,age)
+   /
+   underaged        . (0--4,5--9,10--14)
+   working          . (15--19,
+     20--24, 25--29, 30--34, 35--39,
+     40--44, 45--49, 50--54, 55--59)
+   retired          . (60--64, 65--69, 70--74, 75--79
+       80--84,85--89,90--94,95--99,100+ )
+   /
+
+   bmi_tree15
+   /low,lowsplit,mediumsplit,high,highsplit/
+
+   bmi_group15
+   /verylow,low,medium,mediumhigh,high,veryhigh/
+
+   bmi_group_est15(bmi_group15)
+   /verylow,low,mediumhigh,high,veryhigh/
+
+   age_new_estimated15(age)
+   /0--4,5--9,10--14,15--19/
 
    reproductive(age) reproductive age groups
    /20--24, 25--29, 30--34, 35--39/
@@ -24,13 +58,10 @@ sets
    estimates15
    /preliminary,final/
 
-   parameters15 schofield equation parameters
+   paras_s15 schofield equation parameters
    /slope, intercept/
 
-   schofield_parameters15 schofield equation parameters with height
-   /height, weight, intercept/
-
-   parameters_intake15 intake equation parameters
+   paras_b15 intake equation parameters
    /saturation,halfsaturation,intercept/
 
    kfo(kall) all products in the sectoral version
@@ -82,7 +113,7 @@ sets
 * intercept + saturation give the max value if non-saturation is 1
 * halfsaturation is the gdp until which half of saturation is reached
 
-  demand_subsys15
+ regr15  demand regression types
       / overconsumption,livestockshare,processedshare,vegfruitshare /
 
 *** Scenarios
