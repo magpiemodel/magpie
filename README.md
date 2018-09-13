@@ -1,4 +1,4 @@
-# MAgPIE 4.0
+# MAgPIE - Open Source land-use modeling framework
 
   <https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpie>
 
@@ -206,7 +206,7 @@ See file CITATION.cff or the documentation of the model for information how
 to cite the model.
 
 ## AUTHORS
-See file `AUTHORS`
+See list of authors in CITATION.cff
 
 ## CHANGELOG
 See log on GitHub (https://github.com/magpiemodel)

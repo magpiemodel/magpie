@@ -21,7 +21,7 @@ cfg$results_folder <- "output/:title:"
 cfg$recalibrate <- TRUE
 
 #specify the title flag for all the scenarios
-flag <- "anthro"
+flag <- "bmi"
 
 #SSPs
 for (ssp in c("SSP2","SSP1","SSP3","SSP4","SSP5")) {
@@ -148,7 +148,7 @@ cfg$results_folder <- "output/:title:"
 cfg$recalibrate <- TRUE
 
 #specify the title flag for all the scenarios
-flag <- "bmi"
+flag <- "anthro"
 cfg$gms$food <- "anthropometrics_jan18" 
 
 #SSPs
