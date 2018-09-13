@@ -22,15 +22,13 @@
                    + sum(ct,f50_nitrogen_balanceflow(ct,i2))
                    + v50_nr_deposition(i2,"crop")
                  )
-                 =g=
-                 sum(kcr,v50_nr_withdrawals(i2,kcr));
+                 =g= sum(kcr,v50_nr_withdrawals(i2,kcr));
 
 
 *' Withdrawls from crop land consist of nitrogen that can not be fixed by crop production
 *' or by residues (above and below ground), less the nitrogen inflow from seeds.
  q50_nr_withdrawals(i2,kcr) ..
-                 v50_nr_withdrawals(i2,kcr)
-                 =e=
+                 v50_nr_withdrawals(i2,kcr) =e=
                  (1-sum(ct,f50_nr_fix_ndfa(ct,i2,kcr))) *
                  (
                     vm_prod_reg(i2,kcr) * fm_attributes("nr",kcr)
@@ -55,19 +53,16 @@
                      + sum((cell(i2,j2)), vm_land(j2,"past")) * sum(ct,f50_nr_fixation_rates_pasture(ct,i2))
                      + v50_nr_deposition(i2,"past")
                     )
-                    =g=
-                    vm_prod_reg(i2,"pasture") * fm_attributes("nr","pasture");
+                    =g= vm_prod_reg(i2,"pasture") * fm_attributes("nr","pasture");
 
 *' For both crop land and pasture land, this equation gives the amount of nitrogen deposited from the atmosphere.  
  q50_nr_deposition(i2,land) ..
-                     v50_nr_deposition(i2,land)
-                     =e=
+                     v50_nr_deposition(i2,land) =e=
                      sum(cell(i2,j2),ic50_atmospheric_deposition_rates(i2,land) * vm_land(j2,land));
 
 *' Having calculated the amount of nitrogen fertilizer required (see above) now the resulting cost are derived. They 
 *' are part of the objective function.
  q50_nr_cost_fert(i2) ..
-                 vm_nr_inorg_fert_costs(i2)
-                 =e=
+                 vm_nr_inorg_fert_costs(i2) =e=
                  sum(land_ag,vm_nr_inorg_fert_reg(i2,land_ag)) * 600
                  ;

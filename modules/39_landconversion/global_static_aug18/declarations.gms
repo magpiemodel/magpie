@@ -5,28 +5,28 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 equations
- q39_cost_landcon_annuity(j,land)	Calculation of cellular annuity costs of landconversion (mio USD per yr)
- q39_cost_landcon(j,land)        	Calculation of cellular landconversion costs (mio USD per yr)
+ q39_cost_landcon_annuity(j,land)	Calculation of cellular annuity costs of landconversion (mio. USD05MER per yr)
+ q39_cost_landcon(j,land)        	Calculation of cellular landconversion costs (mio. USD05MER per yr)
 ;
 
 variables
- vm_cost_landcon(j,land)            landconversion costs (mio USD per yr)
+ vm_cost_landcon(j,land)            landconversion costs (mio. USD05MER per yr)
 ;
 
 positive variable
- v39_cost_landcon_annuity(j,land) annuity costs of landconversion in the current timestep (mio USD per yr)
+ v39_cost_landcon_annuity(j,land) annuity costs of landconversion in the current timestep (mio. USD05MER per yr)
 ;
 
 scalar
- s39_cost_establish                    global land establishment costs (USD per hectare)
- s39_cost_clearing                     global land clearing costs (USD per ton C)
+ s39_cost_establish                    global land establishment costs (USD05MER per hectare)
+ s39_cost_clearing                     global land clearing costs (USD05MER per ton C)
 ;
 
 parameters
- i39_cost_establish(land)			   global land establishment costs (USD per hectare)
- i39_cost_clearing(land)               global land clearing costs (USD per ton C)
- p39_cost_landcon_past(t,j,land)       costs for landconversion from the past (mio USD per yr)
- pc39_cost_landcon_past(j,land)        current costs for landconversion from the past (mio USD per yr)
+ i39_cost_establish(land)			   global land establishment costs (USD05MER per hectare)
+ i39_cost_clearing(land)               global land clearing costs (USD05MER per ton C)
+ p39_cost_landcon_past(t,j,land)       costs for landconversion from the past (mio. USD05MER per yr)
+ pc39_cost_landcon_past(j,land)        current costs for landconversion from the past (mio. USD05MER per yr)
 ;
 
 
