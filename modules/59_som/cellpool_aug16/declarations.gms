@@ -5,36 +5,36 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
-          i59_lossrate(t)                      rate of loss or recovery of SOM pool per timestep
-          p59_carbon_density(t_all,j,pools59)  carbon density of a hectare of land (t C per ha)
-          i59_tillage_share(i,tillage59)       share of land under tillage clas(1)
-          i59_input_share(i,inputs59)          share of land under input class (1)
-          i59_cratio(j,kcr)                    ratio of carbon densitiy of land relative to natural vegetaion (1)
-          p59_som_pool(j,pools59)              actual C pool (Tg C)
+          i59_lossrate(t)                      Rate of loss or recovery of SOM pool per timestep (1)
+          p59_carbon_density(t_all,j,pools59)  Carbon density of a hectare of land (tC per ha)
+          i59_tillage_share(i,tillage59)       Share of land under tillage class (1)
+          i59_input_share(i,inputs59)          Share of land under input class (1)
+          i59_cratio(j,kcr)                    Ratio of carbon density of land relative to natural vegetaion (1)
+          p59_som_pool(j,pools59)              Actual C pool (mio. tC)
 ;
 
 equations
-         q59_som_target_cropland(j)         estimates the long-term target state of cropland
-         q59_som_target_noncropland(j)      estimates the long-term target state of noncropland
-         q59_som_transfer_to_cropland(j)    estimates the transfer of carbonpools due to land conversion
-         q59_som_pool_cropland(j)           actual C pool in croplands
-         q59_som_pool_noncropland(j)        actual C pool in non-croplands
-         q59_nr_som(j)                      soil organic matter loss
-         q59_crop_diff(j)                   cropland difference
-         q59_crop_diff_constraint(i)        cropland difference constraint 
+         q59_som_target_cropland(j)         Estimates the long-term target state of cropland (mio. tC)
+         q59_som_target_noncropland(j)      Estimates the long-term target state of noncropland (mio. tC)
+         q59_som_transfer_to_cropland(j)    Estimates the transfer of carbon pools due to land conversion (mio. tC)
+         q59_som_pool_cropland(j)           Actual C pool in croplands (mio. tC)
+         q59_som_pool_noncropland(j)        Actual C pool in non-croplands (mio. tC)
+         q59_nr_som(j)                      Soil organic matter loss (Tg N per yr)
+         q59_crop_diff(j)                   Cropland difference
+         q59_crop_diff_constraint(i)        Cropland difference constraint 
 ;
 
 positive variables
-         v59_som_target(j,pools59)           long-term target state of C pool (Tg C)
-         v59_som_pool(j,pools59)             soil organic matter pool (Tg C)
-         v59_crop_expansion(j)               crop land expansion (mio. ha)
-         v59_crop_reduction(j)               land reduction (mio. ha)
+         v59_som_target(j,pools59)           Long-term target state of C pool (mio. tC)
+         v59_som_pool(j,pools59)             Soil organic matter pool (mio. tC)
+         v59_crop_expansion(j)               Crop land expansion (mio. ha)
+         v59_crop_reduction(j)               Land reduction (mio. ha)
 ;
 
 variables
-         v59_som_transfer_to_cropland(j)     transfer of SOM from other land to cropland (Tg C)
-         vm_nr_som(j)                        release of soil organic matter (Tg Nr)
-         vm_costs_overrate_cropdiff(i)	     punishment costs for overrated cropland difference (mio. USD05 per yr)  
+         v59_som_transfer_to_cropland(j)     Transfer of SOM from other land to cropland (mio. tC)
+         vm_nr_som(j)                        Release of soil organic matter (Tg N per yr)
+         vm_costs_overrate_cropdiff(i)	     Punishment costs for overrated cropland difference (mio. USD05 per yr)  
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

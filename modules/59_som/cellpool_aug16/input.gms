@@ -9,25 +9,25 @@ scalars
 ;
 
 
-table f59_cratio_landuse(climate59,kcr) ratio of soil c SOM relative to natural vegetation soilcs for different landuse
+table f59_cratio_landuse(climate59,kcr) Ratio of soil carbon relative to potential natural vegetation soil carbon for different landuse (1)
 $ondelim
 $include "./modules/59_som/cellpool_aug16/input/f59_ch5_F_LU.csv"
 $offdelim
 ;
 
-table f59_cratio_tillage(climate59,tillage59) ratio of soil c SOM relative to natural vegetation soilcs for different soil management
+table f59_cratio_tillage(climate59,tillage59) Ratio of soil carbon relative to potential natural vegetation soil carbon for different soil management (1)
 $ondelim
 $include "./modules/59_som/cellpool_aug16/input/f59_ch5_F_MG.csv"
 $offdelim
 ;
 
-table f59_cratio_inputs(climate59,inputs59) ratio of soil c SOM relative to natural vegetation soilcs for different input intensity
+table f59_cratio_inputs(climate59,inputs59) Ratio of soil carbon relative to potential natural vegetation soil carbon for different input intensity  (1)
 $ondelim
 $include "./modules/59_som/cellpool_aug16/input/f59_ch5_F_I.csv"
 $offdelim
 ;
 
-table f59_som_initialisation_pools(t_all,j, pools59) Initialisation pools for soil organic carbon (Mt C)
+table f59_som_initialisation_pools(t_all,j, pools59) Initialisation pools for soil organic carbon (mio. tC)
 $ondelim
 $include "./modules/59_som/cellpool_aug16/input/f59_som_initialisation_pools.cs3"
 $offdelim

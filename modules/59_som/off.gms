@@ -4,6 +4,9 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @description This realization does not track soil organic matter turnover.
+
+*' @limitations The release of nitrogen due to soil organic matter loss is not calculated. 
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "declarations" $include "./modules/59_som/off/declarations.gms"

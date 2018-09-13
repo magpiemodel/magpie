@@ -6,6 +6,15 @@
 
 *' @title Soil organic matter
 
+*' @description
+*' The soil organic matter module calculates the soil organic carbon loss due to landuse activities.
+*' It also estimates the nitrogen release due to the soil organic carbon turnover.  
+
+*' @authors Benjamin Leon Bodirsky, Kristine Karstens
+
+
+
+
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%som%" == "cellpool_aug16" $include "./modules/59_som/cellpool_aug16.gms"
 $Ifi "%som%" == "off" $include "./modules/59_som/off.gms"

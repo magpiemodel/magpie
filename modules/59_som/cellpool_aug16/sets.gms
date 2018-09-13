@@ -5,22 +5,22 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-noncropland59(land)
+noncropland59(land) Soil carbon conserving landuse types
 /past, forestry, primforest, secdforest, urban, other/
 
-pools59
+pools59 Carbon differentiating landuse types 
 /cropland,noncropland/
 
-tillage59
-/full_tillage,reduced_tillage,no_tillage /
+tillage59 Tillage categories of IPCC 
+/full_tillage,reduced_tillage,no_tillage/
 
-inputs59
-/low_input,medium_input,high_input_nomanure,high_input_manure /
+inputs59 Input management categories of IPCC
+/low_input,medium_input,high_input_nomanure,high_input_manure/
 
-climate59 climate classes of IPCC 2006
+climate59 Climate classes of IPCC 2006
 /temperate_dry,temperate_moist,tropical_dry,tropical_moist/
 
-clcl_climate59(clcl,climate59) climate classification types
+clcl_climate59(clcl,climate59) Climate classification types
            /
            Af .(tropical_moist) "equatorial fully humid"
            Am .(tropical_moist) "equatorial monsoonal"
