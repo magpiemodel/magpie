@@ -45,14 +45,14 @@ parameters
  ov59_crop_reduction(t,j,type)           Land reduction (mio. ha)
  ov59_som_transfer_to_cropland(t,j,type) Transfer of SOM from other land to cropland (mio. tC)
  ov_nr_som(t,j,type)                     Release of soil organic matter (Tg N per yr)
- ov_costs_overrate_cropdiff(t,i,type)    Punishment costs for overrated cropland difference (mio. USD05 per yr)  
+ ov_costs_overrate_cropdiff(t,i,type)    Punishment costs for overrated cropland difference (mio. USD05MER per yr)  
  oq59_som_target_cropland(t,j,type)      Estimates the long-term target state of cropland (mio. tC)
  oq59_som_target_noncropland(t,j,type)   Estimates the long-term target state of noncropland (mio. tC)
  oq59_som_transfer_to_cropland(t,j,type) Estimates the transfer of carbon pools due to land conversion (mio. tC)
  oq59_som_pool_cropland(t,j,type)        Actual C pool in croplands (mio. tC)
  oq59_som_pool_noncropland(t,j,type)     Actual C pool in non-croplands (mio. tC)
  oq59_nr_som(t,j,type)                   Soil organic matter loss (Tg N per yr)
- oq59_crop_diff(t,j,type)                Cropland difference
- oq59_crop_diff_constraint(t,i,type)     Cropland difference constraint 
+ oq59_crop_diff(t,j,type)                Cropland difference (mio. ha)
+ oq59_crop_diff_constraint(t,i,type)     Cropland difference constraint (mio. USD05MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

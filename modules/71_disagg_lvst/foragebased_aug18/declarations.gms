@@ -30,12 +30,12 @@ scalars
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov71_prod_rum(t,j,kli_rum,kforage,type)                   production of forage fed ruminants within a cell (mio. tDM per yr)
- ov71_feed_balanceflow(t,j,kli_rum,kforage,type)           cellular feed balanceflow for forage feed for ruminant livestock (mio. tDM per yr)
- oq71_feed_rum_liv(t,j,kforage,type)                       production constraint for ruminant livestock products (mio. tDM per yr)
- oq71_balanceflow_constraint_nlp(t,j,kli_rum,kforage,type) nonlinear balanceflow constraint for cellular forage feed products (mio. tDM per yr)
- oq71_balanceflow_constraint_lp(t,i,kli_rum,kforage,type)  linear balanceflow constraint for cellular forage feed product (mio. tDM per yr)
- oq71_sum_rum_liv(t,j,kli_rum,type)                        total production of forage fed ruminants (mio. tDM per yr)
- oq71_prod_mon_liv(t,j,kli_mon,type)                       production constraint for monogastrics livestock products (mio. tDM per yr)
+ ov71_prod_rum(t,j,kli_rum,kforage,type)                   Production of forage fed ruminants within a cell (mio. tDM per yr)
+ ov71_feed_balanceflow(t,j,kli_rum,kforage,type)           Cellular feed balanceflow for forage feed for ruminant livestock (mio. tDM per yr)
+ oq71_feed_rum_liv(t,j,kforage,type)                       Production constraint for ruminant livestock products (mio. tDM per yr)
+ oq71_balanceflow_constraint_nlp(t,j,kli_rum,kforage,type) Nonlinear balanceflow constraint for cellular forage feed products (mio. tDM per yr)
+ oq71_balanceflow_constraint_lp(t,i,kli_rum,kforage,type)  Linear balanceflow constraint for cellular forage feed product (mio. tDM per yr)
+ oq71_sum_rum_liv(t,j,kli_rum,type)                        Total production of forage fed ruminants (mio. tDM per yr)
+ oq71_prod_mon_liv(t,j,kli_mon,type)                       Production constraint for monogastrics livestock products (mio. tDM per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

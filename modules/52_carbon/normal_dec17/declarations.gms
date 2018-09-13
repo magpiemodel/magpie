@@ -27,11 +27,11 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov52_carbon_stock_diff(t,j,land,c_pools,type)      Change in carbon stocks compared to previous time step (mio tC per time step)
- ov_carbon_stock(t,j,land,c_pools,type)             Carbon stock in vegetation soil and litter for different land types (mio tC)
- ov_carbon_stock_reduction(t,j,land,c_pools,type)   Reduction in carbon stocks compared to previous time step (mio tC per time step)
- oq52_carbon_stock_diff(t,j,land,c_pools,type)      Calculation net carbon stock change (mio tC per time step)
- oq52_carbon_stock_reduction(t,j,land,c_pools,type) Calculation carbon stock reduction (mio tC per time step)
- oq52_co2c_emis(t,j,emis_co2,type)                  Calculation of annual CO2 emissions (mio tC per yr)
+ ov52_carbon_stock_diff(t,j,land,c_pools,type)      Change in carbon stocks compared to previous time step (mio. tC per time step)
+ ov_carbon_stock(t,j,land,c_pools,type)             Carbon stock in vegetation soil and litter for different land types (mio. tC)
+ ov_carbon_stock_reduction(t,j,land,c_pools,type)   Reduction in carbon stocks compared to previous time step (mio. tC per time step)
+ oq52_carbon_stock_diff(t,j,land,c_pools,type)      Calculation net carbon stock change (mio. tC per time step)
+ oq52_carbon_stock_reduction(t,j,land,c_pools,type) Calculation carbon stock reduction (mio. tC per time step)
+ oq52_co2c_emis(t,j,emis_co2,type)                  Calculation of annual CO2 emissions (mio. tC per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
