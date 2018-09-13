@@ -6,16 +6,16 @@
 
 
 positive variables
- vm_cost_trade(i)                            transport costs and taxes for the bilateral trade (mio. USD)
+ vm_cost_trade(i)                            transport costs and taxes for the bilateral trade (mio. USD05MER)
 ;
 
 equations
- q21_notrade(i,k)        fix of not traded commodities
+ q21_notrade(i,k)        fix of not traded commodities (mio. tDM)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_trade(t,i,type)  transport costs and taxes for the bilateral trade (mio. USD)
- oq21_notrade(t,i,k,type) fix of not traded commodities
+ ov_cost_trade(t,i,type)  transport costs and taxes for the bilateral trade (mio. USD05MER)
+ oq21_notrade(t,i,k,type) fix of not traded commodities (mio. tDM)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
