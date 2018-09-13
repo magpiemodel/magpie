@@ -15,7 +15,7 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_trade(t,i,type)  transport costs and taxes for the bilateral trade (mio. USD05MER)
+ ov_cost_trade(t,i,type)  regional  trade costs (mio. USD05MER)
  oq21_notrade(t,i,k,type) fix of not traded commodities (mio. tDM)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

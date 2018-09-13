@@ -50,46 +50,46 @@ $title magpie
 
 
 *##################### R SECTION START (VERSION INFO) ##########################
-*
+* 
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev34_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: b88ddae2ac42d76603bd988337115c64
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-*
-* Used data set: rev4.12_690d3718e151be1b450b394c1064b1c5_magpie.tgz
-* md5sum: 69a886994ddc2b793553226c01f33ddf
+* 
+* Used data set: rev4.14_690d3718e151be1b450b394c1064b1c5_magpie.tgz
+* md5sum: 4a5a4bd2ed2e4feb61c6b7160f966414
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-*
-* Used data set: rev4.12_690d3718e151be1b450b394c1064b1c5_validation.tgz
-* md5sum: 6e3b8690af3e4cafa7e1af711d0a95a0
+* 
+* Used data set: rev4.14_690d3718e151be1b450b394c1064b1c5_validation.tgz
+* md5sum: ced3291c4ceacfdb7f60cf4d2c92a95f
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-*
-* Used data set: additional_data_rev3.57.tgz
-* md5sum: ff8090c1d1f74dafafe920dd48a8f1c0
+* 
+* Used data set: additional_data_rev3.58.tgz
+* md5sum: 75798c6d2670497a92ae2a3fb5a7e6ee
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-*
-* Used data set: calibration_H12_c200_29Aug18.tgz
-* md5sum: a71530714bb31e49c3f1c82870cea4c5
+* 
+* Used data set: calibration_H12_c200_12Sep18.tgz
+* md5sum: 0a7d88e902918eb6a5263faaf066cc5d
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/calibration
-*
+* 
 * Low resolution: c200
 * High resolution: 0.5
-*
+* 
 * Total number of cells: 200
-*
+* 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    28   24   10    7    3   53   17    8   22    7   11   10
-*
+* 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-*
-* Regions data revision: 4.12
-*
+* 
+* Regions data revision: 4.14
+* 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
 * * Additional input folder: /p/projects/landuse/data/input/other/rev34
 * * Revision: 34
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-*
+* 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
@@ -99,11 +99,11 @@ $title magpie
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
-*
-*
-*
-* Last modification (input data): Tue Sep 11 16:26:34 2018
-*
+* 
+* 
+* 
+* Last modification (input data): Thu Sep 13 11:37:28 2018
+* 
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper

@@ -8,11 +8,11 @@ sets
         scen12 real interest rate scenarios
                   / low, medium, high /
 
-        scen12_to_dev(scen12,dev)
+        scen12_to_dev(scen12,dev) Mapping between interest scneario and economic development status
       /        high        . (lic)
-               medium        . (mic)
-               low                . (hic) /
+               medium      . (mic)
+               low         . (hic) /
 
-        t_to_i_to_dev(t,i,dev)
+        t_to_i_to_dev(t,i,dev) Mapping between time, region and economic development status
 
 ;

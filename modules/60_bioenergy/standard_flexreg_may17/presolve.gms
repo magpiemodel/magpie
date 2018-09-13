@@ -38,6 +38,3 @@ vm_dem_bioen.lo(i,kbe60) = 0;
 vm_dem_bioen.up(i,kres) = Inf;
 
 *' @stop
-
-*fix bioenergy revenue to 0
-vm_cost_bioen.fx(i) = 0;

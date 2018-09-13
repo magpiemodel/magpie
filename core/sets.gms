@@ -288,7 +288,7 @@ secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, 
 
 ***RELATIONSHIPS BETWEEN DIFFERENT SETS***
 
-  emis_land(emis_co2,land,c_pools)
+  emis_land(emis_co2,land,c_pools) Mapping between land and carbon pools
   /crop_vegc        . (crop) . (vegc)
    crop_litc        . (crop) . (litc)
    crop_soilc       . (crop) . (soilc)
@@ -312,7 +312,7 @@ secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, 
    other_soilc      . (other) . (soilc)
    /
 
-   emis_co2_to_forestry(co2_forestry,c_pools)
+   emis_co2_to_forestry(co2_forestry,c_pools) Mapping between forestry land and carbon pools
   /forestry_vegc    . (vegc)
    forestry_litc    . (litc)
    forestry_soilc   . (soilc)
