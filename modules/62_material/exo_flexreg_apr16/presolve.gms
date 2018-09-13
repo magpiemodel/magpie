@@ -4,8 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' '@code
-
+*' @code
 *' For the time period beloning to the historical time period (y1965 to y2010
 *' in this version of the model), the scalar `s62_historical` is set to 1 and
 *' for the non-historical time periods, `s62_historical` is set to 0.
