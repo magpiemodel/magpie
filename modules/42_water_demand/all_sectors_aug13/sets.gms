@@ -5,14 +5,19 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-   watdem_ineldo(wat_dem) water demands for subset / industry, electricity, domestic /
-   watdem_exo(wat_dem) exogenous water demands / industry, electricity, domestic, ecosystem /
-   scen_watdem_nonagr	available scenarios for non agricultural water demand / A2 , B1 , SSP2 /
+   watdem_exo(wat_dem) exogenous water demand
+   / industry, electricity, domestic, ecosystem /
 
-	scen42 EFP policy
+   watdem_ineldo(wat_dem) exogenous water demand subset 
+   / industry, electricity, domestic /
+   
+   scen_watdem_nonagr scenarios for non agricultural water demand 
+   / A2 , B1 , SSP2 /
+
+	scen42 Environmental Flow Policy (EFP)
   		/ off, on /
 
-	scen42_to_dev(scen42,dev)
+	scen42_to_dev(scen42,dev) Mapping between EFP and economic development status
       /	off		. (lic, mic)
        	on		. (hic) /
 

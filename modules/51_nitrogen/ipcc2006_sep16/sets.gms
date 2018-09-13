@@ -5,16 +5,16 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-   emis_uncertainty51 different estimates for emission parameters
+   emis_uncertainty51 Different estimates for emission parameters
    /best,low, high/
 
-   ipcc_ef51 ipcc emission factors
+   ipcc_ef51 ipcc Emission factors
    /frac_gasf,frac_gasm,frac_leach,frac_leach_h,ef_1,ef_1fr,ef_2,ef_4,ef_5/
 
-   emis_source_n51(emis_source)
+   emis_source_n51(emis_source) Emission sources from agriculture
    / inorg_fert, man_crop, awms, resid, man_past, som, rice /
 
-   emis_source_nonitrogen51(emis_source) emission sources
+   emis_source_nonitrogen51(emis_source) Emission sources
    / rice, ent_ferm,
      resid_burn,
      crop_vegc, crop_litc, crop_soilc,

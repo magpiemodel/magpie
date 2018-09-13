@@ -48,18 +48,18 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
                                  im_pop_iso(t,iso)
                              );
 
- p15_delta_income_pc_real_ppp(t,i) = p15_income_pc_real_ppp(t,i) / im_gdp_pc_ppp(t,i);
+ p15_delta_income(t,i) = p15_income_pc_real_ppp(t,i) / im_gdp_pc_ppp(t,i);
 
 * estimate convergence measure for deciding to stop iteration
 
 
  p15_convergence_measure(t) =smax(i,
-                              abs(p15_delta_income_pc_real_ppp(t,i) / p15_lastiteration_delta_income_pc_real_ppp(i)- 1)
+                              abs(p15_delta_income(t,i) / p15_lastiteration_delta_income(i)- 1)
                             );
 
 
 * keeping current deltas for estimating convergence in next timestep
- p15_lastiteration_delta_income_pc_real_ppp(i) = p15_delta_income_pc_real_ppp(t,i);
+ p15_lastiteration_delta_income(i) = p15_delta_income(t,i);
 
 
 *' @code
@@ -88,12 +88,13 @@ if (s15_elastic_demand * (1-sum(sameas(t_past,t),1)) =1,
 
 * saving regression outcome for postprocessing
 
-         p15_kcal_regression(t, iso, kfo)=v15_kcal_regression.l(iso, kfo);
+         p15_kcal_regr(t, iso, kfo)=v15_kcal_regr.l(iso, kfo);
 
 * estimating calibrated values for height regression
 * add balanceflow for calibration
-         p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regression.l(iso,kfo) + p15_kcal_calib(t,iso,kfo) * s15_calibrate;
-* set negative values that can occur due to balanceflow to zero
+         p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regr.l(iso,kfo) + p15_kcal_calib(t,iso,kfo) * s15_calibrate;
+
+* set negative values that can occur due to calibration to zero
          p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
 
 * aggregate to regions
@@ -134,12 +135,35 @@ display "exogenous demand information is used" ;
 );
 
 
+*' The calibration parameter is added to the regression value
+
+   p15_bmi_shr(t,iso,sex,age,bmi_group15) =
+           v15_bmi_shr_regr.l(iso,sex,age,bmi_group15)+
+           i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
+
+*' The bmi shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
+   p15_bmi_shr(t,iso,sex,age,bmi_group15)$(p15_bmi_shr(t,iso,sex,age,bmi_group15)<0) = 0;
+   p15_bmi_shr(t,iso,sex,age,bmi_group15)$(p15_bmi_shr(t,iso,sex,age,bmi_group15)>1) = 1;
+*' The mismatch is balanced by moving the exceeding quantities into the middle BMI group.
+   p15_bmi_shr(t,iso,sex,age,"medium")=
+      1 - (sum(bmi_group15, p15_bmi_shr(t,iso,sex,age,bmi_group15)) - p15_bmi_shr(t,iso,sex,age,"medium"));
+
+*' We recalculate the intake with the new values
+   p15_kcal_intake_total(t,iso) =
+         (
+           sum((sex, age, bmi_group15),
+               p15_bmi_shr(t,iso,sex,age,bmi_group15)*
+               im_demography(t,iso,sex,age) *
+               i15_intake(t,iso,sex,age,bmi_group15)
+           ) + i15_kcal_pregnancy(t,iso)
+         )/sum((sex,age), im_demography(t,iso,sex,age));
+
 
 
 if(ord(t)>1,
 * start from bodyheight structure of last period
    p15_bodyheight(t,iso,sex,age,"final") = p15_bodyheight(t-1,iso,sex,age,"final");
-   p15_kcal_growth_food(t,iso,age_underaged15) = p15_kcal_growth_food(t-1,iso,age_underaged15);
+   p15_kcal_growth_food(t,iso,underaged15) = p15_kcal_growth_food(t-1,iso,underaged15);
 );
 
 s15_count=m_yeardiff(t);
@@ -152,8 +176,8 @@ For (s15_count = 1 to (m_yeardiff(t)/5),
    p15_bodyheight(t,iso,sex,age++1,"final") = p15_bodyheight(t,iso,sex,age,"final");
 
 *  move on consumption agegroups by 5 years
-   p15_kcal_growth_food(t,iso,age_underaged15++1)=
-            p15_kcal_growth_food(t,iso,age_underaged15);
+   p15_kcal_growth_food(t,iso,underaged15++1)=
+            p15_kcal_growth_food(t,iso,underaged15);
 
 *  consumption is calculated as linear interpolation between timesteps
    p15_kcal_growth_food(t,iso,"0--4") =
@@ -169,14 +193,14 @@ For (s15_count = 1 to (m_yeardiff(t)/5),
 *' years.
    p15_bodyheight(t,iso,"F","15--19","final") =
                      126.4*
-                     (sum(age_underaged15,
-                       p15_kcal_growth_food(t,iso,age_underaged15)
+                     (sum(underaged15,
+                       p15_kcal_growth_food(t,iso,underaged15)
                      )/3)**0.03464
                      ;
    p15_bodyheight(t,iso,"M","15--19","final") =
                      131.8*
-                     (sum(age_underaged15,
-                       p15_kcal_growth_food(t,iso,age_underaged15)
+                     (sum(underaged15,
+                       p15_kcal_growth_food(t,iso,underaged15)
                      )/3)**0.03975
                      ;
 *' @stop
@@ -205,11 +229,11 @@ p15_bodyheight(t,iso,"F","10--14","final")=p15_bodyheight(t,iso,"M","15--19","fi
 
 if (sum(sameas(t_past,t),1) = 1,
 * for historical period only use estimate to calibrate balanceflow but use historical data for values
-  p15_bodyheight_balanceflow(t,iso,sex,age_new_estimated15) = f15_bodyheight(t,iso,sex,age_new_estimated15) - p15_bodyheight(t,iso,sex,age_new_estimated15,"final");
+  p15_bodyheight_calib(t,iso,sex,age_new_estimated15) = f15_bodyheight(t,iso,sex,age_new_estimated15) - p15_bodyheight(t,iso,sex,age_new_estimated15,"final");
   p15_bodyheight(t,iso,sex,age_new_estimated15,"final") = f15_bodyheight(t,iso,sex,age_new_estimated15);
 else
-  p15_bodyheight_balanceflow(t,iso,sex,age_new_estimated15)=p15_bodyheight_balanceflow(t-1,iso,sex,age_new_estimated15);
-  p15_bodyheight(t,iso,sex,age_new_estimated15,"final")=p15_bodyheight(t,iso,sex,age_new_estimated15,"final")+p15_bodyheight_balanceflow(t,iso,sex,age_new_estimated15)*s15_calibrate;
+  p15_bodyheight_calib(t,iso,sex,age_new_estimated15)=p15_bodyheight_calib(t-1,iso,sex,age_new_estimated15);
+  p15_bodyheight(t,iso,sex,age_new_estimated15,"final")=p15_bodyheight(t,iso,sex,age_new_estimated15,"final")+p15_bodyheight_calib(t,iso,sex,age_new_estimated15)*s15_calibrate;
 );
 
 *' @stop

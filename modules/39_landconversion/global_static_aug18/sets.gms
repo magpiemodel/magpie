@@ -5,9 +5,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-   land_establish39(land)
+   land_establish39(land) Managed land pools
         / crop, past, forestry /
 
-   land_clearing39(land)
+   land_clearing39(land) Natural vegetation land pools
         / primforest, secdforest, other /
 ;

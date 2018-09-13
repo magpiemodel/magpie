@@ -9,18 +9,18 @@ $title magpie
 *' @title MAgPIE - Modelling Framework
 *'
 *' @description The *Model of Agricultural Production and its Impact on the
-*' Environment* (MAgPIE) is developed and used to assess the competition for 
-*' land and water, and the associated consequences for sustainable development 
+*' Environment* (MAgPIE) is developed and used to assess the competition for
+*' land and water, and the associated consequences for sustainable development
 *' under future scenarios of rising food, energy and material demand and production,
-*' climate change and different land related policies. 
+*' climate change and different land related policies.
 *'
-*' MAgPIE is a global partial equilibrium model of the land-use sector that operates 
-*' in a recursive dynamic mode and incorporates spatially explicit information on 
+*' MAgPIE is a global partial equilibrium model of the land-use sector that operates
+*' in a recursive dynamic mode and incorporates spatially explicit information on
 *' biophysical constraints into an economic decision making process (@lotze-campen_global_2008).
 *' It takes regional economic conditions such as demand for agricultural commodities,
 *' technological development and production costs as well as spatially explicit data
 *' on biophysical constraints into account. Geographically explicit data on biophysical
-*' constraints are provided by the Lund-Potsdam-Jena managed land model (LPJmL) 
+*' constraints are provided by the Lund-Potsdam-Jena managed land model (LPJmL)
 *' (@bondeau_lpjml_2007, @mueller_projecting_2014) on 0.5° resolution and include e.g.
 *' carbon densities of different vegetation types, agricultural productivity such as
 *' crop yields and water availability for irrigation as. Based on the strong interaction
@@ -44,7 +44,7 @@ $title magpie
 *' thus integrating information about market access into the decision process where to
 *' allocate cropping activities and livestock production. Parts of the forests and other
 *' natural land can be excluded from conversion into agricultural land if designated for
-*' wood production or located in protected areas (Kreidenweis et al 2018). Due to computational constraints, all model inputs in 0.5 degree resolution can be aggregated to simulation units for the optimization process based on a clustering algorithm (Dietrich et al 2013). 
+*' wood production or located in protected areas (Kreidenweis et al 2018). Due to computational constraints, all model inputs in 0.5 degree resolution can be aggregated to simulation units for the optimization process based on a clustering algorithm (Dietrich et al 2013).
 
 
 
@@ -55,20 +55,20 @@ $title magpie
 * md5sum: b88ddae2ac42d76603bd988337115c64
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
-* Used data set: rev4.12_690d3718e151be1b450b394c1064b1c5_magpie.tgz
-* md5sum: 69a886994ddc2b793553226c01f33ddf
+* Used data set: rev4.14_690d3718e151be1b450b394c1064b1c5_magpie.tgz
+* md5sum: 4a5a4bd2ed2e4feb61c6b7160f966414
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.12_690d3718e151be1b450b394c1064b1c5_validation.tgz
-* md5sum: 6e3b8690af3e4cafa7e1af711d0a95a0
+* Used data set: rev4.14_690d3718e151be1b450b394c1064b1c5_validation.tgz
+* md5sum: ced3291c4ceacfdb7f60cf4d2c92a95f
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev3.57.tgz
-* md5sum: ff8090c1d1f74dafafe920dd48a8f1c0
+* Used data set: additional_data_rev3.58.tgz
+* md5sum: 75798c6d2670497a92ae2a3fb5a7e6ee
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
-* Used data set: calibration_H12_c200_29Aug18.tgz
-* md5sum: a71530714bb31e49c3f1c82870cea4c5
+* Used data set: calibration_H12_c200_12Sep18.tgz
+* md5sum: 0a7d88e902918eb6a5263faaf066cc5d
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/calibration
 * 
 * Low resolution: c200
@@ -82,7 +82,7 @@ $title magpie
 * 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
-* Regions data revision: 4.12
+* Regions data revision: 4.14
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
@@ -102,7 +102,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Tue Sep 11 16:26:34 2018
+* Last modification (input data): Thu Sep 13 11:37:28 2018
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -142,7 +142,7 @@ $setglobal interest_rate  reg_feb18
 $setglobal tc  endo_jun18
 $setglobal yields  dynamic_aug18
 
-$setglobal food  bmi_share_jul18
+$setglobal food  anthropometrics_jan18
 $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 
