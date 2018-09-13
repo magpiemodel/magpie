@@ -19,11 +19,11 @@ buildInputVector <- function(regionmapping   = "aus",
                              co2             = "co2",
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "h200",
-                             archive_rev     = "33",
-                             madrat_rev      = "3.34",
-                             validation_rev  = "3.34",
+                             archive_rev     = "34",
+                             madrat_rev      = "4.14",
+                             validation_rev  = "4.14",
                              calibration     = NULL,
-                             additional_data = "additional_data_rev3.41.tgz") {
+                             additional_data = "additional_data_rev3.58.tgz") {
   mappings <- c(aus="b18f2e819b94edba598984a7da8f553c",
                 bra="e90458394d5302941049f44b72ff08dc",
                 cha="fb4142b907bc772d14b467365f58c330",
@@ -38,10 +38,14 @@ buildInputVector <- function(regionmapping   = "aus",
   return(c(archive,madrat,validation,calibration,additional_data))
 }
 
-calib_date <- "15Jul18"
+#calib_date <- NULL 
 
 for(x in c("aus","bra","cha","eth","idn","ind","usa")) {
-  calibration <- ifelse(exists("calib_date") && !is.null(calib_date),paste0("calibration_",x,"_",calib_date,".tgz"), NULL)
+  if(exists("calib_date") && !is.null(calib_date)) {
+    calibration <- paste0("calibration_",x,"_",calib_date,".tgz")
+  } else {
+    calibration <-  NULL
+  }
   cfg$title <- x
   cfg$input <- buildInputVector(regionmapping=x, calibration=calibration)
   if(is.null(calibration)){
@@ -49,5 +53,5 @@ for(x in c("aus","bra","cha","eth","idn","ind","usa")) {
     calib <- submitCalibration(x)
     cfg$input <- c(cfg$input,calib)
   }
-  publish_data(input=cfg, name=paste0("testdata2_",x), target=".")
+  publish_data(input=cfg, name=paste0("testdata3_",x), target=".")
 }
