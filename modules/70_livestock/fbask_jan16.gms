@@ -47,7 +47,7 @@
 *' conversion and livestock productivity:
 
 *' ![Relationship between feed conversion and livestock productivity
-*' [@weindl_livestock_2017].](feed_conv.jpg){ width=60% }
+*' [@weindl_livestock_2017].](feed_conv.jpg){ width=100% }
 
 *' In the case of feed composition, we use an additional proxy parameter in our
 *' analysis. What type of biomass is used to feed animals is to a certain extent

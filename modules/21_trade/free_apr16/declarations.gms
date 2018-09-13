@@ -6,18 +6,18 @@
 
 
 positive variables
- vm_cost_trade(i)                            transport costs and taxes for the bilateral trade (mio. USD)
+ vm_cost_trade(i)                            regional  trade costs (mio. USD05MER)
 ;
 
 equations
- q21_trade_glo(k_trade)          Global production > demand constraint
- q21_notrade(i,k_notrade)        fix of not traded commodities
+ q21_trade_glo(k_trade)          Global production > demand constraint (mio. tDM)
+ q21_notrade(i,k_notrade)        fix of not traded commodities (mio. tDM)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_trade(t,i,type)          transport costs and taxes for the bilateral trade (mio. USD)
- oq21_trade_glo(t,k_trade,type)   Global production > demand constraint
- oq21_notrade(t,i,k_notrade,type) fix of not traded commodities
+ ov_cost_trade(t,i,type)          transport costs and taxes for the bilateral trade (mio. USD05MER)
+ oq21_trade_glo(t,k_trade,type)   Global production > demand constraint (mio. tDM)
+ oq21_notrade(t,i,k_notrade,type) fix of not traded commodities (mio. tDM)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
