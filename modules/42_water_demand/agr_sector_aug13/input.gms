@@ -6,17 +6,17 @@
 
 scalars
 
-s42_reserved_fraction  fraction of available water that is reserved for industry electricity and domestic use / 0.5 /
+s42_reserved_fraction  Fraction of available water that is reserved for industry, electricity and domestic use (1) / 0.5 /
 
-s42_irrig_eff_scenario     scenario for irrigation efficiency            / 1 /
+s42_irrig_eff_scenario     Scenario for irrigation efficiency     (1)       / 1 /
 *                                      1: global static value
 *                                      2: regional static values from CS
 *                                      3: gdp driven increase
 
-s42_irrigation_efficiency              value of irrigation efficiency.               / 0.66 /
+s42_irrigation_efficiency              Value of irrigation efficiency       (1)        / 0.66 /
 *                                      Only if global static value is requested
 
-s42_env_flow_scenario              Environmental flow protection scenario.               / 2 /
+s42_env_flow_scenario              EFP scenario.     (1)          / 2 /
 *                                  0: don't consider environmental flows.
 *                                                                          s42_env_flow_base_fraction and
 *                                                                          s42_env_flow_fraction have no effect.
@@ -28,11 +28,9 @@ s42_env_flow_scenario              Environmental flow protection scenario.      
 *                                     results and a calculation algorithm by Smakhtin 2004.
 *                                                                          s42_env_flow_fraction has no effect.
 
-s42_env_flow_base_fraction         Fraction of available water that                                                 / 0.05 /
-*                                                                   is reserved for the environment if
-*                                                                   no EFR protection policy is implemented (determined in the file
-*                                                                   EFR_protection_policy.csv)
-s42_env_flow_fraction              Fraction of available water that is reserved for under protection policies / 0.2 /
+s42_env_flow_base_fraction         Fraction of available water that is reserved for the environment where no EFP policy is implemented (1) / 0.05 /
+* 									(determined in the file EFR_protection_policy.csv) 
+s42_env_flow_fraction              Fraction of available water that is reserved for under protection policies (1) / 0.2 / 
 ;
 
 $setglobal c42_watdem_scenario  nocc
@@ -40,7 +38,7 @@ $setglobal c42_watdem_scenario  nocc
 *             nocc (no climate change)
 
 
-table f42_wat_req_kve(t_all,j,kve) LPJ annual water demand for irrigation per ha per year (m^3)
+table f42_wat_req_kve(t_all,j,kve) LPJmL annual water demand for irrigation per ha (m^3 per yr)
 $ondelim
 $include "./modules/42_water_demand/input/lpj_airrig.cs2"
 $offdelim
@@ -57,7 +55,7 @@ $offdelim
 /;
 
 
-parameter f42_env_flows(t_all,j) Environmental flow requirements from LPJ and Smakhtin algorithm (mio m^3)
+parameter f42_env_flows(t_all,j) Environmental flow requirements from LPJ and Smakhtin algorithm (mio. m^3)
 /
 $ondelim
 $include "./modules/42_water_demand/input/lpj_envflow_grper.cs2"

@@ -14,12 +14,10 @@
 *'
 *' For industry, electricity and domestic demand, three scenarios are available on cluster
 *' level from the model by @watergap_water_2003:
-*'
-*' SRES A2 (WATCH Project)
-*'
-*' SRES B1 (WATCH Project)
-*'
-*' SSP2 (ISI-MIP Project)
+*' 
+*' * SRES A2 (WATCH Project)
+*' * SRES B1 (WATCH Project)
+*' * SSP2 (ISI-MIP Project)
 *'
 *' The preprocessing script that extracts the @watergap_water_2003 data and converts it to MAgPIE input
 *' can be found in:
@@ -49,11 +47,11 @@
 *' In the case of the absence of an environmental flow protection policy, a base protection
 *' can be specified: `s42_env_flow_base_fraction`. It defaults to 5 % of available water.
 *'
-*' @limitations The module uses a conveyance efficiency times management factor
-*' for irrigation efficiency. Therefore, the management factor is double
-*' accounted for because it is already considered in lpj airrig.
-*' The module realization does not consider annual water balances, but only water balances
-*' during the growing period of crops. This period differs between cells.
+*' @limitations The module uses the "conveyance efficiency times management factor" for irrigation efficiency.
+*' Therefore, the management factor is accounted twice, since it is already considered in LPJmL water quantity used 
+*' for irrigation (`airrig`: annual irrigation).
+*' Furthermore, the module realization does not consider annual water balances but only water balances during the
+*' growing period of crops. This period differs between cells.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/42_water_demand/all_sectors_aug13/sets.gms"
