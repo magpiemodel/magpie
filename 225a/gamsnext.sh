@@ -1,1 +1,0 @@
-gmsgenus.run /p/projects/landuse/users/karstens/magpie4_4/225a/ /p/projects/landuse/users/karstens/magpie4_4/ $1 /p/projects/landuse/users/karstens/magpie4_4/225a/gamscntr.dat /p/system/packages/gams/25.1.1/ CONOPT4
