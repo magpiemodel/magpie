@@ -5,35 +5,66 @@
 *** Contact: magpie@pik-potsdam.de
 
 sets
-   age_underaged15(age)
+   underaged15(age) underaged age group
    /0--4,5--9,10--14/
 
-   age_new_estimated15(age)
-   /0--4,5--9,10--14,15--19/
-
-   age_adult15(age) Age groups for adult population
+   adult15(age) Age groups for adult population
        /  15--19,
        20--24, 25--29, 30--34, 35--39,
        40--44, 45--49, 50--54, 55--59,
        60--64, 65--69, 70--74, 75--79
        80--84,85--89,90--94,95--99,100+ /
 
+   working15(adult15) Working age group
+   / 15--19,
+     20--24, 25--29, 30--34, 35--39,
+     40--44, 45--49, 50--54, 55--59/
+
+   retired15(adult15) Retired age group
+   /60--64, 65--69, 70--74, 75--79
+       80--84,85--89,90--94,95--99,100+ /
+
+   agegroup15 All age groups
+   /underaged,working,retired /
+
+   age2_adults15(agegroup15) Adult age group
+   /working,retired /
+
+   agegroup2age(agegroup15,age) Mapping between age cohort and age
+   /
+   underaged        . (0--4,5--9,10--14)
+   working          . (15--19,
+     20--24, 25--29, 30--34, 35--39,
+     40--44, 45--49, 50--54, 55--59)
+   retired          . (60--64, 65--69, 70--74, 75--79
+       80--84,85--89,90--94,95--99,100+ )
+   /
+
+   bmi_tree15 Body mass index
+   /low,lowsplit,mediumsplit,high,highsplit/
+
+   bmi_group15 Body mass index gradient
+   /verylow,low,medium,mediumhigh,high,veryhigh/
+
+   bmi_group_est15(bmi_group15) Body mass index extremes
+   /verylow,low,mediumhigh,high,veryhigh/
+
+   age_new_estimated15(age) Estimated ages
+   /0--4,5--9,10--14,15--19/
+
    reproductive(age) reproductive age groups
    /20--24, 25--29, 30--34, 35--39/
 
-   estimates15
+   estimates15 Estimate type
    /preliminary,final/
 
-   parameters15 schofield equation parameters
+   paras_s15 Schofield equation parameters
    /slope, intercept/
 
-   schofield_parameters15 schofield equation parameters with height
-   /height, weight, intercept/
-
-   parameters_intake15 intake equation parameters
+   paras_b15 Intake equation parameters
    /saturation,halfsaturation,intercept/
 
-   kfo(kall) all products in the sectoral version
+   kfo(kall) All products in the sectoral version
    /
    tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,puls_pro,
    potato,cassav_sp,sugr_cane,sugr_beet,
@@ -53,7 +84,7 @@ sets
    oils,sugar,molasses,alcohol,brans,scp/
 
 
-   kfo_ap(kfo)
+   kfo_ap(kfo) Animal food products
    /
    livst_rum,livst_pig,livst_chick, livst_egg, livst_milk, fish
    /
@@ -77,12 +108,12 @@ sets
    nutrition nutritition attributes
    /kcal, protein/
 
-  par15
+  par15 Parameters for food module
       / intercept,saturation,halfsaturation,non_saturation /
 * intercept + saturation give the max value if non-saturation is 1
 * halfsaturation is the gdp until which half of saturation is reached
 
-  demand_subsys15
+ regr15  demand regression types
       / overconsumption,livestockshare,processedshare,vegfruitshare /
 
 *** Scenarios

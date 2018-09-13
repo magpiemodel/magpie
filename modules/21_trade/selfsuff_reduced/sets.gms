@@ -5,7 +5,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-  tstart21(t_all)
+  tstart21(t_all) historic time steps
     / y1995, y2000, y2005, y2010 /
 
 *sets need to be adopted to new categories
@@ -14,25 +14,21 @@ sets
 * oilpalm not traded, only its oil and oilcake due to FAOSTAT complications, and as trade is little
 * foddr is not traded as too bulky
 * pasture ist not traded as too bulky
-   k_trade(kall)
-       /
-   tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,puls_pro,
+   k_trade(kall) production activities for which trade is allowed
+   / tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,puls_pro,
    potato,cassav_sp,sugr_cane,sugr_beet,others,cottn_pro, begr, betr,
    oils,oilcakes,sugar,molasses,alcohol,ethanol,distillers_grain,brans,scp,fibres,
-   livst_rum, livst_pig,livst_chick, livst_egg, livst_milk, fish
-   /
+   livst_rum, livst_pig,livst_chick, livst_egg, livst_milk, fish /
 
 * We limit trade of secondary products as this allows for extreme specialisation
 * in the implementation. Exception is sugar, where we allow the secondary product
 * trade but not the primary as primaries are hardly traded in reality
    k_hardtrade21(k_trade) products where trade should be limited
-   /
-   sugr_cane,sugr_beet,
+   / sugr_cane,sugr_beet,
    oils,oilcakes,alcohol,ethanol,distillers_grain,brans,scp,fibres,
-   livst_rum, livst_pig,livst_chick, livst_egg, livst_milk, fish
-   /
+   livst_rum, livst_pig,livst_chick, livst_egg, livst_milk, fish /
 
-   trade_regime21
+   trade_regime21 trade scenarios
    /
    free2000,
    regionalized,
@@ -49,7 +45,7 @@ sets
    l909595r809090
    /
 
-   trade_groups21
+   trade_groups21 trade groups
    / easytrade,hardtrade /
 
 ;

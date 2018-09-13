@@ -12,7 +12,7 @@
 *' For this purpose, the livestock module provides for every time-step regional
 *' and product-specific feed baskets that determine type and magnitude of feed
 *' needed to produce one unit of livestock commodities. Estimated pasture
-*' feed demand is also relevant for the module [31_pasture] in order to derive
+*' feed demand is also relevant for the module [31_past] in order to derive
 *' required pasture areas. The information flow between the livestock and the
 *' pasture module is organized via interfaces `vm_dem_feed`, `vm_supply` and
 *' `vm_prod_reg` via modules [16_demand] and [21_trade]. Feed demand estimates

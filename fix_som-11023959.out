@@ -1,0 +1,7 @@
+Global .Rprofile loaded!
+The model folder was locked by this process.
+Error in replace_in_file(path(fullmodulepath, module, t, ftype = "gms"),  : 
+  File ./modules/39_landconversion/gdp_vegc_may18.gms does not exist!
+Calls: start_run -> <Anonymous> -> replace_in_file
+The model was unlocked
+Execution halted

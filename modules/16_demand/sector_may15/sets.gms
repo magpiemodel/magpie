@@ -9,7 +9,7 @@ sets
    ksd(kall) secondary products
    /oils,oilcakes,sugar,molasses,alcohol,ethanol,distillers_grain,brans,scp,fibres/
 
-   kres(kall)
+   kres(kall) residues
    / res_cereals, res_fibrous, res_nonfibrous /
 
    k(kall) products
@@ -18,7 +18,7 @@ sets
          foddr, pasture, cottn_pro, begr, betr, livst_rum, livst_pig,
          livst_chick, livst_egg, livst_milk, fish /
 
-   kap(k)
+   kap(k) Animal products
    /
    livst_rum,livst_pig,livst_chick, livst_egg, livst_milk, fish
    /

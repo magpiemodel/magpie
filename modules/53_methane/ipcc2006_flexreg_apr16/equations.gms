@@ -19,16 +19,16 @@
 
  q53_emissionbal_ch4_ent_ferm(i2) ..
    vm_btm_reg(i2,"ent_ferm","ch4") =e= 1/55.65 *
-  (sum(k_concentrate53, vm_dem_feed(i2,"livst_rum",k_concentrate53)
-                *fm_attributes("ge",k_concentrate53)*0.03)
-   + sum(k_concentrate53, vm_dem_feed(i2,"livst_milk",k_concentrate53)
-                *fm_attributes("ge",k_concentrate53)*0.065)
-   + sum((k_noconcentrate53,k_ruminants53),vm_dem_feed(i2,k_ruminants53,k_noconcentrate53)
-                 *fm_attributes("ge",k_noconcentrate53)*0.065));
+  (sum(k_conc53, vm_dem_feed(i2,"livst_rum",k_conc53)
+                *fm_attributes("ge",k_conc53)*0.03)
+   + sum(k_conc53, vm_dem_feed(i2,"livst_milk",k_conc53)
+                *fm_attributes("ge",k_conc53)*0.065)
+   + sum((k_noconc53,k_ruminants53),vm_dem_feed(i2,k_ruminants53,k_noconc53)
+                 *fm_attributes("ge",k_noconc53)*0.065));
 
 *' As such, methane from enteric fermentation depends on the feed quality and the purpose of livestock farming.
-*' The feed quality (measured by energy content of the feed type) can be `k_concentrate53` 
-*'  ( with high energy contents, for example, temperate and tropical cereals, maize,pulses) or `k_noconcentrate53` 
+*' The feed quality (measured by energy content of the feed type) can be `k_conc53` 
+*'  ( with high energy contents, for example, temperate and tropical cereals, maize,pulses) or `k_noconc53` 
 *' (for example, pasture, fodder,crop residues). The purpose of livestock raising `k_ruminants53`
 *' can be either for meat (`livst_rum`) or for milk (`livst_milk`). The parameter `fm_attributes`
 *' in MAgPIE captures a content of some thing (e.g. gross energy-ge, dry matter-dm, reactive nitrogen-nr) 
@@ -42,8 +42,9 @@
 *' See the [51_nitrogen] module for more on calculation of methane from animal waste(or manure) .
 
  q53_emissionbal_ch4_awms(i2) ..
-  vm_btm_reg(i2,"awms","ch4") =e= sum(kli, vm_manure(i2, kli, "confinement", "nr")
-            *sum(ct,  f53_ef_ch4_awms(ct,i2,kli)));
+  vm_btm_reg(i2,"awms","ch4") =e= 
+            sum(kli, vm_manure(i2, kli, "confinement", "nr")
+                * sum(ct,  f53_ef_ch4_awms(ct,i2,kli)));
 
 *' The third equation of this realization calculates methane emissions from rice cultivation.
 *' As presented below CH4 from rice is a function of harvested area of rice
@@ -51,5 +52,6 @@
 *' The calculation is based on @ipcc_2006_2006 and Rice Cultivation Emissions from @FAOSTAT.
 
  q53_emissionbal_ch4_rice(i2) ..
-   vm_btm_reg(i2,"rice","ch4") =e= sum((cell(i2,j2),w), vm_area(j2,"rice_pro",w)
-          *sum(ct,f53_ef_ch4_rice(ct,i2)));
+   vm_btm_reg(i2,"rice","ch4") =e= 
+          sum((cell(i2,j2),w), vm_area(j2,"rice_pro",w)
+              * sum(ct,f53_ef_ch4_rice(ct,i2)));
