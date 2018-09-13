@@ -1,5 +1,9 @@
 *' @code
-*' The parameters are resetted based on each time step optimization to be used in next step.
+*' The parameters `p62_dem_material_lh` and `p62_dem_food_lh` are overwritten
+*' based on each time step optimization, in order to be used in next step.
+*' This is only carried out when the model is still running in the time period
+*' before (and including) y2010 with this model version.
+
 if (sum(sameas(t_past,t),1) = 1,
  p62_dem_material_lh(i,kall) = f62_dem_material(t,i,kall);
  p62_dem_food_lh(i)=  sum(kfo, vm_dem_food.l(i,kfo));
