@@ -39,8 +39,7 @@ q71_balanceflow_constraint_nlp(j2,kli_rum,kforage)$(s71_lp_fix=0) ..
 		         v71_feed_balanceflow(j2,kli_rum,kforage)
 		         =e= sum((ct,cell(i2,j2)), 
 				 fm_feed_balanceflow(ct,i2,kli_rum,kforage)/ 
-		         im_feed_baskets(ct,i2,kli_rum,kforage)) 
-				 * sum(cell(i2,j2),1/(vm_prod_reg(i2,kli_rum) + 10**(-6)))
+		         (im_feed_baskets(ct,i2,kli_rum,kforage)*vm_prod_reg(i2,kli_rum) + 10**(-6)))
                  ;
 
 *' The regional ruminant production is than given by
