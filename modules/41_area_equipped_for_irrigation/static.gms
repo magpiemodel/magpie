@@ -6,7 +6,7 @@
 
 
 *' In this realization, area equipped for irrigation is fixed to input data (around the year 2000)
-*'  for all time steps. The source of the input data is @siebert_FAO_2007.
+*' for all time steps. The source of the input data is @siebert_FAO_2007.
 *'
 *' @limitations No irrigation is possible on areas that have not been equipped for irrigation in the past.
 *'

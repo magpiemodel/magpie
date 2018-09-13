@@ -7,8 +7,8 @@
 *' @description  
 *' *Agricultural water demand*:
 *'
-*' Water demand for agriculture is endogenously calculated based on irrigated cropland
-*' `vm_area(j,kcr,"irrigated")` and livestock production.
+*' Water demand for agriculture is endogenously calculated based
+*' on irrigated cropland `vm_area(j,kcr,"irrigated")` and livestock production `vm_prod(j2,kli)`.
 *'
 *' Irrigation water demand per hectare for each crop category and cluster
 *' is provided by the LPJmL model. This parameter refers to the water that
@@ -53,10 +53,10 @@
 *' fact that MAgPIE only considers available blue water during the growing period of
 *' the plants ([43_water_availability]), EFR are also only calculated during this growing
 *' period. They are reserved in addition to `s42_protected_fraction`.
-*' In the case of the absence of an environmental flow protection policy, a base protection
+*' In the case of the absence of an environmental flow protection (EFP) policy, a base protection
 *' can be specified: `s42_env_flow_base_fraction`. Its default value is 5 % of available water.
 *'
-*' Whether a potential environmental flow protection policy takes effect is determined
+*' Whether a potential EFP policy takes effect is determined
 *' by the parameter `f42_env_flow_policy` in the input folder of the water demand module.
 *'
 *' @limitations The module uses the "conveyance efficiency times management factor" for irrigation efficiency.

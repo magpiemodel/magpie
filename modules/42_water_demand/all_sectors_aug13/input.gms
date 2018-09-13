@@ -6,20 +6,20 @@
 
 scalars
 
-s42_watdem_nonagr_scenario         scenario for non agricultural water demand from WATERGAP                  / 1 /
+s42_watdem_nonagr_scenario         Scenario for non agricultural water demand from WATERGAP     (1)             / 1 /
 *                                                                                1: SSP 2
 *                                                                                2: A2
 *                                                                                3: B1
 
-s42_irrig_eff_scenario     scenario for irrigation efficiency            / 1 /
+s42_irrig_eff_scenario     Scenario for irrigation efficiency      (1)      / 1 /
 *                                      1: global static value
 *                                      2: regional static values from CS
 *                                      3: gdp driven increase
 
-s42_irrigation_efficiency              value of irrigation efficiency.               / 0.66 /
+s42_irrigation_efficiency              Value of irrigation efficiency.         (1)      / 0.66 /
 *                                      Only if global static value is requested
 
-s42_env_flow_scenario              Environmental flow protection scenario.               / 2 /
+s42_env_flow_scenario              Environmental flow protection scenario.         (1)      / 2 /
 *                                  0: don't consider environmental flows.
 *                                                                          s42_env_flow_base_fraction and
 *                                                                          s42_env_flow_fraction have no effect.
@@ -31,18 +31,17 @@ s42_env_flow_scenario              Environmental flow protection scenario.      
 *                                     results and a calculation algorithm by Smakhtin 2004.
 *                                                                          s42_env_flow_fraction has no effect.
 
-s42_env_flow_base_fraction         Fraction of available water that                                                 / 0.05 /
-*                                                                    is reserved for the environment if
-*                                                                   no EFR protection policy is implemented (determined in the file
+s42_env_flow_base_fraction         Fraction of available water that is reserved for the environment if no EFR protection policy is implemented (1)           / 0.05 /
+*                                                                    (determined in the file
 *                                                                   EFR_protection_policy.csv)
-s42_env_flow_fraction              Fraction of available water that is reserved for under protection policies / 0.2 /
+s42_env_flow_fraction              Fraction of available water that is reserved for under protection policies (1) / 0.2 /
 ;
 
 $setglobal c42_watdem_scenario  nocc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
 
-table f42_wat_req_kve(t_all,j,kve) LPJ annual water demand for irrigation per ha per year (m^3)
+table f42_wat_req_kve(t_all,j,kve) LPJ annual water demand for irrigation per ha (m^3 per yr)
 $ondelim
 $include "./modules/42_water_demand/input/lpj_airrig.cs2"
 $offdelim
@@ -50,7 +49,7 @@ $offdelim
 $if "%c42_watdem_scenario%" == "nocc" f42_wat_req_kve(t_all,j,kve) = f42_wat_req_kve("y1995",j,kve);
 m_fillmissingyears(f42_wat_req_kve,"j,kve");
 
-parameter f42_wat_req_kli(kli) Average water requirements of livestock commodities per region per tDM per year (m^3)
+parameter f42_wat_req_kli(kli) Average water requirements of livestock commodities per region per tDM per year (m^3 per yr)
 /
 $ondelim
 $include "./modules/42_water_demand/input/f42_wat_req_fao.csv"
