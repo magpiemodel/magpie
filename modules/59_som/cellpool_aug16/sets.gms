@@ -5,19 +5,19 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-noncropland59(land)
+noncropland59(land) Land pools excluding corpland
 /past, forestry, primforest, secdforest, urban, other/
 
-pools59
+pools59 General cropland and noncropland pools
 /cropland,noncropland/
 
-tillage59
+tillage59 Tillage types
 /full_tillage,reduced_tillage,no_tillage /
 
-inputs59
+inputs59 Inputs levels and types for land management
 /low_input,medium_input,high_input_nomanure,high_input_manure /
 
-climate59 climate classes of IPCC 2006
+climate59 Climate classes of IPCC 2006
 /temperate_dry,temperate_moist,tropical_dry,tropical_moist/
 
 clcl_climate59(clcl,climate59) climate classification types
