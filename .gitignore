@@ -6,6 +6,7 @@ magpie_calib.*
 #ignore input files
 *.cs*
 *.mz
+*.rds
 /input/
 
 #ignore outputs
@@ -23,3 +24,11 @@ magpie_calib.*
 /doc/*.pdf
 /doc/*.rds
 /doc/*.tex
+/doc/*.aux
+/doc/*.log
+/doc/*.gz
+
+#ignore run specific files and folders
+/225*/
+*.out
+/scripts/npi_ndc/npi_ndc_overview.txt
