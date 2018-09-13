@@ -6,7 +6,7 @@
 
 
 positive variables
- vm_cost_trade(i)                            transport costs and taxes for the bilateral trade (mio. USD05MER)
+ vm_cost_trade(i)                            regional  trade costs (mio. USD05MER)
 ;
 
 equations
