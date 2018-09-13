@@ -8,10 +8,11 @@
 *' the feed availability for grazed pasture and fodder crops. This accounts for the fact that pasture and fodder 
 *' (summarized with forage) feed stuff is usually not transported over long distances and by the the same time 
 *' is very essential in livestock diets. The monogastric livestock is distributed following the very simply idea 
-*' that these animals are held close to densely populated areas. 
+*' that these animals are held close to densely populated areas. For more detailed information on cellular livestock 
+*' distribution see @robinson_mapping_2014, which inspired this realization.
 
-*' @limitations Distribution of monogastrics do not account for feed availability within a cell.
-
+*' @limitations Distribution of monogastrics do not account for feed availability within a cell. Crop residue feed stuff
+*' for ruminant production is also not considered to restrict livestock production.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/71_disagg_lvst/foragebased_aug18/sets.gms"

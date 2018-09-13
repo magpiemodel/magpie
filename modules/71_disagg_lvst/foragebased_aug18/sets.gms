@@ -5,17 +5,17 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-   kli_rum(kli) ruminant livestock
+   kli_rum(kli) Ruminant livestock
    /
    livst_rum, livst_milk
    /
 
-   kli_mon(kli) monogastric livestock
+   kli_mon(kli) Monogastric livestock
    /
    livst_pig, livst_chick, livst_egg
    /
    
-   kforage(k)
+   kforage(k) Forage feed categories
    /
 	pasture, foddr
    / 
