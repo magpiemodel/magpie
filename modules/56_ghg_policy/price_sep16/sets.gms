@@ -6,7 +6,7 @@
 
 sets
 
-   pollutants_all
+   pollutants_all all pollutants
    / co2_c,
    ch4,
    n2o_n_direct, nh3_n, no2_n,
@@ -22,33 +22,25 @@ sets
    bc,
    so2 /
 
-   pollutants(pollutants_all)   subset of pollutants_all that can be taxed
-   /
-   co2_c,
+   pollutants(pollutants_all) subset of pollutants_all that can be taxed
+   / co2_c,
    ch4,
    n2o_n_direct, n2o_n_indirect,
    nh3_n, no2_n,
-   no3_n
-   /
+   no3_n /
 
-   n_pollutants(pollutants)
-   /
-   n2o_n_direct,n2o_n_indirect,
+   n_pollutants(pollutants) subset of n pollutants
+   / n2o_n_direct,n2o_n_indirect,
    nh3_n, no2_n,
-   no3_n
-   /
+   no3_n /
 
-   n_pollutants_direct(n_pollutants)
-   /
-   n2o_n_direct,
+   n_pollutants_direct(n_pollutants) subset of n pollutants
+   / n2o_n_direct,
    nh3_n, no2_n,
-   no3_n
-   /
+   no3_n /
 
-   pollutant_nh3no2_51(n_pollutants_direct) nitrogen emissins relevant for deposition
-   /nh3_n, no2_n/
-
-
+   pollutant_nh3no2_51(n_pollutants_direct) nitrogen emissions relevant for deposition
+   / nh3_n, no2_n /
 
    emis_source_n_cropsoils51(emis_source) activities that lead to emissions
    / inorg_fert, man_crop, resid, som, rice /
