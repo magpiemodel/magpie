@@ -32,9 +32,9 @@ parameters
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_landcon(t,j,land,type)           landconversion costs (mio USD per yr)
- ov39_cost_landcon_annuity(t,j,land,type) annuity costs of landconversion in the current timestep (mio USD per yr)
- oq39_cost_landcon_annuity(t,j,land,type) Calculation of cellular annuity costs of landconversion (mio USD per yr)
- oq39_cost_landcon(t,j,land,type)         Calculation of cellular landconversion costs (mio USD per yr)
+ ov_cost_landcon(t,j,land,type)           landconversion costs (mio. USD05MER per yr)
+ ov39_cost_landcon_annuity(t,j,land,type) annuity costs of landconversion in the current timestep (mio. USD05MER per yr)
+ oq39_cost_landcon_annuity(t,j,land,type) Calculation of cellular annuity costs of landconversion (mio. USD05MER per yr)
+ oq39_cost_landcon(t,j,land,type)         Calculation of cellular landconversion costs (mio. USD05MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
