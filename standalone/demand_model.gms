@@ -15,7 +15,7 @@ $setglobal c_timesteps  pastandfuture
 
 *******************************MODULE SETUP*************************************
 $setglobal drivers  aug17
-$setglobal food  bmi_share_jul18
+$setglobal food  anthropometrics_jan18
 
 ***************************PREDEFINED MACROS************************************
 $include "./core/macros.gms"
