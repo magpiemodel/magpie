@@ -43,8 +43,8 @@
 
  q53_emissionbal_ch4_awms(i2) ..
   vm_btm_reg(i2,"awms","ch4") =e= 
-  sum(kli, vm_manure(i2, kli, "confinement", "nr")
-  *sum(ct,  f53_ef_ch4_awms(ct,i2,kli)));
+            sum(kli, vm_manure(i2, kli, "confinement", "nr")
+                * sum(ct,  f53_ef_ch4_awms(ct,i2,kli)));
 
 *' The third equation of this realization calculates methane emissions from rice cultivation.
 *' As presented below CH4 from rice is a function of harvested area of rice
@@ -52,5 +52,6 @@
 *' The calculation is based on @ipcc_2006_2006 and Rice Cultivation Emissions from @FAOSTAT.
 
  q53_emissionbal_ch4_rice(i2) ..
-   vm_btm_reg(i2,"rice","ch4") =e= sum((cell(i2,j2),w), vm_area(j2,"rice_pro",w)
-          *sum(ct,f53_ef_ch4_rice(ct,i2)));
+   vm_btm_reg(i2,"rice","ch4") =e= 
+          sum((cell(i2,j2),w), vm_area(j2,"rice_pro",w)
+              * sum(ct,f53_ef_ch4_rice(ct,i2)));

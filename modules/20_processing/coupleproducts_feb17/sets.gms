@@ -17,16 +17,16 @@ knpr(kall) plant-based products that cannot be processed
    livst_pig,livst_rum,oilcakes,pasture,puls_pro,res_cereals,res_fibrous,
    res_nonfibrous,scp/
 
-processing_subst20
+processing_subst20 Processing activities
 / milling, refining, extracting, distilling, fermentation, breeding, ginning, substitutes /
 
-processing20(processing_subst20)
+processing20(processing_subst20) Processing activities except substitution
 / milling, refining, extracting, distilling, fermentation, breeding, ginning /
 
-kcereals20(kpr)
+kcereals20(kpr) cereals used for processing
 /tece,maiz,trce,rice_pro/
 
-no_milling_ginning20(processing_subst20)
+no_milling_ginning20(processing_subst20) processing activities without milling and ginning
 /refining, extracting, distilling, fermentation, breeding, substitutes /
 
 

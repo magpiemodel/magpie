@@ -9,7 +9,7 @@ sets
 	scen13 tc cost scenario
   	  /low, medium, high/
 
-	scen13_to_dev(scen13,dev)
+	scen13_to_dev(scen13,dev) mapping between tc cost scenarios and development stages
       /	high	. (lic)
        	medium	. (mic)
        	low		. (hic) /
