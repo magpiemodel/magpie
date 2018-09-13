@@ -20,8 +20,8 @@ equations
          q59_som_pool_cropland(j)           Actual C pool in croplands (mio. tC)
          q59_som_pool_noncropland(j)        Actual C pool in non-croplands (mio. tC)
          q59_nr_som(j)                      Soil organic matter loss (Tg N per yr)
-         q59_crop_diff(j)                   Cropland difference
-         q59_crop_diff_constraint(i)        Cropland difference constraint 
+         q59_crop_diff(j)                   Cropland difference (mio. ha)
+         q59_crop_diff_constraint(i)        Cropland difference constraint (mio. USD05MER per yr)
 ;
 
 positive variables
@@ -34,7 +34,7 @@ positive variables
 variables
          v59_som_transfer_to_cropland(j)     Transfer of SOM from other land to cropland (mio. tC)
          vm_nr_som(j)                        Release of soil organic matter (Tg N per yr)
-         vm_costs_overrate_cropdiff(i)	     Punishment costs for overrated cropland difference (mio. USD05 per yr)  
+         vm_costs_overrate_cropdiff(i)	     Punishment costs for overrated cropland difference (mio. USD05MER per yr)  
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

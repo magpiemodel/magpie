@@ -31,7 +31,7 @@ i59_cratio(j,kcr) = sum((cell(i,j),tillage59,inputs59,climate59),
                  * i59_input_share(i,inputs59)
                  * f59_cratio_inputs(climate59,inputs59));
 
-				 
+*' @stop				 
 				 
 p59_som_pool(j,pools59) = f59_som_initialisation_pools("y1995",j, pools59);
 

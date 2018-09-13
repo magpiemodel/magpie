@@ -18,7 +18,6 @@ tillage59 Tillage categories of IPCC
 inputs59 Input management categories of IPCC
 /low_input,medium_input,high_input_nomanure,high_input_manure/
 
-
 climate59 Climate classes of IPCC 2006
 /temperate_dry,temperate_moist,tropical_dry,tropical_moist/
 
