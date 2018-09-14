@@ -205,6 +205,8 @@ Please contact magpie@pik-potsdam.de
 See file CITATION.cff or the documentation of the model for information how
 to cite the model.
 
+[![DOI](https://zenodo.org/badge/135430060.svg)](https://zenodo.org/badge/latestdoi/135430060)
+
 ## AUTHORS
 See list of authors in CITATION.cff
 

@@ -32,3 +32,4 @@ magpie_calib.*
 /225*/
 *.out
 /scripts/npi_ndc/npi_ndc_overview.txt
+Rplots.pdf
