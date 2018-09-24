@@ -26,13 +26,13 @@
 *' [@dietrich_measuring_2012]](tau_regional.png){ width=60% }
 *'
 *' Investments into technological change (TC) trigger land use intensification
-*' ($\tau$) which triggers in turn yields increases. How much intensification an
-*' investment can trigger depends on the investment-yield ratio which depends
-*' again on the current agricultural land use intensity. The higher the current
-*' intensity level, the more expensive the additional intensification will
-*' become. The interaction between land use intensity and production costs per
-*' area as shown in the schematic is not covered by this module and can be found
-*' instead in [38_factor_costs].
+*' ($\tau$) which triggers in turn yields increases. How much intensification
+*' can be triggered by an investment, depends on the investment-yield ratio,
+*' which in turn depends on the current agricultural land use intensity. The
+*' higher the current intensity level, the more expensive the additional
+*' intensification will become. The interaction between land use intensity and
+*' production costs per area as shown in the schematic is not covered by this
+*' module and can be found instead in [38_factor_costs].
 
 *' @limitations This module significantly reduces the overall computational
 *' performance of the model since these endogenous calculations are highly

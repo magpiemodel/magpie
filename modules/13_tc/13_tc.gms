@@ -6,14 +6,14 @@
 
 *' @title Technological change
 *'
-*' @description The technological change module describes the relation between
-*' agricultural land use intensity represented by the $\tau$ factor and the
-*' costs which have to be paid for further intensification (technological change
-*' costs). Besides cropland expansion ([39_landconversion]) and trade ([21_trade])
-*' it describes the third major option of the model to increase regional supply.
-*' In order to calculate this relation, the module needs to receive information
-*' about the assumed interest rate and assumed investment horizon currently
-*' provided by module [12_interest_rate].
+*' @description The technological change (TC) module describes the relation
+*' between agricultural land use intensity represented by the $\tau$ factor and
+*' the costs which have to be paid for further intensification (technological
+*' change costs). Besides cropland expansion ([39_landconversion]) and trade
+*' ([21_trade]), it describes the third major option of the model to increase
+*' regional supply. In order to calculate this relation, the module needs to
+*' receive information about the assumed interest rate and assumed investment
+*' horizon currently provided by module [12_interest_rate].
 *'
 *' Calculated $\tau$ factors are then used for yields calculation by [14_yields]
 *' and by [38_factor_costs] for the calculation of factor costs.
