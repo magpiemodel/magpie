@@ -141,14 +141,14 @@ update_sets <- function(cpr,map) {
   content <- c(content,'   iso list of iso countries /')
   content <- c(content, .tmp(map$CountryCode, suffix1=",", suffix2=" /"))
 
-  content <- c(content,  '', paste('   j number of LPJ cells /\n       ',paste(cells,collapse=',\n       '),'/',sep=''),'',
-               '   cell(i,j) number of LPJ cells per region i','      /')
+  content <- c(content,  '', paste('   j spatial clusters /\n       ',paste(cells,collapse=',\n       '),'/',sep=''),'',
+               '   cell(i,j) mapping between regions i and clusters j','      /')
   for(i in 1:length(cpr)) {
     content <- c(content,paste('       ',names(cpr)[i],' . ',cells[i],sep=''))
   }
   content <- c(content,'      /','')
 
-  content <- c(content,'   i_to_iso(i,iso) mapping regions to iso countries','      /')
+  content <- c(content,'   i_to_iso(i,iso) mapping between regions and iso countries','      /')
   map$RegionCode <- as.factor(map$RegionCode)
   for(i in levels(map$RegionCode)) {
     content <- c(content, .tmp(map$CountryCode[map$RegionCode==i], prefix=paste0(i," . ("), suffix1=")", suffix2=")"))
