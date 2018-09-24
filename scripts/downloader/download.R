@@ -134,11 +134,11 @@ update_sets <- function(cpr,map) {
     '*THERE YOU CAN ALSO FIND ADDITIONAL INFORMATION')
   content <- c(modification_warning,'','sets','')
 
-  content <- c(content,paste('   i all economic regions /',paste(names(cpr),collapse=','),'/',sep=''),'')
+  content <- c(content,paste('   i world regions /',paste(names(cpr),collapse=','),'/',sep=''),'')
 
   # write iso set with nice formatting (10 countries per line)
   tmp <- lapply(split(map$CountryCode, ceiling(seq_along(map$CountryCode)/10)),paste,collapse=",")
-  content <- c(content,'   iso list of iso countries /')
+  content <- c(content,'   iso countries /')
   content <- c(content, .tmp(map$CountryCode, suffix1=",", suffix2=" /"))
 
   content <- c(content,  '', paste('   j spatial clusters /\n       ',paste(cells,collapse=',\n       '),'/',sep=''),'',
@@ -148,7 +148,7 @@ update_sets <- function(cpr,map) {
   }
   content <- c(content,'      /','')
 
-  content <- c(content,'   i_to_iso(i,iso) mapping between regions and iso countries','      /')
+  content <- c(content,'   i_to_iso(i,iso) mapping between regions and countries','      /')
   map$RegionCode <- as.factor(map$RegionCode)
   for(i in levels(map$RegionCode)) {
     content <- c(content, .tmp(map$CountryCode[map$RegionCode==i], prefix=paste0(i," . ("), suffix1=")", suffix2=")"))

@@ -53,30 +53,30 @@ $title magpie
 
 
 *##################### R SECTION START (VERSION INFO) ##########################
-*
+* 
 * Used data set: magpie4.0_default_sep18.tgz
 * md5sum: 98e158205482936e487aeb616dea5403
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
-*
+* 
 * Low resolution: c200
 * High resolution: 0.5
-*
+* 
 * Total number of cells: 200
-*
+* 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    28   24   10    7    3   53   17    8   22    7   11   10
-*
+* 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-*
+* 
 * Regions data revision: 4.14
-*
+* 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
 * * Additional input folder: /p/projects/landuse/data/input/other/rev34
 * * Revision: 34
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-*
+* 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
@@ -86,11 +86,11 @@ $title magpie
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
-*
-*
-*
-* Last modification (input data): Thu Sep 13 14:51:39 2018
-*
+* 
+* 
+* 
+* Last modification (input data): Mon Sep 24 11:38:01 2018
+* 
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
