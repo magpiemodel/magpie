@@ -5,12 +5,12 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @code 
-*' Forestry carbon stocks are fixed to product of plantations in 1995 
-*' and forestry carbon density of the current time step (`pc32_carbon_density`).
+*' Forestry carbon stocks are calculated by multiplying plantations in 1995 
+*' with the forestry carbon density of the current time step (`pc32_carbon_density`).
 pc32_carbon_density(j,c_pools) = fm_carbon_density(t,j,"forestry",c_pools);
 vm_carbon_stock.fx(j,"forestry",c_pools) = vm_land.l(j,"forestry")*pc32_carbon_density(j,c_pools);
 
-*' Set wood demand to zero because forestry is not modeled in this realization.
+*' Wood demand is also set to zero because forestry is not modeled in this realization.
 vm_supply.fx(i2,kforestry) = 0;
 *' @stop
 

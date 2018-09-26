@@ -11,10 +11,10 @@ sets
   land32 forestry land pools
     / new, new_ndc, prot, grow, old/
 
-  pol32 afforestation policy type
+  pol32 afforestation policy
     / none, npi, ndc/
 
-   ac_land32(ac,land32) mapping age class - land type
+   ac_land32(ac,land32) mapping between age class and forestry land type
 
    kforestry(kall) forestry products
    / wood, woodfuel /
