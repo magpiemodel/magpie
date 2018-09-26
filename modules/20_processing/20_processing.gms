@@ -7,8 +7,8 @@
 *' @title Processing
 
 *' @description The processing module calculates the quantity of secondary products that
-*' are generated through conversion of raw products (especially of primary plant agricultural commodities ) in order
-*' to meet the demand for those secondary products.
+*' are generated through conversion of raw products (especially of primary plant agricultural commodities)
+*' in order to meet the demand for those secondary products.
 
 *' @authors Benjamin Leon Bodirsky
 

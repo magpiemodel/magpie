@@ -6,12 +6,11 @@
 
 *' @title Drivers
 *'
-*' @description The Drivers module provides the input drivers
-*' that are used by several other modules in the model. This module 
-*' mainly aggregates inputs related to population and GDP, but is not limited 
-*' to these. When an input is only required in one module or realization, 
-*' the input driver is provided directly within the module that demands it, 
-*' rather than within the [09_drivers] module. 
+*' @description The Drivers module provides data on drivers
+*' that are used by several other modules. It mainly aggregates inputs related 
+*' to population and GDP. If an input is required in one module or realization only, 
+*' the input driver is provided directly by the module that demands it, 
+*' rather than by the [09_drivers] module. 
 *'
 *' @authors Benjamin Leon Bodirsky
 
