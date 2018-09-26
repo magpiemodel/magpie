@@ -4,10 +4,10 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description This realization describes the conversion process.
+*' @description This realization describes the conversion process of primary to secondary agricultural products.
 *' Secondary products are produced through some sort of mechanical or chemical processing
-*' of primary crops. It is important to note here that by secondary products
-*' we do refer only those for which information is available in Commodity Balance sheet of @FAOSTAT.
+*' of primary crops. By secondary products we only refer to those for which information is 
+*' available in Commodity Balance sheet of @FAOSTAT.
 *' Among others, press cakes from oil production, molasses and bagasses
 *' from sugar refinement and brans from cereal milling are important ones.
 *' The use of these secondary products is given in the [16_demand] module.

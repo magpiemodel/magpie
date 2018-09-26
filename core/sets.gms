@@ -284,7 +284,7 @@ secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, 
    /vegc,litc,soilc/
 
 ***TECHNICAL STUFF***
-   type type of output / level, marginal, upper, lower /
+   type GAMS variable attribute used for the output / level, marginal, upper, lower /
 
 ***RELATIONSHIPS BETWEEN DIFFERENT SETS***
 
