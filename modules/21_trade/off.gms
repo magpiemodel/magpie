@@ -4,7 +4,8 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description Agricultural trade is switched off, i.e. reagions are fully dependent on domestic production.
+*' @description In this realization, there is no agricultural trade, i.e. regions
+*' are fully self-sufficient and dependent on domestic production.
 
 *' @limitations This realization does not account for current trends in agricultural trade.
 

@@ -10,7 +10,7 @@
 
 *' The direct costs of afforestation `vm_cost_fore` include maintenance and monitoring 
 *' costs for newly established plantations [@sathaye_ghg_2005]. Note that "old" refers 
-*' to the static forestry sector plantations.
+*' to forestry plantations for wood production in 1995. 
 *' In addition, afforestation may cause costs in other parts of the model such 
 *' as costs for technological change [13_tc] or land expansion [39_landconversion].
 
@@ -20,7 +20,7 @@ vm_cost_fore(i2) =e= sum((cell(i2,j2),land32,fcosts32)$(not sameas(land32,"old")
 
 *****forestry emissions seen in maccs module************************************
 *' The interface `vm_cdr_aff` provides the projected CDR of an afforestation 
-*' activity for an planning horizon of 30 years `s32_planing_horizon` to the [56_ghg_policy] module. 
+*' activity for a planning horizon of 30 years `s32_planing_horizon` to the [56_ghg_policy] module. 
 
 q32_cdr_aff(j2,co2_forestry) ..
 vm_cdr_aff(j2,co2_forestry) =e=
@@ -58,7 +58,7 @@ sum(ct, pm_carbon_density_ac(ct,j2,ac-1,c_pools))));
                          sum(land32, v32_land(j2,land32)*
                          sum(ct, p32_carbon_density(ct,j2,land32,c_pools)));
 
-*' Calculate forestry land expansion and reduction
+*' Forestry land expansion and reduction is calculated as follows:
 
  q32_land_diff .. vm_landdiff_forestry =e= sum((j2,land32),
  					  v32_land_expansion(j2,land32)
