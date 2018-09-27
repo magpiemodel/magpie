@@ -30,17 +30,17 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov21_excess_dem(t,k_trade,type)       global excess demand (mio. tDM)
- ov21_excess_prod(t,i,k_trade,type)    regional excess production (mio. tDM)
- ov_cost_trade(t,i,type)               regional  trade costs (mio. USD05MER)
- ov21_cost_trade_reg(t,i,k_trade,type) regional trade costs for each tradable commodity (mio. USD05MER)
- oq21_trade_glo(t,k_trade,type)        Global production > demand constraint (mio. tDM)
- oq21_notrade(t,i,k_notrade,type)      fix of not traded commodities (mio. tDM)
- oq21_trade_reg(t,i,k_trade,type)      regional trade balances i.e. minimum self-suff ratio (1)
- oq21_trade_reg_up(t,i,k_trade,type)   regional trade balance maximum self-suff ratio (1)
- oq21_excess_dem(t,k_trade,type)       global excess demand (mio. tDM)
- oq21_excess_supply(t,i,k_trade,type)  regional excess production (mio. tDM)
- oq21_cost_trade(t,i,type)             regional  trade costs (mio. USD05MER)
- oq21_cost_trade_reg(t,i,k_trade,type) regional trade costs for each tradable commodity (mio. USD05MER)
+ ov21_excess_dem(t,k_trade,type)       Global excess demand (mio. tDM)
+ ov21_excess_prod(t,i,k_trade,type)    Regional excess production (mio. tDM)
+ ov_cost_trade(t,i,type)               Regional  trade costs (mio. USD05MER)
+ ov21_cost_trade_reg(t,i,k_trade,type) Regional trade costs for each tradable commodity (mio. USD05MER)
+ oq21_trade_glo(t,k_trade,type)        Global production constraint (mio. tDM)
+ oq21_notrade(t,i,k_notrade,type)      Regional production constraint of non-tradable commodities (mio. tDM)
+ oq21_trade_reg(t,i,k_trade,type)      Regional trade balances i.e. minimum self-sufficiency ratio (1)
+ oq21_trade_reg_up(t,i,k_trade,type)   Regional trade balances i.e. maximum self-sufficiency ratio (1)
+ oq21_excess_dem(t,k_trade,type)       Global excess demand (mio. tDM)
+ oq21_excess_supply(t,i,k_trade,type)  Regional excess production (mio. tDM)
+ oq21_cost_trade(t,i,type)             Regional  trade costs (mio. USD05MER)
+ oq21_cost_trade_reg(t,i,k_trade,type) Regional trade costs for each tradable commodity (mio. USD05MER)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
