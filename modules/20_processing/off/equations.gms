@@ -6,7 +6,7 @@
 
 *' @equations
 *' The equation of this realization is straight forward.
-*' Costs of processing are product of quantity of secondary products
+*' Costs of processing are calculated by the product of the quantity of secondary products and the unit processing costs
 *' and unit processing costs (which arbitrarily is set to be 5000 USD for all processing types and secondary products).
 
 q20_processing_costs(i2) ..
