@@ -5,7 +5,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-        scen12 real Interest rate scenarios
+        scen12 Interest rate scenarios
                   / low, medium, high /
 
         scen12_to_dev(scen12,dev) Mapping between interest scneario and economic development status

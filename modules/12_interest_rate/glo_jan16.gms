@@ -5,7 +5,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description In the glo_jan16 realization, interest rates are identical in all regions.
-*' The initial global interest rate is 7% (in 1995) for all scenarios defined in scen12.
+*' The initial global interest rate is 7% (in 1995) for all scenarios defined in `scen12`.
 *' It undergoes a transition towards 4%, 7% and 10% until 2030 for the low-, medium-
 *' and high- interest rate scenarios, respectively.
 
