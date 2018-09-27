@@ -277,7 +277,7 @@ secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, 
 secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, urban_soilc,
      other_vegc, other_litc, other_soilc /
 
-   co2_forestry(emis_source_cell) forestry land CO2 emission sources
+   co2_forestry(emis_source_cell) Sources of forestry land CO2 emissions
    /forestry_vegc, forestry_litc, forestry_soilc/
 
    c_pools carbon pools
