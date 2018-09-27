@@ -5,27 +5,27 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- i21_trade_bal_reduction(t_all,k_trade)         trade balance reduction (1)
- i21_trade_margin(i,k_trade)                    trade margins (USD05MER per tDM)
- i21_trade_tariff(i,k_trade)                    trade tariffs (USD05MER per tDM)
+ i21_trade_bal_reduction(t_all,k_trade)         Trade balance reduction (1)
+ i21_trade_margin(i,k_trade)                    Trade margins (USD05MER per tDM)
+ i21_trade_tariff(i,k_trade)                    Trade tariffs (USD05MER per tDM)
 ;
 
 positive variables
- v21_excess_dem(k_trade)                 global excess demand (mio. tDM)
- v21_excess_prod(i,k_trade)              regional excess production (mio. tDM)
- vm_cost_trade(i)                        regional  trade costs (mio. USD05MER)
- v21_cost_trade_reg(i,k_trade)           regional trade costs for each tradable commodity (mio. USD05MER)
+ v21_excess_dem(k_trade)                 Global excess demand (mio. tDM)
+ v21_excess_prod(i,k_trade)              Regional excess production (mio. tDM)
+ vm_cost_trade(i)                        Regional  trade costs (mio. USD05MER)
+ v21_cost_trade_reg(i,k_trade)           Regional trade costs for each tradable commodity (mio. USD05MER)
 ;
 
 equations
- q21_trade_glo(k_trade)                  Global production > demand constraint (mio. tDM)
- q21_notrade(i,k_notrade)                fix of not traded commodities (mio. tDM)
- q21_trade_reg(i,k_trade)                regional trade balances i.e. minimum self-suff ratio (1)
- q21_trade_reg_up(i,k_trade)             regional trade balance maximum self-suff ratio (1)
- q21_excess_dem(k_trade)                 global excess demand (mio. tDM)
- q21_excess_supply(i,k_trade)            regional excess production (mio. tDM)
- q21_cost_trade(i)                       regional  trade costs (mio. USD05MER)
- q21_cost_trade_reg(i,k_trade)           regional trade costs for each tradable commodity (mio. USD05MER)
+ q21_trade_glo(k_trade)                  Global production constraint (mio. tDM)
+ q21_notrade(i,k_notrade)                Regional production constraint of non-tradable commodities (mio. tDM)
+ q21_trade_reg(i,k_trade)                Regional trade balances i.e. minimum self-sufficiency ratio (1)
+ q21_trade_reg_up(i,k_trade)             Regional trade balances i.e. maximum self-sufficiency ratio (1)
+ q21_excess_dem(k_trade)                 Global excess demand (mio. tDM)
+ q21_excess_supply(i,k_trade)            Regional excess production (mio. tDM)
+ q21_cost_trade(i)                       Regional  trade costs (mio. USD05MER)
+ q21_cost_trade_reg(i,k_trade)           Regional trade costs for each tradable commodity (mio. USD05MER)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

@@ -4,7 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description  Agricultural trade is fully liberalized in all timesteps. 
+*' @description  In this realization, agricultural trade is fully liberalized in all timesteps. 
 
 *' @limitations This realization does not account for current trends in agricultural trade.
 

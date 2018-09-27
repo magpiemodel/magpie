@@ -6,11 +6,11 @@
 
 
 positive variables
- vm_cost_trade(i)                            regional  trade costs (mio. USD05MER)
+ vm_cost_trade(i)                            Regional  trade costs (mio. USD05MER)
 ;
 
 equations
- q21_notrade(i,k)        fix of not traded commodities (mio. tDM)
+ q21_notrade(i,k)        Regional production constraint of non-tradable commodities (mio. tDM)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
