@@ -26,12 +26,11 @@
                  (vm_prod_reg(i2,kcr) + vm_res_biomass_ag(i2,kcr,"dm"))*f18_cgf("bg_to_ag",kcr)
                  * f18_attributes_residue_bg(dm_nr,kcr);
 
-*' In contrast to AG biomass, we define the AG production
-*' `vm_res_biomass_ag(i,kcr,attributes)`as the part of residues
-*' which is removed from the field. The difference between biomass
-*' and production is either burned on field or remains on the fields
-*' (either incorporated in soils or not) and decays.
-*' The field balance equations assures that the production of AG residues
+*' In contrast to AG biomass, AG production `vm_res_biomass_ag(i,kcr,attributes)`
+*' is defined as the part of residues which is removed from the field. The
+*' difference between biomass and production is either burned on field or
+*' remains on the fields (either incorporated in soils or not) and decays.
+*' The field balance equations ensures that the production of AG residues
 *' `vm_res_biomass_ag(i,kcr,attributes)` is properly assigned to different uses:
 *' removal, on-field burning and recycling of AG residues.
 
@@ -42,12 +41,12 @@
                   + v18_res_ag_burn(i2,kcr,attributes)
                   + v18_res_ag_recycling(i2,kcr,attributes);
 
-*' The amount of residues burned on fields in a region `v18_res_ag_burn` are
+*' The amount of residues burned on fields in a region `v18_res_ag_burn` is
 *' determined by the share (ic18_res_use_min_shr) of AG residue biomass.
 *' Based on @smil_nitrogen_1999, residue burning is fixed to 15% of total AG
 *' crop residue dry matter in developed and 25% in developing regions for each
-*' crop. For the future these rates are scenario dependent, and either kept
-*' constant or reduced to 10% and 0% in 2050.
+*' crop. For future time steps, these rates are scenario dependent, and either
+*' kept constant or reduced to 10% and 0% in 2050.
 
  q18_res_field_burn(i2,kcr,attributes) ..
                   v18_res_ag_burn(i2,kcr,attributes)
@@ -62,7 +61,7 @@
 *' removed residues are assumed to have homogeneous properties
 *' (to reduce the number of commodities in MAgPIE) within three crop residue
 *' groups (cereal straw, fibrous residues that cannot be digested
-*' by monogastrics and non-fibrous residues that can be digested.
+*' by monogastrics, and non-fibrous residues that can be digested).
 *' The following constraint, in combination with the field balance equation,
 *' guarantees that mass balances are not violated while a homogeneous
 *' good is extracted from heterogeneous goods.
@@ -73,7 +72,7 @@
                   vm_prod_reg(i2,kres) * fm_attributes(attributes,kres);
 
 *' Residues recycled to croplands in nutrients `vm_res_recycling(i2,"nr")` are
-*' calcualted based on ammount of AG residues left on field for recycling, the
+*' calcualted based on the amount of AG residues left on field for recycling, the
 *' nutrients coming from burned residues, and on biomass that is left in
 *' BG residues. They are calculated to be transmitted to the nitrogen budget
 *' module [50_nr_soil_budget].
@@ -88,9 +87,9 @@
 
 *' Similar to the recycled nutrients, the potash recycling is determined by the
 *' amount of AG residues with the potash content and the amounts of potash from
-*' burning residues. As P and K are not volatile and little water soluble,
-*' only removed aboveground crop residues habe to be considered, while
-*' nutrients from burned AG as well as BG stay on the field.
+*' burning residues. As P and K are not volatile and hardly water soluble, only
+*' removed aboveground crop residues have to be considered, while nutrients from
+*' burned AG as well as BG stay on the field.
 
  q18_res_recycling_pk(i2,pk18) ..
                   vm_res_recycling(i2,pk18)
@@ -102,8 +101,8 @@
 
 *' Costs of residues production are determined as factor costs per ton
 *' assuming 15 USD per ton, using the lower range from
-*' [this srouce](hwww1.agric.gov.ab.ca/$Department/deptdocs.nsf/All/faq7514),
-*' 10USD pro bale baling costs per large round bale plus 2USD pro bale stocking and hauling,
+*' [this source](hwww1.agric.gov.ab.ca/$Department/deptdocs.nsf/All/faq7514),
+*' 10USD baling costs per large round bale plus 2USD pro bale stocking and hauling,
 *' 1 large round bale is approximately 500 kg, resulting in 24USD per ton,
 *' for developing prices see [here](citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.557.5823&rep=rep1&type=pdf).
 *' Tha calcuated factor costs per ton are therefore 24 for `res_cereals`, `res_fibrous`
@@ -115,6 +114,6 @@
                   vm_prod_reg(i2,kres)*f18_fac_req_kres(kres);
 
 *' Trade of AG residues is not considered, so that all produced AG residues have
-*' to be assigned to uses within the world region (see [21_trade]).
+*' to be assigned to uses within the respective world region.
 
 *** EOF constraints.gms ***

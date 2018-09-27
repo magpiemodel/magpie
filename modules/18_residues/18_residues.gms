@@ -11,7 +11,9 @@
 *' recycled to soils or used for other purposes (construction, fuel etc).
 *'
 *' The module also calculates the costs of crop residue harvest when it is used
-*' for feed or material usage.                                                     
+*' for feed or material purposes.
+
+*' @authors Benjamin Leon Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%residues%" == "flexreg_apr16" $include "./modules/18_residues/flexreg_apr16.gms"

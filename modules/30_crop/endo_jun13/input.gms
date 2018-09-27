@@ -6,14 +6,14 @@
 
 ********* CROP-ROTATIONAL CONSTRAINT *******************************************
 
-parameter f30_rotation_max_shr(crp30) Max allowed shares for each crop demand type (1)
+parameter f30_rotation_max_shr(crp30) Maximum allowed area shares for each crop type (1)
 /
 $ondelim
 $include "./modules/30_crop/endo_jun13/input/f30_rotation_max.csv"
 $offdelim
 /;
 
-parameter f30_rotation_min_shr(crp30) Min allowed shares for each crop demand type (1)
+parameter f30_rotation_min_shr(crp30) Minimum allowed area shares for each crop type (1)
 /
 $ondelim
 $include "./modules/30_crop/endo_jun13/input/f30_rotation_min.csv"
@@ -23,7 +23,7 @@ $offdelim
 
 ********* SUITABILITY CONSTRAINT *******************************************
 
-table f30_land_si(j,si) suitable and non-suitable land (mio. ha)
+table f30_land_si(j,si) Land area suitable and non-suitable as cropland (mio. ha)
 $ondelim
 $include "./modules/30_crop/endo_jun13/input/avl_land_si.cs3"
 $offdelim
