@@ -4,9 +4,8 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In the affore_vegc_dec16 realisation, the forestry sector is static as 
-*' described in the static realisation. But on top of the existing forestry land in 1995, 
-*' forestry land can increase in size due to afforestation. Afforestation can be modelled
+*' @description The main feature of the affore_vegc_dec16 realization is afforestation 
+*' for CDR. Afforestation can be modelled
 *' exogenously (prescribed by NPI/NDC policies) and/or endogenously 
 *' (incentivized by a reward for CDR). National policies implemented (NPI) and 
 *' nationally determined contributions to the Paris agreement (NDC) for afforestation 
@@ -16,11 +15,13 @@
 *' with the carbon price and annuity factor in the [56_ghg_policy] module.
 *' Technically, the reward for CDR from afforestation is a negative cash flow 
 *' lowering the costs in the objective function of the model. 
-*' In this realisation, afforestation is modeled as managed/assisted regrowth 
+*' In this realization, afforestation is modeled as managed/assisted regrowth 
 *' of natural vegetation (@humpenoder_investigating_2014). The regrowth of natural
 *' vegetation follows S-shaped growth curves. 
+*' Note that existing forestry plantations in 1995 dedicated to wood production are assumed constant throughout time. 
 
-*' @limitations static forestry sector
+*' @limitations Forestry activities such as establishment or 
+*' harvest of plantations for wood production are not modeled. 
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/32_forestry/affore_vegc_dec16/sets.gms"
