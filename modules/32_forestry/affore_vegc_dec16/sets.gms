@@ -5,18 +5,18 @@
 *** |  Contact: magpie@pik-potsdam.de
 sets
 ***FORESTRY COST TYPES***
-   fcosts32 forestry factor cost types
+   fcosts32 Forestry factor cost types
            / recur,mon /
 
-  land32 forestry land pools
+  land32 Forestry land pools
     / new, new_ndc, prot, grow, old/
 
-  pol32 afforestation policy
+  pol32 Afforestation policy
     / none, npi, ndc/
 
-   ac_land32(ac,land32) mapping between age class and forestry land type
+   ac_land32(ac,land32) Mapping between age class and forestry land type
 
-   kforestry(kall) forestry products
+   kforestry(kall) Forestry products
    / wood, woodfuel /
 ;
 *** EOF sets.gms ***

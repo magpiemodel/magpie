@@ -15,12 +15,12 @@ v32_land.fx(j,"new") = 0;
 v32_land.fx(j,"prot") = 0;
 v32_land.fx(j,"grow") = 0;
 v32_land.fx(j,"old") = pcm_land(j,"forestry");
+*' @stop
 
-*' Aggregation of forestry land pools (`land32`).
+* Aggregation of forestry land pools (`land32`).
 vm_land.fx(j,"forestry") = sum(land32, v32_land.l(j,land32));
 
-*' The change of forestry land is also set to zero. 
+* The change of forestry land is also set to zero. 
 vm_landdiff_forestry.fx = 0;
-*' @stop
 
 *** EOF preloop.gms ***
