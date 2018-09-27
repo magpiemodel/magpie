@@ -4,12 +4,12 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In the static realisation, forestry land is held fixed at the
-*' observed 1995 level. This represents a static forestry sector, i.e. forestry 
-*' activities such as establishment or harvest of plantations are
-*' are not modeled.
+*' @description The static realisation is very simple and does not include any equation 
+*' because forestry land is assumed constant at the observed 1995 level throughout time. 
 
-*' @limitations static forestry sector, no afforestation for CDR
+*' @limitations Forestry activities such as establishment or 
+*' harvest of plantations for wood production are not modeled. 
+*' Also afforestation for CDR is not included.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/32_forestry/static_sep16/sets.gms"
