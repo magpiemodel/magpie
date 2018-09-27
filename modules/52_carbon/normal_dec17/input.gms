@@ -16,7 +16,7 @@ $offdelim
 $if "%c52_carbon_scenario%" == "nocc" fm_carbon_density(t_all,j,land,c_pools) = fm_carbon_density("y1995",j,land,c_pools);
 m_fillmissingyears(fm_carbon_density,"j,land,c_pools");
 
-table f52_growth_par(clcl,chap_par) parameters for chapman-richards equation (1)
+table f52_growth_par(clcl,chap_par) Parameters for chapman-richards equation (1)
 $ondelim
 $include "./modules/52_carbon/input/f52_growth_par.csv"
 $offdelim
