@@ -37,19 +37,17 @@ ac_land32(ac,"prot") = yes$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planing_horizon/5
 ac_land32(ac,"grow") = yes$((ord(ac)-1) > s32_planing_horizon/5 AND ord(ac) < card(ac));
 ac_land32(ac,"old")  = yes$(ord(ac) = card(ac));
 
-*' @code
-*' We model regrowth of natural vegetation (natural succession) by shifting age-classes according to time step length.
+* Regrowth of natural vegetation (natural succession) is modelled by shifting age-classes according to time step length.
 s32_shift = m_yeardiff(t)/5;
 if((ord(t) = 1),
     p32_land(t,j,ac,"before") = 0$(not sameas(ac,"acx")) + pcm_land(j,"forestry")$(sameas(ac,"acx"));
 else
-*example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s32_shift = 1)
+* example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s32_shift = 1)
     p32_land(t,j,ac,"before")$(ord(ac) > s32_shift) = p32_land(t-1,j,ac-s32_shift,"after");
-*account for cases at the end of the age class set (s32_shift > 1) which are not shifted by the above calculation
+* account for cases at the end of the age class set (s32_shift > 1) which are not shifted by the above calculation
     p32_land(t,j,"acx","before") = p32_land(t,j,"acx","before")
                   + sum(ac$(ord(ac) > card(ac)-s32_shift), p32_land(t-1,j,ac,"after"));
 );
-*' @stop
 
 * Age-classes exist only between the optimization time steps.
 * For the optimization, we aggregate age-classes to 5 groups defined in `land32`.

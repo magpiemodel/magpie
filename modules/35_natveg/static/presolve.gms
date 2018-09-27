@@ -5,8 +5,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @code
-*' Carbon stock calculations for primary forest, secondary forest or other natural land.
-*' We calculate carbon stocks as product of area and carbon density. 
+*' Carbon stocks for primary forest, secondary forest or other natural land are calculated 
+*' as the product of respective area and carbon density.
 *' 
 vm_carbon_stock.fx(j,"primforest",c_pools) =
           vm_land.l(j,"primforest")*fm_carbon_density(t,j,"primforest",c_pools);
