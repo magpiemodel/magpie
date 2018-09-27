@@ -30,7 +30,7 @@ equations
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_landdiff(t,type)               Aggregated difference in land between current and previous time step (mio. ha)
- ov_land(t,j,land,type)            Areas of the different land types (mio. ha)
+ ov_land(t,j,land,type)            Land area of the different land types (mio. ha)
  ov_landexpansion(t,j,land,type)   Land expansion (mio. ha)
  ov10_landreduction(t,j,land,type) Land reduction (mio. ha)
  oq10_land(t,j,type)               Land conversion constraint (mio. ha)

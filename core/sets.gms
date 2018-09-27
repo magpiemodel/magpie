@@ -144,7 +144,7 @@ sets time_annual Annual extended time steps
         /
 ;
 
-set t(t_all) Used time periods
+set t(t_all) Simulated time periods
 $If "%c_timesteps%"== "less_TS" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100,y2110,y2130,y2150/;
 $If "%c_timesteps%"== "coup2100" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100/;
 $If "%c_timesteps%"== "test_TS" /y1995,y2000,y2005,y2010,y2020,y2030,y2040,y2050,y2070,y2090,y2110,y2130,y2150/;
@@ -198,8 +198,8 @@ sets
 ***WATER SOURCES***
    wat_src Water sources / surface, ground, technical, ren_ground /
 
-***WATER DEAMND sectors***
-   wat_dem Water demands / agriculture, industry, electricity, domestic, ecosystem /
+***WATER DEMAND sectors***
+   wat_dem Water demand sectors / agriculture, industry, electricity, domestic, ecosystem /
 
 ***LAND POOLS***
    land Land pools
