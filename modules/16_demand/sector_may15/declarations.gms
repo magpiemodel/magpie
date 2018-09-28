@@ -13,13 +13,13 @@ vm_dem_seed(i,kall)               Demand for seed (mio. tDM per yr)
 ;
 
 equations
-q16_supply_crops(i,kcr)          Supply balance crops (mio. tDM per yr)
-q16_supply_livestock(i,kap)      Supply balance livestock (mio. tDM per yr)
-q16_supply_secondary(i,ksd)      Supply balance secondary products (mio. tDM per yr)
-q16_supply_residues(i,kres)      Supply balance crop residues (mio. tDM per yr)
-q16_supply_pasture(i)            Supply balance pasture (mio. tDM per yr)
-q16_waste_demand(i,kall)         Waste Demand (mio. tDM per yr)
-q16_seed_demand(i,kcr)           Seed Demand (mio. tDM per yr)
+q16_supply_crops(i,kcr)          Supply balance of crops (mio. tDM per yr)
+q16_supply_livestock(i,kap)      Supply balance of livestock (mio. tDM per yr)
+q16_supply_secondary(i,ksd)      Supply balance of secondary products (mio. tDM per yr)
+q16_supply_residues(i,kres)      Supply balance of crop residues (mio. tDM per yr)
+q16_supply_pasture(i)            Supply balance of pasture (mio. tDM per yr)
+q16_waste_demand(i,kall)         Waste generation (mio. tDM per yr)
+q16_seed_demand(i,kcr)           Seed demand (mio. tDM per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

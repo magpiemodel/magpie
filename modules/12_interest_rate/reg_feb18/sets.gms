@@ -5,6 +5,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-	bound12 bound for interest rate
+	bound12 Bound for interest rate
 	/low, high/
 ;

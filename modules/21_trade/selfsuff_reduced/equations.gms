@@ -5,22 +5,22 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @equations
-*' In the comparative advantage pool,the only active constraint is that the global supply is larger or equal to demand.
+*' In the comparative advantage pool, the only active constraint is that the global supply is larger or equal to demand.
 *' This means that production can be freely allocated globally based on comparative advantages.
 
  q21_trade_glo(k_trade)..
   sum(i2 ,vm_prod_reg(i2,k_trade)) =g=
   sum(i2, vm_supply(i2,k_trade)) + sum(ct,f21_trade_balanceflow(ct,k_trade));
 *'
-*' For non-trade goods, the regional supply should be larger or equal to the regional demand.
+*' For non-tradable commodites, the regional supply should be larger or equal to the regional demand.
  q21_notrade(i2,k_notrade)..
   vm_prod_reg(i2,k_notrade) =g= vm_supply(i2,k_notrade);
 
-*' This equation indicate the regional trade constraint for the self-sufficiency pool.
-*' The share of regional demand that has to be fulfilled through the self-sufficiency pool
-*' is determined by a trade balance reduction factor for each commodity `i21_trade_bal_reduction(ct,k_trade)`
+*' The following equation indicates the regional trade constraint for the self-sufficiency pool.
+*' The share of regional demand that has to be fulfilled through the self-sufficiency pool is
+*' determined by a trade balance reduction factor for each commodity  `i21_trade_bal_reduction(ct,k_trade)`
 *' according to the following equations [@schmitz_trading_2012].
-*' If the trade balance reduction equals 1, all demand enters the self-sufficiency pool.
+*' If the trade balance reduction equals 1 (`f21_self_suff(ct,i2,k_trade) = 1`), all demand enters the self-sufficiency pool.
 *' If it equals 0, all demand enters the comparative advantage pool.
 
 
@@ -64,5 +64,6 @@
  (i21_trade_margin(i2,k_trade) + i21_trade_tariff(i2,k_trade))
  *(vm_prod_reg(i2,k_trade)-vm_supply(i2,k_trade));
 
+* Regional trade costs are the costs for each region aggregated over all the tradable commodities.
  q21_cost_trade(i2)..
  vm_cost_trade(i2) =e= sum(k_trade,v21_cost_trade_reg(i2,k_trade));

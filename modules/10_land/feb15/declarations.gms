@@ -6,8 +6,8 @@
 
 
 parameters
- pm_land_start(j,land)         Land initialization areas (mio. ha)
- pcm_land(j,land)              Land areas of previous time step (mio. ha)
+ pm_land_start(j,land)         Land initialization area (mio. ha)
+ pcm_land(j,land)              Land area in previous time step (mio. ha)
 ;
 
 variables
@@ -15,7 +15,7 @@ variables
 ;
 
 positive variables
- vm_land(j,land)                  Areas of the different land types (mio. ha)
+ vm_land(j,land)                  Land area of the different land types (mio. ha)
  vm_landexpansion(j,land)         Land expansion (mio. ha)
  v10_landreduction(j,land)        Land reduction (mio. ha)
 ;
@@ -30,7 +30,7 @@ equations
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_landdiff(t,type)               Aggregated difference in land between current and previous time step (mio. ha)
- ov_land(t,j,land,type)            Areas of the different land types (mio. ha)
+ ov_land(t,j,land,type)            Land area of the different land types (mio. ha)
  ov_landexpansion(t,j,land,type)   Land expansion (mio. ha)
  ov10_landreduction(t,j,land,type) Land reduction (mio. ha)
  oq10_land(t,j,type)               Land conversion constraint (mio. ha)
