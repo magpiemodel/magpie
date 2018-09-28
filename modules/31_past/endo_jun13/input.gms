@@ -6,5 +6,5 @@
 
 
 scalars
-  s31_fac_req_past  Factor requirements (USD04 per tDM)                / 1 /
+  s31_fac_req_past  Factor requirements (USD05MER per tDM)          / 1 /
 ;
