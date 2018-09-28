@@ -65,10 +65,10 @@ write.ghgtax <- function(co2tax_2025=NULL,regions=NULL,out="./modules/56_ghg_pol
   ghgtax <- new.magpie(cells_and_regions = regions,years = time,fill = NA,sets = c("regions","years","gas"),names = c("n2o_n_direct","n2o_n_indirect","ch4","co2_c"))
   
   # unit defined in modules/56_ghg_policy/input/f56_pollutant_prices.cs3: US$ 2004 per Mg N2O-N CH4 and CO2-C
-  ghgtax[,,"co2_c"]          <- as.magpie(co2tax) * 0.967 * 44/12       # US$2005/tCO2 -> US$2004/tC
-  ghgtax[,,"ch4"]            <- as.magpie(co2tax) * 0.967 * 25          # US$2005/tCO2 -> US$2004/tCH4
-  ghgtax[,,"n2o_n_direct"]   <- as.magpie(co2tax) * 0.967 * 44/28 * 300 # US$2005/tCO2 -> US$2004/tN
-  ghgtax[,,"n2o_n_indirect"] <- as.magpie(co2tax) * 0.967 * 44/28 * 300 # US$2005/tCO2 -> US$2004/tN
+  ghgtax[,,"co2_c"]          <- as.magpie(co2tax) * 44/12       # US$2005/tCO2 -> US$2005/tC
+  ghgtax[,,"ch4"]            <- as.magpie(co2tax) * 25          # US$2005/tCO2 -> US$2005/tCH4
+  ghgtax[,,"n2o_n_direct"]   <- as.magpie(co2tax) * 44/28 * 300 # US$2005/tCO2 -> US$2005/tN
+  ghgtax[,,"n2o_n_indirect"] <- as.magpie(co2tax) * 44/28 * 300 # US$2005/tCO2 -> US$2005/tN
   
   # set ghg prices before 2020 to zero
   ghgtax[,getYears(ghgtax)<"y2020",] <- 0
@@ -79,7 +79,7 @@ write.ghgtax <- function(co2tax_2025=NULL,regions=NULL,out="./modules/56_ghg_pol
   
   # create textplot
   cat("CO2 price in 2025:",as.numeric(co2tax_2025),"\n")
-  for_plot <- ghgtax[1,,"co2_c"] / 0.967 * 12/44 # convert unit back just for plotting
+  for_plot <- ghgtax[1,,"co2_c"] * 12/44 # convert unit back just for plotting
   #for_plot <- for_plot[,c("y1995","y2110","y2130","y2150"),,invert=TRUE]
   txtplot(as.numeric(gsub("y","",getYears(for_plot))),for_plot,ylab="US$2005/tCO2")
   

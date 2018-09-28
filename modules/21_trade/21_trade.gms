@@ -7,7 +7,7 @@
 *' @title Agricultural trade
 *'
 *' @description This module represents agricutlural trade among world regions.
-*' It assures that the regional demand is met by domestic production and imports from other regions.
+*' It ensures that the regional demand is met by domestic production and imports from other regions.
 *' The global trade balance dictates that global production must be larger than or equal to global demand.
 *' For non-traded goods, the regional production must be larger than or equal to regional demand.
 *'
