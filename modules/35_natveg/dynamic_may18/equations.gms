@@ -37,12 +37,11 @@
  									sum(ct, p35_min_forest(ct,j2));
 
  q35_min_other(j2) .. vm_land(j2,"other") =g= sum(ct, p35_min_other(ct,j2));
-*' @stop
 
-* Technical calculations needed for reducing differences in land-use patterns between time steps.
-* The gross change in natural vegetation is calculated based on land expansion and
-* land contraction of other land, and land reduction of primary and secondary forest.
-* This information is then passed to the land module ([10_land]):
+*' The following technical calculations are needed for reducing differences in land-use patterns between time steps.
+*' The gross change in natural vegetation is calculated based on land expansion and
+*' land contraction of other land, and land reduction of primary and secondary forest.
+*' This information is then passed to the land module ([10_land]):
 
  q35_landdiff .. vm_landdiff_natveg =e=
  					sum((j2,land35),
