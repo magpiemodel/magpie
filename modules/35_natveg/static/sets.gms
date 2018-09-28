@@ -5,6 +5,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-  land35 natveg land pools
+  land35 Natveg land pools
     / new, grow, old/
 ;

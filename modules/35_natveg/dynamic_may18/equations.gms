@@ -5,18 +5,18 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @equations
-*' Land constraints. Aggregation of detailed land pools (`land35`).
+*' The interface `vm_land` provides aggregated natveg land pools (`land35`) to other modules.
 
  q35_land_secdforest(j2) .. vm_land(j2,"secdforest") =e= sum(land35, v35_secdforest(j2,land35));
 
  q35_land_other(j2) .. vm_land(j2,"other") =e= sum(land35, v35_other(j2,land35));
 
-*' Carbon stock calculations for primary forest, secondary forest or other natural land.
-*' We calculate carbon stocks as product of area and carbon density.
-*' Therefore, carbon stocks decline if the area decreases
+*' Carbon stocks for primary forest, secondary forest or other natural land are calculated 
+*' as the product of respective area and carbon density.
+*' Carbon stocks decline if the area decreases
 *' (e.g. due to cropland expansion into forests).
 *' In case of abandoned agricultural land (increase of other natural land),
-*' we model natural succession by age-class growth, which results in increasing carbon stocks.
+*' natural succession, represented by age-class growth, results in increasing carbon stocks.
 
  q35_carbon_primforest(j2,c_pools) .. vm_carbon_stock(j2,"primforest",c_pools) =e=
            vm_land(j2,"primforest")
@@ -31,28 +31,17 @@
            *sum(ct, p35_carbon_density_other(ct,j2,land35,c_pools)));
 
 
-*' NPI/NDC policies: Avoided deforestation, and CO2 emissions from the conversion of primary
-*' and secondary forest. Afforestation NPI/NDC policies are accounted for in the
-*' [32_forestry] module.
-*' NPI/NDC policies are ramped up until 2030, and are assumed constant thereafter.
-*' If a country has plans for afforestation (according to it's NDC documents),
-*' we assume a stop of deforestation.
-*' CO2 emission reduction targets apply on CO2 emissions from the conversion of
-*' primary forest, secondary forest and other natural land.
-
+*' NPI/NDC land protection policies are implemented as minium forest land and other land stock. 
 
  q35_min_forest(j2) .. vm_land(j2,"primforest") + vm_land(j2,"secdforest") =g=
  									sum(ct, p35_min_forest(ct,j2));
 
  q35_min_other(j2) .. vm_land(j2,"other") =g= sum(ct, p35_min_other(ct,j2));
 
-
-*' @stop
-*' Technical calculations needed for reducing differences in land-use patterns between time steps
-
-*' The gross changes in natural vegetation is calculated based on land expansion and
-*' land contraction of other land and land reduction of primary and secondary forest
-*' this information is then passed to the land module ([10_land]):
+*' The following technical calculations are needed for reducing differences in land-use patterns between time steps.
+*' The gross change in natural vegetation is calculated based on land expansion and
+*' land contraction of other land, and land reduction of primary and secondary forest.
+*' This information is then passed to the land module ([10_land]):
 
  q35_landdiff .. vm_landdiff_natveg =e=
  					sum((j2,land35),
