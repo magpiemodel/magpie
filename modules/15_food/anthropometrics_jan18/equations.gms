@@ -169,8 +169,8 @@ q15_regr(iso, regr15) ..
 *' In the subsequent equations, those parameters
 *' are used to determine the dietary composition using a hierachical tree:
 *' Total calories are first divided into animal- and plant-based. The plant-based
-*' caclories are further divided into processed empty calories and nutritious
-*'' calories, and so on.
+*' calories are further divided into processed empty calories and nutritious
+*' calories, and so on.
 
 q15_foodtree_kcal_animals(iso,kfo_ap) ..
          v15_kcal_regr(iso,kfo_ap) =e=
