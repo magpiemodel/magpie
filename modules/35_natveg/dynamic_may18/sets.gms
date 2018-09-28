@@ -5,18 +5,18 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-  land35 natveg land pools
+  land35 Natveg land pools
     / new, grow, old /
 
-   pol35 afforestation policy type
+   pol35 Land protection policy
     / none, npi, ndc/
 
-   ac_land35(ac,land35) mapping between age classes and aggregated land types
+   ac_land35(ac,land35) Mapping between age class and natveg land type
 
-   prot_type conservation priority areas
+   prot_type Conservation priority areas
    / BH, CPD, FF, LW, WDPA /
 
-   pol_stock35 land stocks for npi and ndc policies
+   pol_stock35 Land types for land protection policies
    /forest, other/
 
 ;
