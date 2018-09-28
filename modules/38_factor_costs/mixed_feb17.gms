@@ -4,17 +4,19 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description This realization specifies factors costs
-*' to depend on area harvested and agricultural land use intensity.
-*' Consequently, we dubbed it as 'mixed' as the factor costs depend on both area harvested
-*' and agricultural productivity as captured by the $\tau$ factor.
-*' We refer the reader to @dietrich_measuring_2012 and @dietrich_forecasting_2014 for more on
-*' the calculations of the initial agricultural land use intensities.
+*' @description This 'mixed' realization specifies factors costs to depend on
+*' area harvested and agricultural land use intensity and corresponding average
+*' production volumes.
+*' Consequently, factor costs in this realization react on both: area under
+*' production and average productivity of a region as captured by the $\tau$
+*' factor. A detailed description of the approach can be found
+*' in @dietrich_forecasting_2014 with background information about the used
+*' intensity measure in @dietrich_measuring_2012.
 *'
-*' @limitations This realization assumes that factor costs, within a region,
-*' purely depend on the area harvested regardless of the productivity potential of different cells.
-*' Therefore, cases in which the cellular productivity level significantly affect factors costs per area,
-*' other than the regional intensity factor ($\tau$) are not fully accounted.
+*' @limitations This realization assumes that factor costs only depend on area
+*' and average productivity of a region. Productivity differences within a
+*' region are ignored. Therefore, cases in which the cellular productivity
+*' levels affect factors costs are only partially accounted for.
 
 
 *####################### R SECTION START (PHASES) ##############################
