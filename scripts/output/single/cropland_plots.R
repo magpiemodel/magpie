@@ -43,6 +43,16 @@ if(!dir.exists(file.path(outputdir,destplots))){
 } else {writeLines(paste0("\nPlots will be saved in directory: ",destplots,"\n"))}
 
 model <- read.magpie(paste0(outputdir,"/",destfile))
+
+## Only cropland, no diff
+writeLines(paste0("\n Plotting cropland .....\n"))
+yr_to_plot <- c("y2050","y2100")
+for(yr1 in yr_to_plot){
+  plotmap2(model[,yr1,"Cropland"],file = paste0(outputdir, "/", destplots, "/", "Cropland_",yr1, ".png"),lowcol = "red",midcol = "white",highcol = "green",midpoint = 0,title = paste0("Cropland in ",yr1),sea = FALSE,text_size = 30,legendname = "Change in mha.",plot_height = 18,plot_width = 36)
+  dev.off()
+}
+
+## All land types, diff with first year
 for (i in getNames(model)) {
       var=i
       yrs <- getYears(model)
