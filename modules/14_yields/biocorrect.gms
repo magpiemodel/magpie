@@ -4,21 +4,19 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description The biocorrect realization reads in the LPJmL data and performs 
-*' several corrections. 
+*' @description The biocorrect realization reads in the LPJmL data and performs
+*' several corrections.
 *' First, a bioenergy yield correction is performed. As there is currently no
-*' robust information on bioenergy yields available in [@FAOSTAT], it is assumed 
-*' that the LPJmL yields for bioenergy correspond to the yields achieved under 
-*' the highest currently observed value of the $\tau$ factor representing 
-*' agricultural land use intensity.
-*' 
-*' Bioenergy yields are downscaled proportionally to the respective $\tau$ factor
-*' in the given region. Yields for all other crops are corrected on the regional 
-*' level by applying a calibration factor that does not differentiate between 
-*' crops. Pasture yields have their own regional calibration factors. The goal 
-*' of this correction is to improve the consistency of simulated pasture and
-*' cropland area with data from [@FAOSTAT] on the regional level in the initial 
-*' time step.
+*' robust information on bioenergy yields available in [@FAOSTAT], it is assumed
+*' that the LPJmL yields for bioenergy correspond to the yields achieved under
+*' the highest currently observed value of the $\tau$ factor representing
+*' agricultural land use intensity. Bioenergy yields are downscaled
+*' proportionally to the respective $\tau$ factor in the given region.
+*' Second, yields for all other crops are corrected on the regional
+*' level by applying a calibration factor that does not differentiate between
+*' crops. Pasture yields have their own regional calibration factors. Applied
+*' calibration factors are derived via comparing cropland and pasture areas in
+*' the initial time step with values reported by FAO [@FAOSTAT].
 *'
 *' @limitations The magnitude of spillover effects from technological change in
 *' the crop sector towards improvements in pasture management is very uncertain.
