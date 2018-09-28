@@ -56,7 +56,7 @@ $include "./modules/42_water_demand/input/f42_wat_req_fao.csv"
 $offdelim
 /;
 
-table f42_watdem_ineldo(t_all,j,scen_watdem_nonagr,watdem_ineldo) industry electricity and domestic water demand under our socioeconomic scenarios (mio. m^3)
+table f42_watdem_ineldo(t_all,j,scen_watdem_nonagr,watdem_ineldo) Industry electricity and domestic water demand under our socioeconomic scenarios (mio. m^3)
 $ondelim
 $include "./modules/42_water_demand/input/watdem_nonagr_grper.cs3"
 $offdelim
