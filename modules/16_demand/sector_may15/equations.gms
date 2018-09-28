@@ -7,14 +7,13 @@
 *' @equations
 *'
 *' Not all demands are relevant for each product group therefore we distinguish
-*' into diverse product groups and demand types, according to the equations below.
-*' Supply balance for crops, livestock, secondary products and crop residues are calculated
-*' as the summation of the corresponding demand for food, feed, processing products,
-*' material, bioenergy, seed, waste and the domestic balance flow.
-*' Demand for seed, waste and the domestic balance flow are calculated internally
-*' within the [16_demand] module, while the other relevent demand values are taken
-*' from other modules. More information about the underlying connections can be seen
-*' from the interface plot made available with this document.
+*' into diverse product groups and demand types, according to the equations
+*' below. Supply balance for crops, livestock, secondary products and crop
+*' residues are calculated as the summation of the corresponding demand for
+*' food, feed, processing products, material, bioenergy, seed, waste and the
+*' domestic balance flow. Demand for seed, waste and the domestic balance flow
+*' are calculated internally within the [16_demand] module, while the other
+*' relevant demand values are taken from other modules (see interface plot).
 
 q16_supply_crops(i2,kcr) ..
                           vm_supply(i2,kcr) =e=
@@ -62,17 +61,17 @@ q16_supply_residues(i2,kres)..
 q16_supply_pasture(i2) ..  vm_supply(i2,"pasture") =e=
                           sum(kap4, vm_dem_feed(i2,kap4,"pasture"));
 
-*' Waste demand are calculated as the regional demand multiplied by the
-*' waste share relative to domestic supply, plus the overproduction
-*' of secondary couple products.
+*' Waste demand is calculated as the regional demand of all commodities
+*' multiplied by the corresponding waste share and summed up with the
+*' overproduction of secondary couple products.
 
 q16_waste_demand(i2,kall) ..
                  v16_dem_waste(i2,kall) =e=
                  vm_supply(i2,kall) * sum(ct,f16_waste_shr(ct,i2,kall))
                  + sum(kpr,vm_secondary_overproduction(i2,kall,kpr));
 
-*' Seed demand are calculated as the regional aggregated production multiplied
-*' by the seed share relative to production.
+*' Seed demand is calculated as the regional aggregated production of all
+*' commodities multiplied by the corresponding seed share.
 
 q16_seed_demand(i2,kcr) ..
                  vm_dem_seed(i2,kcr) =e=

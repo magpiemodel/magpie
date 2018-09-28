@@ -196,7 +196,7 @@ sets
    w Water supply type / rainfed, irrigated /
 
 ***WATER SOURCES***
-   wat_src Water sources / surface, ground, technical, ren_ground /
+   wat_src Type of water source / surface, ground, technical, ren_ground /
 
 ***WATER DEMAND sectors***
    wat_dem Water demand sectors / agriculture, industry, electricity, domestic, ecosystem /
@@ -227,7 +227,7 @@ sets
    chap_par Chapman-richards parameters / k,m /
 
 *** Nutrients
-   attributes Product attributes
+   attributes Product attributes characterizing a product (such as weight or energy content)
    /dm,ge,nr,p,k,wm,c/
 * dry matter, gross energy, reactive nitrogen, phosphorus, potash, wet matters
 

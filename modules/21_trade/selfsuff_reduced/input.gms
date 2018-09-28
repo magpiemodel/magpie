@@ -8,7 +8,7 @@ $setglobal c21_trade_liberalization  l909090r808080
 *   options are "regionalized" and "globalized" and "fragmented"
 
 scalars
-  s21_trade_tariff Trade tariff switch (1=on 0=off)                      / 1 /
+  s21_trade_tariff Trade tariff switch (1=on 0=off)  (1)                   / 1 /
 ;
 
 table f21_trade_bal_reduction(t_all,trade_groups21,trade_regime21) Share of inelastic trade pool (1)
@@ -26,7 +26,7 @@ $ondelim
 $include "./modules/21_trade/input/f21_trade_export_share.cs3"
 $offdelim;
 
-table f21_trade_balanceflow(t_all,kall) Domestic balance flows (mio. tDM)
+table f21_trade_balanceflow(t_all,kall) Domestic balance flows (mio. tDM per yr)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_balanceflow.cs3"
 $offdelim;
