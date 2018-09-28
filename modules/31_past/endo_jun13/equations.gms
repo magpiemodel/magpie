@@ -22,15 +22,16 @@ q31_carbon(j2,c_pools) ..
  vm_carbon_stock(j2,"past",c_pools) =e=
          sum(ct, vm_land(j2,"past")*fm_carbon_density(ct,j2,"past",c_pools));
 
-*' In the initial calibration time step, where the pasture calibration factor 
-*' is calculated that brings pasture biomass demand and pasture area in balance, 
-*' small costs are attributed to the production of pasture biomass in order to 
-*' avoid overproduction of pasture in the model: 
+*' In the initial calibration time step, where the pasture calibration factor
+*' is calculated that brings pasture biomass demand and pasture area in balance,
+*' small costs are attributed to the production of pasture biomass in order to
+*' avoid overproduction of pasture in the model:
 
 q31_cost_prod_past(i2) ..
  vm_cost_prod(i2,"pasture") =e= vm_prod_reg(i2,"pasture")
  								* s31_fac_req_past;
- 								
-*' For all following time steps, `s31_fac_req_past` is set to zero.
+
+*' For all following time steps, factor requriements `s31_fac_req_past` are set
+*' to zero.
 
 *** EOF constraints.gms ***
