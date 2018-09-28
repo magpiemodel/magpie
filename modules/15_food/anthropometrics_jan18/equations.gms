@@ -12,14 +12,15 @@ q15_food_demand(i2,kfo) ..
                 sum(ct,im_pop(ct,i2) * p15_kcal_pc_calibrated(ct,i2,kfo)) * 365
                 ;
 
-*' The constraint transforms the fooduse of agricultural products into per-capita
+*' Above constraint transforms the fooduse of agricultural products into per capita
 *' food demand.
-*' vm_dem_food is the fooduse of agricultural products. Its measured in tons dry matter
-*' before processing. Multiplying with the nutrition attributes provides the equivalent
-*' in calories. While nutrition attributes are assumed to be globally the same
-*' (assumption of homogeneous products), a regional balanceflow is used to account
+*' `vm_dem_food` is the fooduse of agricultural products. It is measured in tons
+*' of dry matter prior to processing. The multiplication with the nutrition attributes
+*' provides the equivalent in calories. While nutrition attributes are assumed
+*' to be globally the same
+*' (assumption of homogeneous products), a regional balance flow is used to account
 *' for current differences in food processing, where some regions get different calories
-*' from the same fooduse quantitiy. Depending on the inputdata, the balanceflow
+*' from the same fooduse quantitiy. Depending on the input data, the balance flow
 *' may fade out in the future, which implies actual homogeneous products.
 
 *' The subsequent equations belong to the standalone food demand model, which is
@@ -32,15 +33,15 @@ q15_aim ..
           - 10**6*v15_income_balance(iso))
           ;
 
-*' In principle, the food demand model has only one solution which satifies all
-*' equations. The objective could therefore be choosen arbirtrarily, and the
-*' solver just finds the single solution.
+*' In principle, the food demand model has only one solution that satifies all
+*' equations. Technically, the objective could therefore be chosen arbirtrarily,
+*' for the solver to find the single solution.
 *' However, if the model is executed outside its domain
-*' (e.g. with extreme price shocks), it can happen that real income turns
-*' negative (because the increase in food value exceeds the available income).
-*' To avoid this case, we allow for a punishment term v15_income_balance, which
-*' increases the real income, but which negatively affects the maximized
-*' objective variable, disincentivizing its use in cases where not needed.
+*' (e.g. with extreme price shocks), it can happen that real income takes a
+*' negative value (because the increase in food value exceeds the available income).
+*' To avoid this case, a punishment term `v15_income_balance` is introduced. It
+*' increases the real income, but affects the maximized objective variable
+*' negatively, disincentivizing its use in cases where it is not needed.
 
 
 q15_budget(iso) ..
@@ -49,18 +50,18 @@ q15_budget(iso) ..
          *(i15_prices_initial_kcal(iso,kfo)-p15_prices_kcal(ct,iso,kfo)))
          + sum(ct,im_gdp_pc_ppp_iso(ct,iso)) + v15_income_balance(iso);
 
-*' The budget constraint calculates the real income after an eventual price
+*' The budget constraint calculates the real income after a possible price
 *' shock. The basic assumption is that increasing prices reduce real income,
 *' while decreasing prices increase real income.
 *' Through this income effect, higher prices reduce the food demand.
-*' The income before the food price shock is im_gdp_pc_ppp.
-*' Its reduced by the change in value of the demanded calories under changed
+*' The income before the food price shock is `im_gdp_pc_ppp`.
+*' It is reduced by the change in value of the demanded calories under changed
 *' prices.
 *' In the following, the real income is used to determine food intake,
 *' food demand as well as dietary composition.
 
-*' First we estimate the BMI distribution within the population, using
-*' regression in an hierachrical tree. First we estimate the regression shares:
+*' The BMI distribution within the population is calculated using
+*' regressions in a hierachical tree. First, the regression shares are calculated:
 
 q15_regr_bmi_shr(iso,sex,agegroup15,bmi_tree15) ..
         v15_regr_overgroups(iso,sex,agegroup15,bmi_tree15)
@@ -69,7 +70,7 @@ q15_regr_bmi_shr(iso,sex,agegroup15,bmi_tree15) ..
         + (i15_bmi_saturation(sex,agegroup15,bmi_tree15) * v15_income_pc_real_ppp_iso(iso))
         / (i15_bmi_halfsat(sex,agegroup15,bmi_tree15) + v15_income_pc_real_ppp_iso(iso));
 
-*' Then we apply these regression shares to an hierarchical tree structure
+*' Then, these regression shares are applied to a hierarchical tree structure:
 
 q15_bmi_shr_verylow(iso,sex,agegroup15) ..
         v15_bmi_shr_overgroups(iso,sex,agegroup15,"verylow")
@@ -116,7 +117,7 @@ q15_bmi_shr_veryhigh(iso,sex,agegroup15) ..
         ;
 
 
-*' From BMI shares of the large overgroups, we disaggregate to
+*' From BMI shares of the larger groups (overgroups), we disaggregate to
 *' age-specific subgroups.
 
 q15_bmi_shr_agg(iso,sex,age,bmi_group15) ..
@@ -145,9 +146,9 @@ q15_intake(iso)..
 
 
 *' Food demand is based on food intake and a regression
-*' based on income which estimates how much the actual demand is relative to
-*' the requried intake.
-*' The difference between demand and intake is food waste (not explcitly
+*' based on income, which estimates how much the actual demand is relative to
+*' the required intake.
+*' The difference between demand and intake is food waste (not explicitly
 *' mentioned in this equation)
 
 q15_regr_kcal(iso) ..
@@ -157,7 +158,7 @@ q15_regr_kcal(iso) ..
 
 *' This equation estimates key dietary composition regressision factors,
 *' such as the share of animal products, empty calories, or
-*' fruit vegetables and nuts.
+*' fruits, vegetables and nuts.
 
 q15_regr(iso, regr15) ..
          v15_demand_regr(iso, regr15) =e=
@@ -166,10 +167,10 @@ q15_regr(iso, regr15) ..
          / (i15_dem_halfsat(regr15) + v15_income_pc_real_ppp_iso(iso)**i15_dem_nonsat(regr15));
 
 *' In the subsequent equations, those parameters
-*' are used to determine the dietary composition using an hirachical tree:
-*' Total calories are first divided into animal and plant based; the plant-based
-*' are further divided into processed empty calories and nutritious calories
-*' and so on.
+*' are used to determine the dietary composition using a hierachical tree:
+*' Total calories are first divided into animal- and plant-based. The plant-based
+*' caclories are further divided into processed empty calories and nutritious
+*'' calories, and so on.
 
 q15_foodtree_kcal_animals(iso,kfo_ap) ..
          v15_kcal_regr(iso,kfo_ap) =e=
