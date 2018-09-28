@@ -115,8 +115,8 @@ sets
 *###############################################################################
 
 sets
-        i2(i) "all economic regions (dynamic set)"
-        j2(j) "number of LPJ cells (dynamic set)"
+        i2(i) World regions (dynamic set)
+        j2(j) Spatial Clusters (dynamic set)
 ;
 i2(i) = yes;
 j2(j) = yes;
@@ -127,7 +127,7 @@ j2(j) = yes;
 *            here as they need to make some assumption about these settings,
 *            especially having 1965 as start year, having t2 as alias of t and
 *            having ct as current time step
-sets time_annual Annual extended vector
+sets time_annual Annual extended time steps
     / y1965*y2150 /
 
     t_all 5-year time periods
@@ -144,7 +144,7 @@ sets time_annual Annual extended vector
         /
 ;
 
-set t(t_all) Used time periods
+set t(t_all) Simulated time periods
 $If "%c_timesteps%"== "less_TS" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100,y2110,y2130,y2150/;
 $If "%c_timesteps%"== "coup2100" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100/;
 $If "%c_timesteps%"== "test_TS" /y1995,y2000,y2005,y2010,y2020,y2030,y2040,y2050,y2070,y2090,y2110,y2130,y2150/;
@@ -172,7 +172,7 @@ $If "%c_timesteps%"=="16" /y1995,y2000,y2010,y2020,y2030,y2040,y2050,y2060,y2070
 $If "%c_timesteps%"=="17" /y1995,y2000,y2010,y2020,y2030,y2040,y2050,y2060,y2070,y2080,y2090,y2100,y2110,y2120,y2130,y2140,y2150/;
 $If "%c_timesteps%"=="past" /y1965,y1970,y1975,y1980,y1985,y1990,y1995,y2000,y2005,y2010/;
 $If "%c_timesteps%"=="pastandfuture" /y1965,y1970,y1975,y1980,y1985,y1990,y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2065,y2070,y2075,y2080,y2085,y2090,y2095,y2100/;
-set ct(t) current time period;
+set ct(t) Current time period;
 
 alias(t,t2);
 
@@ -193,25 +193,25 @@ sets
        / lic, mic, hic /
 
 ***TYPE OF WATER SUPPLY***
-   w water Supply type / rainfed, irrigated /
+   w Water supply type / rainfed, irrigated /
 
 ***WATER SOURCES***
    wat_src Water sources / surface, ground, technical, ren_ground /
 
-***WATER DEAMND sectors***
-   wat_dem water demands / agriculture, industry, electricity, domestic, ecosystem /
+***WATER DEMAND sectors***
+   wat_dem Water demand sectors / agriculture, industry, electricity, domestic, ecosystem /
 
 ***LAND POOLS***
    land Land pools
         / crop, past, forestry, primforest, secdforest, urban, other /
 
-  land_ag(land) Agricultural land
+  land_ag(land) Agricultural land pools
                   / crop, past /
 
-  land_natveg(land) natveg land types
+  land_natveg(land) Natural vegetation land pools
         / primforest, secdforest, other /
 
-   si suitability classes
+   si Suitability classes
         / si0, nsi0 /
 
 ***Forestry**
@@ -231,7 +231,7 @@ sets
    /dm,ge,nr,p,k,wm,c/
 * dry matter, gross energy, reactive nitrogen, phosphorus, potash, wet matters
 
-   nutrients(attributes) Product attributes
+   nutrients(attributes) Nutrient related product attributes
    /dm,ge,nr,p,k/
 
   dm_ge_nr(nutrients) Attribtues relevant for nutrition
@@ -261,7 +261,7 @@ secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, 
    / inorg_fert, man_crop, awms, resid, man_past, som,
      rice, ent_ferm, beccs /
 
-   emis_source_cell(emis_source) Celllular emission sources
+   emis_source_cell(emis_source) Cellular emission sources
    / crop_vegc, crop_litc, crop_soilc,
      past_vegc, past_litc, past_soilc,
      forestry_vegc, forestry_litc, forestry_soilc,

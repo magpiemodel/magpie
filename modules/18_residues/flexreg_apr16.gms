@@ -12,8 +12,8 @@
 *'
 *' @ipcc_2006_2006 offers one of the few consistent datasets to estimate
 *' both AG and BG residues. Also, by providing crop-growth functions (CGF, `f18_cgf`)
-*' instead of fixed harvest indices, it can well describe current international
-*' differences of harvest indices and also their development into the future.
+*' instead of fixed harvest indices, it can be used to depict current
+*' international differences of harvest indices and their development in the future.
 *' The methodology is thus well eligible for global long-term modelling.
 *' @ipcc_2006_2006 provides linear CGFs with positive slope and intercept
 *' for cereals, leguminous crops, potatoes and grasses. As no values are

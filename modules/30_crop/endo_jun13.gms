@@ -4,11 +4,16 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description The endo_jun13 realization calculates the crop specific agricultural land use endogenously 
-*' based on yield data coming from [14_yields] the module and the rotational and suitability constrains stated in the input data of the module.
-*' Cropland areas are linked to the crop specific production and the carbon content of the different land carbon pools.
-*' The crop specific land use areas are also used in [18_residues], [38_factor_costs], [41_area_equipped_for_irrigation], 
-*' [42_water_demand], [50_nr_soil_budget], [53_methane] and [59_som].
+*' @description The endo_jun13 realization calculates the crop specific
+*' agricultural land use endogenously based on yield data coming from the
+*' module [14_yields] and the rotational as well as suitability constrains
+*' stated in the input data of the module.
+*'
+*' Cropland areas are linked to the crop specific production and the carbon
+*' content of the different land carbon pools. The crop specific land use areas
+*' are also used in [18_residues], [38_factor_costs],
+*' [41_area_equipped_for_irrigation], [42_water_demand], [50_nr_soil_budget],
+*' [53_methane] and [59_som].
 
 *' @limitations There are currently no known limitations of this realization.
 
