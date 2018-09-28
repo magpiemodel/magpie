@@ -5,16 +5,16 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 equation
-q40_cost_transport(j,k)   					Cellular transport costs for k (mio. USD05 per yr)
+q40_cost_transport(j,k)   Cellular transport costs for k (mio. USD05MER per yr)
 ;
 
 variables
- vm_cost_transp(j,k)                        Transportation costs (mio. USD05 per yr)
+ vm_cost_transp(j,k)      Transportation costs (mio. USD05MER per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_transp(t,j,k,type)      Transportation costs (mio. USD05 per yr)
- oq40_cost_transport(t,j,k,type) Cellular transport costs for k (mio. USD05 per yr)
+ ov_cost_transp(t,j,k,type)      Transportation costs (mio. USD05MER per yr)
+ oq40_cost_transport(t,j,k,type) Cellular transport costs for k (mio. USD05MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
