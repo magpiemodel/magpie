@@ -4,11 +4,10 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description This realization relates
-*' factor costs to volume of production of a given crop.
-*' The latter [17_production] depends on area harvested  from [30_crop] and yields  from [14_yields].
-*' In other words, in this implementation, factor costs
-*' entirely depend on the volume of production.
+*' @description This realization relates factor costs to volume of production of
+*' a given crop. The latter [17_production] depends on area harvested
+*' from [30_crop] and yields from [14_yields]. In other words, in this 
+*' implementation, factor costs entirely depend on the volume of production.
 *' As such, there are no incentives to allocate and concentrate production
 *' into high-productive cells.
 
