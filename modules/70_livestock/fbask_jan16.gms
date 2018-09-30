@@ -68,6 +68,11 @@
 *' biomass in feed baskets and livestock productivity for diary cattle systems
 *' [@weindl_livestock_2017].](feed_comp_dairy.jpg){ width=60% }
 
+*' These relationships between feed baskets and livestock productivity are used 
+*' to construct feeding scenarios that reflect the narratives of the SSPs. The 
+*' resulting feed baskets enter the MAgPIE model as scenario-dependent input data
+*' and are crucial for the feed demand calculations in the livestock module.
+
 *' @limitations Intensification of livestock production and related changes in
 *' livestock feeding are modelled exogenously. Therefore, the livestock sector
 *' does not endogenously respond to demand and climate shocks and policies, e.g.
