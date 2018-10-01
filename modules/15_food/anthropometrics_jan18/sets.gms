@@ -55,7 +55,7 @@ sets
    reproductive(age) Reproductive age groups
    /20--24, 25--29, 30--34, 35--39/
 
-   estimates15 Estimate type
+   estimates15 Preliminary or final result for body height distribution
    /preliminary,final/
 
    paras_s15 Schofield equation parameters
