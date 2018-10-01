@@ -7,21 +7,21 @@
 
 
 positive variables
-  vm_dem_processing(i,kall)          		   		Demand for processing use (mio. tDM per yr)
-  v20_dem_processing(i,processing_subst20,kpr) 		Demand for processing use by process (mio. tDM per yr)
-  v20_secondary_substitutes(i,ksd,kpr) 				Substitutes for inferior secondary products (mio. tDM per yr)
-  vm_secondary_overproduction(i,kall,kpr)			Overproduction of secondary couple products (mio. tDM per yr)
-  vm_cost_processing(i)            					Processing costs (mio. USD)
+  vm_dem_processing(i,kall)                                             Demand for processing use (mio. tDM per yr)
+  v20_dem_processing(i,processing_subst20,kpr)                 Demand for processing use by process (mio. tDM per yr)
+  v20_secondary_substitutes(i,ksd,kpr)                                 Substitutes for inferior secondary products (mio. tDM per yr)
+  vm_secondary_overproduction(i,kall,kpr)                        Overproduction of secondary couple products (mio. tDM per yr)
+  vm_cost_processing(i)                                                    Processing costs (mio. USD)
 ;
 
 equations
-     q20_processing(i,kpr,ksd)                			Processing equation (mio. tDM per yr)
-     q20_processing_aggregation_nocereals(i,kpr) 		Connecting processing activity to processing flows (mio. tDM per yr)
+     q20_processing(i,kpr,ksd)                                        Processing equation (mio. tDM per yr)
+     q20_processing_aggregation_nocereals(i,kpr)                 Connecting processing activity to processing flows (mio. tDM per yr)
      q20_processing_aggregation_cereals(i,kcereals20)   Connecting processing activity to food use for milling (mio. tDM per yr)
-     q20_processing_aggregation_cotton(i)        		Connecting processing activity to production for cotton ginning (mio. tDM per yr)
+     q20_processing_aggregation_cotton(i)                        Connecting processing activity to production for cotton ginning (mio. tDM per yr)
      q20_processing_substitution_oils(i)                Substitution of branoils by other oils (mio. tDM per yr)
      q20_processing_substitution_brans(i)               Substitution of brans by cereals (mio. tDM per yr)
-     q20_processing_costs(i)                            Processing costs (mio. USD05 per yr)
+     q20_processing_costs(i)                            Processing costs (mio. USD05MER per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

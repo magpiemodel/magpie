@@ -12,7 +12,7 @@ kpr(kall) Products that can be processed
    potato,cassav_sp,sugr_cane,sugr_beet,others,cottn_pro,brans,begr,betr,foddr,
    sugar,molasses,oils/
 
-knpr(kall) Plant-based products that cannot be processed
+knpr(kall) Products that cannot be processed
    /alcohol,distillers_grain,ethanol,fibres,fish,livst_chick,livst_egg,livst_milk,
    livst_pig,livst_rum,oilcakes,pasture,puls_pro,res_cereals,res_fibrous,
    res_nonfibrous,scp/
