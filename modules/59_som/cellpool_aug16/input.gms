@@ -5,9 +5,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-  s59_punish_cropdiff  Punishment costs per croparea squared (USD05 per (mio. ha)^2)                / 10000 /
+  s59_punish_cropdiff  Punishment costs per croparea squared (mio. USD05MER per (mio. ha)^2)                / 10000 /
 ;
-
 
 table f59_cratio_landuse(climate59,kcr) Ratio of soil carbon relative to potential natural vegetation soil carbon for different landuse (1)
 $ondelim
