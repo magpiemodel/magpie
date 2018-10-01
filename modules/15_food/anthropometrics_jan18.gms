@@ -22,18 +22,18 @@ $Ifi "%phase%" == "nl_relax" $include "./modules/15_food/anthropometrics_jan18/n
 *' which are provided from module [09_drivers]) as drivers.
 *' The module estimates food demand on iso-country level taking
 *' anthropometric food requirements as well as economic dynamics into account.
-*' If flexible demand is activated, the module also uses the shadow prices from
-*' the optimization, which are the Lagrange multipliers of the constraint
-*' `q15_food_demand`.
+*' If flexible demand is activated, the module also uses the shadow prices
+*' for agircultural products from the optimization, which are the Lagrange
+*' multipliers of the constraint `q15_food_demand`.
 *' The module consists of a standalone food demand model, which is executed
 *' before MAgPIE starts. In the case of endogenous demand, the module is
 *' iterated with MAgPIE.
 *' Besides providing the fooduse of agricultural products, the model also
-*' provides a number of output indicators, including food intake by age group
-*' and sex, food waste, dietary composition between livestock products,
+*' provides a number of output indicators, including the BMI distribution,
+*' body weight and height of the population by age and sex, food intake by
+*' age group and sex, food waste, dietary composition between livestock products,
 *' empty calories (sugar, oil and alcohol), fruits vegetables and nuts, as well
-*' as staples. Finally, it provides anthropometric indicators such as
-*' body height, body weight and the body mass index (BMI) by age class and gender.
+*' as staple calories.
 *' The food demand model can be run in standalone mode by running the
 *' the file `standalone/demand_model.gms`.
 *'

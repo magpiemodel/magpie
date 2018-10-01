@@ -5,7 +5,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
- sm_intersolve              if 0 finish loop or if 1 iterate optimization /0/
+ sm_intersolve              if 0 finish loop or if 1 iterate optimization (1) /0/
 ;
 
 *** EOF declarations.gms ***

@@ -97,12 +97,12 @@ $include "./modules/15_food/input/f15_ruminant_fadeout.csv"
 $offdelim
 ;
 
-table f15_bodyheight(t_all,iso,sex,age)   Body height (cm)
+table f15_bodyheight(t_all,iso,sex,age)   Body height (cm per capita)
 $ondelim
 $include "./modules/15_food/input/f15_bodyheight_historical.cs3"
 $offdelim;
 
-table f15_schofield(sex,age, paras_s15) Schofield equation parameters (-)
+table f15_schofield(sex,age, paras_s15) Schofield equation parameters (X)
 $ondelim
 $include "./modules/15_food/input/f15_schofield_parameters.cs3"
 $offdelim

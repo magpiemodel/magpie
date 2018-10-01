@@ -20,35 +20,35 @@ positive variables
 
 equations
   q15_aim                Objective function of food demand model (mio. USD05PPP)
-  q15_budget(iso)        Household budget constraint (USD05PPP per capita per day)
+  q15_budget(iso)        Household budget constraint (USD05PPP per cap per day)
 
   q15_regr_bmi_shr(iso,sex,agegroup15,bmi_tree15) Estimates regression parameters for BMI regression shares (1)
-  q15_bmi_shr_verylow(iso,sex,agegroup15)  Estimates BMI share for population groups (1)
-  q15_bmi_shr_low(iso,sex,agegroup15)       Estimates BMI share for population groups (1)
-  q15_bmi_shr_medium(iso,sex,agegroup15)     Estimates BMI share for population groups (1)
-  q15_bmi_shr_medium_high(iso,sex,agegroup15)     Estimates BMI share for population groups (1)
-  q15_bmi_shr_high(iso,sex,agegroup15)      Estimates BMI share for population groups  (1)
-  q15_bmi_shr_veryhigh(iso,sex,agegroup15)   Estimates BMI share for population groups  (1)
+  q15_bmi_shr_verylow(iso,sex,agegroup15)  Estimates BMI share for population groups with low BMI (1)
+  q15_bmi_shr_low(iso,sex,agegroup15)       Estimates BMI share for population groups with very low BMI (1)
+  q15_bmi_shr_medium(iso,sex,agegroup15)     Estimates BMI share for population groups with medium BMI(1)
+  q15_bmi_shr_medium_high(iso,sex,agegroup15)     Estimates BMI share for population groups with medium to high BMI (1)
+  q15_bmi_shr_high(iso,sex,agegroup15)      Estimates BMI share for population groups with high BMI (1)
+  q15_bmi_shr_veryhigh(iso,sex,agegroup15)   Estimates BMI share for population groups with very high BMI (1)
   q15_bmi_shr_agg(iso,sex,age,bmi_group15)     Disaggregates age groups from overarching groups (1)
 
-  q15_intake(iso) Intake estimation for country total (kcal per capita per day)
-  q15_regr_kcal(iso)     Per capita total consumption (kcal per capita per day)
-  q15_regr(iso, regr15)  Share regressions  (kcal per kcal)
-  q15_foodtree_kcal_animals(iso,kfo_ap)  Demand for animal products  (kcal per capita per day)
-  q15_foodtree_kcal_processed(iso,kfo_pf) Demand for processed products  (kcal per capita per day)
-  q15_foodtree_kcal_staples(iso,kfo_st)     Demand for staple products  (kcal per capita per day)
-  q15_foodtree_kcal_vegetables(iso)     Demand for vegetable and fruit products  (kcal per capita per day)
+  q15_intake(iso) Estimates average intake for the entire country (kcal per cap per day)
+  q15_regr_kcal(iso)     Per capita total consumption (kcal per cap per day)
+  q15_regr(iso, regr15)  Estimates parameters for food demand and dietary composition (kcal per kcal)
+  q15_foodtree_kcal_animals(iso,kfo_ap)  Demand for animal products  (kcal per cap per day)
+  q15_foodtree_kcal_processed(iso,kfo_pf) Demand for processed products  (kcal per cap per day)
+  q15_foodtree_kcal_staples(iso,kfo_st)     Demand for staple products  (kcal per cap per day)
+  q15_foodtree_kcal_vegetables(iso)     Demand for vegetable and fruit products  (kcal per cap per day)
 
 ;
 
 
 positive variables
   v15_kcal_regr(iso,kfo)     Uncalibrated regression estimates of calorie demand (kcal per cap per day)
-  v15_kcal_regr_total(iso)     Uncalibrated regression estimates of  total per capita calories (kcal per cap per day)
+  v15_kcal_regr_total(iso)     Uncalibrated regression estimates of  total per cap calories (kcal per cap per day)
   v15_demand_regr(iso, regr15)       Uncalibrated regression estimates of kcal shares (kcal per kcal)
-  v15_income_pc_real_ppp_iso(iso)    Real income per capita (USD05PPP per capita)
-  v15_income_balance(iso)            Balance variable to balance cases in which reduction in income beats gdp pc (USD05PPP per cap)
-  v15_kcal_intake_total_regr(iso)  Food intake (kcal per capita per day)
+  v15_income_pc_real_ppp_iso(iso)    Real income per cap (USD05PPP per cap)
+  v15_income_balance(iso)            Balance variable to balance cases in which reduction in income is larger than the per-capita gdp (USD05PPP per cap)
+  v15_kcal_intake_total_regr(iso)  Food intake (kcal per cap per day)
   v15_regr_overgroups(iso,sex,agegroup15,bmi_tree15)   Hierarchical tree parameter regressions (1)
   v15_bmi_shr_regr(iso,sex,age,bmi_group15) Uncalibrated share of population groups belonging to a certain bmi_group (1)
   v15_bmi_shr_overgroups(iso,sex,agegroup15,bmi_group15) Uncalibrated  share of population groups belonging to a certain bmi_group (1)
@@ -65,9 +65,9 @@ parameters
  p15_modelstat(t)                             Model solver status (1)
  p15_iteration_counter(t)                     Number of iterations required for reaching an equilibrium between food demand model and magpie (1)
  p15_convergence_measure(t)                   Convergence measure to decide for continuation or stop of food_demand - magpie iteration (1)
- i15_dem_intercept(regr15)              Food regression parameters intercept (1)
- i15_dem_saturation(regr15)             Food regression parameters saturation (1)
- i15_dem_halfsat(regr15)                Food regression parameters halfsaturation (1)
+ i15_dem_intercept(regr15)              Food regression parameters intercept in kcal or as share (X)
+ i15_dem_saturation(regr15)             Food regression parameters saturation in kcal or as share (X)
+ i15_dem_halfsat(regr15)                Food regression parameters halfsaturation (USD05PPP per cap)
  i15_dem_nonsat(regr15)                 Food regression parameters nonsaturation (1)
 
 *prices
@@ -75,11 +75,11 @@ parameters
  i15_prices_initial_kcal(iso,kfo)             Initial prices that capture the approximate level of prices in 1961-2010 (USD05PPP per kcal)
 
 * anthropometrics
-  p15_bmi_shr(t,iso,sex,age,bmi_group15)      Calibrated estimates BMI share for population groups  (capita per capita)
-  p15_bodyheight(t,iso,sex,age,estimates15)    Body height (cm per capita)
-  p15_bodyweight(t,iso,sex,age,bmi_group15)  Body weight (kg per capita)
+  p15_bmi_shr(t,iso,sex,age,bmi_group15)      Calibrated estimates BMI share for population groups  (cap per cap)
+  p15_bodyheight(t,iso,sex,age,estimates15)    Body height (cm per cap)
+  p15_bodyweight(t,iso,sex,age,bmi_group15)  Body weight (kg per cap)
   p15_bodyheight_calib(t,iso,sex,age_new_estimated15)               Calibration factor for regional height differences (cm)
-  p15_kcal_growth_food(t_all,iso,underaged15)  Average per capita consumption of growth relevant food items in the last three 5-year steps (kcal per capita per day)
+  p15_kcal_growth_food(t_all,iso,underaged15)  Average per capita demand for body size growth relevant food items in the last three 5-year steps (kcal per capita per day)
   p15_physical_activity_level(t,iso,sex,age)    Physical activity levels in PAL relative to Basic metabolic rate BMR (kcal per kcal)
 
   i15_bmi_intercept(sex,agegroup15,bmi_tree15)   BMI share regression intercept (1)

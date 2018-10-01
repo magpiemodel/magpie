@@ -186,11 +186,14 @@ For (s15_count = 1 to (m_yeardiff(t)/5),
                 + p15_kcal_pc_iso(t-1,iso,growth_food15) * (1 - s15_count / (m_yeardiff(t)/5))
             );
 *' @code
-*' After each execution of the food demand model, the body height is estimated.
-*' The starting point is the body height structure of the last timestep. Then we move all
-*' 5-year age classes up by one. The age class of 15-19 year olds is calculated newly
+*' After each execution of the food demand model, the body height distribution
+*' of the population is estimated. The starting point is the body height
+*' distribution of the last timestep. The body height estimates of the old
+*' period are moved into the subsequent age class (e.g. the 20-24 year old are
+*' now 25-29 years old). The age class of 15-19 year olds is estimated newly
 *' using the body height regressions and the food consumption of the last 15
 *' years.
+
    p15_bodyheight(t,iso,"F","15--19","final") =
                      126.4*
                      (sum(underaged15,
