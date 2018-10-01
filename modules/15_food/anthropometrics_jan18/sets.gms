@@ -5,7 +5,7 @@
 *** Contact: magpie@pik-potsdam.de
 
 sets
-   underaged15(age) Underaged age group
+   underaged15(age) Group of underaged age classes
    /0--4,5--9,10--14/
 
    adult15(age) Age groups for adult population
@@ -15,12 +15,12 @@ sets
        60--64, 65--69, 70--74, 75--79
        80--84,85--89,90--94,95--99,100+ /
 
-   working15(adult15) Working age group
+   working15(adult15) Group of working age population
    / 15--19,
      20--24, 25--29, 30--34, 35--39,
      40--44, 45--49, 50--54, 55--59/
 
-   retired15(adult15) Retired age group
+   retired15(adult15) Age group of retired population
    /60--64, 65--69, 70--74, 75--79
        80--84,85--89,90--94,95--99,100+ /
 
@@ -52,7 +52,7 @@ sets
    age_new_estimated15(age) Estimated ages
    /0--4,5--9,10--14,15--19/
 
-   reproductive(age) Reproductive age groups
+   reproductive(age) Age group of people in the reproductive age
    /20--24, 25--29, 30--34, 35--39/
 
    estimates15 Estimate type
@@ -105,7 +105,7 @@ sets
    wood, woodfuel
    /
 
-   nutrition nutritition attributes
+   nutrition Nutritition attributes
    /kcal, protein/
 
   par15 Parameters for food module
