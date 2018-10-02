@@ -24,8 +24,8 @@ q59_som_target_noncropland(j2) ..
 *' Depending on the setting of `c59_som_scenario `climate impacts (`cc`) are taken into account or not (`nocc`).
 *' For a static climate `f59_topsoilc_density` is set to the value of 1995 within the input of the module realization.
 			  
-*' To account for the transfer of carbon rich soils from natural vegetation to cropland respectively the other way around,
-*' the cropland expansion and reduction of each cell is calculated via
+*' To account for the transfer of carbon rich soils from natural vegetation to cropland as well as the transfer of 
+*' depleted soils from cropland to regrowing natural land, the cropland expansion and reduction of each cell is calculated via
 			  
 q59_crop_diff(j2)  ..	
 
@@ -44,7 +44,7 @@ q59_crop_diff_constraint(i2) ..
 *' ensures that no extra cropland reduction and expansion at the same time is happening. Note that this nonlinear realization 
 *' needs two to three times longer runtime and is thus by default not switch on. 
 
-*' The actually carbon transfer from respectively to cropland soils is then given by
+*' The actually carbon transfer from cropland as well as to cropland soils is then given by
 
 q59_som_transfer_to_cropland(j2) ..
               v59_som_transfer_to_cropland(j2)
@@ -53,8 +53,8 @@ q59_som_transfer_to_cropland(j2) ..
               - v59_crop_reduction(j2) * p59_carbon_density(ct,j2,"cropland"))
 			  ;
 
-*' To get the current size of the soil organic carbon pool the pool of the previous timestep corrected by the carbon transfer
-*' is developing into the direction of the above calculate target values taken the timestep depending lossrate into account by 
+*' To get the current size of the soil organic carbon pool, the pool of the previous timestep corrected by the carbon transfer
+*' is developing into the direction of the above calculated target values taken the timestep depending lossrate into account by 
 
 q59_som_pool_cropland(j2) ..
              v59_som_pool(j2,"cropland")
@@ -64,7 +64,7 @@ q59_som_pool_cropland(j2) ..
 				+ (p59_som_pool(j2,"cropland") + v59_som_transfer_to_cropland(j2))
               ;
 
-*' respectively
+*' and
 			  
 q59_som_pool_noncropland(j2) ..
                v59_som_pool(j2,"noncropland")

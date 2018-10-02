@@ -164,10 +164,9 @@ i15_intake(t,iso,sex,age,bmi_group15)=
                         * p15_physical_activity_level(t,iso,sex,age);
 
 
-*' Then, the divergence of the BMI from the regressions
-*' during the historical period is estimated for calibration purposes.
-*' Within the optimization, it can however be altered to avoid shares below
-*' zero or above 1.
+*' Then, the divergence of the BMI from the regression during the historical
+*' period is estimated for calibration purposes.
+
 if (sum(sameas(t_past,t),1) = 1,
    i15_bmi_shr_regr_pre(t,iso,sex,agegroup15,bmi_tree15)  =
    f15_bmi_shr_paras(sex,agegroup15,bmi_tree15,"intercept")
@@ -274,9 +273,12 @@ p15_kcal_regr(t, iso, kfo)=v15_kcal_regr.l(iso, kfo);
 *' For this purpose, the residual between the regression fit and the observation
 *' is calculated for the historical period. When the historical period ends, the
 *' calibarion factor is fixed at the value of the last period.
-*' Additionally, a balance flow is calculated, which accounts for the mismatch
-*' of demand estimates (for all countries) and the countries with FAOSTAT data
-*' (only a subset), such that FAOSTAT data is still met.
+*' Additionally, a second calibration is requrired to meet the FAOSTAT fooduse
+*' demand. While the food demand model estimates the demand for all countries
+*' of the world, FAOSTAT only has a subset of countries. To match FAOSTAT totals,
+*' the food demand of these countries is calibrated to zero. As this calibration
+*' is done ex-post, food demand estimates can still be used for all countries,
+*' but MAgPIE only considers demand from FAOSTAT countries.
 
 if (sum(sameas(t_past,t),1) = 1,
     p15_kcal_calib(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))=0) = 0;
@@ -294,22 +296,24 @@ if (sum(sameas(t_past,t),1) = 1,
                       i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
 
 else
-*' The divergence of the kcal from the historical data is eventually faded out
+*' Depending on the scenario switch c15_calibscen, the divergence of the demand from the
+*' historical data is kept constant or eventually faded out
     p15_kcal_calib(t,iso,kfo) = p15_kcal_calib_lastcalibyear(iso,kfo) * f15_kcal_calib_fadeout(t,"%c15_calibscen%");
-*' The divergence of the kcal of countries with no data is kept constant over time
+*' The divergence of the kcal of countries with no FAOSTAT data is kept constant
+*' over time.
     p15_balanceflow_kcal_iso(t,iso,kfo) = p15_balanceflow_kcal_lastcalibyear(iso,kfo);
 
-*' The divergence of the BMI from the historical data is kept constant over time
-*' or fadet out.
+*' Depending on the scenario switch c15_calibscen, the divergence of the BMI from the historical
+*' data is kept constant over time or fadet out.
    i15_bmi_shr_calib(t,iso,sex,age,bmi_group15) =
                      i15_bmi_shr_calib_lastcalibyear(iso,sex,age,bmi_group15)
                      * f15_kcal_calib_fadeout(t,"%c15_calibscen%");
 );
 
-*' The calib is added to the regression value
+*' The calibration factor is added to the regression value.
    p15_kcal_pc_iso(t,iso,kfo) =
           v15_kcal_regr.l(iso,kfo) + p15_kcal_calib(t,iso,kfo) * s15_calibrate;
-*' Negative values that can possibly occur due to calib are set to zero
+*' Negative values that can possibly occur due to calibration, are set to zero.
    p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
 
 *' The country-level parameter p15_kcal_pc_iso is aggregated to

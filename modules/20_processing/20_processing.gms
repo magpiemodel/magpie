@@ -10,7 +10,7 @@
 *' are generated through conversion of raw products (especially of primary plant agricultural commodities)
 *' in order to meet the demand for those secondary products.
 
-*' @authors Benjamin Leon Bodirsky
+*' @authors Benjamin Leon Bodirsky, Amsalu Woldie Yalew
 
 
 *###################### R SECTION START (MODULETYPES) ##########################

@@ -7,12 +7,12 @@
 
 *' @equations
 
-*' Manure is esimtated based on feed intake minus the NPK incorporated
+*' Manure is estimated based on feed intake minus the NPK incorporated
 *' in the biomass of the slaughtered animal.
 *' We distinguish 4 general animal waste management systems based on
 *' what animals eat and where their manure remains. For simplification,
 *' we assume that pastures receive the manure of grazed biomass,
-*' while croplands receive the manure of cropbased feed. In reality,
+*' while croplands receive the manure of crop based feed. In reality,
 *' manure from grazing may be also excreted in stables and vice versa.
 *' Problematic may be in particular that grass can also be harvested and
 *' fed to animals in stables, and manure from confinements may be applied
@@ -28,7 +28,7 @@
          + sum(kap,vm_dem_feed(i2,kli,kap) * fm_attributes(npk,kap))
          + sum(ksd,vm_dem_feed(i2,kli,ksd) * fm_attributes(npk,ksd))
          + sum(kres,vm_dem_feed(i2,kli,kres) * fm_attributes(npk,kres)
-         *(1-sum(ct,im_development_state(ct,i2))*0.25))
+		 *(1-(1-sum(ct,im_development_state(ct,i2))))*0.25)
          ;
 
 *' b) grazing animals on pastures where the manure stays on pastures
@@ -38,6 +38,7 @@
          (vm_dem_feed(i2,kli,"pasture")) * fm_attributes(npk,"pasture")
          *(1-ic55_manure_fuel_shr(i2,kli))
          ;
+
 *' c) grazing animals on pastures where the manure is collected as household fuel
 
  q55_bal_intake_fuel(i2,kli,npk) ..
@@ -54,8 +55,13 @@
          *(1 - sum(ct,im_development_state(ct,i2)))*0.25)
          ;
 
-*' The Manure is estimated by substracting from feed a certain share which is
-*' incorporated into animal biomass. This share depends on the producivitiy of
+*' Please note that the share of residues fed via stubble grazing depends 
+*' on the development state and has to be subtracted from the residues fed to confined animals. 
+*' We assume that in developing regions 25% of residues are grazed by animals on stubble fields, 
+*' whereas stubble grazing is assumed to not occur in developed regions.
+		 
+*' The manure is estimated by subtracting from feed a certain share which is
+*' incorporated into animal biomass. This share depends on the productivity of
 *' the animal and is calculated in the preprocessing, also for computational
 *' reasons.
 
