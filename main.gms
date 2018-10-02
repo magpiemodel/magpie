@@ -8,17 +8,17 @@ $title magpie
 
 *' @title MAgPIE - Modelling Framework
 *'
-*' @description The *Model of Agricultural Production and its Impact on the 
+*' @description The *Model of Agricultural Production and its Impact on the
 *' Environment* (MAgPIE) is developed and used to assess the competition for
 *' land and water and the associated consequences for sustainable development
-*' under future scenarios of rising food, energy and material demand as well 
+*' under future scenarios of rising food, energy and material demand as well
 *' as production, climate change impacts and greenhouse gas mitigation and
-*' different land related policies. 
+*' different land related policies.
 *'
 *' MAgPIE is a global partial equilibrium model of the land-use sector that operates
-*' in a recursive dynamic mode and incorporates spatially explicit information on 
+*' in a recursive dynamic mode and incorporates spatially explicit information on
 *' biophysical constraints into an economic decision making process (@lotze-campen_global_2008).
-*' It takes regional economic conditions such as elastic demand for agricultural commodities, 
+*' It takes regional economic conditions such as elastic demand for agricultural commodities,
 *' technological development and production costs as well as spatially explicit data on biophysical
 *' constraints into account. Geographically explicit data on biophysical conditions are provided
 *' by the Lund-Potsdam-Jena managed land model (LPJmL) (@bondeau_lpjml_2007, @mueller_projecting_2014)
@@ -35,80 +35,85 @@ $title magpie
 *' cereals, maize, rice, oilseeds, roots), both rainfed and irrigated systems, and two
 *' 2nd generation bioenergy crop types (grassy and woody).
 *'
-*' The supply of animal-based food commodities is divided into five livestock production
-*' activities (ruminant meat, pig meat, poultry meat, eggs and milk) (@weindl_livestock_2017-1).
-*' Furthermore, primary products can also be processed to secondary products such as sugar
-*' or ethanol ([20_processing]) in the model. Taking international trade based on historical trade patterns
-*' and economic competitiveness ([21_trade]) into account, global production has to meet demand for food,
-*' feed, seed, bioenergy and material demand ([16_demand]). The quantity of livestock production in
+*' Taking into account international trade based on historical trade patterns and economic
+*' competitiveness ([21_trade]), global production has to meet demand for food,
+*' feed, seed, processing, bioenergy and material demand ([16_demand]). Food demand is
+*' derived based on population growth ([09_drivers]) and dietary transitions, accounting
+*' for changes in intake and food waste, the shift in the share of animal calories,
+*' processed products, fruits and vegetables as well as staples ([15_food]).
+*' Primary products can be processed to secondary products such as sugar, oil
+*' or ethanol ([20_processing]). The quantity of livestock production in
 *' combination with dynamic regional and livestock-specific feed baskets determines the
-*' demand for feed ([70_livestock]). The spatial distribution of crops ([30_crop]), livestock
-*' ([71_disagg_lvst]) and pasture ([31_past]) in MAgPIE is
-*' guided by geographically explicit information on vegetation growth and the balance
-*' between crop water demand and water availability, by initial land cover distribution maps
+*' demand for feed ([70_livestock]). The supply of animal-based food commodities is divided into five livestock production
+*' activities (ruminant meat, pig meat, poultry meat, eggs and milk) (@weindl_livestock_2017-1).
+*' The spatial distribution of crops ([30_crop]), livestock ([71_disagg_lvst])
+*' and pasture ([31_past]) in MAgPIE is guided by geographically explicit
+*' information on vegetation growth and the balance between crop water
+*' demand and water availability, by initial land cover distribution maps
 *' as well as by economic conditions like trade barriers ([21_trade]), management intensity ([13_tc])
-*' and transport costs ([40_transport]). It therefore integrates information about market access into 
+*' and transport costs ([40_transport]). It therefore integrates information about market access into
 *' the model's optimization process that determines where cropping activities and livestock production
-*' are allocated to. Parts of forests and other natural land area can be excluded from conversion into 
-*' agricultural land if designated for wood production or located in protected areas ([32_forestry], 
-*' [35_natveg]) (@kreidenweis_pasture_2018). 
+*' are allocated to. Parts of forests and other natural land area can be excluded from conversion into
+*' agricultural land if designated for wood production or located in protected areas ([32_forestry],
+*' [35_natveg]) (@kreidenweis_pasture_2018).
 *'
 *' Due to computational constraints, all model inputs in 0.5 degree resolution are aggregated
-*' to simulation units for the optimization process ([80_optimization]) based on a clustering 
-*' algorithm (@dietrich_reducing_2013). 
+*' to simulation units for the optimization process ([80_optimization]) based on a clustering
+*' algorithm (@dietrich_reducing_2013).
 *'
 *' MAgPIE estimates flows of different land-based greenhouse gases (GHGs). CO2 emissions are computed
 *' from land-use change dynamics, i.e. from conversion of different biomes into agricultural land
 *' and consequent loss of terrestrial carbon stocks (@popp_land-use_2014), also including the
 *' depletion of organic matter in soils ([59_som]). The land also serves as a sink for atmospheric
 *' carbon when agricultural land is set aside from production and the associated regrowth of natural
-*' vegetation generates negative emissions from land-use change. Nitrogen emissions
-*' ([51_nitrogen]) are estimated based on nitrogen budgets for croplands, pastures ([50_nr_budgets])
-*' and the livestock sector ([55_awms]) (@bodirsky_reactive_2014). CH4 emissions are based on
+*' vegetation generates negative emissions from land-use change.
+*' Nitrogen emissions ([51_nitrogen]) are estimated based on nitrogen budgets for croplands,
+*' pastures ([50_nr_budgets]) and the livestock sector ([55_awms]) (@bodirsky_reactive_2014).
+*' CH4 emissions are based on
 *' livestock feed and rice cultivation areas (@popp_food_2010). In the case of mitigation
 *' policies for the land sector, the model can reduce CO2 emissions by restraining land-use
 *' conversion and consequent carbon release as well as CH4 and N emissions by applying improved
 *' agricultural management (such as anaerobic digesters for CH4 capture from animal waste, or use
 *' of fertilizer spreaders) (@popp_land-use_2014, @stevanovic_mitigation_2017). In addition,
 *' the model covers land-based carbon removal technologies such as bioenergy with carbon capture
-*' and sequestration (CCS) and afforestation (@humpenoder_investigating_2014, 
-*' @humpenoder_large-scale_2017, @kreidenweis_afforestation_2016). 
+*' and sequestration (CCS) and afforestation (@humpenoder_investigating_2014,
+*' @humpenoder_large-scale_2017, @kreidenweis_afforestation_2016).
 *'
 *' In response to all involved demand for agricultural commodities, costs of production,
 *' biophysical constraints and land-related policies, MAgPIE simulates major dynamics of
 *' the land-use sector like investments in research and development (R&D) ([13_tc]) (@dietrich_forecasting_2014)
 *' and associated increases in both crop yields  ([14_yields]) and biomass removal through grazing on
-*' pastures ([31_past]), land use change ([39_landconversion]), interregional trade flows ([21_trade]), 
+*' pastures ([31_past]), land use change ([39_landconversion]), interregional trade flows ([21_trade]),
 *' and irrigation ([41_area_equipped_for_irrigation]).
 
 
 
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
+*
 * Used data set: magpie4.0_default_sep18.tgz
 * md5sum: 98e158205482936e487aeb616dea5403
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
+*
 * Low resolution: c200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    28   24   10    7    3   53   17    8   22    7   11   10
-* 
+*
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-* 
+*
 * Regions data revision: 4.14
-* 
+*
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
 * * Additional input folder: /p/projects/landuse/data/input/other/rev34
 * * Revision: 34
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-* 
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
@@ -118,11 +123,11 @@ $title magpie
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
-* 
-* 
-* 
+*
+*
+*
 * Last modification (input data): Thu Sep 27 16:08:48 2018
-* 
+*
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
