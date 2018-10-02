@@ -14,9 +14,9 @@ scalar s15_elastic_demand  elastic demand switch (1=elastic 0=exogenous) (1) / 1
 scalar s15_calibrate Calibration switch (1=calibrated 2=pure regresssion outcomes) (1) / 1 /;
 * only for per-capita calories, not for e.g. calibration of transformation parameters between per-capita calories in dm
 
-scalar s15_maxiter Maximum iteration number (1) / 5 /;
+scalar s15_maxiter Scalar defining maximum number of iterations (1) / 5 /;
 
-scalar s15_convergence Convergence criteria (1) / 0.005 /;
+scalar s15_convergence Convergence criterion (1) / 0.005 /;
 
 table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of heterogeneous products and processes (mio. tDM)
 $ondelim
@@ -36,12 +36,12 @@ $offdelim;
 * kcal/capita/day for saturation and intercept, and
 * USD05/capita for halfsaturation
 
-table f15_demand_paras(regr15,food_scen15,par15)  Food regression parameters (X)
+table f15_demand_paras(regr15,food_scen15,par15)  Food regression parameters in USD05PPP or dimensionless (X)
 $ondelim
 $include "./modules/15_food/input/f15_demand_regression_parameters.cs3"
 $offdelim;
 
-table f15_bmi_shr_paras(sex, agegroup15, bmi_tree15, paras_b15)  BMI share regression parameters (X)
+table f15_bmi_shr_paras(sex, agegroup15, bmi_tree15, paras_b15)  BMI share regression parameters in USD05PPP or dimensionless (X)
 $ondelim
 $include "./modules/15_food/input/f15_bmi_shr_regr_paras.cs3"
 $offdelim;
@@ -57,7 +57,7 @@ $include "./modules/15_food/input/f15_bmi_shr_past.cs3"
 $offdelim;
 
 
-table f15_kcal_pc_iso(t_all,iso,kfo)  Observed per capita calories in the past (kcal per capita per day)
+table f15_kcal_pc_iso(t_all,iso,kfo)  Observed per capita calories in the past (kcal per cap per day)
 $ondelim
 $include "./modules/15_food/input/f15_kcal_pc_iso.csv"
 $offdelim;
@@ -97,12 +97,12 @@ $include "./modules/15_food/input/f15_ruminant_fadeout.csv"
 $offdelim
 ;
 
-table f15_bodyheight(t_all,iso,sex,age)   Body height (cm)
+table f15_bodyheight(t_all,iso,sex,age)   Body height (cm per cap)
 $ondelim
 $include "./modules/15_food/input/f15_bodyheight_historical.cs3"
 $offdelim;
 
-table f15_schofield(sex,age, paras_s15) Schofield equation parameters (-)
+table f15_schofield(sex,age, paras_s15) Schofield equation parameters in kcal per capita per day or kcal per capita per day per weight (X)
 $ondelim
 $include "./modules/15_food/input/f15_schofield_parameters.cs3"
 $offdelim
