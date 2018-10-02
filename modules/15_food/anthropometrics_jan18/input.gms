@@ -36,12 +36,12 @@ $offdelim;
 * kcal/capita/day for saturation and intercept, and
 * USD05/capita for halfsaturation
 
-table f15_demand_paras(regr15,food_scen15,par15)  Food regression parameters (X)
+table f15_demand_paras(regr15,food_scen15,par15)  Food regression parameters in USD05PPP or dimensionless (X)
 $ondelim
 $include "./modules/15_food/input/f15_demand_regression_parameters.cs3"
 $offdelim;
 
-table f15_bmi_shr_paras(sex, agegroup15, bmi_tree15, paras_b15)  BMI share regression parameters (X)
+table f15_bmi_shr_paras(sex, agegroup15, bmi_tree15, paras_b15)  BMI share regression parameters in USD05PPP or dimensionless (X)
 $ondelim
 $include "./modules/15_food/input/f15_bmi_shr_regr_paras.cs3"
 $offdelim;
@@ -57,7 +57,7 @@ $include "./modules/15_food/input/f15_bmi_shr_past.cs3"
 $offdelim;
 
 
-table f15_kcal_pc_iso(t_all,iso,kfo)  Observed per capita calories in the past (kcal per capita per day)
+table f15_kcal_pc_iso(t_all,iso,kfo)  Observed per capita calories in the past (kcal per cap per day)
 $ondelim
 $include "./modules/15_food/input/f15_kcal_pc_iso.csv"
 $offdelim;
@@ -97,12 +97,12 @@ $include "./modules/15_food/input/f15_ruminant_fadeout.csv"
 $offdelim
 ;
 
-table f15_bodyheight(t_all,iso,sex,age)   Body height (cm per capita)
+table f15_bodyheight(t_all,iso,sex,age)   Body height (cm per cap)
 $ondelim
 $include "./modules/15_food/input/f15_bodyheight_historical.cs3"
 $offdelim;
 
-table f15_schofield(sex,age, paras_s15) Schofield equation parameters (X)
+table f15_schofield(sex,age, paras_s15) Schofield equation parameters in kcal per capita per day or kcal per capita per day per weight (X)
 $ondelim
 $include "./modules/15_food/input/f15_schofield_parameters.cs3"
 $offdelim

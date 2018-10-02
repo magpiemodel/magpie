@@ -313,7 +313,7 @@ else
 *' The calibration factor is added to the regression value.
    p15_kcal_pc_iso(t,iso,kfo) =
           v15_kcal_regr.l(iso,kfo) + p15_kcal_calib(t,iso,kfo) * s15_calibrate;
-*' Negative values that can possibly occur due to calibratopn are set to zero.
+*' Negative values that can possibly occur due to calibration, are set to zero.
    p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
 
 *' The country-level parameter p15_kcal_pc_iso is aggregated to
