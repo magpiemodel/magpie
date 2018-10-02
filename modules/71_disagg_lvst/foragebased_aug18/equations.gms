@@ -7,8 +7,8 @@
 *' @equations
 
 *' Ruminant livestock production within a cell is determined by the production of the non-transportable 
-*' feed items grazed pasture and fodder. They have be larger than the ruminant feed requirements 
-*' ensured by the following equation containing a split of pasture and fodder fed ruminants  
+*' feed items: grazed pasture and fodder crops. They have to be larger than the ruminant feed requirements, 
+*' that are given by the product of ruminant production and the respective feed baskets:
 
 q71_feed_rum_liv(j2,kforage) ..
                  vm_prod(j2,kforage) =g=
@@ -17,31 +17,41 @@ q71_feed_rum_liv(j2,kforage) ..
 				 * (1 + v71_feed_balanceflow(j2,kli_rum,kforage)$(s71_lp_fix=0))
 				 + v71_feed_balanceflow(j2,kli_rum,kforage)$(s71_lp_fix=1))
 				 ;
+				 
+				 
+*' The above equation contains a split of pasture and fodder fed ruminants, since we assume that depending 
+*' on the intensity level of the livestock production, ruminants will graze on pastures (extensive systems) 
+*' or will be fed via harvested fodder crops (intensive systems).  
+*' Please note that `s71_lp_fix` is set to zero (for more information please look into the source code). 	
 
-*' The balance flow for pasture and fodder (summarized with forage) production, that leads to a distortion 
-*' of the relationship between the livestock and feed production, is incorporated for a linear and non-linear 
-*' realization of this module. 
+*' The balance flow for pasture and fodder (summarized with forage) production, accounts as in 
+*' [70_livestock] `q70_feed(i2,kap,kall)` for inconsistencies with the FAO inventory of national feed use.
 			
-*' If module is fixed to linear behaviour the balance flow is allowed to be used in any cell 
-*' containing pasture respectively cropland area in the previous time step ensured by the restrictions 
-*' in the nl_fix statement. The balanceflow within a region is than determined by 
+*' @stop
+
+* If module is fixed to linear behaviour the balance flow is allowed to be used in any cell 
+* containing pasture or cropland area in the previous time step ensured by the restrictions 
+* in the nl_fix statement. The balance flow within a region is then determined by 
 
 q71_balanceflow_constraint_lp(i2,kli_rum,kforage)$(s71_lp_fix=1) ..
                  sum(ct, fm_feed_balanceflow(ct,i2,kli_rum,kforage)) =e=
                   sum(cell(i2,j2), v71_feed_balanceflow(j2,kli_rum,kforage))
                  ;
+
+* Note that for fixation to linear behaviour `q71_balanceflow_constraint_lp` replaces `q71_balanceflow_constraint_nlp`.
 				 
-*' In the non linear version the balanceflow in each cluster is constraint by its share of 
-*' livestock production regarding the regional level by  
+*' @equations
+
+*' In each cluster the balance flow is constrained by its share of livestock production regarding the regional level by  
 				 
 q71_balanceflow_constraint_nlp(j2,kli_rum,kforage)$(s71_lp_fix=0) ..
 		         v71_feed_balanceflow(j2,kli_rum,kforage) =e= 
 		         sum((ct,cell(i2,j2)),fm_feed_balanceflow(ct,i2,kli_rum,kforage)
-				 * 1/(im_feed_baskets(ct,i2,kli_rum,kforage)*vm_prod_reg(i2,kli_rum) + 10**(-6)))
+				 /(im_feed_baskets(ct,i2,kli_rum,kforage)*vm_prod_reg(i2,kli_rum) + 10**(-6)))
                  ;
 
-*' Note that $10^(-6)$ is required to avoid division by zero. 		 
-*' The regional ruminant production is than given by
+*' Note that $10^{-6}$ is required to avoid division by zero. 		 
+*' The regional ruminant production is then given by
 
 q71_sum_rum_liv(j2,kli_rum) ..
                  vm_prod(j2,kli_rum) =e= sum(kforage,v71_prod_rum(j2,kli_rum,kforage))
