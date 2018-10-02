@@ -61,7 +61,11 @@ q15_budget(iso) ..
 *' food demand as well as dietary composition.
 
 *' The BMI distribution within the population is calculated using
-*' regressions in a hierachical tree. First, the regression shares are calculated:
+*' regressions in a hierachical tree to estimate the share of the population
+*' falling into a certain BMI class.
+*' ![Hierarchical tree used to estimate BMI population shares](hierarchical_tree.png){ width=100% }
+
+*' First, the regression shares are calculated:
 
 q15_regr_bmi_shr(iso,sex,agegroup15,bmi_tree15) ..
         v15_regr_overgroups(iso,sex,agegroup15,bmi_tree15)
@@ -70,7 +74,8 @@ q15_regr_bmi_shr(iso,sex,agegroup15,bmi_tree15) ..
         + (i15_bmi_saturation(sex,agegroup15,bmi_tree15) * v15_income_pc_real_ppp_iso(iso))
         / (i15_bmi_halfsat(sex,agegroup15,bmi_tree15) + v15_income_pc_real_ppp_iso(iso));
 
-*' Then, these regression shares are applied to a hierarchical tree structure:
+*' Then, these regression shares are applied to parameterize the
+*' hierarchical tree structure:
 
 q15_bmi_shr_verylow(iso,sex,agegroup15) ..
         v15_bmi_shr_overgroups(iso,sex,agegroup15,"verylow")
