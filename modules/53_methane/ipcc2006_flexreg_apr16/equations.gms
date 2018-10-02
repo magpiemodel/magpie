@@ -36,7 +36,7 @@
 *' These attributes or coefficients are then used in content conversions in may modules of the model.
 *'
 *' The second equation of this realization is meant to calculate CH4 emission from
-*' animal waste management(AWM). In general, AWM depends on the amount of manure
+*' animal waste management (AWM). In general, AWM depends on the amount of manure
 *' excreted in confinements (such as stables or barns) (see [55_awms])and its
 *' subsequent storage.
 *' We calculate the CH4 emission per unit of nitrogen in manure based on @ipcc_2006_2006
