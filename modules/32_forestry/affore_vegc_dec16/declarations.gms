@@ -19,7 +19,7 @@ parameters
 ;
 
 positive variables
- vm_cost_fore(i)                        Afforestation costs (mio. USD04MER)
+ vm_cost_fore(i)                        Afforestation costs (mio. USD04MER per yr)
  v32_land(j,land32)                     Forestry land pools (mio. ha)
  vm_landdiff_forestry                   Aggregated difference in forestry land compared to previous timestep (mio. ha)
  v32_land_expansion(j,land32) 			Forestry land expansion compared to previous timestep (mio. ha)
@@ -42,7 +42,7 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_fore(t,i,type)               Afforestation costs (mio. USD04MER)
+ ov_cost_fore(t,i,type)               Afforestation costs (mio. USD04MER per yr)
  ov32_land(t,j,land32,type)           Forestry land pools (mio. ha)
  ov_landdiff_forestry(t,type)         Aggregated difference in forestry land compared to previous timestep (mio. ha)
  ov32_land_expansion(t,j,land32,type) Forestry land expansion compared to previous timestep (mio. ha)
