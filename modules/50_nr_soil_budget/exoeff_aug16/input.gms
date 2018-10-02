@@ -13,6 +13,11 @@ $setglobal c50_scen_neff  neff60_60_starty2010
 $setglobal c50_dep_scen  history
 *   options:   history
 
+scalar
+      s50_fertilizer_costs Costs of fertilizer (USD05MER per tN)            / 600 /
+;
+
+
 parameter f50_snupe(t_all,i,scen_neff50)  selected scenario values for soil nitrogen uptake efficiency (1)
 /
 $ondelim

@@ -36,5 +36,6 @@ $Ifi "%phase%" == "nl_relax" $include "./modules/15_food/anthropometrics_jan18/n
 *' as staple calories.
 *' The food demand model can be run in standalone mode by running the
 *' the file `standalone/demand_model.gms`.
+*' The model is described in [@bodirsky_starved_nodate]
 *'
 *' @authors Benjamin Leon Bodirsky, Jan Philipp Dietrich
