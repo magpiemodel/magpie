@@ -84,7 +84,7 @@ q20_processing_substitution_brans(i2) ..
 *' and the type of secondary product (e.g. brans, sugar, fiber) product.
 *' The unit costs of processing, `f20_processing_unitcosts`,
 *' are specific for the different conversion routes and are collected, interpolated,
-*' and extrapolated from the scant related literature
+*' and extrapolated from the related literature (e.g. @adanacioglu_profitability_2011, @pikaar_decoupling_2018, @valco_thecost_2016)
 *' complemented with best educated guess by the module authors.
 
 q20_processing_costs(i2) ..
