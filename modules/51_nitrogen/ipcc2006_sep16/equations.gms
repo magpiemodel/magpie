@@ -6,7 +6,7 @@
 
 *' @equations
 
-*' Nitrogeneous emissions stem from:
+*' Nitrogeneous emissions stem from reactive nitrogen (Nr) in:
 *' Manure applied to croplands...
  q51_emissions_man_crop(i2,n_pollutants_direct)..
                  vm_btm_reg(i2,"man_crop",n_pollutants_direct)
