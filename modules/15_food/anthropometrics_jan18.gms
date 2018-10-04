@@ -39,3 +39,4 @@ $Ifi "%phase%" == "nl_relax" $include "./modules/15_food/anthropometrics_jan18/n
 *' The model is described in [@bodirsky_starved_nodate]
 *'
 *' @authors Benjamin Leon Bodirsky, Jan Philipp Dietrich
+
