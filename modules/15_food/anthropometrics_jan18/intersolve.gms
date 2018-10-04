@@ -4,9 +4,9 @@ option nlp = conopt4
 * calculate prices for providing 1 kcal per day of one commodity
 
 *' @code
-*' After MAgPIEs execution of a timestep, the shadow prices of the food demand
+*' After one time step of MAgPIE is executed, the shadow prices of the food demand
 *' constraint are fed back into the food demand module, and the food demand
-*' module is executed again.
+*' module is executed once again.
 *' @stop
 
 if (magpie.modelstat = NA,
@@ -63,13 +63,13 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
 
 
 *' @code
-*' If s15_elastic_demand is 0, MAgPIE is not executed again for this timestep.
-*' In case s15_elastic_demand is 1, we check whether MAgPIE and the food demand
-*' model have reached sufficient convergence. The criteria for this is whether
-*' the real income in the food demand model has changed in any country by
-*' more than s15_convergences_measure relative to the last iteration due to
-*' changes in food prices from MAgPIE. Moreover, the model breaks when the
-*' number of iterations reaches s15_maxiter.
+*' If `s15_elastic_demand` is 0, MAgPIE is not executed again for this time step.
+*' In case that `s15_elastic_demand` is 1, it is checked whether MAgPIE and the
+*' food demand model have reached sufficient convergence. The criterion for this
+*' is whether the real income in the food demand model has changed in any country
+*' by more than `s15_convergences_measure` relative to the last iteration due to
+*' changes in food prices from MAgPIE. Moreover, the model aborts when the
+*' number of iterations reaches `s15_maxiter`.
 *' As long as the iteration continues, the food prices are transferred from
 *' MAgPIE to the food demand model, and the food demand is transferred from
 *' the food demand model to MAgPIE.
@@ -141,7 +141,7 @@ display "exogenous demand information is used" ;
            v15_bmi_shr_regr.l(iso,sex,age,bmi_group15)+
            i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
 
-*' The bmi shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
+*' The BMI shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
    p15_bmi_shr(t,iso,sex,age,bmi_group15)$(p15_bmi_shr(t,iso,sex,age,bmi_group15)<0) = 0;
    p15_bmi_shr(t,iso,sex,age,bmi_group15)$(p15_bmi_shr(t,iso,sex,age,bmi_group15)>1) = 1;
 *' The mismatch is balanced by moving the exceeding quantities into the middle BMI group.
@@ -186,11 +186,14 @@ For (s15_count = 1 to (m_yeardiff(t)/5),
                 + p15_kcal_pc_iso(t-1,iso,growth_food15) * (1 - s15_count / (m_yeardiff(t)/5))
             );
 *' @code
-*' After each execution of the food demand model, the body height is estimated
-*' We start from the bodyheight structure of the last timestep. Then we move all
-*' 5yr-age classes up by one. The 15-19 year old age class is calculated newly
+*' After each execution of the food demand model, the body height distribution
+*' of the population is estimated. The starting point is the body height
+*' distribution of the last timestep. The body height estimates of the old
+*' period are moved into the subsequent age class (e.g. the 20-24 year old are
+*' now 25-29 years old). The age class of 15-19 year olds is estimated newly
 *' using the body height regressions and the food consumption of the last 15
 *' years.
+
    p15_bodyheight(t,iso,"F","15--19","final") =
                      126.4*
                      (sum(underaged15,
@@ -207,10 +210,10 @@ For (s15_count = 1 to (m_yeardiff(t)/5),
 );
 
 *' @code
-*' The bodyheight of the underaged 0--14 is assumed to diverge from 'normal'
-*' bodyheight by the same proportion as the 15-19 year old age-class'.
-*' This is rotation is repeated for the 5-yr length of the timestep, so in case
-*' of a 15 yr timestep 3 times.
+*' The bodyheight of the underaged age class (0-14) is assumed to diverge from 'normal'
+*' body height by the same proportion as age class of the 15-19 year olds.
+*' This  rotation is repeated for the 5-year length of the time step, it is repeated
+*' 3 times.
 
 p15_bodyheight(t,iso,"M","0--4","final")=p15_bodyheight(t,iso,"M","15--19","final")/176*92;
 p15_bodyheight(t,iso,"M","5--9","final")=p15_bodyheight(t,iso,"M","15--19","final")/176*125;
@@ -223,9 +226,9 @@ p15_bodyheight(t,iso,"F","10--14","final")=p15_bodyheight(t,iso,"M","15--19","fi
 *' @stop
 
 *' @code
-*' Finally the regression outcome is calibrated by a country-specific additive
-*' term which is the residual of regression result and observation of the last
-*' historical timestep
+*' Finally, the regression outcome is calibrated by a country-specific additive
+*' term, which is the residual of the regression fit and observation of the last
+*' historical time step
 
 if (sum(sameas(t_past,t),1) = 1,
 * for historical period only use estimate to calibrate balanceflow but use historical data for values

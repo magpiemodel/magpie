@@ -3,10 +3,10 @@ option nlp = conopt4
 
 *' @code
 *' Within the major foodgroups determined by the regressions
-*' '(animal calories, empty calories, fruits, vegetable and nut calories as well as staple calories)
-*' we assume that the relative share of individual products (e.g. eggss with animal calories) stay
-*' the same. An exception is the demand for ruminant meat, which declines in the course of the
-*' century at the cost of chicken meat.
+*' (animal calories, empty calories, fruits, vegetable and nut calories as well as staple calories),
+*' the relative share of individual products (e.g. eggss with animal calories)
+*' is assumed to be constant. An exception is the demand for ruminant meat,
+*' which declines in the course of the century at the cost of chicken meat.
 *' @stop
 
 if (sum(sameas(t_past,t),1) = 1,
@@ -78,15 +78,15 @@ if (sum(sameas(t_past,t),1) = 1,
 *' @code
 *' The calculations are exectued in the following order:
 *'
-*' In the beginning of each timestep, the bodyheight is estimated based on the diets
-*' of the previous 15 years. In case the timestep length exceed 5 years, the consumption
-*' is extrapolated using the last two timesteps.
-*' Bodyheight is estimated using the consumption of proteins and fats, in our case
+*' In the beginning of each time step, the body height is estimated based on the diets
+*' of the previous 15 years. In case that the time step length exceed 5 years, the consumption
+*' is extrapolated using the last two time steps.
+*' Body height is estimated using the consumption of proteins and fats, in our case
 *' the foodgroups animal products, pulses and oils.
-*' To estimate the body size of underaged (0--14 years), we scale the WHO body height
-*' recommendations for underaged with the divergence of the 15--19 year olds.
-*' The bodyheight estimates are repeated again at the end of the timestep to improve
-*' the results of the extrapolation for cases where timestep length exceeds 5 years.
+*' To estimate the body size of underaged (0-14 years), we scale the WHO body height
+*' recommendations for underaged with the divergence of the 15-19 year olds.
+*' The body height estimates are repeated again at the end of the time step to improve
+*' the results of the extrapolation for cases where the time step length exceeds 5 years.
 *' @stop
 
 * ###### ANTHROPOMETRIC ESIMTATES
@@ -149,9 +149,9 @@ else
 *### estimate standardized food requirement
 p15_bodyweight(t,iso,sex,age,bmi_group15)= f15_bmi(sex,age,bmi_group15) * (p15_bodyheight(t,iso,sex,age,"preliminary")/100)**2;
 
-*' Physical activity levels (PAL) relative to Basic metabolic rate (BMR) are
-*' estimated based on physical inactivity level and assuming PALs for sedentary
-*' or medium-active populations of 1.53 and 1.76.
+*' Physical activity levels (PAL) relative to the basic metabolic rate (BMR) are
+*' estimated based on physical inactivity levels, assuming PALs for sedentary
+*' and medium-active populations of 1.53 and 1.76 respectively.
 p15_physical_activity_level(t,iso,sex,age)=
                             im_physical_inactivity(t,iso,sex,age) * 1.53
                             +(1-im_physical_inactivity(t,iso,sex,age)) * 1.76
@@ -164,10 +164,9 @@ i15_intake(t,iso,sex,age,bmi_group15)=
                         * p15_physical_activity_level(t,iso,sex,age);
 
 
-*' Now we estimate the divergence of the BMI from the regressions
-*' during the historical period for calibration purposes.
-*' Within the optimization, it can however be altered to avoid shares below
-*' zero or above 1.
+*' Then, the divergence of the BMI from the regression during the historical
+*' period is estimated for calibration purposes.
+
 if (sum(sameas(t_past,t),1) = 1,
    i15_bmi_shr_regr_pre(t,iso,sex,agegroup15,bmi_tree15)  =
    f15_bmi_shr_paras(sex,agegroup15,bmi_tree15,"intercept")
@@ -211,12 +210,14 @@ if (sum(sameas(t_past,t),1) = 1,
 
 else
 *' The divergence of the BMI from the historical data is kept constant over time
-*' or fadet out.
+*' or fades out.
    i15_bmi_shr_calib(t,iso,sex,age,bmi_group15) =
    i15_bmi_shr_calib_lastcalibyear(iso,sex,age,bmi_group15)
    * f15_kcal_calib_fadeout(t,"%c15_calibscen%");
 );
-*' pregnancy and lactation requires extra intake. We distribute the newborns among reproductive women and multuply with extra energy requirements
+*' Pregnancy and lactation requires additonal food intakes. To account for this,
+*' newborns are distributed among reproductive women in a population. This number
+*' is then multiplied with the extra energy requirements
 i15_kcal_pregnancy(t,iso)=sum(sex,im_demography(t,iso,sex,"0--4")/5) * ((40/66)*845 + (26/66)*675);
 
 *' @stop
@@ -226,8 +227,8 @@ i15_kcal_pregnancy(t,iso)=sum(sex,im_demography(t,iso,sex,"0--4")/5) * ((40/66)*
 *###### Estimation of food demand using a first run of the food demand model with unshocked prices.
 
 *' @code
-*' Before MAgPIE is executed, the food demand model is executed the first time
-*' with unshocked prices.
+*' Before MAgPIE is executed, the food demand model is executed, at first
+*' without price shocks.
 *' @stop
 
 * demand for non-food products "knf" is set to 0;
@@ -268,14 +269,16 @@ p15_kcal_regr(t, iso, kfo)=v15_kcal_regr.l(iso, kfo);
 * deriving calibration values
 
 *' @code
-*' Food demand and BMIis calibrated to meet the historical food demand.
-*' For this purpose,
-*' we calculate in the historical period with observations the residual between
-*' the regression and the observation. When the historical period ends, the
+*' Food demand and BMIs are calibrated so that historical food demand is met.
+*' For this purpose, the residual between the regression fit and the observation
+*' is calculated for the historical period. When the historical period ends, the
 *' calibarion factor is fixed at the value of the last period.
-*' Additionally, we also need a balanceflow, which accounts for the mismatch
-*' of demand estimates (for all countries) and the countries with FAOSTAT data
-*' (only a subset), such that FAOSTAT data is still met.
+*' Additionally, a second calibration is requrired to meet the FAOSTAT fooduse
+*' demand. While the food demand model estimates the demand for all countries
+*' of the world, FAOSTAT only has a subset of countries. To match FAOSTAT totals,
+*' the food demand of these countries is calibrated to zero. As this calibration
+*' is done ex-post, food demand estimates can still be used for all countries,
+*' but MAgPIE only considers demand from FAOSTAT countries.
 
 if (sum(sameas(t_past,t),1) = 1,
     p15_kcal_calib(t,iso,kfo)$(sum(kfo2,f15_kcal_pc_iso(t,iso,kfo2))=0) = 0;
@@ -293,22 +296,24 @@ if (sum(sameas(t_past,t),1) = 1,
                       i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
 
 else
-*' The divergence of the kcal from the historical data is eventually faded out
+*' Depending on the scenario switch c15_calibscen, the divergence of the demand from the
+*' historical data is kept constant or eventually faded out
     p15_kcal_calib(t,iso,kfo) = p15_kcal_calib_lastcalibyear(iso,kfo) * f15_kcal_calib_fadeout(t,"%c15_calibscen%");
-*' The divergence of the kcal of countries with no data is kept constant over time
+*' The divergence of the kcal of countries with no FAOSTAT data is kept constant
+*' over time.
     p15_balanceflow_kcal_iso(t,iso,kfo) = p15_balanceflow_kcal_lastcalibyear(iso,kfo);
 
-*' The divergence of the BMI from the historical data is kept constant over time
-*' or fadet out.
+*' Depending on the scenario switch c15_calibscen, the divergence of the BMI from the historical
+*' data is kept constant over time or fadet out.
    i15_bmi_shr_calib(t,iso,sex,age,bmi_group15) =
                      i15_bmi_shr_calib_lastcalibyear(iso,sex,age,bmi_group15)
                      * f15_kcal_calib_fadeout(t,"%c15_calibscen%");
 );
 
-*' The calib is added to the regression value
+*' The calibration factor is added to the regression value.
    p15_kcal_pc_iso(t,iso,kfo) =
           v15_kcal_regr.l(iso,kfo) + p15_kcal_calib(t,iso,kfo) * s15_calibrate;
-*' Eventual negative values that can occur due to calib are set to zero
+*' Negative values that can possibly occur due to calibration, are set to zero.
    p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
 
 *' The country-level parameter p15_kcal_pc_iso is aggregated to

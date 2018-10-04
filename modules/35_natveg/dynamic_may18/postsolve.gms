@@ -5,9 +5,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 if((ord(t) = 1),
-* In the 1st timestep there is a lot of reshuffling resulting in increase of v35_other(j,"new").
-* This would result in quite some carbon uptake (negative emissions) due to regrowth of vegetation.
-* Therefore, we reset age-classes after the optimization of the 1st time step.
+* Reshuffling of agricultural land in the 1st timestep results in an artificial increase of v35_other(j,"new").
+* This would result in carbon uptake (negative emissions) due to regrowth of vegetation.
+* To avoid this artificial effect on CO2 emissions we reset age-classes after the optimization of the 1st time step.
 	v35_other.l(j,land35) = 0;
 	v35_other.l(j,"old") = vm_land.l(j,"other");
 	p35_other(t,j,ac,"after") = 0;

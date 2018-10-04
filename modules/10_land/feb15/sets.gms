@@ -5,5 +5,5 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-  t_ini10  t_all
+  t_ini10  Time periods with land initialization data
        / y1995, y2000, y2005, y2010, y2015 /

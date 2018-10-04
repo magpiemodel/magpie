@@ -6,11 +6,14 @@
 
 *' @title Material
 *'
-*' @description The material module describes the demand for material usage
+*' @description
+*' The material module describes the demand for material usage
 *' based on historical data. Material uage is derived from FAO's "other utils"
-*' category. This category when translated into MAgPIE world, provide bioenergy
-*' and material demand. Material demand in this context can be considered as a
-*' subset of "other utils" category of FAO.
+*' category, and includes for example the use of agricultural products
+*' for cosmetics, chemical usage or textiles. In contrast to FAO's other util
+*' category, the use for bioenergy (oils and ethanol) has been excluded
+*' and is accounted for in the demand for bioenergy. Material demand in this
+*' context can be considered as a subset of "other utils" category of FAO.
 
 *' @authors Benjamin Bodirsky
 

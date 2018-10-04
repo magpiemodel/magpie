@@ -134,21 +134,21 @@ update_sets <- function(cpr,map) {
     '*THERE YOU CAN ALSO FIND ADDITIONAL INFORMATION')
   content <- c(modification_warning,'','sets','')
 
-  content <- c(content,paste('   i all economic regions /',paste(names(cpr),collapse=','),'/',sep=''),'')
+  content <- c(content,paste('   i World regions /',paste(names(cpr),collapse=','),'/',sep=''),'')
 
   # write iso set with nice formatting (10 countries per line)
   tmp <- lapply(split(map$CountryCode, ceiling(seq_along(map$CountryCode)/10)),paste,collapse=",")
-  content <- c(content,'   iso list of iso countries /')
+  content <- c(content,'   iso Countries /')
   content <- c(content, .tmp(map$CountryCode, suffix1=",", suffix2=" /"))
 
-  content <- c(content,  '', paste('   j number of LPJ cells /\n       ',paste(cells,collapse=',\n       '),'/',sep=''),'',
-               '   cell(i,j) number of LPJ cells per region i','      /')
+  content <- c(content,  '', paste('   j Spatial clusters /\n       ',paste(cells,collapse=',\n       '),'/',sep=''),'',
+               '   cell(i,j) Mapping between regions i and clusters j','      /')
   for(i in 1:length(cpr)) {
     content <- c(content,paste('       ',names(cpr)[i],' . ',cells[i],sep=''))
   }
   content <- c(content,'      /','')
 
-  content <- c(content,'   i_to_iso(i,iso) mapping regions to iso countries','      /')
+  content <- c(content,'   i_to_iso(i,iso) Mapping between regions and countries','      /')
   map$RegionCode <- as.factor(map$RegionCode)
   for(i in levels(map$RegionCode)) {
     content <- c(content, .tmp(map$CountryCode[map$RegionCode==i], prefix=paste0(i," . ("), suffix1=")", suffix2=")"))

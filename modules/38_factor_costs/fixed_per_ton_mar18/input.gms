@@ -6,7 +6,7 @@
 
 
 
-parameter f38_fac_req_per_ton(kcr) factor requirement costs (USD per tDM)
+parameter f38_fac_req_per_ton(kcr) Factor requirement costs (USD05MER per tDM)
 /
 $ondelim
 $include "./modules/38_factor_costs/input/f38_fac_req_per_ton.csv"

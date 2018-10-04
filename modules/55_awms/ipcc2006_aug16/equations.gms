@@ -7,7 +7,7 @@
 
 *' @equations
 
-*' Manure is esimtated based on feed intake minus the NPK incorporated
+*' Manure is estimated based on feed intake minus the NPK incorporated
 *' in the biomass of the slaughtered animal.
 *' We distinguish 4 general animal waste management systems based on
 *' what animals eat and where their manure remains. For simplification,
@@ -19,8 +19,8 @@
 *' also to pastures. As both practices mostly appear in high-income countries
 *' and may also be causally linked (as nutrient deficits of pastures have to
 *' be balanced if biomass is removed), we assume they cancel out.
-*' We therefore distinguish only 4 categories
-*' a) confined animals which received concentrate feed and crop residues
+*' We therefore distinguish only 4 categories:
+*' a) confined animals which receive concentrate feed and crop residues
 
  q55_bal_intake_confinement(i2,kli,npk) ..
          v55_feed_intake(i2, kli, "confinement",npk) =e=
@@ -28,7 +28,7 @@
          + sum(kap,vm_dem_feed(i2,kli,kap) * fm_attributes(npk,kap))
          + sum(ksd,vm_dem_feed(i2,kli,ksd) * fm_attributes(npk,ksd))
          + sum(kres,vm_dem_feed(i2,kli,kres) * fm_attributes(npk,kres)
-         *(1-sum(ct,im_development_state(ct,i2))*0.25))
+		 *(1-(1-sum(ct,im_development_state(ct,i2))))*0.25)
          ;
 
 *' b) grazing animals on pastures where the manure stays on pastures
@@ -54,8 +54,13 @@
          *(1 - sum(ct,im_development_state(ct,i2)))*0.25)
          ;
 
-*' The Manure is estimated by substracting from feed a certain share which is
-*' incorporated into animal biomass. This share depends on the producivitiy of
+*' Please note that the share of residues fed via stubble grazing depends 
+*' on the development state and has to be subtracted from the residues fed to confined animals. 
+*' We assume that in developing regions 25% of residues are grazed by animals on stubble fields, 
+*' whereas stubble grazing is assumed to not occur in developed regions.
+		 
+*' The manure is estimated by subtracting from feed a certain share which is
+*' incorporated into animal biomass. This share depends on the productivity of
 *' the animal and is calculated in the preprocessing, also for computational
 *' reasons.
 
@@ -71,12 +76,11 @@
          vm_manure(i2, kli, "confinement", npk) * ic55_awms_shr(i2,kli,awms_conf)
          ;
 
-*' Each of this awms has different recycling shares
+*' Each of these awms have different recycling shares
 *' (and different emission factors,
 *' see [51_nitrogen])
  q55_manure_recycling(i2,npk) ..
          vm_manure_recycling(i2,npk) =e=
          sum((awms_conf,kli),
              vm_manure_confinement(i2,kli,awms_conf, npk)
-             * i55_manure_recycling_share(i2,kli,awms_conf,npk)
-         );
+             * i55_manure_recycling_share(i2,kli,awms_conf,npk));

@@ -5,13 +5,15 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @equations
-*' The series of equations below show the aggregation of secondary products from non-cereal(through fermentation, breeding, or distilling processes),
-*' cereals(through milling process), and cotton (through ginning process).
+*' The series of equations below show the aggregation of secondary products from
+*' from non-cereals (through alcohol fermentation, single cell protein breeding,
+*' oil extracting, sugar refining or ethanol distilling processes),
+*' cereals (through milling process), and cotton (through ginning process).
 *' The need to have such multiple equations (i.e., separate equations for each process)
 *' is meant to replicate the structure of Commodity Balance Sheets in @FAOSTAT.
 *'
 *' In the first equation, the demand for processing use is calculated
-*' by aggregating the demand for secondary (processed) products use by process type 
+*' by aggregating the demand for secondary (processed) products use by process type
 *' (other than milling and ginning in this equation case).
 *' The equation also calculates secondary products from non-cereals crops
 *' such as bio-energy crops and oil crops.
@@ -22,7 +24,7 @@ q20_processing_aggregation_nocereals(i2,kpr) ..
 
 *' In the second equation, the demand for processed products by process type of milling
 *' of cereal crops is calculated. The equation applies only to secondary products from cereal crops which, among others,
-*' include maize, tropical and temperate cereals. 
+*' include maize, tropical and temperate cereals.
 *' Nevertheless, as in Commodity Balance Sheets of  @FAOSTAT, cereal milling here is
 *' not counted as processing but derived from food use of cereals.
 
@@ -52,7 +54,7 @@ q20_processing_aggregation_cotton(i2) ..
 
 q20_processing(i2,kpr,ksd) ..
   sum(processing20, v20_dem_processing(i2,processing20,kpr)
-         * sum(ct,f20_processing_conversion_factors(ct,processing20,ksd,kpr)))  =e= 
+         * sum(ct,f20_processing_conversion_factors(ct,processing20,ksd,kpr)))  =e=
  (vm_prod_reg(i2,ksd) - sum(ct,f20_processing_balanceflow(ct,i2,ksd)))
          * sum(ct,f20_processing_shares(ct,i2,ksd,kpr))
          - v20_secondary_substitutes(i2,ksd,kpr)
@@ -69,20 +71,20 @@ v20_dem_processing(i2,"substitutes","oils") =g=
 *' The sixth equation below replaces brans by cereals of same protein value.
 
 q20_processing_substitution_brans(i2) ..
-   sum(kcereals20, v20_dem_processing(i2,"substitutes",kcereals20) 
-             * fm_attributes("nr",kcereals20))  =g= 
-   sum((kcereals20), v20_secondary_substitutes(i2,"brans",kcereals20) 
+   sum(kcereals20, v20_dem_processing(i2,"substitutes",kcereals20)
+             * fm_attributes("nr",kcereals20))  =g=
+   sum((kcereals20), v20_secondary_substitutes(i2,"brans",kcereals20)
             * fm_attributes("nr","brans"));
 
-*' The seventh and the last equation in this realization calculates the costs of processing (or converting)
+*' The seventh equation in this realization calculates the costs of processing (or converting)
 *' primary products to secondary products.
-*' As show in the equation, the costs of processing (converting from primary to secondary products)
+*' As shown in the equation, the costs of processing (converting from primary to secondary products)
 *' depend on the type of the primary product (e.g. maize, sugar cane, cotton),
-*' type of the process (e.g. milling, refining, ginning),
-*' and the secondary (e.g. brans, sugar, fiber) product.
+*' the type of the process (e.g. milling, refining, ginning),
+*' and the type of secondary product (e.g. brans, sugar, fiber) product.
 *' The unit costs of processing, `f20_processing_unitcosts`,
-*' are primary product-process type-secondary product specific that are collected, interpolated,
-*' and extrapolated from the scant related literature 
+*' are specific for the different conversion routes and are collected, interpolated,
+*' and extrapolated from the related literature (e.g. @adanacioglu_profitability_2011, @pikaar_decoupling_2018, @valco_thecost_2016)
 *' complemented with best educated guess by the module authors.
 
 q20_processing_costs(i2) ..
@@ -90,12 +92,3 @@ q20_processing_costs(i2) ..
 sum((ksd,processing20,kpr), v20_dem_processing(i2,processing20,kpr)
          *sum(ct,f20_processing_conversion_factors(ct,processing20,ksd,kpr))
          *f20_processing_unitcosts(ksd,kpr));
-
-
-*' As show in the equation, the costs of processing (converting from primary to secondary products)
-*' depend on the type of the primary product (e.g. maize, sugar cane, cotton),
-*' type of the process (e.g. milling, refining, ginning),
-*' and the secondary (e.g. brans, sugar, fiber) product.
-*' The unit costs of processing `f20_processing_unitcosts`
-*' are primary-process-secondary specific collected, interpolated,
-*' and extrapolated from the related literature complemented with best educated guess by the module authors.

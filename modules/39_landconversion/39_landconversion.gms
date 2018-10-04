@@ -8,8 +8,11 @@
 
 *' @description The land conversion cost module calculates costs for the conversion
 *' from one land type to another (e.g. conversion from forest to cropland).
-*' Expansion of agricultural land plays an important role for the overall model dynamics,
+*' Land conversion plays an important role for the overall model dynamics,
 *' in particular in terms of CO2 emissions from land-use change.
+*' Expansion of agricultural land is one of the major options in the model to increase 
+*' agricultural production, besides yield increases ([13_tc], [14_yields]) and trade ([21_trade]).
+*' 
 *'
 *' @authors Florian Humpenöder, Jan Philipp Dietrich, Ulrich Kreidenweis
 

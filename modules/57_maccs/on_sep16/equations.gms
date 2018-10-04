@@ -15,5 +15,4 @@ q57_total_costs(i2) ..
   sum((ct,emis_source), p57_maccs_costs_integral(ct,i2,emis_source,"n2o_n_direct") 
 		* vm_btm_reg(i2,emis_source,"n2o_n_direct") 
         + p57_maccs_costs_integral(ct,i2,emis_source,"ch4") 
-		* vm_btm_reg(i2,emis_source,"ch4")
-       );
+		* vm_btm_reg(i2,emis_source,"ch4"));

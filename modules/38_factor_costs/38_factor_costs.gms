@@ -6,10 +6,13 @@
 
 
 *' @title Factor Costs
-*' @description This module is used to calculate factor costs of production in crop activities.
-*' The costs of factors of production included in this module are specifically of labor, capital, and energy and related costs.
-*' The costs are crop-specific, and pass to the the cost optimization function in [11_costs].
-*' Thus, factor costs will contribute to and influence the choice of production pattern in the model.
+
+*' @description This module is used to calculate factor costs of production in
+*' crop activities. The costs of factors of production included in this module
+*' are specifically of labor, capital, and energy and related costs. The costs
+*' are crop-specific, and pass to the the cost function in [11_costs].
+*' Thus, factor costs will contribute to and influence the choice of production
+*' pattern in the model.
 
 *' @authors Jan Philipp Dietrich, Benjamin Bodirsky, Kristine Karstens
 

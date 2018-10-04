@@ -7,7 +7,7 @@
 *' @title Food demand
 *'
 *' @description The main function of the food demand module is to forecast
-*' the fooduse of agricultural products, which is used in [16_demand].
+*' the food demand from agricultural products, which is used in the module [16_demand].
 *' @authors Benjamin Leon Bodirsky, Jan Philipp Dietrich
 
 *###################### R SECTION START (MODULETYPES) ##########################

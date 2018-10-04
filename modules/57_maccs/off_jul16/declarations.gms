@@ -5,16 +5,16 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- im_maccs_mitigation(t,i,emis_source,pollutants)     technical mitigation of GHG emissions (1)
+ im_maccs_mitigation(t,i,emis_source,pollutants)     Technical mitigation of GHG emissions (1)
 ;
 
 positive variables
- vm_maccs_costs(i)                                  costs of technical mitigation of GHG emissions (mio. USD)
+ vm_maccs_costs(i)        Costs of technical mitigation of GHG emissions (mio. USD95MER per yr)
 ;
 
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_maccs_costs(t,i,type) costs of technical mitigation of GHG emissions (mio. USD)
+ ov_maccs_costs(t,i,type) costs of technical mitigation of GHG emissions (mio. USD95MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

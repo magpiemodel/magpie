@@ -10,44 +10,81 @@ $title magpie
 *'
 *' @description The *Model of Agricultural Production and its Impact on the
 *' Environment* (MAgPIE) is developed and used to assess the competition for
-*' land and water, and the associated consequences for sustainable development
-*' under future scenarios of rising food, energy and material demand and production,
-*' climate change and different land related policies.
+*' land and water and the associated consequences for sustainable development
+*' under future scenarios of rising food, energy and material demand as well
+*' as production, climate change impacts and greenhouse gas mitigation and
+*' different land related policies.
 *'
 *' MAgPIE is a global partial equilibrium model of the land-use sector that operates
 *' in a recursive dynamic mode and incorporates spatially explicit information on
 *' biophysical constraints into an economic decision making process (@lotze-campen_global_2008).
-*' It takes regional economic conditions such as demand for agricultural commodities,
-*' technological development and production costs as well as spatially explicit data
-*' on biophysical constraints into account. Geographically explicit data on biophysical
-*' constraints are provided by the Lund-Potsdam-Jena managed land model (LPJmL)
-*' (@bondeau_lpjml_2007, @mueller_projecting_2014) on 0.5° resolution and include e.g.
-*' carbon densities of different vegetation types, agricultural productivity such as
-*' crop yields and water availability for irrigation as. Based on the strong interaction
-*' with LPJmL, MAgPIE can also help to assess the consequences of increased CO2 in the
-*' atmosphere and associated climate change on the land-use sector (@stevanovic_impact_2016)
+*' It takes regional economic conditions such as elastic demand for agricultural commodities,
+*' technological development and production costs as well as spatially explicit data on biophysical
+*' constraints into account. Geographically explicit data on biophysical conditions are provided
+*' by the Lund-Potsdam-Jena managed land model (LPJmL) (@bondeau_lpjml_2007, @mueller_projecting_2014)
+*' on a 0.5 degree resolution and include e.g. carbon densities of different vegetation types,
+*' agricultural productivity such as crop yields and water availability for irrigation. Based on
+*' the strong interaction with LPJmL, MAgPIE can also help to assess the consequences of climate
+*' change and increased CO2 in the atmosphere on the land-use sector (@stevanovic_impact_2016)
 *'
-*' Available land types in MAgPIE are cropland, pasture, forest, other land (including
-*' non-forest natural vegetation, abandoned agricultural land and desert) and settlements.
-*' Cropland (rainfed and irrigated), pasture, forest and other land are endogenously
-*' determined, while settlement areas are assumed to be constant over time. The cropland
-*' covers cultivation of different food/feed crop types (e.g. temperate and tropical
+*' Available land types in MAgPIE are cropland, pasture area, forest, other land
+*' (including non-forest natural vegetation, abandoned agricultural land and deserts)
+*' and settlements. Cropland (rainfed and irrigated), pasture, forest and other land
+*' are endogenously determined, while settlement areas are assumed to be constant over time.
+*' The cropland covers cultivation of different crop types (e.g. temperate and tropical
 *' cereals, maize, rice, oilseeds, roots), both rainfed and irrigated systems, and two
-*' 2nd generation bioenergy crop types (grassy and woody). The supply of animal food
-*' commodities is divided into five livestock production activities (ruminant meat,
-*' pig meat, poultry meat, eggs and milk) (Weindl et al 2018). The quantity of livestock
-*' production in combination with regional and livestock-specific feed baskets determines
-*' the demand for feed. Spatial distribution of crops and pasture in MAgPIE is guided by
-*' geographically explicit information on vegetation growth and the balance between crop
-*' water demand and water availability, by initial land cover distribution maps as well as
-*' by economic conditions like trade barriers, management intensity and transport costs,
-*' thus integrating information about market access into the decision process where to
-*' allocate cropping activities and livestock production. Parts of the forests and other
-*' natural land can be excluded from conversion into agricultural land if designated for
-*' wood production or located in protected areas (Kreidenweis et al 2018). Due to
-*' computational constraints, all model inputs in 0.5 degree resolution can be
-*' aggregated to simulation units for the optimization process based on a
-*' clustering algorithm (Dietrich et al 2013).
+*' 2nd generation bioenergy crop types (grassy and woody).
+*'
+*' Taking into account international trade based on historical trade patterns and economic
+*' competitiveness ([21_trade]), global production has to meet demand for food,
+*' feed, seed, processing, bioenergy and material demand ([16_demand]). Food demand is
+*' derived based on population growth ([09_drivers]) and dietary transitions, accounting
+*' for changes in intake and food waste, the shift in the share of animal calories,
+*' processed products, fruits and vegetables as well as staples ([15_food]).
+*' Primary products can be processed to secondary products such as sugar, oil
+*' or ethanol ([20_processing]). The quantity of livestock production in
+*' combination with dynamic regional and livestock-specific feed baskets determines the
+*' demand for feed ([70_livestock]). The supply of animal-based food commodities is divided into five livestock production
+*' activities (ruminant meat, pig meat, poultry meat, eggs and milk) (@weindl_livestock_2017-1).
+*' The spatial distribution of crops ([30_crop]), livestock ([71_disagg_lvst])
+*' and pasture ([31_past]) in MAgPIE is guided by geographically explicit
+*' information on vegetation growth and the balance between crop water
+*' demand and water availability, by initial land cover distribution maps
+*' as well as by economic conditions like trade barriers ([21_trade]), management intensity ([13_tc])
+*' and transport costs ([40_transport]). It therefore integrates information about market access into
+*' the model's optimization process that determines where cropping activities and livestock production
+*' are allocated to. Parts of forests and other natural land area can be excluded from conversion into
+*' agricultural land if designated for wood production or located in protected areas ([32_forestry],
+*' [35_natveg]) (@kreidenweis_pasture_2018).
+*'
+*' Due to computational constraints, all model inputs in 0.5 degree resolution are aggregated
+*' to simulation units for the optimization process ([80_optimization]) based on a clustering
+*' algorithm (@dietrich_reducing_2013).
+*'
+*' MAgPIE estimates flows of different land-based greenhouse gases (GHGs). CO2 emissions are computed
+*' from land-use change dynamics, i.e. from conversion of different biomes into agricultural land
+*' and consequent loss of terrestrial carbon stocks (@popp_land-use_2014), also including the
+*' depletion of organic matter in soils ([59_som]). The land also serves as a sink for atmospheric
+*' carbon when agricultural land is set aside from production and the associated regrowth of natural
+*' vegetation generates negative emissions from land-use change.
+*' Nitrogen emissions ([51_nitrogen]) are estimated based on nitrogen budgets for croplands,
+*' pastures ([50_nr_budgets]) and the livestock sector ([55_awms]) (@bodirsky_reactive_2014).
+*' CH4 emissions are based on
+*' livestock feed and rice cultivation areas (@popp_food_2010). In the case of mitigation
+*' policies for the land sector, the model can reduce CO2 emissions by restraining land-use
+*' conversion and consequent carbon release as well as CH4 and N emissions by applying improved
+*' agricultural management (such as anaerobic digesters for CH4 capture from animal waste, or use
+*' of fertilizer spreaders) (@popp_land-use_2014, @stevanovic_mitigation_2017). In addition,
+*' the model covers land-based carbon removal technologies such as bioenergy with carbon capture
+*' and sequestration (CCS) and afforestation (@humpenoder_investigating_2014,
+*' @humpenoder_large-scale_2017, @kreidenweis_afforestation_2016).
+*'
+*' In response to all involved demand for agricultural commodities, costs of production,
+*' biophysical constraints and land-related policies, MAgPIE simulates major dynamics of
+*' the land-use sector like investments in research and development (R&D) ([13_tc]) (@dietrich_forecasting_2014)
+*' and associated increases in both crop yields  ([14_yields]) and biomass removal through grazing on
+*' pastures ([31_past]), land use change ([39_landconversion]), interregional trade flows ([21_trade]),
+*' and irrigation ([41_area_equipped_for_irrigation]).
 
 
 
@@ -89,7 +126,7 @@ $title magpie
 *
 *
 *
-* Last modification (input data): Thu Sep 13 14:51:39 2018
+* Last modification (input data): Thu Sep 27 16:08:48 2018
 *
 *###################### R SECTION END (VERSION INFO) ###########################
 

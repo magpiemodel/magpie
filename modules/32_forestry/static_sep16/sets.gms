@@ -5,10 +5,10 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-  land32 forestry land pools
+  land32 Forestry land pools
     / new, prot, grow, old/
 
-   kforestry(kall) forestry products
+   kforestry(kall) Forestry products
    / wood, woodfuel /
 ;
 *** EOF sets.gms ***

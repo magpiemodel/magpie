@@ -11,19 +11,19 @@ $setglobal c15_rumscen  mixed
 
 scalar s15_elastic_demand  elastic demand switch (1=elastic 0=exogenous) (1) / 1 /;
 
-scalar s15_calibrate calibration switch (1=calibrated 2=pure regresssion outcomes) (1) / 1 /;
+scalar s15_calibrate Calibration switch (1=calibrated 2=pure regresssion outcomes) (1) / 1 /;
 * only for per-capita calories, not for e.g. calibration of transformation parameters between per-capita calories in dm
 
-scalar s15_maxiter maximum iteration number (1) / 5 /;
+scalar s15_maxiter Scalar defining maximum number of iterations (1) / 5 /;
 
-scalar s15_convergence convergence criteria (1) / 0.005 /;
+scalar s15_convergence Convergence criterion (1) / 0.005 /;
 
-table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of inhomogenous products and processes in statistics (mio. tDM)
+table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of heterogeneous products and processes (mio. tDM)
 $ondelim
 $include "./modules/15_food/input/f15_household_balanceflow.cs3"
 $offdelim;
 
-table f15_nutrition_attributes(t_all,kall,nutrition) nutrition attributes of fooditems dedicated for fooduse (mio. kcal per tDM | t Protein per tDM)
+table f15_nutrition_attributes(t_all,kall,nutrition) Nutrition attributes of food items dedicated for fooduse (mio. kcal per tDM | t Protein per tDM)
 $ondelim
 $include "./modules/15_food/input/f15_nutrition_attributes.cs3"
 $offdelim;
@@ -36,40 +36,40 @@ $offdelim;
 * kcal/capita/day for saturation and intercept, and
 * USD05/capita for halfsaturation
 
-table f15_demand_paras(regr15,food_scen15,par15)  Food regression parameters (X)
+table f15_demand_paras(regr15,food_scen15,par15)  Food regression parameters in USD05PPP or dimensionless (X)
 $ondelim
 $include "./modules/15_food/input/f15_demand_regression_parameters.cs3"
 $offdelim;
 
-table f15_bmi_shr_paras(sex, agegroup15, bmi_tree15, paras_b15)  BMI share regression parameters (X)
+table f15_bmi_shr_paras(sex, agegroup15, bmi_tree15, paras_b15)  BMI share regression parameters in USD05PPP or dimensionless (X)
 $ondelim
 $include "./modules/15_food/input/f15_bmi_shr_regr_paras.cs3"
 $offdelim;
 
-table f15_bmi(sex,age,bmi_group15) mean body mass index for each bmi group (kg per m2)
+table f15_bmi(sex,age,bmi_group15) Mean body mass index for each BMI group (kg per m2)
 $ondelim
 $include "./modules/15_food/input/f15_bmi.cs3"
 $offdelim;
 
-table f15_bmi_shr_past(t_all,iso,age,sex,bmi_group15) mean body mass index for each bmi group (kg per m2)
+table f15_bmi_shr_past(t_all,iso,age,sex,bmi_group15) Mean body mass index for each BMI group (kg per m2)
 $ondelim
 $include "./modules/15_food/input/f15_bmi_shr_past.cs3"
 $offdelim;
 
 
-table f15_kcal_pc_iso(t_all,iso,kfo)  Observed per-capita calories in the past (kcal per capita per day)
+table f15_kcal_pc_iso(t_all,iso,kfo)  Observed per capita calories in the past (kcal per cap per day)
 $ondelim
 $include "./modules/15_food/input/f15_kcal_pc_iso.csv"
 $offdelim;
 
 
-table f15_intake_pc_observed_iso(t_all,iso,sex,age)  Observed per-capita calorie intake in the past (kcal per captia per day)
+table f15_intake_pc_observed_iso(t_all,iso,sex,age)  Observed per capita calorie intake in the past (kcal per captia per day)
 $ondelim
 $include "./modules/15_food/input/f15_intake_pc_observed_iso.cs3"
 $offdelim;
 
 
-parameter f15_prices_initial(kall) Food prices in initialisation period (USD05MER per t DM)
+parameter f15_prices_initial(kall) Food prices in initialization period (USD05MER per t DM)
 /
 $ondelim
 $include "./modules/15_food/input/f15_prices_initial.csv"
@@ -77,7 +77,7 @@ $offdelim
 /;
 
 
-parameter f15_price_index(t_all) Food prices index in initialisation period (USD05MER per t DM)
+parameter f15_price_index(t_all) Food price index in initialization period (USD05MER per t DM)
 /
 $ondelim
 $include "./modules/15_food/input/f15_prices_index.csv"
@@ -85,24 +85,24 @@ $offdelim
 /;
 
 
-table f15_kcal_calib_fadeout(t_all,calibscen15) calibration fadeout (1)
+table f15_kcal_calib_fadeout(t_all,calibscen15) Calibration fadeout factor (1)
 $ondelim
 $include "./modules/15_food/input/f15_kcal_balanceflow_fadeout.csv"
 $offdelim
 ;
 
-table f15_ruminant_fadeout(t_all,ruminantfadeoutscen15) ruminant fadeout scenario (1)
+table f15_ruminant_fadeout(t_all,ruminantfadeoutscen15) Ruminant fadeout scenario (1)
 $ondelim
 $include "./modules/15_food/input/f15_ruminant_fadeout.csv"
 $offdelim
 ;
 
-table f15_bodyheight(t_all,iso,sex,age)      body height (cm)
+table f15_bodyheight(t_all,iso,sex,age)   Body height (cm per cap)
 $ondelim
 $include "./modules/15_food/input/f15_bodyheight_historical.cs3"
 $offdelim;
 
-table f15_schofield(sex,age, paras_s15) Schofield equation parameters (-)
+table f15_schofield(sex,age, paras_s15) Schofield equation parameters in kcal per capita per day or kcal per capita per day per weight (X)
 $ondelim
 $include "./modules/15_food/input/f15_schofield_parameters.cs3"
 $offdelim

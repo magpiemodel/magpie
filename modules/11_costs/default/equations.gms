@@ -27,21 +27,21 @@
                    + vm_costs_overrate_cropdiff(i2)
                    ;
 
-*' Total regional production cost calculation is based on the sum of different
+*' The total regional production cost calculation is based on the sum of different
 *' MAgPIE production activities. These individual costs are calculated by various
-*' cost interfaces which are in turn calculated inside their respective modules.
+*' cost interfaces, which are in turn calculated inside their respective modules.
 *' Different components of regional costs are as follows:
-*' Factor costs [38_factor_costs],
-*' land conversion costs [39_landconversion],
-*' Transportation costs [40_transport],
-*' Technological costs [13_tc],
-*' Inorganic fertilizers [50_nr_soil_budget],
-*' Emission costs [56_ghg_policy],
-*' Rewarded CDR from afforestation (Benefits as negative costs) [56_ghg_policy],
-*' Abatement costs [57_maccs],
-*' Irrigation expansion costs [41_area_equipped_for_irrigation],
-*' Trade costs (Transport and bilateral trade) [21_trade],
-*' Forestry related costs (afforestation) [32_forestry],
-*' Bioenergy costs [60_bioenergy],
-*' Processing costs [20_processing],
-*' Punish costs for overrate cropland differences [59_som].
+*' Factor costs ([38_factor_costs]),
+*' land conversion costs ([39_landconversion]),
+*' Transportation costs ([40_transport]),
+*' Technological costs ([13_tc]),
+*' Inorganic fertilizers ([50_nr_soil_budget]),
+*' Emission costs ([56_ghg_policy]),
+*' Rewarded CDR from afforestation (Benefits as negative costs) ([56_ghg_policy]),
+*' Abatement costs ([57_maccs]),
+*' Irrigation expansion costs ([41_area_equipped_for_irrigation]),
+*' Trade costs (Transport and bilateral trade) ([21_trade]),
+*' Forestry related costs (afforestation) ([32_forestry]),
+*' Bioenergy costs ([60_bioenergy]),
+*' Processing costs ([20_processing]),
+*' Punish costs for overrate cropland differences ([59_som]).

@@ -21,8 +21,8 @@ q40_cost_transport(j2,k) ..
 *' for any location on the earth surface to the nearest large city is used
 *' (figure below - @nelson_transport_2008). The data set is based on multiple
 *' indicators (biophysical, administrative and transport mode) which determine the
-*' friction surface that in turn determines the speed needed to transport goods
-*' across grid cells. The cumulated time value needed to reach an urban center
+*' friction surface that in turn determines the time needed to transport goods
+*' across grid cells. The cumulated time needed to reach an urban center
 *' of minimal 50000 inhabitants stands as static proxy for accessibility of a
 *' grid cell.
 *'
@@ -42,11 +42,15 @@ q40_cost_transport(j2,k) ..
 *' and 50% of the output transport costs represent the agricultural transport costs
 *' for a commodity.
 *'
-*' ![Transport Costs Concept](transport_costs_concept.png){ width=60% }
+*' ![Transport Costs Concept](transport_costs_concept.png){ width=100% }
 *'
 *' Relative transport costs `f40_transport_costs(k)` are calculated by dividing
 *' total agricultural transport costs from GTAP 7 by the product of an initial
 *' (1995 as default) cellular MAgPIE production pattern and cellular travel time.
+*' By doing so we ensure that relative transport costs, multiplied with the
+*' initial MAgPIE production allocation and given travel times match the absolute
+*' transport costs as reported by GTAP 7.
+*'
 *' Total agricultural transport costs from GTAP 7 are based on total agricultural
 *' production in 2004. For consistency, we scale the GTAP data with the ratio of
 *' FAO production data for 2004 and 1995. Subsequently, MAgPIE is run several
@@ -58,4 +62,6 @@ q40_cost_transport(j2,k) ..
 *' round of MAgPIE yield calibration is started. This process is repeated until MAgPIE
 *' total transport costs are in good agreement with GTAP total transport costs.
 *'
-*' ![Transport Costs Calibration](transport_costs_calib.png){ width=60% }
+*' ![Transport Costs Calibration - Comparison between GTAP transport costs and
+*' MAgPIE transport costs for different GTAP commodities after each calibration
+*' step](transport_costs_calib.png){ width=100% }

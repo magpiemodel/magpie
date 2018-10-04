@@ -4,7 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @title Marginal Abatement Cost Curves 
+*' @title Marginal Abatement Cost Curves
 *'
 *' @description This module describes technical mitigation of GHG emissions.
 *' It allows to reduce GHG emissions by undertaking mitigation
@@ -16,10 +16,9 @@
 *' Their direct consequences on biophysical values like yields or water requirements is ignored at the moment.
 *'
 *' Mitigation costs are estimated using marginal abatement cost curves (MACCs).
-*' The curves allow to reduce emissions before technical mitigation (btm)
-*' by a certain percentage in exchange for additional costs.
-*' The MACCs used in this module are based on the data from @LUCAS200785.
-*' Despite we have reservations on its data quality, we stick on it as we are aware of no other better data.
+*' The curves are applied on the original emissions before technical mitigation (btm),
+*' and reduce them by a certain percentage in exchange for additional costs.
+*' The MACCs used in this module are based on the data from @LUCAS200785.  
 *'
 *' @authors Benjamin Leon Bodirsky
 
