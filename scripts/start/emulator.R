@@ -55,23 +55,23 @@ write.ghgtax <- function(co2tax_2025=NULL,regions=NULL,out="./modules/56_ghg_pol
   if(is.null(co2tax_2025)) stop("No initial value for ghg tax supplied.")
   if(is.null(regions))     stop("Please supply regions for ghg tax.")
 
-  # construct combination of exponential tax (5% increase) until 2060 and linear continuation thereafter (using the slope of 2055-2060)
+  # construct combination of exponential tax (5% increase) until 2050 and linear continuation thereafter (using the slope of 2045-2050)
   time <- seq(1995,2100,5)
   co2tax <- as.numeric(co2tax_2025) * 1.05 ^(time-2025)
   names(co2tax)<-time
-  slope <- (co2tax["2060"] - co2tax["2055"]) / (2060 - 2055)
-  co2tax[names(co2tax)>"2060"] <- co2tax["2060"] + slope * (time[time>2060] - 2060)
+  slope <- (co2tax["2050"] - co2tax["2045"]) / (2050 - 2045)
+  co2tax[names(co2tax)>"2050"] <- co2tax["2050"] + slope * (time[time>2050] - 2050)
 
   ghgtax <- new.magpie(cells_and_regions = regions,years = time,fill = NA,sets = c("regions","years","gas"),names = c("n2o_n_direct","n2o_n_indirect","ch4","co2_c"))
   
-  # unit defined in modules/56_ghg_policy/input/f56_pollutant_prices.cs3: US$ 2004 per Mg N2O-N CH4 and CO2-C
+  # unit defined in modules/56_ghg_policy/input/f56_pollutant_prices.cs3: US$ 2005 per Mg N2O-N CH4 and CO2-C
   ghgtax[,,"co2_c"]          <- as.magpie(co2tax) * 44/12       # US$2005/tCO2 -> US$2005/tC
   ghgtax[,,"ch4"]            <- as.magpie(co2tax) * 25          # US$2005/tCO2 -> US$2005/tCH4
   ghgtax[,,"n2o_n_direct"]   <- as.magpie(co2tax) * 44/28 * 300 # US$2005/tCO2 -> US$2005/tN
   ghgtax[,,"n2o_n_indirect"] <- as.magpie(co2tax) * 44/28 * 300 # US$2005/tCO2 -> US$2005/tN
   
-  # set ghg prices before 2020 to zero
-  ghgtax[,getYears(ghgtax)<"y2020",] <- 0
+  # set ghg prices before and in 2020 to zero
+  ghgtax[,getYears(ghgtax)<="y2020",] <- 0
   # add years after 2100
   ghgtax <- add_columns(ghgtax,dim = 2.1,addnm = c("y2110","y2130","y2150"))
   # keep ghgtax constant after 2100
@@ -99,62 +99,14 @@ for (scen in rownames(scenarios)) {
   cat("\n################ Scenario",scen,"################\n")
   # Configure MAgPIE
   # Set scenario
-  cfg<-setScenario(cfg,scenario=as.character(scenarios[scen,"SSP"]))
+  cfg<-setScenario(cfg,scenario = c(trimws(unlist(strsplit(scenarios[scen,"mag_scen"],split=",")))))
   # emulator has to be set AFTER SSP because SSP would set bioenergy demand to predefined scenario and not to input from this script
   cfg<-setScenario(cfg,scenario="emulator")
 
   # Choose GHG tax scenario
   if (scenarios[scen,"co2tax_2025"] == "built-in") {
+    # see magpie/config/default.cfg for available scenarios
     cfg$gms$c56_pollutant_prices <- scenarios[scen,"co2tax_name"]
-    # *   options:  
-    # * "SSP1-20-SPA1-V15-IMAGE",
-    # * "SSP1-26-SPA1-V15-IMAGE"  ,
-    # * "SSP1-34-SPA1-V15-IMAGE"  ,
-    # * "SSP1-45-SPA1-V15-IMAGE" ,
-    # * "SSP1-Ref-SPA0-V15-IMAGE",
-    #
-    # * "SSP1-20-SPA1-V15-REMIND-MAGPIE",
-    # * "SSP1-26-SPA1-V15-REMIND-MAGPIE"  ,
-    # * "SSP1-34-SPA1-V15-REMIND-MAGPIE"  ,
-    # * "SSP1-37-SPA1-V15-REMIND-MAGPIE",
-    # * "SSP1-45-SPA1-V15-REMIND-MAGPIE" ,
-    # * "SSP1-Ref-SPA0-V15-REMIND-MAGPIE",
-    #
-    # * "SSP2-18-SPA2-V15-MESSAGE-GLOBIOM" ,
-    # * "SSP2-19-SPA2-V15-MESSAGE-GLOBIOM",
-    # * "SSP2-20-SPA2-V15-MESSAGE-GLOBIOM",
-    # * "SSP2-26-SPA2-V15-MESSAGE-GLOBIOM",
-    # * "SSP2-34-SPA2-V15-MESSAGE-GLOBIOM",
-    # * "SSP2-45-SPA2-V15-MESSAGE-GLOBIOM",
-    # * "SSP2-60-SPA2-V15-MESSAGE-GLOBIOM",
-    # * "SSP2-Ref-SPA0-V15-MESSAGE-GLOBIOM",
-    #
-    # * "SSP2-20-SPA2-V15-REMIND-MAGPIE",
-    # * "SSP2-26-SPA2-V15-REMIND-MAGPIE",
-    # * "SSP2-34-SPA2-V15-REMIND-MAGPIE",
-    # * "SSP2-37-SPA2-V15-REMIND-MAGPIE",
-    # * "SSP2-45-SPA2-V15-REMIND-MAGPIE",
-    # * "SSP2-60-SPA2-V15-REMIND-MAGPIE",
-    # * "SSP2-Ref-SPA0-V15-REMIND-MAGPIE",
-    #
-    # * "SSP3-34-SPA3-V15-AIM-CGE",
-    # * "SSP3-45-SPA3-V15-AIM-CGE",
-    # * "SSP3-60-SPA3-V15-AIM-CGE",
-    #
-    # * "SSP4-26-SPA4-V15-GCAM4",
-    # * "SSP4-34-SPA4-V15-GCAM4",
-    # * "SSP4-45-SPA4-V15-GCAM4",
-    # * "SSP4-60-SPA4-V15-GCAM4",
-    # * "SSP4-Ref-SPA0-V15-GCAM4",
-    #
-    # * "SSP5-20-SPA5-V15-REMIND-MAGPIE",
-    # * "SSP5-26-SPA5-V15-REMIND-MAGPIE",
-    # * "SSP5-34-SPA5-V15-REMIND-MAGPIE",
-    # * "SSP5-37-SPA5-V15-REMIND-MAGPIE",
-    # * "SSP5-45-SPA5-V15-REMIND-MAGPIE",
-    # * "SSP5-60-SPA5-V15-REMIND-MAGPIE",
-    # * "SSP5-Ref-SPA0-V15-REMIND-MAGPIE"
-    # *             coupling
   } else {
     # If none of the built-in GHG price scenarios was chosen, provide GHG prices
     cfg$gms$c56_pollutant_prices <- "emulator"
@@ -163,7 +115,7 @@ for (scen in rownames(scenarios)) {
   }
 
   # Compose string with scenario name
-  expname <- paste0(scenarios[scen,"SSP"],"-",scenarios[scen,"co2tax_name"])
+  expname <- paste0(gsub(",","-",scenarios[scen,"mag_scen"]),"-",scenarios[scen,"co2tax_name"])
 
   # run numbers sorted in descending by runtime (taken from former SSP2-26 emulator runs)
   runtime_order <- c("4","17","34","12","11","22","32","15","21","2","58","18","20","16","19",
@@ -188,4 +140,4 @@ for (scen in rownames(scenarios)) {
   }
 }
 
-cat("Finished!\n")
+cat("Finished starting of emulator runs!\n")
