@@ -258,9 +258,9 @@ getReportData <- function(rep,scen,LU_pricing="y2010") {
 
     out <- mbind(out_n2o_direct,out_n2o_indirect,out_ch4,out_c)
 
-  	# Set prices to zero before and in the year given in LU_pricing
-    y_zeroprices <-  getYears(mag)<=LU_pricing & getYears(mag)>"y2010"
-	  out[,y_zeroprices,]<-0
+    # Set prices to zero before and in the year given in LU_pricing
+    y_zeroprices <- getYears(mag)<=LU_pricing
+    out[,y_zeroprices,]<-0
 
     # Remove GLO region
     notGLO <- getRegions(mag)[!(getRegions(mag)=="GLO")]
