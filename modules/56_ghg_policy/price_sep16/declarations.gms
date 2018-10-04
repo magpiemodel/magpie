@@ -5,27 +5,27 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- im_pollutant_prices(t_all,i,pollutants)      certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
- p56_ghg_price_growth_rate(t,i,pollutants)    growth rate of certificate price (% per yr)
- p56_ghg_price_growth_rate_avg(i,pollutants)  average over time of growth rate of certificate price (% per yr)
+ im_pollutant_prices(t_all,i,pollutants)      Certificate prices for N2O-N CH4 CO2-C (USD05MER per Mg)
+ p56_ghg_price_growth_rate(t,i,pollutants)    Growth rate of certificate price (% per yr)
+ p56_ghg_price_growth_rate_avg(i,pollutants)  Average over time of growth rate of certificate price (% per yr)
 ;
 
 equations
- q56_technical_mitigation_reg(i,pollutants,emis_source)   application of maccs on emissions (Tg per yr)
- q56_technical_mitigation_cell(j,pollutants,emis_source)  application of maccs on emissions (Tg per yr)
- q56_cell_to_reg(i,pollutants,emis_source)                aggregation to regional emissions (Tg per yr)
- q56_emission_costs(i)                                    calculation of total emission costs (mio. USD05MER per yr)
- q56_emission_costs_reg_yearly(i,emis_reg_yr56)       calculation of regional costs for annual emissions (mio. USD05MER per yr)
- q56_emission_costs_reg_oneoff(i,emis_reg_one56)       calculation of regional costs for emissions occuring only once in time (mio. USD05MER per yr)
- q56_emission_costs_cell_yearly(j,emis_cell_yr56)     calculation of cellular costs for annual emissions (mio. USD05MER per yr)
- q56_emission_costs_cell_oneoff(j,emis_cell_one56)     calculation of cellular costs for emissions occuring only once in time (mio. USD05MER per yr)
- q56_reward_cdr_aff_reg(i)                                regional revenues for carbon captured by afforestation (mio. USD05MER per yr)
- q56_reward_cdr_aff(j,co2_forestry)                       cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
+ q56_technical_mitigation_reg(i,pollutants,emis_source)   Application of maccs on emissions (Tg per yr)
+ q56_technical_mitigation_cell(j,pollutants,emis_source)  Application of maccs on emissions (Tg per yr)
+ q56_cell_to_reg(i,pollutants,emis_source)                Aggregation to regional emissions (Tg per yr)
+ q56_emission_costs(i)                                    Calculation of total emission costs (mio. USD05MER per yr)
+ q56_emission_costs_reg_yearly(i,emis_reg_yr56)       Calculation of regional costs for annual emissions (mio. USD05MER per yr)
+ q56_emission_costs_reg_oneoff(i,emis_reg_one56)       Calculation of regional costs for emissions occuring only once in time (mio. USD05MER per yr)
+ q56_emission_costs_cell_yearly(j,emis_cell_yr56)     Calculation of cellular costs for annual emissions (mio. USD05MER per yr)
+ q56_emission_costs_cell_oneoff(j,emis_cell_one56)     Calculation of cellular costs for emissions occuring only once in time (mio. USD05MER per yr)
+ q56_reward_cdr_aff_reg(i)                                Regional revenues for carbon captured by afforestation (mio. USD05MER per yr)
+ q56_reward_cdr_aff(j,co2_forestry)                       Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
 ;
 
 positive variables
- v56_reward_cdr_aff(j,co2_forestry)  cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
- vm_reward_cdr_aff(i)                regional revenues for carbon captured by afforestation (mio. USD05MER per yr)
+ v56_reward_cdr_aff(j,co2_forestry)  Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
+ vm_reward_cdr_aff(i)                Regional revenues for carbon captured by afforestation (mio. USD05MER per yr)
 ;
 
 variables

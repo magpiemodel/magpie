@@ -26,8 +26,7 @@ q56_technical_mitigation_cell(j2,pollutants,emis_source)  ..
  v56_emis_cell(j2,emis_source,pollutants) =e=
                 sum(cell(i2,j2),
                   vm_btm_cell(j2,emis_source,pollutants)
-                  * (1 - sum(ct, im_maccs_mitigation(ct,i2,emis_source,pollutants)))
-                );
+                  * (1 - sum(ct, im_maccs_mitigation(ct,i2,emis_source,pollutants))));
 
 q56_cell_to_reg(i2,pollutants,emis_source) ..
  vm_emissions_reg(i2,emis_source,pollutants) =e=
@@ -44,8 +43,7 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
                  sum(pollutants,
                      vm_emissions_reg(i2,emis_reg_yr56,pollutants) *
                      f56_emis_policy("%c56_emis_policy%",pollutants,emis_reg_yr56) *
-                     sum(ct, im_pollutant_prices(ct,i2,pollutants))
-                 );
+                     sum(ct, im_pollutant_prices(ct,i2,pollutants)));
 
 
  q56_emission_costs_cell_yearly(j2,emis_cell_yr56) ..
@@ -53,8 +51,7 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
                  sum(pollutants,
                      v56_emis_cell(j2,emis_cell_yr56,pollutants) *
                      f56_emis_policy("%c56_emis_policy%",pollutants,emis_cell_yr56) *
-                     sum((ct,cell(i2,j2)),im_pollutant_prices(ct,i2,pollutants))
-                 );
+                     sum((ct,cell(i2,j2)),im_pollutant_prices(ct,i2,pollutants)));
 
 *' As MAgPIE is a recursive dynamic model, within the optimization of the current time step it does not account for benefits or costs in future time steps.
 *' This can be problematic for the treatment of emissions that occur only once under continuous management (such as deforestation,

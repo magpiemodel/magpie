@@ -4,7 +4,12 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description
+*' @description 
+*'
+*' This realization models agricultural sector water demand endogenously, as described in the first realization,
+*' Industry, electricity and domestic demand are also modelled endogenously with various scenarios;
+*' Various settings (same ias in previous realization) for environmental water demand described below.
+*'
 *' *Agricultural water demand*:
 *'
 *' Water demand for agriculture is endogenously calculated based on irrigated

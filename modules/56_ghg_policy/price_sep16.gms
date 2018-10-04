@@ -10,7 +10,7 @@
 *' rewarded depending on the afforestation incentive policy defined in `f56_aff_policy`.
 *' For CO2 emissions from land-use change and CDR from afforestation, the growth rate 
 *' of the CO2 price is used to annuitize associated emission costs.
-*' If pollutant prices are zero, which is the default for referene scenarios without 
+*' If pollutant prices are zero, which is the default for reference scenarios without 
 *' mitigation, total emission costs entering the objective function are zero.
 
 

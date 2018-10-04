@@ -12,15 +12,15 @@
 *' We distinguish 4 general animal waste management systems based on
 *' what animals eat and where their manure remains. For simplification,
 *' we assume that pastures receive the manure of grazed biomass,
-*' while croplands receive the manure of crop based feed. In reality,
+*' while croplands receive the manure of cropbased feed. In reality,
 *' manure from grazing may be also excreted in stables and vice versa.
 *' Problematic may be in particular that grass can also be harvested and
 *' fed to animals in stables, and manure from confinements may be applied
 *' also to pastures. As both practices mostly appear in high-income countries
 *' and may also be causally linked (as nutrient deficits of pastures have to
 *' be balanced if biomass is removed), we assume they cancel out.
-*' We therefore distinguish only 4 categories
-*' a) confined animals which received concentrate feed and crop residues
+*' We therefore distinguish only 4 categories:
+*' a) confined animals which receive concentrate feed and crop residues
 
  q55_bal_intake_confinement(i2,kli,npk) ..
          v55_feed_intake(i2, kli, "confinement",npk) =e=
@@ -38,7 +38,6 @@
          (vm_dem_feed(i2,kli,"pasture")) * fm_attributes(npk,"pasture")
          *(1-ic55_manure_fuel_shr(i2,kli))
          ;
-
 *' c) grazing animals on pastures where the manure is collected as household fuel
 
  q55_bal_intake_fuel(i2,kli,npk) ..
@@ -77,12 +76,11 @@
          vm_manure(i2, kli, "confinement", npk) * ic55_awms_shr(i2,kli,awms_conf)
          ;
 
-*' Each of this awms has different recycling shares
+*' Each of these awms have different recycling shares
 *' (and different emission factors,
 *' see [51_nitrogen])
  q55_manure_recycling(i2,npk) ..
          vm_manure_recycling(i2,npk) =e=
          sum((awms_conf,kli),
              vm_manure_confinement(i2,kli,awms_conf, npk)
-             * i55_manure_recycling_share(i2,kli,awms_conf,npk)
-         );
+             * i55_manure_recycling_share(i2,kli,awms_conf,npk));
