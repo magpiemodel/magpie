@@ -244,11 +244,7 @@ getReportData <- function(rep,scen,LU_pricing="y2010") {
     write.magpie(out[notGLO,,],"./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
   }
   .emission_prices <- function(mag){
-    notGLO <- getRegions(mag)[!(getRegions(mag)=="GLO")]
     out_c <- mag[,,"Price|Carbon (US$2005/t CO2)"]*44/12 # US$2005/tCO2 -> US$2005/tC
-  	y_zeroprices <-  getYears(mag)<=LU_pricing & getYears(mag)>"y2010"
-	  out_c[,y_zeroprices,]<-0 # .5*44/12 # US$2005/tCO2 -> US$2005/tC
-
     dimnames(out_c)[[3]] <- "co2_c"
 
     out_n2o_direct <- mag[,,"Price|N2O (US$2005/t N2O)"]*44/28 # US$2005/tN2O -> US$2005/tN
@@ -261,6 +257,13 @@ getReportData <- function(rep,scen,LU_pricing="y2010") {
     dimnames(out_ch4)[[3]] <- "ch4"
 
     out <- mbind(out_n2o_direct,out_n2o_indirect,out_ch4,out_c)
+
+  	# Set prices to zero before and in the year given in LU_pricing
+    y_zeroprices <-  getYears(mag)<=LU_pricing & getYears(mag)>"y2010"
+	  out[,y_zeroprices,]<-0
+
+    # Remove GLO region
+    notGLO <- getRegions(mag)[!(getRegions(mag)=="GLO")]
     write.magpie(out[notGLO,,],"./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3")
   }
 
