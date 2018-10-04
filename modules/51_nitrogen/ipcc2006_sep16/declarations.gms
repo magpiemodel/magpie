@@ -16,12 +16,12 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- oq51_emissions_inorg_fert(t,i,n_pollutants_direct,type) detailed n2o constraint for inorganic fertilizer before technical mitigation (Mt X-N)
- oq51_emissions_man_crop(t,i,n_pollutants_direct,type)   detailed n2o constraint for manure on cropland before technical mitigation   (Mt X-N)
- oq51_emissions_resid(t,i,n_pollutants_direct,type)      detailed n2o constraint for residues before technical mitigation            (Mt X-N)
- oq51_emissions_som(t,i,n_pollutants_direct,type)        detailed n2o constraint for soil organic matter loss before technical mitigation (Mt X-N)
- oq51_emissionbal_man_past(t,i,n_pollutants_direct,type) detailed n2o constraint for manure on pasture land before technical mitigation (Mt X-N)
- oq51_emissionbal_awms(t,i,n_pollutants_direct,type)     detailed n2o constraint for animal waste management systems before technical mitigation  (Mt X-N)
- oq51_emissions_indirect_n2o(t,i,emis_source_n51,type)   estimates indirect emissions from volatilisation and leaching  (Mt X-N)
+ oq51_emissions_inorg_fert(t,i,n_pollutants_direct,type) estimates various emission types X from inorganic fertilizer before technical mitigation (Mt X-N)
+ oq51_emissions_man_crop(t,i,n_pollutants_direct,type)   estimates various emission types X from manure on cropland before technical mitigation   (Mt X-N)
+ oq51_emissions_resid(t,i,n_pollutants_direct,type)      estimates various emission types X from residues before technical mitigation            (Mt X-N)
+ oq51_emissions_som(t,i,n_pollutants_direct,type)        estimates various emission types X from soil organic matter loss before technical mitigation (Mt X-N)
+ oq51_emissionbal_man_past(t,i,n_pollutants_direct,type) estimates various emission types X from manure on pasture land before technical mitigation (Mt X-N)
+ oq51_emissionbal_awms(t,i,n_pollutants_direct,type)     estimates various emission types X from animal waste management systems before technical mitigation  (Mt X-N)
+ oq51_emissions_indirect_n2o(t,i,emis_source_n51,type)   estimates various emission types X from volatilisation and leaching  (Mt X-N)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

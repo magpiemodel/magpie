@@ -20,7 +20,7 @@ positive variables
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_maccs_costs(t,i,type)   costs of technical mitigation of GHG emissions (mio. USD95MER per yr)
- oq57_total_costs(t,i,type) calculation of total costs of technical mitigation (mio.USD95MER per yr)
+ ov_maccs_costs(t,i,type)   Costs of technical mitigation of GHG emissions (mio. USD95MER per yr)
+ oq57_total_costs(t,i,type) Calculation of total costs of technical mitigation (mio.USD95MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
