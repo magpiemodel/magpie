@@ -9,7 +9,7 @@ parameters
 ;
 
 positive variables
- vm_maccs_costs(i)                                  Costs of technical mitigation of GHG emissions (mio. USD05MER)
+ vm_maccs_costs(i)        Costs of technical mitigation of GHG emissions (mio. USD95MER)
 ;
 
 
