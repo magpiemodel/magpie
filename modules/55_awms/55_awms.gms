@@ -9,7 +9,7 @@
 *' This module calculates the nutrient (NPK) flows within animal waste management.
 *' It receives information on feed from the module [70_livestock], and provides
 *' information on recycled manure to [50_nr_soil_budget] and information on
-*' greenhouse gas emissions to module [51_nitrogen].
+*' greenhouse gas emissions to modules [51_nitrogen] and [53_methane].
 *' @authors Benjamin Leon Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################

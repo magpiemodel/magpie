@@ -7,7 +7,7 @@
 *' @description This is the current default implementation of the module.
 *' It deactivates calculations related to the phosphorus module.
 
-*' @limitations The realization is under development yet.
+*' @limitations The realization is still under development.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "declarations" $include "./modules/54_phosphorus/off/declarations.gms"

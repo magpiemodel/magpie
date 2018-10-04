@@ -4,7 +4,11 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description
+*' @description  
+*'
+*' This realization models agricultural sector water demand endogenously, while other sectors are kept exogenous;
+*' Various settings for environmental water demand described below.
+*'
 *' *Agricultural water demand*:
 *'
 *' Water demand for agriculture is endogenously calculated based

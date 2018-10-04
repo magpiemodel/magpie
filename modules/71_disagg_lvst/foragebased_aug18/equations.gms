@@ -7,7 +7,7 @@
 *' @equations
 
 *' Ruminant livestock production within a cell is determined by the production of the non-transportable 
-*' feed items: grazed pasture and fodder crops. They have to be larger than the ruminant feed requirements, 
+*' feed items grazed pasture and fodder. These must be larger than the ruminant feed requirements 
 *' that are given by the product of ruminant production and the respective feed baskets:
 
 q71_feed_rum_liv(j2,kforage) ..
@@ -57,7 +57,7 @@ q71_sum_rum_liv(j2,kli_rum) ..
                  vm_prod(j2,kli_rum) =e= sum(kforage,v71_prod_rum(j2,kli_rum,kforage))
                  ;
 
-*' To account for the above mentioned simple idea, that monogastric livestocks is held close to the population, it is
+*' To account for the above mentioned fact that monogastric livestock are held close to the population, it is
 *' distributed based on urban area by the formula 
 
 q71_prod_mon_liv(j2,kli_mon) ..
