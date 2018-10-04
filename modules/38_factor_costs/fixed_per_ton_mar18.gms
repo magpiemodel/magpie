@@ -9,7 +9,7 @@
 *' from [30_crop] and yields from [14_yields]. In other words, in this 
 *' implementation, factor costs entirely depend on the volume of production.
 *' As such, there are no incentives to allocate and concentrate production
-*' into high-productive cells.
+*' into more productive cells.
 
 *' @limitations This realization assumes that factor costs, within a region,
 *' purely depend on the production and are independent of the area under cultivation.

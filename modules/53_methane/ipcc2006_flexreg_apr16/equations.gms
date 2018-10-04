@@ -6,7 +6,7 @@
 
 *' @equations
 *'
-*' We calculate methane emissions before technical mitigation(btm) in each regions (reg) (`vm_btm_reg`)
+*' We calculate methane emissions before technical mitigation(btm) in each region (reg) (`vm_btm_reg`)
 *' from the aforementioned three sources of emissions step-by-step in the following three equations.
 *'
 *' The first equation describes how CH4 emission from enteric fermentation is calculated.
@@ -31,9 +31,8 @@
 *'  ( with high energy contents, for example, temperate and tropical cereals, maize,pulses) or `k_noconc53` 
 *' (for example, pasture, fodder,crop residues). The purpose of livestock raising `k_ruminants53`
 *' can be either for meat (`livst_rum`) or for milk (`livst_milk`). The parameter `fm_attributes`
-*' in MAgPIE captures a content of some thing (e.g. gross energy-ge, dry matter-dm, reactive nitrogen-nr) 
-*' in a given commodity.
-*' These attributes or coefficients are then used in content conversions in may modules of the model.
+*' in MAgPIE converts given commodities into desired attributes and units (e.g. gross energy-ge, dry matter-dm, reactive nitrogen-nr) 
+*' These attributes or coefficients are then used in content conversions in many modules of the model.
 *'
 *' The second equation of this realization is meant to calculate CH4 emission from
 *' animal waste management(AWM). In general, AWM depends on the number of

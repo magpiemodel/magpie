@@ -4,7 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description Unlike the previous one, this implementation allows the possibility
+*' @description Unlike the previous realization, this implementation allows the possibility
 *' that non-CO2 emissions can be reduced by technical mitigation at additional costs.
 *'
 *' @limitations There are still issues related to data quality used by our source.

@@ -6,24 +6,24 @@
 
 
 positive variables
- vm_nr_inorg_fert_reg(i,land_ag)  inorganic fertilizer application (Tg N per yr)
- vm_nr_inorg_fert_costs(i)        cost of inorganic fertilizers (mio. USD per yr)
- v50_nr_eff(i)                    cropland nutrient uptake efficiency (Tg N per yr)
- v50_nr_eff_pasture(i)            pasture nutrient uptake efficiency (Tg N per yr)
- v50_nr_withdrawals(i,kcr)        withdrawals of Nr from soils (Tg N per yr)
- v50_nr_deposition(i,land)        atmospheric deposition (Tg N per yr)
+ vm_nr_inorg_fert_reg(i,land_ag)  Inorganic fertilizer application (Tg N per yr)
+ vm_nr_inorg_fert_costs(i)        Cost of inorganic fertilizers (mio. USD per yr)
+ v50_nr_eff(i)                    Cropland nutrient uptake efficiency (Tg N per yr)
+ v50_nr_eff_pasture(i)            Pasture nutrient uptake efficiency (Tg N per yr)
+ v50_nr_withdrawals(i,kcr)        Withdrawals of Nr from soils (Tg N per yr)
+ v50_nr_deposition(i,land)        Atmospheric deposition (Tg N per yr)
 ;
 
 equations
- q50_nr_cost_fert(i)        fertilizer costs (mio. USD per yr)
- q50_nr_bal_crp(i)          cropland nutrient inputs have to equal withdrawals and losses (Tg N per yr)
- q50_nr_withdrawals(i,kcr)  calculating nr withdrawals (Tg N per yr)
- q50_nr_bal_pasture(i)      nitrogen balance pasture lands (Tg N per yr)
- q50_nr_deposition(i,land)  atmospheric deposition (Tg N per yr)
+ q50_nr_cost_fert(i)        Fertilizer costs (mio. USD per yr)
+ q50_nr_bal_crp(i)          Cropland nutrient inputs have to equal withdrawals and losses (Tg N per yr)
+ q50_nr_withdrawals(i,kcr)  Calculating nr withdrawals (Tg N per yr)
+ q50_nr_bal_pasture(i)      Nitrogen balance pasture lands (Tg N per yr)
+ q50_nr_deposition(i,land)  Atmospheric deposition (Tg N per yr)
 ;
 
 parameters
- ic50_atmospheric_deposition_rates(i,land)   atmospheric deposition rate (t N per ha)
+ ic50_atmospheric_deposition_rates(i,land)   Atmospheric deposition rate (t N per ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

@@ -6,7 +6,7 @@
 
 *' @description In this realization climate classification information remains
 *' static over the whole simulation based on data for 1976-2000 taken from
-*' <http://koeppen-geiger.vu-wien.ac.at/shifts.htm> @rubel_observed_2010.
+*' <http://koeppen-geiger.vu-wien.ac.at/shifts.htm> (@rubel_observed_2010).
 *'
 *' @limitations Temporal variations in climate classification are not considered.
 
