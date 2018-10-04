@@ -42,8 +42,8 @@ variables
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov56_reward_cdr_aff(t,j,co2_forestry,type)                      cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
- ov_reward_cdr_aff(t,i,type)                                     regional revenues for carbon captured by afforestation (mio. USD05MER per yr)
+ ov56_reward_cdr_aff(t,j,co2_forestry,type)                      Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
+ ov_reward_cdr_aff(t,i,type)                                     Regional revenues for carbon captured by afforestation (mio. USD05MER per yr)
  ov_btm_reg(t,i,emis_source,pollutants,type)                     Regional emissions before technical mitigation (Tg per yr)
  ov_btm_cell(t,j,emis_source,pollutants,type)                    Cellular emissions before technical mitigation (Tg per yr)
  ov_emission_costs(t,i,type)                                     Costs for emission rights for pollutants and greenhouse gases (mio. USD05MER per yr)
@@ -53,15 +53,15 @@ parameters
  ov56_emission_costs_reg_oneoff(t,i,emis_reg_one56,type)         Costs for emissions occuring only once in time (mio. USD05MER per yr)
  ov56_emission_costs_cell_yearly(t,j,emis_cell_yr56,type)        Costs for emissions occuring yearly (mio. USD05MER per yr)
  ov56_emission_costs_cell_oneoff(t,j,emis_cell_one56,type)       Costs for emissions occuring only once in time (mio. USD05MER per yr)
- oq56_technical_mitigation_reg(t,i,pollutants,emis_source,type)  application of maccs on emissions (Tg per yr)
- oq56_technical_mitigation_cell(t,j,pollutants,emis_source,type) application of maccs on emissions (Tg per yr)
- oq56_cell_to_reg(t,i,pollutants,emis_source,type)               aggregation to regional emissions (Tg per yr)
- oq56_emission_costs(t,i,type)                                   calculation of total emission costs (mio. USD05MER per yr)
- oq56_emission_costs_reg_yearly(t,i,emis_reg_yr56,type)          calculation of regional costs for annual emissions (mio. USD05MER per yr)
- oq56_emission_costs_reg_oneoff(t,i,emis_reg_one56,type)         calculation of regional costs for emissions occuring only once in time (mio. USD05MER per yr)
- oq56_emission_costs_cell_yearly(t,j,emis_cell_yr56,type)        calculation of cellular costs for annual emissions (mio. USD05MER per yr)
- oq56_emission_costs_cell_oneoff(t,j,emis_cell_one56,type)       calculation of cellular costs for emissions occuring only once in time (mio. USD05MER per yr)
- oq56_reward_cdr_aff_reg(t,i,type)                               regional revenues for carbon captured by afforestation (mio. USD05MER per yr)
- oq56_reward_cdr_aff(t,j,co2_forestry,type)                      cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
+ oq56_technical_mitigation_reg(t,i,pollutants,emis_source,type)  Application of maccs on emissions (Tg per yr)
+ oq56_technical_mitigation_cell(t,j,pollutants,emis_source,type) Application of maccs on emissions (Tg per yr)
+ oq56_cell_to_reg(t,i,pollutants,emis_source,type)               Aggregation to regional emissions (Tg per yr)
+ oq56_emission_costs(t,i,type)                                   Calculation of total emission costs (mio. USD05MER per yr)
+ oq56_emission_costs_reg_yearly(t,i,emis_reg_yr56,type)          Calculation of regional costs for annual emissions (mio. USD05MER per yr)
+ oq56_emission_costs_reg_oneoff(t,i,emis_reg_one56,type)         Calculation of regional costs for emissions occuring only once in time (mio. USD05MER per yr)
+ oq56_emission_costs_cell_yearly(t,j,emis_cell_yr56,type)        Calculation of cellular costs for annual emissions (mio. USD05MER per yr)
+ oq56_emission_costs_cell_oneoff(t,j,emis_cell_one56,type)       Calculation of cellular costs for emissions occuring only once in time (mio. USD05MER per yr)
+ oq56_reward_cdr_aff_reg(t,i,type)                               Regional revenues for carbon captured by afforestation (mio. USD05MER per yr)
+ oq56_reward_cdr_aff(t,j,co2_forestry,type)                      Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

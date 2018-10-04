@@ -34,16 +34,16 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_manure(t,i,kli,awms,npk,type)                    calculation of manure excreted in confinements (mio t X)
- ov55_feed_intake(t,i,kli,awms,npk,type)             calculation of manure excreted in confinements (mio t X)
+ ov_manure(t,i,kli,awms,npk,type)                    Calculation of manure excreted in confinements (mio t X)
+ ov55_feed_intake(t,i,kli,awms,npk,type)             Calculation of manure excreted in confinements (mio t X)
  ov_manure_recycling(t,i,npk,type)                   Manure being recycled to croplands (mio t X)
  ov_manure_confinement(t,i,kli,awms_conf,npk,type)   Manure excreted in confinements managed in different awms (mio t X)
- oq55_bal_intake_grazing_pasture(t,i,kli,npk,type)   nutrient balance for intake of grazing animals on pastures (mio t X)
- oq55_bal_intake_confinement(t,i,kli,npk,type)       nutrient balance for intake in confinement  (mio t X)
- oq55_bal_intake_grazing_cropland(t,i,kli,npk,type)  nutrient balance for intake of grazing animals on cropland  (mio t X)
- oq55_bal_intake_fuel(t,i,kli,npk,type)              nutrient balance for intake of grazing animals on pasture whose excreate are collected for household fuel (mio t X)
- oq55_bal_manure(t,i,kli,awms,npk,type)              calculation of manure (mio t X)
- oq55_manure_confinement(t,i,kli,awms_conf,npk,type) manure from animals in confinement managed in different awms (mio t X)
- oq55_manure_recycling(t,i,npk,type)                 manure from animals in confinement recycling to cropland (mio t X)
+ oq55_bal_intake_grazing_pasture(t,i,kli,npk,type)   Nutrient balance for intake of grazing animals on pastures (mio t X)
+ oq55_bal_intake_confinement(t,i,kli,npk,type)       Nutrient balance for intake in confinement  (mio t X)
+ oq55_bal_intake_grazing_cropland(t,i,kli,npk,type)  Nutrient balance for intake of grazing animals on cropland  (mio t X)
+ oq55_bal_intake_fuel(t,i,kli,npk,type)              Nutrient balance for intake of grazing animals on pasture whose excreate are collected for household fuel (mio t X)
+ oq55_bal_manure(t,i,kli,awms,npk,type)              Calculation of manure (mio t X)
+ oq55_manure_confinement(t,i,kli,awms_conf,npk,type) Manure from animals in confinement managed in different awms (mio t X)
+ oq55_manure_recycling(t,i,npk,type)                 Manure from animals in confinement recycling to cropland (mio t X)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
