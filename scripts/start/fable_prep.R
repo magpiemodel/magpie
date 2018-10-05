@@ -13,6 +13,9 @@
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
+library(magpie4)
+library(lucode)
+
 buildInputVector <- function(regionmapping   = "aus",
                              project_name    = "isimip_rcp",
                              climatescen_name= "rcp2p6",
