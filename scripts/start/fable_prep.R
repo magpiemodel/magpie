@@ -24,23 +24,17 @@ buildInputVector <- function(regionmapping   = "aus",
                              validation_rev  = "4.14",
                              calibration     = NULL,
                              additional_data = "additional_data_rev3.58.tgz") {
-  mappings <- c(aus="b18f2e819b94edba598984a7da8f553c",
-                bra="e90458394d5302941049f44b72ff08dc",
-                cha="fb4142b907bc772d14b467365f58c330",
-                eth="cc2f7adaab245d3d5cb63f6caff2d76f",
-                idn="6f3b58c7e203e8d9d2ea92993d84ee54",
-                ind="4431b698acab987e1dedd3a714231643",
-                usa="2b409196626ee246982f5ec87323c01a")
+  mappings <- c(h12="690d3718e151be1b450b394c1064b1c5")
   archive_name=paste(project_name,climate_model,climatescen_name,co2,sep="-")
-  archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", toupper(regionmapping),"4_",mappings[regionmapping], ".tgz")
-  madrat  <- paste0("rev", madrat_rev, "_", mappings[regionmapping], "_magpie.tgz")
-  validation  <- paste0("rev", validation_rev, "_", mappings[regionmapping], "_validation.tgz")
+  archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", toupper(regionmapping),"4_",mappings["h12"], ".tgz")
+  madrat  <- paste0("rev", madrat_rev, "_", mappings["h12"], "_magpie.tgz")
+  validation  <- paste0("rev", validation_rev, "_", mappings["h12"], "_validation.tgz")
   return(c(archive,madrat,validation,calibration,additional_data))
 }
 
 #calib_date <- NULL 
 
-for(x in c("aus","bra","cha","eth","idn","ind","usa")) {
+for(x in c("ind","cha")) {
   if(exists("calib_date") && !is.null(calib_date)) {
     calibration <- paste0("calibration_",x,"_",calib_date,".tgz")
   } else {
@@ -53,5 +47,5 @@ for(x in c("aus","bra","cha","eth","idn","ind","usa")) {
     calib <- submitCalibration(x)
     cfg$input <- c(cfg$input,calib)
   }
-  publish_data(input=cfg, name=paste0("testdata3_",x), target=".")
+  publish_data(input=cfg, name=paste0("magpie4.0_",x,"_oct18"), target=".")
 }
