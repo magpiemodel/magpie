@@ -1,0 +1,35 @@
+*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+*** |  authors, and contributors see AUTHORS file
+*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  Contact: magpie@pik-potsdam.de
+
+*' @description As official global statistics exist only for crop production and not for crop
+*' residue production, the biomass of residues is obtained in MAgPIE by using
+*' crop-type specific plant growth functions based on crop production and area harvested.
+*' Plant biomass is divided into three components: the harvested organ as listed
+*' in FAO, the aboveground (AG) and the belowground (BG) residues.
+*'
+*' @ipcc_2006_2006 offers one of the few consistent datasets to estimate
+*' both AG and BG residues. Also, by providing crop-growth functions (CGF, `f18_cgf`)
+*' instead of fixed harvest indices, it can be used to depict current
+*' international differences of harvest indices and their development in the future.
+*' The methodology is thus well eligible for global long-term modelling.
+*' @ipcc_2006_2006 provides linear CGFs with positive slope and intercept
+*' for cereals, leguminous crops, potatoes and grasses. As no values are
+*' available for the oilcrops rapeseed, sunflower, oilpalms as well as
+*' sugar crops, tropical roots, cotton and others, we use fixed harvest-indices
+*' (positive slope without intercept) for these crops based
+*' on @wirsenius_human_2000, @lal_world_2005 and @feller_dungung_2007. If different CGFs are available
+*' for crops within a crop group, we build a weighted average based on the
+*' production in 1995.
+
+*####################### R SECTION START (PHASES) ##############################
+$Ifi "%phase%" == "sets" $include "./modules/18_residues/flexreg_apr16/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/18_residues/flexreg_apr16/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/18_residues/flexreg_apr16/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/18_residues/flexreg_apr16/equations.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/18_residues/flexreg_apr16/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/18_residues/flexreg_apr16/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/18_residues/flexreg_apr16/postsolve.gms"
+*######################## R SECTION END (PHASES) ###############################

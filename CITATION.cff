@@ -1,0 +1,89 @@
+cff-version: 1.0.3
+message: If you use this model, please cite it as below.
+authors:
+  - family-names: Dietrich
+    given-names: Jan Philipp
+    orcid: https://orcid.org/0000-0002-4309-6431
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: dietrich@pik-potsdam.de
+
+  - family-names: Bodirsky
+    given-names: Benjamin Leon
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: bodirsky@pik-potsdam.de
+
+  - family-names: Weindl
+    given-names: Isabelle
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: weindl@pik-potsdam.de
+
+  - family-names: Humpenöder
+    given-names: Florian
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: humpenoeder@pik-potsdam.de
+
+  - family-names: Stevanovic
+    given-names: Miodrag
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: stevanovic@pik-potsdam.de
+
+  - family-names: Kreidenweis
+    given-names: Ulrich
+    affiliation: "Potsdam Institute for Climate Impact Research"
+
+  - family-names: Wang
+    given-names: Xiaoxi
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: wang@pik-potsdam.de
+
+  - family-names: Karstens
+    given-names: Kristine
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: karstens@pik-potsdam.de
+
+  - family-names: Mishra
+    given-names: Abhijeet
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: mishra@pik-potsdam.de
+
+  - family-names: Klein
+    given-names: David
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: dklein@pik-potsdam.de
+
+  - family-names: Ambrósio
+    given-names: Geanderson
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: ambrosio@pik-potsdam.de
+
+  - family-names: Araujo
+    given-names: Ewerton
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: araujo@pik-potsdam.de
+
+  - family-names: Biewald
+    given-names: Anne
+    affiliation: "Potsdam Institute for Climate Impact Research"
+
+  - family-names: Lotze-Campen
+    given-names: Hermann
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: lotze-campen@pik-potsdam.de
+
+  - family-names: Popp
+    given-names: Alexander
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: popp@pik-potsdam.de
+
+title: MAgPIE - An Open Source land-use modeling framework
+version: 4.0.1-dev
+date-released: 2018-10-05
+repository-code: https://github.com/magpiemodel/magpie
+keywords:
+  - landuse
+  - modeling
+  - nlp
+  - partial equilibrium
+doi: 10.5281/zenodo.1418752
+license: AGPL-3.0-or-later
+url: https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpie

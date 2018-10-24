@@ -1,0 +1,18 @@
+# |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+# |  authors, and contributors see AUTHORS file
+# |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+# |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+# |  Contact: magpie@pik-potsdam.de
+
+name,type,reason
+vm_nr_som, input, not needed
+vm_area,input,not needed
+vm_manure,input, not needed
+vm_manure_recycling,input, not needed
+vm_res_recycling,input, not needed
+vm_res_biomass_ag,input, not needed
+vm_res_biomass_bg,input, not needed
+fm_attributes,input, not needed
+vm_prod_reg,input, not needed
+vm_dem_seed,input, not needed
+vm_land,input,questionnaire

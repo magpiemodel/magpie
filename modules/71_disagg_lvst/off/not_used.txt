@@ -1,0 +1,13 @@
+# |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+# |  authors, and contributors see AUTHORS file
+# |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+# |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+# |  Contact: magpie@pik-potsdam.de
+
+name,type,reason
+im_feed_baskets,input,questionnaire
+fm_feed_balanceflow,input,questionnaire 
+vm_prod,input,questionnaire
+vm_prod_reg,input,questionnaire
+pm_land_start,input,questionnaire
+pcm_land,input,questionnaire

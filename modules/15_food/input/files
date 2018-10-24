@@ -1,0 +1,19 @@
+* list of files that are required here
+f15_bmi.cs3
+f15_bmi_shr_past.cs3
+f15_bmi_shr_regr_paras.cs3
+f15_demand_regression_parameters.cs3
+f15_bmi_shr_regr_paras.cs3
+f15_kcal_pc_iso.csv
+f15_intake_pc_observed_iso.cs3
+f15_prices_initial.csv
+f15_prices_index.csv
+f15_kcal_balanceflow_fadeout.csv
+f15_ruminant_fadeout.csv
+f15_bodyheight_historical.cs3
+f15_schofield_parameters.cs3
+f15_schofield_parameters_height.cs3
+f15_intake_regression_parameters.cs3
+f15_household_balanceflow.cs3
+f15_nutrition_attributes.cs3
+

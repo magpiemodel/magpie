@@ -1,0 +1,13 @@
+# |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+# |  authors, and contributors see AUTHORS file
+# |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+# |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+# |  Contact: magpie@pik-potsdam.de
+name,type,reason
+vm_emissions_reg, input, no emission feedback on deposition
+vm_manure, input, new flexreg structure
+vm_manure_confinement, input, new flexreg structure
+vm_manure_recycling, input, new flexreg structure
+vm_res_recycling,new flexreg structure,
+vm_nr_inorg_fert_reg,input, not needed
+vm_nr_som,input,questionnaire
