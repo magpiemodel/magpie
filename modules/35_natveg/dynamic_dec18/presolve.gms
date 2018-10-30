@@ -106,11 +106,8 @@ v35_other.up(j,"acx") = pc35_other(j,"acx");
 m_boundfix(v35_other,(j,"acx"),l,10e-5);
 
 * calculate carbon density
-p35_yield_secdforest(t,j,ac) =
+p35_yield_natveg(t,j,ac) =
      m_growing_stock(pm_carbon_density_ac(t,j,ac,"vegc"));
-
-p35_yield_other(t,j,ac) =
-   m_growing_stock(pm_carbon_density_ac(t,j,ac,"vegc"));
 
 p35_yield_primforest(t,j) =
     sum(kforestry,p35_wood_product_to_biomass_share(kforestry))
