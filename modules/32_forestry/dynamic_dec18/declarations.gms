@@ -122,31 +122,31 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_fore(t,i,type)                            Afforestation costs (Mio US$)
- ov32_land(t,j,type32,ac,type)                     forestry land pools (mio. ha)
- ov_landdiff_forestry(t,type)                      aggregated difference in forestry land compared to previous timestep (mio. ha)
- ov_cdr_aff(t,j,emis_source_co2_forestry,type)     total CDR from afforestation (new and existing areas) between t+1 and t=sm_invest_horizon (Tg CO2-C)
- ov32_prod(t,j,hvarea32,kforestry,type)            Production
- ov32_cost_harvest(t,i,type)                       Harvest
- ov32_cost_recur(t,i,type)                         Defunkt
- ov32_cost_transp(t,i,type)                        harvesting costs USD ton per m3
- ov32_hvarea_forestry(t,j,kforestry,ac_sub,type)   Harvested area
- ov32_hvarea_secdforest(t,j,kforestry,ac_sub,type) Harvested area secondary
- ov32_hvarea_primforest(t,j,kforestry,type)        Harvested area primary
- ov32_excess_dem(t,kforestry,type)                 global excess demand (mio. ton DM)
- ov32_excess_prod(t,i,kforestry,type)              regional excess production (mio. ton DM)
- ov_cost_trade_forestry(t,i,type)                  transport costs and taxes for the bilateral trade (Mio USD)
- ov32_cost_trade_reg(t,i,kforestry,type)           interregional trade costs (mio. USD)
- ov32_prod_future_reg(t,i,kforestry,type)          X
- ov32_prod_external(t,j,kforestry,type)            X
- ov32_land_expansion(t,j,type32,ac,type)           X
- ov32_land_reduction(t,j,type32,ac,type)           X
- ov32_avail_reuse(t,j,type)                        X
- ov32_hvarea_other(t,j,kforestry,ac_sub,type)      X
- ov32_cost_establishment(t,i,type)                 X
- ov32_missing_area_future(t,j,type)                X
- oq32_cost_total(t,i,type)                         total forestry costs constraintt
- oq32_land(t,j,type)                               land constraint
+ ov_cost_fore(t,i,type)                            Forestry costs (Mio USD)
+ ov32_land(t,j,type32,ac,type)                     Forestry land pools (mio. ha)
+ ov_landdiff_forestry(t,type)                      Aggregated difference in forestry land compared to previous timestep (mio. ha)
+ ov_cdr_aff(t,j,emis_source_co2_forestry,type)     Total CDR from afforestation (new and existing areas) between t+1 and t=sm_invest_horizon (Tg CO2-C)
+ ov32_prod(t,j,hvarea32,kforestry,type)            Timber production (mio. m3)
+ ov32_cost_harvest(t,i,type)                       Cost of timber harvesting (USD per ha)
+ ov32_cost_recur(t,i,type)                         Recurring forest management costs (USD per ha)
+ ov32_cost_transp(t,i,type)                        Transportation costs (USD per m3)
+ ov32_hvarea_forestry(t,j,kforestry,ac_sub,type)   Area harvested for timber production (mio. ha)
+ ov32_hvarea_secdforest(t,j,kforestry,ac_sub,type) Harvested secondary forest area (mio. ha)
+ ov32_hvarea_primforest(t,j,kforestry,type)        Primary forest harvested (mio. ha)
+ ov32_excess_dem(t,kforestry,type)                 Global excess demand (mio. ton DM)
+ ov32_excess_prod(t,i,kforestry,type)              Regional excess production (mio. ton DM)
+ ov_cost_trade_forestry(t,i,type)                  Transport costs and taxes for the bilateral trade (Mio USD)
+ ov32_cost_trade_reg(t,i,kforestry,type)           Interregional trade costs (mio. USD)
+ ov32_prod_future_reg(t,i,kforestry,type)          Future regional production (mio. m3)
+ ov32_prod_external(t,j,kforestry,type)            Production balance flow from heaven (mio. m3)
+ ov32_land_expansion(t,j,type32,ac,type)           Land expansion (mio. ha)
+ ov32_land_reduction(t,j,type32,ac,type)           land reduction (mio. ha)
+ ov32_avail_reuse(t,j,type)                        Defunct (1)
+ ov32_hvarea_other(t,j,kforestry,ac_sub,type)      Harvested area of other land (mio. ha)
+ ov32_cost_establishment(t,i,type)                 Cost of establishment calculated at the current time step (mio. USD)
+ ov32_missing_area_future(t,j,type)                Defunct (1)
+ oq32_cost_total(t,i,type)                         total forestry costs constraint (mio. USD)
+ oq32_land(t,j,type)                               land constraint (mio. ha)
  oq32_cdr_aff(t,j,emis_source_co2_forestry,type)   calculation of CDR from afforestation
  oq32_carbon(t,j,c_pools,type)                     forestry carbon stock calculation
  oq32_diff(t,type)                                 aggregated difference in forestry land compared to previous timestep (mio. ha)
@@ -158,25 +158,25 @@ parameters
  oq32_prod_forestry_woodfuel(t,j,type)             woodfuel production from forestry
  oq32_prod_secdforest_woodfuel(t,j,type)           woodfuel production from secdforest
  oq32_prod_primforest_woodfuel(t,j,type)           woodfuel production from primforest
- oq32_hvarea_forestry(t,j,ac_sub,type)             X
- oq32_hvarea_secdforest(t,j,ac_sub,type)           X
- oq32_hvarea_primforest(t,j,type)                  X
- oq32_cost_recur(t,i,type)                         X
- oq32_cost_harvest(t,i,type)                       X
- oq32_cost_transport(t,i,type)                     X
- oq32_production_timber(t,j,type)                  X
+ oq32_hvarea_forestry(t,j,ac_sub,type)             
+ oq32_hvarea_secdforest(t,j,ac_sub,type)           
+ oq32_hvarea_primforest(t,j,type)                  
+ oq32_cost_recur(t,i,type)                         
+ oq32_cost_harvest(t,i,type)                       
+ oq32_cost_transport(t,i,type)                     
+ oq32_production_timber(t,j,type)                  
  oq32_trade_reg(t,i,kforestry,type)                regional trade balances i.e. minimum self-suff ratio
  oq32_excess_dem(t,kforestry,type)                 global excess demand
  oq32_excess_supply(t,i,kforestry,type)            regional excess production
  oq32_cost_trade(t,i,type)                         trade costs
  oq32_cost_trade_reg(t,i,kforestry,type)           interregional trade cost calculation (mio. USD)
- oq32_prod_future(t,i,type)                        X
- oq32_land_expansion(t,j,type32,ac,type)           X
- oq32_land_reduction(t,j,type32,ac,type)           X
- oq32_avail_reuse(t,j,type)                        X
- oq32_hvarea_other(t,j,ac_sub,type)                X
- oq32_prod_other(t,j,type)                         X
- oq32_cost_establishment(t,i,type)                 X
- oq32_secdforest_conversion(t,j,type)              X
+ oq32_prod_future(t,i,type)                        
+ oq32_land_expansion(t,j,type32,ac,type)           
+ oq32_land_reduction(t,j,type32,ac,type)           
+ oq32_avail_reuse(t,j,type)                        
+ oq32_hvarea_other(t,j,ac_sub,type)                
+ oq32_prod_other(t,j,type)                         
+ oq32_cost_establishment(t,i,type)                 
+ oq32_secdforest_conversion(t,j,type)              
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
