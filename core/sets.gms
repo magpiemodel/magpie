@@ -208,6 +208,9 @@ sets
   land_ag(land) Agricultural land pools
                   / crop, past /
 
+  hvarea_timber(land) land from which timber can be taken away
+  / forestry, primforest, secdforest,other /
+
   land_natveg(land) Natural vegetation land pools
         / primforest, secdforest, other /
 
