@@ -71,17 +71,14 @@ q32_cost_harvest(i2)..
                     v32_cost_harvest(i2)
                     =e=
                     sum((cell(i2,j2), kforestry),
-                    sum(ac_sub, v32_hvarea_forestry(j2,kforestry,ac_sub))
-                  + sum(ac_sub, v32_hvarea_secdforest(j2,kforestry,ac_sub))
-                  + sum(ac_sub, v32_hvarea_other(j2,"woodfuel",ac_sub))
-                  + v32_hvarea_primforest(j2,kforestry)) * f32_harvest_cost_ha(i2,"harv")
+                    sum(ac_sub, v32_hvarea_forestry(j2,kforestry,ac_sub)) * f32_harvest_cost_ha(i2,"harv")
                     ;
 *** THIS CAN BE MOVED TO TRANSPORT MODULE
 *** Instead of v32_prod we can use vm_prod interface and add wood/woodfuel transport costs to input file.
 
 q32_cost_transport(i2) ..     v32_cost_transp(i2)
                               =e=
-                              sum((hvarea32,kforestry,cell(i2,j2)), v32_prod(j2,hvarea32,kforestry) * f32_distance(j2) * f32_transport_costs(kforestry));
+                              sum((hvarea_timber,kforestry,cell(i2,j2)), v32_prod(j2,hvarea_timber,kforestry) * f32_distance(j2) * f32_transport_costs(kforestry));
 
 **--------------------------------------------------------------------
 
@@ -99,37 +96,6 @@ q32_prod_forestry_woodfuel(j2)..
                          sum(ac_sub, v32_hvarea_forestry(j2,"wood",ac_sub)      * sum(ct, p32_yield_forestry_ac(ct,j2,ac_sub)))* (1-0.88)
 						            +sum(ac_sub, v32_hvarea_forestry(j2,"woodfuel",ac_sub)  * sum(ct, p32_yield_forestry_ac(ct,j2,ac_sub)));
 
-**** FROM SECONDARY FORESTS
-q32_prod_secdforest_wood(j2)..
-                         v32_prod(j2,"secdforest","wood")
-                          =e=
-						             sum(ac_sub, v32_hvarea_secdforest(j2,"wood",ac_sub) * sum(ct, p32_yield_natveg(ct,j2,ac_sub)))* 0.80;
-
-q32_prod_secdforest_woodfuel(j2)..
-                          v32_prod(j2,"secdforest","woodfuel")
-                          =e=
-                          sum(ac_sub, v32_hvarea_secdforest(j2,"wood",ac_sub)	    * sum(ct, p32_yield_natveg(ct,j2,ac_sub)))* (1-0.80)
-	   				            + sum(ac_sub, v32_hvarea_secdforest(j2,"woodfuel",ac_sub)	* sum(ct, p32_yield_natveg(ct,j2,ac_sub)));
-
-
-**** FROM PRIMARY FORESTS
-q32_prod_primforest_wood(j2)..
-                          v32_prod(j2,"primforest","wood")
-                          =e=
-                          v32_hvarea_primforest(j2,"wood") * sum(ct, p32_yield_primforest(ct,j2))* 0.70;
-
-q32_prod_primforest_woodfuel(j2)..
-                          v32_prod(j2,"primforest","woodfuel")
-                          =e=
-                          v32_hvarea_primforest(j2,"wood")      * sum(ct, p32_yield_primforest(ct,j2)) * (1-0.70)
-                         +v32_hvarea_primforest(j2,"woodfuel")  * sum(ct, p32_yield_primforest(ct,j2));
-
-**** FROM OTHER LAND (only woodfuel)
-q32_prod_other(j2)..
-                          v32_prod(j2,"other","woodfuel")
-                          =e=
-                          sum(ac_sub,v32_hvarea_other(j2,"woodfuel",ac_sub) * sum(ct, p32_yield_natveg(ct,j2,ac_sub)));
-
 **--------------------------------------------------------------------
 
 ***AREA
@@ -146,34 +112,12 @@ q32_hvarea_forestry(j2,ac_sub) ..
                           =e=
                           (pc32_land(j2,"plant",ac_sub) - v32_land(j2,"plant",ac_sub));
 
-q32_hvarea_secdforest(j2,ac_sub)..
-                          sum(kforestry,v32_hvarea_secdforest(j2,kforestry,ac_sub))
-                          =l=
-                          (pc35_secdforest(j2,ac_sub) - v35_secdforest(j2,ac_sub));
-
-q32_hvarea_primforest(j2)..
-                          sum(kforestry,v32_hvarea_primforest(j2,kforestry))
-                          =l=
-                          (pcm_land(j2,"primforest") - vm_land(j2,"primforest"));
-
-q32_hvarea_other(j2,ac_sub)..
-                          sum(kforestry,v32_hvarea_other(j2,kforestry,ac_sub))
-                          =l=
-                          (pc35_other(j2,ac_sub)  - v35_other(j2,ac_sub));
-
-**--------------------------------------------------------------------
- q32_secdforest_conversion(j2)..
-                          v35_secdforest(j2,"ac0")
-                          =e=
-                          sum((kforestry,ac_sub),v32_hvarea_secdforest(j2,kforestry,ac_sub))
-                        + sum(kforestry,v32_hvarea_primforest(j2,kforestry))
-                          ;
 *********************************************************
 
-q32_production_timber(j2)..
-                          sum(kforestry,vm_prod(j2,kforestry))
+q32_production_timber(i2)..
+                          sum((kforestry,cell(i2,j2)),vm_prod(j2,kforestry)) * sum(ct,f32_production_ratio(i2,ct))
                           =e=
-                          sum(kforestry,sum(hvarea32, v32_prod(j2,hvarea32,kforestry)) + v32_prod_external(j2,kforestry))
+                          sum((kforestry,cell(i2,j2)),sum(hvarea_timber, v32_prod(j2,hvarea_timber,kforestry)) + v32_prod_external(j2,kforestry))
                           ;
 
 **--------------------------------------------------------------------

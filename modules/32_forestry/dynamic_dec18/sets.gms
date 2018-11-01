@@ -26,17 +26,11 @@ sets
    rltype
    /rlFAO_min,rlGTM,rlFAO_max,init,hybrid/
 
-   hvarea32(land)
-   / forestry, primforest, secdforest,other /
-
-   natveg32(hvarea32)
-   / primforest, secdforest /
-
    tstart32(t_ext_forestry)
     / y1995, y2000, y2005, y2010 /
 
   gs_calib
-  /p75,avg/  
+  /p75,avg/
 
 ;
 
