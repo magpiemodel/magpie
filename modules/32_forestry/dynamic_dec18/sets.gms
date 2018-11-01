@@ -20,9 +20,6 @@ sets
 
    harvest32(j,ac) mapping age class - land type
 
-  kforestry(k) forestry products
-   / wood, woodfuel /
-
    rltype
    /rlFAO_min,rlGTM,rlFAO_max,init,hybrid/
 
