@@ -60,7 +60,6 @@ positive variables
  vm_cost_trade_forestry(i)                        Transport costs and taxes for the bilateral trade (Mio USD)
  v32_cost_trade_reg(i,kforestry)                  Interregional trade costs (mio. USD)
 
-* v32_prod_future(j,kforestry)
  v32_prod_future_reg(i,kforestry)                 Future regional production (mio. m3)
 
  v32_prod_external(j,kforestry)                   Production balance flow from heaven (mio. m3)
