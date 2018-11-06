@@ -30,15 +30,16 @@ q16_supply_forestry(i,kforestry)          Forestry demand (mio. m3 per yr)
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_supply(t,i,kall,type)            Regional demand (mio. tDM per yr)
- ov16_dem_waste(t,i,kall,type)       Demand for waste (mio. tDM per yr)
- ov_dem_seed(t,i,kall,type)          Demand for seed (mio. tDM per yr)
- oq16_supply_crops(t,i,kcr,type)     Supply balance of crops (mio. tDM per yr)
- oq16_supply_livestock(t,i,kap,type) Supply balance of livestock (mio. tDM per yr)
- oq16_supply_secondary(t,i,ksd,type) Supply balance of secondary products (mio. tDM per yr)
- oq16_supply_residues(t,i,kres,type) Supply balance of crop residues (mio. tDM per yr)
- oq16_supply_pasture(t,i,type)       Supply balance of pasture (mio. tDM per yr)
- oq16_waste_demand(t,i,kall,type)    Waste generation (mio. tDM per yr)
- oq16_seed_demand(t,i,kcr,type)      Seed demand (mio. tDM per yr)
+ ov_supply(t,i,kall,type)                 Regional demand (mio. tDM per yr)
+ ov16_dem_waste(t,i,kall,type)            Demand for waste (mio. tDM per yr)
+ ov_dem_seed(t,i,kall,type)               Demand for seed (mio. tDM per yr)
+ oq16_supply_crops(t,i,kcr,type)          Supply balance of crops (mio. tDM per yr)
+ oq16_supply_livestock(t,i,kap,type)      Supply balance of livestock (mio. tDM per yr)
+ oq16_supply_secondary(t,i,ksd,type)      Supply balance of secondary products (mio. tDM per yr)
+ oq16_supply_residues(t,i,kres,type)      Supply balance of crop residues (mio. tDM per yr)
+ oq16_supply_pasture(t,i,type)            Supply balance of pasture (mio. tDM per yr)
+ oq16_waste_demand(t,i,kall,type)         Waste generation (mio. tDM per yr)
+ oq16_seed_demand(t,i,kcr,type)           Seed demand (mio. tDM per yr)
+ oq16_supply_forestry(t,i,kforestry,type) Forestry demand (mio. m3 per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
