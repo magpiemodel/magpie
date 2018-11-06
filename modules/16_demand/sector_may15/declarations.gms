@@ -12,6 +12,11 @@ v16_dem_waste(i,kall)             Demand for waste (mio. tDM per yr)
 vm_dem_seed(i,kall)               Demand for seed (mio. tDM per yr)
 ;
 
+parameters
+fm_forestry_demand(t_all,i,kforestry) Forestry demand with all time steps (mio. m3 per year)
+p16_volumetric_conversion(kforestry) Volumetric Conversion parameter for timber (1)
+;
+
 equations
 q16_supply_crops(i,kcr)          Supply balance of crops (mio. tDM per yr)
 q16_supply_livestock(i,kap)      Supply balance of livestock (mio. tDM per yr)
@@ -20,6 +25,7 @@ q16_supply_residues(i,kres)      Supply balance of crop residues (mio. tDM per y
 q16_supply_pasture(i)            Supply balance of pasture (mio. tDM per yr)
 q16_waste_demand(i,kall)         Waste generation (mio. tDM per yr)
 q16_seed_demand(i,kcr)           Seed demand (mio. tDM per yr)
+q16_supply_forestry(i,kforestry)          Forestry demand (mio. m3 per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
