@@ -24,11 +24,11 @@
 
  q35_carbon_secdforest(j2,c_pools) .. vm_carbon_stock(j2,"secdforest",c_pools) =e=
            sum(ac, v35_secdforest(j2,ac)
-           *sum(ct, p35_carbon_density_secdforest(ct,j2,ac,c_pools)));
+           *sum(ct, pm_carbon_density_ac(ct,j2,ac,c_pools)));
 
  q35_carbon_other(j2,c_pools)  .. vm_carbon_stock(j2,"other",c_pools) =e=
            sum(ac, v35_other(j2,ac)
-           *sum(ct, p35_carbon_density_other(ct,j2,ac,c_pools)));
+           *sum(ct, pm_carbon_density_ac(ct,j2,ac,c_pools)));
 
 
 *' NPI/NDC land protection policies are implemented as minium forest land and other land stock.

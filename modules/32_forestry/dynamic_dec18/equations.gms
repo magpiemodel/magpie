@@ -9,8 +9,8 @@
 
 *****C-PRICE INDUCED AFFORESTATION
 **negative emissions seen in maccs module
- q32_cdr_aff(j2,emis_source_co2_forestry) .. vm_cdr_aff(j2,emis_source_co2_forestry) =e=
-                                        sum((ac,emis_co2_to_forestry(emis_source_co2_forestry,c_pools))$(ord(ac) > 1 AND (ord(ac)-1) <= sm_invest_horizon/5),
+ q32_cdr_aff(j2,co2_forestry) .. vm_cdr_aff(j2,co2_forestry) =e=
+                                        sum((ac,emis_co2_to_forestry(co2_forestry,c_pools))$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planing_horizon/5),
                                         v32_land(j2,"aff","ac0") * (sum(ct, pm_carbon_density_ac(ct,j2,ac,c_pools)) - sum(ct, pm_carbon_density_ac(ct,j2,ac-1,c_pools))));
 
 **Upper bound for C-price induced afforestation area
@@ -71,7 +71,7 @@ q32_cost_harvest(i2)..
                     v32_cost_harvest(i2)
                     =e=
                     sum((cell(i2,j2), kforestry),
-                    sum(ac_sub, v32_hvarea_forestry(j2,kforestry,ac_sub)) * f32_harvest_cost_ha(i2,"harv")
+                    sum(ac_sub, v32_hvarea_forestry(j2,kforestry,ac_sub))) * f32_harvest_cost_ha(i2,"harv")
                     ;
 *** THIS CAN BE MOVED TO TRANSPORT MODULE
 *** Instead of v32_prod we can use vm_prod interface and add wood/woodfuel transport costs to input file.

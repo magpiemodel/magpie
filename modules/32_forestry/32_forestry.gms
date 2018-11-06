@@ -18,4 +18,5 @@
 $Ifi "%forestry%" == "affore_vegc_dec16" $include "./modules/32_forestry/affore_vegc_dec16.gms"
 $Ifi "%forestry%" == "static_sep16" $include "./modules/32_forestry/static_sep16.gms"
 $Ifi "%forestry%" == "dynamic_dec16" $include "./modules/32_forestry/dynamic_dec16.gms"
+$Ifi "%forestry%" == "dynamic_dec18" $include "./modules/32_forestry/dynamic_dec18.gms"
 *###################### R SECTION END (MODULETYPES) ############################

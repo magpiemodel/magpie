@@ -68,7 +68,7 @@ v32_land.fx(j,"indc",ac) = 0;
 
 display pc32_land;
 display v32_land.l,vm_land.lo,v32_land.up;
-f32_calib_gs("IND") = 1.2;
+
 p32_yield_forestry_ac(t,j,ac_sub) =
       sum(cell(i,j),p32_forestry_management(i))
       * (2)
@@ -92,21 +92,6 @@ p32_yield_primforest(t,j) =
       * 0.75
       / sum(clcl,pm_climate_class(j,clcl) * pm_bcef("acx",clcl))
       ;
-$ontext
-p32_yield_forestry_ac(t,j,ac) =
-*    sum(cell(i,j),p32_forestry_management(i) * f32_calib_gs(i))
-    sum(cell(i,j), f32_calib_gs(i))
-    * m_growing_stock(pm_carbon_density_ac(t,j,ac,"vegc"));
-
-p32_yield_natveg(t,j,ac) =
-*	 sum(cell(i,j),f32_calib_gs(i)) *
-     m_growing_stock(pm_carbon_density_ac(t,j,ac,"vegc"));
-
-p32_yield_primforest(t,j) =
-*	sum(cell(i,j),f32_calib_gs(i)) *
-    m_growing_stock(fm_carbon_density(t,j,"primforest","vegc"));
-$offtext
-
 ** Future demand relevant in current time step depending on rotation length
 ***** COULD BE MOVED AWAY TO NEW MODULE
 p32_rotation_reg(i) = ord(t) + ceil(p32_rot_length(i)/5);

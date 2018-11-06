@@ -46,8 +46,8 @@ positive variables
  vm_cost_fore(i)                                  Forestry costs (Mio USD)
  v32_land(j,type32,ac)                            Forestry land pools (mio. ha)
  vm_landdiff_forestry                             Aggregated difference in forestry land compared to previous timestep (mio. ha)
- vm_cdr_aff(j,emis_source_co2_forestry)           Total CDR from afforestation (new and existing areas) between t+1 and t=sm_invest_horizon (Tg CO2-C)
- v32_prod(j,hvarea_timber,kforestry)                   Timber production (mio. m3)
+ vm_cdr_aff(j,co2_forestry)                       Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
+ v32_prod(j,hvarea_timber,kforestry)              Timber production (mio. m3)
  v32_cost_harvest(i)                              Cost of timber harvesting (USD per ha)
  v32_cost_recur(i)                                Recurring forest management costs (USD per ha)
  v32_cost_transp(i)                               Transportation costs (USD per m3)
@@ -76,7 +76,7 @@ positive variables
 equations
  q32_cost_total(i)                                total forestry costs constraint (mio. USD)
  q32_land(j)                                      land constraint (mio. ha)
- q32_cdr_aff(j,emis_source_co2_forestry)          calculation of CDR from afforestation
+ q32_cdr_aff(j,co2_forestry)          calculation of CDR from afforestation
  q32_carbon(j,c_pools)                            forestry carbon stock calculation
  q32_diff                                         aggregated difference in forestry land compared to previous timestep (mio. ha)
  q32_max_aff                                      maximum total global afforestation
@@ -94,7 +94,7 @@ equations
  q32_cost_recur(i)
  q32_cost_harvest(i)
  q32_cost_transport(i)
- q32_production_timber(j)
+ q32_production_timber(i)
 
  q32_trade_reg(i,kforestry)                regional trade balances i.e. minimum self-suff ratio
  q32_excess_dem(kforestry)                 global excess demand
@@ -124,7 +124,7 @@ parameters
  ov_cost_fore(t,i,type)                            Forestry costs (Mio USD)
  ov32_land(t,j,type32,ac,type)                     Forestry land pools (mio. ha)
  ov_landdiff_forestry(t,type)                      Aggregated difference in forestry land compared to previous timestep (mio. ha)
- ov_cdr_aff(t,j,emis_source_co2_forestry,type)     Total CDR from afforestation (new and existing areas) between t+1 and t=sm_invest_horizon (Tg CO2-C)
+ ov_cdr_aff(t,j,co2_forestry,type)                 Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
  ov32_prod(t,j,hvarea_timber,kforestry,type)       Timber production (mio. m3)
  ov32_cost_harvest(t,i,type)                       Cost of timber harvesting (USD per ha)
  ov32_cost_recur(t,i,type)                         Recurring forest management costs (USD per ha)
@@ -146,7 +146,7 @@ parameters
  ov32_missing_area_future(t,j,type)                Defunct (1)
  oq32_cost_total(t,i,type)                         total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                               land constraint (mio. ha)
- oq32_cdr_aff(t,j,emis_source_co2_forestry,type)   calculation of CDR from afforestation
+ oq32_cdr_aff(t,j,co2_forestry,type)               calculation of CDR from afforestation
  oq32_carbon(t,j,c_pools,type)                     forestry carbon stock calculation
  oq32_diff(t,type)                                 aggregated difference in forestry land compared to previous timestep (mio. ha)
  oq32_max_aff(t,type)                              maximum total global afforestation
@@ -163,7 +163,7 @@ parameters
  oq32_cost_recur(t,i,type)                         
  oq32_cost_harvest(t,i,type)                       
  oq32_cost_transport(t,i,type)                     
- oq32_production_timber(t,j,type)                  
+ oq32_production_timber(t,i,type)                  
  oq32_trade_reg(t,i,kforestry,type)                regional trade balances i.e. minimum self-suff ratio
  oq32_excess_dem(t,kforestry,type)                 global excess demand
  oq32_excess_supply(t,i,kforestry,type)            regional excess production

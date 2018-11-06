@@ -20,6 +20,7 @@ scalars
   c32_reESTBcost / 2000 /
   c32_recurring_cost / 100 /
   c32_harvesting_cost / 200 /
+  s32_planing_horizon Afforestation planing horizon (years)            / 30 /
 ;
 
 scalars
@@ -58,12 +59,6 @@ $ondelim
 $include "./modules/32_forestry/input/f32_rot_length.csv"
 $offdelim;
 
-table f32_prescribed_demand(iso,t_all,kforestry) demand
-$ondelim
-$include "./modules/32_forestry/input/f32_prescribed_demand.csv"
-$offdelim
-;
-
 parameter f32_production_ratio(i,t_all) percentage of supply coming from plantations (percentage)
 /
 $ondelim
@@ -82,13 +77,6 @@ parameter f32_forestry_management(i) upscaling factor for forestry plantations
 /
 $ondelim
 $include "./modules/32_forestry/input/f32_forestry_management.csv"
-$offdelim
-/;
-
-parameter f32_calib_gs(i) upscaling calibration factor for yields
-/
-$ondelim
-$include "./modules/32_forestry/input/f32_calib_gs_1995.csv"
 $offdelim
 /;
 
