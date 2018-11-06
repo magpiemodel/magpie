@@ -4,7 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c21_trade_liberalization  l909090r808080
+$setglobal c21_trade_liberalization  regionalized
 *   options are "regionalized" and "globalized" and "fragmented"
 
 scalars
