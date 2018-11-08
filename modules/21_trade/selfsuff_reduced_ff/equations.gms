@@ -75,10 +75,10 @@ q21_trade_reg_ff(i2,kforestry2)..
   vm_prod_future_reg_ff(i2,kforestry2)
   =g=
   (pc21_demand_forestry_future(i2,kforestry2) + v21_excess_prod_ff(i2,kforestry2))
-  * pc21_trade_bal_reduction_future$(pc21_selfsuff_forestry_future(i2,kforestry2) >= 1)
+  * pc21_trade_bal_reduction_future(kforestry2)$(pc21_selfsuff_forestry_future(i2,kforestry2) >= 1)
   + pc21_demand_forestry_future(i2,kforestry2)
   * pc21_selfsuff_forestry_future(i2,kforestry2)
-  * pc21_trade_bal_reduction_future$(pc21_selfsuff_forestry_future(i2,kforestry2) < 1);
+  * pc21_trade_bal_reduction_future(kforestry2)$(pc21_selfsuff_forestry_future(i2,kforestry2) < 1);
 
 q21_excess_dem_ff(kforestry2)..
   v21_excess_dem_ff(kforestry2)

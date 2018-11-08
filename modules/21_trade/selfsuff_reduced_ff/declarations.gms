@@ -5,9 +5,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- i21_trade_bal_reduction(t_all,k_trade)         Trade balance reduction (1)
- i21_trade_margin(i,k_trade)                    Trade margins (USD05MER per tDM)
- i21_trade_tariff(i,k_trade)                    Trade tariffs (USD05MER per tDM)
+ i21_trade_bal_reduction(t_all,k_trade)          Trade balance reduction (1)
+ i21_trade_margin(i,k_trade)                     Trade margins (USD05MER per tDM)
+ i21_trade_tariff(i,k_trade)                     Trade tariffs (USD05MER per tDM)
  im_trade_bal_reduction(t_ext,kforestry2)        Trade balance reduction for timber (1)
  im_trade_margin(i,kforestry2)                   Trade margins for timber (USD05MER per tDM)
  im_trade_tariff(i,kforestry2)                   Trade tariffs for timber (USD05MER per tDM)
@@ -17,10 +17,11 @@ parameters
  p21_exp_shr_ext(t_ext,i,kforestry2)             Extended export share (1)
  pc21_demand_forestry_future(i,kforestry2)       Future timber demand (mio. m3)
  pc21_selfsuff_forestry_future(i,kforestry2)     Future self sufficiency ratio for timber products (1)
- pc21_trade_bal_reduction_future                Future trade balance reduction (1)
+ pc21_trade_bal_reduction_future(kforestry2)     Future trade balance reduction (1)
  pc21_trade_balanceflow_future(kforestry2)       Future trade balanceflow (1)
  pc21_exp_shr_future(i,kforestry2)               Future export share (1)
- pcm_production_ratio_future(i)                Future production ratio (1)
+ pcm_production_ratio_future(i)                  Future production ratio (1)
+ pm_rotation_reg(i)                              Regional rotation length of plantations translated to age class equivalent for future (1)
 ;
 
 positive variables
