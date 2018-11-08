@@ -13,11 +13,11 @@ parameters
  p32_yield_forestry_ac(t,j,ac)                    Age class specific yield of plantation forests (m3 per ha per yr)
  p32_hvcost_ha(i)                                 Timber harvesting cost per ha (USD)
  p32_rot_length(i)                                Regional rotation length of plantations (yr)
- pm_rot_length(i)                                  Regional rotation length of plantations translated to age class equivalent for future (1)
+ pm_rot_length(i)                                 Regional rotation length of plantations translated to age class equivalent for future (1)
  p32_rotation_cellular(j)                         Rotation length translated to age classes on cellular level (1)
  p32_forestry_management(i)                       Plantation forest management factors on world region levels (1)
  pc32_timestep                                    Timestep (1)
- pm_production_ratio_ext(i,t_ext)                Extened production ratio (1)
+ pm_production_ratio_ext(i,t_ext)                 Extened production ratio (1)
  pc32_yield_forestry_mature_future(j)             Future yield of matured tree after rotation period (m3 per ha per yr)
  p32_protect_avail(t,j)                           Mature trees which are protected (mio. ha)
  p32_plant_ini_ac(j)                              Initialization of plantation area (mio. ha)
@@ -90,14 +90,14 @@ parameters
  oq32_aff_pol(t,j,type)                          afforestation policy constraint
  oq32_prod_forestry_wood(t,j,type)               wood production from forestry
  oq32_prod_forestry_woodfuel(t,j,type)           woodfuel production from forestry
- oq32_hvarea_forestry(t,j,ac_sub,type)           
- oq32_cost_recur(t,i,type)                       
- oq32_cost_harvest(t,i,type)                     
- oq32_production_timber(t,i,type)                
- oq32_prod_future(t,i,type)                      
- oq32_land_expansion(t,j,type32,ac,type)         
- oq32_land_reduction(t,j,type32,ac,type)         
- oq32_avail_reuse(t,j,type)                      
- oq32_cost_establishment(t,i,type)               
+ oq32_hvarea_forestry(t,j,ac_sub,type)
+ oq32_cost_recur(t,i,type)
+ oq32_cost_harvest(t,i,type)
+ oq32_production_timber(t,i,type)
+ oq32_prod_future(t,i,type)
+ oq32_land_expansion(t,j,type32,ac,type)
+ oq32_land_reduction(t,j,type32,ac,type)
+ oq32_avail_reuse(t,j,type)
+ oq32_cost_establishment(t,i,type)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
