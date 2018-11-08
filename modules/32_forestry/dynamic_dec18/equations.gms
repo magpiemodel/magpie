@@ -30,7 +30,6 @@
 q32_cost_total(i2) .. vm_cost_fore(i2) =e=
                      v32_cost_harvest(i2)
 								   + v32_cost_recur(i2)
-								   + v32_cost_transp(i2)
 								   + v32_cost_establishment(i2)
 								   + sum((cell(i2,j2),kforestry), v32_prod_external(j2,kforestry) * 99999)
 								   ;
@@ -39,7 +38,6 @@ re-establishment costs in t0
 recurring costs * rotation length (thinning, monitigotr) (1/i)
 harvesting costs in t30
 transports in t30
-
 
 PV of establishment decision cost
 PV * annuity factor * time step length
@@ -59,32 +57,20 @@ q32_cost_establishment(i2)..
 						sum(cell(i2,j2),v32_missing_area_future(j2) * 100000)
 						;
 
-**recurring/management costs
 **Only protected areas incurring recurring/monitoring costs
 q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 										0;
-*                                   sum((cell(i2,j2),type32,fcosts32), v32_land(j2,type32,"ac0")+(v32_prod_external_future(j2)*99999) * f32_fac_req_ha(i2,fcosts32));
+*                   sum((cell(i2,j2),type32,fcosts32), v32_land(j2,type32,"ac0")+(v32_prod_external_future(j2)*99999) * f32_fac_req_ha(i2,fcosts32));
 
 **harvesting costs
-
 q32_cost_harvest(i2)..
                     v32_cost_harvest(i2)
                     =e=
                     sum((cell(i2,j2), kforestry),
                     sum(ac_sub, v32_hvarea_forestry(j2,kforestry,ac_sub))) * f32_harvest_cost_ha(i2,"harv")
                     ;
-*** THIS CAN BE MOVED TO TRANSPORT MODULE
-*** Instead of v32_prod we can use vm_prod interface and add wood/woodfuel transport costs to input file.
 
-q32_cost_transport(i2) ..     v32_cost_transp(i2)
-                              =e=
-                              sum((hvarea_timber,kforestry,cell(i2,j2)), v32_prod(j2,hvarea_timber,kforestry) * f32_distance(j2) * f32_transport_costs(kforestry));
-
-**--------------------------------------------------------------------
-
-***PRODUCTION New Production routine 20180727
-
-**** FROM PLANTATIONS
+***PRODUCTION
 q32_prod_forestry_wood(j2)..
                           v32_prod(j2,"forestry","wood")
                           =e=
@@ -96,15 +82,7 @@ q32_prod_forestry_woodfuel(j2)..
                          sum(ac_sub, v32_hvarea_forestry(j2,"wood",ac_sub)      * sum(ct, p32_yield_forestry_ac(ct,j2,ac_sub)))* (1-0.88)
 						            +sum(ac_sub, v32_hvarea_forestry(j2,"woodfuel",ac_sub)  * sum(ct, p32_yield_forestry_ac(ct,j2,ac_sub)));
 
-**--------------------------------------------------------------------
-
 ***AREA
-
-
-*q32_land_fix(j2) ..       sum(ac, v32_land(j2,"plant",ac))
-*                          =e=
-*						  sum(ac, pc32_land(j2,"plant",ac));
-
 
 **harvesting area ((0.6*0.975**(pc32_timestep-m_timdestep_length/2)))
 q32_hvarea_forestry(j2,ac_sub) ..
@@ -120,7 +98,6 @@ q32_production_timber(i2)..
                           sum((kforestry,cell(i2,j2)),sum(hvarea_timber, v32_prod(j2,hvarea_timber,kforestry)) + v32_prod_external(j2,kforestry))
                           ;
 
-**--------------------------------------------------------------------
 
 ** Establishment in current time step already accounts for a certain percentage of production to be fulfilled by plantations in future.
 ** 20percent buffer and 88 percent efficiency 12 percent loss factor

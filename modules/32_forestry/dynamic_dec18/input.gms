@@ -2,23 +2,8 @@ $setglobal c32_aff_mask  noboreal
 * options: unrestricted, noboreal, onlytropical
 $setglobal c32_aff_policy  none
 $setglobal c32_rot_length  rlGTM
-$setglobal c32_gs_calib  avg
-
-$setglobal c32_trade_liberalization  l909090r808080
 
 scalars
-  c32_reduction_start        initial annual trade balance reduction      / 0.0025 /
-  c32_reduction_regionalized regionalized annual trade balance reduction / 0.005  /
-  c32_reduction_globalized   globalized annual trade balance reduction   / 0.01   /
-  c32_reduction_fragmented   fragmented annual trade balance reduction   / 0      /
-  s32_trade_tariff                                                       / 0 /
-
-  c32_upscaling_factor / 5 /
-  c32_ProdExtCost / 10000 /
-  c32_LandRednCost / 100000 /
-  c32_CostComparison / 2 /
-  c32_shift / 9 /
-
   c32_reESTBcost / 2000 /
   c32_recurring_cost / 100 /
   c32_harvesting_cost / 200 /
