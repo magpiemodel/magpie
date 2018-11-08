@@ -71,30 +71,30 @@
 **---------------------------------------------------------------------
 ** FUTURE TRADE EQUATIONS (Analogous to trade module)
 
-q21_trade_reg_ff(i2,kforestry)..
-  vm_prod_future_reg_ff(i2,kforestry)
+q21_trade_reg_ff(i2,kforestry2)..
+  vm_prod_future_reg_ff(i2,kforestry2)
   =g=
-  (pc21_demand_forestry_future(i2,kforestry) + v21_excess_prod_ff(i2,kforestry))
-  * pc21_trade_bal_reduction_future$(pc21_selfsuff_forestry_future(i2,kforestry) >= 1)
-  + pc21_demand_forestry_future(i2,kforestry)
-  * pc21_selfsuff_forestry_future(i2,kforestry)
-  * pc21_trade_bal_reduction_future$(pc21_selfsuff_forestry_future(i2,kforestry) < 1);
+  (pc21_demand_forestry_future(i2,kforestry2) + v21_excess_prod_ff(i2,kforestry2))
+  * pc21_trade_bal_reduction_future$(pc21_selfsuff_forestry_future(i2,kforestry2) >= 1)
+  + pc21_demand_forestry_future(i2,kforestry2)
+  * pc21_selfsuff_forestry_future(i2,kforestry2)
+  * pc21_trade_bal_reduction_future$(pc21_selfsuff_forestry_future(i2,kforestry2) < 1);
 
-q21_excess_dem_ff(kforestry)..
-  v21_excess_dem_ff(kforestry)
+q21_excess_dem_ff(kforestry2)..
+  v21_excess_dem_ff(kforestry2)
   =g=
-  sum(i2, pc21_demand_forestry_future(i2,kforestry)*(1 - pc21_selfsuff_forestry_future(i2,kforestry))$(pc21_selfsuff_forestry_future(i2,kforestry) < 1))
-  + pc21_trade_balanceflow_future(kforestry);
+  sum(i2, pc21_demand_forestry_future(i2,kforestry2)*(1 - pc21_selfsuff_forestry_future(i2,kforestry2))$(pc21_selfsuff_forestry_future(i2,kforestry2) < 1))
+  + pc21_trade_balanceflow_future(kforestry2);
 
-q21_excess_supply_ff(i2,kforestry)..
-  v21_excess_prod_ff(i2,kforestry)
+q21_excess_supply_ff(i2,kforestry2)..
+  v21_excess_prod_ff(i2,kforestry2)
   =e=
-  v21_excess_dem_ff(kforestry)*pc21_exp_shr_future(i2,kforestry);
+  v21_excess_dem_ff(kforestry2)*pc21_exp_shr_future(i2,kforestry2);
 
-q21_cost_trade_reg_ff(i2,kforestry)..
-  v21_cost_trade_reg_ff(i2,kforestry)
+q21_cost_trade_reg_ff(i2,kforestry2)..
+  v21_cost_trade_reg_ff(i2,kforestry2)
   =g=
-  (im_trade_margin(i2,kforestry) + im_trade_tariff(i2,kforestry))*(vm_prod_future_reg_ff(i2,kforestry)-pc21_demand_forestry_future(i2,kforestry));
+  (im_trade_margin(i2,kforestry2) + im_trade_tariff(i2,kforestry2))*(vm_prod_future_reg_ff(i2,kforestry2)-pc21_demand_forestry_future(i2,kforestry2));
 
 q21_cost_trade_ff(i2)..
-  vm_cost_trade_forestry_ff(i2) =e= sum(kforestry,v21_cost_trade_reg_ff(i2,kforestry));
+  vm_cost_trade_forestry_ff(i2) =e= sum(kforestry2,v21_cost_trade_reg_ff(i2,kforestry2));
