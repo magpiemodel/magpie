@@ -68,7 +68,7 @@ v32_land.fx(j,"indc",ac) = 0;
 
 display pc32_land;
 display v32_land.l,vm_land.lo,v32_land.up;
-f32_calib_gs("IND") = 1.2;
+
 p32_yield_forestry_ac(t,j,ac_sub) =
       sum(cell(i,j),p32_forestry_management(i))
       * (2)
@@ -77,51 +77,9 @@ p32_yield_forestry_ac(t,j,ac_sub) =
       / sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac_sub,clcl))
       ;
 
-
-p32_yield_natveg(t,j,ac_sub) =
-      (2)
-      * pm_carbon_density_ac(t,j,ac_sub,"vegc")
-      * 0.80
-      / sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac_sub,clcl))
-      ;
-
-
-p32_yield_primforest(t,j) =
-      (2)
-      * pm_carbon_density_ac(t,j,"acx","vegc")
-      * 0.75
-      / sum(clcl,pm_climate_class(j,clcl) * pm_bcef("acx",clcl))
-      ;
-$ontext
-p32_yield_forestry_ac(t,j,ac) =
-*    sum(cell(i,j),p32_forestry_management(i) * f32_calib_gs(i))
-    sum(cell(i,j), f32_calib_gs(i))
-    * m_growing_stock(pm_carbon_density_ac(t,j,ac,"vegc"));
-
-p32_yield_natveg(t,j,ac) =
-*	 sum(cell(i,j),f32_calib_gs(i)) *
-     m_growing_stock(pm_carbon_density_ac(t,j,ac,"vegc"));
-
-p32_yield_primforest(t,j) =
-*	sum(cell(i,j),f32_calib_gs(i)) *
-    m_growing_stock(fm_carbon_density(t,j,"primforest","vegc"));
-$offtext
-
 ** Future demand relevant in current time step depending on rotation length
-***** COULD BE MOVED AWAY TO NEW MODULE
-p32_rotation_reg(i) = ord(t) + ceil(p32_rot_length(i)/5);
-
-pc32_demand_forestry_future(i,kforestry) = sum(t_ext_forestry$(t_ext_forestry.pos = p32_rotation_reg(i)),p32_demand_ext(t_ext_forestry,i,kforestry));
-pc32_selfsuff_forestry_future(i,kforestry) = sum(t_ext_forestry$(t_ext_forestry.pos = p32_rotation_reg(i)),p32_selfsuff_ext(t_ext_forestry,i,kforestry));
-pc32_trade_bal_reduction_future = sum(t_ext_forestry, i32_trade_bal_reduction(t_ext_forestry))/card(t_ext_forestry);
-pc32_trade_balanceflow_future(kforestry) = sum(t_ext_forestry,p32_trade_balanceflow_ext(t_ext_forestry,kforestry))/card(t_ext_forestry);
-pc32_exp_shr_future(i,kforestry) = sum(t_ext_forestry$(t_ext_forestry.pos = p32_rotation_reg(i)),p32_exp_shr_ext(t_ext_forestry,i,kforestry));
-pc32_production_ratio_future(i) = sum(t_ext_forestry$(t_ext_forestry.pos = p32_rotation_reg(i)),p32_production_ratio_ext(i,t_ext_forestry));
-***** COULD BE MOVED AWAY TO NEW MODULE
-
-display p32_rotation_reg;
-display pc32_demand_forestry_future;
-display p32_demand_ext;
+***** Card is used here to exclude y1965 to y1995 when calculating rotation length calculations for past
+pm_rotation_reg(i) = ord(t) + ceil(p32_rot_length(i)/5) + card(t_past_ff);
 
 *pc32_yield_forestry_future(j) = sum(ac$(ac.off = p32_rotation_cellular(j)+1), p32_yield_forestry_ac(t,j,ac));
 pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular(j)), p32_yield_forestry_ac(t,j,ac_sub));

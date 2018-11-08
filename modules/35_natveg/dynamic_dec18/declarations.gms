@@ -23,8 +23,11 @@ parameters
  p35_min_forest(t,j) 			Minimum forest stock [land protection policies] (Mha)
  p35_min_other(t,j)      		Minimum other land stock [land protection policies] (Mha)
 
- p35_yield_natveg(t,j,ac)
- p35_yield_primforest(t,j)
+ p35_yield_natveg(t,j,ac)   Yield of natural vegetation (m3 per ha per yr)
+ p35_yield_primforest(t,j)  Yield of primary vegetation (m3 per ha per yr)
+
+ i35_ageclass_area_secdf(j,ac)  Age class distribution from poulter et al (1)
+ i35_ageclass_shr_grow(j,ac)    Age class share distribution (1)
 ;
 
 equations
@@ -51,13 +54,12 @@ equations
  q35_hvarea_primforest(j)         Area harvested from primary forests (mio. ha)
  q35_hvarea_other(j,ac_sub)       Area harvested from other land (mio. ha)
  q35_secdforest_conversion(j)     Conversion of secondary forest (mio.ha)
- q35_cost_transport(i)            Cost of harveting timber taken from natural vegetation (mio. USD)
  q35_production_timber(i)         Timbe production from natural vegetation (mio. USD)
 ;
 
 positive variables
   v35_secdforest(j,ac) Detailed stock of secdforest (mio. ha)
-  v35_other(j,ac)      Detailed stock of other land pool (mio. ha)
+  v35_other(j,ac)      Detailed stock of other land (mio. ha)
   vm_landdiff_natveg       Aggregated difference in natveg land compared to previous timestep (mio. ha)
   v35_other_expansion(j,ac) Other land expansion compared to previous timestep (mio. ha)
   v35_other_reduction(j,ac) Other land reduction compared to previous timestep (mio. ha)
@@ -69,6 +71,7 @@ positive variables
   v35_hvarea_other(j,kforestry,ac_sub)        Harvested area of other land (mio. ha)
   v35_hvarea_primforest(j,kforestry)          Harvested area of primary forest (mio. ha)
   v35_prod(j,land_natveg,kforestry)          Timber production coming from natveg (mio. m3)
+  v35_prod_external(j,kforestry)            Production balanceflow (mio. m3)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -85,6 +88,7 @@ parameters
  ov35_hvarea_other(t,j,kforestry,ac_sub,type)      Harvested area of other land (mio. ha)
  ov35_hvarea_primforest(t,j,kforestry,type)        Harvested area of primary forest (mio. ha)
  ov35_prod(t,j,land_natveg,kforestry,type)         Timber production coming from natveg (mio. m3)
+ ov35_prod_external(t,j,kforestry,type)            Production balanceflow (mio. m3)
  oq35_land_secdforest(t,j,type)                    Secdforest land pool calculation (mio. ha)
  oq35_land_other(t,j,type)                         Other land pool calculation (mio. ha)
  oq35_carbon_primforest(t,j,c_pools,type)          Primforest carbon stock calculation (mio tC)
@@ -107,7 +111,6 @@ parameters
  oq35_hvarea_primforest(t,j,type)                  Area harvested from primary forests (mio. ha)
  oq35_hvarea_other(t,j,ac_sub,type)                Area harvested from other land (mio. ha)
  oq35_secdforest_conversion(t,j,type)              Conversion of secondary forest (mio.ha)
- oq35_cost_transport(t,i,type)                     Cost of harveting timber taken from natural vegetation (mio. USD)
  oq35_production_timber(t,i,type)                  Timbe production from natural vegetation (mio. USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

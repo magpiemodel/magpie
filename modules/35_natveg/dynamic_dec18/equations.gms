@@ -24,11 +24,11 @@
 
  q35_carbon_secdforest(j2,c_pools) .. vm_carbon_stock(j2,"secdforest",c_pools) =e=
            sum(ac, v35_secdforest(j2,ac)
-           *sum(ct, p35_carbon_density_secdforest(ct,j2,ac,c_pools)));
+           *sum(ct, pm_carbon_density_ac(ct,j2,ac,c_pools)));
 
  q35_carbon_other(j2,c_pools)  .. vm_carbon_stock(j2,"other",c_pools) =e=
            sum(ac, v35_other(j2,ac)
-           *sum(ct, p35_carbon_density_other(ct,j2,ac,c_pools)));
+           *sum(ct, pm_carbon_density_ac(ct,j2,ac,c_pools)));
 
 
 *' NPI/NDC land protection policies are implemented as minium forest land and other land stock.
@@ -139,14 +139,9 @@ q35_secdforest_conversion(j2)..
                           sum((kforestry,ac_sub),v35_hvarea_secdforest(j2,kforestry,ac_sub))
                         + sum(kforestry,v35_hvarea_primforest(j2,kforestry))
                           ;
-********** NatVeg production of timber and transport cost equation
-
-q35_cost_transport(i2) ..     v35_cost_transp(i2)
-                              =e=
-                              sum((land_natveg,kforestry,cell(i2,j2)), v35_prod(j2,land_natveg,kforestry) * f35_distance(j2) * f35_transport_costs(kforestry));
-
+********** NatVeg production of timber
 q35_production_timber(i2)..
-                          sum((kforestry,cell(i2,j2)),vm_prod(j2,kforestry)) * sum(ct,1-f35_production_ratio(i2,ct))
+                          sum((kforestry,cell(i2,j2)),vm_prod(j2,kforestry)) * sum(ct,1-pm_production_ratio_ext(i2,ct))
                           =e=
                           sum((kforestry,cell(i2,j2)),sum(land_natveg, v35_prod(j2,land_natveg,kforestry)) + v35_prod_external(j2,kforestry))
                           ;

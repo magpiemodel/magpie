@@ -2,24 +2,12 @@ $setglobal c32_aff_mask  noboreal
 * options: unrestricted, noboreal, onlytropical
 $setglobal c32_aff_policy  none
 $setglobal c32_rot_length  rlGTM
-$setglobal c32_gs_calib  avg
 
 scalars
-  c32_reduction_start        initial annual trade balance reduction      / 0.0025 /
-  c32_reduction_regionalized regionalized annual trade balance reduction / 0.005  /
-  c32_reduction_globalized   globalized annual trade balance reduction   / 0.01   /
-  c32_reduction_fragmented   fragmented annual trade balance reduction   / 0      /
-  s32_trade_tariff                                                       / 0 /
-
-  c32_upscaling_factor / 5 /
-  c32_ProdExtCost / 10000 /
-  c32_LandRednCost / 100000 /
-  c32_CostComparison / 2 /
-  c32_shift / 9 /
-
   c32_reESTBcost / 2000 /
   c32_recurring_cost / 100 /
   c32_harvesting_cost / 200 /
+  s32_planing_horizon Afforestation planing horizon (years)            / 30 /
 ;
 
 scalars
@@ -58,20 +46,7 @@ $ondelim
 $include "./modules/32_forestry/input/f32_rot_length.csv"
 $offdelim;
 
-table f32_prescribed_demand(iso,t_all,kforestry) demand
-$ondelim
-$include "./modules/32_forestry/input/f32_prescribed_demand.csv"
-$offdelim
-;
-
 parameter f32_production_ratio(i,t_all) percentage of supply coming from plantations (percentage)
-/
-$ondelim
-$include "./modules/32_forestry/input/f32_production_ratio.csv"
-$offdelim
-/;
-
-parameter f32_production_ratio_FUTURE(i,t_all) percentage of supply coming from plantations (percentage)
 /
 $ondelim
 $include "./modules/32_forestry/input/f32_production_ratio.csv"
@@ -84,25 +59,6 @@ $ondelim
 $include "./modules/32_forestry/input/f32_forestry_management.csv"
 $offdelim
 /;
-
-parameter f32_calib_gs(i) upscaling calibration factor for yields
-/
-$ondelim
-$include "./modules/32_forestry/input/f32_calib_gs_1995.csv"
-$offdelim
-/;
-
-table f32_trade_margin(i,kforestry) costs of freight and insurance (USD per DMT)
-$ondelim
-$include "./modules/32_forestry/input/f32_trade_margin.cs3"
-$offdelim
-;
-
-table f32_trade_tariff(i,kforestry) specific duty tariffs (USD per DMT)
-$ondelim
-$include "./modules/32_forestry/input/f32_trade_tariff.cs3"
-$offdelim
-;
 
 parameters
 f32_distance(j) transport distance to urban center (Minutes)

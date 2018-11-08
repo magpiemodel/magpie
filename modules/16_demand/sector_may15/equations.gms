@@ -76,3 +76,9 @@ q16_waste_demand(i2,kall) ..
 q16_seed_demand(i2,kcr) ..
                  vm_dem_seed(i2,kcr) =e=
                  vm_prod_reg(i2,kcr) * sum(ct,f16_seed_shr(ct,i2,kcr));
+
+*' Timber demand is calculated based of interpolation of FAO reported numbers and
+*' fed exogenously to the model.
+q16_supply_forestry(i2,kforestry) ..  vm_supply(i2,kforestry)
+                                       =e=
+								                       sum(ct,fm_forestry_demand(ct,i2,kforestry));

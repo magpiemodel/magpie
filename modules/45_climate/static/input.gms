@@ -10,3 +10,10 @@ table f45_koeppengeiger(j,clcl) Koeppen-Geiger climate classification on the sim
 $ondelim
 $include "./modules/45_climate/static/input/koeppen_geiger.cs3"
 $offdelim;
+
+parameter f45_bcef(ac,clcl) BCEF by Koeppen-Geiger classification mapped to age-classes (-)
+/
+$ondelim
+$include "./modules/45_climate/static/input/45_bcef_kg_ac.csv"
+$offdelim
+/;

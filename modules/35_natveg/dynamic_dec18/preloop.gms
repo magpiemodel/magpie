@@ -4,8 +4,6 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-i35_ageclass_area(j,ac) = sum(ac_poulter_to_ac(ac_poulter,ac), f35_ageclass_area(j,ac_poulter));
-
 i35_ageclass_area_secdf(j,ac) = sum(ac_poulter_to_ac(ac_poulter,ac), f35_ageclass_area(j,ac_poulter)$(not sameas(ac_poulter,"class15")));
 
 i35_ageclass_shr_grow(j,ac) = 1/card(ac);
