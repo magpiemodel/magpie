@@ -139,12 +139,7 @@ q35_secdforest_conversion(j2)..
                           sum((kforestry,ac_sub),v35_hvarea_secdforest(j2,kforestry,ac_sub))
                         + sum(kforestry,v35_hvarea_primforest(j2,kforestry))
                           ;
-********** NatVeg production of timber and transport cost equation
-
-q35_cost_transport(i2) ..     v35_cost_transp(i2)
-                              =e=
-                              sum((land_natveg,kforestry,cell(i2,j2)), v35_prod(j2,land_natveg,kforestry) * f35_distance(j2) * f35_transport_costs(kforestry));
-
+********** NatVeg production of timber
 q35_production_timber(i2)..
                           sum((kforestry,cell(i2,j2)),vm_prod(j2,kforestry)) * sum(ct,1-pm_production_ratio_ext(i2,ct))
                           =e=

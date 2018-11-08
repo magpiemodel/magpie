@@ -90,14 +90,14 @@ parameters
  oq32_aff_pol(t,j,type)                          afforestation policy constraint
  oq32_prod_forestry_wood(t,j,type)               wood production from forestry
  oq32_prod_forestry_woodfuel(t,j,type)           woodfuel production from forestry
- oq32_hvarea_forestry(t,j,ac_sub,type)
- oq32_cost_recur(t,i,type)
- oq32_cost_harvest(t,i,type)
- oq32_production_timber(t,i,type)
- oq32_prod_future(t,i,type)
- oq32_land_expansion(t,j,type32,ac,type)
- oq32_land_reduction(t,j,type32,ac,type)
- oq32_avail_reuse(t,j,type)
- oq32_cost_establishment(t,i,type)
+ oq32_hvarea_forestry(t,j,ac_sub,type)           
+ oq32_cost_recur(t,i,type)                       
+ oq32_cost_harvest(t,i,type)                     
+ oq32_production_timber(t,i,type)                
+ oq32_prod_future(t,i,type)                      
+ oq32_land_expansion(t,j,type32,ac,type)         
+ oq32_land_reduction(t,j,type32,ac,type)         
+ oq32_avail_reuse(t,j,type)                      
+ oq32_cost_establishment(t,i,type)               
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
