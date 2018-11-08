@@ -146,7 +146,7 @@ q35_cost_transport(i2) ..     v35_cost_transp(i2)
                               sum((land_natveg,kforestry,cell(i2,j2)), v35_prod(j2,land_natveg,kforestry) * f35_distance(j2) * f35_transport_costs(kforestry));
 
 q35_production_timber(i2)..
-                          sum((kforestry,cell(i2,j2)),vm_prod(j2,kforestry)) * sum(ct,1-f35_production_ratio(i2,ct))
+                          sum((kforestry,cell(i2,j2)),vm_prod(j2,kforestry)) * sum(ct,1-pm_production_ratio_ext(i2,ct))
                           =e=
                           sum((kforestry,cell(i2,j2)),sum(land_natveg, v35_prod(j2,land_natveg,kforestry)) + v35_prod_external(j2,kforestry))
                           ;

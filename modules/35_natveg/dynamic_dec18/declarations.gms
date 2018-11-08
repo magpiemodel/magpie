@@ -25,6 +25,9 @@ parameters
 
  p35_yield_natveg(t,j,ac)   Yield of natural vegetation (m3 per ha per yr)
  p35_yield_primforest(t,j)  Yield of primary vegetation (m3 per ha per yr)
+
+ i35_ageclass_area_secdf(j,ac)  Age class distribution from poulter et al (1)
+ i35_ageclass_shr_grow(j,ac)    Age class share distribution (1)
 ;
 
 equations

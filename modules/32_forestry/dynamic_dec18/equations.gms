@@ -125,23 +125,13 @@ q32_production_timber(i2)..
 ** Establishment in current time step already accounts for a certain percentage of production to be fulfilled by plantations in future.
 ** 20percent buffer and 88 percent efficiency 12 percent loss factor
 
-q32_prod_future(i2) ..          sum(kforestry, v32_prod_future_reg(i2,kforestry)) * pc32_production_ratio_future(i2)
+q32_prod_future(i2) ..          sum(kforestry, vm_prod_future_reg_ff(i2,kforestry)) * pcm_production_ratio_future(i2)
                                 =e=
                                 sum(cell(i2,j2), (v32_land(j2,"plant","ac0") + v32_missing_area_future(j2)) * pc32_yield_forestry_future(j2) * 0.88);
 *    							+
 *    							sum(cell(i2,j2), v32_avail_reuse(j2) * pc32_yield_forestry_mature_future(j2)) * 0.80
 
-q32_avail_reuse(j2) ..      v32_avail_reuse(j2)
-							=e=
-							0;
-*************************** This has to be changed into paramaeter later
-*							sum(ac,v32_land(j2,"plant",ac) - v32_land.lo(j2,"plant",ac));
-$ontext
-q32_prod_future_reg(i2,kforestry) ..  v32_prod_future_reg(i2,kforestry)
-									=e=
-									sum(cell(i2,j2),v32_prod_future(j2,kforestry));
-$offtext
-**--------------------------------------------------------------------
+q32_avail_reuse(j2) ..      v32_avail_reuse(j2)	=e=	0;
 
 **TECHNICAL STUFF
 q32_diff .. vm_landdiff_forestry =e= sum((j2,type32,ac),
@@ -153,33 +143,5 @@ q32_land_expansion(j2,type32,ac) ..
 
 q32_land_reduction(j2,type32,ac) ..
      v32_land_reduction(j2,type32,ac) =g= pc32_land(j2,type32,ac) - v32_land(j2,type32,ac);
-
-
-**---------------------------------------------------------------------
-
-** FUTURE TRADE EQUATIONS (Analogous to trade module)
-
-q32_trade_reg(i2,kforestry)..     v32_prod_future_reg(i2,kforestry)
-                                  =g=
-                  (pc32_demand_forestry_future(i2,kforestry) + v32_excess_prod(i2,kforestry))
-                 * pc32_trade_bal_reduction_future$(pc32_selfsuff_forestry_future(i2,kforestry) >= 1)
-                 + pc32_demand_forestry_future(i2,kforestry)
-                 * pc32_selfsuff_forestry_future(i2,kforestry)
-                 * pc32_trade_bal_reduction_future$(pc32_selfsuff_forestry_future(i2,kforestry) < 1);
-
-q32_excess_dem(kforestry).. v32_excess_dem(kforestry)
-                            =g=
-                            sum(i2, pc32_demand_forestry_future(i2,kforestry)*(1 - pc32_selfsuff_forestry_future(i2,kforestry))$(pc32_selfsuff_forestry_future(i2,kforestry) < 1))
-                            + pc32_trade_balanceflow_future(kforestry);
-
-q32_excess_supply(i2,kforestry)..   v32_excess_prod(i2,kforestry)
-                                    =e=
-                                    v32_excess_dem(kforestry)*pc32_exp_shr_future(i2,kforestry);
-
-q32_cost_trade_reg(i2,kforestry)..  v32_cost_trade_reg(i2,kforestry)
-                                    =g=
-                                   (i32_trade_margin(i2,kforestry) + i32_trade_tariff(i2,kforestry))*(v32_prod_future_reg(i2,kforestry)-pc32_demand_forestry_future(i2,kforestry));
-
-q32_cost_trade(i2)..          vm_cost_trade_forestry(i2) =e= sum(kforestry,v32_cost_trade_reg(i2,kforestry));
 
 *** EOF equations.gms ***

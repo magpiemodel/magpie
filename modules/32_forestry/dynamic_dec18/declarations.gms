@@ -13,15 +13,11 @@ parameters
  p32_yield_forestry_ac(t,j,ac)                    Age class specific yield of plantation forests (m3 per ha per yr)
  p32_hvcost_ha(i)                                 Timber harvesting cost per ha (USD)
  p32_rot_length(i)                                Regional rotation length of plantations (yr)
- p32_rotation_reg(i)                              Regional rotation length of plantations translated to age class equivalent for future (1)
+ pm_rotation_reg(i)                              Regional rotation length of plantations translated to age class equivalent for future (1)
  p32_rotation_cellular(j)                         Rotation length translated to age classes on cellular level (1)
  p32_forestry_management(i)                       Plantation forest management factors on world region levels (1)
  pc32_timestep                                    Timestep (1)
- i32_trade_bal_reduction(t_all)          Trade balance reduction (1)
- i32_trade_bal_reduction_annual(t_all)   Annual trade balance reduction (1)
- i32_trade_margin(i,kforestry)                    Trade margins (1)
- i32_trade_tariff(i,kforestry)                    Trade tariffs (1)
- p32_production_ratio_ext(i,t_ext)                Extened production ratio (1)
+ pm_production_ratio_ext(i,t_ext)                Extened production ratio (1)
  pc32_yield_forestry_mature_future(j)             Future yield of matured tree after rotation period (m3 per ha per yr)
  p32_protect_avail(t,j)                           Mature trees which are protected (mio. ha)
 
@@ -43,8 +39,6 @@ positive variables
 
  v32_excess_dem(kforestry)                        Global excess demand (mio. ton DM)
  v32_excess_prod(i,kforestry)                     Regional excess production (mio. ton DM)
- vm_cost_trade_forestry(i)                        Transport costs and taxes for the bilateral trade (Mio USD)
- v32_cost_trade_reg(i,kforestry)                  Interregional trade costs (mio. USD)
 
  v32_prod_future_reg(i,kforestry)                 Future regional production (mio. m3)
 
@@ -73,7 +67,6 @@ equations
  q32_prod_forestry_woodfuel(j)     	              woodfuel production from forestry
  q32_prod_secdforest_woodfuel(j)   	              woodfuel production from secdforest
  q32_prod_primforest_woodfuel(j)                  woodfuel production from primforest
-
  q32_hvarea_forestry(j,ac_sub)
  q32_hvarea_secdforest(j,ac_sub)
  q32_hvarea_primforest(j)
@@ -81,23 +74,10 @@ equations
  q32_cost_harvest(i)
  q32_cost_transport(i)
  q32_production_timber(i)
-
- q32_trade_reg(i,kforestry)                regional trade balances i.e. minimum self-suff ratio
- q32_excess_dem(kforestry)                 global excess demand
- q32_excess_supply(i,kforestry)            regional excess production
- q32_cost_trade(i)                         trade costs
- q32_cost_trade_reg(i,kforestry)           interregional trade cost calculation (mio. USD)
-
  q32_prod_future(i)
-* q32_prod_future_reg(i,kforestry)
-
  q32_land_expansion(j,type32,ac)
  q32_land_reduction(j,type32,ac)
-
  q32_avail_reuse(j)
-
-* q32_land_fix(j)
-
  q32_hvarea_other(j,ac_sub)
  q32_prod_other(j)
  q32_cost_establishment(i)
@@ -120,8 +100,6 @@ parameters
  ov32_hvarea_primforest(t,j,kforestry,type)        Primary forest harvested (mio. ha)
  ov32_excess_dem(t,kforestry,type)                 Global excess demand (mio. ton DM)
  ov32_excess_prod(t,i,kforestry,type)              Regional excess production (mio. ton DM)
- ov_cost_trade_forestry(t,i,type)                  Transport costs and taxes for the bilateral trade (Mio USD)
- ov32_cost_trade_reg(t,i,kforestry,type)           Interregional trade costs (mio. USD)
  ov32_prod_future_reg(t,i,kforestry,type)          Future regional production (mio. m3)
  ov32_prod_external(t,j,kforestry,type)            Production balance flow from heaven (mio. m3)
  ov32_land_expansion(t,j,type32,ac,type)           Land expansion (mio. ha)
@@ -150,11 +128,6 @@ parameters
  oq32_cost_harvest(t,i,type)
  oq32_cost_transport(t,i,type)
  oq32_production_timber(t,i,type)
- oq32_trade_reg(t,i,kforestry,type)                regional trade balances i.e. minimum self-suff ratio
- oq32_excess_dem(t,kforestry,type)                 global excess demand
- oq32_excess_supply(t,i,kforestry,type)            regional excess production
- oq32_cost_trade(t,i,type)                         trade costs
- oq32_cost_trade_reg(t,i,kforestry,type)           interregional trade cost calculation (mio. USD)
  oq32_prod_future(t,i,type)
  oq32_land_expansion(t,j,type32,ac,type)
  oq32_land_reduction(t,j,type32,ac,type)
