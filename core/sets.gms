@@ -141,16 +141,6 @@ sets time_annual Annual extended time steps
     y2245, y2250
     /
 
-    t_ext_forestry(t_ext) 5-year time periods
-    /
-    y1995, y2000, y2005, y2010, y2015, y2020, y2025, y2030, y2035, y2040,
-    y2045, y2050, y2055, y2060, y2065, y2070, y2075, y2080, y2085, y2090,
-    y2095, y2100, y2105, y2110, y2115, y2120, y2125, y2130, y2135, y2140,
-    y2145, y2150, y2155, y2160, y2165, y2170, y2175, y2180, y2185, y2190,
-    y2195, y2200, y2205, y2210, y2215, y2220, y2225, y2230, y2235, y2240,
-    y2245, y2250
-    /
-
     t_all(t_ext) 5-year time periods
     / y1965, y1970, y1975, y1980, y1985, y1990,
       y1995, y2000, y2005, y2010, y2015, y2020, y2025, y2030, y2035, y2040,
@@ -163,6 +153,9 @@ sets time_annual Annual extended time steps
          y1980, y1985, y1990,
          y1995, y2000, y2005, y2010
         /
+    t_past_ff(t_past) Time stamps before 1995
+    / y1965, y1970, y1975,
+     y1980, y1985, y1990 /    
 ;
 
 set t(t_all) Simulated time periods

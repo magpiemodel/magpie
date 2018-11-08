@@ -4,6 +4,8 @@ $setglobal c32_aff_policy  none
 $setglobal c32_rot_length  rlGTM
 $setglobal c32_gs_calib  avg
 
+$setglobal c32_trade_liberalization  l909090r808080
+
 scalars
   c32_reduction_start        initial annual trade balance reduction      / 0.0025 /
   c32_reduction_regionalized regionalized annual trade balance reduction / 0.005  /

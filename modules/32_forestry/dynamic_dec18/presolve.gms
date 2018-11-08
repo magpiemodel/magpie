@@ -93,15 +93,15 @@ p32_yield_primforest(t,j) =
       / sum(clcl,pm_climate_class(j,clcl) * pm_bcef("acx",clcl))
       ;
 ** Future demand relevant in current time step depending on rotation length
-***** COULD BE MOVED AWAY TO NEW MODULE
-p32_rotation_reg(i) = ord(t) + ceil(p32_rot_length(i)/5);
+***** Card is used here to exclude y1965 to y1995 when calculating rotation length calculations for past
+p32_rotation_reg(i) = ord(t) + ceil(p32_rot_length(i)/5) + card(t_past_ff);
 
-pc32_demand_forestry_future(i,kforestry) = sum(t_ext_forestry$(t_ext_forestry.pos = p32_rotation_reg(i)),p32_demand_ext(t_ext_forestry,i,kforestry));
-pc32_selfsuff_forestry_future(i,kforestry) = sum(t_ext_forestry$(t_ext_forestry.pos = p32_rotation_reg(i)),p32_selfsuff_ext(t_ext_forestry,i,kforestry));
-pc32_trade_bal_reduction_future = sum(t_ext_forestry, i32_trade_bal_reduction(t_ext_forestry))/card(t_ext_forestry);
-pc32_trade_balanceflow_future(kforestry) = sum(t_ext_forestry,p32_trade_balanceflow_ext(t_ext_forestry,kforestry))/card(t_ext_forestry);
-pc32_exp_shr_future(i,kforestry) = sum(t_ext_forestry$(t_ext_forestry.pos = p32_rotation_reg(i)),p32_exp_shr_ext(t_ext_forestry,i,kforestry));
-pc32_production_ratio_future(i) = sum(t_ext_forestry$(t_ext_forestry.pos = p32_rotation_reg(i)),p32_production_ratio_ext(i,t_ext_forestry));
+pc32_demand_forestry_future(i,kforestry) = sum(t_ext$(t_ext.pos = p32_rotation_reg(i)),p32_demand_ext(t_ext,i,kforestry));
+pc32_selfsuff_forestry_future(i,kforestry) = sum(t_ext$(t_ext.pos = p32_rotation_reg(i)),p32_selfsuff_ext(t_ext,i,kforestry));
+pc32_trade_bal_reduction_future = sum(t_ext, im_trade_bal_reduction(t_ext))/card(t_ext);
+pc32_trade_balanceflow_future(kforestry) = sum(t_ext,p32_trade_balanceflow_ext(t_ext,kforestry))/card(t_ext);
+pc32_exp_shr_future(i,kforestry) = sum(t_ext$(t_ext.pos = p32_rotation_reg(i)),p32_exp_shr_ext(t_ext,i,kforestry));
+pc32_production_ratio_future(i) = sum(t_ext$(t_ext.pos = p32_rotation_reg(i)),p32_production_ratio_ext(i,t_ext));
 ***** COULD BE MOVED AWAY TO NEW MODULE
 
 display p32_rotation_reg;

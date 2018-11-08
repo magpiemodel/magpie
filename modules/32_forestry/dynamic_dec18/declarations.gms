@@ -24,8 +24,8 @@ parameters
  p32_trade_balanceflow_ext(t_ext,kforestry)       Extended trade balance flow numbers (1)
  p32_exp_shr_ext(t_ext,i,kforestry)               Extended export share (1)
 
- i32_trade_bal_reduction(t_ext_forestry)          Trade balance reduction (1)
- i32_trade_bal_reduction_annual(t_ext_forestry)   Annual trade balance reduction (1)
+ i32_trade_bal_reduction(t_all)          Trade balance reduction (1)
+ i32_trade_bal_reduction_annual(t_all)   Annual trade balance reduction (1)
  i32_trade_margin(i,kforestry)                    Trade margins (1)
  i32_trade_tariff(i,kforestry)                    Trade tariffs (1)
  pc32_trade_bal_reduction_future                  Future trade balance reduction (1)
@@ -157,25 +157,25 @@ parameters
  oq32_prod_forestry_woodfuel(t,j,type)             woodfuel production from forestry
  oq32_prod_secdforest_woodfuel(t,j,type)           woodfuel production from secdforest
  oq32_prod_primforest_woodfuel(t,j,type)           woodfuel production from primforest
- oq32_hvarea_forestry(t,j,ac_sub,type)             
- oq32_hvarea_secdforest(t,j,ac_sub,type)           
- oq32_hvarea_primforest(t,j,type)                  
- oq32_cost_recur(t,i,type)                         
- oq32_cost_harvest(t,i,type)                       
- oq32_cost_transport(t,i,type)                     
- oq32_production_timber(t,i,type)                  
+ oq32_hvarea_forestry(t,j,ac_sub,type)
+ oq32_hvarea_secdforest(t,j,ac_sub,type)
+ oq32_hvarea_primforest(t,j,type)
+ oq32_cost_recur(t,i,type)
+ oq32_cost_harvest(t,i,type)
+ oq32_cost_transport(t,i,type)
+ oq32_production_timber(t,i,type)
  oq32_trade_reg(t,i,kforestry,type)                regional trade balances i.e. minimum self-suff ratio
  oq32_excess_dem(t,kforestry,type)                 global excess demand
  oq32_excess_supply(t,i,kforestry,type)            regional excess production
  oq32_cost_trade(t,i,type)                         trade costs
  oq32_cost_trade_reg(t,i,kforestry,type)           interregional trade cost calculation (mio. USD)
- oq32_prod_future(t,i,type)                        
- oq32_land_expansion(t,j,type32,ac,type)           
- oq32_land_reduction(t,j,type32,ac,type)           
- oq32_avail_reuse(t,j,type)                        
- oq32_hvarea_other(t,j,ac_sub,type)                
- oq32_prod_other(t,j,type)                         
- oq32_cost_establishment(t,i,type)                 
- oq32_secdforest_conversion(t,j,type)              
+ oq32_prod_future(t,i,type)
+ oq32_land_expansion(t,j,type32,ac,type)
+ oq32_land_reduction(t,j,type32,ac,type)
+ oq32_avail_reuse(t,j,type)
+ oq32_hvarea_other(t,j,ac_sub,type)
+ oq32_prod_other(t,j,type)
+ oq32_cost_establishment(t,i,type)
+ oq32_secdforest_conversion(t,j,type)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

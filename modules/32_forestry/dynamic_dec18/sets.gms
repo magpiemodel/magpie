@@ -23,7 +23,7 @@ sets
    rltype
    /rlFAO_min,rlGTM,rlFAO_max,init,hybrid/
 
-   tstart32(t_ext_forestry)
+   tstart32(t_all)
     / y1995, y2000, y2005, y2010 /
 
   gs_calib
