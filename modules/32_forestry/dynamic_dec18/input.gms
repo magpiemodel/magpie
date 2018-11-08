@@ -53,31 +53,12 @@ $include "./modules/32_forestry/input/f32_production_ratio.csv"
 $offdelim
 /;
 
-parameter f32_production_ratio_FUTURE(i,t_all) percentage of supply coming from plantations (percentage)
-/
-$ondelim
-$include "./modules/32_forestry/input/f32_production_ratio.csv"
-$offdelim
-/;
-
 parameter f32_forestry_management(i) upscaling factor for forestry plantations
 /
 $ondelim
 $include "./modules/32_forestry/input/f32_forestry_management.csv"
 $offdelim
 /;
-
-table f32_trade_margin(i,kforestry) costs of freight and insurance (USD per DMT)
-$ondelim
-$include "./modules/32_forestry/input/f32_trade_margin.cs3"
-$offdelim
-;
-
-table f32_trade_tariff(i,kforestry) specific duty tariffs (USD per DMT)
-$ondelim
-$include "./modules/32_forestry/input/f32_trade_tariff.cs3"
-$offdelim
-;
 
 parameters
 f32_distance(j) transport distance to urban center (Minutes)

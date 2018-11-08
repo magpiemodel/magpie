@@ -31,26 +31,3 @@ $ondelim
 $include "./modules/35_natveg/input/f35_harvestingcost.csv"
 $offdelim
 ;
-
-parameters
-f35_distance(j) transport distance to urban center (Minutes)
-/
-$ondelim
-$include "./modules/35_natveg/input/transport_distance_natveg.cs2"
-$offdelim
-/
-;
-
-parameter f35_production_ratio(i,t_all) percentage of supply coming from plantations has to be one minus (percentage)
-/
-$ondelim
-$include "./modules/35_natveg/input/f35_production_ratio.csv"
-$offdelim
-/;
-
-parameter f35_transport_costs(kforestry) transport costs 2004 per tDM per minute (USD)
-/
-$ondelim
-$include "./modules/35_natveg/input/f35_transport_costs.csv"
-$offdelim
-/;
