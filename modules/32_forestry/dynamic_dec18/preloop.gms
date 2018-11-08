@@ -1,5 +1,4 @@
 ** Prohibiting harvesting and production of wood but not woodfuel from other land
-v32_hvarea_other.fx(j,"wood",ac_sub)= 0;
 v32_prod.fx(j,"other","wood") = 0;
 *v32_hvarea_forestry.fx(j,kforestry,"ac0") = 0;
 

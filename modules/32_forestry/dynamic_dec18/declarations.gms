@@ -35,11 +35,6 @@ positive variables
  v32_cost_transp(i)                               Transportation costs (USD per m3)
  v32_hvarea_forestry(j,kforestry,ac_sub)          Area harvested for timber production (mio. ha)
 
- v32_excess_dem(kforestry)                        Global excess demand (mio. ton DM)
- v32_excess_prod(i,kforestry)                     Regional excess production (mio. ton DM)
-
- v32_prod_future_reg(i,kforestry)                 Future regional production (mio. m3)
-
  v32_prod_external(j,kforestry)                   Production balance flow from heaven (mio. m3)
 
  v32_land_expansion(j,type32,ac)                  Land expansion (mio. ha)
@@ -89,9 +84,6 @@ parameters
  ov32_cost_recur(t,i,type)                       Recurring forest management costs (USD per ha)
  ov32_cost_transp(t,i,type)                      Transportation costs (USD per m3)
  ov32_hvarea_forestry(t,j,kforestry,ac_sub,type) Area harvested for timber production (mio. ha)
- ov32_excess_dem(t,kforestry,type)               Global excess demand (mio. ton DM)
- ov32_excess_prod(t,i,kforestry,type)            Regional excess production (mio. ton DM)
- ov32_prod_future_reg(t,i,kforestry,type)        Future regional production (mio. m3)
  ov32_prod_external(t,j,kforestry,type)          Production balance flow from heaven (mio. m3)
  ov32_land_expansion(t,j,type32,ac,type)         Land expansion (mio. ha)
  ov32_land_reduction(t,j,type32,ac,type)         land reduction (mio. ha)

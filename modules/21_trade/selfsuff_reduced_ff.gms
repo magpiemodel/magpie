@@ -26,5 +26,6 @@ $Ifi "%phase%" == "declarations" $include "./modules/21_trade/selfsuff_reduced_f
 $Ifi "%phase%" == "input" $include "./modules/21_trade/selfsuff_reduced_ff/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/21_trade/selfsuff_reduced_ff/equations.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/21_trade/selfsuff_reduced_ff/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/21_trade/selfsuff_reduced_ff/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/21_trade/selfsuff_reduced_ff/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

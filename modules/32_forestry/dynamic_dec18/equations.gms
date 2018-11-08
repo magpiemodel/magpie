@@ -51,7 +51,7 @@ q32_cost_establishment(i2)..
 						=e=
 						sum((cell(i2,j2),type32), v32_land(j2,type32,"ac0") * ( c32_reESTBcost + c32_recurring_cost / pm_interest(i2) ))
 						+
-						sum(kforestry, v32_prod_future_reg(i2,kforestry) * c32_harvesting_cost/((1+pm_interest(i2))**p32_rot_length(i2)))
+						sum(kforestry2, vm_prod_future_reg_ff(i2,kforestry2) * c32_harvesting_cost/((1+pm_interest(i2))**p32_rot_length(i2)))
 						+
 						sum((cell(i2,j2),kforestry), f32_distance(j2) * f32_transport_costs(kforestry)/((1+pm_interest(i2))**p32_rot_length(i2)))
 					 	* (pm_interest(i2)/(1+pm_interest(i2)))	* m_timestep_length
