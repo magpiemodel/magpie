@@ -23,8 +23,8 @@ parameters
  p35_min_forest(t,j) 			Minimum forest stock [land protection policies] (Mha)
  p35_min_other(t,j)      		Minimum other land stock [land protection policies] (Mha)
 
- p35_yield_natveg(t,j,ac)
- p35_yield_primforest(t,j)
+ p35_yield_natveg(t,j,ac)   Yield of natural vegetation (m3 per ha per yr)
+ p35_yield_primforest(t,j)  Yield of primary vegetation (m3 per ha per yr)
 ;
 
 equations

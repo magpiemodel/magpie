@@ -30,6 +30,16 @@ elseif (s21_trade_tariff=0),
     im_trade_tariff(i2,kforestry) = 0;
 );
 
-fm_self_suff_forestry(t_all,i,kforestry) = f21_self_suff(t_all,i,kforestry);
-fm_trade_balanceflow_forestry(t_all,kforestry) = f21_trade_balanceflow(t_all,kforestry);
-fm_exp_shr_forestry(t_all,i,kforestry) = f21_exp_shr(t_all,i,kforestry);
+*' Extended time frame calculations. Holding constant after y2150.
+
+p21_demand_ext(t_ext,i,kforestry) = fm_forestry_demand("y2150",i,kforestry);
+p21_demand_ext(t_all,i,kforestry) = fm_forestry_demand(t_all,i,kforestry);
+
+p21_selfsuff_ext(t_ext,i,kforestry) = f21_self_suff("y2150",i,kforestry);
+p21_selfsuff_ext(t_all,i,kforestry) = f21_self_suff(t_all,i,kforestry);
+
+p21_trade_balanceflow_ext(t_ext,kforestry) = f21_trade_balanceflow("y2150",kforestry);
+p21_trade_balanceflow_ext(t_all,kforestry) = f21_trade_balanceflow(t_all,kforestry);
+
+p21_exp_shr_ext(t_ext,i,kforestry) = f21_exp_shr("y2150",i,kforestry);
+p21_exp_shr_ext(t_all,i,kforestry) = f21_exp_shr(t_all,i,kforestry);

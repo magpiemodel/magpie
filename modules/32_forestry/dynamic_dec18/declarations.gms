@@ -9,8 +9,6 @@ parameters
  p32_aff_pot(t,j)                                 Potential afforestation area (Mha)
  p32_aff_pol_timestep(t,j)                        INDC afforestation per time step (Mha)
  p32_aff_pol(t,j)                                 INDC forest stock (Mha)
- p32_demand_ext(t_ext,i,kforestry)                Extended demand for timber beyound simulation (mio. m3)
- pc32_demand_forestry_future(i,kforestry)         Future timber demand (mio. m3)
  pc32_yield_forestry_future(j)                    Cellular timber yield expected in the future (m3 per ha per year)
  p32_yield_forestry_ac(t,j,ac)                    Age class specific yield of plantation forests (m3 per ha per yr)
  p32_hvcost_ha(i)                                 Timber harvesting cost per ha (USD)
@@ -19,27 +17,15 @@ parameters
  p32_rotation_cellular(j)                         Rotation length translated to age classes on cellular level (1)
  p32_forestry_management(i)                       Plantation forest management factors on world region levels (1)
  pc32_timestep                                    Timestep (1)
- p32_selfsuff_ext(t_ext,i,kforestry)              Self sufficiency for timber products in extended time frame (1)
- pc32_selfsuff_forestry_future(i,kforestry)       Future self sufficiency ratio for timber products (1)
- p32_trade_balanceflow_ext(t_ext,kforestry)       Extended trade balance flow numbers (1)
- p32_exp_shr_ext(t_ext,i,kforestry)               Extended export share (1)
-
  i32_trade_bal_reduction(t_all)          Trade balance reduction (1)
  i32_trade_bal_reduction_annual(t_all)   Annual trade balance reduction (1)
  i32_trade_margin(i,kforestry)                    Trade margins (1)
  i32_trade_tariff(i,kforestry)                    Trade tariffs (1)
- pc32_trade_bal_reduction_future                  Future trade balance reduction (1)
- pc32_trade_balanceflow_future(kforestry)         Future trade balanceflow (1)
- pc32_exp_shr_future(i,kforestry)                 Future export share (1)
-
  p32_production_ratio_ext(i,t_ext)                Extened production ratio (1)
- pc32_production_ratio_future(i)                  Future production ratio (1s)
  pc32_yield_forestry_mature_future(j)             Future yield of matured tree after rotation period (m3 per ha per yr)
  p32_protect_avail(t,j)                           Mature trees which are protected (mio. ha)
 
  p32_plant_ini_ac(j)                              Initialization of plantation area (mio. ha)
- p32_yield_natveg(t,j,ac)                         Yield of natural forest (m3 per ha per yr)
- p32_yield_primforest(t,j)                        Yield of primary forest (m3 per ha per yr)
 ;
 
 positive variables

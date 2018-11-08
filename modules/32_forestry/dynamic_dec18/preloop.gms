@@ -51,23 +51,8 @@ p32_land(t,j,"plant",ac)$(ord(ac) > 1) = p32_land(t,j,"plant",ac-1);
 p32_land("y1995",j,"plant","ac0") = 0;
 
 **************************************************************************************
-
-** Extended time frame calculations. Holding constant after y2150.
-p32_demand_ext(t_ext,i,kforestry) = fm_forestry_demand("y2150",i,kforestry);
-p32_demand_ext(t_all,i,kforestry) = fm_forestry_demand(t_all,i,kforestry);
-
-p32_selfsuff_ext(t_ext,i,kforestry) = fm_self_suff_forestry("y2150",i,kforestry);
-p32_selfsuff_ext(t_all,i,kforestry) = fm_self_suff_forestry(t_all,i,kforestry);
-
-p32_trade_balanceflow_ext(t_ext,kforestry) = fm_trade_balanceflow_forestry("y2150",kforestry);
-p32_trade_balanceflow_ext(t_all,kforestry) = fm_trade_balanceflow_forestry(t_all,kforestry);
-
-p32_exp_shr_ext(t_ext,i,kforestry) = fm_exp_shr_forestry("y2150",i,kforestry);
-p32_exp_shr_ext(t_all,i,kforestry) = fm_exp_shr_forestry(t_all,i,kforestry);
-
-p32_production_ratio_ext(i,t_ext) = f32_production_ratio(i,"y2150");
-p32_production_ratio_ext(i,t_all) = f32_production_ratio(i,t_all);
-********
+pm_production_ratio_ext(i,t_ext) = f32_production_ratio(i,"y2150");
+pm_production_ratio_ext(i,t_all) = f32_production_ratio(i,t_all);
 
 p32_forestry_management(i) = f32_forestry_management(i);
 p32_forestry_management("IND") = 10;
