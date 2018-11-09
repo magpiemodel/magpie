@@ -90,34 +90,38 @@ $title magpie
 
 
 *##################### R SECTION START (VERSION INFO) ##########################
-*
+* 
 * Used data set: magpie4.0_default_sep18.tgz
 * md5sum: 98e158205482936e487aeb616dea5403
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
-*
+* 
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev35_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: 5f53004397ab92625cd21b642b78ebb7
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-*
+* Repository: /p/projects/landuse/data/input/archive
+* 
+* Used data set: private_forestry_dec18.tgz
+* md5sum: bf0ad7323351f73c5a8ee0889f6f39a1
+* Repository: /p/projects/landuse/users/mishra/additional_data_private_forestry
+* 
 * Low resolution: c200
 * High resolution: 0.5
-*
+* 
 * Total number of cells: 200
-*
+* 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    28   24   10    7    3   53   17    8   22    7   11   10
-*
+* 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-*
+* 
 * Regions data revision: 4.14
-*
+* 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
 * * Additional input folder: /p/projects/landuse/data/input/other/rev35
 * * Revision: 35
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-*
+* 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
@@ -127,11 +131,11 @@ $title magpie
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
-*
-*
-*
-* Last modification (input data): Tue Nov 06 13:46:23 2018
-*
+* 
+* 
+* 
+* Last modification (input data): Fri Nov  9 19:32:00 2018
+* 
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
