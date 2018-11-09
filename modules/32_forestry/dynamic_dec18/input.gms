@@ -29,7 +29,7 @@ $include "./modules/32_forestry/input/f32_fac_req_ha.csv"
 $offdelim
 ;
 
-table f32_harvest_cost_ha(i,fcosts32H) Harvesting cost (US Dollar 2004 per ha)
+table fm_harvest_cost_ha(i,fcosts32H) Harvesting cost (US Dollar 2004 per ha)
 $ondelim
 $include "./modules/32_forestry/input/f32_harvestingcost.csv"
 $offdelim

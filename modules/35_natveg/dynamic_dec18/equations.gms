@@ -75,7 +75,7 @@ q35_cost_harvest(i2)..
                     sum((cell(i2,j2), kforestry),
                     sum(ac_sub, v35_hvarea_secdforest(j2,kforestry,ac_sub))
                   + sum(ac_sub, v35_hvarea_other(j2,"woodfuel",ac_sub))
-                  + v35_hvarea_primforest(j2,kforestry)) * f35_harvest_cost_ha(i2,"harv")
+                  + v35_hvarea_primforest(j2,kforestry)) * fm_harvest_cost_ha(i2,"harv")
                     ;
 
 *******************************************************************************

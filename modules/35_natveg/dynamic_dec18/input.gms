@@ -25,9 +25,3 @@ $ondelim
 $include "./modules/35_natveg/input/forestageclasses.cs3"
 $offdelim
 ;
-
-table f35_harvest_cost_ha(i,fcosts32H) Harvesting cost (US Dollar 2004 per ha)
-$ondelim
-$include "./modules/35_natveg/input/f35_harvestingcost.csv"
-$offdelim
-;
