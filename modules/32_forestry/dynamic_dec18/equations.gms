@@ -67,7 +67,7 @@ q32_cost_harvest(i2)..
                     v32_cost_harvest(i2)
                     =e=
                     sum((cell(i2,j2), kforestry),
-                    sum(ac_sub, v32_hvarea_forestry(j2,kforestry,ac_sub))) * f32_harvest_cost_ha(i2,"harv")
+                    sum(ac_sub, v32_hvarea_forestry(j2,kforestry,ac_sub))) * fm_harvest_cost_ha(i2,"harv")
                     ;
 
 ***PRODUCTION
