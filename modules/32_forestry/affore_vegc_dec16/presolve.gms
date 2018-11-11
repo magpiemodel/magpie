@@ -18,6 +18,13 @@
 *' Wood demand is set to zero because forestry is not modeled in this realization.
 vm_supply.fx(i2,kforestry) = 0;
 
+*' Production and future trade realated calculations are also set to zero because
+*' they are modeled by a different realization of this module.
+vm_prod.fx(j2,kforestry) = 0;
+vm_prod_reg.fx(i2,kforestry) = 0;
+vm_prod_future_reg_ff.fx(i2,kforestry2) = 0;
+vm_cost_trade_forestry_ff.fx(i2) = 0;
+
 *' Certain areas (e.g. the boreal zone) are excluded from endogenous afforestation.
 v32_land.lo(j,"new") = 0;
 v32_land.up(j,"new") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
@@ -27,9 +34,9 @@ v32_land.fx(j,"new")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
 *' @stop
 
 * Mapping `ac_land32` between age classes `ac` and forest land types `land32` depending on
-* the 30-year planning horizon `s32_planing_horizon`. The mapping `ac_land32` is used to 
-* aggregate age classes in `p32_land` for the optimization. Note that age-classes exist 
-* only between the optimization time steps (see below). 
+* the 30-year planning horizon `s32_planing_horizon`. The mapping `ac_land32` is used to
+* aggregate age classes in `p32_land` for the optimization. Note that age-classes exist
+* only between the optimization time steps (see below).
 ac_land32(ac,land32) = no;
 ac_land32(ac,"new")  = yes$(ord(ac) = 1);
 ac_land32(ac,"new_ndc") = yes$(ord(ac) = 1);
@@ -56,8 +63,8 @@ pc32_land(j,land32) = v32_land.l(j,land32);
 vm_land.l(j,"forestry") = sum(land32, pc32_land(j,land32));
 pcm_land(j,"forestry") = sum(land32, pc32_land(j,land32));
 
-* Fix forestry land to current levels, i.e. forestry land can not decrease in size within the optimization. 
-* Since there is no bound on `v32_land(j,"new")` forestry land can increase in size within the optimization. 
+* Fix forestry land to current levels, i.e. forestry land can not decrease in size within the optimization.
+* Since there is no bound on `v32_land(j,"new")` forestry land can increase in size within the optimization.
 v32_land.fx(j,"prot") = pc32_land(j,"prot");
 v32_land.fx(j,"grow") = pc32_land(j,"grow");
 v32_land.fx(j,"old") = pc32_land(j,"old");

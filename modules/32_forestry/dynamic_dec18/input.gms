@@ -4,9 +4,9 @@ $setglobal c32_aff_policy  none
 $setglobal c32_rot_length  rlGTM
 
 scalars
-  c32_reESTBcost / 2000 /
-  c32_recurring_cost / 100 /
-  c32_harvesting_cost / 200 /
+  c32_reESTBcost Reestablishment cost in USD per ha / 2000 /
+  c32_recurring_cost Recurring costs in USD per ha / 100 /
+  c32_harvesting_cost Harvesting cost in USD per ha / 200 /
   s32_planing_horizon Afforestation planing horizon (years)            / 30 /
 ;
 

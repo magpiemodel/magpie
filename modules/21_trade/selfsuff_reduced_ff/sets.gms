@@ -48,7 +48,6 @@ sets
    trade_groups21 Trade groups
    / easytrade,hardtrade /
 
-   kforestry2(k_trade)
+   kforestry2(k_trade) Same as kforestry but subset of trade set
    / wood, woodfuel /
-
 ;

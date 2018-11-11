@@ -46,22 +46,22 @@ positive variables
 equations
  q32_cost_total(i)                                total forestry costs constraint (mio. USD)
  q32_land(j)                                      land constraint (mio. ha)
- q32_cdr_aff(j,co2_forestry)          calculation of CDR from afforestation
+ q32_cdr_aff(j,co2_forestry)                      calculation of CDR from afforestation
  q32_carbon(j,c_pools)                            forestry carbon stock calculation
  q32_diff                                         aggregated difference in forestry land compared to previous timestep (mio. ha)
  q32_max_aff                                      maximum total global afforestation
  q32_aff_pol(j)                                   afforestation policy constraint
  q32_prod_forestry_wood(j)        	              wood production from forestry
  q32_prod_forestry_woodfuel(j)     	              woodfuel production from forestry
- q32_hvarea_forestry(j,ac_sub)
- q32_cost_recur(i)
- q32_cost_harvest(i)
- q32_production_timber(i)
- q32_prod_future(i)
- q32_land_expansion(j,type32,ac)
- q32_land_reduction(j,type32,ac)
- q32_avail_reuse(j)
- q32_cost_establishment(i)
+ q32_hvarea_forestry(j,ac_sub)                    Harvested area from plantations (mio. ha)
+ q32_cost_recur(i)                                Recurruing costs (mio. USD)
+ q32_cost_harvest(i)                              Harvesting costs (mio. USD)
+ q32_production_timber(i)                         Timber production from plantations (mio. USD)
+ q32_prod_future(i)                               Establishment in current time step for future demand (mio. ha)
+ q32_land_expansion(j,type32,ac)                  Land expansion (mio. ha)
+ q32_land_reduction(j,type32,ac)                  Land contarction (mio. ha)
+ q32_avail_reuse(j)                               Defunct (1)
+ q32_cost_establishment(i)                        Present value of cost of establishment (mio. USD) 
 ;
 
 
@@ -90,14 +90,14 @@ parameters
  oq32_aff_pol(t,j,type)                          afforestation policy constraint
  oq32_prod_forestry_wood(t,j,type)               wood production from forestry
  oq32_prod_forestry_woodfuel(t,j,type)           woodfuel production from forestry
- oq32_hvarea_forestry(t,j,ac_sub,type)
- oq32_cost_recur(t,i,type)
- oq32_cost_harvest(t,i,type)
- oq32_production_timber(t,i,type)
- oq32_prod_future(t,i,type)
- oq32_land_expansion(t,j,type32,ac,type)
- oq32_land_reduction(t,j,type32,ac,type)
- oq32_avail_reuse(t,j,type)
- oq32_cost_establishment(t,i,type)
+ oq32_hvarea_forestry(t,j,ac_sub,type)           Harvested area from plantations (mio. ha)
+ oq32_cost_recur(t,i,type)                       Recurruing costs (mio. USD)
+ oq32_cost_harvest(t,i,type)                     Harvesting costs (mio. USD)
+ oq32_production_timber(t,i,type)                Timber production from plantations (mio. USD)
+ oq32_prod_future(t,i,type)                      Establishment in current time step for future demand (mio. ha)
+ oq32_land_expansion(t,j,type32,ac,type)         Land expansion (mio. ha)
+ oq32_land_reduction(t,j,type32,ac,type)         Land contarction (mio. ha)
+ oq32_avail_reuse(t,j,type)                      Defunct (1)
+ oq32_cost_establishment(t,i,type)               Present value of cost of establishment (mio. USD) 
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
