@@ -94,7 +94,7 @@ q21_excess_supply_ff(i2,kforestry2)..
 q21_cost_trade_reg_ff(i2,kforestry2)..
   v21_cost_trade_reg_ff(i2,kforestry2)
   =g=
-  (im_trade_margin(i2,kforestry2) + im_trade_tariff(i2,kforestry2))*(vm_prod_future_reg_ff(i2,kforestry2)-pc21_demand_forestry_future(i2,kforestry2));
+  (i21_trade_margin_ff(i2,kforestry2) + i21_trade_tariff_ff(i2,kforestry2))*(vm_prod_future_reg_ff(i2,kforestry2)-pc21_demand_forestry_future(i2,kforestry2));
 
 q21_cost_trade_ff(i2)..
   vm_cost_trade_forestry_ff(i2) =e= sum(kforestry2,v21_cost_trade_reg_ff(i2,kforestry2));

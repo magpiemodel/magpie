@@ -55,6 +55,8 @@ q32_cost_establishment(i2)..
 					 	* (pm_interest(i2)/(1+pm_interest(i2)))	* m_timestep_length
 						+
 						sum(cell(i2,j2),v32_missing_area_future(j2) * 100000)
+            +
+            (vm_cost_trade_forestry_ff(i2) / pm_interest(i2))
 						;
 
 **Only protected areas incurring recurring/monitoring costs

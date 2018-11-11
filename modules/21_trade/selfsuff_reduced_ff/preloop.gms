@@ -18,16 +18,16 @@ elseif (s21_trade_tariff=0),
 
 *' Future trade calculations for forestry
 
-im_trade_bal_reduction(t_ext,kforestry2) = i21_trade_bal_reduction("y2150",kforestry2);
-im_trade_bal_reduction(t_all,kforestry2) = i21_trade_bal_reduction(t_all,kforestry2);
+i21_trade_bal_reduction_ff(t_ext,kforestry2) = i21_trade_bal_reduction("y2150",kforestry2);
+i21_trade_bal_reduction_ff(t_all,kforestry2) = i21_trade_bal_reduction(t_all,kforestry2);
 
-im_trade_margin(i2,"woodfuel") = f21_trade_margin(i2,"cottn_pro");
-im_trade_margin(i2,"wood") = im_trade_margin(i2,"woodfuel");
+i21_trade_margin_ff(i2,"woodfuel") = f21_trade_margin(i2,"cottn_pro");
+i21_trade_margin_ff(i2,"wood") = i21_trade_margin_ff(i2,"woodfuel");
 
 if ((s21_trade_tariff=1),
-    im_trade_tariff(i2,kforestry2) = f21_trade_tariff(i2,kforestry2);
+    i21_trade_tariff_ff(i2,kforestry2) = f21_trade_tariff(i2,kforestry2);
 elseif (s21_trade_tariff=0),
-    im_trade_tariff(i2,kforestry2) = 0;
+    i21_trade_tariff_ff(i2,kforestry2) = 0;
 );
 
 *' Extended time frame calculations. Holding constant after y2150.
