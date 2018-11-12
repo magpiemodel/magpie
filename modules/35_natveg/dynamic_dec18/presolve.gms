@@ -84,6 +84,7 @@ $endif
 * (e.g. for cropland expansion).
 * In contrast, other natural land can decrease and increase within the optimization.
 * For instance, other natural land increases if agricultural land is abandoned.
+$ontext
 vm_land.lo(j,"primforest") = p35_save_primforest(t,j);
 vm_land.up(j,"primforest") = vm_land.l(j,"primforest");
 m_boundfix(vm_land,(j,"primforest"),l,10e-5);
@@ -104,6 +105,20 @@ m_boundfix(v35_other,(j,ac_sub),l,10e-5);
 v35_other.lo(j,"acx") = p35_save_other(t,j);
 v35_other.up(j,"acx") = pc35_other(j,"acx");
 m_boundfix(v35_other,(j,"acx"),l,10e-5);
+$offtext
+
+vm_land.lo(j,"primforest") = p35_save_primforest(t,j);
+vm_land.up(j,"primforest") = vm_land.l(j,"primforest");
+m_boundfix(vm_land,(j,"primforest"),l,10e-5);
+
+v35_secdforest.lo(j,ac_sub) = 0;
+v35_secdforest.lo(j,"acx") = p35_save_secdforest(t,j);
+v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
+m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
+
+v35_other.lo(j,"acx") = p35_save_other(t,j);
+v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
+m_boundfix(v35_other,(j,ac_sub),l,10e-5);
 
 * calculate carbon density
 p35_yield_natveg(t,j,ac_sub) =
