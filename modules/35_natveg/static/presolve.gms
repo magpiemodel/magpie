@@ -21,4 +21,5 @@ vm_carbon_stock.fx(j,"other",c_pools) =
 *' @code
 *' Setting variable interfaces to zero which are not dealt by this module realization
 vm_prod(j2,kforestry).fx = 0;
+vm_cost_natveg(i2).fx = 0;
 *' @stop
