@@ -26,7 +26,7 @@ cfg$results_folder <- "output/:title:"
 cfg<-lucode::setScenario(cfg,"SSP2")
 
 #ALERT:  At the moment this script cannot download new data in case the input files are changed. Has to be set to true.
-cfg$force_download <- TRUE
+cfg$force_download <- FALSE
 rl_all<-c("rlGTM")
 #rl_all<-c("rlGTM","rlFAO_max")
 #rl_all<-c("hybrid")

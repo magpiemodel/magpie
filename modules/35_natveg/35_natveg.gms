@@ -15,7 +15,7 @@
 *' @authors Florian Humpenöder, Abhijeet Mishra
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%natveg%" == "dynamic_may18" $include "./modules/35_natveg/dynamic_may18.gms"
 $Ifi "%natveg%" == "dynamic_dec18" $include "./modules/35_natveg/dynamic_dec18.gms"
+$Ifi "%natveg%" == "dynamic_may18" $include "./modules/35_natveg/dynamic_may18.gms"
 $Ifi "%natveg%" == "static" $include "./modules/35_natveg/static.gms"
 *###################### R SECTION END (MODULETYPES) ############################

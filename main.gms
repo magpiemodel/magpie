@@ -93,7 +93,7 @@ $title magpie
 * 
 * Used data set: magpie4.0_default_sep18.tgz
 * md5sum: 98e158205482936e487aeb616dea5403
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev35_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: 5f53004397ab92625cd21b642b78ebb7
@@ -134,7 +134,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Fri Nov  9 19:32:00 2018
+* Last modification (input data): Tue Nov 13 13:53:46 2018
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -158,7 +158,7 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  coup2100
+$setglobal c_timesteps  5year
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /
@@ -214,7 +214,7 @@ $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 $setglobal disagg_lvst  foragebased_aug18
 
-$setglobal optimization  nlp_apr17
+$setglobal optimization  lp_nlp_apr17
 
 ****************************END MODULE SETUP************************************
 

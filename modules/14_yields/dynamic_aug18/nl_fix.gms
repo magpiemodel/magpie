@@ -9,8 +9,7 @@
 vm_yld.fx(j,kcr,w) = sum(ct,i14_yields(ct,j,kcr,w))*sum(cell(i,j),vm_tau.l(i)/fm_tau1995(i));
 
 
-v14_past_mngmnt_factor.fx(i) = 1.1;
-vm_yld.fx(j,"pasture",w) = sum(ct,i14_yields(ct,j,"pasture",w))*sum(cell(i,j),pm_past_mngmnt_factor(ct,i));
+vm_yld.fx(j,"pasture",w) = sum(ct,i14_yields(ct,j,"pasture",w)*sum(cell(i,j),pm_past_mngmnt_factor(ct,i)));
 
 
 
