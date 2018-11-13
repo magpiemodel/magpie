@@ -8,6 +8,7 @@ positive variables
   v35_secdforest(j,land35) Secdforest (mio. ha)
   v35_other(j,land35)      Other land (mio. ha)
   vm_landdiff_natveg       Aggregated difference in other land compared to previous timestep (mio. ha)
+  vm_cost_natveg(i)                           Regional natveg timber production costs (mio. USD)
 ;
 
 
@@ -16,6 +17,6 @@ parameters
  ov35_secdforest(t,j,land35,type) Secdforest (mio. ha)
  ov35_other(t,j,land35,type)      Other land (mio. ha)
  ov_landdiff_natveg(t,type)       Aggregated difference in other land compared to previous timestep (mio. ha)
+ ov_cost_natveg(t,i,type)         Regional natveg timber production costs (mio. USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
-

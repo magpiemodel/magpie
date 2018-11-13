@@ -23,6 +23,7 @@
                    + vm_cost_AEI(i2)
                    + vm_cost_trade(i2)
                    + vm_cost_fore(i2)
+                   + vm_cost_natveg(i2)
                    + vm_cost_processing(i2)
                    + vm_costs_overrate_cropdiff(i2)
                    ;

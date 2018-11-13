@@ -67,6 +67,11 @@
  		pcm_land(j2,"primforest") - vm_land(j2,"primforest");
 
 *******************************************************************************
+** Natveg related production costs
+q35_cost_total(i2) .. vm_cost_natveg(i2) =e=
+                     v35_cost_harvest(i2)
+								   + sum((cell(i2,j2),kforestry), v35_prod_external(j2,kforestry) * 99999)
+								   ;
 *******************************************************************************
 **** Cost of harvesting from NatVeg
 q35_cost_harvest(i2)..
