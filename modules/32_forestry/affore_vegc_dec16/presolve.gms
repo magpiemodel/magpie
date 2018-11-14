@@ -16,7 +16,6 @@
 
 *' @code
 *' Wood demand is set to zero because forestry is not modeled in this realization.
-fm_forestry_demand(t_all,i,kforestry) = 0;
 vm_supply.fx(i2,kforestry) = 0;
 
 *' Production and future trade realated calculations are also set to zero because

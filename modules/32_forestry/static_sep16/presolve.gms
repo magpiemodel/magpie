@@ -11,7 +11,6 @@ pc32_carbon_density(j,c_pools) = fm_carbon_density(t,j,"forestry",c_pools);
 vm_carbon_stock.fx(j,"forestry",c_pools) = vm_land.l(j,"forestry")*pc32_carbon_density(j,c_pools);
 
 *' Wood demand is also set to zero because forestry is not modeled in this realization.
-fm_forestry_demand(t_all,i,kforestry) = 0;
 vm_supply.fx(i2,kforestry) = 0;
 
 *' Production and future trade realated calculations are also set to zero because
