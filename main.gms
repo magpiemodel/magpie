@@ -175,13 +175,13 @@ $setglobal tc  endo_jun18
 $setglobal yields  dynamic_aug18
 
 $setglobal food  anthropometrics_jan18
-$setglobal demand  sector_may15
+$setglobal demand  sector_dec18_forestry
 $setglobal production  flexreg_apr16
 
 $setglobal residues  flexreg_apr16
 $setglobal processing  coupleproducts_feb17
 
-$setglobal trade  selfsuff_reduced
+$setglobal trade  selfsuff_reduced_ff
 
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13

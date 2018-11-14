@@ -79,5 +79,6 @@ p32_carbon_density(t,j,"old",c_pools) = pm_carbon_density_ac(t,j,"acx",c_pools);
 
 * Fix production related parameters to 0
 pm_production_ratio_ext(i,t_ext) = 0;
+pm_rot_length(i) = 0;
 
 *** EOF presolve.gms ***
