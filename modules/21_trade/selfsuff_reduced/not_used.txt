@@ -5,7 +5,3 @@
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
 fm_forestry_demand, input, not used
-pcm_production_ratio_future, input, not used
-pm_rotation_reg, input, not used
-pm_rot_length, input, not used
-pm_production_ratio_ext, input, not used

@@ -21,6 +21,8 @@ parameters
  pc32_yield_forestry_mature_future(j)             Future yield of matured tree after rotation period (m3 per ha per yr)
  p32_protect_avail(t,j)                           Mature trees which are protected (mio. ha)
  p32_plant_ini_ac(j)                              Initialization of plantation area (mio. ha)
+ pcm_production_ratio_future(i)                  Future production ratio (1)
+ pm_rotation_reg(i)                              Regional rotation length of plantations translated to age class equivalent for future (1)
 ;
 
 positive variables
@@ -61,7 +63,7 @@ equations
  q32_land_expansion(j,type32,ac)                  Land expansion (mio. ha)
  q32_land_reduction(j,type32,ac)                  Land contarction (mio. ha)
  q32_avail_reuse(j)                               Defunct (1)
- q32_cost_establishment(i)                        Present value of cost of establishment (mio. USD) 
+ q32_cost_establishment(i)                        Present value of cost of establishment (mio. USD)
 ;
 
 
@@ -98,6 +100,6 @@ parameters
  oq32_land_expansion(t,j,type32,ac,type)         Land expansion (mio. ha)
  oq32_land_reduction(t,j,type32,ac,type)         Land contarction (mio. ha)
  oq32_avail_reuse(t,j,type)                      Defunct (1)
- oq32_cost_establishment(t,i,type)               Present value of cost of establishment (mio. USD) 
+ oq32_cost_establishment(t,i,type)               Present value of cost of establishment (mio. USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
