@@ -5,6 +5,5 @@
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
 pm_interest, input, not used
-fm_forestry_demand, input, not used
 pm_climate_class, input, not used
 pm_bcef, input, not used
