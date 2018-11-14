@@ -16,4 +16,5 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%demand%" == "sector_may15" $include "./modules/16_demand/sector_may15.gms"
+$Ifi "%demand%" == "sector_dec18_forestry" $include "./modules/16_demand/sector_dec18_forestry.gms"
 *###################### R SECTION END (MODULETYPES) ############################

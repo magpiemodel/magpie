@@ -25,9 +25,3 @@ table f16_domestic_balanceflow(t_all,i,kall) Balance flow for inconsistencies be
 $ondelim
 $include "./modules/16_demand/sector_may15/input/f16_domestic_balanceflow.csv"
 $offdelim;
-
-table f16_forestry_demand_iso(t_all,iso,kforestry) demand
-$ondelim
-$include "./modules/16_demand/sector_may15/input/f16_forestry_demand.csv"
-$offdelim
-;
