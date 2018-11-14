@@ -175,7 +175,7 @@ $setglobal tc  endo_jun18
 $setglobal yields  dynamic_aug18
 
 $setglobal food  anthropometrics_jan18
-$setglobal demand  sector_dec18_forestry
+$setglobal demand  sector_dec18
 $setglobal production  flexreg_apr16
 
 $setglobal residues  flexreg_apr16
