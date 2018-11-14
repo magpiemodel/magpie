@@ -1,5 +1,3 @@
-pm_forestry_future_switch = 1;
-
 pm_rotation_reg(i) = ord(t) + ceil(pm_rot_length(i)/5) + card(t_past_ff);
 
 pc21_demand_forestry_future(i,kforestry2)    = sum(t_ext$(t_ext.pos = pm_rotation_reg(i)),p21_demand_ext(t_ext,i,kforestry2));
