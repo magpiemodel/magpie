@@ -13,3 +13,7 @@ p32_aff_togo(t) = sum(j, smax(t2, p32_aff_pol(t2,j)) - p32_aff_pol(t,j));
 
 *initialize parameter 
 p32_land(t,j,ac,when) = 0;
+
+* Fix production related parameters to 0
+pm_production_ratio_ext(i,t_ext) = 0;
+pm_rot_length(i) = 0;
