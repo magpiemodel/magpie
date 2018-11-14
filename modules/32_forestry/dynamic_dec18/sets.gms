@@ -11,9 +11,6 @@ sets
  recur,mon
  /
 
- fcosts32H(fcostsALL) forestry harvest cost
- / harv /
-
  type32 plantation type
  /
  aff, indc, plant

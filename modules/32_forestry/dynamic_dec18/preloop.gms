@@ -60,6 +60,6 @@ p32_forestry_management("MEA") = 20;
 
 f32_fac_req_ha(i2,"recur") = 100;
 f32_fac_req_ha(i2,"mon") = 33;
-fm_harvest_cost_ha(i2,"harv")  = 300;
+fm_harvest_cost_ha(i2)  = 300;
 
 **************************************************************************

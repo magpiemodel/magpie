@@ -15,8 +15,5 @@ sets
     / none, npi, ndc/
 
    ac_land32(ac,land32) Mapping between age class and forestry land type
-
-   kforestry(kall) Forestry products
-   / wood, woodfuel /
 ;
 *** EOF sets.gms ***

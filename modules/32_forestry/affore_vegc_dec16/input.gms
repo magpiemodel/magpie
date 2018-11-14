@@ -33,3 +33,11 @@ $ondelim
 $include "./modules/32_forestry/input/npi_ndc_aff_pol.cs3"
 $offdelim
 ;
+
+parameter fm_harvest_cost_ha(i) Harvesting cost (US Dollar 2004 per ha)
+/
+$ondelim
+$include "./modules/32_forestry/input/f32_harvestingcost.csv"
+$offdelim
+/
+;

@@ -6,10 +6,5 @@
 name,type,reason
 pm_interest, input, not used
 fm_forestry_demand, input, not used
-pcm_production_ratio_future, input, not used
-pm_rotation_reg, input, not used
-pm_rot_length, input, not used
-pm_production_ratio_ext, input, not used
-fm_harvest_cost_ha, input, not used
 pm_climate_class, input, not used
 pm_bcef, input, not used

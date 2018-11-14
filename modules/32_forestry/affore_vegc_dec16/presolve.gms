@@ -76,6 +76,7 @@ p32_carbon_density(t,j,"prot",c_pools) = m_weightedmean(pm_carbon_density_ac(t,j
 p32_carbon_density(t,j,"grow",c_pools) = m_weightedmean(pm_carbon_density_ac(t,j,ac,c_pools),p32_land(t,j,ac,"before"),(ac_land32(ac,"grow")));
 p32_carbon_density(t,j,"old",c_pools) = pm_carbon_density_ac(t,j,"acx",c_pools);
 
-
+* Fix production related parameters to 0
+pm_production_ratio_ext(i,t_ext) = 0;
 
 *** EOF presolve.gms ***
