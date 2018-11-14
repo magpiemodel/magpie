@@ -13,6 +13,7 @@ vm_dem_seed(i,kall)               Demand for seed (mio. tDM per yr)
 ;
 
 parameters
+fm_forestry_demand(t_all,i,kforestry) Forestry demand with all time steps (mio. m3 per year)
 p16_volumetric_conversion(kforestry) Volumetric Conversion parameter for timber (1)
 ;
 
