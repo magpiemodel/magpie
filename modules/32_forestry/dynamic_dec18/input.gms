@@ -35,6 +35,7 @@ $ondelim
 $include "./modules/32_forestry/input/f32_harvestingcost.csv"
 $offdelim
 /
+;
 
 table f32_aff_pol(t_all,j,pol32) npi+indc afforestation policy (Mha new forest wrt to 2010)
 $ondelim
