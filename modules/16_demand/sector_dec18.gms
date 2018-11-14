@@ -4,7 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In the sector_dec18_forestry realization, demand is calculated as the sum of
+*' @description In the sector_dec18 realization, demand is calculated as the sum of
 *' demand for all products coming from the modules [62_material],
 *' [60_bioenergy], [70_livestock], [15_food] and [17_production].
 *' It also delivers data to the modules [60_bioenergy], [21_trade], [20_processing],
@@ -12,10 +12,10 @@
 
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/16_demand/sector_dec18_forestry/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/16_demand/sector_dec18_forestry/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/16_demand/sector_dec18_forestry/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/16_demand/sector_dec18_forestry/equations.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/16_demand/sector_dec18_forestry/preloop.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/16_demand/sector_dec18_forestry/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/16_demand/sector_dec18/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/16_demand/sector_dec18/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/16_demand/sector_dec18/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/16_demand/sector_dec18/equations.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/16_demand/sector_dec18/preloop.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/16_demand/sector_dec18/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
