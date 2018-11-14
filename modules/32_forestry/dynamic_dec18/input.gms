@@ -29,11 +29,12 @@ $include "./modules/32_forestry/input/f32_fac_req_ha.csv"
 $offdelim
 ;
 
-table fm_harvest_cost_ha(i) Harvesting cost (US Dollar 2004 per ha)
+parameter fm_harvest_cost_ha(i) Harvesting cost (US Dollar 2004 per ha)
+/
 $ondelim
 $include "./modules/32_forestry/input/f32_harvestingcost.csv"
 $offdelim
-;
+/
 
 table f32_aff_pol(t_all,j,pol32) npi+indc afforestation policy (Mha new forest wrt to 2010)
 $ondelim
