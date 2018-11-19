@@ -16,8 +16,17 @@ source("config/default.cfg")
 cfg$input <- c("magpie4.0_default_sep18.tgz","isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev35_c200_690d3718e151be1b450b394c1064b1c5.tgz","private_forestry_dec18.tgz")
 cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL,"/p/projects/landuse/users/mishra/additional_data_private_forestry"=NULL),
                            getOption("magpie_repos"))
-						   
+
 cfg$output <- c("rds_report","interpolation")
+
+## Module settings
+cfg$policyregions <- "iso"
+cfg$gms$demand <- "sector_dec18"
+cfg$gms$trade <- "selfsuff_reduced_ff"
+cfg$gms$forestry  <- "dynamic_dec18"
+cfg$gms$c32_aff_policy <- "none"
+cfg$gms$natveg  <- "dynamic_dec18"
+cfg$gms$c35_ad_policy <- "none"
 
 #set defaults
 codeCheck <- TRUE
