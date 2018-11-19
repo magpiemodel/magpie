@@ -15,6 +15,6 @@
 *' @authors Isabelle Weindl, Benjamin Bodirsky, Jan Philipp Dietrich.
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%demand%" == "sector_may15" $include "./modules/16_demand/sector_may15.gms"
 $Ifi "%demand%" == "sector_dec18" $include "./modules/16_demand/sector_dec18.gms"
+$Ifi "%demand%" == "sector_may15" $include "./modules/16_demand/sector_may15.gms"
 *###################### R SECTION END (MODULETYPES) ############################

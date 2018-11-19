@@ -94,19 +94,19 @@ q32_hvarea_forestry(j2,ac_sub) ..
 
 *********************************************************
 
-q32_production_timber(i2)..
-                          sum((kforestry,cell(i2,j2)),vm_prod(j2,kforestry)) * sum(ct,f32_production_ratio(i2,ct))
-                          =e=
-                          sum((kforestry,cell(i2,j2)),sum(hvarea_timber, v32_prod(j2,hvarea_timber,kforestry)) + v32_prod_external(j2,kforestry))
+q32_production_timber..
+                          sum((kforestry,i2,cell(i2,j2)),vm_prod(j2,kforestry)) * 0.33
+                          =g=
+                          sum((kforestry,i2,cell(i2,j2)),sum(hvarea_timber, v32_prod(j2,hvarea_timber,kforestry)) + v32_prod_external(j2,kforestry))
                           ;
 
 
 ** Establishment in current time step already accounts for a certain percentage of production to be fulfilled by plantations in future.
 ** 20percent buffer and 88 percent efficiency 12 percent loss factor
 
-q32_prod_future(i2) ..          sum(kforestry2, vm_prod_future_reg_ff(i2,kforestry2)) * pcm_production_ratio_future(i2)
-                                =e=
-                                sum(cell(i2,j2), (v32_land(j2,"plant","ac0") + v32_missing_area_future(j2)) * pc32_yield_forestry_future(j2) * 0.88);
+q32_prod_future ..          sum((kforestry2,i2), vm_prod_future_reg_ff(i2,kforestry2)) * 0.33
+                                =g=
+                                sum((i2,cell(i2,j2)), (v32_land(j2,"plant","ac0") + v32_missing_area_future(j2)) * pc32_yield_forestry_future(j2) * 0.88);
 *    							+
 *    							sum(cell(i2,j2), v32_avail_reuse(j2) * pc32_yield_forestry_mature_future(j2)) * 0.80
 
