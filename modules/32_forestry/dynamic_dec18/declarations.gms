@@ -4,6 +4,7 @@ scalars
 
 parameters
  p32_carbon_density(t,j,type32,ac,c_pools)        Carbon density for ac and c_pools (tC per ha)
+ p32_carbon_density_ac(t,j,type32,ac,c_pools)     Carbon density for ac and c_pools (tC per ha)
  p32_land(t,j,type32,ac)                          Forestry land for each cell wood type and age class before and after optimization (mio. ha)
  pc32_land(j,type32,ac)                           Forestry land per forestry land type initialization of the optimization (mio. ha)
  p32_aff_pot(t,j)                                 Potential afforestation area (Mha)

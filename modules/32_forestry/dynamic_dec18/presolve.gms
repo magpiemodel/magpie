@@ -10,6 +10,10 @@ p32_protect_avail(t_alias,j) = p32_protect_avail(t_alias,j) + v32_avail_reuse.l(
 *v32_land.lo(j,"plant","xxxxxxxxxx") = p32_protect_avail(t,j);
 display p32_protect_avail;
 
+** Setting ac dependent carbon densities
+p32_carbon_density_ac(t,j,type32,ac,c_pools)  = pm_carbon_density_ac(t,j,ac,c_pools);
+** Plantation vegc is different
+p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * sum(cell(i,j),p32_forestry_management(i));
 
 ** BEGIN INDC **
 
@@ -70,9 +74,8 @@ display pc32_land;
 display v32_land.l,vm_land.lo,v32_land.up;
 
 p32_yield_forestry_ac(t,j,ac_sub) =
-      sum(cell(i,j),p32_forestry_management(i))
-      * (2)
-      * pm_carbon_density_ac(t,j,ac_sub,"vegc")
+      (2)
+      * p32_carbon_density_ac(t,j,"plant",ac,"vegc")
       * 0.85
       / sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac_sub,clcl))
       ;
