@@ -1,5 +1,8 @@
 ** Prohibiting harvesting and production of wood but not woodfuel from other land
-v32_prod.fx(j,"other","wood") = 0;
+v32_prod.fx(j,"other",kforestry) = 0;
+v32_prod.fx(j,"primforest",kforestry) = 0;
+v32_prod.fx(j,"secdforest",kforestry) = 0;
+
 *v32_hvarea_forestry.fx(j,kforestry,"ac0") = 0;
 
 ** Read exogenous rotation length
