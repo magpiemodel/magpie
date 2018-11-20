@@ -105,7 +105,7 @@ q32_production_timber(i2)..
 ** 20percent buffer and 88 percent efficiency 12 percent loss factor
 
 q32_prod_future(i2) ..          sum(kforestry2, vm_prod_future_reg_ff(i2,kforestry2)) * pcm_production_ratio_future(i2)
-                                =e=
+                                =g=
                                 sum(cell(i2,j2), (v32_land(j2,"plant","ac0") + v32_missing_area_future(j2)) * pc32_yield_forestry_future(j2) * 0.88);
 *    							+
 *    							sum(cell(i2,j2), v32_avail_reuse(j2) * pc32_yield_forestry_mature_future(j2)) * 0.80

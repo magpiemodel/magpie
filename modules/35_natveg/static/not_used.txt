@@ -9,3 +9,4 @@ pm_land_start, input,not used
 fm_harvest_cost_ha, input, not used
 pm_climate_class, input, not used
 pm_bcef, input, not used
+pcm_production_ratio_future, input, not used
