@@ -48,13 +48,6 @@ $ondelim
 $include "./modules/32_forestry/input/f32_rot_length.csv"
 $offdelim;
 
-parameter f32_production_ratio(i,t_all) percentage of supply coming from plantations (percentage)
-/
-$ondelim
-$include "./modules/32_forestry/input/f32_production_ratio.csv"
-$offdelim
-/;
-
 parameter fm_production_ratio(i,t_all) percentage of supply coming from plantations (percentage)
 /
 $ondelim
