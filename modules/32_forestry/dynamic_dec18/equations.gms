@@ -5,7 +5,7 @@
 
 *****Carbon stocks**************************************************************
  q32_carbon(j2,c_pools)  .. vm_carbon_stock(j2,"forestry",c_pools) =e=
-                        sum((type32,ac), v32_land(j2,type32,ac)*sum(ct, p32_carbon_density_ac(t,j,type32,ac,c_pools)));
+                        sum((type32,ac), v32_land(j2,type32,ac)*sum(ct, p32_carbon_density_ac(t,j2,type32,ac,c_pools)));
 
 *****C-PRICE INDUCED AFFORESTATION
 **negative emissions seen in maccs module
