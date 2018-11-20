@@ -21,8 +21,8 @@ parameters
  pc32_yield_forestry_mature_future(j)             Future yield of matured tree after rotation period (m3 per ha per yr)
  p32_protect_avail(t,j)                           Mature trees which are protected (mio. ha)
  p32_plant_ini_ac(j)                              Initialization of plantation area (mio. ha)
- pcm_production_ratio_future(i)                  Future production ratio (1)
- pm_rotation_reg(i)                              Regional rotation length of plantations translated to age class equivalent for future (1)
+ pcm_production_ratio_future(i)                   Future production ratio (1)
+ pm_rotation_reg(i)                               Regional rotation length of plantations translated to age class equivalent for future (1)
 ;
 
 positive variables
