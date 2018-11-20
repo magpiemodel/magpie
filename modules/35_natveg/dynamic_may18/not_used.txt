@@ -4,7 +4,6 @@
 # |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
-pm_production_ratio_ext, input, not used
 fm_harvest_cost_ha, input, not used
 pm_climate_class, input, not used
 pm_bcef, input, not used
