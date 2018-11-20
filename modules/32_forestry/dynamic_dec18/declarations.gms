@@ -24,6 +24,7 @@ parameters
  p32_plant_ini_ac(j)                              Initialization of plantation area (mio. ha)
  pcm_production_ratio_future(i)                  Future production ratio (1)
  pm_rotation_reg(i)                              Regional rotation length of plantations translated to age class equivalent for future (1)
+ p32_error_check                                  X (1)
 ;
 
 positive variables

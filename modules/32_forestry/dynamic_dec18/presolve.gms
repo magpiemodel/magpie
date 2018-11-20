@@ -105,5 +105,4 @@ loop(j,
 display pc32_yield_forestry_mature_future;
 
 pc32_timestep = ord(t);
-
 *** EOF presolve.gms ***

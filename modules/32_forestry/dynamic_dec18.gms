@@ -16,5 +16,6 @@ $Ifi "%phase%" == "input" $include "./modules/32_forestry/dynamic_dec18/input.gm
 $Ifi "%phase%" == "equations" $include "./modules/32_forestry/dynamic_dec18/equations.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/32_forestry/dynamic_dec18/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/32_forestry/dynamic_dec18/presolve.gms"
+$Ifi "%phase%" == "intersolve" $include "./modules/32_forestry/dynamic_dec18/intersolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/32_forestry/dynamic_dec18/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
