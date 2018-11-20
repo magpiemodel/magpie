@@ -75,7 +75,7 @@ display v32_land.l,vm_land.lo,v32_land.up;
 
 p32_yield_forestry_ac(t,j,ac_sub) =
       (2)
-      * p32_carbon_density_ac(t,j,"plant",ac,"vegc")
+      * p32_carbon_density_ac(t,j,"plant",ac_sub,"vegc")
       * 0.85
       / sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac_sub,clcl))
       ;
