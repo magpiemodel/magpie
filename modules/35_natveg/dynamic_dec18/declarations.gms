@@ -54,7 +54,7 @@ equations
  q35_hvarea_primforest(j)         Area harvested from primary forests (mio. ha)
  q35_hvarea_other(j,ac_sub)       Area harvested from other land (mio. ha)
  q35_secdforest_conversion(j)     Conversion of secondary forest (mio.ha)
- q35_production_timber(i)         Timbe production from natural vegetation (mio. USD)
+ q35_production_timber         Timbe production from natural vegetation (mio. USD)
  q35_cost_total(i)                Natveg realted production costs (mio. USD)
 ;
 
@@ -114,7 +114,7 @@ parameters
  oq35_hvarea_primforest(t,j,type)                  Area harvested from primary forests (mio. ha)
  oq35_hvarea_other(t,j,ac_sub,type)                Area harvested from other land (mio. ha)
  oq35_secdforest_conversion(t,j,type)              Conversion of secondary forest (mio.ha)
- oq35_production_timber(t,i,type)                  Timbe production from natural vegetation (mio. USD)
+ oq35_production_timber(t,type)                    Timbe production from natural vegetation (mio. USD)
  oq35_cost_total(t,i,type)                         Natveg realted production costs (mio. USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
