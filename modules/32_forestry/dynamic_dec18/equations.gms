@@ -97,7 +97,7 @@ q32_hvarea_forestry(j2,ac) ..
 q32_production_timber(i2)..
                           sum((kforestry,cell(i2,j2)),vm_prod(j2,kforestry)) * sum(ct,f32_production_ratio(i2,ct))
                           =e=
-                          sum((kforestry,cell(i2,j2)),sum(hvarea_timber, v32_prod(j2,hvarea_timber,kforestry)) + v32_prod_external(j2,kforestry))
+                          sum((kforestry,cell(i2,j2)), v32_prod(j2,"forestry",kforestry) + v32_prod_external(j2,kforestry))
                           ;
 
 
