@@ -53,10 +53,10 @@ v32_land.lo(j,"plant","ac0") = 0;
 v32_land.up(j,"plant","ac0") = Inf;
 
 *fix land with rotation length
-v32_land.fx(j,"plant",ac_sub)$protect32(j,ac_sub) = pc32_land(j,"plant",ac_sub);
+v32_land.fx(j,"plant",ac)$protect32(j,ac) = pc32_land(j,"plant",ac);
 
 *set upper bound for plantations after rotation length
-v32_land.up(j,"plant",ac_sub)$harvest32(j,ac_sub) = pc32_land(j,"plant",ac_sub);
+v32_land.up(j,"plant",ac)$harvest32(j,ac) = pc32_land(j,"plant",ac);
 
 *fix C-price induced afforestation and indc to zero (for testing)
 v32_land.fx(j,"aff",ac) = 0;
@@ -73,11 +73,11 @@ v32_land.fx(j,"indc",ac) = 0;
 display pc32_land;
 display v32_land.l,vm_land.lo,v32_land.up;
 
-p32_yield_forestry_ac(t,j,ac_sub) =
+p32_yield_forestry_ac(t,j,ac) =
       (2)
-      * p32_carbon_density_ac(t,j,"plant",ac_sub,"vegc")
+      * p32_carbon_density_ac(t,j,"plant",ac,"vegc")
       * 0.85
-      / sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac_sub,clcl))
+      / sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac,clcl))
       ;
 
 ** Future demand relevant in current time step depending on rotation length
@@ -85,7 +85,7 @@ p32_yield_forestry_ac(t,j,ac_sub) =
 pm_rotation_reg(i) = ord(t) + ceil(p32_rot_length(i)/5) + card(t_past_ff);
 
 *pc32_yield_forestry_future(j) = sum(ac$(ac.off = p32_rotation_cellular(j)+1), p32_yield_forestry_ac(t,j,ac));
-pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular(j)), p32_yield_forestry_ac(t,j,ac_sub));
+pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular(j)), p32_yield_forestry_ac(t,j,ac));
 display pc32_yield_forestry_future;
 
 ** Calculating future yield from already mature plantations.
@@ -94,9 +94,9 @@ display pc32_yield_forestry_future;
 ** in thirty years from now will be considered to have a yield of forest belonging to ac80.
 
 loop(j,
-  loop (ac_sub2,
-  if(p32_rotation_cellular(j)+ord(ac_sub2) <= card(ac),
-  pc32_yield_forestry_mature_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular(j)+ord(ac_sub2)), p32_yield_forestry_ac(t,j,ac_sub));
+  loop (ac2,
+  if(p32_rotation_cellular(j)+ord(ac2) <= card(ac),
+  pc32_yield_forestry_mature_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular(j)+ord(ac2)), p32_yield_forestry_ac(t,j,ac));
   else
   pc32_yield_forestry_mature_future(j) = p32_yield_forestry_ac(t,j,"acx");
   );
