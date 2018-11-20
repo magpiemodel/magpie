@@ -55,6 +55,13 @@ $include "./modules/32_forestry/input/f32_production_ratio.csv"
 $offdelim
 /;
 
+parameter fm_production_ratio(i,t_all) percentage of supply coming from plantations (percentage)
+/
+$ondelim
+$include "./modules/32_forestry/input/f32_production_ratio.csv"
+$offdelim
+/;
+
 parameter f32_forestry_management(i) upscaling factor for forestry plantations
 /
 $ondelim
