@@ -31,7 +31,7 @@ q32_cost_total(i2) .. vm_cost_fore(i2) =e=
                      v32_cost_harvest(i2)
 								   + v32_cost_recur(i2)
 								   + v32_cost_establishment(i2)
-								   + sum((cell(i2,j2),kforestry), v32_prod_external(j2,kforestry) * 99999)
+								   + sum(kforestry, v32_prod_external(i2,kforestry) * 99999)
 								   ;
 $ontext
 re-establishment costs in t0
@@ -96,8 +96,8 @@ q32_hvarea_forestry(j2,ac) ..
 
 q32_production_timber(i2)..
                           sum((kforestry,cell(i2,j2)),vm_prod(j2,kforestry)) * sum(ct,fm_production_ratio(i2,ct))
-                          =e=
-                          sum((kforestry,cell(i2,j2)), v32_prod(j2,kforestry) + v32_prod_external(j2,kforestry))
+                          =g=
+                          sum((kforestry,cell(i2,j2)), v32_prod(j2,kforestry)) + sum(kforestry,v32_prod_external(i2,kforestry))
                           ;
 
 
@@ -105,7 +105,7 @@ q32_production_timber(i2)..
 ** 20percent buffer and 88 percent efficiency 12 percent loss factor
 
 q32_prod_future(i2) ..          sum(kforestry2, vm_prod_future_reg_ff(i2,kforestry2)) * pcm_production_ratio_future(i2)
-                                =g=
+                                =e=
                                 sum(cell(i2,j2), (v32_land(j2,"plant","ac0") + v32_missing_area_future(j2)) * pc32_yield_forestry_future(j2) * 0.88);
 *    							+
 *    							sum(cell(i2,j2), v32_avail_reuse(j2) * pc32_yield_forestry_mature_future(j2)) * 0.80

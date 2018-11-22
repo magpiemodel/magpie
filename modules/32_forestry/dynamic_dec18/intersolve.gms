@@ -1,4 +1,4 @@
-p32_error_check = sum((j,kforestry),v32_prod_external.l(j,kforestry));
+p32_error_check = sum((i,kforestry),v32_prod_external.l(i,kforestry));
 
 display "Balance overflow detected:";
 display p32_error_check;

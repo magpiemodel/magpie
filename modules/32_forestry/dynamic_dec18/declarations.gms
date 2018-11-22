@@ -37,7 +37,7 @@ positive variables
  v32_cost_recur(i)                                Recurring forest management costs (USD per ha)
  v32_hvarea_forestry(j,kforestry,ac)          Area harvested for timber production (mio. ha)
 
- v32_prod_external(j,kforestry)                   Production balance flow from heaven (mio. m3)
+ v32_prod_external(i,kforestry)                   Production balance flow from heaven (mio. m3)
 
  v32_land_expansion(j,type32,ac)                  Land expansion (mio. ha)
  v32_land_reduction(j,type32,ac)                  land reduction (mio. ha)
@@ -79,7 +79,7 @@ parameters
  ov32_cost_harvest(t,i,type)                 Cost of timber harvesting (USD per ha)
  ov32_cost_recur(t,i,type)                   Recurring forest management costs (USD per ha)
  ov32_hvarea_forestry(t,j,kforestry,ac,type) Area harvested for timber production (mio. ha)
- ov32_prod_external(t,j,kforestry,type)      Production balance flow from heaven (mio. m3)
+ ov32_prod_external(t,i,kforestry,type)      Production balance flow from heaven (mio. m3)
  ov32_land_expansion(t,j,type32,ac,type)     Land expansion (mio. ha)
  ov32_land_reduction(t,j,type32,ac,type)     land reduction (mio. ha)
  ov32_avail_reuse(t,j,type)                  Defunct (1)

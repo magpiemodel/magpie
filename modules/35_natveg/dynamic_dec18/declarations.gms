@@ -72,7 +72,7 @@ positive variables
   v35_hvarea_other(j,kforestry,ac_sub)        Harvested area of other land (mio. ha)
   v35_hvarea_primforest(j,kforestry)          Harvested area of primary forest (mio. ha)
   v35_prod(j,land_natveg,kforestry)          Timber production coming from natveg (mio. m3)
-  v35_prod_external(j,kforestry)            Production balanceflow (mio. m3)
+  v35_prod_external(i,kforestry)            Production balanceflow (mio. m3)
   vm_cost_natveg(i)                           Regional natveg timber production costs (mio. USD)
 ;
 
@@ -90,7 +90,7 @@ parameters
  ov35_hvarea_other(t,j,kforestry,ac_sub,type)      Harvested area of other land (mio. ha)
  ov35_hvarea_primforest(t,j,kforestry,type)        Harvested area of primary forest (mio. ha)
  ov35_prod(t,j,land_natveg,kforestry,type)         Timber production coming from natveg (mio. m3)
- ov35_prod_external(t,j,kforestry,type)            Production balanceflow (mio. m3)
+ ov35_prod_external(t,i,kforestry,type)            Production balanceflow (mio. m3)
  ov_cost_natveg(t,i,type)                          Regional natveg timber production costs (mio. USD)
  oq35_land_secdforest(t,j,type)                    Secdforest land pool calculation (mio. ha)
  oq35_land_other(t,j,type)                         Other land pool calculation (mio. ha)
