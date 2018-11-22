@@ -147,6 +147,6 @@ q35_secdforest_conversion(j2)..
 ********** NatVeg production of timber
 q35_production_timber(i2)..
                           sum((kforestry,cell(i2,j2)),vm_prod(j2,kforestry)) * sum(ct,1-fm_production_ratio(i2,ct))
-                          =l=
+                          =e=
                           sum((kforestry,land_natveg,cell(i2,j2)), v35_prod(j2,land_natveg,kforestry) + v35_prod_external(j2,kforestry))
                           ;
