@@ -12,3 +12,4 @@ pm_production_ratio_ext, input, not used
 vm_prod_forestry, var, not used
 vm_prod_natveg, var, not used
 fm_production_ratio, input, not used
+vm_prod, var, not used
