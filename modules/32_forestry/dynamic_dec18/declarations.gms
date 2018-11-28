@@ -45,6 +45,7 @@ positive variables
 
  v32_cost_establishment(i)                        Cost of establishment calculated at the current time step (mio. USD)
  v32_missing_area_future(j)                       Defunct (1)
+ vm_prod_forestry(j,kforestry)	                  xx
 ;
 
 equations
@@ -85,6 +86,7 @@ parameters
  ov32_avail_reuse(t,j,type)                      Defunct (1)
  ov32_cost_establishment(t,i,type)               Cost of establishment calculated at the current time step (mio. USD)
  ov32_missing_area_future(t,j,type)              Defunct (1)
+ ov_prod_forestry(t,j,kforestry,type)            xx
  oq32_cost_total(t,i,type)                       total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                             land constraint (mio. ha)
  oq32_cdr_aff(t,j,co2_forestry,type)             calculation of CDR from afforestation

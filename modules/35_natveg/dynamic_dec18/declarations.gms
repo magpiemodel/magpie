@@ -74,6 +74,7 @@ positive variables
   v35_prod(j,land_natveg,kforestry)          Timber production coming from natveg (mio. m3)
   v35_prod_external(i,kforestry)            Production balanceflow (mio. m3)
   vm_cost_natveg(i)                           Regional natveg timber production costs (mio. USD)
+  vm_prod_natveg(j,kforestry)                  xx
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -92,6 +93,7 @@ parameters
  ov35_prod(t,j,land_natveg,kforestry,type)         Timber production coming from natveg (mio. m3)
  ov35_prod_external(t,i,kforestry,type)            Production balanceflow (mio. m3)
  ov_cost_natveg(t,i,type)                          Regional natveg timber production costs (mio. USD)
+ ov_prod_natveg(t,j,kforestry,type)                xx
  oq35_land_secdforest(t,j,type)                    Secdforest land pool calculation (mio. ha)
  oq35_land_other(t,j,type)                         Other land pool calculation (mio. ha)
  oq35_carbon_primforest(t,j,c_pools,type)          Primforest carbon stock calculation (mio tC)
