@@ -7,3 +7,6 @@ name,type,reason
 fm_forestry_demand, input, not used
 pm_production_ratio_ext, not used
 pm_rot_length, input, not used
+vm_prod_forestry, var, not used
+vm_prod_natveg, var, not used
+fm_production_ratio, input, not used

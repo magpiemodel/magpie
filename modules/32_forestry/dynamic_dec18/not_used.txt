@@ -6,3 +6,4 @@
 name,type,reason
 vm_supply, variable_interface, dealt by other module
 fm_carbon_density, input, not used
+vm_prod, variable_interface, dealt by other module

@@ -69,28 +69,28 @@ q32_cost_harvest(i2)..
                     v32_cost_harvest(i2)
                     =e=
                     sum((cell(i2,j2), kforestry),
-                    sum(ac, v32_hvarea_forestry(j2,kforestry,ac))) * fm_harvest_cost_ha(i2)
+                    sum(ac_sub, v32_hvarea_forestry(j2,kforestry,ac_sub))) * fm_harvest_cost_ha(i2)
                     ;
 
 ***PRODUCTION
 q32_prod_forestry_wood(j2)..
                           v32_prod(j2,"wood")
                           =e=
-                         sum(ac, v32_hvarea_forestry(j2,"wood",ac) * sum(ct, p32_yield_forestry_ac(ct,j2,ac)))* 0.88;
+                         sum(ac_sub, v32_hvarea_forestry(j2,"wood",ac_sub) * sum(ct, p32_yield_forestry_ac(ct,j2,ac_sub)))* 0.88;
 
 q32_prod_forestry_woodfuel(j2)..
                           v32_prod(j2,"woodfuel")
                           =e=
-                         sum(ac, v32_hvarea_forestry(j2,"wood",ac)      * sum(ct, p32_yield_forestry_ac(ct,j2,ac)))* (1-0.88)
-						            +sum(ac, v32_hvarea_forestry(j2,"woodfuel",ac)  * sum(ct, p32_yield_forestry_ac(ct,j2,ac)));
+                         sum(ac_sub, v32_hvarea_forestry(j2,"wood",ac_sub)      * sum(ct, p32_yield_forestry_ac(ct,j2,ac_sub)))* (1-0.88)
+						            +sum(ac_sub, v32_hvarea_forestry(j2,"woodfuel",ac_sub)  * sum(ct, p32_yield_forestry_ac(ct,j2,ac_sub)));
 
 ***AREA
 
 **harvesting area ((0.6*0.975**(pc32_timestep-m_timdestep_length/2)))
-q32_hvarea_forestry(j2,ac) ..
-                          sum(kforestry, v32_hvarea_forestry(j2,kforestry,ac))
+q32_hvarea_forestry(j2,ac_sub) ..
+                          sum(kforestry, v32_hvarea_forestry(j2,kforestry,ac_sub))
                           =e=
-                          (pc32_land(j2,"plant",ac) - v32_land(j2,"plant",ac));
+                          (pc32_land(j2,"plant",ac_sub) - v32_land(j2,"plant",ac_sub));
 
 *********************************************************
 

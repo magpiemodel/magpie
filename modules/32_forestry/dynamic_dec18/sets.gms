@@ -31,5 +31,6 @@ sets
 ;
 
 alias(ac,ac2);
+alias(ac_sub,ac_sub2);
 alias(t,t_alias);
 *** EOF sets.gms ***

@@ -14,11 +14,11 @@ display p32_rotation_cellular;
 *ac_land32(j,ac,"indc") = yes$(ord(ac) > 1);
 
 *' @stop
-protect32(j,ac) = no;
-protect32(j,ac) = yes$(ord(ac) < p32_rotation_cellular(j));
+protect32(j,ac_sub) = no;
+protect32(j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular(j));
 
-harvest32(j,ac) = no;
-harvest32(j,ac) = yes$(ord(ac) >= p32_rotation_cellular(j));
+harvest32(j,ac_sub) = no;
+harvest32(j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular(j));
 
 *harvest32(j,ac) = yes$(ord(ac) >= sum(cell(i,j), ceil(p32_rot_length(i)/5)));
 
@@ -35,11 +35,11 @@ p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
 p32_land(t,j,type32,ac) = 0;
 
 ** divide initial forestry area by number of age classes within protect32
-** since protect32 is TRUE for ord(ac) < p32_rotation_cellular(j) there is one additional junk which is assigned to ac0
+** since protect32 is TRUE for ord(ac_sub) < p32_rotation_cellular(j) there is one additional junk which is assigned to ac0
 p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular(j);
 *p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/sum(cell(i,j), ceil(f32_rot_length(i,"init")/5));
 
-p32_land("y1995",j,"plant",ac)$(protect32(j,ac)) = p32_plant_ini_ac(j);
+p32_land("y1995",j,"plant",ac_sub)$(protect32(j,ac_sub)) = p32_plant_ini_ac(j);
 p32_land("y1995",j,"plant","ac0") = p32_plant_ini_ac(j);
 
 ** initial shifting of age classes
