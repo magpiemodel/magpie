@@ -26,9 +26,9 @@ cfg$policyregions <- "iso"
 cfg$gms$demand <- "sector_dec18"
 cfg$gms$trade <- "selfsuff_reduced_ff"
 cfg$gms$forestry  <- "dynamic_dec18"
-cfg$gms$c32_aff_policy <- "none"
+#cfg$gms$c32_aff_policy <- "none"
 cfg$gms$natveg  <- "dynamic_dec18"
-cfg$gms$c35_ad_policy <- "none"
+#cfg$gms$c35_ad_policy <- "none"
 
 #set defaults
 codeCheck <- TRUE

@@ -18,3 +18,6 @@ fm_forestry_demand(t_all,i,"woodfuel") =
 					 					m_yeardiff(t_all)
                   * f16_forestry_demand_iso(t_all,iso,"woodfuel")
 				 					* 1000/p16_volumetric_conversion("woodfuel")) * 0.50;
+
+* Setting MEA demand to 10% of calculated demand for testing purposes
+fm_forestry_demand(t_all,"MEA",kforestry) = fm_forestry_demand(t_all,"MEA",kforestry) * 0.10 ;
