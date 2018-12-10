@@ -14,6 +14,6 @@ $offdelim;
 parameter f45_bcef(ac,clcl) BCEF by Koeppen-Geiger classification mapped to age-classes (-)
 /
 $ondelim
-$include "./modules/45_climate/static/input/45_bcef_kg_ac.csv"
+$include "./modules/45_climate/static/input/45_bcef_kg_ac_smoothed.csv"
 $offdelim
 /;
