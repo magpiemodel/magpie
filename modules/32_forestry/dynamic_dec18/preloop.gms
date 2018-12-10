@@ -2,6 +2,10 @@
 
 ** Read exogenous rotation length
 p32_rot_length(i) = f32_rot_length(i,"%c32_rot_length%");
+**********************************************
+p32_rot_length("MEA") = 60;
+p32_rot_length("REF") = 20;
+**********************************************
 pm_rot_length(i) = p32_rot_length(i);
 ** rotation length in 5 year time steps
 p32_rotation_cellular(j) = sum(cell(i,j), ceil(p32_rot_length(i)/5));
