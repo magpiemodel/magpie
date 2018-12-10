@@ -32,7 +32,7 @@ p32_protect_avail(t,j) = 0;
 v32_avail_reuse.l(j) = 0;
 
 ** Exoenously determine timber demand is fed into interface vm_prod_reg which is used to equate demand with supply.
-vm_prod_reg.l(i,kforestry) = fm_forestry_demand("y1995",i,kforestry);
+*vm_prod_reg.l(i,kforestry) = fm_forestry_demand("y1995",i,kforestry);
 
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
