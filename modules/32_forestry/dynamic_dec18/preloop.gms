@@ -4,7 +4,7 @@
 p32_rot_length(i) = f32_rot_length(i,"%c32_rot_length%");
 **********************************************
 p32_rot_length("MEA") = 60;
-p32_rot_length("REF") = 20;
+p32_rot_length("REF") = 50;
 **********************************************
 pm_rot_length(i) = p32_rot_length(i);
 ** rotation length in 5 year time steps
@@ -56,7 +56,7 @@ pm_production_ratio_ext(i,t_ext) = fm_production_ratio(i,"y2150");
 pm_production_ratio_ext(i,t_all) = fm_production_ratio(i,t_all);
 
 p32_forestry_management(i) = f32_forestry_management(i);
-*p32_forestry_management("IND") = 10;
+p32_forestry_management("IND") = 6;
 *p32_forestry_management("CHA") = 7;
 *p32_forestry_management("MEA") = 200;
 
