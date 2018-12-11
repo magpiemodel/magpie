@@ -72,15 +72,15 @@
 ** FUTURE TRADE EQUATIONS (Analogous to trade module)
 
 q21_prod_timber(j2,kforestry) ..
-vm_prod(j2,kforestry) =e= vm_prod_forestry(j2,kforestry) + vm_prod_natveg(j2,kforestry);
+vm_prod(j2,kforestry) =e= vm_prod_forestry(j2,kforestry) + vm_prod_natveg(j2,kforestry) + sum(ct,f21_trade_balanceflow(ct,kforestry));
 
 q21_trade_forestry(kforestry)..
-  sum(j2 ,vm_prod_forestry(j2,kforestry)) =g=
-  sum((i2,ct), vm_supply(i2,kforestry) * fm_production_ratio(i2,ct)) + sum(ct,f21_trade_balanceflow(ct,kforestry));
+  sum(j2 ,vm_prod_forestry(j2,kforestry)) =e=
+  sum((i2,ct), vm_supply(i2,kforestry) * fm_production_ratio(i2,ct));
 
 q21_trade_natveg(kforestry)..
-  sum(j2 ,vm_prod_natveg(j2,kforestry)) =g=
-  sum((i2,ct), vm_supply(i2,kforestry) * (1-fm_production_ratio(i2,ct))) + sum(ct,f21_trade_balanceflow(ct,kforestry));
+  sum(j2 ,vm_prod_natveg(j2,kforestry)) =e=
+  sum((i2,ct), vm_supply(i2,kforestry) * (1-fm_production_ratio(i2,ct)));
 
 q21_trade_reg_ff(i2,kforestry2)..
   vm_prod_future_reg_ff(i2,kforestry2)
