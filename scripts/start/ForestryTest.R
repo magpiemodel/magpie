@@ -22,7 +22,7 @@ cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=
 cfg$output <- c("rds_report","interpolation")
 
 ## Module settings
-cfg$policyregions <- "iso"
+#cfg$policyregions <- "iso"
 cfg$gms$demand <- "sector_dec18"
 cfg$gms$trade <- "selfsuff_reduced_ff"
 cfg$gms$forestry  <- "dynamic_dec18"

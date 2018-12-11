@@ -39,7 +39,7 @@ p32_land(t,j,type32,ac)$(ord(ac) > s32_shift) = p32_land(t-1,j,type32,ac-s32_shi
 p32_land(t,j,type32,"acx") = p32_land(t,j,type32,"acx") + sum(ac$(ord(ac) > card(ac)-s32_shift), p32_land(t-1,j,type32,ac));
 );
 *should not be necessary. Just to be on the save side
-*p32_land(t,j,type32,"ac0") = 0;
+p32_land(t,j,type32,"ac0") = 0;
 
 *calculate v32_land.l
 v32_land.l(j,type32,ac) = p32_land(t,j,type32,ac);
@@ -59,16 +59,16 @@ v32_land.fx(j,"plant",ac_sub)$protect32(j,ac_sub) = pc32_land(j,"plant",ac_sub);
 v32_land.up(j,"plant",ac_sub)$harvest32(j,ac_sub) = pc32_land(j,"plant",ac_sub);
 
 *fix C-price induced afforestation and indc to zero (for testing)
-v32_land.fx(j,"aff",ac) = 0;
-v32_land.fx(j,"indc",ac) = 0;
+*v32_land.fx(j,"aff",ac) = 0;
+*v32_land.fx(j,"indc",ac) = 0;
 
 **C-price induced afforestation
 *boundaries afforestation mask (albedo)
-*v32_land.lo(j,"aff","new") = 0;
-*v32_land.up(j,"aff","new") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
+*v32_land.lo(j,"aff","ac0") = 0;
+*v32_land.up(j,"aff","ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
 *no afforestation if carbon density <= 20 tc/ha
-*v32_land.fx(j,"aff","new")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
-*m_boundfix(v32_land,(j,"aff","new"),l,10e-5);
+*v32_land.fx(j,"aff","ac0")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
+*m_boundfix(v32_land,(j,"aff","ac0"),l,10e-5);
 
 display pc32_land;
 display v32_land.l,vm_land.lo,v32_land.up;
