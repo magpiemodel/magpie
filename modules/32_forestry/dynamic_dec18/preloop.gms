@@ -2,6 +2,10 @@
 
 ** Read exogenous rotation length
 p32_rot_length(i) = f32_rot_length(i,"%c32_rot_length%");
+**********************************************
+p32_rot_length("MEA") = 60;
+p32_rot_length("REF") = 20;
+**********************************************
 pm_rot_length(i) = p32_rot_length(i);
 ** rotation length in 5 year time steps
 p32_rotation_cellular(j) = sum(cell(i,j), ceil(p32_rot_length(i)/5));
@@ -28,7 +32,7 @@ p32_protect_avail(t,j) = 0;
 v32_avail_reuse.l(j) = 0;
 
 ** Exoenously determine timber demand is fed into interface vm_prod_reg which is used to equate demand with supply.
-vm_prod_reg.l(i,kforestry) = fm_forestry_demand("y1995",i,kforestry);
+*vm_prod_reg.l(i,kforestry) = fm_forestry_demand("y1995",i,kforestry);
 
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
@@ -51,13 +55,13 @@ p32_land("y1995",j,"plant","ac0") = 0;
 pm_production_ratio_ext(i,t_ext) = fm_production_ratio(i,"y2150");
 pm_production_ratio_ext(i,t_all) = fm_production_ratio(i,t_all);
 
-p32_forestry_management(i) = f32_forestry_management(i)+1;
+p32_forestry_management(i) = f32_forestry_management(i);
 *p32_forestry_management("IND") = 10;
 *p32_forestry_management("CHA") = 7;
 *p32_forestry_management("MEA") = 200;
 
 f32_fac_req_ha(i2,"recur") = 100;
 f32_fac_req_ha(i2,"mon") = 33;
-fm_harvest_cost_ha(i2)  = 300;
+fm_harvest_cost_ha(i2)  = 3000;
 
 **************************************************************************
