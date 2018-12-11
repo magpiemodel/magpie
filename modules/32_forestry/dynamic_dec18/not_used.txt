@@ -7,4 +7,5 @@ name,type,reason
 vm_supply, variable_interface, dealt by other module
 vm_prod, variable_interface, dealt by other module
 fm_forestry_demand, input, not used
+fm_carbon_density, input, not used
 vm_prod_reg, interface, dealt elsewhere
