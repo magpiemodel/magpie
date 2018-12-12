@@ -94,7 +94,7 @@ q32_hvarea_forestry(j2,ac_sub) ..
 
 ** Set minimum harvest area
 q32_hvarea_forestry_min(i2) ..
-                        sum((cell(i2,j2),ac_sub,kforestry),v32_hvarea_forestry(j2,kforestry,ac_sub)) =g= 0.001 ;
+                        sum((cell(i2,j2),ac_sub,kforestry),v32_hvarea_forestry(j2,kforestry,ac_sub)) =g= 0.01 ;
 
 *********************************************************
 
