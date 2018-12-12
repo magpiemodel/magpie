@@ -17,7 +17,7 @@ $macro m_growth_vegc(S,A,k,m,ac) S + (A-S)*(1-exp(-k*(ac*5)))**m;
 
 $macro m_growth_litc_soilc(start,end,ac) (start + (end - start) * 1/20 * ac*5)$(ac <= 20/5) + end$(ac > 20/5);
 
-$macro m_growing_stock(carbonstock) carbonstock*(0.674*exp(-0.0062*carbonstock)+0.2629);
+$macro m_growing_stock(carbonstock) 2*carbonstock*(0.674*exp(-0.0062*carbonstock)+0.2629);
 
 * annuity factor (annuity) for converting the present value (P) of an investment to a repeating annual payment (A): A = P/annuity
 * ordinary annuity: cash flow at the end of the period (currently only used for carbon emissions costs as they can become negative (~reward) in case of afforestation)
