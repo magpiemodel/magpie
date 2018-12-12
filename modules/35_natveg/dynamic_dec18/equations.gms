@@ -137,6 +137,10 @@ q35_hvarea_other(j2,ac_sub)..
                           =l=
                           (pc35_other(j2,ac_sub)  - v35_other(j2,ac_sub));
 
+q35_hvarea_secdforest_min(i2) ..  sum((cell(i2,j2),kforestry,ac_sub),v35_hvarea_secdforest(j2,kforestry,ac_sub)) =g= 0.01 ;
+q35_hvarea_primforest_min(i2) ..  sum((cell(i2,j2),kforestry),v35_hvarea_primforest(j2,kforestry)) =g= 0.01 ;
+q35_hvarea_other_min(i2)      ..  sum((cell(i2,j2),kforestry,ac_sub),v35_hvarea_other(j2,kforestry,ac_sub)) =g= 0.01 ;
+
 **--------------------------------------------------------------------
 q35_secdforest_conversion(j2)..
                           v35_secdforest(j2,"ac0")
