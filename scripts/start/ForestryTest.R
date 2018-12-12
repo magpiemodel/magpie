@@ -49,6 +49,6 @@ for (rl in rl_all) {
 	t <- gsub(".*_", "", rl)
 	t <- gsub("rl","",t)
 	cfg$gms$c32_rot_length <- rl
-	cfg$title<- paste0(t,"_dec18_",gsub('([[:punct:]])|\\s+','_',date())) #Use the above naming when using two policyScen or using RecCost switch
+	cfg$title<- paste0(t,"_",format(Sys.time(), format="%Y%m%d"),"_",format(Sys.time(), format="%H%M"))
 	start_run(cfg=cfg,codeCheck=codeCheck)
 }
