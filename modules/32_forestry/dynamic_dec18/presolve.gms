@@ -73,17 +73,15 @@ v32_land.up(j,"plant",ac_sub)$harvest32(j,ac_sub) = pc32_land(j,"plant",ac_sub);
 display pc32_land;
 display v32_land.l,vm_land.lo,v32_land.up;
 
-$ontext
 p32_yield_forestry_ac(t,j,ac_sub) =
       (2)
       * p32_carbon_density_ac(t,j,"plant",ac_sub,"vegc")
       * 0.85
-      / sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac_sub,clcl))
+      * sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac_sub,clcl))
       ;
-$offtext
 
 *p32_yield_forestry_ac(t,j,ac_sub) = m_growing_stock(pm_carbon_density_ac(t,j,ac_sub,"vegc") * sum(cell(i,j),p32_forestry_management(i)));
-p32_yield_forestry_ac(t,j,ac_sub) = m_growing_stock(p32_carbon_density_ac(t,j,"plant",ac_sub,"vegc"));
+*p32_yield_forestry_ac(t,j,ac_sub) = m_growing_stock(p32_carbon_density_ac(t,j,"plant",ac_sub,"vegc"));
 
 ** Future demand relevant in current time step depending on rotation length
 ***** Card is used here to exclude y1965 to y1995 when calculating rotation length calculations for past
