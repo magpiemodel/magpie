@@ -19,9 +19,12 @@ equations
      q20_processing_aggregation_nocereals(i,kpr)        Connecting processing activity to processing flows (mio. tDM per yr)
      q20_processing_aggregation_cereals(i,kcereals20)   Connecting processing activity to food use for milling (mio. tDM per yr)
      q20_processing_aggregation_cotton(i)               Connecting processing activity to production for cotton ginning (mio. tDM per yr)
-     q20_processing_substitution_oils(i)                Substitution of branoils by other oils (mio. tDM per yr)
-     q20_processing_substitution_brans(i)               Substitution of brans by cereals (mio. tDM per yr)
+     q20_processing_substitution_oils(i)                Substitution of oils by other oils (mio. tDM per yr)
+     q20_processing_substitution_brans(i)               Substitution of brans by cereals (mio. tNr per yr)
+     q20_processing_substitution_sugar(i)               Substitution of molasses by sugar (mio. tDM per yr)
+     q20_processing_substitution_protein(i)             Substitution of protein products by other protein products (mio. tNr per yr)
      q20_processing_costs(i)                            Processing costs (mio. USD05MER per yr)
+     q20_substitution_utility_loss(i2)                  Utility loss when one product has to be substituted by another (mio. t Nr per year)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -35,8 +38,10 @@ parameters
  oq20_processing_aggregation_nocereals(t,i,kpr,type)      Connecting processing activity to processing flows (mio. tDM per yr)
  oq20_processing_aggregation_cereals(t,i,kcereals20,type) Connecting processing activity to food use for milling (mio. tDM per yr)
  oq20_processing_aggregation_cotton(t,i,type)             Connecting processing activity to production for cotton ginning (mio. tDM per yr)
- oq20_processing_substitution_oils(t,i,type)              Substitution of branoils by other oils (mio. tDM per yr)
- oq20_processing_substitution_brans(t,i,type)             Substitution of brans by cereals (mio. tDM per yr)
+ oq20_processing_substitution_oils(t,i,type)              Substitution of oils by other oils (mio. tDM per yr)
+ oq20_processing_substitution_brans(t,i,type)             Substitution of brans by cereals (mio. tNr per yr)
+ oq20_processing_substitution_sugar(t,i,type)             Substitution of molasses by sugar (mio. tDM per yr)
+ oq20_processing_substitution_protein(t,i,type)           Substitution of protein products by other protein products (mio. tNr per yr)
  oq20_processing_costs(t,i,type)                          Processing costs (mio. USD05MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

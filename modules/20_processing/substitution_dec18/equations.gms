@@ -60,28 +60,31 @@ q20_processing(i2,kpr,ksd) ..
          - v20_secondary_substitutes(i2,ksd,kpr)
          + vm_secondary_overproduction(i2,ksd,kpr);
 
-*'The fifth equation below replaces the couple products bran oil and germ oil by other oils.
-
+*' Oils from one crop can be substituted by different types of oils.
 q20_processing_substitution_oils(i2) ..
-v20_dem_processing(i2,"substitutes","oils") =g=
- sum((kpr), v20_secondary_substitutes(i2,"oils",kpr) );
+  v20_dem_processing(i2,"substitutes","oils") =g=
+  sum((kpr), v20_secondary_substitutes(i2,"oils",kpr) );
 
-q20_processing_substitution_oilcakes(i2) ..
- v20_dem_processing(i2,"substitutes","oilcakes") =g=
-  sum((kpr), v20_secondary_substitutes(i2,"oilcakes",kpr) );
-
-q20_processing_substitution_oilcakes(i2) ..
+*' Molasses can be substituted by sugar,
+q20_processing_substitution_sugar(i2) ..
    v20_dem_processing(i2,"substitutes","sugar") =g=
     sum((kpr), v20_secondary_substitutes(i2,"molasses",kpr) );
 
-q20_processing_substitution_oilcakes(i2) ..
-    v20_dem_processing(i2,"substitutes","oilcakes")
-     * fm_attributes("nr","oilcakes")) =g=
-    sum((kpr), v20_secondary_substitutes(i2,"distillers_grain",kpr)
-    * fm_attributes("nr",kpr));
+*' Different types of primary oilcrops or oilcakes from different origins
+*' as well as distillers grains can be substituted for oilcakes and distillers
+*' grains based on their protein content.
 
-*'
-*' The sixth equation below replaces brans by cereals of same protein value.
+q20_processing_substitution_protein(i2) ..
+    sum(oilcrops,
+      v20_dem_processing(i2,"substitutes",oilcake_substitutes20)
+      * fm_attributes("nr",oilcrops)
+    ) =g=
+    sum((kpr),
+      v20_secondary_substitutes(i2,"distillers_grain",kpr)
+      + v20_secondary_substitutes(i2,"oilcakes",kpr) )
+      * fm_attributes("nr",kpr));
+
+*' Brans can be substituted by cereals of the same protein value.
 
 q20_processing_substitution_brans(i2) ..
    sum(kcereals20, v20_dem_processing(i2,"substitutes",kcereals20)
@@ -100,10 +103,33 @@ q20_processing_substitution_brans(i2) ..
 *' and extrapolated from the related literature (e.g. @adanacioglu_profitability_2011, @pikaar_decoupling_2018, @valco_thecost_2016)
 *' complemented with best educated guess by the module authors.
 
+
+
 q20_processing_costs(i2) ..
- vm_cost_processing(i2)=e=
+ vm_cost_processing(i2) =e=
 sum((ksd,processing20,kpr), v20_dem_processing(i2,processing20,kpr)
          *sum(ct,f20_processing_conversion_factors(ct,processing20,ksd,kpr))
-         *f20_processing_unitcosts(ksd,kpr));
+         * (
+            f20_processing_unitcosts(ksd,kpr)
+         );
 
-         add substitution costs
+*' Finally, we assume that any substitution of one product by another,
+*' diverging from our initial demand estimates, comes at a loss of utility.
+*' We assume a loss of utility in the magnitude of 200 USD to strongly
+*' disincentivize substitution.
+*' Moreover, to account for heterogeneity of different types of oil which
+*' are traded based on the assumption of homogeneity, we include a cost term
+*' for quality differences which make low-quality oils like palm oil more
+*' expensive and high quality oils cheaper. The magnitude of the quality
+*' adjustment is based on current price differences between different 
+*' types of oils, standardized on the price of soybean oil.
+
+q20_substitution_utility_loss(i2) ..
+      vm_processing_substitution_cost(i2) =e=
+      sum(kpr,
+        v20_dem_processing(i2,"substitutes",kpr)
+        * 200
+      ) +
+      sum((ksd,processing20,kpr), v20_dem_processing(i2,processing20,kpr)
+        *sum(ct,f20_processing_conversion_factors(ct,processing20,ksd,kpr))
+        * f20_quality_adjustment(ksd,kpr));

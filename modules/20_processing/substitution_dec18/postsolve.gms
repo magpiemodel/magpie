@@ -18,6 +18,8 @@
  oq20_processing_aggregation_cotton(t,i,"marginal")             = q20_processing_aggregation_cotton.m(i);
  oq20_processing_substitution_oils(t,i,"marginal")              = q20_processing_substitution_oils.m(i);
  oq20_processing_substitution_brans(t,i,"marginal")             = q20_processing_substitution_brans.m(i);
+ oq20_processing_substitution_sugar(t,i,"marginal")             = q20_processing_substitution_sugar.m(i);
+ oq20_processing_substitution_protein(t,i,"marginal")           = q20_processing_substitution_protein.m(i);
  oq20_processing_costs(t,i,"marginal")                          = q20_processing_costs.m(i);
  ov_dem_processing(t,i,kall,"level")                            = vm_dem_processing.l(i,kall);
  ov20_dem_processing(t,i,processing_subst20,kpr,"level")        = v20_dem_processing.l(i,processing_subst20,kpr);
@@ -30,6 +32,8 @@
  oq20_processing_aggregation_cotton(t,i,"level")                = q20_processing_aggregation_cotton.l(i);
  oq20_processing_substitution_oils(t,i,"level")                 = q20_processing_substitution_oils.l(i);
  oq20_processing_substitution_brans(t,i,"level")                = q20_processing_substitution_brans.l(i);
+ oq20_processing_substitution_sugar(t,i,"level")                = q20_processing_substitution_sugar.l(i);
+ oq20_processing_substitution_protein(t,i,"level")              = q20_processing_substitution_protein.l(i);
  oq20_processing_costs(t,i,"level")                             = q20_processing_costs.l(i);
  ov_dem_processing(t,i,kall,"upper")                            = vm_dem_processing.up(i,kall);
  ov20_dem_processing(t,i,processing_subst20,kpr,"upper")        = v20_dem_processing.up(i,processing_subst20,kpr);
@@ -42,6 +46,8 @@
  oq20_processing_aggregation_cotton(t,i,"upper")                = q20_processing_aggregation_cotton.up(i);
  oq20_processing_substitution_oils(t,i,"upper")                 = q20_processing_substitution_oils.up(i);
  oq20_processing_substitution_brans(t,i,"upper")                = q20_processing_substitution_brans.up(i);
+ oq20_processing_substitution_sugar(t,i,"upper")                = q20_processing_substitution_sugar.up(i);
+ oq20_processing_substitution_protein(t,i,"upper")              = q20_processing_substitution_protein.up(i);
  oq20_processing_costs(t,i,"upper")                             = q20_processing_costs.up(i);
  ov_dem_processing(t,i,kall,"lower")                            = vm_dem_processing.lo(i,kall);
  ov20_dem_processing(t,i,processing_subst20,kpr,"lower")        = v20_dem_processing.lo(i,processing_subst20,kpr);
@@ -54,5 +60,7 @@
  oq20_processing_aggregation_cotton(t,i,"lower")                = q20_processing_aggregation_cotton.lo(i);
  oq20_processing_substitution_oils(t,i,"lower")                 = q20_processing_substitution_oils.lo(i);
  oq20_processing_substitution_brans(t,i,"lower")                = q20_processing_substitution_brans.lo(i);
+ oq20_processing_substitution_sugar(t,i,"lower")                = q20_processing_substitution_sugar.lo(i);
+ oq20_processing_substitution_protein(t,i,"lower")              = q20_processing_substitution_protein.lo(i);
  oq20_processing_costs(t,i,"lower")                             = q20_processing_costs.lo(i);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
