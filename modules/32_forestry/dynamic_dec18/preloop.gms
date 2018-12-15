@@ -57,6 +57,7 @@ pm_production_ratio_ext(i,t_all) = fm_production_ratio(i,t_all);
 
 p32_forestry_management(i) = f32_forestry_management(i);
 p32_forestry_management("IND") = 10;
+p32_forestry_management("USA") = 7;
 *p32_forestry_management("CAZ") = 7;
 *p32_forestry_management("LAM") = 4;
 *p32_forestry_management("OAS") = 6;

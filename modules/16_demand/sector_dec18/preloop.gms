@@ -21,4 +21,4 @@ fm_forestry_demand(t_all,i,"woodfuel") =
 
 * Setting MEA demand to 10% of calculated demand for testing purposes
 fm_forestry_demand(t_all,"MEA",kforestry) = fm_forestry_demand(t_all,"MEA",kforestry) * 0.10 ;
-fm_forestry_demand(t_all,"IND",kforestry) = fm_forestry_demand(t_all,"IND",kforestry) * 0.80 ;
+fm_forestry_demand(t_all,"IND",kforestry) = fm_forestry_demand(t_all,"IND",kforestry) * 0.60 ;
