@@ -8,9 +8,21 @@
 *' In the comparative advantage pool, the only active constraint is that the global supply is larger or equal to demand.
 *' This means that production can be freely allocated globally based on comparative advantages.
 
- q21_trade_glo(k_trade)..
-  sum(i2 ,vm_prod_reg(i2,k_trade)) =g=
-  sum(i2, vm_supply(i2,k_trade)) + sum(ct,f21_trade_balanceflow(ct,k_trade));
+ q21_trade_glo_ag(k_trade_ag)..
+  sum(i2 ,vm_prod_reg(i2,k_trade_ag)) =g=
+  sum(i2, vm_supply(i2,k_trade_ag)) + sum(ct,f21_trade_balanceflow(ct,k_trade_ag));
+
+ q21_prod_timber(j2,kforestry) ..
+  vm_prod(j2,kforestry) =e= vm_prod_forestry(j2,kforestry) + vm_prod_natveg(j2,kforestry);
+
+ q21_trade_forestry(kforestry)..
+    sum(j2, vm_prod_forestry(j2,kforestry)) =g=
+    sum((i2,ct),(vm_supply(i2,kforestry) + f21_trade_balanceflow(ct,kforestry)) * fm_production_ratio(i2,ct));
+
+ q21_trade_natveg(kforestry)..
+    sum(j2, vm_prod_natveg(j2,kforestry)) =g=
+    sum((i2,ct),(vm_supply(i2,kforestry) + f21_trade_balanceflow(ct,kforestry)) * (1-fm_production_ratio(i2,ct)));
+
 *'
 *' For non-tradable commodites, the regional supply should be larger or equal to the regional demand.
  q21_notrade(i2,k_notrade)..
@@ -70,17 +82,6 @@
 
 **---------------------------------------------------------------------
 ** FUTURE TRADE EQUATIONS (Analogous to trade module)
-
-q21_prod_timber(j2,kforestry) ..
-vm_prod(j2,kforestry) =e= vm_prod_forestry(j2,kforestry) + vm_prod_natveg(j2,kforestry);
-
-q21_trade_forestry(kforestry)..
-  sum(j2 ,vm_prod_forestry(j2,kforestry)) =e=
-  sum((i2,ct), vm_supply(i2,kforestry) * fm_production_ratio(i2,ct)) + sum(ct,f21_trade_balanceflow(ct,kforestry));
-
-q21_trade_natveg(kforestry)..
-  sum(j2 ,vm_prod_natveg(j2,kforestry)) =e=
-  sum((i2,ct), vm_supply(i2,kforestry) * (1-fm_production_ratio(i2,ct)));
 
 q21_trade_reg_ff(i2,kforestry2)..
   vm_prod_future_reg_ff(i2,kforestry2)

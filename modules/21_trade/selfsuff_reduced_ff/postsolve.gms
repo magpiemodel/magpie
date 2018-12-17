@@ -15,7 +15,7 @@
  ov21_excess_prod_ff(t,i,kforestry2,"marginal")    = v21_excess_prod_ff.m(i,kforestry2);
  ov21_cost_trade_reg_ff(t,i,kforestry2,"marginal") = v21_cost_trade_reg_ff.m(i,kforestry2);
  ov_cost_trade_forestry_ff(t,i,"marginal")         = vm_cost_trade_forestry_ff.m(i);
- oq21_trade_glo(t,k_trade,"marginal")              = q21_trade_glo.m(k_trade);
+ oq21_trade_glo_ag(t,k_trade_ag,"marginal")        = q21_trade_glo_ag.m(k_trade_ag);
  oq21_notrade(t,i,k_notrade,"marginal")            = q21_notrade.m(i,k_notrade);
  oq21_trade_reg(t,i,k_trade,"marginal")            = q21_trade_reg.m(i,k_trade);
  oq21_trade_reg_up(t,i,k_trade,"marginal")         = q21_trade_reg_up.m(i,k_trade);
@@ -41,7 +41,7 @@
  ov21_excess_prod_ff(t,i,kforestry2,"level")       = v21_excess_prod_ff.l(i,kforestry2);
  ov21_cost_trade_reg_ff(t,i,kforestry2,"level")    = v21_cost_trade_reg_ff.l(i,kforestry2);
  ov_cost_trade_forestry_ff(t,i,"level")            = vm_cost_trade_forestry_ff.l(i);
- oq21_trade_glo(t,k_trade,"level")                 = q21_trade_glo.l(k_trade);
+ oq21_trade_glo_ag(t,k_trade_ag,"level")           = q21_trade_glo_ag.l(k_trade_ag);
  oq21_notrade(t,i,k_notrade,"level")               = q21_notrade.l(i,k_notrade);
  oq21_trade_reg(t,i,k_trade,"level")               = q21_trade_reg.l(i,k_trade);
  oq21_trade_reg_up(t,i,k_trade,"level")            = q21_trade_reg_up.l(i,k_trade);
@@ -67,7 +67,7 @@
  ov21_excess_prod_ff(t,i,kforestry2,"upper")       = v21_excess_prod_ff.up(i,kforestry2);
  ov21_cost_trade_reg_ff(t,i,kforestry2,"upper")    = v21_cost_trade_reg_ff.up(i,kforestry2);
  ov_cost_trade_forestry_ff(t,i,"upper")            = vm_cost_trade_forestry_ff.up(i);
- oq21_trade_glo(t,k_trade,"upper")                 = q21_trade_glo.up(k_trade);
+ oq21_trade_glo_ag(t,k_trade_ag,"upper")           = q21_trade_glo_ag.up(k_trade_ag);
  oq21_notrade(t,i,k_notrade,"upper")               = q21_notrade.up(i,k_notrade);
  oq21_trade_reg(t,i,k_trade,"upper")               = q21_trade_reg.up(i,k_trade);
  oq21_trade_reg_up(t,i,k_trade,"upper")            = q21_trade_reg_up.up(i,k_trade);
@@ -93,7 +93,7 @@
  ov21_excess_prod_ff(t,i,kforestry2,"lower")       = v21_excess_prod_ff.lo(i,kforestry2);
  ov21_cost_trade_reg_ff(t,i,kforestry2,"lower")    = v21_cost_trade_reg_ff.lo(i,kforestry2);
  ov_cost_trade_forestry_ff(t,i,"lower")            = vm_cost_trade_forestry_ff.lo(i);
- oq21_trade_glo(t,k_trade,"lower")                 = q21_trade_glo.lo(k_trade);
+ oq21_trade_glo_ag(t,k_trade_ag,"lower")           = q21_trade_glo_ag.lo(k_trade_ag);
  oq21_notrade(t,i,k_notrade,"lower")               = q21_notrade.lo(i,k_notrade);
  oq21_trade_reg(t,i,k_trade,"lower")               = q21_trade_reg.lo(i,k_trade);
  oq21_trade_reg_up(t,i,k_trade,"lower")            = q21_trade_reg_up.lo(i,k_trade);
