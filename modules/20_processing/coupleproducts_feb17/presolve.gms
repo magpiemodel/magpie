@@ -18,3 +18,5 @@ v20_secondary_substitutes.up(i,"oils",kcereals20)=Inf;
 v20_dem_processing.fx(i2,"substitutes",kpr)=0;
 v20_dem_processing.up(i2,"substitutes",kcereals20)=Inf;
 v20_dem_processing.up(i2,"substitutes","oils")=Inf;
+
+vm_processing_substitution_cost.fx(i)=0;

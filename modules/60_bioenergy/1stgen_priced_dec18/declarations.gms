@@ -6,7 +6,7 @@
 
 
 parameters
- i60_bioenergy_dem(t,i)   			Regional bioenergy demand per year (mio. GJ per yr)
+ i60_bioenergy_dem(t,i)                           Regional bioenergy demand per year (mio. GJ per yr)
 ;
 
 positive variables
@@ -20,9 +20,11 @@ variables
 ;
 
 equations
- q60_bioenergy_glo                 	Global bioenergy demand (mio. GJ per yr)
- q60_bioenergy_reg(i)              	Regional bioenergy demand (mio. GJ per yr)
- q60_res_2ndgenBE(i)       			Regional residue demand for 2nd generation bioenergy (mio. GJ per yr)
+ q60_bioenergy(i,kall)                     Global total bioenergy demand (mio. GJ per yr)
+ q60_bioenergy_glo                         Global 2nd generation dedicated bioenergy demand (mio. GJ per yr)
+ q60_bioenergy_reg(i)                      Regional 2nd generation dedicated bioenergy demand (mio. GJ per yr)
+ q60_res_2ndgenBE(i)                       Regional residue demand for 2nd generation bioenergy (mio. GJ per yr)
+ q60_bioenergy_incentive(i)                Incentive to produce bioenergy (mio. USD05MER per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -31,8 +33,10 @@ parameters
  ov60_2ndgen_bioenergy_dem_dedicated(t,i,kall,type) bioenergy demand which can come from different regions(mio. tDM per yr)
  ov60_2ndgen_bioenergy_dem_residues(t,i,kall,type)  bioenergy demand which can come from different product types(mio. tDM per yr)
  ov_bioenergy_utility(t,i,type)                     Utility as negative costs for producing bioenergy (USD05MER per yr)
- oq60_bioenergy_glo(t,type)                         Global bioenergy demand (mio. GJ per yr)
- oq60_bioenergy_reg(t,i,type)                       Regional bioenergy demand (mio. GJ per yr)
+ oq60_bioenergy(t,i,kall,type)                      Global total bioenergy demand (mio. GJ per yr)
+ oq60_bioenergy_glo(t,type)                         Global 2nd generation dedicated bioenergy demand (mio. GJ per yr)
+ oq60_bioenergy_reg(t,i,type)                       Regional 2nd generation dedicated bioenergy demand (mio. GJ per yr)
  oq60_res_2ndgenBE(t,i,type)                        Regional residue demand for 2nd generation bioenergy (mio. GJ per yr)
+ oq60_bioenergy_incentive(t,i,type)                 Incentive to produce bioenergy (mio. USD05MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

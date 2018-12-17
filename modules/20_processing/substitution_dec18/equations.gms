@@ -75,12 +75,12 @@ q20_processing_substitution_sugar(i2) ..
 *' grains based on their protein content.
 
 q20_processing_substitution_protein(i2) ..
-    sum(oilcrops,
+    sum(oilcake_substitutes20,
       v20_dem_processing(i2,"substitutes",oilcake_substitutes20)
-      * fm_attributes("nr",oilcrops)
+      * fm_attributes("nr",oilcake_substitutes20)
     ) =g=
-    sum((kpr),
-      v20_secondary_substitutes(i2,"distillers_grain",kpr)
+    sum(kpr,
+      (v20_secondary_substitutes(i2,"distillers_grain",kpr)
       + v20_secondary_substitutes(i2,"oilcakes",kpr) )
       * fm_attributes("nr",kpr));
 
@@ -111,7 +111,7 @@ sum((ksd,processing20,kpr), v20_dem_processing(i2,processing20,kpr)
          *sum(ct,f20_processing_conversion_factors(ct,processing20,ksd,kpr))
          * (
             f20_processing_unitcosts(ksd,kpr)
-         );
+         ));
 
 *' Finally, we assume that any substitution of one product by another,
 *' diverging from our initial demand estimates, comes at a loss of utility.
@@ -121,7 +121,7 @@ sum((ksd,processing20,kpr), v20_dem_processing(i2,processing20,kpr)
 *' are traded based on the assumption of homogeneity, we include a cost term
 *' for quality differences which make low-quality oils like palm oil more
 *' expensive and high quality oils cheaper. The magnitude of the quality
-*' adjustment is based on current price differences between different 
+*' adjustment is based on current price differences between different
 *' types of oils, standardized on the price of soybean oil.
 
 q20_substitution_utility_loss(i2) ..
@@ -132,4 +132,4 @@ q20_substitution_utility_loss(i2) ..
       ) +
       sum((ksd,processing20,kpr), v20_dem_processing(i2,processing20,kpr)
         *sum(ct,f20_processing_conversion_factors(ct,processing20,ksd,kpr))
-        * f20_quality_adjustment(ksd,kpr));
+        * f20_substitution_costs(ksd,kpr));

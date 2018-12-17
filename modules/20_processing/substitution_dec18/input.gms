@@ -9,7 +9,7 @@
 table f20_processing_balanceflow(t_all,i,ksd) Processing balance flow  (mio. tDM)
 $ondelim
 $include "./modules/20_processing/input/f20_processing_balanceflow.cs3"
-$offdelim
+$offdelim       ;
 
 table f20_processing_conversion_factors(t_all,processing20,ksd,kpr) Conversion factors of primary products into secondary products (1)
 $ondelim
@@ -26,7 +26,7 @@ $ondelim
 $include "./modules/20_processing/input/f20_processing_unitcosts.cs3"
 $offdelim       ;
 
-table f20_quality_adjustment(ksd,kpr)   Costs of transforming x units kpr into 1 unit ksd (USD05MER per tDM)
+table f20_substitution_costs(ksd,kpr)   Costs of substituting a product (USD per tDM substitued)
 $ondelim
-$include "./modules/20_processing/coupleproducts_feb17/input/f20_quality_adjustment.cs3"
+$include "./modules/20_processing/substitution_dec18/input/f20_substitution_costs.cs3"
 $offdelim       ;

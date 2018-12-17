@@ -125,8 +125,11 @@ $title magpie
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
 *
 *
+* Warnmeldung:
+* In runsubmit(runscripts, submit) :
+*   Script ./scripts/start/default.R was stopped by an error and not executed properly!
 *
-* Last modification (input data): Thu Sep 27 16:08:48 2018
+* Last modification (input data): Mon Dec 17 09:41:37 2018
 *
 *###################### R SECTION END (VERSION INFO) ###########################
 

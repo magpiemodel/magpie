@@ -9,7 +9,7 @@
 table f20_processing_balanceflow(t_all,i,ksd) Processing balance flow  (mio. tDM)
 $ondelim
 $include "./modules/20_processing/input/f20_processing_balanceflow.cs3"
-$offdelim
+$offdelim       ;
 
 table f20_processing_conversion_factors(t_all,processing20,ksd,kpr) Conversion factors of primary products into secondary products (1)
 $ondelim

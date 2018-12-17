@@ -17,7 +17,7 @@
 
 q60_bioenergy(i2,kall) ..
       vm_dem_bioen(i2,kall) * fm_attributes("ge",kall) =g=
-      f60_1stgen_bioenergy_dem(t,i2,"%c60_1stgen_biodem%",kall) +
+      sum(ct,f60_1stgen_bioenergy_dem(ct,i2,"%c60_1stgen_biodem%",kall)) +
       v60_2ndgen_bioenergy_dem_dedicated(i2,kall) +
       v60_2ndgen_bioenergy_dem_residues(i2,kall)
       ;
@@ -42,10 +42,10 @@ q60_bioenergy(i2,kall) ..
 *' is set to 0, if it is 0 (global) the right hand side of the second equation
 *' is set to 0.
 
-q60_bioenergy_glo.. sum((kbe60,i2), v60_2ndgen_bioenergy_dem_dedicated(t,i,kbe60))
+q60_bioenergy_glo.. sum((kbe60,i2), v60_2ndgen_bioenergy_dem_dedicated(i2,kbe60))
                     =g= sum((ct,i2),i60_bioenergy_dem(ct,i2))*(1-c60_biodem_level);
 
-q60_bioenergy_reg(i2).. sum(kbe60, v60_2ndgen_bioenergy_dem_dedicated(t,i,kbe60))
+q60_bioenergy_reg(i2).. sum(kbe60, v60_2ndgen_bioenergy_dem_dedicated(i2,kbe60))
                     =g= sum(ct,i60_bioenergy_dem(ct,i2))*c60_biodem_level;
 
 *' Except the implementation of the switches and the fact that in the first
@@ -61,7 +61,7 @@ q60_bioenergy_reg(i2).. sum(kbe60, v60_2ndgen_bioenergy_dem_dedicated(t,i,kbe60)
 *' is mainly driven by population and GDP.
 
 q60_res_2ndgenBE(i2) ..
-  sum(kres, v60_2ndgen_bioenergy_dem_residues(i2,kres)
+  sum(kres, v60_2ndgen_bioenergy_dem_residues(i2,kres))
   =g=
   sum(ct,f60_res_2ndgenBE_dem(ct,i2,"%c60_res_2ndgenBE_dem%"));
 
@@ -72,4 +72,4 @@ q60_res_2ndgenBE(i2) ..
 *' overproduction from couple products.
 
 q60_bioenergy_incentive(i2).. vm_bioenergy_utility(i2)
-          =g= sum(k1st60, vm_dem_bioen(i2,k1st60) * (-300);
+          =g= sum(k1st60, vm_dem_bioen(i2,k1st60) * (-300));
