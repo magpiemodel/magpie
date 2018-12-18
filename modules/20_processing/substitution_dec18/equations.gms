@@ -42,7 +42,10 @@ q20_processing_aggregation_cotton(i2) ..
 
 *' The fourth equation below describes the transformation of primary products into secondary products.
 *' The processing conversion factors (`f20_processing_conversion_factors_cf`) indicate how much secondary products
-*' can be derived from one unit of a specific primary product.
+*' can be derived from one unit of a specific primary product. The conversion factors are globally
+*' equal to avoid path-dependencies in future outlooks based on historical patterns.
+*' Historical differences in conversion efficiencies are instead considered using
+*' a static balanceflow.
 *' To avoid perfect substitutability between different primary commodities being transformed into the same
 *' secondary product (e.g. oil from sunflower or oil palm), we use share factor coefficients, `f20_processing_shares`,
 *' which indicate how much of the secondary products comes from which primary products.
