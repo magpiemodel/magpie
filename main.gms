@@ -90,30 +90,34 @@ $title magpie
 
 
 *##################### R SECTION START (VERSION INFO) ##########################
-*
+* 
 * Used data set: magpie4.0_default_sep18.tgz
 * md5sum: 98e158205482936e487aeb616dea5403
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
-*
+* 
+* Used data set: additional_data_rev3.62.tgz
+* md5sum: 0b7a94fe3114c7fb2b14f9ac59c3a01a
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* 
 * Low resolution: c200
 * High resolution: 0.5
-*
+* 
 * Total number of cells: 200
-*
+* 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    28   24   10    7    3   53   17    8   22    7   11   10
-*
+* 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-*
+* 
 * Regions data revision: 4.14
-*
+* 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
 * * Additional input folder: /p/projects/landuse/data/input/other/rev34
 * * Revision: 34
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-*
+* 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
@@ -123,14 +127,11 @@ $title magpie
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
-*
-*
-* Warnmeldung:
-* In runsubmit(runscripts, submit) :
-*   Script ./scripts/start/default.R was stopped by an error and not executed properly!
-*
-* Last modification (input data): Mon Dec 17 09:41:37 2018
-*
+* 
+* 
+* 
+* Last modification (input data): Tue Dec 18 10:24:18 2018
+* 
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
