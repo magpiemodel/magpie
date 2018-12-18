@@ -31,6 +31,8 @@ buildInputVector <- function(regionmapping   = "H12",
   mappings <- c(H11="8a828c6ed5004e77d1ba2025e8ea2261",
                 H12="690d3718e151be1b450b394c1064b1c5",
                 mag="c30c1c580039c2b300d86cc46ff4036a",
+		agmip="c77f075908c3bc29bdbe1976165eccaf",
+		sim4nexus="270870819da5607e288b6d0e5a5e6594",
                 capri="e7e72fddc44cc3d546af7b038c651f51")
   archive_name=paste(project_name,climate_model,climatescen_name,co2,sep="-")
   archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", mappings[regionmapping], ".tgz")
