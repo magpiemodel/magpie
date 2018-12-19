@@ -20,7 +20,7 @@
     sum((i2,ct),(vm_supply(i2,kforestry) + f21_trade_balanceflow(ct,kforestry)) * fm_production_ratio(i2,ct));
 
  q21_trade_natveg(kforestry)..
-    sum(j2, vm_prod_natveg(j2,kforestry)) =g=
+    sum(j2, vm_prod_natveg(j2,kforestry)) =l=
     sum((i2,ct),(vm_supply(i2,kforestry) + f21_trade_balanceflow(ct,kforestry)) * (1-fm_production_ratio(i2,ct)));
 
 *'
