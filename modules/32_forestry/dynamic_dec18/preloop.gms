@@ -52,7 +52,7 @@ p32_land(t,j,"plant",ac)$(ord(ac) > 1) = p32_land(t,j,"plant",ac-1);
 p32_land("y1995",j,"plant","ac0") = 0;
 
 **************************************************************************************
-pm_production_ratio_ext(i,t_ext) = fm_production_ratio(i,"y2150");
+pm_production_ratio_ext(i,t_ext) = fm_production_ratio(i,"y2100");
 pm_production_ratio_ext(i,t_all) = fm_production_ratio(i,t_all);
 
 p32_forestry_management(i) = f32_forestry_management(i);
