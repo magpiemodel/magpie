@@ -77,7 +77,7 @@ sets
     SSP5-Ref-SPA0-V15-REMIND-MAGPIE  /
 
   scen56 emission policy scenarios
-  / none, all, ssp, ssp50 /
+  / none, all, ssp /
 
   aff56 afforestation policy scenarios
   / none, all, all50, vegc100, vegc75, vegc50, vegc33, vegc25 /
