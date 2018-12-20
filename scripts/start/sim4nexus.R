@@ -17,7 +17,7 @@ source("config/default.cfg")
 #set defaults
 codeCheck <- FALSE
 
-buildInputVector <- function(regionmapping   = "sim4nexus",
+buildInputVector <- function(regionmapping   = "agmip",
                              project_name    = "isimip_rcp",
                              climatescen_name= "rcp2p6",
                              co2             = "noco2",
@@ -26,7 +26,7 @@ buildInputVector <- function(regionmapping   = "sim4nexus",
                              archive_rev     = "34",
                              madrat_rev      = "4.14",
                              validation_rev  = "4.14",
-			     calibration     = "calibration_H12_c200_12Sep18.tgz",
+			     calibration     = "calibration_agmip_c200_19Dec18.tgz",
                              additional_data = "additional_data_rev3.58.tgz") {
   mappings <- c(H11="8a828c6ed5004e77d1ba2025e8ea2261",
                 H12="690d3718e151be1b450b394c1064b1c5",
@@ -36,108 +36,106 @@ buildInputVector <- function(regionmapping   = "sim4nexus",
                 capri="e7e72fddc44cc3d546af7b038c651f51")
   archive_name=paste(project_name,climate_model,climatescen_name,co2,sep="-")
   archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", mappings[regionmapping], ".tgz")
-  madrat  <- paste0("magpie_", mappings[regionmapping], "_rev", madrat_rev, ".tgz")
-  validation  <- paste0("validation_", mappings[regionmapping], "_rev", validation_rev, ".tgz")
-  return(c(archive,madrat,validation,additional_data))
+  madrat  <- paste0("rev", madrat_rev,"_", mappings[regionmapping], "_magpie", ".tgz")
+  validation  <- paste0("rev", validation_rev,"_", mappings[regionmapping], "_validation", ".tgz")
+  return(c(archive,madrat,validation,calibration,additional_data))
 }
 
-### Single runs ###
+### SIM4NEXUS runs ###
 #general settings
-cfg$gms$c_timesteps <- 7
-cfg$gms$s15_elastic_demand <- 1
-cfg$gms$food <- "intake_dez17"
-
-# clalibration runs
-
-cfg$title <- "SUSTAg2"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$force_download <- TRUE
-cfg$gms$factor_costs="fixed_per_ton_nov16"
-cfg$input <- buildInputVector(co2="co2")
-cfg$recalibrate <- TRUE
-start_run(cfg=cfg,codeCheck=codeCheck)
+cfg$gms$c_timesteps <- "coup2100"
+cfg$input <- buildInputVector()
+cfg$output <- c(cfg$output,"sustag_report")
 cfg$recalibrate <- FALSE
 
+# SSP control runs###############################################
 
+# SSP2
+cfg$title <- "SSP2"
+cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-lucode::setScenario(cfg,"nocc")
+cfg$force_download <- TRUE
+cfg$input <- buildInputVector(co2="co2")
+#cfg$recalibrate <- TRUE
+start_run(cfg=cfg,codeCheck=codeCheck)
+#cfg$recalibrate <- FALSE
 
-# SSP1 family
-
-cfg$title <- "SUSTAg1"
-cfg<-lucode::setScenario(cfg,"SUSTAg1")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6")
+# SSP1
+cfg$title <- "SSP1"
+cfg<-lucode::setScenario(cfg,"SSP1")
+cfg<-lucode::setScenario(cfg,"nocc")
+cfg$input <- buildInputVector(co2="co2")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
-# SSP3 family
-
-cfg$title <- "SUSTAg3"
-cfg<-lucode::setScenario(cfg,"SUSTAg3")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0")
+# SSP3
+cfg$title <- "SSP3"
+cfg<-lucode::setScenario(cfg,"SSP3")
+cfg<-lucode::setScenario(cfg,"nocc")
+cfg$input <- buildInputVector(co2="co2")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
-# SSP4 family
-
-cfg$title <- "SUSTAg4"
-cfg<-lucode::setScenario(cfg,"SUSTAg4")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5")
+# SSP4
+cfg$title <- "SSP4"
+cfg<-lucode::setScenario(cfg,"SSP4")
+cfg<-lucode::setScenario(cfg,"nocc")
+cfg$input <- buildInputVector(co2="co2")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
-# SSP5 family
-
-cfg$title <- "SUSTAg5"
-cfg<-lucode::setScenario(cfg,"SUSTAg5")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5")
+# SSP5
+cfg$title <- "SSP5"
+cfg<-lucode::setScenario(cfg,"SSP5")
+cfg<-lucode::setScenario(cfg,"nocc")
+cfg$input <- buildInputVector(co2="co2")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
+
+
+
+
+#SIM4NEXUS standard runs#############################################
 
 #SSP2 family
 
-# SSP2 control run
-cfg$title <- "SSP2"
+# SSP2 Baseline RCP6.0 without CC mitigation 
+cfg$title <- "base_rcp6p0"
 cfg<-lucode::setScenario(cfg,"SSP2")
-cfg$input <- buildInputVector(co2="noco2")
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-cfg$title <- "SUSTAg2_Ref"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0")
-cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
-cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
-cfg$recalibrate <- FALSE
 
-cfg$title <- "SUSTAg2_nocc"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$input <- buildInputVector(co2="noco2")
-cfg<-lucode::setScenario(cfg,"nocc")
-cfg$recalibrate <- TRUE
+
+# SSP2 Mitigation RCP2.6 
+cfg$title <- "policy_rcp2p6"
+cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-lucode::setScenario(cfg,"cc")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6")
+cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
+cfg$gms$forestry  <- "affore_vegc_dec16"
+cfg$gms$maccs  <- "on_sep16"
 start_run(cfg=cfg,codeCheck=codeCheck)
-cfg$recalibrate <- FALSE
 
-cfg$title <- "SUSTAg2_co2fix"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$input <- buildInputVector(co2="noco2")
-cfg$recalibrate <- TRUE
+
+# SSP2 Baseline RCP6.0 without CC mitigation with EFP
+cfg$title <- "base_rcp6p0_efp"
+cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-lucode::setScenario(cfg,"cc")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0")
+cfg$gms$c42_env_flow_policy <- "on"
 start_run(cfg=cfg,codeCheck=codeCheck)
-cfg$recalibrate <- FALSE
 
-cfg$title <- "SUSTAg2_Ref_co2fix"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$input <- buildInputVector(co2="noco2",climatescen_name="rcp6p0")
-cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
-cfg$recalibrate <- TRUE
+
+# SSP2 Mitigation RCP2.6 with EFP
+cfg$title <- "policy_rcp2p6_efp"
+cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-lucode::setScenario(cfg,"cc")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6")
+cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
+cfg$gms$forestry  <- "affore_vegc_dec16"
+cfg$gms$maccs  <- "on_sep16"
+cfg$gms$c42_env_flow_policy <- "on"
 start_run(cfg=cfg,codeCheck=codeCheck)
-cfg$recalibrate <- FALSE
 
 
-### mixed 
 
-cfg$title <- "SUSTAg2_mixedfactorcosts"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$input <- buildInputVector(co2="co2")
-cfg$gms$factor_costs="mixed_feb17"
-cfg$recalibrate <- TRUE
-start_run(cfg=cfg,codeCheck=codeCheck)
-cfg$recalibrate <- FALSE
-cfg$gms$factor_costs="fixed_per_ton_nov16"
