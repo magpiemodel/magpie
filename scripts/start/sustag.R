@@ -17,7 +17,7 @@ source("config/default.cfg")
 #set defaults
 codeCheck <- FALSE
 
-buildInputVector <- function(regionmapping   = "H12",
+buildInputVector <- function(regionmapping   = "agmip",
                              project_name    = "isimip_rcp",
                              climatescen_name= "rcp2p6",
                              co2             = "noco2",
@@ -26,7 +26,7 @@ buildInputVector <- function(regionmapping   = "H12",
                              archive_rev     = "34",
                              madrat_rev      = "4.14",
                              validation_rev  = "4.14",
-			     calibration     = "calibration_H12_c200_12Sep18.tgz",
+			     calibration     = "calibration_agmip_c200_19Dec18.tgz",
                              additional_data = "additional_data_rev3.58.tgz") {
   mappings <- c(H11="8a828c6ed5004e77d1ba2025e8ea2261",
                 H12="690d3718e151be1b450b394c1064b1c5",
@@ -44,7 +44,7 @@ buildInputVector <- function(regionmapping   = "H12",
 ### SUSTAg runs ###
 #general settings
 cfg$gms$c_timesteps <- 12
-cfg$input <- buildInputVector(regionmapping="H12")
+cfg$input <- buildInputVector()
 cfg$output <- c(cfg$output,"sustag_report")
 cfg$recalibrate <- FALSE
 
@@ -57,7 +57,9 @@ cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"nocc")
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector(co2="co2")
+#cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
+#cfg$recalibrate <- FALSE
 
 # SSP1
 cfg$title <- "SSP1"
