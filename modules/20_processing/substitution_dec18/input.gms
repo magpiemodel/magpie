@@ -26,7 +26,7 @@ $ondelim
 $include "./modules/20_processing/input/f20_processing_unitcosts.cs3"
 $offdelim       ;
 
-table f20_substitution_costs(ksd,kpr)   Costs of substituting a product (USD per tDM substitued)
+table f20_quality_cost(ksd,kpr)   Costs for difference in quality between secondary products from diiverging origins (USD per tDM substitued)
 $ondelim
-$include "./modules/20_processing/substitution_dec18/input/f20_substitution_costs.cs3"
+$include "./modules/20_processing/substitution_dec18/input/f20_quality_cost.cs3"
 $offdelim       ;
