@@ -12,6 +12,7 @@
  ov20_secondary_substitutes(t,i,ksd,kpr,"marginal")             = v20_secondary_substitutes.m(i,ksd,kpr);
  ov_secondary_overproduction(t,i,kall,kpr,"marginal")           = vm_secondary_overproduction.m(i,kall,kpr);
  ov_cost_processing(t,i,"marginal")                             = vm_cost_processing.m(i);
+ ov_processing_substitution_cost(t,i,"marginal")                = vm_processing_substitution_cost.m(i);
  oq20_processing(t,i,kpr,ksd,"marginal")                        = q20_processing.m(i,kpr,ksd);
  oq20_processing_aggregation_nocereals(t,i,kpr,"marginal")      = q20_processing_aggregation_nocereals.m(i,kpr);
  oq20_processing_aggregation_cereals(t,i,kcereals20,"marginal") = q20_processing_aggregation_cereals.m(i,kcereals20);
@@ -24,6 +25,7 @@
  ov20_secondary_substitutes(t,i,ksd,kpr,"level")                = v20_secondary_substitutes.l(i,ksd,kpr);
  ov_secondary_overproduction(t,i,kall,kpr,"level")              = vm_secondary_overproduction.l(i,kall,kpr);
  ov_cost_processing(t,i,"level")                                = vm_cost_processing.l(i);
+ ov_processing_substitution_cost(t,i,"level")                   = vm_processing_substitution_cost.l(i);
  oq20_processing(t,i,kpr,ksd,"level")                           = q20_processing.l(i,kpr,ksd);
  oq20_processing_aggregation_nocereals(t,i,kpr,"level")         = q20_processing_aggregation_nocereals.l(i,kpr);
  oq20_processing_aggregation_cereals(t,i,kcereals20,"level")    = q20_processing_aggregation_cereals.l(i,kcereals20);
@@ -36,6 +38,7 @@
  ov20_secondary_substitutes(t,i,ksd,kpr,"upper")                = v20_secondary_substitutes.up(i,ksd,kpr);
  ov_secondary_overproduction(t,i,kall,kpr,"upper")              = vm_secondary_overproduction.up(i,kall,kpr);
  ov_cost_processing(t,i,"upper")                                = vm_cost_processing.up(i);
+ ov_processing_substitution_cost(t,i,"upper")                   = vm_processing_substitution_cost.up(i);
  oq20_processing(t,i,kpr,ksd,"upper")                           = q20_processing.up(i,kpr,ksd);
  oq20_processing_aggregation_nocereals(t,i,kpr,"upper")         = q20_processing_aggregation_nocereals.up(i,kpr);
  oq20_processing_aggregation_cereals(t,i,kcereals20,"upper")    = q20_processing_aggregation_cereals.up(i,kcereals20);
@@ -48,6 +51,7 @@
  ov20_secondary_substitutes(t,i,ksd,kpr,"lower")                = v20_secondary_substitutes.lo(i,ksd,kpr);
  ov_secondary_overproduction(t,i,kall,kpr,"lower")              = vm_secondary_overproduction.lo(i,kall,kpr);
  ov_cost_processing(t,i,"lower")                                = vm_cost_processing.lo(i);
+ ov_processing_substitution_cost(t,i,"lower")                   = vm_processing_substitution_cost.lo(i);
  oq20_processing(t,i,kpr,ksd,"lower")                           = q20_processing.lo(i,kpr,ksd);
  oq20_processing_aggregation_nocereals(t,i,kpr,"lower")         = q20_processing_aggregation_nocereals.lo(i,kpr);
  oq20_processing_aggregation_cereals(t,i,kcereals20,"lower")    = q20_processing_aggregation_cereals.lo(i,kcereals20);
