@@ -14,17 +14,22 @@ positive variables
  vm_dem_bioen(i,kall)               Regional bioenergy demand  (mio. tDM per yr)
 ;
 
+variables
+  vm_bioenergy_utility(i)  Utility as negative costs for producing bioenergy (USD05MER per yr)
+;
+
 equations
  q60_bioenergy_glo                 	Global bioenergy demand (mio. GJ per yr)
  q60_bioenergy_reg(i)              	Regional bioenergy demand (mio. GJ per yr)
- q60_res_2ndgenBE(i)       			Regional residue demand for 2nd generation bioenergy (mio. GJ per yr) 
+ q60_res_2ndgenBE(i)       			Regional residue demand for 2nd generation bioenergy (mio. GJ per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_dem_bioen(t,i,kall,type)  Regional bioenergy demand  (mio. tDM per yr)
- oq60_bioenergy_glo(t,type)   Global bioenergy demand (mio. GJ per yr)
- oq60_bioenergy_reg(t,i,type) Regional bioenergy demand (mio. GJ per yr)
- oq60_res_2ndgenBE(t,i,type)  Regional residue demand for 2nd generation bioenergy (mio. GJ per yr) 
+ ov_dem_bioen(t,i,kall,type)    Regional bioenergy demand  (mio. tDM per yr)
+ ov_bioenergy_utility(t,i,type) Utility as negative costs for producing bioenergy (USD05MER per yr)
+ oq60_bioenergy_glo(t,type)     Global bioenergy demand (mio. GJ per yr)
+ oq60_bioenergy_reg(t,i,type)   Regional bioenergy demand (mio. GJ per yr)
+ oq60_res_2ndgenBE(t,i,type)    Regional residue demand for 2nd generation bioenergy (mio. GJ per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

@@ -19,7 +19,7 @@ vm_dem_bioen.fx(i,kall) = f60_1stgen_bioenergy_dem(t,i,"%c60_1stgen_biodem%",kal
 *' based on currently established and planned bioenergy policies
 *' (@lotze-campen_impacts_2014). For the time
 *' after 2050 it is assumed that bioenergy production will be fully transformed
-*' to 2nd generation bioenergy crops and residues because of their higher 
+*' to 2nd generation bioenergy crops and residues because of their higher
 *' estimated efficiency respectively their low costs.
 *'
 *' For second generation bioenergy (`kbe60` = bioenergy grasses and bioenergy
@@ -36,5 +36,8 @@ vm_dem_bioen.lo(i,kbe60) = 0;
 *' Relax the upper bound for residues.
 
 vm_dem_bioen.up(i,kres) = Inf;
+
+*' In this realization, there is no financial incentive to produce bioenergy.
+vm_bioenergy_utility.fx(i2) = 0;
 
 *' @stop

@@ -10,13 +10,9 @@ vm_dem_processing.fx(i,knpr)=0;
 vm_secondary_overproduction.fx(i2,kall,kpr)=0;
 vm_secondary_overproduction.up(i2,ksd,kpr)=Inf;
 
-v20_secondary_substitutes.fx(i,ksd,kpr)=0;
-v20_secondary_substitutes.up(i,"brans",kcereals20)=Inf;
-v20_secondary_substitutes.up(i,"oils",kcereals20)=Inf;
-
-* allowing only cereals and oils as substitutes for brans, germoil and branoil
-v20_dem_processing.fx(i2,"substitutes",kpr)=0;
-v20_dem_processing.up(i2,"substitutes",kcereals20)=Inf;
-v20_dem_processing.up(i2,"substitutes","oils")=Inf;
-
-vm_processing_substitution_cost.fx(i)=0;
+v20_secondary_substitutes.fx(i2,ksd,kpr)=0;
+v20_secondary_substitutes.up(i2,"oils",kpr)=Inf;
+v20_secondary_substitutes.up(i2,"molasses",kpr)=Inf;
+v20_secondary_substitutes.up(i2,"distillers_grain",kpr)=Inf;
+v20_secondary_substitutes.up(i2,"oilcakes",kpr)=Inf;
+v20_secondary_substitutes.up(i2,"brans",kcereals20)=Inf;
