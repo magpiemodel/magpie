@@ -17,13 +17,13 @@
 
  q21_trade_forestry(kforestry)..
     sum(j2, vm_prod_forestry(j2,kforestry)) =g=
-*    sum((i2,ct),(vm_supply(i2,kforestry) + f21_trade_balanceflow(ct,kforestry)) * fm_production_ratio(i2,ct));
-    sum((i2,ct), vm_supply(i2,kforestry) * fm_production_ratio(i2,ct));
+   sum((i2,ct),(vm_supply(i2,kforestry) + f21_trade_balanceflow(ct,kforestry)) * fm_production_ratio(i2,ct));
+*    sum((i2,ct), vm_supply(i2,kforestry) * fm_production_ratio(i2,ct));
 
  q21_trade_natveg(kforestry)..
-    sum(j2, vm_prod_natveg(j2,kforestry)) =l=
-*    sum((i2,ct),(vm_supply(i2,kforestry) + f21_trade_balanceflow(ct,kforestry)) * (1-fm_production_ratio(i2,ct)));
-    sum((i2,ct), vm_supply(i2,kforestry) * (1-fm_production_ratio(i2,ct)));
+    sum(j2, vm_prod_natveg(j2,kforestry)) =g=
+    sum((i2,ct),(vm_supply(i2,kforestry) + f21_trade_balanceflow(ct,kforestry)) * (1-fm_production_ratio(i2,ct)));
+*    sum((i2,ct), vm_supply(i2,kforestry) * (1-fm_production_ratio(i2,ct)));
 *'
 *' For non-tradable commodites, the regional supply should be larger or equal to the regional demand.
  q21_notrade(i2,k_notrade)..
