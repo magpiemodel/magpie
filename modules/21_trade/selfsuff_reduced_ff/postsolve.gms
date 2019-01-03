@@ -30,7 +30,7 @@
  oq21_cost_trade_ff(t,i,"marginal")                = q21_cost_trade_ff.m(i);
  oq21_trade_natveg(t,kforestry,"marginal")         = q21_trade_natveg.m(kforestry);
  oq21_trade_forestry(t,kforestry,"marginal")       = q21_trade_forestry.m(kforestry);
- oq21_prod_timber(t,j,kforestry,"marginal")        = q21_prod_timber.m(j,kforestry);
+ oq21_prod_timber(t,i,kforestry,"marginal")        = q21_prod_timber.m(i,kforestry);
  ov21_excess_dem(t,k_trade,"level")                = v21_excess_dem.l(k_trade);
  ov21_excess_prod(t,i,k_trade,"level")             = v21_excess_prod.l(i,k_trade);
  ov_cost_trade(t,i,"level")                        = vm_cost_trade.l(i);
@@ -56,7 +56,7 @@
  oq21_cost_trade_ff(t,i,"level")                   = q21_cost_trade_ff.l(i);
  oq21_trade_natveg(t,kforestry,"level")            = q21_trade_natveg.l(kforestry);
  oq21_trade_forestry(t,kforestry,"level")          = q21_trade_forestry.l(kforestry);
- oq21_prod_timber(t,j,kforestry,"level")           = q21_prod_timber.l(j,kforestry);
+ oq21_prod_timber(t,i,kforestry,"level")           = q21_prod_timber.l(i,kforestry);
  ov21_excess_dem(t,k_trade,"upper")                = v21_excess_dem.up(k_trade);
  ov21_excess_prod(t,i,k_trade,"upper")             = v21_excess_prod.up(i,k_trade);
  ov_cost_trade(t,i,"upper")                        = vm_cost_trade.up(i);
@@ -82,7 +82,7 @@
  oq21_cost_trade_ff(t,i,"upper")                   = q21_cost_trade_ff.up(i);
  oq21_trade_natveg(t,kforestry,"upper")            = q21_trade_natveg.up(kforestry);
  oq21_trade_forestry(t,kforestry,"upper")          = q21_trade_forestry.up(kforestry);
- oq21_prod_timber(t,j,kforestry,"upper")           = q21_prod_timber.up(j,kforestry);
+ oq21_prod_timber(t,i,kforestry,"upper")           = q21_prod_timber.up(i,kforestry);
  ov21_excess_dem(t,k_trade,"lower")                = v21_excess_dem.lo(k_trade);
  ov21_excess_prod(t,i,k_trade,"lower")             = v21_excess_prod.lo(i,k_trade);
  ov_cost_trade(t,i,"lower")                        = vm_cost_trade.lo(i);
@@ -108,5 +108,5 @@
  oq21_cost_trade_ff(t,i,"lower")                   = q21_cost_trade_ff.lo(i);
  oq21_trade_natveg(t,kforestry,"lower")            = q21_trade_natveg.lo(kforestry);
  oq21_trade_forestry(t,kforestry,"lower")          = q21_trade_forestry.lo(kforestry);
- oq21_prod_timber(t,j,kforestry,"lower")           = q21_prod_timber.lo(j,kforestry);
+ oq21_prod_timber(t,i,kforestry,"lower")           = q21_prod_timber.lo(i,kforestry);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################

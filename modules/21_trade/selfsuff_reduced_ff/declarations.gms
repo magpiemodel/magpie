@@ -51,7 +51,7 @@ equations
  q21_cost_trade_ff(i)                   Future forestry total trade costs (mio. USD)
  q21_trade_natveg(kforestry)			Global natveg production constraint (mio. m3 per yr)
  q21_trade_forestry(kforestry)			Global forestry production constraint (mio. m3 per yr)
- q21_prod_timber(j,kforestry)         xx
+ q21_prod_timber(i,kforestry)         xx
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -81,6 +81,6 @@ parameters
  oq21_cost_trade_ff(t,i,type)                Future forestry total trade costs (mio. USD)
  oq21_trade_natveg(t,kforestry,type)         Global natveg production constraint (mio. m3 per yr)
  oq21_trade_forestry(t,kforestry,type)       Global forestry production constraint (mio. m3 per yr)
- oq21_prod_timber(t,j,kforestry,type)        xx
+ oq21_prod_timber(t,i,kforestry,type)        xx
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

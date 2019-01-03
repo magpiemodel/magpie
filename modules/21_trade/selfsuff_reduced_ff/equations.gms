@@ -12,8 +12,8 @@
   sum(i2 ,vm_prod_reg(i2,k_trade_ag)) =g=
   sum(i2, vm_supply(i2,k_trade_ag)) + sum(ct,f21_trade_balanceflow(ct,k_trade_ag));
 
- q21_prod_timber(j2,kforestry) ..
-  vm_prod(j2,kforestry) =e= vm_prod_forestry(j2,kforestry) + vm_prod_natveg(j2,kforestry);
+ q21_prod_timber(i2,kforestry) ..
+  vm_prod_reg(i2,kforestry) =e= sum(cell(i2,j2), vm_prod_forestry(j2,kforestry) + vm_prod_natveg(j2,kforestry));
 
  q21_trade_forestry(kforestry)..
     sum(j2, vm_prod_forestry(j2,kforestry)) =g=
