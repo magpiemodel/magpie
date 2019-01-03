@@ -65,9 +65,9 @@ q60_res_2ndgenBE(i2) ..
   =g=
   sum(ct,f60_res_2ndgenBE_dem(ct,i2,"%c60_res_2ndgenBE_dem%"));
 
-*' Finally, an incentive is provided for the production of 1st generation of
+*' Finally, an incentive of 300 USD05MER per ton is provided for the production of 1st generation 
 *' bioenergy from oils and ethanol even beyond the exogeneous minimum demand.
-*' The incentive is kept low, but should provide a more realistic substitution
+*' The incentive is kept low, but should provide a more realistic
 *' overproduction from couple products.
 
 q60_bioenergy_incentive(i2).. vm_bioenergy_utility(i2)
