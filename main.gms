@@ -95,6 +95,10 @@ $title magpie
 * md5sum: 98e158205482936e487aeb616dea5403
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 *
+* Used data set: additional_data_rev3.62.tgz
+* md5sum: 0b7a94fe3114c7fb2b14f9ac59c3a01a
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+*
 * Low resolution: c200
 * High resolution: 0.5
 *
@@ -126,7 +130,7 @@ $title magpie
 *
 *
 *
-* Last modification (input data): Thu Sep 27 16:08:48 2018
+* Last modification (input data): Tue Dec 18 10:24:18 2018
 *
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -171,7 +175,7 @@ $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 
 $setglobal residues  flexreg_apr16
-$setglobal processing  coupleproducts_feb17
+$setglobal processing  substitution_dec18
 
 $setglobal trade  selfsuff_reduced
 
@@ -201,7 +205,7 @@ $setglobal maccs  on_sep16
 $setglobal carbon_removal  off_sep16
 $setglobal som  off
 
-$setglobal bioenergy  standard_flexreg_may17
+$setglobal bioenergy  1stgen_priced_dec18
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 $setglobal disagg_lvst  foragebased_aug18
