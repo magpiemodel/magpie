@@ -15,6 +15,8 @@ positive variables
   vm_cost_processing(i)                          processing costs (mio. USD05MER per yr)
 ;
 
+  vm_processing_substitution_cost(i)
+
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_dem_processing(t,i,kall,type)               demand for processing use (mio.tDM)

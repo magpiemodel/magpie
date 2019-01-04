@@ -4,8 +4,4 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-
-vm_dem_processing.fx(i,kall)=0;
-vm_secondary_overproduction.fx(i,ksd,kpr)=0;
-
-vm_processing_substitution_cost.fx(i)=0;
+v56_emission_costs_reg_yearly.scale(i,emis_reg_yr56) = 10e5;
