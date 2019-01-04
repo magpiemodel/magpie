@@ -42,16 +42,16 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
                  v56_emission_costs_reg_yearly(i2,emis_reg_yr56) =e=
                  sum(pollutants,
                      vm_emissions_reg(i2,emis_reg_yr56,pollutants) *
-                     f56_emis_policy("%c56_emis_policy%",pollutants,emis_reg_yr56) *
-                     sum(ct, im_pollutant_prices(ct,i2,pollutants)));
+                     sum(ct, p56_emis_policy(ct,i2,pollutants,emis_reg_yr56) *
+                     im_pollutant_prices(ct,i2,pollutants)));
 
 
  q56_emission_costs_cell_yearly(j2,emis_cell_yr56) ..
                  v56_emission_costs_cell_yearly(j2,emis_cell_yr56) =e=
                  sum(pollutants,
                      v56_emis_cell(j2,emis_cell_yr56,pollutants) *
-                     f56_emis_policy("%c56_emis_policy%",pollutants,emis_cell_yr56) *
-                     sum((ct,cell(i2,j2)),im_pollutant_prices(ct,i2,pollutants)));
+                     sum((ct,cell(i2,j2)), p56_emis_policy(ct,i2,pollutants,emis_cell_yr56) *
+                     im_pollutant_prices(ct,i2,pollutants)));
 
 *' As MAgPIE is a recursive dynamic model, within the optimization of the current time step it does not account for benefits or costs in future time steps.
 *' This can be problematic for the treatment of emissions that occur only once under continuous management (such as deforestation,
@@ -68,10 +68,10 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
                  sum(pollutants,
                      vm_emissions_reg(i2,emis_reg_one56,pollutants)
                      * m_timestep_length
-                     * f56_emis_policy("%c56_emis_policy%",pollutants,emis_reg_one56)
                      * sum(ct,
-                           im_pollutant_prices(ct,i2,pollutants)
-                           * p56_ghg_price_growth_rate(ct,i2,pollutants)/(1+p56_ghg_price_growth_rate(ct,i2,pollutants)))
+                      p56_emis_policy(ct,i2,pollutants,emis_reg_one56)
+                      * im_pollutant_prices(ct,i2,pollutants)
+                      * p56_ghg_price_growth_rate(ct,i2,pollutants)/(1+p56_ghg_price_growth_rate(ct,i2,pollutants)))
                  );
 
  q56_emission_costs_cell_oneoff(j2,emis_cell_one56) ..
@@ -79,9 +79,9 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
                  sum(pollutants,
                      v56_emis_cell(j2,emis_cell_one56,pollutants)
                      * m_timestep_length
-                     * f56_emis_policy("%c56_emis_policy%",pollutants,emis_cell_one56)
                      * sum((ct,cell(i2,j2)),
-                         im_pollutant_prices(ct,i2,pollutants)
+                    	p56_emis_policy(ct,i2,pollutants,emis_cell_one56)
+                         * im_pollutant_prices(ct,i2,pollutants)
                          * p56_ghg_price_growth_rate(ct,i2,pollutants)/(1+p56_ghg_price_growth_rate(ct,i2,pollutants)))
                  );
 
@@ -106,8 +106,7 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
  q56_reward_cdr_aff(j2) ..
                  v56_reward_cdr_aff(j2) =e=
                  vm_cdr_aff(j2) *
-                 f56_aff_policy("forestry_vegc","%c56_aff_policy%") *
                  sum((ct,cell(i2,j2)),
-                 im_pollutant_prices(ct,i2,"co2_c")
-                 * p56_ghg_price_growth_rate(ct,i2,"co2_c")/(1+p56_ghg_price_growth_rate(ct,i2,"co2_c"))
+                  im_pollutant_prices(ct,i2,"co2_c")
+                  * p56_ghg_price_growth_rate(ct,i2,"co2_c")/(1+p56_ghg_price_growth_rate(ct,i2,"co2_c"))
                  );
