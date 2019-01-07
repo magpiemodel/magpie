@@ -64,11 +64,11 @@ v32_land.up(j,"plant",ac_sub)$harvest32(j,ac_sub) = pc32_land(j,"plant",ac_sub);
 
 **C-price induced afforestation
 *boundaries afforestation mask (albedo)
-*v32_land.lo(j,"aff","ac0") = 0;
-*v32_land.up(j,"aff","ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
+v32_land.lo(j,"aff","ac0") = 0;
+v32_land.up(j,"aff","ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
 *no afforestation if carbon density <= 20 tc/ha
-*v32_land.fx(j,"aff","ac0")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
-*m_boundfix(v32_land,(j,"aff","ac0"),l,10e-5);
+v32_land.fx(j,"aff","ac0")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
+m_boundfix(v32_land,(j,"aff","ac0"),l,10e-5);
 
 display pc32_land;
 display v32_land.l,vm_land.lo,v32_land.up;
