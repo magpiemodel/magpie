@@ -26,7 +26,7 @@ equations
 
 positive variables
          v59_som_target(j,pools59)           Long-term target state of C pool (mio. tC)
-         v59_som_pool(j,pools59)             Soil organic matter pool (mio. tC)
+         vm_som_pool(j,pools59)             Soil organic matter pool (mio. tC)
          v59_crop_expansion(j)               Crop land expansion (mio. ha)
          v59_crop_reduction(j)               Land reduction (mio. ha)
 ;
@@ -34,18 +34,18 @@ positive variables
 variables
          v59_som_transfer_to_cropland(j)     Transfer of SOM from other land to cropland (mio. tC)
          vm_nr_som(j)                        Release of soil organic matter (Tg N per yr)
-         vm_costs_overrate_cropdiff(i)	     Punishment costs for overrated cropland difference (mio. USD05MER per yr)  
+         vm_costs_overrate_cropdiff(i)	     Punishment costs for overrated cropland difference (mio. USD05MER per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov59_som_target(t,j,pools59,type)       Long-term target state of C pool (mio. tC)
- ov59_som_pool(t,j,pools59,type)         Soil organic matter pool (mio. tC)
+ ov_som_pool(t,j,pools59,type)           Soil organic matter pool (mio. tC)
  ov59_crop_expansion(t,j,type)           Crop land expansion (mio. ha)
  ov59_crop_reduction(t,j,type)           Land reduction (mio. ha)
  ov59_som_transfer_to_cropland(t,j,type) Transfer of SOM from other land to cropland (mio. tC)
  ov_nr_som(t,j,type)                     Release of soil organic matter (Tg N per yr)
- ov_costs_overrate_cropdiff(t,i,type)    Punishment costs for overrated cropland difference (mio. USD05MER per yr)  
+ ov_costs_overrate_cropdiff(t,i,type)    Punishment costs for overrated cropland difference (mio. USD05MER per yr)
  oq59_som_target_cropland(t,j,type)      Estimates the long-term target state of cropland (mio. tC)
  oq59_som_target_noncropland(t,j,type)   Estimates the long-term target state of noncropland (mio. tC)
  oq59_som_transfer_to_cropland(t,j,type) Estimates the transfer of carbon pools due to land conversion (mio. tC)

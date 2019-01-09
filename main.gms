@@ -175,7 +175,7 @@ $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 
 $setglobal residues  flexreg_apr16
-$setglobal processing  substitution_dec18
+$setglobal processing  coupleproducts_feb17
 
 $setglobal trade  selfsuff_reduced
 
@@ -203,9 +203,9 @@ $setglobal awms  ipcc2006_aug16
 $setglobal ghg_policy  price_sep16
 $setglobal maccs  on_sep16
 $setglobal carbon_removal  off_sep16
-$setglobal som  off
+$setglobal som  cellpool_aug16
 
-$setglobal bioenergy  1stgen_priced_dec18
+$setglobal bioenergy  standard_flexreg_may17
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 $setglobal disagg_lvst  foragebased_aug18
