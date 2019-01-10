@@ -96,8 +96,9 @@ q35_prod_secdforest_wood(j2)..
 q35_prod_secdforest_woodfuel(j2)..
                           v35_prod(j2,"secdforest","woodfuel")
                           =e=
-                          sum(ac_sub, v35_hvarea_secdforest(j2,"wood",ac_sub)	    * sum(ct, p35_yield_natveg(ct,j2,ac_sub)))* (1-0.80)
-	   				            + sum(ac_sub, v35_hvarea_secdforest(j2,"woodfuel",ac_sub)	* sum(ct, p35_yield_natveg(ct,j2,ac_sub)));
+*                          sum(ac_sub, v35_hvarea_secdforest(j2,"wood",ac_sub)	    * sum(ct, p35_yield_natveg(ct,j2,ac_sub)))* (1-0.80)
+*	   				            +
+                        sum(ac_sub, v35_hvarea_secdforest(j2,"woodfuel",ac_sub)	* sum(ct, p35_yield_natveg(ct,j2,ac_sub)));
 
 
 **** From Primary forest
@@ -109,8 +110,9 @@ q35_prod_primforest_wood(j2)..
 q35_prod_primforest_woodfuel(j2)..
                           v35_prod(j2,"primforest","woodfuel")
                           =e=
-                          v35_hvarea_primforest(j2,"wood")      * sum(ct, p35_yield_primforest(ct,j2)) * (1-0.70)
-                         +v35_hvarea_primforest(j2,"woodfuel")  * sum(ct, p35_yield_primforest(ct,j2));
+*                          v35_hvarea_primforest(j2,"wood")      * sum(ct, p35_yield_primforest(ct,j2)) * (1-0.70)
+*                         +
+                         v35_hvarea_primforest(j2,"woodfuel")  * sum(ct, p35_yield_primforest(ct,j2));
 
 **** From other land (only woodfuel)
 q35_prod_other(j2)..
@@ -145,8 +147,8 @@ q35_secdforest_conversion(j2)..
                         + sum(kforestry,v35_hvarea_primforest(j2,kforestry))
                           ;
 ********** NatVeg production of timber
-q35_production_timber(i2)..
-                          sum((kforestry,cell(i2,j2)),vm_prod_natveg(j2,kforestry))
-                          =l=
-                          sum((kforestry,land_natveg,cell(i2,j2)), v35_prod(j2,land_natveg,kforestry)) + sum(kforestry,v35_prod_external(i2,kforestry))
+q35_production_timber(j2,kforestry)..
+                          vm_prod_natveg(j2,kforestry)
+                          =e=
+                          sum(land_natveg, v35_prod(j2,land_natveg,kforestry)) + sum(cell(i2,j2),v35_prod_external(i2,kforestry))
                           ;

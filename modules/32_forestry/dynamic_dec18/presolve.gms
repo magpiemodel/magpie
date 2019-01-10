@@ -19,7 +19,8 @@ p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"veg
 
 **limit demand for afforestation if not enough area for conversion is available
 *calc potential afforestation (cropland + pasture)
-        p32_aff_pot(t,j) = pcm_land(j,"crop") + pcm_land(j,"past");
+*        p32_aff_pot(t,j) = pcm_land(j,"crop") + pcm_land(j,"past");
+         p32_aff_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop")) + (vm_land.l(j,"past") - vm_land.lo(j,"past"));
 *correct indc forest stock based on p32_aff_pot
         if((ord(t) > 1),
                 p32_aff_pol(t,j)$(p32_aff_pol(t,j) - p32_aff_pol(t-1,j) > p32_aff_pot(t,j)) = p32_aff_pol(t-1,j) + p32_aff_pot(t,j);
