@@ -43,6 +43,7 @@ repeat(
     );
 
   p80_modelstat(t) = magpie.modelstat;
+  p80_numNOpt(t) = magpie.numNOpt;
 
   display "vm_cost_glo.l";
   display vm_cost_glo.l;
@@ -54,7 +55,7 @@ repeat(
 
   display s80_counter;
 
-  until (p80_modelstat(t) <= 2 or s80_counter >= s80_maxiter)
+  until ((p80_modelstat(t) <= 2 and p80_numNOpt(t) = 0) or s80_counter >= s80_maxiter)
 );
 
 *' @stop

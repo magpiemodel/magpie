@@ -6,6 +6,7 @@
 
 parameters
 	p80_modelstat(t)	modelstat indicator (1)
+	p80_numNOpt(t)		numNOpt indicator (1)
 ;
 
 scalars
