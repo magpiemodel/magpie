@@ -14,6 +14,10 @@ positive variables
   vm_cost_processing(i)                          Processing costs (mio. USD05MER per yr)
 ;
 
+variables
+  vm_processing_substitution_cost(i)             Costs or benefits of substituting one product by another (mio. USD05MER per yr)
+;
+
 equations
      q20_processing(i,kpr,ksd)                          Processing equation (mio. tDM per yr)
      q20_processing_aggregation_nocereals(i,kpr)        Connecting processing activity to processing flows (mio. tDM per yr)
@@ -31,6 +35,7 @@ parameters
  ov20_secondary_substitutes(t,i,ksd,kpr,type)             Substitutes for inferior secondary products (mio. tDM per yr)
  ov_secondary_overproduction(t,i,kall,kpr,type)           Overproduction of secondary couple products (mio. tDM per yr)
  ov_cost_processing(t,i,type)                             Processing costs (mio. USD05MER per yr)
+ ov_processing_substitution_cost(t,i,type)                Costs or benefits of substituting one product by another (mio. USD05MER per yr)
  oq20_processing(t,i,kpr,ksd,type)                        Processing equation (mio. tDM per yr)
  oq20_processing_aggregation_nocereals(t,i,kpr,type)      Connecting processing activity to processing flows (mio. tDM per yr)
  oq20_processing_aggregation_cereals(t,i,kcereals20,type) Connecting processing activity to food use for milling (mio. tDM per yr)

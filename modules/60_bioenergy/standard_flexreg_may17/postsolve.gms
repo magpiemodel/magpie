@@ -7,21 +7,25 @@
 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
- ov_dem_bioen(t,i,kall,"marginal")  = vm_dem_bioen.m(i,kall);
- oq60_bioenergy_glo(t,"marginal")   = q60_bioenergy_glo.m;
- oq60_bioenergy_reg(t,i,"marginal") = q60_bioenergy_reg.m(i);
- oq60_res_2ndgenBE(t,i,"marginal")  = q60_res_2ndgenBE.m(i);
- ov_dem_bioen(t,i,kall,"level")     = vm_dem_bioen.l(i,kall);
- oq60_bioenergy_glo(t,"level")      = q60_bioenergy_glo.l;
- oq60_bioenergy_reg(t,i,"level")    = q60_bioenergy_reg.l(i);
- oq60_res_2ndgenBE(t,i,"level")     = q60_res_2ndgenBE.l(i);
- ov_dem_bioen(t,i,kall,"upper")     = vm_dem_bioen.up(i,kall);
- oq60_bioenergy_glo(t,"upper")      = q60_bioenergy_glo.up;
- oq60_bioenergy_reg(t,i,"upper")    = q60_bioenergy_reg.up(i);
- oq60_res_2ndgenBE(t,i,"upper")     = q60_res_2ndgenBE.up(i);
- ov_dem_bioen(t,i,kall,"lower")     = vm_dem_bioen.lo(i,kall);
- oq60_bioenergy_glo(t,"lower")      = q60_bioenergy_glo.lo;
- oq60_bioenergy_reg(t,i,"lower")    = q60_bioenergy_reg.lo(i);
- oq60_res_2ndgenBE(t,i,"lower")     = q60_res_2ndgenBE.lo(i);
+ ov_dem_bioen(t,i,kall,"marginal")    = vm_dem_bioen.m(i,kall);
+ ov_bioenergy_utility(t,i,"marginal") = vm_bioenergy_utility.m(i);
+ oq60_bioenergy_glo(t,"marginal")     = q60_bioenergy_glo.m;
+ oq60_bioenergy_reg(t,i,"marginal")   = q60_bioenergy_reg.m(i);
+ oq60_res_2ndgenBE(t,i,"marginal")    = q60_res_2ndgenBE.m(i);
+ ov_dem_bioen(t,i,kall,"level")       = vm_dem_bioen.l(i,kall);
+ ov_bioenergy_utility(t,i,"level")    = vm_bioenergy_utility.l(i);
+ oq60_bioenergy_glo(t,"level")        = q60_bioenergy_glo.l;
+ oq60_bioenergy_reg(t,i,"level")      = q60_bioenergy_reg.l(i);
+ oq60_res_2ndgenBE(t,i,"level")       = q60_res_2ndgenBE.l(i);
+ ov_dem_bioen(t,i,kall,"upper")       = vm_dem_bioen.up(i,kall);
+ ov_bioenergy_utility(t,i,"upper")    = vm_bioenergy_utility.up(i);
+ oq60_bioenergy_glo(t,"upper")        = q60_bioenergy_glo.up;
+ oq60_bioenergy_reg(t,i,"upper")      = q60_bioenergy_reg.up(i);
+ oq60_res_2ndgenBE(t,i,"upper")       = q60_res_2ndgenBE.up(i);
+ ov_dem_bioen(t,i,kall,"lower")       = vm_dem_bioen.lo(i,kall);
+ ov_bioenergy_utility(t,i,"lower")    = vm_bioenergy_utility.lo(i);
+ oq60_bioenergy_glo(t,"lower")        = q60_bioenergy_glo.lo;
+ oq60_bioenergy_reg(t,i,"lower")      = q60_bioenergy_reg.lo(i);
+ oq60_res_2ndgenBE(t,i,"lower")       = q60_res_2ndgenBE.lo(i);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
 
