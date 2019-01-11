@@ -119,7 +119,8 @@ pkgs <- c("ggplot2",
           "magpiesets",
           "lusweave",
           "luscale",
-          "goxygen")
+          "goxygen",
+		  "luplot")
 install.packages(pkgs)
 ```
 For post-processing model outputs *Latex* is required

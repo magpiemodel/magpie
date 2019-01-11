@@ -4,20 +4,10 @@
 # or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # Contact: magpie@pik-potsdam.de
 
-library(gdx)
-library(luscale)
-library(luplot)
-library(lucode)
-library(lusweave)
 library(magpie4)
-library(ncdf4)
-library(raster)
 library(magpiesets)
-library(moinput)
-library(mrvalidation)
+library(lusweave)
 library(magclass)
-library(madrat)
-library(moinput)
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
@@ -49,11 +39,17 @@ for (i in LU) {
   breakpoints <- c(0,0.1,0.2,0.3)
   for (j in getYears(modout_landuse)) {
     cat(paste0(":::",LU," ",j,"\n"))
-    swfigure(sw,"plotmap2",sw_option="width=10,height=6",
+	if("luplot" %in% rownames(installed.packages())){
+	library(luplot)
+	swfigure(sw,"plotmap2",sw_option="width=10,height=6",
              modout_landuse[,j,i], title = paste0(i),legend_breaks = breakpoints,
              lowcol = "white",midcol = "red",highcol = "green",
              legendname = "m ha",
-             legend_range = c(0,0.3),land_colour = "grey",sea=F)
+             legend_range = c(0,0.3),land_colour = "grey",sea=F) 
+	} else {
+	swlatex(sw,"This functionality requires the package luplot to be loaded. Send an email to magpie[at]pik-potsdam.de for more details.")
+	break
+	}
   }
 }
 

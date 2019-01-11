@@ -7,3 +7,5 @@
 
 vm_dem_processing.fx(i,kall)=0;
 vm_secondary_overproduction.fx(i,ksd,kpr)=0;
+
+vm_processing_substitution_cost.fx(i)=0;
