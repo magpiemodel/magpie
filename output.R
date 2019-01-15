@@ -37,6 +37,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
     } else {
       dirs <- sub("fulldata.gdx","",sub("./output/","",tmp, fixed=TRUE), fixed=TRUE)
     }
+    dirs <- gtools::mixedsort(dirs)
     dirs <- c("all",dirs)
     cat("\n",title,":\n", sep="")
     cat(paste(1:length(dirs), dirs, sep=": " ),sep="\n")
