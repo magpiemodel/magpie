@@ -103,6 +103,10 @@ $title magpie
 * md5sum: 2e3390fdc82f9277e162fe993c8aff74
 * Repository: /p/projects/landuse/users/mishra/additional_data_private_forestry
 * 
+* Used data set: additional_data_rev3.62.tgz
+* md5sum: 0b7a94fe3114c7fb2b14f9ac59c3a01a
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+*
 * Low resolution: c200
 * High resolution: 0.5
 * 
@@ -131,11 +135,11 @@ $title magpie
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
-* 
-* 
-* 
-* Last modification (input data): Thu Dec 13 20:09:44 2018
-* 
+*
+*
+*
+* Last modification (input data): Tue Dec 18 10:24:18 2018
+*
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
@@ -179,7 +183,7 @@ $setglobal demand  sector_dec18
 $setglobal production  flexreg_apr16
 
 $setglobal residues  flexreg_apr16
-$setglobal processing  coupleproducts_feb17
+$setglobal processing  substitution_dec18
 
 $setglobal trade  selfsuff_reduced_ff
 
@@ -204,12 +208,12 @@ $setglobal carbon  normal_dec17
 $setglobal methane  ipcc2006_flexreg_apr16
 $setglobal phosphorus  off
 $setglobal awms  ipcc2006_aug16
-$setglobal ghg_policy  price_sep16
+$setglobal ghg_policy  price_jan19
 $setglobal maccs  on_sep16
 $setglobal carbon_removal  off_sep16
 $setglobal som  off
 
-$setglobal bioenergy  standard_flexreg_may17
+$setglobal bioenergy  1stgen_priced_dec18
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 $setglobal disagg_lvst  foragebased_aug18

@@ -5,7 +5,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 * Limit demand for prescribed NPI/NDC afforestation in `p32_aff_pol` if not enough suitable area (`p32_aff_pot`) for afforestation is available.
-	p32_aff_pot(t,j) = pcm_land(j,"crop") + pcm_land(j,"past");
+	p32_aff_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop")) + (vm_land.l(j,"past") - vm_land.lo(j,"past"));
 	if((ord(t) > 1),
 		p32_aff_pol(t,j)$(p32_aff_pol(t,j) - p32_aff_pol(t-1,j) > p32_aff_pot(t,j)) = p32_aff_pol(t-1,j) + p32_aff_pot(t,j);
 	);
