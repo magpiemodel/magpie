@@ -5,7 +5,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 vm_area.fx(j,"begr","irrigated")=0;
-vm_area.fx(j,"begr","irrigated")=0;
 vm_area.fx(j,"betr","irrigated")=0;
 
 crpmax30(crp30) = yes$(f30_rotation_max_shr(crp30) < 1);
