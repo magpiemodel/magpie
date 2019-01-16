@@ -21,13 +21,6 @@ cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=
 
 cfg$output <- c("rds_report","interpolation")
 
-## Module settings
-#cfg$policyregions <- "iso"
-cfg$gms$demand <- "sector_dec18"
-cfg$gms$trade <- "selfsuff_reduced_ff"
-cfg$gms$forestry  <- "dynamic_dec18"
-cfg$gms$natveg  <- "dynamic_dec18"
-
 #set defaults
 codeCheck <- TRUE
 
@@ -36,6 +29,14 @@ codeCheck <- TRUE
 cfg$gms$c_timesteps <- "5year"
 cfg$results_folder <- "output/:title:"
 cfg <- setScenario(cfg,c("SSP2","NPI"))
+
+## Module settings
+#cfg$policyregions <- "iso"
+cfg$gms$demand <- "sector_dec18"
+cfg$gms$trade <- "selfsuff_reduced_ff"
+cfg$gms$forestry  <- "dynamic_dec18"
+cfg$gms$natveg  <- "dynamic_dec18"
+
 
 ## Comment out for CO2 prices
 #cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"      	# def = "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
@@ -51,7 +52,7 @@ for (rl in rl_all) {
 	t <- gsub(".*_", "", rl)
 	t <- gsub("rl","",t)
 	cfg$gms$c32_rot_length <- rl
-	if(cfg$gms$c56_pollutant_prices == "SSP2-Ref-SPA0-V15-REMIND-MAGPIE" ) {
+	if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
 	cfg$title<- paste0(t,"_",format(Sys.time(), format="%Y%m%d"),"_",format(Sys.time(), format="%H%M"),"_CO2prices")
 	} else {
 	cfg$title<- paste0(t,"_",format(Sys.time(), format="%Y%m%d"),"_",format(Sys.time(), format="%H%M"))
