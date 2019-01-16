@@ -37,6 +37,10 @@ cfg$gms$c_timesteps <- "5year"
 cfg$results_folder <- "output/:title:"
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 
+## Comment out for CO2 prices
+#cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"      	# def = "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
+#cfg$gms$c60_2ndgen_biodem <- "SSP2-26-SPA2"     						# def = "SSP2-Ref-SPA0"
+
 #ALERT:  At the moment this script cannot download new data in case the input files are changed. Has to be set to true.
 cfg$force_download <- FALSE
 rl_all<-c("rlGTM")
@@ -47,6 +51,10 @@ for (rl in rl_all) {
 	t <- gsub(".*_", "", rl)
 	t <- gsub("rl","",t)
 	cfg$gms$c32_rot_length <- rl
+	if(cfg$gms$c56_pollutant_prices == "SSP2-Ref-SPA0-V15-REMIND-MAGPIE" ) {
+	cfg$title<- paste0(t,"_",format(Sys.time(), format="%Y%m%d"),"_",format(Sys.time(), format="%H%M"),"_CO2prices")
+	} else {
 	cfg$title<- paste0(t,"_",format(Sys.time(), format="%Y%m%d"),"_",format(Sys.time(), format="%H%M"))
+	}
 	start_run(cfg=cfg,codeCheck=codeCheck)
 }
