@@ -200,7 +200,7 @@ $setglobal carbon  normal_dec17
 $setglobal methane  ipcc2006_flexreg_apr16
 $setglobal phosphorus  off
 $setglobal awms  ipcc2006_aug16
-$setglobal ghg_policy  price_sep16
+$setglobal ghg_policy  price_jan19
 $setglobal maccs  on_sep16
 $setglobal carbon_removal  off_sep16
 $setglobal som  off

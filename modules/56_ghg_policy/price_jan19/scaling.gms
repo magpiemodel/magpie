@@ -4,12 +4,4 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-parameters
-	p80_modelstat(t)	modelstat indicator (1)
-	p80_numNOpt(t)		numNOpt indicator (1)
-;
-
-scalars
-  s80_counter      counter (1)
-  s80_obj_linear   linear objective value (mio. USD05MER per yr)
-;
+v56_emission_costs_reg_yearly.scale(i,emis_reg_yr56) = 10e5;
