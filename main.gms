@@ -95,6 +95,10 @@ $title magpie
 * md5sum: 98e158205482936e487aeb616dea5403
 * Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
+* Used data set: additional_data_rev3.65.tgz
+* md5sum: 0def52c4bf1dd0bad3ee995f7c3296cd
+* Repository: /p/projects/landuse/data/input/archive
+* 
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev35_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: 5f53004397ab92625cd21b642b78ebb7
 * Repository: /p/projects/landuse/data/input/archive
@@ -103,10 +107,6 @@ $title magpie
 * md5sum: 2e3390fdc82f9277e162fe993c8aff74
 * Repository: /p/projects/landuse/users/mishra/additional_data_private_forestry
 * 
-* Used data set: additional_data_rev3.62.tgz
-* md5sum: 0b7a94fe3114c7fb2b14f9ac59c3a01a
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-*
 * Low resolution: c200
 * High resolution: 0.5
 * 
@@ -135,11 +135,11 @@ $title magpie
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
-*
-*
-*
-* Last modification (input data): Tue Dec 18 10:24:18 2018
-*
+* 
+* 
+* 
+* Last modification (input data): Tue Jan 15 16:46:49 2019
+* 
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper

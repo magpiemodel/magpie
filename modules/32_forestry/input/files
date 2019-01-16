@@ -6,7 +6,7 @@ f32_fac_req_ha.csv
 npi_ndc_aff_pol.cs3
 f32_forestry_management.csv
 f32_harvestingcost.csv
-fm_production_ratio.csv
+f32_production_ratio.csv
 f32_rot_length.csv
 f32_transport_costs.csv
 transport_distance.cs2
