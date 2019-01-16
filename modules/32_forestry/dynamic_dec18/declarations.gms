@@ -31,7 +31,8 @@ positive variables
  vm_cost_fore(i)                                  Forestry costs (Mio USD)
  v32_land(j,type32,ac)                            Forestry land pools (mio. ha)
  vm_landdiff_forestry                             Aggregated difference in forestry land compared to previous timestep (mio. ha)
- vm_cdr_aff(j,co2_forestry)                       Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
+* vm_cdr_aff(j,co2_forestry)                       Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
+ vm_cdr_aff(j)                       Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
  v32_prod(j,kforestry)                             Timber production (mio. m3)
  v32_cost_harvest(i)                              Cost of timber harvesting (USD per ha)
  v32_cost_recur(i)                                Recurring forest management costs (USD per ha)
@@ -51,7 +52,7 @@ positive variables
 equations
  q32_cost_total(i)                                total forestry costs constraint (mio. USD)
  q32_land(j)                                      land constraint (mio. ha)
- q32_cdr_aff(j,co2_forestry)                      calculation of CDR from afforestation
+ q32_cdr_aff(j)                      calculation of CDR from afforestation
  q32_carbon(j,c_pools)                            forestry carbon stock calculation
  q32_diff                                         aggregated difference in forestry land compared to previous timestep (mio. ha)
  q32_max_aff                                      maximum total global afforestation
@@ -75,7 +76,7 @@ parameters
  ov_cost_fore(t,i,type)                          Forestry costs (Mio USD)
  ov32_land(t,j,type32,ac,type)                   Forestry land pools (mio. ha)
  ov_landdiff_forestry(t,type)                    Aggregated difference in forestry land compared to previous timestep (mio. ha)
- ov_cdr_aff(t,j,co2_forestry,type)               Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
+ ov_cdr_aff(t,j,type)                            Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
  ov32_prod(t,j,kforestry,type)                   Timber production (mio. m3)
  ov32_cost_harvest(t,i,type)                     Cost of timber harvesting (USD per ha)
  ov32_cost_recur(t,i,type)                       Recurring forest management costs (USD per ha)
@@ -89,7 +90,7 @@ parameters
  ov_prod_forestry(t,j,kforestry,type)            xx
  oq32_cost_total(t,i,type)                       total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                             land constraint (mio. ha)
- oq32_cdr_aff(t,j,co2_forestry,type)             calculation of CDR from afforestation
+ oq32_cdr_aff(t,j,type)                          calculation of CDR from afforestation
  oq32_carbon(t,j,c_pools,type)                   forestry carbon stock calculation
  oq32_diff(t,type)                               aggregated difference in forestry land compared to previous timestep (mio. ha)
  oq32_max_aff(t,type)                            maximum total global afforestation

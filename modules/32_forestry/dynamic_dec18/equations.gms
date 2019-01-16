@@ -9,10 +9,20 @@
 
 *****C-PRICE INDUCED AFFORESTATION
 **negative emissions seen in maccs module
- q32_cdr_aff(j2,co2_forestry) .. vm_cdr_aff(j2,co2_forestry) =e=
+
+q32_cdr_aff(j2) ..
+vm_cdr_aff(j2) =e=
+sum(ac$(ord(ac) > 1
+AND (ord(ac)-1) <= s32_planing_horizon/5), 
+v32_land(j2,"aff","ac0") *
+(sum(ct, pm_carbon_density_ac(ct,j2,ac,"vegc")) -
+sum(ct, pm_carbon_density_ac(ct,j2,ac-1,"vegc"))));
+
+$ontext
+q32_cdr_aff(j2,co2_forestry) .. vm_cdr_aff(j2,co2_forestry) =e=
                                         sum((ac,emis_co2_to_forestry(co2_forestry,c_pools))$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planing_horizon/5),
                                         v32_land(j2,"aff","ac0") * (sum(ct, pm_carbon_density_ac(ct,j2,ac,c_pools)) - sum(ct, pm_carbon_density_ac(ct,j2,ac-1,c_pools))));
-
+$offtext
 **Upper bound for C-price induced afforestation area
  q32_max_aff .. sum((j2,ac), v32_land(j2,"aff",ac)) =l= s32_max_aff_area;
 

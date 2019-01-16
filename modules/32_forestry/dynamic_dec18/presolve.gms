@@ -71,6 +71,10 @@ v32_land.up(j,"aff","ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
 v32_land.fx(j,"aff","ac0")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
 m_boundfix(v32_land,(j,"aff","ac0"),l,10e-5);
 
+** Bounds for indc and aff forests
+v32_land.fx(j,"aff",ac_sub) = pc32_land(j,"aff",ac_sub);
+v32_land.fx(j,"indc",ac_sub) = pc32_land(j,"indc",ac_sub);
+
 display pc32_land;
 display v32_land.l,vm_land.lo,v32_land.up;
 
