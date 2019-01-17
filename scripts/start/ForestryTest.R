@@ -37,25 +37,26 @@ cfg$gms$trade <- "selfsuff_reduced_ff"
 cfg$gms$forestry  <- "dynamic_dec18"
 cfg$gms$natveg  <- "dynamic_dec18"
 
-
-## Comment out for CO2 prices
-#cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"      	# def = "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
-#cfg$gms$c60_2ndgen_biodem <- "SSP2-26-SPA2"     						# def = "SSP2-Ref-SPA0"
-
 #ALERT:  At the moment this script cannot download new data in case the input files are changed. Has to be set to true.
 cfg$force_download <- FALSE
 rl_all<-c("rlGTM")
 #rl_all<-c("rlGTM","rlFAO_max")
 #rl_all<-c("hybrid")
-for (rl in rl_all) {
-	print(paste("Rotation length:",rl,"-----"))
-	t <- gsub(".*_", "", rl)
-	t <- gsub("rl","",t)
-	cfg$gms$c32_rot_length <- rl
-	if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
-	cfg$title<- paste0(t,"_",format(Sys.time(), format="%Y%m%d"),"_",format(Sys.time(), format="%H%M"),"_CO2prices")
-	} else {
-	cfg$title<- paste0(t,"_",format(Sys.time(), format="%Y%m%d"),"_",format(Sys.time(), format="%H%M"))
+for(biodem in c("SSP2-Ref-SPA0","SSP2-26-SPA2")){
+	
+	cfg$gms$c56_pollutant_prices <- paste0(biodem,"-V15-REMIND-MAGPIE")      	# def = "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
+	cfg$gms$c60_2ndgen_biodem <- biodem     									# def = "SSP2-Ref-SPA0"
+
+	for (rl in rl_all) {
+		print(paste("Rotation length:",rl,"-----"))
+		t <- gsub(".*_", "", rl)
+		t <- gsub("rl","",t)
+		cfg$gms$c32_rot_length <- rl
+		if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
+			cfg$title<- paste0(t,"_",format(Sys.time(), format="%Y%m%d"),"_",format(Sys.time(), format="%H%M"),"_CO2prices")
+			} else {
+			cfg$title<- paste0(t,"_",format(Sys.time(), format="%Y%m%d"),"_",format(Sys.time(), format="%H%M"))
+			}
+		start_run(cfg=cfg,codeCheck=codeCheck)
 	}
-	start_run(cfg=cfg,codeCheck=codeCheck)
 }
