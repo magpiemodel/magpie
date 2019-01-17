@@ -26,7 +26,7 @@ buildInputVector <- function(regionmapping   = "agmip",
                              archive_rev     = "34",
                              madrat_rev      = "4.14",
                              validation_rev  = "4.14",
-			                       #calibration     = "",
+			                       calibration     = NULL,
                              additional_data = "additional_data_rev3.65.tgz") {
   mappings <- c(H11="8a828c6ed5004e77d1ba2025e8ea2261",
                 H12="690d3718e151be1b450b394c1064b1c5",
@@ -38,7 +38,7 @@ buildInputVector <- function(regionmapping   = "agmip",
   archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", mappings[regionmapping], ".tgz")
   madrat  <- paste0("rev", madrat_rev,"_", mappings[regionmapping], "_magpie", ".tgz")
   validation  <- paste0("rev", validation_rev,"_", mappings[regionmapping], "_validation", ".tgz")
-  return(c(archive,madrat,validation,additional_data))
+  return(c(archive,madrat,validation,calibration,additional_data))
 }
 
 ### SIM4NEXUS runs ###
