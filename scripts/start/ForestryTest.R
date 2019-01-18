@@ -31,7 +31,6 @@ cfg$results_folder <- "output/:title:"
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 
 ## Module settings
-#cfg$policyregions <- "iso"
 cfg$gms$demand <- "sector_dec18"
 cfg$gms$trade <- "selfsuff_reduced_ff"
 cfg$gms$forestry  <- "dynamic_dec18"
@@ -42,7 +41,11 @@ cfg$force_download <- FALSE
 rl_all<-c("rlGTM")
 #rl_all<-c("rlGTM","rlFAO_max")
 #rl_all<-c("hybrid")
-for(biodem in c("SSP2-Ref-SPA0","SSP2-26-SPA2")){
+
+co2_price_scenarios <- c("SSP2-Ref-SPA0")
+#co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
+
+for(biodem in co2_price_scenarios){
 	
 	cfg$gms$c56_pollutant_prices <- paste0(biodem,"-V15-REMIND-MAGPIE")      	# def = "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
 	cfg$gms$c60_2ndgen_biodem <- biodem     									# def = "SSP2-Ref-SPA0"
