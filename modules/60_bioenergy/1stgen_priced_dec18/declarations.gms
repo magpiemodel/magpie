@@ -13,8 +13,8 @@ parameters
 
 positive variables
  vm_dem_bioen(i,kall)               Regional bioenergy demand  (mio. tDM per yr)
- v60_2ndgen_bioenergy_dem_dedicated(i,kall) bioenergy demand which can come from different regions(mio. tDM per yr)
- v60_2ndgen_bioenergy_dem_residues(i,kall) bioenergy demand which can come from different product types(mio. tDM per yr)
+ v60_2ndgen_bioenergy_dem_dedicated(i,kall) bioenergy demand which can come from different regions (mio. GJ per yr)
+ v60_2ndgen_bioenergy_dem_residues(i,kall) bioenergy demand which can come from different product types (mio. GJ per yr)
 ;
 
 variables
