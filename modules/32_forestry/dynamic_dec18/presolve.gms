@@ -93,7 +93,7 @@ p32_yield_forestry_ac(t,j,ac_sub) =
 *pm_rotation_reg(i) = ord(t) + ceil(p32_rot_length(i)/5) + card(t_past_ff);
 
 *pc32_yield_forestry_future(j) = sum(ac$(ac.off = p32_rotation_cellular(j)+1), p32_yield_forestry_ac(t,j,ac));
-pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular(j)), p32_yield_forestry_ac(t,j,ac_sub));
+pc32_yield_forestry_future(j) = sum(ac$(ac.off = sum(cell(i,j), ceil(f32_rot_length(i,"%c32_rot_length_estb%")/5))+1), p32_yield_forestry_ac(t,j,ac));
 display pc32_yield_forestry_future;
 
 ** Calculating future yield from already mature plantations.
