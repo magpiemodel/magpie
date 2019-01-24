@@ -90,7 +90,7 @@ p32_yield_forestry_ac(t,j,ac_sub) =
 
 ** Future demand relevant in current time step depending on rotation length
 ***** Card is used here to exclude y1965 to y1995 when calculating rotation length calculations for past
-pm_rotation_reg(i) = ord(t) + ceil(p32_rot_length(i)/5) + card(t_past_ff);
+*pm_rotation_reg(i) = ord(t) + ceil(p32_rot_length(i)/5) + card(t_past_ff);
 
 *pc32_yield_forestry_future(j) = sum(ac$(ac.off = p32_rotation_cellular(j)+1), p32_yield_forestry_ac(t,j,ac));
 pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular(j)), p32_yield_forestry_ac(t,j,ac_sub));
