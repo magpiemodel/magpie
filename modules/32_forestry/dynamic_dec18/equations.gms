@@ -13,7 +13,7 @@
 q32_cdr_aff(j2) ..
 vm_cdr_aff(j2) =e=
 sum(ac$(ord(ac) > 1
-AND (ord(ac)-1) <= s32_planing_horizon/5), 
+AND (ord(ac)-1) <= s32_planing_horizon/5),
 v32_land(j2,"aff","ac0") *
 (sum(ct, pm_carbon_density_ac(ct,j2,ac,"vegc")) -
 sum(ct, pm_carbon_density_ac(ct,j2,ac-1,"vegc"))));
@@ -115,8 +115,7 @@ q32_production_timber(j2,kforestry)..
 ** Establishment in current time step already accounts for a certain percentage of production to be fulfilled by plantations in future.
 ** 20percent buffer and 88 percent efficiency 12 percent loss factor
 
-q32_prod_future(i2) ..          sum(kforestry2, vm_prod_future_reg_ff(i2,kforestry2)) * 0.45
-* pcm_production_ratio_future(i2)
+q32_prod_future(i2) ..          sum(kforestry2, vm_prod_future_reg_ff(i2,kforestry2)) * pcm_production_ratio_future(i2)
                                 =e=
                                 sum(cell(i2,j2), (v32_land(j2,"plant","ac0") + v32_missing_area_future(j2)) * pc32_yield_forestry_future(j2) * 0.88);
 *    							+
