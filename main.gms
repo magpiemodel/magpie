@@ -93,19 +93,19 @@ $title magpie
 * 
 * Used data set: magpie4.0_default_sep18.tgz
 * md5sum: 98e158205482936e487aeb616dea5403
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: additional_data_rev3.65.tgz
 * md5sum: 0def52c4bf1dd0bad3ee995f7c3296cd
-* Repository: /p/projects/landuse/data/input/archive
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev35_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: 5f53004397ab92625cd21b642b78ebb7
-* Repository: /p/projects/landuse/data/input/archive
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Used data set: private_forestry_dec18_20181213v3.tgz
 * md5sum: 2e3390fdc82f9277e162fe993c8aff74
-* Repository: /p/projects/landuse/users/mishra/additional_data_private_forestry
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/users/mishra/additional_data_private_forestry
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -138,7 +138,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Wed Jan 16 11:37:56 2019
+* Last modification (input data): Thu Jan 24 11:37:04 2019
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 

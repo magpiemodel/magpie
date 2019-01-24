@@ -7,6 +7,7 @@ p32_rot_length("MEA") = 60;
 p32_rot_length("REF") = 50;
 **********************************************
 pm_rot_length(i) = p32_rot_length(i);
+pm_rot_length_estb(i) = f32_rot_length(i,"hybrid");
 ** rotation length in 5 year time steps
 p32_rotation_cellular(j) = sum(cell(i,j), ceil(p32_rot_length(i)/5));
 display p32_rotation_cellular;
