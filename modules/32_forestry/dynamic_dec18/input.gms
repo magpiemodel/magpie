@@ -2,6 +2,7 @@ $setglobal c32_aff_mask  noboreal
 * options: unrestricted, noboreal, onlytropical
 $setglobal c32_aff_policy  npi
 $setglobal c32_rot_length  rlGTM
+$setglobal c32_rot_length_estb rlGTM
 
 scalars
   c32_reESTBcost Reestablishment cost in USD per ha / 2000 /

@@ -40,26 +40,35 @@ cfg$gms$natveg  <- "dynamic_dec18"
 cfg$force_download <- FALSE
 #rl_all<-c("rlGTM")
 rl_all<-c("rlGTM","rlFAO_max","rlFAO_min")
-#rl_all<-c("hybrid")
+rl_establishment<-c("hybrid")
 
-#co2_price_scenarios <- c("SSP2-Ref-SPA0")
-co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
+cfg$gms$c32pm_rot_length_estb <- rl_estb
+
+co2_price_scenarios <- c("SSP2-Ref-SPA0")
+#co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
 
 for(biodem in co2_price_scenarios){
-	
+
 	cfg$gms$c56_pollutant_prices <- paste0(biodem,"-V15-REMIND-MAGPIE")      	# def = "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
 	cfg$gms$c60_2ndgen_biodem <- biodem     									# def = "SSP2-Ref-SPA0"
 
-	for (rl in rl_all) {
-		print(paste("Rotation length:",rl,"-----"))
-		t <- gsub(".*_", "", rl)
-		t <- gsub("rl","",t)
-		cfg$gms$c32_rot_length <- rl
-		if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
-			cfg$title<- paste0(t,"_",format(Sys.time(), format="%Y%m%d"),"_",format(Sys.time(), format="%H%M"),"_CO2prices")
-			} else {
-			cfg$title<- paste0(t,"_",format(Sys.time(), format="%Y%m%d"),"_",format(Sys.time(), format="%H%M"))
-			}
-		start_run(cfg=cfg,codeCheck=codeCheck)
-	}
+  for (rl_estb in rl_establishment){
+  	for (rl in rl_all) {
+  		print(paste("Rotation length:",rl,"-----"))
+  		t <- gsub(".*_", "", rl)
+  		t <- gsub("rl","",t)
+
+      t_estb <- gsub(".*_", "", rl_estb)
+      t_estb <- gsub("rl","",t_estb)
+
+  		cfg$gms$c32_rot_length <- rl
+      cfg$gms$c32pm_rot_length_estb <- rl_estb
+  		if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
+  			cfg$title<- paste0(t,"_","e",t_estb,"_",format(Sys.time(), format="%Y%m%d"),"_",format(Sys.time(), format="%H%M"),"_CO2prices")
+  			} else {
+  			cfg$title<- paste0(t,"_",format(Sys.time(), format="%Y%m%d"),"_",format(Sys.time(), format="%H%M"))
+  			}
+  		start_run(cfg=cfg,codeCheck=codeCheck)
+  	}
+  }
 }
