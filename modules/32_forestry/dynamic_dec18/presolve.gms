@@ -90,10 +90,11 @@ p32_yield_forestry_ac(t,j,ac_sub) =
 
 ** Future demand relevant in current time step depending on rotation length
 ***** Card is used here to exclude y1965 to y1995 when calculating rotation length calculations for past
-*pm_rotation_reg(i) = ord(t) + ceil(p32_rot_length(i)/5) + card(t_past_ff);
+pm_rotation_reg(i) = ord(t) + ceil(p32_rot_length(i)/5) + card(t_past_ff);
 
 *pc32_yield_forestry_future(j) = sum(ac$(ac.off = p32_rotation_cellular(j)+1), p32_yield_forestry_ac(t,j,ac));
-pc32_yield_forestry_future(j) = sum(ac$(ac.off = sum(cell(i,j), ceil(f32_rot_length(i,"%c32_rot_length_estb%")/5))+1), p32_yield_forestry_ac(t,j,ac));
+*pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular(j)), p32_yield_forestry_ac(t,j,ac_sub));
+pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = sum(cell(i,j), ceil(pm_rot_length_estb(i)/5))), p32_yield_forestry_ac(t,j,ac_sub));
 display pc32_yield_forestry_future;
 
 ** Calculating future yield from already mature plantations.

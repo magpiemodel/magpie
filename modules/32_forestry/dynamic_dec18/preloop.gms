@@ -7,7 +7,7 @@ p32_rot_length("MEA") = 60;
 p32_rot_length("REF") = 50;
 **********************************************
 pm_rot_length(i) = p32_rot_length(i);
-pm_rot_length_estb(i) = f32_rot_length(i,"%c32_rot_length_estb%");
+pm_rot_length_estb(i)= f32_rot_length(i,"%c32_rot_length_estb%");
 ** rotation length in 5 year time steps
 p32_rotation_cellular(j) = sum(cell(i,j), ceil(p32_rot_length(i)/5));
 display p32_rotation_cellular;
@@ -42,9 +42,7 @@ p32_land(t,j,type32,ac) = 0;
 ** divide initial forestry area by number of age classes within protect32
 ** since protect32 is TRUE for ord(ac_sub) < p32_rotation_cellular(j) there is one additional junk which is assigned to ac0
 *p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular(j);
-p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/sum(cell(i,j), ceil(f32_rot_length(i,"hybrid")/5));
-
-*p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/sum(cell(i,j), ceil(f32_rot_length(i,"init")/5));
+p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/sum(cell(i,j), ceil(f32_rot_length(i,"%c32_rot_length_estb%")/5));
 
 p32_land("y1995",j,"plant",ac_sub)$(protect32(j,ac_sub)) = p32_plant_ini_ac(j);
 p32_land("y1995",j,"plant","ac0") = p32_plant_ini_ac(j);
