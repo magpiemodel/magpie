@@ -25,7 +25,6 @@ parameters
  pcm_production_ratio_future(i)                  Future production ratio (1)
  pm_rotation_reg(i)                              Regional rotation length of plantations translated to age class equivalent for future (1)
  p32_error_check                                  X (1)
- pm_rot_length_estb(i)                            Rotation length used for establishment decisions (yr)
 ;
 
 positive variables

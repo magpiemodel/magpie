@@ -9,11 +9,10 @@ pcm_production_ratio_future, input, not used
 pm_land_start, input, not used
 pm_interest, input, not used
 pm_rotation_reg, input, not used
+pm_rot_length, input, not used
 pm_production_ratio_ext, input, not used
 fm_harvest_cost_ha, input, not used
 pm_climate_class, input, not used
 pm_bcef, input, not used
 fm_production_ratio, input, not used
 vm_prod_forestry, var, not used
-pm_rot_length_estb, input, not used
-pm_rot_length, input, not used

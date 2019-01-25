@@ -1,5 +1,4 @@
-*pm_rotation_reg(i) = ord(t) + ceil(pm_rot_length(i)/5) + card(t_past_ff);
-pm_rotation_reg(i) = ord(t) + ceil(pm_rot_length_estb(i)/5) + card(t_past_ff);
+pm_rotation_reg(i) = ord(t) + ceil(pm_rot_length(i)/5) + card(t_past_ff);
 
 pc21_demand_forestry_future(i,kforestry2)    = sum(t_ext$(t_ext.pos = pm_rotation_reg(i)),p21_demand_ext(t_ext,i,kforestry2));
 pc21_selfsuff_forestry_future(i,kforestry2)  = sum(t_ext$(t_ext.pos = pm_rotation_reg(i)),p21_selfsuff_ext(t_ext,i,kforestry2));
