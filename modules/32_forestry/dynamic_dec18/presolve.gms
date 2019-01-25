@@ -93,8 +93,8 @@ p32_yield_forestry_ac(t,j,ac_sub) =
 pm_rotation_reg(i) = ord(t) + ceil(p32_rot_length(i)/5) + card(t_past_ff);
 
 *pc32_yield_forestry_future(j) = sum(ac$(ac.off = p32_rotation_cellular(j)+1), p32_yield_forestry_ac(t,j,ac));
-pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular(j)), p32_yield_forestry_ac(t,j,ac_sub));
-display pc32_yield_forestry_future;
+pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(j)), p32_yield_forestry_ac(t,j,ac_sub));
+*display pc32_yield_forestry_future;
 
 ** Calculating future yield from already mature plantations.
 ** If the forest is already mature (say ac50), and we decide to use this mature "available" plantation to meet Future

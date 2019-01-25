@@ -55,11 +55,10 @@ for(biodem in co2_price_scenarios){
   		t <- gsub("rl","",t)
 
   		cfg$gms$c32_rot_length <- rl
-      cfg$gms$c32pm_rot_length_estb <- rl_estb
   		if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
   			cfg$title<- paste0(t,"_",format(Sys.time(), format="%Y%m%d"),"_",format(Sys.time(), format="%H%M"),"_CO2prices")
   			} else {
-  			cfg$title<- paste0(t,"_",,format(Sys.time(), format="%Y%m%d"),"_",format(Sys.time(), format="%H%M"))
+  			cfg$title<- paste0(t,"_",format(Sys.time(), format="%Y%m%d"),"_",format(Sys.time(), format="%H%M"))
   			}
   		start_run(cfg=cfg,codeCheck=codeCheck)
   	}
