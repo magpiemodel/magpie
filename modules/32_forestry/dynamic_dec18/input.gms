@@ -3,6 +3,7 @@ $setglobal c32_aff_mask  noboreal
 $setglobal c32_aff_policy  npi
 $setglobal c32_rot_length  rlGTM
 $setglobal c32_rot_length_estb  hybrid
+
 scalars
   c32_reESTBcost Reestablishment cost in USD per ha / 2000 /
   c32_recurring_cost Recurring costs in USD per ha / 100 /
