@@ -42,8 +42,6 @@ rl_all<-c("rlGTM")
 #rl_all<-c("rlGTM","rlFAO_max","rlFAO_min")
 rl_establishment<-c("hybrid")
 
-cfg$gms$c32pm_rot_length_estb <- rl_estb
-
 co2_price_scenarios <- c("SSP2-Ref-SPA0")
 #co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
 
