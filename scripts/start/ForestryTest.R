@@ -38,8 +38,8 @@ cfg$gms$natveg  <- "dynamic_dec18"
 
 #ALERT:  At the moment this script cannot download new data in case the input files are changed. Has to be set to true.
 cfg$force_download <- FALSE
-#rl_all<-c("rlGTM")
-rl_all<-c("rlGTM","rlFAO_max","rlFAO_min")
+rl_all<-c("rlGTM")
+#rl_all<-c("rlGTM","rlFAO_max","rlFAO_min")
 rl_establishment<-c("hybrid")
 
 cfg$gms$c32pm_rot_length_estb <- rl_estb
