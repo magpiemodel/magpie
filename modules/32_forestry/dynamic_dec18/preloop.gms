@@ -12,7 +12,6 @@ pm_rot_length_estb(i) = p32_rot_length_estb(i);
 ** rotation length in 5 year time steps
 p32_rotation_cellular(j) = sum(cell(i,j), ceil(p32_rot_length(i)/5));
 p32_rotation_cellular_estb(j) = sum(cell(i,j), ceil(p32_rot_length_estb(i)/5))
-display p32_rotation_cellular;
 
 *' @code
 *' Mapping between AC, type32 and Rotation length
