@@ -218,7 +218,7 @@ $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 $setglobal disagg_lvst  foragebased_aug18
 
-$setglobal optimization  nlp_apr17
+$setglobal optimization  lp_nlp_apr17
 
 ****************************END MODULE SETUP************************************
 
