@@ -39,8 +39,8 @@ cfg$gms$optimization <- "nlp_apr17"
 
 #ALERT:  At the moment this script cannot download new data in case the input files are changed. Has to be set to true.
 cfg$force_download <- FALSE
-rl_all<-c("rlGTM")
-#rl_all<-c("rlGTM","rlFAO_max","rlFAO_min")
+#rl_all<-c("rlGTM")
+rl_all<-c("rlGTM","rlFAO_max","rlFAO_min")
 #rl_all<-c("rlFAO_max","rlFAO_min")
 cfg$gms$c32_rot_length_estb <- c("hybrid")
 
