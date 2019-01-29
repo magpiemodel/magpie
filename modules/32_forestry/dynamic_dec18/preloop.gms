@@ -1,7 +1,10 @@
 *v32_hvarea_forestry.fx(j,kforestry,"ac0") = 0;
 
 ** Read exogenous rotation length
+p32_rot_length_all(t,i) = f32_rot_length(i,"%c32_rot_length_estb%");
 p32_rot_length(i) = f32_rot_length(i,"%c32_rot_length%");
+p32_rot_length(i) = sum(t$(ord(t) < 6), p32_rot_length_all(t,i));
+*p32_rot_length(i) = f32_rot_length(i,"%c32_rot_length%");
 p32_rot_length_estb(i) = f32_rot_length(i,"%c32_rot_length_estb%");
 **********************************************
 p32_rot_length("MEA") = 60;
