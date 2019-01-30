@@ -6,7 +6,7 @@ p32_rot_length(i) = f32_rot_length(i,"%c32_rot_length%");
 *p32_rot_length(i) = sum(t$(ord(t) < 6), p32_rot_length_all(t,i));
 *p32_rot_length(i) = f32_rot_length(i,"%c32_rot_length%");
 p32_rot_length_estb(i) = p32_rot_length(i);
-p32_rot_length_estb(i) = sum(t$(ord(t) < 6), p32_rot_length_all(t,i));
+
 **********************************************
 p32_rot_length("MEA") = 60;
 p32_rot_length("REF") = 50;
