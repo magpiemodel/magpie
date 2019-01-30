@@ -26,7 +26,7 @@ sets
  harvest32(t,j,ac) mapping age class - land type
 
  rltype Rotation length sets
- /rlFAO_min,rlGTM,rlFAO_max,init,hybrid/
+ /rlFAO_min,rlGTM,rlFAO_max/
 
 ;
 

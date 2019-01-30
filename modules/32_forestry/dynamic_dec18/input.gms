@@ -1,7 +1,7 @@
 $setglobal c32_aff_mask  noboreal
 * options: unrestricted, noboreal, onlytropical
 $setglobal c32_aff_policy  npi
-$setglobal c32_rot_length  rlFAO_min
+$setglobal c32_rot_length  rlGTM
 $setglobal c32_rot_length_estb  rlGTM
 
 scalars
