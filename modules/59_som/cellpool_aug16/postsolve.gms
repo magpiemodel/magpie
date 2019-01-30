@@ -4,7 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-p59_som_pool(j,pools59) = vm_som_pool.l(j,pools59);
+p59_som_pool(j,pools59) = v59_som_pool.l(j,pools59);
 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################

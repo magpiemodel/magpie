@@ -7,14 +7,21 @@
 parameters
         i59_topsoilc_density(t_all,j)      Topsoil carbon density of a hectare of cropland (tC per ha)
         i59_subsoilc_density(t_all,j)      Subsoil carbon density of a hectare of land (tC per ha)
+;
 
 variables
          vm_nr_som(j)                        Release of soil organic matter (Tg N per yr)
          vm_costs_overrate_cropdiff(i)	     Punishment costs for overrated cropland difference (mio. USD05 per yr)
 ;
+
+equations
+         q59_soilcarbon_cropland(j)          Cropland soil carbon content calculation (mio. tC)
+;
+
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_nr_som(t,j,type)                  Release of soil organic matter (Tg N per yr)
  ov_costs_overrate_cropdiff(t,i,type) Punishment costs for overrated cropland difference (mio. USD05 per yr)
+ oq59_soilcarbon_cropland(t,j,type)   Cropland soil carbon content calculation (mio. tC)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

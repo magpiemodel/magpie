@@ -8,6 +8,10 @@ $setglobal c59_static_spatial_level  cellular
 *   options:   cellular  (use preprocessed cellular stock change factors)
 *              cluster   (use cshare_released on cluster within gams)
 
+$setglobal c59_som_scenario  nocc
+*   options:   cc  (climate change)
+*             nocc (no climate change)
+
 parameters f59_topsoilc_density(t_all,j) LPJ topsoil carbon density for natural vegetation (tC per ha)
 /
 $ondelim

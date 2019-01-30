@@ -37,4 +37,4 @@ p59_som_pool(j,pools59) = f59_som_initialisation_pools("y1995",j, pools59);
 
 p59_carbon_density(t,j,pools59)=0;
 
-i59_subsoilc_density(t_all,j) = fm_carbon_density(t_all,j,"secdforest","soilc") - f59_topsoilc_density(t_all,j)
+i59_subsoilc_density(t_all,j) = fm_carbon_density(t_all,j,"secdforest","soilc") - f59_topsoilc_density(t_all,j);
