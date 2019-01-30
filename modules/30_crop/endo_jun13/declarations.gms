@@ -15,7 +15,6 @@ equations
  q30_rotation_min(j,crp30,w)     Local minimum rotational constraints (mio. ha)
  q30_prod(j,kcr)                 Production of cropped products (mio. tDM)
  q30_carbon(j,ag_cpools)         Cropland aboveground carbon content calculation (mio. tC)
- q30_carbon_soil(j)              Cropland soil carbon content calculation (mio. tC)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

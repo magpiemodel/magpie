@@ -46,13 +46,8 @@
 *' production of bioenergy is deactivated (see presolve statements of crop
 *' realization).
 
-*' The carbon content of the different carbon pools are calculated as a total
+*' The carbon content of the above-ground carbon pools are calculated as a total
 *' for all cropland :
  q30_carbon(j2,ag_cpools) ..
  vm_carbon_stock(j2,"crop",ag_cpools) =e=
    vm_land(j2,"crop") * sum(ct,fm_carbon_density(ct,j2,"crop",ag_cpools));
-
-q30_carbon_soil(j2) ..
-   vm_carbon_stock(j2,"crop","soilc") =e= 
-     vm_som_pool(j2,"cropland") +
-     0.58 * vm_land(j2,"crop") * sum(ct,fm_carbon_density(ct,j2,"past","soilc"));

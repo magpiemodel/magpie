@@ -11,6 +11,7 @@ parameters
           i59_input_share(i,inputs59)          Share of land under input class (1)
           i59_cratio(j,kcr)                    Ratio of carbon density of land relative to natural vegetaion (1)
           p59_som_pool(j,pools59)              Actual C pool (mio. tC)
+          i59_subsoilc_density(t_all,j)        Subsoil carbon density of a hectare of land (tC per ha)
 ;
 
 equations
@@ -22,11 +23,12 @@ equations
          q59_nr_som(j)                      Soil organic matter loss (Tg N per yr)
          q59_crop_diff(j)                   Cropland difference (mio. ha)
          q59_crop_diff_constraint(i)        Cropland difference constraint (mio. USD05MER per yr)
+         q59_carbon_soil(j)                 Cropland soil carbon content calculation (mio. tC)
 ;
 
 positive variables
          v59_som_target(j,pools59)           Long-term target state of C pool (mio. tC)
-         vm_som_pool(j,pools59)             Soil organic matter pool (mio. tC)
+         v59_som_pool(j,pools59)             Soil organic matter pool (mio. tC)
          v59_crop_expansion(j)               Crop land expansion (mio. ha)
          v59_crop_reduction(j)               Land reduction (mio. ha)
 ;

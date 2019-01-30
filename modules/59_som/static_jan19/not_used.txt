@@ -4,8 +4,5 @@
 # |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
-vm_land,input,questionnaire
 pcm_land,input,questionnaire
 vm_area,input,questionnaire
-pm_climate_class,input,questionnaire
-vm_som_pool,notused,questionnaire
