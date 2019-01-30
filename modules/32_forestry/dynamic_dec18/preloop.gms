@@ -1,7 +1,7 @@
 *v32_hvarea_forestry.fx(j,kforestry,"ac0") = 0;
 
 ** Read exogenous rotation length
-p32_rot_length(t,i) = f32_rot_length(t,i,"rlGTM");
+p32_rot_length(t,i) = f32_rot_length(t,i,"%c32_rot_length%");
 
 pm_rot_length(t,i) = p32_rot_length(t,i);
 
