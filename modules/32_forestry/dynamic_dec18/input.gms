@@ -44,7 +44,7 @@ $include "./modules/32_forestry/input/npi_ndc_aff_pol.cs3"
 $offdelim
 ;
 
-table f32_rot_length(i,rltype) rot length
+table f32_rot_length(t_all,i,rltype) rot length
 $ondelim
 $include "./modules/32_forestry/input/f32_rot_length.csv"
 $offdelim;

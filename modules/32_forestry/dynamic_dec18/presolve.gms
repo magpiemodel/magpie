@@ -2,11 +2,11 @@
 ** to meet future demand rather than only depending on establishing "new" plantations.
 ** The idea is that not all the available plantations are needed to meet the demand in current time step.
 ** both p32_protect_avail and v32_avail_reuse.l are initialized as 0.
-
+$ontext
 loop(j,
 p32_protect_avail(t_alias,j) = p32_protect_avail(t_alias,j) + v32_avail_reuse.l(j)$(m_year(t_alias) >= m_year(t) AND m_year(t_alias) <= m_year(t) + sum(cell(i,j), p32_rot_length(i)));
 );
-
+$offtext
 *v32_land.lo(j,"plant","xxxxxxxxxx") = p32_protect_avail(t,j);
 
 ** Setting ac dependent carbon densities
@@ -53,10 +53,10 @@ v32_land.lo(j,"plant","ac0") = 0;
 v32_land.up(j,"plant","ac0") = Inf;
 
 *fix land with rotation length
-v32_land.fx(j,"plant",ac_sub)$protect32(j,ac_sub) = pc32_land(j,"plant",ac_sub);
+v32_land.fx(j,"plant",ac_sub)$protect32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
 
 *set upper bound for plantations after rotation length
-v32_land.up(j,"plant",ac_sub)$harvest32(j,ac_sub) = pc32_land(j,"plant",ac_sub);
+v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
 
 *fix C-price induced afforestation and indc to zero (for testing)
 *v32_land.fx(j,"aff",ac) = 0;
@@ -86,16 +86,17 @@ p32_yield_forestry_ac(t,j,ac_sub) =
 
 ** Future demand relevant in current time step depending on rotation length
 ***** Card is used here to exclude y1965 to y1995 when calculating rotation length calculations for past
-pm_rotation_reg(i) = ord(t) + ceil(p32_rot_length(i)/5) + card(t_past_ff);
+pm_rotation_reg(t,i) = ord(t) + ceil(pm_rot_length(t,i)/5) + card(t_past_ff);
 
 *pc32_yield_forestry_future(j) = sum(ac$(ac.off = p32_rotation_cellular(j)+1), p32_yield_forestry_ac(t,j,ac));
-pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular(j)), p32_yield_forestry_ac(t,j,ac_sub));
+pc32_yield_forestry_future(t,j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular(t,j)), p32_yield_forestry_ac(t,j,ac_sub));
 
 ** Calculating future yield from already mature plantations.
 ** If the forest is already mature (say ac50), and we decide to use this mature "available" plantation to meet Future
 ** demand according to rotation length of lets say 30, then the mature "available" planattion of ac50 being used to meet demand
 ** in thirty years from now will be considered to have a yield of forest belonging to ac80.
 
+$ontext
 loop(j,
   loop (ac_sub2,
   if(p32_rotation_cellular(j)+ord(ac_sub2) <= card(ac),
@@ -105,6 +106,6 @@ loop(j,
   );
  );
 );
-
+$offtext
 pc32_timestep = ord(t);
 *** EOF presolve.gms ***
