@@ -42,7 +42,7 @@ variables
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov59_som_target(t,j,pools59,type)       Long-term target state of C pool (mio. tC)
- ov_som_pool(t,j,pools59,type)           Soil organic matter pool (mio. tC)
+ ov59_som_pool(t,j,pools59,type)         Soil organic matter pool (mio. tC)
  ov59_crop_expansion(t,j,type)           Crop land expansion (mio. ha)
  ov59_crop_reduction(t,j,type)           Land reduction (mio. ha)
  ov59_som_transfer_to_cropland(t,j,type) Transfer of SOM from other land to cropland (mio. tC)
@@ -56,5 +56,6 @@ parameters
  oq59_nr_som(t,j,type)                   Soil organic matter loss (Tg N per yr)
  oq59_crop_diff(t,j,type)                Cropland difference (mio. ha)
  oq59_crop_diff_constraint(t,i,type)     Cropland difference constraint (mio. USD05MER per yr)
+ oq59_carbon_soil(t,j,type)              Cropland soil carbon content calculation (mio. tC)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
