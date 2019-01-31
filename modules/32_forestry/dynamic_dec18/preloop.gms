@@ -2,11 +2,14 @@
 
 ** Read exogenous rotation length
 p32_rot_length(t,i) = f32_rot_length(t,i,"%c32_rot_length%");
+p32_rot_length_estb(t,i) = f32_rot_length(t,i,"%c32_rot_length_estb%");
 
 pm_rot_length(t,i) = p32_rot_length(t,i);
+pm_rot_length_estb(t,i) = p32_rot_length_estb(t,i);
 
 ** rotation length in 5 year time steps
 p32_rotation_cellular(t,j) = sum(cell(i,j), ceil(p32_rot_length(t,i)/5));
+p32_rotation_cellular_estb(t,j) = sum(cell(i,j), ceil(p32_rot_length_estb(t,i)/5));
 
 *' @code
 *' Mapping between AC, type32 and Rotation length

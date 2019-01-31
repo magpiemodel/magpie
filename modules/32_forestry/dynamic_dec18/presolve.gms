@@ -49,8 +49,14 @@ pcm_land(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 
 ***bounds for plantations
 *** ac0 can increase
+$ontext
 v32_land.lo(j,"plant","ac0") = 0;
 v32_land.up(j,"plant","ac0") = Inf;
+$offtext
+
+** Release bounds for ALL Age classes before we make brptection of harvest "indication" decisions
+v32_land.lo(j,"plant",ac) = 0;
+v32_land.up(j,"plant",ac) = Inf;
 
 *fix land with rotation length
 v32_land.fx(j,"plant",ac_sub)$protect32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
@@ -86,10 +92,10 @@ p32_yield_forestry_ac(t,j,ac_sub) =
 
 ** Future demand relevant in current time step depending on rotation length
 ***** Card is used here to exclude y1965 to y1995 when calculating rotation length calculations for past
-pm_rotation_reg(t,i) = ord(t) + ceil(pm_rot_length(t,i)/5) + card(t_past_ff);
+pm_rotation_reg(t,i) = ord(t) + ceil(pm_rot_length_estb(t,i)/5) + card(t_past_ff);
 
 *pc32_yield_forestry_future(j) = sum(ac$(ac.off = p32_rotation_cellular(j)+1), p32_yield_forestry_ac(t,j,ac));
-pc32_yield_forestry_future(t,j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular(t,j)), p32_yield_forestry_ac(t,j,ac_sub));
+pc32_yield_forestry_future(t,j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), p32_yield_forestry_ac(t,j,ac_sub));
 
 ** Calculating future yield from already mature plantations.
 ** If the forest is already mature (say ac50), and we decide to use this mature "available" plantation to meet Future

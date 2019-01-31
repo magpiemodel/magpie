@@ -25,9 +25,9 @@ parameters
  pcm_production_ratio_future(i)                  Future production ratio (1)
  pm_rotation_reg(t,i)                              Regional rotation length of plantations translated to age class equivalent for future (1)
  p32_error_check                                  X (1)
- p32_rot_length_estb(i)                           Rotation length for establishment (yr)
- pm_rot_length_estb(i)                            Regional rotation length of plantations translated to age class equivalent for future (1)
- p32_rotation_cellular_estb(j)                    Rotation length translated to age classes on cellular level (1)
+ p32_rot_length_estb(t,i)                           Rotation length for establishment (yr)
+ pm_rot_length_estb(t,i)                            Regional rotation length of plantations translated to age class equivalent for future (1)
+ p32_rotation_cellular_estb(t,j)                    Rotation length translated to age classes on cellular level (1)
  p32_rot_length_all(t,i)                      xx
 ;
 
