@@ -42,7 +42,7 @@ cfg$force_download <- FALSE
 #rl_all<-c("rlGTM")
 rl_all<-c("rlGTM","rlFAO_max","rlFAO_min")
 #rl_all<-c("rlFAO_max","rlFAO_min")
-cfg$gms$c32_rot_length_estb <- c("hybrid")
+cfg$gms$c32_rot_length_estb <- c("rlGTM")
 
 co2_price_scenarios <- c("SSP2-Ref-SPA0")
 #co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
