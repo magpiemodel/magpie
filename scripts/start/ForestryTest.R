@@ -42,7 +42,8 @@ cfg$force_download <- FALSE
 #rl_all<-c("rlGTM")
 rl_all<-c("rlGTM","rlFAO_max","rlFAO_min")
 #rl_all<-c("rlFAO_max","rlFAO_min")
-cfg$gms$c32_rot_length_estb <- c("rlGTM")
+
+establishment_decision <- c("rlGTM")
 
 co2_price_scenarios <- c("SSP2-Ref-SPA0")
 #co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
@@ -58,10 +59,18 @@ for(biodem in co2_price_scenarios){
   		t <- gsub("rl","",t)
 
   		cfg$gms$c32_rot_length <- rl
+      #########################################################################################
+      ### SET THE FOLLWING SETTING TO establishment_decision once done with max-max, min-min, gtm-gtm pair####
+      rl_estb <- rl
+      cfg$gms$c32_rot_length_estb <- rl_estb
+      t_estb <- gsub(".*_", "", rl_estb)
+  		t_estb <- gsub("rl","",t_estb)
+      #########################################################################################
+
   		if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
-  			cfg$title<- paste0(t,"_",format(Sys.time(), format="%Y%m%d"),"_",format(Sys.time(), format="%H%M"),"_CO2prices")
+  			cfg$title<- paste0("Harv",t,"-","Estb",t_estb,"-",format(Sys.time(), format="%m%d"),"_",format(Sys.time(), format="%H%M"),"_CO2prices")
   			} else {
-  			cfg$title<- paste0(t,"_",format(Sys.time(), format="%Y%m%d"),"_",format(Sys.time(), format="%H%M"))
+  			cfg$title<- paste0("Harv",t,"-","Estb",t_estb,"-",format(Sys.time(), format="%m%d"),"_",format(Sys.time(), format="%H%M"))
   			}
   		start_run(cfg=cfg,codeCheck=codeCheck)
   	}
