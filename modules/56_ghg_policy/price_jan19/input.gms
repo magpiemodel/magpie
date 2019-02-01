@@ -11,7 +11,7 @@ scalars
   s56_ghgprice_start start year for ghg price phase in / 2025 /
 ;
 
-$setglobal c56_pollutant_prices  SSP2-Ref-SPA0-V15-REMIND-MAGPIE
+$setglobal c56_pollutant_prices  SSP2-26-SPA2-V15-REMIND-MAGPIE
 $setglobal c56_emis_policy  ssp
 $setglobal c56_aff_policy  vegc50
 

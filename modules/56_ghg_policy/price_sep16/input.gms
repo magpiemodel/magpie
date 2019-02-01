@@ -9,7 +9,7 @@ scalars
   s56_limit_ch4_n2o_price upper limit for CH4 and N2O GHG prices (USD05MER per tC) / 1000 /
 ;
 
-$setglobal c56_pollutant_prices  SSP2-Ref-SPA0-V15-REMIND-MAGPIE
+$setglobal c56_pollutant_prices  SSP2-26-SPA2-V15-REMIND-MAGPIE
 $setglobal c56_emis_policy  ssp
 $setglobal c56_aff_policy  vegc50
 
