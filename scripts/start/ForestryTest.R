@@ -45,8 +45,8 @@ rl_all<-c("rlGTM","rlFAO_max","rlFAO_min")
 
 establishment_decision <- c("rlGTM")
 
-co2_price_scenarios <- c("SSP2-Ref-SPA0")
-#co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
+#co2_price_scenarios <- c("SSP2-Ref-SPA0")
+co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
 
 for(biodem in co2_price_scenarios){
 
@@ -60,7 +60,7 @@ for(biodem in co2_price_scenarios){
 
   		cfg$gms$c32_rot_length <- rl
       #########################################################################################
-      ### SET THE FOLLWING SETTING TO establishment_decision once done with max-max, min-min, gtm-gtm pair####
+      ### SET THE FOLLWING SETTING TO [establishment_decision] once done with max-max, min-min, gtm-gtm pair####
       rl_estb <- rl
       cfg$gms$c32_rot_length_estb <- rl_estb
       t_estb <- gsub(".*_", "", rl_estb)
