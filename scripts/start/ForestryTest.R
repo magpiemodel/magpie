@@ -60,8 +60,8 @@ for(biodem in co2_price_scenarios){
 
   		cfg$gms$c32_rot_length <- rl
       #########################################################################################
-      ### SET THE FOLLWING SETTING TO [establishment_decision] once done with max-max, min-min, gtm-gtm pair####
-      rl_estb <- rl
+      ### SET THE [rl_estb <- rl] SETTING TO [rl_estb <- establishment_decision] once done with max-max, min-min, gtm-gtm pair####
+      rl_estb <- establishment_decision
       cfg$gms$c32_rot_length_estb <- rl_estb
       t_estb <- gsub(".*_", "", rl_estb)
   		t_estb <- gsub("rl","",t_estb)
