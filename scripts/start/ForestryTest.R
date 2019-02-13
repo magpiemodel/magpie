@@ -91,7 +91,7 @@ for(biodem in co2_price_scenarios){
   		t <- gsub(".*_", "", rl)
   		t <- gsub("rl","",t)
   		cfg$gms$c32_rot_length <- rl
-  		for(rl_estb in c("rlGTM","rlFAO_max"))){
+  		for(rl_estb in c("rlGTM","rlFAO_max")){
   		cfg$gms$c32_rot_length_estb <- rl_estb
   		t_estb <- gsub(".*_", "", rl_estb)
       	t_estb <- gsub("rl","",t_estb)
