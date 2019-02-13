@@ -40,7 +40,7 @@ cfg$gms$optimization <- "nlp_apr17"
 #ALERT:  At the moment this script cannot download new data in case the input files are changed. Has to be set to true.
 cfg$force_download <- FALSE
 #rl_all<-c("rlGTM")
-rl_all<-c("rlGTM","rlFAO_max","rlFAO_min")
+rl_all<-c("rlFAO_min","rlGTM","rlFAO_max")
 #rl_all<-c("rlFAO_max","rlFAO_min")
 
 establishment_decision <- c("rlGTM")
@@ -53,31 +53,55 @@ for(biodem in co2_price_scenarios){
 	cfg$gms$c56_pollutant_prices <- paste0(biodem,"-V15-REMIND-MAGPIE")      	# def = "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
 	cfg$gms$c60_2ndgen_biodem <- biodem     									# def = "SSP2-Ref-SPA0"
 
-  	for (rl in rl_all) {
+  for (rl in rl_all) {
+  	if(rl=="rlFAO_min"){
   		print(paste("Rotation length:",rl,"-----"))
   		t <- gsub(".*_", "", rl)
   		t <- gsub("rl","",t)
-
   		cfg$gms$c32_rot_length <- rl
-      #########################################################################################
-      ### SET THE [rl_estb <- rl] SETTING TO [rl_estb <- establishment_decision] once done with max-max, min-min, gtm-gtm pair####
-      for(decision in c("own_rl","gtm")){
-        if(decision=="own_rl"){
-          rl_estb <- rl
-        } else if(decision=="gtm"){
-          rl_estb <- establishment_decision
-        }
-        cfg$gms$c32_rot_length_estb <- rl_estb
-        t_estb <- gsub(".*_", "", rl_estb)
-    		t_estb <- gsub("rl","",t_estb)
-        #########################################################################################
-
-    		if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
-    			cfg$title<- paste0("Harv",t,"-","Estb",t_estb,"-",format(Sys.time(), format="%m%d"),"_",format(Sys.time(), format="%H%M"),"_CO2prices")
-    			} else {
-    			cfg$title<- paste0("Harv",t,"-","Estb",t_estb,"-",format(Sys.time(), format="%m%d"),"_",format(Sys.time(), format="%H%M"))
-    			}
-    		start_run(cfg=cfg,codeCheck=codeCheck)
-      }
-  	}
+  		for(rl_estb in rl_all[!grepl(rl, rl_all)]){
+  		cfg$gms$c32_rot_length_estb <- rl_estb
+  		t_estb <- gsub(".*_", "", rl_estb)
+      	t_estb <- gsub("rl","",t_estb)
+  		if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
+  			cfg$title<- paste0(t,"Harv","-",t_estb,"Estb","-",format(Sys.time(), format="%m%d"),"_",format(Sys.time(), format="%H%M"),"_CO2prices")
+      		} else {
+      		cfg$title<- paste0(t,"Harv","-",t_estb,"Estb","-",format(Sys.time(), format="%m%d"),"_",format(Sys.time(), format="%H%M"))
+      		}
+      	start_run(cfg=cfg,codeCheck=codeCheck)
+  		}
+  	} else if(rl=="rlGTM"){
+  		print(paste("Rotation length:",rl,"-----"))
+  		t <- gsub(".*_", "", rl)
+  		t <- gsub("rl","",t)
+  		cfg$gms$c32_rot_length <- rl
+  		for(rl_estb in rl_all){
+  		cfg$gms$c32_rot_length_estb <- rl_estb
+  		t_estb <- gsub(".*_", "", rl_estb)
+      	t_estb <- gsub("rl","",t_estb)
+  		if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
+  			cfg$title<- paste0(t,"Harv","-",t_estb,"Estb","-",format(Sys.time(), format="%m%d"),"_",format(Sys.time(), format="%H%M"),"_CO2prices")
+      		} else {
+      		cfg$title<- paste0(t,"Harv","-",t_estb,"Estb","-",format(Sys.time(), format="%m%d"),"_",format(Sys.time(), format="%H%M"))
+      		}
+      	start_run(cfg=cfg,codeCheck=codeCheck)
+  		}
+  	} else if(rl=="rlFAO_max"){
+  		print(paste("Rotation length:",rl,"-----"))
+  		t <- gsub(".*_", "", rl)
+  		t <- gsub("rl","",t)
+  		cfg$gms$c32_rot_length <- rl
+  		for(rl_estb in rl_all[!grepl(rl, rl_all)]){
+  		cfg$gms$c32_rot_length_estb <- rl_estb
+  		t_estb <- gsub(".*_", "", rl_estb)
+      	t_estb <- gsub("rl","",t_estb)
+  		if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
+  			cfg$title<- paste0(t,"Harv","-",t_estb,"Estb","-",format(Sys.time(), format="%m%d"),"_",format(Sys.time(), format="%H%M"),"_CO2prices")
+      		} else {
+      		cfg$title<- paste0(t,"Harv","-",t_estb,"Estb","-",format(Sys.time(), format="%m%d"),"_",format(Sys.time(), format="%H%M"))
+      		}
+      	start_run(cfg=cfg,codeCheck=codeCheck)
+  		}
+    }
+  }
 }
