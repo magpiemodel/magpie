@@ -34,6 +34,10 @@ if(file.exists(runstatistics) & dir.exists(resultsarchive)) {
   stats <- list()
   load(runstatistics)
   if(!is.null(stats$id)) {
+    if(file.exists(paste0(resultsarchive,"/",stats$id,".rds"))){
+      cat(paste0("Existing rds file ",stats$id," will be deleted and then created from scratch."))
+      invisible(file.remove(paste0(resultsarchive,"/",stats$id,".rds")))
+    }
     saveRDS(q,file=paste0(resultsarchive,"/",stats$id,".rds"))
     cwd <- getwd()
     setwd(resultsarchive)
