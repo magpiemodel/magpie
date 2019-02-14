@@ -33,7 +33,7 @@ cfg$gms$c60_2ndgen_biodem <- "coupling"
 
 cfg$title <- "SSP2_Base_GAMS26"
 cfg <- setScenario(cfg,c("SSP2","NPI"))
-getInput("/p/projects/remind/runs/magpie_40-develop/output/r8332_coupled_Base-mag-5/fulldata.gdx")
+getInput("/p/projects/remind/runs/magpie_40-develop-2019-02-08/output/r8332_coupled_Base-mag-5/fulldata.gdx")
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "SSP2_NDC_GAMS26"
