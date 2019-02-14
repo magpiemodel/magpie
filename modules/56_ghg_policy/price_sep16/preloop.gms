@@ -11,6 +11,9 @@ $elseif "%c56_pollutant_prices%" == "emulator" im_pollutant_prices(t_all,i,pollu
 $else im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices%");
 $endif
 
+***save im_pollutant_prices to parameter
+p56_pollutant_prices_input(t,i,pollutants) = im_pollutant_prices(t,i,pollutants);
+
 ***limit CH4 and N2O GHG prices based on s56_limit_ch4_n2o_price
 *12/44 conversion from USD per tC to USD per tCO2
 *28 and 265 Global Warming Potentials from AR5 WG1 CH08 Table 8.7, conversion from USD per tCO2 to USD per tCH4 and USD per tN2O
