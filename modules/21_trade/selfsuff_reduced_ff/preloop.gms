@@ -3,11 +3,13 @@
 *** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
-f21_self_suff(t_all,"MEA","wood")     = 0.05;
-f21_self_suff(t_all,"MEA","woodfuel") = 0.05;
+*f21_self_suff(t_all,"MEA","wood")     = 0.05;
+*f21_self_suff(t_all,"MEA","woodfuel") = 0.05;
 
-f21_trade_tariff("MEA","wood")      = 0.01;
-f21_trade_tariff("MEA","woodfuel")  = 0.01;
+f21_self_suff(t_all,"MEA",kforestry) = 0.05;
+f21_self_suff(t_all,"JPN",kforestry) = 0.50;
+f21_self_suff(t_all,"REF",kforestry) = 1.03;
+f21_trade_tariff("MEA",kforestry)    = 0.01;
 
 i21_trade_bal_reduction(t_all,k_trade)=f21_trade_bal_reduction(t_all,"easytrade","%c21_trade_liberalization%");
 i21_trade_bal_reduction(t_all,k_hardtrade21)=f21_trade_bal_reduction(t_all,"hardtrade","%c21_trade_liberalization%");
