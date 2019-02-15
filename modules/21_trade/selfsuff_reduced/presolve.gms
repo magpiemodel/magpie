@@ -1,8 +1,8 @@
-vm_prod_future_reg_ff.fx(i,kforestry2)    = 0 ;
-v21_excess_prod_ff.fx(i,kforestry2)       = 0 ;
-v21_excess_dem_ff.fx(kforestry2)          = 0 ;
-v21_excess_prod_ff.fx(i,kforestry2)       = 0 ;
-v21_cost_trade_reg_ff.fx(i,kforestry2)    = 0 ;
+vm_prod_future_reg_ff.fx(i,kforestry)    = 0 ;
+v21_excess_prod_ff.fx(i,kforestry)       = 0 ;
+v21_excess_dem_ff.fx(kforestry)          = 0 ;
+v21_excess_prod_ff.fx(i,kforestry)       = 0 ;
+v21_cost_trade_reg_ff.fx(i,kforestry)    = 0 ;
 vm_cost_trade_forestry_ff.fx(i)           = 0 ;
 
 pm_rotation_reg(i)                 = 0 ;

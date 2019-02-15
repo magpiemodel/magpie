@@ -19,5 +19,5 @@ pm_production_ratio_ext(i,t_ext) = 0;
 pm_rot_length(i) = 0;
 
 * Fix future trade related variables to 0
-vm_prod_future_reg_ff.fx(i2,kforestry2) = 0;
+vm_prod_future_reg_ff.fx(i2,kforestry) = 0;
 fm_forestry_demand(t_all,i,kforestry) = 0;
