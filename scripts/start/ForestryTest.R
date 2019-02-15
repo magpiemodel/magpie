@@ -39,8 +39,8 @@ cfg$gms$optimization <- "nlp_apr17"
 
 #ALERT:  At the moment this script cannot download new data in case the input files are changed. Has to be set to true.
 cfg$force_download <- FALSE
-#rl_all<-c("rlGTM")
-rl_all<-c("rlFAO_min","rlGTM","rlFAO_max")
+rl_all<-c("rlGTM")
+#rl_all<-c("rlFAO_min","rlGTM","rlFAO_max")
 #rl_all<-c("rlFAO_max","rlFAO_min")
 
 establishment_decision <- c("rlGTM")
