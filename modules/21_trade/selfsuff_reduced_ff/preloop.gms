@@ -9,12 +9,15 @@
 f21_self_suff(t_all,"MEA",kforestry) = 0.05;
 f21_self_suff(t_all,"JPN",kforestry) = 0.50;
 f21_self_suff(t_all,"REF",kforestry) = 0.90;
+
 f21_trade_tariff("MEA",kforestry)    = 0.01;
+f21_trade_tariff("MEA",kforestry)    = 100;
 
 i21_trade_bal_reduction(t_all,k_trade)=f21_trade_bal_reduction(t_all,"easytrade","%c21_trade_liberalization%");
 i21_trade_bal_reduction(t_all,k_hardtrade21)=f21_trade_bal_reduction(t_all,"hardtrade","%c21_trade_liberalization%");
 
 i21_trade_margin(i2,k_trade) = f21_trade_margin(i2,k_trade);
+i21_trade_margin(i2,kforestry) = i21_trade_margin(i2,"others");
 
 if ((s21_trade_tariff=1),
     i21_trade_tariff(i2,k_trade) = f21_trade_tariff(i2,k_trade);
