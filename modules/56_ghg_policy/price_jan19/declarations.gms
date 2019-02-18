@@ -5,7 +5,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- im_pollutant_prices(t,i,pollutants)      Certificate prices for N2O-N CH4 CO2-C (USD05MER per Mg)
+ im_pollutant_prices(t,i,pollutants)      	  Certificate prices for N2O-N CH4 CO2-C used in the model (USD05MER per Mg)
+ p56_pollutant_prices_input(t,i,pollutants)   Certificate prices for N2O-N CH4 CO2-C from input files (USD05MER per Mg)
  p56_ghg_price_growth_rate(t,i,pollutants)    Growth rate of certificate price (% per yr)
  p56_ghg_price_growth_rate_avg(i,pollutants)  Average over time of growth rate of certificate price (% per yr)
  p56_emis_policy(t,i,pollutants,emis_source)  GHG emission policy scenarios (binary)
