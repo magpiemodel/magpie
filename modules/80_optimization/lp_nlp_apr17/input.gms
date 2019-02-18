@@ -9,6 +9,7 @@ scalars
 		s80_optfile     switch to use specfied solver settings (1)          / 0 /
 		s80_add_cplex   add cplex optimization after conopt4 (1)            / 0 /
         s80_add_conopt3 add conopt3 optimization after conopt4 (1)          / 0 /
+		s80_num_nonopt_allowed	number of allowed non-optimal variables (1)	/ Inf /
 ;
 
 
