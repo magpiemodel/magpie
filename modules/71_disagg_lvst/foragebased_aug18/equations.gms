@@ -66,9 +66,15 @@ q71_prod_mon_liv(j2,kli_mon) ..
                   + v71_additional_mon(j2,kli_mon)
                  ;
 
-*' Punishmment of additional monogastric livestock
+*' Note that s71_scale_mon relaxes the constraint (per default by 10%) and v71_additional_mon ensures
+*' feasability by punishing additonal monogastric production within a cluster.
+
+*' The punishmment of additional monogastric livestock production are calculated via
 
 q71_punishment_mon(i2) ..
                 vm_costs_additional_mon(i2) =e=
                 sum((cell(i2,j2),kli_mon), v71_additional_mon(j2,kli_mon)) *  s71_punish_additional_mon
                 ;
+
+*' Note that the punishment costs are based on transport costs and scaled up by one order of magnitude
+*' of the average transport costs to account for additional transport between clusters.
