@@ -26,7 +26,7 @@ codeCheck <- TRUE
 
 ### Single runs ###
 #general settings
-cfg$gms$c_timesteps <- "5year"
+cfg$gms$c_timesteps <- "quicktest"
 cfg$results_folder <- "output/:title:"
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 
