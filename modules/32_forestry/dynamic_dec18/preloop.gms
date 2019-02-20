@@ -2,7 +2,8 @@
 
 ** Read exogenous rotation length
 p32_rot_length(t,i) = f32_rot_length(t,i,"%c32_rot_length%");
-p32_rot_length_estb(t,i) = f32_rot_length(t,i,"%c32_rot_length_estb%");
+*p32_rot_length_estb(t,i) = f32_rot_length(t,i,"%c32_rot_length_estb%");
+p32_rot_length_estb(t,i) = 30;
 
 pm_rot_length(t,i) = p32_rot_length(t,i);
 pm_rot_length_estb(t,i) = p32_rot_length_estb(t,i);
