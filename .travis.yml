@@ -8,6 +8,8 @@ sudo: false
 latex: false
 pandoc: false
 r_packages: lucode
+install:
+  - Rscript -e "install.packages('lucode')"
 script:
   - Rscript -e "null <- lucode::codeCheck()"
 
