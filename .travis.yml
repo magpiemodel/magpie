@@ -1,0 +1,11 @@
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: R
+sudo: false
+latex: false
+pandoc: false
+install:
+  - Rscript -e "devtools::install_github('pik-piam/lucode')"
+script:
+  - Rscript -e "null <- lucode::codeCheck()"
+
