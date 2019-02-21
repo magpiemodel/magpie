@@ -5,11 +5,12 @@ repos:
   CRAN: https://cloud.r-project.org
   PIK:  https://rse.pik-potsdam.de/r/packages/
 sudo: false
+cache: packages
 latex: false
 pandoc: false
-r_packages: lucode
 install:
-  - Rscript -e "install.packages('lucode')"
+  - Rscript -e "install.packages('devtools')"
+  - Rscript -e "devtools::install_github('pik-piam/lucode')"
 script:
   - Rscript -e "null <- lucode::codeCheck()"
 
