@@ -24,5 +24,6 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%maccs%" == "off_jul16" $include "./modules/57_maccs/off_jul16.gms"
+$Ifi "%maccs%" == "on_feb19" $include "./modules/57_maccs/on_feb19.gms"
 $Ifi "%maccs%" == "on_sep16" $include "./modules/57_maccs/on_sep16.gms"
 *###################### R SECTION END (MODULETYPES) ############################

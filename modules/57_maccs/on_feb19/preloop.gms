@@ -30,33 +30,23 @@ im_maccs_mitigation(t,i,emis_source_awms_ch4,"ch4") =
         sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step(t,i)),
               f57_maccs_ch4(t,i,"awms_ch4",maccs_steps));
 
-
-p57_maccs_costs_integral(t,i,emis_source_inorg_fert_n2o,"n2o_n_direct") = f57_maccs_n2o(t,i,"inorg_fert_n2o","1");
-p57_maccs_costs_integral(t,i,emis_source_awms_manure_n2o,"n2o_n_direct") = f57_maccs_n2o(t,i,"awms_manure_n2o","1");
-p57_maccs_costs_integral(t,i,emis_source_rice_ch4,"ch4") = f57_maccs_ch4(t,i,"rice_ch4","1");
-p57_maccs_costs_integral(t,i,emis_source_ent_ferm_ch4,"ch4") = f57_maccs_ch4(t,i,"ent_ferm_ch4","1");
-p57_maccs_costs_integral(t,i,emis_source_awms_ch4,"ch4") = f57_maccs_ch4(t,i,"awms_ch4","1");
+p57_maccs_costs_integral(t,i,emis_source,pollutants) = 0;
 
 loop(maccs_steps$(ord(maccs_steps) > 1),
     p57_maccs_costs_integral(t,i,emis_source_inorg_fert_n2o,"n2o_n_direct")$(ord(maccs_steps) <= i57_mac_step(t,i)) =
-    p57_maccs_costs_integral(t,i,emis_source_inorg_fert_n2o,"n2o_n_direct") +
-    (f57_maccs_n2o(t,i,"inorg_fert_n2o",maccs_steps) - f57_maccs_n2o(t,i,"inorg_fert_n2o",maccs_steps-1))*(ord(maccs_steps)-1)*5;
+    p57_maccs_costs_integral(t,i,emis_source_inorg_fert_n2o,"n2o_n_direct") + ord(maccs_steps)*5;
 
     p57_maccs_costs_integral(t,i,emis_source_awms_manure_n2o,"n2o_n_direct")$(ord(maccs_steps) <= i57_mac_step(t,i)) =
-    p57_maccs_costs_integral(t,i,emis_source_awms_manure_n2o,"n2o_n_direct") +
-    (f57_maccs_n2o(t,i,"awms_manure_n2o",maccs_steps) - f57_maccs_n2o(t,i,"awms_manure_n2o",maccs_steps-1))*(ord(maccs_steps)-1)*5;
+    p57_maccs_costs_integral(t,i,emis_source_awms_manure_n2o,"n2o_n_direct") + ord(maccs_steps)*5;
 
     p57_maccs_costs_integral(t,i,emis_source_rice_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step(t,i)) =
-    p57_maccs_costs_integral(t,i,emis_source_rice_ch4,"ch4") +
-    (f57_maccs_ch4(t,i,"rice_ch4",maccs_steps) - f57_maccs_ch4(t,i,"rice_ch4",maccs_steps-1))*(ord(maccs_steps)-1)*5;
+    p57_maccs_costs_integral(t,i,emis_source_rice_ch4,"ch4") + ord(maccs_steps)*5;
 
     p57_maccs_costs_integral(t,i,emis_source_ent_ferm_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step(t,i)) =
-    p57_maccs_costs_integral(t,i,emis_source_ent_ferm_ch4,"ch4") +
-    (f57_maccs_ch4(t,i,"ent_ferm_ch4",maccs_steps) - f57_maccs_ch4(t,i,"ent_ferm_ch4",maccs_steps-1))*(ord(maccs_steps)-1)*5;
+    p57_maccs_costs_integral(t,i,emis_source_ent_ferm_ch4,"ch4") + ord(maccs_steps)*5;
 
     p57_maccs_costs_integral(t,i,emis_source_awms_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step(t,i)) =
-    p57_maccs_costs_integral(t,i,emis_source_awms_ch4,"ch4") +
-    (f57_maccs_ch4(t,i,"awms_ch4",maccs_steps) - f57_maccs_ch4(t,i,"awms_ch4",maccs_steps-1))*(ord(maccs_steps)-1)*5;
+    p57_maccs_costs_integral(t,i,emis_source_awms_ch4,"ch4") + ord(maccs_steps)*5;
 );
 
 display
