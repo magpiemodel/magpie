@@ -18,5 +18,5 @@ install:
   - Rscript -e "install.packages('devtools')"
   - Rscript -e "devtools::install_github('pik-piam/lucode')"
 script:
-  - Rscript -e "null <- lucode::codeCheck()"
+  - Rscript -e "null <- lucode::codeCheck(strict=TRUE)"
 
