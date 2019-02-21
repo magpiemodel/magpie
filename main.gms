@@ -129,9 +129,6 @@ $title magpie
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
 * 
 * 
-* Warning messages:
-* 1: In readLines(file) : incomplete final line found on 'main.gms'
-* 2: vm_costs_additional_mon appears in not_used.txt of module disagg_lvst.off but is used in the GAMS code of it!
 * 
 * Last modification (input data): Fri Feb 15 12:55:12 2019
 * 
