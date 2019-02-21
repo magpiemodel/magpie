@@ -5,9 +5,15 @@ repos:
   CRAN: https://cloud.r-project.org
   PIK:  https://rse.pik-potsdam.de/r/packages/
 sudo: false
-cache: packages
+cache: 
+  directories:
+    - /home/travis/usr/share/doc/r-cran-ncdf4
+    - /home/travis/usr/lib/R/site-library/ncdf4
+  packages: true
 latex: false
 pandoc: false
+before_install:
+  - sudo apt-get install r-cran-ncdf4
 install:
   - Rscript -e "install.packages('devtools')"
   - Rscript -e "devtools::install_github('pik-piam/lucode')"
