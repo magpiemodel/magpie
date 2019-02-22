@@ -58,9 +58,3 @@ loop(maccs_steps$(ord(maccs_steps) > 1),
     p57_maccs_costs_integral(t,i,emis_source_awms_ch4,"ch4") +
     (f57_maccs_ch4(t,i,"awms_ch4",maccs_steps) - f57_maccs_ch4(t,i,"awms_ch4",maccs_steps-1))*(ord(maccs_steps)-1)*5;
 );
-
-display
-i57_mac_step
-im_maccs_mitigation
-p57_maccs_costs_integral
-;
