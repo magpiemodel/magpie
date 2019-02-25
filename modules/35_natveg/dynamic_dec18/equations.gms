@@ -91,7 +91,7 @@ q35_cost_harvest(i2)..
 q35_prod_secdforest_wood(j2)..
                          v35_prod(j2,"secdforest","wood")
                           =e=
-						             sum(ac_sub, v35_hvarea_secdforest(j2,"wood",ac_sub) * sum(ct, p35_yield_natveg(ct,j2,ac_sub)))* 0.80;
+						             sum(ac_sub, v35_hvarea_secdforest(j2,"wood",ac_sub) * sum(ct, p35_yield_natveg(ct,j2,ac_sub)));
 
 q35_prod_secdforest_woodfuel(j2)..
                           v35_prod(j2,"secdforest","woodfuel")
@@ -105,7 +105,7 @@ q35_prod_secdforest_woodfuel(j2)..
 q35_prod_primforest_wood(j2)..
                           v35_prod(j2,"primforest","wood")
                           =e=
-                          v35_hvarea_primforest(j2,"wood") * sum(ct, p35_yield_primforest(ct,j2))* 0.70;
+                          v35_hvarea_primforest(j2,"wood") * sum(ct, p35_yield_primforest(ct,j2));
 
 q35_prod_primforest_woodfuel(j2)..
                           v35_prod(j2,"primforest","woodfuel")

@@ -87,7 +87,7 @@ q32_cost_harvest(i2)..
 q32_prod_forestry_wood(j2)..
                           v32_prod(j2,"wood")
                           =e=
-                         sum(ac_sub, v32_hvarea_forestry(j2,"wood",ac_sub) * sum(ct, p32_yield_forestry_ac(ct,j2,ac_sub)))* 0.88;
+                         sum(ac_sub, v32_hvarea_forestry(j2,"wood",ac_sub) * sum(ct, p32_yield_forestry_ac(ct,j2,ac_sub)));
 
 q32_prod_forestry_woodfuel(j2)..
                           v32_prod(j2,"woodfuel")
@@ -118,7 +118,7 @@ q32_production_timber(j2,kforestry)..
 
 q32_prod_future(i2) ..          sum(kforestry, vm_prod_future_reg_ff(i2,kforestry)) * pcm_production_ratio_future(i2)
                                 =e=
-                                sum((cell(i2,j2),ct), (v32_land(j2,"plant","ac0") + v32_missing_area_future(j2)) * pc32_yield_forestry_future(ct,j2) * 0.88);
+                                sum((cell(i2,j2),ct), (v32_land(j2,"plant","ac0") + v32_missing_area_future(j2)) * pc32_yield_forestry_future(ct,j2));
 *    							+
 *    							sum(cell(i2,j2), v32_avail_reuse(j2) * pc32_yield_forestry_mature_future(j2)) * 0.80
 
