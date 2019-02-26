@@ -41,7 +41,7 @@ cfg$gms$optimization <- "nlp_apr17"
 cfg$force_download <- FALSE
 #rl_all<-c("rlGTM")
 #rl_all<-c("rlFAO_min","rlGTM","rlFAO_max")
-rl_all<-c("rlFAO_max","rlFAO_min")
+rl_all<-c("rlFAO_max")
 
 co2_price_scenarios <- c("SSP2-Ref-SPA0")
 #co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
