@@ -88,6 +88,7 @@ q35_cost_harvest(i2)..
 **** Production equations from NatVeg
 
 **** From Secondary forest
+$ontext
 q35_prod_secdforest_wood(j2)..
                          v35_prod(j2,"secdforest","wood")
                           =e=
@@ -99,9 +100,14 @@ q35_prod_secdforest_woodfuel(j2)..
 *                          sum(ac_sub, v35_hvarea_secdforest(j2,"wood",ac_sub)	    * sum(ct, p35_yield_natveg(ct,j2,ac_sub)))* (1-0.80)
 *	   				            +
                         sum(ac_sub, v35_hvarea_secdforest(j2,"woodfuel",ac_sub)	* sum(ct, p35_yield_natveg(ct,j2,ac_sub)));
-
+$offtext
+q35_prod_secdforest(j2,kforestry)..
+                         v35_prod(j2,"secdforest",kforestry)
+                          =e=
+						             sum(ac_sub, v35_hvarea_secdforest(j2,kforestry,ac_sub) * sum(ct, p35_yield_natveg(ct,j2,ac_sub)));
 
 **** From Primary forest
+$ontext
 q35_prod_primforest_wood(j2)..
                           v35_prod(j2,"primforest","wood")
                           =e=
@@ -113,6 +119,11 @@ q35_prod_primforest_woodfuel(j2)..
 *                          v35_hvarea_primforest(j2,"wood")      * sum(ct, p35_yield_primforest(ct,j2)) * (1-0.70)
 *                         +
                          v35_hvarea_primforest(j2,"woodfuel")  * sum(ct, p35_yield_primforest(ct,j2));
+$offtext
+q35_prod_primforest(j2,kforestry)..
+                           v35_prod(j2,"primforest",kforestry)
+                           =e=
+                           v35_hvarea_primforest(j2,kforestry) * sum(ct, p35_yield_primforest(ct,j2));
 
 **** From other land (only woodfuel)
 q35_prod_other(j2)..

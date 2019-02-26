@@ -45,10 +45,10 @@ equations
  q35_min_other(j)              		   Minimum other land constraint (mio. ha)
 
  q35_cost_harvest(i)              Cost of harvesting natveg (mio. USD)
- q35_prod_secdforest_wood(j)      Wood production from secondary forest (mio. m3)
- q35_prod_secdforest_woodfuel(j)  Woodfuel production from secondary forest (mio. m3)
- q35_prod_primforest_wood(j)      Wood production from primary forest (mio. m3)
- q35_prod_primforest_woodfuel(j)  Woodfuel production from primary forest (mio. m3)
+* q35_prod_secdforest_wood(j)      Wood production from secondary forest (mio. m3)
+* q35_prod_secdforest_woodfuel(j)  Woodfuel production from secondary forest (mio. m3)
+* q35_prod_primforest_wood(j)      Wood production from primary forest (mio. m3)
+* q35_prod_primforest_woodfuel(j)  Woodfuel production from primary forest (mio. m3)
  q35_prod_other(j)                Woodfuel production from other land (mio. m3)
  q35_hvarea_secdforest(j,ac_sub)  Area harvested from secondary forests (mio. ha)
  q35_hvarea_primforest(j)         Area harvested from primary forests (mio. ha)
@@ -56,6 +56,8 @@ equations
  q35_secdforest_conversion(j)     Conversion of secondary forest (mio.ha)
  q35_production_timber(j,kforestry)         Timber production from natural vegetation (mio. USD)
  q35_cost_total(i)                Natveg realted production costs (mio. USD)
+ q35_prod_secdforest(j,kforestry)  xx
+ q35_prod_primforest(j,kforestry)  xx
 ;
 
 positive variables
@@ -74,7 +76,7 @@ positive variables
   v35_prod(j,land_natveg,kforestry)          Timber production coming from natveg (mio. m3)
   v35_prod_external(i,kforestry)            Production balanceflow (mio. m3)
   vm_cost_natveg(i)                           Regional natveg timber production costs (mio. USD)
-  vm_prod_natveg(j,kforestry)                  xx
+  vm_prod_natveg(j,kforestry)	                  xx
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -93,7 +95,6 @@ parameters
  ov35_prod(t,j,land_natveg,kforestry,type)         Timber production coming from natveg (mio. m3)
  ov35_prod_external(t,i,kforestry,type)            Production balanceflow (mio. m3)
  ov_cost_natveg(t,i,type)                          Regional natveg timber production costs (mio. USD)
- ov_prod_natveg(t,j,kforestry,type)                xx
  oq35_land_secdforest(t,j,type)                    Secdforest land pool calculation (mio. ha)
  oq35_land_other(t,j,type)                         Other land pool calculation (mio. ha)
  oq35_carbon_primforest(t,j,c_pools,type)          Primforest carbon stock calculation (mio tC)
@@ -107,10 +108,6 @@ parameters
  oq35_min_forest(t,j,type)                         Minimum forest land constraint (mio. ha)
  oq35_min_other(t,j,type)                          Minimum other land constraint (mio. ha)
  oq35_cost_harvest(t,i,type)                       Cost of harvesting natveg (mio. USD)
- oq35_prod_secdforest_wood(t,j,type)               Wood production from secondary forest (mio. m3)
- oq35_prod_secdforest_woodfuel(t,j,type)           Woodfuel production from secondary forest (mio. m3)
- oq35_prod_primforest_wood(t,j,type)               Wood production from primary forest (mio. m3)
- oq35_prod_primforest_woodfuel(t,j,type)           Woodfuel production from primary forest (mio. m3)
  oq35_prod_other(t,j,type)                         Woodfuel production from other land (mio. m3)
  oq35_hvarea_secdforest(t,j,ac_sub,type)           Area harvested from secondary forests (mio. ha)
  oq35_hvarea_primforest(t,j,type)                  Area harvested from primary forests (mio. ha)
@@ -118,5 +115,7 @@ parameters
  oq35_secdforest_conversion(t,j,type)              Conversion of secondary forest (mio.ha)
  oq35_production_timber(t,j,kforestry,type)        Timber production from natural vegetation (mio. USD)
  oq35_cost_total(t,i,type)                         Natveg realted production costs (mio. USD)
+ oq35_prod_secdforest(t,j,kforestry,type)          xx
+ oq35_prod_primforest(t,j,kforestry,type)          xx
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
