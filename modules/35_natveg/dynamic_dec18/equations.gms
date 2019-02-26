@@ -74,6 +74,7 @@ q35_cost_total(i2) .. vm_cost_natveg(i2) =e=
 								   ;
 *******************************************************************************
 **** Cost of harvesting from NatVeg
+$ontext
 q35_cost_harvest(i2)..
                     v35_cost_harvest(i2)
                     =e=
@@ -81,6 +82,12 @@ q35_cost_harvest(i2)..
                     sum(ac_sub, v35_hvarea_secdforest(j2,kforestry,ac_sub))
                   + sum(ac_sub, v35_hvarea_other(j2,"woodfuel",ac_sub))
                   + v35_hvarea_primforest(j2,kforestry) * 1.2) * (fm_harvest_cost_ha(i2) * 1.5)
+                    ;
+$offtext
+q35_cost_harvest(i2)..
+                    v35_cost_harvest(i2)
+                    =e=
+                    sum((cell(i2,j2),kforestry),vm_prod_natveg(j2,kforestry)) * 50;
                     ;
 
 *******************************************************************************
