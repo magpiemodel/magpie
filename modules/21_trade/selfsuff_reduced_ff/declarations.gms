@@ -49,9 +49,12 @@ equations
  q21_excess_supply_ff(i,kforestry)      Future forestry excess supply (mio. m3)
  q21_cost_trade_reg_ff(i,kforestry)     Future forestry trade costs (mio. USD)
  q21_cost_trade_ff(i)                   Future forestry total trade costs (mio. USD)
- q21_trade_natveg(kforestry)			Global natveg production constraint (mio. m3 per yr)
- q21_trade_forestry(kforestry)			Global forestry production constraint (mio. m3 per yr)
- q21_prod_timber(i,kforestry)         xx
+* q21_trade_natveg(kforestry)			Global natveg production constraint (mio. m3 per yr)
+* q21_trade_forestry(kforestry)			Global forestry production constraint (mio. m3 per yr)
+* q21_prod_timber(i,kforestry)         xx
+ q21_trade_glo_timber(kforestry)        xx
+ q21_prod_reg_forestry(i,kforestry)     xx
+ q21_ratio_forestry(i)                  xx
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -79,8 +82,8 @@ parameters
  oq21_excess_supply_ff(t,i,kforestry,type)  Future forestry excess supply (mio. m3)
  oq21_cost_trade_reg_ff(t,i,kforestry,type) Future forestry trade costs (mio. USD)
  oq21_cost_trade_ff(t,i,type)               Future forestry total trade costs (mio. USD)
- oq21_trade_natveg(t,kforestry,type)        Global natveg production constraint (mio. m3 per yr)
- oq21_trade_forestry(t,kforestry,type)      Global forestry production constraint (mio. m3 per yr)
- oq21_prod_timber(t,i,kforestry,type)       xx
+ oq21_trade_glo_timber(t,kforestry,type)    xx
+ oq21_prod_reg_forestry(t,i,kforestry,type) xx
+ oq21_ratio_forestry(t,i,type)              xx
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
