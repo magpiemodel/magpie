@@ -87,7 +87,7 @@ $offtext
 q35_cost_harvest(i2)..
                     v35_cost_harvest(i2)
                     =e=
-                    sum((cell(i2,j2),kforestry),vm_prod_natveg(j2,kforestry)) * 50;
+                    sum((cell(i2,j2),land_natveg,kforestry),v35_prod(j2,land_natveg,kforestry)) * 50;
                     ;
 
 *******************************************************************************
@@ -108,10 +108,10 @@ q35_prod_secdforest_woodfuel(j2)..
 *	   				            +
                         sum(ac_sub, v35_hvarea_secdforest(j2,"woodfuel",ac_sub)	* sum(ct, p35_yield_natveg(ct,j2,ac_sub)));
 $offtext
-q35_prod_secdforest(j2,kforestry)..
-                         v35_prod(j2,"secdforest",kforestry)
+q35_prod_secdforest(j2)..
+                         sum(kforestry,v35_prod(j2,"secdforest",kforestry))
                           =e=
-						             sum(ac_sub, v35_hvarea_secdforest(j2,kforestry,ac_sub) * sum(ct, p35_yield_natveg(ct,j2,ac_sub)));
+						             sum((ac_sub,kforestry,ct), v35_hvarea_secdforest(j2,kforestry,ac_sub) * p35_yield_natveg(ct,j2,ac_sub));
 
 **** From Primary forest
 $ontext
@@ -127,10 +127,10 @@ q35_prod_primforest_woodfuel(j2)..
 *                         +
                          v35_hvarea_primforest(j2,"woodfuel")  * sum(ct, p35_yield_primforest(ct,j2));
 $offtext
-q35_prod_primforest(j2,kforestry)..
-                           v35_prod(j2,"primforest",kforestry)
+q35_prod_primforest(j2)..
+                           sum(kforestry,v35_prod(j2,"primforest",kforestry))
                            =e=
-                           v35_hvarea_primforest(j2,kforestry) * sum(ct, p35_yield_primforest(ct,j2));
+                           sum(kforestry,v35_hvarea_primforest(j2,kforestry)) * sum(ct, p35_yield_primforest(ct,j2));
 
 **** From other land (only woodfuel)
 q35_prod_other(j2)..

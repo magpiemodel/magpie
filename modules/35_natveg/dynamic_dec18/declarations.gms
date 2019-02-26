@@ -56,8 +56,8 @@ equations
  q35_secdforest_conversion(j)     Conversion of secondary forest (mio.ha)
  q35_production_timber(j,kforestry)         Timber production from natural vegetation (mio. USD)
  q35_cost_total(i)                Natveg realted production costs (mio. USD)
- q35_prod_secdforest(j,kforestry)  xx
- q35_prod_primforest(j,kforestry)  xx
+ q35_prod_secdforest(j)  xx
+ q35_prod_primforest(j)  xx
 ;
 
 positive variables
@@ -116,7 +116,7 @@ parameters
  oq35_secdforest_conversion(t,j,type)              Conversion of secondary forest (mio.ha)
  oq35_production_timber(t,j,kforestry,type)        Timber production from natural vegetation (mio. USD)
  oq35_cost_total(t,i,type)                         Natveg realted production costs (mio. USD)
- oq35_prod_secdforest(t,j,kforestry,type)          xx
- oq35_prod_primforest(t,j,kforestry,type)          xx
+ oq35_prod_secdforest(t,j,type)                    xx
+ oq35_prod_primforest(t,j,type)                    xx
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
