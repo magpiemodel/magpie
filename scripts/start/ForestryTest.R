@@ -15,9 +15,11 @@ source("config/default.cfg")
 
 cfg$developer_mode <- TRUE
 
-cfg$input <- c("magpie4.0_default_sep18.tgz","additional_data_rev3.65.tgz","isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev35_c200_690d3718e151be1b450b394c1064b1c5.tgz","private_forestry_dec18_20190216.tgz")
-cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL,"/p/projects/landuse/users/mishra/additional_data_private_forestry"=NULL),
-                           getOption("magpie_repos"))
+#cfg$input <- c("magpie4.0_default_sep18.tgz","additional_data_rev3.65.tgz","isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev35_c200_690d3718e151be1b450b394c1064b1c5.tgz","private_forestry_dec18_20190216.tgz")
+#cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL,"/p/projects/landuse/users/mishra/additional_data_private_forestry"=NULL), getOption("magpie_repos"))
+
+cfg$input <- c("magpie4.0_default_sep18.tgz","additional_data_rev3.65.tgz","isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev35_c200_690d3718e151be1b450b394c1064b1c5.tgz","rev4.1666_690d3718e151be1b450b394c1064b1c5_magpie.tgz","rev4.1666_690d3718e151be1b450b394c1064b1c5_validation.tgz","private_forestry_dec18_20190228.tgz")
+cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL,"/p/projects/landuse/users/mishra/additional_data_private_forestry"=NULL,"/p/projects/rd3mod/inputdata/output"=NULL), getOption("magpie_repos"))
 
 cfg$output <- c("rds_report","interpolation")
 
@@ -40,11 +42,12 @@ cfg$gms$optimization <- "nlp_apr17"
 #ALERT:  At the moment this script cannot download new data in case the input files are changed. Has to be set to true.
 cfg$force_download <- FALSE
 #rl_all<-c("rlGTM")
-rl_all<-c("rlFAO_min","rlGTM","rlFAO_max")
+#rl_all<-c("rlFAO_min","rlGTM","rlFAO_max")
+rl_all<-c("rlGTM","rlFAO_max")
 #rl_all<-c("rlFAO_max")
 
-co2_price_scenarios <- c("SSP2-Ref-SPA0")
-#co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
+#co2_price_scenarios <- c("SSP2-Ref-SPA0")
+co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
 
 for(biodem in co2_price_scenarios){
 
@@ -73,7 +76,7 @@ for(biodem in co2_price_scenarios){
   		t <- gsub(".*_", "", rl)
   		t <- gsub("rl","",t)
   		cfg$gms$c32_rot_length <- rl
-  		for(rl_estb in rl_all){
+  		for(rl_estb in c("rlGTM")){
   		cfg$gms$c32_rot_length_estb <- rl_estb
   		t_estb <- gsub(".*_", "", rl_estb)
       	t_estb <- gsub("rl","",t_estb)
@@ -89,7 +92,7 @@ for(biodem in co2_price_scenarios){
   		t <- gsub(".*_", "", rl)
   		t <- gsub("rl","",t)
   		cfg$gms$c32_rot_length <- rl
-  		for(rl_estb in c("rlGTM","rlFAO_max")){
+  		for(rl_estb in c("rlGTM")){
   		cfg$gms$c32_rot_length_estb <- rl_estb
   		t_estb <- gsub(".*_", "", rl_estb)
       	t_estb <- gsub("rl","",t_estb)
