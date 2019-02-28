@@ -73,7 +73,7 @@ cfg$force_download <- TRUE
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6",regionmapping="agmip")
 cfg$gms$som<-"cellpool_aug16"
 #cfg$gms$factor_costs <- "sticky_feb18"
-cfg$c50_scen_neff  <- "neff80_85_starty2010"
+cfg$gms$c50_scen_neff  <- "neff80_85_starty2010"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg$title <- "INMS_SSP1_RCP45_Nhigh"
@@ -84,7 +84,7 @@ cfg$force_download <- TRUE
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="agmip")
 cfg$gms$som<-"cellpool_aug16"
 #cfg$gms$factor_costs <- "sticky_feb18"
-cfg$c50_scen_neff  <- "neff80_85_starty2010"
+cfg$gms$c50_scen_neff  <- "neff80_85_starty2010"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 
@@ -95,7 +95,7 @@ cfg$gms$c60_2ndgen_biodem    <- "SSP2-45-SPA2"
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="agmip")
 cfg$gms$som<-"cellpool_aug16"
-cfg$c50_scen_neff  <- "constant"
+cfg$gms$c50_scen_neff  <- "constant"
 #cfg$gms$factor_costs <- "sticky_feb18"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
@@ -106,7 +106,7 @@ cfg$gms$c60_2ndgen_biodem    <- "SSP2-45-SPA2"
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="agmip")
 cfg$gms$som<-"cellpool_aug16"
-cfg$c50_scen_neff  <- "neff80_85_starty2010"
+cfg$gms$c50_scen_neff  <- "neff80_85_starty2010"
 #cfg$gms$factor_costs <- "sticky_feb18"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
@@ -117,6 +117,6 @@ cfg$gms$c60_2ndgen_biodem    <- "SSP5-85-SPA2"
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp8p5",regionmapping="agmip")
 cfg$gms$som<-"cellpool_aug16"
-cfg$c50_scen_neff  <- "constant"
+cfg$gms$c50_scen_neff  <- "constant"
 #cfg$gms$factor_costs <- "sticky_feb18"
 start_run(cfg=cfg,codeCheck=codeCheck)
