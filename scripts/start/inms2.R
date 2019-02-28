@@ -17,22 +17,23 @@ source("config/default.cfg")
 #set defaults
 codeCheck <- FALSE
 
-buildInputVector <- function(regionmapping   = "h11",
+buildInputVector <- function(regionmapping   = "agmip",
                              project_name    = "isimip_rcp",
                              climatescen_name= "rcp2p6",
                              co2             = "noco2",
                              climate_model   = "IPSL_CM5A_LR",
-                             resolution      = "h200",
-                             archive_rev     = "29",
-                             madrat_rev      = "3.15",
-                             validation_rev  = "3.15",
-                             additional_data = "additional_data_rev3.65.tgz",
-                             npi="npi_ndc_base_SSP2_fixed.tgz") {
+                             resolution      = "c200",
+                             archive_rev     = "34",
+                             madrat_rev      = "4.14",
+                             validation_rev  = "4.14",
+                             calibration     = "calibration_agmip_c200_19Dec18.tgz",
+                             additional_data = "additional_data_rev3.65.tgz" ) {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
                 mag="c30c1c580039c2b300d86cc46ff4036a",
                 inms="69c65bb3c88e8033cf8df6b5ac5d52a9",
-                inms2="ef2ae7cd6110d5d142a9f8bd7d5a68f2")
+                inms2="ef2ae7cd6110d5d142a9f8bd7d5a68f2",
+                agmip="c77f075908c3bc29bdbe1976165eccaf")
   archive_name=paste(project_name,climate_model,climatescen_name,co2,sep="-")
   archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", mappings[regionmapping], ".tgz")
   madrat  <- paste0("rev", madrat_rev,"_", mappings[regionmapping], "_magpie.tgz")
@@ -53,7 +54,7 @@ cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$gms$c56_pollutant_prices <- "SSP2-45-SPA2-V15-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-45-SPA2"
 cfg$force_download <- TRUE
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms2")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="agmip")
 cfg$gms$som<-"cellpool_aug16"
 #cfg$gms$factor_costs <- "sticky_feb18"
 start_run(cfg=cfg,codeCheck=codeCheck)
@@ -68,7 +69,7 @@ cfg<-lucode::setScenario(cfg,"SUSTAg1")
 cfg$gms$c56_pollutant_prices <- "SSP1-26-SPA2-V15-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSP1-26-SPA2"
 cfg$force_download <- TRUE
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6",regionmapping="inms2")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6",regionmapping="agmip")
 cfg$gms$som<-"cellpool_aug16"
 #cfg$gms$factor_costs <- "sticky_feb18"
 cfg$c50_scen_neff  <- "neff80_85_starty2010"
@@ -79,7 +80,7 @@ cfg<-lucode::setScenario(cfg,"SUSTAg1")
 cfg$gms$c56_pollutant_prices <- "SSP1-45-SPA2-V15-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSP1-45-SPA2"
 cfg$force_download <- TRUE
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms2")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="agmip")
 cfg$gms$som<-"cellpool_aug16"
 #cfg$gms$factor_costs <- "sticky_feb18"
 cfg$c50_scen_neff  <- "neff80_85_starty2010"
@@ -91,7 +92,7 @@ cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$gms$c56_pollutant_prices <- "SSP2-45-SPA2-V15-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-45-SPA2"
 cfg$force_download <- TRUE
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms2")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="agmip")
 cfg$gms$som<-"cellpool_aug16"
 cfg$c50_scen_neff  <- "constant"
 #cfg$gms$factor_costs <- "sticky_feb18"
@@ -102,7 +103,7 @@ cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$gms$c56_pollutant_prices <- "SSP2-45-SPA2-V15-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-45-SPA2"
 cfg$force_download <- TRUE
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms2")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="agmip")
 cfg$gms$som<-"cellpool_aug16"
 cfg$c50_scen_neff  <- "neff80_85_starty2010"
 #cfg$gms$factor_costs <- "sticky_feb18"
@@ -113,7 +114,7 @@ cfg<-lucode::setScenario(cfg,"SUSTAg5")
 cfg$gms$c56_pollutant_prices <- "SSP5-85-SPA2-V15-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSP5-85-SPA2"
 cfg$force_download <- TRUE
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp8p5",regionmapping="inms2")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp8p5",regionmapping="agmip")
 cfg$gms$som<-"cellpool_aug16"
 cfg$c50_scen_neff  <- "constant"
 #cfg$gms$factor_costs <- "sticky_feb18"
