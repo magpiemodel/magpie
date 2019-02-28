@@ -26,7 +26,7 @@ buildInputVector <- function(regionmapping   = "h11",
                              archive_rev     = "29",
                              madrat_rev      = "3.15",
                              validation_rev  = "3.15",
-                             additional_data = "additional_data_rev3.26.tgz",
+                             additional_data = "additional_data_rev3.65.tgz",
                              npi="npi_ndc_base_SSP2_fixed.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
@@ -48,36 +48,73 @@ cfg$gms$c_timesteps <- 12
 
 # clalibration runs
 
-cfg$title <- "INMS2"
+cfg$title <- "INMS_SSP2_RCP45_Nmed"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$gms$s15_elastic_demand = 1
-cfg$gms$c56_pollutant_prices <- "SSP2-60-SPA2-V15-MESSAGE-GLOBIOM"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-60-SPA2"
+cfg$gms$c56_pollutant_prices <- "SSP2-45-SPA2-V15-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-45-SPA2"
 cfg$force_download <- TRUE
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0",regionmapping="inms2")
-#cfg$gms$som<-"cellpool_aug16"
-cfg$gms$factor_costs <- "sticky_feb18"
-cfg$recalc_npi_ndc <- FALSE
-cfg$gms$c32_aff_policy <- "none"
-cfg$gms$c35_ad_policy <- "none"
-cfg$recalibrate <- TRUE
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms2")
+cfg$gms$som<-"cellpool_aug16"
+#cfg$gms$factor_costs <- "sticky_feb18"
 start_run(cfg=cfg,codeCheck=codeCheck)
-cfg$recalibrate <- FALSE
 
 
 #SSP1,5 family
 
+cfg$title <- "INMS_SSP1_RCP26_Nhigh_diet"
 
-cfg$title <- "INMS1"
+cfg$title <- "INMS_SSP1_RCP26_Nhigh"
 cfg<-lucode::setScenario(cfg,"SUSTAg1")
+cfg$gms$c56_pollutant_prices <- "SSP1-26-SPA2-V15-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem    <- "SSP1-26-SPA2"
+cfg$force_download <- TRUE
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6",regionmapping="inms2")
-cfg$gms$c56_pollutant_prices <- "SSP5-26-SPA5-V15-REMIND-MAGPIE"
-cfg$gms$c60_2ndgen_biodem    <- "SSP5-26-SPA5"
+cfg$gms$som<-"cellpool_aug16"
+#cfg$gms$factor_costs <- "sticky_feb18"
+cfg$c50_scen_neff  <- "neff80_85_starty2010"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
-cfg$title <- "INMS5"
-cfg<-lucode::setScenario(cfg,"SUSTAg5")
+cfg$title <- "INMS_SSP1_RCP45_Nhigh"
+cfg<-lucode::setScenario(cfg,"SUSTAg1")
+cfg$gms$c56_pollutant_prices <- "SSP1-45-SPA2-V15-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem    <- "SSP1-45-SPA2"
+cfg$force_download <- TRUE
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms2")
-cfg$gms$c56_pollutant_prices <- "SSP1-45-SPA1-V15-IMAGE"
-cfg$gms$c60_2ndgen_biodem    <- "SSP1-45-SPA1"
+cfg$gms$som<-"cellpool_aug16"
+#cfg$gms$factor_costs <- "sticky_feb18"
+cfg$c50_scen_neff  <- "neff80_85_starty2010"
+start_run(cfg=cfg,codeCheck=codeCheck)
+
+
+cfg$title <- "INMS_SSP2_RCP45_Nlow"
+cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg$gms$c56_pollutant_prices <- "SSP2-45-SPA2-V15-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-45-SPA2"
+cfg$force_download <- TRUE
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms2")
+cfg$gms$som<-"cellpool_aug16"
+cfg$c50_scen_neff  <- "constant"
+#cfg$gms$factor_costs <- "sticky_feb18"
+start_run(cfg=cfg,codeCheck=codeCheck)
+
+cfg$title <- "INMS_SSP2_RCP45_Nhigh"
+cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg$gms$c56_pollutant_prices <- "SSP2-45-SPA2-V15-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-45-SPA2"
+cfg$force_download <- TRUE
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms2")
+cfg$gms$som<-"cellpool_aug16"
+cfg$c50_scen_neff  <- "neff80_85_starty2010"
+#cfg$gms$factor_costs <- "sticky_feb18"
+start_run(cfg=cfg,codeCheck=codeCheck)
+
+cfg$title <- "SSP5_RCP85_Nlow"
+cfg<-lucode::setScenario(cfg,"SUSTAg5")
+cfg$gms$c56_pollutant_prices <- "SSP5-85-SPA2-V15-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem    <- "SSP5-85-SPA2"
+cfg$force_download <- TRUE
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp8p5",regionmapping="inms2")
+cfg$gms$som<-"cellpool_aug16"
+cfg$c50_scen_neff  <- "constant"
+#cfg$gms$factor_costs <- "sticky_feb18"
 start_run(cfg=cfg,codeCheck=codeCheck)

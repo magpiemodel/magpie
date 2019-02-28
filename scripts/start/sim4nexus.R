@@ -66,7 +66,7 @@ cfg$title <- "SSP1"
 cfg<-lucode::setScenario(cfg,"SSP1")
 cfg<-lucode::setScenario(cfg,"nocc")
 cfg$recalibrate <- TRUE
-cfg$input <- buildInputVector(co2="co2",regionmapping = "sim4nexus")
+cfg$input <- buildInputVector(co2="nocc",regionmapping = "sim4nexus")
 start_run(cfg=cfg,codeCheck=codeCheck)
 calib<-magpie4::submitCalibration(name = "calibration_sim4nexus_jan2019.tgz")
 cfg$recalibrate <- "ifneeded"
@@ -75,28 +75,28 @@ cfg$recalibrate <- "ifneeded"
 cfg$title <- "SSP2"
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"nocc")
-cfg$input <- buildInputVector(co2="co2",regionmapping = "sim4nexus",calibration=calib)
+cfg$input <- buildInputVector(co2="nocc",regionmapping = "sim4nexus",calibration=calib)
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 # SSP3
 cfg$title <- "SSP3"
 cfg<-lucode::setScenario(cfg,"SSP3")
 cfg<-lucode::setScenario(cfg,"nocc")
-cfg$input <- buildInputVector(co2="co2",regionmapping = "sim4nexus",calibration=calib)
+cfg$input <- buildInputVector(co2="nocc",regionmapping = "sim4nexus",calibration=calib)
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 # SSP4
 cfg$title <- "SSP4"
 cfg<-lucode::setScenario(cfg,"SSP4")
 cfg<-lucode::setScenario(cfg,"nocc")
-cfg$input <- buildInputVector(co2="co2",regionmapping = "sim4nexus",calibration=calib)
+cfg$input <- buildInputVector(co2="nocc",regionmapping = "sim4nexus",calibration=calib)
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 # SSP5
 cfg$title <- "SSP5"
 cfg<-lucode::setScenario(cfg,"SSP5")
 cfg<-lucode::setScenario(cfg,"nocc")
-cfg$input <- buildInputVector(co2="co2",regionmapping = "sim4nexus",calibration=calib)
+cfg$input <- buildInputVector(co2="nocc",regionmapping = "sim4nexus",calibration=calib)
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 
@@ -108,18 +108,18 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 #SSP2 family
 
 # SSP2 Baseline RCP6.0 without CC mitigation 
-cfg$title <- "base_rcp6p0"
+cfg$title <- "SSP2_base_rcp6p0"
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0",regionmapping = "sim4nexus",calibration=calib)
+cfg$input <- buildInputVector(co2="nocc",climatescen_name="rcp6p0",regionmapping = "sim4nexus",calibration=calib)
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 
 # SSP2 Mitigation RCP2.6 
-cfg$title <- "policy_rcp2p6"
+cfg$title <- "SSP2_policy_rcp2p6"
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6",regionmapping = "sim4nexus",calibration=calib)
+cfg$input <- buildInputVector(co2="nocc",climatescen_name="rcp2p6",regionmapping = "sim4nexus",calibration=calib)
 cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
 cfg$gms$forestry  <- "affore_vegc_dec16"
@@ -128,19 +128,19 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 
 
 # SSP2 Baseline RCP6.0 without CC mitigation with EFP
-cfg$title <- "base_rcp6p0_efp"
+cfg$title <- "SSP2_base_rcp6p0_efp"
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0",regionmapping = "sim4nexus",calibration=calib)
+cfg$input <- buildInputVector(co2="nocc",climatescen_name="rcp6p0",regionmapping = "sim4nexus",calibration=calib)
 cfg$gms$c42_env_flow_policy <- "on"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 
 # SSP2 Mitigation RCP2.6 with EFP
-cfg$title <- "policy_rcp2p6_efp"
+cfg$title <- "SSP2_policy_rcp2p6_efp"
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6",regionmapping = "sim4nexus",calibration=calib)
+cfg$input <- buildInputVector(co2="nocc",climatescen_name="rcp2p6",regionmapping = "sim4nexus",calibration=calib)
 cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
 cfg$gms$forestry  <- "affore_vegc_dec16"
