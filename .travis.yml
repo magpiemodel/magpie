@@ -9,7 +9,9 @@ cache:
   packages: true
 latex: false
 pandoc: false
-r-packages: lucode
+r_packages: lucode
+install:
+  - echo "go go go"
 script:
   - Rscript -e "null <- lucode::codeCheck(strict=TRUE)"
 
