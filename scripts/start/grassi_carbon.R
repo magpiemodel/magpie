@@ -52,7 +52,7 @@ cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp6p0-co2_rev34_c200_690d3718e151be1b45
                "calibration_H12_c200_12Sep18.tgz")
 cfg$gms$land <- "dec18"
 cfg <- setScenario(cfg,c("SSP2","NPI"))
-getInput("/p/projects/remind/runs/magpie_40-develop-2019-02-25-macfix/output/r8375-C_Budg600-mag-10/fulldata.gdx")
+getInput("/p/projects/remind/runs/magpie_40-develop-2019-02-25-macfix/output/r8375-C_Base-mag-10/fulldata.gdx")
 cfg$gms$c14_yields_scenario  <- "cc"
 cfg$gms$c42_watdem_scenario  <- "cc"
 cfg$gms$c52_carbon_scenario  <- "cc"
