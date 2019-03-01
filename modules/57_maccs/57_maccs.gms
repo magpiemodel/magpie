@@ -20,7 +20,7 @@
 *' and reduce them by a certain percentage in exchange for additional costs.
 *' The MACCs used in this module are based on the data from @LUCAS200785.  
 *'
-*' @authors Benjamin Leon Bodirsky
+*' @authors Benjamin Leon Bodirsky, Florian Humpenoeder
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%maccs%" == "off_jul16" $include "./modules/57_maccs/off_jul16.gms"

@@ -6,6 +6,7 @@
 
 parameters
  im_maccs_mitigation(t,i,emis_source,pollutants)        Technical mitigation of GHG emissions (percent)
+ i57_maccs_mitigation_diff(t,i,emis_source,pollutants)  Difference in technical mitigation of GHG emissions compared to previous time step (percent)
  i57_mac_step_n2o(t,i)                                  Helper to map C prices and maccs_steps (1)
  i57_mac_step_ch4(t,i)                                  Helper to map C prices and maccs_steps (1)
  p57_maccs_costs_n2o(t,i)     							Costs of technical N emission abatement (USD95MER per Tg N)
