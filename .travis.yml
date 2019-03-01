@@ -11,7 +11,7 @@ latex: false
 pandoc: false
 r_packages: lucode
 install:
-  - echo "go go go"
+  - echo "This echo is required as travis would otherwise complain a non-existing DESCRIPTION file (it just requires some entry under "install")!"
 script:
   - Rscript -e "null <- lucode::codeCheck(strict=TRUE)"
 
