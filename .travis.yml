@@ -6,11 +6,10 @@ repos:
   PIK:  https://rse.pik-potsdam.de/r/packages/
 sudo: false
 cache: 
-  packages: false
+  packages: true
 latex: false
 pandoc: false
-install:
-  - Rscript -e "install.packages('lucode')"
+r-packages: lucode
 script:
   - Rscript -e "null <- lucode::codeCheck(strict=TRUE)"
 
