@@ -8,8 +8,6 @@ vm_land.l(j,land) = pcm_land(j,land);
 
 *The following bounds should be moved to the respective land modules in the future (different bounds for different realizations)
 
-*content-wise bounds
-
 *No afforestation on natveg areas
 v10_lu_transitions.fx(j,"primforest","forestry") = 0;
 v10_lu_transitions.fx(j,"secdforest","forestry") = 0;
@@ -18,11 +16,6 @@ v10_lu_transitions.fx(j,"other","forestry") = 0;
 *conversions within natveg are not allowed
 v10_lu_transitions.fx(j,"primforest","other") = 0;
 v10_lu_transitions.fx(j,"secdforest","other") = 0;
-
-
-*The following bounds speed up the model. 
-*Results with and without these bounds should be identical but run time differs. 
-*About 30 min with and 1 hour without bounds for default runs until 2100.
 
 *forestry can only increase
 v10_lu_transitions.fx(j,"forestry",land_to10) = 0;
