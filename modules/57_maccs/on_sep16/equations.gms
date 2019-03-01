@@ -6,8 +6,9 @@
 
 *' @equations
 *' Therefore, the equation below is used to estimate the mitigation costs.
-*' It is simply calculated as a product of emissions before technical mitigation (`vm_btm_reg`) and
-*' the incremental costs of mitigation (`p57_maccs_costs_integral`).
+*' It is simply calculated as a product of emissions before technical mitigation (`vm_btm_reg`), 
+*' incremental mitigation (`i57_maccs_mitigation_diff`), and costs associated with the 
+*' respective level of technical mitigation (`p57_maccs_costs_n2o` and `p57_maccs_costs_ch4`)
 *' The mitigation costs will go into the objective function of the model.
 
 q57_total_costs(i2) ..
