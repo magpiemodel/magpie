@@ -6,15 +6,14 @@
 
 *' @equations
 *' Therefore, the equation below is used to estimate the mitigation costs.
-*' It is simply calculated as a product of emissions before technical mitigation (`vm_btm_reg`), 
-*' incremental mitigation (`i57_maccs_mitigation_diff`), and costs associated with the 
-*' respective level of technical mitigation (`p57_maccs_costs_n2o` and `p57_maccs_costs_ch4`)
+*' It is simply calculated as a product of GHG emissions before technical mitigation (`vm_btm_reg`), 
+*' and the costs per unit of technical mitigation (`p57_maccs_costs_integral`).
 *' The mitigation costs will go into the objective function of the model.
 
 q57_total_costs(i2) ..
   vm_maccs_costs(i2) =g=
-  sum((ct,emis_source), p57_maccs_costs_n2o(ct,i2)
-		* (vm_btm_reg(i2,emis_source,"n2o_n_direct") * i57_maccs_mitigation_diff(ct,i2,emis_source,"n2o_n_direct")) 
-        + p57_maccs_costs_ch4(ct,i2)
-		* (vm_btm_reg(i2,emis_source,"ch4") * i57_maccs_mitigation_diff(ct,i2,emis_source,"ch4"))
+  sum((ct,emis_source), p57_maccs_costs_integral(ct,i2,emis_source,"n2o_n_direct")
+		* vm_btm_reg(i2,emis_source,"n2o_n_direct")
+        + p57_maccs_costs_integral(ct,i2,emis_source,"ch4")
+		* vm_btm_reg(i2,emis_source,"ch4")
 		);
