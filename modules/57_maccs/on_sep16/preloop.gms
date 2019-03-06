@@ -4,11 +4,16 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*Determine level of GHG emission abatement depending on CH4/N2O_N price
-*There are 200 abatement steps. Each step is 5 USD per tC eq. Therefore conversion to USD per tC eq is needed.
-*Options at zero cost are in the first step
-i57_mac_step_n2o(t,i) = min(201, ceil(im_pollutant_prices(t,i,"n2o_n_direct")/265*28/44*44/12 / 5) + 1);
-i57_mac_step_ch4(t,i) = min(201, ceil(im_pollutant_prices(t,i,"ch4")/28*44/12 / 5) + 1);
+$ontext
+Determine level of GHG emission abatement depending on GHG prices.
+There are 200 abatement steps. Each step is 5 USD per tC eq. Options at zero cost are in the first step.
+Since the GHG prices are in USD per ton N and USD per ton CH4, conversion to USD per ton C eq is needed.
+In this realization, the old IPCC AR4 global warming potential factor for N2O (298) and CH4 (25) MUST be used because 
+Lucas et al used these parameters to convert USD per ton N2O and USD per ton CH4 into USD per ton C eq. 
+$offtext
+
+i57_mac_step_n2o(t,i) = min(201, ceil(im_pollutant_prices(t,i,"n2o_n_direct")/298*28/44*44/12 / 5) + 1);
+i57_mac_step_ch4(t,i) = min(201, ceil(im_pollutant_prices(t,i,"ch4")/25*44/12 / 5) + 1);
 
 *Calculate technical mitigation depending on i57_mac_step_n2o and i57_mac_step_ch4.
 *At zero GHG prices i57_mac_step_n2o/i57_mac_step_ch4 are set to 1.
@@ -77,9 +82,9 @@ loop(maccs_steps$(ord(maccs_steps) > 1),
     (f57_maccs_ch4(t,i,"awms_ch4",maccs_steps) - f57_maccs_ch4(t,i,"awms_ch4",maccs_steps-1))*(ord(maccs_steps)-1)*5;
 );
 
-*Conversion from USD per tC to USD per t CH4/N2O_N
-p57_maccs_costs_integral(t,i,emis_source,"n2o_n_direct") = p57_maccs_costs_integral(t,i,emis_source,"n2o_n_direct")*12/44*265*44/28;
-p57_maccs_costs_integral(t,i,emis_source,"ch4") = p57_maccs_costs_integral(t,i,emis_source,"ch4")*12/44*28;
+*Conversion from USD per ton C to USD per ton N and USD per ton CH4, using the old IPCC AR4 GWP factors.
+p57_maccs_costs_integral(t,i,emis_source,"n2o_n_direct") = p57_maccs_costs_integral(t,i,emis_source,"n2o_n_direct")*12/44*298*44/28;
+p57_maccs_costs_integral(t,i,emis_source,"ch4") = p57_maccs_costs_integral(t,i,emis_source,"ch4")*12/44*25;
 
 
 display
