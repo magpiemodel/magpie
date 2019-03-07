@@ -10,14 +10,12 @@ p16_volumetric_conversion("woodfuel") = 307.1;
 fm_forestry_demand(t_all,i,"wood") =
 										sum(i_to_iso(i,iso),
 										m_yeardiff(t_all)
-                  * f16_forestry_demand_iso(t_all,iso,"wood")
-									* 1000/p16_volumetric_conversion("wood"));
+                  * f16_forestry_demand_iso(t_all,iso,"wood"));
 
 fm_forestry_demand(t_all,i,"woodfuel") =
 										sum(i_to_iso(i,iso),
 					 					m_yeardiff(t_all)
-                  * f16_forestry_demand_iso(t_all,iso,"woodfuel")
-				 					* 1000/p16_volumetric_conversion("woodfuel")) * 0.50;
+                  * f16_forestry_demand_iso(t_all,iso,"woodfuel")) * 0.50;
 
 *** Only needed to fix the time step length miscalculation from t_all in y1995.
 *** The 1995 value for yeardiff needs to be onw but with m_yeatrdiff on t_all its is 5.
@@ -27,14 +25,12 @@ fm_forestry_demand(t_all,i,"woodfuel") =
 fm_forestry_demand(t,i,"wood") =
 										sum(i_to_iso(i,iso),
 										m_yeardiff(t)
-                  * f16_forestry_demand_iso(t,iso,"wood")
-									* 1000/p16_volumetric_conversion("wood"));
+                  * f16_forestry_demand_iso(t,iso,"wood"));
 
 fm_forestry_demand(t,i,"woodfuel") =
 										sum(i_to_iso(i,iso),
 					 					m_yeardiff(t)
-                  * f16_forestry_demand_iso(t,iso,"woodfuel")
-				 					* 1000/p16_volumetric_conversion("woodfuel")) * 0.50;
+                  * f16_forestry_demand_iso(t,iso,"woodfuel")) * 0.50;
 
 *fm_forestry_demand("y1995",i,kforestry) = fm_forestry_demand("y1995",i,kforestry) * 5;
 * Setting MEA demand to 10% of calculated demand for testing purposes
