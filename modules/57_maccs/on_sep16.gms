@@ -15,6 +15,5 @@ $Ifi "%phase%" == "declarations" $include "./modules/57_maccs/on_sep16/declarati
 $Ifi "%phase%" == "input" $include "./modules/57_maccs/on_sep16/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/57_maccs/on_sep16/equations.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/57_maccs/on_sep16/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/57_maccs/on_sep16/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/57_maccs/on_sep16/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
