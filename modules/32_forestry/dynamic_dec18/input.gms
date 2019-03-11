@@ -1,14 +1,14 @@
 $setglobal c32_aff_mask  noboreal
 * options: unrestricted, noboreal, onlytropical
 $setglobal c32_aff_policy  npi
-$setglobal c32_rot_length  rlFAO_max
+$setglobal c32_rot_length  rlGTM
 $setglobal c32_rot_length_estb  rlGTM
 
 scalars
   c32_reESTBcost Reestablishment cost in USD per ha / 2000 /
   c32_recurring_cost Recurring costs in USD per ha / 100 /
   c32_harvesting_cost Harvesting cost in USD per ha / 200 /
-  s32_planing_horizon Afforestation planing horizon (years)            / 30 /
+  s32_planing_horizon Afforestation planing horizon (years)            / 80 /
 ;
 
 scalars
