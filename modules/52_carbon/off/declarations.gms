@@ -7,7 +7,7 @@
 * Here you can put your additional declarations
 parameters
  pm_carbon_density_ac(t,j,ac,c_pools)  Carbon density for ac and c_pools (tC per ha)
- pc52_carbon_stock(j,land,c_pools)     Current carbon in vegetation soil and litter for different land types (mio tC)
+ pcm_carbon_stock(j,land,c_pools)     Current carbon in vegetation soil and litter for different land types (mio tC)
 ;
 
 positive variables
