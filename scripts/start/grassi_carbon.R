@@ -32,8 +32,8 @@ cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$c60_2ndgen_biodem <- "coupling"
 
 #SSP2 Ref noCC
-cfg$title <- "SSP2_Ref_noCC_05"
-cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp6p0-co2_rev34_c200_690d3718e151be1b450b394c1064b1c5.tgz",
+cfg$title <- "SSP2_Ref_noCC_06"
+cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp8p5-co2_rev34_c200_690d3718e151be1b450b394c1064b1c5.tgz",
                "rev4.14_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
                "rev4.14_690d3718e151be1b450b394c1064b1c5_validation.tgz",
                "additional_data_rev3.65.tgz",
@@ -44,8 +44,8 @@ getInput("/p/projects/remind/runs/magpie_40-develop-2019-02-25-macfix/output/r83
 start_run(cfg,codeCheck=FALSE)
 
 #SSP2 Ref CC
-cfg$title <- "SSP2_Ref_CC_05"
-cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp6p0-co2_rev34_c200_690d3718e151be1b450b394c1064b1c5.tgz",
+cfg$title <- "SSP2_Ref_RCP85_06"
+cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp8p5-co2_rev34_c200_690d3718e151be1b450b394c1064b1c5.tgz",
                "rev4.14_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
                "rev4.14_690d3718e151be1b450b394c1064b1c5_validation.tgz",
                "additional_data_rev3.65.tgz",
@@ -60,7 +60,7 @@ cfg$gms$c59_som_scenario  <- "cc"
 start_run(cfg,codeCheck=FALSE)
 
 ##SSP2 26 CC
-cfg$title <- "SSP2_26_CC_05"
+cfg$title <- "SSP2_26_RCP26_06"
 cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev34_c200_690d3718e151be1b450b394c1064b1c5.tgz",
                "rev4.14_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
                "rev4.14_690d3718e151be1b450b394c1064b1c5_validation.tgz",
