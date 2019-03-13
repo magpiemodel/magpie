@@ -46,8 +46,8 @@ cfg$force_download <- FALSE
 rl_all<-c("rlGTM","rlFAO_max")
 #rl_all<-c("rlFAO_max")
 
-#co2_price_scenarios <- c("SSP2-Ref-SPA0")
-co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
+co2_price_scenarios <- c("SSP2-Ref-SPA0")
+#co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
 
 for(biodem in co2_price_scenarios){
 
