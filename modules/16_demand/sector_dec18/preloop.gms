@@ -18,7 +18,7 @@ fm_forestry_demand(t_all,i,"woodfuel") =
                   * f16_forestry_demand_iso(t_all,iso,"woodfuel")) * 0.50;
 
 *** Only needed to fix the time step length miscalculation from t_all in y1995.
-*** The 1995 value for yeardiff needs to be onw but with m_yeatrdiff on t_all its is 5.
+*** The 1995 value for yeardiff needs to be one but with m_yeatrdiff on t_all its is 5.
 *** Only the t values will be overwritten using this fix.
 *** Could also make a dollar condition with $(ord(t)=1). Fix later.
 

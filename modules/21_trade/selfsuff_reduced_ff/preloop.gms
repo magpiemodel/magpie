@@ -12,6 +12,7 @@ f21_self_suff(t_all,"REF",kforestry) = 0.90;
 
 f21_trade_tariff("MEA",kforestry)    = 0.01;
 f21_trade_tariff("MEA",kforestry)    = 100;
+f21_trade_tariff("JPN",kforestry)    = 999999;
 
 i21_trade_bal_reduction(t_all,k_trade)=f21_trade_bal_reduction(t_all,"easytrade","%c21_trade_liberalization%");
 i21_trade_bal_reduction(t_all,k_hardtrade21)=f21_trade_bal_reduction(t_all,"hardtrade","%c21_trade_liberalization%");
