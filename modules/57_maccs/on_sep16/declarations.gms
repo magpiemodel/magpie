@@ -5,13 +5,14 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- im_maccs_mitigation(t,i,emis_source,pollutants)          Technical mitigation of GHG emissions (1 per 100)
- p57_maccs_costs_integral(t,i,emis_source,pollutants)     Costs of technical mitigation (USD95MER per tC)
- i57_mac_step(t,i)                                        Helper to map CO2 prices and maccs_steps (1)
+ im_maccs_mitigation(t,i,emis_source,pollutants)        Technical mitigation of GHG emissions (percent)
+ i57_mac_step_n2o(t,i)                                  Helper to map N2O prices and maccs_steps (1)
+ i57_mac_step_ch4(t,i)                                  Helper to map CH4 prices and maccs_steps (1)
+ p57_maccs_costs_integral(t,i,emis_source,pollutants)   Costs of technical mitigation (USD95MER per Tg N CH4 C)
 ;
 
 equations
- q57_total_costs(i)  Calculation of total costs of technical mitigation (mio.USD95MER per yr)
+ q57_total_costs(i)  Calculation of total costs of technical mitigation (mio. USD95MER per yr)
 ;
 
 positive variables
@@ -21,6 +22,6 @@ positive variables
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_maccs_costs(t,i,type)   Costs of technical mitigation of GHG emissions (mio. USD95MER per yr)
- oq57_total_costs(t,i,type) Calculation of total costs of technical mitigation (mio.USD95MER per yr)
+ oq57_total_costs(t,i,type) Calculation of total costs of technical mitigation (mio. USD95MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
