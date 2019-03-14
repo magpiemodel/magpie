@@ -9,7 +9,7 @@ parameters
           p59_carbon_density(t_all,j,pools59)  Carbon density of a hectare of land (tC per ha)
           i59_tillage_share(i,tillage59)       Share of land under tillage class (1)
           i59_input_share(i,inputs59)          Share of land under input class (1)
-          i59_cratio(j,kcr)                    Ratio of carbon density of land relative to natural vegetaion (1)
+          i59_cratio(j,kcr,w)                  Ratio of carbon density of land relative to natural vegetaion (1)
           p59_som_pool(j,pools59)              Actual C pool (mio. tC)
           i59_subsoilc_density(t_all,j)        Subsoil carbon density of a hectare of land (tC per ha)
 ;

@@ -23,14 +23,14 @@ i59_input_share(i,"medium_input")=1;
 *' The stock change factor in each cell for every crop type also takes into account
 *' the climate variability of these factors and is therefor given by:
 
-i59_cratio(j,kcr) = sum((cell(i,j),tillage59,inputs59,climate59),
+i59_cratio(j,kcr,w) = sum((cell(i,j),tillage59,inputs59,climate59),
                  sum(clcl_climate59(clcl,climate59),pm_climate_class(j,clcl))
                  * f59_cratio_landuse(climate59,kcr)
                  * i59_tillage_share(i,tillage59)
                  * f59_cratio_tillage(climate59,tillage59)
                  * i59_input_share(i,inputs59)
-                 * f59_cratio_inputs(climate59,inputs59));
-
+                 * f59_cratio_inputs(climate59,inputs59)
+                 * f59_cratio_irrigation(climate59,w,kcr));
 *' @stop
 
 p59_som_pool(j,pools59) = f59_som_initialisation_pools("y1995",j, pools59);
