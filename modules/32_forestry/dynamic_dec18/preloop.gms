@@ -57,8 +57,9 @@ pm_production_ratio_ext(i,t_all) = fm_production_ratio(i,t_all);
 
 p32_forestry_management(i) = f32_forestry_management(i);
 p32_forestry_management("IND") = 10;
-p32_forestry_management("USA") = 7;
+p32_forestry_management("USA") = 10;
 p32_forestry_management("REF") = 8;
+p32_forestry_management("MEA") = 50;
 *p32_forestry_management("CAZ") = 7;
 *p32_forestry_management("LAM") = 4;
 *p32_forestry_management("OAS") = 6;
@@ -66,8 +67,8 @@ p32_forestry_management("REF") = 8;
 *p32_forestry_management("CHA") = 7;
 *p32_forestry_management("MEA") = 200;
 
-f32_fac_req_ha(i2,"recur") = 100;
-f32_fac_req_ha(i2,"mon") = 33;
+f32_fac_req_ha(i2,"recur") = 1000;
+f32_fac_req_ha(i2,"mon") = 500;
 fm_harvest_cost_ha(i2)  = 2000;
 
 **************************************************************************
