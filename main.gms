@@ -90,7 +90,7 @@ $title magpie
 
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
+*
 * Used data set: magpie4.0_default_sep18.tgz
 * md5sum: 98e158205482936e487aeb616dea5403
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
@@ -105,28 +105,28 @@ $title magpie
 * 
 * Low resolution: c200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    28   24   10    7    3   53   17    8   22    7   11   10
-* 
+*
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-* 
+*
 * Regions data revision: 4.14
-* 
+*
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
-* * Additional input folder: /p/projects/landuse/data/input/other/rev36
-* * Revision: 36
+* * Additional input folder: /p/projects/landuse/data/input/other/rev34
+* * Revision: 34
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-* 
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
-* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev36_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev36_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev34_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev34_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
@@ -134,7 +134,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Mon Jan 28 17:31:43 2019
+* Last modification (input data): Fri Feb 15 12:55:12 2019
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -179,7 +179,7 @@ $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 
 $setglobal residues  flexreg_apr16
-$setglobal processing  coupleproducts_feb17
+$setglobal processing  substitution_dec18
 
 $setglobal trade  selfsuff_reduced
 
@@ -207,9 +207,9 @@ $setglobal awms  ipcc2006_aug16
 $setglobal ghg_policy  price_sep16
 $setglobal maccs  on_sep16
 $setglobal carbon_removal  off_sep16
-$setglobal som  cellpool_aug16
+$setglobal som  off
 
-$setglobal bioenergy  standard_flexreg_may17
+$setglobal bioenergy  1stgen_priced_dec18
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 $setglobal disagg_lvst  foragebased_aug18
