@@ -22,9 +22,8 @@ library(luscale)
 ############################# BASIC CONFIGURATION #######################################
 land_lr_file     <- "avl_land_t.cs3"
 land_hr_file     <- "avl_land_t_0.5.mz"
-land_hr_out_file <- "cell.land_0.5.mz"
-land_hr_share_out_file <- "cell_land_0.5_share.mz"
-croparea_hr_share_out_file <- "cell_croparea_0.5_share.mz"
+land_hr_out_file <- "cell_land_cropsplit_0.5.mz"
+land_hr_share_out_file <- "cell_land_cropsplit_0.5_share.mz"
 
 prev_year        <- "y1985"            #timestep before calculations in MAgPIE
 in_folder        <- "modules/10_land/input"
@@ -112,13 +111,6 @@ area_shr_hr <- speed_aggregate(area_shr,t(read.spam(path(outputdir,sum_spam_file
 
 # calculate crop tpye specific croparea in 0.5 resolution
 area_hr     <- area_shr_hr*setNames(land_hr[,,"crop"],NULL)
-
-# calculate share of crop types in terms of total cell size
-area_shr_hr <- area_hr/dimSums(land_hr,dim=3.1)
-
-# write share of crop types in terms of total cell size
-write.magpie(area_shr_hr,path(outputdir,paste(croparea_hr_share_out_file,sep="_")),comment="unit: grid-cell land area fraction")
-write.magpie(area_shr_hr,path(outputdir,paste(sub(".mz",".nc",croparea_hr_share_out_file),sep="_")),comment="unit: grid-cell land area fraction", verbose=FALSE)
 
 print("Write netCDF outputs #1")
 ### replace crop in land_hr in with crop_kfo_rf, crop_kfo_ir, crop_kbe_rf and crop_kbe_ir
