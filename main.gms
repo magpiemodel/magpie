@@ -91,13 +91,9 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: magpie4.0_default_sep18.tgz
-* md5sum: 98e158205482936e487aeb616dea5403
+* Used data set: magpie4.1_default_mar19.tgz
+* md5sum: b3d2e9928cedd5ab97c5de52c1289c23
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
-* Used data set: additional_data_rev3.66.tgz
-* md5sum: b3a269f6640883cb2cd69d65311800d3
-* Repository: /p/projects/landuse/data/input/archive
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -130,7 +126,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Fri Feb 15 12:55:12 2019
+* Last modification (input data): Thu Mar 21 12:20:40 2019
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
