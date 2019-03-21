@@ -26,7 +26,7 @@ buildInputVector <- function(regionmapping   = "aus",
                              madrat_rev      = "4.14",
                              validation_rev  = "4.14",
                              calibration     = NULL,
-                             additional_data = "additional_data_rev3.58.tgz") {
+                             additional_data = "additional_data_rev3.66.tgz") {
   mappings <- c(h12="690d3718e151be1b450b394c1064b1c5")
   archive_name=paste(project_name,climate_model,climatescen_name,co2,sep="-")
   archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", toupper(regionmapping),"4_",mappings["h12"], ".tgz")
@@ -35,7 +35,7 @@ buildInputVector <- function(regionmapping   = "aus",
   return(c(archive,madrat,validation,calibration,additional_data))
 }
 
-#calib_date <- NULL 
+#calib_date <- NULL
 
 for(x in c("ind","cha")) {
   if(exists("calib_date") && !is.null(calib_date)) {
@@ -50,5 +50,5 @@ for(x in c("ind","cha")) {
     calib <- submitCalibration(x)
     cfg$input <- c(cfg$input,calib)
   }
-  publish_data(input=cfg, name=paste0("magpie4.0_",x,"_oct18"), target=".")
+  publish_data(input=cfg, name=paste0("magpie4.1_",x,"_mar19"), target=".")
 }
