@@ -89,7 +89,7 @@ $batinclude "./modules/include.gms" nl_fix
     );
 
     p80_modelstat(t) = magpie.modelstat;
-    p80_numNOpt(t) = magpie.numNOpt;
+    p80_num_nonopt(t) = magpie.numNOpt;
 
 *' @code After the linear optimization all nonlinear variables are released
 *' again.
@@ -141,7 +141,7 @@ $batinclude "./modules/include.gms" nl_relax
   );
 
   p80_modelstat(t) = magpie.modelstat;
-  p80_numNOpt(t) = magpie.numNOpt;
+  p80_num_nonopt(t) = magpie.numNOpt;
 
   display "s80_obj_linear";
   display s80_obj_linear;
@@ -156,7 +156,7 @@ $batinclude "./modules/include.gms" nl_relax
 
   display s80_counter;
 
-  until ((p80_modelstat(t) <= 2 and p80_numNOpt(t) = 0) or s80_counter >= s80_maxiter)
+  until ((p80_modelstat(t) <= 2 and p80_num_nonopt(t) <= s80_num_nonopt_allowed) or s80_counter >= s80_maxiter)
 );
 
 * if s80_add_cplex is 1 add additional solve statement for cplex

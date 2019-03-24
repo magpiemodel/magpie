@@ -17,7 +17,7 @@
 
 q60_bioenergy(i2,kall) ..
       vm_dem_bioen(i2,kall) * fm_attributes("ge",kall) =g=
-      sum(ct,f60_1stgen_bioenergy_dem(ct,i2,"%c60_1stgen_biodem%",kall)) +
+      sum(ct,i60_1stgen_bioenergy_dem(ct,i2,kall) ) +
       v60_2ndgen_bioenergy_dem_dedicated(i2,kall) +
       v60_2ndgen_bioenergy_dem_residues(i2,kall)
       ;
@@ -63,9 +63,9 @@ q60_bioenergy_reg(i2).. sum(kbe60, v60_2ndgen_bioenergy_dem_dedicated(i2,kbe60))
 q60_res_2ndgenBE(i2) ..
   sum(kres, v60_2ndgen_bioenergy_dem_residues(i2,kres))
   =g=
-  sum(ct,f60_res_2ndgenBE_dem(ct,i2,"%c60_res_2ndgenBE_dem%"));
+  sum(ct,i60_res_2ndgenBE_dem(ct,i2));
 
-*' Finally, an incentive of 300 USD05MER per ton is provided for the production of 1st generation 
+*' Finally, an incentive of 300 USD05MER per ton is provided for the production of 1st generation
 *' bioenergy from oils and ethanol even beyond the exogeneous minimum demand.
 *' The incentive is kept low, but should provide a more realistic
 *' overproduction from couple products.

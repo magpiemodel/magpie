@@ -13,7 +13,6 @@ scalars
 
 $setglobal c56_pollutant_prices  SSP2-Ref-SPA0-V15-REMIND-MAGPIE
 $setglobal c56_emis_policy  ssp
-$setglobal c56_aff_policy  vegc50
 
 table f56_pollutant_prices(t_all,i,pollutants,ghgscen56) GHG certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
 $ondelim
