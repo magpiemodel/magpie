@@ -8,7 +8,7 @@
 * starting value of carbon stocks 1995 is only an estimate.
 * ATTENTION: emissions in 1995 are not meaningful
 vm_carbon_stock.l(j,land,c_pools) = fm_carbon_density("y1995",j,land,c_pools)*pcm_land(j,land);
-pc52_carbon_stock(j,land,c_pools) = vm_carbon_stock.l(j,land,c_pools);
+pcm_carbon_stock(j,land,c_pools) = vm_carbon_stock.l(j,land,c_pools);
 
 *age-class carbon density start values
 pc52_carbon_density_start(t,j,"vegc") = 0;

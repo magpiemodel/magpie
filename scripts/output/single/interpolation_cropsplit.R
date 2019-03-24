@@ -22,9 +22,8 @@ library(luscale)
 ############################# BASIC CONFIGURATION #######################################
 land_lr_file     <- "avl_land_t.cs3"
 land_hr_file     <- "avl_land_t_0.5.mz"
-land_hr_out_file           <- "cell.land_0.5.mz"
-land_hr_share_out_file     <- "cell.land_0.5_share.mz"
-croparea_hr_share_out_file <- "cell.croparea_0.5_share.mz"
+land_hr_out_file <- "cell_land_cropsplit_0.5.mz"
+land_hr_share_out_file <- "cell_land_cropsplit_0.5_share.mz"
 
 prev_year        <- "y1985"            #timestep before calculations in MAgPIE
 in_folder        <- "modules/10_land/input"
@@ -84,23 +83,12 @@ land_hr <- interpolate( x          = land_lr,
 
 # Write outputs
 
-print("Write outputs cell.land")
-# write landpool
-write.magpie(land_hr,path(outputdir,paste(land_hr_out_file,sep="_")),comment="unit: Mha per grid-cell")
-write.magpie(land_hr,path(outputdir,paste(sub(".mz",".nc",land_hr_out_file),sep="_")),comment="unit: Mha per grid-cell", verbose=FALSE)
-
-print("Write outputs cell.land_share")
-# calculate share of land pools in terms of tatal cell size
-land_shr_hr <- land_hr/dimSums(land_hr,dim=3.1)
-# write landpool shares
-write.magpie(land_shr_hr,path(outputdir,paste(land_hr_share_out_file,sep="_")),comment="unit: grid-cell land area fraction")
-write.magpie(land_shr_hr,path(outputdir,paste(sub(".mz",".nc",land_hr_share_out_file),sep="_")),comment="unit: grid-cell land area fraction", verbose=FALSE)
-
 # Write spam files (crop weighted for each time step)
 for(y in getYears(land_hr)) create_spam(land_hr[,y,"crop"],read.spam(path(outputdir,sum_spam_file)),fname=path(outputdir,sub("sum",paste("crop_weighted_mean",y,sep="_"),sum_spam_file)))
 
 # Disaggregate other cellular files
 reshape_folder(outputdir)
+
 
 print("Disaggregation crop types")
 # detailed output (crop types, rf + if), disaggregate shares of cropland within cluster level to cellular level
@@ -124,10 +112,26 @@ area_shr_hr <- speed_aggregate(area_shr,t(read.spam(path(outputdir,sum_spam_file
 # calculate crop tpye specific croparea in 0.5 resolution
 area_hr     <- area_shr_hr*setNames(land_hr[,,"crop"],NULL)
 
-# calculate share of crop types in terms of total cell size
-area_shr_hr <- area_hr/dimSums(land_hr,dim=3.1)
+print("Write netCDF outputs #1")
+### replace crop in land_hr in with crop_kfo_rf, crop_kfo_ir, crop_kbe_rf and crop_kbe_ir
+kbe <- c("betr","begr")
+kfo <- setdiff(getNames(area_hr,dim=1),kbe)
+crop_kfo_rf <- setNames(dimSums(area_hr[,,kfo][,,"rainfed"],dim=3),"crop_kfo_rf")
+crop_kfo_ir <- setNames(dimSums(area_hr[,,kfo][,,"irrigated"],dim=3),"crop_kfo_ir")
+crop_kbe_rf <- setNames(dimSums(area_hr[,,kbe][,,"rainfed"],dim=3),"crop_kbe_rf")
+crop_kbe_ir <- setNames(dimSums(area_hr[,,kbe][,,"irrigated"],dim=3),"crop_kbe_ir")
+crop_hr <- mbind(crop_kfo_rf,crop_kfo_ir,crop_kbe_rf,crop_kbe_ir)
+#drop crop
+land_hr <- land_hr[,,"crop",invert=TRUE]
+#combine land_hr with crop_hr. 
+land_hr <- mbind(crop_hr,land_hr)
+#write landpool
+write.magpie(land_hr,path(outputdir,paste(land_hr_out_file,sep="_")),comment="unit: Mha per grid-cell")
+write.magpie(land_hr,path(outputdir,paste(sub(".mz",".nc",land_hr_out_file),sep="_")),comment="unit: Mha per grid-cell", verbose=FALSE)
 
-print("Write outputs cell.cropara_share")
-# write share of crop types in terms of total cell size
-write.magpie(area_shr_hr,path(outputdir,paste(croparea_hr_share_out_file,sep="_")),comment="unit: grid-cell land area fraction")
-write.magpie(area_shr_hr,path(outputdir,paste(sub(".mz",".nc",croparea_hr_share_out_file),sep="_")),comment="unit: grid-cell land area fraction", verbose=FALSE)
+print("Write netCDF outputs #2")
+#calculate share of land pools in terms of tatal cell size
+land_shr_hr <- land_hr/dimSums(land_hr,dim=3.1)
+#write landpool shares
+write.magpie(land_shr_hr,path(outputdir,paste(land_hr_share_out_file,sep="_")),comment="unit: grid-cell land area fraction")
+write.magpie(land_shr_hr,path(outputdir,paste(sub(".mz",".nc",land_hr_share_out_file),sep="_")),comment="unit: grid-cell land area fraction", verbose=FALSE)
