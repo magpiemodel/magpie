@@ -1,0 +1,35 @@
+*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+*** |  authors, and contributors see AUTHORS file
+*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  Contact: magpie@pik-potsdam.de
+
+vm_land.l(j,land) = pcm_land(j,land);
+
+*The following bounds should be moved to the respective land modules in the future (different bounds for different realizations)
+
+*No afforestation on natveg areas
+v10_lu_transitions.fx(j,"primforest","forestry") = 0;
+v10_lu_transitions.fx(j,"secdforest","forestry") = 0;
+v10_lu_transitions.fx(j,"other","forestry") = 0;
+
+*conversions within natveg are not allowed
+v10_lu_transitions.fx(j,"primforest","other") = 0;
+v10_lu_transitions.fx(j,"secdforest","other") = 0;
+
+*forestry can only increase
+v10_lu_transitions.fx(j,"forestry",land_to10) = 0;
+v10_lu_transitions.up(j,"forestry","forestry") = Inf;
+
+*primforest can only decrease
+v10_lu_transitions.fx(j,land_from10,"primforest") = 0;
+v10_lu_transitions.up(j,"primforest","primforest") = Inf;
+
+*secdforest can only decrease (during optimization)
+v10_lu_transitions.fx(j,land_from10,"secdforest") = 0;
+v10_lu_transitions.up(j,"secdforest","secdforest") = Inf;
+
+*urban land is fixed
+v10_lu_transitions.fx(j,land_from10,"urban") = 0;
+v10_lu_transitions.fx(j,"urban",land_to10) = 0;
+v10_lu_transitions.fx(j,"urban","urban") = pcm_land(j,"urban");
