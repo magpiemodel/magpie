@@ -12,7 +12,6 @@ parameters
 variables
         vm_nr_som(j)                        Release of soil organic matter (Mt N per yr)
         vm_nr_som_fertilizer(j)             Uptake of soil organic matter from plants (Mt N per yr)
-        vm_costs_overrate_cropdiff(i)	      Punishment costs for overrated cropland difference (mio. USD05 per yr)
 ;
 
 equations
@@ -21,9 +20,8 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_nr_som(t,j,type)                  Release of soil organic matter (Mt N per yr)
- ov_nr_som_fertilizer(t,j,type)       Uptake of soil organic matter from plants (Mt N per yr)
- ov_costs_overrate_cropdiff(t,i,type) Punishment costs for overrated cropland difference (mio. USD05 per yr)
- oq59_soilcarbon_cropland(t,j,type)   Cropland soil carbon content calculation (mio. tC)
+ ov_nr_som(t,j,type)                Release of soil organic matter (Mt N per yr)
+ ov_nr_som_fertilizer(t,j,type)     Uptake of soil organic matter from plants (Mt N per yr)
+ oq59_soilcarbon_cropland(t,j,type) Cropland soil carbon content calculation (mio. tC)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

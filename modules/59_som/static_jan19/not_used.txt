@@ -6,4 +6,6 @@
 name,type,reason
 pcm_land,input,questionnaire
 vm_area,input,questionnaire
+vm_landexpansion,input,questionnaire
+vm_landreduction,input,questionnaire
 pm_climate_class,input,questionnaire

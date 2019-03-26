@@ -24,7 +24,6 @@
                    + vm_cost_trade(i2)
                    + vm_cost_fore(i2)
                    + vm_cost_processing(i2)
-                   + vm_costs_overrate_cropdiff(i2)
                    + vm_bioenergy_utility(i2)
                    + vm_processing_substitution_cost(i2)
                    + vm_costs_additional_mon(i2)

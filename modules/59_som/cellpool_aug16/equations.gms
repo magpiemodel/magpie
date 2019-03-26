@@ -23,33 +23,13 @@ q59_som_target_noncropland(j2) ..
 *' Depending on the setting of `c59_som_scenario `climate impacts (`cc`) are taken into account or not (`nocc`).
 *' For a static climate `f59_topsoilc_density` is set to the value of 1995 within the input of the module realization.
 
-*' To account for the transfer of carbon rich soils from natural vegetation to cropland as well as the transfer of
-*' depleted soils from cropland to regrowing natural land, the cropland expansion and reduction of each cell is calculated via
-
-q59_crop_diff(j2)  ..
-
- 	          v59_crop_reduction(j2) - v59_crop_expansion(j2)
-                  =e= pcm_land(j2,"crop") - vm_land(j2,"crop")
-              ;
-
-*' The following nonlinear constraint
-
-q59_crop_diff_constraint(i2) ..
-              vm_costs_overrate_cropdiff(i2)
-			      =e= s59_punish_cropdiff
-				   * sum(cell(i2,j2),v59_crop_reduction(j2)*v59_crop_expansion(j2))
-              ;
-
-*' ensures that no extra cropland reduction and expansion at the same time is happening. Note that this nonlinear realization
-*' needs two to three times longer runtime and is thus by default not switch on.
-
 *' The actually carbon transfer from cropland as well as to cropland soils is then given by
 
 q59_som_transfer_to_cropland(j2) ..
               v59_som_transfer_to_cropland(j2)
               =e= sum(ct,
-              v59_crop_expansion(j2) * p59_carbon_density(ct,j2,"noncropland")
-              - v59_crop_reduction(j2) * p59_carbon_density(ct,j2,"cropland"))
+              vm_landexpansion(j2,"crop") * p59_carbon_density(ct,j2,"noncropland")
+              - vm_landreduction(j2,"crop") * p59_carbon_density(ct,j2,"cropland"))
 			  ;
 
 *' To get the current size of the soil organic carbon pool, the pool of the previous timestep corrected by the carbon transfer
@@ -101,6 +81,6 @@ q59_nr_som_fertilizer(j2) ..
 q59_nr_som_fertilizer2(j2) ..
           vm_nr_som_fertilizer(j2)
           =l=
-          v59_crop_expansion(j2)*s59_nitrogen_uptake;
+          vm_landexpansion(j2,"crop")*s59_nitrogen_uptake;
 
-*' Here we assume a maximum of 200 kg on the expanded area. 
+*' Here we assume a maximum of 200 kg on the expanded area.

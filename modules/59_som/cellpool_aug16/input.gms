@@ -5,7 +5,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-  s59_punish_cropdiff  Punishment costs per croparea squared (USD05MER per mio. per ha^2)                / 100000000 /
   s59_nitrogen_uptake  Maximum plant available nitrogen from soil organic matter loss (tN per ha)        / 0.2 /
 ;
 
