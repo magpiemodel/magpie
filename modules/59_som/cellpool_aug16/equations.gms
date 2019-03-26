@@ -87,5 +87,20 @@ q59_nr_som(j2) ..
 		   * (p59_som_pool(j2,"cropland")
              + v59_som_transfer_to_cropland(j2) - v59_som_target(j2,"cropland"))
            ;
-
 *' with the carbon to nitrogen ratio of soils assumed to be 15:1.
+
+*' The amount of nitrogen that becomes available to cropland farming is limited by loss of soil organic matter by
+
+q59_nr_som_fertilizer(j2) ..
+          vm_nr_som_fertilizer(j2)
+          =l=
+          vm_nr_som(j2);
+
+*' as well as by the amount that crops can take up.
+
+q59_nr_som_fertilizer2(j2) ..
+          vm_nr_som_fertilizer(j2)
+          =l=
+          v59_crop_expansion(j2)*s59_nitrogen_uptake;
+
+*' Here we assume a maximum of 200 kg on the expanded area. 

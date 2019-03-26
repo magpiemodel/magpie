@@ -5,7 +5,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 name,type,reason
-vm_nr_som, input, not needed
+vm_nr_som_fertilizer, input, not needed
 vm_area,input,not needed
 vm_manure,input, not needed
 vm_manure_recycling,input, not needed
