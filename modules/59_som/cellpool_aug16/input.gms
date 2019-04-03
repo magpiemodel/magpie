@@ -26,11 +26,16 @@ $include "./modules/59_som/cellpool_aug16/input/f59_ch5_F_I.csv"
 $offdelim
 ;
 
+$setglobal c59_irrigation_scenario  on
+*   options:   on  (higher carbon sequestration under irrigation)
+*              off (no carbon sequestration under irrigation)
+
 table f59_cratio_irrigation(climate59,w,kcr) Ratio of soil carbon relative to potential natural vegetation soil carbon for different irrigation schemes  (1)
 $ondelim
 $include "./modules/59_som/cellpool_aug16/input/f59_ch5_F_IRR.cs3"
 $offdelim
 ;
+$if "%c59_irrigation_scenario%" == "off" f59_cratio_irrigation(climate59,w,kcr) = 1;
 
 
 table f59_som_initialisation_pools(t_all,j,pools59) Initialisation pools for soil organic carbon (mio. tC)
