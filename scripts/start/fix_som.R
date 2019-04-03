@@ -1,3 +1,4 @@
+
 # |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
 # |  authors, and contributors see AUTHORS file
 # |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
@@ -13,13 +14,35 @@ library(lucode)
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
-cfg$title <- "static_som_cellular"
-start_run(cfg=cfg,codeCheck=TRUE)
-
-cfg$title <- "static_som_cluster"
+cfg$title   <- "BAU_static_som"
+cfg$gms$som <- "static_jan19"
 cfg$gms$c59_static_spatial_level <-  "cluster"
 start_run(cfg=cfg,codeCheck=TRUE)
 
-cfg$title <- "cellpoll_som_cluster"
+cfg$title   <- "BAU_dynamic_som_irr"
 cfg$gms$som <- "cellpool_aug16"
+cfg$gms$c59_irrigation_scenario  <- "on"
+start_run(cfg=cfg,codeCheck=TRUE)
+
+cfg$title   <- "BAU_dynamic_som"
+cfg$gms$som <- "cellpool_aug16"
+cfg$gms$c59_irrigation_scenario <- "off"
+start_run(cfg=cfg,codeCheck=TRUE)
+
+cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-REMIND-MAGPIE"
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
+
+cfg$title   <- "SSP2-26-SPA2_static_som"
+cfg$gms$som <- "static_jan19"
+cfg$gms$c59_static_spatial_level <-  "cluster"
+start_run(cfg=cfg,codeCheck=TRUE)
+
+cfg$title   <- "SSP2-26-SPA2_dynamic_som_irr"
+cfg$gms$som <- "cellpool_aug16"
+cfg$gms$c59_irrigation_scenario  <- "on"
+start_run(cfg=cfg,codeCheck=TRUE)
+
+cfg$title   <- "SSP2-26-SPA2_dynamic_som"
+cfg$gms$som <- "cellpool_aug16"
+cfg$gms$c59_irrigation_scenario <- "off"
 start_run(cfg=cfg,codeCheck=TRUE)
