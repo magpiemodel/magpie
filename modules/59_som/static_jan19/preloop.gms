@@ -6,5 +6,5 @@
 
 i59_subsoilc_density(t_all,j) = fm_carbon_density(t_all,j,"secdforest","soilc") - f59_topsoilc_density(t_all,j);
 $ifthen "%c59_static_spatial_level%" == "cellular" i59_topsoilc_density(t_all,j) = fm_carbon_density(t_all,j,"crop","soilc") - i59_subsoilc_density(t_all,j);
-$elseif "%c59_static_spatial_level%" == "cluster"  i59_topsoilc_density(t_all,j) = f59_topsoilc_density(t_all,j) * f59_cshare_released(j);
+$elseif "%c59_static_spatial_level%" == "cluster"  i59_topsoilc_density(t_all,j) = f59_topsoilc_density(t_all,j) * (1- f59_cshare_released(j));
 $endif
