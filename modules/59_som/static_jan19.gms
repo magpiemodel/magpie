@@ -9,6 +9,7 @@
 *' @limitations The release of nitrogen due to soil organic matter loss is not calculated. 
 
 *####################### R SECTION START (PHASES) ##############################
+$Ifi "%phase%" == "sets" $include "./modules/59_som/static_jan19/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/59_som/static_jan19/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/59_som/static_jan19/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/59_som/static_jan19/equations.gms"

@@ -95,13 +95,17 @@ $title magpie
 * md5sum: 98e158205482936e487aeb616dea5403
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev3.65.tgz
-* md5sum: 0def52c4bf1dd0bad3ee995f7c3296cd
+* Used data set: additional_data_rev3.67.tgz
+* md5sum: b85772a77a9865f792dd0b830fff06e5
 * Repository: /home/kristine/mnt/landuse-data/input/archive/
 * 
-* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev36_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: b8958d411d029a399b37832f694c24df
+* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38.1_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* md5sum: ae4dbc8e36e6fb4ba8cee0d2400b2193
 * Repository: /home/kristine/mnt/landuse-data/input/archive/
+* 
+* Used data set: rev4.17_690d3718e151be1b450b394c1064b1c5_validation.tgz
+* md5sum: bcee4cf4f6dec6c8e040b03615204049
+* Repository: /home/kristine/mnt/rd3mod/inputdata/output/
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -119,14 +123,14 @@ $title magpie
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
 * * Additional input folder: /p/projects/landuse/data/input/other/rev38
-* * Revision: 38
+* * Revision: 38.1
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
 * 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
-* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38.1_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38.1_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
@@ -134,7 +138,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Tue Mar 19 10:48:03 2019
+* Last modification (input data): Fri Apr  5 11:48:59 2019
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -204,10 +208,10 @@ $setglobal carbon  normal_dec17
 $setglobal methane  ipcc2006_flexreg_apr16
 $setglobal phosphorus  off
 $setglobal awms  ipcc2006_aug16
-$setglobal ghg_policy  price_sep16
+$setglobal ghg_policy  price_jan19
 $setglobal maccs  on_sep16
 $setglobal carbon_removal  off_sep16
-$setglobal som  off
+$setglobal som  cellpool_aug16
 
 $setglobal bioenergy  1stgen_priced_dec18
 $setglobal material  exo_flexreg_apr16

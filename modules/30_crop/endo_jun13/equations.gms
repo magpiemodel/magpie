@@ -48,6 +48,6 @@
 
 *' The carbon content of the above-ground carbon pools are calculated as a total
 *' for all cropland :
- q30_carbon(j2,ag_cpools) ..
- vm_carbon_stock(j2,"crop",ag_cpools) =e=
-   vm_land(j2,"crop") * sum(ct,fm_carbon_density(ct,j2,"crop",ag_cpools));
+ q30_carbon(j2,ag_pools) ..
+ vm_carbon_stock(j2,"crop",ag_pools) =e=
+   vm_land(j2,"crop") * sum(ct,fm_carbon_density(ct,j2,"crop",ag_pools));

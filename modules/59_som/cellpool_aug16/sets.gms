@@ -56,3 +56,5 @@ clcl_climate59(clcl,climate59) Climate classification types
            ET .(temperate_moist) "polar polar tundra"
            /
 ;
+
+alias(noncropland59,noncropland59_2);

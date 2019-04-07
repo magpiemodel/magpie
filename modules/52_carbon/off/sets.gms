@@ -6,6 +6,6 @@
 
 sets
 
-ag_cpools(c_pools) Aboveground carbon pools
+ag_pools(c_pools) Aboveground carbon pools
          /vegc,litc/
 ;
