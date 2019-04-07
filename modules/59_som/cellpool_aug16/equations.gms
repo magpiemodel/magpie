@@ -53,10 +53,15 @@ q59_som_pool_noncropland(j2) ..
 				 + (p59_som_pool(j2,"noncropland") - v59_som_transfer_to_cropland(j2))
                ;
 
-
-q59_carbon_soil(j2) ..
+q59_carbon_soil_cropland(j2) ..
                 vm_carbon_stock(j2,"crop","soilc") =e=
                     v59_som_pool(j2,"cropland") + vm_land(j2,"crop") * sum(ct,i59_subsoilc_density(ct,j2))
+                ;
+
+q59_carbon_soil_noncropland(j2, noncropland59) ..
+                vm_carbon_stock(j2,noncropland59,"soilc") =e=
+                  (v59_som_pool(j2,"noncropland") / (sum(noncropland59,vm_land(j2,noncropland59)) + 10**(-6))
+                   +  sum(ct,i59_subsoilc_density(ct,j2))) * vm_land(j2,noncropland59)
                 ;
 
 *' The annual nitrogen release (or sink) for cropland soils is than calculated by the loss of soil organic carbon given by

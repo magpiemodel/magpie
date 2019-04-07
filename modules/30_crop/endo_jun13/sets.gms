@@ -34,7 +34,4 @@ sets
          fiber_r     . (cottn_pro)
          begr_r      . (begr)
          betr_r      . (betr)  /
-
-ag_cpools(c_pools) Aboveground carbon pools
-         /vegc,litc/
 ;

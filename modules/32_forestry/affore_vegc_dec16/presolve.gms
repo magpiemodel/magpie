@@ -27,9 +27,9 @@ v32_land.fx(j,"new")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
 *' @stop
 
 * Mapping `ac_land32` between age classes `ac` and forest land types `land32` depending on
-* the 30-year planning horizon `s32_planing_horizon`. The mapping `ac_land32` is used to 
-* aggregate age classes in `p32_land` for the optimization. Note that age-classes exist 
-* only between the optimization time steps (see below). 
+* the 30-year planning horizon `s32_planing_horizon`. The mapping `ac_land32` is used to
+* aggregate age classes in `p32_land` for the optimization. Note that age-classes exist
+* only between the optimization time steps (see below).
 ac_land32(ac,land32) = no;
 ac_land32(ac,"new")  = yes$(ord(ac) = 1);
 ac_land32(ac,"new_ndc") = yes$(ord(ac) = 1);
@@ -56,18 +56,18 @@ pc32_land(j,land32) = v32_land.l(j,land32);
 vm_land.l(j,"forestry") = sum(land32, pc32_land(j,land32));
 pcm_land(j,"forestry") = sum(land32, pc32_land(j,land32));
 
-* Fix forestry land to current levels, i.e. forestry land can not decrease in size within the optimization. 
-* Since there is no bound on `v32_land(j,"new")` forestry land can increase in size within the optimization. 
+* Fix forestry land to current levels, i.e. forestry land can not decrease in size within the optimization.
+* Since there is no bound on `v32_land(j,"new")` forestry land can increase in size within the optimization.
 v32_land.fx(j,"prot") = pc32_land(j,"prot");
 v32_land.fx(j,"grow") = pc32_land(j,"grow");
 v32_land.fx(j,"old") = pc32_land(j,"old");
 
 * Aggregate carbon density from `ac` to `land32` for the optimization
-p32_carbon_density(t,j,"new",c_pools) = pm_carbon_density_ac(t,j,"ac0",c_pools);
-p32_carbon_density(t,j,"new_ndc",c_pools) = pm_carbon_density_ac(t,j,"ac0",c_pools);
-p32_carbon_density(t,j,"prot",c_pools) = m_weightedmean(pm_carbon_density_ac(t,j,ac,c_pools),p32_land(t,j,ac,"before"),(ac_land32(ac,"prot")));
-p32_carbon_density(t,j,"grow",c_pools) = m_weightedmean(pm_carbon_density_ac(t,j,ac,c_pools),p32_land(t,j,ac,"before"),(ac_land32(ac,"grow")));
-p32_carbon_density(t,j,"old",c_pools) = pm_carbon_density_ac(t,j,"acx",c_pools);
+p32_carbon_density(t,j,"new",ag_pools) = pm_carbon_density_ac(t,j,"ac0",ag_pools);
+p32_carbon_density(t,j,"new_ndc",ag_pools) = pm_carbon_density_ac(t,j,"ac0",ag_pools);
+p32_carbon_density(t,j,"prot",ag_pools) = m_weightedmean(pm_carbon_density_ac(t,j,ac,ag_pools),p32_land(t,j,ac,"before"),(ac_land32(ac,"prot")));
+p32_carbon_density(t,j,"grow",ag_pools) = m_weightedmean(pm_carbon_density_ac(t,j,ac,ag_pools),p32_land(t,j,ac,"before"),(ac_land32(ac,"grow")));
+p32_carbon_density(t,j,"old",ag_pools) = pm_carbon_density_ac(t,j,"acx",ag_pools);
 
 
 

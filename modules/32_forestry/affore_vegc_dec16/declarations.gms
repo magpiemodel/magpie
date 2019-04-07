@@ -9,7 +9,7 @@ scalars
 ;
 
 parameters
- p32_carbon_density(t,j,land32,c_pools) Carbon density for land32 and c_pools (tC per ha)
+ p32_carbon_density(t,j,land32,ag_pools) Carbon density for land32 and ag_pools (tC per ha)
  p32_land(t,j,ac,when)                  Forestry land for each cell wood type and age class before and after optimization (mio. ha)
  pc32_land(j,land32)                    Forestry land per forestry land type initialization of the optimization (mio. ha)
  p32_aff_pot(t,j)                       Potential afforestation area on cropland and pasture land (mio. ha)
@@ -31,7 +31,7 @@ equations
  q32_cost_fore_ac(i)                      Total forestry costs constraint (mio. USD04MER)
  q32_land(j)                              Land constraint (mio. ha)
  q32_cdr_aff(j)  			  			  Calculation of CDR from afforestation in terms of CO2-C (mio. tC)
- q32_carbon(j,c_pools)                    Forestry carbon stock calculation C (mio. tC)
+ q32_carbon(j,ag_pools)                    Forestry carbon stock calculation C (mio. tC)
  q32_land_diff                            Aggregated difference in forestry land compared to previous timestep (mio. ha)
  q32_land_expansion(j,land32)		   	  Forestry land expansion (mio. ha)
  q32_land_reduction(j,land32)		   	  Forestry land reduction (mio. ha)
@@ -51,7 +51,7 @@ parameters
  oq32_cost_fore_ac(t,i,type)          Total forestry costs constraint (mio. USD04MER)
  oq32_land(t,j,type)                  Land constraint (mio. ha)
  oq32_cdr_aff(t,j,type)               Calculation of CDR from afforestation in terms of CO2-C (mio. tC)
- oq32_carbon(t,j,c_pools,type)        Forestry carbon stock calculation C (mio. tC)
+ oq32_carbon(t,j,ag_pools,type)        Forestry carbon stock calculation C (mio. tC)
  oq32_land_diff(t,type)               Aggregated difference in forestry land compared to previous timestep (mio. ha)
  oq32_land_expansion(t,j,land32,type) Forestry land expansion (mio. ha)
  oq32_land_reduction(t,j,land32,type) Forestry land reduction (mio. ha)

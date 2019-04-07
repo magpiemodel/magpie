@@ -7,12 +7,12 @@
 sets
 
 noncropland59(land) Soil carbon conserving landuse types
-/past, forestry, primforest, secdforest, urban, other/
+/past, forestry, primforest, secdforest, other/
 
-pools59 Carbon differentiating landuse types 
+pools59 Carbon differentiating landuse types
 /cropland,noncropland/
 
-tillage59 Tillage categories of IPCC 
+tillage59 Tillage categories of IPCC
 /full_tillage,reduced_tillage,no_tillage/
 
 inputs59 Input management categories of IPCC

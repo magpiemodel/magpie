@@ -11,27 +11,27 @@
 
  q35_land_other(j2) .. vm_land(j2,"other") =e= sum(land35, v35_other(j2,land35));
 
-*' Carbon stocks for primary forest, secondary forest or other natural land are calculated 
+*' Carbon stocks for primary forest, secondary forest or other natural land are calculated
 *' as the product of respective area and carbon density.
 *' Carbon stocks decline if the area decreases
 *' (e.g. due to cropland expansion into forests).
 *' In case of abandoned agricultural land (increase of other natural land),
 *' natural succession, represented by age-class growth, results in increasing carbon stocks.
 
- q35_carbon_primforest(j2,c_pools) .. vm_carbon_stock(j2,"primforest",c_pools) =e=
+ q35_carbon_primforest(j2,ag_pools) .. vm_carbon_stock(j2,"primforest",ag_pools) =e=
            vm_land(j2,"primforest")
-           *sum(ct, fm_carbon_density(ct,j2,"primforest",c_pools));
+           *sum(ct, fm_carbon_density(ct,j2,"primforest",ag_pools));
 
- q35_carbon_secdforest(j2,c_pools) .. vm_carbon_stock(j2,"secdforest",c_pools) =e=
+ q35_carbon_secdforest(j2,ag_pools) .. vm_carbon_stock(j2,"secdforest",ag_pools) =e=
            sum(land35, v35_secdforest(j2,land35)
-           *sum(ct, p35_carbon_density_secdforest(ct,j2,land35,c_pools)));
+           *sum(ct, p35_carbon_density_secdforest(ct,j2,land35,ag_pools)));
 
- q35_carbon_other(j2,c_pools)  .. vm_carbon_stock(j2,"other",c_pools) =e=
+ q35_carbon_other(j2,ag_pools)  .. vm_carbon_stock(j2,"other",ag_pools) =e=
            sum(land35, v35_other(j2,land35)
-           *sum(ct, p35_carbon_density_other(ct,j2,land35,c_pools)));
+           *sum(ct, p35_carbon_density_other(ct,j2,land35,ag_pools)));
 
 
-*' NPI/NDC land protection policies are implemented as minium forest land and other land stock. 
+*' NPI/NDC land protection policies are implemented as minium forest land and other land stock.
 
  q35_min_forest(j2) .. vm_land(j2,"primforest") + vm_land(j2,"secdforest") =g=
  									sum(ct, p35_min_forest(ct,j2));

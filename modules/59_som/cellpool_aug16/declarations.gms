@@ -23,7 +23,8 @@ equations
          q59_nr_som(j)                      Soil organic matter loss (Mt N per yr)
          q59_nr_som_fertilizer(j)           Bound of nitrogen fertilizer of soil organic matter loss (Mt N per yr)
          q59_nr_som_fertilizer2(j)          Fraction of soil organic matter loss take is taken up by plants (Mt N per yr)
-         q59_carbon_soil(j)                 Cropland soil carbon content calculation (mio. tC)
+         q59_carbon_soil_cropland(j)        Cropland soil carbon content calculation (mio. tC)
+         q59_carbon_soil_noncropland(j,noncropland59)  Non-cropland soil carbon content calculation (mio. tC)
 
 ;
 

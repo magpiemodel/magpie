@@ -14,9 +14,9 @@ positive variables
 ;
 
 parameters
- pm_carbon_density_ac(t,j,ac,c_pools)  Carbon density for age classes and carbon pools (tC per ha)
- pcm_carbon_stock(j,land,c_pools)     Current carbon in vegetation soil and litter for different land types (mio. tC)
- pc52_carbon_density_start(t,j,c_pools)  Carbon density for new land in other land pool (tC per ha)
+ pm_carbon_density_ac(t,j,ac,ag_pools)    Aboveground carbon density for age classes and carbon pools (tC per ha)
+ pc52_carbon_density_start(t,j,ag_pools)  Aboveground carbon density for new land in other land pool (tC per ha)
+ pcm_carbon_stock(j,land,c_pools)         Current carbon in vegetation soil and litter for different land types (mio. tC)
 ;
 
 equations

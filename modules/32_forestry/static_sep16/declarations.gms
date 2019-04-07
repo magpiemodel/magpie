@@ -12,7 +12,7 @@ positive variables
 ;
 
 parameters
- pc32_carbon_density(j,c_pools)           Carbon density in optimization (tC per ha)
+ pc32_carbon_density(j,ag_pools)           Carbon density in optimization (tC per ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

@@ -9,8 +9,8 @@ scalars
 ;
 
 parameters
- p35_carbon_density_secdforest(t,j,land35,c_pools) Carbon density secdforest (tC per ha)
- p35_carbon_density_other(t,j,land35,c_pools) 	   Carbon density other land (tC per ha)
+ p35_carbon_density_secdforest(t,j,land35,ag_pools) Carbon density secdforest (tC per ha)
+ p35_carbon_density_other(t,j,land35,ag_pools) 	   Carbon density other land (tC per ha)
  i35_secdforest(j,ac)							   Inital secdforest (mio. ha)
  i35_other(j,ac)								   Inital other land (mio. ha)
  p35_secdforest(t,j,ac,when)  	Secdforest per age class before and after optimization (mio. ha)
@@ -29,9 +29,9 @@ parameters
 equations
  q35_land_secdforest(j)       		   Secdforest land pool calculation (mio. ha)
  q35_land_other(j)       		       Other land pool calculation (mio. ha)
- q35_carbon_primforest(j,c_pools)      Primforest carbon stock calculation (mio tC)
- q35_carbon_secdforest(j,c_pools)      Secdforest carbon stock calculation (mio tC)
- q35_carbon_other(j,c_pools)      	   Other land carbon stock calculation (mio tC)
+ q35_carbon_primforest(j,ag_pools)      Primforest carbon stock calculation (mio tC)
+ q35_carbon_secdforest(j,ag_pools)      Secdforest carbon stock calculation (mio tC)
+ q35_carbon_other(j,ag_pools)      	   Other land carbon stock calculation (mio tC)
  q35_landdiff              			   Difference in natveg land (mio. ha)
  q35_other_expansion(j,land35)		   Other land expansion (mio. ha)
  q35_other_reduction(j,land35)		   Other land reduction (mio. ha)
@@ -62,9 +62,9 @@ parameters
  ov35_primforest_reduction(t,j,type)        Primforest reduction compared to previous timestep (mio. ha)
  oq35_land_secdforest(t,j,type)             Secdforest land pool calculation (mio. ha)
  oq35_land_other(t,j,type)                  Other land pool calculation (mio. ha)
- oq35_carbon_primforest(t,j,c_pools,type)   Primforest carbon stock calculation (mio tC)
- oq35_carbon_secdforest(t,j,c_pools,type)   Secdforest carbon stock calculation (mio tC)
- oq35_carbon_other(t,j,c_pools,type)        Other land carbon stock calculation (mio tC)
+ oq35_carbon_primforest(t,j,ag_pools,type)   Primforest carbon stock calculation (mio tC)
+ oq35_carbon_secdforest(t,j,ag_pools,type)   Secdforest carbon stock calculation (mio tC)
+ oq35_carbon_other(t,j,ag_pools,type)        Other land carbon stock calculation (mio tC)
  oq35_landdiff(t,type)                      Difference in natveg land (mio. ha)
  oq35_other_expansion(t,j,land35,type)      Other land expansion (mio. ha)
  oq35_other_reduction(t,j,land35,type)      Other land reduction (mio. ha)

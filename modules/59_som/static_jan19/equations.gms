@@ -9,3 +9,8 @@
  q59_soilcarbon_cropland(j2) ..
  vm_carbon_stock(j2,"crop","soilc") =e=
       vm_land(j2,"crop") * sum(ct, i59_topsoilc_density(ct,j2) + i59_subsoilc_density(ct,j2));
+
+
+ q59_soilcarbon_noncropland(j2) ..
+ vm_carbon_stock(j2,noncropland59,"soilc") =e=
+      sum(ct, vm_land(j2,noncropland59) * fm_carbon_density(ct,j2,noncropland59,"soilc"));

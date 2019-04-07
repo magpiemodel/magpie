@@ -7,7 +7,7 @@
 
 equations
  q31_prod(j)              Cellular pasture production constraint (mio. tDM per yr)
- q31_carbon(j,c_pools)    Carbon content calculation for pasture (mio tC)
+ q31_carbon(j,ag_pools)    Carbon content calculation for pasture (mio tC)
  q31_cost_prod_past(i)    Costs for putting animals on pastures (mio. USD05MER per yr)
 ;
 
@@ -15,7 +15,7 @@ equations
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  oq31_prod(t,j,type)           Cellular pasture production constraint (mio. tDM per yr)
- oq31_carbon(t,j,c_pools,type) Carbon content calculation for pasture (mio tC)
+ oq31_carbon(t,j,ag_pools,type) Carbon content calculation for pasture (mio tC)
  oq31_cost_prod_past(t,i,type) Costs for putting animals on pastures (mio. USD05MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
