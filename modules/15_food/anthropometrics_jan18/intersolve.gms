@@ -94,6 +94,7 @@ if (s15_elastic_demand * (1-sum(sameas(t_past,t),1)) =1,
 
 * saving regression outcome for postprocessing
          p15_kcal_regr(t, iso, kfo)=v15_kcal_regr.l(iso, kfo);
+         p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)=v15_bmi_shr_regr.l(iso,sex,age,bmi_group15);
 
 * The calibration factor is added to the regression value.
          p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regr.l(iso,kfo) + p15_kcal_calib(t,iso,kfo) * s15_calibrate;
@@ -142,7 +143,7 @@ display "exogenous demand information is used" ;
 *' The calibration parameter is added to the regression value.
 
    p15_bmi_shr(t,iso,sex,age,bmi_group15) =
-           v15_bmi_shr_regr.l(iso,sex,age,bmi_group15)+
+           p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)+
            i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
 
 *' The BMI shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
@@ -203,13 +204,13 @@ For (s15_count = 1 to (m_yeardiff(t)/5),
                      126.4*
                      (sum(underaged15,
                        p15_kcal_growth_food(t,iso,underaged15)
-                     )/3)**0.03464
+                     )/3)**0.03467
                      ;
    p15_bodyheight(t,iso,"M","15--19","final") =
                      131.8*
                      (sum(underaged15,
                        p15_kcal_growth_food(t,iso,underaged15)
-                     )/3)**0.03975
+                     )/3)**0.03978
                      ;
 *' @stop
 );

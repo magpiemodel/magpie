@@ -213,13 +213,14 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
 );
 
 * releasing real income per capita binding for later runs that include shocks
-
 v15_income_pc_real_ppp_iso.lo(iso)=10;
 v15_income_pc_real_ppp_iso.up(iso)=Inf;
 
 * saving regression outcome for per capita food demand for different foods
-
 p15_kcal_regr(t, iso, kfo)=v15_kcal_regr.l(iso, kfo);
+
+* saving regression outcome for BMI shares
+p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)=v15_bmi_shr_regr.l(iso,sex,age,bmi_group15);
 
 * deriving calibration values
 

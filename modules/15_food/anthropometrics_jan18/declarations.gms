@@ -86,6 +86,7 @@ parameters
   i15_bmi_saturation(sex,agegroup15,bmi_tree15)    BMI share regression saturation (1)
   i15_bmi_halfsat(sex,agegroup15,bmi_tree15)       BMI share regression halfsaturation (1)
 
+  p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)      Uncalibrated regression estimates of BMI shares (1)
   i15_bmi_shr_calib(t,iso,sex,age,bmi_group15)     Calibration parameters to meet historical BMI shares (1)
   i15_bmi_shr_calib_lastcalibyear(iso,sex,age,bmi_group15) Calibration parameters of the last year with historical observations (1)
 
