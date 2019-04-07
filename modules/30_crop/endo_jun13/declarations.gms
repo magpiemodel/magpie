@@ -4,6 +4,10 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+parameters
+ pm_croparea_start(j,kcr)        Agricultural land initialization area (mio. ha)
+;
+
 positive variables
  vm_area(j,kcr,w)                Agricultural production area (mio. ha)
 ;

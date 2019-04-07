@@ -4,6 +4,25 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+*****************************
+*** SOM initialisation    ***
+*****************************
+
+i59_subsoilc_density(t_all,j) = fm_carbon_density(t_all,j,"secdforest","soilc") - f59_topsoilc_density(t_all,j);
+
+p59_som_pool(j,"cropland") =
+  sum((climate59,kcr),sum(clcl_climate59(clcl,climate59),
+      pm_climate_class(j,clcl)) * f59_cratio_landuse(climate59,kcr)
+      * f59_topsoilc_density("y1995",j) * pm_croparea_start(j,kcr));
+
+p59_som_pool(j,"noncropland") =
+  sum(noncropland59, f59_topsoilc_density("y1995",j) * pm_land_start(j,noncropland59));
+
+
+*****************************
+*** cshare calculation    ***
+*****************************
+
 *' @code The cellpool_aug16 calculates the carbon loss with the assumption
 *' of a lossrate of 15% per year resulting in 44% in 5 years, 80% in 10 years
 *' and 96% in 20 years. The lossrate for a given timestep is than calculate by
@@ -33,8 +52,4 @@ i59_cratio(j,kcr,w) = sum((cell(i,j),tillage59,inputs59,climate59),
                  * f59_cratio_irrigation(climate59,w,kcr));
 *' @stop
 
-p59_som_pool(j,pools59) = f59_som_initialisation_pools("y1995",j, pools59);
-
 p59_carbon_density(t,j,pools59)=0;
-
-i59_subsoilc_density(t_all,j) = fm_carbon_density(t_all,j,"secdforest","soilc") - f59_topsoilc_density(t_all,j);
