@@ -4,7 +4,7 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c59_static_spatial_level  cellular
+$setglobal c59_static_spatial_level  cluster
 *   options:   cellular  (use preprocessed cellular stock change factors)
 *              cluster   (use cshare_released on cluster within gams)
 
