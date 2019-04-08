@@ -37,6 +37,18 @@
         sum(land_to10$(not sameas(land_from10,land_to10)),
         v10_lu_transitions(j2,land_from10,land_to10));
 
+q10_croplandreduction(j2,land_to10) ..
+               vm_croplandreduction(j2,land_to10) =e=
+               v10_lu_transitions(j2,"crop",land_to10);
+
+q10_croplandexpansion(j2,land_from10) ..
+               vm_croplandexpansion(j2,land_from10) =e=
+               v10_lu_transitions(j2,land_from10,"crop");
+
+q10_croplandreduction(j2,land_to10) ..
+                              vm_croplandchange(j2,land_to10) =e=
+                              v10_lu_transitions(j2,"crop",land_to10);
+
 *' Small costs of 1 $ per ha on gross land-use change avoid unrealistic patterns in the land transition matrix
 
  q10_cost(j2) ..

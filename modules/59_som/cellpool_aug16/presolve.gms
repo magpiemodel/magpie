@@ -5,4 +5,4 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 p59_carbon_density(t,j,"noncropland")$(sum(noncropland59,pcm_land(j,noncropland59))>0) = p59_som_pool(j,"noncropland")/sum(noncropland59,pcm_land(j,noncropland59));
-p59_carbon_density(t,j,"cropland")$(pcm_land(j,"crop")>0)=  p59_som_pool(j,"cropland") / pcm_land(j,"crop");
+p59_carbon_density(t,j,"crop")$(pcm_land(j,"crop")>0)=  p59_som_pool(j,"crop") / pcm_land(j,"crop");

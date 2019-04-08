@@ -38,11 +38,11 @@ $offdelim
 $if "%c59_irrigation_scenario%" == "off" f59_cratio_irrigation(climate59,w,kcr) = 1;
 
 
-table f59_som_initialisation_pools(t_all,j,pools59) Initialisation pools for soil organic carbon (mio. tC)
-$ondelim
-$include "./modules/59_som/cellpool_aug16/input/f59_som_initialisation_pools.cs3"
-$offdelim
-;
+* table f59_som_initialisation_pools(t_all,j,pools59) Initialisation pools for soil organic carbon (mio. tC)
+* $ondelim
+* $include "./modules/59_som/cellpool_aug16/input/f59_som_initialisation_pools.cs3"
+* $offdelim
+* ;
 
 $setglobal c59_som_scenario  nocc
 *   options:   cc  (climate change)

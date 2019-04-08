@@ -17,7 +17,9 @@ variables
 positive variables
  vm_land(j,land)                  Land area of the different land types (mio. ha)
  vm_landexpansion(j,land)         Land expansion (mio. ha)
- vm_landreduction(j,land)        Land reduction (mio. ha)
+ vm_landreduction(j,land)         Land reduction (mio. ha)
+ vm_croplandexpansion(j,land)     Source of cropland expansion (mio. ha)
+ vm_croplandreduction(j,land)     Fade of cropland reduction (mio. ha)
  vm_cost_land_transition(j)		  Costs for lu transitions (mio. USD05MER per yr)
  v10_lu_transitions(j,land_from10,land_to10) Land transitions between time steps (mio. ha)
 ;
@@ -29,6 +31,8 @@ equations
  q10_transition_from(j,land_from10)	Land transition constraint from (mio. ha)
  q10_landexpansion(j,land_to10)     Land expansion constraint (mio. ha)
  q10_landreduction(j,land_from10)   Land reduction constraint (mio. ha)
+ q10_croplandreduction(j,land_to10)   Cropland reduction
+ q10_croplandexpansion(j,land_from10)   Cropland expansion
  q10_cost(j)                    	Costs for lu transitions (mio. USD05MER per yr)
  q10_landdiff                   	Land difference constraint (mio. ha)
 ;
