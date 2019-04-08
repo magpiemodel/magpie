@@ -17,7 +17,7 @@ variables
 positive variables
  vm_land(j,land)                  Land area of the different land types (mio. ha)
  vm_landexpansion(j,land)         Land expansion (mio. ha)
- vm_landreduction(j,land)         Land reduction (mio. ha)
+ v10_landreduction(j,land)         Land reduction (mio. ha)
  vm_croplandexpansion(j,land)     Source of cropland expansion (mio. ha)
  vm_croplandreduction(j,land)     Fade of cropland reduction (mio. ha)
  vm_cost_land_transition(j)		  Costs for lu transitions (mio. USD05MER per yr)
@@ -42,7 +42,9 @@ parameters
  ov_landdiff(t,type)                                 Aggregated difference in land between current and previous time step (mio. ha)
  ov_land(t,j,land,type)                              Land area of the different land types (mio. ha)
  ov_landexpansion(t,j,land,type)                     Land expansion (mio. ha)
- ov_landreduction(t,j,land,type)                     Land reduction (mio. ha)
+ ov10_landreduction(t,j,land,type)                   Land reduction (mio. ha)
+ ov_croplandexpansion(t,j,land,type)                 Source of cropland expansion (mio. ha)
+ ov_croplandreduction(t,j,land,type)                 Fade of cropland reduction (mio. ha)
  ov_cost_land_transition(t,j,type)                   Costs for lu transitions (mio. USD05MER per yr)
  ov10_lu_transitions(t,j,land_from10,land_to10,type) Land transitions between time steps (mio. ha)
  oq10_land(t,j,type)                                 Land conversion constraint (mio. ha)
@@ -51,6 +53,8 @@ parameters
  oq10_transition_from(t,j,land_from10,type)          Land transition constraint from (mio. ha)
  oq10_landexpansion(t,j,land_to10,type)              Land expansion constraint (mio. ha)
  oq10_landreduction(t,j,land_from10,type)            Land reduction constraint (mio. ha)
+ oq10_croplandreduction(t,j,land_to10,type)          Cropland reduction
+ oq10_croplandexpansion(t,j,land_from10,type)        Cropland expansion
  oq10_cost(t,j,type)                                 Costs for lu transitions (mio. USD05MER per yr)
  oq10_landdiff(t,type)                               Land difference constraint (mio. ha)
 ;

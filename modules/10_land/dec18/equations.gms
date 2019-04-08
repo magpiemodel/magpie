@@ -33,7 +33,7 @@
         v10_lu_transitions(j2,land_from10,land_to10));
 
  q10_landreduction(j2,land_from10) ..
-        vm_landreduction(j2,land_from10) =e=
+        v10_landreduction(j2,land_from10) =e=
         sum(land_to10$(not sameas(land_from10,land_to10)),
         v10_lu_transitions(j2,land_from10,land_to10));
 
@@ -45,15 +45,11 @@ q10_croplandexpansion(j2,land_from10) ..
                vm_croplandexpansion(j2,land_from10) =e=
                v10_lu_transitions(j2,land_from10,"crop");
 
-q10_croplandreduction(j2,land_to10) ..
-                              vm_croplandchange(j2,land_to10) =e=
-                              v10_lu_transitions(j2,"crop",land_to10);
-
 *' Small costs of 1 $ per ha on gross land-use change avoid unrealistic patterns in the land transition matrix
 
  q10_cost(j2) ..
         vm_cost_land_transition(j2) =e=
-        sum(land, vm_landexpansion(j2,land) + vm_landreduction(j2,land)) * 1;
+        sum(land, vm_landexpansion(j2,land) + v10_landreduction(j2,land)) * 1;
 
 *' The gross changes in land are calculated based on land expansion, land
 *' contraction and land changes from within the modules [35_natveg]
@@ -61,6 +57,6 @@ q10_croplandreduction(j2,land_to10) ..
 
  q10_landdiff ..
 		vm_landdiff =e= sum((j2,land), vm_landexpansion(j2,land)
-                                 + vm_landreduction(j2,land))
+                                 + v10_landreduction(j2,land))
                                  + vm_landdiff_natveg
                                  + vm_landdiff_forestry;
