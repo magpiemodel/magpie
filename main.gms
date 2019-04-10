@@ -13,7 +13,7 @@ $title magpie
 *' land and water and the associated consequences for sustainable development
 *' under future scenarios of rising food, energy and material demand as well
 *' as production, climate change impacts and greenhouse gas mitigation and
-*' different land related policies.
+*' different land related policies (@dietrich_magpie4).
 *'
 *' MAgPIE is a global partial equilibrium model of the land-use sector that operates
 *' in a recursive dynamic mode and incorporates spatially explicit information on
