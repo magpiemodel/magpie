@@ -219,7 +219,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   # Delete previously downloaded files, download new files and distribute 
   # them within the model.
   if(!setequal(input_new, input_old) | cfg$force_download) {
-    download_distribute(files        = input_new,
+    filemap <- download_distribute(files        = input_new,
                         repositories = cfg$repositories, # defined in your local .Rprofile or on the cluster /p/projects/rd3mod/R/.Rprofile
                         modelfolder  = ".",
                         additionalDelete="scripts/downloader/inputdelete.cfg",
@@ -236,13 +236,13 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   # and update_sets, which is updating the resolution- and region-depending
   # sets in core/sets.gms
 
-  low_res  <- get_info("input/info.txt","^\\* Output ?resolution:",": ")
-  high_res <- get_info("input/info.txt","^\\* Input ?resolution:",": ")
-  tmp <- read.magpie("modules/10_land/input/avl_land_t.cs3")
-  cpr <- getCPR(tmp)
+  #low_res  <- get_info("input/info.txt","^\\* Output ?resolution:",": ")
+  #high_res <- get_info("input/info.txt","^\\* Input ?resolution:",": ")
+  tmp <- magclass::read.magpie("modules/10_land/input/avl_land_t.cs3")
+  cpr <- magclass::getCPR(tmp)
   # read spatial_header, map, reg_revision and regionscode
   load("input/spatial_header.rda")
-  update_info(filemap,low_res,high_res,cpr,regionscode,reg_revision, warnings)
+  update_info(filemap,cpr,regionscode,reg_revision, warnings)
   update_sets(cpr,map)
 
   ###########################################################################################################
