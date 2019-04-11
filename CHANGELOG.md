@@ -12,23 +12,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This release version is focussed on consistency between the MAgPIE setup and the [REMIND model] and result of a validation exercise of the coupled REMIND-MAgPIE system.
 
 ### added
- - *80_optimization* added support for GAMS version 26.x.x
+ - **80_optimization** added support for GAMS version 26.x.x
 
 ### changed
- - *56_ghg_policy* apply reduction factor on CO2 price to account for potential negative side effects; lowers the economic incentive for CO2 emission reduction (avoided deforestation) and afforestation
- - *56_ghg_policy* non-linar phase-in of GHG prices over 20 year period
- - *56_ghg_policy* multiply GHG prices with development state to account for institutional requirements needed for implementing a GHG pricing scheme
- - *NDC/NPI scripts* added forest protection policy for Brazilian Atlantic Forest in default NDC and NPI scenarios
+ - **56_ghg_policy** apply reduction factor on CO2 price to account for potential negative side effects; lowers the economic incentive for CO2 emission reduction (avoided deforestation) and afforestation
+ - **56_ghg_policy** non-linar phase-in of GHG prices over 20 year period
+ - **56_ghg_policy** multiply GHG prices with development state to account for institutional requirements needed for implementing a GHG pricing scheme
+ - **NPI/NDC scripts** added forest protection policy for Brazilian Atlantic Forest in default NDC and NPI scenarios
+ - **NPI/NDC scripts** harmonized the starting year of the NDC policies 2020.
 
 ### fixed
- - *42_water_demand* bugfix environmental flow policy harmonization for historic period
- - *57_maccs* correction of cost calculation; Conversion from USD per ton C to USD per ton N and USD per ton CH4 was missing.
+ - **42_water_demand** bugfix environmental flow policy harmonization for historic period
+ - **57_maccs** correction of cost calculation; Conversion from USD per ton C to USD per ton N and USD per ton CH4 was missing.
 
 
 ## [4.0.1] - 2018-10-05
 
 ### fixed
- - *FABLE* adapted FABLE-specific configuration so that it works with MAgPIE 4.0
+ - **FABLE** adapted FABLE-specific configuration so that it works with MAgPIE 4.0
 
 
 ## [4.0.0] - 2018-10-04
