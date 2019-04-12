@@ -1,3 +1,8 @@
+*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+*** |  authors, and contributors see AUTHORS file
+*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  Contact: magpie@pik-potsdam.de
 
 
  i15_dem_intercept(regr15)   = f15_demand_paras(regr15,"%c15_food_scenario%","intercept");
@@ -12,7 +17,6 @@
 p15_bodyheight(t,iso,sex,age,estimates15) = f15_bodyheight(t,iso,sex,age);
 
 * calculating growth food for historical period
-* in case it starts before period use values of first timestep
 
 loop(t_past,
      if (ord(t_past)>3,

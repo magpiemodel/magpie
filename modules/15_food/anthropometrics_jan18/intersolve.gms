@@ -1,3 +1,9 @@
+*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+*** |  authors, and contributors see AUTHORS file
+*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  Contact: magpie@pik-potsdam.de
+
 option nlp = conopt4
 
 * retrieving interfaces from MAgPIE
@@ -13,7 +19,7 @@ if (magpie.modelstat = NA,
     q15_food_demand.m(i,kfo)=0;
     p15_prices_kcal(t,iso,kfo)=i15_prices_initial_kcal(iso,kfo)*f15_price_index(t);
 else
-    display "Coupling: Reading out Marginal Costs from MAgPIE as shock to demand model";
+    display "Coupling: Reading out marginal costs from MAgPIE as shock to demand model";
     p15_prices_kcal(t,iso,kfo)=sum(i_to_iso(i,iso), q15_food_demand.m(i,kfo));
 );
 
@@ -66,7 +72,7 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
 *' If `s15_elastic_demand` is 0, MAgPIE is not executed again for this time step.
 *' In case that `s15_elastic_demand` is 1, it is checked whether MAgPIE and the
 *' food demand model have reached sufficient convergence. The criterion for this
-*' is whether the real income in the food demand model has changed in any country
+*' is whether the real income in the food demand model has changed in any region
 *' by more than `s15_convergences_measure` relative to the last iteration due to
 *' changes in food prices from MAgPIE. Moreover, the model aborts when the
 *' number of iterations reaches `s15_maxiter`.
@@ -87,14 +93,13 @@ if (s15_elastic_demand * (1-sum(sameas(t_past,t),1)) =1,
         sm_intersolve=0;
 
 * saving regression outcome for postprocessing
-
          p15_kcal_regr(t, iso, kfo)=v15_kcal_regr.l(iso, kfo);
+         p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)=v15_bmi_shr_regr.l(iso,sex,age,bmi_group15);
 
-* estimating calibrated values for height regression
-* add balanceflow for calibration
+* The calibration factor is added to the regression value.
          p15_kcal_pc_iso(t,iso,kfo) =  v15_kcal_regr.l(iso,kfo) + p15_kcal_calib(t,iso,kfo) * s15_calibrate;
 
-* set negative values that can occur due to calibration to zero
+* Negative values that can possibly occur due to calibration are set to zero.
          p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
 
 * aggregate to regions
@@ -109,9 +114,9 @@ if (s15_elastic_demand * (1-sum(sameas(t_past,t),1)) =1,
                                        im_pop_iso(t,iso)
                                    );
 
-* we calibrate countries with zero food demand according to FAOSTAT
-* down to zero to match FAO values-
-* Values are rounded to avoid path dependencies of MAgPIE solver
+* We calibrate countries with zero food demand according to FAOSTAT
+* down to zero to match FAO world totals.
+* Values are rounded to avoid path dependencies of MAgPIE solver.
        p15_kcal_pc_calibrated(t,i,kfo)=p15_kcal_pc(t,i,kfo)+p15_balanceflow_kcal(t,i,kfo);
        p15_kcal_pc_calibrated(t,i,kfo)=round(p15_kcal_pc_calibrated(t,i,kfo),2);
        p15_kcal_pc_calibrated(t,i,kfo)$(p15_kcal_pc_calibrated(t,i,kfo)<0)=0;
@@ -135,10 +140,10 @@ display "exogenous demand information is used" ;
 );
 
 
-*' The calibration parameter is added to the regression value
+*' The calibration parameter is added to the regression value.
 
    p15_bmi_shr(t,iso,sex,age,bmi_group15) =
-           v15_bmi_shr_regr.l(iso,sex,age,bmi_group15)+
+           p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)+
            i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
 
 *' The BMI shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
@@ -148,13 +153,13 @@ display "exogenous demand information is used" ;
    p15_bmi_shr(t,iso,sex,age,"medium")=
       1 - (sum(bmi_group15, p15_bmi_shr(t,iso,sex,age,bmi_group15)) - p15_bmi_shr(t,iso,sex,age,"medium"));
 
-*' We recalculate the intake with the new values
+*' We recalculate the intake with the new values.
    p15_kcal_intake_total(t,iso) =
          (
            sum((sex, age, bmi_group15),
                p15_bmi_shr(t,iso,sex,age,bmi_group15)*
                im_demography(t,iso,sex,age) *
-               i15_intake(t,iso,sex,age,bmi_group15)
+               p15_intake(t,iso,sex,age,bmi_group15)
            ) + i15_kcal_pregnancy(t,iso)
          )/sum((sex,age), im_demography(t,iso,sex,age));
 
@@ -175,22 +180,23 @@ For (s15_count = 1 to (m_yeardiff(t)/5),
 * to find out about ++1 search for help on Circular Lag and Lead Operators in Assignments
    p15_bodyheight(t,iso,sex,age++1,"final") = p15_bodyheight(t,iso,sex,age,"final");
 
-*  move on consumption agegroups by 5 years
+* move on consumption agegroups by 5 years
    p15_kcal_growth_food(t,iso,underaged15++1)=
             p15_kcal_growth_food(t,iso,underaged15);
 
-*  consumption is calculated as linear interpolation between timesteps
+* consumption is calculated as linear interpolation between timesteps
    p15_kcal_growth_food(t,iso,"0--4") =
             sum(growth_food15,
                 p15_kcal_pc_iso(t,iso,growth_food15) * (s15_count / (m_yeardiff(t)/5))
                 + p15_kcal_pc_iso(t-1,iso,growth_food15) * (1 - s15_count / (m_yeardiff(t)/5))
             );
+
 *' @code
 *' After each execution of the food demand model, the body height distribution
 *' of the population is estimated. The starting point is the body height
 *' distribution of the last timestep. The body height estimates of the old
 *' period are moved into the subsequent age class (e.g. the 20-24 year old are
-*' now 25-29 years old). The age class of 15-19 year olds is estimated newly
+*' now 25-29 years old). The age class of 15-19 year old is estimated newly
 *' using the body height regressions and the food consumption of the last 15
 *' years.
 
@@ -198,22 +204,20 @@ For (s15_count = 1 to (m_yeardiff(t)/5),
                      126.4*
                      (sum(underaged15,
                        p15_kcal_growth_food(t,iso,underaged15)
-                     )/3)**0.03464
+                     )/3)**0.03467
                      ;
    p15_bodyheight(t,iso,"M","15--19","final") =
                      131.8*
                      (sum(underaged15,
                        p15_kcal_growth_food(t,iso,underaged15)
-                     )/3)**0.03975
+                     )/3)**0.03978
                      ;
 *' @stop
 );
 
 *' @code
 *' The bodyheight of the underaged age class (0-14) is assumed to diverge from 'normal'
-*' body height by the same proportion as age class of the 15-19 year olds.
-*' This  rotation is repeated for the 5-year length of the time step, it is repeated
-*' 3 times.
+*' body height by the same proportion as the age class of the 15-19 year old.
 
 p15_bodyheight(t,iso,"M","0--4","final")=p15_bodyheight(t,iso,"M","15--19","final")/176*92;
 p15_bodyheight(t,iso,"M","5--9","final")=p15_bodyheight(t,iso,"M","15--19","final")/176*125;
@@ -228,10 +232,10 @@ p15_bodyheight(t,iso,"F","10--14","final")=p15_bodyheight(t,iso,"M","15--19","fi
 *' @code
 *' Finally, the regression outcome is calibrated by a country-specific additive
 *' term, which is the residual of the regression fit and observation of the last
-*' historical time step
+*' historical time step.
 
 if (sum(sameas(t_past,t),1) = 1,
-* for historical period only use estimate to calibrate balanceflow but use historical data for values
+* For historical period, the regression results are only used to estimate the calibration parameter.
   p15_bodyheight_calib(t,iso,sex,age_new_estimated15) = f15_bodyheight(t,iso,sex,age_new_estimated15) - p15_bodyheight(t,iso,sex,age_new_estimated15,"final");
   p15_bodyheight(t,iso,sex,age_new_estimated15,"final") = f15_bodyheight(t,iso,sex,age_new_estimated15);
 else
