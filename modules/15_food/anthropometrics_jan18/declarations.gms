@@ -75,7 +75,7 @@ parameters
  i15_prices_initial_kcal(iso,kfo)                  Initial prices that capture the approximate level of prices in 1961-2010 (USD05PPP per kcal)
 
 * anthropometrics
-  p15_bmi_shr(t,iso,sex,age,bmi_group15)           Calibrated estimates BMI share for population groups  (1)
+  o15_bmi_shr(t,iso,sex,age,bmi_group15)           Calibrated estimates BMI share for population groups  (1)
   p15_bodyheight(t,iso,sex,age,estimates15)        Body height (cm per cap)
   p15_bodyweight(t,iso,sex,age,bmi_group15)        Body weight (kg per cap)
   p15_bodyheight_calib(t,iso,sex,age_new_estimated15)         Calibration factor for regional height differences (cm)
@@ -91,7 +91,7 @@ parameters
   i15_bmi_shr_calib_lastcalibyear(iso,sex,age,bmi_group15) Calibration parameters of the last year with historical observations (1)
 
 * diet structure
-  p15_kcal_intake_total(t,iso)                     Total food intake in a country (kcal per capita per day)
+  o15_kcal_intake_total(t,iso)                     Total food intake in a country (kcal per capita per day)
   p15_intake(t,iso,sex,age,bmi_group15)            Mean food intake by population group (kcal per capita per day)
   i15_kcal_pregnancy(t,iso)                        Additional calorie requirements  for pregnancy and lactation (kcal)
   p15_kcal_regr(t, iso, kfo)                       Uncalibrated regression estimates of calorie demand (kcal per cap per day)
