@@ -1,8 +1,8 @@
-*** (C) 2008-2017 Potsdam Institute for Climate Impact Research (PIK),
-*** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** or later. See LICENSE file or go to http://www.gnu.org/licenses/
-*** Contact: magpie@pik-potsdam.de
+*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+*** |  authors, and contributors see AUTHORS file
+*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  Contact: magpie@pik-potsdam.de
 
 *' @equations
 
@@ -144,7 +144,7 @@ q15_intake(iso)..
          sum((ct, sex, age, bmi_group15),
            v15_bmi_shr_regr(iso,sex,age,bmi_group15)*
            im_demography(ct,iso,sex,age) *
-           i15_intake(ct,iso,sex,age,bmi_group15)
+           p15_intake(ct,iso,sex,age,bmi_group15)
          )
          + sum(ct,i15_kcal_pregnancy(ct,iso))
          ;
