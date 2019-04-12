@@ -54,12 +54,12 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
 
 
  p15_convergence_measure(t) =smax(i,
-                              abs(p15_delta_income(t,i) / p15_lastiteration_delta_income(i)- 1)
+                              abs(p15_delta_income(t,i) / p15_lastiteration_delta_income(t,i)- 1)
                             );
 
 
 * keeping current deltas for estimating convergence in next timestep
- p15_lastiteration_delta_income(i) = p15_delta_income(t,i);
+ p15_lastiteration_delta_income(t,i) = p15_delta_income(t,i);
 
 
 *' @code

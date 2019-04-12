@@ -130,7 +130,7 @@ parameters
 
   p15_income_pc_real_ppp(t,i)                 Regional per capita income after price shock on regional level (USD05PPP per capita)
   p15_delta_income(t,i)           Regional change in per capita income due to price shock on regional level (1)
-  p15_lastiteration_delta_income(i) Regional change in per capita income due to price shock of last iteration (1)
+  p15_lastiteration_delta_income(t,i) Regional change in per capita income due to price shock of last iteration (1)
 
 ;
 

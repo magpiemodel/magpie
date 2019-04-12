@@ -39,7 +39,7 @@ i15_prices_initial_kcal(iso,kfo)$(f15_nutrition_attributes("y1995",kfo,"kcal")>0
                                                                                   / (f15_nutrition_attributes("y1995",kfo,"kcal")*10**6);
 p15_prices_kcal(t,iso,kfo)=i15_prices_initial_kcal(iso,kfo);
 
-p15_lastiteration_delta_income(i) = 1;
+p15_lastiteration_delta_income(t,i) = 1;
 
 
 $ifthen "%c15_rumscen%" == "mixed" i15_ruminant_fadeout(t) = (f15_ruminant_fadeout(t,"constant") + f15_ruminant_fadeout(t,"halving2050"))/2;
