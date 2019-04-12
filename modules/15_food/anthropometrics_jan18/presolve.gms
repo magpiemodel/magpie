@@ -114,10 +114,15 @@ else
     p15_bodyheight(t,iso,sex,age,"preliminary") = p15_bodyheight(t-1,iso,sex,age,"final");
     p15_kcal_growth_food(t,iso,underaged15) = p15_kcal_growth_food(t-1,iso,underaged15);
 
-    s15_count=m_yeardiff(t);
+
+
+
+    s15_yeardiff = m_yeardiff(t)/5;
 * avoid fake 1yr timestep in 1995
-    if(s15_count<5,s15_count=5);
-    For (s15_count = 1 to (m_yeardiff(t)/5),
+    if(s15_yeardiff<1,s15_yeardiff=1);
+
+    For (s15_count = 1 to s15_yeardiff,
+
 
 * circular move of age by 5 years
 * to find out about ++1 search for help on Circular Lag and Lead Operators in Assignments
