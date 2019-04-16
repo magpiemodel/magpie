@@ -17,13 +17,15 @@ This release version is focussed on consistency between the MAgPIE setup and the
  - **56_ghg_policy** apply reduction factor on CO2 price to account for potential negative side effects; lowers the economic incentive for CO2 emission reduction (avoided deforestation) and afforestation
  - **56_ghg_policy** non-linar phase-in of GHG prices over 20 year period
  - **56_ghg_policy** multiply GHG prices with development state to account for institutional requirements needed for implementing a GHG pricing scheme
+ - **40_transport** introduced transport costs for monogastric livestock products
  - **NPI/NDC scripts** added forest protection policy for Brazilian Atlantic Forest in default NDC and NPI scenarios
  - **NPI/NDC scripts** harmonized the starting year of the NDC policies 2020.
+ - **interpolation scripts** changed output files to seven magpie land use types, added additional cropsplit script for more detailed cropland output
 
 ### fixed
  - **42_water_demand** bugfix environmental flow policy harmonization for historic period
  - **57_maccs** correction of cost calculation; Conversion from USD per ton C to USD per ton N and USD per ton CH4 was missing.
-
+ - **71_diagg_lvst** adjusted monogastric disaggregation for more flexiblity to avoid infeasibilities with EFPs (see 42_water_demand)
 
 ## [4.0.1] - 2018-10-05
 
