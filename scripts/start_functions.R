@@ -86,7 +86,6 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   # Define internal functions
   ################################################################################
   .update_sets <- function(cpr,map) {
-    # requireNamespace(lucode)
 
     reg1 <- unique(map$RegionCode)
     reg2 <- names(cpr)
@@ -163,7 +162,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
 
   #Define routine to update info file in input folder and info in main.gms
   .update_info <- function(datasets, cpr, regionscode, reg_revision, warnings=NULL) {
-    #requireNamespace(lucode)
+
     low_res  <- .get_info("input/info.txt","^\\* Output ?resolution:",": ")
     high_res <- .get_info("input/info.txt","^\\* Input ?resolution:",": ")
 
