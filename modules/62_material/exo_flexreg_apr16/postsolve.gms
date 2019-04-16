@@ -1,3 +1,8 @@
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK),
+*** |  authors, and contributors see AUTHORS file
+*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  Contact: magpie@pik-potsdam.de
 *' @code
 *' The parameters `p62_dem_material_lh` and `p62_dem_food_lh` are overwritten
 *' based on each time step optimization, in order to be used in next step.

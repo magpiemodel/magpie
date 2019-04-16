@@ -1,17 +1,20 @@
-# |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK),
 # |  authors, and contributors see AUTHORS file
 # |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
 # |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # |  Contact: magpie@pik-potsdam.de
 
 insertheader <- function(maindir=".", 
-                         header=c("(C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),",
+                         header=c("(C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK),",
                                   "authors, and contributors see AUTHORS file",
                                   "This file is part of MAgPIE and licensed under GNU AGPL Version 3",
                                   "or later. See LICENSE file or go to http://www.gnu.org/licenses/",
                                   "Contact: magpie@pik-potsdam.de"), 
                          donottouch=c("AUTHORS","README","LICENSE",".lhd",".mz",".rda",".opt",
-                                      ".spam",".xlsx",".sh","files",".md",".RData"),
+                                      ".spam",".xlsx",".sh","files",".md",".RData", ".jpg", 
+                                      ".png",".cff", ".rds", ".aux", ".log", ".out", ".pdf",
+                                      ".tex", ".htm", ".css", ".bib", ".ref", ".mif", ".gdx", 
+                                      ".lst", ".git-id"),
                          comments=c(".R"="#",".gms"="***",".cfg"="#",".csv"="*",".cs2"="*",
                                     ".cs3"="*",".cs4"="*",".sh"="#",".txt"="#"),
                          line_endings="notwin",
