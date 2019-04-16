@@ -3,11 +3,6 @@
 # |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
 # |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # |  Contact: magpie@pik-potsdam.de
-# (C) 2008-2017 Potsdam Institute for Climate Impact Research (PIK),
-# authors, and contributors see AUTHORS file
-# This file is part of MAgPIE and licensed under GNU AGPL Version 3
-# or later. See LICENSE file or go to http://www.gnu.org/licenses/
-# Contact: magpie@pik-potsdam.de
 
 library(magpie4)
 library(magpiesets)
@@ -50,7 +45,7 @@ for (i in LU) {
              modout_landuse[,j,i], title = paste0(i),legend_breaks = breakpoints,
              lowcol = "white",midcol = "red",highcol = "green",
              legendname = "m ha",
-             legend_range = c(0,0.3),land_colour = "grey",sea=F) 
+             legend_range = c(0,0.3),land_colour = "grey",sea=F)
 	} else {
 	swlatex(sw,"This functionality requires the package luplot to be loaded. Send an email to magpie[at]pik-potsdam.de for more details.")
 	break
