@@ -1,3 +1,117 @@
+*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+*** |  authors, and contributors see AUTHORS file
+*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
+*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  Contact: magpie@pik-potsdam.de
+
+
+*' The calibration parameter is added to the regression value.
+
+   o15_bmi_shr(t,iso,sex,age,bmi_group15) =
+           p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)+
+           i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
+
+*' The BMI shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
+   o15_bmi_shr(t,iso,sex,age,bmi_group15)$(o15_bmi_shr(t,iso,sex,age,bmi_group15)<0) = 0;
+   o15_bmi_shr(t,iso,sex,age,bmi_group15)$(o15_bmi_shr(t,iso,sex,age,bmi_group15)>1) = 1;
+*' The mismatch is balanced by moving the exceeding quantities into the middle BMI group.
+   o15_bmi_shr(t,iso,sex,age,"medium")=
+      1 - (sum(bmi_group15, o15_bmi_shr(t,iso,sex,age,bmi_group15)) - o15_bmi_shr(t,iso,sex,age,"medium"));
+
+*' We recalculate the intake with the new values.
+   o15_kcal_intake_total(t,iso) =
+         (
+           sum((sex, age, bmi_group15),
+               o15_bmi_shr(t,iso,sex,age,bmi_group15)*
+               im_demography(t,iso,sex,age) *
+               p15_intake(t,iso,sex,age,bmi_group15)
+           ) + i15_kcal_pregnancy(t,iso)
+         )/sum((sex,age), im_demography(t,iso,sex,age));
+
+
+
+if(ord(t)>1,
+* start from bodyheight structure of last period
+   p15_bodyheight(t,iso,sex,age,"final") = p15_bodyheight(t-1,iso,sex,age,"final");
+   p15_kcal_growth_food(t,iso,underaged15) = p15_kcal_growth_food(t-1,iso,underaged15);
+);
+
+s15_yeardiff = m_yeardiff(t)/5;
+if(s15_yeardiff<1,s15_yeardiff=1);
+
+For (s15_count = 1 to s15_yeardiff,
+
+* circular move of age by 5 years
+* to find out about ++1 search for help on Circular Lag and Lead Operators in Assignments
+   p15_bodyheight(t,iso,sex,age++1,"final") = p15_bodyheight(t,iso,sex,age,"final");
+
+* move on consumption agegroups by 5 years
+   p15_kcal_growth_food(t,iso,underaged15++1)=
+            p15_kcal_growth_food(t,iso,underaged15);
+
+* consumption is calculated as linear interpolation between timesteps
+   p15_kcal_growth_food(t,iso,"0--4") =
+            sum(growth_food15,
+                p15_kcal_pc_iso(t,iso,growth_food15) * (s15_count / (m_yeardiff(t)/5))
+                + p15_kcal_pc_iso(t-1,iso,growth_food15) * (1 - s15_count / (m_yeardiff(t)/5))
+            );
+
+*' @code
+*' After each execution of the food demand model, the body height distribution
+*' of the population is estimated. The starting point is the body height
+*' distribution of the last timestep. The body height estimates of the old
+*' period are moved into the subsequent age class (e.g. the 20-24 year old are
+*' now 25-29 years old). The age class of 15-19 year old is estimated newly
+*' using the body height regressions and the food consumption of the last 15
+*' years.
+
+   p15_bodyheight(t,iso,"F","15--19","final") =
+                     126.4*
+                     (sum(underaged15,
+                       p15_kcal_growth_food(t,iso,underaged15)
+                     )/3)**0.03467
+                     ;
+   p15_bodyheight(t,iso,"M","15--19","final") =
+                     131.8*
+                     (sum(underaged15,
+                       p15_kcal_growth_food(t,iso,underaged15)
+                     )/3)**0.03978
+                     ;
+*' @stop
+);
+
+*' @code
+*' The bodyheight of the underaged age class (0-14) is assumed to diverge from 'normal'
+*' body height by the same proportion as the age class of the 15-19 year old.
+
+p15_bodyheight(t,iso,"M","0--4","final")=p15_bodyheight(t,iso,"M","15--19","final")/176*92;
+p15_bodyheight(t,iso,"M","5--9","final")=p15_bodyheight(t,iso,"M","15--19","final")/176*125;
+p15_bodyheight(t,iso,"M","10--14","final")=p15_bodyheight(t,iso,"M","15--19","final")/176*152;
+
+p15_bodyheight(t,iso,"F","0--4","final")=p15_bodyheight(t,iso,"M","15--19","final")/163*91;
+p15_bodyheight(t,iso,"F","5--9","final")=p15_bodyheight(t,iso,"M","15--19","final")/163*124;
+p15_bodyheight(t,iso,"F","10--14","final")=p15_bodyheight(t,iso,"M","15--19","final")/163*154;
+
+*' @stop
+
+*' @code
+*' Finally, the regression outcome is calibrated by a country-specific additive
+*' term, which is the residual of the regression fit and observation of the last
+*' historical time step.
+
+if (sum(sameas(t_past,t),1) = 1,
+* For historical period, the regression results are only used to estimate the calibration parameter.
+  p15_bodyheight_calib(t,iso,sex,age_new_estimated15) = f15_bodyheight(t,iso,sex,age_new_estimated15) - p15_bodyheight(t,iso,sex,age_new_estimated15,"final");
+  p15_bodyheight(t,iso,sex,age_new_estimated15,"final") = f15_bodyheight(t,iso,sex,age_new_estimated15);
+else
+  p15_bodyheight_calib(t,iso,sex,age_new_estimated15)=p15_bodyheight_calib(t-1,iso,sex,age_new_estimated15);
+  p15_bodyheight(t,iso,sex,age_new_estimated15,"final")=p15_bodyheight(t,iso,sex,age_new_estimated15,"final")+p15_bodyheight_calib(t,iso,sex,age_new_estimated15)*s15_calibrate;
+);
+
+*' @stop
+
+
+
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_dem_food(t,i,kall,"marginal")                                     = vm_dem_food.m(i,kall);
