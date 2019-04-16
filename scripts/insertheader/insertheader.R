@@ -14,7 +14,7 @@ insertheader <- function(maindir=".",
                                       ".spam",".xlsx",".sh","files",".md",".RData", ".jpg", 
                                       ".png",".cff", ".rds", ".aux", ".log", ".out", ".pdf",
                                       ".tex", ".htm", ".css", ".bib", ".ref", ".mif", ".gdx", 
-                                      ".lst", ".git-id"),
+                                      ".lst", ".git-id", ".csv", ".Rdata"),
                          comments=c(".R"="#",".gms"="***",".cfg"="#",".csv"="*",".cs2"="*",
                                     ".cs3"="*",".cs4"="*",".sh"="#",".txt"="#"),
                          line_endings="notwin",
@@ -88,7 +88,7 @@ insertheader <- function(maindir=".",
     # Write file only if it was modified
     if (writefile & !test_only) {
       if (line_endings == "win") {
-        writeLinesDOS(f,file)
+        lucode:::writeLinesDOS(f,file)
       } else {
         writeLines(f,file)
       }
