@@ -85,8 +85,8 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   ################################################################################
   # Define internal functions
   ################################################################################
-  update_sets <- function(cpr,map) {
-    require(lucode)
+  .update_sets <- function(cpr,map) {
+    # requireNamespace(lucode)
 
     reg1 <- unique(map$RegionCode)
     reg2 <- names(cpr)
@@ -143,11 +143,11 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
 
     }
     content <- c(content,'      /',';')
-    replace_in_file("core/sets.gms",content,subject)
+    lucode::replace_in_file("core/sets.gms",content,subject)
   }
 
   # Function to extract information from info.txt
-  get_info <- function(file, grep_expression, sep, pattern="", replacement="") {
+  .get_info <- function(file, grep_expression, sep, pattern="", replacement="") {
     if(!file.exists(file)) return("#MISSING#")
     file <- readLines(file, warn=FALSE)
     tmp <- grep(grep_expression, file, value=TRUE)
@@ -162,10 +162,10 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   }
 
   #Define routine to update info file in input folder and info in main.gms
-  update_info <- function(datasets, cpr, regionscode, reg_revision, warnings=NULL) {
-    require(lucode)
-    low_res  <- get_info("input/info.txt","^\\* Output ?resolution:",": ")
-    high_res <- get_info("input/info.txt","^\\* Input ?resolution:",": ")
+  .update_info <- function(datasets, cpr, regionscode, reg_revision, warnings=NULL) {
+    #requireNamespace(lucode)
+    low_res  <- .get_info("input/info.txt","^\\* Output ?resolution:",": ")
+    high_res <- .get_info("input/info.txt","^\\* Input ?resolution:",": ")
 
     info <- readLines('input/info.txt')
     subject <- 'VERSION INFO'
@@ -206,20 +206,20 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
                  paste('Last modification (input data):',date()),
                  '')
     writeLines(content,'input/info.txt')
-    replace_in_file("main.gms",paste('*',content),subject)
+    lucode::replace_in_file("main.gms",paste('*',content),subject)
   }
 
   ################################################################################
   ################################################################################
 
-  input_old <- get_info("input/info.txt", "^Used data set:", ": ")
+  input_old <- .get_info("input/info.txt", "^Used data set:", ": ")
   input_new <- cfg$input
   
   ###################### Download files ###################################
   # Delete previously downloaded files, download new files and distribute 
   # them within the model.
   if(!setequal(input_new, input_old) | cfg$force_download) {
-    filemap <- download_distribute(files        = input_new,
+    filemap <- lucode::download_distribute(files        = input_new,
                         repositories = cfg$repositories, # defined in your local .Rprofile or on the cluster /p/projects/rd3mod/R/.Rprofile
                         modelfolder  = ".",
                         additionalDelete="scripts/downloader/inputdelete.cfg",
@@ -231,19 +231,17 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   # are manipulated. Therefore some information about the number of cells per
   # region is required (CPR). This information is gained by extracting it from
   # the avl_land.cs3 input file (any other cellular file could be used as well).
-  # This information is then transfered to update_info, which is
+  # This information is then transfered to .update_info, which is
   # updating the general information in magpie.gms and input/info.txt
-  # and update_sets, which is updating the resolution- and region-depending
+  # and .update_sets, which is updating the resolution- and region-depending
   # sets in core/sets.gms
 
-  #low_res  <- get_info("input/info.txt","^\\* Output ?resolution:",": ")
-  #high_res <- get_info("input/info.txt","^\\* Input ?resolution:",": ")
   tmp <- magclass::read.magpie("modules/10_land/input/avl_land_t.cs3")
   cpr <- magclass::getCPR(tmp)
   # read spatial_header, map, reg_revision and regionscode
   load("input/spatial_header.rda")
-  update_info(filemap,cpr,regionscode,reg_revision, warnings)
-  update_sets(cpr,map)
+  .update_info(filemap,cpr,regionscode,reg_revision, warnings)
+  .update_sets(cpr,map)
 
   ###########################################################################################################
   ############# PROCESSING INPUT DATA ###################### END ############################################
