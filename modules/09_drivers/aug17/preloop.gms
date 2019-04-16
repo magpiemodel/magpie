@@ -1,7 +1,9 @@
-
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK),
+*** |  authors, and contributors see CITATION.cff file
 *** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
+
 * get the scenario GDP & Populaiton data for iso countries
 
 im_physical_inactivity(t,iso,sex,age) = f09_physical_inactivity(t,iso,"%c09_gdp_scenario%",sex,age);
