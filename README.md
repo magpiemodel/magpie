@@ -37,7 +37,7 @@ The Coding Etiquette explains also the used name conventions and other
 structural characteristics.
 
 ## COPYRIGHT
-Copyright 2008-2018 Potsdam Institute for Climate Impact Research (PIK)
+Copyright 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
 
 ## LICENSE
 This program is free software: you can redistribute it and/or modify
