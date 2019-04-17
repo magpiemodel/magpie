@@ -12,6 +12,7 @@ This release version is focussed on consistency between the MAgPIE setup and the
 
 ### added
  - **80_optimization** added support for GAMS version 26.x.x
+ - **scripts** added new start and output scripts
 
 ### changed
  - **56_ghg_policy** apply reduction factor on CO2 price to account for potential negative side effects; lowers the economic incentive for CO2 emission reduction (avoided deforestation) and afforestation
@@ -21,11 +22,13 @@ This release version is focussed on consistency between the MAgPIE setup and the
  - **NPI/NDC scripts** added forest protection policy for Brazilian Atlantic Forest in default NDC and NPI scenarios
  - **NPI/NDC scripts** harmonized the starting year of the NDC policies 2020.
  - **interpolation scripts** changed output files to seven magpie land use types, added additional cropsplit script for more detailed cropland output
+ - **15_food** clean-up and cosmetic changes (correction of comments, parameter names, structure of code); update BMI share calculations with the values of the last consistent MAgPIE/food-demand-model iteration
 
 ### fixed
  - **42_water_demand** bugfix environmental flow policy harmonization for historic period
  - **57_maccs** correction of cost calculation; Conversion from USD per ton C to USD per ton N and USD per ton CH4 was missing.
  - **71_diagg_lvst** adjusted monogastric disaggregation for more flexiblity to avoid infeasibilities with EFPs (see 42_water_demand)
+ - **15_food** correction regarding the convergence measure of the iterative execution of the food demand model and MAgPIE; correction accounting for unusual time step length in body height calculations; body height regression parameters updated
 
 ## [4.0.1] - 2018-10-05
 
