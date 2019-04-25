@@ -48,8 +48,8 @@ cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector()
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5")
-cfg$gms$c56_pollutant_prices <- "SSP2-45-SPA2-V15-REMIND-MAGPIE"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-45-SPA2"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-REMIND-MAGPIE"
+cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-REMIND-MAGPIE"
 cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
 
@@ -58,7 +58,7 @@ cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector()
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6")
-cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-REMIND-MAGPIE"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-26-REMIND-MAGPIE"
 cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)

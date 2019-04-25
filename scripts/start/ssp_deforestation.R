@@ -80,8 +80,8 @@ for(reg in c("BRA","H12")) {
             } else {
               model="GCAM4"
             }
-            cfg$gms$c56_pollutant_prices <- paste(ssp,rcp,spa,"V15",model,sep="-")
-            cfg$gms$c60_2ndgen_biodem <- paste(if(ssp %in% c("SSP3","SSP4")) "SSP2" else ssp,rcp,"SPA0",sep="-")
+            cfg$gms$c56_pollutant_prices <- paste("SSPDB",ssp,rcp,model,sep="-")
+            cfg$gms$c60_2ndgen_biodem <- paste("SSPDB",ssp,rcp,model,sep="-")
 
             cfg$gms$tc <- tau
 
