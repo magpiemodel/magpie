@@ -23,8 +23,8 @@ buildInputVector <- function(regionmapping   = "aus",
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "c200",
                              archive_rev     = "34",
-                             madrat_rev      = "4.14",
-                             validation_rev  = "4.14",
+                             madrat_rev      = "4.18",
+                             validation_rev  = "4.18",
                              calibration     = NULL,
                              additional_data = "additional_data_rev3.66.tgz") {
   mappings <- c(h12="690d3718e151be1b450b394c1064b1c5")
@@ -37,7 +37,7 @@ buildInputVector <- function(regionmapping   = "aus",
 
 #calib_date <- NULL
 
-for(x in c("ind","cha")) {
+for(x in c("h12","ind","cha")) {
   if(exists("calib_date") && !is.null(calib_date)) {
     calibration <- paste0("calibration_",x,"_",calib_date,".tgz")
   } else {
@@ -50,5 +50,6 @@ for(x in c("ind","cha")) {
     calib <- submitCalibration(x)
     cfg$input <- c(cfg$input,calib)
   }
-  publish_data(input=cfg, name=paste0("magpie4.1_",x,"_mar19"), target=".")
+  if(x=="h12") x <- "default"
+  publish_data(input=cfg, name=paste0("magpie4.1_",x,"_apr19"), target=".")
 }
