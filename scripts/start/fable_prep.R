@@ -23,23 +23,25 @@ buildInputVector <- function(regionmapping   = "aus",
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "c200",
                              archive_rev     = "34",
-                             madrat_rev      = "4.14",
-                             validation_rev  = "4.14",
+                             madrat_rev      = "4.18",
+                             validation_rev  = "4.18",
                              calibration     = NULL,
                              additional_data = "additional_data_rev3.66.tgz") {
   mappings <- c(h12="690d3718e151be1b450b394c1064b1c5")
   archive_name=paste(project_name,climate_model,climatescen_name,co2,sep="-")
-  archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", toupper(regionmapping),"4_",mappings["h12"], ".tgz")
+  if(regionmapping=="h12") archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", mappings["h12"], ".tgz")
+  else  archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", toupper(regionmapping),"4_",mappings["h12"], ".tgz")
   madrat  <- paste0("rev", madrat_rev, "_", mappings["h12"], "_magpie.tgz")
   validation  <- paste0("rev", validation_rev, "_", mappings["h12"], "_validation.tgz")
   return(c(archive,madrat,validation,calibration,additional_data))
 }
 
-#calib_date <- NULL
+calib_date <- "21Mar19" 
 
-for(x in c("ind","cha")) {
+for(x in c("h12","ind","cha")) {
   if(exists("calib_date") && !is.null(calib_date)) {
     calibration <- paste0("calibration_",x,"_",calib_date,".tgz")
+    if(x=="h12") calibration <- "calibration_H12_c200_12Sep18.tgz"
   } else {
     calibration <-  NULL
   }
@@ -50,5 +52,6 @@ for(x in c("ind","cha")) {
     calib <- submitCalibration(x)
     cfg$input <- c(cfg$input,calib)
   }
-  publish_data(input=cfg, name=paste0("magpie4.1_",x,"_mar19"), target=".")
+  if(x=="h12") x <- "default"
+  publish_data(input=cfg, name=paste0("magpie4.1_",x,"_apr19"), target=".")
 }
