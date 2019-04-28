@@ -20,25 +20,25 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-cfg$title <- "R2M41_SSP2_NPi_v2"
+cfg$title <- "R2M41_SSP2_NPi_v3"
 setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
 cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "R2M41_SSP2_NDC_v2"
+cfg$title <- "R2M41_SSP2_NDC_v3"
 setScenario(cfg,c("SSP2","NDC"))
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NDC"
 cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NDC"
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "R2M41_SSP2_Budg600_v2"
+cfg$title <- "R2M41_SSP2_Budg600_v3"
 setScenario(cfg,c("SSP2","NDC"))
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
 cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "SSPDB_SSP2_26_v2"
+cfg$title <- "SSPDB_SSP2_26_v3"
 setScenario(cfg,c("SSP2","NDC"))
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
 cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
