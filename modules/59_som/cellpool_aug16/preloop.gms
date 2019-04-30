@@ -10,7 +10,7 @@
 
 i59_subsoilc_density(t_all,j) = fm_carbon_density(t_all,j,"secdforest","soilc") - f59_topsoilc_density(t_all,j);
 
-p59_som_pool(j,"cropl") =
+p59_som_pool(j,"crop") =
   sum((climate59,kcr),sum(clcl_climate59(clcl,climate59),
       pm_climate_class(j,clcl)) * f59_cratio_landuse(climate59,kcr)
       * f59_topsoilc_density("y1995",j) * pm_croparea_start(j,kcr));
@@ -27,7 +27,7 @@ p59_som_pool(j,noncropland59) =
 * ATTENTION: emissions in 1995 are not meaningful
 
 vm_carbon_stock.l(j,"crop","soilc") =
-  p59_som_pool(j,"cropland") + i59_subsoilc_density("y1995",j) * pm_land_start(j,"crop");
+  p59_som_pool(j,"crop") + i59_subsoilc_density("y1995",j) * pm_land_start(j,"crop");
 vm_carbon_stock.l(j,noncropland59,"soilc") =
   fm_carbon_density("y1995",j,noncropland59,"soilc") * pm_land_start(j,noncropland59);
 vm_carbon_stock.l(j,"urban","soilc") =

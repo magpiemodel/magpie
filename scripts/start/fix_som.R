@@ -14,35 +14,29 @@ library(lucode)
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
-cfg$title   <- "BAU_static_som"
-cfg$gms$som <- "static_jan19"
-cfg$gms$c59_static_spatial_level <-  "cluster"
-start_run(cfg=cfg,codeCheck=TRUE)
-
 cfg$title   <- "BAU_dynamic_som_irr"
 cfg$gms$som <- "cellpool_aug16"
 cfg$gms$c59_irrigation_scenario  <- "on"
 start_run(cfg=cfg,codeCheck=TRUE)
 
-cfg$title   <- "BAU_dynamic_som"
-cfg$gms$som <- "cellpool_aug16"
-cfg$gms$c59_irrigation_scenario <- "off"
-start_run(cfg=cfg,codeCheck=TRUE)
-
 cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-REMIND-MAGPIE"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
 
-cfg$title   <- "SSP2-26-SPA2_static_som"
-cfg$gms$som <- "static_jan19"
-cfg$gms$c59_static_spatial_level <-  "cluster"
-start_run(cfg=cfg,codeCheck=TRUE)
-
-cfg$title   <- "SSP2-26-SPA2_dynamic_som_irr"
+cfg$title   <- "GHG_dynamic_som_irr"
 cfg$gms$som <- "cellpool_aug16"
 cfg$gms$c59_irrigation_scenario  <- "on"
 start_run(cfg=cfg,codeCheck=TRUE)
 
-cfg$title   <- "SSP2-26-SPA2_dynamic_som"
+source("config/default.cfg")
+cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
+
+cfg$title   <- "BECCS_dynamic_som_irr"
 cfg$gms$som <- "cellpool_aug16"
-cfg$gms$c59_irrigation_scenario <- "off"
+cfg$gms$c59_irrigation_scenario  <- "on"
+start_run(cfg=cfg,codeCheck=TRUE)
+
+cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-REMIND-MAGPIE"
+
+cfg$title   <- "SSP2-26-SPA2_dynamic_som_irr"
+cfg$gms$som <- "cellpool_aug16"
+cfg$gms$c59_irrigation_scenario  <- "on"
 start_run(cfg=cfg,codeCheck=TRUE)
