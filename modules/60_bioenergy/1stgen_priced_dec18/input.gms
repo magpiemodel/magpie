@@ -9,15 +9,7 @@ scalars
   c60_biodem_level  bioenergy demand level indicator 1 for regional and 0 for global demand   (1)   / 1 /
 ;
 
-$setglobal c60_2ndgen_biodem  SSP2-Ref-SPA0
-*   options:  SSP1-Ref-SPA0, SSP2-Ref-SPA0, SSP5-Ref-SPA0,
-*             SSP1-26-SPA0, SSP1-37-SPA0, SSP1-45-SPA0,
-*             SSP2-26-SPA0, SSP2-37-SPA0, SSP2-45-SPA0, SSP2-60-SPA0,
-*             SSP5-26-SPA0, SSP5-37-SPA0, SSP5-45-SPA0, SSP5-60-SPA0,
-*             SSP1-26-SPA1, SSP1-37-SPA1, SSP1-45-SPA1,
-*             SSP2-26-SPA2, SSP2-37-SPA2, SSP2-45-SPA2, SSP2-60-SPA2,
-*             SSP5-26-SPA5, SSP5-37-SPA5, SSP5-45-SPA5, SSP5-60-SPA5,
-*             coupling
+$setglobal c60_2ndgen_biodem  R2M41-SSP2-NPi
 
 $if "%c60_2ndgen_biodem%" == "coupling" table f60_bioenergy_dem_coupling(t_all,i) Bioenergy demand (regional) (mio. GJ per yr)
 $if "%c60_2ndgen_biodem%" == "coupling" $ondelim

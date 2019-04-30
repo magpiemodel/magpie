@@ -120,8 +120,8 @@ cfg$title <- "SSP2_policy_rcp2p6"
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(co2="nocc",climatescen_name="rcp2p6",regionmapping = "sim4nexus",calibration=calib)
-cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-MESSAGE-GLOBIOM"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-26-MESSAGE-GLOBIOM"
 cfg$gms$forestry  <- "affore_vegc_dec16"
 cfg$gms$maccs  <- "on_sep16"
 start_run(cfg=cfg,codeCheck=codeCheck)
@@ -141,8 +141,8 @@ cfg$title <- "SSP2_policy_rcp2p6_efp"
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(co2="nocc",climatescen_name="rcp2p6",regionmapping = "sim4nexus",calibration=calib)
-cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-MESSAGE-GLOBIOM"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-26-MESSAGE-GLOBIOM"
 cfg$gms$forestry  <- "affore_vegc_dec16"
 cfg$gms$maccs  <- "on_sep16"
 cfg$gms$c42_env_flow_policy <- "on"

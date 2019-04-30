@@ -51,8 +51,8 @@ cfg$gms$c_timesteps <- 12
 
 cfg$title <- "INMS_SSP2_RCP45_Nmed"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$gms$c56_pollutant_prices <- "SSP2-45-SPA2-V15-MESSAGE-GLOBIOM"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-45-SPA2"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="agmip")
 cfg$gms$som<-"cellpool_aug16"
@@ -66,8 +66,8 @@ cfg$title <- "INMS_SSP1_RCP26_Nhigh_diet"
 
 cfg$title <- "INMS_SSP1_RCP26_Nhigh"
 cfg<-lucode::setScenario(cfg,"SUSTAg1")
-cfg$gms$c56_pollutant_prices <- "SSP1-26-SPA1-V15-IMAGE"
-cfg$gms$c60_2ndgen_biodem    <- "SSP1-26-SPA1"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP1-26-IMAGE"
+cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP1-26-IMAGE"
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6",regionmapping="agmip")
 cfg$gms$som<-"cellpool_aug16"
@@ -77,8 +77,8 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg$title <- "INMS_SSP1_RCP45_Nhigh"
 cfg<-lucode::setScenario(cfg,"SUSTAg1")
-cfg$gms$c56_pollutant_prices <- "SSP1-45-SPA1-V15-IMAGE"
-cfg$gms$c60_2ndgen_biodem    <- "SSP1-45-SPA1"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP1-45-IMAGE"
+cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP1-45-IMAGE"
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="agmip")
 cfg$gms$som<-"cellpool_aug16"
@@ -89,8 +89,8 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg$title <- "INMS_SSP2_RCP45_Nlow"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$gms$c56_pollutant_prices <- "SSP2-45-SPA2-V15-MESSAGE-GLOBIOM"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-45-SPA2"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="agmip")
 cfg$gms$som<-"cellpool_aug16"
@@ -100,8 +100,8 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg$title <- "INMS_SSP2_RCP45_Nhigh"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$gms$c56_pollutant_prices <- "SSP2-45-SPA2-V15-MESSAGE-GLOBIOM"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-45-SPA2"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="agmip")
 cfg$gms$som<-"cellpool_aug16"
@@ -111,8 +111,8 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg$title <- "SSP5_RCP85_Nlow"
 cfg<-lucode::setScenario(cfg,"SUSTAg5")
-cfg$gms$c56_pollutant_prices <- "SSP5-Ref-SPA0-V15-REMIND-MAGPIE"
-cfg$gms$c60_2ndgen_biodem    <- "SSP5-Ref-SPA0"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP5-Ref-REMIND-MAGPIE"
+cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP5-Ref-REMIND-MAGPIE"
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp8p5",regionmapping="agmip")
 cfg$gms$som<-"cellpool_aug16"
