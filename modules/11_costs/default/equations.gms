@@ -1,7 +1,8 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @equations
@@ -25,6 +26,9 @@
                    + vm_cost_fore(i2)
                    + vm_cost_processing(i2)
                    + vm_costs_overrate_cropdiff(i2)
+                   + vm_bioenergy_utility(i2)
+                   + vm_processing_substitution_cost(i2)
+                   + vm_costs_additional_mon(i2)
                    ;
 
 *' The total regional production cost calculation is based on the sum of different

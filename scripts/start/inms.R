@@ -1,7 +1,8 @@
-# |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-# |  authors, and contributors see AUTHORS file
-# |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-# |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  authors, and contributors see CITATION.cff file. This file is part
+# |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+# |  AGPL-3.0, you are granted additional permissions described in the
+# |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
 
@@ -51,8 +52,8 @@ cfg$gms$c_timesteps <- 12
 cfg$title <- "INMS2_casestudies"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$gms$s15_elastic_demand = 1
-cfg$gms$c56_pollutant_prices <- "SSP2-60-SPA2-V15-MESSAGE-GLOBIOM"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-60-SPA2"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-60-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-60-MESSAGE-GLOBIOM"
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0",regionmapping="inms")
 #cfg$gms$som<-"cellpool_aug16"
@@ -71,13 +72,13 @@ cfg$recalibrate <- FALSE
 cfg$title <- "INMS1_casestudies"
 cfg<-lucode::setScenario(cfg,"SUSTAg1")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6",regionmapping="inms")
-cfg$gms$c56_pollutant_prices <- "SSP5-26-SPA5-V15-REMIND-MAGPIE"
-cfg$gms$c60_2ndgen_biodem    <- "SSP5-26-SPA5"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP5-26-REMIND-MAGPIE"
+cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP5-26-REMIND-MAGPIE"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg$title <- "INMS5_casestudies"
 cfg<-lucode::setScenario(cfg,"SUSTAg5")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms")
-cfg$gms$c56_pollutant_prices <- "SSP1-45-SPA1-V15-IMAGE"
-cfg$gms$c60_2ndgen_biodem    <- "SSP1-45-SPA1"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP1-45-IMAGE"
+cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP1-45-IMAGE"
 start_run(cfg=cfg,codeCheck=codeCheck)
