@@ -15,6 +15,6 @@
 *' @authors Kristine Karstens, Benjamin Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%disagg_lvst%" == "foragebased_aug18" $include "./modules/71_disagg_lvst/foragebased_aug18.gms"
-$Ifi "%disagg_lvst%" == "off" $include "./modules/71_disagg_lvst/off.gms"
+$Ifi "%disagg_lvst%" == "foragebased_aug18" $include "./modules/71_disagg_lvst/foragebased_aug18/realization.gms"
+$Ifi "%disagg_lvst%" == "off" $include "./modules/71_disagg_lvst/off/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

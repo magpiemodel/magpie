@@ -15,5 +15,5 @@
 *' @authors Jan Philipp Dietrich
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%climate%" == "static" $include "./modules/45_climate/static.gms"
+$Ifi "%climate%" == "static" $include "./modules/45_climate/static/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

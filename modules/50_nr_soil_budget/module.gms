@@ -13,6 +13,6 @@
 *' @authors Benjamin Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%nr_soil_budget%" == "exoeff_aug16" $include "./modules/50_nr_soil_budget/exoeff_aug16.gms"
-$Ifi "%nr_soil_budget%" == "off" $include "./modules/50_nr_soil_budget/off.gms"
+$Ifi "%nr_soil_budget%" == "exoeff_aug16" $include "./modules/50_nr_soil_budget/exoeff_aug16/realization.gms"
+$Ifi "%nr_soil_budget%" == "off" $include "./modules/50_nr_soil_budget/off/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

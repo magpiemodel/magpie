@@ -18,6 +18,6 @@
 *' @authors Benjamin Leon Bodirsky, Florian Humpenoeder
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%carbon%" == "normal_dec17" $include "./modules/52_carbon/normal_dec17.gms"
-$Ifi "%carbon%" == "off" $include "./modules/52_carbon/off.gms"
+$Ifi "%carbon%" == "normal_dec17" $include "./modules/52_carbon/normal_dec17/realization.gms"
+$Ifi "%carbon%" == "off" $include "./modules/52_carbon/off/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

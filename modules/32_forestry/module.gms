@@ -16,6 +16,6 @@
 *' @authors Florian Humpenöder
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%forestry%" == "affore_vegc_dec16" $include "./modules/32_forestry/affore_vegc_dec16.gms"
-$Ifi "%forestry%" == "static_sep16" $include "./modules/32_forestry/static_sep16.gms"
+$Ifi "%forestry%" == "affore_vegc_dec16" $include "./modules/32_forestry/affore_vegc_dec16/realization.gms"
+$Ifi "%forestry%" == "static_sep16" $include "./modules/32_forestry/static_sep16/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

@@ -17,6 +17,6 @@
 *' @authors Isabelle Weindl, Jan Philipp Dietrich
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%past%" == "endo_jun13" $include "./modules/31_past/endo_jun13.gms"
-$Ifi "%past%" == "static" $include "./modules/31_past/static.gms"
+$Ifi "%past%" == "endo_jun13" $include "./modules/31_past/endo_jun13/realization.gms"
+$Ifi "%past%" == "static" $include "./modules/31_past/static/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

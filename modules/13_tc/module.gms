@@ -22,5 +22,5 @@
 *' @authors Jan Philipp Dietrich, Christoph Schmitz, Benjamin Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%tc%" == "endo_jun18" $include "./modules/13_tc/endo_jun18.gms"
+$Ifi "%tc%" == "endo_jun18" $include "./modules/13_tc/endo_jun18/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

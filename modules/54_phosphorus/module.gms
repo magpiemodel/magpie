@@ -30,5 +30,5 @@
 *' @authors Benjamin Leon Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%phosphorus%" == "off" $include "./modules/54_phosphorus/off.gms"
+$Ifi "%phosphorus%" == "off" $include "./modules/54_phosphorus/off/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

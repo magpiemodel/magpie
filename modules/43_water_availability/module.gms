@@ -17,5 +17,5 @@
 *' @authors Anne Biewald, Markus Bonsch
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%water_availability%" == "total_water_aug13" $include "./modules/43_water_availability/total_water_aug13.gms"
+$Ifi "%water_availability%" == "total_water_aug13" $include "./modules/43_water_availability/total_water_aug13/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

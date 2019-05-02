@@ -15,5 +15,5 @@
 *' @authors Jan Philipp Dietrich, Florian Humpenöder, Benjamin Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%crop%" == "endo_jun13" $include "./modules/30_crop/endo_jun13.gms"
+$Ifi "%crop%" == "endo_jun13" $include "./modules/30_crop/endo_jun13/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

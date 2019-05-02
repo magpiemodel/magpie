@@ -17,5 +17,5 @@
 *' @authors Benjamin Leon Bodirsky, Florian Humpenöder, Jan Philipp Dietrich
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%costs%" == "default" $include "./modules/11_costs/default.gms"
+$Ifi "%costs%" == "default" $include "./modules/11_costs/default/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

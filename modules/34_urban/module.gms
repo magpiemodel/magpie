@@ -14,5 +14,5 @@
 *' @authors Jan Philipp Dietrich, Florian Humpenöder
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%urban%" == "static" $include "./modules/34_urban/static.gms"
+$Ifi "%urban%" == "static" $include "./modules/34_urban/static/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

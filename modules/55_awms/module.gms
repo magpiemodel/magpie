@@ -14,6 +14,6 @@
 *' @authors Benjamin Leon Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%awms%" == "ipcc2006_aug16" $include "./modules/55_awms/ipcc2006_aug16.gms"
-$Ifi "%awms%" == "off" $include "./modules/55_awms/off.gms"
+$Ifi "%awms%" == "ipcc2006_aug16" $include "./modules/55_awms/ipcc2006_aug16/realization.gms"
+$Ifi "%awms%" == "off" $include "./modules/55_awms/off/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

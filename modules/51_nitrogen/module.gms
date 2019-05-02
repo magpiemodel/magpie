@@ -12,6 +12,6 @@
 *' @authors Benjamin Leon Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%nitrogen%" == "ipcc2006_sep16" $include "./modules/51_nitrogen/ipcc2006_sep16.gms"
-$Ifi "%nitrogen%" == "off" $include "./modules/51_nitrogen/off.gms"
+$Ifi "%nitrogen%" == "ipcc2006_sep16" $include "./modules/51_nitrogen/ipcc2006_sep16/realization.gms"
+$Ifi "%nitrogen%" == "off" $include "./modules/51_nitrogen/off/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

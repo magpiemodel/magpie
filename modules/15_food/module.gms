@@ -12,5 +12,5 @@
 *' @authors Benjamin Leon Bodirsky, Jan Philipp Dietrich
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%food%" == "anthropometrics_jan18" $include "./modules/15_food/anthropometrics_jan18.gms"
+$Ifi "%food%" == "anthropometrics_jan18" $include "./modules/15_food/anthropometrics_jan18/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

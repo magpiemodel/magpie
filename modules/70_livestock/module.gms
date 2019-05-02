@@ -23,5 +23,5 @@
 *' @authors Isabelle Weindl, Benjamin Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%livestock%" == "fbask_jan16" $include "./modules/70_livestock/fbask_jan16.gms"
+$Ifi "%livestock%" == "fbask_jan16" $include "./modules/70_livestock/fbask_jan16/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

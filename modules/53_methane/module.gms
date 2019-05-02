@@ -14,6 +14,6 @@
 *' @authors Benjamin Leon Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%methane%" == "ipcc2006_flexreg_apr16" $include "./modules/53_methane/ipcc2006_flexreg_apr16.gms"
-$Ifi "%methane%" == "off" $include "./modules/53_methane/off.gms"
+$Ifi "%methane%" == "ipcc2006_flexreg_apr16" $include "./modules/53_methane/ipcc2006_flexreg_apr16/realization.gms"
+$Ifi "%methane%" == "off" $include "./modules/53_methane/off/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

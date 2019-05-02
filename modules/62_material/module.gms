@@ -19,5 +19,5 @@
 *' @authors Benjamin Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%material%" == "exo_flexreg_apr16" $include "./modules/62_material/exo_flexreg_apr16.gms"
+$Ifi "%material%" == "exo_flexreg_apr16" $include "./modules/62_material/exo_flexreg_apr16/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

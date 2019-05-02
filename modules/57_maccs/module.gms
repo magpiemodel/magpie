@@ -24,6 +24,6 @@
 *' @authors Benjamin Leon Bodirsky, Florian Humpenoeder
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%maccs%" == "off_jul16" $include "./modules/57_maccs/off_jul16.gms"
-$Ifi "%maccs%" == "on_sep16" $include "./modules/57_maccs/on_sep16.gms"
+$Ifi "%maccs%" == "off_jul16" $include "./modules/57_maccs/off_jul16/realization.gms"
+$Ifi "%maccs%" == "on_sep16" $include "./modules/57_maccs/on_sep16/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

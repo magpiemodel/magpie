@@ -21,6 +21,6 @@
 *' @authors Jan Philipp Dietrich, Todd Munson
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%optimization%" == "lp_nlp_apr17" $include "./modules/80_optimization/lp_nlp_apr17.gms"
-$Ifi "%optimization%" == "nlp_apr17" $include "./modules/80_optimization/nlp_apr17.gms"
+$Ifi "%optimization%" == "lp_nlp_apr17" $include "./modules/80_optimization/lp_nlp_apr17/realization.gms"
+$Ifi "%optimization%" == "nlp_apr17" $include "./modules/80_optimization/nlp_apr17/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

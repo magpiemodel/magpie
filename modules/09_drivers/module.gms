@@ -16,5 +16,5 @@
 *' @authors Benjamin Leon Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%drivers%" == "aug17" $include "./modules/09_drivers/aug17.gms"
+$Ifi "%drivers%" == "aug17" $include "./modules/09_drivers/aug17/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

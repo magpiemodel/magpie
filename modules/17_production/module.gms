@@ -13,5 +13,5 @@
 *' @authors Benjamin Leon Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%production%" == "flexreg_apr16" $include "./modules/17_production/flexreg_apr16.gms"
+$Ifi "%production%" == "flexreg_apr16" $include "./modules/17_production/flexreg_apr16/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

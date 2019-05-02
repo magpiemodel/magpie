@@ -23,5 +23,5 @@
 *' @authors Benjamin Bodirsky, Florian Humpenoeder
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%ghg_policy%" == "price_jan19" $include "./modules/56_ghg_policy/price_jan19.gms"
+$Ifi "%ghg_policy%" == "price_jan19" $include "./modules/56_ghg_policy/price_jan19/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

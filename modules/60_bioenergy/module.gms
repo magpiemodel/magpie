@@ -19,5 +19,5 @@
 
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%bioenergy%" == "1stgen_priced_dec18" $include "./modules/60_bioenergy/1stgen_priced_dec18.gms"
+$Ifi "%bioenergy%" == "1stgen_priced_dec18" $include "./modules/60_bioenergy/1stgen_priced_dec18/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
