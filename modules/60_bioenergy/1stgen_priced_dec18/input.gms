@@ -1,7 +1,8 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
 
@@ -9,15 +10,7 @@ scalars
   c60_biodem_level  bioenergy demand level indicator 1 for regional and 0 for global demand   (1)   / 1 /
 ;
 
-$setglobal c60_2ndgen_biodem  SSP2-Ref-SPA0
-*   options:  SSP1-Ref-SPA0, SSP2-Ref-SPA0, SSP5-Ref-SPA0,
-*             SSP1-26-SPA0, SSP1-37-SPA0, SSP1-45-SPA0,
-*             SSP2-26-SPA0, SSP2-37-SPA0, SSP2-45-SPA0, SSP2-60-SPA0,
-*             SSP5-26-SPA0, SSP5-37-SPA0, SSP5-45-SPA0, SSP5-60-SPA0,
-*             SSP1-26-SPA1, SSP1-37-SPA1, SSP1-45-SPA1,
-*             SSP2-26-SPA2, SSP2-37-SPA2, SSP2-45-SPA2, SSP2-60-SPA2,
-*             SSP5-26-SPA5, SSP5-37-SPA5, SSP5-45-SPA5, SSP5-60-SPA5,
-*             coupling
+$setglobal c60_2ndgen_biodem  R2M41-SSP2-NPi
 
 $if "%c60_2ndgen_biodem%" == "coupling" table f60_bioenergy_dem_coupling(t_all,i) Bioenergy demand (regional) (mio. GJ per yr)
 $if "%c60_2ndgen_biodem%" == "coupling" $ondelim

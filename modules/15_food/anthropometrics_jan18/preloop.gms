@@ -1,3 +1,9 @@
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
+*** |  Contact: magpie@pik-potsdam.de
 
 
  i15_dem_intercept(regr15)   = f15_demand_paras(regr15,"%c15_food_scenario%","intercept");
@@ -12,7 +18,6 @@
 p15_bodyheight(t,iso,sex,age,estimates15) = f15_bodyheight(t,iso,sex,age);
 
 * calculating growth food for historical period
-* in case it starts before period use values of first timestep
 
 loop(t_past,
      if (ord(t_past)>3,
@@ -39,7 +44,7 @@ i15_prices_initial_kcal(iso,kfo)$(f15_nutrition_attributes("y1995",kfo,"kcal")>0
                                                                                   / (f15_nutrition_attributes("y1995",kfo,"kcal")*10**6);
 p15_prices_kcal(t,iso,kfo)=i15_prices_initial_kcal(iso,kfo);
 
-p15_lastiteration_delta_income(i) = 1;
+p15_lastiteration_delta_income(t,i) = 1;
 
 
 $ifthen "%c15_rumscen%" == "mixed" i15_ruminant_fadeout(t) = (f15_ruminant_fadeout(t,"constant") + f15_ruminant_fadeout(t,"halving2050"))/2;
