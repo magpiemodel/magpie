@@ -45,12 +45,15 @@ it under the terms of the **GNU Affero General Public License** as published by
 the Free Software Foundation, **version 3** of the License or later. You should
 have received a copy of the GNU Affero General Public License along with this
 program. See the LICENSE file in the root directory. If not, see
-http://www.gnu.org/licenses/
+https://www.gnu.org/licenses/agpl.txt
+
+Under Section 7 of AGPL-3.0, you are granted additional permissions described
+in the MAgPIE License Exception, version 1.0 (see LICENSE file).
 
 ## NOTES
-Besides distribution and software-as-a-service applications the source code
-should also be made available in the events of model based publications or
-model-based consulting.
+Following the principles of good scientific practice it is recommended
+to make the source code available in the events of model based publications
+or model-based consulting.
 
 When using a modified version of **MAgPIE** which is not identical to versions
 in the official main repository at https://github.com/magpiemodel add a suffix
@@ -123,7 +126,7 @@ pkgs <- c("ggplot2",
           "lusweave",
           "luscale",
           "goxygen",
-		  "luplot")
+          "luplot")
 install.packages(pkgs)
 ```
 For post-processing model outputs *Latex* is required

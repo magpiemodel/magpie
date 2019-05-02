@@ -6,13 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [4.1.0] - 2019-xx-xx
+## [4.1.0] - 2019-05-02
 
 This release version is focussed on consistency between the MAgPIE setup and the [REMIND model] and result of a validation exercise of the coupled REMIND-MAgPIE system.
 
 ### added
  - **80_optimization** added support for GAMS version 26.x.x
  - **scripts** added new start and output scripts
+ - **license** added exception to the applied AGPL license to clarify handling of required GAMS environment, solver libraries and R libraries
 
 ### changed
  - **56_ghg_policy** apply reduction factor on CO2 price to account for potential negative side effects; lowers the economic incentive for CO2 emission reduction (avoided deforestation) and afforestation
@@ -41,7 +42,7 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.0.1...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.1.0...develop
 [4.1.0]: https://github.com/magpiemodel/magpie/compare/v4.0.1...v4.1.0
 [4.0.1]: https://github.com/magpiemodel/magpie/compare/v4.0...v4.0.1
 [4.0.0]: https://github.com/magpiemodel/magpie/releases/tag/v4.0
