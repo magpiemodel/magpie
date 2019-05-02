@@ -75,9 +75,6 @@ sets
   scen56 emission policy scenarios
   / none, all, ssp /
 
-  aff56 afforestation policy scenarios
-  / none, all, all50, vegc100, vegc75, vegc50, vegc33, vegc25 /
-
    emis_cell_one56(emis_source_cell) cellular oneoff emission sources
    /crop_vegc, crop_litc, crop_soilc, past_vegc, past_litc, past_soilc, forestry_vegc,
    forestry_litc, forestry_soilc, primforest_vegc, primforest_litc, primforest_soilc,
