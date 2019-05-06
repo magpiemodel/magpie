@@ -1,7 +1,8 @@
-# |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-# |  authors, and contributors see AUTHORS file
-# |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-# |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  authors, and contributors see CITATION.cff file. This file is part
+# |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+# |  AGPL-3.0, you are granted additional permissions described in the
+# |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
 
@@ -49,15 +50,30 @@ MIF2SUSTAg <- function(x,model="MAgPIE",scenario="default") {
   name <- "Emissions|CO2|AFOLU (Mt CO2/yr)"
   new <- mbind(new,setNames(x[,,"Emissions|CO2|Land (Mt CO2/yr)"],paste(model,scenario,name,sep=".")))
 
+  name <- "Emissions|CO2|AFOLU|Land-use Change (Mt CO2/yr)"
+  new <- mbind(new,setNames(x[,,"Emissions|CO2|Land|+|Land-use Change (Mt CO2/yr)"],paste(model,scenario,name,sep=".")))
+
+  name <- "Emissions|CO2|AFOLU|Climate Change (Mt CO2/yr)"
+  new <- mbind(new,setNames(x[,,"Emissions|CO2|Land|+|Climate Change (Mt CO2/yr)"],paste(model,scenario,name,sep=".")))
+
   name <- "Emissions|NH3|Agriculture (Mt NH3/yr)"
   new <- mbind(new,setNames(x[,,"Emissions|NH3|Land|+|Agriculture (Mt NH3/yr)"],paste(model,scenario,name,sep=".")))
 
   name <- "Emissions|NOx|Agriculture (Mt NO2/yr)"
-  new <- mbind(new,setNames(x[,,"Emissions|NOx|Land|+|Agriculture (Mt NOx/yr)"],paste(model,scenario,name,sep=".")))
+  new <- mbind(new,setNames(x[,,"Emissions|NO2|Land|+|Agriculture (Mt NO2/yr)"],paste(model,scenario,name,sep=".")))
 
   name <- "Emissions|NO3-|Agriculture (Mt NO3/yr)"
   new <- mbind(new,setNames(x[,,"Emissions|NO3-|Land|+|Agriculture (Mt NO3-/yr)"],paste(model,scenario,name,sep=".")))
 
+  #Cumulative
+  name <- "Emissions|CO2|AFOLU|Cumulative (Gt CO2)"
+  new <- mbind(new,setNames(x[,,"Emissions|CO2|Land|Cumulative (Gt CO2)"],paste(model,scenario,name,sep=".")))
+
+  name <- "Emissions|CO2|AFOLU|Cumulative|Land-use Change (Gt CO2)"
+  new <- mbind(new,setNames(x[,,"Emissions|CO2|Land|Cumulative|+|Land-use Change (Gt CO2)"],paste(model,scenario,name,sep=".")))
+
+  name <- "Emissions|CO2|AFOLU|Cumulative|Climate Change (Gt CO2)"
+  new <- mbind(new,setNames(x[,,"Emissions|CO2|Land|Cumulative|+|Climate Change (Gt CO2)"],paste(model,scenario,name,sep=".")))
 
 
 
@@ -196,15 +212,15 @@ MIF2SUSTAg <- function(x,model="MAgPIE",scenario="default") {
   
   #????# aktuell nur aggregiert verfügbar für alle food items ??????????????
   name <- "Prices|Producer Price Index|Food (index relative to 2010)"
-  new <- mbind(new,setNames(x[,,"Prices|Food Price Index (Index 2005=100)"],paste(model,scenario,name,sep=".")))
+  new <- mbind(new,setNames(x[,,"Prices|Food Price Index (Index 2010=100)"],paste(model,scenario,name,sep=".")))
 
 #  #????# Index für food crops fehlt  ??????????????????????????????????????
 #  name <- "Prices|Producer Price Index|Crops (index relative to 2010)"
-#  new <- mbind(new,setNames(x[,,"Prices|Food Price Index (Index 2005=100)"],paste(model,scenario,name,sep=".")))
+#  new <- mbind(new,setNames(x[,,"Prices|Food Price Index (Index 2010=100)"],paste(model,scenario,name,sep=".")))
 
 #  #????# Index für livestock fehlt ?????????????????????????????????????????
 #  name <- "Prices|Producer Price Index|Livestock (index relative to 2010)"
-#  new <- mbind(new,setNames(x[,,"Prices|Food Price Index (Index 2005=100)"],paste(model,scenario,name,sep=".")))
+#  new <- mbind(new,setNames(x[,,"Prices|Food Price Index (Index 2010=100)"],paste(model,scenario,name,sep=".")))
 
 
   name <- "Prices|Producer Prices|Ethanol (US$05/tDM)"
@@ -288,8 +304,8 @@ MIF2SUSTAg <- function(x,model="MAgPIE",scenario="default") {
 
   ### Food Intake
   name <- "Food Intake (kcal/cap/day)"
-  reg.intake <- Intake(gdx,level = "reg",calibrated=TRUE, pregnancy = TRUE, per_capita = TRUE, age_groups = FALSE)
-  glo.intake <- Intake(gdx,level = "glo",calibrated=TRUE, pregnancy = TRUE, per_capita = TRUE, age_groups = FALSE)
+  reg.intake <- Intake(gdx,level = "reg",calibrated=TRUE, pregnancy = TRUE, per_capita = TRUE, age = FALSE)
+  glo.intake <- Intake(gdx,level = "glo",calibrated=TRUE, pregnancy = TRUE, per_capita = TRUE, age = FALSE)
   new <- mbind(new,setNames(mbind(reg.intake,glo.intake)[,-1,],paste(model,scenario,name,sep=".")))
 
   name <- "Food Intake|Staple products (kcal/cap/day)"
@@ -319,6 +335,32 @@ MIF2SUSTAg <- function(x,model="MAgPIE",scenario="default") {
   glo <- FoodExpenditure(gdx,level = "glo",products = "kfo",product_aggr = TRUE, per_capita = TRUE)
   new <- mbind(new,setNames(mbind(reg,glo)[,-1,],paste(model,scenario,name,sep=".")))
 
+######################################################
+
+  ### Bioenergy Production
+  name <- "Energy|Bioenergy (EJ/yr)"
+  reg <- collapseNames(demand(gdx,level="reg",products = "kall",product_aggr = TRUE,attributes = "ge")[,,"bioenergy"])/1000
+  glo <- collapseNames(demand(gdx,level="glo",products = "kall",product_aggr = TRUE,attributes = "ge")[,,"bioenergy"])/1000
+  new <- mbind(new,setNames(mbind(reg,glo)[,-1,],paste(model,scenario,name,sep=".")))
+
+  name <- "Energy|Bioenergy|2nd generation bioenergy crops (EJ/yr)"
+  reg <- collapseNames(demand(gdx,level="reg",products = c("betr","begr"),product_aggr = TRUE,attributes = "ge")[,,"bioenergy"])/1000
+  glo <- collapseNames(demand(gdx,level="glo",products = c("betr","begr"),product_aggr = TRUE,attributes = "ge")[,,"bioenergy"])/1000
+  new <- mbind(new,setNames(mbind(reg,glo)[,-1,],paste(model,scenario,name,sep=".")))
+
+  name <- "Energy|Bioenergy|Residues (EJ/yr)"
+  reg <- collapseNames(demand(gdx,level="reg",products = c("res_cereals","res_fibrous","res_nonfibrous"),product_aggr = TRUE,attributes = "ge")[,,"bioenergy"])/1000
+  glo <- collapseNames(demand(gdx,level="glo",products = c("res_cereals","res_fibrous","res_nonfibrous"),product_aggr = TRUE,attributes = "ge")[,,"bioenergy"])/1000
+  new <- mbind(new,setNames(mbind(reg,glo)[,-1,],paste(model,scenario,name,sep=".")))
+
+#  name <- "Energy|Bioenerg|1st generation bioenergy (EJ/yr)"
+#  reg <- collapseNames(demand(gdx,level="reg",products = "kall",product_aggr = TRUE,attributes = "ge")[,,"bioenergy"])/1000
+#	 - collapseNames(demand(gdx,level="reg",products = c("betr","begr"),product_aggr = TRUE,attributes = "ge")[,,"bioenergy"])/1000
+#	 - collapseNames(demand(gdx,level="reg",products = c("res_cereals","res_fibrous","res_nonfibrous"),product_aggr = TRUE,attributes = "ge")[,,"bioenergy"])/1000
+#  glo <- collapseNames(demand(gdx,level="glo",products = "kall",product_aggr = TRUE,attributes = "ge")[,,"bioenergy"])/1000
+#	 - collapseNames(demand(gdx,level="glo",products = c("betr","begr"),product_aggr = TRUE,attributes = "ge")[,,"bioenergy"])/1000
+#	 - collapseNames(demand(gdx,level="glo",products = c("res_cereals","res_fibrous","res_nonfibrous"),product_aggr = TRUE,attributes = "ge")[,,"bioenergy"])/1000
+#  new <- mbind(new,setNames(mbind(reg,glo)[,-1,],paste(model,scenario,name,sep=".")))
 
   
   return(new)
