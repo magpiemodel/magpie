@@ -1,0 +1,20 @@
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
+*** |  Contact: magpie@pik-potsdam.de
+
+*' @title Land
+
+*' @description The land module coordinates and analyzes all land related activities
+*' by summing up all land types and calculating the gross changes in land use
+*' between two time steps of optimization given the recursive dynamic structure of
+*' MAgPIE model.
+
+*' @authors Jan Philipp Dietrich
+
+*###################### R SECTION START (MODULETYPES) ##########################
+$Ifi "%land%" == "dec18" $include "./modules/10_land/dec18/realization.gms"
+$Ifi "%land%" == "feb15" $include "./modules/10_land/feb15/realization.gms"
+*###################### R SECTION END (MODULETYPES) ############################

@@ -1,11 +1,12 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
 p59_som_pool(j,pools59) = v59_som_pool.l(j,pools59);
-
+                 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov59_som_target(t,j,pools59,"marginal")                     = v59_som_target.m(j,pools59);
@@ -69,3 +70,4 @@ p59_som_pool(j,pools59) = v59_som_pool.l(j,pools59);
  oq59_carbon_soil_cropland(t,j,"lower")                      = q59_carbon_soil_cropland.lo(j);
  oq59_carbon_soil_noncropland(t,j,noncropland59,"lower")     = q59_carbon_soil_noncropland.lo(j,noncropland59);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
+

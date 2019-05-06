@@ -1,7 +1,8 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
 $title magpie
@@ -13,7 +14,7 @@ $title magpie
 *' land and water and the associated consequences for sustainable development
 *' under future scenarios of rising food, energy and material demand as well
 *' as production, climate change impacts and greenhouse gas mitigation and
-*' different land related policies.
+*' different land related policies (@dietrich_magpie4).
 *'
 *' MAgPIE is a global partial equilibrium model of the land-use sector that operates
 *' in a recursive dynamic mode and incorporates spatially explicit information on
@@ -91,22 +92,6 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: magpie4.0_default_sep18.tgz
-* md5sum: 98e158205482936e487aeb616dea5403
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
-* Used data set: additional_data_rev3.67.tgz
-* md5sum: b85772a77a9865f792dd0b830fff06e5
-* Repository: /home/kristine/mnt/landuse-data/input/archive/
-* 
-* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38.1_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: ae4dbc8e36e6fb4ba8cee0d2400b2193
-* Repository: /home/kristine/mnt/landuse-data/input/archive/
-* 
-* Used data set: rev4.17_690d3718e151be1b450b394c1064b1c5_validation.tgz
-* md5sum: bcee4cf4f6dec6c8e040b03615204049
-* Repository: /home/kristine/mnt/rd3mod/inputdata/output/
-* 
 * Low resolution: c200
 * High resolution: 0.5
 * 
@@ -118,7 +103,7 @@ $title magpie
 * 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
-* Regions data revision: 4.14
+* Regions data revision: 4.18
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
@@ -138,7 +123,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Fri Apr  5 11:48:59 2019
+* Last modification (input data): Mon May  6 15:18:22 2019
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -183,7 +168,7 @@ $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 
 $setglobal residues  flexreg_apr16
-$setglobal processing  coupleproducts_feb17
+$setglobal processing  substitution_dec18
 
 $setglobal trade  selfsuff_reduced
 
@@ -210,8 +195,7 @@ $setglobal phosphorus  off
 $setglobal awms  ipcc2006_aug16
 $setglobal ghg_policy  price_jan19
 $setglobal maccs  on_sep16
-$setglobal carbon_removal  off_sep16
-$setglobal som  static_jan19
+$setglobal som  cellpool_aug16
 
 $setglobal bioenergy  1stgen_priced_dec18
 $setglobal material  exo_flexreg_apr16
