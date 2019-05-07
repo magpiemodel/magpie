@@ -14,29 +14,34 @@ library(lucode)
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
-cfg$title   <- "BAU_dynamic_som_irr"
+cfg$title   <- "BAU_dynamic_som"
 cfg$gms$som <- "cellpool_aug16"
 cfg$gms$c59_irrigation_scenario  <- "on"
 start_run(cfg=cfg,codeCheck=TRUE)
 
-cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-REMIND-MAGPIE"
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300"
+cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg1300"
 
-cfg$title   <- "GHG_dynamic_som_irr"
+cfg$title   <- "SSP2-26-SPA2_dynamic_som_none"
+cfg$gms$c56_emis_policy <- "none"
 cfg$gms$som <- "cellpool_aug16"
 cfg$gms$c59_irrigation_scenario  <- "on"
 start_run(cfg=cfg,codeCheck=TRUE)
 
-source("config/default.cfg")
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
-
-cfg$title   <- "BECCS_dynamic_som_irr"
+cfg$title   <- "SSP2-26-SPA2_dynamic_som_all"
+cfg$gms$c56_emis_policy <- "all"
 cfg$gms$som <- "cellpool_aug16"
 cfg$gms$c59_irrigation_scenario  <- "on"
 start_run(cfg=cfg,codeCheck=TRUE)
 
-cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-REMIND-MAGPIE"
+cfg$title   <- "SSP2-26-SPA2_dynamic_som_spp"
+cfg$gms$c56_emis_policy <- "spp"
+cfg$gms$som <- "cellpool_aug16"
+cfg$gms$c59_irrigation_scenario  <- "on"
+start_run(cfg=cfg,codeCheck=TRUE)
 
-cfg$title   <- "SSP2-26-SPA2_dynamic_som_irr"
+cfg$title   <- "SSP2-26-SPA2_dynamic_som_soiloff"
+cfg$gms$c56_emis_policy <- "soiloff"
 cfg$gms$som <- "cellpool_aug16"
 cfg$gms$c59_irrigation_scenario  <- "on"
 start_run(cfg=cfg,codeCheck=TRUE)
