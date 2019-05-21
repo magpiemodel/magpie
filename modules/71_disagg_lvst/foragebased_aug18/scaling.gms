@@ -10,6 +10,4 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-v71_additional_mon.scale(j, kli_mon)          = 10e-5;
-vm_costs_additional_mon.scale(i)              = 10e-5;                      
-v71_feed_balanceflow.scale(j,kli_rum,kforage) = 10e-5;
+vm_costs_additional_mon.scale(i) = 10e4;
