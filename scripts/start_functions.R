@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
-                      report=NULL,sceninreport=NULL,LU_pricing="y2010", lock_model=TRUE) {
+                      report=NULL,sceninreport=NULL,LU_pricing="y2010", lock_model=TRUE, force=FALSE) {
 
   if (!requireNamespace("lucode", quietly = TRUE)) {
     stop("Package \"lucode\" needed for this function to work. Please install it.",
@@ -39,7 +39,11 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   # Create output folder
   if (!file.exists(cfg$results_folder)) {
     dir.create(cfg$results_folder, recursive=TRUE, showWarnings=FALSE)
-	} else {
+	} else if (force) {
+    cat("Deleting results folder because it alreay exists:",cfg$results_folder,"\n")
+    unlink(cfg$results_folder, recursive = TRUE)
+    dir.create(cfg$results_folder, recursive = TRUE, showWarnings = FALSE)
+  } else {
     stop(paste0("Results folder ",cfg$results_folder,
                 " could not be created because is already exists."))
   }
