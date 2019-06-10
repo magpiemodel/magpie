@@ -9,8 +9,8 @@
 require(lucode)
 
 source("config/default.cfg")
-source("scripts/downloader/download.R")
-archive_download(files=cfg$input,
-                 repositories=cfg$repositories,
-                 modelfolder=".",
-                 debug=cfg$debug)
+lucode::download_distribute(files            = cfg$input,
+                            repositories     = cfg$repositories,
+                            modelfolder      = ".",
+                            additionalDelete = "scripts/downloader/inputdelete.cfg",
+                            debug            = cfg$debug)
