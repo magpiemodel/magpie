@@ -210,38 +210,36 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   }
 
   ################################################################################
+  ########## DOWNLOAD INPUT FILES and MANIPULATE GAMS FILES ######################
   ################################################################################
 
   input_old <- .get_info("input/info.txt", "^Used data set:", ": ")
   input_new <- cfg$input
   
-  ###################### Download files ###################################
-  # Delete previously downloaded files, download new files and distribute 
-  # them within the model.
   if(!setequal(input_new, input_old) | cfg$force_download) {
+    # Delete previously downloaded files, download new files and distribute 
+    # them within the model.
     filemap <- lucode::download_distribute(files        = input_new,
                         repositories = cfg$repositories, # defined in your local .Rprofile or on the cluster /p/projects/rd3mod/R/.Rprofile
                         modelfolder  = ".",
                         additionalDelete="scripts/downloader/inputdelete.cfg",
                         debug        = cfg$debug)
+
+    # In the following the GAMS sourcecode files magpie.gms and core/sets.gms
+    # are manipulated. Therefore some information about the number of cells per
+    # region is required (CPR). This information is gained by extracting it from
+    # the avl_land.cs3 input file (any other cellular file could be used as well).
+    # This information is then transfered to .update_info, which is
+    # updating the general information in magpie.gms and input/info.txt
+    # and .update_sets, which is updating the resolution- and region-depending
+    # sets in core/sets.gms
+    tmp <- magclass::read.magpie("modules/10_land/input/avl_land_t.cs3")
+    cpr <- magclass::getCPR(tmp)
+    # read spatial_header, map, reg_revision and regionscode
+    load("input/spatial_header.rda")
+    .update_info(filemap,cpr,regionscode,reg_revision, warnings)
+    .update_sets(cpr,map)
   }
-
-  ###################### MANIPULATE GAMS FILES ###################################
-  # In the following the GAMS sourcecode files magpie.gms and core/sets.gms
-  # are manipulated. Therefore some information about the number of cells per
-  # region is required (CPR). This information is gained by extracting it from
-  # the avl_land.cs3 input file (any other cellular file could be used as well).
-  # This information is then transfered to .update_info, which is
-  # updating the general information in magpie.gms and input/info.txt
-  # and .update_sets, which is updating the resolution- and region-depending
-  # sets in core/sets.gms
-
-  tmp <- magclass::read.magpie("modules/10_land/input/avl_land_t.cs3")
-  cpr <- magclass::getCPR(tmp)
-  # read spatial_header, map, reg_revision and regionscode
-  load("input/spatial_header.rda")
-  .update_info(filemap,cpr,regionscode,reg_revision, warnings)
-  .update_sets(cpr,map)
 
   ###########################################################################################################
   ############# PROCESSING INPUT DATA ###################### END ############################################
