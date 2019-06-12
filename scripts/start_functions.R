@@ -39,7 +39,11 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   # Create output folder
   if (!file.exists(cfg$results_folder)) {
     dir.create(cfg$results_folder, recursive=TRUE, showWarnings=FALSE)
-	} else {
+	} else if (cfg$force_replace) {
+    cat("Deleting results folder because it alreay exists:",cfg$results_folder,"\n")
+    unlink(cfg$results_folder, recursive = TRUE)
+    dir.create(cfg$results_folder, recursive = TRUE, showWarnings = FALSE)
+  } else {
     stop(paste0("Results folder ",cfg$results_folder,
                 " could not be created because is already exists."))
   }
