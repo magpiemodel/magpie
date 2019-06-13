@@ -55,7 +55,7 @@ general_settings<-function(title) {
   cfg$gms$forestry  <- "affore_vegc_dec16"
   cfg$gms$maccs  <- "on_sep16"
   cfg$title <- paste0("v1_",title)
-  include costs per-ton
+#  include costs per-ton
   return(cfg)
 }
 
