@@ -16,9 +16,9 @@
 
 sets
 
-   i all economic regions /CAZ,CHA,EUR,IND,JPN,LAM,MEA,NEU,OAS,REF,SSA,USA/
+   i World regions /CAZ,CHA,EUR,IND,JPN,LAM,MEA,NEU,OAS,REF,SSA,USA/
 
-   iso list of iso countries /
+   iso Countries /
        ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
        ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
        BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
@@ -45,7 +45,7 @@ sets
        UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
        VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 
-   j number of LPJ cells /
+   j Spatial clusters /
        CAZ_1*CAZ_28,
        CHA_29*CHA_52,
        EUR_53*EUR_62,
@@ -59,7 +59,7 @@ sets
        SSA_180*SSA_190,
        USA_191*USA_200/
 
-   cell(i,j) number of LPJ cells per region i
+   cell(i,j) Mapping between regions i and clusters j
       /
        CAZ . CAZ_1*CAZ_28
        CHA . CHA_29*CHA_52
@@ -75,7 +75,7 @@ sets
        USA . USA_191*USA_200
       /
 
-   i_to_iso(i,iso) mapping regions to iso countries
+   i_to_iso(i,iso) Mapping between regions and countries
       /
        CAZ . (AUS,CAN,HMD,NZL,SPM)
        CHA . (CHN,HKG,MAC,TWN)

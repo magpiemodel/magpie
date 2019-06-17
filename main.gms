@@ -93,7 +93,7 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
 * Used data set: magpie4.1_default_apr19.tgz
-* md5sum: 5c38bb1083bd66010c2104c9d40553f4
+* md5sum: ea3959be0d5a45cf50cfc232571dc9bd
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
@@ -127,7 +127,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Thu Jun 13 17:10:08 2019
+* Last modification (input data): Sat Apr 27 13:45:25 2019
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
