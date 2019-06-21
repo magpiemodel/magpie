@@ -1,7 +1,8 @@
-# |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-# |  authors, and contributors see AUTHORS file
-# |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-# |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  authors, and contributors see CITATION.cff file. This file is part
+# |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+# |  AGPL-3.0, you are granted additional permissions described in the
+# |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
 
@@ -21,8 +22,8 @@ for(i in (1:4)){
   if(i==3) cfg$gms$disagg_lvst <- "foragebased_sep18"
   if(i==3) cfg$recalibrate <- FALSE
   cfg <- setScenario(cfg,c("SSP2","NPI"))
-  cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
-  cfg$gms$c60_2ndgen_biodem <- "SSP2-Ref-SPA0"
+  cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-Ref-REMIND-MAGPIE"
+  cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-Ref-REMIND-MAGPIE"
   start_run(cfg=cfg,codeCheck=FALSE)
   cfg$recalibrate <- TRUE
 }

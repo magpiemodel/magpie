@@ -3,14 +3,13 @@
 language: R
 repos:
   CRAN: https://cloud.r-project.org
-  PIK:  https://rse.pik-potsdam.de/r/packages/
 cache: packages
 latex: false
 pandoc: false
 sudo: false
-r_packages: lucode
 install:
-  - echo "This echo is required as travis would otherwise complain a non-existing DESCRIPTION file (it just requires some entry under "install")!"
+  - Rscript -e "if(!requireNamespace('devtools')) install.packages('devtools')"
+  - Rscript -e "if(!requireNamespace('lucode')) devtools::install_github('pik-piam/lucode')"
 script:
   - Rscript -e "null <- lucode::codeCheck(strict=TRUE)"
 

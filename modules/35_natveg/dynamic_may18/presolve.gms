@@ -1,7 +1,8 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
 * Regrowth of natural vegetation (natural succession) is modelled by shifting age-classes according to time step length.
@@ -58,8 +59,12 @@ $ifthen "%c35_protect_scenario%" == "none"
   p35_save_other(t,j) = 0;
 $elseif "%c35_protect_scenario%" == "full"
   p35_save_primforest(t,j) = vm_land.l(j,"primforest");
-  p35_save_secdforest(t,j) = vm_land.l(j,"secdforest");
-  p35_save_other(t,j) = vm_land.l(j,"other");
+  p35_save_secdforest(t,j) = pc35_secdforest(j,"old");
+  p35_save_other(t,j) = pc35_other(j,"old");
+$elseif "%c35_protect_scenario%" == "forest"
+  p35_save_primforest(t,j) = vm_land.l(j,"primforest");
+  p35_save_secdforest(t,j) = pc35_secdforest(j,"old");
+  p35_save_other(t,j) = 0;
 $elseif "%c35_protect_scenario%" == "WDPA"
   p35_save_primforest(t,j) = p35_protect_shr(t,j,"WDPA")*pm_land_start(j,"primforest");
   p35_save_secdforest(t,j) = p35_protect_shr(t,j,"WDPA")*pm_land_start(j,"secdforest");

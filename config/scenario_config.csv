@@ -10,9 +10,10 @@ c35_ad_policy;;;;;;;;none;npi;ndc;;;;;;;;
 c35_aolc_policy;;;;;;;;none;npi;ndc;;;;;;;;
 c42_env_flow_policy;;;on;off;off;mixed;on;;;;;;;on;off;off;mixed;on
 c50_scen_neff;;;neff65_70_starty2010;neff60_60_starty2010;neff55_60_starty2010;neff65_70_starty2010;neff55_60_starty2010;;;;;;;neff65_70_starty2010;neff60_60_starty2010;neff55_60_starty2010;neff65_70_starty2010;neff55_60_starty2010
-c56_pollutant_prices;;;;;;;;SSP2-Ref-SPA0-V15-REMIND-MAGPIE;;;coupling;emulator;coupling;SSP1-20-SPA1-V15-IMAGE;SSP2-26-SPA2-V15-MESSAGE-GLOBIOM;SSP3-60-SPA3-V15-AIM-CGE;SSP4-45-SPA4-V15-GCAM4;SSP5-45-SPA5-V15-REMIND-MAGPIE
+c55_scen_conf;;;ssp1;ssp2;ssp3;ssp4;ssp5;;;;;;;ssp1;ssp2;ssp3;ssp4;ssp5
+c56_pollutant_prices;;;;;;;;;;;coupling;emulator;coupling;SSPDB-SSP1-20-IMAGE;SSPDB-SSP2-26-MESSAGE-GLOBIOM;SSPDB-SSP3-60-AIM-CGE;SSPDB-SSP4-45-GCAM4;SSPDB-SSP5-45-REMIND-MAGPIE
 maccs;;;;;;;;;;;;;;on_sep16;on_sep16;on_sep16;on_sep16;on_sep16
-c60_2ndgen_biodem;;;;;;;;SSP2-Ref-SPA0;;;coupling;emulator;coupling;SSP1-20-SPA1;SSP2-26-SPA2;SSP2-60-SPA2;SSP2-45-SPA2;SSP5-45-SPA5
+c60_2ndgen_biodem;;;;;;;;;;;coupling;emulator;coupling;SSPDB-SSP1-20-IMAGE;SSPDB-SSP2-26-MESSAGE-GLOBIOM;SSPDB-SSP3-60-AIM-CGE;SSPDB-SSP4-45-GCAM4;SSPDB-SSP5-45-REMIND-MAGPIE
 c60_1stgen_biodem;;;phaseout2020;const2020;const2030;const2020;phaseout2020;;;;;;;phaseout2020;const2020;const2030;const2020;phaseout2020
 c60_biodem_level;;;;;;;;;;;1;0;;;;;;
 c60_res_2ndgenBE_dem;;;ssp1;ssp2;ssp3;ssp4;ssp5;;;;;;;ssp1;ssp2;ssp3;ssp4;ssp5
