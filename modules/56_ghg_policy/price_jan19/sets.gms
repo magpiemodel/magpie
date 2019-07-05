@@ -73,7 +73,7 @@ sets
    	SSPDB-SSP5-Ref-REMIND-MAGPIE/
 
   scen56 emission policy scenarios
-  / none, all, ssp, soiloff /
+  / none, all, ssp, ssp_nosoil, all_nosoil /
 
    emis_cell_one56(emis_source_cell) cellular oneoff emission sources
    /crop_vegc, crop_litc, crop_soilc, past_vegc, past_litc, past_soilc, forestry_vegc,
