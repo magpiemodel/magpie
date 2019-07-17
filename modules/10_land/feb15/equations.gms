@@ -18,22 +18,6 @@
  q10_landreduction(j2,land) ..
         v10_landreduction(j2,land) =g= pcm_land(j2,land)-vm_land(j2,land);
 
- q10_croplandreduction(j2,land) ..
-        sum(land, vm_croplandreduction(j2,land)) =e=
-            v10_landreduction(j2,"crop");
-
- q10_croplandreduction2(j2,land) ..
-        vm_croplandreduction(j2,land)) =l=
-                vm_landexpansion(j2,land);
-
- q10_croplandexpansion(j2,land) ..
-        sum(land, vm_croplandexpansion(j2,land)) =e=
-            vm_landexpansion(j2,"crop");
-
- q10_croplandexpansion2(j2,land) ..
-        vm_croplandexpansion(j2,land)) =l=
-                v10_landreduction(j2,land);
-
 *' The gross changes in land are calculated based on land expansion, land
 *' contraction and land changes from within the modules [35_natveg]
 *' and [32_forestry]:
