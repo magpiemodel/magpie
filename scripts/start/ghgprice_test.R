@@ -52,83 +52,86 @@ cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg1300"
 cfg$input <- buildInputVector()
 #nocc
 
-# none
-cfg$gms$c56_emis_policy      <- "none"
+## none
+#cfg$gms$c56_emis_policy      <- "none"
 
-cfg$gms$land <- "dec18" 
-cfg$gms$som  <- "static_jan19"
-cfg$title    <- "staticsom_none"
-start_run(cfg=cfg,codeCheck=TRUE)
+#cfg$gms$land <- "dec18" 
+#cfg$gms$som  <- "static_jan19"
+#cfg$title    <- "staticsom_none"
+#start_run(cfg=cfg,codeCheck=TRUE)
 
-cfg$gms$land <- "dec18" 
-cfg$gms$som  <- "cellpool_aug16"
-cfg$title    <- "dynamicsom_none"
-start_run(cfg=cfg,codeCheck=TRUE)
+#cfg$gms$land <- "dec18" 
+#cfg$gms$som  <- "cellpool_aug16"
+#cfg$title    <- "dynamicsom_none"
+#start_run(cfg=cfg,codeCheck=TRUE)
 
 # ssp
 cfg$gms$c56_emis_policy      <- "ssp"
-
-cfg$gms$land <- "dec18" 
-cfg$gms$som  <- "static_jan19"
-cfg$title    <- "staticsom_ssp"
-start_run(cfg=cfg,codeCheck=TRUE)
-
-cfg$gms$land <- "dec18" 
-cfg$gms$som  <- "cellpool_aug16"
-cfg$title    <- "dynamicsom_ssp"
-start_run(cfg=cfg,codeCheck=TRUE)
-
-# ssp_nosoil
-cfg$gms$c56_emis_policy      <- "ssp_nosoil"
-
-cfg$gms$land <- "dec18" 
-cfg$gms$som  <- "static_jan19"
-cfg$title    <- "staticsom_ssp_nosoil"
-start_run(cfg=cfg,codeCheck=TRUE)
-
-cfg$gms$land <- "dec18" 
-cfg$gms$som  <- "cellpool_aug16"
-cfg$title    <- "dynamicsom_ssp_nosoil"
-start_run(cfg=cfg,codeCheck=TRUE)
-
-# all_nosoil
-cfg$gms$c56_emis_policy      <- "all_nosoil"
-
-cfg$gms$land <- "dec18" 
-cfg$gms$som  <- "static_jan19"
-cfg$title    <- "staticsom_all_nosoil"
-start_run(cfg=cfg,codeCheck=TRUE)
-
-cfg$gms$land <- "dec18" 
-cfg$gms$som  <- "cellpool_aug16"
-cfg$title    <- "dynamicsom_all_nosoil"
-start_run(cfg=cfg,codeCheck=TRUE)
-
-# all
-cfg$gms$c56_emis_policy      <- "all"
-
-cfg$gms$land <- "dec18" 
-cfg$gms$som  <- "static_jan19"
-cfg$title    <- "staticsom_all"
-start_run(cfg=cfg,codeCheck=TRUE)
-
-cfg$gms$land <- "dec18" 
-cfg$gms$som  <- "cellpool_aug16"
-cfg$title    <- "dynamicsom_all"
-start_run(cfg=cfg,codeCheck=TRUE)
-
-# all_mINF
-cfg$gms$c56_emis_policy      <- "all"
 cfg$gms$s56_reward_neg_emis  <- -Inf
 
 cfg$gms$land <- "dec18" 
 cfg$gms$som  <- "static_jan19"
-cfg$title    <- "staticsom_all_mINF"
+cfg$title    <- "staticsom_ssp_mINF"
 start_run(cfg=cfg,codeCheck=TRUE)
 
 cfg$gms$land <- "dec18" 
 cfg$gms$som  <- "cellpool_aug16"
-cfg$title    <- "dynamicsom_all_mINF"
+cfg$title    <- "dynamicsom_ssp_mINF"
 start_run(cfg=cfg,codeCheck=TRUE)
+
+# ssp_nosoil
+cfg$gms$c56_emis_policy      <- "ssp_nosoil"
+cfg$gms$s56_reward_neg_emis  <- -Inf
+
+cfg$gms$land <- "dec18" 
+cfg$gms$som  <- "static_jan19"
+cfg$title    <- "staticsom_ssp_nosoil_mINF"
+start_run(cfg=cfg,codeCheck=TRUE)
+
+cfg$gms$land <- "dec18" 
+cfg$gms$som  <- "cellpool_aug16"
+cfg$title    <- "dynamicsom_ssp_nosoil_mINF"
+start_run(cfg=cfg,codeCheck=TRUE)
+
+# all_nosoil
+cfg$gms$c56_emis_policy      <- "all_nosoil"
+cfg$gms$s56_reward_neg_emis  <- -Inf
+
+cfg$gms$land <- "dec18" 
+cfg$gms$som  <- "static_jan19"
+cfg$title    <- "staticsom_all_nosoil_mINF"
+start_run(cfg=cfg,codeCheck=TRUE)
+
+cfg$gms$land <- "dec18" 
+cfg$gms$som  <- "cellpool_aug16"
+cfg$title    <- "dynamicsom_all_nosoil_mINF"
+start_run(cfg=cfg,codeCheck=TRUE)
+
+## all
+#cfg$gms$c56_emis_policy      <- "all"
+
+#cfg$gms$land <- "dec18" 
+#cfg$gms$som  <- "static_jan19"
+#cfg$title    <- "staticsom_all"
+#start_run(cfg=cfg,codeCheck=TRUE)
+
+#cfg$gms$land <- "dec18" 
+#cfg$gms$som  <- "cellpool_aug16"
+#cfg$title    <- "dynamicsom_all"
+#start_run(cfg=cfg,codeCheck=TRUE)
+
+## all_mINF
+#cfg$gms$c56_emis_policy      <- "all"
+#cfg$gms$s56_reward_neg_emis  <- -Inf
+
+#cfg$gms$land <- "dec18" 
+#cfg$gms$som  <- "static_jan19"
+#cfg$title    <- "staticsom_all_mINF"
+#start_run(cfg=cfg,codeCheck=TRUE)
+
+#cfg$gms$land <- "dec18" 
+#cfg$gms$som  <- "cellpool_aug16"
+#cfg$title    <- "dynamicsom_all_mINF"
+#start_run(cfg=cfg,codeCheck=TRUE)
 
 

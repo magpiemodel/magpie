@@ -92,6 +92,22 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
+* Used data set: magpie4.1_default_apr19.tgz
+* md5sum: 5c38bb1083bd66010c2104c9d40553f4
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* 
+* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* md5sum: ec49cd93dcd6ae9bcb264629e4e3d1f2
+* Repository: /p/projects/landuse/data/input/archive
+* 
+* Used data set: rev4.19_690d3718e151be1b450b394c1064b1c5_validation.tgz
+* md5sum: 4606c7cd8d643fec4338f172cf4a6444
+* Repository: /p/projects/rd3mod/inputdata/output
+* 
+* Used data set: additional_data_rev3.68.tgz
+* md5sum: 15d1135625a9f5cfb9c7c6038716a156
+* Repository: /p/projects/landuse/data/input/archive
+* 
 * Low resolution: c200
 * High resolution: 0.5
 * 
@@ -108,14 +124,14 @@ $title magpie
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
 * * Additional input folder: /p/projects/landuse/data/input/other/rev38
-* * Revision: 38.1
+* * Revision: 38
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
 * 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
-* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38.1_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38.1_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
@@ -123,7 +139,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Mon May  6 15:18:22 2019
+* Last modification (input data): Thu Jul 11 14:27:47 2019
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
