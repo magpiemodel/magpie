@@ -10,7 +10,7 @@
 
 vm_land.fx(j,"past") = pcm_land(j,"past");
 
-*' Correspondingly, also the carbon stocks related to pasture areas are fixed.
+*' Correspondingly, also the above ground carbon stocks related to pasture areas are fixed.
 
 vm_carbon_stock.fx(j,"past",ag_pools) =
           pcm_land(j,"past")*fm_carbon_density(t,j,"past",ag_pools);

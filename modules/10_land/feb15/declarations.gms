@@ -7,20 +7,20 @@
 
 
 parameters
- pm_land_start(j,land)         Land initialization area (mio. ha)
- pcm_land(j,land)              Land area in previous time step (mio. ha)
+ pm_land_start(j,land)            Land initialization area (mio. ha)
+ pcm_land(j,land)                 Land area in previous time step (mio. ha)
 ;
 
 variables
- vm_landdiff    Aggregated difference in land between current and previous time step (mio. ha)
+ vm_landdiff                      Aggregated difference in land between current and previous time step (mio. ha)
 ;
 
 positive variables
  vm_land(j,land)                  Land area of the different land types (mio. ha)
  vm_landexpansion(j,land)         Land expansion (mio. ha)
  v10_landreduction(j,land)        Land reduction (mio. ha)
- vm_croplandreduction(j,land)          dummy
- vm_croplandexpansion(j,land)          dummy
+ vm_croplandexpansion(j,land)     Sources of cropland expansion (mio. ha)
+ vm_croplandreduction(j,land)     Targets of cropland reduction (mio. ha)
  vm_cost_land_transition(j)		    Costs for lu transitions (mio. USD05MER per yr)
 ;
 

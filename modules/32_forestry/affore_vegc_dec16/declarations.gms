@@ -6,26 +6,26 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
- s32_shift                 Number of 5-year age-classes corresponding to current time step length (1)
+ s32_shift                               Number of 5-year age-classes corresponding to current time step length (1)
 ;
 
 parameters
- p32_carbon_density(t,j,land32,ag_pools) Carbon density for land32 and ag_pools (tC per ha)
- p32_land(t,j,ac,when)                  Forestry land for each cell wood type and age class before and after optimization (mio. ha)
- pc32_land(j,land32)                    Forestry land per forestry land type initialization of the optimization (mio. ha)
- p32_aff_pot(t,j)                       Potential afforestation area on cropland and pasture land (mio. ha)
- p32_aff_pol(t,j)			            Exogenous afforestation target as stock (mio. ha)
- p32_aff_pol_timestep(t,j)			    Exogenous afforestation target as flow per time step (mio. ha per timestep)
- p32_aff_togo(t)              			Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
+ p32_carbon_density(t,j,land32,ag_pools) Above ground carbon density for land32 (tC per ha)
+ p32_land(t,j,ac,when)                   Forestry land for each cell wood type and age class before and after optimization (mio. ha)
+ pc32_land(j,land32)                     Forestry land per forestry land type initialization of the optimization (mio. ha)
+ p32_aff_pot(t,j)                        Potential afforestation area on cropland and pasture land (mio. ha)
+ p32_aff_pol(t,j)			                   Exogenous afforestation target as stock (mio. ha)
+ p32_aff_pol_timestep(t,j)			         Exogenous afforestation target as flow per time step (mio. ha per timestep)
+ p32_aff_togo(t)              		       Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
 ;
 
 positive variables
- vm_cost_fore(i)                        Afforestation costs (mio. USD04MER per yr)
- v32_land(j,land32)                     Forestry land pools (mio. ha)
- vm_landdiff_forestry                   Aggregated difference in forestry land compared to previous timestep (mio. ha)
- v32_land_expansion(j,land32) 			Forestry land expansion compared to previous timestep (mio. ha)
- v32_land_reduction(j,land32) 			Forestry land reduction compared to previous timestep (mio. ha)
- vm_cdr_aff(j) 							Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon CO2-C (mio. tC)
+ vm_cost_fore(i)                         Afforestation costs (mio. USD04MER per yr)
+ v32_land(j,land32)                      Forestry land pools (mio. ha)
+ vm_landdiff_forestry                    Aggregated difference in forestry land compared to previous timestep (mio. ha)
+ v32_land_expansion(j,land32) 			     Forestry land expansion compared to previous timestep (mio. ha)
+ v32_land_reduction(j,land32) 			     Forestry land reduction compared to previous timestep (mio. ha)
+ vm_cdr_aff(j) 							             Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon CO2-C (mio. tC)
 ;
 
 equations

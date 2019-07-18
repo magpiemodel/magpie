@@ -63,7 +63,7 @@ v32_land.fx(j,"prot") = pc32_land(j,"prot");
 v32_land.fx(j,"grow") = pc32_land(j,"grow");
 v32_land.fx(j,"old") = pc32_land(j,"old");
 
-* Aggregate carbon density from `ac` to `land32` for the optimization
+* Aggregate above ground carbon density from `ac` to `land32` for the optimization
 p32_carbon_density(t,j,"new",ag_pools) = pm_carbon_density_ac(t,j,"ac0",ag_pools);
 p32_carbon_density(t,j,"new_ndc",ag_pools) = pm_carbon_density_ac(t,j,"ac0",ag_pools);
 p32_carbon_density(t,j,"prot",ag_pools) = m_weightedmean(pm_carbon_density_ac(t,j,ac,ag_pools),p32_land(t,j,ac,"before"),(ac_land32(ac,"prot")));

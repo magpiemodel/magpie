@@ -52,7 +52,7 @@ sum(ct, pm_carbon_density_ac(ct,j2,ac-1,"vegc"))));
                 =l= s32_max_aff_area - sum(ct, p32_aff_togo(ct));
 
 *****Carbon stocks**************************************************************
-*' Forestry carbon stocks are calculated as the product of forestry land (`v32_land`) and the area
+*' Forestry above ground carbon stocks are calculated as the product of forestry land (`v32_land`) and the area
 *' weighted mean of carbon density for carbon pools (`p32_carbon_density`).
 
  q32_carbon(j2,ag_pools)  .. vm_carbon_stock(j2,"forestry",ag_pools) =e=

@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-* starting value of carbon stocks 1995 is only an estimate.
+* starting value of above ground carbon stocks 1995 is only an estimate.
 * ATTENTION: emissions in 1995 are not meaningful
 vm_carbon_stock.l(j,land,ag_pools) = fm_carbon_density("y1995",j,land,ag_pools)*pcm_land(j,land);
 pcm_carbon_stock(j,land,ag_pools) = vm_carbon_stock.l(j,land,ag_pools);

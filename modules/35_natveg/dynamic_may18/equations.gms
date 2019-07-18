@@ -17,7 +17,7 @@
 *' Carbon stocks decline if the area decreases
 *' (e.g. due to cropland expansion into forests).
 *' In case of abandoned agricultural land (increase of other natural land),
-*' natural succession, represented by age-class growth, results in increasing carbon stocks.
+*' natural succession, represented by age-class growth, results in increasing above ground carbon stocks.
 
  q35_carbon_primforest(j2,ag_pools) .. vm_carbon_stock(j2,"primforest",ag_pools) =e=
            vm_land(j2,"primforest")

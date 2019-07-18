@@ -15,6 +15,6 @@
 *' @authors Jan Philipp Dietrich
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%land%" == "dec18" $include "./modules/10_land/dec18/realization.gms"
+$Ifi "%land%" == "landmatrix_dec18" $include "./modules/10_land/landmatrix_dec18/realization.gms"
 $Ifi "%land%" == "feb15" $include "./modules/10_land/feb15/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
