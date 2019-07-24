@@ -7,12 +7,17 @@
 
 *' @description
 *' The cellpool_aug16 realization is built on the IPCC 2006 Guidelines for
-*' National Greenhouse Gas Inventories (@ipcc_2006_2006.). It calculates based 
-*' on the idea of stock change factors regarding the potential natural vegetation
-*' the loss of soil carbon due to cropping activities and management.
-*' This approach also accounts for the temporal dimension of soil organic carbon change, 
-*' since it assumes a gradual step of 15% in the direction of the new equilibrium soil 
-*' organic carbon pool each year.   
+*' National Greenhouse Gas Inventories (@ipcc_2006_2006.). It calculates the loss of
+*' soil carbon due to cropping activities and management based on stock change factors,
+*' compared to potential natural vegetation.
+*' This approach also accounts for the temporal dimension of soil organic carbon change,
+*' since it assumes a gradual step of 15% in the direction of the new equilibrium soil
+*' organic carbon pool each year. Stock change factors tracks crop types as well as
+*' management (e.g. irrigation) and input differences on cropland. 
+
+*' @limitations It is assumed that pastures and rangelandes as well as managed forests
+*' do not change in soil carbon compared to the natural reference state.
+
 
 *' @authors Benjamin Leon Bodirsky, Kristine Karstens
 

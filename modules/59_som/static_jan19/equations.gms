@@ -12,8 +12,6 @@
  vm_carbon_stock(j2,"crop","soilc") =e=
       vm_land(j2,"crop") * sum(ct, i59_topsoilc_density(ct,j2) + i59_subsoilc_density(ct,j2));
 
-*' Hereby we assume that cropland activities will just change the topsoil (here 30 cm) carbon density.
-
 *' The soil carbon content for all other land use types is calculated based on the full profile soil carbon density:
  q59_soilcarbon_noncropland(j2,noncropland59) ..
  vm_carbon_stock(j2,noncropland59,"soilc") =e=

@@ -16,16 +16,15 @@ parameters
 ;
 
 equations
-         q59_som_target_cropland(j)         Estimates the long-term target state of cropland (mio. tC)
+         q59_som_target_cropland(j)                       Estimates the long-term target state of cropland (mio. tC)
          q59_som_target_noncropland(j,noncropland59)      Estimates the long-term target state of noncropland (mio. tC)
          q59_som_transfer_to_cropland(j,noncropland59)    Estimates the transfer of carbon pools due to land conversion (mio. tC)
-         q59_som_pool_cropland(j)           Actual C pool in croplands (mio. tC)
+         q59_som_pool_cropland(j)                         Actual C pool in croplands (mio. tC)
          q59_som_pool_noncropland(j,noncropland59)        Actual C pool in non-croplands (mio. tC)
-         q59_nr_som(j)                      Soil organic matter loss (Mt N per yr)
-         q59_nr_som_fertilizer(j)           Bound of nitrogen fertilizer of soil organic matter loss (Mt N per yr)
-         q59_nr_som_fertilizer2(j)          Fraction of soil organic matter loss take is taken up by plants (Mt N per yr)
-         q59_carbon_soil_cropland(j)        Cropland soil carbon content calculation (mio. tC)
-         q59_carbon_soil_noncropland(j,noncropland59)  Non-cropland soil carbon content calculation (mio. tC)
+         q59_nr_som(j)                                    Soil organic matter loss (Mt N per yr)
+         q59_nr_som_fertilizer(j)                         Bound of nitrogen fertilizer of soil organic matter loss (Mt N per yr)
+         q59_nr_som_fertilizer2(j)                        Fraction of soil organic matter loss take is taken up by plants (Mt N per yr)
+         q59_carbon_soil(j,pools59)                       Soil carbon content calculation (mio. tC)
 ;
 
 positive variables
@@ -35,8 +34,8 @@ positive variables
 
 variables
          v59_som_transfer_to_cropland(j, noncropland59)     Transfer of SOM from other land to cropland (mio. tC)
-         vm_nr_som(j)                        Release of soil organic matter (Mt N per yr)
-         vm_nr_som_fertilizer(j)             Uptake of soil organic matter from plants (Mt N per yr)
+         vm_nr_som(j)                                       Release of soil organic matter (Mt N per yr)
+         vm_nr_som_fertilizer(j)                            Uptake of soil organic matter from plants (Mt N per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

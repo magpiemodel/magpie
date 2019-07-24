@@ -6,17 +6,21 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description The static_jan19 realization is built on the IPCC 2006 Guidelines for
-*' National Greenhouse Gas Inventories (@ipcc_2006_2006.). It calculates based
-*' on the idea of stock change factors regarding the potential natural vegetation
-*' the loss of soil carbon due to cropping activities and management.
-*' This approach does not accounts for the temporal dimension of soil organic carbon change,
+*' National Greenhouse Gas Inventories (@ipcc_2006_2006.). It calculates the loss of
+*' soil carbon due to cropping activities based on stock change factors, compared to
+*' potential natural vegetation.
+*' This approach does not account for the temporal dimension of soil organic carbon change,
 *' since it assumes a complete loss of carbon directly after land conversion to cropland.
-*' Only one stock change factors for all crop types is used, 
-*' neglecting e.g. differences for annual and perenial crops.
+*' Therefore, no release of nitrogen due to soil organic matter loss is calculated.
+*' Moreover only one stock change factor for all crop types is used, neglecting
+*' e.g. differences for annual and perennial crops.
 
-*' @limitations The soil carbon dynamics are instantaneously and do not account
-*' for any time dependent release of soil carbon. The soil carbon pools on cropland
-*' are also not crop type specific. The release of nitrogen due to soil organic matter loss is not calculated.
+*' @limitations The soil carbon dynamics are instantaneous and do not account
+*' for any time dependent release of soil carbon.
+*' The soil carbon pools on cropland are not crop type specific.
+*' The release of nitrogen due to soil organic matter loss is not calculated.
+*' It is assumed that pastures and rangelands as well as managed forests
+*' do not change in soil carbon compared to the natural reference state.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/59_som/static_jan19/sets.gms"

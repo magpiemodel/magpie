@@ -5,9 +5,9 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @limitations Do not track sources and targets of land transitions.
+*' @limitations This realization does not track sources and targets of land transitions.
 *' Interface variables like vm_croplandexpansion and vm_croplandreduction
-*' are therefore not meaningful. 
+*' are therefore not meaningful.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/10_land/feb15/sets.gms"

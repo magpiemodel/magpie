@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description The landmatrix_dec18 realization tracks land use transitions by
-*' directly counting sources and targets of conversions.   
+*' directly counting sources and targets of conversions.
 
 *' @limitations There are currently no known limitations of this realization.
 
