@@ -53,7 +53,6 @@ parameters
  oq59_nr_som(t,j,type)                                 Soil organic matter loss (Mt N per yr)
  oq59_nr_som_fertilizer(t,j,type)                      Bound of nitrogen fertilizer of soil organic matter loss (Mt N per yr)
  oq59_nr_som_fertilizer2(t,j,type)                     Fraction of soil organic matter loss take is taken up by plants (Mt N per yr)
- oq59_carbon_soil_cropland(t,j,type)                   Cropland soil carbon content calculation (mio. tC)
- oq59_carbon_soil_noncropland(t,j,noncropland59,type)  Non-cropland soil carbon content calculation (mio. tC)
+ oq59_carbon_soil(t,j,pools59,type)                    Soil carbon content calculation (mio. tC)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

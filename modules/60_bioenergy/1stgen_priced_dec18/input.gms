@@ -10,7 +10,7 @@ scalars
   c60_biodem_level  bioenergy demand level indicator 1 for regional and 0 for global demand   (1)   / 1 /
 ;
 
-$setglobal c60_2ndgen_biodem  R2M41-SSP2-Budg1300
+$setglobal c60_2ndgen_biodem  R2M41-SSP2-NPi
 
 $if "%c60_2ndgen_biodem%" == "coupling" table f60_bioenergy_dem_coupling(t_all,i) Bioenergy demand (regional) (mio. GJ per yr)
 $if "%c60_2ndgen_biodem%" == "coupling" $ondelim

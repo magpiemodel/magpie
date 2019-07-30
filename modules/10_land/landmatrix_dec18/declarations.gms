@@ -43,8 +43,8 @@ parameters
  ov_land(t,j,land,type)                              Land area of the different land types (mio. ha)
  ov_landexpansion(t,j,land,type)                     Land expansion (mio. ha)
  ov10_landreduction(t,j,land,type)                   Land reduction (mio. ha)
- ov_croplandexpansion(t,j,land,type)                 Source of cropland expansion (mio. ha)
- ov_croplandreduction(t,j,land,type)                 Fade of cropland reduction (mio. ha)
+ ov_croplandexpansion(t,j,land,type)                 Sources of cropland expansion (mio. ha)
+ ov_croplandreduction(t,j,land,type)                 Targets of cropland reduction (mio. ha)
  ov_cost_land_transition(t,j,type)                   Costs for lu transitions (mio. USD05MER per yr)
  ov10_lu_transitions(t,j,land_from10,land_to10,type) Land transitions between time steps (mio. ha)
  oq10_land(t,j,type)                                 Land conversion constraint (mio. ha)
@@ -53,8 +53,8 @@ parameters
  oq10_transition_from(t,j,land_from10,type)          Land transition constraint from (mio. ha)
  oq10_landexpansion(t,j,land_to10,type)              Land expansion constraint (mio. ha)
  oq10_landreduction(t,j,land_from10,type)            Land reduction constraint (mio. ha)
- oq10_croplandreduction(t,j,land_to10,type)          Cropland reduction
- oq10_croplandexpansion(t,j,land_from10,type)        Cropland expansion
+ oq10_croplandreduction(t,j,land_to10,type)          Cropland reduction constraint (mio. ha)
+ oq10_croplandexpansion(t,j,land_from10,type)        Cropland expansion constraint (mio. ha)
  oq10_cost(t,j,type)                                 Costs for lu transitions (mio. USD05MER per yr)
  oq10_landdiff(t,type)                               Land difference constraint (mio. ha)
 ;
