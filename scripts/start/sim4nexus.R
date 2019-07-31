@@ -96,7 +96,7 @@ cfg<-lucode::setScenario(cfg,"SSP2")
 cfg$input <- buildInputVector(climatescen_name="rcp2p6",regionmapping = "sim4nexus",calibration=calib)
 cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
-cfg$c50_scen_neff <- "neff65_70_starty2010"
+cfg$gms$c50_scen_neff <- "neff65_70_starty2010"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 
@@ -104,7 +104,7 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 cfg<-general_settings(title="SSP2_water")
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "sim4nexus",calibration=calib)
-cfg$c50_scen_neff <- "neff70_75_starty2010"
+cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 
@@ -112,8 +112,8 @@ cfg<-general_settings(title="SSP2_biodiversity")
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "sim4nexus",calibration=calib)
-cfg$c50_scen_neff <- "neff70_75_starty2010"
-cfg$c55_scen_conf <- "SSP1"
+cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
+cfg$gms$c55_scen_conf <- "SSP1"
 cfg$gms$c12_interest_rate <- "low"
 cfg$gms$c35_protect_scenario <- "BH"		
 start_run(cfg=cfg,codeCheck=codeCheck)
@@ -125,9 +125,9 @@ cfg$input <- buildInputVector(climatescen_name="rcp2p6",regionmapping = "sim4nex
 cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
 cfg$gms$c42_env_flow_policy <- "on"
-cfg$c50_scen_neff <- "neff75_80_starty2010"
+cfg$gms$c50_scen_neff <- "neff75_80_starty2010"
 cfg$gms$c12_interest_rate <- "low"
-cfg$c55_scen_conf <- "SSP1"
+cfg$gms$c55_scen_conf <- "SSP1"
 cfg$gms$c35_protect_scenario <- "BH"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
