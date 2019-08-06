@@ -84,37 +84,16 @@ available repositories via:
 options(repos = c(CRAN = "@CRAN@", pik = "https://rse.pik-potsdam.de/r/packages"))
 ```
 
-The `gdxrrw` package has to be downloaded directly from GAMS via
-```
-download.file("https://support.gams.com/_media/gdxrrw:gdxrrw_1.0.2.zip",
-              "gdxrrw_1.0.2.zip")
-install.packages(“reshape2”)
-install.packages("gdxrrw_1.0.2.zip",repos = NULL)
-```
-In some cases it can happen that `gdxrrw` does not return an error message during
-installation but also did not install properly. To verify a successful
-installation try to load the package via `library(gdxrrw)`.
-
---------------------------------------------------------------------------------
-
-If loading of the package fails you need to install the package from source.
-Under Windows this requires to install Rtools
+Under Windows you need to install Rtools
 (https://cran.r-project.org/bin/windows/Rtools/) and to add it to the PATH
 variable. After that you can run the following lines of code:
 
-```
-download.file("https://support.gams.com/_media/gdxrrw:gdxrrw_1.0.2.tar.gz",
-              "gdxrrw_1.0.2.tar.gz")
-install.packages("gdxrrw_1.0.2.tar.gz",repos = NULL, type="source")
-```
 
---------------------------------------------------------------------------------
-
-
-After that all remaining packages can be installed via `install.packages`
+After that all packages can be installed via `install.packages`
 
 ```
-pkgs <- c("ggplot2",
+pkgs <- c("gdxrrw",
+          "ggplot2",
           "curl",
           "gdx",
           "magclass",
