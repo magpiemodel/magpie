@@ -20,7 +20,7 @@
   vm_prod_reg(i2,kforestry) =e= sum(cell(i2,j2), vm_prod_forestry(j2,kforestry) + vm_prod_natveg(j2,kforestry));
 
  q21_ratio_forestry(i2)..
-  sum(cell(i2,j2), vm_prod_forestry(j2,"wood")) =g= vm_prod_reg(i2,"wood") * sum(ct,fm_production_ratio(i2,ct));
+  sum(cell(i2,j2), vm_prod_forestry(j2,"wood")) =e= vm_prod_reg(i2,"wood") * sum(ct,fm_production_ratio(i2,ct));
 
 $ontext
  q21_prod_timber(i2,kforestry) ..
