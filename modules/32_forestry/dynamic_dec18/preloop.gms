@@ -66,6 +66,7 @@ p32_forestry_management("MEA") = 50;
 *p32_forestry_management("SSA") = 2;
 *p32_forestry_management("CHA") = 7;
 *p32_forestry_management("MEA") = 200;
+p32_forestry_management(i) = p32_forestry_management(i) + 3;
 
 f32_fac_req_ha(i2,"recur") = 1000;
 f32_fac_req_ha(i2,"mon") = 500;
