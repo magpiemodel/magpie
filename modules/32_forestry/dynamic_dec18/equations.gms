@@ -57,29 +57,24 @@ $offtext
 q32_cost_establishment(i2)..
 						v32_cost_establishment(i2)
 						=e=
-            sum((cell(i2,j2),type32), v32_land(j2,type32,"ac0")) * c32_reESTBcost
+            (sum((cell(i2,j2),type32), v32_land(j2,type32,"ac0") * c32_reESTBcost)
+            +
+              (sum((ct,kforestry), vm_prod_future_reg_ff(i2,kforestry) * c32_harvesting_cost/((1+pm_interest(i2))**p32_rot_length(ct,i2)))
+              +
+              sum((cell(i2,j2),ct,kforestry), f32_distance(j2) * f32_transport_costs(kforestry)) * sum(kforestry,vm_prod_future_reg_ff(i2,kforestry))
+              +
+              sum(ct,vm_cost_trade_forestry_ff(i2)/((1+pm_interest(i2))**p32_rot_length(ct,i2)))
+              )
+            )
+            * (pm_interest(i2)/(1+pm_interest(i2)))
             +
             sum(cell(i2,j2),v32_missing_area_future(j2) * 100000)
-$ontext
-sum((cell(i2,j2),type32), v32_land(j2,type32,"ac0") * ( c32_reESTBcost + c32_recurring_cost / pm_interest(i2) ))
-+
-sum((ct,kforestry), vm_prod_future_reg_ff(i2,kforestry) * c32_harvesting_cost/((1+pm_interest(i2))**p32_rot_length(ct,i2)))
-+
-sum((cell(i2,j2),ct,kforestry), f32_distance(j2) * f32_transport_costs(kforestry)/((1+pm_interest(i2))**p32_rot_length(ct,i2)))
-*					 	* (pm_interest(i2)/(1+pm_interest(i2)))	* m_timestep_length
-* (pm_interest(i2)/(1+pm_interest(i2)))	* 5
-+
-sum(cell(i2,j2),v32_missing_area_future(j2) * 100000)
-+
-(vm_cost_trade_forestry_ff(i2) / pm_interest(i2))
-$offtext
 						;
 
 
 **Only protected areas incurring recurring/monitoring costs
 q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
-										0;
-*                   sum((cell(i2,j2),type32,fcosts32), v32_land(j2,type32,"ac0")+(v32_prod_external_future(j2)*99999) * f32_fac_req_ha(i2,fcosts32));
+                    sum((cell(i2,j2),type32,ac_sub), v32_land(j2,type32,ac_sub)$(sum(ct,protect32(ct,j2,ac_sub)))) * f32_fac_req_ha(i2,"recur");
 
 **harvesting costs
 q32_cost_harvest(i2)..
