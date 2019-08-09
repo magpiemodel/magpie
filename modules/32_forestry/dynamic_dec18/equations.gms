@@ -124,7 +124,7 @@ q32_production_timber(j2,kforestry)..
                           ;
 
 q32_prod_reg_forestry(i2)..
-  sum(cell(i2,j2), vm_prod_forestry(j2,"wood")) =g=  vm_prod_reg(i2,"wood")  - sum(cell(i2,j2),vm_prod_natveg(j2,"wood"));
+  sum(cell(i2,j2), vm_prod_forestry(j2,"wood")) =e=  vm_prod_reg(i2,"wood")  - sum(cell(i2,j2),vm_prod_natveg(j2,"wood"));
 
 
 ** Establishment in current time step already accounts for a certain percentage of production to be fulfilled by plantations in future.

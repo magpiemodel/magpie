@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "GLOBAL_PROD_RATIO"
+flag_run <- "STRICT_EQ_IN_PROD"
 
 library(lucode)
 source("scripts/start_functions.R")

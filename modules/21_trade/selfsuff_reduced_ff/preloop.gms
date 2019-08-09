@@ -7,7 +7,7 @@
 *f21_self_suff(t_all,"MEA","woodfuel") = 0.05;
 
 f21_self_suff(t_all,"MEA",kforestry) = 0.2;
-f21_self_suff(t_all,"JPN",kforestry) = 0.50;
+f21_self_suff(t_all,"JPN",kforestry) = 0.2;
 *f21_self_suff(t_all,"REF",kforestry) = 0.90;
 *f21_self_suff(t_all,i,"woodfuel") = f21_self_suff(t_all,i,"wood");
 
