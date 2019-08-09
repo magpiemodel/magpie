@@ -114,8 +114,8 @@ $ontext
    sum(cell(i2,j2), vm_prod_forestry(j2,"wood")) =g= vm_prod_reg(i2,"wood") * sum(ct,fm_production_ratio(i2,ct));
 $offtext
 
-q32_ratio_forestry(i2)..
-  sum(cell(i2,j2), vm_prod_forestry(j2,"wood")) =g= sum(ct, vm_prod_reg(i2,"wood") * fm_production_ratio(i2,ct));
+q32_ratio_forestry..
+  sum(j2, vm_prod_forestry(j2,"wood")) =e= sum((ct,i2), vm_prod_reg(i2,"wood") * fm_production_ratio(i2,ct));
 
 q32_production_timber(j2,kforestry)..
                           vm_prod_forestry(j2,kforestry)
