@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "WFselfsuff_WOOD_FORESTRY_PRODRATIO_GREATER" 
+flag_run <- "Secdf_remains_Secdf" 
 
 library(lucode)
 source("scripts/start_functions.R")

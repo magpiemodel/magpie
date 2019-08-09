@@ -25,7 +25,7 @@ $ontext
 $offtext
 
 q21_ratio_forestry(i2)..
- sum(cell(i2,j2), vm_prod_forestry(j2,"wood")) =g= sum(ct, vm_prod_reg(i2,"wood") * fm_production_ratio(i2,ct));
+ sum(cell(i2,j2), vm_prod_forestry(j2,"wood")) =l= sum(ct, vm_prod_reg(i2,"wood") * fm_production_ratio(i2,ct));
 
 *' For non-tradable commodites, the regional supply should be larger or equal to the regional demand.
  q21_notrade(i2,k_notrade)..
