@@ -9,6 +9,8 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
+flag_run <- "DEFAULT_PROD_RATIO"
+
 library(lucode)
 source("scripts/start_functions.R")
 source("config/default.cfg")
@@ -83,7 +85,8 @@ for(biodem in co2_price_scenarios){
   		if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
   			cfg$title<- paste0(t,"Harv","-",t_estb,"Estb","-",format(Sys.time(), format="%m%d"),"_",format(Sys.time(), format="%H%M"),"_CO2prices")
       		} else {
-      		cfg$title<- paste0(t,"Harv","-",t_estb,"Estb","-",format(Sys.time(), format="%m%d"),"_",format(Sys.time(), format="%H%M"))
+      		#cfg$title<- paste0(t,"Harv","-",t_estb,"Estb","-",format(Sys.time(), format="%m%d"),"_",format(Sys.time(), format="%H%M"))
+					cfg$title<- paste0(flag_run,"_",format(Sys.time(), format="%m%d"),"_",format(Sys.time(), format="%H%M"))
       		}
       	start_run(cfg=cfg,codeCheck=codeCheck)
   		}
