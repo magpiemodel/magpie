@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "SECDF_TO_OTHER_AFTER_HARVEST"
+flag_run <- "TIMBERFORESTRY=l=TIMBERNATVEG"
 
 library(lucode)
 source("scripts/start_functions.R")
