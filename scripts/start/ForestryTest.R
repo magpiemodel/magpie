@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "TIMBERFORESTRY=l=TIMBERNATVEG"
+flag_run <- "PROD_RATIO_NATVEG_GLOBAL_FREE"
 
 library(lucode)
 source("scripts/start_functions.R")

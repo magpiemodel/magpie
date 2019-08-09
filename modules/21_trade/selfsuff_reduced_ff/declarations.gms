@@ -54,7 +54,8 @@ equations
 * q21_prod_timber(i,kforestry)         xx
  q21_trade_glo_timber(kforestry)        xx
  q21_prod_reg_forestry(i,kforestry)     xx
- q21_ratio_forestry(i)                  xx
+* q21_ratio_forestry(i)                  xx
+ q21_ratio_forestry                       xx
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -84,6 +85,6 @@ parameters
  oq21_cost_trade_ff(t,i,type)               Future forestry total trade costs (mio. USD)
  oq21_trade_glo_timber(t,kforestry,type)    xx
  oq21_prod_reg_forestry(t,i,kforestry,type) xx
- oq21_ratio_forestry(t,i,type)              xx
+ oq21_ratio_forestry(t,type)                xx
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
