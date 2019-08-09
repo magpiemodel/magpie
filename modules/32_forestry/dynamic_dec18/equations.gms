@@ -115,7 +115,7 @@ $ontext
 $offtext
 
 q32_ratio_forestry(i2)..
-  sum(cell(i2,j2), vm_prod_forestry(j2,"wood")) =e= sum(ct, vm_prod_reg(i2,"wood") * fm_production_ratio(i2,ct));
+  sum(cell(i2,j2), vm_prod_forestry(j2,"wood")) =g= sum(ct, vm_prod_reg(i2,"wood") * fm_production_ratio(i2,ct));
 
 q32_production_timber(j2,kforestry)..
                           vm_prod_forestry(j2,kforestry)
@@ -124,7 +124,7 @@ q32_production_timber(j2,kforestry)..
                           ;
 
 q32_prod_reg_forestry(i2)..
-  sum(cell(i2,j2), vm_prod_forestry(j2,"wood")) =e=  vm_prod_reg(i2,"wood")  - sum(cell(i2,j2),vm_prod_natveg(j2,"wood"));
+  sum(cell(i2,j2), vm_prod_forestry(j2,"wood")) =g=  vm_prod_reg(i2,"wood")  - sum(cell(i2,j2),vm_prod_natveg(j2,"wood"));
 
 
 ** Establishment in current time step already accounts for a certain percentage of production to be fulfilled by plantations in future.
@@ -135,12 +135,11 @@ q32_prod_future(i2) ..          sum(cell(i2,j2), v32_land(j2,"plant","ac0"))
                                 sum((cell(i2,j2),kforestry,ac_sub),v32_hvarea_forestry(j2,kforestry,ac_sub))
                                 ;
 $offtext
-q32_prod_future(i2) ..          sum(kforestry, vm_prod_future_reg_ff(i2,kforestry)) * pcm_production_ratio_future(i2)
-                                =e=
-                                sum((cell(i2,j2),ct), (v32_land(j2,"plant","ac0") + v32_missing_area_future(j2)) * pc32_yield_forestry_future(ct,j2));
-*    							+
-*    							sum(cell(i2,j2), v32_avail_reuse(j2) * pc32_yield_forestry_mature_future(j2)) * 0.80
-
+q32_prod_future(i2) ..
+              sum((cell(i2,j2),ct), (v32_land(j2,"plant","ac0") + v32_missing_area_future(j2)) * pc32_yield_forestry_future(ct,j2))
+              =e=
+              sum(kforestry, vm_prod_future_reg_ff(i2,kforestry)) * pcm_production_ratio_future(i2)
+              ;
 
 q32_avail_reuse(j2) ..      v32_avail_reuse(j2)	=e=	0;
 
