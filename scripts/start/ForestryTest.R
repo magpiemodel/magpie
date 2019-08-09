@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "WOODFUELselfsuff_WOOD" 
+flag_run <- "WFselfsuff_WOOD_FORESTRY_PRODRATIO_EQUALITY" 
 
 library(lucode)
 source("scripts/start_functions.R")
