@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "Secdf_remains_Secdf" 
+flag_run <- "GlobalOpt_PRORATIO_FORESTRY" 
 
 library(lucode)
 source("scripts/start_functions.R")
