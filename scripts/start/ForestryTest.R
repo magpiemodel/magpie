@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "Higher_ROOTtoSHOOT_NATVEG"
+flag_run <- "GLOBAL_PROD_RATIO"
 
 library(lucode)
 source("scripts/start_functions.R")
