@@ -64,9 +64,11 @@ q32_cost_establishment(i2)..
               sum((cell(i2,j2),ct,kforestry), f32_distance(j2) * f32_transport_costs(kforestry)) * sum(kforestry,vm_prod_future_reg_ff(i2,kforestry))
               +
               sum(ct,vm_cost_trade_forestry_ff(i2)/((1+pm_interest(i2))**p32_rot_length(ct,i2)))
+*************************** ((1+pm_interest(i2))**p32_rot_length(ct,i2)) to calculate present value of future costs
               )
             )
             * (pm_interest(i2)/(1+pm_interest(i2)))
+*************************** (pm_interest(i2)/(1+pm_interest(i2))) to annuituze the values. Similar to averaging over time
             +
             sum(cell(i2,j2),v32_missing_area_future(j2) * 100000)
 						;
@@ -116,12 +118,18 @@ q32_production_timber(j2,kforestry)..
 
 ** Establishment in current time step already accounts for a certain percentage of production to be fulfilled by plantations in future.
 ** 20percent buffer and 88 percent efficiency 12 percent loss factor
-
+$ontext
+q32_prod_future(i2) ..          sum(cell(i2,j2), v32_land(j2,"plant","ac0"))
+                                =g=
+                                sum((cell(i2,j2),kforestry,ac_sub),v32_hvarea_forestry(j2,kforestry,ac_sub))
+                                ;
+$offtext
 q32_prod_future(i2) ..          sum(kforestry, vm_prod_future_reg_ff(i2,kforestry)) * pcm_production_ratio_future(i2)
                                 =e=
                                 sum((cell(i2,j2),ct), (v32_land(j2,"plant","ac0") + v32_missing_area_future(j2)) * pc32_yield_forestry_future(ct,j2));
 *    							+
 *    							sum(cell(i2,j2), v32_avail_reuse(j2) * pc32_yield_forestry_mature_future(j2)) * 0.80
+
 
 q32_avail_reuse(j2) ..      v32_avail_reuse(j2)	=e=	0;
 

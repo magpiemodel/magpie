@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "DEFAULT_PROD_RATIO"
+flag_run <- "SECDF_TO_OTHER_AFTER_HARVEST"
 
 library(lucode)
 source("scripts/start_functions.R")
