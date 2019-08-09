@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "PROD_RATIO_NATVEG_GLOBAL_FREE" 
+flag_run <- "WOODFUELselfsuff_WOOD" 
 
 library(lucode)
 source("scripts/start_functions.R")
