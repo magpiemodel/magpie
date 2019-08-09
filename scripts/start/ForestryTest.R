@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "GlobalOpt_PRORATIO_FORESTRY" 
+flag_run <- "SPLIT_PROD_IN_FORESTRY" 
 
 library(lucode)
 source("scripts/start_functions.R")

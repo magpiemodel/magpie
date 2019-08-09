@@ -8,24 +8,9 @@
 *' In the comparative advantage pool, the only active constraint is that the global supply is larger or equal to demand.
 *' This means that production can be freely allocated globally based on comparative advantages.
 
- q21_trade_glo_ag(k_trade_ag)..
-  sum(i2 ,vm_prod_reg(i2,k_trade_ag)) =g=
-  sum(i2, vm_supply(i2,k_trade_ag)) + sum(ct,f21_trade_balanceflow(ct,k_trade_ag));
-
- q21_trade_glo_timber(kforestry)..
-    sum(i2 ,vm_prod_reg(i2,kforestry)) =g=
-    sum(i2, vm_supply(i2,kforestry)) + sum(ct,f21_trade_balanceflow(ct,kforestry));
-
- q21_prod_reg_forestry(i2,kforestry)..
-  vm_prod_reg(i2,kforestry) =e= sum(cell(i2,j2), vm_prod_forestry(j2,kforestry) + vm_prod_natveg(j2,kforestry));
-
-$ontext
- q21_ratio_forestry(i2)..
-  sum(cell(i2,j2), vm_prod_forestry(j2,"wood")) =g= vm_prod_reg(i2,"wood") * sum(ct,fm_production_ratio(i2,ct));
-$offtext
-
-q21_ratio_forestry..
- sum(j2, vm_prod_forestry(j2,"wood")) =l= sum((i2,ct), vm_prod_reg(i2,"wood") * fm_production_ratio(i2,ct));
+ q21_trade_glo(k_trade)..
+ sum(i2 ,vm_prod_reg(i2,k_trade)) =g=
+ sum(i2, vm_supply(i2,k_trade)) + sum(ct,f21_trade_balanceflow(ct,k_trade));
 
 *' For non-tradable commodites, the regional supply should be larger or equal to the regional demand.
  q21_notrade(i2,k_notrade)..

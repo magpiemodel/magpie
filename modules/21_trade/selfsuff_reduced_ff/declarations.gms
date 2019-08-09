@@ -36,7 +36,7 @@ positive variables
 ;
 
 equations
- q21_trade_glo_ag(k_trade_ag)                  Global production constraint (mio. tDM per yr)
+ q21_trade_glo(k_trade)                  Global production constraint (mio. tDM per yr)
  q21_notrade(i,k_notrade)                Regional production constraint of non-tradable commodities (mio. tDM per yr)
  q21_trade_reg(i,k_trade)                Regional trade balances i.e. minimum self-sufficiency ratio (1)
  q21_trade_reg_up(i,k_trade)             Regional trade balances i.e. maximum self-sufficiency ratio (1)
@@ -52,9 +52,6 @@ equations
 * q21_trade_natveg(kforestry)			Global natveg production constraint (mio. m3 per yr)
 * q21_trade_forestry(kforestry)			Global forestry production constraint (mio. m3 per yr)
 * q21_prod_timber(i,kforestry)         xx
- q21_trade_glo_timber(kforestry)        xx
- q21_prod_reg_forestry(i,kforestry)     xx
- q21_ratio_forestry                  xx
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -69,7 +66,7 @@ parameters
  ov21_excess_prod_ff(t,i,kforestry,type)    Excess future production of timber (mio. m3)
  ov21_cost_trade_reg_ff(t,i,kforestry,type) Future trade costs for timber (mio. USD)
  ov_cost_trade_forestry_ff(t,i,type)        Future total timber trade costs (mio. USD)
- oq21_trade_glo_ag(t,k_trade_ag,type)       Global production constraint (mio. tDM per yr)
+ oq21_trade_glo(t,k_trade,type)             Global production constraint (mio. tDM per yr)
  oq21_notrade(t,i,k_notrade,type)           Regional production constraint of non-tradable commodities (mio. tDM per yr)
  oq21_trade_reg(t,i,k_trade,type)           Regional trade balances i.e. minimum self-sufficiency ratio (1)
  oq21_trade_reg_up(t,i,k_trade,type)        Regional trade balances i.e. maximum self-sufficiency ratio (1)
@@ -82,8 +79,5 @@ parameters
  oq21_excess_supply_ff(t,i,kforestry,type)  Future forestry excess supply (mio. m3)
  oq21_cost_trade_reg_ff(t,i,kforestry,type) Future forestry trade costs (mio. USD)
  oq21_cost_trade_ff(t,i,type)               Future forestry total trade costs (mio. USD)
- oq21_trade_glo_timber(t,kforestry,type)    xx
- oq21_prod_reg_forestry(t,i,kforestry,type) xx
- oq21_ratio_forestry(t,type)                xx
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
