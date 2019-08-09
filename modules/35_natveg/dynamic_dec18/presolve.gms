@@ -128,13 +128,13 @@ m_boundfix(v35_other,(j,ac_sub),l,10e-5);
 p35_yield_natveg(t,j,ac_sub) =
 		(2)
 		* pm_carbon_density_ac(t,j,ac_sub,"vegc")
-		* 0.80
+		* 0.85
 		/ sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac_sub,clcl));
 
 p35_yield_primforest(t,j) =
 		(2)
 		* pm_carbon_density_ac(t,j,"acx","vegc")
-		* 0.75
+		* 0.80
 		/ sum(clcl,pm_climate_class(j,clcl) * pm_bcef("acx",clcl));
 
 *p35_yield_natveg(t,j,ac_sub) =	m_growing_stock(pm_carbon_density_ac(t,j,ac_sub,"vegc"));

@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "SPLIT_PROD_IN_FORESTRY_PRODRATIO_GRT"
+flag_run <- "Higher_ROOTtoSHOOT_NATVEG"
 
 library(lucode)
 source("scripts/start_functions.R")
