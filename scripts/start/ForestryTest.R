@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "STRICT_EQ_IN_PROD-DEF_MGMT_FACTORS"
+flag_run <- "FUTURE_TRADE_CALC_ONLY_WOOD"
 
 library(lucode)
 source("scripts/start_functions.R")

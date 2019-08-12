@@ -23,6 +23,9 @@ sets
    k_trade_forestry(k_trade) Trade for timber
    /wood, woodfuel /
 
+   k_forestry_wood(kforestry)
+   /wood/
+
 * We limit trade of secondary products as this allows for extreme specialisation
 * in the implementation. Exception is sugar, where we allow the secondary product
 * trade but not the primary as primaries are hardly traded in reality
