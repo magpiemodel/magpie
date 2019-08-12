@@ -50,7 +50,7 @@ positive variables
 
  v32_cost_establishment(i)                        Cost of establishment calculated at the current time step (mio. USD)
  v32_missing_area_future(j)                       Defunct (1)
- vm_prod_forestry(j,kforestry)	                  xx
+* vm_prod_forestry(j,kforestry)	                  xx
 ;
 
 equations
@@ -66,14 +66,14 @@ equations
  q32_hvarea_forestry(j,ac_sub)                    Harvested area from plantations (mio. ha)
  q32_cost_recur(i)                                Recurruing costs (mio. USD)
  q32_cost_harvest(i)                              Harvesting costs (mio. USD)
- q32_production_timber(j,kforestry)                         Timber production from plantations (mio. USD)
+ q32_production_timber(i,kforestry)                         Timber production from plantations (mio. USD)
  q32_prod_future(i)                               Establishment in current time step for future demand (mio. ha)
  q32_land_expansion(j,type32,ac)                  Land expansion (mio. ha)
  q32_land_reduction(j,type32,ac)                  Land contarction (mio. ha)
  q32_avail_reuse(j)                               Defunct (1)
  q32_cost_establishment(i)                        Present value of cost of establishment (mio. USD)
- q32_ratio_forestry                               xxxx
- q32_prod_reg_forestry(i)                         xxxx
+* q32_ratio_forestry                               xxxx
+* q32_prod_reg_forestry(i)                         xxxx
 ;
 
 
@@ -93,7 +93,6 @@ parameters
  ov32_avail_reuse(t,j,type)                      Defunct (1)
  ov32_cost_establishment(t,i,type)               Cost of establishment calculated at the current time step (mio. USD)
  ov32_missing_area_future(t,j,type)              Defunct (1)
- ov_prod_forestry(t,j,kforestry,type)            xx
  oq32_cost_total(t,i,type)                       total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                             land constraint (mio. ha)
  oq32_cdr_aff(t,j,type)                          calculation of CDR from afforestation
@@ -106,13 +105,11 @@ parameters
  oq32_hvarea_forestry(t,j,ac_sub,type)           Harvested area from plantations (mio. ha)
  oq32_cost_recur(t,i,type)                       Recurruing costs (mio. USD)
  oq32_cost_harvest(t,i,type)                     Harvesting costs (mio. USD)
- oq32_production_timber(t,j,kforestry,type)      Timber production from plantations (mio. USD)
+ oq32_production_timber(t,i,kforestry,type)      Timber production from plantations (mio. USD)
  oq32_prod_future(t,i,type)                      Establishment in current time step for future demand (mio. ha)
  oq32_land_expansion(t,j,type32,ac,type)         Land expansion (mio. ha)
  oq32_land_reduction(t,j,type32,ac,type)         Land contarction (mio. ha)
  oq32_avail_reuse(t,j,type)                      Defunct (1)
  oq32_cost_establishment(t,i,type)               Present value of cost of establishment (mio. USD)
- oq32_ratio_forestry(t,type)                     xxxx
- oq32_prod_reg_forestry(t,i,type)                xxxx
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

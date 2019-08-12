@@ -114,18 +114,13 @@ $ontext
    sum(cell(i2,j2), vm_prod_forestry(j2,"wood")) =g= vm_prod_reg(i2,"wood") * sum(ct,fm_production_ratio(i2,ct));
 $offtext
 
-q32_ratio_forestry..
-  sum(j2, vm_prod_forestry(j2,"wood")) =e= sum((ct,i2), vm_prod_reg(i2,"wood") * fm_production_ratio(i2,ct));
-
-q32_production_timber(j2,kforestry)..
-                          vm_prod_forestry(j2,kforestry)
+q32_production_timber(i2,kforestry)..
+                          vm_prod_reg(i2,kforestry) * sum(ct, fm_production_ratio(i2,ct))
+                          -
+                          sum(cell(i2,j2),vm_prod_natveg(j2,kforestry))
                           =e=
-                          v32_prod(j2,kforestry) + sum(cell(i2,j2),v32_prod_external(i2,kforestry))
+                          sum(cell(i2,j2),v32_prod(j2,kforestry)) + v32_prod_external(i2,kforestry)
                           ;
-
-q32_prod_reg_forestry(i2)..
-  sum(cell(i2,j2), vm_prod_forestry(j2,"wood")) =e=  vm_prod_reg(i2,"wood")  - sum(cell(i2,j2),vm_prod_natveg(j2,"wood"));
-
 
 ** Establishment in current time step already accounts for a certain percentage of production to be fulfilled by plantations in future.
 ** 20percent buffer and 88 percent efficiency 12 percent loss factor

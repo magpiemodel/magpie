@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "SECDFtoOTHER_ESTB=e=RATIODEFAULT"
+flag_run <- "NO_FORESTRYPROD_INTERFACE"
 
 library(lucode)
 source("scripts/start_functions.R")
