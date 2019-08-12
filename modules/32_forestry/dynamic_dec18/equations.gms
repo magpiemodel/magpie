@@ -41,7 +41,7 @@ q32_cost_total(i2) .. vm_cost_fore(i2) =e=
                      v32_cost_harvest(i2)
 								   + v32_cost_recur(i2)
 								   + v32_cost_establishment(i2)
-								   + sum(kforestry, v32_prod_external(i2,kforestry) * 99999)
+								   + sum((cell(i2,j2),kforestry), v32_prod_external(j2,kforestry) * 99999)
 								   ;
 $ontext
 re-establishment costs in t0
@@ -114,10 +114,10 @@ $ontext
    sum(cell(i2,j2), vm_prod_forestry(j2,"wood")) =g= vm_prod_reg(i2,"wood") * sum(ct,fm_production_ratio(i2,ct));
 $offtext
 
-q32_production_timber(kforestry)..
-                          sum(j2,v32_prod(j2,kforestry)) + sum(i2,v32_prod_external(i2,kforestry))
+q32_production_timber(i2,kforestry)..
+                          sum(cell(i2,j2),v32_prod(j2,kforestry) + v32_prod_external(j2,kforestry))
                           =e=
-                          sum(i2,vm_prod_reg(i2,kforestry) * sum(ct, fm_production_ratio(i2,ct)))
+                          vm_prod_reg(i2,kforestry) * sum(ct, fm_production_ratio(i2,ct))
                           ;
 
 ** Establishment in current time step already accounts for a certain percentage of production to be fulfilled by plantations in future.

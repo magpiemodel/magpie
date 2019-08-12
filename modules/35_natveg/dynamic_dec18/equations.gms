@@ -70,7 +70,7 @@
 ** Natveg related production costs
 q35_cost_total(i2) .. vm_cost_natveg(i2) =e=
                      v35_cost_harvest(i2)
-								   + sum(kforestry, v35_prod_external(i2,kforestry) * 99999)
+								   + sum((cell(i2,j2),kforestry), v35_prod_external(j2,kforestry) * 99999)
 								   ;
 *******************************************************************************
 **** Cost of harvesting from NatVeg
@@ -158,8 +158,8 @@ q35_secdforest_conversion(j2)..
                         + sum(kforestry,v35_hvarea_primforest(j2,kforestry))
                           ;
 ********** NatVeg production of timber
-q35_production_timber(kforestry)..
-                          sum((j2,land_natveg),v35_prod(j2,land_natveg,kforestry)) + sum(i2,v35_prod_external(i2,kforestry))
+q35_production_timber(i2,kforestry)..
+                          sum((cell(i2,j2),land_natveg),v35_prod(j2,land_natveg,kforestry) + v35_prod_external(j2,kforestry))
                           =e=
-                          sum(i2,vm_prod_reg(i2,kforestry) * sum(ct, 1-fm_production_ratio(i2,ct)))
+                          vm_prod_reg(i2,kforestry) * sum(ct, 1-fm_production_ratio(i2,ct))
                           ;

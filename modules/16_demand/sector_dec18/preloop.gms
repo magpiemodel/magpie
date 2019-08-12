@@ -34,7 +34,7 @@ fm_forestry_demand(t,i,"woodfuel") =
 
 *fm_forestry_demand("y1995",i,kforestry) = fm_forestry_demand("y1995",i,kforestry) * 5;
 * Setting MEA demand to 10% of calculated demand for testing purposes
-*fm_forestry_demand(t_all,"MEA",kforestry) = fm_forestry_demand(t_all,"MEA",kforestry) * 0.10 ;
+fm_forestry_demand(t_all,"MEA",kforestry) = fm_forestry_demand(t_all,"MEA",kforestry) * 0.25 ;
 *fm_forestry_demand(t_all,"IND",kforestry) = fm_forestry_demand(t_all,"IND",kforestry) * 0.60 ;
 *fm_forestry_demand(t_all,"USA",kforestry) = fm_forestry_demand(t_all,"USA",kforestry) * 0.50 ;
 
