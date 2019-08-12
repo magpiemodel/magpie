@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "NO_FORESTRYPROD_INTERFACE"
+flag_run <- "NO_TIMBERPROD_INTERFACE"
 
 library(lucode)
 source("scripts/start_functions.R")
