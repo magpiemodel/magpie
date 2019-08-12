@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "SECDFtoOTHER_ESTB=l=ONETHIRD"
+flag_run <- "SECDFtoOTHER_ESTB=l=RATIOFUTURE"
 
 library(lucode)
 source("scripts/start_functions.R")
