@@ -50,10 +50,11 @@ p32_land(t,j,"plant",ac)$(ord(ac) > 1) = p32_land(t,j,"plant",ac-1);
 p32_land("y1995",j,"plant","ac0") = 0;
 
 **************************************************************************************
-*pm_production_ratio_ext(i,t_ext) = fm_production_ratio(i,"y1995");
-*pm_production_ratio_ext(i,t_all) = fm_production_ratio(i,"y1995");
+fm_production_ratio(i,t_all) = fm_production_ratio(i,t_all) * 0.8;
+pm_production_ratio_ext(i,t_ext) = fm_production_ratio(i,"y1995");
+pm_production_ratio_ext(i,t_all) = fm_production_ratio(i,"y1995");
 *fm_production_ratio(i,t_all) = 0.3;
-fm_production_ratio(i,t_all) = 0.20+0.025*ord(t_all);
+*fm_production_ratio(i,t_all) = 0.20+0.025*ord(t_all);
 
 pm_production_ratio_ext(i,t_ext) = fm_production_ratio(i,"y2100");
 pm_production_ratio_ext(i,t_all) = fm_production_ratio(i,t_all);
