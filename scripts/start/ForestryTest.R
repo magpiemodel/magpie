@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "FUTURE_TRADE_CALC_ONLY_WOOD"
+flag_run <- "SECDFtoOTHER_ESTB=l=ONETHIRD"
 
 library(lucode)
 source("scripts/start_functions.R")
