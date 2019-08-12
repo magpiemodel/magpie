@@ -117,7 +117,7 @@ v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
 m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
 
 *** We don't want harvested secdf to end up in 0 again.It should come through other land.
-* v35_secdforest.fx(j,"ac0") = 0;
+ v35_secdforest.fx(j,"ac0") = 0;
 
 v35_other.lo(j,"acx") = p35_save_other(t,j);
 v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);

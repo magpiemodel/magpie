@@ -137,7 +137,7 @@ q32_prod_future(i2) ..          sum(cell(i2,j2), v32_land(j2,"plant","ac0"))
 $offtext
 q32_prod_future(i2) ..
               sum((cell(i2,j2),ct), (v32_land(j2,"plant","ac0") + v32_missing_area_future(j2)) * pc32_yield_forestry_future(ct,j2))
-              =e=
+              =l=
               sum(kforestry, vm_prod_future_reg_ff(i2,kforestry)) * pcm_production_ratio_future(i2)
               ;
 
