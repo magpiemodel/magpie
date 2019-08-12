@@ -5,6 +5,21 @@ p32_rot_length(t,i) = f32_rot_length(t,i,"%c32_rot_length%");
 p32_rot_length_estb(t,i) = f32_rot_length(t,i,"%c32_rot_length_estb%");
 *p32_rot_length_estb(t,i) = 30;
 
+p32_rot_length(t,"CAZ") = 45;
+p32_rot_length(t,"CHA")= 30;
+p32_rot_length(t,"EUR")= 35;
+p32_rot_length(t,"IND")= 20;
+p32_rot_length(t,"JPN")= 60;
+p32_rot_length(t,"LAM")= 25;
+p32_rot_length(t,"MEA")= 30;
+p32_rot_length(t,"NEU")= 35;
+p32_rot_length(t,"OAS")= 20;
+p32_rot_length(t,"REF")= 35;
+p32_rot_length(t,"SSA")= 20;
+p32_rot_length(t,"USA") = 45;
+
+p32_rot_length_estb(t,i) = p32_rot_length(t,i);
+
 pm_rot_length(t,i) = p32_rot_length(t,i);
 pm_rot_length_estb(t,i) = p32_rot_length_estb(t,i);
 
