@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "NO_TIMBERPROD_INTERFACE-ownrotlength"
+flag_run <- "NO_TIMBERPROD_INTERFACE-ownrotlength-RegProd"
 
 library(lucode)
 source("scripts/start_functions.R")
