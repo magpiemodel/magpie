@@ -7,35 +7,22 @@
 p16_volumetric_conversion("wood") = 632.5;
 p16_volumetric_conversion("woodfuel") = 307.1;
 
-fm_forestry_demand(t_all,i,"wood") =
-										sum(i_to_iso(i,iso),
-										m_yeardiff(t_all)
-                  * f16_forestry_demand_iso(t_all,iso,"wood"));
-
-fm_forestry_demand(t_all,i,"woodfuel") =
-										sum(i_to_iso(i,iso),
-					 					m_yeardiff(t_all)
-                  * f16_forestry_demand_iso(t_all,iso,"woodfuel")) * 0.50;
+fm_forestry_demand(t_all,i,kforestry) =
+									m_yeardiff(t_all) * f16_forestry_demand(t_all,i,kforestry);
 
 *** Only needed to fix the time step length miscalculation from t_all in y1995.
 *** The 1995 value for yeardiff needs to be one but with m_yeatrdiff on t_all its is 5.
 *** Only the t values will be overwritten using this fix.
 *** Could also make a dollar condition with $(ord(t)=1). Fix later.
 
-fm_forestry_demand(t,i,"wood") =
-										sum(i_to_iso(i,iso),
-										m_yeardiff(t)
-                  * f16_forestry_demand_iso(t,iso,"wood"));
-
-fm_forestry_demand(t,i,"woodfuel") =
-										sum(i_to_iso(i,iso),
-					 					m_yeardiff(t)
-                  * f16_forestry_demand_iso(t,iso,"woodfuel")) * 0.50;
+fm_forestry_demand(t,i,kforestry) =
+										m_yeardiff(t) * f16_forestry_demand(t,i,kforestry);
 
 *fm_forestry_demand("y1995",i,kforestry) = fm_forestry_demand("y1995",i,kforestry) * 5;
 * Setting MEA demand to 10% of calculated demand for testing purposes
-fm_forestry_demand(t_all,"MEA",kforestry) = fm_forestry_demand(t_all,"MEA",kforestry) * 0.25 ;
-*fm_forestry_demand(t_all,"IND",kforestry) = fm_forestry_demand(t_all,"IND",kforestry) * 0.60 ;
-*fm_forestry_demand(t_all,"USA",kforestry) = fm_forestry_demand(t_all,"USA",kforestry) * 0.50 ;
+fm_forestry_demand(t_all,"MEA",kforestry) = fm_forestry_demand(t_all,"MEA",kforestry) * 0.01 ;
+fm_forestry_demand(t_all,"IND","woodfuel") = fm_forestry_demand(t_all,"IND","wood");
+fm_forestry_demand(t_all,"USA","wood") = fm_forestry_demand(t_all,"USA","wood") * 0.50;
+fm_forestry_demand(t_all,"CHA","wood") = fm_forestry_demand(t_all,"CAZ","wood") * 0.50;
 
 *fm_forestry_demand(t_all,i,kforestry) = fm_forestry_demand("y1995",i,kforestry);

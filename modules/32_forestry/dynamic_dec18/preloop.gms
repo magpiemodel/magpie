@@ -75,20 +75,11 @@ pm_production_ratio_ext(i,t_ext) = fm_production_ratio(i,"y2100");
 pm_production_ratio_ext(i,t_all) = fm_production_ratio(i,t_all);
 
 p32_forestry_management(i) = f32_forestry_management(i);
-p32_forestry_management("IND") = 10;
-*p32_forestry_management("USA") = 10;
-p32_forestry_management("REF") = 8;
-*p32_forestry_management("MEA") = 50;
-p32_forestry_management("CAZ") = 16;
-p32_forestry_management("LAM") = 12;
-*p32_forestry_management("OAS") = 6;
-p32_forestry_management("SSA") = 10;
-*p32_forestry_management("CHA") = 7;
-*p32_forestry_management("MEA") = 200;
-*p32_forestry_management(i) = p32_forestry_management(i) + 3;
-
-f32_fac_req_ha(i2,"recur") = 1000;
-f32_fac_req_ha(i2,"mon") = 500;
-fm_harvest_cost_ha(i2)  = 2000;
 
 **************************************************************************
+
+**** TC like inmplementation for mgmt factors
+p32_management_incr_cost(i) = 10e6;
+
+**** initialize managemnt factors which can be increased
+v32_management_factor.l(i) = p32_forestry_management(i);

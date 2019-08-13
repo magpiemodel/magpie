@@ -42,6 +42,11 @@ repeat(
       option nlp = conopt4;
     );
 
+    if((magpie.modelstat = 4),
+      display "WARNING: Modelstat 4, SOLPRINT SET TO 1.";
+      magpie.solprint  = 1 ;
+    );
+
   p80_modelstat(t) = magpie.modelstat;
   p80_num_nonopt(t) = magpie.numNOpt;
 

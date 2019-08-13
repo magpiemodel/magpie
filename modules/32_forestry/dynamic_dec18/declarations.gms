@@ -29,6 +29,7 @@ parameters
  pm_rot_length_estb(t,i)                            Regional rotation length of plantations translated to age class equivalent for future (1)
  p32_rotation_cellular_estb(t,j)                    Rotation length translated to age classes on cellular level (1)
  p32_rot_length_all(t,i)                      xx
+ p32_management_incr_cost(i)                 xx
 ;
 
 positive variables
@@ -42,21 +43,23 @@ positive variables
  v32_cost_recur(i)                                Recurring forest management costs (USD per ha)
  v32_hvarea_forestry(j,kforestry,ac_sub)          Area harvested for timber production (mio. ha)
 
- v32_prod_external(j,kforestry)                   Production balance flow from heaven (mio. m3)
+* v32_prod_external(j,kforestry)                   Production balance flow from heaven (mio. m3)
 
  v32_land_expansion(j,type32,ac)                  Land expansion (mio. ha)
  v32_land_reduction(j,type32,ac)                  land reduction (mio. ha)
  v32_avail_reuse(j)                               Defunct (1)
 
  v32_cost_establishment(i)                        Cost of establishment calculated at the current time step (mio. USD)
- v32_missing_area_future(j)                       Defunct (1)
-* vm_prod_forestry(j,kforestry)	                  xx
-;
+* v32_missing_area_future(j)                       Defunct (1)
+ v32_management_factor(i)                         managemement factor which can increase in extreme cases
+ v32_management_incr_cost(i)                      Very high costs for increasing managemnt factors
+ vm_prod_cell_forestry(j,kforestry)               xx
+ ;
 
 equations
  q32_cost_total(i)                                total forestry costs constraint (mio. USD)
  q32_land(j)                                      land constraint (mio. ha)
- q32_cdr_aff(j)                      calculation of CDR from afforestation
+ q32_cdr_aff(j)                                   calculation of CDR from afforestation
  q32_carbon(j,c_pools)                            forestry carbon stock calculation
  q32_diff                                         aggregated difference in forestry land compared to previous timestep (mio. ha)
  q32_max_aff                                      maximum total global afforestation
@@ -74,6 +77,8 @@ equations
  q32_cost_establishment(i)                        Present value of cost of establishment (mio. USD)
 * q32_ratio_forestry                               xxxx
 * q32_prod_reg_forestry(i)                         xxxx
+ q32_management_incr_cost(i)                       xxxx
+ q32_prod_cell_forestry(j,kforestry)               xx
 ;
 
 
@@ -87,12 +92,13 @@ parameters
  ov32_cost_harvest(t,i,type)                     Cost of timber harvesting (USD per ha)
  ov32_cost_recur(t,i,type)                       Recurring forest management costs (USD per ha)
  ov32_hvarea_forestry(t,j,kforestry,ac_sub,type) Area harvested for timber production (mio. ha)
- ov32_prod_external(t,j,kforestry,type)          Production balance flow from heaven (mio. m3)
  ov32_land_expansion(t,j,type32,ac,type)         Land expansion (mio. ha)
  ov32_land_reduction(t,j,type32,ac,type)         land reduction (mio. ha)
  ov32_avail_reuse(t,j,type)                      Defunct (1)
  ov32_cost_establishment(t,i,type)               Cost of establishment calculated at the current time step (mio. USD)
- ov32_missing_area_future(t,j,type)              Defunct (1)
+ ov32_management_factor(t,i,type)                managemement factor which can increase in extreme cases
+ ov32_management_incr_cost(t,i,type)             Very high costs for increasing managemnt factors
+ ov_prod_cell_forestry(t,j,kforestry,type)       xx
  oq32_cost_total(t,i,type)                       total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                             land constraint (mio. ha)
  oq32_cdr_aff(t,j,type)                          calculation of CDR from afforestation
@@ -111,5 +117,7 @@ parameters
  oq32_land_reduction(t,j,type32,ac,type)         Land contarction (mio. ha)
  oq32_avail_reuse(t,j,type)                      Defunct (1)
  oq32_cost_establishment(t,i,type)               Present value of cost of establishment (mio. USD)
+ oq32_management_incr_cost(t,i,type)             xxxx
+ oq32_prod_cell_forestry(t,j,kforestry,type)     xx
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

@@ -41,7 +41,8 @@ q32_cost_total(i2) .. vm_cost_fore(i2) =e=
                      v32_cost_harvest(i2)
 								   + v32_cost_recur(i2)
 								   + v32_cost_establishment(i2)
-								   + sum((cell(i2,j2),kforestry), v32_prod_external(j2,kforestry) * 99999)
+                   + v32_management_incr_cost(i2)
+*								   + sum((cell(i2,j2),kforestry), v32_prod_external(j2,kforestry) * 99999)
 								   ;
 $ontext
 re-establishment costs in t0
@@ -69,8 +70,6 @@ q32_cost_establishment(i2)..
             )
             * (pm_interest(i2)/(1+pm_interest(i2)))
 *************************** (pm_interest(i2)/(1+pm_interest(i2))) to annuituze the values. Similar to averaging over time
-            +
-            sum(cell(i2,j2),v32_missing_area_future(j2) * 100000)
 						;
 
 
@@ -95,8 +94,6 @@ q32_prod_forestry_wood(j2)..
 q32_prod_forestry_woodfuel(j2)..
                           v32_prod(j2,"woodfuel")
                           =e=
-*                         sum(ac_sub, v32_hvarea_forestry(j2,"wood",ac_sub)      * sum(ct, p32_yield_forestry_ac(ct,j2,ac_sub)))* (1-0.88)
-*						            +
                         sum(ac_sub, v32_hvarea_forestry(j2,"woodfuel",ac_sub)  * sum(ct, p32_yield_forestry_ac(ct,j2,ac_sub)));
 
 ***AREA
@@ -109,28 +106,35 @@ q32_hvarea_forestry(j2,ac_sub) ..
 
 *********************************************************
 
+ q32_management_incr_cost(i2) ..
+                              v32_management_incr_cost(i2)
+                              =e=
+                              (v32_management_factor(i2) - p32_forestry_management(i2)) * p32_management_incr_cost(i2)
+                              ;
+
+*********************************************************
+
 $ontext
   q21_ratio_forestry(i2)..
    sum(cell(i2,j2), vm_prod_forestry(j2,"wood")) =g= vm_prod_reg(i2,"wood") * sum(ct,fm_production_ratio(i2,ct));
 $offtext
 
-q32_production_timber(i2,kforestry)..
-                          sum(cell(i2,j2),v32_prod(j2,kforestry) + v32_prod_external(j2,kforestry))
+q32_prod_cell_forestry(j2,kforestry)..
+                          vm_prod_cell_forestry(j2,kforestry)
                           =e=
+                          v32_prod(j2,kforestry)
+                          ;
+
+q32_production_timber(i2,kforestry)..
+                          sum(cell(i2,j2),v32_prod(j2,kforestry))
+                          =g=
                           vm_prod_reg(i2,kforestry) * sum(ct, fm_production_ratio(i2,ct))
                           ;
 
 ** Establishment in current time step already accounts for a certain percentage of production to be fulfilled by plantations in future.
-** 20percent buffer and 88 percent efficiency 12 percent loss factor
-$ontext
-q32_prod_future(i2) ..          sum(cell(i2,j2), v32_land(j2,"plant","ac0"))
-                                =g=
-                                sum((cell(i2,j2),kforestry,ac_sub),v32_hvarea_forestry(j2,kforestry,ac_sub))
-                                ;
-$offtext
 q32_prod_future(i2) ..
-              sum((cell(i2,j2),ct), (v32_land(j2,"plant","ac0") + v32_missing_area_future(j2)) * pc32_yield_forestry_future(ct,j2))
-              =e=
+              sum((cell(i2,j2),ct),(v32_land(j2,"plant","ac0")) * pc32_yield_forestry_future(ct,j2))
+              =g=
               sum(kforestry, vm_prod_future_reg_ff(i2,kforestry)) * pcm_production_ratio_future(i2)
               ;
 

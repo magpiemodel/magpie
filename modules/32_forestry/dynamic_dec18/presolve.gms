@@ -11,8 +11,13 @@ $offtext
 
 ** Setting ac dependent carbon densities
 p32_carbon_density_ac(t,j,type32,ac,c_pools)  = pm_carbon_density_ac(t,j,ac,c_pools);
+
+**** set lower limit
+v32_management_factor.up(i) = 50;
+
 ** Plantation vegc is different
-p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * sum(cell(i,j),p32_forestry_management(i));
+*p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * sum(cell(i,j),p32_forestry_management(i));
+p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * sum(cell(i,j),v32_management_factor.l(i));
 
 ** BEGIN INDC **
 
