@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @equations
-*' This realization defines the total amount of land to be constant over time.
+*' This equations defines the total amount of land to be constant over time.
 
  q10_land(j2) ..
 		sum(land, vm_land(j2,land)) =e= sum(land, pm_land_start(j2,land));
