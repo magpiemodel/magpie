@@ -24,7 +24,7 @@ q59_som_target_noncropland(j2,noncropland59) ..
 *' Depending on the setting of `c59_som_scenario `climate impacts (`cc`) are taken into account or not (`nocc`).
 *' For a static climate `f59_topsoilc_density` is set to the value of 1995 within the input of the module realization.
 
-*' The actually carbon transfer from cropland as well as to cropland soils is then given by
+*' The actual carbon transfer from cropland as well as to cropland soils is then given by
 
 q59_som_transfer_to_cropland(j2, noncropland59) ..
               v59_som_transfer_to_cropland(j2, noncropland59)
