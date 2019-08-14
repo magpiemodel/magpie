@@ -85,16 +85,29 @@ q32_cost_harvest(i2)..
                     sum(ac_sub, v32_hvarea_forestry(j2,kforestry,ac_sub))) * fm_harvest_cost_ha(i2)
                     ;
 
+*** YIELDS
+q32_yield_forestry_ac(j2,ac_sub)..
+  v32_yield_forestry_ac(j2,ac_sub)
+  =e=
+   (2)
+   *
+   sum(ct, pm_carbon_density_ac(ct,j2,ac_sub,"vegc")) * sum(cell(i2,j2),v32_management_factor(i2))
+   *
+   0.85
+   /
+   sum(clcl,pm_climate_class(j2,clcl) * pm_bcef(ac_sub,clcl))
+   ;
+
 ***PRODUCTION
 q32_prod_forestry_wood(j2)..
                           v32_prod(j2,"wood")
                           =e=
-                         sum(ac_sub, v32_hvarea_forestry(j2,"wood",ac_sub) * sum(ct, p32_yield_forestry_ac(ct,j2,ac_sub)));
+                         sum(ac_sub, v32_hvarea_forestry(j2,"wood",ac_sub) * v32_yield_forestry_ac(j2,ac_sub));
 
 q32_prod_forestry_woodfuel(j2)..
                           v32_prod(j2,"woodfuel")
                           =e=
-                        sum(ac_sub, v32_hvarea_forestry(j2,"woodfuel",ac_sub)  * sum(ct, p32_yield_forestry_ac(ct,j2,ac_sub)));
+                        sum(ac_sub, v32_hvarea_forestry(j2,"woodfuel",ac_sub)  * v32_yield_forestry_ac(j2,ac_sub));
 
 ***AREA
 
@@ -109,7 +122,7 @@ q32_hvarea_forestry(j2,ac_sub) ..
  q32_management_incr_cost(i2) ..
                               v32_management_incr_cost(i2)
                               =e=
-                              (v32_management_factor(i2) - p32_forestry_management(i2)) * p32_management_incr_cost(i2)
+                              v32_management_factor(i2) * p32_management_incr_cost(i2)
                               ;
 
 *********************************************************
@@ -128,7 +141,8 @@ q32_prod_cell_forestry(j2,kforestry)..
 q32_production_timber(i2,kforestry)..
                           sum(cell(i2,j2),v32_prod(j2,kforestry))
                           =g=
-                          vm_prod_reg(i2,kforestry) * sum(ct, fm_production_ratio(i2,ct))
+                          vm_prod_reg(i2,kforestry) * 0.33
+*                          * sum(ct, fm_production_ratio(i2,ct))
                           ;
 
 ** Establishment in current time step already accounts for a certain percentage of production to be fulfilled by plantations in future.

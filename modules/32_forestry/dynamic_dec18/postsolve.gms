@@ -2,6 +2,12 @@ p32_land(t,j,type32,ac) = v32_land.l(j,type32,ac);
 
 p32_forestry_management(i) = v32_management_factor.l(i);
 
+** Optimized yield
+p32_yield_forestry_ac(j,ac_sub) = v32_yield_forestry_ac.l(j,ac_sub);
+
+** Updated costs
+p32_management_incr_cost(i) = 10**(6+(p32_forestry_management(i)/20)) - 10**6;
+
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_cost_fore(t,i,"marginal")                          = vm_cost_fore.m(i);
  ov32_land(t,j,type32,ac,"marginal")                   = v32_land.m(j,type32,ac);
@@ -18,6 +24,7 @@ p32_forestry_management(i) = v32_management_factor.l(i);
  ov32_management_factor(t,i,"marginal")                = v32_management_factor.m(i);
  ov32_management_incr_cost(t,i,"marginal")             = v32_management_incr_cost.m(i);
  ov_prod_cell_forestry(t,j,kforestry,"marginal")       = vm_prod_cell_forestry.m(j,kforestry);
+ ov32_yield_forestry_ac(t,j,ac_sub,"marginal")         = v32_yield_forestry_ac.m(j,ac_sub);
  oq32_cost_total(t,i,"marginal")                       = q32_cost_total.m(i);
  oq32_land(t,j,"marginal")                             = q32_land.m(j);
  oq32_cdr_aff(t,j,"marginal")                          = q32_cdr_aff.m(j);
@@ -38,6 +45,7 @@ p32_forestry_management(i) = v32_management_factor.l(i);
  oq32_cost_establishment(t,i,"marginal")               = q32_cost_establishment.m(i);
  oq32_management_incr_cost(t,i,"marginal")             = q32_management_incr_cost.m(i);
  oq32_prod_cell_forestry(t,j,kforestry,"marginal")     = q32_prod_cell_forestry.m(j,kforestry);
+ oq32_yield_forestry_ac(t,j,ac_sub,"marginal")         = q32_yield_forestry_ac.m(j,ac_sub);
  ov_cost_fore(t,i,"level")                             = vm_cost_fore.l(i);
  ov32_land(t,j,type32,ac,"level")                      = v32_land.l(j,type32,ac);
  ov_landdiff_forestry(t,"level")                       = vm_landdiff_forestry.l;
@@ -53,6 +61,7 @@ p32_forestry_management(i) = v32_management_factor.l(i);
  ov32_management_factor(t,i,"level")                   = v32_management_factor.l(i);
  ov32_management_incr_cost(t,i,"level")                = v32_management_incr_cost.l(i);
  ov_prod_cell_forestry(t,j,kforestry,"level")          = vm_prod_cell_forestry.l(j,kforestry);
+ ov32_yield_forestry_ac(t,j,ac_sub,"level")            = v32_yield_forestry_ac.l(j,ac_sub);
  oq32_cost_total(t,i,"level")                          = q32_cost_total.l(i);
  oq32_land(t,j,"level")                                = q32_land.l(j);
  oq32_cdr_aff(t,j,"level")                             = q32_cdr_aff.l(j);
@@ -73,6 +82,7 @@ p32_forestry_management(i) = v32_management_factor.l(i);
  oq32_cost_establishment(t,i,"level")                  = q32_cost_establishment.l(i);
  oq32_management_incr_cost(t,i,"level")                = q32_management_incr_cost.l(i);
  oq32_prod_cell_forestry(t,j,kforestry,"level")        = q32_prod_cell_forestry.l(j,kforestry);
+ oq32_yield_forestry_ac(t,j,ac_sub,"level")            = q32_yield_forestry_ac.l(j,ac_sub);
  ov_cost_fore(t,i,"upper")                             = vm_cost_fore.up(i);
  ov32_land(t,j,type32,ac,"upper")                      = v32_land.up(j,type32,ac);
  ov_landdiff_forestry(t,"upper")                       = vm_landdiff_forestry.up;
@@ -88,6 +98,7 @@ p32_forestry_management(i) = v32_management_factor.l(i);
  ov32_management_factor(t,i,"upper")                   = v32_management_factor.up(i);
  ov32_management_incr_cost(t,i,"upper")                = v32_management_incr_cost.up(i);
  ov_prod_cell_forestry(t,j,kforestry,"upper")          = vm_prod_cell_forestry.up(j,kforestry);
+ ov32_yield_forestry_ac(t,j,ac_sub,"upper")            = v32_yield_forestry_ac.up(j,ac_sub);
  oq32_cost_total(t,i,"upper")                          = q32_cost_total.up(i);
  oq32_land(t,j,"upper")                                = q32_land.up(j);
  oq32_cdr_aff(t,j,"upper")                             = q32_cdr_aff.up(j);
@@ -108,6 +119,7 @@ p32_forestry_management(i) = v32_management_factor.l(i);
  oq32_cost_establishment(t,i,"upper")                  = q32_cost_establishment.up(i);
  oq32_management_incr_cost(t,i,"upper")                = q32_management_incr_cost.up(i);
  oq32_prod_cell_forestry(t,j,kforestry,"upper")        = q32_prod_cell_forestry.up(j,kforestry);
+ oq32_yield_forestry_ac(t,j,ac_sub,"upper")            = q32_yield_forestry_ac.up(j,ac_sub);
  ov_cost_fore(t,i,"lower")                             = vm_cost_fore.lo(i);
  ov32_land(t,j,type32,ac,"lower")                      = v32_land.lo(j,type32,ac);
  ov_landdiff_forestry(t,"lower")                       = vm_landdiff_forestry.lo;
@@ -123,6 +135,7 @@ p32_forestry_management(i) = v32_management_factor.l(i);
  ov32_management_factor(t,i,"lower")                   = v32_management_factor.lo(i);
  ov32_management_incr_cost(t,i,"lower")                = v32_management_incr_cost.lo(i);
  ov_prod_cell_forestry(t,j,kforestry,"lower")          = vm_prod_cell_forestry.lo(j,kforestry);
+ ov32_yield_forestry_ac(t,j,ac_sub,"lower")            = v32_yield_forestry_ac.lo(j,ac_sub);
  oq32_cost_total(t,i,"lower")                          = q32_cost_total.lo(i);
  oq32_land(t,j,"lower")                                = q32_land.lo(j);
  oq32_cdr_aff(t,j,"lower")                             = q32_cdr_aff.lo(j);
@@ -143,4 +156,5 @@ p32_forestry_management(i) = v32_management_factor.l(i);
  oq32_cost_establishment(t,i,"lower")                  = q32_cost_establishment.lo(i);
  oq32_management_incr_cost(t,i,"lower")                = q32_management_incr_cost.lo(i);
  oq32_prod_cell_forestry(t,j,kforestry,"lower")        = q32_prod_cell_forestry.lo(j,kforestry);
+ oq32_yield_forestry_ac(t,j,ac_sub,"lower")            = q32_yield_forestry_ac.lo(j,ac_sub);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################

@@ -13,11 +13,13 @@ $offtext
 p32_carbon_density_ac(t,j,type32,ac,c_pools)  = pm_carbon_density_ac(t,j,ac,c_pools);
 
 **** set lower limit
+v32_management_factor.lo(i) = 1$(ord(t)=1);
 v32_management_factor.up(i) = 50;
+v32_management_factor.lo(i) = p32_forestry_management(i);
 
 ** Plantation vegc is different
 *p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * sum(cell(i,j),p32_forestry_management(i));
-p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * sum(cell(i,j),v32_management_factor.l(i));
+*p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * sum(cell(i,j),v32_management_factor.l(i));
 
 ** BEGIN INDC **
 
@@ -85,12 +87,19 @@ m_boundfix(v32_land,(j,"aff","ac0"),l,10e-5);
 v32_land.fx(j,"aff",ac_sub) = pc32_land(j,"aff",ac_sub);
 v32_land.fx(j,"indc",ac_sub) = pc32_land(j,"indc",ac_sub);
 
+$ontext
 p32_yield_forestry_ac(t,j,ac_sub) =
       (2)
       * p32_carbon_density_ac(t,j,"plant",ac_sub,"vegc")
       * 0.85
       / sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac_sub,clcl))
       ;
+$offtext
+
+if(ord(t)=1,
+**** initialize p32_yield_forestry_ac
+p32_yield_forestry_ac(j,ac_sub) = 2 * pm_carbon_density_ac("y1995",j,ac_sub,"vegc") * sum(cell(i,j),v32_management_factor.l(i)) * 0.85 * sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac_sub,clcl));
+);
 
 *p32_yield_forestry_ac(t,j,ac_sub) = m_growing_stock(pm_carbon_density_ac(t,j,ac_sub,"vegc") * sum(cell(i,j),p32_forestry_management(i)));
 *p32_yield_forestry_ac(t,j,ac_sub) = m_growing_stock(p32_carbon_density_ac(t,j,"plant",ac_sub,"vegc"));
@@ -101,7 +110,7 @@ pm_rotation_reg(t,i) = ord(t) + ceil(pm_rot_length_estb(t,i)/5) + card(t_past_ff
 *pm_rotation_reg(t,i) = ord(t) + ceil(30/5) + card(t_past_ff);
 
 *pc32_yield_forestry_future(j) = sum(ac$(ac.off = p32_rotation_cellular(j)+1), p32_yield_forestry_ac(t,j,ac));
-pc32_yield_forestry_future(t,j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), p32_yield_forestry_ac(t,j,ac_sub));
+pc32_yield_forestry_future(t,j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), p32_yield_forestry_ac(j,ac_sub));
 
 ** Calculating future yield from already mature plantations.
 ** If the forest is already mature (say ac50), and we decide to use this mature "available" plantation to meet Future

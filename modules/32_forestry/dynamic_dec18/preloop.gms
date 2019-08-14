@@ -79,7 +79,7 @@ p32_forestry_management(i) = f32_forestry_management(i);
 **************************************************************************
 
 **** TC like inmplementation for mgmt factors
-p32_management_incr_cost(i) = 10e6;
+p32_management_incr_cost(i) = 10e12;
 
 **** initialize managemnt factors which can be increased
 v32_management_factor.l(i) = p32_forestry_management(i);

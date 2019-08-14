@@ -11,7 +11,7 @@ parameters
  p32_aff_pol_timestep(t,j)                        INDC afforestation per time step (Mha)
  p32_aff_pol(t,j)                                 INDC forest stock (Mha)
  pc32_yield_forestry_future(t,j)                    Cellular timber yield expected in the future (m3 per ha per year)
- p32_yield_forestry_ac(t,j,ac)                    Age class specific yield of plantation forests (m3 per ha per yr)
+ p32_yield_forestry_ac(j,ac)                    Age class specific yield of plantation forests (m3 per ha per yr)
  p32_hvcost_ha(i)                                 Timber harvesting cost per ha (USD)
  p32_rot_length(t,i)                                Regional rotation length of plantations (yr)
  pm_rot_length(t,i)                                 Regional rotation length of plantations translated to age class equivalent for future (1)
@@ -29,7 +29,7 @@ parameters
  pm_rot_length_estb(t,i)                            Regional rotation length of plantations translated to age class equivalent for future (1)
  p32_rotation_cellular_estb(t,j)                    Rotation length translated to age classes on cellular level (1)
  p32_rot_length_all(t,i)                      xx
- p32_management_incr_cost(i)                 xx
+ p32_management_incr_cost(i)                  xx
 ;
 
 positive variables
@@ -54,6 +54,7 @@ positive variables
  v32_management_factor(i)                         managemement factor which can increase in extreme cases
  v32_management_incr_cost(i)                      Very high costs for increasing managemnt factors
  vm_prod_cell_forestry(j,kforestry)               xx
+ v32_yield_forestry_ac(j,ac_sub)                  xx
  ;
 
 equations
@@ -79,6 +80,7 @@ equations
 * q32_prod_reg_forestry(i)                         xxxx
  q32_management_incr_cost(i)                       xxxx
  q32_prod_cell_forestry(j,kforestry)               xx
+ q32_yield_forestry_ac(j,ac_sub)                   xx
 ;
 
 
@@ -99,6 +101,7 @@ parameters
  ov32_management_factor(t,i,type)                managemement factor which can increase in extreme cases
  ov32_management_incr_cost(t,i,type)             Very high costs for increasing managemnt factors
  ov_prod_cell_forestry(t,j,kforestry,type)       xx
+ ov32_yield_forestry_ac(t,j,ac_sub,type)         xx
  oq32_cost_total(t,i,type)                       total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                             land constraint (mio. ha)
  oq32_cdr_aff(t,j,type)                          calculation of CDR from afforestation
@@ -119,5 +122,6 @@ parameters
  oq32_cost_establishment(t,i,type)               Present value of cost of establishment (mio. USD)
  oq32_management_incr_cost(t,i,type)             xxxx
  oq32_prod_cell_forestry(t,j,kforestry,type)     xx
+ oq32_yield_forestry_ac(t,j,ac_sub,type)         xx
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
