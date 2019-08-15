@@ -29,7 +29,6 @@ parameters
  pm_rot_length_estb(t,i)                            Regional rotation length of plantations translated to age class equivalent for future (1)
  p32_rotation_cellular_estb(t,j)                    Rotation length translated to age classes on cellular level (1)
  p32_rot_length_all(t,i)                      xx
- p32_management_incr_cost(i)                  xx
 ;
 
 positive variables

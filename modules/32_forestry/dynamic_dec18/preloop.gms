@@ -65,7 +65,6 @@ p32_land(t,j,"plant",ac)$(ord(ac) > 1) = p32_land(t,j,"plant",ac-1);
 p32_land("y1995",j,"plant","ac0") = 0;
 
 **************************************************************************************
-fm_production_ratio(i,t_all) = fm_production_ratio(i,t_all) * 0.8;
 pm_production_ratio_ext(i,t_ext) = fm_production_ratio(i,"y1995");
 pm_production_ratio_ext(i,t_all) = fm_production_ratio(i,"y1995");
 *fm_production_ratio(i,t_all) = 0.3;
@@ -77,9 +76,6 @@ pm_production_ratio_ext(i,t_all) = fm_production_ratio(i,t_all);
 p32_forestry_management(i) = f32_forestry_management(i);
 
 **************************************************************************
-
-**** TC like inmplementation for mgmt factors
-p32_management_incr_cost(i) = 10e12;
 
 **** initialize managemnt factors which can be increased
 v32_management_factor.l(i) = p32_forestry_management(i);

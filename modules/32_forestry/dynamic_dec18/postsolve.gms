@@ -5,9 +5,6 @@ p32_forestry_management(i) = v32_management_factor.l(i);
 ** Optimized yield
 p32_yield_forestry_ac(j,ac_sub) = v32_yield_forestry_ac.l(j,ac_sub);
 
-** Updated costs
-p32_management_incr_cost(i) = 10**(6+(p32_forestry_management(i)/20)) - 10**6;
-
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_cost_fore(t,i,"marginal")                          = vm_cost_fore.m(i);
  ov32_land(t,j,type32,ac,"marginal")                   = v32_land.m(j,type32,ac);

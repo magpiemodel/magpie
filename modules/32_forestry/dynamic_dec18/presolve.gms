@@ -13,8 +13,7 @@ $offtext
 p32_carbon_density_ac(t,j,type32,ac,c_pools)  = pm_carbon_density_ac(t,j,ac,c_pools);
 
 **** set lower limit
-v32_management_factor.lo(i) = 1$(ord(t)=1);
-v32_management_factor.up(i) = 50;
+v32_management_factor.up(i) = 100;
 v32_management_factor.lo(i) = p32_forestry_management(i);
 
 ** Plantation vegc is different

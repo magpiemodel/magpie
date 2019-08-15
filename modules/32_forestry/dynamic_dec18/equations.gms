@@ -122,7 +122,7 @@ q32_hvarea_forestry(j2,ac_sub) ..
  q32_management_incr_cost(i2) ..
                               v32_management_incr_cost(i2)
                               =e=
-                              v32_management_factor(i2) * p32_management_incr_cost(i2)
+                              (10**(6+(v32_management_factor(i2)/20))) - (10**(6+(1/20)))
                               ;
 
 *********************************************************
@@ -141,8 +141,7 @@ q32_prod_cell_forestry(j2,kforestry)..
 q32_production_timber(i2,kforestry)..
                           sum(cell(i2,j2),v32_prod(j2,kforestry))
                           =g=
-                          vm_prod_reg(i2,kforestry) * 0.33
-*                          * sum(ct, fm_production_ratio(i2,ct))
+                          vm_prod_reg(i2,kforestry) * sum(ct, fm_production_ratio(i2,ct))
                           ;
 
 ** Establishment in current time step already accounts for a certain percentage of production to be fulfilled by plantations in future.
