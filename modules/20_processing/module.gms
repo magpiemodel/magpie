@@ -15,7 +15,6 @@
 
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%processing%" == "coupleproducts_feb17" $include "./modules/20_processing/coupleproducts_feb17/realization.gms"
 $Ifi "%processing%" == "off" $include "./modules/20_processing/off/realization.gms"
 $Ifi "%processing%" == "substitution_dec18" $include "./modules/20_processing/substitution_dec18/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
