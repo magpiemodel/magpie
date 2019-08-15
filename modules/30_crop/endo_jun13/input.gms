@@ -8,11 +8,12 @@
 
 ********* CROPAREA INITIALISATION **********************************************
 
-table f30_croparea(t_past,j,kcr) Different croparea type areas (mio. ha)
+table fm_croparea(t_all,j,w,kcr) Different croparea type areas (mio. ha)
 $ondelim
-$include "./modules/30_crop/endo_jun13/input/f30_croparea_initialisation.cs2"
+$include "./modules/30_crop/endo_jun13/input/f30_croparea_initialisation.cs3"
 $offdelim
 ;
+m_fillmissingyears(fm_croparea,"j,w,kcr");
 
 
 ********* CROP-ROTATIONAL CONSTRAINT *******************************************

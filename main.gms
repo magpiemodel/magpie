@@ -92,17 +92,25 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
+* Used data set: rev4.21_690d3718e151be1b450b394c1064b1c5_magpie.tgz
+* md5sum: e44c795bcb0cc322c8991beb82ae7139
+* Repository: /p/projects/rd3mod/inputdata/output
+* 
 * Used data set: magpie4.1_default_apr19.tgz
 * md5sum: 5c38bb1083bd66010c2104c9d40553f4
 * Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: additional_data_rev3.68.tgz
 * md5sum: 15d1135625a9f5cfb9c7c6038716a156
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* 
+* Used data set: LPJmL5-IPSL_CM5A_LR-rcp2p6_rev39_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* md5sum: 5f65f0927d751b359a23c8c466bca840
 * Repository: /p/projects/landuse/data/input/archive
 * 
-* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38.1_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: ae4dbc8e36e6fb4ba8cee0d2400b2193
-* Repository: /p/projects/landuse/data/input/archive
+* Used data set: rev4.21_690d3718e151be1b450b394c1064b1c5_validation.tgz
+* md5sum: 6474ba0947b7bd202e587a4f5273de9b
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -111,31 +119,31 @@ $title magpie
 * 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*    28   24   10    7    3   53   17    8   22    7   11   10
+*    28   23    9    6    2   32   34    9   14    9   25    9
 * 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
 * Regions data revision: 4.18
 * 
 * lpj2magpie settings:
-* * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
-* * Additional input folder: /p/projects/landuse/data/input/other/rev38
-* * Revision: 38.1
-* * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
+* * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/LPJmL5/IPSL_CM5A_LR/rcp2p6/
+* * Additional input folder: /p/projects/landuse/data/input/other/rev39
+* * Revision: 39
+* * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), moinput_cache = gsub("default",     paste0("rev", cfg$revision2), madrat::getConfig()$cachefolder),     output_file = lpj2magpie_file, rev = cfg$revision, start_year = cfg$LPJ_start_year)
 * 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
-* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38.1_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38.1_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* * Input file: /p/projects/landuse/data/input/archive/LPJmL5-IPSL_CM5A_LR-rcp2p6-_rev39_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/LPJmL5-IPSL_CM5A_LR-rcp2p6-_rev39_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
-* * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
+* * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = cfg$spamfile, debug = FALSE, seed = cfg$seed)
 * 
 * 
 * 
-* Last modification (input data): Wed Jul 24 16:08:37 2019
+* Last modification (input data): Thu Aug 15 23:03:08 2019
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -173,7 +181,7 @@ $setglobal land  feb15
 $setglobal costs  default
 $setglobal interest_rate  reg_feb18
 $setglobal tc  endo_jun18
-$setglobal yields  dynamic_aug18
+$setglobal yields  managementcalib_aug19
 
 $setglobal food  anthropometrics_jan18
 $setglobal demand  sector_may15
