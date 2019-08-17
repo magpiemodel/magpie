@@ -21,22 +21,27 @@ i14_yields(t,j,"pasture",w) = i14_yields(t,j,"pasture",w)*sum(cell(i,j),p14_pyie
 ***YIELD MANAGEMENT CALIBRATION************************************************************
 
 p14_lpj_yields(t,i,kcr)         = sum((cell(i,j),w), fm_croparea(t,j,w,kcr) * f14_yields(t,j,kcr,w)) /
-                                   sum((cell(i,j),w), fm_croparea(t,j,w,kcr));
-
-p14_lambda_yields(t,i,kcr)  = 1$(f14_regions_yields(t,i,kcr) <= p14_lpj_yields(t,i,kcr)) +
-                              sqrt(p14_lpj_yields(t,i,kcr)/f14_regions_yields(t,i,kcr))$(f14_regions_yields(t,i,kcr) > p14_lpj_yields(t,i,kcr));
-
+                                   (sum((cell(i,j),w), fm_croparea(t,j,w,kcr))+0.000001);
 loop(t,
      if(sum(sameas(t,t_past),1)=1,
-			 p14_delta_yields(t,i,kcr)   = f14_regions_yields(t,i,kcr) - p14_lpj_yields(t,i,kcr);
-			 p14_ccratio_yields(t,i,kcr) = p14_lpj_yields(t,i,kcr) / p14_lpj_yields(t,i,kcr);
-	   Else
-			 p14_delta_yields(t,i,kcr)   = f14_regions_yields("y2010",i,kcr) - p14_lpj_yields("y2010",i,kcr);
-			 p14_ccratio_yields(t,i,kcr) = p14_lpj_yields(t,i,kcr) / p14_lpj_yields("y2010",i,kcr);
-			 p14_lambda_yields(t,i,kcr) = p14_lambda_yields("y2010",i,kcr));
+       p14_lpj_yields_past(t,i,kcr) = p14_lpj_yields(t,i,kcr);
+			 p14_delta_yields(t,i,kcr)    = f14_regions_yields(t,i,kcr) - p14_lpj_yields(t,i,kcr);
+			 p14_ccratio_yields(t,i,kcr)  = 1$(p14_lpj_yields_past(t,i,kcr)=0) +
+			                                (p14_lpj_yields(t,i,kcr) / p14_lpj_yields_past(t,i,kcr))$(p14_lpj_yields_past(t,i,kcr)>0);
+			 p14_lambda_yields(t,i,kcr)   = 1$
+			                                   ((not s14_limit_calib) or (f14_regions_yields(t,i,kcr) <= p14_lpj_yields(t,i,kcr))) +
+																			sqrt(p14_lpj_yields(t,i,kcr)/f14_regions_yields(t,i,kcr))$
+																			   ((s14_limit_calib) and (f14_regions_yields(t,i,kcr) > p14_lpj_yields(t,i,kcr)));
+		 Else
+		   p14_lpj_yields_past(t,i,kcr) = p14_lpj_yields_past(t-1,i,kcr);
+			 p14_delta_yields(t,i,kcr)    = p14_delta_yields(t-1,i,kcr);
+			 p14_ccratio_yields(t,i,kcr)  = 1$(p14_lpj_yields_past(t,i,kcr)=0) +
+																		  (p14_lpj_yields(t,i,kcr) / p14_lpj_yields_past(t,i,kcr))$(p14_lpj_yields_past(t,i,kcr)>0);
+			p14_lambda_yields(t,i,kcr)    = p14_lambda_yields(t-1,i,kcr);
+		);
 );
 
-p14_managementcalib(t,i,kcr) = 1 + p14_delta_yields(t,i,kcr)/ p14_lpj_yields(t,i,kcr) *
+p14_managementcalib(t,i,kcr) = 1 + p14_delta_yields(t,i,kcr)/ (p14_lpj_yields(t,i,kcr)+0.000001) *
                                       (p14_ccratio_yields(t,i,kcr)) ** p14_lambda_yields(t,i,kcr);
 
 

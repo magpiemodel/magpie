@@ -92,13 +92,9 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.21_690d3718e151be1b450b394c1064b1c5_magpie.tgz
-* md5sum: e44c795bcb0cc322c8991beb82ae7139
-* Repository: /p/projects/rd3mod/inputdata/output
-* 
 * Used data set: magpie4.1_default_apr19.tgz
 * md5sum: 5c38bb1083bd66010c2104c9d40553f4
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: additional_data_rev3.68.tgz
 * md5sum: 15d1135625a9f5cfb9c7c6038716a156
@@ -107,6 +103,10 @@ $title magpie
 * Used data set: LPJmL5-IPSL_CM5A_LR-rcp2p6_rev39_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: 5f65f0927d751b359a23c8c466bca840
 * Repository: /p/projects/landuse/data/input/archive
+* 
+* Used data set: rev4.21_690d3718e151be1b450b394c1064b1c5_magpie.tgz
+* md5sum: e44c795bcb0cc322c8991beb82ae7139
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Used data set: rev4.21_690d3718e151be1b450b394c1064b1c5_validation.tgz
 * md5sum: 6474ba0947b7bd202e587a4f5273de9b
@@ -123,7 +123,7 @@ $title magpie
 * 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
-* Regions data revision: 4.18
+* Regions data revision: 4.21
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/LPJmL5/IPSL_CM5A_LR/rcp2p6/
@@ -143,7 +143,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Thu Aug 15 23:03:08 2019
+* Last modification (input data): Fri Aug 16 11:29:26 2019
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -177,7 +177,7 @@ scalars
 *******************************MODULE SETUP*************************************
 
 $setglobal drivers  aug17
-$setglobal land  feb15
+$setglobal land  landmatrix_dec18
 $setglobal costs  default
 $setglobal interest_rate  reg_feb18
 $setglobal tc  endo_jun18

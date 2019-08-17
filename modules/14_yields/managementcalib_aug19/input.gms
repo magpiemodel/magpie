@@ -9,6 +9,8 @@ $setglobal c14_yields_scenario  nocc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
 
+scalar s14_limit_calib   Relative managament calibration switch (1=limited 0=pure relative) / 1 /;
+
 ******* Calibration factor
 table f14_yld_calib(i,ltype14) Calibration factor for the LPJmL yields (1)
 $ondelim
@@ -36,3 +38,4 @@ $offdelim
 ;
 * set values to 1995 if nocc scenario is used
 $if "%c14_yields_scenario%" == "nocc" f14_regions_yields(t_past,i,kcr) = f14_regions_yields("y1995",i,kcr);
+m_fillmissingyears(f14_regions_yields,"i,kcr");
