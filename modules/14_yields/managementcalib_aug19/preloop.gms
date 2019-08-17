@@ -41,8 +41,9 @@ loop(t,
 		);
 );
 
-p14_managementcalib(t,i,kcr) = 1 + p14_delta_yields(t,i,kcr)/ (p14_lpj_yields(t,i,kcr)+0.000001) *
-                                      (p14_ccratio_yields(t,i,kcr)) ** p14_lambda_yields(t,i,kcr);
+p14_managementcalib(t,i,kcr) = 1 + (p14_delta_yields(t,i,kcr)/ (p14_lpj_yields(t,i,kcr)) *
+                                      (p14_ccratio_yields(t,i,kcr)) ** p14_lambda_yields(t,i,kcr))
+																			  $(p14_lpj_yields(t,i,kcr)>0);
 
 
 ***YIELD CALIBRATION***********************************************************************

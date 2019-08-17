@@ -37,7 +37,7 @@ buildInputVector <- function(base            = "magpie4.1_default_apr19.tgz",
                 capri="e7e72fddc44cc3d546af7b038c651f51",
 		BRATRADE="d49a7a8baaab0edc754ebfc09462be0a")
 
-  archive_name <- paste(archive,climate_model,climatescen_name,co2,sep="-")
+  archive_name <- paste(archive,climate_model,climatescen_name,sep="-")
   if(!is.null(archive))    archive     <- paste0(archive_name, "_rev", archive_rev, "_", resolution, addings,"_", mappings[regionmapping], ".tgz")
   if(!is.null(madrat))     madrat      <- paste0("rev", madrat,"_", mappings[regionmapping], "_magpie", ".tgz")
   if(!is.null(validation)) validation  <- paste0("rev", validation,"_", mappings[regionmapping], "_validation", ".tgz")
