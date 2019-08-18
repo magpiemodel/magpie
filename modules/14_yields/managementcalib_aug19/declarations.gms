@@ -9,6 +9,7 @@ parameters
  i14_yields(t,j,kve,w)           Biophysical input yields (excluding technological change) (tDM per ha per yr)
  p14_pyield_LPJ_reg(t_all,i)     Regional average input yields aggregated from clusters with initial pasture area as weights (tDM per ha per yr)
  p14_pyield_corr(t,i)            Regional pasture management correction for historical time steps (1)
+ p14_croparea_total(t,j)         Cellular water type specific cropareas (mio. ha)
  p14_lpj_yields(t,i,kcr)         Biophysical input yields average over region and water supply type (tDM per ha per yr)
  p14_lpj_yields_past(t,i,kcr)    Biophysical input yields average over region and water supply type at the past reference year (tDM per ha per yr)
  p14_delta_yields(t,i,kcr)       Gap between FAO and biophysical yields on regional level (tDM per ha per yr)

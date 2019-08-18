@@ -48,25 +48,24 @@ buildInputVector <- function(base            = "magpie4.1_default_apr19.tgz",
 
 cfg$input <- buildInputVector()
 
-
 cfg$recalibrate <- TRUE
 
 cfg$gms$s14_limit_calib <- 1
-cfg$title    <- "lpjml5_limited_calib"
+cfg$title    <- "lpjml5_limited_calib_fix3"
 start_run(cfg=cfg,codeCheck=TRUE)
 
 cfg$recalibrate <- FALSE
 
 cfg$gms$s14_limit_calib <- 0
-cfg$title    <- "lpjml5_purerel_calib"
+cfg$title    <- "lpjml5_purerel_calib_fix3"
 start_run(cfg=cfg,codeCheck=TRUE)
 
 cfg<-lucode::setScenario(cfg,"cc")
 
 cfg$gms$s14_limit_calib <- 1
-cfg$title    <- "lpjml5_limited_calib_cc"
+cfg$title    <- "lpjml5_limited_calib_cc_fix3"
 start_run(cfg=cfg,codeCheck=TRUE)
 
 cfg$gms$s14_limit_calib <- 0
-cfg$title    <- "lpjml5_purerel_calib_cc"
+cfg$title    <- "lpjml5_purerel_calib_cc_fix3"
 start_run(cfg=cfg,codeCheck=TRUE)

@@ -20,8 +20,13 @@ i14_yields(t,j,"pasture",w) = i14_yields(t,j,"pasture",w)*sum(cell(i,j),p14_pyie
 
 ***YIELD MANAGEMENT CALIBRATION************************************************************
 
-p14_lpj_yields(t,i,kcr)         = sum((cell(i,j),w), fm_croparea(t,j,w,kcr) * f14_yields(t,j,kcr,w)) /
-                                   (sum((cell(i,j),w), fm_croparea(t,j,w,kcr))+0.000001);
+p14_croparea_total(t,j) = sum((kcr,w), fm_croparea(t,j,w,kcr));
+
+p14_lpj_yields(t,i,kcr)         = (sum((cell(i,j),w), fm_croparea(t,j,w,kcr) * f14_yields(t,j,kcr,w)) /
+                                    sum((cell(i,j),w), fm_croparea(t,j,w,kcr)))$(sum((cell(i,j),w), fm_croparea(t,j,w,kcr))>0) +
+																	(sum((cell(i,j),w), p14_croparea_total(t,j) * f14_yields(t,j,kcr,w)) /
+																	  sum(cell(i,j), p14_croparea_total(t,j)))$(sum((cell(i,j),w), fm_croparea(t,j,w,kcr))=0);
+
 loop(t,
      if(sum(sameas(t,t_past),1)=1,
        p14_lpj_yields_past(t,i,kcr) = p14_lpj_yields(t,i,kcr);

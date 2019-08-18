@@ -5,11 +5,11 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c14_yields_scenario  nocc
+$setglobal c14_yields_scenario  cc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
 
-scalar s14_limit_calib   Relative managament calibration switch (1=limited 0=pure relative) / 1 /;
+scalar s14_limit_calib   Relative managament calibration switch (1=limited 0=pure relative) / 0 /;
 
 ******* Calibration factor
 table f14_yld_calib(i,ltype14) Calibration factor for the LPJmL yields (1)
@@ -36,6 +36,4 @@ $ondelim
 $include "./modules/14_yields/managementcalib_aug19/input/f14_region_yields.cs3"
 $offdelim
 ;
-* set values to 1995 if nocc scenario is used
-$if "%c14_yields_scenario%" == "nocc" f14_regions_yields(t_past,i,kcr) = f14_regions_yields("y1995",i,kcr);
 m_fillmissingyears(f14_regions_yields,"i,kcr");
