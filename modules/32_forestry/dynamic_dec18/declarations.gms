@@ -13,10 +13,10 @@ parameters
  pc32_yield_forestry_future(t,j)                    Cellular timber yield expected in the future (m3 per ha per year)
  p32_yield_forestry_ac(j,ac)                    Age class specific yield of plantation forests (m3 per ha per yr)
  p32_hvcost_ha(i)                                 Timber harvesting cost per ha (USD)
- p32_rot_length(t,i)                                Regional rotation length of plantations (yr)
- pm_rot_length(t,i)                                 Regional rotation length of plantations translated to age class equivalent for future (1)
+ p32_rot_length(t,j)                                Regional rotation length of plantations (yr)
+ pm_rot_length(t,j)                                 Regional rotation length of plantations translated to age class equivalent for future (1)
  p32_rotation_cellular(t,j)                         Rotation length translated to age classes on cellular level (1)
- p32_forestry_management(i)                       Plantation forest management factors on world region levels (1)
+ p32_forestry_management(j)                       Plantation forest management factors on world region levels (1)
  pc32_timestep                                    Timestep (1)
  pm_production_ratio_ext(i,t_ext)                 Extened production ratio (1)
  pc32_yield_forestry_mature_future(j)             Future yield of matured tree after rotation period (m3 per ha per yr)
@@ -25,8 +25,8 @@ parameters
  pcm_production_ratio_future(i)                  Future production ratio (1)
  pm_rotation_reg(t,i)                              Regional rotation length of plantations translated to age class equivalent for future (1)
  p32_error_check                                  X (1)
- p32_rot_length_estb(t,i)                           Rotation length for establishment (yr)
- pm_rot_length_estb(t,i)                            Regional rotation length of plantations translated to age class equivalent for future (1)
+ p32_rot_length_estb(t,j)                           Rotation length for establishment (yr)
+ pm_rot_length_estb(t,j)                            Regional rotation length of plantations translated to age class equivalent for future (1)
  p32_rotation_cellular_estb(t,j)                    Rotation length translated to age classes on cellular level (1)
  p32_rot_length_all(t,i)                      xx
 ;
@@ -50,7 +50,7 @@ positive variables
 
  v32_cost_establishment(i)                        Cost of establishment calculated at the current time step (mio. USD)
 * v32_missing_area_future(j)                       Defunct (1)
- v32_management_factor(i)                         managemement factor which can increase in extreme cases
+ v32_management_factor(j)                         managemement factor which can increase in extreme cases
  v32_management_incr_cost(i)                      Very high costs for increasing managemnt factors
  vm_prod_cell_forestry(j,kforestry)               xx
  v32_yield_forestry_ac(j,ac_sub)                  xx
@@ -97,7 +97,7 @@ parameters
  ov32_land_reduction(t,j,type32,ac,type)         land reduction (mio. ha)
  ov32_avail_reuse(t,j,type)                      Defunct (1)
  ov32_cost_establishment(t,i,type)               Cost of establishment calculated at the current time step (mio. USD)
- ov32_management_factor(t,i,type)                managemement factor which can increase in extreme cases
+ ov32_management_factor(t,j,type)                managemement factor which can increase in extreme cases
  ov32_management_incr_cost(t,i,type)             Very high costs for increasing managemnt factors
  ov_prod_cell_forestry(t,j,kforestry,type)       xx
  ov32_yield_forestry_ac(t,j,ac_sub,type)         xx

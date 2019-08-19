@@ -1,31 +1,21 @@
 *v32_hvarea_forestry.fx(j,kforestry,"ac0") = 0;
 
 ** Read exogenous rotation length
-p32_rot_length(t,i) = f32_rot_length(t,i,"%c32_rot_length%");
-p32_rot_length_estb(t,i) = f32_rot_length(t,i,"%c32_rot_length_estb%");
+*p32_rot_length(t,i) = f32_rot_length(t,i,"%c32_rot_length%");
+*p32_rot_length_estb(t,i) = f32_rot_length(t,i,"%c32_rot_length_estb%");
+
+p32_rot_length(t,j) = f32_rot_length_cellular(t,j);
+p32_rot_length_estb(t,j) = f32_rot_length_cellular(t,j);
 *p32_rot_length_estb(t,i) = 30;
 
-p32_rot_length(t,"CAZ") = 45;
-p32_rot_length(t,"CHA")= 30;
-p32_rot_length(t,"EUR")= 35;
-p32_rot_length(t,"IND")= 20;
-p32_rot_length(t,"JPN")= 60;
-p32_rot_length(t,"LAM")= 25;
-p32_rot_length(t,"MEA")= 30;
-p32_rot_length(t,"NEU")= 35;
-p32_rot_length(t,"OAS")= 20;
-p32_rot_length(t,"REF")= 35;
-p32_rot_length(t,"SSA")= 20;
-p32_rot_length(t,"USA") = 45;
+p32_rot_length_estb(t,j) = p32_rot_length(t,j);
 
-p32_rot_length_estb(t,i) = p32_rot_length(t,i);
-
-pm_rot_length(t,i) = p32_rot_length(t,i);
-pm_rot_length_estb(t,i) = p32_rot_length_estb(t,i);
+pm_rot_length(t,j) = p32_rot_length(t,j);
+pm_rot_length_estb(t,j) = p32_rot_length_estb(t,j);
 
 ** rotation length in 5 year time steps
-p32_rotation_cellular(t,j) = sum(cell(i,j), ceil(p32_rot_length(t,i)/5));
-p32_rotation_cellular_estb(t,j) = sum(cell(i,j), ceil(p32_rot_length_estb(t,i)/5));
+p32_rotation_cellular(t,j) = ceil(p32_rot_length(t,j)/5);
+p32_rotation_cellular_estb(t,j) = ceil(p32_rot_length_estb(t,j)/5);
 
 *' @code
 *' Mapping between AC, type32 and Rotation length
@@ -65,6 +55,7 @@ p32_land(t,j,"plant",ac)$(ord(ac) > 1) = p32_land(t,j,"plant",ac-1);
 p32_land("y1995",j,"plant","ac0") = 0;
 
 **************************************************************************************
+fm_production_ratio("MEA",t_all) = fm_production_ratio("MEA","y1995");
 pm_production_ratio_ext(i,t_ext) = fm_production_ratio(i,"y1995");
 pm_production_ratio_ext(i,t_all) = fm_production_ratio(i,"y1995");
 *fm_production_ratio(i,t_all) = 0.3;
@@ -73,9 +64,9 @@ pm_production_ratio_ext(i,t_all) = fm_production_ratio(i,"y1995");
 pm_production_ratio_ext(i,t_ext) = fm_production_ratio(i,"y2100");
 pm_production_ratio_ext(i,t_all) = fm_production_ratio(i,t_all);
 
-p32_forestry_management(i) = f32_forestry_management(i);
+p32_forestry_management(j) = sum(cell(i,j),f32_forestry_management(i));
 
 **************************************************************************
 
 **** initialize managemnt factors which can be increased
-v32_management_factor.l(i) = p32_forestry_management(i);
+v32_management_factor.l(j) = 2;

@@ -49,6 +49,13 @@ $ondelim
 $include "./modules/32_forestry/input/f32_rot_length.csv"
 $offdelim;
 
+parameter f32_rot_length_cellular(t_all,j) rot length cellular
+/
+$ondelim
+$include "./modules/32_forestry/input/f32_rot_length_cellular.cs2"
+$offdelim
+/;
+
 parameter fm_production_ratio(i,t_all) percentage of supply coming from plantations (percentage)
 /
 $ondelim

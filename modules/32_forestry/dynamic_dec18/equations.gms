@@ -60,11 +60,11 @@ q32_cost_establishment(i2)..
 						=e=
             (sum((cell(i2,j2),type32), v32_land(j2,type32,"ac0") * c32_reESTBcost)
             +
-              (sum((ct,kforestry), vm_prod_future_reg_ff(i2,kforestry) * c32_harvesting_cost/((1+pm_interest(i2))**p32_rot_length(ct,i2)))
+              (sum((ct,kforestry), vm_prod_future_reg_ff(i2,kforestry) * c32_harvesting_cost/((1+pm_interest(i2))**30))
               +
               sum((cell(i2,j2),ct,kforestry), f32_distance(j2) * f32_transport_costs(kforestry)) * sum(kforestry,vm_prod_future_reg_ff(i2,kforestry))
               +
-              sum(ct,vm_cost_trade_forestry_ff(i2)/((1+pm_interest(i2))**p32_rot_length(ct,i2)))
+              sum(ct,vm_cost_trade_forestry_ff(i2)/((1+pm_interest(i2))**30))
 *************************** ((1+pm_interest(i2))**p32_rot_length(ct,i2)) to calculate present value of future costs
               )
             )
@@ -91,7 +91,7 @@ q32_yield_forestry_ac(j2,ac_sub)..
   =e=
    (2)
    *
-   sum(ct, pm_carbon_density_ac(ct,j2,ac_sub,"vegc")) * sum(cell(i2,j2),v32_management_factor(i2))
+   sum(ct, pm_carbon_density_ac(ct,j2,ac_sub,"vegc")) * v32_management_factor(j2)
    *
    0.85
    /
@@ -122,7 +122,7 @@ q32_hvarea_forestry(j2,ac_sub) ..
  q32_management_incr_cost(i2) ..
                               v32_management_incr_cost(i2)
                               =e=
-                              (10**(6+(v32_management_factor(i2)/20))) - (10**(6+(1/20)))
+                              sum(cell(i2,j2),(10**(6+(v32_management_factor(j2)/20))) - (10**(6+(1/20))))
                               ;
 
 *********************************************************
