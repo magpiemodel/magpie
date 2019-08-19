@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "Florian_fix"
+flag_run <- "cell_rotation"
 
 library(lucode)
 source("scripts/start_functions.R")
