@@ -4,8 +4,20 @@
 *p32_rot_length(t,i) = f32_rot_length(t,i,"%c32_rot_length%");
 *p32_rot_length_estb(t,i) = f32_rot_length(t,i,"%c32_rot_length_estb%");
 
-p32_rot_length(t,j) = f32_rot_length_cellular(t,j);
-p32_rot_length_estb(t,j) = f32_rot_length_cellular(t,j);
+p32_carbon_density_ac_nat(t,j,ac) = m_growth_vegc(0,fm_carbon_density(t,j,"other","vegc"),sum(clcl,f45_koeppengeiger(j,clcl)*f52_growth_par(clcl,"k")),sum(clcl,f45_koeppengeiger(j,clcl)*f52_growth_par(clcl,"m")),(ord(ac)-1));
+
+p32_carbon_density_ac_marg(t,j,ac+1) = (p32_carbon_density_ac_nat(t,j,ac+1) - p32_carbon_density_ac_nat(t,j,ac)) / 5;
+
+p32_IGR(t,j,ac_sub) = p32_carbon_density_ac_marg(t,j,ac_sub)/p32_carbon_density_ac_nat(t,j,ac_sub);
+p32_IGR("y1995",j,"ac0") = 1;
+p32_rot_flg(t,j,ac) = 1$((p32_IGR(t,j,ac) - sum(cell(i,j),p12_interest(t,i)))>0) + 0$((p32_IGR(t,j,ac) - sum(cell(i,j),p12_interest(t,i)))>0);
+p32_rot_final(t,j) = sum(ac,p32_rot_flg(t,j,ac)) * 5;
+
+p32_rot_length(t,j) = p32_rot_final(t,j);
+p32_rot_length_estb(t,j) = p32_rot_final(t,j);
+
+*p32_rot_length(t,j) = f32_rot_length_cellular(t,j);
+*p32_rot_length_estb(t,j) = f32_rot_length_cellular(t,j);
 *p32_rot_length_estb(t,i) = 30;
 
 p32_rot_length_estb(t,j) = p32_rot_length(t,j);
