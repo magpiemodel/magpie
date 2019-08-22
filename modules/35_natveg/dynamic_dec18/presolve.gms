@@ -107,12 +107,16 @@ v35_other.up(j,"acx") = pc35_other(j,"acx");
 m_boundfix(v35_other,(j,"acx"),l,10e-5);
 $offtext
 
-vm_land.lo(j,"primforest") = p35_save_primforest(t,j);
+** Setting bounds for only allowing 5% of available primf to be harvested (highest age class)
+vm_land.lo(j,"primforest") = max((1-s35_selective_logging_flag) * vm_land.l(j,"primforest"), p35_save_primforest(t,j));
+*vm_land.lo(j,"primforest") = p35_save_primforest(t,j);
 vm_land.up(j,"primforest") = vm_land.l(j,"primforest");
 m_boundfix(vm_land,(j,"primforest"),l,10e-5);
 
 v35_secdforest.lo(j,ac_sub) = 0;
-v35_secdforest.lo(j,"acx") = p35_save_secdforest(t,j);
+** Setting bounds for only allowing 5% of available primf to be harvested (highest age class)
+v35_secdforest.lo(j,"acx") = max((1-s35_selective_logging_flag) * v35_secdforest.l(j,"acx"), p35_save_secdforest(t,j));
+*v35_secdforest.lo(j,"acx") = p35_save_secdforest(t,j);
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
 m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
 

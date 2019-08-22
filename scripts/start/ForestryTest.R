@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "cell_rotation_as_parameter"
+flag_run <- "NatVeg_management"
 
 library(lucode)
 source("scripts/start_functions.R")
@@ -56,6 +56,14 @@ for(biodem in co2_price_scenarios){
 	cfg$gms$c56_pollutant_prices <- paste0(biodem,"-V15-REMIND-MAGPIE")      	# def = "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
 	cfg$gms$c60_2ndgen_biodem <- biodem     									# def = "SSP2-Ref-SPA0"
 
+	for (sl_set in c(0.05,1.00)) {
+		if(sl_set == 0.05) sl_name = "SelLog"
+#		if(sl_set == 0.10) sl_name = "Sl10pc"
+#		if(sl_set == 0.50) sl_name = "Sl50pc"
+		if(sl_set == 1.00) sl_name = "ClearCut"
+
+		cfg$gms$s35_selective_logging_flag = sl_set
+
   for (rl in rl_all) {
   	if(rl=="rlFAO_min"){
   		print(paste("Rotation length:",rl,"-----"))
@@ -83,10 +91,10 @@ for(biodem in co2_price_scenarios){
   		t_estb <- gsub(".*_", "", rl_estb)
       	t_estb <- gsub("rl","",t_estb)
   		if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
-  			cfg$title<- paste0(t,"Harv","-",t_estb,"Estb","-",format(Sys.time(), format="%m%d"),"_",format(Sys.time(), format="%H%M"),"_CO2prices")
+  			cfg$title<- paste0(flag_run,"_",sl_name,"_"format(Sys.time(), format="%m%d"),"_",format(Sys.time(), format="%H%M"),"_CO2prices")
       		} else {
       		#cfg$title<- paste0(t,"Harv","-",t_estb,"Estb","-",format(Sys.time(), format="%m%d"),"_",format(Sys.time(), format="%H%M"))
-					cfg$title<- paste0(flag_run,"_",format(Sys.time(), format="%m%d"),"_",format(Sys.time(), format="%H%M"))
+					cfg$title<- paste0(flag_run,"_",sl_name,"_"format(Sys.time(), format="%m%d"),"_",format(Sys.time(), format="%H%M"))
       		}
       	start_run(cfg=cfg,codeCheck=codeCheck)
   		}
@@ -108,4 +116,5 @@ for(biodem in co2_price_scenarios){
   		}
     }
   }
+ }
 }
