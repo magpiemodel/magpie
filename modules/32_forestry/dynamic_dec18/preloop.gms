@@ -69,4 +69,4 @@ p32_forestry_management(j) = sum(cell(i,j),f32_forestry_management(i));
 **************************************************************************
 
 **** initialize managemnt factors which can be increased
-v32_management_factor.l(j) = 2;
+v32_management_factor.l(j) = 5;
