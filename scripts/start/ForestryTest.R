@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "cell_rotation"
+flag_run <- "cell_rotation_as_parameter"
 
 library(lucode)
 source("scripts/start_functions.R")
