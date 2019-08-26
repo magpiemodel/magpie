@@ -1,7 +1,8 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 **************start solve loop**************
 
@@ -43,6 +44,7 @@ repeat(
     );
 
   p80_modelstat(t) = magpie.modelstat;
+  p80_num_nonopt(t) = magpie.numNOpt;
 
   display "vm_cost_glo.l";
   display vm_cost_glo.l;
@@ -54,7 +56,7 @@ repeat(
 
   display s80_counter;
 
-  until (p80_modelstat(t) <= 2 or s80_counter >= s80_maxiter)
+  until ((p80_modelstat(t) <= 2 and p80_num_nonopt(t) <= s80_num_nonopt_allowed) or s80_counter >= s80_maxiter)
 );
 
 *' @stop

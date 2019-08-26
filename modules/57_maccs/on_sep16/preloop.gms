@@ -1,60 +1,96 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+$ontext
+Determine level of GHG emission abatement depending on GHG prices.
+There are 200 abatement steps. Each step is 5 USD per tC eq. Options at zero cost are in the first step.
+Since the GHG prices are in USD per ton N and USD per ton CH4, conversion to USD per ton C eq is needed.
+In this realization, the old IPCC AR4 global warming potential factor for N2O (298) and CH4 (25) MUST be used because 
+Lucas et al used these parameters to convert USD per ton N2O and USD per ton CH4 into USD per ton C eq. 
+$offtext
 
-*Abatement options are in 5 USD/tC steps; options at zero price are in the first step
-i57_mac_step(t,i) = min(201, ceil(im_pollutant_prices(t,i,"co2_c") / 5) + 1);
+i57_mac_step_n2o(t,i) = min(201, ceil(im_pollutant_prices(t,i,"n2o_n_direct")/298*28/44*44/12 / 5) + 1);
+i57_mac_step_ch4(t,i) = min(201, ceil(im_pollutant_prices(t,i,"ch4")/25*44/12 / 5) + 1);
+
+*Calculate technical mitigation depending on i57_mac_step_n2o and i57_mac_step_ch4.
+*At zero GHG prices i57_mac_step_n2o/i57_mac_step_ch4 are set to 1.
+*Technical mitigation should be zero at zero GHG prices.
+*There the following calculations are only executed for ord(maccs_steps) > 1
 
 im_maccs_mitigation(t,i,emis_source,pollutants) = 0;
 
 im_maccs_mitigation(t,i,emis_source_inorg_fert_n2o,"n2o_n_direct") =
-        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step(t,i)),
+        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step_n2o(t,i) AND ord(maccs_steps) > 1),
               f57_maccs_n2o(t,i,"inorg_fert_n2o",maccs_steps));
 
 im_maccs_mitigation(t,i,emis_source_awms_manure_n2o,"n2o_n_direct") =
-        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step(t,i)),
+        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step_n2o(t,i) AND ord(maccs_steps) > 1),
               f57_maccs_n2o(t,i,"awms_manure_n2o",maccs_steps));
 
 im_maccs_mitigation(t,i,emis_source_rice_ch4,"ch4") =
-        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step(t,i)),
+        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step_ch4(t,i) AND ord(maccs_steps) > 1),
               f57_maccs_ch4(t,i,"rice_ch4",maccs_steps));
 
 im_maccs_mitigation(t,i,emis_source_ent_ferm_ch4,"ch4") =
-        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step(t,i)),
+        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step_ch4(t,i) AND ord(maccs_steps) > 1),
               f57_maccs_ch4(t,i,"ent_ferm_ch4",maccs_steps));
 
 im_maccs_mitigation(t,i,emis_source_awms_ch4,"ch4") =
-        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step(t,i)),
+        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step_ch4(t,i) AND ord(maccs_steps) > 1),
               f57_maccs_ch4(t,i,"awms_ch4",maccs_steps));
 
+$ontext
+The costs associated with technical abatement of GHG emissions are reflected by the area under the mac curve, i.e. the integral.
+Abatement options at zero cost are in the first step. Therefore an offset of -1 is used.
+Note that vm_btm_reg, which needs to be part of the integral calculation but is not available in preloop, 
+is multiplied with p57_maccs_costs_integral during optimization (see equations).
 
-p57_maccs_costs_integral(t,i,emis_source_inorg_fert_n2o,"n2o_n_direct") = f57_maccs_n2o(t,i,"inorg_fert_n2o","1");
-p57_maccs_costs_integral(t,i,emis_source_awms_manure_n2o,"n2o_n_direct") = f57_maccs_n2o(t,i,"awms_manure_n2o","1");
-p57_maccs_costs_integral(t,i,emis_source_rice_ch4,"ch4") = f57_maccs_ch4(t,i,"rice_ch4","1");
-p57_maccs_costs_integral(t,i,emis_source_ent_ferm_ch4,"ch4") = f57_maccs_ch4(t,i,"ent_ferm_ch4","1");
-p57_maccs_costs_integral(t,i,emis_source_awms_ch4,"ch4") = f57_maccs_ch4(t,i,"awms_ch4","1");
+Illustrative example for CH4: Abatement is 0.14 percent at 0$/tC, 0.15 percent at 5 and 10 $/tC, and 0.16 percent at 15 $/tC. 
+Emissions before technical mitigation are assumed 1 t CH4.
+
+step 1											0 mio $		0 mio $
+step 2  (0.15-0.14) * 1 tCH4 * 5$/tC*12/44*28 	0.38 mio $	0.38 mio $
+step 3  (0.15-0.15) * 1 tCH4 * 10$/tC*12/44*28 	0 mio $		0.38 mio $
+step 4  (0.16-0.15) * 1 tCH4 * 15$/tC*12/44*28 	1.15 mio $	1.53 mio $
+
+$offtext
+
+p57_maccs_costs_integral(t,i,emis_source,pollutants) = 0;
 
 loop(maccs_steps$(ord(maccs_steps) > 1),
-    p57_maccs_costs_integral(t,i,emis_source_inorg_fert_n2o,"n2o_n_direct")$(ord(maccs_steps) <= i57_mac_step(t,i)) =
+    p57_maccs_costs_integral(t,i,emis_source_inorg_fert_n2o,"n2o_n_direct")$(ord(maccs_steps) <= i57_mac_step_n2o(t,i)) =
     p57_maccs_costs_integral(t,i,emis_source_inorg_fert_n2o,"n2o_n_direct") +
     (f57_maccs_n2o(t,i,"inorg_fert_n2o",maccs_steps) - f57_maccs_n2o(t,i,"inorg_fert_n2o",maccs_steps-1))*(ord(maccs_steps)-1)*5;
 
-    p57_maccs_costs_integral(t,i,emis_source_awms_manure_n2o,"n2o_n_direct")$(ord(maccs_steps) <= i57_mac_step(t,i)) =
+    p57_maccs_costs_integral(t,i,emis_source_awms_manure_n2o,"n2o_n_direct")$(ord(maccs_steps) <= i57_mac_step_n2o(t,i)) =
     p57_maccs_costs_integral(t,i,emis_source_awms_manure_n2o,"n2o_n_direct") +
     (f57_maccs_n2o(t,i,"awms_manure_n2o",maccs_steps) - f57_maccs_n2o(t,i,"awms_manure_n2o",maccs_steps-1))*(ord(maccs_steps)-1)*5;
 
-    p57_maccs_costs_integral(t,i,emis_source_rice_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step(t,i)) =
+    p57_maccs_costs_integral(t,i,emis_source_rice_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step_ch4(t,i)) =
     p57_maccs_costs_integral(t,i,emis_source_rice_ch4,"ch4") +
     (f57_maccs_ch4(t,i,"rice_ch4",maccs_steps) - f57_maccs_ch4(t,i,"rice_ch4",maccs_steps-1))*(ord(maccs_steps)-1)*5;
 
-    p57_maccs_costs_integral(t,i,emis_source_ent_ferm_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step(t,i)) =
+    p57_maccs_costs_integral(t,i,emis_source_ent_ferm_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step_ch4(t,i)) =
     p57_maccs_costs_integral(t,i,emis_source_ent_ferm_ch4,"ch4") +
     (f57_maccs_ch4(t,i,"ent_ferm_ch4",maccs_steps) - f57_maccs_ch4(t,i,"ent_ferm_ch4",maccs_steps-1))*(ord(maccs_steps)-1)*5;
 
-    p57_maccs_costs_integral(t,i,emis_source_awms_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step(t,i)) =
+    p57_maccs_costs_integral(t,i,emis_source_awms_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step_ch4(t,i)) =
     p57_maccs_costs_integral(t,i,emis_source_awms_ch4,"ch4") +
     (f57_maccs_ch4(t,i,"awms_ch4",maccs_steps) - f57_maccs_ch4(t,i,"awms_ch4",maccs_steps-1))*(ord(maccs_steps)-1)*5;
 );
+
+*Conversion from USD per ton C to USD per ton N and USD per ton CH4, using the old IPCC AR4 GWP factors.
+p57_maccs_costs_integral(t,i,emis_source,"n2o_n_direct") = p57_maccs_costs_integral(t,i,emis_source,"n2o_n_direct")*12/44*298*44/28;
+p57_maccs_costs_integral(t,i,emis_source,"ch4") = p57_maccs_costs_integral(t,i,emis_source,"ch4")*12/44*25;
+
+
+display
+i57_mac_step_n2o
+i57_mac_step_ch4
+im_maccs_mitigation
+p57_maccs_costs_integral
+;
