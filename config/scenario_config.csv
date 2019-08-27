@@ -8,8 +8,11 @@ forestry;;;;;;;;;affore_vegc_dec16;affore_vegc_dec16;affore_vegc_dec16;;;;affore
 c32_aff_policy;;;;;;;;;none;npi;ndc;;;;;;;;
 c35_ad_policy;;;;;;;;;none;npi;ndc;;;;;;;;
 c35_aolc_policy;;;;;;;;;none;npi;ndc;;;;;;;;
+c35_protect_scenario;;;;;;;;BH;;;;;;;;;;;
+water_demand;;;;;;;;all_sectors_aug13;;;;;;;;;;;
+s42_irrig_eff_scenario;;;;;;;;3;;;;;;;;;;;
 c42_env_flow_policy;;;on;off;off;mixed;on;on;;;;;;;on;off;off;mixed;on
-c50_scen_neff;;;neff65_70_starty2010;neff60_60_starty2010;neff55_60_starty2010;neff65_70_starty2010;neff55_60_starty2010;neff65_70_starty2010;;;;;;;neff65_70_starty2010;neff60_60_starty2010;neff55_60_starty2010;neff65_70_starty2010;neff55_60_starty2010
+c50_scen_neff;;;neff65_70_starty2010;neff60_60_starty2010;neff55_60_starty2010;neff65_70_starty2010;neff55_60_starty2010;neff75_80_starty2010;;;;;;;neff65_70_starty2010;neff60_60_starty2010;neff55_60_starty2010;neff65_70_starty2010;neff55_60_starty2010
 c55_scen_conf;;;ssp1;ssp2;ssp3;ssp4;ssp5;ssp1;;;;;;;ssp1;ssp2;ssp3;ssp4;ssp5
 c56_pollutant_prices;;;;;;;;;;;;coupling;emulator;coupling;SSPDB-SSP1-20-IMAGE;SSPDB-SSP2-26-MESSAGE-GLOBIOM;SSPDB-SSP3-60-AIM-CGE;SSPDB-SSP4-45-GCAM4;SSPDB-SSP5-45-REMIND-MAGPIE
 maccs;;;;;;;;;;;;;;;on_sep16;on_sep16;on_sep16;on_sep16;on_sep16
