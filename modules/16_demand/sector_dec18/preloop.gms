@@ -7,6 +7,8 @@
 p16_volumetric_conversion("wood") = 632.5;
 p16_volumetric_conversion("woodfuel") = 307.1;
 
+f16_forestry_demand(t_all,"USA",kforestry) = f16_forestry_demand(t_all,"USA",kforestry) * 0.50;
+
 fm_forestry_demand(t_all,i,kforestry) =
 									m_yeardiff(t_all) * f16_forestry_demand(t_all,i,kforestry) * 0.8;
 

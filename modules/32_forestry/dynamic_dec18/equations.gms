@@ -122,7 +122,7 @@ q32_hvarea_forestry(j2,ac_sub) ..
  q32_management_incr_cost(i2) ..
                               v32_management_incr_cost(i2)
                               =e=
-                              sum(cell(i2,j2),(10**(6+(v32_management_factor(j2)/20))) - (10**(6+(1/20))))
+                              sum(cell(i2,j2),(10**(4+(v32_management_factor(j2)/20))) - (10**(4+(1/20)))) * (pm_interest(i2)/(1+pm_interest(i2)))
                               ;
 
 *********************************************************
@@ -140,7 +140,7 @@ q32_prod_cell_forestry(j2,kforestry)..
 
 q32_production_timber(i2,kforestry)..
                           sum(cell(i2,j2),v32_prod(j2,kforestry))
-                          =g=
+                          =n=
                           vm_prod_reg(i2,kforestry) * sum(ct, fm_production_ratio(i2,ct))
                           ;
 
