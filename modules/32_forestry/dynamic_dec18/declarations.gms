@@ -40,21 +40,15 @@ positive variables
  vm_cost_fore(i)                                  Forestry costs (Mio USD)
  v32_land(j,type32,ac)                            Forestry land pools (mio. ha)
  vm_landdiff_forestry                             Aggregated difference in forestry land compared to previous timestep (mio. ha)
-* vm_cdr_aff(j,co2_forestry)                       Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
  vm_cdr_aff(j)                       Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
  v32_prod(j,kforestry)                             Timber production (mio. m3)
  v32_cost_harvest(i)                              Cost of timber harvesting (USD per ha)
  v32_cost_recur(i)                                Recurring forest management costs (USD per ha)
  v32_hvarea_forestry(j,kforestry,ac_sub)          Area harvested for timber production (mio. ha)
-
-* v32_prod_external(j,kforestry)                   Production balance flow from heaven (mio. m3)
-
  v32_land_expansion(j,type32,ac)                  Land expansion (mio. ha)
  v32_land_reduction(j,type32,ac)                  land reduction (mio. ha)
  v32_avail_reuse(j)                               Defunct (1)
-
  v32_cost_establishment(i)                        Cost of establishment calculated at the current time step (mio. USD)
-* v32_missing_area_future(j)                       Defunct (1)
  v32_management_factor(j)                         managemement factor which can increase in extreme cases
  v32_management_incr_cost(i)                      Very high costs for increasing managemnt factors
  vm_prod_cell_forestry(j,kforestry)               xx
@@ -80,8 +74,6 @@ equations
  q32_land_reduction(j,type32,ac)                  Land contarction (mio. ha)
  q32_avail_reuse(j)                               Defunct (1)
  q32_cost_establishment(i)                        Present value of cost of establishment (mio. USD)
-* q32_ratio_forestry                               xxxx
-* q32_prod_reg_forestry(i)                         xxxx
  q32_management_incr_cost(i)                       xxxx
  q32_prod_cell_forestry(j,kforestry)               xx
  q32_yield_forestry_ac(j,ac_sub)                   xx

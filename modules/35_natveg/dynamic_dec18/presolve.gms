@@ -141,9 +141,5 @@ p35_yield_primforest(t,j) =
 		* 0.80
 		/ sum(clcl,pm_climate_class(j,clcl) * pm_bcef("acx",clcl));
 
-*p35_yield_natveg(t,j,ac_sub) =	m_growing_stock(pm_carbon_density_ac(t,j,ac_sub,"vegc"));
-
-*p35_yield_primforest(t,j) = m_growing_stock(pm_carbon_density_ac(t,j,"acx","vegc"));
-
 p35_min_forest(t,j)$(p35_min_forest(t,j) > vm_land.l(j,"primforest") + vm_land.l(j,"secdforest")) = vm_land.l(j,"primforest") + vm_land.l(j,"secdforest");
 p35_min_other(t,j)$(p35_min_other(t,j) > vm_land.l(j,"other")) = vm_land.l(j,"other");

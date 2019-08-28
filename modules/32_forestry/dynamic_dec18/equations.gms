@@ -18,11 +18,6 @@ v32_land(j2,"aff","ac0") *
 (sum(ct, pm_carbon_density_ac(ct,j2,ac,"vegc")) -
 sum(ct, pm_carbon_density_ac(ct,j2,ac-1,"vegc"))));
 
-$ontext
-q32_cdr_aff(j2,co2_forestry) .. vm_cdr_aff(j2,co2_forestry) =e=
-                                        sum((ac,emis_co2_to_forestry(co2_forestry,c_pools))$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planing_horizon/5),
-                                        v32_land(j2,"aff","ac0") * (sum(ct, pm_carbon_density_ac(ct,j2,ac,c_pools)) - sum(ct, pm_carbon_density_ac(ct,j2,ac-1,c_pools))));
-$offtext
 **Upper bound for C-price induced afforestation area
  q32_max_aff .. sum((j2,ac), v32_land(j2,"aff",ac)) =l= s32_max_aff_area;
 
@@ -126,11 +121,6 @@ q32_hvarea_forestry(j2,ac_sub) ..
                               ;
 
 *********************************************************
-
-$ontext
-  q21_ratio_forestry(i2)..
-   sum(cell(i2,j2), vm_prod_forestry(j2,"wood")) =g= vm_prod_reg(i2,"wood") * sum(ct,fm_production_ratio(i2,ct));
-$offtext
 
 q32_prod_cell_forestry(j2,kforestry)..
                           vm_prod_cell_forestry(j2,kforestry)

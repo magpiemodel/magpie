@@ -30,13 +30,7 @@ pm_rot_length_estb(t,j) = p32_rot_length_estb(t,j);
 p32_rotation_cellular(t,j) = ceil(p32_rot_length(t,j)/5);
 p32_rotation_cellular_estb(t,j) = ceil(p32_rot_length_estb(t,j)/5);
 
-*' @code
-*' Mapping between AC, type32 and Rotation length
-*' Forests are moved to categories of type32 based the rotation lengths.
-*ac_land32(j,ac,"aff") = yes$(ord(ac) > 1);
-*ac_land32(j,ac,"indc") = yes$(ord(ac) > 1);
-
-*' @stop
+** Define protect and harvest setting
 protect32(t,j,ac_sub) = no;
 protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular(t,j));
 
@@ -46,9 +40,6 @@ harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular(t,j));
 ** Initialization of "Protected available plantations" and "availabe plantations which can be re-used".
 p32_protect_avail(t,j) = 0;
 v32_avail_reuse.l(j) = 0;
-
-** Exoenously determine timber demand is fed into interface vm_prod_reg which is used to equate demand with supply.
-*vm_prod_reg.l(i,kforestry) = fm_forestry_demand("y1995",i,kforestry);
 
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
@@ -71,8 +62,6 @@ p32_land("y1995",j,"plant","ac0") = 0;
 fm_production_ratio("MEA",t_all) = fm_production_ratio("MEA","y1995");
 pm_production_ratio_ext(i,t_ext) = fm_production_ratio(i,"y1995");
 pm_production_ratio_ext(i,t_all) = fm_production_ratio(i,"y1995");
-*fm_production_ratio(i,t_all) = 0.3;
-*fm_production_ratio(i,t_all) = 0.20+0.025*ord(t_all);
 
 pm_production_ratio_ext(i,t_ext) = fm_production_ratio(i,"y2100");
 pm_production_ratio_ext(i,t_all) = fm_production_ratio(i,t_all);

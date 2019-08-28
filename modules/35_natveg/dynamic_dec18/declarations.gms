@@ -43,14 +43,12 @@ equations
  q35_primforest_reduction(j)   	       Primforest reduction (mio. ha)
  q35_min_forest(j)					   Minimum forest land constraint (mio. ha)
  q35_min_other(j)              		   Minimum other land constraint (mio. ha)
-
  q35_cost_harvest(i)              Cost of harvesting natveg (mio. USD)
  q35_prod_other(j)                Woodfuel production from other land (mio. m3)
  q35_hvarea_secdforest(j,ac_sub)  Area harvested from secondary forests (mio. ha)
  q35_hvarea_primforest(j)         Area harvested from primary forests (mio. ha)
  q35_hvarea_other(j,ac_sub)       Area harvested from other land (mio. ha)
  q35_secdforest_conversion(j)     Conversion of secondary forest (mio.ha)
-* q35_production_timber(i,kforestry)         Timber production from natural vegetation (mio. USD)
  q35_cost_total(i)                Natveg realted production costs (mio. USD)
  q35_prod_secdforest(j,kforestry)  xx
  q35_prod_primforest(j,kforestry)  xx
@@ -65,15 +63,12 @@ positive variables
   v35_other_reduction(j,ac) Other land reduction compared to previous timestep (mio. ha)
   v35_secdforest_reduction(j,ac) Secdforest reduction compared to previous timestep (mio. ha)
   v35_primforest_reduction(j) Primforest reduction compared to previous timestep (mio. ha)
-
   v35_cost_harvest(i)                         Cost of harvesting natveg (mio. USD)
   v35_hvarea_secdforest(j,kforestry,ac_sub)   Harvested area of secondary forest (mio. ha)
   v35_hvarea_other(j,kforestry,ac_sub)        Harvested area of other land (mio. ha)
   v35_hvarea_primforest(j,kforestry)          Harvested area of primary forest (mio. ha)
   v35_prod(j,land_natveg,kforestry)          Timber production coming from natveg (mio. m3)
-*  v35_prod_external(j,kforestry)            Production balanceflow (mio. m3)
   vm_cost_natveg(i)                           Regional natveg timber production costs (mio. USD)
-*  vm_prod_natveg(j,kforestry)	                  xx
   vm_prod_cell_natveg(j,kforestry)           xx
 ;
 
