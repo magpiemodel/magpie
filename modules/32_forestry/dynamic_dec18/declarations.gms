@@ -34,6 +34,7 @@ parameters
  p32_IGR(t_all,j,ac)                              xx
  p32_rot_flg(t_all,j,ac)                             xx
  p32_rot_final(t_all,j)                           xx
+ p32_forestry_management_init(j)                  xx
 ;
 
 positive variables

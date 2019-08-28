@@ -117,7 +117,7 @@ q32_hvarea_forestry(j2,ac_sub) ..
  q32_management_incr_cost(i2) ..
                               v32_management_incr_cost(i2)
                               =e=
-                              sum(cell(i2,j2),(10**(4+(v32_management_factor(j2)/20))) - (10**(4+(1/20)))) * (pm_interest(i2)/(1+pm_interest(i2)))
+                              sum(cell(i2,j2),(10**(5+(v32_management_factor(j2)/20))) - (10**(5+(p32_forestry_management_init(j2)/20)))) * (pm_interest(i2)/(1+pm_interest(i2)))
                               ;
 
 *********************************************************
