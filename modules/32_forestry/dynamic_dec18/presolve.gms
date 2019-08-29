@@ -1,13 +1,11 @@
+** Check for calcultation of time factor
+pm_time_mod(t) = (1$(ord(t)=1)+(m_yeardiff(t)*(0.985**m_yeardiff(t)))$(ord(t)>1));
+
 ** Setting ac dependent carbon densities
 p32_carbon_density_ac(t,j,type32,ac,c_pools)  = pm_carbon_density_ac(t,j,ac,c_pools);
 
-**** set lower limit
-v32_management_factor.up(j) = 40;
-v32_management_factor.lo(j) = p32_forestry_management(j);
-
-
 ** Plantation vegc is different
-*p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * sum(cell(i,j),p32_forestry_management(i));
+p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * p32_management_factor(j,"normal");
 *p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * sum(cell(i,j),v32_management_factor.l(i));
 
 ** BEGIN INDC **
@@ -59,6 +57,7 @@ v32_land.fx(j,"plant",ac_sub)$protect32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub
 
 *set upper bound for plantations after rotation length
 v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
+m_boundfix(v32_land,(j,"plant",ac_sub),l,10e-5);
 
 *fix C-price induced afforestation and indc to zero (for testing)
 *v32_land.fx(j,"aff",ac) = 0;
@@ -76,10 +75,18 @@ m_boundfix(v32_land,(j,"aff","ac0"),l,10e-5);
 v32_land.fx(j,"aff",ac_sub) = pc32_land(j,"aff",ac_sub);
 v32_land.fx(j,"indc",ac_sub) = pc32_land(j,"indc",ac_sub);
 
-if(ord(t)=1,
-**** initialize p32_yield_forestry_ac
-p32_yield_forestry_ac(j,ac_sub) = 2 * pm_carbon_density_ac("y1995",j,ac_sub,"vegc") * v32_management_factor.l(j) * 0.85 * sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac_sub,clcl));
-);
+*** YIELDS
+p32_yield_forestry_ac(t,j,ac_sub,mgmt_type) =
+   (
+     (2)
+     *
+     pm_carbon_density_ac(t,j,ac_sub,"vegc") * p32_management_factor(j,mgmt_type)
+     *
+     0.85
+     /
+     sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac_sub,clcl))
+    ) / pm_time_mod(t)
+   ;
 
 ** Future demand relevant in current time step depending on rotation length
 ***** Card is used here to exclude y1965 to y1995 when calculating rotation length calculations for past
@@ -88,7 +95,7 @@ pm_rotation_reg(t,i) = ord(t) + ceil((sum(cell(i,j),pcm_land(j,"forestry")*pm_ro
 *pm_rotation_reg(t,i) = ord(t) + ceil(30/5) + card(t_past_ff);
 
 *pc32_yield_forestry_future(j) = sum(ac$(ac.off = p32_rotation_cellular(j)+1), p32_yield_forestry_ac(t,j,ac));
-pc32_yield_forestry_future(t,j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), p32_yield_forestry_ac(j,ac_sub));
+pc32_yield_forestry_future(t,j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), p32_yield_forestry_ac(t,j,ac_sub,"normal"));
 
 pc32_timestep = ord(t);
 *** EOF presolve.gms ***

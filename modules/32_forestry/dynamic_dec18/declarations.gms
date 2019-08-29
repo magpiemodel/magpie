@@ -11,7 +11,7 @@ parameters
  p32_aff_pol_timestep(t,j)                        INDC afforestation per time step (Mha)
  p32_aff_pol(t,j)                                 INDC forest stock (Mha)
  pc32_yield_forestry_future(t,j)                    Cellular timber yield expected in the future (m3 per ha per year)
- p32_yield_forestry_ac(j,ac)                    Age class specific yield of plantation forests (m3 per ha per yr)
+ p32_yield_forestry_ac(t,j,ac,mgmt_type)                    Age class specific yield of plantation forests (m3 per ha per yr)
  p32_hvcost_ha(i)                                 Timber harvesting cost per ha (USD)
  p32_rot_length(t,j)                                Regional rotation length of plantations (yr)
  pm_rot_length(t,j)                                 Regional rotation length of plantations translated to age class equivalent for future (1)
@@ -35,25 +35,25 @@ parameters
  p32_rot_flg(t_all,j,ac)                             xx
  p32_rot_final(t_all,j)                           xx
  p32_forestry_management_init(j)                  xx
+ p32_management_factor(j,mgmt_type)               xx
+ pm_time_mod(t)                                  xx
 ;
 
 positive variables
- vm_cost_fore(i)                                  Forestry costs (Mio USD)
- v32_land(j,type32,ac)                            Forestry land pools (mio. ha)
- vm_landdiff_forestry                             Aggregated difference in forestry land compared to previous timestep (mio. ha)
- vm_cdr_aff(j)                       Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
- v32_prod(j,kforestry)                             Timber production (mio. m3)
- v32_cost_harvest(i)                              Cost of timber harvesting (USD per ha)
- v32_cost_recur(i)                                Recurring forest management costs (USD per ha)
- v32_hvarea_forestry(j,kforestry,ac_sub)          Area harvested for timber production (mio. ha)
- v32_land_expansion(j,type32,ac)                  Land expansion (mio. ha)
- v32_land_reduction(j,type32,ac)                  land reduction (mio. ha)
- v32_avail_reuse(j)                               Defunct (1)
- v32_cost_establishment(i)                        Cost of establishment calculated at the current time step (mio. USD)
- v32_management_factor(j)                         managemement factor which can increase in extreme cases
- v32_management_incr_cost(i)                      Very high costs for increasing managemnt factors
- vm_prod_cell_forestry(j,kforestry)               xx
- v32_yield_forestry_ac(j,ac_sub)                  xx
+ vm_cost_fore(i)                                    Forestry costs (Mio USD)
+ v32_land(j,type32,ac)                              Forestry land pools (mio. ha)
+ vm_landdiff_forestry                               Aggregated difference in forestry land compared to previous timestep (mio. ha)
+ vm_cdr_aff(j)                                      Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
+ v32_prod(j,kforestry,mgmt_type)                              Timber production (mio. m3)
+ v32_cost_harvest(i)                                Cost of timber harvesting (USD per ha)
+ v32_cost_recur(i)                                  Recurring forest management costs (USD per ha)
+ v32_hvarea_forestry(j,kforestry,ac_sub,mgmt_type)  Area harvested for timber production (mio. ha)
+ v32_land_expansion(j,type32,ac)                    Land expansion (mio. ha)
+ v32_land_reduction(j,type32,ac)                    land reduction (mio. ha)
+ v32_avail_reuse(j)                                 Defunct (1)
+ v32_cost_establishment(i)                          Cost of establishment calculated at the current time step (mio. USD)
+ v32_management_incr_cost(i)                        Very high costs for increasing managemnt factors
+ vm_prod_cell_forestry(j,kforestry)                 xx
  ;
 
 equations
@@ -64,8 +64,7 @@ equations
  q32_diff                                         aggregated difference in forestry land compared to previous timestep (mio. ha)
  q32_max_aff                                      maximum total global afforestation
  q32_aff_pol(j)                                   afforestation policy constraint
- q32_prod_forestry_wood(j)        	              wood production from forestry
- q32_prod_forestry_woodfuel(j)     	              woodfuel production from forestry
+ q32_prod_forestry(j,kforestry,mgmt_type)         Timber production from forestry
  q32_hvarea_forestry(j,ac_sub)                    Harvested area from plantations (mio. ha)
  q32_cost_recur(i)                                Recurruing costs (mio. USD)
  q32_cost_harvest(i)                              Harvesting costs (mio. USD)
@@ -77,48 +76,43 @@ equations
  q32_cost_establishment(i)                        Present value of cost of establishment (mio. USD)
  q32_management_incr_cost(i)                       xxxx
  q32_prod_cell_forestry(j,kforestry)               xx
- q32_yield_forestry_ac(j,ac_sub)                   xx
 ;
 
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_fore(t,i,type)                          Forestry costs (Mio USD)
- ov32_land(t,j,type32,ac,type)                   Forestry land pools (mio. ha)
- ov_landdiff_forestry(t,type)                    Aggregated difference in forestry land compared to previous timestep (mio. ha)
- ov_cdr_aff(t,j,type)                            Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
- ov32_prod(t,j,kforestry,type)                   Timber production (mio. m3)
- ov32_cost_harvest(t,i,type)                     Cost of timber harvesting (USD per ha)
- ov32_cost_recur(t,i,type)                       Recurring forest management costs (USD per ha)
- ov32_hvarea_forestry(t,j,kforestry,ac_sub,type) Area harvested for timber production (mio. ha)
- ov32_land_expansion(t,j,type32,ac,type)         Land expansion (mio. ha)
- ov32_land_reduction(t,j,type32,ac,type)         land reduction (mio. ha)
- ov32_avail_reuse(t,j,type)                      Defunct (1)
- ov32_cost_establishment(t,i,type)               Cost of establishment calculated at the current time step (mio. USD)
- ov32_management_factor(t,j,type)                managemement factor which can increase in extreme cases
- ov32_management_incr_cost(t,i,type)             Very high costs for increasing managemnt factors
- ov_prod_cell_forestry(t,j,kforestry,type)       xx
- ov32_yield_forestry_ac(t,j,ac_sub,type)         xx
- oq32_cost_total(t,i,type)                       total forestry costs constraint (mio. USD)
- oq32_land(t,j,type)                             land constraint (mio. ha)
- oq32_cdr_aff(t,j,type)                          calculation of CDR from afforestation
- oq32_carbon(t,j,c_pools,type)                   forestry carbon stock calculation
- oq32_diff(t,type)                               aggregated difference in forestry land compared to previous timestep (mio. ha)
- oq32_max_aff(t,type)                            maximum total global afforestation
- oq32_aff_pol(t,j,type)                          afforestation policy constraint
- oq32_prod_forestry_wood(t,j,type)               wood production from forestry
- oq32_prod_forestry_woodfuel(t,j,type)           woodfuel production from forestry
- oq32_hvarea_forestry(t,j,ac_sub,type)           Harvested area from plantations (mio. ha)
- oq32_cost_recur(t,i,type)                       Recurruing costs (mio. USD)
- oq32_cost_harvest(t,i,type)                     Harvesting costs (mio. USD)
- oq32_production_timber(t,i,kforestry,type)      Timber production from plantations (mio. USD)
- oq32_prod_future(t,i,type)                      Establishment in current time step for future demand (mio. ha)
- oq32_land_expansion(t,j,type32,ac,type)         Land expansion (mio. ha)
- oq32_land_reduction(t,j,type32,ac,type)         Land contarction (mio. ha)
- oq32_avail_reuse(t,j,type)                      Defunct (1)
- oq32_cost_establishment(t,i,type)               Present value of cost of establishment (mio. USD)
- oq32_management_incr_cost(t,i,type)             xxxx
- oq32_prod_cell_forestry(t,j,kforestry,type)     xx
- oq32_yield_forestry_ac(t,j,ac_sub,type)         xx
+ ov_cost_fore(t,i,type)                                    Forestry costs (Mio USD)
+ ov32_land(t,j,type32,ac,type)                             Forestry land pools (mio. ha)
+ ov_landdiff_forestry(t,type)                              Aggregated difference in forestry land compared to previous timestep (mio. ha)
+ ov_cdr_aff(t,j,type)                                      Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
+ ov32_prod(t,j,kforestry,mgmt_type,type)                   Timber production (mio. m3)
+ ov32_cost_harvest(t,i,type)                               Cost of timber harvesting (USD per ha)
+ ov32_cost_recur(t,i,type)                                 Recurring forest management costs (USD per ha)
+ ov32_hvarea_forestry(t,j,kforestry,ac_sub,mgmt_type,type) Area harvested for timber production (mio. ha)
+ ov32_land_expansion(t,j,type32,ac,type)                   Land expansion (mio. ha)
+ ov32_land_reduction(t,j,type32,ac,type)                   land reduction (mio. ha)
+ ov32_avail_reuse(t,j,type)                                Defunct (1)
+ ov32_cost_establishment(t,i,type)                         Cost of establishment calculated at the current time step (mio. USD)
+ ov32_management_incr_cost(t,i,type)                       Very high costs for increasing managemnt factors
+ ov_prod_cell_forestry(t,j,kforestry,type)                 xx
+ oq32_cost_total(t,i,type)                                 total forestry costs constraint (mio. USD)
+ oq32_land(t,j,type)                                       land constraint (mio. ha)
+ oq32_cdr_aff(t,j,type)                                    calculation of CDR from afforestation
+ oq32_carbon(t,j,c_pools,type)                             forestry carbon stock calculation
+ oq32_diff(t,type)                                         aggregated difference in forestry land compared to previous timestep (mio. ha)
+ oq32_max_aff(t,type)                                      maximum total global afforestation
+ oq32_aff_pol(t,j,type)                                    afforestation policy constraint
+ oq32_prod_forestry(t,j,kforestry,mgmt_type,type)          Timber production from forestry
+ oq32_hvarea_forestry(t,j,ac_sub,type)                     Harvested area from plantations (mio. ha)
+ oq32_cost_recur(t,i,type)                                 Recurruing costs (mio. USD)
+ oq32_cost_harvest(t,i,type)                               Harvesting costs (mio. USD)
+ oq32_production_timber(t,i,kforestry,type)                Timber production from plantations (mio. USD)
+ oq32_prod_future(t,i,type)                                Establishment in current time step for future demand (mio. ha)
+ oq32_land_expansion(t,j,type32,ac,type)                   Land expansion (mio. ha)
+ oq32_land_reduction(t,j,type32,ac,type)                   Land contarction (mio. ha)
+ oq32_avail_reuse(t,j,type)                                Defunct (1)
+ oq32_cost_establishment(t,i,type)                         Present value of cost of establishment (mio. USD)
+ oq32_management_incr_cost(t,i,type)                       xxxx
+ oq32_prod_cell_forestry(t,j,kforestry,type)               xx
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

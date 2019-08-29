@@ -28,6 +28,9 @@ sets
  rltype Rotation length sets
  /rlFAO_min,rlGTM,rlFAO_max/
 
+ mgmt_type Type of forestry management
+ /normal,high/
+
 ;
 
 alias(ac,ac2);

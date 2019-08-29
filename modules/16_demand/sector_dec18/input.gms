@@ -26,15 +26,8 @@ $ondelim
 $include "./modules/16_demand/sector_dec18/input/f16_domestic_balanceflow.csv"
 $offdelim;
 
-$ontext
 table f16_forestry_demand_iso(t_all,iso,kforestry) demand
 $ondelim
-$include "./modules/16_demand/sector_dec18/input/f16_forestry_demand.csv"
-$offdelim
-;
-$offtext
-table f16_forestry_demand(t_all,i,kforestry) demand
-$ondelim
-$include "./modules/16_demand/sector_dec18/input/f16_forestry_demand.csv"
+$include "./modules/16_demand/sector_dec18/input/f16_forestry_demand_iso.csv"
 $offdelim
 ;

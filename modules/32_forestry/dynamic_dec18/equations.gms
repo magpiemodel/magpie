@@ -77,38 +77,20 @@ q32_cost_harvest(i2)..
                     v32_cost_harvest(i2)
                     =e=
                     sum((cell(i2,j2), kforestry),
-                    sum(ac_sub, v32_hvarea_forestry(j2,kforestry,ac_sub))) * fm_harvest_cost_ha(i2)
+                    sum((ac_sub,mgmt_type), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type))) * fm_harvest_cost_ha(i2)
                     ;
 
-*** YIELDS
-q32_yield_forestry_ac(j2,ac_sub)..
-  v32_yield_forestry_ac(j2,ac_sub)
-  =e=
-   (2)
-   *
-   sum(ct, pm_carbon_density_ac(ct,j2,ac_sub,"vegc")) * v32_management_factor(j2)
-   *
-   0.85
-   /
-   sum(clcl,pm_climate_class(j2,clcl) * pm_bcef(ac_sub,clcl))
-   ;
-
 ***PRODUCTION
-q32_prod_forestry_wood(j2)..
-                          v32_prod(j2,"wood")
+q32_prod_forestry(j2,kforestry,mgmt_type)..
+                          v32_prod(j2,kforestry,mgmt_type)
                           =e=
-                         sum(ac_sub, v32_hvarea_forestry(j2,"wood",ac_sub) * v32_yield_forestry_ac(j2,ac_sub));
-
-q32_prod_forestry_woodfuel(j2)..
-                          v32_prod(j2,"woodfuel")
-                          =e=
-                        sum(ac_sub, v32_hvarea_forestry(j2,"woodfuel",ac_sub)  * v32_yield_forestry_ac(j2,ac_sub));
+                         sum((ac_sub,ct), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type) * p32_yield_forestry_ac(ct,j2,ac_sub,mgmt_type));
 
 ***AREA
 
 **harvesting area ((0.6*0.975**(pc32_timestep-m_timdestep_length/2)))
 q32_hvarea_forestry(j2,ac_sub) ..
-                          sum(kforestry, v32_hvarea_forestry(j2,kforestry,ac_sub))
+                          sum((kforestry,mgmt_type), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type))
                           =e=
                           (pc32_land(j2,"plant",ac_sub) - v32_land(j2,"plant",ac_sub));
 
@@ -117,7 +99,8 @@ q32_hvarea_forestry(j2,ac_sub) ..
  q32_management_incr_cost(i2) ..
                               v32_management_incr_cost(i2)
                               =e=
-                              sum(cell(i2,j2),(10**(5+((v32_management_factor(j2)-p32_forestry_management_init(j2))/20)))) * (pm_interest(i2)/(1+pm_interest(i2)))
+                              sum((cell(i2,j2), kforestry),
+                              sum(ac_sub, v32_hvarea_forestry(j2,kforestry,ac_sub,"high"))) * 10e5
                               ;
 
 *********************************************************
@@ -125,11 +108,11 @@ q32_hvarea_forestry(j2,ac_sub) ..
 q32_prod_cell_forestry(j2,kforestry)..
                           vm_prod_cell_forestry(j2,kforestry)
                           =e=
-                          v32_prod(j2,kforestry)
+                          sum(mgmt_type,v32_prod(j2,kforestry,mgmt_type))
                           ;
 
 q32_production_timber(i2,kforestry)..
-                          sum(cell(i2,j2),v32_prod(j2,kforestry))
+                          sum((cell(i2,j2),mgmt_type),v32_prod(j2,kforestry,mgmt_type))
                           =n=
                           vm_prod_reg(i2,kforestry) * sum(ct, fm_production_ratio(i2,ct))
                           ;

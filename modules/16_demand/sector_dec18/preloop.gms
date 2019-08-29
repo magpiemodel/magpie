@@ -7,10 +7,10 @@
 p16_volumetric_conversion("wood") = 632.5;
 p16_volumetric_conversion("woodfuel") = 307.1;
 
-f16_forestry_demand(t_all,"USA",kforestry) = f16_forestry_demand(t_all,"USA",kforestry) * 0.50;
+f16_forestry_demand_iso(t_all,iso,"woodfuel") = f16_forestry_demand_iso(t_all,iso,"woodfuel") * 0.50;
 
 fm_forestry_demand(t_all,i,kforestry) =
-									m_yeardiff(t_all) * f16_forestry_demand(t_all,i,kforestry) * 0.8;
+									sum(i_to_iso(i,iso),f16_forestry_demand_iso(t_all,iso,kforestry));
 
 *** Only needed to fix the time step length miscalculation from t_all in y1995.
 *** The 1995 value for yeardiff needs to be one but with m_yeatrdiff on t_all its is 5.
@@ -18,4 +18,4 @@ fm_forestry_demand(t_all,i,kforestry) =
 *** Could also make a dollar condition with $(ord(t)=1). Fix later.
 
 fm_forestry_demand(t,i,kforestry) =
-										m_yeardiff(t) * f16_forestry_demand(t,i,kforestry) * 0.8;
+										sum(i_to_iso(i,iso),f16_forestry_demand_iso(t,iso,kforestry));

@@ -66,10 +66,6 @@ pm_production_ratio_ext(i,t_all) = fm_production_ratio(i,"y1995");
 pm_production_ratio_ext(i,t_ext) = fm_production_ratio(i,"y2100");
 pm_production_ratio_ext(i,t_all) = fm_production_ratio(i,t_all);
 
-p32_forestry_management(j) = sum(cell(i,j),f32_forestry_management(i));
-p32_forestry_management_init(j) = sum(cell(i,j),f32_forestry_management(i));
-
+p32_management_factor(j,mgmt_type) = sum(cell(i,j),f32_forestry_management(i));
+p32_management_factor(j,"high") = p32_management_factor(j,"normal") * 5;
 **************************************************************************
-
-**** initialize managemnt factors which can be increased
-v32_management_factor.l(j) = 5;
