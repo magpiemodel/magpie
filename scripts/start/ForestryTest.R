@@ -49,16 +49,19 @@ for(biodem in co2_price_scenarios){
 	cfg$gms$c56_pollutant_prices <- paste0(biodem,"-V15-REMIND-MAGPIE")	# def = "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
 	cfg$gms$c60_2ndgen_biodem <- biodem     														# def = "SSP2-Ref-SPA0"
 
-	for (sl_set in c(0.05,1.00)) {
-		if(sl_set == 0.05) sl_name = "SL"
-		if(sl_set == 1.00) sl_name = "ClC"
-		cfg$gms$s35_selective_logging_flag = sl_set
+	for(ts_test in c("10y","20y","30y","50y")){
+		cfg$gms$c_timesteps = ts_test
+		for (sl_set in c(0.05)) {
+			if(sl_set == 0.05) sl_name = "SL"
+			if(sl_set == 1.00) sl_name = "ClC"
+			cfg$gms$s35_selective_logging_flag = sl_set
 
-		if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
-			cfg$title<- paste0(cfg$gms$c_timesteps,"_",sl_name,"_","_CO2prices","-",flag_run)
-		} else {
-			cfg$title<- paste0(cfg$gms$c_timesteps,"_",sl_name,"-",flag_run)
-		}
-		start_run(cfg=cfg,codeCheck=codeCheck)
- }
+			if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
+				cfg$title<- paste0(cfg$gms$c_timesteps,"_",sl_name,"_","_CO2prices")
+			} else {
+				cfg$title<- paste0(cfg$gms$c_timesteps,"_",sl_name)
+			}
+			start_run(cfg=cfg,codeCheck=codeCheck)
+	 }
+	}
 }
