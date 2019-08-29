@@ -22,6 +22,12 @@ codeCheck <- FALSE
 #rev4.14_690d3718e151be1b450b394c1064b1c5_validation.tgz
 #calibration_H12_c200_12Sep18.tgz
 
+#isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev34_c200_690d3718e151be1b450b394c1064b1c5.tgz
+#rev4.18_690d3718e151be1b450b394c1064b1c5_magpie.tgz
+#rev4.18_690d3718e151be1b450b394c1064b1c5_validation.tgz
+#calibration_H12_c200_12Sep18.tgz
+#additional_data_rev3.66.tgz
+
 
 buildInputVector <- function(regionmapping   = "H12",
                              project_name    = "isimip_rcp",
@@ -30,8 +36,8 @@ buildInputVector <- function(regionmapping   = "H12",
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "h200",
                              archive_rev     = "37",
-                             madrat_rev      = "4.14",
-                             validation_rev  = "4.14",
+                             madrat_rev      = "4.18",
+                             validation_rev  = "4.18",
 			                       calibration     = "calibration_sim4nexus_may2019.tgz",
                              additional_data = "additional_data_rev3.67.tgz") {
   mappings <- c(H11="8a828c6ed5004e77d1ba2025e8ea2261",
