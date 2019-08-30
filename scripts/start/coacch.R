@@ -6,7 +6,7 @@
 
 
 ############################################################
-#### Script for the generation of SIM4NEXUS simulations ####
+#### Script for the generation of COACCH simulations ####
 ############################################################
 
 library(lucode)
@@ -35,18 +35,19 @@ buildInputVector <- function(regionmapping   = "H12",
                              co2             = "co2",
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "h200",
-                             archive_rev     = "37",
+                             archive_rev     = "38",
                              madrat_rev      = "4.18",
                              validation_rev  = "4.18",
-			                       calibration     = "calibration_sim4nexus_may2019.tgz",
+			                       calibration     = "calibration_coacch_sept19.tgz",
                              additional_data = "additional_data_rev3.67.tgz") {
   mappings <- c(H11="8a828c6ed5004e77d1ba2025e8ea2261",
                 H12="690d3718e151be1b450b394c1064b1c5",
+				coacch="",
                 mag="c30c1c580039c2b300d86cc46ff4036a",
-		agmip="c77f075908c3bc29bdbe1976165eccaf",
-		sim4nexus="25dd7264e8e145385b3bd0b89ec5f3fc",
-		inms="44f1e181a3da765729f2f1bfc926425a",
-    capri="e7e72fddc44cc3d546af7b038c651f51")
+		        agmip="c77f075908c3bc29bdbe1976165eccaf",
+		        sim4nexus="25dd7264e8e145385b3bd0b89ec5f3fc",
+		        inms="44f1e181a3da765729f2f1bfc926425a",
+                capri="e7e72fddc44cc3d546af7b038c651f51")
   archive_name=paste(project_name,climate_model,climatescen_name,co2,sep="-")
   archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", mappings[regionmapping], ".tgz")
   madrat  <- paste0("rev", madrat_rev,"_", mappings[regionmapping], "_magpie", ".tgz")
@@ -83,13 +84,13 @@ general_settings<-function(title) {
 cfg<-general_settings(title="SSP2_nocc_newregion")
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"nocc")
-cfg$input <- buildInputVector(regionmapping = "sim4nexus")
+cfg$input <- buildInputVector(regionmapping = "coacch")
 cfg$recalibrate=TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
-calib<-magpie4::submitCalibration(name = "calibration_sim4nexus.tgz")
+calib<-magpie4::submitCalibration(name = "calibration_coacch_sept19.tgz")
 cfg$recalibrate <- "ifneeded"
 
-#SIM4NEXUS standard runs#############################################
+#COACCH standard runs#############################################
 
 #SSP2 family
 
@@ -112,7 +113,7 @@ start_the_run<-function(ssp,mit,rcp,gcm,co2){
 	cat(paste(title))
 	cfg<-general_settings(title=title))
 	cfg<-lucode::setScenario(cfg,ssp)
-	cfg$input <- buildInputVector(climatescen_name=rcp,climate_model   = gcm, regionmapping = "sim4nexus",calibration=calib)
+	cfg$input <- buildInputVector(climatescen_name=rcp,climate_model   = gcm, regionmapping = "coacch",calibration=calib)
 	mitigation=paste0("SSPDB-",ssp,"-",mit,"-",model)
 	cfg$gms$c56_pollutant_prices <- mitigation
 	cfg$gms$c60_2ndgen_biodem    <- mitigation
