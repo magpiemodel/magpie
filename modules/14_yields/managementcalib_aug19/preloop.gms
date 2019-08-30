@@ -28,7 +28,7 @@ p14_lpj_yields(t,i,kcr)         = (sum((cell(i,j),w), fm_croparea(t,j,w,kcr) * f
 																	  sum(cell(i,j), p14_croparea_total(t,j)))$(sum((cell(i,j),w), fm_croparea(t,j,w,kcr))=0);
 
 loop(t,
-     if(sum(sameas(t,t_past),1)=1,
+     if(sum(sameas(t,"y1995"),1)=1,
        p14_lpj_yields_past(t,i,kcr) = p14_lpj_yields(t,i,kcr);
 			 p14_delta_yields(t,i,kcr)    = f14_regions_yields(t,i,kcr) - p14_lpj_yields(t,i,kcr);
 			 p14_ccratio_yields(t,i,kcr)  = 1$(p14_lpj_yields_past(t,i,kcr)=0) +
@@ -47,8 +47,8 @@ loop(t,
 );
 
 p14_managementcalib(t,i,kcr) = 1 + (p14_delta_yields(t,i,kcr)/ (p14_lpj_yields(t,i,kcr)) *
-                                      (p14_ccratio_yields(t,i,kcr)) ** p14_lambda_yields(t,i,kcr))
-																			  $(p14_lpj_yields(t,i,kcr)>0);
+                                                 (p14_ccratio_yields(t,i,kcr)) ** p14_lambda_yields(t,i,kcr))
+																			            $(p14_lpj_yields(t,i,kcr)>0);
 
 
 ***YIELD CALIBRATION***********************************************************************
