@@ -44,12 +44,17 @@ cfg$force_download <- FALSE
 co2_price_scenarios <- c("SSP2-Ref-SPA0")
 #co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
 
+## CC Runs
+climate_impacts <- FALSE
+cc_flag <- "NoCCI"
+if(climate_impacts) cc_flag = "CCI"
+
 for(biodem in co2_price_scenarios){
 
 	cfg$gms$c56_pollutant_prices <- paste0(biodem,"-V15-REMIND-MAGPIE")	# def = "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
 	cfg$gms$c60_2ndgen_biodem <- biodem     														# def = "SSP2-Ref-SPA0"
 
-	for(ts_test in c("10y","20y","30y","50y")){
+	for(ts_test in c("coup2100")){
 		cfg$gms$c_timesteps = ts_test
 		for (sl_set in c(0.05)) {
 			if(sl_set == 0.05) sl_name = "SL"
@@ -57,9 +62,9 @@ for(biodem in co2_price_scenarios){
 			cfg$gms$s35_selective_logging_flag = sl_set
 
 			if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
-				cfg$title<- paste0(cfg$gms$c_timesteps,"_",sl_name,"_","_CO2prices")
+				cfg$title<- paste0(cfg$gms$c_timesteps,"_",sl_name,"_","_CO2prices","_",cc_flag)
 			} else {
-				cfg$title<- paste0(cfg$gms$c_timesteps,"_",sl_name)
+				cfg$title<- paste0(cfg$gms$c_timesteps,"_",sl_name,"_",cc_flag)
 			}
 			start_run(cfg=cfg,codeCheck=codeCheck)
 	 }
