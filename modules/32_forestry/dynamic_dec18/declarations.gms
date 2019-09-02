@@ -93,7 +93,7 @@ parameters
  ov32_land_reduction(t,j,type32,ac,type)                   land reduction (mio. ha)
  ov32_avail_reuse(t,j,type)                                Defunct (1)
  ov32_cost_establishment(t,i,type)                         Cost of establishment calculated at the current time step (mio. USD)
- ov32_high_mgmt_prod_cost(t,i,type)                       Very high costs for increasing managemnt factors
+ ov32_high_mgmt_prod_cost(t,i,type)                        Very high costs for increasing managemnt factors
  ov_prod_cell_forestry(t,j,kforestry,type)                 xx
  oq32_cost_total(t,i,type)                                 total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                                       land constraint (mio. ha)
