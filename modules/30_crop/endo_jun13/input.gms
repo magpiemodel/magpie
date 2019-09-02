@@ -5,6 +5,16 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+
+********* CROPAREA INITIALISATION **********************************************
+
+table f30_croparea(t_past,j,kcr) Different croparea type areas (mio. ha)
+$ondelim
+$include "./modules/30_crop/endo_jun13/input/f30_croparea_initialisation.cs2"
+$offdelim
+;
+
+
 ********* CROP-ROTATIONAL CONSTRAINT *******************************************
 
 parameter f30_rotation_max_shr(crp30) Maximum allowed area shares for each crop type (1)
