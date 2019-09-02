@@ -37,7 +37,6 @@ q32_cost_total(i2) .. vm_cost_fore(i2) =e=
 								   + v32_cost_recur(i2)
 								   + v32_cost_establishment(i2)
                    + v32_high_mgmt_prod_cost(i2)
-*								   + sum((cell(i2,j2),kforestry), v32_prod_external(j2,kforestry) * 99999)
 								   ;
 $ontext
 re-establishment costs in t0
@@ -76,11 +75,7 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 q32_cost_harvest(i2)..
                     v32_cost_harvest(i2)
                     =e=
-                    sum((cell(i2,j2), kforestry),
-                    sum((ac_sub), v32_hvarea_forestry(j2,kforestry,ac_sub,"normal"))) * fm_harvest_cost_ha(i2)
-                    +
-                    sum((cell(i2,j2), kforestry),
-                    sum((ac_sub), v32_hvarea_forestry(j2,kforestry,ac_sub,"high"))) * fm_harvest_cost_ha(i2)
+                    sum((cell(i2,j2), kforestry, ac_sub, mgmt_type), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type)) * fm_harvest_cost_ha(i2)
                     ;
 
 ***PRODUCTION
@@ -99,10 +94,10 @@ q32_hvarea_forestry(j2,ac_sub) ..
 
 *********************************************************
 
- q32_management_incr_cost(i2) ..
-                              v32_high_mgmt_prod_cost(i2)
+ q32_management_incr_cost ..
+                              sum(i2,v32_high_mgmt_prod_cost(i2))
                               =e=
-                              sum((cell(i2,j2),kforestry), v32_prod(j2,kforestry,"high")) * 1000
+                              sum((j2,kforestry), v32_prod(j2,kforestry,"high")) * 10e4
                               ;
 
 *********************************************************
