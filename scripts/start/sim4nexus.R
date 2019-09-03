@@ -81,53 +81,99 @@ cfg$recalibrate <- "ifneeded"
 
 cfg<-general_settings(title="SSP2_base_rcp6p0")
 cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "sim4nexus",calibration=calib)
+cfg$gms$som <- "on"
+cfg$gms$c59_som_scenario  <- "cc"		# Should I switch this on?
 start_run(cfg=cfg,codeCheck=codeCheck)
-
 
 cfg<-general_settings(title="SSP2_food")
 cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "sim4nexus",calibration=calib)
-start_run(cfg=cfg,codeCheck=codeCheck)
-
+cfg$gms$som <- "on"
+cfg$gms$c59_som_scenario  <- "cc"		# Should I switch this on?
+# food still missing!
+# start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg<-general_settings(title="SSP2_climate")
 cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp2p6",regionmapping = "sim4nexus",calibration=calib)
-cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-MESSAGE-GLOBIOM"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
+# afforestation, avoided deforestation, all based on CO2 price (forest protection in line with 2deg target): (NOTE: if yes also in _all)
+cfg$gms$c32_aff_policy <- "ndc" 				# Florian
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-26-MESSAGE-GLOBIOM"
 cfg$gms$c50_scen_neff <- "neff65_70_starty2010"
+cfg$gms$som <- "on"
+cfg$gms$c59_som_scenario  <- "cc"		# Should I switch this on?
 start_run(cfg=cfg,codeCheck=codeCheck)
 
-
-
-cfg<-general_settings(title="SSP2_water")
+cfg<-general_settings(title="SSP2_water_global_irrigeff")
 cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "sim4nexus",calibration=calib)
+cfg$gms$s42_irrig_eff_scenario <- 1				# look at INPUT!!
+cfg$gms$c42_env_flow_policy <- "on"
 cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
+cfg$gms$som <- "on"
+cfg$gms$c59_som_scenario  <- "cc"		# Should I switch this on?
 start_run(cfg=cfg,codeCheck=codeCheck)
 
+cfg<-general_settings(title="SSP2_water_regional_irrigeff")
+cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-lucode::setScenario(cfg,"cc")
+cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "sim4nexus",calibration=calib)
+cfg$gms$s42_irrig_eff_scenario <- 2				
+cfg$gms$c42_env_flow_policy <- "on"
+cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
+cfg$gms$som <- "on"
+cfg$gms$c59_som_scenario  <- "cc"		# Should I switch this on?
+start_run(cfg=cfg,codeCheck=codeCheck)
+
+cfg<-general_settings(title="SSP2_water_dynamic_irrigeff")
+cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-lucode::setScenario(cfg,"cc")
+cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "sim4nexus",calibration=calib)
+cfg$gms$s42_irrig_eff_scenario <- 3				
+cfg$gms$c42_env_flow_policy <- "on"
+cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
+cfg$gms$som <- "on"
+cfg$gms$c59_som_scenario  <- "cc"		# Should I switch this on?
+start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg<-general_settings(title="SSP2_biodiversity")
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "sim4nexus",calibration=calib)
-cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
-cfg$gms$c55_scen_conf <- "SSP1"
 cfg$gms$c12_interest_rate <- "low"
-cfg$gms$c35_protect_scenario <- "BH"		
+cfg$gms$c35_protect_scenario <- "BH"
+cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
+cfg$gms$c55_scen_conf <- "SSP1"	
+cfg$gms$som <- "on"
+cfg$gms$c59_som_scenario  <- "cc"		# Should I switch this on?		
 start_run(cfg=cfg,codeCheck=codeCheck)
-
 
 cfg<-general_settings(title="SSP2_all")
 cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp2p6",regionmapping = "sim4nexus",calibration=calib)
-cfg$gms$c56_pollutant_prices <- "SSP2-26-SPA2-V15-MESSAGE-GLOBIOM"
-cfg$gms$c60_2ndgen_biodem    <- "SSP2-26-SPA2"
+cfg$gms$c32_aff_policy <- "ndc"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-MESSAGE-GLOBIOM"
+cfg$gms$som <- "on"
+cfg$gms$c59_som_scenario  <- "cc"		# Should I switch this on?
+cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-26-MESSAGE-GLOBIOM"
 cfg$gms$c42_env_flow_policy <- "on"
+# include irrigation efficiency scenario selected from above runs
 cfg$gms$c50_scen_neff <- "neff75_80_starty2010"
 cfg$gms$c12_interest_rate <- "low"
 cfg$gms$c55_scen_conf <- "SSP1"
 cfg$gms$c35_protect_scenario <- "BH"
+# food still missing!
 start_run(cfg=cfg,codeCheck=codeCheck)
+
+
+
+
+
 
