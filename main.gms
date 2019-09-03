@@ -166,7 +166,7 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  5year
+$setglobal c_timesteps  coup2100
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /
