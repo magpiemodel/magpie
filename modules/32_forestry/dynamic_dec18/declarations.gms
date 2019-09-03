@@ -74,7 +74,7 @@ equations
  q32_land_reduction(j,type32,ac)                  Land contarction (mio. ha)
  q32_avail_reuse(j)                               Defunct (1)
  q32_cost_establishment(i)                        Present value of cost of establishment (mio. USD)
- q32_management_incr_cost                       xxxx
+ q32_management_incr_cost(j)                       xxxx
  q32_prod_cell_forestry(j,kforestry)               xx
 ;
 
@@ -112,7 +112,7 @@ parameters
  oq32_land_reduction(t,j,type32,ac,type)                   Land contarction (mio. ha)
  oq32_avail_reuse(t,j,type)                                Defunct (1)
  oq32_cost_establishment(t,i,type)                         Present value of cost of establishment (mio. USD)
- oq32_management_incr_cost(t,type)                         xxxx
+ oq32_management_incr_cost(t,j,type)                       xxxx
  oq32_prod_cell_forestry(t,j,kforestry,type)               xx
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
