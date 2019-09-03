@@ -1,5 +1,5 @@
 ** Check for calcultation of time factor
-pm_time_mod(t) = (1$(ord(t)=1)+(m_yeardiff(t)*(0.985**m_yeardiff(t)))$(ord(t)>1));
+pm_time_mod(t) = (5$(ord(t)=1)+(m_yeardiff(t)*(0.985**m_yeardiff(t)))$(ord(t)>1));
 
 ** Setting ac dependent carbon densities
 p32_carbon_density_ac(t,j,type32,ac,c_pools)  = pm_carbon_density_ac(t,j,ac,c_pools);
