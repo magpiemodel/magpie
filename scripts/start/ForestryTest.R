@@ -45,7 +45,7 @@ co2_price_scenarios <- c("SSP2-Ref-SPA0")
 #co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
 
 
-for(climate_impacts in c(TRUE,FALSE)){
+for(climate_impacts in c(FALSE)){
 
 	if(climate_impacts){
 		cfg <- setScenario(cfg, "cc")
