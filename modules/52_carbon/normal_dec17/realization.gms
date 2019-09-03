@@ -22,6 +22,7 @@
 *' carbon stock information prior to 1995 is not available
 
 *####################### R SECTION START (PHASES) ##############################
+$Ifi "%phase%" == "sets" $include "./modules/52_carbon/normal_dec17/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/52_carbon/normal_dec17/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/52_carbon/normal_dec17/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/52_carbon/normal_dec17/equations.gms"

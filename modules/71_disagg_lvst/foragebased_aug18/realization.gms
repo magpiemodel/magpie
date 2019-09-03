@@ -19,6 +19,7 @@
 $Ifi "%phase%" == "sets" $include "./modules/71_disagg_lvst/foragebased_aug18/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/71_disagg_lvst/foragebased_aug18/declarations.gms"
 $Ifi "%phase%" == "equations" $include "./modules/71_disagg_lvst/foragebased_aug18/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/71_disagg_lvst/foragebased_aug18/scaling.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/71_disagg_lvst/foragebased_aug18/preloop.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/71_disagg_lvst/foragebased_aug18/postsolve.gms"
 $Ifi "%phase%" == "nl_fix" $include "./modules/71_disagg_lvst/foragebased_aug18/nl_fix.gms"
