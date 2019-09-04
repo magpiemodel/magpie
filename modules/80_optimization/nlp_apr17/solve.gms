@@ -49,7 +49,7 @@ repeat(
       s80_forestry_counter = s80_forestry_counter + 1 ;
     );
 
-  magpie.solprint  = 0 ;  
+  magpie.solprint  = 0 ;
 
   p80_modelstat(t) = magpie.modelstat;
   p80_num_nonopt(t) = magpie.numNOpt;
