@@ -4,9 +4,12 @@
 *p32_rot_length(t,i) = f32_rot_length(t,i,"%c32_rot_length%");
 *p32_rot_length_estb(t,i) = f32_rot_length(t,i,"%c32_rot_length_estb%");
 
+** Check for calcultation of time factor
+pm_time_mod(t) = (5$(ord(t)=1)+(m_yeardiff(t)*(0.985**m_yeardiff(t)))$(ord(t)>1));
+
 p32_carbon_density_ac_nat(t,j,ac) = m_growth_vegc(0,fm_carbon_density(t,j,"other","vegc"),sum(clcl,f45_koeppengeiger(j,clcl)*f52_growth_par(clcl,"k")),sum(clcl,f45_koeppengeiger(j,clcl)*f52_growth_par(clcl,"m")),(ord(ac)-1));
 
-p32_carbon_density_ac_marg(t,j,ac+1) = p32_carbon_density_ac_nat(t,j,ac+1) - p32_carbon_density_ac_nat(t,j,ac);
+p32_carbon_density_ac_marg(t,j,ac_sub) = p32_carbon_density_ac_nat(t,j,ac_sub) - p32_carbon_density_ac_nat(t,j,ac_sub-1);
 
 p32_IGR(t,j,ac_sub) = p32_carbon_density_ac_marg(t,j,ac_sub)/p32_carbon_density_ac_nat(t,j,ac_sub);
 p32_IGR("y1995",j,"ac0") = 1;
@@ -36,6 +39,13 @@ protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular(t,j));
 
 harvest32(t,j,ac_sub) = no;
 harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular(t,j));
+
+****************************************
+*** ADD DYNAMIC SET HERE BASED ON AC ***
+****************************************
+ac_add_timestep(t,ac_additional) = no;
+**** Overwrite with yes for ac_additional elements which are lower than difference between years.
+ac_add_timestep(t,ac_additional) = yes$(ord(ac_additional) <= (m_yeardiff(t)/5));
 
 ** Initialization of "Protected available plantations" and "availabe plantations which can be re-used".
 p32_protect_avail(t,j) = 0;

@@ -14,6 +14,7 @@ $else
 $endif
 
 s80_counter = 0;
+s80_forestry_counter = 0;
 p80_modelstat(t) = 1;
 
 *** solver settings
@@ -42,10 +43,13 @@ repeat(
       option nlp = conopt4;
     );
 
-    if((magpie.modelstat = 4),
+    if((magpie.modelstat = 4 and s80_forestry_counter <= 1),
       display "WARNING: Modelstat 4, SOLPRINT SET TO 1.";
       magpie.solprint  = 1 ;
+      s80_forestry_counter = s80_forestry_counter + 1 ;
     );
+
+  magpie.solprint  = 0 ;  
 
   p80_modelstat(t) = magpie.modelstat;
   p80_num_nonopt(t) = magpie.numNOpt;
