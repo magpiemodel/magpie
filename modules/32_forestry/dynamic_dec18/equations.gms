@@ -103,9 +103,9 @@ q32_hvarea_forestry(j2,ac_sub) ..
 *********************************************************
 
 q32_prod_cell_forestry(j2,kforestry)..
-                          sum(mgmt_type,v32_prod(j2,kforestry,mgmt_type))
-                          =e=
                           vm_prod_cell_forestry(j2,kforestry)
+                          =l=
+                          sum(mgmt_type,v32_prod(j2,kforestry,mgmt_type))
                           ;
 
 ** Establishment in current time step already accounts for a certain percentage of production to be fulfilled by plantations in future.
