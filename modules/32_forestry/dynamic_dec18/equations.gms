@@ -75,7 +75,7 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 q32_cost_harvest(i2)..
                     v32_cost_harvest(i2)
                     =e=
-                    sum((cell(i2,j2), kforestry, ac_sub, mgmt_type), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type)) * fm_harvest_cost_ha(i2)
+                    sum((cell(i2,j2), kforestry, ac_sub), v32_hvarea_forestry(j2,kforestry,ac_sub,"normal")) * fm_harvest_cost_ha(i2)
                     ;
 
 ***PRODUCTION
@@ -97,7 +97,7 @@ q32_hvarea_forestry(j2,ac_sub) ..
  q32_management_incr_cost(i2) ..
                               v32_high_mgmt_prod_cost(i2)
                               =e=
-                              sum((cell(i2,j2),kforestry,ac_sub,mgmt_type), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type)) * 10e4
+                              sum((cell(i2,j2),kforestry,ac_sub), v32_hvarea_forestry(j2,kforestry,ac_sub,"high")) * 10e3
                               ;
 
 *********************************************************
