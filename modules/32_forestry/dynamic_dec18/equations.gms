@@ -122,7 +122,7 @@ q32_prod_future(i2) ..
               ;
 $offtext
 q32_prod_future(i2) ..
-              sum((cell(i2,j2),ac_additional), v32_land(j2,"plant",ac_additional))
+              sum((cell(i2,j2)), v32_land(j2,"plant","ac0"))
               =g=
               sum((cell(i2,j2),ac_sub,mgmt_type,kforestry), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type))
               ;
