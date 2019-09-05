@@ -7,14 +7,14 @@
 *' @equations
 
 q17_prod_cell_wood(j2)..
- vm_prod(j2,"wood")
+ vm_prod(j2,"wood") - vm_prod_cell_natveg(j2,"wood")
  =e=
- vm_prod_cell_forestry(j2,"wood") + vm_prod_cell_natveg(j2,"wood");
+ vm_prod_cell_forestry(j2,"wood");
 
  q17_prod_cell_woodfuel(j2)..
-  vm_prod(j2,"woodfuel")
+  vm_prod(j2,"woodfuel") - vm_prod_cell_natveg(j2,"woodfuel")
   =e=
-  vm_prod_cell_forestry(j2,"woodfuel") + vm_prod_cell_natveg(j2,"woodfuel");
+  vm_prod_cell_forestry(j2,"woodfuel");
 
 *' The equation above describes regional production of a MAgPIE timber commodity
 *' `vm_prod_reg_cell_xx` as the cluster level production for `vm_prod` of the same commodity.

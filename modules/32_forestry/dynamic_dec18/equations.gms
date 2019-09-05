@@ -103,9 +103,9 @@ q32_hvarea_forestry(j2,ac_sub) ..
 *********************************************************
 
 q32_prod_cell_forestry(j2,kforestry)..
-                          vm_prod_cell_forestry(j2,kforestry)
-                          =e=
                           sum(mgmt_type,v32_prod(j2,kforestry,mgmt_type))
+                          =e=
+                          vm_prod_cell_forestry(j2,kforestry)
                           ;
 
 q32_production_timber(i2,kforestry)..
