@@ -47,10 +47,6 @@ ac_add_timestep(t,ac_additional) = no;
 **** Overwrite with yes for ac_additional elements which are lower than difference between years.
 ac_add_timestep(t,ac_additional) = yes$(ord(ac_additional) <= (m_yeardiff(t)/5));
 
-** Initialization of "Protected available plantations" and "availabe plantations which can be re-used".
-p32_protect_avail(t,j) = 0;
-v32_avail_reuse.l(j) = 0;
-
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
 p32_land(t,j,type32,ac) = 0;

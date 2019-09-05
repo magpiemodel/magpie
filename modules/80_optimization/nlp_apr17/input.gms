@@ -10,6 +10,6 @@ scalars
 		s80_num_nonopt_allowed 	number of allowed non-optimal variables (1)  		/ Inf /
 ;
 
-$setglobal c80_nlp_solver  conopt3
+$setglobal c80_nlp_solver  conopt4
 *   options:   (conopt3):         conopt3
 *              (conopt4):         conopt4

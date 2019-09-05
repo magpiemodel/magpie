@@ -26,7 +26,7 @@ sets
  harvest32(t,j,ac) mapping age class - land type
 
  ac_additional(ac)
- /ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40/
+ /ac0,ac5,ac10,ac15,ac20,ac25,ac30/
 
  ac_add_timestep(t,ac_additional) timestep length and additional acs to be planted
 

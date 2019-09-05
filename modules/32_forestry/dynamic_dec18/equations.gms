@@ -108,26 +108,24 @@ q32_prod_cell_forestry(j2,kforestry)..
                           vm_prod_cell_forestry(j2,kforestry)
                           ;
 
-q32_production_timber(i2,kforestry)..
-                          sum((cell(i2,j2),mgmt_type),v32_prod(j2,kforestry,mgmt_type))
-                          =n=
-                          vm_prod_reg(i2,kforestry) * sum(ct, fm_production_ratio(i2,ct))
-                          ;
-
 ** Establishment in current time step already accounts for a certain percentage of production to be fulfilled by plantations in future.
 *q32_prod_future(i2) ..
 *              sum((cell(i2,j2),ct),(v32_land(j2,"plant",ac_additional)) * pc32_yield_forestry_future(ct,j2))
 *              =g=
 *              sum(kforestry, vm_prod_future_reg_ff(i2,kforestry,ac_additional)) * pcm_production_ratio_future(i2)
 *              ;
-
+$ontext
 q32_prod_future(i2) ..
               sum((cell(i2,j2),ct), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(ct,j2))
               =g=
               sum(kforestry, vm_prod_future_reg_ff(i2,kforestry)) * pcm_production_ratio_future(i2)
               ;
-
-q32_avail_reuse(j2) ..      v32_avail_reuse(j2)	=e=	0;
+$offtext
+q32_prod_future(i2) ..
+              sum((cell(i2,j2),ac_additional), v32_land(j2,"plant",ac_additional))
+              =g=
+              sum((cell(i2,j2),ac_sub,mgmt_type,kforestry), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type))
+              ;
 
 **TECHNICAL STUFF
 q32_diff .. vm_landdiff_forestry =e= sum((j2,type32,ac),
