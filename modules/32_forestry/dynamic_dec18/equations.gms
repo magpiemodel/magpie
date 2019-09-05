@@ -79,10 +79,10 @@ q32_cost_harvest(i2)..
                     ;
 
 ***PRODUCTION
-q32_prod_forestry(j2,kforestry,mgmt_type)..
-                          v32_prod(j2,kforestry,mgmt_type)
+q32_prod_forestry(j2,kforestry)..
+                          v32_prod(j2,kforestry)
                           =e=
-                         sum((ac_sub,ct), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type) * p32_yield_forestry_ac(ct,j2,ac_sub,mgmt_type));
+                         sum((ac_sub,ct,mgmt_type), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type) * p32_yield_forestry_ac(ct,j2,ac_sub,mgmt_type));
 
 ***AREA
 
@@ -97,15 +97,15 @@ q32_hvarea_forestry(j2,ac_sub) ..
  q32_management_incr_cost(i2) ..
                               v32_high_mgmt_prod_cost(i2)
                               =e=
-                              sum((cell(i2,j2),kforestry), v32_prod(j2,kforestry,"high")) * 10e4
+                              sum((cell(i2,j2),kforestry,ac_sub,mgmt_type), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type)) * 10e4
                               ;
 
 *********************************************************
 
 q32_prod_cell_forestry(j2,kforestry)..
                           vm_prod_cell_forestry(j2,kforestry)
-                          =g=
-                          sum(mgmt_type,v32_prod(j2,kforestry,mgmt_type))
+                          =e=
+                          v32_prod(j2,kforestry)
                           ;
 
 ** Establishment in current time step already accounts for a certain percentage of production to be fulfilled by plantations in future.
@@ -120,6 +120,12 @@ q32_prod_future(i2) ..
               =g=
 *              sum(kforestry, vm_prod_future_reg_ff(i2,kforestry)) * pcm_production_ratio_future(i2)
               sum(kforestry, vm_prod_reg(i2,kforestry) * 2)
+              ;
+
+q32_prod_reg(i2)..
+              sum(kforestry,v32_prod_reg(i2,kforestry))
+              =e=
+              sum((cell(i2,j2),kforestry), v32_prod(j2,kforestry))
               ;
 
 **TECHNICAL STUFF

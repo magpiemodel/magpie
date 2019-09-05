@@ -53,6 +53,7 @@ equations
  q35_prod_secdforest(j,kforestry)  xx
  q35_prod_primforest(j,kforestry)  xx
  q35_prod_cell_natveg(j,kforestry)  xx
+ q35_prod_reg(i)
 ;
 
 positive variables
@@ -70,6 +71,7 @@ positive variables
   v35_prod(j,land_natveg,kforestry)          Timber production coming from natveg (mio. m3)
   vm_cost_natveg(i)                           Regional natveg timber production costs (mio. USD)
   vm_prod_cell_natveg(j,kforestry)           xx
+  v35_prod_reg(i,kforestry)                  xx
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -88,6 +90,7 @@ parameters
  ov35_prod(t,j,land_natveg,kforestry,type)         Timber production coming from natveg (mio. m3)
  ov_cost_natveg(t,i,type)                          Regional natveg timber production costs (mio. USD)
  ov_prod_cell_natveg(t,j,kforestry,type)           xx
+ ov35_prod_reg(t,i,kforestry,type)                 xx
  oq35_land_secdforest(t,j,type)                    Secdforest land pool calculation (mio. ha)
  oq35_land_other(t,j,type)                         Other land pool calculation (mio. ha)
  oq35_carbon_primforest(t,j,c_pools,type)          Primforest carbon stock calculation (mio tC)
@@ -110,5 +113,6 @@ parameters
  oq35_prod_secdforest(t,j,kforestry,type)          xx
  oq35_prod_primforest(t,j,kforestry,type)          xx
  oq35_prod_cell_natveg(t,j,kforestry,type)         xx
+ oq35_prod_reg(t,i,type)                           
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
