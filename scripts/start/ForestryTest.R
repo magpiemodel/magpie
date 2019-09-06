@@ -40,6 +40,9 @@ cfg$gms$optimization <- "nlp_apr17"
 #ALERT:  At the moment this script cannot download new data in case the input files are changed. Has to be set to true.
 cfg$force_download <- FALSE
 
+## No interpolation later
+cfg$output <- c("rds_report","validation")
+
 ## CO2 price runs
 co2_price_scenarios <- c("SSP2-Ref-SPA0")
 #co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
