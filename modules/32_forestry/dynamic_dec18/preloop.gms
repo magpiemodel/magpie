@@ -5,7 +5,8 @@
 *p32_rot_length_estb(t,i) = f32_rot_length(t,i,"%c32_rot_length_estb%");
 
 ** Check for calcultation of time factor
-pm_time_mod(t) = (5$(ord(t)=1)+(m_yeardiff(t)*(0.985**m_yeardiff(t)))$(ord(t)>1));
+*pm_time_mod(t) = (5$(ord(t)=1)+(m_yeardiff(t)*(0.985**m_yeardiff(t)))$(ord(t)>1));
+pm_time_mod(t) = m_yeardiff(t);
 
 p32_carbon_density_ac_nat(t,j,ac) = m_growth_vegc(0,fm_carbon_density(t,j,"other","vegc"),sum(clcl,f45_koeppengeiger(j,clcl)*f52_growth_par(clcl,"k")),sum(clcl,f45_koeppengeiger(j,clcl)*f52_growth_par(clcl,"m")),(ord(ac)-1));
 
@@ -39,13 +40,6 @@ protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular(t,j));
 
 harvest32(t,j,ac_sub) = no;
 harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular(t,j));
-
-****************************************
-*** ADD DYNAMIC SET HERE BASED ON AC ***
-****************************************
-ac_add_timestep(t,ac_additional) = no;
-**** Overwrite with yes for ac_additional elements which are lower than difference between years.
-ac_add_timestep(t,ac_additional) = yes$(ord(ac_additional) <= (m_yeardiff(t)/5));
 
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");

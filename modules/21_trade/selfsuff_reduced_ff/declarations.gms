@@ -20,6 +20,7 @@ parameters
  pc21_trade_bal_reduction_future(kforestry)     Future trade balance reduction (1)
  pc21_trade_balanceflow_future(kforestry)       Future trade balanceflow (1)
  pc21_exp_shr_future(i,kforestry)               Future export share (1)
+ p21_demand_ff_factor(t_all)                    xx
 ;
 
 positive variables

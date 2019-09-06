@@ -3,8 +3,6 @@
 *** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
-*f21_self_suff(t_all,"MEA","wood")     = 0.05;
-*f21_self_suff(t_all,"MEA","woodfuel") = 0.05;
 
 f21_self_suff(t_all,"MEA",kforestry) = 0.2;
 f21_self_suff(t_all,"JPN",kforestry) = 0.2;
