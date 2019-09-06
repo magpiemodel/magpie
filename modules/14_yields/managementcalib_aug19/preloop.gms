@@ -22,33 +22,26 @@ i14_yields(t,j,"pasture",w) = i14_yields(t,j,"pasture",w)*sum(cell(i,j),p14_pyie
 
 p14_croparea_total(t,j) = sum((kcr,w), fm_croparea(t,j,w,kcr));
 
-p14_lpj_yields(t,i,kcr)         = (sum((cell(i,j),w), fm_croparea(t,j,w,kcr) * f14_yields(t,j,kcr,w)) /
-                                    sum((cell(i,j),w), fm_croparea(t,j,w,kcr)))$(sum((cell(i,j),w), fm_croparea(t,j,w,kcr))>0) +
-																	(sum((cell(i,j),w), p14_croparea_total(t,j) * f14_yields(t,j,kcr,w)) /
-																	  sum(cell(i,j), p14_croparea_total(t,j)))$(sum((cell(i,j),w), fm_croparea(t,j,w,kcr))=0);
+p14_lpj_yields_hist("y1995",i,kcr)   = (sum((cell(i,j),w), fm_croparea("y1995",j,w,kcr) * f14_yields("y1995",j,kcr,w)) /
+                                        sum((cell(i,j),w), fm_croparea("y1995",j,w,kcr)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,kcr))>0) +
+																       (sum((cell(i,j),w), p14_croparea_total("y1995",j) * f14_yields("y1995",j,kcr,w)) /
+																      	sum(cell(i,j), p14_croparea_total("y1995",j)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,kcr))=0);
 
-loop(t,
-     if(sum(sameas(t,"y1995"),1)=1,
-       p14_lpj_yields_past(t,i,kcr) = p14_lpj_yields(t,i,kcr);
-			 p14_delta_yields(t,i,kcr)    = f14_regions_yields(t,i,kcr) - p14_lpj_yields(t,i,kcr);
-			 p14_ccratio_yields(t,i,kcr)  = 1$(p14_lpj_yields_past(t,i,kcr)=0) +
-			                                (p14_lpj_yields(t,i,kcr) / p14_lpj_yields_past(t,i,kcr))$(p14_lpj_yields_past(t,i,kcr)>0);
-			 p14_lambda_yields(t,i,kcr)   = 1$
-			                                   ((not s14_limit_calib) or (f14_regions_yields(t,i,kcr) <= p14_lpj_yields(t,i,kcr))) +
-																			sqrt(p14_lpj_yields(t,i,kcr)/f14_regions_yields(t,i,kcr))$
+loop(t, if(sum(sameas(t,"y1995"),1)=1,
+			    p14_lambda_yields(t,i,kcr)   = 1$((not s14_limit_calib) or (f14_regions_yields(t,i,kcr) <= p14_lpj_yields_hist(t,i,kcr))) +
+																			   sqrt(p14_lpj_yields_hist(t,i,kcr)/f14_regions_yields(t,i,kcr))$
 																			   ((s14_limit_calib) and (f14_regions_yields(t,i,kcr) > p14_lpj_yields(t,i,kcr)));
-		 Else
-		   p14_lpj_yields_past(t,i,kcr) = p14_lpj_yields_past(t-1,i,kcr);
-			 p14_delta_yields(t,i,kcr)    = p14_delta_yields(t-1,i,kcr);
-			 p14_ccratio_yields(t,i,kcr)  = 1$(p14_lpj_yields_past(t,i,kcr)=0) +
-																		  (p14_lpj_yields(t,i,kcr) / p14_lpj_yields_past(t,i,kcr))$(p14_lpj_yields_past(t,i,kcr)>0);
-			p14_lambda_yields(t,i,kcr)    = p14_lambda_yields(t-1,i,kcr);
+		    Else
+		      p14_lpj_yields_hist(t,i,kcr) = p14_lpj_yields_hist(t-1,i,kcr);
+		    	p14_lambda_yields(t,i,kcr)   = p14_lambda_yields(t-1,i,kcr);
 		);
 );
 
-p14_managementcalib(t,i,kcr) = 1 + (p14_delta_yields(t,i,kcr)/ (p14_lpj_yields(t,i,kcr)) *
-                                                 (p14_ccratio_yields(t,i,kcr)) ** p14_lambda_yields(t,i,kcr))
-																			            $(p14_lpj_yields(t,i,kcr)>0);
+p14_managementcalib(t,j,kcr,w) = 1 + (sum((cell(i,j),w), f14_regions_yields(t,i,kcr) - p14_lpj_yields_hist(t,i,kcr)) / i14_yields(t,j,kcr,w) *
+                                      (i14_yields(t,j,kcr,w) / sum((cell(i,j),w),p14_lpj_yields_hist(t,i,kcr))) ** sum((cell(i,j),w),p14_lambda_yields(t,i,kcr)))
+																			  $(i14_yields(t,j,kcr,w)>0);
+
+p14_yields_calib(t,j,kcr,w)       = p14_managementcalib(t,j,kcr,w) * i14_yields(t,j,kcr,w);
 
 
 ***YIELD CALIBRATION***********************************************************************
