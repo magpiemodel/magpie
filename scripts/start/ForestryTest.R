@@ -43,6 +43,9 @@ cfg$force_download <- FALSE
 ## No interpolation later
 cfg$output <- c("rds_report","validation")
 
+## Using opt file during bugfix
+cfg$gms$s80_optfile <- 1
+
 ## CO2 price runs
 co2_price_scenarios <- c("SSP2-Ref-SPA0")
 #co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")

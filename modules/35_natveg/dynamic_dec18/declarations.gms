@@ -54,6 +54,7 @@ equations
  q35_prod_primforest(j,kforestry)  xx
  q35_prod_cell_natveg(j,kforestry)  xx
  q35_prod_reg(i)
+ q35_prod_natveg_more               xx
 ;
 
 positive variables
@@ -114,5 +115,6 @@ parameters
  oq35_prod_primforest(t,j,kforestry,type)          xx
  oq35_prod_cell_natveg(t,j,kforestry,type)         xx
  oq35_prod_reg(t,i,type)                           
+ oq35_prod_natveg_more(t,type)                     xx
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
