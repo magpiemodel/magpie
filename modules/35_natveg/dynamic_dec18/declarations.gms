@@ -28,6 +28,8 @@ parameters
 
  i35_ageclass_area_secdf(j,ac)  Age class distribution from poulter et al (1)
  i35_ageclass_shr_grow(j,ac)    Age class share distribution (1)
+
+ p35_prod_ratio                 xx
 ;
 
 equations
@@ -114,7 +116,7 @@ parameters
  oq35_prod_secdforest(t,j,kforestry,type)          xx
  oq35_prod_primforest(t,j,kforestry,type)          xx
  oq35_prod_cell_natveg(t,j,kforestry,type)         xx
- oq35_prod_reg(t,i,type)                           
+ oq35_prod_reg(t,i,type)
  oq35_prod_natveg_more(t,type)                     xx
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

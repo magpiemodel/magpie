@@ -148,5 +148,5 @@ q35_prod_reg(i2)..
 q35_prod_natveg_more..
                           sum((j2,kforestry),vm_prod_cell_natveg(j2,kforestry))
                           =g=
-                          sum((j2,kforestry),vm_prod_cell_forestry(j2,kforestry))
+                          sum((i2,kforestry),vm_prod_reg(i2,kforestry)) * p35_prod_ratio
                           ;

@@ -4,6 +4,8 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
+p35_prod_ratio = (80-(2.5*ord(t)))/100;
+
 * Regrowth of natural vegetation (natural succession) is modelled by shifting age-classes according to time step length.
 s35_shift = m_yeardiff(t)/5;
 if((ord(t) = 1),
