@@ -18,12 +18,10 @@ p32_rot_flg(t,j,ac) = 1$((p32_IGR(t,j,ac) - sum(cell(i,j),p12_interest(t,i)))>0)
 p32_rot_final(t,j) = sum(ac,p32_rot_flg(t,j,ac)) * 5;
 p32_rot_final(t,j)$(p32_rot_final(t,j)>90) = 90;
 
-p32_rot_length(t,j) = p32_rot_final(t,j);
-p32_rot_length_estb(t,j) = p32_rot_final(t,j);
-
-*p32_rot_length(t,j) = f32_rot_length_cellular(t,j);
-*p32_rot_length_estb(t,j) = f32_rot_length_cellular(t,j);
-*p32_rot_length_estb(t,i) = 30;
+*p32_rot_length(t,j) = p32_rot_final(t,j);
+*p32_rot_length_estb(t,j) = p32_rot_final(t,j);
+p32_rot_length(t,j) = p32_rot_final("y1995",j);
+p32_rot_length_estb(t,j) = p32_rot_final("y1995",j);
 
 p32_rot_length_estb(t,j) = p32_rot_length(t,j);
 
