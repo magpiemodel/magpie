@@ -20,4 +20,4 @@ fm_forestry_demand(t,i,kforestry) =
 
 fm_forestry_demand(t,i,"woodfuel") = fm_forestry_demand(t,i,"woodfuel") * 0.5;
 
-fm_forestry_demand(t,i,kforestry) = fm_forestry_demand(t,i,kforestry) * 0.7;
+fm_forestry_demand(t,i,kforestry) = fm_forestry_demand("y1995",i,kforestry);
