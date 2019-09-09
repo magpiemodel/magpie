@@ -30,7 +30,7 @@ p32_land(t,j,type32,ac)$(ord(ac) > s32_shift) = p32_land(t-1,j,type32,ac-s32_shi
 p32_land(t,j,type32,"acx") = p32_land(t,j,type32,"acx") + sum(ac$(ord(ac) > card(ac)-s32_shift), p32_land(t-1,j,type32,ac));
 );
 *should not be necessary. Just to be on the save side
-p32_land(t,j,type32,"ac0") = 0;
+*p32_land(t,j,type32,"ac0") = 0;
 
 *calculate v32_land.l
 v32_land.l(j,type32,ac) = p32_land(t,j,type32,ac);
