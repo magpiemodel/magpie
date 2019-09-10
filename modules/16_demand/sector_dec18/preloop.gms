@@ -7,6 +7,8 @@
 p16_volumetric_conversion("wood") = 632.5;
 p16_volumetric_conversion("woodfuel") = 307.1;
 
+f16_forestry_demand_iso(t_all,iso,"woodfuel") = f16_forestry_demand_iso(t_all,iso,"woodfuel") * 0.50;
+
 fm_forestry_demand(t_all,i,kforestry) =
 									sum(i_to_iso(i,iso),f16_forestry_demand_iso(t_all,iso,kforestry));
 
@@ -17,7 +19,3 @@ fm_forestry_demand(t_all,i,kforestry) =
 
 fm_forestry_demand(t,i,kforestry) =
 										sum(i_to_iso(i,iso),f16_forestry_demand_iso(t,iso,kforestry));
-
-fm_forestry_demand(t,i,"woodfuel") = fm_forestry_demand(t,i,"woodfuel") * 0.5;
-
-fm_forestry_demand(t,i,kforestry) = fm_forestry_demand("y1995",i,kforestry);

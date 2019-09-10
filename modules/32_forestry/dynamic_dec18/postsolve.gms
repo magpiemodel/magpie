@@ -1,4 +1,5 @@
 v32_land.l(j,"plant",ac_additional) = v32_land.l(j,"plant","ac0")/card(ac_additional);
+*v32_land.l(j,"plant",ac_additional)$(m_yeardiff(t)>5) = v32_land.l(j,"plant","ac0")/(m_yeardiff(t)/5);
 
 p32_land(t,j,type32,ac) = v32_land.l(j,type32,ac);
 

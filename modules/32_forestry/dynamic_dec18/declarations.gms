@@ -11,7 +11,7 @@ parameters
  p32_aff_pol_timestep(t,j)                        INDC afforestation per time step (Mha)
  p32_aff_pol(t,j)                                 INDC forest stock (Mha)
  pc32_yield_forestry_future(t,j)                    Cellular timber yield expected in the future (m3 per ha per year)
- p32_yield_forestry_ac(t,j,ac,mgmt_type)          Age class specific yield of plantation forests (m3 per ha per yr)
+ p32_yield_forestry_ac(t,j,ac,mgmt_type)                    Age class specific yield of plantation forests (m3 per ha per yr)
  p32_hvcost_ha(i)                                 Timber harvesting cost per ha (USD)
  p32_rot_length(t,j)                                Regional rotation length of plantations (yr)
  pm_rot_length(t,j)                                 Regional rotation length of plantations translated to age class equivalent for future (1)

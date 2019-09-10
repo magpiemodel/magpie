@@ -26,7 +26,6 @@ magpie.holdfixed = 1 ;
 
 $onecho > conopt4.opt
 Tol_Obj_Change = 3.0e-6
-Tol_Feas_Min = 4.0e-8
 $offecho
 
 repeat(
@@ -49,6 +48,8 @@ repeat(
       magpie.solprint  = 1 ;
       s80_forestry_counter = s80_forestry_counter + 1 ;
     );
+
+  magpie.solprint  = 0 ;
 
   p80_modelstat(t) = magpie.modelstat;
   p80_num_nonopt(t) = magpie.numNOpt;

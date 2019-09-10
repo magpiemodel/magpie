@@ -144,9 +144,3 @@ q35_prod_reg(i2)..
                           =e=
                           sum((cell(i2,j2),land_natveg,kforestry), v35_prod(j2,land_natveg,kforestry))
                           ;
-
-q35_prod_natveg_more..
-                          sum((i2,kforestry),vm_prod_reg(i2,kforestry))
-                          =e=
-                          sum((j2,kforestry),vm_prod_cell_natveg(j2,kforestry)) + sum((j2,kforestry),vm_prod_cell_forestry(j2,kforestry))
-                          ;

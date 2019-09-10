@@ -111,7 +111,7 @@ q32_prod_cell_forestry(j2,kforestry)..
 q32_prod_future(i2) ..
               sum((cell(i2,j2),ct), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(ct,j2))
               =g=
-              sum(kforestry, vm_prod_future_reg_ff(i2,kforestry)) * pcm_production_ratio_future(i2)
+              sum(kforestry, vm_prod_future_reg_ff(i2,kforestry) * card(ac_additional)) * pcm_production_ratio_future(i2)
               ;
 
 q32_prod_reg(i2)..
