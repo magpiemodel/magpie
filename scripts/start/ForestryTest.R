@@ -61,7 +61,7 @@ for(climate_impacts in c(FALSE)){
 		cfg$gms$c56_pollutant_prices <- paste0(biodem,"-V15-REMIND-MAGPIE")	# def = "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
 		cfg$gms$c60_2ndgen_biodem <- biodem     														# def = "SSP2-Ref-SPA0"
 
-		for(ts_test in c("coup2100")){
+		for(ts_test in c("5year")){
 			cfg$gms$c_timesteps = ts_test
 			for (sl_set in c(0.05)) {
 				if(sl_set == 0.05) sl_name = "SL"
