@@ -114,12 +114,6 @@ q32_prod_future(i2) ..
               sum(kforestry, vm_prod_future_reg_ff(i2,kforestry) * card(ac_additional)) * pcm_production_ratio_future(i2)
               ;
 
-q32_prod_reg(i2)..
-              sum(kforestry,v32_prod_reg(i2,kforestry))
-              =e=
-              sum((cell(i2,j2),kforestry), v32_prod(j2,kforestry))
-              ;
-
 **TECHNICAL STUFF
 q32_diff .. vm_landdiff_forestry =e= sum((j2,type32,ac),
                        v32_land_expansion(j2,type32,ac)
