@@ -50,3 +50,12 @@ p15_lastiteration_delta_income(t,i) = 1;
 $ifthen "%c15_rumscen%" == "mixed" i15_ruminant_fadeout(t) = (f15_ruminant_fadeout(t,"constant") + f15_ruminant_fadeout(t,"halving2050"))/2;
 $else i15_ruminant_fadeout(t) = f15_ruminant_fadeout(t,"%c15_rumscen%");
 $endif
+
+
+* The target year for transition to exogenous scenario diets defines the speed
+* of fading from regression based daily food consumption towards the scenario:
+i15_exo_foodscen_fader(t) = f15_exo_foodscen_fader(t,"%c15_exo_diet_targetyear%");
+
+* Initialisation of the ratio between food calorie demand and food intake for the
+* historical reference period:
+p15_demand2intake_ratio_ref(i) = 0;

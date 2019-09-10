@@ -16,4 +16,7 @@ f15_schofield_parameters_height.cs3
 f15_intake_regression_parameters.cs3
 f15_household_balanceflow.cs3
 f15_nutrition_attributes.cs3
-
+f15_calib_factor_FAOfsupply.cs4
+f15_supply2intake_ratio_bottomup.cs3
+f15_intake_EATLancet.cs3
+f15_exo_foodscen_fader.csv

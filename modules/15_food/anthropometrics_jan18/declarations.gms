@@ -59,8 +59,8 @@ variables
   v15_objective                      Objective term (USD05PPP)
 ;
 
-scalars 
-  s15_yeardiff                       Number of 5-year time intervalls between time steps (1) 
+scalars
+  s15_yeardiff                       Number of 5-year time intervalls between time steps (1)
   s15_count                          Loop counter for interpolating body height estimates between longer timesteps (1)
 
 ;
@@ -123,15 +123,32 @@ parameters
  p15_kcal_pc_initial_iso(t,iso,kfo)           Per capita consumption in food demand model before price shock on country level (kcal per capita per day)
 
 * after price shock
- p15_kcal_pc_iso(t,iso,kfo)                   Per capita consumption in food demand model after price shock on country level (kcal per capita per day)
- p15_kcal_pc(t,i,kfo)                         Per capita consumption in food demand model after price shock on regional level (kcal per capita per day)
- p15_kcal_pc_calibrated(t,i,kfo)              Calibrated per capita consumption in food demand model after price shock (kcal per capita per day)
+ p15_kcal_pc_iso(t,iso,kfo)                            Per capita consumption in food demand model after price shock on country level (kcal per capita per day)
+ p15_kcal_pc(t,i,kfo)                                  Per capita consumption in food demand model after price shock on regional level (kcal per capita per day)
+ p15_kcal_pc_calibrated(t,i,kfo)                       Calibrated per capita consumption in food demand model after price shock (kcal per capita per day)
+ p15_kcal_pc_calibrated_orig(t,i,kfo)                  Auxiliary parameter for per capita food consumption - basis for convergence into waste and diet scenarios (kcal per capita per day)
+ p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)     Calibrated estimates of BMI share for population groups  (1)
+ p15_intake_total_iso_calibrated(t,iso)                Total food intake in a country (kcal per capita per day)
+ p15_intake_total_calibrated(t,i)                      Total regional food intake (kcal per capita per day)
+
+*food waste
+ p15_demand2intake_ratio(t,i)                 Ratio between food calorie demand and intake (1)
+ p15_demand2intake_ratio_scen(t,i)            Ratio between food calorie demand and intake according to exogenous food waste scenario (1)
+
+* transition to exogenous scenario diets
+ i15_intake_scen_target(t,i)                  Target for total per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
+ i15_intake_EATLancet(i,kfo)                  Food-specific per capita calorie intake according to EAT Lancet diet scenario (kcal per capita per day)
+ i15_intake_detailed_scen_target(t,i,kfo)     Target for food-specific per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
+ p15_demand2intake_ratio_ref(i)               Ratio between food calorie demand and intake for the historical time step of EAT Lancet diets (1)
+ p15_foodwaste_growth(t,i)                    increase in food waste over time relative to the historical time step of EAT Lancet diets (1)
+ i15_kcal_pc_scen_target(t,i,kfo)             Target for per capita food consumption according to an exogenous diet scenario (kcal per capita per day)
+ i15_exo_foodscen_fader(t)                    Fader that converges per capita food consumption to an exogenous diet scenario (1)
 
 * calculate diet iteration breakpoint
 
   p15_income_pc_real_ppp(t,i)                 Regional per capita income after price shock on regional level (USD05PPP per capita)
   p15_delta_income(t,i)                       Regional change in per capita income due to price shock on regional level (1)
-  p15_lastiteration_delta_income(t,i)           Regional change in per capita income due to price shock of last iteration (1)
+  p15_lastiteration_delta_income(t,i)         Regional change in per capita income due to price shock of last iteration (1)
 
 ;
 

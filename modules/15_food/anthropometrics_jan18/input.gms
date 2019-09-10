@@ -17,6 +17,16 @@ $setglobal c15_calibscen  constant
 $setglobal c15_rumscen  mixed
 *   options:   constant, halving2050, mixed
 
+$setglobal c15_exo_diet_targetyear  y2050
+*   options:   y2030, y2050
+
+$setglobal c15_kcal_scen  2100kcal
+*   options:   healthy_BMI, 2100kcal, 2500kcal
+
+$setglobal c15_EAT_scen  FLX
+*   options:   BMK, FLX, PSC, VEG, VGN, FLX_hmilk, FLX_hredmeat
+
+
 scalar s15_elastic_demand  Elastic demand switch (1=elastic 0=exogenous) (1) / 1 /;
 
 scalar s15_calibrate Calibration switch (1=calibrated 0=pure regression outcomes) (1) / 1 /;
@@ -25,6 +35,13 @@ scalar s15_calibrate Calibration switch (1=calibrated 0=pure regression outcomes
 scalar s15_maxiter Scalar defining maximum number of iterations (1) / 5 /;
 
 scalar s15_convergence Convergence criterion (1) / 0.005 /;
+
+scalar s15_exo_waste_scen Switch for transition towards exogenous food waste scenario (1)  / 1 /;
+
+scalar s15_exo_waste_target Scenario target for the ratio between food demand and intake (1)  / 1.2 /;
+
+scalar s15_exo_diet_scen Switch for transition towards exogenous diet scenario (1)  / 1 /;
+
 
 table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of heterogeneous products and processes (mio. tDM)
 $ondelim
@@ -116,6 +133,31 @@ $include "./modules/15_food/input/f15_schofield_parameters.cs3"
 $offdelim
 ;
 
+
+*** Exogenous food demand scenarios
+
+table f15_intake_EATLancet(t_scen15,i,kcal_scen15,EAT_scen15,kfo)   EAT Lancet scenarios for food-specific intake (kcal per capita per day)
+$ondelim
+$include "./modules/15_food/input/f15_intake_EATLancet.cs3"
+$offdelim;
+
+table f15_overcons_FAOwaste(i,kfo)   Ratio between food calorie supply and food intake based on FAO food waste shares (1)
+$ondelim
+$include "./modules/15_food/input/f15_supply2intake_ratio_bottomup.cs3"
+$offdelim;
+
+parameter f15_calib_fsupply(i) Factor calibrating food supply as estimated from intake and FAO waste assumptions to FAO food supply (1)
+/
+$ondelim
+$include "./modules/15_food/input/f15_calib_factor_FAOfsupply.cs4"
+$offdelim
+/;
+
+table f15_exo_foodscen_fader(t_all,t_scen15) Fader that converges per capita food consumption to an exogenous diet scenario until the target year (1)
+$ondelim
+$include "./modules/15_food/input/f15_exo_foodscen_fader.csv"
+$offdelim
+;
 
 
 *** EOF input.gms ***

@@ -123,6 +123,121 @@ if (s15_elastic_demand * (1-sum(sameas(t_past,t),1)) =1,
        p15_kcal_pc_calibrated(t,i,kfo)$(p15_kcal_pc_calibrated(t,i,kfo)<0)=0;
 
 
+*###############################################################################
+* INSERTION within if-statement (case that "elastic demand model is activated"
+* and "convergence between MAgPIE and Food Demand Model not yet reached":
+
+* This insertion is needed in case that elastic demand mode is combined with
+* additional exogenous scenrio assumptions regarding food waste or diets
+
+
+* ######  WASTE CALCULATIONS (required for exogenous food waste or diet scenarios)
+
+* The ratio of food demand at household level to food intake is determined
+* by the amount of food that is wasted. This ratio is one of the drivers of
+* future food demand trajetories.
+* For the calculation of the ratio between food demand and intake, total food
+* calorie intake based on CALIBRATED parameters needs to be calculated:
+
+p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15) =
+           p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)+
+           i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
+
+* The BMI shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
+p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)$(p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)<0) = 0;
+p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)$(p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)>1) = 1;
+* The mismatch is balanced by moving the exceeding quantities into the middle BMI group.
+p15_bmi_shr_calibrated(t,iso,sex,age,"medium")=
+      1 - (sum(bmi_group15, p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15))
+      - p15_bmi_shr_calibrated(t,iso,sex,age,"medium"));
+
+p15_intake_total_iso_calibrated(t,iso) =
+       sum((sex, age, bmi_group15), p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)*
+       im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
+       + i15_kcal_pregnancy(t,iso);
+
+p15_intake_total_calibrated(t,i)$(sum(i_to_iso(i,iso),sum((sex,age), im_demography(t,iso,sex,age)) ) >0 )
+          = sum(i_to_iso(i,iso),p15_intake_total_iso_calibrated(t,iso)
+            ) / sum(i_to_iso(i,iso),
+                sum((sex,age), im_demography(t,iso,sex,age))
+            );
+
+p15_demand2intake_ratio(t,i)$(p15_intake_total_calibrated(t,i) >0 ) =
+         sum(kfo,p15_kcal_pc_calibrated(t,i,kfo)) /
+         p15_intake_total_calibrated(t,i);
+
+* In case, no exogenous waste scenario is selceted, the original regression-
+* based estimates for food calorie oversupply are used as waste scenario.
+* This information is needed in case that an exogenous diet scenario should be
+* constructed from food calorie intake.
+p15_demand2intake_ratio_scen(t,i) =p15_demand2intake_ratio(t,i);
+
+
+* ###### Exogenous food waste scenario
+
+if(s15_exo_waste_scen = 1,
+
+* "Downwards convergence" of regional calorie oversupply due to food waste to the
+* waste reduction target, i.e. only for values that are higher than the target:
+
+p15_demand2intake_ratio_scen(t,i)$(p15_demand2intake_ratio(t,i) > s15_exo_waste_target )
+                    = p15_demand2intake_ratio(t,i)*(1-i15_exo_foodscen_fader(t))
+                      + s15_exo_waste_target*i15_exo_foodscen_fader(t);
+
+p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
+p15_kcal_pc_calibrated(t,i,kfo)$(p15_demand2intake_ratio(t,i) >0 ) = p15_kcal_pc_calibrated_orig(t,i,kfo)*(
+                      p15_demand2intake_ratio_scen(t,i)/p15_demand2intake_ratio(t,i) );
+
+);
+
+
+* ###### Exogenous EAT Lancet diet scenario
+
+*' @code
+*' Transition to exogenous EAT Lancet diet scenarios:
+*' A part of the definition of exogenous diet scenarios is already accomplished
+*' in the presolve.gms, where the parameters `i15_intake_scen_target(t,i)`,
+*' `i15_intake_EATLancet(i,kfo)` and `i15_intake_detailed_scen_target(t,i,kfo)`
+*' are calculated.
+
+if(s15_exo_diet_scen = 1,
+
+
+*' Now, the calorie supply at household level is calculated by multiplying
+*' daily per capita calorie intake with a ratio  of supply to intake
+*' (`f15_overcons_FAOwaste(i,kfo)`) based on FAO estimates on historical food waste
+*' at consumption level and food conversion factors, and with a calibration
+*' factor `f15_calib_fsupply(i)`. Another multiplicative factor accounts for
+*' increases in food waste over time.
+
+* In case, no exogenous waste scenario is selceted, the original regression-
+* based estimates for food calorie oversupply are here used as waste scenario:
+p15_foodwaste_growth(t,i) = ( 1$(p15_demand2intake_ratio_ref(i) = 0)
+            + (p15_demand2intake_ratio_scen(t,i)/p15_demand2intake_ratio_ref(i))$(
+              p15_demand2intake_ratio_ref(i) > 0)
+              );
+
+i15_kcal_pc_scen_target(t,i,kfo) = (f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)
+                                    *i15_intake_detailed_scen_target(t,i,kfo))
+                                    *p15_foodwaste_growth(t,i);
+
+*' In the last step, the regression-based calculation of daily per capita food demand
+*' is faded into the exogenous diet scenario according to a predefined spped of
+*' convergence:
+
+p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
+p15_kcal_pc_calibrated(t,i,kfo) = p15_kcal_pc_calibrated_orig(t,i,kfo) * (1-i15_exo_foodscen_fader(t))
+                        + i15_kcal_pc_scen_target(t,i,kfo) * i15_exo_foodscen_fader(t);
+
+
+);
+*' @stop
+
+*###############################################################################
+
+
+
+
         if (p15_modelstat(t) < 3,
            put_utility 'shell' / 'mv -f m15_food_demand_p.gdx m15_food_demand_' t.tl:0'.gdx';
         );
@@ -139,4 +254,3 @@ if (s15_elastic_demand * (1-sum(sameas(t_past,t),1)) =1,
 else
 display "exogenous demand information is used" ;
 );
-
