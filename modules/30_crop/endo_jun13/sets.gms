@@ -35,4 +35,10 @@ sets
          fiber_r     . (cottn_pro)
          begr_r      . (begr)
          betr_r      . (betr)  /
+
+   kbe30(kcr) bio energy activities
+        / betr, begr /
+
+   bioen_type_30(kbe30) dynamic set bioen type
+   bioen_water_30(w) dynamic set bioen water
 ;
