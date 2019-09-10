@@ -28,7 +28,8 @@ codeCheck <- TRUE
 #general settings
 cfg$gms$c_timesteps <- "5year"
 cfg$results_folder <- "output/:title:"
-cfg <- setScenario(cfg,c("SSP2","NPI"))
+#cfg <- setScenario(cfg,c("SSP2","NPI"))
+cfg <- setScenario(cfg,c("SSP2"))
 
 ## Module settings
 cfg$gms$demand <- "sector_dec18"
