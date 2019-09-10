@@ -69,7 +69,7 @@ q32_cost_establishment(i2)..
 
 **Only protected areas incurring recurring/monitoring costs
 q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
-                    sum((cell(i2,j2),type32,ac_sub), v32_land(j2,type32,ac_sub)$(sum(ct,protect32(ct,j2,ac_sub)))) * f32_fac_req_ha(i2,"recur");
+                    sum((cell(i2,j2),type32,ac_sub), v32_land(j2,type32,ac_sub)) * f32_fac_req_ha(i2,"recur");
 
 **harvesting costs
 q32_cost_harvest(i2)..
@@ -82,7 +82,7 @@ q32_cost_harvest(i2)..
 q32_prod_forestry(j2,kforestry)..
                           v32_prod(j2,kforestry)
                           =e=
-                         sum((ac_sub,ct,mgmt_type), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type) * p32_yield_forestry_ac(ct,j2,ac_sub,mgmt_type));
+                         sum((ac_sub,ct,mgmt_type), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type) * p32_yield_forestry_ac(j2,ac_sub,mgmt_type));
 
 ***AREA
 
@@ -109,7 +109,7 @@ q32_prod_cell_forestry(j2,kforestry)..
                           ;
 
 q32_prod_future(i2) ..
-              sum((cell(i2,j2),ct), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(ct,j2))
+              sum((cell(i2,j2)), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
               =g=
               sum(kforestry, vm_prod_future_reg_ff(i2,kforestry) * card(ac_additional)) * pcm_production_ratio_future(i2)
               ;
