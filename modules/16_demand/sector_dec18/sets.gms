@@ -18,6 +18,9 @@ sets
          foddr, pasture, cottn_pro, begr, betr, livst_rum, livst_pig,
          livst_chick, livst_egg, livst_milk, fish, wood, woodfuel /
 
+   kforestry(k) forestry products
+        / wood, woodfuel /
+
    kap(k) Animal products
    /
    livst_rum,livst_pig,livst_chick, livst_egg, livst_milk, fish

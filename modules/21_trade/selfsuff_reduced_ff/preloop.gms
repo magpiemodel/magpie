@@ -8,7 +8,8 @@ i21_trade_bal_reduction(t_all,k_trade)=f21_trade_bal_reduction(t_all,"easytrade"
 i21_trade_bal_reduction(t_all,k_hardtrade21)=f21_trade_bal_reduction(t_all,"hardtrade","%c21_trade_liberalization%");
 
 i21_trade_margin(i,k_trade) = f21_trade_margin(i,k_trade);
-i21_trade_margin(i,kforestry) = i21_trade_margin(i,"others");
+i21_trade_margin(i,"wood") = f21_trade_margin(i,"maiz");
+i21_trade_margin(i,"woodfuel") = f21_trade_margin(i,"maiz");
 
 if ((s21_trade_tariff=1),
     i21_trade_tariff(i,k_trade) = f21_trade_tariff(i,k_trade);
@@ -18,10 +19,10 @@ elseif (s21_trade_tariff=0),
 
 *' Future trade calculations for forestry
 
-i21_trade_bal_reduction_ff(t_ext,kforestry) = i21_trade_bal_reduction("y2150",kforestry);
-i21_trade_bal_reduction_ff(t_all,kforestry) = i21_trade_bal_reduction(t_all,kforestry);
+i21_trade_bal_reduction_ff(t_ext,kforestry) = i21_trade_bal_reduction("y2150","maiz");
+i21_trade_bal_reduction_ff(t_all,kforestry) = i21_trade_bal_reduction(t_all,"maiz");
 
-i21_trade_margin_ff(i,"woodfuel") = f21_trade_margin(i,"cottn_pro");
+i21_trade_margin_ff(i,"woodfuel") = f21_trade_margin(i,"maiz");
 i21_trade_margin_ff(i,"wood") = i21_trade_margin_ff(i,"woodfuel");
 
 if ((s21_trade_tariff=1),

@@ -48,6 +48,9 @@ co2_price_scenarios <- c("SSP2-Ref-SPA0")
 ## What outputs to generate
 cfg$output <- c("rds_report")
 
+## Food model covnvergence
+cfg$gms$s15_convergence <- 0.005
+
 for(climate_impacts in c(FALSE)){
 
 	if(climate_impacts){

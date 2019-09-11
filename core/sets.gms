@@ -219,9 +219,6 @@ sets
    oils,oilcakes,sugar,molasses,alcohol,ethanol,distillers_grain,brans,scp,fibres,
    livst_rum, livst_pig,livst_chick, livst_egg, livst_milk, fish, wood, woodfuel /
 
-   kforestry(k_trade) forestry products
-          / wood, woodfuel /
-
   dev Economic development status
        / lic, mic, hic /
 

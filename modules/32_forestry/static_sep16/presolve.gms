@@ -16,7 +16,7 @@ vm_supply.fx(i2,kforestry) = 0;
 *' Production and future trade realated calculations are also set to zero because
 *' they are modeled by a different realization of this module.
 vm_prod.fx(j2,kforestry) = 0;
-vm_prod_reg.fx(i2,kforestry) = 0;
+*vm_prod_reg.fx(i2,kforestry) = 0;
 vm_prod_future_reg_ff.fx(i2,kforestry) = 0;
 vm_cost_trade_forestry_ff.fx(i2) = 0;
 *' @stop
