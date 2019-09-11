@@ -7,9 +7,10 @@
 *' @equations
 
 q17_prod_glo_timber..
- sum((j2,kforestry),vm_prod(j2,kforestry)
+ sum((j2,kforestry),vm_prod(j2,kforestry))
  =e=
- sum((j2,kforestry),vm_prod_cell_forestry(j2,kforestry) + vm_prod_cell_natveg(j2,kforestry));
+ sum((j2,kforestry),vm_prod_cell_forestry(j2,kforestry) + vm_prod_cell_natveg(j2,kforestry))
+ ;
 
 $ontext
  q17_prod_cell_woodfuel(j2)..
