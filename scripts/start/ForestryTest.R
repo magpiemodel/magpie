@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "High_prod_INTENSIVEFORESTRY"
+flag_run <- "High_prod_noWoodOther"
 
 library(lucode)
 source("scripts/start_functions.R")
