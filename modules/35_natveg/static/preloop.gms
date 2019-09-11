@@ -21,3 +21,4 @@ vm_land.fx(j,"other") = sum(land35, v35_other.l(j,land35));
 
 vm_landdiff_natveg.fx = 0;
 
+vm_prod_cell_natveg.fx(j,kforestry) = 0;

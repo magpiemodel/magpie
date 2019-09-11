@@ -145,5 +145,25 @@ p35_yield_primforest(t,j) =
 		/ sum(clcl,pm_climate_class(j,clcl) * pm_bcef("acx",clcl))
 		) / pm_time_mod(t);
 
+
+* calculate carbon density
+* highest carbon density 1st time step to account for reshuffling
+if((ord(t) = 1),
+	p35_carbon_density_secdforest(t,j,ac,c_pools) = pm_carbon_density_ac(t,j,"acx",c_pools);
+	p35_carbon_density_other(t,j,ac,c_pools) = pm_carbon_density_ac(t,j,"acx",c_pools);
+else
+	p35_carbon_density_secdforest(t,j,ac,c_pools) = pm_carbon_density_ac(t,j,ac,c_pools);
+	p35_carbon_density_other(t,j,ac,c_pools) = pm_carbon_density_ac(t,j,ac,c_pools);
+);
+
+* update pcm_carbon_stock. Needed for shifting from other land to secdforest (p35_recovered_forest).
+pcm_carbon_stock(j,"secdforest",c_pools) =
+           sum(ac, pc35_secdforest(j,ac)
+           * p35_carbon_density_secdforest(t,j,ac,c_pools));
+
+pcm_carbon_stock(j,"other",c_pools) =
+           sum(ac, pc35_other(j,ac)
+           * p35_carbon_density_other(t,j,ac,c_pools));
+
 p35_min_forest(t,j)$(p35_min_forest(t,j) > vm_land.l(j,"primforest") + vm_land.l(j,"secdforest")) = vm_land.l(j,"primforest") + vm_land.l(j,"secdforest");
 p35_min_other(t,j)$(p35_min_other(t,j) > vm_land.l(j,"other")) = vm_land.l(j,"other");

@@ -18,7 +18,7 @@ parameters
  p32_aff_togo(t)              			Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
  pm_production_ratio_ext(i,t_ext)                 Extened production ratio (1)
  pm_rotation_reg(t,i)                 Regional rotation length of plantations translated to age class equivalent for future (1)
- pm_rot_length(i)                    Regional rotation length of plantations translated to age class equivalent for future (1)
+ pc32_rot_length(i)                    Regional rotation length of plantations translated to age class equivalent for future (1)
  pcm_production_ratio_future(i)                  Future production ratio (1)
 ;
 
@@ -29,6 +29,7 @@ positive variables
  v32_land_expansion(j,land32) 			Forestry land expansion compared to previous timestep (mio. ha)
  v32_land_reduction(j,land32) 			Forestry land reduction compared to previous timestep (mio. ha)
  vm_cdr_aff(j) 							Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon CO2-C (mio. tC)
+ vm_prod_cell_forestry(j,kforestry)                 xx
 ;
 
 equations
@@ -46,20 +47,21 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_fore(t,i,type)               Afforestation costs (mio. USD04MER per yr)
- ov32_land(t,j,land32,type)           Forestry land pools (mio. ha)
- ov_landdiff_forestry(t,type)         Aggregated difference in forestry land compared to previous timestep (mio. ha)
- ov32_land_expansion(t,j,land32,type) Forestry land expansion compared to previous timestep (mio. ha)
- ov32_land_reduction(t,j,land32,type) Forestry land reduction compared to previous timestep (mio. ha)
- ov_cdr_aff(t,j,type)                 Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon CO2-C (mio. tC)
- oq32_cost_fore_ac(t,i,type)          Total forestry costs constraint (mio. USD04MER)
- oq32_land(t,j,type)                  Land constraint (mio. ha)
- oq32_cdr_aff(t,j,type)               Calculation of CDR from afforestation in terms of CO2-C (mio. tC)
- oq32_carbon(t,j,c_pools,type)        Forestry carbon stock calculation C (mio. tC)
- oq32_land_diff(t,type)               Aggregated difference in forestry land compared to previous timestep (mio. ha)
- oq32_land_expansion(t,j,land32,type) Forestry land expansion (mio. ha)
- oq32_land_reduction(t,j,land32,type) Forestry land reduction (mio. ha)
- oq32_max_aff(t,type)                 Maximum total global afforestation (mio. ha)
- oq32_aff_pol(t,j,type)               Afforestation policy constraint (mio. ha)
+ ov_cost_fore(t,i,type)                    Afforestation costs (mio. USD04MER per yr)
+ ov32_land(t,j,land32,type)                Forestry land pools (mio. ha)
+ ov_landdiff_forestry(t,type)              Aggregated difference in forestry land compared to previous timestep (mio. ha)
+ ov32_land_expansion(t,j,land32,type)      Forestry land expansion compared to previous timestep (mio. ha)
+ ov32_land_reduction(t,j,land32,type)      Forestry land reduction compared to previous timestep (mio. ha)
+ ov_cdr_aff(t,j,type)                      Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon CO2-C (mio. tC)
+ ov_prod_cell_forestry(t,j,kforestry,type) xx
+ oq32_cost_fore_ac(t,i,type)               Total forestry costs constraint (mio. USD04MER)
+ oq32_land(t,j,type)                       Land constraint (mio. ha)
+ oq32_cdr_aff(t,j,type)                    Calculation of CDR from afforestation in terms of CO2-C (mio. tC)
+ oq32_carbon(t,j,c_pools,type)             Forestry carbon stock calculation C (mio. tC)
+ oq32_land_diff(t,type)                    Aggregated difference in forestry land compared to previous timestep (mio. ha)
+ oq32_land_expansion(t,j,land32,type)      Forestry land expansion (mio. ha)
+ oq32_land_reduction(t,j,land32,type)      Forestry land reduction (mio. ha)
+ oq32_max_aff(t,type)                      Maximum total global afforestation (mio. ha)
+ oq32_aff_pol(t,j,type)                    Afforestation policy constraint (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

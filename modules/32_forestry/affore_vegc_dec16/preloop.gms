@@ -16,8 +16,11 @@ p32_land(t,j,ac,when) = 0;
 
 * Fix production related parameters to 0
 pm_production_ratio_ext(i,t_ext) = 0;
-pm_rot_length(i) = 0;
+pc32_rot_length(i) = 0;
 
 * Fix future trade related variables to 0
 vm_prod_future_reg_ff.fx(i2,kforestry) = 0;
 fm_forestry_demand(t_all,i,kforestry) = 0;
+
+* Set cellular forestry production to 0
+vm_prod_cell_forestry.fx(j,kforestry) = 0;

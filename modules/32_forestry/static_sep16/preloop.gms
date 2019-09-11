@@ -23,4 +23,7 @@ vm_land.fx(j,"forestry") = sum(land32, v32_land.l(j,land32));
 * The change of forestry land is also set to zero.
 vm_landdiff_forestry.fx = 0;
 fm_forestry_demand(t_all,i,kforestry) = 0;
+
+* Set cellular forestry production to 0
+vm_prod_cell_forestry.fx(j,kforestry) = 0;
 *** EOF preloop.gms ***

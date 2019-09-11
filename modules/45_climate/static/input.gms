@@ -17,3 +17,8 @@ $ondelim
 $include "./modules/45_climate/static/input/45_BCE_kg_ac.csv"
 $offdelim
 /;
+
+table fm_climate_class(j,clcl) Koeppen-Geiger climate classification on the simulation cluster level (1)
+$ondelim
+$include "./modules/45_climate/static/input/koeppen_geiger.cs3"
+$offdelim;

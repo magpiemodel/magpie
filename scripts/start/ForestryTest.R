@@ -20,13 +20,10 @@ cfg$developer_mode <- TRUE
 cfg$input <- c("magpie4.0_default_sep18.tgz","additional_data_rev3.65.tgz","isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev35_c200_690d3718e151be1b450b394c1064b1c5.tgz","rev4.1666_690d3718e151be1b450b394c1064b1c5_validation.tgz","private_forestry_dec18_20190827.tgz")
 cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL,"/p/projects/landuse/users/mishra/additional_data_private_forestry"=NULL,"/p/projects/rd3mod/inputdata/output"=NULL), getOption("magpie_repos"))
 
-cfg$output <- c("rds_report","interpolation")
-
 #set defaults
 codeCheck <- TRUE
 
 #general settings
-cfg$gms$c_timesteps <- "5year"
 cfg$results_folder <- "output/:title:"
 #cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg <- setScenario(cfg,c("SSP2"))
@@ -36,7 +33,7 @@ cfg$gms$demand <- "sector_dec18"
 cfg$gms$trade <- "selfsuff_reduced_ff"
 cfg$gms$forestry  <- "dynamic_dec18"
 cfg$gms$natveg  <- "dynamic_dec18"
-cfg$gms$optimization <- "lp_nlp_apr17"
+cfg$gms$optimization <- "nlp_apr17"
 
 #ALERT:  At the moment this script cannot download new data in case the input files are changed. Has to be set to true.
 cfg$force_download <- FALSE
@@ -48,6 +45,8 @@ cfg$output <- c("rds_report","validation")
 co2_price_scenarios <- c("SSP2-Ref-SPA0")
 #co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
 
+## What outputs to generate
+cfg$output <- c("rds_report")
 
 for(climate_impacts in c(FALSE)){
 

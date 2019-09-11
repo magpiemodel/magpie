@@ -8,10 +8,6 @@ $setglobal c35_protect_scenario  WDPA
 $setglobal c35_ad_policy  npi
 $setglobal c35_aolc_policy  npi
 
-scalars
-  s35_selective_logging_flag               / 0.05 /
-;
-
 table f35_protect_area(j,prot_type) Conservation priority areas (mio. ha)
 $ondelim
 $include "./modules/35_natveg/input/protect_area.cs3"

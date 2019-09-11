@@ -124,14 +124,6 @@ q35_hvarea_other(j2,ac_sub)..
                           =e=
                           (pc35_other(j2,ac_sub)  - v35_other(j2,ac_sub));
 
-**--------------------------------------------------------------------
-*q35_secdforest_conversion(j2)..
-*                          v35_secdforest(j2,"ac0")
-*                          =n=
-*                          sum((kforestry,ac_sub),v35_hvarea_secdforest(j2,kforestry,ac_sub))
-*                        + sum(kforestry,v35_hvarea_primforest(j2,kforestry))
-*                          ;
-
 ********** NatVeg production of timber
 q35_prod_cell_natveg(j2,kforestry)..
                           vm_prod_cell_natveg(j2,kforestry)

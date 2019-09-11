@@ -21,3 +21,9 @@ $ondelim
 $include "./modules/52_carbon/input/f52_growth_par.csv"
 $offdelim
 ;
+
+table fm_growth_par(clcl,chap_par) Parameters for chapman-richards equation (1)
+$ondelim
+$include "./modules/52_carbon/input/f52_growth_par.csv"
+$offdelim
+;

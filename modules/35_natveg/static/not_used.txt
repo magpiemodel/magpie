@@ -10,4 +10,4 @@ pm_land_start, input,not used
 fm_harvest_cost_ha, input, not used
 pm_climate_class, input, not used
 pm_bcef, input, not used
-vm_prod_natveg, var, not used
+pm_time_mod, parameter, not used

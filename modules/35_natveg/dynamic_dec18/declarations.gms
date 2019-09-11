@@ -6,6 +6,7 @@
 
 scalars
  s35_shift number of 5-year age-classes corresponding to current time step length (1)
+ s35_selective_logging_flag Flag for turning of selective logging in percentage. One equals clearcut   / 0.05 /
 ;
 
 parameters
@@ -28,6 +29,9 @@ parameters
 
  i35_ageclass_area_secdf(j,ac)  Age class distribution from poulter et al (1)
  i35_ageclass_shr_grow(j,ac)    Age class share distribution (1)
+
+ p35_carbon_density_secdforest(t,j,ac,c_pools) Carbon density secdforest (tC per ha)
+ p35_carbon_density_other(t,j,ac,c_pools) 	   Carbon density other land (tC per ha)
 ;
 
 equations
@@ -48,7 +52,6 @@ equations
  q35_hvarea_secdforest(j,ac_sub)  Area harvested from secondary forests (mio. ha)
  q35_hvarea_primforest(j)         Area harvested from primary forests (mio. ha)
  q35_hvarea_other(j,ac_sub)       Area harvested from other land (mio. ha)
-* q35_secdforest_conversion(j)     Conversion of secondary forest (mio.ha)
  q35_cost_total(i)                Natveg realted production costs (mio. USD)
  q35_prod_secdforest(j,kforestry)  xx
  q35_prod_primforest(j,kforestry)  xx

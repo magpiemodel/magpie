@@ -20,12 +20,6 @@ sets
    oils,oilcakes,sugar,molasses,alcohol,ethanol,distillers_grain,brans,scp,fibres,
    livst_rum, livst_pig,livst_chick, livst_egg, livst_milk, fish/
 
-   k_trade_forestry(k_trade) Trade for timber
-   /wood, woodfuel /
-
-   k_forestry_wood(kforestry)
-   /wood/
-
 * We limit trade of secondary products as this allows for extreme specialisation
 * in the implementation. Exception is sugar, where we allow the secondary product
 * trade but not the primary as primaries are hardly traded in reality
@@ -54,5 +48,5 @@ sets
    trade_groups21 Trade groups
    / easytrade,hardtrade /
 
-   ac_additional(ac)
+   ac_additional(ac) Subset of ac to account for longer than five year time steps
 ;
