@@ -21,8 +21,8 @@ source("config/default.cfg")
 
 cfg$force_download <- TRUE
 
-cfg$results_folder <- "output/:title:"
-#cfg$results_folder <- "output/:title::date:"
+#cfg$results_folder <- "output/:title:"
+cfg$results_folder <- "output/:title::date:"
 
 
 cfg$title <- "R2M41_SDP"

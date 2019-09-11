@@ -21,8 +21,17 @@ source("config/default.cfg")
 
 cfg$force_download <- TRUE
 
-cfg$results_folder <- "output/:title:"
-#cfg$results_folder <- "output/:title::date:"
+#cfg$results_folder <- "output/:title:"
+cfg$results_folder <- "output/:title::date:"
+
+
+cfg$title <- "R2M41_SSP1"
+cfg <- setScenario(cfg,c("SSP1"))
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- "R2M41_SSP2"
+cfg <- setScenario(cfg,c("SSP2"))
+start_run(cfg,codeCheck=FALSE)
 
 
 cfg$title <- "R2M41_SDP"
