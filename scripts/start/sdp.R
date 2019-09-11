@@ -25,30 +25,30 @@ cfg$results_folder <- "output/:title:"
 #cfg$results_folder <- "output/:title::date:"
 
 
-cfg$title <- "R2M41_SDP_SSP1"
+cfg$title <- "R2M41_SDP"
 cfg <- setScenario(cfg,c("SDP"))
 start_run(cfg,codeCheck=FALSE)
 
 
-cfg$title <- "R2M41_SDP_SSP1_NPi"
+cfg$title <- "R2M41_SDP_NPi"
 cfg <- setScenario(cfg,c("SDP","NPI"))
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
 cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "R2M41_SDP_SSP1_NDC"
+cfg$title <- "R2M41_SDP_NDC"
 cfg <- setScenario(cfg,c("SDP","NDC"))
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NDC"
 cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NDC"
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "R2M41_SDP_SSP1_Budg600"
+cfg$title <- "R2M41_SDP_Budg600"
 cfg <- setScenario(cfg,c("SDP","NDC"))
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
 cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "SSPDB_SDP_SSP1_26"
+cfg$title <- "SSPDB_SDP_26"
 cfg <- setScenario(cfg,c("SDP","NDC"))
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
 cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
