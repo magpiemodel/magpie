@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "REG"
+flag_run <- "GLO"
 
 library(lucode)
 source("scripts/start_functions.R")
@@ -42,8 +42,8 @@ cfg$force_download <- FALSE
 cfg$output <- c("rds_report","validation")
 
 ## CO2 price runs
-co2_price_scenarios <- c("SSP2-Ref-SPA0")
-#co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
+#co2_price_scenarios <- c("SSP2-Ref-SPA0")
+co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
 
 ## What outputs to generate
 cfg$output <- c("rds_report")
@@ -51,12 +51,12 @@ cfg$output <- c("rds_report")
 ## Food model covnvergence
 cfg$gms$s15_convergence <- 0.005
 
-for(climate_impacts in c(FALSE)){
+for(climate_impacts in c(FALSE,TRUE)){
 
 	if(climate_impacts){
 		cfg <- setScenario(cfg, "cc")
-		cc_flag = "CCI"
-	} else {cc_flag = "NoCCI"}
+		cc_flag = "CC"
+	} else {cc_flag = "nCC"}
 
 	for(biodem in co2_price_scenarios){
 

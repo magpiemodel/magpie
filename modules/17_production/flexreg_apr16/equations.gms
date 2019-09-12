@@ -6,10 +6,10 @@
 
 *' @equations
 
-q17_prod_glo_timber(i2)..
- sum((kforestry),vm_prod_reg(i2,kforestry))
+q17_prod_glo_timber..
+ sum((j2,kforestry),vm_prod(j2,kforestry))
  =e=
- sum((cell(i2,j2),kforestry),vm_prod_cell_forestry(j2,kforestry) + vm_prod_cell_natveg(j2,kforestry))
+ sum((j2,kforestry),vm_prod_cell_forestry(j2,kforestry) + vm_prod_cell_natveg(j2,kforestry))
  ;
 
 $ontext

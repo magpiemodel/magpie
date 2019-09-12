@@ -11,15 +11,15 @@ positive variables
 
 equations
  q17_prod_reg(i,k)               Regional production (mio. tDM per yr)
- q17_prod_glo_timber(i)           xx
+ q17_prod_glo_timber             xx
 * q17_prod_cell_woodfuel(j)       xx
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_prod(t,j,k,type)            Production in each cell (mio. tDM per yr)
- ov_prod_reg(t,i,kall,type)     Regional aggregated production (mio. tDM per yr)
- oq17_prod_reg(t,i,k,type)      Regional production (mio. tDM per yr)
- oq17_prod_glo_timber(t,i,type) xx
+ ov_prod(t,j,k,type)          Production in each cell (mio. tDM per yr)
+ ov_prod_reg(t,i,kall,type)   Regional aggregated production (mio. tDM per yr)
+ oq17_prod_reg(t,i,k,type)    Regional production (mio. tDM per yr)
+ oq17_prod_glo_timber(t,type) xx
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
