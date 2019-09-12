@@ -17,11 +17,14 @@ source("config/default.cfg")
 
 cfg$developer_mode <- TRUE
 
-cfg$input <- c("magpie4.0_default_sep18.tgz","additional_data_rev3.65.tgz","isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev35_c200_690d3718e151be1b450b394c1064b1c5.tgz","rev4.1666_690d3718e151be1b450b394c1064b1c5_validation.tgz","private_forestry_dec18_20190827.tgz")
-cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL,"/p/projects/landuse/users/mishra/additional_data_private_forestry"=NULL,"/p/projects/rd3mod/inputdata/output"=NULL), getOption("magpie_repos"))
+## Fine names of input data
+cfg$input <- c("magpie4.1_default_apr19.tgz","additional_data_rev3.68.tgz","isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz","private_forestry_dec18_20190827.tgz")
+
+## Location of input data
+cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL,"/p/projects/landuse/users/mishra/additional_data_private_forestry"=NULL), getOption("magpie_repos"))
 
 #set defaults
-codeCheck <- TRUE
+codeCheck <- FALSE
 
 #general settings
 cfg$results_folder <- "output/:title:"
@@ -42,8 +45,7 @@ cfg$force_download <- FALSE
 cfg$output <- c("rds_report")
 
 ## CO2 price runs
-co2_price_scenarios <- c("SSP2-Ref-SPA0")
-#co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
+co2_price_scenarios <- c("R2M41-SSP2-NPi")
 
 ## What outputs to generate
 cfg$output <- c("rds_report")
@@ -58,25 +60,22 @@ for(climate_impacts in c(FALSE)){
 		cc_flag = "CC"
 	} else {cc_flag = "nCC"}
 
-	for(biodem in co2_price_scenarios){
+	cfg$gms$c56_pollutant_prices <- co2_price_scenarios	# def = "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
+	cfg$gms$c60_2ndgen_biodem <- co2_price_scenarios		# same as co2 price scenario from mag4.1
 
-		cfg$gms$c56_pollutant_prices <- paste0(biodem,"-V15-REMIND-MAGPIE")	# def = "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
-		cfg$gms$c60_2ndgen_biodem <- biodem     														# def = "SSP2-Ref-SPA0"
+	for(ts_test in c("5year")){
+		cfg$gms$c_timesteps = ts_test
+		for (sl_set in c(0.05)) {
+			if(sl_set == 0.05) sl_name = "SL"
+			if(sl_set == 1.00) sl_name = "ClC"
+			cfg$gms$s35_selective_logging_flag = sl_set
 
-		for(ts_test in c("5year")){
-			cfg$gms$c_timesteps = ts_test
-			for (sl_set in c(0.05)) {
-				if(sl_set == 0.05) sl_name = "SL"
-				if(sl_set == 1.00) sl_name = "ClC"
-				cfg$gms$s35_selective_logging_flag = sl_set
-
-				if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
-					cfg$title<- paste0(cfg$gms$c_timesteps,"_",sl_name,"_","_CO2prices","_",cc_flag,"_",flag_run)
-				} else {
-					cfg$title<- paste0(cfg$gms$c_timesteps,"_",sl_name,"_",cc_flag,"_",flag_run)
-				}
-				start_run(cfg=cfg,codeCheck=codeCheck)
-		 }
-		}
-	}
+			if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
+				cfg$title<- paste0(cfg$gms$c_timesteps,"_",sl_name,"_","_CO2prices","_",cc_flag,"_",flag_run)
+			} else {
+				cfg$title<- paste0(cfg$gms$c_timesteps,"_",sl_name,"_",cc_flag,"_",flag_run)
+			}
+			start_run(cfg=cfg,codeCheck=codeCheck)
+	 }
+ }
 }

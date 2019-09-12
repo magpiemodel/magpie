@@ -84,28 +84,6 @@ $endif
 * (e.g. for cropland expansion).
 * In contrast, other natural land can decrease and increase within the optimization.
 * For instance, other natural land increases if agricultural land is abandoned.
-$ontext
-vm_land.lo(j,"primforest") = p35_save_primforest(t,j);
-vm_land.up(j,"primforest") = vm_land.l(j,"primforest");
-m_boundfix(vm_land,(j,"primforest"),l,10e-5);
-
-v35_secdforest.fx(j,"ac0") = 0;
-v35_secdforest.lo(j,ac_sub) = 0;
-v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
-m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
-v35_secdforest.lo(j,"acx") = p35_save_secdforest(t,j);
-v35_secdforest.up(j,"acx") = pc35_secdforest(j,"acx");
-m_boundfix(v35_secdforest,(j,"acx"),l,10e-5);
-
-v35_other.lo(j,"ac0") = 0;
-v35_other.up(j,"ac0") = Inf;
-v35_other.lo(j,ac_sub) = 0;
-v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
-m_boundfix(v35_other,(j,ac_sub),l,10e-5);
-v35_other.lo(j,"acx") = p35_save_other(t,j);
-v35_other.up(j,"acx") = pc35_other(j,"acx");
-m_boundfix(v35_other,(j,"acx"),l,10e-5);
-$offtext
 
 ** Setting bounds for only allowing 5% of available primf to be harvested (highest age class)
 vm_land.lo(j,"primforest") = max((1-s35_selective_logging_flag) * vm_land.l(j,"primforest"), p35_save_primforest(t,j));
@@ -149,21 +127,21 @@ p35_yield_primforest(t,j) =
 * calculate carbon density
 * highest carbon density 1st time step to account for reshuffling
 if((ord(t) = 1),
-	p35_carbon_density_secdforest(t,j,ac,c_pools) = pm_carbon_density_ac(t,j,"acx",c_pools);
-	p35_carbon_density_other(t,j,ac,c_pools) = pm_carbon_density_ac(t,j,"acx",c_pools);
+	p35_carbon_density_secdforest(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,"acx",ag_pools);
+	p35_carbon_density_other(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,"acx",ag_pools);
 else
-	p35_carbon_density_secdforest(t,j,ac,c_pools) = pm_carbon_density_ac(t,j,ac,c_pools);
-	p35_carbon_density_other(t,j,ac,c_pools) = pm_carbon_density_ac(t,j,ac,c_pools);
+	p35_carbon_density_secdforest(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
+	p35_carbon_density_other(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
 );
 
 * update pcm_carbon_stock. Needed for shifting from other land to secdforest (p35_recovered_forest).
-pcm_carbon_stock(j,"secdforest",c_pools) =
+pcm_carbon_stock(j,"secdforest",ag_pools) =
            sum(ac, pc35_secdforest(j,ac)
-           * p35_carbon_density_secdforest(t,j,ac,c_pools));
+           * p35_carbon_density_secdforest(t,j,ac,ag_pools));
 
-pcm_carbon_stock(j,"other",c_pools) =
+pcm_carbon_stock(j,"other",ag_pools) =
            sum(ac, pc35_other(j,ac)
-           * p35_carbon_density_other(t,j,ac,c_pools));
+           * p35_carbon_density_other(t,j,ac,ag_pools));
 
 p35_min_forest(t,j)$(p35_min_forest(t,j) > vm_land.l(j,"primforest") + vm_land.l(j,"secdforest")) = vm_land.l(j,"primforest") + vm_land.l(j,"secdforest");
 p35_min_other(t,j)$(p35_min_other(t,j) > vm_land.l(j,"other")) = vm_land.l(j,"other");

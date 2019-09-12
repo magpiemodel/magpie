@@ -18,17 +18,17 @@
 *' In case of abandoned agricultural land (increase of other natural land),
 *' natural succession, represented by age-class growth, results in increasing carbon stocks.
 
- q35_carbon_primforest(j2,c_pools) .. vm_carbon_stock(j2,"primforest",c_pools) =e=
+ q35_carbon_primforest(j2,ag_pools) .. vm_carbon_stock(j2,"primforest",ag_pools) =e=
            vm_land(j2,"primforest")
-           *sum(ct, fm_carbon_density(ct,j2,"primforest",c_pools));
+           *sum(ct, fm_carbon_density(ct,j2,"primforest",ag_pools));
 
- q35_carbon_secdforest(j2,c_pools) .. vm_carbon_stock(j2,"secdforest",c_pools) =e=
+ q35_carbon_secdforest(j2,ag_pools) .. vm_carbon_stock(j2,"secdforest",ag_pools) =e=
            sum(ac, v35_secdforest(j2,ac)
-           *sum(ct, pm_carbon_density_ac(ct,j2,ac,c_pools)));
+           *sum(ct, pm_carbon_density_ac(ct,j2,ac,ag_pools)));
 
- q35_carbon_other(j2,c_pools)  .. vm_carbon_stock(j2,"other",c_pools) =e=
+ q35_carbon_other(j2,ag_pools)  .. vm_carbon_stock(j2,"other",ag_pools) =e=
            sum(ac, v35_other(j2,ac)
-           *sum(ct, pm_carbon_density_ac(ct,j2,ac,c_pools)));
+           *sum(ct, pm_carbon_density_ac(ct,j2,ac,ag_pools)));
 
 
 *' NPI/NDC land protection policies are implemented as minium forest land and other land stock.

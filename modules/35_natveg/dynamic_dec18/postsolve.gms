@@ -3,12 +3,26 @@
 *** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
+if((ord(t) = 1),
+* Reshuffling of agricultural land in the 1st timestep results in an artificial increase of v35_other(j,"new").
+* This would result in carbon uptake (negative emissions) due to regrowth of vegetation.
+* To avoid this artificial effect on CO2 emissions we reset age-classes after the optimization of the 1st time step.
+	v35_other.l(j,ac) = 0;
+	v35_other.l(j,ac) = vm_land.l(j,"other");
+	p35_other(t,j,ac) = 0;
+	p35_other(t,j,"acx") = vm_land.l(j,"other");
+else
+*other land age class calculation
+	p35_other(t,j,ac) =
+        v35_other.l(j,ac);
+);
 
 *secdforest age class calculation
 p35_secdforest(t,j,ac) = v35_secdforest.l(j,ac);
 
 *other land age class calculation
 p35_other(t,j,ac) = v35_other.l(j,ac);
+
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov35_secdforest(t,j,ac,"marginal")                      = v35_secdforest.m(j,ac);
  ov35_other(t,j,ac,"marginal")                           = v35_other.m(j,ac);
@@ -26,9 +40,9 @@ p35_other(t,j,ac) = v35_other.l(j,ac);
  ov_prod_cell_natveg(t,j,kforestry,"marginal")           = vm_prod_cell_natveg.m(j,kforestry);
  oq35_land_secdforest(t,j,"marginal")                    = q35_land_secdforest.m(j);
  oq35_land_other(t,j,"marginal")                         = q35_land_other.m(j);
- oq35_carbon_primforest(t,j,c_pools,"marginal")          = q35_carbon_primforest.m(j,c_pools);
- oq35_carbon_secdforest(t,j,c_pools,"marginal")          = q35_carbon_secdforest.m(j,c_pools);
- oq35_carbon_other(t,j,c_pools,"marginal")               = q35_carbon_other.m(j,c_pools);
+ oq35_carbon_primforest(t,j,ag_pools,"marginal")         = q35_carbon_primforest.m(j,ag_pools);
+ oq35_carbon_secdforest(t,j,ag_pools,"marginal")         = q35_carbon_secdforest.m(j,ag_pools);
+ oq35_carbon_other(t,j,ag_pools,"marginal")              = q35_carbon_other.m(j,ag_pools);
  oq35_landdiff(t,"marginal")                             = q35_landdiff.m;
  oq35_other_expansion(t,j,ac,"marginal")                 = q35_other_expansion.m(j,ac);
  oq35_other_reduction(t,j,ac,"marginal")                 = q35_other_reduction.m(j,ac);
@@ -61,9 +75,9 @@ p35_other(t,j,ac) = v35_other.l(j,ac);
  ov_prod_cell_natveg(t,j,kforestry,"level")              = vm_prod_cell_natveg.l(j,kforestry);
  oq35_land_secdforest(t,j,"level")                       = q35_land_secdforest.l(j);
  oq35_land_other(t,j,"level")                            = q35_land_other.l(j);
- oq35_carbon_primforest(t,j,c_pools,"level")             = q35_carbon_primforest.l(j,c_pools);
- oq35_carbon_secdforest(t,j,c_pools,"level")             = q35_carbon_secdforest.l(j,c_pools);
- oq35_carbon_other(t,j,c_pools,"level")                  = q35_carbon_other.l(j,c_pools);
+ oq35_carbon_primforest(t,j,ag_pools,"level")            = q35_carbon_primforest.l(j,ag_pools);
+ oq35_carbon_secdforest(t,j,ag_pools,"level")            = q35_carbon_secdforest.l(j,ag_pools);
+ oq35_carbon_other(t,j,ag_pools,"level")                 = q35_carbon_other.l(j,ag_pools);
  oq35_landdiff(t,"level")                                = q35_landdiff.l;
  oq35_other_expansion(t,j,ac,"level")                    = q35_other_expansion.l(j,ac);
  oq35_other_reduction(t,j,ac,"level")                    = q35_other_reduction.l(j,ac);
@@ -96,9 +110,9 @@ p35_other(t,j,ac) = v35_other.l(j,ac);
  ov_prod_cell_natveg(t,j,kforestry,"upper")              = vm_prod_cell_natveg.up(j,kforestry);
  oq35_land_secdforest(t,j,"upper")                       = q35_land_secdforest.up(j);
  oq35_land_other(t,j,"upper")                            = q35_land_other.up(j);
- oq35_carbon_primforest(t,j,c_pools,"upper")             = q35_carbon_primforest.up(j,c_pools);
- oq35_carbon_secdforest(t,j,c_pools,"upper")             = q35_carbon_secdforest.up(j,c_pools);
- oq35_carbon_other(t,j,c_pools,"upper")                  = q35_carbon_other.up(j,c_pools);
+ oq35_carbon_primforest(t,j,ag_pools,"upper")            = q35_carbon_primforest.up(j,ag_pools);
+ oq35_carbon_secdforest(t,j,ag_pools,"upper")            = q35_carbon_secdforest.up(j,ag_pools);
+ oq35_carbon_other(t,j,ag_pools,"upper")                 = q35_carbon_other.up(j,ag_pools);
  oq35_landdiff(t,"upper")                                = q35_landdiff.up;
  oq35_other_expansion(t,j,ac,"upper")                    = q35_other_expansion.up(j,ac);
  oq35_other_reduction(t,j,ac,"upper")                    = q35_other_reduction.up(j,ac);
@@ -131,9 +145,9 @@ p35_other(t,j,ac) = v35_other.l(j,ac);
  ov_prod_cell_natveg(t,j,kforestry,"lower")              = vm_prod_cell_natveg.lo(j,kforestry);
  oq35_land_secdforest(t,j,"lower")                       = q35_land_secdforest.lo(j);
  oq35_land_other(t,j,"lower")                            = q35_land_other.lo(j);
- oq35_carbon_primforest(t,j,c_pools,"lower")             = q35_carbon_primforest.lo(j,c_pools);
- oq35_carbon_secdforest(t,j,c_pools,"lower")             = q35_carbon_secdforest.lo(j,c_pools);
- oq35_carbon_other(t,j,c_pools,"lower")                  = q35_carbon_other.lo(j,c_pools);
+ oq35_carbon_primforest(t,j,ag_pools,"lower")            = q35_carbon_primforest.lo(j,ag_pools);
+ oq35_carbon_secdforest(t,j,ag_pools,"lower")            = q35_carbon_secdforest.lo(j,ag_pools);
+ oq35_carbon_other(t,j,ag_pools,"lower")                 = q35_carbon_other.lo(j,ag_pools);
  oq35_landdiff(t,"lower")                                = q35_landdiff.lo;
  oq35_other_expansion(t,j,ac,"lower")                    = q35_other_expansion.lo(j,ac);
  oq35_other_reduction(t,j,ac,"lower")                    = q35_other_reduction.lo(j,ac);

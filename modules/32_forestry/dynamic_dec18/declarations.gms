@@ -3,8 +3,8 @@ scalars
 ;
 
 parameters
- p32_carbon_density(t,j,type32,ac,c_pools)        Carbon density for ac and c_pools (tC per ha)
- p32_carbon_density_ac(t,j,type32,ac,c_pools)     Carbon density for ac and c_pools (tC per ha)
+ p32_carbon_density(t,j,type32,ac,ag_pools)        Carbon density for ac and ag_pools (tC per ha)
+ p32_carbon_density_ac(t,j,type32,ac,ag_pools)     Carbon density for ac and ag_pools (tC per ha)
  p32_land(t,j,type32,ac)                          Forestry land for each cell wood type and age class before and after optimization (mio. ha)
  pc32_land(j,type32,ac)                           Forestry land per forestry land type initialization of the optimization (mio. ha)
  p32_aff_pot(t,j)                                 Potential afforestation area (Mha)
@@ -36,6 +36,7 @@ parameters
  p32_forestry_management_init(j)                  xx
  p32_management_factor(j,mgmt_type)               xx
  pm_time_mod(t)                                  xx
+ p32_aff_togo(t)              		       Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
 ;
 
 positive variables
@@ -58,8 +59,8 @@ equations
  q32_cost_total(i)                                total forestry costs constraint (mio. USD)
  q32_land(j)                                      land constraint (mio. ha)
  q32_cdr_aff(j)                                   calculation of CDR from afforestation
- q32_carbon(j,c_pools)                            forestry carbon stock calculation
- q32_diff                                         aggregated difference in forestry land compared to previous timestep (mio. ha)
+ q32_carbon(j,ag_pools)                            forestry carbon stock calculation
+ q32_land_diff                                         aggregated difference in forestry land compared to previous timestep (mio. ha)
  q32_max_aff                                      maximum total global afforestation
  q32_aff_pol(j)                                   afforestation policy constraint
  q32_prod_forestry(j,kforestry)         Timber production from forestry
@@ -93,8 +94,8 @@ parameters
  oq32_cost_total(t,i,type)                                 total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                                       land constraint (mio. ha)
  oq32_cdr_aff(t,j,type)                                    calculation of CDR from afforestation
- oq32_carbon(t,j,c_pools,type)                             forestry carbon stock calculation
- oq32_diff(t,type)                                         aggregated difference in forestry land compared to previous timestep (mio. ha)
+ oq32_carbon(t,j,ag_pools,type)                            forestry carbon stock calculation
+ oq32_land_diff(t,type)                                    aggregated difference in forestry land compared to previous timestep (mio. ha)
  oq32_max_aff(t,type)                                      maximum total global afforestation
  oq32_aff_pol(t,j,type)                                    afforestation policy constraint
  oq32_prod_forestry(t,j,kforestry,type)                    Timber production from forestry
