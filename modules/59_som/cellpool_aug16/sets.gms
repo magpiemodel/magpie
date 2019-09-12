@@ -1,18 +1,19 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
 
-noncropland59(land) Soil carbon conserving landuse types
-/past, forestry, primforest, secdforest, urban, other/
+pools59(land) Carbon differentiating landuse types
+/crop, past, forestry, primforest, secdforest, other/
 
-pools59 Carbon differentiating landuse types 
-/cropland,noncropland/
+noncropland59(pools59) Soil carbon conserving landuse types
+/past, forestry, primforest, secdforest, other/
 
-tillage59 Tillage categories of IPCC 
+tillage59 Tillage categories of IPCC
 /full_tillage,reduced_tillage,no_tillage/
 
 inputs59 Input management categories of IPCC
@@ -56,3 +57,5 @@ clcl_climate59(clcl,climate59) Climate classification types
            ET .(temperate_moist) "polar polar tundra"
            /
 ;
+
+alias(noncropland59,noncropland59_2);

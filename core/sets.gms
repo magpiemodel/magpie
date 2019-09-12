@@ -1,7 +1,8 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
 *************************BASIC SETS (INDICES)***********************************
@@ -15,9 +16,9 @@
 
 sets
 
-   i World regions /CAZ,CHA,EUR,IND,JPN,LAM,MEA,NEU,OAS,REF,SSA,USA/
+   i all economic regions /CAZ,CHA,EUR,IND,JPN,LAM,MEA,NEU,OAS,REF,SSA,USA/
 
-   iso Countries /
+   iso list of iso countries /
        ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
        ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
        BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
@@ -44,7 +45,7 @@ sets
        UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
        VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 
-   j Spatial clusters /
+   j number of LPJ cells /
        CAZ_1*CAZ_28,
        CHA_29*CHA_52,
        EUR_53*EUR_62,
@@ -58,7 +59,7 @@ sets
        SSA_180*SSA_190,
        USA_191*USA_200/
 
-   cell(i,j) Mapping between regions i and clusters j
+   cell(i,j) number of LPJ cells per region i
       /
        CAZ . CAZ_1*CAZ_28
        CHA . CHA_29*CHA_52
@@ -74,7 +75,7 @@ sets
        USA . USA_191*USA_200
       /
 
-   i_to_iso(i,iso) Mapping between regions and countries
+   i_to_iso(i,iso) mapping regions to iso countries
       /
        CAZ . (AUS,CAN,HMD,NZL,SPM)
        CHA . (CHN,HKG,MAC,TWN)

@@ -1,7 +1,8 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @equations
@@ -17,7 +18,7 @@
                    + vm_manure_recycling(i2,"nr")
                    + sum(kli, vm_manure(i2, kli, "stubble_grazing","nr"))
                    + vm_nr_inorg_fert_reg(i2,"crop")
-                   + sum(cell(i2,j2),vm_nr_som(j2))
+                   + sum(cell(i2,j2),vm_nr_som_fertilizer(j2))
                    + sum(ct,f50_nitrogen_balanceflow(ct,i2))
                    + v50_nr_deposition(i2,"crop"))
                  =g= sum(kcr,v50_nr_withdrawals(i2,kcr));

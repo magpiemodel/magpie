@@ -1,7 +1,8 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
@@ -11,9 +12,8 @@ scalars
   s56_ghgprice_start start year for ghg price phase in / 2025 /
 ;
 
-$setglobal c56_pollutant_prices  SSP2-Ref-SPA0-V15-REMIND-MAGPIE
-$setglobal c56_emis_policy  ssp
-$setglobal c56_aff_policy  vegc50
+$setglobal c56_pollutant_prices  R2M41-SSP2-NPi
+$setglobal c56_emis_policy  ssp_nosoil
 
 table f56_pollutant_prices(t_all,i,pollutants,ghgscen56) GHG certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
 $ondelim

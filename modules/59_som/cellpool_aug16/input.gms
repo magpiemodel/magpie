@@ -1,11 +1,12 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-  s59_punish_cropdiff  Punishment costs per croparea squared (USD05MER per mio. per ha^2)                / 10000 /
+  s59_nitrogen_uptake  Maximum plant available nitrogen from soil organic matter loss (tN per ha)        / 0.2 /
 ;
 
 table f59_cratio_landuse(climate59,kcr) Ratio of soil carbon relative to potential natural vegetation soil carbon for different landuse (1)
@@ -26,11 +27,23 @@ $include "./modules/59_som/cellpool_aug16/input/f59_ch5_F_I.csv"
 $offdelim
 ;
 
-table f59_som_initialisation_pools(t_all,j, pools59) Initialisation pools for soil organic carbon (mio. tC)
+$setglobal c59_irrigation_scenario  on
+*   options:   on  (higher carbon sequestration under irrigation)
+*              off (no carbon sequestration under irrigation)
+
+table f59_cratio_irrigation(climate59,w,kcr) Ratio of soil carbon relative to potential natural vegetation soil carbon for different irrigation schemes  (1)
 $ondelim
-$include "./modules/59_som/cellpool_aug16/input/f59_som_initialisation_pools.cs3"
+$include "./modules/59_som/cellpool_aug16/input/f59_ch5_F_IRR.cs3"
 $offdelim
 ;
+$if "%c59_irrigation_scenario%" == "off" f59_cratio_irrigation(climate59,w,kcr) = 1;
+
+
+* table f59_som_initialisation_pools(t_all,j,pools59) Initialisation pools for soil organic carbon (mio. tC)
+* $ondelim
+* $include "./modules/59_som/cellpool_aug16/input/f59_som_initialisation_pools.cs3"
+* $offdelim
+* ;
 
 $setglobal c59_som_scenario  nocc
 *   options:   cc  (climate change)
@@ -39,7 +52,7 @@ $setglobal c59_som_scenario  nocc
 parameters f59_topsoilc_density(t_all,j) LPJ topsoil carbon density for natural vegetation (tC per ha)
 /
 $ondelim
-$include "./modules/59_som/cellpool_aug16/input/lpj_carbon_topsoil.cs2"
+$include "./modules/59_som/input/lpj_carbon_topsoil.cs2"
 $offdelim
 /
 ;

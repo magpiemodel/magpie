@@ -1,7 +1,8 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @equations
@@ -11,27 +12,27 @@
 
  q35_land_other(j2) .. vm_land(j2,"other") =e= sum(land35, v35_other(j2,land35));
 
-*' Carbon stocks for primary forest, secondary forest or other natural land are calculated 
+*' Carbon stocks for primary forest, secondary forest or other natural land are calculated
 *' as the product of respective area and carbon density.
 *' Carbon stocks decline if the area decreases
 *' (e.g. due to cropland expansion into forests).
 *' In case of abandoned agricultural land (increase of other natural land),
-*' natural succession, represented by age-class growth, results in increasing carbon stocks.
+*' natural succession, represented by age-class growth, results in increasing above ground carbon stocks.
 
- q35_carbon_primforest(j2,c_pools) .. vm_carbon_stock(j2,"primforest",c_pools) =e=
+ q35_carbon_primforest(j2,ag_pools) .. vm_carbon_stock(j2,"primforest",ag_pools) =e=
            vm_land(j2,"primforest")
-           *sum(ct, fm_carbon_density(ct,j2,"primforest",c_pools));
+           *sum(ct, fm_carbon_density(ct,j2,"primforest",ag_pools));
 
- q35_carbon_secdforest(j2,c_pools) .. vm_carbon_stock(j2,"secdforest",c_pools) =e=
+ q35_carbon_secdforest(j2,ag_pools) .. vm_carbon_stock(j2,"secdforest",ag_pools) =e=
            sum(land35, v35_secdforest(j2,land35)
-           *sum(ct, p35_carbon_density_secdforest(ct,j2,land35,c_pools)));
+           *sum(ct, p35_carbon_density_secdforest(ct,j2,land35,ag_pools)));
 
- q35_carbon_other(j2,c_pools)  .. vm_carbon_stock(j2,"other",c_pools) =e=
+ q35_carbon_other(j2,ag_pools)  .. vm_carbon_stock(j2,"other",ag_pools) =e=
            sum(land35, v35_other(j2,land35)
-           *sum(ct, p35_carbon_density_other(ct,j2,land35,c_pools)));
+           *sum(ct, p35_carbon_density_other(ct,j2,land35,ag_pools)));
 
 
-*' NPI/NDC land protection policies are implemented as minium forest land and other land stock. 
+*' NPI/NDC land protection policies are implemented as minium forest land and other land stock.
 
  q35_min_forest(j2) .. vm_land(j2,"primforest") + vm_land(j2,"secdforest") =g=
  									sum(ct, p35_min_forest(ct,j2));

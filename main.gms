@@ -1,7 +1,8 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
 $title magpie
@@ -13,7 +14,7 @@ $title magpie
 *' land and water and the associated consequences for sustainable development
 *' under future scenarios of rising food, energy and material demand as well
 *' as production, climate change impacts and greenhouse gas mitigation and
-*' different land related policies.
+*' different land related policies (@dietrich_magpie4).
 *'
 *' MAgPIE is a global partial equilibrium model of the land-use sector that operates
 *' in a recursive dynamic mode and incorporates spatially explicit information on
@@ -91,12 +92,12 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 *
-* Used data set: magpie4.0_default_sep18.tgz
-* md5sum: 98e158205482936e487aeb616dea5403
+* Used data set: magpie4.1_default_apr19.tgz
+* md5sum: 5c38bb1083bd66010c2104c9d40553f4
 * Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
-*
-* Used data set: additional_data_rev3.65.tgz
-* md5sum: 0def52c4bf1dd0bad3ee995f7c3296cd
+* 
+* Used data set: additional_data_rev3.68.tgz
+* md5sum: 15d1135625a9f5cfb9c7c6038716a156
 * Repository: /p/projects/landuse/data/input/archive
 *
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev35_c200_690d3718e151be1b450b394c1064b1c5.tgz
@@ -111,6 +112,10 @@ $title magpie
 * md5sum: 212e1c168cf37b514d739b637225b1de
 * Repository: /p/projects/landuse/users/mishra/additional_data_private_forestry
 *
+* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38.1_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* md5sum: ae4dbc8e36e6fb4ba8cee0d2400b2193
+* Repository: /p/projects/landuse/data/input/archive
+* 
 * Low resolution: c200
 * High resolution: 0.5
 *
@@ -122,28 +127,28 @@ $title magpie
 *
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 *
-* Regions data revision: 4.14
+* Regions data revision: 4.18
 *
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
-* * Additional input folder: /p/projects/landuse/data/input/other/rev35
-* * Revision: 35
+* * Additional input folder: /p/projects/landuse/data/input/other/rev38
+* * Revision: 38.1
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
 *
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
-* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev35_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev35_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38.1_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38.1_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = NULL, debug = FALSE)
-*
-*
-*
-* Last modification (input data): Tue Aug 27 17:34:15 2019
-*
+* 
+* 
+* 
+* Last modification (input data): Thu Aug 15 16:03:20 2019
+* 
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
@@ -214,8 +219,7 @@ $setglobal phosphorus  off
 $setglobal awms  ipcc2006_aug16
 $setglobal ghg_policy  price_jan19
 $setglobal maccs  on_sep16
-$setglobal carbon_removal  off_sep16
-$setglobal som  off
+$setglobal som  static_jan19
 
 $setglobal bioenergy  1stgen_priced_dec18
 $setglobal material  exo_flexreg_apr16
