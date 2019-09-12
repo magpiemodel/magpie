@@ -113,25 +113,25 @@ m_boundfix(v35_other,(j,"old"),l,10e-5);
 * calculate carbon density
 * highest carbon density 1st time step to account for reshuffling
 if((ord(t) = 1),
-	p35_carbon_density_secdforest(t,j,land35,c_pools) = pm_carbon_density_ac(t,j,"acx",c_pools);
-	p35_carbon_density_other(t,j,land35,c_pools) = pm_carbon_density_ac(t,j,"acx",c_pools);
+	p35_carbon_density_secdforest(t,j,land35,ag_pools) = pm_carbon_density_ac(t,j,"acx",ag_pools);
+	p35_carbon_density_other(t,j,land35,ag_pools) = pm_carbon_density_ac(t,j,"acx",ag_pools);
 else
-	p35_carbon_density_secdforest(t,j,"new",c_pools) = pm_carbon_density_ac(t,j,"ac0",c_pools);
-	p35_carbon_density_secdforest(t,j,"grow",c_pools) = m_weightedmean(pm_carbon_density_ac(t,j,ac,c_pools),p35_secdforest(t,j,ac,"before"),(ac_land35(ac,"grow")));
-	p35_carbon_density_secdforest(t,j,"old",c_pools) = pm_carbon_density_ac(t,j,"acx",c_pools);
-	p35_carbon_density_other(t,j,"new",c_pools) = pm_carbon_density_ac(t,j,"ac0",c_pools);
-	p35_carbon_density_other(t,j,"grow",c_pools) = m_weightedmean(pm_carbon_density_ac(t,j,ac,c_pools),p35_other(t,j,ac,"before"),(ac_land35(ac,"grow")));
-	p35_carbon_density_other(t,j,"old",c_pools) = pm_carbon_density_ac(t,j,"acx",c_pools);
+	p35_carbon_density_secdforest(t,j,"new",ag_pools) = pm_carbon_density_ac(t,j,"ac0",ag_pools);
+	p35_carbon_density_secdforest(t,j,"grow",ag_pools) = m_weightedmean(pm_carbon_density_ac(t,j,ac,ag_pools),p35_secdforest(t,j,ac,"before"),(ac_land35(ac,"grow")));
+	p35_carbon_density_secdforest(t,j,"old",ag_pools) = pm_carbon_density_ac(t,j,"acx",ag_pools);
+	p35_carbon_density_other(t,j,"new",ag_pools) = pm_carbon_density_ac(t,j,"ac0",ag_pools);
+	p35_carbon_density_other(t,j,"grow",ag_pools) = m_weightedmean(pm_carbon_density_ac(t,j,ac,ag_pools),p35_other(t,j,ac,"before"),(ac_land35(ac,"grow")));
+	p35_carbon_density_other(t,j,"old",ag_pools) = pm_carbon_density_ac(t,j,"acx",ag_pools);
 );
 
 * update pcm_carbon_stock. Needed for shifting from other land to secdforest (p35_recovered_forest).
-pcm_carbon_stock(j,"secdforest",c_pools) =
+pcm_carbon_stock(j,"secdforest",ag_pools) =
            sum(land35, pc35_secdforest(j,land35)
-           * p35_carbon_density_secdforest(t,j,land35,c_pools));
+           * p35_carbon_density_secdforest(t,j,land35,ag_pools));
 
-pcm_carbon_stock(j,"other",c_pools) =
+pcm_carbon_stock(j,"other",ag_pools) =
            sum(land35, pc35_other(j,land35)
-           * p35_carbon_density_other(t,j,land35,c_pools));
+           * p35_carbon_density_other(t,j,land35,ag_pools));
 
 p35_min_forest(t,j)$(p35_min_forest(t,j) > vm_land.l(j,"primforest") + vm_land.l(j,"secdforest")) = vm_land.l(j,"primforest") + vm_land.l(j,"secdforest");
 p35_min_other(t,j)$(p35_min_other(t,j) > vm_land.l(j,"other")) = vm_land.l(j,"other");
