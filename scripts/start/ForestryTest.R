@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "COACCH"
+flag_run <- "REG"
 
 library(lucode)
 source("scripts/start_functions.R")
@@ -51,7 +51,7 @@ cfg$output <- c("rds_report")
 ## Food model covnvergence
 cfg$gms$s15_convergence <- 0.005
 
-for(climate_impacts in c(FALSE,TRUE)){
+for(climate_impacts in c(FALSE)){
 
 	if(climate_impacts){
 		cfg <- setScenario(cfg, "cc")
