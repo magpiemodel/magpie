@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "GLO"
+flag_run <- "cell"
 
 library(lucode)
 source("scripts/start_functions.R")
@@ -39,11 +39,11 @@ cfg$gms$optimization <- "nlp_apr17"
 cfg$force_download <- FALSE
 
 ## No interpolation later
-cfg$output <- c("rds_report","validation")
+cfg$output <- c("rds_report")
 
 ## CO2 price runs
-#co2_price_scenarios <- c("SSP2-Ref-SPA0")
-co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
+co2_price_scenarios <- c("SSP2-Ref-SPA0")
+#co2_price_scenarios <- c("SSP2-Ref-SPA0","SSP2-26-SPA2")
 
 ## What outputs to generate
 cfg$output <- c("rds_report")
@@ -51,7 +51,7 @@ cfg$output <- c("rds_report")
 ## Food model covnvergence
 cfg$gms$s15_convergence <- 0.005
 
-for(climate_impacts in c(FALSE,TRUE)){
+for(climate_impacts in c(FALSE)){
 
 	if(climate_impacts){
 		cfg <- setScenario(cfg, "cc")
