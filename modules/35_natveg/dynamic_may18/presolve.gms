@@ -138,6 +138,5 @@ p35_min_other(t,j)$(p35_min_other(t,j) > vm_land.l(j,"other")) = vm_land.l(j,"ot
 
 *' @code
 *' Setting variable interfaces to zero which are not dealt by this module realization
-vm_prod.fx(j,kforestry) = 0;
 vm_cost_natveg.fx(i) = 0;
 *' @stop
