@@ -60,6 +60,10 @@ v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub
 *v32_land.fx(j,"aff",ac) = 0;
 *v32_land.fx(j,"indc",ac) = 0;
 
+** Bounds for indc and aff forests
+v32_land.fx(j,"aff",ac_sub) = pc32_land(j,"aff",ac_sub);
+v32_land.fx(j,"indc",ac_sub) = pc32_land(j,"indc",ac_sub);
+
 ** Setting ac dependent carbon densities
 p32_carbon_density_ac(t,j,type32,ac,ag_pools)  = pm_carbon_density_ac(t,j,ac,ag_pools);
 
