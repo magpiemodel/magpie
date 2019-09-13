@@ -44,6 +44,9 @@ cfg$force_download <- FALSE
 ## No interpolation later
 cfg$output <- c("rds_report")
 
+## Using optfile
+cfg$gms$s80_optfile <- 1
+
 ## CO2 price runs
 co2_price_scenarios <- c("R2M41-SSP2-NPi")
 
