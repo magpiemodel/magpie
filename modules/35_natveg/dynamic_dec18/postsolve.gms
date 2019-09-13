@@ -3,19 +3,6 @@
 *** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
-if((ord(t) = 1),
-* Reshuffling of agricultural land in the 1st timestep results in an artificial increase of v35_other(j,"new").
-* This would result in carbon uptake (negative emissions) due to regrowth of vegetation.
-* To avoid this artificial effect on CO2 emissions we reset age-classes after the optimization of the 1st time step.
-	v35_other.l(j,ac) = 0;
-	v35_other.l(j,ac) = vm_land.l(j,"other");
-	p35_other(t,j,ac) = 0;
-	p35_other(t,j,"acx") = vm_land.l(j,"other");
-else
-*other land age class calculation
-	p35_other(t,j,ac) =
-        v35_other.l(j,ac);
-);
 
 *secdforest age class calculation
 p35_secdforest(t,j,ac) = v35_secdforest.l(j,ac);
