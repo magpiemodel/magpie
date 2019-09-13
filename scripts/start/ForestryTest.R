@@ -28,8 +28,8 @@ codeCheck <- FALSE
 
 #general settings
 cfg$results_folder <- "output/:title:"
-#cfg <- setScenario(cfg,c("SSP2","NPI"))
-cfg <- setScenario(cfg,c("SSP2"))
+cfg <- setScenario(cfg,c("SSP2","NPI"))
+#cfg <- setScenario(cfg,c("SSP2"))
 
 ## Module settings
 cfg$gms$demand <- "sector_dec18"

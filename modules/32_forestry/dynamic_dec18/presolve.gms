@@ -1,3 +1,9 @@
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
+*** |  Contact: magpie@pik-potsdam.de
 ** BEGIN INDC **
 
 * Limit demand for prescribed NPI/NDC afforestation in `p32_aff_pol` if not enough suitable area (`p32_aff_pot`) for afforestation is available.
@@ -12,9 +18,13 @@
 
 ** END INDC **
 
-*' Certain areas (e.g. the boreal zone) are excluded from endogenous afforestation.
-v32_land.lo(j,type32,"ac0") = 0;
-v32_land.up(j,type32,"ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
+*' Certain areas (e.g. the boreal zone) are excluded from endogenous afforestation. DON'T USE TYPE32 SET HERE
+v32_land.lo(j,"aff","ac0") = 0;
+v32_land.up(j,"aff","ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
+
+*no afforestation if carbon density <= 20 tc/ha
+v32_land.fx(j,"aff","ac0")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
+m_boundfix(v32_land,(j,"aff","ac0"),l,10e-5);
 
 * Regrowth of natural vegetation (natural succession) is modelled by shifting age-classes according to time step length.
 s32_shift = (5/5)$(ord(t)=1);
@@ -49,18 +59,6 @@ v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub
 *fix C-price induced afforestation and indc to zero (for testing)
 *v32_land.fx(j,"aff",ac) = 0;
 *v32_land.fx(j,"indc",ac) = 0;
-
-**C-price induced afforestation
-*boundaries afforestation mask (albedo)
-v32_land.lo(j,"aff","ac0") = 0;
-v32_land.up(j,"aff","ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
-*no afforestation if carbon density <= 20 tc/ha
-v32_land.fx(j,"aff","ac0")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
-m_boundfix(v32_land,(j,"aff","ac0"),l,10e-5);
-
-** Bounds for indc and aff forests
-v32_land.fx(j,"aff",ac_sub) = pc32_land(j,"aff",ac_sub);
-v32_land.fx(j,"indc",ac_sub) = pc32_land(j,"indc",ac_sub);
 
 ** Setting ac dependent carbon densities
 p32_carbon_density_ac(t,j,type32,ac,ag_pools)  = pm_carbon_density_ac(t,j,ac,ag_pools);

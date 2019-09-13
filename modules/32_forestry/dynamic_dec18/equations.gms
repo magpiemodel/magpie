@@ -45,7 +45,7 @@ sum(ct, pm_carbon_density_ac(ct,j2,ac-1,"vegc"))));
 *' The constraint `q32_aff_pol` accounts for the exogenous afforestation prescribed by NPI/NDC policies.
 
  q32_aff_pol(j2) ..
- v32_land(j2,"indc","ac0") =l= sum(ct, p32_aff_pol_timestep(ct,j2));
+ v32_land(j2,"indc","ac0") =e= sum(ct, p32_aff_pol_timestep(ct,j2));
 
 *' The constraint `q32_max_aff` accounts for the allowed maximum global
 *' carbon-price induced endogenous afforestation defined in `s32_max_aff_area`.
