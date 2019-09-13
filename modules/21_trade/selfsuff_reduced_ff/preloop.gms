@@ -5,7 +5,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 ** Setting kforestry self sufficiencies to 0 for test
-f21_self_suff(t_all,i,kforestry) = 1;
+*f21_self_suff(t_all,i,kforestry) = 1;
 
 i21_trade_bal_reduction(t_all,k_trade)=f21_trade_bal_reduction(t_all,"easytrade","%c21_trade_liberalization%");
 i21_trade_bal_reduction(t_all,k_hardtrade21)=f21_trade_bal_reduction(t_all,"hardtrade","%c21_trade_liberalization%");

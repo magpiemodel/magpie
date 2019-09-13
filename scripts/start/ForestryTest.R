@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "NPI"
+flag_run <- "defSS"
 
 library(lucode)
 source("scripts/start_functions.R")
