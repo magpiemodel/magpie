@@ -111,7 +111,7 @@ start_the_run<-function(ssp,mit,rcp,gcm,co2){
 
 	if(co2=="co2") {title=paste(ssp,gcm_alias,rcp_alias,mit_alias,sep="_")} else {title=paste(ssp,gcm_alias,substring("rcp2p6",4),mit_alias,"NoCO2",sep="_")}
 	cat(paste(title))
-	cfg<-general_settings(title=title))
+	cfg<-general_settings(title=title)
 	cfg<-lucode::setScenario(cfg,ssp)
 	cfg$input <- buildInputVector(climatescen_name=rcp,climate_model   = gcm, regionmapping = "coacch",calibration=calib)
 	mitigation=paste0("SSPDB-",ssp,"-",mit,"-",model)
