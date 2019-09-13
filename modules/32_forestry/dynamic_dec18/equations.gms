@@ -141,7 +141,7 @@ q32_hvarea_forestry(j2,ac_sub) ..
  q32_management_incr_cost(i2) ..
                               v32_high_mgmt_prod_cost(i2)
                               =e=
-                              sum((cell(i2,j2),kforestry,ac_sub), v32_hvarea_forestry(j2,kforestry,ac_sub,"high") * p32_yield_forestry_ac(j2,ac_sub,"high")) * 10e5
+                              sum((cell(i2,j2),kforestry,ac_sub), v32_hvarea_forestry(j2,kforestry,ac_sub,"high") * p32_yield_forestry_ac(j2,ac_sub,"high")) * 10e3
                               ;
 
 *********************************************************
