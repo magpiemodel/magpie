@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "MEAleSS"
+flag_run <- "MEAlowSS"
 
 library(lucode)
 source("scripts/start_functions.R")
