@@ -13,6 +13,12 @@ q17_prod_glo_timber(j2,kforestry)..
  vm_prod_cell_forestry(j2,kforestry) + vm_prod_cell_natveg(j2,kforestry)
  ;
 
+q17_prod_reg_timber(i2,kforestry)..
+ vm_prod_reg(i2,kforestry)
+ =e=
+ sum(cell(i2,j2),vm_prod_cell_forestry(j2,kforestry) + vm_prod_cell_natveg(j2,kforestry))
+ ;
+
 $ontext
  q17_prod_cell_woodfuel(j2)..
   vm_prod(j2,"woodfuel")
