@@ -27,6 +27,7 @@ magpie.holdfixed = 1 ;
 
 $onecho > conopt4.opt
 Tol_Obj_Change = 3.0e-6
+Tol_Feas_Min = 4.0e-7
 $offecho
 
 repeat(
