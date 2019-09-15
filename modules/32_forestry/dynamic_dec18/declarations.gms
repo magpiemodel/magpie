@@ -44,7 +44,7 @@ positive variables
  v32_land(j,type32,ac)                              Forestry land pools (mio. ha)
  vm_landdiff_forestry                               Aggregated difference in forestry land compared to previous timestep (mio. ha)
  vm_cdr_aff(j)                                      Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
- v32_prod(j,kforestry)                              Timber production (mio. m3)
+* v32_prod(j,kforestry)                              Timber production (mio. m3)
  v32_cost_harvest(i)                                Cost of timber harvesting (USD per ha)
  v32_cost_recur(i)                                  Recurring forest management costs (USD per ha)
  v32_hvarea_forestry(j,kforestry,ac_sub,mgmt_type)  Area harvested for timber production (mio. ha)
@@ -72,7 +72,7 @@ equations
  q32_land_reduction(j,type32,ac)                  Land contarction (mio. ha)
  q32_cost_establishment(i)                        Present value of cost of establishment (mio. USD)
  q32_management_incr_cost(i)                       xxxx
- q32_prod_cell_forestry(j,kforestry)               xx
+* q32_prod_cell_forestry(j,kforestry)               xx
 ;
 
 
@@ -82,7 +82,6 @@ parameters
  ov32_land(t,j,type32,ac,type)                             Forestry land pools (mio. ha)
  ov_landdiff_forestry(t,type)                              Aggregated difference in forestry land compared to previous timestep (mio. ha)
  ov_cdr_aff(t,j,type)                                      Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
- ov32_prod(t,j,kforestry,type)                             Timber production (mio. m3)
  ov32_cost_harvest(t,i,type)                               Cost of timber harvesting (USD per ha)
  ov32_cost_recur(t,i,type)                                 Recurring forest management costs (USD per ha)
  ov32_hvarea_forestry(t,j,kforestry,ac_sub,mgmt_type,type) Area harvested for timber production (mio. ha)
@@ -107,6 +106,5 @@ parameters
  oq32_land_reduction(t,j,type32,ac,type)                   Land contarction (mio. ha)
  oq32_cost_establishment(t,i,type)                         Present value of cost of establishment (mio. USD)
  oq32_management_incr_cost(t,i,type)                       xxxx
- oq32_prod_cell_forestry(t,j,kforestry,type)               xx
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
