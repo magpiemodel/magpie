@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "Dem1995"
+flag_run <- "regDemand"
 
 library(lucode)
 source("scripts/start_functions.R")
