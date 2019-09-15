@@ -31,3 +31,9 @@ $ondelim
 $include "./modules/16_demand/sector_dec18/input/f16_forestry_demand_iso.csv"
 $offdelim
 ;
+
+table f16_forestry_demand_REG(t_all,i,kforestry) demand
+$ondelim
+$include "./modules/16_demand/sector_dec18/input/f16_forestry_demand_REGIONAL.csv"
+$offdelim
+;
