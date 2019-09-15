@@ -33,7 +33,7 @@ cfg <- setScenario(cfg,c("SSP2","NPI"))
 
 ## Module settings
 cfg$gms$demand <- "sector_dec18"
-cfg$gms$trade <- "selfsuff_reduced"
+cfg$gms$trade <- "selfsuff_reduced_ff"
 cfg$gms$forestry  <- "dynamic_dec18"
 cfg$gms$natveg  <- "dynamic_dec18"
 cfg$gms$optimization <- "nlp_apr17"
