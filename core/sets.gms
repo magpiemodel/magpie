@@ -214,12 +214,6 @@ sets
    res_cereals, res_fibrous, res_nonfibrous, wood, woodfuel
    /
 
-   k_trade(kall) Production activities of tradable commodities
-   / tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,puls_pro,
-   potato,cassav_sp,sugr_cane,sugr_beet,others,cottn_pro, begr, betr,
-   oils,oilcakes,sugar,molasses,alcohol,ethanol,distillers_grain,brans,scp,fibres,
-   livst_rum, livst_pig,livst_chick, livst_egg, livst_milk, fish, wood, woodfuel /
-
   dev Economic development status
        / lic, mic, hic /
 
