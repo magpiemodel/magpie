@@ -1,10 +1,3 @@
-****************************************
-*** ADD DYNAMIC SET HERE BASED ON AC ***
-***************************************
-ac_additional(ac) = no;
-**** Overwrite with yes for ac_additional elements which are lower than difference between years.
-ac_additional(ac) = yes$(ord(ac) <= (m_yeardiff(t)/5));
-
 ** Weighting future rotation calculation for mean regional values by area
 pm_rotation_reg(t,i) = ord(t) + ceil((sum(cell(i,j),pcm_land(j,"forestry")*pm_rot_length_estb(t,j))/sum(cell(i,j),pcm_land(j,"forestry")))/5) + card(t_past_ff);
 *pm_rotation_reg(t,i) = ord(t) + ceil(30/5) + card(t_past_ff);

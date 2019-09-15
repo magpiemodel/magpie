@@ -48,5 +48,4 @@ sets
    trade_groups21 Trade groups
    / easytrade,hardtrade /
 
-   ac_additional(ac) Subset of ac to account for longer than five year time steps
 ;

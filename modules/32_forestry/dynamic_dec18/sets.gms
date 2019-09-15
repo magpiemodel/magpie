@@ -31,6 +31,8 @@ sets
  mgmt_type Type of forestry management
  /normal,high/
 
+ ac_additional(ac) Subset of ac to account for longer than five year time steps
+
 ;
 
 alias(ac,ac2);

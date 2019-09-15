@@ -6,6 +6,13 @@
 *** |  Contact: magpie@pik-potsdam.de
 ** BEGIN INDC **
 
+****************************************
+*** ADD DYNAMIC SET HERE BASED ON AC ***
+***************************************
+ac_additional(ac) = no;
+**** Overwrite with yes for ac_additional elements which are lower than difference between years.
+ac_additional(ac) = yes$(ord(ac) <= (m_yeardiff(t)/5));
+
 * Limit demand for prescribed NPI/NDC afforestation in `p32_aff_pol` if not enough suitable area (`p32_aff_pot`) for afforestation is available.
    p32_aff_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop")) + (vm_land.l(j,"past") - vm_land.lo(j,"past"));
 *correct indc forest stock based on p32_aff_pot
