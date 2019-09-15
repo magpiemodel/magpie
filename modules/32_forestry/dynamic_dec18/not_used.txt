@@ -4,6 +4,3 @@
 # |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
-vm_supply, variable_interface, dealt by other module
-vm_prod, variable_interface, dealt by other module
-fm_forestry_demand, input, not used
