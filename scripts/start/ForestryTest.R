@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "regDemand"
+flag_run <- "regDemand_freeVAR"
 
 library(lucode)
 source("scripts/start_functions.R")
