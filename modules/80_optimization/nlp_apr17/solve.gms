@@ -31,6 +31,7 @@ $offecho
 
 repeat(
    s80_counter = s80_counter + 1 ;
+   s80_forestry_counter = s80_forestry_counter + 1 ;
 
 *' @code
   solve magpie USING nlp MINIMIZING vm_cost_glo;
@@ -47,7 +48,9 @@ repeat(
     if((magpie.modelstat = 4 and s80_forestry_counter <= 1),
       display "WARNING: Modelstat 4, SOLPRINT SET TO 1.";
       magpie.solprint  = 1 ;
-      s80_forestry_counter = s80_forestry_counter + 1 ;
+    );
+
+    if((magpie.modelstat = 4 and s80_forestry_counter > 1),
       abort "Forestry run failed. Check lst file for more details!";
     );
 
