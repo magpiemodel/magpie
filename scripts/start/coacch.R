@@ -98,7 +98,8 @@ cfg$recalibrate <- "ifneeded"
 
 
 
-start_the_run<-function(ssp,mit,rcp,gcm,co2){
+start_the_run<-function(ssp,mit,rcp,gcm,co2,cc){
+  # select alias names for reporting
 	if(gcm=="IPSL_CM5A_LR"){gcm_alias="IPSL-CM5A-LR"}
 	if(gcm=="HadGEM2_ES"){gcm_alias="HadGEM2-ES"}
 	if(gcm=="GFDL_ESM2M"){gcm_alias="GFDL-ESM2M"}
@@ -107,16 +108,27 @@ start_the_run<-function(ssp,mit,rcp,gcm,co2){
 	if(mit=="26"){mit_alias="2p6"} 
 	if(mit=="45"){mit_alias="4p5"} 
 	if(mit=="Ref"){mit_alias="NoMit"} 
-	if(rcp=="NoCC"){rcp_alias=rcp}else{rcp_alias=substring(rcp,4)}
 
-	if(co2=="co2") {title=paste(ssp,gcm_alias,rcp_alias,mit_alias,sep="_")} else {title=paste(ssp,gcm_alias,substring("rcp2p6",4),mit_alias,"NoCO2",sep="_")}
+  # create runname
+	if(co2=="co2") {
+	  title=paste(ssp,gcm_alias,substring(rcp,4),mit_alias,sep="_")
+	} else {
+	   title=paste(ssp,gcm_alias,substring("rcp2p6",4),mit_alias,"NoCO2",sep="_")
+	}
 	cat(paste(title))
+	
+	
 	cfg<-general_settings(title=title)
 	cfg<-lucode::setScenario(cfg,ssp)
-	cfg$input <- buildInputVector(climatescen_name=rcp,climate_model   = gcm, regionmapping = "coacch",calibration=calib)
+	cfg$input <- buildInputVector(climatescen_name=rcp_start,climate_model   = gcm, regionmapping = "coacch",calibration=calib)
 	mitigation=paste0("SSPDB-",ssp,"-",mit,"-",model)
 	cfg$gms$c56_pollutant_prices <- mitigation
 	cfg$gms$c60_2ndgen_biodem    <- mitigation
+	if(cc==FALSE){
+	  cfg<-lucode::setScenario(cfg,"nocc")
+	} else {
+	  cfg<-lucode::setScenario(cfg,"cc")
+	}
 	start_run(cfg=cfg,codeCheck=codeCheck)
 }
 
@@ -156,14 +168,15 @@ for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
 			co2="co2"
 			if(rcp=="NoCC"){
 				gcm = c("HadGEM2_ES")
-				start_the_run(ssp,mit,rcp,gcm,co2)
+				rcp=  c("rcp4p5")
+				start_the_run(ssp,mit,rcp,gcm,co2,cc=FALSE)
 			} else {
 				for(gcm in gcmopt){
-				  start_the_run(ssp,mit,rcp,gcm,co2)
+				  start_the_run(ssp,mit,rcp,gcm,co2,cc=TRUE)
 				}
 				if (rcp == "rcp8p5"){
 					co2="noco2"
-					start_the_run(ssp,mit,rcp,gcm,co2)
+					start_the_run(ssp,mit,rcp,gcm,co2,cc=TRUE)
 				}
 			}
 		}
