@@ -54,7 +54,7 @@ $endif
 
 * The target year for transition to exogenous scenario diets defines the speed
 * of fading from regression based daily food consumption towards the scenario:
-i15_exo_foodscen_fader(t) = f15_exo_foodscen_fader(t,"%c15_exo_diet_targetyear%");
+i15_exo_foodscen_fader(t) = f15_exo_foodscen_fader(t,"%c15_exo_scen_targetyear%");
 
 * Initialisation of the ratio between food calorie demand and food intake for the
 * historical reference period:

@@ -46,22 +46,22 @@ start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "R2M41_SDP_foodwaste_endo"
 cfg <- setScenario(cfg,c("SDP"))
-cfg$gms$s15_exo_waste_scen <- 0
+cfg$gms$s15_exo_waste <- 0
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "R2M41_SDP_foodwaste_quarter"
 cfg <- setScenario(cfg,c("SDP"))
-cfg$gms$s15_exo_waste_target <- 1.1
+cfg$gms$s15_waste_scen <- 1.1
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "R2M41_SDP_diet_endo"
 cfg <- setScenario(cfg,c("SDP"))
-cfg$gms$s15_exo_diet_scen <- 0
+cfg$gms$s15_exo_diet <- 0
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "R2M41_SDP_EAT_2030"
 cfg <- setScenario(cfg,c("SDP"))
-cfg$gms$c15_exo_diet_targetyear <- "y2030"
+cfg$gms$c15_exo_scen_targetyear <- "y2030"
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "R2M41_SDP_EAT_2100kcal"

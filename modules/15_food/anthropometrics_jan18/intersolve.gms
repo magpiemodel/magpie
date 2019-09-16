@@ -175,14 +175,14 @@ p15_demand2intake_ratio_scen(t,i) =p15_demand2intake_ratio(t,i);
 
 * ###### Exogenous food waste scenario
 
-if(s15_exo_waste_scen = 1,
+if(s15_exo_waste = 1,
 
 * "Downwards convergence" of regional calorie oversupply due to food waste to the
 * waste reduction target, i.e. only for values that are higher than the target:
 
-p15_demand2intake_ratio_scen(t,i)$(p15_demand2intake_ratio(t,i) > s15_exo_waste_target )
+p15_demand2intake_ratio_scen(t,i)$(p15_demand2intake_ratio(t,i) > s15_waste_scen )
                     = p15_demand2intake_ratio(t,i)*(1-i15_exo_foodscen_fader(t))
-                      + s15_exo_waste_target*i15_exo_foodscen_fader(t);
+                      + s15_waste_scen*i15_exo_foodscen_fader(t);
 
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated(t,i,kfo)$(p15_demand2intake_ratio(t,i) >0 ) = p15_kcal_pc_calibrated_orig(t,i,kfo)*(
@@ -200,7 +200,7 @@ p15_kcal_pc_calibrated(t,i,kfo)$(p15_demand2intake_ratio(t,i) >0 ) = p15_kcal_pc
 *' `i15_intake_EATLancet(i,kfo)` and `i15_intake_detailed_scen_target(t,i,kfo)`
 *' are calculated.
 
-if(s15_exo_diet_scen = 1,
+if(s15_exo_diet = 1,
 
 
 *' Now, the calorie supply at household level is calculated by multiplying

@@ -4,10 +4,10 @@ c09_gdp_scenario;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;;;;;;;SSP1;SSP2;SSP3;SSP4;SSP5
 c12_interest_rate;;;low;medium;high;mixed;low;low;;;;;;;low;medium;high;mixed;low
 c15_food_scenario;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;;;;;;;SSP1;SSP2;SSP3;SSP4;SSP5
 s15_elastic_demand;;;;;;;;1;;;;;;;;;;;
-s15_exo_waste_scen;;;;;;;;1;;;;;;;;;;;
-s15_exo_waste_target;;;;;;;;1.2;;;;;;;;;;;
-s15_exo_diet_scen;;;;;;;;1;;;;;;;;;;;
-c15_exo_diet_targetyear;;;;;;;;y2050;;;;;;;;;;;
+c15_exo_scen_targetyear;;;;;;;;y2050;;;;;;;;;;;
+s15_exo_waste;;;;;;;;1;;;;;;;;;;;
+s15_waste_scen;;;;;;;;1.2;;;;;;;;;;;
+s15_exo_diet;;;;;;;;1;;;;;;;;;;;
 c15_kcal_scen;;;;;;;;healthy_BMI;;;;;;;;;;;
 c15_EAT_scen;;;;;;;;FLX;;;;;;;;;;;
 c21_trade_liberalization;;;l908080r807070;l909090r808080;l909595r809090;l908080r807070;l908080r807070;l908080r807070;;;;;;;l908080r807070;l909090r808080;l909595r809090;l908080r807070;l908080r807070

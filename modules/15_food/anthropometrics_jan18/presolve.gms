@@ -367,14 +367,14 @@ p15_demand2intake_ratio_scen(t,i) =p15_demand2intake_ratio(t,i);
 
 * ###### Exogenous food waste scenario
 
-if(s15_exo_waste_scen = 1,
+if(s15_exo_waste = 1,
 
 * "Downwards convergence" of regional calorie oversupply due to food waste to the
 * waste reduction target, i.e. only for values that are higher than the target:
 
-p15_demand2intake_ratio_scen(t,i)$(p15_demand2intake_ratio(t,i) > s15_exo_waste_target )
+p15_demand2intake_ratio_scen(t,i)$(p15_demand2intake_ratio(t,i) > s15_waste_scen )
                     = p15_demand2intake_ratio(t,i)*(1-i15_exo_foodscen_fader(t))
-                      + s15_exo_waste_target*i15_exo_foodscen_fader(t);
+                      + s15_waste_scen*i15_exo_foodscen_fader(t);
 
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated(t,i,kfo)$(p15_demand2intake_ratio(t,i) >0 ) = p15_kcal_pc_calibrated_orig(t,i,kfo)*(
@@ -390,11 +390,11 @@ p15_kcal_pc_calibrated(t,i,kfo)$(p15_demand2intake_ratio(t,i) >0 ) = p15_kcal_pc
 *' It is possible to define exogenous diet scenarios that replace the regression-based
 *' calculation of food intake and demand according to a predefined speed of
 *' convergence from `p15_kcal_pc_calibrated(t,i,kfo)` to the scenario-dependent target
-*' `i15_kcal_pc_scen_target(t,i,kfo)` by setting the switch `s15_exo_diet_scen`
+*' `i15_kcal_pc_scen_target(t,i,kfo)` by setting the switch `s15_exo_diet`
 *' to 1.
 
 
-if(s15_exo_diet_scen = 1,
+if(s15_exo_diet = 1,
 
 
 *' 1.) In a first step, the exogenous scenario diets are defined by selecting a
@@ -409,10 +409,10 @@ $ifthen "%c15_kcal_scen%" == "healthy_BMI"
              sum((sex,age), im_demography(t,iso,sex,age))
          );
   i15_intake_EATLancet(i,kfo) =
-        f15_intake_EATLancet("%c15_exo_diet_targetyear%",i,"2100kcal","%c15_EAT_scen%",kfo);
+        f15_intake_EATLancet("%c15_exo_scen_targetyear%",i,"2100kcal","%c15_EAT_scen%",kfo);
 $else
   i15_intake_EATLancet(i,kfo) =
-      f15_intake_EATLancet("%c15_exo_diet_targetyear%",i,"%c15_kcal_scen%","%c15_EAT_scen%",kfo);
+      f15_intake_EATLancet("%c15_exo_scen_targetyear%",i,"%c15_kcal_scen%","%c15_EAT_scen%",kfo);
       i15_intake_scen_target(t,i) = sum(kfo,i15_intake_EATLancet(i,kfo));
 $endif
 

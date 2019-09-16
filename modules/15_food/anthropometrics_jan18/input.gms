@@ -17,7 +17,7 @@ $setglobal c15_calibscen  constant
 $setglobal c15_rumscen  mixed
 *   options:   constant, halving2050, mixed
 
-$setglobal c15_exo_diet_targetyear  y2050
+$setglobal c15_exo_scen_targetyear  y2050
 *   options:   y2030, y2050
 
 $setglobal c15_kcal_scen  2100kcal
@@ -36,11 +36,11 @@ scalar s15_maxiter Scalar defining maximum number of iterations (1) / 5 /;
 
 scalar s15_convergence Convergence criterion (1) / 0.005 /;
 
-scalar s15_exo_waste_scen Switch for transition towards exogenous food waste scenario (1)  / 1 /;
+scalar s15_exo_waste Switch for transition towards exogenous food waste scenario (1)  / 1 /;
 
-scalar s15_exo_waste_target Scenario target for the ratio between food demand and intake (1)  / 1.2 /;
+scalar s15_waste_scen Scenario target for the ratio between food demand and intake (1)  / 1.2 /;
 
-scalar s15_exo_diet_scen Switch for transition towards exogenous diet scenario (1)  / 1 /;
+scalar s15_exo_diet Switch for transition towards exogenous diet scenario (1)  / 1 /;
 
 
 table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of heterogeneous products and processes (mio. tDM)
