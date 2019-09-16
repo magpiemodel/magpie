@@ -52,11 +52,11 @@ equations
  q35_hvarea_primforest(j)         Area harvested from primary forests (mio. ha)
  q35_hvarea_other(j,ac_sub)       Area harvested from other land (mio. ha)
  q35_cost_total(i)                Natveg realted production costs (mio. USD)
-* q35_prod_secdforest(j,kforestry)  xx
-* q35_prod_primforest(j,kforestry)  xx
-* q35_prod_other(j)                Woodfuel production from other land (mio. m3)
-* q35_prod_cell_natveg(j,kforestry)  xx
- q35_prod_natveg(j,kforestry)       xx
+ q35_prod_secdforest(j,kforestry)  xx
+ q35_prod_primforest(j,kforestry)  xx
+ q35_prod_other(j)                Woodfuel production from other land (mio. m3)
+ q35_prod_cell_natveg(j,kforestry)  xx
+* q35_prod_natveg(j,kforestry)       xx
 ;
 
 positive variables
@@ -71,7 +71,7 @@ positive variables
   v35_hvarea_secdforest(j,kforestry,ac_sub)   Harvested area of secondary forest (mio. ha)
   v35_hvarea_other(j,kforestry,ac_sub)        Harvested area of other land (mio. ha)
   v35_hvarea_primforest(j,kforestry)          Harvested area of primary forest (mio. ha)
-*  v35_prod(j,land_natveg,kforestry)          Timber production coming from natveg (mio. m3)
+  v35_prod(j,land_natveg,kforestry)          Timber production coming from natveg (mio. m3)
   vm_cost_natveg(i)                           Regional natveg timber production costs (mio. USD)
   vm_prod_cell_natveg(j,kforestry)           xx
 ;
@@ -89,6 +89,7 @@ parameters
  ov35_hvarea_secdforest(t,j,kforestry,ac_sub,type) Harvested area of secondary forest (mio. ha)
  ov35_hvarea_other(t,j,kforestry,ac_sub,type)      Harvested area of other land (mio. ha)
  ov35_hvarea_primforest(t,j,kforestry,type)        Harvested area of primary forest (mio. ha)
+ ov35_prod(t,j,land_natveg,kforestry,type)         Timber production coming from natveg (mio. m3)
  ov_cost_natveg(t,i,type)                          Regional natveg timber production costs (mio. USD)
  ov_prod_cell_natveg(t,j,kforestry,type)           xx
  oq35_land_secdforest(t,j,type)                    Secdforest land pool calculation (mio. ha)
@@ -108,6 +109,9 @@ parameters
  oq35_hvarea_primforest(t,j,type)                  Area harvested from primary forests (mio. ha)
  oq35_hvarea_other(t,j,ac_sub,type)                Area harvested from other land (mio. ha)
  oq35_cost_total(t,i,type)                         Natveg realted production costs (mio. USD)
- oq35_prod_natveg(t,j,kforestry,type)              xx
+ oq35_prod_secdforest(t,j,kforestry,type)          xx
+ oq35_prod_primforest(t,j,kforestry,type)          xx
+ oq35_prod_other(t,j,type)                         Woodfuel production from other land (mio. m3)
+ oq35_prod_cell_natveg(t,j,kforestry,type)         xx
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

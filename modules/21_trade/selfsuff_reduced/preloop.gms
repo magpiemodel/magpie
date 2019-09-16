@@ -17,3 +17,7 @@ elseif (s21_trade_tariff=0),
     i21_trade_tariff(i2,k_trade) = 0;
 );
 
+i21_trade_margin(i,"wood") = f21_trade_margin(i,"potato");
+i21_trade_margin(i,"woodfuel") = f21_trade_margin(i,"potato");
+** Setting kforestry self sufficiencies manually for some regions
+f21_self_suff(t_all,"MEA",kforestry) = 0.8;
