@@ -9,7 +9,7 @@
 
 ***CROP YIELD CALCULATIONS**********************************************
 q14_yield_crop(j2,kcr,w) ..
- vm_yld(j2,kcr,w) =e= sum(ct,p14_yields_calib(ct,j2,kcr,w) *
+ vm_yld(j2,kcr,w) =e= sum(ct,i14_yields_calib(ct,j2,kcr,w) *
                         sum(cell(i2,j2), vm_tau(i2) / fm_tau1995(i2)));
 
 
@@ -19,5 +19,5 @@ q14_yield_crop(j2,kcr,w) ..
 
 q14_yield_past(j2,w) ..
  vm_yld(j2,"pasture",w) =e=
- sum(ct,(i14_yields(ct,j2,"pasture",w)
+ sum(ct,(i14_yields_calib(ct,j2,"pasture",w)
  *sum(cell(i2,j2),pm_past_mngmnt_factor(ct,i2))));

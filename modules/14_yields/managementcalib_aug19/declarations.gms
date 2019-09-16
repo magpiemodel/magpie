@@ -6,14 +6,13 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- i14_yields(t,j,kve,w)           Biophysical input yields (excluding technological change) (tDM per ha per yr)
+ i14_yields_calib(t,j,kve,w)     Calibrated biophysical input yields (excluding technological change) (tDM per ha per yr)
  p14_pyield_LPJ_reg(t_all,i)     Regional average input yields aggregated from clusters with initial pasture area as weights (tDM per ha per yr)
  p14_pyield_corr(t,i)            Regional pasture management correction for historical time steps (1)
- p14_croparea_total(t,j)         Cellular water type specific cropareas (mio. ha)
- p14_lpj_yields_hist(t,i,kcr)    Biophysical input yields average over region and water supply type at the historical reference year (tDM per ha per yr)
- p14_lambda_yields(t,i,kcr)      Scaling factor for non-linear management calibration (1)
- p14_managementcalib(t,j,kcr,w)    Regional management calibration factor accounting for FAO yield levels (1)
- p14_yields_calib(t,j,kcr,w)     Calibrated biophysical input yields (excluding technological change) (tDM per ha per yr)
+ i14_croparea_total(t,j)         Cellular water type specific cropareas (mio. ha)
+ i14_lpj_yields_hist(t,i,kcr)    Biophysical input yields average over region and water supply type at the historical reference year (tDM per ha per yr)
+ i14_lambda_yields(t,i,kcr)      Scaling factor for non-linear management calibration (1)
+ i14_managementcalib(t,j,kcr,w)  Regional management calibration factor accounting for FAO yield levels (1)
 ;
 
 positive variables

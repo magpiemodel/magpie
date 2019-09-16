@@ -5,11 +5,11 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c14_yields_scenario  cc
+$setglobal c14_yields_scenario  nocc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
 
-scalar s14_limit_calib   Relative managament calibration switch (1=limited 0=pure relative) / 0 /;
+scalar s14_limit_calib   Relative managament calibration switch (1=limited 0=pure relative) / 1 /;
 
 ******* Calibration factor
 table f14_yld_calib(i,ltype14) Calibration factor for the LPJmL yields (1)
