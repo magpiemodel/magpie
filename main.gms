@@ -187,6 +187,7 @@ $setglobal residues  flexreg_apr16
 $setglobal processing  substitution_dec18
 
 $setglobal trade  selfsuff_reduced_ff
+$setglobal timber exo_sep19
 
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
