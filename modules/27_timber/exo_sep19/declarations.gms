@@ -12,7 +12,7 @@ equations
  q27_prod_timber_natveg(j,kforestry)     Cellular natveg production constraint (mio. m3 per yr)
 ;
 
-variables
+positive variables
  v27_prod_timber(j,timber_source,kforestry)  Production of timber in each cell (mio. m3 per yr)
  vm_prod_heaven_timber(j,kforestry)          Production from heaven in each cell (mio. m3 per yr)
 ;
