@@ -21,3 +21,6 @@ i21_trade_margin(i,"wood") = f21_trade_margin(i,"potato");
 i21_trade_margin(i,"woodfuel") = f21_trade_margin(i,"potato");
 ** Setting kforestry self sufficiencies manually for some regions
 f21_self_suff(t_all,"MEA",kforestry) = 0.8;
+
+f21_exp_shr(t_all,"MEA",kforestry) = 0;
+f21_exp_shr(t_all,"USA",kall) = 0.08;
