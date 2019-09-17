@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "WFInf"
+flag_run <- "50pcWF"
 
 randomFlag <- function(n = 5000) {
     a <- do.call(paste0, replicate(1, sample(LETTERS, n, TRUE), FALSE))
