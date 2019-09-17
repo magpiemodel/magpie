@@ -163,7 +163,7 @@ $offtext
 q32_prod_future(i2) ..
               sum((cell(i2,j2)), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
               =g=
-              sum(kforestry,vm_prod_reg(i2,kforestry)) * 0.33
+              sum(kforestry,vm_prod_reg(i2,kforestry)) * 0.66
 *              sum(kforestry, vm_prod_future_reg_ff(i2,kforestry)) * pcm_production_ratio_future(i2)
               ;
 
