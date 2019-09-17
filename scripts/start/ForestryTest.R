@@ -9,7 +9,14 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "regDemand_freeVAR"
+flag_run <- "WFInf"
+
+randomFlag <- function(n = 5000) {
+    a <- do.call(paste0, replicate(1, sample(LETTERS, n, TRUE), FALSE))
+    paste0(a, sprintf("%04d", sample(9999, n, TRUE)), sample(LETTERS, n, TRUE))
+}
+
+random_identifier <- randomFlag(1)
 
 library(lucode)
 source("scripts/start_functions.R")
@@ -74,9 +81,9 @@ for(climate_impacts in c(FALSE)){
 			cfg$gms$s35_selective_logging_flag = sl_set
 
 			if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
-				cfg$title<- paste0(cfg$gms$c_timesteps,"_",sl_name,"_","_CO2prices","_",cc_flag,"_",flag_run)
+				cfg$title<- paste0(cfg$gms$c_timesteps,"_",sl_name,"_","_CO2prices","_",cc_flag,"_",flag_run,"_",random_identifier)
 			} else {
-				cfg$title<- paste0(cfg$gms$c_timesteps,"_",sl_name,"_",cc_flag,"_",flag_run)
+				cfg$title<- paste0(cfg$gms$c_timesteps,"_",sl_name,"_",cc_flag,"_",flag_run,"_",random_identifier)
 			}
 			start_run(cfg=cfg,codeCheck=codeCheck)
 	 }
