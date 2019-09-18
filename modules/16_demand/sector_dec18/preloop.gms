@@ -36,4 +36,4 @@ fm_forestry_demand(t_all,i,kforestry) = f16_forestry_demand_REG(t_all,i,kforestr
 fm_forestry_demand(t,i,kforestry) = f16_forestry_demand_REG(t,i,kforestry);
 
 *** Model only 50% of woodfuel demand
-fm_forestry_demand(t,i,"woodfuel") = fm_forestry_demand(t,i,"woodfuel") * 0.50;
+fm_forestry_demand(t,i,"woodfuel") = fm_forestry_demand(t,i,"woodfuel") * 0.33;

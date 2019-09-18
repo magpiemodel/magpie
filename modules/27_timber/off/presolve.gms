@@ -5,18 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @code Pasture areas are fixed to the initial spatially explicit patterns
-*' defined in the module [10_land] by the land use input data set.
+*' @code Timber production is fixed to 0 in case the model is run without
+*' dynamic forestry turned on.
 
-vm_land.fx(j,"past") = pcm_land(j,"past");
+vm_prod.fx(j,kforestry) = 0;
 
-*' Correspondingly, also the above ground carbon stocks related to pasture areas are fixed.
-
-vm_carbon_stock.fx(j,"past",ag_pools) =
-          pcm_land(j,"past")*fm_carbon_density(t,j,"past",ag_pools);
-
-*' Regional costs associated with pasture management are set to zero.
-
-vm_cost_prod.fx(i,"pasture") = 0;
+*' Wood demand is set to zero because forestry is not modeled in this realization.
+vm_supply.fx(i2,kforestry) = 0;
 
 *' @stop

@@ -5,14 +5,11 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @title Pasture
+*' @title Timber
 *'
-*' @description The pasture module determines land used as pasture for livestock
-*' rearing. At the same time, it calculates geographically explicit production
-*' of pasture biomass and the carbon content of pasture land. Therefore, the
-*' module requires cellular information about the carbon density related to the
-*' different pasture carbon pools. Furthermore, it delivers regional production
-*' costs associated with pastures.
+*' @description The timber module determines land used for timber production
+*' based on an exogenous timber demand calculated from FAO. At the same time,
+*' it calculates geographically explicit production of wood and wood fuel.
 *'
 *' @authors Abhijeet Mishra
 

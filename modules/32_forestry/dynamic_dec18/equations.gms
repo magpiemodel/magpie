@@ -123,13 +123,7 @@ q32_cost_harvest(i2)..
                     ;
 
 ***PRODUCTION
-$ontext
-q32_prod_forestry(j2,kforestry)..
-                          v32_prod(j2,kforestry)
-                          =e=
-                         sum((ac_sub,ct,mgmt_type), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type) * p32_yield_forestry_ac(j2,ac_sub,mgmt_type));
 
-$offtext
 q32_prod_forestry(j2,kforestry)..
                           vm_prod_cell_forestry(j2,kforestry)
                           =e=
@@ -137,7 +131,6 @@ q32_prod_forestry(j2,kforestry)..
 
 ***AREA
 
-**harvesting area ((0.6*0.975**(pc32_timestep-m_timdestep_length/2)))
 q32_hvarea_forestry(j2,ac_sub) ..
                           sum((kforestry,mgmt_type), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type))
                           =e=
@@ -153,17 +146,10 @@ q32_hvarea_forestry(j2,ac_sub) ..
 
 *********************************************************
 
-$ontext
-q32_prod_cell_forestry(j2,kforestry)..
-                          vm_prod_cell_forestry(j2,kforestry)
-                          =e=
-                          v32_prod(j2,kforestry)
-                          ;
-$offtext
 q32_prod_future(i2) ..
               sum((cell(i2,j2)), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
               =g=
-              sum((ct,kforestry), fm_forestry_demand(ct,i2,kforestry)) * 0.50
+              sum((ct,kforestry), fm_forestry_demand(ct,i2,"wood")) * 0.33
 *              sum(kforestry, vm_prod_future_reg_ff(i2,kforestry)) * pcm_production_ratio_future(i2)
               ;
 

@@ -14,11 +14,18 @@
     + vm_prod_heaven_timber(j2,kforestry)
     ;
 
+*' The equation above describes production of a MAgPIE timber commodity `vm_prod_timber`
+*' as the cluster level production for `vm_prod` for timber. `vm_prod_timber` can be
+*' produced from either highly managed plantation foorests or natural forests.
+
   q27_prod_timber_forestry(j2,kforestry)..
     v27_prod_timber(j2,"plantations",kforestry)
     =e=
     vm_prod_cell_forestry(j2,kforestry)
     ;
+
+*' The part timber production coming from harvesting of highly managed plantation forests
+*' is calculated in [32_forestry] module.
 
   q27_prod_timber_natveg(j2,kforestry)..
     v27_prod_timber(j2,"natural_forest",kforestry)
@@ -26,7 +33,18 @@
     vm_prod_cell_natveg(j2,kforestry)
     ;
 
-*' The equation above describes regional production of a MAgPIE timber commodity
-*' `vm_prod_reg_cell_xx` as the cluster level production for `vm_prod` of the same commodity.
+*' The part timber production coming from harvesting of natural forests is calculated
+*' in [35_natveg] module.
+
+**** Woodfuel specific settings
+
+  q27_prod_woodfuel_forestry(i2,kforestry)..
+    sum(cell(i2,j2),vm_prod_cell_forestry(j2,"woodfuel"))
+    =l=
+    sum(cell(i2,j2),v27_prod_timber(j2,"plantations","woodfuel")) * 0.40
+    ;
+
+*' The part timber production coming from harvesting of highly managed plantation forests
+*' is calculated in [32_forestry] module.
 
 *** EOF constraints.gms ***

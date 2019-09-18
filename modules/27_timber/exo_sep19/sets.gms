@@ -6,6 +6,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
- timber_source
+ timber_source Source of timber production
  / plantations, natural_forest /
 ;

@@ -6,7 +6,6 @@
 
 scalars
  s35_shift number of 5-year age-classes corresponding to current time step length (1)
- s35_selective_logging_flag Flag for turning of selective logging in percentage. One equals clearcut   / 0.05 /
 ;
 
 parameters

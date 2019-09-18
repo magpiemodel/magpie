@@ -5,17 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In the exo_sep19 realization, pasture area and related carbon
-*' stocks are modelled endogenously. The initial spatially explicit patterns of
-*' pasture are defined in the module [10_land] by the land use input data set.
-*' For future time steps, pasture area depends on the demand for biomass from
-*' pastures to feed livestock as calculated in the module [70_livestock] and
-*' from the intensity of pasture utilization ("pasture yield") as determined in
-*' the module [14_yields].
+*' @description In the exo_sep19 realization, The productin of timber from
+*' [32_forestry] and [35_natveg] is brought together. The model is free to
+*' choose between the source of production of timber which can come from either
+*' heavily managed plantation forests or natural forests.
 
-*' @limitations No consideration of generic differences between extensive and
-*' intensive grazing systems, of explicit pasture management options and of
-*' related degradation of pastures.
+*' @limitations wip
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/27_timber/exo_sep19/sets.gms"
