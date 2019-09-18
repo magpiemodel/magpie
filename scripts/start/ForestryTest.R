@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "50pcWF"
+flag_run <- "INDlowSS"
 
 library(lucode)
 source("scripts/start_functions.R")
@@ -45,7 +45,7 @@ cfg$force_download <- FALSE
 cfg$output <- c("rds_report")
 
 ## Using optfile
-cfg$gms$s80_optfile <- 0
+cfg$gms$s80_optfile <- 1
 
 ## CO2 price runs
 co2_price_scenarios <- c("R2M41-SSP2-NPi")
@@ -55,6 +55,9 @@ cfg$output <- c("rds_report")
 
 ## Food model covnvergence
 cfg$gms$s15_convergence <- 0.005
+
+## Should recalibration be made
+cfg$recalibrate <- "ifneeded"
 
 for(climate_impacts in c(FALSE)){
 
