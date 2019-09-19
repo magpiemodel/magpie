@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "INDlowSS"
+flag_run <- "AddnlWFEqns"
 
 library(lucode)
 source("scripts/start_functions.R")

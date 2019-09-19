@@ -10,7 +10,8 @@ equations
  q27_prod_timber(j,kforestry)             Cellular timber production constraint (mio. m3 per yr)
  q27_prod_timber_forestry(j,kforestry)    Cellular forestry production constraint (mio. m3 per yr)
  q27_prod_timber_natveg(j,kforestry)      Cellular natveg production constraint (mio. m3 per yr)
- q27_prod_woodfuel_forestry(i,kforestry)  Regional woodfuel production from plantations (mio. m3 per yr)
+ q27_prod_woodfuel_forestry(i)  Regional woodfuel production from plantations (mio. m3 per yr)
+ q27_prod_woodfuel_total(i)     Regional woodfuel production (mio. m3 per yr)
 ;
 
 positive variables

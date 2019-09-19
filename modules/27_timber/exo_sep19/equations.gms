@@ -38,11 +38,18 @@
 
 **** Woodfuel specific settings
 
-  q27_prod_woodfuel_forestry(i2,kforestry)..
+  q27_prod_woodfuel_forestry(i2)..
     sum(cell(i2,j2),vm_prod_cell_forestry(j2,"woodfuel"))
     =l=
-    sum(cell(i2,j2),v27_prod_timber(j2,"plantations","woodfuel")) * 0.40
+    sum(cell(i2,j2),vm_prod(j2,"woodfuel")) * 0.33
     ;
+
+  q27_prod_woodfuel_natveg(i2)..
+    sum(cell(i2,j2),vm_prod_cell_natveg(j2,"woodfuel"))
+    =g=
+    sum(cell(i2,j2),vm_prod(j2,"woodfuel")) * 0.33
+    ;
+
 
 *' The part timber production coming from harvesting of highly managed plantation forests
 *' is calculated in [32_forestry] module.
