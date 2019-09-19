@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "ForceNatveg"
+flag_run <- "AddnlProdCost"
 
 library(lucode)
 source("scripts/start_functions.R")
