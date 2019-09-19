@@ -3,7 +3,7 @@
 *** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
-*v35_prod.fx(j,"other","wood") = 0;
+v35_prod.fx(j,"other","wood") = 0;
 v35_hvarea_other.fx(j,"wood",ac_sub) = 0;
 
 i35_ageclass_area_secdf(j,ac) = sum(ac_poulter_to_ac(ac_poulter,ac), f35_ageclass_area(j,ac_poulter)$(not sameas(ac_poulter,"class15")));
