@@ -44,6 +44,15 @@ $ontext
     sum(cell(i2,j2),vm_prod(j2,"woodfuel")) * 0.20
     ;
 $offtext
+
+**** Forcing model to use NatVeg
+
+  q27_prod_timber_forced..
+    sum((j2,kforestry),v27_prod_timber(j2,"natural_forest",kforestry))
+    =g=
+    sum((j2,kforestry),vm_prod(j2,kforestry) * 0.5)
+    ;
+
 *' The part timber production coming from harvesting of highly managed plantation forests
 *' is calculated in [32_forestry] module.
 

@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "AddnlWFEqns"
+flag_run <- "ForceNatveg"
 
 library(lucode)
 source("scripts/start_functions.R")
