@@ -20,6 +20,8 @@ q32_cost_total(i2) .. vm_cost_fore(i2) =e=
 								   + v32_cost_recur(i2)
 								   + v32_cost_establishment(i2)
                    + v32_high_mgmt_prod_cost(i2)
+                   + sum(cell(i2,j2), vm_prod_cell_forestry(j2,"wood") * 200)
+                   + sum(cell(i2,j2), vm_prod_cell_forestry(j2,"woodfuel") * 100)
 								   ;
 
 *****C-PRICE INDUCED AFFORESTATION
