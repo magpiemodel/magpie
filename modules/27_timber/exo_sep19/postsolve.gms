@@ -7,13 +7,13 @@
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_prod_heaven_timber(t,j,kforestry,"marginal") = vm_prod_heaven_timber.m(j,kforestry);
- oq27_prod_timber(t,kforestry,"marginal")        = q27_prod_timber.m(kforestry);
+ oq27_prod_timber(t,i,kforestry,"marginal")      = q27_prod_timber.m(i,kforestry);
  ov_prod_heaven_timber(t,j,kforestry,"level")    = vm_prod_heaven_timber.l(j,kforestry);
- oq27_prod_timber(t,kforestry,"level")           = q27_prod_timber.l(kforestry);
+ oq27_prod_timber(t,i,kforestry,"level")         = q27_prod_timber.l(i,kforestry);
  ov_prod_heaven_timber(t,j,kforestry,"upper")    = vm_prod_heaven_timber.up(j,kforestry);
- oq27_prod_timber(t,kforestry,"upper")           = q27_prod_timber.up(kforestry);
+ oq27_prod_timber(t,i,kforestry,"upper")         = q27_prod_timber.up(i,kforestry);
  ov_prod_heaven_timber(t,j,kforestry,"lower")    = vm_prod_heaven_timber.lo(j,kforestry);
- oq27_prod_timber(t,kforestry,"lower")           = q27_prod_timber.lo(kforestry);
+ oq27_prod_timber(t,i,kforestry,"lower")         = q27_prod_timber.lo(i,kforestry);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
 
 *** EOF postsolve.gms ***

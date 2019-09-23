@@ -7,7 +7,7 @@
 
 
 equations
- q27_prod_timber(kforestry)             Cellular timber production constraint (mio. m3 per yr)
+ q27_prod_timber(i,kforestry)             Cellular timber production constraint (mio. m3 per yr)
 ;
 
 positive variables
@@ -17,7 +17,7 @@ positive variables
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_prod_heaven_timber(t,j,kforestry,type) Production from heaven in each cell (mio. m3 per yr)
- oq27_prod_timber(t,kforestry,type)        Cellular timber production constraint (mio. m3 per yr)
+ oq27_prod_timber(t,i,kforestry,type)      Cellular timber production constraint (mio. m3 per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 
