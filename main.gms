@@ -104,8 +104,8 @@ $title magpie
 * md5sum: e0cb64c918128436bf9a323e57cae81b
 * Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: private_forestry_dec18_20190918.tgz
-* md5sum: 211d6d2a997b08c5752504f019b03fd6
+* Used data set: private_forestry_dec18_20190923.tgz
+* md5sum: 3de23498d6c4ab8b5f0320de9015b0c4
 * Repository: /p/projects/landuse/users/mishra/additional_data_private_forestry
 * 
 * Low resolution: c200
@@ -139,7 +139,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Wed Sep 18 13:44:48 2019
+* Last modification (input data): Mon Sep 23 12:17:28 2019
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
