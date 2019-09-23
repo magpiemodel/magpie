@@ -24,4 +24,4 @@ f21_self_suff(t_all,"MEA",kforestry) = 0.8;
 f21_self_suff(t_all,"IND","woodfuel") = 0.8;
 
 f21_exp_shr(t_all,"MEA",kforestry) = 0;
-f21_exp_shr(t_all,"USA",kall) = 0.08;
+f21_exp_shr(t_all,"USA",kforestry) = 0.08;
