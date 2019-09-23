@@ -96,21 +96,21 @@ $title magpie
 * md5sum: 5c38bb1083bd66010c2104c9d40553f4
 * Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev3.68.tgz
-* md5sum: 15d1135625a9f5cfb9c7c6038716a156
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
-* 
-* Used data set: LPJmL5-IPSL_CM5A_LR-rcp2p6_rev39_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: 5f65f0927d751b359a23c8c466bca840
+* Used data set: LPJmL5-IPSL_CM5A_LR-rcp2p6_rev40_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* md5sum: 10644585a0b664f345ded1d90ca88fa3
 * Repository: /p/projects/landuse/data/input/archive
 * 
 * Used data set: rev4.21_690d3718e151be1b450b394c1064b1c5_magpie.tgz
-* md5sum: e44c795bcb0cc322c8991beb82ae7139
+* md5sum: 2d1e3ec7b22675891a8b0ef985425f60
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Used data set: rev4.21_690d3718e151be1b450b394c1064b1c5_validation.tgz
-* md5sum: 6474ba0947b7bd202e587a4f5273de9b
+* md5sum: 69586a3e2a3f6cc888566d671391d853
 * Repository: /p/projects/rd3mod/inputdata/output
+* 
+* Used data set: additional_data_rev3.68.tgz
+* md5sum: 15d1135625a9f5cfb9c7c6038716a156
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -119,23 +119,23 @@ $title magpie
 * 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*    28   23    9    6    2   32   34    9   14    9   25    9
+*    28   23    9    7    2   31   32   10   14   10   25    9
 * 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
 * Regions data revision: 4.21
 * 
 * lpj2magpie settings:
-* * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/LPJmL5/IPSL_CM5A_LR/rcp2p6/
-* * Additional input folder: /p/projects/landuse/data/input/other/rev39
-* * Revision: 39
+* * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/LPJmL5/IPSL_CM5A_LR/rcp2p6
+* * Additional input folder: /p/projects/landuse/data/input/other/rev40
+* * Revision: 40
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), moinput_cache = gsub("default",     paste0("rev", cfg$revision2), madrat::getConfig()$cachefolder),     output_file = lpj2magpie_file, rev = cfg$revision, start_year = cfg$LPJ_start_year)
 * 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
-* * Input file: /p/projects/landuse/data/input/archive/LPJmL5-IPSL_CM5A_LR-rcp2p6-_rev39_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/LPJmL5-IPSL_CM5A_LR-rcp2p6-_rev39_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* * Input file: /p/projects/landuse/data/input/archive/LPJmL5-IPSL_CM5A_LR-rcp2p6_rev40_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/LPJmL5-IPSL_CM5A_LR-rcp2p6_rev40_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
@@ -143,7 +143,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Fri Aug 16 11:29:26 2019
+* Last modification (input data): Mon Sep 23 15:25:53 2019
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 

@@ -19,7 +19,7 @@ buildInputVector <- function(base            = "magpie4.1_default_apr19.tgz",
                              climate_model   = "IPSL_CM5A_LR",
                              climatescen_name= "rcp2p6",
                              co2             = NULL,
-                             archive_rev     = "39",
+                             archive_rev     = "40",
                              resolution      = "c200",
                              regionmapping   = "H12",
                              addings         = NULL,                 #"_IND4", #NULL,
@@ -48,24 +48,54 @@ buildInputVector <- function(base            = "magpie4.1_default_apr19.tgz",
 
 cfg$input <- buildInputVector()
 
+
+
+### dynamic irrigation area
+
+cfg$gms$area_equipped_for_irrigation <- "endo_apr13"   # def = endo_apr13
 cfg$recalibrate <- TRUE
 
 cfg$gms$s14_limit_calib <- 1
-cfg$title    <- "lpjml5_limited_calib_1995"
+cfg$title    <- "lpjml5_limited_calib_newAEI"
 start_run(cfg=cfg,codeCheck=TRUE)
 
 cfg$recalibrate <- FALSE
 
 cfg$gms$s14_limit_calib <- 0
-cfg$title    <- "lpjml5_purerel_calib_1995"
+cfg$title    <- "lpjml5_purerel_calib_newAEI"
 start_run(cfg=cfg,codeCheck=TRUE)
 
 cfg<-lucode::setScenario(cfg,"cc")
 
 cfg$gms$s14_limit_calib <- 1
-cfg$title    <- "lpjml5_limited_calib_cc_1995"
+cfg$title    <- "lpjml5_limited_calib_cc_newAEI"
 start_run(cfg=cfg,codeCheck=TRUE)
 
 cfg$gms$s14_limit_calib <- 0
-cfg$title    <- "lpjml5_purerel_calib_cc_1995"
+cfg$title    <- "lpjml5_purerel_calib_cc_newAEI"
 start_run(cfg=cfg,codeCheck=TRUE)
+
+##static irrigation areas
+
+#cfg$gms$area_equipped_for_irrigation <- "static"   # def = endo_apr13
+#cfg$recalibrate <- TRUE
+#
+#cfg$gms$s14_limit_calib <- 1
+#cfg$title    <- "lpjml5_limited_calib_1995"
+#start_run(cfg=cfg,codeCheck=TRUE)
+#
+#cfg$recalibrate <- FALSE
+#
+#cfg$gms$s14_limit_calib <- 0
+#cfg$title    <- "lpjml5_purerel_calib_1995"
+#start_run(cfg=cfg,codeCheck=TRUE)
+#
+#cfg<-lucode::setScenario(cfg,"cc")
+#
+#cfg$gms$s14_limit_calib <- 1
+#cfg$title    <- "lpjml5_limited_calib_cc_1995"
+#start_run(cfg=cfg,codeCheck=TRUE)
+#
+#cfg$gms$s14_limit_calib <- 0
+#cfg$title    <- "lpjml5_purerel_calib_cc_1995"
+#start_run(cfg=cfg,codeCheck=TRUE)

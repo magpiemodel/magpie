@@ -49,13 +49,13 @@ sets
        CAZ_1*CAZ_28,
        CHA_29*CHA_51,
        EUR_52*EUR_60,
-       IND_61*IND_66,
-       JPN_67*JPN_68,
-       LAM_69*LAM_100,
-       MEA_101*MEA_134,
-       NEU_135*NEU_143,
-       OAS_144*OAS_157,
-       REF_158*REF_166,
+       IND_61*IND_67,
+       JPN_68*JPN_69,
+       LAM_70*LAM_100,
+       MEA_101*MEA_132,
+       NEU_133*NEU_142,
+       OAS_143*OAS_156,
+       REF_157*REF_166,
        SSA_167*SSA_191,
        USA_192*USA_200/
 
@@ -64,13 +64,13 @@ sets
        CAZ . CAZ_1*CAZ_28
        CHA . CHA_29*CHA_51
        EUR . EUR_52*EUR_60
-       IND . IND_61*IND_66
-       JPN . JPN_67*JPN_68
-       LAM . LAM_69*LAM_100
-       MEA . MEA_101*MEA_134
-       NEU . NEU_135*NEU_143
-       OAS . OAS_144*OAS_157
-       REF . REF_158*REF_166
+       IND . IND_61*IND_67
+       JPN . JPN_68*JPN_69
+       LAM . LAM_70*LAM_100
+       MEA . MEA_101*MEA_132
+       NEU . NEU_133*NEU_142
+       OAS . OAS_143*OAS_156
+       REF . REF_157*REF_166
        SSA . SSA_167*SSA_191
        USA . USA_192*USA_200
       /
