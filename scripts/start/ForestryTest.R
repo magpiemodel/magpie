@@ -18,7 +18,7 @@ source("config/default.cfg")
 cfg$developer_mode <- TRUE
 
 ## Fine names of input data
-cfg$input <- c("magpie4.1_default_apr19.tgz","additional_data_rev3.68.tgz","isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz","private_forestry_dec18_20190918.tgz")
+cfg$input <- c("magpie4.1_default_apr19.tgz","additional_data_rev3.68.tgz","isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz","private_forestry_dec18_20190923.tgz")
 
 ## Location of input data
 cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL,"/p/projects/landuse/users/mishra/additional_data_private_forestry"=NULL), getOption("magpie_repos"))
