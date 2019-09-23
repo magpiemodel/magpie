@@ -5,5 +5,5 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-v41_AEI.fx(j) = f41_irrig(j);
+v41_AEI.fx(j)    = f41_irrig_luh(t,j);
 vm_cost_AEI.fx(i) = 0;

@@ -6,8 +6,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @equations
-  
- q41_area_irrig(j2) .. 
+
+ q41_area_irrig(j2) ..
  sum(kcr, vm_area(j2,kcr,"irrigated")) =l= v41_AEI(j2);
 
 *' This realization assures that irrigated crop production can only take place where
