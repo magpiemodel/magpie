@@ -13,3 +13,13 @@ $include "./modules/41_area_equipped_for_irrigation/input/avl_irrig.cs2"
 $offdelim
 /
 ;
+
+parameters
+f41_irrig_luh(t_all,j) Available area equipped for irrigation [AVL] (mio. ha)
+/
+$ondelim
+$include "./modules/41_area_equipped_for_irrigation/input/avl_irrig_luh_t.cs2"
+$offdelim
+/
+;
+m_fillmissingyears(f41_irrig_luh,"j");

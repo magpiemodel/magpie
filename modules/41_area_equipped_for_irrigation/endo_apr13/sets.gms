@@ -5,6 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-pc41_AEI_start(j)=f41_irrig_luh("y1995",j);
-
-p41_cost_AEI_past(t,i) = 0;
+sets
+  t_ini41  Time periods with area equipped for irrigation initialization data
+       / y1995, y2000, y2005, y2010 /
+;

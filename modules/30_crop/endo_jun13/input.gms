@@ -5,6 +5,11 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+$setglobal c30_bioen_type  all
+* options: begr, betr, all
+
+$setglobal c30_bioen_water  rainfed
+* options: rainfed, irrigated, all
 
 ********* CROPAREA INITIALISATION **********************************************
 

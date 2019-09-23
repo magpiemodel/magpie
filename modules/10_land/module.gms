@@ -12,7 +12,7 @@
 *' between two time steps of optimization given the recursive dynamic structure of
 *' MAgPIE model.
 
-*' @authors Jan Philipp Dietrich
+*' @authors Jan Philipp Dietrich, Florian Humpenoeder, Kristine Karstens
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%land%" == "feb15" $include "./modules/10_land/feb15/realization.gms"
