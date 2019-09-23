@@ -20,7 +20,7 @@
   q27_prod_timber_forestry(j2,kforestry)..
     v27_prod_timber(j2,"plantations",kforestry)
     =e=
-    vm_prod_cell_forestry(j2,kforestry) + vm_prod_heaven_timber(j2,kforestry)
+    vm_prod_cell_forestry(j2,kforestry) 
     ;
 
 *' The part timber production coming from harvesting of highly managed plantation forests

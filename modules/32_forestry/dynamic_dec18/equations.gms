@@ -128,7 +128,7 @@ q32_cost_harvest(i2)..
 q32_prod_forestry(j2,kforestry)..
                           vm_prod_cell_forestry(j2,kforestry)
                           =e=
-                         sum((ac_sub,ct,mgmt_type), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type) * p32_yield_forestry_ac(j2,ac_sub,mgmt_type));
+                         sum((ac_sub,ct,mgmt_type), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type) * p32_yield_forestry_ac(j2,ac_sub,mgmt_type)) + vm_prod_heaven_timber(j2,kforestry);
 
 ***AREA
 
