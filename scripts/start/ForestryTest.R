@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "NoExtrCostProd"
+flag_run <- "free"
 
 library(lucode)
 source("scripts/start_functions.R")
