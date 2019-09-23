@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "OnlyWoodFuture"
+flag_run <- "NoExtrCostProd"
 
 library(lucode)
 source("scripts/start_functions.R")

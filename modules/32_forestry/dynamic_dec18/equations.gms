@@ -20,8 +20,6 @@ q32_cost_total(i2) .. vm_cost_fore(i2) =e=
 								   + v32_cost_recur(i2)
 								   + v32_cost_establishment(i2)
                    + v32_high_mgmt_prod_cost(i2)
-                   + sum(cell(i2,j2), vm_prod_cell_forestry(j2,"wood") * 200)
-                   + sum(cell(i2,j2), vm_prod_cell_forestry(j2,"woodfuel") * 100)
 								   ;
 
 *****C-PRICE INDUCED AFFORESTATION
@@ -143,15 +141,17 @@ q32_hvarea_forestry(j2,ac_sub) ..
  q32_management_incr_cost(i2) ..
                               v32_high_mgmt_prod_cost(i2)
                               =e=
-                              sum((cell(i2,j2),kforestry,ac_sub), v32_hvarea_forestry(j2,kforestry,ac_sub,"high") * p32_yield_forestry_ac(j2,ac_sub,"high")) * 10e6
+                              sum((cell(i2,j2),kforestry,ac_sub), v32_hvarea_forestry(j2,kforestry,ac_sub,"high") * p32_yield_forestry_ac(j2,ac_sub,"high")) * 10e4
                               ;
 
 *********************************************************
 
 q32_prod_future(i2) ..
-              sum((cell(i2,j2)), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
+              sum((cell(i2,j2)), v32_land(j2,"plant","ac0")
+*              * pc32_yield_forestry_future(j2)
+              )
               =g=
-              sum(ct, fm_forestry_demand(ct,i2,"wood")) * 0.33
+              sum((cell(i2,j2),ac_sub,kforestry),v32_hvarea_forestry(j2,kforestry,ac_sub,"normal"))
 *              sum(kforestry, vm_prod_future_reg_ff(i2,kforestry)) * pcm_production_ratio_future(i2)
               ;
 
