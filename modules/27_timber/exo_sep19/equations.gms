@@ -10,28 +10,12 @@
   q27_prod_timber(j2,kforestry)..
     vm_prod(j2,kforestry)
     =e=
-    sum(timber_source,v27_prod_timber(j2,timber_source,kforestry))
+    vm_prod_cell_forestry(j2,kforestry) + vm_prod_cell_natveg(j2,kforestry)
     ;
 
 *' The equation above describes production of a MAgPIE timber commodity `vm_prod_timber`
 *' as the cluster level production for `vm_prod` for timber. `vm_prod_timber` can be
 *' produced from either highly managed plantation foorests or natural forests.
-
-  q27_prod_timber_forestry(j2,kforestry)..
-    v27_prod_timber(j2,"plantations",kforestry)
-    =e=
-    vm_prod_cell_forestry(j2,kforestry) 
-    ;
-
-*' The part timber production coming from harvesting of highly managed plantation forests
-*' is calculated in [32_forestry] module.
-
-  q27_prod_timber_natveg(j2,kforestry)..
-    v27_prod_timber(j2,"natural_forest",kforestry)
-    =e=
-    vm_prod_cell_natveg(j2,kforestry)
-    ;
-
 *' The part timber production coming from harvesting of natural forests is calculated
 *' in [35_natveg] module.
 
