@@ -8,9 +8,9 @@
 *' @code Timber production is fixed to 0 in case the model is run without
 *' dynamic forestry turned on.
 
-vm_prod.fx(j,kforestry) = 0;
+*vm_prod.fx(j,kforestry) = 0;
 
 *' Wood demand is set to zero because forestry is not modeled in this realization.
-vm_supply.fx(i2,kforestry) = 0;
+*vm_supply.fx(i2,kforestry) = 0;
 
 *' @stop

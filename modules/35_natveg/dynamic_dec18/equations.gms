@@ -142,3 +142,9 @@ q35_prod_cell_natveg(j2,kforestry)..
                           =e=
                           sum(land_natveg,v35_prod(j2,land_natveg,kforestry))
                           ;
+
+q35_prod_natveg_glo..
+                          sum((j2,kforestry),vm_prod_cell_natveg(j2,kforestry))
+                          =g=
+                          sum((j2,kforestry),vm_prod(j2,kforestry)) * 0.4
+                          ;
