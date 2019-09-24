@@ -30,16 +30,29 @@ i14_lpj_yields_hist("y1995",i,knbe14) = (sum((cell(i,j),w), fm_croparea("y1995",
 																      	     sum(cell(i,j), i14_croparea_total("y1995",j)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14))=0);
 
 loop(t, if(sum(sameas(t,"y1995"),1)=1,
-			    i14_lambda_yields(t,i,knbe14) = 1$((not s14_limit_calib) or (f14_regions_yields(t,i,knbe14) <= i14_lpj_yields_hist(t,i,knbe14)))
-																			  + sqrt(i14_lpj_yields_hist(t,i,knbe14)/f14_regions_yields(t,i,knbe14))$
-																			    ((s14_limit_calib) and (f14_regions_yields(t,i,knbe14) > i14_lpj_yields_hist(t,i,knbe14)));
+
+          if ((s14_limit_calib = 0),
+			      i14_lambda_yields(t,i,knbe14) = 1;
+
+					Elseif (s14_limit_calib =1 )
+
+             if ((f14_regions_yields(t,i,knbe14) <= i14_lpj_yields_hist(t,i,knbe14)),
+                 i14_lambda_yields(t,i,knbe14) = 1;
+             Else
+						     i14_lambda_yields(t,i,knbe14) =	sqrt(i14_lpj_yields_hist(t,i,knbe14)/f14_regions_yields(t,i,knbe14));
+             );
+           );
+
+           i14_regions_yields(t,i,knbe14) = f14_regions_yields(t,i,knbe14);
+
 		    Else
 		      i14_lpj_yields_hist(t,i,knbe14) = i14_lpj_yields_hist(t-1,i,knbe14);
+          i14_regions_yields(t,i,knbe14)  = i14_regions_yields(t-1,i,knbe14);
 		    	i14_lambda_yields(t,i,knbe14)   = i14_lambda_yields(t-1,i,knbe14);
 		);
 );
 
-i14_managementcalib(t,j,knbe14,w) = 1 + (sum(cell(i,j), f14_regions_yields(t,i,knbe14) - i14_lpj_yields_hist(t,i,knbe14)) / f14_yields(t,j,knbe14,w) *
+i14_managementcalib(t,j,knbe14,w) = 1 + (sum(cell(i,j), i14_regions_yields(t,i,knbe14) - i14_lpj_yields_hist(t,i,knbe14)) / f14_yields(t,j,knbe14,w) *
                                         (f14_yields(t,j,knbe14,w) / sum(cell(i,j),i14_lpj_yields_hist(t,i,knbe14))) ** sum(cell(i,j),i14_lambda_yields(t,i,knbe14)))$
 																			  (f14_yields(t,j,knbe14,w)>0);
 

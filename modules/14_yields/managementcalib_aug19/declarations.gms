@@ -11,6 +11,7 @@ parameters
  p14_pyield_corr(t,i)            Regional pasture management correction for historical time steps (1)
  i14_croparea_total(t,j)         Cellular water type specific cropareas (mio. ha)
  i14_lpj_yields_hist(t,i,kcr)    Biophysical input yields average over region and water supply type at the historical reference year (tDM per ha per yr)
+ i14_regions_yields(t,i,kcr)     FAO yields per region (tDM per ha per yr)
  i14_lambda_yields(t,i,kcr)      Scaling factor for non-linear management calibration (1)
  i14_managementcalib(t,j,kcr,w)  Regional management calibration factor accounting for FAO yield levels (1)
 ;
