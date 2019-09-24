@@ -7,11 +7,10 @@
 
 *' @equations
 
-  q27_prod_timber(i2,kforestry)..
-    sum(cell(i2,j2),vm_prod(j2,kforestry))
-    =e=
-    sum(cell(i2,j2),vm_prod_cell_forestry(j2,kforestry) + vm_prod_cell_natveg(j2,kforestry))
-    ;
+  q27_prod_timber(j2,kforestry)..
+    vm_prod_cell_natveg(j2,kforestry)
+    =g=
+    vm_prod(j2,kforestry) - vm_prod_cell_forestry(j2,kforestry);
 
 *' The equation above describes production of a MAgPIE timber commodity `vm_prod_timber`
 *' as the cluster level production for `vm_prod` for timber. `vm_prod_timber` can be
