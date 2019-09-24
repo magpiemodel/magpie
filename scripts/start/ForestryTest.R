@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "cell_prod"
+flag_run <- "exo_ratio"
 
 library(lucode)
 source("scripts/start_functions.R")
