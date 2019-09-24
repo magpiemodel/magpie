@@ -9,6 +9,8 @@
 
   q27_prod_timber(j2,kforestry)..
     vm_prod_cell_natveg(j2,kforestry) + vm_prod_cell_forestry(j2,kforestry)
+*    +
+*    vm_prod_heaven_timber(j2,kforestry)
     =e=
     vm_prod(j2,kforestry)
     ;
