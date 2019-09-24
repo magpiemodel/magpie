@@ -11,24 +11,13 @@
     vm_prod(j2,kforestry)
     =e=
     vm_prod_cell_natveg(j2,kforestry) + vm_prod_cell_forestry(j2,kforestry)
+*    + vm_prod_heaven_timber(j2,kforestry)
     ;
 
   q27_prod_timber_reg(i2,kforestry)..
     vm_prod_reg(i2,kforestry)
     =e=
-    sum(cell(i2,j2),vm_prod(j2,kforestry)) + vm_prod_heaven_timber(i2,kforestry)
-    ;
-
-  q27_prod_forestry_ratio..
-    sum((j2,kforestry),vm_prod_cell_forestry(j2,kforestry))
-    =g=
-    sum((j2,kforestry),vm_prod(j2,kforestry)) * 0.33
-    ;
-
-  q27_prod_natveg_ratio..
-    sum((j2,kforestry),vm_prod_cell_natveg(j2,kforestry))
-    =l=
-    sum((j2,kforestry),vm_prod(j2,kforestry)) * 0.90
+    sum(cell(i2,j2),vm_prod(j2,kforestry))
     ;
 
 *' The equation above describes production of a MAgPIE timber commodity `vm_prod_timber`

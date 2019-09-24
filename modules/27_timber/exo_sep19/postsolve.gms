@@ -6,26 +6,14 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
- ov_prod_heaven_timber(t,i,kforestry,"marginal") = vm_prod_heaven_timber.m(i,kforestry);
- oq27_prod_timber(t,j,kforestry,"marginal")      = q27_prod_timber.m(j,kforestry);
- oq27_prod_timber_reg(t,i,kforestry,"marginal")  = q27_prod_timber_reg.m(i,kforestry);
- oq27_prod_forestry_ratio(t,"marginal")          = q27_prod_forestry_ratio.m;
- oq27_prod_natveg_ratio(t,"marginal")            = q27_prod_natveg_ratio.m;
- ov_prod_heaven_timber(t,i,kforestry,"level")    = vm_prod_heaven_timber.l(i,kforestry);
- oq27_prod_timber(t,j,kforestry,"level")         = q27_prod_timber.l(j,kforestry);
- oq27_prod_timber_reg(t,i,kforestry,"level")     = q27_prod_timber_reg.l(i,kforestry);
- oq27_prod_forestry_ratio(t,"level")             = q27_prod_forestry_ratio.l;
- oq27_prod_natveg_ratio(t,"level")               = q27_prod_natveg_ratio.l;
- ov_prod_heaven_timber(t,i,kforestry,"upper")    = vm_prod_heaven_timber.up(i,kforestry);
- oq27_prod_timber(t,j,kforestry,"upper")         = q27_prod_timber.up(j,kforestry);
- oq27_prod_timber_reg(t,i,kforestry,"upper")     = q27_prod_timber_reg.up(i,kforestry);
- oq27_prod_forestry_ratio(t,"upper")             = q27_prod_forestry_ratio.up;
- oq27_prod_natveg_ratio(t,"upper")               = q27_prod_natveg_ratio.up;
- ov_prod_heaven_timber(t,i,kforestry,"lower")    = vm_prod_heaven_timber.lo(i,kforestry);
- oq27_prod_timber(t,j,kforestry,"lower")         = q27_prod_timber.lo(j,kforestry);
- oq27_prod_timber_reg(t,i,kforestry,"lower")     = q27_prod_timber_reg.lo(i,kforestry);
- oq27_prod_forestry_ratio(t,"lower")             = q27_prod_forestry_ratio.lo;
- oq27_prod_natveg_ratio(t,"lower")               = q27_prod_natveg_ratio.lo;
+ oq27_prod_timber(t,j,kforestry,"marginal")     = q27_prod_timber.m(j,kforestry);
+ oq27_prod_timber_reg(t,i,kforestry,"marginal") = q27_prod_timber_reg.m(i,kforestry);
+ oq27_prod_timber(t,j,kforestry,"level")        = q27_prod_timber.l(j,kforestry);
+ oq27_prod_timber_reg(t,i,kforestry,"level")    = q27_prod_timber_reg.l(i,kforestry);
+ oq27_prod_timber(t,j,kforestry,"upper")        = q27_prod_timber.up(j,kforestry);
+ oq27_prod_timber_reg(t,i,kforestry,"upper")    = q27_prod_timber_reg.up(i,kforestry);
+ oq27_prod_timber(t,j,kforestry,"lower")        = q27_prod_timber.lo(j,kforestry);
+ oq27_prod_timber_reg(t,i,kforestry,"lower")    = q27_prod_timber_reg.lo(i,kforestry);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
 
 *** EOF postsolve.gms ***

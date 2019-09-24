@@ -11,14 +11,11 @@ i21_trade_bal_reduction(t_all,k_hardtrade21)=f21_trade_bal_reduction(t_all,"hard
 
 i21_trade_margin(i2,k_trade) = f21_trade_margin(i2,k_trade);
 
-*i21_trade_margin(i,"wood") = f21_trade_margin(i,"potato");
-*i21_trade_margin(i,"woodfuel") = i21_trade_margin(i,"wood") * 0.5;
+i21_trade_margin(i,"wood") = f21_trade_margin(i,"potato");
+i21_trade_margin(i,"woodfuel") = i21_trade_margin(i,"wood") * 0.5;
 
 if ((s21_trade_tariff=1),
     i21_trade_tariff(i2,k_trade) = f21_trade_tariff(i2,k_trade);
 elseif (s21_trade_tariff=0),
     i21_trade_tariff(i2,k_trade) = 0;
 );
-
-f21_self_suff(t_all,"USA","wood") = 1;
-f21_exp_shr(t_all,"USA","wood") = 0;
