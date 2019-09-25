@@ -47,9 +47,6 @@ cfg$output <- c("rds_report")
 ## Using optfile
 cfg$gms$s80_optfile <- 1
 
-## CO2 price runs
-co2_price_scenarios <- c("R2M41-SSP2-NPi")
-
 ## What outputs to generate
 cfg$output <- c("rds_report")
 
@@ -59,29 +56,39 @@ cfg$gms$s15_convergence <- 0.005
 ## Should recalibration be made
 cfg$recalibrate <- "ifneeded"
 
-for(climate_impacts in c(FALSE)){
+## Setting up runs
 
-	if(climate_impacts){
-		cfg <- setScenario(cfg, "cc")
-		cc_flag = "CC"
-	} else {cc_flag = "nCC"}
+## Loop over mitigation-co2 prices
+for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300" )){
 
-	cfg$gms$c56_pollutant_prices <- co2_price_scenarios	# def = "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
-	cfg$gms$c60_2ndgen_biodem <- co2_price_scenarios		# same as co2 price scenario from mag4.1
+	## Loop over climate impacts
+	for(climate_impacts in c(FALSE,TRUE)){
+		if(climate_impacts){
+			cfg <- setScenario(cfg, "cc")
+			cc_flag = "CC"
+		} else {cc_flag = "noCC"}
 
-	for(ts_test in c("5year")){
-		cfg$gms$c_timesteps = ts_test
-		for (sl_set in c(0.05)) {
-			if(sl_set == 0.05) sl_name = "SL"
-			if(sl_set == 1.00) sl_name = "ClC"
+		## Set 2nd gen bioenergy demand and pollutant prices
+		cfg$gms$c56_pollutant_prices <- co2_price_scenarios
+		cfg$gms$c60_2ndgen_biodem <- co2_price_scenarios		# same as co2 price scenario from mag4.1
+
+		## Set time step length
+		cfg$gms$c_timesteps = "5year"
+
+		## Set clear cutting or selective logging flag
+		for (sl_set in c(0.05,1.00)) {
+			if(sl_set == 0.05) logging = "SelectiveLog"
+			if(sl_set == 1.00) logging = "ClearCut"
 			cfg$gms$s35_selective_logging_flag = sl_set
 
-			if(cfg$gms$c56_pollutant_prices == "SSP2-26-SPA2-V15-REMIND-MAGPIE" ) {
-				cfg$title<- paste0(cfg$gms$c_timesteps,"_",sl_name,"_","_CO2prices","_",cc_flag,"_",flag_run)
+			if(cfg$gms$c56_pollutant_prices == "R2M41-SSP2-Budg1300" ) {
+#				cfg$title<- paste0(cfg$gms$c_timesteps,"_",logging,"_","_CO2prices","_",cc_flag,"_",flag_run)
+				cfg$title<- paste0(logging,"_","Mitig-CO2prices","_",cc_flag)
 			} else {
-				cfg$title<- paste0(cfg$gms$c_timesteps,"_",sl_name,"_",cc_flag,"_",flag_run)
+#				cfg$title<- paste0(cfg$gms$c_timesteps,"_",logging,"_",cc_flag,"_",flag_run)
+				cfg$title<- paste0(logging,"_",cc_flag)
 			}
 			start_run(cfg=cfg,codeCheck=codeCheck)
 	 }
- }
+	}
 }
