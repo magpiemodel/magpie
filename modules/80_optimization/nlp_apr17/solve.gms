@@ -31,7 +31,7 @@ Tol_Feas_Min = 4.0e-8
 $offecho
 
 $onecho > conopt.opt
-RTOBJL = 1.0e-5
+RTOBJL = 3.0e-6
 RTNWMI = 4.0e-8
 $offecho
 
