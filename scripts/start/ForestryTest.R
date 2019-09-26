@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "noTrade"
+flag_run <- "noHeaven"
 
 library(lucode)
 source("scripts/start_functions.R")
