@@ -56,7 +56,7 @@ equations
  q35_prod_other(j)                Woodfuel production from other land (mio. m3)
  q35_prod_cell_natveg(j,kforestry)  xx
 * q35_prod_natveg(j,kforestry)       xx
- q35_prod_natveg_glo                xx
+* q35_prod_natveg_glo                xx
 ;
 
 positive variables
@@ -113,6 +113,5 @@ parameters
  oq35_prod_primforest(t,j,kforestry,type)          xx
  oq35_prod_other(t,j,type)                         Woodfuel production from other land (mio. m3)
  oq35_prod_cell_natveg(t,j,kforestry,type)         xx
- oq35_prod_natveg_glo(t,type)                      xx
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

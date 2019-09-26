@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "off27"
+flag_run <- "clearcut_default"
 
 library(lucode)
 source("scripts/start_functions.R")
@@ -59,10 +59,11 @@ cfg$recalibrate <- "ifneeded"
 ## Setting up runs
 
 ## Loop over mitigation-co2 prices
-for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300" )){
+#for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300" )){
+for(co2_price_scenarios in c("R2M41-SSP2-NPi")){
 
 	## Loop over climate impacts
-	for(climate_impacts in c(FALSE,TRUE)){
+	for(climate_impacts in c(FALSE)){
 		if(climate_impacts){
 			cfg <- setScenario(cfg, "cc")
 			cc_flag = "CC"
@@ -76,19 +77,19 @@ for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300" )){
 		cfg$gms$c_timesteps = "5year"
 
 		## Set clear cutting or selective logging flag
-		for (sl_set in c(0.05,1.00)) {
-			if(sl_set == 0.05) logging = "SelectiveLog"
-			if(sl_set == 1.00) logging = "ClearCut"
+		#for (sl_set in c(0.05,1.00)) {
+		#	if(sl_set == 0.05) logging = "SelectiveLog"
+		#	if(sl_set == 1.00) logging = "ClearCut"
 			cfg$gms$s35_selective_logging_flag = sl_set
 
 			if(cfg$gms$c56_pollutant_prices == "R2M41-SSP2-Budg1300" ) {
 #				cfg$title<- paste0(cfg$gms$c_timesteps,"_",logging,"_","_CO2prices","_",cc_flag,"_",flag_run)
-				cfg$title<- paste0(logging,"_","Mitig-CO2prices","_",cc_flag)
+				cfg$title<- paste0("Mitig-CO2prices","_",cc_flag,"-",flag_run)
 			} else {
 #				cfg$title<- paste0(cfg$gms$c_timesteps,"_",logging,"_",cc_flag,"_",flag_run)
-				cfg$title<- paste0(logging,"_",cc_flag)
+				cfg$title<- paste0(cc_flag,"-",flag_run)
 			}
 			start_run(cfg=cfg,codeCheck=codeCheck)
-	 }
+	 #}
 	}
 }
