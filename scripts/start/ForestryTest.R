@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "wf_0p5"
+flag_run <- "wf_0p5_lowSS-JPNMEA"
 
 library(lucode)
 source("scripts/start_functions.R")
