@@ -80,7 +80,7 @@ for(co2_price_scenarios in c("R2M41-SSP2-NPi")){
 		#for (sl_set in c(0.05,1.00)) {
 		#	if(sl_set == 0.05) logging = "SelectiveLog"
 		#	if(sl_set == 1.00) logging = "ClearCut"
-			cfg$gms$s35_selective_logging_flag = sl_set
+		#	cfg$gms$s35_selective_logging_flag = sl_set
 
 			if(cfg$gms$c56_pollutant_prices == "R2M41-SSP2-Budg1300" ) {
 #				cfg$title<- paste0(cfg$gms$c_timesteps,"_",logging,"_","_CO2prices","_",cc_flag,"_",flag_run)
