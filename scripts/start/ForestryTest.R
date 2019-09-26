@@ -89,7 +89,7 @@ for(co2_price_scenarios in c("R2M41-SSP2-NPi")){
 				cfg$title<- paste0("Mitig-CO2prices","_",cc_flag,"-",flag_run)
 			} else {
 #				cfg$title<- paste0(cfg$gms$c_timesteps,"_",logging,"_",cc_flag,"_",flag_run)
-				cfg$title<- paste0(cfg$gms$c80_nlp_solver,"-",flag_run)
+				cfg$title<- paste0(flag_run,"-",cfg$gms$c80_nlp_solver)
 			}
 			start_run(cfg=cfg,codeCheck=codeCheck)
 	 #}
