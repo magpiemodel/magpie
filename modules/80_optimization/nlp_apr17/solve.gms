@@ -45,7 +45,7 @@ repeat(
       solve magpie USING nlp MINIMIZING vm_cost_glo;
       option nlp = conopt4;
     );
-$ontext
+
     if((magpie.modelstat = 4 and s80_forestry_counter <= 1),
       display "WARNING: Modelstat 4, SOLPRINT SET TO 1.";
       magpie.solprint  = 1 ;
@@ -53,14 +53,6 @@ $ontext
 
     if((magpie.modelstat = 4 and s80_forestry_counter > 1),
       abort "Forestry run failed. Check lst file for more details!";
-    );
-$offtext
-
-    if((magpie.modelstat = 4),
-      display "WARNING: CONOPT4 Terminated | retry with CONOPT3!";
-      option nlp = conopt;
-      solve magpie USING nlp MINIMIZING vm_cost_glo;
-      option nlp = conopt4;
     );
 
   p80_modelstat(t) = magpie.modelstat;
