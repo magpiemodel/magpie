@@ -19,3 +19,5 @@ if ((s21_trade_tariff=1),
 elseif (s21_trade_tariff=0),
     i21_trade_tariff(i2,k_trade) = 0;
 );
+
+f21_self_suff(t_all,"MEA",kforestry) = 0.5;

@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "clearcut_default"
+flag_run <- "wf_0p5"
 
 library(lucode)
 source("scripts/start_functions.R")
