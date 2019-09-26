@@ -37,6 +37,7 @@ cfg$gms$trade <- "selfsuff_reduced"
 cfg$gms$forestry  <- "dynamic_dec18"
 cfg$gms$natveg  <- "dynamic_dec18"
 cfg$gms$optimization <- "nlp_apr17"
+cfg$gms$land <- "feb15"
 
 #ALERT:  At the moment this script cannot download new data in case the input files are changed. Has to be set to true.
 cfg$force_download <- FALSE

@@ -54,8 +54,7 @@ pcm_land(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 
 ** Release bounds for ALL Age classes before we make brptection of harvest "indication" decisions
 v32_land.lo(j,"plant",ac) = 0;
-*v32_land.up(j,"plant",ac) = Inf;
-v32_land.up(j,"plant",ac) = 50;
+v32_land.up(j,"plant",ac) = Inf;
 
 *fix land with rotation length
 v32_land.fx(j,"plant",ac_sub)$protect32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
