@@ -32,7 +32,6 @@ $offecho
 
 $onecho > conopt.opt
 RTOBJL = 3.0e-6
-RTNWMI = 4.0e-8
 $offecho
 
 repeat(
