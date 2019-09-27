@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "noHeaven-NoHigh-OLDland"
+flag_run <- "noHeaven-OLDland"
 
 library(lucode)
 source("scripts/start_functions.R")
@@ -92,7 +92,7 @@ for(sector_test in c("dynamic_oct19","dynamic_dec18")){
 					cfg$title<- paste0("Mitig-CO2prices","_",cc_flag,"-",flag_run)
 				} else {
 	#				cfg$title<- paste0(cfg$gms$c_timesteps,"_",logging,"_",cc_flag,"_",flag_run)
-					cfg$title<- paste0(flag_run,"-",cfg$gms$c80_nlp_solver,"-",cfg$gms$c21_trade_liberalization)
+					cfg$title<- paste0(flag_run,"-",sector_test)
 				}
 				start_run(cfg=cfg,codeCheck=codeCheck)
 		 #}
