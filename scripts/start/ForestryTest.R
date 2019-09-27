@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "noHeaven-OLDland"
+flag_run <- "noHeaven-OLDland-LOWwf"
 
 library(lucode)
 source("scripts/start_functions.R")
