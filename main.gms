@@ -191,7 +191,7 @@ $setglobal timber  exo_sep19
 
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
-$setglobal forestry  dynamic_dec18
+$setglobal forestry  dynamic_oct19
 $setglobal urban  static
 $setglobal natveg  dynamic_dec18
 
