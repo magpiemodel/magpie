@@ -14,3 +14,7 @@
 *vm_supply.fx(i2,kforestry) = 0;
 
 *' @stop
+
+vm_prod_cell_forestry.fx(j,kforestry) = 0;
+vm_prod_cell_natveg(j,kforestry) = 0;
+vm_prod.fx(j,kforestry) = 0;

@@ -28,12 +28,12 @@ positive variables
  v21_excess_prod(i,k_trade)              Regional excess production (mio. tDM per yr)
  vm_cost_trade(i)                        Regional  trade costs (mio. USD05MER per yr)
  v21_cost_trade_reg(i,k_trade)           Regional trade costs for each tradable commodity (mio. USD05MER per yr)
- vm_prod_future_reg_ff(i,kforestry)     Future production of timber based (mio. m3)
+ v21_prod_future_reg_ff(i,kforestry)     Future production of timber based (mio. m3)
  v21_excess_prod_ff(i,kforestry)        Excess future production of timber (mio. m3)
  v21_excess_dem_ff(kforestry)            Excess future demand of timber (mio. m3)
  v21_excess_prod_ff(i,kforestry)        Excess future production of timber (mio. m3)
  v21_cost_trade_reg_ff(i,kforestry)     Future trade costs for timber (mio. USD)
- vm_cost_trade_forestry_ff(i)           Future total timber trade costs (mio. USD)
+ v21_cost_trade_forestry_ff(i)           Future total timber trade costs (mio. USD)
 ;
 
 equations

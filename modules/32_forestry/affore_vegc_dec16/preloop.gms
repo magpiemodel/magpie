@@ -20,7 +20,7 @@ pm_production_ratio_ext(i,t_ext) = 0;
 pc32_rot_length(i) = 0;
 
 * Fix future trade related variables to 0
-vm_prod_future_reg_ff.fx(i2,kforestry) = 0;
+*vm_prod_future_reg_ff.fx(i2,kforestry) = 0;
 
 * Set cellular forestry production to 0
 vm_prod_cell_forestry.fx(j,kforestry) = 0;

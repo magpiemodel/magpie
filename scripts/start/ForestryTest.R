@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "noHeaven"
+flag_run <- "noHeaven-NoHigh"
 
 library(lucode)
 source("scripts/start_functions.R")
@@ -37,7 +37,7 @@ cfg$gms$trade <- "selfsuff_reduced"
 cfg$gms$forestry  <- "dynamic_oct19"
 cfg$gms$natveg  <- "dynamic_dec18"
 cfg$gms$optimization <- "nlp_apr17"
-cfg$gms$land <- "feb15"
+cfg$gms$land <- "landmatrix_dec18"
 cfg$gms$c80_nlp_solver <- "conopt4"
 
 #ALERT:  At the moment this script cannot download new data in case the input files are changed. Has to be set to true.
