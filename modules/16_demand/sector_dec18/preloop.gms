@@ -27,6 +27,7 @@ fm_forestry_demand(t,i,kforestry) = fm_forestry_demand("y1995",i,kforestry);
 $offtext
 
 f16_forestry_demand_REG(t_all,i,"woodfuel") = f16_forestry_demand_REG(t_all,i,"woodfuel") * 0.50;
+f16_forestry_demand_REG(t_all,"MEA",kforestry) = f16_forestry_demand_REG(t_all,"MEA",kforestry) * 0.25;  
 
 fm_forestry_demand(t_all,i,kforestry) = f16_forestry_demand_REG(t_all,i,kforestry);
 *fm_forestry_demand(t_all,i,"woodfuel") = f16_forestry_demand_REG(t_all,i,"woodfuel") * 0.5;
