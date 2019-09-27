@@ -34,13 +34,11 @@ loop(t, if(sum(sameas(t,"y1995"),1)=1,
           if ((s14_limit_calib = 0),
 			      i14_lambda_yields(t,i,knbe14) = 1;
 
-					Elseif (s14_limit_calib =1 )
+					Elseif (s14_limit_calib =1 ),
 
-             if ((f14_regions_yields(t,i,knbe14) <= i14_lpj_yields_hist(t,i,knbe14)),
-                 i14_lambda_yields(t,i,knbe14) = 1;
-             Else
-						     i14_lambda_yields(t,i,knbe14) =	sqrt(i14_lpj_yields_hist(t,i,knbe14)/f14_regions_yields(t,i,knbe14));
-             );
+            i14_lambda_yields(t,i,knbe14) = 1$(f14_regions_yields(t,i,knbe14) <= i14_lpj_yields_hist(t,i,knbe14))
+                                            + sqrt(i14_lpj_yields_hist(t,i,knbe14)/f14_regions_yields(t,i,knbe14))$
+                                               (f14_regions_yields(t,i,knbe14) > i14_lpj_yields_hist(t,i,knbe14));
            );
 
            i14_regions_yields(t,i,knbe14) = f14_regions_yields(t,i,knbe14);
