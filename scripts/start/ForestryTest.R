@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "noHeaven-OLDland-LOWwf"
+flag_run <- "INDhigh"
 
 library(lucode)
 source("scripts/start_functions.R")
@@ -60,8 +60,8 @@ cfg$recalibrate <- "ifneeded"
 
 ## Setting up runs
 
-
-for(sector_test in c("dynamic_oct19","dynamic_dec18")){
+#,"dynamic_dec18"
+for(sector_test in c("dynamic_oct19")){
 	cfg$gms$forestry  <- sector_test
 	## Loop over mitigation-co2 prices
 	#for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300" )){
