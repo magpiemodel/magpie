@@ -139,7 +139,7 @@ $title magpie
 *
 *
 *
-* Last modification (input data): Thu Sep 26 23:27:33 2019
+* Last modification (input data): Sat Sep 28 13:56:41 2019
 *
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -186,7 +186,7 @@ $setglobal production  flexreg_apr16
 $setglobal residues  flexreg_apr16
 $setglobal processing  substitution_dec18
 
-$setglobal trade  selfsuff_reduced
+$setglobal trade  selfsuff_reduced_ff
 $setglobal timber  exo_sep19
 
 $setglobal crop  endo_jun13

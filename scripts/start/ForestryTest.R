@@ -28,8 +28,8 @@ codeCheck <- FALSE
 
 #general settings
 cfg$results_folder <- "output/:title:"
-#cfg <- setScenario(cfg,c("SSP2","NPI"))
-cfg <- setScenario(cfg,c("SSP2","BASE"))
+cfg <- setScenario(cfg,c("SSP2","NPI"))
+#cfg <- setScenario(cfg,c("SSP2","BASE"))
 
 ## Module settings
 cfg$gms$demand <- "sector_dec18"
@@ -61,7 +61,7 @@ cfg$recalibrate <- "ifneeded"
 ## Setting up runs
 
 #,"dynamic_dec18"
-for(sector_test in c("dynamic_oct19")){
+for(sector_test in c("dynamic_oct19","dynamic_dec18")){
 	cfg$gms$forestry  <- sector_test
 	## Loop over mitigation-co2 prices
 	#for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300" )){

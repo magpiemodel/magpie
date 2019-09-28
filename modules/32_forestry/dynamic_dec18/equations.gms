@@ -98,14 +98,15 @@ q32_cost_establishment(i2)..
 						v32_cost_establishment(i2)
 						=e=
             (sum((cell(i2,j2),type32), v32_land(j2,type32,"ac0") * c32_reESTBcost)
-*standaloneTEST            +
-*standaloneTEST              (sum((ct,kforestry), vm_prod_future_reg_ff(i2,kforestry) * c32_harvesting_cost/((1+pm_interest(i2))**30))
-*standaloneTEST              +
-*standaloneTEST              sum((cell(i2,j2),ct,kforestry), f32_distance(j2) * f32_transport_costs(kforestry)) * sum(kforestry,vm_prod_future_reg_ff(i2,kforestry))
-*standaloneTEST              +
-*standaloneTEST              sum(ct,vm_cost_trade_forestry_ff(i2)/((1+pm_interest(i2))**30))
-*************************** ((1+pm_interest(i2))**p32_rot_length(ct,i2)) to calculate present value of future costs
-*standaloneTEST              )
+            +
+              (
+*             sum((ct,kforestry), vm_prod_future_reg_ff(i2,kforestry) * c32_harvesting_cost/((1+pm_interest(i2))**30))
+*              +
+              sum((cell(i2,j2),ct,kforestry), f32_distance(j2) * f32_transport_costs(kforestry)) * sum(kforestry,vm_prod_future_reg_ff(i2,kforestry))
+              +
+              sum(ct,vm_cost_trade_forestry_ff(i2)/((1+pm_interest(i2))**30))
+************ ((1+pm_interest(i2))**p32_rot_length(ct,i2)) to calculate present value of future costs
+              )
             )
             * (pm_interest(i2)/(1+pm_interest(i2)))
 *************************** (pm_interest(i2)/(1+pm_interest(i2))) to annuituze the values. Similar to averaging over time
@@ -128,8 +129,8 @@ q32_cost_harvest(i2)..
 q32_prod_future(i2) ..
               sum((cell(i2,j2)), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
               =g=
-              sum((ct,kforestry),fm_forestry_demand(ct,i2,kforestry)) * 0.33
-*              sum(kforestry, vm_prod_future_reg_ff(i2,kforestry)) * pcm_production_ratio_future(i2)
+*              sum((ct,kforestry),fm_forestry_demand(ct,i2,kforestry)) * 0.33
+              sum(kforestry, vm_prod_future_reg_ff(i2,kforestry)) * pcm_production_ratio_future(i2)
               ;
 
 *********************************************************

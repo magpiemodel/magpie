@@ -86,15 +86,26 @@ $endif
 * For instance, other natural land increases if agricultural land is abandoned.
 
 ** Setting bounds for only allowing 5% of available primf to be harvested (highest age class)
-*vm_land.lo(j,"primforest") = max((1-s35_selective_logging_flag) * vm_land.l(j,"primforest"), p35_save_primforest(t,j));
+** Allowing selective logging only after historical period
+if (sum(sameas(t_past,t),1) = 1,
 vm_land.lo(j,"primforest") = p35_save_primforest(t,j);
+else
+vm_land.lo(j,"primforest") = max((1-s35_selective_logging_flag) * vm_land.l(j,"primforest"), p35_save_primforest(t,j));
+);
+*vm_land.lo(j,"primforest") = max((1-s35_selective_logging_flag) * vm_land.l(j,"primforest"), p35_save_primforest(t,j));
+*vm_land.lo(j,"primforest") = p35_save_primforest(t,j);
 vm_land.up(j,"primforest") = vm_land.l(j,"primforest");
 m_boundfix(vm_land,(j,"primforest"),l,10e-5);
 
 v35_secdforest.lo(j,ac_sub) = 0;
 ** Setting bounds for only allowing 5% of available primf to be harvested (highest age class)
-*v35_secdforest.lo(j,"acx") = max((1-s35_selective_logging_flag) * v35_secdforest.l(j,"acx"), p35_save_secdforest(t,j));
+if (sum(sameas(t_past,t),1) = 1,
 v35_secdforest.lo(j,"acx") = p35_save_secdforest(t,j);
+else
+v35_secdforest.lo(j,"acx") = max((1-s35_selective_logging_flag) * v35_secdforest.l(j,"acx"), p35_save_secdforest(t,j));
+);
+*v35_secdforest.lo(j,"acx") = max((1-s35_selective_logging_flag) * v35_secdforest.l(j,"acx"), p35_save_secdforest(t,j));
+*v35_secdforest.lo(j,"acx") = p35_save_secdforest(t,j);
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
 m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
 

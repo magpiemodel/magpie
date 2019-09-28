@@ -72,7 +72,7 @@
 ** FUTURE TRADE EQUATIONS (Analogous to trade module)
 
 q21_trade_reg_ff(i2,kforestry)..
-  v21_prod_future_reg_ff(i2,kforestry)
+  vm_prod_future_reg_ff(i2,kforestry)
   =g=
   (pc21_demand_forestry_future(i2,kforestry) + v21_excess_prod_ff(i2,kforestry))
   * pc21_trade_bal_reduction_future(kforestry)$(pc21_selfsuff_forestry_future(i2,kforestry) >= 1)
@@ -94,7 +94,7 @@ q21_excess_supply_ff(i2,kforestry)..
 q21_cost_trade_reg_ff(i2,kforestry)..
   v21_cost_trade_reg_ff(i2,kforestry)
   =g=
-  (i21_trade_margin_ff(i2,kforestry) + i21_trade_tariff_ff(i2,kforestry))*(v21_prod_future_reg_ff(i2,kforestry)-pc21_demand_forestry_future(i2,kforestry));
+  (i21_trade_margin_ff(i2,kforestry) + i21_trade_tariff_ff(i2,kforestry))*(vm_prod_future_reg_ff(i2,kforestry)-pc21_demand_forestry_future(i2,kforestry));
 
 q21_cost_trade_ff(i2)..
-  v21_cost_trade_forestry_ff(i2) =e= sum(kforestry,v21_cost_trade_reg_ff(i2,kforestry));
+  vm_cost_trade_forestry_ff(i2) =e= sum(kforestry,v21_cost_trade_reg_ff(i2,kforestry));

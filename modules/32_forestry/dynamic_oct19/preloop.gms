@@ -73,5 +73,5 @@ f32_forestry_management("USA") = 10;
 f32_forestry_management("IND") = 10;
 *p32_management_factor(j,mgmt_type) = sum(cell(i,j),f32_forestry_management(i));
 *p32_management_factor(j,"high") = p32_management_factor(j,"normal") * 2;
-p32_management_factor(j) = sum(cell(i,j),f32_forestry_management(i) * 2);
+p32_management_factor(j) = sum(cell(i,j),f32_forestry_management(i));
 **************************************************************************
