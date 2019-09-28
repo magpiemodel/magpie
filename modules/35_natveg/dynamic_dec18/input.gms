@@ -5,8 +5,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 $setglobal c35_protect_scenario  WDPA
-$setglobal c35_ad_policy  none
-$setglobal c35_aolc_policy  none
+$setglobal c35_ad_policy  npi
+$setglobal c35_aolc_policy  npi
 
 scalars
 s35_selective_logging_flag Flag for turning of selective logging in percentage. One equals clearcut   / 0.05 /
