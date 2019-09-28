@@ -5,7 +5,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 ** Setting kforestry self sufficiencies manually for some regions
-f21_self_suff(t_all,"MEA",kforestry) = 0.7;
+f21_self_suff(t_all,"MEA",kforestry) = 0.2;
+f21_exp_shr(t_all,"MEA",kforestry) = 0;
 
 i21_trade_bal_reduction(t_all,k_trade)=f21_trade_bal_reduction(t_all,"easytrade","%c21_trade_liberalization%");
 i21_trade_bal_reduction(t_all,k_hardtrade21)=f21_trade_bal_reduction(t_all,"hardtrade","%c21_trade_liberalization%");
