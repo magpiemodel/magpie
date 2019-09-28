@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "INDhigh"
+flag_run <- "20190928"
 
 library(lucode)
 source("scripts/start_functions.R")
