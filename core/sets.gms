@@ -149,6 +149,10 @@ sets time_annual Annual extended time steps
       y2095, y2100, y2105, y2110, y2115, y2120, y2125, y2130, y2135, y2140,
       y2145, y2150 /
 
+    t_future(t_all) 5-year time periods
+    / y2105, y2110, y2115, y2120, y2125, y2130, y2135, y2140,
+      y2145, y2150 /
+
     t_past(t_all) Timesteps with observed data
         / y1965, y1970, y1975,
          y1980, y1985, y1990,

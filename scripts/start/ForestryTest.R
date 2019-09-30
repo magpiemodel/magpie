@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "HardCodeFACTOR_ALL-FUT-ESTB"
+flag_run <- "RED-WF-IND"
 
 library(lucode)
 source("scripts/start_functions.R")
