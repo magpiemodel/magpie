@@ -38,7 +38,6 @@ cfg$gms$natveg  <- "dynamic_dec18"
 cfg$gms$optimization <- "nlp_apr17"
 cfg$gms$land <- "feb15"
 cfg$gms$c80_nlp_solver <- "conopt4"
-#cfg$gms$c21_trade_liberalization  <- "free2000"
 
 #ALERT:  At the moment this script cannot download new data in case the input files are changed. Has to be set to true.
 cfg$force_download <- FALSE
@@ -60,15 +59,16 @@ cfg$recalibrate <- "ifneeded"
 
 ## Setting up runs
 
-#,"dynamic_dec18"
 for(sector_test in c("dynamic_oct19","dynamic_dec18")){
 	cfg$gms$forestry  <- sector_test
+	if(sector_test == "dynamic_dec18") forestry_tc = "2FMgmt"
+	if(sector_test == "dynamic_oct19") forestry_tc = "1FMgmt"
 	## Loop over mitigation-co2 prices
-	#for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300" )){
-	for(co2_price_scenarios in c("R2M41-SSP2-NPi")){
+	for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300" )){
+#	for(co2_price_scenarios in c("R2M41-SSP2-NPi")){
 
 		## Loop over climate impacts
-		for(climate_impacts in c(FALSE)){
+		for(climate_impacts in c(FALSE,TRUE)){
 			if(climate_impacts){
 				cfg <- setScenario(cfg, "cc")
 				cc_flag = "CC"
@@ -82,20 +82,20 @@ for(sector_test in c("dynamic_oct19","dynamic_dec18")){
 			cfg$gms$c_timesteps = "5year"
 
 			## Set clear cutting or selective logging flag
-			#for (sl_set in c(0.05,1.00)) {
-			#	if(sl_set == 0.05) logging = "SelectiveLog"
-			#	if(sl_set == 1.00) logging = "ClearCut"
-			#	cfg$gms$s35_selective_logging_flag = sl_set
+			for (sl_set in c(0.05,1.00)) {
+				if(sl_set == 0.05) logging = "SelLog"
+				if(sl_set == 1.00) logging = "ClrCut"
+				cfg$gms$s35_selective_logging_flag = sl_set
 
 				if(cfg$gms$c56_pollutant_prices == "R2M41-SSP2-Budg1300" ) {
 	#				cfg$title<- paste0(cfg$gms$c_timesteps,"_",logging,"_","_CO2prices","_",cc_flag,"_",flag_run)
-					cfg$title<- paste0("Mitig-CO2prices","_",cc_flag,"-",flag_run)
+					cfg$title<- paste0(forestry_tc,"_",logging,"_",cc_flag,"_","Mitig-pCO2")
 				} else {
 	#				cfg$title<- paste0(cfg$gms$c_timesteps,"_",logging,"_",cc_flag,"_",flag_run)
-					cfg$title<- paste0(flag_run,"-",sector_test)
+					cfg$title<- paste0(forestry_tc,"_",logging,"_",cc_flag)
 				}
 				start_run(cfg=cfg,codeCheck=codeCheck)
-		 #}
+		 }
 		}
 	}
 }
