@@ -9,7 +9,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "RED-WF-IND"
+flag_run <- "BugFix-"
 
 library(lucode)
 source("scripts/start_functions.R")
