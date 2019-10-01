@@ -98,7 +98,7 @@ for(climate_impacts in c("nocc","cc")){
 				text3 <- paste("The run is based on LPJmL4 input. Climate change impact has been set to", climate_impacts)
 				text4 <- paste("Forestry management factors have been hardcoded.")
 
-				log_con <- file("/output/",cfg$title,"/run_info_forestry.txt", open="a")
+				log_con <- file("output/",cfg$title,"/run_info_forestry.txt", open="a")
 				cat(text1,text2,text3,text4, file = log_con, sep="\n")
 				close(log_con)
 				start_run(cfg=cfg,codeCheck=codeCheck)
