@@ -89,9 +89,11 @@ cfg$title <- "R2M41_SDP_emis_policy_nodef"
 cfg <- setScenario(cfg,c("SDP"))
 cfg$gms$c56_emis_policy <- "all"
 start_run(cfg,codeCheck=FALSE)
+#reset:
+cfg$gms$c56_emis_policy      <- "ssp_nosoil"
 
 
-#reset
+#reset run
 cfg$title <- "R2M41_SDP_reset"
 cfg <- setScenario(cfg,c("SDP"))
 start_run(cfg,codeCheck=FALSE)
