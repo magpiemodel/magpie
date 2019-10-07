@@ -46,55 +46,55 @@ buildInputVector <- function(base            = "magpie4.1_default_apr19.tgz",
   return(c(base,archive,madrat,validation,calibration,additional_data,patch))
 }
 
-cfg$input <- buildInputVector()
-cfg$gms$yields <- "managementcalib_aug19"
+#cfg$input <- buildInputVector()
+#cfg$gms$yields <- "managementcalib_aug19"
 
-cfg$recalibrate <- TRUE
-cfg$gms$s14_limit_calib <- 1
-cfg$title    <- "lpjml5_limited_calib"
-start_run(cfg=cfg,codeCheck=TRUE)
+#cfg$recalibrate <- TRUE
+#cfg$gms$s14_limit_calib <- 1
+#cfg$title    <- "lpjml5_limited_calib"
+#start_run(cfg=cfg,codeCheck=TRUE)
 
-cfg$recalibrate <- FALSE
+#cfg$recalibrate <- FALSE
 
-cfg$gms$s14_limit_calib <- 0
-cfg$title    <- "lpjml5_purerel_calib"
-start_run(cfg=cfg,codeCheck=TRUE)
+#cfg$gms$s14_limit_calib <- 0
+#cfg$title    <- "lpjml5_purerel_calib"
+#start_run(cfg=cfg,codeCheck=TRUE)
 
-cfg$gms$c21_trade_liberalization <- "l909595r809090"
-cfg$gms$s14_limit_calib <- 1
-cfg$title    <- "lpjml5_limited_calib_lessTrade"
-start_run(cfg=cfg,codeCheck=TRUE)
+#cfg$gms$c21_trade_liberalization <- "l909595r809090"
+#cfg$gms$s14_limit_calib <- 1
+#cfg$title    <- "lpjml5_limited_calib_lessTrade"
+#start_run(cfg=cfg,codeCheck=TRUE)
 
-cfg$gms$c21_trade_liberalization <- "l908080r807070"
-cfg$gms$s14_limit_calib <- 1
-cfg$title    <- "lpjml5_limited_calib_moreTrade"
-start_run(cfg=cfg,codeCheck=TRUE)
+#cfg$gms$c21_trade_liberalization <- "l908080r807070"
+#cfg$gms$s14_limit_calib <- 1
+#cfg$title    <- "lpjml5_limited_calib_moreTrade"
+#start_run(cfg=cfg,codeCheck=TRUE)
 
-cfg$gms$c21_trade_liberalization <- "l909090r808080"
+#cfg$gms$c21_trade_liberalization <- "l909090r808080"
 
 # CC
-cfg<-lucode::setScenario(cfg,"cc")
+#cfg<-lucode::setScenario(cfg,"cc")
 
-cfg$gms$s14_limit_calib <- 1
-cfg$title    <- "lpjml5_limited_calib_cc"
-start_run(cfg=cfg,codeCheck=TRUE)
+#cfg$gms$s14_limit_calib <- 1
+#cfg$title    <- "lpjml5_limited_calib_cc"
+#start_run(cfg=cfg,codeCheck=TRUE)
 
-cfg$gms$s14_limit_calib <- 0
-cfg$title    <- "lpjml5_purerel_calib_cc"
-start_run(cfg=cfg,codeCheck=TRUE)
+#cfg$gms$s14_limit_calib <- 0
+#cfg$title    <- "lpjml5_purerel_calib_cc"
+#start_run(cfg=cfg,codeCheck=TRUE)
 
-cfg$gms$c21_trade_liberalization <- "l909595r809090"
-cfg$gms$s14_limit_calib <- 1
-cfg$title    <- "lpjml5_limited_calib_cc_lessTrade"
-start_run(cfg=cfg,codeCheck=TRUE)
+#cfg$gms$c21_trade_liberalization <- "l909595r809090"
+#cfg$gms$s14_limit_calib <- 1
+#cfg$title    <- "lpjml5_limited_calib_cc_lessTrade"
+#start_run(cfg=cfg,codeCheck=TRUE)
 
-cfg$gms$c21_trade_liberalization <- "l908080r807070"
-cfg$gms$s14_limit_calib <- 1
-cfg$title    <- "lpjml5_limited_calib_cc_moreTrade"
-start_run(cfg=cfg,codeCheck=TRUE)
+#cfg$gms$c21_trade_liberalization <- "l908080r807070"
+#cfg$gms$s14_limit_calib <- 1
+#cfg$title    <- "lpjml5_limited_calib_cc_moreTrade"
+#start_run(cfg=cfg,codeCheck=TRUE)
 
-cfg$gms$c21_trade_liberalization <- "l909090r808080"
-cfg<-lucode::setScenario(cfg,"nocc")
+#cfg$gms$c21_trade_liberalization <- "l909090r808080"
+#cfg<-lucode::setScenario(cfg,"nocc")
 
 #################################
 ###### #          #      # ######

@@ -24,6 +24,3 @@ i14_yields(t,j,"pasture",w) = i14_yields(t,j,"pasture",w)*sum(cell(i,j),f14_yld_
 
 
 ***INITIALIZATION OF PARAMETERS FOR THE INITIAL TIME STEP**********************************
-
-
-

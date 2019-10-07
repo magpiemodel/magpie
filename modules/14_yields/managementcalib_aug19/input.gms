@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c14_yields_scenario  nocc
+$setglobal c14_yields_scenario  cc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
 
@@ -26,10 +26,12 @@ $offdelim
 $if "%c14_yields_scenario%" == "nocc" f14_yields(t_all,j,kve,w) = f14_yields("y1995",j,kve,w);
 m_fillmissingyears(f14_yields,"j,kve,w");
 
+
 table f14_pyld_hist(t_all,i) Modelled regional pasture yields in the past (tDM per ha per yr)
 $ondelim
 $include "./modules/14_yields/input/f14_pasture_yields_hist.csv"
 $offdelim;
+
 
 table f14_regions_yields(t_all,i,kcr) FAO yields per region (tDM per ha per yr)
 $ondelim
