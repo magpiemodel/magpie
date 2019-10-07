@@ -64,11 +64,10 @@ $offdelim
 /;
 
 table f32_forestry_management_moinput(i,forest_type) upscaling factor for forestry plantations
-/
 $ondelim
 $include "./modules/32_forestry/input/f32_forestry_management_moinput.csv"
 $offdelim
-/;
+;
 
 
 parameters
