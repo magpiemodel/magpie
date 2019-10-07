@@ -70,7 +70,7 @@ cfg <- setScenario(cfg,c("SDP","NDC"))
 getInput("/p/tmp/aloisdir/magpie/output/remind-coupled_SDP-Budg600_plus-mag-4/fulldata.gdx")
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "R2Mdev_SDP_coup_BudgBudg950"
+cfg$title <- "R2Mdev_SDP_coup_Budg950"
 cfg <- setScenario(cfg,c("SDP","NDC"))
 getInput("/p/tmp/aloisdir/magpie/output/remind-coupled_SDP-Budg950-mag-4/fulldata.gdx")
 start_run(cfg,codeCheck=FALSE)
