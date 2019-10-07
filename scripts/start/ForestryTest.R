@@ -9,7 +9,6 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-flag_run <- "R001-"
 library(lucode)
 source("scripts/start_functions.R")
 source("config/default.cfg")
@@ -55,6 +54,7 @@ cfg$recalibrate <- "ifneeded"
 
 ## Setting up runs
 
+flag_run <- "R002-"
 ## Loop over climate impacts
 for(climate_impacts in c("nocc")){
 	cfg <- setScenario(cfg, climate_impacts)
