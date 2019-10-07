@@ -33,6 +33,9 @@ sets
 
  ac_additional(ac) Subset of ac to account for longer than five year time steps
 
+ forest_type forest type
+ /plantations, natveg/
+
 ;
 
 alias(ac,ac2);
