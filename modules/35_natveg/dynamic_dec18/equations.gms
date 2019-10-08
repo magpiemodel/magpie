@@ -33,15 +33,16 @@
 
 *' NPI/NDC land protection policies are implemented as minium forest land and other land stock.
 
-$ontext
- q35_min_forest(j2) .. vm_land(j2,"primforest") + vm_land(j2,"secdforest") =g=
- 									sum(ct, p35_min_forest(ct,j2));
+ q35_min_forest(j2) .. vm_land(j2,"primforest") + vm_land(j2,"secdforest")
+                       =g=
+ 									     sum(ct, p35_min_forest(ct,j2));
 
  q35_min_other(j2) .. vm_land(j2,"other") =g= sum(ct, p35_min_other(ct,j2));
-$offtext
+
 *** Merging NPIs into one
- q35_min_natveg(j2) .. vm_land(j2,"primforest") + vm_land(j2,"secdforest") + vm_land(j2,"other")=g=
- 									sum(ct, p35_min_forest(ct,j2)) + sum(ct, p35_min_other(ct,j2));
+ q35_min_natveg(j2) .. vm_land(j2,"primforest") + vm_land(j2,"secdforest") + vm_land(j2,"other")
+                      =n=
+                      sum(ct, p35_min_forest(ct,j2)) + sum(ct, p35_min_other(ct,j2));
 
 *' The following technical calculations are needed for reducing differences in land-use patterns between time steps.
 *' The gross change in natural vegetation is calculated based on land expansion and
@@ -146,4 +147,11 @@ q35_prod_cell_natveg(j2,kforestry)..
                           vm_prod_cell_natveg(j2,kforestry)
                           =e=
                           sum(land_natveg,v35_prod(j2,land_natveg,kforestry))
+                          ;
+
+q35_secdforest_conversion(j2)..
+                          v35_secdforest(j2,"ac0")
+                          =n=
+                          sum((kforestry,ac_sub),v35_hvarea_secdforest(j2,kforestry,ac_sub))
+                        + sum(kforestry,v35_hvarea_primforest(j2,kforestry))
                           ;

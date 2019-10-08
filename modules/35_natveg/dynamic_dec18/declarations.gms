@@ -44,8 +44,8 @@ equations
  q35_other_reduction(j,ac)		   Other land reduction (mio. ha)
  q35_secdforest_reduction(j,ac)    Secdforest reduction (mio. ha)
  q35_primforest_reduction(j)   	       Primforest reduction (mio. ha)
-* q35_min_forest(j)					   Minimum forest land constraint (mio. ha)
-* q35_min_other(j)              		   Minimum other land constraint (mio. ha)
+ q35_min_forest(j)					   Minimum forest land constraint (mio. ha)
+ q35_min_other(j)              		   Minimum other land constraint (mio. ha)
  q35_min_natveg(j)                Minimum natveg land constraint (mio. ha)
  q35_cost_harvest(i)              Cost of harvesting natveg (mio. USD)
  q35_hvarea_secdforest(j,ac_sub)  Area harvested from secondary forests (mio. ha)
@@ -58,6 +58,7 @@ equations
  q35_prod_cell_natveg(j,kforestry)  xx
 * q35_prod_natveg(j,kforestry)       xx
 * q35_prod_natveg_glo                xx
+ q35_secdforest_conversion(j)           xx
 ;
 
 positive variables
@@ -103,6 +104,8 @@ parameters
  oq35_other_reduction(t,j,ac,type)                 Other land reduction (mio. ha)
  oq35_secdforest_reduction(t,j,ac,type)            Secdforest reduction (mio. ha)
  oq35_primforest_reduction(t,j,type)               Primforest reduction (mio. ha)
+ oq35_min_forest(t,j,type)                         Minimum forest land constraint (mio. ha)
+ oq35_min_other(t,j,type)                          Minimum other land constraint (mio. ha)
  oq35_min_natveg(t,j,type)                         Minimum natveg land constraint (mio. ha)
  oq35_cost_harvest(t,i,type)                       Cost of harvesting natveg (mio. USD)
  oq35_hvarea_secdforest(t,j,ac_sub,type)           Area harvested from secondary forests (mio. ha)
@@ -113,5 +116,6 @@ parameters
  oq35_prod_primforest(t,j,kforestry,type)          xx
  oq35_prod_other(t,j,type)                         Woodfuel production from other land (mio. m3)
  oq35_prod_cell_natveg(t,j,kforestry,type)         xx
+ oq35_secdforest_conversion(t,j,type)              xx
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
