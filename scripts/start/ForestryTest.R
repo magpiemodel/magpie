@@ -96,8 +96,8 @@ for(rl_scen in c("low","medium","high")){
 
 				## Set clear cutting or selective logging flag
 				for (sl_set in c(0.01,0.05,1.00)) {
-					if(sl_set == 0.01) logging = "Sel0p1"
-					if(sl_set == 0.05) logging = "Sel0p5"
+					if(sl_set == 0.01) logging = "Sel1pc"
+					if(sl_set == 0.05) logging = "Sel5pc"
 					if(sl_set == 1.00) logging = "ClrCut"
 					cfg$gms$s35_selective_logging_flag = sl_set
 

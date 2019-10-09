@@ -78,6 +78,7 @@ pm_production_ratio_ext(i,t_all) = f32_production_ratio(i,t_all);
 *f32_forestry_management("EUR") = 12;
 *f32_forestry_management("JPN") = 7;
 *f32_forestry_management("NEU") = 7;
+f32_forestry_management_moinput("USA","plantations") = 7;
 p32_management_factor(j,mgmt_type) = sum(cell(i,j),ceil(f32_forestry_management_moinput(i,"plantations")/f32_forestry_management_moinput(i,"natveg")));
 p32_management_factor(j,"high") = p32_management_factor(j,"normal") * 3;
 **************************************************************************
