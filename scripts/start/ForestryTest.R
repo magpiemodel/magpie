@@ -62,9 +62,9 @@ cfg <- setScenario(cfg,c("SSP2","NPI"))
 flag_run <- "R004-"
 #################################
 for(rl_scen in c("low","medium","high")){
-	if(rl_scen == "low") forestry_tc = "highRL"
-	if(rl_scen == "medium") forestry_tc = "defRL"
-	if(rl_scen == "high") forestry_tc = "LowRL"
+	if(rl_scen == "low") rot_length = "highRL"
+	if(rl_scen == "medium") rot_length = "defRL"
+	if(rl_scen == "high") rot_length = "LowRL"
 
 	## Overwrite SSP2 interest rate
 	cfg$gms$c12_interest_rate <- rl_scen          # def = "medium"
@@ -103,10 +103,10 @@ for(rl_scen in c("low","medium","high")){
 
 					if(cfg$gms$c56_pollutant_prices == "R2M41-SSP2-Budg1300" ) {
 						#cfg$title<- paste0(flag_run,"-",ssp_scen,"-",forestry_tc,"_",logging,"_",climate_impacts,"_",rcp_scen,"_","Mitig-pCO2")
-						cfg$title<- paste0(flag_run,"-",rl_scen,"_",logging,"_",rcp_scen,"_","Mitig-pCO2")
+						cfg$title<- paste0(flag_run,"-",rot_length,"_",logging,"_",rcp_scen,"_","Mitig-pCO2")
 					} else {
 						#cfg$title<- paste0(flag_run,"-",ssp_scen,"-",forestry_tc,"_",logging,"_",climate_impacts,"_",rcp_scen)
-						cfg$title<- paste0(flag_run,"-",rl_scen,"_",logging,"_",rcp_scen)
+						cfg$title<- paste0(flag_run,"-",rot_length,"_",logging,"_",rcp_scen)
 					}
 					start_run(cfg=cfg,codeCheck=codeCheck)
 				}
