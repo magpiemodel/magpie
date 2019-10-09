@@ -18,6 +18,6 @@ f32_production_ratio, input, not used
 pm_rot_length_estb, input, not used
 pm_time_mod, parameter, not used
 fm_growth_par, input, not used
-pcm_interest, parameter, not used
+p32_interest, parameter, not used
 fm_climate_class, input, not used
 fm_forestry_demand, input, not used

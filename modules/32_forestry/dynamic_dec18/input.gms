@@ -85,3 +85,9 @@ $ondelim
 $include "./modules/32_forestry/input/f32_transport_costs.csv"
 $offdelim
 /;
+
+table f32_interest(t_all,scen12)  Interest rate scenarios (% per yr)
+$ondelim
+$include "./modules/32_forestry/input/f32_interest_rate.cs3"
+$offdelim
+;
