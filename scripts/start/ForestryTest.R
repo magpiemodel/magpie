@@ -54,11 +54,13 @@ cfg$recalibrate <- "ifneeded"
 
 ## Setting up runs
 
-flag_run <- "R003-"
-
 ## Load SSP2
 cfg <- setScenario(cfg,c("SSP2","NPI"))
-
+#################################
+####### CHANGING THE FLAG #######
+#################################
+flag_run <- "R004-"
+#################################
 for(rl_scen in c("low","medium","high")){
 	if(rl_scen == "low") forestry_tc = "highRL"
 	if(rl_scen == "medium") forestry_tc = "defRL"
