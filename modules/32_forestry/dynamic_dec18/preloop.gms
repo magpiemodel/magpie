@@ -38,10 +38,10 @@ p32_rotation_cellular_estb(t,j) = ceil(p32_rot_length_estb(t,j)/5);
 
 ** Define protect and harvest setting
 protect32(t,j,ac_sub) = no;
-protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular(t,j));
+protect32(t,j,ac_sub) = yes$(ord(ac_sub) <= p32_rotation_cellular(t,j));
 
 harvest32(t,j,ac_sub) = no;
-harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular(t,j));
+harvest32(t,j,ac_sub) = yes$(ord(ac_sub) > p32_rotation_cellular(t,j));
 
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");

@@ -62,7 +62,7 @@ v32_land.fx(j,"plant",ac_sub)$protect32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub
 *set upper bound for plantations after rotation length
 *v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
 ****** Harvest as soon as you jump out of protection
-v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = 0;
+v32_land.fx(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = 0;
 m_boundfix(v32_land,(j,"plant",ac_sub),l,10e-5);
 
 *fix C-price induced afforestation and indc to zero (for testing)
