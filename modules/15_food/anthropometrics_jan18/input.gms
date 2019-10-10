@@ -14,8 +14,16 @@ $setglobal c15_food_scenario  SSP2
 $setglobal c15_calibscen  constant
 *   options:   constant, fadeout2050
 
-$setglobal c15_rumscen  mixed
-*   options:   constant, halving2050, mixed
+
+* Food substitution scenarios including functional forms, targets and transition periods
+*   options:   constant,
+*              lin_zero_10_50, lin_zero_20_50, lin_zero_20_30,
+*              lin_50pc_10_50_extend90, lin_75pc_10_50_extend90, lin_80pc_20_50, lin_80pc_20_50_extend95, lin_90pc_20_50_extend95
+$setglobal c15_rumscen  lin_75pc_10_50_extend90
+$setglobal c15_fishscen  lin_80pc_20_50_extend95
+$setglobal c15_alcscen  constant
+$setglobal c15_livescen  constant
+
 
 $setglobal c15_exo_scen_targetyear  y2050
 *   options:   y2030, y2050
@@ -36,11 +44,11 @@ scalar s15_maxiter Scalar defining maximum number of iterations (1) / 5 /;
 
 scalar s15_convergence Convergence criterion (1) / 0.005 /;
 
-scalar s15_exo_waste Switch for transition towards exogenous food waste scenario (1)  / 1 /;
+scalar s15_exo_waste Switch for transition towards exogenous food waste scenario (1)  / 0 /;
 
 scalar s15_waste_scen Scenario target for the ratio between food demand and intake (1)  / 1.2 /;
 
-scalar s15_exo_diet Switch for transition towards exogenous diet scenario (1)  / 1 /;
+scalar s15_exo_diet Switch for transition towards exogenous diet scenario (1)  / 0 /;
 
 
 table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of heterogeneous products and processes (mio. tDM)
@@ -116,12 +124,6 @@ $include "./modules/15_food/input/f15_kcal_balanceflow_fadeout.csv"
 $offdelim
 ;
 
-table f15_ruminant_fadeout(t_all,ruminantfadeoutscen15) Ruminant fadeout scenario (1)
-$ondelim
-$include "./modules/15_food/input/f15_ruminant_fadeout.csv"
-$offdelim
-;
-
 table f15_bodyheight(t_all,iso,sex,age)   Body height (cm per cap)
 $ondelim
 $include "./modules/15_food/input/f15_bodyheight_historical.cs3"
@@ -132,6 +134,14 @@ $ondelim
 $include "./modules/15_food/input/f15_schofield_parameters.cs3"
 $offdelim
 ;
+
+
+*** Exogenous food substitution scenarios
+
+table f15_food_substitution_fader(t_all,fadeoutscen15)   Fader for food substitution scenarios (1)
+$ondelim
+$include "./modules/15_food/input/f15_food_substitution_fader.csv"
+$offdelim;
 
 
 *** Exogenous food demand scenarios

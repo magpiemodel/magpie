@@ -101,10 +101,12 @@ parameters
   i15_kcal_pregnancy(t,iso)                        Additional calorie requirements  for pregnancy and lactation (kcal)
   p15_kcal_regr(t, iso, kfo)                       Uncalibrated regression estimates of calorie demand (kcal per cap per day)
 
- i15_ruminant_fadeout(t_all)                       Ruminant fadeout share (1)
+  i15_ruminant_fadeout(t_all)                       Ruminant fadeout share (1)
+  i15_fish_fadeout(t_all)                           Fish fadeout share (1)
+  i15_alcohol_fadeout(t_all)                        Alcohol fadeout share (1)
+  i15_livestock_fadeout(t_all)                      Livestock fadeout share (1)
 
  i15_staples_kcal_structure_iso(t,iso,kfo_st)      Share of single staple products within total staples (1)
- i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap)  Share of single livestock products within total livestock products (uncorrected for future changes in shares) (1)
  i15_livestock_kcal_structure_iso(t,iso,kfo_ap)    Share of single livestock products within total livestock products (corrected for future changes in shares) (1)
  i15_processed_kcal_structure_iso                  Share of single processed products within total processed food (1)
 
@@ -116,7 +118,6 @@ parameters
   p15_balanceflow_kcal_lastcalibyear(iso,kfo) Balance flow of last historic time step for mismatch between FAOSTAT and demand estimates (kcal per capita per day)
 
 * before shock
-
  o15_kcal_regr_initial(iso,kfo)               Uncalibrated per capita demand before price shock (kcal per capita per day)
  p15_kcal_pc_initial(t,i,kfo)                 Per capita consumption in food demand model before price shock on regional level (kcal per capita per day)
  pm_kcal_pc_initial(t,i,kfo)                  Per capita consumption in food demand model before price shock (kcal per capita per day)
@@ -127,6 +128,11 @@ parameters
  p15_kcal_pc(t,i,kfo)                                  Per capita consumption in food demand model after price shock on regional level (kcal per capita per day)
  p15_kcal_pc_calibrated(t,i,kfo)                       Calibrated per capita consumption in food demand model after price shock (kcal per capita per day)
  p15_kcal_pc_calibrated_orig(t,i,kfo)                  Auxiliary parameter for per capita food consumption - basis for convergence into waste and diet scenarios (kcal per capita per day)
+ p15_kcal_pc_calibrated_livestock_orig(t,i)            Auxiliary parameter for per capita livestock consumption - basis for scenarios of livestock food substitution (kcal per capita per day)
+ p15_kcal_pc_calibrated_plant_orig(t,i)                Auxiliary parameter for per capita plant-based food consumption - basis for scenarios of livestock food substitution (kcal per capita per day)
+ p15_livestock_kcal_structure_orig(t,i,kfo_lp)            Auxiliary parameter for livestock kcal structure - basis for scenarios of livestock food substitution (1)
+ p15_plant_kcal_structure_orig(t,i,kfo_pp)             Auxiliary parameter for plant-based food kcal structure - basis for scenarios of livestock food substitution (1)
+
  p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)     Calibrated estimates of BMI share for population groups  (1)
  p15_intake_total_iso_calibrated(t,iso)                Total food intake in a country (kcal per capita per day)
  p15_intake_total_calibrated(t,i)                      Total regional food intake (kcal per capita per day)
@@ -145,7 +151,6 @@ parameters
  i15_exo_foodscen_fader(t)                    Fader that converges per capita food consumption to an exogenous diet scenario (1)
 
 * calculate diet iteration breakpoint
-
   p15_income_pc_real_ppp(t,i)                 Regional per capita income after price shock on regional level (USD05PPP per capita)
   p15_delta_income(t,i)                       Regional change in per capita income due to price shock on regional level (1)
   p15_lastiteration_delta_income(t,i)         Regional change in per capita income due to price shock of last iteration (1)
