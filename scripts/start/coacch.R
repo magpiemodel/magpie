@@ -38,7 +38,7 @@ buildInputVector <- function(regionmapping   = "H12",
                              archive_rev     = "38",
                              madrat_rev      = "4.18",
                              validation_rev  = "4.18",
-			                       calibration     = "calibration_coacch_sept19.tgz",
+			                 calibration     = "calibration_coacch_08Oct19.tgz",
                              additional_data = "additional_data_rev3.68.tgz") {
   mappings <- c(H11="8a828c6ed5004e77d1ba2025e8ea2261",
                 H12="690d3718e151be1b450b394c1064b1c5",
@@ -87,7 +87,7 @@ cfg<-lucode::setScenario(cfg,"nocc")
 cfg$input <- buildInputVector(regionmapping = "coacch")
 cfg$recalibrate=TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
-calib<-magpie4::submitCalibration(name = "calibration_coacch_sept19.tgz")
+calib<-magpie4::submitCalibration(name = "calibration_coacch")
 cfg$recalibrate <- "ifneeded"
 
 #COACCH standard runs#############################################
