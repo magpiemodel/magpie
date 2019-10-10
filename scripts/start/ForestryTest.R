@@ -59,9 +59,9 @@ cfg <- setScenario(cfg,c("SSP2","NPI"))
 #################################
 ####### CHANGING THE FLAG #######
 #################################
-flag_run <- "R005-"
+flag_run <- "R006-"
 #################################
-for(rl_scen in c("low","medium","high")){
+for(rl_scen in c("medium")) {
 	if(rl_scen == "low") rot_length = "highRL"
 	if(rl_scen == "medium") rot_length = "defRL"
 	if(rl_scen == "high") rot_length = "LowRL"
@@ -69,17 +69,17 @@ for(rl_scen in c("low","medium","high")){
 	## Overwrite SSP2 interest rate
 	cfg$gms$c12_interest_rate <- rl_scen          # def = "medium"
 	## Loop over climate impacts
-	for(climate_impacts in c("nocc")){
+	for(climate_impacts in c("nocc")) {
 		cfg <- setScenario(cfg, climate_impacts)
 
-		for(sector_test in c("dynamic_dec18")){
+		for(sector_test in c("dynamic_dec18")) {
 			# Set forestry module realization
 			cfg$gms$forestry  <- sector_test
 			if(sector_test == "dynamic_dec18") forestry_tc = "2Mgmt"
 			if(sector_test == "dynamic_oct19") forestry_tc = "1Mgmt"
 
 			## Loop over mitigation-co2 prices
-			for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")){
+			for(co2_price_scenarios in c("R2M41-SSP2-NPi")) {
 				if(co2_price_scenarios=="R2M41-SSP2-NPi") rcp_scen <- "rcp6p0"
 				if(co2_price_scenarios=="R2M41-SSP2-Budg1300") rcp_scen <- "rcp2p6"
 
@@ -95,7 +95,7 @@ for(rl_scen in c("low","medium","high")){
 				cfg$gms$c_timesteps = "5year"
 
 				## Set clear cutting or selective logging flag
-				for (sl_set in c(0.01,0.05,1.00)) {
+				for (sl_set in c(1.00)) {
 					if(sl_set == 0.01) logging = "Sel1pc"
 					if(sl_set == 0.05) logging = "Sel5pc"
 					if(sl_set == 1.00) logging = "ClrCut"
