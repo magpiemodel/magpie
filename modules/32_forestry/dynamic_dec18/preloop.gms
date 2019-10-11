@@ -20,8 +20,8 @@ p32_rot_final(t,j) = sum(ac,p32_rot_flg(t,j,ac)) * 5;
 p32_rot_final(t,j)$(p32_rot_final(t,j)>90) = 90;
 p32_rot_final(t_future,j) = p32_rot_final("y2100",j);
 
-p32_rot_length(t,j) = p32_rot_final(t,j);
-*p32_rot_length(t,j) = p32_rot_length("y1995",j);
+*p32_rot_length(t,j) = p32_rot_final(t,j);
+p32_rot_length(t,j) = p32_rot_final("y1995",j);
 p32_rot_length_estb(t,j) = p32_rot_final(t,j);
 
 *p32_rot_length(t,j) = f32_rot_length_cellular(t,j);
@@ -39,10 +39,10 @@ p32_rotation_cellular_estb(t,j) = ceil(p32_rot_length_estb(t,j)/5);
 
 ** Define protect and harvest setting
 protect32(t,j,ac_sub) = no;
-protect32(t,j,ac_sub) = yes$(ord(ac_sub) <= p32_rotation_cellular(t,j));
+protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular(t,j));
 
 harvest32(t,j,ac_sub) = no;
-harvest32(t,j,ac_sub) = yes$(ord(ac_sub) > p32_rotation_cellular(t,j));
+harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular(t,j));
 
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
