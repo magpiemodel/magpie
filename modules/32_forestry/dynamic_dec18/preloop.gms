@@ -20,7 +20,8 @@ p32_rot_final(t,j) = sum(ac,p32_rot_flg(t,j,ac)) * 5;
 p32_rot_final(t,j)$(p32_rot_final(t,j)>90) = 90;
 p32_rot_final(t_future,j) = p32_rot_final("y2100",j);
 
-p32_rot_length(t,j) = p32_rot_final(t,j);
+*p32_rot_length(t,j) = p32_rot_final(t,j);
+p32_rot_length(t,j) = p32_rot_final("y1995",j);
 p32_rot_length_estb(t,j) = p32_rot_final(t,j);
 
 *p32_rot_length(t,j) = f32_rot_length_cellular(t,j);
