@@ -60,9 +60,9 @@ v32_land.up(j,"plant",ac) = Inf;
 v32_land.fx(j,"plant",ac_sub)$protect32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
 
 *set upper bound for plantations after rotation length
-*v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
+v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
 ****** Harvest as soon as you jump out of protection
-v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = 0;
+*v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = 0;
 m_boundfix(v32_land,(j,"plant",ac_sub),l,10e-5);
 
 *fix C-price induced afforestation and indc to zero (for testing)
@@ -76,8 +76,14 @@ v32_land.fx(j,"indc",ac_sub) = pc32_land(j,"indc",ac_sub);
 ** Setting ac dependent carbon densities
 p32_carbon_density_ac(t,j,type32,ac,ag_pools)  = pm_carbon_density_ac(t,j,ac,ag_pools);
 
+p32_rot_ac(j) = p32_rot_length("y1995",j)/5;
+p32_regional_min(j)   = 1/p32_management_factor(j,"normal");
+p32_dampen_pre(ac,j)  = (1-(1/ord(ac)))$(ord(ac)<p32_rot_ac(j)) + 1$(ord(ac)=p32_rot_ac(j)) + (1-(1/p32_rot_ac(j))*(ord(ac)-p32_rot_ac(j)))$(ord(ac)>p32_rot_ac(j));
+p32_dampen_final(ac,j) = p32_dampen_pre(ac,j)$(p32_dampen_pre(ac,j) >= p32_regional_min(j)) + p32_regional_min(j)$(p32_dampen_pre(ac,j) < p32_regional_min(j));
+
 ** Plantation vegc is different
-p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * p32_management_factor(j,"normal");
+*p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * p32_management_factor(j,"normal");
+p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * p32_management_factor(j,"normal") * p32_dampen_final(ac,j);
 
 *** YIELDS
 p32_yield_forestry_ac(j,ac_sub,mgmt_type) =

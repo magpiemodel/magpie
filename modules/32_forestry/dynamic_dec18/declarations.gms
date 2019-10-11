@@ -38,6 +38,10 @@ parameters
  pm_time_mod(t)                                  xx
  p32_aff_togo(t)              		       Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
  p32_interest(t,i)     Interest rate in each region and timestep (% per yr)
+ p32_rot_ac(j)              xx
+ p32_regional_min(j)        xx
+ p32_dampen_pre(ac,j)       xx
+ p32_dampen_final(ac,j)     xx
 ;
 
 positive variables
