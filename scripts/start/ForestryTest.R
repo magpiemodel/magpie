@@ -59,7 +59,7 @@ cfg <- setScenario(cfg,c("SSP2","NPI"))
 #################################
 ####### CHANGING THE FLAG #######
 #################################
-flag_run <- "R007-"
+flag_run <- "R008-"
 #################################
 for(rl_scen in c("low","medium","high")) {
 	if(rl_scen == "low") rot_length = "highRL"
