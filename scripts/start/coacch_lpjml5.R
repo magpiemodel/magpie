@@ -30,15 +30,15 @@ codeCheck <- FALSE
 
 
 buildInputVector <- function(regionmapping   = "H12",
-                             project_name    = "isimip_rcp",
+                             project_name    = "LPJmL5",
                              climatescen_name= "rcp2p6",
                              co2             = "co2",
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "c400",
-                             archive_rev     = "38",
+                             archive_rev     = "40.1",
                              madrat_rev      = "4.18",
                              validation_rev  = "4.18",
-			                 calibration     = "calibration_coacch_08Oct19.tgz",
+			                       calibration     = "calibration_coacch_08Oct19.tgz",
                              additional_data = "additional_data_rev3.68.tgz") {
   mappings <- c(H11="8a828c6ed5004e77d1ba2025e8ea2261",
                 H12="690d3718e151be1b450b394c1064b1c5",
@@ -102,7 +102,7 @@ start_the_run<-function(ssp,mit,rcp,gcm,co2,cc){
   # select alias names for reporting
 	if(gcm=="IPSL_CM5A_LR"){gcm_alias="IPSL-CM5A-LR"}
 	if(gcm=="HadGEM2_ES"){gcm_alias="HadGEM2-ES"}
-	if(gcm=="GFDL_ESM2M"){gcm_alias="GFDL-ESM2M"}
+	if(gcm=="GFDL_ESM2G"){gcm_alias="GFDL-ESM2G"}
 	if(gcm=="NorESM1_M"){gcm_alias="NNorESM1-M"}
 	if(rcp=="NoCC"){gcm_alias="NoCC"}
 	if(mit=="26"){mit_alias="2p6"} 
@@ -143,7 +143,7 @@ for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
 		model="MESSAGE-GLOBIOM"
 		mitopt = c("26","45","Ref")
 		rcpopt = c("rcp2p6","rcp4p5","rcp6p0","NoCC")
-		gcmopt = c("IPSL_CM5A_LR","HadGEM2_ES","GFDL_ESM2M","NorESM1_M")
+		gcmopt = c("IPSL_CM5A_LR","HadGEM2_ES","GFDL_ESM2G","NorESM1_M")
 		}
 	if(ssp=="SSP3"){
 		model="AIM-CGE"
