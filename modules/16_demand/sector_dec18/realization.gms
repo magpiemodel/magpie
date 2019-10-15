@@ -9,7 +9,7 @@
 *' demand for all products coming from the modules [62_material],
 *' [60_bioenergy], [70_livestock], [15_food] and [17_production].
 *' It also delivers data to the modules [60_bioenergy], [21_trade], [20_processing],
-*' [18_residues], [55_awms], [50_nr_soil_budget], [32_forestry], and [53_methane].
+*' [18_residues], [55_awms], [50_nr_soil_budget], [27_timber], and [53_methane].
 
 
 *####################### R SECTION START (PHASES) ##############################
