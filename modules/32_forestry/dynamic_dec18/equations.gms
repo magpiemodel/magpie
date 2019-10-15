@@ -129,7 +129,6 @@ q32_cost_harvest(i2)..
 q32_prod_future(i2) ..
               sum((cell(i2,j2)), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
               =g=
-*              sum((ct,kforestry),fm_forestry_demand(ct,i2,kforestry)) * 0.33
               sum(kforestry, vm_prod_future_reg_ff(i2,kforestry)) * pcm_production_ratio_future(i2)
               ;
 
@@ -150,7 +149,7 @@ q32_prod_forestry(j2,kforestry)..
 
 *********************************************************
 **** Parametrised TAU for plantations
- q32_management_incr_cost(i2) ..
+ q32_high_mgmt_prod_cost(i2) ..
                               v32_high_mgmt_prod_cost(i2)
                               =e=
                               sum((cell(i2,j2),kforestry,ac_sub), v32_hvarea_forestry(j2,kforestry,ac_sub,"high") * p32_yield_forestry_ac(j2,ac_sub,"high")) * 10e4

@@ -16,11 +16,11 @@ positive variables
  v21_excess_prod(i,k_trade)              Regional excess production (mio. tDM per yr)
  vm_cost_trade(i)                        Regional  trade costs (mio. USD05MER per yr)
  v21_cost_trade_reg(i,k_trade)           Regional trade costs for each tradable commodity (mio. USD05MER per yr)
- v21_prod_future_reg_ff(i,kforestry)     Future production of timber based (mio. m3)
+ vm_prod_future_reg_ff(i,kforestry)     Future production of timber based (mio. m3)
  v21_excess_prod_ff(i,kforestry)        Excess future production of timber (mio. m3)
  v21_excess_dem_ff(kforestry)            Excess future demand of timber (mio. m3)
  v21_cost_trade_reg_ff(i,kforestry)     Future trade costs for timber (mio. USD)
- v21_cost_trade_forestry_ff(i)           Future total timber trade costs (mio. USD)
+ vm_cost_trade_forestry_ff(i)           Future total timber trade costs (mio. USD)
  ;
 
 equations
@@ -36,22 +36,22 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov21_excess_dem(t,k_trade,type)             Global excess demand (mio. tDM per yr)
- ov21_excess_prod(t,i,k_trade,type)          Regional excess production (mio. tDM per yr)
- ov_cost_trade(t,i,type)                     Regional  trade costs (mio. USD05MER per yr)
- ov21_cost_trade_reg(t,i,k_trade,type)       Regional trade costs for each tradable commodity (mio. USD05MER per yr)
- ov21_prod_future_reg_ff(t,i,kforestry,type) Future production of timber based (mio. m3)
- ov21_excess_prod_ff(t,i,kforestry,type)     Excess future production of timber (mio. m3)
- ov21_excess_dem_ff(t,kforestry,type)        Excess future demand of timber (mio. m3)
- ov21_cost_trade_reg_ff(t,i,kforestry,type)  Future trade costs for timber (mio. USD)
- ov21_cost_trade_forestry_ff(t,i,type)       Future total timber trade costs (mio. USD)
- oq21_trade_glo(t,k_trade,type)              Global production constraint (mio. tDM per yr)
- oq21_notrade(t,i,k_notrade,type)            Regional production constraint of non-tradable commodities (mio. tDM per yr)
- oq21_trade_reg(t,i,k_trade,type)            Regional trade balances i.e. minimum self-sufficiency ratio (1)
- oq21_trade_reg_up(t,i,k_trade,type)         Regional trade balances i.e. maximum self-sufficiency ratio (1)
- oq21_excess_dem(t,k_trade,type)             Global excess demand (mio. tDM per yr)
- oq21_excess_supply(t,i,k_trade,type)        Regional excess production (mio. tDM per yr)
- oq21_cost_trade(t,i,type)                   Regional  trade costs (mio. USD05MER per yr)
- oq21_cost_trade_reg(t,i,k_trade,type)       Regional trade costs for each tradable commodity (mio. USD05MER per yr)
+ ov21_excess_dem(t,k_trade,type)            Global excess demand (mio. tDM per yr)
+ ov21_excess_prod(t,i,k_trade,type)         Regional excess production (mio. tDM per yr)
+ ov_cost_trade(t,i,type)                    Regional  trade costs (mio. USD05MER per yr)
+ ov21_cost_trade_reg(t,i,k_trade,type)      Regional trade costs for each tradable commodity (mio. USD05MER per yr)
+ ov_prod_future_reg_ff(t,i,kforestry,type)  Future production of timber based (mio. m3)
+ ov21_excess_prod_ff(t,i,kforestry,type)    Excess future production of timber (mio. m3)
+ ov21_excess_dem_ff(t,kforestry,type)       Excess future demand of timber (mio. m3)
+ ov21_cost_trade_reg_ff(t,i,kforestry,type) Future trade costs for timber (mio. USD)
+ ov_cost_trade_forestry_ff(t,i,type)        Future total timber trade costs (mio. USD)
+ oq21_trade_glo(t,k_trade,type)             Global production constraint (mio. tDM per yr)
+ oq21_notrade(t,i,k_notrade,type)           Regional production constraint of non-tradable commodities (mio. tDM per yr)
+ oq21_trade_reg(t,i,k_trade,type)           Regional trade balances i.e. minimum self-sufficiency ratio (1)
+ oq21_trade_reg_up(t,i,k_trade,type)        Regional trade balances i.e. maximum self-sufficiency ratio (1)
+ oq21_excess_dem(t,k_trade,type)            Global excess demand (mio. tDM per yr)
+ oq21_excess_supply(t,i,k_trade,type)       Regional excess production (mio. tDM per yr)
+ oq21_cost_trade(t,i,type)                  Regional  trade costs (mio. USD05MER per yr)
+ oq21_cost_trade_reg(t,i,k_trade,type)      Regional trade costs for each tradable commodity (mio. USD05MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

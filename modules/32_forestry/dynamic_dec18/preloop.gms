@@ -5,8 +5,8 @@
 *p32_rot_length_estb(t,i) = f32_rot_length(t,i,"%c32_rot_length_estb%");
 
 ** Check for calcultation of time factor
-*pm_time_mod(t) = (5$(ord(t)=1)+(m_yeardiff(t)*(0.985**m_yeardiff(t)))$(ord(t)>1));
-pm_time_mod(t) = m_yeardiff(t);
+*pm_time_diff(t) = (5$(ord(t)=1)+(m_yeardiff(t)*(0.985**m_yeardiff(t)))$(ord(t)>1));
+pm_time_diff(t) = m_yeardiff(t);
 
 p32_carbon_density_ac_nat(t,j,ac) = m_growth_vegc(0,fm_carbon_density(t,j,"other","vegc"),sum(clcl,fm_climate_class(j,clcl)*fm_growth_par(clcl,"k")),sum(clcl,fm_climate_class(j,clcl)*fm_growth_par(clcl,"m")),(ord(ac)-1));
 

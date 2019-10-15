@@ -76,7 +76,8 @@ v32_land.fx(j,"indc",ac_sub) = pc32_land(j,"indc",ac_sub);
 ** Setting ac dependent carbon densities
 p32_carbon_density_ac(t,j,type32,ac,ag_pools)  = pm_carbon_density_ac(t,j,ac,ag_pools);
 
-p32_rot_ac(j) = p32_rot_length("y1995",j)/5;
+*p32_rot_ac(j) = p32_rot_length("y1995",j)/5;
+p32_rot_ac(j) = p32_rot_length(t,j)/5;
 p32_regional_min(j)   = 1/p32_management_factor(j,"normal");
 p32_dampen_pre(ac,j)  = (1-(1/ord(ac)))$(ord(ac)<p32_rot_ac(j)) + 1$(ord(ac)=p32_rot_ac(j)) + (1-(1/p32_rot_ac(j))*(ord(ac)-p32_rot_ac(j)))$(ord(ac)>p32_rot_ac(j));
 p32_dampen_final(ac,j) = p32_dampen_pre(ac,j)$(p32_dampen_pre(ac,j) >= p32_regional_min(j)) + p32_regional_min(j)$(p32_dampen_pre(ac,j) < p32_regional_min(j));
@@ -95,7 +96,7 @@ p32_yield_forestry_ac(j,ac_sub,mgmt_type) =
      0.85
      /
      sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac_sub,clcl))
-    ) / pm_time_mod(t)
+    ) / pm_time_diff(t)
    ;
 
 ** Future demand relevant in current time step depending on rotation length

@@ -20,7 +20,6 @@ parameters
  pc21_trade_bal_reduction_future(kforestry)     Future trade balance reduction (1)
  pc21_trade_balanceflow_future(kforestry)       Future trade balanceflow (1)
  pc21_exp_shr_future(i,kforestry)               Future export share (1)
- p21_demand_ff_factor(t_all)                    xx
 ;
 
 positive variables
@@ -50,9 +49,6 @@ equations
  q21_excess_supply_ff(i,kforestry)      Future forestry excess supply (mio. m3)
  q21_cost_trade_reg_ff(i,kforestry)     Future forestry trade costs (mio. USD)
  q21_cost_trade_ff(i)                   Future forestry total trade costs (mio. USD)
-* q21_trade_natveg(kforestry)			Global natveg production constraint (mio. m3 per yr)
-* q21_trade_forestry(kforestry)			Global forestry production constraint (mio. m3 per yr)
-* q21_prod_timber(i,kforestry)         xx
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

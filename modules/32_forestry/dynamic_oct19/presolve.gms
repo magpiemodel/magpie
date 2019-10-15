@@ -88,7 +88,7 @@ p32_yield_forestry_ac(t,j,ac_sub) =
      0.85
      /
      sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac_sub,clcl))
-    ) / pm_time_mod(t)
+    ) / pm_time_diff(t)
    ;
 
 ** Future demand relevant in current time step depending on rotation length
