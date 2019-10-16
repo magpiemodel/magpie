@@ -104,16 +104,20 @@ start_the_run<-function(ssp,mit,rcp,gcm,co2,cc){
 	if(gcm=="HadGEM2_ES"){gcm_alias="HadGEM2-ES"}
 	if(gcm=="GFDL_ESM2G"){gcm_alias="GFDL-ESM2G"}
 	if(gcm=="NorESM1_M"){gcm_alias="NNorESM1-M"}
-	if(rcp=="NoCC"){gcm_alias="NoCC"}
+  rcp_alias=substring(rcp,4)
+	if(cc==FALSE){
+	  gcm_alias="NoCC"
+	  rcp_alias="NoCC"
+	}
 	if(mit=="26"){mit_alias="2p6"} 
 	if(mit=="45"){mit_alias="4p5"} 
 	if(mit=="Ref"){mit_alias="NoMit"} 
 
   # create runname
 	if(co2=="co2") {
-	  title=paste(ssp,gcm_alias,substring(rcp,4),mit_alias,sep="_")
+	  title=paste(ssp,gcm_alias,rcp_alias,mit_alias,sep="_")
 	} else {
-	   title=paste(ssp,gcm_alias,substring("rcp2p6",4),mit_alias,"NoCO2",sep="_")
+	   title=paste(ssp,gcm_alias,rcp_alias,mit_alias,"NoCO2",sep="_")
 	}
 	cat(paste(title))
 	
@@ -147,7 +151,7 @@ for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
 		}
 	if(ssp=="SSP3"){
 		model="AIM-CGE"
-		mitopt = c("Ref")
+		mitopt = c("60")
 		rcpopt = c("rcp4p5","rcp6p0","NoCC")
 		gcmopt = c("HadGEM2_ES")
 		}
