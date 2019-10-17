@@ -24,7 +24,7 @@ i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w) * sum(cell
 
 i14_croparea_total(t_all,j) = sum((kcr,w), fm_croparea(t_all,j,w,kcr));
 
-i14_lpj_yields_hist(t_past,i,knbe14) = (sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14) * f14_yields(t_past,j,knbe14,w)) /
+i14_lpj_yields_hist("y1995",i,knbe14) = (sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14) * f14_yields(t_past,j,knbe14,w)) /
                                              sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14)))$(sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14))>0) +
 																            (sum((cell(i,j),w), i14_croparea_total(t_past,j) * f14_yields(t_past,j,knbe14,w)) /
 																      	     sum(cell(i,j), i14_croparea_total(t_past,j)))$(sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14))=0);
@@ -50,8 +50,11 @@ loop(t, if(sum(sameas(t,"y1995"),1)=1,
 		);
 );
 
-i14_managementcalib(t,j,knbe14,w) = 1 + (sum(cell(i,j), i14_regions_yields(t,i,knbe14) - i14_lpj_yields_hist(t,i,knbe14)) / f14_yields(t,j,knbe14,w) *
-                                        (f14_yields(t,j,knbe14,w) / sum(cell(i,j),i14_lpj_yields_hist(t,i,knbe14))) ** sum(cell(i,j),i14_lambda_yields(t,i,knbe14)))$
+i14_managementcalib(t,j,knbe14,w) =
+  1 + (sum(cell(i,j), i14_regions_yields(t,i,knbe14) - i14_lpj_yields_hist(t,i,knbe14)) /
+                                          f14_yields(t,j,knbe14,w) *
+      (f14_yields(t,j,knbe14,w) / (sum(cell(i,j),i14_lpj_yields_hist(t,i,knbe14))+10**(-8))) **
+                             sum(cell(i,j),i14_lambda_yields(t,i,knbe14)))$
 																			  (f14_yields(t,j,knbe14,w)>0);
 
 i14_yields_calib(t,j,knbe14,w)    = i14_managementcalib(t,j,knbe14,w) * f14_yields(t,j,knbe14,w);
