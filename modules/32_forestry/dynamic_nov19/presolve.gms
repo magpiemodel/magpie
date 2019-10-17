@@ -80,7 +80,7 @@ p32_carbon_density_ac(t,j,type32,ac,ag_pools)  = pm_carbon_density_ac(t,j,ac,ag_
 p32_rot_ac(j) = p32_rot_length(t,j)/5;
 p32_regional_min(j)   = 1/p32_management_factor(j,"normal");
 *p32_dampen_pre(ac,j)  = (1-(1/ord(ac)))$(ord(ac)<p32_rot_ac(j)) + 1$(ord(ac)=p32_rot_ac(j)) + (1-(1/p32_rot_ac(j))*(ord(ac)-p32_rot_ac(j)))$(ord(ac)>p32_rot_ac(j));
-p32_dampen_pre(ac,j)  = (1-(1/ord(ac)))$(ord(ac)<p32_rot_ac(j)) + 1$(ord(ac)=p32_rot_ac(j) OR ord(ac)<=18) + (1-(1/p32_rot_ac(j))*(ord(ac)-p32_rot_ac(j)))$(ord(ac)>18);
+p32_dampen_pre(ac,j)  = (1-(1/ord(ac)))$(ord(ac)<p32_rot_ac(j)) + 1$(ord(ac)>=p32_rot_ac(j) AND ord(ac)<=18) + (1-(1/p32_rot_ac(j))*(ord(ac)-p32_rot_ac(j)))$(ord(ac)>18);
 p32_dampen_final(ac,j) = p32_dampen_pre(ac,j)$(p32_dampen_pre(ac,j) >= p32_regional_min(j)) + p32_regional_min(j)$(p32_dampen_pre(ac,j) < p32_regional_min(j));
 
 ** Plantation vegc is different
