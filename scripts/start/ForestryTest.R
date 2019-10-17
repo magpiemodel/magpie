@@ -62,10 +62,14 @@ cfg$recalibrate <- "ifneeded"
 flag_run <- "R010-"
 #################################
 #for(rl_scen in c("low","medium","high")) {
-for(rl_scen in c("medium")) {
+for(rl_scen in c("1pc","low","medium","high","15pc")) {
+	if(rl_scen == "1pc") rot_length = "BioRL"
+
 	if(rl_scen == "low") rot_length = "highRL"
 	if(rl_scen == "medium") rot_length = "defRL"
 	if(rl_scen == "high") rot_length = "LowRL"
+	if(rl_scen == "15pc") rot_length = "MinRL"
+	
 
 	## Overwrite SSP2 interest rate
 	cfg$gms$c12_interest_rate <- rl_scen          # def = "medium"

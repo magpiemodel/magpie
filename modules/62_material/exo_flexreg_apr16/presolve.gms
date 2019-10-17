@@ -18,4 +18,5 @@ else
  s62_historical=0;
 );
 
+vm_dem_material.fx(i,kforestry) = 0;
 *' @stop
