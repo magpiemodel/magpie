@@ -10,5 +10,5 @@ sets
 	/low, high/
 
   scen12 Interest rate scenarios
-							/ low, medium, high /
+							/ low, medium, high , 1pc, 15pc /
 ;

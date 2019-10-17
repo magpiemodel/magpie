@@ -27,3 +27,6 @@ $ondelim
 $include "./modules/12_interest_rate/input/f12_interest_rate.cs3"
 $offdelim
 ;
+
+fm_interest(t_all,"1pc") =  0.01;
+fm_interest(t_all,"15pc") =  0.15;
