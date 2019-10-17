@@ -59,7 +59,7 @@ cfg$recalibrate <- "ifneeded"
 #################################
 ####### CHANGING THE FLAG #######
 #################################
-flag_run <- "R010-"
+flag_run <- "R011-"
 #################################
 #for(rl_scen in c("low","medium","high")) {
 for(rl_scen in c("1pc","low","medium","high","15pc")) {
@@ -79,7 +79,7 @@ for(rl_scen in c("1pc","low","medium","high","15pc")) {
 
 		## Loop over mitigation-co2 prices
 		#for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")) {
-		for(co2_price_scenarios in c("R2M41-SSP2-NPi")) {
+		for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")) {
 			if(co2_price_scenarios=="R2M41-SSP2-NPi") rcp_scen <- "rcp6p0"
 			if(co2_price_scenarios=="R2M41-SSP2-Budg1300") rcp_scen <- "rcp2p6"
 
@@ -96,7 +96,7 @@ for(rl_scen in c("1pc","low","medium","high","15pc")) {
 
 			## Set clear cutting or selective logging flag
 			#for (sl_set in c(0.01,0.05,1.00)) {
-			for (sl_set in c(1.00)) {
+			for (sl_set in c(0.01,0.05,1.00)) {
 				if(sl_set == 0.01) logging = "Sel1pc"
 				if(sl_set == 0.05) logging = "Sel5pc"
 				if(sl_set == 1.00) logging = "ClrCut"
