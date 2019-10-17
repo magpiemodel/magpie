@@ -9,15 +9,15 @@
 *'
 
 q40_cost_transport(j2,k) ..
-  vm_cost_transp(j2,k) =e= vm_prod(j2,k)*f40_distance(j2)
-                           * f40_transport_costs(k);
+  vm_cost_transp(j2,k) =e= vm_prod(j2,k)*fm_distance(j2)
+                           * fm_transport_costs(k);
 
 *'
 *' Transportation costs for each cell are calculated as the product of
 *' the production in each cell, the transport distance to a urban centre
 *' and the transport costs.
 *'
-*' As cellular distance information `f40_distance(j2)`, the European Commission
+*' As cellular distance information `fm_distance(j2)`, the European Commission
 *' Joint Research Centre (EC JRC)’s 30 arc-second resolution map on travel time
 *' for any location on the earth surface to the nearest large city is used
 *' (figure below - @nelson_transport_2008). The data set is based on multiple
@@ -32,7 +32,7 @@ q40_cost_transport(j2,k) ..
 *' ![Travel time to major cities (in hours and days)
 *' [@nelson_transport_2008]](travel_time_map.png){ width=100% }
 *'
-*' Relative transport costs `f40_transport_costs(k)` are calibrated using total
+*' Relative transport costs `fm_transport_costs(k)` are calibrated using total
 *' agricultural transport costs taken from the GTAP 7 database (see @narayanan_gtap7_2008
 *' for a general description of the GTAP model structure). GTAP agricultural
 *' transport costs represent transport costs from one sector to another sector
@@ -45,7 +45,7 @@ q40_cost_transport(j2,k) ..
 *'
 *' ![Transport Costs Concept](transport_costs_concept.png){ width=100% }
 *'
-*' Relative transport costs `f40_transport_costs(k)` are calculated by dividing
+*' Relative transport costs `fm_transport_costs(k)` are calculated by dividing
 *' total agricultural transport costs from GTAP 7 by the product of an initial
 *' (1995 as default) cellular MAgPIE production pattern and cellular travel time.
 *' By doing so we ensure that relative transport costs, multiplied with the

@@ -11,7 +11,7 @@ equations
 ;
 
 positive variables
- vm_prod_heaven_timber(j,kforestry)          Production from heaven in each cell (mio. m3 per yr)
+ vm_prod_heaven_timber(j,kforestry)           Balanceflow production of timber from each cell (mio. m3 per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

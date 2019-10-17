@@ -33,7 +33,7 @@ $offdelim
 parameter fm_harvest_cost_ha(i) Harvesting cost (US Dollar 2004 per ha)
 /
 $ondelim
-$include "./modules/32_forestry/input/f32_harvestingcost.csv"
+$include "./modules/32_forestry/input/f32_harvestingcost.cs4"
 $offdelim
 /
 ;
@@ -44,50 +44,14 @@ $include "./modules/32_forestry/input/npi_ndc_aff_pol.cs3"
 $offdelim
 ;
 
-table f32_rot_length(t_all,i,rltype) rot length
-$ondelim
-$include "./modules/32_forestry/input/f32_rot_length.csv"
-$offdelim;
-
-parameter f32_production_ratio(i,t_all) percentage of supply coming from plantations (percentage)
-/
+table f32_production_ratio(t_all,i) percentage of supply coming from plantations (percentage)
 $ondelim
 $include "./modules/32_forestry/input/f32_production_ratio.csv"
 $offdelim
-/;
+;
 
-parameter f32_forestry_management(i) upscaling factor for forestry plantations
-/
+table f32_forestry_management(i,forest_type) upscaling factor for forestry plantations
 $ondelim
 $include "./modules/32_forestry/input/f32_forestry_management.csv"
-$offdelim
-/;
-
-table f32_forestry_management_moinput(i,forest_type) upscaling factor for forestry plantations
-$ondelim
-$include "./modules/32_forestry/input/f32_forestry_management_moinput.csv"
-$offdelim
-;
-
-
-parameters
-f32_distance(j) transport distance to urban center (Minutes)
-/
-$ondelim
-$include "./modules/32_forestry/input/transport_distance.cs2"
-$offdelim
-/
-;
-
-parameter f32_transport_costs(kforestry) transport costs 2004 per tDM per minute (USD)
-/
-$ondelim
-$include "./modules/32_forestry/input/f32_transport_costs.csv"
-$offdelim
-/;
-
-table f32_interest(t_all,scen12)  Interest rate scenarios (% per yr)
-$ondelim
-$include "./modules/32_forestry/input/f32_interest_rate.cs3"
 $offdelim
 ;

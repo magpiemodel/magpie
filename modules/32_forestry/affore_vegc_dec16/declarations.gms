@@ -17,7 +17,7 @@ parameters
  p32_aff_pol(t,j)			                   Exogenous afforestation target as stock (mio. ha)
  p32_aff_pol_timestep(t,j)			         Exogenous afforestation target as flow per time step (mio. ha per timestep)
  p32_aff_togo(t)              		       Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
- pm_production_ratio_ext(i,t_ext)        Extened production ratio (1)
+ pm_production_ratio_ext(t_ext,i)        Extened production ratio (1)
  pm_rotation_reg(t,i)                    Regional rotation length of plantations translated to age class equivalent for future (1)
  pc32_rot_length(i)                      Regional rotation length of plantations translated to age class equivalent for future (1)
  pcm_production_ratio_future(i)          Future production ratio (1)

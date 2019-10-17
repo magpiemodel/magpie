@@ -26,17 +26,17 @@ fm_forestry_demand(t,i,kforestry) = fm_forestry_demand(t,i,kforestry) * 0.75;
 fm_forestry_demand(t,i,kforestry) = fm_forestry_demand("y1995",i,kforestry);
 $offtext
 
-f16_forestry_demand_REG(t_all,i,"woodfuel") = f16_forestry_demand_REG(t_all,i,"woodfuel") * 0.5;
-f16_forestry_demand_REG(t_all,"MEA",kforestry) = f16_forestry_demand_REG(t_all,"MEA",kforestry) * 0.25;
-f16_forestry_demand_REG(t_all,"IND",kforestry) = f16_forestry_demand_REG(t_all,"IND",kforestry) * 0.25;
+f16_forestry_demand(t_all,i,"woodfuel") = f16_forestry_demand(t_all,i,"woodfuel") * 0.5;
+f16_forestry_demand(t_all,"MEA",kforestry) = f16_forestry_demand(t_all,"MEA",kforestry) * 0.25;
+f16_forestry_demand(t_all,"IND",kforestry) = f16_forestry_demand(t_all,"IND",kforestry) * 0.25;
 
-fm_forestry_demand(t_all,i,kforestry) = f16_forestry_demand_REG(t_all,i,kforestry);
-*fm_forestry_demand(t_all,i,"woodfuel") = f16_forestry_demand_REG(t_all,i,"woodfuel") * 0.5;
+fm_forestry_demand(t_all,i,kforestry) = f16_forestry_demand(t_all,i,kforestry);
+*fm_forestry_demand(t_all,i,"woodfuel") = f16_forestry_demand(t_all,i,"woodfuel") * 0.5;
 
 *** Only needed to fix the time step length miscalculation from t_all in y1995.
 *** The 1995 value for yeardiff needs to be one but with m_yeatrdiff on t_all its is 5.
 *** Only the t values will be overwritten using this fix.
 *** Could also make a dollar condition with $(ord(t)=1). Fix later.
 
-fm_forestry_demand(t,i,kforestry) = f16_forestry_demand_REG(t,i,kforestry);
-*fm_forestry_demand(t,i,"woodfuel") = f16_forestry_demand_REG(t,i,"woodfuel") * 0.5;
+fm_forestry_demand(t,i,kforestry) = f16_forestry_demand(t,i,kforestry);
+*fm_forestry_demand(t,i,"woodfuel") = f16_forestry_demand(t,i,"woodfuel") * 0.5;

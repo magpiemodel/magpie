@@ -8,13 +8,10 @@
 
 equations
  q27_prod_timber(j,kforestry)             Cellular timber production constraint (mio. m3 per yr)
-* q27_prod_timber_reg(i,kforestry)         Regional timber production constraint (mio. m3 per yr)
-* q27_prod_forestry_ratio                  Global forestry production constraint (mio. m3 per yr)
-* q27_prod_natveg_ratio                    Global natveg production constraint (mio. m3 per yr)
 ;
 
 positive variables
- vm_prod_heaven_timber(j,kforestry)          Production from heaven in each cell (mio. m3 per yr)
+ vm_prod_heaven_timber(j,kforestry)          Balanceflow production of timber from each cell (mio. m3 per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

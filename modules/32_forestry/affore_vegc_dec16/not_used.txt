@@ -12,3 +12,6 @@ pm_time_diff, parameter, not used
 fm_growth_par, input, not used
 p32_interest, parameter, not used
 fm_climate_class, input, not used
+fm_interest, input, not used
+fm_distance, input, not used
+fm_transport_costs, input, not used

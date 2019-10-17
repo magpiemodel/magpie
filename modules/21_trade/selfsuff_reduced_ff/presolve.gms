@@ -7,4 +7,4 @@ pc21_selfsuff_forestry_future(i,kforestry)  = sum(t_ext$(t_ext.pos = pm_rotation
 pc21_trade_bal_reduction_future(kforestry)  = sum(t_ext, i21_trade_bal_reduction_ff(t_ext,kforestry))/card(t_ext);
 pc21_trade_balanceflow_future(kforestry)    = sum(t_ext, p21_trade_balanceflow_ext(t_ext,kforestry))/card(t_ext);
 pc21_exp_shr_future(i,kforestry)            = sum(t_ext$(t_ext.pos = pm_rotation_reg(t,i)),p21_exp_shr_ext(t_ext,i,kforestry));
-pcm_production_ratio_future(i)               = sum(t_ext$(t_ext.pos = pm_rotation_reg(t,i)),pm_production_ratio_ext(i,t_ext));
+pcm_production_ratio_future(i)               = sum(t_ext$(t_ext.pos = pm_rotation_reg(t,i)),pm_production_ratio_ext(t_ext,i));

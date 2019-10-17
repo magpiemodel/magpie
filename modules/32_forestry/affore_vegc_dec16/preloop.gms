@@ -16,7 +16,7 @@ p32_aff_togo(t) = sum(j, smax(t2, p32_aff_pol(t2,j)) - p32_aff_pol(t,j));
 p32_land(t,j,ac,when) = 0;
 
 * Fix production related parameters to 0
-pm_production_ratio_ext(i,t_ext) = 0;
+pm_production_ratio_ext(t_ext,i) = 0;
 pc32_rot_length(i) = 0;
 
 * Fix future trade related variables to 0

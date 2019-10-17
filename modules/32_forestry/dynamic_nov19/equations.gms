@@ -9,11 +9,14 @@
 
 *****Costs**********************************************************************
 
-*' The direct costs of afforestation `vm_cost_fore` include maintenance and monitoring
-*' costs for newly established plantations [@sathaye_ghg_2005]. Note that "old" refers
-*' to forestry plantations for wood production in 1995.
-*' In addition, afforestation may cause costs in other parts of the model such
-*' as costs for technological change [13_tc] or land expansion [39_landconversion].
+*' The direct costs of Timber production and afforestation `vm_cost_fore` include
+*' maintenance and monitoring costs for newly established plantations as well as
+*' standing plantations '[@sathaye_ghg_2005]. In addition, this type of forest management
+*' (including afforestation) may cause costs in other parts of the model such as costs
+*' for technological change [13_tc] or land expansion [39_landconversion]. Also included
+*' are additional costs for producing timber from extremely highly managed plantations
+*' which are analogous to intensification using technological change from [13_tc] but
+*' in a parametrized form.
 
 q32_cost_total(i2) .. vm_cost_fore(i2) =e=
                      v32_cost_harvest(i2)
@@ -93,6 +96,8 @@ PV of establishment decision cost
 PV * annuity factor * time step length
 $offtext
 
+*' Cost of new plantations establishment `v32_cost_establishment` calculated as the product of forestry land (`v32_land`) and the area
+*' weighted mean of carbon density for carbon pools (`p32_carbon_density`).
 
 q32_cost_establishment(i2)..
 						v32_cost_establishment(i2)
@@ -102,7 +107,7 @@ q32_cost_establishment(i2)..
               (
 *             sum((ct,kforestry), vm_prod_future_reg_ff(i2,kforestry) * c32_harvesting_cost/((1+pm_interest(i2))**30))
 *              +
-              sum((cell(i2,j2),ct,kforestry), f32_distance(j2) * f32_transport_costs(kforestry)) * sum(kforestry,vm_prod_future_reg_ff(i2,kforestry))
+              sum((cell(i2,j2),ct,kforestry), fm_distance(j2) * fm_transport_costs(kforestry)) * sum(kforestry,vm_prod_future_reg_ff(i2,kforestry))
               +
               sum(ct,vm_cost_trade_forestry_ff(i2)/((1+pm_interest(i2))**30))
 ************ ((1+pm_interest(i2))**p32_rot_length(ct,i2)) to calculate present value of future costs

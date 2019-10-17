@@ -14,7 +14,7 @@ p32_carbon_density_ac_marg(t,j,ac_sub) = p32_carbon_density_ac_nat(t,j,ac_sub) -
 
 p32_IGR(t,j,ac_sub) = p32_carbon_density_ac_marg(t,j,ac_sub)/p32_carbon_density_ac_nat(t,j,ac_sub);
 p32_IGR("y1995",j,"ac0") = 1;
-p32_interest(t,i) = f32_interest(t,"%c12_interest_rate%");
+p32_interest(t,i) = fm_interest(t,"%c12_interest_rate%");
 p32_rot_flg(t,j,ac) = 1$((p32_IGR(t,j,ac) - sum(cell(i,j),p32_interest(t,i)))>0) + 0$((p32_IGR(t,j,ac) - sum(cell(i,j),p32_interest(t,i)))>0);
 p32_rot_final(t,j) = sum(ac,p32_rot_flg(t,j,ac)) * 5;
 p32_rot_final(t,j)$(p32_rot_final(t,j)>90) = 90;
@@ -66,12 +66,12 @@ p32_land(t,j,"plant",ac)$(ord(ac) > 1) = p32_land(t,j,"plant",ac-1);
 p32_land("y1995",j,"plant","ac0") = 0;
 
 **************************************************************************************
-f32_production_ratio("MEA",t_all) = f32_production_ratio("MEA","y1995");
-pm_production_ratio_ext(i,t_ext) = f32_production_ratio(i,"y1995");
-pm_production_ratio_ext(i,t_all) = f32_production_ratio(i,"y1995");
+f32_production_ratio(t_all,"MEA") = f32_production_ratio("y1995","MEA");
+pm_production_ratio_ext(t_ext,i) = f32_production_ratio("y1995",i);
+pm_production_ratio_ext(t_all,i) = f32_production_ratio("y1995",i);
 
-pm_production_ratio_ext(i,t_ext) = f32_production_ratio(i,"y2100");
-pm_production_ratio_ext(i,t_all) = f32_production_ratio(i,t_all);
+pm_production_ratio_ext(t_ext,i) = f32_production_ratio("y2100",i);
+pm_production_ratio_ext(t_all,i) = f32_production_ratio(t_all,i);
 
 *** Hardcoding bugfix
 *f32_forestry_management("USA") = 15;
@@ -79,7 +79,7 @@ pm_production_ratio_ext(i,t_all) = f32_production_ratio(i,t_all);
 *f32_forestry_management("EUR") = 12;
 *f32_forestry_management("JPN") = 7;
 *f32_forestry_management("NEU") = 7;
-f32_forestry_management_moinput("USA","plantations") = 7;
-p32_management_factor(j,mgmt_type) = sum(cell(i,j),ceil(f32_forestry_management_moinput(i,"plantations")/f32_forestry_management_moinput(i,"natveg")));
+f32_forestry_management("USA","plantations") = 7;
+p32_management_factor(j,mgmt_type) = sum(cell(i,j),ceil(f32_forestry_management(i,"plantations")/f32_forestry_management(i,"natveg")));
 p32_management_factor(j,"high") = p32_management_factor(j,"normal") * 3;
 **************************************************************************

@@ -7,9 +7,10 @@
 
 *' @title Timber
 *'
-*' @description The timber module determines land used for timber production
-*' based on an exogenous timber demand calculated from FAO. At the same time,
-*' it calculates geographically explicit production of wood and wood fuel.
+*' @description The timber module Calculates geographically explicit production
+*' of wood and wood fuel while endogenously determining the optimal share of
+*' wood and woodfuel production coming from plantation forests and natural forests
+*' based on an exogenous timber demand calculated from FAO. 
 *'
 *' @authors Abhijeet Mishra
 

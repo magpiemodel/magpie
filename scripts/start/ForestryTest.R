@@ -60,7 +60,7 @@ cfg <- setScenario(cfg,c("SSP2","NPI"))
 #################################
 ####### CHANGING THE FLAG #######
 #################################
-flag_run <- "R009-"
+flag_run <- "R010-"
 #################################
 #for(rl_scen in c("low","medium","high")) {
 for(rl_scen in c("medium")) {
@@ -83,7 +83,7 @@ for(rl_scen in c("medium")) {
 
 			## Update input file from isimip
 			isimip_data <- paste0("isimip_rcp-IPSL_CM5A_LR-",rcp_scen,"-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
-			cfg$input <- c("magpie4.1_default_apr19.tgz","additional_data_rev3.68.tgz",isimip_data,"private_forestry_dec18_20191009.tgz")
+			cfg$input <- c("magpie4.1_default_apr19.tgz","additional_data_rev3.68.tgz",isimip_data,"private_forestry_dec18_20191016.tgz")
 
 			## Set 2nd gen bioenergy demand and pollutant prices
 			cfg$gms$c56_pollutant_prices <- co2_price_scenarios

@@ -66,7 +66,7 @@ v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub
 m_boundfix(v32_land,(j,"plant",ac_sub),l,10e-5);
 
 *fix C-price induced afforestation and indc to zero (for testing)
-*v32_land.fx(j,"aff",ac) = 0;
+v32_land.fx(j,"aff",ac) = 0;
 *v32_land.fx(j,"indc",ac) = 0;
 
 ** Bounds for indc and aff forests
@@ -79,6 +79,7 @@ p32_carbon_density_ac(t,j,type32,ac,ag_pools)  = pm_carbon_density_ac(t,j,ac,ag_
 *p32_rot_ac(j) = p32_rot_length("y1995",j)/5;
 p32_rot_ac(j) = p32_rot_length(t,j)/5;
 p32_regional_min(j)   = 1/p32_management_factor(j,"normal");
+*p32_dampen_pre(ac,j)  = (1-(1/ord(ac)))$(ord(ac)<p32_rot_ac(j)) + 1$(ord(ac)=p32_rot_ac(j)) + (1-(1/p32_rot_ac(j))*(ord(ac)-p32_rot_ac(j)))$(ord(ac)>p32_rot_ac(j));
 p32_dampen_pre(ac,j)  = (1-(1/ord(ac)))$(ord(ac)<p32_rot_ac(j)) + 1$(ord(ac)=p32_rot_ac(j)) + (1-(1/p32_rot_ac(j))*(ord(ac)-p32_rot_ac(j)))$(ord(ac)>p32_rot_ac(j));
 p32_dampen_final(ac,j) = p32_dampen_pre(ac,j)$(p32_dampen_pre(ac,j) >= p32_regional_min(j)) + p32_regional_min(j)$(p32_dampen_pre(ac,j) < p32_regional_min(j));
 

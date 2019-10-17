@@ -18,7 +18,7 @@ parameters
  p32_rotation_cellular(t,j)                         Cellular length translated to age classes on cellular level (1)
  p32_forestry_management(j)                       Plantation forest management factors on world region levels (1)
  pc32_timestep                                    Timestep (1)
- pm_production_ratio_ext(i,t_ext)                 Extened production ratio (1)
+ pm_production_ratio_ext(t_ext,i)                 Extened production ratio (1)
  pc32_yield_forestry_mature_future(j)             Future yield of matured tree after rotation period (m3 per ha per yr)
  p32_plant_ini_ac(j)                              Initialization of plantation area (mio. ha)
  pcm_production_ratio_future(i)                  Future production ratio (1)

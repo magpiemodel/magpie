@@ -21,3 +21,9 @@ $if "%c12_interest_rate%" == "coupling" $include "./modules/12_interest_rate/inp
 $if "%c12_interest_rate%" == "coupling" $offdelim
 $if "%c12_interest_rate%" == "coupling" /
 $if "%c12_interest_rate%" == "coupling" ;
+
+table fm_interest(t_all,scen12)  Interest rate scenarios (% per yr)
+$ondelim
+$include "./modules/12_interest_rate/input/f12_interest_rate.cs3"
+$offdelim
+;
