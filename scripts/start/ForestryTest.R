@@ -25,7 +25,8 @@ codeCheck <- FALSE
 cfg$results_folder <- "output/:title:"
 
 #cfg <- setScenario(cfg,c("SSP2","BASE"))
-
+## Load SSP2
+cfg <- setScenario(cfg,c("SSP2","NPI"))
 ## Module settings
 cfg$gms$demand <- "sector_dec18"
 cfg$gms$trade <- "selfsuff_reduced_ff"
@@ -55,8 +56,6 @@ cfg$recalibrate <- "ifneeded"
 
 ## Setting up runs
 
-## Load SSP2
-cfg <- setScenario(cfg,c("SSP2","NPI"))
 #################################
 ####### CHANGING THE FLAG #######
 #################################
