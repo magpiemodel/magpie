@@ -29,7 +29,7 @@ cfg$results_folder <- "output/:title:"
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 ## Module settings
 cfg$gms$demand <- "sector_may15"
-cfg$gms$trade <- "selfsuff_reduced_ff"
+cfg$gms$trade <- "selfsuff_reduced"
 cfg$gms$forestry  <- "dynamic_nov19"
 cfg$gms$natveg  <- "dynamic_nov19"
 cfg$gms$optimization <- "nlp_apr17"
@@ -59,7 +59,7 @@ cfg$recalibrate <- "ifneeded"
 #################################
 ####### CHANGING THE FLAG #######
 #################################
-flag_run <- "R001--ZeroForestProd--"
+flag_run <- "R002--ZeroForestProd--"
 #################################
 #for(rl_scen in c("low","medium","high")) {
 for(rl_scen in c("medium")) {
