@@ -31,6 +31,7 @@ cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$demand <- "sector_dec18"
 cfg$gms$trade <- "selfsuff_reduced_ff"
 cfg$gms$forestry  <- "dynamic_nov19"
+cfg$gms$s32_recurring_cost_multiplier <- 100
 cfg$gms$natveg  <- "dynamic_nov19"
 cfg$gms$optimization <- "nlp_apr17"
 cfg$gms$land <- "landmatrix_dec18"
@@ -59,19 +60,22 @@ cfg$recalibrate <- "ifneeded"
 #################################
 ####### CHANGING THE FLAG #######
 #################################
-flag_run <- "R011-"
+flag_run <- "R012-"
 #################################
 #for(rl_scen in c("low","medium","high")) {
 for(rl_scen in c("1pc","low","medium","high","15pc")) {
-	if(rl_scen == "1pc") rot_length = "BioRL"
-	if(rl_scen == "low") rot_length = "highRL"
-	if(rl_scen == "medium") rot_length = "defRL"
-	if(rl_scen == "high") rot_length = "LowRL"
-	if(rl_scen == "15pc") rot_length = "MinRL"
+	if(rl_scen == "1pc") cfg$gms$c32_rotation_harvest <- "bio"
+	if(rl_scen == "low") cfg$gms$c32_rotation_harvest = "high"
+	if(rl_scen == "medium") cfg$gms$c32_rotation_harvest = "def"
+	if(rl_scen == "high") cfg$gms$c32_rotation_harvest = "low"
+	if(rl_scen == "15pc") cfg$gms$c32_rotation_harvest = "min"
 
 
 	## Overwrite SSP2 interest rate
-	cfg$gms$c12_interest_rate <- rl_scen          # def = "medium"
+	cfg$gms$c12_interest_rate <- rl_scen
+
+	cfg$gms$c32_rotation_estb <- "medium"
+
 	## Loop over climate impacts
 	#for(climate_impacts in c("nocc","cc")) {
 	for(climate_impacts in c("nocc")) {
@@ -104,10 +108,10 @@ for(rl_scen in c("1pc","low","medium","high","15pc")) {
 
 				if(cfg$gms$c56_pollutant_prices == "R2M41-SSP2-Budg1300" ) {
 					#cfg$title<- paste0(flag_run,"-",ssp_scen,"-",forestry_tc,"_",logging,"_",climate_impacts,"_",rcp_scen,"_","Mitig-pCO2")
-					cfg$title<- paste0(flag_run,"-",rot_length,"_",logging,"_",climate_impacts,"_",rcp_scen,"_","Mitig-pCO2")
+					cfg$title<- paste0(flag_run,"-",paste0(cfg$gms$c32_rotation_harvest,"RL"),"_",logging,"_",climate_impacts,"_",rcp_scen,"_","Mitig-pCO2")
 				} else {
 					#cfg$title<- paste0(flag_run,"-",ssp_scen,"-",forestry_tc,"_",logging,"_",climate_impacts,"_",rcp_scen)
-					cfg$title<- paste0(flag_run,"-",rot_length,"_",logging,"_",climate_impacts,"_",rcp_scen)
+					cfg$title<- paste0(flag_run,"-",paste0(cfg$gms$c32_rotation_harvest,"RL"),"_",logging,"_",climate_impacts,"_",rcp_scen)
 				}
 				start_run(cfg=cfg,codeCheck=codeCheck)
 			}

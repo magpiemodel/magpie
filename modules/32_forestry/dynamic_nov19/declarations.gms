@@ -29,16 +29,17 @@ parameters
  p32_carbon_density_ac_nat(t_all,j,ac)             Above ground carbon density for age classes and carbon pools (tC per ha)
  p32_carbon_density_ac_marg(t_all,j,ac)           Marginal above ground carbon density for age classes and carbon pools (tC per ha)
  p32_IGR(t_all,j,ac)                              Instantaneous growth rate or periodic annual increment of forest growth (1)
- p32_rot_flg(t_all,j,ac)                          Identifier flag when calculating rotation length (1)
- p32_rot_final(t_all,j)                           Rotation length (yr)
+ p32_rot_flg(t_all,j,ac,scen12)                          Identifier flag when calculating rotation length (1)
+ p32_rot_final(t_all,j,scen12)                           Rotation length (yr)
  p32_management_factor(j,mgmt_type)               Management factor used to upscale plantation yields as compared to natural forest yields (1)
  pm_time_diff(t)                                  Difference between timesteps (1)
  p32_aff_togo(t)              		       Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
- p32_interest(t,i)     Interest rate in each region and timestep (% per yr)
+ p32_interest(t,i,scen12)     Interest rate in each region and timestep (% per yr)
  p32_rot_ac(j)              Rotation length translated to age classes on cellular level (1)
  p32_regional_min(j)        Inverse of management factor in plantations (1)
  p32_dampen_pre(ac,j)       Pre calculation for dampening factors applied on management factors (1)
  p32_dampen_final(ac,j)     Final calculation for dampening factors applied on management factors (1)
+ p32_rot_corrected(t_all,j,rotation_type)  Corrected calculation for dampening factors applied on management factors (1)
 ;
 
 positive variables

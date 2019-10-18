@@ -36,6 +36,18 @@ sets
  forest_type forest type
  /plantations, natveg/
 
+ rotation_type Rotation type
+ / min, low, def, high, bio /
+
+ int_to_rl(rotation_type,scen12) mapping between ac and ac_poulter
+ /
+ min   .  (15pc)
+ low   .  (high)
+ def   .  (medium)
+ high  .  (low)
+ bio   .  (1pc)
+ /
+
 ;
 
 alias(ac,ac2);

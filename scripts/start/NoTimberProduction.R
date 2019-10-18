@@ -31,9 +31,11 @@ cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$demand <- "sector_may15"
 cfg$gms$trade <- "selfsuff_reduced"
 cfg$gms$forestry  <- "dynamic_nov19"
+cfg$gms$s32_recurring_cost_multiplier <- 1
 cfg$gms$natveg  <- "dynamic_nov19"
 cfg$gms$optimization <- "nlp_apr17"
 cfg$gms$land <- "landmatrix_dec18"
+cfg$gms$timber <- "off"
 cfg$gms$c80_nlp_solver <- "conopt4"
 
 #ALERT:  At the moment this script cannot download new data in case the input files are changed. Has to be set to true.
@@ -59,16 +61,20 @@ cfg$recalibrate <- "ifneeded"
 #################################
 ####### CHANGING THE FLAG #######
 #################################
-flag_run <- "R002--ZeroForestProd--"
+flag_run <- "R003--ZeroForestProd--"
 #################################
 #for(rl_scen in c("low","medium","high")) {
 for(rl_scen in c("medium")) {
-	if(rl_scen == "low") rot_length = "highRL"
-	if(rl_scen == "medium") rot_length = "defRL"
-	if(rl_scen == "high") rot_length = "LowRL"
+	if(rl_scen == "1pc") cfg$gms$c32_rotation_harvest <- "bio"
+	if(rl_scen == "low") cfg$gms$c32_rotation_harvest = "high"
+	if(rl_scen == "medium") cfg$gms$c32_rotation_harvest = "def"
+	if(rl_scen == "high") cfg$gms$c32_rotation_harvest = "low"
+	if(rl_scen == "15pc") cfg$gms$c32_rotation_harvest = "min"
 
 	## Overwrite SSP2 interest rate
-	cfg$gms$c12_interest_rate <- rl_scen          # def = "medium"
+	cfg$gms$c12_interest_rate <- rl_scen
+	cfg$gms$c32_rotation_estb <- "medium"
+
 	## Loop over climate impacts
 	#for(climate_impacts in c("nocc","cc")) {
 	for(climate_impacts in c("nocc")) {
@@ -76,7 +82,7 @@ for(rl_scen in c("medium")) {
 
 		## Loop over mitigation-co2 prices
 		#for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")) {
-		for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")) {
+		for(co2_price_scenarios in c("R2M41-SSP2-Budg1300")) {
 			if(co2_price_scenarios=="R2M41-SSP2-NPi") rcp_scen <- "rcp6p0"
 			if(co2_price_scenarios=="R2M41-SSP2-Budg1300") rcp_scen <- "rcp2p6"
 

@@ -3,12 +3,15 @@ $setglobal c32_aff_mask  noboreal
 $setglobal c32_aff_policy  npi
 $setglobal c32_rot_length  rlGTM
 $setglobal c32_rot_length_estb  rlGTM
+$setglobal c32_rotation_harvest  def
+$setglobal c32_rotation_estb  def
 
 scalars
   c32_reESTBcost Reestablishment cost in USD per ha / 2000 /
   c32_recurring_cost Recurring costs in USD per ha / 100 /
   c32_harvesting_cost Harvesting cost in USD per ha / 200 /
   s32_planing_horizon Afforestation planing horizon (years)            / 80 /
+  s32_recurring_cost_multiplier Cost multiplier for recurring costs only for testing (1)            / 1 /
 ;
 
 scalars
@@ -29,6 +32,7 @@ $ondelim
 $include "./modules/32_forestry/input/f32_fac_req_ha.csv"
 $offdelim
 ;
+f32_fac_req_ha(i,"recur") = f32_fac_req_ha(i,"recur") * s32_recurring_cost_multiplier;
 
 parameter fm_harvest_cost_ha(i) Harvesting cost (US Dollar 2004 per ha)
 /
