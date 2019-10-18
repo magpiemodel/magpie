@@ -31,7 +31,7 @@ cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$demand <- "sector_dec18"
 cfg$gms$trade <- "selfsuff_reduced_ff"
 cfg$gms$forestry  <- "dynamic_nov19"
-cfg$gms$s32_recurring_cost_multiplier <- 100
+cfg$gms$s32_recurring_cost_multiplier <- 1
 cfg$gms$natveg  <- "dynamic_nov19"
 cfg$gms$optimization <- "nlp_apr17"
 cfg$gms$land <- "landmatrix_dec18"
