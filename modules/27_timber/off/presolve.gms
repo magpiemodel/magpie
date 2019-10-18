@@ -9,7 +9,7 @@
 *' dynamic forestry turned on.
 
 vm_prod_cell_forestry.fx(j,kforestry) = 0;
-vm_prod_cell_natveg(j,kforestry) = 0;
+vm_prod_cell_natveg.fx(j,kforestry) = 0;
 vm_prod.fx(j,kforestry) = 0;
 vm_prod_heaven_timber.fx(j,kforestry)  = 0;
 
