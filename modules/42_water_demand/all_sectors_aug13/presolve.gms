@@ -5,17 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-if (sum(sameas(t_past,t),1) = 1,    
 
-i42_env_flow_policy(t,i) = f42_env_flow_policy(t,"off");
-
-else
 
 $ifthen "%c42_env_flow_policy%" == "mixed" i42_env_flow_policy(t,i) = im_development_state(t,i) * f42_env_flow_policy(t,"on");
 $else i42_env_flow_policy(t,i) = f42_env_flow_policy(t,"%c42_env_flow_policy%");
 $endif
 
-);
 
 
 * Agricultural water demand
