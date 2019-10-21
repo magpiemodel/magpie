@@ -60,7 +60,7 @@ cfg$recalibrate <- "ifneeded"
 #################################
 ####### CHANGING THE FLAG #######
 #################################
-flag_run <- "COACCH01--"
+flag_run <- "COACCH02--"
 #################################
 #for(rl_scen in c("low","medium","high")) {
 for(rl_scen in c("medium")) {
@@ -82,7 +82,7 @@ for(rl_scen in c("medium")) {
 		## Loop over mitigation-co2 prices
 		#for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")) {
 		for(co2_price_scenarios in c("R2M41-SSP2-NPi")) {
-				for(rcp_scen  in c("rcp2p6","rcp4p5","rcp6p0","rcp8p5")){
+				for(rcp_scen  in c("rcp6p0","rcp2p6","rcp4p5","rcp8p5")){
 				## Update input file from isimip
 				isimip_data <- paste0("isimip_rcp-HadGEM2_ES-",rcp_scen,"-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
 				cfg$input <- c("magpie4.1_default_apr19.tgz","additional_data_rev3.68.tgz",isimip_data,"private_forestry_dec18_20191016.tgz")
