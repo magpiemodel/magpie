@@ -42,14 +42,14 @@ sum(ct, pm_carbon_density_ac(ct,j2,ac-1,"vegc"))));
  q32_aff_pol(j2) ..
  v32_land(j2,"new_ndc") =e= sum(ct, p32_aff_pol_timestep(ct,j2));
 
-*' The constraint `q32_max_aff` accounts for the allowed maximum global 
-*' carbon-price induced endogenous afforestation defined in `s32_max_aff_area`. 
-*' Note that NPI/NDC afforestation policies are not counted towards the 
+*' The constraint `q32_max_aff` accounts for the allowed maximum global
+*' carbon-price induced endogenous afforestation defined in `s32_max_aff_area`.
+*' Note that NPI/NDC afforestation policies are not counted towards the
 *' maximum defined in `s32_max_aff_area`. Therefore, the right-hand side of the constraint
-*' is relaxed by the value of exogenously prescribed afforestation (`p32_aff_togo`).
+*' is relaxed by the value of exogenously prescribed afforestation (`p32_aff_pol`).
 
  q32_max_aff .. sum((j2), vm_land(j2,"forestry")-pm_land_start(j2,"forestry"))
-                =l= s32_max_aff_area + sum(ct, p32_aff_togo(ct));
+                =l= s32_max_aff_area + sum((ct,j2), p32_aff_pol(ct,j2));
 
 *****Carbon stocks**************************************************************
 *' Forestry above ground carbon stocks are calculated as the product of forestry land (`v32_land`) and the area

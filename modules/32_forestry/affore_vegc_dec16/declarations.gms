@@ -16,7 +16,6 @@ parameters
  p32_aff_pot(t,j)                        Potential afforestation area on cropland and pasture land (mio. ha)
  p32_aff_pol(t,j)			                   Exogenous afforestation target as stock (mio. ha)
  p32_aff_pol_timestep(t,j)			         Exogenous afforestation target as flow per time step (mio. ha per timestep)
- p32_aff_togo(t)              		       Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
 ;
 
 positive variables
