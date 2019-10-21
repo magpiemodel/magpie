@@ -21,4 +21,3 @@ parameters
  oq17_prod_reg(t,i,k,type)  Regional production (mio. tDM per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
-

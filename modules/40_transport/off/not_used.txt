@@ -7,3 +7,5 @@
 
 name,type,reason
 vm_prod, input, not needed
+fm_distance, input, not used
+fm_transport_costs, input, not used

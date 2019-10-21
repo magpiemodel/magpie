@@ -5,3 +5,7 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
+fm_harvest_cost_ha, input, not used
+pm_climate_class, input, not used
+pm_bcef, input, not used
+pm_time_diff, parameter, not used

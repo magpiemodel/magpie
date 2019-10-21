@@ -9,14 +9,17 @@ positive variables
   v35_secdforest(j,land35) Secdforest (mio. ha)
   v35_other(j,land35)      Other land (mio. ha)
   vm_landdiff_natveg       Aggregated difference in other land compared to previous timestep (mio. ha)
+  vm_cost_natveg(i)                           Regional natveg timber production costs (mio. USD)
+  vm_prod_cell_natveg(j,kforestry)            Production of wood products from plantation forests (mio. m3 per yr)
 ;
 
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov35_secdforest(t,j,land35,type) Secdforest (mio. ha)
- ov35_other(t,j,land35,type)      Other land (mio. ha)
- ov_landdiff_natveg(t,type)       Aggregated difference in other land compared to previous timestep (mio. ha)
+ ov35_secdforest(t,j,land35,type)        Secdforest (mio. ha)
+ ov35_other(t,j,land35,type)             Other land (mio. ha)
+ ov_landdiff_natveg(t,type)              Aggregated difference in other land compared to previous timestep (mio. ha)
+ ov_cost_natveg(t,i,type)                Regional natveg timber production costs (mio. USD)
+ ov_prod_cell_natveg(t,j,kforestry,type) Production of wood products from plantation forests (mio. m3 per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
-

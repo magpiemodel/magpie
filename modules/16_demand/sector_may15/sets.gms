@@ -21,6 +21,8 @@ sets
    kli(kap) Livestock products
    / livst_rum, livst_pig, livst_chick, livst_egg, livst_milk  /
 
+   kforestry(k) forestry products
+          / wood, woodfuel /
  ;
 
 alias(kap,kap4);

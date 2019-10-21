@@ -11,6 +11,6 @@ vm_tech_cost.scale(i) = 10e4;
 vm_cost_prod.scale(i,k) = 10e4;
 vm_cost_transp.scale(j,k) = 10e3;
 vm_nr_inorg_fert_costs.scale(i) = 10e4;
-vm_cost_fore.scale(i) = 10e4;
+vm_cost_fore.scale(i) = 10e6;
 vm_emission_costs.scale(i) = 10e4;
 vm_maccs_costs.scale(i) = 10e4;

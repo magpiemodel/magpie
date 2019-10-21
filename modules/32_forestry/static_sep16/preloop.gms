@@ -10,7 +10,7 @@
 vm_cost_fore.fx(i) = 0;
 vm_cdr_aff.fx(j) = 0;
 
-*' All forestry land pools (`land32`) except for "old" are set to zero, 
+*' All forestry land pools (`land32`) except for "old" are set to zero,
 *' whereas "old" refers to the forestry plantations at the level of 1995.
 v32_land.fx(j,"new") = 0;
 v32_land.fx(j,"prot") = 0;
@@ -21,7 +21,9 @@ v32_land.fx(j,"old") = pcm_land(j,"forestry");
 * Aggregation of forestry land pools (`land32`).
 vm_land.fx(j,"forestry") = sum(land32, v32_land.l(j,land32));
 
-* The change of forestry land is also set to zero. 
+* The change of forestry land is also set to zero.
 vm_landdiff_forestry.fx = 0;
 
+* Set cellular forestry production to 0
+vm_prod_cell_forestry.fx(j,kforestry) = 0;
 *** EOF preloop.gms ***

@@ -13,9 +13,10 @@
 *' For non-traded goods, the regional production must be larger than or equal to regional demand.
 *'
 *'
-*' @authors  Xiaoxi Wang, Anne Biewald, Christoph Schmitz, Markus Bonsch
+*' @authors  Xiaoxi Wang, Anne Biewald, Christoph Schmitz, Markus Bonsch, Abhijeet Mishra
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%trade%" == "free_apr16" $include "./modules/21_trade/free_apr16/realization.gms"
 $Ifi "%trade%" == "off" $include "./modules/21_trade/off/realization.gms"
 $Ifi "%trade%" == "selfsuff_reduced" $include "./modules/21_trade/selfsuff_reduced/realization.gms"
+$Ifi "%trade%" == "selfsuff_reduced_ff" $include "./modules/21_trade/selfsuff_reduced_ff/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

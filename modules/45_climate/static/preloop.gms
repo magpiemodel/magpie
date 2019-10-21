@@ -11,3 +11,8 @@
 pm_climate_class(j,clcl) = f45_koeppengeiger(j,clcl);
 
 *' @stop
+
+
+pm_bcef(ac,clcl) = f45_bcef(ac,clcl);
+
+pm_bcef("ac0",clcl) = 3 ;

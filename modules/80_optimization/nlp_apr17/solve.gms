@@ -15,6 +15,7 @@ $else
 $endif
 
 s80_counter = 0;
+s80_forestry_counter = 0;
 p80_modelstat(t) = 1;
 
 *** solver settings
@@ -26,11 +27,13 @@ magpie.holdfixed = 1 ;
 
 $onecho > conopt4.opt
 Tol_Obj_Change = 3.0e-6
-Tol_Feas_Min = 4.0e-8
+Tol_Feas_Min = 4.0e-7
+Tol_Feas_Max = 4.0e-6
 $offecho
 
 repeat(
    s80_counter = s80_counter + 1 ;
+   s80_forestry_counter = s80_forestry_counter + 1 ;
 
 *' @code
   solve magpie USING nlp MINIMIZING vm_cost_glo;
@@ -42,6 +45,15 @@ repeat(
       option nlp = conopt;
       solve magpie USING nlp MINIMIZING vm_cost_glo;
       option nlp = conopt4;
+    );
+
+    if((magpie.modelstat = 4 and s80_forestry_counter <= 1),
+      display "WARNING: Modelstat 4, SOLPRINT SET TO 1.";
+      magpie.solprint  = 1 ;
+    );
+
+    if((magpie.modelstat = 4 and s80_forestry_counter > 1),
+      abort "Forestry run failed. Check lst file for more details!";
     );
 
   p80_modelstat(t) = magpie.modelstat;

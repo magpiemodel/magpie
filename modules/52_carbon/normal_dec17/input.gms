@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c52_carbon_scenario  cc
+$setglobal c52_carbon_scenario  nocc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
 
@@ -17,7 +17,7 @@ $offdelim
 $if "%c52_carbon_scenario%" == "nocc" fm_carbon_density(t_all,j,land,c_pools) = fm_carbon_density("y1995",j,land,c_pools);
 m_fillmissingyears(fm_carbon_density,"j,land,c_pools");
 
-table f52_growth_par(clcl,chap_par) Parameters for chapman-richards equation (1)
+table fm_growth_par(clcl,chap_par) Parameters for chapman-richards equation (1)
 $ondelim
 $include "./modules/52_carbon/input/f52_growth_par.csv"
 $offdelim

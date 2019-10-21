@@ -24,11 +24,13 @@
                    + vm_cost_AEI(i2)
                    + vm_cost_trade(i2)
                    + vm_cost_fore(i2)
+                   + vm_cost_natveg(i2)
                    + vm_cost_processing(i2)
                    + vm_bioenergy_utility(i2)
                    + vm_processing_substitution_cost(i2)
                    + vm_costs_additional_mon(i2)
                    + sum(cell(i2,j2),vm_cost_land_transition(j2))
+                   + sum((cell(i2,j2),kforestry),vm_prod_heaven_timber(j2,kforestry) * 10e9)
                    ;
 
 *' The total regional production cost calculation is based on the sum of different

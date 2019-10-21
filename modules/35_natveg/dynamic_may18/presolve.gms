@@ -135,3 +135,8 @@ pcm_carbon_stock(j,"other",ag_pools) =
 
 p35_min_forest(t,j)$(p35_min_forest(t,j) > vm_land.l(j,"primforest") + vm_land.l(j,"secdforest")) = vm_land.l(j,"primforest") + vm_land.l(j,"secdforest");
 p35_min_other(t,j)$(p35_min_other(t,j) > vm_land.l(j,"other")) = vm_land.l(j,"other");
+
+*' @code
+*' Setting variable interfaces to zero which are not dealt by this module realization
+vm_cost_natveg.fx(i) = 0;
+*' @stop

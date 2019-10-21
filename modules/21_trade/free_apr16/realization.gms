@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description  In this realization, agricultural trade is fully liberalized in all timesteps. 
+*' @description  In this realization, agricultural trade is fully liberalized in all timesteps.
 
 *' @limitations This realization does not account for current trends in agricultural trade.
 
@@ -14,5 +14,6 @@ $Ifi "%phase%" == "sets" $include "./modules/21_trade/free_apr16/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/21_trade/free_apr16/declarations.gms"
 $Ifi "%phase%" == "equations" $include "./modules/21_trade/free_apr16/equations.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/21_trade/free_apr16/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/21_trade/free_apr16/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/21_trade/free_apr16/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

@@ -20,17 +20,17 @@ v10_lu_transitions.fx(j,"other","forestry") = 0;
 v10_lu_transitions.fx(j,"primforest","other") = 0;
 v10_lu_transitions.fx(j,"secdforest","other") = 0;
 
-*' Forestry can only increase
-v10_lu_transitions.fx(j,"forestry",land_to10) = 0;
-v10_lu_transitions.up(j,"forestry","forestry") = Inf;
+*' Forestry can only increase -- Not in dynamic forestry
+*v10_lu_transitions.fx(j,"forestry",land_to10) = 0;
+*v10_lu_transitions.up(j,"forestry","forestry") = Inf;
 
 *' Primforest can only decrease
 v10_lu_transitions.fx(j,land_from10,"primforest") = 0;
 v10_lu_transitions.up(j,"primforest","primforest") = Inf;
 
-*' Secdforest can only decrease (during optimization)
-v10_lu_transitions.fx(j,land_from10,"secdforest") = 0;
-v10_lu_transitions.up(j,"secdforest","secdforest") = Inf;
+*' Secdforest can only decrease (during optimization) -- Not in dynamic forestry
+*v10_lu_transitions.fx(j,land_from10,"secdforest") = 0;
+*v10_lu_transitions.up(j,"secdforest","secdforest") = Inf;
 
 *' Urban land is fixed
 v10_lu_transitions.fx(j,land_from10,"urban") = 0;

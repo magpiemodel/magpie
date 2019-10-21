@@ -12,4 +12,5 @@ parameters
 
 scalars
   s80_counter       counter (1)
+	s80_forestry_counter	counter (1)
 ;

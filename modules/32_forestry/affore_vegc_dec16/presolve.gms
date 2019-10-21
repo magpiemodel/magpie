@@ -17,7 +17,13 @@
 
 *' @code
 *' Wood demand is set to zero because forestry is not modeled in this realization.
-vm_supply.fx(i2,kforestry) = 0;
+*vm_supply.fx(i2,kforestry) = 0;
+
+*' Production and future trade realated calculations are also set to zero because
+*' they are modeled by a different realization of this module.
+*vm_prod.fx(j2,kforestry) = 0;
+*vm_prod_reg.fx(i2,kforestry) = 0;
+vm_cost_trade_forestry_ff.fx(i2) = 0;
 
 *' Certain areas (e.g. the boreal zone) are excluded from endogenous afforestation.
 v32_land.lo(j,"new") = 0;
@@ -69,7 +75,4 @@ p32_carbon_density(t,j,"new_ndc",ag_pools) = pm_carbon_density_ac(t,j,"ac0",ag_p
 p32_carbon_density(t,j,"prot",ag_pools) = m_weightedmean(pm_carbon_density_ac(t,j,ac,ag_pools),p32_land(t,j,ac,"before"),(ac_land32(ac,"prot")));
 p32_carbon_density(t,j,"grow",ag_pools) = m_weightedmean(pm_carbon_density_ac(t,j,ac,ag_pools),p32_land(t,j,ac,"before"),(ac_land32(ac,"grow")));
 p32_carbon_density(t,j,"old",ag_pools) = pm_carbon_density_ac(t,j,"acx",ag_pools);
-
-
-
 *** EOF presolve.gms ***
