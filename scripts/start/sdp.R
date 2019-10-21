@@ -111,6 +111,21 @@ cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
 start_run(cfg,codeCheck=FALSE)
 
 
+
+
+##############################################################
+
+
+cfg$title <- "SSP2_26_SSP2DB_RM"
+cfg <- setScenario(cfg,c("SSP2","noSDP","NDC"))
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+start_run(cfg,codeCheck=FALSE)
+
+
+
+
+
 #reset:
 # SSP2 with NPI policy is default:
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
