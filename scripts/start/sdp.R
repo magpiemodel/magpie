@@ -115,6 +115,27 @@ start_run(cfg,codeCheck=FALSE)
 
 ##############################################################
 
+cfg$title <- "SDP_26_SSP2DB_RM_0affore"
+cfg <- setScenario(cfg,c("SDP","NDC"))
+cfg$gms$s32_max_aff_area <- 0
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- "SDP_26_SSP2DB_RM_Infaffore"
+cfg <- setScenario(cfg,c("SDP","NDC"))
+cfg$gms$s32_max_aff_area <- Inf
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+start_run(cfg,codeCheck=FALSE)
+
+#reset:
+cfg$gms$s32_max_aff_area <- 500
+
+
+
+#############################################################
+
 
 cfg$title <- "SSP2_26_SSP2DB_RM"
 cfg <- setScenario(cfg,c("SSP2","noSDP","NDC"))
