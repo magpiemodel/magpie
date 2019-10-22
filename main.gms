@@ -92,58 +92,65 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: magpie4.1_default_apr19.tgz
-* md5sum: 5c38bb1083bd66010c2104c9d40553f4
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
-* 
-* Used data set: LPJmL5-IPSL_CM5A_LR-rcp2p6_rev40_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: 10644585a0b664f345ded1d90ca88fa3
+* Used data set: LPJmL5-HadGEM2_ES-rcp4p5-co2_rev40.3_c400_c2a48c5eae535d4b8fe9c953d9986f1b.tgz
+* md5sum: 18fcf23ae3d4fef19da462744ee38e39
 * Repository: /p/projects/landuse/data/input/archive
 * 
-* Used data set: rev4.21_690d3718e151be1b450b394c1064b1c5_magpie.tgz
-* md5sum: 2d1e3ec7b22675891a8b0ef985425f60
+* Used data set: rev4.19_c2a48c5eae535d4b8fe9c953d9986f1b_magpie.tgz
+* md5sum: 868be46ae83602d6fa238801db63cde8
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.21_690d3718e151be1b450b394c1064b1c5_validation.tgz
-* md5sum: 69586a3e2a3f6cc888566d671391d853
+* Used data set: rev4.19_c2a48c5eae535d4b8fe9c953d9986f1b_validation.tgz
+* md5sum: cb88faacdbd5a42fe0b591bf6bd52220
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev3.68.tgz
-* md5sum: 15d1135625a9f5cfb9c7c6038716a156
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: calibration_calibration_coacch_21Oct19.tgz_21Oct19.tgz
+* md5sum: cf78b5c1366029e3be23f5857ab6ca03
+* Repository: /p/projects/landuse/data/input/calibration
 * 
-* Low resolution: c200
+* Used data set: additional_data_rev3.72.tgz
+* md5sum: c57958997559c1a6197bead52e05fc0b
+* Repository: /p/projects/landuse/data/input/archive
+* 
+* Used data set: coacch_forestry_inputdata_v2.tgz
+* md5sum: 3d93a890ca56adbee2071ebd4d4bf3b7
+* Repository: /p/projects/landuse/data/input/archive
+* 
+* Low resolution: c400
 * High resolution: 0.5
 * 
-* Total number of cells: 200
+* Total number of cells: 400
 * 
 * Number of cells per region:
-*   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*    28   23    9    7    2   31   32   10   14   10   25    9
+*   EAS  EEU  FSU  MEN  NAO  NEU  SAS  SCA  SEU  SSA  WEU  XEU
+*    46    4   13   32   72    8   29   81    9   96    6    4
 * 
-* Regionscode: 690d3718e151be1b450b394c1064b1c5
+* Regionscode: c2a48c5eae535d4b8fe9c953d9986f1b
 * 
-* Regions data revision: 4.21
+* Regions data revision: 4.19
 * 
 * lpj2magpie settings:
-* * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/LPJmL5/IPSL_CM5A_LR/rcp2p6
+* * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/LPJmL5/HadGEM2_ES/rcp4p5/co2
 * * Additional input folder: /p/projects/landuse/data/input/other/rev40
-* * Revision: 40
+* * Revision: 40.3
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), moinput_cache = gsub("default",     paste0("rev", cfg$revision2), madrat::getConfig()$cachefolder),     output_file = lpj2magpie_file, rev = cfg$revision, start_year = cfg$LPJ_start_year)
 * 
 * aggregation settings:
 * * Input resolution: 0.5
-* * Output resolution: c200
-* * Input file: /p/projects/landuse/data/input/archive/LPJmL5-IPSL_CM5A_LR-rcp2p6_rev40_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/LPJmL5-IPSL_CM5A_LR-rcp2p6_rev40_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* * Regionscode: 690d3718e151be1b450b394c1064b1c5
+* * Output resolution: c400
+* * Input file: /p/projects/landuse/data/input/archive/LPJmL5-HadGEM2_ES-rcp4p5-co2_rev40.3_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/LPJmL5-HadGEM2_ES-rcp4p5-co2_rev40.3_c400_c2a48c5eae535d4b8fe9c953d9986f1b.tgz
+* * Regionscode: c2a48c5eae535d4b8fe9c953d9986f1b
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = cfg$spamfile, debug = FALSE, seed = cfg$seed)
 * 
 * 
+* Warning message:
+* In file.copy("calibration_results.pdf", cfg$results_folder,  ... :
+*   problem copying ./calibration_results.pdf to output/v8_SSP2_nocc_newregion_2019-10-21_23.42.08/calibration_results.pdf: No such file or directory
 * 
-* Last modification (input data): Mon Sep 23 15:25:53 2019
+* Last modification (input data): Tue Oct 22 05:18:05 2019
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -184,19 +191,20 @@ $setglobal tc  endo_jun18
 $setglobal yields  managementcalib_aug19
 
 $setglobal food  anthropometrics_jan18
-$setglobal demand  sector_may15
+$setglobal demand  sector_dec18
 $setglobal production  flexreg_apr16
 
 $setglobal residues  flexreg_apr16
 $setglobal processing  substitution_dec18
 
-$setglobal trade  selfsuff_reduced
+$setglobal trade  selfsuff_reduced_ff
+$setglobal timber  exo_sep19
 
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
-$setglobal forestry  affore_vegc_dec16
+$setglobal forestry  dynamic_nov19
 $setglobal urban  static
-$setglobal natveg  dynamic_may18
+$setglobal natveg  dynamic_nov19
 
 $setglobal factor_costs  mixed_feb17
 $setglobal landconversion  global_static_aug18

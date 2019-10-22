@@ -24,11 +24,6 @@ $offdelim;
 table f16_domestic_balanceflow(t_all,i,kall) Balance flow for inconsistencies between domestic supply and use in FAO (mio. tDM per yr)
 $ondelim
 $include "./modules/16_demand/sector_dec18/input/f16_domestic_balanceflow.csv"
-$offdelim;
-
-table f16_forestry_demand_iso(t_all,iso,kforestry) demand
-$ondelim
-$include "./modules/16_demand/sector_dec18/input/f16_forestry_demand_iso.csv"
 $offdelim
 ;
 

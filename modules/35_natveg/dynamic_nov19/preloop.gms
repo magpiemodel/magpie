@@ -6,7 +6,9 @@
 v35_prod.fx(j,"other","wood") = 0;
 v35_hvarea_other.fx(j,"wood",ac_sub) = 0;
 
-i35_ageclass_area_secdf(j,ac) = sum(ac_poulter_to_ac(ac_poulter,ac), f35_ageclass_area(j,ac_poulter)$(not sameas(ac_poulter,"class15")));
+*i35_ageclass_area_secdf(j,ac) = sum(ac_poulter_to_ac(ac_poulter,ac), f35_ageclass_area(j,ac_poulter)$(not sameas(ac_poulter,"class15")));
+i35_ageclass_area_secdf(j,ac) = 1;
+
 
 i35_ageclass_shr_grow(j,ac) = 1/card(ac);
 

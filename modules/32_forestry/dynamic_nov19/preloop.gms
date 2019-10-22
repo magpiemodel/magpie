@@ -12,7 +12,8 @@ p32_carbon_density_ac_nat(t,j,ac) = m_growth_vegc(0,fm_carbon_density(t,j,"other
 
 p32_carbon_density_ac_marg(t,j,ac_sub) = p32_carbon_density_ac_nat(t,j,ac_sub) - p32_carbon_density_ac_nat(t,j,ac_sub-1);
 
-p32_IGR(t,j,ac_sub) = p32_carbon_density_ac_marg(t,j,ac_sub)/p32_carbon_density_ac_nat(t,j,ac_sub);
+*p32_IGR(t,j,ac_sub) = p32_carbon_density_ac_marg(t,j,ac_sub)/p32_carbon_density_ac_nat(t,j,ac_sub);
+p32_IGR(t,j,ac_sub) = (p32_carbon_density_ac_marg(t,j,ac_sub)/p32_carbon_density_ac_nat(t,j,ac_sub))$(p32_carbon_density_ac_nat(t,j,ac_sub)>0) + 1$(p32_carbon_density_ac_nat(t,j,ac_sub)<0.0001);
 p32_IGR("y1995",j,"ac0") = 1;
 p32_interest(t,i,scen12) = fm_interest(t,scen12);
 p32_rot_flg(t,j,ac,scen12) = 1$((p32_IGR(t,j,ac) - sum(cell(i,j),p32_interest(t,i,scen12)))>0) + 0$((p32_IGR(t,j,ac) - sum(cell(i,j),p32_interest(t,i,scen12)))>0);
@@ -67,7 +68,7 @@ p32_land(t,j,"plant",ac)$(ord(ac) > 1) = p32_land(t,j,"plant",ac-1);
 p32_land("y1995",j,"plant","ac0") = 0;
 
 **************************************************************************************
-f32_production_ratio(t_all,"MEA") = f32_production_ratio("y1995","MEA");
+*f32_production_ratio(t_all,"MEA") = f32_production_ratio("y1995","MEA");
 pm_production_ratio_ext(t_ext,i) = f32_production_ratio("y1995",i);
 pm_production_ratio_ext(t_all,i) = f32_production_ratio("y1995",i);
 
@@ -80,7 +81,7 @@ pm_production_ratio_ext(t_all,i) = f32_production_ratio(t_all,i);
 *f32_forestry_management("EUR") = 12;
 *f32_forestry_management("JPN") = 7;
 *f32_forestry_management("NEU") = 7;
-f32_forestry_management("USA","plantations") = 7;
+*f32_forestry_management("USA","plantations") = 7;
 p32_management_factor(j,mgmt_type) = sum(cell(i,j),ceil(f32_forestry_management(i,"plantations")/f32_forestry_management(i,"natveg")));
 p32_management_factor(j,"high") = p32_management_factor(j,"normal") * 3;
 **************************************************************************

@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c12_interest_rate  medium
+$setglobal c12_interest_rate  low
 
 table f12_interest_bound(t,bound12) Lower and higher bounds of interest rates (% per yr)
 $ondelim

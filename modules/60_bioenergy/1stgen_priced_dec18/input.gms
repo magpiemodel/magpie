@@ -10,7 +10,7 @@ scalars
   c60_biodem_level  bioenergy demand level indicator 1 for regional and 0 for global demand   (1)   / 1 /
 ;
 
-$setglobal c60_2ndgen_biodem  R2M41-SSP2-NPi
+$setglobal c60_2ndgen_biodem  SSPDB-SSP5-Ref-REMIND-MAGPIE
 
 $if "%c60_2ndgen_biodem%" == "coupling" table f60_bioenergy_dem_coupling(t_all,i) Bioenergy demand (regional) (mio. GJ per yr)
 $if "%c60_2ndgen_biodem%" == "coupling" $ondelim
@@ -32,7 +32,7 @@ $include "./modules/60_bioenergy/input/f60_bioenergy_dem.cs3"
 $offdelim
 ;
 
-$setglobal c60_res_2ndgenBE_dem  ssp2
+$setglobal c60_res_2ndgenBE_dem  ssp5
 *   options:    ssp1,ssp2,ssp3,ssp4,ssp5,off
 
 table f60_res_2ndgenBE_dem(t_all,i,scen2ndres60) annual residue demand for 2nd generation bioenergy(regional) (mio. GJ per yr)
@@ -42,7 +42,7 @@ $offdelim
 ;
 
 
-$setglobal c60_1stgen_biodem  const2020
+$setglobal c60_1stgen_biodem  phaseout2020
 *   options:  "const2020", "const2030", "phaseout2020"
 
 table f60_1stgen_bioenergy_dem(t_all,i,scen1st60,kall) annual 1st generation bioenergy demand (mio. GJ per yr)
