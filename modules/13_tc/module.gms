@@ -19,8 +19,9 @@
 *' Calculated $\tau$ factors are then used for yields calculation by [14_yields]
 *' and by [38_factor_costs] for the calculation of factor costs.
 *'
-*' @authors Jan Philipp Dietrich, Christoph Schmitz, Benjamin Bodirsky
+*' @authors Jan Philipp Dietrich, Christoph Schmitz, Benjamin Bodirsky, Florian Humpenoeder
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%tc%" == "endo_jun18" $include "./modules/13_tc/endo_jun18/realization.gms"
+$Ifi "%tc%" == "exo" $include "./modules/13_tc/exo/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
