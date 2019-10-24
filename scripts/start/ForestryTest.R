@@ -100,7 +100,7 @@ for(rl_scen in c("medium")) {
 
 			## Set clear cutting or selective logging flag
 			#for (sl_set in c(0.01,0.05,1.00)) {
-			for (sl_set in c(0.01,0.05,1.00)) {
+			for (sl_set in c(1.00)) {
 				if(sl_set == 0.01) logging = "Sel1pc"
 				if(sl_set == 0.05) logging = "Sel5pc"
 				if(sl_set == 1.00) logging = "ClrCut"
