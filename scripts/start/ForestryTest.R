@@ -100,13 +100,13 @@ for(rl_scen in c("medium")) {
 
 			## Set clear cutting or selective logging flag
 			#for (sl_set in c(0.01,0.05,1.00)) {
-			for (sl_set in c(1.00)) {
+			for (sl_set in c(0.01,0.05,1.00)) {
 				if(sl_set == 0.01) logging = "Sel1pc"
 				if(sl_set == 0.05) logging = "Sel5pc"
 				if(sl_set == 1.00) logging = "ClrCut"
 				cfg$gms$s35_selective_logging_flag = sl_set
 
-				if(cfg$gms$c56_pollutant_prices == "R2M41-SSP2-Budg1300" ) {
+				if(cfg$gms$c56_pollutant_prices == "R2M41-SSP2-Budg1300") {
 					#cfg$title<- paste0(flag_run,"-",ssp_scen,"-",forestry_tc,"_",logging,"_",climate_impacts,"_",rcp_scen,"_","Mitig-pCO2")
 					cfg$title<- paste0(flag_run,"-",paste0(cfg$gms$c32_rotation_harvest,"RL"),"_",logging,"_",climate_impacts,"_",rcp_scen,"_","Mitig-pCO2")
 				} else {
