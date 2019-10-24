@@ -50,7 +50,7 @@ cfg$gms$s80_optfile <- 1
 cfg$output <- c("rds_report")
 
 ## Food model covnvergence
-cfg$gms$s15_convergence <- 0.5
+cfg$gms$s15_convergence <- 0.005
 
 ## Should recalibration be made
 cfg$recalibrate <- "ifneeded"
