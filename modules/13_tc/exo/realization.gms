@@ -17,10 +17,11 @@
 *' copied to the input folder (overwrite the existing dummy file f13_tau_scenario.csv).
 
 
-*' @limitations This realization might result in infeasibilities if the scenario setup
-*' diverges too much from the scenario setup used to generate the file f13_tau_scenario.csv.
-*' If the pressure in the system is too high, the tau factors provided in the file 
-*' f13_tau_scenario.csv might be insufficient to solve the model. 
+*' @limitations TC is not allowed to adapt to the given demand requirements.This realization
+*' might result in infeasibilities if the scenario setup diverges too much from the scenario
+*' setup used to generate the file f13_tau_scenario.csv. If the pressure in the system is 
+*' too high, the tau factors provided in the file f13_tau_scenario.csv might be insufficient
+*' to solve the model. 
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/13_tc/exo/sets.gms"
