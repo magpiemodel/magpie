@@ -31,7 +31,7 @@ cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$demand <- "sector_dec18"
 cfg$gms$trade <- "selfsuff_reduced_ff"
 cfg$gms$forestry  <- "dynamic_nov19"
-cfg$gms$s32_recurring_cost_multiplier <- 1
+cfg$gms$s32_recurring_cost_multiplier <- 100
 cfg$gms$natveg  <- "dynamic_nov19"
 cfg$gms$optimization <- "nlp_apr17"
 cfg$gms$land <- "landmatrix_dec18"
@@ -60,10 +60,10 @@ cfg$recalibrate <- "ifneeded"
 #################################
 ####### CHANGING THE FLAG #######
 #################################
-flag_run <- "R012--"
+flag_run <- "R020--"
 #################################
 #for(rl_scen in c("low","medium","high")) {
-for(rl_scen in c("1pc","low","medium","high","15pc")) {
+for(rl_scen in c("medium")) {
 	if(rl_scen == "1pc") cfg$gms$c32_rotation_harvest <- "bio"
 	if(rl_scen == "low") cfg$gms$c32_rotation_harvest = "high"
 	if(rl_scen == "medium") cfg$gms$c32_rotation_harvest = "def"
@@ -83,13 +83,13 @@ for(rl_scen in c("1pc","low","medium","high","15pc")) {
 
 		## Loop over mitigation-co2 prices
 		#for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")) {
-		for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")) {
+		for(co2_price_scenarios in c("R2M41-SSP2-NPi")) {
 			if(co2_price_scenarios=="R2M41-SSP2-NPi") rcp_scen <- "rcp6p0"
 			if(co2_price_scenarios=="R2M41-SSP2-Budg1300") rcp_scen <- "rcp2p6"
 
 			## Update input file from isimip
 			isimip_data <- paste0("isimip_rcp-IPSL_CM5A_LR-",rcp_scen,"-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
-			cfg$input <- c("magpie4.1_default_apr19.tgz","additional_data_rev3.68.tgz",isimip_data,"private_forestry_dec18_20191016.tgz")
+			cfg$input <- c("magpie4.1_default_apr19.tgz","additional_data_rev3.68.tgz",isimip_data,"private_forestry_dec18_20191023.tgz")
 
 			## Set 2nd gen bioenergy demand and pollutant prices
 			cfg$gms$c56_pollutant_prices <- co2_price_scenarios
