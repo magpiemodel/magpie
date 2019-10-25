@@ -57,74 +57,33 @@ getInput <- function(gdx,ghg_price=TRUE,biodem=TRUE) {
 
 
 
-##### last REMIND iteration: with standard setting "landmatrix_dec18" and new default solver settings w.r.t. tolerances
+##### last REMIND iteration: with new SDP standard setting "feb" and new default solver settings w.r.t. tolerances
 
-cfg$title <- "SDP-PkBudg900-mag-3_matrix"
+cfg$title <- "SDP-PkBudg900-mag-3_solv_feb15"
 cfg <- setScenario(cfg,c("SDP","NDC"))
 getInput("/p/projects/piam/runs/magpie-isabelle/output/REMIND_SDP-PkBudg900-mag-3/fulldata.gdx")
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "SDP-PkBudg1100-mag-2_matrix"
+cfg$title <- "SDP-PkBudg1100-mag-2_solv_feb15"
 cfg <- setScenario(cfg,c("SDP","NDC"))
 getInput("/p/projects/piam/runs/magpie-isabelle/output/REMIND_SDP-PkBudg1100-mag-2/fulldata.gdx")
 start_run(cfg,codeCheck=FALSE)
 
 
-cfg$title <- "SDP-PkBudg1300-mag-2_matrix"
+cfg$title <- "SDP-PkBudg1300-mag-2_solv_feb15"
 cfg <- setScenario(cfg,c("SDP","NDC"))
 getInput("/p/projects/piam/runs/magpie-isabelle/output/REMIND_SDP-PkBudg1300-mag-2/fulldata.gdx")
 start_run(cfg,codeCheck=FALSE)
 
 
-### standard policy with standard setting "landmatrix_dec18" and standard solver settings
+### SSP2 with policy with new SDP standard setting "feb" and new default solver settings w.r.t. tolerance
 
-
-cfg$title <- "SSP2_26_SSP2DB_RM_matrix"
+cfg$title <- "SSP2_26_SSP2DB_RM_solv_feb15"
 cfg <- setScenario(cfg,c("SSP2","noSDP","NDC"))
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
 cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
 start_run(cfg,codeCheck=FALSE)
 
-
-
-
-
-
-
-
-
-
-##### last REMIND iteration: with "landmatrix_dec18" and new default solver settings w.r.t. tolerances
-
-cfg$title <- "SDP-PkBudg900-mag-3_feb15"
-cfg <- setScenario(cfg,c("SDP","NDC"))
-cfg$gms$land <- "feb15"
-getInput("/p/projects/piam/runs/magpie-isabelle/output/REMIND_SDP-PkBudg900-mag-3/fulldata.gdx")
-start_run(cfg,codeCheck=FALSE)
-
-cfg$title <- "SDP-PkBudg1100-mag-2_feb15"
-cfg <- setScenario(cfg,c("SDP","NDC"))
-cfg$gms$land <- "feb15"
-getInput("/p/projects/piam/runs/magpie-isabelle/output/REMIND_SDP-PkBudg1100-mag-2/fulldata.gdx")
-start_run(cfg,codeCheck=FALSE)
-
-
-cfg$title <- "SDP-PkBudg1300-mag-2_feb15"
-cfg <- setScenario(cfg,c("SDP","NDC"))
-cfg$gms$land <- "feb15"
-getInput("/p/projects/piam/runs/magpie-isabelle/output/REMIND_SDP-PkBudg1300-mag-2/fulldata.gdx")
-start_run(cfg,codeCheck=FALSE)
-
-
-### standard policy with standard setting "landmatrix_dec18" and standard solver settings
-
-
-cfg$title <- "SSP2_26_SSP2DB_RM_feb15"
-cfg <- setScenario(cfg,c("SSP2","noSDP","NDC"))
-cfg$gms$land <- "feb15"
-cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
-cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
-start_run(cfg,codeCheck=FALSE)
 
 
 
@@ -135,7 +94,6 @@ start_run(cfg,codeCheck=FALSE)
 # SSP2 with NPI policy is default:
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
 cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
-cfg$gms$land <- "landmatrix_dec18" 
 
 
 
