@@ -20,7 +20,7 @@ $offdelim
 /
 ;
 
-f45_bcef(ac,clcl) = 2;
+*f45_bcef(ac,clcl) = 2;
 
 table fm_climate_class(j,clcl) Koeppen-Geiger climate classification on the simulation cluster level (1)
 $ondelim

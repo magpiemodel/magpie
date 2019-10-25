@@ -60,7 +60,7 @@ cfg$recalibrate <- "ifneeded"
 #################################
 ####### CHANGING THE FLAG #######
 #################################
-flag_run <- "R022--"
+flag_run <- "R022--ForestryTest"
 #################################
 #for(rl_scen in c("low","medium","high")) {
 for(rl_scen in c("medium")) {
@@ -78,12 +78,12 @@ for(rl_scen in c("medium")) {
 
 	## Loop over climate impacts
 	#for(climate_impacts in c("nocc","cc")) {
-	for(climate_impacts in c("nocc")) {
+	for(climate_impacts in c("cc")) {
 		cfg <- setScenario(cfg, climate_impacts)
 
 		## Loop over mitigation-co2 prices
 		#for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")) {
-		for(co2_price_scenarios in c("R2M41-SSP2-NPi")) {
+		for(co2_price_scenarios in c("R2M41-SSP2-Budg1300")) {
 			if(co2_price_scenarios=="R2M41-SSP2-NPi") rcp_scen <- "rcp6p0"
 			if(co2_price_scenarios=="R2M41-SSP2-Budg1300") rcp_scen <- "rcp2p6"
 
@@ -100,7 +100,7 @@ for(rl_scen in c("medium")) {
 
 			## Set clear cutting or selective logging flag
 			#for (sl_set in c(0.01,0.05,1.00)) {
-			for (sl_set in c(0.01,0.05,1.00)) {
+			for (sl_set in c(1.00)) {
 				if(sl_set == 0.01) logging = "Sel1pc"
 				if(sl_set == 0.05) logging = "Sel5pc"
 				if(sl_set == 1.00) logging = "ClrCut"
@@ -108,6 +108,8 @@ for(rl_scen in c("medium")) {
 
 				if(cfg$gms$c56_pollutant_prices == "R2M41-SSP2-Budg1300") {
 					#cfg$title<- paste0(flag_run,"-",ssp_scen,"-",forestry_tc,"_",logging,"_",climate_impacts,"_",rcp_scen,"_","Mitig-pCO2")
+					cfg$gms$c56_emis_policy <- "all_nosoil" 
+					cfg$gms$s56_reward_neg_emis <- -Inf
 					cfg$title<- paste0(flag_run,"-",paste0(cfg$gms$c32_rotation_harvest,"RL"),"_",logging,"_",climate_impacts,"_",rcp_scen,"_","Mitig-pCO2")
 				} else {
 					#cfg$title<- paste0(flag_run,"-",ssp_scen,"-",forestry_tc,"_",logging,"_",climate_impacts,"_",rcp_scen)

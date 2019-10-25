@@ -37,7 +37,13 @@ sum(ac$(ord(ac) > 1
 AND (ord(ac)-1) <= s32_planing_horizon/5),
 v32_land(j2,"aff","ac0") *
 (sum(ct, pm_carbon_density_ac(ct,j2,ac,"vegc")) -
-sum(ct, pm_carbon_density_ac(ct,j2,ac-1,"vegc"))));
+sum(ct, pm_carbon_density_ac(ct,j2,ac-1,"vegc"))))
++
+sum(ac$(ord(ac) > 1
+AND (ord(ac)-1) <= sum(ct, p32_rotation_cellular(ct,j2))/5),
+v32_land(j2,"plant","ac0") *
+(sum(ct, p32_carbon_density_ac(ct,j2,"plant",ac,"vegc")) -
+sum(ct, p32_carbon_density_ac(ct,j2,"plant",ac-1,"vegc"))));
 
 *****GENERAL
 *****Land***************************************************
