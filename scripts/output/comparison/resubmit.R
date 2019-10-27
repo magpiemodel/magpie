@@ -32,7 +32,7 @@ for (i in 1:length(outputdirs)) {
   #gdx file
   gdx<-path(outputdirs[i],"fulldata.gdx")
   if(file.exists(gdx)) tmp <- modelstat(gdx) else tmp <- 0
-  if (any(tmp!=2)) {
+  if (any(tmp>2)) {
     current <- getwd()
     setwd(outputdirs[i])
     if (file.exists("magpie_y1995.gdx")) file.remove("magpie_y1995.gdx")
