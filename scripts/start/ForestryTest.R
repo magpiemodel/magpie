@@ -83,7 +83,7 @@ for(rl_scen in c("medium")) {
 
 		## Loop over mitigation-co2 prices
 		#for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")) {
-		for(co2_price_scenarios in c("R2M41-SSP2-NPi")) {
+		for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")) {
 			if(co2_price_scenarios=="R2M41-SSP2-NPi") rcp_scen <- "rcp6p0"
 			if(co2_price_scenarios=="R2M41-SSP2-Budg1300") rcp_scen <- "rcp2p6"
 
