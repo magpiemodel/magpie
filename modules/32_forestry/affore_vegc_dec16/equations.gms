@@ -49,7 +49,7 @@ sum(ct, pm_carbon_density_ac(ct,j2,ac-1,"vegc"))));
 *' is relaxed by the value of exogenously prescribed afforestation (`p32_aff_togo`).
 
  q32_max_aff .. sum((j2), vm_land(j2,"forestry")-pm_land_start(j2,"forestry"))
-                =l= s32_max_aff_area + sum(ct, p32_aff_togo(ct));
+                =l= s32_max_aff_area + sum((ct,j), p32_aff_pol(ct,j));
 
 *****Carbon stocks**************************************************************
 *' Forestry above ground carbon stocks are calculated as the product of forestry land (`v32_land`) and the area
