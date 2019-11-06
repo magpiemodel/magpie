@@ -24,7 +24,7 @@ cfg$gms$c50_scen_neff <- "neff85_85_starty2010"
 
 #Manure share used in an anaerobic digester. 0.15 in 2015, 0.30 in 2030, 0.5 in 2050 and 0.7 in 2100
 #cfg$gms$c55_scen_conf<-"GoodPractice"
-cfg$gms$c55_scen_conf<-"SSP2"
+cfg$gms$c55_scen_conf<-"ssp2"
 
 #start MAgPIE run
 start_run(cfg=cfg)
