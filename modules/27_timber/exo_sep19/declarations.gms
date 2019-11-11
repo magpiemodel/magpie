@@ -8,6 +8,9 @@
 
 equations
  q27_prod_timber(j,kforestry)             Cellular timber production constraint (mio. m3 per yr)
+ q27_prod_timber_plantations(i,kforestry) Regional forestry production constraint (mio. m3 per yr)
+ q27_prod_timber_natveg(i,kforestry)      Regional natveg production constraint (mio. m3 per yr)
+
 ;
 
 positive variables
@@ -16,8 +19,10 @@ positive variables
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_prod_heaven_timber(t,j,kforestry,type) Production from heaven in each cell (mio. m3 per yr)
- oq27_prod_timber(t,j,kforestry,type)      Cellular timber production constraint (mio. m3 per yr)
+ ov_prod_heaven_timber(t,j,kforestry,type)        Balanceflow production of timber from each cell (mio. m3 per yr)
+ oq27_prod_timber(t,j,kforestry,type)             Cellular timber production constraint (mio. m3 per yr)
+ oq27_prod_timber_plantations(t,i,kforestry,type) Regional forestry production constraint (mio. m3 per yr)
+ oq27_prod_timber_natveg(t,i,kforestry,type)      Regional natveg production constraint (mio. m3 per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

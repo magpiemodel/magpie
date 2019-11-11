@@ -16,7 +16,7 @@ positive variables
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_prod_heaven_timber(t,j,kforestry,type) Production from heaven in each cell (mio. m3 per yr)
+ ov_prod_heaven_timber(t,j,kforestry,type) Balanceflow production of timber from each cell (mio. m3 per yr)
  oq27_prod_timber(t,j,kforestry,type)      Cellular timber production constraint (mio. m3 per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

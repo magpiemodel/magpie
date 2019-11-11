@@ -67,7 +67,7 @@ p32_land(t,j,"plant",ac)$(ord(ac) > 1) = p32_land(t,j,"plant",ac-1);
 p32_land("y1995",j,"plant","ac0") = 0;
 
 **************************************************************************************
-f32_production_ratio(t_all,"MEA") = f32_production_ratio("y1995","MEA");
+*f32_production_ratio(t_all,"MEA") = f32_production_ratio("y1995","MEA");
 pm_production_ratio_ext(t_ext,i) = f32_production_ratio("y1995",i);
 pm_production_ratio_ext(t_all,i) = f32_production_ratio("y1995",i);
 
