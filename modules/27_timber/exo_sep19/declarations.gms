@@ -8,7 +8,6 @@
 
 equations
  q27_prod_timber(j,kforestry)             Cellular timber production constraint (mio. m3 per yr)
- q27_prod_timber_plantations(i,kforestry) Regional forestry production constraint (mio. m3 per yr)
 ;
 
 positive variables

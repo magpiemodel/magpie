@@ -7,12 +7,6 @@
 
 *' @equations
 
-  q27_prod_timber_plantations(i2,kforestry)..
-    sum(cell(i2,j2),vm_prod_cell_forestry(j2,kforestry))
-    =e=
-    vm_prod_reg(i2,kforestry) * sum(ct,pm_production_ratio_ext(ct,i2))
-    ;
-
   q27_prod_timber(j2,kforestry)..
     vm_prod(j2,kforestry)
     =e=
