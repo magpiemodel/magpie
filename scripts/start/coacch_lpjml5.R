@@ -30,15 +30,15 @@ codeCheck <- FALSE
 
 
 buildInputVector <- function(regionmapping   = "H12",
-                             project_name    = "isimip_rcp",
+                             project_name    = "LPJmL5",
                              climatescen_name= "rcp2p6",
                              co2             = "co2",
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "c400",
-                             archive_rev     = "38",
+                             archive_rev     = "40.1",
                              madrat_rev      = "4.18",
                              validation_rev  = "4.18",
-			                 calibration     = "calibration_coacch_08Oct19.tgz",
+			                       calibration     = "calibration_coacch_08Oct19.tgz",
                              additional_data = "additional_data_rev3.68.tgz") {
   mappings <- c(H11="8a828c6ed5004e77d1ba2025e8ea2261",
                 H12="690d3718e151be1b450b394c1064b1c5",
@@ -102,25 +102,29 @@ start_the_run<-function(ssp,mit,rcp,gcm,co2,cc){
   # select alias names for reporting
 	if(gcm=="IPSL_CM5A_LR"){gcm_alias="IPSL-CM5A-LR"}
 	if(gcm=="HadGEM2_ES"){gcm_alias="HadGEM2-ES"}
-	if(gcm=="GFDL_ESM2M"){gcm_alias="GFDL-ESM2M"}
+	if(gcm=="GFDL_ESM2G"){gcm_alias="GFDL-ESM2G"}
 	if(gcm=="NorESM1_M"){gcm_alias="NNorESM1-M"}
-	if(rcp=="NoCC"){gcm_alias="NoCC"}
+  rcp_alias=substring(rcp,4)
+	if(cc==FALSE){
+	  gcm_alias="NoCC"
+	  rcp_alias="NoCC"
+	}
 	if(mit=="26"){mit_alias="2p6"} 
 	if(mit=="45"){mit_alias="4p5"} 
 	if(mit=="Ref"){mit_alias="NoMit"} 
 
   # create runname
 	if(co2=="co2") {
-	  title=paste(ssp,gcm_alias,substring(rcp,4),mit_alias,sep="_")
+	  title=paste(ssp,gcm_alias,rcp_alias,mit_alias,sep="_")
 	} else {
-	   title=paste(ssp,gcm_alias,substring("rcp2p6",4),mit_alias,"NoCO2",sep="_")
+	   title=paste(ssp,gcm_alias,rcp_alias,mit_alias,"NoCO2",sep="_")
 	}
 	cat(paste(title))
 	
 	
 	cfg<-general_settings(title=title)
 	cfg<-lucode::setScenario(cfg,ssp)
-	cfg$input <- buildInputVector(climatescen_name=rcp,climate_model   = gcm, regionmapping = "coacch",calibration=calib)
+	cfg$input <- buildInputVector(climatescen_name=rcp,climate_model   = gcm, regionmapping = "coacch",co2=co2,calibration=calib)
 	mitigation=paste0("SSPDB-",ssp,"-",mit,"-",model)
 	cfg$gms$c56_pollutant_prices <- mitigation
 	cfg$gms$c60_2ndgen_biodem    <- mitigation
@@ -143,11 +147,11 @@ for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
 		model="MESSAGE-GLOBIOM"
 		mitopt = c("26","45","Ref")
 		rcpopt = c("rcp2p6","rcp4p5","rcp6p0","NoCC")
-		gcmopt = c("IPSL_CM5A_LR","HadGEM2_ES","GFDL_ESM2M","NorESM1_M")
+		gcmopt = c("IPSL_CM5A_LR","HadGEM2_ES","GFDL_ESM2G","NorESM1_M")
 		}
 	if(ssp=="SSP3"){
 		model="AIM-CGE"
-		mitopt = c("Ref")
+		mitopt = c("60")
 		rcpopt = c("rcp4p5","rcp6p0","NoCC")
 		gcmopt = c("HadGEM2_ES")
 		}
