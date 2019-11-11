@@ -26,26 +26,20 @@ cfg$results_folder <- "output/:title::date:"
 
 
 
-### SSPs & SDP ###
+### SSPs with and w/o mitigation ###
 cfg$title <- "SSP1"
-cfg <- setScenario(cfg,c("SSP1"))
+cfg <- setScenario(cfg,c("SSP1","NPI"))
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "SSP2"
-cfg <- setScenario(cfg,c("SSP2"))
+cfg <- setScenario(cfg,c("SSP2","NPI"))
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "SSP5"
-cfg <- setScenario(cfg,c("SSP5"))
-start_run(cfg,codeCheck=FALSE)
-
-cfg$title <- "SDP"
-cfg <- setScenario(cfg,c("SDP"))
+cfg <- setScenario(cfg,c("SSP5","NPI"))
 start_run(cfg,codeCheck=FALSE)
 
 
-
-### SSPs & SDP with mitigation ###
 
 cfg$title <- "SSP1_rcp26"
 cfg <- setScenario(cfg,c("SSP1","NDC"))
@@ -64,6 +58,23 @@ cfg <- setScenario(cfg,c("SSP5","NDC"))
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP5-26-REMIND-MAGPIE"
 cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP5-26-REMIND-MAGPIE"
 start_run(cfg,codeCheck=FALSE)
+
+
+
+#reset:
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
+
+
+
+
+
+### SDP with and w/o mitigation ###
+
+cfg$title <- "SDP"
+cfg <- setScenario(cfg,c("SDP","NPI"))
+start_run(cfg,codeCheck=FALSE)
+
 
 cfg$title <- "SDP_rcp26_SSP2DB_RM"
 cfg <- setScenario(cfg,c("SDP","NDC"))
@@ -85,14 +96,14 @@ cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
 
 ####trade variation SSP2
 cfg$title <- "SDP_tradessp2"
-cfg <- setScenario(cfg,c("SDP"))
+cfg <- setScenario(cfg,c("SDP","NPI"))
 cfg$gms$c21_trade_liberalization <- "l909090r808080"
 start_run(cfg,codeCheck=FALSE)
 
 
 ####trade variation SSP3
 cfg$title <- "SDP_tradessp3"
-cfg <- setScenario(cfg,c("SDP"))
+cfg <- setScenario(cfg,c("SDP","NPI"))
 cfg$gms$c21_trade_liberalization <- "l909595r809090"
 start_run(cfg,codeCheck=FALSE)
 
@@ -167,6 +178,14 @@ start_run(cfg,codeCheck=FALSE)
 cfg$title <- "SDP_affore500_trop_rcp26"
 cfg <- setScenario(cfg,c("SDP","NDC"))
 cfg$gms$s32_max_aff_area <- 500
+cfg$gms$c32_aff_mask <- "onlytropical"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP1-26-REMIND-MAGPIE"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP1-26-REMIND-MAGPIE"
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- "SDP_affore760_trop_rcp26"
+cfg <- setScenario(cfg,c("SDP","NDC"))
+cfg$gms$s32_max_aff_area <- 760
 cfg$gms$c32_aff_mask <- "onlytropical"
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP1-26-REMIND-MAGPIE"
 cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP1-26-REMIND-MAGPIE"
