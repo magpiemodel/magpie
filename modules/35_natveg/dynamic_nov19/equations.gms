@@ -151,7 +151,7 @@ q35_prod_cell_natveg(j2,kforestry)..
 
 q35_secdforest_conversion(j2)..
                           v35_secdforest(j2,"ac0")
-                          =n=
+                          =e=
                           sum((kforestry,ac_sub),v35_hvarea_secdforest(j2,kforestry,ac_sub))
                         + sum(kforestry,v35_hvarea_primforest(j2,kforestry))
                           ;
