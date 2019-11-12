@@ -94,23 +94,23 @@ $title magpie
 * 
 * Used data set: magpie4.1_default_apr19.tgz
 * md5sum: 5c38bb1083bd66010c2104c9d40553f4
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: additional_data_rev3.68.tgz
 * md5sum: 15d1135625a9f5cfb9c7c6038716a156
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: e0cb64c918128436bf9a323e57cae81b
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: rev4.32_690d3718e151be1b450b394c1064b1c5_magpie.tgz
-* md5sum: e859c633f36cb275c53a5cae6f610ca0
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* Used data set: rev4.33_690d3718e151be1b450b394c1064b1c5_validation.tgz
+* md5sum: b53dcc0f88270baeeab5ecdffb02db94
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.32_690d3718e151be1b450b394c1064b1c5_validation.tgz
-* md5sum: 9006f137f432602bc639fc1a8acdcfd7
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* Used data set: rev4.33_690d3718e151be1b450b394c1064b1c5_magpie.tgz
+* md5sum: 1e1cdc09890067adbca1446d5b4be6e9
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -123,7 +123,7 @@ $title magpie
 * 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
-* Regions data revision: 4.32
+* Regions data revision: 4.33
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
@@ -143,7 +143,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Wed Nov 06 14:48:05 2019
+* Last modification (input data): Tue Nov 12 10:47:20 2019
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
