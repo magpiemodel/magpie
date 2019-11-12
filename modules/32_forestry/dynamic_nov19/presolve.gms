@@ -86,8 +86,8 @@ p32_dampen_pre(ac_sub,j)  = (1-(1/ord(ac_sub)))$(ord(ac_sub)<p32_rot_ac(j)) + 1$
 p32_dampen_final(ac_sub,j) = p32_dampen_pre(ac_sub,j)$(p32_dampen_pre(ac_sub,j) >= p32_regional_min(j)) + p32_regional_min(j)$(p32_dampen_pre(ac_sub,j) < p32_regional_min(j));
 
 ** Plantation vegc is different
-p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * p32_management_factor(j,"normal");
-*p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * p32_management_factor(j,"normal") * p32_dampen_final(ac,j);
+*p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * p32_management_factor(j,"normal");
+p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * p32_management_factor(j,"normal") * p32_dampen_final(ac,j);
 
 *** YIELDS
 ** Yields calculated for both management types but c-densities don't have this set
@@ -97,7 +97,7 @@ p32_yield_forestry_ac(t,j,ac_sub,mgmt_type) =
      (2)
      *
      pm_carbon_density_ac(t,j,ac_sub,"vegc") * p32_management_factor(j,mgmt_type)
-*     * p32_dampen_final(ac_sub,j)
+     * p32_dampen_final(ac_sub,j)
      *
      0.85
      /
