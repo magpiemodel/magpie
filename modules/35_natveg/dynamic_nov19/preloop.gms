@@ -12,9 +12,14 @@ i35_ageclass_shr_grow(j,ac) = 1/card(ac);
 
 i35_ageclass_shr_grow(j,ac)$(sum(ac2, i35_ageclass_area_secdf(j,ac2)) > 0) = i35_ageclass_area_secdf(j,ac)/sum(ac2, i35_ageclass_area_secdf(j,ac2));
 
-i35_secdforest(j,ac) = pcm_land(j,"secdforest")*i35_ageclass_shr_grow(j,ac);
+*i35_secdforest(j,ac) = pcm_land(j,"secdforest")*i35_ageclass_shr_grow(j,ac);
+
+*** Assuming all secdf in acx for initialization
 *i35_secdforest(j,ac) = 0;
 *i35_secdforest(j,"acx") = pcm_land(j,"secdforest");
+
+*** Assuming equal distribution in all age-classes for secdf
+i35_secdforest(j,ac) = pcm_land(j,"secdforest")/card(ac);
 
 i35_other(j,ac) = 0;
 i35_other(j,"acx") = pcm_land(j,"other");
