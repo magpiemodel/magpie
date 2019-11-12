@@ -90,6 +90,8 @@ p32_dampen_final(ac_sub,j) = p32_dampen_pre(ac_sub,j)$(p32_dampen_pre(ac_sub,j) 
 p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * p32_management_factor(j,"normal") * p32_dampen_final(ac,j);
 
 *** YIELDS
+** Yields calculated for both management types but c-densities don't have this set
+** MENTION PARAM HERE
 p32_yield_forestry_ac(j,ac_sub,mgmt_type) =
    (
      (2)

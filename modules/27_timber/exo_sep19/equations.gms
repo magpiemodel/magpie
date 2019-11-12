@@ -21,7 +21,7 @@
 *' and `vm_prod_cell_natveg` as the cluster level production for `vm_prod` for timber.
 *' '`vm_prod` for wood and woodfuel can be produced from either highly managed plantation
 *' forests or natural forests. The part of timber production coming from harvesting
-*' of plantation forests is calculated in [32_forestry] module and the corresponding 
+*' of plantation forests is calculated in [32_forestry] module and the corresponding
 *' calculation for timber production coming from primary forest, secondadry forest
 *' and other land is calculated in [35_natveg]
 

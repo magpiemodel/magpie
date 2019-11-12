@@ -28,14 +28,13 @@ cfg$results_folder <- "output/:title:"
 ## Load SSP2
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 ## Module settings
-cfg$gms$demand <- "sector_dec18"
-cfg$gms$trade <- "selfsuff_reduced_ff"
-cfg$gms$forestry  <- "dynamic_nov19"
+#cfg$gms$demand <- "sector_dec18"
+#cfg$gms$trade <- "selfsuff_reduced_ff"
+#cfg$gms$forestry  <- "dynamic_nov19"
 cfg$gms$s32_recurring_cost_multiplier <- 100
-cfg$gms$natveg  <- "dynamic_nov19"
-cfg$gms$optimization <- "nlp_apr17"
-cfg$gms$land <- "landmatrix_dec18"
-cfg$gms$c80_nlp_solver <- "conopt4"
+#cfg$gms$natveg  <- "dynamic_nov19"
+#cfg$gms$optimization <- "nlp_apr17"
+#cfg$gms$c80_nlp_solver <- "conopt4"
 
 #ALERT:  At the moment this script cannot download new data in case the input files are changed. Has to be set to true.
 cfg$force_download <- FALSE
@@ -60,7 +59,7 @@ cfg$recalibrate <- "ifneeded"
 #################################
 ####### CHANGING THE FLAG #######
 #################################
-flag_run <- "R024--"
+flag_run <- "R026--PoulterSecdftoOther--"
 #################################
 #for(rl_scen in c("low","medium","high")) {
 for(rl_scen in c("medium")) {
