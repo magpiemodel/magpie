@@ -155,7 +155,7 @@ q32_hvarea_forestry(j2,ac_sub) ..
 q32_prod_forestry(j2,kforestry)..
                           vm_prod_cell_forestry(j2,kforestry)
                           =e=
-                         sum((ac_sub,ct,mgmt_type), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type) * p32_yield_forestry_ac(j2,ac_sub,mgmt_type))
+                         sum((ac_sub,ct,mgmt_type), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type) * p32_yield_forestry_ac(ct,j2,ac_sub,mgmt_type))
                          ;
 
 *********************************************************
@@ -163,7 +163,7 @@ q32_prod_forestry(j2,kforestry)..
  q32_high_mgmt_prod_cost(i2) ..
                               v32_high_mgmt_prod_cost(i2)
                               =e=
-                              sum((cell(i2,j2),kforestry,ac_sub), v32_hvarea_forestry(j2,kforestry,ac_sub,"high") * p32_yield_forestry_ac(j2,ac_sub,"high")) * 10e4
+                              sum((cell(i2,j2),kforestry,ac_sub,ct), v32_hvarea_forestry(j2,kforestry,ac_sub,"high") * p32_yield_forestry_ac(ct,j2,ac_sub,"high")) * 10e4
                               ;
 
 

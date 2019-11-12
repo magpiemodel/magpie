@@ -92,7 +92,7 @@ p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"veg
 *** YIELDS
 ** Yields calculated for both management types but c-densities don't have this set
 ** MENTION PARAM HERE
-p32_yield_forestry_ac(j,ac_sub,mgmt_type) =
+p32_yield_forestry_ac(t,j,ac_sub,mgmt_type) =
    (
      (2)
      *
@@ -111,7 +111,7 @@ pm_rotation_reg(t,i) = ord(t) + ceil((sum(cell(i,j),pcm_land(j,"forestry")*pm_ro
 *pm_rotation_reg(t,i) = ord(t) + ceil(30/5) + card(t_past_ff);
 
 *pc32_yield_forestry_future(j) = sum(ac$(ac.off = p32_rotation_cellular(j)+1), p32_yield_forestry_ac(t,j,ac));
-pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), p32_yield_forestry_ac(j,ac_sub,"normal"));
+pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), p32_yield_forestry_ac(t,j,ac_sub,"normal"));
 
 pc32_timestep = ord(t);
 *** EOF presolve.gms ***
