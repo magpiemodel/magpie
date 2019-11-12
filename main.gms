@@ -93,7 +93,7 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
 * Used data set: magpie4.1_default_apr19.tgz
-* md5sum: ea3959be0d5a45cf50cfc232571dc9bd
+* md5sum: 5c38bb1083bd66010c2104c9d40553f4
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
@@ -127,7 +127,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Sat Apr 27 13:45:25 2019
+* Last modification (input data): Tue Nov 05 08:36:47 2019
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -152,6 +152,7 @@ $offlisting
 *                    Key parameters during model runs
 
 $setglobal c_timesteps  coup2100
+$setglobal c_past  till_2010
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /
