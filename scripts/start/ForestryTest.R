@@ -59,7 +59,7 @@ cfg$recalibrate <- "ifneeded"
 #################################
 ####### CHANGING THE FLAG #######
 #################################
-flag_run <- "R026--SecdftoSecdf--dampening--"
+flag_run <- "R026--SecdftoSecdf--dampening--OASLAMFix"
 #################################
 #for(rl_scen in c("low","medium","high")) {
 for(rl_scen in c("medium")) {
