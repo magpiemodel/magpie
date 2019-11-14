@@ -104,7 +104,7 @@ $title magpie
 * md5sum: 36c1041f9f18abf54e10113376f834ae
 * Repository: /p/projects/landuse/data/input/archive
 * 
-* Used data set: private_forestry_dec18_20191023.tgz
+* Used data set: private_forestry_dec18_20191114.tgz
 * md5sum: 8af009c0659bb5d0bfe4b3ab0fa3db7a
 * Repository: /p/projects/landuse/users/mishra/additional_data_private_forestry
 * 

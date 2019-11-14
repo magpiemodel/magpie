@@ -75,18 +75,25 @@ pm_production_ratio_ext(t_ext,i) = f32_production_ratio("y2100",i);
 pm_production_ratio_ext(t_all,i) = f32_production_ratio(t_all,i);
 
 *** Hardcoding bugfix
-*f32_forestry_management("USA") = 15;
-*f32_forestry_management("IND") = 15;
-*f32_forestry_management("EUR") = 12;
-*f32_forestry_management("JPN") = 7;
-*f32_forestry_management("NEU") = 7;
-*f32_forestry_management("USA","plantations") = 7;
 
 ** MANUAL FIX FOR LAM AND OAS
-f32_forestry_management("OAS","plantations") = 2;
-f32_forestry_management("OAS","natveg") = 1;
-f32_forestry_management("LAM","plantations") = 2;
-f32_forestry_management("LAM","natveg") = 1;
-p32_management_factor(j,mgmt_type) = sum(cell(i,j),ceil(f32_forestry_management(i,"plantations")/f32_forestry_management(i,"natveg")));
+*f32_forestry_management("OAS","plantations") = 2;
+*f32_forestry_management("OAS","natveg") = 1;
+*f32_forestry_management("LAM","plantations") = 2;
+*f32_forestry_management("LAM","natveg") = 1;
+*p32_management_factor(j,mgmt_type) = sum(cell(i,j),ceil(f32_forestry_management(i,"plantations")/f32_forestry_management(i,"natveg")));
+*p32_management_factor(j,"high") = p32_management_factor(j,"normal") * 1.5;
+
+** FAO fix for management factors
+p32_rep_yield_forestry(i) = f32_fao_management_factors(i,"forestry_prod")/f32_fao_management_factors(i,"forestry_area");
+p32_rep_yield_natveg(i) = f32_fao_management_factors(i,"natveg_prod")/f32_fao_management_factors(i,"natveg_prod");
+
+p32_fao_management_GloClip(i) = p32_rep_yield_forestry(i)/p32_rep_yield_natveg(i);
+* Extreme values are clipped at a global number
+* ref table 4 from https://www.sciencedirect.com/science/article/pii/S0378112715003473#b0090
+p32_fao_management_GloClip(i)$(p32_fao_management_GloClip(i)>4.6) = 4.6;
+
+p32_management_factor(j,mgmt_type) = sum(cell(i,j),p32_fao_management_GloClip(i));
 p32_management_factor(j,"high") = p32_management_factor(j,"normal") * 1.5;
+
 **************************************************************************
