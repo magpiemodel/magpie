@@ -92,6 +92,8 @@ p32_fao_management_GloClip(i) = p32_rep_yield_forestry(i)/p32_rep_yield_natveg(i
 * Extreme values are clipped at a global number
 * ref table 4 from https://www.sciencedirect.com/science/article/pii/S0378112715003473#b0090
 p32_fao_management_GloClip(i)$(p32_fao_management_GloClip(i)>4.6) = 4.6;
+p32_fao_management_GloClip(i)$(p32_fao_management_GloClip(i)<1) = 1;
+p32_fao_management_GloClip(i) = round(p32_fao_management_GloClip(i),1);
 
 p32_management_factor(j,mgmt_type) = sum(cell(i,j),p32_fao_management_GloClip(i));
 p32_management_factor(j,"high") = p32_management_factor(j,"normal") * 1.5;
