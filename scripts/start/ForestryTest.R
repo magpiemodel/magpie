@@ -59,7 +59,7 @@ cfg$recalibrate <- "ifneeded"
 #################################
 ####### CHANGING THE FLAG #######
 #################################
-flag_run <- "R028--"
+flag_run <- "R028--ReE--"
 #################################
 #for(rl_scen in c("low","medium","high")) {
 for(rl_scen in c("low","medium","high")) {
