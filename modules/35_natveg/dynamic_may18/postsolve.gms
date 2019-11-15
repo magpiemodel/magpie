@@ -19,7 +19,7 @@ else
         v35_other.l(j,"new")$(ord(ac) = 1)
         + sum(ac_land35(ac,land35)$(not sameas(land35,"new") AND pc35_other(j,land35) > 0),(v35_other.l(j,land35)/pc35_other(j,land35))*p35_other(t,j,ac,"before"))$(ord(ac) > 1);
 *account for cases of pc35_other(j,land35) = 0
-	p35_other(t,j,"ac5","after") = sum(land35,v35_other.l(j,land35))-sum(ac, p35_other(t,j,ac,"after"));
+	p35_other(t,j,"ac5","after") = p35_other(t,j,"ac5","after") + sum(land35,v35_other.l(j,land35))-sum(ac, p35_other(t,j,ac,"after"));
 );
 
 *secdforest age class calculation
@@ -27,7 +27,7 @@ p35_secdforest(t,j,ac,"after") =
         v35_secdforest.l(j,"new")$(ord(ac) = 1)
         + sum(ac_land35(ac,land35)$(not sameas(land35,"new") AND pc35_secdforest(j,land35) > 0),(v35_secdforest.l(j,land35)/pc35_secdforest(j,land35))*p35_secdforest(t,j,ac,"before"))$(ord(ac) > 1);
 *account for cases of pc35_secdforest(j,land35) = 0
-p35_secdforest(t,j,"ac30","after") = sum(land35,v35_secdforest.l(j,land35))-sum(ac, p35_secdforest(t,j,ac,"after"));
+p35_secdforest(t,j,"ac30","after") = p35_secdforest(t,j,"ac30","after") + sum(land35,v35_secdforest.l(j,land35))-sum(ac, p35_secdforest(t,j,ac,"after"));
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov35_secdforest(t,j,land35,"marginal")           = v35_secdforest.m(j,land35);
