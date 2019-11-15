@@ -73,7 +73,7 @@ for(rl_scen in c("low","medium","high")) {
 	## Overwrite SSP2 interest rate
 	cfg$gms$c12_interest_rate <- rl_scen
 
-	cfg$gms$c32_rotation_estb <- "def"
+	cfg$gms$c32_rotation_estb <- cfg$gms$c32_rotation_harvest
 
 	## Loop over climate impacts
 	#for(climate_impacts in c("nocc","cc")) {
