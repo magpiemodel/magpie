@@ -60,3 +60,9 @@ $ondelim
 $include "./modules/32_forestry/input/f32_forestry_management.csv"
 $offdelim
 ;
+
+table f32_fao_management_factors(i,area_prod_forests) upscaling factor dervied from fao
+$ondelim
+$include "./modules/32_forestry/input/f32_fao_management_factors.csv"
+$offdelim
+;

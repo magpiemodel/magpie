@@ -85,7 +85,7 @@ for(rl_scen in c("medium")) {
 				for(rcp_scen  in c("rcp6p0","rcp2p6","rcp4p5","rcp8p5")){
 				## Update input file from isimip
 				isimip_data <- paste0("isimip_rcp-HadGEM2_ES-",rcp_scen,"-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
-				cfg$input <- c("magpie4.1_default_apr19.tgz","additional_data_rev3.68.tgz",isimip_data,"private_forestry_dec18_20191016.tgz")
+				cfg$input <- c("magpie4.1_default_apr19.tgz","additional_data_rev3.68.tgz",isimip_data,"private_forestry_dec18_20191114.tgz")
 				## Set 2nd gen bioenergy demand and pollutant prices
 				cfg$gms$c56_pollutant_prices <- co2_price_scenarios
 				cfg$gms$c60_2ndgen_biodem <- co2_price_scenarios		# same as co2 price scenario from mag4.1
@@ -130,7 +130,7 @@ for(rl_scen in c("medium")) {
 				for(rcp_scen  in c("rcp2p6")){
 				## Update input file from isimip
 				isimip_data <- paste0("isimip_rcp-HadGEM2_ES-",rcp_scen,"-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
-				cfg$input <- c("magpie4.1_default_apr19.tgz","additional_data_rev3.68.tgz",isimip_data,"private_forestry_dec18_20191016.tgz")
+				cfg$input <- c("magpie4.1_default_apr19.tgz","additional_data_rev3.68.tgz",isimip_data,"private_forestry_dec18_20191114.tgz")
 				## Set 2nd gen bioenergy demand and pollutant prices
 				cfg$gms$c56_pollutant_prices <- co2_price_scenarios
 				cfg$gms$c60_2ndgen_biodem <- co2_price_scenarios		# same as co2 price scenario from mag4.1

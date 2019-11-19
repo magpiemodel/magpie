@@ -59,10 +59,10 @@ cfg$recalibrate <- "ifneeded"
 #################################
 ####### CHANGING THE FLAG #######
 #################################
-flag_run <- "R026--PoulterSecdftoOther--"
+flag_run <- "R028--ReE--"
 #################################
 #for(rl_scen in c("low","medium","high")) {
-for(rl_scen in c("medium")) {
+for(rl_scen in c("low","medium","high")) {
 	if(rl_scen == "1pc") cfg$gms$c32_rotation_harvest <- "bio"
 	if(rl_scen == "low") cfg$gms$c32_rotation_harvest = "high"
 	if(rl_scen == "medium") cfg$gms$c32_rotation_harvest = "def"
@@ -73,22 +73,22 @@ for(rl_scen in c("medium")) {
 	## Overwrite SSP2 interest rate
 	cfg$gms$c12_interest_rate <- rl_scen
 
-	cfg$gms$c32_rotation_estb <- "def"
+	cfg$gms$c32_rotation_estb <- cfg$gms$c32_rotation_harvest
 
 	## Loop over climate impacts
 	#for(climate_impacts in c("nocc","cc")) {
-	for(climate_impacts in c("nocc")) {
+	for(climate_impacts in c("nocc","cc")) {
 		cfg <- setScenario(cfg, climate_impacts)
 
 		## Loop over mitigation-co2 prices
 		#for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")) {
-		for(co2_price_scenarios in c("R2M41-SSP2-NPi")) {
+		for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")) {
 			if(co2_price_scenarios=="R2M41-SSP2-NPi") rcp_scen <- "rcp6p0"
 			if(co2_price_scenarios=="R2M41-SSP2-Budg1300") rcp_scen <- "rcp2p6"
 
 			## Update input file from isimip
 			isimip_data <- paste0("isimip_rcp-IPSL_CM5A_LR-",rcp_scen,"-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
-			cfg$input <- c("magpie4.1_default_apr19.tgz","additional_data_rev3.68.tgz",isimip_data,"private_forestry_dec18_20191023.tgz")
+			cfg$input <- c("magpie4.1_default_apr19.tgz","additional_data_rev3.68.tgz",isimip_data,"private_forestry_dec18_20191114.tgz")
 
 			## Set 2nd gen bioenergy demand and pollutant prices
 			cfg$gms$c56_pollutant_prices <- co2_price_scenarios
@@ -99,7 +99,7 @@ for(rl_scen in c("medium")) {
 
 			## Set clear cutting or selective logging flag
 			#for (sl_set in c(0.01,0.05,1.00)) {
-			for (sl_set in c(1.00)) {
+			for (sl_set in c(1.00,0.05,0.01)) {
 				if(sl_set == 0.01) logging = "Sel1pc"
 				if(sl_set == 0.05) logging = "Sel5pc"
 				if(sl_set == 1.00) logging = "ClrCut"
@@ -110,10 +110,10 @@ for(rl_scen in c("medium")) {
 					cfg$gms$c56_emis_policy <- "all_nosoil"
 					cfg$gms$s56_reward_neg_emis <- -Inf
 					cfg$gms$c32_price_flag_forestry <- 1
-					cfg$title<- paste0(flag_run,"-",paste0(cfg$gms$c32_rotation_harvest,"RL"),"_",logging,"_",climate_impacts,"_",rcp_scen,"_","Mitig-pCO2")
+					cfg$title<- paste0(flag_run,"-",paste0(cfg$gms$c32_rotation_harvest,"RL"),"_",logging,"_",climate_impacts,"_","Mitig-pCO2")
 				} else {
 					#cfg$title<- paste0(flag_run,"-",ssp_scen,"-",forestry_tc,"_",logging,"_",climate_impacts,"_",rcp_scen)
-					cfg$title<- paste0(flag_run,"-",paste0(cfg$gms$c32_rotation_harvest,"RL"),"_",logging,"_",climate_impacts,"_",rcp_scen)
+					cfg$title<- paste0(flag_run,"-",paste0(cfg$gms$c32_rotation_harvest,"RL"),"_",logging,"_",climate_impacts)
 				}
 				start_run(cfg=cfg,codeCheck=codeCheck)
 			}

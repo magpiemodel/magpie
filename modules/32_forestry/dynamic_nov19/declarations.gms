@@ -11,7 +11,7 @@ parameters
  p32_aff_pol_timestep(t,j)                        INDC afforestation per time step (Mha)
  p32_aff_pol(t,j)                                 INDC forest stock (Mha)
  pc32_yield_forestry_future(j)                    Cellular timber yield expected in the future (m3 per ha per year)
- p32_yield_forestry_ac(j,ac,mgmt_type)                    Age class specific yield of plantation forests (m3 per ha per yr)
+ p32_yield_forestry_ac(t,j,ac,mgmt_type)                    Age class specific yield of plantation forests (m3 per ha per yr)
  p32_hvcost_ha(i)                                 Timber harvesting cost per ha (USD)
  p32_rot_length(t,j)                                Regional rotation length of plantations (yr)
  pc32_rot_length(t,j)                                 Cellular rotation length of plantations translated to age class equivalent for future (1)
@@ -40,6 +40,9 @@ parameters
  p32_dampen_pre(ac,j)       Pre calculation for dampening factors applied on management factors (1)
  p32_dampen_final(ac,j)     Final calculation for dampening factors applied on management factors (1)
  p32_rot_corrected(t_all,j,rotation_type)  Corrected calculation for dampening factors applied on management factors (1)
+ p32_rep_yield_forestry(i)      Representative yield in plantations based on FAO data (m3 per ha)
+ p32_rep_yield_natveg(i)        Representative yield in natvge based on FAO data (m3 per ha)
+ p32_fao_management_GloClip(i)  Representative upscaling factors in plantations compared to natveg based on FAO data (1)
 ;
 
 positive variables

@@ -48,6 +48,9 @@ sets
  bio   .  (1pc)
  /
 
+ area_prod_forests Area and production indicators from FAO
+ / forestry_prod, forestry_area, natveg_prod, natveg_area /
+
 ;
 
 alias(ac,ac2);
