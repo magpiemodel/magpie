@@ -78,8 +78,8 @@ $else
   p35_save_secdforest(t,j) = (p35_protect_shr(t,j,"WDPA")+p35_protect_shr(t,j,"%c35_protect_scenario%"))*pm_land_start(j,"secdforest");
   p35_save_other(t,j) = (p35_protect_shr(t,j,"WDPA")+p35_protect_shr(t,j,"%c35_protect_scenario%"))*pm_land_start(j,"other");
   p35_save_primforest(t,j)$(p35_save_primforest(t,j) > vm_land.l(j,"primforest")) = vm_land.l(j,"primforest");
-  p35_save_secdforest(t,j)$(p35_save_secdforest(t,j) > pc35_secdforest(j,ac)) = pc35_secdforest(j,ac);
-  p35_save_other(t,j)$(p35_save_other(t,j) > pc35_other(j,ac)) = pc35_other(j,ac);
+  p35_save_secdforest(t,j)$(p35_save_secdforest(t,j) > pc35_secdforest(j,"acx")) = pc35_secdforest(j,"acx");
+  p35_save_other(t,j)$(p35_save_other(t,j) > pc35_other(j,"acx")) = pc35_other(j,"acx");
   );
 $endif
 
