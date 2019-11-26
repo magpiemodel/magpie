@@ -6,24 +6,21 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @equations
-*' This equations defines the total amount of land to be constant over time.
-
-* q10_land(j2) ..
-*               sum(land, vm_land(j2,land)) =e= sum(land, pm_land_start(j2,land));
 
 *' The following three equations describe the general structure of the land transition matrix.
+*' The first equation defines the total amount of land to be constant over time.
 
  q10_transition_matrix(j2) ..
-        sum((land_from10,land_to10), v10_lu_transitions(j2,land_from10,land_to10)) =e=
-        sum(land, pm_land_start(j2,land));
+	sum((land_from10,land_to10), v10_lu_transitions(j2,land_from10,land_to10)) =e=
+	sum(land, pm_land_start(j2,land));
 
  q10_transition_to(j2,land_to10) ..
-        sum(land_from10, v10_lu_transitions(j2,land_from10,land_to10)) =e=
-        vm_land(j2,land_to10);
+	sum(land_from10, v10_lu_transitions(j2,land_from10,land_to10)) =e=
+	vm_land(j2,land_to10);
 
  q10_transition_from(j2,land_from10) ..
-        sum(land_to10, v10_lu_transitions(j2,land_from10,land_to10)) =e=
-        pcm_land(j2,land_from10);
+	sum(land_to10, v10_lu_transitions(j2,land_from10,land_to10)) =e=
+	pcm_land(j2,land_from10);
 
 *' The following two equations calculate land expansion and land contraction based
 *' on the above land transition matrix.
@@ -60,7 +57,7 @@ q10_croplandexpansion(j2,land_from10) ..
 *' and [32_forestry]:
 
  q10_landdiff ..
-                vm_landdiff =e= sum((j2,land), vm_landexpansion(j2,land)
+		vm_landdiff =e= sum((j2,land), vm_landexpansion(j2,land)
                                  + v10_landreduction(j2,land))
                                  + vm_landdiff_natveg
                                  + vm_landdiff_forestry;

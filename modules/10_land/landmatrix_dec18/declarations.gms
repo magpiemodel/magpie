@@ -20,21 +20,20 @@ positive variables
  v10_landreduction(j,land)                   Land reduction (mio. ha)
  vm_croplandexpansion(j,land)                Sources of cropland expansion (mio. ha)
  vm_croplandreduction(j,land)                Targets of cropland reduction (mio. ha)
- vm_cost_land_transition(j)                            Costs for lu transitions (mio. USD05MER per yr)
+ vm_cost_land_transition(j)		               Costs for lu transitions (mio. USD05MER per yr)
  v10_lu_transitions(j,land_from10,land_to10) Land transitions between time steps (mio. ha)
 ;
 
 equations
-* q10_land(j)                            Land conversion constraint (mio. ha)
- q10_transition_matrix(j)                               Land transition constraint cell area (mio. ha)
- q10_transition_to(j,land_to10)             Land transition constraint to (mio. ha)
- q10_transition_from(j,land_from10)       Land transition constraint from (mio. ha)
+ q10_transition_matrix(j)			        Land transition constraint cell area (mio. ha)
+ q10_transition_to(j,land_to10)		    Land transition constraint to (mio. ha)
+ q10_transition_from(j,land_from10)	  Land transition constraint from (mio. ha)
  q10_landexpansion(j,land_to10)       Land expansion constraint (mio. ha)
  q10_landreduction(j,land_from10)     Land reduction constraint (mio. ha)
  q10_croplandreduction(j,land_to10)   Cropland reduction constraint (mio. ha)
  q10_croplandexpansion(j,land_from10) Cropland expansion constraint (mio. ha)
- q10_cost(j)                                Costs for lu transitions (mio. USD05MER per yr)
- q10_landdiff                           Land difference constraint (mio. ha)
+ q10_cost(j)                    	    Costs for lu transitions (mio. USD05MER per yr)
+ q10_landdiff                        	Land difference constraint (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
