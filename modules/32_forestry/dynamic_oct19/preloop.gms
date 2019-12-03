@@ -18,3 +18,4 @@ p32_max_aff_area = max(s32_max_aff_area, sum(j, smax(t2, p32_aff_pol(t2,j))) );
 
 *initialize parameter 
 p32_land(t,j,type32,ac) = 0;
+p32_land(t,j,"plant","acx") = pcm_land(j,"forestry");
