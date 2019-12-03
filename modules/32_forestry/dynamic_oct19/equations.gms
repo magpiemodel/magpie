@@ -50,7 +50,7 @@ sum(ct, pm_carbon_density_ac(ct,j2,ac-1,"vegc"))));
 *' the exogenously prescribed afforestation that has to be realized in later 
 *' time steps (`p32_aff_togo`).
 
- q32_max_aff .. sum((j2), vm_land(j2,"forestry")-pm_land_start(j2,"forestry"))
+ q32_max_aff .. sum((j2,type32,ac)$(not sameas(type32,"plant")), v32_land(j2,type32,ac))
                 =l= p32_max_aff_area - sum(ct, p32_aff_togo(ct));
 
 *****Carbon stocks**************************************************************
