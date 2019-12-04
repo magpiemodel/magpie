@@ -84,10 +84,22 @@ sets
    potato,cassav_sp,sugr_cane,sugr_beet,
    oils,sugar,molasses,alcohol,brans,scp/
 
+   kfo_pp(kfo) Plant-based food products
+   /
+   tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,puls_pro,
+   potato,cassav_sp,sugr_cane,sugr_beet,
+   oils,sugar,molasses,alcohol,brans,scp,
+   others
+   /
 
    kfo_ap(kfo) Animal food products
    /
    livst_rum,livst_pig,livst_chick, livst_egg, livst_milk, fish
+   /
+
+   kfo_lp(kfo) Livestock food products
+   /
+   livst_rum,livst_pig,livst_chick, livst_egg, livst_milk
    /
 
    kfo_st(kfo) Staple products
@@ -131,10 +143,35 @@ sets
 
 
   calibscen15  Calibration scenarios for balance flow
-               / constant, fadeout2050 /
+       / constant, fadeout2050 /
 
-  ruminantfadeoutscen15 Scenarios for changed composition of livestock products
-               / halving2050, constant /
+
+  fadeoutscen15  Food substitution scenarios including functional forms with targets and transition periods
+       / constant,
+         lin_zero_10_50, lin_zero_20_50, lin_zero_20_30,
+         lin_50pc_10_50_extend90, lin_75pc_10_50_extend90, lin_80pc_20_50, lin_80pc_20_50_extend95, lin_90pc_20_50_extend95,
+	 lin_99-98-90pc_20_50-60-100
+        /
+
+  t_scen15(t_all) Target years for transition to exogenous scenario diets
+       / y2010, y2030, y2050 /
+
+  kcal_scen15  Scenario of daily per capita calorie intake
+       / 2100kcal, 2500kcal /
+
+  EAT_scen15  Scenario of daily per capita calorie intake
+       / BMK, FLX, PSC, VEG, VGN, FLX_hmilk, FLX_hredmeat /
+
+   EAT_staples(kfo) All staple food products according to EAT Lancet definition
+       / tece,maiz,trce,rice_pro,potato,cassav_sp /
+
+   EAT_nonstaples(kfo) All non-staple food products according to EAT Lancet definition
+       / soybean,rapeseed,groundnut,sunflower,puls_pro,
+         sugr_cane,sugr_beet,
+         oils,sugar,molasses,alcohol,brans,scp,
+         livst_rum,livst_pig,livst_chick, livst_egg, livst_milk, fish,
+         others /
+
 ;
 
 alias(kst,kst2);
@@ -144,3 +181,4 @@ alias(kfo_st,kfo_st2);
 alias(kfo_pf,kfo_pf2);
 alias(iso,iso2);
 alias(reproductive,reproductive2);
+alias(EAT_staples,EAT_staples2);

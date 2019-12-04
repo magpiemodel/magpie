@@ -23,20 +23,18 @@ if (sum(sameas(t_past,t),1) = 1,
 * First set it to equal shares, just in case there is no population
 
 
-     i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap) =
+     i15_livestock_kcal_structure_iso(t,iso,kfo_ap) =
                                  sum(iso2, f15_kcal_pc_iso(t,iso2,kfo_ap)*im_pop_iso(t,iso2))/
                                  (
                                    sum((kfo_ap2,iso2),(f15_kcal_pc_iso(t,iso2,kfo_ap2)*im_pop_iso(t,iso2)))
                                    +10**(-5)
                                  );
 
-     i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap)$sum(kfo_ap2,f15_kcal_pc_iso(t,iso,kfo_ap2)>0)=
+     i15_livestock_kcal_structure_iso(t,iso,kfo_ap)$sum(kfo_ap2,f15_kcal_pc_iso(t,iso,kfo_ap2)>0)=
                                  f15_kcal_pc_iso(t,iso,kfo_ap) /
                                  sum(kfo_ap2,f15_kcal_pc_iso(t,iso,kfo_ap2)
 *                                10**(-5) required to avoid unlogical division by zero error.
                                  );
-
-    i15_livestock_kcal_structure_iso(t,iso,kfo_ap) = i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap);
 
      i15_processed_kcal_structure_iso(t,iso,kfo_pf) =
                                sum(iso2, f15_kcal_pc_iso(t,iso2,kfo_pf)*im_pop_iso(t,iso2)) /
@@ -46,12 +44,10 @@ if (sum(sameas(t_past,t),1) = 1,
 *                                10**(-5) required to avoid unlogical division by zero error. Ask Jan P
                                );
 
-
      i15_processed_kcal_structure_iso(t,iso,kfo_pf)$(sum(kfo_pf2,f15_kcal_pc_iso(t,iso,kfo_pf2))>0) =
                                f15_kcal_pc_iso(t,iso,kfo_pf)
-                               /sum(kfo_pf2,f15_kcal_pc_iso(t,iso,kfo_pf2));
-
-
+                               /sum(kfo_pf2,f15_kcal_pc_iso(t,iso,kfo_pf2)
+                               );
 
      i15_staples_kcal_structure_iso(t,iso,kfo_st) =
                                sum(iso2, f15_kcal_pc_iso(t,iso2,kfo_st)*im_pop_iso(t,iso2)) /
@@ -61,24 +57,17 @@ if (sum(sameas(t_past,t),1) = 1,
 *                                10**(-5) required to avoid unlogical division by zero error. Ask Jan P
                                );
 
-
      i15_staples_kcal_structure_iso(t,iso,kfo_st)$(sum(kfo_st2,f15_kcal_pc_iso(t,iso,kfo_st2))>0) =
                                f15_kcal_pc_iso(t,iso,kfo_st)
-                               /sum(kfo_st2,f15_kcal_pc_iso(t,iso,kfo_st2));
-
+                               /sum(kfo_st2,f15_kcal_pc_iso(t,iso,kfo_st2)
+                               );
 
 
  else
 * Assumptions on future calorie structure within food groups for future projections:
      i15_staples_kcal_structure_iso(t,iso,kfo_st) =i15_staples_kcal_structure_iso(t-1,iso,kfo_st);
      i15_processed_kcal_structure_iso(t,iso,kfo_pf) =i15_processed_kcal_structure_iso(t-1,iso,kfo_pf);
-     i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap) = i15_livestock_kcal_structure_iso_raw(t-1,iso,kfo_ap);
-     i15_livestock_kcal_structure_iso(t,iso,kfo_ap)     = i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap);
-     i15_livestock_kcal_structure_iso(t,iso,"livst_chick") =
-                                      i15_livestock_kcal_structure_iso_raw(t,iso,"livst_chick")
-                                      + i15_livestock_kcal_structure_iso_raw(t,iso,"livst_rum") * (1-i15_ruminant_fadeout(t));
-     i15_livestock_kcal_structure_iso(t,iso,"livst_rum") =
-                                      i15_livestock_kcal_structure_iso_raw(t,iso,"livst_rum") * i15_ruminant_fadeout(t);
+     i15_livestock_kcal_structure_iso(t,iso,kfo_ap) = i15_livestock_kcal_structure_iso(t-1,iso,kfo_ap);
 
  );
 
@@ -176,7 +165,7 @@ p15_intake(t,iso,sex,age,bmi_group15)=
                         * p15_physical_activity_level(t,iso,sex,age);
 
 
-*' Pregnancy and lactation require additional  food intake. To account for this,
+*' Pregnancy and lactation require additional food intake. To account for this,
 *' newborns are distributed among reproductive women in a population. This number
 *' is then multiplied with the extra energy requirements:
 i15_kcal_pregnancy(t,iso)=sum(sex,im_demography(t,iso,sex,"0--4")/5) * ((40/66)*845 + (26/66)*675);
@@ -320,6 +309,211 @@ else
  p15_kcal_pc_calibrated(t,i,kfo)=p15_kcal_pc(t,i,kfo)+p15_balanceflow_kcal(t,i,kfo);
  p15_kcal_pc_calibrated(t,i,kfo)=round(p15_kcal_pc_calibrated(t,i,kfo),2);
  p15_kcal_pc_calibrated(t,i,kfo)$(p15_kcal_pc_calibrated(t,i,kfo)<0)=0;
+
+
+
+
+*###############################################################################
+* ###### Exogenous food substitution scenarios
+
+* "Downwards convergence" of regional calorie oversupply due to food waste to the
+* waste reduction target, i.e. only for values that are higher than the target:
+
+
+*' Substitution of ruminant beef with poultry:
+p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
+p15_kcal_pc_calibrated(t,i,"livst_rum") =
+               p15_kcal_pc_calibrated_orig(t,i,"livst_rum") * i15_ruminant_fadeout(t);
+p15_kcal_pc_calibrated(t,i,"livst_chick") = p15_kcal_pc_calibrated_orig(t,i,"livst_chick")
+             + p15_kcal_pc_calibrated_orig(t,i,"livst_rum") * (1-i15_ruminant_fadeout(t));
+
+*' Substitution of fish with poultry:
+p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
+p15_kcal_pc_calibrated(t,i,"fish") =
+               p15_kcal_pc_calibrated_orig(t,i,"fish") * i15_fish_fadeout(t);
+p15_kcal_pc_calibrated(t,i,"livst_chick") = p15_kcal_pc_calibrated_orig(t,i,"livst_chick")
+             + p15_kcal_pc_calibrated_orig(t,i,"fish") * (1-i15_fish_fadeout(t));
+
+*' Fade-out of alcohol consumption without substitution:
+p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
+p15_kcal_pc_calibrated(t,i,"alcohol") =
+               p15_kcal_pc_calibrated_orig(t,i,"alcohol") * i15_alcohol_fadeout(t);
+
+*' Substitution of livestock products (without fish) with plant-based food commodities:
+p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
+p15_kcal_pc_calibrated_livestock_orig(t,i) = sum(kfo_lp,p15_kcal_pc_calibrated(t,i,kfo_lp));
+p15_kcal_pc_calibrated_plant_orig(t,i) = sum(kfo_pp,p15_kcal_pc_calibrated(t,i,kfo_pp));
+
+p15_livestock_kcal_structure_orig(t,i,kfo_lp)$(p15_kcal_pc_calibrated_livestock_orig(t,i)>0) =
+                               p15_kcal_pc_calibrated(t,i,kfo_lp)
+                               /p15_kcal_pc_calibrated_livestock_orig(t,i);
+
+p15_plant_kcal_structure_orig(t,i,kfo_pp)$(p15_kcal_pc_calibrated_plant_orig(t,i)>0) =
+                               p15_kcal_pc_calibrated(t,i,kfo_pp)
+                               /p15_kcal_pc_calibrated_plant_orig(t,i);
+
+p15_kcal_pc_calibrated(t,i,kfo_lp) = p15_livestock_kcal_structure_orig(t,i,kfo_lp)
+               *p15_kcal_pc_calibrated_livestock_orig(t,i)*i15_livestock_fadeout(t);
+p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
+               *(p15_kcal_pc_calibrated_plant_orig(t,i)
+               + p15_kcal_pc_calibrated_livestock_orig(t,i) * (1-i15_livestock_fadeout(t)));
+
+
+
+
+
+*###############################################################################
+* ######  WASTE CALCULATIONS (required for exogenous food waste or diet scenarios)
+
+* The ratio of food demand at household level to food intake is determined
+* by the amount of food that is wasted. This ratio is one of the drivers of
+* future food demand trajetories.
+* For the calculation of the ratio between food demand and intake, total food
+* calorie intake based on CALIBRATED parameters needs to be calculated:
+
+p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15) =
+           p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)+
+           i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
+
+* The BMI shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
+p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)$(p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)<0) = 0;
+p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)$(p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)>1) = 1;
+* The mismatch is balanced by moving the exceeding quantities into the middle BMI group.
+p15_bmi_shr_calibrated(t,iso,sex,age,"medium")=
+      1 - (sum(bmi_group15, p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15))
+      - p15_bmi_shr_calibrated(t,iso,sex,age,"medium"));
+
+p15_intake_total_iso_calibrated(t,iso) =
+       sum((sex, age, bmi_group15), p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)*
+       im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
+       + i15_kcal_pregnancy(t,iso);
+
+p15_intake_total_calibrated(t,i)$(sum(i_to_iso(i,iso),sum((sex,age), im_demography(t,iso,sex,age)) ) >0 )
+          = sum(i_to_iso(i,iso),p15_intake_total_iso_calibrated(t,iso)
+            ) / sum(i_to_iso(i,iso),
+                sum((sex,age), im_demography(t,iso,sex,age))
+            );
+
+p15_demand2intake_ratio(t,i)$(p15_intake_total_calibrated(t,i) >0 ) =
+         sum(kfo,p15_kcal_pc_calibrated(t,i,kfo)) /
+         p15_intake_total_calibrated(t,i);
+
+* In case, no exogenous waste scenario is selceted, the original regression-
+* based estimates for food calorie oversupply are used as waste scenario.
+* This information is needed in case that an exogenous diet scenario should be
+* constructed from food calorie intake.
+p15_demand2intake_ratio_scen(t,i) =p15_demand2intake_ratio(t,i);
+
+
+* ###### Exogenous food waste scenario
+
+if(s15_exo_waste = 1,
+
+* "Downwards convergence" of regional calorie oversupply due to food waste to the
+* waste reduction target, i.e. only for values that are higher than the target:
+
+p15_demand2intake_ratio_scen(t,i)$(p15_demand2intake_ratio(t,i) > s15_waste_scen )
+                    = p15_demand2intake_ratio(t,i)*(1-i15_exo_foodscen_fader(t))
+                      + s15_waste_scen*i15_exo_foodscen_fader(t);
+
+p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
+p15_kcal_pc_calibrated(t,i,kfo)$(p15_demand2intake_ratio(t,i) >0 ) = p15_kcal_pc_calibrated_orig(t,i,kfo)*(
+                      p15_demand2intake_ratio_scen(t,i)/p15_demand2intake_ratio(t,i) );
+
+);
+
+
+* ###### Exogenous EAT Lancet diet scenario
+
+*' @code
+*' Transition to exogenous EAT Lancet diet scenarios:
+*' It is possible to define exogenous diet scenarios that replace the regression-based
+*' calculation of food intake and demand according to a predefined speed of
+*' convergence from `p15_kcal_pc_calibrated(t,i,kfo)` to the scenario-dependent target
+*' `i15_kcal_pc_scen_target(t,i,kfo)` by setting the switch `s15_exo_diet`
+*' to 1.
+
+
+if(s15_exo_diet = 1,
+
+
+*' 1.) In a first step, the exogenous scenario diets are defined by selecting a
+*' scenario target for total daily per capita food intake and by choosing
+*' food-specific dietary patterns:
+
+$ifthen "%c15_kcal_scen%" == "healthy_BMI"
+  i15_intake_scen_target(t,i) = sum(i_to_iso(i,iso),
+        sum((sex, age), im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,"medium") )
+         + i15_kcal_pregnancy(t,iso)
+         ) / sum(i_to_iso(i,iso),
+             sum((sex,age), im_demography(t,iso,sex,age))
+         );
+  i15_intake_EATLancet(i,kfo) =
+        f15_intake_EATLancet("%c15_exo_scen_targetyear%",i,"2100kcal","%c15_EAT_scen%",kfo);
+$else
+  i15_intake_EATLancet(i,kfo) =
+      f15_intake_EATLancet("%c15_exo_scen_targetyear%",i,"%c15_kcal_scen%","%c15_EAT_scen%",kfo);
+      i15_intake_scen_target(t,i) = sum(kfo,i15_intake_EATLancet(i,kfo));
+$endif
+
+
+*' 2.) The second step defines the daily per capita intake of different food
+*' commodities by filling up the scenario target for total daily per capita food
+*' intake according to different scenario assumptions on dietary patterns.
+*' In case that total daily calorie intake is not equal to EAT Lancet intake,
+*' only the calories for staple crops are modified and calories for non-staple food
+*' commodities are preserved.
+
+if ( sum(i,(i15_intake_scen_target(t,i) - sum(kfo,i15_intake_EATLancet(i,kfo))**2 ) )  = 0,
+    i15_intake_detailed_scen_target(t,i,kfo) = i15_intake_EATLancet(i,kfo);
+else
+    i15_intake_detailed_scen_target(t,i,EAT_nonstaples) = i15_intake_EATLancet(i,EAT_nonstaples);
+    i15_intake_detailed_scen_target(t,i,EAT_staples) = (
+            i15_intake_scen_target(t,i) - sum(EAT_nonstaples,i15_intake_EATLancet(i,EAT_nonstaples)) )*(
+            i15_intake_EATLancet(i,EAT_staples)/sum(EAT_staples2,i15_intake_EATLancet(i,EAT_staples2)) );
+);
+
+*' 3.) The third step estimates the calorie supply at household level by multiplying
+*' daily per capita calorie intake with a ratio  of supply to intake
+*' (`f15_overcons_FAOwaste(i,kfo)`), based on FAO estimates on historical food waste
+*' at consumption level and food conversion factors, and with a calibration
+*' factor `f15_calib_fsupply(i)`. This factor ensures that the estimated food
+*' supply (based on MAgPIE calorie intake, FAO waste shares and food converion
+*' factors) is calibrated to FAO food supply for the only historical time slice
+*' of the EAT Lancet diet scenarios (y2010). A multiplicative factor accounts for
+*' increases in food waste over time relative to the only historical time slice
+*' of the EAT Lancet diet scenarios, according to the regression-based approach.
+
+* In case, no exogenous waste scenario is selceted, the original regression-
+* based estimates for food calorie oversupply are used as waste scenario:
+p15_foodwaste_growth(t,i) = ( 1$(p15_demand2intake_ratio_ref(i) = 0)
+            + (p15_demand2intake_ratio_scen(t,i)/p15_demand2intake_ratio_ref(i))$(
+              p15_demand2intake_ratio_ref(i) > 0)
+              );
+
+i15_kcal_pc_scen_target(t,i,kfo) = (f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)
+                                    *i15_intake_detailed_scen_target(t,i,kfo))
+                                    *p15_foodwaste_growth(t,i);
+
+*' 4.) In the last step, the regression-based calculation of daily per capita food demand
+*' is faded into the exogenous diet scenario according to a predefined speed of
+*' convergence (note that fading should start after the historical time slice of
+*' the EAT Lancet diet scenarios (y2010) as defined in `i15_exo_foodscen_fader(t)`):
+
+p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
+p15_kcal_pc_calibrated(t,i,kfo) = p15_kcal_pc_calibrated_orig(t,i,kfo) * (1-i15_exo_foodscen_fader(t))
+                        + i15_kcal_pc_scen_target(t,i,kfo) * i15_exo_foodscen_fader(t);
+
+
+);
+
+
+*' @stop
+
+*###############################################################################
+
+
+
 
 *' @code
 *' Now, MAgPIE is executed.
