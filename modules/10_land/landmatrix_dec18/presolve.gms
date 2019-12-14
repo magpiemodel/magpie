@@ -29,8 +29,8 @@ v10_lu_transitions.fx(j,land_from10,"primforest") = 0;
 v10_lu_transitions.up(j,"primforest","primforest") = Inf;
 
 *' Secdforest can only decrease (during optimization)
-v10_lu_transitions.fx(j,land_from10,"secdforest") = 0;
-v10_lu_transitions.up(j,"secdforest","secdforest") = Inf;
+*v10_lu_transitions.fx(j,land_from10,"secdforest") = 0;
+*v10_lu_transitions.up(j,"secdforest","secdforest") = Inf;
 
 *' Urban land is fixed
 v10_lu_transitions.fx(j,land_from10,"urban") = 0;
