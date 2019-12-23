@@ -46,6 +46,12 @@ p56_emis_policy(t,i,pollutants,emis_source) = f56_emis_policy("%c56_emis_policy%
 *reward neg emissions depending on s56_reward_neg_emis
 v56_emission_costs_cell_oneoff.lo(j2,emis_cell_one56) = s56_reward_neg_emis;
 
+p56_c_price_aff(t,i,ac) = im_pollutant_prices(t,i,"co2_c");
+p56_c_price_aff(t_all,i,ac)$(p56_c_price_aff(t_all,i,ac)=0 AND ord(t_all)>1) = p56_c_price_aff(t_all-1,i,ac);
+p56_c_price_aff(t,i,ac)$(ord(t)+ac.off<card(t)) = p56_c_price_aff(t+ac.off,i,"ac0");
+
+display p56_c_price_aff;
+
 *calculate ghg price growth rate
 *http://de.wikihow.com/Berechnung-einer-Wachstumsrate#/Bild:Calculate-Growth-Rate-Step-6.jpg
 p56_ghg_price_growth_rate(t,i,pollutants) = 0;

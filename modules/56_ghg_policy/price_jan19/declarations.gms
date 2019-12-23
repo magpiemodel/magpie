@@ -11,6 +11,7 @@ parameters
  p56_ghg_price_growth_rate(t,i,pollutants)    Growth rate of certificate price (% per yr)
  p56_ghg_price_growth_rate_avg(i,pollutants)  Average over time of growth rate of certificate price (% per yr)
  p56_emis_policy(t,i,pollutants,emis_source)  GHG emission policy scenarios (binary)
+ p56_c_price_aff(t_all,i,ac)				  C price used for afforestation decision-making (USD05MER per tC)
 ;
 
 equations
