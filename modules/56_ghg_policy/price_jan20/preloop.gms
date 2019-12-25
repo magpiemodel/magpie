@@ -28,38 +28,34 @@ im_pollutant_prices(t,i,"n2o_n_indirect")$(im_pollutant_prices(t,i,"n2o_n_indire
 im_pollutant_prices(t,i,"co2_c") = im_pollutant_prices(t,i,"co2_c")*s56_cprice_red_factor;
 
 ***phase-in of GHG price over 20 year period; start depends on s56_ghgprice_start
+if (s56_ghgprice_phase_in = 1,
 im_pollutant_prices(t,i,pollutants)$(m_year(t) < s56_ghgprice_start) = 0;
 im_pollutant_prices(t,i,pollutants)$(m_year(t) = s56_ghgprice_start) = 0.1*im_pollutant_prices(t,i,pollutants);
 im_pollutant_prices(t,i,pollutants)$(m_year(t) = s56_ghgprice_start+5) = 0.2*im_pollutant_prices(t,i,pollutants);
 im_pollutant_prices(t,i,pollutants)$(m_year(t) = s56_ghgprice_start+10) = 0.4*im_pollutant_prices(t,i,pollutants);
 im_pollutant_prices(t,i,pollutants)$(m_year(t) = s56_ghgprice_start+15) = 0.8*im_pollutant_prices(t,i,pollutants);
 im_pollutant_prices(t,i,pollutants)$(m_year(t) >= s56_ghgprice_start+20) = im_pollutant_prices(t,i,pollutants);
-
+);
 ***multiply GHG prices with development state to account for institutional requirements needed for implementing a GHG pricing scheme
-im_pollutant_prices(t,i,pollutants) = im_pollutant_prices(t,i,pollutants)*im_development_state(t,i);
+im_pollutant_prices(t,i,pollutants)$(s56_ghgprice_devstate_scaling = 1) = im_pollutant_prices(t,i,pollutants)*im_development_state(t,i);
 
 display im_pollutant_prices;
 
 ***GHG emission policy
 p56_emis_policy(t,i,pollutants,emis_source) = f56_emis_policy("%c56_emis_policy%",pollutants,emis_source);
-	
+
 *reward neg emissions depending on s56_reward_neg_emis
 v56_emission_costs_cell_oneoff.lo(j2,emis_cell_one56) = s56_reward_neg_emis;
 
-*calculate ghg price growth rate
-*http://de.wikihow.com/Berechnung-einer-Wachstumsrate#/Bild:Calculate-Growth-Rate-Step-6.jpg
-p56_ghg_price_growth_rate(t,i,pollutants) = 0;
-p56_ghg_price_growth_rate(t,i,pollutants)$(ord(t)>1 AND im_pollutant_prices(t-1,i,pollutants) > 0) = (im_pollutant_prices(t,i,pollutants)/im_pollutant_prices(t-1,i,pollutants))**(1/m_yeardiff(t))-1;
-*remove negative values
-p56_ghg_price_growth_rate(t,i,pollutants)$(p56_ghg_price_growth_rate(t,i,pollutants) <= 0) = 0;
-*remove values exceeding 10%
-p56_ghg_price_growth_rate(t,i,pollutants)$(p56_ghg_price_growth_rate(t,i,pollutants) > 0.1) = 0.1;
-*calculate average growth rate over time
-p56_ghg_price_growth_rate_avg(i,pollutants) = sum(t, p56_ghg_price_growth_rate(t,i,pollutants))/card(t);
-*limit deviation from average growth rate over time to 1%
-p56_ghg_price_growth_rate(t,i,pollutants)$(p56_ghg_price_growth_rate(t,i,pollutants) > p56_ghg_price_growth_rate_avg(i,pollutants)+0.01) = p56_ghg_price_growth_rate_avg(i,pollutants)+0.01;
-p56_ghg_price_growth_rate(t,i,pollutants)$(p56_ghg_price_growth_rate(t,i,pollutants) < p56_ghg_price_growth_rate_avg(i,pollutants)-0.01) = p56_ghg_price_growth_rate_avg(i,pollutants)-0.01;
-*account for special case if average growth rate is very low (<= 1%)
-p56_ghg_price_growth_rate(t,i,pollutants)$(p56_ghg_price_growth_rate(t,i,pollutants) = 0) = p56_ghg_price_growth_rate_avg(i,pollutants);
-*if average growth rate is zero use 5% as default
-p56_ghg_price_growth_rate(t,i,pollutants)$(p56_ghg_price_growth_rate(t,i,pollutants) = 0) = 0.05;
+***construct age-class dependent C price for afforestation incentive
+***this is needed because time steps (t) and age-classes (ac) can differ. ac is always in 5-year time steps.
+*C prices exist for each time step (t). initialize with same C price for all age-classes, for t. 
+p56_c_price_aff(t,i,ac) = im_pollutant_prices(t,i,"co2_c");
+if (s56_c_price_aff_future = 1,
+*For missing years, use C price of previous time step.
+p56_c_price_aff(t_all,i,ac)$(p56_c_price_aff(t_all,i,ac)=0 AND ord(t_all)>1) = p56_c_price_aff(t_all-1,i,ac);
+*Shift C prices. E.g. ac5 in 2020 should have the C price of ac0 in 2025.
+p56_c_price_aff(t_all,i,ac)$(ord(t_all)+ac.off<card(t_all)) = p56_c_price_aff(t_all+ac.off,i,"ac0");
+);
+
+display p56_c_price_aff;
