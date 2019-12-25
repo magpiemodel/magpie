@@ -8,7 +8,7 @@
 *' @code
 *' Costs and CDR from afforestation are set to zero.
 vm_cost_fore.fx(i) = 0;
-vm_cdr_aff.fx(j) = 0;
+vm_cdr_aff.fx(j,ac) = 0;
 
 *' All forestry land pools (`land32`) except for "old" are set to zero, 
 *' whereas "old" refers to the forestry plantations at the level of 1995.
