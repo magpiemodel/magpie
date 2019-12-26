@@ -32,12 +32,13 @@ for (ssp in c("SSP1","SSP2","SSP5")) {
   # cfg$gms$ghg_policy  <- "price_jan19"
   # start_run(cfg,codeCheck=FALSE)
   
-  cfg$title <- paste0("f_affore_",ssp,"_Budg600_jan20_foodOff")
+  cfg$title <- paste0("f_affore_",ssp,"_Budg600_ghgPol_jan20_land_jan20")
   cfg <- setScenario(cfg,c(ssp,"NDC"))
   cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
   cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
   cfg$gms$ghg_policy  <- "price_jan20"
-  cfg$gms$s15_elastic_demand <- 0
+#  cfg$gms$s15_elastic_demand <- 0
+  cfg$gms$land <- "landmatrix_jan20"
   start_run(cfg,codeCheck=FALSE)
 }
 
