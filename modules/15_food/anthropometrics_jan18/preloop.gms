@@ -47,6 +47,21 @@ p15_prices_kcal(t,iso,kfo)=i15_prices_initial_kcal(iso,kfo);
 p15_lastiteration_delta_income(t,i) = 1;
 
 
-$ifthen "%c15_rumscen%" == "mixed" i15_ruminant_fadeout(t) = (f15_ruminant_fadeout(t,"constant") + f15_ruminant_fadeout(t,"halving2050"))/2;
-$else i15_ruminant_fadeout(t) = f15_ruminant_fadeout(t,"%c15_rumscen%");
-$endif
+
+* Food substitution scenarios including functional forms, targets and transition periods
+
+i15_ruminant_fadeout(t) = f15_food_substitution_fader(t,"%c15_rumscen%");
+i15_fish_fadeout(t) = f15_food_substitution_fader(t,"%c15_fishscen%");
+i15_alcohol_fadeout(t) = f15_food_substitution_fader(t,"%c15_alcscen%");
+i15_livestock_fadeout(t) = f15_food_substitution_fader(t,"%c15_livescen%");
+
+
+
+
+* The target year for transition to exogenous scenario diets defines the speed
+* of fading from regression based daily food consumption towards the scenario:
+i15_exo_foodscen_fader(t) = f15_exo_foodscen_fader(t,"%c15_exo_scen_targetyear%");
+
+* Initialisation of the ratio between food calorie demand and food intake for the
+* historical reference period:
+p15_demand2intake_ratio_ref(i) = 0;

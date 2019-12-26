@@ -10,16 +10,17 @@
 *****Costs**********************************************************************
 
 *' The direct costs of afforestation `vm_cost_fore` include maintenance and monitoring
-*' costs for newly established plantations [@sathaye_ghg_2005]. Note that "old" refers
-*' to forestry plantations for wood production in 1995.
+*' costs for plantations [@sathaye_ghg_2005]. 
 *' In addition, afforestation may cause costs in other parts of the model such
 *' as costs for technological change [13_tc] or land expansion [39_landconversion].
 
 q32_cost_fore_ac(i2) ..
-vm_cost_fore(i2) =e= sum((cell(i2,j2),land32,fcosts32)$(not sameas(land32,"old")),
-                v32_land(j2,land32)*f32_fac_req_ha(i2,fcosts32));
+vm_cost_fore(i2) =e= sum((cell(i2,j2),type32,ac,fcosts32),
+                v32_land(j2,type32,ac)*f32_fac_req_ha(i2,fcosts32));
 
-*****forestry emissions seen in maccs module************************************
+
+*****C-PRICE INDUCED AFFORESTATION
+*****forestry emissions seen in 56_ghg_policy module************************************
 *' The interface `vm_cdr_aff` provides the projected CDR of an afforestation
 *' activity for a planning horizon of 30 years `s32_planing_horizon` to the [56_ghg_policy] module.
 
@@ -27,20 +28,20 @@ q32_cdr_aff(j2) ..
 vm_cdr_aff(j2) =e=
 sum(ac$(ord(ac) > 1
 AND (ord(ac)-1) <= s32_planing_horizon/5),
-v32_land(j2,"new") *
+v32_land(j2,"aff","ac0") *
 (sum(ct, pm_carbon_density_ac(ct,j2,ac,"vegc")) -
 sum(ct, pm_carbon_density_ac(ct,j2,ac-1,"vegc"))));
 
 *****Land***************************************************
-*' The interface `vm_land` provides aggregated forestry land pools (`land32`) to other modules.
+*' The interface `vm_land` provides aggregated forestry land pools (`type32`) to other modules.
 
  q32_land(j2) ..
- vm_land(j2,"forestry") =e= sum(land32, v32_land(j2,land32));
+ vm_land(j2,"forestry") =e= sum((type32,ac), v32_land(j2,type32,ac));
 
 *' The constraint `q32_aff_pol` accounts for the exogenous afforestation prescribed by NPI/NDC policies.
 
  q32_aff_pol(j2) ..
- v32_land(j2,"new_ndc") =e= sum(ct, p32_aff_pol_timestep(ct,j2));
+ v32_land(j2,"indc","ac0") =e= sum(ct, p32_aff_pol_timestep(ct,j2));
 
 *' The constraint `q32_max_aff` accounts for the allowed maximum global
 *' afforestation defined in `p32_max_aff_area`. Note that NPI/NDC afforestation 
@@ -49,7 +50,7 @@ sum(ct, pm_carbon_density_ac(ct,j2,ac-1,"vegc"))));
 *' the exogenously prescribed afforestation that has to be realized in later 
 *' time steps (`p32_aff_togo`).
 
- q32_max_aff .. sum((j2), vm_land(j2,"forestry")-pm_land_start(j2,"forestry"))
+ q32_max_aff .. sum((j2,type32,ac)$(not sameas(type32,"plant")), v32_land(j2,type32,ac))
                 =l= p32_max_aff_area - sum(ct, p32_aff_togo(ct));
 
 *****Carbon stocks**************************************************************
@@ -57,20 +58,17 @@ sum(ct, pm_carbon_density_ac(ct,j2,ac-1,"vegc"))));
 *' weighted mean of carbon density for carbon pools (`p32_carbon_density`).
 
  q32_carbon(j2,ag_pools)  .. vm_carbon_stock(j2,"forestry",ag_pools) =e=
-                         sum(land32, v32_land(j2,land32)*
-                         sum(ct, p32_carbon_density(ct,j2,land32,ag_pools)));
+                         sum((type32,ac), v32_land(j2,type32,ac)*
+                         sum(ct, pm_carbon_density_ac(ct,j2,ac,ag_pools)));
 
 *' Forestry land expansion and reduction is calculated as follows:
 
- q32_land_diff .. vm_landdiff_forestry =e= sum((j2,land32),
- 					  v32_land_expansion(j2,land32)
- 					+ v32_land_reduction(j2,land32));
+ q32_land_diff .. vm_landdiff_forestry =e= sum((j2,type32,ac),
+ 					  v32_land_expansion(j2,type32,ac)
+ 					+ v32_land_reduction(j2,type32,ac));
 
- q32_land_expansion(j2,land32) ..
- 	v32_land_expansion(j2,land32) =g= v32_land(j2,land32) - pc32_land(j2,land32);
+ q32_land_expansion(j2,type32,ac) ..
+ 	v32_land_expansion(j2,type32,ac) =g= v32_land(j2,type32,ac) - pc32_land(j2,type32,ac);
 
- q32_land_reduction(j2,land32) ..
- 	v32_land_reduction(j2,land32) =g= pc32_land(j2,land32) - v32_land(j2,land32);
-
-
-*** EOF equations.gms ***
+ q32_land_reduction(j2,type32,ac) ..
+ 	v32_land_reduction(j2,type32,ac) =g= pc32_land(j2,type32,ac) - v32_land(j2,type32,ac);
