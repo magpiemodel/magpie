@@ -32,7 +32,7 @@ for (ssp in c("SSP1","SSP2","SSP5")) {
   # cfg$gms$ghg_policy  <- "price_jan19"
   # start_run(cfg,codeCheck=FALSE)
   
-  cfg$title <- paste0("f_affore_",ssp,"_Budg600_ghgPol_jan20_land_jan20_update")
+  cfg$title <- paste0("f_affore_",ssp,"_Budg600_ghgPol_jan20_land_jan20_update2")
   cfg <- setScenario(cfg,c(ssp,"NDC"))
   cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
   cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
@@ -44,17 +44,17 @@ for (ssp in c("SSP1","SSP2","SSP5")) {
   
   start_run(cfg,codeCheck=FALSE)
   
-  cfg$title <- paste0("f_affore_",ssp,"_Budg600_ghgPol_jan20_land_dec18_update")
-  cfg <- setScenario(cfg,c(ssp,"NDC"))
-  cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
-  cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
-  cfg$gms$ghg_policy  <- "price_jan20"
-  #  cfg$gms$s15_elastic_demand <- 0
-  cfg$gms$land <- "landmatrix_dec18"
-  #  cfg$gms$land <- "feb15"
-  #  cfg$gms$s80_optfile <- 0
-  
-  start_run(cfg,codeCheck=FALSE)
+  # cfg$title <- paste0("f_affore_",ssp,"_Budg600_ghgPol_jan20_land_dec18_update")
+  # cfg <- setScenario(cfg,c(ssp,"NDC"))
+  # cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
+  # cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
+  # cfg$gms$ghg_policy  <- "price_jan20"
+  # #  cfg$gms$s15_elastic_demand <- 0
+  # cfg$gms$land <- "landmatrix_dec18"
+  # #  cfg$gms$land <- "feb15"
+  # #  cfg$gms$s80_optfile <- 0
+  # 
+  # start_run(cfg,codeCheck=FALSE)
   
 }
 
