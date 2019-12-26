@@ -49,11 +49,14 @@ v56_emission_costs_cell_oneoff.lo(j2,emis_cell_one56) = s56_reward_neg_emis;
 
 ***construct age-class dependent C price for afforestation incentive
 ***this is needed because time steps (t) and age-classes (ac) can differ. ac is always in 5-year time steps.
+p56_c_price_aff(t_all,i,ac) = 0;
 *C prices exist for each time step (t). initialize with same C price for all age-classes, for t. 
 p56_c_price_aff(t,i,ac) = im_pollutant_prices(t,i,"co2_c");
 if (s56_c_price_aff_future = 1,
 *For missing years, use C price of previous time step.
+loop(t_all,
 p56_c_price_aff(t_all,i,ac)$(p56_c_price_aff(t_all,i,ac)=0 AND ord(t_all)>1) = p56_c_price_aff(t_all-1,i,ac);
+);
 *Shift C prices. E.g. ac5 in 2020 should have the C price of ac0 in 2025.
 p56_c_price_aff(t_all,i,ac)$(ord(t_all)+ac.off<card(t_all)) = p56_c_price_aff(t_all+ac.off,i,"ac0");
 );
