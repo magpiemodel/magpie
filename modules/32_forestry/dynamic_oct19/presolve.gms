@@ -53,7 +53,7 @@ pc32_land(j,type32,ac) = p32_land(t,j,type32,ac);
 vm_land.l(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 pcm_land(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 
-** fix v32_land for all age classes except ac0 (aff and indc ac0 is free)
+** fix v32_land for all age classes except ac0 (aff and ndc ac0 is free)
 v32_land.fx(j,type32,ac_sub) = pc32_land(j,type32,ac_sub);
 ** fix plantations ac0 to zero (no forestry modelled).
 v32_land.fx(j,"plant","ac0") = 0;

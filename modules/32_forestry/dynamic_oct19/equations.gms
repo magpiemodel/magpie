@@ -37,7 +37,7 @@ v32_land(j2,"aff","ac0") * sum(ct, p32_cdr_ac(ct,j2,ac));
 *' The constraint `q32_aff_pol` accounts for the exogenous afforestation prescribed by NPI/NDC policies.
 
  q32_aff_pol(j2) ..
- v32_land(j2,"indc","ac0") =e= sum(ct, p32_aff_pol_timestep(ct,j2));
+ v32_land(j2,"ndc","ac0") =e= sum(ct, p32_aff_pol_timestep(ct,j2));
 
 *' The constraint `q32_max_aff` accounts for the allowed maximum global
 *' afforestation defined in `p32_max_aff_area`. Note that NPI/NDC afforestation 
