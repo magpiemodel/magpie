@@ -14,6 +14,7 @@ library(lucode)
 library(magclass)
 library(luplot)
 library(magpie4)
+library(ggplot2)
 
 options(error=function()traceback(2))
 
@@ -39,6 +40,7 @@ for (i in 1:length(outputdirs)) {
     scen <- cfg$title
     #read-in reporting file
     x <- collapseNames(land(gdx,level="glo")[,,"forestry"])
+    x <- x-setYears(x[,1,],NULL)
     getNames(x) <- scen
     forestry <- mbind(forestry,x)
   } else missing <- c(missing,outputdirs[i])
@@ -48,8 +50,5 @@ if (!is.null(missing)) {
   print(missing)
 }
 
-magpie2ggplot2(forestry,scenario = 1,ylab = "Mha",title = "Afforestation",legend_position = "bottom",file = "output/aff_area.pdf")
-
-#plotmap2(forestry,"output/defor_area.pdf",legend_range = c(-0.1,0.1),title = "Diff forest area compared to 1995",legendname = "Mha",midpoint = 0,lowcol = "darkred",midcol = "grey95",highcol = "darkgreen",plot_height=10,plot_width=30,legend_height = NULL)
-# plotmap2(forestry[,2050,],"defor_2050_area.pdf",ncol=6,legend_range = c(-0.5,0.5),title = "Diff 2050",midpoint = 0,lowcol = "darkred",midcol = "grey95",highcol = "darkgreen",plot_height=10,plot_width=30,legend_height = NULL)
-# plotmap2(forestry[,2100,],"defor_2100_area.pdf",ncol=6,legend_range = c(-0.5,0.5),title = "Diff 2100",midpoint = 0,lowcol = "darkred",midcol = "grey95",highcol = "darkgreen",plot_height=10,plot_width=30,legend_height = NULL)
+p <- magpie2ggplot2(forestry,scenario = 1,ylab = "Mha",title = "Afforestation",legend_position = "bottom",group = NULL,legend_ncol = 1)
+ggsave(plot = p,filename = "output/aff_area.pdf",width = 8,height = 7)
