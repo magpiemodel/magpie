@@ -101,14 +101,16 @@ parameters
   i15_kcal_pregnancy(t,iso)                        Additional calorie requirements  for pregnancy and lactation (kcal)
   p15_kcal_regr(t, iso, kfo)                       Uncalibrated regression estimates of calorie demand (kcal per cap per day)
 
+  f15_rum_share_fadeout(t_all)                      Temporal fader of ruminant meat share (applied before food demand model) (1)
   i15_ruminant_fadeout(t_all)                       Ruminant fadeout share (1)
   i15_fish_fadeout(t_all)                           Fish fadeout share (1)
   i15_alcohol_fadeout(t_all)                        Alcohol fadeout share (1)
   i15_livestock_fadeout(t_all)                      Livestock fadeout share (1)
 
- i15_staples_kcal_structure_iso(t,iso,kfo_st)      Share of single staple products within total staples (1)
- i15_livestock_kcal_structure_iso(t,iso,kfo_ap)    Share of single livestock products within total livestock products (corrected for future changes in shares) (1)
- i15_processed_kcal_structure_iso                  Share of single processed products within total processed food (1)
+ i15_staples_kcal_structure_iso(t,iso,kfo_st)        Share of single staple products within total staples (1)
+ i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap)  Share of single livestock products within total livestock products (uncorrected for future changes in shares) (1)
+ i15_livestock_kcal_structure_iso(t,iso,kfo_ap)      Share of single livestock products within total livestock products (corrected for future changes in shares) (1)
+ i15_processed_kcal_structure_iso                    Share of single processed products within total processed food (1)
 
 * diet calibration
   p15_kcal_calib(t,iso,kfo)                   Balance flow to diverge from mean calories of regressions (kcal per cap per day)

@@ -48,8 +48,14 @@ p15_lastiteration_delta_income(t,i) = 1;
 
 
 
-* Food substitution scenarios including functional forms, targets and transition periods
+* Temporal development of ruminant meat share within the livestock food product
+* group (applied before food demand model is executed)
+$ifthen "%c15_rum_share%" == "mixed" i15_rum_share_fadeout(t) = (f15_rum_share_fadeout(t,"constant") + f15_rum_share_fadeout(t,"halving2050"))/2;
+$else i15_rum_share_fadeout(t) = f15_rum_share_fadeout(t,"%c15_rum_share%");
+$endif
 
+
+* Food substitution scenarios including functional forms, targets and transition periods
 i15_ruminant_fadeout(t) = f15_food_substitution_fader(t,"%c15_rumscen%");
 i15_fish_fadeout(t) = f15_food_substitution_fader(t,"%c15_fishscen%");
 i15_alcohol_fadeout(t) = f15_food_substitution_fader(t,"%c15_alcscen%");
