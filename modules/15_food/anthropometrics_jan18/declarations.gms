@@ -101,7 +101,7 @@ parameters
   i15_kcal_pregnancy(t,iso)                        Additional calorie requirements  for pregnancy and lactation (kcal)
   p15_kcal_regr(t, iso, kfo)                       Uncalibrated regression estimates of calorie demand (kcal per cap per day)
 
-  f15_rum_share_fadeout(t_all)                      Temporal fader of ruminant meat share (applied before food demand model) (1)
+  i15_rum_share_fadeout(t_all)                      Temporal fader of ruminant meat share (applied before food demand model) (1)
   i15_ruminant_fadeout(t_all)                       Ruminant fadeout share (1)
   i15_fish_fadeout(t_all)                           Fish fadeout share (1)
   i15_alcohol_fadeout(t_all)                        Alcohol fadeout share (1)
