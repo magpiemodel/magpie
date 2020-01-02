@@ -17,7 +17,7 @@ parameters
  p32_aff_pol(t,j)			             Exogenous afforestation target as stock (mio. ha)
  p32_aff_pol_timestep(t,j)			     Exogenous afforestation target as flow per time step (mio. ha per timestep)
  p32_aff_togo(t)              		     Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
- p32_cdr_ac(t,j,ac)						 CDR from afforestation for each age-class (non-cumulative), depending on planning horizon (tC per ha)
+ p32_cdr_ac(t,j,ac)						 Non-cumulative CDR from afforestation for each age-class depending on planning horizon (tC per ha)
 ;
 
 positive variables
