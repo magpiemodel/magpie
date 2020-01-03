@@ -92,14 +92,6 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: magpie4.1_default_apr19.tgz
-* md5sum: 5c38bb1083bd66010c2104c9d40553f4
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
-* 
-* Used data set: additional_data_rev3.73.tgz
-* md5sum: 3ce07e85c937a937bee759a40fd50b8a
-* Repository: /p/projects/landuse/data/input/archive
-* 
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: e0cb64c918128436bf9a323e57cae81b
 * Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
@@ -111,6 +103,14 @@ $title magpie
 * Used data set: rev4.26_690d3718e151be1b450b394c1064b1c5_validation.tgz
 * md5sum: 2a5fbb76e8f8f3e3f74c833b21517d4b
 * Repository: /p/projects/rd3mod/inputdata/output
+* 
+* Used data set: calibration_H12_c200_12Sep18.tgz
+* md5sum: 0a7d88e902918eb6a5263faaf066cc5d
+* Repository: /p/projects/landuse/data/input/calibration
+* 
+* Used data set: additional_data_rev3.73.tgz
+* md5sum: 3ce07e85c937a937bee759a40fd50b8a
+* Repository: /p/projects/landuse/data/input/archive
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -143,7 +143,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Tue Nov 26 23:24:35 2019
+* Last modification (input data): Sun Dec 29 00:47:22 2019
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
