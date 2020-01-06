@@ -17,6 +17,7 @@ parameters
  p32_aff_pol(t,j)			             Exogenous afforestation target as stock (mio. ha)
  p32_aff_pol_timestep(t,j)			     Exogenous afforestation target as flow per time step (mio. ha per timestep)
  p32_aff_togo(t)              		     Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
+ p32_cdr_ac(t,j,ac)						 Non-cumulative CDR from afforestation for each age-class depending on planning horizon (tC per ha)
 ;
 
 positive variables
@@ -25,13 +26,13 @@ positive variables
  vm_landdiff_forestry                    Aggregated difference in forestry land compared to previous timestep (mio. ha)
  v32_land_expansion(j,type32,ac) 		 Forestry land expansion compared to previous timestep (mio. ha)
  v32_land_reduction(j,type32,ac) 		 Forestry land reduction compared to previous timestep (mio. ha)
- vm_cdr_aff(j) 							 Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon CO2-C (mio. tC)
+ vm_cdr_aff(j,ac) 						 Expected CDR from afforestation depending on planning horizon (mio. tC)
 ;
 
 equations
  q32_cost_fore_ac(i)                      Total forestry costs constraint (mio. USD04MER)
  q32_land(j)                              Land constraint (mio. ha)
- q32_cdr_aff(j)  			  			  Calculation of CDR from afforestation in terms of CO2-C (mio. tC)
+ q32_cdr_aff(j,ac)  			  		  Calculation of CDR from afforestation in terms of CO2-C (mio. tC)
  q32_carbon(j,ag_pools)                   Forestry carbon stock calculation C (mio. tC)
  q32_land_diff                            Aggregated difference in forestry land compared to previous timestep (mio. ha)
  q32_land_expansion(j,type32,ac)	   	  Forestry land expansion (mio. ha)
@@ -48,10 +49,10 @@ parameters
  ov_landdiff_forestry(t,type)            Aggregated difference in forestry land compared to previous timestep (mio. ha)
  ov32_land_expansion(t,j,type32,ac,type) Forestry land expansion compared to previous timestep (mio. ha)
  ov32_land_reduction(t,j,type32,ac,type) Forestry land reduction compared to previous timestep (mio. ha)
- ov_cdr_aff(t,j,type)                    Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon CO2-C (mio. tC)
+ ov_cdr_aff(t,j,ac,type)                 Expected CDR from afforestation depending on planning horizon (mio. tC)
  oq32_cost_fore_ac(t,i,type)             Total forestry costs constraint (mio. USD04MER)
  oq32_land(t,j,type)                     Land constraint (mio. ha)
- oq32_cdr_aff(t,j,type)                  Calculation of CDR from afforestation in terms of CO2-C (mio. tC)
+ oq32_cdr_aff(t,j,ac,type)               Calculation of CDR from afforestation in terms of CO2-C (mio. tC)
  oq32_carbon(t,j,ag_pools,type)          Forestry carbon stock calculation C (mio. tC)
  oq32_land_diff(t,type)                  Aggregated difference in forestry land compared to previous timestep (mio. ha)
  oq32_land_expansion(t,j,type32,ac,type) Forestry land expansion (mio. ha)

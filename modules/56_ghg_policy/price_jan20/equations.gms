@@ -72,7 +72,7 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
                      * sum(ct,
                       p56_emis_policy(ct,i2,pollutants,emis_reg_one56)
                       * im_pollutant_prices(ct,i2,pollutants)
-                      * p56_ghg_price_growth_rate(ct,i2,pollutants)/(1+p56_ghg_price_growth_rate(ct,i2,pollutants)))
+                      * pm_interest(i2)/(1+pm_interest(i2)))
                  );
 
  q56_emission_costs_cell_oneoff(j2,emis_cell_one56) ..
@@ -83,7 +83,7 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
                      * sum((ct,cell(i2,j2)),
                     	p56_emis_policy(ct,i2,pollutants,emis_cell_one56)
                          * im_pollutant_prices(ct,i2,pollutants)
-                         * p56_ghg_price_growth_rate(ct,i2,pollutants)/(1+p56_ghg_price_growth_rate(ct,i2,pollutants)))
+                         * pm_interest(i2)/(1+pm_interest(i2)))
                  );
 
 *' **Total regional emission costs** consist of costs from yearly and one-off emissions occuring in this region and its cells.
@@ -95,19 +95,17 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
                + sum((emis_cell_one56, cell(i2,j2)), v56_emission_costs_cell_oneoff(j2,emis_cell_one56))
                  ;
 
-*' **Benefits** from carbon removal (from afforestation) are also calculated in this module taking into account the policy that was 
-*' defined above in `f56_aff_policy`. Cost and benefits are however not summed here but in [11_costs].
+*' The value of CDR from C-price induced afforestation enters the objective function as negative costs.
+*' The reward, which serves as incentive for afforestation, is calculated in 3 steps: 
+*' First, the expected CDR for each 5-year age-class and the corresponding future C price are multiplied.
+*' Second, these future cash flows are discounted to present value.
+*' Third, an annuity factor (annuity due with infinite time horizon) is used to obtain average annual rewards
 
- q56_reward_cdr_aff_reg(i2) ..
+ q56_reward_cdr_aff(i2) ..
                  vm_reward_cdr_aff(i2) =e=
-                 sum(cell(i2,j2),
-                 v56_reward_cdr_aff(j2)
-                 );
+            	 s56_c_price_induced_aff*
+            	 sum(ac, 
+            	 (sum(cell(i2,j2), vm_cdr_aff(j2,ac)) * sum(ct, p56_c_price_aff(ct,i2,ac)))
+            	 / ((1+pm_interest(i2))**(ac.off*5)))
+                 *(pm_interest(i2)/(1+pm_interest(i2)));
 
- q56_reward_cdr_aff(j2) ..
-                 v56_reward_cdr_aff(j2) =e=
-                 sum(ac, vm_cdr_aff(j2,ac)) *
-                 sum((ct,cell(i2,j2)),
-                  im_pollutant_prices(ct,i2,"co2_c")
-                  * p56_ghg_price_growth_rate(ct,i2,"co2_c")/(1+p56_ghg_price_growth_rate(ct,i2,"co2_c"))
-                 );

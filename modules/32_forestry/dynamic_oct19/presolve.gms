@@ -30,6 +30,10 @@ v32_land.up(j,"aff","ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
 *' Endogenous afforestation is limited to cells with vegetation carbon density above 20 tC/ha.
 v32_land.fx(j,"aff","ac0")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
 
+*' CDR from afforestation for each age-class, depending on planning horizon.
+p32_cdr_ac(t,j,ac)$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planing_horizon/5)
+= pm_carbon_density_ac(t,j,ac,"vegc") - pm_carbon_density_ac(t,j,ac-1,"vegc");
+
 * Regrowth of natural vegetation (natural succession) is modelled by shifting age-classes according to time step length.
 s32_shift = (5/5)$(ord(t)=1);
 s32_shift = (m_timestep_length/5)$(ord(t)>1);
@@ -49,7 +53,7 @@ pc32_land(j,type32,ac) = p32_land(t,j,type32,ac);
 vm_land.l(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 pcm_land(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 
-** fix v32_land for all age classes except ac0 (aff and indc ac0 is free)
+** fix v32_land for all age classes except ac0 (aff and ndc ac0 is free)
 v32_land.fx(j,type32,ac_sub) = pc32_land(j,type32,ac_sub);
 ** fix plantations ac0 to zero (no forestry modelled).
 v32_land.fx(j,"plant","ac0") = 0;
