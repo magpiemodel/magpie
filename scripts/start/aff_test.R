@@ -54,27 +54,27 @@ for (ssp in c("SSP1","SSP2","SSP5")) {
   #  cfg$gms$s80_optfile <- 0
   
     
-  cfg$title <- paste0("aff3_",ssp,"_Budg600_ghgPol_jan20_cpricepresent")
+  cfg$title <- paste0("aff4_",ssp,"_Budg600_ghgPol_jan20_cpricepresent")
   cfg$gms$ghg_policy  <- "price_jan20"
   cfg$gms$s56_c_price_aff_future <- 0
   start_run(cfg,codeCheck=FALSE)
 
-  cfg$title <- paste0("aff3_",ssp,"_Budg600_ghgPol_jan20growthrate_cpricepresent")
+  cfg$title <- paste0("aff4_",ssp,"_Budg600_ghgPol_jan20growthrate_cpricepresent")
   cfg$gms$ghg_policy  <- "price_jan20_growthrate"
   cfg$gms$s56_c_price_aff_future <- 0
   start_run(cfg,codeCheck=FALSE)
 
-  cfg$title <- paste0("aff3_",ssp,"_Budg600_ghgPol_jan20_cpricefuture")
+  cfg$title <- paste0("aff4_",ssp,"_Budg600_ghgPol_jan20_cpricefuture")
   cfg$gms$ghg_policy  <- "price_jan20"
   cfg$gms$s56_c_price_aff_future <- 1
   start_run(cfg,codeCheck=FALSE)
   
-  cfg$title <- paste0("aff3_",ssp,"_Budg600_ghgPol_jan20growthrate_cpricefuture")
+  cfg$title <- paste0("aff4_",ssp,"_Budg600_ghgPol_jan20growthrate_cpricefuture")
   cfg$gms$ghg_policy  <- "price_jan20_growthrate"
   cfg$gms$s56_c_price_aff_future <- 1
   start_run(cfg,codeCheck=FALSE)
   
-  cfg$title <- paste0("aff3_",ssp,"_Budg600_ghgPol_jan19")
+  cfg$title <- paste0("aff4_",ssp,"_Budg600_ghgPol_jan19")
   cfg$gms$ghg_policy  <- "price_jan19"
   start_run(cfg,codeCheck=FALSE)
   
