@@ -22,5 +22,6 @@ $Ifi "%phase%" == "input" $include "./modules/56_ghg_policy/price_jan20/input.gm
 $Ifi "%phase%" == "equations" $include "./modules/56_ghg_policy/price_jan20/equations.gms"
 $Ifi "%phase%" == "scaling" $include "./modules/56_ghg_policy/price_jan20/scaling.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/56_ghg_policy/price_jan20/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/56_ghg_policy/price_jan20/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/56_ghg_policy/price_jan20/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
