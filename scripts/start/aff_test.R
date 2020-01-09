@@ -48,7 +48,7 @@ for (ssp in c("SSP1","SSP2","SSP5")) {
   #  cfg$gms$land <- "feb15"
   #  cfg$gms$s80_optfile <- 0
   
-  getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/coupled-remind_",ssp,"-PkBudg900-mag-4"))
+  getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/coupled-remind_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
   
   cfg$title <- paste0("aff5_",ssp,"_PkBudg900_cpricefuture_50%")
   cfg$gms$ghg_policy  <- "price_jan20"
