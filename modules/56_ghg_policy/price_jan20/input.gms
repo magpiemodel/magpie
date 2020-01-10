@@ -8,12 +8,12 @@
 scalars
   s56_reward_neg_emis reward CDR from all sources (-Inf) or only from afforestation (0) (1) / 0 /
   s56_limit_ch4_n2o_price upper limit for CH4 and N2O GHG prices (USD05MER per tC) / 1000 /
-  s56_cprice_red_factor reduction factor for CO2 price (-) / 0.5 /
+  s56_cprice_red_factor reduction factor for CO2 price (-) / 1 /
   s56_ghgprice_start start year for ghg price phase-in (year) / 2025 /
   s56_ghgprice_phase_in  Switch for phasing-in GHG price over a 20 year period  (1=on 0=off) / 0 /
   s56_ghgprice_devstate_scaling Switch for scaling GHG price with development state (1=on 0=off) / 0 /
   s56_c_price_induced_aff Switch for C price driven afforestation (1=on 0=off) / 1 /
-  s56_c_price_aff_future Switch for using future (1) or present (0) C prices in afforestation decision / 1 /
+  s56_c_price_aff_future Switch for using future (1) or present (0) C prices in afforestation decision / 0 /
 ;
 
 $setglobal c56_pollutant_prices  R2M41-SSP2-Budg600
