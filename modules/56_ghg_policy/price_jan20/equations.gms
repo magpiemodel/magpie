@@ -101,11 +101,17 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
 *' Second, these future cash flows are discounted to present value.
 *' Third, an annuity factor (annuity due with infinite time horizon) is used to obtain average annual rewards
 
- q56_reward_cdr_aff(i2) ..
+ q56_reward_cdr_aff_reg(i2) ..
                  vm_reward_cdr_aff(i2) =e=
+                 sum(cell(i2,j2),
+                 v56_reward_cdr_aff(j2)
+                 );
+
+ q56_reward_cdr_aff(j2) ..
+                 v56_reward_cdr_aff(j2) =e=
             	 pc56_c_price_induced_aff*
             	 sum(ac, 
-            	 (sum(cell(i2,j2), vm_cdr_aff(j2,ac)) * sum(ct, p56_c_price_aff(ct,i2,ac)))
-            	 / ((1+pm_interest(i2))**(ac.off*5)))
-                 *(pm_interest(i2)/(1+pm_interest(i2)));
+            	 (vm_cdr_aff(j2,ac) * sum((cell(i2,j2),ct), p56_c_price_aff(ct,i2,ac)))
+            	 / ((1+sum(cell(i2,j2),pm_interest(i2)))**(ac.off*5)))
+                 *sum(cell(i2,j2),pm_interest(i2)/(1+pm_interest(i2)));
 

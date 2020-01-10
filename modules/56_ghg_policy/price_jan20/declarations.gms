@@ -22,11 +22,13 @@ equations
  q56_emission_costs_reg_oneoff(i,emis_reg_one56)       	  Calculation of regional costs for emissions occuring only once in time (mio. USD05MER per yr)
  q56_emission_costs_cell_yearly(j,emis_cell_yr56)     	  Calculation of cellular costs for annual emissions (mio. USD05MER per yr)
  q56_emission_costs_cell_oneoff(j,emis_cell_one56)     	  Calculation of cellular costs for emissions occuring only once in time (mio. USD05MER per yr)
- q56_reward_cdr_aff(i)			                       	  Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
+ q56_reward_cdr_aff_reg(i)                                Regional revenues for carbon captured by afforestation (mio. USD05MER per yr)
+ q56_reward_cdr_aff(j)			                       	  Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
 ;
 
 positive variables
  vm_reward_cdr_aff(i)                Regional revenues for carbon captured by afforestation (mio. USD05MER per yr)
+ v56_reward_cdr_aff(j)				 Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
 ;
 
 variables
@@ -44,6 +46,7 @@ variables
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_reward_cdr_aff(t,i,type)                                     Regional revenues for carbon captured by afforestation (mio. USD05MER per yr)
+ ov56_reward_cdr_aff(t,j,type)                                   Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
  ov_btm_reg(t,i,emis_source,pollutants,type)                     Regional emissions before technical mitigation (Tg per yr)
  ov_btm_cell(t,j,emis_source,pollutants,type)                    Cellular emissions before technical mitigation (Tg per yr)
  ov_emission_costs(t,i,type)                                     Costs for emission rights for pollutants and greenhouse gases (mio. USD05MER per yr)
@@ -61,6 +64,7 @@ parameters
  oq56_emission_costs_reg_oneoff(t,i,emis_reg_one56,type)         Calculation of regional costs for emissions occuring only once in time (mio. USD05MER per yr)
  oq56_emission_costs_cell_yearly(t,j,emis_cell_yr56,type)        Calculation of cellular costs for annual emissions (mio. USD05MER per yr)
  oq56_emission_costs_cell_oneoff(t,j,emis_cell_one56,type)       Calculation of cellular costs for emissions occuring only once in time (mio. USD05MER per yr)
- oq56_reward_cdr_aff(t,i,type)                                   Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
+ oq56_reward_cdr_aff_reg(t,i,type)                               Regional revenues for carbon captured by afforestation (mio. USD05MER per yr)
+ oq56_reward_cdr_aff(t,j,type)                                   Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
