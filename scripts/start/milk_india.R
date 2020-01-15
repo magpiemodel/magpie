@@ -40,10 +40,9 @@ prefix <- "01_"
 for (ssp in c("SSP1","SSP2","SSP5")) {
   
   cfg <- setScenario(cfg,c(ssp,"NPI"))
-  cfg$gms$c56_pollutant_prices <- paste0("R2M41-",ssp,"-NPi")
-  cfg$gms$c60_2ndgen_biodem <- paste0("R2M41-",ssp,"-NPi")
+  # cfg$gms$c56_pollutant_prices <- paste0("R2M41-",ssp,"-NPi")
+  # cfg$gms$c60_2ndgen_biodem <- paste0("R2M41-",ssp,"-NPi")
 
-  cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
   #getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/coupled-remind_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
   
   cfg$title <- paste0(prefix,ssp,"_NPI_milkInd50")
