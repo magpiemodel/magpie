@@ -53,6 +53,7 @@ scalar s15_waste_scen Scenario target for the ratio between food demand and inta
 
 scalar s15_exo_diet Switch for transition towards exogenous diet scenario (1)  / 0 /;
 
+scalar s15_milk_share_india milk share in India (1)  / 0.5 /;
 
 table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of heterogeneous products and processes (mio. tDM)
 $ondelim
