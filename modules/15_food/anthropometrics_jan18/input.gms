@@ -17,6 +17,9 @@ $setglobal c15_calibscen  constant
 $setglobal c15_rum_share  mixed
 *   options:   constant, halving2050, mixed
 
+$setglobal c15_milk_share_india  mixed
+*   options:   constant, halving2050, mixed
+
 * Food substitution scenarios including functional forms, targets and transition periods
 *   options:   constant,
 *              lin_zero_10_50, lin_zero_20_50, lin_zero_20_30,
@@ -52,8 +55,6 @@ scalar s15_exo_waste Switch for transition towards exogenous food waste scenario
 scalar s15_waste_scen Scenario target for the ratio between food demand and intake (1)  / 1.2 /;
 
 scalar s15_exo_diet Switch for transition towards exogenous diet scenario (1)  / 0 /;
-
-scalar s15_milk_share_india milk share in India (1)  / 0.5 /;
 
 table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of heterogeneous products and processes (mio. tDM)
 $ondelim
@@ -132,6 +133,12 @@ $offdelim
 table f15_rum_share_fadeout(t_all,ruminantfadeoutscen15) Ruminant share fadeout scenario (1)
 $ondelim
 $include "./modules/15_food/input/f15_ruminant_fadeout.csv"
+$offdelim
+;
+
+table f15_milk_share_india_fadeout(t_all,ruminantfadeoutscen15) Milk share India fadeout scenario (1)
+$ondelim
+$include "./modules/15_food/input/f15_milk_india_fadeout.csv"
 $offdelim
 ;
 

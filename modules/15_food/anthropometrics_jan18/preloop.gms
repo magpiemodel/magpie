@@ -54,6 +54,10 @@ $ifthen "%c15_rum_share%" == "mixed" i15_rum_share_fadeout(t) = (f15_rum_share_f
 $else i15_rum_share_fadeout(t) = f15_rum_share_fadeout(t,"%c15_rum_share%");
 $endif
 
+$ifthen "%c15_milk_share_india%" == "mixed" i15_milk_share_india_fadeout(t) = (f15_milk_share_india_fadeout(t,"constant") + f15_milk_share_india_fadeout(t,"halving2050"))/2;
+$else i15_milk_share_india_fadeout(t) = f15_milk_share_india_fadeout(t,"%c15_milk_share_india%");
+$endif
+
 
 * Food substitution scenarios including functional forms, targets and transition periods
 i15_ruminant_fadeout(t) = f15_food_substitution_fader(t,"%c15_rumscen%");

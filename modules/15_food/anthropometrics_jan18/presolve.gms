@@ -79,13 +79,13 @@ if (sum(sameas(t_past,t),1) = 1,
 
 * Substitute milk demand in India with chicken and fish (equally distributed) because milk demand in India shows an implausible increase
     	i15_livestock_kcal_structure_iso(t,"IND","livst_milk") =
-                                 i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * s15_milk_share_india;
+                                 i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * i15_milk_share_india_fadeout(t);
     	i15_livestock_kcal_structure_iso(t,"IND","livst_chick") = 
      							i15_livestock_kcal_structure_iso(t,"IND","livst_chick")
-     							+ i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-s15_milk_share_india) * 0.5;
+     							+ i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_india_fadeout(t)) * 0.5;
     	i15_livestock_kcal_structure_iso(t,"IND","fish") = 
      							i15_livestock_kcal_structure_iso(t,"IND","fish")
-     							+ i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-s15_milk_share_india) * 0.5;
+     							+ i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_india_fadeout(t)) * 0.5;
  );
 
 
