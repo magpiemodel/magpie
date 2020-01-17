@@ -62,7 +62,8 @@ variables
 scalars
   s15_yeardiff                       Number of 5-year time intervalls between time steps (1)
   s15_count                          Loop counter for interpolating body height estimates between longer timesteps (1)
-  s15_rum_share_fadeout_india_strong switch for stronger ruminant fadeout in India (binary) / 1 /
+  s15_rum_share_fadeout_india_strong 	switch for stronger ruminant fadeout in India (binary) / 1 /
+  s15_milk_share_fadeout_india 			switch for milk fadeout in India (binary) / 1 /
 ;
 
 parameters
@@ -101,7 +102,7 @@ parameters
   i15_kcal_pregnancy(t,iso)                        Additional calorie requirements  for pregnancy and lactation (kcal)
   p15_kcal_regr(t, iso, kfo)                       Uncalibrated regression estimates of calorie demand (kcal per cap per day)
 
-  i15_milk_share_india_fadeout(t_all)               Temporal fader of milk share in india (applied before food demand model) (1)
+  i15_milk_share_fadeout_india(t_all)               Temporal fader of milk share in india (applied before food demand model) (1)
   i15_rum_share_fadeout(t_all,iso)                  Temporal fader of ruminant meat share (applied before food demand model) (1)
   i15_ruminant_fadeout(t_all)                       Ruminant fadeout share (1)
   i15_fish_fadeout(t_all)                           Fish fadeout share (1)

@@ -17,9 +17,6 @@ $setglobal c15_calibscen  constant
 $setglobal c15_rum_share  mixed
 *   options:   constant, halving2050, mixed
 
-$setglobal c15_milk_share_india  mixed
-*   options:   constant, halving2050, mixed
-
 * Food substitution scenarios including functional forms, targets and transition periods
 *   options:   constant,
 *              lin_zero_10_50, lin_zero_20_50, lin_zero_20_30,
@@ -143,12 +140,12 @@ $include "./modules/15_food/input/f15_ruminant_fadeout_india.csv"
 $offdelim
 /;
 
-
-table f15_milk_share_india_fadeout(t_all,livst_fadeoutscen15) Milk share India fadeout scenario (1)
+parameter f15_milk_share_fadeout_india(t_all) Milk share India fadeout scenario (1)
+/
 $ondelim
-$include "./modules/15_food/input/f15_milk_india_fadeout.csv"
+$include "./modules/15_food/input/f15_milk_fadeout_india.csv"
 $offdelim
-;
+/;
 
 
 table f15_bodyheight(t_all,iso,sex,age)   Body height (cm per cap)

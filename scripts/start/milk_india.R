@@ -35,7 +35,7 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-prefix <- "08_"
+prefix <- "09_"
 
 #for (ssp in c("SSP1","SSP2","SSP5")) {
 for (ssp in c("SSP2")) {  
@@ -45,12 +45,12 @@ for (ssp in c("SSP2")) {
 
   #getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/coupled-remind_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
   
-  cfg$title <- paste0(prefix,ssp,"_NPI_milkInd50")
-  cfg$gms$c15_milk_share_india <- "halving2050"
+  cfg$title <- paste0(prefix,ssp,"_NPI_milkIndFadeout")
+  cfg$gms$s15_milk_share_fadeout_india <- 0
   start_run(cfg,codeCheck=FALSE)
   
-  cfg$title <- paste0(prefix,ssp,"_NPI_milkInd100")
-  cfg$gms$c15_milk_share_india <- "constant"
+  cfg$title <- paste0(prefix,ssp,"_NPI__NPI_milkIndFull")
+  cfg$gms$s15_milk_share_fadeout_india <- 1
   start_run(cfg,codeCheck=FALSE)
   
 }
