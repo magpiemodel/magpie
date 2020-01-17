@@ -130,13 +130,13 @@ $offdelim
 ;
 
 
-table f15_rum_share_fadeout(t_all,ruminantfadeoutscen15) Ruminant share fadeout scenario (1)
+table f15_rum_share_fadeout(t_all,livst_fadeoutscen15) Ruminant share fadeout scenario (1)
 $ondelim
 $include "./modules/15_food/input/f15_ruminant_fadeout.csv"
 $offdelim
 ;
 
-table f15_milk_share_india_fadeout(t_all,ruminantfadeoutscen15) Milk share India fadeout scenario (1)
+table f15_milk_share_india_fadeout(t_all,livst_fadeoutscen15) Milk share India fadeout scenario (1)
 $ondelim
 $include "./modules/15_food/input/f15_milk_india_fadeout.csv"
 $offdelim

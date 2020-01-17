@@ -79,10 +79,10 @@ if (sum(sameas(t_past,t),1) = 1,
 
 * Stronger ruminant fadeout in India
     	i15_livestock_kcal_structure_iso(t,"IND","livst_rum") =
-                                 i15_livestock_kcal_structure_iso_raw(t,"IND","livst_rum") * i15_rum_share_fadeout(t)*2;
+                                 i15_livestock_kcal_structure_iso_raw(t,"IND","livst_rum") * f15_rum_share_fadeout(t,"halving2050");
     	i15_livestock_kcal_structure_iso(t,"IND","livst_chick") = 
-     							i15_livestock_kcal_structure_iso(t,"IND","livst_chick")
-     							+ i15_livestock_kcal_structure_iso_raw(t,"IND","livst_rum") * (1-i15_rum_share_fadeout(t)*2);
+     							i15_livestock_kcal_structure_iso_raw(t,"IND","livst_chick")
+     							+ i15_livestock_kcal_structure_iso_raw(t,"IND","livst_rum") * (1-f15_rum_share_fadeout(t,"halving2050"));
 
 * Substitute milk demand in India with chicken, egg and fish (equally distributed) because milk demand in India shows an implausible increase
     	i15_livestock_kcal_structure_iso(t,"IND","livst_milk") =
