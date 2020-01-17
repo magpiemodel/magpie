@@ -66,6 +66,8 @@ Elseif s15_milk_share_fadeout_india = 1,
 	i15_milk_share_fadeout_india(t) = f15_milk_share_fadeout_india(t);
 );
 
+display i15_milk_share_fadeout_india;
+
 * Food substitution scenarios including functional forms, targets and transition periods
 i15_ruminant_fadeout(t) = f15_food_substitution_fader(t,"%c15_rumscen%");
 i15_fish_fadeout(t) = f15_food_substitution_fader(t,"%c15_fishscen%");

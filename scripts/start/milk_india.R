@@ -35,7 +35,7 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-prefix <- "10_"
+prefix <- "11_"
 
 #for (ssp in c("SSP1","SSP2","SSP5")) {
 for (ssp in c("SSP2")) {  

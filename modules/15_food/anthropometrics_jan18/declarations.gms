@@ -62,8 +62,6 @@ variables
 scalars
   s15_yeardiff                       Number of 5-year time intervalls between time steps (1)
   s15_count                          Loop counter for interpolating body height estimates between longer timesteps (1)
-  s15_rum_share_fadeout_india_strong 	switch for stronger ruminant fadeout in India (binary) / 1 /
-  s15_milk_share_fadeout_india 			switch for milk fadeout in India (binary) / 1 /
 ;
 
 parameters
