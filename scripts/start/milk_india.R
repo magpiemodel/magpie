@@ -37,8 +37,8 @@ cfg$results_folder <- "output/:title:"
 
 prefix <- "07_"
 
-for (ssp in c("SSP1","SSP2","SSP5")) {
-  
+#for (ssp in c("SSP1","SSP2","SSP5")) {
+for (ssp in c("SSP2")) {  
   cfg <- setScenario(cfg,c(ssp,"NPI"))
   # cfg$gms$c56_pollutant_prices <- paste0("R2M41-",ssp,"-NPi")
   # cfg$gms$c60_2ndgen_biodem <- paste0("R2M41-",ssp,"-NPi")
