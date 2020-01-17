@@ -136,6 +136,14 @@ $include "./modules/15_food/input/f15_ruminant_fadeout.csv"
 $offdelim
 ;
 
+parameter f15_rum_share_fadeout_india(t_all) Ruminant share fadeout scenario for India (1)
+/
+$ondelim
+$include "./modules/15_food/input/f15_ruminant_fadeout_india.csv"
+$offdelim
+/;
+
+
 table f15_milk_share_india_fadeout(t_all,livst_fadeoutscen15) Milk share India fadeout scenario (1)
 $ondelim
 $include "./modules/15_food/input/f15_milk_india_fadeout.csv"

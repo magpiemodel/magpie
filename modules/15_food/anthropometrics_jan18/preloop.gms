@@ -50,9 +50,11 @@ p15_lastiteration_delta_income(t,i) = 1;
 
 * Temporal development of ruminant meat share within the livestock food product
 * group (applied before food demand model is executed)
-$ifthen "%c15_rum_share%" == "mixed" i15_rum_share_fadeout(t) = (f15_rum_share_fadeout(t,"constant") + f15_rum_share_fadeout(t,"halving2050"))/2;
-$else i15_rum_share_fadeout(t) = f15_rum_share_fadeout(t,"%c15_rum_share%");
+$ifthen "%c15_rum_share%" == "mixed" i15_rum_share_fadeout(t,iso) = (f15_rum_share_fadeout(t,"constant") + f15_rum_share_fadeout(t,"halving2050"))/2;
+$else i15_rum_share_fadeout(t,iso) = f15_rum_share_fadeout(t,"%c15_rum_share%");
 $endif
+
+i15_rum_share_fadeout(t,"IND")$(s15_rum_share_fadeout_india_strong = 1) = f15_rum_share_fadeout_india(t); 
 
 $ifthen "%c15_milk_share_india%" == "mixed" i15_milk_share_india_fadeout(t) = (f15_milk_share_india_fadeout(t,"constant") + f15_milk_share_india_fadeout(t,"halving2050"))/2;
 $else i15_milk_share_india_fadeout(t) = f15_milk_share_india_fadeout(t,"%c15_milk_share_india%");
