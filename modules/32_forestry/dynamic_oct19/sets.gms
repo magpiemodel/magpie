@@ -11,7 +11,7 @@ sets
  / recur, mon /
 
  type32 plantation type
- / aff, indc, plant /
+ / aff, ndc, plant /
 
  pol32 afforestation policy type
  / none, npi, ndc /

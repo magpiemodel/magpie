@@ -5,8 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_land.l(j,land) = pcm_land(j,land);
-
 *The following bounds should be moved to the respective land modules in the future (different bounds for different realizations)
 
 *' @code Some of the land use transitions are restricted:
