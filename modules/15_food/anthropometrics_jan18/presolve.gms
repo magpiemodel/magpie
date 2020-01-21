@@ -73,9 +73,22 @@ if (sum(sameas(t_past,t),1) = 1,
      i15_livestock_kcal_structure_iso(t,iso,kfo_ap)     = i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap);
      i15_livestock_kcal_structure_iso(t,iso,"livst_chick") =
                                  i15_livestock_kcal_structure_iso_raw(t,iso,"livst_chick")
-                                 + i15_livestock_kcal_structure_iso_raw(t,iso,"livst_rum") * (1-i15_rum_share_fadeout(t));
+                                 + i15_livestock_kcal_structure_iso_raw(t,iso,"livst_rum") * (1-i15_rum_share_fadeout(t,iso));
     i15_livestock_kcal_structure_iso(t,iso,"livst_rum") =
-                                 i15_livestock_kcal_structure_iso_raw(t,iso,"livst_rum") * i15_rum_share_fadeout(t);
+                                 i15_livestock_kcal_structure_iso_raw(t,iso,"livst_rum") * i15_rum_share_fadeout(t,iso);
+
+* Substitute milk demand in India with chicken, egg and fish (equally distributed) because milk demand in India shows an implausible increase
+    	i15_livestock_kcal_structure_iso(t,"IND","livst_milk") =
+                                 i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * i15_milk_share_fadeout_india(t);
+    	i15_livestock_kcal_structure_iso(t,"IND","livst_chick") = 
+     							i15_livestock_kcal_structure_iso(t,"IND","livst_chick")
+     							+ i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t)) * 1/3;
+    	i15_livestock_kcal_structure_iso(t,"IND","livst_egg") = 
+     							i15_livestock_kcal_structure_iso(t,"IND","livst_egg")
+     							+ i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t)) * 1/3;
+    	i15_livestock_kcal_structure_iso(t,"IND","fish") = 
+     							i15_livestock_kcal_structure_iso(t,"IND","fish")
+     							+ i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t)) * 1/3;
  );
 
 

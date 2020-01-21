@@ -145,7 +145,7 @@ sets
   calibscen15  Calibration scenarios for balance flow
        / constant, fadeout2050 /
 
-  ruminantfadeoutscen15 Scenarios for changed composition of livestock products
+  livst_fadeoutscen15 Scenarios for changed composition of livestock products
        / halving2050, constant /
 
   fadeoutscen15  Food substitution scenarios including functional forms with targets and transition periods
