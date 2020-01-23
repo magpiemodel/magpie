@@ -7,7 +7,7 @@
 p16_volumetric_conversion("wood") = 632.5;
 p16_volumetric_conversion("woodfuel") = 307.1;
 
-f16_forestry_demand_iso(t_all,iso,"woodfuel") = f16_forestry_demand_iso(t_all,iso,"woodfuel") * 0.50;
+*f16_forestry_demand_iso(t_all,iso,"woodfuel") = f16_forestry_demand_iso(t_all,iso,"woodfuel") * 0.50;
 
 $ontext
 fm_forestry_demand(t_all,i,kforestry) =
