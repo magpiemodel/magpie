@@ -54,7 +54,7 @@ cfg$gms$land <- "feb15"
 
 for(bcef in c("different")){
 	cfg$gms$c45_bcef <- bcef
-	flag_run <- paste0("2eb48ee--")
+	flag_run <- paste0("2eb48ee--BCEFix--")
 	for(interest_rate in c("medium","low")) {
 
 		cfg$gms$s32_recurring_cost_multiplier <- 10
