@@ -3,7 +3,7 @@ $setglobal c32_aff_mask  noboreal
 $setglobal c32_aff_policy  npi
 $setglobal c32_rot_length  rlGTM
 $setglobal c32_rot_length_estb  rlGTM
-$setglobal c32_rotation_harvest  def
+$setglobal c32_rotation_harvest  high
 $setglobal c32_rotation_estb  def
 
 scalars
