@@ -74,7 +74,8 @@ v32_land.fx(j,"aff",ac_sub) = pc32_land(j,"aff",ac_sub);
 v32_land.fx(j,"indc",ac_sub) = pc32_land(j,"indc",ac_sub);
 
 ** Setting ac dependent carbon densities
-p32_carbon_density_ac(t,j,type32,ac,ag_pools)  = pm_carbon_density_ac(t,j,ac,ag_pools);
+*p32_carbon_density_ac(t,j,type32,ac,ag_pools)  = pm_carbon_density_ac(t,j,ac,ag_pools);
+p32_carbon_density_ac(t,j,type32,ac,ag_pools)  = pm_carbon_density_ac_forestry(t,j,ac,ag_pools);
 
 *p32_rot_ac(j) = p32_rot_length("y1995",j)/5;
 p32_rot_ac(j) = p32_rot_length(t,j)/5;
@@ -86,19 +87,22 @@ p32_dampen_final(ac_sub,j) = p32_dampen_pre(ac_sub,j)$(p32_dampen_pre(ac_sub,j) 
 
 ** Plantation vegc is different
 *p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * p32_management_factor(j,"normal");
-p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * p32_management_factor(j,"normal") * p32_dampen_final(ac,j);
+*p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * p32_management_factor(j,"normal") * p32_dampen_final(ac,j);
+p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac_forestry(t,j,ac,"vegc");
+
 
 *** YIELDS
-p32_yield_forestry_ac(j,ac_sub,mgmt_type) =
+p32_yield_forestry_ac(t,j,ac_sub,mgmt_type) =
    (
      (2)
      *
-     pm_carbon_density_ac(t,j,ac_sub,"vegc") * p32_management_factor(j,mgmt_type)
-*     * p32_dampen_final(ac_sub,j)
+*     pm_carbon_density_ac(t,j,ac_sub,"vegc") * p32_management_factor(j,mgmt_type) * p32_dampen_final(ac_sub,j)
+     pm_carbon_density_ac_forestry(t,j,ac_sub,"vegc")
      *
      0.85
      /
-     sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac_sub,clcl))
+*     sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac_sub,clcl))
+      sum(clcl, pm_climate_class(j,clcl) * fm_ipcc_bce(clcl,"plantations",ac_sub))
     ) / pm_time_diff(t)
    ;
 
@@ -109,7 +113,7 @@ pm_rotation_reg(t,i) = ord(t) + ceil((sum(cell(i,j),pcm_land(j,"forestry")*pm_ro
 *pm_rotation_reg(t,i) = ord(t) + ceil(30/5) + card(t_past_ff);
 
 *pc32_yield_forestry_future(j) = sum(ac$(ac.off = p32_rotation_cellular(j)+1), p32_yield_forestry_ac(t,j,ac));
-pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), p32_yield_forestry_ac(j,ac_sub,"normal"));
+pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), p32_yield_forestry_ac(t,j,ac_sub,"normal"));
 
 pc32_timestep = ord(t);
 *** EOF presolve.gms ***

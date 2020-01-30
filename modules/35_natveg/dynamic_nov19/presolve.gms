@@ -123,7 +123,9 @@ p35_yield_natveg(t,j,ac_sub) =
 			(2)
 		* pm_carbon_density_ac(t,j,ac_sub,"vegc")
 		* 0.85
-		/ sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac_sub,clcl))
+		/
+*		sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac_sub,clcl))
+		sum(clcl, pm_climate_class(j,clcl) * fm_ipcc_bce(clcl,"natveg",ac_sub))
 		) / pm_time_diff(t);
 
 p35_yield_primforest(t,j) =
@@ -131,7 +133,9 @@ p35_yield_primforest(t,j) =
 			(2)
 		* pm_carbon_density_ac(t,j,"acx","vegc")
 		* 0.80
-		/ sum(clcl,pm_climate_class(j,clcl) * pm_bcef("acx",clcl))
+		/
+*		sum(clcl,pm_climate_class(j,clcl) * pm_bcef("acx",clcl))
+		sum(clcl, pm_climate_class(j,clcl) * fm_ipcc_bce(clcl,"natveg","acx"))
 		) / pm_time_diff(t);
 
 

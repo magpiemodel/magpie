@@ -52,9 +52,9 @@ cfg$gms$land <- "feb15"
 ############ Setting up runs ############
 #########################################
 
-for(bcef in c("different")){
-	cfg$gms$c45_bcef <- bcef
-	flag_run <- paste0("2eb48ee--YldNoDamp--oldBCE--")
+for(bef in c("ipccBEF")){
+	cfg$gms$c32_bef <- bef
+	flag_run <- paste0("R002--",bef,"--")
 	for(interest_rate in c("medium","low")) {
 
 		cfg$gms$s32_recurring_cost_multiplier <- 10
