@@ -46,7 +46,7 @@ cfg$gms$c56_emis_policy <- "ssp_nosoil"
 cfg$gms$s56_reward_neg_emis <- -Inf
 
 ## Which land realization to use
-cfg$gms$land <- "feb15"
+#cfg$gms$land <- "feb15" ---- Changed inside loop. Check once.
 
 #########################################
 ############ Setting up runs ############
