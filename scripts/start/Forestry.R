@@ -34,7 +34,7 @@ cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report")
 
 ## If manual solver settings from module be used (0=No, 1=Yes)
-cfg$gms$s80_optfile <- 1
+cfg$gms$s80_optfile <- 0
 
 ## Set time step length
 cfg$gms$c_timesteps = "5year"
@@ -54,7 +54,7 @@ cfg$gms$s56_reward_neg_emis <- -Inf
 
 for(bef in c("ipccBEF")){
 	cfg$gms$c32_bef <- bef
-	flag_run <- paste0("R003--",bef,"--")
+	flag_run <- paste0("R003--defC4--",bef,"--")
 	for(interest_rate in c("medium","low")) {
 
 		cfg$gms$s32_recurring_cost_multiplier <- 10
