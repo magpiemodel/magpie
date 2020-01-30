@@ -54,7 +54,7 @@ cfg$gms$land <- "feb15"
 
 for(bef in c("ipccBEF")){
 	cfg$gms$c32_bef <- bef
-	flag_run <- paste0("R002--",bef,"--")
+	flag_run <- paste0("R003--",bef,"--")
 	for(interest_rate in c("medium","low")) {
 
 		cfg$gms$s32_recurring_cost_multiplier <- 10
@@ -96,7 +96,7 @@ for(bef in c("ipccBEF")){
 			cfg$gms$s35_selective_logging_flag = sl_set
 
 			## Loop over mitigation-co2 prices
-			for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")) {
+			for(co2_price_scenarios in c("R2M41-SSP2-NPi")) {
 				if(co2_price_scenarios=="R2M41-SSP2-NPi"){
 					cfg <- setScenario(cfg,c("SSP2","NPI"))
 					cfg$gms$demand <- "sector_dec18"
@@ -132,7 +132,7 @@ for(bef in c("ipccBEF")){
 				additional_magpie_data <- "additional_data_rev3.68.tgz"
 	#			isimip_data <- paste0("isimip_rcp-IPSL_CM5A_LR-",rcp_scen,"-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
 				isimip_data <- paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
-				forestry_data <- "private_forestry_dec18_20191114.tgz"
+				forestry_data <- "private_forestry_dec18_20200130.tgz"
 
 				## Update input data array
 				cfg$input <- c(magpie_default_data,additional_magpie_data,isimip_data,forestry_data)
