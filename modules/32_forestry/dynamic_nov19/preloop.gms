@@ -29,9 +29,13 @@ p32_rot_final(t_future,j,scen12) = p32_rot_final("y2100",j,scen12);
 
 p32_rot_corrected(t_all,j,rotation_type) = sum(int_to_rl(rotation_type,scen12),p32_rot_final(t_all,j,scen12));
 
-p32_rot_length(t,j) = p32_rot_corrected(t,j,"%c32_rotation_harvest%");
 *p32_rot_length(t,j) = p32_rot_final("y1995",j);
+$ontext
+p32_rot_length(t,j) = p32_rot_corrected(t,j,"%c32_rotation_harvest%");
 p32_rot_length_estb(t,j) = p32_rot_corrected(t,j,"%c32_rotation_estb%");
+$offtext
+p32_rot_length(t,j) = p32_rot_corrected("y1995",j,"%c32_rotation_harvest%");
+p32_rot_length_estb(t,j) = p32_rot_corrected("y1995",j,"%c32_rotation_estb%");
 
 *p32_rot_length(t,j) = f32_rot_length_cellular(t,j);
 *p32_rot_length_estb(t,j) = f32_rot_length_cellular(t,j);
