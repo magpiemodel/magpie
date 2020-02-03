@@ -14,8 +14,8 @@ p32_rot_final(t,j,scen12)$(p32_rot_final(t,j,scen12)>90) = 90;
 p32_rot_final(t_future,j,scen12) = p32_rot_final("y2100",j,scen12);
 $offtext
 
-p32_carbon_density_ac_forestry(t,j,ac) = m_growth_vegc(0,fm_carbon_density(t,j,"other","vegc"),sum(clcl,fm_climate_class(j,clcl)*(f52_growth_par(clcl,"k")*5)),sum(clcl,fm_climate_class(j,clcl)*(f52_growth_par(clcl,"m")+2)),(ord(ac)-1));
-
+*p32_carbon_density_ac_forestry(t,j,ac) = m_growth_vegc(0,fm_carbon_density(t,j,"other","vegc"),sum(clcl,fm_climate_class(j,clcl)*(fm_growth_par(clcl,"k")*5)),sum(clcl,fm_climate_class(j,clcl)*(fm_growth_par(clcl,"m")+2)),(ord(ac)-1));
+p32_carbon_density_ac_forestry(t,j,ac) = m_growth_vegc(0,fm_carbon_density(t,j,"other","vegc"),sum(clcl,fm_climate_class(j,clcl)*fm_growth_par_image_lpjml(clcl,"k","plantations")),sum(clcl,fm_climate_class(j,clcl)*fm_growth_par_image_lpjml(clcl,"m","plantations")),(ord(ac)-1));
 p32_carbon_density_ac_marg(t,j,ac_sub) = p32_carbon_density_ac_forestry(t,j,ac_sub) - p32_carbon_density_ac_forestry(t,j,ac_sub-1);
 
 p32_IGR(t,j,ac_sub) = (p32_carbon_density_ac_marg(t,j,ac_sub)/p32_carbon_density_ac_forestry(t,j,ac_sub))$(p32_carbon_density_ac_forestry(t,j,ac_sub)>0) + 1$(p32_carbon_density_ac_forestry(t,j,ac_sub)<0.0001);
