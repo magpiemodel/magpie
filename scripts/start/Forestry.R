@@ -54,7 +54,7 @@ cfg$gms$s56_reward_neg_emis <- -Inf
 
 for(bef in c("ipccBEF")){
 	cfg$gms$c32_bef <- bef
-	flag_run <- paste0("R006--GAMS30--",bef,"--")
+	flag_run <- paste0("R006--RTMAXV--",bef,"--")
 	for(interest_rate in c("medium","low")) {
 
 		cfg$gms$s32_recurring_cost_multiplier <- 10
