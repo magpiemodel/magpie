@@ -13,11 +13,15 @@
            i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
 
 *' The BMI shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
-   o15_bmi_shr(t,iso,sex,age,bmi_group15)$(o15_bmi_shr(t,iso,sex,age,bmi_group15)<0) = 0;
+   o15_bmi_shr(t,iso,sex,age,bmi_group15)$(o15_bmi_shr(t,iso,sex,age,bmi_group15)<=0) = 0.000001;
    o15_bmi_shr(t,iso,sex,age,bmi_group15)$(o15_bmi_shr(t,iso,sex,age,bmi_group15)>1) = 1;
-*' The mismatch is balanced by moving the exceeding quantities into the middle BMI group.
+*' In case that the bmi groups, due to calibration, exceed 1, we rescale to 1.
+   o15_bmi_shr(t,iso,sex,age,bmi_group15)$(sum(bmi_group15_2, o15_bmi_shr(t,iso,sex,age,bmi_group15_2))>1) =
+      o15_bmi_shr(t,iso,sex,age,bmi_group15)/sum(bmi_group15_2, o15_bmi_shr(t,iso,sex,age,bmi_group15_2));
+*' The mismatch below one is balanced by moving the exceeding quantities into the middle BMI group.
    o15_bmi_shr(t,iso,sex,age,"medium")=
       1 - (sum(bmi_group15, o15_bmi_shr(t,iso,sex,age,bmi_group15)) - o15_bmi_shr(t,iso,sex,age,"medium"));
+
 
 *' We recalculate the intake with the new values.
    o15_kcal_intake_total(t,iso) =
@@ -66,18 +70,13 @@ For (s15_count = 1 to s15_yeardiff,
 *' using the body height regressions and the food consumption of the last 15
 *' years.
 
-   p15_bodyheight(t,iso,"F","15--19","final") =
-                     126.4*
+   p15_bodyheight(t,iso,sex,"15--19","final") =
+                     f15_bodyheight_regr_paras(sex,"slope")*
                      (sum(underaged15,
                        p15_kcal_growth_food(t,iso,underaged15)
-                     )/3)**0.03467
+                     )/3)**f15_bodyheight_regr_paras(sex,"exponent")
                      ;
-   p15_bodyheight(t,iso,"M","15--19","final") =
-                     131.8*
-                     (sum(underaged15,
-                       p15_kcal_growth_food(t,iso,underaged15)
-                     )/3)**0.03978
-                     ;
+
 *' @stop
 );
 

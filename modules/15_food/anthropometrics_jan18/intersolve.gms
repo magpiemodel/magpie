@@ -55,7 +55,16 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
                                  im_pop_iso(t,iso)
                              );
 
- p15_delta_income(t,i) = p15_income_pc_real_ppp(t,i) / im_gdp_pc_ppp(t,i);
+
+
+ p15_delta_income(t,i) = p15_income_pc_real_ppp(t,i) /
+						( sum(i_to_iso(i,iso),
+                               im_gdp_pc_ppp_iso(t,iso)
+                               * im_pop_iso(t,iso)
+                             ) / sum(i_to_iso(i,iso),
+                                 im_pop_iso(t,iso))
+                        );
+
 
 * estimate convergence measure for deciding to stop iteration
 
@@ -139,4 +148,3 @@ if (s15_elastic_demand * (1-sum(sameas(t_past,t),1)) =1,
 else
 display "exogenous demand information is used" ;
 );
-

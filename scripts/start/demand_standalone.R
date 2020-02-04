@@ -20,6 +20,13 @@ source("config/default.cfg")
 cfg$model <- "standalone/demand_model.gms"  
 cfg$recalibrate=FALSE
 cfg$gms$c_timesteps="pastandfuture"
+cfg$gms$s15_calibrate = 1
+cfg$gms$s15_elastic_demand = 0;
+
+from= "crossvalidation/k_default/"
+to="modules/15_food/input/"
+files <- list.files(from, pattern="*.*")
+file.copy(from =paste0(from,files),to = to, overwrite = TRUE)
 
 cfg$title <- "demand_ssp1"
 cfg$gms$c09_pop_scenario  <- "SSP1"    # def = SSP2
@@ -46,65 +53,42 @@ cfg$gms$c09_pop_scenario  <- "SSP5"    # def = SSP2
 cfg$gms$c09_gdp_scenario  <- "SSP5"    # def = SSP2
 start_run(cfg=cfg,codeCheck = FALSE)
 
+### k-fold cross validation for historical period
+
+crossvalid=c("k1","k2","k3","k4","k5","k_default")
 
 ### calib till 1975
 
 cfg$gms$c_past <- "till_1975"
-
-cfg$title <- "demand_ssp1_calib1975"
-cfg$gms$c09_pop_scenario  <- "SSP1"    # def = SSP2
-cfg$gms$c09_gdp_scenario  <- "SSP1"    # def = SSP2
-start_run(cfg=cfg,codeCheck = FALSE)
-
-cfg$title <- "demand_ssp2_calib1975"
 cfg$gms$c09_pop_scenario  <- "SSP2"    # def = SSP2
 cfg$gms$c09_gdp_scenario  <- "SSP2"    # def = SSP2
-start_run(cfg=cfg,codeCheck = FALSE)
 
-cfg$title <- "demand_ssp3_calib1975"
-cfg$gms$c09_pop_scenario  <- "SSP3"    # def = SSP2
-cfg$gms$c09_gdp_scenario  <- "SSP3"    # def = SSP2
-start_run(cfg=cfg,codeCheck = FALSE)
-
-cfg$title <- "demand_ssp4_calib1975"
-cfg$gms$c09_pop_scenario  <- "SSP4"    # def = SSP2
-cfg$gms$c09_gdp_scenario  <- "SSP4"    # def = SSP2
-start_run(cfg=cfg,codeCheck = FALSE)
-
-cfg$title <- "demand_ssp5_calib1975"
-cfg$gms$c09_pop_scenario  <- "SSP5"    # def = SSP2
-cfg$gms$c09_gdp_scenario  <- "SSP5"    # def = SSP2
-start_run(cfg=cfg,codeCheck = FALSE)
-
-
+for (i in crossvalid){
+  cfg$title <- paste0("demand_ssp2_calib1975_",i)
+  from= paste0("crossvalidation/",i,"/")
+  to="modules/15_food/input/"
+  files <- list.files(from, pattern="*.*")
+  file.copy(from =paste0(from,files),to = to, overwrite = TRUE)
+  cat(paste0(from,files))
+  start_run(cfg=cfg,codeCheck = FALSE)
+}
 ### no calib
 
 cfg$gms$s15_calibrate = 0
 
-cfg$title <- "demand_ssp1_nocalib"
-cfg$gms$c09_pop_scenario  <- "SSP1"    # def = SSP2
-cfg$gms$c09_gdp_scenario  <- "SSP1"    # def = SSP2
-start_run(cfg=cfg,codeCheck = FALSE)
-
 cfg$title <- "demand_ssp2_nocalib"
 cfg$gms$c09_pop_scenario  <- "SSP2"    # def = SSP2
 cfg$gms$c09_gdp_scenario  <- "SSP2"    # def = SSP2
-start_run(cfg=cfg,codeCheck = FALSE)
 
-cfg$title <- "demand_ssp3_nocalib"
-cfg$gms$c09_pop_scenario  <- "SSP3"    # def = SSP2
-cfg$gms$c09_gdp_scenario  <- "SSP3"    # def = SSP2
-start_run(cfg=cfg,codeCheck = FALSE)
-
-cfg$title <- "demand_ssp4_nocalib"
-cfg$gms$c09_pop_scenario  <- "SSP4"    # def = SSP2
-cfg$gms$c09_gdp_scenario  <- "SSP4"    # def = SSP2
-start_run(cfg=cfg,codeCheck = FALSE)
-
-cfg$title <- "demand_ssp5_nocalib"
-cfg$gms$c09_pop_scenario  <- "SSP5"    # def = SSP2
-cfg$gms$c09_gdp_scenario  <- "SSP5"    # def = SSP2
-start_run(cfg=cfg,codeCheck = FALSE)
-
+for (i in crossvalid){
+  cfg$title <- paste0("demand_ssp2_nocalib_",i)
+  from= paste0("crossvalidation/",i,"/")
+  to="modules/15_food/input/"
+  files <- list.files(from, pattern="*.*")
+  file.copy(from =paste0(from,files),to = to, overwrite = TRUE)
+  start_run(cfg=cfg,codeCheck = FALSE)
+}
 
 cfg$gms$s15_calibrate = 1
+
+cfg$gms$c_past <- "till_2010"
