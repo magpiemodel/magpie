@@ -52,20 +52,20 @@ for (ssp in c("SSP1","SSP2","SSP5")) {
   
   getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
   
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg_old_BioTrade")
-  cfg$gms$c52_growth_par  <- "natveg_old"
-  start_run(cfg,codeCheck=FALSE)
-  
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg_new_BioTrade")
-  cfg$gms$c52_growth_par  <- "natveg"
-  start_run(cfg,codeCheck=FALSE)
-  
-  # cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg_old_BioNoTrade")
+  # cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg_old_BioTrade")
   # cfg$gms$c52_growth_par  <- "natveg_old"
   # start_run(cfg,codeCheck=FALSE)
   # 
-  # cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg_new_BioNoTrade")
+  # cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg_new_BioTrade")
   # cfg$gms$c52_growth_par  <- "natveg"
   # start_run(cfg,codeCheck=FALSE)
+  
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg_old_BioNoTrade")
+  cfg$gms$c52_growth_par  <- "natveg_old"
+  start_run(cfg,codeCheck=FALSE)
+
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg_new_BioNoTrade")
+  cfg$gms$c52_growth_par  <- "natveg"
+  start_run(cfg,codeCheck=FALSE)
 }
 
