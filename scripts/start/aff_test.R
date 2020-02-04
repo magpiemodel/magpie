@@ -35,7 +35,7 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-prefix <- "aff6_"
+prefix <- "C01_"
 
 for (ssp in c("SSP1","SSP2","SSP5")) {
   
@@ -45,61 +45,27 @@ for (ssp in c("SSP1","SSP2","SSP5")) {
   # cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-PkBudg900"
   # cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-PkBudg900"
   #  cfg$gms$s15_elastic_demand <- 0
-  cfg$gms$land <- "landmatrix_dec18"
+#  cfg$gms$land <- "landmatrix_dec18"
   # cfg$gms$s80_maxiter <- 20
   #  cfg$gms$land <- "feb15"
   #  cfg$gms$s80_optfile <- 0
   
   getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/coupled-remind_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
   
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_cpricefuture_50%")
-  cfg$gms$ghg_policy  <- "price_jan20"
-  cfg$gms$s56_c_price_aff_future <- 1
-  cfg$gms$s56_cprice_red_factor <- 0.5
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg_old_BioTrade")
+  cfg$gms$c52_growth_par  <- "natveg_old"
   start_run(cfg,codeCheck=FALSE)
   
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_cpricepresent_50%")
-  cfg$gms$ghg_policy  <- "price_jan20"
-  cfg$gms$s56_c_price_aff_future <- 0
-  cfg$gms$s56_cprice_red_factor <- 0.5
-  start_run(cfg,codeCheck=FALSE)
-
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_cpricepresent_100%")
-  cfg$gms$ghg_policy  <- "price_jan20"
-  cfg$gms$s56_c_price_aff_future <- 0
-  cfg$gms$s56_cprice_red_factor <- 1
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg_new_BioTrade")
+  cfg$gms$c52_growth_par  <- "natveg"
   start_run(cfg,codeCheck=FALSE)
   
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_cpricepresent_100%_interest_7%")
-  cfg$gms$ghg_policy  <- "price_jan20"
-  cfg$gms$s56_c_price_aff_future <- 0
-  cfg$gms$s56_cprice_red_factor <- 1
-  cfg$gms$interest_rate <- "glo_jan16"  
-  cfg$gms$c12_interest_rate <- "medium"
-  start_run(cfg,codeCheck=FALSE)
-  
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_cpricepresent_100%_interest_5%")
-  cfg$gms$ghg_policy  <- "price_jan20"
-  cfg$gms$s56_c_price_aff_future <- 0
-  cfg$gms$s56_cprice_red_factor <- 1
-  cfg$gms$interest_rate <- "glo_jan16"  
-  cfg$gms$c12_interest_rate <- "coupling"
-  start_run(cfg,codeCheck=FALSE)
-  
-  # cfg$title <- paste0("aff4_",ssp,"_PkBudg900_ghgPol_jan20growthrate_cpricepresent")
-  # cfg$gms$ghg_policy  <- "price_jan20_growthrate"
-  # cfg$gms$s56_c_price_aff_future <- 0
+  # cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg_old_BioNoTrade")
+  # cfg$gms$c52_growth_par  <- "natveg_old"
   # start_run(cfg,codeCheck=FALSE)
-
-  
-  # cfg$title <- paste0("aff4_",ssp,"_PkBudg900_ghgPol_jan20growthrate_cpricefuture")
-  # cfg$gms$ghg_policy  <- "price_jan20_growthrate"
-  # cfg$gms$s56_c_price_aff_future <- 1
+  # 
+  # cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg_new_BioNoTrade")
+  # cfg$gms$c52_growth_par  <- "natveg"
   # start_run(cfg,codeCheck=FALSE)
-  
-  # cfg$title <- paste0("aff4_",ssp,"_PkBudg900_ghgPol_jan19")
-  # cfg$gms$ghg_policy  <- "price_jan19"
-  # start_run(cfg,codeCheck=FALSE)
-  
 }
 

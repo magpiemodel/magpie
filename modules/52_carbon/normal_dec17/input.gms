@@ -8,6 +8,7 @@
 $setglobal c52_carbon_scenario  nocc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
+$setglobal c52_growth_par natveg_old
 
 table fm_carbon_density(t_all,j,land,c_pools) LPJmL carbon density for land and carbon pools (tC per ha)
 $ondelim
@@ -21,4 +22,12 @@ table f52_growth_par(clcl,chap_par) Parameters for chapman-richards equation (1)
 $ondelim
 $include "./modules/52_carbon/input/f52_growth_par.csv"
 $offdelim
+;
+
+parameter f52_growth_par_image_lpjml(clcl,chap_par,type52) Parameters for chapman-richards equation (1)
+/
+$ondelim
+$include "./modules/52_carbon/input/f52_growth_par_image_lpjml.csv"
+$offdelim
+/
 ;
