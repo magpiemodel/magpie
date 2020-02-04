@@ -54,8 +54,8 @@ cfg$gms$s56_reward_neg_emis <- -Inf
 
 for(bef in c("ipccBEF")){
 	cfg$gms$c32_bef <- bef
-	flag_run <- paste0("R007--RTMAXV--",bef,"--")
-	for(interest_rate in c("medium")) {
+	flag_run <- paste0("R006--RTMAXV--",bef,"--")
+	for(interest_rate in c("medium","low")) {
 
 		cfg$gms$s32_recurring_cost_multiplier <- 10
 
@@ -95,15 +95,37 @@ for(bef in c("ipccBEF")){
 
 			cfg$gms$s35_selective_logging_flag = sl_set
 
-			for(protection_scen in c("BASE","NPI")){
-					cfg <- setScenario(cfg,c("SSP2",protection_scen))
+			## Loop over mitigation-co2 prices
+			for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")) {
+				if(co2_price_scenarios=="R2M41-SSP2-NPi"){
+					cfg <- setScenario(cfg,c("SSP2","NPI"))
 					cfg$gms$demand <- "sector_dec18"
 					cfg$gms$trade <- "selfsuff_reduced_ff"
 					cfg$gms$forestry  <- "dynamic_nov19"
+					cfg$gms$s32_recurring_cost_multiplier <- 100
 					cfg$gms$natveg  <- "dynamic_nov19"
 					cfg$gms$optimization <- "nlp_apr17"
 					cfg$gms$land <- "landmatrix_dec18"
-					cfg$title<- paste0(flag_run,"-",paste0(rot_flag," rotation"),"-",protection_scen)
+	#				rcp_scen <- "rcp6p0" -- ACTIVATE FOR CC RUNS
+					cfg$gms$c56_pollutant_prices <- co2_price_scenarios
+					cfg$gms$c60_2ndgen_biodem <- co2_price_scenarios
+					cfg$gms$c32_price_flag_forestry <- 0
+					cfg$title<- paste0(flag_run,"-",paste0(rot_flag," rotation"))
+				} else if(co2_price_scenarios=="R2M41-SSP2-Budg1300"){
+					cfg <- setScenario(cfg,c("SSP2","NPI"))
+					cfg$gms$demand <- "sector_dec18"
+					cfg$gms$trade <- "selfsuff_reduced_ff"
+					cfg$gms$forestry  <- "dynamic_nov19"
+					cfg$gms$s32_recurring_cost_multiplier <- 100
+					cfg$gms$natveg  <- "dynamic_nov19"
+					cfg$gms$optimization <- "nlp_apr17"
+					cfg$gms$land <- "landmatrix_dec18"
+	#				rcp_scen <- "rcp2p6" -- ACTIVATE FOR CC RUNS
+					cfg$gms$c56_pollutant_prices <- co2_price_scenarios
+					cfg$gms$c60_2ndgen_biodem <- co2_price_scenarios
+					cfg$gms$c32_price_flag_forestry <- 1
+					cfg$title<- paste0(flag_run,"-",paste0(rot_flag," rotation"),"_","CO2 price")
+				}
 
 				## Declare input data array
 				magpie_default_data <- "magpie4.1_default_apr19.tgz"
