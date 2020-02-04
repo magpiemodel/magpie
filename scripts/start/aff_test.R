@@ -50,7 +50,7 @@ for (ssp in c("SSP1","SSP2","SSP5")) {
   #  cfg$gms$land <- "feb15"
   #  cfg$gms$s80_optfile <- 0
   
-  getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/coupled-remind_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
+  getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
   
   cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg_old_BioTrade")
   cfg$gms$c52_growth_par  <- "natveg_old"
