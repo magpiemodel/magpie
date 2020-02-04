@@ -6,6 +6,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 ** BEGIN INDC **
 
+*** Fix high production systems to 0
+v32_hvarea_forestry.fx(j,kforestry,ac_sub,"high") = 0 ;
+
 ****************************************
 *** ADD DYNAMIC SET HERE BASED ON AC ***
 ***************************************
@@ -66,7 +69,7 @@ v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub
 m_boundfix(v32_land,(j,"plant",ac_sub),l,10e-5);
 
 *fix C-price induced afforestation and indc to zero (for testing)
-v32_land.fx(j,"aff",ac) = 0;
+*v32_land.fx(j,"aff",ac) = 0;
 *v32_land.fx(j,"indc",ac) = 0;
 
 ** Bounds for indc and aff forests
@@ -74,8 +77,8 @@ v32_land.fx(j,"aff",ac_sub) = pc32_land(j,"aff",ac_sub);
 v32_land.fx(j,"indc",ac_sub) = pc32_land(j,"indc",ac_sub);
 
 ** Setting ac dependent carbon densities
-*p32_carbon_density_ac(t,j,type32,ac,ag_pools)  = pm_carbon_density_ac(t,j,ac,ag_pools);
-p32_carbon_density_ac(t,j,type32,ac,ag_pools)  = pm_carbon_density_ac_forestry(t,j,ac,ag_pools);
+p32_carbon_density_ac(t,j,type32,ac,ag_pools)  = pm_carbon_density_ac(t,j,ac,ag_pools);
+*p32_carbon_density_ac(t,j,type32,ac,ag_pools)  = pm_carbon_density_ac_forestry(t,j,ac,ag_pools);
 
 *p32_rot_ac(j) = p32_rot_length("y1995",j)/5;
 p32_rot_ac(j) = p32_rot_length(t,j)/5;

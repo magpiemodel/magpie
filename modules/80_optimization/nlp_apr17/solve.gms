@@ -29,6 +29,9 @@ $onecho > conopt4.opt
 Tol_Obj_Change = 3.0e-6
 Tol_Feas_Min = 4.0e-7
 Tol_Feas_Max = 4.0e-6
+$offecho
+
+$onecho > conopt.opt
 RTMAXV = 1.0e25
 $offecho
 
@@ -45,7 +48,9 @@ repeat(
       display "WARNING: Modelstat 13 | retry with CONOPT3!";
       option nlp = conopt;
       solve magpie USING nlp MINIMIZING vm_cost_glo;
+      magpie.solprint  = 1 ;
       option nlp = conopt4;
+      magpie.solprint  = 0 ;
     );
 
     if((magpie.modelstat = 4 and s80_forestry_counter <= 1),
