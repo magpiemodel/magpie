@@ -102,8 +102,8 @@ for(bef in c("ipccBEF")){
 					cfg$gms$forestry  <- "dynamic_nov19"
 					cfg$gms$natveg  <- "dynamic_nov19"
 					cfg$gms$optimization <- "nlp_apr17"
-					cfg$gms$land <- "landmatrix_dec18"
-					cfg$title<- paste0(flag_run,"-",paste0(rot_flag," rotation"),"-",protection_scen)
+					cfg$gms$land <- "feb15"
+					cfg$title<- paste0(flag_run,"-",paste0(rot_flag," rotation"),"-",protection_scen,"-",cfg$gms$land)
 
 				## Declare input data array
 				magpie_default_data <- "magpie4.1_default_apr19.tgz"
