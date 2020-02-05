@@ -15,46 +15,57 @@ p32_rot_final(t_future,j,scen12) = p32_rot_final("y2100",j,scen12);
 $offtext
 
 *p32_carbon_density_ac_forestry(t,j,ac) = m_growth_vegc(0,fm_carbon_density(t,j,"other","vegc"),sum(clcl,fm_climate_class(j,clcl)*(fm_growth_par(clcl,"k")*5)),sum(clcl,fm_climate_class(j,clcl)*(fm_growth_par(clcl,"m")+2)),(ord(ac)-1));
-p32_carbon_density_ac_forestry(t,j,ac) = m_growth_vegc(0,fm_carbon_density(t,j,"other","vegc"),sum(clcl,fm_climate_class(j,clcl)*fm_growth_par_image_lpjml(clcl,"k","plantations")),sum(clcl,fm_climate_class(j,clcl)*fm_growth_par_image_lpjml(clcl,"m","plantations")),(ord(ac)-1));
-p32_carbon_density_ac_marg(t,j,ac_sub) = p32_carbon_density_ac_forestry(t,j,ac_sub) - p32_carbon_density_ac_forestry(t,j,ac_sub-1);
+p32_carbon_density_ac_forestry(t_all,j,ac) = m_growth_vegc(0,fm_carbon_density(t_all,j,"other","vegc"),sum(clcl,fm_climate_class(j,clcl)*fm_growth_par_image_lpjml(clcl,"k","plantations")),sum(clcl,fm_climate_class(j,clcl)*fm_growth_par_image_lpjml(clcl,"m","plantations")),(ord(ac)-1));
+p32_carbon_density_ac_marg(t_all,j,ac_sub) = p32_carbon_density_ac_forestry(t_all,j,ac_sub) - p32_carbon_density_ac_forestry(t_all,j,ac_sub-1);
 
-p32_IGR(t,j,ac_sub) = (p32_carbon_density_ac_marg(t,j,ac_sub)/p32_carbon_density_ac_forestry(t,j,ac_sub))$(p32_carbon_density_ac_forestry(t,j,ac_sub)>0) + 1$(p32_carbon_density_ac_forestry(t,j,ac_sub)<0.0001);
+p32_IGR(t_all,j,ac_sub) = (p32_carbon_density_ac_marg(t_all,j,ac_sub)/p32_carbon_density_ac_forestry(t_all,j,ac_sub))$(p32_carbon_density_ac_forestry(t_all,j,ac_sub)>0) + 1$(p32_carbon_density_ac_forestry(t_all,j,ac_sub)<0.0001);
 
 p32_IGR("y1995",j,"ac0") = 1;
-p32_interest(t,i,scen12) = fm_interest(t,scen12);
-p32_rot_flg(t,j,ac,scen12) = 1$((p32_IGR(t,j,ac) - sum(cell(i,j),p32_interest(t,i,scen12)))>0) + 0$((p32_IGR(t,j,ac) - sum(cell(i,j),p32_interest(t,i,scen12)))>0);
-p32_rot_final(t,j,scen12) = sum(ac,p32_rot_flg(t,j,ac,scen12)) * 5;
-p32_rot_final(t,j,scen12)$(p32_rot_final(t,j,scen12)>90) = 90;
+p32_interest(t_all,i,scen12) = fm_interest(t_all,scen12);
+p32_rot_flg(t_all,j,ac,scen12) = 1$((p32_IGR(t_all,j,ac) - sum(cell(i,j),p32_interest(t_all,i,scen12)))>0) + 0$((p32_IGR(t_all,j,ac) - sum(cell(i,j),p32_interest(t_all,i,scen12)))>0);
+p32_rot_final(t_all,j,scen12) = sum(ac,p32_rot_flg(t_all,j,ac,scen12)) * 5;
+p32_rot_final(t_all,j,scen12)$(p32_rot_final(t_all,j,scen12)>90) = 90;
 p32_rot_final(t_future,j,scen12) = p32_rot_final("y2100",j,scen12);
 
 p32_rot_corrected(t_all,j,rotation_type) = sum(int_to_rl(rotation_type,scen12),p32_rot_final(t_all,j,scen12));
 
-*p32_rot_length(t,j) = p32_rot_final("y1995",j);
+*p32_rot_length(t_all,j) = p32_rot_final("y1995",j);
+
+p32_rot_length(t_all,j) = p32_rot_corrected(t_all,j,"%c32_rotation_harvest%");
+p32_rot_length_estb(t_all,j) = p32_rot_corrected(t_all,j,"%c32_rotation_estb%");
 $ontext
-p32_rot_length(t,j) = p32_rot_corrected(t,j,"%c32_rotation_harvest%");
-p32_rot_length_estb(t,j) = p32_rot_corrected(t,j,"%c32_rotation_estb%");
+p32_rot_length(t_all,j) = p32_rot_corrected("y1995",j,"%c32_rotation_harvest%");
+p32_rot_length_estb(t_all,j) = p32_rot_corrected("y1995",j,"%c32_rotation_estb%");
 $offtext
-p32_rot_length(t,j) = p32_rot_corrected("y1995",j,"%c32_rotation_harvest%");
-p32_rot_length_estb(t,j) = p32_rot_corrected("y1995",j,"%c32_rotation_estb%");
 
-*p32_rot_length(t,j) = f32_rot_length_cellular(t,j);
-*p32_rot_length_estb(t,j) = f32_rot_length_cellular(t,j);
-*p32_rot_length_estb(t,i) = 30;
-*p32_rot_length_estb(t,j) = p32_rot_length(t,j);
+*p32_rot_length(t_all,j) = f32_rot_length_cellular(t_all,j);
+*p32_rot_length_estb(t_all,j) = f32_rot_length_cellular(t_all,j);
+*p32_rot_length_estb(t_all,i) = 30;
+*p32_rot_length_estb(t_all,j) = p32_rot_length(t_all,j);
 
-pc32_rot_length(t,j) = p32_rot_length(t,j);
-pm_rot_length_estb(t,j) = p32_rot_length_estb(t,j);
+pc32_rot_length(t_all,j) = p32_rot_length(t_all,j);
+pm_rot_length_estb(t_all,j) = p32_rot_length_estb(t_all,j);
 
 ** rotation length in 5 year time steps
-p32_rotation_cellular(t,j) = ceil(p32_rot_length(t,j)/5);
-p32_rotation_cellular_estb(t,j) = ceil(p32_rot_length_estb(t,j)/5);
+p32_rotation_cellular(t_all,j) = ceil(p32_rot_length(t_all,j)/5);
+p32_rotation_cellular_estb(t_all,j) = ceil(p32_rot_length_estb(t_all,j)/5);
+
+* Shift rotations. E.g. rotations harveted in 2050 should be harvested with the rotations using which they were establsihed.
+* For 2050 plantation establsihed in 2020 with 30y rotaions shall be harvested according to 30 yr (for example)
+loop(ac,
+p32_rotation_cellular_estb_update(t_all,j)$(ord(t_all)-ac.off<card(t_all)) = p32_rotation_cellular_estb(t_all-ac.off,j);
+);
 
 ** Define protect and harvest setting
 protect32(t,j,ac_sub) = no;
-protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular(t,j));
+*protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular(t,j));
+protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular_estb_update(t,j));
 
 harvest32(t,j,ac_sub) = no;
-harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular(t,j));
+*harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular(t,j));
+harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular_estb_update(t,j));
+
+display p32_rotation_cellular_estb,p32_rotation_cellular_estb_update;
 
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");

@@ -53,6 +53,15 @@ repeat(
       magpie.solprint  = 0 ;
     );
 
+    if((magpie.modelstat = 1 OR magpie.modelstat = 2 OR magpie.modelstat = 7),
+      magpie.solprint = 0;
+    );
+
+    if((magpie.modelstat ne 1 and magpie.modelstat ne 2 and magpie.modelstat ne 7),
+      display "WARNING: Modelstat is neither 1,2,7. SOLPRINT SET TO 1.";
+      magpie.solprint = 1;
+    );
+
     if((magpie.modelstat = 4 and s80_forestry_counter <= 1),
       display "WARNING: Modelstat 4, SOLPRINT SET TO 1.";
       magpie.solprint  = 1 ;
