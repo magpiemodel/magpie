@@ -14,7 +14,8 @@ sets
        / oilpalm, foddr, pasture, res_cereals, res_fibrous, res_nonfibrous,wood,woodfuel,begr,betr /
 * oilpalm not traded, only its oil and oilcake due to FAOSTAT complications, and as trade is little
 * foddr is not traded as too bulky
-* pasture ist not traded as too bulky
+* pasture it not traded as too bulky
+* begr and betr are not traded because biomass is traded in REMIND
    k_trade(kall) Production activities of tradable commodities
    / tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,puls_pro,
    potato,cassav_sp,sugr_cane,sugr_beet,others,cottn_pro,

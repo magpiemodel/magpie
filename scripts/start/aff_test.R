@@ -35,9 +35,9 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-prefix <- "C01_"
+prefix <- "C02_"
 
-for (ssp in c("SSP1","SSP2","SSP5")) {
+for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
   
   cfg <- setScenario(cfg,c(ssp,"NDC"))
   cfg$gms$c56_pollutant_prices <- "coupling"
@@ -52,20 +52,7 @@ for (ssp in c("SSP1","SSP2","SSP5")) {
   
   getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
   
-  # cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg_old_BioTrade")
-  # cfg$gms$c52_growth_par  <- "natveg_old"
-  # start_run(cfg,codeCheck=FALSE)
-  # 
-  # cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg_new_BioTrade")
-  # cfg$gms$c52_growth_par  <- "natveg"
-  # start_run(cfg,codeCheck=FALSE)
-  
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg_old_BioNoTrade")
-  cfg$gms$c52_growth_par  <- "natveg_old"
-  start_run(cfg,codeCheck=FALSE)
-
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg_new_BioNoTrade")
-  cfg$gms$c52_growth_par  <- "natveg"
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900")
   start_run(cfg,codeCheck=FALSE)
 }
 
