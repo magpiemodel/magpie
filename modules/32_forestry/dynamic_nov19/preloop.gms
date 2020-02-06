@@ -20,7 +20,7 @@ p32_carbon_density_ac_marg(t_all,j,ac_sub) = p32_carbon_density_ac_forestry(t_al
 
 p32_IGR(t_all,j,ac_sub) = (p32_carbon_density_ac_marg(t_all,j,ac_sub)/p32_carbon_density_ac_forestry(t_all,j,ac_sub))$(p32_carbon_density_ac_forestry(t_all,j,ac_sub)>0) + 1$(p32_carbon_density_ac_forestry(t_all,j,ac_sub)<0.0001);
 
-p32_IGR("y1995",j,"ac0") = 1;
+p32_IGR("y1995",j,"ac0") = p32_IGR("y1995",j,"ac5");
 p32_interest(t_all,i,scen12) = fm_interest(t_all,scen12);
 p32_rot_flg(t_all,j,ac,scen12) = 1$((p32_IGR(t_all,j,ac) - sum(cell(i,j),p32_interest(t_all,i,scen12)))>0) + 0$((p32_IGR(t_all,j,ac) - sum(cell(i,j),p32_interest(t_all,i,scen12)))>0);
 p32_rot_final(t_all,j,scen12) = sum(ac,p32_rot_flg(t_all,j,ac,scen12)) * 5;
