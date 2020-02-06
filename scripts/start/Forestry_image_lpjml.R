@@ -54,7 +54,7 @@ cfg$gms$s56_reward_neg_emis <- -Inf
 
 for(bef in c("ipccBEF")){
 	cfg$gms$c32_bef <- bef
-	flag_run <- paste0("R009--Loop-t_all-ac-",bef,"--")
+	flag_run <- paste0("R010--NonElastic-",bef,"--")
 	for(interest_rate in c("medium")) {
 
 		cfg$gms$s32_recurring_cost_multiplier <- 10
@@ -102,8 +102,9 @@ for(bef in c("ipccBEF")){
 					cfg$gms$forestry  <- "dynamic_nov19"
 					cfg$gms$natveg  <- "dynamic_nov19"
 					cfg$gms$optimization <- "nlp_apr17"
+					cfg$gms$s15_elastic_demand <- 0
 					cfg$gms$land <- "feb15"
-					cfg$title<- paste0(flag_run,"-",paste0(rot_flag," rotation"),"-",protection_scen,"-",cfg$gms$land)
+					cfg$title<- paste0(flag_run,"-",paste0(rot_flag," rotation"),"-",protection_scen)
 
 				## Declare input data array
 				magpie_default_data <- "magpie4.1_default_apr19.tgz"
