@@ -54,7 +54,7 @@ cfg$gms$s56_reward_neg_emis <- -Inf
 
 for(bef in c("ipccBEF")){
 	cfg$gms$c32_bef <- bef
-	flag_run <- paste0("R010--NonElastic-",bef,"--")
+	flag_run <- paste0("R011--GloDemBio-NoElast-")
 	for(interest_rate in c("medium")) {
 
 		cfg$gms$s32_recurring_cost_multiplier <- 10
@@ -95,8 +95,10 @@ for(bef in c("ipccBEF")){
 
 			cfg$gms$s35_selective_logging_flag = sl_set
 
-			for(protection_scen in c("BASE","NPI")){
-					cfg <- setScenario(cfg,c("SSP2",protection_scen))
+			for(protection_scen in c("NPI")){
+				for(ssp in c("SSP2","SSP1")){
+
+					cfg <- setScenario(cfg,c(ssp,protection_scen))
 					cfg$gms$demand <- "sector_dec18"
 					cfg$gms$trade <- "selfsuff_reduced_ff"
 					cfg$gms$forestry  <- "dynamic_nov19"
@@ -104,26 +106,30 @@ for(bef in c("ipccBEF")){
 					cfg$gms$optimization <- "nlp_apr17"
 					cfg$gms$s15_elastic_demand <- 0
 					cfg$gms$land <- "feb15"
-					cfg$title<- paste0(flag_run,"-",paste0(rot_flag," rotation"),"-",protection_scen)
+					cfg$gms$c60_biodem_level <- 0
+					cfg$title<- paste0(flag_run,"-",paste0(rot_flag," rotation"),"-",ssp)
 
-				## Declare input data array
-				magpie_default_data <- "magpie4.1_default_apr19.tgz"
-				additional_magpie_data <- "additional_data_rev3.68.tgz"
-	#			isimip_data <- paste0("isimip_rcp-IPSL_CM5A_LR-",rcp_scen,"-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
-				isimip_data <- paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
-				forestry_data <- "private_forestry_dec18_20200203.tgz"
+					## Declare input data array
+					magpie_default_data <- "magpie4.1_default_apr19.tgz"
+					additional_magpie_data <- "additional_data_rev3.68.tgz"
+		#			isimip_data <- paste0("isimip_rcp-IPSL_CM5A_LR-",rcp_scen,"-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
+					isimip_data <- paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
+					forestry_data <- "private_forestry_dec18_20200203.tgz"
 
-				## Update input data array
-				cfg$input <- c(magpie_default_data,additional_magpie_data,isimip_data,forestry_data)
+					## Update input data array
+					cfg$input <- c(magpie_default_data,additional_magpie_data,isimip_data,forestry_data)
 
-				## If the model be forced to download data
-				cfg$force_download <- FALSE
+					## If the model be forced to download data
+					cfg$force_download <- FALSE
 
-				## Should recalibration be made
-				cfg$recalibrate <- "ifneeded"
+					## Should recalibration be made
+					cfg$recalibrate <- "ifneeded"
 
-				## Start the run
-				start_run(cfg=cfg,codeCheck=codeCheck)
+					## Start the run
+					start_run(cfg=cfg,codeCheck=codeCheck)
+
+					}
+
 				}
 			}
 		}
