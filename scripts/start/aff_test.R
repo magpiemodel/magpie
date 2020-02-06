@@ -52,7 +52,8 @@ for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
   
   getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
   
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900")
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900_foresight")
+  cfg$gms$s56_c_price_aff_future <- 1
   start_run(cfg,codeCheck=FALSE)
 }
 
