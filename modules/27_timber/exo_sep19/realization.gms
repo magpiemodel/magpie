@@ -16,5 +16,6 @@
 $Ifi "%phase%" == "sets" $include "./modules/27_timber/exo_sep19/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/27_timber/exo_sep19/declarations.gms"
 $Ifi "%phase%" == "equations" $include "./modules/27_timber/exo_sep19/equations.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/27_timber/exo_sep19/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/27_timber/exo_sep19/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
