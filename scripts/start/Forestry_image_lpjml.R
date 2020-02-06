@@ -54,7 +54,7 @@ cfg$gms$s56_reward_neg_emis <- -Inf
 
 for(bef in c("ipccBEF")){
 	cfg$gms$c32_bef <- bef
-	flag_run <- paste0("R011--GloDemBio-NoElast-")
+	flag_run <- paste0("R012--GloDemBio-NoElast-")
 	for(interest_rate in c("medium")) {
 
 		cfg$gms$s32_recurring_cost_multiplier <- 10
