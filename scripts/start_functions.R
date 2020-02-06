@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
-                      report=NULL,sceninreport=NULL,LU_pricing="y2010", lock_model=TRUE) {
+                      path_to_report=NULL,LU_pricing="y2010", lock_model=TRUE) {
 
   if (!requireNamespace("lucode", quietly = TRUE)) {
     stop("Package \"lucode\" needed for this function to work. Please install it.",
@@ -50,8 +50,8 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   # If report and scenname are available the data of this scenario in the report
   # will be converted to MAgPIE input, saved to the respective input folders
   # and used as input by the model
-  if (!is.null(report) && !is.null(sceninreport)) {
-    getReportData(report, sceninreport, LU_pricing)
+  if (!is.null(path_to_report)) {
+    getReportData(path_to_report, LU_pricing)
     cfg <- lucode::setScenario(cfg,"coupling")
   }
 
@@ -372,7 +372,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   return(cfg$results_folder)
 }
 
-getReportData <- function(rep,scen,LU_pricing="y2010") {
+getReportData <- function(path_to_report,LU_pricing="y2010") {
 
   if (!requireNamespace("magclass", quietly = TRUE)) {
     stop("Package \"magclass\" needed for this function to work. Please install it.",
@@ -385,6 +385,7 @@ getReportData <- function(rep,scen,LU_pricing="y2010") {
     dimnames(out)[[3]] <- NULL
     write.magpie(out[notGLO,,],"./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
   }
+  
   .emission_prices <- function(mag){
     out_c <- mag[,,"Price|Carbon (US$2005/t CO2)"]*44/12 # US$2005/tCO2 -> US$2005/tC
     dimnames(out_c)[[3]] <- "co2_c"
@@ -409,18 +410,23 @@ getReportData <- function(rep,scen,LU_pricing="y2010") {
     write.magpie(out[notGLO,,],"./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3")
   }
 
-  if (length(scen)!=1) stop("getReportData: 'scen' does not contain exactly one scenario.")
-  if (length(intersect(scen,names(rep)))!=1) stop("getReportData: 'scen not contained in 'rep'.")
+  # read REMIND report
+  rep <- read.report(path_to_report, as.list = FALSE)
+  if (length(getNames(rep,dim="scenario"))!=1) stop("getReportData: REMIND report contains more or less than 1 scenario.")
+  rep <- collapseNames(rep) # get rid of scenrio and model dimension if they exist
+  mag <- deletePlus(rep) #delete "+" and "++" from variable names
 
-  files <- c("./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3","./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
-  years <- 1990+5*(1:32)
-  for(f in files) suppressWarnings(unlink(f))
-  mag <- rep[[scen]][["MAgPIE"]]
   if(!("y1995" %in% getYears(mag))){
   	empty95<-mag[,1,];empty95[,,]<-0;dimnames(empty95)[[2]] <- "y1995"
   	mag <- mbind(empty95,mag)
   }
+  years <- 1990+5*(1:32)
   mag <- time_interpolate(mag,years)
+
+  # delete old input files before updating them
+  files <- c("./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3","./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
+  for(f in files) suppressWarnings(unlink(f))
+
   .bioenergy_demand(mag)
   .emission_prices(mag)
 }
