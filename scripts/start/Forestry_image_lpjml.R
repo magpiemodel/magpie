@@ -54,7 +54,7 @@ cfg$gms$s56_reward_neg_emis <- -Inf
 
 for(bef in c("ipccBEF")){
 	cfg$gms$c32_bef <- bef
-	flag_run <- paste0("R013--GloDemBio-NoElast-SolverPlay-")
+	flag_run <- paste0("R014--loopOK-")
 	for(interest_rate in c("medium")) {
 
 		cfg$gms$s32_recurring_cost_multiplier <- 10
@@ -96,7 +96,7 @@ for(bef in c("ipccBEF")){
 			cfg$gms$s35_selective_logging_flag = sl_set
 
 			for(protection_scen in c("NPI")){
-				for(ssp in c("SSP2","SSP1")){
+				for(ssp in c("SSP2")){
 
 					cfg <- setScenario(cfg,c(ssp,protection_scen))
 					cfg$gms$demand <- "sector_dec18"

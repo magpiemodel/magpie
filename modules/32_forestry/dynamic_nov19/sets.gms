@@ -53,4 +53,6 @@ sets
 alias(ac,ac2);
 alias(ac_sub,ac_sub2);
 alias(t,t_alias);
+alias(t_all,t_all_alias);
+alias(j,j_alias);
 *** EOF sets.gms ***

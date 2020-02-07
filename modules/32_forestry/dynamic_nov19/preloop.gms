@@ -52,18 +52,24 @@ p32_rotation_cellular_estb(t_all,j) = ceil(p32_rot_length_estb(t_all,j)/5);
 
 * Shift rotations. E.g. rotations harveted in 2050 should be harvested with the rotations using which they were establsihed.
 * For 2050 plantation establsihed in 2020 with 30y rotaions shall be harvested according to 30 yr (for example)
-loop((t_all,ac,j),
-p32_rotation_cellular_estb_update(t_all,j)$(ord(t_all)-ac.off>0) = p32_rotation_cellular_estb(t_all-ac.off,j);
-);
+*loop((t_all,ac,j),
+*p32_rotation_cellular_estb_update(t_all,j)$(ord(t_all)-ac.off>0) = p32_rotation_cellular_estb(t_all-ac.off,j);
+*);
+
+loop(j,
+  loop(ac,
+      p32_rotation_cellular_estb_update(t,j)$(ord(t)-ac.off>0) = p32_rotation_cellular_estb(t-ac.off,j);
+    );
+  );
 
 ** Define protect and harvest setting
 protect32(t,j,ac_sub) = no;
-protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular(t,j));
-*protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular_estb_update(t,j));
+*protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular(t,j));
+protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular_estb_update(t,j));
 
 harvest32(t,j,ac_sub) = no;
-harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular(t,j));
-*harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular_estb_update(t,j));
+*harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular(t,j));
+harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular_estb_update(t,j));
 
 display p32_rotation_cellular_estb,p32_rotation_cellular_estb_update;
 
