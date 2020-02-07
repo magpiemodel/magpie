@@ -62,6 +62,12 @@ loop(j,
     );
   );
 
+loop(j,
+  loop(ac,
+      p32_rotation_cellular_estb_update(t,j)$(ord(t)-(ord(ac)-1-(pm_time_diff(t)/5))>0 AND pm_time_diff(t)>5) = p32_rotation_cellular_estb(t-(ord(ac)-1-(pm_time_diff(t)/5)),j);
+    );
+  );
+
 ** Define protect and harvest setting
 protect32(t,j,ac_sub) = no;
 *protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular(t,j));

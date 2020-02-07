@@ -34,7 +34,7 @@ parameters
  p32_rot_flg(t_all,j,ac,scen12)                          Identifier flag when calculating rotation length (1)
  p32_rot_final(t_all,j,scen12)                           Rotation length (yr)
  p32_management_factor(j,mgmt_type)               Management factor used to upscale plantation yields as compared to natural forest yields (1)
- pm_time_diff(t)                                  Difference between timesteps (1)
+ pm_time_diff(t_all)                                  Difference between timesteps (1)
  p32_aff_togo(t)              		       Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
  p32_interest(t_all,i,scen12)     Interest rate in each region and timestep (% per yr)
  p32_rot_ac(j)              Rotation length translated to age classes on cellular level (1)

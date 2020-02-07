@@ -25,10 +25,16 @@ magpie.scaleopt  = 1 ;
 magpie.solprint  = 0 ;
 magpie.holdfixed = 1 ;
 
+*$onecho > conopt4.opt
+*Tol_Obj_Change = 3.0e-6
+*Tol_Feas_Min = 1.0e-6
+*Tol_Feas_Max = 1.0e-5
+*$offecho
+
 $onecho > conopt4.opt
-Tol_Obj_Change = 3.0e-6
-Tol_Feas_Min = 1.0e-6
-Tol_Feas_Max = 1.0e-5
+Tol_Obj_Change = 3.0e-12
+Tol_Feas_Min = 4.e-10
+Tol_Feas_Max = 1.e-7
 $offecho
 
 $onecho > conopt.opt
