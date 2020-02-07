@@ -37,7 +37,8 @@ cfg$results_folder <- "output/:title:"
 
 prefix <- "C02_"
 
-for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
+#for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
+for (ssp in c("SSP2")) {
   
   cfg <- setScenario(cfg,c(ssp,"NDC"))
   cfg$gms$c56_pollutant_prices <- "coupling"
@@ -52,8 +53,17 @@ for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
   
   getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
   
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_foresight")
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900_yieldCalib_croplandTRUE")
   cfg$gms$s56_c_price_aff_future <- 1
+  cfg$recalibrate <- TRUE
+  cfg$calib_cropland <- TRUE
   start_run(cfg,codeCheck=FALSE)
+  
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900_yieldCalib_croplandFALSE")
+  cfg$gms$s56_c_price_aff_future <- 1
+  cfg$recalibrate <- TRUE
+  cfg$calib_cropland <- FALSE
+  start_run(cfg,codeCheck=FALSE)
+  
 }
 
