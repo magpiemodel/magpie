@@ -31,11 +31,11 @@ getInput <- function(gdx,ghg_price=TRUE,biodem=TRUE) {
 #start MAgPIE run
 source("config/default.cfg")
 
-cfg$force_download <- TRUE
+cfg$force_download <- FALSE
 
 cfg$results_folder <- "output/:title:"
 
-prefix <- "C02_"
+prefix <- "C03_"
 
 for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
 #for (ssp in c("SSP2")) {
