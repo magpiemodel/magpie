@@ -16,7 +16,7 @@ scalars
   s56_c_price_aff_future Switch for using future (1) or present (0) C prices in afforestation decision / 0 /
 ;
 
-$setglobal c56_pollutant_prices  R2M41-SSP2-Budg600
+$setglobal c56_pollutant_prices  R2M41-SSP2-NPi
 $setglobal c56_emis_policy  ssp_nosoil
 
 table f56_pollutant_prices(t_all,i,pollutants,ghgscen56) GHG certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
