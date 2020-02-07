@@ -54,7 +54,7 @@ cfg$gms$s56_reward_neg_emis <- -Inf
 
 for(bef in c("ipccBEF")){
 	cfg$gms$c32_bef <- bef
-	flag_run <- paste0("R016--2loops-1995Dem-HighPlant-")
+	flag_run <- paste0("R017-HighPlant-")
 	for(interest_rate in c("medium")) {
 
 		cfg$gms$s32_recurring_cost_multiplier <- 10
@@ -104,9 +104,9 @@ for(bef in c("ipccBEF")){
 					cfg$gms$forestry  <- "dynamic_nov19"
 					cfg$gms$natveg  <- "dynamic_nov19"
 					cfg$gms$optimization <- "nlp_apr17"
-					cfg$gms$s15_elastic_demand <- 0
+#					cfg$gms$s15_elastic_demand <- 0
 					cfg$gms$land <- "feb15"
-					cfg$gms$c60_biodem_level <- 0
+#					cfg$gms$c60_biodem_level <- 0
 					cfg$title<- paste0(flag_run,"-",paste0(rot_flag," rotation"),"-",ssp,"-",cfg$gms$land)
 
 					## Declare input data array
