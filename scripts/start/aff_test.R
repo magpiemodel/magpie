@@ -53,9 +53,29 @@ for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
   
   getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
   
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_foresight_timehorizon30yrs")
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon40_foresight40")
   cfg$gms$s56_c_price_aff_future <- 1
-  cfg$gms$s32_planing_horizon <- 30
+  cfg$gms$s32_planing_horizon <- 40
+  cfg$gms$s56_c_price_exp_aff <- 40
   start_run(cfg,codeCheck=FALSE)
+
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon50_foresight50")
+  cfg$gms$s56_c_price_aff_future <- 1
+  cfg$gms$s32_planing_horizon <- 50
+  cfg$gms$s56_c_price_exp_aff <- 50
+  start_run(cfg,codeCheck=FALSE)
+    
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon80_foresight40")
+  cfg$gms$s56_c_price_aff_future <- 1
+  cfg$gms$s32_planing_horizon <- 80
+  cfg$gms$s56_c_price_exp_aff <- 40
+  start_run(cfg,codeCheck=FALSE)
+
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon80_foresight80")
+  cfg$gms$s56_c_price_aff_future <- 1
+  cfg$gms$s32_planing_horizon <- 80
+  cfg$gms$s56_c_price_exp_aff <- 80
+  start_run(cfg,codeCheck=FALSE)
+  
 }
 
