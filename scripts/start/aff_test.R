@@ -57,8 +57,30 @@ for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
   cfg$gms$s56_c_price_aff_future <- 1
   cfg$gms$s32_planing_horizon <- 30
   cfg$gms$s56_c_price_exp_aff <- 30
+  cfg$gms$cfg$gms$s56_buffer_aff <- 0
   start_run(cfg,codeCheck=FALSE)
 
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon30_foresight30_buffer20")
+  cfg$gms$s56_c_price_aff_future <- 1
+  cfg$gms$s32_planing_horizon <- 30
+  cfg$gms$s56_c_price_exp_aff <- 30
+  cfg$gms$cfg$gms$s56_buffer_aff <- 0.2
+  start_run(cfg,codeCheck=FALSE)
+  
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon50_foresight50_buffer20")
+  cfg$gms$s56_c_price_aff_future <- 1
+  cfg$gms$s32_planing_horizon <- 50
+  cfg$gms$s56_c_price_exp_aff <- 50
+  cfg$gms$cfg$gms$s56_buffer_aff <- 0.2
+  start_run(cfg,codeCheck=FALSE)
+
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon40_foresight40_buffer20")
+  cfg$gms$s56_c_price_aff_future <- 1
+  cfg$gms$s32_planing_horizon <- 40
+  cfg$gms$s56_c_price_exp_aff <- 40
+  cfg$gms$cfg$gms$s56_buffer_aff <- 0.2
+  start_run(cfg,codeCheck=FALSE)
+  
   # cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon50_foresight50")
   # cfg$gms$s56_c_price_aff_future <- 1
   # cfg$gms$s32_planing_horizon <- 50
