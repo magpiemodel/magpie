@@ -37,7 +37,9 @@ cfg$results_folder <- "output/:title:"
 
 #06 bug pasture production
 #07 bugfix pasture production
-prefix <- "C07_"
+#08 Update from Edna
+
+prefix <- "C08_"
 
 for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
 
