@@ -53,7 +53,8 @@ for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
   
   getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
 
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon50_foresight50_buffer20")
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon50_foresight50_buffer20_allnosoil")
+  cfg$gms$c56_emis_policy <- "all_nosoil"
   # cfg$gms$s32_planing_horizon <- 50
   # cfg$gms$s56_c_price_exp_aff <- 50
   # cfg$gms$s56_buffer_aff <- 0.2
