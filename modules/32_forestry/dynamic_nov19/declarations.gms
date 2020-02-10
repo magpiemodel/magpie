@@ -78,6 +78,7 @@ equations
  q32_land_reduction(j,type32,ac)                  Land contarction (mio. ha)
  q32_cost_establishment(i)                        Present value of cost of establishment (mio. USD)
  q32_high_mgmt_prod_cost(i)                       Additional production cost for timber produced from extremely highly managed plantations (Mio. USD)
+ q32_prod_timber(j,kforestry)                     TImber production from plantataions (mio m3 per yr)
 ;
 
 
@@ -111,5 +112,6 @@ parameters
  oq32_land_reduction(t,j,type32,ac,type)                   Land contarction (mio. ha)
  oq32_cost_establishment(t,i,type)                         Present value of cost of establishment (mio. USD)
  oq32_high_mgmt_prod_cost(t,i,type)                        Additional production cost for timber produced from extremely highly managed plantations (Mio. USD)
+ oq32_prod_timber(t,j,kforestry,type)                      TImber production from plantataions (mio m3 per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

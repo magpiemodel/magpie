@@ -160,6 +160,14 @@ q32_prod_forestry(j2,kforestry)..
                               sum((cell(i2,j2),ct,kforestry,ac_sub), v32_hvarea_forestry(j2,kforestry,ac_sub,"high") * p32_yield_forestry_ac(ct,j2,ac_sub,"high")) * 10e4
                               ;
 
-
+q32_prod_timber(j2,kforestry)..
+  vm_prod(j2,kforestry)
+  -
+  vm_prod_cell_natveg(j2,kforestry)
+  =e=
+  vm_prod_cell_forestry(j2,kforestry)
+  +
+  vm_prod_heaven_timber(j2,kforestry)
+  ;
 
 *** EOF equations.gms ***
