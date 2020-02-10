@@ -88,8 +88,6 @@ Under Windows you need to install Rtools
 (https://cran.r-project.org/bin/windows/Rtools/) and to add it to the PATH
 variable. After that you can run the following lines of code:
 
-After that all packages can be installed via `install.packages`
-
 ```
 pkgs <- c("gdxrrw",
           "ggplot2",

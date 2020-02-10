@@ -42,7 +42,7 @@ display im_pollutant_prices;
 
 ***GHG emission policy
 p56_emis_policy(t,i,pollutants,emis_source) = f56_emis_policy("%c56_emis_policy%",pollutants,emis_source);
-
+	
 *reward neg emissions depending on s56_reward_neg_emis
 v56_emission_costs_cell_oneoff.lo(j2,emis_cell_one56) = s56_reward_neg_emis;
 

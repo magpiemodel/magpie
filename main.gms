@@ -92,9 +92,9 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: magpie4.1_default_apr19.tgz
-* md5sum: 5c38bb1083bd66010c2104c9d40553f4
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* md5sum: e0cb64c918128436bf9a323e57cae81b
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: additional_data_rev3.68.tgz
 * md5sum: 15d1135625a9f5cfb9c7c6038716a156
@@ -194,9 +194,9 @@ $setglobal trade  selfsuff_reduced
 
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
-$setglobal forestry  affore_vegc_dec16
+$setglobal forestry  dynamic_oct19
 $setglobal urban  static
-$setglobal natveg  dynamic_may18
+$setglobal natveg  dynamic_oct19
 
 $setglobal factor_costs  mixed_feb17
 $setglobal landconversion  global_static_aug18
@@ -213,7 +213,7 @@ $setglobal carbon  normal_dec17
 $setglobal methane  ipcc2006_flexreg_apr16
 $setglobal phosphorus  off
 $setglobal awms  ipcc2006_aug16
-$setglobal ghg_policy  price_jan19
+$setglobal ghg_policy  price_jan20
 $setglobal maccs  on_sep16
 $setglobal som  static_jan19
 

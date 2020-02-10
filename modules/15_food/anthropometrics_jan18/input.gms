@@ -14,8 +14,29 @@ $setglobal c15_food_scenario  SSP2
 $setglobal c15_calibscen  constant
 *   options:   constant, fadeout2050
 
-$setglobal c15_rumscen  mixed
+$setglobal c15_rum_share  mixed
 *   options:   constant, halving2050, mixed
+
+* Food substitution scenarios including functional forms, targets and transition periods
+*   options:   constant,
+*              lin_zero_10_50, lin_zero_20_50, lin_zero_20_30,
+*              lin_50pc_10_50_extend90, lin_75pc_10_50_extend90, lin_80pc_20_50, lin_80pc_20_50_extend95, lin_90pc_20_50_extend95,
+*              lin_99-98-90pc_20_50-60-100
+$setglobal c15_rumscen  constant
+$setglobal c15_fishscen  constant
+$setglobal c15_alcscen  constant
+$setglobal c15_livescen  constant
+
+
+$setglobal c15_exo_scen_targetyear  y2050
+*   options:   y2030, y2050
+
+$setglobal c15_kcal_scen  healthy_BMI
+*   options:   healthy_BMI, 2100kcal, 2500kcal
+
+$setglobal c15_EAT_scen  FLX
+*   options:   BMK, FLX, PSC, VEG, VGN, FLX_hmilk, FLX_hredmeat
+
 
 scalar s15_elastic_demand  Elastic demand switch (1=elastic 0=exogenous) (1) / 1 /;
 
@@ -25,6 +46,17 @@ scalar s15_calibrate Calibration switch (1=calibrated 0=pure regression outcomes
 scalar s15_maxiter Scalar defining maximum number of iterations (1) / 5 /;
 
 scalar s15_convergence Convergence criterion (1) / 0.005 /;
+
+scalar s15_exo_waste Switch for transition towards exogenous food waste scenario (1)  / 0 /;
+
+scalar s15_waste_scen Scenario target for the ratio between food demand and intake (1)  / 1.2 /;
+
+scalar s15_exo_diet Switch for transition towards exogenous diet scenario (1)  / 0 /;
+
+scalar s15_rum_share_fadeout_india_strong 	switch for stronger ruminant fadeout in India (binary) / 1 /
+
+scalar s15_milk_share_fadeout_india 		switch for milk fadeout in India (binary) / 1 /
+
 
 table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of heterogeneous products and processes (mio. tDM)
 $ondelim
@@ -99,11 +131,27 @@ $include "./modules/15_food/input/f15_kcal_balanceflow_fadeout.csv"
 $offdelim
 ;
 
-table f15_ruminant_fadeout(t_all,ruminantfadeoutscen15) Ruminant fadeout scenario (1)
+
+table f15_rum_share_fadeout(t_all,livst_fadeoutscen15) Ruminant share fadeout scenario (1)
 $ondelim
 $include "./modules/15_food/input/f15_ruminant_fadeout.csv"
 $offdelim
 ;
+
+parameter f15_rum_share_fadeout_india(t_all) Ruminant share fadeout scenario for India (1)
+/
+$ondelim
+$include "./modules/15_food/input/f15_ruminant_fadeout_india.csv"
+$offdelim
+/;
+
+parameter f15_milk_share_fadeout_india(t_all) Milk share India fadeout scenario (1)
+/
+$ondelim
+$include "./modules/15_food/input/f15_milk_fadeout_india.csv"
+$offdelim
+/;
+
 
 table f15_bodyheight(t_all,iso,sex,age)   Body height (cm per cap)
 $ondelim
@@ -116,6 +164,39 @@ $include "./modules/15_food/input/f15_schofield_parameters.cs3"
 $offdelim
 ;
 
+
+*** Exogenous food substitution scenarios
+
+table f15_food_substitution_fader(t_all,fadeoutscen15)   Fader for food substitution scenarios (1)
+$ondelim
+$include "./modules/15_food/input/f15_food_substitution_fader.csv"
+$offdelim;
+
+
+*** Exogenous food demand scenarios
+
+table f15_intake_EATLancet(t_scen15,i,kcal_scen15,EAT_scen15,kfo)   EAT Lancet scenarios for food-specific intake (kcal per capita per day)
+$ondelim
+$include "./modules/15_food/input/f15_intake_EATLancet.cs3"
+$offdelim;
+
+table f15_overcons_FAOwaste(i,kfo)   Ratio between food calorie supply and food intake based on FAO food waste shares (1)
+$ondelim
+$include "./modules/15_food/input/f15_supply2intake_ratio_bottomup.cs3"
+$offdelim;
+
+parameter f15_calib_fsupply(i) Factor calibrating food supply as estimated from intake and FAO waste assumptions to FAO food supply (1)
+/
+$ondelim
+$include "./modules/15_food/input/f15_calib_factor_FAOfsupply.cs4"
+$offdelim
+/;
+
+table f15_exo_foodscen_fader(t_all,t_scen15) Fader that converges per capita food consumption to an exogenous diet scenario until the target year (1)
+$ondelim
+$include "./modules/15_food/input/f15_exo_foodscen_fader.csv"
+$offdelim
+;
 
 
 *** EOF input.gms ***

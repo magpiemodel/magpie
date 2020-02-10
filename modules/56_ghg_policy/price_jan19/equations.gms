@@ -106,7 +106,7 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
 
  q56_reward_cdr_aff(j2) ..
                  v56_reward_cdr_aff(j2) =e=
-                 vm_cdr_aff(j2) *
+                 sum(ac, vm_cdr_aff(j2,ac)) *
                  sum((ct,cell(i2,j2)),
                   im_pollutant_prices(ct,i2,"co2_c")
                   * p56_ghg_price_growth_rate(ct,i2,"co2_c")/(1+p56_ghg_price_growth_rate(ct,i2,"co2_c"))
