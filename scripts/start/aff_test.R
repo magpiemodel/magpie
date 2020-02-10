@@ -35,7 +35,7 @@ cfg$force_download <- FALSE
 
 cfg$results_folder <- "output/:title:"
 
-prefix <- "C04_"
+prefix <- "C05_"
 
 for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
 #for (ssp in c("SSP2")) {
@@ -53,60 +53,53 @@ for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
   
   getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
 
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon80_foresight0_buffer0")
-  cfg$gms$s56_c_price_aff_future <- 1
-  cfg$gms$s32_planing_horizon <- 80
-  cfg$gms$s56_c_price_exp_aff <- 0
-  cfg$gms$s56_buffer_aff <- 0
-  start_run(cfg,codeCheck=FALSE)
-  
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon80_foresight80_buffer0")
-  cfg$gms$s56_c_price_aff_future <- 1
-  cfg$gms$s32_planing_horizon <- 80
-  cfg$gms$s56_c_price_exp_aff <- 80
-  cfg$gms$s56_buffer_aff <- 0
-  start_run(cfg,codeCheck=FALSE)
-  
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon80_foresight40_buffer0")
-  cfg$gms$s56_c_price_aff_future <- 1
-  cfg$gms$s32_planing_horizon <- 80
-  cfg$gms$s56_c_price_exp_aff <- 40
-  cfg$gms$s56_buffer_aff <- 0
-  start_run(cfg,codeCheck=FALSE)
-  
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon80_foresight40_buffer20")
-  cfg$gms$s56_c_price_aff_future <- 1
-  cfg$gms$s32_planing_horizon <- 80
-  cfg$gms$s56_c_price_exp_aff <- 40
-  cfg$gms$s56_buffer_aff <- 0.2
-  start_run(cfg,codeCheck=FALSE)
-  
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon50_foresight50_buffer0")
-  cfg$gms$s56_c_price_aff_future <- 1
-  cfg$gms$s32_planing_horizon <- 50
-  cfg$gms$s56_c_price_exp_aff <- 50
-  cfg$gms$s56_buffer_aff <- 0
-  start_run(cfg,codeCheck=FALSE)
-  
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon40_foresight40_buffer0")
-  cfg$gms$s56_c_price_aff_future <- 1
-  cfg$gms$s32_planing_horizon <- 40
-  cfg$gms$s56_c_price_exp_aff <- 40
-  cfg$gms$s56_buffer_aff <- 0
-  start_run(cfg,codeCheck=FALSE)
-  
   cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon50_foresight50_buffer20")
-  cfg$gms$s56_c_price_aff_future <- 1
-  cfg$gms$s32_planing_horizon <- 50
-  cfg$gms$s56_c_price_exp_aff <- 50
-  cfg$gms$s56_buffer_aff <- 0.2
+  # cfg$gms$s32_planing_horizon <- 50
+  # cfg$gms$s56_c_price_exp_aff <- 50
+  # cfg$gms$s56_buffer_aff <- 0.2
   start_run(cfg,codeCheck=FALSE)
-
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon40_foresight40_buffer20")
-  cfg$gms$s56_c_price_aff_future <- 1
-  cfg$gms$s32_planing_horizon <- 40
-  cfg$gms$s56_c_price_exp_aff <- 40
-  cfg$gms$s56_buffer_aff <- 0.2
-  start_run(cfg,codeCheck=FALSE)
+  
+  # cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon80_foresight0_buffer0")
+  # cfg$gms$s32_planing_horizon <- 80
+  # cfg$gms$s56_c_price_exp_aff <- 0
+  # cfg$gms$s56_buffer_aff <- 0
+  # start_run(cfg,codeCheck=FALSE)
+  # 
+  # cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon80_foresight80_buffer0")
+  # cfg$gms$s32_planing_horizon <- 80
+  # cfg$gms$s56_c_price_exp_aff <- 80
+  # cfg$gms$s56_buffer_aff <- 0
+  # start_run(cfg,codeCheck=FALSE)
+  # 
+  # cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon80_foresight40_buffer0")
+  # cfg$gms$s32_planing_horizon <- 80
+  # cfg$gms$s56_c_price_exp_aff <- 40
+  # cfg$gms$s56_buffer_aff <- 0
+  # start_run(cfg,codeCheck=FALSE)
+  # 
+  # cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon80_foresight40_buffer20")
+  # cfg$gms$s32_planing_horizon <- 80
+  # cfg$gms$s56_c_price_exp_aff <- 40
+  # cfg$gms$s56_buffer_aff <- 0.2
+  # start_run(cfg,codeCheck=FALSE)
+  # 
+  # cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon50_foresight50_buffer0")
+  # cfg$gms$s32_planing_horizon <- 50
+  # cfg$gms$s56_c_price_exp_aff <- 50
+  # cfg$gms$s56_buffer_aff <- 0
+  # start_run(cfg,codeCheck=FALSE)
+  # 
+  # cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon40_foresight40_buffer0")
+  # cfg$gms$s32_planing_horizon <- 40
+  # cfg$gms$s56_c_price_exp_aff <- 40
+  # cfg$gms$s56_buffer_aff <- 0
+  # start_run(cfg,codeCheck=FALSE)
+  # 
+  # 
+  # cfg$title <- paste0(prefix,ssp,"_PkBudg900_timehorizon40_foresight40_buffer20")
+  # cfg$gms$s32_planing_horizon <- 40
+  # cfg$gms$s56_c_price_exp_aff <- 40
+  # cfg$gms$s56_buffer_aff <- 0.2
+  # start_run(cfg,codeCheck=FALSE)
 }
 

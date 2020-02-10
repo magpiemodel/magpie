@@ -13,8 +13,8 @@ scalars
   s56_ghgprice_phase_in  Switch for phasing-in GHG price over a 20 year period  (1=on 0=off) / 0 /
   s56_ghgprice_devstate_scaling Switch for scaling GHG price with development state (1=on 0=off) / 0 /
   s56_c_price_induced_aff Switch for C price driven afforestation (1=on 0=off) / 1 /
-  s56_c_price_exp_aff c price expectation for afforestation (years) / 40 /
-  s56_buffer_aff share of carbon credits for afforestation projects pooled in a buffer (1) / 0 /
+  s56_c_price_exp_aff c price expectation for afforestation (years) / 50 /
+  s56_buffer_aff share of carbon credits for afforestation projects pooled in a buffer (1) / 0.2 /
   s56_counter helper for carbon price calculations (1) / 0 /
 ;
 
