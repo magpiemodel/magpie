@@ -147,19 +147,19 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
       }
       if(!comp) outputdir <- outputdirs
       cat(" -> ",name)
+      r_command <- paste0("Rscript output.R outputdirs=",paste(outputdirs,collapse=",")," comp=",comp,"  output=",rout," submit=direct")
+      sbatch_command <- paste0("sbatch --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --time=200 --mem-per-cpu=8000 --wrap=\"",r_command,"\"")
       if(submit=="direct") {
         tmp.env <- new.env()
         tmp.error <- try(sys.source(script,envir=tmp.env))
         if(!is.null(tmp.error)) warning("Script ",name," was stopped by an error and not executed properly!")
         rm(tmp.env)
       } else if(submit=="background") {
-        system(paste0("Rscript output.R outputdirs=",paste(outputdirs,collapse=",")," comp=",comp,"  output=",rout," submit=direct &> ",format(Sys.time(), "blog_out-%Y-%H-%M-%S-%OS3.log")," &"))
+        system(paste0(r_command," &> ",format(Sys.time(), "blog_out-%Y-%H-%M-%S-%OS3.log")," &"))
       } else if(submit=="slurm default") {
-        system(paste0("srun --qos=standby --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --time=200 --mem-per-cpu=8000 Rscript output.R outputdirs=",paste(outputdirs,collapse=",")," comp=",comp,"  output=",rout," submit=direct &"))
-        Sys.sleep(1)
+        system(paste(sbatch_command, "--qos=standby"))
       } else if(submit=="slurm priority") {
-        system(paste0("srun --qos=priority --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --mem-per-cpu=8000 Rscript output.R outputdirs=",paste(outputdirs,collapse=",")," comp=",comp,"  output=",rout," submit=direct &"))
-        Sys.sleep(1)
+        system(paste(sbatch_command, "--qos=priority"))
       } else if(submit=="debug") {
         tmp.env <- new.env()
         sys.source(script,envir=tmp.env)

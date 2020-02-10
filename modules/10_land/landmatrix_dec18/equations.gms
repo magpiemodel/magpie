@@ -6,16 +6,13 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @equations
-*' This equations defines the total amount of land to be constant over time.
-
- q10_land(j2) ..
-		sum(land, vm_land(j2,land)) =e= sum(land, pm_land_start(j2,land));
 
 *' The following three equations describe the general structure of the land transition matrix.
+*' The first equation defines the total amount of land to be constant over time.
 
  q10_transition_matrix(j2) ..
 	sum((land_from10,land_to10), v10_lu_transitions(j2,land_from10,land_to10)) =e=
-	sum(land, pm_land_start(j2,land));
+	sum(land, pcm_land(j2,land));
 
  q10_transition_to(j2,land_to10) ..
 	sum(land_from10, v10_lu_transitions(j2,land_from10,land_to10)) =e=

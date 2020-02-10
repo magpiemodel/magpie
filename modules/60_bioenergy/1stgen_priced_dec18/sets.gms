@@ -43,6 +43,6 @@ sets
    	SSPDB-SSP5-Ref-REMIND-MAGPIE/
 
    scen2ndres60 residues for second generation bioenergy scenarios
-       / ssp1, ssp2, ssp3, ssp4, ssp5, off /
+       / ssp1, ssp2, ssp3, ssp4, ssp5, sdp, off /
 
 ;

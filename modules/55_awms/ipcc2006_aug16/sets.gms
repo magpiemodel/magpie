@@ -17,6 +17,6 @@ sets
    / lagoon, liquid_slurry, solid_storage, drylot, daily_spread, digester, other, pit_short, pit_long /
 
    scen_conf55 awms scenarios
-   / constant,ssp1,ssp2,ssp3,ssp4,ssp5,a1,a2,b1,b2 /
+   / constant,ssp1,ssp2,ssp3,ssp4,ssp5,sdp,a1,a2,b1,b2 /
 
 ;
