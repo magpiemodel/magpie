@@ -19,7 +19,7 @@ scalars
 ;
 
 $setglobal c56_pollutant_prices  R2M41-SSP2-Budg600
-$setglobal c56_emis_policy  ssp+_nosoil
+$setglobal c56_emis_policy  redd+_nosoil
 
 table f56_pollutant_prices(t_all,i,pollutants,ghgscen56) GHG certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
 $ondelim
