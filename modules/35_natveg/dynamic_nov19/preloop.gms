@@ -3,6 +3,8 @@
 *** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
+im_root_to_shoot_ratio("secdforest") = 0.80;
+im_root_to_shoot_ratio("primforest") = 0.75;
 v35_prod.fx(j,"other","wood") = 0;
 v35_hvarea_other.fx(j,"wood",ac_sub) = 0;
 

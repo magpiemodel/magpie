@@ -4,8 +4,8 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-p16_volumetric_conversion("wood") = 632.5;
-p16_volumetric_conversion("woodfuel") = 307.1;
+pm_volumetric_conversion("wood") = 632.5;
+pm_volumetric_conversion("woodfuel") = 307.1;
 
 *f16_forestry_demand_iso(t_all,iso,"woodfuel") = f16_forestry_demand_iso(t_all,iso,"woodfuel") * 0.50;
 

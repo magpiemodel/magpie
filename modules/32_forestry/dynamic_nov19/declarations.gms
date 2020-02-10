@@ -10,8 +10,8 @@ parameters
  p32_aff_pot(t,j)                                 Potential afforestation area (Mha)
  p32_aff_pol_timestep(t,j)                        INDC afforestation per time step (Mha)
  p32_aff_pol(t,j)                                 INDC forest stock (Mha)
- pc32_yield_forestry_future(j)                    Cellular timber yield expected in the future (m3 per ha per year)
- p32_yield_forestry_ac(t,j,ac,mgmt_type)                    Age class specific yield of plantation forests (m3 per ha per yr)
+ pc32_yield_forestry_future(j,kforestry)                    Cellular timber yield expected in the future (m3 per ha per year)
+ p32_yield_forestry_ac(t,j,ac,mgmt_type,kforestry)                    Age class specific yield of plantation forests (m3 per ha per yr)
  p32_hvcost_ha(i)                                 Timber harvesting cost per ha (USD)
  p32_rot_length(t_all,j)                                Regional rotation length of plantations (yr)
  pc32_rot_length(t_all,j)                                 Cellular rotation length of plantations translated to age class equivalent for future (1)
@@ -44,6 +44,8 @@ parameters
  p32_rot_corrected(t_all,j,rotation_type)  Corrected calculation for dampening factors applied on management factors (1)
  p32_bef_ipcc(clcl)         BEF for plantations (1)
  pm_bef_ipcc(clcl,forest_type)   Biomass expansion factor from IPCC (1)
+ im_carbon_fraction         Carbon fraction for conversion of biomass to dry matter (1)
+ im_root_to_shoot_ratio(hvarea_timber)  Root to shoot ratio (1)
 ;
 
 positive variables
@@ -73,7 +75,7 @@ equations
  q32_hvarea_forestry(j,ac_sub)                    Harvested area from plantations (mio. ha)
  q32_cost_recur(i)                                Recurruing costs (mio. USD)
  q32_cost_harvest(i)                              Harvesting costs (mio. USD)
- q32_prod_future(i)                               Establishment in current time step for future demand (mio. ha)
+ q32_prod_future(i,kforestry)                               Establishment in current time step for future demand (mio. ha)
  q32_land_expansion(j,type32,ac)                  Land expansion (mio. ha)
  q32_land_reduction(j,type32,ac)                  Land contarction (mio. ha)
  q32_cost_establishment(i)                        Present value of cost of establishment (mio. USD)
@@ -107,7 +109,7 @@ parameters
  oq32_hvarea_forestry(t,j,ac_sub,type)                     Harvested area from plantations (mio. ha)
  oq32_cost_recur(t,i,type)                                 Recurruing costs (mio. USD)
  oq32_cost_harvest(t,i,type)                               Harvesting costs (mio. USD)
- oq32_prod_future(t,i,type)                                Establishment in current time step for future demand (mio. ha)
+ oq32_prod_future(t,i,kforestry,type)                      Establishment in current time step for future demand (mio. ha)
  oq32_land_expansion(t,j,type32,ac,type)                   Land expansion (mio. ha)
  oq32_land_reduction(t,j,type32,ac,type)                   Land contarction (mio. ha)
  oq32_cost_establishment(t,i,type)                         Present value of cost of establishment (mio. USD)

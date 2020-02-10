@@ -1,4 +1,6 @@
 pm_time_diff(t) = m_yeardiff(t);
+im_carbon_fraction = 0.5;
+im_root_to_shoot_ratio("forestry") = 0.85;
 
 $ontext
 p32_carbon_density_ac_nat(t,j,ac) = m_growth_vegc(0,fm_carbon_density(t,j,"other","vegc"),sum(clcl,fm_climate_class(j,clcl)*fm_growth_par(clcl,"k")),sum(clcl,fm_climate_class(j,clcl)*fm_growth_par(clcl,"m")),(ord(ac)-1));
