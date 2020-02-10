@@ -35,7 +35,9 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-prefix <- "C06_"
+#06 bug pasture production
+#07 bugfix pasture production
+prefix <- "C07_"
 
 for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
 
