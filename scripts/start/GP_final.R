@@ -23,7 +23,8 @@ cfg$input <- c("magpie4.1_default_apr19.tgz","rev4.26_690d3718e151be1b450b394c10
 "rev4.26_690d3718e151be1b450b394c1064b1c5_validation.tgz",
 "calibration_H12_c200_12Sep18.tgz",
 "additional_data_rev3.76.tgz",
-"additional_data_rev3.68.tgz","isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz","rev4.33_690d3718e151be1b450b394c1064b1c5_validation.tgz","rev4.33_690d3718e151be1b450b394c1064b1c5_magpie.tgz")
+"additional_data_rev3.68.tgz","isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz",
+"rev4.34_690d3718e151be1b450b394c1064b1c5_magpie.tgz"."rev4.34_690d3718e151be1b450b394c1064b1c5_validation.tgz")
 
 #NITROGEN UPTAKE SCENARIO
 cfg$gms$c50_scen_neff <- "neff85_85_starty2010"
