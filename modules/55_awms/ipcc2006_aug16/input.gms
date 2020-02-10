@@ -6,9 +6,10 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-$setglobal c55_scen_conf  GoodPractice
+$setglobal c55_scen_conf  ssp2
 *   options:   SSP: "ssp1", "ssp2", "ssp3", "ssp4", "ssp5", "constant"
 *             SRES: "a1", "a2", "b1", "b2"
+*             GoodPractice: "GoodPractice"
 
 parameter f55_awms_recycling_share(i,kli,awms_conf) share of Nr in confinement recycled (tNr per tNr)
 /

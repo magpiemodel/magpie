@@ -96,21 +96,21 @@ $title magpie
 * md5sum: e0cb64c918128436bf9a323e57cae81b
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev3.68.tgz
-* md5sum: 15d1135625a9f5cfb9c7c6038716a156
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: rev4.26_690d3718e151be1b450b394c1064b1c5_magpie.tgz
+* md5sum: 448ab3a63e3071b3391c6bb56cb04411
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: e0cb64c918128436bf9a323e57cae81b
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: rev4.26_690d3718e151be1b450b394c1064b1c5_validation.tgz
+* md5sum: 2a5fbb76e8f8f3e3f74c833b21517d4b
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.33_690d3718e151be1b450b394c1064b1c5_validation.tgz
-* md5sum: b53dcc0f88270baeeab5ecdffb02db94
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: calibration_H12_c200_12Sep18.tgz
+* md5sum: 0a7d88e902918eb6a5263faaf066cc5d
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/calibration
 * 
-* Used data set: rev4.33_690d3718e151be1b450b394c1064b1c5_magpie.tgz
-* md5sum: 1e1cdc09890067adbca1446d5b4be6e9
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: additional_data_rev3.76.tgz
+* md5sum: ebc58e69dd57ed96860c57f0f667e75e
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -123,7 +123,7 @@ $title magpie
 * 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
-* Regions data revision: 4.33
+* Regions data revision: 4.26
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
@@ -143,7 +143,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Tue Nov 12 10:47:20 2019
+* Last modification (input data): Thu Feb 06 15:03:56 2020
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
