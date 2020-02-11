@@ -6,4 +6,4 @@
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
 im_development_state,input,questionnaire
-fm_interest, input, duplicate
+pm_interest_dev, parameter, not used
