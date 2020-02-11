@@ -42,7 +42,7 @@ cfg$results_folder <- "output/:title:"
 #10 recalc npi
 #11 Test with plantations
 
-prefix <- "C11_"
+prefix <- "C12_"
 
 for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
 
@@ -60,6 +60,6 @@ for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
   cfg$gms$c60_2ndgen_biodem <- "coupling"
   cfg$title <- paste0(prefix,ssp,"_PkBudg900")
   start_run(cfg,codeCheck=FALSE)
-
+  cfg <- setScenario(cfg,"noSDP")
 }
 
