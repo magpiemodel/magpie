@@ -8,4 +8,4 @@
 
 v50_nr_eff.fx(i) = f50_snupe(t,i,"%c50_scen_neff%");
 v50_nr_eff_pasture.fx(i) = f50_nue_pasture(t,i,"%c50_scen_neff_pasture%");
-ic50_atmospheric_deposition_rates(i,land)=f50_atmospheric_deposition_rates(t,i,land,"%c50_dep_scen%");
+i50_atmospheric_deposition_rates(t,i,land)=f50_atmospheric_deposition_rates(t,i,land,"%c50_dep_scen%");
