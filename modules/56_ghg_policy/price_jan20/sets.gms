@@ -85,7 +85,7 @@ sets
    /inorg_fert, man_crop, awms, resid, man_past, som,
    rice, ent_ferm,  beccs/
 
-   ac_exp(ac)
+   ac_exp(ac) age-class corresponding to planning horion
 ;
 
 $onempty

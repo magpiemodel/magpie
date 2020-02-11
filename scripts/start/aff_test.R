@@ -40,9 +40,9 @@ cfg$results_folder <- "output/:title:"
 #08 Update from Edna
 #09 bugfix aff
 #10 recalc npi
-#11 Test with plantations
+#13 final test
 
-prefix <- "C12_"
+prefix <- "C13_"
 
 for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
 
@@ -58,8 +58,7 @@ for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
   cfg <- setScenario(cfg,c(ssp,"NDC"))
   cfg$gms$c56_pollutant_prices <- "coupling"
   cfg$gms$c60_2ndgen_biodem <- "coupling"
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900")
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900_plantations")
   start_run(cfg,codeCheck=FALSE)
-  cfg <- setScenario(cfg,"noSDP")
 }
 
