@@ -39,11 +39,13 @@ cfg$results_folder <- "output/:title:"
 #07 bugfix pasture production
 #08 Update from Edna
 #09 bugfix aff
+#10 recalc npi
 
-prefix <- "C09_"
+prefix <- "C10_"
 
 for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
 
+  cfg$recalc_npi_ndc <- TRUE
   # getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-Base-mag-4/fulldata.gdx"))
   # cfg <- setScenario(cfg,c(ssp,"NPI"))
   # cfg$gms$c56_pollutant_prices <- "coupling"
