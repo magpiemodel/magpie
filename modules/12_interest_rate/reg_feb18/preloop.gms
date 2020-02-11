@@ -18,3 +18,5 @@ p12_interest(t,i) = s12_slope_a *im_development_state(t,i) + s12_intercept_b;
 
 $ifthen "%c12_interest_rate%" == "coupling" p12_interest(t,i) = f12_interest_coupling(t);
 $endif
+
+pm_interest_dev(t,i) = p12_interest(t,i);

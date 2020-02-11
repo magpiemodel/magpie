@@ -43,9 +43,9 @@ parameters
  p32_dampen_final(ac,j)     Final calculation for dampening factors applied on management factors (1)
  p32_rot_corrected(t_all,j,rotation_type)  Corrected calculation for dampening factors applied on management factors (1)
  p32_bef_ipcc(clcl)         BEF for plantations (1)
- pm_bef_ipcc(clcl,forest_type)   Biomass expansion factor from IPCC (1)
  im_carbon_fraction         Carbon fraction for conversion of biomass to dry matter (1)
  im_root_to_shoot_ratio(hvarea_timber)  Root to shoot ratio (1)
+ pm_volumetric_conversion(kforestry) Volumetric Conversion parameter for timber (1)
 ;
 
 positive variables
@@ -80,7 +80,6 @@ equations
  q32_land_reduction(j,type32,ac)                  Land contarction (mio. ha)
  q32_cost_establishment(i)                        Present value of cost of establishment (mio. USD)
  q32_high_mgmt_prod_cost(i)                       Additional production cost for timber produced from extremely highly managed plantations (Mio. USD)
- q32_prod_timber(j,kforestry)                     TImber production from plantataions (mio m3 per yr)
 ;
 
 
@@ -114,6 +113,5 @@ parameters
  oq32_land_reduction(t,j,type32,ac,type)                   Land contarction (mio. ha)
  oq32_cost_establishment(t,i,type)                         Present value of cost of establishment (mio. USD)
  oq32_high_mgmt_prod_cost(t,i,type)                        Additional production cost for timber produced from extremely highly managed plantations (Mio. USD)
- oq32_prod_timber(t,j,kforestry,type)                      TImber production from plantataions (mio m3 per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

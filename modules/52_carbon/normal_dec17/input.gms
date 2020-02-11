@@ -23,12 +23,6 @@ $include "./modules/52_carbon/input/f52_growth_par.csv"
 $offdelim
 ;
 
-table fm_growth_par(clcl,chap_par) Parameters for chapman-richards equation (1)
-$ondelim
-$include "./modules/52_carbon/input/f52_growth_par.csv"
-$offdelim
-;
-
 parameter fm_growth_par_image_lpjml(clcl,chap_par,forest_type) Parameters for chapman-richards equation (1)
 /
 $ondelim
@@ -36,5 +30,3 @@ $include "./modules/52_carbon/input/f52_growth_par_image_lpjml.csv"
 $offdelim
 /
 ;
-*fm_growth_par_image_lpjml(clcl,"k","plantations") = fm_growth_par_image_lpjml(clcl,"k","plantations") * 2;
-*fm_growth_par_image_lpjml(clcl,chap_par,"natveg") = fm_growth_par(clcl,chap_par);

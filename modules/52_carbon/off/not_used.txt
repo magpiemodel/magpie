@@ -7,4 +7,5 @@
 name,type,reason
 pm_climate_class,input,not needed
 pcm_land,input,not needed
-fm_growth_par, additional interface, not used
+pm_carbon_density_ac_forestry, parameter, not used
+fm_growth_par_image_lpjml, parameter, not used

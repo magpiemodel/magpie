@@ -5,12 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @code Timber production is fixed to 0 in case the model is run without
-*' dynamic forestry turned on.
-
-vm_prod_cell_forestry.fx(j,kforestry) = 0;
-vm_prod_cell_natveg.fx(j,kforestry) = 0;
-vm_prod.fx(j,kforestry) = 0;
-vm_prod_heaven_timber.fx(j,kforestry)  = 0;
-
-*' @stop
+v15_income_pc_real_ppp_iso.scale(iso) = 10e5;
+v15_kcal_intake_total_regr.scale(iso) = 10e3;
+v15_kcal_regr_total.scale(iso) = 10e4;

@@ -173,7 +173,7 @@ scalars
 *******************************MODULE SETUP*************************************
 
 $setglobal drivers  aug17
-$setglobal land  landmatrix_dec18
+$setglobal land  feb15
 $setglobal costs  default
 $setglobal interest_rate  reg_feb18
 $setglobal tc  endo_jun18
@@ -186,8 +186,7 @@ $setglobal production  flexreg_apr16
 $setglobal residues  flexreg_apr16
 $setglobal processing  substitution_dec18
 
-$setglobal trade  selfsuff_reduced_ff
-$setglobal timber  exo_sep19
+$setglobal trade  selfsuff_reduced_forestry
 
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13

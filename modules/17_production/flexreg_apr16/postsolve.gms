@@ -8,16 +8,24 @@
 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
- ov_prod(t,j,k,"marginal")        = vm_prod.m(j,k);
- ov_prod_reg(t,i,kall,"marginal") = vm_prod_reg.m(i,kall);
- oq17_prod_reg(t,i,k,"marginal")  = q17_prod_reg.m(i,k);
- ov_prod(t,j,k,"level")           = vm_prod.l(j,k);
- ov_prod_reg(t,i,kall,"level")    = vm_prod_reg.l(i,kall);
- oq17_prod_reg(t,i,k,"level")     = q17_prod_reg.l(i,k);
- ov_prod(t,j,k,"upper")           = vm_prod.up(j,k);
- ov_prod_reg(t,i,kall,"upper")    = vm_prod_reg.up(i,kall);
- oq17_prod_reg(t,i,k,"upper")     = q17_prod_reg.up(i,k);
- ov_prod(t,j,k,"lower")           = vm_prod.lo(j,k);
- ov_prod_reg(t,i,kall,"lower")    = vm_prod_reg.lo(i,kall);
- oq17_prod_reg(t,i,k,"lower")     = q17_prod_reg.lo(i,k);
+ ov_prod(t,j,k,"marginal")                       = vm_prod.m(j,k);
+ ov_prod_reg(t,i,kall,"marginal")                = vm_prod_reg.m(i,kall);
+ ov_prod_heaven_timber(t,j,kforestry,"marginal") = vm_prod_heaven_timber.m(j,kforestry);
+ oq17_prod_reg(t,i,k,"marginal")                 = q17_prod_reg.m(i,k);
+ oq17_prod_timber(t,j,kforestry,"marginal")      = q17_prod_timber.m(j,kforestry);
+ ov_prod(t,j,k,"level")                          = vm_prod.l(j,k);
+ ov_prod_reg(t,i,kall,"level")                   = vm_prod_reg.l(i,kall);
+ ov_prod_heaven_timber(t,j,kforestry,"level")    = vm_prod_heaven_timber.l(j,kforestry);
+ oq17_prod_reg(t,i,k,"level")                    = q17_prod_reg.l(i,k);
+ oq17_prod_timber(t,j,kforestry,"level")         = q17_prod_timber.l(j,kforestry);
+ ov_prod(t,j,k,"upper")                          = vm_prod.up(j,k);
+ ov_prod_reg(t,i,kall,"upper")                   = vm_prod_reg.up(i,kall);
+ ov_prod_heaven_timber(t,j,kforestry,"upper")    = vm_prod_heaven_timber.up(j,kforestry);
+ oq17_prod_reg(t,i,k,"upper")                    = q17_prod_reg.up(i,k);
+ oq17_prod_timber(t,j,kforestry,"upper")         = q17_prod_timber.up(j,kforestry);
+ ov_prod(t,j,k,"lower")                          = vm_prod.lo(j,k);
+ ov_prod_reg(t,i,kall,"lower")                   = vm_prod_reg.lo(i,kall);
+ ov_prod_heaven_timber(t,j,kforestry,"lower")    = vm_prod_heaven_timber.lo(j,kforestry);
+ oq17_prod_reg(t,i,k,"lower")                    = q17_prod_reg.lo(i,k);
+ oq17_prod_timber(t,j,kforestry,"lower")         = q17_prod_timber.lo(j,kforestry);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################

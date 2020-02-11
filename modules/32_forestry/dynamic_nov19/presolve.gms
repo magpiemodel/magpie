@@ -95,23 +95,6 @@ p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac_forestry(t,
 
 
 *** YIELDS
-$ontext
-
-p32_yield_forestry_ac(t,j,ac_sub,mgmt_type) =
-   (
-     (2)
-     *
-*     pm_carbon_density_ac(t,j,ac_sub,"vegc") * p32_management_factor(j,mgmt_type) * p32_dampen_final(ac_sub,j)
-     pm_carbon_density_ac_forestry(t,j,ac_sub,"vegc")
-     *
-     0.85
-     /
-*     sum(clcl,pm_climate_class(j,clcl) * pm_bcef(ac_sub,clcl))
-      sum(clcl, pm_climate_class(j,clcl) * fm_ipcc_bce(clcl,"plantations",ac_sub))
-    ) / pm_time_diff(t)
-   ;
-
-$offtext
 
 p32_yield_forestry_ac(t,j,ac_sub,mgmt_type,kforestry) =
     (

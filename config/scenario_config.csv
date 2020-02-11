@@ -4,7 +4,7 @@ c09_gdp_scenario;;;SSP1;SSP2;SSP3;SSP4;SSP5;;;;;;;SSP1;SSP2;SSP3;SSP4;SSP5
 c12_interest_rate;;;low;medium;high;mixed;low;;;;;;;low;medium;high;mixed;low
 c15_food_scenario;;;SSP1;SSP2;SSP3;SSP4;SSP5;;;;;;;SSP1;SSP2;SSP3;SSP4;SSP5
 c21_trade_liberalization;;;l908080r807070;l909090r808080;l909595r809090;l908080r807070;l908080r807070;;;;;;;l908080r807070;l909090r808080;l909595r809090;l908080r807070;l908080r807070
-forestry;;;;;;;;affore_vegc_dec16;affore_vegc_dec16;affore_vegc_dec16;;;;affore_vegc_dec16;affore_vegc_dec16;affore_vegc_dec16;affore_vegc_dec16;affore_vegc_dec16
+forestry;;;;;;;;dynamic_nov19;dynamic_nov19;dynamic_nov19;;;;affore_vegc_dec16;affore_vegc_dec16;affore_vegc_dec16;affore_vegc_dec16;affore_vegc_dec16
 c32_aff_policy;;;;;;;;none;npi;ndc;;;;;;;;
 c35_ad_policy;;;;;;;;none;npi;ndc;;;;;;;;
 c35_aolc_policy;;;;;;;;none;npi;ndc;;;;;;;;

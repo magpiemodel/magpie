@@ -4,39 +4,19 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-pm_volumetric_conversion("wood") = 632.5;
-pm_volumetric_conversion("woodfuel") = 307.1;
-
-*f16_forestry_demand_iso(t_all,iso,"woodfuel") = f16_forestry_demand_iso(t_all,iso,"woodfuel") * 0.50;
-
-$ontext
-fm_forestry_demand(t_all,i,kforestry) =
-									sum(i_to_iso(i,iso),f16_forestry_demand_iso(t_all,iso,kforestry));
-
-*** Only needed to fix the time step length miscalculation from t_all in y1995.
-*** The 1995 value for yeardiff needs to be one but with m_yeatrdiff on t_all its is 5.
-*** Only the t values will be overwritten using this fix.
-*** Could also make a dollar condition with $(ord(t)=1). Fix later.
-
-fm_forestry_demand(t,i,kforestry) =
-										sum(i_to_iso(i,iso),f16_forestry_demand_iso(t,iso,kforestry));
-
-*** Test with lower demand
-fm_forestry_demand(t,i,kforestry) = fm_forestry_demand(t,i,kforestry) * 0.75;
-fm_forestry_demand(t,i,kforestry) = fm_forestry_demand("y1995",i,kforestry);
-$offtext
-
-f16_forestry_demand(t_all,i,"woodfuel") = f16_forestry_demand(t_all,i,"woodfuel") * 0.5;
-f16_forestry_demand(t_all,"MEA",kforestry) = f16_forestry_demand(t_all,"MEA",kforestry) * 0.25;
-f16_forestry_demand(t_all,"IND",kforestry) = f16_forestry_demand(t_all,"IND",kforestry) * 0.25;
+*' @code
+*' In MAgPIE we model only 50 percent of the projected woodfuel demand.
+*' Similar to the assumption by IMAGE model. See Lauri et al. 2019 for validation.
+*' Not all wood involved is produced from formal forestry activities, as it is also
+*' collected from non-forest areas, for example from thinning orchards and along
+*' roadsides (FAO, 2001; FAO, 2008). As few reliable data are available on fuelwood
+*' production, We make an assumption similar to IMAGE. While fuelwood production in
+*' industrialized regions is dominated by large-scale, commercial operations, in
+*' transitional and developing regions smaller proportions of fuelwood volumes are
+*' assumed to come from forestry operations: 50% and 32% respectively.
+*' In MAgPIE, we assume 50% value across the board.
 
 fm_forestry_demand(t_all,i,kforestry) = f16_forestry_demand(t_all,i,kforestry);
-*fm_forestry_demand(t_all,i,"woodfuel") = f16_forestry_demand(t_all,i,"woodfuel") * 0.5;
+fm_forestry_demand(t,i,"woodfuel") = f16_forestry_demand(t,i,"woodfuel") * 0.33$(im_development_state(t,i)<0.33) + f16_forestry_demand(t,i,"woodfuel") * 0.50$(im_development_state(t,i)>=0.33 AND im_development_state(t,i)<0.66) + f16_forestry_demand(t,i,"woodfuel")$(im_development_state(t,i)>=0.66);
 
-*** Only needed to fix the time step length miscalculation from t_all in y1995.
-*** The 1995 value for yeardiff needs to be one but with m_yeatrdiff on t_all its is 5.
-*** Only the t values will be overwritten using this fix.
-*** Could also make a dollar condition with $(ord(t)=1). Fix later.
-
-fm_forestry_demand(t,i,kforestry) = f16_forestry_demand(t,i,kforestry);
-*fm_forestry_demand(t,i,"woodfuel") = f16_forestry_demand(t,i,"woodfuel") * 0.5;
+*' @stop

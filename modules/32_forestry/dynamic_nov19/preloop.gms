@@ -1,29 +1,17 @@
 pm_time_diff(t) = m_yeardiff(t);
 im_carbon_fraction = 0.5;
 im_root_to_shoot_ratio("forestry") = 0.85;
+pm_volumetric_conversion("wood") = 632.5;
+pm_volumetric_conversion("woodfuel") = 307.1;
 
-$ontext
-p32_carbon_density_ac_nat(t,j,ac) = m_growth_vegc(0,fm_carbon_density(t,j,"other","vegc"),sum(clcl,fm_climate_class(j,clcl)*fm_growth_par(clcl,"k")),sum(clcl,fm_climate_class(j,clcl)*fm_growth_par(clcl,"m")),(ord(ac)-1));
-
-p32_carbon_density_ac_marg(t,j,ac_sub) = p32_carbon_density_ac_nat(t,j,ac_sub) - p32_carbon_density_ac_nat(t,j,ac_sub-1);
-
-p32_IGR(t,j,ac_sub) = (p32_carbon_density_ac_marg(t,j,ac_sub)/p32_carbon_density_ac_nat(t,j,ac_sub))$(p32_carbon_density_ac_nat(t,j,ac_sub)>0) + 1$(p32_carbon_density_ac_nat(t,j,ac_sub)<0.0001);
-p32_IGR("y1995",j,"ac0") = 1;
-p32_interest(t,i,scen12) = fm_interest(t,scen12);
-p32_rot_flg(t,j,ac,scen12) = 1$((p32_IGR(t,j,ac) - sum(cell(i,j),p32_interest(t,i,scen12)))>0) + 0$((p32_IGR(t,j,ac) - sum(cell(i,j),p32_interest(t,i,scen12)))>0);
-p32_rot_final(t,j,scen12) = sum(ac,p32_rot_flg(t,j,ac,scen12)) * 5;
-p32_rot_final(t,j,scen12)$(p32_rot_final(t,j,scen12)>90) = 90;
-p32_rot_final(t_future,j,scen12) = p32_rot_final("y2100",j,scen12);
-$offtext
-
-*p32_carbon_density_ac_forestry(t,j,ac) = m_growth_vegc(0,fm_carbon_density(t,j,"other","vegc"),sum(clcl,fm_climate_class(j,clcl)*(fm_growth_par(clcl,"k")*5)),sum(clcl,fm_climate_class(j,clcl)*(fm_growth_par(clcl,"m")+2)),(ord(ac)-1));
 p32_carbon_density_ac_forestry(t_all,j,ac) = m_growth_vegc(0,fm_carbon_density(t_all,j,"other","vegc"),sum(clcl,fm_climate_class(j,clcl)*fm_growth_par_image_lpjml(clcl,"k","plantations")),sum(clcl,fm_climate_class(j,clcl)*fm_growth_par_image_lpjml(clcl,"m","plantations")),(ord(ac)-1));
 p32_carbon_density_ac_marg(t_all,j,ac_sub) = p32_carbon_density_ac_forestry(t_all,j,ac_sub) - p32_carbon_density_ac_forestry(t_all,j,ac_sub-1);
 
 p32_IGR(t_all,j,ac_sub) = (p32_carbon_density_ac_marg(t_all,j,ac_sub)/p32_carbon_density_ac_forestry(t_all,j,ac_sub))$(p32_carbon_density_ac_forestry(t_all,j,ac_sub)>0) + 1$(p32_carbon_density_ac_forestry(t_all,j,ac_sub)<0.0001);
 
 p32_IGR("y1995",j,"ac0") = p32_IGR("y1995",j,"ac5");
-p32_interest(t_all,i,scen12) = fm_interest(t_all,scen12);
+*p32_interest(t_all,i,scen12) = fm_interest(t_all,scen12);
+p32_interest(t_all,i,scen12) = pm_interest_dev(t_all,i);
 p32_rot_flg(t_all,j,ac,scen12) = 1$((p32_IGR(t_all,j,ac) - sum(cell(i,j),p32_interest(t_all,i,scen12)))>0) + 0$((p32_IGR(t_all,j,ac) - sum(cell(i,j),p32_interest(t_all,i,scen12)))>0);
 p32_rot_final(t_all,j,scen12) = sum(ac,p32_rot_flg(t_all,j,ac,scen12)) * 5;
 p32_rot_final(t_all,j,scen12)$(p32_rot_final(t_all,j,scen12)>90) = 90;
