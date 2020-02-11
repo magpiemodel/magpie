@@ -57,6 +57,18 @@ cfg$gms$c32_rotation_harvest = "def"
 ## Rotation length for establishment
 cfg$gms$c32_rotation_estb <- cfg$gms$c32_rotation_harvest
 
+if(cfg$gms$c32_rotation_harvest = "bio"){
+	rot_flag = "Biological"
+} else if(cfg$gms$c32_rotation_harvest = "high"){
+	rot_flag = "Extended"
+} else if(cfg$gms$c32_rotation_harvest = "def"){
+	rot_flag = "Normal"
+} else if(cfg$gms$c32_rotation_harvest = "low"){
+	rot_flag = "Reduced"
+} else if(cfg$gms$c32_rotation_harvest = "min"){
+	rot_flag = "Very Short"
+}
+
 ## Loop over climate impacts
 
 cfg <- setScenario(cfg, "nocc")
