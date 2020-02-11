@@ -40,8 +40,9 @@ cfg$results_folder <- "output/:title:"
 #08 Update from Edna
 #09 bugfix aff
 #10 recalc npi
+#11 Test with plantations
 
-prefix <- "C10_"
+prefix <- "C11_"
 
 for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
 
