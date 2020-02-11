@@ -73,7 +73,7 @@ sets
    	SSPDB-SSP5-Ref-REMIND-MAGPIE/
 
   scen56 emission policy scenarios
-  / none, all, ssp, ssp_nosoil, all_nosoil /
+  / none, all, ssp, ssp_nosoil, redd+_nosoil, all_nosoil /
 
    emis_cell_one56(emis_source_cell) cellular oneoff emission sources
    /crop_vegc, crop_litc, crop_soilc, past_vegc, past_litc, past_soilc, forestry_vegc,
@@ -84,6 +84,8 @@ sets
    emis_reg_yr56(emis_source_reg) regional yearly emission sources
    /inorg_fert, man_crop, awms, resid, man_past, som,
    rice, ent_ferm,  beccs/
+
+   ac_exp(ac) age-class corresponding to planning horizon
 ;
 
 $onempty
