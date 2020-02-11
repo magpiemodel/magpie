@@ -31,28 +31,33 @@ getInput <- function(gdx,ghg_price=TRUE,biodem=TRUE) {
 #start MAgPIE run
 source("config/default.cfg")
 
-#cfg$force_download <- TRUE
+#cfg$force_download <- FALSE
 
 cfg$results_folder <- "output/:title:"
 
-prefix <- "C02_"
+#06 bug pasture production
+#07 bugfix pasture production
+#08 Update from Edna
+#09 bugfix aff
+#10 recalc npi
+#13 final test
+
+prefix <- "C13_"
 
 for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
+
+  getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-Base-mag-4/fulldata.gdx"))
+  cfg <- setScenario(cfg,c(ssp,"NPI"))
+  cfg$gms$c56_pollutant_prices <- "coupling"
+  cfg$gms$c60_2ndgen_biodem <- "coupling"
+  cfg$title <- paste0(prefix,ssp,"_NPI")
+  start_run(cfg,codeCheck=FALSE)
   
+  getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
   cfg <- setScenario(cfg,c(ssp,"NDC"))
   cfg$gms$c56_pollutant_prices <- "coupling"
   cfg$gms$c60_2ndgen_biodem <- "coupling"
-  # cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-PkBudg900"
-  # cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-PkBudg900"
-  #  cfg$gms$s15_elastic_demand <- 0
-#  cfg$gms$land <- "landmatrix_dec18"
-  # cfg$gms$s80_maxiter <- 20
-  #  cfg$gms$land <- "feb15"
-  #  cfg$gms$s80_optfile <- 0
-  
-  getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
-  
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900")
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg")
   start_run(cfg,codeCheck=FALSE)
 }
 
