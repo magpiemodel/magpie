@@ -57,5 +57,6 @@ pcm_land(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 v32_land.fx(j,"ndc",ac_sub) = pc32_land(j,"ndc",ac_sub);
 ** fix c price induced afforestation based on s32_planing_horizon, fixed only until end of s32_planing_horizon, ac0 is free
 v32_land.fx(j,"aff",ac_sub)$(ord(ac_sub) <= s32_planing_horizon/5) = pc32_land(j,"aff",ac_sub);
-** fix forestry plantations to zero for all age-classes (no forestry modelled)
-v32_land.fx(j,"plant",ac) = 0;
+v32_land.up(j,"aff",ac_sub)$(ord(ac_sub) > s32_planing_horizon/5) = pc32_land(j,"aff",ac_sub);
+** fix forestry plantations for all age-classes (no forestry modelled)
+v32_land.fx(j,"plant",ac) = pc32_land(j,"plant",ac);
