@@ -47,7 +47,7 @@ cfg$gms$s56_reward_neg_emis <- -Inf
 #######################################
 
 
-flag_run <- paste0("NPImerge-R023")
+flag_run <- paste0("NPImerge-SecdfNoSecdf-R024")
 
 cfg$gms$s32_recurring_cost_multiplier <- 10
 
