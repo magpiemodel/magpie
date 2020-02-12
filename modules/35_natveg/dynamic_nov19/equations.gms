@@ -41,7 +41,7 @@
 
 *** Merging NPIs into one
  q35_min_natveg(j2) .. vm_land(j2,"primforest") + vm_land(j2,"secdforest") + vm_land(j2,"other")
-                      =g=
+                      =n=
                       sum(ct, p35_min_forest(ct,j2)) + sum(ct, p35_min_other(ct,j2));
 
 *' The following technical calculations are needed for reducing differences in land-use patterns between time steps.
@@ -151,7 +151,7 @@ q35_prod_cell_natveg(j2,kforestry)..
 
 q35_secdforest_conversion(j2)..
                           v35_secdforest(j2,"ac0")
-                          =n=
+                          =e=
                           sum((kforestry,ac_sub),v35_hvarea_secdforest(j2,kforestry,ac_sub))
                         + sum(kforestry,v35_hvarea_primforest(j2,kforestry))
                           ;
