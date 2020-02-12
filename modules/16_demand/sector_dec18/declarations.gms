@@ -14,6 +14,8 @@ vm_dem_seed(i,kall)               Demand for seed (mio. tDM per yr)
 
 parameters
 fm_forestry_demand(t_all,i,kforestry) Forestry demand with all time steps (mio. m3 per year)
+f16_glo_timber_demand(t,kforestry) IMAGE Correction
+f16_FAO_timber_demand(t,kforestry) FAO Calc
 ;
 
 equations

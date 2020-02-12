@@ -17,6 +17,9 @@
 *' In MAgPIE, we assume 50% value across the board.
 
 fm_forestry_demand(t_all,i,kforestry) = f16_forestry_demand(t_all,i,kforestry);
-fm_forestry_demand(t,i,"woodfuel") = f16_forestry_demand(t,i,"woodfuel") * 0.33$(im_development_state(t,i)<0.33) + f16_forestry_demand(t,i,"woodfuel") * 0.50$(im_development_state(t,i)>=0.33 AND im_development_state(t,i)<0.66) + f16_forestry_demand(t,i,"woodfuel")$(im_development_state(t,i)>=0.66);
+fm_forestry_demand(t,i,"woodfuel") = (f16_forestry_demand(t,i,"woodfuel") * 0.33)$(im_development_state(t,i)<0.33) + (f16_forestry_demand(t,i,"woodfuel") * 0.50)$(im_development_state(t,i)>=0.33 AND im_development_state(t,i)<0.66) + (f16_forestry_demand(t,i,"woodfuel"))$(im_development_state(t,i)>=0.66);
 
+f16_FAO_timber_demand(t,kforestry) = sum((i),f16_forestry_demand(t,i,kforestry));
+f16_glo_timber_demand(t,kforestry) = sum((i),fm_forestry_demand(t,i,kforestry));
+display f16_FAO_timber_demand,f16_glo_timber_demand;
 *' @stop
