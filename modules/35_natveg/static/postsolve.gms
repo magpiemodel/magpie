@@ -6,25 +6,16 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
- ov35_secdforest(t,j,land35,"marginal")        = v35_secdforest.m(j,land35);
- ov35_other(t,j,land35,"marginal")             = v35_other.m(j,land35);
- ov_landdiff_natveg(t,"marginal")              = vm_landdiff_natveg.m;
- ov_cost_natveg(t,i,"marginal")                = vm_cost_natveg.m(i);
- ov_prod_cell_natveg(t,j,kforestry,"marginal") = vm_prod_cell_natveg.m(j,kforestry);
- ov35_secdforest(t,j,land35,"level")           = v35_secdforest.l(j,land35);
- ov35_other(t,j,land35,"level")                = v35_other.l(j,land35);
- ov_landdiff_natveg(t,"level")                 = vm_landdiff_natveg.l;
- ov_cost_natveg(t,i,"level")                   = vm_cost_natveg.l(i);
- ov_prod_cell_natveg(t,j,kforestry,"level")    = vm_prod_cell_natveg.l(j,kforestry);
- ov35_secdforest(t,j,land35,"upper")           = v35_secdforest.up(j,land35);
- ov35_other(t,j,land35,"upper")                = v35_other.up(j,land35);
- ov_landdiff_natveg(t,"upper")                 = vm_landdiff_natveg.up;
- ov_cost_natveg(t,i,"upper")                   = vm_cost_natveg.up(i);
- ov_prod_cell_natveg(t,j,kforestry,"upper")    = vm_prod_cell_natveg.up(j,kforestry);
- ov35_secdforest(t,j,land35,"lower")           = v35_secdforest.lo(j,land35);
- ov35_other(t,j,land35,"lower")                = v35_other.lo(j,land35);
- ov_landdiff_natveg(t,"lower")                 = vm_landdiff_natveg.lo;
- ov_cost_natveg(t,i,"lower")                   = vm_cost_natveg.lo(i);
- ov_prod_cell_natveg(t,j,kforestry,"lower")    = vm_prod_cell_natveg.lo(j,kforestry);
+ ov35_secdforest(t,j,ac,"marginal") = v35_secdforest.m(j,ac);
+ ov35_other(t,j,ac,"marginal")      = v35_other.m(j,ac);
+ ov_landdiff_natveg(t,"marginal")   = vm_landdiff_natveg.m;
+ ov35_secdforest(t,j,ac,"level")    = v35_secdforest.l(j,ac);
+ ov35_other(t,j,ac,"level")         = v35_other.l(j,ac);
+ ov_landdiff_natveg(t,"level")      = vm_landdiff_natveg.l;
+ ov35_secdforest(t,j,ac,"upper")    = v35_secdforest.up(j,ac);
+ ov35_other(t,j,ac,"upper")         = v35_other.up(j,ac);
+ ov_landdiff_natveg(t,"upper")      = vm_landdiff_natveg.up;
+ ov35_secdforest(t,j,ac,"lower")    = v35_secdforest.lo(j,ac);
+ ov35_other(t,j,ac,"lower")         = v35_other.lo(j,ac);
+ ov_landdiff_natveg(t,"lower")      = vm_landdiff_natveg.lo;
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
-

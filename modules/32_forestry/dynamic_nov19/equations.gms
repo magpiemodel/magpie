@@ -31,13 +31,9 @@ q32_cost_total(i2) .. vm_cost_fore(i2) =e=
 *' The interface `vm_cdr_aff` provides the projected CDR of an afforestation
 *' activity for a planning horizon of 30 years `s32_planing_horizon` to the [56_ghg_policy] module.
 
-q32_cdr_aff(j2) ..
-vm_cdr_aff(j2) =e=
-sum(ac$(ord(ac) > 1
-AND (ord(ac)-1) <= s32_planing_horizon/5),
-v32_land(j2,"aff","ac0") *
-(sum(ct, pm_carbon_density_ac(ct,j2,ac,"vegc")) -
-sum(ct, pm_carbon_density_ac(ct,j2,ac-1,"vegc"))));
+q32_cdr_aff(j2,ac) ..
+vm_cdr_aff(j2,ac) =e=
+v32_land(j2,"aff","ac0") * sum(ct, p32_cdr_ac(ct,j2,ac));
 
 *****GENERAL
 *****Land***************************************************

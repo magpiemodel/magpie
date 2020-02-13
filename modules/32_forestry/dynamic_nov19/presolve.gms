@@ -36,6 +36,10 @@ v32_land.up(j,"aff","ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
 v32_land.fx(j,"aff","ac0")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
 m_boundfix(v32_land,(j,"aff","ac0"),l,10e-5);
 
+*' CDR from afforestation for each age-class, depending on planning horizon.
+p32_cdr_ac(t,j,ac)$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planing_horizon/5)
+= pm_carbon_density_ac(t,j,ac,"vegc") - pm_carbon_density_ac(t,j,ac-1,"vegc");
+
 * Regrowth of natural vegetation (natural succession) is modelled by shifting age-classes according to time step length.
 s32_shift = (5/5)$(ord(t)=1);
 s32_shift = (m_timestep_length/5)$(ord(t)>1);

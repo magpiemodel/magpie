@@ -1,5 +1,6 @@
 scalars
  s32_shift number of 5-year age-classes corresponding to current time step length
+ p32_max_aff_area                        Maximum global afforestation area that is greater or equal the exogenous policy target (mio. ha)
 ;
 
 parameters
@@ -46,13 +47,14 @@ parameters
  im_carbon_fraction         Carbon fraction for conversion of biomass to dry matter (1)
  im_root_to_shoot_ratio(hvarea_timber)  Root to shoot ratio (1)
  pm_volumetric_conversion(kforestry) Volumetric Conversion parameter for timber (1)
+ p32_cdr_ac(t,j,ac)						 Non-cumulative CDR from afforestation for each age-class depending on planning horizon (tC per ha)
 ;
 
 positive variables
  vm_cost_fore(i)                                    Forestry costs (Mio USD)
  v32_land(j,type32,ac)                              Forestry land pools (mio. ha)
  vm_landdiff_forestry                               Aggregated difference in forestry land compared to previous timestep (mio. ha)
- vm_cdr_aff(j)                                      Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
+ vm_cdr_aff(j,ac)                                      Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
  v32_cost_harvest(i)                                Cost of timber harvesting (USD per ha)
  v32_cost_recur(i)                                  Recurring forest management costs (USD per ha)
  v32_hvarea_forestry(j,kforestry,ac_sub,mgmt_type)  Area harvested for timber production (mio. ha)
@@ -66,7 +68,7 @@ positive variables
 equations
  q32_cost_total(i)                                total forestry costs constraint (mio. USD)
  q32_land(j)                                      land constraint (mio. ha)
- q32_cdr_aff(j)                                   calculation of CDR from afforestation
+ q32_cdr_aff(j,ac)                                   calculation of CDR from afforestation
  q32_carbon(j,ag_pools)                            forestry carbon stock calculation
  q32_land_diff                                         aggregated difference in forestry land compared to previous timestep (mio. ha)
  q32_max_aff                                      maximum total global afforestation
@@ -88,7 +90,7 @@ parameters
  ov_cost_fore(t,i,type)                                    Forestry costs (Mio USD)
  ov32_land(t,j,type32,ac,type)                             Forestry land pools (mio. ha)
  ov_landdiff_forestry(t,type)                              Aggregated difference in forestry land compared to previous timestep (mio. ha)
- ov_cdr_aff(t,j,type)                                      Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
+ ov_cdr_aff(t,j,ac,type)                                   Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
  ov32_cost_harvest(t,i,type)                               Cost of timber harvesting (USD per ha)
  ov32_cost_recur(t,i,type)                                 Recurring forest management costs (USD per ha)
  ov32_hvarea_forestry(t,j,kforestry,ac_sub,mgmt_type,type) Area harvested for timber production (mio. ha)
@@ -99,7 +101,7 @@ parameters
  ov_prod_cell_forestry(t,j,kforestry,type)                 Production of wood products from plantation forest (mio. m3 per yr)
  oq32_cost_total(t,i,type)                                 total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                                       land constraint (mio. ha)
- oq32_cdr_aff(t,j,type)                                    calculation of CDR from afforestation
+ oq32_cdr_aff(t,j,ac,type)                                 calculation of CDR from afforestation
  oq32_carbon(t,j,ag_pools,type)                            forestry carbon stock calculation
  oq32_land_diff(t,type)                                    aggregated difference in forestry land compared to previous timestep (mio. ha)
  oq32_max_aff(t,type)                                      maximum total global afforestation

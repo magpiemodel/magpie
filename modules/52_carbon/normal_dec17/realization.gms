@@ -28,5 +28,6 @@ $Ifi "%phase%" == "input" $include "./modules/52_carbon/normal_dec17/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/52_carbon/normal_dec17/equations.gms"
 $Ifi "%phase%" == "scaling" $include "./modules/52_carbon/normal_dec17/scaling.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/52_carbon/normal_dec17/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/52_carbon/normal_dec17/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/52_carbon/normal_dec17/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

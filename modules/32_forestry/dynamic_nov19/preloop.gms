@@ -1,3 +1,5 @@
+p32_cdr_ac(t,j,ac) = 0;
+
 pm_time_diff(t) = m_yeardiff(t);
 im_carbon_fraction = 0.5;
 im_root_to_shoot_ratio("forestry") = 0.85;
@@ -76,6 +78,9 @@ p32_land(t,j,type32,ac) = 0;
 * Calculate the remaining exogenous afforestation with respect to the maximum exogenous target over time.
 * `p32_aff_togo` is used to adjust `s32_max_aff_area` in the constraint `q32_max_aff`.
 p32_aff_togo(t) = sum(j, smax(t2, p32_aff_pol(t2,j)) - p32_aff_pol(t,j));
+
+* Adjust the afforestation limit `s32_max_aff_area` upwards, if it is below the exogenous policy target.
+p32_max_aff_area = max(s32_max_aff_area, sum(j, smax(t2, p32_aff_pol(t2,j))) );
 
 ** divide initial forestry area by number of age classes within protect32
 ** since protect32 is TRUE for ord(ac_sub) < p32_rotation_cellular(j) there is one additional junk which is assigned to ac0

@@ -8,12 +8,12 @@
 scalars
   s56_reward_neg_emis reward CDR from all sources (-Inf) or only from afforestation (0) (1) / -Inf /
   s56_limit_ch4_n2o_price upper limit for CH4 and N2O GHG prices (USD05MER per tC) / 1000 /
-  s56_cprice_red_factor reduction factor for CO2 price (-) / 0.5 /
+  s56_cprice_red_factor reduction factor for CO2 price (-) / 1 /
   s56_ghgprice_start start year for ghg price phase in / 2025 /
 ;
 
-$setglobal c56_pollutant_prices  R2M41-SSP2-Budg1300
-$setglobal c56_emis_policy  ssp_nosoil
+$setglobal c56_pollutant_prices  R2M41-SSP2-NPi
+$setglobal c56_emis_policy  redd+_nosoil
 
 table f56_pollutant_prices(t_all,i,pollutants,ghgscen56) GHG certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
 $ondelim
