@@ -122,6 +122,10 @@ sets
 i2(i) = yes;
 j2(j) = yes;
 
+sets
+        c_title defined to include c_title in GDX
+        / %c_title% /
+;
 
 ***TIME STEPS***
 * ATTENTION: check macros m_year and m_yeardiff if you change something
