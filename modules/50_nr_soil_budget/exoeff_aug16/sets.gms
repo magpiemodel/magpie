@@ -17,9 +17,6 @@ neff65_70_starty2010,neff60_60_starty2010,neff55_60_starty2010,
 neff70_75_starty2010,neff75_80_starty2010,neff80_85_starty2010,
 neff75_85_starty2010,neff85_85_starty2010 /
 
-c50_scen_neff(scen_neff50) chosen scenario for scen_neff50
-/ %c50_scen_neff% /
-
 dep_scen50 Scenario for atmospheric deposition
 /history/
 
