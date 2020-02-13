@@ -31,33 +31,27 @@ getInput <- function(gdx,ghg_price=TRUE,biodem=TRUE) {
 #start MAgPIE run
 source("config/default.cfg")
 
-#cfg$force_download <- FALSE
+cfg$force_download <- TRUE
 
 cfg$results_folder <- "output/:title:"
 
-#06 bug pasture production
-#07 bugfix pasture production
-#08 Update from Edna
-#09 bugfix aff
-#10 recalc npi
-#13 final test
+prefix <- "12_"
 
-prefix <- "C13_"
-
-for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
-
-  getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-Base-mag-4/fulldata.gdx"))
+for (ssp in c("SSP1","SSP2","SSP5")) {
+#for (ssp in c("SSP2")) {  
   cfg <- setScenario(cfg,c(ssp,"NPI"))
-  cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$gms$c60_2ndgen_biodem <- "coupling"
-  cfg$title <- paste0(prefix,ssp,"_NPI")
+  # cfg$gms$c56_pollutant_prices <- paste0("R2M41-",ssp,"-NPi")
+  # cfg$gms$c60_2ndgen_biodem <- paste0("R2M41-",ssp,"-NPi")
+
+  #getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/coupled-remind_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
+  
+  cfg$title <- paste0(prefix,ssp,"_NPI_milkIndFull")
+  cfg$gms$s15_milk_share_fadeout_india <- 0
   start_run(cfg,codeCheck=FALSE)
   
-  getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
-  cfg <- setScenario(cfg,c(ssp,"NDC"))
-  cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$gms$c60_2ndgen_biodem <- "coupling"
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg")
+  cfg$title <- paste0(prefix,ssp,"_NPI_milkIndFadeout")
+  cfg$gms$s15_milk_share_fadeout_india <- 1
   start_run(cfg,codeCheck=FALSE)
+  
 }
 

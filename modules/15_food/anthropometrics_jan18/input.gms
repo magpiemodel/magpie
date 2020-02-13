@@ -53,6 +53,10 @@ scalar s15_waste_scen Scenario target for the ratio between food demand and inta
 
 scalar s15_exo_diet Switch for transition towards exogenous diet scenario (1)  / 0 /;
 
+scalar s15_rum_share_fadeout_india_strong 	switch for stronger ruminant fadeout in India (binary) / 1 /;
+
+scalar s15_milk_share_fadeout_india 		switch for milk fadeout in India (binary) / 1 /;
+
 
 table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of heterogeneous products and processes (mio. tDM)
 $ondelim
@@ -128,11 +132,25 @@ $offdelim
 ;
 
 
-table f15_rum_share_fadeout(t_all,ruminantfadeoutscen15) Ruminant share fadeout scenario (1)
+table f15_rum_share_fadeout(t_all,livst_fadeoutscen15) Ruminant share fadeout scenario (1)
 $ondelim
 $include "./modules/15_food/input/f15_ruminant_fadeout.csv"
 $offdelim
 ;
+
+parameter f15_rum_share_fadeout_india(t_all) Ruminant share fadeout scenario for India (1)
+/
+$ondelim
+$include "./modules/15_food/input/f15_ruminant_fadeout_india.csv"
+$offdelim
+/;
+
+parameter f15_milk_share_fadeout_india(t_all) Milk share India fadeout scenario (1)
+/
+$ondelim
+$include "./modules/15_food/input/f15_milk_fadeout_india.csv"
+$offdelim
+/;
 
 
 table f15_bodyheight(t_all,iso,sex,age)   Body height (cm per cap)
