@@ -27,5 +27,3 @@ p35_min_other(t,j) = f35_min_land_stock(t,j,"%c35_ad_policy%","other");
 *initialize parameter
 p35_other(t,j,ac,when) = 0;
 p35_secdforest(t,j,ac,when) = 0;
-
-vm_prod_cell_natveg.fx(j,kforestry) = 0;

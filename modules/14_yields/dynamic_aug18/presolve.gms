@@ -1,0 +1,41 @@
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
+*** |  Contact: magpie@pik-potsdam.de
+
+*** EOF presolve.gms ***
+
+* calculate carbon density
+
+*** YIELDS
+
+
+pm_growing_stock(t,j,ac_sub,kforestry,"forestry") =
+    (
+      pm_carbon_density_ac_forestry(t,j,ac_sub,"vegc") * i14_root_to_shoot_ratio("forestry")
+      /
+      (sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"plantations",ac_sub))
+        * i14_carbon_fraction
+        * (p14_volumetric_conversion(kforestry))
+      )
+     )
+     / m_yeardiff(t)
+    ;
+
+
+pm_growing_stock(t,j,ac_sub,kforestry,land_natveg) =
+    (
+      pm_carbon_density_ac(t,j,ac_sub,"vegc") * i14_root_to_shoot_ratio(land_natveg)
+      /
+      (sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"natveg",ac_sub))
+        * i14_carbon_fraction
+        * (p14_volumetric_conversion(kforestry))
+      )
+     )
+     / m_yeardiff(t)
+    ;
+
+**** Hard constraint to always have a positive number in pm_growing_stock
+pm_growing_stock(t,j,ac_sub,kforestry,land_natveg) = pm_growing_stock(t,j,ac_sub,kforestry,land_natveg)$(pm_growing_stock(t,j,ac_sub,kforestry,land_natveg)>0)+1$(pm_growing_stock(t,j,ac_sub,kforestry,land_natveg)=0);

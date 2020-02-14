@@ -60,16 +60,3 @@ $ondelim
 $include "./modules/32_forestry/input/f32_forestry_management.csv"
 $offdelim
 ;
-
-table fm_ipcc_bce(clcl,forest_type,ac_sub) npi+indc afforestation policy (Mha new forest wrt to 2010)
-$ondelim
-$include "./modules/32_forestry/input/f32_ipcc_bce.cs3"
-$offdelim
-;
-
-$if "%c32_bef%" == "ipccBEF" fm_ipcc_bce(clcl,forest_type,ac_sub) = fm_ipcc_bce(clcl,forest_type,ac_sub);
-$if "%c32_bef%" == "BEF0p25" fm_ipcc_bce(clcl,forest_type,ac_sub) = 0.25;
-$if "%c32_bef%" == "BEF0p5" fm_ipcc_bce(clcl,forest_type,ac_sub) = 0.5;
-$if "%c32_bef%" == "BEF0p75" fm_ipcc_bce(clcl,forest_type,ac_sub) = 0.75;
-$if "%c32_bef%" == "BEF1p0" fm_ipcc_bce(clcl,forest_type,ac_sub) = 1;
-$if "%c32_bef%" == "BEF2p0" fm_ipcc_bce(clcl,forest_type,ac_sub) = 2;

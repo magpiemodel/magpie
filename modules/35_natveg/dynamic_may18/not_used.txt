@@ -6,9 +6,3 @@
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
 fm_harvest_cost_ha, input, not used
-pm_climate_class, input, not used
-pm_time_diff, parameter, not used
-im_carbon_fraction, input, not used
-im_root_to_shoot_ratio, input, not used
-pm_volumetric_conversion, input, not used
-fm_ipcc_bce, input, not used

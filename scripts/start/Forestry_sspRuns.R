@@ -47,7 +47,7 @@ cfg$gms$s56_reward_neg_emis <- -Inf
 #######################################
 
 
-flag_run <- paste0("-dummyRegression-R026")
+flag_run <- paste0("-TimberModule-R027")
 
 cfg$gms$s32_recurring_cost_multiplier <- 10
 
@@ -57,17 +57,7 @@ cfg$gms$c32_rotation_harvest = "def"
 ## Rotation length for establishment
 cfg$gms$c32_rotation_estb <- cfg$gms$c32_rotation_harvest
 
-if(cfg$gms$c32_rotation_harvest == "bio"){
-	rot_flag = "Biological"
-} else if(cfg$gms$c32_rotation_harvest == "high"){
-	rot_flag = "Extended"
-} else if(cfg$gms$c32_rotation_harvest == "def"){
-	rot_flag = "Normal"
-} else if(cfg$gms$c32_rotation_harvest == "low"){
-	rot_flag = "Reduced"
-} else if(cfg$gms$c32_rotation_harvest == "min"){
-	rot_flag = "Very Short"
-}
+rot_flag = "Normal"
 
 ## Loop over climate impacts
 

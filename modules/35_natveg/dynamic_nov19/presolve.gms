@@ -117,32 +117,6 @@ v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
 m_boundfix(v35_other,(j,ac_sub),l,10e-5);
 
 * calculate carbon density
-
-p35_yield_natveg(t,j,ac_sub,kforestry) =
-    (
-      pm_carbon_density_ac(t,j,ac_sub,"vegc") * im_root_to_shoot_ratio("secdforest")
-      /
-      (sum(clcl, pm_climate_class(j,clcl) * fm_ipcc_bce(clcl,"natveg",ac_sub))
-        * im_carbon_fraction
-        * (pm_volumetric_conversion(kforestry)/1000)
-      )
-     )
-     / pm_time_diff(t)
-    ;
-
-p35_yield_primforest(t,j,kforestry) =
-    (
-      pm_carbon_density_ac(t,j,"acx","vegc") * im_root_to_shoot_ratio("primforest")
-      /
-      (sum(clcl, pm_climate_class(j,clcl) * fm_ipcc_bce(clcl,"natveg","acx"))
-        * im_carbon_fraction
-        * (pm_volumetric_conversion(kforestry)/1000)
-      )
-     )
-     / pm_time_diff(t)
-    ;
-
-* calculate carbon density
 * highest carbon density 1st time step to account for reshuffling
 if((ord(t) = 1),
 	p35_carbon_density_secdforest(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,"acx",ag_pools);

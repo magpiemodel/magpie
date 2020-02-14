@@ -7,7 +7,7 @@
 ** BEGIN INDC **
 
 *** Fix high production systems to 0
-v32_hvarea_forestry.fx(j,kforestry,ac_sub,"high") = 0 ;
+*vm_hvarea_forestry.fx(j,kforestry,ac_sub,"high") = 0 ;
 
 ****************************************
 *** ADD DYNAMIC SET HERE BASED ON AC ***
@@ -97,21 +97,6 @@ p32_dampen_final(ac_sub,j) = p32_dampen_pre(ac_sub,j)$(p32_dampen_pre(ac_sub,j) 
 *p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac(t,j,ac,"vegc") * p32_management_factor(j,"normal") * p32_dampen_final(ac,j);
 p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac_forestry(t,j,ac,"vegc");
 
-
-*** YIELDS
-
-p32_yield_forestry_ac(t,j,ac_sub,mgmt_type,kforestry) =
-    (
-      pm_carbon_density_ac_forestry(t,j,ac_sub,"vegc") * im_root_to_shoot_ratio("forestry")
-      /
-      (sum(clcl, pm_climate_class(j,clcl) * fm_ipcc_bce(clcl,"plantations",ac_sub))
-        * im_carbon_fraction
-        * (pm_volumetric_conversion(kforestry)/1000)
-      )
-     )
-     / pm_time_diff(t)
-    ;
-
 ** Future demand relevant in current time step depending on rotation length
 ***** Card is used here to exclude y1965 to y1995 when calculating rotation length calculations for past
 *pm_rotation_reg(t,j) = ord(t) + ceil(pm_rot_length_estb(t,j)/5) + card(t_past_ff);
@@ -119,7 +104,7 @@ pm_rotation_reg(t,i) = ord(t) + ceil((sum(cell(i,j),pcm_land(j,"forestry")*pm_ro
 *pm_rotation_reg(t,i) = ord(t) + ceil(30/5) + card(t_past_ff);
 
 *pc32_yield_forestry_future(j) = sum(ac$(ac.off = p32_rotation_cellular(j)+1), p32_yield_forestry_ac(t,j,ac));
-pc32_yield_forestry_future(j,kforestry) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), p32_yield_forestry_ac(t,j,ac_sub,"normal",kforestry));
+pc32_yield_forestry_future(j,kforestry) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), pm_growing_stock(t,j,ac_sub,kforestry,"forestry"));
 
 pc32_timestep = ord(t);
 *** EOF presolve.gms ***

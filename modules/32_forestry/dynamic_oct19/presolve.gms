@@ -5,6 +5,9 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+** Fixing variables from dynamic Forestry
+vm_hvarea_forestry.fx(j,kforestry,ac_sub) = 0 ;
+
 ** BEGIN INDC **
 
 * Limit demand for prescribed NPI/NDC afforestation in `p32_aff_pol` if not enough suitable area (`p32_aff_pot`) for afforestation is available.
@@ -21,7 +24,9 @@
 
 *' @code
 *' Wood demand is set to zero because forestry is not modeled in this realization.
-vm_supply.fx(i2,kforestry) = 0;
+*vm_supply.fx(i2,kforestry) = 0;
+vm_prod_future_reg_ff.fx(i,kforestry) = 0;
+vm_cost_trade_forestry_ff.fx(i2) = 0;
 
 *' Certain areas (e.g. the boreal zone) are excluded from endogenous afforestation. DON'T USE TYPE32 SET HERE
 v32_land.lo(j,"aff","ac0") = 0;

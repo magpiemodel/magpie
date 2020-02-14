@@ -23,7 +23,6 @@ q32_cost_total(i2) .. vm_cost_fore(i2) =e=
 								   + v32_cost_recur(i2)
 								   + v32_cost_establishment(i2)
                    + v32_high_mgmt_prod_cost(i2)
-*                   + sum((cell(i2,j2),kforestry), vm_prod_heaven_timber(i2,kforestry) * 10e9)
 								   ;
 
 *****C-PRICE INDUCED AFFORESTATION
@@ -101,14 +100,14 @@ q32_cost_establishment(i2)..
             (sum((cell(i2,j2),type32), v32_land(j2,type32,"ac0") * c32_reESTBcost)
             +
               (
-*             sum((ct,kforestry), vm_prod_future_reg_ff(i2,kforestry) * c32_harvesting_cost/((1+pm_interest(i2))**30))
-*              +
+             sum((ct,kforestry), vm_prod_future_reg_ff(i2,kforestry) * c32_harvesting_cost)
+              +
               sum((cell(i2,j2),ct,kforestry), fm_distance(j2) * fm_transport_costs(kforestry)) * sum(kforestry,vm_prod_future_reg_ff(i2,kforestry))
               +
-              sum(ct,vm_cost_trade_forestry_ff(i2)/((1+pm_interest(i2))**30))
+              sum(ct,vm_cost_trade_forestry_ff(i2))
+              )/((1+pm_interest(i2))**sum(ct,(pm_rotation_reg(ct,i2))))
 ************ ((1+pm_interest(i2))**p32_rot_length(ct,i2)) to calculate present value of future costs
               )
-            )
             * (pm_interest(i2)/(1+pm_interest(i2)))
 *************************** (pm_interest(i2)/(1+pm_interest(i2))) to annuituze the values. Similar to averaging over time
 						;
@@ -122,7 +121,7 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 q32_cost_harvest(i2)..
                     v32_cost_harvest(i2)
                     =e=
-                    sum((cell(i2,j2), kforestry, ac_sub), v32_hvarea_forestry(j2,kforestry,ac_sub,"normal")) * fm_harvest_cost_ha(i2)
+                    sum((cell(i2,j2), kforestry, ac_sub), vm_hvarea_forestry(j2,kforestry,ac_sub)) * fm_harvest_cost_ha(i2)
                     ;
 
 *********************************************************
@@ -136,23 +135,9 @@ q32_prod_future(i2,kforestry) ..
 *********************************************************
 *** harvested AREA
 q32_hvarea_forestry(j2,ac_sub) ..
-                          sum((kforestry,mgmt_type), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type))
+                          sum(kforestry, vm_hvarea_forestry(j2,kforestry,ac_sub))
                           =e=
                           (pc32_land(j2,"plant",ac_sub) - v32_land(j2,"plant",ac_sub));
 
 *********************************************************
-***PRODUCTION
-q32_prod_forestry(j2,kforestry)..
-                          vm_prod_cell_forestry(j2,kforestry)
-                          =e=
-                         sum((ac_sub,ct,mgmt_type), v32_hvarea_forestry(j2,kforestry,ac_sub,mgmt_type) * p32_yield_forestry_ac(ct,j2,ac_sub,mgmt_type,kforestry))
-                         ;
-
-*********************************************************
-**** Parametrised TAU for plantations
- q32_high_mgmt_prod_cost(i2) ..
-                              v32_high_mgmt_prod_cost(i2)
-                              =e=
-                              sum((cell(i2,j2),ct,kforestry,ac_sub), v32_hvarea_forestry(j2,kforestry,ac_sub,"high") * p32_yield_forestry_ac(ct,j2,ac_sub,"high",kforestry)) * 10e4
-                              ;
 *** EOF equations.gms ***

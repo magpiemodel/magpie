@@ -5,3 +5,16 @@
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
 pm_land_start,input,not needed
+pm_interest, input, not needed
+pm_interest_dev, parameter, not used
+pm_growing_stock, parameter, not used
+pm_production_ratio_ext, input, not used
+pm_rotation_reg, input, not used
+pcm_production_ratio_future, input, not used
+fm_harvest_cost_ha, input,not used
+pm_rot_length_estb, parameter, not used
+fm_distance, input, not used
+fm_transport_costs, input, not used
+fm_climate_class, input, not used
+pm_carbon_density_ac_forestry, input, not used
+fm_growth_par_image_lpjml, input, not used

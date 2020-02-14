@@ -1,75 +1,72 @@
 p32_cdr_ac(t,j,ac) = 0;
 
-pm_time_diff(t) = m_yeardiff(t);
-im_carbon_fraction = 0.5;
-im_root_to_shoot_ratio("forestry") = 0.85;
-pm_volumetric_conversion("wood") = 632.5;
-pm_volumetric_conversion("woodfuel") = 307.1;
-
+** This is same calculation as in carbon module. As these numbers don't exist yet due to
+** carbon module appearing below forestry module, we keep this double calculation for now.
 p32_carbon_density_ac_forestry(t_all,j,ac) = m_growth_vegc(0,fm_carbon_density(t_all,j,"other","vegc"),sum(clcl,fm_climate_class(j,clcl)*fm_growth_par_image_lpjml(clcl,"k","plantations")),sum(clcl,fm_climate_class(j,clcl)*fm_growth_par_image_lpjml(clcl,"m","plantations")),(ord(ac)-1));
+
+** Calculatin the marginal of carbon density i.e. change in carbon density over two time steps
+** The carbon densities are tC/ha/year so we don't have to divide by timestep length.
 p32_carbon_density_ac_marg(t_all,j,ac_sub) = p32_carbon_density_ac_forestry(t_all,j,ac_sub) - p32_carbon_density_ac_forestry(t_all,j,ac_sub-1);
 
+** Calculating Instantaneous Growth Rates (IGR). This is a proxy number which can be compared against
+** interest rate in the economy to make investment decisions in plantations (i.e. to keep it growing or to harvest it).
+** This parameter is then used to calculate rotation lengths.
 p32_IGR(t_all,j,ac_sub) = (p32_carbon_density_ac_marg(t_all,j,ac_sub)/p32_carbon_density_ac_forestry(t_all,j,ac_sub))$(p32_carbon_density_ac_forestry(t_all,j,ac_sub)>0) + 1$(p32_carbon_density_ac_forestry(t_all,j,ac_sub)<0.0001);
 
+** IGR values for first age class ("ac0") is provided the same value as "ac5" to
+** avoid a sudden drop in rotation lengths in y2000 from y1995.
 p32_IGR("y1995",j,"ac0") = p32_IGR("y1995",j,"ac5");
-*p32_interest(t_all,i,scen12) = fm_interest(t_all,scen12);
-p32_interest(t_all,i,scen12) = pm_interest_dev(t_all,i);
-p32_rot_flg(t_all,j,ac,scen12) = 1$((p32_IGR(t_all,j,ac) - sum(cell(i,j),p32_interest(t_all,i,scen12)))>0) + 0$((p32_IGR(t_all,j,ac) - sum(cell(i,j),p32_interest(t_all,i,scen12)))>0);
-p32_rot_final(t_all,j,scen12) = sum(ac,p32_rot_flg(t_all,j,ac,scen12)) * 5;
-p32_rot_final(t_all,j,scen12)$(p32_rot_final(t_all,j,scen12)>90) = 90;
-p32_rot_final(t_future,j,scen12) = p32_rot_final("y2100",j,scen12);
 
-p32_rot_corrected(t_all,j,rotation_type) = sum(int_to_rl(rotation_type,scen12),p32_rot_final(t_all,j,scen12));
+** For each cluster in MAgPIE ("j") we calculate how long the prevailing interest rates stay lower than the IGR.
+** As long as the prevailing interest rates are lower than IGR, plantations shall be kept standing.
+** As long as the prevailing interest rate becomes higher than IGR, it is assumed that the forest owner would rather
+** keep his/her investment in bank rather than in keeping the forest standing.
+** The easiest way to do this calculation is to count a value of 1 for IGR>interest rate and a value of 0 for IGR<interest rate.
+p32_rot_flg(t_all,j,ac) = 1$((p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)))>0) + 0$((p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)))>0);
 
-*p32_rot_length(t_all,j) = p32_rot_final("y1995",j);
+** From the above calculation, now its easier to count how many age-classes can be sustained before IGR falls below interest rate.
+** Then we just multiply the valid age-classes by 5 (because MAgPIE age classes are in 5 year steps) to get the absolute rotation length (in years)
+p32_rot_final(t_all,j) = sum(ac,p32_rot_flg(t_all,j,ac)) * 5;
 
-p32_rot_length(t_all,j) = p32_rot_corrected(t_all,j,"%c32_rotation_harvest%");
-p32_rot_length_estb(t_all,j) = p32_rot_corrected(t_all,j,"%c32_rotation_estb%");
-$ontext
-p32_rot_length(t_all,j) = p32_rot_corrected("y1995",j,"%c32_rotation_harvest%");
-p32_rot_length_estb(t_all,j) = p32_rot_corrected("y1995",j,"%c32_rotation_estb%");
-$offtext
+** We provide a upper limit of 90 years for commercial plantations.
+p32_rot_final(t_all,j)$(p32_rot_final(t_all,j)>90) = 90;
 
-*p32_rot_length(t_all,j) = f32_rot_length_cellular(t_all,j);
-*p32_rot_length_estb(t_all,j) = f32_rot_length_cellular(t_all,j);
-*p32_rot_length_estb(t_all,i) = 30;
-*p32_rot_length_estb(t_all,j) = p32_rot_length(t_all,j);
+** Holding rotation lengths constant after the end of this century.
+p32_rot_final(t_future,j) = p32_rot_final("y2100",j);
 
-pc32_rot_length(t_all,j) = p32_rot_length(t_all,j);
-pm_rot_length_estb(t_all,j) = p32_rot_length_estb(t_all,j);
+** Rotation used for harvesting decision
+p32_rot_length(t_all,j) = p32_rot_final(t_all,j);
 
-** rotation length in 5 year time steps
+** Rotation used for establishment decision - Same as harvesting rotation for now.
+** This is declared as interface because this is also need in trade module.
+pm_rot_length_estb(t_all,j) = p32_rot_length(t_all,j);
+
+
+** Earlier we converted rotation lengths to absolute numbers, now we make the Conversion
+** back to rotation length in age-classes.
 p32_rotation_cellular(t_all,j) = ceil(p32_rot_length(t_all,j)/5);
-p32_rotation_cellular_estb(t_all,j) = ceil(p32_rot_length_estb(t_all,j)/5);
+p32_rotation_cellular_estb(t_all,j) = ceil(pm_rot_length_estb(t_all,j)/5);
 
 * Shift rotations. E.g. rotations harveted in 2050 should be harvested with the rotations using which they were establsihed.
 * For 2050 plantation establsihed in 2020 with 30y rotaions shall be harvested according to 30 yr (for example)
-*loop((t_all,ac,j),
-*p32_rotation_cellular_estb_update(t_all,j)$(ord(t_all)-ac.off>0) = p32_rotation_cellular_estb(t_all-ac.off,j);
-*);
 
 loop(j,
   loop(ac,
-      p32_rotation_cellular_estb_update(t,j)$(ord(t)-ac.off>0) = p32_rotation_cellular_estb(t-ac.off,j);
-    );
-  );
-
-loop(j,
-  loop(ac,
-      p32_rotation_cellular_estb_update(t,j)$(ord(t)-(ord(ac)-1-(pm_time_diff(t)/5))>0 AND pm_time_diff(t)>5) = p32_rotation_cellular_estb(t-(ord(ac)-1-(pm_time_diff(t)/5)),j);
+      p32_rotation_cellular_harvesting(t,j)$(ord(t)-ac.off>0) = p32_rotation_cellular_estb(t-ac.off,j);
+      p32_rotation_cellular_harvesting(t,j)$(ord(t)-(ord(ac)-1-(m_yeardiff(t)/5))>0 AND m_yeardiff(t)>5) = p32_rotation_cellular_estb(t-(ord(ac)-1-(m_yeardiff(t)/5)),j);
     );
   );
 
 ** Define protect and harvest setting
 protect32(t,j,ac_sub) = no;
 *protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular(t,j));
-protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular_estb_update(t,j));
+protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular_harvesting(t,j));
 
 harvest32(t,j,ac_sub) = no;
 *harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular(t,j));
-harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular_estb_update(t,j));
+harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular_harvesting(t,j));
 
-display p32_rotation_cellular_estb,p32_rotation_cellular_estb_update;
+display p32_rotation_cellular_estb,p32_rotation_cellular_harvesting;
 
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
@@ -103,12 +100,6 @@ pm_production_ratio_ext(t_all,i) = f32_production_ratio("y1995",i);
 pm_production_ratio_ext(t_ext,i) = f32_production_ratio("y2100",i);
 pm_production_ratio_ext(t_all,i) = f32_production_ratio(t_all,i);
 
-*** Hardcoding bugfix
-*f32_forestry_management("USA") = 15;
-*f32_forestry_management("IND") = 15;
-*f32_forestry_management("EUR") = 12;
-*f32_forestry_management("JPN") = 7;
-*f32_forestry_management("NEU") = 7;
 f32_forestry_management("USA","plantations") = 7;
 p32_management_factor(j,mgmt_type) = sum(cell(i,j),ceil(f32_forestry_management(i,"plantations")/f32_forestry_management(i,"natveg")));
 p32_management_factor(j,"high") = p32_management_factor(j,"normal") * 3;

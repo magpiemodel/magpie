@@ -51,7 +51,6 @@ positive variables
   v35_secdforest_reduction(j,land35) Secdforest reduction compared to previous timestep (mio. ha)
   v35_primforest_reduction(j)        Primforest reduction compared to previous timestep (mio. ha)
   vm_cost_natveg(i)                           Regional natveg timber production costs (mio. USD)
-  vm_prod_cell_natveg(j,kforestry)            Production of wood products from natural forests (mio. m3 per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -64,7 +63,6 @@ parameters
  ov35_secdforest_reduction(t,j,land35,type) Secdforest reduction compared to previous timestep (mio. ha)
  ov35_primforest_reduction(t,j,type)        Primforest reduction compared to previous timestep (mio. ha)
  ov_cost_natveg(t,i,type)                   Regional natveg timber production costs (mio. USD)
- ov_prod_cell_natveg(t,j,kforestry,type)    Production of wood products from natural forests (mio. m3 per yr)
  oq35_land_secdforest(t,j,type)             Secdforest land pool calculation (mio. ha)
  oq35_land_other(t,j,type)                  Other land pool calculation (mio. ha)
  oq35_carbon_primforest(t,j,ag_pools,type)  Primforest above ground carbon stock calculation (mio tC)

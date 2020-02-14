@@ -221,6 +221,7 @@ $setglobal bioenergy  1stgen_priced_dec18
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 $setglobal disagg_lvst  foragebased_aug18
+$setglobal timber  biomass_feb20
 
 $setglobal optimization  nlp_apr17
 

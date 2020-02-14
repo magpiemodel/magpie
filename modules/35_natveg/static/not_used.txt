@@ -9,9 +9,3 @@ pcm_carbon_stock, input,not used
 pm_carbon_density_ac, input,not used
 pm_land_start, input,not used
 fm_harvest_cost_ha, input, not used
-pm_climate_class, input, not used
-pm_time_diff, parameter, not used
-im_carbon_fraction, input, not used
-im_root_to_shoot_ratio, input, not used
-pm_volumetric_conversion, input, not used
-fm_ipcc_bce, input, not used

@@ -74,84 +74,44 @@
 
 *******************************************************************************
 ** Natveg related production costs
-q35_cost_total(i2) .. vm_cost_natveg(i2) =e=
-                     v35_cost_harvest(i2)
-*								   + sum((cell(i2,j2),kforestry), v35_prod_external(j2,kforestry) * 99999)
-								   ;
 *******************************************************************************
 **** Cost of harvesting from NatVeg
-q35_cost_harvest(i2)..
-                    v35_cost_harvest(i2)
+q35_cost_total(i2)..
+                    vm_cost_natveg(i2)
                     =e=
                     sum((cell(i2,j2), kforestry),
-                    sum(ac_sub, v35_hvarea_secdforest(j2,kforestry,ac_sub))
-                  + sum(ac_sub, v35_hvarea_other(j2,"woodfuel",ac_sub))
-                  + v35_hvarea_primforest(j2,kforestry)) * (fm_harvest_cost_ha(i2) * 1.5)
+                    sum(ac_sub, vm_hvarea_secdforest(j2,ac_sub,kforestry))
+                  + sum(ac_sub, vm_hvarea_other(j2, ac_sub,"woodfuel"))
+                  + vm_hvarea_primforest(j2, kforestry)) * (fm_harvest_cost_ha(i2) * 1.5)
                     ;
 
 *******************************************************************************
 *******************************************************************************
 **** Production equations from NatVeg
 
-**** From Secondary forest
-$ontext
-q35_prod_natveg(j2,kforestry)..
-                         vm_prod_cell_natveg(j2,kforestry)
-                          =e=
-						             sum((ac_sub,ct), v35_hvarea_secdforest(j2,kforestry,ac_sub) * p35_yield_natveg(ct,j2,ac_sub))
-                         +
-                         v35_hvarea_primforest(j2,kforestry) * sum(ct, p35_yield_primforest(ct,j2))
-                         +
-                         sum(ac_sub,v35_hvarea_other(j2,"woodfuel",ac_sub) * sum(ct, p35_yield_natveg(ct,j2,ac_sub)))
-                         ;
-$offtext
-q35_prod_secdforest(j2,kforestry)..
-                         v35_prod(j2,"secdforest",kforestry)
-                          =e=
-						             sum((ac_sub,ct), v35_hvarea_secdforest(j2,kforestry,ac_sub) * p35_yield_natveg(ct,j2,ac_sub,kforestry));
+q35_secdforest_change(j2,ac_sub)..
+                           sum(kforestry,vm_secdforest_change(j2,kforestry,ac_sub))
+                           =e=
+                           (pc35_secdforest(j2,ac_sub) - v35_secdforest(j2,ac_sub));
 
 **** From Primary forest
-q35_prod_primforest(j2,kforestry)..
-                           v35_prod(j2,"primforest",kforestry)
+q35_primforest_change(j2)..
+                           sum(kforestry,vm_primforest_change(j2,kforestry))
                            =e=
-                           v35_hvarea_primforest(j2,kforestry) * sum(ct, p35_yield_primforest(ct,j2,kforestry));
+                           (pcm_land(j2,"primforest") - vm_land(j2,"primforest"));
+
 
 **** From other land (only woodfuel)
-q35_prod_other(j2)..
-                          v35_prod(j2,"other","woodfuel")
-                          =e=
-                          sum(ac_sub,v35_hvarea_other(j2,"woodfuel",ac_sub) * sum(ct, p35_yield_natveg(ct,j2,ac_sub,"woodfuel")))
-                          ;
-
-*******************************************************************************
-*******************************************************************************
-**** Harvested area calculations
-
-q35_hvarea_secdforest(j2,ac_sub)..
-                          sum(kforestry,v35_hvarea_secdforest(j2,kforestry,ac_sub))
-                          =e=
-                          (pc35_secdforest(j2,ac_sub) - v35_secdforest(j2,ac_sub));
-
-q35_hvarea_primforest(j2)..
-                          sum(kforestry,v35_hvarea_primforest(j2,kforestry))
-                          =e=
-                          (pcm_land(j2,"primforest") - vm_land(j2,"primforest"));
-
-q35_hvarea_other(j2,ac_sub)..
-                          sum(kforestry,v35_hvarea_other(j2,kforestry,ac_sub))
+q35_other_change(j2,ac_sub)..
+                          sum(kforestry,vm_other_change(j2,kforestry,ac_sub))
                           =e=
                           (pc35_other(j2,ac_sub)  - v35_other(j2,ac_sub));
 
-********** NatVeg production of timber
-q35_prod_cell_natveg(j2,kforestry)..
-                          vm_prod_cell_natveg(j2,kforestry)
-                          =e=
-                          sum(land_natveg,v35_prod(j2,land_natveg,kforestry))
-                          ;
+*******************************************************************************
 
 q35_secdforest_conversion(j2)..
                           v35_secdforest(j2,"ac0")
                           =e=
-                          sum((kforestry,ac_sub),v35_hvarea_secdforest(j2,kforestry,ac_sub))
-                        + sum(kforestry,v35_hvarea_primforest(j2,kforestry))
+                          sum((kforestry,ac_sub),vm_secdforest_change(j2,kforestry,ac_sub))
+                        + sum(kforestry,vm_primforest_change(j2,kforestry))
                           ;

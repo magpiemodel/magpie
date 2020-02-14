@@ -4,4 +4,3 @@
 # |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
-fm_harvest_cost_ha, input,not used

@@ -24,6 +24,7 @@ pm_carbon_density_ac(t,j,ac,"vegc") = m_growth_vegc(pc52_carbon_density_start(t,
 pm_carbon_density_ac_forestry(t,j,ac,"vegc") = m_growth_vegc(pc52_carbon_density_start(t,j,"vegc"),fm_carbon_density(t,j,"other","vegc"),sum(clcl,pm_climate_class(j,clcl)*(f52_growth_par(clcl,"k")*5)),sum(clcl,pm_climate_class(j,clcl)*(f52_growth_par(clcl,"m")+2)),(ord(ac)-1));
 $offtext
 
+***** MOVE VEGC TO PRELOOP IN FORESTRY AND NATVEG
 pm_carbon_density_ac(t,j,ac,"vegc") = m_growth_vegc(pc52_carbon_density_start(t,j,"vegc"),fm_carbon_density(t,j,"other","vegc"),sum(clcl,pm_climate_class(j,clcl)*fm_growth_par_image_lpjml(clcl,"k","natveg")),sum(clcl,pm_climate_class(j,clcl)*fm_growth_par_image_lpjml(clcl,"m","natveg")),(ord(ac)-1));
 
 pm_carbon_density_ac_forestry(t,j,ac,"vegc") = m_growth_vegc(pc52_carbon_density_start(t,j,"vegc"),fm_carbon_density(t,j,"other","vegc"),sum(clcl,pm_climate_class(j,clcl)*fm_growth_par_image_lpjml(clcl,"k","plantations")),sum(clcl,pm_climate_class(j,clcl)*fm_growth_par_image_lpjml(clcl,"m","plantations")),(ord(ac)-1));
