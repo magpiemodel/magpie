@@ -42,7 +42,7 @@ cfg$results_folder <- "output/:title:"
 #10 recalc npi
 #13 final test
 
-prefix <- "C13_"
+prefix <- "C14_"
 
 for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
 
@@ -57,7 +57,7 @@ for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
   cfg <- setScenario(cfg,c(ssp,"NDC"))
   cfg$gms$c56_pollutant_prices <- "coupling"
   cfg$gms$c60_2ndgen_biodem <- "coupling"
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg")
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900_plantations")
   start_run(cfg,codeCheck=FALSE)
 }
 
