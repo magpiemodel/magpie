@@ -65,7 +65,7 @@ cfg <- setScenario(cfg, "nocc")
 
 cfg$gms$s35_selective_logging_flag = 1.00 ## Clear cut is 1.0
 
-for(ssp in c("SSP2","SSP2","SSP3","SSP4","SSP5")){
+for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
 	cfg <- setScenario(cfg,c(ssp,"NPI"))
 
 	cfg$title<- paste0(ssp,"-",paste0(rot_flag," rotation"),"-",flag_run)
