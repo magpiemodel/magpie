@@ -22,7 +22,6 @@ q32_cost_total(i2) .. vm_cost_fore(i2) =e=
                      v32_cost_harvest(i2)
 								   + v32_cost_recur(i2)
 								   + v32_cost_establishment(i2)
-                   + v32_high_mgmt_prod_cost(i2)
 								   ;
 
 *****C-PRICE INDUCED AFFORESTATION
@@ -57,7 +56,7 @@ v32_land(j2,"aff","ac0") * sum(ct, p32_cdr_ac(ct,j2,ac));
 
 *****Carbon stocks**************************************************************
 *' Forestry above ground carbon stocks are calculated as the product of forestry land (`v32_land`) and the area
-*' weighted mean of carbon density for carbon pools (`p32_carbon_density`).
+*' weighted mean of carbon density for carbon pools (`p32_carbon_density_ac`).
 
  q32_carbon(j2,ag_pools)  .. vm_carbon_stock(j2,"forestry",ag_pools) =e=
                          sum((type32,ac), v32_land(j2,type32,ac)*
@@ -75,11 +74,14 @@ v32_land(j2,"aff","ac0") * sum(ct, p32_cdr_ac(ct,j2,ac));
  q32_land_reduction(j2,type32,ac) ..
  	v32_land_reduction(j2,type32,ac) =g= pc32_land(j2,type32,ac) - v32_land(j2,type32,ac);
 
-**--------------------------------------------------------------------
+*------------------------------------------------------------------------------*
 
-*****FORESTRY SECTOR
+*----------------------------------------------------
+****** Forestry sector for prodcution purposes ******
+*----------------------------------------------------
 
-***COSTS
+**** Cost calculations
+*---------------------
 
 $ontext
 re-establishment costs in t0
@@ -91,8 +93,10 @@ PV of establishment decision cost
 PV * annuity factor * time step length
 $offtext
 
-*' Cost of new plantations establishment `v32_cost_establishment` calculated as the product of forestry land (`v32_land`) and the area
-*' weighted mean of carbon density for carbon pools (`p32_carbon_density`).
+*' Cost of new plantations establishment `v32_cost_establishment` is the investment
+*' made in setting up new plantations but also accounts for the expected value of
+*' future transport costs and harvesting costs as well as trade costs for timber.
+*' This makes sure that the model sticks to reasonable plantation patterns over time.
 
 q32_cost_establishment(i2)..
 						v32_cost_establishment(i2)
@@ -106,38 +110,54 @@ q32_cost_establishment(i2)..
               +
               sum(ct,vm_cost_trade_forestry_ff(i2))
               )/((1+pm_interest(i2))**sum(ct,(pm_rotation_reg(ct,i2))))
-************ ((1+pm_interest(i2))**p32_rot_length(ct,i2)) to calculate present value of future costs
+*************************** ((1+pm_interest(i2))**p32_rot_length(ct,i2)) to calculate present value of future costs
               )
             * (pm_interest(i2)/(1+pm_interest(i2)))
 *************************** (pm_interest(i2)/(1+pm_interest(i2))) to annuituze the values. Similar to averaging over time
 						;
 
 
-**Only protected areas incurring recurring/monitoring costs
+*' Recurring costs are paid for plantations where the trees have to be regularly monitored
+*' and maintained. These costs are only calculated becuase we see active human intervebtion
+*' in commercial plantations. These costs are paid for trees used for timber production or
+*' trees established for afforestation purposes.
+
 q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
                     sum((cell(i2,j2),type32,ac_sub), v32_land(j2,type32,ac_sub)) * f32_fac_req_ha(i2,"recur");
 
-**harvesting costs
+
+*' Harvesting costs are calculated based on area removed for timber production purposes.
+*' These costs are also paid when land expansion happens at the cost of plantations,
+
 q32_cost_harvest(i2)..
                     v32_cost_harvest(i2)
                     =e=
                     sum((cell(i2,j2), kforestry, ac_sub), vm_hvarea_forestry(j2,kforestry,ac_sub)) * fm_harvest_cost_ha(i2)
                     ;
 
-*********************************************************
-***** Establishment
+**** New establishment decision
+*------------------------------
+
+*' New plantations are already established in the optimization step based on a certain
+*' percentage ('pcm_production_ratio_future') of future demand (vm_prod_future_reg_ff)
+*' calculated in the trade module [21_trade] .This is based on the expected future
+*' yield ('pc32_yield_forestry_future') at harvest.
+
 q32_prod_future(i2,kforestry) ..
               sum((cell(i2,j2)), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2,kforestry))
               =g=
               vm_prod_future_reg_ff(i2,kforestry) * pcm_production_ratio_future(i2)
               ;
 
-*********************************************************
-*** harvested AREA
+**** Area harvested
+*------------------
+
+*' Harvested area is the difference between plantation area from precious time
+*' step ('pc32_land') and optimized plantation area from current time step ('v32_land')
+
 q32_hvarea_forestry(j2,ac_sub) ..
                           sum(kforestry, vm_hvarea_forestry(j2,kforestry,ac_sub))
                           =e=
                           (pc32_land(j2,"plant",ac_sub) - v32_land(j2,"plant",ac_sub));
 
-*********************************************************
 *** EOF equations.gms ***

@@ -47,7 +47,7 @@ cfg$gms$s56_reward_neg_emis <- -Inf
 #######################################
 
 
-flag_run <- paste0("-TimberModule-R027")
+flag_run <- paste0("-ProdRatioOK-R028")
 
 cfg$gms$s32_recurring_cost_multiplier <- 10
 
@@ -65,7 +65,7 @@ cfg <- setScenario(cfg, "nocc")
 
 cfg$gms$s35_selective_logging_flag = 1.00 ## Clear cut is 1.0
 
-for(ssp in c("SSP2")){
+for(ssp in c("SSP2","SSP2","SSP3","SSP4","SSP5")){
 	cfg <- setScenario(cfg,c(ssp,"NPI"))
 
 	cfg$title<- paste0(ssp,"-",paste0(rot_flag," rotation"),"-",flag_run)

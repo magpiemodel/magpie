@@ -1,3 +1,9 @@
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
+*** |  Contact: magpie@pik-potsdam.de
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov73_prod_forestry(t,j,kforestry,"marginal")                  = v73_prod_forestry.m(j,kforestry);
@@ -45,4 +51,3 @@
  oq73_prod_other(t,j,ac_sub,"lower")                           = q73_prod_other.lo(j,ac_sub);
  oq73_hvarea_other(t,j,ac_sub,"lower")                         = q73_hvarea_other.lo(j,ac_sub);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
-

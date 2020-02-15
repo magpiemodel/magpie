@@ -7,6 +7,8 @@
 
 *' @description In the dynamic_aug18 realization, the crop yield calculations
 *' are identical as in the above described realization (biocorrect).
+*' Additionally, this realization also calculates the growing stocks in commercial
+*' plantations and natural vegetation using LPJmL Carbon stocks.
 *'
 *' @limitations The exogenous implementation of pasture intensification cannot
 *' capture feedbacks between land scarcity and efforts to improve pasture

@@ -7,9 +7,13 @@
 
 *' @title Timber
 *'
-*' @description WIP
+*' @description This module handles the production of timber using plantations [32_forestry]
+*' and natural vegetation [3_natveg]. TImber can be produced from both commercial plantations
+*' and natural forests. The module feeds 'vm_prod' at cellular level to [17_production] and
+*' [21_trade] modules. This module also calculates the "real" harvested area in natural
+*' forests i.e. 'vm_hvarea_primforest','vm_hvarea_secdforest' and 'vm_hvarea_other'.
 *'
-*' @authors Abhijeet Mishra
+*' @authors Abhijeet Mishra, Florian Humpenöder
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%timber%" == "biomass_feb20" $include "./modules/73_timber/biomass_feb20/realization.gms"

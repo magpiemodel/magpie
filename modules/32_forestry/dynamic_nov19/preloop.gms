@@ -1,10 +1,8 @@
-p32_cdr_ac(t,j,ac) = 0;
-
 ** This is same calculation as in carbon module. As these numbers don't exist yet due to
 ** carbon module appearing below forestry module, we keep this double calculation for now.
 p32_carbon_density_ac_forestry(t_all,j,ac) = m_growth_vegc(0,fm_carbon_density(t_all,j,"other","vegc"),sum(clcl,fm_climate_class(j,clcl)*fm_growth_par_image_lpjml(clcl,"k","plantations")),sum(clcl,fm_climate_class(j,clcl)*fm_growth_par_image_lpjml(clcl,"m","plantations")),(ord(ac)-1));
 
-** Calculatin the marginal of carbon density i.e. change in carbon density over two time steps
+** Calculating the marginal of carbon density i.e. change in carbon density over two time steps
 ** The carbon densities are tC/ha/year so we don't have to divide by timestep length.
 p32_carbon_density_ac_marg(t_all,j,ac_sub) = p32_carbon_density_ac_forestry(t_all,j,ac_sub) - p32_carbon_density_ac_forestry(t_all,j,ac_sub-1);
 
@@ -26,16 +24,13 @@ p32_rot_flg(t_all,j,ac) = 1$((p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_de
 
 ** From the above calculation, now its easier to count how many age-classes can be sustained before IGR falls below interest rate.
 ** Then we just multiply the valid age-classes by 5 (because MAgPIE age classes are in 5 year steps) to get the absolute rotation length (in years)
-p32_rot_final(t_all,j) = sum(ac,p32_rot_flg(t_all,j,ac)) * 5;
+p32_rot_length(t_all,j) = sum(ac,p32_rot_flg(t_all,j,ac)) * 5;
 
 ** We provide a upper limit of 90 years for commercial plantations.
-p32_rot_final(t_all,j)$(p32_rot_final(t_all,j)>90) = 90;
+p32_rot_length(t_all,j)$(p32_rot_length(t_all,j)>90) = 90;
 
 ** Holding rotation lengths constant after the end of this century.
-p32_rot_final(t_future,j) = p32_rot_final("y2100",j);
-
-** Rotation used for harvesting decision
-p32_rot_length(t_all,j) = p32_rot_final(t_all,j);
+p32_rot_length(t_future,j) = p32_rot_length("y2100",j);
 
 ** Rotation used for establishment decision - Same as harvesting rotation for now.
 ** This is declared as interface because this is also need in trade module.
@@ -79,27 +74,26 @@ p32_aff_togo(t) = sum(j, smax(t2, p32_aff_pol(t2,j)) - p32_aff_pol(t,j));
 * Adjust the afforestation limit `s32_max_aff_area` upwards, if it is below the exogenous policy target.
 p32_max_aff_area = max(s32_max_aff_area, sum(j, smax(t2, p32_aff_pol(t2,j))) );
 
+p32_cdr_ac(t,j,ac) = 0;
+
 ** divide initial forestry area by number of age classes within protect32
-** since protect32 is TRUE for ord(ac_sub) < p32_rotation_cellular(j) there is one additional junk which is assigned to ac0
+** since protect32 is TRUE for ord(ac_sub) < p32_rotation_cellular(j) there is
+** one additional junk which is assigned to ac0
 p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular("y1995",j);
-*p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/sum(cell(i,j), ceil(f32_rot_length(i,"init")/5));
 
 p32_land("y1995",j,"plant",ac_sub)$(protect32("y1995",j,ac_sub)) = p32_plant_ini_ac(j);
 p32_land("y1995",j,"plant","ac0") = p32_plant_ini_ac(j);
 
-** initial shifting of age classes
+** Initial shifting of age classes
 p32_land(t,j,"plant",ac)$(ord(ac) > 1) = p32_land(t,j,"plant",ac-1);
-** reset ac0 to zero
+** Reset ac0 to zero
 p32_land("y1995",j,"plant","ac0") = 0;
 
-**************************************************************************************
-f32_production_ratio(t_all,"MEA") = f32_production_ratio("y1995","MEA");
-pm_production_ratio_ext(t_ext,i) = f32_production_ratio("y1995",i);
-pm_production_ratio_ext(t_all,i) = f32_production_ratio("y1995",i);
-
+** Proportion of production coming from plantations
 pm_production_ratio_ext(t_ext,i) = f32_production_ratio("y2100",i);
 pm_production_ratio_ext(t_all,i) = f32_production_ratio(t_all,i);
 
+** Forest management options. Probably deprecated.
 f32_forestry_management("USA","plantations") = 7;
 p32_management_factor(j,mgmt_type) = sum(cell(i,j),ceil(f32_forestry_management(i,"plantations")/f32_forestry_management(i,"natveg")));
 p32_management_factor(j,"high") = p32_management_factor(j,"normal") * 3;

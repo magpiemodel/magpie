@@ -23,11 +23,3 @@ $ondelim
 $include "./modules/35_natveg/input/npi_ndc_ad_aolc_pol.cs3"
 $offdelim
 ;
-
-$ontext
-table f35_ageclass_area(j,ac_poulter) age classes from Poulter et al dataset (Mha)
-$ondelim
-$include "./modules/35_natveg/input/forestageclasses.cs3"
-$offdelim
-;
-$offtext

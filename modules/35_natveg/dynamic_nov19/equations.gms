@@ -39,7 +39,8 @@
 
  q35_min_other(j2) .. vm_land(j2,"other") =g= sum(ct, p35_min_other(ct,j2));
 
-*** Merging NPIs into one
+*' NPI/NDC land protection policies are combined into one based on minimum land stocks.
+
  q35_min_natveg(j2) .. vm_land(j2,"primforest") + vm_land(j2,"secdforest") + vm_land(j2,"other")
                       =n=
                       sum(ct, p35_min_forest(ct,j2)) + sum(ct, p35_min_other(ct,j2));
@@ -73,9 +74,11 @@
  		pcm_land(j2,"primforest") - vm_land(j2,"primforest");
 
 *******************************************************************************
-** Natveg related production costs
-*******************************************************************************
-**** Cost of harvesting from NatVeg
+**** Natveg related equations used for production
+
+*' Harvesting costs are paid everytime natural vegetation is harvested. The "real"
+*' harvested area are received from the timber module [73_timber].
+
 q35_cost_total(i2)..
                     vm_cost_natveg(i2)
                     =e=
@@ -85,29 +88,36 @@ q35_cost_total(i2)..
                   + vm_hvarea_primforest(j2, kforestry)) * (fm_harvest_cost_ha(i2) * 1.5)
                     ;
 
-*******************************************************************************
-*******************************************************************************
-**** Production equations from NatVeg
+
+*' Change in secondary forest compared to previous time step. Helps calculating
+*' production coming out of secondary forests.
 
 q35_secdforest_change(j2,ac_sub)..
                            sum(kforestry,vm_secdforest_change(j2,kforestry,ac_sub))
                            =e=
                            (pc35_secdforest(j2,ac_sub) - v35_secdforest(j2,ac_sub));
 
-**** From Primary forest
+
+*' Change in primary forest compared to previous time step. Helps calculating
+*' production coming out of primary forests.
+
 q35_primforest_change(j2)..
                            sum(kforestry,vm_primforest_change(j2,kforestry))
                            =e=
                            (pcm_land(j2,"primforest") - vm_land(j2,"primforest"));
 
 
-**** From other land (only woodfuel)
+*' Change in other land compared to previous time step. Helps calculating
+*' production of woodfuel coming out of other land.
 q35_other_change(j2,ac_sub)..
                           sum(kforestry,vm_other_change(j2,kforestry,ac_sub))
                           =e=
                           (pc35_other(j2,ac_sub)  - v35_other(j2,ac_sub));
 
-*******************************************************************************
+
+*' Harvested secondary forest is still considered secondary forests due to
+*' restrictive NPI definitions. Also primary forest harvested will be considered
+*' to be secondary forest.
 
 q35_secdforest_conversion(j2)..
                           v35_secdforest(j2,"ac0")

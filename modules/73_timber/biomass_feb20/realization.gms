@@ -5,15 +5,11 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description biomass_feb20 realization builds up of the affore_vegc_dec16 realization
-*' and additionally handles the production of two timber products from plantation
-*' forests while still accounting for afforestation policies. This realization
-*' harvests timber from available plantations to meet a portion of overall timber
-*' demand. The model is free to decide the amount of production coming from plantations.
-*' New plantations are also established in the simulation step to account for future
-*' timber demand and trade.
+*' @description biomass_feb20 realization acts as a common tunnel for land related
+*' decisions in forestry [32_forestry] and natveg [35_natveg] modules and corresponding
+*' production of woody biomass realized.
 
-*' @limitations
+*' @limitations WIP
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/73_timber/biomass_feb20/sets.gms"
