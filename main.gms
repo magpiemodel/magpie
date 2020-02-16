@@ -167,7 +167,8 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  coup2100
+$setglobal c_timesteps  2
+$setglobal c_title  seins
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /

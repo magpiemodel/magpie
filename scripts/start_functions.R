@@ -31,6 +31,9 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   if(!is.null(scenario)) cfg <- lucode::setScenario(cfg,scenario)
   cfg <- lucode::check_config(cfg)
 
+  # Make 'title' a setglobal in gams to include it in the gdx
+  cfg$gms$c_title <- cfg$title
+
   rundate <- Sys.time()
   date <- format(rundate, "_%Y-%m-%d_%H.%M.%S")
   cfg$results_folder <- gsub(":date:", date, cfg$results_folder, fixed=TRUE)
@@ -82,7 +85,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
 
   #check all setglobal settings for consistency
   lucode::settingsCheck()
-
+  
   ###########################################################################################################
   ############# PROCESSING INPUT DATA ###################### START ##########################################
   ###########################################################################################################
