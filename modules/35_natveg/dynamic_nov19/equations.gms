@@ -131,15 +131,15 @@ q35_secdforest_conversion(j2)..
 
 q35_secdf_change_constraint..
                           sum((j2,ac_sub,kforestry),vm_hvarea_secdforest(j2,ac_sub,kforestry))
-                          =l=
+                          =n=
                           sum((j2,ac_sub,kforestry),vm_secdforest_change(j2,kforestry,ac_sub));
 
 q35_primf_change_constraint..
                           sum((j2,kforestry),vm_hvarea_primforest(j2,kforestry))
-                          =l=
+                          =n=
                           sum((j2,ac_sub,kforestry),vm_primforest_change(j2,kforestry));
 
 q35_other_change_constraint..
                           sum((j2,ac_sub),vm_hvarea_other(j2, ac_sub,"woodfuel"))
-                          =l=
+                          =n=
                           sum((j2,ac_sub),vm_other_change(j2,"woodfuel",ac_sub));
