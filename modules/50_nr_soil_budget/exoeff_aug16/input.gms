@@ -78,9 +78,8 @@ $include "./modules/50_nr_soil_budget/input/f50_nitrogen_fixation_rates_pasture.
 $offdelim
 /;
 
-parameter f50_atmospheric_deposition_rates(t_all,i,land,dep_scen50) Nr deposition rates per area (tNr per ha)
-/
+table f50_atmospheric_deposition_rates(t_all,j,land,dep_scen50) Nr deposition rates per area (tNr per ha)
 $ondelim
-$include "./modules/50_nr_soil_budget/input/f50_atmospheric_deposition_rates.cs4"
+$include "./modules/50_nr_soil_budget/input/f50_AtmosphericDepositionRates.cs3"
 $offdelim
-/;
+;
