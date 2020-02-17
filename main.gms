@@ -92,9 +92,9 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: e0cb64c918128436bf9a323e57cae81b
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* md5sum: 94c214b0a7b46f403dd0aab57b7e476c
+* Repository: /p/projects/landuse/data/input/archive
 * 
 * Used data set: rev4.37_690d3718e151be1b450b394c1064b1c5_magpie.tgz
 * md5sum: 3e22e59029e3cd043e247b435cc773ce
@@ -103,7 +103,6 @@ $title magpie
 * Used data set: rev4.37_690d3718e151be1b450b394c1064b1c5_validation.tgz
 * md5sum: 7573940b148f440a5f2d2ceedf400afc
 * Repository: /p/projects/rd3mod/inputdata/output
-
 * 
 * Used data set: calibration_H12_c200_12Sep18.tgz
 * md5sum: 0a7d88e902918eb6a5263faaf066cc5d
@@ -144,7 +143,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Sun Feb 16 22:54:01 2020
+* Last modification (input data): Mon Feb 17 14:01:16 2020
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -169,7 +168,7 @@ $offlisting
 *                    Key parameters during model runs
 
 $setglobal c_timesteps  coup2100
-$setglobal c_title  SSP2_fbask_newrev4_37
+$setglobal c_title  SSP2_rev42_rev4p37
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /
