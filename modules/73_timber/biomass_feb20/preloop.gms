@@ -36,5 +36,6 @@ p73_calibrated_pc(t,iso,wood_products) = p73_wood_products_demand_pc(t, iso, woo
 
 ** Total demand is calculated based on pc demand multiplied by population
 p73_calibrated_abs(t,iso,wood_products) = p73_calibrated_pc(t,iso,wood_products) * im_pop_iso(t,iso);
-p73_calibrated_abs_glo(t) = sum((iso,wood_products),p73_calibrated_abs(t,iso,wood_products));
+p73_calibrated_abs(t,iso,"wood_fuel") = sum(wood_products,p73_calibrated_abs(t,iso,wood_products)) * 0.4;
+p73_calibrated_abs_glo(t) = sum((iso,total_wood_products),p73_calibrated_abs(t,iso,total_wood_products));
 display p73_calibrated_abs_glo;

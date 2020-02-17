@@ -6,11 +6,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
-p73_wood_products_demand_pc(t,iso,wood_products)                      Demand for wood products (mio. m3 per capita per yr)
-p73_calibration_timber_demand_pc(t,iso,wood_products)                 Calibration value for wood products (mio. m3 per capita per yr)
-p73_calib_lastyr_pc(iso,wood_products)                                Calibration value from previous year for wood products (mio. m3 per capita per yr)
-p73_calibrated_pc(t,iso,wood_products)                                Calibrated demand for wood products (mio. m3 per capita per yr)
-p73_calibrated_abs(t,iso,wood_products)                               Calibrated demand for wood products (mio. m3 per yr)
+p73_wood_products_demand_pc(t,iso,total_wood_products)                      Demand for wood products (mio. m3 per capita per yr)
+p73_calibration_timber_demand_pc(t,iso,total_wood_products)                 Calibration value for wood products (mio. m3 per capita per yr)
+p73_calib_lastyr_pc(iso,total_wood_products)                                Calibration value from previous year for wood products (mio. m3 per capita per yr)
+p73_calibrated_pc(t,iso,total_wood_products)                                Calibrated demand for wood products (mio. m3 per capita per yr)
+p73_calibrated_abs(t,iso,total_wood_products)                               Calibrated demand for wood products (mio. m3 per yr)
 p73_calibrated_abs_glo(t)                                             Calibrated global demand for wood products (mio. m3 per yr)
 ;
 
