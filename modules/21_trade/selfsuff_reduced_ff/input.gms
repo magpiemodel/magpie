@@ -36,9 +36,11 @@ $ondelim
 $include "./modules/21_trade/input/f21_trade_margin.cs3"
 $offdelim
 ;
+f21_trade_margin("JPN",kforestry) = 0.01;
 
 table f21_trade_tariff(i,kall) Specific duty tariffs (USD05MER per tDM)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_tariff.cs3"
 $offdelim
 ;
+f21_trade_tariff("JPN",kforestry) = 0.01;

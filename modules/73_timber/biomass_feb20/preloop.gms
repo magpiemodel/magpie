@@ -8,7 +8,8 @@
 ** Fixing variables
 vm_prod_heaven_timber.fx(j,kforestry) = 0;
 v73_prod_natveg.fx(j,"other",ac_sub,"wood") = 0;
-vm_other_change.fx(j,"wood",ac_sub) = 0;
+vm_hvarea_other.fx(j,ac_sub,"wood") = 0;
+v73_prod_natveg.fx(j,"primforest",ac_sub,kforestry)$(not sameas(ac_sub,"acx")) = 0;
 
 ***** Calculate model estimate per capita
 p73_wood_products_demand_pc(t,iso,wood_panels) = 8.978e-06*im_gdp_pc_ppp_iso(t,iso)**0.9244;

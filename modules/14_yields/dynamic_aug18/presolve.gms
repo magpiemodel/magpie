@@ -21,7 +21,7 @@ pm_growing_stock(t,j,ac_sub,kforestry,"forestry") =
         * (p14_volumetric_conversion(kforestry))
       )
      )
-     / m_yeardiff(t)
+     / (5$(ord(t)=1) + m_yeardiff(t)$(ord(t)>1))
     ;
 
 
@@ -34,8 +34,8 @@ pm_growing_stock(t,j,ac_sub,kforestry,land_natveg) =
         * (p14_volumetric_conversion(kforestry))
       )
      )
-     / m_yeardiff(t)
+     / (5$(ord(t)=1) + m_yeardiff(t)$(ord(t)>1))
     ;
 
 **** Hard constraint to always have a positive number in pm_growing_stock
-pm_growing_stock(t,j,ac_sub,kforestry,land_natveg) = pm_growing_stock(t,j,ac_sub,kforestry,land_natveg)$(pm_growing_stock(t,j,ac_sub,kforestry,land_natveg)>0)+1$(pm_growing_stock(t,j,ac_sub,kforestry,land_natveg)=0);
+pm_growing_stock(t,j,ac_sub,kforestry,land_natveg) = pm_growing_stock(t,j,ac_sub,kforestry,land_natveg)$(pm_growing_stock(t,j,ac_sub,kforestry,land_natveg)>0)+0.001$(pm_growing_stock(t,j,ac_sub,kforestry,land_natveg)=0);
