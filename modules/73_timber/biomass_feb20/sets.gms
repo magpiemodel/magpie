@@ -28,4 +28,10 @@ wood_panels(wood_products)        Wood products used for panels construction
 /
 fibreboard,particle_board_and_osb,plywood,veneer_sheets
 /
+
+kforestry_to_woodprod(kforestry,total_wood_products) mapping between ac and ac_poulter
+/
+wood . (fibreboard,particle_board_and_osb,plywood,veneer_sheets,wood_pulp,sawnwood)
+woodfuel . (wood_fuel)
+/
 *** EOF sets.gms ***
