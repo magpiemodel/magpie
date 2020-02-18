@@ -11,7 +11,8 @@ p73_calibration_timber_demand_pc(t,iso,total_wood_products)                 Cali
 p73_calib_lastyr_pc(iso,total_wood_products)                                Calibration value from previous year for wood products (mio. m3 per capita per yr)
 p73_calibrated_pc(t,iso,total_wood_products)                                Calibrated demand for wood products (mio. m3 per capita per yr)
 p73_calibrated_abs(t,iso,total_wood_products)                               Calibrated demand for wood products (mio. m3 per yr)
-p73_calibrated_abs_glo(t)                                             Calibrated global demand for wood products (mio. m3 per yr)
+p73_calibrated_abs_glo(t)                                                   Calibrated global demand for wood products (mio. m3 per yr)
+p73_wood_products_demand_GLO(t)                                             Global wood products demand (mio. m3 per yr)
 ;
 
 positive variables
