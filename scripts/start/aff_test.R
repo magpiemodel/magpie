@@ -52,8 +52,8 @@ for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
   # cfg$gms$c60_2ndgen_biodem <- "coupling"
   # cfg$title <- paste0(prefix,ssp,"_NPI")
   # start_run(cfg,codeCheck=FALSE)
-  
-  getInput(paste0("/p/projects/piam/runs/coupled-magpie-flohump/output/C_",ssp,"-_PkBudg900-plant-mag-4/fulldata.gdx"))
+
+  getInput(paste0("/p/projects/piam/runs/coupled-magpie-flohump/output/C_",ssp,"-PkBudg900-plant-mag-4/fulldata.gdx"))
   cfg <- setScenario(cfg,c(ssp,"NDC"))
   cfg$gms$c56_pollutant_prices <- "coupling"
   cfg$gms$c60_2ndgen_biodem <- "coupling"
