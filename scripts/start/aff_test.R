@@ -42,22 +42,22 @@ cfg$results_folder <- "output/:title:"
 #10 recalc npi
 #13 final test
 
-prefix <- "C14_"
+prefix <- "C15_"
 
 for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
 
-  getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-Base-mag-4/fulldata.gdx"))
+  getInput(paste0("/p/projects/piam/runs/coupled-magpie-flohump/output/C_",ssp,"-Base-mag-4/fulldata.gdx"))
   cfg <- setScenario(cfg,c(ssp,"NPI"))
   cfg$gms$c56_pollutant_prices <- "coupling"
   cfg$gms$c60_2ndgen_biodem <- "coupling"
   cfg$title <- paste0(prefix,ssp,"_NPI")
   start_run(cfg,codeCheck=FALSE)
   
-  getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
+  getInput(paste0("/p/projects/piam/runs/coupled-magpie-flohump/output/C_",ssp,"-Base-mag-4/fulldata.gdx"))
   cfg <- setScenario(cfg,c(ssp,"NDC"))
   cfg$gms$c56_pollutant_prices <- "coupling"
   cfg$gms$c60_2ndgen_biodem <- "coupling"
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_plantations")
+  cfg$title <- paste0(prefix,ssp,"_PkBudg900")
   start_run(cfg,codeCheck=FALSE)
 }
 
