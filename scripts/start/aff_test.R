@@ -42,22 +42,41 @@ cfg$results_folder <- "output/:title:"
 #10 recalc npi
 #13 final test
 
-prefix <- "C14_"
+prefix <- "C16_"
 
 for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
-
-  getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-Base-mag-4/fulldata.gdx"))
-  cfg <- setScenario(cfg,c(ssp,"NPI"))
-  cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$gms$c60_2ndgen_biodem <- "coupling"
-  cfg$title <- paste0(prefix,ssp,"_NPI")
-  start_run(cfg,codeCheck=FALSE)
-  
-  getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
-  cfg <- setScenario(cfg,c(ssp,"NDC"))
-  cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$gms$c60_2ndgen_biodem <- "coupling"
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_plantations")
-  start_run(cfg,codeCheck=FALSE)
+  for (aff in c("plant","natveg")) {
+    
+    # getInput(paste0("/p/projects/piam/runs/coupled-magpie-flohump/output/C_",ssp,"-Base-mag-4/fulldata.gdx"))
+    # cfg <- setScenario(cfg,c(ssp,"NPI"))
+    # cfg$gms$c56_pollutant_prices <- "coupling"
+    # cfg$gms$c60_2ndgen_biodem <- "coupling"
+    # cfg$title <- paste0(prefix,ssp,"_NPI")
+    # start_run(cfg,codeCheck=FALSE)
+    
+    cfg <- setScenario(cfg,c(ssp,"NDC"))
+    
+    if (aff == "plant") {
+      if (ssp == "SDP") {
+        getInput(paste0("/p/projects/piam/runs/coupled-magpie-flohump/output/C_",ssp,"-PkBudg1000-plant-mag-4/fulldata.gdx"))
+      } else {
+        getInput(paste0("/p/projects/piam/runs/coupled-magpie-flohump/output/C_",ssp,"-PkBudg900-plant-mag-4/fulldata.gdx"))
+      }
+      cfg$gms$s52_forestry_plantation <- 1
+    } else if (aff == "natveg") {
+      if (ssp == "SDP") {
+        getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-PkBudg1000-mag-4/fulldata.gdx"))
+      } else {
+        getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
+      }
+      cfg$gms$s52_forestry_plantation <- 0
+    }
+    
+    cfg$gms$c56_pollutant_prices <- "coupling"
+    cfg$gms$c60_2ndgen_biodem <- "coupling"
+    cfg$title <- paste0(prefix,ssp,"_PkBudg900_",aff)
+    start_run(cfg,codeCheck=FALSE)
+    
+  }
 }
 
