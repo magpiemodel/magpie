@@ -15,7 +15,7 @@ p73_calibrated_abs_glo(t)                                                   Cali
 p73_wood_products_demand_reg(t,i,kforestry)                                 Regional wood products demand (mio. m3 per yr)
 p73_wood_products_demand_GLO(t,kforestry)                                   Global wood products demand (mio. m3 per yr)
 p73_elasticity(kforestry)                                                   GDP Elasticity (1)
-pm_iiasa_timber(t,i,kforestry)                                            Timber demand based on lauri et al 2019 (mio. m3 per yr)
+pm_iiasa_timber(t_all,i,kforestry)                                            Timber demand based on lauri et al 2019 (mio. m3 per yr)
 ;
 
 positive variables

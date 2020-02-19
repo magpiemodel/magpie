@@ -11,7 +11,7 @@ v73_prod_natveg.fx(j,"other",ac_sub,"wood") = 0;
 vm_hvarea_other.fx(j,ac_sub,"wood") = 0;
 v73_prod_natveg.fx(j,"primforest",ac_sub,kforestry)$(not sameas(ac_sub,"acx")) = 0;
 
-****************** IIASA demand
+****************** IIASA demand ******************
 p73_elasticity("wood") = 0.0005;
 p73_elasticity("woodfuel") = -1.17;
 
@@ -30,8 +30,12 @@ loop(t_all,
     );
 );
 
-pm_iiasa_timber(t,i,kforestry) = sum(i_to_iso(i,iso),f73_forestry_demand(t,iso,kforestry));
+pm_iiasa_timber(t_all,i,kforestry) = sum(i_to_iso(i,iso),f73_forestry_demand(t_all,iso,kforestry));
 display pm_iiasa_timber;
+
+pm_demand_ext(t_ext,i,kforestry) = pm_iiasa_timber("y2150",i,kforestry);
+pm_demand_ext(t_all,i,kforestry) = pm_iiasa_timber(t_all,i,kforestry);
+display pm_demand_ext;
 
 ***** Calculate model estimate per capita
 p73_wood_products_demand_pc(t,iso,wood_panels) = 8.978e-06*(im_gdp_pc_ppp_iso(t,iso)**0.9244);
