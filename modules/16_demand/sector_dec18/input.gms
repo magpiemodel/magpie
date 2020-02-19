@@ -31,4 +31,3 @@ $ondelim
 $include "./modules/16_demand/sector_dec18/input/f16_forestry_demand_20200212.csv"
 $offdelim
 ;
-f16_forestry_demand(t_all,"MEA",kforestry) = f16_forestry_demand("y1995","MEA",kforestry);
