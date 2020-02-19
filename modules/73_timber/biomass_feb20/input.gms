@@ -11,3 +11,10 @@ $include "./modules/73_timber/input/f73_observed_timber_demand_pc.csv"
 $offdelim
 ;
 m_fillmissingyears(f73_observed_timber_demand_pc,"iso,total_wood_products");
+
+table f73_forestry_demand(t_all,iso,kforestry) demand
+$ondelim
+$include "./modules/73_timber/input/f16_forestry_demand_iso.csv"
+$offdelim
+;
+f73_forestry_demand(t_past_ff,iso,kforestry) = f73_forestry_demand("y1995",iso,kforestry);

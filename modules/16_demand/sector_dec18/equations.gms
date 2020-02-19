@@ -81,4 +81,5 @@ q16_seed_demand(i2,kcr) ..
 *' fed exogenously to the model.
 q16_supply_forestry(i2,kforestry) ..  vm_supply(i2,kforestry)
                                        =e=
-								                       sum(ct,fm_forestry_demand(ct,i2,kforestry));
+*								                       sum(ct,fm_forestry_demand(ct,i2,kforestry));
+                                       sum(ct,pm_iiasa_timber(ct,i2,kforestry)); 
