@@ -22,6 +22,9 @@ v10_lu_transitions.fx(j,"secdforest","other") = 0;
 *v10_lu_transitions.fx(j,"forestry",land_to10) = 0;
 *v10_lu_transitions.up(j,"forestry","forestry") = Inf;
 
+*' Plantations can be setup on other land
+v10_lu_transitions.up(j,"other","forestry") = Inf;
+
 *' Primforest can only decrease
 v10_lu_transitions.fx(j,land_from10,"primforest") = 0;
 v10_lu_transitions.up(j,"primforest","primforest") = Inf;
