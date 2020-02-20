@@ -47,7 +47,7 @@ cfg$gms$s56_reward_neg_emis <- -Inf
 #######################################
 
 
-flag_run <- paste0("-LauriEtAl-R035")
+flag_run <- paste0("-LauriEtAl-R036")
 
 cfg$gms$s32_recurring_cost_multiplier <- 10
 

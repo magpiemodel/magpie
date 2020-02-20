@@ -60,10 +60,13 @@ positive variables
   vm_hvarea_secdforest(j,ac_sub,kforestry)      Harvested area of secondary forest (mio. ha)
   vm_hvarea_other(j,ac_sub,kforestry)           Harvested area of other land (mio. ha)
   vm_hvarea_primforest(j,kforestry)             Harvested area of primary forest (mio. ha)
-  vm_secdforest_change(j,kforestry,ac_sub)      Change in secondary forest between timesteps (mio. ha per year)
-  vm_primforest_change(j,kforestry)             Change in primary forest between timesteps (mio. ha per year)
-  vm_other_change(j,kforestry,ac_sub)           Change in other land between timesteps (mio. ha per year)
   vm_cost_natveg(i)                             Regional natveg timber production costs (mio. USD)
+;
+
+variables
+ vm_secdforest_change(j,kforestry,ac_sub)       Change in secondary forest between timesteps (mio. ha per year)
+ vm_primforest_change(j,kforestry)              Change in primary forest between timesteps (mio. ha per year)
+ vm_other_change(j,kforestry,ac_sub)            Change in other land between timesteps (mio. ha per year)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
