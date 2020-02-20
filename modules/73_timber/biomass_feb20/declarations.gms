@@ -16,6 +16,9 @@ p73_wood_products_demand_reg(t,i,kforestry)                                 Regi
 p73_wood_products_demand_GLO(t,kforestry)                                   Global wood products demand (mio. m3 per yr)
 p73_elasticity(kforestry)                                                   GDP Elasticity (1)
 pm_iiasa_timber(t_all,i,kforestry)                                            Timber demand based on lauri et al 2019 (mio. m3 per yr)
+pm_iiasa_GLO(t_all,kforestry)                                               Global timber demand (mio. m3 per yr)
+i73_gdp_ppp_pc_iso(t_all,iso,gdp_scen09)                                    GDPpc at iso level (mio. USD per capita)
+pm_forestry_demand(t_all,iso,kforestry)                                     Final forestry demand (mio. m3 per yr)
 ;
 
 positive variables

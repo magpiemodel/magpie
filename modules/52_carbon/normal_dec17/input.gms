@@ -32,5 +32,3 @@ $include "./modules/52_carbon/input/f52_growth_par_image_lpjml.csv"
 $offdelim
 /
 ;
-fm_growth_par_image_lpjml(clcl,"k","plantations") = fm_growth_par_image_lpjml(clcl,"k","plantations") * 2;
-fm_growth_par_image_lpjml(clcl,"m","plantations") = fm_growth_par_image_lpjml(clcl,"m","plantations") + 1;

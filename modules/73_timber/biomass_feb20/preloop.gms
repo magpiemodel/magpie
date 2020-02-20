@@ -12,26 +12,34 @@ vm_hvarea_other.fx(j,ac_sub,"wood") = 0;
 v73_prod_natveg.fx(j,"primforest",ac_sub,kforestry)$(not sameas(ac_sub,"acx")) = 0;
 
 ****************** IIASA demand ******************
-p73_elasticity("wood") = 0.0005;
-p73_elasticity("woodfuel") = -1.17;
+*' Taken from Supply and demand functions for global wood markets: Specification and
+*' plausibility testing of econometric models within the global forest sector.
+*' https://doi.org/10.1016/j.forpol.2018.04.003
+*' Fiberboard value used for wood, Fuelwood value used for wood fuel (Table 5).
+p73_elasticity("wood") = 1.06;
+p73_elasticity("woodfuel") = -0.568;
 
-fm_pop_iso(t_all,iso,"%c09_pop_scenario%")$(fm_pop_iso(t_all,iso,"%c09_pop_scenario%")=0) = 0.000001;
-fm_gdp_ppp_iso(t_all,iso,"%c09_gdp_scenario%")$(fm_gdp_ppp_iso(t_all,iso,"%c09_gdp_scenario%")=0) = 0.000001;
+fm_pop_iso(t_all,iso,"%c09_pop_scenario%")$(fm_pop_iso(t_all,iso,"%c09_pop_scenario%")=0) = 0.001;
+fm_gdp_ppp_iso(t_all,iso,"%c09_gdp_scenario%")$(fm_gdp_ppp_iso(t_all,iso,"%c09_gdp_scenario%")=0) = 0.001;
+i73_gdp_ppp_pc_iso(t_all,iso,"%c09_gdp_scenario%") = fm_gdp_ppp_iso(t_all,iso,"%c09_gdp_scenario%")/fm_pop_iso(t_all,iso,"%c09_pop_scenario%");
 
-loop(t_all,
-  if(ord(t_all)<card(t_all),
-      f73_forestry_demand(t_all+1,iso,kforestry)
-          = f73_forestry_demand(t_all,iso,kforestry)
+pm_forestry_demand(t_past_forestry,iso,kforestry) = f73_forestry_demand(t_past_forestry,iso,kforestry);
+
+loop(t_sim,
+  if(ord(t_sim)<card(t_sim),
+      pm_forestry_demand(t_sim+1,iso,kforestry)
+          = f73_forestry_demand(t_sim,iso,kforestry)
           *
-          (fm_pop_iso(t_all+1,iso,"%c09_pop_scenario%")/fm_pop_iso(t_all,iso,"%c09_pop_scenario%"))
+          (fm_pop_iso(t_sim+1,iso,"%c09_pop_scenario%")/fm_pop_iso(t_sim,iso,"%c09_pop_scenario%"))
           *
-          ((fm_gdp_ppp_iso(t_all+1,iso,"%c09_gdp_scenario%")/fm_gdp_ppp_iso(t_all,iso,"%c09_gdp_scenario%"))**p73_elasticity(kforestry))
+          ((i73_gdp_ppp_pc_iso(t_sim+1,iso,"%c09_gdp_scenario%")/i73_gdp_ppp_pc_iso(t_sim,iso,"%c09_gdp_scenario%"))**p73_elasticity(kforestry))
           ;
     );
 );
 
-pm_iiasa_timber(t_all,i,kforestry) = sum(i_to_iso(i,iso),f73_forestry_demand(t_all,iso,kforestry));
-display pm_iiasa_timber;
+pm_iiasa_timber(t_all,i,kforestry) = sum(i_to_iso(i,iso),pm_forestry_demand(t_all,iso,kforestry));
+pm_iiasa_GLO(t_all,kforestry) = sum(iso,pm_forestry_demand(t_all,iso,kforestry));
+display pm_iiasa_timber,pm_iiasa_GLO;
 
 pm_demand_ext(t_ext,i,kforestry) = pm_iiasa_timber("y2150",i,kforestry);
 pm_demand_ext(t_all,i,kforestry) = pm_iiasa_timber(t_all,i,kforestry);
