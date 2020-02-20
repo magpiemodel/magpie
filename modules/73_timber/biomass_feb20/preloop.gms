@@ -38,7 +38,7 @@ pm_demand_ext(t_all,i,kforestry) = pm_iiasa_timber(t_all,i,kforestry);
 display pm_demand_ext;
 
 ***** Calculate model estimate per capita
-p73_wood_products_demand_pc(t,iso,wood_panels) = 8.978e-06*(im_gdp_pc_ppp_iso(t,iso)**0.9244);
+p73_wood_products_demand_pc(t,iso,wood_panels) =1.044e-05*(im_gdp_pc_ppp_iso(t,iso)**0.9063);
 
 p73_wood_products_demand_pc(t,iso,"wood_pulp") = 9.984e-07*(im_gdp_pc_ppp_iso(t,iso)**1.218);
 
