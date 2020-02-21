@@ -47,45 +47,51 @@ cfg$gms$s56_reward_neg_emis <- -Inf
 #######################################
 
 
-flag_run <- paste0("-LauriEtAl-R036")
+
+flag_run <- paste0("-LauriEtAl-R037")
 
 cfg$gms$s32_recurring_cost_multiplier <- 10
 
-## Set rotation length at harvest according to interest rate
-cfg$gms$c32_rotation_harvest = "def"
+for(c32_rotation_extension in c(0,0.20)){
+	## Set rotation length at harvest according to interest rate
+	cfg$gms$c32_rotation_harvest = "def"
 
-## Rotation length for establishment
-cfg$gms$c32_rotation_estb <- cfg$gms$c32_rotation_harvest
+	cfg$gms$c32_rotation_extension = c32_rotation_extension;
 
-rot_flag = "Normal"
+	if(c32_rotation_extension == 0) rot_flag = "Normal"
+	if(c32_rotation_extension == 0.20) rot_flag = "Extended_20p"
 
-## Loop over climate impacts
+	## Rotation length for establishment
+	cfg$gms$c32_rotation_estb <- cfg$gms$c32_rotation_harvest
 
-cfg <- setScenario(cfg, "nocc")
+	## Loop over climate impacts
 
-cfg$gms$s35_selective_logging_flag = 1.00 ## Clear cut is 1.0
+	cfg <- setScenario(cfg, "nocc")
 
-for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
-	cfg <- setScenario(cfg,c(ssp,"NPI"))
+	cfg$gms$s35_selective_logging_flag = 1.00 ## Clear cut is 1.0
 
-	cfg$title<- paste0(ssp,"-",paste0(rot_flag," rotation"),"-",flag_run)
+	for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
+		cfg <- setScenario(cfg,c(ssp,"NPI"))
 
-	## Declare input data array
-	#magpie_default_data <- "magpie4.1_default_apr19.tgz"
-	#additional_magpie_data <- "additional_data_rev3.68.tgz"
-	#isimip_data <- paste0("isimip_rcp-IPSL_CM5A_LR-",rcp_scen,"-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
-	#isimip_data <- paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
-	#forestry_data <- "private_forestry_dec18_20200203.tgz"
+		cfg$title<- paste0(ssp,"-",paste0(rot_flag," rotation"),"-",flag_run)
 
-	## Update input data array
-	#cfg$input <- c(magpie_default_data,additional_magpie_data,isimip_data,forestry_data)
+		## Declare input data array
+		#magpie_default_data <- "magpie4.1_default_apr19.tgz"
+		#additional_magpie_data <- "additional_data_rev3.68.tgz"
+		#isimip_data <- paste0("isimip_rcp-IPSL_CM5A_LR-",rcp_scen,"-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
+		#isimip_data <- paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
+		#forestry_data <- "private_forestry_dec18_20200203.tgz"
 
-	## If the model be forced to download data
-	cfg$force_download <- FALSE
+		## Update input data array
+		#cfg$input <- c(magpie_default_data,additional_magpie_data,isimip_data,forestry_data)
 
-	## Should recalibration be made
-	cfg$recalibrate <- "ifneeded"
+		## If the model be forced to download data
+		cfg$force_download <- FALSE
 
-	## Start the run
-	start_run(cfg=cfg,codeCheck=codeCheck)
+		## Should recalibration be made
+		cfg$recalibrate <- "ifneeded"
+
+		## Start the run
+		start_run(cfg=cfg,codeCheck=codeCheck)
+	}
 }

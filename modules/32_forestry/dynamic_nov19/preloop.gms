@@ -41,16 +41,34 @@ pm_rot_length_estb(t_all,j) = p32_rot_length(t_all,j);
 ** back to rotation length in age-classes.
 p32_rotation_cellular(t_all,j) = ceil(p32_rot_length(t_all,j)/5);
 p32_rotation_cellular_estb(t_all,j) = ceil(pm_rot_length_estb(t_all,j)/5);
+p32_rotation_cellular_estb(t_past_ff,j) = p32_rotation_cellular_estb("y1995",j);
 
 * Shift rotations. E.g. rotations harveted in 2050 should be harvested with the rotations using which they were establsihed.
 * For 2050 plantation establsihed in 2020 with 30y rotaions shall be harvested according to 30 yr (for example)
 
-loop(j,
-  loop(ac,
-      p32_rotation_cellular_harvesting(t,j)$(ord(t)-ac.off>0) = p32_rotation_cellular_estb(t-ac.off,j);
-      p32_rotation_cellular_harvesting(t,j)$(ord(t)-(ord(ac)-1-(m_yeardiff(t)/5))>0 AND m_yeardiff(t)>5) = p32_rotation_cellular_estb(t-(ord(ac)-1-(m_yeardiff(t)/5)),j);
+p32_rotation_cellular_harvesting(t_all,j) = p32_rotation_cellular_estb(t_all,j);
+loop(t,
+  loop(j,
+      p32_rotation_offset = p32_rotation_cellular_estb(t,j);
+      if(ord(t)>p32_rotation_offset,
+        p32_rotation_cellular_harvesting(t,j) = p32_rotation_cellular_estb(t-p32_rotation_offset,j);
+        );
+    );
+);
+
+** RL Extension
+p32_rotation_cellular_harvesting(t_all,j) = p32_rotation_cellular_harvesting(t_all,j) * (1+c32_rotation_extension);
+
+$ontext
+loop(t,
+  loop(j,
+    loop(ac,
+        p32_rotation_cellular_harvesting(t,j)$(ord(t)-ac.off>0) = p32_rotation_cellular_estb(t-ac.off,j);
+        p32_rotation_cellular_harvesting(t_all,j)$(ord(t_all)-(ord(ac)-1-(m_yeardiff(t_all)/5))>0 AND m_yeardiff(t_all)>5) = p32_rotation_cellular_estb(t_all-(ord(ac)-1-(m_yeardiff(t_all)/5)),j);
+      );
     );
   );
+$offtext
 
 ** Define protect and harvest setting
 protect32(t,j,ac_sub) = no;

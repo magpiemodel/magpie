@@ -11,6 +11,7 @@ scalars
   c32_harvesting_cost Harvesting cost in USD per ha / 200 /
   s32_planing_horizon Afforestation planing horizon (years)            / 80 /
   s32_recurring_cost_multiplier Cost multiplier for recurring costs only for testing (1)            / 100 /
+  c32_rotation_extension Rotation extension / 0 /
 ;
 
 scalars

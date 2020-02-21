@@ -32,6 +32,7 @@ parameters
  p32_regional_min(j)                                Inverse of management factor in plantations (1)
  p32_dampen_pre(ac,j)                               Pre calculation for dampening factors applied on management factors (1)
  p32_dampen_final(ac,j)                             Final calculation for dampening factors applied on management factors (1)
+ p32_rotation_offset                                offset calc
 ;
 
 positive variables
