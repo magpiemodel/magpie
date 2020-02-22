@@ -54,7 +54,7 @@ for(c32_rotation_extension in c(0,5,10)){
 	for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")){
 
 		if(co2_price_scenarios == "R2M41-SSP2-NPi") co2_flag = "Ref"
-		if(co2_price_scenarios == "R2M41-SSP2-Budg1300") co2_flag "CO2price"
+		if(co2_price_scenarios == "R2M41-SSP2-Budg1300") co2_flag = "CO2price"
 
 		## Set rotation length at harvest according to interest rate
 		cfg$gms$c32_rotation_harvest = "def"
