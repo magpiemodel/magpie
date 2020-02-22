@@ -23,7 +23,7 @@ fm_pop_iso(t_all,iso,"%c09_pop_scenario%")$(fm_pop_iso(t_all,iso,"%c09_pop_scena
 fm_gdp_ppp_iso(t_all,iso,"%c09_gdp_scenario%")$(fm_gdp_ppp_iso(t_all,iso,"%c09_gdp_scenario%")=0) = 0.001;
 i73_gdp_ppp_pc_iso(t_all,iso,"%c09_gdp_scenario%") = fm_gdp_ppp_iso(t_all,iso,"%c09_gdp_scenario%")/fm_pop_iso(t_all,iso,"%c09_pop_scenario%");
 
-pm_forestry_demand(t_past_forestry,iso,kforestry) = f73_forestry_demand(t_past_forestry,iso,kforestry);
+pm_forestry_demand(t_observed,iso,kforestry) = f73_forestry_demand(t_observed,iso,kforestry);
 
 loop(t_sim,
   if(ord(t_sim)<card(t_sim),

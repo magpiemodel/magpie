@@ -150,7 +150,7 @@ sets time_annual Annual extended time steps
       y2145, y2150 /
 
     t_sim(t_all) 5-year time periods usually simulated
-    / y1995, y2000, y2005, y2010, y2015, y2020, y2025, y2030, y2035, y2040,
+    / y2015, y2020, y2025, y2030, y2035, y2040,
       y2045, y2050, y2055, y2060, y2065, y2070, y2075, y2080, y2085, y2090,
       y2095, y2100, y2105, y2110, y2115, y2120, y2125, y2130, y2135, y2140,
       y2145, y2150 /

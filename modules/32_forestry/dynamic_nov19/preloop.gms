@@ -57,7 +57,7 @@ loop(t,
 );
 
 ** RL Extension
-p32_rotation_cellular_harvesting(t_all,j) = p32_rotation_cellular_harvesting(t_all,j) * (1+c32_rotation_extension);
+p32_rotation_cellular_harvesting(t_all,j) = p32_rotation_cellular_harvesting(t_all,j) + c32_rotation_extension ;
 
 $ontext
 loop(t,
