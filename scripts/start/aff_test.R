@@ -55,6 +55,7 @@ for (ssp in c("SSP2")) {
     # start_run(cfg,codeCheck=FALSE)
     
     cfg <- setScenario(cfg,c(ssp,"NDC"))
+    aff <- "natveg"
     
     if (aff == "plant") {
       if (ssp == "SDP") {
