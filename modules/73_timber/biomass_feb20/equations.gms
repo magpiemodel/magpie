@@ -25,6 +25,8 @@ q73_prod_timber(j2,kforestry)..
   v73_prod_forestry(j2,kforestry)
   +
   sum((land_natveg,ac_sub),v73_prod_natveg(j2,land_natveg,ac_sub,kforestry))
+  +
+  vm_prod_heaven_timber(j2,kforestry);
   ;
 
 

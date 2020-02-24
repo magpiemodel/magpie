@@ -5,4 +5,4 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_prod_heaven_timber.fx(j,kforestry) = 0;
+*vm_prod_heaven_timber.fx(j,kforestry) = 0;
