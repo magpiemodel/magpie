@@ -42,11 +42,11 @@ cfg$results_folder <- "output/:title:"
 #10 recalc npi
 #13 final test
 
-prefix <- "C16_"
+prefix <- "C17_"
 
-for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
-  for (aff in c("plant","natveg")) {
-    
+#for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
+for (ssp in c("SSP2")) {
+  
     # getInput(paste0("/p/projects/piam/runs/coupled-magpie-flohump/output/C_",ssp,"-Base-mag-4/fulldata.gdx"))
     # cfg <- setScenario(cfg,c(ssp,"NPI"))
     # cfg$gms$c56_pollutant_prices <- "coupling"
@@ -55,6 +55,7 @@ for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
     # start_run(cfg,codeCheck=FALSE)
     
     cfg <- setScenario(cfg,c(ssp,"NDC"))
+    aff <- "natveg"
     
     if (aff == "plant") {
       if (ssp == "SDP") {
@@ -72,11 +73,18 @@ for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
       cfg$gms$s52_forestry_plantation <- 0
     }
     
+    # cfg$gms$c56_pollutant_prices <- "coupling"
+    # cfg$gms$c60_2ndgen_biodem <- "coupling"
+    # cfg$title <- paste0(prefix,ssp,"_PkBudg900_","FeedDef")
+    # cfg$gms$c70_feed_scen <- "ssp2"
+    # start_run(cfg,codeCheck=FALSE)
+    
     cfg$gms$c56_pollutant_prices <- "coupling"
     cfg$gms$c60_2ndgen_biodem <- "coupling"
-    cfg$title <- paste0(prefix,ssp,"_PkBudg900_",aff)
+    cfg$title <- paste0(prefix,ssp,"_PkBudg900_","FeedSSP5","_TradeLib")
+    cfg$gms$c70_feed_scen <- "ssp5"
+    cfg$gms$c21_trade_liberalization <- "l908080r807070"
     start_run(cfg,codeCheck=FALSE)
     
-  }
 }
 
