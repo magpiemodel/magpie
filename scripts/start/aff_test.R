@@ -73,16 +73,17 @@ for (ssp in c("SSP2")) {
       cfg$gms$s52_forestry_plantation <- 0
     }
     
-    cfg$gms$c56_pollutant_prices <- "coupling"
-    cfg$gms$c60_2ndgen_biodem <- "coupling"
-    cfg$title <- paste0(prefix,ssp,"_PkBudg900_","FeedDef")
-    cfg$gms$c70_feed_scen <- "ssp2"
-    start_run(cfg,codeCheck=FALSE)
+    # cfg$gms$c56_pollutant_prices <- "coupling"
+    # cfg$gms$c60_2ndgen_biodem <- "coupling"
+    # cfg$title <- paste0(prefix,ssp,"_PkBudg900_","FeedDef")
+    # cfg$gms$c70_feed_scen <- "ssp2"
+    # start_run(cfg,codeCheck=FALSE)
     
     cfg$gms$c56_pollutant_prices <- "coupling"
     cfg$gms$c60_2ndgen_biodem <- "coupling"
-    cfg$title <- paste0(prefix,ssp,"_PkBudg900_","FeedSSP5")
+    cfg$title <- paste0(prefix,ssp,"_PkBudg900_","FeedSSP5","_TradeLib")
     cfg$gms$c70_feed_scen <- "ssp5"
+    cfg$gms$c21_trade_liberalization <- "l908080r807070"
     start_run(cfg,codeCheck=FALSE)
     
 }
