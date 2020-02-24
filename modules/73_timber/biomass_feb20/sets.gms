@@ -31,7 +31,7 @@ fibreboard,particle_board_and_osb,plywood,veneer_sheets
 
 kforestry_to_woodprod(kforestry,total_wood_products) mapping between ac and ac_poulter
 /
-wood . (fibreboard,particle_board_and_osb,plywood,veneer_sheets,wood_pulp,sawnwood)
+wood . (fibreboard,particle_board_and_osb,plywood,veneer_sheets,wood_pulp,sawnwood,other_sawnwood,other_industrial_roundwood)
 woodfuel . (wood_fuel)
 /
 *** EOF sets.gms ***

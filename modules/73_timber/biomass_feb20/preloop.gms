@@ -19,8 +19,12 @@ v73_prod_natveg.fx(j,"primforest",ac_sub,kforestry)$(not sameas(ac_sub,"acx")) =
 p73_elasticity("wood") = 1.06;
 p73_elasticity("woodfuel") = -0.568;
 
+** Select population at iso level
 fm_pop_iso(t_all,iso,"%c09_pop_scenario%")$(fm_pop_iso(t_all,iso,"%c09_pop_scenario%")=0) = 0.001;
 fm_gdp_ppp_iso(t_all,iso,"%c09_gdp_scenario%")$(fm_gdp_ppp_iso(t_all,iso,"%c09_gdp_scenario%")=0) = 0.001;
+fm_gdp_ppp_iso(t_all,iso,"%c09_gdp_scenario%") = fm_gdp_ppp_iso("y1995",iso,"%c09_gdp_scenario%");
+
+** Calculate gdp per capita at iso level
 i73_gdp_ppp_pc_iso(t_all,iso,"%c09_gdp_scenario%") = fm_gdp_ppp_iso(t_all,iso,"%c09_gdp_scenario%")/fm_pop_iso(t_all,iso,"%c09_pop_scenario%");
 
 pm_forestry_demand(t_observed,iso,kforestry) = f73_forestry_demand(t_observed,iso,kforestry);
@@ -37,13 +41,49 @@ loop(t_sim,
     );
 );
 
-pm_iiasa_timber(t_all,i,kforestry) = sum(i_to_iso(i,iso),pm_forestry_demand(t_all,iso,kforestry));
-pm_iiasa_GLO(t_all,kforestry) = sum(iso,pm_forestry_demand(t_all,iso,kforestry));
+*pm_iiasa_timber(t_all,i,kforestry) = sum(i_to_iso(i,iso),pm_forestry_demand(t_all,iso,kforestry));
+*pm_iiasa_GLO(t_all,kforestry) = sum(iso,pm_forestry_demand(t_all,iso,kforestry));
+*display pm_iiasa_GLO;
+
+*pm_demand_ext(t_ext,i,kforestry) = pm_iiasa_timber("y2150",i,kforestry);
+*pm_demand_ext(t_all,i,kforestry) = pm_iiasa_timber(t_all,i,kforestry);
+*display pm_demand_ext;
+
+*******************************************************************************
+p73_income_elasticity("wood_fuel") = -0.57;
+p73_income_elasticity("wood_pulp") = 0.36;
+p73_income_elasticity("particle_board_and_osb") = 0.75;
+p73_income_elasticity("fibreboard") = 1.06;
+p73_income_elasticity("plywood") = 0.94;
+p73_income_elasticity("veneer_sheets") = 0.60;
+p73_income_elasticity("sawnwood") = 0.19;
+p73_income_elasticity("other_industrial_roundwood") = 0.22;
+** veneer_sheets and other_industrial_roundwood from buongiorno paper
+p73_income_elasticity("other_sawnwood") = p73_income_elasticity("sawnwood");
+
+pm_forestry_demand_73(t_observed,iso,total_wood_products) = f73_prod_specific_timber(t_observed,iso,total_wood_products);
+
+loop(t_sim,
+  if(ord(t_sim)<card(t_sim),
+      pm_demand_timber_nextyr(iso,total_wood_products)
+          = pm_forestry_demand_73(t_sim,iso,total_wood_products)
+          *
+          (fm_pop_iso(t_sim+1,iso,"%c09_pop_scenario%")/fm_pop_iso(t_sim,iso,"%c09_pop_scenario%"))
+          *
+          ((i73_gdp_ppp_pc_iso(t_sim+1,iso,"%c09_gdp_scenario%")/i73_gdp_ppp_pc_iso(t_sim,iso,"%c09_gdp_scenario%"))**p73_income_elasticity(total_wood_products))
+          ;
+      pm_forestry_demand_73(t_sim+1,iso,total_wood_products) = pm_demand_timber_nextyr(iso,total_wood_products);
+    );
+);
+pm_iiasa_73(t_all,kforestry) = sum((iso,kforestry_to_woodprod(kforestry,total_wood_products)),pm_forestry_demand_73(t_all,iso,total_wood_products));
+display pm_iiasa_73;
+
+pm_iiasa_timber(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to_woodprod(kforestry,total_wood_products)),pm_forestry_demand_73(t_all,iso,total_wood_products));
+pm_iiasa_GLO(t_all,kforestry) = sum((iso,kforestry_to_woodprod(kforestry,total_wood_products)),pm_forestry_demand_73(t_all,iso,total_wood_products));
 display pm_iiasa_GLO;
 
 pm_demand_ext(t_ext,i,kforestry) = pm_iiasa_timber("y2150",i,kforestry);
 pm_demand_ext(t_all,i,kforestry) = pm_iiasa_timber(t_all,i,kforestry);
-*display pm_demand_ext;
 
 ***** Calculate model estimate per capita
 p73_wood_products_demand_pc(t,iso,wood_panels) =1.044e-05*(im_gdp_pc_ppp_iso(t,iso)**0.9063);

@@ -46,12 +46,12 @@ cfg$gms$s56_reward_neg_emis <- -Inf
 ########## Setting up runs ############
 #######################################
 
-flag_run <- paste0("R038")
+flag_run <- paste0("R039")
 
 cfg$gms$s32_recurring_cost_multiplier <- 10
 
-for(c32_rotation_extension in c(0,5,10)){
-	for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")){
+for(c32_rotation_extension in c(0)){
+	for(co2_price_scenarios in c("R2M41-SSP2-NPi")){
 
 		if(co2_price_scenarios == "R2M41-SSP2-NPi") co2_flag = "Ref"
 		if(co2_price_scenarios == "R2M41-SSP2-Budg1300") co2_flag = "CO2price"
@@ -74,7 +74,7 @@ for(c32_rotation_extension in c(0,5,10)){
 
 		cfg$gms$s35_selective_logging_flag = 1.00 ## Clear cut is 1.0
 
-		for(ssp in c("SSP1","SSP2","SSP5")){
+		for(ssp in c("SSP2")){
 			cfg <- setScenario(cfg,c(ssp,"NPI"))
 
 			cfg$gms$c56_pollutant_prices <- co2_price_scenarios
