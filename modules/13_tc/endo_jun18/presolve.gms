@@ -12,7 +12,7 @@ vm_tau.up(i) =  2*pc13_tau(i);
 * educated guess for vm_tau.l:
 vm_tau.l(i) = pc13_tau(i)*(1+pc13_tcguess(i))**m_yeardiff(t);
 
-*vm_tau.up(i)$(sum(sameas(t_past,t),1) = 1) = f13_tau_historical(t,i); 
+vm_tau.fx(i)$(sum(sameas(t_past,t),1) = 1) = f13_tau_historical(t,i); 
 
 vm_tech_cost.up(i) = 10e9;
 

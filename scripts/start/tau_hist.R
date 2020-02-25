@@ -42,7 +42,7 @@ cfg$results_folder <- "output/:title:"
 #10 recalc npi
 #13 final test
 
-prefix <- "TAU01"
+prefix <- "TAU02"
 
 for (ssp in c("SSP2")) {
   
@@ -51,7 +51,7 @@ for (ssp in c("SSP2")) {
     cfg$gms$c60_2ndgen_biodem <- "coupling"
     getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-NPi-mag-4/fulldata.gdx"))
     cfg$title <- paste0(prefix,"_",ssp,"_","NPI")
-    cfg$recalibrate <- TRUE
+    cfg$recalibrate <- FALSE
     start_run(cfg,codeCheck=FALSE)
     
 }
