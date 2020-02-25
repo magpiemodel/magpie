@@ -25,7 +25,7 @@ parameters
   im_gdp_pc_ppp_iso(t,iso)          Per capita income in purchasing power parity (USD05PPP per cap per yr)
 
 * Development State
-  im_development_state(t,i)                          Development state according to the World Bank definition where 0=low income country 1=high income country in high income level  (1)
+  im_development_state(t_all,i)                          Development state according to the World Bank definition where 0=low income country 1=high income country in high income level  (1)
   im_physical_inactivity(t,iso,sex,age)          Share of population which is physically inactive (1)
   im_demography(t,iso,sex,age)                         Population by groups (mio. per yr)
 ;

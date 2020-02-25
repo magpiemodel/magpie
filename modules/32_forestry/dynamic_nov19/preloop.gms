@@ -47,11 +47,11 @@ p32_rotation_cellular_estb(t_past_ff,j) = p32_rotation_cellular_estb("y1995",j);
 * For 2050 plantation establsihed in 2020 with 30y rotaions shall be harvested according to 30 yr (for example)
 
 p32_rotation_cellular_harvesting(t_all,j) = p32_rotation_cellular_estb(t_all,j);
-loop(t,
+loop(t_all,
   loop(j,
-      p32_rotation_offset = p32_rotation_cellular_estb(t,j);
-      if(ord(t)>p32_rotation_offset,
-        p32_rotation_cellular_harvesting(t,j) = p32_rotation_cellular_estb(t-p32_rotation_offset,j);
+      p32_rotation_offset = p32_rotation_cellular_estb(t_all,j);
+      if(ord(t_all)>p32_rotation_offset,
+        p32_rotation_cellular_harvesting(t_all,j) = p32_rotation_cellular_estb(t_all-p32_rotation_offset,j);
         );
     );
 );

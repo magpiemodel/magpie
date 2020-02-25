@@ -34,4 +34,8 @@ kforestry_to_woodprod(kforestry,total_wood_products) mapping between ac and ac_p
 wood . (fibreboard,particle_board_and_osb,plywood,veneer_sheets,wood_pulp,sawnwood,other_sawnwood,other_industrial_roundwood)
 woodfuel . (wood_fuel)
 /
+
+t_all_ct(t_all)
+
+;
 *** EOF sets.gms ***
