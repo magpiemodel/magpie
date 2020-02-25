@@ -42,7 +42,7 @@ cfg$results_folder <- "output/:title:"
 #10 recalc npi
 #13 final test
 
-prefix <- "TAU02"
+prefix <- "TAU03"
 
 for (ssp in c("SSP2")) {
   
