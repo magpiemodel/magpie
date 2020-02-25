@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 s39_cost_establish = 8000;
-s39_cost_clearing = 5;
+s39_cost_clearing = 10;
 
 i39_cost_establish(land) = 0;
 i39_cost_establish(land_establish39) = s39_cost_establish;
