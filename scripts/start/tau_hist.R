@@ -50,8 +50,8 @@ for (ssp in c("SSP2")) {
     cfg$gms$c56_pollutant_prices <- "coupling"
     cfg$gms$c60_2ndgen_biodem <- "coupling"
     getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-NPi-mag-4/fulldata.gdx"))
-    cfg$title <- paste0(prefix,"_",ssp,"_","NPI_tcexo")
-    cfg$gms$tc <- "exo"
+    cfg$title <- paste0(prefix,"_",ssp,"_","NPI_tcendo")
+    #cfg$gms$tc <- "exo"
     cfg$recalibrate <- FALSE
     start_run(cfg,codeCheck=FALSE)
     
