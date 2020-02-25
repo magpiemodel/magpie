@@ -46,7 +46,7 @@ cfg$gms$s56_reward_neg_emis <- -Inf
 ########## Setting up runs ############
 #######################################
 
-flag_run <- paste0("FreeVar-R040")
+flag_run <- paste0("-R041")
 
 cfg$gms$s32_recurring_cost_multiplier <- 10
 
@@ -74,7 +74,7 @@ for(c32_rotation_extension in c(0)){
 
 		cfg$gms$s35_selective_logging_flag = 1.00 ## Clear cut is 1.0
 
-		for(ssp in c("SSP2")){
+		for(ssp in c("SSP3","SSP2","SSP5")){
 			cfg <- setScenario(cfg,c(ssp,"NPI"))
 
 			cfg$gms$c56_pollutant_prices <- co2_price_scenarios
