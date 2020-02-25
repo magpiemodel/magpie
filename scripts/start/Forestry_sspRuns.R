@@ -34,7 +34,7 @@ cfg$output <- c("rds_report")
 cfg$gms$s80_optfile <- 1
 
 ## Set time step length
-cfg$gms$c_timesteps = "5year"
+cfg$gms$c_timesteps = "coup2100"
 
 ## Emis policy
 cfg$gms$c56_emis_policy <- "ssp_nosoil"
