@@ -146,7 +146,8 @@ q32_cost_harvest(i2)..
 q32_prod_future(i2,kforestry) ..
               sum((cell(i2,j2)), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2,kforestry))
               =g=
-              vm_prod_future_reg_ff(i2,kforestry) * pcm_production_ratio_future(i2)
+              vm_prod_future_reg_ff(i2,kforestry) * 0.33
+*              * pcm_production_ratio_future(i2)
               ;
 
 **** Area harvested

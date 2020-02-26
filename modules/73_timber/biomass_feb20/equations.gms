@@ -13,7 +13,8 @@
 q73_timber_demand(i2,kforestry)..
   v73_timber_demand(i2,kforestry)
   =e=
-  sum(ct,p73_wood_products_demand_reg(ct,i2,kforestry));
+*  sum(ct,p73_wood_products_demand_reg(ct,i2,kforestry));
+  0;
 
 *' The following equation describes cellular level production of woody biomass
 *' `vm_prod_reg` as the sum of the cluster level production of timber coming from
