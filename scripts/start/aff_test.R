@@ -42,7 +42,7 @@ cfg$results_folder <- "output/:title:"
 #10 recalc npi
 #13 final test
 
-prefix <- "C17_"
+prefix <- "C18_"
 
 #for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
 for (ssp in c("SSP2")) {
@@ -54,36 +54,42 @@ for (ssp in c("SSP2")) {
     # cfg$title <- paste0(prefix,ssp,"_NPI")
     # start_run(cfg,codeCheck=FALSE)
     
-    cfg <- setScenario(cfg,c(ssp,"NDC"))
-    aff <- "natveg"
-    
-    if (aff == "plant") {
-      if (ssp == "SDP") {
-        getInput(paste0("/p/projects/piam/runs/coupled-magpie-flohump/output/C_",ssp,"-PkBudg1000-plant-mag-4/fulldata.gdx"))
-      } else {
-        getInput(paste0("/p/projects/piam/runs/coupled-magpie-flohump/output/C_",ssp,"-PkBudg900-plant-mag-4/fulldata.gdx"))
-      }
-      cfg$gms$s52_forestry_plantation <- 1
-    } else if (aff == "natveg") {
-      if (ssp == "SDP") {
-        getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-PkBudg1000-mag-4/fulldata.gdx"))
-      } else {
-        getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
-      }
-      cfg$gms$s52_forestry_plantation <- 0
-    }
-    
+    # aff <- "natveg"
+    # 
+    # if (aff == "plant") {
+    #   if (ssp == "SDP") {
+    #     getInput(paste0("/p/projects/piam/runs/coupled-magpie-flohump/output/C_",ssp,"-PkBudg1000-plant-mag-4/fulldata.gdx"))
+    #   } else {
+    #     getInput(paste0("/p/projects/piam/runs/coupled-magpie-flohump/output/C_",ssp,"-PkBudg900-plant-mag-4/fulldata.gdx"))
+    #   }
+    #   cfg$gms$s52_forestry_plantation <- 1
+    # } else if (aff == "natveg") {
+    #   if (ssp == "SDP") {
+    #     getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-PkBudg1000-mag-4/fulldata.gdx"))
+    #   } else {
+    #     getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
+    #   }
+    #   cfg$gms$s52_forestry_plantation <- 0
+    # }
+    # 
     # cfg$gms$c56_pollutant_prices <- "coupling"
     # cfg$gms$c60_2ndgen_biodem <- "coupling"
     # cfg$title <- paste0(prefix,ssp,"_PkBudg900_","FeedDef")
     # cfg$gms$c70_feed_scen <- "ssp2"
     # start_run(cfg,codeCheck=FALSE)
     
+    cfg <- setScenario(cfg,c(ssp,"NPI"))
     cfg$gms$c56_pollutant_prices <- "coupling"
     cfg$gms$c60_2ndgen_biodem <- "coupling"
-    cfg$title <- paste0(prefix,ssp,"_PkBudg900_","FeedSSP5","_TradeLib")
-    cfg$gms$c70_feed_scen <- "ssp5"
-    cfg$gms$c21_trade_liberalization <- "l908080r807070"
+    cfg$title <- paste0(prefix,ssp,"_NPI_GHGzero")
+    getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-NPi-mag-4/fulldata.gdx"))
+    start_run(cfg,codeCheck=FALSE)
+
+    cfg <- setScenario(cfg,c(ssp,"NDC"))
+    cfg$gms$c56_pollutant_prices <- "coupling"
+    cfg$gms$c60_2ndgen_biodem <- "coupling"
+    cfg$title <- paste0(prefix,ssp,"_NDC_GHGzero")
+    getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-NDC-mag-4/fulldata.gdx"))
     start_run(cfg,codeCheck=FALSE)
     
 }

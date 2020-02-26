@@ -48,21 +48,31 @@ v56_emission_costs_cell_oneoff.lo(j2,emis_cell_one56) = s56_reward_neg_emis;
 ***construct age-class dependent C price for afforestation incentive
 ***this is needed because time steps (t) and age-classes (ac) can differ. ac and t_all are always in 5-year time steps.
 *For missing years in t_all use C price of previous time step. This step makes sure that C prices for every 5-year time step are available.
+
+*TEST with 0 prices
+im_pollutant_prices(t_all,i,pollutants) = 0;
+$ontext
 loop(t_all$(m_year(t_all)>=s56_ghgprice_start),
 	im_pollutant_prices(t_all,i,"co2_c")$(im_pollutant_prices(t_all,i,"co2_c") = 0) = im_pollutant_prices(t_all-1,i,"co2_c");
 );
+
 *Calculate mean C price in case a zero C price was replaced by the previous step. There might be a more efficient way to do this.
-loop(t_all$(m_year(t_all)>=s56_ghgprice_start AND ord(t_all)<card(t_all)),
+loop(t_all$(m_year(t_all)>=s56_ghgprice_start AND ord(t_all)<card(t_all)-1),
 	loop(i,
-		if (im_pollutant_prices(t_all,i,"co2_c") = im_pollutant_prices(t_all-1,i,"co2_c"),
+		if (im_pollutant_prices(t_all+1,i,"co2_c") = im_pollutant_prices(t_all,i,"co2_c") AND im_pollutant_prices(t_all,i,"co2_c") > 0,
 			s56_counter = 0;
 			repeat (
 			s56_counter = s56_counter + 1;
-			until im_pollutant_prices(t_all+s56_counter,i,"co2_c") > im_pollutant_prices(t_all-1,i,"co2_c") OR s56_counter = card(t_all)-ord(t_all));
-			im_pollutant_prices(t_all,i,"co2_c") = (im_pollutant_prices(t_all-1,i,"co2_c") + im_pollutant_prices(t_all+s56_counter,i,"co2_c"))/2
+			until im_pollutant_prices(t_all+s56_counter,i,"co2_c") <> im_pollutant_prices(t_all,i,"co2_c") OR s56_counter = card(t_all)-ord(t_all));
+			im_pollutant_prices(t_all+1,i,"co2_c")  = (im_pollutant_prices(t_all+1,i,"co2_c") + im_pollutant_prices(t_all+s56_counter,i,"co2_c"))/2 * 1/s56_counter
+			im_pollutant_prices(t_all+1,i,"co2_c") = im_pollutant_prices(t_all+1,i,"co2_c") + 1/6 * increase
+			im_pollutant_prices(t_all+2,i,"co2_c") = im_pollutant_prices(t_all+2,i,"co2_c") + 2/6 * increase
+			display s56_counter;
 		);
 	);
 );
+$offtext
+display p56_pollutant_prices_input;
 display im_pollutant_prices;
 *initialize age-class dependent C price with same C price for all age-classes
 p56_c_price_aff(t_all,i,ac) = im_pollutant_prices(t_all,i,"co2_c");
