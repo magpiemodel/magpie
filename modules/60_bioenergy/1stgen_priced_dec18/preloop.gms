@@ -12,7 +12,6 @@ $endif
 * Add minimal bioenergy demand in case of zero demand to avoid zero prices
 i60_bioenergy_dem(t,i)$(i60_bioenergy_dem(t,i) = 0) = 0.01;
 
-
 i60_res_2ndgenBE_dem(t,i) =
              f60_res_2ndgenBE_dem(t,i,"%c60_res_2ndgenBE_dem%");
 
