@@ -10,7 +10,8 @@ $elseif "%c60_2ndgen_biodem%" == "emulator" i60_bioenergy_dem(t,i) = f60_bioener
 $else i60_bioenergy_dem(t,i) = f60_bioenergy_dem(t,i,"%c60_2ndgen_biodem%");
 $endif
 * Add minimal bioenergy demand in case of zero demand to avoid zero prices
-i60_bioenergy_dem("y2010",) = 0;
+i60_bioenergy_dem("y2005",i) = 0;
+i60_bioenergy_dem("y2010",i) = 0;
 i60_bioenergy_dem(t,i)$(i60_bioenergy_dem(t,i) = 0) = 0.01;
 
 
