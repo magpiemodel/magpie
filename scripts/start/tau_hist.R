@@ -42,18 +42,30 @@ cfg$results_folder <- "output/:title:"
 #10 recalc npi
 #13 final test
 
-prefix <- "TAU03"
+cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c200_690d3718e151be1b450b394c1064b1c5.tgz",
+               "rev4.37_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
+               "rev4.37_690d3718e151be1b450b394c1064b1c5_validation.tgz",
+#               "calibration_H12_c200_12Sep18.tgz",
+               "additional_data_rev3.77.tgz")
+
+prefix <- "TAU04"
 
 for (ssp in c("SSP2")) {
-  
-    cfg <- setScenario(cfg,c(ssp,"NPI"))
-    cfg$gms$c56_pollutant_prices <- "coupling"
-    cfg$gms$c60_2ndgen_biodem <- "coupling"
-    getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-NPi-mag-4/fulldata.gdx"))
-    cfg$title <- paste0(prefix,"_",ssp,"_","NPI_lowerbound_100USD")
-    #cfg$gms$tc <- "exo"
-    #cfg$recalibrate <- TRUE
-    start_run(cfg,codeCheck=FALSE)
-    
+  for (acc in c(0.01,0.02,0.03,0.04,0.05)) {
+    for (damp in c(0.98,0.95)) {
+      cfg <- setScenario(cfg,c(ssp,"NPI"))
+      cfg$gms$c56_pollutant_prices <- "coupling"
+      cfg$gms$c60_2ndgen_biodem <- "coupling"
+      getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-NPi-mag-4/fulldata.gdx"))
+      #cfg$gms$tc <- "exo"
+      cfg$recalibrate <- TRUE
+      cfg$calib_accuracy <- acc
+      cfg$calib_maxiter <- 30
+      cfg$damping_factor <- damp
+      cfg$force_download <- TRUE
+      cfg$title <- paste0(prefix,"_",ssp,"_","NPI","_","acc",acc*100,"_damp",damp*100)
+      start_run(cfg,codeCheck=FALSE)
+    }
+  }
 }
 
