@@ -81,14 +81,14 @@ for (ssp in c("SSP2")) {
     cfg <- setScenario(cfg,c(ssp,"NPI"))
     cfg$gms$c56_pollutant_prices <- "coupling"
     cfg$gms$c60_2ndgen_biodem <- "coupling"
-    cfg$title <- paste0(prefix,ssp,"_NPI_GHGzero")
+    cfg$title <- paste0(prefix,ssp,"_NPI_GHGzero_Biozero2010")
     getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-NPi-mag-4/fulldata.gdx"))
     start_run(cfg,codeCheck=FALSE)
 
     cfg <- setScenario(cfg,c(ssp,"NDC"))
     cfg$gms$c56_pollutant_prices <- "coupling"
     cfg$gms$c60_2ndgen_biodem <- "coupling"
-    cfg$title <- paste0(prefix,ssp,"_NDC_GHGzero")
+    cfg$title <- paste0(prefix,ssp,"_NDC_GHGzero_Biozero2010")
     getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-NDC-mag-4/fulldata.gdx"))
     start_run(cfg,codeCheck=FALSE)
     
