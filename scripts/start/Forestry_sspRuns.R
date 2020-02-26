@@ -46,7 +46,7 @@ cfg$gms$s56_reward_neg_emis <- -Inf
 ########## Setting up runs ############
 #######################################
 
-flag_run <- paste0("ConstantEstbRatio-R043")
+flag_run <- paste0("NatVegFreeProd-R044")
 
 cfg$gms$s32_recurring_cost_multiplier <- 10
 

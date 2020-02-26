@@ -42,6 +42,7 @@ q73_hvarea_primforest(j,kforestry)                                    Area harve
 q73_prod_other(j,ac_sub)                                              Production of woody biomass from other land (mio. m3 per yr)
 q73_hvarea_other(j,ac_sub)                                            Area harvested for woody biomass from other land (mio. m3 per yr)
 q73_timber_demand(i,kforestry)                                        Timber demand (mio. m3 per yr)
+q73_min_natveg_prod                                                   Minimum proportion of overall production that should come from plantations (mio. m3 per yr)
 ;
 
 
@@ -60,5 +61,6 @@ parameters
  oq73_prod_other(t,j,ac_sub,type)                        Production of woody biomass from other land (mio. m3 per yr)
  oq73_hvarea_other(t,j,ac_sub,type)                      Area harvested for woody biomass from other land (mio. m3 per yr)
  oq73_timber_demand(t,i,kforestry,type)                  Timber demand (mio. m3 per yr)
+ oq73_min_natveg_prod(t,type)                            Minimum proportion of overall production that should come from plantations (mio. m3 per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
