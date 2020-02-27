@@ -44,12 +44,6 @@ q73_prod_forestry(j2,kforestry)..
                          sum((ac_sub,ct), vm_hvarea_forestry(j2,kforestry,ac_sub) * pm_growing_stock(ct,j2,ac_sub,kforestry,"forestry"))
                          ;
 
-q73_min_natveg_prod..
-                        sum((land_natveg,ac_sub,j2,kforestry),v73_prod_natveg(j2,land_natveg,ac_sub,kforestry))
-                        =l=
-                        sum((ct,i2,kforestry),vm_prod_reg(i2,kforestry) * (1-pm_production_ratio_ext(ct,i2)))
-                        ;
-
 *** Natveg production ***
 
 ** Secondary forest

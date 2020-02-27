@@ -146,8 +146,7 @@ q32_cost_harvest(i2)..
 q32_prod_future(i2,kforestry) ..
               sum((cell(i2,j2)), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2,kforestry))
               =g=
-              vm_prod_future_reg_ff(i2,kforestry) * 0.33
-*              * pcm_production_ratio_future(i2)
+              vm_prod_future_reg_ff(i2,kforestry) * pcm_production_ratio_future(i2)
               ;
 
 **** Area harvested
@@ -160,5 +159,12 @@ q32_hvarea_forestry(j2,ac_sub) ..
                           sum(kforestry, vm_hvarea_forestry(j2,kforestry,ac_sub))
                           =e=
                           (pc32_land(j2,"plant",ac_sub) - v32_land(j2,"plant",ac_sub));
+
+*' Regional land area for plantations
+q32_land_forestry(i2)..
+                    v32_land_forestry(i2)
+                    =e=
+                    sum((ac,cell(i2,j2)),v32_land(j2,"plant",ac))
+                    ;
 
 *** EOF equations.gms ***

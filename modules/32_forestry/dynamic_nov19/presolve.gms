@@ -5,6 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+** Setting initial values
+v32_land_forestry.lo(i) = sum((cell(i,j),ac),p32_land("y1995",j,"plant",ac));
+v32_land_forestry.up(i) = v32_land_forestry.lo(i) * 2;
+
 ** Declare new set to distribute newly established plantations evenly for longer
 ** than 5 year time steps. We then overwrite this with yes for ac_additional
 ** elements which are lower than difference between years.
@@ -41,8 +45,7 @@ p32_cdr_ac(t,j,ac)$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planing_horizon/5)
 *' Regrowth of natural vegetation (natural succession) is modelled by shifting
 *' age-classes according to time step length. For first year of simulation, the
 *' shift is just 1.
-s32_shift = (5/5)$(ord(t)=1);
-s32_shift = (m_timestep_length/5)$(ord(t)>1);
+s32_shift = (5/5)$(ord(t)=1) + (m_timestep_length/5)$(ord(t)>1);
 
 *' Shifting of age-calsses in land.
 if((ord(t)>1),

@@ -59,17 +59,6 @@ loop(t_all,
 ** RL Extension
 p32_rotation_cellular_harvesting(t_all,j) = p32_rotation_cellular_harvesting(t_all,j) + c32_rotation_extension ;
 
-$ontext
-loop(t,
-  loop(j,
-    loop(ac,
-        p32_rotation_cellular_harvesting(t,j)$(ord(t)-ac.off>0) = p32_rotation_cellular_estb(t-ac.off,j);
-        p32_rotation_cellular_harvesting(t_all,j)$(ord(t_all)-(ord(ac)-1-(m_yeardiff(t_all)/5))>0 AND m_yeardiff(t_all)>5) = p32_rotation_cellular_estb(t_all-(ord(ac)-1-(m_yeardiff(t_all)/5)),j);
-      );
-    );
-  );
-$offtext
-
 ** Define protect and harvest setting
 protect32(t,j,ac_sub) = no;
 *protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular(t,j));
@@ -115,4 +104,5 @@ pm_production_ratio_ext(t_all,i) = f32_production_ratio(t_all,i);
 f32_forestry_management("USA","plantations") = 7;
 p32_management_factor(j,mgmt_type) = sum(cell(i,j),ceil(f32_forestry_management(i,"plantations")/f32_forestry_management(i,"natveg")));
 p32_management_factor(j,"high") = p32_management_factor(j,"normal") * 3;
+
 **************************************************************************

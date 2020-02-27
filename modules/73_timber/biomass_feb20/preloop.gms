@@ -8,8 +8,9 @@
 ** Fixing variables
 *vm_prod_heaven_timber.fx(j,kforestry) = 0;
 v73_prod_natveg.fx(j,"other",ac_sub,"wood") = 0;
-vm_hvarea_other.fx(j,ac_sub,"wood") = 0;
 v73_prod_natveg.fx(j,"primforest",ac_sub,kforestry)$(not sameas(ac_sub,"acx")) = 0;
+vm_hvarea_other.fx(j,ac_sub,"wood") = 0;
+
 
 ****************** IIASA demand ******************
 *' Taken from Supply and demand functions for global wood markets: Specification and

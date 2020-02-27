@@ -20,11 +20,13 @@ table f21_self_suff(t_all,i,kall) Regional self-sufficiency rates (1)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_self_suff.cs3"
 $offdelim;
+*f21_self_suff(t_all,"MEA",kforestry) = 0.2;
 
 table f21_exp_shr(t_all,i,kall) Regional and crop-specific export share (1)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_export_share.cs3"
 $offdelim;
+*f21_exp_shr(t_all,"MEA",kforestry) = 0.0001;
 
 table f21_trade_balanceflow(t_all,kall) Domestic balance flows (mio. tDM per yr)
 $ondelim
@@ -36,11 +38,12 @@ $ondelim
 $include "./modules/21_trade/input/f21_trade_margin.cs3"
 $offdelim
 ;
-f21_trade_margin("JPN",kforestry) = 0.01;
+f21_trade_margin(i,kforestry) = f21_trade_margin(i,"livst_rum");
+
 
 table f21_trade_tariff(i,kall) Specific duty tariffs (USD05MER per tDM)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_tariff.cs3"
 $offdelim
 ;
-f21_trade_tariff("JPN",kforestry) = 0.01;
+*f21_trade_tariff("JPN",kforestry) = 0.01;

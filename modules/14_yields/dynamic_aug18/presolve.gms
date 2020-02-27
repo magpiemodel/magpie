@@ -38,4 +38,4 @@ pm_growing_stock(t,j,ac_sub,kforestry,land_natveg) =
     ;
 
 **** Hard constraint to always have a positive number in pm_growing_stock
-pm_growing_stock(t,j,ac_sub,kforestry,land_natveg) = pm_growing_stock(t,j,ac_sub,kforestry,land_natveg)$(pm_growing_stock(t,j,ac_sub,kforestry,land_natveg)>0)+0.001$(pm_growing_stock(t,j,ac_sub,kforestry,land_natveg)=0);
+pm_growing_stock(t,j,ac_sub,kforestry,land_natveg) = pm_growing_stock(t,j,ac_sub,kforestry,land_natveg)$(pm_growing_stock(t,j,ac_sub,kforestry,land_natveg)>0)+0.0001$(pm_growing_stock(t,j,ac_sub,kforestry,land_natveg)=0);
