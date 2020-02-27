@@ -59,7 +59,7 @@ loop(t_all$(m_year(t_all) >= 1990),
           ;
 );
 
-pm_iiasa_timber(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to_woodprod(kforestry,total_wood_products)),pm_forestry_demand_prod_specific(t_all,iso,total_wood_products));
+pm_iiasa_timber(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to_woodprod(kforestry,total_wood_products)),pm_forestry_demand_prod_specific(t_all,iso,total_wood_products)) * c16_timber_demand;
 
 ** Woodfuel fix
 pm_iiasa_timber(t_all,i,"woodfuel") = (pm_iiasa_timber(t_all,i,"woodfuel") * 0.50)$(im_development_state(t_all,i)<1)
