@@ -50,56 +50,64 @@ flag_run <- paste0("InitLandFix-R046")
 
 cfg$gms$s32_recurring_cost_multiplier <- 10
 
-for(c32_rotation_extension in c(0)){
-	for(co2_price_scenarios in c("R2M41-SSP2-NPi")){
+for(timber_demand in c(1,0)){
 
-		if(co2_price_scenarios == "R2M41-SSP2-NPi") co2_flag = "Ref"
-		if(co2_price_scenarios == "R2M41-SSP2-Budg1300") co2_flag = "CO2price"
+	cfg$gms$c16_timber_demand <- timber_demand
 
-		## Set rotation length at harvest according to interest rate
-		cfg$gms$c32_rotation_harvest = "def"
+	if(timber_demand == 1) dem_flag = "TimberON"
+	if(timber_demand == 0) dem_flag = "TimberOFF"
 
-		cfg$gms$c32_rotation_extension = c32_rotation_extension;
+	for(c32_rotation_extension in c(0)){
+		for(co2_price_scenarios in c("R2M41-SSP2-NPi")){
 
-		if(c32_rotation_extension == 0) rot_flag = "NormalRotation"
-		if(c32_rotation_extension == 5) rot_flag = "ExtendedRotation5y"
-		if(c32_rotation_extension == 10) rot_flag = "ExtendedRotation10y"
+			if(co2_price_scenarios == "R2M41-SSP2-NPi") co2_flag = "Ref"
+			if(co2_price_scenarios == "R2M41-SSP2-Budg1300") co2_flag = "CO2price"
 
-		## Rotation length for establishment
-		cfg$gms$c32_rotation_estb <- cfg$gms$c32_rotation_harvest
+			## Set rotation length at harvest according to interest rate
+			cfg$gms$c32_rotation_harvest = "def"
 
-		## Loop over climate impacts
+			cfg$gms$c32_rotation_extension = c32_rotation_extension;
 
-		cfg <- setScenario(cfg, "nocc")
+			if(c32_rotation_extension == 0) rot_flag = "NormalRotation"
+			if(c32_rotation_extension == 5) rot_flag = "ExtendedRotation5y"
+			if(c32_rotation_extension == 10) rot_flag = "ExtendedRotation10y"
 
-		cfg$gms$s35_selective_logging_flag = 1.00 ## Clear cut is 1.0
+			## Rotation length for establishment
+			cfg$gms$c32_rotation_estb <- cfg$gms$c32_rotation_harvest
 
-		for(ssp in c("SSP2","SSP3","SSP5")){
-			cfg <- setScenario(cfg,c(ssp,"NPI"))
+			## Loop over climate impacts
 
-			cfg$gms$c56_pollutant_prices <- co2_price_scenarios
-			cfg$gms$c60_2ndgen_biodem <- co2_price_scenarios
+			cfg <- setScenario(cfg, "nocc")
 
-			cfg$title<- paste0(ssp,"-",rot_flag,"-",co2_flag,"-",flag_run)
+			cfg$gms$s35_selective_logging_flag = 1.00 ## Clear cut is 1.0
 
-			## Declare input data array
-			#magpie_default_data <- "magpie4.1_default_apr19.tgz"
-			#additional_magpie_data <- "additional_data_rev3.68.tgz"
-			#isimip_data <- paste0("isimip_rcp-IPSL_CM5A_LR-",rcp_scen,"-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
-			#isimip_data <- paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
-			#forestry_data <- "private_forestry_dec18_20200203.tgz"
+			for(ssp in c("SSP2")){
+				cfg <- setScenario(cfg,c(ssp,"NPI"))
 
-			## Update input data array
-			#cfg$input <- c(magpie_default_data,additional_magpie_data,isimip_data,forestry_data)
+				cfg$gms$c56_pollutant_prices <- co2_price_scenarios
+				cfg$gms$c60_2ndgen_biodem <- co2_price_scenarios
 
-			## If the model be forced to download data
-			cfg$force_download <- FALSE
+				cfg$title<- paste0(ssp,"-",rot_flag,"-",co2_flag,"-",dem_flag,"-",flag_run)
 
-			## Should recalibration be made
-			cfg$recalibrate <- "ifneeded"
+				## Declare input data array
+				#magpie_default_data <- "magpie4.1_default_apr19.tgz"
+				#additional_magpie_data <- "additional_data_rev3.68.tgz"
+				#isimip_data <- paste0("isimip_rcp-IPSL_CM5A_LR-",rcp_scen,"-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
+				#isimip_data <- paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz")
+				#forestry_data <- "private_forestry_dec18_20200203.tgz"
 
-			## Start the run
-			start_run(cfg=cfg,codeCheck=codeCheck)
+				## Update input data array
+				#cfg$input <- c(magpie_default_data,additional_magpie_data,isimip_data,forestry_data)
+
+				## If the model be forced to download data
+				cfg$force_download <- FALSE
+
+				## Should recalibration be made
+				cfg$recalibrate <- "ifneeded"
+
+				## Start the run
+				start_run(cfg=cfg,codeCheck=codeCheck)
+			}
 		}
 	}
 }

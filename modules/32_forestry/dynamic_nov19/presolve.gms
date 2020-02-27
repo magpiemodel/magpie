@@ -5,9 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-** Setting initial values
-v32_land.fx(j,"plant",ac)$(ord(t)=1) = p32_land("y1995",j,"plant",ac);
-
 ** Declare new set to distribute newly established plantations evenly for longer
 ** than 5 year time steps. We then overwrite this with yes for ac_additional
 ** elements which are lower than difference between years.
