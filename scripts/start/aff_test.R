@@ -42,7 +42,7 @@ cfg$results_folder <- "output/:title:"
 #10 recalc npi
 #13 final test
 
-prefix <- "C20_"
+prefix <- "C21_"
 
 #for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
 for (ssp in c("SSP2")) {
@@ -85,12 +85,12 @@ for (ssp in c("SSP2")) {
     getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-NPi-mag-4/fulldata.gdx"))
     start_run(cfg,codeCheck=FALSE)
 
-    cfg <- setScenario(cfg,c(ssp,"NDC"))
-    cfg$gms$c56_pollutant_prices <- "coupling"
-    cfg$gms$c60_2ndgen_biodem <- "coupling"
-    cfg$title <- paste0(prefix,ssp,"_NDC_LAM40")
-    getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-NDC-mag-4/fulldata.gdx"))
-    start_run(cfg,codeCheck=FALSE)
+    # cfg <- setScenario(cfg,c(ssp,"NDC"))
+    # cfg$gms$c56_pollutant_prices <- "coupling"
+    # cfg$gms$c60_2ndgen_biodem <- "coupling"
+    # cfg$title <- paste0(prefix,ssp,"_NDC_LAM40")
+    # getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-NDC-mag-4/fulldata.gdx"))
+    # start_run(cfg,codeCheck=FALSE)
     
 }
 
