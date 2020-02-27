@@ -46,7 +46,7 @@ positive variables
  v32_land_expansion(j,type32,ac)                    Land expansion (mio. ha)
  v32_land_reduction(j,type32,ac)                    land reduction (mio. ha)
  v32_cost_establishment(i)                          Cost of establishment calculated at the current time step (mio. USD)
- v32_land_forestry(i)                               Regional land area for plantations (mio. ha)
+ v32_land_forestry                                  Regional land area for plantations (mio. ha)
  ;
 
 equations
@@ -64,7 +64,7 @@ equations
  q32_land_expansion(j,type32,ac)                  Land expansion (mio. ha)
  q32_land_reduction(j,type32,ac)                  Land contarction (mio. ha)
  q32_cost_establishment(i)                        Present value of cost of establishment (mio. USD)
- q32_land_forestry(i)                          Regional land area for plantations (mio. ha)
+ q32_land_forestry                                Regional land area for plantations (mio. ha)
 ;
 
 
@@ -80,7 +80,7 @@ parameters
  ov32_land_expansion(t,j,type32,ac,type)       Land expansion (mio. ha)
  ov32_land_reduction(t,j,type32,ac,type)       land reduction (mio. ha)
  ov32_cost_establishment(t,i,type)             Cost of establishment calculated at the current time step (mio. USD)
- ov32_land_forestry(t,i,type)                  Regional land area for plantations (mio. ha)
+ ov32_land_forestry(t,type)                    Regional land area for plantations (mio. ha)
  oq32_cost_total(t,i,type)                     total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                           land constraint (mio. ha)
  oq32_cdr_aff(t,j,ac,type)                     calculation of CDR from afforestation
@@ -95,6 +95,6 @@ parameters
  oq32_land_expansion(t,j,type32,ac,type)       Land expansion (mio. ha)
  oq32_land_reduction(t,j,type32,ac,type)       Land contarction (mio. ha)
  oq32_cost_establishment(t,i,type)             Present value of cost of establishment (mio. USD)
- oq32_land_forestry(t,i,type)                  Regional land area for plantations (mio. ha)
+ oq32_land_forestry(t,type)                    Regional land area for plantations (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

@@ -161,10 +161,10 @@ q32_hvarea_forestry(j2,ac_sub) ..
                           (pc32_land(j2,"plant",ac_sub) - v32_land(j2,"plant",ac_sub));
 
 *' Regional land area for plantations
-q32_land_forestry(i2)..
-                    v32_land_forestry(i2)
+q32_land_forestry..
+                    v32_land_forestry
                     =e=
-                    sum((ac,cell(i2,j2)),v32_land(j2,"plant",ac))
+                    sum((j2,ac),v32_land(j2,"plant",ac))
                     ;
 
 *** EOF equations.gms ***
