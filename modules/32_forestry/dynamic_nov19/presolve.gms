@@ -6,8 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 ** Setting initial values
-v32_land_forestry.lo = sum((j,ac),p32_land("y1995",j,"plant",ac));
-v32_land_forestry.up = v32_land_forestry.lo * 2;
+v32_land.fx(j,"plant",ac)$(ord(t)=1) = p32_land("y1995",j,"plant",ac);
 
 ** Declare new set to distribute newly established plantations evenly for longer
 ** than 5 year time steps. We then overwrite this with yes for ac_additional
