@@ -81,7 +81,7 @@ for (ssp in c("SSP2")) {
     cfg <- setScenario(cfg,c(ssp,"NPI"))
     cfg$gms$c56_pollutant_prices <- "coupling"
     cfg$gms$c60_2ndgen_biodem <- "coupling"
-    cfg$title <- paste0(prefix,ssp,"_NPI_LAM45")
+    cfg$title <- paste0(prefix,ssp,"_NPI_LAM50")
     getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-NPi-mag-4/fulldata.gdx"))
     start_run(cfg,codeCheck=FALSE)
 
