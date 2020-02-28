@@ -46,19 +46,19 @@ cfg$gms$s56_reward_neg_emis <- -Inf
 ########## Setting up runs ############
 #######################################
 
-flag_run <- paste0("-R048")
+flag_run <- paste0("-R049")
 
 cfg$gms$s32_recurring_cost_multiplier <- 10
 
-for(timber_demand in c(1,0)){
+for(timber_demand in c(1)){
 
 	cfg$gms$c16_timber_demand <- timber_demand
 
-	if(timber_demand == 1) dem_flag = "TimberON"
+	if(timber_demand == 1) dem_flag = "-"
 	if(timber_demand == 0) dem_flag = "TimberOFF"
 
-	for(c32_rotation_extension in c(0)){
-		for(co2_price_scenarios in c("R2M41-SSP2-NPi")){
+	for(c32_rotation_extension in c(0,5,10)){
+		for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")){
 
 			if(co2_price_scenarios == "R2M41-SSP2-NPi") co2_flag = "Ref"
 			if(co2_price_scenarios == "R2M41-SSP2-Budg1300") co2_flag = "CO2price"
@@ -81,7 +81,7 @@ for(timber_demand in c(1,0)){
 
 			cfg$gms$s35_selective_logging_flag = 1.00 ## Clear cut is 1.0
 
-			for(ssp in c("SSP2")){
+			for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
 				cfg <- setScenario(cfg,c(ssp,"NPI"))
 
 				cfg$gms$c56_pollutant_prices <- co2_price_scenarios
