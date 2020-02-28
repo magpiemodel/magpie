@@ -5,4 +5,10 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
-name,type,reason
+
+require(lucode)
+
+# publish data which is defined in default.cfg on https://rse.pik-potsdam.de/data/magpie/intern or magpie/public
+
+source("config/default.cfg")
+lucode::publish_data(cfg,target = "dataupload@rse.pik-potsdam.de:/magpie/intern|dataupload@rse.pik-potsdam.de:/magpie/public")

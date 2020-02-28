@@ -19,7 +19,7 @@ i09_gdp_ppp(t,i) = sum(i_to_iso(i,iso),i09_gdp_ppp_iso(t,iso));
 im_pop(t,i) = sum(i_to_iso(i,iso),im_pop_iso(t,iso));
 
 * Status of countries' development
-im_development_state(t,i) = f09_development_state(t,i,"%c09_gdp_scenario%");
+im_development_state(t_all,i) = f09_development_state(t_all,i,"%c09_gdp_scenario%");
 
 * GPD per capita for MAgPIE regions
  im_gdp_pc_mer(t,i)$(

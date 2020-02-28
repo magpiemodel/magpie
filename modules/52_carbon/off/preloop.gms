@@ -6,3 +6,4 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 pm_carbon_density_ac(t,j,ac,c_pools) = 0;
+pm_carbon_density_ac_forestry(t,j,ac,c_pools) = 0;

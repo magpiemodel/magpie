@@ -75,7 +75,7 @@ if(any(land_ini_hr < 0)) {
 }
 
 # Start interpolation (use interpolate from luscale)
-print("Interpolation")
+print("Disaggregation")
 land_hr <- interpolate( x          = land_lr,
                         x_ini_lr   = land_ini_lr,
                         x_ini_hr   = land_ini_hr,

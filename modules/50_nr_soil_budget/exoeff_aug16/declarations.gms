@@ -24,7 +24,7 @@ equations
 ;
 
 parameters
- ic50_atmospheric_deposition_rates(i,land)   atmospheric deposition rate (t N per ha)
+ i50_atmospheric_deposition_rates(t,j,land)   atmospheric deposition rate (t N per ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

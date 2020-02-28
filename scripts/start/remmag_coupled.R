@@ -31,33 +31,19 @@ getInput <- function(gdx,ghg_price=TRUE,biodem=TRUE) {
 #start MAgPIE run
 source("config/default.cfg")
 
-#cfg$force_download <- FALSE
-
 cfg$results_folder <- "output/:title:"
 
-#06 bug pasture production
-#07 bugfix pasture production
-#08 Update from Edna
-#09 bugfix aff
-#10 recalc npi
-#13 final test
-
-prefix <- "C13_"
+prefix <- "RMC01"
 
 for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
-
-  getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-Base-mag-4/fulldata.gdx"))
-  cfg <- setScenario(cfg,c(ssp,"NPI"))
-  cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$gms$c60_2ndgen_biodem <- "coupling"
-  cfg$title <- paste0(prefix,ssp,"_NPI")
-  start_run(cfg,codeCheck=FALSE)
-  
-  getInput(paste0("/p/projects/piam/runs/coupled-magpie/output-20200129/C_",ssp,"-PkBudg900-mag-4/fulldata.gdx"))
-  cfg <- setScenario(cfg,c(ssp,"NDC"))
-  cfg$gms$c56_pollutant_prices <- "coupling"
-  cfg$gms$c60_2ndgen_biodem <- "coupling"
-  cfg$title <- paste0(prefix,ssp,"_PkBudg900_natveg")
-  start_run(cfg,codeCheck=FALSE)
+ for (pol in c("NPi","PkBudg900","PkBudg1100","PkBudg1300")) {
+   if(ssp=="SDP" & pol=="PkBudg900") pol <- "PkBudg1000"
+   getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-",pol,"-mag-4/fulldata.gdx"))
+   cfg$title <- paste(prefix,ssp,pol,sep="-")
+   cfg <- setScenario(cfg,c(ssp,if(pol=="NPi") "NPI" else "NDC"))
+   cfg$gms$c56_pollutant_prices <- "coupling"
+   cfg$gms$c60_2ndgen_biodem <- "coupling"
+   start_run(cfg,codeCheck=FALSE)
+ }
 }
 
