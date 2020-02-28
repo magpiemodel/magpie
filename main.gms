@@ -128,8 +128,8 @@ $title magpie
 *' Units
 *'
 *'  * Document units at the location of the variable declaration
-*'  * Use units that lead to variable values in the range of 0.01 to 100 
-*'  * Use only MAgPIE standard units in GAMS code 1, 106, 106 ha, 106tDM, 106 GJ, 106 USD, 106 m3
+*'  * If possible use units that lead to variable values in the range of 0.01 to 100 
+*'  * Use only MAgPIE standard units in GAMS code 1, 106, 106 ha, 106tDM, 106 GJ, PJ, 106 USD, 106 m3
 *'  * Make sure that your inputs already have the right unit
 *' 
 *' Input files
