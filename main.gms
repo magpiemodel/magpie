@@ -86,9 +86,63 @@ $title magpie
 *' and associated increases in both crop yields  ([14_yields]) and biomass removal through grazing on
 *' pastures ([31_past]), land use change ([39_landconversion]), interregional trade flows ([21_trade]),
 *' and irrigation ([41_area_equipped_for_irrigation]).
-
-
-
+*'
+*' The MAgPIE GAMS code folllows the coding etiquette as described below.
+*'
+*' Use the following prefixes:
+*'
+*'  *  q_ eQuations
+*'  *  v_ Variables
+*'  *  s_ Scalars
+*'  *  f_ File parameters - these parameters contain data as it was read from file
+*'  *  i_ Input parameters - influencing the optimzation but are not influenced by it
+*'  *  p_ Processing parameters - influencing optimization and are being influenced by it
+*'  *  o_ Output parameters - only being influenced by optimization but without effect on the optimization
+*'  *  x_ eXtremely important output parameters - output parameters, that are necessary for the model to run properly (required by external postprocessing). They must not be removed.
+*'  *  c_ switches from the Config.gms - parameters, that are switches to choose different scenarios
+*'  *  m_ Macros
+*'
+*' The prefixes have to be extended in some cases by a second letter
+*'
+*'  * ?m_ module-relevant object - This object is used by at least one module and the core code. Changes related to this object have to be performed carefully.
+*'  * ?00_ (a 2-digit number) module-only object This 2-digit number defines the module the object belongs to. The number is used here to make sure that different modules cannot have the same object
+*'
+*' Sets 
+*'
+*' Sets are treated slightly different: Instead of adding a prefix sets should get a 2-digit number suffix giving the number
+*' of the module in which the set is exclusively used. If the set is used in more than one module no suffix should be given.
+*'
+*' The prefixes have to be extended by a second letter in some more cases
+*'
+*'  * ?c_ value for the Current timestep - necessary for constraints. Each *c_-object must have a time-depending counterpart
+*'  * ?q_ parameter containing the values of an equation
+*'  * ?v_ parameter containing the values of a variable
+*'
+*' Besides prefixes also suffixes should be used. Suffixes should indicate the level of aggregation of an object:
+*'
+*'  * (no suffix) highest disaggregation available
+*'  * _(setname) aggregation over set
+*'  * _reg regional aggregation (exception)
+*'  * _glo global aggregation (exception)
+*'
+*' Units
+*'
+*'  * Document units at the location of the variable declaration
+*'  * Use units that lead to variable values in the range of 0.01 to 100 
+*'  * Use only MAgPIE standard units in GAMS code 1, 106, 106 ha, 106tDM, 106 GJ, 106 USD, 106 m3
+*'  * Make sure that your inputs already have the right unit
+*' 
+*' Input files
+*' 
+*'  * Input file names must be unique, because input files will be downloaded from a data repository and extracted to the same folder so that different files with the same file name would overwrite each other.
+*'  * Do not add input files to the git repository. Input files should be copied instead to one of the existing data repositories from which the data is downloaded by the model.
+*' 
+*' Postprocessing
+*' 
+*'  * Processing of model outputs is managed in the corresponding magpie R package (e.g. package "magpie4" for MAgPIE version 4.x).
+*'  * If you change something in the GAMS code make sure that all function in the corresponding magpie R package still work and adapt them if necessary to the new model structure.
+*'  * When performing modifications in a magpie R package make sure that these changes are downwards compatible.
+*'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
