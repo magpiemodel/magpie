@@ -20,7 +20,6 @@ table f21_self_suff(t_all,i,kall) Regional self-sufficiency rates (1)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_self_suff.cs3"
 $offdelim;
-*f21_self_suff(t_all,"MEA",kforestry) = 0.2;
 
 table f21_exp_shr(t_all,i,kall) Regional and crop-specific export share (1)
 $ondelim

@@ -52,13 +52,13 @@ cfg$gms$s32_recurring_cost_multiplier <- 10
 
 for(timber_demand in c(1)){
 
-	cfg$gms$c16_timber_demand <- timber_demand
+	cfg$gms$s73_timber_demand <- timber_demand
 
 	if(timber_demand == 1) dem_flag = "-"
 	if(timber_demand == 0) dem_flag = "TimberOFF"
 
-	for(c32_rotation_extension in c(0,5,10)){
-		for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")){
+	for(c32_rotation_extension in c(0)){
+		for(co2_price_scenarios in c("R2M41-SSP2-NPi")){
 
 			if(co2_price_scenarios == "R2M41-SSP2-NPi") co2_flag = "Ref"
 			if(co2_price_scenarios == "R2M41-SSP2-Budg1300") co2_flag = "CO2price"

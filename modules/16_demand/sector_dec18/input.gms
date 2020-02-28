@@ -4,11 +4,6 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-scalars
-  c16_timber_demand Switch for timber demand / 1 /
-;
-
-
 table f16_seed_shr(t_all,i,kcr) Seed share relative to production from FAO-FBS (1)
 $ondelim
 $include "./modules/16_demand/sector_dec18/input/f16_seed_shr.csv"

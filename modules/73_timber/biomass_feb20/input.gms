@@ -5,6 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+scalars
+  s73_timber_demand Switch for timber demand / 1 /
+;
+
 table f73_observed_timber_demand_pc(t_all,iso,total_wood_products)  FAO data for observed timber demand (mio. m3 per capita per year)
 $ondelim
 $include "./modules/73_timber/input/f73_observed_timber_demand_pc.csv"
