@@ -8,6 +8,7 @@
 
 positive variables
  vm_cost_trade(i)                            Regional  trade costs (mio. USD05MER per yr)
+ v21_manna_from_heaven(i,k)                  Last resort resource for otherwise infeasble trade balance constraints (mio. tDM per yr)
 ;
 
 equations
