@@ -4,3 +4,4 @@
 # |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
+fm_forestry_demand, input, not used

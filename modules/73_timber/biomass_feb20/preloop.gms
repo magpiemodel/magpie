@@ -42,16 +42,13 @@ p73_income_elasticity("other_industrial_roundwood") = 0.22;
 p73_income_elasticity("other_sawnwood") = p73_income_elasticity("sawnwood");
 
 ** Set historical values to FAO values
-pm_forestry_demand_prod_specific(t_past_ff,iso,total_wood_products) = f73_prod_specific_timber(t_past_ff,iso,total_wood_products);
-
-** Initialize with dummy values
-pm_demand_timber_nextyr(t_all,iso,total_wood_products) = 0;
+p73_forestry_demand_prod_specific(t_past_ff,iso,total_wood_products) = f73_prod_specific_timber(t_past_ff,iso,total_wood_products);
 
 ** Loop over time to calculate future demand
 
 loop(t_all$(m_year(t_all) >= 1990),
-   pm_forestry_demand_prod_specific(t_all+1,iso,total_wood_products)
-          = pm_forestry_demand_prod_specific(t_all,iso,total_wood_products)
+   p73_forestry_demand_prod_specific(t_all+1,iso,total_wood_products)
+          = p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)
           *
           (fm_pop_iso(t_all+1,iso,"%c09_pop_scenario%")/fm_pop_iso(t_all,iso,"%c09_pop_scenario%"))
           *
@@ -59,17 +56,14 @@ loop(t_all$(m_year(t_all) >= 1990),
           ;
 );
 
-pm_iiasa_timber(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to_woodprod(kforestry,total_wood_products)),pm_forestry_demand_prod_specific(t_all,iso,total_wood_products)) * s73_timber_demand;
+pm_timber_demand_gdp_pop(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to_woodprod(kforestry,total_wood_products)),p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)) * s73_timber_demand;
 
 ** Woodfuel fix
-pm_iiasa_timber(t_all,i,"woodfuel") = (pm_iiasa_timber(t_all,i,"woodfuel") * 0.50)$(im_development_state(t_all,i)<1)
-      + (pm_iiasa_timber(t_all,i,"woodfuel"))$(im_development_state(t_all,i)=1);
+pm_timber_demand_gdp_pop(t_all,i,"woodfuel") = (pm_timber_demand_gdp_pop(t_all,i,"woodfuel") * 0.50)$(im_development_state(t_all,i)<1)
+      + (pm_timber_demand_gdp_pop(t_all,i,"woodfuel"))$(im_development_state(t_all,i)=1);
 
-pm_iiasa_GLO(t_all,kforestry) = sum(i,pm_iiasa_timber(t_all,i,kforestry));
-display pm_iiasa_GLO;
-
-pm_demand_ext(t_ext,i,kforestry) = pm_iiasa_timber("y2150",i,kforestry);
-pm_demand_ext(t_all,i,kforestry) = pm_iiasa_timber(t_all,i,kforestry);
+pm_demand_ext(t_ext,i,kforestry) = pm_timber_demand_gdp_pop("y2150",i,kforestry);
+pm_demand_ext(t_all,i,kforestry) = pm_timber_demand_gdp_pop(t_all,i,kforestry);
 
 ***** Calculate model estimate per capita
 *p73_wood_products_demand_pc(t,iso,wood_panels) =1.044e-05*(im_gdp_pc_ppp_iso(t,iso)**0.9063);

@@ -32,14 +32,6 @@ elseif (s21_trade_tariff=0),
     i21_trade_tariff_ff(i,kforestry) = 0;
 );
 
-*' Extended time frame calculations. Holding constant after y2150.
-$ontext
-p21_demand_ext(t_ext,i,"wood") = fm_forestry_demand("y2150",i,"wood");
-p21_demand_ext(t_all,i,"wood") = fm_forestry_demand(t_all,i,"wood");
-p21_demand_ext(t_ext,i,"woodfuel") = fm_forestry_demand("y2150",i,"woodfuel");
-p21_demand_ext(t_all,i,"woodfuel") = fm_forestry_demand(t_all,i,"woodfuel");
-$offtext
-
 p21_selfsuff_ext(t_ext,i,kforestry) = f21_self_suff("y2150",i,kforestry);
 p21_selfsuff_ext(t_all,i,kforestry) = f21_self_suff(t_all,i,kforestry);
 
