@@ -57,7 +57,7 @@ for(timber_demand in c(1)){
 	if(timber_demand == 1) dem_flag = "-"
 	if(timber_demand == 0) dem_flag = "TimberOFF"
 
-	for(c32_rotation_extension in c(0,5,10)){
+	for(c32_rotation_extension in c(0,1,2)){
 		for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")){
 
 			if(co2_price_scenarios == "R2M41-SSP2-NPi") co2_flag = "Ref"
@@ -69,8 +69,8 @@ for(timber_demand in c(1)){
 			cfg$gms$c32_rotation_extension = c32_rotation_extension;
 
 			if(c32_rotation_extension == 0) rot_flag = "NormalRotation"
-			if(c32_rotation_extension == 5) rot_flag = "ExtendedRotation5y"
-			if(c32_rotation_extension == 10) rot_flag = "ExtendedRotation10y"
+			if(c32_rotation_extension == 1) rot_flag = "ExtendedRotation5y"
+			if(c32_rotation_extension == 2) rot_flag = "ExtendedRotation10y"
 
 			## Rotation length for establishment
 			cfg$gms$c32_rotation_estb <- cfg$gms$c32_rotation_harvest
@@ -88,7 +88,7 @@ for(timber_demand in c(1)){
 				cfg$gms$c60_2ndgen_biodem <- co2_price_scenarios
 
 				#cfg$title<- paste0(ssp,"-",rot_flag,"-",co2_flag,"-",dem_flag,"-",flag_run)
-				cfg$title<- paste0(ssp,"-",rot_flag,"-",co2_flag)
+				cfg$title<- paste0(ssp,"-",rot_flag,"-",co2_flag,"-",flag_run)
 
 				## Declare input data array
 				#magpie_default_data <- "magpie4.1_default_apr19.tgz"

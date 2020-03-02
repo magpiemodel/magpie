@@ -69,8 +69,8 @@ for(timber_demand in c(1)){
 			cfg$gms$c32_rotation_extension = c32_rotation_extension;
 
 			if(c32_rotation_extension == 0) rot_flag = "NormalRotation"
-			if(c32_rotation_extension == 5) rot_flag = "ExtendedRotation5y"
-			if(c32_rotation_extension == 10) rot_flag = "ExtendedRotation10y"
+			if(c32_rotation_extension == 1) rot_flag = "ExtendedRotation5y"
+			if(c32_rotation_extension == 2) rot_flag = "ExtendedRotation10y"
 
 			## Rotation length for establishment
 			cfg$gms$c32_rotation_estb <- cfg$gms$c32_rotation_harvest
