@@ -34,14 +34,13 @@ p32_rot_length(t_future,j) = p32_rot_length("y2100",j);
 
 ** Rotation used for establishment decision - Same as harvesting rotation for now.
 ** This is declared as interface because this is also need in trade module.
+p32_rot_length(t_past_ff,j) = p32_rot_length("y2000",j);
 pm_rot_length_estb(t_all,j) = p32_rot_length(t_all,j);
-
 
 ** Earlier we converted rotation lengths to absolute numbers, now we make the Conversion
 ** back to rotation length in age-classes.
 p32_rotation_cellular(t_all,j) = ceil(p32_rot_length(t_all,j)/5);
 p32_rotation_cellular_estb(t_all,j) = ceil(pm_rot_length_estb(t_all,j)/5);
-p32_rotation_cellular_estb(t_past_ff,j) = p32_rotation_cellular_estb("y1995",j);
 
 * Shift rotations. E.g. rotations harveted in 2050 should be harvested with the rotations using which they were establsihed.
 * For 2050 plantation establsihed in 2020 with 30y rotaions shall be harvested according to 30 yr (for example)
