@@ -11,12 +11,12 @@ positive variables
 ;
 
 equations
- q21_notrade(i,k)        Regional production constraint of non-tradable commodities (mio. tDM per yr)
+ q21_notrade(i,kall)        Regional production constraint of non-tradable commodities (mio. tDM per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_trade(t,i,type)  Regional  trade costs (mio. USD05MER per yr)
- oq21_notrade(t,i,k,type) Regional production constraint of non-tradable commodities (mio. tDM per yr)
+ ov_cost_trade(t,i,type)     Regional  trade costs (mio. USD05MER per yr)
+ oq21_notrade(t,i,kall,type) Regional production constraint of non-tradable commodities (mio. tDM per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

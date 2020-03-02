@@ -36,3 +36,5 @@ v10_lu_transitions.fx(j,"urban",land_to10) = 0;
 v10_lu_transitions.fx(j,"urban","urban") = pcm_land(j,"urban");
 
 *' @stop
+
+m_boundfix(vm_land,(j,land),up,10e-5);
