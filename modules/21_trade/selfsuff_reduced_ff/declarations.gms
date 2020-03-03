@@ -11,7 +11,6 @@ parameters
  i21_trade_bal_reduction_ff(t_ext,kforestry)        Trade balance reduction for timber (1)
  i21_trade_margin_ff(i,kforestry)                   Trade margins for timber (USD05MER per tDM)
  i21_trade_tariff_ff(i,kforestry)                   Trade tariffs for timber (USD05MER per tDM)
- pm_demand_ext(t_ext,i,kforestry)               CHECK Module 73 for calc Extended demand for timber beyound simulation (mio. m3)
  p21_selfsuff_ext(t_ext,i,kforestry)            Self sufficiency for timber products in extended time frame (1)
  p21_trade_balanceflow_ext(t_ext,kforestry)     Extended trade balance flow numbers (1)
  p21_exp_shr_ext(t_ext,i,kforestry)             Extended export share (1)

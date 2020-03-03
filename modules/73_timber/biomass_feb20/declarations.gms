@@ -20,13 +20,15 @@ pm_timber_demand_gdp_pop(t_all,i,kforestry)                                     
 i73_gdp_ppp_pc_iso(t_all,iso,gdp_scen09)                                    GDPpc at iso level (mio. USD per capita)
 p73_forestry_demand(t_all,iso,kforestry)                                     Final forestry demand (mio. m3 per yr)
 p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)                   Final forestry demand (mio. m3 per yr)
+pm_demand_ext(t_ext,i,kforestry)                                            Extended demand for timber beyound simulation (mio. m3)
+p73_glo_timber_demand(t_all,kforestry)                                      Global timber demand (mio. m3 per yr)
 ;
 
 positive variables
 v73_prod_forestry(j,kforestry)                                        Production of woody biomass from commercial plantations (mio. m3 per yr)
 v73_prod_natveg(j,land_natveg,ac_sub,kforestry)                       Production of woody biomass from natural vegetation (mio. m3 per yr)
 vm_prod_heaven_timber(j,kforestry)                                    Production of woody biomass from heaven (mio. m3 per yr)
-v73_timber_demand(i,kforestry)                                       Timber demand (mio. m3 per yr)
+v73_timber_demand(i,kforestry)                                        Timber demand (mio. m3 per yr)
 ;
 
 equations

@@ -24,13 +24,12 @@ p73_elasticity("woodfuel") = -0.568;
 ** Select population at iso level
 fm_pop_iso(t_all,iso,"%c09_pop_scenario%")$(fm_pop_iso(t_all,iso,"%c09_pop_scenario%")=0) = 0.001;
 fm_gdp_ppp_iso(t_all,iso,"%c09_gdp_scenario%")$(fm_gdp_ppp_iso(t_all,iso,"%c09_gdp_scenario%")=0) = 0.001;
-fm_gdp_ppp_iso(t_all,iso,"%c09_gdp_scenario%") = fm_gdp_ppp_iso("y1995",iso,"%c09_gdp_scenario%");
 
 ** Calculate gdp per capita at iso level
 i73_gdp_ppp_pc_iso(t_all,iso,"%c09_gdp_scenario%") = fm_gdp_ppp_iso(t_all,iso,"%c09_gdp_scenario%")/fm_pop_iso(t_all,iso,"%c09_pop_scenario%");
 
 *******************************************************************************
-p73_income_elasticity("wood_fuel") = 0.57;
+p73_income_elasticity("wood_fuel") = -0.57;
 p73_income_elasticity("wood_pulp") = 0.36;
 p73_income_elasticity("particle_board_and_osb") = 0.75;
 p73_income_elasticity("fibreboard") = 1.06;
@@ -57,6 +56,8 @@ loop(t_all$(m_year(t_all) >= 1990),
 );
 
 pm_timber_demand_gdp_pop(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to_woodprod(kforestry,total_wood_products)),p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)) * s73_timber_demand;
+p73_glo_timber_demand(t_all,kforestry) = sum(i,pm_timber_demand_gdp_pop(t_all,i,kforestry));
+display p73_glo_timber_demand;
 
 ** Woodfuel fix
 pm_timber_demand_gdp_pop(t_all,i,"woodfuel") = (pm_timber_demand_gdp_pop(t_all,i,"woodfuel") * 0.50)$(im_development_state(t_all,i)<1)
