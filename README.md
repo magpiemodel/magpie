@@ -1,25 +1,28 @@
-# MAgPIE - Open Source land-use modeling framework
+# MAgPIE - Modular open source framework for modeling global land-systems
 
   <https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpie>
 
 ## WHAT IS MAGPIE?
 The *Model of Agricultural Production and its Impact on the Environment* (MAgPIE)
-is a global land use allocation model framework, which is coupled to the grid-based
-dynamic vegetation model LPJmL, with a spatial resolution of 0.5°x0.5°. It takes
-regional economic conditions such as demand for agricultural commodities, technological
-development and production costs as well as spatially explicit data on potential
-crop yields, land and water constraints (from LPJmL) into account. Based on these,
-the model derives specific land use patterns, yields and total costs of
-agricultural production for each grid cell. The objective function of the land use
-model is to minimize total cost of production for a given amount of regional food
-and bioenergy demand. Regional food energy demand is defined for an exogenously
-given population in 10 food energy categories, based on regional diets. Future
-trends in food demand are derived from a cross-country regression analysis, based
-on future scenarios on GDP and population growth.
+is a modular open source framework for modeling global land-systems, which is
+coupled to the grid-based dynamic vegetation model LPJmL, with a spatial resolution
+of 0.5°x0.5°. It takes regional economic conditions such as demand for agricultural
+commodities, technological development and production costs as well as spatially
+explicit data on potential crop yields, land and water constraints (from LPJmL) into
+account. Based on these, the model derives specific land use patterns, yields and
+total costs of agricultural production for each grid cell. The objective function of
+the land use model is to minimize total cost of production for a given amount of
+regional food and bioenergy demand. Regional food energy demand is defined for an
+exogenously given population in 10 food energy categories, based on regional diets.
+Future trends in food demand are derived from a cross-country regression analysis,
+based on future scenarios on GDP and population growth.
 
 ## DOCUMENTATION
-The model documentation for version 4 can be found at
-https://rse.pik-potsdam.de/doc/magpie/version4/
+A framework description paper has been published in
+Geoscientific Model Development (GMD): https://doi.org/10.5194/gmd-12-1299-2019
+
+The model documentation for version 4.1 can be found at
+https://rse.pik-potsdam.de/doc/magpie/4.1/
 
 A most recent version of the documentation can also be extracted from the
 model source code via the R package goxygen
@@ -34,7 +37,7 @@ The Coding Etiquette explains also the used name conventions and other
 structural characteristics.
 
 ## COPYRIGHT
-Copyright 2008-2018 Potsdam Institute for Climate Impact Research (PIK)
+Copyright 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
 
 ## LICENSE
 This program is free software: you can redistribute it and/or modify
@@ -42,12 +45,15 @@ it under the terms of the **GNU Affero General Public License** as published by
 the Free Software Foundation, **version 3** of the License or later. You should
 have received a copy of the GNU Affero General Public License along with this
 program. See the LICENSE file in the root directory. If not, see
-http://www.gnu.org/licenses/
+https://www.gnu.org/licenses/agpl.txt
+
+Under Section 7 of AGPL-3.0, you are granted additional permissions described
+in the MAgPIE License Exception, version 1.0 (see LICENSE file).
 
 ## NOTES
-Besides distribution and software-as-a-service applications the source code
-should also be made available in the events of model based publications or
-model-based consulting.
+Following the principles of good scientific practice it is recommended
+to make the source code available in the events of model based publications
+or model-based consulting.
 
 When using a modified version of **MAgPIE** which is not identical to versions
 in the official main repository at https://github.com/magpiemodel add a suffix
@@ -78,37 +84,16 @@ available repositories via:
 options(repos = c(CRAN = "@CRAN@", pik = "https://rse.pik-potsdam.de/r/packages"))
 ```
 
-The `gdxrrw` package has to be downloaded directly from GAMS via
-```
-download.file("https://support.gams.com/_media/gdxrrw:gdxrrw_1.0.2.zip",
-              "gdxrrw_1.0.2.zip")
-install.packages(“reshape2”)
-install.packages("gdxrrw_1.0.2.zip",repos = NULL)
-```
-In some cases it can happen that `gdxrrw` does not return an error message during
-installation but also did not install properly. To verify a successful
-installation try to load the package via `library(gdxrrw)`.
-
---------------------------------------------------------------------------------
-
-If loading of the package fails you need to install the package from source.
-Under Windows this requires to install Rtools
+Under Windows you need to install Rtools
 (https://cran.r-project.org/bin/windows/Rtools/) and to add it to the PATH
 variable. After that you can run the following lines of code:
 
-```
-download.file("https://support.gams.com/_media/gdxrrw:gdxrrw_1.0.2.tar.gz",
-              "gdxrrw_1.0.2.tar.gz")
-install.packages("gdxrrw_1.0.2.tar.gz",repos = NULL, type="source")
-```
 
---------------------------------------------------------------------------------
-
-
-After that all remaining packages can be installed via `install.packages`
+After that all packages can be installed via `install.packages`
 
 ```
-pkgs <- c("ggplot2",
+pkgs <- c("gdxrrw",
+          "ggplot2",
           "curl",
           "gdx",
           "magclass",
@@ -119,7 +104,8 @@ pkgs <- c("ggplot2",
           "magpiesets",
           "lusweave",
           "luscale",
-          "goxygen")
+          "goxygen",
+          "luplot")
 install.packages(pkgs)
 ```
 For post-processing model outputs *Latex* is required

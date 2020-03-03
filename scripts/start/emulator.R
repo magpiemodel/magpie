@@ -1,3 +1,9 @@
+# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  authors, and contributors see CITATION.cff file. This file is part
+# |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+# |  AGPL-3.0, you are granted additional permissions described in the
+# |  MAgPIE License Exception, version 1.0 (see LICENSE file).
+# |  Contact: magpie@pik-potsdam.de
 #########################################################
 #### Start MAgPIE runs to derive price emulator from ####
 #########################################################
@@ -66,9 +72,9 @@ write.ghgtax <- function(co2tax_2025=NULL,regions=NULL,out="./modules/56_ghg_pol
   
   # unit defined in modules/56_ghg_policy/input/f56_pollutant_prices.cs3: US$ 2005 per Mg N2O-N CH4 and CO2-C
   ghgtax[,,"co2_c"]          <- as.magpie(co2tax) * 44/12       # US$2005/tCO2 -> US$2005/tC
-  ghgtax[,,"ch4"]            <- as.magpie(co2tax) * 25          # US$2005/tCO2 -> US$2005/tCH4
-  ghgtax[,,"n2o_n_direct"]   <- as.magpie(co2tax) * 44/28 * 300 # US$2005/tCO2 -> US$2005/tN
-  ghgtax[,,"n2o_n_indirect"] <- as.magpie(co2tax) * 44/28 * 300 # US$2005/tCO2 -> US$2005/tN
+  ghgtax[,,"ch4"]            <- as.magpie(co2tax) * 28          # US$2005/tCO2 -> US$2005/tCH4 (using Global Warming Potentials from AR5 WG1 CH08 Table 8.7)
+  ghgtax[,,"n2o_n_direct"]   <- as.magpie(co2tax) * 44/28 * 265 # US$2005/tCO2 -> US$2005/tN (using Global Warming Potentials from AR5 WG1 CH08 Table 8.7)
+  ghgtax[,,"n2o_n_indirect"] <- as.magpie(co2tax) * 44/28 * 265 # US$2005/tCO2 -> US$2005/tN (using Global Warming Potentials from AR5 WG1 CH08 Table 8.7)
   
   # set ghg prices before and in 2020 to zero
   ghgtax[,getYears(ghgtax)<="y2020",] <- 0

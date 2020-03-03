@@ -1,8 +1,9 @@
-*** (C) 2008-2017 Potsdam Institute for Climate Impact Research (PIK),
-*** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** or later. See LICENSE file or go to http://www.gnu.org/licenses/
-*** Contact: magpie@pik-potsdam.de
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
+*** |  Contact: magpie@pik-potsdam.de
 
 variables
  v52_carbon_stock_diff(j,land,c_pools)  Change in carbon stocks compared to previous time step (mio. tC per time step)
@@ -15,7 +16,7 @@ positive variables
 
 parameters
  pm_carbon_density_ac(t,j,ac,c_pools)  Carbon density for age classes and carbon pools (tC per ha)
- pc52_carbon_stock(j,land,c_pools)     Current carbon in vegetation soil and litter for different land types (mio. tC)
+ pcm_carbon_stock(j,land,c_pools)     Current carbon in vegetation soil and litter for different land types (mio. tC)
  pc52_carbon_density_start(t,j,c_pools)  Carbon density for new land in other land pool (tC per ha)
 ;
 

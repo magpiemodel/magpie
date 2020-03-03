@@ -1,7 +1,8 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @equations
@@ -22,13 +23,13 @@ vm_cost_fore(i2) =e= sum((cell(i2,j2),land32,fcosts32)$(not sameas(land32,"old")
 *' The interface `vm_cdr_aff` provides the projected CDR of an afforestation 
 *' activity for a planning horizon of 30 years `s32_planing_horizon` to the [56_ghg_policy] module. 
 
-q32_cdr_aff(j2,co2_forestry) ..
-vm_cdr_aff(j2,co2_forestry) =e=
-sum((ac,emis_co2_to_forestry(co2_forestry,c_pools))$(ord(ac) > 1
+q32_cdr_aff(j2) ..
+vm_cdr_aff(j2) =e=
+sum(ac$(ord(ac) > 1
 AND (ord(ac)-1) <= s32_planing_horizon/5), 
 v32_land(j2,"new") *
-(sum(ct, pm_carbon_density_ac(ct,j2,ac,c_pools)) -
-sum(ct, pm_carbon_density_ac(ct,j2,ac-1,c_pools))));
+(sum(ct, pm_carbon_density_ac(ct,j2,ac,"vegc")) -
+sum(ct, pm_carbon_density_ac(ct,j2,ac-1,"vegc"))));
 
 *****Land***************************************************
 *' The interface `vm_land` provides aggregated forestry land pools (`land32`) to other modules.

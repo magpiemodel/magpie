@@ -1,7 +1,8 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
 * Disaggregation of forestry land after optimization from `land32`to `ac`.
@@ -19,10 +20,10 @@ p32_land(t,j,ac,"after") =
  ov_landdiff_forestry(t,"marginal")         = vm_landdiff_forestry.m;
  ov32_land_expansion(t,j,land32,"marginal") = v32_land_expansion.m(j,land32);
  ov32_land_reduction(t,j,land32,"marginal") = v32_land_reduction.m(j,land32);
- ov_cdr_aff(t,j,co2_forestry,"marginal")    = vm_cdr_aff.m(j,co2_forestry);
+ ov_cdr_aff(t,j,"marginal")                 = vm_cdr_aff.m(j);
  oq32_cost_fore_ac(t,i,"marginal")          = q32_cost_fore_ac.m(i);
  oq32_land(t,j,"marginal")                  = q32_land.m(j);
- oq32_cdr_aff(t,j,co2_forestry,"marginal")  = q32_cdr_aff.m(j,co2_forestry);
+ oq32_cdr_aff(t,j,"marginal")               = q32_cdr_aff.m(j);
  oq32_carbon(t,j,c_pools,"marginal")        = q32_carbon.m(j,c_pools);
  oq32_land_diff(t,"marginal")               = q32_land_diff.m;
  oq32_land_expansion(t,j,land32,"marginal") = q32_land_expansion.m(j,land32);
@@ -34,10 +35,10 @@ p32_land(t,j,ac,"after") =
  ov_landdiff_forestry(t,"level")            = vm_landdiff_forestry.l;
  ov32_land_expansion(t,j,land32,"level")    = v32_land_expansion.l(j,land32);
  ov32_land_reduction(t,j,land32,"level")    = v32_land_reduction.l(j,land32);
- ov_cdr_aff(t,j,co2_forestry,"level")       = vm_cdr_aff.l(j,co2_forestry);
+ ov_cdr_aff(t,j,"level")                    = vm_cdr_aff.l(j);
  oq32_cost_fore_ac(t,i,"level")             = q32_cost_fore_ac.l(i);
  oq32_land(t,j,"level")                     = q32_land.l(j);
- oq32_cdr_aff(t,j,co2_forestry,"level")     = q32_cdr_aff.l(j,co2_forestry);
+ oq32_cdr_aff(t,j,"level")                  = q32_cdr_aff.l(j);
  oq32_carbon(t,j,c_pools,"level")           = q32_carbon.l(j,c_pools);
  oq32_land_diff(t,"level")                  = q32_land_diff.l;
  oq32_land_expansion(t,j,land32,"level")    = q32_land_expansion.l(j,land32);
@@ -49,10 +50,10 @@ p32_land(t,j,ac,"after") =
  ov_landdiff_forestry(t,"upper")            = vm_landdiff_forestry.up;
  ov32_land_expansion(t,j,land32,"upper")    = v32_land_expansion.up(j,land32);
  ov32_land_reduction(t,j,land32,"upper")    = v32_land_reduction.up(j,land32);
- ov_cdr_aff(t,j,co2_forestry,"upper")       = vm_cdr_aff.up(j,co2_forestry);
+ ov_cdr_aff(t,j,"upper")                    = vm_cdr_aff.up(j);
  oq32_cost_fore_ac(t,i,"upper")             = q32_cost_fore_ac.up(i);
  oq32_land(t,j,"upper")                     = q32_land.up(j);
- oq32_cdr_aff(t,j,co2_forestry,"upper")     = q32_cdr_aff.up(j,co2_forestry);
+ oq32_cdr_aff(t,j,"upper")                  = q32_cdr_aff.up(j);
  oq32_carbon(t,j,c_pools,"upper")           = q32_carbon.up(j,c_pools);
  oq32_land_diff(t,"upper")                  = q32_land_diff.up;
  oq32_land_expansion(t,j,land32,"upper")    = q32_land_expansion.up(j,land32);
@@ -64,10 +65,10 @@ p32_land(t,j,ac,"after") =
  ov_landdiff_forestry(t,"lower")            = vm_landdiff_forestry.lo;
  ov32_land_expansion(t,j,land32,"lower")    = v32_land_expansion.lo(j,land32);
  ov32_land_reduction(t,j,land32,"lower")    = v32_land_reduction.lo(j,land32);
- ov_cdr_aff(t,j,co2_forestry,"lower")       = vm_cdr_aff.lo(j,co2_forestry);
+ ov_cdr_aff(t,j,"lower")                    = vm_cdr_aff.lo(j);
  oq32_cost_fore_ac(t,i,"lower")             = q32_cost_fore_ac.lo(i);
  oq32_land(t,j,"lower")                     = q32_land.lo(j);
- oq32_cdr_aff(t,j,co2_forestry,"lower")     = q32_cdr_aff.lo(j,co2_forestry);
+ oq32_cdr_aff(t,j,"lower")                  = q32_cdr_aff.lo(j);
  oq32_carbon(t,j,c_pools,"lower")           = q32_carbon.lo(j,c_pools);
  oq32_land_diff(t,"lower")                  = q32_land_diff.lo;
  oq32_land_expansion(t,j,land32,"lower")    = q32_land_expansion.lo(j,land32);
