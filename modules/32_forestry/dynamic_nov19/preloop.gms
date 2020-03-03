@@ -34,7 +34,7 @@ p32_rot_length(t_future,j) = p32_rot_length("y2100",j);
 
 ** Rotation used for establishment decision - Same as harvesting rotation for now.
 ** This is declared as interface because this is also need in trade module.
-p32_rot_length(t_past_ff,j) = p32_rot_length("y2000",j);
+p32_rot_length(t_past_ff,j) = p32_rot_length("y1995",j);
 pm_rot_length_estb(t_all,j) = p32_rot_length(t_all,j);
 
 ** Earlier we converted rotation lengths to absolute numbers, now we make the Conversion
@@ -85,7 +85,7 @@ p32_cdr_ac(t,j,ac) = 0;
 ** divide initial forestry area by number of age classes within protect32
 ** since protect32 is TRUE for ord(ac_sub) < p32_rotation_cellular(j) there is
 ** one additional junk which is assigned to ac0
-p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular("y1995",j);
+p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular_harvesting("y1995",j);
 
 p32_land("y1995",j,"plant",ac_sub)$(protect32("y1995",j,ac_sub)) = p32_plant_ini_ac(j);
 p32_land("y1995",j,"plant","ac0") = p32_plant_ini_ac(j);
