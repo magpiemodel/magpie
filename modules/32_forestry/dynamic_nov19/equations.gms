@@ -102,15 +102,15 @@ q32_cost_establishment(i2)..
 						v32_cost_establishment(i2)
 						=e=
             (sum((cell(i2,j2),type32), v32_land(j2,type32,"ac0") * c32_reESTBcost)
-            +
-              (
-             sum((ct,kforestry), vm_prod_future_reg_ff(i2,kforestry) * c32_harvesting_cost)
-              +
-              sum((cell(i2,j2),ct,kforestry), fm_distance(j2) * fm_transport_costs(kforestry)) * sum(kforestry,vm_prod_future_reg_ff(i2,kforestry))
-              +
-              sum(ct,vm_cost_trade_forestry_ff(i2))
-              )/((1+pm_interest(i2))**sum(ct,(pm_rotation_reg(ct,i2))))
-*************************** ((1+pm_interest(i2))**p32_rot_length(ct,i2)) to calculate present value of future costs
+*            +
+*              (
+*             sum((ct,kforestry), vm_prod_future_reg_ff(i2,kforestry) * c32_harvesting_cost)
+*              +
+*              sum((cell(i2,j2),ct,kforestry), fm_distance(j2) * fm_transport_costs(kforestry)) * sum(kforestry,vm_prod_future_reg_ff(i2,kforestry))
+*              +
+*              sum(ct,vm_cost_trade_forestry_ff(i2))
+*              )/((1+pm_interest(i2))**sum(ct,(pm_rotation_reg(ct,i2))))
+**************************** ((1+pm_interest(i2))**p32_rot_length(ct,i2)) to calculate present value of future costs
               )
             * (pm_interest(i2)/(1+pm_interest(i2)))
 *************************** (pm_interest(i2)/(1+pm_interest(i2))) to annuituze the values. Similar to averaging over time
