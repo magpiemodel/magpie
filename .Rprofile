@@ -11,6 +11,8 @@ if(file.exists("~/.Rprofile")) source("~/.Rprofile")
 # to the model output folder. Otherwise, the run itself will again use the
 # default library set!
 
-# snapshot <- "/p/projects/rd3mod/R/libraries/snapshots/dec2016"
-# if(file.exists(snapshot)) .libPaths(snapshot)
-
+# snapshot <- "/p/projects/rd3mod/R/libraries/snapshots/2019_02_28"
+# if(file.exists(snapshot)) {
+# cat("Set libPaths to",snapshot,"\n")
+# .libPaths(snapshot)
+# }

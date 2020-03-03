@@ -53,7 +53,7 @@
 *' For both crop land and pasture land, this equation gives the amount of nitrogen deposited from the atmosphere.
  q50_nr_deposition(i2,land) ..
                      v50_nr_deposition(i2,land) =e=
-                     sum(cell(i2,j2),ic50_atmospheric_deposition_rates(i2,land) * vm_land(j2,land));
+                     sum((ct,cell(i2,j2)),i50_atmospheric_deposition_rates(ct,j2,land) * vm_land(j2,land));
 
 *' Having calculated the amount of nitrogen fertilizer required (see above) now the resulting cost are derived. They
 *' are part of the objective function.

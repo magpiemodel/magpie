@@ -6,8 +6,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-  land32 Forestry land pools
-    / new, prot, grow, old/
+   type32 plantation type
+   / aff, ndc, plant /
 
    kforestry(kall) Forestry products
    / wood, woodfuel /

@@ -36,7 +36,9 @@ $elseif "%c80_nlp_solver%" == "conopt4+conopt3"
 $endif
 
 $onecho > conopt4.opt
-Tol_Obj_Change = 3.0e-7
+Tol_Obj_Change = 3.0e-6
+Tol_Feas_Min = 4.0e-7
+Tol_Feas_Max = 4.0e-6
 $offecho
 
 

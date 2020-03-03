@@ -47,6 +47,40 @@ p15_prices_kcal(t,iso,kfo)=i15_prices_initial_kcal(iso,kfo);
 p15_lastiteration_delta_income(t,i) = 1;
 
 
-$ifthen "%c15_rumscen%" == "mixed" i15_ruminant_fadeout(t) = (f15_ruminant_fadeout(t,"constant") + f15_ruminant_fadeout(t,"halving2050"))/2;
-$else i15_ruminant_fadeout(t) = f15_ruminant_fadeout(t,"%c15_rumscen%");
+
+* Temporal development of ruminant meat share within the livestock food product
+* group (applied before food demand model is executed)
+$ifthen "%c15_rum_share%" == "mixed" i15_rum_share_fadeout(t,iso) = (f15_rum_share_fadeout(t,"constant") + f15_rum_share_fadeout(t,"halving2050"))/2;
+$else i15_rum_share_fadeout(t,iso) = f15_rum_share_fadeout(t,"%c15_rum_share%");
 $endif
+
+* Stronger ruminant fadeout for India
+if (s15_rum_share_fadeout_india_strong = 1,
+	i15_rum_share_fadeout(t,"IND") = f15_rum_share_fadeout_india(t); 
+);
+
+* Milk fadeout for India
+if (s15_milk_share_fadeout_india = 0,
+	i15_milk_share_fadeout_india(t) = 1;
+Elseif s15_milk_share_fadeout_india = 1,
+	i15_milk_share_fadeout_india(t) = f15_milk_share_fadeout_india(t);
+);
+
+display i15_milk_share_fadeout_india;
+
+* Food substitution scenarios including functional forms, targets and transition periods
+i15_ruminant_fadeout(t) = f15_food_substitution_fader(t,"%c15_rumscen%");
+i15_fish_fadeout(t) = f15_food_substitution_fader(t,"%c15_fishscen%");
+i15_alcohol_fadeout(t) = f15_food_substitution_fader(t,"%c15_alcscen%");
+i15_livestock_fadeout(t) = f15_food_substitution_fader(t,"%c15_livescen%");
+
+
+
+
+* The target year for transition to exogenous scenario diets defines the speed
+* of fading from regression based daily food consumption towards the scenario:
+i15_exo_foodscen_fader(t) = f15_exo_foodscen_fader(t,"%c15_exo_scen_targetyear%");
+
+* Initialisation of the ratio between food calorie demand and food intake for the
+* historical reference period:
+p15_demand2intake_ratio_ref(i) = 0;

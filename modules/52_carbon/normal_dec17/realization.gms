@@ -16,7 +16,7 @@
 *' which return land type specific carbon stocks to the carbon module. The realization
 *' also provides carbon density for different age-classes, based on a
 *' chapman-richards volume growth model, to the land modules [32_forestry] and [35_natveg]
-*' [@humpenoder_investigating_2014].
+*' [@humpenoder_investigating_2014 and @braakhekke_modelling_2019].
 
 *' @limitations CO2 emissions in the 1st time step (1995) are not meaningful because
 *' carbon stock information prior to 1995 is not available
@@ -28,5 +28,6 @@ $Ifi "%phase%" == "input" $include "./modules/52_carbon/normal_dec17/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/52_carbon/normal_dec17/equations.gms"
 $Ifi "%phase%" == "scaling" $include "./modules/52_carbon/normal_dec17/scaling.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/52_carbon/normal_dec17/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/52_carbon/normal_dec17/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/52_carbon/normal_dec17/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
