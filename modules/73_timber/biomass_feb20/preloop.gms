@@ -39,7 +39,7 @@ p73_forestry_demand_prod_specific(t_past_ff,iso,total_wood_products) = f73_prod_
 ** Loop over time to calculate future demand
 
 loop(t_all$(m_year(t_all) >= 1990 AND m_year(t_all) < 2150),
-   p73_forestry_demand_prod_specific(t_all+1,iso,total_wood_products)
+   p73_forestry_demand_prod_specific(t_all+1,iso,total_wood_products)$(im_gdp_pc_ppp_iso(t_all+1,iso)>0)
           = p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)
           *
           (im_pop_iso(t_all+1,iso)/im_pop_iso(t_all,iso))
@@ -47,6 +47,7 @@ loop(t_all$(m_year(t_all) >= 1990 AND m_year(t_all) < 2150),
           ((im_gdp_pc_ppp_iso(t_all+1,iso)/im_gdp_pc_ppp_iso(t_all,iso))**p73_income_elasticity(total_wood_products))
           ;
 );
+p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)$(im_gdp_pc_ppp_iso(t_all,iso)=0) = 0;
 
 pm_timber_demand_gdp_pop(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to_woodprod(kforestry,total_wood_products)),p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)) * s73_timber_demand;
 p73_glo_timber_demand(t_all,kforestry) = sum(i,pm_timber_demand_gdp_pop(t_all,i,kforestry));

@@ -39,9 +39,6 @@ cfg$gms$c_timesteps = "coup2100"
 ## Emis policy
 cfg$gms$c56_emis_policy <- "ssp_nosoil"
 
-## Reward for -ve emis
-cfg$gms$s56_reward_neg_emis <- -Inf
-
 #######################################
 ########## Setting up runs ############
 #######################################
