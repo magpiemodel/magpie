@@ -55,7 +55,7 @@ $offdelim
 ;
 f32_production_ratio(t_all,"JPN") = f32_production_ratio("y1995","JPN");
 f32_production_ratio(t_all,"MEA") = f32_production_ratio("y1995","MEA");
-f32_production_ratio(t_all,i) = f32_production_ratio("y1995",i);
+f32_production_ratio(t_all,i) = 0.25;
 
 table f32_forestry_management(i,forest_type) upscaling factor for forestry plantations
 $ondelim
