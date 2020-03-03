@@ -46,7 +46,7 @@ cfg$gms$s56_reward_neg_emis <- -Inf
 ########## Setting up runs ############
 #######################################
 
-flag_run <- paste0("R055x-")
+flag_run <- paste0("R056-")
 
 cfg$gms$s32_recurring_cost_multiplier <- 10
 

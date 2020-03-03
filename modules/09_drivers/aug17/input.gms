@@ -45,13 +45,3 @@ table f09_physical_inactivity(t_all,iso,gdp_scen09,sex,age) Share of population 
 $ondelim
 $include "./modules/09_drivers/input/f09_physical_inactivity.cs3"
 $offdelim;
-
-table fm_gdp_ppp_iso(t_all,iso,gdp_scen09) Income in purchasing power parity (mio. USD05PPP per yr)
-$ondelim
-$include "./modules/09_drivers/input/f09_gdp_ppp_iso.csv"
-$offdelim;
-
-table fm_pop_iso(t_all,iso,pop_scen09) Population (mio. capita per yr)
-$ondelim
-$include "./modules/09_drivers/input/f09_pop_iso.csv"
-$offdelim;
