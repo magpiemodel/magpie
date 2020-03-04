@@ -4,8 +4,10 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-f21_self_suff(t_all,"MEA","wood") = 0.7;
-f21_self_suff(t_all,"MEA","woodfuel") = 0.9;
+f21_self_suff(t_all,"MEA","wood") = 0.3;
+f21_self_suff(t_all,"MEA","woodfuel") = 0.3;
+f21_self_suff(t_all,"JPN","wood") = 0.3;
+f21_self_suff(t_all,"JPN","woodfuel") = 0.3;
 
 f21_exp_shr(t_all,"JPN",kforestry) = 0;
 f21_exp_shr(t_all,"MEA",kforestry) = 0;
@@ -43,8 +45,6 @@ elseif (s21_trade_tariff=0),
 
 p21_selfsuff_ext(t_ext,i,kforestry) = f21_self_suff("y2150",i,kforestry);
 p21_selfsuff_ext(t_all,i,kforestry) = f21_self_suff(t_all,i,kforestry);
-p21_selfsuff_ext(t_all,"MEA",kforestry) = 0.3;
-p21_selfsuff_ext(t_all,"JPN",kforestry) = 0.1;
 
 p21_trade_balanceflow_ext(t_ext,kforestry) = f21_trade_balanceflow("y2150",kforestry);
 p21_trade_balanceflow_ext(t_all,kforestry) = f21_trade_balanceflow(t_all,kforestry);
