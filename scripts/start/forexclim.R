@@ -79,7 +79,7 @@ for(timber_demand in c(1,0)){
 				cfg$gms$c60_2ndgen_biodem <- co2_price_scenarios
 
 				#cfg$title<- paste0(ssp,"-",rot_flag,"-",co2_flag,"-",dem_flag,"-",flag_run)
-				cfg$title<- paste0(flag_run,"-",ssp,"-",rot_flag,"-",co2_flag)
+				cfg$title<- paste0(flag_run,"-",ssp,"-",rot_flag,"-",co2_flag,"-",dem_flag)
 
 				## Declare input data array
 				#magpie_default_data <- "magpie4.1_default_apr19.tgz"
