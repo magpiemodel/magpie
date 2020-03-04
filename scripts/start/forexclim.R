@@ -58,14 +58,14 @@ for(timber_demand in c(1,0)){
 		for(co2_price_scenarios in c("R2M41-SSP2-NPi")){
 
 			if(co2_price_scenarios == "R2M41-SSP2-NPi") {
-				co2_flag = "Ref"
-				# * Switch for C price driven afforestation (1=on 0=off)
+				# Switch for C price driven afforestation (1=on 0=off)
 				cfg$gms$s56_c_price_induced_aff <- 0
-			}
-			if(co2_price_scenarios == "R2M41-SSP2-Budg1300"){
-				# * Switch for C price driven afforestation (1=on 0=off)
+				co2_flag = "Ref"
+			} else if(co2_price_scenarios == "R2M41-SSP2-Budg1300"){
+				# Switch for C price driven afforestation (1=on 0=off)
 				cfg$gms$s56_c_price_induced_aff <- 1
-			} co2_flag = "CO2price"
+				co2_flag = "CO2price"
+			}
 
 			cfg$gms$c32_rotation_extension = c32_rotation_extension;
 
