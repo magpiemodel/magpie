@@ -43,7 +43,7 @@ cfg$gms$c56_emis_policy <- "ssp_nosoil"
 ########## Setting up runs ############
 #######################################
 
-flag_run <- paste0("R068-")
+flag_run <- paste0("Forexclim001-")
 
 cfg$gms$s32_recurring_cost_multiplier <- 10
 
@@ -51,11 +51,11 @@ for(timber_demand in c(1)){
 
 	cfg$gms$s73_timber_demand <- timber_demand
 
-	if(timber_demand == 1) dem_flag = "TimberON"
+	if(timber_demand == 1) dem_flag = "-"
 	if(timber_demand == 0) dem_flag = "TimberOFF"
 
-	for(c32_rotation_extension in c(0)){
-		for(co2_price_scenarios in c("R2M41-SSP2-NPi")){
+	for(c32_rotation_extension in c(0,1,2)){
+		for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")){
 
 			if(co2_price_scenarios == "R2M41-SSP2-NPi") {
 				co2_flag = "Ref"
