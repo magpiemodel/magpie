@@ -36,7 +36,7 @@ buildInputVector <- function(regionmapping   = "H12",
                 sim4nexus="25dd7264e8e145385b3bd0b89ec5f3fc",
                 inms="44f1e181a3da765729f2f1bfc926425a",
                 capri="e7e72fddc44cc3d546af7b038c651f51",
-	    coacch="c2a48c5eae535d4b8fe9c953d9986f1b")
+                coacch="c2a48c5eae535d4b8fe9c953d9986f1b")
   archive_name=paste(project_name,climate_model,climatescen_name,co2,sep="-")
   archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", mappings[regionmapping], ".tgz")
   madrat  <- paste0("rev", madrat_rev,"_", mappings[regionmapping], "_magpie", ".tgz")
@@ -54,23 +54,24 @@ general_settings<-function(title) {
   cfg$recalibrate <- FALSE
   cfg<-lucode::setScenario(cfg,"cc")
   cfg$gms$c56_emis_policy <- "all"
+  cfg$gms$som <- "cellpool_aug16"   
+  cfg$gms$c59_som_scenario  <- "cc"		
   cfg$gms$forestry  <- "affore_vegc_dec16"
   cfg$gms$maccs  <- "on_sep16"
   cfg$title <- paste0(title,"_lpjml3_IPSLCM5ALR_sim4nexus_v1")
-#  include costs per-ton
+  #  include costs per-ton
   return(cfg)
 }
 
 
 # SSP control runs###############################################
 
-
 # SSP2
-cfg<-general_settings(title="counterfactual_ssp2_nocc_mit60")
+cfg<-general_settings(title="counterfactual_ssp2_nocc_mitnpi")
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"nocc")
 cfg$input <- buildInputVector(regionmapping = "coacch",calibration=NULL)
-cfg$gms$som <- "cellpool_aug16"   
+cfg$gms$c59_som_scenario  <- "nocc"	
 cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
 calib<-magpie4::submitCalibration(name = "calibration_sim4nexus_may2019")
@@ -78,23 +79,18 @@ cfg$recalibrate <- "ifneeded"
 
 
 #SIM4NEXUS standard runs#############################################
-
-#SSP2 family
-
-cfg<-general_settings(title="base_ssp2_rc60_mit60")
+# SSP2 Family
+cfg<-general_settings(title="base_ssp2_rcp60_mitnpi")
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
-cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib)
-cfg$gms$som <- "cellpool_aug16"   
-cfg$gms$c59_som_scenario  <- "cc"		
+cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib)		
 start_run(cfg=cfg,codeCheck=codeCheck)
 
-cfg<-general_settings(title="food_ssp2_rcp60_mit60")
+# Scenario runs
+cfg<-general_settings(title="food_ssp2_rcp60_mitnpi")
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
-cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib)
-cfg$gms$som <- "cellpool_aug16"   
-cfg$gms$c59_som_scenario  <- "cc"	
+cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib)	
 cfg$gms$c15_food_scenario <- "SSP1" 	
 cfg$gms$s15_exo_waste <- 1
 cfg$gms$s15_waste_scen <- 1.15
@@ -114,33 +110,27 @@ cfg$input <- buildInputVector(climatescen_name="rcp2p6",regionmapping = "coacch"
 cfg$gms$c32_aff_policy <- "ndc" 				# Florian (NDC: afforestation target, afforestation based on CO2 price?)
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300"
 cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg1300"
-cfg$gms$c50_scen_neff <- "neff65_70_starty2010"
-cfg$gms$som <- "cellpool_aug16"   
-cfg$gms$c59_som_scenario  <- "cc"		
+cfg$gms$c50_scen_neff <- "neff65_70_starty2010"		
 start_run(cfg=cfg,codeCheck=codeCheck)
 
-cfg<-general_settings(title="water_ssp2_rcp60_mit60")
+cfg<-general_settings(title="water_ssp2_rcp60_mitnpi")
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib)
 cfg$gms$s42_irrig_eff_scenario <- 1		
 cfg$gms$s42_irrigation_efficiency <- 0.76
 cfg$gms$c42_env_flow_policy <- "on"
-cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
-cfg$gms$som <- "cellpool_aug16"   
-cfg$gms$c59_som_scenario  <- "cc"		
+cfg$gms$c50_scen_neff <- "neff70_75_starty2010"	
 start_run(cfg=cfg,codeCheck=codeCheck)
 
-cfg<-general_settings(title="biodiversity_ssp2_rcp60_mit60")
+cfg<-general_settings(title="biodiversity_ssp2_rcp60_mitnpi")
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib)
 cfg$gms$c12_interest_rate <- "low"
 cfg$gms$c35_protect_scenario <- "BH"
 cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
-cfg$gms$c55_scen_conf <- "SSP1"	
-cfg$gms$som <- "cellpool_aug16"   
-cfg$gms$c59_som_scenario  <- "cc"				
+cfg$gms$c55_scen_conf <- "SSP1"					
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg<-general_settings(title="all_ssp2_rcp26_mit26")
@@ -148,9 +138,7 @@ cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp2p6",regionmapping = "coacch",calibration=calib)
 cfg$gms$c32_aff_policy <- "ndc"
-cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300"
-cfg$gms$som <- "cellpool_aug16"   
-cfg$gms$c59_som_scenario  <- "cc"		
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300"		
 cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg1300"
 cfg$gms$c42_env_flow_policy <- "on"
 cfg$gms$s42_irrig_eff_scenario <- 1				
@@ -166,4 +154,11 @@ cfg$gms$c12_interest_rate <- "low"
 cfg$gms$c55_scen_conf <- "SSP1"
 cfg$gms$c35_protect_scenario <- "BH"
 start_run(cfg=cfg,codeCheck=codeCheck)
+
+
+#SIM4NEXUS regional runs#############################################
+# Policies only apply for EU28
+
+
+
 
