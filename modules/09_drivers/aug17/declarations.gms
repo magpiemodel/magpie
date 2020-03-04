@@ -7,7 +7,7 @@
 parameters
 
 * Population
-  im_pop_iso(t,iso)                              Population (mio. per yr)
+  im_pop_iso(t_all,iso)                              Population (mio. per yr)
   im_pop(t,i)                                    Population (mio. per yr)
 
 * GDP in MER
