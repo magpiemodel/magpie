@@ -43,7 +43,7 @@ cfg$gms$c56_emis_policy <- "ssp_nosoil"
 ########## Setting up runs ############
 #######################################
 
-flag_run <- paste0("R062-")
+flag_run <- paste0("R063-")
 
 cfg$gms$s32_recurring_cost_multiplier <- 10
 
@@ -59,11 +59,11 @@ for(timber_demand in c(1,0)){
 
 			if(co2_price_scenarios == "R2M41-SSP2-NPi") {
 				# Switch for C price driven afforestation (1=on 0=off)
-				cfg$gms$s56_c_price_induced_aff <- 0
+				#cfg$gms$s56_c_price_induced_aff <- 0
 				co2_flag = "Ref"
 			} else if(co2_price_scenarios == "R2M41-SSP2-Budg1300"){
 				# Switch for C price driven afforestation (1=on 0=off)
-				cfg$gms$s56_c_price_induced_aff <- 1
+				#cfg$gms$s56_c_price_induced_aff <- 1
 				co2_flag = "CO2price"
 			}
 
