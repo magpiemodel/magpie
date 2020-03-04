@@ -43,7 +43,7 @@ cfg$gms$c56_emis_policy <- "ssp_nosoil"
 ########## Setting up runs ############
 #######################################
 
-flag_run <- paste0("R066-")
+flag_run <- paste0("R067-")
 
 cfg$gms$s32_recurring_cost_multiplier <- 10
 
