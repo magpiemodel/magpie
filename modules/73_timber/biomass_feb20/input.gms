@@ -16,7 +16,7 @@ $offdelim
 ;
 m_fillmissingyears(f73_observed_timber_demand_pc,"iso,total_wood_products");
 
-table f73_prod_specific_timber(t_all,iso,total_wood_products) demand
+table f73_prod_specific_timber(t_past,iso,total_wood_products) demand
 $ondelim
 $include "./modules/73_timber/input/f73_prod_specific_timber.csv"
 $offdelim
