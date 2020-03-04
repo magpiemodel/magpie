@@ -17,7 +17,7 @@ vm_hvarea_other.fx(j,ac_sub,"wood") = 0;
 *' plausibility testing of econometric models within the global forest sector.
 *' https://doi.org/10.1016/j.forpol.2018.04.003
 *' Fiberboard value used for wood, Fuelwood value used for wood fuel (Table 5).
-p73_income_elasticity(total_wood_products) = 0.1
+p73_income_elasticity(total_wood_products) = 0.1:
 *' Overwrite known values
 p73_income_elasticity("wood_fuel") = -0.57;
 p73_income_elasticity("wood_pulp") = 0.36;
