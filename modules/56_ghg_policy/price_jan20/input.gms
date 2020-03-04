@@ -5,8 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+* Set-switch for countries affected by regional ghg policy
+* Default: all iso countries selected
 sets
-  taxcountries (iso) countries to be affected by ghg policy / DEU, FRA /
+  ghg_policy_countries (iso) countries to be affected by ghg policy / DEU, FRA /
 ;
 
 scalars

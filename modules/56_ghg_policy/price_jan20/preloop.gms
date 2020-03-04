@@ -12,8 +12,15 @@ $elseif "%c56_pollutant_prices%" == "emulator" im_pollutant_prices(t_all,i,pollu
 $else im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices%");
 $endif
 
+* Region price share for regional ghg policy:
+p56_country_dummy(iso) = 0;
+p56_country_dummy(ghg_policy_countries) = 1;
+p56_region_price_shr(t_all,i) = sum(i_to_iso(i,iso), p56_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
+
 ***save im_pollutant_prices to parameter
-p56_pollutant_prices_input(t_all,i,pollutants) = im_pollutant_prices(t_all,i,pollutants);
+p56_pollutant_prices_input(t_all,i,pollutants) = im_pollutant_prices(t_all,i,pollutants) * p56_region_price_shr(t_all,i);
+
+
 
 ***limit CH4 and N2O GHG prices based on s56_limit_ch4_n2o_price
 *12/44 conversion from USD per tC to USD per tCO2
@@ -59,8 +66,8 @@ loop(t,
     repeat(
        s56_counter = s56_counter + 1;
        s56_offset = s56_timesteps-s56_counter;
-       im_pollutant_prices(t_all-s56_offset,i,"co2_c")$(m_year(t_all) = m_year(t)) = 
-       im_pollutant_prices(t-1,i,"co2_c") + 
+       im_pollutant_prices(t_all-s56_offset,i,"co2_c")$(m_year(t_all) = m_year(t)) =
+       im_pollutant_prices(t-1,i,"co2_c") +
        (im_pollutant_prices(t,i,"co2_c") - im_pollutant_prices(t-1,i,"co2_c"))*s56_counter/(s56_timesteps);
     until s56_counter = s56_timesteps-1);
   );
@@ -69,7 +76,7 @@ display p56_pollutant_prices_input;
 display im_pollutant_prices;
 *initialize age-class dependent C price with same C price for all age-classes
 p56_c_price_aff(t_all,i,ac) = im_pollutant_prices(t_all,i,"co2_c");
-*Shift C prices in age-classes for reflecting foresight. 
+*Shift C prices in age-classes for reflecting foresight.
 *e.g. ac5 in 2020 should have the C price of ac0 in 2025, and ac20 in 2020 equals to ac0 in 2040
 p56_c_price_aff(t_all,i,ac)$(ord(t_all)+ac.off<card(t_all)) = p56_c_price_aff(t_all+ac.off,i,"ac0");
 *limit foresight of C prices to X years; constant C price after X years.
