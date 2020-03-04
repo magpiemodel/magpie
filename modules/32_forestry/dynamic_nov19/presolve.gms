@@ -107,6 +107,4 @@ p32_dampen_final("ac0",j) = 0;
 p32_dampen_pre(ac_sub,j)  = (1-(1/ord(ac_sub)))$(ord(ac_sub)<p32_rot_ac(j)) + 1$(ord(ac_sub)>=p32_rot_ac(j) AND ord(ac_sub)<=18) + (1-(1/p32_rot_ac(j))*(ord(ac_sub)-p32_rot_ac(j)))$(ord(ac_sub)>18);
 p32_dampen_final(ac_sub,j) = p32_dampen_pre(ac_sub,j)$(p32_dampen_pre(ac_sub,j) >= p32_regional_min(j)) + p32_regional_min(j)$(p32_dampen_pre(ac_sub,j) < p32_regional_min(j));
 
-v32_land.up(j,"plant","ac0")$(ord(t)=1) = 0.03; 
-
 *** EOF presolve.gms ***
