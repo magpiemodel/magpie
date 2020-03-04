@@ -36,14 +36,14 @@ cfg$gms$s80_optfile <- 1
 ## Set time step length
 cfg$gms$c_timesteps = "coup2100"
 
-## Emis policy
-cfg$gms$c56_emis_policy <- "ssp_nosoil"
+## Emis policy --- USE DEFAULT
+#cfg$gms$c56_emis_policy <- "ssp_nosoil"
 
 #######################################
 ########## Setting up runs ############
 #######################################
 
-flag_run <- paste0("Forexclim001-")
+flag_run <- paste0("Forexclim002-")
 
 cfg$gms$s32_recurring_cost_multiplier <- 10
 
@@ -54,7 +54,7 @@ for(timber_demand in c(1)){
 	if(timber_demand == 1) dem_flag = "-"
 	if(timber_demand == 0) dem_flag = "TimberOFF"
 
-	for(c32_rotation_extension in c(0,1,2)){
+	for(c32_rotation_extension in c(0,2)){
 		for(co2_price_scenarios in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")){
 
 			if(co2_price_scenarios == "R2M41-SSP2-NPi") {
@@ -75,14 +75,14 @@ for(timber_demand in c(1)){
 
 			cfg$gms$s35_selective_logging_flag = 1.00 ## Clear cut is 1.0
 
-			for(ssp in c("SSP2")){
+			for(ssp in c("SSP1","SSP2","SSP3","SSP4""SSP5")){
 				cfg <- setScenario(cfg,c(ssp,"NPI"))
 
 				cfg$gms$c56_pollutant_prices <- co2_price_scenarios
 				cfg$gms$c60_2ndgen_biodem <- co2_price_scenarios
 
 				#cfg$title<- paste0(ssp,"-",rot_flag,"-",co2_flag,"-",dem_flag,"-",flag_run)
-				cfg$title<- paste0(flag_run,"-",ssp,"-",rot_flag,"-",co2_flag,"-",dem_flag)
+				cfg$title<- paste0(flag_run,"-",ssp,"-",rot_flag,"-",co2_flag)
 
 				## Declare input data array
 				#magpie_default_data <- "magpie4.1_default_apr19.tgz"
