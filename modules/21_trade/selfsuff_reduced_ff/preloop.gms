@@ -7,6 +7,15 @@
 f21_self_suff(t_all,"MEA","wood") = 0.7;
 f21_self_suff(t_all,"MEA","woodfuel") = 0.9;
 
+f21_exp_shr(t_all,"JPN",kforestry) = 0;
+f21_exp_shr(t_all,"MEA",kforestry) = 0;
+
+f21_trade_margin("MEA",kforestry) = 0.1;
+f21_trade_margin("JPN",kforestry) = 0.1;
+
+f21_trade_tariff("JPN",kforestry) = 0.0000001;
+f21_trade_tariff("MEA",kforestry) = 0.0000001;
+
 i21_trade_bal_reduction(t_all,k_trade)=f21_trade_bal_reduction(t_all,"easytrade","%c21_trade_liberalization%");
 i21_trade_bal_reduction(t_all,k_hardtrade21)=f21_trade_bal_reduction(t_all,"hardtrade","%c21_trade_liberalization%");
 

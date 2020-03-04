@@ -25,8 +25,6 @@ table f21_exp_shr(t_all,i,kall) Regional and crop-specific export share (1)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_export_share.cs3"
 $offdelim;
-f21_exp_shr(t_all,"JPN",kforestry) = 0;
-f21_exp_shr(t_all,"MEA",kforestry) = 0;
 
 table f21_trade_balanceflow(t_all,kall) Domestic balance flows (mio. tDM per yr)
 $ondelim
@@ -39,8 +37,6 @@ $include "./modules/21_trade/input/f21_trade_margin.cs3"
 $offdelim
 ;
 f21_trade_margin(i,kforestry) = f21_trade_margin(i,"livst_rum");
-f21_trade_margin("MEA",kforestry) = 0.1;
-f21_trade_margin("JPN",kforestry) = 0.1;
 
 
 table f21_trade_tariff(i,kall) Specific duty tariffs (USD05MER per tDM)
@@ -48,5 +44,3 @@ $ondelim
 $include "./modules/21_trade/input/f21_trade_tariff.cs3"
 $offdelim
 ;
-f21_trade_tariff("JPN",kforestry) = 0.0000001;
-f21_trade_tariff("MEA",kforestry) = 0.0000001;
