@@ -18,10 +18,6 @@ vm_hvarea_other.fx(j,ac_sub,"wood") = 0;
 *' https://doi.org/10.1016/j.forpol.2018.04.003
 *' Fiberboard value used for wood, Fuelwood value used for wood fuel (Table 5).
 
-p73_elasticity("wood") = 1.06;
-p73_elasticity("woodfuel") = -0.568;
-
-*******************************************************************************
 p73_income_elasticity("wood_fuel") = -0.57;
 p73_income_elasticity("wood_pulp") = 0.36;
 p73_income_elasticity("particle_board_and_osb") = 0.75;

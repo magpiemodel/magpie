@@ -82,5 +82,5 @@ q16_seed_demand(i2,kcr) ..
 q16_supply_forestry(i2,kforestry) ..  vm_supply(i2,kforestry)
                                        =e=
 *								                       sum(ct,fm_forestry_demand(ct,i2,kforestry));
-                                       sum(ct,pm_timber_demand_gdp_pop(ct,i2,kforestry))
-                                       ; 
+                                       sum(ct,pm_demand_ext(ct,i2,kforestry))
+                                       ;

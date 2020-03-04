@@ -7,15 +7,6 @@
 
 *' @equations
 
-*' Following is a dummy calculation for timber demand based on regression output.
-*' Fo now the variable is not used in optimization but only used for testing prposes.
-
-q73_timber_demand(i2,kforestry)..
-  v73_timber_demand(i2,kforestry)
-  =e=
-*  sum(ct,p73_wood_products_demand_reg(ct,i2,kforestry));
-  0;
-
 *' The following equation describes cellular level production of woody biomass
 *' `vm_prod_reg` as the sum of the cluster level production of timber coming from
 *' 'v73_prod_forestry' and 'v73_prod_natveg'.
