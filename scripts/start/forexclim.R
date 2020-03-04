@@ -43,7 +43,7 @@ cfg$gms$c56_emis_policy <- "ssp_nosoil"
 ########## Setting up runs ############
 #######################################
 
-flag_run <- paste0("R057-")
+flag_run <- paste0("R060-")
 
 cfg$gms$s32_recurring_cost_multiplier <- 10
 
@@ -51,7 +51,7 @@ for(timber_demand in c(1,0)){
 
 	cfg$gms$s73_timber_demand <- timber_demand
 
-	if(timber_demand == 1) dem_flag = "-"
+	if(timber_demand == 1) dem_flag = "TimberON"
 	if(timber_demand == 0) dem_flag = "TimberOFF"
 
 	for(c32_rotation_extension in c(0)){
@@ -60,17 +60,11 @@ for(timber_demand in c(1,0)){
 			if(co2_price_scenarios == "R2M41-SSP2-NPi") co2_flag = "Ref"
 			if(co2_price_scenarios == "R2M41-SSP2-Budg1300") co2_flag = "CO2price"
 
-			## Set rotation length at harvest according to interest rate
-			cfg$gms$c32_rotation_harvest = "def"
-
 			cfg$gms$c32_rotation_extension = c32_rotation_extension;
 
 			if(c32_rotation_extension == 0) rot_flag = "NormalRotation"
 			if(c32_rotation_extension == 1) rot_flag = "ExtendedRotation5y"
 			if(c32_rotation_extension == 2) rot_flag = "ExtendedRotation10y"
-
-			## Rotation length for establishment
-			cfg$gms$c32_rotation_estb <- cfg$gms$c32_rotation_harvest
 
 			## Loop over climate impacts
 

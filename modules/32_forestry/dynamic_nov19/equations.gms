@@ -145,7 +145,7 @@ q32_cost_harvest(i2)..
 
 q32_prod_future(i2) ..
               sum((cell(i2,j2)), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2,"wood"))
-              =l=
+              =n=
               vm_prod_future_reg_ff(i2,"wood") * pcm_production_ratio_future(i2)
               ;
 
