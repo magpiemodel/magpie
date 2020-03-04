@@ -43,11 +43,11 @@ cfg$gms$c56_emis_policy <- "ssp_nosoil"
 ########## Setting up runs ############
 #######################################
 
-flag_run <- paste0("R063-")
+flag_run <- paste0("R064-")
 
 cfg$gms$s32_recurring_cost_multiplier <- 10
 
-for(timber_demand in c(1,0)){
+for(timber_demand in c(1)){
 
 	cfg$gms$s73_timber_demand <- timber_demand
 
