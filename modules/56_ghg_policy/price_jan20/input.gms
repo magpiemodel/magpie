@@ -6,8 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-  taxcountries (iso) countries to be affected by ghg policy
-    / DEU, FRA /
+  taxcountries (iso) countries to be affected by ghg policy / DEU, FRA /
 ;
 
 scalars
