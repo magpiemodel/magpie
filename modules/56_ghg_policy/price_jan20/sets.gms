@@ -7,9 +7,6 @@
 
 sets
 
-  taxcountries(iso) countries to be affected by ghg policy
-    / DEU, FRA / 
-
    pollutants_all all pollutants
    / co2_c,
    ch4,
