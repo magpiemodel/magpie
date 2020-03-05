@@ -17,9 +17,9 @@ $setglobal c15_calibscen  constant
 $setglobal c15_rumscen  mixed
 *   options:   constant, halving2050, mixed
 
-scalar s15_elastic_demand  Elastic demand switch (1=elastic 0=exogenous) (1) / 0 /;
+scalar s15_elastic_demand  Elastic demand switch (1=elastic 0=exogenous) (1) / 1 /;
 
-scalar s15_calibrate Calibration switch (1=calibrated 0=pure regression outcomes) (1) / 0 /;
+scalar s15_calibrate Calibration switch (1=calibrated 0=pure regression outcomes) (1) / 1 /;
 * only for per-capita calories, not for e.g. calibration of transformation parameters between per-capita calories in dm
 
 scalar s15_maxiter Scalar defining maximum number of iterations (1) / 5 /;
