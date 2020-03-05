@@ -33,3 +33,9 @@ $ondelim
 $include "./modules/13_tc/input/f13_tc_exponent.cs3"
 $offdelim
 ;
+
+table f13_tau_historical(t_all,i) historical tau scenario (1)
+$ondelim
+$include "./modules/13_tc/input/f13_tau_historical.csv"
+$offdelim
+;

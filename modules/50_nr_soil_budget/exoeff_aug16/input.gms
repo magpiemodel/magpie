@@ -6,10 +6,18 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 $setglobal c50_scen_neff  neff60_60_starty2010
-*   options:   neff55_55_starty1990,neff60_60_starty1990,neff65_70_starty1990,
+*   options: constant,
+*   neff55_55_starty1990,neff60_60_starty1990,neff65_70_starty1990,
 *   neff65_70_starty2010,neff60_60_starty2010,neff55_60_starty2010,
 *   neff70_75_starty2010,neff75_80_starty2010,neff80_85_starty2010
-*   neff75_85_starty2010
+*   neff75_85_starty2010,neff85_85_starty2010
+
+$setglobal c50_scen_neff_pasture  constant
+*   options: constant,
+*   neff55_55_starty1990,neff60_60_starty1990,neff65_70_starty1990,
+*   neff65_70_starty2010,neff60_60_starty2010,neff55_60_starty2010,
+*   neff70_75_starty2010,neff75_80_starty2010,neff80_85_starty2010
+*   neff75_85_starty2010,neff85_85_starty2010
 
 $setglobal c50_dep_scen  history
 *   options:   history
@@ -70,9 +78,8 @@ $include "./modules/50_nr_soil_budget/input/f50_nitrogen_fixation_rates_pasture.
 $offdelim
 /;
 
-parameter f50_atmospheric_deposition_rates(t_all,i,land,dep_scen50) Nr deposition rates per area (tNr per ha)
-/
+table f50_atmospheric_deposition_rates(t_all,j,land,dep_scen50) Nr deposition rates per area (tNr per ha)
 $ondelim
-$include "./modules/50_nr_soil_budget/input/f50_atmospheric_deposition_rates.cs4"
+$include "./modules/50_nr_soil_budget/input/f50_AtmosphericDepositionRates.cs3"
 $offdelim
-/;
+;

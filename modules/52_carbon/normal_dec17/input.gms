@@ -5,6 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+scalar
+ s52_forestry_plantation switch for using natveg (0) or plantation (1) growth curves for afforestation in forestry module / 0 /
+;
+
 $setglobal c52_carbon_scenario  nocc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
@@ -17,8 +21,10 @@ $offdelim
 $if "%c52_carbon_scenario%" == "nocc" fm_carbon_density(t_all,j,land,c_pools) = fm_carbon_density("y1995",j,land,c_pools);
 m_fillmissingyears(fm_carbon_density,"j,land,c_pools");
 
-table f52_growth_par(clcl,chap_par) Parameters for chapman-richards equation (1)
+parameter f52_growth_par(clcl,chap_par,type52) Parameters for chapman-richards equation (1)
+/
 $ondelim
 $include "./modules/52_carbon/input/f52_growth_par.csv"
 $offdelim
+/
 ;

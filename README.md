@@ -30,10 +30,13 @@ model source code via the R package goxygen
 package and run the main function (goxygen) in the main folder of the model.
 The resulting documentation can be found in the folder "doc".
 
+Please find a set of tutorials here https://github.com/magpiemodel/tutorials. 
+This guide will give you a brief technical introduction in how to install, run and use the model
+and how to analyse the model output.
+
 Please pay attentions to the MAgPIE Coding Etiquette when you modify the code.
-The Coding Etiquette you find at
-https://redmine.pik-potsdam.de/projects/pik-model-operations/wiki/Coding_Etiquette
-The Coding Etiquette explains also the used name conventions and other
+The Coding Etiquette you find at the beginning of the documentation mentioned above.
+The Coding Etiquette explains also the naming conventions and other
 structural characteristics.
 
 ## COPYRIGHT

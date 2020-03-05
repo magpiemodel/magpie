@@ -89,13 +89,16 @@ $endif
 * For instance, other natural land increases if agricultural land is abandoned.
 vm_land.lo(j,"primforest") = p35_save_primforest(t,j);
 vm_land.up(j,"primforest") = vm_land.l(j,"primforest");
+m_boundfix(vm_land,(j,"primforest"),up,10e-5);
 
 v35_secdforest.fx(j,"ac0") = 0;
 v35_secdforest.lo(j,"acx") = p35_save_secdforest(t,j);
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
+m_boundfix(v35_secdforest,(j,ac_sub),up,10e-5);
 
 v35_other.lo(j,"acx") = p35_save_other(t,j);
 v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
+m_boundfix(v35_other,(j,ac_sub),up,10e-5);
 
 * calculate carbon density
 * highest carbon density 1st time step to account for reshuffling

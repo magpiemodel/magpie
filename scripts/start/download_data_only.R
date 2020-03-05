@@ -6,11 +6,6 @@
 # |  Contact: magpie@pik-potsdam.de
 
 
-require(lucode)
-
+source("scripts/start_functions.R")
 source("config/default.cfg")
-lucode::download_distribute(files            = cfg$input,
-                            repositories     = cfg$repositories,
-                            modelfolder      = ".",
-                            additionalDelete = "scripts/downloader/inputdelete.cfg",
-                            debug            = cfg$debug)
+download_and_update(cfg)
