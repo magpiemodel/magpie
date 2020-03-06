@@ -34,7 +34,7 @@ cfg$output <- c("rds_report","disaggregation","interpolation")
 cfg$gms$s80_optfile <- 1
 
 ## Recalculate NPIs
-cfg$recalc_npi_ndc <- TRUE 
+cfg$recalc_npi_ndc <- TRUE
 
 #######################################
 ########## Setting up runs ############
@@ -66,7 +66,7 @@ for(timber_demand in c(1)){
 			if(c32_rotation_extension == 1) rot_flag = "ExtendedRotation5y"
 			if(c32_rotation_extension == 2) rot_flag = "ExtendedRotation10y"
 
-			for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
+			for(ssp in c("SSP2")){
 				cfg <- setScenario(cfg,c(ssp,"NPI"))
 
 				## Declare input data array
