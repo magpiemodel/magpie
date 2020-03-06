@@ -92,7 +92,11 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: magpie4.1.1_default_mar20.tgz
+* Used data set: magpie4.1_default_apr19.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* 
+* Used data set: patch_magpie4.1.1_mar20.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
@@ -107,7 +111,7 @@ $title magpie
 * 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
-* Regions data revision: 4.34
+* Regions data revision: 4.18
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
@@ -127,7 +131,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Thu Mar  5 14:22:55 2020
+* Last modification (input data): Fri Mar  6 15:04:16 2020
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
