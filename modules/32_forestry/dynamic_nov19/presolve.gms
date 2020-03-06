@@ -11,18 +11,18 @@
 ac_additional(ac) = no;
 ac_additional(ac) = yes$(ord(ac) <= (m_yeardiff(t)/5));
 
-** Start INDC **
+** Start ndc **
 * Limit demand for prescribed NPI/NDC afforestation in `p32_aff_pol` if not enough suitable area (`p32_aff_pot`) for afforestation is available.
    p32_aff_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop")) + (vm_land.l(j,"past") - vm_land.lo(j,"past"));
-*correct indc forest stock based on p32_aff_pot
+*correct ndc forest stock based on p32_aff_pot
   if((ord(t) > 1),
       p32_aff_pol(t,j)$(p32_aff_pol(t,j) - p32_aff_pol(t-1,j) > p32_aff_pot(t,j)) = p32_aff_pol(t-1,j) + p32_aff_pot(t,j);
     );
-*calc indc afforestation per time step based on forest stock changes
+*calc ndc afforestation per time step based on forest stock changes
   p32_aff_pol_timestep("y1995",j) = 0;
   p32_aff_pol_timestep(t,j)$(ord(t)>1) = p32_aff_pol(t,j) - p32_aff_pol(t-1,j);
 
-** END INDC **
+** END ndc **
 
 *' @code
 *' Certain areas (e.g. the boreal zone) are excluded from endogenous afforestation.
@@ -75,13 +75,13 @@ v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub
 *v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = 0;
 m_boundfix(v32_land,(j,"plant",ac_sub),l,10e-5);
 
-** fix C-price induced afforestation and indc to zero (for testing)
+** fix C-price induced afforestation and ndc to zero (for testing)
 *v32_land.fx(j,"aff",ac) = 0;
-*v32_land.fx(j,"indc",ac) = 0;
+*v32_land.fx(j,"ndc",ac) = 0;
 
-** Bounds for indc and aff forests
+** Bounds for ndc and aff forests
 v32_land.fx(j,"aff",ac_sub) = pc32_land(j,"aff",ac_sub);
-v32_land.fx(j,"indc",ac_sub) = pc32_land(j,"indc",ac_sub);
+v32_land.fx(j,"ndc",ac_sub) = pc32_land(j,"ndc",ac_sub);
 
 ** Setting ac dependent carbon.
 ** First, plantations carbon density is set to natveg carbon density

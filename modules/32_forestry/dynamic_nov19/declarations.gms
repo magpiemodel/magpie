@@ -4,8 +4,8 @@ scalars
 ;
 
 parameters
- p32_aff_pol(t,j)                                   INDC forest stock (mio. ha)
- p32_aff_pol_timestep(t,j)                          INDC afforestation per time step (mio. ha)
+ p32_aff_pol(t,j)                                   ndc forest stock (mio. ha)
+ p32_aff_pol_timestep(t,j)                          ndc afforestation per time step (mio. ha)
  p32_aff_pot(t,j)                                   Potential afforestation area (mio. ha)
  p32_aff_togo(t)              		                  Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
  p32_carbon_density_ac(t,j,type32,ac,ag_pools)      Carbon density for ac and ag_pools (tC per ha)

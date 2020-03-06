@@ -10,7 +10,7 @@ scalars
   c32_recurring_cost Recurring costs in USD per ha / 100 /
   c32_harvesting_cost Harvesting cost in USD per ha / 200 /
   s32_planing_horizon Afforestation planing horizon (years)            / 80 /
-  s32_recurring_cost_multiplier Cost multiplier for recurring costs only for testing (1)            / 100 /
+  s32_recurring_cost_multiplier Cost multiplier for recurring costs only for testing (1)            / 10 /
   c32_rotation_extension Rotation extension / 0 /
 ;
 
@@ -42,7 +42,7 @@ $offdelim
 /
 ;
 
-table f32_aff_pol(t_all,j,pol32) npi+indc afforestation policy (Mha new forest wrt to 2010)
+table f32_aff_pol(t_all,j,pol32) npi+ndc afforestation policy (Mha new forest wrt to 2010)
 $ondelim
 $include "./modules/32_forestry/input/npi_ndc_aff_pol.cs3"
 $offdelim
