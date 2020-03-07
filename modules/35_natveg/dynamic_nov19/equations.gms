@@ -85,7 +85,7 @@
 
 q35_secdforest_change(j2,ac_sub)..
                            vm_secdforest_reduction(j2,ac_sub)
-                           =g=
+                           =e=
                            (pc35_secdforest(j2,ac_sub) - v35_secdforest(j2,ac_sub));
 
 
@@ -94,7 +94,7 @@ q35_secdforest_change(j2,ac_sub)..
 
 q35_primforest_change(j2)..
                            vm_primforest_reduction(j2)
-                           =g=
+                           =e=
                            (pcm_land(j2,"primforest") - vm_land(j2,"primforest"));
 
 
@@ -102,7 +102,7 @@ q35_primforest_change(j2)..
 *' production of woodfuel coming out of other land.
 q35_other_change(j2,ac_sub)..
                           vm_other_reduction(j2,ac_sub)
-                          =g=
+                          =e=
                           (pc35_other(j2,ac_sub)  - v35_other(j2,ac_sub));
 
 

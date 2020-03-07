@@ -151,7 +151,7 @@ q32_prod_future(i2) ..
 
 q32_forestry_change(j2,ac_sub) ..
                           vm_forestry_reduction(j2,ac_sub)
-                          =g=
+                          =e=
                           sum(type32, pc32_land(j2,type32,ac_sub) - v32_land(j2,type32,ac_sub));
 
 *** EOF equations.gms ***
