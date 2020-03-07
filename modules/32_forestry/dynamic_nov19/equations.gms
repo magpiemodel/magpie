@@ -122,7 +122,7 @@ q32_cost_establishment(i2)..
 *' trees established for afforestation purposes.
 
 q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
-                    sum((cell(i2,j2),type32,ac_sub), v32_land(j2,type32,ac_sub)) * f32_fac_req_ha(i2,"recur");
+                    sum((cell(i2,j2),type32,ac), v32_land(j2,type32,ac)) * f32_fac_req_ha(i2,"recur");
 
 
 *' Harvesting costs are calculated based on area removed for timber production purposes.
@@ -140,7 +140,7 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 q32_prod_future(i2) ..
               sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
               =e=
-              sum(kforestry,vm_prod_future_reg_ff(i2,kforestry) * pcm_production_ratio_future(i2))
+              sum(kforestry,vm_prod_future_reg_ff(i2,kforestry) * p73_volumetric_conversion(kforestry)) * pcm_production_ratio_future(i2)
               ;
 
 **** Area harvested
