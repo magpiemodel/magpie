@@ -11,7 +11,7 @@ sets
 
 *sets need to be adopted to new categories
    k_notrade(kall) Production activities of non-tradable commodites
-       / oilpalm, foddr, pasture, res_cereals, res_fibrous, res_nonfibrous,wood,woodfuel,begr,betr /
+       / oilpalm, foddr, pasture, res_cereals, res_fibrous, res_nonfibrous,begr,betr /
 * oilpalm not traded, only its oil and oilcake due to FAOSTAT complications, and as trade is little
 * foddr is not traded as too bulky
 * pasture it not traded as too bulky
