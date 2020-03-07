@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --qos=standby
+#SBATCH --qos=priority
 #SBATCH --job-name=mag-run
 #SBATCH --output=full.log
 #SBATCH --mail-type=END
