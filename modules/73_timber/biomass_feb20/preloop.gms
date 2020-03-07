@@ -5,11 +5,15 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+p73_volumetric_conversion("wood") = 0.6325;
+p73_volumetric_conversion("woodfuel") = 0.3071;
+
 ** Fixing variables
 *vm_prod_heaven_timber.fx(j,kforestry) = 0;
 v73_prod_natveg.fx(j,"other",ac_sub,"wood") = 0;
+*v73_prod_natveg.fx(j,"other",ac_sub,"woodfuel") = 0;
 v73_prod_natveg.fx(j,"primforest",ac_sub,kforestry)$(not sameas(ac_sub,"acx")) = 0;
-vm_hvarea_other.fx(j,ac_sub,"wood") = 0;
+*vm_hvarea_other.fx(j,ac_sub,"wood") = 0;
 
 
 ****************** IIASA demand ******************

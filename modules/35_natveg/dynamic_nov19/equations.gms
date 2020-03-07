@@ -79,22 +79,13 @@
 *' Harvesting costs are paid everytime natural vegetation is harvested. The "real"
 *' harvested area are received from the timber module [73_timber].
 
-q35_cost_total(i2)..
-                    vm_cost_natveg(i2)
-                    =e=
-                    sum((cell(i2,j2), kforestry),
-                    sum(ac_sub, vm_hvarea_secdforest(j2,ac_sub,kforestry))
-                  + sum(ac_sub, vm_hvarea_other(j2, ac_sub,"woodfuel"))
-                  + vm_hvarea_primforest(j2, kforestry)) * (fm_harvest_cost_ha(i2) * 1.5)
-                    ;
-
 
 *' Change in secondary forest compared to previous time step. Helps calculating
 *' production coming out of secondary forests.
 
 q35_secdforest_change(j2,ac_sub)..
-                           sum(kforestry,vm_secdforest_change(j2,kforestry,ac_sub))
-                           =e=
+                           vm_secdforest_reduction(j2,ac_sub)
+                           =g=
                            (pc35_secdforest(j2,ac_sub) - v35_secdforest(j2,ac_sub));
 
 
@@ -102,16 +93,16 @@ q35_secdforest_change(j2,ac_sub)..
 *' production coming out of primary forests.
 
 q35_primforest_change(j2)..
-                           sum(kforestry,vm_primforest_change(j2,kforestry))
-                           =e=
+                           vm_primforest_reduction(j2)
+                           =g=
                            (pcm_land(j2,"primforest") - vm_land(j2,"primforest"));
 
 
 *' Change in other land compared to previous time step. Helps calculating
 *' production of woodfuel coming out of other land.
 q35_other_change(j2,ac_sub)..
-                          sum(kforestry,vm_other_change(j2,kforestry,ac_sub))
-                          =e=
+                          vm_other_reduction(j2,ac_sub)
+                          =g=
                           (pc35_other(j2,ac_sub)  - v35_other(j2,ac_sub));
 
 
@@ -122,6 +113,6 @@ q35_other_change(j2,ac_sub)..
 q35_secdforest_conversion(j2)..
                           v35_secdforest(j2,"ac0")
                           =e=
-                          sum((kforestry,ac_sub),vm_hvarea_secdforest(j2,ac_sub,kforestry))
-                        + sum(kforestry,vm_hvarea_primforest(j2,kforestry))
+                          sum(ac_sub,vm_hvarea_secdforest(j2,ac_sub))
+                        + vm_hvarea_primforest(j2)
                           ;

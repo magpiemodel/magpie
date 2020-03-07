@@ -19,8 +19,7 @@
 *' in a parametrized form.
 
 q32_cost_total(i2) .. vm_cost_fore(i2) =e=
-                     v32_cost_harvest(i2)
-								   + v32_cost_recur(i2)
+								   v32_cost_recur(i2)
 								   + v32_cost_establishment(i2)
 								   ;
 
@@ -129,11 +128,6 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 *' Harvesting costs are calculated based on area removed for timber production purposes.
 *' These costs are also paid when land expansion happens at the cost of plantations,
 
-q32_cost_harvest(i2)..
-                    v32_cost_harvest(i2)
-                    =e=
-                    sum((cell(i2,j2), kforestry, ac_sub), vm_hvarea_forestry(j2,kforestry,ac_sub)) * fm_harvest_cost_ha(i2)
-                    ;
 
 **** New establishment decision
 *------------------------------
@@ -144,7 +138,7 @@ q32_cost_harvest(i2)..
 *' yield ('pc32_yield_forestry_future') at harvest.
 
 q32_prod_future(i2) ..
-              sum((cell(i2,j2),kforestry), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2,kforestry))
+              sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
               =e=
               sum(kforestry,vm_prod_future_reg_ff(i2,kforestry) * pcm_production_ratio_future(i2))
               ;
@@ -155,9 +149,9 @@ q32_prod_future(i2) ..
 *' Harvested area is the difference between plantation area from precious time
 *' step ('pc32_land') and optimized plantation area from current time step ('v32_land')
 
-q32_hvarea_forestry(j2,ac_sub) ..
-                          sum(kforestry, vm_hvarea_forestry(j2,kforestry,ac_sub))
-                          =e=
-                          (pc32_land(j2,"plant",ac_sub) - v32_land(j2,"plant",ac_sub));
+q32_forestry_change(j2,ac_sub) ..
+                          vm_forestry_reduction(j2,ac_sub)
+                          =g=
+                          sum(type32, pc32_land(j2,type32,ac_sub) - v32_land(j2,type32,ac_sub));
 
 *** EOF equations.gms ***

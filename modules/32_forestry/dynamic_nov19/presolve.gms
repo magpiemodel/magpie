@@ -29,6 +29,7 @@ ac_additional(ac) = yes$(ord(ac) <= (m_yeardiff(t)/5));
 ** DON'T USE TYPE32 SET HERE
 v32_land.lo(j,"aff","ac0") = 0;
 v32_land.up(j,"aff","ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
+*v32_land.fx(j,"aff","ac0") = 0;
 
 *' No afforestation is allowed if carbon density <= 20 tc/ha
 v32_land.fx(j,"aff","ac0")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
@@ -58,6 +59,7 @@ p32_land(t,j,type32,"ac0") = 0;
 ** Calculate v32_land.l
 v32_land.l(j,type32,ac) = p32_land(t,j,type32,ac);
 pc32_land(j,type32,ac) = p32_land(t,j,type32,ac);
+p32_land_before(t,j,type32,ac) = p32_land(t,j,type32,ac);
 vm_land.l(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 pcm_land(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 
@@ -96,7 +98,7 @@ p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac_forestry(t,
 *pm_rotation_reg(t,j) = ord(t) + ceil(pm_rot_length_estb(t,j)/5) + card(t_past_ff);
 pm_rotation_reg(t,i) = ord(t) + ceil((sum(cell(i,j),pcm_land(j,"forestry")*pm_rot_length_estb(t,j))/sum(cell(i,j),pcm_land(j,"forestry")))/5) + card(t_past_ff);
 
-pc32_yield_forestry_future(j,kforestry) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), pm_growing_stock(t,j,ac_sub,kforestry,"forestry"));
+pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), pm_growing_stock(t,j,ac_sub,"forestry"));
 
 
 ********** Dampening factor calculation (Deprecated)

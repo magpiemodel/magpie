@@ -6,6 +6,3 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 vm_landdiff_natveg.scale = 10e4;
-vm_hvarea_other.scale(j,ac_sub,kforestry) = 10e-3;
-vm_hvarea_secdforest.scale(j,ac_sub,kforestry) = 10e-3;
-vm_cost_natveg.scale(i) = 10e3;
