@@ -23,10 +23,11 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-cfg$title <- "F02_SSP2_landfeb15_simpleTrade_greater"
+cfg$title <- "F02_SSP2_landfeb15_simpleTrade_processOff"
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
 cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
 cfg$gms$land <- "feb15"
+cfg$gms$processing <- "off"
 #cfg$gms$c32_aff_policy <- "none"
 start_run(cfg,codeCheck=FALSE)
