@@ -50,8 +50,8 @@ v32_land(j2,"aff","ac0") * sum(ct, p32_cdr_ac(ct,j2,ac));
 *' maximum defined in `s32_max_aff_area`. Therefore, the right-hand side of the constraint
 *' is relaxed by the value of exogenously prescribed afforestation (`p32_aff_togo`).
 
- q32_max_aff .. sum((j2), vm_land(j2,"forestry")-pm_land_start(j2,"forestry"))
-                =l= s32_max_aff_area + sum(ct, p32_aff_togo(ct));
+ q32_max_aff .. sum((j2,type32,ac)$(not sameas(type32,"plant")), v32_land(j2,type32,ac))
+                =l= p32_max_aff_area - sum(ct, p32_aff_togo(ct));
 
 *****Carbon stocks**************************************************************
 *' Forestry above ground carbon stocks are calculated as the product of forestry land (`v32_land`) and the area
@@ -140,7 +140,7 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 
 q32_prod_future(i2) ..
               sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
-              =e=
+              =g=
               sum((ct,kforestry), pm_demand_ext(ct,i2,kforestry) * p73_volumetric_conversion(kforestry)) * 0.3
               ;
 
