@@ -29,7 +29,7 @@ ac_additional(ac) = yes$(ord(ac) <= (m_yeardiff(t)/5));
 ** DON'T USE TYPE32 SET HERE
 v32_land.lo(j,"aff","ac0") = 0;
 v32_land.up(j,"aff","ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
-v32_land.fx(j,"aff","ac0") = 0;
+*v32_land.fx(j,"aff","ac0") = 0;
 
 *' No afforestation is allowed if carbon density <= 20 tc/ha
 v32_land.fx(j,"aff","ac0")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;

@@ -101,6 +101,7 @@ q32_cost_establishment(i2)..
 						v32_cost_establishment(i2)
 						=e=
             (sum((cell(i2,j2),type32), v32_land(j2,type32,"ac0") * c32_reESTBcost)
+            + sum(cell(i2,j2), v32_land(j2,"aff","ac0") * c32_reESTBcost)
 *            +
 *              (
 *             sum((ct,kforestry), vm_prod_future_reg_ff(i2,kforestry) * c32_harvesting_cost)
