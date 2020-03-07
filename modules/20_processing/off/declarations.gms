@@ -16,7 +16,9 @@ positive variables
   vm_cost_processing(i)                          processing costs (mio. USD05MER per yr)
 ;
 
-  vm_processing_substitution_cost(i)
+variables
+  vm_processing_substitution_cost(i)             Costs or benefits of substituting one product by another (mio. USD05MER per yr)
+;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
