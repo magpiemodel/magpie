@@ -29,8 +29,6 @@ ac_additional(ac) = yes$(ord(ac) <= (m_yeardiff(t)/5));
 ** DON'T USE TYPE32 SET HERE
 v32_land.lo(j,"aff","ac0") = 0;
 v32_land.up(j,"aff","ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
-*only for testing
-v32_land.fx(j,"aff","ac0") = 0;
 
 *' No afforestation is allowed if carbon density <= 20 tc/ha
 v32_land.fx(j,"aff","ac0")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
@@ -67,8 +65,6 @@ pcm_land(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 ** Release bounds for ALL Age classes before we make brptection of harvest "indication" decisions
 v32_land.lo(j,"plant",ac) = 0;
 v32_land.up(j,"plant",ac) = Inf;
-*only for testing
-v32_land.fx(j,"plant","ac0") = 0;
 
 ** Fix land with rotation length
 v32_land.fx(j,"plant",ac_sub)$protect32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
