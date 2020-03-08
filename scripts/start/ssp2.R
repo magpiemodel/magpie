@@ -35,10 +35,10 @@ cfg$gms$s15_elastic_demand <- 0
 #cfg$gms$c32_aff_policy <- "none"
 cfg$gms$trade <- "selfsuff_reduced"
 
-cfg$title <- "F04_simple_timberOff"
+cfg$title <- "F04_simple_timberOff_ac0fixzero"
 cfg$gms$s73_timber_demand <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "F04_simple_timberOn"
-cfg$gms$s73_timber_demand <- 1
-start_run(cfg,codeCheck=FALSE)
+# cfg$title <- "F04_simple_timberOn"
+# cfg$gms$s73_timber_demand <- 1
+# start_run(cfg,codeCheck=FALSE)
