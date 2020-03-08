@@ -39,7 +39,7 @@ cfg$recalc_npi_ndc <- TRUE
 ########## Setting up runs ############
 #######################################
 
-flag_run <- paste0("R071-CodeFix-")
+flag_run <- paste0("R072-CodeFix-")
 
 cfg$gms$land <- "feb15"
 
@@ -56,7 +56,7 @@ for(conopt_setting in c(0,1)){
 		if(timber_demand == 1) dem_flag = "TimberON"
 		if(timber_demand == 0) dem_flag = "TimberOFF"
 
-		for(c32_rotation_extension in c(0,2)){
+		for(c32_rotation_extension in c(0)){
 			for(pollutant_prices in c("R2M41-SSP2-NPi")){
 
 				if(pollutant_prices == "R2M41-SSP2-NPi") {

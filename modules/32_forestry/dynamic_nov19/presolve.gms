@@ -76,7 +76,7 @@ v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub
 m_boundfix(v32_land,(j,"plant",ac_sub),l,10e-5);
 
 ** fix C-price induced afforestation and ndc to zero (for testing)
-*v32_land.fx(j,"aff",ac) = 0;
+v32_land.fx(j,"aff",ac) = 0;
 *v32_land.fx(j,"ndc",ac) = 0;
 
 ** Bounds for ndc and aff forests
