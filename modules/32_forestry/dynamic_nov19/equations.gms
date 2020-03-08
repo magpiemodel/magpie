@@ -110,7 +110,7 @@ q32_cost_establishment(i2)..
 *              +
 *              sum(ct,vm_cost_trade_forestry_ff(i2))
 *              )/((1+pm_interest(i2))**sum(ct,(pm_rotation_reg(ct,i2))))
-**************************** ((1+pm_interest(i2))**p32_rot_length(ct,i2)) to calculate present value of future costs
+**************************** ((1+pm_interest(i2))**p32_rot_length_ac_eqivalent(ct,i2)) to calculate present value of future costs
               )
             * (pm_interest(i2)/(1+pm_interest(i2)))
 *************************** (pm_interest(i2)/(1+pm_interest(i2))) to annuituze the values. Similar to averaging over time

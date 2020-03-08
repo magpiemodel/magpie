@@ -98,11 +98,11 @@ p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac_forestry(t,
 pm_rotation_reg(t,i) = ord(t) + ceil((sum(cell(i,j),pcm_land(j,"forestry")*pm_rot_length_estb(t,j))/sum(cell(i,j),pcm_land(j,"forestry")))/5) + card(t_past_ff);
 
 ** Future forestry yield
-pc32_yield_forestry_future(j,kforestry) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), pm_growing_stock(t,j,ac_sub,kforestry,"forestry"));
+pc32_yield_forestry_future(j,kforestry) = sum(ac_sub$(ord(ac_sub) = pm_rot_length_estb(t,j)), pm_growing_stock(t,j,ac_sub,kforestry,"forestry"));
 
 
 ********** Dampening factor calculation (Deprecated)
-p32_rot_ac(j) = p32_rot_length(t,j)/5;
+p32_rot_ac(j) = p32_rot_length_ac_eqivalent(t,j)/5;
 p32_regional_min(j)   = 1/p32_management_factor(j,"normal");
 *p32_dampen_pre(ac,j)  = (1-(1/ord(ac)))$(ord(ac)<p32_rot_ac(j)) + 1$(ord(ac)=p32_rot_ac(j)) + (1-(1/p32_rot_ac(j))*(ord(ac)-p32_rot_ac(j)))$(ord(ac)>p32_rot_ac(j));
 p32_dampen_final("ac0",j) = 0;

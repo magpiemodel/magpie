@@ -21,28 +21,23 @@ p32_IGR(t_all,j,"ac0") = p32_IGR(t_all,j,"ac5");
 ** keep his/her investment in bank rather than in keeping the forest standing.
 ** The easiest way to do this calculation is to count a value of 1 for IGR>interest rate and a value of 0 for IGR<interest rate.
 p32_rot_flg(t_all,j,ac) = 1$((p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)))>0)
-                        + 0$((p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)))<0);
+                        + 0$((p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)))<=0);
 
 ** From the above calculation, now its easier to count how many age-classes can be sustained before IGR falls below interest rate.
 ** Then we just multiply the valid age-classes by 5 (because MAgPIE age classes are in 5 year steps) to get the absolute rotation length (in years)
-p32_rot_length(t_all,j) = sum(ac,p32_rot_flg(t_all,j,ac)) * 5;
+p32_rot_length_ac_eqivalent(t_all,j) = sum(ac,p32_rot_flg(t_all,j,ac));
 
 ** We provide a upper limit of 90 years for commercial plantations.
-p32_rot_length(t_all,j)$(p32_rot_length(t_all,j)>90) = 90;
-
+** 90 years translates to age-class 18 (90/5)
+p32_rot_length_ac_eqivalent(t_all,j)$(p32_rot_length_ac_eqivalent(t_all,j)>18) = 18;
+display p32_rot_length_ac_eqivalent;
 ** Holding rotation lengths constant after the end of this century.
-p32_rot_length(t_future,j) = p32_rot_length("y2100",j);
-
-** Rotation used for establishment decision - Same as harvesting rotation for now.
-** This is declared as interface because this is also need in trade module.
-pm_rot_length_estb(t_all,j) = p32_rot_length(t_all,j);
-
+p32_rot_length_ac_eqivalent(t_future,j) = p32_rot_length_ac_eqivalent("y2100",j);
 
 ** Earlier we converted rotation lengths to absolute numbers, now we make the Conversion
 ** back to rotation length in age-classes.
-p32_rotation_cellular(t_all,j) = ceil(p32_rot_length(t_all,j)/5);
-p32_rotation_cellular_estb(t_all,j) = ceil(pm_rot_length_estb(t_all,j)/5);
-p32_rotation_cellular_estb(t_past_ff,j) = p32_rotation_cellular_estb("y1995",j);
+p32_rotation_cellular(t_all,j) = ceil(p32_rot_length_ac_eqivalent(t_all,j));
+p32_rotation_cellular_estb(t_all,j) = ceil(p32_rot_length_ac_eqivalent(t_all,j));
 
 * Shift rotations. E.g. rotations harveted in 2050 should be harvested with the rotations using which they were establsihed.
 * For 2050 plantation establsihed in 2020 with 30y rotaions shall be harvested according to 30 yr (for example)
@@ -61,6 +56,11 @@ loop(t_all,
         );
     );
 );
+
+** Rotation used for establishment decision - Same as harvesting rotation for now.
+** This is declared as interface because this is also need in trade module.
+pm_rot_length_estb(t_all,j) = p32_rotation_cellular_estb(t_all,j);
+
 ** Define protect and harvest setting
 protect32(t,j,ac_sub) = no;
 *protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular(t,j));
