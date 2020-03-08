@@ -97,6 +97,12 @@ pm_rotation_reg(t,i) = ord(t) + ceil((sum(cell(i,j),pcm_land(j,"forestry")*pm_ro
 
 pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), pm_growing_stock(t,j,ac_sub,"forestry"));
 
+*pm_rot_length_estb not needed as interface
+*pm_rotation_reg not needed as interface
+
+pc32_demand_forestry_future(i,kforestry)    = sum(t_ext$(t_ext.pos = pm_rotation_reg(t,i)),pm_demand_ext(t_ext,i,kforestry));
+pc32_selfsuff_forestry_future(i,kforestry)  = sum(t_ext$(t_ext.pos = pm_rotation_reg(t,i)),pm_selfsuff_ext(t_ext,i,kforestry));
+pc32_production_ratio_future(i)             = sum(t_ext$(t_ext.pos = pm_rotation_reg(t,i)),p32_production_ratio_ext(t_ext,i));
 
 ********** Dampening factor calculation (Deprecated)
 p32_rot_ac(j) = p32_rot_length(t,j)/5;

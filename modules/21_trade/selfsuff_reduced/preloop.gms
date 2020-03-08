@@ -24,3 +24,7 @@ f21_self_suff(t_all,"MEA",kforestry) = 0.1;
 f21_exp_shr(t_all,"MEA",kforestry) = 0;
 *f21_self_suff(t_all,"JPN",kforestry) = 0.1;
 *f21_self_suff(t_all,"EUR","woodfuel") = 1.09;
+
+pm_selfsuff_ext(t_ext,i,kforestry) = f21_self_suff("y2150",i,kforestry);
+pm_selfsuff_ext(t_all,i,kforestry) = f21_self_suff(t_all,i,kforestry);
+

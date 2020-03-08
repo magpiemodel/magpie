@@ -14,9 +14,9 @@ parameters
  p32_land(t,j,type32,ac)                            Forestry land for each cell wood type and age class before and after optimization (mio. ha)
  pc32_land(j,type32,ac)                             Forestry land per forestry land type initialization of the optimization (mio. ha)
  pc32_yield_forestry_future(j)            Cellular timber yield expected in the future (m3 per ha per year)
- pm_production_ratio_ext(t_ext,i)                   Fraction of demand coming from commercial plantations (1)
+ p32_production_ratio_ext(t_ext,i)                   Fraction of demand coming from commercial plantations (1)
  p32_plant_ini_ac(j)                                Initialization of plantation area (mio. ha)
- pcm_production_ratio_future(i)                     Future Fraction of demand coming from commercial plantations (1)
+ pc32_production_ratio_future(i)                     Future Fraction of demand coming from commercial plantations (1)
  p32_IGR(t_all,j,ac)                                Instantaneous growth rate or periodic annual increment of forest growth (1)
  p32_rot_flg(t_all,j,ac)                            Identifier flag when calculating rotation length (1)
  p32_rot_ac(j)                                      Rotation length translated to age classes on cellular level (1)
@@ -35,6 +35,8 @@ parameters
  p32_rotation_offset                                offset calc
  p32_land_start(j,ac)                               Saving first val (mio. ha)
  p32_land_before(t,j,type32,ac) blub
+ pc32_demand_forestry_future(i,kforestry)
+ pc32_selfsuff_forestry_future(i,kforestry)
 ;
 
 positive variables

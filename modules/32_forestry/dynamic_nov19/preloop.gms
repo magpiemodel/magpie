@@ -36,6 +36,8 @@ p32_rot_length(t_future,j) = p32_rot_length("y2100",j);
 ** This is declared as interface because this is also need in trade module.
 pm_rot_length_estb(t_all,j) = p32_rot_length(t_all,j);
 
+pm_rotation_reg(t,i) = ord(t) + smax(cell(i,j), pm_rot_length_estb(t,j))/5 + card(t_past_ff);; 
+display pm_rotation_reg;
 
 ** Earlier we converted rotation lengths to absolute numbers, now we make the Conversion
 ** back to rotation length in age-classes.
@@ -99,8 +101,8 @@ p32_land(t,j,"plant",ac)$(ord(ac) > 1) = p32_land(t,j,"plant",ac-1);
 p32_land("y1995",j,"plant","ac0") = 0;
 
 ** Proportion of production coming from plantations
-pm_production_ratio_ext(t_ext,i) = f32_production_ratio("y2100",i);
-pm_production_ratio_ext(t_all,i) = f32_production_ratio(t_all,i);
+p32_production_ratio_ext(t_ext,i) = f32_production_ratio("y2100",i);
+p32_production_ratio_ext(t_all,i) = f32_production_ratio(t_all,i);
 
 ** Forest management options. Probably deprecated.
 f32_forestry_management("USA","plantations") = 7;
