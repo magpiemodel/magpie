@@ -40,7 +40,7 @@ cfg$recalc_npi_ndc <- TRUE
 ########## Setting up runs ############
 #######################################
 
-flag_run <- paste0("R070-")
+flag_run <- paste0("R071-CodeFix-")
 
 for(timber_demand in c(1)){
 
