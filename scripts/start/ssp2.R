@@ -39,6 +39,6 @@ cfg$gms$trade <- "selfsuff_reduced"
 # cfg$gms$s73_timber_demand <- 0
 # start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "F04_simple_timberOn_prod_ratio33"
+cfg$title <- "F04_simple_timberOn_prod_ratio33_check"
 cfg$gms$s73_timber_demand <- 1
 start_run(cfg,codeCheck=FALSE)

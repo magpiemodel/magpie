@@ -5,9 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-p73_volumetric_conversion("wood") = 0.6325;
-p73_volumetric_conversion("woodfuel") = 0.3071;
-
 ** Fixing variables
 *vm_prod_heaven_timber.fx(j,kforestry) = 0;
 v73_prod_natveg.fx(j,"other",ac_sub,"wood") = 0;
@@ -59,6 +56,16 @@ p73_timber_demand_gdp_pop(t_all,i,"woodfuel")$(im_development_state(t_all,i)<1) 
 
 pm_demand_ext(t_ext,i,kforestry) = p73_timber_demand_gdp_pop("y2150",i,kforestry);
 pm_demand_ext(t_all,i,kforestry) = p73_timber_demand_gdp_pop(t_all,i,kforestry);
+
+*m3 to ton conversion. 
+*0.6 ton DM / m^3?
+p73_volumetric_conversion("wood") = 0.6325;
+p73_volumetric_conversion("woodfuel") = 0.3071;
+*p73_timber_demand_gdp_pop in mio m^3
+*pm_demand_ext in mio ton DM
+pm_demand_ext(t_all,i,kforestry) = p73_timber_demand_gdp_pop(t_all,i,kforestry) * p73_volumetric_conversion(kforestry);
+
+
 *pm_demand_ext(t_all,"JPN",kforestry) =p73_timber_demand_gdp_pop(t_all,"JPN",kforestry) * 0.5;
 *pm_demand_ext(t_all,"MEA",kforestry) = p73_timber_demand_gdp_pop(t_all,"MEA",kforestry) * 0.5;
 ***** Calculate model estimate per capita

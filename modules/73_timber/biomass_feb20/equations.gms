@@ -30,11 +30,11 @@ q73_cost_hvarea(i2)..
 *' `vm_prod_reg` as the sum of the cluster level production of timber coming from
 *' 'v73_prod_forestry' and 'v73_prod_natveg'.
 
-*prod in m^3
+*prod in ton. q73_prod_timber can be removed.
 q73_prod_timber(j2,kforestry)..
   vm_prod(j2,kforestry)
   =e=
-  v73_prod_ton(j2,kforestry) / p73_volumetric_conversion(kforestry);
+  v73_prod_ton(j2,kforestry);
 
 *prod in ton
 q73_prod_timber_ton(j2,kforestry)..

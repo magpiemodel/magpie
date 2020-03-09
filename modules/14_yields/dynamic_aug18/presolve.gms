@@ -11,14 +11,16 @@
 
 *** YIELDS
 
-
+*pm_carbon_density_ac_forestry (vegc) is above + below ground carbon density.
+*convert from tC/ha to tDM/ha by using carbon fraction of 0.5 tC/tDM
+*for wood harvesting we want only above ground biomass. Therefore multiply with 1-root_to_shoot ratio (1-0.23). i14_root_to_shoot_ratio is 1-root_to_shoot ratio. should be corrected.
+*divide Aboveground tree biomass by BEF to get Stem biomass in tDM/ha
 pm_growing_stock(t,j,ac_sub,"forestry") =
     (
-      pm_carbon_density_ac_forestry(t,j,ac_sub,"vegc") * i14_root_to_shoot_ratio("forestry")
-      /
-      (sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"plantations",ac_sub))
-        * i14_carbon_fraction
-      )
+      pm_carbon_density_ac_forestry(t,j,ac_sub,"vegc")
+      / i14_carbon_fraction
+      * i14_root_to_shoot_ratio("forestry")
+      / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"plantations",ac_sub))
      )
      / (5$(ord(t)=1) + m_yeardiff(t)$(ord(t)>1))
     ;
