@@ -11,31 +11,31 @@
 
 *** YIELDS
 
-
-pm_growing_stock(t,j,ac_sub,kforestry,"forestry") =
+*pm_carbon_density_ac_forestry (vegc) is above + below ground carbon density.
+*convert from tC/ha to tDM/ha by using carbon fraction of 0.5 tC/tDM
+*for wood harvesting we want only above ground biomass. Therefore multiply with 1-root_to_shoot ratio (1-0.23). i14_root_to_shoot_ratio is 1-root_to_shoot ratio. should be corrected.
+*divide Aboveground tree biomass by BEF to get Stem biomass in tDM/ha
+pm_growing_stock(t,j,ac_sub,"forestry") =
     (
-      pm_carbon_density_ac_forestry(t,j,ac_sub,"vegc") * i14_root_to_shoot_ratio("forestry")
-      /
-      (sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"plantations",ac_sub))
-        * i14_carbon_fraction
-        * (p14_volumetric_conversion(kforestry))
-      )
+      pm_carbon_density_ac_forestry(t,j,ac_sub,"vegc")
+      / i14_carbon_fraction
+      * i14_root_to_shoot_ratio("forestry")
+      / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"plantations",ac_sub))
      )
      / (5$(ord(t)=1) + m_yeardiff(t)$(ord(t)>1))
     ;
 
 
-pm_growing_stock(t,j,ac_sub,kforestry,land_natveg) =
+pm_growing_stock(t,j,ac_sub,land_natveg) =
     (
       pm_carbon_density_ac(t,j,ac_sub,"vegc") * i14_root_to_shoot_ratio(land_natveg)
       /
       (sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"natveg",ac_sub))
         * i14_carbon_fraction
-        * (p14_volumetric_conversion(kforestry))
       )
      )
      / (5$(ord(t)=1) + m_yeardiff(t)$(ord(t)>1))
     ;
 
 **** Hard constraint to always have a positive number in pm_growing_stock
-pm_growing_stock(t,j,ac_sub,kforestry,land_natveg) = pm_growing_stock(t,j,ac_sub,kforestry,land_natveg)$(pm_growing_stock(t,j,ac_sub,kforestry,land_natveg)>0)+0.0001$(pm_growing_stock(t,j,ac_sub,kforestry,land_natveg)=0);
+pm_growing_stock(t,j,ac_sub,land_natveg) = pm_growing_stock(t,j,ac_sub,land_natveg)$(pm_growing_stock(t,j,ac_sub,land_natveg)>0)+0.0001$(pm_growing_stock(t,j,ac_sub,land_natveg)=0);

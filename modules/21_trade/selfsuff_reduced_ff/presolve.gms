@@ -1,5 +1,9 @@
 ** Weighting future rotation calculation for mean regional values by area
 pm_rotation_reg(t,i) = ord(t) + ceil((sum(cell(i,j),pcm_land(j,"forestry")*pm_rot_length_estb(t,j))/sum(cell(i,j),pcm_land(j,"forestry")))/5) + card(t_past_ff);
+display pm_rotation_reg;
+** dirty quick fix
+pm_rotation_reg(t,i) = ord(t) + smax(cell(i,j), pm_rot_length_estb(t,j))/5 + card(t_past_ff);; 
+display pm_rotation_reg;
 
 ** Checking future numbers
 pc21_demand_forestry_future(i,kforestry)    = sum(t_ext$(t_ext.pos = pm_rotation_reg(t,i)),pm_demand_ext(t_ext,i,kforestry));

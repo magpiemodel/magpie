@@ -16,13 +16,16 @@ positive variables
   vm_cost_processing(i)                          processing costs (mio. USD05MER per yr)
 ;
 
-  vm_processing_substitution_cost(i)
+variables
+  vm_processing_substitution_cost(i)             Costs or benefits of substituting one product by another (mio. USD05MER per yr)
+;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_dem_processing(t,i,kall,type)               demand for processing use (mio.tDM)
  ov_secondary_overproduction(t,i,kall,kpr,type) overproduction of secondary couple products (mio.tDM)
  ov_cost_processing(t,i,type)                   processing costs (mio. USD05MER per yr)
+ ov_processing_substitution_cost(t,i,type)      Costs or benefits of substituting one product by another (mio. USD05MER per yr)
  oq20_processing_costs(t,i,type)                processing costs (mio.USD05MER)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

@@ -58,6 +58,7 @@ p32_land(t,j,type32,"ac0") = 0;
 ** Calculate v32_land.l
 v32_land.l(j,type32,ac) = p32_land(t,j,type32,ac);
 pc32_land(j,type32,ac) = p32_land(t,j,type32,ac);
+p32_land_before(t,j,type32,ac) = p32_land(t,j,type32,ac);
 vm_land.l(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 pcm_land(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 
@@ -75,14 +76,11 @@ v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub
 *v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = 0;
 m_boundfix(v32_land,(j,"plant",ac_sub),l,10e-5);
 
-** fix C-price induced afforestation and ndc to zero (for testing)
-v32_land.fx(j,"aff",ac) = 0;
-*v32_land.fx(j,"ndc",ac) = 0;
-
-** Bounds for ndc and aff forests
-*v32_land.fx(j,"aff","ac0") = 0; --- LATER?
-v32_land.fx(j,"aff",ac_sub) = pc32_land(j,"aff",ac_sub);
+** fix ndc afforestation forever, all age-classes are fixed except ac0
 v32_land.fx(j,"ndc",ac_sub) = pc32_land(j,"ndc",ac_sub);
+** fix c price induced afforestation based on s32_planing_horizon, fixed only until end of s32_planing_horizon, ac0 is free
+v32_land.fx(j,"aff",ac_sub)$(ord(ac_sub) <= s32_planing_horizon/5) = pc32_land(j,"aff",ac_sub);
+v32_land.up(j,"aff",ac_sub)$(ord(ac_sub) > s32_planing_horizon/5) = pc32_land(j,"aff",ac_sub);
 
 ** Setting ac dependent carbon.
 ** First, plantations carbon density is set to natveg carbon density
@@ -97,12 +95,17 @@ p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac_forestry(t,
 *pm_rotation_reg(t,j) = ord(t) + ceil(pm_rot_length_estb(t,j)/5) + card(t_past_ff);
 pm_rotation_reg(t,i) = ord(t) + ceil((sum(cell(i,j),pcm_land(j,"forestry")*pm_rot_length_estb(t,j))/sum(cell(i,j),pcm_land(j,"forestry")))/5) + card(t_past_ff);
 
-** Future forestry yield
-pc32_yield_forestry_future(j,kforestry) = sum(ac_sub$(ord(ac_sub) = pm_rot_length_estb(t,j)), pm_growing_stock(t,j,ac_sub,kforestry,"forestry"));
+pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), pm_growing_stock(t,j,ac_sub,"forestry"));
 
+*pm_rot_length_estb not needed as interface
+*pm_rotation_reg not needed as interface
+
+pc32_demand_forestry_future(i,kforestry)    = sum(t_ext$(t_ext.pos = pm_rotation_reg(t,i)),pm_demand_ext(t_ext,i,kforestry));
+pc32_selfsuff_forestry_future(i,kforestry)  = sum(t_ext$(t_ext.pos = pm_rotation_reg(t,i)),pm_selfsuff_ext(t_ext,i,kforestry));
+pc32_production_ratio_future(i)             = sum(t_ext$(t_ext.pos = pm_rotation_reg(t,i)),p32_production_ratio_ext(t_ext,i));
 
 ********** Dampening factor calculation (Deprecated)
-p32_rot_ac(j) = p32_rot_length_ac_eqivalent(t,j)/5;
+p32_rot_ac(j) = p32_rot_length(t,j)/5;
 p32_regional_min(j)   = 1/p32_management_factor(j,"normal");
 *p32_dampen_pre(ac,j)  = (1-(1/ord(ac)))$(ord(ac)<p32_rot_ac(j)) + 1$(ord(ac)=p32_rot_ac(j)) + (1-(1/p32_rot_ac(j))*(ord(ac)-p32_rot_ac(j)))$(ord(ac)>p32_rot_ac(j));
 p32_dampen_final("ac0",j) = 0;
