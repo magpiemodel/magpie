@@ -55,13 +55,12 @@ p73_glo_timber_demand(t_all,kforestry) = sum(i,p73_timber_demand_gdp_pop(t_all,i
 display p73_glo_timber_demand;
 
 ** Woodfuel fix
-p73_timber_demand_gdp_pop(t_all,i,"woodfuel") = (p73_timber_demand_gdp_pop(t_all,i,"woodfuel") * 0.50)$(im_development_state(t_all,i)<1)
-      + (p73_timber_demand_gdp_pop(t_all,i,"woodfuel"))$(im_development_state(t_all,i)=1);
+p73_timber_demand_gdp_pop(t_all,i,"woodfuel")$(im_development_state(t_all,i)<1) = p73_timber_demand_gdp_pop(t_all,i,"woodfuel") * 0.5;
 
 pm_demand_ext(t_ext,i,kforestry) = p73_timber_demand_gdp_pop("y2150",i,kforestry);
 pm_demand_ext(t_all,i,kforestry) = p73_timber_demand_gdp_pop(t_all,i,kforestry);
-pm_demand_ext(t_all,"JPN",kforestry) =p73_timber_demand_gdp_pop(t_all,"JPN",kforestry) * 0.5;
-pm_demand_ext(t_all,"MEA",kforestry) = p73_timber_demand_gdp_pop(t_all,"MEA",kforestry) * 0.5;
+*pm_demand_ext(t_all,"JPN",kforestry) =p73_timber_demand_gdp_pop(t_all,"JPN",kforestry) * 0.5;
+*pm_demand_ext(t_all,"MEA",kforestry) = p73_timber_demand_gdp_pop(t_all,"MEA",kforestry) * 0.5;
 ***** Calculate model estimate per capita
 *p73_wood_products_demand_pc(t,iso,wood_panels) =1.044e-05*(im_gdp_pc_ppp_iso(t,iso)**0.9063);
 *

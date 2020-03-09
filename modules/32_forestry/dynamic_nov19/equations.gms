@@ -141,9 +141,9 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 q32_prod_future(i2) ..
               sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
               =g=
-              sum(kforestry, pc32_demand_forestry_future(i2,kforestry) * pc32_selfsuff_forestry_future(i2,kforestry) * p73_volumetric_conversion(kforestry) * pc32_production_ratio_future(i2))
+              pc32_demand_forestry_future(i2,"wood") * pc32_selfsuff_forestry_future(i2,"wood") * p73_volumetric_conversion("wood") * 0.33
               ;
-
+* * pc32_production_ratio_future(i2)
 **** Area harvested
 *------------------
 
