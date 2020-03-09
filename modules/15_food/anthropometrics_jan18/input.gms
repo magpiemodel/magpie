@@ -17,9 +17,9 @@ $setglobal c15_calibscen  constant
 $setglobal c15_rumscen  mixed
 *   options:   constant, halving2050, mixed
 
-scalar s15_elastic_demand  Elastic demand switch (1=elastic 0=exogenous) (1) / 1 /;
+scalar s15_elastic_demand  Elastic demand switch (1=elastic 0=exogenous) (1) / 0 /;
 
-scalar s15_calibrate Calibration switch (1=calibrated 0=pure regression outcomes) (1) / 1 /;
+scalar s15_calibrate Calibration switch (1=calibrated 0=pure regression outcomes) (1) / 0 /;
 * only for per-capita calories, not for e.g. calibration of transformation parameters between per-capita calories in dm
 
 scalar s15_maxiter Scalar defining maximum number of iterations (1) / 5 /;
@@ -110,12 +110,15 @@ $ondelim
 $include "./modules/15_food/input/f15_bodyheight_historical.cs3"
 $offdelim;
 
+table f15_bodyheight_regr_paras(sex,paras_h15)   Body height regression parameters (X)
+$ondelim
+$include "./modules/15_food/input/f15_bodyheight_regr_paras.cs3"
+$offdelim;
+
 table f15_schofield(sex,age, paras_s15) Schofield equation parameters in kcal per capita per day or kcal per capita per day per weight (X)
 $ondelim
 $include "./modules/15_food/input/f15_schofield_parameters.cs3"
 $offdelim
 ;
-
-
 
 *** EOF input.gms ***

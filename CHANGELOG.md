@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.1] - 2020-03-09
+
+This version provides the model version used for the publication starved, stuffed and wasteful. It provides a few technical updates compared to the 4.1 release, which include
+
+### added
+- **scripts** a startscript that allows the exchange of model parameters as a sensitivity analysis
+ 
+### changed
+- **core** allow for flexible calibration period of the model, which allows for uncalibrated runs of the past for validation purposes
+- **15_food** Parameters for bodyheight regressions were included explicitly as input parameters
+- **config** updated input data of the drivers and food demand regressions
+
+### fixed
+- **15_food** Precision of iteration convergence criterium for magpie-demandmodel-iteration is calculated more precisely, avoiding unnecessary iterations.
 
 ## [4.1.0] - 2019-05-02
 
