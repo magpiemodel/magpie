@@ -5,10 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-
-
-*set vm_cost_trade zero in order to avoid a free variable
-vm_cost_trade.fx(i)               = 0;
-
-pm_selfsuff_ext(t_ext,i,kforestry) = f21_self_suff("y2150",i,kforestry);
-pm_selfsuff_ext(t_all,i,kforestry) = f21_self_suff(t_all,i,kforestry);
+table f21_self_suff(t_all,i,kall) Regional self-sufficiency rates (1)
+$ondelim
+$include "./modules/21_trade/input/f21_trade_self_suff.cs3"
+$offdelim;
