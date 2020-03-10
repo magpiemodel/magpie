@@ -5,11 +5,13 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In the dynamic_aug18 realization, the crop yield calculations 
+*' @description In the dynamic_aug18 realization, the crop yield calculations
 *' are identical as in the above described realization (biocorrect).
+*' Additionally, this realization also calculates the growing stocks in commercial
+*' plantations and natural vegetation using LPJmL Carbon stocks.
 *'
-*' @limitations The exogenous implementation of pasture intensification cannot 
-*' capture feedbacks between land scarcity and efforts to improve pasture 
+*' @limitations The exogenous implementation of pasture intensification cannot
+*' capture feedbacks between land scarcity and efforts to improve pasture
 *' management.
 
 
@@ -19,6 +21,7 @@ $Ifi "%phase%" == "declarations" $include "./modules/14_yields/dynamic_aug18/dec
 $Ifi "%phase%" == "input" $include "./modules/14_yields/dynamic_aug18/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/14_yields/dynamic_aug18/equations.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/14_yields/dynamic_aug18/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/14_yields/dynamic_aug18/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/14_yields/dynamic_aug18/postsolve.gms"
 $Ifi "%phase%" == "nl_fix" $include "./modules/14_yields/dynamic_aug18/nl_fix.gms"
 $Ifi "%phase%" == "nl_release" $include "./modules/14_yields/dynamic_aug18/nl_release.gms"

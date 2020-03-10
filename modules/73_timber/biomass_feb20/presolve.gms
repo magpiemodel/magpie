@@ -6,6 +6,5 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-parameters
- pm_climate_class(j,clcl) Koeppen-Geiger climate classification on the simulation cluster level (1)
-;
+
+*** EOF presolve.gms ***

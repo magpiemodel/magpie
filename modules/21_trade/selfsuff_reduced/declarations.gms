@@ -9,6 +9,7 @@ parameters
  i21_trade_bal_reduction(t_all,k_trade)         Trade balance reduction (1)
  i21_trade_margin(i,k_trade)                    Trade margins (USD05MER per tDM)
  i21_trade_tariff(i,k_trade)                    Trade tariffs (USD05MER per tDM)
+ pm_selfsuff_ext(t_ext,i,kforestry)            Self sufficiency for timber products in extended time frame (1)
 ;
 
 positive variables

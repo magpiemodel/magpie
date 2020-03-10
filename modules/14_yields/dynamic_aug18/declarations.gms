@@ -6,10 +6,14 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- i14_yields(t,j,kve,w)               Biophysical input yields (excluding technological change) (tDM per ha per yr)
- p14_pyield_LPJ_reg(t_all,i)         Regional average input yields aggregated from clusters with initial pasture area as weights (tDM per ha per yr)
- p14_pyield_corr(t,i)                Regional pasture management correction for historical time steps (1)
-;
+ i14_yields(t,j,kve,w)                                          Biophysical input yields (excluding technological change) (tDM per ha per yr)
+ p14_pyield_LPJ_reg(t_all,i)                                    Regional average input yields aggregated from clusters with initial pasture area as weights (tDM per ha per yr)
+ p14_pyield_corr(t,i)                                           Regional pasture management correction for historical time steps (1)
+ pm_growing_stock(t,j,ac_sub,forest_land)             Forest growing stock (m3 per ha per yr)
+ i14_carbon_fraction                                            Carbon fraction for conversion of biomass to dry matter (1)
+ i14_aboveground_fraction(forest_land)                           Root to shoot ratio (1)
+ p14_volumetric_conversion(kforestry)                           Volumetric Conversion parameter for timber (1)
+ ;
 
 positive variables
  vm_yld(j,kve,w)                     Yields (variable because of technical change) (tDM per ha per yr)

@@ -17,7 +17,7 @@ sets
        / tece, maiz, trce, rice_pro, soybean, rapeseed, groundnut, sunflower,
          oilpalm, puls_pro, potato, cassav_sp, sugr_cane, sugr_beet, others,
          foddr, pasture, cottn_pro, begr, betr, livst_rum, livst_pig,
-         livst_chick, livst_egg, livst_milk, fish /
+         livst_chick, livst_egg, livst_milk, fish, wood, woodfuel /
 
    kap(k) Animal products
    /
@@ -26,6 +26,9 @@ sets
 
    kli(kap) Livestock products
    / livst_rum, livst_pig, livst_chick, livst_egg, livst_milk  /
+
+   kforestry(k) forestry products
+        / wood, woodfuel /
 
    kve(k) Land-use activities
        / tece, maiz, trce, rice_pro, soybean, rapeseed, groundnut, sunflower,

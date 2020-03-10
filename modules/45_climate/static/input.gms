@@ -7,7 +7,7 @@
 
 
 
-table f45_koeppengeiger(j,clcl) Koeppen-Geiger climate classification on the simulation cluster level (1)
+table pm_climate_class(j,clcl) Koeppen-Geiger climate classification on the simulation cluster level (1)
 $ondelim
 $include "./modules/45_climate/static/input/koeppen_geiger.cs3"
 $offdelim;

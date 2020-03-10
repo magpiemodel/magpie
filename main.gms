@@ -147,24 +147,28 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: 94c214b0a7b46f403dd0aab57b7e476c
-* Repository: /p/projects/landuse/data/input/archive
+* md5sum: NA
+* Repository: http://rse.pik-potsdam.de/data/magpie/intern
 * 
-* Used data set: rev4.37_690d3718e151be1b450b394c1064b1c5_magpie.tgz
-* md5sum: 3e22e59029e3cd043e247b435cc773ce
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: rev4.42_690d3718e151be1b450b394c1064b1c5_magpie.tgz
+* md5sum: NA
+* Repository: http://rse.pik-potsdam.de/data/magpie/intern
 * 
-* Used data set: rev4.37_690d3718e151be1b450b394c1064b1c5_validation.tgz
-* md5sum: 7573940b148f440a5f2d2ceedf400afc
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: rev4.42_690d3718e151be1b450b394c1064b1c5_validation.tgz
+* md5sum: NA
+* Repository: http://rse.pik-potsdam.de/data/magpie/intern
 * 
-* Used data set: calibration_H12_c200_12Sep18.tgz
-* md5sum: 0a7d88e902918eb6a5263faaf066cc5d
-* Repository: /p/projects/landuse/data/input/calibration
+* Used data set: calibration_H12_c200_26Feb20.tgz
+* md5sum: NA
+* Repository: http://rse.pik-potsdam.de/data/magpie/intern
 * 
 * Used data set: additional_data_rev3.77.tgz
 * md5sum: 28184d92028972c171145399ab21fdca
-* Repository: /p/projects/landuse/data/input/archive
+* Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/input_data/
+* 
+* Used data set: private_forestry_20200224.tgz
+* md5sum: e0422749670c22835e009d6517fbd87c
+* Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/input_data/
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -177,7 +181,7 @@ $title magpie
 * 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
-* Regions data revision: 4.37
+* Regions data revision: 4.42
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
@@ -197,7 +201,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Mon Feb 17 14:01:16 2020
+* Last modification (input data): Tue Mar 10 10:40:53 2020
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -249,9 +253,9 @@ $setglobal trade  selfsuff_reduced
 
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
-$setglobal forestry  dynamic_oct19
+$setglobal forestry  dynamic_nov19
 $setglobal urban  static
-$setglobal natveg  dynamic_oct19
+$setglobal natveg  dynamic_nov19
 
 $setglobal factor_costs  mixed_feb17
 $setglobal landconversion  global_static_aug18
@@ -276,6 +280,7 @@ $setglobal bioenergy  1stgen_priced_dec18
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 $setglobal disagg_lvst  foragebased_aug18
+$setglobal timber  biomass_feb20
 
 $setglobal optimization  nlp_apr17
 

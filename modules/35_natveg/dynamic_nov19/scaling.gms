@@ -5,9 +5,4 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @code
-*' In each cell $j$, the climate class shares $clcl$ sum up to 1.
-
-pm_climate_class(j,clcl) = f45_koeppengeiger(j,clcl);
-
-*' @stop
+vm_landdiff_natveg.scale = 10e4;

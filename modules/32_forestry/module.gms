@@ -16,6 +16,7 @@
 *' @authors Florian Humpenöder
 
 *###################### R SECTION START (MODULETYPES) ##########################
+$Ifi "%forestry%" == "dynamic_nov19" $include "./modules/32_forestry/dynamic_nov19/realization.gms"
 $Ifi "%forestry%" == "dynamic_oct19" $include "./modules/32_forestry/dynamic_oct19/realization.gms"
 $Ifi "%forestry%" == "static_sep16" $include "./modules/32_forestry/static_sep16/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
