@@ -149,9 +149,9 @@ q32_prod_future(i2) ..
 *' Harvested area is the difference between plantation area from precious time
 *' step ('pc32_land') and optimized plantation area from current time step ('v32_land')
 
-q32_forestry_change(j2,ac_sub) ..
-                          vm_forestry_reduction(j2,ac_sub)
+q32_forestry_reduction(j2,type32,ac_sub) ..
+                          vm_forestry_reduction(j2,type32,ac_sub)
                           =e=
-                          sum(type32, pc32_land(j2,type32,ac_sub) - v32_land(j2,type32,ac_sub));
+                          pc32_land(j2,type32,ac_sub) - v32_land(j2,type32,ac_sub);
 
 *** EOF equations.gms ***

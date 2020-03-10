@@ -52,7 +52,7 @@ q73_prod_timber(j2,kforestry)..
 q73_prod_forestry(j2,ac_sub)..
                          sum(kforestry, v73_prod_forestry(j2,ac_sub,kforestry))
                          =l=
-                         vm_forestry_reduction(j2,ac_sub) * sum(ct, pm_growing_stock(ct,j2,ac_sub,"forestry"));
+                         sum(type32, vm_forestry_reduction(j2,type32,ac_sub)) * sum(ct, pm_growing_stock(ct,j2,ac_sub,"forestry"));
 
 q73_hvarea_forestry(j2,ac_sub) ..
                           vm_hvarea_forestry(j2,ac_sub)
