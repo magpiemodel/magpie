@@ -5,9 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-***Fix C price driven afforestation to zero before 2020
-if (m_year(t) <= 2020,
-	pc56_c_price_induced_aff = 0;
-else 
-	pc56_c_price_induced_aff = s56_c_price_induced_aff;
-);
+table f21_trade_balance(t_all,i,kall) trade balance of positive exports and negative imports (mio. tDM per yr)
+$ondelim
+$include "./modules/21_trade/input/f21_trade_balance.cs3"
+$offdelim;
