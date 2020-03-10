@@ -26,6 +26,18 @@ cfg$results_folder <- "output/:title:"
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
 cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
+cfg$gms$forestry  <- "dynamic_nov19"
+cfg$gms$natveg  <- "dynamic_nov19"
+
+cfg$title <- "F05_devfull_timberOff"
+cfg$gms$s73_timber_demand <- 0
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- "F05_devfull_timberOn"
+cfg$gms$s73_timber_demand <- 1
+start_run(cfg,codeCheck=FALSE)
+
+#simple
 cfg$gms$land <- "feb15"
 cfg$gms$processing <- "off"
 cfg$gms$disagg_lvst <- "off"
@@ -35,13 +47,11 @@ cfg$gms$s15_elastic_demand <- 0
 #cfg$gms$c32_aff_policy <- "none"
 cfg$gms$trade <- "selfsuff_reduced"
 cfg$gms$c80_nlp_solver <- "conopt4"
-cfg$gms$forestry  <- "dynamic_nov19"
-cfg$gms$natveg  <- "dynamic_nov19"
 
-cfg$title <- "F05_devsimple_timberOff"
+cfg$title <- "F05_simple_timberOff"
 cfg$gms$s73_timber_demand <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "F05_devsimple_timberOn"
+cfg$title <- "F05_simple_timberOn"
 cfg$gms$s73_timber_demand <- 1
 start_run(cfg,codeCheck=FALSE)
