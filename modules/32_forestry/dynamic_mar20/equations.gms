@@ -150,7 +150,7 @@ $offtext
 q32_establishment_glo ..
               sum(j2, v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
               =g=
-              sum(i2, pc32_demand_forestry_future(i2,"wood")) * sum(ct, f32_plant_prod_share(ct))
+              sum(i2, pc32_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2))
               ;
 *regional constraint for maintaining current forestry area patterns. 
 * area harvested * ratio of future and present demand.
@@ -159,7 +159,7 @@ q32_establishment_glo ..
 q32_establishment_reg(i2) ..
               sum(cell(i2,j2), v32_land(j2,"plant","ac0"))
               =g=
-              sum((cell(i2,j2),ac_sub), vm_hvarea_forestry.l(j2,ac_sub))*
+              sum(cell(i2,j2), pc32_hvarea_forestry(j2))*
               (pc32_demand_forestry_future(i2,"wood")/sum(ct, pm_demand_ext(ct,i2,"wood")))
               ;
 

@@ -99,6 +99,7 @@ pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_
 *p32_rotation_regional not needed as interface
 
 pc32_demand_forestry_future(i,kforestry)    = sum(t_ext$(t_ext.pos = p32_rotation_regional(t,i)),pm_demand_ext(t_ext,i,kforestry));
+pc32_plant_prod_share_future(i)    			= sum(t_ext$(t_ext.pos = p32_rotation_regional(t,i)),p32_plant_prod_share(t_ext,i));
 pc32_selfsuff_forestry_future(i,kforestry)  = sum(t_ext$(t_ext.pos = p32_rotation_regional(t,i)),pm_selfsuff_ext(t_ext,i,kforestry));
 pc32_production_ratio_future(i)             = sum(t_ext$(t_ext.pos = p32_rotation_regional(t,i)),p32_production_ratio_ext(t_ext,i));
 

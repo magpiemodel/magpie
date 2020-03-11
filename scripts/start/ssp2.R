@@ -53,7 +53,7 @@ cfg$gms$c80_nlp_solver <- "conopt4"
 # start_run(cfg,codeCheck=FALSE)
 
 cfg <- setScenario(cfg,c("SSP5","NPI"))
-cfg$title <- "F10_simple_SSP5_timberOn"
+cfg$title <- "F11_simple_SSP5_timberOn"
 cfg$gms$timber <- "biomass_feb20"
 start_run(cfg,codeCheck=FALSE)
 

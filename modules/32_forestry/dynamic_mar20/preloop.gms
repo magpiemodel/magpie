@@ -96,6 +96,9 @@ p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular("y1995",
 p32_land("y1995",j,"plant",ac_sub)$(protect32("y1995",j,ac_sub)) = p32_plant_ini_ac(j);
 p32_land("y1995",j,"plant","ac0") = p32_plant_ini_ac(j);
 
+*initial assumption for harvested area
+pc32_hvarea_forestry(j) = p32_plant_ini_ac(j);
+
 p32_land_start(j,type32,ac) = p32_land("y1995",j,type32,ac);
 display p32_land_start;
 
@@ -107,6 +110,9 @@ p32_land("y1995",j,"plant","ac0") = 0;
 ** Proportion of production coming from plantations
 p32_production_ratio_ext(t_ext,i) = f32_production_ratio("y2100",i);
 p32_production_ratio_ext(t_all,i) = f32_production_ratio(t_all,i);
+
+p32_plant_prod_share(t_ext,i) = f32_plant_prod_share("y2100");
+p32_plant_prod_share(t_all,i) = f32_plant_prod_share(t_all);
 
 ** Forest management options. Probably deprecated.
 f32_forestry_management("USA","plantations") = 7;

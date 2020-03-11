@@ -36,6 +36,9 @@ parameters
  p32_land_before(t,j,type32,ac) blub
  pc32_demand_forestry_future(i,kforestry)
  pc32_selfsuff_forestry_future(i,kforestry)
+ p32_plant_prod_share(t_ext,i) 					 	blub
+ pc32_plant_prod_share_future(i)
+ pc32_hvarea_forestry(j)
 ;
 
 positive variables

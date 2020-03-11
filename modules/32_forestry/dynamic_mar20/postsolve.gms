@@ -8,6 +8,8 @@ v32_land.l(j,"plant",ac_additional) = v32_land.l(j,"plant","ac0")/card(ac_additi
 p32_land(t,j,type32,ac) = v32_land.l(j,type32,ac);
 *' @stop
 
+pc32_hvarea_forestry(j) = sum(ac_sub, vm_hvarea_forestry.l(j,ac_sub));
+
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_cost_fore(t,i,"marginal")                          = vm_cost_fore.m(i);
  ov32_land(t,j,type32,ac,"marginal")                   = v32_land.m(j,type32,ac);
