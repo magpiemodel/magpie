@@ -147,28 +147,28 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: NA
+* md5sum: 94c214b0a7b46f403dd0aab57b7e476c
 * Repository: http://rse.pik-potsdam.de/data/magpie/intern
 * 
 * Used data set: rev4.42_690d3718e151be1b450b394c1064b1c5_magpie.tgz
-* md5sum: NA
+* md5sum: 531f893581b6e3ea3ca871d76e0dd8a3
 * Repository: http://rse.pik-potsdam.de/data/magpie/intern
 * 
 * Used data set: rev4.42_690d3718e151be1b450b394c1064b1c5_validation.tgz
-* md5sum: NA
+* md5sum: ad8da81da4ddbb3cf4b341b40ceec3fb
 * Repository: http://rse.pik-potsdam.de/data/magpie/intern
 * 
 * Used data set: calibration_H12_c200_26Feb20.tgz
-* md5sum: NA
+* md5sum: 0fc75955deb5916d4ac078e8d817feda
 * Repository: http://rse.pik-potsdam.de/data/magpie/intern
 * 
 * Used data set: additional_data_rev3.77.tgz
 * md5sum: 28184d92028972c171145399ab21fdca
-* Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/input_data/
+* Repository: http://rse.pik-potsdam.de/data/magpie/intern
 * 
-* Used data set: private_forestry_20200224.tgz
-* md5sum: e0422749670c22835e009d6517fbd87c
-* Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/input_data/
+* Used data set: private_forestry_dec18_20200311.tgz
+* md5sum: 8ff50b2966b0c91dcf15bd80386121a2
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/users/mishra/additional_data_private_forestry
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -201,7 +201,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Tue Mar 10 10:40:53 2020
+* Last modification (input data): Wed Mar 11 20:46:10 2020
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -226,7 +226,7 @@ $offlisting
 *                    Key parameters during model runs
 
 $setglobal c_timesteps  coup2100
-$setglobal c_title  SSP2_rev42_rev4p37
+$setglobal c_title  F12_simple_SSP2_timberOn
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /
@@ -236,7 +236,7 @@ scalars
 *******************************MODULE SETUP*************************************
 
 $setglobal drivers  aug17
-$setglobal land  landmatrix_dec18
+$setglobal land  feb15
 $setglobal costs  default
 $setglobal interest_rate  reg_feb18
 $setglobal tc  endo_jun18
@@ -246,8 +246,8 @@ $setglobal food  anthropometrics_jan18
 $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 
-$setglobal residues  flexreg_apr16
-$setglobal processing  substitution_dec18
+$setglobal residues  off
+$setglobal processing  off
 
 $setglobal trade  selfsuff_reduced
 
@@ -273,13 +273,13 @@ $setglobal methane  ipcc2006_flexreg_apr16
 $setglobal phosphorus  off
 $setglobal awms  ipcc2006_aug16
 $setglobal ghg_policy  price_jan20
-$setglobal maccs  on_sep16
+$setglobal maccs  off_jul16
 $setglobal som  static_jan19
 
 $setglobal bioenergy  1stgen_priced_dec18
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
-$setglobal disagg_lvst  foragebased_aug18
+$setglobal disagg_lvst  off
 $setglobal timber  biomass_feb20
 
 $setglobal optimization  nlp_apr17
