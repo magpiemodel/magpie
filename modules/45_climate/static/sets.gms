@@ -42,47 +42,6 @@ sets
              Dsd  "snow summer dry extremely continental"
              Csc  "warm temperate summer dry cool summer"
            /
-
-  ipcc32 ipcc climate regions
-  /
-  tropical, temperate, boreal
-  /
-
-  clcl_ipcc32(clcl,ipcc32) Climate classification types
-            /
-            Af .(tropical) "equatorial fully humid"
-            Am .(tropical) "equatorial monsoonal"
-            As .(tropical) "equatorial summer dry"
-            Aw .(tropical) "equatorial winter dry"
-            BSh .(tropical) "arid steppe hot arid"
-            BSk .(temperate) "arid steppe cold arid"
-            BWh .(tropical) "arid desert hot arid"
-            BWk .(temperate) "arid desert cold arid"
-            Cfa .(temperate) "warm temperate fully humid hot summer"
-            Cfb .(temperate) "warm temperate fully humid warm summer"
-            Cfc .(temperate) "warm temperate fully humid cool summer"
-            Csa .(temperate) "warm temperate summer dry hot summer"
-            Csb .(temperate) "warm temperate summer dry warm summer"
-            Csc .(temperate) "warm temperate summer dry cool summer"
-            Cwa .(temperate) "warm temperate winter dry hot summer"
-            Cwb .(temperate) "warm temperate winter dry warm summer"
-            Cwc .(temperate) "warm temperate winter dry cool summer"
-            Dfa .(temperate) "snow fully humid hot summer"
-            Dfb .(temperate) "snow fully humid warm summer"
-            Dfc .(boreal) "snow fully humid cool summer"
-            Dfd .(temperate) "snow fully humid extremely continental"
-            Dsa .(boreal) "snow summer dry hot summer"
-            Dsb .(boreal) "snow summer dry warm summer"
-            Dsc .(boreal) "snow summer dry cool summer"
-            Dsd .(boreal) "snow summer dry extremely continental"
-            Dwa .(boreal) "snow winter dry hot summer"
-            Dwb .(boreal) "snow winter dry warm summer"
-            Dwc .(boreal) "snow winter dry cool summer"
-            Dwd .(boreal) "snow winter dry extremely continental"
-            EF .(boreal) "polar polar frost"
-            ET .(boreal) "polar polar tundra"
-            /         
-
 ;
 
 *' @stop

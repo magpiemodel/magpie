@@ -5,6 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+scalar
+ s52_forestry_plantation switch for using natveg (0) or plantation (1) growth curves for afforestation in forestry module / 1 /
+;
+
 $setglobal c52_carbon_scenario  nocc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
@@ -21,14 +25,6 @@ parameter f52_growth_par(clcl,chap_par,type52) Parameters for chapman-richards e
 /
 $ondelim
 $include "./modules/52_carbon/input/f52_growth_par.csv"
-$offdelim
-/
-;
-
-parameter fm_growth_par_image_lpjml(clcl,chap_par,forest_type) Parameters for chapman-richards equation (1)
-/
-$ondelim
-$include "./modules/52_carbon/input/f52_growth_par_image_lpjml.csv"
 $offdelim
 /
 ;

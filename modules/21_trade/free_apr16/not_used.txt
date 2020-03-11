@@ -5,10 +5,3 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
-fm_forestry_demand, input, not used
-pcm_production_ratio_future, input, not used
-pm_rotation_reg, input, not used
-pm_rot_length_estb, input, not used
-pm_production_ratio_ext, input, not used
-pcm_land, parameter, not used
-pm_demand_ext, parameter, not used

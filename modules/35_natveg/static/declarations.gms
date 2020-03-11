@@ -19,3 +19,4 @@ parameters
  ov_landdiff_natveg(t,type)   Aggregated difference in other land compared to previous timestep (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
+

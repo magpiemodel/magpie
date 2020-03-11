@@ -89,13 +89,16 @@ $endif
 * For instance, other natural land increases if agricultural land is abandoned.
 vm_land.lo(j,"primforest") = p35_save_primforest(t,j);
 vm_land.up(j,"primforest") = vm_land.l(j,"primforest");
+m_boundfix(vm_land,(j,"primforest"),up,10e-5);
 
 v35_secdforest.fx(j,"ac0") = 0;
 v35_secdforest.lo(j,"acx") = p35_save_secdforest(t,j);
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
+m_boundfix(v35_secdforest,(j,ac_sub),up,10e-5);
 
 v35_other.lo(j,"acx") = p35_save_other(t,j);
 v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
+m_boundfix(v35_other,(j,ac_sub),up,10e-5);
 
 * calculate carbon density
 * highest carbon density 1st time step to account for reshuffling
@@ -118,14 +121,3 @@ pcm_carbon_stock(j,"other",ag_pools) =
 
 p35_min_forest(t,j)$(p35_min_forest(t,j) > vm_land.l(j,"primforest") + vm_land.l(j,"secdforest")) = vm_land.l(j,"primforest") + vm_land.l(j,"secdforest");
 p35_min_other(t,j)$(p35_min_other(t,j) > vm_land.l(j,"other")) = vm_land.l(j,"other");
-
-*' @code
-*' Setting variable interfaces to zero which are not dealt by this module realization
-vm_cost_natveg.fx(i) = 0;
-vm_hvarea_secdforest.fx(j,ac_sub,kforestry) = 0;
-vm_hvarea_other.fx(j,ac_sub,kforestry) = 0;
-vm_hvarea_primforest.fx(j,kforestry) = 0;
-vm_secdforest_change.fx(j,kforestry,ac_sub)  = 0;
-vm_primforest_change.fx(j,kforestry)  = 0;
-vm_other_change.fx(j,kforestry,ac_sub)  = 0;
-*' @stop

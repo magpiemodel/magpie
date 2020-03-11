@@ -15,10 +15,12 @@ scalars
   s56_c_price_induced_aff Switch for C price driven afforestation (1=on 0=off) / 1 /
   s56_c_price_exp_aff c price expectation for afforestation (years) / 50 /
   s56_buffer_aff share of carbon credits for afforestation projects pooled in a buffer (1) / 0.2 /
-  s56_counter helper for carbon price calculations (1) / 0 /
+  s56_counter counter for C price interpolation (1) / 0 /
+  s56_timesteps number of time steps for C price interpolation (1) / 0 /
+  s56_offset helper for C price interpolation (1) / 0 /
 ;
 
-$setglobal c56_pollutant_prices  R2M41-SSP2-Budg600
+$setglobal c56_pollutant_prices  R2M41-SSP2-NPi
 $setglobal c56_emis_policy  redd+_nosoil
 
 table f56_pollutant_prices(t_all,i,pollutants,ghgscen56) GHG certificate prices for N2O-N CH4 CO2-C (USD05MER per t)

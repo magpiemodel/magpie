@@ -27,6 +27,9 @@ sets
    kli(kap) Livestock products
    / livst_rum, livst_pig, livst_chick, livst_egg, livst_milk  /
 
+   kforestry(k) forestry products
+        / wood, woodfuel /
+
    kve(k) Land-use activities
        / tece, maiz, trce, rice_pro, soybean, rapeseed, groundnut, sunflower,
          oilpalm, puls_pro, potato, cassav_sp, sugr_cane, sugr_beet, others,
@@ -36,9 +39,6 @@ sets
        / tece, maiz, trce, rice_pro, soybean, rapeseed, groundnut, sunflower,
          oilpalm, puls_pro, potato, cassav_sp, sugr_cane, sugr_beet, others,
          foddr, cottn_pro, begr, betr /
-
-   kforestry(k) forestry products
-          / wood, woodfuel /
  ;
 
 alias(kap,kap4);

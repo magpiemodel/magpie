@@ -14,7 +14,5 @@
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/45_climate/static/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/45_climate/static/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/45_climate/static/input.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/45_climate/static/preloop.gms"
 *######################## R SECTION END (PHASES) ###############################

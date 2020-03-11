@@ -28,10 +28,10 @@ i14_yields(t,j,"pasture",w) = i14_yields(t,j,"pasture",w)*sum(cell(i,j),f14_yld_
 ** Forestry parameters
 i14_carbon_fraction = 0.5;
 
-i14_root_to_shoot_ratio("forestry") = 0.85;
-i14_root_to_shoot_ratio("secdforest") = 0.80;
-i14_root_to_shoot_ratio("primforest") = 0.75;
-i14_root_to_shoot_ratio("other") = 0.85;
+i14_aboveground_fraction("forestry") = 0.85;
+i14_aboveground_fraction("secdforest") = 0.80;
+i14_aboveground_fraction("primforest") = 0.75;
+i14_aboveground_fraction("other") = 0.85;
 
 p14_volumetric_conversion("wood") = 0.6325;
 p14_volumetric_conversion("woodfuel") = 0.3071;

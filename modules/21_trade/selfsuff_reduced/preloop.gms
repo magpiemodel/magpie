@@ -11,18 +11,11 @@ i21_trade_bal_reduction(t_all,k_hardtrade21)=f21_trade_bal_reduction(t_all,"hard
 
 i21_trade_margin(i2,k_trade) = f21_trade_margin(i2,k_trade);
 
-*i21_trade_margin(i,"wood") = f21_trade_margin(i,"potato");
-*i21_trade_margin(i,"woodfuel") = i21_trade_margin(i,"wood") * 0.5;
-
 if ((s21_trade_tariff=1),
     i21_trade_tariff(i2,k_trade) = f21_trade_tariff(i2,k_trade);
 elseif (s21_trade_tariff=0),
     i21_trade_tariff(i2,k_trade) = 0;
 );
-
-*bad coding. Never change f parameters.
-*set export share to zero if f21_self_suff <= 1
-f21_exp_shr(t_all,i,kforestry)$(f21_self_suff(t_all,i,kforestry) <= 1) = 0; 
 
 f21_self_suff(t_all,"MEA",kforestry) = 0.1;
 f21_exp_shr(t_all,"MEA",kforestry) = 0;
@@ -33,4 +26,3 @@ f21_exp_shr(t_all,"MEA",kforestry) = 0;
 
 pm_selfsuff_ext(t_ext,i,kforestry) = f21_self_suff("y2150",i,kforestry);
 pm_selfsuff_ext(t_all,i,kforestry) = f21_self_suff(t_all,i,kforestry);
-

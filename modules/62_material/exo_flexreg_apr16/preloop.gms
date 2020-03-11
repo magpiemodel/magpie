@@ -7,4 +7,3 @@
 
  p62_dem_material_lh(i,kall) =0;
  p62_dem_food_lh(i)=1;
- f62_dem_material(t_all,i,kforestry) = 0;

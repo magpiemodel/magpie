@@ -8,7 +8,4 @@
 sets
 	bound12 Bound for interest rate
 	/low, high/
-
-  scen12 Interest rate scenarios
-							/ low, medium, high , 1pc, 15pc /
 ;

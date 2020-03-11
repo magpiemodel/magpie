@@ -5,9 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-** Fixing variables from dynamic Forestry
-vm_hvarea_forestry.fx(j,kforestry,ac_sub) = 0 ;
-
 ** BEGIN INDC **
 
 * Limit demand for prescribed NPI/NDC afforestation in `p32_aff_pol` if not enough suitable area (`p32_aff_pot`) for afforestation is available.
@@ -24,11 +21,9 @@ vm_hvarea_forestry.fx(j,kforestry,ac_sub) = 0 ;
 
 *' @code
 *' Wood demand is set to zero because forestry is not modeled in this realization.
-*vm_supply.fx(i2,kforestry) = 0;
-vm_prod_future_reg_ff.fx(i,kforestry) = 0;
-vm_cost_trade_forestry_ff.fx(i2) = 0;
+vm_supply.fx(i2,kforestry) = 0;
 
-*' Certain areas (e.g. the boreal zone) are excluded from endogenous afforestation. DON'T USE TYPE32 SET HERE
+*' Certain areas (e.g. the boreal zone) are excluded from endogenous afforestation.
 v32_land.lo(j,"aff","ac0") = 0;
 v32_land.up(j,"aff","ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
 
@@ -37,7 +32,8 @@ v32_land.fx(j,"aff","ac0")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
 
 *' CDR from afforestation for each age-class, depending on planning horizon.
 p32_cdr_ac(t,j,ac)$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planing_horizon/5)
-= pm_carbon_density_ac(t,j,ac,"vegc") - pm_carbon_density_ac(t,j,ac-1,"vegc");
+= pm_carbon_density_ac_forestry(t,j,ac,"vegc") - pm_carbon_density_ac_forestry(t,j,ac-1,"vegc");
+*' @stop
 
 * Regrowth of natural vegetation (natural succession) is modelled by shifting age-classes according to time step length.
 s32_shift = (5/5)$(ord(t)=1);

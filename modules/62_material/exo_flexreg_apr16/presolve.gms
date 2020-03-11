@@ -17,4 +17,5 @@ if (sum(sameas(t_past,t),1) = 1,
 else
  s62_historical=0;
 );
+
 *' @stop

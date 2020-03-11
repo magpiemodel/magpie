@@ -19,6 +19,5 @@
 $Ifi "%phase%" == "declarations" $include "./modules/40_transport/gtap_nov12/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/40_transport/gtap_nov12/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/40_transport/gtap_nov12/equations.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/40_transport/gtap_nov12/preloop.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/40_transport/gtap_nov12/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

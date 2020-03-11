@@ -122,6 +122,10 @@ sets
 i2(i) = yes;
 j2(j) = yes;
 
+sets
+        c_title defined to include c_title in GDX
+        / %c_title% /
+;
 
 ***TIME STEPS***
 * ATTENTION: check macros m_year and m_yeardiff if you change something
@@ -159,12 +163,6 @@ sets time_annual Annual extended time steps
          y1995, y2000, y2005, y2010
         /
 
-    t_observed(t_all) Timesteps with observed data
-    / y1965, y1970, y1975,
-     y1980, y1985, y1990,
-     y1995, y2000, y2005, y2010, y2015
-    /
-
     t_past_ff(t_past) Time stamps before 1995
     / y1965, y1970, y1975,
      y1980, y1985, y1990 /
@@ -174,6 +172,7 @@ sets time_annual Annual extended time steps
      y1980, y1985, y1990,
      y1995, y2000, y2005, y2010, y2015
     /
+
 ;
 
 set t(t_all) Simulated time periods
@@ -183,10 +182,6 @@ $If "%c_timesteps%"== "test_TS" /y1995,y2000,y2005,y2010,y2020,y2030,y2040,y2050
 $If "%c_timesteps%"== "TS_benni" /y1995,y2000,y2005,y2010,y2020,y2030,y2040,y2050/;
 $If "%c_timesteps%"== "TS_WB" /y1995,y2000,y2005,y2010,y2020,y2030,y2040,y2050,y2060,y2070,y2080/;
 $If "%c_timesteps%"== "5year" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2065,y2070,y2075,y2080,y2085,y2090,y2095,y2100/;
-$If "%c_timesteps%"== "10y" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2050,y2060,y2070,y2080,y2090,y2100/;
-$If "%c_timesteps%"== "20y" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2060,y2080,y2095,y2100/;
-$If "%c_timesteps%"== "30y" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2070,y2100/;
-$If "%c_timesteps%"== "50y" /y1995,y2000,y2005,y2010,y2015,y2020,y2050,y2100/;
 $If "%c_timesteps%"== "5year2050" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050/;
 $If "%c_timesteps%"== "quicktest" /y1995,y2010,y2025/;
 $If "%c_timesteps%"== "1" /y1995/;

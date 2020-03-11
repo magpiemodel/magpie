@@ -22,11 +22,6 @@ v10_lu_transitions.fx(j,"secdforest","other") = 0;
 *v10_lu_transitions.fx(j,"forestry",land_to10) = 0;
 *v10_lu_transitions.up(j,"forestry","forestry") = Inf;
 
-*' Plantations can be setup on other land
-v10_lu_transitions.up(j,"primforest","forestry") = Inf;
-v10_lu_transitions.up(j,"secdforest","forestry") = Inf;
-v10_lu_transitions.up(j,"other","forestry") = Inf;
-
 *' Primforest can only decrease
 v10_lu_transitions.fx(j,land_from10,"primforest") = 0;
 v10_lu_transitions.up(j,"primforest","primforest") = Inf;
@@ -41,3 +36,5 @@ v10_lu_transitions.fx(j,"urban",land_to10) = 0;
 v10_lu_transitions.fx(j,"urban","urban") = pcm_land(j,"urban");
 
 *' @stop
+
+m_boundfix(vm_land,(j,land),up,10e-5);

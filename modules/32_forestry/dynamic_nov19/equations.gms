@@ -105,11 +105,10 @@ q32_cost_establishment(i2)..
             +
               (
              sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2)) * c32_harvesting_cost)
-              +
-              sum(cell(i2,j2), fm_distance(j2) * fm_transport_costs("wood") * v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
+*              +sum(cell(i2,j2), fm_distance(j2) * fm_transport_costs("wood") * v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
 *              +
 *              sum(ct,vm_cost_trade_forestry_ff(i2))
-              )/((1+pm_interest(i2))**sum(ct,(pm_rotation_reg(ct,i2))))
+              )/((1+pm_interest(i2))**sum(ct,(p32_rotation_regional(ct,i2))))
 **************************** ((1+pm_interest(i2))**p32_rot_length(ct,i2)) to calculate present value of future costs
 *              )
             * (pm_interest(i2)/(1+pm_interest(i2)))
@@ -141,7 +140,7 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 q32_prod_future(i2) ..
               sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
               =g=
-              pc32_demand_forestry_future(i2,"wood") * pc32_selfsuff_forestry_future(i2,"wood") * 0.33
+              pc32_demand_forestry_future(i2,"wood") * pc32_selfsuff_forestry_future(i2,"wood") * pc32_production_ratio_future(i2)
               ;
 * * pc32_production_ratio_future(i2)
 **** Area harvested
@@ -150,9 +149,9 @@ q32_prod_future(i2) ..
 *' Harvested area is the difference between plantation area from precious time
 *' step ('pc32_land') and optimized plantation area from current time step ('v32_land')
 
-q32_forestry_change(j2,ac_sub) ..
-                          vm_forestry_reduction(j2,ac_sub)
+q32_forestry_reduction(j2,type32,ac_sub) ..
+                          vm_forestry_reduction(j2,type32,ac_sub)
                           =e=
-                          sum(type32, pc32_land(j2,type32,ac_sub) - v32_land(j2,type32,ac_sub));
+                          pc32_land(j2,type32,ac_sub) - v32_land(j2,type32,ac_sub);
 
 *** EOF equations.gms ***

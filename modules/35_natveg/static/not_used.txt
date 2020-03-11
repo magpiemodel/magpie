@@ -8,4 +8,3 @@ name,type,reason
 pcm_carbon_stock, input,not used
 pm_carbon_density_ac, input,not used
 pm_land_start, input,not used
-fm_harvest_cost_ha, input, not used

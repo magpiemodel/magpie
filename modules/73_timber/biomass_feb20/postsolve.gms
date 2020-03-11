@@ -10,7 +10,6 @@
  ov73_prod_forestry(t,j,ac_sub,kforestry,"marginal")           = v73_prod_forestry.m(j,ac_sub,kforestry);
  ov73_prod_natveg(t,j,land_natveg,ac_sub,kforestry,"marginal") = v73_prod_natveg.m(j,land_natveg,ac_sub,kforestry);
  ov_prod_heaven_timber(t,j,kforestry,"marginal")               = vm_prod_heaven_timber.m(j,kforestry);
- ov73_prod_ton(t,j,kforestry,"marginal")                       = v73_prod_ton.m(j,kforestry);
  ov_cost_timber(t,i,"marginal")                                = vm_cost_timber.m(i);
  ov_hvarea_secdforest(t,j,ac_sub,"marginal")                   = vm_hvarea_secdforest.m(j,ac_sub);
  ov_hvarea_other(t,j,ac_sub,"marginal")                        = vm_hvarea_other.m(j,ac_sub);
@@ -19,7 +18,6 @@
  oq73_cost_timber(t,i,"marginal")                              = q73_cost_timber.m(i);
  oq73_cost_hvarea(t,i,"marginal")                              = q73_cost_hvarea.m(i);
  oq73_prod_timber(t,j,kforestry,"marginal")                    = q73_prod_timber.m(j,kforestry);
- oq73_prod_timber_ton(t,j,kforestry,"marginal")                = q73_prod_timber_ton.m(j,kforestry);
  oq73_prod_forestry(t,j,ac_sub,"marginal")                     = q73_prod_forestry.m(j,ac_sub);
  oq73_hvarea_forestry(t,j,ac_sub,"marginal")                   = q73_hvarea_forestry.m(j,ac_sub);
  oq73_prod_secdforest(t,j,ac_sub,"marginal")                   = q73_prod_secdforest.m(j,ac_sub);
@@ -32,7 +30,6 @@
  ov73_prod_forestry(t,j,ac_sub,kforestry,"level")              = v73_prod_forestry.l(j,ac_sub,kforestry);
  ov73_prod_natveg(t,j,land_natveg,ac_sub,kforestry,"level")    = v73_prod_natveg.l(j,land_natveg,ac_sub,kforestry);
  ov_prod_heaven_timber(t,j,kforestry,"level")                  = vm_prod_heaven_timber.l(j,kforestry);
- ov73_prod_ton(t,j,kforestry,"level")                          = v73_prod_ton.l(j,kforestry);
  ov_cost_timber(t,i,"level")                                   = vm_cost_timber.l(i);
  ov_hvarea_secdforest(t,j,ac_sub,"level")                      = vm_hvarea_secdforest.l(j,ac_sub);
  ov_hvarea_other(t,j,ac_sub,"level")                           = vm_hvarea_other.l(j,ac_sub);
@@ -41,7 +38,6 @@
  oq73_cost_timber(t,i,"level")                                 = q73_cost_timber.l(i);
  oq73_cost_hvarea(t,i,"level")                                 = q73_cost_hvarea.l(i);
  oq73_prod_timber(t,j,kforestry,"level")                       = q73_prod_timber.l(j,kforestry);
- oq73_prod_timber_ton(t,j,kforestry,"level")                   = q73_prod_timber_ton.l(j,kforestry);
  oq73_prod_forestry(t,j,ac_sub,"level")                        = q73_prod_forestry.l(j,ac_sub);
  oq73_hvarea_forestry(t,j,ac_sub,"level")                      = q73_hvarea_forestry.l(j,ac_sub);
  oq73_prod_secdforest(t,j,ac_sub,"level")                      = q73_prod_secdforest.l(j,ac_sub);
@@ -54,7 +50,6 @@
  ov73_prod_forestry(t,j,ac_sub,kforestry,"upper")              = v73_prod_forestry.up(j,ac_sub,kforestry);
  ov73_prod_natveg(t,j,land_natveg,ac_sub,kforestry,"upper")    = v73_prod_natveg.up(j,land_natveg,ac_sub,kforestry);
  ov_prod_heaven_timber(t,j,kforestry,"upper")                  = vm_prod_heaven_timber.up(j,kforestry);
- ov73_prod_ton(t,j,kforestry,"upper")                          = v73_prod_ton.up(j,kforestry);
  ov_cost_timber(t,i,"upper")                                   = vm_cost_timber.up(i);
  ov_hvarea_secdforest(t,j,ac_sub,"upper")                      = vm_hvarea_secdforest.up(j,ac_sub);
  ov_hvarea_other(t,j,ac_sub,"upper")                           = vm_hvarea_other.up(j,ac_sub);
@@ -63,7 +58,6 @@
  oq73_cost_timber(t,i,"upper")                                 = q73_cost_timber.up(i);
  oq73_cost_hvarea(t,i,"upper")                                 = q73_cost_hvarea.up(i);
  oq73_prod_timber(t,j,kforestry,"upper")                       = q73_prod_timber.up(j,kforestry);
- oq73_prod_timber_ton(t,j,kforestry,"upper")                   = q73_prod_timber_ton.up(j,kforestry);
  oq73_prod_forestry(t,j,ac_sub,"upper")                        = q73_prod_forestry.up(j,ac_sub);
  oq73_hvarea_forestry(t,j,ac_sub,"upper")                      = q73_hvarea_forestry.up(j,ac_sub);
  oq73_prod_secdforest(t,j,ac_sub,"upper")                      = q73_prod_secdforest.up(j,ac_sub);
@@ -76,7 +70,6 @@
  ov73_prod_forestry(t,j,ac_sub,kforestry,"lower")              = v73_prod_forestry.lo(j,ac_sub,kforestry);
  ov73_prod_natveg(t,j,land_natveg,ac_sub,kforestry,"lower")    = v73_prod_natveg.lo(j,land_natveg,ac_sub,kforestry);
  ov_prod_heaven_timber(t,j,kforestry,"lower")                  = vm_prod_heaven_timber.lo(j,kforestry);
- ov73_prod_ton(t,j,kforestry,"lower")                          = v73_prod_ton.lo(j,kforestry);
  ov_cost_timber(t,i,"lower")                                   = vm_cost_timber.lo(i);
  ov_hvarea_secdforest(t,j,ac_sub,"lower")                      = vm_hvarea_secdforest.lo(j,ac_sub);
  ov_hvarea_other(t,j,ac_sub,"lower")                           = vm_hvarea_other.lo(j,ac_sub);
@@ -85,7 +78,6 @@
  oq73_cost_timber(t,i,"lower")                                 = q73_cost_timber.lo(i);
  oq73_cost_hvarea(t,i,"lower")                                 = q73_cost_hvarea.lo(i);
  oq73_prod_timber(t,j,kforestry,"lower")                       = q73_prod_timber.lo(j,kforestry);
- oq73_prod_timber_ton(t,j,kforestry,"lower")                   = q73_prod_timber_ton.lo(j,kforestry);
  oq73_prod_forestry(t,j,ac_sub,"lower")                        = q73_prod_forestry.lo(j,ac_sub);
  oq73_hvarea_forestry(t,j,ac_sub,"lower")                      = q73_hvarea_forestry.lo(j,ac_sub);
  oq73_prod_secdforest(t,j,ac_sub,"lower")                      = q73_prod_secdforest.lo(j,ac_sub);

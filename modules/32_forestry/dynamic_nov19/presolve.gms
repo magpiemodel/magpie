@@ -92,20 +92,18 @@ p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac_forestry(t,
 
 ** Future demand relevant in current time step depending on rotation length
 ** Card is used here to exclude y1965 to y1995 when calculating rotation length calculations for past
-*pm_rotation_reg(t,j) = ord(t) + ceil(pm_rot_length_estb(t,j)/5) + card(t_past_ff);
-pm_rotation_reg(t,i) = ord(t) + ceil((sum(cell(i,j),pcm_land(j,"forestry")*pm_rot_length_estb(t,j))/sum(cell(i,j),pcm_land(j,"forestry")))/5) + card(t_past_ff);
+p32_rotation_regional(t,i) = ord(t) + ceil((sum(cell(i,j),pcm_land(j,"forestry")*p32_rot_length_ac_eqivalent(t,j))/sum(cell(i,j),pcm_land(j,"forestry")))/5) + card(t_past_ff);
 
 pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), pm_growing_stock(t,j,ac_sub,"forestry"));
 
-*pm_rot_length_estb not needed as interface
-*pm_rotation_reg not needed as interface
+*p32_rotation_regional not needed as interface
 
-pc32_demand_forestry_future(i,kforestry)    = sum(t_ext$(t_ext.pos = pm_rotation_reg(t,i)),pm_demand_ext(t_ext,i,kforestry));
-pc32_selfsuff_forestry_future(i,kforestry)  = sum(t_ext$(t_ext.pos = pm_rotation_reg(t,i)),pm_selfsuff_ext(t_ext,i,kforestry));
-pc32_production_ratio_future(i)             = sum(t_ext$(t_ext.pos = pm_rotation_reg(t,i)),p32_production_ratio_ext(t_ext,i));
+pc32_demand_forestry_future(i,kforestry)    = sum(t_ext$(t_ext.pos = p32_rotation_regional(t,i)),pm_demand_ext(t_ext,i,kforestry));
+pc32_selfsuff_forestry_future(i,kforestry)  = sum(t_ext$(t_ext.pos = p32_rotation_regional(t,i)),pm_selfsuff_ext(t_ext,i,kforestry));
+pc32_production_ratio_future(i)             = sum(t_ext$(t_ext.pos = p32_rotation_regional(t,i)),p32_production_ratio_ext(t_ext,i));
 
 ********** Dampening factor calculation (Deprecated)
-p32_rot_ac(j) = p32_rot_length(t,j)/5;
+p32_rot_ac(j) = p32_rot_length_ac_eqivalent(t,j)/5;
 p32_regional_min(j)   = 1/p32_management_factor(j,"normal");
 *p32_dampen_pre(ac,j)  = (1-(1/ord(ac)))$(ord(ac)<p32_rot_ac(j)) + 1$(ord(ac)=p32_rot_ac(j)) + (1-(1/p32_rot_ac(j))*(ord(ac)-p32_rot_ac(j)))$(ord(ac)>p32_rot_ac(j));
 p32_dampen_final("ac0",j) = 0;

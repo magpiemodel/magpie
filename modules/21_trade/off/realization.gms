@@ -14,6 +14,5 @@
 $Ifi "%phase%" == "declarations" $include "./modules/21_trade/off/declarations.gms"
 $Ifi "%phase%" == "equations" $include "./modules/21_trade/off/equations.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/21_trade/off/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/21_trade/off/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/21_trade/off/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

@@ -11,7 +11,7 @@ q73_cost_timber(i2)..
                     vm_cost_timber(i2)
                     =e=
                     v73_cost_hvarea(i2)
-                    + sum((cell(i2,j2),kforestry), vm_prod(j2,kforestry)) *1;
+                    + sum((cell(i2,j2),kforestry), vm_prod_heaven_timber(j2,kforestry)) *1000000;
 
 
 q73_cost_hvarea(i2)..
@@ -30,15 +30,9 @@ q73_cost_hvarea(i2)..
 *' `vm_prod_reg` as the sum of the cluster level production of timber coming from
 *' 'v73_prod_forestry' and 'v73_prod_natveg'.
 
-*prod in ton. q73_prod_timber can be removed.
+*prod in ton
 q73_prod_timber(j2,kforestry)..
   vm_prod(j2,kforestry)
-  =e=
-  v73_prod_ton(j2,kforestry);
-
-*prod in ton
-q73_prod_timber_ton(j2,kforestry)..
-  v73_prod_ton(j2,kforestry)
   =e=
   sum(ac_sub, v73_prod_forestry(j2,ac_sub,kforestry))
   +
@@ -58,7 +52,7 @@ q73_prod_timber_ton(j2,kforestry)..
 q73_prod_forestry(j2,ac_sub)..
                          sum(kforestry, v73_prod_forestry(j2,ac_sub,kforestry))
                          =l=
-                         vm_forestry_reduction(j2,ac_sub) * sum(ct, pm_growing_stock(ct,j2,ac_sub,"forestry"));
+                         sum(type32, vm_forestry_reduction(j2,type32,ac_sub)) * sum(ct, pm_growing_stock(ct,j2,ac_sub,"forestry"));
 
 q73_hvarea_forestry(j2,ac_sub) ..
                           vm_hvarea_forestry(j2,ac_sub)

@@ -23,9 +23,23 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
+run_flag <- "F13_"
+
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
 cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
+cfg$gms$forestry  <- "dynamic_mar20"
+cfg$gms$natveg  <- "dynamic_nov19"
+
+# cfg$title <- "F12_devfull_timberOff"
+# cfg$gms$timber <- "off"
+# start_run(cfg,codeCheck=FALSE)
+#
+# cfg$title <- "F12_devfull_timberOn"
+# cfg$gms$timber <- "biomass_feb20"
+# start_run(cfg,codeCheck=FALSE)
+
+#simple
 cfg$gms$land <- "feb15"
 cfg$gms$processing <- "off"
 cfg$gms$disagg_lvst <- "off"
@@ -34,11 +48,30 @@ cfg$gms$residues <- "off"
 cfg$gms$s15_elastic_demand <- 0
 #cfg$gms$c32_aff_policy <- "none"
 cfg$gms$trade <- "selfsuff_reduced"
+cfg$gms$c80_nlp_solver <- "conopt4"
 
-# cfg$title <- "F04_simple_timberOff_ac0fixzero"
-# cfg$gms$s73_timber_demand <- 0
+# cfg$title <- "F12_simple_timberOff"
+# cfg$gms$timber <- "off"
 # start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "F04_simple_timberOn_prod_ratio33_check"
-cfg$gms$s73_timber_demand <- 1
+cfg <- setScenario(cfg,c("SSP5","NPI"))
+cfg$title <- paste0(run_flag,"simple_SSP5_timberOn")
+cfg$gms$timber <- "biomass_feb20"
+#start_run(cfg,codeCheck=FALSE)
+
+cfg <- setScenario(cfg,c("SSP2","NPI"))
+cfg$title <- paste0(run_flag,"simple_SSP2_timberOn")
+cfg$gms$timber <- "biomass_feb20"
+start_run(cfg,codeCheck=FALSE)
+
+cfg <- setScenario(cfg,c("SSP2","NPI"))
+cfg$title <- paste0(run_flag,"simple_SSP2_timberOn_freeTrade")
+cfg$gms$timber <- "biomass_feb20"
+cfg$gms$trade <- "free_apr16"
+start_run(cfg,codeCheck=FALSE)
+
+cfg <- setScenario(cfg,c("SSP5","NPI"))
+cfg$title <- paste0(run_flag,"simple_SSP5_timberOn_freeTrade")
+cfg$gms$timber <- "biomass_feb20"
+cfg$gms$trade <- "free_apr16"
 start_run(cfg,codeCheck=FALSE)

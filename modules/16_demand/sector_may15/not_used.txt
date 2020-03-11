@@ -6,4 +6,3 @@
 # |  Contact: magpie@pik-potsdam.de
 
 name,type,reason
-im_development_state, input, not used
