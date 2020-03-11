@@ -60,3 +60,11 @@ $ondelim
 $include "./modules/32_forestry/input/f32_forestry_management.csv"
 $offdelim
 ;
+
+parameter f32_plant_prod_share(t_all) share (percentage)
+/
+$ondelim
+$include "./modules/32_forestry/input/f32_plant_prod_share.csv"
+$offdelim
+/
+;
