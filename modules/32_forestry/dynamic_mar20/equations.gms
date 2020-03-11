@@ -157,10 +157,10 @@ q32_establishment_glo ..
 * E.g. forestry area in EUR will not decline with this setup.
 * Cell specific allocation of plantations based on max c density via v32_cost_establishment
 q32_establishment_reg(i2) ..
-              sum(cell(i2,j2), v32_land(j2,"plant","ac0")
+              sum(cell(i2,j2), v32_land(j2,"plant","ac0"))
               =g=
-              sum((cell(i2,j2),type32,ac_sub), vm_hvarea_forestry(j2,type32,ac_sub))*
-              (pc32_demand_forestry_future(i2,"wood")/(ct, pm_demand_ext(ct,i2,"wood")))
+              sum((cell(i2,j2),ac_sub), vm_hvarea_forestry(j2,ac_sub))*
+              (pc32_demand_forestry_future(i2,"wood")/sum(ct, pm_demand_ext(ct,i2,"wood")))
               ;
 
 * * pc32_production_ratio_future(i2)
