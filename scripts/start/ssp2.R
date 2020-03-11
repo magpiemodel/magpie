@@ -23,7 +23,7 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-run_flag <- "F12_"
+run_flag <- "F13_"
 
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
@@ -55,23 +55,23 @@ cfg$gms$c80_nlp_solver <- "conopt4"
 # start_run(cfg,codeCheck=FALSE)
 
 cfg <- setScenario(cfg,c("SSP5","NPI"))
-cfg$title <- "F12_simple_SSP5_timberOn"
+cfg$title <- paste0(run_flag,"simple_SSP5_timberOn")
 cfg$gms$timber <- "biomass_feb20"
 #start_run(cfg,codeCheck=FALSE)
 
 cfg <- setScenario(cfg,c("SSP2","NPI"))
-cfg$title <- "F12_simple_SSP2_timberOn"
+cfg$title <- paste0(run_flag,"simple_SSP2_timberOn")
 cfg$gms$timber <- "biomass_feb20"
 start_run(cfg,codeCheck=FALSE)
 
 cfg <- setScenario(cfg,c("SSP2","NPI"))
-cfg$title <- "F12_simple_SSP2_timberOn_freeTrade"
+cfg$title <- paste0(run_flag,"simple_SSP2_timberOn_freeTrade")
 cfg$gms$timber <- "biomass_feb20"
 cfg$gms$trade <- "free_apr16"
 start_run(cfg,codeCheck=FALSE)
 
 cfg <- setScenario(cfg,c("SSP5","NPI"))
-cfg$title <- "F12_simple_SSP5_timberOn_freeTrade"
+cfg$title <- paste0(run_flag,"simple_SSP5_timberOn_freeTrade")
 cfg$gms$timber <- "biomass_feb20"
 cfg$gms$trade <- "free_apr16"
 start_run(cfg,codeCheck=FALSE)
