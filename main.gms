@@ -145,7 +145,7 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
+
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: 94c214b0a7b46f403dd0aab57b7e476c
 * Repository: http://rse.pik-potsdam.de/data/magpie/intern
@@ -172,13 +172,13 @@ $title magpie
 * 
 * Low resolution: c200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    28   24   10    7    3   53   17    8   22    7   11   10
-* 
+*
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
 * Regions data revision: 4.42
@@ -188,7 +188,7 @@ $title magpie
 * * Additional input folder: /p/projects/landuse/data/input/other/rev42
 * * Revision: 42
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-* 
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
@@ -198,8 +198,6 @@ $title magpie
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = cfg$spamfile, debug = FALSE, seed = cfg$seed)
-* 
-* 
 * 
 * Last modification (input data): Wed Mar 11 20:46:10 2020
 * 
@@ -243,7 +241,7 @@ $setglobal tc  endo_jun18
 $setglobal yields  dynamic_aug18
 
 $setglobal food  anthropometrics_jan18
-$setglobal demand  sector_may15
+$setglobal demand  sector_dec18
 $setglobal production  flexreg_apr16
 
 $setglobal residues  off
@@ -253,7 +251,9 @@ $setglobal trade  selfsuff_reduced
 
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
+
 $setglobal forestry  dynamic_mar20
+
 $setglobal urban  static
 $setglobal natveg  dynamic_nov19
 
@@ -279,7 +279,9 @@ $setglobal som  static_jan19
 $setglobal bioenergy  1stgen_priced_dec18
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
+
 $setglobal disagg_lvst  off
+
 $setglobal timber  biomass_feb20
 
 $setglobal optimization  nlp_apr17

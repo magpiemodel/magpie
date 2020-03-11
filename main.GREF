@@ -1,0 +1,4280 @@
+*!START Set, Parameter, Variable, Equation Declaration
+0,0,1,"ac","","Age classes"
+1,0,0,"ac_land35","ac,land35","Mapping between age class and natveg land type"
+2,0,1,"ac_poulter","","Forest age classes in Poulter data set"
+3,0,1,"ac_poulter_to_ac","ac_poulter,ac","mapping between ac and ac_poulter"
+4,0,1,"ac_sub","ac","age classes"
+5,0,1,"ac_sub2","ac_sub","Aliased with ac_sub"
+6,0,1,"ac2","ac","Aliased with ac"
+7,0,1,"adult15","age","Age groups for adult population"
+8,0,1,"aff56","","afforestation policy scenarios"
+9,0,1,"age","","Population age groups"
+10,0,1,"age_new_estimated15","age","Estimated ages"
+11,0,0,"age2_adults15","agegroup15","Adult age group"
+12,0,1,"agegroup15","","All age groups"
+13,0,1,"agegroup2age","agegroup15,age","Mapping between age cohort and age"
+14,0,1,"attributes","","Product attributes characterizing a product (such as weight or energy content)"
+15,0,1,"awms","","animal waste management systems"
+16,0,1,"awms_conf","","animal waste management systems in confinements"
+17,0,1,"awms_prp","awms","animal waste management systems pasture range and paddock"
+18,0,0,"bmi_group_est15","bmi_group15","Body mass index extremes"
+19,0,1,"bmi_group15","","Body mass index gradient"
+20,0,1,"bmi_tree15","","Body mass index"
+21,0,1,"bound12","","Bound for interest rate"
+22,0,1,"burn_scen18","","scenario for burning residues on field"
+23,0,1,"c_pools","","Carbon pools"
+24,0,1,"calibscen15","","Calibration scenarios for balance flow"
+25,0,1,"cell","i,j","Mapping between regions i and clusters j"
+26,0,1,"cell2","cell","Aliased with cell"
+27,0,1,"cgf","","Residue production functions"
+28,0,1,"chap_par","","Chapman-richards parameters"
+29,0,1,"clcl","","climate classification types"
+30,0,1,"co2_forestry","emis_source_cell","Sources of forestry land CO2 emissions"
+31,0,1,"cost_regr","","Cost regression parameters"
+32,0,1,"crp_kcr30","crp30,kcr","Mapping of crop types into crop rotation types"
+33,0,1,"crp30","","Crop rotation types"
+34,0,1,"crpmax30","crp30","Maximum crop rotation"
+35,0,1,"crpmin30","crp30","Minimum crop rotation"
+36,0,1,"ct","t","Current time period"
+37,0,1,"dep_scen50","","Scenario for atmospheric deposition"
+38,0,0,"deposition_source51","","Source of atmospheric deposition"
+39,0,1,"dev","","Economic development status"
+40,0,1,"dev18","","country develoment indicator"
+41,0,1,"dm_ge_nr","nutrients","Attribtues relevant for nutrition"
+42,0,1,"dm_nr","attributes","dry matter and nr"
+43,0,1,"emis_cell_one56","emis_source_cell","cellular oneoff emission sources"
+44,0,1,"emis_cell_yr56","emis_source_cell","cellular yearly emission sources"
+45,0,1,"emis_co2","emis_source_cell","Land pool CO2 emission sources"
+46,0,1,"emis_co2_to_forestry","co2_forestry,c_pools","Mapping between forestry land and carbon pools"
+47,0,1,"emis_land","emis_co2,land,c_pools","Mapping between land and carbon pools"
+48,0,1,"emis_reg_one56","emis_source_reg","regional oneoff emission sources"
+49,0,1,"emis_reg_yr56","emis_source_reg","regional yearly emission sources"
+50,0,1,"emis_source","","Emission sources"
+51,0,1,"emis_source_awms_ch4","emis_source","subset awms emissions"
+52,0,1,"emis_source_awms_manure_n2o","emis_source","subset awms_manure_n2o"
+53,0,1,"emis_source_cell","emis_source","Cellular emission sources"
+54,0,1,"emis_source_ent_ferm_ch4","emis_source","subset ent_ferm emissions"
+55,0,1,"emis_source_inorg_fert_n2o","emis_source","subset inorg_fert_n2o emissions"
+56,0,1,"emis_source_n_cropsoils51","emis_source","activities that lead to emissions"
+57,0,1,"emis_source_n51","emis_source","Emission sources from agriculture"
+58,0,1,"emis_source_nomethane53","emis_source","emission sources"
+59,0,1,"emis_source_nonitrogen51","emis_source","Emission sources"
+60,0,1,"emis_source_reg","emis_source","Regional emission sources"
+61,0,1,"emis_source_rice_ch4","emis_source","subset rice emissions"
+62,0,1,"emis_uncertainty51","","Different estimates for emission parameters"
+63,0,1,"estimates15","","Preliminary or final result for body height distribution"
+64,0,1,"fcosts32","fcostsALL","forestry factor cost per annum"
+65,0,1,"fcosts32H","fcostsALL","forestry harvest cost"
+66,0,1,"fcostsALL","","forestry factor cost types"
+67,0,1,"feed_scen70","","scenarios"
+68,0,1,"food_scen15","","Food scenarios"
+69,0,1,"gdp_scen09","","GDP scenario"
+70,0,1,"ghgscen56","","ghg price scenarios"
+71,0,1,"growth_food15","kfo","Food items that are important for body growth regression"
+72,0,0,"gs_calib","",""
+73,0,1,"harvest32","j,ac","mapping age class - land type"
+74,0,1,"hvarea_timber","land","land from which timber can be taken away"
+75,0,1,"i","","World regions"
+76,0,1,"i_to_iso","i,iso","Mapping between regions and countries"
+77,0,1,"i2","i","World regions (dynamic set)"
+78,0,1,"ipcc_ef51","","ipcc Emission factors"
+79,0,1,"iso","","Countries"
+80,0,1,"iso2","iso","Aliased with iso"
+81,0,1,"j","","Spatial clusters"
+82,0,1,"j2","j","Spatial Clusters (dynamic set)"
+83,0,1,"j3","j","Aliased with j"
+84,0,1,"k","kall","Primary products"
+85,0,1,"k_conc53","kall","feedstuff with high energy content"
+86,0,1,"k_hardtrade21","k_trade","Products where trade should be limited"
+87,0,1,"k_noconc53","kall","non-concentrates"
+88,0,1,"k_notrade","kall","Production activities of non-tradable commodites"
+89,0,1,"k_ruminants53","kli","ruminant subset"
+90,0,1,"k_trade","kall","Production activities of tradable commodities"
+91,0,1,"kall","","All products in the sectoral version"
+92,0,1,"kap","k","Animal products"
+93,0,1,"kap4","kap","Aliased with kap"
+94,0,1,"kbe60","kcr","bio energy activities"
+95,0,1,"kcereals20","kpr","Cereals used for processing"
+96,0,1,"kcr","kve","Cropping activities"
+97,0,1,"kfo","kall","All products in the sectoral version"
+98,0,1,"kfo_ap","kfo","Animal food products"
+99,0,1,"kfo_ap2","kfo_ap","Aliased with kfo_ap"
+100,0,1,"kfo_pf","kfo","Processed foods including oils sugar alcohol"
+101,0,1,"kfo_pf2","kfo_pf","Aliased with kfo_pf"
+102,0,1,"kfo_st","kfo","Staple products"
+103,0,1,"kfo_st2","kfo_st","Aliased with kfo_st"
+104,0,1,"kfo2","kfo","Aliased with kfo"
+105,0,1,"kforage","k","Forage feed categories"
+106,0,1,"kforage2","kforage","Aliased with kforage"
+107,0,1,"kforestry","k","forestry products"
+108,0,1,"kli","kap","Livestock products"
+109,0,1,"kli_mon","kli","Monogastric livestock"
+110,0,1,"kli_rum","kli","Ruminant livestock"
+111,0,1,"knf","kall","Non-food products in the sectoral version"
+112,0,1,"knpr","kall","Products that cannot be processed"
+113,0,1,"kpr","kall","Products that can be processed"
+114,0,1,"kres","kall","Residues"
+115,0,1,"kres_kcr","kres,kcr","mapping of crops to different residue types"
+116,0,1,"ksd","kall","Secondary products"
+117,0,1,"kst","kfo","Plant-based staple products in the sectoral version"
+118,0,0,"kst2","kst","Aliased with kst"
+119,0,1,"kve","k","Land-use activities"
+120,0,1,"land","","Land pools"
+121,0,1,"land_ag","land","Agricultural land pools"
+122,0,1,"land_clearing39","land","Natural vegetation land pools"
+123,0,1,"land_establish39","land","Managed land pools"
+124,0,1,"land_natveg","land","Natural vegetation land pools"
+125,0,1,"land35","","Natveg land pools"
+126,0,1,"ltype14","","calibration land types"
+127,0,1,"maccs_ch4","","ch4 mitigation categories with MACCS"
+128,0,1,"maccs_n2o","","n2o mitigation categories with MACCS"
+129,0,1,"maccs_steps","","maccs tax level steps"
+130,0,0,"material_scen62","","scenarios"
+131,0,1,"n_pollutants","pollutants","subset of n pollutants"
+132,0,1,"n_pollutants_direct","n_pollutants","subset of n pollutants"
+133,0,1,"no_milling_ginning20","processing_subst20","Processing activities without milling and ginning"
+134,0,1,"nonused18","kcr","crops that are not used as residues"
+135,0,1,"npk","nutrients","Plant nutrients"
+136,0,1,"nutrients","attributes","Nutrient related product attributes"
+137,0,1,"nutrition","","Nutritition attributes"
+138,0,1,"par15","","Parameters for food module"
+139,0,1,"paras_b15","","Intake equation parameters"
+140,0,1,"paras_s15","","Schofield equation parameters"
+141,0,1,"pk18","npk","subset of npk containing P and K nutrients"
+142,0,1,"pol_stock35","","Land types for land protection policies"
+143,0,1,"pol32","","afforestation policy type"
+144,0,1,"pol35","","Land protection policy"
+145,0,1,"pollutant_nh3no2_51","n_pollutants_direct","nitrogen emissions relevant for deposition"
+146,0,1,"pollutants","pollutants_all","subset of pollutants_all that can be taxed"
+147,0,1,"pollutants_all","","all pollutants"
+148,0,1,"pop_scen09","","Population scenario"
+149,0,0,"pop_scen15","","Population scenarios"
+150,0,1,"processing_subst20","","Processing activities"
+151,0,1,"processing20","processing_subst20","Processing activities except substitution"
+152,0,1,"prot_type","","Conservation priority areas"
+153,0,1,"protect32","j,ac","mapping age class - land type"
+154,0,1,"regr15","","Demand regression types"
+155,0,1,"reproductive","age","Age group of people in the reproductive age"
+156,0,0,"reproductive2","reproductive","Aliased with reproductive"
+157,0,0,"retired15","adult15","Age group of retired population"
+158,0,1,"rltype","",""
+159,0,1,"ruminantfadeoutscen15","","Scenarios for changed composition of livestock products"
+160,0,1,"SameAs","*,*","Set Element Comparison Without Checking"
+161,0,1,"scen_conf55","","awms scenarios"
+162,0,1,"scen_neff50","","Scenario for uptake efficiency"
+163,0,1,"scen13","","tc cost scenario"
+164,0,0,"scen13_to_dev","scen13,dev","mapping between tc cost scenarios and development stages"
+165,0,1,"scen1st60","","first generation bioenergy scenarios"
+166,0,1,"scen2nd60","","second generation bioenergy scenarios"
+167,0,1,"scen2ndres60","","residues for second generation bioenergy scenarios"
+168,0,1,"scen42","","Environmental Flow Policy (EFP)"
+169,0,0,"scen42_to_dev","scen42,dev","Mapping between EFP and economic development status"
+170,0,1,"scen56","","emission policy scenarios"
+171,0,1,"sex","","Sex groups"
+172,0,1,"si","","Suitability classes"
+173,0,1,"sys","","Livestock production systems"
+174,0,0,"sys_meat","sys","Livestock meat production systems"
+175,0,0,"sys_nonmeat","sys","Livestock non-meat production systems"
+176,0,1,"sys_to_kli","sys,kli","Mapping between livestock producton systems and livestock products"
+177,0,1,"t","t_all","Simulated time periods"
+178,0,1,"t_alias","t","Aliased with t"
+179,0,1,"t_all","t_ext","5-year time periods"
+180,0,1,"t_ext","","5-year time periods"
+181,0,1,"t_ini10","","Time periods with land initialization data"
+182,0,1,"t_past","t_all","Timesteps with observed data"
+183,0,1,"t_past_ff","t_past","Time stamps before 1995"
+184,0,1,"t2","t","Aliased with t"
+185,0,1,"time_annual","","Annual extended time steps"
+186,0,1,"trade_groups21","","Trade groups"
+187,0,1,"trade_regime21","","Trade scenarios"
+188,0,0,"tstart21","t_all","Historic time steps"
+189,0,0,"tstart32","t_all",""
+190,0,1,"type","","GAMS variable attribute used for the output"
+191,0,1,"type32","","plantation type"
+192,0,1,"underaged15","age","Group of underaged age classes"
+193,0,1,"w","","Water supply type"
+194,0,1,"wat_dem","","Water demand sectors"
+195,0,1,"wat_src","","Type of water source"
+196,0,1,"watdem_exo","wat_dem","Exogenous water demands"
+197,0,0,"when","","Temporal location relative to optimization"
+198,0,0,"working15","adult15","Group of working age population"
+199,1,0,"c32_CostComparison","",""
+200,1,1,"c32_harvesting_cost","",""
+201,1,0,"c32_LandRednCost","",""
+202,1,0,"c32_ProdExtCost","",""
+203,1,1,"c32_recurring_cost","",""
+204,1,0,"c32_reduction_fragmented","","fragmented annual trade balance reduction"
+205,1,0,"c32_reduction_globalized","","globalized annual trade balance reduction"
+206,1,0,"c32_reduction_regionalized","","regionalized annual trade balance reduction"
+207,1,0,"c32_reduction_start","","initial annual trade balance reduction"
+208,1,1,"c32_reESTBcost","",""
+209,1,0,"c32_shift","",""
+210,1,0,"c32_upscaling_factor","",""
+211,1,1,"c60_biodem_level","","bioenergy demand level indicator 1 for regional and 0 for global demand (1)"
+212,1,0,"END2","",""
+213,1,0,"END3","",""
+214,1,1,"f09_demography","t_all,iso,pop_scen09,sex,age","Population (mio. capita per yr)"
+215,1,1,"f09_development_state","t_all,i,gdp_scen09","Development state according to the World Bank definition where 0=low income country 1=high income country in high income level (1)"
+216,1,1,"f09_gdp_mer_iso","t_all,iso,gdp_scen09","Income in market exchange rates (mio. USD05MER per yr)"
+217,1,1,"f09_gdp_ppp_iso","t_all,iso,gdp_scen09","Income in purchasing power parity (mio. USD05PPP per yr)"
+218,1,1,"f09_physical_inactivity","t_all,iso,gdp_scen09,sex,age","Share of population which is physically inactive (1)"
+219,1,1,"f09_pop_iso","t_all,iso,pop_scen09","Population (mio. capita per yr)"
+220,1,1,"f10_land","t_ini10,j,land","Different land type areas (mio. ha)"
+221,1,1,"f12_interest_bound","t,bound12","Lower and higher bounds of interest rates (% per yr)"
+222,1,1,"f13_tc_exponent","t_all,scen13","Regression exponent (1)"
+223,1,1,"f13_tc_factor","t_all,scen13","Regression factor (USD05PPP per ha)"
+224,1,1,"f13_tcguess","i","Guess for initial annual TC rates (1)"
+225,1,1,"f14_pyld_hist","t_all,i","Modelled regional pasture yields in the past (tDM per ha per yr)"
+226,1,1,"f14_yields","t_all,j,kve,w","LPJmL potential yields per cell (rainfed and irrigated) (tDM per ha per yr)"
+227,1,1,"f14_yld_calib","i,ltype14","Calibration factor for the LPJmL yields (1)"
+228,1,1,"f15_bmi","sex,age,bmi_group15","Mean body mass index for each BMI group (kg per m2)"
+229,1,1,"f15_bmi_shr_paras","sex,agegroup15,bmi_tree15,paras_b15","BMI share regression parameters in USD05PPP or dimensionless (X)"
+230,1,1,"f15_bmi_shr_past","t_all,iso,age,sex,bmi_group15","Mean body mass index for each BMI group (kg per m2)"
+231,1,1,"f15_bodyheight","t_all,iso,sex,age","Body height (cm per cap)"
+232,1,1,"f15_demand_paras","regr15,food_scen15,par15","Food regression parameters in USD05PPP or dimensionless (X)"
+233,1,1,"f15_household_balanceflow","t_all,i,kall,dm_ge_nr","Balance flow to take account of heterogeneous products and processes (mio. tDM)"
+234,1,0,"f15_intake_pc_observed_iso","t_all,iso,sex,age","Observed per capita calorie intake in the past (kcal per captia per day)"
+235,1,1,"f15_kcal_calib_fadeout","t_all,calibscen15","Calibration fadeout factor (1)"
+236,1,1,"f15_kcal_pc_iso","t_all,iso,kfo","Observed per capita calories in the past (kcal per cap per day)"
+237,1,1,"f15_nutrition_attributes","t_all,kall,nutrition","Nutrition attributes of food items dedicated for fooduse (mio. kcal per tDM | t Protein per tDM)"
+238,1,1,"f15_price_index","t_all","Food price index in initialization period (USD05MER per t DM)"
+239,1,1,"f15_prices_initial","kall","Food prices in initialization period (USD05MER per t DM)"
+240,1,1,"f15_ruminant_fadeout","t_all,ruminantfadeoutscen15","Ruminant fadeout scenario (1)"
+241,1,1,"f15_schofield","sex,age,paras_s15","Schofield equation parameters in kcal per capita per day or kcal per capita per day per weight (X)"
+242,1,1,"f16_domestic_balanceflow","t_all,i,kall","Balance flow for inconsistencies between domestic supply and use in FAO (mio. tDM per yr)"
+243,1,1,"f16_forestry_demand_iso","t_all,iso,kforestry","demand"
+244,1,1,"f16_seed_shr","t_all,i,kcr","Seed share relative to production from FAO-FBS (1)"
+245,1,1,"f16_waste_shr","t_all,i,kall","Waste share relative to domestic supply from FAO-FBS (1)"
+246,1,1,"f18_attributes_residue_ag","attributes,kve","Nutrient content of aboveground crop residues in respective attribute units DM GJ Nr P K WM C (X per DM)"
+247,1,1,"f18_attributes_residue_bg","dm_nr,kve","Nutrient content of belowground crop residues in reactive nitorgen and carbon units Nr C (X per DM)"
+248,1,1,"f18_cgf","cgf,kve","Crop growth functions for all vegetation types containing slope intercept and belowground to aboveground ratio (1)"
+249,1,1,"f18_fac_req_kres","kres","Factor requirements (USD05MER per tDM)"
+250,1,1,"f18_multicropping","t_all,i","Multicropping indicator as ratio of area harvested by physical area (1)"
+251,1,1,"f18_res_combust_eff","kve","Combustion efficiency of residue burning (1)"
+252,1,1,"f18_res_use_burn","t_all,burn_scen18,dev18,kcr","Minimum and maximum burn share use for residues developing over time (1)"
+253,1,1,"f20_processing_balanceflow","t_all,i,ksd","Processing balance flow (mio. tDM)"
+254,1,1,"f20_processing_conversion_factors","t_all,processing20,ksd,kpr","Conversion factors of primary products into secondary products (1)"
+255,1,1,"f20_processing_shares","t_all,i,ksd,kpr","Shares of secondary products coming from a primary product (1)"
+256,1,1,"f20_processing_unitcosts","ksd,kpr","Costs of transforming x units kpr into 1 unit ksd (USD05MER per tDM)"
+257,1,1,"f21_exp_shr","t_all,i,kall","Regional and crop-specific export share (1)"
+258,1,1,"f21_self_suff","t_all,i,kall","Regional self-sufficiency rates (1)"
+259,1,1,"f21_trade_bal_reduction","t_all,trade_groups21,trade_regime21","Share of inelastic trade pool (1)"
+260,1,1,"f21_trade_balanceflow","t_all,kall","Domestic balance flows (mio. tDM per yr)"
+261,1,1,"f21_trade_margin","i,kall","Costs of freight and insurance (USD05MER per tDM)"
+262,1,1,"f21_trade_tariff","i,kall","Specific duty tariffs (USD05MER per tDM)"
+263,1,1,"f30_land_si","j,si","Land area suitable and non-suitable as cropland (mio. ha)"
+264,1,1,"f30_rotation_max_shr","crp30","Maximum allowed area shares for each crop type (1)"
+265,1,1,"f30_rotation_min_shr","crp30","Minimum allowed area shares for each crop type (1)"
+266,1,0,"f32_aff_mask","j","afforestation mask (binary)"
+267,1,1,"f32_aff_pol","t_all,j,pol32","npi+indc afforestation policy (Mha new forest wrt to 2010)"
+268,1,1,"f32_distance","j","transport distance to urban center (Minutes)"
+269,1,1,"f32_fac_req_ha","i,fcosts32","Afforestation factor requirement costs (US Dollar 2004 per ha per annum)"
+270,1,1,"f32_forestry_management","i","upscaling factor for forestry plantations"
+271,1,1,"f32_harvest_cost_ha","i,fcosts32H","Harvesting cost (US Dollar 2004 per ha)"
+272,1,1,"f32_production_ratio","i,t_all","percentage of supply coming from plantations (percentage)"
+273,1,0,"f32_production_ratio_FUTURE","i,t_all","percentage of supply coming from plantations (percentage)"
+274,1,1,"f32_rot_length","i,rltype","rot length"
+275,1,0,"f32_trade_margin","i,kforestry","costs of freight and insurance (USD per DMT)"
+276,1,0,"f32_trade_tariff","i,kforestry","specific duty tariffs (USD per DMT)"
+277,1,1,"f32_transport_costs","kforestry","transport costs 2004 per tDM per minute (USD)"
+278,1,1,"f35_ageclass_area","j,ac_poulter","age classes from Poulter et al dataset (Mha)"
+279,1,1,"f35_distance","j","transport distance to urban center (Minutes)"
+280,1,1,"f35_harvest_cost_ha","i,fcosts32H","Harvesting cost (US Dollar 2004 per ha)"
+281,1,1,"f35_min_land_stock","t_all,j,pol35,pol_stock35","Land protection policies [minimum land stock] (Mha)"
+282,1,1,"f35_production_ratio","i,t_all","percentage of supply coming from plantations has to be one minus (percentage)"
+283,1,1,"f35_protect_area","j,prot_type","Conservation priority areas (mio. ha)"
+284,1,1,"f35_transport_costs","kforestry","transport costs 2004 per tDM per minute (USD)"
+285,1,1,"f38_fac_req","kcr,w","Factor requirement costs (USD05MER per tDM)"
+286,1,1,"f38_region_yield","i,kcr","Regional crop yields (tDM per ha)"
+287,1,1,"f40_distance","j","Transport distance to urban center (min)"
+288,1,1,"f40_transport_costs","k","Relative transport costs (USD05MER per tDM per min)"
+289,1,1,"f41_c_irrig","t_all,i","Irrigation investment costs (USD04MER per ha)"
+290,1,1,"f41_irrig","j","Available area equipped for irrigation [AVL] (mio. ha)"
+291,1,1,"f42_env_flow_policy","t_all,scen42","EFP policies (1)"
+292,1,1,"f42_env_flows","t_all,j","Environmental flow requirements from LPJ and Smakhtin algorithm (mio. m^3)"
+293,1,1,"f42_wat_req_kli","kli","Average water requirements of livestock commodities per region per tDM per year (m^3)"
+294,1,1,"f42_wat_req_kve","t_all,j,kve","LPJmL annual water demand for irrigation per ha (m^3 per yr)"
+295,1,1,"f43_wat_avail","t_all,j","Surface water available for irrigation per cell from LPJmL (mio. m^3 per yr)"
+296,1,1,"f45_bcef","ac,clcl","BCEF by Koeppen-Geiger classification mapped to age-classes (-)"
+297,1,1,"f45_koeppengeiger","j,clcl","Koeppen-Geiger climate classification on the simulation cluster level (1)"
+298,1,1,"f50_atmospheric_deposition_rates","t_all,i,land,dep_scen50","Nr deposition rates per area (tNr per ha)"
+299,1,1,"f50_nitrogen_balanceflow","t_all,i","Balancelfow to account for unrealistically high SNUpEs on croplands (mio. tNr per yr)"
+300,1,0,"f50_nitrogen_balanceflow_pasture","t_all,i","Balancelfow to account for unrealistically high NUE on pastures (mio. tNr per yr)"
+301,1,1,"f50_nr_fix_area","kcr","Nr fixation rates per area (tNr per ha)"
+302,1,1,"f50_nr_fix_ndfa","t_all,i,kcr","Nr fixation rates per Nr in plant biomass (tNr per tNr)"
+303,1,1,"f50_nr_fixation_rates_pasture","t_all,i","Nr fixation rates per pasture area (tNr per ha)"
+304,1,1,"f50_nue_pasture","t_all,i,scen_neff50","selected scenario values for soil nitrogen uptake efficiency (1)"
+305,1,1,"f50_snupe","t_all,i,scen_neff50","selected scenario values for soil nitrogen uptake efficiency (1)"
+306,1,1,"f51_ef_n_soil","n_pollutants_direct,emis_source_n_cropsoils51","ipcc emission factors for various emission types X (tX-N per tN)"
+307,1,1,"f51_ef3_confinement","i,kli,awms_conf,n_pollutants_direct","emissions from manure managed in confinement for various emission types X (tX-N per tN)"
+308,1,1,"f51_ef3_prp","i,n_pollutants_direct,kli","emissions from manure on pasture range and paddocks for various emission types X (tX-N per tN)"
+309,1,1,"f51_ipcc_ef","ipcc_ef51,emis_uncertainty51","ipcc emission factors for various emission types X (tX-N per tN)"
+310,1,1,"f52_growth_par","clcl,chap_par","Parameters for chapman-richards equation (1)"
+311,1,1,"f53_ef_ch4_awms","t_all,i,kli","CH4 emission per livestock products (CH4 per tDM)"
+312,1,1,"f53_ef_ch4_rice","t_all,i","CH4 emission per ha rice (CH4 per ha)"
+313,1,1,"f55_awms_recycling_share","i,kli,awms_conf","share of Nr in confinement recycled (tNr per tNr)"
+314,1,1,"f55_awms_shr","t_all,i,scen_conf55,kli,awms_conf","share of Nr in confinement recycled (tNr per tNr)"
+315,1,1,"f55_manure_fuel_shr","t_all,i,kli,gdp_scen09","share of Nr in confinement recycled (tNr per tNr)"
+316,1,1,"f56_aff_policy","co2_forestry,aff56","afforestation policy scenarios (1)"
+317,1,1,"f56_emis_policy","scen56,pollutants_all,emis_source","emission policy scenarios (1)"
+318,1,1,"f56_pollutant_prices","t_all,i,pollutants,ghgscen56","ghg certificate prices for N2O-N CH4 CO2-C (USD05MER per t)"
+319,1,1,"f57_maccs_ch4","t_all,i,maccs_ch4,maccs_steps","CH4 MACC from Image model (USD05MER per tC)"
+320,1,1,"f57_maccs_n2o","t_all,i,maccs_n2o,maccs_steps","N2O MACC from Image model (USD05MER per tC)"
+321,1,1,"f60_1stgen_bioenergy_dem","t_all,i,scen1st60,kall","annual 1st generation bioenergy demand (mio. GJ per yr)"
+322,1,1,"f60_bioenergy_dem","t_all,i,scen2nd60","annual bioenergy demand (regional) (mio. GJ per yr)"
+323,1,1,"f60_res_2ndgenBE_dem","t_all,i,scen2ndres60","annual residue demand for 2nd generation bioenergy(regional) (mio. GJ per yr)"
+324,1,1,"f62_dem_material","t_all,i,kall","Historical material demand (mio. tDM)"
+325,1,1,"f70_cost_regr","kap,cost_regr","Factor requirements livestock (USD04 per tDM (A) and USD (B))"
+326,1,1,"f70_feed_baskets","t_all,i,kap,kall,feed_scen70","Feed baskets in tDM per tDM livestock product (1)"
+327,1,1,"f70_livestock_productivity","t_all,i,sys,feed_scen70","Productivity indicator for livestock production (t FM per animal)"
+328,1,1,"f70_pyld_slope_reg","i","Regional slope of linear relationship determining pasture intensification (1)"
+329,1,1,"f70_slaughter_feed_share","t_all,i,kap,attributes,feed_scen70","Share of feed that is incorprated in animal biomass (1)"
+330,1,1,"fm_attributes","attributes,kall","Conversion factors - where X is ton N P K C DM WM or PJ GE (X per tDM)"
+331,1,1,"fm_carbon_density","t_all,j,land,c_pools","LPJmL carbon density for land and carbon pools (tC per ha)"
+332,1,1,"fm_feed_balanceflow","t_all,i,kap,kall","Balanceflow balance difference between estimated feed baskets and FAO (mio. tDM)"
+333,1,1,"fm_forestry_demand","t_all,i,kforestry","Forestry demand with all time steps (mio. m3 per year)"
+334,1,1,"fm_tau1995","i","Agricultural land use intensity tau in 1995 (1)"
+335,1,1,"i09_gdp_mer","t,i","Income in market exchange rates (mio. USD05MER per yr)"
+336,1,1,"i09_gdp_mer_iso","t,iso","Income in market exchange rates (mio. USD05MER per yr)"
+337,1,0,"i09_gdp_pc_mer_iso","t,iso","Per capita income in market exchange rates (USD05MER per cap per yr)"
+338,1,1,"i09_gdp_ppp","t,i","Income in purchasing power parity (mio. USD05PPP per yr)"
+339,1,1,"i09_gdp_ppp_iso","t,iso","Income in purchasing power parity (mio. USD05PPP per yr)"
+340,1,1,"i13_tc_exponent","t,i","Regression exponent (1)"
+341,1,1,"i13_tc_factor","t,i","Regression factor (USD05PPP per ha)"
+342,1,1,"i14_yields","t,j,kve,w","Biophysical input yields (excluding technological change) (tDM per ha per yr)"
+343,1,1,"i15_bmi_halfsat","sex,agegroup15,bmi_tree15","BMI share regression halfsaturation (1)"
+344,1,1,"i15_bmi_intercept","sex,agegroup15,bmi_tree15","BMI share regression intercept (1)"
+345,1,1,"i15_bmi_saturation","sex,agegroup15,bmi_tree15","BMI share regression saturation (1)"
+346,1,1,"i15_bmi_shr_calib","t,iso,sex,age,bmi_group15","Calibration parameters to meet historical BMI shares (1)"
+347,1,1,"i15_bmi_shr_calib_lastcalibyear","iso,sex,age,bmi_group15","Calibration parameters of the last year with historical observations (1)"
+348,1,1,"i15_bmi_shr_pre","t,iso,sex,agegroup15,bmi_group15","BMI share precalculation based on regression parameters required for calibration (1)"
+349,1,1,"i15_bmi_shr_regr_pre","t,iso,sex,agegroup15,bmi_tree15","BMI regression share precalculation based on regression parameters required for calibration (1)"
+350,1,1,"i15_dem_halfsat","regr15","Food regression parameters halfsaturation (USD05PPP per cap)"
+351,1,1,"i15_dem_intercept","regr15","Food regression parameters intercept in kcal or as share (X)"
+352,1,1,"i15_dem_nonsat","regr15","Food regression parameters nonsaturation (1)"
+353,1,1,"i15_dem_saturation","regr15","Food regression parameters saturation in kcal or as share (X)"
+354,1,1,"i15_intake","t,iso,sex,age,bmi_group15","Mean food intake by population group (kcal per capita per day)"
+355,1,1,"i15_kcal_pregnancy","t,iso","Additional calorie requriements for pregnancy and lactation (kcal)"
+356,1,0,"i15_livestock_kcal_iso_tmp","t,iso","Intermediate calculation do not use elsewhere (kcal per cap per day)"
+357,1,1,"i15_livestock_kcal_structure_iso","t,iso,kfo_ap","Share of livestock products within total staples (corrected for future changes in shares) (1)"
+358,1,1,"i15_livestock_kcal_structure_iso_raw","t,iso,kfo_ap","Share of a livestock products within total staples (uncorrected for future changes in shares) (1)"
+359,1,1,"i15_prices_initial_kcal","iso,kfo","Initial prices that capture the approximate level of prices in 1961-2010 (USD05PPP per kcal)"
+360,1,1,"i15_processed_kcal_structure_iso","*,*,*","Share of a processed product within total staples (1)"
+361,1,1,"i15_ruminant_fadeout","t_all","ruminant fadeout share (1)"
+362,1,0,"i15_staples_kcal_iso_tmp","t,iso","Intermediate calculation do not use elsewhere (kcal per cap per day)"
+363,1,1,"i15_staples_kcal_structure_iso","t,iso,kfo_st","Share of a staple products within total staples (1)"
+364,1,1,"i18_res_use_burn","t_all,dev18,kcr","Share of residues burned on field (1)"
+365,1,1,"i21_trade_bal_reduction","t_all,k_trade","Trade balance reduction (1)"
+366,1,1,"i21_trade_margin","i,k_trade","Trade margins (USD05MER per tDM)"
+367,1,1,"i21_trade_tariff","i,k_trade","Trade tariffs (USD05MER per tDM)"
+368,1,0,"i32_trade_bal_reduction","t_all","Trade balance reduction (1)"
+369,1,0,"i32_trade_bal_reduction_annual","t_all","Annual trade balance reduction (1)"
+370,1,1,"i32_trade_margin","i,kforestry","Trade margins (1)"
+371,1,1,"i32_trade_tariff","i,kforestry","Trade tariffs (1)"
+372,1,1,"i35_other","j,ac","Inital other land (mio. ha)"
+373,1,1,"i35_secdforest","j,ac","Inital secdforest (mio. ha)"
+374,1,1,"i39_cost_clearing","land","Global land clearing costs (USD05MER per ton C)"
+375,1,1,"i39_cost_establish","land","Global land establishment costs (USD05MER per hectare)"
+376,1,1,"i42_env_flow_policy","t,i","Determines whether environmental flow protection is enforced (1)"
+377,1,1,"i42_env_flows","t,j","Environmental flow requirements if a protection policy is in place (mio. m^3)"
+378,1,1,"i42_env_flows_base","t,j","Environmental flow requirements if no protection policy is in place (mio. m^3)"
+379,1,1,"i42_wat_req_k","t,j,k","LPJmL annual water demand for irrigation per ha per year (m^3) + Livestock demand per ton (m^3)"
+380,1,1,"i55_manure_recycling_share","i,kli,awms_conf,npk","Share of manure recycled (tNr per tNr)"
+381,1,1,"i57_mac_step","t,i","Helper to map CO2 prices and maccs_steps (1)"
+382,1,1,"i60_bioenergy_dem","t,i","Regional bioenergy demand per year (mio. GJ per yr)"
+383,1,1,"i60_res_2ndgenBE_dem","t,i","Regional residue demand for 2nd generation bioenergy per year (mio. GJ per yr)"
+384,1,1,"i70_livestock_productivity","t_all,i,sys","Productivity indicator for livestock production (t FM per animal per yr)"
+385,1,1,"i71_urban_area_share","j","Share of urban area within a region (1)"
+386,1,1,"ic42_env_flow_policy","i","Determines whether environmental flow protection is enforced in the current time step (1)"
+387,1,1,"ic42_wat_req_k","j,k","LPJmL annual water demand for irrigation per ha per year (m^3) + Livestock demand per ton (m^3)"
+388,1,1,"ic50_atmospheric_deposition_rates","i,land","atmospheric deposition rate (t N per ha)"
+389,1,1,"ic55_awms_shr","i,kli,awms_conf","Share of manure Nr managed in each animal waste management systems (tNr per tNr)"
+390,1,1,"ic55_manure_fuel_shr","i,kli","Share of manure excreted on pastures used for fuel (tNr per tNr)"
+391,1,1,"im_demography","t,iso,sex,age","Population by groups (mio. per yr)"
+392,1,1,"im_development_state","t,i","Development state according to the World Bank definition where 0=low income country 1=high income country in high income level (1)"
+393,1,1,"im_feed_baskets","t_all,i,kap,kall","Feed baskets in tDM per tDM livestock product (1)"
+394,1,1,"im_gdp_pc_mer","t,i","Per capita income in market exchange rates (USD05MER per cap per yr)"
+395,1,1,"im_gdp_pc_ppp","t,i","Per capita income in purchasing power parity (USD05PPP per cap per yr)"
+396,1,1,"im_gdp_pc_ppp_iso","t,iso","Per capita income in purchasing power parity (USD05PPP per cap per yr)"
+397,1,1,"im_maccs_mitigation","t,i,emis_source,pollutants","Technical mitigation of GHG emissions (1 per 100)"
+398,1,1,"im_physical_inactivity","t,iso,sex,age","Share of population which is physically inactive (1)"
+399,1,1,"im_pollutant_prices","t_all,i,pollutants","Certificate prices for N2O-N CH4 CO2-C (USD05MER per Mg)"
+400,1,1,"im_pop","t,i","Population (mio. per yr)"
+401,1,1,"im_pop_iso","t,iso","Population (mio. per yr)"
+402,1,1,"im_slaughter_feed_share","t_all,i,kap,attributes","Share of feed that is incorporated in animal biomass (1)"
+403,1,1,"im_wat_avail","t,wat_src,j","Water availability (mio. m^3 per yr)"
+404,1,0,"INCR2","",""
+405,1,0,"INCR3","",""
+406,1,1,"o15_kcal_regr_initial","iso,kfo","Uncalibrated per capita demand before price shock (kcal per capita per day)"
+407,1,1,"oq10_land","t,j,type","Land conversion constraint (mio. ha)"
+408,1,1,"oq10_landdiff","t,type","Land difference constraint (mio. ha)"
+409,1,1,"oq10_landexpansion","t,j,land,type","Land expansion constraint (mio. ha)"
+410,1,1,"oq10_landreduction","t,j,land,type","Land reduction constraint (mio. ha)"
+411,1,1,"oq11_cost_glo","t,type","Objective function (mio. USD05MER per yr)"
+412,1,1,"oq11_cost_reg","t,i,type","Regional cost constraint (mio. USD05MER per yr)"
+413,1,1,"oq13_cost_tc","t,i,type","Costs for TC (mio. USD05PPP per yr)"
+414,1,1,"oq13_tech_cost","t,i,type","Total costs for TC (mio. USD05PPP)"
+415,1,1,"oq13_tech_cost_annuity","t,i,type","Annuity costs for TC (mio. USD05PPP per yr)"
+416,1,1,"oq14_yield_crop","t,j,kcr,w,type","Crop yields (tDM per ha per yr)"
+417,1,1,"oq14_yield_past","t,j,w,type","Pasture yields (tDM per ha per yr)"
+418,1,1,"oq15_aim","t,type","Objective function of food demand model (mio. USD05PPP)"
+419,1,1,"oq15_bmi_shr_agg","t,iso,sex,age,bmi_group15,type","Disaggregates age groups from overarching groups (1)"
+420,1,1,"oq15_bmi_shr_high","t,iso,sex,agegroup15,type","Estimates BMI share for population groups with high BMI (1)"
+421,1,1,"oq15_bmi_shr_low","t,iso,sex,agegroup15,type","Estimates BMI share for population groups with very low BMI (1)"
+422,1,1,"oq15_bmi_shr_medium","t,iso,sex,agegroup15,type","Estimates BMI share for population groups with medium BMI(1)"
+423,1,1,"oq15_bmi_shr_medium_high","t,iso,sex,agegroup15,type","Estimates BMI share for population groups with medium to high BMI (1)"
+424,1,1,"oq15_bmi_shr_veryhigh","t,iso,sex,agegroup15,type","Estimates BMI share for population groups with very high BMI (1)"
+425,1,1,"oq15_bmi_shr_verylow","t,iso,sex,agegroup15,type","Estimates BMI share for population groups with low BMI (1)"
+426,1,1,"oq15_budget","t,iso,type","Household budget constraint (USD05PPP per cap per day)"
+427,1,1,"oq15_food_demand","t,i,kfo,type","Food demand (mio. kcal)"
+428,1,1,"oq15_foodtree_kcal_animals","t,iso,kfo_ap,type","Demand for animal products (kcal per cap per day)"
+429,1,1,"oq15_foodtree_kcal_processed","t,iso,kfo_pf,type","Demand for processed products (kcal per cap per day)"
+430,1,1,"oq15_foodtree_kcal_staples","t,iso,kfo_st,type","Demand for staple products (kcal per cap per day)"
+431,1,1,"oq15_foodtree_kcal_vegetables","t,iso,type","Demand for vegetable and fruit products (kcal per cap per day)"
+432,1,1,"oq15_intake","t,iso,type","Estimates average intake for the entire country (kcal per cap per day)"
+433,1,1,"oq15_regr","t,iso,regr15,type","Estimates parameters for food demand and dietary composition (1)"
+434,1,1,"oq15_regr_bmi_shr","t,iso,sex,agegroup15,bmi_tree15,type","Estimates regression parameters for BMI regression shares (1)"
+435,1,1,"oq15_regr_kcal","t,iso,type","Per capita total demand (kcal per cap per day)"
+436,1,1,"oq16_seed_demand","t,i,kcr,type","Seed demand (mio. tDM per yr)"
+437,1,1,"oq16_supply_crops","t,i,kcr,type","Supply balance of crops (mio. tDM per yr)"
+438,1,1,"oq16_supply_forestry","t,i,kforestry,type","Forestry demand (mio. m3 per yr)"
+439,1,1,"oq16_supply_livestock","t,i,kap,type","Supply balance of livestock (mio. tDM per yr)"
+440,1,1,"oq16_supply_pasture","t,i,type","Supply balance of pasture (mio. tDM per yr)"
+441,1,1,"oq16_supply_residues","t,i,kres,type","Supply balance of crop residues (mio. tDM per yr)"
+442,1,1,"oq16_supply_secondary","t,i,ksd,type","Supply balance of secondary products (mio. tDM per yr)"
+443,1,1,"oq16_waste_demand","t,i,kall,type","Waste generation (mio. tDM per yr)"
+444,1,1,"oq17_prod_reg","t,i,k,type","Regional production (mio. tDM per yr)"
+445,1,1,"oq18_cost_prod_res","t,i,kres,type","Production costs of harvesting crop residues (mio. USD05MER)"
+446,1,1,"oq18_prod_res_ag_reg","t,i,kcr,attributes,type","Production constraint of aboveground residues (mio. tDM)"
+447,1,1,"oq18_prod_res_bg_reg","t,i,kcr,dm_nr,type","Production constraint of belowground residues (mio. tDM)"
+448,1,1,"oq18_res_field_balance","t,i,kcr,attributes,type","Calculation of the residues amount recycled to soils (mio. tDM)"
+449,1,1,"oq18_res_field_burn","t,i,kcr,attributes,type","Fixing of the residues amount burned in a region in respective attribute units DM GJ Nr P K WM C (mio. tX)"
+450,1,1,"oq18_res_recycling_nr","t,i,type","Nutrient recycling of reaactive nitrogen (mio. tNr)"
+451,1,1,"oq18_res_recycling_pk","t,i,pk18,type","Nutrient recycling of phosphorus and potash (mio. tX)"
+452,1,1,"oq18_translate","t,i,kres,attributes,type","Transformation of the multiple crop residues into supply balance crop redisues in respective attribute units DM GJ Nr P K WM C (mio. tX)"
+453,1,1,"oq20_processing","t,i,kpr,ksd,type","Processing equation (mio. tDM per yr)"
+454,1,1,"oq20_processing_aggregation_cereals","t,i,kcereals20,type","Connecting processing activity to food use for milling (mio. tDM per yr)"
+455,1,1,"oq20_processing_aggregation_cotton","t,i,type","Connecting processing activity to production for cotton ginning (mio. tDM per yr)"
+456,1,1,"oq20_processing_aggregation_nocereals","t,i,kpr,type","Connecting processing activity to processing flows (mio. tDM per yr)"
+457,1,1,"oq20_processing_costs","t,i,type","Processing costs (mio. USD05MER per yr)"
+458,1,1,"oq20_processing_substitution_brans","t,i,type","Substitution of brans by cereals (mio. tDM per yr)"
+459,1,1,"oq20_processing_substitution_oils","t,i,type","Substitution of branoils by other oils (mio. tDM per yr)"
+460,1,1,"oq21_cost_trade","t,i,type","Regional trade costs (mio. USD05MER per yr)"
+461,1,1,"oq21_cost_trade_reg","t,i,k_trade,type","Regional trade costs for each tradable commodity (mio. USD05MER per yr)"
+462,1,1,"oq21_excess_dem","t,k_trade,type","Global excess demand (mio. tDM per yr)"
+463,1,1,"oq21_excess_supply","t,i,k_trade,type","Regional excess production (mio. tDM per yr)"
+464,1,1,"oq21_notrade","t,i,k_notrade,type","Regional production constraint of non-tradable commodities (mio. tDM per yr)"
+465,1,1,"oq21_trade_glo","t,k_trade,type","Global production constraint (mio. tDM per yr)"
+466,1,1,"oq21_trade_reg","t,i,k_trade,type","Regional trade balances i.e. minimum self-sufficiency ratio (1)"
+467,1,1,"oq21_trade_reg_up","t,i,k_trade,type","Regional trade balances i.e. maximum self-sufficiency ratio (1)"
+468,1,1,"oq30_carbon","t,j,c_pools,type","Cropland carbon content calculation (mio. tC)"
+469,1,1,"oq30_cropland","t,j,type","Total cropland calculation (mio. ha)"
+470,1,1,"oq30_prod","t,j,kcr,type","Production of cropped products (mio. tDM)"
+471,1,1,"oq30_rotation_max","t,j,crp30,w,type","Local maximum rotational constraints (mio. ha)"
+472,1,1,"oq30_rotation_min","t,j,crp30,w,type","Local minimum rotational constraints (mio. ha)"
+473,1,1,"oq30_suitability","t,j,type","Suitability constraint (mio. ha)"
+474,1,1,"oq31_carbon","t,j,c_pools,type","Carbon content calculation for pasture (mio tC)"
+475,1,1,"oq31_cost_prod_past","t,i,type","Costs for putting animals on pastures (mio. USD05MER per yr)"
+476,1,1,"oq31_prod","t,j,type","Cellular pasture production constraint (mio. tDM per yr)"
+477,1,1,"oq32_aff_pol","t,j,type","afforestation policy constraint"
+478,1,1,"oq32_avail_reuse","t,j,type",""
+479,1,1,"oq32_carbon","t,j,c_pools,type","forestry carbon stock calculation"
+480,1,1,"oq32_cdr_aff","t,j,co2_forestry,type","calculation of CDR from afforestation"
+481,1,1,"oq32_cost_establishment","t,i,type",""
+482,1,1,"oq32_cost_harvest","t,i,type",""
+483,1,1,"oq32_cost_recur","t,i,type",""
+484,1,1,"oq32_cost_total","t,i,type","total forestry costs constraint (mio. USD)"
+485,1,1,"oq32_cost_trade","t,i,type","trade costs"
+486,1,1,"oq32_cost_trade_reg","t,i,kforestry,type","interregional trade cost calculation (mio. USD)"
+487,1,1,"oq32_cost_transport","t,i,type",""
+488,1,1,"oq32_diff","t,type","aggregated difference in forestry land compared to previous timestep (mio. ha)"
+489,1,1,"oq32_excess_dem","t,kforestry,type","global excess demand"
+490,1,1,"oq32_excess_supply","t,i,kforestry,type","regional excess production"
+491,1,1,"oq32_hvarea_forestry","t,j,ac_sub,type",""
+492,1,1,"oq32_hvarea_other","t,j,ac_sub,type",""
+493,1,1,"oq32_hvarea_primforest","t,j,type",""
+494,1,1,"oq32_hvarea_secdforest","t,j,ac_sub,type",""
+495,1,1,"oq32_land","t,j,type","land constraint (mio. ha)"
+496,1,1,"oq32_land_expansion","t,j,type32,ac,type",""
+497,1,1,"oq32_land_reduction","t,j,type32,ac,type",""
+498,1,1,"oq32_max_aff","t,type","maximum total global afforestation"
+499,1,1,"oq32_prod_forestry_wood","t,j,type","wood production from forestry"
+500,1,1,"oq32_prod_forestry_woodfuel","t,j,type","woodfuel production from forestry"
+501,1,1,"oq32_prod_future","t,i,type",""
+502,1,1,"oq32_prod_other","t,j,type",""
+503,1,1,"oq32_prod_primforest_wood","t,j,type","wood production from primforest"
+504,1,1,"oq32_prod_primforest_woodfuel","t,j,type","woodfuel production from primforest"
+505,1,1,"oq32_prod_secdforest_wood","t,j,type","wood production from secdforest"
+506,1,1,"oq32_prod_secdforest_woodfuel","t,j,type","woodfuel production from secdforest"
+507,1,1,"oq32_production_timber","t,i,type",""
+508,1,1,"oq32_secdforest_conversion","t,j,type",""
+509,1,1,"oq32_trade_reg","t,i,kforestry,type","regional trade balances i.e. minimum self-suff ratio"
+510,1,1,"oq35_carbon_other","t,j,c_pools,type","Other land carbon stock calculation (mio tC)"
+511,1,1,"oq35_carbon_primforest","t,j,c_pools,type","Primforest carbon stock calculation (mio tC)"
+512,1,1,"oq35_carbon_secdforest","t,j,c_pools,type","Secdforest carbon stock calculation (mio tC)"
+513,1,1,"oq35_cost_harvest","t,i,type","Cost of harvesting natveg (mio. USD)"
+514,1,1,"oq35_cost_transport","t,i,type","Cost of harveting timber taken from natural vegetation (mio. USD)"
+515,1,1,"oq35_hvarea_other","t,j,ac_sub,type","Area harvested from other land (mio. ha)"
+516,1,1,"oq35_hvarea_primforest","t,j,type","Area harvested from primary forests (mio. ha)"
+517,1,1,"oq35_hvarea_secdforest","t,j,ac_sub,type","Area harvested from secondary forests (mio. ha)"
+518,1,1,"oq35_land_other","t,j,type","Other land pool calculation (mio. ha)"
+519,1,1,"oq35_land_secdforest","t,j,type","Secdforest land pool calculation (mio. ha)"
+520,1,1,"oq35_landdiff","t,type","Difference in natveg land (mio. ha)"
+521,1,1,"oq35_min_forest","t,j,type","Minimum forest land constraint (mio. ha)"
+522,1,1,"oq35_min_other","t,j,type","Minimum other land constraint (mio. ha)"
+523,1,1,"oq35_other_expansion","t,j,ac,type","Other land expansion (mio. ha)"
+524,1,1,"oq35_other_reduction","t,j,ac,type","Other land reduction (mio. ha)"
+525,1,1,"oq35_primforest_reduction","t,j,type","Primforest reduction (mio. ha)"
+526,1,1,"oq35_prod_other","t,j,type","Woodfuel production from other land (mio. m3)"
+527,1,1,"oq35_prod_primforest_wood","t,j,type","Wood production from primary forest (mio. m3)"
+528,1,1,"oq35_prod_primforest_woodfuel","t,j,type","Woodfuel production from primary forest (mio. m3)"
+529,1,1,"oq35_prod_secdforest_wood","t,j,type","Wood production from secondary forest (mio. m3)"
+530,1,1,"oq35_prod_secdforest_woodfuel","t,j,type","Woodfuel production from secondary forest (mio. m3)"
+531,1,1,"oq35_production_timber","t,i,type","Timbe production from natural vegetation (mio. USD)"
+532,1,1,"oq35_secdforest_conversion","t,j,type","Conversion of secondary forest (mio.ha)"
+533,1,1,"oq35_secdforest_reduction","t,j,ac,type","Secdforest reduction (mio. ha)"
+534,1,1,"oq38_cost_prod_crop","t,i,kcr,type","Regional factor input costs for plant production (mio. USD05MER per yr)"
+535,1,1,"oq39_cost_landcon","t,j,land,type","Calculation of cellular landconversion costs (mio. USD05MER per yr)"
+536,1,1,"oq39_cost_landcon_annuity","t,j,land,type","Calculation of cellular annuity costs of landconversion (mio. USD05MER per yr)"
+537,1,1,"oq40_cost_transport","t,j,k,type","Cellular transport costs for k (mio. USD05MER per yr)"
+538,1,1,"oq41_area_irrig","t,j,type","Irrigation area constraint (mio. ha)"
+539,1,1,"oq41_cost_AEI","t,i,type","Calculation of costs of irrigation area expansion (mio. USD04MER)"
+540,1,1,"oq41_cost_AEI_annuity","t,i,type","Calculation of annuity costs of AEI expansion (mio. USD04MER)"
+541,1,1,"oq42_water_demand","t,wat_dem,j,type","Water consumption in different sectors (mio. m^3 per yr)"
+542,1,1,"oq43_water","t,j,type","Local seasonal water constraints (mio. m^3 per yr)"
+543,1,1,"oq50_nr_bal_crp","t,i,type","cropland nutrient inputs have to equal withdrawals and losses (Tg N per yr)"
+544,1,1,"oq50_nr_bal_pasture","t,i,type","nitrogen balance pasture lands (Tg N per yr)"
+545,1,1,"oq50_nr_cost_fert","t,i,type","fertilizer costs (mio. USD05MER per yr)"
+546,1,1,"oq50_nr_deposition","t,i,land,type","atmospheric deposition (Tg N per yr)"
+547,1,1,"oq50_nr_withdrawals","t,i,kcr,type","calculating nr withdrawals (Tg N per yr)"
+548,1,1,"oq51_emissionbal_awms","t,i,n_pollutants_direct,type","estimates various emission types X from animal waste management systems before technical mitigation (Mt X-N)"
+549,1,1,"oq51_emissionbal_man_past","t,i,n_pollutants_direct,type","estimates various emission types X from manure on pasture land before technical mitigation (Mt X-N)"
+550,1,1,"oq51_emissions_indirect_n2o","t,i,emis_source_n51,type","estimates various emission types X from volatilisation and leaching (Mt X-N)"
+551,1,1,"oq51_emissions_inorg_fert","t,i,n_pollutants_direct,type","estimates various emission types X from inorganic fertilizer before technical mitigation (Mt X-N)"
+552,1,1,"oq51_emissions_man_crop","t,i,n_pollutants_direct,type","estimates various emission types X from manure on cropland before technical mitigation (Mt X-N)"
+553,1,1,"oq51_emissions_resid","t,i,n_pollutants_direct,type","estimates various emission types X from residues before technical mitigation (Mt X-N)"
+554,1,1,"oq51_emissions_som","t,i,n_pollutants_direct,type","estimates various emission types X from soil organic matter loss before technical mitigation (Mt X-N)"
+555,1,1,"oq52_carbon_stock_diff","t,j,land,c_pools,type","Calculation net carbon stock change (mio. tC per time step)"
+556,1,1,"oq52_carbon_stock_reduction","t,j,land,c_pools,type","Calculation carbon stock reduction (mio. tC per time step)"
+557,1,1,"oq52_co2c_emis","t,j,emis_co2,type","Calculation of annual CO2 emissions (mio. tC per yr)"
+558,1,1,"oq53_emissionbal_ch4_awms","t,i,type","Detailed ch4 constraint for animal waste management systems before technical mitigation (tCH4)"
+559,1,1,"oq53_emissionbal_ch4_ent_ferm","t,i,type","Detailed ch4 constraint for enteric fermentation before technical mitigation (tCH4)"
+560,1,1,"oq53_emissionbal_ch4_rice","t,i,type","Detailed ch4 constraint for rice before technical mitigation (tCH4)"
+561,1,1,"oq55_bal_intake_confinement","t,i,kli,npk,type","Nutrient balance for intake in confinement (mio t X)"
+562,1,1,"oq55_bal_intake_fuel","t,i,kli,npk,type","Nutrient balance for intake of grazing animals on pasture whose excreate are collected for household fuel (mio t X)"
+563,1,1,"oq55_bal_intake_grazing_cropland","t,i,kli,npk,type","Nutrient balance for intake of grazing animals on cropland (mio t X)"
+564,1,1,"oq55_bal_intake_grazing_pasture","t,i,kli,npk,type","Nutrient balance for intake of grazing animals on pastures (mio t X)"
+565,1,1,"oq55_bal_manure","t,i,kli,awms,npk,type","Calculation of manure (mio t X)"
+566,1,1,"oq55_manure_confinement","t,i,kli,awms_conf,npk,type","Manure from animals in confinement managed in different awms (mio t X)"
+567,1,1,"oq55_manure_recycling","t,i,npk,type","Manure from animals in confinement recycling to cropland (mio t X)"
+568,1,1,"oq56_cell_to_reg","t,i,pollutants,emis_source,type","Aggregation to regional emissions (Tg per yr)"
+569,1,1,"oq56_emission_costs","t,i,type","Calculation of total emission costs (mio. USD05MER per yr)"
+570,1,1,"oq56_emission_costs_cell_oneoff","t,j,emis_cell_one56,type","Calculation of cellular costs for emissions occuring only once in time (mio. USD05MER per yr)"
+571,1,1,"oq56_emission_costs_cell_yearly","t,j,emis_cell_yr56,type","Calculation of cellular costs for annual emissions (mio. USD05MER per yr)"
+572,1,1,"oq56_emission_costs_reg_oneoff","t,i,emis_reg_one56,type","Calculation of regional costs for emissions occuring only once in time (mio. USD05MER per yr)"
+573,1,1,"oq56_emission_costs_reg_yearly","t,i,emis_reg_yr56,type","Calculation of regional costs for annual emissions (mio. USD05MER per yr)"
+574,1,1,"oq56_reward_cdr_aff","t,j,co2_forestry,type","Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)"
+575,1,1,"oq56_reward_cdr_aff_reg","t,i,type","Regional revenues for carbon captured by afforestation (mio. USD05MER per yr)"
+576,1,1,"oq56_technical_mitigation_cell","t,j,pollutants,emis_source,type","Application of maccs on emissions (Tg per yr)"
+577,1,1,"oq56_technical_mitigation_reg","t,i,pollutants,emis_source,type","Application of maccs on emissions (Tg per yr)"
+578,1,1,"oq57_total_costs","t,i,type","Calculation of total costs of technical mitigation (mio.USD95MER per yr)"
+579,1,1,"oq60_bioenergy_glo","t,type","Global bioenergy demand (mio. GJ per yr)"
+580,1,1,"oq60_bioenergy_reg","t,i,type","Regional bioenergy demand (mio. GJ per yr)"
+581,1,1,"oq60_res_2ndgenBE","t,i,type","Regional residue demand for 2nd generation bioenergy (mio. GJ per yr)"
+582,1,1,"oq62_dem_material","t,i,kall,type","Estimating material demand (mio. tDM per yr)"
+583,1,1,"oq70_cost_prod_fish","t,i,type","Regional factor input costs for fish production"
+584,1,1,"oq70_cost_prod_liv","t,i,kall,type","Regional factor input costs for livestock production"
+585,1,1,"oq70_feed","t,i,kap,kall,type","Regional feed demand"
+586,1,1,"oq71_balanceflow_constraint_lp","t,i,kli_rum,kforage,type","Linear balanceflow constraint for cellular forage feed product (mio. tDM per yr)"
+587,1,1,"oq71_balanceflow_constraint_nlp","t,j,kli_rum,kforage,type","Nonlinear balanceflow constraint for cellular forage feed products (mio. tDM per yr)"
+588,1,1,"oq71_feed_rum_liv","t,j,kforage,type","Production constraint for ruminant livestock products (mio. tDM per yr)"
+589,1,1,"oq71_prod_mon_liv","t,j,kli_mon,type","Production constraint for monogastrics livestock products (mio. tDM per yr)"
+590,1,1,"oq71_sum_rum_liv","t,j,kli_rum,type","Total production of forage fed ruminants (mio. tDM per yr)"
+591,1,1,"ov_area","t,j,kcr,w,type","Agricultural production area (mio. ha)"
+592,1,1,"ov_btm_cell","t,j,emis_source,pollutants,type","Cellular emissions before technical mitigation (Tg per yr)"
+593,1,1,"ov_btm_reg","t,i,emis_source,pollutants,type","Regional emissions before technical mitigation (Tg per yr)"
+594,1,1,"ov_carbon_stock","t,j,land,c_pools,type","Carbon stock in vegetation soil and litter for different land types (mio. tC)"
+595,1,1,"ov_carbon_stock_reduction","t,j,land,c_pools,type","Reduction in carbon stocks compared to previous time step (mio. tC per time step)"
+596,1,1,"ov_cdr_aff","t,j,co2_forestry,type","Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)"
+597,1,1,"ov_cost_AEI","t,i,type","Irrigation expansion costs (mio. USD04MER per yr)"
+598,1,1,"ov_cost_fore","t,i,type","Forestry costs (Mio USD)"
+599,1,1,"ov_cost_glo","t,type","Total costs of production (mio. USD05MER per yr)"
+600,1,1,"ov_cost_landcon","t,j,land,type","Land conversion costs (mio. USD05MER per yr)"
+601,1,1,"ov_cost_processing","t,i,type","Processing costs (mio. USD05MER per yr)"
+602,1,1,"ov_cost_prod","t,i,kall,type","Factor costs (mio. USD05MER per yr)"
+603,1,1,"ov_cost_trade","t,i,type","Regional trade costs (mio. USD05MER per yr)"
+604,1,1,"ov_cost_trade_forestry","t,i,type","Transport costs and taxes for the bilateral trade (Mio USD)"
+605,1,1,"ov_cost_transp","t,j,k,type","Transportation costs (mio. USD05MER per yr)"
+606,1,1,"ov_costs_overrate_cropdiff","t,i,type","Punishment costs for overrated cropland difference (mio. USD05 per yr)"
+607,1,1,"ov_dem_bioen","t,i,kall,type","Regional bioenergy demand (mio. tDM per yr)"
+608,1,1,"ov_dem_feed","t,i,kap,kall,type","Regional feed demand including byproducts (mio. tDM per yr)"
+609,1,1,"ov_dem_food","t,i,kall,type","Food demand (mio. tDM per yr)"
+610,1,1,"ov_dem_material","t,i,kall,type","Demand for material usage (mio. tDM per yr)"
+611,1,1,"ov_dem_processing","t,i,kall,type","Demand for processing use (mio. tDM per yr)"
+612,1,1,"ov_dem_seed","t,i,kall,type","Demand for seed (mio. tDM per yr)"
+613,1,1,"ov_emission_costs","t,i,type","Costs for emission rights for pollutants and greenhouse gases (mio. USD05MER per yr)"
+614,1,1,"ov_emissions_reg","t,i,emis_source,pollutants,type","Regional emissions by source and gas after technical mitigation N CH4 C (Tg per yr)"
+615,1,1,"ov_land","t,j,land,type","Land area of the different land types (mio. ha)"
+616,1,1,"ov_landdiff","t,type","Aggregated difference in land between current and previous time step (mio. ha)"
+617,1,1,"ov_landdiff_forestry","t,type","Aggregated difference in forestry land compared to previous timestep (mio. ha)"
+618,1,1,"ov_landdiff_natveg","t,type","Aggregated difference in natveg land compared to previous timestep (mio. ha)"
+619,1,1,"ov_landexpansion","t,j,land,type","Land expansion (mio. ha)"
+620,1,1,"ov_maccs_costs","t,i,type","Costs of technical mitigation of GHG emissions (mio. USD95MER per yr)"
+621,1,1,"ov_manure","t,i,kli,awms,npk,type","Calculation of manure excreted in confinements (mio t X)"
+622,1,1,"ov_manure_confinement","t,i,kli,awms_conf,npk,type","Manure excreted in confinements managed in different awms (mio t X)"
+623,1,1,"ov_manure_recycling","t,i,npk,type","Manure being recycled to croplands (mio t X)"
+624,1,1,"ov_nr_inorg_fert_costs","t,i,type","cost of inorganic fertilizers (mio. USD05MER per yr)"
+625,1,1,"ov_nr_inorg_fert_reg","t,i,land_ag,type","inorganic fertilizer application (Tg N per yr)"
+626,1,1,"ov_nr_som","t,j,type","Release of soil organic matter (Tg N per yr)"
+627,1,1,"ov_p_fert_costs","t,i,type","costs for mineral fertilizers (mio. USD05MER per yr)"
+628,1,1,"ov_prod","t,j,k,type","Production in each cell (mio. tDM per yr)"
+629,1,1,"ov_prod_reg","t,i,kall,type","Regional aggregated production (mio. tDM per yr)"
+630,1,1,"ov_res_biomass_ag","t,i,kcr,attributes,type","Production of aboveground residues in each region (mio. tDM)"
+631,1,1,"ov_res_biomass_bg","t,i,kcr,dm_nr,type","Production of belowground residues in each region (mio. tDM)"
+632,1,1,"ov_res_recycling","t,i,npk,type","Residues recycled to croplands in respective nutrients Nr P K units (mio. tX)"
+633,1,1,"ov_reward_cdr_aff","t,i,type","Regional revenues for carbon captured by afforestation (mio. USD05MER per yr)"
+634,1,1,"ov_secondary_overproduction","t,i,kall,kpr,type","Overproduction of secondary couple products (mio. tDM per yr)"
+635,1,1,"ov_supply","t,i,kall,type","Regional demand (mio. tDM per yr)"
+636,1,1,"ov_tau","t,i,type","Agricultural land use intensity tau (1)"
+637,1,1,"ov_tech_cost","t,i,type","Costs of TC (mio. USD05PPP per yr)"
+638,1,1,"ov_watdem","t,wat_dem,j,type","Water demand from different sectors (mio. m^3 per yr)"
+639,1,1,"ov_yld","t,j,kve,w,type","Yields (variable because of technical change) (tDM per ha per yr)"
+640,1,1,"ov10_landreduction","t,j,land,type","Land reduction (mio. ha)"
+641,1,1,"ov11_cost_reg","t,i,type","Regional costs (mio. USD05MER per yr)"
+642,1,1,"ov13_cost_tc","t,i,type","Technical change costs per region (mio. USD05PPP)"
+643,1,1,"ov13_tech_cost_annuity","t,i,type","Annuity costs of TC (mio. USD05PPP per yr)"
+644,1,1,"ov15_bmi_shr_overgroups","t,iso,sex,agegroup15,bmi_group15,type","Uncalibrated share of population groups belonging to a certain BMI group (1)"
+645,1,1,"ov15_bmi_shr_regr","t,iso,sex,age,bmi_group15,type","Uncalibrated share of population groups belonging to a certain BMI group (1)"
+646,1,1,"ov15_demand_regr","t,iso,regr15,type","Uncalibrated regression estimates of kcal shares (1)"
+647,1,1,"ov15_income_balance","t,iso,type","Balance variable to balance cases in which reduction in income is larger than the per capita GDP (USD05PPP per cap per yr)"
+648,1,1,"ov15_income_pc_real_ppp_iso","t,iso,type","Real income per cap (USD05PPP per cap)"
+649,1,1,"ov15_kcal_intake_total_regr","t,iso,type","Food intake (kcal per cap per day)"
+650,1,1,"ov15_kcal_regr","t,iso,kfo,type","Uncalibrated regression estimates of calorie demand (kcal per cap per day)"
+651,1,1,"ov15_kcal_regr_total","t,iso,type","Uncalibrated regression estimates of total per cap calories (kcal per cap per day)"
+652,1,1,"ov15_objective","t,type","Objective term (USD05PPP)"
+653,1,1,"ov15_regr_overgroups","t,iso,sex,agegroup15,bmi_tree15,type","Hierarchical tree parameter regressions (1)"
+654,1,1,"ov16_dem_waste","t,i,kall,type","Demand for waste (mio. tDM per yr)"
+655,1,1,"ov18_res_ag_burn","t,i,kcr,attributes,type","Residues burned on fields in respective attribute units DM GJ Nr P K WM C (mio. tX)"
+656,1,1,"ov18_res_ag_recycling","t,i,kcr,attributes,type","Recylcing of crop residues to soils in respective attribute units DM GJ Nr P K WM C (mio. tX)"
+657,1,1,"ov18_res_ag_removal","t,i,kcr,attributes,type","Removal of crop residues in respective attribute units DM GJ Nr P K WM C (mio. tX)"
+658,1,1,"ov20_dem_processing","t,i,processing_subst20,kpr,type","Demand for processing use by process (mio. tDM per yr)"
+659,1,1,"ov20_secondary_substitutes","t,i,ksd,kpr,type","Substitutes for inferior secondary products (mio. tDM per yr)"
+660,1,1,"ov21_cost_trade_reg","t,i,k_trade,type","Regional trade costs for each tradable commodity (mio. USD05MER per yr)"
+661,1,1,"ov21_excess_dem","t,k_trade,type","Global excess demand (mio. tDM per yr)"
+662,1,1,"ov21_excess_prod","t,i,k_trade,type","Regional excess production (mio. tDM per yr)"
+663,1,1,"ov32_avail_reuse","t,j,type","Defunct (1)"
+664,1,1,"ov32_cost_establishment","t,i,type","Cost of establishment calculated at the current time step (mio. USD)"
+665,1,1,"ov32_cost_harvest","t,i,type","Cost of timber harvesting (USD per ha)"
+666,1,1,"ov32_cost_recur","t,i,type","Recurring forest management costs (USD per ha)"
+667,1,1,"ov32_cost_trade_reg","t,i,kforestry,type","Interregional trade costs (mio. USD)"
+668,1,1,"ov32_cost_transp","t,i,type","Transportation costs (USD per m3)"
+669,1,1,"ov32_excess_dem","t,kforestry,type","Global excess demand (mio. ton DM)"
+670,1,1,"ov32_excess_prod","t,i,kforestry,type","Regional excess production (mio. ton DM)"
+671,1,1,"ov32_hvarea_forestry","t,j,kforestry,ac_sub,type","Area harvested for timber production (mio. ha)"
+672,1,1,"ov32_hvarea_other","t,j,kforestry,ac_sub,type","Harvested area of other land (mio. ha)"
+673,1,1,"ov32_hvarea_primforest","t,j,kforestry,type","Primary forest harvested (mio. ha)"
+674,1,1,"ov32_hvarea_secdforest","t,j,kforestry,ac_sub,type","Harvested secondary forest area (mio. ha)"
+675,1,1,"ov32_land","t,j,type32,ac,type","Forestry land pools (mio. ha)"
+676,1,1,"ov32_land_expansion","t,j,type32,ac,type","Land expansion (mio. ha)"
+677,1,1,"ov32_land_reduction","t,j,type32,ac,type","land reduction (mio. ha)"
+678,1,1,"ov32_missing_area_future","t,j,type","Defunct (1)"
+679,1,1,"ov32_prod","t,j,hvarea_timber,kforestry,type","Timber production (mio. m3)"
+680,1,1,"ov32_prod_external","t,j,kforestry,type","Production balance flow from heaven (mio. m3)"
+681,1,1,"ov32_prod_future_reg","t,i,kforestry,type","Future regional production (mio. m3)"
+682,1,1,"ov35_cost_harvest","t,i,type","Cost of harvesting natveg (mio. USD)"
+683,1,1,"ov35_cost_transp","t,i,type","Transport cost for harvest from natural vegetation (mio. USD)"
+684,1,1,"ov35_hvarea_other","t,j,kforestry,ac_sub,type","Harvested area of other land (mio. ha)"
+685,1,1,"ov35_hvarea_primforest","t,j,kforestry,type","Harvested area of primary forest (mio. ha)"
+686,1,1,"ov35_hvarea_secdforest","t,j,kforestry,ac_sub,type","Harvested area of secondary forest (mio. ha)"
+687,1,1,"ov35_other","t,j,ac,type","Detailed stock of other land (mio. ha)"
+688,1,1,"ov35_other_expansion","t,j,ac,type","Other land expansion compared to previous timestep (mio. ha)"
+689,1,1,"ov35_other_reduction","t,j,ac,type","Other land reduction compared to previous timestep (mio. ha)"
+690,1,1,"ov35_primforest_reduction","t,j,type","Primforest reduction compared to previous timestep (mio. ha)"
+691,1,1,"ov35_prod","t,j,land_natveg,kforestry,type","Timber production coming from natveg (mio. m3)"
+692,1,1,"ov35_prod_external","t,j,kforestry,type","Production balanceflow (mio. m3)"
+693,1,1,"ov35_secdforest","t,j,ac,type","Detailed stock of secdforest (mio. ha)"
+694,1,1,"ov35_secdforest_reduction","t,j,ac,type","Secdforest reduction compared to previous timestep (mio. ha)"
+695,1,1,"ov39_cost_landcon_annuity","t,j,land,type","Annuity costs of landconversion in the current timestep (mio. USD05MER per yr)"
+696,1,1,"ov41_AEI","t,j,type","Area equipped for irrigation in each grid cell (mio. ha)"
+697,1,1,"ov41_cost_AEI_annuity","t,i,type","Annuity costs of AEI expansion in the current time step (mio. USD04MER per yr)"
+698,1,1,"ov42_irrig_eff","t,j,type","Irrigation efficiency (1)"
+699,1,1,"ov43_watavail","t,wat_src,j,type","Water available from different sources (mio. m^3 per yr)"
+700,1,1,"ov50_nr_deposition","t,i,land,type","atmospheric deposition (Tg N per yr)"
+701,1,1,"ov50_nr_eff","t,i,type","cropland nutrient uptake efficiency (Tg N per yr)"
+702,1,1,"ov50_nr_eff_pasture","t,i,type","pasture nutrient uptake efficiency (Tg N per yr)"
+703,1,1,"ov50_nr_withdrawals","t,i,kcr,type","withdrawals of Nr from soils (Tg N per yr)"
+704,1,1,"ov52_carbon_stock_diff","t,j,land,c_pools,type","Change in carbon stocks compared to previous time step (mio. tC per time step)"
+705,1,1,"ov55_feed_intake","t,i,kli,awms,npk,type","Calculation of manure excreted in confinements (mio t X)"
+706,1,1,"ov56_emis_cell","t,j,emis_source,pollutants,type","Cellular emissions by source and gas after technical mitigation N CH4 C (Tg per yr)"
+707,1,1,"ov56_emission_costs_cell_oneoff","t,j,emis_cell_one56,type","Costs for emissions occuring only once in time (mio. USD05MER per yr)"
+708,1,1,"ov56_emission_costs_cell_yearly","t,j,emis_cell_yr56,type","Costs for emissions occuring yearly (mio. USD05MER per yr)"
+709,1,1,"ov56_emission_costs_reg_oneoff","t,i,emis_reg_one56,type","Costs for emissions occuring only once in time (mio. USD05MER per yr)"
+710,1,1,"ov56_emission_costs_reg_yearly","t,i,emis_reg_yr56,type","Costs for emissions occuring yearly (mio. USD05MER per yr)"
+711,1,1,"ov56_reward_cdr_aff","t,j,co2_forestry,type","Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)"
+712,1,1,"ov71_feed_balanceflow","t,j,kli_rum,kforage,type","Cellular feed balanceflow for forage feed for ruminant livestock (mio. tDM per yr)"
+713,1,1,"ov71_prod_rum","t,j,kli_rum,kforage,type","Production of forage fed ruminants within a cell (mio. tDM per yr)"
+714,1,1,"p12_interest","t,i","Interest rate in each region and timestep (% per yr)"
+715,1,1,"p13_tech_cost_past","t,i","Costs for TC from past (mio. USD05PPP per yr)"
+716,1,1,"p14_pyield_corr","t,i","Regional pasture management correction for historical time steps (1)"
+717,1,1,"p14_pyield_LPJ_reg","t_all,i","Regional average input yields aggregated from clusters with initial pasture area as weights (tDM per ha per yr)"
+718,1,1,"p15_balanceflow_kcal","t,i,kfo","Balance flow for mismatch between FAOSTAT and demand estimates (kcal per capita per day)"
+719,1,1,"p15_balanceflow_kcal_iso","t,iso,kfo","Balance flow for mismatch between FAOSTAT and demand estimates (kcal per capita per day)"
+720,1,1,"p15_balanceflow_kcal_lastcalibyear","iso,kfo","Balance flow of last historic time step for mismatch between FAOSTAT and demand estimates (kcal per capita per day)"
+721,1,1,"p15_bmi_shr","t,iso,sex,age,bmi_group15","Calibrated estimates BMI share for population groups (1)"
+722,1,1,"p15_bodyheight","t,iso,sex,age,estimates15","Body height (cm per cap)"
+723,1,1,"p15_bodyheight_calib","t,iso,sex,age_new_estimated15","Calibration factor for regional height differences (cm)"
+724,1,1,"p15_bodyweight","t,iso,sex,age,bmi_group15","Body weight (kg per cap)"
+725,1,1,"p15_convergence_measure","t","Convergence measure to decide for continuation or stop of food_demand - magpie iteration (1)"
+726,1,1,"p15_delta_income","t,i","Regional change in per capita income due to price shock on regional level (1)"
+727,1,1,"p15_income_pc_real_ppp","t,i","Regional per capita income after price shock on regional level (USD05PPP per capita)"
+728,1,1,"p15_iteration_counter","t","Number of iterations required for reaching an equilibrium between food demand model and magpie (1)"
+729,1,1,"p15_kcal_calib","t,iso,kfo","Balance flow to diverge from mean calories of regressions (kcal per cap per day)"
+730,1,1,"p15_kcal_calib_lastcalibyear","iso,kfo","Calibration factor for the last year with observations (kcal per cap per day)"
+731,1,1,"p15_kcal_growth_food","t_all,iso,underaged15","Average per capita demand for body size growth relevant food items in the last three 5-year steps (kcal per capita per day)"
+732,1,1,"p15_kcal_intake_total","t,iso","Total food intake in a country (kcal per capita per day)"
+733,1,1,"p15_kcal_pc","t,i,kfo","Per capita consumption in food demand model after price shock on regional level (kcal per capita per day)"
+734,1,1,"p15_kcal_pc_calibrated","t,i,kfo","Calibrated per capita consumption in food demand model after price shock (kcal per capita per day)"
+735,1,0,"p15_kcal_pc_initial","t,i,kfo","Per capita consumption in food demand model before price shock on regional level (kcal per capita per day)"
+736,1,1,"p15_kcal_pc_initial_iso","t,iso,kfo","Per capita consumption in food demand model before price shock on country level (kcal per capita per day)"
+737,1,1,"p15_kcal_pc_iso","t,iso,kfo","Per capita consumption in food demand model after price shock on country level (kcal per capita per day)"
+738,1,1,"p15_kcal_regr","t,iso,kfo","Uncalibrated regression estimates of calorie demand (kcal per cap per day)"
+739,1,1,"p15_lastiteration_delta_income","i","Regional change in per capita income due to price shock of last iteration (1)"
+740,1,1,"p15_modelstat","t","Model solver status (1)"
+741,1,1,"p15_physical_activity_level","t,iso,sex,age","Physical activity levels in PAL relative to basic metabolic rate BMR (kcal per kcal)"
+742,1,1,"p15_prices_kcal","t,iso,kfo","Prices from MAgPIE after optimization (USD05PPP per kcal)"
+743,1,1,"p16_volumetric_conversion","kforestry","Volumetric Conversion parameter for timber (1)"
+744,1,1,"p32_aff_pol","t,j","INDC forest stock (Mha)"
+745,1,1,"p32_aff_pol_timestep","t,j","INDC afforestation per time step (Mha)"
+746,1,1,"p32_aff_pot","t,j","Potential afforestation area (Mha)"
+747,1,0,"p32_carbon_density","t,j,type32,ac,c_pools","Carbon density for ac and c_pools (tC per ha)"
+748,1,0,"p32_demand_ext","t_ext,i,kforestry","Extended demand for timber beyound simulation (mio. m3)"
+749,1,0,"p32_exp_shr_ext","t_ext,i,kforestry","Extended export share (1)"
+750,1,1,"p32_forestry_management","i","Plantation forest management factors on world region levels (1)"
+751,1,0,"p32_hvcost_ha","i","Timber harvesting cost per ha (USD)"
+752,1,1,"p32_land","t,j,type32,ac","Forestry land for each cell wood type and age class before and after optimization (mio. ha)"
+753,1,1,"p32_plant_ini_ac","j","Initialization of plantation area (mio. ha)"
+754,1,0,"p32_production_ratio_ext","i,t_ext","Extened production ratio (1)"
+755,1,1,"p32_protect_avail","t,j","Mature trees which are protected (mio. ha)"
+756,1,1,"p32_rot_length","i","Regional rotation length of plantations (yr)"
+757,1,1,"p32_rotation_cellular","j","Rotation length translated to age classes on cellular level (1)"
+758,1,0,"p32_rotation_reg","i","Regional rotation length of plantations translated to age class equivalent for future (1)"
+759,1,0,"p32_selfsuff_ext","t_ext,i,kforestry","Self sufficiency for timber products in extended time frame (1)"
+760,1,0,"p32_trade_balanceflow_ext","t_ext,kforestry","Extended trade balance flow numbers (1)"
+761,1,1,"p32_yield_forestry_ac","t,j,ac","Age class specific yield of plantation forests (m3 per ha per yr)"
+762,1,1,"p35_min_forest","t,j","Minimum forest stock [land protection policies] (Mha)"
+763,1,1,"p35_min_other","t,j","Minimum other land stock [land protection policies] (Mha)"
+764,1,1,"p35_other","t,j,ac","Other land per age class before and after optimization (mio. ha)"
+765,1,1,"p35_protect_shr","t,j,prot_type","Protection share for primforest secdforest and other land (1)"
+766,1,1,"p35_recovered_forest","t,j,ac","Recovered forest (mio. ha)"
+767,1,1,"p35_save_other","t,j","Other land protection (mio. ha)"
+768,1,1,"p35_save_primforest","t,j","Primforest protection (mio. ha)"
+769,1,1,"p35_save_secdforest","t,j","Secdforest protection (mio. ha)"
+770,1,1,"p35_secdforest","t,j,ac","Secdforest per age class before and after optimization (mio. ha)"
+771,1,1,"p35_yield_natveg","t,j,ac","Yield of natural vegetation (m3 per ha per yr)"
+772,1,1,"p35_yield_primforest","t,j","Yield of primary vegetation (m3 per ha per yr)"
+773,1,1,"p39_cost_landcon_past","t,j,land","Costs for landconversion from the past (mio. USD05MER per yr)"
+774,1,1,"p41_AEI_start","t,j","Area equipped for irrigation at the beginning of each time step (mio. ha)"
+775,1,1,"p41_cost_AEI_past","t,i","Costs for AEI expansion from the past (mio. USD04MER)"
+776,1,1,"p56_ghg_price_growth_rate","t,i,pollutants","Growth rate of certificate price (% per yr)"
+777,1,1,"p56_ghg_price_growth_rate_avg","i,pollutants","Average over time of growth rate of certificate price (% per yr)"
+778,1,1,"p57_maccs_costs_integral","t,i,emis_source,pollutants","Costs of technical mitigation (USD95MER per tC)"
+779,1,1,"p62_dem_food_lh","i","Food demand in last historical timestep (mio. tDM per yr)"
+780,1,1,"p62_dem_material_lh","i,kall","Material demand in last historical timestep (mio. tDM per yr)"
+781,1,1,"p70_cattle_stock_proxy","t,i","Proxy for cattle stocks needed to fullfil domestic food demand (mio. animals per yr)"
+782,1,1,"p70_incr_cattle","t,i","Change in estimated cattle stocks attributed to food demand projections (1)"
+783,1,1,"p80_modelstat","t","modelstat indicator (1)"
+784,1,1,"pc13_land","i","Crop land area per region (mio ha)"
+785,1,1,"pc13_tau","i","Tau factor of the previous time step (1)"
+786,1,1,"pc13_tcguess","i","Guess for annual tc rates in the next time step (1)"
+787,1,1,"pc13_tech_cost_past","i","Current costs for TC from past (mio. USD05PPP per yr)"
+788,1,1,"pc32_demand_forestry_future","i,kforestry","Future timber demand (mio. m3)"
+789,1,1,"pc32_exp_shr_future","i,kforestry","Future export share (1)"
+790,1,1,"pc32_land","j,type32,ac","Forestry land per forestry land type initialization of the optimization (mio. ha)"
+791,1,1,"pc32_production_ratio_future","i","Future production ratio (1s)"
+792,1,1,"pc32_selfsuff_forestry_future","i,kforestry","Future self sufficiency ratio for timber products (1)"
+793,1,1,"pc32_timestep","","Timestep (1)"
+794,1,1,"pc32_trade_bal_reduction_future","","Future trade balance reduction (1)"
+795,1,1,"pc32_trade_balanceflow_future","kforestry","Future trade balanceflow (1)"
+796,1,1,"pc32_yield_forestry_future","j","Cellular timber yield expected in the future (m3 per ha per year)"
+797,1,1,"pc32_yield_forestry_mature_future","j","Future yield of matured tree after rotation period (m3 per ha per yr)"
+798,1,1,"pc35_other","j,ac","Other land per aggregated age class (mio. ha)"
+799,1,1,"pc35_secdforest","j,ac","Secdforest per aggregated age class (mio. ha)"
+800,1,1,"pc39_cost_landcon_past","j,land","Costs for landconversion from the past in the current time step (mio. USD05MER per yr)"
+801,1,1,"pc41_AEI_start","j","Area equipped for irrigation at the beginning of current time step (mio. ha)"
+802,1,1,"pc41_cost_AEI_past","i","Current costs for AEI expansion from the past (mio. USD04MER)"
+803,1,1,"pc41_unitcost_AEI","i","Unit cost of AEI expansion (USD04MER per ha)"
+804,1,1,"pc52_carbon_density_start","t,j,c_pools","Carbon density for new land in other land pool (tC per ha)"
+805,1,1,"pc52_carbon_stock","j,land,c_pools","Current carbon in vegetation soil and litter for different land types (mio. tC)"
+806,1,1,"pcm_land","j,land","Land area in previous time step (mio. ha)"
+807,1,1,"pm_carbon_density_ac","t,j,ac,c_pools","Carbon density for age classes and carbon pools (tC per ha)"
+808,1,1,"pm_climate_class","j,clcl","Koeppen-Geiger climate classification on the simulation cluster level (1)"
+809,1,1,"pm_interest","i","Current interest rate in each region (% per yr)"
+810,1,1,"pm_kcal_pc_initial","t,i,kfo","Per capita consumption in food demand model before price shock (kcal per capita per day)"
+811,1,1,"pm_land_start","j,land","Land initialization area (mio. ha)"
+812,1,1,"pm_past_mngmnt_factor","t,i","Regional pasture management intensification factor (1)"
+813,1,1,"s_use_gdx","","use of gdx files"
+814,1,1,"s12_intercept_b","","Intercept of the linear relationship between development state and interest rate (1)"
+815,1,1,"s12_max_dev","","Maximum development_state of all regions in 1995 (1)"
+816,1,1,"s12_min_dev","","Minimum development_state of all regions in 1995 (1)"
+817,1,1,"s12_slope_a","","Slope of the linear relationship between development state and interest rate (1)"
+818,1,1,"s15_calibrate","","Calibration switch (1=calibrated 2=pure regresssion outcomes) (1)"
+819,1,1,"s15_convergence","","Convergence criterion (1)"
+820,1,1,"s15_count","","Loop counter for interpolating body height estimates between longer timesteps (1)"
+821,1,1,"s15_elastic_demand","","elastic demand switch (1=elastic 0=exogenous) (1)"
+822,1,1,"s15_maxiter","","Scalar defining maximum number of iterations (1)"
+823,1,0,"s15_year","","Current year as integer value (yr)"
+824,1,1,"s21_trade_tariff","","Trade tariff switch (1=on 0=off) (1)"
+825,1,1,"s31_fac_req_past","","Factor requirements (USD05MER per tDM)"
+826,1,1,"s32_max_aff_area","","maximum total global afforestation in Mha"
+827,1,1,"s32_planing_horizon","","Afforestation planing horizon (years)"
+828,1,1,"s32_shift","","number of 5-year age-classes corresponding to current time step length"
+829,1,0,"s32_trade_tariff","",""
+830,1,1,"s35_shift","","number of 5-year age-classes corresponding to current time step length (1)"
+831,1,1,"s39_cost_clearing","","Global land clearing costs (USD05MER per ton C)"
+832,1,1,"s39_cost_establish","","Global land establishment costs (USD05MER per hectare)"
+833,1,1,"s40_pasture_transport_costs","","Transport costs for pasture (USD05MER per tDM per min)"
+834,1,1,"s42_env_flow_base_fraction","","Fraction of available water that is reserved for the environment where no EFP policy is implemented (1)"
+835,1,1,"s42_env_flow_fraction","","Fraction of available water that is reserved for under protection policies (1)"
+836,1,1,"s42_env_flow_scenario","","EFP scenario. (1)"
+837,1,1,"s42_irrig_eff_scenario","","Scenario for irrigation efficiency (1)"
+838,1,1,"s42_irrigation_efficiency","","Value of irrigation efficiency (1)"
+839,1,1,"s42_reserved_fraction","","Fraction of available water that is reserved for industry electricity and domestic use (1)"
+840,1,1,"s50_fertilizer_costs","","Costs of fertilizer (USD05MER per tN)"
+841,1,1,"s56_limit_ch4_n2o_price","","upper limit for CH4 and N2O GHG prices (USD05MER per tC)"
+842,1,1,"s56_reward_neg_emis","","reward CDR from all sources (-Inf) or only from afforestation (0) (1)"
+843,1,1,"s62_historical","","Switch for turning off historical material demand (1)"
+844,1,1,"s70_pyld_intercept","","Intercept of linear relationship determining pasture intensification (1)"
+845,1,1,"s71_lp_fix","","Switch to fix equations to linear relation (Logical)"
+846,1,1,"s80_counter","","counter (1)"
+847,1,1,"s80_maxiter","","maximal solve iterations if modelstat is > 2 (1)"
+848,1,1,"s80_optfile","","switch to use specfied solver settings (1)"
+849,1,1,"sm_intersolve","","if 0 finish loop or if 1 iterate optimization (1)"
+850,2,1,"v10_landreduction","j,land","Land reduction (mio. ha)"
+851,2,1,"v11_cost_reg","i","Regional costs (mio. USD05MER per yr)"
+852,2,1,"v13_cost_tc","i","Technical change costs per region (mio. USD05PPP)"
+853,2,1,"v13_tech_cost_annuity","i","Annuity costs of TC (mio. USD05PPP per yr)"
+854,2,1,"v15_bmi_shr_overgroups","iso,sex,agegroup15,bmi_group15","Uncalibrated share of population groups belonging to a certain BMI group (1)"
+855,2,1,"v15_bmi_shr_regr","iso,sex,age,bmi_group15","Uncalibrated share of population groups belonging to a certain BMI group (1)"
+856,2,1,"v15_demand_regr","iso,regr15","Uncalibrated regression estimates of kcal shares (1)"
+857,2,1,"v15_income_balance","iso","Balance variable to balance cases in which reduction in income is larger than the per capita GDP (USD05PPP per cap per yr)"
+858,2,1,"v15_income_pc_real_ppp_iso","iso","Real income per cap (USD05PPP per cap)"
+859,2,1,"v15_kcal_intake_total_regr","iso","Food intake (kcal per cap per day)"
+860,2,1,"v15_kcal_regr","iso,kfo","Uncalibrated regression estimates of calorie demand (kcal per cap per day)"
+861,2,1,"v15_kcal_regr_total","iso","Uncalibrated regression estimates of total per cap calories (kcal per cap per day)"
+862,2,1,"v15_objective","","Objective term (USD05PPP)"
+863,2,1,"v15_regr_overgroups","iso,sex,agegroup15,bmi_tree15","Hierarchical tree parameter regressions (1)"
+864,2,1,"v16_dem_waste","i,kall","Demand for waste (mio. tDM per yr)"
+865,2,1,"v18_res_ag_burn","i,kcr,attributes","Residues burned on fields in respective attribute units DM GJ Nr P K WM C (mio. tX)"
+866,2,1,"v18_res_ag_recycling","i,kcr,attributes","Recylcing of crop residues to soils in respective attribute units DM GJ Nr P K WM C (mio. tX)"
+867,2,1,"v18_res_ag_removal","i,kcr,attributes","Removal of crop residues in respective attribute units DM GJ Nr P K WM C (mio. tX)"
+868,2,1,"v20_dem_processing","i,processing_subst20,kpr","Demand for processing use by process (mio. tDM per yr)"
+869,2,1,"v20_secondary_substitutes","i,ksd,kpr","Substitutes for inferior secondary products (mio. tDM per yr)"
+870,2,1,"v21_cost_trade_reg","i,k_trade","Regional trade costs for each tradable commodity (mio. USD05MER per yr)"
+871,2,1,"v21_excess_dem","k_trade","Global excess demand (mio. tDM per yr)"
+872,2,1,"v21_excess_prod","i,k_trade","Regional excess production (mio. tDM per yr)"
+873,2,1,"v32_avail_reuse","j","Defunct (1)"
+874,2,1,"v32_cost_establishment","i","Cost of establishment calculated at the current time step (mio. USD)"
+875,2,1,"v32_cost_harvest","i","Cost of timber harvesting (USD per ha)"
+876,2,1,"v32_cost_recur","i","Recurring forest management costs (USD per ha)"
+877,2,1,"v32_cost_trade_reg","i,kforestry","Interregional trade costs (mio. USD)"
+878,2,1,"v32_cost_transp","i","Transportation costs (USD per m3)"
+879,2,1,"v32_excess_dem","kforestry","Global excess demand (mio. ton DM)"
+880,2,1,"v32_excess_prod","i,kforestry","Regional excess production (mio. ton DM)"
+881,2,1,"v32_hvarea_forestry","j,kforestry,ac_sub","Area harvested for timber production (mio. ha)"
+882,2,1,"v32_hvarea_other","j,kforestry,ac_sub","Harvested area of other land (mio. ha)"
+883,2,1,"v32_hvarea_primforest","j,kforestry","Primary forest harvested (mio. ha)"
+884,2,1,"v32_hvarea_secdforest","j,kforestry,ac_sub","Harvested secondary forest area (mio. ha)"
+885,2,1,"v32_land","j,type32,ac","Forestry land pools (mio. ha)"
+886,2,1,"v32_land_expansion","j,type32,ac","Land expansion (mio. ha)"
+887,2,1,"v32_land_reduction","j,type32,ac","land reduction (mio. ha)"
+888,2,1,"v32_missing_area_future","j","Defunct (1)"
+889,2,1,"v32_prod","j,hvarea_timber,kforestry","Timber production (mio. m3)"
+890,2,1,"v32_prod_external","j,kforestry","Production balance flow from heaven (mio. m3)"
+891,2,1,"v32_prod_future_reg","i,kforestry","Future regional production (mio. m3)"
+892,2,1,"v35_cost_harvest","i","Cost of harvesting natveg (mio. USD)"
+893,2,1,"v35_cost_transp","i","Transport cost for harvest from natural vegetation (mio. USD)"
+894,2,1,"v35_hvarea_other","j,kforestry,ac_sub","Harvested area of other land (mio. ha)"
+895,2,1,"v35_hvarea_primforest","j,kforestry","Harvested area of primary forest (mio. ha)"
+896,2,1,"v35_hvarea_secdforest","j,kforestry,ac_sub","Harvested area of secondary forest (mio. ha)"
+897,2,1,"v35_other","j,ac","Detailed stock of other land (mio. ha)"
+898,2,1,"v35_other_expansion","j,ac","Other land expansion compared to previous timestep (mio. ha)"
+899,2,1,"v35_other_reduction","j,ac","Other land reduction compared to previous timestep (mio. ha)"
+900,2,1,"v35_primforest_reduction","j","Primforest reduction compared to previous timestep (mio. ha)"
+901,2,1,"v35_prod","j,land_natveg,kforestry","Timber production coming from natveg (mio. m3)"
+902,2,1,"v35_prod_external","j,kforestry","Production balanceflow (mio. m3)"
+903,2,1,"v35_secdforest","j,ac","Detailed stock of secdforest (mio. ha)"
+904,2,1,"v35_secdforest_reduction","j,ac","Secdforest reduction compared to previous timestep (mio. ha)"
+905,2,1,"v39_cost_landcon_annuity","j,land","Annuity costs of landconversion in the current timestep (mio. USD05MER per yr)"
+906,2,1,"v41_AEI","j","Area equipped for irrigation in each grid cell (mio. ha)"
+907,2,1,"v41_cost_AEI_annuity","i","Annuity costs of AEI expansion in the current time step (mio. USD04MER per yr)"
+908,2,1,"v42_irrig_eff","j","Irrigation efficiency (1)"
+909,2,1,"v43_watavail","wat_src,j","Water available from different sources (mio. m^3 per yr)"
+910,2,1,"v50_nr_deposition","i,land","atmospheric deposition (Tg N per yr)"
+911,2,1,"v50_nr_eff","i","cropland nutrient uptake efficiency (Tg N per yr)"
+912,2,1,"v50_nr_eff_pasture","i","pasture nutrient uptake efficiency (Tg N per yr)"
+913,2,1,"v50_nr_withdrawals","i,kcr","withdrawals of Nr from soils (Tg N per yr)"
+914,2,1,"v52_carbon_stock_diff","j,land,c_pools","Change in carbon stocks compared to previous time step (mio. tC per time step)"
+915,2,1,"v55_feed_intake","i,kli,awms,npk","Calculation of manure excreted in confinements (mio t X)"
+916,2,1,"v56_emis_cell","j,emis_source,pollutants","Cellular emissions by source and gas after technical mitigation N CH4 C (Tg per yr)"
+917,2,1,"v56_emission_costs_cell_oneoff","j,emis_cell_one56","Costs for emissions occuring only once in time (mio. USD05MER per yr)"
+918,2,1,"v56_emission_costs_cell_yearly","j,emis_cell_yr56","Costs for emissions occuring yearly (mio. USD05MER per yr)"
+919,2,1,"v56_emission_costs_reg_oneoff","i,emis_reg_one56","Costs for emissions occuring only once in time (mio. USD05MER per yr)"
+920,2,1,"v56_emission_costs_reg_yearly","i,emis_reg_yr56","Costs for emissions occuring yearly (mio. USD05MER per yr)"
+921,2,1,"v56_reward_cdr_aff","j,co2_forestry","Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)"
+922,2,1,"v71_feed_balanceflow","j,kli_rum,kforage","Cellular feed balanceflow for forage feed for ruminant livestock (mio. tDM per yr)"
+923,2,1,"v71_prod_rum","j,kli_rum,kforage","Production of forage fed ruminants within a cell (mio. tDM per yr)"
+924,2,1,"vm_area","j,kcr,w","Agricultural production area (mio. ha)"
+925,2,1,"vm_btm_cell","j,emis_source,pollutants","Cellular emissions before technical mitigation (Tg per yr)"
+926,2,1,"vm_btm_reg","i,emis_source,pollutants","Regional emissions before technical mitigation (Tg per yr)"
+927,2,1,"vm_carbon_stock","j,land,c_pools","Carbon stock in vegetation soil and litter for different land types (mio. tC)"
+928,2,1,"vm_carbon_stock_reduction","j,land,c_pools","Reduction in carbon stocks compared to previous time step (mio. tC per time step)"
+929,2,1,"vm_cdr_aff","j,co2_forestry","Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)"
+930,2,1,"vm_cost_AEI","i","Irrigation expansion costs (mio. USD04MER per yr)"
+931,2,1,"vm_cost_fore","i","Forestry costs (Mio USD)"
+932,2,1,"vm_cost_glo","","Total costs of production (mio. USD05MER per yr)"
+933,2,1,"vm_cost_landcon","j,land","Land conversion costs (mio. USD05MER per yr)"
+934,2,1,"vm_cost_processing","i","Processing costs (mio. USD05MER per yr)"
+935,2,1,"vm_cost_prod","i,kall","Factor costs (mio. USD05MER per yr)"
+936,2,1,"vm_cost_trade","i","Regional trade costs (mio. USD05MER per yr)"
+937,2,1,"vm_cost_trade_forestry","i","Transport costs and taxes for the bilateral trade (Mio USD)"
+938,2,1,"vm_cost_transp","j,k","Transportation costs (mio. USD05MER per yr)"
+939,2,1,"vm_costs_overrate_cropdiff","i","Punishment costs for overrated cropland difference (mio. USD05 per yr)"
+940,2,1,"vm_dem_bioen","i,kall","Regional bioenergy demand (mio. tDM per yr)"
+941,2,1,"vm_dem_feed","i,kap,kall","Regional feed demand including byproducts (mio. tDM per yr)"
+942,2,1,"vm_dem_food","i,kall","Food demand (mio. tDM per yr)"
+943,2,1,"vm_dem_material","i,kall","Demand for material usage (mio. tDM per yr)"
+944,2,1,"vm_dem_processing","i,kall","Demand for processing use (mio. tDM per yr)"
+945,2,1,"vm_dem_seed","i,kall","Demand for seed (mio. tDM per yr)"
+946,2,1,"vm_emission_costs","i","Costs for emission rights for pollutants and greenhouse gases (mio. USD05MER per yr)"
+947,2,1,"vm_emissions_reg","i,emis_source,pollutants","Regional emissions by source and gas after technical mitigation N CH4 C (Tg per yr)"
+948,2,1,"vm_land","j,land","Land area of the different land types (mio. ha)"
+949,2,1,"vm_landdiff","","Aggregated difference in land between current and previous time step (mio. ha)"
+950,2,1,"vm_landdiff_forestry","","Aggregated difference in forestry land compared to previous timestep (mio. ha)"
+951,2,1,"vm_landdiff_natveg","","Aggregated difference in natveg land compared to previous timestep (mio. ha)"
+952,2,1,"vm_landexpansion","j,land","Land expansion (mio. ha)"
+953,2,1,"vm_maccs_costs","i","Costs of technical mitigation of GHG emissions (mio. USD95MER per yr)"
+954,2,1,"vm_manure","i,kli,awms,npk","Calculation of manure excreted in confinements (mio t X)"
+955,2,1,"vm_manure_confinement","i,kli,awms_conf,npk","Manure excreted in confinements managed in different awms (mio t X)"
+956,2,1,"vm_manure_recycling","i,npk","Manure being recycled to croplands (mio t X)"
+957,2,1,"vm_nr_inorg_fert_costs","i","cost of inorganic fertilizers (mio. USD05MER per yr)"
+958,2,1,"vm_nr_inorg_fert_reg","i,land_ag","inorganic fertilizer application (Tg N per yr)"
+959,2,1,"vm_nr_som","j","Release of soil organic matter (Tg N per yr)"
+960,2,1,"vm_p_fert_costs","i","costs for mineral fertilizers (mio. USD05MER per yr)"
+961,2,1,"vm_prod","j,k","Production in each cell (mio. tDM per yr)"
+962,2,1,"vm_prod_reg","i,kall","Regional aggregated production (mio. tDM per yr)"
+963,2,1,"vm_res_biomass_ag","i,kcr,attributes","Production of aboveground residues in each region (mio. tDM)"
+964,2,1,"vm_res_biomass_bg","i,kcr,dm_nr","Production of belowground residues in each region (mio. tDM)"
+965,2,1,"vm_res_recycling","i,npk","Residues recycled to croplands in respective nutrients Nr P K units (mio. tX)"
+966,2,1,"vm_reward_cdr_aff","i","Regional revenues for carbon captured by afforestation (mio. USD05MER per yr)"
+967,2,1,"vm_secondary_overproduction","i,kall,kpr","Overproduction of secondary couple products (mio. tDM per yr)"
+968,2,1,"vm_supply","i,kall","Regional demand (mio. tDM per yr)"
+969,2,1,"vm_tau","i","Agricultural land use intensity tau (1)"
+970,2,1,"vm_tech_cost","i","Costs of TC (mio. USD05PPP per yr)"
+971,2,1,"vm_watdem","wat_dem,j","Water demand from different sectors (mio. m^3 per yr)"
+972,2,1,"vm_yld","j,kve,w","Yields (variable because of technical change) (tDM per ha per yr)"
+973,3,1,"q10_land","j","Land conversion constraint (mio. ha)"
+974,3,1,"q10_landdiff","","Land difference constraint (mio. ha)"
+975,3,1,"q10_landexpansion","j,land","Land expansion constraint (mio. ha)"
+976,3,1,"q10_landreduction","j,land","Land reduction constraint (mio. ha)"
+977,3,1,"q11_cost_glo","","Objective function (mio. USD05MER per yr)"
+978,3,1,"q11_cost_reg","i","Regional cost constraint (mio. USD05MER per yr)"
+979,3,1,"q13_cost_tc","i","Costs for TC (mio. USD05PPP per yr)"
+980,3,1,"q13_tech_cost","i","Total costs for TC (mio. USD05PPP)"
+981,3,1,"q13_tech_cost_annuity","i","Annuity costs for TC (mio. USD05PPP per yr)"
+982,3,1,"q14_yield_crop","j,kcr,w","Crop yields (tDM per ha per yr)"
+983,3,1,"q14_yield_past","j,w","Pasture yields (tDM per ha per yr)"
+984,3,1,"q15_aim","","Objective function of food demand model (mio. USD05PPP)"
+985,3,1,"q15_bmi_shr_agg","iso,sex,age,bmi_group15","Disaggregates age groups from overarching groups (1)"
+986,3,1,"q15_bmi_shr_high","iso,sex,agegroup15","Estimates BMI share for population groups with high BMI (1)"
+987,3,1,"q15_bmi_shr_low","iso,sex,agegroup15","Estimates BMI share for population groups with very low BMI (1)"
+988,3,1,"q15_bmi_shr_medium","iso,sex,agegroup15","Estimates BMI share for population groups with medium BMI(1)"
+989,3,1,"q15_bmi_shr_medium_high","iso,sex,agegroup15","Estimates BMI share for population groups with medium to high BMI (1)"
+990,3,1,"q15_bmi_shr_veryhigh","iso,sex,agegroup15","Estimates BMI share for population groups with very high BMI (1)"
+991,3,1,"q15_bmi_shr_verylow","iso,sex,agegroup15","Estimates BMI share for population groups with low BMI (1)"
+992,3,1,"q15_budget","iso","Household budget constraint (USD05PPP per cap per day)"
+993,3,1,"q15_food_demand","i,kfo","Food demand (mio. kcal)"
+994,3,1,"q15_foodtree_kcal_animals","iso,kfo_ap","Demand for animal products (kcal per cap per day)"
+995,3,1,"q15_foodtree_kcal_processed","iso,kfo_pf","Demand for processed products (kcal per cap per day)"
+996,3,1,"q15_foodtree_kcal_staples","iso,kfo_st","Demand for staple products (kcal per cap per day)"
+997,3,1,"q15_foodtree_kcal_vegetables","iso","Demand for vegetable and fruit products (kcal per cap per day)"
+998,3,1,"q15_intake","iso","Estimates average intake for the entire country (kcal per cap per day)"
+999,3,1,"q15_regr","iso,regr15","Estimates parameters for food demand and dietary composition (1)"
+1000,3,1,"q15_regr_bmi_shr","iso,sex,agegroup15,bmi_tree15","Estimates regression parameters for BMI regression shares (1)"
+1001,3,1,"q15_regr_kcal","iso","Per capita total demand (kcal per cap per day)"
+1002,3,1,"q16_seed_demand","i,kcr","Seed demand (mio. tDM per yr)"
+1003,3,1,"q16_supply_crops","i,kcr","Supply balance of crops (mio. tDM per yr)"
+1004,3,1,"q16_supply_forestry","i,kforestry","Forestry demand (mio. m3 per yr)"
+1005,3,1,"q16_supply_livestock","i,kap","Supply balance of livestock (mio. tDM per yr)"
+1006,3,1,"q16_supply_pasture","i","Supply balance of pasture (mio. tDM per yr)"
+1007,3,1,"q16_supply_residues","i,kres","Supply balance of crop residues (mio. tDM per yr)"
+1008,3,1,"q16_supply_secondary","i,ksd","Supply balance of secondary products (mio. tDM per yr)"
+1009,3,1,"q16_waste_demand","i,kall","Waste generation (mio. tDM per yr)"
+1010,3,1,"q17_prod_reg","i,k","Regional production (mio. tDM per yr)"
+1011,3,1,"q18_cost_prod_res","i,kres","Production costs of harvesting crop residues (mio. USD05MER)"
+1012,3,1,"q18_prod_res_ag_reg","i,kcr,attributes","Production constraint of aboveground residues (mio. tDM)"
+1013,3,1,"q18_prod_res_bg_reg","i,kcr,dm_nr","Production constraint of belowground residues (mio. tDM)"
+1014,3,1,"q18_res_field_balance","i,kcr,attributes","Calculation of the residues amount recycled to soils (mio. tDM)"
+1015,3,1,"q18_res_field_burn","i,kcr,attributes","Fixing of the residues amount burned in a region in respective attribute units DM GJ Nr P K WM C (mio. tX)"
+1016,3,1,"q18_res_recycling_nr","i","Nutrient recycling of reaactive nitrogen (mio. tNr)"
+1017,3,1,"q18_res_recycling_pk","i,pk18","Nutrient recycling of phosphorus and potash (mio. tX)"
+1018,3,1,"q18_translate","i,kres,attributes","Transformation of the multiple crop residues into supply balance crop redisues in respective attribute units DM GJ Nr P K WM C (mio. tX)"
+1019,3,1,"q20_processing","i,kpr,ksd","Processing equation (mio. tDM per yr)"
+1020,3,1,"q20_processing_aggregation_cereals","i,kcereals20","Connecting processing activity to food use for milling (mio. tDM per yr)"
+1021,3,1,"q20_processing_aggregation_cotton","i","Connecting processing activity to production for cotton ginning (mio. tDM per yr)"
+1022,3,1,"q20_processing_aggregation_nocereals","i,kpr","Connecting processing activity to processing flows (mio. tDM per yr)"
+1023,3,1,"q20_processing_costs","i","Processing costs (mio. USD05MER per yr)"
+1024,3,1,"q20_processing_substitution_brans","i","Substitution of brans by cereals (mio. tDM per yr)"
+1025,3,1,"q20_processing_substitution_oils","i","Substitution of branoils by other oils (mio. tDM per yr)"
+1026,3,1,"q21_cost_trade","i","Regional trade costs (mio. USD05MER per yr)"
+1027,3,1,"q21_cost_trade_reg","i,k_trade","Regional trade costs for each tradable commodity (mio. USD05MER per yr)"
+1028,3,1,"q21_excess_dem","k_trade","Global excess demand (mio. tDM per yr)"
+1029,3,1,"q21_excess_supply","i,k_trade","Regional excess production (mio. tDM per yr)"
+1030,3,1,"q21_notrade","i,k_notrade","Regional production constraint of non-tradable commodities (mio. tDM per yr)"
+1031,3,1,"q21_trade_glo","k_trade","Global production constraint (mio. tDM per yr)"
+1032,3,1,"q21_trade_reg","i,k_trade","Regional trade balances i.e. minimum self-sufficiency ratio (1)"
+1033,3,1,"q21_trade_reg_up","i,k_trade","Regional trade balances i.e. maximum self-sufficiency ratio (1)"
+1034,3,1,"q30_carbon","j,c_pools","Cropland carbon content calculation (mio. tC)"
+1035,3,1,"q30_cropland","j","Total cropland calculation (mio. ha)"
+1036,3,1,"q30_prod","j,kcr","Production of cropped products (mio. tDM)"
+1037,3,1,"q30_rotation_max","j,crp30,w","Local maximum rotational constraints (mio. ha)"
+1038,3,1,"q30_rotation_min","j,crp30,w","Local minimum rotational constraints (mio. ha)"
+1039,3,1,"q30_suitability","j","Suitability constraint (mio. ha)"
+1040,3,1,"q31_carbon","j,c_pools","Carbon content calculation for pasture (mio tC)"
+1041,3,1,"q31_cost_prod_past","i","Costs for putting animals on pastures (mio. USD05MER per yr)"
+1042,3,1,"q31_prod","j","Cellular pasture production constraint (mio. tDM per yr)"
+1043,3,1,"q32_aff_pol","j","afforestation policy constraint"
+1044,3,1,"q32_avail_reuse","j",""
+1045,3,1,"q32_carbon","j,c_pools","forestry carbon stock calculation"
+1046,3,1,"q32_cdr_aff","j,co2_forestry","calculation of CDR from afforestation"
+1047,3,1,"q32_cost_establishment","i",""
+1048,3,1,"q32_cost_harvest","i",""
+1049,3,1,"q32_cost_recur","i",""
+1050,3,1,"q32_cost_total","i","total forestry costs constraint (mio. USD)"
+1051,3,1,"q32_cost_trade","i","trade costs"
+1052,3,1,"q32_cost_trade_reg","i,kforestry","interregional trade cost calculation (mio. USD)"
+1053,3,1,"q32_cost_transport","i",""
+1054,3,1,"q32_diff","","aggregated difference in forestry land compared to previous timestep (mio. ha)"
+1055,3,1,"q32_excess_dem","kforestry","global excess demand"
+1056,3,1,"q32_excess_supply","i,kforestry","regional excess production"
+1057,3,1,"q32_hvarea_forestry","j,ac_sub",""
+1058,3,1,"q32_hvarea_other","j,ac_sub",""
+1059,3,1,"q32_hvarea_primforest","j",""
+1060,3,1,"q32_hvarea_secdforest","j,ac_sub",""
+1061,3,1,"q32_land","j","land constraint (mio. ha)"
+1062,3,1,"q32_land_expansion","j,type32,ac",""
+1063,3,1,"q32_land_reduction","j,type32,ac",""
+1064,3,1,"q32_max_aff","","maximum total global afforestation"
+1065,3,1,"q32_prod_forestry_wood","j","wood production from forestry"
+1066,3,1,"q32_prod_forestry_woodfuel","j","woodfuel production from forestry"
+1067,3,1,"q32_prod_future","i",""
+1068,3,1,"q32_prod_other","j",""
+1069,3,1,"q32_prod_primforest_wood","j","wood production from primforest"
+1070,3,1,"q32_prod_primforest_woodfuel","j","woodfuel production from primforest"
+1071,3,1,"q32_prod_secdforest_wood","j","wood production from secdforest"
+1072,3,1,"q32_prod_secdforest_woodfuel","j","woodfuel production from secdforest"
+1073,3,1,"q32_production_timber","i",""
+1074,3,1,"q32_secdforest_conversion","j",""
+1075,3,1,"q32_trade_reg","i,kforestry","regional trade balances i.e. minimum self-suff ratio"
+1076,3,1,"q35_carbon_other","j,c_pools","Other land carbon stock calculation (mio tC)"
+1077,3,1,"q35_carbon_primforest","j,c_pools","Primforest carbon stock calculation (mio tC)"
+1078,3,1,"q35_carbon_secdforest","j,c_pools","Secdforest carbon stock calculation (mio tC)"
+1079,3,1,"q35_cost_harvest","i","Cost of harvesting natveg (mio. USD)"
+1080,3,1,"q35_cost_transport","i","Cost of harveting timber taken from natural vegetation (mio. USD)"
+1081,3,1,"q35_hvarea_other","j,ac_sub","Area harvested from other land (mio. ha)"
+1082,3,1,"q35_hvarea_primforest","j","Area harvested from primary forests (mio. ha)"
+1083,3,1,"q35_hvarea_secdforest","j,ac_sub","Area harvested from secondary forests (mio. ha)"
+1084,3,1,"q35_land_other","j","Other land pool calculation (mio. ha)"
+1085,3,1,"q35_land_secdforest","j","Secdforest land pool calculation (mio. ha)"
+1086,3,1,"q35_landdiff","","Difference in natveg land (mio. ha)"
+1087,3,1,"q35_min_forest","j","Minimum forest land constraint (mio. ha)"
+1088,3,1,"q35_min_other","j","Minimum other land constraint (mio. ha)"
+1089,3,1,"q35_other_expansion","j,ac","Other land expansion (mio. ha)"
+1090,3,1,"q35_other_reduction","j,ac","Other land reduction (mio. ha)"
+1091,3,1,"q35_primforest_reduction","j","Primforest reduction (mio. ha)"
+1092,3,1,"q35_prod_other","j","Woodfuel production from other land (mio. m3)"
+1093,3,1,"q35_prod_primforest_wood","j","Wood production from primary forest (mio. m3)"
+1094,3,1,"q35_prod_primforest_woodfuel","j","Woodfuel production from primary forest (mio. m3)"
+1095,3,1,"q35_prod_secdforest_wood","j","Wood production from secondary forest (mio. m3)"
+1096,3,1,"q35_prod_secdforest_woodfuel","j","Woodfuel production from secondary forest (mio. m3)"
+1097,3,1,"q35_production_timber","i","Timbe production from natural vegetation (mio. USD)"
+1098,3,1,"q35_secdforest_conversion","j","Conversion of secondary forest (mio.ha)"
+1099,3,1,"q35_secdforest_reduction","j,ac","Secdforest reduction (mio. ha)"
+1100,3,1,"q38_cost_prod_crop","i,kcr","Regional factor input costs for plant production (mio. USD05MER per yr)"
+1101,3,1,"q39_cost_landcon","j,land","Calculation of cellular landconversion costs (mio. USD05MER per yr)"
+1102,3,1,"q39_cost_landcon_annuity","j,land","Calculation of cellular annuity costs of landconversion (mio. USD05MER per yr)"
+1103,3,1,"q40_cost_transport","j,k","Cellular transport costs for k (mio. USD05MER per yr)"
+1104,3,1,"q41_area_irrig","j","Irrigation area constraint (mio. ha)"
+1105,3,1,"q41_cost_AEI","i","Calculation of costs of irrigation area expansion (mio. USD04MER)"
+1106,3,1,"q41_cost_AEI_annuity","i","Calculation of annuity costs of AEI expansion (mio. USD04MER)"
+1107,3,1,"q42_water_demand","wat_dem,j","Water consumption in different sectors (mio. m^3 per yr)"
+1108,3,1,"q43_water","j","Local seasonal water constraints (mio. m^3 per yr)"
+1109,3,1,"q50_nr_bal_crp","i","cropland nutrient inputs have to equal withdrawals and losses (Tg N per yr)"
+1110,3,1,"q50_nr_bal_pasture","i","nitrogen balance pasture lands (Tg N per yr)"
+1111,3,1,"q50_nr_cost_fert","i","fertilizer costs (mio. USD05MER per yr)"
+1112,3,1,"q50_nr_deposition","i,land","atmospheric deposition (Tg N per yr)"
+1113,3,1,"q50_nr_withdrawals","i,kcr","calculating nr withdrawals (Tg N per yr)"
+1114,3,1,"q51_emissionbal_awms","i,n_pollutants_direct","estimates various emission types X from animal waste management systems before technical mitigation (Mt X-N)"
+1115,3,1,"q51_emissionbal_man_past","i,n_pollutants_direct","estimates various emission types X from manure on pasture land before technical mitigation (Mt X-N)"
+1116,3,1,"q51_emissions_indirect_n2o","i,emis_source_n51","estimates various emission types X from volatilisation and leaching (Mt X-N)"
+1117,3,1,"q51_emissions_inorg_fert","i,n_pollutants_direct","estimates various emission types X from inorganic fertilizer before technical mitigation (Mt X-N)"
+1118,3,1,"q51_emissions_man_crop","i,n_pollutants_direct","estimates various emission types X from manure on cropland before technical mitigation (Mt X-N)"
+1119,3,1,"q51_emissions_resid","i,n_pollutants_direct","estimates various emission types X from residues before technical mitigation (Mt X-N)"
+1120,3,1,"q51_emissions_som","i,n_pollutants_direct","estimates various emission types X from soil organic matter loss before technical mitigation (Mt X-N)"
+1121,3,1,"q52_carbon_stock_diff","j,land,c_pools","Calculation net carbon stock change (mio. tC per time step)"
+1122,3,1,"q52_carbon_stock_reduction","j,land,c_pools","Calculation carbon stock reduction (mio. tC per time step)"
+1123,3,1,"q52_co2c_emis","j,emis_co2","Calculation of annual CO2 emissions (mio. tC per yr)"
+1124,3,1,"q53_emissionbal_ch4_awms","i","Detailed ch4 constraint for animal waste management systems before technical mitigation (tCH4)"
+1125,3,1,"q53_emissionbal_ch4_ent_ferm","i","Detailed ch4 constraint for enteric fermentation before technical mitigation (tCH4)"
+1126,3,1,"q53_emissionbal_ch4_rice","i","Detailed ch4 constraint for rice before technical mitigation (tCH4)"
+1127,3,1,"q55_bal_intake_confinement","i,kli,npk","Nutrient balance for intake in confinement (mio t X)"
+1128,3,1,"q55_bal_intake_fuel","i,kli,npk","Nutrient balance for intake of grazing animals on pasture whose excreate are collected for household fuel (mio t X)"
+1129,3,1,"q55_bal_intake_grazing_cropland","i,kli,npk","Nutrient balance for intake of grazing animals on cropland (mio t X)"
+1130,3,1,"q55_bal_intake_grazing_pasture","i,kli,npk","Nutrient balance for intake of grazing animals on pastures (mio t X)"
+1131,3,1,"q55_bal_manure","i,kli,awms,npk","Calculation of manure (mio t X)"
+1132,3,1,"q55_manure_confinement","i,kli,awms_conf,npk","Manure from animals in confinement managed in different awms (mio t X)"
+1133,3,1,"q55_manure_recycling","i,npk","Manure from animals in confinement recycling to cropland (mio t X)"
+1134,3,1,"q56_cell_to_reg","i,pollutants,emis_source","Aggregation to regional emissions (Tg per yr)"
+1135,3,1,"q56_emission_costs","i","Calculation of total emission costs (mio. USD05MER per yr)"
+1136,3,1,"q56_emission_costs_cell_oneoff","j,emis_cell_one56","Calculation of cellular costs for emissions occuring only once in time (mio. USD05MER per yr)"
+1137,3,1,"q56_emission_costs_cell_yearly","j,emis_cell_yr56","Calculation of cellular costs for annual emissions (mio. USD05MER per yr)"
+1138,3,1,"q56_emission_costs_reg_oneoff","i,emis_reg_one56","Calculation of regional costs for emissions occuring only once in time (mio. USD05MER per yr)"
+1139,3,1,"q56_emission_costs_reg_yearly","i,emis_reg_yr56","Calculation of regional costs for annual emissions (mio. USD05MER per yr)"
+1140,3,1,"q56_reward_cdr_aff","j,co2_forestry","Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)"
+1141,3,1,"q56_reward_cdr_aff_reg","i","Regional revenues for carbon captured by afforestation (mio. USD05MER per yr)"
+1142,3,1,"q56_technical_mitigation_cell","j,pollutants,emis_source","Application of maccs on emissions (Tg per yr)"
+1143,3,1,"q56_technical_mitigation_reg","i,pollutants,emis_source","Application of maccs on emissions (Tg per yr)"
+1144,3,1,"q57_total_costs","i","Calculation of total costs of technical mitigation (mio.USD95MER per yr)"
+1145,3,1,"q60_bioenergy_glo","","Global bioenergy demand (mio. GJ per yr)"
+1146,3,1,"q60_bioenergy_reg","i","Regional bioenergy demand (mio. GJ per yr)"
+1147,3,1,"q60_res_2ndgenBE","i","Regional residue demand for 2nd generation bioenergy (mio. GJ per yr)"
+1148,3,1,"q62_dem_material","i,kall","Estimating material demand (mio. tDM per yr)"
+1149,3,1,"q70_cost_prod_fish","i","Regional factor input costs for fish production"
+1150,3,1,"q70_cost_prod_liv","i,kall","Regional factor input costs for livestock production"
+1151,3,1,"q70_feed","i,kap,kall","Regional feed demand"
+1152,3,1,"q71_balanceflow_constraint_lp","i,kli_rum,kforage","Linear balanceflow constraint for cellular forage feed product (mio. tDM per yr)"
+1153,3,1,"q71_balanceflow_constraint_nlp","j,kli_rum,kforage","Nonlinear balanceflow constraint for cellular forage feed products (mio. tDM per yr)"
+1154,3,1,"q71_feed_rum_liv","j,kforage","Production constraint for ruminant livestock products (mio. tDM per yr)"
+1155,3,1,"q71_prod_mon_liv","j,kli_mon","Production constraint for monogastrics livestock products (mio. tDM per yr)"
+1156,3,1,"q71_sum_rum_liv","j,kli_rum","Total production of forage fed ruminants (mio. tDM per yr)"
+*!!END
+*!START Element declaration
+0,"ac0","ac0"
+1,"ac5","ac5"
+2,"ac10","ac10"
+3,"ac15","ac15"
+4,"ac20","ac20"
+5,"ac25","ac25"
+6,"ac30","ac30"
+7,"ac35","ac35"
+8,"ac40","ac40"
+9,"ac45","ac45"
+10,"ac50","ac50"
+11,"ac55","ac55"
+12,"ac60","ac60"
+13,"ac65","ac65"
+14,"ac70","ac70"
+15,"ac75","ac75"
+16,"ac80","ac80"
+17,"ac85","ac85"
+18,"ac90","ac90"
+19,"ac95","ac95"
+20,"ac100","ac100"
+21,"ac105","ac105"
+22,"ac110","ac110"
+23,"ac115","ac115"
+24,"ac120","ac120"
+25,"ac125","ac125"
+26,"ac130","ac130"
+27,"ac135","ac135"
+28,"ac140","ac140"
+29,"ac145","ac145"
+30,"ac150","ac150"
+31,"ac155","ac155"
+32,"ac160","ac160"
+33,"ac165","ac165"
+34,"ac170","ac170"
+35,"ac175","ac175"
+36,"ac180","ac180"
+37,"ac185","ac185"
+38,"ac190","ac190"
+39,"ac195","ac195"
+40,"ac200","ac200"
+41,"ac205","ac205"
+42,"ac210","ac210"
+43,"ac215","ac215"
+44,"ac220","ac220"
+45,"ac225","ac225"
+46,"ac230","ac230"
+47,"ac235","ac235"
+48,"ac240","ac240"
+49,"ac245","ac245"
+50,"ac250","ac250"
+51,"ac255","ac255"
+52,"ac260","ac260"
+53,"ac265","ac265"
+54,"ac270","ac270"
+55,"ac275","ac275"
+56,"ac280","ac280"
+57,"ac285","ac285"
+58,"ac290","ac290"
+59,"ac295","ac295"
+60,"acx","acx"
+61,"class1","class1"
+62,"class2","class2"
+63,"class3","class3"
+64,"class4","class4"
+65,"class5","class5"
+66,"class6","class6"
+67,"class7","class7"
+68,"class8","class8"
+69,"class9","class9"
+70,"class10","class10"
+71,"class11","class11"
+72,"class12","class12"
+73,"class13","class13"
+74,"class14","class14"
+75,"class15","class15"
+76,"none","none"
+77,"all","all"
+78,"all50","all50"
+79,"vegc100","vegc100"
+80,"vegc75","vegc75"
+81,"vegc50","vegc50"
+82,"vegc33","vegc33"
+83,"vegc25","vegc25"
+84,"0--4","0--4"
+85,"5--9","5--9"
+86,"10--14","10--14"
+87,"15--19","15--19"
+88,"20--24","20--24"
+89,"25--29","25--29"
+90,"30--34","30--34"
+91,"35--39","35--39"
+92,"40--44","40--44"
+93,"45--49","45--49"
+94,"50--54","50--54"
+95,"55--59","55--59"
+96,"60--64","60--64"
+97,"65--69","65--69"
+98,"70--74","70--74"
+99,"75--79","75--79"
+100,"80--84","80--84"
+101,"85--89","85--89"
+102,"90--94","90--94"
+103,"95--99","95--99"
+104,"100+","100+"
+105,"underaged","underaged"
+106,"working","working"
+107,"retired","retired"
+108,"dm","dm"
+109,"ge","ge"
+110,"nr","nr"
+111,"p","p"
+112,"k","k"
+113,"wm","wm"
+114,"c","c"
+115,"grazing","grazing"
+116,"stubble_grazing","stubble_grazing"
+117,"fuel","fuel"
+118,"confinement","confinement"
+119,"lagoon","lagoon"
+120,"liquid_slurry","liquid_slurry"
+121,"solid_storage","solid_storage"
+122,"drylot","drylot"
+123,"daily_spread","daily_spread"
+124,"digester","digester"
+125,"other","other"
+126,"pit_short","pit_short"
+127,"pit_long","pit_long"
+128,"verylow","verylow"
+129,"low","low"
+130,"medium","medium"
+131,"mediumhigh","mediumhigh"
+132,"high","high"
+133,"veryhigh","veryhigh"
+134,"low","low"
+135,"lowsplit","lowsplit"
+136,"mediumsplit","mediumsplit"
+137,"high","high"
+138,"highsplit","highsplit"
+139,"low","low"
+140,"high","high"
+141,"constant","constant"
+142,"phaseout","phaseout"
+143,"vegc","vegc"
+144,"litc","litc"
+145,"soilc","soilc"
+146,"constant","constant"
+147,"fadeout2050","fadeout2050"
+148,"slope","slope"
+149,"intercept","intercept"
+150,"bg_to_ag","bg_to_ag"
+151,"k","k"
+152,"m","m"
+153,"BWh","arid desert hot arid"
+154,"As","equatorial summer dry"
+155,"BSh","arid steppe hot arid"
+156,"Aw","equatorial winter dry"
+157,"Am","equatorial monsoonal"
+158,"Af","equatorial fully humid"
+159,"BWk","arid desert cold arid"
+160,"BSk","arid steppe cold arid"
+161,"Cwb","warm temperate winter dry warm summer"
+162,"Cwa","warm temperate winter dry hot summer"
+163,"Csb","warm temperate summer dry warm summer"
+164,"Csa","warm temperate summer dry hot summer"
+165,"Cfa","warm temperate fully humid hot summer"
+166,"Cfb","warm temperate fully humid warm summer"
+167,"ET","polar polar tundra"
+168,"Dfc","snow fully humid cool summer"
+169,"Dfb","snow fully humid warm summer"
+170,"Dwb","snow winter dry warm summer"
+171,"Dwc","snow winter dry cool summer"
+172,"Dfa","snow fully humid hot summer"
+173,"Cwc","warm temperate winter dry cool summer"
+174,"Dwa","snow winter dry hot summer"
+175,"EF","polar polar frost"
+176,"Cfc","warm temperate fully humid cool summer"
+177,"Dsb","snow summer dry warm summer"
+178,"Dsa","snow summer dry hot summer"
+179,"Dsc","snow summer dry cool summer"
+180,"Dfd","snow fully humid extremely continental"
+181,"Dwd","snow winter dry extremely continental"
+182,"Dsd","snow summer dry extremely continental"
+183,"Csc","warm temperate summer dry cool summer"
+184,"cost_regr_a","cost_regr_a"
+185,"cost_regr_b","cost_regr_b"
+186,"cereals_r","cereals_r"
+187,"rice_r","rice_r"
+188,"cer_rice_r","cer_rice_r"
+189,"fieldoil_r","fieldoil_r"
+190,"soybean_r","soybean_r"
+191,"rapeseed_r","rapeseed_r"
+192,"sunflower_r","sunflower_r"
+193,"groundnut_r","groundnut_r"
+194,"oilpalm_r","oilpalm_r"
+195,"puls_r","puls_r"
+196,"potato_r","potato_r"
+197,"cassava_r","cassava_r"
+198,"roots_r","roots_r"
+199,"sugr_cane_r","sugr_cane_r"
+200,"sugr_beet_r","sugr_beet_r"
+201,"others_r","others_r"
+202,"foddr_r","foddr_r"
+203,"fiber_r","fiber_r"
+204,"begr_r","begr_r"
+205,"betr_r","betr_r"
+206,"history","history"
+207,"agricultural_magpie","agricultural_magpie"
+208,"other_exogenous","other_exogenous"
+209,"lic","lic"
+210,"mic","mic"
+211,"hic","hic"
+212,"high_income","high_income"
+213,"low_income","low_income"
+214,"inorg_fert","inorg_fert"
+215,"man_crop","man_crop"
+216,"awms","awms"
+217,"resid","resid"
+218,"man_past","man_past"
+219,"SOM","SOM"
+220,"rice","rice"
+221,"ent_ferm","ent_ferm"
+222,"resid_burn","resid_burn"
+223,"crop_vegc","crop_vegc"
+224,"crop_litc","crop_litc"
+225,"crop_soilc","crop_soilc"
+226,"past_vegc","past_vegc"
+227,"past_litc","past_litc"
+228,"past_soilc","past_soilc"
+229,"forestry_vegc","forestry_vegc"
+230,"forestry_litc","forestry_litc"
+231,"forestry_soilc","forestry_soilc"
+232,"primforest_vegc","primforest_vegc"
+233,"primforest_litc","primforest_litc"
+234,"primforest_soilc","primforest_soilc"
+235,"secdforest_vegc","secdforest_vegc"
+236,"secdforest_litc","secdforest_litc"
+237,"secdforest_soilc","secdforest_soilc"
+238,"urban_vegc","urban_vegc"
+239,"urban_litc","urban_litc"
+240,"urban_soilc","urban_soilc"
+241,"other_vegc","other_vegc"
+242,"other_litc","other_litc"
+243,"other_soilc","other_soilc"
+244,"beccs","beccs"
+245,"best","best"
+246,"low","low"
+247,"high","high"
+248,"preliminary","preliminary"
+249,"final","final"
+250,"recur","recur"
+251,"mon","mon"
+252,"harv","harv"
+253,"SSP1","SSP1"
+254,"SSP2","SSP2"
+255,"SSP3","SSP3"
+256,"SSP4","SSP4"
+257,"SSP5","SSP5"
+258,"constant","constant"
+259,"SSP1","SSP1"
+260,"SSP2","SSP2"
+261,"SSP3","SSP3"
+262,"SSP4","SSP4"
+263,"SSP5","SSP5"
+264,"SSP1_boundary","SSP1_boundary"
+265,"SSP2_boundary","SSP2_boundary"
+266,"SSP3_boundary","SSP3_boundary"
+267,"SSP4_boundary","SSP4_boundary"
+268,"SSP5_boundary","SSP5_boundary"
+269,"SSP2_lowcal","SSP2_lowcal"
+270,"SSP2_lowls","SSP2_lowls"
+271,"SSP2_waste","SSP2_waste"
+272,"ssp2_high_yvonne","ssp2_high_yvonne"
+273,"ssp2_low_yvonne","ssp2_low_yvonne"
+274,"ssp2_lowest_yvonne","ssp2_lowest_yvonne"
+275,"history","history"
+276,"SSP1","SSP1"
+277,"SSP2","SSP2"
+278,"SSP3","SSP3"
+279,"SSP4","SSP4"
+280,"SSP5","SSP5"
+281,"a1","a1"
+282,"a2","a2"
+283,"b1","b1"
+284,"b2","b2"
+285,"SSP1-20-SPA1-V15-IMAGE","SSP1-20-SPA1-V15-IMAGE"
+286,"SSP1-26-SPA1-V15-IMAGE","SSP1-26-SPA1-V15-IMAGE"
+287,"SSP1-34-SPA1-V15-IMAGE","SSP1-34-SPA1-V15-IMAGE"
+288,"SSP1-45-SPA1-V15-IMAGE","SSP1-45-SPA1-V15-IMAGE"
+289,"SSP1-Ref-SPA0-V15-IMAGE","SSP1-Ref-SPA0-V15-IMAGE"
+290,"SSP1-20-SPA1-V15-REMIND-MAGPIE","SSP1-20-SPA1-V15-REMIND-MAGPIE"
+291,"SSP1-26-SPA1-V15-REMIND-MAGPIE","SSP1-26-SPA1-V15-REMIND-MAGPIE"
+292,"SSP1-34-SPA1-V15-REMIND-MAGPIE","SSP1-34-SPA1-V15-REMIND-MAGPIE"
+293,"SSP1-37-SPA1-V15-REMIND-MAGPIE","SSP1-37-SPA1-V15-REMIND-MAGPIE"
+294,"SSP1-45-SPA1-V15-REMIND-MAGPIE","SSP1-45-SPA1-V15-REMIND-MAGPIE"
+295,"SSP1-Ref-SPA0-V15-REMIND-MAGPIE","SSP1-Ref-SPA0-V15-REMIND-MAGPIE"
+296,"SSP2-18-SPA2-V15-MESSAGE-GLOBIOM","SSP2-18-SPA2-V15-MESSAGE-GLOBIOM"
+297,"SSP2-19-SPA2-V15-MESSAGE-GLOBIOM","SSP2-19-SPA2-V15-MESSAGE-GLOBIOM"
+298,"SSP2-20-SPA2-V15-MESSAGE-GLOBIOM","SSP2-20-SPA2-V15-MESSAGE-GLOBIOM"
+299,"SSP2-26-SPA2-V15-MESSAGE-GLOBIOM","SSP2-26-SPA2-V15-MESSAGE-GLOBIOM"
+300,"SSP2-34-SPA2-V15-MESSAGE-GLOBIOM","SSP2-34-SPA2-V15-MESSAGE-GLOBIOM"
+301,"SSP2-45-SPA2-V15-MESSAGE-GLOBIOM","SSP2-45-SPA2-V15-MESSAGE-GLOBIOM"
+302,"SSP2-60-SPA2-V15-MESSAGE-GLOBIOM","SSP2-60-SPA2-V15-MESSAGE-GLOBIOM"
+303,"SSP2-Ref-SPA0-V15-MESSAGE-GLOBIOM","SSP2-Ref-SPA0-V15-MESSAGE-GLOBIOM"
+304,"SSP2-20-SPA2-V15-REMIND-MAGPIE","SSP2-20-SPA2-V15-REMIND-MAGPIE"
+305,"SSP2-26-SPA2-V15-REMIND-MAGPIE","SSP2-26-SPA2-V15-REMIND-MAGPIE"
+306,"SSP2-34-SPA2-V15-REMIND-MAGPIE","SSP2-34-SPA2-V15-REMIND-MAGPIE"
+307,"SSP2-37-SPA2-V15-REMIND-MAGPIE","SSP2-37-SPA2-V15-REMIND-MAGPIE"
+308,"SSP2-45-SPA2-V15-REMIND-MAGPIE","SSP2-45-SPA2-V15-REMIND-MAGPIE"
+309,"SSP2-60-SPA2-V15-REMIND-MAGPIE","SSP2-60-SPA2-V15-REMIND-MAGPIE"
+310,"SSP2-Ref-SPA0-V15-REMIND-MAGPIE","SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
+311,"SSP3-34-SPA3-V15-AIM-CGE","SSP3-34-SPA3-V15-AIM-CGE"
+312,"SSP3-45-SPA3-V15-AIM-CGE","SSP3-45-SPA3-V15-AIM-CGE"
+313,"SSP3-60-SPA3-V15-AIM-CGE","SSP3-60-SPA3-V15-AIM-CGE"
+314,"SSP4-26-SPA4-V15-GCAM4","SSP4-26-SPA4-V15-GCAM4"
+315,"SSP4-34-SPA4-V15-GCAM4","SSP4-34-SPA4-V15-GCAM4"
+316,"SSP4-45-SPA4-V15-GCAM4","SSP4-45-SPA4-V15-GCAM4"
+317,"SSP4-60-SPA4-V15-GCAM4","SSP4-60-SPA4-V15-GCAM4"
+318,"SSP4-Ref-SPA0-V15-GCAM4","SSP4-Ref-SPA0-V15-GCAM4"
+319,"SSP5-20-SPA5-V15-REMIND-MAGPIE","SSP5-20-SPA5-V15-REMIND-MAGPIE"
+320,"SSP5-26-SPA5-V15-REMIND-MAGPIE","SSP5-26-SPA5-V15-REMIND-MAGPIE"
+321,"SSP5-34-SPA5-V15-REMIND-MAGPIE","SSP5-34-SPA5-V15-REMIND-MAGPIE"
+322,"SSP5-37-SPA5-V15-REMIND-MAGPIE","SSP5-37-SPA5-V15-REMIND-MAGPIE"
+323,"SSP5-45-SPA5-V15-REMIND-MAGPIE","SSP5-45-SPA5-V15-REMIND-MAGPIE"
+324,"SSP5-60-SPA5-V15-REMIND-MAGPIE","SSP5-60-SPA5-V15-REMIND-MAGPIE"
+325,"SSP5-Ref-SPA0-V15-REMIND-MAGPIE","SSP5-Ref-SPA0-V15-REMIND-MAGPIE"
+326,"p75","p75"
+327,"avg","avg"
+328,"CAZ","CAZ"
+329,"CHA","CHA"
+330,"EUR","EUR"
+331,"IND","IND"
+332,"JPN","JPN"
+333,"LAM","LAM"
+334,"MEA","MEA"
+335,"NEU","NEU"
+336,"OAS","OAS"
+337,"REF","REF"
+338,"SSA","SSA"
+339,"USA","USA"
+340,"frac_gasf","frac_gasf"
+341,"frac_gasm","frac_gasm"
+342,"frac_leach","frac_leach"
+343,"frac_leach_h","frac_leach_h"
+344,"ef_1","ef_1"
+345,"ef_1fr","ef_1fr"
+346,"ef_2","ef_2"
+347,"ef_4","ef_4"
+348,"ef_5","ef_5"
+349,"ABW","ABW"
+350,"AFG","AFG"
+351,"AGO","AGO"
+352,"AIA","AIA"
+353,"ALA","ALA"
+354,"ALB","ALB"
+355,"AND","AND"
+356,"ARE","ARE"
+357,"ARG","ARG"
+358,"ARM","ARM"
+359,"ASM","ASM"
+360,"ATA","ATA"
+361,"ATF","ATF"
+362,"ATG","ATG"
+363,"AUS","AUS"
+364,"AUT","AUT"
+365,"AZE","AZE"
+366,"BDI","BDI"
+367,"BEL","BEL"
+368,"BEN","BEN"
+369,"BES","BES"
+370,"BFA","BFA"
+371,"BGD","BGD"
+372,"BGR","BGR"
+373,"BHR","BHR"
+374,"BHS","BHS"
+375,"BIH","BIH"
+376,"BLM","BLM"
+377,"BLR","BLR"
+378,"BLZ","BLZ"
+379,"BMU","BMU"
+380,"BOL","BOL"
+381,"BRA","BRA"
+382,"BRB","BRB"
+383,"BRN","BRN"
+384,"BTN","BTN"
+385,"BVT","BVT"
+386,"BWA","BWA"
+387,"CAF","CAF"
+388,"CAN","CAN"
+389,"CCK","CCK"
+390,"CHN","CHN"
+391,"CHE","CHE"
+392,"CHL","CHL"
+393,"CIV","CIV"
+394,"CMR","CMR"
+395,"COD","COD"
+396,"COG","COG"
+397,"COK","COK"
+398,"COL","COL"
+399,"COM","COM"
+400,"CPV","CPV"
+401,"CRI","CRI"
+402,"CUB","CUB"
+403,"CUW","CUW"
+404,"CXR","CXR"
+405,"CYM","CYM"
+406,"CYP","CYP"
+407,"CZE","CZE"
+408,"DEU","DEU"
+409,"DJI","DJI"
+410,"DMA","DMA"
+411,"DNK","DNK"
+412,"DOM","DOM"
+413,"DZA","DZA"
+414,"ECU","ECU"
+415,"EGY","EGY"
+416,"ERI","ERI"
+417,"ESH","ESH"
+418,"ESP","ESP"
+419,"EST","EST"
+420,"ETH","ETH"
+421,"FIN","FIN"
+422,"FJI","FJI"
+423,"FLK","FLK"
+424,"FRA","FRA"
+425,"FRO","FRO"
+426,"FSM","FSM"
+427,"GAB","GAB"
+428,"GBR","GBR"
+429,"GEO","GEO"
+430,"GGY","GGY"
+431,"GHA","GHA"
+432,"GIB","GIB"
+433,"GIN","GIN"
+434,"GLP","GLP"
+435,"GMB","GMB"
+436,"GNB","GNB"
+437,"GNQ","GNQ"
+438,"GRC","GRC"
+439,"GRD","GRD"
+440,"GRL","GRL"
+441,"GTM","GTM"
+442,"GUF","GUF"
+443,"GUM","GUM"
+444,"GUY","GUY"
+445,"HKG","HKG"
+446,"HMD","HMD"
+447,"HND","HND"
+448,"HRV","HRV"
+449,"HTI","HTI"
+450,"HUN","HUN"
+451,"IDN","IDN"
+452,"IMN","IMN"
+453,"IND","IND"
+454,"IOT","IOT"
+455,"IRL","IRL"
+456,"IRN","IRN"
+457,"IRQ","IRQ"
+458,"ISL","ISL"
+459,"ISR","ISR"
+460,"ITA","ITA"
+461,"JAM","JAM"
+462,"JEY","JEY"
+463,"JOR","JOR"
+464,"JPN","JPN"
+465,"KAZ","KAZ"
+466,"KEN","KEN"
+467,"KGZ","KGZ"
+468,"KHM","KHM"
+469,"KIR","KIR"
+470,"KNA","KNA"
+471,"KOR","KOR"
+472,"KWT","KWT"
+473,"LAO","LAO"
+474,"LBN","LBN"
+475,"LBR","LBR"
+476,"LBY","LBY"
+477,"LCA","LCA"
+478,"LIE","LIE"
+479,"LKA","LKA"
+480,"LSO","LSO"
+481,"LTU","LTU"
+482,"LUX","LUX"
+483,"LVA","LVA"
+484,"MAC","MAC"
+485,"MAF","MAF"
+486,"MAR","MAR"
+487,"MCO","MCO"
+488,"MDA","MDA"
+489,"MDG","MDG"
+490,"MDV","MDV"
+491,"MEX","MEX"
+492,"MHL","MHL"
+493,"MKD","MKD"
+494,"MLI","MLI"
+495,"MLT","MLT"
+496,"MMR","MMR"
+497,"MNE","MNE"
+498,"MNG","MNG"
+499,"MNP","MNP"
+500,"MOZ","MOZ"
+501,"MRT","MRT"
+502,"MSR","MSR"
+503,"MTQ","MTQ"
+504,"MUS","MUS"
+505,"MWI","MWI"
+506,"MYS","MYS"
+507,"MYT","MYT"
+508,"NAM","NAM"
+509,"NCL","NCL"
+510,"NER","NER"
+511,"NFK","NFK"
+512,"NGA","NGA"
+513,"NIC","NIC"
+514,"NIU","NIU"
+515,"NLD","NLD"
+516,"NOR","NOR"
+517,"NPL","NPL"
+518,"NRU","NRU"
+519,"NZL","NZL"
+520,"OMN","OMN"
+521,"PAK","PAK"
+522,"PAN","PAN"
+523,"PCN","PCN"
+524,"PER","PER"
+525,"PHL","PHL"
+526,"PLW","PLW"
+527,"PNG","PNG"
+528,"POL","POL"
+529,"PRI","PRI"
+530,"PRK","PRK"
+531,"PRT","PRT"
+532,"PRY","PRY"
+533,"PSE","PSE"
+534,"PYF","PYF"
+535,"QAT","QAT"
+536,"REU","REU"
+537,"ROU","ROU"
+538,"RUS","RUS"
+539,"RWA","RWA"
+540,"SAU","SAU"
+541,"SDN","SDN"
+542,"SEN","SEN"
+543,"SGP","SGP"
+544,"SGS","SGS"
+545,"SHN","SHN"
+546,"SJM","SJM"
+547,"SLB","SLB"
+548,"SLE","SLE"
+549,"SLV","SLV"
+550,"SMR","SMR"
+551,"SOM","SOM"
+552,"SPM","SPM"
+553,"SRB","SRB"
+554,"SSD","SSD"
+555,"STP","STP"
+556,"SUR","SUR"
+557,"SVK","SVK"
+558,"SVN","SVN"
+559,"SWE","SWE"
+560,"SWZ","SWZ"
+561,"SXM","SXM"
+562,"SYC","SYC"
+563,"SYR","SYR"
+564,"TCA","TCA"
+565,"TCD","TCD"
+566,"TGO","TGO"
+567,"THA","THA"
+568,"TJK","TJK"
+569,"TKL","TKL"
+570,"TKM","TKM"
+571,"TLS","TLS"
+572,"TON","TON"
+573,"TTO","TTO"
+574,"TUN","TUN"
+575,"TUR","TUR"
+576,"TUV","TUV"
+577,"TWN","TWN"
+578,"TZA","TZA"
+579,"UGA","UGA"
+580,"UKR","UKR"
+581,"UMI","UMI"
+582,"URY","URY"
+583,"USA","USA"
+584,"UZB","UZB"
+585,"VAT","VAT"
+586,"VCT","VCT"
+587,"VEN","VEN"
+588,"VGB","VGB"
+589,"VIR","VIR"
+590,"VNM","VNM"
+591,"VUT","VUT"
+592,"WLF","WLF"
+593,"WSM","WSM"
+594,"YEM","YEM"
+595,"ZAF","ZAF"
+596,"ZMB","ZMB"
+597,"ZWE","ZWE"
+598,"CAZ_1","CAZ_1"
+599,"CAZ_2","CAZ_2"
+600,"CAZ_3","CAZ_3"
+601,"CAZ_4","CAZ_4"
+602,"CAZ_5","CAZ_5"
+603,"CAZ_6","CAZ_6"
+604,"CAZ_7","CAZ_7"
+605,"CAZ_8","CAZ_8"
+606,"CAZ_9","CAZ_9"
+607,"CAZ_10","CAZ_10"
+608,"CAZ_11","CAZ_11"
+609,"CAZ_12","CAZ_12"
+610,"CAZ_13","CAZ_13"
+611,"CAZ_14","CAZ_14"
+612,"CAZ_15","CAZ_15"
+613,"CAZ_16","CAZ_16"
+614,"CAZ_17","CAZ_17"
+615,"CAZ_18","CAZ_18"
+616,"CAZ_19","CAZ_19"
+617,"CAZ_20","CAZ_20"
+618,"CAZ_21","CAZ_21"
+619,"CAZ_22","CAZ_22"
+620,"CAZ_23","CAZ_23"
+621,"CAZ_24","CAZ_24"
+622,"CAZ_25","CAZ_25"
+623,"CAZ_26","CAZ_26"
+624,"CAZ_27","CAZ_27"
+625,"CAZ_28","CAZ_28"
+626,"CHA_29","CHA_29"
+627,"CHA_30","CHA_30"
+628,"CHA_31","CHA_31"
+629,"CHA_32","CHA_32"
+630,"CHA_33","CHA_33"
+631,"CHA_34","CHA_34"
+632,"CHA_35","CHA_35"
+633,"CHA_36","CHA_36"
+634,"CHA_37","CHA_37"
+635,"CHA_38","CHA_38"
+636,"CHA_39","CHA_39"
+637,"CHA_40","CHA_40"
+638,"CHA_41","CHA_41"
+639,"CHA_42","CHA_42"
+640,"CHA_43","CHA_43"
+641,"CHA_44","CHA_44"
+642,"CHA_45","CHA_45"
+643,"CHA_46","CHA_46"
+644,"CHA_47","CHA_47"
+645,"CHA_48","CHA_48"
+646,"CHA_49","CHA_49"
+647,"CHA_50","CHA_50"
+648,"CHA_51","CHA_51"
+649,"CHA_52","CHA_52"
+650,"EUR_53","EUR_53"
+651,"EUR_54","EUR_54"
+652,"EUR_55","EUR_55"
+653,"EUR_56","EUR_56"
+654,"EUR_57","EUR_57"
+655,"EUR_58","EUR_58"
+656,"EUR_59","EUR_59"
+657,"EUR_60","EUR_60"
+658,"EUR_61","EUR_61"
+659,"EUR_62","EUR_62"
+660,"IND_63","IND_63"
+661,"IND_64","IND_64"
+662,"IND_65","IND_65"
+663,"IND_66","IND_66"
+664,"IND_67","IND_67"
+665,"IND_68","IND_68"
+666,"IND_69","IND_69"
+667,"JPN_70","JPN_70"
+668,"JPN_71","JPN_71"
+669,"JPN_72","JPN_72"
+670,"LAM_73","LAM_73"
+671,"LAM_74","LAM_74"
+672,"LAM_75","LAM_75"
+673,"LAM_76","LAM_76"
+674,"LAM_77","LAM_77"
+675,"LAM_78","LAM_78"
+676,"LAM_79","LAM_79"
+677,"LAM_80","LAM_80"
+678,"LAM_81","LAM_81"
+679,"LAM_82","LAM_82"
+680,"LAM_83","LAM_83"
+681,"LAM_84","LAM_84"
+682,"LAM_85","LAM_85"
+683,"LAM_86","LAM_86"
+684,"LAM_87","LAM_87"
+685,"LAM_88","LAM_88"
+686,"LAM_89","LAM_89"
+687,"LAM_90","LAM_90"
+688,"LAM_91","LAM_91"
+689,"LAM_92","LAM_92"
+690,"LAM_93","LAM_93"
+691,"LAM_94","LAM_94"
+692,"LAM_95","LAM_95"
+693,"LAM_96","LAM_96"
+694,"LAM_97","LAM_97"
+695,"LAM_98","LAM_98"
+696,"LAM_99","LAM_99"
+697,"LAM_100","LAM_100"
+698,"LAM_101","LAM_101"
+699,"LAM_102","LAM_102"
+700,"LAM_103","LAM_103"
+701,"LAM_104","LAM_104"
+702,"LAM_105","LAM_105"
+703,"LAM_106","LAM_106"
+704,"LAM_107","LAM_107"
+705,"LAM_108","LAM_108"
+706,"LAM_109","LAM_109"
+707,"LAM_110","LAM_110"
+708,"LAM_111","LAM_111"
+709,"LAM_112","LAM_112"
+710,"LAM_113","LAM_113"
+711,"LAM_114","LAM_114"
+712,"LAM_115","LAM_115"
+713,"LAM_116","LAM_116"
+714,"LAM_117","LAM_117"
+715,"LAM_118","LAM_118"
+716,"LAM_119","LAM_119"
+717,"LAM_120","LAM_120"
+718,"LAM_121","LAM_121"
+719,"LAM_122","LAM_122"
+720,"LAM_123","LAM_123"
+721,"LAM_124","LAM_124"
+722,"LAM_125","LAM_125"
+723,"MEA_126","MEA_126"
+724,"MEA_127","MEA_127"
+725,"MEA_128","MEA_128"
+726,"MEA_129","MEA_129"
+727,"MEA_130","MEA_130"
+728,"MEA_131","MEA_131"
+729,"MEA_132","MEA_132"
+730,"MEA_133","MEA_133"
+731,"MEA_134","MEA_134"
+732,"MEA_135","MEA_135"
+733,"MEA_136","MEA_136"
+734,"MEA_137","MEA_137"
+735,"MEA_138","MEA_138"
+736,"MEA_139","MEA_139"
+737,"MEA_140","MEA_140"
+738,"MEA_141","MEA_141"
+739,"MEA_142","MEA_142"
+740,"NEU_143","NEU_143"
+741,"NEU_144","NEU_144"
+742,"NEU_145","NEU_145"
+743,"NEU_146","NEU_146"
+744,"NEU_147","NEU_147"
+745,"NEU_148","NEU_148"
+746,"NEU_149","NEU_149"
+747,"NEU_150","NEU_150"
+748,"OAS_151","OAS_151"
+749,"OAS_152","OAS_152"
+750,"OAS_153","OAS_153"
+751,"OAS_154","OAS_154"
+752,"OAS_155","OAS_155"
+753,"OAS_156","OAS_156"
+754,"OAS_157","OAS_157"
+755,"OAS_158","OAS_158"
+756,"OAS_159","OAS_159"
+757,"OAS_160","OAS_160"
+758,"OAS_161","OAS_161"
+759,"OAS_162","OAS_162"
+760,"OAS_163","OAS_163"
+761,"OAS_164","OAS_164"
+762,"OAS_165","OAS_165"
+763,"OAS_166","OAS_166"
+764,"OAS_167","OAS_167"
+765,"OAS_168","OAS_168"
+766,"OAS_169","OAS_169"
+767,"OAS_170","OAS_170"
+768,"OAS_171","OAS_171"
+769,"OAS_172","OAS_172"
+770,"REF_173","REF_173"
+771,"REF_174","REF_174"
+772,"REF_175","REF_175"
+773,"REF_176","REF_176"
+774,"REF_177","REF_177"
+775,"REF_178","REF_178"
+776,"REF_179","REF_179"
+777,"SSA_180","SSA_180"
+778,"SSA_181","SSA_181"
+779,"SSA_182","SSA_182"
+780,"SSA_183","SSA_183"
+781,"SSA_184","SSA_184"
+782,"SSA_185","SSA_185"
+783,"SSA_186","SSA_186"
+784,"SSA_187","SSA_187"
+785,"SSA_188","SSA_188"
+786,"SSA_189","SSA_189"
+787,"SSA_190","SSA_190"
+788,"USA_191","USA_191"
+789,"USA_192","USA_192"
+790,"USA_193","USA_193"
+791,"USA_194","USA_194"
+792,"USA_195","USA_195"
+793,"USA_196","USA_196"
+794,"USA_197","USA_197"
+795,"USA_198","USA_198"
+796,"USA_199","USA_199"
+797,"USA_200","USA_200"
+798,"tece","tece"
+799,"maiz","maiz"
+800,"trce","trce"
+801,"rice_pro","rice_pro"
+802,"soybean","soybean"
+803,"rapeseed","rapeseed"
+804,"groundnut","groundnut"
+805,"sunflower","sunflower"
+806,"oilpalm","oilpalm"
+807,"puls_pro","puls_pro"
+808,"potato","potato"
+809,"cassav_sp","cassav_sp"
+810,"sugr_cane","sugr_cane"
+811,"sugr_beet","sugr_beet"
+812,"others","others"
+813,"cottn_pro","cottn_pro"
+814,"foddr","foddr"
+815,"pasture","pasture"
+816,"begr","begr"
+817,"betr","betr"
+818,"oils","oils"
+819,"oilcakes","oilcakes"
+820,"sugar","sugar"
+821,"molasses","molasses"
+822,"alcohol","alcohol"
+823,"ethanol","ethanol"
+824,"distillers_grain","distillers_grain"
+825,"brans","brans"
+826,"scp","scp"
+827,"fibres","fibres"
+828,"livst_rum","livst_rum"
+829,"livst_pig","livst_pig"
+830,"livst_chick","livst_chick"
+831,"livst_egg","livst_egg"
+832,"livst_milk","livst_milk"
+833,"fish","fish"
+834,"res_cereals","res_cereals"
+835,"res_fibrous","res_fibrous"
+836,"res_nonfibrous","res_nonfibrous"
+837,"wood","wood"
+838,"woodfuel","woodfuel"
+839,"crop","crop"
+840,"past","past"
+841,"forestry","forestry"
+842,"primforest","primforest"
+843,"secdforest","secdforest"
+844,"urban","urban"
+845,"other","other"
+846,"new","new"
+847,"grow","grow"
+848,"old","old"
+849,"crop","crop"
+850,"past","past"
+851,"rice_ch4","rice_ch4"
+852,"ent_ferm_ch4","ent_ferm_ch4"
+853,"awms_ch4","awms_ch4"
+854,"inorg_fert_n2o","inorg_fert_n2o"
+855,"awms_manure_n2o","awms_manure_n2o"
+856,"1","1"
+857,"2","2"
+858,"3","3"
+859,"4","4"
+860,"5","5"
+861,"6","6"
+862,"7","7"
+863,"8","8"
+864,"9","9"
+865,"10","10"
+866,"11","11"
+867,"12","12"
+868,"13","13"
+869,"14","14"
+870,"15","15"
+871,"16","16"
+872,"17","17"
+873,"18","18"
+874,"19","19"
+875,"20","20"
+876,"21","21"
+877,"22","22"
+878,"23","23"
+879,"24","24"
+880,"25","25"
+881,"26","26"
+882,"27","27"
+883,"28","28"
+884,"29","29"
+885,"30","30"
+886,"31","31"
+887,"32","32"
+888,"33","33"
+889,"34","34"
+890,"35","35"
+891,"36","36"
+892,"37","37"
+893,"38","38"
+894,"39","39"
+895,"40","40"
+896,"41","41"
+897,"42","42"
+898,"43","43"
+899,"44","44"
+900,"45","45"
+901,"46","46"
+902,"47","47"
+903,"48","48"
+904,"49","49"
+905,"50","50"
+906,"51","51"
+907,"52","52"
+908,"53","53"
+909,"54","54"
+910,"55","55"
+911,"56","56"
+912,"57","57"
+913,"58","58"
+914,"59","59"
+915,"60","60"
+916,"61","61"
+917,"62","62"
+918,"63","63"
+919,"64","64"
+920,"65","65"
+921,"66","66"
+922,"67","67"
+923,"68","68"
+924,"69","69"
+925,"70","70"
+926,"71","71"
+927,"72","72"
+928,"73","73"
+929,"74","74"
+930,"75","75"
+931,"76","76"
+932,"77","77"
+933,"78","78"
+934,"79","79"
+935,"80","80"
+936,"81","81"
+937,"82","82"
+938,"83","83"
+939,"84","84"
+940,"85","85"
+941,"86","86"
+942,"87","87"
+943,"88","88"
+944,"89","89"
+945,"90","90"
+946,"91","91"
+947,"92","92"
+948,"93","93"
+949,"94","94"
+950,"95","95"
+951,"96","96"
+952,"97","97"
+953,"98","98"
+954,"99","99"
+955,"100","100"
+956,"101","101"
+957,"102","102"
+958,"103","103"
+959,"104","104"
+960,"105","105"
+961,"106","106"
+962,"107","107"
+963,"108","108"
+964,"109","109"
+965,"110","110"
+966,"111","111"
+967,"112","112"
+968,"113","113"
+969,"114","114"
+970,"115","115"
+971,"116","116"
+972,"117","117"
+973,"118","118"
+974,"119","119"
+975,"120","120"
+976,"121","121"
+977,"122","122"
+978,"123","123"
+979,"124","124"
+980,"125","125"
+981,"126","126"
+982,"127","127"
+983,"128","128"
+984,"129","129"
+985,"130","130"
+986,"131","131"
+987,"132","132"
+988,"133","133"
+989,"134","134"
+990,"135","135"
+991,"136","136"
+992,"137","137"
+993,"138","138"
+994,"139","139"
+995,"140","140"
+996,"141","141"
+997,"142","142"
+998,"143","143"
+999,"144","144"
+1000,"145","145"
+1001,"146","146"
+1002,"147","147"
+1003,"148","148"
+1004,"149","149"
+1005,"150","150"
+1006,"151","151"
+1007,"152","152"
+1008,"153","153"
+1009,"154","154"
+1010,"155","155"
+1011,"156","156"
+1012,"157","157"
+1013,"158","158"
+1014,"159","159"
+1015,"160","160"
+1016,"161","161"
+1017,"162","162"
+1018,"163","163"
+1019,"164","164"
+1020,"165","165"
+1021,"166","166"
+1022,"167","167"
+1023,"168","168"
+1024,"169","169"
+1025,"170","170"
+1026,"171","171"
+1027,"172","172"
+1028,"173","173"
+1029,"174","174"
+1030,"175","175"
+1031,"176","176"
+1032,"177","177"
+1033,"178","178"
+1034,"179","179"
+1035,"180","180"
+1036,"181","181"
+1037,"182","182"
+1038,"183","183"
+1039,"184","184"
+1040,"185","185"
+1041,"186","186"
+1042,"187","187"
+1043,"188","188"
+1044,"189","189"
+1045,"190","190"
+1046,"191","191"
+1047,"192","192"
+1048,"193","193"
+1049,"194","194"
+1050,"195","195"
+1051,"196","196"
+1052,"197","197"
+1053,"198","198"
+1054,"199","199"
+1055,"200","200"
+1056,"201","201"
+1057,"SSP1","SSP1"
+1058,"SSP2","SSP2"
+1059,"SSP3","SSP3"
+1060,"SSP4","SSP4"
+1061,"SSP5","SSP5"
+1062,"SSP1_boundary","SSP1_boundary"
+1063,"SSP2_boundary","SSP2_boundary"
+1064,"SSP3_boundary","SSP3_boundary"
+1065,"SSP4_boundary","SSP4_boundary"
+1066,"SSP5_boundary","SSP5_boundary"
+1067,"a1","a1"
+1068,"a2","a2"
+1069,"b1","b1"
+1070,"b2","b2"
+1071,"history","history"
+1072,"SSP2_lowls","SSP2_lowls"
+1073,"SSP2_lowcal","SSP2_lowcal"
+1074,"kcal","kcal"
+1075,"protein","protein"
+1076,"intercept","intercept"
+1077,"saturation","saturation"
+1078,"halfsaturation","halfsaturation"
+1079,"non_saturation","non_saturation"
+1080,"saturation","saturation"
+1081,"halfsaturation","halfsaturation"
+1082,"intercept","intercept"
+1083,"slope","slope"
+1084,"intercept","intercept"
+1085,"forest","forest"
+1086,"other","other"
+1087,"none","none"
+1088,"npi","npi"
+1089,"ndc","ndc"
+1090,"none","none"
+1091,"npi","npi"
+1092,"ndc","ndc"
+1093,"co2_c","co2_c"
+1094,"ch4","ch4"
+1095,"n2o_n_direct","n2o_n_direct"
+1096,"nh3_n","nh3_n"
+1097,"no2_n","no2_n"
+1098,"no3_n","no3_n"
+1099,"n2o_n_indirect","n2o_n_indirect"
+1100,"co","co"
+1101,"nmhc","nmhc"
+1102,"h2","h2"
+1103,"pm2_5","pm2_5"
+1104,"tpm","tpm"
+1105,"tc","tc"
+1106,"oc","oc"
+1107,"bc","bc"
+1108,"so2","so2"
+1109,"SSP1","SSP1"
+1110,"SSP2","SSP2"
+1111,"SSP3","SSP3"
+1112,"SSP4","SSP4"
+1113,"SSP5","SSP5"
+1114,"a1","a1"
+1115,"a2","a2"
+1116,"b1","b1"
+1117,"b2","b2"
+1118,"SSP1","SSP1"
+1119,"SSP2","SSP2"
+1120,"SSP3","SSP3"
+1121,"SSP4","SSP4"
+1122,"SSP5","SSP5"
+1123,"milling","milling"
+1124,"refining","refining"
+1125,"extracting","extracting"
+1126,"distilling","distilling"
+1127,"fermentation","fermentation"
+1128,"breeding","breeding"
+1129,"ginning","ginning"
+1130,"substitutes","substitutes"
+1131,"BH","BH"
+1132,"CPD","CPD"
+1133,"FF","FF"
+1134,"LW","LW"
+1135,"WDPA","WDPA"
+1136,"overconsumption","overconsumption"
+1137,"livestockshare","livestockshare"
+1138,"processedshare","processedshare"
+1139,"vegfruitshare","vegfruitshare"
+1140,"rlFAO_min","rlFAO_min"
+1141,"rlGTM","rlGTM"
+1142,"rlFAO_max","rlFAO_max"
+1143,"init","init"
+1144,"hybrid","hybrid"
+1145,"halving2050","halving2050"
+1146,"constant","constant"
+1147,"constant","constant"
+1148,"SSP1","SSP1"
+1149,"SSP2","SSP2"
+1150,"SSP3","SSP3"
+1151,"SSP4","SSP4"
+1152,"SSP5","SSP5"
+1153,"a1","a1"
+1154,"a2","a2"
+1155,"b1","b1"
+1156,"b2","b2"
+1157,"constant","constant"
+1158,"neff55_55_starty1990","neff55_55_starty1990"
+1159,"neff60_60_starty1990","neff60_60_starty1990"
+1160,"neff65_70_starty1990","neff65_70_starty1990"
+1161,"neff65_70_starty2010","neff65_70_starty2010"
+1162,"neff60_60_starty2010","neff60_60_starty2010"
+1163,"neff55_60_starty2010","neff55_60_starty2010"
+1164,"neff70_75_starty2010","neff70_75_starty2010"
+1165,"neff75_80_starty2010","neff75_80_starty2010"
+1166,"neff80_85_starty2010","neff80_85_starty2010"
+1167,"neff75_85_starty2010","neff75_85_starty2010"
+1168,"low","low"
+1169,"medium","medium"
+1170,"high","high"
+1171,"const2020","const2020"
+1172,"const2030","const2030"
+1173,"phaseout2020","phaseout2020"
+1174,"SSP1-Ref-SPA0","SSP1-Ref-SPA0"
+1175,"SSP2-Ref-SPA0","SSP2-Ref-SPA0"
+1176,"SSP5-Ref-SPA0","SSP5-Ref-SPA0"
+1177,"SSP1-20-SPA0","SSP1-20-SPA0"
+1178,"SSP1-26-SPA0","SSP1-26-SPA0"
+1179,"SSP1-37-SPA0","SSP1-37-SPA0"
+1180,"SSP1-45-SPA0","SSP1-45-SPA0"
+1181,"SSP2-20-SPA0","SSP2-20-SPA0"
+1182,"SSP2-26-SPA0","SSP2-26-SPA0"
+1183,"SSP2-37-SPA0","SSP2-37-SPA0"
+1184,"SSP2-45-SPA0","SSP2-45-SPA0"
+1185,"SSP2-60-SPA0","SSP2-60-SPA0"
+1186,"SSP2-OS-SPA2","SSP2-OS-SPA2"
+1187,"SSP5-20-SPA0","SSP5-20-SPA0"
+1188,"SSP5-26-SPA0","SSP5-26-SPA0"
+1189,"SSP5-37-SPA0","SSP5-37-SPA0"
+1190,"SSP5-45-SPA0","SSP5-45-SPA0"
+1191,"SSP5-60-SPA0","SSP5-60-SPA0"
+1192,"SSP1-20-SPA1","SSP1-20-SPA1"
+1193,"SSP1-26-SPA1","SSP1-26-SPA1"
+1194,"SSP1-37-SPA1","SSP1-37-SPA1"
+1195,"SSP1-45-SPA1","SSP1-45-SPA1"
+1196,"SSP2-20-SPA2","SSP2-20-SPA2"
+1197,"SSP2-26-SPA2","SSP2-26-SPA2"
+1198,"SSP2-37-SPA2","SSP2-37-SPA2"
+1199,"SSP2-45-SPA2","SSP2-45-SPA2"
+1200,"SSP2-60-SPA2","SSP2-60-SPA2"
+1201,"SSP5-20-SPA5","SSP5-20-SPA5"
+1202,"SSP5-26-SPA5","SSP5-26-SPA5"
+1203,"SSP5-37-SPA5","SSP5-37-SPA5"
+1204,"SSP5-45-SPA5","SSP5-45-SPA5"
+1205,"SSP5-60-SPA5","SSP5-60-SPA5"
+1206,"SSP5-OS-SPA5","SSP5-OS-SPA5"
+1207,"SSP1","SSP1"
+1208,"SSP2","SSP2"
+1209,"SSP3","SSP3"
+1210,"SSP4","SSP4"
+1211,"SSP5","SSP5"
+1212,"off","off"
+1213,"off","off"
+1214,"on","on"
+1215,"none","none"
+1216,"all","all"
+1217,"ssp","ssp"
+1218,"m","m"
+1219,"F","F"
+1220,"si0","si0"
+1221,"nsi0","nsi0"
+1222,"sys_pig","sys_pig"
+1223,"sys_beef","sys_beef"
+1224,"sys_chicken","sys_chicken"
+1225,"sys_hen","sys_hen"
+1226,"sys_dairy","sys_dairy"
+1227,"y1965","y1965"
+1228,"y1970","y1970"
+1229,"y1975","y1975"
+1230,"y1980","y1980"
+1231,"y1985","y1985"
+1232,"y1990","y1990"
+1233,"y1995","y1995"
+1234,"y2000","y2000"
+1235,"y2005","y2005"
+1236,"y2010","y2010"
+1237,"y2015","y2015"
+1238,"y2020","y2020"
+1239,"y2025","y2025"
+1240,"y2030","y2030"
+1241,"y2035","y2035"
+1242,"y2040","y2040"
+1243,"y2045","y2045"
+1244,"y2050","y2050"
+1245,"y2055","y2055"
+1246,"y2060","y2060"
+1247,"y2065","y2065"
+1248,"y2070","y2070"
+1249,"y2075","y2075"
+1250,"y2080","y2080"
+1251,"y2085","y2085"
+1252,"y2090","y2090"
+1253,"y2095","y2095"
+1254,"y2100","y2100"
+1255,"y2105","y2105"
+1256,"y2110","y2110"
+1257,"y2115","y2115"
+1258,"y2120","y2120"
+1259,"y2125","y2125"
+1260,"y2130","y2130"
+1261,"y2135","y2135"
+1262,"y2140","y2140"
+1263,"y2145","y2145"
+1264,"y2150","y2150"
+1265,"y2155","y2155"
+1266,"y2160","y2160"
+1267,"y2165","y2165"
+1268,"y2170","y2170"
+1269,"y2175","y2175"
+1270,"y2180","y2180"
+1271,"y2185","y2185"
+1272,"y2190","y2190"
+1273,"y2195","y2195"
+1274,"y2200","y2200"
+1275,"y2205","y2205"
+1276,"y2210","y2210"
+1277,"y2215","y2215"
+1278,"y2220","y2220"
+1279,"y2225","y2225"
+1280,"y2230","y2230"
+1281,"y2235","y2235"
+1282,"y2240","y2240"
+1283,"y2245","y2245"
+1284,"y2250","y2250"
+1285,"y1995","y1995"
+1286,"y2000","y2000"
+1287,"y2005","y2005"
+1288,"y2010","y2010"
+1289,"y2015","y2015"
+1290,"y1965","y1965"
+1291,"y1966","y1966"
+1292,"y1967","y1967"
+1293,"y1968","y1968"
+1294,"y1969","y1969"
+1295,"y1970","y1970"
+1296,"y1971","y1971"
+1297,"y1972","y1972"
+1298,"y1973","y1973"
+1299,"y1974","y1974"
+1300,"y1975","y1975"
+1301,"y1976","y1976"
+1302,"y1977","y1977"
+1303,"y1978","y1978"
+1304,"y1979","y1979"
+1305,"y1980","y1980"
+1306,"y1981","y1981"
+1307,"y1982","y1982"
+1308,"y1983","y1983"
+1309,"y1984","y1984"
+1310,"y1985","y1985"
+1311,"y1986","y1986"
+1312,"y1987","y1987"
+1313,"y1988","y1988"
+1314,"y1989","y1989"
+1315,"y1990","y1990"
+1316,"y1991","y1991"
+1317,"y1992","y1992"
+1318,"y1993","y1993"
+1319,"y1994","y1994"
+1320,"y1995","y1995"
+1321,"y1996","y1996"
+1322,"y1997","y1997"
+1323,"y1998","y1998"
+1324,"y1999","y1999"
+1325,"y2000","y2000"
+1326,"y2001","y2001"
+1327,"y2002","y2002"
+1328,"y2003","y2003"
+1329,"y2004","y2004"
+1330,"y2005","y2005"
+1331,"y2006","y2006"
+1332,"y2007","y2007"
+1333,"y2008","y2008"
+1334,"y2009","y2009"
+1335,"y2010","y2010"
+1336,"y2011","y2011"
+1337,"y2012","y2012"
+1338,"y2013","y2013"
+1339,"y2014","y2014"
+1340,"y2015","y2015"
+1341,"y2016","y2016"
+1342,"y2017","y2017"
+1343,"y2018","y2018"
+1344,"y2019","y2019"
+1345,"y2020","y2020"
+1346,"y2021","y2021"
+1347,"y2022","y2022"
+1348,"y2023","y2023"
+1349,"y2024","y2024"
+1350,"y2025","y2025"
+1351,"y2026","y2026"
+1352,"y2027","y2027"
+1353,"y2028","y2028"
+1354,"y2029","y2029"
+1355,"y2030","y2030"
+1356,"y2031","y2031"
+1357,"y2032","y2032"
+1358,"y2033","y2033"
+1359,"y2034","y2034"
+1360,"y2035","y2035"
+1361,"y2036","y2036"
+1362,"y2037","y2037"
+1363,"y2038","y2038"
+1364,"y2039","y2039"
+1365,"y2040","y2040"
+1366,"y2041","y2041"
+1367,"y2042","y2042"
+1368,"y2043","y2043"
+1369,"y2044","y2044"
+1370,"y2045","y2045"
+1371,"y2046","y2046"
+1372,"y2047","y2047"
+1373,"y2048","y2048"
+1374,"y2049","y2049"
+1375,"y2050","y2050"
+1376,"y2051","y2051"
+1377,"y2052","y2052"
+1378,"y2053","y2053"
+1379,"y2054","y2054"
+1380,"y2055","y2055"
+1381,"y2056","y2056"
+1382,"y2057","y2057"
+1383,"y2058","y2058"
+1384,"y2059","y2059"
+1385,"y2060","y2060"
+1386,"y2061","y2061"
+1387,"y2062","y2062"
+1388,"y2063","y2063"
+1389,"y2064","y2064"
+1390,"y2065","y2065"
+1391,"y2066","y2066"
+1392,"y2067","y2067"
+1393,"y2068","y2068"
+1394,"y2069","y2069"
+1395,"y2070","y2070"
+1396,"y2071","y2071"
+1397,"y2072","y2072"
+1398,"y2073","y2073"
+1399,"y2074","y2074"
+1400,"y2075","y2075"
+1401,"y2076","y2076"
+1402,"y2077","y2077"
+1403,"y2078","y2078"
+1404,"y2079","y2079"
+1405,"y2080","y2080"
+1406,"y2081","y2081"
+1407,"y2082","y2082"
+1408,"y2083","y2083"
+1409,"y2084","y2084"
+1410,"y2085","y2085"
+1411,"y2086","y2086"
+1412,"y2087","y2087"
+1413,"y2088","y2088"
+1414,"y2089","y2089"
+1415,"y2090","y2090"
+1416,"y2091","y2091"
+1417,"y2092","y2092"
+1418,"y2093","y2093"
+1419,"y2094","y2094"
+1420,"y2095","y2095"
+1421,"y2096","y2096"
+1422,"y2097","y2097"
+1423,"y2098","y2098"
+1424,"y2099","y2099"
+1425,"y2100","y2100"
+1426,"y2101","y2101"
+1427,"y2102","y2102"
+1428,"y2103","y2103"
+1429,"y2104","y2104"
+1430,"y2105","y2105"
+1431,"y2106","y2106"
+1432,"y2107","y2107"
+1433,"y2108","y2108"
+1434,"y2109","y2109"
+1435,"y2110","y2110"
+1436,"y2111","y2111"
+1437,"y2112","y2112"
+1438,"y2113","y2113"
+1439,"y2114","y2114"
+1440,"y2115","y2115"
+1441,"y2116","y2116"
+1442,"y2117","y2117"
+1443,"y2118","y2118"
+1444,"y2119","y2119"
+1445,"y2120","y2120"
+1446,"y2121","y2121"
+1447,"y2122","y2122"
+1448,"y2123","y2123"
+1449,"y2124","y2124"
+1450,"y2125","y2125"
+1451,"y2126","y2126"
+1452,"y2127","y2127"
+1453,"y2128","y2128"
+1454,"y2129","y2129"
+1455,"y2130","y2130"
+1456,"y2131","y2131"
+1457,"y2132","y2132"
+1458,"y2133","y2133"
+1459,"y2134","y2134"
+1460,"y2135","y2135"
+1461,"y2136","y2136"
+1462,"y2137","y2137"
+1463,"y2138","y2138"
+1464,"y2139","y2139"
+1465,"y2140","y2140"
+1466,"y2141","y2141"
+1467,"y2142","y2142"
+1468,"y2143","y2143"
+1469,"y2144","y2144"
+1470,"y2145","y2145"
+1471,"y2146","y2146"
+1472,"y2147","y2147"
+1473,"y2148","y2148"
+1474,"y2149","y2149"
+1475,"y2150","y2150"
+1476,"easytrade","easytrade"
+1477,"hardtrade","hardtrade"
+1478,"free2000","free2000"
+1479,"regionalized","regionalized"
+1480,"globalized","globalized"
+1481,"fragmented","fragmented"
+1482,"a909090","a909090"
+1483,"a908080","a908080"
+1484,"a909595","a909595"
+1485,"a808080","a808080"
+1486,"a807070","a807070"
+1487,"a809090","a809090"
+1488,"l909090r808080","l909090r808080"
+1489,"l908080r807070","l908080r807070"
+1490,"l909595r809090","l909595r809090"
+1491,"level","level"
+1492,"marginal","marginal"
+1493,"upper","upper"
+1494,"lower","lower"
+1495,"aff","aff"
+1496,"indc","indc"
+1497,"plant","plant"
+1498,"rainfed","rainfed"
+1499,"irrigated","irrigated"
+1500,"agriculture","agriculture"
+1501,"industry","industry"
+1502,"electricity","electricity"
+1503,"domestic","domestic"
+1504,"ecosystem","ecosystem"
+1505,"surface","surface"
+1506,"ground","ground"
+1507,"technical","technical"
+1508,"ren_ground","ren_ground"
+1509,"before","before"
+1510,"after","after"
+*!!END
+*!START Sets and Elements
+0,0
+0,1
+0,2
+0,3
+0,4
+0,5
+0,6
+0,7
+0,8
+0,9
+0,10
+0,11
+0,12
+0,13
+0,14
+0,15
+0,16
+0,17
+0,18
+0,19
+0,20
+0,21
+0,22
+0,23
+0,24
+0,25
+0,26
+0,27
+0,28
+0,29
+0,30
+0,31
+0,32
+0,33
+0,34
+0,35
+0,36
+0,37
+0,38
+0,39
+0,40
+0,41
+0,42
+0,43
+0,44
+0,45
+0,46
+0,47
+0,48
+0,49
+0,50
+0,51
+0,52
+0,53
+0,54
+0,55
+0,56
+0,57
+0,58
+0,59
+0,60
+2,61
+2,62
+2,63
+2,64
+2,65
+2,66
+2,67
+2,68
+2,69
+2,70
+2,71
+2,72
+2,73
+2,74
+2,75
+8,1215
+8,1216
+8,78
+8,79
+8,80
+8,81
+8,82
+8,83
+9,84
+9,85
+9,86
+9,87
+9,88
+9,89
+9,90
+9,91
+9,92
+9,93
+9,94
+9,95
+9,96
+9,97
+9,98
+9,99
+9,100
+9,101
+9,102
+9,103
+9,104
+12,105
+12,106
+12,107
+14,108
+14,109
+14,110
+14,111
+14,151
+14,113
+14,114
+15,115
+15,116
+15,117
+15,118
+16,119
+16,120
+16,121
+16,122
+16,123
+16,124
+16,1086
+16,126
+16,127
+19,128
+19,1168
+19,1169
+19,131
+19,1170
+19,133
+20,1168
+20,135
+20,136
+20,1170
+20,138
+21,1168
+21,1170
+22,1157
+22,142
+23,143
+23,144
+23,145
+24,1157
+24,147
+27,1083
+27,1084
+27,150
+28,151
+28,1218
+29,153
+29,154
+29,155
+29,156
+29,157
+29,158
+29,159
+29,160
+29,161
+29,162
+29,163
+29,164
+29,165
+29,166
+29,167
+29,168
+29,169
+29,170
+29,171
+29,172
+29,173
+29,174
+29,175
+29,176
+29,177
+29,178
+29,179
+29,180
+29,181
+29,182
+29,183
+31,184
+31,185
+33,186
+33,187
+33,188
+33,189
+33,190
+33,191
+33,192
+33,193
+33,194
+33,195
+33,196
+33,197
+33,198
+33,199
+33,200
+33,201
+33,202
+33,203
+33,204
+33,205
+37,1071
+38,207
+38,208
+39,209
+39,210
+39,211
+40,212
+40,213
+50,214
+50,215
+50,216
+50,217
+50,218
+50,551
+50,220
+50,221
+50,222
+50,223
+50,224
+50,225
+50,226
+50,227
+50,228
+50,229
+50,230
+50,231
+50,232
+50,233
+50,234
+50,235
+50,236
+50,237
+50,238
+50,239
+50,240
+50,241
+50,242
+50,243
+50,244
+62,245
+62,1168
+62,1170
+63,248
+63,249
+66,250
+66,251
+66,252
+67,1207
+67,1208
+67,1209
+67,1210
+67,1211
+67,1157
+68,1207
+68,1208
+68,1209
+68,1210
+68,1211
+68,1062
+68,1063
+68,1064
+68,1065
+68,1066
+68,1073
+68,1072
+68,271
+68,272
+68,273
+68,274
+68,1071
+69,1207
+69,1208
+69,1209
+69,1210
+69,1211
+69,1153
+69,1154
+69,1155
+69,1156
+70,285
+70,286
+70,287
+70,288
+70,289
+70,290
+70,291
+70,292
+70,293
+70,294
+70,295
+70,296
+70,297
+70,298
+70,299
+70,300
+70,301
+70,302
+70,303
+70,304
+70,305
+70,306
+70,307
+70,308
+70,309
+70,310
+70,311
+70,312
+70,313
+70,314
+70,315
+70,316
+70,317
+70,318
+70,319
+70,320
+70,321
+70,322
+70,323
+70,324
+70,325
+72,326
+72,327
+75,328
+75,329
+75,330
+75,453
+75,464
+75,333
+75,334
+75,335
+75,336
+75,337
+75,338
+75,583
+78,340
+78,341
+78,342
+78,343
+78,344
+78,345
+78,346
+78,347
+78,348
+79,349
+79,350
+79,351
+79,352
+79,353
+79,354
+79,355
+79,356
+79,357
+79,358
+79,359
+79,360
+79,361
+79,362
+79,363
+79,364
+79,365
+79,366
+79,367
+79,368
+79,369
+79,370
+79,371
+79,372
+79,373
+79,374
+79,375
+79,376
+79,377
+79,378
+79,379
+79,380
+79,381
+79,382
+79,383
+79,384
+79,385
+79,386
+79,387
+79,388
+79,389
+79,390
+79,391
+79,392
+79,393
+79,394
+79,395
+79,396
+79,397
+79,398
+79,399
+79,400
+79,401
+79,402
+79,403
+79,404
+79,405
+79,406
+79,407
+79,408
+79,409
+79,410
+79,411
+79,412
+79,413
+79,414
+79,415
+79,416
+79,417
+79,418
+79,419
+79,420
+79,421
+79,422
+79,423
+79,424
+79,425
+79,426
+79,427
+79,428
+79,429
+79,430
+79,431
+79,432
+79,433
+79,434
+79,435
+79,436
+79,437
+79,438
+79,439
+79,440
+79,441
+79,442
+79,443
+79,444
+79,445
+79,446
+79,447
+79,448
+79,449
+79,450
+79,451
+79,452
+79,453
+79,454
+79,455
+79,456
+79,457
+79,458
+79,459
+79,460
+79,461
+79,462
+79,463
+79,464
+79,465
+79,466
+79,467
+79,468
+79,469
+79,470
+79,471
+79,472
+79,473
+79,474
+79,475
+79,476
+79,477
+79,478
+79,479
+79,480
+79,481
+79,482
+79,483
+79,484
+79,485
+79,486
+79,487
+79,488
+79,489
+79,490
+79,491
+79,492
+79,493
+79,494
+79,495
+79,496
+79,497
+79,498
+79,499
+79,500
+79,501
+79,502
+79,503
+79,504
+79,505
+79,506
+79,507
+79,508
+79,509
+79,510
+79,511
+79,512
+79,513
+79,514
+79,515
+79,516
+79,517
+79,518
+79,519
+79,520
+79,521
+79,522
+79,523
+79,524
+79,525
+79,526
+79,527
+79,528
+79,529
+79,530
+79,531
+79,532
+79,533
+79,534
+79,535
+79,536
+79,537
+79,538
+79,539
+79,540
+79,541
+79,542
+79,543
+79,544
+79,545
+79,546
+79,547
+79,548
+79,549
+79,550
+79,551
+79,552
+79,553
+79,554
+79,555
+79,556
+79,557
+79,558
+79,559
+79,560
+79,561
+79,562
+79,563
+79,564
+79,565
+79,566
+79,567
+79,568
+79,569
+79,570
+79,571
+79,572
+79,573
+79,574
+79,575
+79,576
+79,577
+79,578
+79,579
+79,580
+79,581
+79,582
+79,583
+79,584
+79,585
+79,586
+79,587
+79,588
+79,589
+79,590
+79,591
+79,592
+79,593
+79,594
+79,595
+79,596
+79,597
+81,598
+81,599
+81,600
+81,601
+81,602
+81,603
+81,604
+81,605
+81,606
+81,607
+81,608
+81,609
+81,610
+81,611
+81,612
+81,613
+81,614
+81,615
+81,616
+81,617
+81,618
+81,619
+81,620
+81,621
+81,622
+81,623
+81,624
+81,625
+81,626
+81,627
+81,628
+81,629
+81,630
+81,631
+81,632
+81,633
+81,634
+81,635
+81,636
+81,637
+81,638
+81,639
+81,640
+81,641
+81,642
+81,643
+81,644
+81,645
+81,646
+81,647
+81,648
+81,649
+81,650
+81,651
+81,652
+81,653
+81,654
+81,655
+81,656
+81,657
+81,658
+81,659
+81,660
+81,661
+81,662
+81,663
+81,664
+81,665
+81,666
+81,667
+81,668
+81,669
+81,670
+81,671
+81,672
+81,673
+81,674
+81,675
+81,676
+81,677
+81,678
+81,679
+81,680
+81,681
+81,682
+81,683
+81,684
+81,685
+81,686
+81,687
+81,688
+81,689
+81,690
+81,691
+81,692
+81,693
+81,694
+81,695
+81,696
+81,697
+81,698
+81,699
+81,700
+81,701
+81,702
+81,703
+81,704
+81,705
+81,706
+81,707
+81,708
+81,709
+81,710
+81,711
+81,712
+81,713
+81,714
+81,715
+81,716
+81,717
+81,718
+81,719
+81,720
+81,721
+81,722
+81,723
+81,724
+81,725
+81,726
+81,727
+81,728
+81,729
+81,730
+81,731
+81,732
+81,733
+81,734
+81,735
+81,736
+81,737
+81,738
+81,739
+81,740
+81,741
+81,742
+81,743
+81,744
+81,745
+81,746
+81,747
+81,748
+81,749
+81,750
+81,751
+81,752
+81,753
+81,754
+81,755
+81,756
+81,757
+81,758
+81,759
+81,760
+81,761
+81,762
+81,763
+81,764
+81,765
+81,766
+81,767
+81,768
+81,769
+81,770
+81,771
+81,772
+81,773
+81,774
+81,775
+81,776
+81,777
+81,778
+81,779
+81,780
+81,781
+81,782
+81,783
+81,784
+81,785
+81,786
+81,787
+81,788
+81,789
+81,790
+81,791
+81,792
+81,793
+81,794
+81,795
+81,796
+81,797
+91,798
+91,799
+91,800
+91,801
+91,802
+91,803
+91,804
+91,805
+91,806
+91,807
+91,808
+91,809
+91,810
+91,811
+91,812
+91,813
+91,814
+91,815
+91,816
+91,817
+91,818
+91,819
+91,820
+91,821
+91,822
+91,823
+91,824
+91,825
+91,826
+91,827
+91,828
+91,829
+91,830
+91,831
+91,832
+91,833
+91,834
+91,835
+91,836
+91,837
+91,838
+120,849
+120,850
+120,841
+120,842
+120,843
+120,844
+120,1086
+125,846
+125,847
+125,848
+126,849
+126,850
+127,851
+127,852
+127,853
+128,854
+128,855
+129,856
+129,857
+129,858
+129,859
+129,860
+129,861
+129,862
+129,863
+129,864
+129,865
+129,866
+129,867
+129,868
+129,869
+129,870
+129,871
+129,872
+129,873
+129,874
+129,875
+129,876
+129,877
+129,878
+129,879
+129,880
+129,881
+129,882
+129,883
+129,884
+129,885
+129,886
+129,887
+129,888
+129,889
+129,890
+129,891
+129,892
+129,893
+129,894
+129,895
+129,896
+129,897
+129,898
+129,899
+129,900
+129,901
+129,902
+129,903
+129,904
+129,905
+129,906
+129,907
+129,908
+129,909
+129,910
+129,911
+129,912
+129,913
+129,914
+129,915
+129,916
+129,917
+129,918
+129,919
+129,920
+129,921
+129,922
+129,923
+129,924
+129,925
+129,926
+129,927
+129,928
+129,929
+129,930
+129,931
+129,932
+129,933
+129,934
+129,935
+129,936
+129,937
+129,938
+129,939
+129,940
+129,941
+129,942
+129,943
+129,944
+129,945
+129,946
+129,947
+129,948
+129,949
+129,950
+129,951
+129,952
+129,953
+129,954
+129,955
+129,956
+129,957
+129,958
+129,959
+129,960
+129,961
+129,962
+129,963
+129,964
+129,965
+129,966
+129,967
+129,968
+129,969
+129,970
+129,971
+129,972
+129,973
+129,974
+129,975
+129,976
+129,977
+129,978
+129,979
+129,980
+129,981
+129,982
+129,983
+129,984
+129,985
+129,986
+129,987
+129,988
+129,989
+129,990
+129,991
+129,992
+129,993
+129,994
+129,995
+129,996
+129,997
+129,998
+129,999
+129,1000
+129,1001
+129,1002
+129,1003
+129,1004
+129,1005
+129,1006
+129,1007
+129,1008
+129,1009
+129,1010
+129,1011
+129,1012
+129,1013
+129,1014
+129,1015
+129,1016
+129,1017
+129,1018
+129,1019
+129,1020
+129,1021
+129,1022
+129,1023
+129,1024
+129,1025
+129,1026
+129,1027
+129,1028
+129,1029
+129,1030
+129,1031
+129,1032
+129,1033
+129,1034
+129,1035
+129,1036
+129,1037
+129,1038
+129,1039
+129,1040
+129,1041
+129,1042
+129,1043
+129,1044
+129,1045
+129,1046
+129,1047
+129,1048
+129,1049
+129,1050
+129,1051
+129,1052
+129,1053
+129,1054
+129,1055
+129,1056
+130,1207
+130,1208
+130,1209
+130,1210
+130,1211
+130,1062
+130,1063
+130,1064
+130,1065
+130,1066
+130,1153
+130,1154
+130,1155
+130,1156
+130,1071
+130,1072
+130,1073
+137,1074
+137,1075
+138,1084
+138,1080
+138,1081
+138,1079
+139,1080
+139,1081
+139,1084
+140,1083
+140,1084
+142,1085
+142,1086
+143,1215
+143,1091
+143,1092
+144,1215
+144,1091
+144,1092
+147,1093
+147,1094
+147,1095
+147,1096
+147,1097
+147,1098
+147,1099
+147,1100
+147,1101
+147,1102
+147,1103
+147,1104
+147,1105
+147,1106
+147,1107
+147,1108
+148,1207
+148,1208
+148,1209
+148,1210
+148,1211
+148,1153
+148,1154
+148,1155
+148,1156
+149,1207
+149,1208
+149,1209
+149,1210
+149,1211
+150,1123
+150,1124
+150,1125
+150,1126
+150,1127
+150,1128
+150,1129
+150,1130
+152,1131
+152,1132
+152,1133
+152,1134
+152,1135
+154,1136
+154,1137
+154,1138
+154,1139
+158,1140
+158,1141
+158,1142
+158,1143
+158,1144
+159,1145
+159,1157
+161,1157
+161,1207
+161,1208
+161,1209
+161,1210
+161,1211
+161,1153
+161,1154
+161,1155
+161,1156
+162,1157
+162,1158
+162,1159
+162,1160
+162,1161
+162,1162
+162,1163
+162,1164
+162,1165
+162,1166
+162,1167
+163,1168
+163,1169
+163,1170
+165,1171
+165,1172
+165,1173
+166,1174
+166,1175
+166,1176
+166,1177
+166,1178
+166,1179
+166,1180
+166,1181
+166,1182
+166,1183
+166,1184
+166,1185
+166,1186
+166,1187
+166,1188
+166,1189
+166,1190
+166,1191
+166,1192
+166,1193
+166,1194
+166,1195
+166,1196
+166,1197
+166,1198
+166,1199
+166,1200
+166,1201
+166,1202
+166,1203
+166,1204
+166,1205
+166,1206
+167,1207
+167,1208
+167,1209
+167,1210
+167,1211
+167,1213
+168,1213
+168,1214
+170,1215
+170,1216
+170,1217
+171,1218
+171,1219
+172,1220
+172,1221
+173,1222
+173,1223
+173,1224
+173,1225
+173,1226
+180,1290
+180,1295
+180,1300
+180,1305
+180,1310
+180,1315
+180,1320
+180,1325
+180,1330
+180,1335
+180,1340
+180,1345
+180,1350
+180,1355
+180,1360
+180,1365
+180,1370
+180,1375
+180,1380
+180,1385
+180,1390
+180,1395
+180,1400
+180,1405
+180,1410
+180,1415
+180,1420
+180,1425
+180,1430
+180,1435
+180,1440
+180,1445
+180,1450
+180,1455
+180,1460
+180,1465
+180,1470
+180,1475
+180,1265
+180,1266
+180,1267
+180,1268
+180,1269
+180,1270
+180,1271
+180,1272
+180,1273
+180,1274
+180,1275
+180,1276
+180,1277
+180,1278
+180,1279
+180,1280
+180,1281
+180,1282
+180,1283
+180,1284
+181,1320
+181,1325
+181,1330
+181,1335
+181,1340
+185,1290
+185,1291
+185,1292
+185,1293
+185,1294
+185,1295
+185,1296
+185,1297
+185,1298
+185,1299
+185,1300
+185,1301
+185,1302
+185,1303
+185,1304
+185,1305
+185,1306
+185,1307
+185,1308
+185,1309
+185,1310
+185,1311
+185,1312
+185,1313
+185,1314
+185,1315
+185,1316
+185,1317
+185,1318
+185,1319
+185,1320
+185,1321
+185,1322
+185,1323
+185,1324
+185,1325
+185,1326
+185,1327
+185,1328
+185,1329
+185,1330
+185,1331
+185,1332
+185,1333
+185,1334
+185,1335
+185,1336
+185,1337
+185,1338
+185,1339
+185,1340
+185,1341
+185,1342
+185,1343
+185,1344
+185,1345
+185,1346
+185,1347
+185,1348
+185,1349
+185,1350
+185,1351
+185,1352
+185,1353
+185,1354
+185,1355
+185,1356
+185,1357
+185,1358
+185,1359
+185,1360
+185,1361
+185,1362
+185,1363
+185,1364
+185,1365
+185,1366
+185,1367
+185,1368
+185,1369
+185,1370
+185,1371
+185,1372
+185,1373
+185,1374
+185,1375
+185,1376
+185,1377
+185,1378
+185,1379
+185,1380
+185,1381
+185,1382
+185,1383
+185,1384
+185,1385
+185,1386
+185,1387
+185,1388
+185,1389
+185,1390
+185,1391
+185,1392
+185,1393
+185,1394
+185,1395
+185,1396
+185,1397
+185,1398
+185,1399
+185,1400
+185,1401
+185,1402
+185,1403
+185,1404
+185,1405
+185,1406
+185,1407
+185,1408
+185,1409
+185,1410
+185,1411
+185,1412
+185,1413
+185,1414
+185,1415
+185,1416
+185,1417
+185,1418
+185,1419
+185,1420
+185,1421
+185,1422
+185,1423
+185,1424
+185,1425
+185,1426
+185,1427
+185,1428
+185,1429
+185,1430
+185,1431
+185,1432
+185,1433
+185,1434
+185,1435
+185,1436
+185,1437
+185,1438
+185,1439
+185,1440
+185,1441
+185,1442
+185,1443
+185,1444
+185,1445
+185,1446
+185,1447
+185,1448
+185,1449
+185,1450
+185,1451
+185,1452
+185,1453
+185,1454
+185,1455
+185,1456
+185,1457
+185,1458
+185,1459
+185,1460
+185,1461
+185,1462
+185,1463
+185,1464
+185,1465
+185,1466
+185,1467
+185,1468
+185,1469
+185,1470
+185,1471
+185,1472
+185,1473
+185,1474
+185,1475
+186,1476
+186,1477
+187,1478
+187,1479
+187,1480
+187,1481
+187,1482
+187,1483
+187,1484
+187,1485
+187,1486
+187,1487
+187,1488
+187,1489
+187,1490
+190,1491
+190,1492
+190,1493
+190,1494
+191,1495
+191,1496
+191,1497
+193,1498
+193,1499
+194,1500
+194,1501
+194,1502
+194,1503
+194,1504
+195,1505
+195,1506
+195,1507
+195,1508
+197,1509
+197,1510
+*!!END
+*!START GDX inputs
+*!!END
+*!START Setglobal
+"C_TIMESTEPS","coup2100"
+"DRIVERS","aug17"
+"LAND","feb15"
+"COSTS","default"
+"INTEREST_RATE","reg_feb18"
+"TC","endo_jun18"
+"YIELDS","dynamic_aug18"
+"FOOD","anthropometrics_jan18"
+"DEMAND","sector_may15"
+"PRODUCTION","flexreg_apr16"
+"RESIDUES","flexreg_apr16"
+"PROCESSING","coupleproducts_feb17"
+"TRADE","selfsuff_reduced"
+"CROP","endo_jun13"
+"PAST","endo_jun13"
+"FORESTRY","dynamic_dec18"
+"URBAN","static"
+"NATVEG","dynamic_dec18"
+"FACTOR_COSTS","mixed_feb17"
+"LANDCONVERSION","global_static_aug18"
+"TRANSPORT","gtap_nov12"
+"AREA_EQUIPPED_FOR_IRRIGATION","endo_apr13"
+"WATER_DEMAND","agr_sector_aug13"
+"WATER_AVAILABILITY","total_water_aug13"
+"CLIMATE","static"
+"NR_SOIL_BUDGET","exoeff_aug16"
+"NITROGEN","ipcc2006_sep16"
+"CARBON","normal_dec17"
+"METHANE","ipcc2006_flexreg_apr16"
+"PHOSPHORUS","off"
+"AWMS","ipcc2006_aug16"
+"GHG_POLICY","price_sep16"
+"MACCS","on_sep16"
+"CARBON_REMOVAL","off_sep16"
+"SOM","off"
+"BIOENERGY","standard_flexreg_may17"
+"MATERIAL","exo_flexreg_apr16"
+"LIVESTOCK","fbask_jan16"
+"DISAGG_LVST","foragebased_aug18"
+"OPTIMIZATION","nlp_apr17"
+"PHASE","postsolve"
+"C09_POP_SCENARIO","SSP2"
+"C09_GDP_SCENARIO","SSP2"
+"C12_INTEREST_RATE","MEDIUM"
+"C13_TCCOST","medium"
+"C14_YIELDS_SCENARIO","NOCC"
+"C15_FOOD_SCENARIO","SSP2"
+"C15_CALIBSCEN","constant"
+"C15_RUMSCEN","mixed"
+"C18_BURN_SCEN","phaseout"
+"C21_TRADE_LIBERALIZATION","REGIONALIZED"
+"C32_AFF_MASK","NOBOREAL"
+"C32_AFF_POLICY","NONE"
+"C32_ROT_LENGTH","rlGTM"
+"C32_GS_CALIB","avg"
+"C32_TRADE_LIBERALIZATION","l909090r808080"
+"C35_PROTECT_SCENARIO","WDPA"
+"C35_AD_POLICY","NPI"
+"C35_AOLC_POLICY","NPI"
+"C42_WATDEM_SCENARIO","NOCC"
+"C42_ENV_FLOW_POLICY","OFF"
+"C43_WATAVAIL_SCENARIO","nocc"
+"C50_SCEN_NEFF","neff60_60_starty2010"
+"C50_DEP_SCEN","history"
+"C52_CARBON_SCENARIO","NOCC"
+"C55_SCEN_CONF","SSP2"
+"C56_POLLUTANT_PRICES","SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
+"C56_EMIS_POLICY","ssp"
+"C56_AFF_POLICY","vegc50"
+"C59_SOM_SCENARIO","nocc"
+"C60_2NDGEN_BIODEM","SSP2-Ref-SPA0"
+"C60_RES_2NDGENBE_DEM","ssp2"
+"C60_1STGEN_BIODEM","const2020"
+"C70_FEED_SCEN","ssp2"
+"C80_NLP_SOLVER","CONOPT4"
+*!!END
+*!START Dimension
+*!!END
+*!START Recoding
+*!!END
+*!START Bounds
+*!!END
+*!START NonEdit
+*!!END
+*!START Info
+*!!END
+*!START Format
+*!!END
+*!START UserLevel
+*!!END
+*!START GDX datafiles
+*!!END
