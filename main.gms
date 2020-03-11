@@ -86,32 +86,90 @@ $title magpie
 *' and associated increases in both crop yields  ([14_yields]) and biomass removal through grazing on
 *' pastures ([31_past]), land use change ([39_landconversion]), interregional trade flows ([21_trade]),
 *' and irrigation ([41_area_equipped_for_irrigation]).
-
-
-
+*'
+*' The MAgPIE GAMS code folllows the coding etiquette as described below.
+*'
+*' Use the following prefixes:
+*'
+*'  *  q_ eQuations
+*'  *  v_ Variables
+*'  *  s_ Scalars
+*'  *  f_ File parameters - these parameters contain data as it was read from file
+*'  *  i_ Input parameters - influencing the optimzation but are not influenced by it
+*'  *  p_ Processing parameters - influencing optimization and are being influenced by it
+*'  *  o_ Output parameters - only being influenced by optimization but without effect on the optimization
+*'  *  x_ eXtremely important output parameters - output parameters, that are necessary for the model to run properly (required by external postprocessing). They must not be removed.
+*'  *  c_ switches from the Config.gms - parameters, that are switches to choose different scenarios
+*'  *  m_ Macros
+*'
+*' The prefixes have to be extended in some cases by a second letter
+*'
+*'  * ?m_ module-relevant object - This object is used by at least one module and the core code. Changes related to this object have to be performed carefully.
+*'  * ?00_ (a 2-digit number) module-only object This 2-digit number defines the module the object belongs to. The number is used here to make sure that different modules cannot have the same object
+*'
+*' Sets 
+*'
+*' Sets are treated slightly different: Instead of adding a prefix sets should get a 2-digit number suffix giving the number
+*' of the module in which the set is exclusively used. If the set is used in more than one module no suffix should be given.
+*'
+*' The prefixes have to be extended by a second letter in some more cases
+*'
+*'  * ?c_ value for the Current timestep - necessary for constraints. Each *c_-object must have a time-depending counterpart
+*'  * ?q_ parameter containing the values of an equation
+*'  * ?v_ parameter containing the values of a variable
+*'
+*' Besides prefixes also suffixes should be used. Suffixes should indicate the level of aggregation of an object:
+*'
+*'  * (no suffix) highest disaggregation available
+*'  * _(setname) aggregation over set
+*'  * _reg regional aggregation (exception)
+*'  * _glo global aggregation (exception)
+*'
+*' Units
+*'
+*'  * Document units at the location of the variable declaration
+*'  * Use units that lead to variable values in the range of 0.01 to 100. Keep the option of scaling in mind.
+*'  * Use only MAgPIE standard units in GAMS code 10^6, 10^6 ha, 10^6 tDM, 10^6 PJ, 10^6 USD, 10^6 m3
+*'  * Make sure that your inputs already have the right unit
+*' 
+*' Input files
+*' 
+*'  * Input file names must be unique, because input files will be downloaded from a data repository and extracted to the same folder so that different files with the same file name would overwrite each other.
+*'  * Do not add input files to the git repository. Input files should be copied instead to one of the existing data repositories from which the data is downloaded by the model.
+*' 
+*' Postprocessing
+*' 
+*'  * Processing of model outputs is managed in the corresponding magpie R package (e.g. package "magpie4" for MAgPIE version 4.x).
+*'  * If you change something in the GAMS code make sure that all function in the corresponding magpie R package still work and adapt them if necessary to the new model structure.
+*'  * When performing modifications in a magpie R package make sure that these changes are downwards compatible.
+*'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-*
-* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: e0cb64c918128436bf9a323e57cae81b
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-*
-* Used data set: rev4.26_690d3718e151be1b450b394c1064b1c5_magpie.tgz
-* md5sum: 448ab3a63e3071b3391c6bb56cb04411
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-*
-* Used data set: rev4.26_690d3718e151be1b450b394c1064b1c5_validation.tgz
-* md5sum: 2a5fbb76e8f8f3e3f74c833b21517d4b
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-*
-* Used data set: calibration_H12_c200_12Sep18.tgz
-* md5sum: 0a7d88e902918eb6a5263faaf066cc5d
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/calibration
-*
-* Used data set: additional_data_rev3.76.tgz
-* md5sum: ebc58e69dd57ed96860c57f0f667e75e
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-*
+
+* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* md5sum: 94c214b0a7b46f403dd0aab57b7e476c
+* Repository: http://rse.pik-potsdam.de/data/magpie/intern
+* 
+* Used data set: rev4.42_690d3718e151be1b450b394c1064b1c5_magpie.tgz
+* md5sum: 531f893581b6e3ea3ca871d76e0dd8a3
+* Repository: http://rse.pik-potsdam.de/data/magpie/intern
+* 
+* Used data set: rev4.42_690d3718e151be1b450b394c1064b1c5_validation.tgz
+* md5sum: ad8da81da4ddbb3cf4b341b40ceec3fb
+* Repository: http://rse.pik-potsdam.de/data/magpie/intern
+* 
+* Used data set: calibration_H12_c200_26Feb20.tgz
+* md5sum: 0fc75955deb5916d4ac078e8d817feda
+* Repository: http://rse.pik-potsdam.de/data/magpie/intern
+* 
+* Used data set: additional_data_rev3.77.tgz
+* md5sum: 28184d92028972c171145399ab21fdca
+* Repository: http://rse.pik-potsdam.de/data/magpie/intern
+* 
+* Used data set: private_forestry_dec18_20200311.tgz
+* md5sum: 8ff50b2966b0c91dcf15bd80386121a2
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/users/mishra/additional_data_private_forestry
+* 
 * Low resolution: c200
 * High resolution: 0.5
 *
@@ -122,29 +180,27 @@ $title magpie
 *    28   24   10    7    3   53   17    8   22    7   11   10
 *
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-*
-* Regions data revision: 4.26
-*
+* 
+* Regions data revision: 4.42
+* 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
-* * Additional input folder: /p/projects/landuse/data/input/other/rev38
-* * Revision: 38
+* * Additional input folder: /p/projects/landuse/data/input/other/rev42
+* * Revision: 42
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
 *
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
-* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = cfg$spamfile, debug = FALSE, seed = cfg$seed)
-*
-*
-*
-* Last modification (input data): Thu Feb 06 15:03:56 2020
-*
+* 
+* Last modification (input data): Wed Mar 11 20:46:10 2020
+* 
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
@@ -167,7 +223,8 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  5year
+$setglobal c_timesteps  coup2100
+$setglobal c_title  F12_simple_SSP2_timberOn
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /
@@ -177,7 +234,7 @@ scalars
 *******************************MODULE SETUP*************************************
 
 $setglobal drivers  aug17
-$setglobal land  landmatrix_dec18
+$setglobal land  feb15
 $setglobal costs  default
 $setglobal interest_rate  reg_feb18
 $setglobal tc  endo_jun18
@@ -187,14 +244,16 @@ $setglobal food  anthropometrics_jan18
 $setglobal demand  sector_dec18
 $setglobal production  flexreg_apr16
 
-$setglobal residues  flexreg_apr16
-$setglobal processing  substitution_dec18
+$setglobal residues  off
+$setglobal processing  off
 
 $setglobal trade  selfsuff_reduced
 
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
-$setglobal forestry  dynamic_nov19
+
+$setglobal forestry  dynamic_mar20
+
 $setglobal urban  static
 $setglobal natveg  dynamic_nov19
 
@@ -214,13 +273,15 @@ $setglobal methane  ipcc2006_flexreg_apr16
 $setglobal phosphorus  off
 $setglobal awms  ipcc2006_aug16
 $setglobal ghg_policy  price_jan20
-$setglobal maccs  on_sep16
+$setglobal maccs  off_jul16
 $setglobal som  static_jan19
 
 $setglobal bioenergy  1stgen_priced_dec18
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
-$setglobal disagg_lvst  foragebased_aug18
+
+$setglobal disagg_lvst  off
+
 $setglobal timber  biomass_feb20
 
 $setglobal optimization  nlp_apr17
