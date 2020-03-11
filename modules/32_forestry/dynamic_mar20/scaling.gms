@@ -7,4 +7,4 @@
 vm_landdiff_forestry.scale = 10e3;
 v32_cost_establishment.scale(i) = 10e3;
 v32_cost_recur.scale(i) = 10e4;
-vm_forestry_reduction.scale = 10e-3;
+vm_forestry_reduction.scale(j,type32,ac_sub) = 10e-3;

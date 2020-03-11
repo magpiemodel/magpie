@@ -6,4 +6,4 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 vm_cost_processing.scale(i) = 10e6;
-vm_secondary_overproduction.scale(i) = 10e-4;
+vm_secondary_overproduction.scale(i,kall,kpr) = 10e-4;
