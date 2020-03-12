@@ -6,10 +6,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 pc21_trade_bal_reduction(k_trade) = i21_trade_bal_reduction(t,k_trade);
+v21_trade_bal_reduction.fx(k_trade) = i21_trade_bal_reduction(t,k_trade);
 if(m_year(t) <= 2050,
- v21_trade_bal_reduction.fx(k_trade) = i21_trade_bal_reduction(t,k_trade);
+ v21_trade_bal_reduction.fx("wood") = i21_trade_bal_reduction(t,"wood");
 else 
- v21_trade_bal_reduction.up(k_trade) = i21_trade_bal_reduction(t,k_trade);
- v21_trade_bal_reduction.l(k_trade) = i21_trade_bal_reduction(t,k_trade);
- v21_trade_bal_reduction.lo(k_trade) = 0.5;
+ v21_trade_bal_reduction.up("wood") = i21_trade_bal_reduction(t,"wood");
+ v21_trade_bal_reduction.l("wood") = i21_trade_bal_reduction(t,"wood");
+ v21_trade_bal_reduction.lo("wood") = 0.5;
 );
