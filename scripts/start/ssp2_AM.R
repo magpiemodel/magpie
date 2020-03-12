@@ -26,11 +26,11 @@ cfg$results_folder <- "output/:title:"
 # Time setting
 cfg$gms$c_timesteps <- "5year"
 
-for(c52_carbon_switch in c("default_lpjml","lpjml4")){
+for(s14_BEF_constant in c(1,2)){
 
-  cfg$gms$c52_carbon_switch <- c52_carbon_switch
+  cfg$gms$s14_BEF_constant <- s14_BEF_constant
 
-  run_flag <- paste0("F14AM_",c52_carbon_switch,"-")
+  run_flag <- paste0("F16AM_","kBEF",s14_BEF_constant,"_")
 
   cfg <- setScenario(cfg,c("SSP2","NPI"))
   cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
@@ -64,7 +64,7 @@ for(c52_carbon_switch in c("default_lpjml","lpjml4")){
   cfg$gms$s15_elastic_demand <- 0
   cfg$title <- paste0(run_flag,"simple_SSP5_timberOn")
   cfg$gms$timber <- "biomass_feb20"
-  start_run(cfg,codeCheck=FALSE)
+  #start_run(cfg,codeCheck=FALSE)
 
   cfg <- setScenario(cfg,c("SSP2","NPI"))
   cfg$gms$s15_elastic_demand <- 0

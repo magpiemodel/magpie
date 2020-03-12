@@ -9,6 +9,12 @@ $setglobal c14_yields_scenario  nocc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
 
+$setglobal c14_bef ipccBEF
+
+scalars
+  s14_BEF_constant Constant global number for BEF / 2 /
+;
+
 ******* Calibration factor
 table f14_yld_calib(i,ltype14) Calibration factor for the LPJmL yields (1)
 $ondelim
@@ -29,15 +35,16 @@ $ondelim
 $include "./modules/14_yields/input/f14_pasture_yields_hist.csv"
 $offdelim;
 
-table f14_ipcc_bce(clcl,forest_type,ac_sub) npi+indc afforestation policy (Mha new forest wrt to 2010)
+table f14_ipcc_bce(clcl,forest_type,ac) npi+indc afforestation policy (Mha new forest wrt to 2010)
 $ondelim
 $include "./modules/14_yields/input/f14_ipcc_bce.cs3"
 $offdelim
 ;
+f14_ipcc_bce(clcl,forest_type,"ac0") = f14_ipcc_bce(clcl,forest_type,"ac5");
 
-$if "%c14_bef%" == "ipccBEF" f14_ipcc_bce(clcl,forest_type,ac_sub) = f14_ipcc_bce(clcl,forest_type,ac_sub);
-$if "%c14_bef%" == "BEF0p25" f14_ipcc_bce(clcl,forest_type,ac_sub) = 0.25;
-$if "%c14_bef%" == "BEF0p5" f14_ipcc_bce(clcl,forest_type,ac_sub) = 0.5;
-$if "%c14_bef%" == "BEF0p75" f14_ipcc_bce(clcl,forest_type,ac_sub) = 0.75;
-$if "%c14_bef%" == "BEF1p0" f14_ipcc_bce(clcl,forest_type,ac_sub) = 1;
-$if "%c14_bef%" == "BEF2p0" f14_ipcc_bce(clcl,forest_type,ac_sub) = 2;
+$if "%c14_bef%" == "ipccBEF" f14_ipcc_bce(clcl,forest_type,ac) = f14_ipcc_bce(clcl,forest_type,ac);
+$if "%c14_bef%" == "BEF0p25" f14_ipcc_bce(clcl,forest_type,ac) = 0.25;
+$if "%c14_bef%" == "BEF0p5" f14_ipcc_bce(clcl,forest_type,ac) = 0.5;
+$if "%c14_bef%" == "BEF0p75" f14_ipcc_bce(clcl,forest_type,ac) = 0.75;
+$if "%c14_bef%" == "BEF1p0" f14_ipcc_bce(clcl,forest_type,ac) = 1;
+$if "%c14_bef%" == "BEF2p0" f14_ipcc_bce(clcl,forest_type,ac) = 2;
