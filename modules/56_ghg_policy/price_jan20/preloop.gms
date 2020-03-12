@@ -12,12 +12,19 @@ $elseif "%c56_pollutant_prices%" == "emulator" im_pollutant_prices(t_all,i,pollu
 $else im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices%");
 $endif
 
-* Region price share for regional ghg policy:
+****** Region price share for ghg policy of selective countries:
+* Country switch to determine countries for which ghg policy shall be applied.
+* In the default case, the ghg policy affects all countries when activated.
 p56_country_dummy(iso) = 0;
 p56_country_dummy(ghg_policy_countries) = 1;
+* Because MAgPIE is not run at country-level, but at region level, a region
+* share is calculated that translates the countries' influence to regional level.
+* Countries are weighted by their population size.
 p56_region_price_shr(t_all,i) = sum(i_to_iso(i,iso), p56_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
 
-***save im_pollutant_prices to parameter
+***save im_pollutant_prices to parameter (including the region price share of
+* the countries' ghg poliy. Note: p56_region_price_shr(t_all,i) is 1 in the
+* default case)
 p56_pollutant_prices_input(t_all,i,pollutants) = im_pollutant_prices(t_all,i,pollutants) * p56_region_price_shr(t_all,i);
 
 
