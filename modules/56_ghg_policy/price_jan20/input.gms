@@ -8,7 +8,7 @@
 * Set-switch for countries affected by regional ghg policy
 * Default: all iso countries selected
 sets
-  ghg_policy_countries (iso) countries to be affected by ghg policy / DEU, FRA /
+  ghg_policy_countries(iso) countries to be affected by ghg policy / DEU, FRA /
 ;
 
 scalars

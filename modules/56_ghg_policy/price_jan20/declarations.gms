@@ -11,7 +11,7 @@ parameters
  p56_emis_policy(t,i,pollutants,emis_source)      GHG emission policy scenarios (binary)
  p56_c_price_aff(t_all,i,ac)				              C price used for afforestation decision-making (USD05MER per tC)
  pc56_c_price_induced_aff					                Helper for fixing C price driven afforestation to zero for historic time steps (binary)
- p56_region_price_shr(t_all,i)	                      GHG price share of the region (1)
+ p56_region_price_shr(t_all,i)	                  GHG price share of the region (1)
  p56_country_dummy(iso)		                        Dummy parameter indicating whether country is affected by GHG policy or not (1)
 ;
 
