@@ -75,7 +75,7 @@ $offdelim
 $if "%c42_watdem_scenario%" == "nocc" f42_env_flows(t_all,j) = f42_env_flows("y1995",j);
 m_fillmissingyears(f42_env_flows,"j");
 
-$setglobal c42_env_flow_policy  off
+$setglobal c42_env_flow_policy  on
 
 table f42_env_flow_policy(t_all,scen42) EFP policies (1)
 $ondelim

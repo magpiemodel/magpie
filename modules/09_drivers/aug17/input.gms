@@ -5,12 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c09_pop_scenario  SSP2
+$setglobal c09_pop_scenario  SSP5
 *   options:   SSP: "SSP1", "SSP2", "SP3", "SSP4", "SSP5"
 *              SDP: "SDP"
 *             SRES: "a1", "a2", "b1", "b2"
 
-$setglobal c09_gdp_scenario  SSP2
+$setglobal c09_gdp_scenario  SSP5
 *   options:   SSP: "SSP1", "SSP2", "SSP3", "SSP4", "SSP5"
 *              SDP: "SDP"
 *             SRES: "a1", "a2", "b1", "b2"

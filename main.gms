@@ -226,7 +226,7 @@ $offlisting
 *                    Key parameters during model runs
 
 $setglobal c_timesteps  coup2100
-$setglobal c_title  F12_simple_SSP2_timberOn
+$setglobal c_title  F18_AM_OldScale_simple_SSP5
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /

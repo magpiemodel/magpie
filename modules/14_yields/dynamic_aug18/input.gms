@@ -9,7 +9,7 @@ $setglobal c14_yields_scenario  nocc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
 
-$setglobal c14_bef ipccBEF
+$setglobal c14_bef  ipccBEF
 
 scalars
   s14_BEF_constant Constant global number for BEF / 2 /
