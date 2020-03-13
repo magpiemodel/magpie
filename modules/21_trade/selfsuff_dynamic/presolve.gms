@@ -7,7 +7,7 @@
 
 pc21_trade_bal_reduction(k_trade) = i21_trade_bal_reduction(t,k_trade);
 v21_trade_bal_reduction.fx(k_trade) = i21_trade_bal_reduction(t,k_trade);
-if(m_year(t) <= 2010,
+if(m_year(t) <= 2050,
  v21_trade_bal_reduction.fx("wood") = i21_trade_bal_reduction(t,"wood");
  v21_trade_bal_reduction.fx("woodfuel") = i21_trade_bal_reduction(t,"woodfuel");
 else 

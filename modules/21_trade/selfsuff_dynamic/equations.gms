@@ -12,7 +12,7 @@
  q21_trade_glo(k_trade)..
   sum(i2 ,vm_prod_reg(i2,k_trade)) =g=
   sum(i2, vm_supply(i2,k_trade)) + sum(ct,f21_trade_balanceflow(ct,k_trade)) + 
-  ((pc21_trade_bal_reduction(k_trade) - v21_trade_bal_reduction(k_trade)) * 100)**2 * 1000000;
+  ((pc21_trade_bal_reduction(k_trade) - v21_trade_bal_reduction(k_trade)) * 100) * 1000000;
 
 *'
 *' For non-tradable commodites, the regional supply should be larger or equal to the regional demand.
