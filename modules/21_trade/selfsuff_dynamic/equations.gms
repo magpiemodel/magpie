@@ -11,8 +11,7 @@
 
  q21_trade_glo(k_trade)..
   sum(i2 ,vm_prod_reg(i2,k_trade)) =g=
-  sum(i2, vm_supply(i2,k_trade)) + sum(ct,f21_trade_balanceflow(ct,k_trade)) + 
-  ((pc21_trade_bal_reduction(k_trade) - v21_trade_bal_reduction(k_trade)) * 100) * 1000000;
+  sum(i2, vm_supply(i2,k_trade)) + sum(ct,f21_trade_balanceflow(ct,k_trade));
 
 *'
 *' For non-tradable commodites, the regional supply should be larger or equal to the regional demand.
@@ -69,4 +68,5 @@
 
 * Regional trade costs are the costs for each region aggregated over all the tradable commodities.
  q21_cost_trade(i2)..
- vm_cost_trade(i2) =e= sum(k_trade,v21_cost_trade_reg(i2,k_trade));
+ vm_cost_trade(i2) =e= sum(k_trade,v21_cost_trade_reg(i2,k_trade)) + 
+  ((pc21_trade_bal_reduction(k_trade) - v21_trade_bal_reduction(k_trade)) * 100) * 1000000;
