@@ -7,5 +7,5 @@
 vm_hvarea_forestry.scale(j,ac_sub) = 10e-3;
 vm_hvarea_other.scale(j,ac_sub) = 10e-3;
 vm_hvarea_secdforest.scale(j,ac_sub) = 10e-3;
-vm_cost_timber.scale(i) = 10e3;
+vm_cost_timber.scale(i) = 10e4;
 v73_cost_hvarea.scale(i) = 10e3;

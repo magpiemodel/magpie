@@ -37,20 +37,16 @@ cfg$gms$maccs  <- "off_jul16"
 cfg$gms$residues <- "off"
 cfg$gms$c80_nlp_solver <- "conopt4"
 
-for( c14_bef in c("ipccBEF","BEF2p0")){
+run_flag <- c("F18_AM_ScalingOLD_",c14_bef,"_")
 
-  run_flag <- c("F17_AM_",c14_bef,"_")
+cfg <- setScenario(cfg,c("SSP5","NPI"))
+cfg$gms$s15_elastic_demand <- 0
+cfg$title <- paste0(run_flag,"simple_SSP5_timberOn")
+cfg$gms$timber <- "biomass_feb20"
+#start_run(cfg,codeCheck=FALSE)
 
-  cfg$gms$c14_bef <- c14_bef
-  cfg <- setScenario(cfg,c("SSP5","NPI"))
-  cfg$gms$s15_elastic_demand <- 0
-  cfg$title <- paste0(run_flag,"simple_SSP5_timberOn")
-  cfg$gms$timber <- "biomass_feb20"
-#  start_run(cfg,codeCheck=FALSE)
-
-  cfg <- setScenario(cfg,c("SSP2","NPI"))
-  cfg$gms$s15_elastic_demand <- 0
-  cfg$title <- paste0(run_flag,"simple_SSP2_timberOn")
-  cfg$gms$timber <- "biomass_feb20"
-  start_run(cfg,codeCheck=FALSE)
-}
+cfg <- setScenario(cfg,c("SSP2","NPI"))
+cfg$gms$s15_elastic_demand <- 0
+cfg$title <- paste0(run_flag,"simple_SSP2_timberOn")
+cfg$gms$timber <- "biomass_feb20"
+start_run(cfg,codeCheck=FALSE)

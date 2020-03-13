@@ -11,7 +11,7 @@ q73_cost_timber(i2)..
                     vm_cost_timber(i2)
                     =e=
                     v73_cost_hvarea(i2)
-                    + sum((cell(i2,j2),kforestry), vm_prod_heaven_timber(j2,kforestry)) *1000000;
+                    + sum((cell(i2,j2),kforestry), vm_prod_heaven_timber(j2,kforestry)) * 1000000;
 
 
 q73_cost_hvarea(i2)..
