@@ -13,8 +13,8 @@ if(m_year(t) <= 2050,
 else 
  v21_trade_bal_reduction.up("wood") = i21_trade_bal_reduction(t,"wood");
  v21_trade_bal_reduction.l("wood") = i21_trade_bal_reduction(t,"wood");
- v21_trade_bal_reduction.lo("wood") = 0.5;
+ v21_trade_bal_reduction.lo("wood") = 0.1;
  v21_trade_bal_reduction.up("woodfuel") = i21_trade_bal_reduction(t,"woodfuel");
  v21_trade_bal_reduction.l("woodfuel") = i21_trade_bal_reduction(t,"woodfuel");
- v21_trade_bal_reduction.lo("woodfuel") = 0.5;
+ v21_trade_bal_reduction.lo("woodfuel") = 0.1;
 );
