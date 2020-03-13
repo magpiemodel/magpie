@@ -40,7 +40,7 @@ cfg$gms$c80_nlp_solver <- "conopt4"
 ### 50pc
 
 cfg$gms$s21_redn_factor <- 0.5
-run_flag <- c("F18_AM_OldScale_","50pc_")
+run_flag <- paste0("F18_AM_OldScale_","50pc_")
 
 cfg <- setScenario(cfg,c("SSP5","NPI"))
 cfg$gms$s15_elastic_demand <- 0
@@ -57,7 +57,7 @@ start_run(cfg,codeCheck=FALSE)
 ### 10pc
 
 cfg$gms$s21_redn_factor <- 0.1
-run_flag <- c("F18_AM_OldScale_","10pc_")
+run_flag <- paste0("F18_AM_OldScale_","10pc_")
 
 cfg <- setScenario(cfg,c("SSP5","NPI"))
 cfg$gms$s15_elastic_demand <- 0
