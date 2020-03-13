@@ -47,7 +47,7 @@ cfg$gms$maccs  <- "off_jul16"
 cfg$gms$residues <- "off"
 cfg$gms$s15_elastic_demand <- 0
 #cfg$gms$c32_aff_policy <- "none"
-cfg$gms$trade <- "selfsuff_dynamic"
+#cfg$gms$trade <- "selfsuff_dynamic"
 cfg$gms$c80_nlp_solver <- "conopt4"
 
 # cfg$title <- "F12_simple_timberOff"
@@ -55,12 +55,12 @@ cfg$gms$c80_nlp_solver <- "conopt4"
 # start_run(cfg,codeCheck=FALSE)
 
 cfg <- setScenario(cfg,c("SSP5","NPI"))
-cfg$title <- paste0(run_flag,"dynTrade_SSP5_timberOn")
+cfg$title <- paste0(run_flag,"simple_SSP5_timberOn")
 cfg$gms$timber <- "biomass_feb20"
 start_run(cfg,codeCheck=FALSE)
 
 cfg <- setScenario(cfg,c("SSP2","NPI"))
-cfg$title <- paste0(run_flag,"dynTrade_SSP2_timberOn")
+cfg$title <- paste0(run_flag,"simple_SSP2_timberOn")
 cfg$gms$timber <- "biomass_feb20"
 start_run(cfg,codeCheck=FALSE)
 
