@@ -59,11 +59,11 @@ pm_demand_ext(t_all,i,kforestry) = p73_timber_demand_gdp_pop(t_all,i,kforestry);
 
 *m3 to ton conversion.
 *0.6 ton DM / m^3?
-p73_volumetric_conversion("wood") = 0.6325;
-p73_volumetric_conversion("woodfuel") = 0.3071;
+p73_volumetric_conversion("wood") = 0.6;
+p73_volumetric_conversion("woodfuel") = 0.3;
 *p73_timber_demand_gdp_pop in mio m^3
 *pm_demand_ext in mio ton DM
-pm_demand_ext(t_all,i,kforestry) = p73_timber_demand_gdp_pop(t_all,i,kforestry) * p73_volumetric_conversion(kforestry);
+pm_demand_ext(t_all,i,kforestry) = round(p73_timber_demand_gdp_pop(t_all,i,kforestry) * p73_volumetric_conversion(kforestry));
 
 
 *pm_demand_ext(t_all,"JPN",kforestry) =p73_timber_demand_gdp_pop(t_all,"JPN",kforestry) * 0.5;

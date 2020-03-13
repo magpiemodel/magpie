@@ -37,16 +37,24 @@ cfg$gms$maccs  <- "off_jul16"
 cfg$gms$residues <- "off"
 cfg$gms$c80_nlp_solver <- "conopt4"
 
-run_flag <- c("F18_AM_ScalingOLD_",c14_bef,"_")
+for(s21_redn_factor in c(0.5,0.1)){
 
-cfg <- setScenario(cfg,c("SSP5","NPI"))
-cfg$gms$s15_elastic_demand <- 0
-cfg$title <- paste0(run_flag,"simple_SSP5_timberOn")
-cfg$gms$timber <- "biomass_feb20"
-#start_run(cfg,codeCheck=FALSE)
+  cfg$gms$s21_redn_factor <- s21_redn_factor
 
-cfg <- setScenario(cfg,c("SSP2","NPI"))
-cfg$gms$s15_elastic_demand <- 0
-cfg$title <- paste0(run_flag,"simple_SSP2_timberOn")
-cfg$gms$timber <- "biomass_feb20"
-start_run(cfg,codeCheck=FALSE)
+  if(cfg$gms$s21_redn_factor == 0.5) reduction_flag="50pc"
+  if(cfg$gms$s21_redn_factor == 0.1) reduction_flag="10pc"
+
+  run_flag <- c("F18_AM_ScalingOLD_", reduction_flag,"_")
+
+  cfg <- setScenario(cfg,c("SSP5","NPI"))
+  cfg$gms$s15_elastic_demand <- 0
+  cfg$title <- paste0(run_flag,"simple_SSP5_timberOn")
+  cfg$gms$timber <- "biomass_feb20"
+  start_run(cfg,codeCheck=FALSE)
+
+  cfg <- setScenario(cfg,c("SSP2","NPI"))
+  cfg$gms$s15_elastic_demand <- 0
+  cfg$title <- paste0(run_flag,"simple_SSP2_timberOn")
+  cfg$gms$timber <- "biomass_feb20"
+  start_run(cfg,codeCheck=FALSE)
+}
