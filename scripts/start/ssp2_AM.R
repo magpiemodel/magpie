@@ -23,66 +23,34 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-# Time setting
-cfg$gms$c_timesteps <- "5year"
+cfg <- setScenario(cfg,c("SSP2","NPI"))
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
+cfg$gms$forestry  <- "dynamic_mar20"
+cfg$gms$natveg  <- "dynamic_nov19"
 
-for(s14_BEF_constant in c(1,2)){
+#simple
+cfg$gms$land <- "feb15"
+cfg$gms$processing <- "off"
+cfg$gms$disagg_lvst <- "off"
+cfg$gms$maccs  <- "off_jul16"
+cfg$gms$residues <- "off"
+cfg$gms$c80_nlp_solver <- "conopt4"
 
-  cfg$gms$s14_BEF_constant <- s14_BEF_constant
+for( c14_bef in c("ipccBEF","BEF2p0")){
 
-  run_flag <- paste0("F16AM_","kBEF",s14_BEF_constant,"_")
+  run_flag <- c("F17_AM_",c14_bef,"_")
 
-  cfg <- setScenario(cfg,c("SSP2","NPI"))
-  cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
-  cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
-  cfg$gms$forestry  <- "dynamic_mar20"
-  cfg$gms$natveg  <- "dynamic_nov19"
-
-  # cfg$title <- "F12_devfull_timberOff"
-  # cfg$gms$timber <- "off"
-  # start_run(cfg,codeCheck=FALSE)
-  #
-  # cfg$title <- "F12_devfull_timberOn"
-  # cfg$gms$timber <- "biomass_feb20"
-  # start_run(cfg,codeCheck=FALSE)
-
-  #simple
-  cfg$gms$land <- "feb15"
-  cfg$gms$processing <- "off"
-  cfg$gms$disagg_lvst <- "off"
-  cfg$gms$maccs  <- "off_jul16"
-  cfg$gms$residues <- "off"
-  #cfg$gms$c32_aff_policy <- "none"
-  cfg$gms$trade <- "selfsuff_reduced"
-  cfg$gms$c80_nlp_solver <- "conopt4"
-
-  # cfg$title <- "F12_simple_timberOff"
-  # cfg$gms$timber <- "off"
-  # start_run(cfg,codeCheck=FALSE)
-
+  cfg$gms$c14_bef <- c14_bef
   cfg <- setScenario(cfg,c("SSP5","NPI"))
   cfg$gms$s15_elastic_demand <- 0
   cfg$title <- paste0(run_flag,"simple_SSP5_timberOn")
   cfg$gms$timber <- "biomass_feb20"
-  #start_run(cfg,codeCheck=FALSE)
+#  start_run(cfg,codeCheck=FALSE)
 
   cfg <- setScenario(cfg,c("SSP2","NPI"))
   cfg$gms$s15_elastic_demand <- 0
   cfg$title <- paste0(run_flag,"simple_SSP2_timberOn")
   cfg$gms$timber <- "biomass_feb20"
   start_run(cfg,codeCheck=FALSE)
-
-  cfg <- setScenario(cfg,c("SSP2","NPI"))
-  cfg$gms$s15_elastic_demand <- 0
-  cfg$title <- paste0(run_flag,"simple_SSP2_timberOn_freeTrade")
-  cfg$gms$timber <- "biomass_feb20"
-  cfg$gms$trade <- "free_apr16"
-  #start_run(cfg,codeCheck=FALSE)
-
-  cfg <- setScenario(cfg,c("SSP5","NPI"))
-  cfg$gms$s15_elastic_demand <- 0
-  cfg$title <- paste0(run_flag,"simple_SSP5_timberOn_freeTrade")
-  cfg$gms$timber <- "biomass_feb20"
-  cfg$gms$trade <- "free_apr16"
-  #start_run(cfg,codeCheck=FALSE)
 }
