@@ -25,7 +25,7 @@ equations
  q21_trade_glo(k_trade)                  Global production constraint (mio. tDM per yr)
  q21_notrade(i,k_notrade)                Regional production constraint of non-tradable commodities (mio. tDM per yr)
  q21_trade_reg(i,k_trade)                Regional trade balances i.e. minimum self-sufficiency ratio (1)
- q21_trade_reg_up(i,k_trade)             Regional trade balances i.e. maximum self-sufficiency ratio (1)
+ q21_trade_reg_up(i,k_trade_excl_forestry) Regional trade balances i.e. maximum self-sufficiency ratio (1)
  q21_excess_dem(k_trade)                 Global excess demand (mio. tDM per yr)
  q21_excess_supply(i,k_trade)            Regional excess production (mio. tDM per yr)
  q21_cost_trade(i)                       Regional  trade costs (mio. USD05MER per yr)
@@ -34,18 +34,18 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov21_excess_dem(t,k_trade,type)          Global excess demand (mio. tDM per yr)
- ov21_excess_prod(t,i,k_trade,type)       Regional excess production (mio. tDM per yr)
- ov_cost_trade(t,i,type)                  Regional  trade costs (mio. USD05MER per yr)
- ov21_cost_trade_reg(t,i,k_trade,type)    Regional trade costs for each tradable commodity (mio. USD05MER per yr)
- ov21_trade_bal_reduction(t,k_trade,type) blub
- oq21_trade_glo(t,k_trade,type)           Global production constraint (mio. tDM per yr)
- oq21_notrade(t,i,k_notrade,type)         Regional production constraint of non-tradable commodities (mio. tDM per yr)
- oq21_trade_reg(t,i,k_trade,type)         Regional trade balances i.e. minimum self-sufficiency ratio (1)
- oq21_trade_reg_up(t,i,k_trade,type)      Regional trade balances i.e. maximum self-sufficiency ratio (1)
- oq21_excess_dem(t,k_trade,type)          Global excess demand (mio. tDM per yr)
- oq21_excess_supply(t,i,k_trade,type)     Regional excess production (mio. tDM per yr)
- oq21_cost_trade(t,i,type)                Regional  trade costs (mio. USD05MER per yr)
- oq21_cost_trade_reg(t,i,k_trade,type)    Regional trade costs for each tradable commodity (mio. USD05MER per yr)
+ ov21_excess_dem(t,k_trade,type)                   Global excess demand (mio. tDM per yr)
+ ov21_excess_prod(t,i,k_trade,type)                Regional excess production (mio. tDM per yr)
+ ov_cost_trade(t,i,type)                           Regional  trade costs (mio. USD05MER per yr)
+ ov21_cost_trade_reg(t,i,k_trade,type)             Regional trade costs for each tradable commodity (mio. USD05MER per yr)
+ ov21_trade_bal_reduction(t,k_trade,type)          blub
+ oq21_trade_glo(t,k_trade,type)                    Global production constraint (mio. tDM per yr)
+ oq21_notrade(t,i,k_notrade,type)                  Regional production constraint of non-tradable commodities (mio. tDM per yr)
+ oq21_trade_reg(t,i,k_trade,type)                  Regional trade balances i.e. minimum self-sufficiency ratio (1)
+ oq21_trade_reg_up(t,i,k_trade_excl_forestry,type) Regional trade balances i.e. maximum self-sufficiency ratio (1)
+ oq21_excess_dem(t,k_trade,type)                   Global excess demand (mio. tDM per yr)
+ oq21_excess_supply(t,i,k_trade,type)              Regional excess production (mio. tDM per yr)
+ oq21_cost_trade(t,i,type)                         Regional  trade costs (mio. USD05MER per yr)
+ oq21_cost_trade_reg(t,i,k_trade,type)             Regional trade costs for each tradable commodity (mio. USD05MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
