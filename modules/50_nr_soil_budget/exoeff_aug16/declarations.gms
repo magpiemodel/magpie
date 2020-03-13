@@ -7,24 +7,30 @@
 
 
 positive variables
- vm_nr_inorg_fert_reg(i,land_ag)  inorganic fertilizer application (Tg N per yr)
- vm_nr_inorg_fert_costs(i)        cost of inorganic fertilizers (mio. USD05MER per yr)
- v50_nr_eff(i)                    cropland nutrient uptake efficiency (Tg N per yr)
- v50_nr_eff_pasture(i)            pasture nutrient uptake efficiency (Tg N per yr)
- v50_nr_withdrawals(i,kcr)        withdrawals of Nr from soils (Tg N per yr)
- v50_nr_deposition(i,land)        atmospheric deposition (Tg N per yr)
+ vm_nr_inorg_fert_reg(i,land_ag)  Inorganic fertilizer application (Tg N per yr)
+ vm_nr_inorg_fert_costs(i)        Cost of inorganic fertilizers (mio. USD05MER per yr)
+ v50_nr_eff(i)                    Cropland nutrient uptake efficiency (Tg N per yr)
+ v50_nr_eff_pasture(i)            Pasture nutrient uptake efficiency (Tg N per yr)
+ v50_nr_withdrawals(i,kcr)        Withdrawals of Nr from soils (Tg N per yr)
+ v50_nr_deposition(i,land)        Atmospheric deposition (Tg N per yr)
 ;
 
 equations
- q50_nr_cost_fert(i)        fertilizer costs (mio. USD05MER per yr)
- q50_nr_bal_crp(i)          cropland nutrient inputs have to equal withdrawals and losses (Tg N per yr)
- q50_nr_withdrawals(i,kcr)  calculating nr withdrawals (Tg N per yr)
- q50_nr_bal_pasture(i)      nitrogen balance pasture lands (Tg N per yr)
- q50_nr_deposition(i,land)  atmospheric deposition (Tg N per yr)
+ q50_nr_cost_fert(i)        Fertilizer costs (mio. USD05MER per yr)
+ q50_nr_bal_crp(i)          Cropland nutrient inputs have to equal withdrawals and losses (Tg N per yr)
+ q50_nr_withdrawals(i,kcr)  Calculating nr withdrawals (Tg N per yr)
+ q50_nr_bal_pasture(i)      Nitrogen balance pasture lands (Tg N per yr)
+ q50_nr_deposition(i,land)  Atmospheric deposition (Tg N per yr)
 ;
 
 parameters
- i50_atmospheric_deposition_rates(t,j,land)   atmospheric deposition rate (t N per ha)
+ i50_atmospheric_deposition_rates(t,j,land)   Atmospheric deposition rate (t N per ha)
+* country-specific scenario switch
+ p50_country_dummy_cropneff(iso)              Dummy parameter indicating whether country is affected by crop neff scenario (1)
+ p50_country_dummy_pastneff(iso)              Dummy parameter indicating whether country is affected by pasture neff scenario (1)
+ p50_cropneff_region_shr(t_all,i)             Weighted share of region with regards to crop neff scenario of countries (1)
+ p50_pastneff_region_shr(t_all,i)             Weighted share of region with regards to pasture neff scenario of countries (1)
+ ;
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
