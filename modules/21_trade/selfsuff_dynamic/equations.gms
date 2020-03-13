@@ -37,7 +37,7 @@
 
 
 
- q21_trade_reg_up(i2,k_trade_excl_forestry_excl_forestry)..
+ q21_trade_reg_up(i2,k_trade_excl_forestry)..
  vm_prod_reg(i2,k_trade_excl_forestry) =l=
  ((vm_supply(i2,k_trade_excl_forestry) + v21_excess_prod(i2,k_trade_excl_forestry))/v21_trade_bal_reduction(k_trade_excl_forestry))
  $(sum(ct,f21_self_suff(ct,i2,k_trade_excl_forestry) >= 1))
@@ -68,6 +68,5 @@
 
 * Regional trade costs are the costs for each region aggregated over all the tradable commodities.
  q21_cost_trade(i2)..
- vm_cost_trade(i2) =e= sum(k_trade,v21_cost_trade_reg(i2,k_trade)) + 
+ vm_cost_trade(i2) =e= sum(k_trade,v21_cost_trade_reg(i2,k_trade)) +
  sum(k_trade, pc21_trade_bal_reduction(k_trade) - v21_trade_bal_reduction(k_trade)) * 100 * 1000000;
- 
