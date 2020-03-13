@@ -37,36 +37,33 @@ cfg$gms$maccs  <- "off_jul16"
 cfg$gms$residues <- "off"
 cfg$gms$c80_nlp_solver <- "conopt4"
 
-### 50pc
+identifier_flag <- "F19AM_OS_"
 
-cfg$gms$s21_redn_factor <- 0.5
-run_flag <- paste0("F18_AM_OldScale_","50pc_")
+for(trade_module in c("selfsuff_reduced")){
 
-cfg <- setScenario(cfg,c("SSP5","NPI"))
-cfg$gms$s15_elastic_demand <- 0
-cfg$title <- paste0(run_flag,"simple_SSP5")
-cfg$gms$timber <- "biomass_feb20"
-start_run(cfg,codeCheck=FALSE)
+  if(trade_module == "selfsuff_dynamic") trade_flag = "TVar"
+  if(trade_module == "selfsuff_reduced") trade_flag = "TDef"
 
-cfg <- setScenario(cfg,c("SSP2","NPI"))
-cfg$gms$s15_elastic_demand <- 0
-cfg$title <- paste0(run_flag,"simple_SSP2")
-cfg$gms$timber <- "biomass_feb20"
-start_run(cfg,codeCheck=FALSE)
+  for(redn_factor in c(0.5,0.1)){
+    cfg$gms$s21_redn_factor <- redn_factor
 
-### 10pc
+    if(cfg$gms$s21_redn_factor == 0.5) redn_flag = "50pc"
+    if(cfg$gms$s21_redn_factor == 0.1) redn_flag = "10pc"
 
-cfg$gms$s21_redn_factor <- 0.1
-run_flag <- paste0("F18_AM_OldScale_","10pc_")
+    run_flag <- paste0(identifier_flag,redn_flag,"_",trade_flag,"_")
 
-cfg <- setScenario(cfg,c("SSP5","NPI"))
-cfg$gms$s15_elastic_demand <- 0
-cfg$title <- paste0(run_flag,"simple_SSP5")
-cfg$gms$timber <- "biomass_feb20"
-start_run(cfg,codeCheck=FALSE)
+    cfg <- setScenario(cfg,c("SSP5","NPI"))
+    cfg$gms$s15_elastic_demand <- 0
+    cfg$title <- paste0(run_flag,"simple_SSP5")
+    cfg$gms$timber <- "biomass_feb20"
+    cfg$gms$trade <- trade_module
+    start_run(cfg,codeCheck=FALSE)
 
-cfg <- setScenario(cfg,c("SSP2","NPI"))
-cfg$gms$s15_elastic_demand <- 0
-cfg$title <- paste0(run_flag,"simple_SSP2")
-cfg$gms$timber <- "biomass_feb20"
-start_run(cfg,codeCheck=FALSE)
+    cfg <- setScenario(cfg,c("SSP2","NPI"))
+    cfg$gms$s15_elastic_demand <- 0
+    cfg$title <- paste0(run_flag,"simple_SSP2")
+    cfg$gms$timber <- "biomass_feb20"
+    cfg$gms$trade <- trade_module
+    start_run(cfg,codeCheck=FALSE)
+  }
+}
