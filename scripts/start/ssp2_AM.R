@@ -37,7 +37,7 @@ cfg$gms$maccs  <- "off_jul16"
 cfg$gms$residues <- "off"
 cfg$gms$c80_nlp_solver <- "conopt4"
 
-identifier_flag <- "F21AM_MEADef_"
+identifier_flag <- "F22AM_MEA75pc_"
 
 for(trade_module in c("selfsuff_reduced")){
 
@@ -55,14 +55,14 @@ for(trade_module in c("selfsuff_reduced")){
     cfg <- setScenario(cfg,c("SSP5","NPI"))
     cfg$gms$s15_elastic_demand <- 0
     cfg$title <- paste0(run_flag,"simple_SSP5")
-    cfg$gms$timber <- "biomass_feb20"
+    cfg$gms$timber <- "biomass_mar20"
     cfg$gms$trade <- trade_module
     start_run(cfg,codeCheck=FALSE)
 
     cfg <- setScenario(cfg,c("SSP2","NPI"))
     cfg$gms$s15_elastic_demand <- 0
     cfg$title <- paste0(run_flag,"simple_SSP2")
-    cfg$gms$timber <- "biomass_feb20"
+    cfg$gms$timber <- "biomass_mar20"
     cfg$gms$trade <- trade_module
     start_run(cfg,codeCheck=FALSE)
   }
