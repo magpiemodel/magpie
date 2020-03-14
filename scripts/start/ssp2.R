@@ -23,7 +23,7 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-run_flag <- "F24_FH_"
+run_flag <- "F25_FH_"
 
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
@@ -47,7 +47,7 @@ cfg$gms$maccs  <- "off_jul16"
 cfg$gms$residues <- "off"
 cfg$gms$s15_elastic_demand <- 0
 #cfg$gms$c32_aff_policy <- "none"
-cfg$gms$trade <- "selfsuff_reduced_test"
+cfg$gms$trade <- "selfsuff_forestry"
 cfg$gms$c80_nlp_solver <- "conopt4"
 
 # cfg$title <- "F12_simple_timberOff"
