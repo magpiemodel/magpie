@@ -10,6 +10,7 @@
  ov21_excess_prod(t,i,k_trade,"marginal")    = v21_excess_prod.m(i,k_trade);
  ov_cost_trade(t,i,"marginal")               = vm_cost_trade.m(i);
  ov21_cost_trade_reg(t,i,k_trade,"marginal") = v21_cost_trade_reg.m(i,k_trade);
+ ov21_self_suff(t,i,k_trade,"marginal")      = v21_self_suff.m(i,k_trade);
  oq21_trade_glo(t,k_trade,"marginal")        = q21_trade_glo.m(k_trade);
  oq21_notrade(t,i,k_notrade,"marginal")      = q21_notrade.m(i,k_notrade);
  oq21_trade_reg(t,i,k_trade,"marginal")      = q21_trade_reg.m(i,k_trade);
@@ -22,6 +23,7 @@
  ov21_excess_prod(t,i,k_trade,"level")       = v21_excess_prod.l(i,k_trade);
  ov_cost_trade(t,i,"level")                  = vm_cost_trade.l(i);
  ov21_cost_trade_reg(t,i,k_trade,"level")    = v21_cost_trade_reg.l(i,k_trade);
+ ov21_self_suff(t,i,k_trade,"level")         = v21_self_suff.l(i,k_trade);
  oq21_trade_glo(t,k_trade,"level")           = q21_trade_glo.l(k_trade);
  oq21_notrade(t,i,k_notrade,"level")         = q21_notrade.l(i,k_notrade);
  oq21_trade_reg(t,i,k_trade,"level")         = q21_trade_reg.l(i,k_trade);
@@ -34,6 +36,7 @@
  ov21_excess_prod(t,i,k_trade,"upper")       = v21_excess_prod.up(i,k_trade);
  ov_cost_trade(t,i,"upper")                  = vm_cost_trade.up(i);
  ov21_cost_trade_reg(t,i,k_trade,"upper")    = v21_cost_trade_reg.up(i,k_trade);
+ ov21_self_suff(t,i,k_trade,"upper")         = v21_self_suff.up(i,k_trade);
  oq21_trade_glo(t,k_trade,"upper")           = q21_trade_glo.up(k_trade);
  oq21_notrade(t,i,k_notrade,"upper")         = q21_notrade.up(i,k_notrade);
  oq21_trade_reg(t,i,k_trade,"upper")         = q21_trade_reg.up(i,k_trade);
@@ -46,6 +49,7 @@
  ov21_excess_prod(t,i,k_trade,"lower")       = v21_excess_prod.lo(i,k_trade);
  ov_cost_trade(t,i,"lower")                  = vm_cost_trade.lo(i);
  ov21_cost_trade_reg(t,i,k_trade,"lower")    = v21_cost_trade_reg.lo(i,k_trade);
+ ov21_self_suff(t,i,k_trade,"lower")         = v21_self_suff.lo(i,k_trade);
  oq21_trade_glo(t,k_trade,"lower")           = q21_trade_glo.lo(k_trade);
  oq21_notrade(t,i,k_notrade,"lower")         = q21_notrade.lo(i,k_notrade);
  oq21_trade_reg(t,i,k_trade,"lower")         = q21_trade_reg.lo(i,k_trade);
