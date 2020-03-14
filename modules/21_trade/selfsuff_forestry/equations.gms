@@ -25,25 +25,24 @@
 *' If it equals 0, all demand enters the comparative advantage pool.
 
  q21_trade_balance(k_trade)..
-  sum(i2, v21_import(i2,k_trade)) =e=
-  sum(i2, v21_export(i2,k_trade));
+  sum(i2, v21_trade_bal(i2,k_trade)) =e= 0;
 
  q21_trade_reg(i2,k_trade)..
  vm_prod_reg(i2,k_trade) =g=
  ((vm_supply(i2,k_trade) + v21_excess_prod(i2,k_trade))
- *sum(ct,i21_trade_bal_reduction(ct,k_trade)) + v21_export(i2,k_trade))
+ *sum(ct,i21_trade_bal_reduction(ct,k_trade)) + v21_trade_bal(i2,k_trade))
  $(sum(ct,f21_self_suff(ct,i2,k_trade) >= 1))
  + (vm_supply(i2,k_trade)*sum(ct,f21_self_suff(ct,i2,k_trade))
- *sum(ct,i21_trade_bal_reduction(ct,k_trade)) - v21_import(i2,k_trade))
+ *sum(ct,i21_trade_bal_reduction(ct,k_trade)) + v21_trade_bal(i2,k_trade))
  $(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
 
 
- q21_trade_reg_up(i2,k_trade_excl_forestry)..
- vm_prod_reg(i2,k_trade_excl_forestry) =l=
- ((vm_supply(i2,k_trade_excl_forestry) + v21_excess_prod(i2,k_trade_excl_forestry))/sum(ct,i21_trade_bal_reduction(ct,k_trade_excl_forestry)))
- $(sum(ct,f21_self_suff(ct,i2,k_trade_excl_forestry) >= 1))
- + (vm_supply(i2,k_trade_excl_forestry)*sum(ct,f21_self_suff(ct,i2,k_trade_excl_forestry))/sum(ct,i21_trade_bal_reduction(ct,k_trade_excl_forestry)))
- $(sum(ct,f21_self_suff(ct,i2,k_trade_excl_forestry) < 1));
+ q21_trade_reg_up(i2,k_trade)..
+ vm_prod_reg(i2,k_trade) =l=
+ (((vm_supply(i2,k_trade) + v21_excess_prod(i2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade))) + v21_trade_bal(i2,k_trade))
+ $(sum(ct,f21_self_suff(ct,i2,k_trade) >= 1))
+ + ((vm_supply(i2,k_trade)*sum(ct,f21_self_suff(ct,i2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade))) + v21_trade_bal(i2,k_trade))
+ $(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
 
 *' The global excess demand of each tradable good `v21_excess_demad` equals to
 *' the sum over all the imports of importing regions.
@@ -69,6 +68,6 @@
 
 * Regional trade costs are the costs for each region aggregated over all the tradable commodities.
  q21_cost_trade(i2)..
- vm_cost_trade(i2) =e= sum(k_trade,v21_cost_trade_reg(i2,k_trade)) +
- sum(k_trade, v21_import(i2,k_trade)*1000000)
+ vm_cost_trade(i2) =g= sum(k_trade,v21_cost_trade_reg(i2,k_trade)) +
+ sum(k_trade, -v21_trade_bal(i2,k_trade)*1000000)
  ;
