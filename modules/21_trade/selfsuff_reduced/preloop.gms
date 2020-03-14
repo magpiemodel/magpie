@@ -21,6 +21,10 @@ elseif (s21_trade_tariff=0),
 
 f21_self_suff(t_all,"MEA",kforestry) = 0.1;
 f21_exp_shr(t_all,"MEA",kforestry) = 0;
+i21_trade_margin("MEA","wood") = 0;
+i21_trade_margin("MEA","woodfuel") = i21_trade_margin("MEA","wood");
+i21_trade_tariff("MEA","wood") = 0;
+i21_trade_tariff("MEA","woodfuel") = i21_trade_tariff("MEA","wood");
 *f21_self_suff(t_all,"JPN",kforestry) = 0.1;
 *f21_self_suff(t_all,"EUR","woodfuel") = 1.09;
 

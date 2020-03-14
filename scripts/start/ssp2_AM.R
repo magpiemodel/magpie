@@ -37,7 +37,7 @@ cfg$gms$maccs  <- "off_jul16"
 cfg$gms$residues <- "off"
 cfg$gms$c80_nlp_solver <- "conopt4"
 
-identifier_flag <- "F19AM_OS_"
+identifier_flag <- "F20AM_MEA0_"
 
 for(trade_module in c("selfsuff_reduced")){
 
