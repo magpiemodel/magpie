@@ -29,8 +29,8 @@ scalar
 * Set-switch for countries affected by country-specific neff scenarios
 * Default: all iso countries selected
 sets
-  cropneff_countries(iso)   countries to be affected by chosen crop neff scenario / DEU, FRA /
-  pastneff_countries(iso)   countries to be affected by chosen pasture neff scenario / DEU, FRA /
+  cropneff_countries (iso)   countries to be affected by chosen crop neff scenario / DEU, FRA /
+  pastneff_countries (iso)   countries to be affected by chosen pasture neff scenario / DEU, FRA /
 ;
 
 parameter f50_snupe(t_all,i,scen_neff50)  selected scenario values for soil nitrogen uptake efficiency (1)
