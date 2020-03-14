@@ -39,7 +39,7 @@
  vm_prod_reg(i2,k_trade_excl_forestry) =l=
  ((vm_supply(i2,k_trade_excl_forestry) + v21_excess_prod(i2,k_trade_excl_forestry))/sum(ct,i21_trade_bal_reduction(ct,k_trade_excl_forestry)))
  $(sum(ct,f21_self_suff(ct,i2,k_trade_excl_forestry) >= 1))
- + (vm_supply(i2,k_trade_excl_forestry)*sum(ct,f21_self_suff(ct,i2,k_trade_excl_forestry))/sum(ct,i21_trade_bal_reduction(ct,k_trade_excl_forestry)))
+ + (vm_supply(i2,k_trade_excl_forestry)*v21_self_suff(i2,k_trade_excl_forestry)/sum(ct,i21_trade_bal_reduction(ct,k_trade_excl_forestry)))
  $(sum(ct,f21_self_suff(ct,i2,k_trade_excl_forestry) < 1));
 
 *' The global excess demand of each tradable good `v21_excess_demad` equals to

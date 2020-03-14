@@ -5,6 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+vm_prod_heaven_timber.fx(j,kforestry) = 0;
 
 i21_trade_bal_reduction(t_all,k_trade)=f21_trade_bal_reduction(t_all,"easytrade","%c21_trade_liberalization%");
 i21_trade_bal_reduction(t_all,k_hardtrade21)=f21_trade_bal_reduction(t_all,"hardtrade","%c21_trade_liberalization%");
@@ -19,7 +20,7 @@ elseif (s21_trade_tariff=0),
     i21_trade_tariff(i2,k_trade) = 0;
 );
 
-f21_self_suff(t_all,"MEA",kforestry) = 0;
+f21_self_suff(t_all,"MEA",kforestry) = 0.1;
 f21_exp_shr(t_all,"MEA",kforestry) = 0;
 *f21_self_suff(t_all,"JPN",kforestry) = 0.1;
 *f21_self_suff(t_all,"EUR","woodfuel") = 1.09;

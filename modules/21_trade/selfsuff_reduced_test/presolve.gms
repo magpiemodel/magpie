@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 v21_self_suff.fx(i,k_trade) = f21_self_suff(t,i,k_trade);
-if(m_year(t) <= 2050,
+if(m_year(t) <= 2020,
  v21_self_suff.fx(i,"wood") = f21_self_suff(t,i,"wood");
  v21_self_suff.fx(i,"woodfuel") = f21_self_suff(t,i,"woodfuel");
 else 
