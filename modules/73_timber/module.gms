@@ -17,5 +17,6 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%timber%" == "biomass_feb20" $include "./modules/73_timber/biomass_feb20/realization.gms"
+$Ifi "%timber%" == "biomass_mar20" $include "./modules/73_timber/biomass_mar20/realization.gms"
 $Ifi "%timber%" == "off" $include "./modules/73_timber/off/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
