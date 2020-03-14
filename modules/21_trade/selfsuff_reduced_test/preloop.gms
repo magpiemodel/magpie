@@ -9,8 +9,8 @@ vm_prod_heaven_timber.fx(j,kforestry) = 0;
 
 i21_trade_bal_reduction(t_all,k_trade)=f21_trade_bal_reduction(t_all,"easytrade","%c21_trade_liberalization%");
 i21_trade_bal_reduction(t_all,k_hardtrade21)=f21_trade_bal_reduction(t_all,"hardtrade","%c21_trade_liberalization%");
-*i21_trade_bal_reduction(t_all,"wood")$(m_year(t_all) >= 2050) = 0.5;
-*i21_trade_bal_reduction(t_all,"woodfuel") = i21_trade_bal_reduction(t_all,"wood");
+i21_trade_bal_reduction(t_all,"wood")$(m_year(t_all) >= 2050) = 0.5;
+i21_trade_bal_reduction(t_all,"woodfuel") = i21_trade_bal_reduction(t_all,"wood");
 
 i21_trade_margin(i2,k_trade) = f21_trade_margin(i2,k_trade);
 
