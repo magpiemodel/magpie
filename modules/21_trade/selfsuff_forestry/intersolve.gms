@@ -8,9 +8,9 @@
 
 s21_counter = 0; 
 
-p21_prices(i,k_trade) = q21_trade_glo.m(k_trade) + q21_trade_reg.m(i,k_trade);
-p21_prices_reg(i,k_trade) = q21_trade_reg.m(i,k_trade);
-p21_prices_glo(k_trade) = q21_trade_glo.m(k_trade);
+p21_prices(t,i,k_trade) = q21_trade_glo.m(k_trade) + q21_trade_reg.m(i,k_trade);
+p21_prices_reg(t,i,k_trade) = q21_trade_reg.m(i,k_trade);
+p21_prices_glo(t,k_trade) = q21_trade_glo.m(k_trade);
 *display q21_trade_glo.m;
 *display q21_trade_reg.m;
 *display q16_supply_forestry.m;
