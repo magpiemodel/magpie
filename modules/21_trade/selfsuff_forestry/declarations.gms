@@ -17,7 +17,8 @@ positive variables
  v21_excess_prod(i,k_trade)              Regional excess production (mio. tDM per yr)
  vm_cost_trade(i)                        Regional  trade costs (mio. USD05MER per yr)
  v21_cost_trade_reg(i,k_trade)           Regional trade costs for each tradable commodity (mio. USD05MER per yr)
- v21_cost_trade_bal(i,k_trade)		blub
+ v21_cost_import(i,k_trade)		blub
+ v21_cost_export(i,k_trade)		blub
 ;
 
 variables
@@ -34,7 +35,8 @@ equations
  q21_cost_trade(i)                       Regional  trade costs (mio. USD05MER per yr)
  q21_cost_trade_reg(i,k_trade)           Regional trade costs for each tradable commodity (mio. USD05MER per yr)
  q21_trade_balance(k_trade)				blub
- q21_cost_trade_bal(i,k_trade)				blub
+ q21_cost_import(i,k_trade)				blub
+ q21_cost_export(i,k_trade)				blub
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -43,7 +45,8 @@ parameters
  ov21_excess_prod(t,i,k_trade,type)    Regional excess production (mio. tDM per yr)
  ov_cost_trade(t,i,type)               Regional  trade costs (mio. USD05MER per yr)
  ov21_cost_trade_reg(t,i,k_trade,type) Regional trade costs for each tradable commodity (mio. USD05MER per yr)
- ov21_cost_trade_bal(t,i,k_trade,type) blub
+ ov21_cost_import(t,i,k_trade,type)    blub
+ ov21_cost_export(t,i,k_trade,type)    blub
  ov21_trade_bal(t,i,k_trade,type)      blub
  oq21_trade_glo(t,k_trade,type)        Global production constraint (mio. tDM per yr)
  oq21_notrade(t,i,k_notrade,type)      Regional production constraint of non-tradable commodities (mio. tDM per yr)
@@ -54,6 +57,7 @@ parameters
  oq21_cost_trade(t,i,type)             Regional  trade costs (mio. USD05MER per yr)
  oq21_cost_trade_reg(t,i,k_trade,type) Regional trade costs for each tradable commodity (mio. USD05MER per yr)
  oq21_trade_balance(t,k_trade,type)    blub
- oq21_cost_trade_bal(t,i,k_trade,type) blub
+ oq21_cost_import(t,i,k_trade,type)    blub
+ oq21_cost_export(t,i,k_trade,type)    blub
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

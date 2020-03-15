@@ -8,10 +8,10 @@
 
 s21_counter = 0; 
 
-while(abs(sum((i2,k_trade), v21_cost_trade_bal.l(i2,k_trade))) > 0 AND s21_counter <= s21_maxiter,
+while(smax((i,k_trade), v21_trade_bal.l(i,k_trade)) > 0 AND s21_counter <= s21_maxiter,
     s21_counter = s21_counter + 1;
     display "Warning: There are trade imbalances for timber. Restarting solve with reduced timber demand!";
-    pm_demand_ext(t,i,"wood") = pm_demand_ext(t,i,"wood") + v21_cost_trade_bal.l(i,"wood");
-    pm_demand_ext(t,i,"woodfuel") = pm_demand_ext(t,i,"woodfuel") + v21_cost_trade_bal.l(i,"woodfuel");
+    pm_demand_ext(t,i,"wood") = pm_demand_ext(t,i,"wood") + v21_trade_bal.l(i,"wood");
+    pm_demand_ext(t,i,"woodfuel") = pm_demand_ext(t,i,"woodfuel") + v21_trade_bal.l(i,"woodfuel");
     solve magpie USING nlp MINIMIZING vm_cost_glo;
 );
