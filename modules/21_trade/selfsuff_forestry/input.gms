@@ -13,6 +13,8 @@ scalars
   s21_redn_factor Reduction factor for trade balance reduction for timber products (1) / 0.5 /
   s21_counter blub / 0 /
   s21_maxiter blub / 2 /
+  s21_counter2 blub / 0 /
+  s21_maxiter2 blub / 2 /
 ;
 
 table f21_trade_bal_reduction(t_all,trade_groups21,trade_regime21) Share of inelastic trade pool (1)
