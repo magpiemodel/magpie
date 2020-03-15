@@ -7,8 +7,6 @@
 **************start solve loop**************
 
 s21_counter = 0; 
-p21_criterion = floor(smax((i,k_trade), v21_trade_bal.l(i,k_trade)));
-display p21_criterion;
 
 p21_prices(i,k_trade) = q21_trade_glo.m(k_trade) + q21_trade_reg.m(i,k_trade);
 p21_prices_reg(i,k_trade) = q21_trade_reg.m(i,k_trade);
@@ -18,9 +16,11 @@ p21_prices_glo(k_trade) = q21_trade_glo.m(k_trade);
 *display q16_supply_forestry.m;
 *display p21_prices;
 
-while(p21_criterion > 0 AND s21_counter <= s21_maxiter,
+while(floor(smax((i,k_trade), v21_trade_bal.l(i,k_trade))) > 0 AND s21_counter <= s21_maxiter,
     s21_counter = s21_counter + 1;
-    display "Warning: There are trade imbalances for timber. Restarting solve with adjusted timber demand!";
+    p21_criterion = floor(smax((i,k_trade), v21_trade_bal.l(i,k_trade)));
+	display p21_criterion;
+	display "Warning: There are trade imbalances for timber. Restarting solve with adjusted timber demand!";
     pm_demand_ext(t,i,"wood") = pm_demand_ext(t,i,"wood") + v21_trade_bal.l(i,"wood");
     pm_demand_ext(t,i,"woodfuel") = pm_demand_ext(t,i,"woodfuel") + v21_trade_bal.l(i,"woodfuel");
 	s21_counter2 = 0;
