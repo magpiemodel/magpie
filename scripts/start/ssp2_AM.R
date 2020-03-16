@@ -23,47 +23,33 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-cfg <- setScenario(cfg,c("SSP2","NPI"))
-cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
-cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
-cfg$gms$forestry  <- "dynamic_mar20"
-cfg$gms$natveg  <- "dynamic_nov19"
+identifier_flag <- "F23AM_FloFix_ALL_"
 
-#simple
-cfg$gms$land <- "feb15"
-cfg$gms$processing <- "off"
-cfg$gms$disagg_lvst <- "off"
-cfg$gms$maccs  <- "off_jul16"
-cfg$gms$residues <- "off"
-cfg$gms$c80_nlp_solver <- "conopt4"
+for(ssp in c("SSP2","SSP5")){
 
-identifier_flag <- "F22AM_MEA75pc_"
+  for(c32_rotation_extension in c(0,1,2)){
 
-for(trade_module in c("selfsuff_reduced")){
+    cfg$gms$c32_rotation_extension <- c32_rotation_extension
 
-  if(trade_module == "selfsuff_dynamic") trade_flag = "TVar"
-  if(trade_module == "selfsuff_reduced") trade_flag = "TDef"
+    cfg <- setScenario(cfg,c(ssp,"NPI"))
 
-  for(redn_factor in c(0.5,0.1)){
-    cfg$gms$s21_redn_factor <- redn_factor
+    for(emis_price in c("R2M41-SSP2-NPi")){
 
-    if(cfg$gms$s21_redn_factor == 0.5) redn_flag = "50pc"
-    if(cfg$gms$s21_redn_factor == 0.1) redn_flag = "10pc"
+      cfg$gms$c56_pollutant_prices <- emis_price
+      cfg$gms$c60_2ndgen_biodem <- emis_price
 
-    run_flag <- paste0(identifier_flag,redn_flag,"_",trade_flag,"_")
+      ### Create flags
 
-    cfg <- setScenario(cfg,c("SSP5","NPI"))
-    cfg$gms$s15_elastic_demand <- 0
-    cfg$title <- paste0(run_flag,"simple_SSP5")
-    cfg$gms$timber <- "biomass_mar20"
-    cfg$gms$trade <- trade_module
-    start_run(cfg,codeCheck=FALSE)
+      if(c32_rotation_extension == 0) rot_flag = ""
+      if(c32_rotation_extension == 1) rot_flag = "5yE"
+      if(c32_rotation_extension == 2) rot_flag = "10yE"
 
-    cfg <- setScenario(cfg,c("SSP2","NPI"))
-    cfg$gms$s15_elastic_demand <- 0
-    cfg$title <- paste0(run_flag,"simple_SSP2")
-    cfg$gms$timber <- "biomass_mar20"
-    cfg$gms$trade <- trade_module
-    start_run(cfg,codeCheck=FALSE)
+      if(emis_price == "R2M41-SSP2-NPi") emis_flag = ""
+      if(emis_price == "R2M41-SSP2-Budg1300") emis_flag = "CO2p"
+
+      cfg$title <- paste0(identifier_flag,"_",emis_flag,"_",rot_flag,"_",ssp)
+
+      start_run(cfg,codeCheck=FALSE)
+    }
   }
 }
