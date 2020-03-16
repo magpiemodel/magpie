@@ -98,6 +98,7 @@ p32_land("y1995",j,"plant","ac0") = p32_plant_ini_ac(j);
 
 *initial assumption for harvested area
 pc32_hvarea_forestry(j) = p32_plant_ini_ac(j);
+vm_hvarea_forestry.l(j,ac_sub) = p32_plant_ini_ac(j)/card(ac_sub);
 
 p32_land_start(j,type32,ac) = p32_land("y1995",j,type32,ac);
 display p32_land_start;
