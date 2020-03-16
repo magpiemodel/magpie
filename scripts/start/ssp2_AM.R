@@ -23,9 +23,9 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-identifier_flag <- "F23AM_FloFix_ALL_"
+identifier_flag <- "F24AM_FloFix_ALL_"
 
-for(ssp in c("SSP2","SSP5")){
+for(ssp in c("SSP2")){
 
   for(c32_rotation_extension in c(0,1,2)){
 
@@ -33,7 +33,7 @@ for(ssp in c("SSP2","SSP5")){
 
     cfg <- setScenario(cfg,c(ssp,"NPI"))
 
-    for(emis_price in c("R2M41-SSP2-NPi")){
+    for(emis_price in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")){
 
       cfg$gms$c56_pollutant_prices <- emis_price
       cfg$gms$c60_2ndgen_biodem <- emis_price
@@ -48,6 +48,8 @@ for(ssp in c("SSP2","SSP5")){
       if(emis_price == "R2M41-SSP2-Budg1300") emis_flag = "CO2p"
 
       cfg$title <- paste0(identifier_flag,"_",emis_flag,"_",rot_flag,"_",ssp)
+
+      cfg$output <- c("rds_report","disaggregation")
 
       start_run(cfg,codeCheck=FALSE)
     }
