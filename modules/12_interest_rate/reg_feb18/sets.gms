@@ -6,6 +6,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
+  scen12 Interest rate scenarios
+  / low, medium, high /
+
 	bound12 Bound for interest rate
 	/low, high/
 ;
