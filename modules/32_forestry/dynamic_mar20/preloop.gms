@@ -115,7 +115,7 @@ loop(t,
 p32_hv_area_past_avg(t,i)$(ord(t) > 3) = (p32_hv_area_current(t,i) * p32_dummy_time(t)
                                         + p32_hv_area_current(t-1,i) * p32_dummy_time(t-1)
                                         + p32_hv_area_current(t-3,i) * p32_dummy_time(t-3)
-                                        ) / p32_dummy_elapsed;
+                                        ) / p32_dummy_elapsed(t);
 
 
 ** Initialization of land
