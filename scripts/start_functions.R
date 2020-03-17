@@ -1,4 +1,4 @@
-# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -166,6 +166,8 @@ download_and_update <- function(cfg) {
 
 start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
                       path_to_report=NULL,LU_pricing="y2010", lock_model=TRUE) {
+
+  timePrepareStart <- Sys.time()
 
   if (!requireNamespace("lucode", quietly = TRUE)) {
     stop("Package \"lucode\" needed for this function to work. Please install it.",
@@ -372,6 +374,13 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   }
 
   setwd(cfg$results_folder)
+
+  # Save run statistics to local file
+  cat("Saving timePrepareStart and timePrepareEnd to runstatistics.rda\n")
+  timePrepareEnd <- Sys.time()
+  lucode::runstatistics(file             = paste0("runstatistics.rda"),
+                        timePrepareStart = timePrepareStart,
+                        timePrepareEnd   = timePrepareEnd)
 
   #Is SLURM available?
   slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
