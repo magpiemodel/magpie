@@ -16,6 +16,7 @@ p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)                
 pm_demand_ext(t_ext,i,kforestry)                                            Extended demand for timber beyound simulation (mio. m3)
 p73_glo_timber_demand(t_all,kforestry)                                      Global timber demand (mio. m3 per yr)
 p73_volumetric_conversion(kforestry)  blub
+pm_demand_ext_original(t_all,i,kforestry) xx
 ;
 
 positive variables

@@ -24,24 +24,21 @@
 *' If the trade balance reduction equals 1 (`f21_self_suff(ct,i2,k_trade) = 1`), all demand enters the self-sufficiency pool.
 *' If it equals 0, all demand enters the comparative advantage pool.
 
- q21_trade_balance(k_trade)..
-  sum(i2, v21_trade_bal(i2,k_trade)) =e= 0;
-
  q21_trade_reg(i2,k_trade)..
  vm_prod_reg(i2,k_trade) =g=
- ((vm_supply(i2,k_trade) + v21_trade_bal(i2,k_trade) + v21_excess_prod(i2,k_trade))
+ ((vm_supply(i2,k_trade) - v21_supply_missing(i2,k_trade) + v21_excess_prod(i2,k_trade))
  *sum(ct,i21_trade_bal_reduction(ct,k_trade)))
  $(sum(ct,f21_self_suff(ct,i2,k_trade) >= 1))
- + ((vm_supply(i2,k_trade) + v21_trade_bal(i2,k_trade))*sum(ct,f21_self_suff(ct,i2,k_trade))
+ + ((vm_supply(i2,k_trade) + v21_supply_missing(i2,k_trade))*sum(ct,f21_self_suff(ct,i2,k_trade))
  *sum(ct,i21_trade_bal_reduction(ct,k_trade)))
  $(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
 
 
  q21_trade_reg_up(i2,k_trade)..
  vm_prod_reg(i2,k_trade) =l=
- ((vm_supply(i2,k_trade) + v21_excess_prod(i2,k_trade) + v21_trade_bal(i2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade)))
+ ((vm_supply(i2,k_trade) + v21_excess_prod(i2,k_trade) - v21_supply_missing(i2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade)))
  $(sum(ct,f21_self_suff(ct,i2,k_trade) >= 1))
- + ((vm_supply(i2,k_trade) + v21_trade_bal(i2,k_trade))*sum(ct,f21_self_suff(ct,i2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade)))
+ + ((vm_supply(i2,k_trade) - v21_supply_missing(i2,k_trade))*sum(ct,f21_self_suff(ct,i2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade)))
  $(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
 
 *' The global excess demand of each tradable good `v21_excess_demad` equals to
@@ -68,15 +65,10 @@
 
 * Regional trade costs are the costs for each region aggregated over all the tradable commodities.
  q21_cost_trade(i2)..
- vm_cost_trade(i2) =e= sum(k_trade, v21_cost_trade_reg(i2,k_trade) + v21_cost_import(i2,k_trade) + v21_cost_export(i2,k_trade))
+ vm_cost_trade(i2) =e= sum(k_trade, v21_cost_trade_reg(i2,k_trade) + v21_cost_supply_missing(i2,k_trade))
  ;
 
 * Regional trade costs are the costs for each region aggregated over all the tradable commodities.
- q21_cost_import(i2,k_trade)..
- v21_cost_import(i2,k_trade) =g= -v21_trade_bal(i2,k_trade)*1000000
- ;
-
-* Regional trade costs are the costs for each region aggregated over all the tradable commodities.
- q21_cost_export(i2,k_trade)..
- v21_cost_export(i2,k_trade) =g= v21_trade_bal(i2,k_trade)*1
+ q21_cost_supply_missing(i2,k_trade)..
+ v21_cost_supply_missing(i2,k_trade) =g= v21_supply_missing(i2,k_trade)*1000000
  ;

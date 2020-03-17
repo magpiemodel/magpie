@@ -39,6 +39,10 @@ parameters
  p32_plant_prod_share(t_ext,i) 					 	blub
  pc32_plant_prod_share_future(i)
  pc32_hvarea_forestry(j)
+ p32_hv_area_current(t,i)
+ p32_hv_area_past_avg(t,i)
+ p32_dummy_time(t)
+ p32_dummy_elapsed(t)
 ;
 
 positive variables

@@ -7,4 +7,4 @@
 
 vm_cost_trade.scale(i) = 10e4;
 v21_cost_trade_reg.scale(i,k_trade) = 10e2;
-v21_cost_import.scale(i,k_trade) = 10e6;
+v21_cost_supply_missing.scale(i,k_trade) = 10e6;

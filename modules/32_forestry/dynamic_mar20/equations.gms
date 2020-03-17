@@ -144,22 +144,23 @@ q32_prod_future(i2) ..
               ;
 $offtext
 
-*global constraint for meeting 1/3 of future wood demand with plantations. 
-* Cell specific allocation of plantations based on max c density. 
+*global constraint for meeting 1/3 of future wood demand with plantations.
+* Cell specific allocation of plantations based on max c density.
 * Given that the rotation length is about 80 years, we don't really know the future trade patterns.
 q32_establishment_glo ..
               sum(j2, v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
               =g=
               sum(i2, pc32_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2))
               ;
-*regional constraint for maintaining current forestry area patterns. 
+*regional constraint for maintaining current forestry area patterns.
 * area harvested * ratio of future and present demand.
 * E.g. forestry area in EUR will not decline with this setup.
 * Cell specific allocation of plantations based on max c density via v32_cost_establishment
 q32_establishment_reg(i2) ..
               sum(cell(i2,j2), v32_land(j2,"plant","ac0"))
               =g=
-              sum((cell(i2,j2),ac_sub), vm_hvarea_forestry.l(j2,ac_sub))*
+*              sum((cell(i2,j2),ac_sub), vm_hvarea_forestry.l(j2,ac_sub))*
+							sum(ct, p32_hv_area_past_avg(ct,i2)) *
               (pc32_demand_forestry_future(i2,"wood")/sum(ct, pm_demand_ext(ct,i2,"wood")))
               ;
 

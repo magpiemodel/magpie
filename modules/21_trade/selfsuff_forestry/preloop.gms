@@ -25,14 +25,14 @@ f21_exp_shr(t_all,"MEA",kforestry) = 0;
 *f21_self_suff(t_all,"JPN",kforestry) = 0.1;
 *f21_self_suff(t_all,"EUR","woodfuel") = 1.09;
 
-v21_trade_bal.l(i,k_trade) = 0;
-v21_trade_bal.fx(i,k_trade) = 0;
-v21_trade_bal.lo(i,"wood") = -Inf;
-v21_trade_bal.lo(i,"woodfuel") = -Inf;
-v21_trade_bal.up(i,"wood") = Inf;
-v21_trade_bal.up(i,"woodfuel") = Inf;
+v21_supply_missing.l(i,k_trade) = 0;
+v21_supply_missing.fx(i,k_trade) = 0;
+v21_supply_missing.lo(i,"wood") = 0;
+v21_supply_missing.lo(i,"woodfuel") = 0;
+v21_supply_missing.up(i,"wood") = Inf;
+v21_supply_missing.up(i,"woodfuel") = Inf;
 
-v21_cost_import.l(i,k_trade) = 0;
+v21_cost_supply_missing.l(i,k_trade) = 0;
 v21_cost_export.l(i,k_trade) = 0;
 
 pm_selfsuff_ext(t_ext,i,kforestry) = f21_self_suff("y2150",i,kforestry);

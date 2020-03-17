@@ -100,6 +100,25 @@ p32_land("y1995",j,"plant","ac0") = p32_plant_ini_ac(j);
 pc32_hvarea_forestry(j) = p32_plant_ini_ac(j);
 vm_hvarea_forestry.l(j,ac_sub) = p32_plant_ini_ac(j)/card(ac_sub);
 
+**** Updated calculation for avg are needed to be estb based on past years
+
+*' Saving intial values for avg calc
+p32_hv_area_current(t,i) = sum((cell(i,j),ac_sub),vm_hvarea_forestry.l(j,ac_sub));
+p32_hv_area_past_avg(t,i) = p32_hv_area_current(t,i);
+
+loop(t,
+  p32_dummy_time(t) =  m_yeardiff(t);
+  p32_dummy_elapsed(t) = m_year(t) - m_year(t-2);
+  display p32_dummy_elapsed;
+);
+
+p32_hv_area_past_avg(t,i)$(ord(t) > 3) = (p32_hv_area_current(t,i) * p32_dummy_time(t)
+                                        + p32_hv_area_current(t-1,i) * p32_dummy_time(t-1)
+                                        + p32_hv_area_current(t-3,i) * p32_dummy_time(t-3)
+                                        ) / p32_dummy_elapsed;
+
+
+** Initialization of land
 p32_land_start(j,type32,ac) = p32_land("y1995",j,type32,ac);
 display p32_land_start;
 

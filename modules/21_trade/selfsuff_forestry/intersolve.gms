@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 **************start solve loop**************
 
-s21_counter = 0; 
+s21_counter = 0;
 
 p21_prices(t,i,k_trade) = q21_trade_glo.m(k_trade) + q21_trade_reg.m(i,k_trade);
 p21_prices_reg(t,i,k_trade) = q21_trade_reg.m(i,k_trade);
@@ -16,13 +16,22 @@ p21_prices_glo(t,k_trade) = q21_trade_glo.m(k_trade);
 *display q16_supply_forestry.m;
 *display p21_prices;
 
-while(floor(smax((i,k_trade), v21_trade_bal.l(i,k_trade))) > 0 AND s21_counter <= s21_maxiter,
+while(floor(smax((i,k_trade), v21_supply_missing.l(i,k_trade))) > 0 AND s21_counter <= s21_maxiter,
     s21_counter = s21_counter + 1;
-    p21_criterion = floor(smax((i,k_trade), v21_trade_bal.l(i,k_trade)));
+    p21_criterion = floor(smax((i,k_trade), v21_supply_missing.l(i,k_trade)));
 	display p21_criterion;
 	display "Warning: There are trade imbalances for timber. Restarting solve with adjusted timber demand!";
-    pm_demand_ext(t,i,"wood") = pm_demand_ext(t,i,"wood") + v21_trade_bal.l(i,"wood");
-    pm_demand_ext(t,i,"woodfuel") = pm_demand_ext(t,i,"woodfuel") + v21_trade_bal.l(i,"woodfuel");
+    pm_demand_ext(t,i,"wood") = pm_demand_ext(t,i,"wood") + v21_supply_missing.l(i,"wood");
+    pm_demand_ext(t,i,"woodfuel") = pm_demand_ext(t,i,"woodfuel") + v21_supply_missing.l(i,"woodfuel");
+
+    p21_timder_adjustment_ratio(t,i,"wood") = pm_demand_ext(t,i,"wood")/pm_demand_ext_original(t,i,"wood");
+    p21_timder_adjustment_ratio(t,i,"woodfuel") = pm_demand_ext(t,i,"woodfuel")/pm_demand_ext_original(t,i,"woodfuel");
+
+    if(p21_timder_adjustment_ratio(t,i,"wood") < 0.75 OR p21_timder_adjustment_ratio(t,i,"woodfuel") < 0.75),
+    display "Warning: Ratio between prescribed demand and adjusted demand in some regions diverge heavily!";
+    display p21_timder_adjustment_ratio;
+    );
+
 	s21_counter2 = 0;
 	repeat(
       s21_counter2 = s21_counter2 + 1;
