@@ -23,17 +23,17 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-identifier_flag <- "F24AM_FloFix_ALL_"
+identifier_flag <- "F25AM_"
 
 for(ssp in c("SSP2")){
 
-  for(c32_rotation_extension in c(0,1,2)){
+  for(c32_rotation_extension in c(0)){
 
     cfg$gms$c32_rotation_extension <- c32_rotation_extension
 
     cfg <- setScenario(cfg,c(ssp,"NPI"))
 
-    for(emis_price in c("R2M41-SSP2-NPi","R2M41-SSP2-Budg1300")){
+    for(emis_price in c("R2M41-SSP2-NPi")){
 
       cfg$gms$c56_pollutant_prices <- emis_price
       cfg$gms$c60_2ndgen_biodem <- emis_price
