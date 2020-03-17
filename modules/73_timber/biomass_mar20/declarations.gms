@@ -16,7 +16,7 @@ p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)                
 pm_demand_ext(t_ext,i,kforestry)                                            Extended demand for timber beyound simulation (mio. m3)
 p73_glo_timber_demand(t_all,kforestry)                                      Global timber demand (mio. m3 per yr)
 p73_volumetric_conversion(kforestry)  blub
-pm_demand_ext_original(t_all,i,kforestry) xx
+pm_demand_ext_original(t_ext,i,kforestry) xx
 ;
 
 positive variables
@@ -48,7 +48,7 @@ q73_hvarea_other(j,ac_sub)                                            Area harve
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov73_cost_hvarea(t,i,type)                              
+ ov73_cost_hvarea(t,i,type)
  ov73_prod_forestry(t,j,ac_sub,kforestry,type)           Production of woody biomass from commercial plantations (mio. m3 per yr)
  ov73_prod_natveg(t,j,land_natveg,ac_sub,kforestry,type) Production of woody biomass from natural vegetation (mio. m3 per yr)
  ov_prod_heaven_timber(t,j,kforestry,type)               Production of woody biomass from heaven (mio. m3 per yr)
@@ -61,7 +61,7 @@ parameters
  oq73_cost_hvarea(t,i,type)                              blub
  oq73_prod_timber(t,j,kforestry,type)                    Production of woody biomass from commercial plantations and natural vegetation (mio. m3 per yr)
  oq73_prod_forestry(t,j,ac_sub,type)                     Production of woody biomass from commercial plantations (mio. m3 per yr)
- oq73_hvarea_forestry(t,j,ac_sub,type)                   
+ oq73_hvarea_forestry(t,j,ac_sub,type)
  oq73_prod_secdforest(t,j,ac_sub,type)                   Production of woody biomass from secondary forests (mio. m3 per yr)
  oq73_hvarea_secdforest(t,j,ac_sub,type)                 Area harvested for woody biomass from secondary forests (mio. m3 per yr)
  oq73_prod_primforest(t,j,type)                          Production of woody biomass from primary forests (mio. m3 per yr)

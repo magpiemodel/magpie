@@ -60,9 +60,10 @@ p73_volumetric_conversion("wood") = 0.6;
 p73_volumetric_conversion("woodfuel") = 0.3;
 *p73_timber_demand_gdp_pop in mio m^3
 *pm_demand_ext in mio ton DM
+pm_demand_ext(t_ext,i,kforestry) = round(p73_timber_demand_gdp_pop("y2150",i,kforestry) * p73_volumetric_conversion(kforestry));
 pm_demand_ext(t_all,i,kforestry) = round(p73_timber_demand_gdp_pop(t_all,i,kforestry) * p73_volumetric_conversion(kforestry));
 pm_demand_ext(t_all,"MEA",kforestry) = pm_demand_ext(t_all,"MEA",kforestry) * 0.75;
-pm_demand_ext_original(t_all,i,kforestry) = pm_demand_ext(t_all,i,kforestry);
+pm_demand_ext_original(t_ext,i,kforestry) = pm_demand_ext(t_ext,i,kforestry);
 
 *pm_demand_ext(t_all,"JPN",kforestry) =p73_timber_demand_gdp_pop(t_all,"JPN",kforestry) * 0.5;
 *pm_demand_ext(t_all,"MEA",kforestry) = p73_timber_demand_gdp_pop(t_all,"MEA",kforestry) * 0.5;

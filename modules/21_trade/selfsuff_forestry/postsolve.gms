@@ -21,7 +21,6 @@
  oq21_excess_supply(t,i,k_trade,"marginal")       = q21_excess_supply.m(i,k_trade);
  oq21_cost_trade(t,i,"marginal")                  = q21_cost_trade.m(i);
  oq21_cost_trade_reg(t,i,k_trade,"marginal")      = q21_cost_trade_reg.m(i,k_trade);
- oq21_trade_balance(t,k_trade,"marginal")         = q21_trade_balance.m(k_trade);
  oq21_cost_supply_missing(t,i,k_trade,"marginal") = q21_cost_supply_missing.m(i,k_trade);
  ov21_excess_dem(t,k_trade,"level")               = v21_excess_dem.l(k_trade);
  ov21_excess_prod(t,i,k_trade,"level")            = v21_excess_prod.l(i,k_trade);
@@ -38,7 +37,6 @@
  oq21_excess_supply(t,i,k_trade,"level")          = q21_excess_supply.l(i,k_trade);
  oq21_cost_trade(t,i,"level")                     = q21_cost_trade.l(i);
  oq21_cost_trade_reg(t,i,k_trade,"level")         = q21_cost_trade_reg.l(i,k_trade);
- oq21_trade_balance(t,k_trade,"level")            = q21_trade_balance.l(k_trade);
  oq21_cost_supply_missing(t,i,k_trade,"level")    = q21_cost_supply_missing.l(i,k_trade);
  ov21_excess_dem(t,k_trade,"upper")               = v21_excess_dem.up(k_trade);
  ov21_excess_prod(t,i,k_trade,"upper")            = v21_excess_prod.up(i,k_trade);
@@ -55,7 +53,6 @@
  oq21_excess_supply(t,i,k_trade,"upper")          = q21_excess_supply.up(i,k_trade);
  oq21_cost_trade(t,i,"upper")                     = q21_cost_trade.up(i);
  oq21_cost_trade_reg(t,i,k_trade,"upper")         = q21_cost_trade_reg.up(i,k_trade);
- oq21_trade_balance(t,k_trade,"upper")            = q21_trade_balance.up(k_trade);
  oq21_cost_supply_missing(t,i,k_trade,"upper")    = q21_cost_supply_missing.up(i,k_trade);
  ov21_excess_dem(t,k_trade,"lower")               = v21_excess_dem.lo(k_trade);
  ov21_excess_prod(t,i,k_trade,"lower")            = v21_excess_prod.lo(i,k_trade);
@@ -72,6 +69,5 @@
  oq21_excess_supply(t,i,k_trade,"lower")          = q21_excess_supply.lo(i,k_trade);
  oq21_cost_trade(t,i,"lower")                     = q21_cost_trade.lo(i);
  oq21_cost_trade_reg(t,i,k_trade,"lower")         = q21_cost_trade_reg.lo(i,k_trade);
- oq21_trade_balance(t,k_trade,"lower")            = q21_trade_balance.lo(k_trade);
  oq21_cost_supply_missing(t,i,k_trade,"lower")    = q21_cost_supply_missing.lo(i,k_trade);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################

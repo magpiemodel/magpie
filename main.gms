@@ -249,7 +249,7 @@ $setglobal production  flexreg_apr16
 $setglobal residues  off
 $setglobal processing  off
 
-$setglobal trade  selfsuff_reduced
+$setglobal trade  selfsuff_forestry
 
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
@@ -284,7 +284,7 @@ $setglobal livestock  fbask_jan16
 
 $setglobal disagg_lvst  off
 
-$setglobal timber  biomass_feb20
+$setglobal timber  biomass_mar20
 
 $setglobal optimization  nlp_apr17
 

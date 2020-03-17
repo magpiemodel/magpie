@@ -36,7 +36,6 @@ equations
  q21_excess_supply(i,k_trade)            Regional excess production (mio. tDM per yr)
  q21_cost_trade(i)                       Regional  trade costs (mio. USD05MER per yr)
  q21_cost_trade_reg(i,k_trade)           Regional trade costs for each tradable commodity (mio. USD05MER per yr)
- q21_trade_balance(k_trade)				       blub
  q21_cost_supply_missing(i,k_trade)				blub
 ;
 
@@ -57,7 +56,6 @@ parameters
  oq21_excess_supply(t,i,k_trade,type)       Regional excess production (mio. tDM per yr)
  oq21_cost_trade(t,i,type)                  Regional  trade costs (mio. USD05MER per yr)
  oq21_cost_trade_reg(t,i,k_trade,type)      Regional trade costs for each tradable commodity (mio. USD05MER per yr)
- oq21_trade_balance(t,k_trade,type)         blub
  oq21_cost_supply_missing(t,i,k_trade,type) blub
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
