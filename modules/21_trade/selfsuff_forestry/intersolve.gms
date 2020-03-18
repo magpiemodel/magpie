@@ -27,7 +27,7 @@ while(floor(smax((i,k_trade), v21_supply_missing.l(i,k_trade))) > 0 AND s21_coun
     p21_timder_adjustment_ratio(t,i,"wood") = pm_demand_ext(t,i,"wood")/pm_demand_ext_original(t,i,"wood");
     p21_timder_adjustment_ratio(t,i,"woodfuel") = pm_demand_ext(t,i,"woodfuel")/pm_demand_ext_original(t,i,"woodfuel");
 
-    if(floor(smin(i,p21_timder_adjustment_ratio(t,i,"wood"))) < 0.75 OR floor(smin(i,p21_timder_adjustment_ratio(t,i,"woodfuel"))) < 0.75,
+    if(round(smin(i,p21_timder_adjustment_ratio(t,i,"wood")),2) < 0.75 OR round(smin(i,p21_timder_adjustment_ratio(t,i,"woodfuel")),2) < 0.75,
     display "Warning: Ratio between prescribed demand and adjusted demand in some regions diverge heavily!";
     display p21_timder_adjustment_ratio;
     );

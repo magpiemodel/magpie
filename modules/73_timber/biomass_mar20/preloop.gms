@@ -45,7 +45,7 @@ loop(t_all$(m_year(t_all) >= 2010 AND m_year(t_all) < 2150),
           ((im_gdp_pc_ppp_iso(t_all+1,iso)/im_gdp_pc_ppp_iso(t_all,iso))**p73_income_elasticity(total_wood_products))$(im_gdp_pc_ppp_iso(t_all,iso)>0)
           ;
 );
-p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)$(im_gdp_pc_ppp_iso(t_all,iso)=0) = 0;
+p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)$(im_gdp_pc_ppp_iso(t_all,iso)=0) = 0.0001;
 
 p73_timber_demand_gdp_pop(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to_woodprod(kforestry,total_wood_products)),p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)) * s73_timber_demand;
 p73_glo_timber_demand(t_all,kforestry) = sum(i,p73_timber_demand_gdp_pop(t_all,i,kforestry));
@@ -60,10 +60,10 @@ p73_volumetric_conversion("wood") = 0.6;
 p73_volumetric_conversion("woodfuel") = 0.3;
 *p73_timber_demand_gdp_pop in mio m^3
 *pm_demand_ext in mio ton DM
-pm_demand_ext(t_ext,i,kforestry) = round(p73_timber_demand_gdp_pop("y2150",i,kforestry) * p73_volumetric_conversion(kforestry));
-pm_demand_ext(t_all,i,kforestry) = round(p73_timber_demand_gdp_pop(t_all,i,kforestry) * p73_volumetric_conversion(kforestry));
-pm_demand_ext(t_all,"MEA",kforestry) = pm_demand_ext(t_all,"MEA",kforestry) * 0.75;
+pm_demand_ext(t_ext,i,kforestry) = round(p73_timber_demand_gdp_pop("y2150",i,kforestry) * p73_volumetric_conversion(kforestry),3);
+pm_demand_ext(t_all,i,kforestry) = round(p73_timber_demand_gdp_pop(t_all,i,kforestry) * p73_volumetric_conversion(kforestry),3);
 pm_demand_ext_original(t_ext,i,kforestry) = pm_demand_ext(t_ext,i,kforestry);
+display pm_demand_ext;
 
 *pm_demand_ext(t_all,"JPN",kforestry) =p73_timber_demand_gdp_pop(t_all,"JPN",kforestry) * 0.5;
 *pm_demand_ext(t_all,"MEA",kforestry) = p73_timber_demand_gdp_pop(t_all,"MEA",kforestry) * 0.5;
