@@ -23,7 +23,7 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-identifier_flag <- "F25AM_"
+identifier_flag <- "F26AM_"
 
 for(ssp in c("SSP2")){
 
