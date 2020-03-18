@@ -29,8 +29,8 @@ v21_supply_missing.l(i,k_trade) = 0;
 v21_supply_missing.fx(i,k_trade) = 0;
 v21_supply_missing.lo(i,"wood") = 0;
 v21_supply_missing.lo(i,"woodfuel") = 0;
-v21_supply_missing.up(i,"wood") = Inf;
-v21_supply_missing.up(i,"woodfuel") = Inf;
+v21_supply_missing.up(i,"wood") = 500 ;
+v21_supply_missing.up(i,"woodfuel") = 100 ;
 
 v21_cost_supply_missing.l(i,k_trade) = 0;
 v21_cost_export.l(i,k_trade) = 0;
