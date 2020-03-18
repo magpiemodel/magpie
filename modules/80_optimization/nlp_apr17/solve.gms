@@ -24,6 +24,9 @@ magpie.scaleopt  = 1 ;
 magpie.solprint  = 0 ;
 magpie.holdfixed = 1 ;
 
+*** Following are the manual solver settings in case user wants to
+*** run the model with specific tolerances or other changes.
+*** Check availale settings here https://www.gams.com/latest/docs/S_CONOPT4.html
 $onecho > conopt4.opt
 Tol_Obj_Change = 3.0e-6
 Tol_Feas_Min = 4.0e-7
