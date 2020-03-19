@@ -80,13 +80,13 @@ if (sum(sameas(t_past,t),1) = 1,
 * Substitute milk demand in India with chicken, egg and fish (equally distributed) because milk demand in India shows an implausible increase
     	i15_livestock_kcal_structure_iso(t,"IND","livst_milk") =
                                  i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * i15_milk_share_fadeout_india(t);
-    	i15_livestock_kcal_structure_iso(t,"IND","livst_chick") = 
+    	i15_livestock_kcal_structure_iso(t,"IND","livst_chick") =
      							i15_livestock_kcal_structure_iso(t,"IND","livst_chick")
      							+ i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t)) * 1/3;
-    	i15_livestock_kcal_structure_iso(t,"IND","livst_egg") = 
+    	i15_livestock_kcal_structure_iso(t,"IND","livst_egg") =
      							i15_livestock_kcal_structure_iso(t,"IND","livst_egg")
      							+ i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t)) * 1/3;
-    	i15_livestock_kcal_structure_iso(t,"IND","fish") = 
+    	i15_livestock_kcal_structure_iso(t,"IND","fish") =
      							i15_livestock_kcal_structure_iso(t,"IND","fish")
      							+ i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t)) * 1/3;
  );
@@ -433,8 +433,8 @@ if(s15_exo_waste = 1,
 * waste reduction target, i.e. only for values that are higher than the target:
 
 p15_demand2intake_ratio_scen(t,i)$(p15_demand2intake_ratio(t,i) > s15_waste_scen )
-                    = p15_demand2intake_ratio(t,i)*(1-i15_exo_foodscen_fader(t))
-                      + s15_waste_scen*i15_exo_foodscen_fader(t);
+                    = p15_demand2intake_ratio(t,i)*(1-i15_exo_foodscen_fader(t,i))
+                      + s15_waste_scen*i15_exo_foodscen_fader(t,i);
 
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated(t,i,kfo)$(p15_demand2intake_ratio(t,i) >0 ) = p15_kcal_pc_calibrated_orig(t,i,kfo)*(
@@ -518,11 +518,11 @@ i15_kcal_pc_scen_target(t,i,kfo) = (f15_calib_fsupply(i)*f15_overcons_FAOwaste(i
 *' 4.) In the last step, the regression-based calculation of daily per capita food demand
 *' is faded into the exogenous diet scenario according to a predefined speed of
 *' convergence (note that fading should start after the historical time slice of
-*' the EAT Lancet diet scenarios (y2010) as defined in `i15_exo_foodscen_fader(t)`):
+*' the EAT Lancet diet scenarios (y2010) as defined in `i15_exo_foodscen_fader(t,i)`):
 
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
-p15_kcal_pc_calibrated(t,i,kfo) = p15_kcal_pc_calibrated_orig(t,i,kfo) * (1-i15_exo_foodscen_fader(t))
-                        + i15_kcal_pc_scen_target(t,i,kfo) * i15_exo_foodscen_fader(t);
+p15_kcal_pc_calibrated(t,i,kfo) = p15_kcal_pc_calibrated_orig(t,i,kfo) * (1-i15_exo_foodscen_fader(t,i))
+                        + i15_kcal_pc_scen_target(t,i,kfo) * i15_exo_foodscen_fader(t,i);
 
 
 );

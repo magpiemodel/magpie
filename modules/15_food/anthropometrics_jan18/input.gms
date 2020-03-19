@@ -38,6 +38,13 @@ $setglobal c15_EAT_scen  FLX
 *   options:   BMK, FLX, PSC, VEG, VGN, FLX_hmilk, FLX_hredmeat
 
 
+* Set-switch for countries affected by country-specific exogenous diet scenario
+* Default: all iso countries selected
+sets
+  scen_countries15(iso) countries to be affected by ghg policy / DEU, FRA /
+;
+
+
 scalar s15_elastic_demand  Elastic demand switch (1=elastic 0=exogenous) (1) / 1 /;
 
 scalar s15_calibrate Calibration switch (1=calibrated 0=pure regression outcomes) (1) / 1 /;
