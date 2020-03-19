@@ -10,7 +10,7 @@ $setglobal c12_interest_rate  medium
 * Set-switch for countries affected by country-specific interest rate scenario
 * Default: all iso countries selected
 sets
-  interest_rate_policy_countries(iso) countries to be affected by chosen interest rate scenario / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
+  gdp_countries12(iso) countries to be affected by chosen interest rate scenario / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
                           ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
                           BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
                           BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,
@@ -49,6 +49,20 @@ $include "./modules/12_interest_rate/input/f12_interest_rate.cs3"
 $offdelim
 ;
 
+$ontext
+parameters
+f12_interest_reg_policy(t_all)  Interest rate scenario fader for country specific policy (1)
+/
+$ondelim
+$include "./modules/12_interest_rate/input/f12_interest_reg_policy.cs2"
+$offdelim
+/
+;
+$offtext
+
+scalars
+  s12_alt_interest   Interest rate scenario chosen for regional interest rate scenario switch (1) / 0.05 /
+;
 
 $if "%c12_interest_rate%" == "coupling" parameter f12_interest_coupling(t_all) Interest rate (% per yr)
 $if "%c12_interest_rate%" == "coupling" /
