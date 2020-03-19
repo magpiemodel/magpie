@@ -21,8 +21,8 @@ while(floor(smax((i,k_trade), v21_supply_missing.l(i,k_trade))) > 0 AND s21_coun
     p21_criterion = floor(smax((i,k_trade), v21_supply_missing.l(i,k_trade)));
 	display p21_criterion;
 	display "Warning: There are trade imbalances for timber. Restarting solve with adjusted timber demand!";
-    pm_demand_ext(t,i,"wood") = pm_demand_ext(t,i,"wood") + v21_supply_missing.l(i,"wood");
-    pm_demand_ext(t,i,"woodfuel") = pm_demand_ext(t,i,"woodfuel") + v21_supply_missing.l(i,"woodfuel");
+    pm_demand_ext(t,i,"wood") = pm_demand_ext(t,i,"wood") - v21_supply_missing.l(i,"wood");
+    pm_demand_ext(t,i,"woodfuel") = pm_demand_ext(t,i,"woodfuel") - v21_supply_missing.l(i,"woodfuel");
 
     p21_timder_adjustment_ratio(t,i,"wood") = pm_demand_ext(t,i,"wood")/pm_demand_ext_original(t,i,"wood");
     p21_timder_adjustment_ratio(t,i,"woodfuel") = pm_demand_ext(t,i,"woodfuel")/pm_demand_ext_original(t,i,"woodfuel");
