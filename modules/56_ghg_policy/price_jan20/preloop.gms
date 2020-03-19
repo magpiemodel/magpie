@@ -16,7 +16,7 @@ $endif
 * Country switch to determine countries for which ghg policy shall be applied.
 * In the default case, the ghg policy affects all countries when activated.
 p56_country_dummy(iso) = 0;
-p56_country_dummy(ghg_policy_countries) = 1;
+p56_country_dummy(policy_countries56) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by their population size.

@@ -8,7 +8,7 @@
 * Set-switch for countries affected by regional ghg policy
 * Default: all iso countries selected
 sets
-  ghg_policy_countries (iso) countries to be affected by ghg policy / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
+  policy_countries56 (iso) countries to be affected by ghg policy / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
                           ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
                           BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
                           BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,
