@@ -10,5 +10,6 @@ sets
   / low, medium, high /
 
 	bound12 Bound for interest rate
-	/low, high/
+	/ low, high/
+
 ;
