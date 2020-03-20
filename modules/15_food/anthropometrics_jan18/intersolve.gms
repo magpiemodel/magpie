@@ -86,7 +86,7 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
 display "finished iteration number ", p15_iteration_counter;
 display "convergence measure:",p15_convergence_measure;
 
-if (s15_elastic_demand * (1-sum(sameas(t_past,t),1)) =1,
+if (s15_elastic_demand = 1 AND m_year(t) > 2020,
   display "elastic demand model is activated";
   if ((p15_convergence_measure(t) > s15_convergence and p15_iteration_counter(t) <= s15_maxiter),
 
