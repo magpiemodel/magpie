@@ -17,6 +17,12 @@
   p32_aff_pol_timestep("y1995",j) = 0;
   p32_aff_pol_timestep(t,j)$(ord(t)>1) = p32_aff_pol(t,j) - p32_aff_pol(t-1,j);
 
+if(m_year(t) <= 2020,
+ p32_max_aff_area = Inf;
+else
+ p32_max_aff_area = s32_max_aff_area;
+);
+
 ** END INDC **
 
 *' @code
@@ -24,9 +30,12 @@
 vm_supply.fx(i2,kforestry) = 0;
 
 *' Certain areas (e.g. the boreal zone) are excluded from endogenous afforestation.
-v32_land.lo(j,"aff","ac0") = 0;
-v32_land.up(j,"aff","ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
-
+if(m_year(t) <= 2020,
+	v32_land.fx(j,"aff","ac0") = 0;
+else
+	v32_land.lo(j,"aff","ac0") = 0;
+	v32_land.up(j,"aff","ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
+);
 *' Endogenous afforestation is limited to cells with vegetation carbon density above 20 tC/ha.
 v32_land.fx(j,"aff","ac0")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
 
