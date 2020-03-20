@@ -8,7 +8,7 @@
 ic55_manure_fuel_shr(i,kli)=f55_manure_fuel_shr(t,i,kli,"%c09_gdp_scenario%");
 
 if(m_year(t) <= 2015,
-ic55_awms_shr(i,kli,awms_conf)=  f55_awms_shr(t,i,"ssp2",kli,awms_conf);
+ ic55_awms_shr(i,kli,awms_conf) = f55_awms_shr(t,i,"ssp2",kli,awms_conf);
 else
-ic55_awms_shr(i,kli,awms_conf)=  f55_awms_shr(t,i,"%c55_scen_conf%",kli,awms_conf);
+ ic55_awms_shr(i,kli,awms_conf) = f55_awms_shr(t,i,"%c55_scen_conf%",kli,awms_conf);
 );

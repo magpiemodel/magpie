@@ -6,3 +6,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 vm_dem_bioen.fx(i2,kap)=0;
+
+if(m_year(t) <= 2015,
+ i60_res_2ndgenBE_dem(t,i) =
+             f60_res_2ndgenBE_dem(t,i,"ssp2");
+else 
+ i60_res_2ndgenBE_dem(t,i) =
+             f60_res_2ndgenBE_dem(t,i,"%c60_res_2ndgenBE_dem%");
+);
