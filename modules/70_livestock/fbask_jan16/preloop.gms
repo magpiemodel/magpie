@@ -5,6 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+f70_slaughter_feed_share(t_all,i,kap,attributes,feed_scen70)$(m_year(t_all)<=2015) = f70_slaughter_feed_share(t_all,i,kap,attributes,"ssp2");
+f70_livestock_productivity(t_all,i,sys,feed_scen70)$(m_year(t_all)<=2015) = f70_livestock_productivity(t_all,i,sys,"ssp2");
+f70_feed_baskets(t_all,i,kap,kall,feed_scen70)$(m_year(t_all)<=2015) = f70_feed_baskets(t_all,i,kap,kall,"ssp2");
+
 im_slaughter_feed_share(t_all,i,kap,attributes) =
              f70_slaughter_feed_share(t_all,i,kap,attributes,"%c70_feed_scen%");
 
