@@ -12,6 +12,7 @@ im_demography(t,iso,sex,age) = f09_demography(t,iso,"%c09_gdp_scenario%",sex,age
 
 i09_gdp_ppp_iso(t,iso) = f09_gdp_ppp_iso(t,iso,"%c09_gdp_scenario%");
 i09_gdp_mer_iso(t,iso) = f09_gdp_mer_iso(t,iso,"%c09_gdp_scenario%");
+i09_gdp_mer_iso(t,iso)$(m_year(t) <= 2015) = f09_gdp_mer_iso(t,iso,"SSP2");
 im_pop_iso(t,iso) = f09_pop_iso(t,iso,"%c09_pop_scenario%");
 * get the scenario GDP & Populaiton data for MAgPIE regions
 i09_gdp_mer(t,i) = sum(i_to_iso(i,iso),i09_gdp_mer_iso(t,iso));

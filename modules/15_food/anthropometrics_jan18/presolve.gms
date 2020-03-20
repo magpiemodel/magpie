@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-if(m_year(t) <= 2020,
+if(m_year(t) <= 2015,
  i15_dem_intercept(regr15)   = f15_demand_paras(regr15,"SSP2","intercept");
  i15_dem_saturation(regr15)  = f15_demand_paras(regr15,"SSP2","saturation");
  i15_dem_halfsat(regr15)     = f15_demand_paras(regr15,"SSP2","halfsaturation");
