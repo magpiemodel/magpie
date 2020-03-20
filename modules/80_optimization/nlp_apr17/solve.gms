@@ -31,6 +31,14 @@ Tol_Feas_Max = 4.0e-6
 Tol_Feas_Tria = 4.0e-6
 $offecho
 
+$onecho > conopt4.op2
+Tol_Obj_Change = 3.0e-6
+Tol_Feas_Min = 4.0e-7
+Tol_Feas_Max = 4.0e-6
+Tol_Feas_Tria = 4.0e-6
+Flg_Prep = FALSE
+$offecho
+
 repeat(
    s80_counter = s80_counter + 1 ;
 
@@ -38,7 +46,15 @@ repeat(
   solve magpie USING nlp MINIMIZING vm_cost_glo;
 *' @stop
 
-* if solve stopped with an error, try it again with conopt3
+* if solve stopped with an error, try it again without pre-processing
+    if((magpie.modelstat = 13),
+      display "WARNING: Modelstat 13 | retry without Conopt4 pre-processing";
+	  magpie.optfile = 2 
+      solve magpie USING nlp MINIMIZING vm_cost_glo;
+      magpie.optfile   = s80_optfile ;
+    );
+
+* if solve stopped again with an error, try it again with conopt3
     if((magpie.modelstat = 13),
       display "WARNING: Modelstat 13 | retry with CONOPT3!";
       option nlp = conopt;
