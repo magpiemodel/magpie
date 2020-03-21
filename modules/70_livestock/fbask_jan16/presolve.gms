@@ -32,7 +32,7 @@ p70_incr_cattle(t,i)  =  1$(ord(t)=1)
 *' The pasture management factor is calculated by applying a linear relationship 
 *' that links changes in pasture management with changes in cattle stocks:
 
-if (m_year(t) <= sm_fix_SSP2,
+if (sum(sameas(t_past,t),1) = 1,
    pm_past_mngmnt_factor(t,i) = 1;
 else               
    pm_past_mngmnt_factor(t,i) =   ( (s70_pyld_intercept + f70_pyld_slope_reg(i)*p70_incr_cattle(t,i)**(5/(m_year(t)-m_year(t-1))) 
