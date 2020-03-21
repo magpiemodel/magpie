@@ -6,20 +6,21 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 * get the scenario GDP & Populaiton data for iso countries
-if(m_year(t) <= sm_fix_SSP2,
- im_physical_inactivity(t,iso,sex,age) = f09_physical_inactivity(t,iso,"SSP2",sex,age);
- im_demography(t,iso,sex,age) = f09_demography(t,iso,"SSP2",sex,age)+0.000001;
- i09_gdp_ppp_iso(t,iso) = f09_gdp_ppp_iso(t,iso,"SSP2");
- i09_gdp_mer_iso(t,iso) = f09_gdp_mer_iso(t,iso,"SSP2");
- im_pop_iso(t,iso) = f09_pop_iso(t,iso,"SSP2");
+loop(t,
+ if(m_year(t) <= sm_fix_SSP2,
+  im_physical_inactivity(t,iso,sex,age) = f09_physical_inactivity(t,iso,"SSP2",sex,age);
+  im_demography(t,iso,sex,age) = f09_demography(t,iso,"SSP2",sex,age)+0.000001;
+  i09_gdp_ppp_iso(t,iso) = f09_gdp_ppp_iso(t,iso,"SSP2");
+  i09_gdp_mer_iso(t,iso) = f09_gdp_mer_iso(t,iso,"SSP2");
+  im_pop_iso(t,iso) = f09_pop_iso(t,iso,"SSP2");
 else
- im_physical_inactivity(t,iso,sex,age) = f09_physical_inactivity(t,iso,"%c09_gdp_scenario%",sex,age);
- im_demography(t,iso,sex,age) = f09_demography(t,iso,"%c09_gdp_scenario%",sex,age)+0.000001;
- i09_gdp_ppp_iso(t,iso) = f09_gdp_ppp_iso(t,iso,"%c09_gdp_scenario%");
- i09_gdp_mer_iso(t,iso) = f09_gdp_mer_iso(t,iso,"%c09_gdp_scenario%");
- im_pop_iso(t,iso) = f09_pop_iso(t,iso,"%c09_pop_scenario%");
+  im_physical_inactivity(t,iso,sex,age) = f09_physical_inactivity(t,iso,"%c09_gdp_scenario%",sex,age);
+  im_demography(t,iso,sex,age) = f09_demography(t,iso,"%c09_gdp_scenario%",sex,age)+0.000001;
+  i09_gdp_ppp_iso(t,iso) = f09_gdp_ppp_iso(t,iso,"%c09_gdp_scenario%");
+  i09_gdp_mer_iso(t,iso) = f09_gdp_mer_iso(t,iso,"%c09_gdp_scenario%");
+  im_pop_iso(t,iso) = f09_pop_iso(t,iso,"%c09_pop_scenario%");
+ );
 );
-
 * get the scenario GDP & Populaiton data for MAgPIE regions
 i09_gdp_mer(t,i) = sum(i_to_iso(i,iso),i09_gdp_mer_iso(t,iso));
 i09_gdp_ppp(t,i) = sum(i_to_iso(i,iso),i09_gdp_ppp_iso(t,iso));
