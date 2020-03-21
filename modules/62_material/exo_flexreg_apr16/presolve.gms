@@ -18,6 +18,4 @@ else
  s62_historical=0;
 );
 
-p62_dem_food(i) = sum(kfo, vm_dem_food.l(i,kfo));
-
 *' @stop
