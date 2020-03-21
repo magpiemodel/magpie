@@ -7,5 +7,5 @@
 
 parameters
   pm_interest(i)        Current interest rate in each region (% per yr)
-  p12_interest(t,i)	    Interest rate (% per yr)
+  p12_interest(t_all,i)	    Interest rate (% per yr)
 ;
