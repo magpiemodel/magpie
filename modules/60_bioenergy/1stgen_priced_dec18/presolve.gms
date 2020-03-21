@@ -7,7 +7,7 @@
 
 vm_dem_bioen.fx(i2,kap)=0;
 
-if(m_year(t) <= 2015,
+if(m_year(t) <= sm_fix_SSP2,
  i60_res_2ndgenBE_dem(t,i) =
              f60_res_2ndgenBE_dem(t,i,"ssp2");
 else 

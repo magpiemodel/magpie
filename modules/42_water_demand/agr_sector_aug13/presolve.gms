@@ -38,7 +38,7 @@ vm_watdem.fx("ecosystem",j) = sum(cell(i,j), i42_env_flows_base(t,j) * (1-ic42_e
 
 
 * irrigation efficiency
-if(m_year(t) <= 2020,
+if(m_year(t) <= sm_fix_SSP2,
  v42_irrig_eff.fx(j) = s42_irrigation_efficiency;
 else 
  if((s42_irrig_eff_scenario = 1),

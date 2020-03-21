@@ -35,55 +35,62 @@ getInput <- function(gdx,ghg_price=TRUE,biodem=TRUE) {
   }
 }
 
+cfg$gms$sm_fix_SSP2 <- 2020
 
-cfg$title <- "val12_SSP2-NPI_POP1"
+cfg$title <- "val13_SDP-NPI_2020"
+cfg <- setScenario(cfg,c("SDP","NPI"))
+cfg$gms$c56_pollutant_prices <- "coupling"
+cfg$gms$c60_2ndgen_biodem <- "coupling"
+getInput("/p/projects/piam/runs/coupled-magpie/output/C_SDP-NPi-mag-4/fulldata.gdx")
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- "val13_SSP1-NPI_2020"
+cfg <- setScenario(cfg,c("SSP1","NPI"))
+cfg$gms$c56_pollutant_prices <- "coupling"
+cfg$gms$c60_2ndgen_biodem <- "coupling"
+getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP1-NPi-mag-4/fulldata.gdx")
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- "val13_SSP2-NPI_2020"
 cfg <- setScenario(cfg,c("SSP2","NPI"))
-cfg$gms$c09_pop_scenario  <- "SSP1"
 cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$c60_2ndgen_biodem <- "coupling"
 getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP2-NPi-mag-4/fulldata.gdx")
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "val12_SSP2-NPI_GDP1"
+cfg$title <- "val13_SSP5-NPI_2020"
+cfg <- setScenario(cfg,c("SSP5","NPI"))
+cfg$gms$c56_pollutant_prices <- "coupling"
+cfg$gms$c60_2ndgen_biodem <- "coupling"
+getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP5-NPi-mag-4/fulldata.gdx")
+start_run(cfg,codeCheck=FALSE)
+
+cfg$gms$sm_fix_SSP2 <- 2015
+
+cfg$title <- "val13_SDP-NPI_2015"
+cfg <- setScenario(cfg,c("SDP","NPI"))
+cfg$gms$c56_pollutant_prices <- "coupling"
+cfg$gms$c60_2ndgen_biodem <- "coupling"
+getInput("/p/projects/piam/runs/coupled-magpie/output/C_SDP-NPi-mag-4/fulldata.gdx")
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- "val13_SSP1-NPI_2015"
+cfg <- setScenario(cfg,c("SSP1","NPI"))
+cfg$gms$c56_pollutant_prices <- "coupling"
+cfg$gms$c60_2ndgen_biodem <- "coupling"
+getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP1-NPi-mag-4/fulldata.gdx")
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- "val13_SSP2-NPI_2015"
 cfg <- setScenario(cfg,c("SSP2","NPI"))
-cfg$gms$c09_gdp_scenario  <- "SSP1"
 cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$c60_2ndgen_biodem <- "coupling"
 getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP2-NPi-mag-4/fulldata.gdx")
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "val12_SSP2-NPI_FOOD1"
-cfg <- setScenario(cfg,c("SSP2","NPI"))
-cfg$gms$c15_food_scenario <- "SSP1"
+cfg$title <- "val13_SSP5-NPI_2015"
+cfg <- setScenario(cfg,c("SSP5","NPI"))
 cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$c60_2ndgen_biodem <- "coupling"
-getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP2-NPi-mag-4/fulldata.gdx")
+getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP5-NPi-mag-4/fulldata.gdx")
 start_run(cfg,codeCheck=FALSE)
-
-# cfg$title <- "val12_SDP-NPI"
-# cfg <- setScenario(cfg,c("SDP","NPI"))
-# cfg$gms$c56_pollutant_prices <- "coupling"
-# cfg$gms$c60_2ndgen_biodem <- "coupling"
-# getInput("/p/projects/piam/runs/coupled-magpie/output/C_SDP-NPi-mag-4/fulldata.gdx")
-# start_run(cfg,codeCheck=FALSE)
-# 
-# cfg$title <- "val12_SSP1-NPI"
-# cfg <- setScenario(cfg,c("SSP1","NPI"))
-# cfg$gms$c56_pollutant_prices <- "coupling"
-# cfg$gms$c60_2ndgen_biodem <- "coupling"
-# getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP1-NPi-mag-4/fulldata.gdx")
-# start_run(cfg,codeCheck=FALSE)
-# 
-# cfg$title <- "val12_SSP2-NPI"
-# cfg <- setScenario(cfg,c("SSP2","NPI"))
-# cfg$gms$c56_pollutant_prices <- "coupling"
-# cfg$gms$c60_2ndgen_biodem <- "coupling"
-# getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP2-NPi-mag-4/fulldata.gdx")
-# start_run(cfg,codeCheck=FALSE)
-# 
-# cfg$title <- "val12_SSP5-NPI"
-# cfg <- setScenario(cfg,c("SSP5","NPI"))
-# cfg$gms$c56_pollutant_prices <- "coupling"
-# cfg$gms$c60_2ndgen_biodem <- "coupling"
-# getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP5-NPi-mag-4/fulldata.gdx")
-# start_run(cfg,codeCheck=FALSE)

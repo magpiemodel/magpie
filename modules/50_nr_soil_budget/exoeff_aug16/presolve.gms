@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-if(m_year(t) <= 2015,
+if(m_year(t) <= sm_fix_SSP2,
  v50_nr_eff.fx(i) = f50_snupe(t,i,"neff60_60_starty2010");
  v50_nr_eff_pasture.fx(i) = f50_nue_pasture(t,i,"neff60_60_starty2010");
 else

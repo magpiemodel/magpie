@@ -17,7 +17,7 @@
   p32_aff_pol_timestep("y1995",j) = 0;
   p32_aff_pol_timestep(t,j)$(ord(t)>1) = p32_aff_pol(t,j) - p32_aff_pol(t-1,j);
 
-if(m_year(t) <= 2020,
+if(m_year(t) <= sm_fix_SSP2,
  p32_max_aff_area = Inf;
 else
  p32_max_aff_area = s32_max_aff_area;
@@ -30,7 +30,7 @@ else
 vm_supply.fx(i2,kforestry) = 0;
 
 *' Certain areas (e.g. the boreal zone) are excluded from endogenous afforestation.
-if(m_year(t) <= 2020,
+if(m_year(t) <= sm_fix_SSP2,
 	v32_land.fx(j,"aff","ac0") = 0;
 else
 	v32_land.lo(j,"aff","ac0") = 0;
