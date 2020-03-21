@@ -35,6 +35,8 @@ getInput <- function(gdx,ghg_price=TRUE,biodem=TRUE) {
   }
 }
 
+cfg$output <- c("rds_report")
+
 cfg$gms$sm_fix_SSP2 <- 2020
 
 cfg$title <- "val14_SDP-NPI_2020"
