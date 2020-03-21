@@ -22,7 +22,7 @@
                       sum(ct,f62_dem_material(ct,i2,kall))*s62_historical
                       +
                       (p62_dem_material_lh(i2,kall)*
-                           p62_dem_food(i2)
+                           sum(kfo, vm_dem_food.l(i,kfo))
                            /(p62_dem_food_lh(i2)))
                       *(1-s62_historical)
                       ;

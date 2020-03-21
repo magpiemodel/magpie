@@ -38,7 +38,6 @@ getInput <- function(gdx,ghg_price=TRUE,biodem=TRUE) {
 cfg$output <- c("rds_report")
 
 cfg$gms$sm_fix_SSP2 <- 2020
-cfg$gms$processing <- "off"
 
 cfg$title <- "val17_SDP-NPI_2020_procOff"
 cfg <- setScenario(cfg,c("SDP","NPI"))
