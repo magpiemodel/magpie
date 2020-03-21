@@ -5039,9 +5039,9 @@ ipcc emission factors for various emission types X (tX-N per tN)
 f51_ipcc_ef(ipcc_ef51,emis_uncertainty51)|
 <%/ITEM%>
 <%ITEM%>
-f52_growth_par
+fm_growth_par
 Parameters for chapman-richards equation (1)
-f52_growth_par(clcl,chap_par)|
+fm_growth_par(clcl,chap_par)|
 <%/ITEM%>
 <%ITEM%>
 f53_ef_ch4_awms

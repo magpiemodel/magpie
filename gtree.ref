@@ -4117,10 +4117,10 @@
 4117 158 ct SETS ref 565285 17 271 4 396 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/input.gms
 4118 157 t SETS ref 565285 17 279 4 396 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/input.gms
 4119 158 ct SETS assigned 565285 17 284 4 396 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/input.gms
-4120 1270 f52_growth_par PARAMETERS declared 565287 19 21 4 396 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/input.gms
+4120 1270 fm_growth_par PARAMETERS declared 565287 19 21 4 396 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/input.gms
 4121 289 clcl SETS ref 565287 19 26 4 396 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/input.gms
 4122 173 chap_par SETS ref 565287 19 35 4 396 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/input.gms
-4123 1270 f52_growth_par PARAMETERS defined 565287 19 81 4 396 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/input.gms
+4123 1270 fm_growth_par PARAMETERS defined 565287 19 81 4 396 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/input.gms
 4124 1271 f53_ef_ch4_awms PARAMETERS declared 565380 7 26 4 401 C:\PIK\private_forestry\./modules/53_methane/ipcc2006_flexreg_apr16/input.gms
 4125 154 t_all SETS ref 565380 7 32 4 401 C:\PIK\private_forestry\./modules/53_methane/ipcc2006_flexreg_apr16/input.gms
 4126 145 i SETS ref 565380 7 34 4 401 C:\PIK\private_forestry\./modules/53_methane/ipcc2006_flexreg_apr16/input.gms
@@ -8423,14 +8423,14 @@
 8423 951 pm_climate_class PARAMETERS ref 1004005 19 190 5 716 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/preloop.gms
 8424 147 j SETS ref 1004005 19 193 5 716 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/preloop.gms
 8425 289 clcl SETS ref 1004005 19 198 5 716 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/preloop.gms
-8426 1270 f52_growth_par PARAMETERS ref 1004005 19 213 5 716 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/preloop.gms
+8426 1270 fm_growth_par PARAMETERS ref 1004005 19 213 5 716 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/preloop.gms
 8427 289 clcl SETS ref 1004005 19 219 5 716 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/preloop.gms
 8428 170 ac SETS ref 1004005 19 233 5 716 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/preloop.gms
 8429 289 clcl SETS control 1004005 19 253 5 716 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/preloop.gms
 8430 951 pm_climate_class PARAMETERS ref 1004005 19 269 5 716 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/preloop.gms
 8431 147 j SETS ref 1004005 19 272 5 716 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/preloop.gms
 8432 289 clcl SETS ref 1004005 19 277 5 716 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/preloop.gms
-8433 1270 f52_growth_par PARAMETERS ref 1004005 19 292 5 716 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/preloop.gms
+8433 1270 fm_growth_par PARAMETERS ref 1004005 19 292 5 716 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/preloop.gms
 8434 289 clcl SETS ref 1004005 19 298 5 716 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/preloop.gms
 8435 157 t SETS control 1004008 22 24 5 716 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/preloop.gms
 8436 147 j SETS control 1004008 22 26 5 716 C:\PIK\private_forestry\./modules/52_carbon/normal_dec17/preloop.gms
@@ -20888,7 +20888,7 @@
 1267 f51_ef3_confinement 4 PARAM 4 0 145 237 303 308 emissions from manure managed in confinement for various emission types X (tX-N per tN)
 1268 f51_ef3_prp 4 PARAM 3 0 145 308 237 emissions from manure on pasture range and paddocks for various emission types X (tX-N per tN)
 1269 fm_carbon_density 4 PARAM 4 0 154 147 165 184 LPJmL carbon density for land and carbon pools (tC per ha)
-1270 f52_growth_par 4 PARAM 2 0 289 173 Parameters for chapman-richards equation (1)
+1270 fm_growth_par 4 PARAM 2 0 289 173 Parameters for chapman-richards equation (1)
 1271 f53_ef_ch4_awms 4 PARAM 3 0 154 145 237 CH4 emission per livestock products (CH4 per tDM)
 1272 f53_ef_ch4_rice 4 PARAM 2 0 154 145 CH4 emission per ha rice (CH4 per ha)
 1273 f55_awms_recycling_share 4 PARAM 3 0 145 237 303 share of Nr in confinement recycled (tNr per tNr)

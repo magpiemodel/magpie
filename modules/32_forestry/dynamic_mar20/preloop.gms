@@ -1,6 +1,6 @@
 ** This is same calculation as in carbon module. As these numbers don't exist yet due to
 ** carbon module appearing below forestry module, we keep this double calculation for now.
-p32_carbon_density_ac_forestry(t_all,j,ac) = m_growth_vegc(0,fm_carbon_density(t_all,j,"other","vegc"),sum(clcl,pm_climate_class(j,clcl)*f52_growth_par(clcl,"k","plantations")),sum(clcl,pm_climate_class(j,clcl)*f52_growth_par(clcl,"m","plantations")),(ord(ac)-1));
+p32_carbon_density_ac_forestry(t_all,j,ac) = m_growth_vegc(0,fm_carbon_density(t_all,j,"other","vegc"),sum(clcl,pm_climate_class(j,clcl)*fm_growth_par(clcl,"k","plantations")),sum(clcl,pm_climate_class(j,clcl)*fm_growth_par(clcl,"m","plantations")),(ord(ac)-1));
 
 ** Calculating the marginal of carbon density i.e. change in carbon density over two time steps
 ** The carbon densities are tC/ha/year so we don't have to divide by timestep length.

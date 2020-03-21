@@ -1,6 +1,16 @@
-# |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
+# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK),
 # |  authors, and contributors see AUTHORS file
 # |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
 # |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
+im_pop_iso, input, not used
+im_gdp_pc_ppp_iso, input, not used
+im_development_state, input, not used
+pm_growing_stock, input, not used
+pm_prices, input, not used
+fm_harvest_cost_ha, input, not used
+vm_secdforest_reduction, input, not used
+vm_other_reduction, input, not used
+vm_primforest_reduction, input, not used
+vm_cost_glo, input, not used

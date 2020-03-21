@@ -309,7 +309,7 @@
 307,1,1,"f51_ef3_confinement","i,kli,awms_conf,n_pollutants_direct","emissions from manure managed in confinement for various emission types X (tX-N per tN)"
 308,1,1,"f51_ef3_prp","i,n_pollutants_direct,kli","emissions from manure on pasture range and paddocks for various emission types X (tX-N per tN)"
 309,1,1,"f51_ipcc_ef","ipcc_ef51,emis_uncertainty51","ipcc emission factors for various emission types X (tX-N per tN)"
-310,1,1,"f52_growth_par","clcl,chap_par","Parameters for chapman-richards equation (1)"
+310,1,1,"fm_growth_par","clcl,chap_par","Parameters for chapman-richards equation (1)"
 311,1,1,"f53_ef_ch4_awms","t_all,i,kli","CH4 emission per livestock products (CH4 per tDM)"
 312,1,1,"f53_ef_ch4_rice","t_all,i","CH4 emission per ha rice (CH4 per ha)"
 313,1,1,"f55_awms_recycling_share","i,kli,awms_conf","share of Nr in confinement recycled (tNr per tNr)"

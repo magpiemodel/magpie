@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -35,12 +35,12 @@
  $(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
 
 
- q21_trade_reg_up(i2,k_trade_excl_forestry)..
- vm_prod_reg(i2,k_trade_excl_forestry) =l=
- ((vm_supply(i2,k_trade_excl_forestry) + v21_excess_prod(i2,k_trade_excl_forestry))/sum(ct,i21_trade_bal_reduction(ct,k_trade_excl_forestry)))
- $(sum(ct,f21_self_suff(ct,i2,k_trade_excl_forestry) >= 1))
- + (vm_supply(i2,k_trade_excl_forestry)*sum(ct,f21_self_suff(ct,i2,k_trade_excl_forestry))/sum(ct,i21_trade_bal_reduction(ct,k_trade_excl_forestry)))
- $(sum(ct,f21_self_suff(ct,i2,k_trade_excl_forestry) < 1));
+ q21_trade_reg_up(i2,k_trade)..
+ vm_prod_reg(i2,k_trade) =l=
+ ((vm_supply(i2,k_trade) + v21_excess_prod(i2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade)))
+ $(sum(ct,f21_self_suff(ct,i2,k_trade) >= 1))
+ + (vm_supply(i2,k_trade)*sum(ct,f21_self_suff(ct,i2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade)))
+ $(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
 
 *' The global excess demand of each tradable good `v21_excess_demad` equals to
 *' the sum over all the imports of importing regions.

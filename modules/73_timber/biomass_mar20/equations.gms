@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -11,7 +11,7 @@ q73_cost_timber(i2)..
                     vm_cost_timber(i2)
                     =e=
                     v73_cost_hvarea(i2)
-                    + sum((cell(i2,j2),kforestry), vm_prod_heaven_timber(j2,kforestry)) * 1000000;
+                    + sum((cell(i2,j2),kforestry), v73_prod_heaven_timber(j2,kforestry)) * 1000000;
 
 
 q73_cost_hvarea(i2)..
@@ -20,7 +20,7 @@ q73_cost_hvarea(i2)..
                     sum(cell(i2,j2),
                     sum(ac_sub, vm_hvarea_forestry(j2,ac_sub)) * fm_harvest_cost_ha(i2)
                   + (sum(ac_sub, vm_hvarea_secdforest(j2,ac_sub))
-                  + sum(ac_sub, vm_hvarea_other(j2, ac_sub))
+                  + sum(ac_sub, v73_hvarea_other(j2, ac_sub))
                   + vm_hvarea_primforest(j2)) * (fm_harvest_cost_ha(i2) * 1.5))
                     ;
 
@@ -38,7 +38,7 @@ q73_prod_timber(j2,kforestry)..
   +
   sum((land_natveg,ac_sub),v73_prod_natveg(j2,land_natveg,ac_sub,kforestry))
   +
-  vm_prod_heaven_timber(j2,kforestry);
+  v73_prod_heaven_timber(j2,kforestry);
   ;
 
 
@@ -113,7 +113,7 @@ q73_prod_other(j2,ac_sub)..
 *' realized from such areas divided by the corresponding growing stocks.
 
 q73_hvarea_other(j2,ac_sub)..
-                         vm_hvarea_other(j2, ac_sub)
+                         v73_hvarea_other(j2, ac_sub)
                           =e=
                          v73_prod_natveg(j2,"other",ac_sub,"woodfuel") / sum(ct, pm_growing_stock(ct,j2,ac_sub,"other"));
 

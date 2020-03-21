@@ -1,11 +1,9 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
-
- 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_supply(t,i,kall,"marginal")                 = vm_supply.m(i,kall);
@@ -53,4 +51,3 @@
  oq16_seed_demand(t,i,kcr,"lower")              = q16_seed_demand.lo(i,kcr);
  oq16_supply_forestry(t,i,kforestry,"lower")    = q16_supply_forestry.lo(i,kforestry);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
-

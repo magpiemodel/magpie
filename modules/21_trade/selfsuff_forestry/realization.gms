@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -28,6 +28,5 @@ $Ifi "%phase%" == "input" $include "./modules/21_trade/selfsuff_forestry/input.g
 $Ifi "%phase%" == "equations" $include "./modules/21_trade/selfsuff_forestry/equations.gms"
 $Ifi "%phase%" == "scaling" $include "./modules/21_trade/selfsuff_forestry/scaling.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/21_trade/selfsuff_forestry/preloop.gms"
-$Ifi "%phase%" == "intersolve" $include "./modules/21_trade/selfsuff_forestry/intersolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/21_trade/selfsuff_forestry/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
