@@ -41,7 +41,7 @@ $setglobal c15_EAT_scen  FLX
 * Set-switch for countries affected by country-specific exogenous diet scenario
 * Default: all iso countries selected
 sets
-  scen_countries15(iso) countries to be affected by ghg policy / DEU, FRA /
+  scen_countries15(iso) countries to be affected by selected food sceanrio / DEU, FRA /
 ;
 
 
