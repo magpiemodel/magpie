@@ -24,6 +24,10 @@ q16_seed_demand(i,kcr)           Seed demand (mio. tDM per yr)
 q16_supply_forestry(i,kforestry)          Forestry demand (mio. tDM per yr)
 ;
 
+parameters
+p16_mid_price           Mid price (USD per tDM)
+;
+
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_supply(t,i,kall,type)                 Regional demand (mio. tDM per yr)

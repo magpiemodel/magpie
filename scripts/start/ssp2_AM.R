@@ -23,8 +23,7 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-identifier_flag <- "F30AM_DefTrade_CodeOK_"
-
+identifier_flag <- "F31AM"
 for(ssp in c("SSP2")){
 
   for(c32_rotation_extension in c(0)){
