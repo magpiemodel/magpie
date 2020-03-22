@@ -24,7 +24,6 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 
 identifier_flag <- "F32AM"
-c73_demand_adjuster
 
 for(c73_demand_adjuster in c("price_based","manually_adjusted")){
   cfg$gms$c73_demand_adjuster <- c73_demand_adjuster
