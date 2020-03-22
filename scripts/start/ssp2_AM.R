@@ -23,34 +23,42 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-identifier_flag <- "F31AM"
-for(ssp in c("SSP2")){
+identifier_flag <- "F32AM"
+c73_demand_adjuster
 
-  for(c32_rotation_extension in c(0)){
+for(c73_demand_adjuster in c("price_based","manually_adjusted")){
+  cfg$gms$c73_demand_adjuster <- c73_demand_adjuster
+  for(ssp in c("SSP2")){
 
-    cfg$gms$c32_rotation_extension <- c32_rotation_extension
+    for(c32_rotation_extension in c(0)){
 
-    cfg <- setScenario(cfg,c(ssp,"NPI"))
+      cfg$gms$c32_rotation_extension <- c32_rotation_extension
 
-    for(emis_price in c("R2M41-SSP2-NPi")){
+      cfg <- setScenario(cfg,c(ssp,"NPI"))
 
-      cfg$gms$c56_pollutant_prices <- emis_price
-      cfg$gms$c60_2ndgen_biodem <- emis_price
+      for(emis_price in c("R2M41-SSP2-NPi")){
 
-      ### Create flags
+        cfg$gms$c56_pollutant_prices <- emis_price
+        cfg$gms$c60_2ndgen_biodem <- emis_price
 
-      if(c32_rotation_extension == 0) rot_flag = ""
-      if(c32_rotation_extension == 1) rot_flag = "5yE"
-      if(c32_rotation_extension == 2) rot_flag = "10yE"
+        ### Create flags
 
-      if(emis_price == "R2M41-SSP2-NPi") emis_flag = ""
-      if(emis_price == "R2M41-SSP2-Budg1300") emis_flag = "CO2p"
+        if(c32_rotation_extension == 0) rot_flag = ""
+        if(c32_rotation_extension == 1) rot_flag = "5yE"
+        if(c32_rotation_extension == 2) rot_flag = "10yE"
 
-      cfg$title <- paste0(identifier_flag,"_",emis_flag,"_",rot_flag,"_",ssp)
+        if(emis_price == "R2M41-SSP2-NPi") emis_flag = ""
+        if(emis_price == "R2M41-SSP2-Budg1300") emis_flag = "CO2p"
 
-      cfg$output <- c("rds_report","disaggregation")
+        if(c73_demand_adjuster == "price_based") adj_flag = "PriceFix"
+        if(c73_demand_adjuster == "manually_adjusted") adj_flag = "SlackFix"
 
-      start_run(cfg,codeCheck=FALSE)
+        cfg$title <- paste0(identifier_flag,"_",adj_flag,"_",emis_flag,"_",rot_flag,"_",ssp)
+
+        cfg$output <- c("rds_report","disaggregation")
+
+        start_run(cfg,codeCheck=FALSE)
+      }
     }
   }
 }
