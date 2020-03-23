@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -20,7 +20,7 @@ scalars
   s56_offset helper for C price interpolation (1) / 0 /
 ;
 
-$setglobal c56_pollutant_prices  R2M41-SSP2-NPi
+$setglobal c56_pollutant_prices  emulator
 $setglobal c56_emis_policy  redd+_nosoil
 
 table f56_pollutant_prices(t_all,i,pollutants,ghgscen56) GHG certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
@@ -35,7 +35,7 @@ $if "%c56_pollutant_prices%" == "coupling" $include "./modules/56_ghg_policy/inp
 $if "%c56_pollutant_prices%" == "coupling" $offdelim
 $if "%c56_pollutant_prices%" == "coupling" ;
 
-$if "%c56_pollutant_prices%" == "emulator" table f56_pollutant_prices_emulator(t_all,pollutants) Global ghg certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
+$if "%c56_pollutant_prices%" == "emulator" table f56_pollutant_prices_emulator(t_all,i,pollutants) Global ghg certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
 $if "%c56_pollutant_prices%" == "emulator" $ondelim
 $if "%c56_pollutant_prices%" == "emulator" $include "./modules/56_ghg_policy/input/f56_pollutant_prices_emulator.cs3"
 $if "%c56_pollutant_prices%" == "emulator" $offdelim
