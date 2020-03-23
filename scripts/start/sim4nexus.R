@@ -25,7 +25,7 @@ buildInputVector <- function(regionmapping   = "H12",
                              madrat_rev      = "4.22",
                              validation_rev  = "4.22",
                              calibration     = "calibration_sim4nexus_may2019.tgz",
-                             additional_data = "additional_data_rev3.70.tgz") {
+                             additional_data = "additional_data_rev3.78.tgz") {
   mappings <- c(H11="8a828c6ed5004e77d1ba2025e8ea2261",
                 H12="690d3718e151be1b450b394c1064b1c5",
                 mag="c30c1c580039c2b300d86cc46ff4036a",
@@ -53,7 +53,7 @@ general_settings<-function(title) {
   cfg$gms$c56_emis_policy <- "all"
   cfg$gms$som <- "cellpool_aug16"
   cfg$gms$c59_som_scenario  <- "cc"
-  cfg$gms$forestry  <- "affore_vegc_dec16"
+  cfg$gms$forestry  <- "dynamic_oct19"
   cfg$gms$maccs  <- "on_sep16"
   cfg$title <- paste0(title,"_lpjml3_IPSLCM5ALR_sim4nexus_v1")
   #  include costs per-ton
