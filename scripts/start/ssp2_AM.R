@@ -23,7 +23,7 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-identifier_flag <- "F36AM"
+identifier_flag <- "F37AM"
 
 for(c73_demand_adjuster in c("price_based")){
   cfg$gms$c73_demand_adjuster <- c73_demand_adjuster
