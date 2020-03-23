@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -109,7 +109,7 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
 
  q56_reward_cdr_aff(j2) ..
                  v56_reward_cdr_aff(j2) =e=
-            	 pc56_c_price_induced_aff*
+            	 s56_c_price_induced_aff*
             	 sum(ac, 
             	 ((1-s56_buffer_aff)*vm_cdr_aff(j2,ac) * sum((cell(i2,j2),ct), p56_c_price_aff(ct,i2,ac)))
             	 / ((1+sum(cell(i2,j2),pm_interest(i2)))**(ac.off*5)))
