@@ -17,7 +17,7 @@ while(floor(smax((i,kforestry), sum(cell(i,j),v73_prod_heaven_timber.l(j,kforest
   	display "Warning: There are trade imbalances for timber. Restarting solve with adjusted timber demand!";
 
 $if "%c73_demand_adjuster%" == "price_based"
-    pm_demand_ext(t,i,kforestry) = pm_demand_ext(t,i,kforestry) * ((pm_prices(t,i,kforestry)/pm_prices("y1995",i,kforestry))**(s73_price_elasticity));
+    pm_demand_ext(t,i,kforestry) = pm_demand_ext(t,i,kforestry) * ((pm_prices(t,i,kforestry)/pm_prices("y1995",i,kforestry))**(s73_price_elasticity$(pm_prices(t,i,kforestry)>0) + (s73_price_elasticity*(-1))$(pm_prices(t,i,kforestry)<0)));
 $if "%c73_demand_adjuster%" == "manually_adjusted"
     pm_demand_ext(t,i,kforestry) = pm_demand_ext(t,i,kforestry) - sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry));
 
