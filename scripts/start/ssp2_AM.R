@@ -23,9 +23,9 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-identifier_flag <- "F35AM"
+identifier_flag <- "F36AM"
 
-for(c73_demand_adjuster in c("price_based","manually_adjusted")){
+for(c73_demand_adjuster in c("price_based")){
   cfg$gms$c73_demand_adjuster <- c73_demand_adjuster
   for(ssp in c("SSP2")){
 

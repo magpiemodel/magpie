@@ -7,6 +7,4 @@
 **************start solve loop**************
 
  pm_prices(t,i,kforestry) = q16_supply_forestry.m(i,kforestry);
- p16_mid_price = smax((i,kforestry),pm_prices(t,i,kforestry))/2;
- pm_prices(t,i,kforestry)$(pm_prices(t,i,kforestry)=0) = p16_mid_price;
- pm_prices(t,i,kforestry)$(pm_prices(t,i,kforestry)<0) = 0.1;
+ pm_prices("y1995",i,kforestry)$(pm_prices("y1995",i,kforestry)=0) = 1;
