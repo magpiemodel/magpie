@@ -17,7 +17,7 @@ c32_aff_policy;;;;;;;;;none;npi;ndc;;;;;;;;
 c35_ad_policy;;;;;;;;;none;npi;ndc;;;;;;;;
 c35_aolc_policy;;;;;;;;;none;npi;ndc;;;;;;;;
 c35_protect_scenario;;;WDPA;WDPA;WDPA;WDPA;WDPA;BH;;;;;;;WDPA;WDPA;WDPA;WDPA;WDPA
-s42_irrig_eff_scenario;;;1;1;1;1;1;3;;;;;;;1;1;1;1;1
+s42_irrig_eff_scenario;;;2;2;2;2;2;3;;;;;;;1;1;1;1;1
 c42_env_flow_policy;;;on;off;off;mixed;on;on;;;;;;;on;off;off;mixed;on
 c50_scen_neff;;;neff65_70_starty2010;neff60_60_starty2010;neff55_60_starty2010;neff65_70_starty2010;neff55_60_starty2010;neff75_80_starty2010;;;;;;;neff65_70_starty2010;neff60_60_starty2010;neff55_60_starty2010;neff65_70_starty2010;neff55_60_starty2010
 c55_scen_conf;;;ssp1;ssp2;ssp3;ssp4;ssp5;ssp1;;;;;;;ssp1;ssp2;ssp3;ssp4;ssp5
