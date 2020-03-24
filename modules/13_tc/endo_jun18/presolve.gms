@@ -5,6 +5,19 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+if(m_year(t) <= sm_fix_SSP2,
+ i13_tc_factor(t,i) = f13_tc_factor(t,"medium");
+ i13_tc_exponent(t,i) = f13_tc_exponent(t,"medium");
+else
+$ifthen "%c13_tccost%" == "mixed"
+  i13_tc_factor(t,i) = sum(t_to_i_to_dev("y1995",i,dev), sum(scen13_to_dev(scen13,dev), f13_tc_factor(t,scen13)));
+  i13_tc_exponent(t,i) = sum(t_to_i_to_dev("y1995",i,dev), sum(scen13_to_dev(scen13,dev), f13_tc_exponent(t,scen13)));
+$else
+  i13_tc_factor(t,i) = f13_tc_factor(t,"%c13_tccost%");
+  i13_tc_exponent(t,i) = f13_tc_exponent(t,"%c13_tccost%");
+$endif
+);
+
 pc13_tech_cost_past(i) = p13_tech_cost_past(t,i);
 
 pc13_land(i) = sum(cell(i,j),pcm_land(j,"crop"));
