@@ -23,40 +23,51 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-identifier_flag <- "F37AM"
+identifier_flag <- "F38AM"
 
-for(c73_demand_adjuster in c("price_based")){
-  cfg$gms$c73_demand_adjuster <- c73_demand_adjuster
-  for(ssp in c("SSP2")){
+for(s73_price_elasticity in c(1,2,3,4)){
 
-    for(c32_rotation_extension in c(0)){
+  cfg$gms$s73_price_elasticity <- (s73_price_elasticity/10)*(-1)
 
-      cfg$gms$c32_rotation_extension <- c32_rotation_extension
+  for(c73_demand_adjuster in c("price_based")){
 
-      cfg <- setScenario(cfg,c(ssp,"NPI"))
+    cfg$gms$c73_demand_adjuster <- c73_demand_adjuster
+    for(ssp in c("SSP2")){
 
-      for(emis_price in c("R2M41-SSP2-NPi")){
+      for(c32_rotation_extension in c(0)){
 
-        cfg$gms$c56_pollutant_prices <- emis_price
-        cfg$gms$c60_2ndgen_biodem <- emis_price
+        cfg$gms$c32_rotation_extension <- c32_rotation_extension
 
-        ### Create flags
+        cfg <- setScenario(cfg,c(ssp,"NPI"))
 
-        if(c32_rotation_extension == 0) rot_flag = ""
-        if(c32_rotation_extension == 1) rot_flag = "5yE"
-        if(c32_rotation_extension == 2) rot_flag = "10yE"
+        for(emis_price in c("R2M41-SSP2-NPi")){
 
-        if(emis_price == "R2M41-SSP2-NPi") emis_flag = ""
-        if(emis_price == "R2M41-SSP2-Budg1300") emis_flag = "CO2p"
+          cfg$gms$c56_pollutant_prices <- emis_price
+          cfg$gms$c60_2ndgen_biodem <- emis_price
 
-        if(c73_demand_adjuster == "price_based") adj_flag = "PriceFix"
-        if(c73_demand_adjuster == "manually_adjusted") adj_flag = "SlackFix"
+          ### Create flags
 
-        cfg$title <- paste0(identifier_flag,"_",adj_flag,"_",emis_flag,"_",rot_flag,"_",ssp)
+          if(c32_rotation_extension == 0) rot_flag = ""
+          if(c32_rotation_extension == 1) rot_flag = "5yE"
+          if(c32_rotation_extension == 2) rot_flag = "10yE"
 
-        cfg$output <- c("rds_report","disaggregation")
+          if(emis_price == "R2M41-SSP2-NPi") emis_flag = ""
+          if(emis_price == "R2M41-SSP2-Budg1300") emis_flag = "CO2p"
 
-        start_run(cfg,codeCheck=FALSE)
+          if(c73_demand_adjuster == "price_based") adj_flag = "PriceFix"
+          if(c73_demand_adjuster == "manually_adjusted") adj_flag = "SlackFix"
+
+          if(s73_price_elasticity == 1) elas_flag = "0p1"
+          if(s73_price_elasticity == 2) elas_flag = "0p2"
+          if(s73_price_elasticity == 3) elas_flag = "0p3"
+          if(s73_price_elasticity == 4) elas_flag = "0p4"
+
+          cfg$title <- paste0(identifier_flag,"_",elas_flag,"_",adj_flag,"_",emis_flag,"_",rot_flag,"_",ssp)
+
+          cfg$output <- c("rds_report")
+
+          start_run(cfg,codeCheck=FALSE)
+        }
       }
     }
   }

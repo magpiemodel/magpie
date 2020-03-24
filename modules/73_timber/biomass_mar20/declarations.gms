@@ -20,8 +20,9 @@ p73_demand_ext_original(t_ext,i,kforestry)                                  Orig
 pm_prices(t,i,kforestry)                                                    Woody biomass prices (USD per tDM)
 p73_criterion	                                                              Criteria calculating timber demand adjustment (mio. tDM per yr)
 p73_timder_adjustment_ratio(t,i,kforestry)                                  Ratio between adjusted and prescribed timber demand (1)
-p73_price_ratio(t,i,kforestry)                                              Price ration from current step to base year (1)
-p73_demand_adjustor(t,i,kforestry)                                          Timber demand adjsutor (1)
+p73_price_ratio(t,i,kforestry)                                              Price ratio from current step to base year (1)
+p73_price_ratio_before(t,i,kforestry)                                       Price ratio from current step to base year before adjustment (1)
+p73_demand_adjustor(t,i,kforestry)                                          Timber demand adjustor (1)
 ;
 
 positive variables

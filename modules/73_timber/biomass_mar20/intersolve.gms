@@ -10,6 +10,8 @@ s73_counter = 0;
 
 if(ord(t)>1,
 
+p73_price_ratio_before(t,i,kforestry) = pm_prices(t,i,kforestry)/pm_prices("y1995",i,kforestry);
+
 while(floor(smax((i,kforestry), sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry)))) > 0 AND s73_counter <= s73_maxiter,
     s73_counter = s73_counter + 1;
     p73_criterion = floor(smax((i,kforestry), sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry))));
@@ -18,6 +20,8 @@ while(floor(smax((i,kforestry), sum(cell(i,j),v73_prod_heaven_timber.l(j,kforest
 
 $if "%c73_demand_adjuster%" == "price_based"
     p73_price_ratio(t,i,kforestry) = pm_prices(t,i,kforestry)/pm_prices("y1995",i,kforestry);
+    p73_price_ratio(t,i,kforestry)$(p73_price_ratio(t,i,kforestry)>2) = 2;
+** Also base prices are important
     pm_demand_ext(t,i,kforestry) =
           pm_demand_ext(t,i,kforestry)
           *
