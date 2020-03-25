@@ -23,11 +23,9 @@ $if "%c73_demand_adjuster%" == "price_based"
     p73_price_ratio(t,i,kforestry)$(p73_price_ratio(t,i,kforestry)>2) = 2;
 ** Also base prices are important
     pm_demand_ext(t,i,kforestry) =
-          pm_demand_ext(t,i,kforestry)
+          (pm_demand_ext(t,i,kforestry)
           *
-          ((p73_price_ratio(t,i,kforestry)**s73_price_elasticity)$(p73_price_ratio(t,i,kforestry)>0)
-          -
-          (1)$(p73_price_ratio(t,i,kforestry)<0));
+          (p73_price_ratio(t,i,kforestry)**s73_price_elasticity))$(p73_price_ratio(t,i,kforestry)>0 AND p73_price_ratio(t,i,kforestry)<1 AND sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry))>0);
 
 $if "%c73_demand_adjuster%" == "manually_adjusted"
     pm_demand_ext(t,i,kforestry) = pm_demand_ext(t,i,kforestry) - sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry));
