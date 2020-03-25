@@ -50,15 +50,7 @@ fac[,2100,] <- setYears(fac[,2100,],NULL)
 fac <- time_interpolate(fac[,seq(2025,2095,by=5),,invert=T],interpolated_year = seq(2020,2100,by=5),integrate_interpolated_years = TRUE)
 write.magpie(round(fac),"modules/13_tc/input/f13_tc_factor.cs3")
 
-# cfg$title <- "TC3_SDP"
-# cfg <- setScenario(cfg,c("SDP","NPI"))
-# cfg$gms$c56_pollutant_prices <- "coupling"
-# cfg$gms$c60_2ndgen_biodem <- "coupling"
-# getInput("/p/projects/piam/runs/coupled-magpie/output/C_SDP-NPi-mag-4/fulldata.gdx")
-# cfg$gms$c13_tccost <- "medium"
-# start_run(cfg,codeCheck=FALSE)
-
-cfg$title <- "TC3_SDP_lowCost_2100"
+cfg$title <- "TC4_SDP_NPI"
 cfg <- setScenario(cfg,c("SDP","NPI"))
 cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$c60_2ndgen_biodem <- "coupling"
@@ -66,15 +58,15 @@ getInput("/p/projects/piam/runs/coupled-magpie/output/C_SDP-NPi-mag-4/fulldata.g
 cfg$gms$c13_tccost <- "low"
 start_run(cfg,codeCheck=FALSE)
 
-# cfg$title <- "TC3_SSP1"
-# cfg <- setScenario(cfg,c("SSP1","NPI"))
-# cfg$gms$c56_pollutant_prices <- "coupling"
-# cfg$gms$c60_2ndgen_biodem <- "coupling"
-# getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP1-NPi-mag-4/fulldata.gdx")
-# cfg$gms$c13_tccost <- "medium"
-# start_run(cfg,codeCheck=FALSE)
+cfg$title <- "TC4_SDP_PkBudg1000"
+cfg <- setScenario(cfg,c("SDP","NDC"))
+cfg$gms$c56_pollutant_prices <- "coupling"
+cfg$gms$c60_2ndgen_biodem <- "coupling"
+getInput("/p/projects/piam/runs/coupled-magpie/output/C_SDP-PkBudg1000-mag-4/fulldata.gdx")
+cfg$gms$c13_tccost <- "low"
+start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "TC3_SSP1_lowCost_2100"
+cfg$title <- "TC4_SSP1_NPI"
 cfg <- setScenario(cfg,c("SSP1","NPI"))
 cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$c60_2ndgen_biodem <- "coupling"
@@ -82,35 +74,43 @@ getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP1-NPi-mag-4/fulldata.
 cfg$gms$c13_tccost <- "low"
 start_run(cfg,codeCheck=FALSE)
 
-# cfg$title <- "TC3_SSP2-NPI"
-# cfg <- setScenario(cfg,c("SSP2","NPI"))
-# cfg$gms$c56_pollutant_prices <- "coupling"
-# cfg$gms$c60_2ndgen_biodem <- "coupling"
-# getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP2-NPi-mag-4/fulldata.gdx")
-# cfg$gms$c13_tccost <- "medium"
-# start_run(cfg,codeCheck=FALSE)
+cfg$title <- "TC4_SSP1_PkBudg900"
+cfg <- setScenario(cfg,c("SSP1","NDC"))
+cfg$gms$c56_pollutant_prices <- "coupling"
+cfg$gms$c60_2ndgen_biodem <- "coupling"
+getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP1-PkBudg900-mag-4/fulldata.gdx")
+cfg$gms$c13_tccost <- "low"
+start_run(cfg,codeCheck=FALSE)
 
-# cfg$title <- "TC3_SSP2-NPI_moreTrade"
-# cfg <- setScenario(cfg,c("SSP2","NPI"))
-# cfg$gms$c56_pollutant_prices <- "coupling"
-# cfg$gms$c60_2ndgen_biodem <- "coupling"
-# getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP2-NPi-mag-4/fulldata.gdx")
-# cfg$gms$c13_tccost <- "medium"
-# cfg$gms$c21_trade_liberalization  <- "l908080r807070"
-# start_run(cfg,codeCheck=FALSE)
+cfg$title <- "TC4_SSP2_NPI"
+cfg <- setScenario(cfg,c("SSP2","NDC"))
+cfg$gms$c56_pollutant_prices <- "coupling"
+cfg$gms$c60_2ndgen_biodem <- "coupling"
+getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP2-NPi-mag-4/fulldata.gdx")
+cfg$gms$c13_tccost <- "medium"
+start_run(cfg,codeCheck=FALSE)
 
-# cfg$title <- "TC3_SSP5"
-# cfg <- setScenario(cfg,c("SSP5","NPI"))
-# cfg$gms$c56_pollutant_prices <- "coupling"
-# cfg$gms$c60_2ndgen_biodem <- "coupling"
-# getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP5-NPi-mag-4/fulldata.gdx")
-# cfg$gms$c13_tccost <- "medium"
-# start_run(cfg,codeCheck=FALSE)
+cfg$title <- "TC4_SSP2_PkBudg900"
+cfg <- setScenario(cfg,c("SSP2","NDC"))
+cfg$gms$c56_pollutant_prices <- "coupling"
+cfg$gms$c60_2ndgen_biodem <- "coupling"
+getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP2-PkBudg900-mag-4/fulldata.gdx")
+cfg$gms$c13_tccost <- "medium"
+start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "TC3_SSP5_lowCost_2100"
+cfg$title <- "TC4_SSP5_NPI"
 cfg <- setScenario(cfg,c("SSP5","NPI"))
 cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$c60_2ndgen_biodem <- "coupling"
 getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP5-NPi-mag-4/fulldata.gdx")
 cfg$gms$c13_tccost <- "low"
 start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- "TC4_SSP5_PkBudg900"
+cfg <- setScenario(cfg,c("SSP5","NDC"))
+cfg$gms$c56_pollutant_prices <- "coupling"
+cfg$gms$c60_2ndgen_biodem <- "coupling"
+getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP5-PkBudg900-mag-4/fulldata.gdx")
+cfg$gms$c13_tccost <- "low"
+start_run(cfg,codeCheck=FALSE)
+
