@@ -40,14 +40,14 @@ cfg$output <- c("rds_report")
 
 exp <- read.magpie("modules/13_tc/input/f13_tc_exponent.cs3")
 exp[,getYears(exp,as.integer = T)<=2020,] <- setYears(exp[,1995,],NULL)
-exp[,2050,] <- setYears(exp[,2100,],NULL)
-exp <- time_interpolate(exp[,seq(2025,2045,by=5),,invert=T],interpolated_year = seq(2020,2050,by=5),integrate_interpolated_years = TRUE)
+exp[,2100,] <- setYears(exp[,2100,],NULL)
+exp <- time_interpolate(exp[,seq(2025,2095,by=5),,invert=T],interpolated_year = seq(2020,2100,by=5),integrate_interpolated_years = TRUE)
 write.magpie(round(exp,2),"modules/13_tc/input/f13_tc_exponent.cs3")
 
 fac <- read.magpie("modules/13_tc/input/f13_tc_factor.cs3")
 fac[,getYears(fac,as.integer = T)<=2020,] <- setYears(fac[,1995,],NULL)
-fac[,2050,] <- setYears(fac[,2100,],NULL)
-fac <- time_interpolate(fac[,seq(2025,2045,by=5),,invert=T],interpolated_year = seq(2020,2050,by=5),integrate_interpolated_years = TRUE)
+fac[,2100,] <- setYears(fac[,2100,],NULL)
+fac <- time_interpolate(fac[,seq(2025,2095,by=5),,invert=T],interpolated_year = seq(2020,2100,by=5),integrate_interpolated_years = TRUE)
 write.magpie(round(fac),"modules/13_tc/input/f13_tc_factor.cs3")
 
 # cfg$title <- "TC3_SDP"
@@ -58,7 +58,7 @@ write.magpie(round(fac),"modules/13_tc/input/f13_tc_factor.cs3")
 # cfg$gms$c13_tccost <- "medium"
 # start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "TC3_SDP_lowCost_2050"
+cfg$title <- "TC3_SDP_lowCost_2100"
 cfg <- setScenario(cfg,c("SDP","NPI"))
 cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$c60_2ndgen_biodem <- "coupling"
@@ -74,7 +74,7 @@ start_run(cfg,codeCheck=FALSE)
 # cfg$gms$c13_tccost <- "medium"
 # start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "TC3_SSP1_lowCost_2050"
+cfg$title <- "TC3_SSP1_lowCost_2100"
 cfg <- setScenario(cfg,c("SSP1","NPI"))
 cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$c60_2ndgen_biodem <- "coupling"
@@ -107,7 +107,7 @@ start_run(cfg,codeCheck=FALSE)
 # cfg$gms$c13_tccost <- "medium"
 # start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "TC3_SSP5_lowCost_2050"
+cfg$title <- "TC3_SSP5_lowCost_2100"
 cfg <- setScenario(cfg,c("SSP5","NPI"))
 cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$c60_2ndgen_biodem <- "coupling"
