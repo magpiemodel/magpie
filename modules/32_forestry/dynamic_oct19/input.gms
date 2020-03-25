@@ -12,7 +12,7 @@ $setglobal c32_aff_policy  npi
 scalars
 	s32_max_aff_area 	Maximum global endogenous afforestation (mio. ha)    / Inf /
 	s32_planing_horizon Afforestation planing horizon (years)            / 50 /
- 	s32_aff_plantation switch for using natveg (0) or plantation (1) growth curves for afforestation / 1 /
+ 	s32_aff_plantation switch for using natveg (0) or plantation (1) growth curves for afforestation / 0 /
 ;
 
 parameter f32_aff_mask(j) Afforestation mask (1)
