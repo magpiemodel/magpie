@@ -23,9 +23,9 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-identifier_flag <- "F38AM"
+identifier_flag <- "F39AM"
 
-for(s73_price_elasticity in c(1,2,3,4)){
+for(s73_price_elasticity in c(1)){
 
   cfg$gms$s73_price_elasticity <- (s73_price_elasticity/10)*(-1)
 
