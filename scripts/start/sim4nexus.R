@@ -21,11 +21,11 @@ buildInputVector <- function(regionmapping   = "H12",
                              co2             = "co2",
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "c200",
-                             archive_rev     = "38",
-                             madrat_rev      = "4.22",
-                             validation_rev  = "4.22",
+                             archive_rev     = "42",
+                             madrat_rev      = "4.42",
+                             validation_rev  = "4.42",
                              calibration     = "calibration_sim4nexus_may2019.tgz",
-                             additional_data = "additional_data_rev3.78.tgz") {
+                             additional_data = "additional_data_rev3.77.tgz") {
   mappings <- c(H11="8a828c6ed5004e77d1ba2025e8ea2261",
                 H12="690d3718e151be1b450b394c1064b1c5",
                 mag="c30c1c580039c2b300d86cc46ff4036a",
@@ -55,15 +55,38 @@ general_settings<-function(title) {
   cfg$gms$c59_som_scenario  <- "cc"
   cfg$gms$forestry  <- "dynamic_oct19"
   cfg$gms$maccs  <- "on_sep16"
-  cfg$title <- paste0(title,"_lpjml3_IPSLCM5ALR_sim4nexus_v1")
+  cfg$title <- paste0("sim4nexus_",title)
   #  include costs per-ton
   return(cfg)
 }
 
 
+# Switches for EU28-only runs:
+
+EU28 <- "AUT,BEL,BGR,HRV,CYP,CZE,DNK,EST,FIN,FRA,DEU,GRC,HUN,IRL,ITA,LVA,LTU,LUX,MLT,NLD,POL,PRT,ROU,SVK,SVN,ESP,SWE,GBR"
+
+All_minus_EU28 <- "ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,ASM,ATA,ATF,ATG,AUS,AZE,
+BDI,BEN,BES,BFA,BGD,BHR,BHS,BIH,BLM,BLR,BLZ,BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,
+CCK,CHN,CHE,CHL,CIV,CMR,COD,COG,COK,COL,COM,CPV,CRI,CUB,CUW,CXR,CYM,DJI,DMA,DOM,DZA,
+ECU,EGY,ERI,ESH,ETH,FJI,FLK,FRO,FSM,GAB,GEO,GGY,GHA,GIB,GIN,GLP,GMB,GNB,GNQ,GRD,GRL,
+GTM,GUF,GUM,GUY,HKG,HMD,HND,HTI,IDN,IMN,IND,IOT,IRN,IRQ,ISL,ISR,JAM,JEY,JOR,JPN,KAZ,
+KEN,KGZ,KHM,KIR,KNA,KOR,KWT,LAO,LBN,LBR,LBY,LCA,LIE,LKA,LSO,MAC,MAF,MAR,MCO,MDA,MDG,
+MDV,MEX,MHL,MKD,MLI,MMR,MNE,MNG,MNP,MOZ,MRT,MSR,MTQ,MUS,MWI,MYS,MYT,NAM,NCL,NER,NFK,
+NGA,NIC,NIU,NOR,NPL,NRU,NZL,OMN,PAK,PAN,PCN,PER,PHL,PLW,PNG,PRI,PRK,PRY,PSE,PYF,QAT,
+REU,RUS,RWA,SAU,SDN,SEN,SGP,SGS,SHN,SJM,SLB,SLE,SLV,SMR,SOM,SPM,SRB,SSD,STP,SUR,SWZ,
+SXM,SYC,SYR,TCA,TCD,TGO,THA,TJK,TKL,TKM,TLS,TON,TTO,TUN,TUR,TUV,TWN,TZA,UGA,UKR,UMI,
+URY,USA,UZB,VAT,VCT,VEN,VGB,VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE"
+
+# Three baselines:
+  # baseline (base_ssp2_rcp60_mitnpi, see above),
+  # GLO_2degree (GLO_2deg_ssp2_rcp26_mit26, see above),
+  # EUR_2degree (EUR_2deg_ssp2_rcp26_mit26)
+
+
+
 # SSP control runs ###############################################
 # SSP2
-cfg<-general_settings(title="counterfactual_ssp2_nocc_mitnpi")
+cfg<-general_settings(title="v2_SSP2_NoCC_NoCC_NoMit_base")
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"nocc")
 cfg$input <- buildInputVector(regionmapping = "coacch",calibration=NULL)
@@ -75,66 +98,55 @@ cfg$recalibrate <- "ifneeded"
 
 # Three baseline scenarios ###############################################
 # Baseline
-cfg<-general_settings(title="base_ssp2_rcp60_mitnpi")
+cfg<-general_settings(title="v2_SSP2_IPSL-CM5A-LR_6p0_NoMit_base")
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib)
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 # Global 2 degree scenario
-cfg<-general_settings(title="GLO_2deg_ssp2_rcp26_mit26")
+cfg<-general_settings(title="v2_SSP2_IPSL-CM5A-LR_2p6_Mit2p6_base")
 # CC mitigation (2degree scenario): cost-optimal mitigation pathway based on endogenous trade and fertilization patterns, MAC-curves from Lucas et al. (2007) for non-co2 ghg emissions, and endogenous mitigation for CO2 emissions from landuse change and afforestation
   # RCP 2.6
   # CO2 emissions based on CO2 price
   # non-CO2 ghg emissions based on CO2 eq price
   # carbon price according to SSP2 RCP2.6 scenario
   # bioenergy demand from SSP2 RCP 2.6 scenario
-  # afforestation/avoided deforestation: all based on CO2 price
+  # afforestation/avoided deforestation: all based on CO2 price and NDC
   # 65% NUE croplands
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
+cfg<-lucode::setScenario(cfg,"NDC")
 cfg$input <- buildInputVector(climatescen_name="rcp2p6",regionmapping = "coacch",calibration=calib)
-cfg$gms$c32_aff_policy <- "ndc"
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300"
 cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg1300"
 cfg$gms$c50_scen_neff <- "neff65_70_starty2010"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 # Third "baseline/reference": GHG policy for EU28 only:
-cfg<-general_settings(title="EUR_2deg_ssp2_rcp26_mit26")
-cfg<-lucode::setScenario(cfg,"SSP2")
-cfg<-lucode::setScenario(cfg,"cc")
-cfg$input <- buildInputVector(climatescen_name="rcp2p6",regionmapping = "coacch",calibration=calib) # RCP2p6 when only EU28????
-#cfg$gms$c32_aff_policy <- "ndc" (this as well in EU28????)
-cfg$gms$ghg_policy_countries  <- EU28
-cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300"
-#cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg1300" #### (THIS AS WELL IN EU28??? separate switch????)
-#cfg$gms$c50_scen_neff <- "neff65_70_starty2010" (this as well in EU28?????)
-start_run(cfg=cfg,codeCheck=codeCheck)
-#cfg<-general_settings(title="EU2degree_ssp2_rcp26_mit26")
 # EU: CC mitigation (2degree scenario):
   # CO2 emissions based on CO2 price
   # non-CO2 ghg emissions based on CO2 eq price
   # carbon price according to SSP2 RCP2.6 scenario
-  # bioenergy demand from SSP2 RCP 2.6 scenario
-  # afforestation/avoided deforestation: all based on CO2 price
+  # bioenergy demand from SSP2 RCP 2.6 scenario (!!!)
   # 65% NUE croplands
 # RoW: baseline scenario
-# RCP 2.6 (???)
-
-#cfg<-lucode::setScenario(cfg,"SSP2")
-#cfg<-lucode::setScenario(cfg,"cc")
-#cfg$input <- buildInputVector(climatescen_name="rcp2p6",regionmapping = "coacch",calibration=calib)
-#cfg$gms$c32_aff_policy <- "ndc" (should I implement this for EU28 too??)
-#cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300" (for EU28)
-#cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg1300" (is this covered by pollutant prices switch??)
-#cfg$gms$c50_scen_neff <- "neff65_70_starty2010" (for EU28)
-#start_run(cfg=cfg,codeCheck=codeCheck)
+# RCP 6.0
+cfg<-general_settings(title="v2_SSP2_IPSL-CM5A-LR_6p0_onlyEUR2p6_base")
+cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-lucode::setScenario(cfg,"cc")
+cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib) # RCP2p6 when only EU28????
+cfg$gms$ghg_policy_countries  <- EU28
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300"
+#cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg1300" #### (ADD SWITCH!!!!)
+cfg$gms$cropneff_countries  <- EU28
+cfg$gms$c50_scen_neff <- "neff65_70_starty2010"
+start_run(cfg=cfg,codeCheck=codeCheck)
 
 
 # Global scenario runs ###############################################
 # Global water
-cfg<-general_settings(title="GLO_water_ssp2_rcp60_mitnpi")
+cfg<-general_settings(title="v2_SSP2_IPSL-CM5A-LR_6p0_NoMit_water")
 # Irrigation efficiency
   # Irrigation expansion remains endogenous
   # Irrigation efficiency increased
@@ -156,7 +168,7 @@ cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 # Global biodiversity
-cfg<-general_settings(title="GLO_biodiversity_ssp2_rcp60_mitnpi")
+cfg<-general_settings(title="v2_SSP2_IPSL-CM5A-LR_6p0_NoMit_biodiversity")
 # WDPA IUCN categories I + II, protected biodiversity hotspots from Brookes et al (2006)
    # Land protection
     # land productivity increase (lower interest rate)
@@ -175,7 +187,7 @@ cfg$gms$c55_scen_conf <- "SSP1"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 # Global diet shift
-cfg<-general_settings(title="GLO_food_ssp2_rcp60_mitnpi")
+cfg<-general_settings(title="v2_SSP2_IPSL-CM5A-LR_6p0_NoMit_diet")
 # Sustainable food production
   # Healthy and sufficient diet: Transformation towards a flexetarian healthy diet (similar to Lancet diet) with reduced meat consumption. Transformation pathway takes place until 2050
   # Waste: max waste of 15%
@@ -197,7 +209,7 @@ cfg$gms$c55_scen_conf <- "SSP1"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 # Combination of all global scenarios
-cfg<-general_settings(title="GLO_all_ssp2_rcp26_mit26")
+cfg<-general_settings(title="v2_SSP2_IPSL-CM5A-LR_6p0_NoMit_combined")
 # All scenarios: combination of all scenarios
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
@@ -222,30 +234,11 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 
 
 #SIM4NEXUS regional runs#############################################
-# Switches for EU28-only runs:
-EU28 <- "AUT, BEL, BGR, HRV, CYP, CZE, DNK, EST, FIN, FRA, DEU, GRC, HUN, IRL, ITA,
-         LVA, LTU, LUX, MLT, NLD, POL, PRT, ROU, SVK, SVN, ESP, SWE, GBR"
-All_minus_EU28 <- "ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,ASM,ATA,ATF,ATG,AUS,AZE,
-BDI,BEN,BES,BFA,BGD,BHR,BHS,BIH,BLM,BLR,BLZ,BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,
-CCK,CHN,CHE,CHL,CIV,CMR,COD,COG,COK,COL,COM,CPV,CRI,CUB,CUW,CXR,CYM,DJI,DMA,DOM,DZA,
-ECU,EGY,ERI,ESH,ETH,FJI,FLK,FRO,FSM,GAB,GEO,GGY,GHA,GIB,GIN,GLP,GMB,GNB,GNQ,GRD,GRL,
-GTM,GUF,GUM,GUY,HKG,HMD,HND,HTI,IDN,IMN,IND,IOT,IRN,IRQ,ISL,ISR,JAM,JEY,JOR,JPN,KAZ,
-KEN,KGZ,KHM,KIR,KNA,KOR,KWT,LAO,LBN,LBR,LBY,LCA,LIE,LKA,LSO,MAC,MAF,MAR,MCO,MDA,MDG,
-MDV,MEX,MHL,MKD,MLI,MMR,MNE,MNG,MNP,MOZ,MRT,MSR,MTQ,MUS,MWI,MYS,MYT,NAM,NCL,NER,NFK,
-NGA,NIC,NIU,NOR,NPL,NRU,NZL,OMN,PAK,PAN,PCN,PER,PHL,PLW,PNG,PRI,PRK,PRY,PSE,PYF,QAT,
-REU,RUS,RWA,SAU,SDN,SEN,SGP,SGS,SHN,SJM,SLB,SLE,SLV,SMR,SOM,SPM,SRB,SSD,STP,SUR,SWZ,
-SXM,SYC,SYR,TCA,TCD,TGO,THA,TJK,TKL,TKM,TLS,TON,TTO,TUN,TUR,TUV,TWN,TZA,UGA,UKR,UMI,
-URY,USA,UZB,VAT,VCT,VEN,VGB,VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE"
-# Three baselines:
-  # baseline (base_ssp2_rcp60_mitnpi, see above),
-  # GLO_2degree (GLO_2deg_ssp2_rcp26_mit26, see above),
-  # EUR_2degree (EUR_2deg_ssp2_rcp26_mit26)
 
 ### Scenario runs:
 
-
 ### Resource efficiency:
-cfg<-general_settings(title="Base_eur_reseff_ssp2_rcp26_mit26")
+cfg<-general_settings(title="v2_SSP2_IPSL-CM5A-LR_6p0_NoMit_EURreseff")
 # In addition to global baseline scenario assumptions (base_ssp2_rcp60_mitnpi),
 # resource efficiency policies and technology trends implemented in Europe.
   # increased fertilizer efficiency in Europe (switch for 70% NUE of croplands in EU28)
@@ -256,50 +249,74 @@ cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch"
 cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
 cfg$gms$cropneff_countries  <- EU28
 cfg$gms$gdp_countries12  <- All_minus_EU28
-cfg$gms$s12_alt_interest <- 0.02 # I think we could go even lower (considering current interest rate policy in Europe)!!!!!!
+cfg$gms$s12_alt_interest <- 0.02
 start_run(cfg=cfg,codeCheck=codeCheck)
 
-cfg<-general_settings(title="GloClimate_eur_reseff_ssp2_rcp26_mit26")
+cfg<-general_settings(title="v2_SSP2_IPSL-CM5A-LR_2p6_Mit2p6_EURreseff")
 # In addition to global 2 degree scenario assumptions (GLO_2deg_ssp2_rcp26_mit26),
 # resource efficiency policies and technology trends implemented in Europe.
   # increased fertilizer efficiency in Europe (switch for 70% NUE of croplands in EU28)
   # increased crop yields in Europe (switch lower interest rates in EU28, rest: default)
+#  cfg<-lucode::setScenario(cfg,"SSP2")
+#  cfg<-lucode::setScenario(cfg,"cc")
+#  cfg<-lucode::setScenario(cfg,"NDC")
+#  cfg$input <- buildInputVector(climatescen_name="rcp2p6",regionmapping = "coacch",calibration=calib)
+  #cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300"
+  #cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg1300"
+  #cfg$gms$c50_scen_neff <- "neff65_70_starty2010" # (implement new switch setting)
+#  cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
+#  cfg$gms$cropneff_countries  <- EU28
+#  cfg$gms$gdp_countries12  <- All_minus_EU28
+#  cfg$gms$s12_alt_interest <- 0.02
+#  start_run(cfg=cfg,codeCheck=codeCheck)
 
-cfg<-general_settings(title="EurClimate_eur_reseff_ssp2_rcp26_mit26")
+cfg<-general_settings(title="v2_SSP2_IPSL-CM5A-LR_6p0_onlyEUR2p6_EURreseff")
 # In addition to European 2 degree scenario assumptions (EUR_2deg_ssp2_rcp26_mit26),
 # resource efficiency policies and technology trends implemented in Europe.
   # increased fertilizer efficiency in Europe (switch for 70% NUE of croplands in EU28)
   # increased crop yields in Europe (switch lower interest rates in EU28, rest: default)
+#  cfg<-lucode::setScenario(cfg,"SSP2")
+#  cfg<-lucode::setScenario(cfg,"cc")
+#  cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib) # RCP2p6 when only EU28????
+#  cfg$gms$ghg_policy_countries  <- EU28
+#  cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300"
+  #cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg1300" #### (ADD SWITCH!!!!)
+#  cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
+#  cfg$gms$cropneff_countries  <- EU28
+#  cfg$gms$gdp_countries12  <- All_minus_EU28
+#  cfg$gms$s12_alt_interest <- 0.02
+#  start_run(cfg=cfg,codeCheck=codeCheck)
+
 
 
 ### Diets:
-cfg<-general_settings(title="Base_eur_diet_ssp2_rcp26_mit26")
+cfg<-general_settings(title="v2_SSP2_IPSL-CM5A-LR_6p0_NoMit_EURdiet")
 # In addition to global baseline scenario assumptions (base_ssp2_rcp60_mitnpi),
 # a shift to sustainable diets takes place in Europe.
   # max food waste of 15%
   # healthy and sufficient (flexitarian) diet in Europe
     # both implemented via "fader switch"!
-cfg<-lucode::setScenario(cfg,"SSP2")
-cfg<-lucode::setScenario(cfg,"cc")
-cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib)
+#cfg<-lucode::setScenario(cfg,"SSP2")
+#cfg<-lucode::setScenario(cfg,"cc")
+#cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib)
 #cfg$gms$c15_food_scenario <- "SSP1" #(THIS AS  WELLL??????)
-cfg$gms$s15_exo_waste <- 1
-cfg$gms$s15_waste_scen <- 1.15
-cfg$gms$s15_exo_diet <- 1
-cfg$gms$c15_kcal_scen <- "healthy_BMI"
-cfg$gms$c15_EAT_scen <- "FLX"
-cfg$gms$scen_countries15  <- EU28
-start_run(cfg=cfg,codeCheck=codeCheck)
+#cfg$gms$s15_exo_waste <- 1
+#cfg$gms$s15_waste_scen <- 1.15
+#cfg$gms$s15_exo_diet <- 1
+#cfg$gms$c15_kcal_scen <- "healthy_BMI"
+#cfg$gms$c15_EAT_scen <- "FLX"
+#cfg$gms$scen_countries15  <- EU28
+#start_run(cfg=cfg,codeCheck=codeCheck)
 
 
-cfg<-general_settings(title="GloClimate_eur_diet_ssp2_rcp26_mit26")
+cfg<-general_settings(title="v2_SSP2_IPSL-CM5A-LR_2p6_Mit2p6_EURdiet")
 # In addition to global 2 degree scenario assumptions (GLO_2deg_ssp2_rcp26_mit26),
 # a shift to sustainable diets takes place in Europe.
   # max food waste of 15%
   # healthy and sufficient (flexitarian) diet in Europe
     # both implemented via "fader switch"!
 
-cfg<-general_settings(title="EurClimate_eur_diet_ssp2_rcp26_mit26")
+cfg<-general_settings(title="v2_SSP2_IPSL-CM5A-LR_6p0_onlyEUR2p6_EURdiet")
 # In addition to European 2 degree scenario assumptions (EUR_2deg_ssp2_rcp26_mit26),
 # a shift to sustainable diets takes place in Europe.
   # max food waste of 15%
@@ -308,23 +325,23 @@ cfg<-general_settings(title="EurClimate_eur_diet_ssp2_rcp26_mit26")
 
 
 ### Push for renewables:
-cfg<-general_settings(title="Base_eur_renewables_ssp2_rcp26_mit26")
+cfg<-general_settings(title="v2_SSP2_IPSL-CM5A-LR_6p0_NoMit_EURwater")
 # In addition to global baseline scenario assumptions (base_ssp2_rcp60_mitnpi),
 # irrigation water withdrawals in Europe are at sustainable level.
   # EFP in Europe (switch for EFRs to be met in EU28)
-cfg<-lucode::setScenario(cfg,"SSP2")
-cfg<-lucode::setScenario(cfg,"cc")
-cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib)
-cfg$gms$c42_env_flow_policy <- "on"
-cfg$gms$EFP_countries  <- EU28
-start_run(cfg=cfg,codeCheck=codeCheck)
+#cfg<-lucode::setScenario(cfg,"SSP2")
+#cfg<-lucode::setScenario(cfg,"cc")
+#cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib)
+#cfg$gms$c42_env_flow_policy <- "on"
+#cfg$gms$EFP_countries  <- EU28
+#start_run(cfg=cfg,codeCheck=codeCheck)
 
-cfg<-general_settings(title="GloClimate_eur_renewables_ssp2_rcp26_mit26")
+cfg<-general_settings(title="v2_SSP2_IPSL-CM5A-LR_2p6_Mit2p6_EURwater")
 # In addition to global 2 degree scenario assumptions (GLO_2deg_ssp2_rcp26_mit26),
 # irrigation water withdrawals in Europe are at sustainable level.
   # EFP in Europe (switch for EFRs to be met in EU28)
 
-cfg<-general_settings(title="EurClimate_eur_renewables_ssp2_rcp26_mit26")
+cfg<-general_settings(title="v2_SSP2_IPSL-CM5A-LR_6p0_onlyEUR2p6_EURwater")
 # In addition to European 2 degree scenario assumptions (EUR_2deg_ssp2_rcp26_mit26),
 # irrigation water withdrawals in Europe are at sustainable level.
   # EFP in Europe (switch for EFRs to be met in EU28)
