@@ -23,7 +23,7 @@ $if "%c73_demand_adjuster%" == "price_based"
     p73_price_ratio(t,i,kforestry)$(p73_price_ratio(t,i,kforestry)>2) = 2;
 ** Also base prices are important
     pm_demand_ext(t,i,kforestry) =
-          p73_demand_ext_original(t,i,kforestry)
+          pm_demand_ext(t,i,kforestry)
           *
           ((p73_price_ratio(t,i,kforestry)**s73_price_elasticity)$(p73_price_ratio(t,i,kforestry)>0)
           -
