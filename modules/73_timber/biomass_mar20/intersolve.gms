@@ -9,9 +9,14 @@ s73_counter = 0;
 
 if(ord(t)>1,
 
-p73_price_ratio_before(t,i,kforestry) = pm_prices(t,i,kforestry)/pm_prices("y1995",i,kforestry);
-
 while(floor(smax((i,kforestry), sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry)))) > 0 AND s73_counter <= s73_maxiter,
+
+**** Update prices in intersolve -- will fail codecheck
+    pm_prices(t,i,kforestry) = q16_supply_forestry.m(i,kforestry);
+    pm_prices("y1995",i,kforestry)$(pm_prices("y1995",i,kforestry)=0) = 1;
+
+    p73_price_ratio_before(t,i,kforestry) = pm_prices(t,i,kforestry)/pm_prices("y1995",i,kforestry);
+
     s73_counter = s73_counter + 1;
     p73_criterion = floor(smax((i,kforestry), sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry))));
   	display p73_criterion;
@@ -25,6 +30,8 @@ $if "%c73_demand_adjuster%" == "price_based"
           (pm_demand_ext(t,i,kforestry)
           *
           (p73_price_ratio(t,i,kforestry)**s73_price_elasticity))$(p73_price_ratio(t,i,kforestry)>10);
+
+    pm_demand_ext(t,i,kforestry)$(pm_demand_ext(t,i,kforestry)<1) = 1;
 
 $if "%c73_demand_adjuster%" == "manually_adjusted"
     pm_demand_ext(t,i,kforestry) = pm_demand_ext(t,i,kforestry) - sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry));
