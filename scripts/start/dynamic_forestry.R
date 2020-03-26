@@ -23,7 +23,7 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-identifier_flag <- "PR01"
+identifier_flag <- "PR02"
 
 for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
 

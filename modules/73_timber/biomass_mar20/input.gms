@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c73_demand_adjuster price_based
+$setglobal c73_demand_adjuster manually_adjusted
 
 scalars
   s73_timber_demand Switch for timber demand / 1 /
