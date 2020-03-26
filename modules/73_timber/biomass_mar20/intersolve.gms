@@ -4,7 +4,6 @@
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
-**************start solve loop**************
 
 s73_counter = 0;
 
@@ -20,12 +19,12 @@ while(floor(smax((i,kforestry), sum(cell(i,j),v73_prod_heaven_timber.l(j,kforest
 
 $if "%c73_demand_adjuster%" == "price_based"
     p73_price_ratio(t,i,kforestry) = pm_prices(t,i,kforestry)/pm_prices("y1995",i,kforestry);
-    p73_price_ratio(t,i,kforestry)$(p73_price_ratio(t,i,kforestry)>2) = 2;
+*    p73_price_ratio(t,i,kforestry)$(p73_price_ratio(t,i,kforestry)>2) = 2;
 ** Also base prices are important
     pm_demand_ext(t,i,kforestry) =
           (pm_demand_ext(t,i,kforestry)
           *
-          (p73_price_ratio(t,i,kforestry)**s73_price_elasticity))$(p73_price_ratio(t,i,kforestry)>0 AND p73_price_ratio(t,i,kforestry)<1 AND sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry))>0);
+          (p73_price_ratio(t,i,kforestry)**s73_price_elasticity))$(p73_price_ratio(t,i,kforestry)>10);
 
 $if "%c73_demand_adjuster%" == "manually_adjusted"
     pm_demand_ext(t,i,kforestry) = pm_demand_ext(t,i,kforestry) - sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry));
