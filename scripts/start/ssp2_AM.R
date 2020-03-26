@@ -23,7 +23,7 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-identifier_flag <- "F44AM"
+identifier_flag <- "F45AM"
 
 for(s73_price_elasticity in c(1)){
 
