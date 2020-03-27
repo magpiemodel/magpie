@@ -23,35 +23,42 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-identifier_flag <- "PR03"
+identifier_flag <- "PR04"
 cfg$gms$s73_price_adjuster <- 0
 cfg$recalc_npi_ndc <- TRUE
 
-for(ssp in c("SSP2")){
+for(s73_demand_adjuster in c(1,0)){
+  cfg$gms$s73_price_adjuster <- s73_demand_adjuster
 
-  for(c32_rotation_extension in c(0)){
+  for(ssp in c("SSP2")){
 
-    cfg$gms$c32_rotation_extension <- c32_rotation_extension
+    for(c32_rotation_extension in c(0)){
 
-    cfg <- setScenario(cfg,c(ssp,"NPI"))
+      cfg$gms$c32_rotation_extension <- c32_rotation_extension
 
-    for (co2_price_path in c("NPI","2deg")) {
+      cfg <- setScenario(cfg,c(ssp,"NPI"))
 
-      cfg$gms$c56_pollutant_prices <- "coupling"
-      cfg$gms$c60_2ndgen_biodem <- "coupling"
+      for (co2_price_path in c("NPI","2deg")) {
 
-      file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
-      file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
+        cfg$gms$c56_pollutant_prices <- "coupling"
+        cfg$gms$c60_2ndgen_biodem <- "coupling"
 
-      ### Create flags
+        file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
+        file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
 
-      rot_flag <- paste0(c32_rotation_extension*5,"yE")
+        ### Create flags
 
-      cfg$title <- paste0(identifier_flag,"_",ssp,"_",rot_flag,"_",co2_price_path)
+        rot_flag <- paste0(c32_rotation_extension*5,"yE")
 
-      cfg$output <- c("rds_report")
+        if(s73_demand_adjuster == 1) adj_flag = "Pfix"
+        if(s73_demand_adjuster == 0) adj_flag = "FVfix"
 
-      start_run(cfg,codeCheck=FALSE)
+        cfg$title <- paste0(identifier_flag,"_",ssp,"_",adj_flag,"_",rot_flag,"_",co2_price_path)
+
+        cfg$output <- c("rds_report")
+
+        start_run(cfg,codeCheck=FALSE)
+      }
     }
   }
 }
