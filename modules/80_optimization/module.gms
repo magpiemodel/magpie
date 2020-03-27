@@ -23,4 +23,5 @@
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%optimization%" == "lp_nlp_apr17" $include "./modules/80_optimization/lp_nlp_apr17/realization.gms"
 $Ifi "%optimization%" == "nlp_apr17" $include "./modules/80_optimization/nlp_apr17/realization.gms"
+$Ifi "%optimization%" == "nlp_par" $include "./modules/80_optimization/nlp_par/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
