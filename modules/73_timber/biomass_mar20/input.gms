@@ -5,9 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c73_demand_adjuster manually_adjusted
-
 scalars
+  s73_price_adjuster Switch for price based adjustment /1/
   s73_timber_demand Switch for timber demand / 1 /
   s73_counter Counter for iterations of demand adjustment / 0 /
   s73_maxiter Maximum iterations for demand adjustments / 10 /

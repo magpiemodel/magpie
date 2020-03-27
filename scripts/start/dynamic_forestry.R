@@ -23,11 +23,12 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-identifier_flag <- "PR02"
+identifier_flag <- "PR03"
+cfg$gms$s73_price_adjuster <- 0
 
-for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
+for(ssp in c("SSP2")){
 
-  for(c32_rotation_extension in c(0,2,4)){
+  for(c32_rotation_extension in c(0)){
 
     cfg$gms$c32_rotation_extension <- c32_rotation_extension
 

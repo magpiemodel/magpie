@@ -23,15 +23,15 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-identifier_flag <- "F45AM"
+identifier_flag <- "F46AM"
 
 for(s73_price_elasticity in c(1)){
 
   cfg$gms$s73_price_elasticity <- (s73_price_elasticity/10)*(-1)
 
-  for(c73_demand_adjuster in c("price_based")){
+  for(s73_demand_adjuster in c(1,0)){
 
-    cfg$gms$c73_demand_adjuster <- c73_demand_adjuster
+    cfg$gms$s73_price_adjuster <- s73_demand_adjuster
     for(ssp in c("SSP2")){
 
       for(c32_rotation_extension in c(0)){
@@ -54,8 +54,8 @@ for(s73_price_elasticity in c(1)){
           if(emis_price == "R2M41-SSP2-NPi") emis_flag = ""
           if(emis_price == "R2M41-SSP2-Budg1300") emis_flag = "CO2p"
 
-          if(c73_demand_adjuster == "price_based") adj_flag = "PriceFix"
-          if(c73_demand_adjuster == "manually_adjusted") adj_flag = "SlackFix"
+          if(s73_demand_adjuster == 1) adj_flag = "PriceFix"
+          if(s73_demand_adjuster == 0) adj_flag = "SlackFix"
 
           if(s73_price_elasticity == 1) elas_flag = "0p1"
           if(s73_price_elasticity == 2) elas_flag = "0p2"

@@ -22,18 +22,19 @@ while(floor(smax((i,kforestry), sum(cell(i,j),v73_prod_heaven_timber.l(j,kforest
   	display p73_criterion;
   	display "Warning: There are trade imbalances for timber. Restarting solve with adjusted timber demand!";
 
-$ifthen "%c73_demand_adjuster%" == "price_based"
-*    p73_price_ratio(t,i,kforestry)$(p73_price_ratio(t,i,kforestry)>2) = 2;
-** Also base prices are important
-    p73_price_ratio(t,i,kforestry) = pm_prices(t,i,kforestry)/pm_prices("y1995",i,kforestry);
+    if (s73_price_adjuster = 1,
 
-    pm_demand_ext(t,i,kforestry)$(p73_price_ratio(t,i,kforestry) > 10) = pm_demand_ext(t,i,kforestry) * (p73_price_ratio(t,i,kforestry)**s73_price_elasticity);
+      p73_price_ratio(t,i,kforestry) = pm_prices(t,i,kforestry)/pm_prices("y1995",i,kforestry);
+      pm_demand_ext(t,i,kforestry)$(p73_price_ratio(t,i,kforestry) > 10) = pm_demand_ext(t,i,kforestry) * (p73_price_ratio(t,i,kforestry)**s73_price_elasticity);
+      pm_demand_ext(t,i,kforestry)$(pm_demand_ext(t,i,kforestry)<1) = 1;
 
-    pm_demand_ext(t,i,kforestry)$(pm_demand_ext(t,i,kforestry)=0) = pm_demand_ext(t-1,i,kforestry);
+******* Overwrite future demand when current demand is adjusted
+      pm_demand_ext(t_ext,i,kforestry) = pm_demand_ext(t,i,kforestry);
 
-$elseif "%c73_demand_adjuster%" == "manually_adjusted"
-    pm_demand_ext(t,i,kforestry) = pm_demand_ext(t,i,kforestry) - sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry));
-$endif
+      else
+
+      pm_demand_ext(t,i,kforestry) = pm_demand_ext(t,i,kforestry) - sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry));
+    );
 
     p73_timder_adjustment_ratio(t,i,"wood") = pm_demand_ext(t,i,"wood")/p73_demand_ext_original(t,i,"wood");
     p73_timder_adjustment_ratio(t,i,"woodfuel") = pm_demand_ext(t,i,"woodfuel")/p73_demand_ext_original(t,i,"woodfuel");
