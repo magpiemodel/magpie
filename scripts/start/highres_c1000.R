@@ -46,7 +46,7 @@ calib <- TRUE
 
 if(calib) {
   ssp <- "SSP2"
-  cfg$title <- paste(prefix,ssp,"NPI",res,"calib",sep="_")
+  cfg$title <- paste(prefix,ssp,"NPI",res,"calib2",sep="_")
   cfg <- setScenario(cfg,c(ssp,"NPI"))
   
   #get trade pattern from low resolution run with c200
@@ -61,7 +61,7 @@ if(calib) {
   #use exo trade and parallel optimization
   cfg$gms$trade <- "exo"
   cfg$gms$optimization <- "nlp_par"
-  cfg$gms$c60_bioenergy_subsidy <- 0
+  #cfg$gms$c60_bioenergy_subsidy <- 0
   
   cfg$recalibrate <- TRUE
   
