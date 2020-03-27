@@ -27,7 +27,7 @@ cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report")
 
 prefix <- "hr02"
-res <- "c5000"
+res <- "c2000"
 #magpie4::submitCalibration("H12_c1000")
 #calibration_H12_c1000_27Mar20.tgz
 #calibration_H12_c200_26Feb20.tgz
