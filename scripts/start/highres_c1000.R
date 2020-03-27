@@ -27,12 +27,15 @@ cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report")
 
 prefix <- "hr02"
-res <- "c1000"
+res <- "c5000"
+magpie4::submitCalibration("H12_c1000")
+#calibration_H12_c1000_27Mar20.tgz
+#calibration_H12_c200_26Feb20.tgz
 
 cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_",res,"_690d3718e151be1b450b394c1064b1c5.tgz"),
                "rev4.42_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
                "rev4.42_690d3718e151be1b450b394c1064b1c5_validation.tgz",
-               "calibration_H12_c200_26Feb20.tgz",
+               "calibration_H12_c1000_27Mar20.tgz",
                "additional_data_rev3.78.tgz")
 
 co2_price_path <- "NPI"
@@ -85,7 +88,7 @@ if(calib) {
     #use exo trade and parallel optimization
     cfg$gms$trade <- "exo"
     cfg$gms$optimization <- "nlp_par"
-    cfg$gms$c60_bioenergy_subsidy <- 0
+    #cfg$gms$c60_bioenergy_subsidy <- 0
     
     # cfg$gms$c56_pollutant_prices <- "coupling"
     # cfg$gms$c60_2ndgen_biodem <- "coupling"
