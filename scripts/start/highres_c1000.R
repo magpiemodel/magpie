@@ -50,7 +50,7 @@ if(calib) {
   cfg <- setScenario(cfg,c(ssp,"NPI"))
   
   #get trade pattern from low resolution run with c200
-  gdx <- paste0("output/",paste(prefix,ssp,"NPI","c200",sep="_"),"/fulldata.gdx")
+  gdx <- paste0("output/",paste("hr01",ssp,"NPI","c200",sep="_"),"/fulldata.gdx")
   ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
   ov_supply <- readGDX(gdx,"ov_supply",select=list(type="level"))
   f21_trade_balance <- ov_prod_reg - ov_supply
@@ -74,7 +74,7 @@ if(calib) {
     cfg <- setScenario(cfg,c(ssp,"NPI"))
     
     #get trade pattern from low resolution run with c200
-    gdx <- paste0("output/",paste(prefix,ssp,"NPI","c200",sep="_"),"/fulldata.gdx")
+    gdx <- paste0("output/",paste("hr01",ssp,"NPI","c200",sep="_"),"/fulldata.gdx")
     ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
     ov_supply <- readGDX(gdx,"ov_supply",select=list(type="level"))
     f21_trade_balance <- ov_prod_reg - ov_supply
