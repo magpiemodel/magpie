@@ -8,7 +8,7 @@
 * Set-switch for countries affected by regional ghg policy
 * Default: all iso countries selected
 sets
-  policy_countries56 (iso) countries to be affected by ghg policy / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
+  policy_countries56(iso) countries to be affected by ghg policy / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
                           ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
                           BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
                           BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,
@@ -50,7 +50,8 @@ scalars
   s56_offset helper for C price interpolation (1) / 0 /
 ;
 
-$setglobal c56_pollutant_prices  emulator
+$setglobal c56_pollutant_prices_select  R2M41-SSP2-NPi
+$setglobal c56_pollutant_prices_noselect  R2M41-SSP2-NPi
 $setglobal c56_emis_policy  redd+_nosoil
 
 table f56_pollutant_prices(t_all,i,pollutants,ghgscen56) GHG certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
@@ -59,17 +60,17 @@ $include "./modules/56_ghg_policy/input/f56_pollutant_prices.cs3"
 $offdelim
 ;
 
-$if "%c56_pollutant_prices%" == "coupling" table f56_pollutant_prices_coupling(t_all,i,pollutants) Regional ghg certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
-$if "%c56_pollutant_prices%" == "coupling" $ondelim
-$if "%c56_pollutant_prices%" == "coupling" $include "./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3"
-$if "%c56_pollutant_prices%" == "coupling" $offdelim
-$if "%c56_pollutant_prices%" == "coupling" ;
+$if "%c56_pollutant_prices_select%" == "coupling" table f56_pollutant_prices_coupling(t_all,i,pollutants) Regional ghg certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
+$if "%c56_pollutant_prices_select%" == "coupling" $ondelim
+$if "%c56_pollutant_prices_select%" == "coupling" $include "./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3"
+$if "%c56_pollutant_prices_select%" == "coupling" $offdelim
+$if "%c56_pollutant_prices_select%" == "coupling" ;
 
-$if "%c56_pollutant_prices%" == "emulator" table f56_pollutant_prices_emulator(t_all,i,pollutants) Global ghg certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
-$if "%c56_pollutant_prices%" == "emulator" $ondelim
-$if "%c56_pollutant_prices%" == "emulator" $include "./modules/56_ghg_policy/input/f56_pollutant_prices_emulator.cs3"
-$if "%c56_pollutant_prices%" == "emulator" $offdelim
-$if "%c56_pollutant_prices%" == "emulator" ;
+$if "%c56_pollutant_prices_select%" == "emulator" table f56_pollutant_prices_emulator(t_all,i,pollutants) Global ghg certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
+$if "%c56_pollutant_prices_select%" == "emulator" $ondelim
+$if "%c56_pollutant_prices_select%" == "emulator" $include "./modules/56_ghg_policy/input/f56_pollutant_prices_emulator.cs3"
+$if "%c56_pollutant_prices_select%" == "emulator" $offdelim
+$if "%c56_pollutant_prices_select%" == "emulator" ;
 
 *' `f56_emis_policy` contains scenarios determining for each gas and source whether it is priced or not.
 

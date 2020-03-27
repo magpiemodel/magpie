@@ -32,13 +32,14 @@ s12_max_dev = smax(i,im_development_state("y1995",i));
 s12_slope_a = (f12_interest_bound("y1995","high")-f12_interest_bound("y1995","low"))/(s12_min_dev-s12_max_dev);
 s12_intercept_b = f12_interest_bound("y1995","high")-s12_slope_a*s12_min_dev;
 
-* For the countries selected in gdp_countries12 the interest rate is dependent on
-* their development state. (By default, all iso countries are selected.)
-* For all other countries the scalar s12_alt_interest applies.
-p12_interest(t,i) = (s12_slope_a *im_development_state(t,i) + s12_intercept_b) * p12_reg_shr(t,i)
-                    + s12_alt_interest * p12_interest_reg_policy(t) * (1-p12_reg_shr(t,i));
-
 *' @stop
 
-$ifthen "%c12_interest_rate%" == "coupling" p12_interest(t,i) = f12_interest_coupling(t);
+$ifthen "%c12_interest_rate%" == "coupling"
+ p12_interest(t,i) = f12_interest_coupling(t);
+$else
+* For the countries selected in gdp_countries12 the interest rate is dependent on
+* their development state. (By default, all iso countries are selected.)
+* For all other countries the scalar s12_interest_noselect applies.
+ p12_interest(t,i) = (s12_slope_a * im_development_state(t,i) + s12_intercept_b) * p12_reg_shr(t,i)
+                    + s12_interest_noselect * p12_interest_reg_policy(t) * (1-p12_reg_shr(t,i));
 $endif

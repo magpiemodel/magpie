@@ -148,23 +148,23 @@ $title magpie
 * 
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: 94c214b0a7b46f403dd0aab57b7e476c
-* Repository: /p/projects/landuse/data/input/archive
+* Repository: http://rse.pik-potsdam.de/data/magpie/intern
 * 
-* Used data set: rev4.37_690d3718e151be1b450b394c1064b1c5_magpie.tgz
-* md5sum: 3e22e59029e3cd043e247b435cc773ce
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: rev4.42_690d3718e151be1b450b394c1064b1c5_magpie.tgz
+* md5sum: 531f893581b6e3ea3ca871d76e0dd8a3
+* Repository: http://rse.pik-potsdam.de/data/magpie/intern
 * 
-* Used data set: rev4.37_690d3718e151be1b450b394c1064b1c5_validation.tgz
-* md5sum: 7573940b148f440a5f2d2ceedf400afc
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: rev4.42_690d3718e151be1b450b394c1064b1c5_validation.tgz
+* md5sum: ad8da81da4ddbb3cf4b341b40ceec3fb
+* Repository: http://rse.pik-potsdam.de/data/magpie/intern
 * 
-* Used data set: calibration_H12_c200_12Sep18.tgz
-* md5sum: 0a7d88e902918eb6a5263faaf066cc5d
-* Repository: /p/projects/landuse/data/input/calibration
+* Used data set: calibration_H12_c200_26Feb20.tgz
+* md5sum: 0fc75955deb5916d4ac078e8d817feda
+* Repository: http://rse.pik-potsdam.de/data/magpie/intern
 * 
 * Used data set: additional_data_rev3.77.tgz
 * md5sum: 28184d92028972c171145399ab21fdca
-* Repository: /p/projects/landuse/data/input/archive
+* Repository: http://rse.pik-potsdam.de/data/magpie/intern
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -177,7 +177,7 @@ $title magpie
 * 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
-* Regions data revision: 4.37
+* Regions data revision: 4.42
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
@@ -197,7 +197,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Mon Feb 17 14:01:16 2020
+* Last modification (input data): Wed Mar 04 13:53:55 2020
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -222,7 +222,7 @@ $offlisting
 *                    Key parameters during model runs
 
 $setglobal c_timesteps  coup2100
-$setglobal c_title  SSP2_rev42_rev4p37
+$setglobal c_title  default
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /

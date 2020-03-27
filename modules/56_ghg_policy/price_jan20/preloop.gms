@@ -5,13 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-
-****select ghg prices
-$ifthen "%c56_pollutant_prices%" == "coupling" im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices_coupling(t_all,i,pollutants);
-$elseif "%c56_pollutant_prices%" == "emulator" im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices_emulator(t_all,i,pollutants);
-$else im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices%");
-$endif
-
 ****** Region price share for ghg policy of selective countries:
 * Country switch to determine countries for which ghg policy shall be applied.
 * In the default case, the ghg policy affects all countries when activated.
@@ -22,10 +15,18 @@ p56_country_dummy(policy_countries56) = 1;
 * Countries are weighted by their population size.
 p56_region_price_shr(t_all,i) = sum(i_to_iso(i,iso), p56_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
 
-***save im_pollutant_prices to parameter (including the region price share of
-* the countries' ghg poliy. Note: p56_region_price_shr(t_all,i) is 1 in the
-* default case)
-p56_pollutant_prices_input(t_all,i,pollutants) = im_pollutant_prices(t_all,i,pollutants) * p56_region_price_shr(t_all,i);
+****select ghg prices
+$ifthen "%c56_pollutant_prices_select%" == "coupling"
+ im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices_coupling(t_all,i,pollutants);
+$elseif "%c56_pollutant_prices_select%" == "emulator"
+ im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices_emulator(t_all,i,pollutants);
+$else
+ im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices_select%") * p56_region_price_shr(t_all,i)
+ 																				 + f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices_noselect%") * (1-p56_region_price_shr(t_all,i));
+$endif
+
+***save im_pollutant_prices to parameter
+p56_pollutant_prices_input(t_all,i,pollutants) = im_pollutant_prices(t_all,i,pollutants);
 
 
 

@@ -19,8 +19,8 @@ p50_cropneff_region_shr(t_all,i) = sum(i_to_iso(i,iso), p50_country_dummy_cropne
 p50_pastneff_region_shr(t_all,i) = sum(i_to_iso(i,iso), p50_country_dummy_pastneff(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
 
 * Nitrogen use efficiency
-v50_nr_eff.fx(i) = f50_snupe(t,i,"%c50_scen_neff%") * p50_cropneff_region_shr(t,i)
-                    + f50_snupe(t,i,"neff60_60_starty2010") * (1-p50_cropneff_region_shr(t,i));
-v50_nr_eff_pasture.fx(i) = f50_nue_pasture(t,i,"%c50_scen_neff_pasture%") * p50_pastneff_region_shr(t,i)
-                            + f50_nue_pasture(t,i,"constant") * (1-p50_pastneff_region_shr(t,i));
+v50_nr_eff.fx(i) = f50_snupe(t,i,"%c50_scen_neff_select%") * p50_cropneff_region_shr(t,i)
+                    + f50_snupe(t,i,"%c50_scen_neff_noselect%") * (1-p50_cropneff_region_shr(t,i));
+v50_nr_eff_pasture.fx(i) = f50_nue_pasture(t,i,"%c50_scen_neff_pasture_select%") * p50_pastneff_region_shr(t,i)
+                            + f50_nue_pasture(t,i,"%c50_scen_neff_pasture_noselect%") * (1-p50_pastneff_region_shr(t,i));
 i50_atmospheric_deposition_rates(t,j,land)=f50_atmospheric_deposition_rates(t,j,land,"%c50_dep_scen%");

@@ -36,7 +36,7 @@ $offdelim
 ;
 
 scalars
-  s12_alt_interest   Interest rate scenario chosen for regional interest rate scenario switch (1) / 0.02 /
+  s12_interest_noselect   Interest rate scenario chosen for regional interest rate scenario switch (1) / 0.02 /
 ;
 
 $if "%c12_interest_rate%" == "coupling" parameter f12_interest_coupling(t_all) Interest rate (% per yr)
