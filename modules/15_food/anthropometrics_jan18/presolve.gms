@@ -6,6 +6,18 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
+if(m_year(t) <= sm_fix_SSP2,
+ i15_dem_intercept(regr15)   = f15_demand_paras(regr15,"SSP2","intercept");
+ i15_dem_saturation(regr15)  = f15_demand_paras(regr15,"SSP2","saturation");
+ i15_dem_halfsat(regr15)     = f15_demand_paras(regr15,"SSP2","halfsaturation");
+ i15_dem_nonsat(regr15)      = f15_demand_paras(regr15,"SSP2","non_saturation");
+else 
+ i15_dem_intercept(regr15)   = f15_demand_paras(regr15,"%c15_food_scenario%","intercept");
+ i15_dem_saturation(regr15)  = f15_demand_paras(regr15,"%c15_food_scenario%","saturation");
+ i15_dem_halfsat(regr15)     = f15_demand_paras(regr15,"%c15_food_scenario%","halfsaturation");
+ i15_dem_nonsat(regr15)      = f15_demand_paras(regr15,"%c15_food_scenario%","non_saturation");
+);
+
 option nlp = conopt4
 
 

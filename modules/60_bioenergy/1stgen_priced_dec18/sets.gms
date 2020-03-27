@@ -7,7 +7,7 @@
 
 sets
 
-   kbe60(kcr) bio energy activities
+   kbe60(kall) bio energy activities
         / betr, begr /
 
    k1st60(kall) 1st generation bioenergy carriers
