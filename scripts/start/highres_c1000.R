@@ -47,7 +47,7 @@ for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
   cfg <- setScenario(cfg,c(ssp,"NPI"))
   
   #get trade pattern from low resolution run with c200
-  gdx <- paste0("output/",paste(prefix,ssp,"NPI","c200",sep="_"))
+  gdx <- paste0("output/",paste(prefix,ssp,"NPI","c200",sep="_"),"/fulldata.gdx")
   ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
   ov_supply <- readGDX(gdx,"ov_supply",select=list(type="level"))
   f21_trade_balance <- ov_prod_reg - ov_supply
