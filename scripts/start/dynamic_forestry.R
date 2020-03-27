@@ -25,6 +25,7 @@ cfg$results_folder <- "output/:title:"
 
 identifier_flag <- "PR03"
 cfg$gms$s73_price_adjuster <- 0
+cfg$recalc_npi_ndc <- TRUE
 
 for(ssp in c("SSP2")){
 

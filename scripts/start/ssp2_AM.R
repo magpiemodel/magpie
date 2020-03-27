@@ -23,7 +23,8 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-identifier_flag <- "F46AM"
+identifier_flag <- "F47AM"
+cfg$recalc_npi_ndc <- TRUE
 
 for(s73_price_elasticity in c(1)){
 
