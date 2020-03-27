@@ -39,6 +39,8 @@ co2_price_path <- "NPI"
 file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
 file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
 
+#Download data 
+#system('Rscript start.R runscripts=download_data_only submit=direct')
 
 for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
   cfg$title <- paste(prefix,ssp,"NPI",res,sep="_")
@@ -49,7 +51,9 @@ for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
   ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
   ov_supply <- readGDX(gdx,"ov_supply",select=list(type="level"))
   f21_trade_balance <- ov_prod_reg - ov_supply
-  write.magpie(round(f21_trade_balance,6),paste0("modules/21_trade/input/f21_trade_balance.cs3"))
+  #f21_trade_balance.cs3 will be deleted when downloading the high res data. Therefore renamed.
+  write.magpie(round(f21_trade_balance,6),paste0("modules/21_trade/input/f21_trade_balance2.cs3"))
+  manipulateFile("modules/21_trade/exo/input.gms",c("f21_trade_balance.cs3","f21_trade_balance2.cs3"))
   
   #use exo trade and parallel optimization
   cfg$gms$trade <- "exo"
