@@ -58,6 +58,7 @@ for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
   #use exo trade and parallel optimization
   cfg$gms$trade <- "exo"
   cfg$gms$optimization <- "nlp_par"
+  cfg$gms$c60_bioenergy_subsidy <- 0
   
   # cfg$gms$c56_pollutant_prices <- "coupling"
   # cfg$gms$c60_2ndgen_biodem <- "coupling"
