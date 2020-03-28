@@ -27,26 +27,23 @@ cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report")
 
 prefix <- "hr02"
-res <- "c5000"
+res <- "c1000"
 #magpie4::submitCalibration("H12_c1000")
-#calibration_H12_c200_26Feb20.tgz
-#calibration_H12_c1000_27Mar20.tgz
-#calibration_H12_c2000_27Mar20.tgz
 
 cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_",res,"_690d3718e151be1b450b394c1064b1c5.tgz"),
                "rev4.42_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
                "rev4.42_690d3718e151be1b450b394c1064b1c5_validation.tgz",
-               "calibration_H12_c1000_27Mar20.tgz",
+               paste0("calibration_H12_",res,"highres.tgz"),
                "additional_data_rev3.78.tgz")
 
-co2_price_path <- "NPI"
+co2_price_path <- "2deg"
 file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
 file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
 
 #Download data 
 #system('Rscript start.R runscripts=download_data_only submit=direct')
 
-calib <- TRUE
+calib <- FALSE
 
 if(calib) {
   ssp <- "SSP2"
@@ -75,11 +72,11 @@ if(calib) {
   start_run(cfg,codeCheck=FALSE)
 } else {
   for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
-    cfg$title <- paste(prefix,ssp,"NPI",res,sep="_")
-    cfg <- setScenario(cfg,c(ssp,"NPI"))
+    cfg$title <- paste(prefix,ssp,co2_price_path,res,sep="_")
+    cfg <- setScenario(cfg,c(ssp,"NDC"))
     
     #get trade pattern from low resolution run with c200
-    gdx <- paste0("output/",paste("hr01",ssp,"NPI","c200",sep="_"),"/fulldata.gdx")
+    gdx <- paste0("output/",paste("hr02",ssp,co2_price_path,"c200",sep="_"),"/fulldata.gdx")
     ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
     ov_supply <- readGDX(gdx,"ov_supply",select=list(type="level"))
     f21_trade_balance <- ov_prod_reg - ov_supply
