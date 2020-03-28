@@ -33,7 +33,7 @@ res <- "c1000"
 cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_",res,"_690d3718e151be1b450b394c1064b1c5.tgz"),
                "rev4.42_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
                "rev4.42_690d3718e151be1b450b394c1064b1c5_validation.tgz",
-               paste0("calibration_H12_",res,"highres.tgz"),
+               paste0("calibration_H12_",res,"_highres.tgz"),
                "additional_data_rev3.78.tgz")
 
 co2_price_path <- "2deg"
