@@ -42,7 +42,11 @@ file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "m
 
 for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
   cfg$title <- paste(prefix,ssp,co2_price_path,res,sep="_")
-  cfg <- setScenario(cfg,c(ssp,"NDC"))
+  if (co2_price_path == "2deg") {
+    cfg <- setScenario(cfg,c(ssp,"NDC"))
+  } else if (co2_price_path == "NPI") {
+    cfg <- setScenario(cfg,c(ssp,"NPI"))
+  }
   # cfg$gms$c56_pollutant_prices <- "coupling"
   # cfg$gms$c60_2ndgen_biodem <- "coupling"
   start_run(cfg,codeCheck=FALSE)
