@@ -29,6 +29,6 @@ $offdelim
 
 table f13_tau_scenario(t_all,i) tau scenario (1)
 $ondelim
-$include "./modules/13_tc/input/f13_tau_scenario.csv"
+$include "./modules/13_tc/input/f13_tau_scenario2.csv"
 $offdelim
 ;

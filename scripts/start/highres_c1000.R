@@ -27,8 +27,10 @@ cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report")
 
 prefix <- "hr02"
-res <- "c1000"
+res <- "c2000"
 #magpie4::submitCalibration("H12_c1000")
+#c1000 with endoTC
+#c2000 with exoTC
 
 cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_",res,"_690d3718e151be1b450b394c1064b1c5.tgz"),
                "rev4.42_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
@@ -88,10 +90,16 @@ if(calib) {
     write.magpie(round(f21_trade_balance,6),paste0("modules/21_trade/input/f21_trade_balance2.cs3"))
     manipulateFile("modules/21_trade/exo/input.gms",c("f21_trade_balance.cs3","f21_trade_balance2.cs3"))
     
+    #get tau from low resolution run with c200
+    tau(gdx,file = "modules/13_tc/input/f13_tau_scenario2.csv",digits = 4)
+    manipulateFile("modules/13_tc/exo/input.gms",c("f13_tau_scenario.csv","f13_tau_scenario2.csv"))
+    
     #use exo trade and parallel optimization
     cfg$gms$trade <- "exo"
     cfg$gms$optimization <- "nlp_par"
     cfg$gms$s15_elastic_demand <- 0
+    cfg$gms$tc <- "exo"
+    
     #cfg$gms$c60_bioenergy_subsidy <- 0
     
     # cfg$gms$c56_pollutant_prices <- "coupling"
