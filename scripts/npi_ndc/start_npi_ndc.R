@@ -13,7 +13,8 @@ calc_NPI_NDC <- function(policyregions = "iso",
                          cellmapping  = "policies/country2cell.rds",
                          land_stock_file = "../../modules/10_land/input/avl_land_t_0.5.mz",
                          spam_file    = Sys.glob("../../input/*-to-*_sum.spam"),
-                         outfolders   = c("policies/","../../modules/35_natveg/input/"),
+                         outfolder_ad_aolc   = c("policies/","../../modules/35_natveg/input/"),
+                         outfolder_aff   = c("policies/","../../modules/32_forestry/input/"),
                          out_ad_file  = "npi_ndc_ad_aolc_pol.cs3",
                          out_aff_file = "npi_ndc_aff_pol.cs3"){
 
@@ -26,7 +27,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
   pol_mapping <- readRDS(cellmapping)
   if(!(policyregions %in% names(pol_mapping))) stop("No cell mapping available for policyregions = ",policyregions)
   pol_mapping <- pol_mapping[,policyregions]
-  
+
   ##############################################################################
   ##########          Information from the reference observed data   ###########
   ##############################################################################
@@ -101,7 +102,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
   ndc_ad[,which(getYears(ndc_ad,as.integer=TRUE)<=2020),] <-
     npi_ad[,which(getYears(npi_ad,as.integer=TRUE)<=2020),]
   cat(paste0(" (time elapsed: ",format(proc.time()["elapsed"]-ptm,width=6,nsmall=2,digits=2),"s)\n"))
-  
+
 
   addline("")
   addline("##----------------------------------------------------------------------------")
@@ -120,7 +121,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
                           spatialheader_file=spatialheader_file, spam_file=spam_file)
   getNames(npi_aolc) <- "npi.other"
   cat(paste0(" (time elapsed: ",format(proc.time()["elapsed"]-ptm,width=6,nsmall=2,digits=2),"s)\n"))
-  
+
   cat("Compute NDC AOLC policy")
   addline("")
   addline("################")
@@ -140,12 +141,12 @@ calc_NPI_NDC <- function(policyregions = "iso",
   none_ad_aolc_pol[] <- 0
   getNames(none_ad_aolc_pol) <- c("none.forest","none.other")
   ad_aolc_pol <- mbind(none_ad_aolc_pol,npi_ad,npi_aolc,ndc_ad,ndc_aolc)
-  
-  adfiles <- paste0(outfolders, out_ad_file)
+
+  adfiles <- paste0(outfolder_ad_aolc, out_ad_file)
   write.magpie(ad_aolc_pol, adfiles[1])
   if(length(adfiles >1)) for(i in 2:length(adfiles)) file.copy(adfiles[1],adfiles[i], overwrite=TRUE)
   cat(paste0(" (time elapsed: ",format(proc.time()["elapsed"]-ptm,width=6,nsmall=2,digits=2),"s)\n"))
-  
+
   addline("")
   addline("##----------------------------------------------------------------------------")
   addline("## Afforestation - AFF (Mha)")
@@ -163,7 +164,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
                          spatialheader_file=spatialheader_file, spam_file=spam_file)
   getNames(npi_aff) <- "npi"
   cat(paste0(" (time elapsed: ",format(proc.time()["elapsed"]-ptm,width=6,nsmall=2,digits=2),"s)\n"))
-  
+
   cat("Compute NDC  AFF policy")
   addline("")
   addline("###############")
@@ -184,18 +185,17 @@ calc_NPI_NDC <- function(policyregions = "iso",
   none_aff_pol[] <- 0
   getNames(none_aff_pol) <- "none"
   aff_pol <- mbind(none_aff_pol,npi_aff,ndc_aff)
-  afffiles <- paste0(outfolders, out_aff_file)
+  afffiles <- paste0(outfolder_aff, out_aff_file)
   write.magpie(aff_pol, afffiles[1])
   if(length(afffiles >1)) for(i in 2:length(afffiles)) file.copy(afffiles[1],afffiles[i], overwrite=TRUE)
-  
-  write.magpie(aff_pol, "policies/npi_ndc_aff_pol.cs3")
+
   cat(paste0(" (time elapsed: ",format(proc.time()["elapsed"]-ptm,width=6,nsmall=2,digits=2),"s)\n"))
 }
 
 calc_tperiods <- function(y) {
   t_periods <- c(1,y[3:length(y)]-y[2:(length(y)-1)])
   names(t_periods) <- paste0("y",y[2:length(y)])
-  return(as.magpie(t_periods)) 
+  return(as.magpie(t_periods))
 }
 
 ### calc flow function
@@ -209,31 +209,31 @@ calc_flows <- function(stock) {
 }
 
 ### calc npi & ndc policy
-calc_policy <- function(policy, stock, pol_type="aff", pol_mapping, weight=NULL, 
+calc_policy <- function(policy, stock, pol_type="aff", pol_mapping, weight=NULL,
                         spatialheader_file = "../../input/spatial_header.rda",
                         spam_file = Sys.glob("../../input/*-to-*_sum.spam")) {
   ## pol_type = {"aff","ad"}
-  
+
   require(luscale)
   require(lucode)
   require(madrat)
-  
+
   #extent stock beyond last observed value with constant values from the last year
   ly <- tail(getYears(stock,as.integer=TRUE),1)
   ly <- ly - ly%%5
   year_extension  <- seq(ly+5,2150,5)
   stock           <- stock[,c(seq(1995,ly,5),rep(ly,length(year_extension))),]
   getYears(stock) <- c(seq(1995,ly,5), year_extension)
-  
+
   #the the years
   tp <- getYears(stock, as.integer=TRUE)
-  
+
   #select and filter countries that exist in the chosen policy mapping
   policy_countries <- intersect(policy$dummy,unique(pol_mapping))
   policy <- policy[policy$dummy %in% policy_countries,]
   # create key to distinguish different cases of baseyear, targetyear combinations
   policy$key <- paste(policy$baseyear,policy$targetyear)
-  
+
   #set stock to zero or Inf for countries without policies
   # (representing no constraint for min and max constraints)
   if(pol_type=="ad"){
@@ -243,7 +243,7 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping, weight=NULL,
     #account only for positive flows
     flow[flow < 0] <- 0
   }
-  
+
   #Initialize magpie_policy with 0 (country level)
   #This is a return object of this function and contains policy targets at
   #cluster level
@@ -257,7 +257,7 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping, weight=NULL,
     targetyear <- tmp[2]
     countries  <- policy$dummy[policy$key==i]
     y_full <- tp[tp >= baseyear]
-    
+
     #set target in targetyear
     #percentage: 0 = no reduction, 1 = full reduction of deforestation
     #Mha if pol_type=="aff"
@@ -267,7 +267,7 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping, weight=NULL,
     if(targetyear==baseyear) {
       magpie_policy[countries,y_full,] <- setYears(magpie_policy[countries,baseyear,],NULL)
     } else {
-      magpie_policy[countries,y_full,] <- time_interpolate(magpie_policy[countries,c(baseyear,targetyear),],y_full, 
+      magpie_policy[countries,y_full,] <- time_interpolate(magpie_policy[countries,c(baseyear,targetyear),],y_full,
                                                          extrapolation_type = "constant")
     }
     #set reference flow based on target type
@@ -280,10 +280,10 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping, weight=NULL,
         t1countries <- policy$dummy[policy$key==i & policy$targettype==1]
         t1c_index <- (sub("\\..*$","",getCells(flow)) %in% t1countries)
         flow[t1c_index,,] <- setYears(flow[t1c_index,baseyear,],NULL)
-      }     
+      }
     }
   }
-  
+
   #calculate the reduction target in absolute numbers
   rel <- data.frame(from=pol_mapping,to=paste(pol_mapping,1:length(pol_mapping),sep="."), stringsAsFactors = FALSE)
   if(pol_type=="aff") {
@@ -293,11 +293,11 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping, weight=NULL,
     t_periods <- calc_tperiods(c(tp[1],tp))
     magpie_policy <- magpie_policy * flow * t_periods + stock
   }
-  
+
   load(spatialheader_file)
   getCells(magpie_policy) <- spatial_header
-  
+
   magpie_policy <- speed_aggregate(magpie_policy,spam_file)
-  
+
   return(magpie_policy)
 }
