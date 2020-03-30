@@ -5,10 +5,22 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+* Country switch to determine countries for which EFP holds.
+* In the default case, the EFP affects all countries when activated.
+p42_country_dummy(iso) = 0;
+p42_country_dummy(EFP_countries) = 1;
+* Because MAgPIE is not run at country-level, but at region level, a region
+* share is calculated that translates the countries' influence to regional level.
+* Countries are weighted by their population size.
+p42_EFP_region_shr(t_all,i) = sum(i_to_iso(i,iso), p42_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
 
-
-$ifthen "%c42_env_flow_policy%" == "mixed" i42_env_flow_policy(t,i) = im_development_state(t,i) * f42_env_flow_policy(t,"on");
-$else i42_env_flow_policy(t,i) = f42_env_flow_policy(t,"%c42_env_flow_policy%");
+* Environmental policy switch:
+$ifthen "%c42_env_flow_policy%" == "mixed"
+  i42_env_flow_policy(t,i) = (im_development_state(t,i) * f42_env_flow_policy(t,"on")) * p42_EFP_region_shr(t,i)
+                       + f42_env_flow_policy(t,"off") * (1-p42_EFP_region_shr(t,i));
+$else
+  i42_env_flow_policy(t,i) = f42_env_flow_policy(t,"%c42_env_flow_policy%") * p42_EFP_region_shr(t,i)
+                       + f42_env_flow_policy(t,"off") * (1-p42_EFP_region_shr(t,i));
 $endif
 
 
