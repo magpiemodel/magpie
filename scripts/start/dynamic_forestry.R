@@ -44,6 +44,12 @@ for(s73_demand_adjuster in c(0)){
 
       for (co2_price_path in c("NPI","2deg")) {
 
+        if (co2_price_path == "NPI") {
+          cfg <- setScenario(cfg,c(ssp,"NPI"))
+        } else {
+          cfg <- setScenario(cfg,c(ssp,"NDC"))
+        }
+
         cfg$gms$c56_pollutant_prices <- "coupling"
         cfg$gms$c60_2ndgen_biodem <- "coupling"
 
