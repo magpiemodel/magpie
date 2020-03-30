@@ -24,6 +24,7 @@ magpie_calib.*
 
 #ignore run specific files and folders
 /225*/
+/run_details/
 *.out
 /scripts/npi_ndc/npi_ndc_overview.txt
 Rplots.pdf

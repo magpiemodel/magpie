@@ -161,7 +161,7 @@ q32_establishment_reg(i2) ..
               =g=
 *              sum((cell(i2,j2),ac_sub), vm_hvarea_forestry.l(j2,ac_sub))*
 							sum(ct, p32_hv_area_past_avg(ct,i2)) *
-              (pc32_demand_forestry_future(i2,"wood")/sum(ct, pm_demand_ext(ct,i2,"wood")))
+              (pc32_demand_forestry_future(i2,"wood")/sum(ct, pm_demand_ext_original(ct,i2,"wood")))
               ;
 
 * * pc32_production_ratio_future(i2)

@@ -7,7 +7,7 @@
 
 parameters
 pm_demand_ext(t_ext,i,kforestry)                                            Extended demand for timber beyound simulation (mio. tDM)
-p73_demand_ext_original(t_ext,i,kforestry)  xx
+pm_demand_ext_original(t_ext,i,kforestry)  xx
 ;
 
 positive variables

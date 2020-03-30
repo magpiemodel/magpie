@@ -23,16 +23,20 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-identifier_flag <- "PR04"
-cfg$gms$s73_price_adjuster <- 0
+log_folder <- "run_details"
+dir.create(log_folder,showWarnings = FALSE)
+
+identifier_flag <- "PR05"
+cat(paste0("All runs are adjusted according to free variable. CO2 prices from Jessica."),file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+
 cfg$recalc_npi_ndc <- TRUE
 
-for(s73_demand_adjuster in c(1,0)){
+for(s73_demand_adjuster in c(0)){
   cfg$gms$s73_price_adjuster <- s73_demand_adjuster
 
-  for(ssp in c("SSP2")){
+  for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
 
-    for(c32_rotation_extension in c(0)){
+    for(c32_rotation_extension in c(0,2,4)){
 
       cfg$gms$c32_rotation_extension <- c32_rotation_extension
 
@@ -53,7 +57,7 @@ for(s73_demand_adjuster in c(1,0)){
         if(s73_demand_adjuster == 1) adj_flag = "Pfix"
         if(s73_demand_adjuster == 0) adj_flag = "FVfix"
 
-        cfg$title <- paste0(identifier_flag,"_",ssp,"_",adj_flag,"_",rot_flag,"_",co2_price_path)
+        cfg$title <- paste0(identifier_flag,"_",ssp,"_",rot_flag,"_",co2_price_path)
 
         cfg$output <- c("rds_report")
 

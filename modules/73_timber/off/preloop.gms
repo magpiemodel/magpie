@@ -18,4 +18,4 @@ vm_hvarea_forestry.fx(j,ac_sub) = 0;
 vm_forestry_reduction.fx(j,"plant",ac_sub) = 0;
 pm_demand_ext(t_ext,i,kforestry) = 0;
 vm_prod.fx(j,kforestry) = 0;
-p73_demand_ext_original(t_ext,i,kforestry) = 0;
+pm_demand_ext_original(t_ext,i,kforestry) = 0;

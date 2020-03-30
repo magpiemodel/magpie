@@ -16,7 +16,7 @@ p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)            Fina
 pm_demand_ext(t_ext,i,kforestry)                                            Extended demand for timber beyound simulation (mio. tDM per yr)
 p73_glo_timber_demand(t_all,kforestry)                                      Global timber demand (mio. m3 per yr)
 p73_volumetric_conversion(kforestry)                                        Volumetric conversion factor for volume to mass (tDM per m3)
-p73_demand_ext_original(t_ext,i,kforestry)                                  Original prescribed timber demand (mio. tDM per yr)
+pm_demand_ext_original(t_ext,i,kforestry)                                   Original prescribed timber demand (mio. tDM per yr)
 pm_prices(t,i,kforestry)                                                    Woody biomass prices (USD per tDM)
 p73_criterion	                                                              Criteria calculating timber demand adjustment (mio. tDM per yr)
 p73_timder_adjustment_ratio(t,i,kforestry)                                  Ratio between adjusted and prescribed timber demand (1)
