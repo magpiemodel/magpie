@@ -98,8 +98,8 @@ if(calib) {
     #use exo trade and parallel optimization
     cfg$gms$trade <- "exo"
     cfg$gms$optimization <- "nlp_par"
-    cfg$gms$s15_elastic_demand <- 0
-    cfg$gms$tc <- "exo"
+    #cfg$gms$s15_elastic_demand <- 0
+    #cfg$gms$tc <- "exo"
     
     #cfg$gms$c60_bioenergy_subsidy <- 0
     
