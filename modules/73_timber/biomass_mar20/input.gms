@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-  s73_price_adjuster Switch for price based adjustment /1/
+  s73_price_adjuster Switch for price based adjustment /0/
   s73_timber_demand Switch for timber demand / 1 /
   s73_counter Counter for iterations of demand adjustment / 0 /
   s73_maxiter Maximum iterations for demand adjustments / 20 /
