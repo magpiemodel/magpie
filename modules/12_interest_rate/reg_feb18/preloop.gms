@@ -35,11 +35,11 @@ s12_intercept_b = f12_interest_bound("y1995","high")-s12_slope_a*s12_min_dev;
 *' @stop
 
 $ifthen "%c12_interest_rate%" == "coupling"
- p12_interest(t,i) = f12_interest_coupling(t);
+ p12_interest(t_all,i) = f12_interest_coupling(t_all);
 $else
 * For the countries selected in gdp_countries12 the interest rate is dependent on
 * their development state. (By default, all iso countries are selected.)
 * For all other countries the scalar s12_interest_noselect applies.
- p12_interest(t,i) = (s12_slope_a * im_development_state(t,i) + s12_intercept_b) * p12_reg_shr(t,i)
-                    + s12_interest_noselect * p12_interest_reg_policy(t) * (1-p12_reg_shr(t,i));
+ p12_interest(t_all,i) = (s12_slope_a * im_development_state(t_all,i) + s12_intercept_b) * p12_reg_shr(t_all,i)
+                    + s12_interest_noselect * p12_interest_reg_policy(t_all) * (1-p12_reg_shr(t_all,i));
 $endif

@@ -7,7 +7,7 @@
 
 parameters
  pm_interest(i)        Current interest rate in each region (% per yr)
- p12_interest(t,i)	    Interest rate (% per yr)
+ p12_interest(t_all,i)	Interest rate (% per yr)
 * country-specific scenario switch
  p12_country_dummy(iso)               Dummy parameter indicating whether country is affected by interest rate scenario (1)
  p12_reg_shr(t_all,i) Weighted share of region with regards to interest rate scenario of countries (1)

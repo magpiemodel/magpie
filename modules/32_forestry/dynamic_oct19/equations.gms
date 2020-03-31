@@ -55,7 +55,7 @@ v32_land(j2,"aff","ac0") * sum(ct, p32_cdr_ac(ct,j2,ac));
 
  q32_carbon(j2,ag_pools)  .. vm_carbon_stock(j2,"forestry",ag_pools) =e=
                          sum((type32,ac), v32_land(j2,type32,ac)*
-                         sum(ct, pm_carbon_density_ac_forestry(ct,j2,ac,ag_pools)));
+                         sum(ct, p32_carbon_density_ac(ct,j2,type32,ac,ag_pools)));
 
 *' Forestry land expansion and reduction is calculated as follows:
 
