@@ -23,7 +23,7 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
-cfg$recalc_npi_ndc <- TRUE
+cfg$recalc_npi_ndc <- "ifneeded"
 
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
