@@ -71,9 +71,9 @@ for(ssp in c("SSP2")){
 
           cfg$output <- c("rds_report")
 
-          cat(cfg$title,"\n")
+#          cat(cfg$title,"\n")
 
-#          start_run(cfg,codeCheck=FALSE)
+          start_run(cfg,codeCheck=FALSE)
         }
       }
     }
@@ -133,9 +133,9 @@ for(ssp in c("SSP2")){
 
           cfg$output <- c("rds_report")
 
-          cat(cfg$title,"\n")
+#          cat(cfg$title,"\n")
 
-#          start_run(cfg,codeCheck=FALSE)
+          start_run(cfg,codeCheck=FALSE)
         }
       }
     }
