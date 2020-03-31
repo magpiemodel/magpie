@@ -37,7 +37,7 @@ for(ssp in c("SSP2")){
 
     cfg$gms$c32_rotation_extension <- c32_rotation_extension
 
-    for(timber_demand in c("biomass_mar20","off")){
+    for(timber_demand in c("off")){
 
       cfg$gms$timber <- timber_demand
 
@@ -103,7 +103,7 @@ for(ssp in c("SSP2")){
 
     cfg$gms$c32_rotation_extension <- c32_rotation_extension
 
-    for(timber_demand in c("biomass_mar20","off")){
+    for(timber_demand in c("off")){
 
       cfg$gms$timber <- timber_demand
 
