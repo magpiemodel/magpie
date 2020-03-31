@@ -27,7 +27,7 @@ cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report")
 
 prefix <- "hr02"
-res <- "c1000"
+res <- "c200"
 
 cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_",res,"_690d3718e151be1b450b394c1064b1c5.tgz"),
                "rev4.42_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
