@@ -12,7 +12,7 @@ s42_watdem_nonagr_scenario         Scenario for non agricultural water demand fr
 *                                                                                2: A2
 *                                                                                3: B1
 
-s42_irrig_eff_scenario     Scenario for irrigation efficiency      (1)      / 1 /
+s42_irrig_eff_scenario     Scenario for irrigation efficiency      (1)      / 2 /
 *                                      1: global static value
 *                                      2: regional static values from CS
 *                                      3: gdp driven increase

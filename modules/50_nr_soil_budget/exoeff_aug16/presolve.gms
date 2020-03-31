@@ -15,12 +15,20 @@ p50_country_dummy_pastneff(pastneff_countries) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by their population size.
-p50_cropneff_region_shr(t_all,i) = sum(i_to_iso(i,iso), p50_country_dummy_cropneff(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
-p50_pastneff_region_shr(t_all,i) = sum(i_to_iso(i,iso), p50_country_dummy_pastneff(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
+p50_cropneff_region_shr(t,i) = sum(i_to_iso(i,iso), p50_country_dummy_cropneff(iso) * im_pop_iso(t,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t,iso));
+p50_pastneff_region_shr(t,i) = sum(i_to_iso(i,iso), p50_country_dummy_pastneff(iso) * im_pop_iso(t,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t,iso));
 
 * Nitrogen use efficiency
-v50_nr_eff.fx(i) = f50_snupe(t,i,"%c50_scen_neff_select%") * p50_cropneff_region_shr(t,i)
+if(m_year(t) <= sm_fix_SSP2,
+ v50_nr_eff.fx(i) = f50_snupe(t,i,"neff60_60_starty2010") * p50_cropneff_region_shr(t,i)
+                    + f50_snupe(t,i,"neff60_60_starty2010") * (1-p50_cropneff_region_shr(t,i));
+ v50_nr_eff_pasture.fx(i) = f50_nue_pasture(t,i,"constant") * p50_pastneff_region_shr(t,i)
+                            + f50_nue_pasture(t,i,"constant") * (1-p50_pastneff_region_shr(t,i));
+else
+ v50_nr_eff.fx(i) = f50_snupe(t,i,"%c50_scen_neff_select%") * p50_cropneff_region_shr(t,i)
                     + f50_snupe(t,i,"%c50_scen_neff_noselect%") * (1-p50_cropneff_region_shr(t,i));
-v50_nr_eff_pasture.fx(i) = f50_nue_pasture(t,i,"%c50_scen_neff_pasture_select%") * p50_pastneff_region_shr(t,i)
+ v50_nr_eff_pasture.fx(i) = f50_nue_pasture(t,i,"%c50_scen_neff_pasture_select%") * p50_pastneff_region_shr(t,i)
                             + f50_nue_pasture(t,i,"%c50_scen_neff_pasture_noselect%") * (1-p50_pastneff_region_shr(t,i));
+);
+
 i50_atmospheric_deposition_rates(t,j,land)=f50_atmospheric_deposition_rates(t,j,land,"%c50_dep_scen%");
