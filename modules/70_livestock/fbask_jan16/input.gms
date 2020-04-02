@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-$setglobal c70_feed_scen  ssp5
+$setglobal c70_feed_scen  ssp2
 *   options:    ssp1,ssp2,ssp3,ssp4,ssp5,constant
 
 scalars

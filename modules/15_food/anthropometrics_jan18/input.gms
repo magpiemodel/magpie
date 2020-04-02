@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-$setglobal c15_food_scenario  SSP5
+$setglobal c15_food_scenario  SSP2
 *   options:   SSP: "SSP1", "SSP2", "SSP3", "SSP4", "SSP5"
 *             SRES: "A1", "A2", "B1", "B2"
 *            OTHER: "SSP1_boundary", "SSP2_boundary", "SSP3_boundary", "SSP4_boundary", "SSP5_boundary"
@@ -38,7 +38,14 @@ $setglobal c15_EAT_scen  FLX
 *   options:   BMK, FLX, PSC, VEG, VGN, FLX_hmilk, FLX_hredmeat
 
 
-scalar s15_elastic_demand  Elastic demand switch (1=elastic 0=exogenous) (1) / 0 /;
+* Set-switch for countries affected by country-specific exogenous diet scenario
+* Default: all iso countries selected
+sets
+  scen_countries15(iso) countries to be affected by selected food sceanrio / DEU, FRA /
+;
+
+
+scalar s15_elastic_demand  Elastic demand switch (1=elastic 0=exogenous) (1) / 1 /;
 
 scalar s15_calibrate Calibration switch (1=calibrated 0=pure regression outcomes) (1) / 1 /;
 * only for per-capita calories, not for e.g. calibration of transformation parameters between per-capita calories in dm

@@ -28,8 +28,8 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "BF01"
-cat(paste0("Runs are made to disentangle forestry effects from default magpie run and also to see NDC/NPI diesntanglement."),file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+identifier_flag <- "BF03x-DUMMY-"
+cat(paste0("Manual pull from latest develop 3rd Apr 2020. Needed because carbonstock calculation throws warning."),file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 for(ssp in c("SSP2")){
 
@@ -37,11 +37,11 @@ for(ssp in c("SSP2")){
 
     cfg$gms$c32_rotation_extension <- c32_rotation_extension
 
-    for(timber_demand in c("off")){
+    for(timber_demand in c("biomass_mar20")){ ## Add "off" here to turn off timber demand
 
       cfg$gms$timber <- timber_demand
 
-      for (co2_price_path in c("NPI","2deg")) {
+      for (co2_price_path in c("NPI")) { ## Add "2deg" here for CO2 price runs
 
         if (co2_price_path == "NPI") {
           cfg <- setScenario(cfg,c(ssp,"NPI"))
@@ -49,7 +49,7 @@ for(ssp in c("SSP2")){
           cfg <- setScenario(cfg,c(ssp,"NDC"))
         }
 
-        for(emis_policy in c("redd+_nosoil","ssp_nosoil")){
+        for(emis_policy in c("redd+_nosoil")){ ## Add "ssp_nosoil" for policy penalizing only natveg emissions
 
           cfg$gms$c56_emis_policy <- emis_policy
 
@@ -103,7 +103,7 @@ for(ssp in c("SSP2")){
 
     cfg$gms$c32_rotation_extension <- c32_rotation_extension
 
-    for(timber_demand in c("off")){
+    for(timber_demand in c("biomass_mar20")){
 
       cfg$gms$timber <- timber_demand
 
@@ -111,7 +111,7 @@ for(ssp in c("SSP2")){
 
         cfg <- setScenario(cfg,c(ssp,"NDC"))
 
-        for(emis_policy in c("redd+_nosoil","ssp_nosoil")){
+        for(emis_policy in c("ssp_nosoil")){
 
           cfg$gms$c56_emis_policy <- emis_policy
 
@@ -135,7 +135,7 @@ for(ssp in c("SSP2")){
 
 #          cat(cfg$title,"\n")
 
-          start_run(cfg,codeCheck=FALSE)
+#          start_run(cfg,codeCheck=FALSE)
         }
       }
     }

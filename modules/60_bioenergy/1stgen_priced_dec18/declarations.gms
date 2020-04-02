@@ -10,6 +10,8 @@ parameters
  i60_bioenergy_dem(t,i)                           Regional bioenergy demand per year (mio. GJ per yr)
  i60_res_2ndgenBE_dem(t,i)                        Regional residue demand for 2nd generation bioenergy per year (mio. GJ per yr)
  i60_1stgen_bioenergy_dem(t,i,kall)               Regional 1st generation bioenergy demand (mio. GJ per yr)
+ p60_region_BE_shr(t_all,i)	                  Bioenergy demand share of the region (1)
+ p60_country_dummy(iso)		                        Dummy parameter indicating whether country is selected for bioenergy demand scenario (1)
 ;
 
 positive variables

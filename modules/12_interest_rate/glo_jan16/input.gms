@@ -5,7 +5,24 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c12_interest_rate  low
+$setglobal c12_interest_rate  medium
+
+* Set-switch for countries affected by country-specific interest rate scenario
+* Default: all iso countries selected
+sets
+  gdp_countries12(iso) countries to be affected by chosen interest rate scenario / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,ASM,ATA,ATF,ATG,AUS,AZE,
+BDI,BEN,BES,BFA,BGD,BHR,BHS,BIH,BLM,BLR,BLZ,BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,
+CCK,CHN,CHE,CHL,CIV,CMR,COD,COG,COK,COL,COM,CPV,CRI,CUB,CUW,CXR,CYM,DJI,DMA,DOM,DZA,
+ECU,EGY,ERI,ESH,ETH,FJI,FLK,FRO,FSM,GAB,GEO,GGY,GHA,GIB,GIN,GLP,GMB,GNB,GNQ,GRD,GRL,
+GTM,GUF,GUM,GUY,HKG,HMD,HND,HTI,IDN,IMN,IND,IOT,IRN,IRQ,ISL,ISR,JAM,JEY,JOR,JPN,KAZ,
+KEN,KGZ,KHM,KIR,KNA,KOR,KWT,LAO,LBN,LBR,LBY,LCA,LIE,LKA,LSO,MAC,MAF,MAR,MCO,MDA,MDG,
+MDV,MEX,MHL,MKD,MLI,MMR,MNE,MNG,MNP,MOZ,MRT,MSR,MTQ,MUS,MWI,MYS,MYT,NAM,NCL,NER,NFK,
+NGA,NIC,NIU,NOR,NPL,NRU,NZL,OMN,PAK,PAN,PCN,PER,PHL,PLW,PNG,PRI,PRK,PRY,PSE,PYF,QAT,
+REU,RUS,RWA,SAU,SDN,SEN,SGP,SGS,SHN,SJM,SLB,SLE,SLV,SMR,SOM,SPM,SRB,SSD,STP,SUR,SWZ,
+SXM,SYC,SYR,TCA,TCD,TGO,THA,TJK,TKL,TKM,TLS,TON,TTO,TUN,TUR,TUV,TWN,TZA,UGA,UKR,UMI,
+URY,USA,UZB,VAT,VCT,VEN,VGB,VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
+;
+
 
 table f12_interest(t_all,scen12)  Interest rate scenarios (% per yr)
 $ondelim
