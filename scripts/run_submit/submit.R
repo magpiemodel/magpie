@@ -18,10 +18,17 @@ maindir <- cfg$magpie_folder
 # write the config file in the output_folder: config.log
 write(capture.output(cfg), file="config.log")
 
+# Capture start time
+timeGAMSStart <- Sys.time()
+
 cat("\nStarting MAgPIE...\n")
-begin<-Sys.time()
 system(paste("gams full.gms -errmsg=1 -lf=full.log -lo=",cfg$logoption,sep=""))
-gams_runtime<-Sys.time()-begin  #calculate runtime info
+
+# Capture runtimes
+timeGAMSEnd  <- Sys.time()
+gams_runtime <- timeGAMSEnd - timeGAMSStart
+timeOutputStart <- Sys.time() 
+
 if(!file.exists("fulldata.gdx")) stop("MAgPIE model run did not finish properly (fulldata.gdx is missing). Please check full.lst for further information!")
 cat("\nMAgPIE run finished!\n")
 
@@ -75,5 +82,16 @@ submit <- "direct"
 output <- cfg$output
 outputdirs <- runfolder
 sys.source("output.R",envir=new.env())
+
+# get runtime for output
+timeOutputEnd <- Sys.time()
+
+# Save run statistics to local file
+cat("Saving timeGAMSStart, timeGAMSEnd, timeOutputStart and timeOutputStart to runstatistics.rda\n")
+lucode::runstatistics(file           = paste0(cfg$results_folder, "/runstatistics.rda"),
+                     timeGAMSStart   = timeGAMSStart,
+                     timeGAMSEnd     = timeGAMSEnd,
+                     timeOutputStart = timeOutputStart,
+                     timeOutputEnd   = timeOutputEnd)
 
 print(warnings())

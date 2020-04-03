@@ -13,3 +13,4 @@ vm_primforest_reduction, variable, not used
 vm_other_reduction, variable, not used
 vm_hvarea_secdforest, variable, not used
 vm_hvarea_primforest, variable, not used
+sm_fix_SSP2, input, not used

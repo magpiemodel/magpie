@@ -145,50 +145,50 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-*
+* 
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: NA
 * Repository: http://rse.pik-potsdam.de/data/magpie/intern
-*
+* 
 * Used data set: rev4.42_690d3718e151be1b450b394c1064b1c5_magpie.tgz
 * md5sum: NA
 * Repository: http://rse.pik-potsdam.de/data/magpie/intern
-*
+* 
 * Used data set: rev4.42_690d3718e151be1b450b394c1064b1c5_validation.tgz
 * md5sum: NA
 * Repository: http://rse.pik-potsdam.de/data/magpie/intern
-*
+* 
 * Used data set: calibration_H12_c200_26Feb20.tgz
 * md5sum: NA
 * Repository: http://rse.pik-potsdam.de/data/magpie/intern
-*
+* 
 * Used data set: additional_data_rev3.78.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-*
+* 
 * Used data set: private_forestry_dec18_20200312.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/users/mishra/additional_data_private_forestry
-*
+* 
 * Low resolution: c200
 * High resolution: 0.5
-*
+* 
 * Total number of cells: 200
-*
+* 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    28   24   10    7    3   53   17    8   22    7   11   10
-*
+* 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-*
+* 
 * Regions data revision: 4.42
-*
+* 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
 * * Additional input folder: /p/projects/landuse/data/input/other/rev42
 * * Revision: 42
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-*
+* 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
@@ -198,11 +198,11 @@ $title magpie
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = cfg$spamfile, debug = FALSE, seed = cfg$seed)
-*
-*
-*
-* Last modification (input data): Fri Apr 03 00:38:35 2020
-*
+* 
+* 
+* 
+* Last modification (input data): Fri Apr 03 02:43:16 2020
+* 
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
@@ -226,7 +226,7 @@ $offlisting
 *                    Key parameters during model runs
 
 $setglobal c_timesteps  coup2100
-$setglobal c_title  F18_AM_OldScale_simple_SSP5
+$setglobal c_title  default
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /
