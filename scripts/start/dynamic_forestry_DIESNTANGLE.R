@@ -28,10 +28,10 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "BF05"
+identifier_flag <- "BF06"
 cat(paste0("ZERO DIV BUGFIX FOR OFF REALIZATION. Manual copy paste from latest develop 3rd Apr 2020. Needed because carbonstock calculation throws warning."),file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
-for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
+for(ssp in c("SSP2")){
 
   for(c32_rotation_extension in c(0)){
 
@@ -97,7 +97,7 @@ cfg$results_folder <- "output/:title:"
 
 cfg$recalc_npi_ndc <- TRUE
 
-for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
+for(ssp in c("SSP2")){
 
   for(c32_rotation_extension in c(0)){
 
