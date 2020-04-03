@@ -11,7 +11,7 @@ sets
 
 scalars
   c60_biodem_level  bioenergy demand level indicator 1 for regional and 0 for global demand   (1)   / 1 /
-  c60_bioenergy_subsidy first generation bioenergy subsidy (USD05MER per ton) / 0 /
+  c60_bioenergy_subsidy first generation bioenergy subsidy (USD05MER per ton) / 300 /
 ;
 
 $setglobal c60_2ndgen_biodem_select  R2M41-SSP2-NPi
