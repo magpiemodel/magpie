@@ -135,7 +135,7 @@ calc_NPI_NDC <- function(policyregions="iso"){
   none_ad_aolc_pol[] <- 0
   getNames(none_ad_aolc_pol) <- c("none.forest","none.other")
   ad_aolc_pol <- mbind(none_ad_aolc_pol,npi_ad,npi_aolc,ndc_ad,ndc_aolc)
-  write.magpie(round(ad_aolc_pol,6), "policies/npi_ndc_ad_aolc_pol.cs3")
+  write.magpie(round(ad_aolc_pol,3), "policies/npi_ndc_ad_aolc_pol.cs3")
 
   addline("")
   addline("##----------------------------------------------------------------------------")
