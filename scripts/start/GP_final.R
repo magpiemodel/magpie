@@ -33,7 +33,7 @@ cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev38_c200_690d3718e151be1b45
                )
 
 #NITROGEN UPTAKE SCENARIO
-cfg$gms$c50_scen_neff <- "neff85_85_starty2010"
+cfg$gms$c50_scen_neff_select <- "neff85_85_starty2010"
 
 #Manure share used in an anaerobic digester 0.15 in 2015 0.30 in 2030, 0.5 in 2050 and 0.7 in 2100
 cfg$gms$c55_scen_conf<-"GoodPractice"

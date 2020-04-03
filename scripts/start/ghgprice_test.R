@@ -47,8 +47,8 @@ buildInputVector <- function(base            = "magpie4.1_default_apr19.tgz",
 
 #general settings
 cfg$gms$s80_optfile <- 1
-cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300"
-cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg1300"
+cfg$gms$c56_pollutant_prices_select <- "R2M41-SSP2-Budg1300"
+cfg$gms$c60_2ndgen_biodem_select    <- "R2M41-SSP2-Budg1300"
 cfg$input <- buildInputVector()
 #nocc
 

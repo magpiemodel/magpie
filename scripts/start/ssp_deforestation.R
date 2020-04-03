@@ -81,8 +81,8 @@ for(reg in c("BRA","H12")) {
             } else {
               model="GCAM4"
             }
-            cfg$gms$c56_pollutant_prices <- paste("SSPDB",ssp,rcp,model,sep="-")
-            cfg$gms$c60_2ndgen_biodem <- paste("SSPDB",ssp,rcp,model,sep="-")
+            cfg$gms$c56_pollutant_prices_select <- paste("SSPDB",ssp,rcp,model,sep="-")
+            cfg$gms$c60_2ndgen_biodem_select <- paste("SSPDB",ssp,rcp,model,sep="-")
 
             cfg$gms$tc <- tau
 
