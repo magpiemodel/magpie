@@ -52,8 +52,8 @@ cfg$recalibrate <- TRUE
 cfg$gms$s80_optfile <- 1
 cfg$gms$c56_emis_policy      <- "all"
 cfg$gms$s56_reward_neg_emis  <- -Inf
-cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300"
-cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg1300"
+cfg$gms$c56_pollutant_prices_select <- "R2M41-SSP2-Budg1300"
+cfg$gms$c60_2ndgen_biodem_select    <- "R2M41-SSP2-Budg1300"
 #nocc
 
 # c200

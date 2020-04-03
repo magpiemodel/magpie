@@ -142,10 +142,10 @@ for (scen in rownames(scenarios)) {
   # Choose GHG tax scenario
   if (scenarios[scen,"co2tax_2025"] == "built-in") {
     # see magpie/config/default.cfg for available scenarios
-    cfg$gms$c56_pollutant_prices <- scenarios[scen,"co2tax_name"]
+    cfg$gms$c56_pollutant_prices_select <- scenarios[scen,"co2tax_name"]
   } else {
     # If none of the built-in GHG price scenarios was chosen, provide GHG prices
-    cfg$gms$c56_pollutant_prices <- "emulator"
+    cfg$gms$c56_pollutant_prices_select <- "emulator"
     write.ghgtax(co2tax_2025=scenarios[scen,"co2tax_2025"],regions=unique(reg$RegionCode))
   }
 

@@ -36,8 +36,8 @@ getInput <- function(gdx,ghg_price=TRUE,biodem=TRUE) {
 }
 
 cfg <- setScenario(cfg,c("SSP1","NDC"))
-cfg$gms$c56_pollutant_prices <- "coupling"
-cfg$gms$c60_2ndgen_biodem <- "coupling"
+cfg$gms$c56_pollutant_prices_select <- "coupling"
+cfg$gms$c60_2ndgen_biodem_select <- "coupling"
 getInput("/p/projects/landuse/users/florianh/bugfix/infes-matrix-REMIND_SSP1-PkBudg1300-mag-2/fulldata.gdx")
 
 cfg$title <- "SSP1-PkBudg1300_oct19"

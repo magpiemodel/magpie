@@ -22,8 +22,8 @@ for(i in (1:4)){
   if(i==3) cfg$gms$disagg_lvst <- "foragebased_sep18"
   if(i==3) cfg$recalibrate <- FALSE
   cfg <- setScenario(cfg,c("SSP2","NPI"))
-  cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-Ref-REMIND-MAGPIE"
-  cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-Ref-REMIND-MAGPIE"
+  cfg$gms$c56_pollutant_prices_select <- "SSPDB-SSP2-Ref-REMIND-MAGPIE"
+  cfg$gms$c60_2ndgen_biodem_select <- "SSPDB-SSP2-Ref-REMIND-MAGPIE"
   start_run(cfg=cfg,codeCheck=FALSE)
   cfg$recalibrate <- TRUE
 }

@@ -37,32 +37,32 @@ getInput <- function(gdx,ghg_price=TRUE,biodem=TRUE) {
 
 cfg$title <- "IR1_SDP-NPI_GDP"
 cfg <- setScenario(cfg,c("SDP","NPI"))
-cfg$gms$c56_pollutant_prices <- "coupling"
-cfg$gms$c60_2ndgen_biodem <- "coupling"
+cfg$gms$c56_pollutant_prices_select <- "coupling"
+cfg$gms$c60_2ndgen_biodem_select <- "coupling"
 getInput("/p/projects/piam/runs/coupled-magpie/output/C_SDP-NPi-mag-4/fulldata.gdx")
 cfg$gms$s42_irrig_eff_scenario <- 3
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "IR1_SSP1-NPI_GDP"
 cfg <- setScenario(cfg,c("SSP1","NPI"))
-cfg$gms$c56_pollutant_prices <- "coupling"
-cfg$gms$c60_2ndgen_biodem <- "coupling"
+cfg$gms$c56_pollutant_prices_select <- "coupling"
+cfg$gms$c60_2ndgen_biodem_select <- "coupling"
 getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP1-NPi-mag-4/fulldata.gdx")
 cfg$gms$s42_irrig_eff_scenario <- 2
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "IR1_SSP2-NPI_GDP"
 cfg <- setScenario(cfg,c("SSP2","NPI"))
-cfg$gms$c56_pollutant_prices <- "coupling"
-cfg$gms$c60_2ndgen_biodem <- "coupling"
+cfg$gms$c56_pollutant_prices_select <- "coupling"
+cfg$gms$c60_2ndgen_biodem_select <- "coupling"
 getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP2-NPi-mag-4/fulldata.gdx")
 cfg$gms$s42_irrig_eff_scenario <- 2
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "IR1_SSP5-NPI_GDP"
 cfg <- setScenario(cfg,c("SSP5","NPI"))
-cfg$gms$c56_pollutant_prices <- "coupling"
-cfg$gms$c60_2ndgen_biodem <- "coupling"
+cfg$gms$c56_pollutant_prices_select <- "coupling"
+cfg$gms$c60_2ndgen_biodem_select <- "coupling"
 getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP5-NPi-mag-4/fulldata.gdx")
 cfg$gms$s42_irrig_eff_scenario <- 2
 start_run(cfg,codeCheck=FALSE)

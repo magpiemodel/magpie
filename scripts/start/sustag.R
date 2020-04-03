@@ -136,8 +136,8 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 cfg$title <- "SUSTAg2_Ref"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0")
-cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-Ref-REMIND-MAGPIE"
-cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-Ref-REMIND-MAGPIE"
+cfg$gms$c56_pollutant_prices_select <- "SSPDB-SSP2-Ref-REMIND-MAGPIE"
+cfg$gms$c60_2ndgen_biodem_select    <- "SSPDB-SSP2-Ref-REMIND-MAGPIE"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 #SUSTAg2 scenario without CC impacts
@@ -156,8 +156,8 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 #cfg$title <- "SUSTAg2_Ref_co2fix"
 #cfg<-lucode::setScenario(cfg,"SUSTAg2")
 #cfg$input <- buildInputVector(co2="noco2",climatescen_name="rcp6p0")
-#cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
-#cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
+#cfg$gms$c56_pollutant_prices_select <- "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
+#cfg$gms$c60_2ndgen_biodem_select    <- "SSP2-Ref-SPA0"
 #start_run(cfg=cfg,codeCheck=codeCheck)
 
 # SUSTAg2 scenario with variation of 1st gen. bioenergy: phaseout2020
