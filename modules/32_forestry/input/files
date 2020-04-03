@@ -4,3 +4,7 @@ aff_noboreal.cs2
 aff_onlytropical.cs2
 f32_fac_req_ha.csv
 npi_ndc_aff_pol.cs3
+f32_harvestingcost.cs4
+f32_production_ratio.csv
+f32_forestry_management.csv
+f32_plant_prod_share.csv
