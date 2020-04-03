@@ -16,6 +16,8 @@ vm_hvarea_primforest.fx(j) = 0;
 vm_hvarea_forestry.fx(j,ac_sub) = 0;
 
 vm_forestry_reduction.fx(j,"plant",ac_sub) = 0;
-pm_demand_ext(t_ext,i,kforestry) = 0;
-vm_prod.fx(j,kforestry) = 0;
 pm_demand_ext_original(t_ext,i,kforestry) = 0;
+pm_demand_ext(t_ext,i,kforestry) = pm_demand_ext_original(t_ext,i,kforestry);
+f21_trade_balanceflow(t_all,kforestry) = 0;
+*f21_trade_balanceflow(t_all,"woodfuel") = 0;
+vm_prod.fx(j,kforestry) = 0;

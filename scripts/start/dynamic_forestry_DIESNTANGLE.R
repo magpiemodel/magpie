@@ -28,8 +28,8 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "BF04"
-cat(paste0("SCEN CONFIG HAD TO BE CHANGED ASK FELI FOR FIX.Manual copy paste from latest develop 3rd Apr 2020. Needed because carbonstock calculation throws warning."),file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+identifier_flag <- "BF05"
+cat(paste0("ZERO DIV BUGFIX FOR OFF REALIZATION. Manual copy paste from latest develop 3rd Apr 2020. Needed because carbonstock calculation throws warning."),file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
 
@@ -61,8 +61,8 @@ for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
 
           ### Create flags
 
-          if(timber_demand == "biomass_mar20") demand_flag = "TimberON"
-          if(timber_demand == "off") demand_flag = "TimberOFF"
+          if(timber_demand == "biomass_mar20") demand_flag = "tON"
+          if(timber_demand == "off") demand_flag = "tOFF"
 
           if(emis_policy == "redd+_nosoil") pol_flag = "REDD"
           if(emis_policy == "ssp_nosoil") pol_flag = "SNS"
