@@ -32,6 +32,10 @@ q32_cdr_aff(j2,ac) ..
 vm_cdr_aff(j2,ac) =e=
 v32_land(j2,"aff","ac0") * sum(ct, p32_cdr_ac(ct,j2,ac));
 
+*ac0 can only increase if total afforested land increases
+q32_aff_ac0(j2) ..
+v32_land(j2,"aff","ac0") =l= sum(ac, v32_land(j2,"aff",ac)) - sum((ct,ac), p32_land(ct,j2,"aff",ac));
+
 *****GENERAL
 *****Land***************************************************
 *' The interface `vm_land` provides aggregated forestry land pools (`type32`) to other modules.
