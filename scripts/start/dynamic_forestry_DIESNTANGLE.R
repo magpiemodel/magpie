@@ -65,9 +65,9 @@ for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
           if(timber_demand == "off") demand_flag = "TimberOFF"
 
           if(emis_policy == "redd+_nosoil") pol_flag = "REDD"
-          if(emis_policy == "ssp_nosoil") pol_flag = "SSP"
+          if(emis_policy == "ssp_nosoil") pol_flag = "SNS"
 
-          cfg$title <- paste0(identifier_flag,"_",ssp,"_",demand_flag,"_","c",co2_price_path,"_",pol_flag,"_",cfg$gms$c32_aff_policy)
+          cfg$title <- paste0(identifier_flag,"_",ssp,"_",demand_flag,"_",co2_price_path,"_",pol_flag)
 
           cfg$output <- c("rds_report")
 
