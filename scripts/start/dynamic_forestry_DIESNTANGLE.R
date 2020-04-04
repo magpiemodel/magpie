@@ -28,8 +28,8 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "BF06"
-cat(paste0("ZERO DIV BUGFIX FOR OFF REALIZATION. Manual copy paste from latest develop 3rd Apr 2020. Needed because carbonstock calculation throws warning."),file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+identifier_flag <- "BF07"
+cat(paste0("RERUN BECAUSE REPORTING IS SHITE. ZERO DIV BUGFIX FOR OFF REALIZATION. Manual copy paste from latest develop 3rd Apr 2020. Needed because carbonstock calculation throws warning."),file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 for(ssp in c("SSP2")){
 
@@ -80,7 +80,7 @@ for(ssp in c("SSP2")){
   }
 }
 
-#*******************************************************************************
+#******************************************************************************************************************
 
 library(lucode)
 library(magclass)
@@ -130,6 +130,59 @@ for(ssp in c("SSP2")){
           if(emis_policy == "ssp_nosoil") pol_flag = "SSP"
 
           cfg$title <- paste0(identifier_flag,"_",ssp,"_",demand_flag,"_","c",co2_price_path,"_",pol_flag,"_",cfg$gms$c32_aff_policy)
+
+          cfg$output <- c("rds_report")
+
+#          cat(cfg$title,"\n")
+
+          start_run(cfg,codeCheck=FALSE)
+        }
+      }
+    }
+  }
+}
+
+#*******************************************************************************
+
+for(ssp in c("SSP2")){
+
+  for(c32_rotation_extension in c(1,2)){
+
+    cfg$gms$c32_rotation_extension <- c32_rotation_extension
+
+    for(timber_demand in c("biomass_mar20")){ ## Add "off" here to turn off timber demand
+
+      cfg$gms$timber <- timber_demand
+
+      for (co2_price_path in c("NPI","2deg")) { ## Add "2deg" here for CO2 price runs
+
+        if (co2_price_path == "NPI") {
+          cfg <- setScenario(cfg,c(ssp,"NPI"))
+        } else {
+          cfg <- setScenario(cfg,c(ssp,"NDC"))
+        }
+
+        for(emis_policy in c("redd+_nosoil")){ ## Add "ssp_nosoil" for policy penalizing only natveg emissions
+
+          cfg$gms$c56_emis_policy <- emis_policy
+
+          cfg$gms$c56_pollutant_prices_select <- "coupling"
+          cfg$gms$c60_2ndgen_biodem_select <- "coupling"
+
+          file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
+          file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
+
+          ### Create flags
+
+          if(timber_demand == "biomass_mar20") demand_flag = "tON"
+          if(timber_demand == "off") demand_flag = "tOFF"
+
+          if(emis_policy == "redd+_nosoil") pol_flag = "REDD"
+          if(emis_policy == "ssp_nosoil") pol_flag = "SNS"
+
+          rot_flag <- paste0(c32_rotation_extension*5,"yE")
+
+          cfg$title <- paste0(identifier_flag,"_",ssp,"_",demand_flag,"_",co2_price_path,"_",pol_flag,"_",rot_flag)
 
           cfg$output <- c("rds_report")
 
