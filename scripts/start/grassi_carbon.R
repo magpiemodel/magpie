@@ -29,8 +29,8 @@ getInput <- function(gdx) {
   write.magpie(a,"modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
 }
 
-cfg$gms$c56_pollutant_prices_select <- "coupling"
-cfg$gms$c60_2ndgen_biodem_select <- "coupling"
+cfg$gms$c56_pollutant_prices <- "coupling"
+cfg$gms$c60_2ndgen_biodem <- "coupling"
 
 #SSP2 Ref noCC
 cfg$title <- "SSP2_Ref_noCC_06"

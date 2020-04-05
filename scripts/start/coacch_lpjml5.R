@@ -127,8 +127,8 @@ start_the_run<-function(ssp,mit,rcp,gcm,co2,cc){
 	cfg<-lucode::setScenario(cfg,ssp)
 	cfg$input <- buildInputVector(climatescen_name=rcp,climate_model   = gcm, regionmapping = "coacch",co2=co2,calibration=calib)
 	mitigation=paste0("SSPDB-",ssp,"-",mit,"-",model)
-	cfg$gms$c56_pollutant_prices_select <- mitigation
-	cfg$gms$c60_2ndgen_biodem_select    <- mitigation
+	cfg$gms$c56_pollutant_prices <- mitigation
+	cfg$gms$c60_2ndgen_biodem    <- mitigation
 	if(cc==FALSE){
 	  cfg<-lucode::setScenario(cfg,"nocc")
 	} else {
