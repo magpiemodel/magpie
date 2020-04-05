@@ -54,8 +54,8 @@ for (ssp in c("SSP2")) {
   for (acc in c(0.01,0.02,0.03,0.04,0.05)) {
     for (damp in c(0.98,0.95)) {
       cfg <- setScenario(cfg,c(ssp,"NPI"))
-      cfg$gms$c56_pollutant_prices_select <- "coupling"
-      cfg$gms$c60_2ndgen_biodem_select <- "coupling"
+      cfg$gms$c56_pollutant_prices <- "coupling"
+      cfg$gms$c60_2ndgen_biodem <- "coupling"
       getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-NPi-mag-4/fulldata.gdx"))
       #cfg$gms$tc <- "exo"
       cfg$recalibrate <- TRUE

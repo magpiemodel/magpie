@@ -33,14 +33,14 @@ cfg$results_folder <- "output/:title::date:"
 #### Policy runs with bioenergy and CO2 prices from REMIND-MAgPIE coupled SDP-runs:
 
 #For activating input files with data from coupled runs, the following switches have to be activated:
-cfg$gms$c56_pollutant_prices_select <- "coupling"
-cfg$gms$c60_2ndgen_biodem_select <- "coupling"
+cfg$gms$c56_pollutant_prices <- "coupling"
+cfg$gms$c60_2ndgen_biodem <- "coupling"
 
 
 # The following function generates the files 
 # "f56_pollutant_prices_coupling.cs3" and
 # "reg.2ndgen_bioenergy_demand.csv"
-# that are required if switches "c56_pollutant_prices_select" and "c60_2ndgen_biodem_select"
+# that are required if switches "c56_pollutant_prices" and "c60_2ndgen_biodem"
 # are se to "coupling":
 
 getInput <- function(gdx,ghg_price=TRUE,biodem=TRUE) {
@@ -80,8 +80,8 @@ start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "SSP2_26_SSP2DB_RM_solv_feb15"
 cfg <- setScenario(cfg,c("SSP2","noSDP","NDC"))
-cfg$gms$c56_pollutant_prices_select <- "SSPDB-SSP2-26-REMIND-MAGPIE"
-cfg$gms$c60_2ndgen_biodem_select <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
 start_run(cfg,codeCheck=FALSE)
 
 
@@ -92,8 +92,8 @@ start_run(cfg,codeCheck=FALSE)
 
 #reset:
 # SSP2 with NPI policy is default:
-cfg$gms$c56_pollutant_prices_select <- "R2M41-SSP2-NPi"
-cfg$gms$c60_2ndgen_biodem_select <- "R2M41-SSP2-NPi"
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
 
 
 

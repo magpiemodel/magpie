@@ -41,8 +41,8 @@ for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
    getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-",pol,"-mag-4/fulldata.gdx"))
    cfg$title <- paste(prefix,ssp,pol,sep="-")
    cfg <- setScenario(cfg,c(ssp,if(pol=="NPi") "NPI" else "NDC"))
-   cfg$gms$c56_pollutant_prices_select <- "coupling"
-   cfg$gms$c60_2ndgen_biodem_select <- "coupling"
+   cfg$gms$c56_pollutant_prices <- "coupling"
+   cfg$gms$c60_2ndgen_biodem <- "coupling"
    start_run(cfg,codeCheck=FALSE)
  }
 }
