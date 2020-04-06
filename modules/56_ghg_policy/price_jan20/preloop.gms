@@ -23,12 +23,12 @@ p56_country_dummy(policy_countries56) = 1;
 p56_region_price_shr(t_all,i) = sum(i_to_iso(i,iso), p56_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
 
 ****select ghg prices
-$ifthen "%c56_pollutant_prices_select%" == "coupling"
+$ifthen "%c56_pollutant_prices%" == "coupling"
  im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices_coupling(t_all,i,pollutants);
-$elseif "%c56_pollutant_prices_select%" == "emulator"
+$elseif "%c56_pollutant_prices%" == "emulator"
  im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices_emulator(t_all,i,pollutants);
 $else
- im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices_select%") * p56_region_price_shr(t_all,i)
+ im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices%") * p56_region_price_shr(t_all,i)
  																				 + f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices_noselect%") * (1-p56_region_price_shr(t_all,i));
 $endif
 

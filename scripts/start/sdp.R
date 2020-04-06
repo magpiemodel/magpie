@@ -37,14 +37,14 @@ start_run(cfg,codeCheck=FALSE)
 #### Policy runs with bioenergy and CO2 prices from REMIND-MAgPIE coupled SDP-runs:
 
 #For activating input files with data from coupled runs, the following switches have to be activated:
-cfg$gms$c56_pollutant_prices_select <- "coupling"
-cfg$gms$c60_2ndgen_biodem_select <- "coupling"
+cfg$gms$c56_pollutant_prices <- "coupling"
+cfg$gms$c60_2ndgen_biodem <- "coupling"
 
 
 # The following function generates the files 
 # "f56_pollutant_prices_coupling.cs3" and
 # "reg.2ndgen_bioenergy_demand.csv"
-# that are required if switches "c56_pollutant_prices_select" and "c60_2ndgen_biodem_select"
+# that are required if switches "c56_pollutant_prices" and "c60_2ndgen_biodem"
 # are se to "coupling":
 
 getInput <- function(gdx,ghg_price=TRUE,biodem=TRUE) {
@@ -79,8 +79,8 @@ start_run(cfg,codeCheck=FALSE)
 
 #reset:
 # NPI policy is default:
-cfg$gms$c56_pollutant_prices_select <- "R2M41-SSP2-NPi"
-cfg$gms$c60_2ndgen_biodem_select <- "R2M41-SSP2-NPi"
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
 
 
 
@@ -88,26 +88,26 @@ cfg$gms$c60_2ndgen_biodem_select <- "R2M41-SSP2-NPi"
 
 cfg$title <- "SDP_R2M41-SSP2-NPi"
 cfg <- setScenario(cfg,c("SDP","NPI"))
-cfg$gms$c56_pollutant_prices_select <- "R2M41-SSP2-NPi"
-cfg$gms$c60_2ndgen_biodem_select <- "R2M41-SSP2-NPi"
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "SDP_R2M41-SSP2-NDC"
 cfg <- setScenario(cfg,c("SDP","NDC"))
-cfg$gms$c56_pollutant_prices_select <- "R2M41-SSP2-NDC"
-cfg$gms$c60_2ndgen_biodem_select <- "R2M41-SSP2-NDC"
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NDC"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NDC"
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "SDP_R2M41-SSP2-Budg600"
 cfg <- setScenario(cfg,c("SDP","NDC"))
-cfg$gms$c56_pollutant_prices_select <- "R2M41-SSP2-Budg600"
-cfg$gms$c60_2ndgen_biodem_select <- "R2M41-SSP2-Budg600"
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "SDP_26_SSP2DB_RM"
 cfg <- setScenario(cfg,c("SDP","NDC"))
-cfg$gms$c56_pollutant_prices_select <- "SSPDB-SSP2-26-REMIND-MAGPIE"
-cfg$gms$c60_2ndgen_biodem_select <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
 start_run(cfg,codeCheck=FALSE)
 
 
@@ -118,15 +118,15 @@ start_run(cfg,codeCheck=FALSE)
 cfg$title <- "SDP_26_SSP2DB_RM_0affore"
 cfg <- setScenario(cfg,c("SDP","NDC"))
 cfg$gms$s32_max_aff_area <- 0
-cfg$gms$c56_pollutant_prices_select <- "SSPDB-SSP2-26-REMIND-MAGPIE"
-cfg$gms$c60_2ndgen_biodem_select <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "SDP_26_SSP2DB_RM_Infaffore"
 cfg <- setScenario(cfg,c("SDP","NDC"))
 cfg$gms$s32_max_aff_area <- Inf
-cfg$gms$c56_pollutant_prices_select <- "SSPDB-SSP2-26-REMIND-MAGPIE"
-cfg$gms$c60_2ndgen_biodem_select <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
 start_run(cfg,codeCheck=FALSE)
 
 #reset:
@@ -139,8 +139,8 @@ cfg$gms$s32_max_aff_area <- 500
 
 cfg$title <- "SSP2_26_SSP2DB_RM"
 cfg <- setScenario(cfg,c("SSP2","noSDP","NDC"))
-cfg$gms$c56_pollutant_prices_select <- "SSPDB-SSP2-26-REMIND-MAGPIE"
-cfg$gms$c60_2ndgen_biodem_select <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
 start_run(cfg,codeCheck=FALSE)
 
 
@@ -149,8 +149,8 @@ start_run(cfg,codeCheck=FALSE)
 
 #reset:
 # SSP2 with NPI policy is default:
-cfg$gms$c56_pollutant_prices_select <- "R2M41-SSP2-NPi"
-cfg$gms$c60_2ndgen_biodem_select <- "R2M41-SSP2-NPi"
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
 
 
 
