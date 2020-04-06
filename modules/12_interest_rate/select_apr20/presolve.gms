@@ -5,7 +5,4 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-parameters
- pm_interest(i)         Current interest rate in each region (% per yr)
- p12_interest(t_all,i)	Interest rate (% per yr)
-;
+pm_interest(i) = p12_interest(t,i);

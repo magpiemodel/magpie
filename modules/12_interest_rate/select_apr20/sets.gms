@@ -5,7 +5,17 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-parameters
- pm_interest(i)         Current interest rate in each region (% per yr)
- p12_interest(t_all,i)	Interest rate (% per yr)
+sets
+  scen12 Interest rate scenarios
+  / low, medium, high /
+
+	bound12 Bound for interest rate
+	/ low, high/
+
+  scen12_to_dev(scen12,dev) Mapping between interest scneario and economic development status
+  /       high        . (lic)
+          medium      . (mic)
+          low         . (hic) /
+
+  t_to_i_to_dev(t_all,i,dev) Mapping between time, region and economic development status
 ;

@@ -297,8 +297,6 @@ cfg$gms$gdp_countries12  <- All_minus_EU28
 cfg$gms$s12_alt_interest <- 0.02
 start_run(cfg=cfg,codeCheck=codeCheck)
 
-
-
 ### Diets:
 cfg<-general_settings(title="SSP2_IPSL-CM5A-LR_6p0_NoMit_EURdiet")
 # In addition to global baseline scenario assumptions (SSP2_IPSL-CM5A-LR_6p0_NoMit_base),
@@ -309,6 +307,8 @@ cfg<-general_settings(title="SSP2_IPSL-CM5A-LR_6p0_NoMit_EURdiet")
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib)
+
+cfg$gms$c55_scen_conf_noselect <- "SSP1" ### (SHOULD THIS BE INCLUDED TOO???)
 # EUR specific
 #cfg$gms$c15_food_scenario <- "SSP1" #(THIS AS  WELLL??????)
 cfg$gms$s15_exo_waste <- 1
@@ -317,6 +317,8 @@ cfg$gms$s15_exo_diet <- 1
 cfg$gms$c15_kcal_scen <- "healthy_BMI"
 cfg$gms$c15_EAT_scen <- "FLX"
 cfg$gms$scen_countries15  <- EU28
+cfg$gms$c55_scen_conf <- "SSP1" ### (SHOULD THIS BE INCLUDED TOO???)
+cfg$gms$scen_countries55  <- EU28
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 
@@ -342,6 +344,8 @@ cfg$gms$s15_exo_diet <- 1
 cfg$gms$c15_kcal_scen <- "healthy_BMI"
 cfg$gms$c15_EAT_scen <- "FLX"
 cfg$gms$scen_countries15  <- EU28
+cfg$gms$c55_scen_conf <- "SSP1" ### (SHOULD THIS BE INCLUDED TOO???)
+cfg$gms$scen_countries55  <- EU28
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg<-general_settings(title="SSP2_IPSL-CM5A-LR_6p0_onlyEUR2p6_EURdiet")
@@ -370,10 +374,9 @@ cfg$gms$s15_exo_diet <- 1
 cfg$gms$c15_kcal_scen <- "healthy_BMI"
 cfg$gms$c15_EAT_scen <- "FLX"
 cfg$gms$scen_countries15  <- EU28
+cfg$gms$c55_scen_conf <- "SSP1" ### (SHOULD THIS BE INCLUDED TOO???)
+cfg$gms$scen_countries55  <- EU28
 start_run(cfg=cfg,codeCheck=codeCheck)
-
-
-
 
 ### Push for renewables:
 cfg<-general_settings(title="SSP2_IPSL-CM5A-LR_6p0_NoMit_EURwater")

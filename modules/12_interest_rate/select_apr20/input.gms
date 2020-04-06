@@ -7,6 +7,18 @@
 
 $setglobal c12_interest_rate  medium
 
+* Set-switch for countries affected by country-specific interest rate scenario
+* Default: all iso countries selected
+sets
+  select_countries12(iso) countries to be affected by chosen interest rate scenario / ABW,ZMB,ZWE /
+;
+
+table f12_interest_bound(t,bound12) Lower and higher bounds of interest rates (% per yr)
+$ondelim
+$include "./modules/12_interest_rate/input/f12_interest_rate_bound.cs3"
+$offdelim
+;
+
 table f12_interest(t_all,scen12)  Interest rate scenarios (% per yr)
 $ondelim
 $include "./modules/12_interest_rate/input/f12_interest_rate.cs3"

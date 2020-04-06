@@ -15,4 +15,9 @@ scalars
 parameters
  pm_interest(i)                      Current interest rate in each region (% per yr)
  p12_interest(t_all,i)               Interest rate in each region and timestep (% per yr)
+* country-specific region scenario switch
+ p12_country_dummy(iso)              Dummy parameter indicating whether country is affected by interest rate scenario (1)
+ p12_reg_shr(t_all,i)                Weighted share of region with regards to interest rate scenario of countries (1)
+ i12_interest_select(t_all,i)        Interest rate in each region and timestep for selected countries (% per yr)
+ i12_interest_noselect(t_all,i)      Interest rate in each region and timestep for nonselected countries (% per yr)
 ;
