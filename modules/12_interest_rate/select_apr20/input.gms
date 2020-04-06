@@ -6,6 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 $setglobal c12_interest_rate  medium
+$setglobal c12_interest_rate_noselect  medium
 
 * Set-switch for countries affected by country-specific interest rate scenario
 * Default: all iso countries selected
