@@ -198,7 +198,7 @@ calc_tperiods <- function(y) {
   return(as.magpie(t_periods))
 }
 
-### calc flow function
+### calc annual flow function
 calc_flows <- function(stock) {
   stock <- stock[,c(1,1:nyears(stock)),]
   y <- getYears(stock,as.integer = TRUE)
@@ -225,13 +225,13 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping, weight=NULL,
   stock           <- stock[,c(seq(1995,ly,5),rep(ly,length(year_extension))),]
   getYears(stock) <- c(seq(1995,ly,5), year_extension)
 
-  #the the years
+  #full years 
   tp <- getYears(stock, as.integer=TRUE)
 
   #select and filter countries that exist in the chosen policy mapping
   policy_countries <- intersect(policy$dummy,unique(pol_mapping))
-  policy <- policy[policy$dummy %in% policy_countries,]
-  # create key to distinguish different cases of baseyear, targetyear combinations
+
+  #create key to distinguish different cases of baseyear, targetyear combinations
   policy$key <- paste(policy$baseyear,policy$targetyear)
 
   #set stock to zero or Inf for countries without policies
@@ -240,7 +240,7 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping, weight=NULL,
     stock[!(sub("\\..*$","",getCells(stock)) %in% policy_countries),,] <- 0
     #calculate flows
     flow <- calc_flows(stock)
-    #account only for positive flows
+    #account only for positive flows, i.e. deforestation
     flow[flow < 0] <- 0
   }
 
@@ -250,7 +250,6 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping, weight=NULL,
   magpie_policy <- new.magpie(unique(pol_mapping),tp,NULL,0)
   keys <- unique(policy$key)
   for (i in keys) {
-    #cat(i,round(which(keys==i)/length(keys)*100),"%\n")
     #get baseyear and targetyear
     tmp <- as.integer(strsplit(i," ")[[1]])
     baseyear   <- tmp[1]
