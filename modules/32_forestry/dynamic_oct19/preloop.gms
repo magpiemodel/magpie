@@ -13,7 +13,7 @@ p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
 p32_aff_togo(t) = sum(j, smax(t2, p32_aff_pol(t2,j)) - p32_aff_pol(t,j));
 
 * Adjust the afforestation limit `s32_max_aff_area` upwards, if it is below the exogenous policy target. 
-p32_max_aff_area = max(s32_max_aff_area, sum(j, smax(t2, p32_aff_pol(t2,j))) );
+s32_max_aff_area = max(s32_max_aff_area, sum(j, smax(t2, p32_aff_pol(t2,j))) );
 
 p32_cdr_ac(t,j,ac) = 0;
 

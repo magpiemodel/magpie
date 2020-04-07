@@ -18,7 +18,7 @@
 
 q60_bioenergy(i2,kall) ..
       vm_dem_bioen(i2,kall) * fm_attributes("ge",kall) =g=
-      sum(ct,i60_1stgen_bioenergy_dem(ct,i2,kall) ) +
+      sum(ct, i60_1stgen_bioenergy_dem(ct,i2,kall)) +
       v60_2ndgen_bioenergy_dem_dedicated(i2,kall) +
       v60_2ndgen_bioenergy_dem_residues(i2,kall)
       ;

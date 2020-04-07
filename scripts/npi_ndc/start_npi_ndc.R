@@ -225,7 +225,7 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping, weight=NULL,
   stock           <- stock[,c(seq(1995,ly,5),rep(ly,length(year_extension))),]
   getYears(stock) <- c(seq(1995,ly,5), year_extension)
 
-  #full years 
+  #full years
   tp <- getYears(stock, as.integer=TRUE)
 
   #select and filter countries that exist in the chosen policy mapping

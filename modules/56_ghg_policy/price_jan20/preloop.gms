@@ -5,15 +5,37 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+***fix vm_btm_cell to zero for non-CO2 emissions from land-use change
+vm_btm_cell.fx(j,emis_source_cell,pollutants)$(not sameas(pollutants,"co2_c")) = 0;
+***fix vm_btm_cell to zero for CO2 emissions from ag. production (non land-use change)
+vm_btm_cell.fx(j,emis_source_reg,"co2_c") = 0;
+***fix vm_btm_cell to zero for CO2 emissions from beccs (not used)
+vm_btm_cell.fx(j,"beccs",pollutants) = 0;
+
+****** Region price share for ghg policy of selective countries:
+* Country switch to determine countries for which ghg policy shall be applied.
+* In the default case, the ghg policy affects all countries when activated.
+p56_country_dummy(iso) = 0;
+p56_country_dummy(policy_countries56) = 1;
+* Because MAgPIE is not run at country-level, but at region level, a region
+* share is calculated that translates the countries' influence to regional level.
+* Countries are weighted by their population size.
+p56_region_price_shr(t_all,i) = sum(i_to_iso(i,iso), p56_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
 
 ****select ghg prices
-$ifthen "%c56_pollutant_prices%" == "coupling" im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices_coupling(t_all,i,pollutants);
-$elseif "%c56_pollutant_prices%" == "emulator" im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices_emulator(t_all,i,pollutants);
-$else im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices%");
+$ifthen "%c56_pollutant_prices%" == "coupling"
+ im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices_coupling(t_all,i,pollutants);
+$elseif "%c56_pollutant_prices%" == "emulator"
+ im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices_emulator(t_all,i,pollutants);
+$else
+ im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices%") * p56_region_price_shr(t_all,i)
+ 																				 + f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices_noselect%") * (1-p56_region_price_shr(t_all,i));
 $endif
 
 ***save im_pollutant_prices to parameter
 p56_pollutant_prices_input(t_all,i,pollutants) = im_pollutant_prices(t_all,i,pollutants);
+
+
 
 ***limit CH4 and N2O GHG prices based on s56_limit_ch4_n2o_price
 *12/44 conversion from USD per tC to USD per tCO2
@@ -59,8 +81,8 @@ loop(t,
     repeat(
        s56_counter = s56_counter + 1;
        s56_offset = s56_timesteps-s56_counter;
-       im_pollutant_prices(t_all-s56_offset,i,"co2_c")$(m_year(t_all) = m_year(t)) = 
-       im_pollutant_prices(t-1,i,"co2_c") + 
+       im_pollutant_prices(t_all-s56_offset,i,"co2_c")$(m_year(t_all) = m_year(t)) =
+       im_pollutant_prices(t-1,i,"co2_c") +
        (im_pollutant_prices(t,i,"co2_c") - im_pollutant_prices(t-1,i,"co2_c"))*s56_counter/(s56_timesteps);
     until s56_counter = s56_timesteps-1);
   );
@@ -69,7 +91,7 @@ display p56_pollutant_prices_input;
 display im_pollutant_prices;
 *initialize age-class dependent C price with same C price for all age-classes
 p56_c_price_aff(t_all,i,ac) = im_pollutant_prices(t_all,i,"co2_c");
-*Shift C prices in age-classes for reflecting foresight. 
+*Shift C prices in age-classes for reflecting foresight.
 *e.g. ac5 in 2020 should have the C price of ac0 in 2025, and ac20 in 2020 equals to ac0 in 2040
 p56_c_price_aff(t_all,i,ac)$(ord(t_all)+ac.off<card(t_all)) = p56_c_price_aff(t_all+ac.off,i,"ac0");
 *limit foresight of C prices to X years; constant C price after X years.
