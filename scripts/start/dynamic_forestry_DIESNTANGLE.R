@@ -28,8 +28,8 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "BF08"
-cat(paste0("Forestry same as natveg. ZERO DIV BUGFIX FOR OFF REALIZATION. Manual copy paste from latest develop 3rd Apr 2020. Needed because carbonstock calculation throws warning."),file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+identifier_flag <- "DUMMY01" #"BF08"
+cat(paste0("Possible bugfix for carbonstock warning. CO2 prices in baseline runs bugfix included. Those are fixed to 0. Woodfuel demand 50% across the board. This is a dummy run to check if all systems are OK."),file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 for(ssp in c("SSP2")){
 
@@ -41,7 +41,7 @@ for(ssp in c("SSP2")){
 
       cfg$gms$timber <- timber_demand
 
-      for (co2_price_path in c("NPI","2deg")) { ## Add "2deg" here for CO2 price runs
+      for (co2_price_path in c("NPI")) { ## Add "2deg" here for CO2 price runs
 
         if (co2_price_path == "NPI") {
           cfg <- setScenario(cfg,c(ssp,"NPI"))
@@ -51,13 +51,13 @@ for(ssp in c("SSP2")){
           co2_price_path_flag = "Policy"
         }
 
-        for(emis_policy in c("redd+_nosoil","ssp_nosoil")){ ## Add "ssp_nosoil" for policy penalizing only natveg emissions
+        for(emis_policy in c("redd+_nosoil")){ ## Add "ssp_nosoil" for policy penalizing only natveg emissions
 
           cfg$gms$c56_emis_policy <- emis_policy
 
-          for(plantation_switch in c("plantations","natveg")){
+          for(plantation_switch in c(1)){
 
-            cfg$gms$c52_plantation_gc_switch <- plantation_switch
+            cfg$gms$s32_timber_plantation <- plantation_switch
 
             cfg$gms$c56_pollutant_prices_select <- "coupling"
             cfg$gms$c60_2ndgen_biodem_select <- "coupling"
@@ -70,8 +70,11 @@ for(ssp in c("SSP2")){
             if(timber_demand == "biomass_mar20") demand_flag = ""
             if(timber_demand == "off") demand_flag = "tOFF"
 
-            if(emis_policy == "redd+_nosoil") pol_flag = "REDD"
             if(emis_policy == "ssp_nosoil") pol_flag = ""
+            if(emis_policy == "redd+_nosoil") pol_flag = "REDD"
+
+            if(plantation_switch == 1) plantation_flag = ""
+            if(plantation_switch == 0) plantation_flag = "pNatVeg"
 
             cfg$title <- paste0(identifier_flag,"_",plantation_switch,"_",ssp,"_",demand_flag,"_",co2_price_path_flag,"_",pol_flag)
 

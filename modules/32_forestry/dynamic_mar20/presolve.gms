@@ -62,7 +62,7 @@ p32_carbon_density_ac(t,j,"ndc",ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_po
 
 *' CDR from afforestation for each age-class, depending on planning horizon.
 p32_cdr_ac(t,j,ac)$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planing_horizon/5)
-= pm_carbon_density_ac(t,j,ac,"vegc") - pm_carbon_density_ac(t,j,ac-1,"vegc");
+= p32_carbon_density_ac(t,j,"aff",ac,"vegc") - p32_carbon_density_ac(t,j,"aff",ac-1,"vegc");
 
 *' Regrowth of natural vegetation (natural succession) is modelled by shifting
 *' age-classes according to time step length. For first year of simulation, the
