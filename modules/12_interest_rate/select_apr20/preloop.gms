@@ -31,7 +31,7 @@ p12_reg_shr(t_all,i) = sum(i_to_iso(i,iso), p12_country_dummy(iso) * im_pop_iso(
 * Interest rate in countries selected in select_countries12
 $ifthen "%c12_interest_rate" == "coupling"
   i12_interest_select(t_all,i) = f12_interest_coupling(t_all);
-$elseif "%c12_interest_rate" == "gdp_dependent"
+$elseif "%c12_interest_rate" == "gdpdependent"
   i12_interest_select(t_all,i) = s12_slope_a * im_development_state(t_all,i) + s12_intercept_b;
 $elseif "%c12_interest_rate%" == "mixed"
   i12_interest_select(t_all,i) = sum(t_to_i_to_dev("y1995",i,dev), sum(scen12_to_dev(scen12,dev), f12_interest(t_all,scen12)));
@@ -42,7 +42,7 @@ $endif
 * Interest rate in countries not selected in select_countries12
 $ifthen "%c12_interest_rate_noselect" == "coupling"
   i12_interest_noselect(t_all,i) = f12_interest_coupling(t_all);
-$elseif "%c12_interest_rate_noselect" == "gdp_dependent"
+$elseif "%c12_interest_rate_noselect" == "gdpdependent"
   i12_interest_noselect(t_all,i) = s12_slope_a * im_development_state(t_all,i) + s12_intercept_b;
 $elseif "%c12_interest_rate_noselect%" == "mixed"
   i12_interest_noselect(t_all,i) = sum(t_to_i_to_dev("y1995",i,dev), sum(scen12_to_dev(scen12,dev), f12_interest(t_all,scen12)));
