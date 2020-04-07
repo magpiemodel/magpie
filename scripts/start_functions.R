@@ -394,7 +394,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
       load <- lucode::getClusterLoad()
       if(is.null(load)) {
         cfg$qos <- "standby"
-      } else if(all(load) > 80) {
+      } else if(all(load > 80)) {
         cfg$qos <- "priority"
       } else if(load["priority"] < load["standard"]) {
         cfg$qos <- "standby"
@@ -404,7 +404,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
     }
     submitfile <- paste0("submit_",cfg$qos,".sh")
     if(!file.exists(submitfile)) stop("Submit script ",submitfile," not found!")
-    system(paste("sbatch",submitfile)
+    system(paste("sbatch",submitfile))
     cat("Run submitted with ",submitfile,"!\n",sep="")
   } else {
     system("Rscript submit.R", wait=cfg$sequential)
