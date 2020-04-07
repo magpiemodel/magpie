@@ -146,25 +146,9 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* Used data set: magpie4.2_default_apr20.tgz
 * md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/intern
-* 
-* Used data set: rev4.42_690d3718e151be1b450b394c1064b1c5_magpie.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/intern
-* 
-* Used data set: rev4.42_690d3718e151be1b450b394c1064b1c5_validation.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/intern
-* 
-* Used data set: calibration_H12_c200_26Feb20.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/intern
-* 
-* Used data set: additional_data_rev3.78.tgz
-* md5sum: f68c1ba83f9d840710e4cd07c8ffb02f
-* Repository: /p/projects/landuse/data/input/archive
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -197,7 +181,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Wed Mar 25 14:47:04 2020
+* Last modification (input data): Fri Apr  7 13:37:42 2020
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
