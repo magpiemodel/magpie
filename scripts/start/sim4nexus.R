@@ -116,9 +116,9 @@ cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
 cfg<-lucode::setScenario(cfg,"NDC")
 cfg$input <- buildInputVector(climatescen_name="rcp2p6",regionmapping = "coacch",calibration=calib)
-cfg$gms$c56_pollutant_prices_select <- "R2M41-SSP2-Budg1300"
-cfg$gms$c60_2ndgen_biodem_select    <- "R2M41-SSP2-Budg1300"
-cfg$gms$c50_scen_neff_select <- "neff65_70_starty2010"
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300"
+cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg1300"
+cfg$gms$c50_scen_neff <- "neff65_70_starty2010"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 # Third "baseline/reference": GHG policy for EU28 only:
@@ -138,10 +138,10 @@ cfg$gms$ghg_policy_countries  <- EU28
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300"
 cfg$gms$c56_pollutant_prices_noselect <- "R2M41-SSP2-NPi"
 cfg$gms$scen_countries60  <- EU28
-cfg$gms$c60_2ndgen_biodem_select <- "R2M41-SSP2-Budg1300"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg1300"
 cfg$gms$c60_2ndgen_biodem_noselect <- "R2M41-SSP2-NPi"
 cfg$gms$cropneff_countries  <- EU28
-cfg$gms$c50_scen_neff_select <- "neff65_70_starty2010"
+cfg$gms$c50_scen_neff <- "neff65_70_starty2010"
 cfg$gms$c50_scen_neff_noselect <- "neff60_60_starty2010"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
@@ -205,7 +205,7 @@ cfg$gms$s15_waste_scen <- 1.15
 cfg$gms$s15_exo_diet <- 1
 cfg$gms$c15_kcal_scen <- "healthy_BMI"
 cfg$gms$c15_EAT_scen <- "FLX"
-cfg$gms$c50_scen_neff_select <- "neff70_75_starty2010"
+cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
 cfg$gms$c12_interest_rate <- "low"
 cfg$gms$c55_scen_conf <- "SSP1"
 start_run(cfg=cfg,codeCheck=codeCheck)
@@ -228,10 +228,10 @@ cfg$gms$c35_protect_scenario <- "BH"
 cfg$gms$c42_env_flow_policy <- "on"
 cfg$gms$s42_irrig_eff_scenario <- 1
 cfg$gms$s42_irrigation_efficiency <- 0.76
-cfg$gms$c50_scen_neff_select <- "neff75_80_starty2010"
+cfg$gms$c50_scen_neff <- "neff75_80_starty2010"
 cfg$gms$c55_scen_conf <- "SSP1"
-cfg$gms$c56_pollutant_prices_select <- "R2M41-SSP2-Budg1300"
-cfg$gms$c60_2ndgen_biodem_select    <- "R2M41-SSP2-Budg1300"
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300"
+cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg1300"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 
@@ -269,7 +269,7 @@ cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300"
 cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg1300"
 cfg$gms$c50_scen_neff_noselect <- "neff65_70_starty2010"
 # EUR specific
-cfg$gms$c50_scen_neff_select <- "neff70_75_starty2010"
+cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
 cfg$gms$cropneff_countries  <- EU28
 cfg$gms$gdp_countries12  <- All_minus_EU28
 cfg$gms$s12_alt_interest <- 0.02
@@ -287,11 +287,11 @@ cfg$gms$ghg_policy_countries  <- EU28
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300"
 cfg$gms$c56_pollutant_prices_noselect <- "R2M41-SSP2-NPi"
 cfg$gms$scen_countries60  <- EU28
-cfg$gms$c60_2ndgen_biodem_select <- "R2M41-SSP2-Budg1300"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg1300"
 cfg$gms$c60_2ndgen_biodem_noselect <- "R2M41-SSP2-NPi"
 cfg$gms$c50_scen_neff_noselect <- "neff60_60_starty2010"
 # EUR specific
-cfg$gms$c50_scen_neff_select <- "neff70_75_starty2010"
+cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
 cfg$gms$cropneff_countries  <- EU28
 cfg$gms$gdp_countries12  <- All_minus_EU28
 cfg$gms$s12_alt_interest <- 0.02
@@ -357,10 +357,10 @@ cfg$gms$ghg_policy_countries  <- EU28
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300"
 cfg$gms$c56_pollutant_prices_noselect <- "R2M41-SSP2-NPi"
 cfg$gms$scen_countries60  <- EU28
-cfg$gms$c60_2ndgen_biodem_select <- "R2M41-SSP2-Budg1300"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg1300"
 cfg$gms$c60_2ndgen_biodem_noselect <- "R2M41-SSP2-NPi"
 cfg$gms$cropneff_countries  <- EU28
-cfg$gms$c50_scen_neff_select <- "neff65_70_starty2010"
+cfg$gms$c50_scen_neff <- "neff65_70_starty2010"
 cfg$gms$c50_scen_neff_noselect <- "neff60_60_starty2010"
 # EUR specific
 #cfg$gms$c15_food_scenario <- "SSP1" #(THIS AS  WELLL??????)
@@ -416,10 +416,10 @@ cfg$gms$ghg_policy_countries  <- EU28
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300"
 cfg$gms$c56_pollutant_prices_noselect <- "R2M41-SSP2-NPi"
 cfg$gms$scen_countries60  <- EU28
-cfg$gms$c60_2ndgen_biodem_select <- "R2M41-SSP2-Budg1300"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg1300"
 cfg$gms$c60_2ndgen_biodem_noselect <- "R2M41-SSP2-NPi"
 cfg$gms$cropneff_countries  <- EU28
-cfg$gms$c50_scen_neff_select <- "neff65_70_starty2010"
+cfg$gms$c50_scen_neff <- "neff65_70_starty2010"
 cfg$gms$c50_scen_neff_noselect <- "neff60_60_starty2010"
 # EUR specific
 cfg$gms$c42_env_flow_policy <- "on"

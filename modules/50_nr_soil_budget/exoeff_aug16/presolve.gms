@@ -25,9 +25,9 @@ if(m_year(t) <= sm_fix_SSP2,
  v50_nr_eff_pasture.fx(i) = f50_nue_pasture(t,i,"constant") * p50_pastneff_region_shr(t,i)
                             + f50_nue_pasture(t,i,"constant") * (1-p50_pastneff_region_shr(t,i));
 else
- v50_nr_eff.fx(i) = f50_snupe(t,i,"%c50_scen_neff_select%") * p50_cropneff_region_shr(t,i)
+ v50_nr_eff.fx(i) = f50_snupe(t,i,"%c50_scen_neff%") * p50_cropneff_region_shr(t,i)
                     + f50_snupe(t,i,"%c50_scen_neff_noselect%") * (1-p50_cropneff_region_shr(t,i));
- v50_nr_eff_pasture.fx(i) = f50_nue_pasture(t,i,"%c50_scen_neff_pasture_select%") * p50_pastneff_region_shr(t,i)
+ v50_nr_eff_pasture.fx(i) = f50_nue_pasture(t,i,"%c50_scen_neff_pasture%") * p50_pastneff_region_shr(t,i)
                             + f50_nue_pasture(t,i,"%c50_scen_neff_pasture_noselect%") * (1-p50_pastneff_region_shr(t,i));
 );
 
