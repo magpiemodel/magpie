@@ -35,8 +35,8 @@ equations
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_dem_bioen(t,i,kall,type)                        Regional bioenergy demand  (mio. tDM per yr)
- ov60_2ndgen_bioenergy_dem_dedicated(t,i,kall,type) bioenergy demand which can come from different regions (mio. GJ per yr)
- ov60_2ndgen_bioenergy_dem_residues(t,i,kall,type)  bioenergy demand which can come from different product types (mio. GJ per yr)
+ ov60_2ndgen_bioenergy_dem_dedicated(t,i,kall,type) Bioenergy demand which can come from different regions (mio. GJ per yr)
+ ov60_2ndgen_bioenergy_dem_residues(t,i,kall,type)  Bioenergy demand which can come from different product types (mio. GJ per yr)
  ov_bioenergy_utility(t,i,type)                     Utility as negative costs for producing bioenergy (USD05MER per yr)
  oq60_bioenergy(t,i,kall,type)                      Global total bioenergy demand (mio. GJ per yr)
  oq60_bioenergy_glo(t,type)                         Global 2nd generation dedicated bioenergy demand (mio. GJ per yr)
