@@ -16,6 +16,8 @@ scalars
 
 scalars
         s32_max_aff_area         maximum total global afforestation in Mha    / Inf /
+      	s32_aff_plantation switch for using natveg (0) or plantation (1) growth curves for afforestation / 0 /
+        s32_timber_plantation switch for using natveg (0) or plantation (1) growth curves for plantations / 1 /
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)

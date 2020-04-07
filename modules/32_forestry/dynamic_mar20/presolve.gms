@@ -22,17 +22,43 @@ ac_additional(ac) = yes$(ord(ac) <= (m_yeardiff(t)/5));
   p32_aff_pol_timestep("y1995",j) = 0;
   p32_aff_pol_timestep(t,j)$(ord(t)>1) = p32_aff_pol(t,j) - p32_aff_pol(t-1,j);
 
+if(m_year(t) <= sm_fix_SSP2,
+ p32_max_aff_area = Inf;
+else
+ p32_max_aff_area = s32_max_aff_area;
+);
 ** END ndc **
 
 *' @code
 *' Certain areas (e.g. the boreal zone) are excluded from endogenous afforestation.
 ** DON'T USE TYPE32 SET HERE
-v32_land.lo(j,"aff","ac0") = 0;
-v32_land.up(j,"aff","ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
-
+if(m_year(t) <= sm_fix_SSP2,
+	v32_land.fx(j,"aff","ac0") = 0;
+else
+	v32_land.lo(j,"aff","ac0") = 0;
+	v32_land.up(j,"aff","ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
+);
 *' No afforestation is allowed if carbon density <= 20 tc/ha
 v32_land.fx(j,"aff","ac0")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
-m_boundfix(v32_land,(j,"aff","ac0"),l,10e-5);
+
+*' Afforestation switch.
+*' 0 = Use natveg carbon densities for aff
+*' 1 = Use plantation carbon densities for aff
+if(s32_aff_plantation = 0,
+ p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
+elseif s32_aff_plantation = 1,
+ p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_ac_forestry(t,j,ac,ag_pools);
+);
+*' Timber plantations switch.
+*' 0 = Use natveg carbon densities for timber plantations
+*' 1 = Use plantation carbon densities for timber plantations
+if(s32_timber_plantation = 0,
+ p32_carbon_density_ac(t,j,"plant",ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
+elseif s32_timber_plantation = 1,
+ p32_carbon_density_ac(t,j,"plant",ac,ag_pools) = pm_carbon_density_ac_forestry(t,j,ac,ag_pools);
+);
+*' NDC carbon densities are natveg carbon densities
+p32_carbon_density_ac(t,j,"ndc",ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
 
 *' CDR from afforestation for each age-class, depending on planning horizon.
 p32_cdr_ac(t,j,ac)$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planing_horizon/5)
@@ -85,10 +111,10 @@ v32_land.up(j,"aff",ac_sub)$(ord(ac_sub) > s32_planing_horizon/5) = pc32_land(j,
 ** Setting ac dependent carbon.
 ** First, plantations carbon density is set to natveg carbon density
 ** Later the vegc carbon density is overwritten by vegc carbon density of plantations.
-p32_carbon_density_ac(t,j,type32,ac,ag_pools)  = pm_carbon_density_ac(t,j,ac,ag_pools);
+*p32_carbon_density_ac(t,j,type32,ac,ag_pools)  = pm_carbon_density_ac(t,j,ac,ag_pools);
 
 ** Plantation vegc is different
-p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac_forestry(t,j,ac,"vegc");
+*p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac_forestry(t,j,ac,"vegc");
 
 ** Future demand relevant in current time step depending on rotation length
 ** Card is used here to exclude y1965 to y1995 when calculating rotation length calculations for past

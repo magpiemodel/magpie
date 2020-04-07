@@ -28,5 +28,5 @@ $offdelim
 /;
 
 f40_transport_costs("pasture") = s40_pasture_transport_costs;
-f40_transport_costs("wood") = f40_transport_costs("others");
+f40_transport_costs("wood") = f40_transport_costs("betr");
 f40_transport_costs("woodfuel") = f40_transport_costs("betr");
