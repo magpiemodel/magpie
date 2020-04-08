@@ -6,16 +6,21 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
+
 if(m_year(t) <= sm_fix_SSP2,
- i15_dem_intercept(regr15)   = f15_demand_paras(regr15,"SSP2","intercept");
- i15_dem_saturation(regr15)  = f15_demand_paras(regr15,"SSP2","saturation");
- i15_dem_halfsat(regr15)     = f15_demand_paras(regr15,"SSP2","halfsaturation");
- i15_dem_nonsat(regr15)      = f15_demand_paras(regr15,"SSP2","non_saturation");
-else 
- i15_dem_intercept(regr15)   = f15_demand_paras(regr15,"%c15_food_scenario%","intercept");
- i15_dem_saturation(regr15)  = f15_demand_paras(regr15,"%c15_food_scenario%","saturation");
- i15_dem_halfsat(regr15)     = f15_demand_paras(regr15,"%c15_food_scenario%","halfsaturation");
- i15_dem_nonsat(regr15)      = f15_demand_paras(regr15,"%c15_food_scenario%","non_saturation");
+ i15_dem_intercept(iso,regr15)   = f15_demand_paras(regr15,"SSP2","intercept");
+ i15_dem_saturation(iso,regr15)  = f15_demand_paras(regr15,"SSP2","saturation");
+ i15_dem_halfsat(iso,regr15)     = f15_demand_paras(regr15,"SSP2","halfsaturation");
+ i15_dem_nonsat(iso,regr15)      = f15_demand_paras(regr15,"SSP2","non_saturation");
+else
+ i15_dem_intercept(iso,regr15)   = f15_demand_paras(regr15,"%c15_food_scenario%","intercept")*p15_country_dummy(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","intercept")*(1-p15_country_dummy(iso));
+ i15_dem_saturation(iso,regr15)  = f15_demand_paras(regr15,"%c15_food_scenario%","saturation")*p15_country_dummy(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","saturation")*(1-p15_country_dummy(iso));
+ i15_dem_halfsat(iso,regr15)     = f15_demand_paras(regr15,"%c15_food_scenario%","halfsaturation")*p15_country_dummy(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","halfsaturation")*(1-p15_country_dummy(iso));
+ i15_dem_nonsat(iso,regr15)      = f15_demand_paras(regr15,"%c15_food_scenario%","non_saturation")*p15_country_dummy(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","non_saturation")*(1-p15_country_dummy(iso));
 );
 
 option nlp = conopt4

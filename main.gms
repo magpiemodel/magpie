@@ -107,7 +107,7 @@ $title magpie
 *'  * ?m_ module-relevant object - This object is used by at least one module and the core code. Changes related to this object have to be performed carefully.
 *'  * ?00_ (a 2-digit number) module-only object This 2-digit number defines the module the object belongs to. The number is used here to make sure that different modules cannot have the same object
 *'
-*' Sets 
+*' Sets
 *'
 *' Sets are treated slightly different: Instead of adding a prefix sets should get a 2-digit number suffix giving the number
 *' of the module in which the set is exclusively used. If the set is used in more than one module no suffix should be given.
@@ -131,60 +131,60 @@ $title magpie
 *'  * Use units that lead to variable values in the range of 0.01 to 100. Keep the option of scaling in mind.
 *'  * Use only MAgPIE standard units in GAMS code 10^6, 10^6 ha, 10^6 tDM, 10^6 PJ, 10^6 USD, 10^6 m3
 *'  * Make sure that your inputs already have the right unit
-*' 
+*'
 *' Input files
-*' 
+*'
 *'  * Input file names must be unique, because input files will be downloaded from a data repository and extracted to the same folder so that different files with the same file name would overwrite each other.
 *'  * Do not add input files to the git repository. Input files should be copied instead to one of the existing data repositories from which the data is downloaded by the model.
-*' 
+*'
 *' Postprocessing
-*' 
+*'
 *'  * Processing of model outputs is managed in the corresponding magpie R package (e.g. package "magpie4" for MAgPIE version 4.x).
 *'  * If you change something in the GAMS code make sure that all function in the corresponding magpie R package still work and adapt them if necessary to the new model structure.
 *'  * When performing modifications in a magpie R package make sure that these changes are downwards compatible.
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
+*
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: 94c214b0a7b46f403dd0aab57b7e476c
 * Repository: http://rse.pik-potsdam.de/data/magpie/intern
-* 
+*
 * Used data set: rev4.42_690d3718e151be1b450b394c1064b1c5_magpie.tgz
 * md5sum: 531f893581b6e3ea3ca871d76e0dd8a3
 * Repository: http://rse.pik-potsdam.de/data/magpie/intern
-* 
+*
 * Used data set: rev4.42_690d3718e151be1b450b394c1064b1c5_validation.tgz
 * md5sum: ad8da81da4ddbb3cf4b341b40ceec3fb
 * Repository: http://rse.pik-potsdam.de/data/magpie/intern
-* 
+*
 * Used data set: calibration_H12_c200_26Feb20.tgz
 * md5sum: 0fc75955deb5916d4ac078e8d817feda
 * Repository: http://rse.pik-potsdam.de/data/magpie/intern
-* 
+*
 * Used data set: additional_data_rev3.77.tgz
 * md5sum: 28184d92028972c171145399ab21fdca
 * Repository: http://rse.pik-potsdam.de/data/magpie/intern
-* 
+*
 * Low resolution: c200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    28   24   10    7    3   53   17    8   22    7   11   10
-* 
+*
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-* 
+*
 * Regions data revision: 4.42
-* 
+*
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
 * * Additional input folder: /p/projects/landuse/data/input/other/rev42
 * * Revision: 42
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-* 
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
@@ -194,11 +194,11 @@ $title magpie
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = cfg$spamfile, debug = FALSE, seed = cfg$seed)
-* 
-* 
-* 
+*
+*
+*
 * Last modification (input data): Wed Mar 04 13:53:55 2020
-* 
+*
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
@@ -234,7 +234,7 @@ scalars
 $setglobal drivers  aug17
 $setglobal land  landmatrix_dec18
 $setglobal costs  default
-$setglobal interest_rate  reg_feb18
+$setglobal interest_rate  select_apr20
 $setglobal tc  endo_jun18
 $setglobal yields  dynamic_aug18
 
