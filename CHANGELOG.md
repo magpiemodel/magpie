@@ -5,17 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [4.2.0] - 2020-04-07
 
 ### added
 
 
 ### changed
  - **modules** modular structure updated from version 1 to version 2
+ - **50_nr_soil_budget** atmospheric deposition is now estimated on the cluster-level instead of the region level to improve spatial patterns.
 
 
- ### fixed
+### fixed
 
+
+## [4.1.1] - 2020-03-09
+
+This version provides the model version used for the publication starved, stuffed and wasteful. It provides a few technical updates compared to the 4.1 release, which include
+
+### added
+- **scripts** a startscript that allows the exchange of model parameters as a sensitivity analysis
+ 
+### changed
+- **core** allow for flexible calibration period of the model, which allows for uncalibrated runs of the past for validation purposes
+- **15_food** Parameters for bodyheight regressions were included explicitly as input parameters
+- **config** updated input data of the drivers and food demand regressions
+
+### fixed
+- **15_food** Precision of iteration convergence criterium for magpie-demandmodel-iteration is calculated more precisely, avoiding unnecessary iterations.
 
 
 ## [4.1.0] - 2019-05-02
@@ -54,7 +70,9 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.1.0...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.2.0...develop
+[4.2.0]: https://github.com/magpiemodel/magpie/compare/v4.1.1...v4.2.0
+[4.1.1]: https://github.com/magpiemodel/magpie/compare/v4.1.0...v4.1.1
 [4.1.0]: https://github.com/magpiemodel/magpie/compare/v4.0.1...v4.1.0
 [4.0.1]: https://github.com/magpiemodel/magpie/compare/v4.0...v4.0.1
 [4.0.0]: https://github.com/magpiemodel/magpie/releases/tag/v4.0
