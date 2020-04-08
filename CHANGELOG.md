@@ -8,18 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### added
- - **15_food** regional scenario switch that can be switched on via scen_countries15 country switch that includes countries that are then affected by exogenous diet and food waste scenarios and c15_food_scenario
- - **42_water_demand** regional scenario switch that can be switched on via EFP_countries country switch that determines countries for which EFP policy (c42_env_flow_policy) will be in place
- - **50_nr_soil_budget** regional scenario switches that can be switched on via cropneff_countries and pastneff_countries country switches that determines countries for which respective scenario will be in place
- - **55_awms** regional scenario switch that can be switched on via scen_countries55 and that determines countries for which c55_scen_conf scenario will be in place
- - **56_ghg_policy** regional scenario switch that can be switched on via policy_countries56 and that determines countries for which ghg policy will be in place
- - **60_bioenergy** regional scenario switch that can be switched on via scen_countries60 and that determines countries for which bioenergy scenario will be in place
-
+ - **modules** added option of regional scenario switches in modules 12_interest_rate, 15_food, 42_water_demand, 50_nr_soil_budget, 55_awms, 56_ghg_policy, 60_bioenergy
 
 ### changed
  - **modules** modular structure updated from version 1 to version 2
  - **12_interest_rate** merged the two realizations (glo_jan16 and reg_feb18) into one (select_apr20) with same functionality and add on of option to choose different interest rate scenarios for different regions selected via country switch select_countries12
-
 
 ### fixed
 
