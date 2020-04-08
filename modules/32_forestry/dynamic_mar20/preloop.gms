@@ -49,7 +49,7 @@ p32_rotation_cellular_estb(t_all,j) = ceil(p32_rot_length_ac_eqivalent(t_all,j))
 p32_rotation_cellular_harvesting(t_all,j) = p32_rotation_cellular_estb(t_all,j);
 
 ** RL Extension
-p32_rotation_cellular_estb(t_all,j) = p32_rotation_cellular_estb(t_all,j) + c32_rotation_extension ;
+p32_rotation_cellular_estb(t_all,j) = p32_rotation_cellular_estb(t_all,j) * c32_rotation_extension ;
 
 loop(t_all,
   loop(j,
