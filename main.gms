@@ -181,7 +181,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Fri Apr  7 13:37:42 2020
+* Last modification (input data): Wed Apr  8 18:14:05 2020
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -206,6 +206,7 @@ $offlisting
 *                    Key parameters during model runs
 
 $setglobal c_timesteps  coup2100
+$setglobal c_past  till_2010
 $setglobal c_title  SSP2_rev42_rev4p37
 
 scalars
