@@ -72,7 +72,7 @@ for(ssp in c("SSP2")){
           if(plantation_switch == 1) plantation_flag = ""
           if(plantation_switch == 0) plantation_flag = "pNatVeg"
 
-          cfg$title <- paste0(identifier_flag,"_",plantation_switch,"_",ssp,"_",demand_flag,"_",co2_price_path_flag,"_",pol_flag)
+          cfg$title <- paste0(identifier_flag,"_",plantation_flag,"_",ssp,"_",demand_flag,"_",co2_price_path_flag,"_",pol_flag)
 
           cfg$output <- c("rds_report")
 
@@ -149,7 +149,7 @@ for(ssp in c("SSP2")){
 
             rot_flag <- paste0("E",c32_rotation_extension,"pc")
 
-            cfg$title <- paste0(identifier_flag,"_",plantation_switch,"_",ssp,"_",demand_flag,"_",co2_price_path_flag,"_",pol_flag,"_",rot_flag)
+            cfg$title <- paste0(identifier_flag,"_",plantation_flag,"_",ssp,"_",demand_flag,"_",co2_price_path_flag,"_",pol_flag,"_",rot_flag)
 
             cfg$output <- c("rds_report")
 
