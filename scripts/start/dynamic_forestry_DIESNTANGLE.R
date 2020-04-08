@@ -130,8 +130,8 @@ for(ssp in c("SSP2")){
 
             cfg$gms$s32_timber_plantation <- plantation_switch
 
-            cfg$gms$c56_pollutant_prices_select <- "coupling"
-            cfg$gms$c60_2ndgen_biodem_select <- "coupling"
+            cfg$gms$c56_pollutant_prices <- "coupling"
+            cfg$gms$c60_2ndgen_biodem <- "coupling"
 
             file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
             file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
