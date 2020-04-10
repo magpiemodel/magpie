@@ -6,10 +6,18 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 $setglobal c12_interest_rate  gdp_dependent
-$setglobal c12_interest_rate_noselect  gdp_dependent
 
-* Set-switch for countries affected by country-specific interest rate scenario
-* Default: all iso countries selected
+scalars
+  s12_high_bound                  Interest rate in high income countries  / 0.02 /
+  s12_low_bound                   Interest rate in low income countries   / 0.02 /
+  s12_hist_high_bound             Historic interest rate in high income countries / 0.02 /
+  s12_hist_low_bound              Historic interest rate in low income countries  / 0.02 /
+  s12_high_bound2                 Interest rate in high income countries for nonselected countries only active when regional switch activated / 0.02 /
+  s12_low_bound2                  Interest rate in low income countries for nonselected countries only active when regional switch activated  / 0.02 /
+  s12_hist_high_bound2            Historic interest rate in high income countries for nonselected countries only active when regional switch activated / 0.02 /
+  s12_hist_low_bound2             Historic interest rate in low income countries for nonselected countries only active when regional switch activated  / 0.02 /
+;
+
 sets
   select_countries12(iso) countries to be affected by chosen interest rate scenario / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
                           ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
@@ -36,18 +44,6 @@ sets
                           TKL,TKM,TLS,TON,TTO,TUN,TUR,TUV,TWN,TZA,
                           UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
                           VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
-;
-
-table f12_interest_bound(t,bound12) Lower and higher bounds of interest rates (% per yr)
-$ondelim
-$include "./modules/12_interest_rate/input/f12_interest_rate_bound.cs3"
-$offdelim
-;
-
-table f12_interest(t_all,scen12)  Interest rate scenarios (% per yr)
-$ondelim
-$include "./modules/12_interest_rate/input/f12_interest_rate.cs3"
-$offdelim
 ;
 
 $if "%c12_interest_rate%" == "coupling" parameter f12_interest_coupling(t_all) Interest rate (% per yr)

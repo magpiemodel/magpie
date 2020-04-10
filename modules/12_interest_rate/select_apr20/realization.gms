@@ -5,18 +5,18 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description The regglo_apr20 realization contains different interest rate
-*' scenarios. In the default setting, the interest rate depends on the development
-*' state `im_development_state`, which is calculated based on GDP per capita.
-*' Thus, interest rates are regionally specific and dynamic over time.
-*' Alternatively, global interest rate scenarios can be selected, in which
-*' interest rates are identical in all regions.
-*' The initial global interest rate is 7% (in 1995) for all scenarios defined in `scen12`.
-*' It undergoes a transition towards 4%, 7% and 10% until 2030 for the low-, medium-
-*' and high- interest rate scenarios, respectively.
+*' @description The select_apr20 realization allows to flexibly choose regional
+*' or global interest rates. In the default setting, the interest rate depends
+*' on the development state `im_development_state`, which is calculated based
+*' on GDP per capita. Thus, interest rates are regionally specific and dynamic
+*' over time.
+*' Alternative interest rates can be selected via the interest rate coefficients
+*' (`s12_high_bound`, `s12_low_bound`, `s12_hist_high_bound`, `s12_hist_low_bound`).
+*' The future interest rate policy fades in starting from 2025 until it is fully
+*' in effect by 2050.
+*' It is also possible to choose a global interest rate.
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/12_interest_rate/select_apr20/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/12_interest_rate/select_apr20/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/12_interest_rate/select_apr20/input.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/12_interest_rate/select_apr20/preloop.gms"
