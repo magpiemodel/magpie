@@ -7,12 +7,12 @@
 
 table f41_c_irrig(t_all,i) Irrigation investment costs (USD04MER per ha)
 $ondelim
-$include "./modules/41_area_equipped_for_irrigation/endo_apr13/input/f41_c_irrig.csv"
+$include "./modules/41_area_equipped_for_irrigation/endo_apr13_woa/input/f41_c_irrig.csv"
 $offdelim
 ;
 
 parameters
-f41_irrig(j) Available area equipped for irrigation [AVL] (mio. ha) 
+f41_irrig(j) Available area equipped for irrigation [AVL] (mio. ha)
 /
 $ondelim
 $include "./modules/41_area_equipped_for_irrigation/input/avl_irrig.cs2"
