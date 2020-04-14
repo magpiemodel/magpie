@@ -28,7 +28,7 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "BF14"
+identifier_flag <- "BF15"
 cat(paste0("5 year runs. Fixed harvest rule update via loop. Need to discuss with Florian if this is okay. Added additional switch to select plantation yield via growing stock calculation. Growing stock is always divided by 5 because if not we see huge drop in 10 year steps. Ask florian if its ok. New flags added to make tests where plantations are treated as natveg. Hotelling rule input file will also be used to make co2 price runs in policy case. CO2 prices in baseline runs bugfix included. Those are fixed to 0. Woodfuel demand 50% across the board. "), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 for(ssp in c("SSP2")){
@@ -47,7 +47,7 @@ for(ssp in c("SSP2")){
         co2_price_path_flag = "Policy"
       } else if (co2_price_path == "Hotelling"){
         cfg <- setScenario(cfg,c(ssp,"NDC"))
-        co2_price_path_flag = "PolicyHotelling"
+        co2_price_path_flag = "PolicyH"
       }
 
       for(emis_policy in c("redd+_nosoil")){ ## Add "ssp_nosoil" for policy penalizing only natveg emissions
