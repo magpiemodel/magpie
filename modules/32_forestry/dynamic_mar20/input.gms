@@ -4,6 +4,7 @@ $setglobal c32_aff_policy  npi
 $setglobal c32_rot_length  rlGTM
 $setglobal c32_rot_length_estb  rlGTM
 $setglobal c32_bef  ipccBEF
+$setglobal c32_timber_plantations  plantations
 
 scalars
   c32_reESTBcost Reestablishment cost in USD per ha / 2000 /

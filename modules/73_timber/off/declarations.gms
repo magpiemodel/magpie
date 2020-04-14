@@ -26,10 +26,10 @@ p73_demand_adjustor(t,i,kforestry)                                          Timb
 positive variables
 v73_prod_heaven_timber(j,kforestry)                                    Production of woody biomass from heaven (mio. tDM per yr)
 vm_cost_timber(i)				Actual cost of harvesting timber from forests (mio. USD per yr)
-  vm_hvarea_secdforest(j,ac_sub)      Harvested area of secondary forest (mio. ha)
-  v73_hvarea_other(j,ac_sub)           Harvested area of other land (mio. ha)
-  vm_hvarea_primforest(j)             Harvested area of primary forest (mio. ha)
- vm_hvarea_forestry(j,ac_sub)             Area harvested for timber production (mio. ha)
+vm_hvarea_secdforest(j,ac_sub)      Harvested area of secondary forest (mio. ha)
+v73_hvarea_other(j,ac_sub)           Harvested area of other land (mio. ha)
+vm_hvarea_primforest(j)             Harvested area of primary forest (mio. ha)
+vm_hvarea_forestry(j,ac_sub)             Area harvested for timber production (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

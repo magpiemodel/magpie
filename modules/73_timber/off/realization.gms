@@ -13,6 +13,7 @@
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "declarations" $include "./modules/73_timber/off/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/73_timber/off/input.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/73_timber/off/preloop.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/73_timber/off/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
