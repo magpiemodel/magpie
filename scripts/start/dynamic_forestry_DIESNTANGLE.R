@@ -39,7 +39,7 @@ for(ssp in c("SSP2")){
 
     for (co2_price_path in c("NPI","Hotelling")) { ## Add "2deg" here for CO2 price runs
 
-      if (co2_price_path == "NPI","Hotelling") {
+      if (co2_price_path == "NPI") {
         cfg <- setScenario(cfg,c(ssp,"NPI"))
         co2_price_path_flag = "Baseline"
       } else if (co2_price_path == "2deg"){
