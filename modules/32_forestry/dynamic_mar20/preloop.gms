@@ -4,16 +4,18 @@ p32_carbon_density_ac_forestry(t_all,j,ac) = m_growth_vegc(0,fm_carbon_density(t
 
 ** Calculating the marginal of carbon density i.e. change in carbon density over two time steps
 ** The carbon densities are tC/ha/year so we don't have to divide by timestep length.
-p32_carbon_density_ac_marg(t_all,j,ac_sub) = p32_carbon_density_ac_forestry(t_all,j,ac_sub) - p32_carbon_density_ac_forestry(t_all,j,ac_sub-1);
+loop(ac_sub,
+  p32_carbon_density_ac_marg(t_all,j,ac_sub-1) = p32_carbon_density_ac_forestry(t_all,j,ac_sub) - p32_carbon_density_ac_forestry(t_all,j,ac_sub-1);
+  );
 
 ** Calculating Instantaneous Growth Rates (IGR). This is a proxy number which can be compared against
 ** interest rate in the economy to make investment decisions in plantations (i.e. to keep it growing or to harvest it).
 ** This parameter is then used to calculate rotation lengths.
-p32_IGR(t_all,j,ac_sub) = (p32_carbon_density_ac_marg(t_all,j,ac_sub)/p32_carbon_density_ac_forestry(t_all,j,ac_sub))$(p32_carbon_density_ac_forestry(t_all,j,ac_sub)>0) + 1$(p32_carbon_density_ac_forestry(t_all,j,ac_sub)<0.0001);
+p32_IGR(t_all,j,ac) = (p32_carbon_density_ac_marg(t_all,j,ac)/p32_carbon_density_ac_forestry(t_all,j,ac))$(p32_carbon_density_ac_forestry(t_all,j,ac)>0) + 1$(p32_carbon_density_ac_forestry(t_all,j,ac)<0.0001);
 
 ** IGR values for first age class ("ac0") is provided the same value as "ac5" to
 ** avoid a sudden drop in rotation lengths in y2000 from y1995.
-p32_IGR(t_all,j,"ac0") = p32_IGR(t_all,j,"ac5");
+*p32_IGR(t_all,j,"ac0") = p32_IGR(t_all,j,"ac5");
 
 ** For each cluster in MAgPIE ("j") we calculate how long the prevailing interest rates stay lower than the IGR.
 ** As long as the prevailing interest rates are lower than IGR, plantations shall be kept standing.
@@ -30,6 +32,7 @@ p32_rot_length_ac_eqivalent(t_all,j) = sum(ac,p32_rot_flg(t_all,j,ac));
 ** We provide a upper limit of 90 years for commercial plantations.
 ** 90 years translates to age-class 18 (90/5)
 p32_rot_length_ac_eqivalent(t_all,j)$(p32_rot_length_ac_eqivalent(t_all,j)>18) = 18;
+p32_rot_length_ac_eqivalent(t_historical,j) = p32_rot_length_ac_eqivalent("y1995",j);
 
 ** Holding rotation lengths constant after the end of this century.
 p32_rot_length_ac_eqivalent(t_future,j) = p32_rot_length_ac_eqivalent("y2100",j);
@@ -45,20 +48,45 @@ p32_rotation_cellular_estb(t_all,j) = ceil(p32_rot_length_ac_eqivalent(t_all,j))
 * Shift rotations. E.g. rotations harveted in 2050 should be harvested with the rotations using which they were establsihed.
 * For 2050 plantation establsihed in 2020 with 30y rotaions shall be harvested according to 30 yr (for example)
 
-** Update harvesting rotations
+** Set harvesting rotations same as establishment rotations -- Don't move this line below extension of rotation. This is overwritten in the next loop anyways
 p32_rotation_cellular_harvesting(t_all,j) = p32_rotation_cellular_estb(t_all,j);
 
 ** RL Extension
 p32_rotation_cellular_estb(t_all,j) = p32_rotation_cellular_estb(t_all,j) * c32_rotation_extension ;
 
-loop(t_all,
-  loop(j,
+** Update harvesting rotations based on establishment rotations of past
+*loop(t_all,
+*  loop(j,
+*      p32_rotation_offset = p32_rotation_cellular_estb(t_all,j);
+*      if(ord(t_all)>p32_rotation_offset,
+*        p32_rotation_cellular_harvesting(t_all,j) = p32_rotation_cellular_estb(t_all-p32_rotation_offset,j);
+*        );
+*    );
+*);
+
+loop(j,
+  loop(t_all,
       p32_rotation_offset = p32_rotation_cellular_estb(t_all,j);
-      if(ord(t_all)>p32_rotation_offset,
-        p32_rotation_cellular_harvesting(t_all,j) = p32_rotation_cellular_estb(t_all-p32_rotation_offset,j);
-        );
+* The harvest year is calculated for future based on current establishment decision
+      p32_rotation_cellular_harvesting(t_all+p32_rotation_offset,j) = p32_rotation_cellular_estb(t_all,j);
     );
-);
+  );
+
+** This loop fixes empty gaps.
+** For example in 2035, if establishment length was 10 (50yrs) then it should be harvested in 2085
+** But in 2040, lets say if establishment length was 11 (55yrs) then the harvesting should happen in 2095.
+** This leaves y2090 with a gap where model doens't know which value to choose
+** At this point, it takes the values which were initilaized in lines above
+** where we give harvested rotations the same value as establishment rotation to start with
+** The loop below makes some educated case based on jumps during these blind spots and fills them with proper numbers
+loop(t_all,
+  p32_rotation_cellular_harvesting(t_all+1,j)$(abs(p32_rotation_cellular_harvesting(t_all+1,j) - p32_rotation_cellular_harvesting(t_all,j))>2 AND ord(t_all)<card(t_all)) = p32_rotation_cellular_harvesting(t_all,j);
+  );
+
+*dummy_offset = p32_rotation_offset("SSA_182");
+*dummy_estb(t_all)    =   p32_rotation_cellular_estb(t_all,"SSA_182");
+*dummy_harvest(t_all) =  p32_rotation_cellular_harvesting(t_all,"SSA_182");
+*display dummy_estb, dummy_harvest;
 
 ** Rotation used for establishment decision - Same as harvesting rotation for now.
 ** This is declared as interface because this is also need in trade module.
@@ -112,10 +140,7 @@ loop(t,
   display p32_dummy_elapsed;
 );
 
-p32_hv_area_past_avg(t,i)$(ord(t) > 3) = (p32_hv_area_current(t,i) * p32_dummy_time(t)
-                                        + p32_hv_area_current(t-1,i) * p32_dummy_time(t-1)
-                                        + p32_hv_area_current(t-3,i) * p32_dummy_time(t-3)
-                                        ) / p32_dummy_elapsed(t);
+p32_hv_area_past_avg(t,i)$(ord(t) > 3) = (p32_hv_area_current(t,i) + p32_hv_area_current(t-1,i) + p32_hv_area_current(t-3,i))/3;
 
 
 ** Initialization of land

@@ -153,6 +153,9 @@ sets time_annual Annual extended time steps
       y2095, y2100, y2105, y2110, y2115, y2120, y2125, y2130, y2135, y2140,
       y2145, y2150 /
 
+    t_historical(t_all) Historical period
+    /   y1965, y1970, y1975, y1980, y1985, y1990 /
+
     t_future(t_all) 5-year time periods
     / y2105, y2110, y2115, y2120, y2125, y2130, y2135, y2140,
       y2145, y2150 /
@@ -244,6 +247,9 @@ sets
 
   land_natveg(forest_land) Natural vegetation land pools
         / primforest, secdforest, other /
+
+  forest_type forest type
+         / plantations, natveg /
 
    si Suitability classes
         / si0, nsi0 /
