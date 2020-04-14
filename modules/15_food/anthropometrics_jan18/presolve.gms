@@ -338,7 +338,7 @@ else
  p15_kcal_pc_initial_iso(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
  pm_kcal_pc_initial(t,i,kfo) =  p15_kcal_pc(t,i,kfo);
 
- o15_kcal_regr_initial(iso,kfo)=v15_kcal_regr.l(iso,kfo);
+ o15_kcal_regr_initial(t,iso,kfo)=v15_kcal_regr.l(iso,kfo);
 
 * Finally, we calibrate countries with zero food demand according to FAOSTAT
 * down to zero to match FAO world totals.

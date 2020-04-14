@@ -120,7 +120,7 @@ parameters
   p15_balanceflow_kcal_lastcalibyear(iso,kfo) Balance flow of last historic time step for mismatch between FAOSTAT and demand estimates (kcal per capita per day)
 
 * before shock
- o15_kcal_regr_initial(iso,kfo)               Uncalibrated per capita demand before price shock (kcal per capita per day)
+ o15_kcal_regr_initial(t,iso,kfo)               Uncalibrated per capita demand before price shock (kcal per capita per day)
  p15_kcal_pc_initial(t,i,kfo)                 Per capita consumption in food demand model before price shock on regional level (kcal per capita per day)
  pm_kcal_pc_initial(t,i,kfo)                  Per capita consumption in food demand model before price shock (kcal per capita per day)
  p15_kcal_pc_initial_iso(t,iso,kfo)           Per capita consumption in food demand model before price shock on country level (kcal per capita per day)
