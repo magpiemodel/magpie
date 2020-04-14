@@ -24,4 +24,5 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%ghg_policy%" == "price_jan20" $include "./modules/56_ghg_policy/price_jan20/realization.gms"
+$Ifi "%ghg_policy%" == "price_jan20_woa" $include "./modules/56_ghg_policy/price_jan20_woa/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

@@ -19,4 +19,5 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%landconversion%" == "global_static_aug18" $include "./modules/39_landconversion/global_static_aug18/realization.gms"
+$Ifi "%landconversion%" == "global_static_aug18_woa" $include "./modules/39_landconversion/global_static_aug18_woa/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

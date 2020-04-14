@@ -16,5 +16,6 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%area_equipped_for_irrigation%" == "endo_apr13" $include "./modules/41_area_equipped_for_irrigation/endo_apr13/realization.gms"
+$Ifi "%area_equipped_for_irrigation%" == "endo_apr13_woa" $include "./modules/41_area_equipped_for_irrigation/endo_apr13_woa/realization.gms"
 $Ifi "%area_equipped_for_irrigation%" == "static" $include "./modules/41_area_equipped_for_irrigation/static/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
