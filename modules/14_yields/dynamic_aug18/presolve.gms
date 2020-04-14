@@ -42,3 +42,9 @@ pm_growing_stock(t,j,ac,land_natveg,"natveg") =
 
 **** Hard constraint to always have a positive number in pm_growing_stock
 pm_growing_stock(t,j,ac,land_natveg,"natveg") = pm_growing_stock(t,j,ac,land_natveg,"natveg")$(pm_growing_stock(t,j,ac,land_natveg,"natveg")>0)+0.0001$(pm_growing_stock(t,j,ac,land_natveg,"natveg")=0);
+
+if(s14_timber_plantation_yield = 0,
+ pm_growing_stock(t,j,ac,"forestry","plantations") = pm_growing_stock(t,j,ac,"forestry","natveg");
+elseif s14_timber_plantation_yield = 1,
+ pm_growing_stock(t,j,ac,"forestry","plantations") = pm_growing_stock(t,j,ac,"forestry","plantations");
+);

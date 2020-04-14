@@ -28,7 +28,7 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "BF12x"
+identifier_flag <- "BF14"
 cat(paste0("5 year runs. Fixed harvest rule update via loop. Need to discuss with Florian if this is okay. Added additional switch to select plantation yield via growing stock calculation. Growing stock is always divided by 5 because if not we see huge drop in 10 year steps. Ask florian if its ok. New flags added to make tests where plantations are treated as natveg. Hotelling rule input file will also be used to make co2 price runs in policy case. CO2 prices in baseline runs bugfix included. Those are fixed to 0. Woodfuel demand 50% across the board. "), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 for(ssp in c("SSP2")){
@@ -37,9 +37,9 @@ for(ssp in c("SSP2")){
 
     cfg$gms$timber <- timber_demand
 
-    for (co2_price_path in c("NPI")) { ## Add "2deg" here for CO2 price runs
+    for (co2_price_path in c("NPI","Hotelling")) { ## Add "2deg" here for CO2 price runs
 
-      if (co2_price_path == "NPI") {
+      if (co2_price_path == "NPI","Hotelling") {
         cfg <- setScenario(cfg,c(ssp,"NPI"))
         co2_price_path_flag = "Baseline"
       } else if (co2_price_path == "2deg"){
@@ -54,14 +54,10 @@ for(ssp in c("SSP2")){
 
         cfg$gms$c56_emis_policy <- emis_policy
 
-        for(plantation_switch in c(1)){
+        for(plantation_switch in c(1,0)){
 
-          cfg$gms$s32_timber_plantation <- plantation_switch
-
-          if (plantation_switch == 0) {
-            cfg$gms$c73_timber_plantations = cfg$gms$c73_timber_natveg
-            cfg$gms$c32_timber_plantations = cfg$gms$c73_timber_plantations
-          }
+          cfg$gms$s14_timber_plantation_yield <- plantation_switch
+          cfg$gms$s32_timber_plantation <- cfg$gms$s14_timber_plantation_yield
 
           cfg$gms$c56_pollutant_prices <- "coupling"
           cfg$gms$c60_2ndgen_biodem <- "coupling"

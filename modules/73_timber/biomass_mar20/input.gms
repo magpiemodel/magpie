@@ -5,9 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c73_timber_plantations  plantations
-$setglobal c73_timber_natveg  natveg
-
 scalars
   s73_price_adjuster Switch for price based adjustment /0/
   s73_timber_demand Switch for timber demand / 1 /
