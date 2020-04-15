@@ -120,7 +120,7 @@ v32_land.up(j,"aff",ac_sub)$(ord(ac_sub) > s32_planing_horizon/5) = pc32_land(j,
 ** Card is used here to exclude y1965 to y1995 when calculating rotation length calculations for past
 p32_rotation_regional(t,i) = ord(t) + ceil((sum(cell(i,j),pcm_land(j,"forestry")*p32_rot_length_ac_eqivalent(t,j))/sum(cell(i,j),pcm_land(j,"forestry")))/5) + card(t_past_ff);
 
-pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), pm_growing_stock(t,j,ac_sub,"forestry","plantations"));
+pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac_sub,"forestry"));
 
 *p32_rotation_regional not needed as interface
 

@@ -53,12 +53,12 @@ q73_prod_timber(j2,kforestry)..
 q73_prod_forestry(j2,ac_sub)..
                          sum(kforestry, v73_prod_forestry(j2,ac_sub,kforestry))
                          =l=
-                         sum(type32, vm_forestry_reduction(j2,type32,ac_sub)) * sum(ct, pm_growing_stock(ct,j2,ac_sub,"forestry","plantations"));
+                         sum(type32, vm_forestry_reduction(j2,type32,ac_sub)) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"forestry"));
 
 q73_hvarea_forestry(j2,ac_sub) ..
                           vm_hvarea_forestry(j2,ac_sub)
                           =e=
-                          sum(kforestry, v73_prod_forestry(j2,ac_sub,kforestry)) / sum(ct, pm_growing_stock(ct,j2,ac_sub,"forestry","plantations"));
+                          sum(kforestry, v73_prod_forestry(j2,ac_sub,kforestry)) / sum(ct, pm_timber_yield(ct,j2,ac_sub,"forestry"));
 
 *** Natveg production ***
 
@@ -70,7 +70,7 @@ q73_hvarea_forestry(j2,ac_sub) ..
 q73_prod_secdforest(j2,ac_sub)..
                            sum(kforestry, v73_prod_natveg(j2,"secdforest",ac_sub,kforestry))
                            =l=
-						    vm_secdforest_reduction(j2,ac_sub) * sum(ct,pm_growing_stock(ct,j2,ac_sub,"secdforest","natveg"));
+						    vm_secdforest_reduction(j2,ac_sub) * sum(ct,pm_timber_yield(ct,j2,ac_sub,"secdforest"));
 
 *' Real harvested area for secondary forests is calculated based on the production
 *' realized from secondary forests divided by the corresponding growing stocks.
@@ -78,7 +78,7 @@ q73_prod_secdforest(j2,ac_sub)..
 q73_hvarea_secdforest(j2,ac_sub)..
                           vm_hvarea_secdforest(j2,ac_sub)
                            =e=
-                          sum(kforestry, v73_prod_natveg(j2,"secdforest",ac_sub,kforestry)) / sum(ct, pm_growing_stock(ct,j2,ac_sub,"secdforest","natveg"));
+                          sum(kforestry, v73_prod_natveg(j2,"secdforest",ac_sub,kforestry)) / sum(ct, pm_timber_yield(ct,j2,ac_sub,"secdforest"));
 
 ** Primary forest
 *' Woody biomass production from primary forests is calculated by multiplying the
@@ -88,7 +88,7 @@ q73_hvarea_secdforest(j2,ac_sub)..
 q73_prod_primforest(j2)..
                            sum(kforestry, v73_prod_natveg(j2,"primforest","acx",kforestry))
                            =l=
-                           vm_primforest_reduction(j2) * sum(ct, pm_growing_stock(ct,j2,"acx","primforest","natveg"));
+                           vm_primforest_reduction(j2) * sum(ct, pm_timber_yield(ct,j2,"acx","primforest"));
 
 *' Real harvested area for primary forests is calculated based on the production
 *' realized from primary forests divided by the corresponding growing stocks.
@@ -96,7 +96,7 @@ q73_prod_primforest(j2)..
 q73_hvarea_primforest(j2)..
                           vm_hvarea_primforest(j2)
                            =e=
-                          sum(kforestry, v73_prod_natveg(j2,"primforest","acx",kforestry)) / sum(ct, pm_growing_stock(ct,j2,"acx","primforest","natveg"));
+                          sum(kforestry, v73_prod_natveg(j2,"primforest","acx",kforestry)) / sum(ct, pm_timber_yield(ct,j2,"acx","primforest"));
 
 ** Other land
 *' Wood-fuel production from other land is calculated by multiplying the area under
@@ -107,7 +107,7 @@ q73_hvarea_primforest(j2)..
 q73_prod_other(j2,ac_sub)..
                           v73_prod_natveg(j2,"other",ac_sub,"woodfuel")
                           =l=
-                          vm_other_reduction(j2,ac_sub) * sum(ct, pm_growing_stock(ct,j2,ac_sub,"other","natveg"))
+                          vm_other_reduction(j2,ac_sub) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"other"))
                           ;
 
 *' Real harvested area from other land is calculated based on the wood-fuel production
@@ -116,6 +116,6 @@ q73_prod_other(j2,ac_sub)..
 q73_hvarea_other(j2,ac_sub)..
                          v73_hvarea_other(j2, ac_sub)
                           =e=
-                         v73_prod_natveg(j2,"other",ac_sub,"woodfuel") / sum(ct, pm_growing_stock(ct,j2,ac_sub,"other","natveg"));
+                         v73_prod_natveg(j2,"other",ac_sub,"woodfuel") / sum(ct, pm_timber_yield(ct,j2,ac_sub,"other"));
 
 *** EOF equations.gms ***
