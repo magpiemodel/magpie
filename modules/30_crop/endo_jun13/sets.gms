@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -35,4 +35,10 @@ sets
          fiber_r     . (cottn_pro)
          begr_r      . (begr)
          betr_r      . (betr)  /
+
+   kbe30(kcr) bio energy activities
+        / betr, begr /
+
+   bioen_type_30(kbe30) dynamic set bioen type
+   bioen_water_30(w) dynamic set bioen water
 ;

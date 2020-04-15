@@ -1,4 +1,4 @@
-# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -93,7 +93,7 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
       }
 
       cat("Executing",name,"\n")
-      srun_command <- paste0("srun --job-name=",rout," --output=",rout,"-%j.out --mail-type=END")
+      sbatch_command <- paste0("sbatch --job-name=",rout," --output=",rout,"-%j.out --mail-type=END --wrap=\"Rscript ",name,"\"")
       if(submit=="direct") {
         tmp.env <- new.env()
         tmp.error <- try(sys.source(name,envir=tmp.env))
@@ -103,10 +103,10 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
         log <- format(Sys.time(), paste0(rout,"-%Y-%H-%M-%S-%OS3.log"))
         system2("Rscript",name, stderr = log, stdout = log, wait=FALSE)
       } else if(submit=="slurmpriority") {
-        system(paste0(srun_command," --qos=priority Rscript ",name), wait=FALSE)
+        system(paste(sbatch_command,"--qos=priority"))
         Sys.sleep(1)
       } else if(submit=="slurmstandby") {
-        system(paste0(srun_command," --qos=standby Rscript ",name), wait=FALSE)
+        system(paste(sbatch_command,"--qos=standby"))
         Sys.sleep(1)
       } else if(submit=="debug") {
         tmp.env <- new.env()

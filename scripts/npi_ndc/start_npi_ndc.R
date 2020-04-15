@@ -1,4 +1,4 @@
-# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -135,7 +135,7 @@ calc_NPI_NDC <- function(policyregions="iso"){
   none_ad_aolc_pol[] <- 0
   getNames(none_ad_aolc_pol) <- c("none.forest","none.other")
   ad_aolc_pol <- mbind(none_ad_aolc_pol,npi_ad,npi_aolc,ndc_ad,ndc_aolc)
-  write.magpie(ad_aolc_pol, "policies/npi_ndc_ad_aolc_pol.cs3")
+  write.magpie(round(ad_aolc_pol,3), "policies/npi_ndc_ad_aolc_pol.cs3")
 
   addline("")
   addline("##----------------------------------------------------------------------------")
@@ -172,7 +172,7 @@ calc_NPI_NDC <- function(policyregions="iso"){
   none_aff_pol[] <- 0
   getNames(none_aff_pol) <- "none"
   aff_pol <- mbind(none_aff_pol,npi_aff,ndc_aff)
-  write.magpie(aff_pol, "policies/npi_ndc_aff_pol.cs3")
+  write.magpie(round(aff_pol,6), "policies/npi_ndc_aff_pol.cs3")
 
   #copy files
   file.copy("policies/npi_ndc_ad_aolc_pol.cs3",

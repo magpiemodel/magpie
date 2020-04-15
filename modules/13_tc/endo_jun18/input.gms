@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -31,5 +31,11 @@ $offdelim
 table f13_tc_exponent(t_all,scen13) Regression exponent (1)
 $ondelim
 $include "./modules/13_tc/input/f13_tc_exponent.cs3"
+$offdelim
+;
+
+table f13_tau_historical(t_all,i) historical tau scenario (1)
+$ondelim
+$include "./modules/13_tc/input/f13_tau_historical.csv"
 $offdelim
 ;

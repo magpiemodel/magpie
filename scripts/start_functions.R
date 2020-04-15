@@ -1,12 +1,173 @@
-# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
+################################################################################
+# Define internal functions
+################################################################################
+.update_sets <- function(cpr,map) {
+  
+  reg1 <- unique(map$RegionCode)
+  reg2 <- names(cpr)
+  if(!all(union(reg1,reg2) %in% intersect(reg1,reg2))) {
+    stop("Inconsistent region information!",
+         "\n cpr info: ",paste(reg2,collapse=", "),
+         "\n spatial header info: ", paste(reg1,collapse=", "))
+  }
+  
+  
+  j <- 0; cells <- NULL
+  for(i in 1:length(cpr)) {
+    cells <- c(cells,paste(names(cpr)[i],"_",j+1,"*",names(cpr)[i],"_",j+cpr[i],sep=""))
+    j <- j+cpr[i]
+  }
+  
+  .tmp <- function(x,prefix="", suffix1="", suffix2=" /", collapse=",", n=10) {
+    content <- NULL
+    tmp <- lapply(split(x, ceiling(seq_along(x)/n)),paste,collapse=collapse)
+    end <- suffix1
+    for(i in 1:length(tmp)) {
+      if(i==length(tmp)) end <- suffix2
+      content <- c(content,paste0('       ',prefix,tmp[[i]],end))
+    }
+    return(content)
+  }
+  
+  subject <- 'SETS'
+  modification_warning <- c(
+    '*THIS CODE IS CREATED AUTOMATICALLY, DO NOT MODIFY THESE LINES DIRECTLY',
+    '*ANY DIRECT MODIFICATION WILL BE LOST AFTER NEXT INPUT DOWNLOAD',
+    '*CHANGES CAN BE DONE USING THE INPUT DOWNLOADER UNDER SCRIPTS/DOWNLOAD',
+    '*THERE YOU CAN ALSO FIND ADDITIONAL INFORMATION')
+  content <- c(modification_warning,'','sets','')
+  
+  content <- c(content,paste('   i all economic regions /',paste(names(cpr),collapse=','),'/',sep=''),'')
+  
+  # write iso set with nice formatting (10 countries per line)
+  tmp <- lapply(split(map$CountryCode, ceiling(seq_along(map$CountryCode)/10)),paste,collapse=",")
+  content <- c(content,'   iso list of iso countries /')
+  content <- c(content, .tmp(map$CountryCode, suffix1=",", suffix2=" /"))
+  
+  content <- c(content,  '', paste('   j number of LPJ cells /\n       ',paste(cells,collapse=',\n       '),'/',sep=''),'',
+               '   cell(i,j) number of LPJ cells per region i','      /')
+  for(i in 1:length(cpr)) {
+    content <- c(content,paste('       ',names(cpr)[i],' . ',cells[i],sep=''))
+  }
+  content <- c(content,'      /','')
+  
+  content <- c(content,'   i_to_iso(i,iso) mapping regions to iso countries','      /')
+  map$RegionCode <- as.factor(map$RegionCode)
+  for(i in levels(map$RegionCode)) {
+    content <- c(content, .tmp(map$CountryCode[map$RegionCode==i], prefix=paste0(i," . ("), suffix1=")", suffix2=")"))
+    
+  }
+  content <- c(content,'      /',';')
+  lucode::replace_in_file("core/sets.gms",content,subject)
+}
+
+# Function to extract information from info.txt
+.get_info <- function(file, grep_expression, sep, pattern="", replacement="") {
+  if(!file.exists(file)) return("#MISSING#")
+  file <- readLines(file, warn=FALSE)
+  tmp <- grep(grep_expression, file, value=TRUE)
+  tmp <- strsplit(tmp, sep)
+  tmp <- sapply(tmp, "[[", 2)
+  tmp <- gsub(pattern, replacement ,tmp)
+  if(all(!is.na(as.logical(tmp)))) return(as.vector(sapply(tmp, as.logical)))
+  if (all(!(regexpr("[a-zA-Z]",tmp) > 0))) {
+    tmp <- as.numeric(tmp)
+  }
+  return(tmp)
+}
+
+#Define routine to update info file in input folder and info in main.gms
+.update_info <- function(datasets, cpr, regionscode, reg_revision, warnings=NULL) {
+  
+  low_res  <- .get_info("input/info.txt","^\\* Output ?resolution:",": ")
+  high_res <- .get_info("input/info.txt","^\\* Input ?resolution:",": ")
+  
+  info <- readLines('input/info.txt')
+  subject <- 'VERSION INFO'
+  
+  useddata <- NULL
+  for(dataset in rownames(datasets)) {
+    useddata <- c(useddata,
+                  '',
+                  paste('Used data set:',dataset),
+                  paste('md5sum:',datasets[dataset,"md5"]),
+                  paste('Repository:',datasets[dataset,"repo"]))
+  }
+  
+  warnings <- attr(datasets,"warnings")
+  if(!is.null(warnings)) {
+    warnings <- capture.output(warnings)
+  }
+  
+  content <- c(useddata,
+               '',
+               paste('Low resolution:',low_res),
+               paste('High resolution:',high_res),
+               '',
+               paste('Total number of cells:',sum(cpr)),
+               '',
+               'Number of cells per region:',
+               paste(format(names(cpr),width=5,justify="right"),collapse=""),
+               paste(format(cpr,width=5),collapse=""),
+               '',
+               paste('Regionscode:',regionscode),
+               '',
+               paste('Regions data revision:',reg_revision),
+               '',
+               info,
+               '',
+               warnings,
+               '',
+               paste('Last modification (input data):',date()),
+               '')
+  writeLines(content,'input/info.txt')
+  lucode::replace_in_file("main.gms",paste('*',content),subject)
+}
+
+
+################################################################################
+######################### MAIN FUNCTIONS #######################################
+################################################################################
+
+download_and_update <- function(cfg) {
+  # Download data and update code
+  
+  # Delete previously downloaded files, download new files and distribute 
+  # them within the model.
+  filemap <- lucode::download_distribute(files        = cfg$input,
+                                         repositories = cfg$repositories, # defined in your local .Rprofile or on the cluster /p/projects/rd3mod/R/.Rprofile
+                                         modelfolder  = ".",
+                                         additionalDelete="scripts/downloader/inputdelete.cfg",
+                                         debug        = cfg$debug)
+  
+  # In the following the GAMS sourcecode files magpie.gms and core/sets.gms
+  # are manipulated. Therefore some information about the number of cells per
+  # region is required (CPR). This information is gained by extracting it from
+  # the avl_land.cs3 input file (any other cellular file could be used as well).
+  # This information is then transfered to .update_info, which is
+  # updating the general information in magpie.gms and input/info.txt
+  # and .update_sets, which is updating the resolution- and region-depending
+  # sets in core/sets.gms
+  tmp <- magclass::read.magpie("modules/10_land/input/avl_land_t.cs3")
+  cpr <- magclass::getCPR(tmp)
+  # read spatial_header, map, reg_revision and regionscode
+  load("input/spatial_header.rda")
+  .update_info(filemap,cpr,regionscode,reg_revision, warnings)
+  .update_sets(cpr,map) 
+}
+
+
 start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
-                      report=NULL,sceninreport=NULL,LU_pricing="y2010", lock_model=TRUE) {
+                      path_to_report=NULL,LU_pricing="y2010", lock_model=TRUE) {
+
+  timePrepareStart <- Sys.time()
 
   if (!requireNamespace("lucode", quietly = TRUE)) {
     stop("Package \"lucode\" needed for this function to work. Please install it.",
@@ -31,6 +192,9 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   if(!is.null(scenario)) cfg <- lucode::setScenario(cfg,scenario)
   cfg <- lucode::check_config(cfg)
 
+  # Make 'title' a setglobal in gams to include it in the gdx
+  cfg$gms$c_title <- cfg$title
+
   rundate <- Sys.time()
   date <- format(rundate, "_%Y-%m-%d_%H.%M.%S")
   cfg$results_folder <- gsub(":date:", date, cfg$results_folder, fixed=TRUE)
@@ -39,15 +203,19 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   # Create output folder
   if (!file.exists(cfg$results_folder)) {
     dir.create(cfg$results_folder, recursive=TRUE, showWarnings=FALSE)
-	} else {
+	} else if (cfg$force_replace) {
+    cat("Deleting results folder because it alreay exists:",cfg$results_folder,"\n")
+    unlink(cfg$results_folder, recursive = TRUE)
+    dir.create(cfg$results_folder, recursive = TRUE, showWarnings = FALSE)
+  } else {
     stop(paste0("Results folder ",cfg$results_folder,
                 " could not be created because is already exists."))
   }
   # If report and scenname are available the data of this scenario in the report
   # will be converted to MAgPIE input, saved to the respective input folders
   # and used as input by the model
-  if (!is.null(report) && !is.null(sceninreport)) {
-    getReportData(report, sceninreport, LU_pricing)
+  if (!is.null(path_to_report)) {
+    getReportData(path_to_report, LU_pricing)
     cfg <- lucode::setScenario(cfg,"coupling")
   }
 
@@ -78,35 +246,25 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
 
   #check all setglobal settings for consistency
   lucode::settingsCheck()
+  
+  ################################################################################
+  ############# PROCESSING INPUT DATA ###################### START ###############
+  ################################################################################
 
-  ############# PROCESSING INPUT DATA ##########################################
-  # Check whether input data has to be processed or is already processed
+  ################################################################################
+  ########## DOWNLOAD INPUT FILES and MANIPULATE GAMS FILES ######################
+  ################################################################################
 
-  # Function to extract information from info.txt
-  get_info <- function(file, grep_expression, sep, pattern="", replacement="") {
-    if(!file.exists(file)) return("#MISSING#")
-    file <- readLines(file, warn=FALSE)
-    tmp <- grep(grep_expression, file, value=TRUE)
-    tmp <- strsplit(tmp, sep)
-    tmp <- sapply(tmp, "[[", 2)
-    tmp <- gsub(pattern, replacement ,tmp)
-    if(all(!is.na(as.logical(tmp)))) return(as.vector(sapply(tmp, as.logical)))
-    if (all(!(regexpr("[a-zA-Z]",tmp) > 0))) {
-      tmp <- as.numeric(tmp)
-    }
-    return(tmp)
-  }
-
-  input_old <- get_info("input/info.txt", "^Used data set:", ": ")
-
-
+  input_old <- .get_info("input/info.txt", "^Used data set:", ": ")
+  
   if(!setequal(cfg$input, input_old) | cfg$force_download) {
-    source("scripts/downloader/download.R")
-    archive_download(files=cfg$input,
-                     repositories=cfg$repositories,
-                     modelfolder=".",
-                     debug=cfg$debug)
+    # download data and update code
+    download_and_update(cfg)
   }
+
+  ###########################################################################################################
+  ############# PROCESSING INPUT DATA ###################### END ############################################
+  ###########################################################################################################
 
   if(cfg$recalc_npi_ndc=="ifneeded") {
     aff_pol     <- magclass::read.magpie("modules/32_forestry/input/npi_ndc_aff_pol.cs3")
@@ -217,6 +375,13 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
 
   setwd(cfg$results_folder)
 
+  # Save run statistics to local file
+  cat("Saving timePrepareStart and timePrepareEnd to runstatistics.rda\n")
+  timePrepareEnd <- Sys.time()
+  lucode::runstatistics(file             = paste0("runstatistics.rda"),
+                        timePrepareStart = timePrepareStart,
+                        timePrepareEnd   = timePrepareEnd)
+
   #Is SLURM available?
   slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
 
@@ -231,7 +396,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   return(cfg$results_folder)
 }
 
-getReportData <- function(rep,scen,LU_pricing="y2010") {
+getReportData <- function(path_to_report,LU_pricing="y2010") {
 
   if (!requireNamespace("magclass", quietly = TRUE)) {
     stop("Package \"magclass\" needed for this function to work. Please install it.",
@@ -244,6 +409,7 @@ getReportData <- function(rep,scen,LU_pricing="y2010") {
     dimnames(out)[[3]] <- NULL
     write.magpie(out[notGLO,,],"./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
   }
+  
   .emission_prices <- function(mag){
     out_c <- mag[,,"Price|Carbon (US$2005/t CO2)"]*44/12 # US$2005/tCO2 -> US$2005/tC
     dimnames(out_c)[[3]] <- "co2_c"
@@ -268,18 +434,23 @@ getReportData <- function(rep,scen,LU_pricing="y2010") {
     write.magpie(out[notGLO,,],"./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3")
   }
 
-  if (length(scen)!=1) stop("getReportData: 'scen' does not contain exactly one scenario.")
-  if (length(intersect(scen,names(rep)))!=1) stop("getReportData: 'scen not contained in 'rep'.")
+  # read REMIND report
+  rep <- read.report(path_to_report, as.list = FALSE)
+  if (length(getNames(rep,dim="scenario"))!=1) stop("getReportData: REMIND report contains more or less than 1 scenario.")
+  rep <- collapseNames(rep) # get rid of scenrio and model dimension if they exist
+  mag <- deletePlus(rep) #delete "+" and "++" from variable names
 
-  files <- c("./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3","./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
-  years <- 1990+5*(1:32)
-  for(f in files) suppressWarnings(unlink(f))
-  mag <- rep[[scen]][["MAgPIE"]]
   if(!("y1995" %in% getYears(mag))){
   	empty95<-mag[,1,];empty95[,,]<-0;dimnames(empty95)[[2]] <- "y1995"
   	mag <- mbind(empty95,mag)
   }
+  years <- 1990+5*(1:32)
   mag <- time_interpolate(mag,years)
+
+  # delete old input files before updating them
+  files <- c("./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3","./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
+  for(f in files) suppressWarnings(unlink(f))
+
   .bioenergy_demand(mag)
   .emission_prices(mag)
 }

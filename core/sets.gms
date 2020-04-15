@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -16,9 +16,9 @@
 
 sets
 
-   i World regions /CAZ,CHA,EUR,IND,JPN,LAM,MEA,NEU,OAS,REF,SSA,USA/
+   i all economic regions /CAZ,CHA,EUR,IND,JPN,LAM,MEA,NEU,OAS,REF,SSA,USA/
 
-   iso Countries /
+   iso list of iso countries /
        ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
        ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
        BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
@@ -45,7 +45,7 @@ sets
        UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
        VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 
-   j Spatial clusters /
+   j number of LPJ cells /
        CAZ_1*CAZ_28,
        CHA_29*CHA_52,
        EUR_53*EUR_62,
@@ -59,7 +59,7 @@ sets
        SSA_180*SSA_190,
        USA_191*USA_200/
 
-   cell(i,j) Mapping between regions i and clusters j
+   cell(i,j) number of LPJ cells per region i
       /
        CAZ . CAZ_1*CAZ_28
        CHA . CHA_29*CHA_52
@@ -75,7 +75,7 @@ sets
        USA . USA_191*USA_200
       /
 
-   i_to_iso(i,iso) Mapping between regions and countries
+   i_to_iso(i,iso) mapping regions to iso countries
       /
        CAZ . (AUS,CAN,HMD,NZL,SPM)
        CHA . (CHN,HKG,MAC,TWN)
@@ -122,6 +122,10 @@ sets
 i2(i) = yes;
 j2(j) = yes;
 
+sets
+        c_title defined to include c_title in GDX
+        / %c_title% /
+;
 
 ***TIME STEPS***
 * ATTENTION: check macros m_year and m_yeardiff if you change something
@@ -224,6 +228,14 @@ sets
                     ac155,ac160,ac165,ac170,ac175,ac180,ac185,ac190,ac195,ac200,
                     ac205,ac210,ac215,ac220,ac225,ac230,ac235,ac240,ac245,ac250,
                     ac255,ac260,ac265,ac270,ac275,ac280,ac285,ac290,ac295,acx /
+
+  ac_sub(ac) age classes
+  / ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
+  ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,ac95,ac100,
+  ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,ac150,
+  ac155,ac160,ac165,ac170,ac175,ac180,ac185,ac190,ac195,ac200,
+  ac205,ac210,ac215,ac220,ac225,ac230,ac235,ac240,ac245,ac250,
+  ac255,ac260,ac265,ac270,ac275,ac280,ac285,ac290,ac295,acx /
 
    when Temporal location relative to optimization / before, after /
 

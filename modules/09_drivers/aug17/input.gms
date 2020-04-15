@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -7,10 +7,12 @@
 
 $setglobal c09_pop_scenario  SSP2
 *   options:   SSP: "SSP1", "SSP2", "SP3", "SSP4", "SSP5"
+*              SDP: "SDP"
 *             SRES: "a1", "a2", "b1", "b2"
 
 $setglobal c09_gdp_scenario  SSP2
 *   options:   SSP: "SSP1", "SSP2", "SSP3", "SSP4", "SSP5"
+*              SDP: "SDP"
 *             SRES: "a1", "a2", "b1", "b2"
 
 
