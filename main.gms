@@ -107,7 +107,7 @@ $title magpie
 *'  * ?m_ module-relevant object - This object is used by at least one module and the core code. Changes related to this object have to be performed carefully.
 *'  * ?00_ (a 2-digit number) module-only object This 2-digit number defines the module the object belongs to. The number is used here to make sure that different modules cannot have the same object
 *'
-*' Sets 
+*' Sets
 *'
 *' Sets are treated slightly different: Instead of adding a prefix sets should get a 2-digit number suffix giving the number
 *' of the module in which the set is exclusively used. If the set is used in more than one module no suffix should be given.
@@ -131,14 +131,14 @@ $title magpie
 *'  * Use units that lead to variable values in the range of 0.01 to 100. Keep the option of scaling in mind.
 *'  * Use only MAgPIE standard units in GAMS code 10^6, 10^6 ha, 10^6 tDM, 10^6 PJ, 10^6 USD, 10^6 m3
 *'  * Make sure that your inputs already have the right unit
-*' 
+*'
 *' Input files
-*' 
+*'
 *'  * Input file names must be unique, because input files will be downloaded from a data repository and extracted to the same folder so that different files with the same file name would overwrite each other.
 *'  * Do not add input files to the git repository. Input files should be copied instead to one of the existing data repositories from which the data is downloaded by the model.
-*' 
+*'
 *' Postprocessing
-*' 
+*'
 *'  * Processing of model outputs is managed in the corresponding magpie R package (e.g. package "magpie4" for MAgPIE version 4.x).
 *'  * If you change something in the GAMS code make sure that all function in the corresponding magpie R package still work and adapt them if necessary to the new model structure.
 *'  * When performing modifications in a magpie R package make sure that these changes are downwards compatible.
@@ -152,23 +152,23 @@ $title magpie
 * 
 * Low resolution: c200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    28   24   10    7    3   53   17    8   22    7   11   10
-* 
+*
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-* 
+*
 * Regions data revision: 4.42
-* 
+*
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
 * * Additional input folder: /p/projects/landuse/data/input/other/rev42
 * * Revision: 42
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-* 
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
@@ -219,7 +219,7 @@ scalars
 $setglobal drivers  aug17
 $setglobal land  landmatrix_dec18
 $setglobal costs  default
-$setglobal interest_rate  reg_feb18
+$setglobal interest_rate  select_apr20
 $setglobal tc  endo_jun18
 $setglobal yields  dynamic_aug18
 
