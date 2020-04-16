@@ -48,10 +48,11 @@ cfg$results_folder <- "output/:title:"
 cfg$gms$peatland  <- "on"
 cfg$gms$c60_biodem_level <- 0
 cfg$gms$s56_c_price_induced_aff <- 0
+cfg$gms$s15_elastic_demand <- 0
 
 cfg$output <- c("rds_report","interpolation")
 
-prefix <- "TEST"
+prefix <- "TEST2"
 
 for (ssp in c("SSP2")) {#"SSP1","SSP2","SSP3","SSP4","SSP5"
   pcost <- "default"
