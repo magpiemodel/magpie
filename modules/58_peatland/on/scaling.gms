@@ -7,4 +7,3 @@
 
 v58_expansion.scale(j,stat58) = 10e-3;
 v58_reduction.scale(j,stat58) = 10e-3;
-vm_peatland_cost.scale(j) = 10e3;
