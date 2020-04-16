@@ -60,22 +60,8 @@ general_settings<-function(title) {
   return(cfg)
 }
 
-
 # Switches for EU28-only runs:
-
 EU28 <- "AUT,BEL,BGR,HRV,CYP,CZE,DNK,EST,FIN,FRA,DEU,GRC,HUN,IRL,ITA,LVA,LTU,LUX,MLT,NLD,POL,PRT,ROU,SVK,SVN,ESP,SWE,GBR"
-
-All_minus_EU28 <- "ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,ASM,ATA,ATF,ATG,AUS,AZE,
-BDI,BEN,BES,BFA,BGD,BHR,BHS,BIH,BLM,BLR,BLZ,BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,
-CCK,CHN,CHE,CHL,CIV,CMR,COD,COG,COK,COL,COM,CPV,CRI,CUB,CUW,CXR,CYM,DJI,DMA,DOM,DZA,
-ECU,EGY,ERI,ESH,ETH,FJI,FLK,FRO,FSM,GAB,GEO,GGY,GHA,GIB,GIN,GLP,GMB,GNB,GNQ,GRD,GRL,
-GTM,GUF,GUM,GUY,HKG,HMD,HND,HTI,IDN,IMN,IND,IOT,IRN,IRQ,ISL,ISR,JAM,JEY,JOR,JPN,KAZ,
-KEN,KGZ,KHM,KIR,KNA,KOR,KWT,LAO,LBN,LBR,LBY,LCA,LIE,LKA,LSO,MAC,MAF,MAR,MCO,MDA,MDG,
-MDV,MEX,MHL,MKD,MLI,MMR,MNE,MNG,MNP,MOZ,MRT,MSR,MTQ,MUS,MWI,MYS,MYT,NAM,NCL,NER,NFK,
-NGA,NIC,NIU,NOR,NPL,NRU,NZL,OMN,PAK,PAN,PCN,PER,PHL,PLW,PNG,PRI,PRK,PRY,PSE,PYF,QAT,
-REU,RUS,RWA,SAU,SDN,SEN,SGP,SGS,SHN,SJM,SLB,SLE,SLV,SMR,SOM,SPM,SRB,SSD,STP,SUR,SWZ,
-SXM,SYC,SYR,TCA,TCD,TGO,THA,TJK,TKL,TKM,TLS,TON,TTO,TUN,TUR,TUV,TWN,TZA,UGA,UKR,UMI,
-URY,USA,UZB,VAT,VCT,VEN,VGB,VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE"
 
 # SSP control runs ###############################################
 # SSP2
@@ -182,7 +168,10 @@ cfg<-general_settings(title="SSP2_IPSL-CM5A-LR_6p0_NoMit_biodiversity")
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib)
-#cfg$gms$c12_interest_rate <- "low" THIS DOESN'T TAKE EFFECT ANYWAY BECAUSE REGIONAL REALIZATION SWITCHED ON -> USE DIFFERENT SWITCH???
+cfg$gms$s12_hist_interest_lic <- "0.1"    # def = 0.1
+cfg$gms$s12_hist_interest_hic <- "0.04"    # def = 0.04
+cfg$gms$s12_interest_lic <- "0.07"         # def = 0.1
+cfg$gms$s12_interest_hic <- "0.01"         # def = 0.04
 cfg$gms$c35_protect_scenario <- "BH"
 cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
 cfg$gms$c55_scen_conf <- "SSP1"
@@ -206,7 +195,10 @@ cfg$gms$s15_exo_diet <- 1
 cfg$gms$c15_kcal_scen <- "healthy_BMI"
 cfg$gms$c15_EAT_scen <- "FLX"
 cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
-cfg$gms$c12_interest_rate <- "low"
+cfg$gms$s12_hist_interest_lic <- "0.1"    # def = 0.1
+cfg$gms$s12_hist_interest_hic <- "0.04"    # def = 0.04
+cfg$gms$s12_interest_lic <- "0.07"         # def = 0.1
+cfg$gms$s12_interest_hic <- "0.01"         # def = 0.04
 cfg$gms$c55_scen_conf <- "SSP1"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
@@ -216,7 +208,10 @@ cfg<-general_settings(title="SSP2_IPSL-CM5A-LR_6p0_NoMit_combined")
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp2p6",regionmapping = "coacch",calibration=calib)
-cfg$gms$c12_interest_rate <- "low"
+cfg$gms$s12_hist_interest_lic <- "0.1"    # def = 0.1
+cfg$gms$s12_hist_interest_hic <- "0.04"    # def = 0.04
+cfg$gms$s12_interest_lic <- "0.07"         # def = 0.1
+cfg$gms$s12_interest_hic <- "0.01"         # def = 0.04
 cfg$gms$c15_food_scenario <- "SSP1"
 cfg$gms$s15_exo_waste <- 1
 cfg$gms$s15_waste_scen <- 1.15
@@ -244,15 +239,24 @@ cfg<-general_settings(title="SSP2_IPSL-CM5A-LR_6p0_NoMit_EURreseff")
 # In addition to global baseline scenario assumptions (SSP2_IPSL-CM5A-LR_6p0_NoMit_base),
 # resource efficiency policies and technology trends implemented in Europe.
   # increased fertilizer efficiency in Europe (switch for 70% NUE of croplands in EU28)
-  # increased crop yields in Europe (switch lower interest (2%) rates in EU28, rest: interest rate depends on development state)
+  # increased crop yields in Europe (switch lower interest rates in EU28, rest: interest rate depends on development state)
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib)
 # EUR specific
 cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
 cfg$gms$cropneff_countries  <- EU28
-cfg$gms$gdp_countries12  <- All_minus_EU28
-cfg$gms$s12_alt_interest <- 0.02
+cfg$gms$select_countries12  <- EU28
+# Interest rate coefficients for non-selected countries:
+cfg$gms$s12_interest_lic <- "0.02"         # def = 0.1
+cfg$gms$s12_interest_hic <- "0.02"         # def = 0.04
+cfg$gms$s12_hist_interest_lic <- "0.1"    # def = 0.1
+cfg$gms$s12_hist_interest_hic <- "0.04"    # def = 0.04
+# Interest rate coefficients for non-selected countries (default):
+cfg$gms$s12_interest_lic2 <- "0.1"         # def = 0.1
+cfg$gms$s12_interest_hic2 <- "0.04"         # def = 0.04
+cfg$gms$s12_hist_interest_lic2 <- "0.1"    # def = 0.1
+cfg$gms$s12_hist_interest_hic2 <- "0.04"    # def = 0.04
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg<-general_settings(title="SSP2_IPSL-CM5A-LR_2p6_Mit2p6_EURreseff")
@@ -271,8 +275,17 @@ cfg$gms$c50_scen_neff_noselect <- "neff65_70_starty2010"
 # EUR specific
 cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
 cfg$gms$cropneff_countries  <- EU28
-cfg$gms$gdp_countries12  <- All_minus_EU28
-cfg$gms$s12_alt_interest <- 0.02
+cfg$gms$select_countries12  <- EU28
+# Interest rate coefficients for non-selected countries:
+cfg$gms$s12_interest_lic <- "0.02"         # def = 0.1
+cfg$gms$s12_interest_hic <- "0.02"         # def = 0.04
+cfg$gms$s12_hist_interest_lic <- "0.1"    # def = 0.1
+cfg$gms$s12_hist_interest_hic <- "0.04"    # def = 0.04
+# Interest rate coefficients for non-selected countries (default):
+cfg$gms$s12_interest_lic2 <- "0.1"         # def = 0.1
+cfg$gms$s12_interest_hic2 <- "0.04"         # def = 0.04
+cfg$gms$s12_hist_interest_lic2 <- "0.1"    # def = 0.1
+cfg$gms$s12_hist_interest_hic2 <- "0.04"    # def = 0.04
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg<-general_settings(title="SSP2_IPSL-CM5A-LR_6p0_onlyEUR2p6_EURreseff")
@@ -293,8 +306,17 @@ cfg$gms$c50_scen_neff_noselect <- "neff60_60_starty2010"
 # EUR specific
 cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
 cfg$gms$cropneff_countries  <- EU28
-cfg$gms$gdp_countries12  <- All_minus_EU28
-cfg$gms$s12_alt_interest <- 0.02
+cfg$gms$select_countries12  <- EU28
+# Interest rate coefficients for non-selected countries:
+cfg$gms$s12_interest_lic <- "0.02"         # def = 0.1
+cfg$gms$s12_interest_hic <- "0.02"         # def = 0.04
+cfg$gms$s12_hist_interest_lic <- "0.1"    # def = 0.1
+cfg$gms$s12_hist_interest_hic <- "0.04"    # def = 0.04
+# Interest rate coefficients for non-selected countries (default):
+cfg$gms$s12_interest_lic2 <- "0.1"         # def = 0.1
+cfg$gms$s12_interest_hic2 <- "0.04"         # def = 0.04
+cfg$gms$s12_hist_interest_lic2 <- "0.1"    # def = 0.1
+cfg$gms$s12_hist_interest_hic2 <- "0.04"    # def = 0.04
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 ### Diets:
@@ -302,22 +324,20 @@ cfg<-general_settings(title="SSP2_IPSL-CM5A-LR_6p0_NoMit_EURdiet")
 # In addition to global baseline scenario assumptions (SSP2_IPSL-CM5A-LR_6p0_NoMit_base),
 # a shift to sustainable diets takes place in Europe.
   # max food waste of 15%
-  # healthy and sufficient (flexitarian) diet in Europe
-    # both implemented via "fader switch"!
+  # healthy and sufficient (flexitarian) diet and more sustainable food scenario in Europe
+  # more efficient animal waste mangement in Europe
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib)
-
-cfg$gms$c55_scen_conf_noselect <- "SSP1" ### (SHOULD THIS BE INCLUDED TOO???)
 # EUR specific
-#cfg$gms$c15_food_scenario <- "SSP1" #(THIS AS  WELLL??????)
+cfg$gms$c15_food_scenario <- "SSP1"
 cfg$gms$s15_exo_waste <- 1
 cfg$gms$s15_waste_scen <- 1.15
 cfg$gms$s15_exo_diet <- 1
 cfg$gms$c15_kcal_scen <- "healthy_BMI"
 cfg$gms$c15_EAT_scen <- "FLX"
 cfg$gms$scen_countries15  <- EU28
-cfg$gms$c55_scen_conf <- "SSP1" ### (SHOULD THIS BE INCLUDED TOO???)
+cfg$gms$c55_scen_conf <- "SSP1"
 cfg$gms$scen_countries55  <- EU28
 start_run(cfg=cfg,codeCheck=codeCheck)
 
@@ -337,14 +357,14 @@ cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg1300"
 cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg1300"
 cfg$gms$c50_scen_neff <- "neff65_70_starty2010"
 # EUR specific
-#cfg$gms$c15_food_scenario <- "SSP1" #(THIS AS  WELLL??????)
+cfg$gms$c15_food_scenario <- "SSP1"
 cfg$gms$s15_exo_waste <- 1
 cfg$gms$s15_waste_scen <- 1.15
 cfg$gms$s15_exo_diet <- 1
 cfg$gms$c15_kcal_scen <- "healthy_BMI"
 cfg$gms$c15_EAT_scen <- "FLX"
 cfg$gms$scen_countries15  <- EU28
-cfg$gms$c55_scen_conf <- "SSP1" ### (SHOULD THIS BE INCLUDED TOO???)
+cfg$gms$c55_scen_conf <- "SSP1"
 cfg$gms$scen_countries55  <- EU28
 start_run(cfg=cfg,codeCheck=codeCheck)
 
@@ -367,14 +387,14 @@ cfg$gms$cropneff_countries  <- EU28
 cfg$gms$c50_scen_neff <- "neff65_70_starty2010"
 cfg$gms$c50_scen_neff_noselect <- "neff60_60_starty2010"
 # EUR specific
-#cfg$gms$c15_food_scenario <- "SSP1" #(THIS AS  WELLL??????)
+cfg$gms$c15_food_scenario <- "SSP1"
 cfg$gms$s15_exo_waste <- 1
 cfg$gms$s15_waste_scen <- 1.15
 cfg$gms$s15_exo_diet <- 1
 cfg$gms$c15_kcal_scen <- "healthy_BMI"
 cfg$gms$c15_EAT_scen <- "FLX"
 cfg$gms$scen_countries15  <- EU28
-cfg$gms$c55_scen_conf <- "SSP1" ### (SHOULD THIS BE INCLUDED TOO???)
+cfg$gms$c55_scen_conf <- "SSP1"
 cfg$gms$scen_countries55  <- EU28
 start_run(cfg=cfg,codeCheck=codeCheck)
 
