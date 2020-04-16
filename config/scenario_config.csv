@@ -1,7 +1,11 @@
 ;cc;nocc;SSP1;SSP2;SSP3;SSP4;SSP5;SDP;BASE;NPI;NDC;coupling;emulator;input;eat_lancet_diet;SUSTAg1;SUSTAg2;SUSTAg3;SUSTAg4;SUSTAg5
 c09_pop_scenario;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;;;;;;;;SSP1;SSP2;SSP3;SSP4;SSP5
 c09_gdp_scenario;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;;;;;;;;SSP1;SSP2;SSP3;SSP4;SSP5
-c12_interest_rate;;;low;medium;high;mixed;low;low;;;;;;;;low;medium;high;mixed;low
+c12_interest_rate;;;;;;;;;;;;coupling;;;;;;;;
+s12_hist_interest_lic;;;0.07;0.07;0.07;0.07;0.07;0.07;;;;;;;;0.07;0.07;0.07;0.07;0.07
+s12_hist_interest_lic;;;0.07;0.07;0.07;0.07;0.07;0.07;;;;;;;;0.07;0.07;0.07;0.07;0.07
+s12_interest_lic;;;0.04;0.07;0.1;0.1;0.04;0.04;;;;;;;;0.04;0.07;0.1;0.1;0.04
+s12_interest_hic;;;0.04;0.07;0.1;0.04;0.04;0.04;;;;;;;;0.04;0.07;0.1;0.04;0.04
 c15_food_scenario;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;;;;;;;SSP1;SSP1;SSP2;SSP3;SSP4;SSP5
 s15_elastic_demand;;;1;1;1;1;1;1;;;;;;;0;1;1;1;1;1
 c15_exo_scen_targetyear;;;;;;;;y2050;;;;;;;y2050;;;;;
