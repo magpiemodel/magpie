@@ -20,3 +20,8 @@ pm_demand_ext_original(t_ext,i,kforestry) = 0;
 pm_demand_ext(t_ext,i,kforestry) = pm_demand_ext_original(t_ext,i,kforestry);
 f21_trade_balanceflow(t_all,kforestry) = 0;
 vm_prod.fx(j,kforestry) = 0;
+
+*m3 to ton conversion.
+*0.6 ton DM / m^3?
+*p73_volumetric_conversion("wood") = 0.6;
+*p73_volumetric_conversion("woodfuel") = 0.3;

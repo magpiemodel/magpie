@@ -6,21 +6,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
-p73_wood_products_demand_reg(t,i,kforestry)                                 Regional wood products demand (mio. m3 per yr)
-p73_wood_products_demand_GLO(t,kforestry)                                   Global wood products demand (mio. m3 per yr)
-p73_timber_demand_gdp_pop(t_all,i,kforestry)                                Timber demand based on lauri et al 2019 (mio. m3 per yr)
-i73_gdp_ppp_pc_iso(t_all,iso,gdp_scen09)                                    GDPpc at iso level (mio. USD per capita)
-p73_forestry_demand(t_all,iso,kforestry)                                    Final forestry demand (mio. m3 per yr)
 pm_demand_ext(t_ext,i,kforestry)                                            Extended demand for timber beyound simulation (mio. tDM per yr)
-p73_glo_timber_demand(t_all,kforestry)                                      Global timber demand (mio. m3 per yr)
-p73_volumetric_conversion(kforestry)                                        Volumetric conversion factor for volume to mass (tDM per m3)
 pm_demand_ext_original(t_ext,i,kforestry)                                   Original prescribed timber demand (mio. tDM per yr)
-pm_prices_woodymass(t,i,kforestry)                                                    Woody biomass prices (USD per tDM)
-p73_criterion	                                                              Criteria calculating timber demand adjustment (mio. tDM per yr)
-p73_timder_adjustment_ratio(t,i,kforestry)                                  Ratio between adjusted and prescribed timber demand (1)
-p73_price_ratio(t,i,kforestry)                                              Price ratio from current step to base year (1)
-p73_price_ratio_before(t,i,kforestry)                                       Price ratio from current step to base year before adjustment (1)
-p73_demand_adjustor(t,i,kforestry)                                          Timber demand adjustor (1)
 ;
 
 positive variables
