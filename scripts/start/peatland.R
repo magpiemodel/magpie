@@ -53,7 +53,7 @@ cfg$output <- c("rds_report","interpolation")
 
 prefix <- "T115"
 
-for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
+for (ssp in c("SSP1")) {#,"SSP2","SSP3","SSP4","SSP5"
   pcost <- "default"
   
   # cfg$gms$tc <- "endo_jun18"
@@ -83,14 +83,14 @@ for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
   cfg$title <- paste(prefix,ssp,"RCP2p6+PeatProt",pcost,sep="_")
   cfg$gms$s56_peatland_policy <- 1
   cfg$gms$s58_rewetting_switch  <- 0
-  start_run(cfg,codeCheck=FALSE)
+  #start_run(cfg,codeCheck=FALSE)
 
   cfg$title <- paste(prefix,ssp,"RCP2p6+PeatRestor",pcost,sep="_")
   cfg$gms$s56_peatland_policy <- 1
   cfg$gms$s58_rewetting_switch  <- Inf
   start_run(cfg,codeCheck=FALSE)
 
-  for (pcost in c("low","medium","high")) {
+  for (pcost in c("medium")) {#"low","medium","high"
     if (pcost == "low") {
       cfg$gms$s58_rewet_cost_onetime  <- 875
       cfg$gms$s58_rewet_cost_recur  <- 25
