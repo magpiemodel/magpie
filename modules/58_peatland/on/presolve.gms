@@ -5,6 +5,11 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+*Update p58_scaling_factor. Needed because of tiny differences between input files and variables
+p58_peatland_area(j) = sum((man58,land58), pc58_peatland_man(j,man58,land58)) + pc58_peatland_intact(j);
+p58_land_area(j) = sum(land, pcm_land(j,land));
+p58_scaling_factor(j) = p58_peatland_area(j)/p58_land_area(j);
+
 if(m_year(t) <= 2015,
 	v58_peatland_man.fx(j,man58,land58) = pc58_peatland_man(j,man58,land58);
 	v58_peatland_intact.fx(j) = pc58_peatland_intact(j);
