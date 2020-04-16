@@ -12,10 +12,10 @@ scalars
   s12_interest_hic                   Interest rate in low income countries   / 0.02 /
   s12_hist_interest_lic             Historic interest rate in high income countries / 0.02 /
   s12_hist_interest_hic              Historic interest rate in low income countries  / 0.02 /
-  s12_interest_lic2                 Interest rate in high income countries for nonselected countries only active when regional switch activated / 0.02 /
-  s12_interest_hic2                  Interest rate in low income countries for nonselected countries only active when regional switch activated  / 0.02 /
-  s12_hist_interest_lic2            Historic interest rate in high income countries for nonselected countries only active when regional switch activated / 0.02 /
-  s12_hist_interest_hic2             Historic interest rate in low income countries for nonselected countries only active when regional switch activated  / 0.02 /
+  s12_interest_lic_noselect                 Interest rate in high income countries for nonselected countries only active when regional switch activated / 0.02 /
+  s12_interest_hic_noselect                  Interest rate in low income countries for nonselected countries only active when regional switch activated  / 0.02 /
+  s12_hist_interest_lic_noselect            Historic interest rate in high income countries for nonselected countries only active when regional switch activated / 0.02 /
+  s12_hist_interest_hic_noselect             Historic interest rate in low income countries for nonselected countries only active when regional switch activated  / 0.02 /
 ;
 
 sets

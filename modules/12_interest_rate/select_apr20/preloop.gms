@@ -31,6 +31,6 @@ $ifthen "%c12_interest_rate%" == "coupling"
 $elseif "%c12_interest_rate%" == "gdp_dependent"
   p12_interest(t_all,i) =  ( (s12_interest_lic - (s12_interest_lic-s12_interest_hic) * im_development_state(t_all,i)) * i12_interest_fader(t_all)
                          +   (s12_hist_interest_lic - (s12_hist_interest_lic-s12_hist_interest_hic) * im_development_state(t_all,i)) * (1-i12_interest_fader(t_all)) ) * p12_reg_shr(t_all,i)
-                         + ( (s12_interest_lic2 - (s12_interest_lic2-s12_interest_hic2) * im_development_state(t_all,i)) * i12_interest_fader(t_all)
-                         +   (s12_hist_interest_lic2 - (s12_hist_interest_lic2-s12_hist_interest_hic2) * im_development_state(t_all,i) ) * (1-i12_interest_fader(t_all)) ) * (1-p12_reg_shr(t_all,i));
+                         + ( (s12_interest_lic_noselect - (s12_interest_lic_noselect-s12_interest_hic_noselect) * im_development_state(t_all,i)) * i12_interest_fader(t_all)
+                         +   (s12_hist_interest_lic_noselect - (s12_hist_interest_lic_noselect-s12_hist_interest_hic_noselect) * im_development_state(t_all,i) ) * (1-i12_interest_fader(t_all)) ) * (1-p12_reg_shr(t_all,i));
 $endif

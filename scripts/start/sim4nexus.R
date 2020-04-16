@@ -253,10 +253,10 @@ cfg$gms$s12_interest_hic <- "0.02"         # def = 0.04
 cfg$gms$s12_hist_interest_lic <- "0.1"    # def = 0.1
 cfg$gms$s12_hist_interest_hic <- "0.04"    # def = 0.04
 # Interest rate coefficients for non-selected countries (default):
-cfg$gms$s12_interest_lic2 <- "0.1"         # def = 0.1
-cfg$gms$s12_interest_hic2 <- "0.04"         # def = 0.04
-cfg$gms$s12_hist_interest_lic2 <- "0.1"    # def = 0.1
-cfg$gms$s12_hist_interest_hic2 <- "0.04"    # def = 0.04
+cfg$gms$s12_interest_lic_noselect <- "0.1"         # def = 0.1
+cfg$gms$s12_interest_hic_noselect <- "0.04"         # def = 0.04
+cfg$gms$s12_hist_interest_lic_noselect <- "0.1"    # def = 0.1
+cfg$gms$s12_hist_interest_hic_noselect <- "0.04"    # def = 0.04
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg<-general_settings(title="SSP2_IPSL-CM5A-LR_2p6_Mit2p6_EURreseff")
@@ -282,10 +282,10 @@ cfg$gms$s12_interest_hic <- "0.02"         # def = 0.04
 cfg$gms$s12_hist_interest_lic <- "0.1"    # def = 0.1
 cfg$gms$s12_hist_interest_hic <- "0.04"    # def = 0.04
 # Interest rate coefficients for non-selected countries (default):
-cfg$gms$s12_interest_lic2 <- "0.1"         # def = 0.1
-cfg$gms$s12_interest_hic2 <- "0.04"         # def = 0.04
-cfg$gms$s12_hist_interest_lic2 <- "0.1"    # def = 0.1
-cfg$gms$s12_hist_interest_hic2 <- "0.04"    # def = 0.04
+cfg$gms$s12_interest_lic_noselect <- "0.1"         # def = 0.1
+cfg$gms$s12_interest_hic_noselect <- "0.04"         # def = 0.04
+cfg$gms$s12_hist_interest_lic_noselect <- "0.1"    # def = 0.1
+cfg$gms$s12_hist_interest_hic_noselect <- "0.04"    # def = 0.04
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg<-general_settings(title="SSP2_IPSL-CM5A-LR_6p0_onlyEUR2p6_EURreseff")
@@ -313,10 +313,10 @@ cfg$gms$s12_interest_hic <- "0.02"         # def = 0.04
 cfg$gms$s12_hist_interest_lic <- "0.1"    # def = 0.1
 cfg$gms$s12_hist_interest_hic <- "0.04"    # def = 0.04
 # Interest rate coefficients for non-selected countries (default):
-cfg$gms$s12_interest_lic2 <- "0.1"         # def = 0.1
-cfg$gms$s12_interest_hic2 <- "0.04"         # def = 0.04
-cfg$gms$s12_hist_interest_lic2 <- "0.1"    # def = 0.1
-cfg$gms$s12_hist_interest_hic2 <- "0.04"    # def = 0.04
+cfg$gms$s12_interest_lic_noselect <- "0.1"         # def = 0.1
+cfg$gms$s12_interest_hic_noselect <- "0.04"         # def = 0.04
+cfg$gms$s12_hist_interest_lic_noselect <- "0.1"    # def = 0.1
+cfg$gms$s12_hist_interest_hic_noselect <- "0.04"    # def = 0.04
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 ### Diets:
