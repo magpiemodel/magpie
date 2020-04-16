@@ -170,8 +170,8 @@ cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib)
 cfg$gms$s12_hist_interest_lic <- "0.1"    # def = 0.1
 cfg$gms$s12_hist_interest_hic <- "0.04"    # def = 0.04
-cfg$gms$s12_interest_lic <- "0.07"         # def = 0.1
-cfg$gms$s12_interest_hic <- "0.01"         # def = 0.04
+cfg$gms$s12_interest_lic <- "0.05"         # def = 0.1
+cfg$gms$s12_interest_hic <- "0.02"         # def = 0.04
 cfg$gms$c35_protect_scenario <- "BH"
 cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
 cfg$gms$c55_scen_conf <- "SSP1"
@@ -190,15 +190,15 @@ cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib)
 cfg$gms$c15_food_scenario <- "SSP1"
 cfg$gms$s15_exo_waste <- 1
-cfg$gms$s15_waste_scen <- 1.15
+cfg$gms$s15_waste_scen <- 1.2
 cfg$gms$s15_exo_diet <- 1
 cfg$gms$c15_kcal_scen <- "healthy_BMI"
 cfg$gms$c15_EAT_scen <- "FLX"
 cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
 cfg$gms$s12_hist_interest_lic <- "0.1"    # def = 0.1
 cfg$gms$s12_hist_interest_hic <- "0.04"    # def = 0.04
-cfg$gms$s12_interest_lic <- "0.07"         # def = 0.1
-cfg$gms$s12_interest_hic <- "0.01"         # def = 0.04
+cfg$gms$s12_interest_lic <- "0.05"         # def = 0.1
+cfg$gms$s12_interest_hic <- "0.02"         # def = 0.04
 cfg$gms$c55_scen_conf <- "SSP1"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
@@ -210,11 +210,11 @@ cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp2p6",regionmapping = "coacch",calibration=calib)
 cfg$gms$s12_hist_interest_lic <- "0.1"    # def = 0.1
 cfg$gms$s12_hist_interest_hic <- "0.04"    # def = 0.04
-cfg$gms$s12_interest_lic <- "0.07"         # def = 0.1
-cfg$gms$s12_interest_hic <- "0.01"         # def = 0.04
+cfg$gms$s12_interest_lic <- "0.05"         # def = 0.1
+cfg$gms$s12_interest_hic <- "0.02"         # def = 0.04
 cfg$gms$c15_food_scenario <- "SSP1"
 cfg$gms$s15_exo_waste <- 1
-cfg$gms$s15_waste_scen <- 1.15
+cfg$gms$s15_waste_scen <- 1.2
 cfg$gms$s15_exo_diet <- 1
 cfg$gms$c15_kcal_scen <- "healthy_BMI"
 cfg$gms$c15_EAT_scen <- "FLX"
@@ -247,7 +247,7 @@ cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch"
 cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
 cfg$gms$cropneff_countries  <- EU28
 cfg$gms$select_countries12  <- EU28
-# Interest rate coefficients for non-selected countries:
+# Interest rate coefficients for selected countries:
 cfg$gms$s12_interest_lic <- "0.02"         # def = 0.1
 cfg$gms$s12_interest_hic <- "0.02"         # def = 0.04
 cfg$gms$s12_hist_interest_lic <- "0.1"    # def = 0.1
@@ -276,7 +276,7 @@ cfg$gms$c50_scen_neff_noselect <- "neff65_70_starty2010"
 cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
 cfg$gms$cropneff_countries  <- EU28
 cfg$gms$select_countries12  <- EU28
-# Interest rate coefficients for non-selected countries:
+# Interest rate coefficients for selected countries:
 cfg$gms$s12_interest_lic <- "0.02"         # def = 0.1
 cfg$gms$s12_interest_hic <- "0.02"         # def = 0.04
 cfg$gms$s12_hist_interest_lic <- "0.1"    # def = 0.1
@@ -307,7 +307,7 @@ cfg$gms$c50_scen_neff_noselect <- "neff60_60_starty2010"
 cfg$gms$c50_scen_neff <- "neff70_75_starty2010"
 cfg$gms$cropneff_countries  <- EU28
 cfg$gms$select_countries12  <- EU28
-# Interest rate coefficients for non-selected countries:
+# Interest rate coefficients for selected countries:
 cfg$gms$s12_interest_lic <- "0.02"         # def = 0.1
 cfg$gms$s12_interest_hic <- "0.02"         # def = 0.04
 cfg$gms$s12_hist_interest_lic <- "0.1"    # def = 0.1
@@ -332,7 +332,7 @@ cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch"
 # EUR specific
 cfg$gms$c15_food_scenario <- "SSP1"
 cfg$gms$s15_exo_waste <- 1
-cfg$gms$s15_waste_scen <- 1.15
+cfg$gms$s15_waste_scen <- 1.2
 cfg$gms$s15_exo_diet <- 1
 cfg$gms$c15_kcal_scen <- "healthy_BMI"
 cfg$gms$c15_EAT_scen <- "FLX"
@@ -359,7 +359,7 @@ cfg$gms$c50_scen_neff <- "neff65_70_starty2010"
 # EUR specific
 cfg$gms$c15_food_scenario <- "SSP1"
 cfg$gms$s15_exo_waste <- 1
-cfg$gms$s15_waste_scen <- 1.15
+cfg$gms$s15_waste_scen <- 1.2
 cfg$gms$s15_exo_diet <- 1
 cfg$gms$c15_kcal_scen <- "healthy_BMI"
 cfg$gms$c15_EAT_scen <- "FLX"
@@ -389,7 +389,7 @@ cfg$gms$c50_scen_neff_noselect <- "neff60_60_starty2010"
 # EUR specific
 cfg$gms$c15_food_scenario <- "SSP1"
 cfg$gms$s15_exo_waste <- 1
-cfg$gms$s15_waste_scen <- 1.15
+cfg$gms$s15_waste_scen <- 1.2
 cfg$gms$s15_exo_diet <- 1
 cfg$gms$c15_kcal_scen <- "healthy_BMI"
 cfg$gms$c15_EAT_scen <- "FLX"
