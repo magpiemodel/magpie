@@ -8,7 +8,7 @@
 
  q58_transition_matrix(j2) ..
 	sum((from58,to58), v58_lu_transitions(j2,from58,to58)) =e= 
-	p58_peatland_area(j2);
+	sum((man58,land58), pc58_peatland_man(j2,man58,land58)) + pc58_peatland_intact(j2);
 
  q58_transition_to(j2,to58) ..
 	sum(from58, v58_lu_transitions(j2,from58,to58)) =e= 

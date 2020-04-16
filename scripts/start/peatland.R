@@ -50,7 +50,7 @@ cfg$gms$s56_c_price_induced_aff <- 0
 
 cfg$output <- c("rds_report","interpolation")
 
-prefix <- "T114"
+prefix <- "T115"
 
 for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
   pcost <- "default"
