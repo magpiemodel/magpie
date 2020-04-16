@@ -11,7 +11,7 @@
 *' on GDP per capita. Thus, interest rates are regionally specific and dynamic
 *' over time.
 *' Alternative interest rates can be selected via the interest rate coefficients
-*' (`s12_high_bound`, `s12_low_bound`, `s12_hist_high_bound`, `s12_hist_low_bound`).
+*' (`s12_interest_lic`, `s12_interest_hic`, `s12_hist_interest_lic`, `s12_hist_interest_hic`).
 *' The future interest rate policy fades in starting from 2025 until it is fully
 *' in effect by 2050.
 *' It is also possible to choose a global interest rate.
