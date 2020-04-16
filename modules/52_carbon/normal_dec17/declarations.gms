@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -15,9 +15,10 @@ positive variables
 ;
 
 parameters
- pm_carbon_density_ac(t,j,ac,c_pools)  Carbon density for age classes and carbon pools (tC per ha)
- pcm_carbon_stock(j,land,c_pools)     Current carbon in vegetation soil and litter for different land types (mio. tC)
- pc52_carbon_density_start(t,j,c_pools)  Carbon density for new land in other land pool (tC per ha)
+ pm_carbon_density_ac(t,j,ac,ag_pools)    		Above ground natveg carbon density for age classes and carbon pools (tC per ha)
+ pm_carbon_density_ac_forestry(t,j,ac,ag_pools)    Above ground plantation carbon density for age classes and carbon pools (tC per ha)
+ pc52_carbon_density_start(t,j,ag_pools)  Above ground carbon density for new land in other land pool (tC per ha)
+ pcm_carbon_stock(j,land,c_pools)         Current carbon in vegetation soil and litter for different land types (mio. tC)
 ;
 
 equations

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -7,7 +7,7 @@
 
 sets
 
-   kbe60(kcr) bio energy activities
+   kbe60(kall) bio energy activities
         / betr, begr /
 
    k1st60(kall) 1st generation bioenergy carriers
@@ -43,6 +43,6 @@ sets
    	SSPDB-SSP5-Ref-REMIND-MAGPIE/
 
    scen2ndres60 residues for second generation bioenergy scenarios
-       / ssp1, ssp2, ssp3, ssp4, ssp5, off /
+       / ssp1, ssp2, ssp3, ssp4, ssp5, sdp, off /
 
 ;

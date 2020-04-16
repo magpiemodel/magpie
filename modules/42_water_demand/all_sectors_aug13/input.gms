@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -12,7 +12,7 @@ s42_watdem_nonagr_scenario         Scenario for non agricultural water demand fr
 *                                                                                2: A2
 *                                                                                3: B1
 
-s42_irrig_eff_scenario     Scenario for irrigation efficiency      (1)      / 1 /
+s42_irrig_eff_scenario     Scenario for irrigation efficiency      (1)      / 2 /
 *                                      1: global static value
 *                                      2: regional static values from CS
 *                                      3: gdp driven increase
