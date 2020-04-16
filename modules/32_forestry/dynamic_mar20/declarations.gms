@@ -43,9 +43,6 @@ parameters
  p32_hv_area_past_avg(t,i)                          Average area harvested from plantations in past three time periods (mio. ha)
  p32_dummy_time(t)                                  Year difference between simulation time steps (yr)
  p32_dummy_elapsed(t)                               Elapsed time between simulation time step and two time steps in the past (yr)
- dummy_estb(t_all)
- dummy_harvest(t_all)
- dummy_offset
 ;
 
 positive variables

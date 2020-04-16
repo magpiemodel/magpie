@@ -6,5 +6,5 @@
 *** |  Contact: magpie@pik-potsdam.de
 **************start solve loop**************
 
- pm_prices(t,i,kforestry) = q16_supply_forestry.m(i,kforestry);
- pm_prices("y1995",i,kforestry)$(pm_prices("y1995",i,kforestry)=0) = 1;
+ pm_prices_woodymass(t,i,kforestry) = q16_supply_forestry.m(i,kforestry);
+ pm_prices_woodymass("y1995",i,kforestry)$(pm_prices_woodymass("y1995",i,kforestry)=0) = 1;

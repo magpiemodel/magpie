@@ -146,29 +146,17 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* Used data set: magpie4.2_default_apr20.tgz
 * md5sum: NA
-* Repository: http://rse.pik-potsdam.de/data/magpie/intern
-* 
-* Used data set: rev4.42_690d3718e151be1b450b394c1064b1c5_magpie.tgz
-* md5sum: NA
-* Repository: http://rse.pik-potsdam.de/data/magpie/intern
-* 
-* Used data set: rev4.42_690d3718e151be1b450b394c1064b1c5_validation.tgz
-* md5sum: NA
-* Repository: http://rse.pik-potsdam.de/data/magpie/intern
-* 
-* Used data set: calibration_H12_c200_26Feb20.tgz
-* md5sum: NA
-* Repository: http://rse.pik-potsdam.de/data/magpie/intern
-* 
-* Used data set: additional_data_rev3.78.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: private_forestry_dec18_20200312.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/users/mishra/additional_data_private_forestry
+* 
+* Used data set: coupling_co2_prices_apr20.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/magpie/users/mishra/projects/coupling
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -201,7 +189,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Fri Apr 03 02:43:16 2020
+* Last modification (input data): Thu Apr 16 22:18:08 2020
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -226,7 +214,8 @@ $offlisting
 *                    Key parameters during model runs
 
 $setglobal c_timesteps  coup2100
-$setglobal c_title  default
+$setglobal c_past  till_2010
+$setglobal c_title  SSP2_rev42_rev4p37
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /
@@ -238,7 +227,7 @@ scalars
 $setglobal drivers  aug17
 $setglobal land  feb15
 $setglobal costs  default
-$setglobal interest_rate  reg_feb18
+$setglobal interest_rate  select_apr20
 $setglobal tc  endo_jun18
 $setglobal yields  dynamic_aug18
 

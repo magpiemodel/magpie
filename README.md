@@ -21,8 +21,8 @@ based on future scenarios on GDP and population growth.
 A framework description paper has been published in
 Geoscientific Model Development (GMD): https://doi.org/10.5194/gmd-12-1299-2019
 
-The model documentation for version 4.1 can be found at
-https://rse.pik-potsdam.de/doc/magpie/4.1/
+The model documentation for version 4.2 can be found at
+https://rse.pik-potsdam.de/doc/magpie/4.2/
 
 A most recent version of the documentation can also be extracted from the
 model source code via the R package goxygen

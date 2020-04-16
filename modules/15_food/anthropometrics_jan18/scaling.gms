@@ -5,10 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-parameters
- pm_interest(i)        Current interest rate in each region (% per yr)
- p12_interest(t_all,i)	Interest rate (% per yr)
-* country-specific scenario switch
- p12_country_dummy(iso)               Dummy parameter indicating whether country is affected by interest rate scenario (1)
- p12_reg_shr(t_all,i) Weighted share of region with regards to interest rate scenario of countries (1)
-;
+v15_income_pc_real_ppp_iso.scale(iso) = 10e5;
+v15_kcal_intake_total_regr.scale(iso) = 10e3;
+v15_kcal_regr_total.scale(iso) = 10e4;

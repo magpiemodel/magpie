@@ -7,12 +7,12 @@ name,type,reason
 pm_land_start, input, not used
 pm_interest, input, not used
 pm_interest_dev, input, not used
-pm_growing_stock, input, not used
 pm_selfsuff_ext, input, not used
 fm_harvest_cost_ha, input, not used
 pm_climate_class, input, not used
-pm_carbon_density_ac, input, not used
 fm_growth_par, input, not used
 pm_demand_ext, input, not used
 vm_hvarea_forestry, var, not used
 vm_forestry_reduction, var, not used
+pm_timber_yield, input, not used
+pm_demand_ext_original, input, not used

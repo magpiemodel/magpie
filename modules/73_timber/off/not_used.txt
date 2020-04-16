@@ -6,11 +6,9 @@
 name,type,reason
 im_pop_iso, input, not used
 im_gdp_pc_ppp_iso, input, not used
-im_development_state, input, not used
-pm_growing_stock, input, not used
-pm_prices, input, not used
 fm_harvest_cost_ha, input, not used
 vm_secdforest_reduction, input, not used
 vm_other_reduction, input, not used
 vm_primforest_reduction, input, not used
 vm_cost_glo, input, not used
+pm_timber_yield, input, not used

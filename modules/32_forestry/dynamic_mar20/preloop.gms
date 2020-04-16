@@ -37,7 +37,7 @@ p32_rot_length_ac_eqivalent(t_historical,j) = p32_rot_length_ac_eqivalent("y1995
 ** Holding rotation lengths constant after the end of this century.
 p32_rot_length_ac_eqivalent(t_future,j) = p32_rot_length_ac_eqivalent("y2100",j);
 
-p32_rotation_regional(t,i) = ord(t) + smax(cell(i,j), p32_rot_length_ac_eqivalent(t,j)) + card(t_past_ff);;
+p32_rotation_regional(t,i) = ord(t) + smax(cell(i,j), p32_rot_length_ac_eqivalent(t,j)) + card(t_historical);;
 display p32_rotation_regional;
 
 ** Earlier we converted rotation lengths to absolute numbers, now we make the Conversion
@@ -53,16 +53,6 @@ p32_rotation_cellular_harvesting(t_all,j) = p32_rotation_cellular_estb(t_all,j);
 
 ** RL Extension
 p32_rotation_cellular_estb(t_all,j) = p32_rotation_cellular_estb(t_all,j) * c32_rotation_extension ;
-
-** Update harvesting rotations based on establishment rotations of past
-*loop(t_all,
-*  loop(j,
-*      p32_rotation_offset = p32_rotation_cellular_estb(t_all,j);
-*      if(ord(t_all)>p32_rotation_offset,
-*        p32_rotation_cellular_harvesting(t_all,j) = p32_rotation_cellular_estb(t_all-p32_rotation_offset,j);
-*        );
-*    );
-*);
 
 loop(j,
   loop(t_all,
@@ -82,11 +72,6 @@ loop(j,
 loop(t_all,
   p32_rotation_cellular_harvesting(t_all+1,j)$(abs(p32_rotation_cellular_harvesting(t_all+1,j) - p32_rotation_cellular_harvesting(t_all,j))>2 AND ord(t_all)<card(t_all)) = p32_rotation_cellular_harvesting(t_all,j);
   );
-
-*dummy_offset = p32_rotation_offset("SSA_182");
-*dummy_estb(t_all)    =   p32_rotation_cellular_estb(t_all,"SSA_182");
-*dummy_harvest(t_all) =  p32_rotation_cellular_harvesting(t_all,"SSA_182");
-*display dummy_estb, dummy_harvest;
 
 ** Rotation used for establishment decision - Same as harvesting rotation for now.
 ** This is declared as interface because this is also need in trade module.

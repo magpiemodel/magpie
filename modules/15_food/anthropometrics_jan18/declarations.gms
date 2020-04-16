@@ -69,10 +69,10 @@ parameters
  p15_modelstat(t)                       Model solver status (1)
  p15_iteration_counter(t)               Number of iterations required for reaching an equilibrium between food demand model and magpie (1)
  p15_convergence_measure(t)             Convergence measure to decide for continuation or stop of food_demand - magpie iteration (1)
- i15_dem_intercept(regr15)              Food regression parameters intercept in kcal or as share (X)
- i15_dem_saturation(regr15)             Food regression parameters saturation in kcal or as share (X)
- i15_dem_halfsat(regr15)                Food regression parameters halfsaturation (USD05PPP per cap)
- i15_dem_nonsat(regr15)                 Food regression parameters nonsaturation (1)
+ i15_dem_intercept(iso,regr15)          Food regression parameters intercept in kcal or as share (X)
+ i15_dem_saturation(iso,regr15)             Food regression parameters saturation in kcal or as share (X)
+ i15_dem_halfsat(iso,regr15)                Food regression parameters halfsaturation (USD05PPP per cap)
+ i15_dem_nonsat(iso,regr15)                 Food regression parameters nonsaturation (1)
 
 *prices
  p15_prices_kcal(t,iso,kfo)                        Prices from MAgPIE after optimization (USD05PPP per kcal)
@@ -120,7 +120,7 @@ parameters
   p15_balanceflow_kcal_lastcalibyear(iso,kfo) Balance flow of last historic time step for mismatch between FAOSTAT and demand estimates (kcal per capita per day)
 
 * before shock
- o15_kcal_regr_initial(iso,kfo)               Uncalibrated per capita demand before price shock (kcal per capita per day)
+ o15_kcal_regr_initial(t,iso,kfo)               Uncalibrated per capita demand before price shock (kcal per capita per day)
  p15_kcal_pc_initial(t,i,kfo)                 Per capita consumption in food demand model before price shock on regional level (kcal per capita per day)
  pm_kcal_pc_initial(t,i,kfo)                  Per capita consumption in food demand model before price shock (kcal per capita per day)
  p15_kcal_pc_initial_iso(t,iso,kfo)           Per capita consumption in food demand model before price shock on country level (kcal per capita per day)

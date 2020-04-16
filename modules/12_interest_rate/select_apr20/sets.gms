@@ -6,14 +6,16 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-        scen12 Interest rate scenarios
-                  / low, medium, high /
+  scen12 Interest rate scenarios
+  / low, medium, high /
 
-        scen12_to_dev(scen12,dev) Mapping between interest scneario and economic development status
-      /        high        . (lic)
-               medium      . (mic)
-               low         . (hic) /
+	bound12 Bound for interest rate
+	/ low, high/
 
-        t_to_i_to_dev(t_all,i,dev) Mapping between time, region and economic development status
+  scen12_to_dev(scen12,dev) Mapping between interest scneario and economic development status
+  /       high        . (lic)
+          medium      . (mic)
+          low         . (hic) /
 
+  t_to_i_to_dev(t_all,i,dev) Mapping between time, region and economic development status
 ;
