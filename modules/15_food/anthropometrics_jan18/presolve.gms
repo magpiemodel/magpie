@@ -6,16 +6,21 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
+
 if(m_year(t) <= sm_fix_SSP2,
- i15_dem_intercept(regr15)   = f15_demand_paras(regr15,"SSP2","intercept");
- i15_dem_saturation(regr15)  = f15_demand_paras(regr15,"SSP2","saturation");
- i15_dem_halfsat(regr15)     = f15_demand_paras(regr15,"SSP2","halfsaturation");
- i15_dem_nonsat(regr15)      = f15_demand_paras(regr15,"SSP2","non_saturation");
-else 
- i15_dem_intercept(regr15)   = f15_demand_paras(regr15,"%c15_food_scenario%","intercept");
- i15_dem_saturation(regr15)  = f15_demand_paras(regr15,"%c15_food_scenario%","saturation");
- i15_dem_halfsat(regr15)     = f15_demand_paras(regr15,"%c15_food_scenario%","halfsaturation");
- i15_dem_nonsat(regr15)      = f15_demand_paras(regr15,"%c15_food_scenario%","non_saturation");
+ i15_dem_intercept(iso,regr15)   = f15_demand_paras(regr15,"SSP2","intercept");
+ i15_dem_saturation(iso,regr15)  = f15_demand_paras(regr15,"SSP2","saturation");
+ i15_dem_halfsat(iso,regr15)     = f15_demand_paras(regr15,"SSP2","halfsaturation");
+ i15_dem_nonsat(iso,regr15)      = f15_demand_paras(regr15,"SSP2","non_saturation");
+else
+ i15_dem_intercept(iso,regr15)   = f15_demand_paras(regr15,"%c15_food_scenario%","intercept")*p15_country_dummy(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","intercept")*(1-p15_country_dummy(iso));
+ i15_dem_saturation(iso,regr15)  = f15_demand_paras(regr15,"%c15_food_scenario%","saturation")*p15_country_dummy(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","saturation")*(1-p15_country_dummy(iso));
+ i15_dem_halfsat(iso,regr15)     = f15_demand_paras(regr15,"%c15_food_scenario%","halfsaturation")*p15_country_dummy(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","halfsaturation")*(1-p15_country_dummy(iso));
+ i15_dem_nonsat(iso,regr15)      = f15_demand_paras(regr15,"%c15_food_scenario%","non_saturation")*p15_country_dummy(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","non_saturation")*(1-p15_country_dummy(iso));
 );
 
 option nlp = conopt4
@@ -151,18 +156,13 @@ else
           p15_bodyheight(t,iso,sex,age++1,"preliminary") = p15_bodyheight(t,iso,sex,age,"preliminary");
 
 * replace age groups of 18 year old
-          p15_bodyheight(t,iso,"F","15--19","preliminary") =
-                 126.4*
+          p15_bodyheight(t,iso,sex,"15--19","preliminary") =
+                 f15_bodyheight_regr_paras(sex,"slope")*
                  (sum(underaged15,
                    p15_kcal_growth_food(t,iso,underaged15)
-                 )/3)**0.03467
+                 )/3)**f15_bodyheight_regr_paras(sex,"exponent")
                  ;
-          p15_bodyheight(t,iso,"M","15--19","preliminary") =
-                 131.8*
-                 (sum(underaged15,
-                   p15_kcal_growth_food(t,iso,underaged15)
-                 )/3)**0.03978
-                 ;
+
      );
 *adjust body height of kids proportional to over18 population
      p15_bodyheight(t,iso,"M","0--4","preliminary")=p15_bodyheight(t,iso,"M","15--19","preliminary")/176*92;
@@ -333,7 +333,7 @@ else
  p15_kcal_pc_initial_iso(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
  pm_kcal_pc_initial(t,i,kfo) =  p15_kcal_pc(t,i,kfo);
 
- o15_kcal_regr_initial(iso,kfo)=v15_kcal_regr.l(iso,kfo);
+ o15_kcal_regr_initial(t,iso,kfo)=v15_kcal_regr.l(iso,kfo);
 
 * Finally, we calibrate countries with zero food demand according to FAOSTAT
 * down to zero to match FAO world totals.

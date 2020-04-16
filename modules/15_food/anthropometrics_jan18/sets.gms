@@ -65,6 +65,9 @@ sets
    paras_b15 Intake equation parameters
    /saturation,halfsaturation,intercept/
 
+   paras_h15 Bodyheight equation parameters
+   /slope, exponent/
+
    kfo(kall) All products in the sectoral version
    /
    tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,puls_pro,
@@ -177,6 +180,7 @@ sets
 ;
 
 alias(kst,kst2);
+alias(bmi_group15,bmi_group15_2);
 alias(kfo,kfo2);
 alias(kfo_ap,kfo_ap2);
 alias(kfo_st,kfo_st2);
