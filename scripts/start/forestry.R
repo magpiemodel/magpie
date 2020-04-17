@@ -28,8 +28,8 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "BF22"
-cat(paste0("5 year runs. Fixed harvest rule update via loop. Discussed with Florian --- this is okay. Added additional switch to select plantation yield via growing stock calculation. The Growing stock is calculated normally but is divided based on plantation yield flag in two streams of two new parameters. Annual Yields are now calculated from this and used in equations. Separated growing stocks are used for reporting. New flags added to make tests where plantations are treated as natveg. Hotelling rule input file will also be used to make co2 price runs in policy case. CO2 prices in baseline runs bugfix included. Those are fixed to 0. Woodfuel demand 50% across the board. "), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+identifier_flag <- "BF23"
+cat(paste0("Price based fix test. 5 year runs. Fixed harvest rule update via loop. Discussed with Florian --- this is okay. Added additional switch to select plantation yield via growing stock calculation. The Growing stock is calculated normally but is divided based on plantation yield flag in two streams of two new parameters. Annual Yields are now calculated from this and used in equations. Separated growing stocks are used for reporting. New flags added to make tests where plantations are treated as natveg. Hotelling rule input file will also be used to make co2 price runs in policy case. CO2 prices in baseline runs bugfix included. Those are fixed to 0. Woodfuel demand 50% across the board. "), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 for(s73_price_adjuster in c(1,0)){
   cfg$gms$s73_price_adjuster <- s73_price_adjuster
