@@ -53,7 +53,7 @@ cfg$gms$s80_optfile <- 1
 cfg$output <- c("rds_report","interpolation")
 
 #prefix <- "T118"
-prefix <- "T122"
+prefix <- "T123"
 
 #for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
 for (ssp in c("SSP2")) {
