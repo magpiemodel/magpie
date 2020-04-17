@@ -8,7 +8,7 @@
 sets
  
   man58 Peatland status managed
-    / degrad, unused, rewet /
+    / degrad, rewet /
   
   ef58(man58) Peatland ef categories
     / degrad, rewet /
@@ -19,13 +19,11 @@ sets
   stat58 Peatland status
     / intact, 
     degrad_crop, degrad_past, degrad_forestry, 
-    unused_crop, unused_past, unused_forestry, 
     rewet_crop, rewet_past, rewet_forestry /
 
   from58(stat58) Peatland status
     / intact, 
     degrad_crop, degrad_past, degrad_forestry, 
-    unused_crop, unused_past, unused_forestry, 
     rewet_crop, rewet_past, rewet_forestry /
 
   stat_degrad_from58(from58) Peatland status
@@ -34,7 +32,6 @@ sets
   to58(stat58) Peatland status
     / intact, 
     degrad_crop, degrad_past, degrad_forestry, 
-    unused_crop, unused_past, unused_forestry, 
     rewet_crop, rewet_past, rewet_forestry /
 
   stat_rewet58(to58) Peatland status
@@ -51,37 +48,37 @@ sets
 
   clcl_climate58(clcl,climate58) Climate classification types
            /
-           Af .(tropical) "equatorial fully humid"
-           Am .(tropical) "equatorial monsoonal"
-           As .(tropical) "equatorial summer dry"
-           Aw .(tropical) "equatorial winter dry"
-           BSh .(tropical) "arid steppe hot arid"
-           BSk .(tropical) "arid steppe cold arid"
-           BWh .(tropical) "arid desert hot arid"
-           BWk .(tropical) "arid desert cold arid"
-           Cfa .(temperate) "warm temperate fully humid hot summer"
-           Cfb .(temperate) "warm temperate fully humid warm summer"
-           Cfc .(temperate) "warm temperate fully humid cool summer"
-           Csa .(temperate) "warm temperate summer dry hot summer"
-           Csb .(temperate) "warm temperate summer dry warm summer"
-           Csc .(temperate) "warm temperate summer dry cool summer"
-           Cwa .(temperate) "warm temperate winter dry hot summer"
-           Cwb .(temperate) "warm temperate winter dry warm summer"
-           Cwc .(temperate) "warm temperate winter dry cool summer"
-           Dfa .(boreal) "snow fully humid hot summer"
-           Dfb .(boreal) "snow fully humid warm summer"
-           Dfc .(boreal) "snow fully humid cool summer"
-           Dfd .(boreal) "snow fully humid extremely continental"
-           Dsa .(boreal) "snow summer dry hot summer"
-           Dsb .(boreal) "snow summer dry warm summer"
-           Dsc .(boreal) "snow summer dry cool summer"
+           Af .(tropical) "Tropical rainforest climate"
+           Am .(tropical) "Tropical monsoon climate"
+           As .(tropical) "Tropical dry savanna climate"
+           Aw .(tropical) "Tropical savanna, wet"
+           BSh .(tropical) "Hot semi-arid (steppe) climate"
+           BSk .(tropical) "Cold semi-arid (steppe) climate"
+           BWh .(tropical) "Hot deserts climate"
+           BWk .(tropical) "Cold desert climate"
+           Cfa .(tropical) "Humid subtropical climate"
+           Cfb .(temperate) "Temperate oceanic climate"
+           Cfc .(temperate) "Subpolar oceanic climate"
+           Csa .(temperate) "Hot-summer Mediterranean climate"
+           Csb .(temperate) "Warm-summer Mediterranean climate"
+           Csc .(temperate) "Cool-summer Mediterranean climate"
+           Cwa .(tropical) "Monsoon-influenced humid subtropical climate"
+           Cwb .(tropical) "Subtropical highland climate or temperate oceanic climate with dry winters"
+           Cwc .(temperate) "Cold subtropical highland climate or subpolar oceanic climate with dry winters"
+           Dfa .(boreal) "Hot-summer humid continental climate"
+           Dfb .(boreal) "Warm-summer humid continental climate"
+           Dfc .(boreal) "Subarctic climate"
+           Dfd .(boreal) "Extremely cold subarctic climate"
+           Dsa .(boreal) "Hot, dry-summer continental climate"
+           Dsb .(boreal) "Warm, dry-summer continental climate"
+           Dsc .(boreal) "Dry-summer subarctic climate"
            Dsd .(boreal) "snow summer dry extremely continental"
-           Dwa .(boreal) "snow winter dry hot summer"
-           Dwb .(boreal) "snow winter dry warm summer"
-           Dwc .(boreal) "snow winter dry cool summer"
-           Dwd .(boreal) "snow winter dry extremely continental"
-           EF .(boreal) "polar polar frost"
-           ET .(boreal) "polar polar tundra"
+           Dwa .(boreal) "Monsoon-influenced hot-summer humid continental climate"
+           Dwb .(boreal) "Monsoon-influenced warm-summer humid continental climate"
+           Dwc .(boreal) "Monsoon-influenced subarctic climate"
+           Dwd .(boreal) "Monsoon-influenced extremely cold subarctic climate"
+           EF .(boreal) "Ice cap climate"
+           ET .(boreal) "Tundra"
            /
 
 ;

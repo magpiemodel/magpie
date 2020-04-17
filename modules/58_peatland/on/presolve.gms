@@ -30,18 +30,9 @@ else
 	v58_lu_transitions.up(j2,"intact","degrad_crop") = Inf;
 	v58_lu_transitions.up(j2,"intact","degrad_past") = Inf;
 	v58_lu_transitions.up(j2,"intact","degrad_forestry") = Inf;
-	v58_lu_transitions.up(j2,"degrad_crop","unused_crop") = Inf;
-	v58_lu_transitions.up(j2,"degrad_past","unused_past") = Inf;
-	v58_lu_transitions.up(j2,"degrad_forestry","unused_forestry") = Inf;
 	v58_lu_transitions.up(j2,"degrad_crop","rewet_crop") = Inf;
 	v58_lu_transitions.up(j2,"degrad_past","rewet_past") = Inf;
 	v58_lu_transitions.up(j2,"degrad_forestry","rewet_forestry") = Inf;
-	v58_lu_transitions.up(j2,"unused_crop","rewet_crop") = Inf;
-	v58_lu_transitions.up(j2,"unused_past","rewet_past") = Inf;
-	v58_lu_transitions.up(j2,"unused_forestry","rewet_forestry") = Inf;
-	v58_lu_transitions.up(j2,"unused_crop","degrad_crop") = Inf;
-	v58_lu_transitions.up(j2,"unused_past","degrad_past") = Inf;
-	v58_lu_transitions.up(j2,"unused_forestry","degrad_forestry") = Inf;
 );
 
 pc58_peatland_cost_past(j) = p58_peatland_cost_past(t,j);

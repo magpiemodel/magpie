@@ -15,9 +15,6 @@
 	v58_peatland_man(j2,"degrad","crop")$(sameas(to58,"degrad_crop"))
 	+ v58_peatland_man(j2,"degrad","past")$(sameas(to58,"degrad_past"))
 	+ v58_peatland_man(j2,"degrad","forestry")$(sameas(to58,"degrad_forestry"))
-	+ v58_peatland_man(j2,"unused","crop")$(sameas(to58,"unused_crop"))
-	+ v58_peatland_man(j2,"unused","past")$(sameas(to58,"unused_past"))
-	+ v58_peatland_man(j2,"unused","forestry")$(sameas(to58,"unused_forestry"))
 	+ v58_peatland_man(j2,"rewet","crop")$(sameas(to58,"rewet_crop"))
 	+ v58_peatland_man(j2,"rewet","past")$(sameas(to58,"rewet_past"))
 	+ v58_peatland_man(j2,"rewet","forestry")$(sameas(to58,"rewet_forestry"))
@@ -28,9 +25,6 @@
 	pc58_peatland_man(j2,"degrad","crop")$(sameas(from58,"degrad_crop"))
 	+ pc58_peatland_man(j2,"degrad","past")$(sameas(from58,"degrad_past"))
 	+ pc58_peatland_man(j2,"degrad","forestry")$(sameas(from58,"degrad_forestry"))
-	+ pc58_peatland_man(j2,"unused","crop")$(sameas(from58,"unused_crop"))
-	+ pc58_peatland_man(j2,"unused","past")$(sameas(from58,"unused_past"))
-	+ pc58_peatland_man(j2,"unused","forestry")$(sameas(from58,"unused_forestry"))
 	+ pc58_peatland_man(j2,"rewet","crop")$(sameas(from58,"rewet_crop"))
 	+ pc58_peatland_man(j2,"rewet","past")$(sameas(from58,"rewet_past"))
 	+ pc58_peatland_man(j2,"rewet","forestry")$(sameas(from58,"rewet_forestry"))
@@ -62,8 +56,8 @@
 
  q58_peatland_degrad(j2,land58) ..
 	v58_peatland_man(j2,"degrad",land58) =g=
-	pc58_peatland_man(j2,"degrad",land58)
-  + ((vm_land(j2,land58) - pcm_land(j2,land58))*p58_scaling_factor(j2))$(sum(ct, m_year(ct))>2015);
+    pc58_peatland_man(j2,"degrad",land58)$(sum(ct, m_year(ct))<=2015)
+	+ vm_land(j2,land58)*p58_scaling_factor(j2))$(sum(ct, m_year(ct))>2015);
 
 *' Either conversion of intact to degraded peatland OR conversion of degraded to rewetted peatland.
 *' This constraint avoid the conversion of intact peatland into rewetted peatland.
@@ -88,11 +82,11 @@
     sum(stat_degrad58, v58_lu_transitions(j2,"intact",stat_degrad58) * s58_degrad_cost_onetime))
 	* sum(cell(i2,j2),pm_interest(i2)/(1+pm_interest(i2)));
 
- q58_peatland_emis_detail(j2,climate58,emis58) ..
-	v58_peatland_emis(j2,climate58,emis58) =e=
-	sum((man58,land58), v58_peatland_man(j2,man58,land58) * p58_ipcc_wetland_ef(climate58,land58,emis58,man58) *
-                 p58_mapping_cell_climate(j2,climate58));
+ q58_peatland_emis_detail(j2,emis58) ..
+	v58_peatland_emis(j2,emis58) =e=
+	sum((man58,land58), v58_peatland_man(j2,man58,land58) * 
+	sum(climate58, p58_mapping_cell_climate(j2,climate58) * p58_ipcc_wetland_ef(climate58,land58,emis58,man58)));
 
  q58_peatland_emis(j2) ..
 	vm_peatland_emis(j2) =e=
-	sum((climate58,emis58), v58_peatland_emis(j2,climate58,emis58));
+	sum(emis58, v58_peatland_emis(j2,emis58));

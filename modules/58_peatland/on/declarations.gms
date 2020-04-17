@@ -31,12 +31,12 @@ equations
  q58_peatland_intact(j)							Intact to degrad peatland constraint (mio. ha)
  q58_peatland_cost(j)							One-time and recurring cost of managed peatland (mio. USD05MER per yr)
  q58_peatland_cost_annuity(j)					Annuity costs of managed peatland expansion in the current timestep (mio. USD05MER per yr)
- q58_peatland_emis_detail(j,climate58,emis58)	Detailed GHG emissions from managed peatland (t CO2eq per year)
+ q58_peatland_emis_detail(j,emis58)				Detailed GHG emissions from managed peatland (t CO2eq per year)
  q58_peatland_emis(j)							GHG emissions from managed peatland (t CO2eq per year)
 ;
 
 variables
- v58_peatland_emis(j,climate58,emis58)	Detailed GHG emissions from managed peatland (t CO2eq per year)
+ v58_peatland_emis(j,emis58)				Detailed GHG emissions from managed peatland (t CO2eq per year)
 ;
 
 positive variables
