@@ -28,21 +28,21 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "BF23"
-cat(paste0("Price based fix test. 5 year runs. Fixed harvest rule update via loop. Discussed with Florian --- this is okay. Added additional switch to select plantation yield via growing stock calculation. The Growing stock is calculated normally but is divided based on plantation yield flag in two streams of two new parameters. Annual Yields are now calculated from this and used in equations. Separated growing stocks are used for reporting. New flags added to make tests where plantations are treated as natveg. Hotelling rule input file will also be used to make co2 price runs in policy case. CO2 prices in baseline runs bugfix included. Those are fixed to 0. Woodfuel demand 50% across the board. "), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+identifier_flag <- "BF24"
+cat(paste0("Yield from half of rotation length seen at estblishment point. This means that the model would then establish more trees. Price based fix test. 5 year runs. Fixed harvest rule update via loop. Discussed with Florian --- this is okay. Added additional switch to select plantation yield via growing stock calculation. The Growing stock is calculated normally but is divided based on plantation yield flag in two streams of two new parameters. Annual Yields are now calculated from this and used in equations. Separated growing stocks are used for reporting. New flags added to make tests where plantations are treated as natveg. Hotelling rule input file will also be used to make co2 price runs in policy case. CO2 prices in baseline runs bugfix included. Those are fixed to 0. Woodfuel demand 50% across the board. "), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 for(s73_price_adjuster in c(1,0)){
   cfg$gms$s73_price_adjuster <- s73_price_adjuster
 
   for(ssp in c("SSP2")){
 
-    for(timber_demand in c("biomass_mar20","off")){ ## Add "off" here to turn off timber demand
+    for(timber_demand in c("biomass_mar20")){ ## Add "off" here to turn off timber demand
 
       cfg$gms$timber <- timber_demand
 
       for (co2_price_path in c("NPI")) { ## Add "2deg" here for CO2 price runs
 
-        if (co2_price_path == "NPI") {
+        if (co2_price_path == "NPI","2deg") {
           cfg <- setScenario(cfg,c(ssp,"NPI"))
           co2_price_path_flag = "Baseline"
         } else if (co2_price_path == "2deg"){
