@@ -53,10 +53,11 @@ cfg$gms$s80_optfile <- 1
 cfg$output <- c("rds_report","interpolation")
 
 #prefix <- "T118"
-prefix <- "T120"
+prefix <- "T121"
 
 #for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
 for (ssp in c("SSP2")) {
+  cfg$gms$s58_degrad_cost_onetime  <- 0
   pcost <- "default"
   #reset restor costs to default values
   cfg$gms$s58_rewet_cost_onetime  <- 7000
