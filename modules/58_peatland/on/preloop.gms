@@ -40,8 +40,8 @@ p58_peatland_degrad_left(j) = p58_peatland_degrad_left(j)-pc58_peatland_man(j,"d
 pc58_peatland_man(j,"degrad","past") = min(p58_peatland_degrad_left(j),pcm_land(j,"past")*p58_scaling_factor(j));
 p58_peatland_degrad_left(j) = p58_peatland_degrad_left(j)-pc58_peatland_man(j,"degrad","past");
 *Third step: forestry
-pc58_peatland_man(j,"degrad","forestry") = min(p58_peatland_degrad_left(j),pcm_land(j,"forestry")*p58_scaling_factor(j));
-p58_peatland_degrad_left(j) = p58_peatland_degrad_left(j)-pc58_peatland_man(j,"degrad","forestry");
+*pc58_peatland_man(j,"degrad","forestry") = min(p58_peatland_degrad_left(j),pcm_land(j,"forestry")*p58_scaling_factor(j));
+*p58_peatland_degrad_left(j) = p58_peatland_degrad_left(j)-pc58_peatland_man(j,"degrad","forestry");
 *Finally, the remaining undistributed degraded peatland is equally distributed among crop, past and forestry.
 pc58_peatland_man(j,"degrad",land58) = pc58_peatland_man(j,"degrad",land58) + p58_peatland_degrad_left(j)/card(land58);
 

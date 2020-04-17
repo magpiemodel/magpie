@@ -28,10 +28,10 @@ else
 	v58_lu_transitions.fx(j2,from58,to58)$(not sameas(from58,to58)) = 0;
 	v58_lu_transitions.up(j2,"intact","degrad_crop") = Inf;
 	v58_lu_transitions.up(j2,"intact","degrad_past") = Inf;
-	v58_lu_transitions.up(j2,"intact","degrad_forestry") = Inf;
+*	v58_lu_transitions.up(j2,"intact","degrad_forestry") = Inf;
 	v58_lu_transitions.up(j2,"degrad_crop","rewet_crop") = Inf;
 	v58_lu_transitions.up(j2,"degrad_past","rewet_past") = Inf;
-	v58_lu_transitions.up(j2,"degrad_forestry","rewet_forestry") = Inf;
+*	v58_lu_transitions.up(j2,"degrad_forestry","rewet_forestry") = Inf;
 );
 
 pc58_peatland_cost_past(j) = p58_peatland_cost_past(t,j);
