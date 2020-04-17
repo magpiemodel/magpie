@@ -273,7 +273,7 @@ $setglobal livestock  fbask_jan16
 
 $setglobal disagg_lvst  off
 
-$setglobal timber  off
+$setglobal timber  biomass_mar20
 
 $setglobal optimization  nlp_apr17
 

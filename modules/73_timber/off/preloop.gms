@@ -18,8 +18,10 @@ vm_hvarea_forestry.fx(j,ac_sub) = 0;
 vm_forestry_reduction.fx(j,"plant",ac_sub) = 0;
 pm_demand_ext_original(t_ext,i,kforestry) = 0;
 pm_demand_ext(t_ext,i,kforestry) = pm_demand_ext_original(t_ext,i,kforestry);
-f21_trade_balanceflow(t_all,kforestry) = 0;
-vm_prod.fx(j,kforestry) = 0;
+*f21_trade_balanceflow(t_all,kforestry) = 0;
+***** Not fixinf production to zero because trade balanceflow has some positive numbers.
+***** This will break the production equation in trade. Keeping vm_prod not fixed to 0 helps in this.
+*vm_prod.fx(j,kforestry) = 0;
 
 *m3 to ton conversion.
 *0.6 ton DM / m^3?
