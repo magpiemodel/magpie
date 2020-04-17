@@ -52,11 +52,9 @@ cfg$gms$s80_optfile <- 1
 
 cfg$output <- c("rds_report","interpolation")
 
-#prefix <- "T117"
-prefix <- "TEST4"
+prefix <- "T118"
 
-#for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
-for (ssp in c("SSP2")) {
+for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
   pcost <- "default"
   
   #cfg$gms$tc <- "endo_jun18"
@@ -70,7 +68,7 @@ for (ssp in c("SSP2")) {
   
   cfg$gms$s56_peatland_policy <- 0
   cfg$gms$s58_rewetting_switch  <- 0
-  #start_run(cfg,codeCheck=FALSE)
+  start_run(cfg,codeCheck=FALSE)
 
   #Pol
   #getInput("/p/projects/remind/runs/magpie4-2019-04-02-develop/output/r8473-trunk-C_Budg600-mag-4/fulldata.gdx")
@@ -82,14 +80,14 @@ for (ssp in c("SSP2")) {
   cfg$title <- paste(prefix,ssp,"RCP2p6",pcost,sep="_")
   cfg$gms$s56_peatland_policy <- 0
   cfg$gms$s58_rewetting_switch  <- 0
-  #start_run(cfg,codeCheck=FALSE)
+  start_run(cfg,codeCheck=FALSE)
 
   # cfg$gms$tc <- "exo"
   # tau(paste0("output/",paste(prefix,ssp,"RCP2p6",pcost,sep="_"),"/fulldata.gdx"),"modules/13_tc/input/f13_tau_scenario.csv")
   cfg$title <- paste(prefix,ssp,"RCP2p6+PeatProt",pcost,sep="_")
   cfg$gms$s56_peatland_policy <- 1
   cfg$gms$s58_rewetting_switch  <- 0
-  #start_run(cfg,codeCheck=FALSE)
+  start_run(cfg,codeCheck=FALSE)
 
   cfg$title <- paste(prefix,ssp,"RCP2p6+PeatRestor",pcost,sep="_")
   cfg$gms$s56_peatland_policy <- 1
@@ -110,6 +108,6 @@ for (ssp in c("SSP2")) {
     cfg$title <- paste(prefix,ssp,"RCP2p6+PeatRestor",pcost,sep="_")
     cfg$gms$s56_peatland_policy <- 1
     cfg$gms$s58_rewetting_switch  <- Inf
-    #start_run(cfg,codeCheck=FALSE)
+    start_run(cfg,codeCheck=FALSE)
   }
 }
