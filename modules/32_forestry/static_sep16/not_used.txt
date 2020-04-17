@@ -5,4 +5,5 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
-im_development_state,input,questionnaire
+pm_carbon_density_ac_forestry, input, not needed
+sm_fix_SSP2, input, not needed

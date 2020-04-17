@@ -5,17 +5,13 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+$setglobal c12_interest_rate  gdp_dependent
+$setglobal c12_interest_rate_noselect  gdp_dependent
 
-$setglobal c55_scen_conf  ssp2
-$setglobal c55_scen_conf_noselect  ssp2
-*   options:   SSP: "ssp1", "ssp2", "ssp3", "ssp4", "ssp5", "constant"
-*             SRES: "a1", "a2", "b1", "b2"
-*             GoodPractice: "GoodPractice"
-
-* Set-switch for countries affected by regional ghg policy
+* Set-switch for countries affected by country-specific interest rate scenario
 * Default: all iso countries selected
 sets
-  scen_countries55(iso) countries to be affected by awm scenario / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
+  select_countries12(iso) countries to be affected by chosen interest rate scenario / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
                           ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
                           BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
                           BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,
@@ -42,26 +38,22 @@ sets
                           VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 ;
 
-parameter f55_awms_recycling_share(i,kli,awms_conf) share of Nr in confinement recycled (tNr per tNr)
-/
+table f12_interest_bound(t,bound12) Lower and higher bounds of interest rates (% per yr)
 $ondelim
-$include "./modules/55_awms/ipcc2006_aug16/input/f55_awms_recycling_share.cs4"
+$include "./modules/12_interest_rate/input/f12_interest_rate_bound.cs3"
 $offdelim
-/
 ;
 
-parameter f55_awms_shr(t_all,i,scen_conf55,kli,awms_conf) share of Nr in confinement recycled (tNr per tNr)
-/
+table f12_interest(t_all,scen12)  Interest rate scenarios (% per yr)
 $ondelim
-$include "./modules/55_awms/ipcc2006_aug16/input/f55_awms_shr.cs4"
+$include "./modules/12_interest_rate/input/f12_interest_rate.cs3"
 $offdelim
-/
 ;
 
-parameter f55_manure_fuel_shr(t_all,i,kli,gdp_scen09) share of Nr in confinement recycled (tNr per tNr)
-/
-$ondelim
-$include "./modules/55_awms/ipcc2006_aug16/input/f55_manure_fuel_shr.cs4"
-$offdelim
-/
-;
+$if "%c12_interest_rate%" == "coupling" parameter f12_interest_coupling(t_all) Interest rate (% per yr)
+$if "%c12_interest_rate%" == "coupling" /
+$if "%c12_interest_rate%" == "coupling" $ondelim
+$if "%c12_interest_rate%" == "coupling" $include "./modules/12_interest_rate/input/f12_interest_rate_coupling.csv"
+$if "%c12_interest_rate%" == "coupling" $offdelim
+$if "%c12_interest_rate%" == "coupling" /
+$if "%c12_interest_rate%" == "coupling" ;

@@ -18,6 +18,7 @@ parameters
  p32_aff_pol_timestep(t,j)			     Exogenous afforestation target as flow per time step (mio. ha per timestep)
  p32_aff_togo(t)              		     Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
  p32_cdr_ac(t,j,ac)						 Non-cumulative CDR from afforestation for each age-class depending on planning horizon (tC per ha)
+ p32_carbon_density_ac(t,j,type32,ac,ag_pools)      Carbon density for ac and ag_pools (tC per ha)
 ;
 
 positive variables
@@ -39,6 +40,7 @@ equations
  q32_land_reduction(j,type32,ac)	   	  Forestry land reduction (mio. ha)
  q32_max_aff					          Maximum total global afforestation (mio. ha)
  q32_aff_pol(j)					          Afforestation policy constraint (mio. ha)
+ q32_aff_ac0(j)							  Afforestation constraint for ac0 (mio. ha)
 ;
 
 
@@ -59,5 +61,6 @@ parameters
  oq32_land_reduction(t,j,type32,ac,type) Forestry land reduction (mio. ha)
  oq32_max_aff(t,type)                    Maximum total global afforestation (mio. ha)
  oq32_aff_pol(t,j,type)                  Afforestation policy constraint (mio. ha)
+ oq32_aff_ac0(t,j,type)                  Afforestation constraint for ac0 (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

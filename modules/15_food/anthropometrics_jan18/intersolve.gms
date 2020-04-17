@@ -55,7 +55,16 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
                                  im_pop_iso(t,iso)
                              );
 
- p15_delta_income(t,i) = p15_income_pc_real_ppp(t,i) / im_gdp_pc_ppp(t,i);
+
+
+ p15_delta_income(t,i) = p15_income_pc_real_ppp(t,i) /
+						( sum(i_to_iso(i,iso),
+                               im_gdp_pc_ppp_iso(t,iso)
+                               * im_pop_iso(t,iso)
+                             ) / sum(i_to_iso(i,iso),
+                                 im_pop_iso(t,iso))
+                        );
+
 
 * estimate convergence measure for deciding to stop iteration
 
@@ -86,7 +95,7 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
 display "finished iteration number ", p15_iteration_counter;
 display "convergence measure:",p15_convergence_measure;
 
-if (s15_elastic_demand * (1-sum(sameas(t_past,t),1)) =1,
+if (s15_elastic_demand = 1 AND m_year(t) > sm_fix_SSP2,
   display "elastic demand model is activated";
   if ((p15_convergence_measure(t) > s15_convergence and p15_iteration_counter(t) <= s15_maxiter),
 
@@ -231,8 +240,8 @@ if(s15_exo_waste = 1,
 * waste reduction target, i.e. only for values that are higher than the target:
 
 p15_demand2intake_ratio_scen(t,i)$(p15_demand2intake_ratio(t,i) > s15_waste_scen )
-                    = p15_demand2intake_ratio(t,i)*(1-i15_exo_foodscen_fader(t))
-                      + s15_waste_scen*i15_exo_foodscen_fader(t);
+                    = p15_demand2intake_ratio(t,i)*(1-i15_exo_foodscen_fader(t,i))
+                      + s15_waste_scen*i15_exo_foodscen_fader(t,i);
 
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated(t,i,kfo)$(p15_demand2intake_ratio(t,i) >0 ) = p15_kcal_pc_calibrated_orig(t,i,kfo)*(
@@ -276,8 +285,8 @@ i15_kcal_pc_scen_target(t,i,kfo) = (f15_calib_fsupply(i)*f15_overcons_FAOwaste(i
 *' convergence:
 
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
-p15_kcal_pc_calibrated(t,i,kfo) = p15_kcal_pc_calibrated_orig(t,i,kfo) * (1-i15_exo_foodscen_fader(t))
-                        + i15_kcal_pc_scen_target(t,i,kfo) * i15_exo_foodscen_fader(t);
+p15_kcal_pc_calibrated(t,i,kfo) = p15_kcal_pc_calibrated_orig(t,i,kfo) * (1-i15_exo_foodscen_fader(t,i))
+                        + i15_kcal_pc_scen_target(t,i,kfo) * i15_exo_foodscen_fader(t,i);
 
 
 );

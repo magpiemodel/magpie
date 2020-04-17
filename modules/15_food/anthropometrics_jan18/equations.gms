@@ -168,9 +168,9 @@ q15_regr_kcal(iso) ..
 
 q15_regr(iso, regr15) ..
          v15_demand_regr(iso, regr15) =e=
-         i15_dem_intercept(regr15)
-         + (i15_dem_saturation(regr15) * v15_income_pc_real_ppp_iso(iso))
-         / (i15_dem_halfsat(regr15) + v15_income_pc_real_ppp_iso(iso)**i15_dem_nonsat(regr15));
+         i15_dem_intercept(iso,regr15)
+         + (i15_dem_saturation(iso,regr15) * v15_income_pc_real_ppp_iso(iso))
+         / (i15_dem_halfsat(iso,regr15) + v15_income_pc_real_ppp_iso(iso)**i15_dem_nonsat(iso,regr15));
 
 *' In the subsequent equations, those parameters
 *' are used to determine the dietary composition using a hierachical tree:

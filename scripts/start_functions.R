@@ -9,7 +9,7 @@
 # Define internal functions
 ################################################################################
 .update_sets <- function(cpr,map) {
-  
+
   reg1 <- unique(map$RegionCode)
   reg2 <- names(cpr)
   if(!all(union(reg1,reg2) %in% intersect(reg1,reg2))) {
@@ -17,14 +17,14 @@
          "\n cpr info: ",paste(reg2,collapse=", "),
          "\n spatial header info: ", paste(reg1,collapse=", "))
   }
-  
-  
+
+
   j <- 0; cells <- NULL
   for(i in 1:length(cpr)) {
     cells <- c(cells,paste(names(cpr)[i],"_",j+1,"*",names(cpr)[i],"_",j+cpr[i],sep=""))
     j <- j+cpr[i]
   }
-  
+
   .tmp <- function(x,prefix="", suffix1="", suffix2=" /", collapse=",", n=10) {
     content <- NULL
     tmp <- lapply(split(x, ceiling(seq_along(x)/n)),paste,collapse=collapse)
@@ -35,7 +35,7 @@
     }
     return(content)
   }
-  
+
   subject <- 'SETS'
   modification_warning <- c(
     '*THIS CODE IS CREATED AUTOMATICALLY, DO NOT MODIFY THESE LINES DIRECTLY',
@@ -43,26 +43,26 @@
     '*CHANGES CAN BE DONE USING THE INPUT DOWNLOADER UNDER SCRIPTS/DOWNLOAD',
     '*THERE YOU CAN ALSO FIND ADDITIONAL INFORMATION')
   content <- c(modification_warning,'','sets','')
-  
+
   content <- c(content,paste('   i all economic regions /',paste(names(cpr),collapse=','),'/',sep=''),'')
-  
+
   # write iso set with nice formatting (10 countries per line)
   tmp <- lapply(split(map$CountryCode, ceiling(seq_along(map$CountryCode)/10)),paste,collapse=",")
   content <- c(content,'   iso list of iso countries /')
   content <- c(content, .tmp(map$CountryCode, suffix1=",", suffix2=" /"))
-  
+
   content <- c(content,  '', paste('   j number of LPJ cells /\n       ',paste(cells,collapse=',\n       '),'/',sep=''),'',
                '   cell(i,j) number of LPJ cells per region i','      /')
   for(i in 1:length(cpr)) {
     content <- c(content,paste('       ',names(cpr)[i],' . ',cells[i],sep=''))
   }
   content <- c(content,'      /','')
-  
+
   content <- c(content,'   i_to_iso(i,iso) mapping regions to iso countries','      /')
   map$RegionCode <- as.factor(map$RegionCode)
   for(i in levels(map$RegionCode)) {
     content <- c(content, .tmp(map$CountryCode[map$RegionCode==i], prefix=paste0(i," . ("), suffix1=")", suffix2=")"))
-    
+
   }
   content <- c(content,'      /',';')
   lucode::replace_in_file("core/sets.gms",content,subject)
@@ -85,13 +85,13 @@
 
 #Define routine to update info file in input folder and info in main.gms
 .update_info <- function(datasets, cpr, regionscode, reg_revision, warnings=NULL) {
-  
+
   low_res  <- .get_info("input/info.txt","^\\* Output ?resolution:",": ")
   high_res <- .get_info("input/info.txt","^\\* Input ?resolution:",": ")
-  
+
   info <- readLines('input/info.txt')
   subject <- 'VERSION INFO'
-  
+
   useddata <- NULL
   for(dataset in rownames(datasets)) {
     useddata <- c(useddata,
@@ -100,12 +100,12 @@
                   paste('md5sum:',datasets[dataset,"md5"]),
                   paste('Repository:',datasets[dataset,"repo"]))
   }
-  
+
   warnings <- attr(datasets,"warnings")
   if(!is.null(warnings)) {
     warnings <- capture.output(warnings)
   }
-  
+
   content <- c(useddata,
                '',
                paste('Low resolution:',low_res),
@@ -138,15 +138,15 @@
 
 download_and_update <- function(cfg) {
   # Download data and update code
-  
-  # Delete previously downloaded files, download new files and distribute 
+
+  # Delete previously downloaded files, download new files and distribute
   # them within the model.
   filemap <- lucode::download_distribute(files        = cfg$input,
                                          repositories = cfg$repositories, # defined in your local .Rprofile or on the cluster /p/projects/rd3mod/R/.Rprofile
                                          modelfolder  = ".",
                                          additionalDelete="scripts/downloader/inputdelete.cfg",
                                          debug        = cfg$debug)
-  
+
   # In the following the GAMS sourcecode files magpie.gms and core/sets.gms
   # are manipulated. Therefore some information about the number of cells per
   # region is required (CPR). This information is gained by extracting it from
@@ -160,7 +160,7 @@ download_and_update <- function(cfg) {
   # read spatial_header, map, reg_revision and regionscode
   load("input/spatial_header.rda")
   .update_info(filemap,cpr,regionscode,reg_revision, warnings)
-  .update_sets(cpr,map) 
+  .update_sets(cpr,map)
 }
 
 
@@ -246,7 +246,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
 
   #check all setglobal settings for consistency
   lucode::settingsCheck()
-  
+
   ################################################################################
   ############# PROCESSING INPUT DATA ###################### START ###############
   ################################################################################
@@ -256,7 +256,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   ################################################################################
 
   input_old <- .get_info("input/info.txt", "^Used data set:", ": ")
-  
+
   if(!setequal(cfg$input, input_old) | cfg$force_download) {
     # download data and update code
     download_and_update(cfg)
@@ -383,12 +383,29 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
                         timePrepareEnd   = timePrepareEnd)
 
   #Is SLURM available?
-  slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
+  slurm <- lucode::SystemCommandAvailable("srun")
 
   if(is.na(cfg$sequential)) cfg$sequential <- !slurm
 
   if(slurm & !cfg$sequential) {
-    system("sbatch submit.sh")
+    if(is.null(cfg$qos)) {
+      # try to select best QOS based on available resources
+      # and available information
+      load <- lucode::getClusterLoad()
+      if(is.null(load)) {
+        cfg$qos <- "standby"
+      } else if(all(load > 80)) {
+        cfg$qos <- "priority"
+      } else if(load["priority"] < load["standard"]) {
+        cfg$qos <- "standby"
+      } else {
+        cfg$qos <- "short"
+      }
+    }
+    submitfile <- paste0("submit_",cfg$qos,".sh")
+    if(!file.exists(submitfile)) stop("Submit script ",submitfile," not found!")
+    system(paste("sbatch",submitfile))
+    cat("Run submitted with ",submitfile,"!\n",sep="")
   } else {
     system("Rscript submit.R", wait=cfg$sequential)
   }
@@ -409,7 +426,7 @@ getReportData <- function(path_to_report,LU_pricing="y2010") {
     dimnames(out)[[3]] <- NULL
     write.magpie(out[notGLO,,],"./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
   }
-  
+
   .emission_prices <- function(mag){
     out_c <- mag[,,"Price|Carbon (US$2005/t CO2)"]*44/12 # US$2005/tCO2 -> US$2005/tC
     dimnames(out_c)[[3]] <- "co2_c"
