@@ -79,7 +79,10 @@ for(s73_price_adjuster in c(1,0)){
             if(plantation_switch == 1) plantation_flag = ""
             if(plantation_switch == 0) plantation_flag = "NatVeg"
 
-            cfg$title <- paste0(identifier_flag,"_",ssp,"_",demand_flag,"_",plantation_flag,"_",pol_flag,"_",co2_price_path_flag)
+            if(s73_price_adjuster == 1) adjustment_flag = "PriceAdj"
+            if(s73_price_adjuster == 0) adjustment_flag = ""
+
+            cfg$title <- paste0(identifier_flag,"_",ssp,"_",adjustment_flag,"_",demand_flag,"_",plantation_flag,"_",pol_flag,"_",co2_price_path_flag)
 
             cfg$output <- c("rds_report")
 
