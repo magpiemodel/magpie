@@ -49,7 +49,7 @@ pc58_peatland_man(j,"degrad",land58) = pc58_peatland_man(j,"degrad",land58) + p5
 
 p58_mapping_cell_climate(j,climate58) = sum(clcl_climate58(clcl,climate58),pm_climate_class(j,clcl));
 
-p58_ipcc_wetland_ef(climate58,land58,emis58,ef58) = f58_ipcc_wetland_ef(climate58,land58,emis58,ef58);
+p58_ipcc_wetland_ef(climate58,land58,emis58,man58) = f58_ipcc_wetland_ef(climate58,land58,emis58,man58);
 p58_ipcc_wetland_ef(climate58,land58,"ch4",man58) = p58_ipcc_wetland_ef(climate58,land58,"ch4",man58)/34*28;
 p58_ipcc_wetland_ef(climate58,land58,"n2o",man58) = p58_ipcc_wetland_ef(climate58,land58,"n2o",man58)/298*265;
 
