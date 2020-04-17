@@ -40,9 +40,9 @@ for(s73_price_adjuster in c(1,0)){
 
       cfg$gms$timber <- timber_demand
 
-      for (co2_price_path in c("NPI")) { ## Add "2deg" here for CO2 price runs
+      for (co2_price_path in c("NPI","2deg")) { ## Add "2deg" here for CO2 price runs
 
-        if (co2_price_path == "NPI","2deg") {
+        if (co2_price_path == "NPI") {
           cfg <- setScenario(cfg,c(ssp,"NPI"))
           co2_price_path_flag = "Baseline"
         } else if (co2_price_path == "2deg"){
