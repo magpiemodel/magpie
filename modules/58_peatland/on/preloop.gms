@@ -14,18 +14,18 @@ p58_scaling_factor(j) = p58_peatland_area(j)/p58_land_area(j);
 *' Initialization of peatland
 *' First, all degraded peatland is assigned to cropland. However, if the degraded peatland 
 *' is larger than the actual cropland multiplied by a scaling factor (see below), 
-*' degraded peatland used as cropland is reduced accordingly. In each grid cell, 
+*' degraded peatland used as cropland is reduced accordingly. In each cell, 
 *' we scale the actual cropland with the ratio of total peatland area and total land area 
 *' (factor between 0 and 1) because we use this scaling factor for modeling future 
 *' peatland dynamics based on agricultural land use (see equations). Accounting for 
 *' this scaling factor in the initial distribution of degraded peatland to cropland 
 *' makes sure that a full reduction of cropland would also reduce degraded peatland 
-*' used as cropland to zero in a given grid cell, which is of particular importance 
+*' used as cropland to zero in a given cell, which is of particular importance 
 *' for the peatland restoration scenarios. After this first step, the remaining degraded 
 *' peatland (if any exists) is assigned to pasture with the same rules, i.e. 
 *' assignment to pasture is constrained by the scaled actual pasture area. In a third 
 *' step, all remaining degraded peatland is assigned to forestry with these rules. 
-*' Finally, any remaining degraded peatland in a grid cell after these 3 steps is 
+*' Finally, any remaining degraded peatland in a cell after these 3 steps is 
 *' assigned to an unused peatland category with equal distribution among 
 *' cropland, pasture and forestry (land-use categories are important for the 
 *' application of the wetland GHG emission factors). In total, we therefore have 
