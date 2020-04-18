@@ -49,11 +49,13 @@ cfg$gms$peatland  <- "on"
 cfg$gms$c60_biodem_level <- 0
 cfg$gms$s56_c_price_induced_aff <- 0
 cfg$gms$s80_optfile <- 1
+cfg$gms$c12_interest_rate <- "gdp_dependent"              # def = "gdp_dependent"
+cfg$gms$c12_interest_rate_noselect <- "gdp_dependent"     # def = "gdp_dependent"
 
 cfg$output <- c("rds_report","interpolation")
 
 #prefix <- "T118"
-prefix <- "T127"
+prefix <- "T128"
 
 #for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
 for (ssp in c("SSP2")) {
@@ -71,6 +73,8 @@ for (ssp in c("SSP2")) {
   cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-Ref-REMIND-MAGPIE"
   cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-Ref-REMIND-MAGPIE"
   cfg$gms$s15_elastic_demand <- 0
+  cfg$gms$c12_interest_rate <- "gdp_dependent"              # def = "gdp_dependent"
+  cfg$gms$c12_interest_rate_noselect <- "gdp_dependent"     # def = "gdp_dependent"
   
   cfg$gms$s56_peatland_policy <- 0
   cfg$gms$s58_rewetting_switch  <- 0
@@ -82,6 +86,8 @@ for (ssp in c("SSP2")) {
   cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
   cfg <- setScenario(cfg,c(ssp,"NDC"))
   cfg$gms$s15_elastic_demand <- 0
+  cfg$gms$c12_interest_rate <- "gdp_dependent"              # def = "gdp_dependent"
+  cfg$gms$c12_interest_rate_noselect <- "gdp_dependent"     # def = "gdp_dependent"
   
   cfg$title <- paste(prefix,ssp,"RCP2p6",pcost,sep="_")
   cfg$gms$s56_peatland_policy <- 0

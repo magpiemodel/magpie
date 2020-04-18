@@ -151,7 +151,8 @@ for (i in 1:length(outputdirs)) {
     
     #emis_p_cell_co2
     emis_p_clim <- readGDX(gdx,"ov58_peatland_emis",select=list(type="level"))
-    emis_p_clim <- dimSums(emis_p_clim[,,c("co2","doc")]*map_cell_clim,dim=c(1,3.1))
+    emis_p_clim <- dimSums(emis_p_clim[,,c("co2","doc")],dim=3.1)
+    emis_p_clim <- dimSums(emis_p_clim*map_cell_clim,dim=1)
     emis_p_clim <- add_dimension(emis_p_clim,dim = 3.1,add = "scenario",nm = scen)
     
     #emis_co2_clim_annual

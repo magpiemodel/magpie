@@ -60,7 +60,7 @@
 *' If the total cell would become cropland, degraded peatland would equal to the total peatland area (50 Mha * 0.2 = 10 Mha). 
 
  q58_peatland_degrad(j2,land58) ..
-	v58_peatland_man(j2,"degrad",land58) =g=
+	v58_peatland_man(j2,"degrad",land58) =e=
     pc58_peatland_man(j2,"degrad",land58)
 	+ ((vm_land(j2,land58)-pcm_land(j2,land58))*p58_scaling_factor(j2))$(sum(ct, m_year(ct))>2015);
 
@@ -89,8 +89,8 @@
 
  q58_peatland_emis_detail(j2,emis58) ..
 	v58_peatland_emis(j2,emis58) =e=
-	sum((man58,land58), v58_peatland_man(j2,man58,land58) * 
-	sum(clcl_simple, p58_mapping_cell_climate(j2,clcl_simple) * p58_ipcc_wetland_ef(clcl_simple,land58,emis58,man58)));
+	sum((man58,land58,clcl_simple), v58_peatland_man(j2,man58,land58) * 
+	p58_mapping_cell_climate(j2,clcl_simple) * p58_ipcc_wetland_ef(clcl_simple,land58,emis58,man58));
 
  q58_peatland_emis(j2) ..
 	vm_peatland_emis(j2) =e=
