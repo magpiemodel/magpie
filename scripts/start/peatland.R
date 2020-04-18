@@ -55,15 +55,18 @@ cfg$gms$c12_interest_rate_noselect <- "gdp_dependent"     # def = "gdp_dependent
 cfg$output <- c("rds_report","interpolation")
 
 #prefix <- "T118"
-prefix <- "T128"
+#128 default
+#129 lowcost
+prefix <- "T129"
 
 #for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
 for (ssp in c("SSP2")) {
-  #cfg$gms$s58_degrad_cost_onetime  <- 0
+  cfg$gms$s58_degrad_cost_onetime  <- 0
+  cfg$gms$s58_degrad_cost_recur  <- 0
   pcost <- "default"
   #reset restor costs to default values
-  cfg$gms$s58_rewet_cost_onetime  <- 7000
-  cfg$gms$s58_rewet_cost_recur  <- 200
+  cfg$gms$s58_rewet_cost_onetime  <- 0
+  cfg$gms$s58_rewet_cost_recur  <- 0
   
   #cfg$gms$tc <- "endo_jun18"
   #Ref
