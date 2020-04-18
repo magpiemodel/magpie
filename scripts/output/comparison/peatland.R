@@ -82,8 +82,8 @@ for (i in 1:length(outputdirs)) {
     #area_p_cell
     a <- readGDX(gdx,"ov58_peatland_man",select=list(type="level"))
     a <- dimSums(a,dim=c(3.2))
-    #a[,,"degrad"] <- a[,,"degrad"] + collapseNames(a[,,"unused"])
-    #a <- a[,,"unused",invert=TRUE]
+    a[,,"degrad"] <- a[,,"degrad"] + collapseNames(a[,,"unused"])
+    a <- a[,,"unused",invert=TRUE]
     # miss <- readGDX(gdx,"ov58_peatland_missing",select=list(type="level"))
     # a[,,"degrad"] <- a[,,"degrad"]+miss
     b <- readGDX(gdx,"ov58_peatland_intact",select=list(type="level"))
