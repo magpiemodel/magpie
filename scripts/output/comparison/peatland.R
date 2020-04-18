@@ -90,17 +90,17 @@ for (i in 1:length(outputdirs)) {
     getNames(b) <- "intact"
     a <- mbind(a,b)
     
-    #interpolate
-    p <- a[,getYears(a,as.integer = T)>=2015,]
-    p_ini_lr <- setYears(p[,1,],NULL)
-    p_ini_hr <- read.magpie("/p/projects/landuse/users/florianh/data/PeatArea_0.5.mz")
-    peat_hr <- interpolate(p,p_ini_lr,p_ini_hr,spam = path(outputdirs[i],"0.5-to-c200_sum.spam"))
-    peat_hr <- add_dimension(peat_hr,dim = 3.1,add = "scenario",nm = scen)
-    x$area_p_map <- mbind(x$area_p_map,peat_hr)
-    
-    peat_hr_ratio <- collapseNames(peat_hr[,,"degrad"])/dimSums(peat_hr,dim=3.2)
-    x$area_p_map_ratio <- mbind(x$area_p_map_ratio,peat_hr_ratio)
-    
+    # #interpolate
+    # p <- a[,getYears(a,as.integer = T)>=2015,]
+    # p_ini_lr <- setYears(p[,1,],NULL)
+    # p_ini_hr <- read.magpie("/p/projects/landuse/users/florianh/data/PeatArea_0.5.mz")
+    # peat_hr <- interpolate(p,p_ini_lr,p_ini_hr,spam = path(outputdirs[i],"0.5-to-c200_sum.spam"))
+    # peat_hr <- add_dimension(peat_hr,dim = 3.1,add = "scenario",nm = scen)
+    # x$area_p_map <- mbind(x$area_p_map,peat_hr)
+    # 
+    # peat_hr_ratio <- collapseNames(peat_hr[,,"degrad"])/dimSums(peat_hr,dim=3.2)
+    # x$area_p_map_ratio <- mbind(x$area_p_map_ratio,peat_hr_ratio)
+    # 
     
     a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
     x$area_p_cell <- mbind(x$area_p_cell,a)
@@ -233,15 +233,16 @@ x <- lapply(x, function(x) {x[,getYears(x,as.integer = T)>=2015,]})
 #read emis factors (same for all scenarios)
 x$emis_fac <- readGDX(gdx,"f58_ipcc_wetland_ef")
 x$map_cell_clim <- readGDX(gdx,"p58_mapping_cell_climate")
+x$map_clim <- readGDX(gdx,"clcl_mapping")
 
 x$emis_co2_clim_cum <- calcEmisCum(x$emis_co2_clim_annual)
 
 x$area_p_clim_change <- x$area_p_clim-setYears(x$area_p_clim[,1,],NULL)
 
-write.magpie(x$area_p_map_ratio,"output/map_degrad_ratio.nc",comment = "unit: Degradation Ratio")
-
-x$area_p_map_ratio_change <- x$area_p_map_ratio-setYears(x$area_p_map_ratio[,1,],NULL)
-write.magpie(x$area_p_map_ratio_change,"output/map_degrad_ratio_change.nc",comment = "unit: Change of Degradation Ratio")
+# write.magpie(x$area_p_map_ratio,"output/map_degrad_ratio.nc",comment = "unit: Degradation Ratio")
+# 
+# x$area_p_map_ratio_change <- x$area_p_map_ratio-setYears(x$area_p_map_ratio[,1,],NULL)
+# write.magpie(x$area_p_map_ratio_change,"output/map_degrad_ratio_change.nc",comment = "unit: Change of Degradation Ratio")
 
 x$land_clim_change <- x$land_clim-setYears(x$land_clim[,1,],NULL)
 
