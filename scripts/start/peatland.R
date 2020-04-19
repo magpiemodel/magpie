@@ -59,7 +59,9 @@ cfg$output <- c("rds_report","interpolation")
 #129 lowcost
 #130 old input files
 #131 new input files with old spam file
-prefix <- "T131"
+#132 current input files low cost degrad
+
+prefix <- "T132"
 
 #for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
 for (ssp in c("SSP2")) {
@@ -67,8 +69,8 @@ for (ssp in c("SSP2")) {
   cfg$gms$s58_degrad_cost_recur  <- 0
   pcost <- "default"
   #reset restor costs to default values
-  cfg$gms$s58_rewet_cost_onetime  <- 0
-  cfg$gms$s58_rewet_cost_recur  <- 0
+  cfg$gms$s58_rewet_cost_onetime  <- 7000
+  cfg$gms$s58_rewet_cost_recur  <- 200
   
   #cfg$gms$tc <- "endo_jun18"
   #Ref
