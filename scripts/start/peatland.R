@@ -57,7 +57,8 @@ cfg$output <- c("rds_report","interpolation")
 #prefix <- "T118"
 #128 default
 #129 lowcost
-prefix <- "T129"
+#130 old input files
+prefix <- "T130"
 
 #for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
 for (ssp in c("SSP2")) {
