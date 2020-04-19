@@ -60,8 +60,9 @@ cfg$output <- c("rds_report","interpolation")
 #130 old input files
 #131 new input files with old spam file
 #132 current input files low cost degrad
+#133 current input files low cost degrad + no unused
 
-prefix <- "T132"
+prefix <- "T133"
 
 #for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
 for (ssp in c("SSP2")) {
