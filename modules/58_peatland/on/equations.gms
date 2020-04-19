@@ -14,26 +14,26 @@
 	sum(from58, v58_lu_transitions(j2,from58,to58)) =e= 
 	v58_peatland_man(j2,"degrad","crop")$(sameas(to58,"degrad_crop"))
 	+ v58_peatland_man(j2,"degrad","past")$(sameas(to58,"degrad_past"))
-*	+ v58_peatland_man(j2,"degrad","forestry")$(sameas(to58,"degrad_forestry"))
+	+ v58_peatland_man(j2,"degrad","forestry")$(sameas(to58,"degrad_forestry"))
 	+ v58_peatland_man(j2,"unused","crop")$(sameas(to58,"unused_crop"))
 	+ v58_peatland_man(j2,"unused","past")$(sameas(to58,"unused_past"))
-*	+ v58_peatland_man(j2,"unused","forestry")$(sameas(to58,"unused_forestry"))
+	+ v58_peatland_man(j2,"unused","forestry")$(sameas(to58,"unused_forestry"))
 	+ v58_peatland_man(j2,"rewet","crop")$(sameas(to58,"rewet_crop"))
 	+ v58_peatland_man(j2,"rewet","past")$(sameas(to58,"rewet_past"))
-*	+ v58_peatland_man(j2,"rewet","forestry")$(sameas(to58,"rewet_forestry"))
+	+ v58_peatland_man(j2,"rewet","forestry")$(sameas(to58,"rewet_forestry"))
 	+ v58_peatland_intact(j2)$(sameas(to58,"intact"));
 
  q58_transition_from(j2,from58) ..
 	sum(to58, v58_lu_transitions(j2,from58,to58)) =e= 
 	pc58_peatland_man(j2,"degrad","crop")$(sameas(from58,"degrad_crop"))
 	+ pc58_peatland_man(j2,"degrad","past")$(sameas(from58,"degrad_past"))
-*	+ pc58_peatland_man(j2,"degrad","forestry")$(sameas(from58,"degrad_forestry"))
+	+ pc58_peatland_man(j2,"degrad","forestry")$(sameas(from58,"degrad_forestry"))
 	+ pc58_peatland_man(j2,"unused","crop")$(sameas(from58,"unused_crop"))
 	+ pc58_peatland_man(j2,"unused","past")$(sameas(from58,"unused_past"))
-*	+ pc58_peatland_man(j2,"unused","forestry")$(sameas(from58,"unused_forestry"))
+	+ pc58_peatland_man(j2,"unused","forestry")$(sameas(from58,"unused_forestry"))
 	+ pc58_peatland_man(j2,"rewet","crop")$(sameas(from58,"rewet_crop"))
 	+ pc58_peatland_man(j2,"rewet","past")$(sameas(from58,"rewet_past"))
-*	+ pc58_peatland_man(j2,"rewet","forestry")$(sameas(from58,"rewet_forestry"))
+	+ pc58_peatland_man(j2,"rewet","forestry")$(sameas(from58,"rewet_forestry"))
 	+ pc58_peatland_intact(j2)$(sameas(from58,"intact"));
 
 *' The following two equations calculate land expansion and land contraction based
@@ -79,7 +79,7 @@
 	vm_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2) + pc58_peatland_cost_past(j2)
 							+ sum(land58, v58_peatland_man(j2,"rewet",land58) * s58_rewet_cost_recur)
 							+ sum(land58, v58_peatland_man(j2,"degrad",land58) * s58_degrad_cost_recur)
-							+ sum(stat58, v58_expansion(j2,stat58) + v58_reduction(j2,stat58)) * 0;
+							+ sum(stat58, v58_expansion(j2,stat58) + v58_reduction(j2,stat58)) * 1;
 	
  q58_peatland_cost_annuity(j2) ..
 	v58_peatland_cost_annuity(j2) =e=

@@ -134,8 +134,8 @@ for (i in 1:length(outputdirs)) {
     emis_p_glo <- add_dimension(emis_p_glo,dim = 3.1,add = "scenario",nm = scen)
     x$emis_p_glo <- mbind(x$emis_p_glo,emis_p_glo)
 
-    emis_p_glo[,,"ch4"] <- emis_p_glo[,,"ch4"]/28
-    emis_p_glo[,,"n2o"] <- emis_p_glo[,,"n2o"]/265
+    emis_p_glo[,,"ch4"] <- emis_p_glo[,,"ch4"]/34
+    emis_p_glo[,,"n2o"] <- emis_p_glo[,,"n2o"]/298
     
     #emis_lu_glo
     co2 <- setNames(emisCO2(gdx,level = "glo",unit="gas",cc = TRUE),"co2")
@@ -237,7 +237,8 @@ x <- lapply(x, function(x) {x[,getYears(x,as.integer = T)>=2015,]})
 #read emis factors (same for all scenarios)
 x$emis_fac <- readGDX(gdx,"f58_ipcc_wetland_ef")
 x$map_cell_clim <- readGDX(gdx,"p58_mapping_cell_climate")
-x$map_clim <- readGDX(gdx,"clcl_mapping")
+map_clim <- readGDX(gdx,"clcl_mapping")
+saveRDS(map_clim,"output/map_clim.rds")
 
 x$emis_co2_clim_cum <- calcEmisCum(x$emis_co2_clim_annual)
 
@@ -255,7 +256,7 @@ nums <- as.numeric(gsub(paste("peatland_", ".RData", sep="|"), "", files))
 if(length(nums)==0) last=0 else last <- max(nums)
 newFile <- paste0("output/peatland_", sprintf("%02d", last + 1), ".RData")
 save(x,file = newFile,compress = "xz")
-saveRDS(x,file = sub(".RData",".rds",newFile),compress = "xz")
+#saveRDS(x,file = sub(".RData",".rds",newFile),compress = "xz")
 
 if (!is.null(missing)) {
   cat("\nList of folders with missing fulldata.gdx\n")

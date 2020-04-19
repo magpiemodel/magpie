@@ -62,8 +62,9 @@ cfg$output <- c("rds_report","interpolation")
 #132 current input files low cost degrad
 #133 current input files low cost degrad + no unused
 #134 current input files low cost degrad + no unused + forestry
+#135 current input files low cost degrad + no unused + GWP change
 
-prefix <- "T134"
+prefix <- "T135"
 
 #for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
 for (ssp in c("SSP2")) {
@@ -129,6 +130,6 @@ for (ssp in c("SSP2")) {
     cfg$title <- paste(prefix,ssp,"RCP2p6+PeatRestor",pcost,sep="_")
     cfg$gms$s56_peatland_policy <- 1
     cfg$gms$s58_rewetting_switch  <- Inf
-    #start_run(cfg,codeCheck=FALSE)
+    start_run(cfg,codeCheck=FALSE)
   }
 }

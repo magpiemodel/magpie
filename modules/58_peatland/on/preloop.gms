@@ -12,7 +12,7 @@ p58_mapping_cell_climate(j,clcl_simple) = sum(clcl_mapping(clcl,clcl_simple),pm_
 
 p58_ipcc_wetland_ef(clcl_simple,land58,emis58,ef58) = f58_ipcc_wetland_ef(clcl_simple,land58,emis58,ef58);
 p58_ipcc_wetland_ef(clcl_simple,land58,emis58,"unused") = f58_ipcc_wetland_ef(clcl_simple,land58,emis58,"degrad");
-p58_ipcc_wetland_ef(clcl_simple,land58,"ch4",man58) = p58_ipcc_wetland_ef(clcl_simple,land58,"ch4",man58)/34*28;
-p58_ipcc_wetland_ef(clcl_simple,land58,"n2o",man58) = p58_ipcc_wetland_ef(clcl_simple,land58,"n2o",man58)/298*265;
+p58_ipcc_wetland_ef(clcl_simple,land58,"ch4",man58) = p58_ipcc_wetland_ef(clcl_simple,land58,"ch4",man58);
+p58_ipcc_wetland_ef(clcl_simple,land58,"n2o",man58) = p58_ipcc_wetland_ef(clcl_simple,land58,"n2o",man58);
 
 p58_peatland_cost_past(t,j) = 0;
