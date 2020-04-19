@@ -13,8 +13,11 @@ sets
   ef58(man58) Peatland ef categories
     / degrad, rewet /
 
-  land58(land) Managed land types
+  land_all58(land) Managed land types
     / crop, past, forestry /
+
+  land58(land_all58) Managed land types
+    / crop, past /
 
   stat58 Peatland status
     / intact, 
