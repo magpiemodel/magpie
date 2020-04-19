@@ -63,13 +63,14 @@ cfg$output <- c("rds_report","interpolation")
 #133 current input files low cost degrad + no unused
 #134 current input files low cost degrad + no unused + forestry
 #135 current input files low cost degrad + no unused + GWP change
+#T136 full set
 
-prefix <- "T135"
+prefix <- "T136"
 
-#for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
-for (ssp in c("SSP2")) {
-  cfg$gms$s58_degrad_cost_onetime  <- 0
-  cfg$gms$s58_degrad_cost_recur  <- 0
+for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
+#for (ssp in c("SSP2")) {
+  # cfg$gms$s58_degrad_cost_onetime  <- 0
+  # cfg$gms$s58_degrad_cost_recur  <- 0
   pcost <- "default"
   #reset restor costs to default values
   cfg$gms$s58_rewet_cost_onetime  <- 7000
