@@ -127,8 +127,10 @@ for (i in 1:length(outputdirs)) {
     
     
     #emis_p_glo
-    emis_p_glo <- readGDX(gdx,"ov58_peatland_emis",select=list(type="level"))
-    emis_p_glo <- dimSums(emis_p_glo*map_cell_clim,dim=1)
+    ov58_peatland_man <- readGDX(gdx,"ov58_peatland_man",select = list(type="level"))
+    p58_ipcc_wetland_ef <- readGDX(gdx,"p58_ipcc_wetland_ef")
+    emis_p_glo <- ov58_peatland_man*map_cell_clim*p58_ipcc_wetland_ef
+    emis_p_glo <- dimSums(emis_p_glo,dim=c(1,3.1,3.2))
     emis_p_glo <- add_dimension(emis_p_glo,dim = 3.1,add = "scenario",nm = scen)
     x$emis_p_glo <- mbind(x$emis_p_glo,emis_p_glo)
 
@@ -150,9 +152,10 @@ for (i in 1:length(outputdirs)) {
     x$emis_all_glo_annual <- mbind(x$emis_all_glo_annual,a)
     
     #emis_p_cell_co2
-    emis_p_clim <- readGDX(gdx,"ov58_peatland_emis",select=list(type="level"))
-    emis_p_clim <- dimSums(emis_p_clim[,,c("co2","doc")],dim=3.1)
-    emis_p_clim <- dimSums(emis_p_clim*map_cell_clim,dim=1)
+    ov58_peatland_man <- readGDX(gdx,"ov58_peatland_man",select = list(type="level"))
+    p58_ipcc_wetland_ef <- readGDX(gdx,"p58_ipcc_wetland_ef")
+    emis_p_clim <- ov58_peatland_man*map_cell_clim*p58_ipcc_wetland_ef
+    emis_p_clim <- dimSums(emis_p_clim[,,c("co2","doc")],dim=c(1,3.1,3.2,3.4))
     emis_p_clim <- add_dimension(emis_p_clim,dim = 3.1,add = "scenario",nm = scen)
     
     #emis_co2_clim_annual
