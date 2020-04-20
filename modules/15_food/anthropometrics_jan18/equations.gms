@@ -55,7 +55,7 @@ q15_budget(iso) ..
 *' shock. The basic assumption is that increasing prices reduce real income,
 *' while decreasing prices increase real income.
 *' Through this income effect, higher prices reduce the food demand.
-*' The income before the food price shock is `im_gdp_pc_ppp`.
+*' The income before the food price shock is `im_gdp_pc_ppp_iso`.
 *' It is reduced by the change in value of the demanded calories under changed
 *' prices.
 *' In the following, the real income is used to determine food intake,
@@ -168,9 +168,9 @@ q15_regr_kcal(iso) ..
 
 q15_regr(iso, regr15) ..
          v15_demand_regr(iso, regr15) =e=
-         i15_dem_intercept(regr15)
-         + (i15_dem_saturation(regr15) * v15_income_pc_real_ppp_iso(iso))
-         / (i15_dem_halfsat(regr15) + v15_income_pc_real_ppp_iso(iso)**i15_dem_nonsat(regr15));
+         i15_dem_intercept(iso,regr15)
+         + (i15_dem_saturation(iso,regr15) * v15_income_pc_real_ppp_iso(iso))
+         / (i15_dem_halfsat(iso,regr15) + v15_income_pc_real_ppp_iso(iso)**i15_dem_nonsat(iso,regr15));
 
 *' In the subsequent equations, those parameters
 *' are used to determine the dietary composition using a hierachical tree:
