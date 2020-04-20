@@ -55,7 +55,7 @@ q15_budget(iso) ..
 *' shock. The basic assumption is that increasing prices reduce real income,
 *' while decreasing prices increase real income.
 *' Through this income effect, higher prices reduce the food demand.
-*' The income before the food price shock is `im_gdp_pc_ppp`.
+*' The income before the food price shock is `im_gdp_pc_ppp_iso`.
 *' It is reduced by the change in value of the demanded calories under changed
 *' prices.
 *' In the following, the real income is used to determine food intake,
