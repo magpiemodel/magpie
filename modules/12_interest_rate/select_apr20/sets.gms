@@ -17,5 +17,5 @@ sets
           medium      . (mic)
           low         . (hic) /
 
-  t_to_i_to_dev(t_all,i,dev) Mapping between time, region and economic development status
+  t_to_i_to_dev(t_all,i,dev) Mapping between time region and economic development status
 ;

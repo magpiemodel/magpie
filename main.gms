@@ -243,7 +243,7 @@ $setglobal trade  selfsuff_reduced
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
 
-$setglobal forestry  dynamic_mar20
+$setglobal forestry  dynamic_faustmann
 
 $setglobal urban  static
 $setglobal natveg  dynamic_nov19

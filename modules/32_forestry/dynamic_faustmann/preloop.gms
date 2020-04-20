@@ -1,0 +1,194 @@
+** This is same calculation as in carbon module. As these numbers don't exist yet due to
+** carbon module appearing below forestry module, we keep this double calculation for now.
+p32_carbon_density_ac_forestry(t_all,j,ac) = m_growth_vegc(0,fm_carbon_density(t_all,j,"other","vegc"),sum(clcl,pm_climate_class(j,clcl)*fm_growth_par(clcl,"k","plantations")),sum(clcl,pm_climate_class(j,clcl)*fm_growth_par(clcl,"m","plantations")),(ord(ac)-1));
+
+** Calculating the marginal of carbon density i.e. change in carbon density over two time steps
+** The carbon densities are tC/ha/year so we don't have to divide by timestep length.
+loop(ac_sub,
+  p32_carbon_density_ac_marg(t_all,j,ac_sub-1) = p32_carbon_density_ac_forestry(t_all,j,ac_sub) - p32_carbon_density_ac_forestry(t_all,j,ac_sub-1);
+  );
+
+** Calculating Instantaneous Growth Rates (IGR). This is a proxy number which can be compared against
+** interest rate in the economy to make investment decisions in plantations (i.e. to keep it growing or to harvest it).
+** This parameter is then used to calculate rotation lengths.
+p32_IGR(t_all,j,ac) = (p32_carbon_density_ac_marg(t_all,j,ac)/p32_carbon_density_ac_forestry(t_all,j,ac))$(p32_carbon_density_ac_forestry(t_all,j,ac)>0) + 1$(p32_carbon_density_ac_forestry(t_all,j,ac)<0.0001);
+
+** IGR values for first age class ("ac0") is provided the same value as "ac5" to
+** avoid a sudden drop in rotation lengths in y2000 from y1995.
+*p32_IGR(t_all,j,"ac0") = p32_IGR(t_all,j,"ac5");
+
+** For each cluster in MAgPIE ("j") we calculate how long the prevailing interest rates stay lower than the IGR.
+** As long as the prevailing interest rates are lower than IGR, plantations shall be kept standing.
+** As long as the prevailing interest rate becomes higher than IGR, it is assumed that the forest owner would rather
+** keep his/her investment in bank rather than in keeping the forest standing.
+** The easiest way to do this calculation is to count a value of 1 for IGR>interest rate and a value of 0 for IGR<interest rate.
+p32_rot_flg(t_all,j,ac) = 1$((p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)))>0)
+                        + 0$((p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)))<=0);
+
+** From the above calculation, now its easier to count how many age-classes can be sustained before IGR falls below interest rate.
+** Then we just multiply the valid age-classes by 5 (because MAgPIE age classes are in 5 year steps) to get the absolute rotation length (in years)
+p32_rot_length_ac_eqivalent(t_all,j) = sum(ac,p32_rot_flg(t_all,j,ac));
+
+** We provide a upper limit of 90 years for commercial plantations.
+** 90 years translates to age-class 18 (90/5)
+p32_rot_length_ac_eqivalent(t_all,j)$(p32_rot_length_ac_eqivalent(t_all,j)>18) = 18;
+p32_rot_length_ac_eqivalent(t_historical,j) = p32_rot_length_ac_eqivalent("y1995",j);
+
+** Holding rotation lengths constant after the end of this century.
+p32_rot_length_ac_eqivalent(t_future,j) = p32_rot_length_ac_eqivalent("y2100",j);
+
+p32_rotation_regional(t,i) = ord(t) + smax(cell(i,j), p32_rot_length_ac_eqivalent(t,j)) + card(t_historical);;
+display p32_rotation_regional;
+
+** Earlier we converted rotation lengths to absolute numbers, now we make the Conversion
+** back to rotation length in age-classes.
+p32_rotation_cellular(t_all,j) = ceil(p32_rot_length_ac_eqivalent(t_all,j));
+p32_rotation_cellular_estb(t_all,j) = ceil(p32_rot_length_ac_eqivalent(t_all,j));
+
+* Shift rotations. E.g. rotations harveted in 2050 should be harvested with the rotations using which they were establsihed.
+* For 2050 plantation establsihed in 2020 with 30y rotaions shall be harvested according to 30 yr (for example)
+
+** Set harvesting rotations same as establishment rotations -- Don't move this line below extension of rotation. This is overwritten in the next loop anyways
+p32_rotation_cellular_harvesting(t_all,j) = p32_rotation_cellular_estb(t_all,j);
+
+** RL Extension
+p32_rotation_cellular_estb(t_all,j) = p32_rotation_cellular_estb(t_all,j) * c32_rotation_extension ;
+
+loop(j,
+  loop(t_all,
+      p32_rotation_offset = p32_rotation_cellular_estb(t_all,j);
+* The harvest year is calculated for future based on current establishment decision
+      p32_rotation_cellular_harvesting(t_all+p32_rotation_offset,j) = p32_rotation_cellular_estb(t_all,j);
+    );
+  );
+
+** This loop fixes empty gaps.
+** For example in 2035, if establishment length was 10 (50yrs) then it should be harvested in 2085
+** But in 2040, lets say if establishment length was 11 (55yrs) then the harvesting should happen in 2095.
+** This leaves y2090 with a gap where model doens't know which value to choose
+** At this point, it takes the values which were initilaized in lines above
+** where we give harvested rotations the same value as establishment rotation to start with
+** The loop below makes some educated case based on jumps during these blind spots and fills them with proper numbers
+loop(t_all,
+  p32_rotation_cellular_harvesting(t_all+1,j)$(abs(p32_rotation_cellular_harvesting(t_all+1,j) - p32_rotation_cellular_harvesting(t_all,j))>2 AND ord(t_all)<card(t_all)) = p32_rotation_cellular_harvesting(t_all,j);
+  );
+
+** Rotation used for establishment decision - Same as harvesting rotation for now.
+** This is declared as interface because this is also need in trade module.
+p32_rot_length_ac_eqivalent(t_all,j) = p32_rotation_cellular_estb(t_all,j);
+
+** Define protect and harvest setting
+protect32(t,j,ac_sub) = no;
+*protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular(t,j));
+protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular_harvesting(t,j));
+
+harvest32(t,j,ac_sub) = no;
+*harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular(t,j));
+harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular_harvesting(t,j));
+
+display p32_rotation_cellular_estb,p32_rotation_cellular_harvesting;
+
+** Afforestation policies NPI and NDCs
+p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
+p32_land(t,j,type32,ac) = 0;
+
+* Calculate the remaining exogenous afforestation with respect to the maximum exogenous target over time.
+* `p32_aff_togo` is used to adjust `s32_max_aff_area` in the constraint `q32_max_aff`.
+p32_aff_togo(t) = sum(j, smax(t2, p32_aff_pol(t2,j)) - p32_aff_pol(t,j));
+
+* Adjust the afforestation limit `s32_max_aff_area` upwards, if it is below the exogenous policy target.
+p32_max_aff_area = max(s32_max_aff_area, sum(j, smax(t2, p32_aff_pol(t2,j))) );
+
+p32_cdr_ac(t,j,ac) = 0;
+
+** divide initial forestry area by number of age classes within protect32
+** since protect32 is TRUE for ord(ac_sub) < p32_rotation_cellular(j) there is
+** one additional junk which is assigned to ac0
+p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular("y1995",j);
+
+p32_land("y1995",j,"plant",ac_sub)$(protect32("y1995",j,ac_sub)) = p32_plant_ini_ac(j);
+p32_land("y1995",j,"plant","ac0") = p32_plant_ini_ac(j);
+
+*initial assumption for harvested area
+pc32_hvarea_forestry(j) = p32_plant_ini_ac(j);
+vm_hvarea_forestry.l(j,ac_sub) = p32_plant_ini_ac(j)/card(ac_sub);
+
+**** Updated calculation for avg are needed to be estb based on past years
+
+*' Saving intial values for avg calc
+p32_hv_area_current(t,i) = sum((cell(i,j),ac_sub),vm_hvarea_forestry.l(j,ac_sub));
+p32_hv_area_past_avg(t,i) = p32_hv_area_current(t,i);
+
+loop(t,
+  p32_dummy_time(t) =  m_yeardiff(t);
+  p32_dummy_elapsed(t) = m_year(t) - m_year(t-2);
+  display p32_dummy_elapsed;
+);
+
+p32_hv_area_past_avg(t,i)$(ord(t) > 3) = (p32_hv_area_current(t,i) + p32_hv_area_current(t-1,i) + p32_hv_area_current(t-3,i))/3;
+
+
+** Initialization of land
+p32_land_start(j,type32,ac) = p32_land("y1995",j,type32,ac);
+display p32_land_start;
+
+** Initial shifting of age classes
+p32_land(t,j,"plant",ac)$(ord(ac) > 1) = p32_land(t,j,"plant",ac-1);
+** Reset ac0 to zero
+p32_land("y1995",j,"plant","ac0") = 0;
+
+** Proportion of production coming from plantations
+p32_production_ratio_ext(t_ext,i) = f32_production_ratio("y2100",i);
+p32_production_ratio_ext(t_all,i) = f32_production_ratio(t_all,i);
+
+p32_plant_prod_share(t_ext,i) = f32_plant_prod_share("y2100");
+p32_plant_prod_share(t_all,i) = f32_plant_prod_share(t_all);
+
+** Forest management options. Probably deprecated.
+f32_forestry_management("USA","plantations") = 7;
+p32_management_factor(j,mgmt_type) = sum(cell(i,j),ceil(f32_forestry_management(i,"plantations")/f32_forestry_management(i,"natveg")));
+p32_management_factor(j,"high") = p32_management_factor(j,"normal") * 3;
+**************************************************************************
+****************** FAUSTMANN ROTATIONS *************************
+
+** Set upper and lower bound for rotation years
+p32_replanting_cost(ac) = 0;
+p32_replanting_cost("ac0") = 800;
+
+p32_time(ac) = ord(ac);
+
+pm_interest_dev(t_historical,i) = pm_interest_dev("y1995",i);
+p32_discount_factor(t,j,ac_sub) =  1/(s32_euler**(sum(cell(i,j),pm_interest_dev(t,i))*p32_time(ac_sub)));
+
+display pm_interest_dev;
+
+** Multiply by 2 to convert C to DM
+p32_forest_volume(t,j,ac_sub) = p32_carbon_density_ac_forestry(t,j,ac_sub) * p32_land(t,j,"plant",ac_sub) * 2;
+
+p32_net_present_value(t,j,ac_sub) = ((s32_price*p32_forest_volume(t,j,ac_sub)*p32_discount_factor(t,j,ac_sub))) / 1;
+p32_net_present_value(t,j,ac_sub)$(p32_net_present_value(t,j,ac_sub)<0.5)  = 0.5;
+display p32_net_present_value;
+
+p32_ncells(i) = sum(cell(i,j),1);
+display p32_ncells;
+Loop(t,
+  loop(j,
+    loop(ac_sub,
+      p32_rotation_finder_current = p32_net_present_value(t,j,ac_sub);
+      p32_rotation_finder_past = p32_net_present_value(t,j,ac_sub-1);
+      if(p32_rotation_finder_current > p32_rotation_finder_past,
+        p32_max_npv_rotation(t,j) = ord(ac_sub);
+        );
+      );
+    );
+  );
+
+p32_max_npv_rotation(t,j)$(p32_max_npv_rotation(t,j)=1) = 0;
+
+p32_max_npv_rotation_avg(t,i) = sum(cell(i,j), p32_max_npv_rotation(t,j))/p32_ncells(i);
+
+p32_max_npv_rotation(t,j)$(p32_max_npv_rotation(t,j)=0) = sum(cell(i,j),p32_max_npv_rotation_avg(t,i));
+p32_max_npv_rotation(t,j) = round(p32_max_npv_rotation(t,j),0);
+
+display p32_max_npv_rotation_avg;
+display p32_max_npv_rotation;
