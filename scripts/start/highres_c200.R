@@ -26,7 +26,7 @@ cfg$results_folder <- "output/:title:"
 
 cfg$output <- c("rds_report")
 
-prefix <- "hr02"
+prefix <- "hr03"
 res <- "c200"
 
 cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_",res,"_690d3718e151be1b450b394c1064b1c5.tgz"),
@@ -35,24 +35,12 @@ cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_",res,"_690d3718
                paste0("calibration_H12_",res,"_highres.tgz"),
                "additional_data_rev3.78.tgz")
 
-co2_price_path <- "2deg"
-file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
-file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
-
+download_and_update(cfg)
 
 for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
-  cfg$title <- paste(prefix,ssp,co2_price_path,res,"glo",sep="_")
-  if (co2_price_path == "2deg") {
-    cfg <- setScenario(cfg,c(ssp,"NDC"))
-  } else if (co2_price_path == "NPI") {
-    cfg <- setScenario(cfg,c(ssp,"NPI"))
-  }
-  # cfg$gms$c56_pollutant_prices <- "coupling"
-  # cfg$gms$c60_2ndgen_biodem <- "coupling"
+  cfg$title <- paste(prefix,ssp,"2p6",res,"glo",sep="_")
+  cfg <- setScenario(cfg,c(ssp,"NDC"))
+  cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+  cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
   start_run(cfg,codeCheck=FALSE)
 }
-
-# ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
-# ov_supply <- readGDX(gdx,"ov_supply",select=list(type="level"))
-# f21_trade_balance <- ov_prod_reg - ov_supply
-# write.magpie(round(f21_trade_balance,6),paste0("modules/21_trade/input/f21_trade_balance.cs3"))

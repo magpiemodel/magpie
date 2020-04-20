@@ -7,5 +7,5 @@
 
 table f21_trade_balance(t_all,i,kall) trade balance of positive exports and negative imports (mio. tDM per yr)
 $ondelim
-$include "./modules/21_trade/input/f21_trade_balance2.cs3"
+$include "./modules/21_trade/input/f21_trade_balance.cs3"
 $offdelim;

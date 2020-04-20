@@ -39,12 +39,7 @@ cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_",res,"_690d3718
                paste0("calibration_H12_",res,"_highres.tgz"),
                "additional_data_rev3.78.tgz")
 
-co2_price_path <- "2deg"
-file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
-file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
-
-#Download data 
-#system('Rscript start.R runscripts=download_data_only submit=direct')
+download_and_update(cfg)
 
 calib <- FALSE
 
@@ -58,10 +53,8 @@ if(calib) {
   ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
   ov_supply <- readGDX(gdx,"ov_supply",select=list(type="level"))
   f21_trade_balance <- ov_prod_reg - ov_supply
-  #f21_trade_balance.cs3 will be deleted when downloading the high res data. Therefore renamed.
-  write.magpie(round(f21_trade_balance,6),paste0("modules/21_trade/input/f21_trade_balance2.cs3"))
-  manipulateFile("modules/21_trade/exo/input.gms",c("f21_trade_balance.cs3","f21_trade_balance2.cs3"))
-  
+  write.magpie(round(f21_trade_balance,6),paste0("modules/21_trade/input/f21_trade_balance.cs3"))
+
   #use exo trade and parallel optimization
   cfg$gms$trade <- "exo"
   cfg$gms$optimization <- "nlp_par"
@@ -70,31 +63,22 @@ if(calib) {
   
   cfg$recalibrate <- TRUE
   
-  # cfg$gms$c56_pollutant_prices <- "coupling"
-  # cfg$gms$c60_2ndgen_biodem <- "coupling"
   start_run(cfg,codeCheck=FALSE)
 } else {
   for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
-    cfg$title <- paste(prefix,ssp,co2_price_path,res,sep="_")
-    if (co2_price_path == "2deg") {
-      cfg <- setScenario(cfg,c(ssp,"NDC"))
-    } else if (co2_price_path == "NPI") {
-      cfg <- setScenario(cfg,c(ssp,"NPI"))
-    }
+    cfg$title <- paste(prefix,ssp,"2p6",res,sep="_")
+    cfg <- setScenario(cfg,c(ssp,"NDC"))
     
     #get trade pattern from low resolution run with c200
-    gdx <- paste0("output/",paste("hr02",ssp,co2_price_path,"c200",sep="_"),"/fulldata.gdx")
+    gdx <- paste0("output/",paste("hr03",ssp,co2_price_path,"c200",sep="_"),"/fulldata.gdx")
     ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
     ov_supply <- readGDX(gdx,"ov_supply",select=list(type="level"))
     f21_trade_balance <- ov_prod_reg - ov_supply
-    #f21_trade_balance.cs3 will be deleted when downloading the high res data. Therefore renamed.
-    write.magpie(round(f21_trade_balance,6),paste0("modules/21_trade/input/f21_trade_balance2.cs3"))
-    manipulateFile("modules/21_trade/exo/input.gms",c("f21_trade_balance.cs3","f21_trade_balance2.cs3"))
-    
-    #get tau from low resolution run with c200
-    tau(gdx,file = "modules/13_tc/input/f13_tau_scenario2.csv",digits = 4)
-    manipulateFile("modules/13_tc/exo/input.gms",c("f13_tau_scenario.csv","f13_tau_scenario2.csv"))
-    
+    write.magpie(round(f21_trade_balance,6),paste0("modules/21_trade/input/f21_trade_balance.cs3"))
+
+    #get tau from low resolution run with c200, not used.
+    tau(gdx,file = "modules/13_tc/input/f13_tau_scenario.csv",digits = 4)
+
     #use exo trade and parallel optimization
     cfg$gms$trade <- "exo"
     cfg$gms$optimization <- "nlp_par"
@@ -103,8 +87,8 @@ if(calib) {
     
     #cfg$gms$c60_bioenergy_subsidy <- 0
     
-    # cfg$gms$c56_pollutant_prices <- "coupling"
-    # cfg$gms$c60_2ndgen_biodem <- "coupling"
+    cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+    cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
     start_run(cfg,codeCheck=FALSE)
   }
 }
