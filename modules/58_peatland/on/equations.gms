@@ -79,7 +79,7 @@
 	vm_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2) + pc58_peatland_cost_past(j2)
 							+ sum(land58, v58_peatland_man(j2,"rewet",land58) * s58_rewet_cost_recur)
 							+ sum(land58, v58_peatland_man(j2,"degrad",land58) * s58_degrad_cost_recur)
-							+ sum(stat_man58, v58_reduction(j2,stat_man58)) * 1;
+							+ sum(stat_man58, v58_reduction(j2,stat_man58)) * 0;
 	
  q58_peatland_cost_annuity(j2) ..
 	v58_peatland_cost_annuity(j2) =e=
