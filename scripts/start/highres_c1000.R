@@ -70,7 +70,7 @@ if(calib) {
     cfg <- setScenario(cfg,c(ssp,"NDC"))
     
     #get trade pattern from low resolution run with c200
-    gdx <- paste0("output/",paste("hr03",ssp,co2_price_path,"c200",sep="_"),"/fulldata.gdx")
+    gdx <- paste0("output/",paste("hr03",ssp,"2p6","c200",sep="_"),"/fulldata.gdx")
     ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
     ov_supply <- readGDX(gdx,"ov_supply",select=list(type="level"))
     f21_trade_balance <- ov_prod_reg - ov_supply
