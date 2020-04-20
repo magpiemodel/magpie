@@ -22,6 +22,11 @@ sets
     unused_crop, unused_past, unused_forestry, 
     rewet_crop, rewet_past, rewet_forestry /
 
+  stat_man58(stat58) Peatland status
+    / degrad_crop, degrad_past, degrad_forestry, 
+    unused_crop, unused_past, unused_forestry, 
+    rewet_crop, rewet_past, rewet_forestry /
+
   from58(stat58) Peatland status
     / intact, 
     degrad_crop, degrad_past, degrad_forestry, 
