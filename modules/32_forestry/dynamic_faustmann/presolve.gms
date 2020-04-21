@@ -116,21 +116,21 @@ v32_land.up(j,"aff",ac_sub)$(ord(ac_sub) > s32_planing_horizon/5) = pc32_land(j,
 ** Plantation vegc is different
 *p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac_forestry(t,j,ac,"vegc");
 
-** Future demand relevant in current time step depending on rotation length
-** Card is used here to exclude y1965 to y1995 when calculating rotation length calculations for past
-p32_rotation_regional(t,i) = ord(t) + ceil((sum(cell(i,j),pcm_land(j,"forestry")*p32_rot_length_ac_eqivalent(t,j))/sum(cell(i,j),pcm_land(j,"forestry")))/5) + card(t_historical);
-
 ** Test by diviion with 2 to make even higher establishments now. The model sees half the yields it would normally see based on a goven rotation length.
 ** This is just forcing the model to establish more plantations now so that it is prepared for the worst case scenario in future
 ** when the model doesn't find enough resources to meet the production in future.
 pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac_sub,"forestry"));
 
 *p32_rotation_regional not needed as interface
+** Future demand relevant in current time step depending on rotation length
+** Card is used here to exclude y1965 to y1995 when calculating rotation length calculations for past
+*p32_rotation_regional(t,i) = ord(t) + ceil((sum(cell(i,j),pcm_land(j,"forestry")*p32_rot_length_ac_eqivalent(t,j))/sum(cell(i,j),pcm_land(j,"forestry")))/5) + card(t_historical);
+* Instead using p32_representative_rotation which is calculated in preloop
 
-pc32_demand_forestry_future(i,kforestry)    = sum(t_ext$(t_ext.pos = p32_rotation_regional(t,i)),pm_demand_ext(t_ext,i,kforestry));
-pc32_plant_prod_share_future(i)    			= sum(t_ext$(t_ext.pos = p32_rotation_regional(t,i)),p32_plant_prod_share(t_ext,i));
-pc32_selfsuff_forestry_future(i,kforestry)  = sum(t_ext$(t_ext.pos = p32_rotation_regional(t,i)),pm_selfsuff_ext(t_ext,i,kforestry));
-pc32_production_ratio_future(i)             = sum(t_ext$(t_ext.pos = p32_rotation_regional(t,i)),p32_production_ratio_ext(t_ext,i));
+pc32_demand_forestry_future(i,kforestry)    = sum(t_ext$(t_ext.pos = p32_representative_rotation(t,i)),pm_demand_ext(t_ext,i,kforestry));
+pc32_plant_prod_share_future(i)    			    = sum(t_ext$(t_ext.pos = p32_representative_rotation(t,i)),p32_plant_prod_share(t_ext,i));
+pc32_selfsuff_forestry_future(i,kforestry)  = sum(t_ext$(t_ext.pos = p32_representative_rotation(t,i)),pm_selfsuff_ext(t_ext,i,kforestry));
+pc32_production_ratio_future(i)             = sum(t_ext$(t_ext.pos = p32_representative_rotation(t,i)),p32_production_ratio_ext(t_ext,i));
 
 ********** Dampening factor calculation (Deprecated)
 p32_rot_ac(j) = p32_rot_length_ac_eqivalent(t,j)/5;
@@ -141,47 +141,4 @@ p32_dampen_pre(ac_sub,j)  = (1-(1/ord(ac_sub)))$(ord(ac_sub)<p32_rot_ac(j)) + 1$
 p32_dampen_final(ac_sub,j) = p32_dampen_pre(ac_sub,j)$(p32_dampen_pre(ac_sub,j) >= p32_regional_min(j)) + p32_regional_min(j)$(p32_dampen_pre(ac_sub,j) < p32_regional_min(j));
 
 ****************** FAUSTMANN ROTATIONS *************************
-
-** Set upper and lower bound for rotation years
-p32_replanting_cost(ac) = 0;
-p32_replanting_cost("ac0") = 800;
-
-p32_time(ac) = ord(ac);
-
-pm_interest_dev(t_historical,i) = pm_interest_dev("y1995",i);
-p32_discount_factor(t,j,ac_sub) =  1/(s32_euler**(sum(cell(i,j),pm_interest_dev(t,i))*p32_time(ac_sub)));
-
-display pm_interest_dev;
-
-** Multiply by 2 to convert C to DM
-p32_forest_volume(t,j,ac_sub) = p32_carbon_density_ac_forestry(t,j,ac_sub) * p32_land(t,j,"plant",ac_sub) * 2;
-
-p32_net_present_value(t,j,ac_sub) = ((s32_price*p32_forest_volume(t,j,ac_sub)*p32_discount_factor(t,j,ac_sub))) / 1;
-p32_net_present_value(t,j,ac_sub)$(p32_net_present_value(t,j,ac_sub)<0.5)  = 0.5;
-display p32_net_present_value;
-
-p32_ncells(i) = sum(cell(i,j),1);
-display p32_ncells;
-
-  loop(j,
-    loop(ac_sub,
-      p32_rotation_finder_current = p32_net_present_value(t,j,ac_sub);
-      p32_rotation_finder_past = p32_net_present_value(t,j,ac_sub-1);
-      if(p32_rotation_finder_current > p32_rotation_finder_past,
-        p32_max_npv_rotation(t,j) = ord(ac_sub);
-        );
-      );
-    );
-
-
-p32_max_npv_rotation(t,j)$(p32_max_npv_rotation(t,j)=1) = 0;
-
-p32_max_npv_rotation_avg(t,i) = sum(cell(i,j), p32_max_npv_rotation(t,j))/p32_ncells(i);
-
-p32_max_npv_rotation(t,j)$(p32_max_npv_rotation(t,j)=0) = sum(cell(i,j),p32_max_npv_rotation_avg(t,i));
-p32_max_npv_rotation(t,j) = round(p32_max_npv_rotation(t,j),0);
-
-display p32_max_npv_rotation_avg;
-display p32_max_npv_rotation;
-
 *** EOF presolve.gms ***

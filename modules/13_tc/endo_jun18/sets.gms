@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-  t_to_i_to_dev(t_all,i,dev) Mapping between time, region and economic development status
+  t_to_i_to_dev(t_all,i,dev) Mapping between time region and economic development status
 
 	scen13 tc cost scenario
   	  /low, medium, high/

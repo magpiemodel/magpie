@@ -112,7 +112,7 @@ q32_cost_establishment(i2)..
 *              +sum(cell(i2,j2), fm_distance(j2) * fm_transport_costs("wood") * v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
 *              +
 *              sum(ct,vm_cost_trade_forestry_ff(i2))
-              )/((1+pm_interest(i2))**sum(ct,(p32_rotation_regional(ct,i2))))
+              )/((1+pm_interest(i2))**sum(ct,(p32_representative_rotation(ct,i2))))
 **************************** ((1+pm_interest(i2))**p32_rot_length(ct,i2)) to calculate present value of future costs
 *              )
             * (pm_interest(i2)/(1+pm_interest(i2)))

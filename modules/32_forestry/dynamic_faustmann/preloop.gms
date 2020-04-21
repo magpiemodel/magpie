@@ -1,3 +1,6 @@
+*** Historical value fix
+pm_interest_dev(t_historical,i) = pm_interest_dev("y1995",i) * 0.9;
+
 ** This is same calculation as in carbon module. As these numbers don't exist yet due to
 ** carbon module appearing below forestry module, we keep this double calculation for now.
 p32_carbon_density_ac_forestry(t_all,j,ac) = m_growth_vegc(0,fm_carbon_density(t_all,j,"other","vegc"),sum(clcl,pm_climate_class(j,clcl)*fm_growth_par(clcl,"k","plantations")),sum(clcl,pm_climate_class(j,clcl)*fm_growth_par(clcl,"m","plantations")),(ord(ac)-1));
@@ -5,14 +8,16 @@ p32_carbon_density_ac_forestry(t_all,j,ac) = m_growth_vegc(0,fm_carbon_density(t
 ** Calculating the marginal of carbon density i.e. change in carbon density over two time steps
 ** The carbon densities are tC/ha/year so we don't have to divide by timestep length.
 loop(ac_sub,
-  p32_carbon_density_ac_marg(t_all,j,ac_sub-1) = p32_carbon_density_ac_forestry(t_all,j,ac_sub) - p32_carbon_density_ac_forestry(t_all,j,ac_sub-1);
+  p32_carbon_density_ac_marg(t_all,j,ac_sub) = p32_carbon_density_ac_forestry(t_all,j,ac_sub) - p32_carbon_density_ac_forestry(t_all,j,ac_sub-1);
   );
+p32_carbon_density_ac_marg(t_all,j,"ac0") = 0;
 
 ** Calculating Instantaneous Growth Rates (IGR). This is a proxy number which can be compared against
 ** interest rate in the economy to make investment decisions in plantations (i.e. to keep it growing or to harvest it).
 ** This parameter is then used to calculate rotation lengths.
-p32_IGR(t_all,j,ac) = (p32_carbon_density_ac_marg(t_all,j,ac)/p32_carbon_density_ac_forestry(t_all,j,ac))$(p32_carbon_density_ac_forestry(t_all,j,ac)>0) + 1$(p32_carbon_density_ac_forestry(t_all,j,ac)<0.0001);
-
+p32_IGR(t_all,j,ac) =   (p32_carbon_density_ac_marg(t_all,j,ac)/p32_carbon_density_ac_forestry(t_all,j,ac))$(p32_carbon_density_ac_forestry(t_all,j,ac)>0)
+                      + 1$(p32_carbon_density_ac_forestry(t_all,j,ac)=0);
+display p32_IGR;
 ** IGR values for first age class ("ac0") is provided the same value as "ac5" to
 ** avoid a sudden drop in rotation lengths in y2000 from y1995.
 *p32_IGR(t_all,j,"ac0") = p32_IGR(t_all,j,"ac5");
@@ -22,12 +27,41 @@ p32_IGR(t_all,j,ac) = (p32_carbon_density_ac_marg(t_all,j,ac)/p32_carbon_density
 ** As long as the prevailing interest rate becomes higher than IGR, it is assumed that the forest owner would rather
 ** keep his/her investment in bank rather than in keeping the forest standing.
 ** The easiest way to do this calculation is to count a value of 1 for IGR>interest rate and a value of 0 for IGR<interest rate.
-p32_rot_flg(t_all,j,ac) = 1$((p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)))>0)
-                        + 0$((p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)))<=0);
+p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)) >  0)
+                        + 0$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)) <= 0);
 
 ** From the above calculation, now its easier to count how many age-classes can be sustained before IGR falls below interest rate.
-** Then we just multiply the valid age-classes by 5 (because MAgPIE age classes are in 5 year steps) to get the absolute rotation length (in years)
-p32_rot_length_ac_eqivalent(t_all,j) = sum(ac,p32_rot_flg(t_all,j,ac));
+
+*********************************** FAUSTMANN SWITCHES
+** Set upper and lower bound for rotation years
+p32_replanting_cost = 800;
+
+p32_time(ac) = ord(ac);
+
+p32_discount_factor(t_all,j,ac)         =  1/(s32_euler**(sum(cell(i,j),pm_interest_dev(t_all,i))*p32_time(ac)));
+
+p32_net_present_value(t_all,j,ac)       = ((s32_price * p32_carbon_density_ac_forestry(t_all,j,ac) * p32_discount_factor(t_all,j,ac)))/(1-p32_discount_factor(t_all,j,ac));
+display p32_net_present_value;
+
+p32_stand_value(t_all,j,ac)             = s32_price * p32_carbon_density_ac_forestry(t_all,j,ac);
+p32_stand_value(t_all,j,ac)$(p32_stand_value(t_all,j,ac)<0.01) = 0.01;
+
+p32_investment_returns_lost(t_all,j,ac) = sum(cell(i,j),pm_interest_dev(t_all,i)) * p32_net_present_value(t_all,j,ac);
+p32_land_rent_weighted(t_all,j,ac)      = p32_investment_returns_lost(t_all,j,ac)/p32_stand_value(t_all,j,ac) ;
+
+p32_rot_flg_faustmann(t_all,j,ac)       = 1$(p32_IGR(t_all,j,ac) > sum(cell(i,j),pm_interest_dev(t_all,i)) + p32_land_rent_weighted(t_all,j,ac))
+                                        + 0$(p32_IGR(t_all,j,ac) <= sum(cell(i,j),pm_interest_dev(t_all,i)) + p32_land_rent_weighted(t_all,j,ac));
+
+p32_rot_length_faustmann(t_all,j)       = sum(ac,p32_rot_flg_faustmann(t_all,j,ac));
+
+*********************************************************************************
+
+** Change rotation based on switch. If not use calculation before faustmann
+if(c32_faustmann_rotation = 0,
+  p32_rot_length_ac_eqivalent(t_all,j) = sum(ac,p32_rot_flg(t_all,j,ac));
+elseif c32_faustmann_rotation = 1,
+  p32_rot_length_ac_eqivalent(t_all,j) = sum(ac,p32_rot_flg_faustmann(t_all,j,ac));
+);
 
 ** We provide a upper limit of 90 years for commercial plantations.
 ** 90 years translates to age-class 18 (90/5)
@@ -37,8 +71,15 @@ p32_rot_length_ac_eqivalent(t_historical,j) = p32_rot_length_ac_eqivalent("y1995
 ** Holding rotation lengths constant after the end of this century.
 p32_rot_length_ac_eqivalent(t_future,j) = p32_rot_length_ac_eqivalent("y2100",j);
 
-p32_rotation_regional(t,i) = ord(t) + smax(cell(i,j), p32_rot_length_ac_eqivalent(t,j)) + card(t_historical);;
+
+**** Why is this used this way?
+p32_rotation_regional(t,i) = ord(t) + smax(cell(i,j), p32_rot_length_ac_eqivalent(t,j)) + card(t_historical);
 display p32_rotation_regional;
+
+**** Representative regional rotation
+p32_ncells(i) = sum(cell(i,j),1);
+p32_representative_rotation(t,i) = ord(t) + ceil(sum(cell(i,j),p32_rot_length_ac_eqivalent(t,j))/p32_ncells(i)) + card(t_historical);
+display p32_representative_rotation;
 
 ** Earlier we converted rotation lengths to absolute numbers, now we make the Conversion
 ** back to rotation length in age-classes.
@@ -104,10 +145,16 @@ p32_cdr_ac(t,j,ac) = 0;
 ** divide initial forestry area by number of age classes within protect32
 ** since protect32 is TRUE for ord(ac_sub) < p32_rotation_cellular(j) there is
 ** one additional junk which is assigned to ac0
-p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular("y1995",j);
+if(c32_initial_distribution = 0,
+  p32_land(t,j,"plant","acx") = pcm_land(j,"forestry");
 
-p32_land("y1995",j,"plant",ac_sub)$(protect32("y1995",j,ac_sub)) = p32_plant_ini_ac(j);
-p32_land("y1995",j,"plant","ac0") = p32_plant_ini_ac(j);
+elseif c32_initial_distribution = 1,
+
+  p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular("y1995",j);
+  p32_land("y1995",j,"plant",ac_sub)$(protect32("y1995",j,ac_sub)) = p32_plant_ini_ac(j);
+  p32_land("y1995",j,"plant","ac0") = p32_plant_ini_ac(j);
+  );
+
 
 *initial assumption for harvested area
 pc32_hvarea_forestry(j) = p32_plant_ini_ac(j);
@@ -118,15 +165,7 @@ vm_hvarea_forestry.l(j,ac_sub) = p32_plant_ini_ac(j)/card(ac_sub);
 *' Saving intial values for avg calc
 p32_hv_area_current(t,i) = sum((cell(i,j),ac_sub),vm_hvarea_forestry.l(j,ac_sub));
 p32_hv_area_past_avg(t,i) = p32_hv_area_current(t,i);
-
-loop(t,
-  p32_dummy_time(t) =  m_yeardiff(t);
-  p32_dummy_elapsed(t) = m_year(t) - m_year(t-2);
-  display p32_dummy_elapsed;
-);
-
 p32_hv_area_past_avg(t,i)$(ord(t) > 3) = (p32_hv_area_current(t,i) + p32_hv_area_current(t-1,i) + p32_hv_area_current(t-3,i))/3;
-
 
 ** Initialization of land
 p32_land_start(j,type32,ac) = p32_land("y1995",j,type32,ac);
