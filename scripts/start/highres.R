@@ -76,6 +76,8 @@ download_and_update(cfg)
 for (ssp in ssps) {
   cfg$title <- paste(prefix,ssp,scen,res,sep="_")
   cfg <- setScenario(cfg,c(ssp,"NDC"))
+  cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+  cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
   
   #get trade pattern from low resolution run with c200
   gdx <- paste0("output/",paste(prefix,ssp,scen,"c200",sep="_"),"/fulldata.gdx")
@@ -84,7 +86,7 @@ for (ssp in ssps) {
   f21_trade_balance <- ov_prod_reg - ov_supply
   write.magpie(round(f21_trade_balance,6),paste0("modules/21_trade/input/f21_trade_balance.cs3"))
   
-  #get tau from low resolution run with c200, not used.
+  #get tau from low resolution run with c200, currently not used.
   tau(gdx,file = "modules/13_tc/input/f13_tau_scenario.csv",digits = 4)
   
   #use exo trade and parallel optimization
@@ -95,7 +97,5 @@ for (ssp in ssps) {
   
   #cfg$gms$c60_bioenergy_subsidy <- 0
   
-  cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
-  cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
   start_run(cfg,codeCheck=FALSE)
 }
