@@ -9,8 +9,6 @@ scalars
   s58_rewetting_switch Peatland rewetting on (Inf) or off (0) / 0 /
   s58_rewet_cost_onetime One-time costs for peatland rewetting (USD05MER per ha) / 7000 /
   s58_rewet_cost_recur Recurring costs for peatland rewetting (USD05MER per ha) / 200 /
-  s58_degrad_cost_onetime One-time costs for peatland degradation (USD05MER per ha) / 0 /
-  s58_degrad_cost_recur Recurring costs for peatland degradation (USD05MER per ha) / 0 /
 ;
 
 parameters

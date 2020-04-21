@@ -73,18 +73,13 @@
 	=e= 
 	0;
 
-*' Small costs of 1 $ per ha on gross land-use change avoid unrealistic patterns in the land transition matrix
-
  q58_peatland_cost(j2) ..
 	vm_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2) + pc58_peatland_cost_past(j2)
-							+ sum(land58, v58_peatland_man(j2,"rewet",land58) * s58_rewet_cost_recur)
-							+ sum(land58, v58_peatland_man(j2,"degrad",land58) * s58_degrad_cost_recur)
-							+ sum(stat_man58, v58_reduction(j2,stat_man58)) * 0;
+							+ sum(land58, v58_peatland_man(j2,"rewet",land58) * s58_rewet_cost_recur);
 	
  q58_peatland_cost_annuity(j2) ..
 	v58_peatland_cost_annuity(j2) =e=
-    (sum((from58,stat_rewet58), v58_lu_transitions(j2,from58,stat_rewet58) * s58_rewet_cost_onetime) +
-    sum(stat_degrad58, v58_lu_transitions(j2,"intact",stat_degrad58) * s58_degrad_cost_onetime))
+    sum((from58,stat_rewet58), v58_lu_transitions(j2,from58,stat_rewet58) * s58_rewet_cost_onetime) 
 	* sum(cell(i2,j2),pm_interest(i2)/(1+pm_interest(i2)));
 
  q58_peatland_emis_detail(j2,emis58) ..

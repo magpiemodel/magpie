@@ -32,7 +32,7 @@ else
 *' added to the degraded peatland category with equal distribution among 
 *' cropland, pasture and forestry (land-use categories are important for the 
 *' application of the wetland GHG emission factors). In total, we therefore have 
-*' 3 peatland categories: intact, degraded and restored. And for degraded and restored
+*' 3 peatland categories: intact, degraded and unused. And for degraded and unused
 *' we know the current/previous land use: cropland, pasture and forestry.
 	pc58_peatland_intact(j) = f58_peatland_intact(j);
 	p58_peatland_area(j) = f58_peatland_degrad(j) + f58_peatland_intact(j);
@@ -85,15 +85,6 @@ else
 	v58_lu_transitions.up(j2,"unused_crop","rewet_crop") = Inf;
 	v58_lu_transitions.up(j2,"unused_past","rewet_past") = Inf;
 	v58_lu_transitions.up(j2,"unused_forestry","rewet_forestry") = Inf;
-*	v58_lu_transitions.up(j2,"unused_crop","degrad_crop") = Inf;
-*	v58_lu_transitions.up(j2,"unused_crop","degrad_past") = Inf;
-*	v58_lu_transitions.up(j2,"unused_crop","degrad_forestry") = Inf;
-*	v58_lu_transitions.up(j2,"unused_past","degrad_crop") = Inf;
-*	v58_lu_transitions.up(j2,"unused_past","degrad_past") = Inf;
-*	v58_lu_transitions.up(j2,"unused_past","degrad_forestry") = Inf;
-*	v58_lu_transitions.up(j2,"unused_forestry","degrad_crop") = Inf;
-*	v58_lu_transitions.up(j2,"unused_forestry","degrad_past") = Inf;
-*	v58_lu_transitions.up(j2,"unused_forestry","degrad_forestry") = Inf;
 	);
 );
 

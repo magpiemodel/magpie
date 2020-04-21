@@ -66,13 +66,12 @@ cfg$output <- c("rds_report","interpolation")
 #T136 full set
 #T137 full set no degrad cost
 #T138 full set no transition costs
+#T139 full set final
 
-prefix <- "T138"
+prefix <- "T139"
 
 for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
 #for (ssp in c("SSP2")) {
-  # cfg$gms$s58_degrad_cost_onetime  <- 0
-  # cfg$gms$s58_degrad_cost_recur  <- 0
   pcost <- "default"
   #reset restor costs to default values
   cfg$gms$s58_rewet_cost_onetime  <- 7000
