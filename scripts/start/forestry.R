@@ -96,9 +96,9 @@ for(s73_price_adjuster in c(0)){
 
               cfg$output <- c("rds_report")
 
-  #            cat(cfg$title,"\n")
+#              cat(cfg$title,"\n")
 
-            start_run(cfg,codeCheck=FALSE)
+              start_run(cfg,codeCheck=FALSE)
             }
           }
         }
@@ -179,9 +179,9 @@ for(s73_price_adjuster in c(0)){
 
                 cfg$output <- c("rds_report")
 
-    #            cat(cfg$title,"\n")
+#                cat(cfg$title,"\n")
 
-              start_run(cfg,codeCheck=FALSE)
+                start_run(cfg,codeCheck=FALSE)
               }
             }
           }
