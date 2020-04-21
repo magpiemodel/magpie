@@ -40,7 +40,7 @@ hr <- "c1000"
 #The calibration file must exist for c200 and c1000 with the same date
 #calibration_H12_c200_26Feb20
 #calibration_H12_c1000_26Feb20
-cfg$input <- gsub("c200","c1000",cfg$input)
+cfg$input <- gsub("c200",hr,cfg$input)
 
 #max resources for parallel runs
 cfg$qos <- "priority_maxMem"
