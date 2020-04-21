@@ -153,7 +153,7 @@ for(s73_price_adjuster in c(0)){
               file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
               file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
 
-              for(timber_prices in c(0,20,90,500,1000,5000)){
+              for(timber_prices in c(0,20,90,500,1000)){
 
                 cfg$gms$s32_price = timber_prices
                 ### Create flags
