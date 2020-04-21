@@ -15,7 +15,7 @@ if(!exists("source_include")) {
 load(paste0(outputdir, "/config.Rdata"))
 hist       <- c(paste0(outputdir, "/validation.mif"), "input/validation.mif")
 file       <- paste0(outputdir, "/", cfg$title, "_validation.pdf")
-reportfile <- paste0(outputdir, "/report.mif")
+reportrds  <- paste0(outputdir, "/report.rds")
 gdx        <- paste0(outputdir, "/fulldata.gdx")
 runinfo    <- paste0(outputdir, "/", cfg$title, "_*.RData")
 ###############################################################################
@@ -35,4 +35,7 @@ if(length(runinfo)>1) {
   runinfo <- NULL
 }
 
-validation(gdx=gdx, hist=h, file = file, runinfo=runinfo, reportfile=reportfile, scenario=cfg$title)
+getReport <- NULL
+if(file.exists(reportrds)) getReport <- readRDS(reportrds)
+
+validation(gdx=gdx, hist=h, file = file, runinfo=runinfo, scenario=cfg$title, getReport=getReport)

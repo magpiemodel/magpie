@@ -156,18 +156,13 @@ else
           p15_bodyheight(t,iso,sex,age++1,"preliminary") = p15_bodyheight(t,iso,sex,age,"preliminary");
 
 * replace age groups of 18 year old
-          p15_bodyheight(t,iso,"F","15--19","preliminary") =
-                 126.4*
+          p15_bodyheight(t,iso,sex,"15--19","preliminary") =
+                 f15_bodyheight_regr_paras(sex,"slope")*
                  (sum(underaged15,
                    p15_kcal_growth_food(t,iso,underaged15)
-                 )/3)**0.03467
+                 )/3)**f15_bodyheight_regr_paras(sex,"exponent")
                  ;
-          p15_bodyheight(t,iso,"M","15--19","preliminary") =
-                 131.8*
-                 (sum(underaged15,
-                   p15_kcal_growth_food(t,iso,underaged15)
-                 )/3)**0.03978
-                 ;
+
      );
 *adjust body height of kids proportional to over18 population
      p15_bodyheight(t,iso,"M","0--4","preliminary")=p15_bodyheight(t,iso,"M","15--19","preliminary")/176*92;
