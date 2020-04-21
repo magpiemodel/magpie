@@ -25,7 +25,7 @@ cfg$results_folder <- "output/:title:"
 
 cfg$output <- c("rds_report","highres")
 
-prefix <- "T05"
+prefix <- "T06"
 
 #cfg$qos <- "priority"
 
