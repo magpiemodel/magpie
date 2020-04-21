@@ -21,7 +21,7 @@ parameters
   i09_gdp_ppp_iso(t_all,iso)                      Income in purchasing power parity (mio. USD05PPP per yr)
   i09_gdp_ppp(t_all,i)                            Income in purchasing power parity (mio. USD05PPP per yr)
 
-  im_gdp_pc_ppp(t_all,i)                Per capita income in purchasing power parity (USD05PPP per cap per yr)
+  i09_gdp_pc_ppp(t_all,i)                Per capita income in purchasing power parity (USD05PPP per cap per yr)
   im_gdp_pc_ppp_iso(t_all,iso)          Per capita income in purchasing power parity (USD05PPP per cap per yr)
 
 * Development State
