@@ -21,7 +21,9 @@ pm_demand_ext(t_ext,i,kforestry) = pm_demand_ext_original(t_ext,i,kforestry);
 *f21_trade_balanceflow(t_all,kforestry) = 0;
 ***** Not fixinf production to zero because trade balanceflow has some positive numbers.
 ***** This will break the production equation in trade. Keeping vm_prod not fixed to 0 helps in this.
-*vm_prod.fx(j,kforestry) = 0;
+***** If f21_trade_balanceflow is changed to fm_trade_balanceflow it'll be fine
+vm_prod.fx(j,kforestry) = 0;
+fm_trade_balanceflow(t_all,kforestry) = 0;
 
 *m3 to ton conversion.
 *0.6 ton DM / m^3?
