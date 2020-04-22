@@ -28,8 +28,8 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "BF27"
-cat(paste0("Faustmann rotations added. Yield from half of rotation length seen at estblishment point didn't work. Possible bug in how model sees future yields?. For now reverted back to normal specification. Price based fix test. 5 year runs. Fixed harvest rule update via loop. Discussed with Florian --- this is okay. Added additional switch to select plantation yield via growing stock calculation. The Growing stock is calculated normally but is divided based on plantation yield flag in two streams of two new parameters. Annual Yields are now calculated from this and used in equations. Separated growing stocks are used for reporting. New flags added to make tests where plantations are treated as natveg. Hotelling rule input file will also be used to make co2 price runs in policy case. CO2 prices in baseline runs bugfix included. Those are fixed to 0. Woodfuel demand 50% across the board. "), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+identifier_flag <- "BF28"
+cat(paste0("Fixed initial age-class shiting but when intitial distribution for plantations has to be turned off. Faustmann rotations added. Yield from half of rotation length seen at estblishment point didn't work. Possible bug in how model sees future yields?. For now reverted back to normal specification. Price based fix test. 5 year runs. Fixed harvest rule update via loop. Discussed with Florian --- this is okay. Added additional switch to select plantation yield via growing stock calculation. The Growing stock is calculated normally but is divided based on plantation yield flag in two streams of two new parameters. Annual Yields are now calculated from this and used in equations. Separated growing stocks are used for reporting. New flags added to make tests where plantations are treated as natveg. Hotelling rule input file will also be used to make co2 price runs in policy case. CO2 prices in baseline runs bugfix included. Those are fixed to 0. Woodfuel demand 50% across the board. "), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 for(s73_price_adjuster in c(0)){
   cfg$gms$s73_price_adjuster <- s73_price_adjuster
@@ -153,7 +153,7 @@ for(s73_price_adjuster in c(0)){
               file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
               file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
 
-              for(timber_prices in c(0,20,90,500,1000)){
+              for(timber_prices in c(0,20,90,500)){
 
                 cfg$gms$s32_price = timber_prices
                 ### Create flags

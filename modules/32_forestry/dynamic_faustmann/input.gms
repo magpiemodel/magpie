@@ -14,7 +14,7 @@ scalars
   s32_recurring_cost_multiplier Cost multiplier for recurring costs only for testing (1)            / 10 /
   c32_rotation_extension Rotation extension in percentage terms / 1 /
   c32_faustmann_rotation Switch to activate faustmann rotations / 0 /
-  c32_initial_distribution Switch to deactivate ageclass distribution in plantations / 1 /
+  c32_initial_distribution Switch to Activate ageclass distribution in plantations / 1 /
   s32_interest_rate          / 0.04    /
   s32_price                  / 45      /
   s32_euler                  /2.7/

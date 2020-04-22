@@ -17,7 +17,7 @@ p32_carbon_density_ac_marg(t_all,j,"ac0") = 0;
 ** This parameter is then used to calculate rotation lengths.
 p32_IGR(t_all,j,ac) =   (p32_carbon_density_ac_marg(t_all,j,ac)/p32_carbon_density_ac_forestry(t_all,j,ac))$(p32_carbon_density_ac_forestry(t_all,j,ac)>0)
                       + 1$(p32_carbon_density_ac_forestry(t_all,j,ac)=0);
-display p32_IGR;
+
 ** IGR values for first age class ("ac0") is provided the same value as "ac5" to
 ** avoid a sudden drop in rotation lengths in y2000 from y1995.
 *p32_IGR(t_all,j,"ac0") = p32_IGR(t_all,j,"ac5");
@@ -41,7 +41,6 @@ p32_time(ac) = ord(ac);
 p32_discount_factor(t_all,j,ac)         =  1/(s32_euler**(sum(cell(i,j),pm_interest_dev(t_all,i))*p32_time(ac)));
 
 p32_net_present_value(t_all,j,ac)       = ((s32_price * p32_carbon_density_ac_forestry(t_all,j,ac) * p32_discount_factor(t_all,j,ac)))/(1-p32_discount_factor(t_all,j,ac));
-display p32_net_present_value;
 
 p32_stand_value(t_all,j,ac)             = s32_price * p32_carbon_density_ac_forestry(t_all,j,ac);
 p32_stand_value(t_all,j,ac)$(p32_stand_value(t_all,j,ac)<0.01) = 0.01;
@@ -74,12 +73,10 @@ p32_rot_length_ac_eqivalent(t_future,j) = p32_rot_length_ac_eqivalent("y2100",j)
 
 **** Why is this used this way?
 p32_rotation_regional(t,i) = ord(t) + smax(cell(i,j), p32_rot_length_ac_eqivalent(t,j)) + card(t_historical);
-display p32_rotation_regional;
 
 **** Representative regional rotation
 p32_ncells(i) = sum(cell(i,j),1);
 p32_representative_rotation(t,i) = ord(t) + ceil(sum(cell(i,j),p32_rot_length_ac_eqivalent(t,j))/p32_ncells(i)) + card(t_historical);
-display p32_representative_rotation;
 
 ** Earlier we converted rotation lengths to absolute numbers, now we make the Conversion
 ** back to rotation length in age-classes.
@@ -127,8 +124,6 @@ harvest32(t,j,ac_sub) = no;
 *harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular(t,j));
 harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular_harvesting(t,j));
 
-display p32_rotation_cellular_estb,p32_rotation_cellular_harvesting;
-
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
 p32_land(t,j,type32,ac) = 0;
@@ -146,15 +141,24 @@ p32_cdr_ac(t,j,ac) = 0;
 ** since protect32 is TRUE for ord(ac_sub) < p32_rotation_cellular(j) there is
 ** one additional junk which is assigned to ac0
 if(c32_initial_distribution = 0,
+** Initialize with highest age class and don't shift it when intitial distribution is off
   p32_land(t,j,"plant","acx") = pcm_land(j,"forestry");
 
 elseif c32_initial_distribution = 1,
-
+** Initialize with equal distribtuion in rotation age class
   p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular("y1995",j);
   p32_land("y1995",j,"plant",ac_sub)$(protect32("y1995",j,ac_sub)) = p32_plant_ini_ac(j);
   p32_land("y1995",j,"plant","ac0") = p32_plant_ini_ac(j);
-  );
 
+** Initial shifting of age classes
+  p32_land(t,j,"plant",ac)$(ord(ac) > 1) = p32_land(t,j,"plant",ac-1);
+** Reset ac0 to zero
+  p32_land("y1995",j,"plant","ac0") = 0;
+
+  );
+display p32_land;
+** Initialization of land
+p32_land_start(j,type32,ac) = p32_land("y1995",j,type32,ac);
 
 *initial assumption for harvested area
 pc32_hvarea_forestry(j) = p32_plant_ini_ac(j);
@@ -166,15 +170,6 @@ vm_hvarea_forestry.l(j,ac_sub) = p32_plant_ini_ac(j)/card(ac_sub);
 p32_hv_area_current(t,i) = sum((cell(i,j),ac_sub),vm_hvarea_forestry.l(j,ac_sub));
 p32_hv_area_past_avg(t,i) = p32_hv_area_current(t,i);
 p32_hv_area_past_avg(t,i)$(ord(t) > 3) = (p32_hv_area_current(t,i) + p32_hv_area_current(t-1,i) + p32_hv_area_current(t-3,i))/3;
-
-** Initialization of land
-p32_land_start(j,type32,ac) = p32_land("y1995",j,type32,ac);
-display p32_land_start;
-
-** Initial shifting of age classes
-p32_land(t,j,"plant",ac)$(ord(ac) > 1) = p32_land(t,j,"plant",ac-1);
-** Reset ac0 to zero
-p32_land("y1995",j,"plant","ac0") = 0;
 
 ** Proportion of production coming from plantations
 p32_production_ratio_ext(t_ext,i) = f32_production_ratio("y2100",i);
