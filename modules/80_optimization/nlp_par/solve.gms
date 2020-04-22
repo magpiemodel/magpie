@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -69,7 +69,7 @@ repeat
 		else
 		 if(magpie.modelstat = 13,
           display "WARNING: Modelstat 13 | retry without Conopt4 pre-processing";
-		  magpie.optfile = 2 
+		  magpie.optfile = 2
 	      solve magpie USING nlp MINIMIZING vm_cost_glo;
 	      magpie.optfile   = s80_optfile ;
 		  p80_handle(i) = magpie.handle;
@@ -87,7 +87,7 @@ repeat
   		if((p80_counter(i) >= (s80_maxiter-1) and p80_modelstat(t,i) > 2 and p80_modelstat(t,i) ne 7),
     		magpie.solprint = 1
   		);
-      ); 
+      );
    );
    display$readyCollect(p80_handle) 'Problem waiting for next instance to complete';
 until card(p80_handle) = 0 OR smax(i, p80_counter(i)) >= s80_maxiter;
@@ -98,7 +98,7 @@ if (smax(i,p80_modelstat(t,i)) > 2 and smax(i,p80_modelstat(t,i)) ne 7,
   abort "no feasible solution found!";
 );
 
-* handleSubmit does not work as expected. Does not restart from saved state. 
+* handleSubmit does not work as expected. Does not restart from saved state.
 * Therefore, solve statements are used.
 * display$handleSubmit(p80_handle(i)) 'trouble resubmitting handles' ;
 
