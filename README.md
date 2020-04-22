@@ -181,7 +181,7 @@ could discuss that issue with the MAgPIE development team
 
 ## MODEL OUTPUT
 
-By default the results of a model run are written to an individual results folder within the "output/" folder of the model. The two most important output files are the fulldata.gdx and the report.mif. The fulldata.gdx is the technical output of the GAMS optimization and contains all quantities that were used during the optimization in unchanged form. The mif-file is a csv file of certain format and is synthetized from the fulldata.gdx by post-processing scripts. It can be read in any text editor or spreadsheet program and is well suited for a quick look at the results and for further analysis.
+By default the results of a model run are written to an individual results folder within the "output/" folder of the model. The two most important output files are the fulldata.gdx and the report.mif. The fulldata.gdx is the technical output of the GAMS optimization and contains all quantities that were used during the optimization in unchanged form. The mif-file is a csv file of a specific format and is synthetized from the fulldata.gdx by post-processing scripts. It can be read in any text editor or spreadsheet program and is well suited for a quick look at the results and for further analysis.
 
 ## CONTACT
 magpie@pik-potsdam.de
