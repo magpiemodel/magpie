@@ -53,6 +53,7 @@ cfg$gms$c12_interest_rate <- "gdp_dependent"              # def = "gdp_dependent
 cfg$gms$c12_interest_rate_noselect <- "gdp_dependent"     # def = "gdp_dependent"
 
 cfg$output <- c("rds_report","interpolation")
+download_and_update(cfg)
 
 #prefix <- "T118"
 #128 default
@@ -67,8 +68,9 @@ cfg$output <- c("rds_report","interpolation")
 #T137 full set no degrad cost
 #T138 full set no transition costs
 #T139 full set final
+#T140 full set final elastic demand
 
-prefix <- "T139"
+prefix <- "T140"
 
 for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
 #for (ssp in c("SSP2")) {
@@ -84,7 +86,7 @@ for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
   #getInput("/p/projects/remind/runs/magpie4-2019-04-02-develop/output/r8473-trunk-C_NPi-mag-4/fulldata.gdx")
   cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-Ref-REMIND-MAGPIE"
   cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-Ref-REMIND-MAGPIE"
-  cfg$gms$s15_elastic_demand <- 0
+  cfg$gms$s15_elastic_demand <- 1
   cfg$gms$c12_interest_rate <- "gdp_dependent"              # def = "gdp_dependent"
   cfg$gms$c12_interest_rate_noselect <- "gdp_dependent"     # def = "gdp_dependent"
   
@@ -97,7 +99,7 @@ for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
   cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
   cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
   cfg <- setScenario(cfg,c(ssp,"NDC"))
-  cfg$gms$s15_elastic_demand <- 0
+  cfg$gms$s15_elastic_demand <- 1
   cfg$gms$c12_interest_rate <- "gdp_dependent"              # def = "gdp_dependent"
   cfg$gms$c12_interest_rate_noselect <- "gdp_dependent"     # def = "gdp_dependent"
   
