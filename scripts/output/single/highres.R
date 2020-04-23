@@ -43,7 +43,7 @@ hr <- "c1000"
 cfg$input <- gsub("c200",hr,cfg$input)
 
 #max resources for parallel runs
-cfg$qos <- "priority_maxMem"
+cfg$qos <- "short_maxMem"
 #magpie4::submitCalibration("H12_c1000")
 #c1000 with endoTC
 

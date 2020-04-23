@@ -52,7 +52,7 @@ cfg$gms$s80_optfile <- 1
 cfg$gms$c12_interest_rate <- "gdp_dependent"              # def = "gdp_dependent"
 cfg$gms$c12_interest_rate_noselect <- "gdp_dependent"     # def = "gdp_dependent"
 
-cfg$output <- c("rds_report","interpolation")
+cfg$output <- c("rds_report","interpolation","highres")
 download_and_update(cfg)
 
 #prefix <- "T118"
@@ -69,8 +69,9 @@ download_and_update(cfg)
 #T138 full set no transition costs
 #T139 full set final
 #T140 full set final elastic demand
+#T141 full set final SSPDB bugfix + highres
 
-prefix <- "T140"
+prefix <- "T141"
 
 for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
 #for (ssp in c("SSP2")) {
