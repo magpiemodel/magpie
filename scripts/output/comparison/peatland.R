@@ -24,6 +24,8 @@ if(!exists("source_include")) {
 ###############################################################################
 cat("\nStarting output generation\n")
 
+all <- NULL
+
 x <- list()
 x$emis_co2_clim_annual <- NULL
 x$emis_all_glo_annual <- NULL
@@ -66,6 +68,7 @@ for (i in 1:length(outputdirs)) {
   print(paste("Processing",outputdirs[i]))
   #gdx file
   gdx<-path(outputdirs[i],"fulldata.gdx")
+  rep<-path(outputdirs[i],"report.rds")
   if(file.exists(gdx)) {
     #get scenario name
     load(path(outputdirs[i],"config.Rdata"))
@@ -229,7 +232,11 @@ for (i in 1:length(outputdirs)) {
     x$cost_wo_peatlandemis <- mbind(x$cost_wo_peatlandemis,a)
     
   } else missing <- c(missing,outputdirs[i])
+  a <- readRDS(rep)
+  all <- rbind(all,a)
 }
+
+saveRDS(all,"output/report.rds")
 
 #remove 1995
 x <- lapply(x, function(x) {x[,getYears(x,as.integer = T)>=2015,]})
