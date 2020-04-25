@@ -27,6 +27,9 @@ resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
+#lock the model folder
+lock_id <- lucode::model_lock(timeout1=1)
+
 cfg$results_folder <- "output/:title:"
 
 cfg$output <- c("rds_report")
@@ -70,4 +73,6 @@ cfg$gms$optimization <- "nlp_par"
 
 #cfg$gms$c60_bioenergy_subsidy <- 0
 
-start_run(cfg,codeCheck=FALSE)
+start_run(cfg,codeCheck=FALSE,lock_model=FALSE)
+#unlock the model folder
+lucode::model_unlock(lock_id)
