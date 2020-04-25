@@ -34,43 +34,15 @@ getInput <- function(gdx,ghg_price=TRUE,biodem=TRUE) {
 source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 
-#cfg$force_download <- TRUE
-
-# cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp8p5-co2_rev34_c200_690d3718e151be1b450b394c1064b1c5.tgz",
-#                "rev4.14_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
-#                "rev4.14_690d3718e151be1b450b394c1064b1c5_validation.tgz",
-#                "additional_data_rev3.68_FH.tgz",
-#                "calibration_H12_c200_12Sep18.tgz",
-#                "peatland_input_v1.tgz")
-# cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL,"/p/projects/landuse/users/florianh/data"=NULL),
-#                            getOption("magpie_repos"))
-
 cfg$gms$peatland  <- "on"
 cfg$gms$c60_biodem_level <- 0
 cfg$gms$s56_c_price_induced_aff <- 0
 cfg$gms$s80_optfile <- 1
-cfg$gms$c12_interest_rate <- "gdp_dependent"              # def = "gdp_dependent"
-cfg$gms$c12_interest_rate_noselect <- "gdp_dependent"     # def = "gdp_dependent"
 
-cfg$output <- c("rds_report","interpolation","highres")
+cfg$output <- c("rds_report","highres")
 download_and_update(cfg)
 
-#prefix <- "T118"
-#128 default
-#129 lowcost
-#130 old input files
-#131 new input files with old spam file
-#132 current input files low cost degrad
-#133 current input files low cost degrad + no unused
-#134 current input files low cost degrad + no unused + forestry
-#135 current input files low cost degrad + no unused + GWP change
-#T136 full set
-#T137 full set no degrad cost
-#T138 full set no transition costs
-#T139 full set final
-#T140 full set final elastic demand
 #T141 full set final SSPDB bugfix + highres
-
 prefix <- "T141"
 
 for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
@@ -80,7 +52,6 @@ for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
   cfg$gms$s58_rewet_cost_onetime  <- 7000
   cfg$gms$s58_rewet_cost_recur  <- 200
   
-  #cfg$gms$tc <- "endo_jun18"
   #Ref
   cfg$title <- paste(prefix,ssp,"Ref",pcost,sep="_")
   cfg <- setScenario(cfg,c(ssp,"NPI"))
@@ -89,7 +60,6 @@ for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
   cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-Ref-REMIND-MAGPIE"
   cfg$gms$s15_elastic_demand <- 1
   cfg$gms$c12_interest_rate <- "gdp_dependent"              # def = "gdp_dependent"
-  cfg$gms$c12_interest_rate_noselect <- "gdp_dependent"     # def = "gdp_dependent"
   
   cfg$gms$s56_peatland_policy <- 0
   cfg$gms$s58_rewetting_switch  <- 0
@@ -102,15 +72,12 @@ for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
   cfg <- setScenario(cfg,c(ssp,"NDC"))
   cfg$gms$s15_elastic_demand <- 1
   cfg$gms$c12_interest_rate <- "gdp_dependent"              # def = "gdp_dependent"
-  cfg$gms$c12_interest_rate_noselect <- "gdp_dependent"     # def = "gdp_dependent"
-  
+
   cfg$title <- paste(prefix,ssp,"RCP2p6",pcost,sep="_")
   cfg$gms$s56_peatland_policy <- 0
   cfg$gms$s58_rewetting_switch  <- 0
   start_run(cfg,codeCheck=FALSE)
 
-  # cfg$gms$tc <- "exo"
-  # tau(paste0("output/",paste(prefix,ssp,"RCP2p6",pcost,sep="_"),"/fulldata.gdx"),"modules/13_tc/input/f13_tau_scenario.csv")
   cfg$title <- paste(prefix,ssp,"RCP2p6+PeatProt",pcost,sep="_")
   cfg$gms$s56_peatland_policy <- 1
   cfg$gms$s58_rewetting_switch  <- 0
