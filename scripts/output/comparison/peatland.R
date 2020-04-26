@@ -27,189 +27,82 @@ cat("\nStarting output generation\n")
 all <- NULL
 
 x <- list()
-x$emis_co2_clim_annual <- NULL
-x$emis_all_glo_annual <- NULL
-x$emis_p_glo <- NULL
-x$area_pman_clim_detail <- NULL
-x$area_p_clim <- NULL
-x$area_p_clim_detail <- NULL
-x$area_p_cell <- NULL
-x$area_p_map <- NULL
-x$area_p_map_ratio <- NULL
-x$land_clim <- NULL
+x$LandCover <- NULL
+x$PeatlandArea <- NULL
+x$EmissionCO2 <- NULL
+x$PeatlandEmission <- NULL
 x$fprice_index <- NULL
-x$fprices <- NULL
 x$income <- NULL
-x$fexpshare <- NULL
 x$kcal <- NULL
 x$tau <- NULL
-x$demand_food <- NULL
 x$demand_bioen <- NULL
 x$c_price <- NULL
 x$cost <- NULL
-x$cost_wo_peatlandemis <- NULL
-x$cost_wo_peatlandreward <- NULL
 
 missing <- NULL
 
-calcEmisCum <- function(a) {
-  im_years <- getYears(a,as.integer = T)
-  im_years <- c(0,diff(im_years))
-  im_years <- as.magpie(im_years,temporal=1)
-  getYears(im_years) <- getYears(a)
-  a[,im_years[1],] <- 0
-  a <- a*im_years[,getYears(a),]
-  a <- as.magpie(apply(a,c(1,3),cumsum),spatial=2,temporal=1)
-  return(a)
-}
-
-
 for (i in 1:length(outputdirs)) {
   print(paste("Processing",outputdirs[i]))
-  #gdx file
   gdx<-path(outputdirs[i],"fulldata.gdx")
   rep<-path(outputdirs[i],"report.rds")
   if(file.exists(gdx)) {
-    #get scenario name
     load(path(outputdirs[i],"config.Rdata"))
     scen <- cfg$title
     
     map_cell_clim <- readGDX(gdx,"p58_mapping_cell_climate")
     
-    #area_pman_clim_detail
-    a <- readGDX(gdx,"ov58_peatland_man",select=list(type="level"))
-    a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
-    a <- dimSums(a*map_cell_clim,dim=1)
-    x$area_pman_clim_detail <- mbind(x$area_pman_clim_detail,a)
-
-    #area_p_cell
-    a <- readGDX(gdx,"ov58_peatland_man",select=list(type="level"))
-    a <- dimSums(a,dim=c(3.2))
-    a[,,"degrad"] <- a[,,"degrad"] + collapseNames(a[,,"unused"])
-    a <- a[,,"unused",invert=TRUE]
-    # miss <- readGDX(gdx,"ov58_peatland_missing",select=list(type="level"))
-    # a[,,"degrad"] <- a[,,"degrad"]+miss
-    b <- readGDX(gdx,"ov58_peatland_intact",select=list(type="level"))
-    getNames(b) <- "intact"
-    a <- mbind(a,b)
-    
-    # #interpolate
-    # p <- a[,getYears(a,as.integer = T)>=2015,]
-    # p_ini_lr <- setYears(p[,1,],NULL)
-    # p_ini_hr <- read.magpie("/p/projects/landuse/users/florianh/data/PeatArea_0.5.mz")
-    # peat_hr <- interpolate(p,p_ini_lr,p_ini_hr,spam = path(outputdirs[i],"0.5-to-c200_sum.spam"))
-    # peat_hr <- add_dimension(peat_hr,dim = 3.1,add = "scenario",nm = scen)
-    # x$area_p_map <- mbind(x$area_p_map,peat_hr)
-    # 
-    # peat_hr_ratio <- collapseNames(peat_hr[,,"degrad"])/dimSums(peat_hr,dim=3.2)
-    # x$area_p_map_ratio <- mbind(x$area_p_map_ratio,peat_hr_ratio)
-    # 
-    
-    a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
-    x$area_p_cell <- mbind(x$area_p_cell,a)
-    
-    
-    #area_p_clim
-    a <- dimSums(a*map_cell_clim,dim=1)
-    x$area_p_clim <- mbind(x$area_p_clim,a)
-    
-    #read land
-    a <- land(gdx,level="cell")
-    bio <- setNames(croparea(gdx,level="cell",products = c("betr","begr"),product_aggr = TRUE),"bio")
-    a <- mbind(bio,a)
+    #LandCover
+    a <- land(gdx,level="glo")
+    forest <- setNames(dimSums(a[,,c("forestry","primforest","secdforest")],dim=3),"forest")
+    bio <- setNames(croparea(gdx,level="glo",products = c("betr","begr"),product_aggr = TRUE),"bio")
+    a <- mbind(a,bio,forest)
     a[,,"crop"] <- a[,,"crop"]-setNames(a[,,"bio"],"crop")
-    a <- dimSums(a*map_cell_clim,dim=1)
+    a <- a[,,c("crop","bio","past","forest","other","urban")]
     a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
-    x$land_clim <- mbind(x$land_clim,a)
-
-    #read peatland land detail
-    a <- readGDX(gdx,"ov58_peatland_man",select=list(type="level"))
-    a <- dimSums(a*map_cell_clim,dim=1)
+    x$LandCover <- mbind(x$LandCover,a)
+    
+    #PeatlandArea
+    a <- PeatlandArea(gdx,level="climate")
     a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
-    x$area_p_clim_detail <- mbind(x$area_p_clim_detail,a)
+    x$PeatlandArea <- mbind(x$PeatlandArea,a)
     
+    #EmissionCO2
+    a <- collapseNames(emisCO2(gdx,level = "cell",unit="gas"))
+    a <- dimSums(a*map_cell_clim,dim=1)
+    names(dimnames(a))[3] <- names(dimnames(map_cell_clim))[3]
+    a <- add_dimension(a,dim = 3.2,add = "GHG emission","Vegetation")
+    b <- collapseNames(PeatlandEmissions(gdx,level="climate")[,,"co2"])
+    b <- add_dimension(b,dim = 3.2,add = "GHG emission","Peatland")
+    a <- mbind(a,b)/1000
+    a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
+    x$EmissionCO2 <- mbind(x$EmissionCO2,a)
     
-    #emis_p_glo
-    ov58_peatland_man <- readGDX(gdx,"ov58_peatland_man",select = list(type="level"))
-    p58_ipcc_wetland_ef <- readGDX(gdx,"p58_ipcc_wetland_ef")
-    emis_p_glo <- ov58_peatland_man*map_cell_clim*p58_ipcc_wetland_ef
-    emis_p_glo <- dimSums(emis_p_glo,dim=c(1,3.1,3.2))
-    emis_p_glo <- add_dimension(emis_p_glo,dim = 3.1,add = "scenario",nm = scen)
-    x$emis_p_glo <- mbind(x$emis_p_glo,emis_p_glo)
-
-    emis_p_glo[,,"ch4"] <- emis_p_glo[,,"ch4"]/34
-    emis_p_glo[,,"n2o"] <- emis_p_glo[,,"n2o"]/298
+    #PeatlandEmission
+    a <- collapseNames(PeatlandEmissions(gdx,level="climate",unit="gas"))
+    a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
+    x$PeatlandEmission <- mbind(x$PeatlandEmission,a)
     
-    #emis_lu_glo
-    co2 <- setNames(emisCO2(gdx,level = "glo",unit="gas",cc = TRUE),"co2")
-    doc <- setNames(co2,"doc")
-    doc[,,] <- NA
-    ch4 <- setNames(Emissions(gdx,level="glo",type="ch4",unit="gas"),"ch4")
-    n2o <- setNames(Emissions(gdx,level="glo",type="n2o_n",unit="gas"),"n2o")
-    emis_lu_glo <- mbind(co2,doc,ch4,n2o)
-    emis_lu_glo <- add_dimension(emis_lu_glo,dim = 3.1,add = "scenario",nm = scen)
-
-    lu <- add_dimension(emis_lu_glo,dim = 3.2,add = "GHG emission","Land-use change & Agriculture")
-    peat <- add_dimension(dimSums(emis_p_glo,dim=c(3.2)),dim = 3.2,add = "GHG emission","Peatland")
-    a <- mbind(lu,peat)
-    x$emis_all_glo_annual <- mbind(x$emis_all_glo_annual,a)
-    
-    #emis_p_cell_co2
-    ov58_peatland_man <- readGDX(gdx,"ov58_peatland_man",select = list(type="level"))
-    p58_ipcc_wetland_ef <- readGDX(gdx,"p58_ipcc_wetland_ef")
-    emis_p_clim <- ov58_peatland_man*map_cell_clim*p58_ipcc_wetland_ef
-    emis_p_clim <- dimSums(emis_p_clim[,,c("co2")],dim=c(1,3.1,3.2,3.4))#"doc"
-    emis_p_clim <- add_dimension(emis_p_clim,dim = 3.1,add = "scenario",nm = scen)
-    
-    #emis_co2_clim_annual
-    emis_lu_clim <- emisCO2(gdx,level = "cell",unit="gas",cc = TRUE)
-    emis_lu_clim <- dimSums(emis_lu_clim*map_cell_clim,dim=1)
-    emis_lu_clim <- add_dimension(emis_lu_clim,dim = 3.1,add = "scenario",nm = scen)
-#    names(dimnames(emis_lu_clim)) <- names(dimnames(emis_p_clim))
-    
-    lu <- add_dimension(emis_lu_clim,dim = 3.2,add = "GHG emission","Land-use change")
-    peat <- add_dimension(emis_p_clim,dim = 3.2,add = "GHG emission","Peatland")
-    a <- mbind(lu,peat)
-    x$emis_co2_clim_annual <- mbind(x$emis_co2_clim_annual,a)
-    
-    #read fprice_index
+    #fprice_index
     a <- priceIndex(gdx,level="regglo", products="kfo", baseyear = "y2015")
     a <- collapseNames(add_dimension(a,dim = 3.1,add = "scenario",nm = scen),collapsedim = "data")
     x$fprice_index <- mbind(x$fprice_index,a)
 
-    #read fprice
-    a <- collapseNames(prices(gdx,level="regglo", products="kfo",product_aggr = TRUE))
-    a <- collapseNames(add_dimension(a,dim = 3.1,add = "scenario",nm = scen),collapsedim = "data")
-    x$fprices <- mbind(x$fprices,a)
-    
-    #read income
+    #income
     a <- collapseNames(income(gdx,level="reg",per_capita = FALSE,type = "mer"))
     a <- collapseNames(add_dimension(a,dim = 3.1,add = "scenario",nm = scen),collapsedim = "data")
     x$income <- mbind(x$income,a)
     
-    #read food exp share
-    a <- collapseNames(FoodExpenditureShare(gdx, level = "regglo"))
-    a <- collapseNames(add_dimension(a,dim = 3.1,add = "scenario",nm = scen),collapsedim = "data")
-    x$fexpshare <- mbind(x$fexpshare,a)
-    
-    #read kcal
+    #kcal
     a <- collapseNames(Kcal(gdx, level = "glo"))
     a <- collapseNames(add_dimension(a,dim = 3.1,add = "scenario",nm = scen),collapsedim = "data")
     x$kcal <- mbind(x$kcal,a)
     
-    #read tau
+    #tau
     a <- collapseNames(tau(gdx,level="glo"))
     a <- collapseNames(add_dimension(a,dim = 3.1,add = "scenario",nm = scen),collapsedim = "type")
     x$tau <- mbind(x$tau,a)
     
-    #demand food, feed, processed
-    kcr <- add_dimension(demand(gdx,level = "reg",product_aggr = TRUE,type = c("food","feed","processed"),products = "kcr"),3.1,"cat","Crops")
-    kli <- add_dimension(demand(gdx,level = "reg",product_aggr = TRUE,type = c("food","feed","processed"),products = "kli"),3.1,"cat","Livestock")
-    a <- mbind(kcr,kli)
-    a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
-    x$demand_food <- mbind(x$demand_food,a)
-    
-    #demand bioen
+    #bioen
     a <- demandBioenergy(gdx,level="reg")
     a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
     x$demand_bioen <- mbind(x$demand_bioen,a)
@@ -219,48 +112,32 @@ for (i in 1:length(outputdirs)) {
     a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
     x$c_price <- mbind(x$c_price,a)
     
-    #cost reg
-    a <- collapseNames(readGDX(gdx,"ov11_cost_reg",select = list(type="level")))
-    a <- collapseNames(add_dimension(a,dim = 3.1,add = "scenario",nm = scen),collapsedim = "data")
-    x$cost <- mbind(x$cost,a)
-    
-    #cost reg without peatland GHG emis costs
+    #costs
     a <- collapseNames(readGDX(gdx,"ov11_cost_reg",select = list(type="level")))
     b <- collapseNames(superAggregate(readGDX(gdx,"ov_peatland_emis_cost",select = list(type="level")),level="reg",aggr_type = "sum"))
     a <- a-b
     a <- collapseNames(add_dimension(a,dim = 3.1,add = "scenario",nm = scen),collapsedim = "data")
-    x$cost_wo_peatlandemis <- mbind(x$cost_wo_peatlandemis,a)
+    x$cost <- mbind(x$cost,a)
     
   } else missing <- c(missing,outputdirs[i])
   a <- readRDS(rep)
   all <- rbind(all,a)
 }
-
+all <- as.data.table(all)
 saveRDS(all,"output/report.rds")
+
+map_clim <- readGDX(gdx,"clcl_mapping")
+saveRDS(map_clim,"output/map_clim.rds")
 
 #remove 1995
 x <- lapply(x, function(x) {x[,getYears(x,as.integer = T)>=2015,]})
 
-#read emis factors (same for all scenarios)
-x$emis_fac <- readGDX(gdx,"f58_ipcc_wetland_ef")
-x$map_cell_clim <- readGDX(gdx,"p58_mapping_cell_climate")
-map_clim <- readGDX(gdx,"clcl_mapping")
-saveRDS(map_clim,"output/map_clim.rds")
-
-x$emis_co2_clim_cum <- calcEmisCum(x$emis_co2_clim_annual)
-
-x$area_p_clim_change <- x$area_p_clim-setYears(x$area_p_clim[,1,],NULL)
-
-# write.magpie(x$area_p_map_ratio,"output/map_degrad_ratio.nc",comment = "unit: Degradation Ratio")
-# 
-# x$area_p_map_ratio_change <- x$area_p_map_ratio-setYears(x$area_p_map_ratio[,1,],NULL)
-# write.magpie(x$area_p_map_ratio_change,"output/map_degrad_ratio_change.nc",comment = "unit: Change of Degradation Ratio")
-
-x$land_clim_change <- x$land_clim-setYears(x$land_clim[,1,],NULL)
+x$LandCoverChange <- x$LandCover-setYears(x$LandCover[,1,],NULL)
+x$PeatlandAreaChange <- x$PeatlandArea-setYears(x$PeatlandArea[,1,],NULL)
 
 files <- list.files(path="output", pattern="*.RData")
 nums <- as.numeric(gsub(paste("peatland_", ".RData", sep="|"), "", files))
-if(length(nums)==0) last=0 else last <- max(nums)
+if(length(nums)==0 | is.na(nums)) last=0 else last <- max(nums)
 newFile <- paste0("output/peatland_", sprintf("%02d", last + 1), ".RData")
 save(x,file = newFile,compress = "xz")
 #saveRDS(x,file = sub(".RData",".rds",newFile),compress = "xz")
