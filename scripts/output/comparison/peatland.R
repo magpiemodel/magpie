@@ -13,6 +13,13 @@ library(lucode)
 library(magpie4)
 library(luscale)
 
+library(luplot)
+library(ggplot2)
+library(luscale)
+library(data.table)
+library(ggrepel)
+library(patchwork)
+
 options(error=function()traceback(2))
 
 ############################# BASIC CONFIGURATION #############################
