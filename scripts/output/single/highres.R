@@ -61,9 +61,6 @@ if(!setequal(cfg$input, input_old)) {
   cfg$recalc_npi_ndc <- FALSE
 }
 
-#download and udpate input files
-download_and_update(cfg)
-
 #set title
 cfg$title <- paste(cfg$title,"hr",sep="_")
 
