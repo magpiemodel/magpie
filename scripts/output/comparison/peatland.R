@@ -85,7 +85,7 @@ for (i in 1:length(outputdirs)) {
     x$EmissionCO2 <- mbind(x$EmissionCO2,a)
     
     #PeatlandEmission
-    a <- collapseNames(PeatlandEmissions(gdx,level="climate",unit="gas"))
+    a <- collapseNames(PeatlandEmissions(gdx,level="climate"))
     a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
     x$PeatlandEmission <- mbind(x$PeatlandEmission,a)
     
