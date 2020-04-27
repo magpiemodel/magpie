@@ -52,6 +52,7 @@ cfg$qos <- "priority_maxMem"
 
 #download and udpate input files
 download_and_update(cfg)
+cfg$recalc_npi_ndc <- TRUE
 
 #set title
 cfg$title <- paste(cfg$title,"hr",sep="_")
