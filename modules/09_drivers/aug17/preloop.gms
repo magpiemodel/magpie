@@ -40,7 +40,7 @@ im_pop(t_all,i) = sum(i_to_iso(i,iso),im_pop_iso(t_all,iso));
                                  im_pop_iso(t_all,iso)
                              );
 
- im_gdp_pc_ppp(t_all,i)$(
+ i09_gdp_pc_ppp(t_all,i)$(
      sum(i_to_iso(i,iso),
        im_pop_iso(t_all,iso)
      ) >0 ) =
@@ -53,4 +53,4 @@ im_pop(t_all,i) = sum(i_to_iso(i,iso),im_pop_iso(t_all,iso));
 * GDP per capita for ISO countries
 im_gdp_pc_ppp_iso(t_all,iso)=0;
 im_gdp_pc_ppp_iso(t_all,iso)$(i09_gdp_ppp_iso(t_all,iso)*im_pop_iso(t_all,iso)>0)  = i09_gdp_ppp_iso(t_all,iso)/im_pop_iso(t_all,iso);
-im_gdp_pc_ppp_iso(t_all,iso)$(im_gdp_pc_ppp_iso(t_all,iso)=0) = sum(i_to_iso(i,iso), im_gdp_pc_ppp(t_all,i));
+im_gdp_pc_ppp_iso(t_all,iso)$(im_gdp_pc_ppp_iso(t_all,iso)=0) = sum(i_to_iso(i,iso), i09_gdp_pc_ppp(t_all,i));

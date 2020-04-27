@@ -5,16 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-sets
-	t_to_i_to_dev(t_all,i,dev) Mapping between time region and economic development status
-
-	scen13 tc cost scenario
-  	  /low, medium, high/
-
-	scen13_to_dev(scen13,dev) mapping between tc cost scenarios and development stages
-      /	high	. (lic)
-       	medium	. (mic)
-       	low		. (hic) /
+scalars
+        s80_maxiter   			maximal solve iterations if modelstat is > 2 (1)    / 30 /
+		s80_optfile     		switch to use specfied solver settings (1)          / 0 /
+		s80_num_nonopt_allowed 	number of allowed non-optimal variables (1)  		/ Inf /
 ;
 
-*** EOF sets.gms ***
+$setglobal c80_nlp_solver  conopt4
+*   options:   (conopt3):         conopt3
+*              (conopt4):         conopt4
