@@ -50,9 +50,19 @@ cfg$qos <- "short_maxMem"
 #magpie4::submitCalibration("H12_c1000")
 #c1000 with endoTC
 
+input_old <- .get_info("input/info.txt", "^Used data set:", ": ")
+
+if(!setequal(cfg$input, input_old)) {
+  # download data and update code
+  download_and_update(cfg)
+  cfg$recalc_npi_ndc <- TRUE
+} else {
+  cfg$force_download <- FALSE
+  cfg$recalc_npi_ndc <- FALSE
+}
+
 #download and udpate input files
 download_and_update(cfg)
-cfg$recalc_npi_ndc <- TRUE
 
 #set title
 cfg$title <- paste(cfg$title,"hr",sep="_")
