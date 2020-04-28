@@ -36,6 +36,7 @@ all <- NULL
 x <- list()
 x$LandCover <- NULL
 x$PeatlandArea <- NULL
+x$PeatlandAreaReg <- NULL
 x$EmissionCO2 <- NULL
 x$PeatlandEmission <- NULL
 x$fprice_index <- NULL
@@ -72,6 +73,11 @@ for (i in 1:length(outputdirs)) {
     a <- PeatlandArea(gdx,level="climate")
     a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
     x$PeatlandArea <- mbind(x$PeatlandArea,a)
+    
+    #PeatlandAreaReg
+    a <- PeatlandArea(gdx,level="reg")
+    a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
+    x$PeatlandAreaReg <- mbind(x$PeatlandAreaReg,a)
     
     #EmissionCO2
     a <- collapseNames(emisCO2(gdx,level = "cell",unit="gas"))
