@@ -29,7 +29,7 @@ $offdelim
 /
 ;
 
-table f58_ipcc_wetland_ef(clcl_simple,land58,emis58,ef58) Wetland GWP100 emission factors (t CO2eq per ha)
+table f58_ipcc_wetland_ef(clcl58,land58,emis58,ef58) Wetland GWP100 emission factors (t CO2eq per ha)
 $ondelim
 $include "./modules/58_peatland/input/f58_ipcc_wetland_ef.cs3"
 $offdelim

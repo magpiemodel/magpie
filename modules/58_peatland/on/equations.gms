@@ -84,8 +84,8 @@
 
  q58_peatland_emis_detail(j2,emis58) ..
 	v58_peatland_emis(j2,emis58) =e=
-	sum((man58,land58,clcl_simple), v58_peatland_man(j2,man58,land58) * 
-	p58_mapping_cell_climate(j2,clcl_simple) * p58_ipcc_wetland_ef(clcl_simple,land58,emis58,man58));
+	sum((man58,land58,clcl58), v58_peatland_man(j2,man58,land58) * 
+	p58_mapping_cell_climate(j2,clcl58) * p58_ipcc_wetland_ef(clcl58,land58,emis58,man58));
 
  q58_peatland_emis(j2) ..
 	vm_peatland_emis(j2) =e=
