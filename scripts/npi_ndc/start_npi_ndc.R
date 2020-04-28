@@ -209,8 +209,8 @@ calc_flows <- function(stock) {
 }
 
 ### calc npi & ndc policy
-calc_policy <- function(policy, stock, pol_type="aff", pol_mapping, weight=NULL,
-                        spatialheader_file = "../../input/spatial_header.rda",
+calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
+                        weight=NULL, spatialheader_file = "../../input/spatial_header.rda",
                         spam_file = Sys.glob("../../input/*-to-*_sum.spam")) {
   ## pol_type = {"aff","ad"}
 
@@ -230,9 +230,11 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping, weight=NULL,
 
   #select and filter countries that exist in the chosen policy mapping
   policy_countries <- intersect(policy$dummy,unique(pol_mapping))
-
+  policy <- policy[policy$dummy %in% policy_countries,]
+  
   #create key to distinguish different cases of baseyear, targetyear combinations
   policy$key <- paste(policy$baseyear,policy$targetyear)
+  
 
   #set stock to zero or Inf for countries without policies
   # (representing no constraint for min and max constraints)
