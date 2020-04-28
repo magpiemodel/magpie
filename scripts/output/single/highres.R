@@ -55,14 +55,10 @@ input_old <- .get_info("input/info.txt", "^Used data set:", ": ")
 if(!setequal(cfg$input, input_old)) {
   # download data and update code
   download_and_update(cfg)
-  cfg$recalc_npi_ndc <- TRUE
-} else {
-  cfg$force_download <- FALSE
-  cfg$recalc_npi_ndc <- FALSE
 }
 
 #set title
-cfg$title <- paste(cfg$title,"hr",sep="_")
+cfg$title <- paste0("hr_",cfg$title)
 
 #get trade pattern from low resolution run with c200
 ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
