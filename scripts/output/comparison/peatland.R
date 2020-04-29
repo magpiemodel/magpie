@@ -133,27 +133,34 @@ for (i in 1:length(outputdirs)) {
     x$cost <- mbind(x$cost,a)
     
   } else missing <- c(missing,outputdirs[i])
-  a <- readRDS(rep)
+  a <- as.data.table(readRDS(rep))
+  vars <- c("Population","Income","Demand|+|Food","Demand|Food|+|Crops","Demand|Food|+|Livestock products")
+  a <- a[variable %in% vars & region=="GLO",]
   all <- rbind(all,a)
 }
-all <- as.data.table(all)
-saveRDS(all,"output/report.rds")
-
-map_clim <- readGDX(gdx,"clcl_mapping")
-saveRDS(map_clim,"output/map_clim.rds")
-
 #remove 1995
 x <- lapply(x, function(x) {x[,getYears(x,as.integer = T)>=2015,]})
 
 x$LandCoverChange <- x$LandCover-setYears(x$LandCover[,1,],NULL)
 x$PeatlandAreaChange <- x$PeatlandArea-setYears(x$PeatlandArea[,1,],NULL)
 
-files <- list.files(path="output", pattern="*.RData")
-nums <- as.numeric(gsub(paste("peatland_", ".RData", sep="|"), "", files))
-if(length(nums)==0 | is.na(nums)) last=0 else last <- max(nums)
-newFile <- paste0("output/peatland_", sprintf("%02d", last + 1), ".RData")
-save(x,file = newFile,compress = "xz")
-#saveRDS(x,file = sub(".RData",".rds",newFile),compress = "xz")
+files <- list.files(path="output", pattern="^(peatland)_.*(.rds)$")
+nums <- as.numeric(gsub(paste("peatland_", ".rds", sep="|"), "", files))
+if(length(nums)==0) last=0 else last <- max(nums)
+newFile <- paste0("output/peatland_", sprintf("%02d", last + 1), ".rds")
+saveRDS(x,file = newFile,compress = "xz")
+
+saveRDS(all,paste0("output/report_", sprintf("%02d", last + 1), ".rds"))
+
+val <- as.data.table(read.quitte("input/validation.mif"))
+vars <- c("Population","Income","Demand|+|Food","Demand|Food|+|Crops","Demand|Food|+|Livestock products")
+val <- val[variable %in% vars & region=="GLO",]
+saveRDS(val,paste0("output/validation_", sprintf("%02d", last + 1), ".rds"))
+
+map_clim <- readGDX(gdx,"clcl_mapping")
+saveRDS(map_clim,"output/map_clim.rds")
+
+
 
 if (!is.null(missing)) {
   cat("\nList of folders with missing fulldata.gdx\n")
