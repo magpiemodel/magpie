@@ -39,7 +39,7 @@ cfg$gms$c60_biodem_level <- 0
 cfg$gms$s56_c_price_induced_aff <- 0
 cfg$gms$s80_optfile <- 1
 
-cfg$output <- c("rds_report","highres")
+cfg$output <- c("rds_report")
 download_and_update(cfg)
 
 #T141 full set final SSPDB bugfix + highres
