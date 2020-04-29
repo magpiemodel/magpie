@@ -57,6 +57,7 @@ for (i in 1:length(outputdirs)) {
   if(file.exists(gdx)) {
     load(path(outputdirs[i],"config.Rdata"))
     scen <- cfg$title
+    prefix <- substring(scen, 1, 4)
     
     map_cell_clim <- readGDX(gdx,"p58_mapping_cell_climate")
     
@@ -145,18 +146,19 @@ x <- lapply(x, function(x) {x[,getYears(x,as.integer = T)>=2015,]})
 x$LandCoverChange <- x$LandCover-setYears(x$LandCover[,1,],NULL)
 x$PeatlandAreaChange <- x$PeatlandArea-setYears(x$PeatlandArea[,1,],NULL)
 
-files <- list.files(path="output", pattern="^(peatland)_.*(.rds)$")
-nums <- as.numeric(gsub(paste("peatland_", ".rds", sep="|"), "", files))
-if(length(nums)==0) last=0 else last <- max(nums)
-newFile <- paste0("output/peatland_", sprintf("%02d", last + 1), ".rds")
-saveRDS(x,file = newFile,compress = "xz")
+# files <- list.files(path="output", pattern="^(peatland)_.*(.rds)$")
+# nums <- as.numeric(gsub(paste("peatland_", ".rds", sep="|"), "", files))
+# if(length(nums)==0) last=0 else last <- max(nums)
+# newFile <- paste0("output/peatland_", sprintf("%02d", last + 1), ".rds")
 
-saveRDS(all,paste0("output/report_", sprintf("%02d", last + 1), ".rds"))
+saveRDS(x,file = paste0("output/peatland_",prefix,".rds"),compress = "xz")
+
+saveRDS(all,paste0("output/report_",prefix,".rds"))
 
 val <- as.data.table(read.quitte("input/validation.mif"))
 vars <- c("Population","Income","Demand|+|Food","Demand|Food|+|Crops","Demand|Food|+|Livestock products")
 val <- val[variable %in% vars & region=="GLO",]
-saveRDS(val,paste0("output/validation_", sprintf("%02d", last + 1), ".rds"))
+saveRDS(val,paste0("output/validation_",prefix,".rds"))
 
 map_clim <- readGDX(gdx,"clcl_mapping")
 saveRDS(map_clim,"output/map_clim.rds")
