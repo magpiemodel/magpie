@@ -155,10 +155,12 @@ saveRDS(x,file = paste0("output/peatland_",prefix,".rds"),compress = "xz")
 
 saveRDS(all,paste0("output/report_",prefix,".rds"))
 
-val <- as.data.table(read.quitte("input/validation.mif"))
-vars <- c("Population","Income","Demand|+|Food","Demand|Food|+|Crops","Demand|Food|+|Livestock products")
-val <- val[variable %in% vars & region=="GLO",]
-saveRDS(val,paste0("output/validation_",prefix,".rds"))
+if(!file.exists(paste0("output/validation_",prefix,".rds"))) {
+  val <- as.data.table(read.quitte("input/validation.mif"))
+  vars <- c("Population","Income","Demand|+|Food","Demand|Food|+|Crops","Demand|Food|+|Livestock products")
+  val <- val[variable %in% vars & region=="GLO",]
+  saveRDS(val,paste0("output/validation_",prefix,".rds"))
+}
 
 map_clim <- readGDX(gdx,"clcl_mapping")
 saveRDS(map_clim,"output/map_clim.rds")
