@@ -19,6 +19,7 @@ parameters
  p32_aff_togo(t)              		     Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
  p32_cdr_ac(t,j,ac)						 Non-cumulative CDR from afforestation for each age-class depending on planning horizon (tC per ha)
  p32_carbon_density_ac(t,j,type32,ac,ag_pools)      Carbon density for ac and ag_pools (tC per ha)
+ p32_aff_bgp(j,ac)                        Biophysical impact of afforestation (tCeq per ha)
 ;
 
 positive variables
@@ -27,7 +28,10 @@ positive variables
  vm_landdiff_forestry                    Aggregated difference in forestry land compared to previous timestep (mio. ha)
  v32_land_expansion(j,type32,ac) 		 Forestry land expansion compared to previous timestep (mio. ha)
  v32_land_reduction(j,type32,ac) 		 Forestry land reduction compared to previous timestep (mio. ha)
- vm_cdr_aff(j,ac) 						 Expected CDR from afforestation depending on planning horizon (mio. tC)
+;
+
+variables
+vm_cdr_aff(j,ac,aff_effect) 						 Expected CDR from afforestation depending on planning horizon (mio. tC)
 ;
 
 equations
@@ -41,6 +45,7 @@ equations
  q32_max_aff					          Maximum total global afforestation (mio. ha)
  q32_aff_pol(j)					          Afforestation policy constraint (mio. ha)
  q32_aff_ac0(j)							  Afforestation constraint for ac0 (mio. ha)
+ q32_bgp_aff(j,ac)                          Biophysical afforestation calculation (mio. tCeq)
 ;
 
 
@@ -51,7 +56,7 @@ parameters
  ov_landdiff_forestry(t,type)            Aggregated difference in forestry land compared to previous timestep (mio. ha)
  ov32_land_expansion(t,j,type32,ac,type) Forestry land expansion compared to previous timestep (mio. ha)
  ov32_land_reduction(t,j,type32,ac,type) Forestry land reduction compared to previous timestep (mio. ha)
- ov_cdr_aff(t,j,ac,type)                 Expected CDR from afforestation depending on planning horizon (mio. tC)
+ ov_cdr_aff(t,j,ac,aff_effect,type)                 Expected CDR from afforestation depending on planning horizon (mio. tC)
  oq32_cost_fore_ac(t,i,type)             Total forestry costs constraint (mio. USD04MER)
  oq32_land(t,j,type)                     Land constraint (mio. ha)
  oq32_cdr_aff(t,j,ac,type)               Calculation of CDR from afforestation in terms of CO2-C (mio. tC)
@@ -62,5 +67,6 @@ parameters
  oq32_max_aff(t,type)                    Maximum total global afforestation (mio. ha)
  oq32_aff_pol(t,j,type)                  Afforestation policy constraint (mio. ha)
  oq32_aff_ac0(t,j,type)                  Afforestation constraint for ac0 (mio. ha)
+ oq32_bgp_aff(t,j,ac,type)               Afforestation biophysical effect calculation (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

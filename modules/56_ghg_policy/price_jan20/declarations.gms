@@ -28,10 +28,6 @@ equations
  q56_reward_cdr_aff(j)			                       	      Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
 ;
 
-positive variables
- vm_reward_cdr_aff(i)                Regional revenues for carbon captured by afforestation (mio. USD05MER per yr)
- v56_reward_cdr_aff(j)				       Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
-;
 
 variables
  vm_btm_reg(i,emis_source,pollutants)                    Regional emissions before technical mitigation (Tg per yr)
@@ -43,6 +39,8 @@ variables
  v56_emission_costs_reg_oneoff(i,emis_reg_one56)         Costs for emissions occuring only once in time (mio. USD05MER per yr)
  v56_emission_costs_cell_yearly(j,emis_cell_yr56)        Costs for emissions occuring yearly (mio. USD05MER per yr)
  v56_emission_costs_cell_oneoff(j,emis_cell_one56)       Costs for emissions occuring only once in time (mio. USD05MER per yr)
+ vm_reward_cdr_aff(i)                                    Regional revenues for carbon captured by afforestation (mio. USD05MER per yr)
+ v56_reward_cdr_aff(j)				                           Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

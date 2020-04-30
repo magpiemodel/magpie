@@ -19,5 +19,11 @@ sets
  kforestry(kall) Forestry products
  / wood, woodfuel /
 
+ bgp32 beschreibung
+ / nobgp, ann, djf, jja /
+
+ aff_effect Beschreibung
+ / bgc,bph /
+
 ;
 *** EOF sets.gms ***

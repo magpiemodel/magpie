@@ -10,7 +10,7 @@
 *****Costs**********************************************************************
 
 *' The direct costs of afforestation `vm_cost_fore` include maintenance and monitoring
-*' costs for plantations [@sathaye_ghg_2005]. 
+*' costs for plantations [@sathaye_ghg_2005].
 *' In addition, afforestation may cause costs in other parts of the model such
 *' as costs for technological change [13_tc] or land expansion [39_landconversion].
 
@@ -25,8 +25,12 @@ vm_cost_fore(i2) =e= sum((cell(i2,j2),type32,ac,fcosts32),
 *' activity for a given planning horizon `s32_planing_horizon` to the [56_ghg_policy] module.
 
 q32_cdr_aff(j2,ac) ..
-vm_cdr_aff(j2,ac) =e=
+vm_cdr_aff(j2,ac,"bgc") =e=
 v32_land(j2,"aff","ac0") * sum(ct, p32_cdr_ac(ct,j2,ac));
+
+q32_bgp_aff(j2,ac) ..
+vm_cdr_aff(j2,ac,"bph") =e=
+v32_land(j2,"aff","ac0") * p32_aff_bgp(j2,ac);
 
 *ac0 can only increase if total afforested land increases
 q32_aff_ac0(j2) ..
@@ -44,10 +48,10 @@ v32_land(j2,"aff","ac0") =l= sum(ac, v32_land(j2,"aff",ac)) - sum((ct,ac), p32_l
  v32_land(j2,"ndc","ac0") =e= sum(ct, p32_aff_pol_timestep(ct,j2));
 
 *' The constraint `q32_max_aff` accounts for the allowed maximum global
-*' afforestation defined in `p32_max_aff_area`. Note that NPI/NDC afforestation 
-*' policies are counted towards the maximum defined in `p32_max_aff_area`. 
-*' Therefore, the right-hand side of the constraint is tightened by the value of 
-*' the exogenously prescribed afforestation that has to be realized in later 
+*' afforestation defined in `p32_max_aff_area`. Note that NPI/NDC afforestation
+*' policies are counted towards the maximum defined in `p32_max_aff_area`.
+*' Therefore, the right-hand side of the constraint is tightened by the value of
+*' the exogenously prescribed afforestation that has to be realized in later
 *' time steps (`p32_aff_togo`).
 
  q32_max_aff .. sum((j2,type32,ac)$(not sameas(type32,"plant")), v32_land(j2,type32,ac))
