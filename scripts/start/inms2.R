@@ -1,4 +1,4 @@
-# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -50,7 +50,7 @@ cfg$gms$c_timesteps <- 12
 
 # clalibration runs
 
-cfg$title <- "INMS_SSP2_RCP45_Nmed"
+cfg$title <- "SSP2_RCP4p5_PolicyMed_v1"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
@@ -63,9 +63,11 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 
 #SSP1,5 family
 
-cfg$title <- "INMS_SSP1_RCP26_Nhigh_diet"
+cfg$title <- "SSP1_RCP4p5_PolicyHighDiet_v1"
 
-cfg$title <- "INMS_SSP1_RCP26_Nhigh"
+cfg$title <- "SSP1_RCP2p6_PolicyHigh_v1"
+
+cfg$title <- "SSP1_RCP4p5_PolicyHigh_v1"
 cfg<-lucode::setScenario(cfg,"SUSTAg1")
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP1-26-IMAGE"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP1-26-IMAGE"
@@ -88,7 +90,7 @@ cfg$gms$c50_scen_neff  <- "neff80_85_starty2010"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 
-cfg$title <- "INMS_SSP2_RCP45_Nlow"
+cfg$title <- "SSP2_RCP4p5_PolicyLow_v1"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
@@ -99,7 +101,7 @@ cfg$gms$c50_scen_neff  <- "constant"
 #cfg$gms$factor_costs <- "sticky_feb18"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
-cfg$title <- "INMS_SSP2_RCP45_Nhigh"
+cfg$title <- "SSP2_RCP4p5_PolicyHigh_v1"
 cfg<-lucode::setScenario(cfg,"SUSTAg2")
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
@@ -110,7 +112,7 @@ cfg$gms$c50_scen_neff  <- "neff80_85_starty2010"
 #cfg$gms$factor_costs <- "sticky_feb18"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
-cfg$title <- "SSP5_RCP85_Nlow"
+cfg$title <- "SSP5_RCP8p5_PolicyLow_v1"
 cfg<-lucode::setScenario(cfg,"SUSTAg5")
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP5-Ref-REMIND-MAGPIE"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP5-Ref-REMIND-MAGPIE"

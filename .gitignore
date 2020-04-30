@@ -13,6 +13,7 @@ magpie_calib.*
 *.gdx
 *.rda
 *.opt
+*.op2
 *.lst
 /output/
 
@@ -20,13 +21,7 @@ magpie_calib.*
 .Rhistory
 
 #ignore documentation folder
-/doc/*/
-/doc/*.pdf
-/doc/*.rds
-/doc/*.tex
-/doc/*.aux
-/doc/*.log
-/doc/*.gz
+/doc/
 
 #ignore run specific files and folders
 /225*/
