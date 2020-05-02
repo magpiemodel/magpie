@@ -29,7 +29,7 @@ prefix <- "T06"
 
 #cfg$qos <- "priority"
 lr <- "c200"
-cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_",lr,"_690d3718e151be1b450b394c1064b1c5.tgz"),
+cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_",lr,"_690d3718e151be1b450b394c1064b1c5.tgz"),
                "rev4.42_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
                "rev4.42_690d3718e151be1b450b394c1064b1c5_validation.tgz",
                paste0("calibration_H12_",lr,"_26Feb20.tgz"),
@@ -42,7 +42,7 @@ scen <- "2p6"
   
 for (ssp in ssps) {
   cfg$title <- paste(prefix,ssp,scen,sep="_")
-  cfg <- setScenario(cfg,c(ssp,"NDC"))
+  cfg <- setScenario(cfg,c(ssp,"BASE"))
   cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
   cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
   start_run(cfg,codeCheck=FALSE)
