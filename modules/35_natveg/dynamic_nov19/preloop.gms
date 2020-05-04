@@ -4,15 +4,17 @@
 *** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** |  Contact: magpie@pik-potsdam.de
 
-*i35_ageclass_area_secdf(j,ac) = sum(ac_poulter_to_ac(ac_poulter,ac), f35_ageclass_area(j,ac_poulter)$(not sameas(ac_poulter,"class15")));
-i35_ageclass_area_secdf(j,ac) = 1;
-i35_ageclass_shr_grow(j,ac) = 1/card(ac);
+p35_ageclass_secdforest_area(j,ac_poulter) = f35_ageclass_area(j,ac_poulter);
+p35_ageclass_secdforest_area(j,"class15") = 0;
 
-i35_ageclass_shr_grow(j,ac)$(sum(ac2, i35_ageclass_area_secdf(j,ac2)) > 0) = i35_ageclass_area_secdf(j,ac)/sum(ac2, i35_ageclass_area_secdf(j,ac2));
+p35_ageclass_secdforest_shr(j,ac) = 0;
+p35_ageclass_secdforest_shr(j,ac)$(sum(ac_poulter2, p35_ageclass_secdforest_area(j,ac_poulter2)) > 0) = sum(ac_poulter_to_ac(ac_poulter,ac), p35_ageclass_secdforest_area(j,ac_poulter) / sum(ac_poulter2, p35_ageclass_secdforest_area(j,ac_poulter2)));
+*This causes rounding errors in optimization.
+*p35_ageclass_secdforest_shr(j,ac)$(sum(ac_poulter2, p35_ageclass_secdforest_area(j,ac_poulter2)) = 0) = 1/card(ac);
 
-*i35_secdforest(j,ac) = pcm_land(j,"secdforest")*i35_ageclass_shr_grow(j,ac);
-i35_secdforest(j,ac) = 0;
-i35_secdforest(j,"acx") = pcm_land(j,"secdforest");
+i35_secdforest(j,ac) = pcm_land(j,"secdforest")*p35_ageclass_secdforest_shr(j,ac);
+*use residual approach to avoid rounding errors.
+i35_secdforest(j,"acx") = pcm_land(j,"secdforest") - sum(ac, i35_secdforest(j,ac));
 
 i35_other(j,ac) = 0;
 i35_other(j,"acx") = pcm_land(j,"other");

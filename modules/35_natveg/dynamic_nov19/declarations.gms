@@ -22,8 +22,8 @@ parameters
  p35_recovered_forest(t,j,ac) 	                Recovered forest (mio. ha)
  p35_min_forest(t,j) 			                      Minimum forest stock [land protection policies] (Mha)
  p35_min_other(t,j)      		                    Minimum other land stock [land protection policies] (Mha)
- i35_ageclass_area_secdf(j,ac)                  Age class distribution from poulter et al (1)
- i35_ageclass_shr_grow(j,ac)                    Age class share distribution (1)
+ p35_ageclass_secdforest_area(j,ac_poulter)		Age class distribution from poulter et al (Mha)
+ p35_ageclass_secdforest_shr(j,ac)				Age class distribution from poulter et al (1)
  p35_carbon_density_secdforest(t,j,ac,ag_pools) Carbon density secdforest (tC per ha)
  p35_carbon_density_other(t,j,ac,ag_pools) 	    Carbon density other land (tC per ha)
 ;

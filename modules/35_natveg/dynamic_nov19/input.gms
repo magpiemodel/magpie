@@ -23,3 +23,9 @@ $ondelim
 $include "./modules/35_natveg/input/npi_ndc_ad_aolc_pol.cs3"
 $offdelim
 ;
+
+table f35_ageclass_area(j,ac_poulter) Forest age class area (Mha)
+$ondelim
+$include "./modules/35_natveg/input/f35_forestageclasses.cs3"
+$offdelim
+;

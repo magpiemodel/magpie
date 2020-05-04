@@ -36,16 +36,8 @@ $ondelim
 $include "./modules/14_yields/input/f14_pasture_yields_hist.csv"
 $offdelim;
 
-table f14_ipcc_bce(clcl,forest_type,ac) npi+indc afforestation policy (Mha new forest wrt to 2010)
+table f14_ipcc_bce(clcl,forest_type) ipcc bce factors (add unit)
 $ondelim
 $include "./modules/14_yields/input/f14_ipcc_bce.cs3"
 $offdelim
 ;
-f14_ipcc_bce(clcl,forest_type,"ac0") = f14_ipcc_bce(clcl,forest_type,"ac5");
-
-$if "%c14_bef%" == "ipccBEF" f14_ipcc_bce(clcl,forest_type,ac) = f14_ipcc_bce(clcl,forest_type,ac);
-$if "%c14_bef%" == "BEF0p25" f14_ipcc_bce(clcl,forest_type,ac) = 0.25;
-$if "%c14_bef%" == "BEF0p5" f14_ipcc_bce(clcl,forest_type,ac) = 0.5;
-$if "%c14_bef%" == "BEF0p75" f14_ipcc_bce(clcl,forest_type,ac) = 0.75;
-$if "%c14_bef%" == "BEF1p0" f14_ipcc_bce(clcl,forest_type,ac) = 1;
-$if "%c14_bef%" == "BEF2p0" f14_ipcc_bce(clcl,forest_type,ac) = 2;

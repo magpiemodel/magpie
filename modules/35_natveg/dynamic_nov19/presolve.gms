@@ -57,9 +57,9 @@ $ifthen "%c35_protect_scenario%" == "none"
   p35_save_secdforest(t,j) = 0;
   p35_save_other(t,j) = 0;
 $elseif "%c35_protect_scenario%" == "full"
-  p35_save_primforest(t,j) = vm_land.l(j,"primforest");
-  p35_save_secdforest(t,j) = vm_land.l(j,"secdforest");
-  p35_save_other(t,j) = vm_land.l(j,"other");
+  p35_save_primforest(t,j) = pcm_land(j,"primforest");
+  p35_save_secdforest(t,j) = pcm_land(j,"secdforest");
+  p35_save_other(t,j) = pcm_land(j,"other");
 $elseif "%c35_protect_scenario%" == "WDPA"
   p35_save_primforest(t,j) = p35_protect_shr(t,j,"WDPA")*pm_land_start(j,"primforest");
   p35_save_secdforest(t,j) = p35_protect_shr(t,j,"WDPA")*pm_land_start(j,"secdforest");
@@ -74,7 +74,7 @@ $else
   p35_save_primforest(t,j) = (p35_protect_shr(t,j,"WDPA")+p35_protect_shr(t,j,"%c35_protect_scenario%"))*pm_land_start(j,"primforest");
   p35_save_secdforest(t,j) = (p35_protect_shr(t,j,"WDPA")+p35_protect_shr(t,j,"%c35_protect_scenario%"))*pm_land_start(j,"secdforest");
   p35_save_other(t,j) = (p35_protect_shr(t,j,"WDPA")+p35_protect_shr(t,j,"%c35_protect_scenario%"))*pm_land_start(j,"other");
-  p35_save_primforest(t,j)$(p35_save_primforest(t,j) > vm_land.l(j,"primforest")) = vm_land.l(j,"primforest");
+  p35_save_primforest(t,j)$(p35_save_primforest(t,j) > pcm_land(j,"primforest")) = pcm_land(j,"primforest");
   p35_save_secdforest(t,j)$(p35_save_secdforest(t,j) > pc35_secdforest(j,ac)) = pc35_secdforest(j,ac);
   p35_save_other(t,j)$(p35_save_other(t,j) > pc35_other(j,ac)) = pc35_other(j,ac);
   );
@@ -90,11 +90,11 @@ $endif
 if (sum(sameas(t_past,t),1) = 1,
 vm_land.lo(j,"primforest") = p35_save_primforest(t,j);
 else
-vm_land.lo(j,"primforest") = max((1-s35_selective_logging_flag) * vm_land.l(j,"primforest"), p35_save_primforest(t,j));
+vm_land.lo(j,"primforest") = max((1-s35_selective_logging_flag) * pcm_land(j,"primforest"), p35_save_primforest(t,j));
 );
-*vm_land.lo(j,"primforest") = max((1-s35_selective_logging_flag) * vm_land.l(j,"primforest"), p35_save_primforest(t,j));
+*vm_land.lo(j,"primforest") = max((1-s35_selective_logging_flag) * pcm_land(j,"primforest"), p35_save_primforest(t,j));
 *vm_land.lo(j,"primforest") = p35_save_primforest(t,j);
-vm_land.up(j,"primforest") = vm_land.l(j,"primforest");
+vm_land.up(j,"primforest") = pcm_land(j,"primforest");
 m_boundfix(vm_land,(j,"primforest"),l,10e-5);
 
 v35_secdforest.lo(j,ac_sub) = 0;
@@ -102,9 +102,9 @@ v35_secdforest.lo(j,ac_sub) = 0;
 if (sum(sameas(t_past,t),1) = 1,
 v35_secdforest.lo(j,"acx") = p35_save_secdforest(t,j);
 else
-v35_secdforest.lo(j,"acx") = max((1-s35_selective_logging_flag) * v35_secdforest.l(j,"acx"), p35_save_secdforest(t,j));
+v35_secdforest.lo(j,"acx") = max((1-s35_selective_logging_flag) * pc35_secdforest(j,"acx"), p35_save_secdforest(t,j));
 );
-*v35_secdforest.lo(j,"acx") = max((1-s35_selective_logging_flag) * v35_secdforest.l(j,"acx"), p35_save_secdforest(t,j));
+*v35_secdforest.lo(j,"acx") = max((1-s35_selective_logging_flag) * pc35_secdforest(j,"acx"), p35_save_secdforest(t,j));
 *v35_secdforest.lo(j,"acx") = p35_save_secdforest(t,j);
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
 m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
@@ -135,5 +135,5 @@ pcm_carbon_stock(j,"other",ag_pools) =
            sum(ac, pc35_other(j,ac)
            * p35_carbon_density_other(t,j,ac,ag_pools));
 
-p35_min_forest(t,j)$(p35_min_forest(t,j) > vm_land.l(j,"primforest") + vm_land.l(j,"secdforest")) = vm_land.l(j,"primforest") + vm_land.l(j,"secdforest");
-p35_min_other(t,j)$(p35_min_other(t,j) > vm_land.l(j,"other")) = vm_land.l(j,"other");
+p35_min_forest(t,j)$(p35_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j,"secdforest")) = pcm_land(j,"primforest") + pcm_land(j,"secdforest");
+p35_min_other(t,j)$(p35_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");

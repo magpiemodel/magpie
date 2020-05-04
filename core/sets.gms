@@ -253,18 +253,12 @@ sets
 ***Forestry**
    ac Age classes  / ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
                     ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,ac95,ac100,
-                    ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,ac150,
-                    ac155,ac160,ac165,ac170,ac175,ac180,ac185,ac190,ac195,ac200,
-                    ac205,ac210,ac215,ac220,ac225,ac230,ac235,ac240,ac245,ac250,
-                    ac255,ac260,ac265,ac270,ac275,ac280,ac285,ac290,ac295,acx /
+                    ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,acx /
 
   ac_sub(ac) age classes
   / ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
   ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,ac95,ac100,
-  ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,ac150,
-  ac155,ac160,ac165,ac170,ac175,ac180,ac185,ac190,ac195,ac200,
-  ac205,ac210,ac215,ac220,ac225,ac230,ac235,ac240,ac245,ac250,
-  ac255,ac260,ac265,ac270,ac275,ac280,ac285,ac290,ac295,acx /
+  ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,acx /
 
    when Temporal location relative to optimization / before, after /
 
