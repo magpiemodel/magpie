@@ -8,7 +8,12 @@ p35_ageclass_secdforest_area(j,ac_poulter) = f35_ageclass_area(j,ac_poulter);
 p35_ageclass_secdforest_area(j,"class15") = 0;
 
 p35_ageclass_secdforest_shr(j,ac) = 0;
-p35_ageclass_secdforest_shr(j,ac)$(sum(ac_poulter2, p35_ageclass_secdforest_area(j,ac_poulter2)) > 0) = sum(ac_poulter_to_ac(ac_poulter,ac), p35_ageclass_secdforest_area(j,ac_poulter) / sum(ac_poulter2, p35_ageclass_secdforest_area(j,ac_poulter2)));
+p35_ageclass_secdforest_shr(j,ac)$(sum(ac_poulter2, p35_ageclass_secdforest_area(j,ac_poulter2)) > 0)
+                  =
+                  sum(ac_poulter_to_ac(ac_poulter,ac),
+                      p35_ageclass_secdforest_area(j,ac_poulter)
+                      /
+                      sum(ac_poulter2, p35_ageclass_secdforest_area(j,ac_poulter2)));
 *This causes rounding errors in optimization.
 *p35_ageclass_secdforest_shr(j,ac)$(sum(ac_poulter2, p35_ageclass_secdforest_area(j,ac_poulter2)) = 0) = 1/card(ac);
 

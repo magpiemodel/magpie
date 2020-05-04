@@ -13,6 +13,11 @@ scalars
   s32_planing_horizon Afforestation planing horizon (years)            / 50 /
   s32_recurring_cost_multiplier Cost multiplier for recurring costs only for testing (1)            / 10 /
   c32_rotation_extension Rotation extension in percentage terms / 1 /
+  c32_faustmann_rotation Switch to activate faustmann rotations / 0 /
+  c32_initial_distribution Switch to Activate ageclass distribution in plantations / 1 /
+  s32_interest_rate          / 0.04    /
+  s32_price                  / 45      /
+  s32_euler                  /2.7/
 ;
 
 scalars
@@ -48,19 +53,6 @@ $offdelim
 table f32_aff_pol(t_all,j,pol32) npi+ndc afforestation policy (Mha new forest wrt to 2010)
 $ondelim
 $include "./modules/32_forestry/input/npi_ndc_aff_pol.cs3"
-$offdelim
-;
-
-table f32_production_ratio(t_all,i) percentage of supply coming from plantations (percentage)
-$ondelim
-$include "./modules/32_forestry/input/f32_production_ratio.csv"
-$offdelim
-;
-*f32_production_ratio(t_all,i) = 0.05;
-
-table f32_forestry_management(i,forest_type) upscaling factor for forestry plantations
-$ondelim
-$include "./modules/32_forestry/input/f32_forestry_management.csv"
 $offdelim
 ;
 

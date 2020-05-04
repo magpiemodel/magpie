@@ -150,13 +150,17 @@ $title magpie
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 *
-* Used data set: private_forestry_dec18_20200312.tgz
+* Used data set: private_forestry_dec18_20200504.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/users/mishra/additional_data_private_forestry
 *
 * Used data set: coupling_co2_prices_apr20.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/magpie/users/mishra/projects/coupling
+*
+* Used data set: additional_data_rev3.80.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 *
 * Low resolution: c200
 * High resolution: 0.5
@@ -189,7 +193,7 @@ $title magpie
 *
 *
 *
-* Last modification (input data): Thu Apr 16 22:18:08 2020
+* Last modification (input data): Mon May 04 23:55:43 2020
 *
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -243,10 +247,10 @@ $setglobal trade  selfsuff_reduced
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
 
-$setglobal forestry  dynamic_faustmann
+$setglobal forestry  dynamic_may20
 
 $setglobal urban  static
-$setglobal natveg  dynamic_nov19
+$setglobal natveg  dynamic_may20
 
 $setglobal factor_costs  mixed_feb17
 $setglobal landconversion  global_static_aug18

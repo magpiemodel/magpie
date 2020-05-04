@@ -36,7 +36,7 @@ $ondelim
 $include "./modules/14_yields/input/f14_pasture_yields_hist.csv"
 $offdelim;
 
-table f14_ipcc_bce(clcl,forest_type) ipcc bce factors (add unit)
+table f14_ipcc_bce(clcl,forest_type) ipcc bce factors (1)
 $ondelim
 $include "./modules/14_yields/input/f14_ipcc_bce.cs3"
 $offdelim

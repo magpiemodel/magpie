@@ -16,12 +16,12 @@
 *' @limitations
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/32_forestry/dynamic_faustmann/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/32_forestry/dynamic_faustmann/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/32_forestry/dynamic_faustmann/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/32_forestry/dynamic_faustmann/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/32_forestry/dynamic_faustmann/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/32_forestry/dynamic_faustmann/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/32_forestry/dynamic_faustmann/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/32_forestry/dynamic_faustmann/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/32_forestry/dynamic_may20/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/32_forestry/dynamic_may20/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/32_forestry/dynamic_may20/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/32_forestry/dynamic_may20/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/32_forestry/dynamic_may20/scaling.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/32_forestry/dynamic_may20/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/32_forestry/dynamic_may20/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/32_forestry/dynamic_may20/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
