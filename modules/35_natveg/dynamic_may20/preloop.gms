@@ -21,16 +21,16 @@ p35_ageclass_secdforest_shr(j,ac)$(sum(ac_poulter2, p35_ageclass_secdforest_area
 *This causes rounding errors in optimization.
 *p35_ageclass_secdforest_shr(j,ac)$(sum(ac_poulter2, p35_ageclass_secdforest_area(j,ac_poulter2)) = 0) = 1/card(ac);
 
-*i35_secdforest(j,ac) = pcm_land(j,"secdforest")*p35_ageclass_secdforest_shr(j,ac);
-i35_secdforest(j,ac) = pcm_land(j,"secdforest")/card(ac);
+i35_secdforest(j,ac) = pcm_land(j,"secdforest")*p35_ageclass_secdforest_shr(j,ac);
+
 *use residual approach to avoid rounding errors.
 * Taking the redistributed area with lower age classes from overall secdf and putting them
 * In highest age class is probably not correct
 *i35_secdforest(j,"acx") = pcm_land(j,"secdforest") - sum(ac, i35_secdforest(j,ac));
 
 i35_other(j,ac) = 0;
-*i35_other(j,"acx") = pcm_land(j,"other");
-i35_other(j,ac) = pcm_land(j,"other")/card(ac);
+i35_other(j,"acx") = pcm_land(j,"other");
+*i35_other(j,ac) = pcm_land(j,"other")/card(ac);
 
 p35_protect_shr(t,j,prot_type) = 0;
 
