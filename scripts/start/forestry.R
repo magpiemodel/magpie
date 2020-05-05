@@ -28,9 +28,9 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "BF29"
+identifier_flag <- "BF30"
 
-cat(paste0("Poulter distribution. Ageclasses collapsed by half."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Poulter distribution also in acx. Ageclasses collapsed by half."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 for(s73_price_adjuster in c(0)){
   cfg$gms$s73_price_adjuster <- s73_price_adjuster
@@ -48,7 +48,7 @@ for(s73_price_adjuster in c(0)){
 
         cfg$gms$c32_faustmann_rotation <- faustmann_switch
 
-        for (co2_price_path in c("NPI","2deg")) { ## Add "2deg" here for CO2 price runs
+        for (co2_price_path in c("NPI")) { ## Add "2deg" here for CO2 price runs
 
           if (co2_price_path == "NPI") {
             cfg <- setScenario(cfg,c(ssp,"NPI"))
@@ -93,7 +93,7 @@ for(s73_price_adjuster in c(0)){
               if(s73_price_adjuster == 1) adjustment_flag = "PriceAdj"
               if(s73_price_adjuster == 0) adjustment_flag = ""
 
-              cfg$title <- paste0(identifier_flag,"_",ssp,"_",adjustment_flag,"_",demand_flag,"_",plantation_flag,"_",faustmann_flag,"_",pol_flag,"_",co2_price_path_flag)
+              cfg$title <- paste0(identifier_flag,"_",ssp,"_",adjustment_flag,"_",demand_flag,"_",plantation_flag,"_",faustmann_flag,"_",pol_flag,"_",co2_price_path_flag,"_Poluter")
 
               cfg$output <- c("rds_report")
 

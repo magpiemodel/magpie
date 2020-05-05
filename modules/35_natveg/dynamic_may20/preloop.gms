@@ -5,7 +5,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 p35_ageclass_secdforest_area(j,ac_poulter) = f35_ageclass_area(j,ac_poulter);
-p35_ageclass_secdforest_area(j,"class15") = 0;
+** This probably causes issue with the way shares are calculated for acx.
+** In Tropics, acx has much area which means much of the secondary forest is very old
+** Setting it to 0 and then calculating the share is not correct because we ignore a big
+** chunk of area and then assume that rest of the land is distributed in lower age-classes
+*p35_ageclass_secdforest_area(j,"class15") = 0;
 
 p35_ageclass_secdforest_shr(j,ac) = 0;
 p35_ageclass_secdforest_shr(j,ac)$(sum(ac_poulter2, p35_ageclass_secdforest_area(j,ac_poulter2)) > 0)
@@ -19,7 +23,9 @@ p35_ageclass_secdforest_shr(j,ac)$(sum(ac_poulter2, p35_ageclass_secdforest_area
 
 i35_secdforest(j,ac) = pcm_land(j,"secdforest")*p35_ageclass_secdforest_shr(j,ac);
 *use residual approach to avoid rounding errors.
-i35_secdforest(j,"acx") = pcm_land(j,"secdforest") - sum(ac, i35_secdforest(j,ac));
+* Taking the redistributed area with lower age classes from overall secdf and putting them
+* In highest age class is probably not correct
+*i35_secdforest(j,"acx") = pcm_land(j,"secdforest") - sum(ac, i35_secdforest(j,ac));
 
 i35_other(j,ac) = 0;
 i35_other(j,"acx") = pcm_land(j,"other");
