@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -7,7 +7,7 @@
 
 scalars
         s80_maxiter   maximal solve iterations if modelstat is > 2 (1)    / 30 /
-		s80_optfile     switch to use specfied solver settings (1)          / 1 /
+		s80_optfile     switch to use specfied solver settings (1)          / 0 /
 		s80_add_cplex   add cplex optimization after conopt4 (1)            / 0 /
         s80_add_conopt3 add conopt3 optimization after conopt4 (1)          / 0 /
 		s80_num_nonopt_allowed	number of allowed non-optimal variables (1)	/ Inf /

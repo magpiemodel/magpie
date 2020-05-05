@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -69,10 +69,10 @@ parameters
  p15_modelstat(t)                       Model solver status (1)
  p15_iteration_counter(t)               Number of iterations required for reaching an equilibrium between food demand model and magpie (1)
  p15_convergence_measure(t)             Convergence measure to decide for continuation or stop of food_demand - magpie iteration (1)
- i15_dem_intercept(regr15)              Food regression parameters intercept in kcal or as share (X)
- i15_dem_saturation(regr15)             Food regression parameters saturation in kcal or as share (X)
- i15_dem_halfsat(regr15)                Food regression parameters halfsaturation (USD05PPP per cap)
- i15_dem_nonsat(regr15)                 Food regression parameters nonsaturation (1)
+ i15_dem_intercept(iso,regr15)          Food regression parameters intercept in kcal or as share (X)
+ i15_dem_saturation(iso,regr15)             Food regression parameters saturation in kcal or as share (X)
+ i15_dem_halfsat(iso,regr15)                Food regression parameters halfsaturation (USD05PPP per cap)
+ i15_dem_nonsat(iso,regr15)                 Food regression parameters nonsaturation (1)
 
 *prices
  p15_prices_kcal(t,iso,kfo)                        Prices from MAgPIE after optimization (USD05PPP per kcal)
@@ -120,7 +120,7 @@ parameters
   p15_balanceflow_kcal_lastcalibyear(iso,kfo) Balance flow of last historic time step for mismatch between FAOSTAT and demand estimates (kcal per capita per day)
 
 * before shock
- o15_kcal_regr_initial(iso,kfo)               Uncalibrated per capita demand before price shock (kcal per capita per day)
+ o15_kcal_regr_initial(t,iso,kfo)               Uncalibrated per capita demand before price shock (kcal per capita per day)
  p15_kcal_pc_initial(t,i,kfo)                 Per capita consumption in food demand model before price shock on regional level (kcal per capita per day)
  pm_kcal_pc_initial(t,i,kfo)                  Per capita consumption in food demand model before price shock (kcal per capita per day)
  p15_kcal_pc_initial_iso(t,iso,kfo)           Per capita consumption in food demand model before price shock on country level (kcal per capita per day)
@@ -150,12 +150,14 @@ parameters
  p15_demand2intake_ratio_ref(i)               Ratio between food calorie demand and intake for the historical time step of EAT Lancet diets (1)
  p15_foodwaste_growth(t,i)                    increase in food waste over time relative to the historical time step of EAT Lancet diets (1)
  i15_kcal_pc_scen_target(t,i,kfo)             Target for per capita food consumption according to an exogenous diet scenario (kcal per capita per day)
- i15_exo_foodscen_fader(t)                    Fader that converges per capita food consumption to an exogenous diet scenario (1)
-
+ i15_exo_foodscen_fader(t,i)                    Fader that converges per capita food consumption to an exogenous diet scenario (1)
+* country-specific scenario switch
+ p15_country_dummy(iso)                       Dummy parameter indicating whether country is affected by exogeneous diet scenario (1)
+ p15_exo_foodscen_region_shr(t_all,i)         Weighted share of region with regards to exogenous diet scenario of countries (1)
 * calculate diet iteration breakpoint
-  p15_income_pc_real_ppp(t,i)                 Regional per capita income after price shock on regional level (USD05PPP per capita)
-  p15_delta_income(t,i)                       Regional change in per capita income due to price shock on regional level (1)
-  p15_lastiteration_delta_income(t,i)         Regional change in per capita income due to price shock of last iteration (1)
+ p15_income_pc_real_ppp(t,i)                 Regional per capita income after price shock on regional level (USD05PPP per capita)
+ p15_delta_income(t,i)                       Regional change in per capita income due to price shock on regional level (1)
+ p15_lastiteration_delta_income(t,i)         Regional change in per capita income due to price shock of last iteration (1)
 
 ;
 

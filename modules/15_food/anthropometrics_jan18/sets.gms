@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -64,6 +64,9 @@ sets
 
    paras_b15 Intake equation parameters
    /saturation,halfsaturation,intercept/
+
+   paras_h15 Bodyheight equation parameters
+   /slope, exponent/
 
    kfo(kall) All products in the sectoral version
    /
@@ -177,6 +180,7 @@ sets
 ;
 
 alias(kst,kst2);
+alias(bmi_group15,bmi_group15_2);
 alias(kfo,kfo2);
 alias(kfo_ap,kfo_ap2);
 alias(kfo_st,kfo_st2);

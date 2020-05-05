@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -13,6 +13,8 @@ $offsymlist
 $offlisting
 
 $setglobal c_timesteps  pastandfuture
+$setglobal c_past  till_1975
+
 
 *******************************MODULE SETUP*************************************
 $setglobal drivers  aug17
@@ -26,12 +28,12 @@ $include "./core/sets.gms"
 $batinclude "./modules/include.gms" sets
 
 sets
-   kap(kall)
+   kap(kall) animal products including fish
    /
    livst_rum,livst_pig,livst_chick, livst_egg, livst_milk, fish
    /
 
-   kli(kap)
+   kli(kap) livestock products
    /
    livst_rum,livst_pig,livst_chick, livst_egg, livst_milk
    /

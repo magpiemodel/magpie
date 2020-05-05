@@ -1,4 +1,4 @@
-# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -28,15 +28,15 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
 
   choose_folder <- function(title="Please choose a folder") {
     # try to use find because it is significantly quicker than list.dirs
-    tmp <- try(system("find ./output -name 'fulldata.gdx'", intern=TRUE,  ignore.stderr = TRUE), silent=TRUE)
+    tmp <- try(system("find ./output -name 'full.gms'", intern=TRUE,  ignore.stderr = TRUE), silent=TRUE)
     if("try-error" %in% class(tmp) | length(tmp)==0) {
       tmp <- base::list.dirs("./output/",recursive=TRUE)
       dirs <- NULL
       for (i in 1:length(tmp)) {
-        if (file.exists(path(tmp[i],"fulldata.gdx"))) dirs <- c(dirs,sub("./output/","",tmp[i]))
+        if (file.exists(path(tmp[i],"full.gms"))) dirs <- c(dirs,sub("./output/","",tmp[i]))
       }
     } else {
-      dirs <- sub("fulldata.gdx","",sub("./output/","",tmp, fixed=TRUE), fixed=TRUE)
+      dirs <- sub("full.gms","",sub("./output/","",tmp, fixed=TRUE), fixed=TRUE)
     }
     dirs <- sort(dirs)
     dirs <- c("all",dirs)

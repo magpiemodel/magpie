@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -28,6 +28,10 @@ q32_cdr_aff(j2,ac) ..
 vm_cdr_aff(j2,ac) =e=
 v32_land(j2,"aff","ac0") * sum(ct, p32_cdr_ac(ct,j2,ac));
 
+*ac0 can only increase if total afforested land increases
+q32_aff_ac0(j2) ..
+v32_land(j2,"aff","ac0") =l= sum(ac, v32_land(j2,"aff",ac)) - sum((ct,ac), p32_land(ct,j2,"aff",ac));
+
 *****Land***************************************************
 *' The interface `vm_land` provides aggregated forestry land pools (`type32`) to other modules.
 
@@ -55,7 +59,7 @@ v32_land(j2,"aff","ac0") * sum(ct, p32_cdr_ac(ct,j2,ac));
 
  q32_carbon(j2,ag_pools)  .. vm_carbon_stock(j2,"forestry",ag_pools) =e=
                          sum((type32,ac), v32_land(j2,type32,ac)*
-                         sum(ct, pm_carbon_density_ac(ct,j2,ac,ag_pools)));
+                         sum(ct, p32_carbon_density_ac(ct,j2,type32,ac,ag_pools)));
 
 *' Forestry land expansion and reduction is calculated as follows:
 

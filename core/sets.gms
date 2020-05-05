@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -142,12 +142,14 @@ sets time_annual Annual extended time steps
       y2095, y2100, y2105, y2110, y2115, y2120, y2125, y2130, y2135, y2140,
       y2145, y2150 /
 
-    t_past(t_all) Timesteps with observed data
-        / y1965, y1970, y1975,
-         y1980, y1985, y1990,
-         y1995, y2000, y2005, y2010
-        /
 ;
+
+set t_past(t_all) Timesteps with observed data 
+$If "%c_past%"== "till_2010" /y1965, y1970, y1975, y1980, y1985, y1990,y1995, y2000, y2005, y2010/;
+$If "%c_past%"== "till_1965" /y1965/;
+$If "%c_past%"== "till_1975" /y1965, y1970, y1975/;
+$If "%c_past%"== "till_1995" /y1965, y1970, y1975, y1980, y1985, y1990, y1995/;
+
 
 set t(t_all) Simulated time periods
 $If "%c_timesteps%"== "less_TS" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100,y2110,y2130,y2150/;

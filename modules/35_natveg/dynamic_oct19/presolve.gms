@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -69,7 +69,7 @@ $elseif "%c35_protect_scenario%" == "WDPA"
   p35_save_other(t,j) = p35_protect_shr(t,j,"WDPA")*pm_land_start(j,"other");
 $else
 * conservation priority scenarios start in 2020, in addition to WDPA protection
-  if ((sameas(t,"y1995") or sameas(t,"y2000") or sameas(t,"y2005") or sameas(t,"y2010") or sameas(t,"y2015")),
+  if (m_year(t) <= sm_fix_SSP2,
   p35_save_primforest(t,j) = p35_protect_shr(t,j,"WDPA")*pm_land_start(j,"primforest");
   p35_save_secdforest(t,j) = p35_protect_shr(t,j,"WDPA")*pm_land_start(j,"secdforest");
   p35_save_other(t,j) = p35_protect_shr(t,j,"WDPA")*pm_land_start(j,"other");
@@ -89,13 +89,16 @@ $endif
 * For instance, other natural land increases if agricultural land is abandoned.
 vm_land.lo(j,"primforest") = p35_save_primforest(t,j);
 vm_land.up(j,"primforest") = vm_land.l(j,"primforest");
+m_boundfix(vm_land,(j,"primforest"),up,10e-5);
 
 v35_secdforest.fx(j,"ac0") = 0;
 v35_secdforest.lo(j,"acx") = p35_save_secdforest(t,j);
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
+m_boundfix(v35_secdforest,(j,ac_sub),up,10e-5);
 
 v35_other.lo(j,"acx") = p35_save_other(t,j);
 v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
+m_boundfix(v35_other,(j,ac_sub),up,10e-5);
 
 * calculate carbon density
 * highest carbon density 1st time step to account for reshuffling

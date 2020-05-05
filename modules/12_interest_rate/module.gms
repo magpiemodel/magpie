@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -17,6 +17,5 @@
 *' @authors Xiaoxi Wang
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%interest_rate%" == "glo_jan16" $include "./modules/12_interest_rate/glo_jan16/realization.gms"
-$Ifi "%interest_rate%" == "reg_feb18" $include "./modules/12_interest_rate/reg_feb18/realization.gms"
+$Ifi "%interest_rate%" == "select_apr20" $include "./modules/12_interest_rate/select_apr20/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
