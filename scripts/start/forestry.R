@@ -93,7 +93,7 @@ for(s73_price_adjuster in c(0)){
               if(s73_price_adjuster == 1) adjustment_flag = "PriceAdj"
               if(s73_price_adjuster == 0) adjustment_flag = ""
 
-              cfg$title <- paste0(identifier_flag,"_",ssp,"_",adjustment_flag,"_",demand_flag,"_",plantation_flag,"_",faustmann_flag,"_",pol_flag,"_",co2_price_path_flag,"_Poluter")
+              cfg$title <- paste0(identifier_flag,"_",ssp,"_",adjustment_flag,"_",demand_flag,"_",plantation_flag,"_",faustmann_flag,"_",pol_flag,"_",co2_price_path_flag,"_ContantDist")
 
               cfg$output <- c("rds_report")
 
