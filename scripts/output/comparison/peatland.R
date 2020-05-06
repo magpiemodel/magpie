@@ -32,7 +32,7 @@ if(!exists("source_include")) {
 ###############################################################################
 cat("\nStarting output generation\n")
 
-vars <- c("Population","Income","Demand|+|Food","Demand|Food|+|Crops","Demand|Food|+|Livestock products","Trade|Net−Trade|+|Crops","Productivity|Yield|Crops|+|Cereals")
+vars <- c("Population","Income","Demand|+|Food","Demand|Food|+|Crops","Demand|Food|+|Livestock products","Trade|Net-Trade|+|Crops","Productivity|Yield|Crops|+|Cereals")
 
 all <- NULL
 
