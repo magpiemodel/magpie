@@ -32,6 +32,8 @@ if(!exists("source_include")) {
 ###############################################################################
 cat("\nStarting output generation\n")
 
+vars <- c("Population","Income","Demand|+|Food","Demand|Food|+|Crops","Demand|Food|+|Livestock products","Trade|Net−Trade|+|Crops","Productivity|Yield|Crops|+|Cereals")
+
 all <- NULL
 
 x <- list()
@@ -43,7 +45,6 @@ x$PeatlandEmission <- NULL
 x$fprice_index <- NULL
 x$income <- NULL
 x$kcal <- NULL
-x$tau <- NULL
 x$demand_bioen <- NULL
 x$c_price <- NULL
 x$cost <- NULL
@@ -112,11 +113,6 @@ for (i in 1:length(outputdirs)) {
     a <- collapseNames(add_dimension(a,dim = 3.1,add = "scenario",nm = scen),collapsedim = "data")
     x$kcal <- mbind(x$kcal,a)
     
-    #tau
-    a <- collapseNames(tau(gdx,level="glo"))
-    a <- collapseNames(add_dimension(a,dim = 3.1,add = "scenario",nm = scen),collapsedim = "type")
-    x$tau <- mbind(x$tau,a)
-    
     #bioen
     a <- demandBioenergy(gdx,level="reg")
     a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
@@ -136,8 +132,7 @@ for (i in 1:length(outputdirs)) {
     
   } else missing <- c(missing,outputdirs[i])
   a <- as.data.table(readRDS(rep))
-  vars <- c("Population","Income","Demand|+|Food","Demand|Food|+|Crops","Demand|Food|+|Livestock products")
-  a <- a[variable %in% vars & region=="GLO",]
+  a <- a[variable %in% vars,]
   all <- rbind(all,a)
 }
 #remove 1995
@@ -157,8 +152,7 @@ saveRDS(all,paste0("output/report_",prefix,".rds"))
 
 if(!file.exists(paste0("output/validation_",prefix,".rds"))) {
   val <- as.data.table(read.quitte("input/validation.mif"))
-  vars <- c("Population","Income","Demand|+|Food","Demand|Food|+|Crops","Demand|Food|+|Livestock products")
-  val <- val[variable %in% vars & region=="GLO",]
+  val <- val[variable %in% vars,]
   saveRDS(val,paste0("output/validation_",prefix,".rds"))
 }
 
