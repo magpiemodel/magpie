@@ -28,7 +28,7 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "BF32"
+identifier_flag <- "BF33"
 
 cat(paste0("Poulter distribution by raster calculations. Ageclasses collapsed by half."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
@@ -93,7 +93,7 @@ for(s73_price_adjuster in c(0)){
               if(s73_price_adjuster == 1) adjustment_flag = "PriceAdj"
               if(s73_price_adjuster == 0) adjustment_flag = ""
 
-              cfg$title <- paste0(identifier_flag,"_",ssp,"_",adjustment_flag,"_",demand_flag,"_",plantation_flag,"_",faustmann_flag,"_",pol_flag,"_",co2_price_path_flag,"_","kDist")
+              cfg$title <- paste0(identifier_flag,"_",ssp,"_",adjustment_flag,"_",demand_flag,"_",plantation_flag,"_",faustmann_flag,"_",pol_flag,"_",co2_price_path_flag,"_","NoAC10Dist")
 
               cfg$output <- c("rds_report")
 
