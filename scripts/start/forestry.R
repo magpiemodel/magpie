@@ -28,9 +28,9 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "BF30"
+identifier_flag <- "BF31"
 
-cat(paste0("Poulter distribution also in acx. Ageclasses collapsed by half."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Poulter distribution by raster calculations. Ageclasses collapsed by half."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 for(s73_price_adjuster in c(0)){
   cfg$gms$s73_price_adjuster <- s73_price_adjuster
@@ -48,7 +48,7 @@ for(s73_price_adjuster in c(0)){
 
         cfg$gms$c32_faustmann_rotation <- faustmann_switch
 
-        for (co2_price_path in c("NPI")) { ## Add "2deg" here for CO2 price runs
+        for (co2_price_path in c("NPI","2deg")) { ## Add "2deg" here for CO2 price runs
 
           if (co2_price_path == "NPI") {
             cfg <- setScenario(cfg,c(ssp,"NPI"))
