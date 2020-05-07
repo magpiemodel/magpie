@@ -22,31 +22,16 @@ sets
     unused_crop, unused_past, unused_forestry, 
     rewet_crop, rewet_past, rewet_forestry /
 
-  stat_man58(stat58) Peatland status
+  stat_man58(stat58) Peatland status managed land
     / degrad_crop, degrad_past, degrad_forestry, 
     unused_crop, unused_past, unused_forestry, 
     rewet_crop, rewet_past, rewet_forestry /
 
-  from58(stat58) Peatland status
-    / intact, 
-    degrad_crop, degrad_past, degrad_forestry, 
-    unused_crop, unused_past, unused_forestry, 
-    rewet_crop, rewet_past, rewet_forestry /
-
-  stat_degrad_from58(from58) Peatland status
+  stat_degrad58(stat58) Peatland status degrad
     / degrad_crop, degrad_past, degrad_forestry /
 
-  to58(stat58) Peatland status
-    / intact, 
-    degrad_crop, degrad_past, degrad_forestry, 
-    unused_crop, unused_past, unused_forestry, 
-    rewet_crop, rewet_past, rewet_forestry /
-
-  stat_rewet58(to58) Peatland status
+  stat_rewet58(stat58) Peatland status rewet
     / rewet_crop, rewet_past, rewet_forestry /
-
-  stat_degrad58(to58) Peatland status
-    / degrad_crop, degrad_past, degrad_forestry /
 
   emis58 Wetland emission types
 	/ co2, doc, ch4, n2o /
@@ -90,3 +75,5 @@ sets
            /
 
 ;
+
+alias (stat58, from58, to58);

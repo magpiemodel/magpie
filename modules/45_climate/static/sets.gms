@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* mappings to simplified climate regions exist in 58_peatland and 59_SOM
+* mappings to simplified climate regions exist in 58_peatland and 59_som
 *' @code
 
 sets

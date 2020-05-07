@@ -14,6 +14,7 @@ if(m_year(t) < 2015,
 	v58_lu_transitions.fx(j2,from58,to58)$(not sameas(from58,to58)) = 0;
 else
 	if(sum(j, p58_peatland_area(j)) = 0,
+*' @code
 *' Initialization of peatland
 *' First, all degraded peatland is assigned to cropland. However, if the degraded peatland 
 *' is larger than the actual cropland multiplied by a scaling factor (see below), 
@@ -34,6 +35,7 @@ else
 *' application of the wetland GHG emission factors). In total, we therefore have 
 *' 3 peatland categories: intact, degraded and unused. And for degraded and unused
 *' we know the current/previous land use: cropland, pasture and forestry.
+*' @stop
 	pc58_peatland_intact(j) = f58_peatland_intact(j);
 	p58_peatland_area(j) = f58_peatland_degrad(j) + f58_peatland_intact(j);
 	p58_scaling_factor(j) = p58_peatland_area(j)/p58_land_area(j);
@@ -53,7 +55,6 @@ else
 	p58_peatland_degrad_unused_weight(j,land58)$(p58_peatland_degrad_used(j) > 0) = pc58_peatland_man(j,"degrad",land58)/p58_peatland_degrad_used(j);
 	pc58_peatland_man(j,"unused",land58) = p58_peatland_degrad_unused(j)*p58_peatland_degrad_unused_weight(j,land58);
 	p58_peatland_degrad_unused(j) = p58_peatland_degrad_unused(j)-sum(land58, pc58_peatland_man(j,"unused",land58));
-	display p58_peatland_degrad_unused;
 
 	v58_peatland_man.fx(j,man58,land58) = pc58_peatland_man(j,man58,land58);
 	v58_peatland_intact.fx(j) = pc58_peatland_intact(j);
@@ -82,6 +83,9 @@ else
 	v58_lu_transitions.up(j2,"degrad_crop","rewet_crop") = Inf;
 	v58_lu_transitions.up(j2,"degrad_past","rewet_past") = Inf;
 	v58_lu_transitions.up(j2,"degrad_forestry","rewet_forestry") = Inf;
+	v58_lu_transitions.up(j2,"unused_crop","degrad_crop") = Inf;
+	v58_lu_transitions.up(j2,"unused_past","degrad_past") = Inf;
+	v58_lu_transitions.up(j2,"unused_forestry","degrad_forestry") = Inf;
 	v58_lu_transitions.up(j2,"unused_crop","rewet_crop") = Inf;
 	v58_lu_transitions.up(j2,"unused_past","rewet_past") = Inf;
 	v58_lu_transitions.up(j2,"unused_forestry","rewet_forestry") = Inf;

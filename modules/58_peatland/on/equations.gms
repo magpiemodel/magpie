@@ -5,6 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @equations
 
  q58_transition_matrix(j2) ..
 	sum((from58,to58), v58_lu_transitions(j2,from58,to58)) =e= 
@@ -69,7 +70,7 @@
 
  q58_peatland_intact(j2) ..
 	sum(stat_degrad58, v58_lu_transitions(j2,"intact",stat_degrad58)) * 
-	sum((stat_degrad_from58,stat_rewet58), v58_lu_transitions(j2,stat_degrad_from58,stat_rewet58))
+	sum((stat_degrad58,stat_rewet58), v58_lu_transitions(j2,stat_degrad58,stat_rewet58))
 	=e= 
 	0;
 

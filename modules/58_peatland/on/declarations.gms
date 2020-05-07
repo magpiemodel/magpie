@@ -8,9 +8,9 @@
 parameters
  p58_scaling_factor(j)								Scaling factor for managed peatland (1)
  p58_intact_ratio(t,j)								Ratio of intact and total peatland (1)
- p58_peatland_degrad_used(j)						Helper for peatland initialization (mio. ha)
- p58_peatland_degrad_unused(j)						Helper for peatland initialization (mio. ha)
- p58_peatland_degrad_unused_weight(j,land58)		Helper for peatland initialization (1)
+ p58_peatland_degrad_used(j)						Intermediate calculation in peatland initialization (mio. ha)
+ p58_peatland_degrad_unused(j)						Intermediate calculation in peatland initialization (mio. ha)
+ p58_peatland_degrad_unused_weight(j,land58)		Weight for intermediate calculation in peatland initialization (1)
  p58_land_area(j)									Total land area (mio. ha)
  p58_peatland_area(j)								Total peatland area (mio. ha)
  p58_ipcc_wetland_ef(clcl58,land58,emis58,man58) Wetland GWP100 emission factors (t CO2eq per ha)
