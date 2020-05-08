@@ -150,7 +150,7 @@ $title magpie
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: private_forestry_dec18_20200508.tgz
+* Used data set: private_forestry_dec18_20200509.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/users/mishra/additional_data_private_forestry
 * 
@@ -193,7 +193,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Thu May 07 18:30:19 2020
+* Last modification (input data): Fri May 08 16:49:48 2020
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 

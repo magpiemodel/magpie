@@ -10,6 +10,7 @@ $setglobal c35_aolc_policy  npi
 
 scalars
 s35_selective_logging_flag Flag for turning of selective logging in percentage. One equals clearcut   / 1 /
+s35_secdf_distribution Flag for secdf initialization (0) for all in highest acx (1) for equal dist (2) for poulter dist /0/
 ;
 
 table f35_protect_area(j,prot_type) Conservation priority areas (mio. ha)

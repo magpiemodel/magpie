@@ -30,76 +30,86 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag <- "BF33"
 
-cat(paste0("Poulter distribution by raster calculations. Ageclasses collapsed by half."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Flag for secondary forest distributions. Poulter distribution by raster calculations. Ageclasses collapsed by half."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 for(s73_price_adjuster in c(0)){
+
   cfg$gms$s73_price_adjuster <- s73_price_adjuster
 
-  for(ssp in c("SSP2")){
+  for(secdf_distribution in c(0,1,2)){
 
-    for(timber_demand in c("biomass_mar20")){ ## Add "off" here to turn off timber demand
+    cfg$gms$s35_secdf_distribution <- secdf_distribution
 
-      cfg$gms$timber <- timber_demand
+    for(ssp in c("SSP2")){
 
-      if(timber_demand == "biomass_mar20") cfg$gms$c32_initial_distribution = 1
-      if(timber_demand == "off") cfg$gms$c32_initial_distribution = 0
+      for(timber_demand in c("biomass_mar20")){ ## Add "off" here to turn off timber demand
 
-      for(faustmann_switch in c(0)){
+        cfg$gms$timber <- timber_demand
 
-        cfg$gms$c32_faustmann_rotation <- faustmann_switch
+        if(timber_demand == "biomass_mar20") cfg$gms$c32_initial_distribution = 1
+        if(timber_demand == "off") cfg$gms$c32_initial_distribution = 0
 
-        for (co2_price_path in c("NPI","2deg")) { ## Add "2deg" here for CO2 price runs
+        for(faustmann_switch in c(0)){
 
-          if (co2_price_path == "NPI") {
-            cfg <- setScenario(cfg,c(ssp,"NPI"))
-            co2_price_path_flag = "Baseline"
-          } else if (co2_price_path == "2deg"){
-            cfg <- setScenario(cfg,c(ssp,"NDC"))
-            co2_price_path_flag = "Policy"
-          } else if (co2_price_path == "Hotelling"){
-            cfg <- setScenario(cfg,c(ssp,"NDC"))
-            co2_price_path_flag = "PolicyH"
-          }
+          cfg$gms$c32_faustmann_rotation <- faustmann_switch
 
-          for(emis_policy in c("redd+_nosoil")){ ## Add "ssp_nosoil" for policy penalizing only natveg emissions
+          for (co2_price_path in c("NPI")) { ## Add "2deg" here for CO2 price runs
 
-            cfg$gms$c56_emis_policy <- emis_policy
+            if (co2_price_path == "NPI") {
+              cfg <- setScenario(cfg,c(ssp,"NPI"))
+              co2_price_path_flag = "Baseline"
+            } else if (co2_price_path == "2deg"){
+              cfg <- setScenario(cfg,c(ssp,"NDC"))
+              co2_price_path_flag = "Policy"
+            } else if (co2_price_path == "Hotelling"){
+              cfg <- setScenario(cfg,c(ssp,"NDC"))
+              co2_price_path_flag = "PolicyH"
+            }
 
-            for(plantation_switch in c(1)){ ## Add 0 here to treat plantations as natural vegetation
+            for(emis_policy in c("redd+_nosoil")){ ## Add "ssp_nosoil" for policy penalizing only natveg emissions
 
-              cfg$gms$s14_timber_plantation_yield <- plantation_switch
-              cfg$gms$s32_timber_plantation <- cfg$gms$s14_timber_plantation_yield
+              cfg$gms$c56_emis_policy <- emis_policy
 
-              cfg$gms$c56_pollutant_prices <- "coupling"
-              cfg$gms$c60_2ndgen_biodem <- "coupling"
+              for(plantation_switch in c(1)){ ## Add 0 here to treat plantations as natural vegetation
 
-              file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
-              file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
+                cfg$gms$s14_timber_plantation_yield <- plantation_switch
+                cfg$gms$s32_timber_plantation <- cfg$gms$s14_timber_plantation_yield
 
-              ### Create flags
+                cfg$gms$c56_pollutant_prices <- "coupling"
+                cfg$gms$c60_2ndgen_biodem <- "coupling"
 
-              if(timber_demand == "biomass_mar20") demand_flag = ""
-              if(timber_demand == "off") demand_flag = "NoTimber"
+                file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
+                file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
 
-              if(emis_policy == "ssp_nosoil") pol_flag = "SSPnosoil"
-              if(emis_policy == "redd+_nosoil") pol_flag = ""
+                ### Create flags
 
-              if(plantation_switch == 1) plantation_flag = ""
-              if(plantation_switch == 0) plantation_flag = "NatVeg"
+                if(timber_demand == "biomass_mar20") demand_flag = ""
+                if(timber_demand == "off") demand_flag = "NoTimber"
 
-              if(faustmann_switch == 1) faustmann_flag = "Faustmann"
-              if(faustmann_switch == 0) faustmann_flag = ""
+                if(emis_policy == "ssp_nosoil") pol_flag = "SSPnosoil"
+                if(emis_policy == "redd+_nosoil") pol_flag = ""
 
-              if(s73_price_adjuster == 1) adjustment_flag = "PriceAdj"
-              if(s73_price_adjuster == 0) adjustment_flag = ""
+                if(plantation_switch == 1) plantation_flag = ""
+                if(plantation_switch == 0) plantation_flag = "NatVeg"
 
-              cfg$title <- paste0(identifier_flag,"_",ssp,"_",adjustment_flag,"_",demand_flag,"_",plantation_flag,"_",faustmann_flag,"_",pol_flag,"_",co2_price_path_flag,"_","NoAC10Dist")
+                if(faustmann_switch == 1) faustmann_flag = "Faustmann"
+                if(faustmann_switch == 0) faustmann_flag = ""
 
-              cfg$output <- c("rds_report")
+                if(s73_price_adjuster == 1) adjustment_flag = "PriceAdj"
+                if(s73_price_adjuster == 0) adjustment_flag = ""
 
-#              cat(cfg$title,"\n")
+                if(secdf_distribution == 0) distribution_flag = "xDist"
+                if(secdf_distribution == 1) distribution_flag = "kDist"
+                if(secdf_distribution == 2) distribution_flag = "pDist"
 
-              start_run(cfg,codeCheck=FALSE)
+                cfg$title <- paste0(identifier_flag,"_",ssp,"_",adjustment_flag,"_",demand_flag,"_",plantation_flag,"_",faustmann_flag,"_",pol_flag,"_",distribution_flag,"_",co2_price_path_flag)
+
+                cfg$output <- c("rds_report")
+
+#                cat(cfg$title,"\n")
+
+                start_run(cfg,codeCheck=FALSE)
+              }
             }
           }
         }

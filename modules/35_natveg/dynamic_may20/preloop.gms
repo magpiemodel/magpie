@@ -23,12 +23,22 @@ p35_ageclass_secdforest_shr(j,ac)$(sum(ac_poulter2, p35_ageclass_secdforest_area
 
 *i35_secdforest(j,ac) = round(pcm_land(j,"secdforest")*p35_ageclass_secdforest_shr(j,ac),5);
 
+** Change rotation based on switch. If not use calculation before faustmann
+if(s35_secdf_distribution = 0,
+  i35_secdforest(j,"acx") = pcm_land(j,"secdforest");
+
+  elseif s35_secdf_distribution = 1,
 ** acx here is 0 so secdf has a mask for never having highest acx class in 19956
-i35_secdforest(j,ac) = round(pcm_land(j,"secdforest")*f35_ageclass_share(j,ac),5);
+  i35_secdforest(j,ac_sub) = pcm_land(j,"secdforest")/card(ac_sub);
+
+  elseif s35_secdf_distribution = 2,
+** acx here is 0 so secdf has a mask for never having highest acx class in 19956
+  i35_secdforest(j,ac_sub) = round(pcm_land(j,"secdforest")*f35_ageclass_share(j,ac_sub),5);
+);
+
+*use residual approach to avoid rounding errors
 *i35_secdforest(j,ac) = round(pcm_land(j,"secdforest")/card(ac),5);
 i35_secdforest(j,"acx") = i35_secdforest(j,"acx") + (pcm_land(j,"secdforest") - sum(ac, i35_secdforest(j,ac)));
-
-*use residual approach to avoid rounding errors.
 * Taking the redistributed area with lower age classes from overall secdf and putting them
 * In highest age class is probably not correct
 *i35_secdforest(j,"acx") = pcm_land(j,"secdforest") - sum(ac, i35_secdforest(j,ac));
