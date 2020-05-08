@@ -11,7 +11,7 @@ p58_land_area(j) = sum(land, pcm_land(j,land));
 if(m_year(t) < 2015,
 	v58_peatland_man.fx(j,man58,land58) = 0;
 	v58_peatland_intact.fx(j) = 0;
-	v58_lu_transitions.fx(j2,from58,to58)$(not sameas(from58,to58)) = 0;
+	v58_lu_transitions.fx(j,from58,to58)$(not sameas(from58,to58)) = 0;
 else
 	if(sum(j, p58_peatland_area(j)) = 0,
 *' @code
@@ -58,7 +58,7 @@ else
 
 	v58_peatland_man.fx(j,man58,land58) = pc58_peatland_man(j,man58,land58);
 	v58_peatland_intact.fx(j) = pc58_peatland_intact(j);
-	v58_lu_transitions.fx(j2,from58,to58)$(not sameas(from58,to58)) = 0;
+	v58_lu_transitions.fx(j,from58,to58)$(not sameas(from58,to58)) = 0;
 
 	else	
 	p58_scaling_factor(j) = p58_peatland_area(j)/p58_land_area(j);
@@ -73,22 +73,22 @@ else
 	v58_peatland_intact.l(j) = pc58_peatland_intact(j);
 
 *define allowed transitions within peatland area	
-	v58_lu_transitions.fx(j2,from58,to58)$(not sameas(from58,to58)) = 0;
-	v58_lu_transitions.up(j2,"intact","degrad_crop") = Inf;
-	v58_lu_transitions.up(j2,"intact","degrad_past") = Inf;
-	v58_lu_transitions.up(j2,"intact","degrad_forestry") = Inf;
-	v58_lu_transitions.up(j2,"degrad_crop","unused_crop") = Inf;
-	v58_lu_transitions.up(j2,"degrad_past","unused_past") = Inf;
-	v58_lu_transitions.up(j2,"degrad_forestry","unused_forestry") = Inf;
-	v58_lu_transitions.up(j2,"degrad_crop","rewet_crop") = Inf;
-	v58_lu_transitions.up(j2,"degrad_past","rewet_past") = Inf;
-	v58_lu_transitions.up(j2,"degrad_forestry","rewet_forestry") = Inf;
-	v58_lu_transitions.up(j2,"unused_crop","degrad_crop") = Inf;
-	v58_lu_transitions.up(j2,"unused_past","degrad_past") = Inf;
-	v58_lu_transitions.up(j2,"unused_forestry","degrad_forestry") = Inf;
-	v58_lu_transitions.up(j2,"unused_crop","rewet_crop") = Inf;
-	v58_lu_transitions.up(j2,"unused_past","rewet_past") = Inf;
-	v58_lu_transitions.up(j2,"unused_forestry","rewet_forestry") = Inf;
+	v58_lu_transitions.fx(j,from58,to58)$(not sameas(from58,to58)) = 0;
+	v58_lu_transitions.up(j,"intact","degrad_crop") = Inf;
+	v58_lu_transitions.up(j,"intact","degrad_past") = Inf;
+	v58_lu_transitions.up(j,"intact","degrad_forestry") = Inf;
+	v58_lu_transitions.up(j,"degrad_crop","unused_crop") = Inf;
+	v58_lu_transitions.up(j,"degrad_past","unused_past") = Inf;
+	v58_lu_transitions.up(j,"degrad_forestry","unused_forestry") = Inf;
+	v58_lu_transitions.up(j,"degrad_crop","rewet_crop") = Inf;
+	v58_lu_transitions.up(j,"degrad_past","rewet_past") = Inf;
+	v58_lu_transitions.up(j,"degrad_forestry","rewet_forestry") = Inf;
+	v58_lu_transitions.up(j,"unused_crop","degrad_crop") = Inf;
+	v58_lu_transitions.up(j,"unused_past","degrad_past") = Inf;
+	v58_lu_transitions.up(j,"unused_forestry","degrad_forestry") = Inf;
+	v58_lu_transitions.up(j,"unused_crop","rewet_crop") = Inf;
+	v58_lu_transitions.up(j,"unused_past","rewet_past") = Inf;
+	v58_lu_transitions.up(j,"unused_forestry","rewet_forestry") = Inf;
 	);
 );
 
