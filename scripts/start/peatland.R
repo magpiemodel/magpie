@@ -43,7 +43,7 @@ cfg$output <- c("rds_report")
 download_and_update(cfg)
 
 #T141 full set final SSPDB bugfix + highres
-prefix <- "T142"
+prefix <- "T143"
 
 for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
 #for (ssp in c("SSP2")) {
