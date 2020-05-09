@@ -119,7 +119,7 @@ for (i in 1:length(outputdirs)) {
     x$demand_bioen <- mbind(x$demand_bioen,a)
     
     #ghg price
-    a <- PriceGHG(gdx,level="glo")
+    a <- PriceGHG(gdx,level="glo",aggr="weight")
     a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
     x$c_price <- mbind(x$c_price,a)
     
