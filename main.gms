@@ -147,28 +147,32 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
 * Used data set: magpie4.2_default_apr20.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* md5sum: 36471226972d3dbddec3db3a5e2f555b
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* 
+* Used data set: additional_data_rev3.81.tgz
+* md5sum: 94475462b6440caea9c1bf335a3a1a3b
+* Repository: /p/projects/landuse/data/input/archive
 * 
 * Low resolution: c200
 * High resolution: 0.5
-*
+* 
 * Total number of cells: 200
-*
+* 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    28   24   10    7    3   53   17    8   22    7   11   10
-*
+* 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-*
+* 
 * Regions data revision: 4.42
-*
+* 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
 * * Additional input folder: /p/projects/landuse/data/input/other/rev42
 * * Revision: 42
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-*
+* 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
@@ -181,7 +185,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Wed Apr  8 18:14:05 2020
+* Last modification (input data): Tue May 12 17:40:33 2020
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -207,7 +211,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  SSP2_rev42_rev4p37
+$setglobal c_title  default
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /
