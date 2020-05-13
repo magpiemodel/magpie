@@ -8,9 +8,9 @@ $setglobal c32_aff_mask  noboreal
 * options: unrestricted, noboreal, onlytropical
 $setglobal c32_aff_policy  npi
 * options: none, npi, ndc
-$setglobal c32_aff_bgp  djf
+$setglobal c32_aff_bgp  nobgp
 * options: ann,djf,jja,nobgp
-$setglobal c32_bgp_ac  ac30
+$setglobal c32_bgp_ac  ac10
 * options: ac0,ac10,ac20,ac30
 
 scalars
@@ -42,6 +42,6 @@ $offdelim
 
 table f32_aff_bgp(j,bgp32) Biogeophysical temperature change of afforestation translated to tC for annual DJF JJA nobgp (tC per ha)
 $ondelim
-$include "./modules/32_forestry/input/refordefor_bgp_median.cs3"
+$include "./modules/32_forestry/input/f32_bph_effect.cs3"
 $ondelim
 ;
