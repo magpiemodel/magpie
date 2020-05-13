@@ -12,4 +12,3 @@ vm_other_reduction, input, not used
 vm_primforest_reduction, input, not used
 vm_cost_glo, input, not used
 pm_timber_yield, input, not used
-vm_prod, var, not used

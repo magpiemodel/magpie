@@ -4299,9 +4299,9 @@ c32_CostComparison
 c32_CostComparison|
 <%/ITEM%>
 <%ITEM%>
-c32_harvesting_cost
+s32_harvesting_cost
 
-c32_harvesting_cost|
+s32_harvesting_cost|
 <%/ITEM%>
 <%ITEM%>
 c32_LandRednCost
@@ -4314,9 +4314,9 @@ c32_ProdExtCost
 c32_ProdExtCost|
 <%/ITEM%>
 <%ITEM%>
-c32_recurring_cost
+s32_recurring_cost
 
-c32_recurring_cost|
+s32_recurring_cost|
 <%/ITEM%>
 <%ITEM%>
 c32_reduction_fragmented
@@ -4339,9 +4339,9 @@ initial annual trade balance reduction
 c32_reduction_start|
 <%/ITEM%>
 <%ITEM%>
-c32_reESTBcost
+s32_reESTBcost
 
-c32_reESTBcost|
+s32_reESTBcost|
 <%/ITEM%>
 <%ITEM%>
 c32_shift

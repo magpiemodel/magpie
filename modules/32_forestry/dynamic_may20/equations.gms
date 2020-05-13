@@ -104,11 +104,11 @@ $offtext
 q32_cost_establishment(i2)..
 						v32_cost_establishment(i2)
 						=e=
-            (sum((cell(i2,j2),type32), v32_land(j2,type32,"ac0") * c32_reESTBcost)
-            + sum(cell(i2,j2), v32_land(j2,"aff","ac0") * c32_reESTBcost)
+            (sum((cell(i2,j2),type32), v32_land(j2,type32,"ac0") * s32_reESTBcost)
+            + sum(cell(i2,j2), v32_land(j2,"aff","ac0") * s32_reESTBcost)
             +
               (
-             sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2)) * c32_harvesting_cost)
+             sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2)) * s32_harvesting_cost)
 *              +sum(cell(i2,j2), fm_distance(j2) * fm_transport_costs("wood") * v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
 *              +
 *              sum(ct,vm_cost_trade_forestry_ff(i2))

@@ -46,12 +46,12 @@ for(s73_price_adjuster in c(0)){
 
         cfg$gms$timber <- timber_demand
 
-        if(timber_demand == "biomass_mar20") cfg$gms$c32_initial_distribution = 1
-        if(timber_demand == "off") cfg$gms$c32_initial_distribution = 0
+        if(timber_demand == "biomass_mar20") cfg$gms$s32_initial_distribution = 1
+        if(timber_demand == "off") cfg$gms$s32_initial_distribution = 0
 
         for(faustmann_switch in c(0)){
 
-          cfg$gms$c32_faustmann_rotation <- faustmann_switch
+          cfg$gms$s32_faustmann_rotation <- faustmann_switch
 
           for (co2_price_path in c("NPI")) { ## Add "2deg" here for CO2 price runs
 

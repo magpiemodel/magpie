@@ -3796,12 +3796,12 @@
 3796 1210 c32_CostComparison PARAMETERS defined 467788 19 22 4 319 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/input.gms
 3797 1211 c32_shift PARAMETERS declared 467789 20 12 4 319 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/input.gms
 3798 1211 c32_shift PARAMETERS defined 467789 20 13 4 319 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/input.gms
-3799 1212 c32_reESTBcost PARAMETERS declared 467791 22 17 4 319 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/input.gms
-3800 1212 c32_reESTBcost PARAMETERS defined 467791 22 18 4 319 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/input.gms
-3801 1213 c32_recurring_cost PARAMETERS declared 467792 23 21 4 319 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/input.gms
-3802 1213 c32_recurring_cost PARAMETERS defined 467792 23 22 4 319 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/input.gms
-3803 1214 c32_harvesting_cost PARAMETERS declared 467793 24 22 4 319 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/input.gms
-3804 1214 c32_harvesting_cost PARAMETERS defined 467793 24 23 4 319 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/input.gms
+3799 1212 s32_reESTBcost PARAMETERS declared 467791 22 17 4 319 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/input.gms
+3800 1212 s32_reESTBcost PARAMETERS defined 467791 22 18 4 319 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/input.gms
+3801 1213 s32_recurring_cost PARAMETERS declared 467792 23 21 4 319 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/input.gms
+3802 1213 s32_recurring_cost PARAMETERS defined 467792 23 22 4 319 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/input.gms
+3803 1214 s32_harvesting_cost PARAMETERS declared 467793 24 22 4 319 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/input.gms
+3804 1214 s32_harvesting_cost PARAMETERS defined 467793 24 23 4 319 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/input.gms
 3805 1215 s32_planing_horizon PARAMETERS declared 467794 25 22 4 319 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/input.gms
 3806 1215 s32_planing_horizon PARAMETERS defined 467794 25 72 4 319 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/input.gms
 3807 1216 s32_max_aff_area PARAMETERS declared 467798 29 25 4 319 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/input.gms
@@ -5540,15 +5540,15 @@
 5540 692 v32_land VARIABLES ref 997906 52 83 4 492 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/equations.gms
 5541 151 j2 SETS ref 997906 52 87 4 492 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/equations.gms
 5542 267 type32 SETS ref 997906 52 94 4 492 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/equations.gms
-5543 1212 c32_reESTBcost PARAMETERS ref 997906 52 119 4 492 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/equations.gms
-5544 1213 c32_recurring_cost PARAMETERS ref 997906 52 140 4 492 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/equations.gms
+5543 1212 s32_reESTBcost PARAMETERS ref 997906 52 119 4 492 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/equations.gms
+5544 1213 s32_recurring_cost PARAMETERS ref 997906 52 140 4 492 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/equations.gms
 5545 387 pm_interest PARAMETERS ref 997906 52 154 4 492 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/equations.gms
 5546 150 i2 SETS ref 997906 52 158 4 492 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/equations.gms
 5547 240 kforestry SETS control 997908 54 63 4 492 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/equations.gms
 5548 706 v32_prod_future_reg VARIABLES ref 997908 54 83 4 492 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/equations.gms
 5549 150 i2 SETS ref 997908 54 87 4 492 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/equations.gms
 5550 240 kforestry SETS ref 997908 54 97 4 492 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/equations.gms
-5551 1214 c32_harvesting_cost PARAMETERS ref 997908 54 119 4 492 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/equations.gms
+5551 1214 s32_harvesting_cost PARAMETERS ref 997908 54 119 4 492 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/equations.gms
 5552 387 pm_interest PARAMETERS ref 997908 54 135 4 492 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/equations.gms
 5553 150 i2 SETS ref 997908 54 139 4 492 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/equations.gms
 5554 670 p32_rot_length PARAMETERS ref 997908 54 156 4 492 C:\PIK\private_forestry\./modules/32_forestry/dynamic_dec18/equations.gms
@@ -20830,9 +20830,9 @@
 1209 c32_LandRednCost 4 PARAM 0 1 
 1210 c32_CostComparison 4 PARAM 0 1 
 1211 c32_shift 4 PARAM 0 1 
-1212 c32_reESTBcost 4 PARAM 0 1 
-1213 c32_recurring_cost 4 PARAM 0 1 
-1214 c32_harvesting_cost 4 PARAM 0 1 
+1212 s32_reESTBcost 4 PARAM 0 1 
+1213 s32_recurring_cost 4 PARAM 0 1 
+1214 s32_harvesting_cost 4 PARAM 0 1 
 1215 s32_planing_horizon 4 PARAM 0 1 Afforestation planing horizon (years)
 1216 s32_max_aff_area 4 PARAM 0 1 maximum total global afforestation in Mha
 1217 f32_aff_mask 4 PARAM 1 167 147 afforestation mask (binary)

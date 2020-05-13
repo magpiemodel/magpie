@@ -38,7 +38,7 @@ p32_replanting_cost = 800;
 
 p32_time(ac) = ord(ac);
 
-p32_discount_factor(t_all,j,ac)         =  1/(s32_euler**(sum(cell(i,j),pm_interest_dev(t_all,i))*p32_time(ac)));
+p32_discount_factor(t_all,j,ac)         =  1/(exp(sum(cell(i,j),pm_interest_dev(t_all,i))*p32_time(ac)));
 
 p32_net_present_value(t_all,j,ac)       = ((s32_price * p32_carbon_density_ac_forestry(t_all,j,ac) * p32_discount_factor(t_all,j,ac)))/(1-p32_discount_factor(t_all,j,ac));
 
@@ -56,9 +56,9 @@ p32_rot_length_faustmann(t_all,j)       = sum(ac,p32_rot_flg_faustmann(t_all,j,a
 *********************************************************************************
 
 ** Change rotation based on switch. If not use calculation before faustmann
-if(c32_faustmann_rotation = 0,
+if(s32_faustmann_rotation = 0,
   p32_rot_length_ac_eqivalent(t_all,j) = sum(ac,p32_rot_flg(t_all,j,ac));
-elseif c32_faustmann_rotation = 1,
+elseif s32_faustmann_rotation = 1,
   p32_rot_length_ac_eqivalent(t_all,j) = sum(ac,p32_rot_flg_faustmann(t_all,j,ac));
 );
 
@@ -90,7 +90,7 @@ p32_rotation_cellular_estb(t_all,j) = ceil(p32_rot_length_ac_eqivalent(t_all,j))
 p32_rotation_cellular_harvesting(t_all,j) = p32_rotation_cellular_estb(t_all,j);
 
 ** RL Extension
-p32_rotation_cellular_estb(t_all,j) = p32_rotation_cellular_estb(t_all,j) * c32_rotation_extension ;
+p32_rotation_cellular_estb(t_all,j) = p32_rotation_cellular_estb(t_all,j) * s32_rotation_extension ;
 
 loop(j,
   loop(t_all,
@@ -140,11 +140,11 @@ p32_cdr_ac(t,j,ac) = 0;
 ** divide initial forestry area by number of age classes within protect32
 ** since protect32 is TRUE for ord(ac_sub) < p32_rotation_cellular(j) there is
 ** one additional junk which is assigned to ac0
-if(c32_initial_distribution = 0,
+if(s32_initial_distribution = 0,
 ** Initialize with highest age class and don't shift it when intitial distribution is off
   p32_land(t,j,"plant","acx") = pcm_land(j,"forestry");
 
-elseif c32_initial_distribution = 1,
+elseif s32_initial_distribution = 1,
 ** Initialize with equal distribtuion in rotation age class
   p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular("y1995",j);
   p32_land("y1995",j,"plant",ac_sub)$(protect32("y1995",j,ac_sub)) = p32_plant_ini_ac(j);
