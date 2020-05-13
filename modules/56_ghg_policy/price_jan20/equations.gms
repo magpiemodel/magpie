@@ -114,3 +114,20 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
             	 (sum(aff_effect,(1-s56_buffer_aff)*vm_cdr_aff(j2,ac,aff_effect)) * sum((cell(i2,j2),ct), p56_c_price_aff(ct,i2,ac)))
             	 / ((1+sum(cell(i2,j2),pm_interest(i2)))**(ac.off*5)))
                  *sum(cell(i2,j2),pm_interest(i2)/(1+pm_interest(i2)));
+
+
+*' Peatland emission costs depending on s56_peatland_policy
+
+ q56_peatland_emis_cost_reg(i2) ..
+                 vm_peatland_emis_cost(i2) =e=
+                 sum(cell(i2,j2),
+                 v56_peatland_emis_cost(j2)
+                 );
+
+ q56_peatland_emis_cost(j2) ..
+                 v56_peatland_emis_cost(j2) =e=
+                 vm_peatland_emis(j2) *
+                 s56_peatland_policy *
+                 sum((ct,cell(i2,j2)),
+                 im_pollutant_prices(ct,i2,"co2_c")*12/44
+                 );

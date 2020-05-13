@@ -26,6 +26,14 @@ equations
  q56_emission_costs_cell_oneoff(j,emis_cell_one56)     	  Calculation of cellular costs for emissions occuring only once in time (mio. USD05MER per yr)
  q56_reward_cdr_aff_reg(i)                                Regional revenues for carbon captured by afforestation (mio. USD05MER per yr)
  q56_reward_cdr_aff(j)			                       	      Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
+ q56_peatland_emis_cost_reg(i)                            Regional peatland GHG emissions costs (mio. USD05MER per yr)
+ q56_peatland_emis_cost(j)                            	  Cellular peatland GHG emissions costs (mio. USD05MER per yr)
+;
+
+
+positive variables
+ vm_peatland_emis_cost(i)            Regional peatland GHG emissions costs (mio. USD05MER per yr)
+ v56_peatland_emis_cost(j)           Cellular peatland GHG emissions costs (mio. USD05MER per yr)
 ;
 
 
@@ -47,6 +55,8 @@ variables
 parameters
  ov_reward_cdr_aff(t,i,type)                                     Regional revenues for carbon captured by afforestation (mio. USD05MER per yr)
  ov56_reward_cdr_aff(t,j,type)                                   Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
+ ov_peatland_emis_cost(t,i,type)                                 Regional peatland GHG emissions costs (mio. USD05MER per yr)
+ ov56_peatland_emis_cost(t,j,type)                               Cellular peatland GHG emissions costs (mio. USD05MER per yr)
  ov_btm_reg(t,i,emis_source,pollutants,type)                     Regional emissions before technical mitigation (Tg per yr)
  ov_btm_cell(t,j,emis_source,pollutants,type)                    Cellular emissions before technical mitigation (Tg per yr)
  ov_emission_costs(t,i,type)                                     Costs for emission rights for pollutants and greenhouse gases (mio. USD05MER per yr)
@@ -66,5 +76,7 @@ parameters
  oq56_emission_costs_cell_oneoff(t,j,emis_cell_one56,type)       Calculation of cellular costs for emissions occuring only once in time (mio. USD05MER per yr)
  oq56_reward_cdr_aff_reg(t,i,type)                               Regional revenues for carbon captured by afforestation (mio. USD05MER per yr)
  oq56_reward_cdr_aff(t,j,type)                                   Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
+ oq56_peatland_emis_cost_reg(t,i,type)                           Regional peatland GHG emissions costs (mio. USD05MER per yr)
+ oq56_peatland_emis_cost(t,j,type)                               Cellular peatland GHG emissions costs (mio. USD05MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
