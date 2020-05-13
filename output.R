@@ -56,7 +56,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
     if(length(identifier==1) && identifier==(length(dirs)+1)){
       cat("\nInsert the search pattern or the regular expression: ")
       pattern <- get_line()
-      id <- grep(pattern=pattern, dirs[-1])
+      id <- grep(pattern=pattern, dirs[-1], perl=TRUE)
       # lists all directories matching the pattern and ask for confirmation
       cat("\n\nYou have chosen the following directories:\n")
       cat(paste(1:length(id), dirs[id+1], sep=": "), sep="\n")

@@ -5,10 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-v56_reward_cdr_aff.scale(j) = 10e4;
-vm_reward_cdr_aff.scale(i) = 10e5;
-v56_peatland_emis_cost.scale(j) = 10e4;
-vm_emission_costs.scale(i) = 10e5;
-v56_emission_costs_reg_yearly.scale(i,emis_reg_yr56) = 10e4;
-vm_peatland_emis_cost.scale(i) = 10e5;
+pc58_peatland_intact(j) = 0;
+pc58_peatland_man(j,man58,land58) = 0;
 
+p58_mapping_cell_climate(j,clcl58) = sum(clcl_mapping(clcl,clcl58),pm_climate_class(j,clcl));
+
+p58_ipcc_wetland_ef(clcl58,land58,emis58,ef58) = f58_ipcc_wetland_ef(clcl58,land58,emis58,ef58);
+p58_ipcc_wetland_ef(clcl58,land58,emis58,"unused") = f58_ipcc_wetland_ef(clcl58,land58,emis58,"degrad");
+
+p58_peatland_cost_past(t,j) = 0;
