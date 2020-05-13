@@ -21,6 +21,72 @@ source("config/default.cfg")
 
 #cfg$force_download <- TRUE
 
+###########################################################################
+
+### INPUT FILES
+cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c200_690d3718e151be1b450b394c1064b1c5.tgz",
+			   "calibration_H12_c200_26Feb20.tgz",
+         "rev4.44forestry_h12_magpie.tgz",
+         "rev4.44forestry_h12_validation.tgz",
+         "forestry_20200513.tgz",
+         "coupling_co2_prices_apr20.tgz",
+         "additional_data_rev3.80.tgz")
+
+### REPOSITORIES
+cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL,"/p/projects/landuse/users/mishra/additional_data_private_forestry"=NULL,"/p/projects/magpie/users/mishra/projects/coupling"=NULL), getOption("magpie_repos"))
+
+### TIME
+cfg$gms$c_timesteps <- "5year"
+
+### LAND
+cfg$gms$land <- "landmatrix_dec18"
+
+### YIELDS
+# * IPCC BEF
+# * plantation yield switch
+cfg$gms$s14_timber_plantation_yield <- 1     # def = 1
+
+### FORESTRY
+cfg$gms$forestry  <- "dynamic_may20"
+# * switch for using natveg (0) or plantation (1) growth curves for plantations
+cfg$gms$s32_timber_plantation <- 1		# def = 0
+# * switch for using interest-rate based (0) or Faustmann (1) rotations for plantations
+cfg$gms$s32_faustmann_rotation <- 0   # def = 0
+# * switch for turning off (0) or on (1) the timber plantation land distribution
+cfg$gms$s32_initial_distribution <- 1   # def = 1
+
+### NATVEG
+cfg$gms$natveg  <- "dynamic_may20"
+# Age class distribution in secondary forests
+# * (0): All secondary forest is considered to be in the highest age-class
+# * (1): Equal distribution of LUH2 secondary forest in all age-classes
+# * (2): Distribution of LUH2 secondary forest into age-class distribution from Poulter et al. 2019 GFAD v1.1
+cfg$gms$s35_secdf_distribution <- 0
+
+### CARBON
+# * Carbon switch
+cfg$gms$c52_carbon_switch <- "default_lpjml"          # def = "default_lpjml"
+
+# ***---------------------    73_timber   -----------------------------------
+# * (biomass_mar20): WIP
+cfg$gms$timber <- "biomass_mar20"                  # def = biomass_mar20
+# Switch for timber demand
+cfg$gms$s73_timber_demand <- 1
+# Setting if demand adjuster should be price based or manuall adjusted
+cfg$gms$s73_price_adjuster <- 0       # def = 0
+# Counter for iterations of demand adjustment
+cfg$gms$s73_counter <- 0
+# Maximum iterations for demand adjustments
+cfg$gms$s73_maxiter <- 5
+# price elasticity from lauri et al
+cfg$gms$s73_price_elasticity <- -0.5
+# Counter for iterations of demand adjustment
+cfg$gms$s73_counter2 <- 0
+# Maximum iterations for demand adjustments
+cfg$gms$s73_maxiter2 <- 5
+
+###########################################################################
+
 cfg$results_folder <- "output/:title:"
 
 cfg$recalc_npi_ndc <- "ifneeded"
@@ -28,7 +94,7 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "BF33"
+identifier_flag <- "BF34"
 
 cat(paste0("Flag for secondary forest distributions. Poulter distribution by raster calculations. Ageclasses collapsed by half."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
