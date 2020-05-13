@@ -150,23 +150,15 @@ $title magpie
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
-* Used data set: rev4.44_h12_magpie.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
-* Used data set: rev4.44_h12_validation.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
 * Used data set: calibration_H12_c200_26Feb20.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: rev4.43_forestry_h12_magpie.tgz
+* Used data set: rev4.44forestry_h12_magpie.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.43_forestry_h12_validation.tgz
+* Used data set: rev4.44forestry_h12_validation.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
@@ -193,7 +185,7 @@ $title magpie
 * 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
-* Regions data revision: 4.43
+* Regions data revision: 4.44
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
@@ -213,7 +205,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Wed May 13 17:49:29 2020
+* Last modification (input data): Wed May 13 18:02:47 2020
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
