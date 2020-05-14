@@ -48,6 +48,7 @@ scalars
   s56_counter counter for C price interpolation (1) / 0 /
   s56_timesteps number of time steps for C price interpolation (1) / 0 /
   s56_offset helper for C price interpolation (1) / 0 /
+  s56_peatland_policy 1=on 0=off (binary) / 0 /
 ;
 
 $setglobal c56_pollutant_prices  R2M41-SSP2-NPi

@@ -5,10 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-v56_reward_cdr_aff.scale(j) = 10e4;
-vm_reward_cdr_aff.scale(i) = 10e5;
-v56_peatland_emis_cost.scale(j) = 10e4;
-vm_emission_costs.scale(i) = 10e5;
-v56_emission_costs_reg_yearly.scale(i,emis_reg_yr56) = 10e4;
-vm_peatland_emis_cost.scale(i) = 10e5;
+scalars
+        s80_maxiter   			maximal solve iterations if modelstat is > 2 (1)    / 30 /
+		s80_optfile     		switch to use specfied solver settings (1)          / 0 /
+		s80_num_nonopt_allowed 	number of allowed non-optimal variables (1)  		/ Inf /
+;
 
+$setglobal c80_nlp_solver  conopt4
+*   options:   (conopt3):         conopt3
+*              (conopt4):         conopt4
