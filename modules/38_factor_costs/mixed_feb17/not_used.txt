@@ -7,3 +7,6 @@
 
 name,type,reason
 vm_prod_reg,input,questionnaire
+pm_interest,input,questionnaire
+vm_prod,input,questionnaire
+pm_croparea_start,input,questionnaire
