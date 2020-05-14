@@ -1,40 +1,42 @@
 *** Historical value fix
 pm_interest_dev(t_historical,i) = pm_interest_dev("y1995",i) * 0.9;
 
-** This is same calculation as in carbon module. As these numbers don't exist yet due to
-** carbon module appearing below forestry module, we keep this double calculation for now.
+*' @code
+
+*' Calculation of Single rotation model rotation lengths
+
+*' Calculating forestry carbon densitiy here is the same calculation as in carbon module.
+*' As these numbers don't exist yet due to carbon module appearing below forestry module
 p32_carbon_density_ac_forestry(t_all,j,ac) = m_growth_vegc(0,fm_carbon_density(t_all,j,"other","vegc"),sum(clcl,pm_climate_class(j,clcl)*fm_growth_par(clcl,"k","plantations")),sum(clcl,pm_climate_class(j,clcl)*fm_growth_par(clcl,"m","plantations")),(ord(ac)-1));
 
-** Calculating the marginal of carbon density i.e. change in carbon density over two time steps
-** The carbon densities are tC/ha/year so we don't have to divide by timestep length.
+*' Calculating the marginal of carbon density i.e. change in carbon density over two time steps
+*' The carbon densities are tC/ha/year so we don't have to divide by timestep length.
 loop(ac_sub,
   p32_carbon_density_ac_marg(t_all,j,ac_sub) = p32_carbon_density_ac_forestry(t_all,j,ac_sub) - p32_carbon_density_ac_forestry(t_all,j,ac_sub-1);
   );
 p32_carbon_density_ac_marg(t_all,j,"ac0") = 0;
 
-** Calculating Instantaneous Growth Rates (IGR). This is a proxy number which can be compared against
-** interest rate in the economy to make investment decisions in plantations (i.e. to keep it growing or to harvest it).
-** This parameter is then used to calculate rotation lengths.
+*' Calculating Instantaneous Growth Rates (IGR). This is a proxy number which can be compared against
+*' interest rate in the economy to make investment decisions in plantations (i.e. to keep it growing or to harvest it).
+*' This parameter is then used to calculate rotation lengths.
 p32_IGR(t_all,j,ac) =   (p32_carbon_density_ac_marg(t_all,j,ac)/p32_carbon_density_ac_forestry(t_all,j,ac))$(p32_carbon_density_ac_forestry(t_all,j,ac)>0)
                       + 1$(p32_carbon_density_ac_forestry(t_all,j,ac)=0);
 
-** IGR values for first age class ("ac0") is provided the same value as "ac5" to
-** avoid a sudden drop in rotation lengths in y2000 from y1995.
-*p32_IGR(t_all,j,"ac0") = p32_IGR(t_all,j,"ac5");
-
-** For each cluster in MAgPIE ("j") we calculate how long the prevailing interest rates stay lower than the IGR.
-** As long as the prevailing interest rates are lower than IGR, plantations shall be kept standing.
-** As long as the prevailing interest rate becomes higher than IGR, it is assumed that the forest owner would rather
-** keep his/her investment in bank rather than in keeping the forest standing.
-** The easiest way to do this calculation is to count a value of 1 for IGR>interest rate and a value of 0 for IGR<interest rate.
+*' For each cluster in MAgPIE ("j") we calculate how long the prevailing interest rates stay lower than the IGR.
+*' As long as the prevailing interest rates are lower than IGR, plantations shall be kept standing.
+*' As long as the prevailing interest rate becomes higher than IGR, it is assumed that the forest owner would rather
+*' keep his/her investment in bank rather than in keeping the forest standing.
+*' The easiest way to do this calculation is to count a value of 1 for IGR>interest rate and a value of 0 for IGR<interest rate.
 p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)) >  0)
                         + 0$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)) <= 0);
 
-** From the above calculation, now its easier to count how many age-classes can be sustained before IGR falls below interest rate.
+*' From the above calculation, now its easier to count how many age-classes can be sustained before IGR falls below interest rate.
+*' @stop
+*********************************************************************************
 
-*********************************** FAUSTMANN SWITCHES
-** Set upper and lower bound for rotation years
 p32_replanting_cost = 800;
+*' @code
+*' Faustmann rotation lengths:
 
 p32_time(ac) = ord(ac);
 
@@ -53,6 +55,7 @@ p32_rot_flg_faustmann(t_all,j,ac)       = 1$(p32_IGR(t_all,j,ac) > sum(cell(i,j)
 
 p32_rot_length_faustmann(t_all,j)       = sum(ac,p32_rot_flg_faustmann(t_all,j,ac));
 
+*' @stop
 *********************************************************************************
 
 ** Change rotation based on switch. If not use calculation before faustmann
@@ -166,7 +169,7 @@ vm_hvarea_forestry.l(j,ac_sub) = p32_plant_ini_ac(j)/card(ac_sub);
 
 **** Updated calculation for avg are needed to be estb based on past years
 
-*' Saving intial values for avg calc
+**Saving intial values for avg calc
 p32_hv_area_current(t,i) = sum((cell(i,j),ac_sub),vm_hvarea_forestry.l(j,ac_sub));
 p32_hv_area_past_avg(t,i) = p32_hv_area_current(t,i);
 p32_hv_area_past_avg(t,i)$(ord(t) > 3) = (p32_hv_area_current(t,i) + p32_hv_area_current(t-1,i) + p32_hv_area_current(t-3,i))/3;

@@ -18,10 +18,6 @@ vm_hvarea_forestry.fx(j,ac_sub) = 0;
 vm_forestry_reduction.fx(j,"plant",ac_sub) = 0;
 pm_demand_ext_original(t_ext,i,kforestry) = 0;
 pm_demand_ext(t_ext,i,kforestry) = pm_demand_ext_original(t_ext,i,kforestry);
-*f21_trade_balanceflow(t_all,kforestry) = 0;
-***** Not fixinf production to zero because trade balanceflow has some positive numbers.
-***** This will break the production equation in trade. Keeping vm_prod not fixed to 0 helps in this.
-***** If f21_trade_balanceflow is changed to fm_trade_balanceflow it'll be fine
 vm_prod.fx(j,kforestry) = 0;
 fm_trade_balanceflow(t_all,kforestry) = 0;
 

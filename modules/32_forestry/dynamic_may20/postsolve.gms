@@ -2,7 +2,6 @@
 *' Set 'ac_additional' here allows us to distribute newly establsihed plantations
 *' equally among time steps where the simulation steps go longer than 5 years.
 v32_land.l(j,"plant",ac_additional) = v32_land.l(j,"plant","ac0")/card(ac_additional);
-*v32_land.l(j,"plant",ac_additional)$(m_yeardiff(t)>5) = v32_land.l(j,"plant","ac0")/(m_yeardiff(t)/5);
 
 *' Exchange land information after optimization
 p32_land(t,j,type32,ac) = v32_land.l(j,type32,ac);

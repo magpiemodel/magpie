@@ -7,6 +7,10 @@
 
 *' @equations
 
+*' Timber production cost covering cost of harvest as well as the cost incurred by
+*' utilizing free variable with a very high cost. Ideally this free variable is only
+*' used when there is no other way to meet timber demand.
+
 q73_cost_timber(i2)..
                     vm_cost_timber(i2)
                     =e=
@@ -14,6 +18,11 @@ q73_cost_timber(i2)..
                     + sum((cell(i2,j2),kforestry), v73_prod_heaven_timber(j2,kforestry)) * 1000000
                     ;
 
+
+*' Harvested cost is defined as the const incurred while removing biomass from forests.
+*' Harvestig natural vegetation is made less attractive to the model by providing higher
+*' harvesting costs. This is to mimic the difficulties in accessing primary and secondary
+*' forests.
 
 q73_cost_hvarea(i2)..
                     v73_cost_hvarea(i2)
@@ -24,8 +33,6 @@ q73_cost_hvarea(i2)..
                   + sum(ac_sub, v73_hvarea_other(j2, ac_sub))
                   + vm_hvarea_primforest(j2)) * (fm_harvest_cost_ha(i2) * 2))
                     ;
-
-
 
 *' The following equation describes cellular level production of woody biomass
 *' `vm_prod_reg` as the sum of the cluster level production of timber coming from

@@ -99,7 +99,7 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "BF35"
+identifier_flag <- "BF36"
 
 cat(paste0("Flag for secondary forest distributions. Poulter distribution by raster calculations. Ageclasses collapsed by half."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
@@ -124,7 +124,7 @@ for(s73_price_adjuster in c(0)){
 
           cfg$gms$s32_faustmann_rotation <- faustmann_switch
 
-          for (co2_price_path in c("NPI")) { ## Add "2deg" here for CO2 price runs
+          for (co2_price_path in c("NPI","2deg")) { ## Add "2deg" here for CO2 price runs
 
             if (co2_price_path == "NPI") {
               cfg <- setScenario(cfg,c(ssp,"NPI"))
@@ -132,6 +132,8 @@ for(s73_price_adjuster in c(0)){
             } else if (co2_price_path == "2deg"){
               cfg <- setScenario(cfg,c(ssp,"NDC"))
               co2_price_path_flag = "Policy"
+							cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+							cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
             } else if (co2_price_path == "Hotelling"){
               cfg <- setScenario(cfg,c(ssp,"NDC"))
               co2_price_path_flag = "PolicyH"
@@ -146,11 +148,11 @@ for(s73_price_adjuster in c(0)){
                 cfg$gms$s14_timber_plantation_yield <- plantation_switch
                 cfg$gms$s32_timber_plantation <- cfg$gms$s14_timber_plantation_yield
 
-                cfg$gms$c56_pollutant_prices <- "coupling"
-                cfg$gms$c60_2ndgen_biodem <- "coupling"
+#                cfg$gms$c56_pollutant_prices <- "coupling"
+#                cfg$gms$c60_2ndgen_biodem <- "coupling"
 
-                file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
-                file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
+#                file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
+#                file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
 
                 ### Create flags
 

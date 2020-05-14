@@ -9,7 +9,7 @@
 *' decisions in forestry [32_forestry] and natveg [35_natveg] modules and corresponding
 *' production of woody biomass realized.
 
-*' @limitations WIP
+*' @limitations Timber production not simulated in the model
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "declarations" $include "./modules/73_timber/off/declarations.gms"

@@ -137,29 +137,23 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 *------------------------------
 
 *' New plantations are already established in the optimization step based on a certain
-*' percentage ('pcm_production_ratio_future') of future demand (vm_prod_future_reg_ff)
-*' calculated in the trade module [21_trade] .This is based on the expected future
-*' yield ('pc32_yield_forestry_future') at harvest.
-$ontext
-q32_prod_future(i2) ..
-              sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
-              =g=
-              pc32_demand_forestry_future(i2,"wood") * pc32_selfsuff_forestry_future(i2,"wood") * pc32_production_ratio_future(i2)
-              ;
-$offtext
+*' percentage ('pc32_plant_prod_share_future') of future demand (pc32_demand_forestry_future)
+*' This is based on the expected future yield ('pc32_yield_forestry_future') at harvest.
+*' Global constraint is applied for meeting at leasr 1/3 of future wood demand with plantations.
+*' Cell specific allocation of plantations is based on max c density.
+*' But given that the rotation length is about 80 years, we don't really know the future trade patterns.
 
-*' Global constraint for meeting 1/3 of future wood demand with plantations.
-*' Cell specific allocation of plantations based on max c density.
-*' Given that the rotation length is about 80 years, we don't really know the future trade patterns.
 q32_establishment_glo ..
               sum(j2, v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
               =g=
               sum(i2, pc32_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2))
               ;
-*regional constraint for maintaining current forestry area patterns.
-* area harvested * ratio of future and present demand.
-* E.g. forestry area in EUR will not decline with this setup.
-* Cell specific allocation of plantations based on max c density via v32_cost_establishment
+
+*' Regional constraint for maintaining current forestry area patterns.
+*' Defined as area harvested * ratio of future and present demand (i.e., weighted).
+*' E.g. forestry area in EUR will not decline with this setup.
+*' Cell specific allocation of plantations based on max c density via v32_cost_establishment
+
 q32_establishment_reg(i2) ..
               sum(cell(i2,j2), v32_land(j2,"plant","ac0"))
               =g=
@@ -168,7 +162,6 @@ q32_establishment_reg(i2) ..
               (pc32_demand_forestry_future(i2,"wood")/sum(ct, pm_demand_ext_original(ct,i2,"wood")))$(sum(ct, pm_demand_ext_original(ct,i2,"wood"))>0)
               ;
 
-* * pc32_production_ratio_future(i2)
 **** Area harvested
 *------------------
 

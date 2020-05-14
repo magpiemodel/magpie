@@ -108,25 +108,10 @@ v32_land.fx(j,"ndc",ac_sub) = pc32_land(j,"ndc",ac_sub);
 v32_land.fx(j,"aff",ac_sub)$(ord(ac_sub) <= s32_planing_horizon/5) = pc32_land(j,"aff",ac_sub);
 v32_land.up(j,"aff",ac_sub)$(ord(ac_sub) > s32_planing_horizon/5) = pc32_land(j,"aff",ac_sub);
 
-** Setting ac dependent carbon.
-** First, plantations carbon density is set to natveg carbon density
-** Later the vegc carbon density is overwritten by vegc carbon density of plantations.
-*p32_carbon_density_ac(t,j,type32,ac,ag_pools)  = pm_carbon_density_ac(t,j,ac,ag_pools);
-
-** Plantation vegc is different
-*p32_carbon_density_ac(t,j,"plant",ac,"vegc")  = pm_carbon_density_ac_forestry(t,j,ac,"vegc");
-
-** Test by diviion with 2 to make even higher establishments now. The model sees half the yields it would normally see based on a goven rotation length.
-** This is just forcing the model to establish more plantations now so that it is prepared for the worst case scenario in future
-** when the model doesn't find enough resources to meet the production in future.
+** Calculate future yield based on rotation length
 pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac_sub,"forestry"));
 
-*p32_rotation_regional not needed as interface
 ** Future demand relevant in current time step depending on rotation length
-** Card is used here to exclude y1965 to y1995 when calculating rotation length calculations for past
-*p32_rotation_regional(t,i) = ord(t) + ceil((sum(cell(i,j),pcm_land(j,"forestry")*p32_rot_length_ac_eqivalent(t,j))/sum(cell(i,j),pcm_land(j,"forestry")))/5) + card(t_historical);
-* Instead using p32_representative_rotation which is calculated in preloop
-
 pc32_demand_forestry_future(i,kforestry)    = sum(t_ext$(t_ext.pos = p32_representative_rotation(t,i)),pm_demand_ext(t_ext,i,kforestry));
 pc32_plant_prod_share_future(i)    			    = sum(t_ext$(t_ext.pos = p32_representative_rotation(t,i)),p32_plant_prod_share(t_ext,i));
 pc32_selfsuff_forestry_future(i,kforestry)  = sum(t_ext$(t_ext.pos = p32_representative_rotation(t,i)),pm_selfsuff_ext(t_ext,i,kforestry));

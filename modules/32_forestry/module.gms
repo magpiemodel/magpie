@@ -13,7 +13,7 @@
 *' to the GHG policy module ([56_ghg_policy]) as well as afforestation related costs
 *' to the costs module ([11_costs]).
 *'
-*' @authors Florian Humpenöder
+*' @authors Florian Humpenöder, Abhijeet Mishra
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%forestry%" == "dynamic_may20" $include "./modules/32_forestry/dynamic_may20/realization.gms"
