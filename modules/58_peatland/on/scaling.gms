@@ -5,10 +5,5 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-v56_reward_cdr_aff.scale(j) = 10e4;
-vm_reward_cdr_aff.scale(i) = 10e5;
-v56_peatland_emis_cost.scale(j) = 10e4;
-vm_emission_costs.scale(i) = 10e5;
-v56_emission_costs_reg_yearly.scale(i,emis_reg_yr56) = 10e4;
-vm_peatland_emis_cost.scale(i) = 10e5;
-
+v58_expansion.scale(j,stat58) = 10e-3;
+v58_reduction.scale(j,stat58) = 10e-3;

@@ -29,7 +29,9 @@
                    + vm_processing_substitution_cost(i2)
                    + vm_costs_additional_mon(i2)
                    + sum(cell(i2,j2),vm_cost_land_transition(j2))
-                   ;
+                   + sum(cell(i2,j2), vm_peatland_cost(j2))
+                   + vm_peatland_emis_cost(i2)
+;
 
 *' The total regional production cost calculation is based on the sum of different
 *' MAgPIE production activities. These individual costs are calculated by various
@@ -50,3 +52,5 @@
 *' Processing costs ([20_processing]),
 *' Punish costs for overrate cropland differences ([59_som]).
 *' Small costs for land transitions ([10_land]).
+*' Peatland degradation and restoration costs ([58_peatland]).
+*' Peatland emission costs ([56_ghg_policy]).

@@ -27,6 +27,9 @@ resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
+#lock the model folder
+lock_id <- lucode::model_lock(timeout1=1)
+
 cfg$results_folder <- "output/:title:"
 
 cfg$output <- c("rds_report")
@@ -43,15 +46,19 @@ hr <- "c1000"
 cfg$input <- gsub("c200",hr,cfg$input)
 
 #max resources for parallel runs
-cfg$qos <- "priority_maxMem"
+cfg$qos <- "short_maxMem"
 #magpie4::submitCalibration("H12_c1000")
 #c1000 with endoTC
 
-#download and udpate input files
-download_and_update(cfg)
+input_old <- .get_info("input/info.txt", "^Used data set:", ": ")
+
+if(!setequal(cfg$input, input_old)) {
+  # download data and update code
+  download_and_update(cfg)
+}
 
 #set title
-cfg$title <- paste(cfg$title,"hr",sep="_")
+cfg$title <- paste0("hr_",cfg$title)
 
 #get trade pattern from low resolution run with c200
 ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
@@ -70,4 +77,6 @@ cfg$gms$optimization <- "nlp_par"
 
 #cfg$gms$c60_bioenergy_subsidy <- 0
 
-start_run(cfg,codeCheck=FALSE)
+start_run(cfg,codeCheck=FALSE,lock_model=FALSE)
+#unlock the model folder
+lucode::model_unlock(lock_id)
