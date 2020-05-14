@@ -48,12 +48,6 @@ cfg$gms$c43_watavail_scenario<- clima
 cfg$gms$c52_carbon_scenario  <- clima
 cfg$gms$c59_som_scenario  <- clima
 
-#New realizations
-cfg$gms$tc<-"endo_jun18_woa"
-cfg$gms$landconversion<-"global_static_aug18_woa"
-cfg$gms$area_equipped_for_irrigation<-"endo_apr13_woa"
-
-cfg$qos<-"medium"
 
 start_run(cfg=cfg)
 }}
