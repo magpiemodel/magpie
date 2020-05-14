@@ -67,7 +67,7 @@ cfg$gms$s35_secdf_distribution <- 0
 # * Carbon switch
 cfg$gms$c52_carbon_switch <- "default_lpjml"          # def = "default_lpjml"
 
-# ***---------------------    73_timber   -----------------------------------
+### TIMBER
 # * (biomass_mar20): WIP
 cfg$gms$timber <- "biomass_mar20"                  # def = biomass_mar20
 # Switch for timber demand
@@ -85,6 +85,11 @@ cfg$gms$s73_counter2 <- 0
 # Maximum iterations for demand adjustments
 cfg$gms$s73_maxiter2 <- 5
 
+### OPTIMIZATION
+# * 1: using optfile for specified solver settings
+# * 0: default settings (optfile will be ignored)
+cfg$gms$s80_optfile <- 1
+
 ###########################################################################
 
 cfg$results_folder <- "output/:title:"
@@ -94,7 +99,7 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "BF34"
+identifier_flag <- "BF35"
 
 cat(paste0("Flag for secondary forest distributions. Poulter distribution by raster calculations. Ageclasses collapsed by half."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
@@ -102,7 +107,7 @@ for(s73_price_adjuster in c(0)){
 
   cfg$gms$s73_price_adjuster <- s73_price_adjuster
 
-  for(secdf_distribution in c(0,1,2)){
+  for(secdf_distribution in c(0)){ 					## (0) for all in highest acx (1) for equal dist (2) for poulter dist
 
     cfg$gms$s35_secdf_distribution <- secdf_distribution
 

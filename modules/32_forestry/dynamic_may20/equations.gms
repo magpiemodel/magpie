@@ -148,9 +148,9 @@ q32_prod_future(i2) ..
               ;
 $offtext
 
-*global constraint for meeting 1/3 of future wood demand with plantations.
-* Cell specific allocation of plantations based on max c density.
-* Given that the rotation length is about 80 years, we don't really know the future trade patterns.
+*' Global constraint for meeting 1/3 of future wood demand with plantations.
+*' Cell specific allocation of plantations based on max c density.
+*' Given that the rotation length is about 80 years, we don't really know the future trade patterns.
 q32_establishment_glo ..
               sum(j2, v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
               =g=
