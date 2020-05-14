@@ -9,8 +9,8 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 clima<-"cc"
-resolutions<-c("400")
-realization<-c("sticky_feb18","sticky_feb18_regional")
+resolutions<-c("200")
+realization<-c("sticky_feb18","mixed_feb17")
 trade<-c("selfsuff_reduced")
 
 
