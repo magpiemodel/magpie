@@ -9,8 +9,8 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 clima<-"cc"
-resolutions<-c("200","400")
-realization<-c("mixed_feb17","sticky_feb18")
+resolutions<-c("400","200")
+realization<-c("sticky_feb18","mixed_feb17")
 trade<-c("selfsuff_reduced")
 
 
@@ -19,18 +19,13 @@ for(j in 1:length(realization)){
 for(k in 1:length(trade)){
 #Change the results folder name
 
-if (resolutions[i]==200 & realization=="mixed_feb17"){
-
-}else{
 cfg$title<-paste0("Develop_merge_",realization[j],"_c",resolutions[i],"_trade_",trade[k])
 
-
-cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c200_690d3718e151be1b450b394c1064b1c5.tgz"),
-        paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c",resolutions[i],"_690d3718e151be1b450b394c1064b1c5.tgz"),  
-			   "rev4.44_h12_magpie.tgz",
-			   "rev4.44_h12_validation.tgz",
-			   "calibration_H12_c200_26Feb20.tgz",
-			   "additional_data_rev3.79.tgz")
+cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_",resolutions[i],"_690d3718e151be1b450b394c1064b1c5.tgz"),
+               "rev4.44_h12_magpie.tgz",
+               "rev4.44_h12_validation.tgz",
+               paste0("calibration_H12_",resolutions[i],"_26Feb20.tgz"),
+               "additional_data_rev3.79.tgz")
 
 
 #recalibrate
@@ -56,4 +51,3 @@ cfg$gms$c59_som_scenario  <- clima
 
 start_run(cfg=cfg)}
 }}
-}
