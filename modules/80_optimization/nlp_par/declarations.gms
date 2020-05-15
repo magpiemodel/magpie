@@ -5,15 +5,9 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-sets
-        scen12 Interest rate scenarios
-                  / low, medium, high /
-
-        scen12_to_dev(scen12,dev) Mapping between interest scneario and economic development status
-      /        high        . (lic)
-               medium      . (mic)
-               low         . (hic) /
-
-        t_to_i_to_dev(t_all,i,dev) Mapping between time, region and economic development status
-
+parameters
+	p80_num_nonopt(t)		numNOpt indicator (1)
+	p80_modelstat(t,i)      modelstat indicator (1)
+	p80_counter(i)          counter (1)
+	p80_handle(i)			parallel mode handle parameter (1)
 ;

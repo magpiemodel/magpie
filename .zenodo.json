@@ -1,0 +1,80 @@
+{
+  "title": "MAgPIE - An Open Source land-use modeling framework",
+  "version": "4.2.1",
+  "creators": [
+    {
+      "name": "Dietrich, Jan Philipp",
+      "affiliation": "Potsdam Institute for Climate Impact Research",
+      "orcid": "0000-0002-4309-6431"
+    },
+    {
+      "name": "Bodirsky, Benjamin Leon",
+      "affiliation": "Potsdam Institute for Climate Impact Research"
+    },
+    {
+      "name": "Weindl, Isabelle",
+      "affiliation": "Potsdam Institute for Climate Impact Research"
+    },
+    {
+      "name": "Humpenöder, Florian",
+      "affiliation": "Potsdam Institute for Climate Impact Research"
+    },
+    {
+      "name": "Stevanovic, Miodrag",
+      "affiliation": "Potsdam Institute for Climate Impact Research"
+    },
+    {
+      "name": "Kreidenweis, Ulrich",
+      "affiliation": "Potsdam Institute for Climate Impact Research"
+    },
+    {
+      "name": "Wang, Xiaoxi",
+      "affiliation": "Potsdam Institute for Climate Impact Research"
+    },
+    {
+      "name": "Karstens, Kristine",
+      "affiliation": "Potsdam Institute for Climate Impact Research"
+    },
+    {
+      "name": "Mishra, Abhijeet",
+      "affiliation": "Potsdam Institute for Climate Impact Research"
+    },
+    {
+      "name": "Beier, Felicitas Dorothea",
+      "affiliation": "Potsdam Institute for Climate Impact Research"
+    },
+    {
+      "name": "Molina Bacca, Edna Johanna",
+      "affiliation": "Potsdam Institute for Climate Impact Research"
+    },
+    {
+      "name": "Klein, David",
+      "affiliation": "Potsdam Institute for Climate Impact Research"
+    },
+    {
+      "name": "Ambrósio, Geanderson",
+      "affiliation": "Potsdam Institute for Climate Impact Research"
+    },
+    {
+      "name": "Araujo, Ewerton",
+      "affiliation": "Potsdam Institute for Climate Impact Research"
+    },
+    {
+      "name": "Biewald, Anne",
+      "affiliation": "Potsdam Institute for Climate Impact Research"
+    },
+    {
+      "name": "Lotze-Campen, Hermann",
+      "affiliation": "Potsdam Institute for Climate Impact Research"
+    },
+    {
+      "name": "Popp, Alexander",
+      "affiliation": "Potsdam Institute for Climate Impact Research"
+    }
+  ],
+  "keywords": ["landuse", "modeling", "nlp", "partial equilibrium"],
+  "license": {
+    "id": "AGPL-3.0-or-later"
+  },
+  "publication_date": "2020-05-15"
+}

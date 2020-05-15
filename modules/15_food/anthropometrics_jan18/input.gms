@@ -7,6 +7,7 @@
 
 
 $setglobal c15_food_scenario  SSP2
+$setglobal c15_food_scenario_noselect  SSP2
 *   options:   SSP: "SSP1", "SSP2", "SSP3", "SSP4", "SSP5"
 *             SRES: "A1", "A2", "B1", "B2"
 *            OTHER: "SSP1_boundary", "SSP2_boundary", "SSP3_boundary", "SSP4_boundary", "SSP5_boundary"
@@ -36,6 +37,37 @@ $setglobal c15_kcal_scen  healthy_BMI
 
 $setglobal c15_EAT_scen  FLX
 *   options:   BMK, FLX, PSC, VEG, VGN, FLX_hmilk, FLX_hredmeat
+
+
+* Set-switch for countries affected by country-specific exogenous diet scenario
+* Default: all iso countries selected
+sets
+  scen_countries15(iso) countries to be affected by selected food sceanrio / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
+                          ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
+                          BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
+                          BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,
+                          CCK,CHN,CHE,CHL,CIV,CMR,COD,COG,COK,COL,
+                          COM,CPV,CRI,CUB,CUW,CXR,CYM,CYP,CZE,DEU,
+                          DJI,DMA,DNK,DOM,DZA,ECU,EGY,ERI,ESH,ESP,
+                          EST,ETH,FIN,FJI,FLK,FRA,FRO,FSM,GAB,GBR,
+                          GEO,GGY,GHA,GIB,GIN,GLP,GMB,GNB,GNQ,GRC,
+                          GRD,GRL,GTM,GUF,GUM,GUY,HKG,HMD,HND,HRV,
+                          HTI,HUN,IDN,IMN,IND,IOT,IRL,IRN,IRQ,ISL,
+                          ISR,ITA,JAM,JEY,JOR,JPN,KAZ,KEN,KGZ,KHM,
+                          KIR,KNA,KOR,KWT,LAO,LBN,LBR,LBY,LCA,LIE,
+                          LKA,LSO,LTU,LUX,LVA,MAC,MAF,MAR,MCO,MDA,
+                          MDG,MDV,MEX,MHL,MKD,MLI,MLT,MMR,MNE,MNG,
+                          MNP,MOZ,MRT,MSR,MTQ,MUS,MWI,MYS,MYT,NAM,
+                          NCL,NER,NFK,NGA,NIC,NIU,NLD,NOR,NPL,NRU,
+                          NZL,OMN,PAK,PAN,PCN,PER,PHL,PLW,PNG,POL,
+                          PRI,PRK,PRT,PRY,PSE,PYF,QAT,REU,ROU,RUS,
+                          RWA,SAU,SDN,SEN,SGP,SGS,SHN,SJM,SLB,SLE,
+                          SLV,SMR,SOM,SPM,SRB,SSD,STP,SUR,SVK,SVN,
+                          SWE,SWZ,SXM,SYC,SYR,TCA,TCD,TGO,THA,TJK,
+                          TKL,TKM,TLS,TON,TTO,TUN,TUR,TUV,TWN,TZA,
+                          UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
+                          VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
+;
 
 
 scalar s15_elastic_demand  Elastic demand switch (1=elastic 0=exogenous) (1) / 1 /;

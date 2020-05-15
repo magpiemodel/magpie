@@ -107,7 +107,7 @@ $title magpie
 *'  * ?m_ module-relevant object - This object is used by at least one module and the core code. Changes related to this object have to be performed carefully.
 *'  * ?00_ (a 2-digit number) module-only object This 2-digit number defines the module the object belongs to. The number is used here to make sure that different modules cannot have the same object
 *'
-*' Sets 
+*' Sets
 *'
 *' Sets are treated slightly different: Instead of adding a prefix sets should get a 2-digit number suffix giving the number
 *' of the module in which the set is exclusively used. If the set is used in more than one module no suffix should be given.
@@ -131,14 +131,14 @@ $title magpie
 *'  * Use units that lead to variable values in the range of 0.01 to 100. Keep the option of scaling in mind.
 *'  * Use only MAgPIE standard units in GAMS code 10^6, 10^6 ha, 10^6 tDM, 10^6 PJ, 10^6 USD, 10^6 m3
 *'  * Make sure that your inputs already have the right unit
-*' 
+*'
 *' Input files
-*' 
+*'
 *'  * Input file names must be unique, because input files will be downloaded from a data repository and extracted to the same folder so that different files with the same file name would overwrite each other.
 *'  * Do not add input files to the git repository. Input files should be copied instead to one of the existing data repositories from which the data is downloaded by the model.
-*' 
+*'
 *' Postprocessing
-*' 
+*'
 *'  * Processing of model outputs is managed in the corresponding magpie R package (e.g. package "magpie4" for MAgPIE version 4.x).
 *'  * If you change something in the GAMS code make sure that all function in the corresponding magpie R package still work and adapt them if necessary to the new model structure.
 *'  * When performing modifications in a magpie R package make sure that these changes are downwards compatible.
@@ -146,9 +146,25 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: magpie4.2_default_apr20.tgz
+* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* 
+* Used data set: rev4.44_h12_magpie.tgz
+* md5sum: bd75703d24e35a373e75810f626e2b10
+* Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/input_data/
+* 
+* Used data set: rev4.44_h12_validation.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* 
+* Used data set: calibration_H12_c200_26Feb20.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
+* 
+* Used data set: additional_data_rev3.79.tgz
+* md5sum: 44bb42368f41602ada44395aab201c62
+* Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/input_data/
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -161,19 +177,19 @@ $title magpie
 * 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
-* Regions data revision: 4.42
+* Regions data revision: 4.44
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
-* * Additional input folder: /p/projects/landuse/data/input/other/rev42
-* * Revision: 42
+* * Additional input folder: /p/projects/landuse/data/input/other/rev44
+* * Revision: 44
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
 * 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
-* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
@@ -181,7 +197,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Wed Apr  8 18:14:05 2020
+* Last modification (input data): Thu Apr 23 22:42:06 2020
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -219,7 +235,7 @@ scalars
 $setglobal drivers  aug17
 $setglobal land  landmatrix_dec18
 $setglobal costs  default
-$setglobal interest_rate  reg_feb18
+$setglobal interest_rate  select_apr20
 $setglobal tc  endo_jun18
 $setglobal yields  dynamic_aug18
 
@@ -255,6 +271,7 @@ $setglobal phosphorus  off
 $setglobal awms  ipcc2006_aug16
 $setglobal ghg_policy  price_jan20
 $setglobal maccs  on_sep16
+$setglobal peatland  off
 $setglobal som  static_jan19
 
 $setglobal bioenergy  1stgen_priced_dec18
