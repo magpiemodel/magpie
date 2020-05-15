@@ -18,6 +18,10 @@ for (i in 1:length(resolutions)){
 for(j in 1:length(realization)){
 for(k in 1:length(trade)){
 #Change the results folder name
+
+if (resolutions[i]==200 & realization=="mixed_feb17"){
+
+}else{
 cfg$title<-paste0("Develop_merge_",realization[j],"_c",resolutions[i],"_trade_",trade[k])
 
 
@@ -49,6 +53,6 @@ cfg$gms$c43_watavail_scenario<- clima
 cfg$gms$c52_carbon_scenario  <- clima
 cfg$gms$c59_som_scenario  <- clima
 
-start_run(cfg=cfg)
+start_run(cfg=cfg)}
 }}
 }
