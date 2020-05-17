@@ -102,11 +102,11 @@ parameters
 
   i15_milk_share_fadeout_india(t_all)              Temporal fader of milk share in india (applied before food demand model) (1)
   i15_rum_share_fadeout(t_all,iso)                 Temporal fader of ruminant meat share (applied before food demand model) (1)
-  i15_ruminant_fadeout(t_all,i)                    Ruminant fadeout share (1)
-  i15_fish_fadeout(t_all,i)                        Fish fadeout share (1)
-  i15_alcohol_fadeout(t_all,i)                     Alcohol fadeout share (1)
-  i15_livestock_fadeout(t_all,i)                   Livestock fadeout share (1)
-  i15_rumdairy_fadeout(t_all,i)                    Ruminant meat and dairy fadeout share (1)
+  i15_ruminant_fadeout(t,i)                        Ruminant fadeout share (1)
+  i15_fish_fadeout(t,i)                            Fish fadeout share (1)
+  i15_alcohol_fadeout(t,i)                         Alcohol fadeout share (1)
+  i15_livestock_fadeout(t,i)                       Livestock fadeout share (1)
+  i15_rumdairy_fadeout(t,i)                        Ruminant meat and dairy fadeout share (1)
 
  i15_staples_kcal_structure_iso(t,iso,kfo_st)        Share of single staple products within total staples (1)
  i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap)  Share of single livestock products within total livestock products (uncorrected for future changes in shares) (1)

@@ -89,19 +89,19 @@ p15_country_dummy(scen_countries15) = 1;
 p15_foodscen_region_shr(t_all,i) = sum(i_to_iso(i,iso), p15_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
 
 
+
 * The target year for transition to exogenous scenario diets defines the speed
 * of fading from regression based daily food consumption towards the scenario.
 * Note: p15_foodscen_region_shr(t,i) is 1 in the default case)
 i15_exo_foodscen_fader(t,i) = f15_exo_foodscen_fader(t,"%c15_exo_scen_targetyear%") * p15_foodscen_region_shr(t,i);
 
 
+
 * Food substitution scenarios including functional forms, targets and transition periods
 * Note: p15_foodscen_region_shr(t,i) is 1 in the default case)
-i15_ruminant_fadeout(t,i) = f15_food_substitution_fader(t,"%c15_rumscen%") * p15_foodscen_region_shr(t,i);
-i15_fish_fadeout(t,i) = f15_food_substitution_fader(t,"%c15_fishscen%") * p15_foodscen_region_shr(t,i);
-i15_alcohol_fadeout(t,i) = f15_food_substitution_fader(t,"%c15_alcscen%") * p15_foodscen_region_shr(t,i);
-i15_livestock_fadeout(t,i) = f15_food_substitution_fader(t,"%c15_livescen%") * p15_foodscen_region_shr(t,i);
-i15_rumdairy_fadeout(t,i) = f15_food_substitution_fader(t,"%c15_rumdairyscen%") * p15_foodscen_region_shr(t,i);
-
-
+i15_ruminant_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_rumscen%"));
+i15_fish_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_fishscen%"));
+i15_alcohol_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_alcscen%"));
+i15_livestock_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_livescen%"));
+i15_rumdairy_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_rumdairyscen%"));
 
