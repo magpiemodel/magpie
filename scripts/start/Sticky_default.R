@@ -21,10 +21,9 @@ for(k in 1:length(trade)){
 
 cfg$title<-paste0("Develop_merge_",realization[j],"_c",resolutions[i],"_trade_",trade[k])
 
-cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_",resolutions[i],"_690d3718e151be1b450b394c1064b1c5.tgz"),
+cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_",resolutions[i],"_690d3718e151be1b450b394c1064b1c5.tgz"),
                "rev4.44_h12_magpie.tgz",
                "rev4.44_h12_validation.tgz",
-               paste0("calibration_H12_",resolutions[i],"_26Feb20.tgz"),
                "additional_data_rev3.79.tgz")
 
 
