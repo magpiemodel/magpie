@@ -9,7 +9,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 clima<-"cc"
-resolutions<-c("400","200")
+resolutions<-c("400")
 realization<-c("sticky_feb18","mixed_feb17")
 trade<-c("selfsuff_reduced")
 
@@ -21,11 +21,10 @@ for(k in 1:length(trade)){
 
 cfg$title<-paste0("Develop_merge_",realization[j],"_c",resolutions[i],"_trade_",trade[k])
 
-cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c200_690d3718e151be1b450b394c1064b1c5.tgz",
-             paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_",resolutions[i],"_690d3718e151be1b450b394c1064b1c5.tgz"),
-               "rev4.44_h12_magpie.tgz",
-               "rev4.44_h12_validation.tgz",
-               "additional_data_rev3.79.tgz")
+cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c",resolutions[i],"_690d3718e151be1b450b394c1064b1c5.tgz"),
+               "rev4.42_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
+               "rev4.42_690d3718e151be1b450b394c1064b1c5_validation.tgz",
+               "additional_data_rev3.78.tgz")
 
 
 #recalibrate
