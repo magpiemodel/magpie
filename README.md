@@ -1,6 +1,6 @@
 # MAgPIE - Modular open source framework for modeling global land-systems
 
-  <https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpie>
+[![DOI](https://zenodo.org/badge/135430060.svg)](https://zenodo.org/badge/latestdoi/135430060)
 
 ## WHAT IS MAGPIE?
 The *Model of Agricultural Production and its Impact on the Environment* (MAgPIE)
@@ -16,6 +16,8 @@ regional food and bioenergy demand. Regional food energy demand is defined for a
 exogenously given population in 10 food energy categories, based on regional diets.
 Future trends in food demand are derived from a cross-country regression analysis,
 based on future scenarios on GDP and population growth.
+
+https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpie
 
 ## DOCUMENTATION
 A framework description paper has been published in
@@ -192,10 +194,7 @@ magpie@pik-potsdam.de
 Please contact magpie@pik-potsdam.de
 
 ## CITATION
-See file CITATION.cff or the documentation of the model for information how
-to cite the model.
-
-[![DOI](https://zenodo.org/badge/135430060.svg)](https://zenodo.org/badge/latestdoi/135430060)
+See file CITATION.cff or the [How-to-Cite section](https://rse.pik-potsdam.de/doc/magpie/4.2.1/#howtocite) in the model documentation for information how to cite the model.
 
 ## AUTHORS
 See list of authors in CITATION.cff
