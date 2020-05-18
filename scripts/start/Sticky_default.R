@@ -1,6 +1,12 @@
 ######################################################################################
 #### Script to start a MAgPIE run using different factor_costs realizations ####
 ######################################################################################
+library(lucode)
+library(magclass)
+library(gdx)
+library(magpie4)
+library(mrcommons)
+
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
