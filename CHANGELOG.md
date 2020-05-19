@@ -5,8 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-
 ## [Unreleased]
+
+### added
+
+### changed
+
+### fixed
+
+## [4.2.1] - 2020-05-15
 
 ### added
  - **modules** added option of regional scenario switches in modules 12_interest_rate, 15_food, 42_water_demand, 50_nr_soil_budget, 55_awms, 56_ghg_policy, 60_bioenergy
@@ -115,7 +122,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.2.0...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.2.1...develop
+[4.2.1]: https://github.com/magpiemodel/magpie/compare/v4.2.0...v4.2.1
 [4.2.0]: https://github.com/magpiemodel/magpie/compare/v4.1.1...v4.2.0
 [4.1.1]: https://github.com/magpiemodel/magpie/compare/v4.1.0...v4.1.1
 [4.1.0]: https://github.com/magpiemodel/magpie/compare/v4.0.1...v4.1.0
