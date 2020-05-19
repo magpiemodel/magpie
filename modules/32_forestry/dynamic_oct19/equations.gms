@@ -21,7 +21,7 @@ vm_cost_fore(i2) =e= sum((cell(i2,j2),type32,ac,fcosts32),
 
 *****C-PRICE INDUCED AFFORESTATION
 *****forestry emissions seen in 56_ghg_policy module************************************
-*' The interface `vm_cdr_aff` provides the projected CDR of an afforestation
+*' The interface `vm_cdr_aff` provides the projected bgc (CDR) and local bph effects of an afforestation
 *' activity for a given planning horizon `s32_planing_horizon` to the [56_ghg_policy] module.
 
 q32_cdr_aff(j2,ac) ..

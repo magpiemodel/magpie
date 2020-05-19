@@ -31,7 +31,7 @@ positive variables
 ;
 
 variables
-vm_cdr_aff(j,ac,aff_effect) 						 Expected CDR from afforestation depending on planning horizon (mio. tC)
+vm_cdr_aff(j,ac,aff_effect) 						 Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
 ;
 
 equations
@@ -56,7 +56,7 @@ parameters
  ov_landdiff_forestry(t,type)            Aggregated difference in forestry land compared to previous timestep (mio. ha)
  ov32_land_expansion(t,j,type32,ac,type) Forestry land expansion compared to previous timestep (mio. ha)
  ov32_land_reduction(t,j,type32,ac,type) Forestry land reduction compared to previous timestep (mio. ha)
- ov_cdr_aff(t,j,ac,aff_effect,type)                 Expected CDR from afforestation depending on planning horizon (mio. tC)
+ ov_cdr_aff(t,j,ac,aff_effect,type)      Expected CDR from afforestation depending on planning horizon (mio. tC)
  oq32_cost_fore_ac(t,i,type)             Total forestry costs constraint (mio. USD04MER)
  oq32_land(t,j,type)                     Land constraint (mio. ha)
  oq32_cdr_aff(t,j,ac,type)               Calculation of CDR from afforestation in terms of CO2-C (mio. tC)
@@ -67,6 +67,6 @@ parameters
  oq32_max_aff(t,type)                    Maximum total global afforestation (mio. ha)
  oq32_aff_pol(t,j,type)                  Afforestation policy constraint (mio. ha)
  oq32_aff_ac0(t,j,type)                  Afforestation constraint for ac0 (mio. ha)
- oq32_bgp_aff(t,j,ac,type)               Afforestation biophysical effect calculation (mio. ha)
+ oq32_bgp_aff(t,j,ac,type)               Biophysical afforestation calculation (mio. tCeq)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

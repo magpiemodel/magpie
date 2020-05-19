@@ -97,7 +97,8 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
 
 *' The value of CDR from C-price induced afforestation enters the objective function as negative costs.
 *' The reward, which serves as incentive for afforestation, is calculated in 3 steps:
-*' First, the expected CDR for each 5-year age-class and the corresponding future C price are multiplied.
+*' First, the sum of the expected CDR for each 5-year age-class and the carbon equivalent of local biophysical effects
+*' are multiplied by the corresponding future C price.
 *' Second, these future cash flows are discounted to present value.
 *' Third, an annuity factor (annuity due with infinite time horizon) is used to obtain average annual rewards
 
