@@ -22,7 +22,7 @@ buildInputVector <- function(regionmapping   = "agmip",
                              co2             = "co2", # co2 fertilization????
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "c200",
-                             archive_rev     = "34",
+                             archive_rev     = "44",
                              madrat_rev      = "4.47",
                              validation_rev  = "4.47",
                              calibration     = "calibration_agmip_c200_19Dec18.tgz",
@@ -30,7 +30,7 @@ buildInputVector <- function(regionmapping   = "agmip",
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
                 mag="c30c1c580039c2b300d86cc46ff4036a",
-                inms="69c65bb3c88e8033cf8df6b5ac5d52a9",
+                inms="d9303655de75494941cc82740bcd1ae4",
                 inms2="ef2ae7cd6110d5d142a9f8bd7d5a68f2",
                 agmip="c77f075908c3bc29bdbe1976165eccaf")
   archive_name=paste(project_name,climate_model,climatescen_name,co2,sep="-")
