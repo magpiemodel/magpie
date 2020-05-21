@@ -83,7 +83,7 @@ cfg$gms$s73_price_elasticity <- -0.5
 # Counter for iterations of demand adjustment
 cfg$gms$s73_counter2 <- 0
 # Maximum iterations for demand adjustments
-cfg$gms$s73_maxiter2 <- 5
+cfg$gms$s73_maxiter2 <- 1
 
 ### OPTIMIZATION
 # * 1: using optfile for specified solver settings
@@ -99,7 +99,7 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "FH44"
+identifier_flag <- "FH45"
 
 cat(paste0("Flag for secondary forest distributions. Poulter distribution by raster calculations. Ageclasses collapsed by half."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
