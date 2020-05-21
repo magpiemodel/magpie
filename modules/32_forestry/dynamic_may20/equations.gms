@@ -103,16 +103,14 @@ $offtext
 
 q32_cost_establishment(i2)..
 						v32_cost_establishment(i2)
-						=n=
-            (sum((cell(i2,j2),type32), v32_land(j2,type32,"ac0") * s32_reESTBcost)
-            + sum(cell(i2,j2), v32_land(j2,"aff","ac0") * s32_reESTBcost)
-            +
-              (
-             sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2)) * s32_harvesting_cost)
+						=g=
+            sum(cell(i2,j2), v32_land(j2,"plant","ac0") * s32_reESTBcost)
+*            + sum(cell(i2,j2), v32_land(j2,"aff","ac0") * s32_reESTBcost)
+*            +(sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2)) * s32_harvesting_cost)
 *              +sum(cell(i2,j2), fm_distance(j2) * fm_transport_costs("wood") * v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
 *              +
 *              sum(ct,vm_cost_trade_forestry_ff(i2))
-              )/((1+pm_interest(i2))**sum(ct,(p32_representative_rotation(ct,i2))))
+*              )/((1+pm_interest(i2))**sum(ct,(p32_representative_rotation(ct,i2))))
 **************************** ((1+pm_interest(i2))**p32_rot_length(ct,i2)) to calculate present value of future costs
 *              )
             * (pm_interest(i2)/(1+pm_interest(i2)))
@@ -143,10 +141,10 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 *' Cell specific allocation of plantations is based on max c density.
 *' But given that the rotation length is about 80 years, we don't really know the future trade patterns.
 
-q32_establishment_glo ..
-              sum(j2, v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
-              =n=
-              sum(i2, pc32_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2))
+q32_establishment_prod(i2) ..
+              sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
+              =g=
+              pc32_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2)
               ;
 
 *' Regional constraint for maintaining current forestry area patterns.
@@ -154,11 +152,11 @@ q32_establishment_glo ..
 *' E.g. forestry area in EUR will not decline with this setup.
 *' Cell specific allocation of plantations based on max c density via v32_cost_establishment
 
-q32_establishment_reg(i2) ..
+q32_establishment_area(i2) ..
               sum(cell(i2,j2), v32_land(j2,"plant","ac0"))
               =g=
-              sum((cell(i2,j2),ac_sub), vm_hvarea_forestry(j2,ac_sub))*2*
-*							sum(ct, p32_hv_area_current(ct,i2)) *
+*              sum((cell(i2,j2),ac_sub), vm_hvarea_forestry(j2,ac_sub))*
+							sum(ct, p32_hv_area_current(ct,i2)) *
               (pc32_demand_forestry_future(i2,"wood")/sum(ct, pm_demand_ext_original(ct,i2,"wood")))$(sum(ct, pm_demand_ext_original(ct,i2,"wood"))>0)
               ;
 

@@ -100,6 +100,12 @@ v32_land.fx(j,"plant",ac_sub)$protect32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub
 ** Set upper bound for plantations after rotation length
 v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
 
+** Force harvesting --- Harvest all available area in harvest set
+** First fix it to 0 then fix it to pc32_land in cases where  harvest is ready
+** at the end of the rotation.
+*vm_hvarea_forestry.fx(j,ac_sub) = 0;
+*vm_hvarea_forestry.lo(j,ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
+
 ** Harvest as soon as you jump out of protection
 *v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = 0;
 m_boundfix(v32_land,(j,"plant",ac_sub),l,10e-5);

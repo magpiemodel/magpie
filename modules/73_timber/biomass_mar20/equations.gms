@@ -28,10 +28,10 @@ q73_cost_hvarea(i2)..
                     v73_cost_hvarea(i2)
                     =e=
                     sum(cell(i2,j2),
-                    sum(ac_sub, vm_hvarea_forestry(j2,ac_sub)) * 0
+                    sum(ac_sub, vm_hvarea_forestry(j2,ac_sub)) * 200
                   + (sum(ac_sub, vm_hvarea_secdforest(j2,ac_sub))
                   + sum(ac_sub, v73_hvarea_other(j2, ac_sub))
-                  + vm_hvarea_primforest(j2)) * (fm_harvest_cost_ha(i2) * 2))
+                  + vm_hvarea_primforest(j2)) * (200 * 5))
                     ;
 
 *' The following equation describes cellular level production of woody biomass
