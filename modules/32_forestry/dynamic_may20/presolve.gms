@@ -5,11 +5,13 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+s32_yeardiff = m_yeardiff_forestry(t);
+
 ** Declare new set to distribute newly established plantations evenly for longer
 ** than 5 year time steps. We then overwrite this with yes for ac_additional
 ** elements which are lower than difference between years.
 ac_additional(ac) = no;
-ac_additional(ac) = yes$(ord(ac) <= (m_yeardiff(t)/5));
+ac_additional(ac) = yes$(ord(ac) <= (s32_yeardiff/5));
 
 ** Start ndc **
 * Limit demand for prescribed NPI/NDC afforestation in `p32_aff_pol` if not enough suitable area (`p32_aff_pot`) for afforestation is available.
