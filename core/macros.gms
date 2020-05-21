@@ -39,6 +39,10 @@ $macro m_year(t) (sum(time_annual,ord(time_annual)$sameas(t,time_annual)) + 1964
 * sets the difference for the first time step to one.
 $macro m_yeardiff(t) (1$(ord(t)=1) + (m_year(t)-m_year(t-1))$(ord(t)>1))
 
+* calculates the difference in years to the previous time step and
+* sets the difference for the first time step to one.
+$macro m_yeardiff_forestry(t) (5$(ord(t)=1) + (m_year(t)-m_year(t-1))$(ord(t)>1))
+
 * same as m_yeardiff but only for the current time step and written in a way
 * that it can be used within equations (no t dependency)
 * ATTENTION: t2 needs to exist as alias of t to get this macro working!
