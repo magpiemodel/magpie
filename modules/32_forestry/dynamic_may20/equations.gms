@@ -103,7 +103,7 @@ $offtext
 
 q32_cost_establishment(i2)..
 						v32_cost_establishment(i2)
-						=e=
+						=n=
             (sum((cell(i2,j2),type32), v32_land(j2,type32,"ac0") * s32_reESTBcost)
             + sum(cell(i2,j2), v32_land(j2,"aff","ac0") * s32_reESTBcost)
             +
@@ -126,7 +126,7 @@ q32_cost_establishment(i2)..
 *' trees established for afforestation purposes.
 
 q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
-                    sum((cell(i2,j2),type32,ac), v32_land(j2,type32,ac)) * f32_fac_req_ha(i2,"recur");
+                    sum((cell(i2,j2),type32,ac_sub), v32_land(j2,type32,ac_sub)) * f32_fac_req_ha(i2,"recur");
 
 
 *' Harvesting costs are calculated based on area removed for timber production purposes.
@@ -145,7 +145,7 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 
 q32_establishment_glo ..
               sum(j2, v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
-              =g=
+              =n=
               sum(i2, pc32_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2))
               ;
 
@@ -157,7 +157,7 @@ q32_establishment_glo ..
 q32_establishment_reg(i2) ..
               sum(cell(i2,j2), v32_land(j2,"plant","ac0"))
               =g=
-              sum((cell(i2,j2),ac_sub), vm_hvarea_forestry(j2,ac_sub))*
+              sum((cell(i2,j2),ac_sub), vm_hvarea_forestry(j2,ac_sub))*2*
 *							sum(ct, p32_hv_area_current(ct,i2)) *
               (pc32_demand_forestry_future(i2,"wood")/sum(ct, pm_demand_ext_original(ct,i2,"wood")))$(sum(ct, pm_demand_ext_original(ct,i2,"wood"))>0)
               ;
