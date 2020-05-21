@@ -103,8 +103,8 @@ v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub
 ** Force harvesting --- Harvest all available area in harvest set
 ** First fix it to 0 then fix it to pc32_land in cases where  harvest is ready
 ** at the end of the rotation.
-vm_hvarea_forestry.fx(j,ac_sub,"plant") = 0;
-vm_hvarea_forestry.fx(j,ac_sub,"plant")$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
+vm_hvarea_forestry.fx(j,ac_sub) = 0;
+vm_hvarea_forestry.fx(j,ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
 
 ** Harvest as soon as you jump out of protection
 *v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = 0;
