@@ -141,10 +141,10 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 *' Cell specific allocation of plantations is based on max c density.
 *' But given that the rotation length is about 80 years, we don't really know the future trade patterns.
 
-q32_establishment_prod(i2) ..
-              sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
+q32_establishment_prod ..
+              sum(j2, v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
               =g=
-              pc32_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2)
+              sum(i2, pc32_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2))
               ;
 
 *' Regional constraint for maintaining current forestry area patterns.
