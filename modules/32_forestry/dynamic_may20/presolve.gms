@@ -66,6 +66,9 @@ p32_carbon_density_ac(t,j,"ndc",ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_po
 p32_cdr_ac(t,j,ac)$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planing_horizon/5)
 = p32_carbon_density_ac(t,j,"aff",ac,"vegc") - p32_carbon_density_ac(t,j,"aff",ac-1,"vegc");
 
+p32_cdr_ac_plant(t,j,ac_sub)$(ord(ac_sub) > 1 AND protect32(t,j,ac_sub))
+= p32_carbon_density_ac(t,j,"plant",ac_sub,"vegc") - p32_carbon_density_ac(t,j,"plant",ac_sub-1,"vegc");
+
 *' Regrowth of natural vegetation (natural succession) is modelled by shifting
 *' age-classes according to time step length. For first year of simulation, the
 *' shift is just 1.
