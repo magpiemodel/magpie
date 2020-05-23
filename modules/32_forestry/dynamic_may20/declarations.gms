@@ -57,8 +57,12 @@ parameters
  p32_representative_rotation(t_all,i)               representative regional rotation (1)
 ;
 
-positive variables
+variables
  vm_cost_fore(i)                                    Forestry costs (Mio USD)
+;
+
+positive variables
+ v32_reward_plant(i)                                Forestry costs (Mio USD)
  v32_land(j,type32,ac)                              Forestry land pools (mio. ha)
  vm_landdiff_forestry                               Aggregated difference in forestry land compared to previous timestep (mio. ha)
  vm_cdr_aff(j,ac)                                   Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
@@ -70,6 +74,7 @@ positive variables
  ;
 
 equations
+ q32_reward_plant(i)							reward plant establishment
  q32_cost_total(i)                                total forestry costs constraint (mio. USD)
  q32_land(j)                                      land constraint (mio. ha)
  q32_cdr_aff(j,ac)                                   calculation of CDR from afforestation
@@ -91,6 +96,7 @@ equations
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_cost_fore(t,i,type)                          Forestry costs (Mio USD)
+ ov32_reward_plant(t,i,type)                     Forestry costs (Mio USD)
  ov32_land(t,j,type32,ac,type)                   Forestry land pools (mio. ha)
  ov_landdiff_forestry(t,type)                    Aggregated difference in forestry land compared to previous timestep (mio. ha)
  ov_cdr_aff(t,j,ac,type)                         Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
@@ -99,6 +105,7 @@ parameters
  ov32_land_expansion(t,j,type32,ac,type)         Land expansion (mio. ha)
  ov32_land_reduction(t,j,type32,ac,type)         land reduction (mio. ha)
  ov32_cost_establishment(t,i,type)               Cost of establishment calculated at the current time step (mio. USD)
+ oq32_reward_plant(t,i,type)                     reward plant establishment
  oq32_cost_total(t,i,type)                       total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                             land constraint (mio. ha)
  oq32_cdr_aff(t,j,ac,type)                       calculation of CDR from afforestation

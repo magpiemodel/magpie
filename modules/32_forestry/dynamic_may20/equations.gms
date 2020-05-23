@@ -21,6 +21,7 @@
 q32_cost_total(i2) .. vm_cost_fore(i2) =e=
 								   v32_cost_recur(i2)
 								   + v32_cost_establishment(i2)
+								   - v32_reward_plant(i2)
 								   ;
 
 *****C-PRICE INDUCED AFFORESTATION
@@ -103,14 +104,14 @@ $offtext
 
 q32_cost_establishment(i2)..
 						v32_cost_establishment(i2)
-						=g=
-            sum(cell(i2,j2), v32_land(j2,"plant","ac0") * s32_reESTBcost)
-*            + sum(cell(i2,j2), v32_land(j2,"aff","ac0") * s32_reESTBcost)
-*            +(sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2)) * s32_harvesting_cost)
+						=e=
+            sum((cell(i2,j2),type32), v32_land(j2,type32,"ac0") * s32_reESTBcost)
+            +(sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2) * s32_harvesting_cost)
+*add recurring costs discounted in each time step
 *              +sum(cell(i2,j2), fm_distance(j2) * fm_transport_costs("wood") * v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
 *              +
 *              sum(ct,vm_cost_trade_forestry_ff(i2))
-*              )/((1+pm_interest(i2))**sum(ct,(p32_representative_rotation(ct,i2))))
+              )/((1+pm_interest(i2))**sum(ct,(p32_representative_rotation(ct,i2))))
 **************************** ((1+pm_interest(i2))**p32_rot_length(ct,i2)) to calculate present value of future costs
 *              )
             * (pm_interest(i2)/(1+pm_interest(i2)))
@@ -125,6 +126,11 @@ q32_cost_establishment(i2)..
 
 q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
                     sum((cell(i2,j2),type32,ac_sub), v32_land(j2,type32,ac_sub)) * f32_fac_req_ha(i2,"recur");
+
+
+q32_reward_plant(i2) ..	v32_reward_plant(i2)
+						=e=
+            sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2)) * 6000;
 
 
 *' Harvesting costs are calculated based on area removed for timber production purposes.
@@ -155,8 +161,8 @@ q32_establishment_prod ..
 q32_establishment_area(i2) ..
               sum(cell(i2,j2), v32_land(j2,"plant","ac0"))
               =g=
-*              sum((cell(i2,j2),ac_sub), vm_hvarea_forestry(j2,ac_sub))*
-							sum(ct, p32_hv_area_current(ct,i2)) *
+              sum((cell(i2,j2),ac_sub), vm_hvarea_forestry(j2,ac_sub))*
+*							sum(ct, p32_hv_area_current(ct,i2)) *
               (pc32_demand_forestry_future(i2,"wood")/sum(ct, pm_demand_ext_original(ct,i2,"wood")))$(sum(ct, pm_demand_ext_original(ct,i2,"wood"))>0)
               ;
 
