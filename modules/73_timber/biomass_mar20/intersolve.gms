@@ -9,7 +9,7 @@ s73_counter = 0;
 
 if(ord(t)>1,
 
-while(floor(smax((i,kforestry), sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry)))) > 0 AND s73_counter <= s73_maxiter,
+while(floor(smax((i,kforestry), sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry)))) > 0 AND s73_counter < s73_maxiter,
 
 **** Update prices in intersolve -- will fail codecheck
 *    pm_prices_woodymass(t,i,kforestry) = q16_supply_forestry.m(i,kforestry);

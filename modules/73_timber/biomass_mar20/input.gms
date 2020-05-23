@@ -9,10 +9,10 @@ scalars
   s73_price_adjuster Switch for price based adjustment /0/
   s73_timber_demand Switch for timber demand / 1 /
   s73_counter Counter for iterations of demand adjustment / 0 /
-  s73_maxiter Maximum iterations for demand adjustments / 20 /
+  s73_maxiter Maximum iterations for demand adjustments / 1 /
   s73_price_elasticity price elasticity from lauri et al / -0.1 /
   s73_counter2 Counter for iterations of demand adjustment / 0 /
-  s73_maxiter2 Maximum iterations for demand adjustments / 20 /
+  s73_maxiter2 Maximum iterations for demand adjustments / 1 /
 ;
 
 table f73_prod_specific_timber(t_past,iso,total_wood_products) demand
