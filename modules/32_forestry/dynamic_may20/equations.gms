@@ -32,7 +32,7 @@ q32_cost_total(i2) .. vm_cost_fore(i2) =e=
 q32_cdr_aff(j2,ac) ..
 vm_cdr_aff(j2,ac) =e=
 v32_land(j2,"aff","ac0") * sum(ct, p32_cdr_ac(ct,j2,ac))
-+ v32_land(j2,"plant","ac0") * sum(ct, p32_cdr_ac_plant(ct,j2,ac))
+*+ v32_land(j2,"plant","ac0") * sum(ct, p32_cdr_ac_plant(ct,j2,ac))
 ;
 
 *ac0 can only increase if total afforested land increases
@@ -131,10 +131,11 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 
 
 q32_reward_plant(i2) ..	v32_reward_plant(i2)
-						=e=
-            ((sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2)) * 6000)
-            /((1+pm_interest(i2))**sum(ct,(p32_representative_rotation(ct,i2)))))
-            *(pm_interest(i2)/(1+pm_interest(i2)));
+						=e= 
+						0;
+*            ((sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2)) * 6000)
+*            /((1+pm_interest(i2))**sum(ct,(p32_representative_rotation(ct,i2)))))
+*            *(pm_interest(i2)/(1+pm_interest(i2)));
 
 
 *' Harvesting costs are calculated based on area removed for timber production purposes.
@@ -153,8 +154,8 @@ q32_reward_plant(i2) ..	v32_reward_plant(i2)
 
 q32_establishment_max ..
               sum(j2, v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
-              =l=
-              sum(i2, pc32_demand_forestry_future(i2,"wood"))
+              =g=
+              sum(i2, pc32_demand_forestry_future(i2,"wood")* pc32_plant_prod_share_future(i2))
               ;
 
 q32_establishment_min(i2) ..
