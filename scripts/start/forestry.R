@@ -67,6 +67,8 @@ cfg$gms$s35_secdf_distribution <- 0
 # * Carbon switch
 cfg$gms$c52_carbon_switch <- "default_lpjml"          # def = "default_lpjml"
 
+cfg$gms$s80_maxiter <- 3
+
 ### TIMBER
 # * (biomass_mar20): WIP
 cfg$gms$timber <- "biomass_mar20"                  # def = biomass_mar20
@@ -99,7 +101,7 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "FH52"
+identifier_flag <- "FH53"
 
 cat(paste0("Flag for secondary forest distributions. Poulter distribution by raster calculations. Ageclasses collapsed by half."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 

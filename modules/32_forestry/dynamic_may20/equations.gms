@@ -21,7 +21,8 @@
 q32_cost_total(i2) .. vm_cost_fore(i2) =e=
 								   v32_cost_recur(i2)
 								   + v32_cost_establishment(i2)
-								   - v32_reward_plant(i2)
+								   + v32_land_missing(j2) * 1000000
+*								   - v32_reward_plant(i2)
 								   ;
 
 *****C-PRICE INDUCED AFFORESTATION
@@ -153,13 +154,13 @@ q32_reward_plant(i2) ..	v32_reward_plant(i2)
 *' But given that the rotation length is about 80 years, we don't really know the future trade patterns.
 
 q32_establishment_max ..
-              sum(j2, v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
+              sum(j2, (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) * pc32_yield_forestry_future(j2))
               =g=
               sum(i2, pc32_demand_forestry_future(i2,"wood")* pc32_plant_prod_share_future(i2))
               ;
 
 q32_establishment_min(i2) ..
-              sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
+              sum(cell(i2,j2), (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) * pc32_yield_forestry_future(j2))
               =g=
               pc32_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2) * sum(ct, f21_self_suff(ct,i2,"wood"))
               ;

@@ -65,6 +65,7 @@ variables
 positive variables
  v32_reward_plant(i)                                Forestry costs (Mio USD)
  v32_land(j,type32,ac)                              Forestry land pools (mio. ha)
+ v32_land_missing(j)                              Forestry land pools (mio. ha)
  vm_landdiff_forestry                               Aggregated difference in forestry land compared to previous timestep (mio. ha)
  vm_cdr_aff(j,ac)                                   Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
  v32_cost_recur(i)                                  Recurring forest management costs (USD per ha)
