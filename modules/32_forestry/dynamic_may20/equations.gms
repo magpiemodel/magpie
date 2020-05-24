@@ -22,7 +22,6 @@ q32_cost_total(i2) .. vm_cost_fore(i2) =e=
 								   v32_cost_recur(i2)
 								   + v32_cost_establishment(i2)
 								   + sum(cell(i2,j2), v32_land_missing(j2)) * 1000000
-*								   - v32_reward_plant(i2)
 								   ;
 
 *****C-PRICE INDUCED AFFORESTATION
@@ -105,21 +104,15 @@ $offtext
 *' future transport costs and harvesting costs as well as trade costs for timber.
 *' This makes sure that the model sticks to reasonable plantation patterns over time.
 
+*(establishment costs + PV of future harvesting costs) * annuity factor
 q32_cost_establishment(i2)..
 						v32_cost_establishment(i2)
 						=e=
             (sum((cell(i2,j2),type32), v32_land(j2,type32,"ac0") * s32_reESTBcost)
             +sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2) * s32_harvesting_cost)
-*add recurring costs discounted in each time step
-*              +sum(cell(i2,j2), fm_distance(j2) * fm_transport_costs("wood") * v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2))
-*              +
-*              sum(ct,vm_cost_trade_forestry_ff(i2))
               /((1+pm_interest(i2))**sum(ct,(p32_representative_rotation(ct,i2))))
-**************************** ((1+pm_interest(i2))**p32_rot_length(ct,i2)) to calculate present value of future costs
               )
-            * (pm_interest(i2)/(1+pm_interest(i2)))
-*************************** (pm_interest(i2)/(1+pm_interest(i2))) to annuituze the values. Similar to averaging over time
-						;
+            * (pm_interest(i2)/(1+pm_interest(i2)));
 
 
 *' Recurring costs are paid for plantations where the trees have to be regularly monitored
@@ -131,14 +124,6 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
                     sum((cell(i2,j2),type32,ac_sub), v32_land(j2,type32,ac_sub)) * f32_fac_req_ha(i2,"recur");
 
 
-q32_reward_plant(i2) ..	v32_reward_plant(i2)
-						=e= 
-						0;
-*            ((sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2)) * 6000)
-*            /((1+pm_interest(i2))**sum(ct,(p32_representative_rotation(ct,i2)))))
-*            *(pm_interest(i2)/(1+pm_interest(i2)));
-
-
 *' Harvesting costs are calculated based on area removed for timber production purposes.
 *' These costs are also paid when land expansion happens at the cost of plantations,
 
@@ -148,41 +133,26 @@ q32_reward_plant(i2) ..	v32_reward_plant(i2)
 
 *' New plantations are already established in the optimization step based on a certain
 *' percentage ('pc32_plant_prod_share_future') of future demand (pc32_demand_forestry_future)
-*' This is based on the expected future yield ('pc32_yield_forestry_future') at harvest.
-*' Global constraint is applied for meeting at leasr 1/3 of future wood demand with plantations.
-*' Cell specific allocation of plantations is based on max c density.
-*' But given that the rotation length is about 80 years, we don't really know the future trade patterns.
+*' This is based on the expected future yield ('pc32_yield_forestry_future') at harvest (year in time step are accounted for).
 
+*' Global maximum constraint.
 q32_establishment_max_glo ..
               sum(j2, (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) * pc32_yield_forestry_future(j2))
               =l=
               sum(i2, pc32_demand_forestry_future(i2,"wood"))
               ;
 
+*' Global minimum constraint.
 q32_establishment_min_glo ..
               sum(j2, (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) * pc32_yield_forestry_future(j2))
               =g=
               sum(i2, pc32_demand_forestry_future(i2,"wood")* pc32_plant_prod_share_future(i2))
               ;
-
+*' Regional minimum constraint for maintaining current forestry area patterns, accounting for f21_self_suff of wood.
 q32_establishment_min_reg(i2) ..
               sum(cell(i2,j2), (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) * pc32_yield_forestry_future(j2))
               =g=
               pc32_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2) * sum(ct, f21_self_suff(ct,i2,"wood"))
-              ;
-
-
-*' Regional constraint for maintaining current forestry area patterns.
-*' Defined as area harvested * ratio of future and present demand (i.e., weighted).
-*' E.g. forestry area in EUR will not decline with this setup.
-*' Cell specific allocation of plantations based on max c density via v32_cost_establishment
-
-q32_establishment_area(i2) ..
-              sum(cell(i2,j2), v32_land(j2,"plant","ac0"))
-              =n=
-              sum((cell(i2,j2),ac_sub), vm_hvarea_forestry(j2,ac_sub))*
-*							sum(ct, p32_hv_area_current(ct,i2)) *
-              (pc32_demand_forestry_future(i2,"wood")/sum(ct, pm_demand_ext_original(ct,i2,"wood")))$(sum(ct, pm_demand_ext_original(ct,i2,"wood"))>0)
               ;
 
 **** Area harvested

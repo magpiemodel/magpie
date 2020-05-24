@@ -72,7 +72,8 @@ p32_cdr_ac_plant(t,j,ac_sub)$(ord(ac_sub) > 1 AND protect32(t,j,ac_sub))
 *' Regrowth of natural vegetation (natural succession) is modelled by shifting
 *' age-classes according to time step length. For first year of simulation, the
 *' shift is just 1.
-s32_shift = (5/5)$(ord(t)=1) + (m_timestep_length/5)$(ord(t)>1);
+*s32_shift = (5/5)$(ord(t)=1) + (m_timestep_length/5)$(ord(t)>1);
+s32_shift = s32_yeardiff/5;
 
 *' Shifting of age-calsses in land.
 if((ord(t)>1),

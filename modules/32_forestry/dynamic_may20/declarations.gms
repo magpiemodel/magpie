@@ -58,12 +58,8 @@ parameters
  p32_representative_rotation(t_all,i)               representative regional rotation (1)
 ;
 
-variables
- vm_cost_fore(i)                                    Forestry costs (Mio USD)
-;
-
 positive variables
- v32_reward_plant(i)                                Forestry costs (Mio USD)
+ vm_cost_fore(i)                                    Forestry costs (Mio USD)
  v32_land(j,type32,ac)                              Forestry land pools (mio. ha)
  v32_land_missing(j)                              Forestry land pools (mio. ha)
  vm_landdiff_forestry                               Aggregated difference in forestry land compared to previous timestep (mio. ha)
@@ -76,7 +72,6 @@ positive variables
  ;
 
 equations
- q32_reward_plant(i)							reward plant establishment
  q32_cost_total(i)                                total forestry costs constraint (mio. USD)
  q32_land(j)                                      land constraint (mio. ha)
  q32_cdr_aff(j,ac)                                   calculation of CDR from afforestation
@@ -90,7 +85,6 @@ equations
  q32_establishment_max_glo                               Establishment in current time step for future demand (mio. ha)
  q32_establishment_min_glo                               Establishment in current time step for future demand (mio. ha)
  q32_establishment_min_reg(i)                               Establishment in current time step for future demand (mio. ha)
- q32_establishment_area(i)                               Establishment in current time step for future demand (mio. ha)
  q32_land_expansion(j,type32,ac)                  Land expansion (mio. ha)
  q32_land_reduction(j,type32,ac)                  Land contarction (mio. ha)
  q32_cost_establishment(i)                        Present value of cost of establishment (mio. USD)
@@ -100,7 +94,6 @@ equations
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_cost_fore(t,i,type)                          Forestry costs (Mio USD)
- ov32_reward_plant(t,i,type)                     Forestry costs (Mio USD)
  ov32_land(t,j,type32,ac,type)                   Forestry land pools (mio. ha)
  ov32_land_missing(t,j,type)                     Forestry land pools (mio. ha)
  ov_landdiff_forestry(t,type)                    Aggregated difference in forestry land compared to previous timestep (mio. ha)
@@ -110,7 +103,6 @@ parameters
  ov32_land_expansion(t,j,type32,ac,type)         Land expansion (mio. ha)
  ov32_land_reduction(t,j,type32,ac,type)         land reduction (mio. ha)
  ov32_cost_establishment(t,i,type)               Cost of establishment calculated at the current time step (mio. USD)
- oq32_reward_plant(t,i,type)                     reward plant establishment
  oq32_cost_total(t,i,type)                       total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                             land constraint (mio. ha)
  oq32_cdr_aff(t,j,ac,type)                       calculation of CDR from afforestation
@@ -124,7 +116,6 @@ parameters
  oq32_establishment_max_glo(t,type)              Establishment in current time step for future demand (mio. ha)
  oq32_establishment_min_glo(t,type)              Establishment in current time step for future demand (mio. ha)
  oq32_establishment_min_reg(t,i,type)            Establishment in current time step for future demand (mio. ha)
- oq32_establishment_area(t,i,type)               Establishment in current time step for future demand (mio. ha)
  oq32_land_expansion(t,j,type32,ac,type)         Land expansion (mio. ha)
  oq32_land_reduction(t,j,type32,ac,type)         Land contarction (mio. ha)
  oq32_cost_establishment(t,i,type)               Present value of cost of establishment (mio. USD)
