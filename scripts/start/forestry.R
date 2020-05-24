@@ -69,7 +69,7 @@ cfg$gms$c52_carbon_switch <- "default_lpjml"          # def = "default_lpjml"
 
 cfg$gms$c60_biodem_level <- 0
 
-cfg$gms$s80_maxiter <- 3
+cfg$gms$s80_maxiter <- 2
 
 ### TIMBER
 # * (biomass_mar20): WIP
@@ -87,7 +87,7 @@ cfg$gms$s73_price_elasticity <- -0.5
 # Counter for iterations of demand adjustment
 cfg$gms$s73_counter2 <- 0
 # Maximum iterations for demand adjustments
-cfg$gms$s73_maxiter2 <- 1
+cfg$gms$s73_maxiter2 <- 2
 
 ### OPTIMIZATION
 # * 1: using optfile for specified solver settings
@@ -103,7 +103,7 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "FH58"
+identifier_flag <- "FH59"
 
 cat(paste0("Flag for secondary forest distributions. Poulter distribution by raster calculations. Ageclasses collapsed by half."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
