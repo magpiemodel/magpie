@@ -5,6 +5,9 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+*correct forestry production.
+vm_prod.l(j,kforestry) = vm_prod.l(j,kforestry) - v73_prod_heaven_timber.l(j,kforestry);
+
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov73_cost_hvarea(t,i,"marginal")                              = v73_cost_hvarea.m(i);
  ov73_prod_forestry(t,j,ac_sub,kforestry,"marginal")           = v73_prod_forestry.m(j,ac_sub,kforestry);

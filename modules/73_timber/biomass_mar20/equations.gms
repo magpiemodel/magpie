@@ -31,7 +31,7 @@ q73_cost_hvarea(i2)..
                     sum(ac_sub, vm_hvarea_forestry(j2,ac_sub)) * 200
                   + (sum(ac_sub, vm_hvarea_secdforest(j2,ac_sub))
                   + sum(ac_sub, v73_hvarea_other(j2, ac_sub))
-                  + vm_hvarea_primforest(j2)) * (200 * 3))
+                  + vm_hvarea_primforest(j2)) * (200 * 2))
                     ;
 
 *' The following equation describes cellular level production of woody biomass
