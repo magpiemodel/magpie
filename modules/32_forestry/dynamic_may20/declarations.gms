@@ -101,6 +101,7 @@ parameters
  ov_cost_fore(t,i,type)                          Forestry costs (Mio USD)
  ov32_reward_plant(t,i,type)                     Forestry costs (Mio USD)
  ov32_land(t,j,type32,ac,type)                   Forestry land pools (mio. ha)
+ ov32_land_missing(t,j,type)                     Forestry land pools (mio. ha)
  ov_landdiff_forestry(t,type)                    Aggregated difference in forestry land compared to previous timestep (mio. ha)
  ov_cdr_aff(t,j,ac,type)                         Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
  ov32_cost_recur(t,i,type)                       Recurring forest management costs (USD per ha)

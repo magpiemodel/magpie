@@ -21,7 +21,7 @@
 q32_cost_total(i2) .. vm_cost_fore(i2) =e=
 								   v32_cost_recur(i2)
 								   + v32_cost_establishment(i2)
-								   + v32_land_missing(j2) * 1000000
+								   + sum(cell(i2,j2), v32_land_missing(j2)) * 1000000
 *								   - v32_reward_plant(i2)
 								   ;
 
