@@ -9,7 +9,7 @@
 *' decisions in forestry [32_forestry] and natveg [35_natveg] modules and corresponding
 *' production of woody biomass realized.
 
-*' @limitations WIP
+*' @limitations Timber demand cannot be determined endogenously
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/73_timber/biomass_mar20/sets.gms"
