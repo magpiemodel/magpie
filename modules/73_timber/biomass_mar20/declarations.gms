@@ -16,7 +16,7 @@ p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)            Fina
 pm_demand_ext(t_ext,i,kforestry)                                            Extended demand for timber beyound simulation (mio. tDM per yr)
 p73_glo_timber_demand(t_all,kforestry)                                      Global timber demand (mio. m3 per yr)
 p73_volumetric_conversion(kforestry)                                        Volumetric conversion factor for volume to mass (tDM per m3)
-p73_demand_ext_original(t_ext,i,kforestry)                                   Original prescribed timber demand (mio. tDM per yr)
+p73_demand_ext_original(t_ext,i,kforestry)                                  Original prescribed timber demand (mio. tDM per yr)
 pm_prices_woodymass(t,i,kforestry)                                          Woody biomass prices (USD per tDM)
 p73_criterion	                                                              Criteria calculating timber demand adjustment (mio. tDM per yr)
 p73_timder_adjustment_ratio(t,i,kforestry)                                  Ratio between adjusted and prescribed timber demand (1)
@@ -31,10 +31,10 @@ v73_prod_forestry(j,ac_sub,kforestry)                                       Prod
 v73_prod_natveg(j,land_natveg,ac_sub,kforestry)                             Production of woody biomass from natural vegetation (mio. tDM per yr)
 v73_prod_heaven_timber(j,kforestry)                                         Production of woody biomass from heaven (mio. tDM per yr)
 vm_cost_timber(i)				                                                    Actual cost of harvesting timber from forests (mio. USD per yr)
-vm_hvarea_secdforest(j,ac_sub)                                              Harvested area of secondary forest (mio. ha)
-v73_hvarea_other(j,ac_sub)                                                  Harvested area of other land (mio. ha)
-vm_hvarea_primforest(j)                                                     Harvested area of primary forest (mio. ha)
-vm_hvarea_forestry(j,ac_sub)                                                Area harvested for timber production (mio. ha)
+vm_hvarea_secdforest(j,ac_sub)                                              Harvested area from secondary forest (mio. ha per yr)
+v73_hvarea_other(j,ac_sub)                                                  Harvested area from other land (mio. ha per yr)
+vm_hvarea_primforest(j)                                                     Harvested area from primary forest (mio. ha per yr)
+vm_hvarea_forestry(j,ac_sub)                                                Harvested area from timber plantations(mio. ha per yr)
 ;
 
 equations

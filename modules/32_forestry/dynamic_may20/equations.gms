@@ -35,7 +35,6 @@ v32_land(j2,"aff","ac0") * sum(ct, p32_cdr_ac(ct,j2,ac))
 + v32_land(j2,"plant","ac0") * sum(ct, p32_cdr_ac_plant(ct,j2,ac))
 ;
 
-*** BGP description?
 q32_bgp_aff(j2,ac) ..
 vm_cdr_aff(j2,ac,"bph") =e=
 v32_land(j2,"aff","ac0") * p32_aff_bgp(j2,ac);
@@ -138,23 +137,27 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 *------------------------------
 
 *' New plantations are already established in the optimization step based on a certain
-*' percentage ('pc32_plant_prod_share_future') of future demand (pc32_demand_forestry_future)
-*' This is based on the expected future yield ('pc32_yield_forestry_future') at harvest (year in time step are accounted for).
+*' percentage (`pc32_plant_prod_share_future`) of future demand (`pc32_demand_forestry_future`)
+*' This is based on the expected future yield (`pc32_yield_forestry_future`) at
+*' harvest (year in time step are accounted for).
+*' Here we define three constraints for establishing new plantation in simulation step
 
-*' Global maximum constraint.
+*' Global maximum constraint based on meeting the all future timber demand (`pc32_demand_forestry_future`).
 q32_establishment_max_glo ..
               sum(j2, (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) * pc32_yield_forestry_future(j2))
               =l=
               sum(i2, pc32_demand_forestry_future(i2,"wood"))
               ;
 
-*' Global minimum constraint.
+*' Global minimum constraint based on a proportion (`pc32_plant_prod_share_future`) of future timber demand (`pc32_demand_forestry_future`).
 q32_establishment_min_glo ..
               sum(j2, (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) * pc32_yield_forestry_future(j2))
               =g=
               sum(i2, pc32_demand_forestry_future(i2,"wood")* pc32_plant_prod_share_future(i2))
               ;
-*' Regional minimum constraint for maintaining current forestry area patterns, accounting for fm_self_suff of wood.
+
+*' Regional minimum constraint for maintaining current forestry area patterns,
+*' while accounting for regional self sufficiency in (`fm_self_suff`) timber production.
 q32_establishment_min_reg(i2) ..
               sum(cell(i2,j2), (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) * pc32_yield_forestry_future(j2))
               =g=

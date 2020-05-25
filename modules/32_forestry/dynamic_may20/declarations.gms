@@ -1,12 +1,12 @@
 scalars
- s32_yeardiff									  year diff forestry
- s32_shift                                        Number of 5-year age-classes corresponding to current time step length
+ s32_yeardiff									                    year diff forestry (yr)
+ s32_shift                                        Number of 5-year age-classes corresponding to current time step length (1)
  p32_max_aff_area                                 Maximum global afforestation area that is greater or equal the exogenous policy target (mio. ha)
 ;
 
 parameters
- p32_aff_pol(t,j)                                   ndc forest stock (mio. ha)
- p32_aff_pol_timestep(t,j)                          ndc afforestation per time step (mio. ha)
+ p32_aff_pol(t,j)                                   NDC forest stock (mio. ha)
+ p32_aff_pol_timestep(t,j)                          NDC afforestation per time step (mio. ha)
  p32_aff_pot(t,j)                                   Potential afforestation area (mio. ha)
  p32_aff_togo(t)              		                  Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
  p32_carbon_density_ac(t,j,type32,ac,ag_pools)      Carbon density for ac and ag_pools (tC per ha)
@@ -27,13 +27,13 @@ parameters
  p32_rotation_cellular_estb(t_all,j)                Establishment rotation length translated to age classes on cellular level (1)
  p32_rotation_cellular_harvesting(t_all,j)          Harvesting rotation length of plantations translated to age class equivalent for future (1)
  p32_bef_ipcc(clcl)                                 Biomass expansion factors for plantations (1)
- p32_cdr_ac(t,j,ac)						                      Non-cumulative CDR from afforestation for each age-class depending on planning horizon (tC per ha)
- p32_cdr_ac_plant(t,j,ac)						                      Non-cumulative CDR from afforestation for each age-class depending on planning horizon (tC per ha)
+ p32_cdr_ac(t,j,ac)						                      Non-cumulative CDR from afforestation plantations for each age-class depending on planning horizon (tC per ha)
+ p32_cdr_ac_plant(t,j,ac)						                Non-cumulative CDR from timber plantations for each age-class depending on planning horizon (tC per ha)
  p32_management_factor(j,mgmt_type)                 Management factor used to upscale plantation yields as compared to natural forest yields (1)
  p32_regional_min(j)                                Inverse of management factor in plantations (1)
  p32_dampen_pre(ac,j)                               Pre calculation for dampening factors applied on management factors (1)
  p32_dampen_final(ac,j)                             Final calculation for dampening factors applied on management factors (1)
- p32_rotation_offset                                offset calc
+ p32_rotation_offset                                offset calc in age class equivalents (1)
  p32_land_start(j,type32,ac)                        Saving first value of starting land (mio. ha)
  p32_land_before(t,j,type32,ac)                     Saving time value of starting land (mio. ha)
  pc32_demand_forestry_future(i,kforestry)           Future forestry demand in current time step (tDM per yr)
@@ -62,7 +62,7 @@ parameters
 positive variables
  vm_cost_fore(i)                                    Forestry costs (Mio USD)
  v32_land(j,type32,ac)                              Forestry land pools (mio. ha)
- v32_land_missing(j)                              Forestry land pools (mio. ha)
+ v32_land_missing(j)                                Forestry land pools (mio. ha)
  vm_landdiff_forestry                               Aggregated difference in forestry land compared to previous timestep (mio. ha)
  v32_cost_recur(i)                                  Recurring forest management costs (USD per ha)
  vm_forestry_reduction(j,type32,ac_sub)             Area harvested for timber production (mio. ha)
@@ -72,27 +72,27 @@ positive variables
  ;
 
 variables
- vm_cdr_aff(j,ac,aff_effect) 						 Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
+ vm_cdr_aff(j,ac,aff_effect) 						            Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
  ;
 
 equations
- q32_cost_total(i)                                total forestry costs constraint (mio. USD)
- q32_land(j)                                      land constraint (mio. ha)
- q32_cdr_aff(j,ac)                                   calculation of CDR from afforestation
- q32_carbon(j,ag_pools)                            forestry carbon stock calculation
- q32_land_diff                                         aggregated difference in forestry land compared to previous timestep (mio. ha)
- q32_max_aff                                      maximum total global afforestation
- q32_aff_pol(j)                                   afforestation policy constraint
- q32_aff_ac0(j)							  Afforestation constraint for ac0 (mio. ha)
- q32_forestry_reduction(j,type32,ac_sub)             Harvested area from plantations (mio. ha)
- q32_cost_recur(i)                                Recurruing costs (mio. USD)
- q32_establishment_max_glo                               Establishment in current time step for future demand (mio. ha)
- q32_establishment_min_glo                               Establishment in current time step for future demand (mio. ha)
- q32_establishment_min_reg(i)                               Establishment in current time step for future demand (mio. ha)
- q32_land_expansion(j,type32,ac)                  Land expansion (mio. ha)
- q32_land_reduction(j,type32,ac)                  Land contarction (mio. ha)
- q32_cost_establishment(i)                        Present value of cost of establishment (mio. USD)
- q32_bgp_aff(j,ac)                          Biophysical afforestation calculation (mio. tCeq)
+ q32_cost_total(i)                                  Total forestry costs constraint (mio. USD)
+ q32_land(j)                                        Land constraint (mio. ha)
+ q32_cdr_aff(j,ac)                                  Calculation of CDR from afforestation (mio. tC)
+ q32_carbon(j,ag_pools)                             Forestry carbon stock calculation (mio. tC)
+ q32_land_diff                                      Aggregated difference in forestry land compared to previous timestep (mio. ha)
+ q32_max_aff                                        Maximum total global afforestation (mio. ha)
+ q32_aff_pol(j)                                     Afforestation policy constraint (mio. ha)
+ q32_aff_ac0(j)							                        Afforestation constraint for youngest age class (mio. ha)
+ q32_forestry_reduction(j,type32,ac_sub)            Harvested area from plantations (mio. ha)
+ q32_cost_recur(i)                                  Recurruing costs (mio. USD)
+ q32_establishment_max_glo                          Establishment in current time step for future demand (mio. ha)
+ q32_establishment_min_glo                          Establishment in current time step for future demand (mio. ha)
+ q32_establishment_min_reg(i)                       Establishment in current time step for future demand (mio. ha)
+ q32_land_expansion(j,type32,ac)                    Land expansion (mio. ha)
+ q32_land_reduction(j,type32,ac)                    Land contarction (mio. ha)
+ q32_cost_establishment(i)                          Present value of cost of establishment (mio. USD)
+ q32_bgp_aff(j,ac)                                  Biophysical afforestation calculation (mio. tCeq)
 ;
 
 
