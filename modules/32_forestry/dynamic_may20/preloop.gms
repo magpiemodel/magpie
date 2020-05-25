@@ -136,7 +136,7 @@ p32_land(t,j,type32,ac) = 0;
 p32_aff_togo(t) = sum(j, smax(t2, p32_aff_pol(t2,j)) - p32_aff_pol(t,j));
 
 * Adjust the afforestation limit `s32_max_aff_area` upwards, if it is below the exogenous policy target.
-p32_max_aff_area = max(s32_max_aff_area, sum(j, smax(t2, p32_aff_pol(t2,j))) );
+s32_max_aff_area = max(s32_max_aff_area, sum(j, smax(t2, p32_aff_pol(t2,j))) );
 
 p32_cdr_ac(t,j,ac) = 0;
 p32_cdr_ac_plant(t,j,ac) = 0;
@@ -167,6 +167,10 @@ p32_land_start(j,type32,ac) = p32_land("y1995",j,type32,ac);
 *initial assumption for harvested area
 pc32_hvarea_forestry(j) = p32_plant_ini_ac(j);
 vm_hvarea_forestry.l(j,ac_sub) = p32_plant_ini_ac(j)/card(ac_sub);
+
+*fix bph effect to zero for all age classes except the ac that is chosen for the bph effect to occur after planting (e.g. canopy closure)
+p32_aff_bgp(j,ac) = 0;
+p32_aff_bgp(j,"%c32_bgp_ac%") = f32_aff_bgp(j,"%c32_aff_bgp%");
 
 **** Updated calculation for avg are needed to be estb based on past years
 

@@ -36,6 +36,12 @@ sets
  rotation_type Rotation type
  / min, low, def, high, bio /
 
+ bgp32 biogeophysical effect (tCeq per ha) of afforestation on local climate
+/ nobgp, ann, djf, jja /
+
+aff_effect biochemical and local biophysical effect of afforestation on climate
+/ bgc,bph /
+
 ;
 
 alias(ac,ac2);

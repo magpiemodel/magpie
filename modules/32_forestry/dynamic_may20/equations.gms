@@ -26,14 +26,19 @@ q32_cost_total(i2) .. vm_cost_fore(i2) =e=
 
 *****C-PRICE INDUCED AFFORESTATION
 *****forestry emissions seen in maccs module************************************
-*' The interface `vm_cdr_aff` provides the projected CDR of an afforestation
+*' The interface `vm_cdr_aff` provides the projected bgc (CDR) and local bph effects of an afforestation
 *' activity for a planning horizon of 30 years `s32_planing_horizon` to the [56_ghg_policy] module.
 
 q32_cdr_aff(j2,ac) ..
-vm_cdr_aff(j2,ac) =e=
+vm_cdr_aff(j2,ac,"bgc") =e=
 v32_land(j2,"aff","ac0") * sum(ct, p32_cdr_ac(ct,j2,ac))
 + v32_land(j2,"plant","ac0") * sum(ct, p32_cdr_ac_plant(ct,j2,ac))
 ;
+
+*** BGP description?
+q32_bgp_aff(j2,ac) ..
+vm_cdr_aff(j2,ac,"bph") =e=
+v32_land(j2,"aff","ac0") * p32_aff_bgp(j2,ac);
 
 *ac0 can only increase if total afforested land increases
 q32_aff_ac0(j2) ..
@@ -52,10 +57,11 @@ v32_land(j2,"aff","ac0") =l= sum(ac, v32_land(j2,"aff",ac)) - sum((ct,ac), p32_l
  v32_land(j2,"ndc","ac0") =e= sum(ct, p32_aff_pol_timestep(ct,j2));
 
 *' The constraint `q32_max_aff` accounts for the allowed maximum global
-*' carbon-price induced endogenous afforestation defined in `s32_max_aff_area`.
-*' Note that NPI/NDC afforestation policies are not counted towards the
-*' maximum defined in `s32_max_aff_area`. Therefore, the right-hand side of the constraint
-*' is relaxed by the value of exogenously prescribed afforestation (`p32_aff_togo`).
+*' afforestation defined in `p32_max_aff_area`. Note that NPI/NDC afforestation
+*' policies are counted towards the maximum defined in `p32_max_aff_area`.
+*' Therefore, the right-hand side of the constraint is tightened by the value of
+*' the exogenously prescribed afforestation that has to be realized in later
+*' time steps (`p32_aff_togo`).
 
  q32_max_aff .. sum((j2,type32,ac)$(not sameas(type32,"plant")), v32_land(j2,type32,ac))
                 =l= p32_max_aff_area - sum(ct, p32_aff_togo(ct));
@@ -148,11 +154,11 @@ q32_establishment_min_glo ..
               =g=
               sum(i2, pc32_demand_forestry_future(i2,"wood")* pc32_plant_prod_share_future(i2))
               ;
-*' Regional minimum constraint for maintaining current forestry area patterns, accounting for f21_self_suff of wood.
+*' Regional minimum constraint for maintaining current forestry area patterns, accounting for fm_self_suff of wood.
 q32_establishment_min_reg(i2) ..
               sum(cell(i2,j2), (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) * pc32_yield_forestry_future(j2))
               =g=
-              pc32_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2) * sum(ct, f21_self_suff(ct,i2,"wood"))
+              pc32_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2) * sum(ct, fm_self_suff(ct,i2,"wood"))
               ;
 
 **** Area harvested

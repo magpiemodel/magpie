@@ -19,19 +19,5 @@ elseif (s21_trade_tariff=0),
     i21_trade_tariff(i2,k_trade) = 0;
 );
 
-f21_self_suff(t_all,"MEA",kforestry) = 0.05;
-f21_exp_shr(t_all,"MEA",kforestry) = 0;
-*http://www.jatan.org/eng/japan-e.html
-f21_self_suff(t_all,"JPN",kforestry) = 0.4;
-f21_exp_shr(t_all,"JPN",kforestry) = 0;
-*http://www.fao.org/3/Y2199E/y2199e10.htm
-*f21_self_suff(t_all,"USA",kforestry) = 0.71;
-*f21_exp_shr(t_all,"USA",kforestry) = 0;
-
-*f21_self_suff(t_all,"JPN",kforestry) = 0.1;
-*f21_self_suff(t_all,"EUR","woodfuel") = 1.09;
-
-
-
-pm_selfsuff_ext(t_ext,i,kforestry) = f21_self_suff("y2150",i,kforestry);
-pm_selfsuff_ext(t_all,i,kforestry) = f21_self_suff(t_all,i,kforestry);
+pm_selfsuff_ext(t_ext,i,kforestry) = fm_self_suff("y2150",i,kforestry);
+pm_selfsuff_ext(t_all,i,kforestry) = fm_self_suff(t_all,i,kforestry);

@@ -62,7 +62,7 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
 *' level them with yearly emissions. Since one-off emissions are delivered by the [52_carbon] module as annual emissions they are
 *' multiplied here by the timestep length `m_timestep_length` to obtain emissions for the entire timestep and are then
 *' transformed back into annual costs by multiplying by the emission price and a discount factor `p56_ghg_price_growth_rate`
-*' that is equal to the growth rate of the emissions price. 
+*' that is equal to the growth rate of the emissions price.
 
  q56_emission_costs_reg_oneoff(i2,emis_reg_one56) ..
                  v56_emission_costs_reg_oneoff(i2,emis_reg_one56) =g=
@@ -96,8 +96,9 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
                  ;
 
 *' The value of CDR from C-price induced afforestation enters the objective function as negative costs.
-*' The reward, which serves as incentive for afforestation, is calculated in 3 steps: 
-*' First, the expected CDR for each 5-year age-class and the corresponding future C price are multiplied.
+*' The reward, which serves as incentive for afforestation, is calculated in 3 steps:
+*' First, the sum of the expected CDR for each 5-year age-class and the carbon equivalent of local biophysical effects
+*' are multiplied by the corresponding future C price.
 *' Second, these future cash flows are discounted to present value.
 *' Third, an annuity factor (annuity due with infinite time horizon) is used to obtain average annual rewards
 
@@ -110,8 +111,8 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
  q56_reward_cdr_aff(j2) ..
                  v56_reward_cdr_aff(j2) =e=
             	 s56_c_price_induced_aff*
-            	 sum(ac, 
-            	 ((1-s56_buffer_aff)*vm_cdr_aff(j2,ac) * sum((cell(i2,j2),ct), p56_c_price_aff(ct,i2,ac)))
+               sum(ac,
+            	 (sum(aff_effect,(1-s56_buffer_aff)*vm_cdr_aff(j2,ac,aff_effect)) * sum((cell(i2,j2),ct), p56_c_price_aff(ct,i2,ac)))
             	 / ((1+sum(cell(i2,j2),pm_interest(i2)))**(ac.off*5)))
                  *sum(cell(i2,j2),pm_interest(i2)/(1+pm_interest(i2)));
 

@@ -63,5 +63,5 @@ p73_volumetric_conversion("woodfuel") = 0.3;
 *pm_demand_ext in mio ton DM
 pm_demand_ext(t_ext,i,kforestry) = round(p73_timber_demand_gdp_pop("y2150",i,kforestry) * p73_volumetric_conversion(kforestry),3);
 pm_demand_ext(t_all,i,kforestry) = round(p73_timber_demand_gdp_pop(t_all,i,kforestry) * p73_volumetric_conversion(kforestry),3);
-pm_demand_ext_original(t_ext,i,kforestry) = pm_demand_ext(t_ext,i,kforestry);
+p73_demand_ext_original(t_ext,i,kforestry) = pm_demand_ext(t_ext,i,kforestry);
 display pm_demand_ext;

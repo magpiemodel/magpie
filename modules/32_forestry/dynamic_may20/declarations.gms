@@ -56,6 +56,7 @@ parameters
  p32_rot_length_faustmann(t_all,j)                  Cellular Faustmann rotation length of plantations translated to age class equivalent (1)
  p32_ncells(i)                                      Number of cells in each region (1)
  p32_representative_rotation(t_all,i)               representative regional rotation (1)
+ p32_aff_bgp(j,ac)                                  Biophysical impact of afforestation (tCeq per ha)
 ;
 
 positive variables
@@ -63,12 +64,15 @@ positive variables
  v32_land(j,type32,ac)                              Forestry land pools (mio. ha)
  v32_land_missing(j)                              Forestry land pools (mio. ha)
  vm_landdiff_forestry                               Aggregated difference in forestry land compared to previous timestep (mio. ha)
- vm_cdr_aff(j,ac)                                   Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
  v32_cost_recur(i)                                  Recurring forest management costs (USD per ha)
  vm_forestry_reduction(j,type32,ac_sub)             Area harvested for timber production (mio. ha)
  v32_land_expansion(j,type32,ac)                    Land expansion (mio. ha)
  v32_land_reduction(j,type32,ac)                    land reduction (mio. ha)
  v32_cost_establishment(i)                          Cost of establishment calculated at the current time step (mio. USD)
+ ;
+
+variables
+ vm_cdr_aff(j,ac,aff_effect) 						 Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
  ;
 
 equations
@@ -88,6 +92,7 @@ equations
  q32_land_expansion(j,type32,ac)                  Land expansion (mio. ha)
  q32_land_reduction(j,type32,ac)                  Land contarction (mio. ha)
  q32_cost_establishment(i)                        Present value of cost of establishment (mio. USD)
+ q32_bgp_aff(j,ac)                          Biophysical afforestation calculation (mio. tCeq)
 ;
 
 
@@ -97,12 +102,12 @@ parameters
  ov32_land(t,j,type32,ac,type)                   Forestry land pools (mio. ha)
  ov32_land_missing(t,j,type)                     Forestry land pools (mio. ha)
  ov_landdiff_forestry(t,type)                    Aggregated difference in forestry land compared to previous timestep (mio. ha)
- ov_cdr_aff(t,j,ac,type)                         Total CDR from afforestation (new and existing areas) between t+1 and t=s32_planing_horizon (Tg CO2-C)
  ov32_cost_recur(t,i,type)                       Recurring forest management costs (USD per ha)
  ov_forestry_reduction(t,j,type32,ac_sub,type)   Area harvested for timber production (mio. ha)
  ov32_land_expansion(t,j,type32,ac,type)         Land expansion (mio. ha)
  ov32_land_reduction(t,j,type32,ac,type)         land reduction (mio. ha)
  ov32_cost_establishment(t,i,type)               Cost of establishment calculated at the current time step (mio. USD)
+ ov_cdr_aff(t,j,ac,aff_effect,type)              Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
  oq32_cost_total(t,i,type)                       total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                             land constraint (mio. ha)
  oq32_cdr_aff(t,j,ac,type)                       calculation of CDR from afforestation
@@ -119,5 +124,6 @@ parameters
  oq32_land_expansion(t,j,type32,ac,type)         Land expansion (mio. ha)
  oq32_land_reduction(t,j,type32,ac,type)         Land contarction (mio. ha)
  oq32_cost_establishment(t,i,type)               Present value of cost of establishment (mio. USD)
+ oq32_bgp_aff(t,j,ac,type)                       Biophysical afforestation calculation (mio. tCeq)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

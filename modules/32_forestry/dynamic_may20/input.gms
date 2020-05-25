@@ -1,10 +1,17 @@
-$setglobal c32_aff_mask  noboreal
-* options: unrestricted, noboreal, onlytropical
-$setglobal c32_aff_policy  npi
 $setglobal c32_rot_length  rlGTM
 $setglobal c32_rot_length_estb  rlGTM
 $setglobal c32_bef  ipccBEF
 $setglobal c32_timber_plantations  plantations
+
+$setglobal c32_aff_mask  noboreal
+* options: unrestricted, noboreal, onlytropical
+$setglobal c32_aff_policy  npi
+* options: none, npi, ndc
+
+$setglobal c32_aff_bgp  nobgp
+* options: ann,djf,jja,nobgp
+$setglobal c32_bgp_ac  ac10
+* options: ac0,ac10,ac20,ac30
 
 scalars
   s32_reESTBcost Reestablishment cost in USD per ha / 2000 /
@@ -40,7 +47,7 @@ $offdelim
 ;
 f32_fac_req_ha(i,"recur") = f32_fac_req_ha(i,"recur") * s32_recurring_cost_multiplier;
 
-parameter fm_harvest_cost_ha(i) Harvesting cost (US Dollar 2004 per ha)
+parameter f32_harvest_cost_ha(i) Harvesting cost (US Dollar 2004 per ha)
 /
 $ondelim
 $include "./modules/32_forestry/input/f32_harvestingcost.cs4"
@@ -60,4 +67,10 @@ $ondelim
 $include "./modules/32_forestry/input/f32_plant_prod_share.csv"
 $offdelim
 /
+;
+
+table f32_aff_bgp(j,bgp32) Biogeophysical temperature change of afforestation translated to tC for annual DJF JJA nobgp (tC per ha)
+$ondelim
+$include "./modules/32_forestry/input/f32_bph_effect.cs3"
+$ondelim
 ;

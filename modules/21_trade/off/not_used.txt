@@ -6,3 +6,4 @@
 name,type,reason
 pm_selfsuff_ext, parameter, not used
 fm_trade_balanceflow, input, not used
+fm_self_suff, input, not used
