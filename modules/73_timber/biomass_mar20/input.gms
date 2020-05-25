@@ -13,6 +13,8 @@ scalars
   s73_price_elasticity price elasticity from lauri et al / -0.1 /
   s73_counter2 Counter for iterations of demand adjustment / 0 /
   s73_maxiter2 Maximum iterations for demand adjustments / 1 /
+  s73_timber_harvest_cost Cost per ha for harvesting timber /200/
+  s73_cost_multiplier Multiplier for expensive harvest in natural vegetation /2/
 ;
 
 table f73_prod_specific_timber(t_past,iso,total_wood_products) demand

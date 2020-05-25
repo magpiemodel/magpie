@@ -1,7 +1,7 @@
 scalars
- s32_yeardiff									                    year diff forestry (yr)
- s32_shift                                        Number of 5-year age-classes corresponding to current time step length (1)
- p32_max_aff_area                                 Maximum global afforestation area that is greater or equal the exogenous policy target (mio. ha)
+ s32_yeardiff									                      Year diff forestry (yr)
+ s32_shift                                          Number of 5-year age-classes corresponding to current time step length (1)
+ p32_max_aff_area                                   Maximum global afforestation area that is greater or equal the exogenous policy target (mio. ha)
 ;
 
 parameters
@@ -21,7 +21,7 @@ parameters
  p32_IGR(t_all,j,ac)                                Instantaneous growth rate or periodic annual increment of forest growth (1)
  p32_rot_flg(t_all,j,ac)                            Identifier flag when calculating rotation length (1)
  p32_rot_ac(j)                                      Rotation length translated to age classes on cellular level (1)
- p32_rotation_regional(t,i)                         Regional average rotation length of plantations translated to age class equivalent for future (1)
+ p32_rotation_regional(t_all,i)                         Regional average rotation length of plantations translated to age class equivalent for future (1)
  p32_rot_length_ac_eqivalent(t_all,j)               Cellular rotation length of plantations translated to age class equivalent for future (1)
  p32_rotation_cellular(t_all,j)                     Harvesting rotation length translated to age classes on cellular level (1)
  p32_rotation_cellular_estb(t_all,j)                Establishment rotation length translated to age classes on cellular level (1)

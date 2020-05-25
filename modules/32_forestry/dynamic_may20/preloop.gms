@@ -73,13 +73,16 @@ p32_rot_length_ac_eqivalent(t_historical,j) = p32_rot_length_ac_eqivalent("y1995
 ** Holding rotation lengths constant after the end of this century.
 p32_rot_length_ac_eqivalent(t_future,j) = p32_rot_length_ac_eqivalent("y2100",j);
 
-
-**** Why is this used this way?
-p32_rotation_regional(t,i) = ord(t) + smax(cell(i,j), p32_rot_length_ac_eqivalent(t,j)) + card(t_historical);
+** Number of cells in each region
+p32_ncells(i) = sum(cell(i,j),1);
 
 **** Representative regional rotation
-p32_ncells(i) = sum(cell(i,j),1);
-p32_representative_rotation(t,i) = ord(t) + ceil(sum(cell(i,j),p32_rot_length_ac_eqivalent(t,j))/p32_ncells(i)) + card(t_historical);
+loop(t_all,
+  p32_rotation_regional(t_all,i) = ceil(sum(cell(i,j), p32_rot_length_ac_eqivalent(t_all,j))/p32_ncells(i));
+  p32_representative_rotation(t_all,i) = ord(t_all) + ceil(sum(cell(i,j),p32_rot_length_ac_eqivalent(t_all,j))/p32_ncells(i));
+  );
+display p32_rotation_regional;
+display p32_representative_rotation;
 
 ** Earlier we converted rotation lengths to absolute numbers, now we make the Conversion
 ** back to rotation length in age-classes.

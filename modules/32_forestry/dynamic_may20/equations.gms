@@ -115,7 +115,7 @@ q32_cost_establishment(i2)..
 						=e=
             (sum((cell(i2,j2),type32), v32_land(j2,type32,"ac0") * s32_reESTBcost)
             +sum(cell(i2,j2), v32_land(j2,"plant","ac0") * pc32_yield_forestry_future(j2) * s32_harvesting_cost)
-              /((1+pm_interest(i2))**sum(ct,(p32_representative_rotation(ct,i2))))
+              /((1+pm_interest(i2))**sum(ct,(p32_rotation_regional(ct,i2))))
               )
             * (pm_interest(i2)/(1+pm_interest(i2)));
 

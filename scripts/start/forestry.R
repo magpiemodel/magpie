@@ -88,6 +88,10 @@ cfg$gms$s73_price_elasticity <- -0.5
 cfg$gms$s73_counter2 <- 0
 # Maximum iterations for demand adjustments
 cfg$gms$s73_maxiter2 <- 2
+# Harvest cost in plantations
+cfg$gms$s73_timber_harvest_cost <- 200
+# Cost multiplier for natveg
+cfg$gms$s73_cost_multiplier <- 2
 
 ### OPTIMIZATION
 # * 1: using optfile for specified solver settings
@@ -103,9 +107,9 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "FH59"
+identifier_flag <- "BF37"
 
-cat(paste0("Flag for secondary forest distributions. Poulter distribution by raster calculations. Ageclasses collapsed by half."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Bugfix in representative rotations. General bugfix after Florian's reformation of estb decisions."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 for(s73_price_adjuster in c(0)){
 

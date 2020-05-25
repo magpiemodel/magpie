@@ -42,9 +42,9 @@ p14_growing_stock(t,j,ac,"forestry","plantations") = p14_growing_stock(t,j,ac,"f
 ** Used in equations -- Annual value hence division by timestep
 ***************************************************************
 ** If the plantation yield switch is on, forestry yields are treated are plantation yields
-pm_timber_yield(t,j,ac,"forestry")$(s14_timber_plantation_yield = 1) = p14_growing_stock(t,j,ac,"forestry","plantations")/(5$(ord(t)=1) + m_yeardiff(t)$(ord(t)>1));
+pm_timber_yield(t,j,ac,"forestry")$(s14_timber_plantation_yield = 1) = p14_growing_stock(t,j,ac,"forestry","plantations") / m_yeardiff_forestry(t);
 ** Natveg yields are unchanged and doesn't depend on plantation yield switch
-pm_timber_yield(t,j,ac,land_natveg) = p14_growing_stock(t,j,ac,land_natveg,"natveg")/ (5$(ord(t)=1) + m_yeardiff(t)$(ord(t)>1));
+pm_timber_yield(t,j,ac,land_natveg) = p14_growing_stock(t,j,ac,land_natveg,"natveg") / m_yeardiff_forestry(t);
 ** If the plantation yield switch is off, then the forestry yields are given the same values as secdforest yields,
 pm_timber_yield(t,j,ac,"forestry")$(s14_timber_plantation_yield = 0) = pm_timber_yield(t,j,ac,"secdforest");
 
