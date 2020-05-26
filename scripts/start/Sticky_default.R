@@ -1,12 +1,6 @@
 ######################################################################################
-#### Script to start a MAgPIE run using different factor_costs realizations ####
+#### Script to start a MAgPIE run using different factor_costs realizations ##########
 ######################################################################################
-library(lucode)
-library(magclass)
-library(gdx)
-library(magpie4)
-library(mrcommons)
-
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
@@ -14,9 +8,13 @@ source("scripts/start_functions.R")
 # Sources the default configuration file
 source("config/default.cfg")
 
+#Climate scenario
 clima<-"cc"
+#List of resolutions forruns
 resolutions<-c("200")
+#Factor cost realizations
 realization<-c("sticky_feb18")
+# Trade realization
 trade<-c("selfsuff_reduced")
 
 
@@ -24,34 +22,24 @@ for (i in 1:length(resolutions)){
 for(j in 1:length(realization)){
 for(k in 1:length(trade)){
 #Change the results folder name
-
-cfg$title<-paste0("Develop_merge_",realization[j],"_c",resolutions[i],"_trade_",trade[k])
-
-cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c",resolutions[i],"_690d3718e151be1b450b394c1064b1c5.tgz"),
-               "rev4.44_h12_magpie.tgz",
-               "rev4.44_h12_validation.tgz",
-               "calibration_H12_c200_26Feb20.tgz",
-               "additional_data_rev3.79.tgz")
+cfg$title<-paste0("NormalDevelop",realization[j],"_c",resolutions[i],"_trade_",trade[k])
 
 
-if (trade[k]=="exo"){
-#data from the c200 resolution
-gdx <- paste0("/p/projects/landuse/users/mbacca/magpie_downloads/Develop_sticky_merge/magpie/output/Develop_merge_sticky_feb18_c200_trade_selfsuff_reduced_2020-05-17_23.44.14/fulldata.gdx")
- ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
- ov_supply <- readGDX(gdx,"ov_supply",select=list(type="level"))
- f21_trade_balance <- ov_prod_reg - ov_supply
- #f21_trade_balance.cs3 will be deleted when downloading the high res data. Therefore renamed.
- write.magpie(round(f21_trade_balance,6),paste0("modules/21_trade/input/f21_trade_balance2.cs3"))
- manipulateFile("modules/21_trade/exo/input.gms",c("f21_trade_balance.cs3","f21_trade_balance2.cs3"))
+cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c",resolutions[i],"_690d3718e151be1b450b394c1064b1c5.tgz"),
+               "rev4.42_690d3718e151be1b450b394c1064b1c5_magpie.tgz",
+               "rev4.42_690d3718e151be1b450b394c1064b1c5_validation.tgz",
+               "additional_data_rev3.78.tgz")
 
- #use exo trade and parallel optimization
-  cfg$gms$trade <- trade[k]
-  cfg$gms$optimization <- "nlp_par"
-  cfg$gms$s15_elastic_demand <- 0
-}
+
+
+#max year ssp2
+#cfg$gms$sm_fix_SSP2 <- 1990
+
 #recalibrate
-#cfg$recalibrate <- "ifneeded"
+cfg$recalibrate <- TRUE
 
+#use Feb15 realization for land realization
+cfg$gms$land <- "landmatrix_dec18"
 
 #use Feb15 realization for land realization
 cfg$gms$trade <-trade[k]
@@ -59,6 +47,8 @@ cfg$gms$trade <-trade[k]
 #Output shouldnt include validation
 cfg$output <- c("interpolation","rds_report")
 
+
+#Factor costs realization
 cfg$gms$factor_costs <- realization[j]
 
 #Climate impact or not
@@ -68,5 +58,7 @@ cfg$gms$c43_watavail_scenario<- clima
 cfg$gms$c52_carbon_scenario  <- clima
 cfg$gms$c59_som_scenario  <- clima
 
-start_run(cfg=cfg)}
+
+start_run(cfg=cfg)
 }}
+}
