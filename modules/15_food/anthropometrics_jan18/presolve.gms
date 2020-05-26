@@ -346,30 +346,30 @@ else
 
 
 *###############################################################################
-* ###### Exogenous food substitution scenarios
-
-* "Downwards convergence" of regional calorie oversupply due to food waste to the
-* waste reduction target, i.e. only for values that are higher than the target:
+* ###### Food substitution scenarios
 
 
 *' Substitution of ruminant beef with poultry:
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated(t,i,"livst_rum") =
-               p15_kcal_pc_calibrated_orig(t,i,"livst_rum") * i15_ruminant_fadeout(t);
+               p15_kcal_pc_calibrated_orig(t,i,"livst_rum") * i15_ruminant_fadeout(t,i);
 p15_kcal_pc_calibrated(t,i,"livst_chick") = p15_kcal_pc_calibrated_orig(t,i,"livst_chick")
-             + p15_kcal_pc_calibrated_orig(t,i,"livst_rum") * (1-i15_ruminant_fadeout(t));
+             + p15_kcal_pc_calibrated_orig(t,i,"livst_rum") * (1-i15_ruminant_fadeout(t,i));
+
 
 *' Substitution of fish with poultry:
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated(t,i,"fish") =
-               p15_kcal_pc_calibrated_orig(t,i,"fish") * i15_fish_fadeout(t);
+               p15_kcal_pc_calibrated_orig(t,i,"fish") * i15_fish_fadeout(t,i);
 p15_kcal_pc_calibrated(t,i,"livst_chick") = p15_kcal_pc_calibrated_orig(t,i,"livst_chick")
-             + p15_kcal_pc_calibrated_orig(t,i,"fish") * (1-i15_fish_fadeout(t));
+             + p15_kcal_pc_calibrated_orig(t,i,"fish") * (1-i15_fish_fadeout(t,i));
+
 
 *' Fade-out of alcohol consumption without substitution:
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated(t,i,"alcohol") =
-               p15_kcal_pc_calibrated_orig(t,i,"alcohol") * i15_alcohol_fadeout(t);
+               p15_kcal_pc_calibrated_orig(t,i,"alcohol") * i15_alcohol_fadeout(t,i);
+
 
 *' Substitution of livestock products (without fish) with plant-based food commodities:
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
@@ -385,10 +385,30 @@ p15_plant_kcal_structure_orig(t,i,kfo_pp)$(p15_kcal_pc_calibrated_plant_orig(t,i
                                /p15_kcal_pc_calibrated_plant_orig(t,i);
 
 p15_kcal_pc_calibrated(t,i,kfo_lp) = p15_livestock_kcal_structure_orig(t,i,kfo_lp)
-               *p15_kcal_pc_calibrated_livestock_orig(t,i)*i15_livestock_fadeout(t);
+               *p15_kcal_pc_calibrated_livestock_orig(t,i)*i15_livestock_fadeout(t,i);
 p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
                *(p15_kcal_pc_calibrated_plant_orig(t,i)
-               + p15_kcal_pc_calibrated_livestock_orig(t,i) * (1-i15_livestock_fadeout(t)));
+               + p15_kcal_pc_calibrated_livestock_orig(t,i) * (1-i15_livestock_fadeout(t,i)));
+
+
+*' Substitution of ruminant meat and dairy products with plant-based food commodities:
+p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
+p15_kcal_pc_calibrated_rumdairy_orig(t,i) = sum(kfo_rd,p15_kcal_pc_calibrated(t,i,kfo_rd));
+p15_kcal_pc_calibrated_plant_orig(t,i) = sum(kfo_pp,p15_kcal_pc_calibrated(t,i,kfo_pp));
+
+p15_rumdairy_kcal_structure_orig(t,i,kfo_rd)$(p15_kcal_pc_calibrated_rumdairy_orig(t,i)>0) =
+                               p15_kcal_pc_calibrated(t,i,kfo_rd)
+                               /p15_kcal_pc_calibrated_rumdairy_orig(t,i);
+
+p15_plant_kcal_structure_orig(t,i,kfo_pp)$(p15_kcal_pc_calibrated_plant_orig(t,i)>0) =
+                               p15_kcal_pc_calibrated(t,i,kfo_pp)
+                               /p15_kcal_pc_calibrated_plant_orig(t,i);
+
+p15_kcal_pc_calibrated(t,i,kfo_rd) = p15_rumdairy_kcal_structure_orig(t,i,kfo_rd)
+               *p15_kcal_pc_calibrated_rumdairy_orig(t,i)*i15_rumdairy_fadeout(t,i);
+p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
+               *(p15_kcal_pc_calibrated_plant_orig(t,i)
+               + p15_kcal_pc_calibrated_rumdairy_orig(t,i) * (1-i15_rumdairy_fadeout(t,i)));
 
 
 
