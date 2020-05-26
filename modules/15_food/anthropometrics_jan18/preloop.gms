@@ -1,15 +1,9 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
-
-
- i15_dem_intercept(regr15)   = f15_demand_paras(regr15,"%c15_food_scenario%","intercept");
- i15_dem_saturation(regr15)  = f15_demand_paras(regr15,"%c15_food_scenario%","saturation");
- i15_dem_halfsat(regr15)     = f15_demand_paras(regr15,"%c15_food_scenario%","halfsaturation");
- i15_dem_nonsat(regr15)      = f15_demand_paras(regr15,"%c15_food_scenario%","non_saturation");
 
  i15_bmi_intercept(sex,agegroup15,bmi_tree15)  = f15_bmi_shr_paras(sex,agegroup15,bmi_tree15,"intercept");
  i15_bmi_saturation(sex,agegroup15,bmi_tree15) = f15_bmi_shr_paras(sex,agegroup15,bmi_tree15,"saturation");
@@ -47,6 +41,53 @@ p15_prices_kcal(t,iso,kfo)=i15_prices_initial_kcal(iso,kfo);
 p15_lastiteration_delta_income(t,i) = 1;
 
 
-$ifthen "%c15_rumscen%" == "mixed" i15_ruminant_fadeout(t) = (f15_ruminant_fadeout(t,"constant") + f15_ruminant_fadeout(t,"halving2050"))/2;
-$else i15_ruminant_fadeout(t) = f15_ruminant_fadeout(t,"%c15_rumscen%");
+
+* Temporal development of ruminant meat share within the livestock food product
+* group (applied before food demand model is executed)
+$ifthen "%c15_rum_share%" == "mixed" i15_rum_share_fadeout(t,iso) = (f15_rum_share_fadeout(t,"constant") + f15_rum_share_fadeout(t,"halving2050"))/2;
+$else i15_rum_share_fadeout(t,iso) = f15_rum_share_fadeout(t,"%c15_rum_share%");
 $endif
+
+* Stronger ruminant fadeout for India
+if (s15_rum_share_fadeout_india_strong = 1,
+	i15_rum_share_fadeout(t,"IND") = f15_rum_share_fadeout_india(t);
+);
+
+* Milk fadeout for India
+if (s15_milk_share_fadeout_india = 0,
+	i15_milk_share_fadeout_india(t) = 1;
+Elseif s15_milk_share_fadeout_india = 1,
+	i15_milk_share_fadeout_india(t) = f15_milk_share_fadeout_india(t);
+);
+
+display i15_milk_share_fadeout_india;
+
+* Food substitution scenarios including functional forms, targets and transition periods
+i15_ruminant_fadeout(t) = f15_food_substitution_fader(t,"%c15_rumscen%");
+i15_fish_fadeout(t) = f15_food_substitution_fader(t,"%c15_fishscen%");
+i15_alcohol_fadeout(t) = f15_food_substitution_fader(t,"%c15_alcscen%");
+i15_livestock_fadeout(t) = f15_food_substitution_fader(t,"%c15_livescen%");
+
+
+* ###### Exogenous food waste and exogenous diet scenarios
+
+* Country switch to determine countries for which exogenous food waste
+* and exogenous diet scenarios shall be applied.
+* In the default case, the exogenous food scenario affects all countries when
+* activated.
+p15_country_dummy(iso) = 0;
+p15_country_dummy(scen_countries15) = 1;
+* Because MAgPIE is not run at country-level, but at region level, a region
+* share is calculated that translates the countries' influence to regional level.
+* Countries are weighted by their population size.
+p15_exo_foodscen_region_shr(t_all,i) = sum(i_to_iso(i,iso), p15_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
+
+
+* The target year for transition to exogenous scenario diets defines the speed
+* of fading from regression based daily food consumption towards the scenario.
+* Note: p15_exo_foodscen_region_shr(t,i) is 1 in the default case)
+i15_exo_foodscen_fader(t,i) = f15_exo_foodscen_fader(t,"%c15_exo_scen_targetyear%") * p15_exo_foodscen_region_shr(t,i);
+
+* Initialisation of the ratio between food calorie demand and food intake for the
+* historical reference period:
+p15_demand2intake_ratio_ref(i) = 0;

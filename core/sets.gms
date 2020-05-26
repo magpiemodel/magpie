@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -16,9 +16,9 @@
 
 sets
 
-   i World regions /CAZ,CHA,EUR,IND,JPN,LAM,MEA,NEU,OAS,REF,SSA,USA/
+   i all economic regions /CAZ,CHA,EUR,IND,JPN,LAM,MEA,NEU,OAS,REF,SSA,USA/
 
-   iso Countries /
+   iso list of iso countries /
        ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
        ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
        BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
@@ -45,7 +45,7 @@ sets
        UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
        VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 
-   j Spatial clusters /
+   j number of LPJ cells /
        CAZ_1*CAZ_28,
        CHA_29*CHA_52,
        EUR_53*EUR_62,
@@ -59,7 +59,7 @@ sets
        SSA_180*SSA_190,
        USA_191*USA_200/
 
-   cell(i,j) Mapping between regions i and clusters j
+   cell(i,j) number of LPJ cells per region i
       /
        CAZ . CAZ_1*CAZ_28
        CHA . CHA_29*CHA_52
@@ -75,7 +75,7 @@ sets
        USA . USA_191*USA_200
       /
 
-   i_to_iso(i,iso) Mapping between regions and countries
+   i_to_iso(i,iso) mapping regions to iso countries
       /
        CAZ . (AUS,CAN,HMD,NZL,SPM)
        CHA . (CHN,HKG,MAC,TWN)
@@ -122,6 +122,10 @@ sets
 i2(i) = yes;
 j2(j) = yes;
 
+sets
+        c_title defined to include c_title in GDX
+        / %c_title% /
+;
 
 ***TIME STEPS***
 * ATTENTION: check macros m_year and m_yeardiff if you change something
@@ -138,12 +142,14 @@ sets time_annual Annual extended time steps
       y2095, y2100, y2105, y2110, y2115, y2120, y2125, y2130, y2135, y2140,
       y2145, y2150 /
 
-    t_past(t_all) Timesteps with observed data
-        / y1965, y1970, y1975,
-         y1980, y1985, y1990,
-         y1995, y2000, y2005, y2010
-        /
 ;
+
+set t_past(t_all) Timesteps with observed data 
+$If "%c_past%"== "till_2010" /y1965, y1970, y1975, y1980, y1985, y1990,y1995, y2000, y2005, y2010/;
+$If "%c_past%"== "till_1965" /y1965/;
+$If "%c_past%"== "till_1975" /y1965, y1970, y1975/;
+$If "%c_past%"== "till_1995" /y1965, y1970, y1975, y1980, y1985, y1990, y1995/;
+
 
 set t(t_all) Simulated time periods
 $If "%c_timesteps%"== "less_TS" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2070,y2080,y2090,y2100,y2110,y2130,y2150/;
@@ -222,6 +228,14 @@ sets
                     ac155,ac160,ac165,ac170,ac175,ac180,ac185,ac190,ac195,ac200,
                     ac205,ac210,ac215,ac220,ac225,ac230,ac235,ac240,ac245,ac250,
                     ac255,ac260,ac265,ac270,ac275,ac280,ac285,ac290,ac295,acx /
+
+  ac_sub(ac) age classes
+  / ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
+  ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,ac95,ac100,
+  ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,ac150,
+  ac155,ac160,ac165,ac170,ac175,ac180,ac185,ac190,ac195,ac200,
+  ac205,ac210,ac215,ac220,ac225,ac230,ac235,ac240,ac245,ac250,
+  ac255,ac260,ac265,ac270,ac275,ac280,ac285,ac290,ac295,acx /
 
    when Temporal location relative to optimization / before, after /
 
