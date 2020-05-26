@@ -47,7 +47,7 @@ loop(t_all$(m_year(t_all) >= 2010 AND m_year(t_all) < 2150),
 );
 p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)$(im_gdp_pc_ppp_iso(t_all,iso)=0) = 0.0001;
 
-p73_timber_demand_gdp_pop(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to_woodprod(kforestry,total_wood_products)),p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)) * s73_timber_demand;
+p73_timber_demand_gdp_pop(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to_woodprod(kforestry,total_wood_products)),p73_forestry_demand_prod_specific(t_all,iso,total_wood_products));
 p73_glo_timber_demand(t_all,kforestry) = sum(i,p73_timber_demand_gdp_pop(t_all,i,kforestry));
 *display p73_glo_timber_demand;
 
@@ -56,7 +56,7 @@ p73_timber_demand_gdp_pop(t_all,i,"woodfuel") = p73_timber_demand_gdp_pop(t_all,
 *p73_timber_demand_gdp_pop(t_all,i,"woodfuel")$(im_development_state(t_all,i)<1) = p73_timber_demand_gdp_pop(t_all,i,"woodfuel") * 0.5;
 
 *m3 to ton conversion.
-*0.6 ton DM / m^3?
+*0.6 ton DM / m^3
 p73_volumetric_conversion("wood") = 0.6;
 p73_volumetric_conversion("woodfuel") = 0.3;
 *p73_timber_demand_gdp_pop in mio m^3
@@ -64,4 +64,4 @@ p73_volumetric_conversion("woodfuel") = 0.3;
 pm_demand_ext(t_ext,i,kforestry) = round(p73_timber_demand_gdp_pop("y2150",i,kforestry) * p73_volumetric_conversion(kforestry),3);
 pm_demand_ext(t_all,i,kforestry) = round(p73_timber_demand_gdp_pop(t_all,i,kforestry) * p73_volumetric_conversion(kforestry),3);
 p73_demand_ext_original(t_ext,i,kforestry) = pm_demand_ext(t_ext,i,kforestry);
-display pm_demand_ext;
+*display pm_demand_ext;

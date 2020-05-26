@@ -6,13 +6,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-  s73_price_adjuster        Switch for price based adjustment /0/
-  s73_timber_demand         Switch for timber demand / 1 /
   s73_counter               Counter for iterations of demand adjustment / 0 /
   s73_maxiter               Maximum iterations for demand adjustments / 1 /
   s73_price_elasticity      Price elasticity from lauri et al / -0.1 /
-  s73_counter2              Counter for iterations of demand adjustment / 0 /
-  s73_maxiter2              Maximum iterations for demand adjustments / 1 /
+  s73_counter2              Second counter for iterations of demand adjustment / 0 /
+  s73_maxiter2              Maximum iterations for intersolve demand adjustments / 1 /
   s73_timber_harvest_cost   Cost per ha for harvesting timber /200/
   s73_cost_multiplier       Multiplier for expensive harvest in natural vegetation /2/
   s73_free_prod_cost        Very high cost for using non existing land for plantation establishment /1000000/

@@ -22,18 +22,18 @@ while(floor(smax((i,kforestry), sum(cell(i,j),v73_prod_heaven_timber.l(j,kforest
   	display p73_criterion;
   	display "Warning: There are trade imbalances for timber. Restarting solve with adjusted timber demand!";
 
-    if (s73_price_adjuster = 1,
-      p73_price_ratio(t,i,kforestry) = pm_prices_woodymass(t,i,kforestry)/pm_prices_woodymass("y1995",i,kforestry);
+*    if (s73_price_adjuster = 1,
+*      p73_price_ratio(t,i,kforestry) = pm_prices_woodymass(t,i,kforestry)/pm_prices_woodymass("y1995",i,kforestry);
 ** Clipping price index to 300%
-      p73_price_ratio(t,i,kforestry)$(p73_price_ratio(t,i,kforestry)>3) = 3;
+*      p73_price_ratio(t,i,kforestry)$(p73_price_ratio(t,i,kforestry)>3) = 3;
 ** Only adjust for positive numbers (<1 will mean reduction)
-      pm_demand_ext(t,i,kforestry)$(p73_price_ratio(t,i,kforestry) > 0) = pm_demand_ext(t,i,kforestry) * (p73_price_ratio(t,i,kforestry)**s73_price_elasticity);
-      pm_demand_ext(t,i,kforestry)$(pm_demand_ext(t,i,kforestry)<1) = 1;
+*      pm_demand_ext(t,i,kforestry)$(p73_price_ratio(t,i,kforestry) > 0) = pm_demand_ext(t,i,kforestry) * (p73_price_ratio(t,i,kforestry)**s73_price_elasticity);
+*      pm_demand_ext(t,i,kforestry)$(pm_demand_ext(t,i,kforestry)<1) = 1;
 
-      else
+*      else
 
       pm_demand_ext(t,i,kforestry) = pm_demand_ext(t,i,kforestry) - sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry));
-    );
+*    );
 
     p73_timder_adjustment_ratio(t,i,"wood") = pm_demand_ext(t,i,"wood")/p73_demand_ext_original(t,i,"wood");
     p73_timder_adjustment_ratio(t,i,"woodfuel") = pm_demand_ext(t,i,"woodfuel")/p73_demand_ext_original(t,i,"woodfuel");
@@ -54,7 +54,7 @@ while(floor(smax((i,kforestry), sum(cell(i,j),v73_prod_heaven_timber.l(j,kforest
         solve magpie USING nlp MINIMIZING vm_cost_glo;
       	option nlp = conopt4;
        );
-$batinclude "./modules/include.gms" price_update       
+$batinclude "./modules/include.gms" price_update
 * write extended run information in list file in the case that the final solution is infeasible
   if((s73_counter2 >= (s73_maxiter2-1) and magpie.modelstat > 2 and magpie.modelstat ne 7),
     magpie.solprint = 1

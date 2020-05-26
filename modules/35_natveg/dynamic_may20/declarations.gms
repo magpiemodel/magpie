@@ -41,7 +41,6 @@ equations
  q35_primforest_reduction(j)   	                Primforest reduction (mio. ha)
  q35_min_forest(j)					                    Minimum forest land constraint (mio. ha)
  q35_min_other(j)                               Minimum other land constraint (mio. ha)
- q35_min_natveg(j)                              Minimum natveg land constraint (mio. ha)
  q35_secdforest_change(j,ac_sub)                Change in secondary forest between timesteps (mio. ha per year)
  q35_primforest_change(j)                       Change in primary forest between timesteps (mio. ha per year)
  q35_other_change(j,ac_sub)                     Change in other land between timesteps (mio. ha per year)
@@ -56,9 +55,9 @@ positive variables
   v35_other_reduction(j,ac)                     Other land reduction compared to previous timestep (mio. ha)
   v35_secdforest_reduction(j,ac)                Secdforest reduction compared to previous timestep (mio. ha)
   v35_primforest_reduction(j)                   Primforest reduction compared to previous timestep (mio. ha)
-  vm_secdforest_reduction(j,ac_sub)       Change in secondary forest between timesteps (mio. ha per year)
-  vm_primforest_reduction(j)              Change in primary forest between timesteps (mio. ha per year)
-  vm_other_reduction(j,ac_sub)            Change in other land between timesteps (mio. ha per year)
+  vm_secdforest_reduction(j,ac_sub)             Change in secondary forest between timesteps (mio. ha per year)
+  vm_primforest_reduction(j)                    Change in primary forest between timesteps (mio. ha per year)
+  vm_other_reduction(j,ac_sub)                  Change in other land between timesteps (mio. ha per year)
 ;
 
 
@@ -86,7 +85,6 @@ parameters
  oq35_primforest_reduction(t,j,type)       Primforest reduction (mio. ha)
  oq35_min_forest(t,j,type)                 Minimum forest land constraint (mio. ha)
  oq35_min_other(t,j,type)                  Minimum other land constraint (mio. ha)
- oq35_min_natveg(t,j,type)                 Minimum natveg land constraint (mio. ha)
  oq35_secdforest_change(t,j,ac_sub,type)   Change in secondary forest between timesteps (mio. ha per year)
  oq35_primforest_change(t,j,type)          Change in primary forest between timesteps (mio. ha per year)
  oq35_other_change(t,j,ac_sub,type)        Change in other land between timesteps (mio. ha per year)

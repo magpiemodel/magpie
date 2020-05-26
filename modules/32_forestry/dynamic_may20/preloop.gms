@@ -78,8 +78,8 @@ loop(t_all,
   p32_rotation_regional(t_all,i) = ceil(sum(cell(i,j), p32_rot_length_ac_eqivalent(t_all,j))/p32_ncells(i));
   p32_representative_rotation(t_all,i) = ord(t_all) + ceil(sum(cell(i,j),p32_rot_length_ac_eqivalent(t_all,j))/p32_ncells(i));
   );
-display p32_rotation_regional;
-display p32_representative_rotation;
+*display p32_rotation_regional;
+*display p32_representative_rotation;
 
 ** Earlier we converted rotation lengths to absolute numbers, now we make the Conversion
 ** back to rotation length in age-classes.
@@ -160,7 +160,7 @@ elseif s32_initial_distribution = 1,
   p32_land("y1995",j,"plant","ac0") = 0;
 
   );
-display p32_land;
+*display p32_land;
 ** Initialization of land
 p32_land_start(j,type32,ac) = p32_land("y1995",j,type32,ac);
 
