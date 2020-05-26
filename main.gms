@@ -162,13 +162,13 @@ $title magpie
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev3.82.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-* 
 * Used data set: forestry_20200513.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/users/mishra/additional_data_private_forestry
+* 
+* Used data set: additional_data_rev3.82.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -201,7 +201,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Tue May 26 17:01:48 2020
+* Last modification (input data): Tue May 26 21:48:34 2020
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 

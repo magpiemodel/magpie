@@ -30,7 +30,7 @@ cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c200_690d3718e151be1b45
  			   "calibration_H12_c200_26Feb20.tgz",
          "forestry_20200513.tgz",
 #         "coupling_co2_prices_apr20.tgz",
-         "additional_data_rev3.80.tgz")
+         "additional_data_rev3.82.tgz")
 
 ### REPOSITORIES
 cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL,"/p/projects/landuse/users/mishra/additional_data_private_forestry"=NULL,"/p/projects/magpie/users/mishra/projects/coupling"=NULL), getOption("magpie_repos"))
