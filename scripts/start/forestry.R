@@ -29,7 +29,7 @@ cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c200_690d3718e151be1b45
          "rev4.44forestry_20200525_h12_validation.tgz",
  			   "calibration_H12_c200_26Feb20.tgz",
          "forestry_20200513.tgz",
-         "coupling_co2_prices_apr20.tgz",
+#         "coupling_co2_prices_apr20.tgz",
          "additional_data_rev3.80.tgz")
 
 ### REPOSITORIES
@@ -63,13 +63,8 @@ cfg$gms$natveg  <- "dynamic_may20"
 # * (2): Distribution of LUH2 secondary forest into age-class distribution from Poulter et al. 2019 GFAD v1.1
 cfg$gms$s35_secdf_distribution <- 0
 
-### CARBON
-# * Carbon switch
-cfg$gms$c52_carbon_switch <- "default_lpjml"          # def = "default_lpjml"
-
+## Bioenergy demand 0=GLO
 cfg$gms$c60_biodem_level <- 0
-
-cfg$gms$s80_maxiter <- 2
 
 ### TIMBER
 # * (biomass_mar20): WIP
@@ -97,6 +92,8 @@ cfg$gms$s73_cost_multiplier <- 2
 # * 1: using optfile for specified solver settings
 # * 0: default settings (optfile will be ignored)
 cfg$gms$s80_optfile <- 1
+## Solver maxiter
+cfg$gms$s80_maxiter <- 2
 
 ###########################################################################
 

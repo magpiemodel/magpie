@@ -7,7 +7,9 @@
 
 *' @description biomass_mar20 realization acts as a common tunnel for land related
 *' decisions in forestry [32_forestry] and natveg [35_natveg] modules and corresponding
-*' production of woody biomass realized.
+*' production of woody biomass realized. This realization harvests timber from
+*' available plantations to meet a portion of overall timber demand. Rest of the timber
+*' production comes by harvesting natural vegetation.
 
 *' @limitations Timber demand cannot be determined endogenously
 

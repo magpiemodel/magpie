@@ -7,7 +7,9 @@
 
 *' @equations
 
-*****Costs**********************************************************************
+*------------------
+****** Costs ******
+*------------------
 
 *' The direct costs of Timber production and afforestation `vm_cost_fore` include
 *' maintenance and monitoring costs for newly established plantations as well as
@@ -21,11 +23,12 @@
 q32_cost_total(i2) .. vm_cost_fore(i2) =e=
 								   v32_cost_recur(i2)
 								   + v32_cost_establishment(i2)
-								   + sum(cell(i2,j2), v32_land_missing(j2)) * 1000000
+								   + sum(cell(i2,j2), v32_land_missing(j2)) * s32_free_land_cost
 								   ;
 
-*****C-PRICE INDUCED AFFORESTATION
-*****forestry emissions seen in maccs module************************************
+*-----------------------------------------------
+****** Carbon price induced afforestation ******
+*-----------------------------------------------
 *' The interface `vm_cdr_aff` provides the projected bgc (CDR) and local bph effects of an afforestation
 *' activity for a planning horizon of 30 years `s32_planing_horizon` to the [56_ghg_policy] module.
 
@@ -39,12 +42,15 @@ q32_bgp_aff(j2,ac) ..
 vm_cdr_aff(j2,ac,"bph") =e=
 v32_land(j2,"aff","ac0") * p32_aff_bgp(j2,ac);
 
-*ac0 can only increase if total afforested land increases
+*' Lowest age class can only increase if total afforested land increases
 q32_aff_ac0(j2) ..
 v32_land(j2,"aff","ac0") =l= sum(ac, v32_land(j2,"aff",ac)) - sum((ct,ac), p32_land(ct,j2,"aff",ac));
 
 *****GENERAL
-*****Land***************************************************
+*-----------------------------------------------
+****************** Land ************************
+*-----------------------------------------------
+
 *' The interface `vm_land` provides aggregated forestry land pools (`type32`) to other modules.
 
  q32_land(j2) ..
@@ -65,7 +71,9 @@ v32_land(j2,"aff","ac0") =l= sum(ac, v32_land(j2,"aff",ac)) - sum((ct,ac), p32_l
  q32_max_aff .. sum((j2,type32,ac)$(not sameas(type32,"plant")), v32_land(j2,type32,ac))
                 =l= p32_max_aff_area - sum(ct, p32_aff_togo(ct));
 
-*****Carbon stocks**************************************************************
+*-----------------------------------------------
+************** Carbon stock ********************
+*-----------------------------------------------
 *' Forestry above ground carbon stocks are calculated as the product of forestry land (`v32_land`) and the area
 *' weighted mean of carbon density for carbon pools (`p32_carbon_density_ac`).
 
@@ -85,31 +93,20 @@ v32_land(j2,"aff","ac0") =l= sum(ac, v32_land(j2,"aff",ac)) - sum((ct,ac), p32_l
  q32_land_reduction(j2,type32,ac) ..
  	v32_land_reduction(j2,type32,ac) =g= pc32_land(j2,type32,ac) - v32_land(j2,type32,ac);
 
-*------------------------------------------------------------------------------*
-
 *----------------------------------------------------
-****** Forestry sector for prodcution purposes ******
+********** Timber for rodcution purposes ************
 *----------------------------------------------------
 
 **** Cost calculations
 *---------------------
 
-$ontext
-re-establishment costs in t0
-recurring costs * rotation length (thinning, monitigotr) (1/i)
-harvesting costs in t30
-transports in t30
-
-PV of establishment decision cost
-PV * annuity factor * time step length
-$offtext
-
 *' Cost of new plantations establishment `v32_cost_establishment` is the investment
 *' made in setting up new plantations but also accounts for the expected value of
-*' future transport costs and harvesting costs as well as trade costs for timber.
-*' This makes sure that the model sticks to reasonable plantation patterns over time.
+*' future harvesting costs. This makes sure that the model sticks to reasonable plantation
+*' patterns over time. Present value of harvesting costs is (1+`pm_interest`)^`p32_rotation_regional`
+*' and annuity factor of `pm_interest`/(1+`pm_interest`) averages the cost of this
+*' investment over time.
 
-*(establishment costs + PV of future harvesting costs) * annuity factor
 q32_cost_establishment(i2)..
 						v32_cost_establishment(i2)
 						=e=
@@ -126,11 +123,7 @@ q32_cost_establishment(i2)..
 *' trees established for afforestation purposes.
 
 q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
-                    sum((cell(i2,j2),type32,ac_sub), v32_land(j2,type32,ac_sub)) * f32_fac_req_ha(i2,"recur");
-
-
-*' Harvesting costs are calculated based on area removed for timber production purposes.
-*' These costs are also paid when land expansion happens at the cost of plantations,
+                    sum((cell(i2,j2),type32,ac_sub), v32_land(j2,type32,ac_sub)) * f32_fac_req_ha(i2,"recur") * s32_recurring_cost_multiplier;
 
 
 **** New establishment decision

@@ -5,9 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description off realization acts as a common tunnel for land related
-*' decisions in forestry [32_forestry] and natveg [35_natveg] modules and corresponding
-*' production of woody biomass realized.
+*' @description With the off realization, there is no timber production in the
+*' model
 
 *' @limitations Timber production not simulated in the model
 

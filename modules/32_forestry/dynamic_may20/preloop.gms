@@ -1,8 +1,6 @@
 *** Historical value fix
 pm_interest_dev(t_historical,i) = pm_interest_dev("y1995",i) * 0.9;
 
-*' @code
-
 *' Calculation of Single rotation model rotation lengths
 
 *' Calculating forestry carbon densitiy here is the same calculation as in carbon module.
@@ -31,11 +29,11 @@ p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev
                         + 0$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)) <= 0);
 
 *' From the above calculation, now its easier to count how many age-classes can be sustained before IGR falls below interest rate.
-*' @stop
+
 *********************************************************************************
 
 p32_replanting_cost = 800;
-*' @code
+
 *' Faustmann rotation lengths:
 
 p32_time(ac) = ord(ac);
@@ -55,7 +53,6 @@ p32_rot_flg_faustmann(t_all,j,ac)       = 1$(p32_IGR(t_all,j,ac) > sum(cell(i,j)
 
 p32_rot_length_faustmann(t_all,j)       = sum(ac,p32_rot_flg_faustmann(t_all,j,ac));
 
-*' @stop
 *********************************************************************************
 
 ** Change rotation based on switch. If not use calculation before faustmann

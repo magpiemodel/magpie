@@ -18,9 +18,9 @@ p35_ageclass_secdforest_shr(j,ac)$(sum(ac_poulter2, p35_ageclass_secdforest_area
                       p35_ageclass_secdforest_area(j,ac_poulter)
                       /
                       sum(ac_poulter2, p35_ageclass_secdforest_area(j,ac_poulter2)));
+                      
 *This causes rounding errors in optimization.
 *p35_ageclass_secdforest_shr(j,ac)$(sum(ac_poulter2, p35_ageclass_secdforest_area(j,ac_poulter2)) = 0) = 1/card(ac);
-
 *i35_secdforest(j,ac) = round(pcm_land(j,"secdforest")*p35_ageclass_secdforest_shr(j,ac),5);
 
 ** Change rotation based on switch. If not use calculation before faustmann

@@ -90,9 +90,9 @@ $endif
 if (sum(sameas(t_past,t),1) = 1,
 vm_land.lo(j,"primforest") = p35_save_primforest(t,j);
 else
-vm_land.lo(j,"primforest") = max((1-s35_selective_logging_flag) * pcm_land(j,"primforest"), p35_save_primforest(t,j));
+vm_land.lo(j,"primforest") = max((1-s35_clearcut_share) * pcm_land(j,"primforest"), p35_save_primforest(t,j));
 );
-*vm_land.lo(j,"primforest") = max((1-s35_selective_logging_flag) * pcm_land(j,"primforest"), p35_save_primforest(t,j));
+*vm_land.lo(j,"primforest") = max((1-s35_clearcut_share) * pcm_land(j,"primforest"), p35_save_primforest(t,j));
 *vm_land.lo(j,"primforest") = p35_save_primforest(t,j);
 vm_land.up(j,"primforest") = pcm_land(j,"primforest");
 m_boundfix(vm_land,(j,"primforest"),l,10e-5);
@@ -102,9 +102,9 @@ v35_secdforest.lo(j,ac_sub) = 0;
 if (sum(sameas(t_past,t),1) = 1,
 v35_secdforest.lo(j,"acx") = p35_save_secdforest(t,j);
 else
-v35_secdforest.lo(j,"acx") = max((1-s35_selective_logging_flag) * pc35_secdforest(j,"acx"), p35_save_secdforest(t,j));
+v35_secdforest.lo(j,"acx") = max((1-s35_clearcut_share) * pc35_secdforest(j,"acx"), p35_save_secdforest(t,j));
 );
-*v35_secdforest.lo(j,"acx") = max((1-s35_selective_logging_flag) * pc35_secdforest(j,"acx"), p35_save_secdforest(t,j));
+*v35_secdforest.lo(j,"acx") = max((1-s35_clearcut_share) * pc35_secdforest(j,"acx"), p35_save_secdforest(t,j));
 *v35_secdforest.lo(j,"acx") = p35_save_secdforest(t,j);
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
 m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
