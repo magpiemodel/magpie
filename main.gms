@@ -162,9 +162,9 @@ $title magpie
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev3.79.tgz
-* md5sum: 44bb42368f41602ada44395aab201c62
-* Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/input_data/
+* Used data set: additional_data_rev3.81.tgz
+* md5sum: 94475462b6440caea9c1bf335a3a1a3b
+* Repository: /p/projects/landuse/data/input/archive
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -223,7 +223,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  SSP2_rev42_rev4p37
+$setglobal c_title  default
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /
