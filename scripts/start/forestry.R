@@ -104,9 +104,9 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "BF37"
+identifier_flag <- "PR01"
 
-cat(paste0("Bugfix in representative rotations. General bugfix after Florian's reformation of estb decisions."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("First test after general code cleanup"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 for(s73_price_adjuster in c(0)){
 
