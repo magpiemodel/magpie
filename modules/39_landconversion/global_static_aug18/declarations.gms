@@ -24,10 +24,11 @@ scalar
 ;
 
 parameters
- i39_cost_establish(land)			   Global land establishment costs (USD05MER per hectare)
+ i39_cost_establish(land)			         Global land establishment costs (USD05MER per hectare)
  i39_cost_clearing(land)               Global land clearing costs (USD05MER per ton C)
  p39_cost_landcon_past(t,j,land)       Costs for landconversion from the past (mio. USD05MER per yr)
  pc39_cost_landcon_past(j,land)        Costs for landconversion from the past in the current time step (mio. USD05MER per yr)
+ pc39_ovcost_land(t,j,land)              Overall land conversion costs including past annuities (mio. USD05MER per yr)
 ;
 
 

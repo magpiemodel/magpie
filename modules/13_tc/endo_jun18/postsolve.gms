@@ -5,7 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-p13_tech_cost_past(t2,i) = p13_tech_cost_past(t2,i) + v13_tech_cost_annuity.l(i);
+p13_ov_cost_tc(t,i) = v13_tech_cost_annuity.l(i) + pc13_tech_cost_past(i);
+p13_tech_cost_past(t,i) = p13_tech_cost_past(t,i) + v13_tech_cost_annuity.l(i);
 
 if((ord(t)>1),
  pc13_tcguess(i) = (vm_tau.l(i)/pc13_tau(i))**(1/m_yeardiff(t)) - 1;

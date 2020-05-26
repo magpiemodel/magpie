@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -27,9 +27,5 @@ $Ifi "%phase%" == "scaling" $include "./modules/38_factor_costs/sticky_feb18/sca
 $Ifi "%phase%" == "preloop" $include "./modules/38_factor_costs/sticky_feb18/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/38_factor_costs/sticky_feb18/presolve.gms"
 $Ifi "%phase%" == "solve" $include "./modules/38_factor_costs/sticky_feb18/solve.gms"
-$Ifi "%phase%" == "intersolve" $include "./modules/38_factor_costs/sticky_feb18/intersolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/38_factor_costs/sticky_feb18/postsolve.gms"
-$Ifi "%phase%" == "nl_fix" $include "./modules/38_factor_costs/sticky_feb18/nl_fix.gms"
-$Ifi "%phase%" == "nl_release" $include "./modules/38_factor_costs/sticky_feb18/nl_release.gms"
-$Ifi "%phase%" == "nl_relax" $include "./modules/38_factor_costs/sticky_feb18/nl_relax.gms"
 *######################## R SECTION END (PHASES) ###############################

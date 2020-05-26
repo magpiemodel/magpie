@@ -5,6 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+pc39_ovcost_land(t2,j,land)=v39_cost_landcon_annuity.l(j,land) + pc39_cost_landcon_past(j,land);
 p39_cost_landcon_past(t2,j,land) = p39_cost_landcon_past(t2,j,land) + v39_cost_landcon_annuity.l(j,land);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################

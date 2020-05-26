@@ -56,7 +56,7 @@ parameters
  ov_landdiff_forestry(t,type)            Aggregated difference in forestry land compared to previous timestep (mio. ha)
  ov32_land_expansion(t,j,type32,ac,type) Forestry land expansion compared to previous timestep (mio. ha)
  ov32_land_reduction(t,j,type32,ac,type) Forestry land reduction compared to previous timestep (mio. ha)
- ov_cdr_aff(t,j,ac,aff_effect,type)      Expected CDR from afforestation depending on planning horizon (mio. tC)
+ ov_cdr_aff(t,j,ac,aff_effect,type)      Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
  oq32_cost_fore_ac(t,i,type)             Total forestry costs constraint (mio. USD04MER)
  oq32_land(t,j,type)                     Land constraint (mio. ha)
  oq32_cdr_aff(t,j,ac,type)               Calculation of CDR from afforestation in terms of CO2-C (mio. tC)

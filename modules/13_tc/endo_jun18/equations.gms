@@ -44,4 +44,4 @@ q13_tech_cost_annuity(i2) ..
 *' decisions are added to the technological change costs of the current period:
 
 q13_tech_cost(i2) ..
-  vm_tech_cost(i2) =e= v13_tech_cost_annuity(i2) + pc13_tech_cost_past(i2);
+  vm_tech_cost(i2) =e= v13_tech_cost_annuity(i2);

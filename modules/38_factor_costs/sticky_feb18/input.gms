@@ -1,7 +1,8 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
@@ -13,12 +14,11 @@ scalars
   s38_depreciation_rate depreciation rate (share of costs)  / 0.05 /
 * years a farmer can delay an investment to facilitate switching from one crop to another
   s38_investment_flexibility possible delay of investments (years) / 5 /
-* Share of immobile capital in perennial crops.
+* Share of immobile capital in perennial and yearly crops.
   s38_immobile_perennials  immobile capital in perennial crops (share) / 0.7 /
   s38_immobile  immobile capital in yearly crops (share) / 0.7 /
   s38_mi_start global management intensity in 1995 /0.47/
-*-->
-  s38_n number of periods used to pay calculate annuity /6/
+* Maximum allowed change in crop area   
   s38_AreaLim limits of area change / 10000 /
 ;
 

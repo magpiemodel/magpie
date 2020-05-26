@@ -24,6 +24,7 @@ parameters
  p13_tech_cost_past(t,i)     Costs for TC from past (mio. USD05PPP per yr)
  pc13_tech_cost_past(i)      Current costs for TC from past (mio. USD05PPP per yr)
  pc13_tcguess(i)             Guess for annual tc rates in the next time step (1)
+ p13_ov_cost_tc(t,i)           Overall tc cost including past annuities (mio. USD05PPP)
  i13_tc_factor(t,i)          Regression factor (USD05PPP per ha)
  i13_tc_exponent(t,i)        Regression exponent (1)
 ;

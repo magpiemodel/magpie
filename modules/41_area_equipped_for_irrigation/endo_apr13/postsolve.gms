@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 pc41_AEI_start(j)=v41_AEI.l(j);
-
+pc41_ovcost_AEI(t2,i) =   v41_cost_AEI_annuity.l(i) + pc41_cost_AEI_past(i);
 p41_cost_AEI_past(t2,i) = p41_cost_AEI_past(t2,i) + v41_cost_AEI_annuity.l(i);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################

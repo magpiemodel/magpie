@@ -15,9 +15,9 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 clima<-"cc"
-resolutions<-c("1000")
-realization<-c("sticky_feb18","mixed_feb17")
-trade<-c("exo")
+resolutions<-c("200")
+realization<-c("sticky_feb18")
+trade<-c("selfsuff_reduced")
 
 
 for (i in 1:length(resolutions)){
@@ -27,11 +27,14 @@ for(k in 1:length(trade)){
 
 cfg$title<-paste0("Develop_merge_",realization[j],"_c",resolutions[i],"_trade_",trade[k])
 
-cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c1000_690d3718e151be1b450b394c1064b1c5.tgz",
+cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c",resolutions[i],"_690d3718e151be1b450b394c1064b1c5.tgz"),
                "rev4.44_h12_magpie.tgz",
                "rev4.44_h12_validation.tgz",
+               "calibration_H12_c200_26Feb20.tgz",
                "additional_data_rev3.79.tgz")
 
+
+if (trade[k]=="exo"){
 #data from the c200 resolution
 gdx <- paste0("/p/projects/landuse/users/mbacca/magpie_downloads/Develop_sticky_merge/magpie/output/Develop_merge_sticky_feb18_c200_trade_selfsuff_reduced_2020-05-17_23.44.14/fulldata.gdx")
  ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
@@ -45,7 +48,7 @@ gdx <- paste0("/p/projects/landuse/users/mbacca/magpie_downloads/Develop_sticky_
   cfg$gms$trade <- trade[k]
   cfg$gms$optimization <- "nlp_par"
   cfg$gms$s15_elastic_demand <- 0
-
+}
 #recalibrate
 #cfg$recalibrate <- "ifneeded"
 

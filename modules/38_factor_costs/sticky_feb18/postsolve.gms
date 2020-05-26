@@ -1,30 +1,25 @@
-*** |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
 * postsolve costs
-
-p38_ovcosts(t,i,kcr)   = vm_cost_prod.l(i,kcr)-p38_past_annuity(i,kcr);
-p38_accum_ann(t,i,kcr) = p38_past_annuity(i,kcr)+v38_investment_annuity.l(i,kcr);
+p38_ovcosts(t,i,kcr)   = vm_cost_prod.l(i,kcr)+p38_past_annuity(i,kcr);
 p38_past_annuity(i,kcr)= p38_past_annuity(i,kcr)+v38_investment_annuity.l(i,kcr);
 
 *Capital update from the last investment
 p38_capital(t+1,j,kcr,mobil38) = v38_capital.l(j,kcr,mobil38) + v38_investment.l(j,kcr,mobil38);
 
-* Timestep length matters unfortunately.
-* The model can make larger changes if larger parts of the capital stock are depreciated.
-*p38_croparea_preexisting_capital(t,j,kcr) = p38_croparea_preexisting_capital(t,j,kcr) * (1-s38_depreciation_rate)**m_yeardiff(t+1);
-
-* An option to avoid this is to assume that capital stocks are restocked in the timesteps which were not considered
-* and just to simulate a yearly timestep or a smaller timestep instead.
-* Here we assume a five year timestep, assuming farmers can delay investments by s38_investment_flexibility years.
-p38_capital(t+1,j,kcr,mobil38) = p38_capital(t+1,j,kcr,mobil38) * (1-s38_depreciation_rate)**s38_investment_flexibility;
+* Timestep length matters.
+p38_capital(t+1,j,kcr,mobil38) = p38_capital(t+1,j,kcr,mobil38) * (1-s38_depreciation_rate)**(m_year(t+1)-m_year(t));
 p38_capital_intensity(t+1,j,kcr) = p38_capital(t+1,j,kcr,"immobile") /(vm_prod.l(j,kcr)+0.00001);
 
-* to keep track of areas
+* to keep track of change in physical areas
 p38_past_area(j,kcr)=sum(w,vm_area.l(j,kcr,w));
+
+
 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
