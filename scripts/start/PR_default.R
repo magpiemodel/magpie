@@ -5,26 +5,26 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
+##### Version log (YYYYMMDD - Description - Author(s))
+## 20200527 - Default SSP2 Baseline and Policy runs - FH,AM,EMJB,JPD
 
-###############################################
-#### Starting a current default MAgPIE run ####
-###############################################
-
+## Load lucode to use setScenario later
 library(lucode)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
-#start MAgPIE run
+# Source default cfg. This loads the object "cfg" in R environment
 source("config/default.cfg")
 
-# Set an indentifier flag
-#identifier_flag <- "AM01" ## Identifier flag for easy filterung of run by name in appResults. Use a combination of user initials and count upards in numbers like 01,02... etc
-
-#use user name and model version defined in default.cfg for generating the titel
+# Use user name and model version defined in default.cfg for generating the titel
 pr_flag <- "PR"
+
+# Grab user name
 user <- Sys.info()[["user"]]
 #version <- cfg$model_version ## Havong this somehow throws compilation errors in maccs module
+
+## Create a set of runs based on default.cfg
 
 for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test should be for SSP2
 
@@ -38,10 +38,10 @@ for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test shou
       cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600" ##update to most recent coupled runs asap
     }
 
-    cfg$title <- paste0(pr_flag,"_",user,"_",ssp,"-",co2_price_path) #PR_mishra_4.2-forestry_SSP2-BAU
+    cfg$title <- paste0(pr_flag,"_",user,"_",ssp,"-",co2_price_path) #Create easily distinguishable run title
 
-    cfg$output <- c("rds_report")
+    cfg$output <- c("rds_report") # Only run rds_report after model run
 
-    start_run(cfg,codeCheck=TRUE)
+    start_run(cfg,codeCheck=TRUE) # Start MAgPIE run
   }
 }
