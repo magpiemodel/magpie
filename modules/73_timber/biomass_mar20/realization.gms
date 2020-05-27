@@ -9,7 +9,9 @@
 *' decisions in forestry [32_forestry] and natveg [35_natveg] modules and corresponding
 *' production of woody biomass realized. This realization harvests timber from
 *' available plantations to meet a portion of overall timber demand. Rest of the timber
-*' production comes by harvesting natural vegetation.
+*' production comes by harvesting natural vegetation. Aggregated timber demand for
+*' wood and woodfuel is calculated based on demand equation from @lauri_timber_demand
+*' and income elasticities from @morland2018supply.
 
 *' @limitations Timber demand cannot be determined endogenously
 
