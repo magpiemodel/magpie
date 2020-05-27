@@ -15,7 +15,6 @@ magpie_calib.*
 *.opt
 *.op2
 *.lst
-*.txt
 /output/
 
 #ignore R support files
