@@ -16,8 +16,8 @@ sets
  pol32 afforestation policy type
  / none, npi, ndc /
 
- kforestry(kall) Forestry products
- / wood, woodfuel /
+* kforestry(kall) Forestry products
+* / wood, woodfuel /
 
  bgp32 biogeophysical effect (tCeq per ha) of afforestation on local climate
  / nobgp, ann, djf, jja /
