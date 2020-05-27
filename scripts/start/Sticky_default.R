@@ -22,7 +22,7 @@ for (i in 1:length(resolutions)){
 for(j in 1:length(realization)){
 for(k in 1:length(trade)){
 #Change the results folder name
-cfg$title<-paste0("NormalDevelop",realization[j],"_c",resolutions[i],"_trade_",trade[k])
+cfg$title<-paste0("Develop",realization[j],"_c",resolutions[i],"_trade_",trade[k])
 
 
 cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c",resolutions[i],"_690d3718e151be1b450b394c1064b1c5.tgz"),
