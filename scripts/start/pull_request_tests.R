@@ -24,7 +24,7 @@ source("config/default.cfg")
 #use user name and model version defined in default.cfg for generating the titel
 pr_flag <- "PR"
 user <- Sys.info()[["user"]]
-version <- cfg$model_version
+#version <- cfg$model_version
 
 for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test should be for SSP2
 
@@ -38,10 +38,10 @@ for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test shou
       cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600" ##update to most recent coupled runs asap
     }
 
-    cfg$title <- paste0(pr_flag,"_",user,"_",version,"_",ssp,"-",co2_price_path) #PR_mishra_4.2-forestry_SSP2-BAU
+    cfg$title <- paste0(pr_flag,"_",user,"_",ssp,"-",co2_price_path) #PR_mishra_4.2-forestry_SSP2-BAU
 
     cfg$output <- c("rds_report")
 
-    start_run(cfg,codeCheck=FALSE)
+    start_run(cfg,codeCheck=TRUE)
   }
 }

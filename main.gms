@@ -223,7 +223,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  default
+$setglobal c_title  PR_mishra_4.2.1-forestry_SSP2-BAU
 
 scalars
   s_use_gdx   use of gdx files                                       / 2 /
@@ -233,7 +233,8 @@ scalars
 *******************************MODULE SETUP*************************************
 
 $setglobal drivers  aug17
-$setglobal land  feb15
+$setglobal land  landmatrix_dec18
+*$setglobal land  feb15
 $setglobal costs  default
 $setglobal interest_rate  select_apr20
 $setglobal tc  endo_jun18
@@ -243,7 +244,9 @@ $setglobal food  anthropometrics_jan18
 $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 
+*$setglobal residues  flexreg_apr16
 $setglobal residues  off
+*$setglobal processing  substitution_dec18
 $setglobal processing  off
 
 $setglobal trade  selfsuff_reduced
@@ -280,7 +283,8 @@ $setglobal bioenergy  1stgen_priced_dec18
 $setglobal material  exo_flexreg_apr16
 $setglobal livestock  fbask_jan16
 
-$setglobal disagg_lvst  off
+$setglobal disagg_lvst  foragebased_aug18
+*$setglobal disagg_lvst  off
 
 $setglobal timber  off
 
