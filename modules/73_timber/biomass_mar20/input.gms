@@ -21,3 +21,11 @@ $ondelim
 $include "./modules/73_timber/input/f73_prod_specific_timber.csv"
 $offdelim
 ;
+
+parameter f73_income_elasticity(total_wood_products) Income elasticities of wood products (1)
+/
+$ondelim
+$include "./modules/73_timber/input/f73_income_elasticity.csv"
+$offdelim
+/
+;

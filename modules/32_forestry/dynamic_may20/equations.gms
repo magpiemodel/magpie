@@ -46,7 +46,6 @@ v32_land(j2,"aff","ac0") * p32_aff_bgp(j2,ac);
 q32_aff_ac0(j2) ..
 v32_land(j2,"aff","ac0") =l= sum(ac, v32_land(j2,"aff",ac)) - sum((ct,ac), p32_land(ct,j2,"aff",ac));
 
-*****GENERAL
 *-----------------------------------------------
 ****************** Land ************************
 *-----------------------------------------------
@@ -128,7 +127,6 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 
 **** New establishment decision
 *------------------------------
-
 *' New plantations are already established in the optimization step based on a certain
 *' percentage (`pc32_plant_prod_share_future`) of future demand (`pc32_demand_forestry_future`)
 *' This is based on the expected future yield (`pc32_yield_forestry_future`) at
@@ -157,10 +155,7 @@ q32_establishment_min_reg(i2) ..
               pc32_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2) * sum(ct, fm_self_suff(ct,i2,"wood"))
               ;
 
-**** Area harvested
-*------------------
-
-*' Harvested area is the difference between plantation area from precious time
+*' Change in forestry area is the difference between plantation area from precious time
 *' step ('pc32_land') and optimized plantation area from current time step ('v32_land')
 
 q32_forestry_reduction(j2,type32,ac_sub) ..

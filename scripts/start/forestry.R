@@ -28,13 +28,13 @@ cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c200_690d3718e151be1b45
          "rev4.44forestry_20200525_h12_magpie.tgz",
          "rev4.44forestry_20200525_h12_validation.tgz",
  			   "calibration_H12_c200_26Feb20.tgz",
-         "additional_data_rev3.82.tgz")
+         "additional_data_rev3.83.tgz")
 
 ### REPOSITORIES
 cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL,"/p/projects/landuse/users/mishra/additional_data_private_forestry"=NULL,"/p/projects/magpie/users/mishra/projects/coupling"=NULL), getOption("magpie_repos"))
 
 ### TIME
-cfg$gms$c_timesteps <- "5year"
+#cfg$gms$c_timesteps <- "5year"
 
 ### LAND
 cfg$gms$land <- "landmatrix_dec18"
@@ -102,9 +102,9 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "PR01"
+identifier_flag <- "PR02"
 
-cat(paste0("First test after general code cleanup"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Second test after general code cleanup"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 for(s73_price_adjuster in c(0)){
 

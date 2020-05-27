@@ -84,7 +84,7 @@ equations
  q32_max_aff                                        Maximum total global afforestation (mio. ha)
  q32_aff_pol(j)                                     Afforestation policy constraint (mio. ha)
  q32_aff_ac0(j)							                        Afforestation constraint for youngest age class (mio. ha)
- q32_forestry_reduction(j,type32,ac_sub)            Harvested area from plantations (mio. ha)
+ q32_forestry_reduction(j,type32,ac_sub)            Plantations area reduction (mio. ha)
  q32_cost_recur(i)                                  Recurruing costs (mio. USD)
  q32_establishment_max_glo                          Establishment in current time step for future demand (mio. ha)
  q32_establishment_min_glo                          Establishment in current time step for future demand (mio. ha)
