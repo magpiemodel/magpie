@@ -10,6 +10,8 @@
 #### Starting a current default MAgPIE run ####
 ###############################################
 
+library(lucode)
+
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
@@ -23,11 +25,11 @@ source("config/default.cfg")
 pr_flag <- "PR"
 user <- Sys.info()[["user"]]
 version <- cfg$model_version
-  
+
 for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test should be for SSP2
-  
+
   for (co2_price_path in c("BAU","POL")) {
-    
+
     if (co2_price_path == "BAU") {
       cfg <- setScenario(cfg,c(ssp,"NPI"))
       co2_price_path_flag = "BAU"
@@ -37,11 +39,11 @@ for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test shou
       cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600" #update to most recent coupled runs asap
       cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600" ##update to most recent coupled runs asap
     }
-    
+
     cfg$title <- paste0(pr_flag,"_",user,"_",version,"_",ssp,"-",co2_price_path_flag) #PR_mishra_4.2-forestry_SSP2-BAU
-    
+
     cfg$output <- c("rds_report")
-    
+
     start_run(cfg,codeCheck=FALSE)
   }
 }
