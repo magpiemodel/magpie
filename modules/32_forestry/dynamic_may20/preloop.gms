@@ -129,7 +129,6 @@ harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular_harvesting(t,j
 
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
-p32_land(t,j,type32,ac) = 0;
 
 * Calculate the remaining exogenous afforestation with respect to the maximum exogenous target over time.
 * `p32_aff_togo` is used to adjust `s32_max_aff_area` in the constraint `q32_max_aff`.
@@ -140,6 +139,9 @@ s32_max_aff_area = max(s32_max_aff_area, sum(j, smax(t2, p32_aff_pol(t2,j))) );
 
 p32_cdr_ac(t,j,ac) = 0;
 p32_cdr_ac_plant(t,j,ac) = 0;
+
+** Initialize parameter
+p32_land(t,j,type32,ac) = 0;
 
 ** divide initial forestry area by number of age classes within protect32
 ** since protect32 is TRUE for ord(ac_sub) < p32_rotation_cellular(j) there is
