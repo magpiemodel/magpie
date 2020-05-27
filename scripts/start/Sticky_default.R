@@ -46,7 +46,7 @@ cfg$gms$land <- "landmatrix_dec18"
 cfg$gms$trade <-trade[k]
 
 #Output shouldnt include validation
-cfg$output <- c("interpolation","rds_report")
+cfg$output <- c("interpolation_cropsplit.R","rds_report")
 
 
 #Factor costs realization

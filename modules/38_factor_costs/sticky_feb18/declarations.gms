@@ -35,7 +35,7 @@ parameters
  p38_investment(j,kcr,mobil38)      investment costs in farm capital of previous period (mio USD05MER)
  p38_past_annuity(i,kcr)            investment annuity from previous years
  p38_past_area(j,kcr)               previous period area (mio ha)
- p38_ovcosts(t,i,kcr)               Overall factor costs including non- annuitized capital investment (mio USD05MER)
+ p38_ovcosts(t,i,kcr)               Overall factor costs including non-annuitized capital investment (mio USD05MER)
 ;
 
 

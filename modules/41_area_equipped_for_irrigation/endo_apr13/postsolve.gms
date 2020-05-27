@@ -8,7 +8,7 @@
 pc41_AEI_start(j)=v41_AEI.l(j);
 
 *' Overall AEI investment costs for the current time step
-pc41_ovcost_AEI(t2,i) = vm_cost_AEI.l(i)*(1+pm_interest(i))/pm_interest(i);
+pc41_ovcost_AEI(t,i) = vm_cost_AEI.l(i)*(1+pm_interest(i))/pm_interest(i);
 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
