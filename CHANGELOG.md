@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### added
+ - **modules** added the new sticky realization to the factor costs module.
+ - **38_factor_costs** This realization favors expansion in cells with preexisting farmland and capital.
+ - **scripts** Added two start scripts for Sticky runs.
+
+### changed
+- **modules** Changes to the costs calculation in 13_tc, 39_landconversion, and 41_area_equipped_for_irrigation. For the current time step, the costs include the annuity of the present investment. Also a paramater that accounts for the overall costs was added to keep track of the non-annuitized costs.
+
+
+## [Unreleased]
+
+### added
  - **modules** added endogenous implementation of local biophysical (bph) impacts of afforestation to existing realizations in modules 32_forestry (dynamic_oct19) and 56_ghg_policy (price_jan20). default = off
 
 ### changed

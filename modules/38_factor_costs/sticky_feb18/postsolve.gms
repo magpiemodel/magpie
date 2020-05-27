@@ -5,9 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* postsolve costs
-p38_ovcosts(t,i,kcr)   = vm_cost_prod.l(i,kcr)+p38_past_annuity(i,kcr);
-p38_past_annuity(i,kcr)= p38_past_annuity(i,kcr)+v38_investment_annuity.l(i,kcr);
+* Overall costs including non-annuitized capital costs
+p38_ovcosts(t,i,kcr)   = vm_prod_reg.l(i,kcr) * i38_variable_costs(i,kcr) / (1-v38_mi.l(i))
+                         + v38_investment_annuity.l(i,kcr)*(1+pm_interest(i))/pm_interest(i);
+
 
 *Capital update from the last investment
 p38_capital(t+1,j,kcr,mobil38) = v38_capital.l(j,kcr,mobil38) + v38_investment.l(j,kcr,mobil38);
