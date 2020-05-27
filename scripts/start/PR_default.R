@@ -24,11 +24,11 @@ source("config/default.cfg")
 #use user name and model version defined in default.cfg for generating the titel
 pr_flag <- "PR"
 user <- Sys.info()[["user"]]
-#version <- cfg$model_version
+#version <- cfg$model_version ## Havong this somehow throws compilation errors in maccs module
 
 for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test should be for SSP2
 
-  for (co2_price_path in c("BAU")) {
+  for (co2_price_path in c("BAU","POL")) {
 
     if (co2_price_path == "BAU") {
       cfg <- setScenario(cfg,c(ssp,"NPI"))
