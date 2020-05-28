@@ -61,8 +61,8 @@ q38_investment(j2,kcr,mobil38) .. v38_investment(j2,kcr,mobil38)
 							            + s38_depreciation_rate);
 
 *change of crop area
-q38_crop_change(j2,kcr)..
-                        v38_crop_change(j2,kcr)
-                        =e=
-                        sum(w,vm_area(j2,kcr,w))-p38_past_area(j2,kcr);
-                          ;
+*q38_crop_change(j2,kcr)..
+*                        v38_crop_change(j2,kcr)
+*                        =e=
+*                        sum(w,vm_area(j2,kcr,w))-p38_past_area(j2,kcr);
+*                          ;

@@ -12,7 +12,7 @@ equations
  q38_investment_annuity(i,kcr)     annualized regional investment costs for farm capital  (mio USD05MER)
  q38_capital_relocation(j)         reallocation of mobile capital (mio USD05MER)
  q38_capital_sunk(j,kcr)           immobile capital (mio USD05MER)
- q38_crop_change(j,kcr)            change in crop area compared to previous time step (mio ha)
+*q38_crop_change(j,kcr)            change in crop area compared to previous time step (mio ha)
  ;
 
 positive variables
@@ -23,9 +23,9 @@ positive variables
  v38_capital(j,kcr,mobil38)          capital stock (USD05MER)
 ;
 
-variables
-v38_crop_change(j,kcr)               change in crop area compared to previous period (mio ha)
-;
+*variables
+*v38_crop_change(j,kcr)               change in crop area compared to previous period (mio ha)
+*;
 
 parameters
  i38_variable_costs(i,kcr)          variable input costs (mio USD05MER per input unit)

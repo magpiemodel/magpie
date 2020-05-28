@@ -27,5 +27,5 @@ i38_variable_costs(i2,kcr) = f38_fac_req_per_ton(kcr) * (1-s38_capital_cost_shar
   );
 
 v38_mi.fx(i2) = 0.47;
-v38_crop_change.lo(j2,kcr)=-s38_AreaLim;
-v38_crop_change.up(j2,kcr)=s38_AreaLim;
+*v38_crop_change.lo(j2,kcr)=-s38_AreaLim;
+*v38_crop_change.up(j2,kcr)=s38_AreaLim;

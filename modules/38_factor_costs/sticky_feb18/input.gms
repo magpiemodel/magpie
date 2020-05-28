@@ -18,8 +18,8 @@ scalars
   s38_immobile_perennials  immobile capital in perennial crops (share) / 0.7 /
   s38_immobile  immobile capital in yearly crops (share) / 0.7 /
   s38_mi_start global management intensity in 1995 /0.47/
-* Maximum allowed change in crop area   
-  s38_AreaLim limits of area change / 10000 /
+* Maximum allowed change in crop area
+* s38_AreaLim limits of area change / 10000000 /
 ;
 
 parameter f38_fac_req_per_ton(kcr) Factor requirements (US$05 per ton DM)
