@@ -68,8 +68,6 @@ $batinclude "./modules/include.gms" solve
 * intersolve for food demand model
     sm_intersolve=1;
 
-$batinclude "./modules/include.gms" price_update
-
 $batinclude "./modules/include.gms" intersolve
 
   );

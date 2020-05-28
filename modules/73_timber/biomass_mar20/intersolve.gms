@@ -54,7 +54,7 @@ while(floor(smax((i,kforestry), sum(cell(i,j),v73_prod_heaven_timber.l(j,kforest
         solve magpie USING nlp MINIMIZING vm_cost_glo;
       	option nlp = conopt4;
        );
-$batinclude "./modules/include.gms" price_update
+
 * write extended run information in list file in the case that the final solution is infeasible
   if((s73_counter2 >= (s73_maxiter2-1) and magpie.modelstat > 2 and magpie.modelstat ne 7),
     magpie.solprint = 1
