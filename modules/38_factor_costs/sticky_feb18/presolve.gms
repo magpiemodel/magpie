@@ -23,7 +23,7 @@ i38_variable_costs(i2,kcr) = f38_fac_req_per_ton(kcr) * (1-s38_capital_cost_shar
   p38_capital_intensity(t,j,kcr) = sum(cell(i,j), i38_capital_need(i,kcr,"immobile"));
   p38_capital(t,j,kcr,mobil38)   = sum(cell(i,j), i38_capital_need(i,kcr,mobil38)*pm_croparea_start(j,kcr)*f38_region_yield(i,kcr)* fm_tau1995(i));
   vm_prod.l(j,kcr)=sum(cell(i,j),pm_croparea_start(j,kcr)*f38_region_yield(i,kcr)* fm_tau1995(i));
-  p38_past_area(j,kcr)=pm_croparea_start(j,kcr);
+*p38_past_area(j,kcr)=pm_croparea_start(j,kcr);
   );
 
 v38_mi.fx(i2) = 0.47;

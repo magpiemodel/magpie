@@ -33,8 +33,8 @@ parameters
  p38_capital_intensity(t,j,kcr)     immobile capital per tDM (USD05MER per tDM)
  i38_capital_need(i,kcr,mobil38)    capital requirements for farming with tau equal 1 (mio USD05MER)
  p38_investment(j,kcr,mobil38)      investment costs in farm capital of previous period (mio USD05MER)
- p38_past_annuity(i,kcr)            investment annuity from previous years
- p38_past_area(j,kcr)               previous period area (mio ha)
+*p38_past_annuity(i,kcr)            investment annuity from previous years
+*p38_past_area(j,kcr)               previous period area (mio ha)
  p38_ovcosts(t,i,kcr)               Overall factor costs including non-annuitized capital investment (mio USD05MER)
 ;
 
@@ -46,13 +46,11 @@ parameters
  ov38_investment_annuity(t,i,kcr,type)  annualized investment costs in farm capital (mio USD05MER per yr)
  ov38_mi(t,i,type)                      management intensity (share of max yield)
  ov38_capital(t,j,kcr,mobil38,type)     capital stock (USD05MER)
- ov38_crop_change(t,j,kcr,type)         change in crop area compared to previous period (mio ha)
  oq38_cost_prod_crop(t,i,kcr,type)      regional factor input costs for plant production (mio USD05MER)
  oq38_investment(t,j,kcr,mobil38,type)  cellular mobile investments into farm capital   (mio USD05MER)
  oq38_investment_immobile(t,j,kcr,type) cellular immobile investments into farm capital  (mio USD05MER)
  oq38_investment_annuity(t,i,kcr,type)  annualized regional investment costs for farm capital  (mio USD05MER)
  oq38_capital_relocation(t,j,type)      reallocation of mobile capital (mio USD05MER)
  oq38_capital_sunk(t,j,kcr,type)        immobile capital (mio USD05MER)
- oq38_crop_change(t,j,kcr,type)         change in crop area compared to previous time step (mio ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
