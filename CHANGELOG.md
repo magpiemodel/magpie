@@ -8,9 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### added 20200527
-- **73_timber** Added timber module which brings the ability of producing woody biomass for timber plantations and natural vegetation
-- **32_forestry** Added realization for timber production from timber plantations. This builds up on already existing forestry realization for afforestation
-- **35_natveg** Added realization for timber production from natural vegetation.
+- **73_timber** Added timber module which brings the ability of producing woody biomass for timber plantations and natural vegetation.
+- **32_forestry** New realization for timber production from timber plantations. This builds up on previous forestry realization for afforestation.
+- **35_natveg** New realization for timber production from natural vegetation.
 - **scripts** added start script for making timbe rproduction runs (forestry.R)
 
 ### added
