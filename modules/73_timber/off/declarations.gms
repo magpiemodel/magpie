@@ -6,9 +6,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
-pm_demand_ext(t_ext,i,kforestry)                Extended demand for timber beyound simulation (mio. tDM per yr)
+pm_demand_ext(t_ext,i,kforestry)                Extended demand for timber beyond simulation (mio. tDM per yr)
 p73_volumetric_conversion(kforestry)            Volumetric conversion factor for volume to mass (tDM per m3)
-p73_demand_ext_original(t_ext,i,kforestry)       Original prescribed timber demand (mio. tDM per yr)
+p73_demand_ext_original(t_ext,i,kforestry)      Original prescribed timber demand (mio. tDM per yr)
 pm_prices_woodymass(t,i,kforestry)              Woody biomass prices (USD per tDM)
 ;
 

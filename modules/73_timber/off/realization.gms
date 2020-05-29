@@ -5,8 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description With the off realization, there is no timber production in the
-*' model
+*' @description With the off realization, the mdoel does not see any timber demand
+*' correspondingly, there is no timber production of timber.
 
 *' @limitations Timber production not simulated in the model
 

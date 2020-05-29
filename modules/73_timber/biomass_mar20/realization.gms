@@ -11,7 +11,10 @@
 *' available plantations to meet a portion of overall timber demand. Rest of the timber
 *' production comes by harvesting natural vegetation. Aggregated timber demand for
 *' wood and woodfuel is calculated based on demand equation from @lauri_timber_demand
-*' and income elasticities from @morland2018supply.
+*' and income elasticities from @morland2018supply. The timber demand calculated is further
+*' adjusted between the solve steps where if the model sees no way of producing timber
+*' from existing resources, the demand is lowered down to an extent that an adjusted level
+*' of demand can be met with resources in hand.
 
 *' @limitations Timber demand cannot be determined endogenously
 
