@@ -8,7 +8,7 @@
 equations
  q38_cost_prod_crop(i,kcr)         regional factor input costs for plant production (mio USD05MER)
  q38_investment(j,kcr,mobil38)     cellular mobile investments into farm capital   (mio USD05MER)
- q38_investment_immobile(j,kcr)    cellular immobile investments into farm capital  (mio USD05MER)
+*q38_investment_immobile(j,kcr)    cellular immobile investments into farm capital  (mio USD05MER)
  q38_investment_annuity(i,kcr)     annualized regional investment costs for farm capital  (mio USD05MER)
  q38_capital_relocation(j)         reallocation of mobile capital (mio USD05MER)
  q38_capital_sunk(j,kcr)           immobile capital (mio USD05MER)
@@ -36,7 +36,7 @@ parameters
 *p38_past_annuity(i,kcr)            investment annuity from previous years
 *p38_past_area(j,kcr)               previous period area (mio ha)
  p38_ovcosts(t,i,kcr)               Overall factor costs including non-annuitized capital investment (mio USD05MER)
- p38_capital_intensity2(j,kcr)    Needed in troublesome equation
+* p38_capital_intensity2(j,kcr)    Needed in troublesome equation
 ;
 
 

@@ -43,11 +43,8 @@ q38_investment(j2,kcr,mobil38) .. v38_investment(j2,kcr,mobil38)
 
 * Also the capital intensity of sunk capital is predetermined.
 
- q38_investment_immobile(j2,kcr) .. v38_investment(j2,kcr,"immobile")
-                            =g=vm_prod(j2,kcr) *(p38_capital_intensity2(j2,kcr)-
-                            sum(ct, p38_capital_intensity(ct,j2,kcr)));
-
-*                            sum(cell(i2,j2), vm_prod(j2,kcr) *
+* q38_investment_immobile(j2,kcr) .. v38_investment(j2,kcr,"immobile")
+*                            =g=sum(cell(i2,j2), vm_prod(j2,kcr) *
 *                            (i38_capital_need(i2,kcr,"immobile")
 *                            - sum(ct, p38_capital_intensity(ct,j2,kcr))));
 
