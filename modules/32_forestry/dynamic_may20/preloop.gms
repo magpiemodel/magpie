@@ -1,38 +1,40 @@
 *** Historical value fix
 pm_interest_dev(t_historical,i) = pm_interest_dev("y1995",i) * 0.9;
 
-*' Calculation of Single rotation model rotation lengths
+** Calculation of Single rotation model rotation lengths
 
-*' Calculating forestry carbon densitiy here is the same calculation as in carbon module.
-*' As these numbers don't exist yet due to carbon module appearing below forestry module
+** Calculating forestry carbon densitiy here is the same calculation as in carbon module.
+** As these numbers don't exist yet due to carbon module appearing below forestry module.
+** We need this to calculate marginal carbon density in the next step.
 p32_carbon_density_ac_forestry(t_all,j,ac) = m_growth_vegc(0,fm_carbon_density(t_all,j,"other","vegc"),sum(clcl,pm_climate_class(j,clcl)*fm_growth_par(clcl,"k","plantations")),sum(clcl,pm_climate_class(j,clcl)*fm_growth_par(clcl,"m","plantations")),(ord(ac)-1));
 
-*' Calculating the marginal of carbon density i.e. change in carbon density over two time steps
-*' The carbon densities are tC/ha/year so we don't have to divide by timestep length.
+** Calculating the marginal of carbon density i.e. change in carbon density over two time steps
+** The carbon densities are tC/ha/year so we don't have to divide by timestep length.
 loop(ac_sub,
   p32_carbon_density_ac_marg(t_all,j,ac_sub) = p32_carbon_density_ac_forestry(t_all,j,ac_sub) - p32_carbon_density_ac_forestry(t_all,j,ac_sub-1);
   );
 p32_carbon_density_ac_marg(t_all,j,"ac0") = 0;
 
-*' Calculating Instantaneous Growth Rates (IGR). This is a proxy number which can be compared against
-*' interest rate in the economy to make investment decisions in plantations (i.e. to keep it growing or to harvest it).
-*' This parameter is then used to calculate rotation lengths.
+** Calculating Instantaneous Growth Rates (IGR).
+** This is a proxy number which can be compared against interest rate in the economy to
+** make investment decisions in plantations (i.e. to keep it growing or to harvest it).
+** This parameter is then used to calculate rotation lengths.
 p32_IGR(t_all,j,ac) =   (p32_carbon_density_ac_marg(t_all,j,ac)/p32_carbon_density_ac_forestry(t_all,j,ac))$(p32_carbon_density_ac_forestry(t_all,j,ac)>0)
                       + 1$(p32_carbon_density_ac_forestry(t_all,j,ac)=0);
 
-*' For each cluster in MAgPIE ("j") we calculate how long the prevailing interest rates stay lower than the IGR.
-*' As long as the prevailing interest rates are lower than IGR, plantations shall be kept standing.
-*' As long as the prevailing interest rate becomes higher than IGR, it is assumed that the forest owner would rather
-*' keep his/her investment in bank rather than in keeping the forest standing.
-*' The easiest way to do this calculation is to count a value of 1 for IGR>interest rate and a value of 0 for IGR<interest rate.
+** For each cluster in MAgPIE ("j") we calculate how long the prevailing interest rates stay lower than the IGR.
+** As long as the prevailing interest rates are lower than IGR, plantations shall be kept standing.
+** As long as the prevailing interest rate becomes higher than IGR, it is assumed that the forest owner would rather
+** keep his/her investment in bank rather than in keeping the forest standing.
+** The easiest way to do this calculation is to count a value of 1 for IGR>interest rate and a value of 0 for IGR<interest rate.
 p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)) >  0)
                         + 0$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)) <= 0);
 
-*' From the above calculation, now its easier to count how many age-classes can be sustained before IGR falls below interest rate.
+** From the above calculation, now its easier to count how many age-classes can be sustained before IGR falls below interest rate.
 
 *********************************************************************************
 
-*' Faustmann rotation lengths:
+** Faustmann rotation lengths:
 
 p32_time(ac) = ord(ac);
 
@@ -81,7 +83,6 @@ loop(t_all,
 
 ** Earlier we converted rotation lengths to absolute numbers, now we make the Conversion
 ** back to rotation length in age-classes.
-p32_rotation_cellular(t_all,j) = ceil(p32_rot_length_ac_eqivalent(t_all,j));
 p32_rotation_cellular_estb(t_all,j) = ceil(p32_rot_length_ac_eqivalent(t_all,j));
 
 * Shift rotations. E.g. rotations harvested in 2050 should be harvested with the rotations using which they were establsihed.
@@ -92,6 +93,12 @@ p32_rotation_cellular_harvesting(t_all,j) = p32_rotation_cellular_estb(t_all,j);
 
 ** RL Extension
 p32_rotation_cellular_estb(t_all,j) = p32_rotation_cellular_estb(t_all,j) * s32_rotation_extension ;
+
+** With the following loop, harvesting rotations are updated based on the rotation length
+** at which the establishment of plantations was made. For example, an establishment with
+** 50 year rotation in mind in year 2000 shall be available for harvest when the age of
+** this plantation is 50 years in 2050. The following loop makes sure that the harvesting
+** age is updated correctly in the future.
 
 loop(j,
   loop(t_all,
@@ -117,11 +124,9 @@ p32_rot_length_ac_eqivalent(t_all,j) = p32_rotation_cellular_estb(t_all,j);
 
 ** Define protect and harvest setting
 protect32(t,j,ac_sub) = no;
-*protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular(t,j));
 protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular_harvesting(t,j));
 
 harvest32(t,j,ac_sub) = no;
-*harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular(t,j));
 harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular_harvesting(t,j));
 
 ** Afforestation policies NPI and NDCs
@@ -141,7 +146,7 @@ p32_cdr_ac_plant(t,j,ac) = 0;
 p32_land(t,j,type32,ac) = 0;
 
 ** divide initial forestry area by number of age classes within protect32
-** since protect32 is TRUE for ord(ac_sub) < p32_rotation_cellular(j) there is
+** since protect32 is TRUE for ord(ac_sub) < p32_rotation_cellular_estb(j) there is
 ** one additional junk which is assigned to ac0
 if(s32_initial_distribution = 0,
 ** Initialize with highest age class and don't shift it when intitial distribution is off
@@ -149,7 +154,7 @@ if(s32_initial_distribution = 0,
 
 elseif s32_initial_distribution = 1,
 ** Initialize with equal distribtuion in rotation age class
-  p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular("y1995",j);
+  p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular_estb("y1995",j);
   p32_land("y1995",j,"plant",ac_sub)$(protect32("y1995",j,ac_sub)) = p32_plant_ini_ac(j);
   p32_land("y1995",j,"plant","ac0") = p32_plant_ini_ac(j);
 

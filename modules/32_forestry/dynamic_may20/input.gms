@@ -12,7 +12,7 @@ $setglobal c32_bgp_ac  ac10
 
 scalars
   s32_reESTBcost                  Re establishment cost in USD per ha / 2000 /
-  s32_recurring_cost              Recurring costs in USD per ha / 100 /
+  s32_recurring_cost              Recurring costs in USD per ha / 500 /
   s32_harvesting_cost             Harvesting cost in USD per ha / 200 /
   s32_planing_horizon             Afforestation planing horizon (years)            / 50 /
   s32_recurring_cost_multiplier   Cost multiplier for recurring costs only for testing (1)            / 10 /
@@ -34,12 +34,6 @@ $Ifi "%c32_aff_mask%" == "noboreal" $include "./modules/32_forestry/input/aff_no
 $Ifi "%c32_aff_mask%" == "onlytropical" $include "./modules/32_forestry/input/aff_onlytropical.cs2"
 $offdelim
 /;
-
-table f32_fac_req_ha(i,fcosts32) Afforestation factor requirement costs (US Dollar 2004 per ha per annum)
-$ondelim
-$include "./modules/32_forestry/input/f32_fac_req_ha.csv"
-$offdelim
-;
 
 table f32_aff_pol(t_all,j,pol32) npi+ndc afforestation policy (Mha new forest wrt to 2010)
 $ondelim

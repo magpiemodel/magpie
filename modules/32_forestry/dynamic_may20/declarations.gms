@@ -23,7 +23,6 @@ parameters
  p32_rot_ac(j)                                      Rotation length translated to age classes on cellular level (1)
  p32_rotation_regional(t_all,i)                     Regional average rotation length of plantations translated to age class equivalent for future (1)
  p32_rot_length_ac_eqivalent(t_all,j)               Cellular rotation length of plantations translated to age class equivalent for future (1)
- p32_rotation_cellular(t_all,j)                     Harvesting rotation length translated to age classes on cellular level (1)
  p32_rotation_cellular_estb(t_all,j)                Establishment rotation length translated to age classes on cellular level (1)
  p32_rotation_cellular_harvesting(t_all,j)          Harvesting rotation length of plantations translated to age class equivalent for future (1)
  p32_bef_ipcc(clcl)                                 Biomass expansion factors for plantations (1)
