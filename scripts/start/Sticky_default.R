@@ -13,7 +13,7 @@ clima<-"cc"
 #List of resolutions forruns
 resolutions<-c("200")
 #Factor cost realizations
-realization<-c("sticky_feb18","mixed_feb17")
+realization<-c("sticky_feb18")
 # Trade realization
 trade<-c("selfsuff_reduced")
 
