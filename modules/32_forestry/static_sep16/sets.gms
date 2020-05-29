@@ -8,8 +8,5 @@
 sets
    type32 plantation type
    / aff, ndc, plant /
-
-*   kforestry(kall) Forestry products
-*   / wood, woodfuel /
 ;
 *** EOF sets.gms ***

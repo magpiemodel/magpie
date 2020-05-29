@@ -32,8 +32,6 @@ p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev
 
 *********************************************************************************
 
-p32_replanting_cost = 800;
-
 *' Faustmann rotation lengths:
 
 p32_time(ac) = ord(ac);
@@ -86,7 +84,7 @@ loop(t_all,
 p32_rotation_cellular(t_all,j) = ceil(p32_rot_length_ac_eqivalent(t_all,j));
 p32_rotation_cellular_estb(t_all,j) = ceil(p32_rot_length_ac_eqivalent(t_all,j));
 
-* Shift rotations. E.g. rotations harveted in 2050 should be harvested with the rotations using which they were establsihed.
+* Shift rotations. E.g. rotations harvested in 2050 should be harvested with the rotations using which they were establsihed.
 * For 2050 plantation establsihed in 2020 with 30y rotaions shall be harvested according to 30 yr (for example)
 
 ** Set harvesting rotations same as establishment rotations -- Don't move this line below extension of rotation. This is overwritten in the next loop anyways
@@ -109,13 +107,12 @@ loop(j,
 ** This leaves y2090 with a gap where model doens't know which value to choose
 ** At this point, it takes the values which were initilaized in lines above
 ** where we give harvested rotations the same value as establishment rotation to start with
-** The loop below makes some educated case based on jumps during these blind spots and fills them with proper numbers
+** The loop below makes some educated guess based on jumps during these blind spots and fills them with proper numbers
 loop(t_all,
   p32_rotation_cellular_harvesting(t_all+1,j)$(abs(p32_rotation_cellular_harvesting(t_all+1,j) - p32_rotation_cellular_harvesting(t_all,j))>2 AND ord(t_all)<card(t_all)) = p32_rotation_cellular_harvesting(t_all,j);
   );
 
-** Rotation used for establishment decision - Same as harvesting rotation for now.
-** This is declared as interface because this is also need in trade module.
+** Rotation used for establishment decision.
 p32_rot_length_ac_eqivalent(t_all,j) = p32_rotation_cellular_estb(t_all,j);
 
 ** Define protect and harvest setting
@@ -166,20 +163,9 @@ elseif s32_initial_distribution = 1,
 ** Initialization of land
 p32_land_start(j,type32,ac) = p32_land("y1995",j,type32,ac);
 
-*initial assumption for harvested area
-pc32_hvarea_forestry(j) = p32_plant_ini_ac(j);
-vm_hvarea_forestry.l(j,ac_sub) = p32_plant_ini_ac(j)/card(ac_sub);
-
 *fix bph effect to zero for all age classes except the ac that is chosen for the bph effect to occur after planting (e.g. canopy closure)
 p32_aff_bgp(j,ac) = 0;
 p32_aff_bgp(j,"%c32_bgp_ac%") = f32_aff_bgp(j,"%c32_aff_bgp%");
-
-**** Updated calculation for avg are needed to be estb based on past years
-
-**Saving intial values for avg calc
-p32_hv_area_current(t,i) = sum((cell(i,j),ac_sub),vm_hvarea_forestry.l(j,ac_sub));
-p32_hv_area_past_avg(t,i) = p32_hv_area_current(t,i);
-p32_hv_area_past_avg(t,i)$(ord(t) > 3) = (p32_hv_area_current(t,i) + p32_hv_area_current(t-1,i) + p32_hv_area_current(t-3,i))/3;
 
 ** Proportion of production coming from plantations
 p32_plant_prod_share(t_ext,i) = f32_plant_prod_share("y2100");

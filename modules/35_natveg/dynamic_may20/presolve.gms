@@ -33,8 +33,6 @@ p35_secdforest(t,j,ac) =
 			p35_secdforest(t,j,ac) + p35_recovered_forest(t,j,ac);
 *' @stop
 
-* Age-classes exist only between the optimization time steps.
-* For the optimization, we aggregate age-classes to 3 group defined in `ac`.
 pc35_secdforest(j,ac) = p35_secdforest(t,j,ac);
 v35_secdforest.l(j,ac) = pc35_secdforest(j,ac);
 vm_land.l(j,"secdforest") = sum(ac, pc35_secdforest(j,ac));
@@ -85,32 +83,25 @@ $endif
 * In contrast, other natural land can decrease and increase within the optimization.
 * For instance, other natural land increases if agricultural land is abandoned.
 
-** Setting bounds for only allowing 5% of available primf to be harvested (highest age class)
+** Setting bounds for only allowing s35_natveg_harvest_shr percentage of available primf to be harvested (highest age class)
 ** Allowing selective logging only after historical period
 if (sum(sameas(t_past,t),1) = 1,
 vm_land.lo(j,"primforest") = p35_save_primforest(t,j);
 else
-vm_land.lo(j,"primforest") = max((1-s35_clearcut_share) * pcm_land(j,"primforest"), p35_save_primforest(t,j));
+vm_land.lo(j,"primforest") = max((1-s35_natveg_harvest_shr) * pcm_land(j,"primforest"), p35_save_primforest(t,j));
 );
-*vm_land.lo(j,"primforest") = max((1-s35_clearcut_share) * pcm_land(j,"primforest"), p35_save_primforest(t,j));
-*vm_land.lo(j,"primforest") = p35_save_primforest(t,j);
 vm_land.up(j,"primforest") = pcm_land(j,"primforest");
 m_boundfix(vm_land,(j,"primforest"),l,10e-5);
 
 v35_secdforest.lo(j,ac_sub) = 0;
-** Setting bounds for only allowing 5% of available primf to be harvested (highest age class)
+** Setting bounds for only allowing s35_natveg_harvest_shr percentage of available primf to be harvested (highest age class)
 if (sum(sameas(t_past,t),1) = 1,
 v35_secdforest.lo(j,"acx") = p35_save_secdforest(t,j);
 else
-v35_secdforest.lo(j,"acx") = max((1-s35_clearcut_share) * pc35_secdforest(j,"acx"), p35_save_secdforest(t,j));
+v35_secdforest.lo(j,"acx") = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx"), p35_save_secdforest(t,j));
 );
-*v35_secdforest.lo(j,"acx") = max((1-s35_clearcut_share) * pc35_secdforest(j,"acx"), p35_save_secdforest(t,j));
-*v35_secdforest.lo(j,"acx") = p35_save_secdforest(t,j);
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
 m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
-
-*** We don't want harvested secdf to end up in 0 again.It should come through other land.
-* v35_secdforest.fx(j,"ac0") = 0;
 
 v35_other.lo(j,"acx") = p35_save_other(t,j);
 v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);

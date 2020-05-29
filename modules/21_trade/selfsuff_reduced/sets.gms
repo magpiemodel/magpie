@@ -22,12 +22,6 @@ sets
    oils,oilcakes,sugar,molasses,alcohol,ethanol,distillers_grain,brans,scp,fibres,
    livst_rum, livst_pig,livst_chick, livst_egg, livst_milk, fish, wood, woodfuel /
 
-   k_trade_excl_forestry(k_trade) Production activities of tradable commodities
-   / tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,puls_pro,
-   potato,cassav_sp,sugr_cane,sugr_beet,others,cottn_pro,
-   oils,oilcakes,sugar,molasses,alcohol,ethanol,distillers_grain,brans,scp,fibres,
-   livst_rum, livst_pig,livst_chick, livst_egg, livst_milk, fish /
-
 * We limit trade of secondary products as this allows for extreme specialisation
 * in the implementation. Exception is sugar, where we allow the secondary product
 * trade but not the primary as primaries are hardly traded in reality

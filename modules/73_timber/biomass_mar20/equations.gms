@@ -27,7 +27,7 @@ q73_cost_hvarea(i2)..
                     v73_cost_hvarea(i2)
                     =e=
                     sum(cell(i2,j2),
-                    sum(ac_sub, vm_hvarea_forestry(j2,ac_sub)) * s73_timber_harvest_cost
+                    sum(ac_sub, v73_hvarea_forestry(j2,ac_sub)) * s73_timber_harvest_cost
                   + (sum(ac_sub, vm_hvarea_secdforest(j2,ac_sub))
                   + sum(ac_sub, v73_hvarea_other(j2, ac_sub))
                   + vm_hvarea_primforest(j2)) * (s73_timber_harvest_cost * s73_cost_multiplier))
@@ -60,7 +60,7 @@ q73_prod_forestry(j2,ac_sub)..
 *' from plantations divided by the corresponding growing stocks.
 
 q73_hvarea_forestry(j2,ac_sub) ..
-                          vm_hvarea_forestry(j2,ac_sub)
+                          v73_hvarea_forestry(j2,ac_sub)
                           =e=
                           sum(kforestry, v73_prod_forestry(j2,ac_sub,kforestry)) / sum(ct, pm_timber_yield(ct,j2,ac_sub,"forestry"));
 

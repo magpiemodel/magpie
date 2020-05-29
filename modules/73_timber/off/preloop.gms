@@ -13,7 +13,7 @@ vm_cost_timber.fx(i) = 0;
 vm_hvarea_secdforest.fx(j,ac_sub) = 0;
 v73_hvarea_other.fx(j,ac_sub) = 0;
 vm_hvarea_primforest.fx(j) = 0;
-vm_hvarea_forestry.fx(j,ac_sub) = 0;
+v73_hvarea_forestry.fx(j,ac_sub) = 0;
 
 vm_forestry_reduction.fx(j,"plant",ac_sub) = 0;
 p73_demand_ext_original(t_ext,i,kforestry) = 0;

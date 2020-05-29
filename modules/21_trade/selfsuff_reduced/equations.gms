@@ -21,7 +21,7 @@
 *' The share of regional demand that has to be fulfilled through the self-sufficiency pool is
 *' determined by a trade balance reduction factor for each commodity  `i21_trade_bal_reduction(ct,k_trade)`
 *' according to the following equations [@schmitz_trading_2012].
-*' If the trade balance reduction equals 1 (`fm_self_suff(ct,i2,k_trade) = 1`), all demand enters the self-sufficiency pool.
+*' If the trade balance reduction equals 1 (`f21_self_suff(ct,i2,k_trade) = 1`), all demand enters the self-sufficiency pool.
 *' If it equals 0, all demand enters the comparative advantage pool.
 
 
@@ -29,26 +29,26 @@
  vm_prod_reg(i2,k_trade) =g=
  (vm_supply(i2,k_trade) + v21_excess_prod(i2,k_trade))
  *sum(ct,i21_trade_bal_reduction(ct,k_trade))
- $(sum(ct,fm_self_suff(ct,i2,k_trade) >= 1))
- + vm_supply(i2,k_trade)*sum(ct,fm_self_suff(ct,i2,k_trade))
+ $(sum(ct,f21_self_suff(ct,i2,k_trade) >= 1))
+ + vm_supply(i2,k_trade)*sum(ct,f21_self_suff(ct,i2,k_trade))
  *sum(ct,i21_trade_bal_reduction(ct,k_trade))
- $(sum(ct,fm_self_suff(ct,i2,k_trade) < 1));
+ $(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
 
 
  q21_trade_reg_up(i2,k_trade)..
  vm_prod_reg(i2,k_trade) =l=
  ((vm_supply(i2,k_trade) + v21_excess_prod(i2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade)))
- $(sum(ct,fm_self_suff(ct,i2,k_trade) >= 1))
- + (vm_supply(i2,k_trade)*sum(ct,fm_self_suff(ct,i2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade)))
- $(sum(ct,fm_self_suff(ct,i2,k_trade) < 1));
+ $(sum(ct,f21_self_suff(ct,i2,k_trade) >= 1))
+ + (vm_supply(i2,k_trade)*sum(ct,f21_self_suff(ct,i2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade)))
+ $(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
 
 *' The global excess demand of each tradable good `v21_excess_demad` equals to
 *' the sum over all the imports of importing regions.
 
  q21_excess_dem(k_trade)..
  v21_excess_dem(k_trade) =g=
- sum(i2, vm_supply(i2,k_trade)*(1 - sum(ct,fm_self_suff(ct,i2,k_trade)))
- $(sum(ct,fm_self_suff(ct,i2,k_trade)) < 1))
+ sum(i2, vm_supply(i2,k_trade)*(1 - sum(ct,f21_self_suff(ct,i2,k_trade)))
+ $(sum(ct,f21_self_suff(ct,i2,k_trade)) < 1))
  + sum(ct,fm_trade_balanceflow(ct,k_trade));
 
 *' Distributing the global excess demand to exporting regions is based on regional export shares [@schmitz_trading_2012].

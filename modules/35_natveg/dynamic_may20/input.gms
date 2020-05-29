@@ -9,8 +9,8 @@ $setglobal c35_ad_policy  npi
 $setglobal c35_aolc_policy  npi
 
 scalars
-s35_clearcut_share Flag for turning of selective logging in percentage. One equals clearcut   / 1 /
-s35_secdf_distribution Flag for secdf initialization (0) for all in highest acx (1) for equal dist (2) for poulter dist /0/
+s35_natveg_harvest_shr Constrains the allowed wood harvest from natural vegetation (share of natveg area in each cell) 1 equals to no constraint /1/
+s35_secdf_distribution Flag for secdf initialization (0 = all secondary forest in highest acx 1 = Equal distribution among all age classes) /0/
 ;
 
 table f35_protect_area(j,prot_type) Conservation priority areas (mio. ha)

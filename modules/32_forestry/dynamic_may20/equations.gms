@@ -148,11 +148,11 @@ q32_establishment_min_glo ..
               ;
 
 *' Regional minimum constraint for maintaining current forestry area patterns,
-*' while accounting for regional self sufficiency in (`fm_self_suff`) timber production.
+*' while accounting for regional self sufficiency in (`pm_selfsuff_ext`) timber production.
 q32_establishment_min_reg(i2) ..
               sum(cell(i2,j2), (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) * pc32_yield_forestry_future(j2))
               =g=
-              pc32_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2) * sum(ct, fm_self_suff(ct,i2,"wood"))
+              pc32_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2) * sum(ct, pm_selfsuff_ext(ct,i2,"wood"))
               ;
 
 *' Change in forestry area is the difference between plantation area from precious time

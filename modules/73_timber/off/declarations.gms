@@ -18,7 +18,7 @@ vm_cost_timber(i)				                        Actual cost of harvesting timber fr
 vm_hvarea_secdforest(j,ac_sub)                  Harvested area of secondary forest (mio. ha)
 v73_hvarea_other(j,ac_sub)                      Harvested area of other land (mio. ha)
 vm_hvarea_primforest(j)                         Harvested area of primary forest (mio. ha)
-vm_hvarea_forestry(j,ac_sub)                    Area harvested for timber production (mio. ha)
+v73_hvarea_forestry(j,ac_sub)                    Area harvested for timber production (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -28,6 +28,6 @@ parameters
  ov_hvarea_secdforest(t,j,ac_sub,type)       Harvested area of secondary forest (mio. ha)
  ov73_hvarea_other(t,j,ac_sub,type)          Harvested area of other land (mio. ha)
  ov_hvarea_primforest(t,j,type)              Harvested area of primary forest (mio. ha)
- ov_hvarea_forestry(t,j,ac_sub,type)         Area harvested for timber production (mio. ha)
+ ov73_hvarea_forestry(t,j,ac_sub,type)       Area harvested for timber production (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

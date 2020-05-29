@@ -32,8 +32,10 @@
 
 *'
 *' @limitations Initialization of both primary and secondary forest in highest
-*' age class. There is possibility of selecting a different distribution based
+*' age class or equal distrivution of such areas in all age classes. Data exists
+*' on a more emperically obtained distribution in different age classes based
 *' on satellite data but this results is highly negative land-use change emissions.
+*' Inclusion of this data in MAgPIE remains work in progess and is not available for release yet.
 *' Additionally, in this module realizatuion, harvested secondary forest stays
 *' secondary forest and harvested primary forest is reclassified as secondary forest.
 

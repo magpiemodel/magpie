@@ -18,7 +18,7 @@ $ondelim
 $include "./modules/21_trade/input/f21_trade_bal_reduction.cs3"
 $offdelim;
 
-table fm_self_suff(t_all,i,kall) Regional self-sufficiency rates (1)
+table f21_self_suff(t_all,i,kall) Regional self-sufficiency rates (1)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_self_suff.cs3"
 $offdelim;
