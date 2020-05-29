@@ -8,7 +8,7 @@
 equations
  q38_cost_prod_crop(i,kcr)         regional factor input costs for plant production (mio USD05MER)
  q38_investment(j,kcr,mobil38)     cellular mobile investments into farm capital   (mio USD05MER)
-*q38_investment_immobile(j,kcr)    cellular immobile investments into farm capital  (mio USD05MER)
+ q38_investment_immobile(j,kcr)    cellular immobile investments into farm capital  (mio USD05MER)
  q38_investment_annuity(i,kcr)     annualized regional investment costs for farm capital  (mio USD05MER)
  q38_capital_relocation(j)         reallocation of mobile capital (mio USD05MER)
  q38_capital_sunk(j,kcr)           immobile capital (mio USD05MER)

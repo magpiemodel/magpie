@@ -33,7 +33,7 @@ q38_investment(j2,kcr,mobil38) .. v38_investment(j2,kcr,mobil38)
  q38_capital_relocation(j2) ..
                           sum(kcr, v38_capital(j2,kcr,"mobile"))
                           =l=
-                          sum((kcr,ct), p38_capital(ct,j2,kcr,"mobile"));
+                          sum((kcr,ct), p38_capital(ct,j2,kcr,"mobile")+0.00001);
 
 * Immobile capital is sunk.
  q38_capital_sunk(j2,kcr) ..
@@ -43,10 +43,10 @@ q38_investment(j2,kcr,mobil38) .. v38_investment(j2,kcr,mobil38)
 
 * Also the capital intensity of sunk capital is predetermined.
 
-* q38_investment_immobile(j2,kcr) .. v38_investment(j2,kcr,"immobile")
-*                            =g=sum(cell(i2,j2), vm_prod(j2,kcr) *
-*                            (i38_capital_need(i2,kcr,"immobile")
-*                            - sum(ct, p38_capital_intensity(ct,j2,kcr))));
+ q38_investment_immobile(j2,kcr) .. v38_investment(j2,kcr,"immobile")
+                            =g=sum(cell(i2,j2), vm_prod(j2,kcr) *
+                            (i38_capital_need(i2,kcr,"immobile")
+                            - sum(ct, p38_capital_intensity(ct,j2,kcr))));
 
 * Investments are then translated into annual payments using the interest
 * and depreciation rates over an infinite time horizon.
