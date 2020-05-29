@@ -18,7 +18,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # Use user name and model version defined in default.cfg for generating the titel
-pr_flag <- "PR"
+pr_flag <- "PR03"
 
 # Grab user name
 user <- Sys.info()[["user"]]
