@@ -6,4 +6,4 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-v38_capital.scale(j2,kcr,mobil38)=10e3;
+v38_capital.scale(j2,kcr,mobil38)=10e2;
