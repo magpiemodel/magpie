@@ -18,11 +18,13 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # Use user name and model version defined in default.cfg for generating the titel
-pr_flag <- "PR04"
+pr_flag <- "PR05"
 
 # Grab user name
 user <- Sys.info()[["user"]]
 #version <- cfg$model_version ## Havong this somehow throws compilation errors in maccs module
+
+cfg$results_folder <- "output/:title:"
 
 cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c200_690d3718e151be1b450b394c1064b1c5.tgz",
                "rev4.45MACC_h12_magpie.tgz",
@@ -35,7 +37,7 @@ cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c200_690d3718e151be1b45
 ssp <- "SSP2"
 for(macc in c("PBL_2007","PBL_2019")) { 
   cfg$gms$c57_macc_source <- macc
-
+  if (macc == "PBL_2007") cfg$gms$s56_limit_ch4_n2o_price <- 1000 else if (macc == "PBL_2019") cfg$gms$s56_limit_ch4_n2o_price <- 4000
   for (co2_price_path in c("BAU","POL")) {
 
     if (co2_price_path == "BAU") {
