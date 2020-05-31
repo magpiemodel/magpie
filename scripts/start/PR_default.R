@@ -24,6 +24,13 @@ pr_flag <- "PR04"
 user <- Sys.info()[["user"]]
 #version <- cfg$model_version ## Havong this somehow throws compilation errors in maccs module
 
+cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c200_690d3718e151be1b450b394c1064b1c5.tgz",
+               "rev4.45MACC_h12_magpie.tgz",
+               "rev4.45MACC_h12_validation.tgz",
+               "calibration_H12_c200_26Feb20.tgz",
+               "additional_data_rev3.81.tgz")
+
+
 ## Create a set of runs based on default.cfg
 ssp <- "SSP2"
 for(macc in c("PBL_2007","PBL_2019")) { 
