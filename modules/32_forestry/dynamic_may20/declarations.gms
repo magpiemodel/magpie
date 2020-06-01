@@ -57,12 +57,12 @@ parameters
 positive variables
  vm_cost_fore(i)                                    Forestry costs (Mio USD)
  v32_land(j,type32,ac)                              Forestry land pools (mio. ha)
- v32_land_missing(j)                                Forestry land pools (mio. ha)
+ v32_land_missing(j)                                Forestry land which can be used at extrmemly high costs in case not enough area is available for new establishment (mio. ha)
  vm_landdiff_forestry                               Aggregated difference in forestry land compared to previous timestep (mio. ha)
  v32_cost_recur(i)                                  Recurring forest management costs (USD per ha)
  vm_forestry_reduction(j,type32,ac_sub)             Area harvested for timber production (mio. ha)
  v32_land_expansion(j,type32,ac)                    Land expansion (mio. ha)
- v32_land_reduction(j,type32,ac)                    land reduction (mio. ha)
+ v32_land_reduction(j,type32,ac)                    Land reduction (mio. ha)
  v32_cost_establishment(i)                          Cost of establishment calculated at the current time step (mio. USD)
  ;
 

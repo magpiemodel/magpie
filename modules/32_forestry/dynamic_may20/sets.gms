@@ -21,9 +21,9 @@ sets
  none, npi, ndc
  /
 
- protect32(t,j,ac) mapping age class - land type
+ protect32(t,j,ac) Age classes which need to be protected during rotation
 
- harvest32(t,j,ac) mapping age class - land type
+ harvest32(t,j,ac) Age classes which are available for harvest after rotation
 
  rltype Rotation length sets
  /rlFAO_min,rlGTM,rlFAO_max/

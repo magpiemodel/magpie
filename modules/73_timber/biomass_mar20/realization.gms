@@ -14,7 +14,7 @@
 *' and income elasticities from @morland2018supply. The timber demand calculated is further
 *' adjusted between the solve steps where if the model sees no way of producing timber
 *' from existing resources, the demand is lowered down to an extent that an adjusted level
-*' of demand can be met with resources in hand.
+*' of demand can be met with resources at hand.
 
 *' @limitations Timber demand cannot be determined endogenously
 

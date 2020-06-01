@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **73_timber** Added timber module which brings the ability of producing woody biomass for timber plantations and natural vegetation.
 - **32_forestry** New realization for timber production from timber plantations. This builds up on previous forestry realization for afforestation.
 - **35_natveg** New realization for timber production from natural vegetation.
-- **scripts** added start script for making timbe rproduction runs (forestry.R)
+- **scripts** added start script for making timber production runs (forestry.R)
 
 ### added
  - **modules** added endogenous implementation of local biophysical (bph) impacts of afforestation to existing realizations in modules 32_forestry (dynamic_oct19) and 56_ghg_policy (price_jan20). default = off

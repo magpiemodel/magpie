@@ -87,13 +87,13 @@ v32_land(j2,"aff","ac0") =l= sum(ac, v32_land(j2,"aff",ac)) - sum((ct,ac), p32_l
  					+ v32_land_reduction(j2,type32,ac));
 
  q32_land_expansion(j2,type32,ac) ..
- 	v32_land_expansion(j2,type32,ac) =g= v32_land(j2,type32,ac) - pc32_land(j2,type32,ac);
+	 	v32_land_expansion(j2,type32,ac) =g= v32_land(j2,type32,ac) - pc32_land(j2,type32,ac);
 
  q32_land_reduction(j2,type32,ac) ..
  	v32_land_reduction(j2,type32,ac) =g= pc32_land(j2,type32,ac) - v32_land(j2,type32,ac);
 
 *----------------------------------------------------
-********** Timber for rodcution purposes ************
+********** Timber for prodcution purposes ************
 *----------------------------------------------------
 
 **** Cost calculations
@@ -117,7 +117,7 @@ q32_cost_establishment(i2)..
 
 
 *' Recurring costs are paid for plantations where the trees have to be regularly monitored
-*' and maintained. These costs are only calculated becuase we see active human intervebtion
+*' and maintained. These costs are only calculated becuase we see active human intervention
 *' in commercial plantations. These costs are paid for trees used for timber production or
 *' trees established for afforestation purposes.
 
@@ -133,7 +133,7 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 *' harvest (year in time step are accounted for).
 *' Here we define three constraints for establishing new plantation in simulation step
 
-*' Global maximum constraint based on meeting the all future timber demand (`pc32_demand_forestry_future`).
+*' Global maximum constraint based on meeting all the future timber demand (`pc32_demand_forestry_future`).
 q32_establishment_max_glo ..
               sum(j2, (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) * pc32_yield_forestry_future(j2))
               =l=
@@ -155,7 +155,7 @@ q32_establishment_min_reg(i2) ..
               pc32_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2) * sum(ct, pm_selfsuff_ext(ct,i2,"wood"))
               ;
 
-*' Change in forestry area is the difference between plantation area from precious time
+*' Change in forestry area is the difference between plantation area from previous time
 *' step ('pc32_land') and optimized plantation area from current time step ('v32_land')
 
 q32_forestry_reduction(j2,type32,ac_sub) ..

@@ -31,7 +31,7 @@
 *' it will be harvested after 30 years, even so the rotation length in the prevailing
 *' time step, used for establishment, is shorter or longer.
 
-*' @limitations Rotation lengths for timber plantations is not endogenous.
+*' @limitations Rotation lengths for timber plantations are not endogenous.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/32_forestry/dynamic_may20/sets.gms"
