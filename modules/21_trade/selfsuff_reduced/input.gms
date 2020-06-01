@@ -10,7 +10,6 @@ $setglobal c21_trade_liberalization  l908080r807070
 
 scalars
   s21_trade_tariff Trade tariff switch (1=on 0=off)  (1)                   / 1 /
-  s21_redn_factor Reduction factor for trade balance reduction for timber products (1) / 1 /
 ;
 
 table f21_trade_bal_reduction(t_all,trade_groups21,trade_regime21) Share of inelastic trade pool (1)
