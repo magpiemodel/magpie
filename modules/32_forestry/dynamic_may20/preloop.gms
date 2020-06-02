@@ -30,7 +30,7 @@ p32_IGR(t_all,j,ac) =   (p32_carbon_density_ac_marg(t_all,j,ac)/p32_carbon_densi
 p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)) >  0)
                         + 0$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)) <= 0);
 
-** From the above calculation, now its easier to count how many age-classes can be sustained before IGR falls below interest rate.
+** From the above calculation, now it is easier to count how many age-classes can be sustained before IGR falls below interest rate.
 
 *********************************************************************************
 
@@ -78,15 +78,10 @@ loop(t_all,
   p32_rotation_regional(t_all,i) = ceil(sum(cell(i,j), p32_rot_length_ac_eqivalent(t_all,j))/p32_ncells(i));
   p32_representative_rotation(t_all,i) = ord(t_all) + ceil(sum(cell(i,j),p32_rot_length_ac_eqivalent(t_all,j))/p32_ncells(i));
   );
-*display p32_rotation_regional;
-*display p32_representative_rotation;
 
 ** Earlier we converted rotation lengths to absolute numbers, now we make the Conversion
 ** back to rotation length in age-classes.
 p32_rotation_cellular_estb(t_all,j) = ceil(p32_rot_length_ac_eqivalent(t_all,j));
-
-* Shift rotations. E.g. rotations harvested in 2050 should be harvested with the rotations using which they were establsihed.
-* For 2050 plantation establsihed in 2020 with 30y rotaions shall be harvested according to 30 yr (for example)
 
 ** Set harvesting rotations same as establishment rotations -- Don't move this line below extension of rotation. This is overwritten in the next loop anyways
 p32_rotation_cellular_harvesting(t_all,j) = p32_rotation_cellular_estb(t_all,j);
@@ -111,8 +106,8 @@ loop(j,
 ** This loop fixes empty gaps.
 ** For example in 2035, if establishment length was 10 (50yrs) then it should be harvested in 2085
 ** But in 2040, lets say if establishment length was 11 (55yrs) then the harvesting should happen in 2095.
-** This leaves y2090 with a gap where model doens't know which value to choose
-** At this point, it takes the values which were initilaized in lines above
+** This leaves y2090 with a gap where model doesn't know which value to choose
+** At this point, it takes the values which were initialized in lines above
 ** where we give harvested rotations the same value as establishment rotation to start with
 ** The loop below makes some educated guess based on jumps during these blind spots and fills them with proper numbers
 loop(t_all,
