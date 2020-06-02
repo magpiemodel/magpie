@@ -32,6 +32,3 @@ i14_aboveground_fraction("forestry") = 0.85;
 i14_aboveground_fraction("secdforest") = 0.80;
 i14_aboveground_fraction("primforest") = 0.75;
 i14_aboveground_fraction("other") = 0.85;
-
-p14_volumetric_conversion("wood") = 0.6325;
-p14_volumetric_conversion("woodfuel") = 0.3071;

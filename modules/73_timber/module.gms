@@ -8,7 +8,7 @@
 *' @title Timber
 *'
 *' @description This module handles the production of timber using plantations [32_forestry]
-*' and natural vegetation [35_natveg]. TImber can be produced from both commercial plantations
+*' and natural vegetation [35_natveg]. Timber can be produced from both commercial plantations
 *' and natural forests. The module feeds `vm_prod` at cluster level to [17_production] and
 *' [21_trade] modules. This module also calculates the "real" harvested area in natural
 *' forests i.e. `vm_hvarea_primforest`,`vm_hvarea_secdforest` and `v73_hvarea_other`.

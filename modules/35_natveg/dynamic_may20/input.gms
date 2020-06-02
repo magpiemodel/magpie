@@ -1,7 +1,8 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK),
-*** |  authors, and contributors see AUTHORS file
-*** |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
 $setglobal c35_protect_scenario  WDPA
@@ -9,8 +10,8 @@ $setglobal c35_ad_policy  npi
 $setglobal c35_aolc_policy  npi
 
 scalars
-s35_natveg_harvest_shr Constrains the allowed wood harvest from natural vegetation (share of natveg area in each cell) 1 equals to no constraint /1/
-s35_secdf_distribution Flag for secdf initialization (0 = all secondary forest in highest acx 1 = Equal distribution among all age classes) /0/
+s35_natveg_harvest_shr Constrains the allowed wood harvest from natural vegetation (1=unconstrained) (1) /1/
+s35_secdf_distribution Flag for secdf initialization (0=all secondary forest in highest age class 1=Equal distribution among all age classes) (1) /0/
 ;
 
 table f35_protect_area(j,prot_type) Conservation priority areas (mio. ha)

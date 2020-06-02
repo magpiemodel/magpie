@@ -25,9 +25,6 @@ sets
 
  harvest32(t,j,ac) Age classes which are available for harvest after rotation
 
- rltype Rotation length sets
- /rlFAO_min,rlGTM,rlFAO_max/
-
  mgmt_type Type of forestry management
  /normal,high/
 

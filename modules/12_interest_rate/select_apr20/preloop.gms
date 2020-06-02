@@ -35,8 +35,9 @@ $elseif "%c12_interest_rate%" == "gdp_dependent"
                          +   (s12_hist_interest_lic_noselect - (s12_hist_interest_lic_noselect-s12_hist_interest_hic_noselect) * im_development_state(t_all,i) ) * (1-i12_interest_fader(t_all)) ) * (1-p12_reg_shr(t_all,i));
 $endif
 
+** pm_interest_dev is added as a interface because p12_interest seems to have zero
+** values some times. 
 pm_interest_dev(t,i) = p12_interest(t,i);
 loop(t_all$(ord(t_all)>1),
 	pm_interest_dev(t_all,i)$(pm_interest_dev(t_all,i) = 0) = pm_interest_dev(t_all-1,i);
 );
-display pm_interest_dev;

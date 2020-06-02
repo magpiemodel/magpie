@@ -59,9 +59,9 @@ for (i in 1:length(outputdirs)) {
     load(path(outputdirs[i],"config.Rdata"))
     scen <- cfg$title
     prefix <- substring(scen, 1, 4)
-    
+
     map_cell_clim <- readGDX(gdx,"p58_mapping_cell_climate")
-    
+
     #LandCover
     a <- land(gdx,level="glo")
     forest <- setNames(dimSums(a[,,c("forestry","primforest","secdforest")],dim=3),"forest")
@@ -71,17 +71,17 @@ for (i in 1:length(outputdirs)) {
     a <- a[,,c("crop","bio","past","forest","other","urban")]
     a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
     x$LandCover <- mbind(x$LandCover,a)
-    
+
     #PeatlandArea
     a <- PeatlandArea(gdx,level="climate")
     a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
     x$PeatlandArea <- mbind(x$PeatlandArea,a)
-    
+
     #PeatlandAreaReg
     a <- PeatlandArea(gdx,level="reg")
     a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
     x$PeatlandAreaReg <- mbind(x$PeatlandAreaReg,a)
-    
+
     #EmissionCO2
     a <- collapseNames(emisCO2(gdx,level = "cell",unit="gas"))
     a <- dimSums(a*map_cell_clim,dim=1)
@@ -92,12 +92,12 @@ for (i in 1:length(outputdirs)) {
     a <- mbind(a,b)/1000
     a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
     x$EmissionCO2 <- mbind(x$EmissionCO2,a)
-    
+
     #PeatlandEmission
     a <- collapseNames(PeatlandEmissions(gdx,level="climate"))
     a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
     x$PeatlandEmission <- mbind(x$PeatlandEmission,a)
-    
+
     #fprice_index
     a <- priceIndex(gdx,level="regglo", products="kfo", baseyear = "y2015")
     a <- collapseNames(add_dimension(a,dim = 3.1,add = "scenario",nm = scen),collapsedim = "data")
@@ -107,29 +107,29 @@ for (i in 1:length(outputdirs)) {
     a <- collapseNames(income(gdx,level="reg",per_capita = FALSE,type = "mer"))
     a <- collapseNames(add_dimension(a,dim = 3.1,add = "scenario",nm = scen),collapsedim = "data")
     x$income <- mbind(x$income,a)
-    
+
     #kcal
     a <- collapseNames(Kcal(gdx, level = "glo"))
     a <- collapseNames(add_dimension(a,dim = 3.1,add = "scenario",nm = scen),collapsedim = "data")
     x$kcal <- mbind(x$kcal,a)
-    
+
     #bioen
     a <- demandBioenergy(gdx,level="reg")
     a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
     x$demand_bioen <- mbind(x$demand_bioen,a)
-    
+
     #ghg price
     a <- PriceGHG(gdx,level="glo",aggr="weight")
     a <- add_dimension(a,dim = 3.1,add = "scenario",nm = scen)
     x$c_price <- mbind(x$c_price,a)
-    
+
     #costs
     a <- collapseNames(readGDX(gdx,"ov11_cost_reg",select = list(type="level")))
     b <- collapseNames(superAggregate(readGDX(gdx,"ov_peatland_emis_cost",select = list(type="level")),level="reg",aggr_type = "sum"))
     a <- a-b
     a <- collapseNames(add_dimension(a,dim = 3.1,add = "scenario",nm = scen),collapsedim = "data")
     x$cost <- mbind(x$cost,a)
-    
+
   } else missing <- c(missing,outputdirs[i])
   a <- as.data.table(readRDS(rep))
   a <- a[variable %in% vars,]
