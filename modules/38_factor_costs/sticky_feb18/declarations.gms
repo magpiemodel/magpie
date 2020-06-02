@@ -11,7 +11,7 @@ equations
  q38_investment_immobile(j,kcr)    cellular immobile investments into farm capital  (mio USD05MER)
  q38_investment_annuity(i,kcr)     annualized regional investment costs for farm capital  (mio USD05MER)
  q38_capital_relocation(j)         reallocation of mobile capital (mio USD05MER)
- q38_capital_sunk(j,kcr)           immobile capital (mio USD05MER)
+*q38_capital_sunk(j,kcr)           immobile capital (mio USD05MER)
 *q38_crop_change(j,kcr)            change in crop area compared to previous time step (mio ha)
  ;
 
@@ -29,7 +29,7 @@ positive variables
 
 parameters
  i38_variable_costs(i,kcr)          variable input costs (mio USD05MER per input unit)
- i38_annuity_factor                 factor to convert from total investment to annuitized value  
+ i38_annuity_factor                 factor to convert from total investment to annuitized value
  p38_capital(t,j,kcr,mobil38)       preexisting capital stocks before investment (mio USD05MER)
  p38_capital_intensity(t,j,kcr)     immobile capital per tDM (USD05MER per tDM)
  i38_capital_need(i,kcr,mobil38)    capital requirements for farming with tau equal 1 (mio USD05MER)
@@ -53,6 +53,5 @@ parameters
  oq38_investment_immobile(t,j,kcr,type) cellular immobile investments into farm capital  (mio USD05MER)
  oq38_investment_annuity(t,i,kcr,type)  annualized regional investment costs for farm capital  (mio USD05MER)
  oq38_capital_relocation(t,j,type)      reallocation of mobile capital (mio USD05MER)
- oq38_capital_sunk(t,j,kcr,type)        immobile capital (mio USD05MER)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

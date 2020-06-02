@@ -8,7 +8,7 @@
 * Overall costs including non-annuitized capital costs
 
 p38_ovcosts(t,i,kcr)   = vm_prod_reg.l(i,kcr) * i38_variable_costs(i,kcr) / (1-v38_mi.l(i))
-                         + v38_investment_annuity.l(i,kcr)/i38_annuity_factor;
+                         + v38_investment_annuity.l(i,kcr)/i38_annuity_factor(i);
 
 
 *Capital update from the last investment
@@ -35,7 +35,6 @@ p38_capital_intensity(t+1,j,kcr)$(p38_capital(t+1,j,kcr,"immobile") AND vm_prod.
  oq38_investment_immobile(t,j,kcr,"marginal") = q38_investment_immobile.m(j,kcr);
  oq38_investment_annuity(t,i,kcr,"marginal")  = q38_investment_annuity.m(i,kcr);
  oq38_capital_relocation(t,j,"marginal")      = q38_capital_relocation.m(j);
- oq38_capital_sunk(t,j,kcr,"marginal")        = q38_capital_sunk.m(j,kcr);
  ov_cost_prod(t,i,kall,"level")               = vm_cost_prod.l(i,kall);
  ov38_investment(t,j,kcr,mobil38,"level")     = v38_investment.l(j,kcr,mobil38);
  ov38_investment_annuity(t,i,kcr,"level")     = v38_investment_annuity.l(i,kcr);
@@ -46,7 +45,6 @@ p38_capital_intensity(t+1,j,kcr)$(p38_capital(t+1,j,kcr,"immobile") AND vm_prod.
  oq38_investment_immobile(t,j,kcr,"level")    = q38_investment_immobile.l(j,kcr);
  oq38_investment_annuity(t,i,kcr,"level")     = q38_investment_annuity.l(i,kcr);
  oq38_capital_relocation(t,j,"level")         = q38_capital_relocation.l(j);
- oq38_capital_sunk(t,j,kcr,"level")           = q38_capital_sunk.l(j,kcr);
  ov_cost_prod(t,i,kall,"upper")               = vm_cost_prod.up(i,kall);
  ov38_investment(t,j,kcr,mobil38,"upper")     = v38_investment.up(j,kcr,mobil38);
  ov38_investment_annuity(t,i,kcr,"upper")     = v38_investment_annuity.up(i,kcr);
@@ -57,7 +55,6 @@ p38_capital_intensity(t+1,j,kcr)$(p38_capital(t+1,j,kcr,"immobile") AND vm_prod.
  oq38_investment_immobile(t,j,kcr,"upper")    = q38_investment_immobile.up(j,kcr);
  oq38_investment_annuity(t,i,kcr,"upper")     = q38_investment_annuity.up(i,kcr);
  oq38_capital_relocation(t,j,"upper")         = q38_capital_relocation.up(j);
- oq38_capital_sunk(t,j,kcr,"upper")           = q38_capital_sunk.up(j,kcr);
  ov_cost_prod(t,i,kall,"lower")               = vm_cost_prod.lo(i,kall);
  ov38_investment(t,j,kcr,mobil38,"lower")     = v38_investment.lo(j,kcr,mobil38);
  ov38_investment_annuity(t,i,kcr,"lower")     = v38_investment_annuity.lo(i,kcr);
@@ -68,5 +65,4 @@ p38_capital_intensity(t+1,j,kcr)$(p38_capital(t+1,j,kcr,"immobile") AND vm_prod.
  oq38_investment_immobile(t,j,kcr,"lower")    = q38_investment_immobile.lo(j,kcr);
  oq38_investment_annuity(t,i,kcr,"lower")     = q38_investment_annuity.lo(i,kcr);
  oq38_capital_relocation(t,j,"lower")         = q38_capital_relocation.lo(j);
- oq38_capital_sunk(t,j,kcr,"lower")           = q38_capital_sunk.lo(j,kcr);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################

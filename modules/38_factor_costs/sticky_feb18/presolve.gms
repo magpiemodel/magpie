@@ -31,9 +31,10 @@ i38_capital_need(i,perennials38,"immobile") = f38_fac_req_per_ton(perennials38)*
   );
 
 
-i38_annuity_factor =((1-s38_depreciation_rate)*(pm_interest(i2)/((1+pm_interest(i2))))
+i38_annuity_factor(i) = ((1-s38_depreciation_rate)*(pm_interest(i)/((1+pm_interest(i))))
   + s38_depreciation_rate);
 
-v38_mi.fx(i2) = 0.47;
+v38_mi.fx(i) = 0.47;
+v38_capital.fx(j,kcr,"immobile") = p38_capital(t,j,kcr,"immobile");
 *v38_crop_change.lo(j2,kcr)=-s38_AreaLim;
 *v38_crop_change.up(j2,kcr)=s38_AreaLim;

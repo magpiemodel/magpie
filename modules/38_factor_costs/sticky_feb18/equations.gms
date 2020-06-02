@@ -36,10 +36,10 @@ q38_investment(j2,kcr,mobil38) .. v38_investment(j2,kcr,mobil38)
                           sum((kcr,ct), p38_capital(ct,j2,kcr,"mobile")+0.00001);
 
 * Immobile capital is sunk.
- q38_capital_sunk(j2,kcr) ..
-                          v38_capital(j2,kcr,"immobile")
-                          =e=
-                          sum(ct, p38_capital(ct,j2,kcr,"immobile")+0.00001);
+*q38_capital_sunk(j2,kcr) ..
+*                          v38_capital(j2,kcr,"immobile")
+*                          =e=
+*                          sum(ct, p38_capital(ct,j2,kcr,"immobile")+0.00001);
 
 * Also the capital intensity of sunk capital is predetermined.
 
@@ -55,7 +55,7 @@ q38_investment(j2,kcr,mobil38) .. v38_investment(j2,kcr,mobil38)
                           v38_investment_annuity(i2,kcr)
                           =e=
                           sum((cell(i2,j2),mobil38),
-                          v38_investment(j2,kcr,mobil38))*i38_annuity_factor;
+                          v38_investment(j2,kcr,mobil38))*i38_annuity_factor(i2);
 
 *change of crop area
 *q38_crop_change(j2,kcr)..
