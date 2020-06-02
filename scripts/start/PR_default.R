@@ -24,6 +24,8 @@ pr_flag <- "PR03"
 user <- Sys.info()[["user"]]
 #version <- cfg$model_version ## Havong this somehow throws compilation errors in maccs module
 
+cfg$results_folder <- "output/:title:"
+
 ## Create a set of runs based on default.cfg
 
 for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test should be for SSP2
@@ -32,6 +34,9 @@ for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test shou
 
     if (co2_price_path == "BAU") {
       cfg <- setScenario(cfg,c(ssp,"NPI"))
+      cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi" #update to most recent coupled runs asap
+      cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
+      
     } else if (co2_price_path == "POL"){
       cfg <- setScenario(cfg,c(ssp,"NDC"))
       cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600" #update to most recent coupled runs asap
