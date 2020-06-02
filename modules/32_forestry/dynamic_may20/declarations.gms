@@ -85,7 +85,7 @@ equations
  q32_establishment_min_glo                          Establishment in current time step for future demand (mio. ha)
  q32_establishment_min_reg(i)                       Establishment in current time step for future demand (mio. ha)
  q32_land_expansion(j,type32,ac)                    Land expansion (mio. ha)
- q32_land_reduction(j,type32,ac)                    Land contarction (mio. ha)
+ q32_land_reduction(j,type32,ac)                    Land contraction (mio. ha)
  q32_cost_establishment(i)                          Present value of cost of establishment (mio. USD)
  q32_bgp_aff(j,ac)                                  Biophysical afforestation calculation (mio. tCeq)
 ;
@@ -117,7 +117,7 @@ parameters
  oq32_establishment_min_glo(t,type)              Establishment in current time step for future demand (mio. ha)
  oq32_establishment_min_reg(t,i,type)            Establishment in current time step for future demand (mio. ha)
  oq32_land_expansion(t,j,type32,ac,type)         Land expansion (mio. ha)
- oq32_land_reduction(t,j,type32,ac,type)         Land contarction (mio. ha)
+ oq32_land_reduction(t,j,type32,ac,type)         Land contraction (mio. ha)
  oq32_cost_establishment(t,i,type)               Present value of cost of establishment (mio. USD)
  oq32_bgp_aff(t,j,ac,type)                       Biophysical afforestation calculation (mio. tCeq)
 ;

@@ -18,7 +18,7 @@ q73_cost_timber(i2)..
                     + sum((cell(i2,j2),kforestry), v73_prod_heaven_timber(j2,kforestry)) * s73_free_prod_cost
                     ;
 
-*' Harvested cost is defined as the const incurred while removing biomass from forests.
+*' Harvested cost is defined as the cost incurred while removing biomass from forests.
 *' Harvestig natural vegetation is made less attractive to the model by providing higher
 *' harvesting costs. This is to mimic the difficulties in accessing primary and secondary
 *' forests. These costs are also paid when land expansion happens on forests.

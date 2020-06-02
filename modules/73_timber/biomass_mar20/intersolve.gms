@@ -11,10 +11,6 @@ if(ord(t)>1,
 
 while(floor(smax((i,kforestry), sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry)))) > 0 AND s73_counter < s73_maxiter,
 
-**** Update prices in intersolve -- will fail codecheck
-*    pm_prices_woodymass(t,i,kforestry) = q16_supply_forestry.m(i,kforestry);
-*    pm_prices_woodymass("y1995",i,kforestry)$(pm_prices_woodymass("y1995",i,kforestry)=0) = 1;
-
     p73_price_ratio_before(t,i,kforestry) = pm_prices_woodymass(t,i,kforestry)/pm_prices_woodymass("y1995",i,kforestry);
 
     s73_counter = s73_counter + 1;
@@ -22,18 +18,7 @@ while(floor(smax((i,kforestry), sum(cell(i,j),v73_prod_heaven_timber.l(j,kforest
   	display p73_criterion;
   	display "Warning: There are trade imbalances for timber. Restarting solve with adjusted timber demand!";
 
-*    if (s73_price_adjuster = 1,
-*      p73_price_ratio(t,i,kforestry) = pm_prices_woodymass(t,i,kforestry)/pm_prices_woodymass("y1995",i,kforestry);
-** Clipping price index to 300%
-*      p73_price_ratio(t,i,kforestry)$(p73_price_ratio(t,i,kforestry)>3) = 3;
-** Only adjust for positive numbers (<1 will mean reduction)
-*      pm_demand_ext(t,i,kforestry)$(p73_price_ratio(t,i,kforestry) > 0) = pm_demand_ext(t,i,kforestry) * (p73_price_ratio(t,i,kforestry)**s73_price_elasticity);
-*      pm_demand_ext(t,i,kforestry)$(pm_demand_ext(t,i,kforestry)<1) = 1;
-
-*      else
-
-      pm_demand_ext(t,i,kforestry) = pm_demand_ext(t,i,kforestry) - sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry));
-*    );
+    pm_demand_ext(t,i,kforestry) = pm_demand_ext(t,i,kforestry) - sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry));
 
     p73_timder_adjustment_ratio(t,i,"wood") = pm_demand_ext(t,i,"wood")/p73_demand_ext_original(t,i,"wood");
     p73_timder_adjustment_ratio(t,i,"woodfuel") = pm_demand_ext(t,i,"woodfuel")/p73_demand_ext_original(t,i,"woodfuel");

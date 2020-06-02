@@ -76,6 +76,7 @@ s32_shift = s32_yeardiff/5;
 *' @stop
 
 *' Shifting of age-calsses in land.
+*` @code
 if((ord(t)>1),
 * Example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s32_shift = 1)
 p32_land(t,j,type32,ac)$(ord(ac) > s32_shift) = p32_land(t-1,j,type32,ac-s32_shift);
@@ -93,7 +94,7 @@ p32_land_before(t,j,type32,ac) = p32_land(t,j,type32,ac);
 vm_land.l(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 pcm_land(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 
-** Release bounds for ALL Age classes before we make brptection of harvest "indication" decisions
+** Release bounds for ALL Age classes before we make harvest "indication" decisions
 v32_land.lo(j,"plant",ac) = 0;
 v32_land.up(j,"plant",ac) = Inf;
 

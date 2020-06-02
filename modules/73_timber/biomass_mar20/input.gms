@@ -8,7 +8,7 @@
 scalars
   s73_counter               Counter for iterations of demand adjustment / 0 /
   s73_maxiter               Maximum iterations for demand adjustments / 1 /
-  s73_price_elasticity      Price elasticity from lauri et al / -0.5 /
+  s73_price_elasticity      Price elasticity of timber products / -0.5 /
   s73_counter2              Second counter for iterations of demand adjustment / 0 /
   s73_maxiter2              Maximum iterations for intersolve demand adjustments / 2 /
   s73_timber_harvest_cost   Cost per ha for harvesting timber /200/
