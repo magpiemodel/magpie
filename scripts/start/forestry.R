@@ -118,9 +118,6 @@ for(secdf_distribution in c(0)){ 					## (0) for all in highest acx (1) for equa
               if(faustmann_switch == 1) faustmann_flag = "Faustmann"
               if(faustmann_switch == 0) faustmann_flag = ""
 
-              if(s73_price_adjuster == 1) adjustment_flag = "PriceAdj"
-              if(s73_price_adjuster == 0) adjustment_flag = ""
-
               if(secdf_distribution == 0) distribution_flag = "xDist"
               if(secdf_distribution == 1) distribution_flag = "kDist"
               if(secdf_distribution == 2) distribution_flag = "pDist"
