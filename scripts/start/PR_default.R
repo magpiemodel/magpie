@@ -42,6 +42,9 @@ for(macc in c("PBL_2007","PBL_2019")) {
 
     if (co2_price_path == "BAU") {
       cfg <- setScenario(cfg,c(ssp,"NPI"))
+      cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi" #update to most recent coupled runs asap
+      cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
+      
     } else if (co2_price_path == "POL"){
       cfg <- setScenario(cfg,c(ssp,"NDC"))
       cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600" #update to most recent coupled runs asap
