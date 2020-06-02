@@ -122,7 +122,7 @@ for(secdf_distribution in c(0)){ 					## (0) for all in highest acx (1) for equa
               if(secdf_distribution == 1) distribution_flag = "kDist"
               if(secdf_distribution == 2) distribution_flag = "pDist"
 
-              cfg$title <- paste0(identifier_flag,"_",ssp,"_",adjustment_flag,"_",demand_flag,"_",plantation_flag,"_",faustmann_flag,"_",pol_flag,"_",distribution_flag,"_",co2_price_path_flag)
+              cfg$title <- paste0(identifier_flag,"_",ssp,"_",demand_flag,"_",plantation_flag,"_",faustmann_flag,"_",pol_flag,"_",distribution_flag,"_",co2_price_path_flag)
 
               cfg$output <- c("rds_report")
 
