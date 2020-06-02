@@ -55,9 +55,7 @@ q38_investment(j2,kcr,mobil38) .. v38_investment(j2,kcr,mobil38)
                           v38_investment_annuity(i2,kcr)
                           =e=
                           sum((cell(i2,j2),mobil38),
-                          v38_investment(j2,kcr,mobil38))*
-                          ((1-s38_depreciation_rate)*(pm_interest(i2)/((1+pm_interest(i2))))
-							            + s38_depreciation_rate);
+                          v38_investment(j2,kcr,mobil38))*i38_annuity_factor;
 
 *change of crop area
 *q38_crop_change(j2,kcr)..

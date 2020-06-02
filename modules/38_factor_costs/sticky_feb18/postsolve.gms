@@ -6,8 +6,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 * Overall costs including non-annuitized capital costs
+
 p38_ovcosts(t,i,kcr)   = vm_prod_reg.l(i,kcr) * i38_variable_costs(i,kcr) / (1-v38_mi.l(i))
-                         + v38_investment_annuity.l(i,kcr)*(1+pm_interest(i))/pm_interest(i);
+                         + v38_investment_annuity.l(i,kcr)/i38_annuity_factor;
 
 
 *Capital update from the last investment
