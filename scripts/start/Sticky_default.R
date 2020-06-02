@@ -23,7 +23,7 @@ for(j in 1:length(realization)){
 for(k in 1:length(trade)){
 #Change the results folder name
 #cfg$title<-paste0("Develop",realization[j],"_c",resolutions[i],"_trade_",trade[k])
-cfg$title<-paste0("Sticky_scale_10e2")
+cfg$title<-paste0("Sticky_scale_10e4")
 
 
 cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c",resolutions[i],"_690d3718e151be1b450b394c1064b1c5.tgz"),
@@ -38,7 +38,7 @@ cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c",resolutions[i
 #cfg$gms$sm_fix_SSP2 <- 1990
 
 #recalibrate
-cfg$recalibrate <- TRUE
+cfg$recalibrate <- FALSE
 
 #use Feb15 realization for land realization
 cfg$gms$land <- "landmatrix_dec18"
