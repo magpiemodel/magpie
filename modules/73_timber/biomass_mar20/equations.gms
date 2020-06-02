@@ -60,7 +60,7 @@ q73_prod_forestry(j2,ac_sub)..
 *' from plantations divided by the corresponding growing stocks.
 
 q73_hvarea_forestry(j2,ac_sub) ..
-                          v73_hvarea_forestry(j2,ac_sub)
+                          v73_hvarea_forestry(j2,ac_sub) / m_timestep_length_forestry
                           =e=
                           sum(kforestry, v73_prod_forestry(j2,ac_sub,kforestry)) / sum(ct, pm_timber_yield(ct,j2,ac_sub,"forestry"));
 
@@ -77,7 +77,7 @@ q73_prod_secdforest(j2,ac_sub)..
 *' realized from secondary forests divided by the corresponding growing stocks.
 
 q73_hvarea_secdforest(j2,ac_sub)..
-                          vm_hvarea_secdforest(j2,ac_sub)
+                          vm_hvarea_secdforest(j2,ac_sub) / m_timestep_length_forestry
                            =e=
                           sum(kforestry, v73_prod_natveg(j2,"secdforest",ac_sub,kforestry)) / sum(ct, pm_timber_yield(ct,j2,ac_sub,"secdforest"));
 
@@ -94,7 +94,7 @@ q73_prod_primforest(j2)..
 *' realized from primary forests divided by the corresponding growing stocks.
 
 q73_hvarea_primforest(j2)..
-                          vm_hvarea_primforest(j2)
+                          vm_hvarea_primforest(j2) / m_timestep_length_forestry
                            =e=
                           sum(kforestry, v73_prod_natveg(j2,"primforest","acx",kforestry)) / sum(ct, pm_timber_yield(ct,j2,"acx","primforest"));
 
@@ -113,7 +113,7 @@ q73_prod_other(j2,ac_sub)..
 *' realized from such areas divided by the corresponding growing stocks.
 
 q73_hvarea_other(j2,ac_sub)..
-                         v73_hvarea_other(j2, ac_sub)
+                         v73_hvarea_other(j2, ac_sub) / m_timestep_length_forestry
                           =e=
                          v73_prod_natveg(j2,"other",ac_sub,"woodfuel") / sum(ct, pm_timber_yield(ct,j2,ac_sub,"other"));
 

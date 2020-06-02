@@ -51,7 +51,7 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "PR03"
+identifier_flag <- "PR04"
 
 cat(paste0("Second test after general code cleanup"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
@@ -76,6 +76,8 @@ for(secdf_distribution in c(0)){ 					## (0) for all in highest acx (1) for equa
 
           if (co2_price_path == "NPI") {
             cfg <- setScenario(cfg,c(ssp,"NPI"))
+            cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi" #update to most recent coupled runs asap
+            cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
             co2_price_path_flag = "Baseline"
           } else if (co2_price_path == "2deg"){
             cfg <- setScenario(cfg,c(ssp,"NDC"))

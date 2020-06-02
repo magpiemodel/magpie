@@ -18,7 +18,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # Use user name and model version defined in default.cfg for generating the titel
-pr_flag <- "PR03"
+pr_flag <- "PR04"
 
 # Grab user name
 user <- Sys.info()[["user"]]
@@ -36,7 +36,7 @@ for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test shou
       cfg <- setScenario(cfg,c(ssp,"NPI"))
       cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi" #update to most recent coupled runs asap
       cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
-      
+
     } else if (co2_price_path == "POL"){
       cfg <- setScenario(cfg,c(ssp,"NDC"))
       cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600" #update to most recent coupled runs asap
@@ -48,5 +48,6 @@ for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test shou
     cfg$output <- c("rds_report") # Only run rds_report after model run
 
     start_run(cfg,codeCheck=TRUE) # Start MAgPIE run
+    #cat(cfg$title)
   }
 }

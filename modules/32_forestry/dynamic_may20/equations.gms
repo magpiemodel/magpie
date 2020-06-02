@@ -135,14 +135,14 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 
 *' Global maximum constraint based on meeting all the future timber demand (`pc32_demand_forestry_future`).
 q32_establishment_max_glo ..
-              sum(j2, (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) * pc32_yield_forestry_future(j2))
+              sum(j2, (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) / m_timestep_length_forestry * pc32_yield_forestry_future(j2))
               =l=
               sum(i2, pc32_demand_forestry_future(i2,"wood"))
               ;
 
 *' Global minimum constraint based on a proportion (`pc32_plant_prod_share_future`) of future timber demand (`pc32_demand_forestry_future`).
 q32_establishment_min_glo ..
-              sum(j2, (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) * pc32_yield_forestry_future(j2))
+              sum(j2, (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) / m_timestep_length_forestry * pc32_yield_forestry_future(j2))
               =g=
               sum(i2, pc32_demand_forestry_future(i2,"wood")* pc32_plant_prod_share_future(i2))
               ;
@@ -150,7 +150,7 @@ q32_establishment_min_glo ..
 *' Regional minimum constraint for maintaining current forestry area patterns,
 *' while accounting for regional self sufficiency in (`pm_selfsuff_ext`) timber production.
 q32_establishment_min_reg(i2) ..
-              sum(cell(i2,j2), (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) * pc32_yield_forestry_future(j2))
+              sum(cell(i2,j2), (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) / m_timestep_length_forestry * pc32_yield_forestry_future(j2))
               =g=
               pc32_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2) * sum(ct, pm_selfsuff_ext(ct,i2,"wood"))
               ;

@@ -31,10 +31,10 @@ v73_prod_forestry(j,ac_sub,kforestry)                                       Prod
 v73_prod_natveg(j,land_natveg,ac_sub,kforestry)                             Production of woody biomass from natural vegetation (mio. tDM per yr)
 v73_prod_heaven_timber(j,kforestry)                                         Production of woody biomass from heaven (mio. tDM per yr)
 vm_cost_timber(i)				                                                    Actual cost of harvesting timber from forests (mio. USD per yr)
-vm_hvarea_secdforest(j,ac_sub)                                              Harvested area from secondary forest (mio. ha per yr)
-v73_hvarea_other(j,ac_sub)                                                  Harvested area from other land (mio. ha per yr)
-vm_hvarea_primforest(j)                                                     Harvested area from primary forest (mio. ha per yr)
-v73_hvarea_forestry(j,ac_sub)                                                Harvested area from timber plantations(mio. ha per yr)
+vm_hvarea_secdforest(j,ac_sub)                                              Harvested area from secondary forest (mio. ha)
+v73_hvarea_other(j,ac_sub)                                                  Harvested area from other land (mio. ha)
+vm_hvarea_primforest(j)                                                     Harvested area from primary forest (mio. ha)
+v73_hvarea_forestry(j,ac_sub)                                               Harvested area from timber plantations(mio. ha)
 ;
 
 equations
