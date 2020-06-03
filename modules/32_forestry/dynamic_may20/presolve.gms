@@ -118,6 +118,5 @@ pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_
 ** Future demand relevant in current time step depending on rotation length
 pc32_demand_forestry_future(i,kforestry)    = sum(t_ext$(t_ext.pos = p32_representative_rotation(t,i)),pm_demand_ext(t_ext,i,kforestry));
 pc32_plant_prod_share_future(i)    			    = sum(t_ext$(t_ext.pos = p32_representative_rotation(t,i)),p32_plant_prod_share(t_ext,i));
-pc32_selfsuff_forestry_future(i,kforestry)  = sum(t_ext$(t_ext.pos = p32_representative_rotation(t,i)),pm_selfsuff_ext(t_ext,i,kforestry));
 
 *** EOF presolve.gms ***

@@ -12,10 +12,10 @@ scalars
 parameters
  i35_secdforest(j,ac)							              Inital secdforest (mio. ha)
  i35_other(j,ac)								                Inital other land (mio. ha)
- p35_secdforest(t,j,ac)  	                      Secdforest per age class before and after optimization (mio. ha)
- p35_other(t,j,ac)   	  	                      Other land per age class before and after optimization (mio. ha)
- pc35_secdforest(j,ac)    	                    Secdforest per aggregated age class (mio. ha)
- pc35_other(j,ac)   	  	                      Other land per aggregated age class (mio. ha)
+ p35_secdforest(t,j,ac)  	                      Secdforest per age class (mio. ha)
+ p35_other(t,j,ac)   	  	                      Other land per age class (mio. ha)
+ pc35_secdforest(j,ac)    	                    Secdforest per age class in current time step (mio. ha)
+ pc35_other(j,ac)   	  	                      Other land per age class in current time step (mio. ha)
  p35_protect_shr(t,j,prot_type)                 Protection share for primforest secdforest and other land (1)
  p35_save_primforest(t,j) 		                  Primforest protection (mio. ha)
  p35_save_secdforest(t,j)		                    Secdforest protection (mio. ha)
@@ -23,8 +23,6 @@ parameters
  p35_recovered_forest(t,j,ac) 	                Recovered forest (mio. ha)
  p35_min_forest(t,j) 			                      Minimum forest stock [land protection policies] (Mha)
  p35_min_other(t,j)      		                    Minimum other land stock [land protection policies] (Mha)
- p35_ageclass_secdforest_area(j,ac_poulter)		  Age class distribution from poulter et al (Mha)
- p35_ageclass_secdforest_shr(j,ac)				      Age class distribution from poulter et al (1)
  p35_carbon_density_secdforest(t,j,ac,ag_pools) Carbon density secdforest (tC per ha)
  p35_carbon_density_other(t,j,ac,ag_pools) 	    Carbon density other land (tC per ha)
 ;
