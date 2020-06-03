@@ -20,8 +20,8 @@
 p14_growing_stock(t,j,ac,"forestry","plantations") =
     (
       pm_carbon_density_ac_forestry(t,j,ac,"vegc")
-      / i14_carbon_fraction
-      * i14_aboveground_fraction("forestry")
+      / s14_carbon_fraction
+      * f14_aboveground_fraction("forestry")
       / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"plantations"))
      )
     ;
@@ -29,8 +29,8 @@ p14_growing_stock(t,j,ac,"forestry","plantations") =
 p14_growing_stock(t,j,ac,land_natveg,"natveg") =
     (
      pm_carbon_density_ac(t,j,ac,"vegc")
-     / i14_carbon_fraction
-     * i14_aboveground_fraction(land_natveg)
+     / s14_carbon_fraction
+     * f14_aboveground_fraction(land_natveg)
      / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"natveg"))
     )
     ;

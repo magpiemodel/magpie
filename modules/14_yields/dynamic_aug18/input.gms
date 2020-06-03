@@ -11,6 +11,7 @@ $setglobal c14_yields_scenario  nocc
 
 scalars
   s14_timber_plantation_yield switch for using natveg (0) or plantation (1) yields for plantations / 1 /
+  s14_carbon_fraction Carbon fraction for conversion of biomass to dry matter (1) / 0.5/
 ;
 
 ******* Calibration factor
@@ -37,4 +38,12 @@ table f14_ipcc_bce(clcl,forest_type) IPCC Biomass Conversion and Expansion facto
 $ondelim
 $include "./modules/14_yields/input/f14_ipcc_bce.cs3"
 $offdelim
+;
+
+parameter f14_aboveground_fraction(forest_land) Root to shoot ratio (1)
+/
+$ondelim
+$include "./modules/14_yields/input/f14_aboveground_fraction.csv"
+$offdelim
+/
 ;
