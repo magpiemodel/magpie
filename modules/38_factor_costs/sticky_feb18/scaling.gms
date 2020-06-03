@@ -5,8 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-
-vm_cost_prod.scale(i,kall) = 10e4;
-v38_investment.scale(j,kcr,mobil38) = 10e3;
-v38_investment_annuity.scale(i,kcr) = 10e4;
-v38_capital.scale(j,kcr,mobil38) = 10e3;
+*vm_cost_prod.scale(i,kall) = 10e4;
+*v38_investment.scale(j,kcr,mobil38) = 10e3;
+*v38_investment_annuity.scale(i,kcr) = 10e4;
+*v38_capital.scale(j,kcr,mobil38) = 10e3;
