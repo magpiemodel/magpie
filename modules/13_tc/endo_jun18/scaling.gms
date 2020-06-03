@@ -6,3 +6,4 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 v13_cost_tc.scale(i) = 10e6;
+v13_tech_cost_annuity.scale(i) = 10e3;
