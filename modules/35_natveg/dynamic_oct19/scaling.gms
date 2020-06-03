@@ -5,4 +5,4 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_landdiff_natveg.scale = 10e5;
+vm_landdiff_natveg.scale = 10e3;
