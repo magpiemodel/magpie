@@ -51,7 +51,7 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "PR04"
+identifier_flag <- "PR05"
 
 cat(paste0("Second test after general code cleanup"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
@@ -84,11 +84,7 @@ for(secdf_distribution in c(0)){ 					## (0) for all in highest acx (1) for equa
             co2_price_path_flag = "Policy"
             cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
             cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
-          } else if (co2_price_path == "Hotelling"){
-            cfg <- setScenario(cfg,c(ssp,"NDC"))
-            co2_price_path_flag = "PolicyH"
           }
-
           for(emis_policy in c("redd+_nosoil")){ ## Add "ssp_nosoil" for policy penalizing only natveg emissions
 
             cfg$gms$c56_emis_policy <- emis_policy

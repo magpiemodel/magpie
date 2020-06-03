@@ -11,12 +11,15 @@
 
 *** YIELDS
 
-* pm_carbon_density_ac_forestry (vegc) is above + below ground carbon density.
-* convert from tC/ha to tDM/ha by using carbon fraction of 0.5 tC/tDM
-* for wood harvesting we want only above ground biomass. Therefore multiply with
-* aboveground_fraction.
-* Divide Aboveground tree biomass by BEF to get Stem biomass in tDM/ha
+*` `pm_carbon_density_ac_forestry` for vegetation Carbon is above + below ground
+*' carbon density. We convert Carbon density in tC/ha to tDM/ha by using carbon
+*' fraction of `s14_carbon_fraction` in tC/tDM. For assessing wood harvesting
+*' we need only above ground biomass information, therefore we multiply with
+*' aboveground `f14_aboveground_fraction`. Additionally, we divide aboveground
+*' tree biomass by biomass conversion and expansion (BCE) factor to get stem
+*' biomass in tDM/ha.
 
+*` @code
 p14_growing_stock(t,j,ac,"forestry","plantations") =
     (
       pm_carbon_density_ac_forestry(t,j,ac,"vegc")
@@ -34,6 +37,7 @@ p14_growing_stock(t,j,ac,land_natveg,"natveg") =
      / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"natveg"))
     )
     ;
+*` @stop
 
 **** Hard constraint to always have a positive number in p14_growing_stock
 p14_growing_stock(t,j,ac,land_natveg,"natveg") = p14_growing_stock(t,j,ac,land_natveg,"natveg")$(p14_growing_stock(t,j,ac,land_natveg,"natveg")>0)+0.0001$(p14_growing_stock(t,j,ac,land_natveg,"natveg")=0);

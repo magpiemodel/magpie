@@ -29,6 +29,3 @@ magpie_calib.*
 *.out
 /scripts/npi_ndc/npi_ndc_overview.txt
 Rplots.pdf
-
-#ignore additional configs
-/config/default_forestry.cfg

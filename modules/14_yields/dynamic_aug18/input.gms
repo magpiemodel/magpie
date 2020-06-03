@@ -10,7 +10,7 @@ $setglobal c14_yields_scenario  nocc
 *             nocc (no climate change)
 
 scalars
-  s14_timber_plantation_yield switch for using natveg (0) or plantation (1) yields for plantations / 1 /
+  s14_timber_plantation_yield Plantation yield switch (0=natveg yields 1=plantation yields) (1) / 1 /
   s14_carbon_fraction Carbon fraction for conversion of biomass to dry matter (1) / 0.5/
 ;
 

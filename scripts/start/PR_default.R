@@ -18,7 +18,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # Use user name and model version defined in default.cfg for generating the titel
-pr_flag <- "PR04"
+pr_flag <- "PR05"
 
 # Grab user name
 user <- Sys.info()[["user"]]
@@ -39,8 +39,8 @@ for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test shou
 
     } else if (co2_price_path == "POL"){
       cfg <- setScenario(cfg,c(ssp,"NDC"))
-      cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600" #update to most recent coupled runs asap
-      cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600" ##update to most recent coupled runs asap
+      cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE" #update to most recent coupled runs asap
+      cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE" ##update to most recent coupled runs asap
     }
 
     cfg$title <- paste0(pr_flag,"_",user,"_",ssp,"-",co2_price_path) #Create easily distinguishable run title
