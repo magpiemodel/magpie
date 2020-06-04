@@ -32,9 +32,14 @@ $else
  																				 + f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices_noselect%") * (1-p56_region_price_shr(t_all,i));
 $endif
 
+** Harmonize till 2020
+loop(t_all$(m_year(t_all) <= sm_fix_SSP2),
+im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices(t_all,i,pollutants,"R2M41-SSP2-NPi") * p56_region_price_shr(t_all,i)
+                                        + f56_pollutant_prices(t_all,i,pollutants,"R2M41-SSP2-NPi") * (1-p56_region_price_shr(t_all,i));
+);
+
 ***save im_pollutant_prices to parameter
 p56_pollutant_prices_input(t_all,i,pollutants) = im_pollutant_prices(t_all,i,pollutants);
-
 
 
 ***limit CH4 and N2O GHG prices based on s56_limit_ch4_n2o_price
