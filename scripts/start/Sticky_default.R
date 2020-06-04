@@ -26,7 +26,7 @@ cfg$title<-paste0("Develop_",realization[j],"_c",resolutions[i],"_UP")
 #cfg$title<-paste0("Sticky_pm_fxmobile_costprodscaling_upinvestacap")
 
 
-cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp8p5-co2_rev44_c",resolutions[i],"_690d3718e151be1b450b394c1064b1c5.tgz"),
+cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c",resolutions[i],"_690d3718e151be1b450b394c1064b1c5.tgz"),
 			         "rev4.44_h12_magpie.tgz",
 			         "rev4.44_h12_validation.tgz",
 			         "calibration_H12_c200_26Feb20.tgz",
