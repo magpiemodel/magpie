@@ -28,6 +28,10 @@ source("config/default.cfg")
 ### TIME
 #cfg$gms$c_timesteps <- "5year"
 
+### Other settings
+cfg$gms$land <- "feb15"
+cfg$gms$c60_bioenergy_subsidy <- 0
+
 ## Bioenergy demand 0=GLO
 cfg$gms$c60_biodem_level <- 0
 
@@ -75,7 +79,8 @@ for(secdf_distribution in c(0)){ 					## (0) for all in highest acx (1) for equa
         for (co2_price_path in c("NPI","2deg")) { ## Add "2deg" here for CO2 price runs
 
           if (co2_price_path == "NPI") {
-            cfg <- setScenario(cfg,c(ssp,"NPI"))
+#            cfg <- setScenario(cfg,c(ssp,"NPI"))
+            cfg <- setScenario(cfg,c(ssp,"NDC"))
             cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi" #update to most recent coupled runs asap
             cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
             co2_price_path_flag = "Baseline"
@@ -118,7 +123,7 @@ for(secdf_distribution in c(0)){ 					## (0) for all in highest acx (1) for equa
               if(secdf_distribution == 1) distribution_flag = "kDist"
               if(secdf_distribution == 2) distribution_flag = "pDist"
 
-              cfg$title <- paste0(identifier_flag,"_",ssp,"_",demand_flag,"_",plantation_flag,"_",faustmann_flag,"_",pol_flag,"_",distribution_flag,"_",co2_price_path_flag)
+              cfg$title <- paste0(identifier_flag,"_",ssp,"_",demand_flag,"_",plantation_flag,"_",faustmann_flag,"_",pol_flag,"_",distribution_flag,"_",co2_price_path_flag,"_NDC_0Subs_",cfg$gms$land)
 
               cfg$output <- c("rds_report")
 
