@@ -13,7 +13,7 @@ clima<-"cc"
 #List of resolutions forruns
 resolutions<-c("200")
 #Factor cost realizations
-realization<-c("sticky_feb18")
+realization<-c("sticky_feb18","mixed_feb17")
 # Trade realization
 trade<-c("selfsuff_reduced")
 
@@ -22,11 +22,11 @@ for (i in 1:length(resolutions)){
 for(j in 1:length(realization)){
 for(k in 1:length(trade)){
 #Change the results folder name
-#cfg$title<-paste0("Develop",realization[j],"_c",resolutions[i],"_trade_",trade[k])
-cfg$title<-paste0("Sticky_pm_fxmobile_costprodscaling_upinvestacap")
+cfg$title<-paste0("Develop_",realization[j],"_c",resolutions[i],"_UP")
+#cfg$title<-paste0("Sticky_pm_fxmobile_costprodscaling_upinvestacap")
 
 
-cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c",resolutions[i],"_690d3718e151be1b450b394c1064b1c5.tgz"),
+cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp8p5-co2_rev44_c",resolutions[i],"_690d3718e151be1b450b394c1064b1c5.tgz"),
 			         "rev4.44_h12_magpie.tgz",
 			         "rev4.44_h12_validation.tgz",
 			         "calibration_H12_c200_26Feb20.tgz",
@@ -38,7 +38,7 @@ cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c",resolutions[i
 #cfg$gms$sm_fix_SSP2 <- 1990
 
 #recalibrate
-cfg$recalibrate <- FALSE
+cfg$recalibrate <- TRUE
 
 #use Feb15 realization for land realization
 cfg$gms$land <- "landmatrix_dec18"

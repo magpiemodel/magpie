@@ -10,4 +10,4 @@
 *v38_investment_annuity.scale(i,kcr) = 10e4;
 *v38_capital.scale(j,kcr,mobil38) = 10e3;
 
-vm_cost_prod.scale(i,kall) = 10e4;
+*vm_cost_prod.scale(i,kall) = 10e4;
