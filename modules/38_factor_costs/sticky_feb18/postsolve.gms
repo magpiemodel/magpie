@@ -7,16 +7,19 @@
 
 * Overall costs including non-annuitized capital costs
 
-p38_ovcosts(t,i,kcr)   = vm_prod_reg.l(i,kcr) * i38_variable_costs(i,kcr) / (1-v38_mi.l(i))
+i38_annuity_factor(i)= ((1-s38_depreciation_rate)*(pm_interest(i)/((1+pm_interest(i))))
+  + s38_depreciation_rate);
+
+p38_ovcosts(t,i,kcr)   = vm_prod_reg.l(i,kcr) * i38_variable_costs(i,kcr) / (1-0.47)
                          + v38_investment_annuity.l(i,kcr)/i38_annuity_factor(i);
 
 
 *Capital update from the last investment
-p38_capital(t+1,j,kcr,mobil38)$(v38_capital.l(j,kcr,mobil38) AND v38_investment.l(j,kcr,mobil38)) = v38_capital.l(j,kcr,mobil38) + v38_investment.l(j,kcr,mobil38);
+p38_capital(t+1,j,kcr,mobil38) = v38_capital.l(j,kcr,mobil38) + v38_investment.l(j,kcr,mobil38);
 
 * Timestep length matters
-p38_capital(t+1,j,kcr,mobil38)$(p38_capital(t+1,j,kcr,mobil38)) = p38_capital(t+1,j,kcr,mobil38) * (1-s38_depreciation_rate)**(m_year(t+1)-m_year(t));
-p38_capital_intensity(t+1,j,kcr)$(p38_capital(t+1,j,kcr,"immobile") AND vm_prod.l(j,kcr)) = p38_capital(t+1,j,kcr,"immobile") /(vm_prod.l(j,kcr)+0.00001);
+p38_capital(t+1,j,kcr,mobil38) = p38_capital(t+1,j,kcr,mobil38) * (1-s38_depreciation_rate)**(m_year(t+1)-m_year(t));
+p38_capital_intensity(t+1,j,kcr)= p38_capital(t+1,j,kcr,"immobile") /(vm_prod.l(j,kcr)+0.00001);
 
 * to keep track of change in physical areas
 *p38_past_area(j,kcr)=sum(w,vm_area.l(j,kcr,w));
