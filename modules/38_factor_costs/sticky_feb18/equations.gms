@@ -11,7 +11,7 @@
 * b) investment costs for capital stocks.
 
 q38_cost_prod_crop(i2,kcr) .. vm_cost_prod(i2,kcr)
-                              =e= vm_prod_reg(i2,kcr) * i38_variable_costs(i2,kcr) / (1-0.47)
+                              =e= vm_prod_reg(i2,kcr) * i38_variable_costs(i2,kcr) / (1-v38_mi(i2))
                                   + v38_investment_annuity(i2,kcr);
 
 */ (1-v38_mi(i2))
