@@ -33,7 +33,7 @@ q38_investment(j2,kcr,mobil38) .. v38_investment(j2,kcr,mobil38)
 
  q38_capital_relocation(j2) ..
                           sum(kcr, v38_capital(j2,kcr,"mobile"))
-                          =n=
+                          =l=
                           sum((kcr,ct), p38_capital(ct,j2,kcr,"mobile")+0.00001);
 
 * Immobile capital is sunk.
