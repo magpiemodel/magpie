@@ -10,7 +10,6 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-library(lucode)
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
@@ -64,7 +63,7 @@ cfg$gms$som  <- "static_jan19"
 cfg$title    <- "recalib_oldland_staticsom_c200"
 start_run(cfg=cfg,codeCheck=TRUE)
 
-cfg$gms$land <- "landmatrix_dec18" 
+cfg$gms$land <- "landmatrix_dec18"
 cfg$gms$som  <- "static_jan19"
 cfg$title    <- "recalib_newland_staticsom_c200"
 start_run(cfg=cfg,codeCheck=TRUE)

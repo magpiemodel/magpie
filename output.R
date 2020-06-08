@@ -9,7 +9,7 @@
 #### MAgPIE output generation ####
 ##########################################################
 
-library(lucode)
+library(lucode2)
 
 runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
 
@@ -197,7 +197,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
 
 if(!exists("source_include")) {
   comp <- output <- outputdirs <- submit <- NULL
-  readArgs("comp","output","outputdirs","submit", .silent=TRUE)
+  lucode2::readArgs("comp","output","outputdirs","submit", .silent=TRUE)
 }
 
 runOutputs(comp=comp, output=output, outputdirs = outputdirs, submit=submit)
