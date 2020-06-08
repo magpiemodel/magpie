@@ -19,7 +19,7 @@ title<-c("Develop_mixed","Sticky_UnConstraint_mobileON_TRUECalib")
 
 for (i in 1:length(resolutions)){
 for(j in 1:length(realization)){
-for(k in 1:length(trade)){
+#for(k in 1:length(trade)){
 #Change the results folder name
 #cfg$title<-paste0("Develop_",realization[j],"_c",resolutions[i],"_UP")
 cfg$title<-title[i]
@@ -62,4 +62,4 @@ cfg$gms$c59_som_scenario  <- clima
 
 start_run(cfg=cfg)
 }}
-}
+#}
