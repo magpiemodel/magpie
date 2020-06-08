@@ -32,7 +32,7 @@ model source code via the R package goxygen
 package and run the main function (goxygen) in the main folder of the model.
 The resulting documentation can be found in the folder "doc".
 
-Please find a set of tutorials here https://github.com/magpiemodel/tutorials. 
+Please find a set of tutorials here https://github.com/magpiemodel/tutorials.
 This guide will give you a brief technical introduction in how to install, run and use the model
 and how to analyse the model output.
 
@@ -81,7 +81,7 @@ In addition *R* (https://www.r-project.org/) is required for pre- and
 postprocessing and run management (needs to be added to the PATH variable
 as well).
 
-Some R packages are required to run MAgPIE. All are either distributed via 
+Some R packages are required to run MAgPIE. All are either distributed via
 the offical R CRAN or via a separate repository hosted at
 PIK (PIK-CRAN). Before proceeding PIK-CRAN should be added to the list of
 available repositories via:
@@ -98,10 +98,11 @@ pkgs <- c("gdxrrw",
           "ggplot2",
           "curl",
           "gdx",
+          "gms",
           "magclass",
           "madrat",
           "mip",
-          "lucode",
+          "lucode2",
           "magpie4",
           "magpiesets",
           "lusweave",

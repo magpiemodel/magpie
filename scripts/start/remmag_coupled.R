@@ -10,7 +10,7 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-library(lucode)
+library(gms)
 library(magclass)
 library(gdx)
 
@@ -40,10 +40,9 @@ for (ssp in c("SDP","SSP1","SSP2","SSP5")) {
    if(ssp=="SDP" & pol=="PkBudg900") pol <- "PkBudg1000"
    getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-",pol,"-mag-4/fulldata.gdx"))
    cfg$title <- paste(prefix,ssp,pol,sep="-")
-   cfg <- setScenario(cfg,c(ssp,if(pol=="NPi") "NPI" else "NDC"))
+   cfg <- gms::setScenario(cfg,c(ssp,if(pol=="NPi") "NPI" else "NDC"))
    cfg$gms$c56_pollutant_prices <- "coupling"
    cfg$gms$c60_2ndgen_biodem <- "coupling"
    start_run(cfg,codeCheck=FALSE)
  }
 }
-

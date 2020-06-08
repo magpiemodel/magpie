@@ -6,9 +6,9 @@
 # |  Contact: magpie@pik-potsdam.de
 
 
-require(lucode)
+require(gms)
 
 # publish data which is defined in default.cfg on https://rse.pik-potsdam.de/data/magpie/intern or magpie/public
 
 source("config/default.cfg")
-lucode::publish_data(cfg,target = "dataupload@rse.pik-potsdam.de:/magpie/intern|dataupload@rse.pik-potsdam.de:/magpie/public")
+gms::publish_data(cfg,target = "dataupload@rse.pik-potsdam.de:/magpie/intern|dataupload@rse.pik-potsdam.de:/magpie/public")

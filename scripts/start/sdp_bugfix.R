@@ -10,7 +10,7 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-library(lucode)
+library(gms)
 library(magclass)
 library(gdx)
 
@@ -96,5 +96,3 @@ cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$c60_2ndgen_biodem <- "coupling"
 getInput("/p/projects/piam/runs/coupled-magpie/output/C_SSP5-PkBudg900-mag-4/fulldata.gdx")
 start_run(cfg,codeCheck=FALSE)
-
-

@@ -10,7 +10,7 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-library(lucode)
+library(gms)
 library(magclass)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
@@ -201,7 +201,7 @@ start_run(cfg,codeCheck=FALSE)
 
 
 #reset:
-cfg$gms$s32_max_aff_area <- Inf 
+cfg$gms$s32_max_aff_area <- Inf
 cfg$gms$c32_aff_mask <- "noboreal"
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
 cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
@@ -256,10 +256,3 @@ cfg$gms$c56_emis_policy      <- "ssp_nosoil"
 cfg$gms$s56_reward_neg_emis  <- 0
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
 cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
-
-
-
-
-
-
-

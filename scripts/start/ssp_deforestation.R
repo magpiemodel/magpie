@@ -10,7 +10,7 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-library(lucode)
+library(gms)
 library(magclass)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
@@ -72,7 +72,7 @@ for(reg in c("BRA","H12")) {
             cfg$title <- paste(reg,tc,jpn,tau,ssp,rcp,sep="_")
 
             cfg <- setScenario(cfg,c(ssp,if(rcp=="ref") "NPI" else "NDC"))
-            
+
             if(rcp=="Ref"){spa="SPA0"}else{spa=paste0("SPA",substring(ssp,4,5))}
             if(ssp%in%c("SSP1","SSP2","SSP5")){
               model="REMIND-MAgPIE"

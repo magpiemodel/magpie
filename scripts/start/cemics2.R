@@ -10,7 +10,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-library(lucode)
+library(gms)
 source("scripts/start_functions.R")
 source("scripts/performance_test.R")
 source("config/default.cfg")
@@ -45,7 +45,7 @@ cfg$gms$c_timesteps <- 11
 cfg$gms$s15_elastic_demand <- 1
 
 cfg$title <- "CEMICS2_SSP2_RCP45"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg<-gms::setScenario(cfg,"SUSTAg2")
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector()
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5")
@@ -55,7 +55,7 @@ cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg$title <- "CEMICS2_SSP2_RCP26"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg<-gms::setScenario(cfg,"SUSTAg2")
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector()
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6")
