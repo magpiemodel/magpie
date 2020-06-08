@@ -43,7 +43,7 @@ cfg$recalibrate <- TRUE
 cfg$gms$land <- "landmatrix_dec18"
 
 #use Feb15 realization for land realization
-cfg$gms$trade <-trade[k]
+#cfg$gms$trade <-trade[k]
 
 #Output shouldnt include validation
 cfg$output <- c("interpolation_cropsplit.R","rds_report")
