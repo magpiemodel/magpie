@@ -19,7 +19,7 @@ positive variables
  vm_cost_prod(i,kall)                factor costs (mio USD05MER  per yr)
  v38_investment(j,kcr,mobil38)       investment costs in farm capital (mio USD05MER per yr)
  v38_investment_annuity(i,kcr)       annualized investment costs in farm capital (mio USD05MER per yr)
- v38_mi(i)                           management intensity (share of max yield)
+*v38_mi(i)                           management intensity (share of max yield)
  v38_capital(j,kcr,mobil38)          capital stock (USD05MER)
 ;
 
