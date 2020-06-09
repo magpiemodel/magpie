@@ -1,4 +1,4 @@
-# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -14,16 +14,19 @@ options("magclass.verbosity" = 1)
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
   outputdir <- "/p/projects/landuse/users/miodrag/projects/tests/flexreg/output/H12_setup1_2016-11-23_12.38.56/"
-  lucode2::readArgs("outputdir")
+  readArgs("outputdir")
 }
 
 load(paste0(outputdir, "/config.Rdata"))
-gdx	<- lucode2::path(outputdir,"fulldata.gdx")
-mif <- paste0(outputdir, "/report.mif")
-rda <- paste0(outputdir, "/report.rda")
+gdx	<- path(outputdir,"fulldata.gdx")
+mif <- paste0(outputdir, "/agmip_report.mif")
+rds <- paste0(outputdir, "/agmip_report.rds")
 ###############################################################################
 
 
-report <- getReport(gdx,scenario = cfg$title)
+report <- getReportAgMIP(gdx,scenario = cfg$title)
+
+###regional aggregation
+
 write.report2(report, file=mif)
-saveRDS(as.quitte(report),file=rda)
+saveRDS(as.quitte(report),file=rds)

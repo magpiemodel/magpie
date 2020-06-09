@@ -10,7 +10,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-library(lucode)
+library(gms)
 library(magpie4)
 
 source("scripts/start_functions.R")
@@ -27,33 +27,28 @@ codeCheck <- FALSE
 
 ##SSP1
 cfg$title <- "SSP1"
-cfg<-lucode::setScenario(cfg,"SSP1")
+cfg<-gms::setScenario(cfg,"SSP1")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 ##SSP2
 cfg$title <- "SSP2"
-cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-gms::setScenario(cfg,"SSP2")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 
 ##SSP3
 cfg$title <- "SSP3"
-cfg<-lucode::setScenario(cfg,"SSP3")
+cfg<-gms::setScenario(cfg,"SSP3")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 
 ##SSP4
 cfg$title <- "SSP4"
-cfg<-lucode::setScenario(cfg,"SSP4")
+cfg<-gms::setScenario(cfg,"SSP4")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 
 ##SSP5
 cfg$title <- "SSP5"
-cfg<-lucode::setScenario(cfg,"SSP5")
+cfg<-gms::setScenario(cfg,"SSP5")
 start_run(cfg=cfg,codeCheck=codeCheck)
-
-
-
-
-

@@ -10,7 +10,7 @@
 #### Script for the generation of SUSTAg simulations ####
 ##########################################################
 
-library(lucode)
+library(gms)
 source("scripts/start_functions.R")
 source("scripts/performance_test.R")
 source("config/default.cfg")
@@ -56,8 +56,8 @@ cfg$recalibrate <- FALSE
 
 # SSP2
 cfg$title <- "SSP2"
-cfg<-lucode::setScenario(cfg,"SSP2")
-cfg<-lucode::setScenario(cfg,"nocc")
+cfg<-gms::setScenario(cfg,"SSP2")
+cfg<-gms::setScenario(cfg,"nocc")
 cfg$force_download <- TRUE
 cfg$input <- buildInputVector(co2="co2")
 #cfg$recalibrate <- TRUE
@@ -66,29 +66,29 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 
 # SSP1
 cfg$title <- "SSP1"
-cfg<-lucode::setScenario(cfg,"SSP1")
-cfg<-lucode::setScenario(cfg,"nocc")
+cfg<-gms::setScenario(cfg,"SSP1")
+cfg<-gms::setScenario(cfg,"nocc")
 cfg$input <- buildInputVector(co2="co2")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 # SSP3
 cfg$title <- "SSP3"
-cfg<-lucode::setScenario(cfg,"SSP3")
-cfg<-lucode::setScenario(cfg,"nocc")
+cfg<-gms::setScenario(cfg,"SSP3")
+cfg<-gms::setScenario(cfg,"nocc")
 cfg$input <- buildInputVector(co2="co2")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 # SSP4
 cfg$title <- "SSP4"
-cfg<-lucode::setScenario(cfg,"SSP4")
-cfg<-lucode::setScenario(cfg,"nocc")
+cfg<-gms::setScenario(cfg,"SSP4")
+cfg<-gms::setScenario(cfg,"nocc")
 cfg$input <- buildInputVector(co2="co2")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 # SSP5
 cfg$title <- "SSP5"
-cfg<-lucode::setScenario(cfg,"SSP5")
-cfg<-lucode::setScenario(cfg,"nocc")
+cfg<-gms::setScenario(cfg,"SSP5")
+cfg<-gms::setScenario(cfg,"nocc")
 cfg$input <- buildInputVector(co2="co2")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
@@ -100,31 +100,31 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 
 # SSP1 family
 cfg$title <- "SUSTAg1"
-cfg<-lucode::setScenario(cfg,"SUSTAg1")
+cfg<-gms::setScenario(cfg,"SUSTAg1")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 # SSP2 family
 cfg$title <- "SUSTAg2"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg<-gms::setScenario(cfg,"SUSTAg2")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 # SSP3 family
 cfg$title <- "SUSTAg3"
-cfg<-lucode::setScenario(cfg,"SUSTAg3")
+cfg<-gms::setScenario(cfg,"SUSTAg3")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 # SSP4 family
 cfg$title <- "SUSTAg4"
-cfg<-lucode::setScenario(cfg,"SUSTAg4")
+cfg<-gms::setScenario(cfg,"SUSTAg4")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 # SSP5 family
 cfg$title <- "SUSTAg5"
-cfg<-lucode::setScenario(cfg,"SUSTAg5")
+cfg<-gms::setScenario(cfg,"SUSTAg5")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
@@ -134,7 +134,7 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 
 #SUSTAg2 scenario without global CC mitigation policy
 cfg$title <- "SUSTAg2_Ref"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg<-gms::setScenario(cfg,"SUSTAg2")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp6p0")
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-Ref-REMIND-MAGPIE"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-Ref-REMIND-MAGPIE"
@@ -142,19 +142,19 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 
 #SUSTAg2 scenario without CC impacts
 cfg$title <- "SUSTAg2_nocc"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg<-gms::setScenario(cfg,"SUSTAg2")
 cfg$input <- buildInputVector(co2="co2")
-cfg<-lucode::setScenario(cfg,"nocc")
+cfg<-gms::setScenario(cfg,"nocc")
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 
 #cfg$title <- "SUSTAg2_co2fix"
-#cfg<-lucode::setScenario(cfg,"SUSTAg2")
+#cfg<-gms::setScenario(cfg,"SUSTAg2")
 #cfg$input <- buildInputVector(co2="noco2")
 #start_run(cfg=cfg,codeCheck=codeCheck)
 #
 #cfg$title <- "SUSTAg2_Ref_co2fix"
-#cfg<-lucode::setScenario(cfg,"SUSTAg2")
+#cfg<-gms::setScenario(cfg,"SUSTAg2")
 #cfg$input <- buildInputVector(co2="noco2",climatescen_name="rcp6p0")
 #cfg$gms$c56_pollutant_prices <- "SSP2-Ref-SPA0-V15-REMIND-MAGPIE"
 #cfg$gms$c60_2ndgen_biodem    <- "SSP2-Ref-SPA0"
@@ -162,14 +162,14 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 
 # SUSTAg2 scenario with variation of 1st gen. bioenergy: phaseout2020
 cfg$title <- "SUSTAg2_1stgenbio_phaseout"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg<-gms::setScenario(cfg,"SUSTAg2")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6")
 cfg$gms$c60_1stgen_biodem <- "phaseout2020"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 # SUSTAg2 scenario with variation of 1st gen. bioenergy: const2030
 cfg$title <- "SUSTAg2_1stgenbio_const2030"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg<-gms::setScenario(cfg,"SUSTAg2")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6")
 cfg$gms$c60_1stgen_biodem <- "const2030"
 start_run(cfg=cfg,codeCheck=codeCheck)
