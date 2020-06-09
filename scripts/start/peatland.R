@@ -9,7 +9,7 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-library(lucode)
+library(gms)
 library(magclass)
 library(gdx)
 library(luscale)
@@ -51,7 +51,7 @@ for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
   #reset restor costs to default values
   cfg$gms$s58_rewet_cost_onetime  <- 7000
   cfg$gms$s58_rewet_cost_recur  <- 200
-  
+
   #Ref
   cfg$title <- paste(prefix,ssp,"Ref",pcost,sep="_")
   cfg <- setScenario(cfg,c(ssp,"NPI"))
@@ -60,7 +60,7 @@ for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")) {
   cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-Ref-REMIND-MAGPIE"
   cfg$gms$s15_elastic_demand <- 1
   cfg$gms$c12_interest_rate <- "gdp_dependent"              # def = "gdp_dependent"
-  
+
   cfg$gms$s56_peatland_policy <- 0
   cfg$gms$s58_rewetting_switch  <- 0
   start_run(cfg,codeCheck=FALSE)

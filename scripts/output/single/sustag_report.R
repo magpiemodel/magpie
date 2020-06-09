@@ -9,7 +9,7 @@
 library(gdx)
 library(magclass)
 library(magpie4)
-library(lucode)
+library(lucode2)
 options("magclass.verbosity" = 1)
 
 ############################# BASIC CONFIGURATION #############################
@@ -210,11 +210,11 @@ MIF2SUSTAg <- function(x,model="MAgPIE",scenario="default") {
   ### Prices
 
 
-  #????# aktuell nur aggregiert verfügbar für alle food items ??????????????
+  #????# aktuell nur aggregiert verf�gbar f�r alle food items ??????????????
   name <- "Prices|Producer Price Index|Food (index relative to 2010)"
   new <- mbind(new,setNames(x[,,"Prices|Food Price Index (Index 2010=100)"],paste(model,scenario,name,sep=".")))
 
-#  #????# Index fü  r food crops fehlt  ??????????????????????????????????????
+#  #????# Index für food crops fehlt  ??????????????????????????????????????
 #  name <- "Prices|Producer Price Index|Crops (index relative to 2010)"
 #  new <- mbind(new,setNames(x[,,"Prices|Food Price Index (Index 2010=100)"],paste(model,scenario,name,sep=".")))
 
@@ -361,6 +361,7 @@ MIF2SUSTAg <- function(x,model="MAgPIE",scenario="default") {
 #	 - collapseNames(demand(gdx,level="glo",products = c("betr","begr"),product_aggr = TRUE,attributes = "ge")[,,"bioenergy"])/1000
 #	 - collapseNames(demand(gdx,level="glo",products = c("res_cereals","res_fibrous","res_nonfibrous"),product_aggr = TRUE,attributes = "ge")[,,"bioenergy"])/1000
 #  new <- mbind(new,setNames(mbind(reg,glo)[,-1,],paste(model,scenario,name,sep=".")))
+
 
   return(new)
 }

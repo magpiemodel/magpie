@@ -11,7 +11,7 @@
 #########################
 # Version 1.0, Florian Humpenoeder
 #
-library(lucode)
+library(lucode2)
 library(magclass)
 library(quitte)
 

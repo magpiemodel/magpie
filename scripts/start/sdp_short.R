@@ -10,7 +10,7 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-library(lucode)
+library(gms)
 library(magclass)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
@@ -26,12 +26,10 @@ cfg$results_folder <- "output/:title::date:"
 
 
 cfg$title <- "R2M41_SSP1"
-cfg <- setScenario(cfg,c("SSP1"))
+cfg <- gms::setScenario(cfg,c("SSP1"))
 start_run(cfg,codeCheck=FALSE)
 
 
 cfg$title <- "R2M41_SDP"
-cfg <- setScenario(cfg,c("SDP"))
+cfg <- gms::setScenario(cfg,c("SDP"))
 start_run(cfg,codeCheck=FALSE)
-
-

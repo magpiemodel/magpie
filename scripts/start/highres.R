@@ -10,7 +10,7 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-library(lucode)
+library(gms)
 library(magclass)
 library(gdx)
 library(magpie4)
@@ -39,10 +39,10 @@ download_and_update(cfg)
 
 ssps <- c("SSP1","SSP2","SSP3","SSP4","SSP5")
 scen <- "2p6"
-  
+
 for (ssp in ssps) {
   cfg$title <- paste(prefix,ssp,scen,sep="_")
-  cfg <- setScenario(cfg,c(ssp,"NDC"))
+  cfg <- gms::setScenario(cfg,c(ssp,"NDC"))
   cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
   cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
   start_run(cfg,codeCheck=FALSE)

@@ -7,7 +7,7 @@
 
 library(magclass)
 library(magpie4)
-library(lucode)
+library(lucode2)
 library(quitte)
 options("magclass.verbosity" = 1)
 
@@ -15,7 +15,7 @@ options("magclass.verbosity" = 1)
 if(!exists("source_include")) {
   outputdir <- "/p/projects/landuse/users/miodrag/projects/tests/flexreg/output/H12_setup1_2016-11-23_12.38.56/"
   readArgs("outputdir")
-} 
+}
 
 load(paste0(outputdir, "/config.Rdata"))
 gdx	<- path(outputdir,"fulldata.gdx")
@@ -30,4 +30,3 @@ report <- getReportAgMIP(gdx,scenario = cfg$title)
 
 write.report2(report, file=mif)
 saveRDS(as.quitte(report),file=rds)
-

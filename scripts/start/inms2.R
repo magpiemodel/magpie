@@ -10,7 +10,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-library(lucode)
+library(gms)
 source("scripts/start_functions.R")
 source("scripts/performance_test.R")
 source("config/default.cfg")
@@ -51,7 +51,7 @@ cfg$gms$c_timesteps <- 12
 # clalibration runs
 
 cfg$title <- "SSP2_RCP4p5_PolicyMed_v1"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg<-gms::setScenario(cfg,"SUSTAg2")
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$force_download <- TRUE
@@ -68,7 +68,7 @@ cfg$title <- "SSP1_RCP4p5_PolicyHighDiet_v1"
 cfg$title <- "SSP1_RCP2p6_PolicyHigh_v1"
 
 cfg$title <- "SSP1_RCP4p5_PolicyHigh_v1"
-cfg<-lucode::setScenario(cfg,"SUSTAg1")
+cfg<-gms::setScenario(cfg,"SUSTAg1")
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP1-26-IMAGE"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP1-26-IMAGE"
 cfg$force_download <- TRUE
@@ -79,7 +79,7 @@ cfg$gms$c50_scen_neff  <- "neff80_85_starty2010"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg$title <- "INMS_SSP1_RCP45_Nhigh"
-cfg<-lucode::setScenario(cfg,"SUSTAg1")
+cfg<-gms::setScenario(cfg,"SUSTAg1")
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP1-45-IMAGE"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP1-45-IMAGE"
 cfg$force_download <- TRUE
@@ -91,7 +91,7 @@ start_run(cfg=cfg,codeCheck=codeCheck)
 
 
 cfg$title <- "SSP2_RCP4p5_PolicyLow_v1"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg<-gms::setScenario(cfg,"SUSTAg2")
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$force_download <- TRUE
@@ -102,7 +102,7 @@ cfg$gms$c50_scen_neff  <- "constant"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg$title <- "SSP2_RCP4p5_PolicyHigh_v1"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg<-gms::setScenario(cfg,"SUSTAg2")
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$force_download <- TRUE
@@ -113,7 +113,7 @@ cfg$gms$c50_scen_neff  <- "neff80_85_starty2010"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg$title <- "SSP5_RCP8p5_PolicyLow_v1"
-cfg<-lucode::setScenario(cfg,"SUSTAg5")
+cfg<-gms::setScenario(cfg,"SUSTAg5")
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP5-Ref-REMIND-MAGPIE"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP5-Ref-REMIND-MAGPIE"
 cfg$force_download <- TRUE

@@ -10,7 +10,7 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-library(lucode)
+library(gms)
 library(magclass)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
