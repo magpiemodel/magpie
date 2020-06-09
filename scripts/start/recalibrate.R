@@ -10,7 +10,6 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-library(lucode)
 library(magpie4)
 library(magclass)
 
@@ -26,4 +25,4 @@ cfg$gms$c_timesteps <- 1
 cfg$output <- c("report")
 cfg$sequential <- TRUE
 start_run(cfg,codeCheck=FALSE)
-submitCalibration("H12")
+magpie4::submitCalibration("H12")

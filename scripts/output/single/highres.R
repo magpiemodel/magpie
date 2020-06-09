@@ -8,7 +8,8 @@
 library(magclass)
 library(gdx)
 library(magpie4)
-library(lucode)
+library(lucode2)
+library(gms)
 options("magclass.verbosity" = 1)
 
 ############################# BASIC CONFIGURATION #############################
@@ -28,7 +29,8 @@ resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 source("scripts/start_functions.R")
 
 #lock the model folder
-lock_id <- lucode::model_lock(timeout1=1)
+lock_id <- gms::model_lock(timeout1=1)
+on.exit(gms::model_unlock(lock_id))
 
 cfg$results_folder <- "output/:title:"
 
@@ -78,5 +80,3 @@ cfg$gms$optimization <- "nlp_par"
 #cfg$gms$c60_bioenergy_subsidy <- 0
 
 start_run(cfg,codeCheck=FALSE,lock_model=FALSE)
-#unlock the model folder
-lucode::model_unlock(lock_id)

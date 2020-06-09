@@ -20,13 +20,14 @@ $setglobal c15_rum_share  mixed
 
 * Food substitution scenarios including functional forms, targets and transition periods
 *   options:   constant,
-*              lin_zero_10_50, lin_zero_20_50, lin_zero_20_30,
+*              lin_zero_10_50, lin_zero_20_50, lin_zero_20_30, lin_50pc_20_50, lin_50pc_20_50_extend65, lin_50pc_20_50_extend80,
 *              lin_50pc_10_50_extend90, lin_75pc_10_50_extend90, lin_80pc_20_50, lin_80pc_20_50_extend95, lin_90pc_20_50_extend95,
 *              lin_99-98-90pc_20_50-60-100
 $setglobal c15_rumscen  constant
 $setglobal c15_fishscen  constant
 $setglobal c15_alcscen  constant
 $setglobal c15_livescen  constant
+$setglobal c15_rumdairyscen  constant
 
 
 $setglobal c15_exo_scen_targetyear  y2050
@@ -72,7 +73,7 @@ sets
 
 scalar s15_elastic_demand  Elastic demand switch (1=elastic 0=exogenous) (1) / 1 /;
 
-scalar s15_calibrate Calibration switch (1=calibrated 0=pure regression outcomes) (1) / 0 /;
+scalar s15_calibrate Calibration switch (1=calibrated 0=pure regression outcomes) (1) / 1 /;
 * only for per-capita calories, not for e.g. calibration of transformation parameters between per-capita calories in dm
 
 scalar s15_maxiter Scalar defining maximum number of iterations (1) / 5 /;
@@ -201,7 +202,7 @@ $include "./modules/15_food/input/f15_schofield_parameters.cs3"
 $offdelim
 ;
 
-*** Exogenous food substitution scenarios
+*** Food substitution scenarios
 
 table f15_food_substitution_fader(t_all,fadeoutscen15)   Fader for food substitution scenarios (1)
 $ondelim

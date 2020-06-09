@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 library(magclass)
-library(lucode)
+library(lucode2)
 library(magpie4)
 
 #options(error=function()traceback(2))
@@ -27,17 +27,17 @@ system(paste("gams full.gms -errmsg=1 -lf=full.log -lo=",cfg$logoption,sep=""))
 # Capture runtimes
 timeGAMSEnd  <- Sys.time()
 gams_runtime <- timeGAMSEnd - timeGAMSStart
-timeOutputStart <- Sys.time() 
+timeOutputStart <- Sys.time()
 
 if(!file.exists("fulldata.gdx")) stop("MAgPIE model run did not finish properly (fulldata.gdx is missing). Please check full.lst for further information!")
 cat("\nMAgPIE run finished!\n")
 
-lucode::runstatistics(file       = "runstatistics.rda",
-                      modelstat  = magpie4::modelstat("fulldata.gdx"),
-                      config     = cfg,
-                      runtime    = gams_runtime,
-                      setup_info = lucode::setup_info(),
-                      submit     = cfg$runstatistics)
+lucode2::runstatistics(file       = "runstatistics.rda",
+                       modelstat  = magpie4::modelstat("fulldata.gdx"),
+                       config     = cfg,
+                       runtime    = gams_runtime,
+                       setup_info = lucode2::setup_info(),
+                       submit     = cfg$runstatistics)
 
 runfolder <- getwd()
 setwd(maindir)
@@ -71,7 +71,7 @@ if (exists("last.warning")) {
   validation$technical$last.warning <- c(validation$technical$last.warning,
                                          last.warning)
 }
-validation$technical$setup_info$model_run <- setup_info()
+validation$technical$setup_info$model_run <- lucode2::setup_info()
 save(validation,file=cfg$val_workspace, compress="xz")
 rm(gams_runtime,input_data,module_setup,validation)
 
@@ -88,10 +88,10 @@ timeOutputEnd <- Sys.time()
 
 # Save run statistics to local file
 cat("Saving timeGAMSStart, timeGAMSEnd, timeOutputStart and timeOutputStart to runstatistics.rda\n")
-lucode::runstatistics(file           = paste0(cfg$results_folder, "/runstatistics.rda"),
-                     timeGAMSStart   = timeGAMSStart,
-                     timeGAMSEnd     = timeGAMSEnd,
-                     timeOutputStart = timeOutputStart,
-                     timeOutputEnd   = timeOutputEnd)
+lucode2::runstatistics(file           = paste0(cfg$results_folder, "/runstatistics.rda"),
+                      timeGAMSStart   = timeGAMSStart,
+                      timeGAMSEnd     = timeGAMSEnd,
+                      timeOutputStart = timeOutputStart,
+                      timeOutputEnd   = timeOutputEnd)
 
 print(warnings())

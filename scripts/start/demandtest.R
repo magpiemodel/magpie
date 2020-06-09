@@ -10,7 +10,7 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-library(lucode)
+library(gms)
 library(magclass)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
@@ -28,7 +28,7 @@ flag <- "bmi"
 for (ssp in c("SSP2","SSP1","SSP3","SSP4","SSP5")) {
   for(rcp in c("Ref","26")){
 		cfg <- setScenario(cfg,c(ssp,if(rcp=="Ref") "NPI" else "NDC"))
-		
+
 		if(rcp=="Ref"){spa="SPA0"}else{spa=paste0("SPA",substring(ssp,4,5))}
 		if(ssp%in%c("SSP1","SSP2","SSP5")){
 			model="REMIND-MAgPIE"
@@ -37,7 +37,7 @@ for (ssp in c("SSP2","SSP1","SSP3","SSP4","SSP5")) {
 		} else if (ssp=="SSP4"){
 			model="GCAM4"
 		}
-		
+
 		cfg$title <- paste(if(rcp=="26" & ssp %in% c("SSP3","SSP4")) next else ssp,rcp,flag,sep="_")
 		cfg$gms$c56_pollutant_prices <- paste("SSPDB",ssp,rcp,model,sep="-")
 		cfg$gms$c60_2ndgen_biodem <- paste("SSPDB",ssp,rcp,model,sep="-")
@@ -150,13 +150,13 @@ cfg$recalibrate <- TRUE
 
 #specify the title flag for all the scenarios
 flag <- "anthro"
-cfg$gms$food <- "anthropometrics_jan18" 
+cfg$gms$food <- "anthropometrics_jan18"
 
 #SSPs
 for (ssp in c("SSP2","SSP1","SSP3","SSP4","SSP5")) {
   for(rcp in c("Ref","26")){
     cfg <- setScenario(cfg,c(ssp,if(rcp=="Ref") "NPI" else "NDC"))
-    
+
     if(rcp=="Ref"){spa="SPA0"}else{spa=paste0("SPA",substring(ssp,4,5))}
     if(ssp%in%c("SSP1","SSP2","SSP5")){
       model="REMIND-MAgPIE"
@@ -165,7 +165,7 @@ for (ssp in c("SSP2","SSP1","SSP3","SSP4","SSP5")) {
     } else if (ssp=="SSP4"){
       model="GCAM4"
     }
-    
+
     cfg$title <- paste(if(rcp=="26" & ssp %in% c("SSP3","SSP4")) next else ssp,rcp,flag,sep="_")
     cfg$gms$c56_pollutant_prices <- paste("SSPDB",ssp,rcp,model,sep="-")
     cfg$gms$c60_2ndgen_biodem <- paste("SSPDB",ssp,rcp,model,sep="-")

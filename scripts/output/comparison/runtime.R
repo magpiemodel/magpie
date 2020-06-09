@@ -6,14 +6,14 @@
 # |  Contact: magpie@pik-potsdam.de
 
 ############################# LOAD LIBRARIES #############################
-library(lucode, quietly = TRUE, warn.conflicts =FALSE)
+library(lucode2, quietly = TRUE, warn.conflicts =FALSE)
 
 if(!exists("source_include")) {
  outputdirs <- c("output/default_2015-01-14_11.41.17",
                  "output/default_2015-01-14_12.28.56",
                  "output/default_2015-01-14_15.00.13",
                  "output/default_2015-01-14_15.36.12");
- readArgs("outputdirs")
+ lucode2::readArgs("outputdirs")
 }
 
-print(readRuntime(outputdirs,plot=TRUE))
+print(lucode2::readRuntime(outputdirs,plot=TRUE))

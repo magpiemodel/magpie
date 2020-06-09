@@ -10,7 +10,6 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-library(lucode)
 library(magpie4)
 
 source("scripts/start_functions.R")
@@ -18,8 +17,6 @@ source("scripts/performance_test.R")
 source("config/default.cfg")
 
 #### MAgPIE Brazil comparison tests
-
-
 
 ## Default MAgPIE ##
 
@@ -55,5 +52,3 @@ cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev33_h200_USA4_2b409196626ee
                "rev4_2b409196626ee246982f5ec87323c01a_validation.tgz",
                "additional_data_rev3.45.tgz")
 start_run(cfg=cfg,codeCheck=codeCheck)
-
-

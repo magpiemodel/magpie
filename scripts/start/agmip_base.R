@@ -1,4 +1,4 @@
-# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -19,17 +19,35 @@ source("scripts/start_functions.R")
 #start MAgPIE runs
 source("config/default.cfg")
 
-cfg$force_download <- TRUE
+cfg$force_download <- FALSE
 
 #cfg$results_folder <- "output/:title:"
 cfg$results_folder <- "output/:title::date:"
 
 
-cfg$title <- "R2M41_SSP1"
-cfg <- gms::setScenario(cfg,c("SSP1"))
+
+
+
+#################################################################
+# No climate change                                             #
+#################################################################
+
+
+### SSPs w/o mitigation ################
+cfg$title <- "SSP1_NoMt_NoCC"
+cfg <- gms::setScenario(cfg,c("SSP1","NPI"))
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- "SSP2_NoMt_NoCC"
+cfg <- gms::setScenario(cfg,c("SSP2","NPI"))
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- "SSP3_NoMt_NoCC"
+cfg <- gms::setScenario(cfg,c("SSP3","NPI"))
 start_run(cfg,codeCheck=FALSE)
 
 
-cfg$title <- "R2M41_SDP"
-cfg <- gms::setScenario(cfg,c("SDP"))
-start_run(cfg,codeCheck=FALSE)
+
+
+#reset:
+cfg <- gms::setScenario(cfg,c("SSP2","NPI"))

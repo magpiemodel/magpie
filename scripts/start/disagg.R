@@ -10,7 +10,7 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-library(lucode)
+library(gms)
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
@@ -27,6 +27,3 @@ for(i in (1:4)){
   start_run(cfg=cfg,codeCheck=FALSE)
   cfg$recalibrate <- TRUE
 }
-
-
-

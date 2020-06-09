@@ -19,5 +19,11 @@ sets
  kforestry(kall) Forestry products
  / wood, woodfuel /
 
+ bgp32 biogeophysical effect (tCeq per ha) of afforestation on local climate
+ / nobgp, ann, djf, jja /
+
+ aff_effect biochemical and local biophysical effect of afforestation on climate
+ / bgc,bph /
+
 ;
 *** EOF sets.gms ***

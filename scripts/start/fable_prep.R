@@ -15,7 +15,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 library(magpie4)
-library(lucode)
+library(gms)
 
 buildInputVector <- function(regionmapping   = "aus",
                              project_name    = "isimip_rcp",
@@ -37,7 +37,7 @@ buildInputVector <- function(regionmapping   = "aus",
   return(c(archive,madrat,validation,calibration,additional_data))
 }
 
-calib_date <- "21Mar19" 
+calib_date <- "21Mar19"
 
 for(x in c("h12","ind","cha")) {
   if(exists("calib_date") && !is.null(calib_date)) {
@@ -54,5 +54,5 @@ for(x in c("h12","ind","cha")) {
     cfg$input <- c(cfg$input,calib)
   }
   if(x=="h12") x <- "default"
-  publish_data(input=cfg, name=paste0("magpie4.1_",x,"_apr19"), target=".")
+  gms::publish_data(input=cfg, name=paste0("magpie4.1_",x,"_apr19"), target=".")
 }

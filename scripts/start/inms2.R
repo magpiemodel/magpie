@@ -8,7 +8,8 @@
 ##########################################################
 #### Script to MAgPIE test runs ####
 ##########################################################
-library(lucode)
+
+library(gms)
 source("scripts/start_functions.R")
 source("scripts/performance_test.R")
 source("config/default.cfg")
