@@ -8,7 +8,7 @@
 ### version.0.1: Abhi - Forces runstatistics submission in central repo
 
 ## Load necessary libraries
-library(lucode)
+library(lucode2)
 library(magpie4)
 
 ## Check outputdir
