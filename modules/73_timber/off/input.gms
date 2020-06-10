@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-  s73_free_prod_cost        Very high cost for using non existing land for plantation establishment /100/
+  s73_free_prod_cost        Very low cost for using non existing land for plantation establishment /0.1/
 ;
 
 table f73_prod_specific_timber(t_past,iso,total_wood_products) End use timber product demand (mio. m3 per yr)
@@ -19,6 +19,14 @@ parameter f73_income_elasticity(total_wood_products) Income elasticities of wood
 /
 $ondelim
 $include "./modules/73_timber/input/f73_income_elasticity.csv"
+$offdelim
+/
+;
+
+parameter f73_volumetric_conversion(kforestry) Income elasticities of wood products (1)
+/
+$ondelim
+$include "./modules/73_timber/input/f73_volumetric_conversion.csv"
 $offdelim
 /
 ;

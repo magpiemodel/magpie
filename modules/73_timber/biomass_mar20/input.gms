@@ -29,3 +29,11 @@ $include "./modules/73_timber/input/f73_income_elasticity.csv"
 $offdelim
 /
 ;
+
+parameter f73_volumetric_conversion(kforestry) Income elasticities of wood products (1)
+/
+$ondelim
+$include "./modules/73_timber/input/f73_volumetric_conversion.csv"
+$offdelim
+/
+;

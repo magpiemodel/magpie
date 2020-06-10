@@ -35,15 +35,8 @@ p73_timber_demand_gdp_pop(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to
 p73_timber_demand_gdp_pop(t_all,i,"woodfuel") = p73_timber_demand_gdp_pop(t_all,i,"woodfuel") * 0.5;
 *p73_timber_demand_gdp_pop(t_all,i,"woodfuel")$(im_development_state(t_all,i)<1) = p73_timber_demand_gdp_pop(t_all,i,"woodfuel") * 0.5;
 
-* m3 to ton conversion.
-* 0.6 ton DM / m^3
-* conversion factor of roundwood  : 632.5 kg/m3 (mean value) as in FAO Document (http://www.fao.org/3/a-i4441e.pdf), Page 6, table 4.
-* Conversion factor of wood fuel  : 307.1 kg/m3 (mean value) as in FAO Document (http://www.fao.org/3/a-i4441e.pdf), Page 7, table 6.
-p73_volumetric_conversion("wood") = 0.6;
-p73_volumetric_conversion("woodfuel") = 0.3;
-
 * p73_timber_demand_gdp_pop in in mio m^3
 * pm_demand_ext in mio ton DM
-pm_demand_ext(t_ext,i,kforestry) = round(p73_timber_demand_gdp_pop("y2150",i,kforestry) * p73_volumetric_conversion(kforestry),3);
-pm_demand_ext(t_all,i,kforestry) = round(p73_timber_demand_gdp_pop(t_all,i,kforestry) * p73_volumetric_conversion(kforestry),3);
+pm_demand_ext(t_ext,i,kforestry) = round(p73_timber_demand_gdp_pop("y2150",i,kforestry) * f73_volumetric_conversion(kforestry),3);
+pm_demand_ext(t_all,i,kforestry) = round(p73_timber_demand_gdp_pop(t_all,i,kforestry) * f73_volumetric_conversion(kforestry),3);
 p73_demand_ext_original(t_ext,i,kforestry) = pm_demand_ext(t_ext,i,kforestry);

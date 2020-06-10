@@ -7,7 +7,7 @@
 
 sets
 
-total_wood_products   Wood product category from FAO
+total_wood_products   End use wood product category from FAO
 /
 roundwood,
 industrial_roundwood,wood_fuel,other_industrial_roundwood,
@@ -29,7 +29,7 @@ wood_panels(wood_products)        Wood products used for panels construction
 fibreboard,particle_board_and_osb,plywood,veneer_sheets
 /
 
-kforestry_to_woodprod(kforestry,total_wood_products) mapping between ac and ac_poulter
+kforestry_to_woodprod(kforestry,total_wood_products) Mapping between intermediate and end use wood products
 /
 wood . (fibreboard,particle_board_and_osb,plywood,veneer_sheets,wood_pulp,sawnwood,other_sawnwood,other_industrial_roundwood)
 woodfuel . (wood_fuel)
