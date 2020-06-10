@@ -56,7 +56,7 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "PR187_02"
+identifier_flag <- "PR187_03"
 
 cat(paste0("Last for edits"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
