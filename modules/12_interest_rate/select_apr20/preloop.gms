@@ -29,15 +29,11 @@ p12_reg_shr(t_all,i) = sum(i_to_iso(i,iso), p12_country_dummy(iso) * im_pop_iso(
 $ifthen "%c12_interest_rate%" == "coupling"
   p12_interest_select(t_all,i) = f12_interest_coupling(t_all);
 $elseif "%c12_interest_rate%" == "gdp_dependent"
-  p12_interest(t_all,i) =  ( (s12_interest_lic - (s12_interest_lic-s12_interest_hic) * im_development_state(t_all,i)) * i12_interest_fader(t_all)
+  pm_interest(t_all,i) =  ( (s12_interest_lic - (s12_interest_lic-s12_interest_hic) * im_development_state(t_all,i)) * i12_interest_fader(t_all)
                          +   (s12_hist_interest_lic - (s12_hist_interest_lic-s12_hist_interest_hic) * im_development_state(t_all,i)) * (1-i12_interest_fader(t_all)) ) * p12_reg_shr(t_all,i)
                          + ( (s12_interest_lic_noselect - (s12_interest_lic_noselect-s12_interest_hic_noselect) * im_development_state(t_all,i)) * i12_interest_fader(t_all)
                          +   (s12_hist_interest_lic_noselect - (s12_hist_interest_lic_noselect-s12_hist_interest_hic_noselect) * im_development_state(t_all,i) ) * (1-i12_interest_fader(t_all)) ) * (1-p12_reg_shr(t_all,i));
 $endif
 
-** pm_interest_dev is added as a interface because p12_interest seems to have zero
-** values some times. 
-pm_interest_dev(t,i) = p12_interest(t,i);
-loop(t_all$(ord(t_all)>1),
-	pm_interest_dev(t_all,i)$(pm_interest_dev(t_all,i) = 0) = pm_interest_dev(t_all-1,i);
-);
+*** Historical value fix
+pm_interest(t_historical,i) = pm_interest("y1995",i) * 0.9;

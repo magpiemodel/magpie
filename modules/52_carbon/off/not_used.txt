@@ -7,4 +7,4 @@
 name,type,reason
 pm_climate_class,input,not needed
 pcm_land,input,not needed
-fm_growth_par, input, not used
+f52_growth_par, input, not used

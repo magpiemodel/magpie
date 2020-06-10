@@ -1,12 +1,7 @@
-*** Historical value fix
-pm_interest_dev(t_historical,i) = pm_interest_dev("y1995",i) * 0.9;
-
 ** Calculation of Single rotation model rotation lengths
 
-** Calculating forestry carbon densitiy here is the same calculation as in carbon module.
-** As these numbers don't exist yet due to carbon module appearing below forestry module.
-** We need this to calculate marginal carbon density in the next step.
-p32_carbon_density_ac_forestry(t_all,j,ac) = m_growth_vegc(0,fm_carbon_density(t_all,j,"other","vegc"),sum(clcl,pm_climate_class(j,clcl)*fm_growth_par(clcl,"k","plantations")),sum(clcl,pm_climate_class(j,clcl)*fm_growth_par(clcl,"m","plantations")),(ord(ac)-1));
+** Using forestry carbon densitiy here via carbon density data exchange from carbon module.
+p32_carbon_density_ac_forestry(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc");
 
 ** Calculating the marginal of carbon density i.e. change in carbon density over two time steps
 ** The carbon densities are tC/ha/year so we don't have to divide by timestep length.
@@ -27,8 +22,8 @@ p32_IGR(t_all,j,ac) =   (p32_carbon_density_ac_marg(t_all,j,ac)/p32_carbon_densi
 ** As long as the prevailing interest rate becomes higher than IGR, it is assumed that the forest owner would rather
 ** keep his/her investment in bank rather than in keeping the forest standing.
 ** The easiest way to do this calculation is to count a value of 1 for IGR>interest rate and a value of 0 for IGR<interest rate.
-p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)) >  0)
-                        + 0$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev(t_all,i)) <= 0);
+p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest(t_all,i)) >  0)
+                        + 0$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest(t_all,i)) <= 0);
 
 ** From the above calculation, now it is easier to count how many age-classes can be sustained before IGR falls below interest rate.
 
@@ -38,18 +33,18 @@ p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest_dev
 
 p32_time(ac) = ord(ac);
 
-p32_discount_factor(t_all,j,ac)         =  1/(exp(sum(cell(i,j),pm_interest_dev(t_all,i))*p32_time(ac)));
+p32_discount_factor(t_all,j,ac)         =  1/(exp(sum(cell(i,j),pm_interest(t_all,i))*p32_time(ac)));
 
 p32_net_present_value(t_all,j,ac)       = ((s32_price * p32_carbon_density_ac_forestry(t_all,j,ac) * p32_discount_factor(t_all,j,ac)))/(1-p32_discount_factor(t_all,j,ac));
 
 p32_stand_value(t_all,j,ac)             = s32_price * p32_carbon_density_ac_forestry(t_all,j,ac);
 p32_stand_value(t_all,j,ac)$(p32_stand_value(t_all,j,ac)<0.01) = 0.01;
 
-p32_investment_returns_lost(t_all,j,ac) = sum(cell(i,j),pm_interest_dev(t_all,i)) * p32_net_present_value(t_all,j,ac);
+p32_investment_returns_lost(t_all,j,ac) = sum(cell(i,j),pm_interest(t_all,i)) * p32_net_present_value(t_all,j,ac);
 p32_land_rent_weighted(t_all,j,ac)      = p32_investment_returns_lost(t_all,j,ac)/p32_stand_value(t_all,j,ac) ;
 
-p32_rot_flg_faustmann(t_all,j,ac)       = 1$(p32_IGR(t_all,j,ac) > sum(cell(i,j),pm_interest_dev(t_all,i)) + p32_land_rent_weighted(t_all,j,ac))
-                                        + 0$(p32_IGR(t_all,j,ac) <= sum(cell(i,j),pm_interest_dev(t_all,i)) + p32_land_rent_weighted(t_all,j,ac));
+p32_rot_flg_faustmann(t_all,j,ac)       = 1$(p32_IGR(t_all,j,ac) > sum(cell(i,j),pm_interest(t_all,i)) + p32_land_rent_weighted(t_all,j,ac))
+                                        + 0$(p32_IGR(t_all,j,ac) <= sum(cell(i,j),pm_interest(t_all,i)) + p32_land_rent_weighted(t_all,j,ac));
 
 p32_rot_length_faustmann(t_all,j)       = sum(ac,p32_rot_flg_faustmann(t_all,j,ac));
 

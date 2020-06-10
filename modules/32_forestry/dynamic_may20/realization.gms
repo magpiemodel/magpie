@@ -21,7 +21,7 @@
 *' plantation forests while still accounting for afforestation policies. New plantations
 *' are also established in the simulation step to account for future timber demand.
 *' This module also calculates the rotation lengths before the solve loop by equating
-*' Instantaneous Growth Rates (IGR) and interest rate `pm_interest_dev` based on
+*' Instantaneous Growth Rates (IGR) and interest rate `pm_interest` based on
 *' @amacher2009economics. We have to make assumptions regarding the rotation lengths
 *' to be used for establishment and harvesting decisions. For establishment we just
 *' use the calculated rotations either based on a Single Rotation-Period Model or
