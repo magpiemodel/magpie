@@ -56,7 +56,7 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "PR187_01"
+identifier_flag <- "PR187_02"
 
 cat(paste0("Last for edits"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
@@ -152,7 +152,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # Use user name and model version defined in default.cfg for generating the titel
-identifier_flag <- "PR187_01"
+#identifier_flag <- "PR187_02"
 
 # Grab user name
 user <- Sys.info()[["user"]]
