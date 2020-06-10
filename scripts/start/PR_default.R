@@ -8,8 +8,9 @@
 ##### Version log (YYYYMMDD - Description - Author(s))
 ## 20200527 - Default SSP2 Baseline and Policy runs - FH,AM,EMJB,JPD
 
-## Load lucode2 to use setScenario later
+## Load lucode2 and gms to use setScenario later
 library(lucode2)
+library(gms)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
