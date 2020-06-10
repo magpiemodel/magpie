@@ -12,10 +12,11 @@ vm_hvarea_primforest.fx(j) = 0;
 ** Provide lower bound manually to positive variables for avoiding inconsistencies
 ** in module realizations. These variables can't be fixed to a specific value.
 ** vm_cost_glo gets an upper bound because technically it can fluctuate between -Inf to Inf.
+** vm_forestry_reduction gets a value fix because timber plantations are static from off realization.
 vm_secdforest_reduction.lo(j,ac_sub) = 0;
 vm_other_reduction.lo(j,ac_sub) = 0;
 vm_primforest_reduction.lo(j) = 0;
-vm_forestry_reduction.lo(j,type32,ac_sub)  = 0;
+vm_forestry_reduction.fx(j,"plant",ac_sub) = 0;
 vm_cost_glo.up = Inf;
 
 ** Timber Demand Calculations
