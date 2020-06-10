@@ -16,5 +16,6 @@ $Ifi "%phase%" == "declarations" $include "./modules/73_timber/off/declarations.
 $Ifi "%phase%" == "input" $include "./modules/73_timber/off/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/73_timber/off/equations.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/73_timber/off/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/73_timber/off/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/73_timber/off/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
