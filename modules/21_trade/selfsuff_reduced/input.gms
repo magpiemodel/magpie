@@ -27,7 +27,7 @@ $ondelim
 $include "./modules/21_trade/input/f21_trade_export_share.cs3"
 $offdelim;
 
-table fm_trade_balanceflow(t_all,kall) Domestic balance flows (mio. tDM per yr)
+table f21_trade_balanceflow(t_all,kall) Domestic balance flows (mio. tDM per yr)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_balanceflow.cs3"
 $offdelim;

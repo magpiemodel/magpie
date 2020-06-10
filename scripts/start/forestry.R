@@ -56,9 +56,9 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "PR06"
+identifier_flag <- "PR187_01"
 
-cat(paste0("Second test after general code cleanup"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Last for edits"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 for(secdf_distribution in c(0)){ 					## (0) for all in highest acx (1) for equal dist (2) for poulter dist
 

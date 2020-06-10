@@ -11,7 +11,7 @@
 
  q21_trade_glo(k_trade)..
   sum(i2 ,vm_prod_reg(i2,k_trade)) =g=
-  sum(i2, vm_supply(i2,k_trade)) + sum(ct,fm_trade_balanceflow(ct,k_trade));
+  sum(i2, vm_supply(i2,k_trade)) + sum(ct,f21_trade_balanceflow(ct,k_trade));
 *'
 *' For non-tradable commodites, the regional supply should be larger or equal to the regional demand.
  q21_notrade(i2,k_notrade)..
@@ -49,7 +49,7 @@
  v21_excess_dem(k_trade) =g=
  sum(i2, vm_supply(i2,k_trade)*(1 - sum(ct,f21_self_suff(ct,i2,k_trade)))
  $(sum(ct,f21_self_suff(ct,i2,k_trade)) < 1))
- + sum(ct,fm_trade_balanceflow(ct,k_trade));
+ + sum(ct,f21_trade_balanceflow(ct,k_trade));
 
 *' Distributing the global excess demand to exporting regions is based on regional export shares [@schmitz_trading_2012].
 *' Export shares are derived from FAO data (see @schmitz_trading_2012 for details). They are 0 for importing regions.

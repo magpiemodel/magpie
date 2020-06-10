@@ -11,7 +11,10 @@
 *' @limitations Timber production not simulated in the model
 
 *####################### R SECTION START (PHASES) ##############################
+$Ifi "%phase%" == "sets" $include "./modules/73_timber/off/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/73_timber/off/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/73_timber/off/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/73_timber/off/equations.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/73_timber/off/preloop.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/73_timber/off/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

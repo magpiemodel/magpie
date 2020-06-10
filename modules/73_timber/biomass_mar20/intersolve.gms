@@ -11,8 +11,6 @@ if(ord(t)>1,
 
 while(floor(smax((i,kforestry), sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry)))) > 0 AND s73_counter < s73_maxiter,
 
-    p73_price_ratio_before(t,i,kforestry) = pm_prices_woodymass(t,i,kforestry)/pm_prices_woodymass("y1995",i,kforestry);
-
     s73_counter = s73_counter + 1;
     p73_criterion = floor(smax((i,kforestry), sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry))));
   	display p73_criterion;
@@ -20,12 +18,12 @@ while(floor(smax((i,kforestry), sum(cell(i,j),v73_prod_heaven_timber.l(j,kforest
 
     pm_demand_ext(t,i,kforestry) = pm_demand_ext(t,i,kforestry) - sum(cell(i,j),v73_prod_heaven_timber.l(j,kforestry));
 
-    p73_timder_adjustment_ratio(t,i,"wood") = pm_demand_ext(t,i,"wood")/p73_demand_ext_original(t,i,"wood");
-    p73_timder_adjustment_ratio(t,i,"woodfuel") = pm_demand_ext(t,i,"woodfuel")/p73_demand_ext_original(t,i,"woodfuel");
+    p73_timber_adjustment_ratio(t,i,"wood") = pm_demand_ext(t,i,"wood")/p73_demand_ext_original(t,i,"wood");
+    p73_timber_adjustment_ratio(t,i,"woodfuel") = pm_demand_ext(t,i,"woodfuel")/p73_demand_ext_original(t,i,"woodfuel");
 
-    if(round(smin(i,p73_timder_adjustment_ratio(t,i,"wood")),2) < 0.75 OR round(smin(i,p73_timder_adjustment_ratio(t,i,"woodfuel")),2) < 0.75,
+    if(round(smin(i,p73_timber_adjustment_ratio(t,i,"wood")),2) < 0.75 OR round(smin(i,p73_timber_adjustment_ratio(t,i,"woodfuel")),2) < 0.75,
     display "Warning: Ratio between prescribed demand and adjusted demand in some regions diverge heavily!";
-    display p73_timder_adjustment_ratio;
+    display p73_timber_adjustment_ratio;
     );
 
 	s73_counter2 = 0;
