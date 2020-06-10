@@ -7,8 +7,3 @@
 
 name,type,reason
 pm_timber_yield, input, not used
-vm_secdforest_reduction, var, not used
-vm_other_reduction, var, not used
-vm_primforest_reduction, var, not used
-vm_forestry_reduction, var, not used
-vm_cost_glo, var, not used

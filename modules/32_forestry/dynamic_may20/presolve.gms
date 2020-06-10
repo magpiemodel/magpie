@@ -35,13 +35,13 @@ else
 *' Certain areas (e.g. the boreal zone) are excluded from endogenous afforestation.
 ** DON'T USE TYPE32 SET HERE
 if(m_year(t) <= sm_fix_SSP2,
-	v32_land.fx(j,"aff","ac0") = 0;
+	vm_land_fore.fx(j,"aff","ac0") = 0;
 else
-	v32_land.lo(j,"aff","ac0") = 0;
-	v32_land.up(j,"aff","ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
+	vm_land_fore.lo(j,"aff","ac0") = 0;
+	vm_land_fore.up(j,"aff","ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
 );
 *' No afforestation is allowed if carbon density <= 20 tc/ha
-v32_land.fx(j,"aff","ac0")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
+vm_land_fore.fx(j,"aff","ac0")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
 
 *' Afforestation switch:
 *' 0 = Use natveg carbon densities for afforestation,
@@ -87,30 +87,30 @@ p32_land(t,j,type32,"acx") = p32_land(t,j,type32,"acx") + sum(ac$(ord(ac) > card
 p32_land(t,j,type32,"ac0") = 0;
 *' @stop
 
-** Calculate v32_land.l
-v32_land.l(j,type32,ac) = p32_land(t,j,type32,ac);
+** Calculate vm_land_fore.l
+vm_land_fore.l(j,type32,ac) = p32_land(t,j,type32,ac);
 pc32_land(j,type32,ac) = p32_land(t,j,type32,ac);
 p32_land_before(t,j,type32,ac) = p32_land(t,j,type32,ac);
 vm_land.l(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 pcm_land(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 
 ** Release bounds for ALL Age classes before we make harvest "indication" decisions
-v32_land.lo(j,"plant",ac) = 0;
-v32_land.up(j,"plant",ac) = Inf;
+vm_land_fore.lo(j,"plant",ac) = 0;
+vm_land_fore.up(j,"plant",ac) = Inf;
 
 ** Fix land with rotation length
-v32_land.fx(j,"plant",ac_sub)$protect32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
+vm_land_fore.fx(j,"plant",ac_sub)$protect32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
 
 ** Set upper bound for plantations after rotation length
-v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
+vm_land_fore.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
 
-m_boundfix(v32_land,(j,"plant",ac_sub),l,10e-5);
+m_boundfix(vm_land_fore,(j,"plant",ac_sub),l,10e-5);
 
 ** fix ndc afforestation forever, all age-classes are fixed except ac0
-v32_land.fx(j,"ndc",ac_sub) = pc32_land(j,"ndc",ac_sub);
+vm_land_fore.fx(j,"ndc",ac_sub) = pc32_land(j,"ndc",ac_sub);
 ** fix c price induced afforestation based on s32_planing_horizon, fixed only until end of s32_planing_horizon, ac0 is free
-v32_land.fx(j,"aff",ac_sub)$(ord(ac_sub) <= s32_planing_horizon/5) = pc32_land(j,"aff",ac_sub);
-v32_land.up(j,"aff",ac_sub)$(ord(ac_sub) > s32_planing_horizon/5) = pc32_land(j,"aff",ac_sub);
+vm_land_fore.fx(j,"aff",ac_sub)$(ord(ac_sub) <= s32_planing_horizon/5) = pc32_land(j,"aff",ac_sub);
+vm_land_fore.up(j,"aff",ac_sub)$(ord(ac_sub) > s32_planing_horizon/5) = pc32_land(j,"aff",ac_sub);
 
 ** Calculate future yield based on rotation length
 pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac_sub,"forestry"));

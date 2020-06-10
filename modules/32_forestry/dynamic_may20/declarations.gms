@@ -25,7 +25,7 @@ parameters
  p32_cdr_ac(t,j,ac)						                      Non-cumulative CDR from afforestation plantations for each age-class depending on planning horizon (tC per ha)
  p32_cdr_ac_plant(t,j,ac)						                Non-cumulative CDR from timber plantations for each age-class depending on planning horizon (tC per ha)
  p32_rotation_offset                                offset calc in age class equivalents (1)
- p32_land_start(j,type32,ac)                        Saving first value of starting land (mio. ha)
+ pm_land_start_ac(j,type32,ac)                        Saving first value of starting land (mio. ha)
  p32_land_before(t,j,type32,ac)                     Saving time value of starting land (mio. ha)
  pc32_demand_forestry_future(i,kforestry)           Future forestry demand in current time step (tDM per yr)
  p32_plant_prod_share(t_ext,i) 					 	          Share of overall production coming from plantations (1)
@@ -45,7 +45,7 @@ parameters
 
 positive variables
  vm_cost_fore(i)                                    Forestry costs (Mio USD)
- v32_land(j,type32,ac)                              Forestry land pools (mio. ha)
+ vm_land_fore(j,type32,ac)                          Forestry land pools (mio. ha)
  v32_land_missing(j)                                Forestry land which can be used at extrmemly high costs in case not enough area is available for new establishment (mio. ha)
  vm_landdiff_forestry                               Aggregated difference in forestry land compared to previous timestep (mio. ha)
  v32_cost_recur(i)                                  Recurring forest management costs (USD per ha)
@@ -83,7 +83,7 @@ equations
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_cost_fore(t,i,type)                          Forestry costs (Mio USD)
- ov32_land(t,j,type32,ac,type)                   Forestry land pools (mio. ha)
+ ov_land_fore(t,j,type32,ac,type)                Forestry land pools (mio. ha)
  ov32_land_missing(t,j,type)                     Forestry land which can be used at extrmemly high costs in case not enough area is available for new establishment (mio. ha)
  ov_landdiff_forestry(t,type)                    Aggregated difference in forestry land compared to previous timestep (mio. ha)
  ov32_cost_recur(t,i,type)                       Recurring forest management costs (USD per ha)

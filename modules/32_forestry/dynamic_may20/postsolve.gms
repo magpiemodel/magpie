@@ -1,15 +1,15 @@
 *' @code
 *' Set 'ac_additional' here allows us to distribute newly establsihed plantations
 *' equally among time steps where the simulation steps go longer than 5 years.
-v32_land.l(j,type32,ac_additional) = v32_land.l(j,type32,"ac0")/card(ac_additional);
+vm_land_fore.l(j,type32,ac_additional) = vm_land_fore.l(j,type32,"ac0")/card(ac_additional);
 
 *' Exchange land information after optimization
-p32_land(t,j,type32,ac) = v32_land.l(j,type32,ac);
+p32_land(t,j,type32,ac) = vm_land_fore.l(j,type32,ac);
 *' @stop
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_cost_fore(t,i,"marginal")                          = vm_cost_fore.m(i);
- ov32_land(t,j,type32,ac,"marginal")                   = v32_land.m(j,type32,ac);
+ ov_land_fore(t,j,type32,ac,"marginal")                = vm_land_fore.m(j,type32,ac);
  ov32_land_missing(t,j,"marginal")                     = v32_land_missing.m(j);
  ov_landdiff_forestry(t,"marginal")                    = vm_landdiff_forestry.m;
  ov32_cost_recur(t,i,"marginal")                       = v32_cost_recur.m(i);
@@ -36,7 +36,7 @@ p32_land(t,j,type32,ac) = v32_land.l(j,type32,ac);
  oq32_cost_establishment(t,i,"marginal")               = q32_cost_establishment.m(i);
  oq32_bgp_aff(t,j,ac,"marginal")                       = q32_bgp_aff.m(j,ac);
  ov_cost_fore(t,i,"level")                             = vm_cost_fore.l(i);
- ov32_land(t,j,type32,ac,"level")                      = v32_land.l(j,type32,ac);
+ ov_land_fore(t,j,type32,ac,"level")                   = vm_land_fore.l(j,type32,ac);
  ov32_land_missing(t,j,"level")                        = v32_land_missing.l(j);
  ov_landdiff_forestry(t,"level")                       = vm_landdiff_forestry.l;
  ov32_cost_recur(t,i,"level")                          = v32_cost_recur.l(i);
@@ -63,7 +63,7 @@ p32_land(t,j,type32,ac) = v32_land.l(j,type32,ac);
  oq32_cost_establishment(t,i,"level")                  = q32_cost_establishment.l(i);
  oq32_bgp_aff(t,j,ac,"level")                          = q32_bgp_aff.l(j,ac);
  ov_cost_fore(t,i,"upper")                             = vm_cost_fore.up(i);
- ov32_land(t,j,type32,ac,"upper")                      = v32_land.up(j,type32,ac);
+ ov_land_fore(t,j,type32,ac,"upper")                   = vm_land_fore.up(j,type32,ac);
  ov32_land_missing(t,j,"upper")                        = v32_land_missing.up(j);
  ov_landdiff_forestry(t,"upper")                       = vm_landdiff_forestry.up;
  ov32_cost_recur(t,i,"upper")                          = v32_cost_recur.up(i);
@@ -90,7 +90,7 @@ p32_land(t,j,type32,ac) = v32_land.l(j,type32,ac);
  oq32_cost_establishment(t,i,"upper")                  = q32_cost_establishment.up(i);
  oq32_bgp_aff(t,j,ac,"upper")                          = q32_bgp_aff.up(j,ac);
  ov_cost_fore(t,i,"lower")                             = vm_cost_fore.lo(i);
- ov32_land(t,j,type32,ac,"lower")                      = v32_land.lo(j,type32,ac);
+ ov_land_fore(t,j,type32,ac,"lower")                   = vm_land_fore.lo(j,type32,ac);
  ov32_land_missing(t,j,"lower")                        = v32_land_missing.lo(j);
  ov_landdiff_forestry(t,"lower")                       = vm_landdiff_forestry.lo;
  ov32_cost_recur(t,i,"lower")                          = v32_cost_recur.lo(i);

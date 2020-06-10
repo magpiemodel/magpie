@@ -156,7 +156,7 @@ elseif s32_initial_distribution = 1,
   );
 *display p32_land;
 ** Initialization of land
-p32_land_start(j,type32,ac) = p32_land("y1995",j,type32,ac);
+pm_land_start_ac(j,type32,ac) = p32_land("y1995",j,type32,ac);
 
 *fix bph effect to zero for all age classes except the ac that is chosen for the bph effect to occur after planting (e.g. canopy closure)
 p32_aff_bgp(j,ac) = 0;
