@@ -10,7 +10,7 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-library(lucode)
+library(gms)
 library(magclass)
 library(gdx)
 
@@ -53,7 +53,7 @@ prefix <- "TAU04"
 for (ssp in c("SSP2")) {
   for (acc in c(0.01,0.02,0.03,0.04,0.05)) {
     for (damp in c(0.98,0.95)) {
-      cfg <- setScenario(cfg,c(ssp,"NPI"))
+      cfg <- gms::setScenario(cfg,c(ssp,"NPI"))
       cfg$gms$c56_pollutant_prices <- "coupling"
       cfg$gms$c60_2ndgen_biodem <- "coupling"
       getInput(paste0("/p/projects/piam/runs/coupled-magpie/output/C_",ssp,"-NPi-mag-4/fulldata.gdx"))
@@ -68,4 +68,3 @@ for (ssp in c("SSP2")) {
     }
   }
 }
-

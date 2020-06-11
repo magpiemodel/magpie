@@ -10,7 +10,7 @@
 #########################
 # Version 1.0, Florian Humpenoeder
 #
-library(lucode)
+library(lucode2)
 library(magclass)
 library(luplot)
 library(magpie4)
@@ -22,7 +22,7 @@ options(error=function()traceback(2))
 if(!exists("source_include")) {
   outputdirs <- path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
   #Define arguments that can be read from command line
-  readArgs("outputdirs")
+  lucode2::readArgs("outputdirs")
 }
 ###############################################################################
 cat("\nStarting output generation\n")

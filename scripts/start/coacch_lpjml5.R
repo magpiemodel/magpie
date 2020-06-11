@@ -10,7 +10,7 @@
 #### Script for the generation of COACCH simulations ####
 ############################################################
 
-library(lucode)
+library(gms)
 source("scripts/start_functions.R")
 source("scripts/performance_test.R")
 source("config/default.cfg")
@@ -72,7 +72,7 @@ general_settings<-function(title) {
   cfg$input <- buildInputVector()
   cfg$output <- c(cfg$output,"sustag_report")
   cfg$recalibrate <- FALSE
-  cfg<-lucode::setScenario(cfg,"cc")
+  cfg<-gms::setScenario(cfg,"cc")
   cfg$gms$c56_emis_policy <- "all"
   cfg$gms$forestry  <- "affore_vegc_dec16"
   cfg$gms$maccs  <- "on_sep16"
@@ -83,8 +83,8 @@ general_settings<-function(title) {
 
 # SSP2
 cfg<-general_settings(title="SSP2_nocc_newregion")
-cfg<-lucode::setScenario(cfg,"SSP2")
-cfg<-lucode::setScenario(cfg,"nocc")
+cfg<-gms::setScenario(cfg,"SSP2")
+cfg<-gms::setScenario(cfg,"nocc")
 cfg$input <- buildInputVector(regionmapping = "coacch")
 cfg$recalibrate=TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
@@ -110,9 +110,9 @@ start_the_run<-function(ssp,mit,rcp,gcm,co2,cc){
 	  gcm_alias="NoCC"
 	  rcp_alias="NoCC"
 	}
-	if(mit=="26"){mit_alias="2p6"} 
-	if(mit=="45"){mit_alias="4p5"} 
-	if(mit=="Ref"){mit_alias="NoMit"} 
+	if(mit=="26"){mit_alias="2p6"}
+	if(mit=="45"){mit_alias="4p5"}
+	if(mit=="Ref"){mit_alias="NoMit"}
 
   # create runname
 	if(co2=="co2") {
@@ -121,18 +121,18 @@ start_the_run<-function(ssp,mit,rcp,gcm,co2,cc){
 	   title=paste(ssp,gcm_alias,rcp_alias,mit_alias,"NoCO2",sep="_")
 	}
 	cat(paste(title))
-	
-	
+
+
 	cfg<-general_settings(title=title)
-	cfg<-lucode::setScenario(cfg,ssp)
+	cfg<-gms::setScenario(cfg,ssp)
 	cfg$input <- buildInputVector(climatescen_name=rcp,climate_model   = gcm, regionmapping = "coacch",co2=co2,calibration=calib)
 	mitigation=paste0("SSPDB-",ssp,"-",mit,"-",model)
 	cfg$gms$c56_pollutant_prices <- mitigation
 	cfg$gms$c60_2ndgen_biodem    <- mitigation
 	if(cc==FALSE){
-	  cfg<-lucode::setScenario(cfg,"nocc")
+	  cfg<-gms::setScenario(cfg,"nocc")
 	} else {
-	  cfg<-lucode::setScenario(cfg,"cc")
+	  cfg<-gms::setScenario(cfg,"cc")
 	}
 	start_run(cfg=cfg,codeCheck=codeCheck)
 }
@@ -168,7 +168,7 @@ for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
 		rcpopt = c("rcp2p6","rcp4p5","rcp6p0","rcp8p5","NoCC")
 		gcmopt = c("HadGEM2_ES")
 		}
-	for(mit in mitopt){		
+	for(mit in mitopt){
 		for (rcp in rcpopt) {
 			co2="co2"
 			if(rcp=="NoCC"){
@@ -187,5 +187,3 @@ for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
 		}
 	}
 }
-
-

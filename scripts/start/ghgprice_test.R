@@ -10,7 +10,6 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-library(lucode)
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
@@ -55,7 +54,7 @@ cfg$input <- buildInputVector()
 ## none
 #cfg$gms$c56_emis_policy      <- "none"
 
-#cfg$gms$land <- "landmatrix_dec18" 
+#cfg$gms$land <- "landmatrix_dec18"
 #cfg$gms$som  <- "static_jan19"
 #cfg$title    <- "staticsom_none"
 #start_run(cfg=cfg,codeCheck=TRUE)

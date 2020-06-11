@@ -10,5 +10,5 @@
 #### Script to check MAgPIE code  ####
 ######################################
 
-library(lucode)
-codeCheck()
+library(gms)
+gms::codeCheck()

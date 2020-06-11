@@ -10,7 +10,7 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-library(lucode)
+library(gms)
 library(magclass)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
@@ -35,22 +35,19 @@ cfg$results_folder <- "output/:title::date:"
 
 ### SSPs w/o mitigation ################
 cfg$title <- "SSP1_NoMt_NoCC"
-cfg <- setScenario(cfg,c("SSP1","NPI"))
+cfg <- gms::setScenario(cfg,c("SSP1","NPI"))
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "SSP2_NoMt_NoCC"
-cfg <- setScenario(cfg,c("SSP2","NPI"))
+cfg <- gms::setScenario(cfg,c("SSP2","NPI"))
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- "SSP3_NoMt_NoCC"
-cfg <- setScenario(cfg,c("SSP3","NPI"))
+cfg <- gms::setScenario(cfg,c("SSP3","NPI"))
 start_run(cfg,codeCheck=FALSE)
 
 
 
 
 #reset:
-cfg <- setScenario(cfg,c("SSP2","NPI"))
-
-
-
+cfg <- gms::setScenario(cfg,c("SSP2","NPI"))

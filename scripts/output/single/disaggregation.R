@@ -16,7 +16,7 @@
 # 1.02: uses now the land function to read the simulated land input
 # 1.03: introduced function interpolate, all possible input is read from the GDX file now
 
-library(lucode)
+library(lucode2)
 library(magpie4)
 library(luscale)
 
