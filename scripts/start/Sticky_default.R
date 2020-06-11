@@ -15,7 +15,7 @@ resolutions<-c("200")
 #Factor cost realizations
 realization<-c("sticky_feb18")
 # Trade realization
-title<-c("Sticky_constCapital_only")
+title<-c("Sticky_constCapital_noScaling")
 
 for (i in 1:length(resolutions)){
 for(j in 1:length(realization)){
