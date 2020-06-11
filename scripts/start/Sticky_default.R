@@ -15,7 +15,7 @@ resolutions<-c("200")
 #Factor cost realizations
 realization<-c("sticky_feb18")
 # Trade realization
-title<-c("Sticky_constCapital_noScaling")
+title<-c("Sticky_constCapital_noScaling_maxInvAnn_newRot")
 
 for (i in 1:length(resolutions)){
 for(j in 1:length(realization)){
@@ -25,13 +25,14 @@ for(j in 1:length(realization)){
 cfg$title<-title[i]
 
 
-#cfg$input <- c(paste0("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c",resolutions[i],"_690d3718e151be1b450b394c1064b1c5.tgz"),
-#			         "rev4.44_h12_magpie.tgz",
-#			         "rev4.44_h12_validation.tgz",
-#			         "calibration_H12_c200_26Feb20.tgz",
-#			         "additional_data_rev3.81.tgz")
+cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c200_690d3718e151be1b450b394c1064b1c5.tgz",
+			   "rev4.47_h12_magpie.tgz",
+			   "rev4.47_h12_validation.tgz",
+			   "calibration_H12_c200_26Feb20.tgz",
+			   "additional_data_rev3.86.tgz")
 
 
+cfg$force_download<-TRUE
 
 #max year ssp2
 #cfg$gms$sm_fix_SSP2 <- 1990

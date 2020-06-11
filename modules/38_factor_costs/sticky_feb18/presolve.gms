@@ -31,4 +31,4 @@ v38_capital.fx(j,kcr,"immobile") = p38_capital(t,j,kcr,"immobile");
 *v38_investment.up(j,kcr,mobil38)=1e6;
 s38_capitalmax(j,"mobile") = sum((kcr), p38_capital(t,j,kcr,"mobile"));
 v38_capital.up(j,kcr,"mobile")=s38_capitalmax(j,"mobile");
-*v38_investment_annuity.up(i,kcr) = 1e5;
+v38_investment_annuity.up(i,kcr) = 1e5;
