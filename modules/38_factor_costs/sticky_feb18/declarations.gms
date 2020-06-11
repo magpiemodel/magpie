@@ -38,6 +38,7 @@ parameters
 *p38_past_area(j,kcr)               previous period area (mio ha)
  p38_ovcosts(t,i,kcr)               Overall factor costs including non-annuitized capital investment (mio USD05MER)
 * p38_capital_intensity2(j,kcr)    Needed in troublesome equation
+s38_capitalmax(j,mobil38)       Maximum v38_capital 
 ;
 
 
@@ -46,7 +47,6 @@ parameters
  ov_cost_prod(t,i,kall,type)            factor costs (mio USD05MER  per yr)
  ov38_investment(t,j,kcr,mobil38,type)  investment costs in farm capital (mio USD05MER per yr)
  ov38_investment_annuity(t,i,kcr,type)  annualized investment costs in farm capital (mio USD05MER per yr)
- ov38_mi(t,i,type)                      management intensity (share of max yield)
  ov38_capital(t,j,kcr,mobil38,type)     capital stock (USD05MER)
  oq38_cost_prod_crop(t,i,kcr,type)      regional factor input costs for plant production (mio USD05MER)
  oq38_investment(t,j,kcr,mobil38,type)  cellular mobile investments into farm capital   (mio USD05MER)
