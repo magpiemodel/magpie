@@ -32,7 +32,7 @@ cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c200_690d3718e151be1b45
 			   "additional_data_rev3.85.tgz")
 
 
-#cfg$force_download<-TRUE
+cfg$force_download<-TRUE
 
 #max year ssp2
 #cfg$gms$sm_fix_SSP2 <- 1990
