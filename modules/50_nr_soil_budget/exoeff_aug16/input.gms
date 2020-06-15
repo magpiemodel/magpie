@@ -5,8 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c50_scen_neff  neff65_70_starty2010
-$setglobal c50_scen_neff_noselect  neff65_70_starty2010
+$setglobal c50_scen_neff  neff60_60_starty2010
+$setglobal c50_scen_neff_noselect  neff60_60_starty2010
 *   options: constant,
 *   neff55_55_starty1990,neff60_60_starty1990,neff65_70_starty1990,
 *   neff65_70_starty2010,neff60_60_starty2010,neff55_60_starty2010,

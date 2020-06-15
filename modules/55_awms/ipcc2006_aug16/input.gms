@@ -6,8 +6,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-$setglobal c55_scen_conf  ssp1
-$setglobal c55_scen_conf_noselect  ssp1
+$setglobal c55_scen_conf  ssp2
+$setglobal c55_scen_conf_noselect  ssp2
 *   options:   SSP: "ssp1", "ssp2", "ssp3", "ssp4", "ssp5", "constant"
 *             SRES: "a1", "a2", "b1", "b2"
 *             GoodPractice: "GoodPractice"
