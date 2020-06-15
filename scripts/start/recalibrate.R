@@ -5,10 +5,10 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
-
-######################################
-#### Script to start a MAgPIE run ####
-######################################
+# --------------------------------------------------------
+# description: calculate and store new calibration factors
+# position: 4
+# --------------------------------------------------------
 
 library(magpie4)
 library(magclass)

@@ -5,6 +5,10 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
+# -------------------------------------------------
+# description: just download default.cfg input data
+# position: 3
+# -------------------------------------------------
 
 source("scripts/start_functions.R")
 source("config/default.cfg")
