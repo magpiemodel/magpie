@@ -10,7 +10,7 @@
 *' with the forestry above ground carbon density of the current time step (`pc32_carbon_density`).
 pc32_carbon_density(j,ag_pools) = fm_carbon_density(t,j,"forestry",ag_pools);
 vm_carbon_stock.fx(j,"forestry",ag_pools) = 
-	sum((type32,ac), vm_land_fore.l(j,type32,ac)*pm_carbon_density_ac(t,j,ac,ag_pools));
+	sum((type32,ac), v32_land.l(j,type32,ac)*pm_carbon_density_ac(t,j,ac,ag_pools));
 
 *' Wood demand is also set to zero because forestry is not modeled in this realization.
 vm_supply.fx(i2,kforestry) = 0;

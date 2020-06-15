@@ -8,8 +8,6 @@
 ** Fixing variables
 v73_prod_natveg.fx(j,"other",ac_sub,"wood") = 0;
 v73_prod_natveg.fx(j,"primforest",ac_sub,kforestry)$(not sameas(ac_sub,"acx")) = 0;
-** Set lower bound to positive variable
-vm_land_fore.lo(j,"plant",ac) = 0;
 
 ** Set historical values to FAO values
 p73_forestry_demand_prod_specific(t_past,iso,total_wood_products) = f73_prod_specific_timber(t_past,iso,total_wood_products);

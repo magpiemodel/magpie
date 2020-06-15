@@ -5,12 +5,5 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-scalars
-        s80_maxiter   			maximal solve iterations if modelstat is > 2 (1)    / 2 /
-		s80_optfile     		switch to use specfied solver settings (1)          / 1 /
-		s80_num_nonopt_allowed 	number of allowed non-optimal variables (1)  		/ Inf /
-;
-
-$setglobal c80_nlp_solver  conopt4
-*   options:   (conopt3):         conopt3
-*              (conopt4):         conopt4
+** Future demand relevant in current time step depending on rotation length
+pm_demand_forestry_future(i,kforestry)    = sum(t_ext$(t_ext.pos = pm_representative_rotation(t,i)),pm_demand_ext(t_ext,i,kforestry));

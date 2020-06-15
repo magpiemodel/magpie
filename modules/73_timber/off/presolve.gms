@@ -8,7 +8,6 @@
 ** Fix Variables
 vm_hvarea_secdforest.fx(j,ac_sub) = 0;
 vm_hvarea_primforest.fx(j) = 0;
-vm_land_fore.fx(j,"plant","ac0") = pm_land_start_ac(j,"plant","ac0");
 
 ** Provide lower bound manually to positive variables for avoiding inconsistencies
 ** in module realizations. These variables can't be fixed to a specific value.
@@ -19,3 +18,10 @@ vm_other_reduction.lo(j,ac_sub) = 0;
 vm_primforest_reduction.lo(j) = 0;
 vm_forestry_reduction.fx(j,"plant",ac_sub) = 0;
 vm_cost_glo.up = Inf;
+
+** Future demand relevant in current time step depending on rotation length
+** In off realization, foresight for future timber demand is taken away from
+** the model. This makes sure that no new plantations are added and we stick
+** to the assumption that existing plantation area is well equipped to meet
+** timber demand.
+pm_demand_forestry_future(i,kforestry)    = 0 ;

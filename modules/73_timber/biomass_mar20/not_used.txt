@@ -6,4 +6,3 @@
 # |  Contact: magpie@pik-potsdam.de
 
 name,type,reason
-pm_land_start_ac, input, not used
