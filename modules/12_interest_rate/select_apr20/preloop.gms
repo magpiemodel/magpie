@@ -34,6 +34,3 @@ $elseif "%c12_interest_rate%" == "gdp_dependent"
                          + ( (s12_interest_lic_noselect - (s12_interest_lic_noselect-s12_interest_hic_noselect) * im_development_state(t_all,i)) * i12_interest_fader(t_all)
                          +   (s12_hist_interest_lic_noselect - (s12_hist_interest_lic_noselect-s12_hist_interest_hic_noselect) * im_development_state(t_all,i) ) * (1-i12_interest_fader(t_all)) ) * (1-p12_reg_shr(t_all,i));
 $endif
-
-*** Historical value fix
-pm_interest(t_historical,i) = pm_interest("y1995",i) * 0.9;
