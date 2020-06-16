@@ -26,6 +26,5 @@ $Ifi "%phase%" == "equations" $include "./modules/73_timber/biomass_mar20/equati
 $Ifi "%phase%" == "scaling" $include "./modules/73_timber/biomass_mar20/scaling.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/73_timber/biomass_mar20/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/73_timber/biomass_mar20/presolve.gms"
-$Ifi "%phase%" == "intersolve" $include "./modules/73_timber/biomass_mar20/intersolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/73_timber/biomass_mar20/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

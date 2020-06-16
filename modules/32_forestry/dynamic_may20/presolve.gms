@@ -105,6 +105,10 @@ v32_land.fx(j,"plant",ac_sub)$protect32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub
 ** Set upper bound for plantations after rotation length
 v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
 
+** Fix timber plantation land in case the plantations for productive purposes
+** need to be held at constant 1995 levels.
+v32_land.fx(j,"plant",ac)$(s32_initial_distribution=0) = p32_land_start_ac(j,"plant",ac);
+
 m_boundfix(v32_land,(j,"plant",ac_sub),l,10e-5);
 
 ** fix ndc afforestation forever, all age-classes are fixed except ac0

@@ -56,106 +56,60 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "PR18705"
+identifier_flag <- "PR18706"
 
 cat(paste0("Last for edits"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx = c()
 
-for (co2_price_path in c("NPI","2deg")) {
-  for(timber_demand in c("biomass_mar20")){ ## Add "off" here to turn off timber demand
+for (co2_price_path in c("NPI")) {
 
-    cfg$gms$timber <- timber_demand
+  for(s32_initial_distribution in c(0,1)){
 
-    if(timber_demand == "biomass_mar20") cfg$gms$s32_initial_distribution = 1
-    if(timber_demand == "off") cfg$gms$s32_initial_distribution = 0
+    cfg$gms$s32_initial_distribution = s32_initial_distribution
+    cfg$gms$s73_demand_switch = s32_initial_distribution
 
-      for(emis_policy in c("redd+_nosoil","ssp_nosoil")){
+    if(s32_initial_distribution == 1) timber_flag = "timberON"
+    if(s32_initial_distribution == 0) timber_flag = "timberOFF"
 
-        for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
-          if(emis_policy == "redd+_nosoil") cfg$gms$s32_plant_carbon_foresight = 1
-          if(emis_policy == "ssp_nosoil")   cfg$gms$s32_plant_carbon_foresight = 0
+    for(emis_policy in c("redd+_nosoil")){
 
-          if (co2_price_path == "NPI" && emis_policy == "redd+_nosoil") {
-            cfg <- setScenario(cfg,c(ssp,"NPI"))
-            cfg$gms$c56_emis_policy <- emis_policy
-            cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi" #update to most recent coupled runs asap
-            cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
-            pol_flag = "REDD+"
-            co2_price_path_flag = "BAU"
-          } else if (co2_price_path == "2deg"){
-            cfg <- setScenario(cfg,c(ssp,"NDC"))
-            cfg$gms$c56_emis_policy <- emis_policy
-            cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
-            cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
-            if(emis_policy == "ssp_nosoil") pol_flag = ""
-            if(emis_policy == "redd+_nosoil") pol_flag = "REDD+"
-            co2_price_path_flag = "POL"
-          } else if (ssp != "SSP2" && emis_policy!="redd+_nosoil"){
-            break
-          }
+      for(ssp in c("SSP2")){
+        if(emis_policy == "redd+_nosoil") cfg$gms$s32_plant_carbon_foresight = 1
+        if(emis_policy == "ssp_nosoil")   cfg$gms$s32_plant_carbon_foresight = 0
 
-          #          cfg$gms$c56_pollutant_prices <- "coupling"
-          #          cfg$gms$c60_2ndgen_biodem <- "coupling"
-
-          #          file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
-          #          file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
-
-          cfg$title <- paste0(identifier_flag,"_",ssp,"_",pol_flag,"_",co2_price_path_flag)
-
-          cfg$output <- c("rds_report")
-
-#          xx <- c(xx,cfg$title)
-          start_run(cfg,codeCheck=FALSE)
+        if (co2_price_path == "NPI" && emis_policy == "redd+_nosoil") {
+          cfg <- setScenario(cfg,c(ssp,"NPI"))
+          cfg$gms$c56_emis_policy <- emis_policy
+          cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi" #update to most recent coupled runs asap
+          cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
+          pol_flag = "REDD+"
+          co2_price_path_flag = "BAU"
+        } else if (co2_price_path == "2deg"){
+          cfg <- setScenario(cfg,c(ssp,"NDC"))
+          cfg$gms$c56_emis_policy <- emis_policy
+          cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+          cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+          if(emis_policy == "ssp_nosoil") pol_flag = ""
+          if(emis_policy == "redd+_nosoil") pol_flag = "REDD+"
+          co2_price_path_flag = "POL"
+        } else if (ssp != "SSP2" && emis_policy!="redd+_nosoil"){
+          break
         }
+
+        #          cfg$gms$c56_pollutant_prices <- "coupling"
+        #          cfg$gms$c60_2ndgen_biodem <- "coupling"
+
+        #          file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
+        #          file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
+
+        cfg$title <- paste0(identifier_flag,"_",ssp,"_",pol_flag,"_",co2_price_path_flag,"_",timber_flag)
+
+        cfg$output <- c("rds_report")
+
+          xx <- c(xx,cfg$title)
+#        start_run(cfg,codeCheck=FALSE)
+      }
     }
-  }
-}
-
-##### Version log (YYYYMMDD - Description - Author(s))
-## 20200527 - Default SSP2 Baseline and Policy runs - FH,AM,EMJB,JPD
-
-## Load lucode2 and gms to use setScenario later
-library(lucode2)
-library(gms)
-
-# Load start_run(cfg) function which is needed to start MAgPIE runs
-source("scripts/start_functions.R")
-
-# Source default cfg. This loads the object "cfg" in R environment
-source("config/default.cfg")
-
-# Use user name and model version defined in default.cfg for generating the titel
-#identifier_flag <- "PR187_02"
-
-# Grab user name
-user <- Sys.info()[["user"]]
-#version <- cfg$model_version ## Havong this somehow throws compilation errors in maccs module
-
-cfg$results_folder <- "output/:title:"
-
-## Create a set of runs based on default.cfg
-
-for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test should be for SSP2
-
-  for (co2_price_path in c("BAU","POL")) {
-
-    if (co2_price_path == "BAU") {
-      cfg <- setScenario(cfg,c(ssp,"NPI"))
-      cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi" #update to most recent coupled runs asap
-      cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
-
-    } else if (co2_price_path == "POL"){
-      cfg <- setScenario(cfg,c(ssp,"NDC"))
-      cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE" #update to most recent coupled runs asap
-      cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE" ##update to most recent coupled runs asap
-    }
-
-    cfg$title <- paste0(identifier_flag,"_",user,"_",ssp,"-",co2_price_path) #Create easily distinguishable run title
-
-    cfg$output <- c("rds_report") # Only run rds_report after model run
-
-#    start_run(cfg,codeCheck=TRUE) # Start MAgPIE run
-     cat(cfg$title)
   }
 }
