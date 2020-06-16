@@ -19,7 +19,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-cfg$force_download <- TRUE
+#cfg$force_download <- TRUE
 
 cfg$results_folder <- "output/:title:"
 
