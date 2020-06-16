@@ -11,20 +11,20 @@ $setglobal c32_bgp_ac  ac10
 * options: ac0,ac10,ac20,ac30
 
 scalars
-  s32_reESTBcost                  Re establishment cost in USD per ha / 2000 /
-  s32_recurring_cost              Recurring costs in USD per ha / 500 /
-  s32_harvesting_cost             Harvesting cost in USD per ha / 200 /
+  s32_reESTBcost                  Re establishment cost (USD per ha) / 2000 /
+  s32_recurring_cost              Recurring costs (USD per ha) / 500 /
+  s32_harvesting_cost             Harvesting cost (USD per ha) / 200 /
   s32_planing_horizon             Afforestation planing horizon (years)            / 50 /
   s32_recurring_cost_multiplier   Cost multiplier for recurring costs only for testing (1)            / 10 /
-  s32_rotation_extension          Rotation extension factor (1=original rotations 2=100 percent increase in rotations etc) / 1 /
-  s32_faustmann_rotation          Switch to activate faustmann rotations / 0 /
-  s32_initial_distribution        Switch to Activate ageclass distribution in plantations (1=on 0=off) / 0 /
-  s32_price                       Price for timber (only used in faustmann calculations)      / 45      /
-  s32_free_land_cost              Very high cost for using non existing land for plantation establishment /1000000/
-  s32_max_aff_area                Maximum total global afforestation in Mha    / Inf /
-  s32_aff_plantation              Switch for using growth curves for afforestation (0=natveg 1=plantations) / 0 /
-  s32_timber_plantation           Switch for using growth curves for timber plantations (0=natveg 1=plantations) / 1 /
-  s32_plant_carbon_foresight      Switch to allow plantations to be used as incentives for CDR / 1 /
+  s32_rotation_extension          Rotation extension factor 1=original rotations 2=100 percent increase in rotations etc (1) / 1 /
+  s32_faustmann_rotation          Switch to activate faustmann rotations (1) / 0 /
+  s32_initial_distribution        Switch to Activate ageclass distribution in plantations 1=on 0=off (1) / 0 /
+  s32_price                       Price for timber (USD)      / 45 /
+  s32_free_land_cost              Very high cost for using non existing land for plantation establishment (USD per ha) /1000000/
+  s32_max_aff_area                Maximum total global afforestation (mio. ha)    / Inf /
+  s32_aff_plantation              Switch for using growth curves for afforestation 0=natveg 1=plantations (1) / 0 /
+  s32_timber_plantation           Switch for using growth curves for timber plantations 0=natveg 1=plantations (1) / 1 /
+  s32_plant_carbon_foresight      Switch to allow plantations to be used as incentives for CDR (1) / 1 /
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)

@@ -9,7 +9,7 @@
 *' of natural vegetation are modeled endogenously.
 *' The initial spatial distribution of the sub-land-types primary forest,
 *' secondary forest and other natural land is based on the
-*' LUH2 data set [@hurtt_harmonization_inprep].
+*' LUH2 data set [@hurtt2018luh2].
 *' The realization includes 2 different kinds of land protection.
 *' a) Land protection based on the World Database on Protected Areas (WDPA)
 *' maintained by the International Union for Conservation of Nature (IUCN) and

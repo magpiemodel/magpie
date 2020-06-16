@@ -23,7 +23,7 @@ vm_cost_timber(i)				                                                    Actual 
 vm_hvarea_secdforest(j,ac_sub)                                              Harvested area from secondary forest (mio. ha)
 v73_hvarea_other(j,ac_sub)                                                  Harvested area from other land (mio. ha)
 vm_hvarea_primforest(j)                                                     Harvested area from primary forest (mio. ha)
-v73_hvarea_forestry(j,ac_sub)                                               Harvested area from timber plantations(mio. ha)
+v73_hvarea_forestry(j,ac_sub)                                               Harvested area from timber plantations (mio. ha)
 ;
 
 equations
