@@ -36,10 +36,6 @@ source("config/default.cfg")
 ## Bioenergy demand 0=GLO
 cfg$gms$c60_biodem_level <- 0
 
-### TIMBER
-# * (biomass_mar20): WIP
-cfg$gms$timber <- "biomass_mar20"                  # def = biomass_mar20
-
 ### OPTIMIZATION
 # * 1: using optfile for specified solver settings
 # * 0: default settings (optfile will be ignored)
@@ -56,15 +52,15 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "PR18706"
+identifier_flag <- "PR18707"
 
 cat(paste0("Last for edits"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 #xx = c()
 
-for (co2_price_path in c("NPI")) {
+for (co2_price_path in c("NPI","2deg")) {
 
-  for(s32_initial_distribution in c(0,1)){
+  for(s32_initial_distribution in c(1)){
 
     cfg$gms$s32_initial_distribution = s32_initial_distribution
     cfg$gms$s73_demand_switch = s32_initial_distribution
@@ -72,9 +68,9 @@ for (co2_price_path in c("NPI")) {
     if(s32_initial_distribution == 1) timber_flag = "timberON"
     if(s32_initial_distribution == 0) timber_flag = "timberOFF"
 
-    for(emis_policy in c("redd+_nosoil")){
+    for(emis_policy in c("redd+_nosoil","ssp_nosoil")){
 
-      for(ssp in c("SSP2")){
+      for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
         if(emis_policy == "redd+_nosoil") cfg$gms$s32_plant_carbon_foresight = 1
         if(emis_policy == "ssp_nosoil")   cfg$gms$s32_plant_carbon_foresight = 0
 
@@ -103,7 +99,8 @@ for (co2_price_path in c("NPI")) {
         #          file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
         #          file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
 
-        cfg$title <- paste0(identifier_flag,"_",ssp,"_",pol_flag,"_",co2_price_path_flag,"_",timber_flag)
+        #cfg$title <- paste0(identifier_flag,"_",ssp,"_",pol_flag,"_",co2_price_path_flag,"_",timber_flag)
+        cfg$title <- paste0(identifier_flag,"_",ssp,"_",pol_flag,"_",co2_price_path_flag)
 
         cfg$output <- c("rds_report")
 
