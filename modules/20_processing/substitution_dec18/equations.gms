@@ -56,13 +56,21 @@ q20_processing_aggregation_cotton(i2) ..
 *' (see also equations below). The secondary product overproduction `vm_secondary_overproduction` is used to move overproduction
 *' of secondary products into the waste category such that the demand balance is maintained (see also [16_demand]).
 
-q20_processing(i2,kpr,ksd) ..
+q20_scp(kpr) ..
+	sum(i2, v20_dem_processing(i2,"breeding",kpr)) *
+	sum(scptype,i20_scp_type_shr(scptype)*f20_scp_conversionmatrix(kpr,scptype)) =e=
+ sum(i2, vm_prod_reg(i2,"scp") - sum(ct,f20_processing_balanceflow(ct,i2,"scp")))$(sum(scptype,i20_scp_type_shr(scptype)*f20_scp_conversionmatrix(kpr,scptype)) > 0)
+         - sum(i2, v20_secondary_substitutes(i2,"scp",kpr))
+         + sum(i2, vm_secondary_overproduction(i2,"scp",kpr));
+
+
+q20_processing(i2,kpr,ksd20) ..
   sum(processing20, v20_dem_processing(i2,processing20,kpr)
-         * sum(ct,f20_processing_conversion_factors(ct,processing20,ksd,kpr)))  =e=
- (vm_prod_reg(i2,ksd) - sum(ct,f20_processing_balanceflow(ct,i2,ksd)))
-         * sum(ct,f20_processing_shares(ct,i2,ksd,kpr))
-         - v20_secondary_substitutes(i2,ksd,kpr)
-         + vm_secondary_overproduction(i2,ksd,kpr);
+         * sum(ct,f20_processing_conversion_factors(ct,processing20,ksd20,kpr)))  =e=
+ (vm_prod_reg(i2,ksd20) - sum(ct,f20_processing_balanceflow(ct,i2,ksd20)))
+         * sum(ct,f20_processing_shares(ct,i2,ksd20,kpr))
+         - v20_secondary_substitutes(i2,ksd20,kpr)
+         + vm_secondary_overproduction(i2,ksd20,kpr);
 
 *' Oils from one crop can be substituted by different types of oils.
 q20_processing_substitution_oils(i2) ..
@@ -111,11 +119,12 @@ q20_processing_substitution_brans(i2) ..
 
 q20_processing_costs(i2) ..
  vm_cost_processing(i2) =e=
-sum((ksd,processing20,kpr), v20_dem_processing(i2,processing20,kpr)
-         *sum(ct,f20_processing_conversion_factors(ct,processing20,ksd,kpr))
-         * (
-            f20_processing_unitcosts(ksd,kpr)
-         ));
+sum((ksd20,processing20,kpr), v20_dem_processing(i2,processing20,kpr)
+         *sum(ct,f20_processing_conversion_factors(ct,processing20,ksd20,kpr))
+         * (f20_processing_unitcosts(ksd20,kpr)))
+         + (vm_prod_reg(i2,"scp")
+         * sum(scptype, i20_scp_type_shr(scptype) * f20_scp_unitcosts(scptype)))
+         ;
 
 *' Finally, we assume that any substitution of one product by another,
 *' diverging from our initial demand estimates, comes at a loss of utility.
@@ -134,6 +143,6 @@ q20_substitution_utility_loss(i2) ..
         v20_dem_processing(i2,"substitutes",kpr)
         * 200
       ) +
-      sum((ksd,processing20,kpr), v20_dem_processing(i2,processing20,kpr)
-        *sum(ct,f20_processing_conversion_factors(ct,processing20,ksd,kpr))
-        * (f20_quality_cost(ksd,kpr)+f20_calibration(ksd,kpr)));
+      sum((ksd20,processing20,kpr), v20_dem_processing(i2,processing20,kpr)
+        *sum(ct,f20_processing_conversion_factors(ct,processing20,ksd20,kpr))
+        * (f20_quality_cost(ksd20,kpr)+f20_calibration(ksd20,kpr)));

@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-
+$setglobal c20_scp_type  hydrogen
 
 table f20_processing_balanceflow(t_all,i,ksd) Processing balance flow  (mio. tDM)
 $ondelim
@@ -35,4 +35,21 @@ $offdelim       ;
 table f20_calibration(ksd,kpr)   Additional calibration costs to avoid substitution in historical period (USD05 per tDM)
 $ondelim
 $include "./modules/20_processing/substitution_dec18/input/f20_calibration.cs3"
+$offdelim       ;
+
+parameter f20_scp_unitcosts(scptype) Costs of production of one unit of SCP exclusive of feedstock costs (USD per t)
+/
+$ondelim
+$include "./modules/20_processing/input/f20_scp_unitcosts.csv"
+$offdelim
+/;
+
+table  f20_scp_type_shr(scptype,scen20)  selected scenario values for scp type (1)
+$ondelim
+$include "./modules/20_processing/input/f20_scp_type_shr.csv"
+$offdelim;
+
+table f20_scp_conversionmatrix(kpr,scptype) Conversion matrix to derive tons of feedstock from tons of production (DM)
+$ondelim
+$include "./modules/20_processing/input/f20_scp_conversionmatrix.csv"
 $offdelim       ;

@@ -13,5 +13,7 @@ loop(t_all,
   im_slaughter_feed_share(t_all,i,kap,attributes) = f70_slaughter_feed_share(t_all,i,kap,attributes,"%c70_feed_scen%");
   i70_livestock_productivity(t_all,i,sys) = f70_livestock_productivity(t_all,i,sys,"%c70_feed_scen%");
   im_feed_baskets(t_all,i,kap,kall) = f70_feed_baskets(t_all,i,kap,kall,"%c70_feed_scen%");
+  im_feed_baskets(t_all,i,kap,k) = im_feed_baskets(t_all,i,kap,k)*(1-s70_scp_shr);
+  im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp") + sum(k, im_feed_baskets(t_all,i,kap,k))*s70_scp_shr;
  );
 );

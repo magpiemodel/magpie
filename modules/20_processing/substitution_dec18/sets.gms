@@ -7,6 +7,8 @@
 
 sets
 
+ksd20(ksd) Secondary products without scp
+   /oils,oilcakes,sugar,molasses,alcohol,ethanol,distillers_grain,brans,fibres/
 
 kpr(kall) Products that can be processed
    /tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,oilpalm,
@@ -32,4 +34,11 @@ no_milling_ginning20(processing_subst20) Processing activities without milling a
 
 oilcake_substitutes20(kpr) products that can be substituted for oilcakes
   /soybean,rapeseed,groundnut,sunflower,oilpalm,cottn_pro,oilcakes/
+
+     scptype different types of scp
+       /scp_methane,scp_sugar,scp_cellulose,scp_hydrogen/
+
+     scen20 scenario of type of scp
+      / mixed, methane, sugar, cellulose,hydrogen /
+
 ;
