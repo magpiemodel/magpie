@@ -18,7 +18,7 @@ scalars
   s32_recurring_cost_multiplier   Cost multiplier for recurring costs only for testing (1)            / 10 /
   s32_rotation_extension          Rotation extension factor (1=original rotations 2=100 percent increase in rotations etc) / 1 /
   s32_faustmann_rotation          Switch to activate faustmann rotations / 0 /
-  s32_initial_distribution        Switch to Activate ageclass distribution in plantations (1=on 0=off) / 1 /
+  s32_initial_distribution        Switch to Activate ageclass distribution in plantations (1=on 0=off) / 0 /
   s32_price                       Price for timber (only used in faustmann calculations)      / 45      /
   s32_free_land_cost              Very high cost for using non existing land for plantation establishment /1000000/
   s32_max_aff_area                Maximum total global afforestation in Mha    / Inf /

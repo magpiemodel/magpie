@@ -60,7 +60,7 @@ identifier_flag <- "PR18706"
 
 cat(paste0("Last for edits"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
-xx = c()
+#xx = c()
 
 for (co2_price_path in c("NPI")) {
 
@@ -107,8 +107,8 @@ for (co2_price_path in c("NPI")) {
 
         cfg$output <- c("rds_report")
 
-          xx <- c(xx,cfg$title)
-#        start_run(cfg,codeCheck=FALSE)
+#        xx <- c(xx,cfg$title)
+        start_run(cfg,codeCheck=FALSE)
       }
     }
   }
