@@ -9,7 +9,7 @@
 #### MAgPIE output generation ####
 ##########################################################
 
-library(lucode)
+library(lucode2)
 
 runOutputs <- function(runscripts=NULL, submit=NULL) {
 
@@ -129,5 +129,5 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 
 
 runscripts <- submit <- NULL
-readArgs("runscripts","submit", .silent=TRUE)
+lucode2::readArgs("runscripts","submit", .silent=TRUE)
 runOutputs(runscripts=runscripts, submit=submit)

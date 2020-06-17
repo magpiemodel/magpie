@@ -72,7 +72,7 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
                      * sum(ct,
                       p56_emis_policy(ct,i2,pollutants,emis_reg_one56)
                       * im_pollutant_prices(ct,i2,pollutants)
-                      * pm_interest(i2)/(1+pm_interest(i2)))
+                      * pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
                  );
 
  q56_emission_costs_cell_oneoff(j2,emis_cell_one56) ..
@@ -83,7 +83,7 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
                      * sum((ct,cell(i2,j2)),
                     	p56_emis_policy(ct,i2,pollutants,emis_cell_one56)
                          * im_pollutant_prices(ct,i2,pollutants)
-                         * pm_interest(i2)/(1+pm_interest(i2)))
+                         * pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
                  );
 
 *' **Total regional emission costs** consist of costs from yearly and one-off emissions occuring in this region and its cells.
@@ -113,8 +113,8 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
             	 s56_c_price_induced_aff*
             	 sum(ac,
             	 (sum(aff_effect,(1-s56_buffer_aff)*vm_cdr_aff(j2,ac,aff_effect)) * sum((cell(i2,j2),ct), p56_c_price_aff(ct,i2,ac)))
-            	 / ((1+sum(cell(i2,j2),pm_interest(i2)))**(ac.off*5)))
-                 *sum(cell(i2,j2),pm_interest(i2)/(1+pm_interest(i2)));
+            	 / ((1+sum((cell(i2,j2),ct),pm_interest(ct,i2)))**(ac.off*5)))
+                 *sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
 
 
 *' Peatland emission costs depending on s56_peatland_policy

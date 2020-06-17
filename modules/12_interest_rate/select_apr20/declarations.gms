@@ -6,8 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- pm_interest(i)                      Current interest rate in each region (% per yr)
- p12_interest(t_all,i)               Interest rate in each region and timestep (% per yr)
+ pm_interest(t_all,i)               Interest rate in each region and timestep (% per yr)
  i12_interest_fader(t_all)           Fader for interest rate policy (1)
 * country-specific region scenario switch
  p12_country_dummy(iso)              Dummy parameter indicating whether country is affected by interest rate scenario (1)

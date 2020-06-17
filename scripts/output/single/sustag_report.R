@@ -9,7 +9,7 @@
 library(gdx)
 library(magclass)
 library(magpie4)
-library(lucode)
+library(lucode2)
 options("magclass.verbosity" = 1)
 
 ############################# BASIC CONFIGURATION #############################
@@ -43,7 +43,7 @@ MIF2SUSTAg <- function(x,model="MAgPIE",scenario="default") {
   #Emissions
   name <- "Emissions|N2O|Agriculture (Mt N2O/yr)"
   new <- mbind(new,setNames(x[,,"Emissions|N2O|Land|+|Agriculture (Mt N2O/yr)"],paste(model,scenario,name,sep=".")))
-  
+
   name <- "Emissions|CH4|Agriculture (Mt CH4/yr)"
   new <- mbind(new,setNames(x[,,"Emissions|CH4|Land|+|Agriculture (Mt CH4/yr)"],paste(model,scenario,name,sep=".")))
 
@@ -89,8 +89,8 @@ MIF2SUSTAg <- function(x,model="MAgPIE",scenario="default") {
 
   name <- "Land Cover|Other Land (million ha)"
   new <- mbind(new,setNames(x[,,"Resources|Land Cover|+|Other Land (million ha)"],paste(model,scenario,name,sep=".")))
-  
-  
+
+
   ### Water
   name <- "Land Cover|Cropland|Area actually irrigated (million ha)"
   new <- mbind(new,setNames(x[,,"Resources|Land Cover|Cropland|Area actually irrigated (million ha)"],paste(model,scenario,name,sep=".")))
@@ -118,7 +118,7 @@ MIF2SUSTAg <- function(x,model="MAgPIE",scenario="default") {
   name <- "Nitrogen|Cropland Budget|Inputs|Manure (Mt Nr/yr)"
   new <- mbind(new,setNames(x[,,"Resources|Nitrogen|Cropland Budget|Inputs|+|Manure From Stubble Grazing (Mt Nr/yr)"]
 	 + x[,,"Resources|Nitrogen|Cropland Budget|Inputs|+|Manure Recycled from Confinements (Mt Nr/yr)"],paste(model,scenario,name,sep=".")))
- 
+
   name <- "Nitrogen|Cropland Budget|Inputs|Other nitrogen inputs (Mt Nr/yr)"
   new <- mbind(new,setNames(x[,,"Resources|Nitrogen|Cropland Budget|Inputs (Mt Nr/yr)"]
 	 - x[,,"Resources|Nitrogen|Cropland Budget|Inputs|+|Fertilizer (Mt Nr/yr)"]
@@ -137,7 +137,7 @@ MIF2SUSTAg <- function(x,model="MAgPIE",scenario="default") {
   #!!Benni!# #????# different name ????????????????????????????????????????????????????
   name <- "Nitrogen|Cropland Budget|Balance|Soil Organic Matter Loss (Mt Nr/yr)"
   new <- mbind(new,setNames(x[,,"Resources|Nitrogen|Cropland Budget|Balance|+|Soil Organic Matter Loss (Mt Nr/yr)"],paste(model,scenario,name,sep=".")))
- 
+
 
 
 #  ### Phosphorus
@@ -150,7 +150,7 @@ MIF2SUSTAg <- function(x,model="MAgPIE",scenario="default") {
 #  name <- "Phosphorus|Cropland Budget|Inputs|Manure (Mt P/yr)"
 #  new <- mbind(new,setNames(x[,,"Resources|Phosphorus|Cropland Budget|Inputs|+|Manure From Stubble Grazing (Mt P/yr)"]
 #	 + x[,,"Resources|Phosphorus|Cropland Budget|Inputs|+|Manure Recycled from Confinements (Mt P/yr)"],paste(model,scenario,name,sep=".")))
-# 
+#
 #  name <- "Phosphorus|Cropland Budget|Inputs|Other Phosphorus inputs (Mt P/yr)"
 #  new <- mbind(new,setNames(x[,,"Resources|Phosphorus|Cropland Budget|Inputs (Mt P/yr)"]
 #	 - x[,,"Resources|Phosphorus|Cropland Budget|Inputs|+|Fertilizer (Mt P/yr)"]
@@ -169,7 +169,7 @@ MIF2SUSTAg <- function(x,model="MAgPIE",scenario="default") {
 #  #????# different name ????????????????????????????????????????????????????
 #  name <- "Phosphorus|Cropland Budget|Balance|Soil Organic Matter Loss (Mt P/yr)"
 #  new <- mbind(new,setNames(x[,,"Resources|Phosphorus|Cropland Budget|Balance|+|Soil Organic Matter Loss (Mt P/yr)"],paste(model,scenario,name,sep=".")))
- 
+
 
   ### Production
   name <- "Production|Bioenergy crops (Mt DM/yr)"
@@ -201,24 +201,24 @@ MIF2SUSTAg <- function(x,model="MAgPIE",scenario="default") {
 
   name <- "Production|Secondary products|Ethanol (Mt DM/yr)"
   new <- mbind(new,setNames(x[,,"Production|Secondary products|+|Ethanol (Mt DM/yr)"],paste(model,scenario,name,sep=".")))
- 
+
   name <- "Production|Secondary products|Sugar (Mt DM/yr)"
   new <- mbind(new,setNames(x[,,"Production|Secondary products|+|Sugar (Mt DM/yr)"],paste(model,scenario,name,sep=".")))
- 
+
 
 
   ### Prices
-  
-  
-  #????# aktuell nur aggregiert verfügbar für alle food items ??????????????
+
+
+  #????# aktuell nur aggregiert verfugbar for alle food items ??????????????
   name <- "Prices|Producer Price Index|Food (index relative to 2010)"
   new <- mbind(new,setNames(x[,,"Prices|Food Price Index (Index 2010=100)"],paste(model,scenario,name,sep=".")))
 
-#  #????# Index für food crops fehlt  ??????????????????????????????????????
+#  #????# Index for food crops fehlt  ??????????????????????????????????????
 #  name <- "Prices|Producer Price Index|Crops (index relative to 2010)"
 #  new <- mbind(new,setNames(x[,,"Prices|Food Price Index (Index 2010=100)"],paste(model,scenario,name,sep=".")))
 
-#  #????# Index für livestock fehlt ?????????????????????????????????????????
+#  #????# Index for livestock fehlt ?????????????????????????????????????????
 #  name <- "Prices|Producer Price Index|Livestock (index relative to 2010)"
 #  new <- mbind(new,setNames(x[,,"Prices|Food Price Index (Index 2010=100)"],paste(model,scenario,name,sep=".")))
 
@@ -228,15 +228,15 @@ MIF2SUSTAg <- function(x,model="MAgPIE",scenario="default") {
 
   name <- "Prices|Producer Prices|Biodiesel (US$05/tDM)"
   new <- mbind(new,setNames(x[,,"Prices|Agriculture|Oils (US$05/tDM)"],paste(model,scenario,name,sep=".")))
- 
- 
-  
+
+
+
   ### Costs
 
   #crops!!!!!!!!!!!!
   name <- "Costs|Total production costs|Factor costs|Crops (million US$05/yr)"
   new <- mbind(new,setNames(x[,,"Costs|MainSolve|Input Factors (million US$05/yr)"],paste(model,scenario,name,sep=".")))
-  
+
   #???# livestock excl feed!!!!!!!!!!!
   name <- "Costs|Total production costs|Factor costs|Livestock excluding feed (million US$05/yr)"
   new <- mbind(new,setNames(x[,,"Costs|MainSolve|Input Factors (million US$05/yr)"],paste(model,scenario,name,sep=".")))
@@ -274,18 +274,18 @@ MIF2SUSTAg <- function(x,model="MAgPIE",scenario="default") {
 
   name <- "Demand|Material|Livestock products (Mt DM/yr)"
   new <- mbind(new,setNames(x[,,"Demand|Material|+|Livestock products (Mt DM/yr)"],paste(model,scenario,name,sep=".")))
- 
+
   name <- "Demand|Seed|Livestock products (Mt DM/yr)"
   new <- mbind(new,setNames(x[,,"Demand|Seed|+|Livestock products (Mt DM/yr)"],paste(model,scenario,name,sep=".")))
 
 
   name <- "Demand|Bioenergy|Secondary products|Oil (Mt DM/yr)"
   new <- mbind(new,setNames(x[,,"Demand|Bioenergy|Secondary products|+|Oils (Mt DM/yr)"],paste(model,scenario,name,sep=".")))
- 
+
   name <- "Demand|Bioenergy|Secondary products|Ethanol (Mt DM/yr)"
   new <- mbind(new,setNames(x[,,"Demand|Bioenergy|Secondary products|+|Ethanol (Mt DM/yr)"],paste(model,scenario,name,sep=".")))
 
- 
+
 
   ### Food availability
 
@@ -362,7 +362,7 @@ MIF2SUSTAg <- function(x,model="MAgPIE",scenario="default") {
 #	 - collapseNames(demand(gdx,level="glo",products = c("res_cereals","res_fibrous","res_nonfibrous"),product_aggr = TRUE,attributes = "ge")[,,"bioenergy"])/1000
 #  new <- mbind(new,setNames(mbind(reg,glo)[,-1,],paste(model,scenario,name,sep=".")))
 
-  
+
   return(new)
 }
 

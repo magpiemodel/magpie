@@ -10,7 +10,7 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-library(lucode)
+library(gms)
 library(magclass)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
@@ -41,7 +41,7 @@ cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$c60_2ndgen_biodem <- "coupling"
 
 
-# The following function generates the files 
+# The following function generates the files
 # "f56_pollutant_prices_coupling.cs3" and
 # "reg.2ndgen_bioenergy_demand.csv"
 # that are required if switches "c56_pollutant_prices" and "c60_2ndgen_biodem"
@@ -151,6 +151,3 @@ start_run(cfg,codeCheck=FALSE)
 # SSP2 with NPI policy is default:
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
 cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
-
-
-
