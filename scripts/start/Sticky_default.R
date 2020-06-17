@@ -15,7 +15,7 @@ resolutions<-c("200")
 #Factor cost realizations
 realization<-c("sticky_feb18")
 # Trade realization
-title<-c("Sticky_Only_constCapita_newRot")
+title<-c("Sticky_Only_constCapita_newRot387")
 
 for (i in 1:length(resolutions)){
 for(j in 1:length(realization)){
@@ -29,7 +29,7 @@ cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c200_690d3718e151be1b45
 			   "rev4.47_h12_magpie.tgz",
 			   "rev4.47_h12_validation.tgz",
 			   "calibration_H12_c200_26Feb20.tgz",
-			   "additional_data_rev3.86.tgz")
+			   "additional_data_rev3.87.tgz")
 
 
 cfg$force_download<-TRUE
