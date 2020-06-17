@@ -68,8 +68,8 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
       name   <- paste0("./scripts/start/",rout)
       if(!file.exists(name)) {
         name2 <- paste0(name,".R")
-        if(!file.exists(name)) {
-          warning("Script ",name, " could not be found. Skip execution!")
+        if(!file.exists(name2)) {
+          warning("Script ",name2, " could not be found. Skip execution!")
           next
         }
         name <- name2
