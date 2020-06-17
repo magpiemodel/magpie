@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -23,4 +23,5 @@
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%optimization%" == "lp_nlp_apr17" $include "./modules/80_optimization/lp_nlp_apr17/realization.gms"
 $Ifi "%optimization%" == "nlp_apr17" $include "./modules/80_optimization/nlp_apr17/realization.gms"
+$Ifi "%optimization%" == "nlp_par" $include "./modules/80_optimization/nlp_par/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

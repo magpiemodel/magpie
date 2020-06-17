@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -16,7 +16,7 @@
 
 q70_feed(i2,kap,kall) ..
  vm_dem_feed(i2,kap,kall) =g= vm_prod_reg(i2,kap)
-     *sum(ct,f70_feed_baskets(ct,i2,kap,kall,"%c70_feed_scen%"))
+     *sum(ct,im_feed_baskets(ct,i2,kap,kall))
      +sum(ct,fm_feed_balanceflow(ct,i2,kap,kall));
 
 *' Factor requirement costs (e.g. labour, capital, but without costs for feed)
@@ -32,7 +32,7 @@ q70_feed(i2,kap,kall) ..
 q70_cost_prod_liv(i2,kli) ..
  vm_cost_prod(i2,kli) =e= vm_prod_reg(i2,kli)
      *(f70_cost_regr(kli,"cost_regr_a") + f70_cost_regr(kli,"cost_regr_b")
-     *sum((ct, sys_to_kli(sys,kli)),f70_livestock_productivity(ct,i2,sys,"%c70_feed_scen%")));
+     *sum((ct, sys_to_kli(sys,kli)),i70_livestock_productivity(ct,i2,sys)));
 
 q70_cost_prod_fish(i2) ..
  vm_cost_prod(i2,"fish") =e=

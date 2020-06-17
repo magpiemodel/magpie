@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -77,3 +77,12 @@ q16_waste_demand(i2,kall) ..
 q16_seed_demand(i2,kcr) ..
                  vm_dem_seed(i2,kcr) =e=
                  vm_prod_reg(i2,kcr) * sum(ct,f16_seed_shr(ct,i2,kcr));
+
+*' Timber demand is calculated based on population and income. End use product
+*' demand is aggregated to timber products of first processing stage i.e., wood
+*' and wood fuel.
+
+q16_supply_forestry(i2,kforestry) ..  vm_supply(i2,kforestry)
+                                       =e=
+                                       sum(ct,pm_demand_ext(ct,i2,kforestry))
+                                       ;

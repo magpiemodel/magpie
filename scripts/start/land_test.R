@@ -1,4 +1,4 @@
-# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -10,7 +10,6 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-library(lucode)
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
@@ -64,7 +63,7 @@ cfg$gms$som  <- "static_jan19"
 cfg$title    <- "recalib_oldland_staticsom_c200"
 start_run(cfg=cfg,codeCheck=TRUE)
 
-cfg$gms$land <- "landmatrix_dec18" 
+cfg$gms$land <- "landmatrix_dec18"
 cfg$gms$som  <- "static_jan19"
 cfg$title    <- "recalib_newland_staticsom_c200"
 start_run(cfg=cfg,codeCheck=TRUE)

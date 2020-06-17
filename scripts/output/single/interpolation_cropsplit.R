@@ -1,4 +1,4 @@
-# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -16,7 +16,7 @@
 # 1.02: uses now the land function to read the simulated land input
 # 1.03: introduced function interpolate, all possible input is read from the GDX file now
 
-library(lucode)
+library(lucode2)
 library(magpie4)
 library(luscale)
 
@@ -124,7 +124,7 @@ crop_kbe_ir <- setNames(dimSums(area_hr[,,kbe][,,"irrigated"],dim=3),"crop_kbe_i
 crop_hr <- mbind(crop_kfo_rf,crop_kfo_ir,crop_kbe_rf,crop_kbe_ir)
 #drop crop
 land_hr <- land_hr[,,"crop",invert=TRUE]
-#combine land_hr with crop_hr. 
+#combine land_hr with crop_hr.
 land_hr <- mbind(crop_hr,land_hr)
 #write landpool
 write.magpie(land_hr,path(outputdir,paste(land_hr_out_file,sep="_")),comment="unit: Mha per grid-cell")

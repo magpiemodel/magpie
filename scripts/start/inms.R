@@ -1,4 +1,4 @@
-# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -10,7 +10,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-library(lucode)
+library(gms)
 source("scripts/start_functions.R")
 source("scripts/performance_test.R")
 source("config/default.cfg")
@@ -50,7 +50,7 @@ cfg$gms$c_timesteps <- 12
 # clalibration runs
 
 cfg$title <- "INMS2_casestudies"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
+cfg<-gms::setScenario(cfg,"SUSTAg2")
 cfg$gms$s15_elastic_demand = 1
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-60-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-60-MESSAGE-GLOBIOM"
@@ -70,14 +70,14 @@ cfg$recalibrate <- FALSE
 
 
 cfg$title <- "INMS1_casestudies"
-cfg<-lucode::setScenario(cfg,"SUSTAg1")
+cfg<-gms::setScenario(cfg,"SUSTAg1")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6",regionmapping="inms")
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP5-26-REMIND-MAGPIE"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP5-26-REMIND-MAGPIE"
 start_run(cfg=cfg,codeCheck=codeCheck)
 
 cfg$title <- "INMS5_casestudies"
-cfg<-lucode::setScenario(cfg,"SUSTAg5")
+cfg<-gms::setScenario(cfg,"SUSTAg5")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms")
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP1-45-IMAGE"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP1-45-IMAGE"

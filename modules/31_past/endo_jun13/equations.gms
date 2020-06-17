@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -14,7 +14,7 @@
 *' `vm_yld` which are delivered by the module [14_yields]:
 
 q31_prod(j2) ..
- vm_prod(j2,"pasture") =e= vm_land(j2,"past")
+ vm_prod(j2,"pasture") =l= vm_land(j2,"past")
  						   * vm_yld(j2,"pasture","rainfed");
 
 *' On the basis of the required pasture area, cellular above ground carbon stocks are calculated:

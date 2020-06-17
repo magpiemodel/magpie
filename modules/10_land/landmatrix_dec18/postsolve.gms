@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -17,7 +17,6 @@ pcm_land(j,land) = vm_land.l(j,land);
  ov_croplandreduction(t,j,land,"marginal")                 = vm_croplandreduction.m(j,land);
  ov_cost_land_transition(t,j,"marginal")                   = vm_cost_land_transition.m(j);
  ov10_lu_transitions(t,j,land_from10,land_to10,"marginal") = v10_lu_transitions.m(j,land_from10,land_to10);
- oq10_land(t,j,"marginal")                                 = q10_land.m(j);
  oq10_transition_matrix(t,j,"marginal")                    = q10_transition_matrix.m(j);
  oq10_transition_to(t,j,land_to10,"marginal")              = q10_transition_to.m(j,land_to10);
  oq10_transition_from(t,j,land_from10,"marginal")          = q10_transition_from.m(j,land_from10);
@@ -35,7 +34,6 @@ pcm_land(j,land) = vm_land.l(j,land);
  ov_croplandreduction(t,j,land,"level")                    = vm_croplandreduction.l(j,land);
  ov_cost_land_transition(t,j,"level")                      = vm_cost_land_transition.l(j);
  ov10_lu_transitions(t,j,land_from10,land_to10,"level")    = v10_lu_transitions.l(j,land_from10,land_to10);
- oq10_land(t,j,"level")                                    = q10_land.l(j);
  oq10_transition_matrix(t,j,"level")                       = q10_transition_matrix.l(j);
  oq10_transition_to(t,j,land_to10,"level")                 = q10_transition_to.l(j,land_to10);
  oq10_transition_from(t,j,land_from10,"level")             = q10_transition_from.l(j,land_from10);
@@ -53,7 +51,6 @@ pcm_land(j,land) = vm_land.l(j,land);
  ov_croplandreduction(t,j,land,"upper")                    = vm_croplandreduction.up(j,land);
  ov_cost_land_transition(t,j,"upper")                      = vm_cost_land_transition.up(j);
  ov10_lu_transitions(t,j,land_from10,land_to10,"upper")    = v10_lu_transitions.up(j,land_from10,land_to10);
- oq10_land(t,j,"upper")                                    = q10_land.up(j);
  oq10_transition_matrix(t,j,"upper")                       = q10_transition_matrix.up(j);
  oq10_transition_to(t,j,land_to10,"upper")                 = q10_transition_to.up(j,land_to10);
  oq10_transition_from(t,j,land_from10,"upper")             = q10_transition_from.up(j,land_from10);
@@ -71,7 +68,6 @@ pcm_land(j,land) = vm_land.l(j,land);
  ov_croplandreduction(t,j,land,"lower")                    = vm_croplandreduction.lo(j,land);
  ov_cost_land_transition(t,j,"lower")                      = vm_cost_land_transition.lo(j);
  ov10_lu_transitions(t,j,land_from10,land_to10,"lower")    = v10_lu_transitions.lo(j,land_from10,land_to10);
- oq10_land(t,j,"lower")                                    = q10_land.lo(j);
  oq10_transition_matrix(t,j,"lower")                       = q10_transition_matrix.lo(j);
  oq10_transition_to(t,j,land_to10,"lower")                 = q10_transition_to.lo(j,land_to10);
  oq10_transition_from(t,j,land_from10,"lower")             = q10_transition_from.lo(j,land_from10);

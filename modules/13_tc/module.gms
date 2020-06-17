@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -19,8 +19,9 @@
 *' Calculated $\tau$ factors are then used for yields calculation by [14_yields]
 *' and by [38_factor_costs] for the calculation of factor costs.
 *'
-*' @authors Jan Philipp Dietrich, Christoph Schmitz, Benjamin Bodirsky
+*' @authors Jan Philipp Dietrich, Christoph Schmitz, Benjamin Bodirsky, Florian Humpenoeder
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%tc%" == "endo_jun18" $include "./modules/13_tc/endo_jun18/realization.gms"
+$Ifi "%tc%" == "exo" $include "./modules/13_tc/exo/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
