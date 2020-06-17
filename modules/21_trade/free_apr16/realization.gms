@@ -12,6 +12,7 @@
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/21_trade/free_apr16/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/21_trade/free_apr16/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/21_trade/free_apr16/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/21_trade/free_apr16/equations.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/21_trade/free_apr16/preloop.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/21_trade/free_apr16/postsolve.gms"
