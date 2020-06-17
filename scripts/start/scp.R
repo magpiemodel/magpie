@@ -27,20 +27,17 @@ cfg <- setScenario(cfg,c("SSP2","NPI"))
 
 cfg$gms$c20_scp_type <- "hydrogen"
 
-cfg$title <- "SCP02_hydrogen_scpFeedOff"
-cfg$gms$s70_scp <- 0
+cfg$title <- "SCP03_hydrogen_scpFeedOff"
+cfg$gms$s70_scp_feed <- 0
+cfg$gms$s15_scp_food <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "SCP02_hydrogen_scpFeedOn"
-cfg$gms$s70_scp <- 1
+cfg$title <- "SCP03_hydrogen_scpFeedOn"
+cfg$gms$s70_scp_feed <- 1
+cfg$gms$s15_scp_food <- 0
 start_run(cfg,codeCheck=FALSE)
 
-# cfg$gms$c20_scp_type <- "cellulose"
-# 
-# cfg$title <- "SCP01_cellulose_feed0"
-# cfg$gms$s70_scp <- 0
-# start_run(cfg,codeCheck=FALSE)
-# 
-# cfg$title <- "SCP01_cellulose_feed1"
-# cfg$gms$s70_scp <- 1
-# start_run(cfg,codeCheck=FALSE)
+cfg$title <- "SCP03_hydrogen_scpKapOn"
+cfg$gms$s70_scp_feed <- 1
+cfg$gms$s15_scp_food <- 1
+start_run(cfg,codeCheck=FALSE)

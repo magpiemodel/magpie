@@ -30,7 +30,7 @@ sets
    sys_dairy .livst_milk
    /
 
-   kall70(kall) All products without scp
+   kall70(kall) All products except scp
    /
    tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,oilpalm,puls_pro,
    potato,cassav_sp,sugr_cane,sugr_beet,others,cottn_pro,foddr, pasture, begr, betr,

@@ -105,3 +105,10 @@ i15_alcohol_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitu
 i15_livestock_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_livescen%"));
 i15_rumdairy_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_rumdairyscen%"));
 
+i15_kap_fadeout(t_all)$(m_year(t_all) <= 2020) = 1;
+i15_kap_fadeout("y2025") = 0.8333;
+i15_kap_fadeout("y2030") = 0.6667;
+i15_kap_fadeout("y2035") = 0.5;
+i15_kap_fadeout("y2040") = 0.3333;
+i15_kap_fadeout("y2045") = 0.1667;
+i15_kap_fadeout(t_all)$(m_year(t_all) >= 2050) = 0;

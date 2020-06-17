@@ -90,6 +90,8 @@ scalar s15_rum_share_fadeout_india_strong 	switch for stronger ruminant fadeout 
 
 scalar s15_milk_share_fadeout_india 		switch for milk fadeout in India (binary) / 1 /;
 
+scalar s15_scp_food			 scp as food on (1) or off (0)			/ 0 /;
+
 
 table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of heterogeneous products and processes (mio. tDM)
 $ondelim

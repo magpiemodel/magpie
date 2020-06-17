@@ -411,6 +411,13 @@ p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
                + p15_kcal_pc_calibrated_rumdairy_orig(t,i) * (1-i15_rumdairy_fadeout(t,i)));
 
 
+if(s15_scp_food = 1,
+p15_kcal_pc_calibrated_orig(t,i,kfo_ap) = p15_kcal_pc_calibrated(t,i,kfo_ap);
+p15_kcal_pc_calibrated(t,i,kfo_ap) =
+               p15_kcal_pc_calibrated_orig(t,i,kfo_ap) * i15_kap_fadeout(t);
+p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp")
+             + sum(kfo_ap, p15_kcal_pc_calibrated_orig(t,i,kfo_ap) * (1-i15_kap_fadeout(t)));
+);
 
 
 
