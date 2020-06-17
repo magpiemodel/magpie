@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## [4.2.1] - 2020-05-15
+
+### added
+ - **modules** added option of regional scenario switches in modules 12_interest_rate, 15_food, 42_water_demand, 50_nr_soil_budget, 55_awms, 56_ghg_policy, 60_bioenergy
+ - **58_peatland** added peatland module. Two realizations: off (=default) and on.
+ - **80_optimization** added realization for parallel optimization of regions in combination with fixed trade patterns.
+ - **metadata** added .zenodo.json metadata file for proper metadata information in ZENODO releases
+
+### changed
+ - **12_interest_rate** merged the two realizations (glo_jan16 and reg_feb18) into one (select_apr20) with same functionality and add on of option to choose different interest rate scenarios for different regions selected via country switch select_countries12
+ - **scripts** streamlined and improved performance of NPI/NDC preprocessing
+ 
+### fixed
+ - **56_ghg_policy and 60_bioenergy** update of GHG prices and 2nd generation bioenergy demand from SSPDB to most recent snapshot
+ - **NPI/NDC policy calculations** revision of calculation method
+
+
+
 ## [4.2.0] - 2020-04-15
 
 This release version is focussed on consistency between the MAgPIE setup and the [REMIND model] and result of a validation exercise of the coupled (REMIND 2.1)-(MAgPIE 4.2) system.
@@ -42,6 +61,7 @@ This release version is focussed on consistency between the MAgPIE setup and the
  - **56_ghg_policy** bugfix full soil carbon loss in default setting, renamed it from ssp to ssp_nosoil, indicating, that soil carbon losses are not priced.
  - **56_ghg_policy** bugfix afforestation: vmbtm_cell was a free variable for some sources and pollutants, which could result in GHG cost neutral shifting of age classes to ac0 (e.g. from ac55 to ac0).
  - **80_optimization** added fallback routine for CONOPT4 failure (fatal system error)
+
 
 ## [4.1.1] - 2020-03-09
 
@@ -95,7 +115,7 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.2.0...develop
+[4.2.1]: https://github.com/magpiemodel/magpie/compare/v4.2.0...v4.2.1
 [4.2.0]: https://github.com/magpiemodel/magpie/compare/v4.1.1...v4.2.0
 [4.1.1]: https://github.com/magpiemodel/magpie/compare/v4.1.0...v4.1.1
 [4.1.0]: https://github.com/magpiemodel/magpie/compare/v4.0.1...v4.1.0

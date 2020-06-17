@@ -50,7 +50,7 @@ $endif
 
 * Stronger ruminant fadeout for India
 if (s15_rum_share_fadeout_india_strong = 1,
-	i15_rum_share_fadeout(t,"IND") = f15_rum_share_fadeout_india(t); 
+	i15_rum_share_fadeout(t,"IND") = f15_rum_share_fadeout_india(t);
 );
 
 * Milk fadeout for India
@@ -69,11 +69,24 @@ i15_alcohol_fadeout(t) = f15_food_substitution_fader(t,"%c15_alcscen%");
 i15_livestock_fadeout(t) = f15_food_substitution_fader(t,"%c15_livescen%");
 
 
+* ###### Exogenous food waste and exogenous diet scenarios
+
+* Country switch to determine countries for which exogenous food waste
+* and exogenous diet scenarios shall be applied.
+* In the default case, the exogenous food scenario affects all countries when
+* activated.
+p15_country_dummy(iso) = 0;
+p15_country_dummy(scen_countries15) = 1;
+* Because MAgPIE is not run at country-level, but at region level, a region
+* share is calculated that translates the countries' influence to regional level.
+* Countries are weighted by their population size.
+p15_exo_foodscen_region_shr(t_all,i) = sum(i_to_iso(i,iso), p15_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
 
 
 * The target year for transition to exogenous scenario diets defines the speed
-* of fading from regression based daily food consumption towards the scenario:
-i15_exo_foodscen_fader(t) = f15_exo_foodscen_fader(t,"%c15_exo_scen_targetyear%");
+* of fading from regression based daily food consumption towards the scenario.
+* Note: p15_exo_foodscen_region_shr(t,i) is 1 in the default case)
+i15_exo_foodscen_fader(t,i) = f15_exo_foodscen_fader(t,"%c15_exo_scen_targetyear%") * p15_exo_foodscen_region_shr(t,i);
 
 * Initialisation of the ratio between food calorie demand and food intake for the
 * historical reference period:
