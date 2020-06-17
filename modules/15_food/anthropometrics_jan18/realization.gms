@@ -10,6 +10,7 @@ $Ifi "%phase%" == "sets" $include "./modules/15_food/anthropometrics_jan18/sets.
 $Ifi "%phase%" == "declarations" $include "./modules/15_food/anthropometrics_jan18/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/15_food/anthropometrics_jan18/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/15_food/anthropometrics_jan18/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/15_food/anthropometrics_jan18/scaling.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/15_food/anthropometrics_jan18/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/15_food/anthropometrics_jan18/presolve.gms"
 $Ifi "%phase%" == "intersolve" $include "./modules/15_food/anthropometrics_jan18/intersolve.gms"
