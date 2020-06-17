@@ -5,34 +5,33 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
-
 ##########################################################
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-library(lucode)
+library(gms)
 source("scripts/start_functions.R")
 source("scripts/performance_test.R")
 source("config/default.cfg")
 
-#set defaults
+### Set defaults
 codeCheck <- FALSE
 
 buildInputVector <- function(regionmapping   = "agmip",
                              project_name    = "isimip_rcp",
                              climatescen_name= "rcp2p6",
-                             co2             = "noco2",
+                             co2             = "co2", # co2 fertilization????
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "c200",
-                             archive_rev     = "34",
-                             madrat_rev      = "4.14",
-                             validation_rev  = "4.14",
+                             archive_rev     = "44",
+                             madrat_rev      = "4.47",
+                             validation_rev  = "4.47",
                              calibration     = "calibration_agmip_c200_19Dec18.tgz",
-                             additional_data = "additional_data_rev3.65.tgz") {
+                             additional_data = "additional_data_rev3.79.tgz") { #65
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
                 mag="c30c1c580039c2b300d86cc46ff4036a",
-                inms="69c65bb3c88e8033cf8df6b5ac5d52a9",
+                inms="d9303655de75494941cc82740bcd1ae4",
                 inms2="ef2ae7cd6110d5d142a9f8bd7d5a68f2",
                 agmip="c77f075908c3bc29bdbe1976165eccaf")
   archive_name=paste(project_name,climate_model,climatescen_name,co2,sep="-")
@@ -42,83 +41,219 @@ buildInputVector <- function(regionmapping   = "agmip",
   return(c(archive,madrat,validation,additional_data))
 }
 
+### General settings ###
+general_settings<-function(title) {
+  source("config/default.cfg")
+  cfg<-lucode::setScenario(cfg,"cc")
+  cfg$force_download <- TRUE
+  cfg$gms$c_timesteps <- 12
+  cfg$gms$som <- "cellpool_aug16"
+  cfg$gms$factor_costs <- "fixed_per_ton_mar18" #### change to "sticky_feb18" when ready!
+  cfg$title <- paste0("inms_",title,"_v3")
+  cfg$recalibrate <- "ifneeded"
+  return(cfg)
+}
 
-
-### Single runs ###
-#general settings
-cfg$gms$c_timesteps <- 12
-
-# clalibration runs
-
-cfg$title <- "SSP2_RCP4p5_PolicyMed_v1"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
+###############################################################################
+########## Calibration run  ##########
+cfg<-general_settings(title="SSP2_RCP4p5_Calib")  ########## Different title?
+cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-lucode::setScenario(cfg,"cc")                  ########## or: what?
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms")
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$force_download <- TRUE
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="agmip")
-cfg$gms$som<-"cellpool_aug16"
-#cfg$gms$factor_costs <- "sticky_feb18"
+cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
+calib<-magpie4::submitCalibration(name = "calibration_inms_may2020")
 
-
-#SSP1,5 family
-
-cfg$title <- "SSP1_RCP4p5_PolicyHighDiet_v1"
-
-cfg$title <- "SSP1_RCP2p6_PolicyHigh_v1"
-
-cfg$title <- "SSP1_RCP4p5_PolicyHigh_v1"
-cfg<-lucode::setScenario(cfg,"SUSTAg1")
-cfg$gms$c56_pollutant_prices <- "SSPDB-SSP1-26-IMAGE"
-cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP1-26-IMAGE"
-cfg$force_download <- TRUE
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6",regionmapping="agmip")
-cfg$gms$som<-"cellpool_aug16"
-#cfg$gms$factor_costs <- "sticky_feb18"
-cfg$gms$c50_scen_neff  <- "neff80_85_starty2010"
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-cfg$title <- "INMS_SSP1_RCP45_Nhigh"
-cfg<-lucode::setScenario(cfg,"SUSTAg1")
-cfg$gms$c56_pollutant_prices <- "SSPDB-SSP1-45-IMAGE"
-cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP1-45-IMAGE"
-cfg$force_download <- TRUE
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="agmip")
-cfg$gms$som<-"cellpool_aug16"
-#cfg$gms$factor_costs <- "sticky_feb18"
-cfg$gms$c50_scen_neff  <- "neff80_85_starty2010"
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-
-cfg$title <- "SSP2_RCP4p5_PolicyLow_v1"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
-cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
-cfg$force_download <- TRUE
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="agmip")
-cfg$gms$som<-"cellpool_aug16"
-cfg$gms$c50_scen_neff  <- "constant"
-#cfg$gms$factor_costs <- "sticky_feb18"
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-cfg$title <- "SSP2_RCP4p5_PolicyHigh_v1"
-cfg<-lucode::setScenario(cfg,"SUSTAg2")
-cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
-cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
-cfg$force_download <- TRUE
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="agmip")
-cfg$gms$som<-"cellpool_aug16"
-cfg$gms$c50_scen_neff  <- "neff80_85_starty2010"
-#cfg$gms$factor_costs <- "sticky_feb18"
-start_run(cfg=cfg,codeCheck=codeCheck)
-
-cfg$title <- "SSP5_RCP8p5_PolicyLow_v1"
-cfg<-lucode::setScenario(cfg,"SUSTAg5")
+###############################################################################
+########## Scenario runs  ##########
+### Business-as-usual
+cfg<-general_settings(title="SSP5_RCP8p5_PolicyLow")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp8p5",regionmapping="inms",calibration=calib)
+# Development: fossil-fuel driven (SSP5)
+# Land Use: medium regulation, high productivity
+# Diet: meat and dairy-rich
+cfg<-lucode::setScenario(cfg,"SSP5")
+# Climate: no mitigation (RCP8.5)
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP5-Ref-REMIND-MAGPIE"
-cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP5-Ref-REMIND-MAGPIE"
-cfg$force_download <- TRUE
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp8p5",regionmapping="agmip")
-cfg$gms$som<-"cellpool_aug16"
-cfg$gms$c50_scen_neff  <- "constant"
-#cfg$gms$factor_costs <- "sticky_feb18"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP5-Ref-REMIND-MAGPIE"
+# N policy: low ambition
+cfg$gms$c50_scen_neff <- "constant"
+cfg$gms$c50_scen_neff_pasture <- "constant"
+cfg$gms$c70_feed_scen <- "ssp2"    ##### or ssp5? or not necessary to specify when scenario config selected?
+cfg$gms$c55_scen_conf <- "ssp2"    ##### or ssp5? or not necessary to specify when scenario config selected?
+start_run(cfg=cfg,codeCheck=codeCheck)
+
+### Low N regulation
+cfg<-general_settings(cfg$title <- "SSP2_RCP4p5_PolicyLow")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms",calibration=calib)
+# Development: historical trends (SSP2)
+# Land Use: medium regulation, medium productivity
+# Diet: medium meat and dairy
+cfg<-lucode::setScenario(cfg,"SSP2")
+# Climate: moderate mitigation (RCP4.5)
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
+# N policy: low ambition
+cfg$gms$c50_scen_neff <- "constant"
+cfg$gms$c50_scen_neff_pasture <- "constant"
+cfg$gms$c70_feed_scen <- "ssp2"
+cfg$gms$c55_scen_conf <- "ssp2"
+start_run(cfg=cfg,codeCheck=codeCheck)
+
+### Medium N regulation
+cfg<-general_settings(cfg$title <- "SSP2_RCP4p5_PolicyMed")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms",calibration=calib)
+# Development: historical trends (SSP2)
+# Land Use: medium regulation, medium productivity
+# Diet: medium meat and dairy
+cfg<-lucode::setScenario(cfg,"SSP2")
+# Climate: moderate mitigation (RCP4.5)
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
+# N policy: moderate ambition
+cfg$gms$c50_scen_neff <- "neff_ZhangBy2050_start2010"
+cfg$gms$c50_scen_neff_pasture <- "constant"
+cfg$gms$c70_feed_scen <- "ssp1"
+cfg$gms$c55_scen_conf <- "ssp1"
+start_run(cfg=cfg,codeCheck=codeCheck)
+
+### High N regulation
+cfg<-general_settings(cfg$title <- "SSP2_RCP4p5_PolicyHigh")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms",calibration=calib)
+# Development: historical trends (SSP2)
+# Land Use: medium regulation, medium productivity
+# Diet: medium meat and dairy
+cfg<-lucode::setScenario(cfg,"SSP2")
+# Climate: moderate mitigation (RCP4.5)
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
+# N policy: high ambition
+cfg$gms$c50_scen_neff <- "neff_ZhangBy2030_start2010"
+cfg$gms$c50_scen_neff_pasture <- "constant"
+cfg$gms$c70_feed_scen <- "ssp1"
+cfg$gms$c55_scen_conf <- "GoodPractice"
+start_run(cfg=cfg,codeCheck=codeCheck)
+
+### Best-case
+cfg<-general_settings(cfg$title <- "SSP1_RCP4p5_PolicyHigh")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms",calibration=calib)
+# Development: sustainable development (SSP1)
+# Land Use: strong regulation, high productivity (SSP1)
+# Diet: low meat and dairy
+cfg<-lucode::setScenario(cfg,"SSP1")
+# Climate: moderate mitigation (RCP4.5)
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP1-26-IMAGE"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP1-26-IMAGE"
+# N policy: high ambition
+cfg$gms$c50_scen_neff <- "neff_ZhangBy2030_start2010"
+cfg$gms$c50_scen_neff_pasture <- "constant"
+cfg$gms$c70_feed_scen <- "ssp1"
+cfg$gms$c55_scen_conf <- "GoodPractice"
+start_run(cfg=cfg,codeCheck=codeCheck)
+
+### Best-case+
+cfg<-general_settings(cfg$title <- "SSP1_RCP4p5_PolicyHighDiet")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms",calibration=calib)
+# Development: sustainable development (SSP1)
+# Land Use: strong regulation, high productivity (SSP1)
+cfg<-lucode::setScenario(cfg,"SSP1")
+# Climate: moderate mitigation (RCP4.5)
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP1-26-IMAGE"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP1-26-IMAGE"
+# Diet: ambitious diet shift and food loss/waste reductions (EATLancet)
+cfg$gms$c15_food_scenario <- "SSP1"
+cfg$gms$s15_exo_waste <- 1
+cfg$gms$s15_waste_scen <- 1.2
+cfg$gms$s15_exo_diet <- 1
+cfg$gms$c15_kcal_scen <- "healthy_BMI"
+cfg$gms$c15_EAT_scen <- "FLX"
+# N policy: high ambition
+cfg$gms$c50_scen_neff <- "neff_ZhangBy2030_start2010"
+cfg$gms$c50_scen_neff_pasture <- "constant"
+cfg$gms$c70_feed_scen <- "ssp1"
+cfg$gms$c55_scen_conf <- "GoodPractice"
+start_run(cfg=cfg,codeCheck=codeCheck)
+
+### Bioenergy
+cfg<-general_settings(cfg$title <- "SSP1_RCP2p6_PolicyHigh")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6",regionmapping="inms",calibration=calib)
+# Development: sustainable development (SSP1)
+# Land Use: strong regulation, high productivity (SSP1)
+# Diet: low meat and dairy
+cfg<-lucode::setScenario(cfg,"SSP1")
+# Climate: high mitigation (RCP2.6)
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP1-26-IMAGE"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP1-26-IMAGE"
+# N policy: high ambition
+cfg$gms$c50_scen_neff <- "neff_ZhangBy2030_start2010"
+cfg$gms$c50_scen_neff_pasture <- "constant"
+cfg$gms$c70_feed_scen <- "ssp1"
+cfg$gms$c55_scen_conf <- "GoodPractice"
+start_run(cfg=cfg,codeCheck=codeCheck)
+
+###############################################################################
+########## Sensitivity runs  ##########
+### Sensitivity 1: Only NUE (high ambition)
+cfg<-general_settings(cfg$title <- "SSP2_RCP4p5_SensitivityNUEhigh")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms",calibration=calib)
+# Development: historical trends (SSP2)
+# Land Use: medium regulation, medium productivity (SSP2)
+# Diet: medium meat and dairy
+cfg<-lucode::setScenario(cfg,"SSP2")
+# Climate: moderate mitigation (RCP4.5)
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
+# N policy: Only NUE
+cfg$gms$c50_scen_neff <- "neff_ZhangBy2030_start2010"
+cfg$gms$c50_scen_neff_pasture <- "constant"
+start_run(cfg=cfg,codeCheck=codeCheck)
+
+### Sensitivity 2: Only NUE (moderate ambition)
+cfg<-general_settings(cfg$title <- "SSP2_RCP4p5_SensitivityNUEhigh")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms",calibration=calib)
+# Development: historical trends (SSP2)
+# Land Use: medium regulation, medium productivity (SSP2)
+# Diet: medium meat and dairy
+cfg<-lucode::setScenario(cfg,"SSP2")
+# Climate: moderate mitigation (RCP4.5)
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
+# N policy: Only NUE
+cfg$gms$c50_scen_neff <- "neff_ZhangBy2050_start2010"
+cfg$gms$c50_scen_neff_pasture <- "constant"
+start_run(cfg=cfg,codeCheck=codeCheck)
+
+### Sensitivity 2: Only AWS (high ambition)
+cfg<-general_settings(cfg$title <- "SSP2_RCP4p5_SensitivityAWShigh")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms",calibration=calib)
+# Development: historical trends (SSP2)
+# Land Use: medium regulation, medium productivity (SSP2)
+cfg<-lucode::setScenario(cfg,"SSP2")
+# Climate: moderate mitigation (RCP4.5)
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
+# Diet: medium meat and dairy
+              ########### Already covered by scenario-config?
+# N policy: Best
+cfg$gms$c70_feed_scen <- "ssp1"
+cfg$gms$c55_scen_conf <- "GoodPractice"
+start_run(cfg=cfg,codeCheck=codeCheck)
+
+### Sensitivity 3: Only AWS (moderate ambition)
+cfg<-general_settings(cfg$title <- "SSP2_RCP4p5_SensitivityAWSmoderate") ###
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms",calibration=calib)
+# Development: historical trends (SSP2)
+# Land Use: medium regulation, medium productivity (SSP2)
+cfg<-lucode::setScenario(cfg,"SSP2")
+# Climate: moderate mitigation (RCP4.5)
+cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
+cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
+# Diet: medium meat and dairy
+              ########### Already covered by scenario-config?
+# N policy: Only AWS
+cfg$gms$c70_feed_scen <- "ssp1"
+cfg$gms$c55_scen_conf <- "ssp1"
 start_run(cfg=cfg,codeCheck=codeCheck)

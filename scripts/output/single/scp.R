@@ -9,7 +9,7 @@
 library(gdx)
 library(magclass)
 library(magpie4)
-library(lucode)
+library(lucode2)
 options("magclass.verbosity" = 1)
 
 ############################# BASIC CONFIGURATION #############################
