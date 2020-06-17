@@ -5,6 +5,9 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
+# -----------------------------------------------------------------
+# description: publish data set as input in default.cfg on a server
+# -----------------------------------------------------------------
 
 require(gms)
 

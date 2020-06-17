@@ -103,7 +103,11 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 
 
 
-  if(is.null(runscripts)) runscripts <- selectScript("./scripts/start")
+  if(is.null(runscripts)) runscripts <- gms::selectScript("./scripts/start")
+  if(is.null(runscripts)) {
+    message("No start script selected! Stop here.")
+    return(invisible(NULL))
+  }
   if(is.null(submit))     submit     <- choose_submit("Choose submission type")
   runsubmit(runscripts, submit)
 }

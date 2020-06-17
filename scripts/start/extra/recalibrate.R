@@ -7,7 +7,6 @@
 
 # --------------------------------------------------------
 # description: calculate and store new calibration factors
-# position: 4
 # --------------------------------------------------------
 
 library(magpie4)
