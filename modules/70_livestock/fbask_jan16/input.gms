@@ -11,7 +11,7 @@ $setglobal c70_feed_scen  ssp2
 
 scalars
   s70_pyld_intercept     Intercept of linear relationship determining pasture intensification (1)        / 0.24 /
-  s70_scp_shr			 scp feed share																	/ 0 /	
+  s70_scp			     scp feed on off																/ 0 /	
 ;
 
 table f70_feed_baskets(t_all,i,kap,kall,feed_scen70) Feed baskets in tDM per tDM livestock product (1)

@@ -23,6 +23,7 @@ parameters
  p70_cattle_stock_proxy(t,i)                      Proxy for cattle stocks needed to fullfil domestic food demand (mio. animals per yr)
  p70_incr_cattle(t,i)                             Change in estimated cattle stocks attributed to food demand projections (1)
  pm_past_mngmnt_factor(t,i)                       Regional pasture management intensification factor (1)
+ i70_feed_fadeout(t_all)						  Fade out of feed (1)
 ;
 
 
