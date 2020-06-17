@@ -7,9 +7,6 @@
 
 sets
 
-ksd20(ksd) Secondary products without scp
-   /oils,oilcakes,sugar,molasses,alcohol,ethanol,distillers_grain,brans,fibres/
-
 kpr(kall) Products that can be processed
    /tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,oilpalm,
    potato,cassav_sp,sugr_cane,sugr_beet,others,cottn_pro,brans,begr,betr,foddr,
