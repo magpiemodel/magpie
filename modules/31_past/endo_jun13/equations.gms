@@ -14,7 +14,7 @@
 *' `vm_yld` which are delivered by the module [14_yields]:
 
 q31_prod(j2) ..
- vm_prod(j2,"pasture") =l= vm_land(j2,"past")
+ vm_prod(j2,"pasture") =e= vm_land(j2,"past")
  						   * vm_yld(j2,"pasture","rainfed");
 
 *' On the basis of the required pasture area, cellular above ground carbon stocks are calculated:

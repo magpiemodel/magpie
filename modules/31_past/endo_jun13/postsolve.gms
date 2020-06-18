@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-s31_fac_req_past = 0;
+*s31_fac_req_past = 0;
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  oq31_prod(t,j,"marginal")            = q31_prod.m(j);
