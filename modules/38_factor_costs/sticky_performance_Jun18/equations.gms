@@ -10,10 +10,12 @@
 * a) variable costs such as labour inputs
 * b) investment costs for capital stocks.
 
-q38_cost_prod_crop(i2) .. vm_cost_prod(i2)
-                              =e= sum(kcr,vm_prod_reg(i2,kcr) * i38_variable_costs(i2,kcr) / (1-0.47)+
-                                  v38_investment_annuity_immobile(i2,kcr))+
-                                  v38_investment_annuity_mobile(i2);
+q38_cost_prod_crop(i2,kcr) .. vm_cost_prod(i2,kcr)
+                              =e= vm_prod_reg(i2,kcr) * i38_variable_costs(i2,kcr) / (1-0.47)+
+                                  v38_investment_annuity_immobile(i2,kcr)
+
+q38_cost_prod_crop_inv(i2) .. vm_cost_prod_inv(i2)
+                              =e= v38_investment_annuity_mobile(i2);
 
 */ (1-v38_mi(i2))
 * Each cropping activity requires a certain capital stock that depends on the
