@@ -5,8 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$if "%c57_macc_source%" == "PBL_2007" s57_step_length = 5;
-$if "%c57_macc_source%" == "PBL_2019" s57_step_length = 20;
+$if "%c57_macc_version%" == "PBL_2007" s57_step_length = 5;
+$if "%c57_macc_version%" == "PBL_2019" s57_step_length = 20;
 
 $ontext
 Determine level of GHG emission abatement depending on GHG prices.
