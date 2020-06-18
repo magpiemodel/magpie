@@ -20,16 +20,15 @@ i38_capital_need(i,perennials38,"mobile") = f38_fac_req_per_ton(perennials38)* s
 i38_capital_need(i,perennials38,"immobile") = f38_fac_req_per_ton(perennials38)* s38_capital_cost_share / pm_interest(i) * s38_immobile_perennials;
 
   p38_capital_intensity(t,j,kcr) = sum(cell(i,j), i38_capital_need(i,kcr,"immobile"));
-  p38_capital(t,j,kcr,mobil38)   = sum(cell(i,j), i38_capital_need(i,kcr,mobil38)*pm_croparea_start(j,kcr)*f38_region_yield(i,kcr)* fm_tau1995(i));
+  p38_capital_immobile(t,j,kcr)  = sum(cell(i,j), i38_capital_need(i,kcr,"immobile")*pm_croparea_start(j,kcr)*f38_region_yield(i,kcr)* fm_tau1995(i));
+  p38_capital_mobile(t,j)   = sum((cell(i,j),kcr), i38_capital_need(i,kcr,"mobile")*pm_croparea_start(j,kcr)*f38_region_yield(i,kcr)* fm_tau1995(i));
+
   vm_prod.l(j,kcr)=sum(cell(i,j),pm_croparea_start(j,kcr)*f38_region_yield(i,kcr)* fm_tau1995(i));
-*p38_past_area(j,kcr)=pm_croparea_start(j,kcr);
+
   );
 
 
 *v38_mi.fx(i) = 0.47;
-v38_capital.fx(j,kcr,"immobile") = p38_capital(t,j,kcr,"immobile");
-*v38_investment.up(j,kcr,mobil38)=1e6;
-s38_capitalmax(j,"mobile") = sum((kcr), p38_capital(t,j,kcr,"mobile"));
-
-v38_capital.up(j,kcr,"mobile")=s38_capitalmax(j,"mobile");
-v38_investment_annuity.up(i,kcr) = 1e5;
+v38_capital_immobile.fx(j) = p38_capital_immobile(t,j,kcr);
+s38_capitalmax(j) = p38_capital_mobile(t,j);
+v38_capital_mobile.up(j)=s38_capitalmax(j);
