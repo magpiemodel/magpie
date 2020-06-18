@@ -5,5 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-p38_capital(t,j,kcr,mobil38)=0;
+p38_capital_immobile(t,j,kcr)=0;
+p38_capital_mobile(t,j)=0;
 *p38_past_annuity(i2,kcr)=0;
