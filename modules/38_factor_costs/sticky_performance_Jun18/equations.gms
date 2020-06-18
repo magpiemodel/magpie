@@ -12,7 +12,7 @@
 
 q38_cost_prod_crop(i2,kcr) .. vm_cost_prod(i2,kcr)
                               =e= vm_prod_reg(i2,kcr) * i38_variable_costs(i2,kcr) / (1-0.47)+
-                                  v38_investment_annuity_immobile(i2,kcr)
+                                  v38_investment_annuity_immobile(i2,kcr);
 
 q38_cost_prod_crop_inv(i2) .. vm_cost_prod_inv(i2)
                               =e= v38_investment_annuity_mobile(i2);
