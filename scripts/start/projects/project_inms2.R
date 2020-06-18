@@ -5,9 +5,9 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
-##########################################################
-#### Script to MAgPIE test runs ####
-##########################################################
+# ----------------------------------------------------------
+# description: INMS simulations (nitrogen)
+# ----------------------------------------------------------
 
 library(gms)
 source("scripts/start_functions.R")

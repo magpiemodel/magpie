@@ -6,9 +6,9 @@
 # |  Contact: magpie@pik-potsdam.de
 
 
-######################################
-#### Script to start a MAgPIE run ####
-######################################
+# ----------------------------------------------------------
+# description: Food Demand Paper simulations (overweight, underweight, food demand)
+# ----------------------------------------------------------
 
 #setwd("C:/Users/bodirsky/Desktop/articles/demand model/manuscript_from_starved_to_stuffed/magpie")
 
