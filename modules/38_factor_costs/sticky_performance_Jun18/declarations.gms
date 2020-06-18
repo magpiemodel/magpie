@@ -7,11 +7,11 @@
 
 equations
  q38_cost_prod_crop(i)                    regional factor input costs for plant production (mio USD05MER)
- q38_investment_im(j2,kcr)                cellular immobile investments into farm capital   (mio USD05MER)
- q38_investment_mobile(j2)                cellular mobile investments into farm capital   (mio USD05MER)
- q38_investment_immobile(j2,kcr)          cellular immobile investments into farm capital   (mio USD05MER)
- q38_investment_annuity_mobile(i2)        annualized regional investment costs for farm capital  (mio USD05MER)
- q38_investment_annuity_immobile(i2,kcr)  annualized regional investment costs for farm capital  (mio USD05MER)
+ q38_investment_im(j,kcr)                cellular immobile investments into farm capital   (mio USD05MER)
+ q38_investment_mobile(j)                cellular mobile investments into farm capital   (mio USD05MER)
+ q38_investment_immobile(j,kcr)          cellular immobile investments into farm capital   (mio USD05MER)
+ q38_investment_annuity_mobile(i)        annualized regional investment costs for farm capital  (mio USD05MER)
+ q38_investment_annuity_immobile(i,kcr)  annualized regional investment costs for farm capital  (mio USD05MER)
 ;
 
 positive variables
@@ -28,7 +28,7 @@ v38_investment(j,kcr,mobil38)            investment costs in farm capital (mio U
 parameters
   i38_variable_costs(i,kcr)          variable input costs (mio USD05MER per input unit)
   i38_capital_need(i,kcr,mobil38)    capital requirements for farming with tau equal 1 (mio USD05MER)
-  i38_annuity_factor(i)              Factor to calculate overall investment 
+  i38_annuity_factor(i)              Factor to calculate overall investment
   p38_capital_intensity(t,j,kcr)     immobile capital per tDM (USD05MER per tDM)
   p38_capital_immobile(t,j,kcr)      preexisting capital stocks before investment (mio USD05MER)
   p38_capital_mobile(t,j)            preexisting capital stocks before investment (mio USD05MER)
