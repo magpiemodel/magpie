@@ -26,13 +26,14 @@ i70_feed_fadeout(t_all)$(m_year(t_all) >= 2050) = 0;
 
 if(s70_scp_feed = 1,
 *convert from DM to Nr
-im_feed_baskets(t_all,i,kap,kall) = im_feed_baskets(t_all,i,kap,kall)*fm_attributes("nr",kall);
-i70_feed_baskets_orig(t_all,i,kap,kall) = im_feed_baskets(t_all,i,kap,kall);
+im_feed_baskets(t_all,i,kap,kall70) = im_feed_baskets(t_all,i,kap,kall70)*fm_attributes("nr",kall70);
+im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")*fm_attributes("nr","scp");
 *replace feed with SCP based on Nr
-im_feed_baskets(t_all,i,kap,kall70) =
-               i70_feed_baskets_orig(t_all,i,kap,kall70) * i70_feed_fadeout(t_all);
 im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")
-             + sum(kall70, i70_feed_baskets_orig(t_all,i,kap,kall70) * (1-i70_feed_fadeout(t_all)));
+             + sum(kall70, im_feed_baskets(t_all,i,kap,kall70) * (1-i70_feed_fadeout(t_all)));
+im_feed_baskets(t_all,i,kap,kall70) =
+               im_feed_baskets(t_all,i,kap,kall70) * i70_feed_fadeout(t_all);
 *convert back from Nr to DM
-im_feed_baskets(t_all,i,kap,kall) = im_feed_baskets(t_all,i,kap,kall)/fm_attributes("nr",kall)
+im_feed_baskets(t_all,i,kap,kall70) = im_feed_baskets(t_all,i,kap,kall70)/fm_attributes("nr",kall70);
+im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")/fm_attributes("nr","scp");
 );
