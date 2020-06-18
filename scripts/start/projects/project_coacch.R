@@ -6,9 +6,9 @@
 # |  Contact: magpie@pik-potsdam.de
 
 
-############################################################
-#### Script for the generation of COACCH simulations ####
-############################################################
+# ----------------------------------------------------------
+# description: COACCH simulations (climate-impacts, Europe focus)
+# ----------------------------------------------------------
 
 library(gms)
 source("scripts/start_functions.R")

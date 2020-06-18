@@ -5,9 +5,10 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
-############################################################
-#### Script for the generation of SIM4NEXUS simulations ####
-############################################################
+# ----------------------------------------------------------
+# description: SIM4NEXUS simulations (water-land-climate-energy)
+# ----------------------------------------------------------
+
 library(gms)
 source("scripts/start_functions.R")
 source("scripts/performance_test.R")

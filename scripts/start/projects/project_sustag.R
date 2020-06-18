@@ -6,9 +6,9 @@
 # |  Contact: magpie@pik-potsdam.de
 
 
-##########################################################
-#### Script for the generation of SUSTAg simulations ####
-##########################################################
+# ----------------------------------------------------------
+# description: SUSTAg simulations (bioenergy and mitigation in Europe)
+# ----------------------------------------------------------
 
 library(gms)
 source("scripts/start_functions.R")
