@@ -29,6 +29,6 @@ i38_capital_need(i,perennials38,"immobile") = f38_fac_req_per_ton(perennials38)*
 
 
 *v38_mi.fx(i) = 0.47;
-v38_capital_immobile.fx(j) = p38_capital_immobile(t,j,kcr);
+v38_capital_immobile.fx(j,kcr) = p38_capital_immobile(t,j,kcr);
 s38_capitalmax(j) = p38_capital_mobile(t,j);
 v38_capital_mobile.up(j)=s38_capitalmax(j);
