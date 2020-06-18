@@ -5,13 +5,23 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
-# ------------------------------------------------
-# description: start run with default.cfg settings
-# position: 1
-# ------------------------------------------------
+# --------------------------------------------------------
+# description: calculate and store new calibration factors
+# --------------------------------------------------------
+
+library(magpie4)
+library(magclass)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
 #start MAgPIE run
-start_run(cfg="default.cfg")
+source("config/default.cfg")
+cfg$results_folder <- "output/:title:"
+cfg$recalibrate <- TRUE
+cfg$title <- "calib_run"
+cfg$gms$c_timesteps <- 1
+cfg$output <- c("report")
+cfg$sequential <- TRUE
+start_run(cfg,codeCheck=FALSE)
+magpie4::submitCalibration("H12")
