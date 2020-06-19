@@ -25,7 +25,7 @@ q38_cost_prod_crop_inv(i2) .. vm_cost_prod_inv(i2)
 * with capital stock, and that depreciation is replaced.
 
 q38_investment_im(j2,kcr) .. v38_investment_immobile(j2,kcr)
-                                 =e= sum(cell(i2,j2), vm_prod(j2,kcr) *
+                                 =g= sum(cell(i2,j2), vm_prod(j2,kcr) *
                                  i38_capital_need(i2,kcr,"immobile"))
                                  - v38_capital_immobile(j2,kcr);
 
@@ -36,10 +36,10 @@ q38_investment_mobile(j2) .. v38_investment_mobile(j2)
 
 * Also the capital intensity of sunk capital is predetermined.
 
-*q38_investment_immobile(j2,kcr) .. v38_investment_immobile(j2,kcr)
-*                            =g=sum(cell(i2,j2), vm_prod(j2,kcr) *
-*                            (i38_capital_need(i2,kcr,"immobile")
-*                            - sum(ct, p38_capital_intensity(ct,j2,kcr))));
+q38_investment_immobile(j2,kcr) .. v38_investment_immobile(j2,kcr)
+                            =g=sum(cell(i2,j2), vm_prod(j2,kcr) *
+                            (i38_capital_need(i2,kcr,"immobile")
+                            - sum(ct, p38_capital_intensity(ct,j2,kcr))));
 
 * Investments are then translated into annual payments using the interest
 * and depreciation rates over an infinite time horizon.
