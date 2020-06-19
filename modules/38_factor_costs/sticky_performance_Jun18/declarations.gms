@@ -10,9 +10,9 @@ equations
  q38_cost_prod_crop_inv(i)                   regional factor input costs for plant production (mio USD05MER)
 
  q38_investment_im(j,kcr)                cellular immobile investments into farm capital   (mio USD05MER)
- q38_investment_mobile(j)                cellular mobile investments into farm capital   (mio USD05MER)
+*q38_investment_mobile(j)                cellular mobile investments into farm capital   (mio USD05MER)
  q38_investment_immobile(j,kcr)          cellular immobile investments into farm capital   (mio USD05MER)
- q38_investment_annuity_mobile(i)        annualized regional investment costs for farm capital  (mio USD05MER)
+*q38_investment_annuity_mobile(i)        annualized regional investment costs for farm capital  (mio USD05MER)
  q38_investment_annuity_immobile(i,kcr)  annualized regional investment costs for farm capital  (mio USD05MER)
 ;
 
@@ -21,10 +21,10 @@ vm_cost_prod(i,kall)                      factor costs (mio USD05MER  per yr)
 vm_cost_prod_inv(i)                      investment costs
 v38_investment_immobile(j,kcr)           investment costs in farm capital (mio USD05MER per yr)
 v38_capital_immobile(j,kcr)              capital stock (USD05MER)
-v38_investment_mobile(j)                 investment costs in farm capital (mio USD05MER per yr)
+*v38_investment_mobile(j)                 investment costs in farm capital (mio USD05MER per yr)
 *v38_capital_mobile(j)                    capital stock (USD05MER)
 v38_investment_annuity_immobile(i,kcr)  annualized investment costs in farm immobile capital (mio USD05MER per yr)
-v38_investment_annuity_mobile(i)         annualized investment costs in farm mobile capital (mio USD05MER per yr)
+*v38_investment_annuity_mobile(i)         annualized investment costs in farm mobile capital (mio USD05MER per yr)
 ;
 
 parameters
@@ -36,6 +36,8 @@ parameters
   p38_capital_mobile(t,j)            preexisting capital stocks before investment (mio USD05MER)
   p38_ovcosts(t,i)                   Overall factor costs including non-annuitized capital investment (mio USD05MER)
   s38_capitalmax(j)                  Maximum v38_capital_mobile
+
+  p38_investment_mobile(t,j)         investment in mobile capital postsolve
 ;
 
 

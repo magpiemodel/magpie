@@ -7,17 +7,20 @@
 
 * Overall costs including non-annuitized capital costs
 
+p38_investment_mobile(t,j)=sum(cell(i2,j2), vm_prod.l(j2,kcr) *i38_capital_need(i2,kcr,"mobile"))-p38_capital_mobile(t,j);
+
 i38_annuity_factor(i)= ((1-s38_depreciation_rate)*(pm_interest(i)/((1+pm_interest(i))))
   + s38_depreciation_rate);
 
 p38_ovcosts(t,i)   = sum(kcr,vm_prod_reg.l(i,kcr) * i38_variable_costs(i,kcr) / (1-0.47)+
-    v38_investment_annuity_immobile.l(i,kcr)/i38_annuity_factor(i))+
-    v38_investment_annuity_mobile.l(i)/i38_annuity_factor(i);
+    v38_investment_annuity_immobile.l(i,kcr)/i38_annuity_factor(i))+p38_investment_mobile(t,j);
 
 
 *Capital update from the last investment
 p38_capital_immobile(t+1,j,kcr)$(v38_capital_immobile.l(j,kcr) OR v38_investment_immobile.l(j,kcr)) = v38_capital_immobile.l(j,kcr) + v38_investment_immobile.l(j,kcr);
-p38_capital_mobile(t+1,j)$(p38_capital_mobile(t,j) OR v38_investment_mobile.l(j)) = p38_capital_mobile(t,j) + v38_investment_mobile.l(j);
+p38_capital_mobile(t+1,j)$(p38_capital_mobile(t,j) OR p38_investment_mobile(j)) = p38_capital_mobile(t,j) + p38_investment_mobile(j);
+
+**p38_capital_mobile(t+1,j)$(p38_capital_mobile(t,j) OR v38_investment_mobile.l(j)) = p38_capital_mobile(t,j) + v38_investment_mobile.l(j);
 
 
 * Timestep length matters

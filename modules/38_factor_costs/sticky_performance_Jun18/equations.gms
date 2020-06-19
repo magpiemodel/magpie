@@ -13,9 +13,11 @@
 q38_cost_prod_crop(i2,kcr) .. vm_cost_prod(i2,kcr)
                               =e= vm_prod_reg(i2,kcr) * i38_variable_costs(i2,kcr) / (1-0.47);
 
-q38_cost_prod_crop_inv(i2) .. vm_cost_prod_inv(i2)
-                              =e= sum(kcr,v38_investment_annuity_immobile(i2,kcr))
-                              +v38_investment_annuity_mobile(i2);
+q38_cost_prod_crop_inv(i2) .. vm_cost_prod_inv(i2) =e= sum(kcr,v38_investment_annuity_immobile(i2,kcr));
+** including movile
+*q38_cost_prod_crop_inv(i2) .. vm_cost_prod_inv(i2)
+*                              =e= sum(kcr,v38_investment_annuity_immobile(i2,kcr))
+*                              +v38_investment_annuity_mobile(i2);
 
 */ (1-v38_mi(i2))
 * Each cropping activity requires a certain capital stock that depends on the
@@ -34,10 +36,10 @@ q38_investment_im(j2,kcr) .. v38_investment_immobile(j2,kcr)
 *                                  i38_capital_need(i2,kcr,"mobile"))
 *                                   - v38_capital_mobile(j2);
 
-q38_investment_mobile(j2) .. v38_investment_mobile(j2)
-                                  =g= sum((cell(i2,j2),kcr), vm_prod(j2,kcr) *
-                                  i38_capital_need(i2,kcr,"mobile"))
-                                   - sum(ct,p38_capital_mobile(ct,j2));
+*q38_investment_mobile(j2) .. v38_investment_mobile(j2)
+*                                  =g= sum((cell(i2,j2),kcr), vm_prod(j2,kcr) *
+*                                  i38_capital_need(i2,kcr,"mobile"))
+*                                   - sum(ct,p38_capital_mobile(ct,j2));
 
 * Also the capital intensity of sunk capital is predetermined.
 
@@ -50,12 +52,12 @@ q38_investment_immobile(j2,kcr) .. v38_investment_immobile(j2,kcr)
 * and depreciation rates over an infinite time horizon.
 
 
- q38_investment_annuity_mobile(i2) ..
-                          v38_investment_annuity_mobile(i2)
-                          =e=
-                          sum(cell(i2,j2),
-                          v38_investment_mobile(j2))*((1-s38_depreciation_rate)*(pm_interest(i2)/((1+pm_interest(i2))))
-                            + s38_depreciation_rate);
+*q38_investment_annuity_mobile(i2) ..
+*                          v38_investment_annuity_mobile(i2)
+*                          =e=
+*                          sum(cell(i2,j2),
+*                          v38_investment_mobile(j2))*((1-s38_depreciation_rate)*(pm_interest(i2)/((1+pm_interest(i2))))
+*                            + s38_depreciation_rate);
 
 q38_investment_annuity_immobile(i2,kcr) ..
                            v38_investment_annuity_immobile(i2,kcr)
