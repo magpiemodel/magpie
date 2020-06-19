@@ -15,7 +15,7 @@ resolutions<-c("200")
 #Factor cost realizations
 realization<-c("sticky_performance_Jun18")
 # Trade realization
-title<-c("NewSticky_385")
+title<-c("NewSticky_385_eqEquations")
 
 for (i in 1:length(resolutions)){
 for(j in 1:length(realization)){
