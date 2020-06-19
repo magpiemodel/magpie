@@ -7,7 +7,7 @@
 
 * Overall costs including non-annuitized capital costs
 
-p38_investment_mobile(t,j)$(vm_prod.l(j,kcr) OR p38_capital_mobile(t,j))=sum((cell(i,j),kcr), vm_prod.l(j,kcr) *i38_capital_need(i,kcr,"mobile"))-p38_capital_mobile(t,j);
+p38_investment_mobile(t,j)=sum((cell(i,j),kcr), vm_prod.l(j,kcr) *i38_capital_need(i,kcr,"mobile"))-p38_capital_mobile(t,j);
 
 i38_annuity_factor(i)= ((1-s38_depreciation_rate)*(pm_interest(i)/((1+pm_interest(i))))
   + s38_depreciation_rate);
