@@ -11,11 +11,11 @@
 * b) investment costs for capital stocks.
 
 q38_cost_prod_crop(i2,kcr) .. vm_cost_prod(i2,kcr)
-                              =e= vm_prod_reg(i2,kcr) * i38_variable_costs(i2,kcr) / (1-0.47)+
-                                  v38_investment_annuity_immobile(i2,kcr);
+                              =e= vm_prod_reg(i2,kcr) * i38_variable_costs(i2,kcr) / (1-0.47);
 
 q38_cost_prod_crop_inv(i2) .. vm_cost_prod_inv(i2)
-                              =e= v38_investment_annuity_mobile(i2);
+                              =e= sum(kcr,v38_investment_annuity_immobile(i2,kcr))
+                              +v38_investment_annuity_mobile(i2);
 
 */ (1-v38_mi(i2))
 * Each cropping activity requires a certain capital stock that depends on the
@@ -29,10 +29,15 @@ q38_investment_im(j2,kcr) .. v38_investment_immobile(j2,kcr)
                                  i38_capital_need(i2,kcr,"immobile"))
                                  - v38_capital_immobile(j2,kcr);
 
+*q38_investment_mobile(j2) .. v38_investment_mobile(j2)
+*                                  =g= sum((cell(i2,j2),kcr), vm_prod(j2,kcr) *
+*                                  i38_capital_need(i2,kcr,"mobile"))
+*                                   - v38_capital_mobile(j2);
+
 q38_investment_mobile(j2) .. v38_investment_mobile(j2)
-                                  =e= sum((cell(i2,j2),kcr), vm_prod(j2,kcr) *
+                                  =g= sum((cell(i2,j2),kcr), vm_prod(j2,kcr) *
                                   i38_capital_need(i2,kcr,"mobile"))
-                                   - v38_capital_mobile(j2);
+                                   - p38_capital_mobile(t,j);
 
 * Also the capital intensity of sunk capital is predetermined.
 
