@@ -28,17 +28,17 @@ cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c20_scp_type <- "hydrogen"
 cfg$gms$s15_elastic_demand <- 0
 
-cfg$title <- "SCP09_default"
+cfg$title <- "SCP10_default"
 cfg$gms$s70_scp_feed <- 0
 cfg$gms$s15_scp_food <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "SCP09_hydrogen_scpFeedOn"
+cfg$title <- "SCP10_hydrogen_scpFeedOn"
 cfg$gms$s70_scp_feed <- 1
 cfg$gms$s15_scp_food <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "SCP09_hydrogen_scpKapOn"
+cfg$title <- "SCP10_hydrogen_scpKapOn"
 cfg$gms$s70_scp_feed <- 0
 cfg$gms$s15_scp_food <- 1
 start_run(cfg,codeCheck=FALSE)
