@@ -412,11 +412,21 @@ p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
 
 
 if(s15_scp_food = 1,
-p15_kcal_pc_calibrated_orig(t,i,kfo_ap) = p15_kcal_pc_calibrated(t,i,kfo_ap);
-p15_kcal_pc_calibrated(t,i,kfo_ap) =
-               p15_kcal_pc_calibrated_orig(t,i,kfo_ap) * i15_kap_fadeout(t);
+*conversion factor from kcal/cap/day to t Protein/cap/day
+*t Protein/cap/day = kcal/cap/day * mio t DM / kcal * t Protein / t DM * 10**6
+i15_kcal_pc_to_protein_pc(t,kfo) =  1/f15_nutrition_attributes(t,kfo,"kcal") * f15_nutrition_attributes(t,kfo,"protein") * 10**6;
+*convert from kcal/cap/day to t Protein/cap/day
+p15_kcal_pc_calibrated(t,i,kfo_ap) = p15_kcal_pc_calibrated(t,i,kfo_ap) * i15_kcal_pc_to_protein_pc(t,kfo_ap);
+p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp") * i15_kcal_pc_to_protein_pc(t,"scp");
+*replace kfo_ap with scp based on protein/cap/day
 p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp")
-             + sum(kfo_ap, p15_kcal_pc_calibrated_orig(t,i,kfo_ap) * (1-i15_kap_fadeout(t)));
+             + sum(kfo_ap, p15_kcal_pc_calibrated(t,i,kfo_ap) * (1-i15_kap_fadeout(t)));
+p15_kcal_pc_calibrated(t,i,kfo_ap) =
+               p15_kcal_pc_calibrated(t,i,kfo_ap) * i15_kap_fadeout(t);
+*convert back to kcal/cap/day
+p15_kcal_pc_calibrated(t,i,kfo_ap) = p15_kcal_pc_calibrated(t,i,kfo_ap)/i15_kcal_pc_to_protein_pc(t,kfo_ap);
+p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp")/i15_kcal_pc_to_protein_pc(t,"scp");
+
 );
 
 
