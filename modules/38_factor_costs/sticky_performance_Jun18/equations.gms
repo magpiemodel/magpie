@@ -27,7 +27,7 @@ q38_cost_prod_crop_inv(i2) .. vm_cost_prod_inv(i2) =e= sum(kcr,v38_investment_an
 * with capital stock, and that depreciation is replaced.
 
 q38_investment_im(j2,kcr) .. v38_investment_immobile(j2,kcr)
-                                 =e= sum(cell(i2,j2), vm_prod(j2,kcr) *
+                                 =g= sum(cell(i2,j2), vm_prod(j2,kcr) *
                                  i38_capital_need(i2,kcr,"immobile"))
                                  - v38_capital_immobile(j2,kcr);
 
