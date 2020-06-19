@@ -13,7 +13,7 @@ i38_annuity_factor(i)= ((1-s38_depreciation_rate)*(pm_interest(i)/((1+pm_interes
   + s38_depreciation_rate);
 
 p38_ovcosts(t,i)   = sum(kcr,vm_prod_reg.l(i,kcr) * i38_variable_costs(i,kcr) / (1-0.47)+
-    v38_investment_annuity_immobile.l(i,kcr)/i38_annuity_factor(i))+p38_investment_mobile(t,j);
+    v38_investment_annuity_immobile.l(i,kcr)/i38_annuity_factor(i))+sum(cell(i,j),p38_investment_mobile(t,j));
 
 
 *Capital update from the last investment
