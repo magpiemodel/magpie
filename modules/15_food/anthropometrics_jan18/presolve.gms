@@ -412,9 +412,9 @@ p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
 
 
 if(s15_scp_food = 1,
-*conversion factor from kcal/cap/day to t Protein/cap/day
-*t Protein/cap/day = kcal/cap/day * mio t DM / kcal * t Protein / t DM * 10**6
-i15_kcal_pc_to_protein_pc(t,kfo) =  1/f15_nutrition_attributes(t,kfo,"kcal") * f15_nutrition_attributes(t,kfo,"protein") * 10**6;
+*conversion factor from kcal/cap/day to g protein/cap/day
+*g protein/cap/day = kcal/cap/day * t DM / mio kcal * t Protein / t DM
+i15_kcal_pc_to_protein_pc(t,kfo) =  1/f15_nutrition_attributes(t,kfo,"kcal") * f15_nutrition_attributes(t,kfo,"protein");
 *convert from kcal/cap/day to t Protein/cap/day
 p15_kcal_pc_calibrated(t,i,kfo_ap) = p15_kcal_pc_calibrated(t,i,kfo_ap) * i15_kcal_pc_to_protein_pc(t,kfo_ap);
 p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp") * i15_kcal_pc_to_protein_pc(t,"scp");
