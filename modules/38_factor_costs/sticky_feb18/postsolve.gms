@@ -7,10 +7,10 @@
 
 * Overall costs including non-annuitized capital costs
 
-p38_ovcosts(t,i)   =  sum(kall,vm_cost_prod(i,kall))
+p38_ovcosts(t,i)   =  sum(kall,vm_cost_prod.l(i,kall))
                          + sum((cell(i,j),kcr),
-                         v38_investment_immobile(j,kcr))+sum((cell(i,j)),
-                         v38_investment_mobile(j2);
+                         v38_investment_immobile.l(j,kcr))+sum((cell(i,j)),
+                         v38_investment_mobile.l(j2);
 
 *Capital update from the last investment
 p38_capital_immobile(t+1,j,kcr)$(p38_capital_immobile(t,j,kcr) OR v38_investment_immobile.l(j,kcr)) = p38_capital_immobile(t,j,kcr) + v38_investment_immobile.l(j,kcr);
