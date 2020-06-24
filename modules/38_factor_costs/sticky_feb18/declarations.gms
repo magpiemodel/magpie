@@ -21,7 +21,7 @@ positive variables
  v38_investment_mobile(j)                     investment costs in mobile farm capital (mio USD05MER per yr)
  v38_capital_immobile(j,kcr)                   immobile capital stock (USD05MER)
  v38_capital_mobile(j)                   mobile capital stock (USD05MER)
- v38_investment_annuity_(i)       annualized investment in immobile in capital (mio USD05MER per yr)
+ v38_investment_annuity(i)       annualized investment in immobile in capital (mio USD05MER per yr)
 *v38_mi(i)                           management intensity (share of max yield)
 
 ;
