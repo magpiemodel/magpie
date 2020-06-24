@@ -13,16 +13,16 @@ clima<-"cc"
 #List of resolutions forruns
 resolutions<-c("200")
 #Factor cost realizations
-realization<-c("sticky_feb18")
+realization<-c("sticky_feb18","mixed_feb17","fixed_per_ton_mar18")
 # Trade realization
-title<-c("CleanUp_Sticky_ImMoSplit_beforePR_bugFixed")
+title<-c("CleanUp_Sticky_ImMoSplit_beforePR_1e6","Default_mixed_beforePR_bugFixed","Default_per_Ton_beforePR_bugFixed")
 
 for (i in 1:length(resolutions)){
 for(j in 1:length(realization)){
 #for(k in 1:length(trade)){
 #Change the results folder name
 #cfg$title<-paste0("Develop_",realization[j],"_c",resolutions[i],"_UP")
-cfg$title<-title[i]
+cfg$title<-title[j]
 
 
 cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c200_690d3718e151be1b450b394c1064b1c5.tgz",
