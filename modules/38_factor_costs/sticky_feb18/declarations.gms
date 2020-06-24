@@ -11,8 +11,7 @@ equations
 
  q38_investment_immobile(j,kcr)    cellular immobile investments into farm capital   (mio USD05MER)
  q38_investment_mobile(j)          cellular mobile investments into farm capital   (mio USD05MER)
- q38_investment_annuity_immobile(i)   annualized regional investment costs for immobile farm capital  (mio USD05MER)
- q38_investment_annuity_mobile(i)     annualized regional investment costs for mobile farm capital  (mio USD05MER)
+ q38_investment_annuity(i)         annualized regional investment costs for farm capital  (mio USD05MER)
 ;
 
 positive variables
