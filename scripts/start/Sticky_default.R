@@ -13,9 +13,9 @@ clima<-"cc"
 #List of resolutions forruns
 resolutions<-c("200")
 #Factor cost realizations
-realization<-c("sticky_performance_Jun18")
+realization<-c("sticky_feb18")
 # Trade realization
-title<-c("NewSticky_385_mobilePostsolve_noCapitalIntensity_v38_invGreater")
+title<-c("CleanUp_Sticky_BeforePR")
 
 for (i in 1:length(resolutions)){
 for(j in 1:length(realization)){
@@ -38,7 +38,7 @@ cfg$force_download<-TRUE
 #cfg$gms$sm_fix_SSP2 <- 1990
 
 #recalibrate
-cfg$recalibrate <- TRUE
+cfg$recalibrate <- "FALSE"
 
 #use Feb15 realization for land realization
 cfg$gms$land <- "landmatrix_dec18"
@@ -47,7 +47,7 @@ cfg$gms$land <- "landmatrix_dec18"
 #cfg$gms$trade <-trade[k]
 
 #Output shouldnt include validation
-cfg$output <- c("interpolation_cropsplit.R","rds_report")
+cfg$output <- c("interpolation_cropsplit","rds_report")
 
 
 #Factor costs realization

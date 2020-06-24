@@ -1,3 +1,0 @@
-name,type,reason
-vm_tau,input,questionnaire
-vm_area,input,questionnaire

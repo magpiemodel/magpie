@@ -12,4 +12,3 @@ vm_area,input,questionnaire
 pm_interest,input,questionnaire
 vm_prod,input,questionnaire
 pm_croparea_start,input,questionnaire
-vm_cost_prod_inv,input,questionnaire

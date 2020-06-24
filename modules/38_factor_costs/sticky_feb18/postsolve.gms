@@ -15,15 +15,11 @@ p38_ovcosts(t,i,kcr)   = vm_prod_reg.l(i,kcr) * i38_variable_costs(i,kcr) / (1-0
 
 
 *Capital update from the last investment
-p38_capital(t+1,j,kcr,mobil38)$(v38_capital.l(j,kcr,mobil38) OR v38_investment.l(j,kcr,mobil38)) = v38_capital.l(j,kcr,mobil38) + v38_investment.l(j,kcr,mobil38);
+p38_capital(t+1,j,kcr,mobil38)$(v38_capital.l(j,kcr,mobil38) OR v38_investment.l(j,kcr,mobil38)) = p38_capital(t,j,kcr,mobil38) + v38_investment.l(j,kcr,mobil38);
 
 * Timestep length matters
 p38_capital(t+1,j,kcr,mobil38)$(p38_capital(t+1,j,kcr,mobil38)) = p38_capital(t+1,j,kcr,mobil38) * (1-s38_depreciation_rate)**(m_year(t+1)-m_year(t));
 p38_capital_intensity(t+1,j,kcr)$(vm_prod.l(j,kcr)) = p38_capital(t+1,j,kcr,"immobile") /(vm_prod.l(j,kcr)+0.00001);
-
-* to keep track of change in physical areas
-*p38_past_area(j,kcr)=sum(w,vm_area.l(j,kcr,w));
-
 
 
 
