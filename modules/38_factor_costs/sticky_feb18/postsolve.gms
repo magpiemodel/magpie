@@ -7,12 +7,10 @@
 
 * Overall costs including non-annuitized capital costs
 
-i38_annuity_factor(i)= ((1-s38_depreciation_rate)*(pm_interest(i)/((1+pm_interest(i))))
-  + s38_depreciation_rate);
-
-p38_ovcosts(t,i,kcr)   = vm_prod_reg.l(i,kcr) * i38_variable_costs(i,kcr) / (1-0.47)
-                         + v38_investment_annuity.l(i)/i38_annuity_factor(i);
-
+p38_ovcosts(t,i)   =  sum(kall,vm_cost_prod(i,kall))
+                         + sum((cell(i,j),kcr),
+                         v38_investment_immobile(j,kcr))+sum((cell(i,j)),
+                         v38_investment_mobile(j2);
 
 *Capital update from the last investment
 p38_capital_immobile(t+1,j,kcr)$(p38_capital_immobile(t,j,kcr) OR v38_investment_immobile.l(j,kcr)) = p38_capital_immobile(t,j,kcr) + v38_investment_immobile.l(j,kcr);
