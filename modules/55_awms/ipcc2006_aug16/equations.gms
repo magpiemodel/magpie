@@ -29,7 +29,7 @@
          + sum(kap,vm_dem_feed(i2,kli,kap) * fm_attributes(npk,kap))
          + sum(ksd,vm_dem_feed(i2,kli,ksd) * fm_attributes(npk,ksd))
          + sum(kres,vm_dem_feed(i2,kli,kres) * fm_attributes(npk,kres)
-		 *(1-(1-sum(ct,im_development_state(ct,i2))))*0.25)
+		 *(1-(1-sum(ct,im_development_state(ct,i2)))*0.25))
          ;
 
 *' b) grazing animals on pastures where the manure stays on pastures

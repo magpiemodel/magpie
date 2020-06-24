@@ -10,6 +10,7 @@
 ##########################################################
 
 library(lucode2)
+library(gms)
 
 runOutputs <- function(runscripts=NULL, submit=NULL) {
 
@@ -24,27 +25,6 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
       on.exit(close(con))
     }
     return(s);
-  }
-
-
-  choose_module <- function(Rfolder,title="Please choose an outputmodule") {
-    forder <- paste0(Rfolder,"/order.cfg")
-    if(file.exists(forder)) {
-      order <- grep("(#|^$)",readLines(forder),invert=TRUE,value=TRUE)
-      if(length(order)==0) order <- NULL
-    } else {
-      order <- NULL
-    }
-    module <- gsub("\\.R$","",grep("\\.R$",list.files(Rfolder), value=TRUE))
-    #sort modules based on order.cfg
-    module <- intersect(union(order,module),module)
-    cat("\n",title,":\n", sep="")
-    cat(paste(1: length(module), gsub("_"," ",module,fixed=TRUE), sep=": " ),sep="\n")
-    cat("Number: ")
-    identifier <- get_line()
-    identifier <- as.numeric(strsplit(identifier,",")[[1]])
-    if (any(!(identifier %in% 1:length(module)))) stop("This choice (",identifier,") is not possible. Please type in a number between 1 and ",length(module))
-    return(module[identifier])
   }
 
   choose_submit <- function(title="Please choose run submission type") {
@@ -85,11 +65,14 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 
   runsubmit <- function(runscripts, submit) {
     for(rout in runscripts){
-      name   <- paste0("./scripts/start/",rout,".R")
-
+      name   <- paste0("./scripts/start/",rout)
       if(!file.exists(name)) {
-        warning("Script ",name, " could not be found. Skip execution!")
-        next
+        name2 <- paste0(name,".R")
+        if(!file.exists(name2)) {
+          warning("Script ",name2, " could not be found. Skip execution!")
+          next
+        }
+        name <- name2
       }
 
       cat("Executing",name,"\n")
@@ -120,10 +103,12 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 
 
 
-  if(is.null(runscripts)) runscripts <- choose_module("./scripts/start",
-                                                      "Choose start script")
+  if(is.null(runscripts)) runscripts <- gms::selectScript("./scripts/start")
+  if(is.null(runscripts)) {
+    message("No start script selected! Stop here.")
+    return(invisible(NULL))
+  }
   if(is.null(submit))     submit     <- choose_submit("Choose submission type")
-
   runsubmit(runscripts, submit)
 }
 
