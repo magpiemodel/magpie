@@ -11,16 +11,17 @@ i38_annuity_factor(i)= ((1-s38_depreciation_rate)*(pm_interest(i)/((1+pm_interes
   + s38_depreciation_rate);
 
 p38_ovcosts(t,i,kcr)   = vm_prod_reg.l(i,kcr) * i38_variable_costs(i,kcr) / (1-0.47)
-                         + v38_investment_annuity.l(i,kcr)/i38_annuity_factor(i);
+                         + v38_investment_annuity.l(i)/i38_annuity_factor(i);
 
 
 *Capital update from the last investment
-p38_capital(t+1,j,kcr,mobil38)$(v38_capital.l(j,kcr,mobil38) OR v38_investment.l(j,kcr,mobil38)) = p38_capital(t,j,kcr,mobil38) + v38_investment.l(j,kcr,mobil38);
+p38_capital_immobile(t+1,j,kcr)$(p38_capital_immobile.l(t,j,kcr) OR v38_investment_immobile.l(j,kcr)) = p38_capital_immobile(t,j,kcr) + v38_investment_immobile.l(j,kcr);
+p38_capital_mobile(t+1,j)$(p38_capital_mobile.l(t,j) OR v38_investment_mobile.l(j)) = p38_capital_mobile(t,j) + v38_investment_mobile.l(j);
+
 
 * Timestep length matters
-p38_capital(t+1,j,kcr,mobil38)$(p38_capital(t+1,j,kcr,mobil38)) = p38_capital(t+1,j,kcr,mobil38) * (1-s38_depreciation_rate)**(m_year(t+1)-m_year(t));
-p38_capital_intensity(t+1,j,kcr)$(vm_prod.l(j,kcr)) = p38_capital(t+1,j,kcr,"immobile") /(vm_prod.l(j,kcr)+0.00001);
-
+p38_capital_immobile(t+1,j,kcr)$(p38_capital_immobile(t+1,j,kcr)) = p38_capital_immobile(t+1,j,kcr) * (1-s38_depreciation_rate)**(m_year(t+1)-m_year(t));
+p38_capital_mobile(t+1,j)$(p38_capital_mobile(t+1,j)) = p38_capital_mobile(t+1,j) * (1-s38_depreciation_rate)**(m_year(t+1)-m_year(t));
 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################

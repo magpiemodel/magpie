@@ -7,10 +7,12 @@
 
 equations
  q38_cost_prod_crop(i,kcr)      Regional factor input costs for plant production (mio. USD05MER per yr)
+ q38_cost_prod_inv(i)           Regional investment costs in capital (mio USD05MER)
 ;
 
 positive variables
 vm_cost_prod(i,kall)             Factor costs (mio. USD05MER per yr)
+ vm_cost_inv(i)           Capital investment costs (mio USD05MER  per yr)
 ;
 
 parameters

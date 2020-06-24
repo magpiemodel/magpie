@@ -18,8 +18,9 @@ i38_capital_need(i,kcr,"immobile") = f38_fac_req_per_ton(kcr)*s38_capital_cost_s
 i38_capital_need(i,perennials38,"mobile") = f38_fac_req_per_ton(perennials38)* s38_capital_cost_share / pm_interest(i) * (1-s38_immobile_perennials);
 i38_capital_need(i,perennials38,"immobile") = f38_fac_req_per_ton(perennials38)* s38_capital_cost_share / pm_interest(i) * s38_immobile_perennials;
 
-p38_capital_intensity(t,j,kcr) = sum(cell(i,j), i38_capital_need(i,kcr,"immobile"));
-p38_capital(t,j,kcr,mobil38)   = sum(cell(i,j), i38_capital_need(i,kcr,mobil38)*pm_croparea_start(j,kcr)*f38_region_yield(i,kcr)* fm_tau1995(i));
+p38_capital_immobile(t,j,kcr)   = sum(cell(i,j), i38_capital_need(i,kcr,"immobile")*pm_croparea_start(j,kcr)*f38_region_yield(i,kcr)* fm_tau1995(i));
+p38_capital_mobile(t,j)   = sum((cell(i,j),kcr), i38_capital_need(i,kcr,"mobile")*pm_croparea_start(j,kcr)*f38_region_yield(i,kcr)* fm_tau1995(i));
+
 vm_prod.l(j,kcr)=sum(cell(i,j),pm_croparea_start(j,kcr)*f38_region_yield(i,kcr)* fm_tau1995(i));
 
   );
@@ -35,9 +36,11 @@ vm_prod.l(j,kcr)=sum(cell(i,j),pm_croparea_start(j,kcr)*f38_region_yield(i,kcr)*
 * and between exisiting cropland and new cropland within a cell.
 * The latter gives also incentive for expansion in cells with preexisting
 * farmland.
-s38_capitalmax(j,"mobile") = sum((kcr), p38_capital(t,j,kcr,"mobile"));
-v38_capital.up(j,kcr,"mobile")=s38_capitalmax(j,"mobile");
+
+v38_capital_mobile.up(j)=p38_capital_mobile(t,j);
 
 * The next constraint replaces capital intensity of sunk capital.
-v38_capital.up(j,kcr,"immobile")=p38_capital(t,j,kcr,"immobile");
-v38_investment.up(j,kcr,mobil38)=1e6;
+v38_capital_immobile.up(j,kcr)=p38_capital_immobile(t,j,kcr);
+
+v38_investment_immobile.up(j,kcr,mobil38)=1e7;
+v38_investment_mobile.up(j,kcr,mobil38)=1e7;

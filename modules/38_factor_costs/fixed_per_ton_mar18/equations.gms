@@ -11,6 +11,8 @@
  q38_cost_prod_crop(i2,kcr) ..
   vm_cost_prod(i2,kcr) =e= vm_prod_reg(i2,kcr) * f38_fac_req_per_ton(kcr);
 
+  q38_cost_prod_inv(i2).. vm_cost_inv(i2)=e=0;
+
 
 *' The factor requirement costs `vm_cost_prod` are  calculated as product of
 *' production quantity `vm_prod_reg` and crop-specific world average
