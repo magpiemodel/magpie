@@ -42,5 +42,4 @@ v38_capital_mobile.up(j)=p38_capital_mobile(t,j);
 * The next constraint replaces capital intensity of sunk capital.
 v38_capital_immobile.up(j,kcr)=p38_capital_immobile(t,j,kcr);
 
-v38_investment_immobile.up(j,kcr,mobil38)=1e7;
-v38_investment_mobile.up(j,kcr,mobil38)=1e7;
+v38_investment_annuity.up(i)=1e6;
