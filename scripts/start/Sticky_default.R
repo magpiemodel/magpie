@@ -38,7 +38,7 @@ cfg$force_download<-TRUE
 #cfg$gms$sm_fix_SSP2 <- 1990
 
 #recalibrate
-cfg$recalibrate <- "FALSE"
+cfg$recalibrate <- TRUE
 
 #use Feb15 realization for land realization
 cfg$gms$land <- "landmatrix_dec18"
