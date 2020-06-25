@@ -15,7 +15,7 @@ resolutions<-c("200")
 #Factor cost realizations
 realization<-c("sticky_feb18","mixed_feb17","fixed_per_ton_mar18")
 # Trade realization
-title<-c("CleanUp_Sticky_ImMoSplit_beforePR_1e6","Default_mixed_beforePR_bugFixed","Default_per_Ton_beforePR_bugFixed")
+title<-c("CleanUp_Sticky_ImMoSplit_AfterPR","Default_mixed_AfterPR","Default_per_Ton_AfterPR")
 
 for (i in 1:length(resolutions)){
 for(j in 1:length(realization)){
