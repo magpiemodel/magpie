@@ -7,7 +7,7 @@
 
 # --------------------------------------------------------------
 # description: Makes a png file containing solve time for each step
-# type: single
+# comparison script: FALSE
 # ---------------------------------------------------------------
 
 #Version 1.00 - Abhijeet Mishra
