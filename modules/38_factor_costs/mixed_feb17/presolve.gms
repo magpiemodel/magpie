@@ -5,7 +5,4 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-sets
-  mobil38 types of capital
-  / mobile, immobile /
-;
+vm_cost_inv.fx(i)=0;

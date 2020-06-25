@@ -7,17 +7,18 @@
 
 scalars
 
-* based on gtap7 share of capital in factor costs
-* with factor costs excluding land rent and agricultural inputs
+*' @description based on AgTFP Agricultural total factor productivity from th USDA
+*'http://www.ers.usda.gov/data-products/international-agricultural-productivity.aspx
+
+*'@code
+*' share of capital in the factor costs excluding land rent and agricultural inputs
   s38_capital_cost_share capital cost share (share of costs) / 0.46 /
-* depreciation rate assuming roughly 20 years linear depreciation for invesment goods
+*' depreciation rate assuming roughly 20 years linear depreciation for invesment goods
   s38_depreciation_rate depreciation rate (share of costs)  / 0.05 /
-* years a farmer can delay an investment to facilitate switching from one crop to another
-  s38_investment_flexibility possible delay of investments (years) / 5 /
-* Share of immobile capital in perennial and yearly crops.
-  s38_immobile_perennials  immobile capital in perennial crops (share) / 0.7 /
-  s38_immobile  immobile capital in yearly crops (share) / 0.7 /
-  s38_mi_start global management intensity in 1995 /0.47/
+*' Share of immobile capital.
+  s38_immobile  immobile capital in perennial crops (share) / 0.7 /
+*' Initial management intensity 
+s38_mi_start global management intensity in 1995 /0.47/
 ;
 
 parameter f38_fac_req_per_ton(kcr) Factor requirements (US$05 per ton DM)

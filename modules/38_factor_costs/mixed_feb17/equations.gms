@@ -14,9 +14,6 @@
                             *vm_tau(i2)/fm_tau1995(i2)*f38_fac_req(kcr,w));
 
 
-q38_cost_prod_inv(i2).. vm_cost_inv(i2)=e=0;
-
-
 *' The equation above shows that factor requirement costs `vm_cost_prod` mainly
 *' depend on area harvested `vm_area` and average regional land-use intensity
 *' levels `vm_tau`. Multiplying the land-use intensity increase increases

@@ -19,4 +19,4 @@ q41_area_irrig(j2) ..
 q41_cost_AEI(i2)..
 	vm_cost_AEI(i2) =e=
     sum(cell(i2,j2),(v41_AEI(j2)-pc41_AEI_start(j2)))
-	* pc41_unitcost_AEI(i2)*pm_interest(i2)/(1+pm_interest(i2));
+	* pc41_unitcost_AEI(i2)*sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)));

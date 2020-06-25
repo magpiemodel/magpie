@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 * Overall land conversion costs at the current time step
-pc39_ovcost_land(t2,j,land)=vm_cost_landcon.l(j,land)* sum(cell(i,j),(1+pm_interest(i))/pm_interest(i));
+pc39_ovcost_land(t2,j,land)=vm_cost_landcon.l(j,land)* sum(cell(i,j),(1+pm_interest(t,i))/pm_interest(t,i));
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_cost_landcon(t,j,land,"marginal")   = vm_cost_landcon.m(j,land);

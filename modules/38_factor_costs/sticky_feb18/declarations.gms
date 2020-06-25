@@ -8,10 +8,8 @@
 equations
  q38_cost_prod_crop(i,kcr)        regional factor input costs for plant production (mio USD05MER)
  q38_cost_prod_inv(i)             regional investment costs in capital (mio USD05MER)
-
  q38_investment_immobile(j,kcr)    cellular immobile investments into farm capital   (mio USD05MER)
  q38_investment_mobile(j)          cellular mobile investments into farm capital   (mio USD05MER)
- q38_investment_annuity(i)         annualized regional investment costs for farm capital  (mio USD05MER)
 ;
 
 positive variables
@@ -21,9 +19,6 @@ positive variables
  v38_investment_mobile(j)              investment costs in mobile farm capital (mio USD05MER per yr)
  v38_capital_immobile(j,kcr)           immobile capital stock (USD05MER)
  v38_capital_mobile(j)                 mobile capital stock (USD05MER)
- v38_investment_annuity(i)             annualized investment in immobile in capital (mio USD05MER per yr)
-*v38_mi(i)                           management intensity (share of max yield)
-
 ;
 
 parameters
@@ -32,20 +27,20 @@ parameters
  p38_capital_immobile(t,j,kcr)       preexisting immobile capital stocks before investment (mio USD05MER)
  p38_capital_mobile(t,j)             preexisting mobile capital stocks before investment (mio USD05MER)
  p38_ovcosts(t,i)                   Overall factor costs including non-annuitized capital investment (mio USD05MER)
-
 ;
 
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_prod(t,i,kall,type)            factor costs (mio USD05MER  per yr)
- ov38_investment(t,j,kcr,mobil38,type)  investment costs in farm capital (mio USD05MER per yr)
- ov38_investment_annuity(t,i,kcr,type)  annualized investment costs in farm capital (mio USD05MER per yr)
- ov38_capital(t,j,kcr,mobil38,type)     capital stock (USD05MER)
+ ov_cost_prod(t,i,kall,type)            factor costs  (mio USD05MER  per yr)
+ ov_cost_inv(t,i,type)                  investment capital costs (mio USD05MER  per yr)
+ ov38_investment_immobile(t,j,kcr,type) investment costs in immobile farm capital (mio USD05MER per yr)
+ ov38_investment_mobile(t,j,type)       investment costs in mobile farm capital (mio USD05MER per yr)
+ ov38_capital_immobile(t,j,kcr,type)    immobile capital stock (USD05MER)
+ ov38_capital_mobile(t,j,type)          mobile capital stock (USD05MER)
  oq38_cost_prod_crop(t,i,kcr,type)      regional factor input costs for plant production (mio USD05MER)
- oq38_investment(t,j,kcr,mobil38,type)  cellular mobile investments into farm capital   (mio USD05MER)
- oq38_investment_immobile(t,j,kcr,type) cellular immobile investments into farm capital  (mio USD05MER)
- oq38_investment_annuity(t,i,kcr,type)  annualized regional investment costs for farm capital  (mio USD05MER)
- oq38_capital_relocation(t,j,type)      reallocation of mobile capital (mio USD05MER)
+ oq38_cost_prod_inv(t,i,type)           regional investment costs in capital (mio USD05MER)
+ oq38_investment_immobile(t,j,kcr,type) cellular immobile investments into farm capital   (mio USD05MER)
+ oq38_investment_mobile(t,j,type)       cellular mobile investments into farm capital   (mio USD05MER)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

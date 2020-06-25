@@ -51,7 +51,7 @@ parameters
  ov_hvarea_secdforest(t,j,ac_sub,type)                   Harvested area from secondary forest (mio. ha)
  ov73_hvarea_other(t,j,ac_sub,type)                      Harvested area from other land (mio. ha)
  ov_hvarea_primforest(t,j,type)                          Harvested area from primary forest (mio. ha)
- ov73_hvarea_forestry(t,j,ac_sub,type)                   Harvested area from timber plantations(mio. ha)
+ ov73_hvarea_forestry(t,j,ac_sub,type)                   Harvested area from timber plantations (mio. ha)
  oq73_cost_timber(t,i,type)                              Actual cost of harvesting timber from forests (mio. USD per yr)
  oq73_cost_hvarea(t,i,type)                              Cost of harvesting timber from forests (mio. USD per yr)
  oq73_prod_timber(t,j,kforestry,type)                    Production of woody biomass from commercial plantations and natural vegetation (mio. tDM per yr)

@@ -15,4 +15,4 @@
 q39_cost_landcon(j2,land) .. vm_cost_landcon(j2,land) =e=
 	(vm_landexpansion(j2,land)*i39_cost_establish(land)
  	+ vm_carbon_stock_reduction(j2,land,"vegc")*i39_cost_clearing(land))
- 	* sum(cell(i2,j2),pm_interest(i2)/(1+pm_interest(i2)));
+ 	* sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
