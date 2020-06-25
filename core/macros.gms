@@ -39,11 +39,21 @@ $macro m_year(t) (sum(time_annual,ord(time_annual)$sameas(t,time_annual)) + 1964
 * sets the difference for the first time step to one.
 $macro m_yeardiff(t) (1$(ord(t)=1) + (m_year(t)-m_year(t-1))$(ord(t)>1))
 
+* calculates the difference in years to the previous time step and
+* sets the difference for the first time step to one.
+$macro m_yeardiff_forestry(t) (5$(ord(t)=1) + (m_year(t)-m_year(t-1))$(ord(t)>1))
+
 * same as m_yeardiff but only for the current time step and written in a way
 * that it can be used within equations (no t dependency)
 * ATTENTION: t2 needs to exist as alias of t to get this macro working!
 * ATTENTION: ct needs to exist as set containing only the current time step
 $macro m_timestep_length sum((ct,t2),(1$(ord(t2)=1) + (m_year(t2)-m_year(t2-1))$(ord(t2)>1))$sameas(ct,t2))
+
+* same as m_yeardiff but only for the current time step and written in a way
+* that it can be used within equations (no t dependency)
+* ATTENTION: t2 needs to exist as alias of t to get this macro working!
+* ATTENTION: ct needs to exist as set containing only the current time step
+$macro m_timestep_length_forestry sum((ct,t2),(5$(ord(t2)=1) + (m_year(t2)-m_year(t2-1))$(ord(t2)>1))$sameas(ct,t2))
 
 * update total costs by distribute annuity costs over all years within the given time horizon
 $macro m_annuity_costs_update(past_costs, cost_annuity, invest_horizon) past_costs = past_costs \

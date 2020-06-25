@@ -20,7 +20,7 @@
 q13_cost_tc(i2) ..
   v13_cost_tc(i2) =e= sum(ct, pc13_land(i2) * i13_tc_factor(ct,i2)
                      * vm_tau(i2)**i13_tc_exponent(ct,i2)
-                     * (1+pm_interest(i2))**15);
+                     * (1+pm_interest(ct,i2))**15);
 
 *' The shifting is performed because investments into technological change
 *' require on average 15 years of research before a yield increase is achieved,

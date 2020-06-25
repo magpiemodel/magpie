@@ -5,10 +5,12 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
+# -------------------------------------------------
+# description: Checking code for consistency issues
+# position: 2
+# -------------------------------------------------
 
-######################################
-#### Script to check MAgPIE code  ####
-######################################
+
 
 library(gms)
 gms::codeCheck()

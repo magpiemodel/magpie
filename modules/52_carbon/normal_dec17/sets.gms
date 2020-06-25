@@ -9,7 +9,5 @@ sets
 
 ag_pools(c_pools) Above ground carbon pools
          /vegc,litc/
-
-type52 forest type
- / plantations, natveg /
+         
 ;

@@ -7,7 +7,7 @@
 
 *' @description In the static realization, urban land remains static over time
 *' with the spatial distribution of 1995 from the LUH2 data
-*' set [@hurtt_harmonization_inprep]. Carbon stocks are fixed to zero because
+*' set [@hurtt2018luh2]. Carbon stocks are fixed to zero because
 *' information on urban land carbon density is missing.
 
 *' @limitations Urban land is static over time and
