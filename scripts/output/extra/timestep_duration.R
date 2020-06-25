@@ -7,9 +7,12 @@
 
 # --------------------------------------------------------------
 # description: Makes a png file containing solve time for each step
-# comparison script: FALSE
-# position: 3
+# type: single
 # ---------------------------------------------------------------
+
+#Version 1.00 - Abhijeet Mishra
+# 1.00: first working version [AM]
+# 1.xx: Description [Initials]
 
 library(magpie4)
 library(magpiesets)
