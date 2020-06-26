@@ -13,9 +13,9 @@ clima<-"cc"
 #List of resolutions forruns
 resolutions<-c("200")
 #Factor cost realizations
-realization<-c("sticky_feb18","mixed_feb17","fixed_per_ton_mar18")
+realization<-c("sticky_feb18")
 # Trade realization
-title<-c("CleanUp_Sticky_ImMoSplit_AfterPR","Default_mixed_AfterPR","Default_per_Ton_AfterPR")
+title<-c("AfterPR_1e6_Ann")
 
 for (i in 1:length(resolutions)){
 for(j in 1:length(realization)){
@@ -47,7 +47,7 @@ cfg$gms$land <- "landmatrix_dec18"
 #cfg$gms$trade <-trade[k]
 
 #Output shouldnt include validation
-cfg$output <- c("interpolation_cropsplit","rds_report")
+cfg$output <- c("rds_report")
 
 
 #Factor costs realization
