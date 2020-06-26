@@ -31,9 +31,9 @@ q38_cost_prod_inv(i2).. vm_cost_inv(i2)=e=(sum((cell(i2,j2),kcr),v38_investment_
 q38_investment_immobile(j2,kcr).. v38_investment_immobile(j2,kcr)
                                   =g=
                                  sum(cell(i2,j2), vm_prod(j2,kcr) * i38_capital_need(i2,kcr,"immobile"))
-                                 - v38_capital_immobile(j2,kcr);
+                                 - sum(ct,p38_capital_immobile(ct,j2,kcr));
 
 q38_investment_mobile(j2).. v38_investment_mobile(j2)
                              =g=
                              sum((cell(i2,j2),kcr), vm_prod(j2,kcr) * i38_capital_need(i2,kcr,"mobile"))
-                              - v38_capital_mobile(j2);
+                              - sum(ct,p38_capital_mobile(ct,j2));
