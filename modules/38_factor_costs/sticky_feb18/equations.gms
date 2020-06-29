@@ -20,7 +20,7 @@ q38_cost_prod_inv(i2).. vm_cost_inv(i2)=e=(sum((cell(i2,j2),kcr),v38_investment_
                                     +sum((cell(i2,j2)),v38_investment_mobile(j2)))
                                     *((1-s38_depreciation_rate)*sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
                                         + s38_depreciation_rate)
-                                        ;                                ;
+                                        ;                             
 
 
 *' Each cropping activity requires a certain capital stock that depends on the
