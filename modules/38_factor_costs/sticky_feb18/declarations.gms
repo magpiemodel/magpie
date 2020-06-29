@@ -17,6 +17,8 @@ positive variables
  vm_cost_inv(i)                        investment capital costs (mio USD05MER  per yr)
  v38_investment_immobile(j,kcr)        investment costs in immobile farm capital (mio USD05MER per yr)
  v38_investment_mobile(j)              investment costs in mobile farm capital (mio USD05MER per yr)
+*v38_capital_immobile(j,kcr)           immobile capital stock (USD05MER)
+*v38_capital_mobile(j)                 mobile capital stock (USD05MER)
 ;
 
 parameters
