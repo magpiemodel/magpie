@@ -12,7 +12,7 @@
 *' Variable costs:
 
 q38_cost_prod_crop(i2,kcr).. vm_cost_prod(i2,kcr)
-                              =e= vm_prod_reg(i2,kcr) * i38_variable_costs(i2,kcr) / (1-0.47)
+                              =e= vm_prod_reg(i2,kcr) * i38_variable_costs(i2,kcr) / (1-s38_mi_start)
                                 ;
 
 *' Investment costs
@@ -20,7 +20,7 @@ q38_cost_prod_inv(i2).. vm_cost_inv(i2)=e=(sum((cell(i2,j2),kcr),v38_investment_
                                     +sum((cell(i2,j2)),v38_investment_mobile(j2)))
                                     *((1-s38_depreciation_rate)*sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
                                         + s38_depreciation_rate)
-                                        ;                             
+                                        ;
 
 
 *' Each cropping activity requires a certain capital stock that depends on the
@@ -32,10 +32,9 @@ q38_investment_immobile(j2,kcr).. v38_investment_immobile(j2,kcr)
                                   =g=
                                  sum(cell(i2,j2), vm_prod(j2,kcr) * i38_capital_need(i2,kcr,"immobile"))
                                  - sum(ct,p38_capital_immobile(ct,j2,kcr));
-*                                 - v38_capital_immobile(j2,kcr);
+
 
 q38_investment_mobile(j2).. v38_investment_mobile(j2)
                              =g=
                              sum((cell(i2,j2),kcr), vm_prod(j2,kcr) * i38_capital_need(i2,kcr,"mobile"))
                              -sum(ct,p38_capital_mobile(ct,j2));
-*                              - v38_capital_mobile(j2);

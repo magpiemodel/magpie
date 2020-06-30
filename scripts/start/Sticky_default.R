@@ -15,7 +15,7 @@ resolutions<-c("200")
 #Factor cost realizations
 realization<-c("sticky_feb18")
 # Trade realization
-title<-c("AfterPR_vmParameters_1e6")
+title<-c("AfterPR_vmParameters_GDP_Fraction")
 
 for (i in 1:length(resolutions)){
 for(j in 1:length(realization)){
