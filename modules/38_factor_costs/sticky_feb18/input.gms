@@ -20,7 +20,7 @@ scalars
 *' Initial management intensity
 s38_mi_start global management intensity in 1995 /0.47/
 *' Maximum fraction of the total gdp invested in capital in agriculture
-s38_fraction_gdp maximum percentage /0.10/
+s38_fraction_gdp maximum percentage /0.05/
 ;
 
 parameter f38_fac_req_per_ton(kcr) Factor requirements (US$05 per ton DM)
