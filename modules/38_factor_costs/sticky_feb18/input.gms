@@ -10,7 +10,6 @@ scalars
 *' @description based on AgTFP Agricultural total factor productivity from th USDA
 *'http://www.ers.usda.gov/data-products/international-agricultural-productivity.aspx
 
-*'@code
 *' share of capital in the factor costs excluding land rent and agricultural inputs
   s38_capital_cost_share capital cost share (share of costs) / 0.46 /
 *' depreciation rate assuming roughly 20 years linear depreciation for invesment goods

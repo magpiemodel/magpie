@@ -10,10 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### added
  - **modules** added the new sticky realization to the factor costs module.
  - **38_factor_costs** This realization favors expansion in cells with preexisting farmland and capital.
- - **scripts** Added two start scripts for Sticky runs.
 
 ### changed
-- **modules** Changes to the costs calculation in 13_tc, 39_landconversion, and 41_area_equipped_for_irrigation. For the current time step, the costs include the annuity of the present investment. Also a paramater that accounts for the overall costs was added to keep track of the non-annuitized costs.
+- **modules** Changes to the costs calculation in 13_tc, 39_landconversion, 41_area_equipped_for_irrigation and 58_peatland. For the current time step, the optimization costs include the annuity of the present investment. On the postsolve.gms , a parameter was added to account for the overall costs and keep track of the non-annuitized costs. These are the values observed in the shiny app and get from magpie4's reportCosts() function.
 
 
 ## [Unreleased]

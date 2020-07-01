@@ -20,11 +20,11 @@ positive variables
 ;
 
 parameters
- i38_variable_costs(i,kcr)          variable input costs (mio USD05MER per input unit)
- i38_capital_need(i,kcr,mobil38)    capital requirements for farming with tau equal 1 (mio USD05MER)
+ i38_variable_costs(i,kcr)           variable input costs (mio USD05MER per input unit)
+ i38_capital_need(i,kcr,mobil38)     capital requirements for farming with tau equal 1 (mio USD05MER)
  p38_capital_immobile(t,j,kcr)       preexisting immobile capital stocks before investment (mio USD05MER)
  p38_capital_mobile(t,j)             preexisting mobile capital stocks before investment (mio USD05MER)
- p38_ovcosts(t,i)                   Overall factor costs including non-annuitized capital investment (mio USD05MER)
+ p38_ovcosts(t,i)                    Overall factor costs including non-annuitized capital investment (mio USD05MER)
 ;
 
 

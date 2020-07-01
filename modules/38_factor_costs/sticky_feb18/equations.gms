@@ -5,8 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In the current realization, factor costs are separated in variable costs and investment
-*' costs on capital stocks which can be immobile and mobile. Mobility is defined between crops.
+*' @description In the current realization, the factor costs are separated in variable, and investment
+*' costs in capital stocks which can be immobile and mobile. Mobility is defined between crops.
 
 *' @code
 *' Variable costs:
@@ -15,7 +15,8 @@ q38_cost_prod_crop(i2,kcr).. vm_cost_prod(i2,kcr)
                               =e= vm_prod_reg(i2,kcr) * i38_variable_costs(i2,kcr) / (1-s38_mi_start)
                                 ;
 
-*' Investment costs
+*' Investment costs. These are the summation of investment in mobile and immobile capital. The costs are annuitized,
+*' and corrected to make sure that the annual depreciation of the current time-step is accunted for.
 q38_cost_prod_inv(i2).. vm_cost_inv(i2)=e=(sum((cell(i2,j2),kcr),v38_investment_immobile(j2,kcr))
                                     +sum((cell(i2,j2)),v38_investment_mobile(j2)))
                                     *((1-s38_depreciation_rate)*sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
