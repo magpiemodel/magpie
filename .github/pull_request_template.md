@@ -12,14 +12,14 @@ Please fill following information wherever applicable.
 
 ## Performance loss/gain from current default behavior
 
-- Add an image using plot from appResults and annotate accordingly
+- Add an image using plot from appResults and annotate accordingly.
 
-- %performance loss/gain = 100*Runtime from PR/Runtime from curren default
+- %performance loss/gain = 100*Runtime from PR/Runtime from current default from develop branch.
 
 ## Type of change
 
 - [ ] Bug fix (Change which fixes an issue).
-- [ ] New feature (non-breaking change which adds functionality).
+- [ ] New feature (Change which adds functionality).
 - [ ] Minor change (Change which does not modify core model code i.e., in /modules).
 - [ ] Major change (fix or feature that would change current model behavior).
 
