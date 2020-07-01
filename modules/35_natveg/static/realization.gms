@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description In the static realization natural vegetation is constant over time 
-*' with the spatial distribution of 1995 from the LUH2 data set [@hurtt_harmonization_inprep].
+*' with the spatial distribution of 1995 from the LUH2 data set [@hurtt2018luh2].
 *' Due to static land patterns also carbon stocks are static over time.
 
 *' @limitations Land and carbon stocks of natural vegetation are static over time.

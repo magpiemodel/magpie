@@ -5,6 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+scalars
+ s57_step_length										Step length in MACC data (yr)
+;
+
 parameters
  im_maccs_mitigation(t,i,emis_source,pollutants)        Technical mitigation of GHG emissions (percent)
  i57_mac_step_n2o(t,i)                                  Helper to map N2O prices and maccs_steps (1)

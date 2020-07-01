@@ -10,12 +10,12 @@
 *' @description The forestry module describes the constraints under which managed
 *' forest (age-class forest) exists. At the same time it calculates the corresponding
 *' carbon stocks. The module provides carbon dioxide removal (CDR) from afforestation
-*' to the GHG policy module ([56_ghg_policy]) as well as afforestation related costs 
-*' to the costs module ([11_costs]). 
+*' to the GHG policy module ([56_ghg_policy]) as well as afforestation related costs
+*' to the costs module ([11_costs]).
 *'
-*' @authors Florian Humpenöder
+*' @authors Florian Humpenöder, Abhijeet Mishra
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%forestry%" == "dynamic_oct19" $include "./modules/32_forestry/dynamic_oct19/realization.gms"
+$Ifi "%forestry%" == "dynamic_may20" $include "./modules/32_forestry/dynamic_may20/realization.gms"
 $Ifi "%forestry%" == "static_sep16" $include "./modules/32_forestry/static_sep16/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
