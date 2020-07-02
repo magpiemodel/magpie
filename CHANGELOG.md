@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### changed
 - **modules** Changes to the costs calculation in 13_tc, 39_landconversion, 41_area_equipped_for_irrigation and 58_peatland. For the current time step, the optimization costs include the annuity of the present investment. On the postsolve.gms , a parameter was added to account for the overall costs and keep track of the non-annuitized costs. These are the values observed in the shiny app and get from magpie4's reportCosts() function.
 
-**scripts** removed GP_final start script due to obsolescence
+- **scripts** removed GP_final start script due to obsolescence
 
 
 ### added
