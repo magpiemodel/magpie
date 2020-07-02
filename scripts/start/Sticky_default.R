@@ -13,9 +13,9 @@ clima<-"cc"
 #List of resolutions forruns
 resolutions<-c("200")
 #Factor cost realizations
-realization<-c("sticky_feb18","mixed_feb17")
+realization<-c("mixed_feb17")
 # Trade realization
-title<-c("Last_Sticky_noscaling")
+title<-c("Last_Develop")
 
 for (i in 1:length(resolutions)){
 for(j in 1:length(realization)){
