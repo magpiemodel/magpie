@@ -48,7 +48,7 @@ for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test shou
         cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE" ##update to most recent coupled runs asap
       }
 
-      cfg$title <- paste0(pr_flag,"_",user,"_",ssp,"-",co2_price_path,"_",macc) #Create easily distinguishable run title
+      cfg$title <- paste0(pr_flag,"_",user,"_",ssp,"-",co2_price_path,"_") #Create easily distinguishable run title
 
       cfg$output <- c("rds_report") # Only run rds_report after model run
 
