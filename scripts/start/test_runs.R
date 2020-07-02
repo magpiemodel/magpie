@@ -25,7 +25,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # choose a meaningful Pull Request (PR) flag
-pr_flag <- "Sticky"
+pr_flag <- "Develop"
 
 # Grab user name
 user <- Sys.info()[["user"]]
@@ -35,10 +35,7 @@ cfg$results_folder <- "output/:title:"
 ## Create a set of runs based on default.cfg
 
 for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test should be for SSP2
-  for(macc in c("PBL_2007","PBL_2019")) {
     for (co2_price_path in c("BAU","POL")) {
-
-     cfg$gms$factor_costs<-"sticky_feb18"
 
       if (co2_price_path == "BAU") {
         cfg <- setScenario(cfg,c(ssp,"NPI"))
@@ -59,4 +56,3 @@ for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test shou
       #cat(cfg$title)
     }
   }
-}
