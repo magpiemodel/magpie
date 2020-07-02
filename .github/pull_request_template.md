@@ -6,10 +6,6 @@ Please fill following information wherever applicable.
 
 - Purpose
 
-## Special comments/warnings
-
-- Note
-
 ## Performance loss/gain from current default behavior
 
 - Add an image using plot from appResults and annotate accordingly.
@@ -28,12 +24,22 @@ Please fill following information wherever applicable.
 - [ ] Runs using starting script which tests current defaults (test_runs.R).
 - [ ] Runs using starting script which successfully runs the same scenarios as in test_runs.R but with the changes from PR.
 
-**Default configuration additions/changes**:
-* Realizations:
-* Scalars/Constants:
+# Default configuration additions/changes:
+
+- [ ] Realizations:
+- [ ] Scalars/Constants:
+- [ ] Other changes:
 
 # Checklist:
 
 - [ ] Self-review of my own code.
+- [ ] Added changes to CHANGELOG.md
+- [ ] No hard coded numbers and cluster/country/region names.
+- [ ] The code doesn't contain declared but unused parameters or variables.
 - [ ] In-code comments added including documentation comments.
-- [ ] Additional requirements from https://redmine.pik-potsdam.de/projects/magpie-intern/wiki/Guidelines_for_MAgPIE_pull_requests are fulfilled.
+- [ ] Compiled and checked resulting documentation with goxygen for the new/updated parts.
+- [ ] Changes to magpie4 library for post processing of model output (making sure that it is backward compatible).
+
+## Special comments/warnings
+
+- Notes
