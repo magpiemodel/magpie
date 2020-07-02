@@ -7,7 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-
 ### added
  - **modules** added the new "sticky" realization to the factor costs module.
  - **38_factor_costs** This realization favors expansion in cells with preexisting farmland and capital.
@@ -17,8 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **scripts** removed GP_final start script due to obsolescence
 
-
-## [Unreleased]
 
 ### added
  - **modules** added endogenous implementation of local biophysical (bph) impacts of afforestation to existing realizations in modules 32_forestry (dynamic_oct19) and 56_ghg_policy (price_jan20). default = off
