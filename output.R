@@ -9,7 +9,8 @@
 #### MAgPIE output generation ####
 ##########################################################
 
-library(lucode)
+library(lucode2)
+library(gms)
 
 runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
 
@@ -75,33 +76,6 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
     }
   }
 
-  choose_module <- function(Rfolder,title="Please choose an outputmodule") {
-    module <- gsub("\\.R$","",grep("\\.R$",list.files(Rfolder), value=TRUE))
-    cat("\n",title,":\n",sep="")
-    cat(paste(1: length(module), module, sep=": " ),sep="\n")
-    cat("Number: ")
-    identifier <- get_line()
-    identifier <- as.numeric(strsplit(identifier,",")[[1]])
-    if (any(!(identifier %in% 1:length(module)))) stop("This choice (",identifier,") is not possible. Please type in a number between 1 and ",length(module))
-    return(module[identifier])
-  }
-
-  choose_mode <- function(title="Please choose the output mode") {
-    modes <- c("Output for single run ","Comparison across runs")
-    cat("\n",title,":\n",sep="")
-    cat(paste(1:length(modes), modes, sep=": " ),sep="\n")
-    cat("Number: ")
-    identifier <- get_line()
-    identifier <- as.numeric(strsplit(identifier,",")[[1]])
-    if (identifier==1) {
-      return(FALSE)
-    } else if (identifier==2) {
-      return(TRUE)
-    } else {
-      stop("This mode is invalid. Please choose a valid mode")
-    }
-  }
-
   choose_submit <- function(title="Please choose run submission type") {
     slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
     modes <- c("SLURM (default)", "SLURM priority","Direct execution", "Background execution", "Debug mode")
@@ -136,68 +110,70 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
     return(comp)
   }
 
-  runsubmit <- function(output, outputdirs, comp, script_path) {
+  runsubmit <- function(output, alloutputdirs, submit, script_path) {
+    #Set value source_include so that loaded scripts know, that they are
+    #included as source (instead of a load from command line)
+    source_include <- TRUE
     # run output scripts over all choosen folders
     for(rout in output){
-      name   <- paste0(rout,".R")
+      name <- ifelse(file.exists(paste0(script_path,rout)), rout, paste0(rout,".R"))
       script <- paste0(script_path,name)
       if(!file.exists(script)) {
         warning("Script ",name, " could not be found. Skip execution!")
         next
       }
-      if(!comp) outputdir <- outputdirs
-      cat(" -> ",name)
-      r_command <- paste0("Rscript output.R outputdirs=",paste(outputdirs,collapse=",")," comp=",comp,"  output=",rout," submit=direct")
-      sbatch_command <- paste0("sbatch --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --time=200 --mem-per-cpu=8000 --wrap=\"",r_command,"\"")
-      if(submit=="direct") {
-        tmp.env <- new.env()
-        tmp.error <- try(sys.source(script,envir=tmp.env))
-        if(!is.null(tmp.error)) warning("Script ",name," was stopped by an error and not executed properly!")
-        rm(tmp.env)
-      } else if(submit=="background") {
-        system(paste0(r_command," &> ",format(Sys.time(), "blog_out-%Y-%H-%M-%S-%OS3.log")," &"))
-      } else if(submit=="slurm default") {
-        system(paste(sbatch_command, "--qos=standby"))
-      } else if(submit=="slurm priority") {
-        system(paste(sbatch_command, "--qos=priority"))
-      } else if(submit=="debug") {
-        tmp.env <- new.env()
-        sys.source(script,envir=tmp.env)
-        rm(tmp.env)
+      header <- read_yaml_header(script)
+      comp <- (!is.null(header[["comparison script"]]) && isTRUE(header[["comparison script"]]))
+      if(comp) {
+        loop <- list(alloutputdirs)
+        outputdir <- NULL
       } else {
-        stop("Unknown submission type")
+        loop <- alloutputdirs
+        outputdir <- outputdirs
+      }
+      for(outpudirs in loop) {
+        message(" -> ",name)
+        r_command <- paste0("Rscript output.R outputdirs=",paste(outputdirs,collapse=","),"  output=",rout," submit=direct")
+        sbatch_command <- paste0("sbatch --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --time=200 --mem-per-cpu=8000 --wrap=\"",r_command,"\"")
+        if(submit=="direct") {
+          tmp.env <- new.env()
+          tmp.error <- try(sys.source(script,envir=tmp.env))
+          if(!is.null(tmp.error)) warning("Script ",name," was stopped by an error and not executed properly!")
+          rm(tmp.env)
+        } else if(submit=="background") {
+          system(paste0(r_command," &> ",format(Sys.time(), "blog_out-%Y-%H-%M-%S-%OS3.log")," &"))
+        } else if(submit=="slurm default") {
+          system(paste(sbatch_command, "--qos=standby"))
+        } else if(submit=="slurm priority") {
+          system(paste(sbatch_command, "--qos=priority"))
+        } else if(submit=="debug") {
+          tmp.env <- new.env()
+          sys.source(script,envir=tmp.env)
+          rm(tmp.env)
+        } else {
+          stop("Unknown submission type")
+        }
       }
     }
   }
 
-
-  if(is.null(comp))       comp       <- choose_mode("Choose output type")
   if(is.null(outputdirs)) outputdirs <- choose_folder("Choose runs")
-  if(is.null(output))     output     <- choose_module(ifelse(comp,"./scripts/output/comparison","./scripts/output/single"),
-                                                      "Choose output scripts")
+  if(is.null(output))     output     <- gms::selectScript("./scripts/output")
   if(is.null(submit))     submit     <- choose_submit("Choose submission type")
-
-  #Set value source_include so that loaded scripts know, that they are
-  #included as source (instead of a load from command line)
-  source_include <- TRUE
-
-
-  if (comp) {
-    cat("Output comparsion mode\n")
-    runsubmit(output, outputdirs, TRUE, "scripts/output/comparison/")
-  } else {
-    cat("Run postprocessing mode\n")
-    for (outputdir in outputdirs) {
-      cat(paste("\nSubmit",outputdir))
-      runsubmit(output, outputdir, FALSE, "scripts/output/single/")
-    }
+  if(is.null(output)) {
+    message("No output script selected! Stop here.")
+    return(invisible(NULL))
   }
-  cat("\n\n")
+  if(is.null(outputdirs)) {
+    message("No output folder selected! Stop here.")
+    return(invisible(NULL))
+  }
+  runsubmit(output, outputdirs, submit, "scripts/output/")
 }
 
 if(!exists("source_include")) {
-  comp <- output <- outputdirs <- submit <- NULL
-  readArgs("comp","output","outputdirs","submit", .silent=TRUE)
+  output <- outputdirs <- submit <- NULL
+  lucode2::readArgs("output","outputdirs","submit", .silent=TRUE)
 }
 
-runOutputs(comp=comp, output=output, outputdirs = outputdirs, submit=submit)
+runOutputs(output=output, outputdirs = outputdirs, submit=submit)
