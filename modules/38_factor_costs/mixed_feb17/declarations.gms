@@ -14,10 +14,6 @@ vm_cost_prod(i,kall)             Factor costs (mio. USD05MER per yr)
  vm_cost_inv(i)           Capital investment costs (mio USD05MER  per yr)
 ;
 
-parameters
-p38_ovcosts(t,i,kcr)             Overall factor costs (mio USD05MER)
-;
-
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_cost_prod(t,i,kall,type)       Factor costs (mio. USD05MER per yr)

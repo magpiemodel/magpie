@@ -8,16 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### added
- - **modules** added the new "sticky" realization to the factor costs module.
- - **38_factor_costs** This realization favors expansion in cells with preexisting farmland and capital.
 
-### changed
-- **modules** Changes to the costs calculation in 13_tc, 39_landconversion, 41_area_equipped_for_irrigation and 58_peatland. For the current time step, the optimization costs include the annuity of the present investment. On the postsolve.gms , a parameter was added to account for the overall costs and keep track of the non-annuitized costs. These are the values observed in the shiny app and get from magpie4's reportCosts() function.
+- **modules** added the new "sticky" realization to the factor costs module.
+- **38_factor_costs** The realization "sticky_feb18" favors expansion in cells with preexisting farmland and capital based on capital investment decisions.
 
-- **scripts** removed GP_final start script due to obsolescence
-
-
-### added
  - **modules** added endogenous implementation of local biophysical (bph) impacts of afforestation to existing realizations in modules 32_forestry (dynamic_oct19) and 56_ghg_policy (price_jan20). default = off
  - **73_timber** Added timber module which brings the ability of producing woody biomass for timber plantations and natural vegetation. Default = off.
  - **32_forestry** New realization for timber production from timber plantations. This builds up on previous forestry realization for afforestation.
@@ -28,6 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### changed
  - **scripts** updated selection routine for start and output scripts
  - **scripts** replaced lucode dependency with newer packages lucode2 and gms
+ - **modules** Changes to the costs calculation in 13_tc, 39_landconversion, 41_area_equipped_for_irrigation and 58_peatland. For the current time step, the optimization costs include the annuity of the present investment. The values of costs in the shiny app and get from magpie4's reportCosts() function are the overall costs calculated in the postprocessing.
+
+### Removed
+ - **scripts** removed GP_final start script due to obsolescence
 
 ### fixed
 

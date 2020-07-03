@@ -5,9 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-p58_ovcosts_peatland(t,j) = sum(land58, v58_peatland_man(j,"rewet",land58) * s58_rewet_cost_recur) +
-                  v58_peatland_cost_annuity(j)*sum(cell(i,j),(1+pm_interest(t,i))/pm_interest(t,i));
-
 pc58_peatland_man(j,man58,land58) = v58_peatland_man.l(j,man58,land58);
 pc58_peatland_intact(j) = v58_peatland_intact.l(j);
 

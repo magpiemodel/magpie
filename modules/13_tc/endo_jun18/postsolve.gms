@@ -6,8 +6,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 * Overall TC cost for the current timestep
- p13_oall_cost_tc(t,i) = vm_tech_cost.l(i)*(1+pm_interest(t,i))/pm_interest(t,i);
-
 
 if((ord(t)>1),
  pc13_tcguess(i) = (vm_tau.l(i)/pc13_tau(i))**(1/m_yeardiff(t)) - 1;

@@ -21,7 +21,6 @@ scalar
 parameters
  i39_cost_establish(land)			         Global land establishment costs (USD05MER per hectare)
  i39_cost_clearing(land)               Global land clearing costs (USD05MER per ton C)
- pc39_ovcost_land(t,j,land)            Overall land conversion costs (mio. USD05MER per yr)
 ;
 
 

@@ -19,7 +19,6 @@ parameters
  pc58_peatland_man(j,man58,land58)					Managed peatland (mio. ha)
  pc58_peatland_intact(j)							Intact peatland (mio. ha)
  p58_mapping_cell_climate(j,clcl58)				Mapping between cells and climate regions (binary)
- p58_ovcosts_peatland(t,j)                       Overall costs of managed peatland (mio. USD05MER per yr)
 ;
 
 equations

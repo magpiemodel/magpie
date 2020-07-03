@@ -5,9 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* Overall land conversion costs at the current time step
-pc39_ovcost_land(t2,j,land)=vm_cost_landcon.l(j,land)* sum(cell(i,j),(1+pm_interest(t,i))/pm_interest(t,i));
-
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_cost_landcon(t,j,land,"marginal")   = vm_cost_landcon.m(j,land);
  oq39_cost_landcon(t,j,land,"marginal") = q39_cost_landcon.m(j,land);
