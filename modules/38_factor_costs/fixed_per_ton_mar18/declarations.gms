@@ -11,7 +11,7 @@ equations
 
 positive variables
  vm_cost_prod(i,kall)         Factor costs (mio. USD05MER per yr)
- vm_cost_inv(i)        Capital investment costs (mio USD05MER  per yr)
+ vm_cost_inv(i)               Capital investment costs (mio USD05MER  per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

@@ -6,26 +6,25 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 equations
- q38_cost_prod_crop(i,kcr)        regional factor input costs for plant production (mio USD05MER)
- q38_cost_prod_inv(i)             regional investment costs in capital (mio USD05MER)
- q38_investment_immobile(j,kcr)    cellular immobile investments into farm capital   (mio USD05MER)
- q38_investment_mobile(j)          cellular mobile investments into farm capital   (mio USD05MER)
+ q38_cost_prod_crop(i,kcr)         Regional factor input costs for plant production (mio USD05MER)
+ q38_cost_prod_inv(i)              Regional investment costs in capital (mio USD05MER)
+ q38_investment_immobile(j,kcr)    Cellular immobile investments into farm capital   (mio USD05MER)
+ q38_investment_mobile(j)          Cellular mobile investments into farm capital   (mio USD05MER)
 ;
 
 positive variables
- vm_cost_prod(i,kall)                  factor costs  (mio USD05MER  per yr)
- vm_cost_inv(i)                        investment capital costs (mio USD05MER  per yr)
- v38_investment_immobile(j,kcr)        investment costs in immobile farm capital (mio USD05MER per yr)
- v38_investment_mobile(j)              investment costs in mobile farm capital (mio USD05MER per yr)
+ vm_cost_prod(i,kall)                  Factor costs  (mio USD05MER  per yr)
+ vm_cost_inv(i)                        Investment capital costs (mio USD05MER  per yr)
+ v38_investment_immobile(j,kcr)        Investment costs in immobile farm capital (mio USD05MER per yr)
+ v38_investment_mobile(j)              Investment costs in mobile farm capital (mio USD05MER per yr)
 ;
 
 parameters
- i38_variable_costs(i,kcr)           variable input costs (mio USD05MER per input unit)
- i38_capital_need(i,kcr,mobil38)     capital requirements for farming with tau equal 1 (mio USD05MER)
- p38_capital_immobile(t,j,kcr)       preexisting immobile capital stocks before investment (mio USD05MER)
- p38_capital_mobile(t,j)             preexisting mobile capital stocks before investment (mio USD05MER)
- p38_ovcosts(t,i)                    Overall factor costs including non-annuitized capital investment (mio USD05MER)
-;
+ i38_variable_costs(i,kcr)           Variable input costs (mio USD05MER per input unit)
+ i38_capital_need(i,kcr,mobil38)     Capital requirements for farming with tau equal 1 (mio USD05MER)
+ p38_capital_immobile(t,j,kcr)       Preexisting immobile capital stocks before investment (mio USD05MER)
+ p38_capital_mobile(t,j)             Preexisting mobile capital stocks before investment (mio USD05MER)
+ ;
 
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

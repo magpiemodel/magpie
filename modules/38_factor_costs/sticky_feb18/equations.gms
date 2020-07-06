@@ -15,7 +15,7 @@ q38_cost_prod_crop(i2,kcr).. vm_cost_prod(i2,kcr)
                               =e= vm_prod_reg(i2,kcr) * i38_variable_costs(i2,kcr) / (1-s38_mi_start)
                                 ;
 
-*' Investment costs. These are the summation of investment in mobile and immobile capital. The costs are annuitized,
+*' Investment costs: These are the summation of investment in mobile and immobile capital. The costs are annuitized,
 *' and corrected to make sure that the annual depreciation of the current time-step is accunted for.
 q38_cost_prod_inv(i2).. vm_cost_inv(i2)=e=(sum((cell(i2,j2),kcr),v38_investment_immobile(j2,kcr))
                                     +sum((cell(i2,j2)),v38_investment_mobile(j2)))
@@ -25,9 +25,11 @@ q38_cost_prod_inv(i2).. vm_cost_inv(i2)=e=(sum((cell(i2,j2),kcr),v38_investment_
 
 
 *' Each cropping activity requires a certain capital stock that depends on the
-*' production. These investments are assumed to be sunk costs.
-*' The following makes sure that new land expansion has to be equipped
-*' with capital stock, and that depreciation is replaced.
+*' production. Since the mobility of capital is defined over crop-type, immobile capital is defined
+*' over specific crop, while the mobile capital over the overall capital needed by all crop activities
+*' in a certain location. These investments are assumed to be sunk costs.
+*' The following equations makes sure that new land expansion is equipped
+*' with capital stock, and that depreciation of pre-existing capital is replaced.
 
 q38_investment_immobile(j2,kcr).. v38_investment_immobile(j2,kcr)
                                   =g=
