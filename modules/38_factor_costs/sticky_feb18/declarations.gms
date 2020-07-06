@@ -24,7 +24,8 @@ parameters
  i38_capital_need(i,kcr,mobil38)     Capital requirements for farming with tau equal 1 (mio USD05MER)
  p38_capital_immobile(t,j,kcr)       Preexisting immobile capital stocks before investment (mio USD05MER)
  p38_capital_mobile(t,j)             Preexisting mobile capital stocks before investment (mio USD05MER)
- ;
+
+;
 
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
