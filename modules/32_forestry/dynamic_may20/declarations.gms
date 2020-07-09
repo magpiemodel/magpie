@@ -41,6 +41,7 @@ parameters
  p32_ncells(i)                                      Number of cells in each region (1)
  pm_representative_rotation(t_all,i)               representative regional rotation (1)
  p32_aff_bgp(j,ac)                                  Biophysical impact of afforestation (tCeq per ha)
+ p32_tcre_glo(j)                                    Global mean Transient Climate Response to cumulative Emissions (degree C per tC per ha)
 ;
 
 positive variables

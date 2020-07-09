@@ -33,11 +33,16 @@ sets
  rotation_type Rotation type
  / min, low, def, high, bio /
 
- bgp32 biogeophysical effect (tCeq per ha) of afforestation on local climate
-/ nobgp, ann, djf, jja /
+ bgp32 biogeophysical effect (degree C) of afforestation on local surface temperature
+/ nobgp, ann_bph /
+
+tcre32 transient surface temperature response to CO2 emission (degree C per tC)
+/ ann_TCREmean, ann_TCREhigh, ann_TCRElow /
 
 aff_effect biochemical and local biophysical effect of afforestation on climate
 / bgc,bph /
+
+ac_bph(ac) fade-in of bph effect over age-classes
 
 ;
 
