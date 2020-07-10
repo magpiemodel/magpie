@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description:
+# description: Checks the runtime of several runs
 # comparison script: TRUE
 # ---------------------------------------------------------------
 
