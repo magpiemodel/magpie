@@ -6,49 +6,43 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description:
+# description: re-submits runs to different queues (e.g. priority) 
 # comparison script: TRUE
 # ---------------------------------------------------------------
 
+######################
+#### resubmit run ####
+######################
 # Version 1.0, Florian Humpenoeder
 #
 library(lucode2)
-library(magclass)
-library(quitte)
+library(magpie4)
 
 options(error=function()traceback(2))
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdirs <- lucode2::path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
+  outputdirs <- path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
   #Define arguments that can be read from command line
-  lucode2::readArgs("outputdirs")
+  readArgs("outputdirs")
 }
 ###############################################################################
 cat("\nStarting output generation\n")
 
+out <- NULL
 missing <- NULL
 
-if(file.exists("output/report_comp.csv")) file.rename("output/report_comp.csv","output/report_comp.bak")
-
 for (i in 1:length(outputdirs)) {
-  print(paste("Processing",outputdirs[i]))
+  print(paste("Checking",outputdirs[i]))
   #gdx file
-  rep<-path(outputdirs[i],"report.mif")
-  if(file.exists(rep)) {
-    #get scenario name
-    load(path(outputdirs[i],"config.Rdata"))
-    scen <- cfg$title
-    #read-in reporting file
-    a <- read.report(rep,as.list = FALSE)
-    getNames(a,dim=1) <- scen
-    #add to reporting csv file
-    write.report2(a,file="output/report_comp.csv",append=TRUE,ndigit = 4,skipempty = FALSE)
-  } else missing <- c(missing,outputdirs[i])
+  gdx<-path(outputdirs[i],"fulldata.gdx")
+  if(file.exists(gdx)) tmp <- modelstat(gdx) else tmp <- 0
+  if (any(tmp>2) | all(tmp==0)) {
+    file.copy(from = "scripts/run_submit/submit.sh",to = path(outputdirs[i],"submit.sh"),overwrite = TRUE)
+    current <- getwd()
+    setwd(outputdirs[i])
+    if (file.exists("magpie_y1995.gdx")) file.remove("magpie_y1995.gdx")
+    system("sbatch submit.sh")
+    setwd(current)
+  }
 }
-if (!is.null(missing)) {
-  cat("\nList of folders with missing report.mif\n")
-  print(missing)
-}
-
-if(file.exists("output/report_comp.csv")) saveRDS(read.quitte("output/report_comp.csv"),file = "output/report_comp.rds")

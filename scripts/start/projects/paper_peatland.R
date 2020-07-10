@@ -5,9 +5,9 @@
 # |  Contact: magpie@pik-potsdam.de
 
 
-######################################
-#### Script to start a MAgPIE run ####
-######################################
+# ----------------------------------------------------------
+# description: runs for peatland paper (might be useful as draft for other papers/projects)
+# ----------------------------------------------------------
 
 library(gms)
 library(magclass)

@@ -5,7 +5,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description:
+# description: Output script for peatland paper (might be useful as template for other papers)
 # comparison script: TRUE
 # ---------------------------------------------------------------
 

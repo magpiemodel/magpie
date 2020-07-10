@@ -6,13 +6,13 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description:
+# description: checks the modelstat of several runs
 # comparison script: TRUE
 # ---------------------------------------------------------------
 
-######################
-#### resubmit run ####
-######################
+#########################
+#### check modelstat ####
+#########################
 # Version 1.0, Florian Humpenoeder
 #
 library(lucode2)
@@ -22,9 +22,9 @@ options(error=function()traceback(2))
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdirs <- path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
+  outputdirs <- lucode2::path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
   #Define arguments that can be read from command line
-  readArgs("outputdirs")
+  lucode2::readArgs("outputdirs")
 }
 ###############################################################################
 cat("\nStarting output generation\n")
@@ -33,16 +33,25 @@ out <- NULL
 missing <- NULL
 
 for (i in 1:length(outputdirs)) {
-  print(paste("Checking",outputdirs[i]))
+  print(paste("Processing",outputdirs[i]))
   #gdx file
   gdx<-path(outputdirs[i],"fulldata.gdx")
-  if(file.exists(gdx)) tmp <- modelstat(gdx) else tmp <- 0
-  if (any(tmp>2) | all(tmp==0)) {
-    file.copy(from = "scripts/run_submit/submit.sh",to = path(outputdirs[i],"submit.sh"),overwrite = TRUE)
-    current <- getwd()
-    setwd(outputdirs[i])
-    if (file.exists("magpie_y1995.gdx")) file.remove("magpie_y1995.gdx")
-    system("sbatch submit.sh")
-    setwd(current)
+  if(file.exists(gdx)) {
+    tmp <- modelstat(gdx)
+    dimnames(tmp)[[3]] <- paste(outputdirs[i],dimnames(tmp)[[3]],sep=".")
+    out <- mbind(out,tmp)
+  } else missing <- c(missing,outputdirs[i])
+}
+write.magpie(out,paste("./output/modelstat_",basename(getwd()),".csv",sep=""))
+if (!is.null(missing)) {
+  cat("\nList of folders with missing fulldata.gdx\n")
+  print(missing)
+}
+if (all(out==2)) {
+  cat("\nGood news! No time steps with modelstat different from 2 found!\n")
+} else {
+  cat("\nTime steps with modelstat different from 2 found!\n")
+  for (i in c(1,3:19)) {
+    if (any(out==i)) warning("Time steps with modelstat ",i," found!")
   }
 }

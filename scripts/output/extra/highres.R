@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description:
+# description: starts a run with higher resolution in parallel mode (each region is solved individually) using trade patterns from an existing run
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
