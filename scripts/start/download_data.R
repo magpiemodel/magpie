@@ -6,11 +6,10 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # -------------------------------------------------
-# description: Checking code for consistency issues
-# position: 2
+# description: just download default.cfg input data
+# position: 3
 # -------------------------------------------------
 
-
-
-library(gms)
-gms::codeCheck()
+source("scripts/start_functions.R")
+source("config/default.cfg")
+download_and_update(cfg)
