@@ -20,25 +20,25 @@ codeCheck <- FALSE
 buildInputVector <- function(regionmapping   = "agmip",
                              project_name    = "isimip_rcp",
                              climatescen_name= "rcp2p6",
-                             co2             = "co2", # co2 fertilization????
+                             co2             = "co2",
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "c200",
                              archive_rev     = "44",
                              madrat_rev      = "4.47",
                              validation_rev  = "4.47",
-                             calibration     = "calibration_agmip_c200_19Dec18.tgz",
-                             additional_data = "additional_data_rev3.79.tgz") { #65
+                             calibration     = "calibration_inms_c200_08Jul2020.tgz",
+                             additional_data = "additional_data_rev3.85.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
                 mag="c30c1c580039c2b300d86cc46ff4036a",
-                inms="d9303655de75494941cc82740bcd1ae4",
+                inms="1ffb3a6fd3ac74779d7fb03a215fbec6",
                 inms2="ef2ae7cd6110d5d142a9f8bd7d5a68f2",
                 agmip="c77f075908c3bc29bdbe1976165eccaf")
   archive_name=paste(project_name,climate_model,climatescen_name,co2,sep="-")
   archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", mappings[regionmapping], ".tgz")
   madrat  <- paste0("rev", madrat_rev,"_", mappings[regionmapping], "_magpie.tgz")
   validation  <- paste0("rev",validation_rev,"_", mappings[regionmapping], "_validation", ".tgz")
-  return(c(archive,madrat,validation,additional_data))
+  return(c(archive,madrat,validation,calibration,additional_data))
 }
 
 ### General settings ###
@@ -48,17 +48,18 @@ general_settings<-function(title) {
   cfg$force_download <- TRUE
   cfg$gms$c_timesteps <- 12
   cfg$gms$som <- "cellpool_aug16"
-  cfg$gms$factor_costs <- "fixed_per_ton_mar18" #### change to "sticky_feb18" when ready!
-  cfg$title <- paste0("inms_",title,"_v3")
-  cfg$recalibrate <- "ifneeded"
+  cfg$gms$factor_costs <- "sticky_feb18"
+  cfg$gms$s15_elastic_demand <- 0
+  cfg$title <- paste0("inms_",run_flag,"_",title,"_v3")
+  cfg$recalibrate <- FALSE
   return(cfg)
 }
 
 ###############################################################################
 ########## Calibration run  ##########
-cfg<-general_settings(title="SSP2_RCP4p5_Calib")  ########## Different title?
+cfg<-general_settings(title="SSP2_RCP4p5_Calib")
 cfg<-lucode::setScenario(cfg,"SSP2")
-cfg<-lucode::setScenario(cfg,"cc")                  ########## or: what?
+cfg<-lucode::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms")
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
@@ -66,6 +67,9 @@ cfg$force_download <- TRUE
 cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
 calib<-magpie4::submitCalibration(name = "calibration_inms_may2020")
+
+#calib<-"calibration_calibration_inms_may2020_09Jul20.tgz"
+
 
 ###############################################################################
 ########## Scenario runs  ##########
@@ -235,8 +239,6 @@ cfg<-lucode::setScenario(cfg,"SSP2")
 # Climate: moderate mitigation (RCP4.5)
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
-# Diet: medium meat and dairy
-              ########### Already covered by scenario-config?
 # N policy: Best
 cfg$gms$c70_feed_scen <- "ssp1"
 cfg$gms$c55_scen_conf <- "GoodPractice"
@@ -251,8 +253,6 @@ cfg<-lucode::setScenario(cfg,"SSP2")
 # Climate: moderate mitigation (RCP4.5)
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
-# Diet: medium meat and dairy
-              ########### Already covered by scenario-config?
 # N policy: Only AWS
 cfg$gms$c70_feed_scen <- "ssp1"
 cfg$gms$c55_scen_conf <- "ssp1"
