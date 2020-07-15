@@ -29,6 +29,7 @@ sets
  /normal,high/
 
  ac_additional(ac) Subset of ac to account for longer than five year time steps
+ ac_establish(ac) Subset of ac to account for longer than five year time steps
 
  rotation_type Rotation type
  / min, low, def, high, bio /
@@ -43,6 +44,7 @@ aff_effect biochemical and local biophysical effect of afforestation on climate
 
 alias(ac,ac2);
 alias(ac_sub,ac_sub2);
+alias(ac_establish,ac_establish2);
 alias(t,t_alias);
 alias(t_all,t_all_alias);
 alias(j,j_alias);

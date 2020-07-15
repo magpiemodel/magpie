@@ -114,7 +114,7 @@ p32_rot_length_ac_eqivalent(t_all,j) = p32_rotation_cellular_estb(t_all,j);
 
 ** Define protect and harvest setting
 protect32(t,j,ac_sub) = no;
-protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular_harvesting(t,j));
+protect32(t,j,ac_sub) = yes$(ord(ac_sub) >= m_yeardiff_forestry(t)/5 AND ord(ac_sub) < p32_rotation_cellular_harvesting(t,j));
 
 harvest32(t,j,ac_sub) = no;
 harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular_harvesting(t,j));

@@ -13,6 +13,9 @@ s32_yeardiff = m_yeardiff_forestry(t);
 ac_additional(ac) = no;
 ac_additional(ac) = yes$(ord(ac) <= (s32_yeardiff/5));
 
+ac_establish(ac) = no;
+ac_establish(ac) = yes$(ord(ac) <= (s32_yeardiff/5));
+
 ** Start ndc **
 * Limit demand for prescribed NPI/NDC afforestation in `p32_aff_pol` if not enough suitable area (`p32_aff_pot`) for afforestation is available.
    p32_aff_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop")) + (vm_land.l(j,"past") - vm_land.lo(j,"past"));

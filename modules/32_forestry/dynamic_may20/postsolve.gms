@@ -1,7 +1,7 @@
 *' @code
 *' Set 'ac_additional' here allows us to distribute newly establsihed plantations
 *' equally among time steps where the simulation steps go longer than 5 years.
-v32_land.l(j,type32,ac_additional) = v32_land.l(j,type32,"ac0")/card(ac_additional);
+*v32_land.l(j,type32,ac_additional) = v32_land.l(j,type32,"ac0")/card(ac_additional);
 
 *' Exchange land information after optimization
 p32_land(t,j,type32,ac) = v32_land.l(j,type32,ac);
@@ -35,6 +35,7 @@ p32_land(t,j,type32,ac) = v32_land.l(j,type32,ac);
  oq32_land_reduction(t,j,type32,ac,"marginal")         = q32_land_reduction.m(j,type32,ac);
  oq32_cost_establishment(t,i,"marginal")               = q32_cost_establishment.m(i);
  oq32_bgp_aff(t,j,ac,"marginal")                       = q32_bgp_aff.m(j,ac);
+ oq32_ac_establish(t,j,type32,ac,"marginal")           = q32_ac_establish.m(j,type32,ac);
  ov_cost_fore(t,i,"level")                             = vm_cost_fore.l(i);
  ov32_land(t,j,type32,ac,"level")                      = v32_land.l(j,type32,ac);
  ov32_land_missing(t,j,"level")                        = v32_land_missing.l(j);
@@ -62,6 +63,7 @@ p32_land(t,j,type32,ac) = v32_land.l(j,type32,ac);
  oq32_land_reduction(t,j,type32,ac,"level")            = q32_land_reduction.l(j,type32,ac);
  oq32_cost_establishment(t,i,"level")                  = q32_cost_establishment.l(i);
  oq32_bgp_aff(t,j,ac,"level")                          = q32_bgp_aff.l(j,ac);
+ oq32_ac_establish(t,j,type32,ac,"level")              = q32_ac_establish.l(j,type32,ac);
  ov_cost_fore(t,i,"upper")                             = vm_cost_fore.up(i);
  ov32_land(t,j,type32,ac,"upper")                      = v32_land.up(j,type32,ac);
  ov32_land_missing(t,j,"upper")                        = v32_land_missing.up(j);
@@ -89,6 +91,7 @@ p32_land(t,j,type32,ac) = v32_land.l(j,type32,ac);
  oq32_land_reduction(t,j,type32,ac,"upper")            = q32_land_reduction.up(j,type32,ac);
  oq32_cost_establishment(t,i,"upper")                  = q32_cost_establishment.up(i);
  oq32_bgp_aff(t,j,ac,"upper")                          = q32_bgp_aff.up(j,ac);
+ oq32_ac_establish(t,j,type32,ac,"upper")              = q32_ac_establish.up(j,type32,ac);
  ov_cost_fore(t,i,"lower")                             = vm_cost_fore.lo(i);
  ov32_land(t,j,type32,ac,"lower")                      = v32_land.lo(j,type32,ac);
  ov32_land_missing(t,j,"lower")                        = v32_land_missing.lo(j);
@@ -116,4 +119,5 @@ p32_land(t,j,type32,ac) = v32_land.l(j,type32,ac);
  oq32_land_reduction(t,j,type32,ac,"lower")            = q32_land_reduction.lo(j,type32,ac);
  oq32_cost_establishment(t,i,"lower")                  = q32_cost_establishment.lo(i);
  oq32_bgp_aff(t,j,ac,"lower")                          = q32_bgp_aff.lo(j,ac);
+ oq32_ac_establish(t,j,type32,ac,"lower")              = q32_ac_establish.lo(j,type32,ac);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
