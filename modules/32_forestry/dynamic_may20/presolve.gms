@@ -116,9 +116,12 @@ m_boundfix(v32_land,(j,"plant",ac_sub),l,10e-5);
 
 ** fix ndc afforestation forever, all age-classes are fixed except ac0
 v32_land.fx(j,"ndc",ac_sub) = pc32_land(j,"ndc",ac_sub);
+v32_land.up(j,"ndc",ac_establish) = Inf;
+
 ** fix c price induced afforestation based on s32_planing_horizon, fixed only until end of s32_planing_horizon, ac0 is free
 v32_land.fx(j,"aff",ac_sub)$(ord(ac_sub) <= s32_planing_horizon/5) = pc32_land(j,"aff",ac_sub);
 v32_land.up(j,"aff",ac_sub)$(ord(ac_sub) > s32_planing_horizon/5) = pc32_land(j,"aff",ac_sub);
+v32_land.up(j,"aff",ac_establish) = Inf;
 
 ** Calculate future yield based on rotation length
 pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac_sub,"forestry"));
