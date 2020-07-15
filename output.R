@@ -12,7 +12,7 @@
 library(lucode2)
 library(gms)
 
-runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
+runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
 
   get_line <- function(){
     # gets characters (line) from the terminal or from a connection
@@ -125,15 +125,18 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
       header <- read_yaml_header(script)
       comp <- (!is.null(header[["comparison script"]]) && isTRUE(header[["comparison script"]]))
       if(comp) {
+		print("script executed as comparison script")
         loop <- list(alloutputdirs)
-        outputdir <- NULL
       } else {
-        loop <- alloutputdirs
-        outputdir <- outputdirs
+		if(length(alloutputdirs)>1) {print("script executed multiple times in parallel")} else {print("script executed as single output script")}
+		loop <- alloutputdirs
+		print(loop)
+		print(str(loop))
       }
-      for(outpudirs in loop) {
+      for(outputdir in loop) {
         message(" -> ",name)
-        r_command <- paste0("Rscript output.R outputdirs=",paste(outputdirs,collapse=","),"  output=",rout," submit=direct")
+		print(paste0("starting script for outputdir",outputdir))
+        r_command <- paste0("Rscript output.R outputdir=",paste(outputdir,collapse=","),"  output=",rout," submit=direct")
         sbatch_command <- paste0("sbatch --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --time=200 --mem-per-cpu=8000 --wrap=\"",r_command,"\"")
         if(submit=="direct") {
           tmp.env <- new.env()
@@ -157,23 +160,23 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
     }
   }
 
-  if(is.null(outputdirs)) outputdirs <- choose_folder("Choose runs")
+  if(is.null(outputdir)) outputdir <- choose_folder("Choose runs")
   if(is.null(output))     output     <- gms::selectScript("./scripts/output")
   if(is.null(submit))     submit     <- choose_submit("Choose submission type")
   if(is.null(output)) {
     message("No output script selected! Stop here.")
     return(invisible(NULL))
   }
-  if(is.null(outputdirs)) {
+  if(is.null(outputdir)) {
     message("No output folder selected! Stop here.")
     return(invisible(NULL))
   }
-  runsubmit(output, outputdirs, submit, "scripts/output/")
+  runsubmit(output, alloutputdirs = outputdir, submit, "scripts/output/")
 }
 
 if(!exists("source_include")) {
-  output <- outputdirs <- submit <- NULL
-  lucode2::readArgs("output","outputdirs","submit", .silent=TRUE)
+  output <- outputdir <- submit <- NULL
+  lucode2::readArgs("output","outputdir","submit", .silent=TRUE)
 }
 
-runOutputs(output=output, outputdirs = outputdirs, submit=submit)
+runOutputs(output=output, outputdir = outputdir, submit=submit)
