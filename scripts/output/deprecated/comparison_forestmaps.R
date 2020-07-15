@@ -24,9 +24,9 @@ options(error=function()traceback(2))
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdirs <- path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
+  outputdir <- path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
   #Define arguments that can be read from command line
-  lucode2::readArgs("outputdirs")
+  lucode2::readArgs("outputdir")
 }
 ###############################################################################
 cat("\nStarting output generation\n")
@@ -34,13 +34,13 @@ cat("\nStarting output generation\n")
 defor <- NULL
 missing <- NULL
 
-for (i in 1:length(outputdirs)) {
-  print(paste("Processing",outputdirs[i]))
+for (i in 1:length(outputdir)) {
+  print(paste("Processing",outputdir[i]))
   #gdx file
-  rep<-path(outputdirs[i],"cell.land_0.5.mz")
+  rep<-path(outputdir[i],"cell.land_0.5.mz")
   if(file.exists(rep)) {
     #get scenario name
-    load(path(outputdirs[i],"config.Rdata"))
+    load(path(outputdir[i],"config.Rdata"))
     scen <- cfg$title
     #read-in reporting file
     land_hr <- read.magpie(rep)
@@ -48,7 +48,7 @@ for (i in 1:length(outputdirs)) {
     getCells(land_hr) <- paste("GLO",1:59199,sep=".")
     getNames(land_hr) <- scen
     defor <- mbind(defor,land_hr)
-  } else missing <- c(missing,outputdirs[i])
+  } else missing <- c(missing,outputdir[i])
 }
 if (!is.null(missing)) {
   cat("\nList of folders with missing report.mif\n")

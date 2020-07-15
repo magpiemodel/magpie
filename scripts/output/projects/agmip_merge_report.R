@@ -18,9 +18,9 @@ options(error=function()traceback(2))
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdirs <- path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
+  outputdir <- path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
   #Define arguments that can be read from command line
-  readArgs("outputdirs")
+  readArgs("outputdir")
 }
 ###############################################################################
 cat("\nStarting output generation\n")
@@ -29,20 +29,20 @@ missing <- NULL
 
 if(file.exists("output/agmip_report_comp.csv")) file.rename("output/agmip_report_comp.csv","output/agmip_report_comp.bak")
 
-for (i in 1:length(outputdirs)) {
-  print(paste("Processing",outputdirs[i]))
+for (i in 1:length(outputdir)) {
+  print(paste("Processing",outputdir[i]))
   #gdx file
-  rep<-path(outputdirs[i],"agmip_report.mif")
+  rep<-path(outputdir[i],"agmip_report.mif")
   if(file.exists(rep)) {
     #get scenario name
-    load(path(outputdirs[i],"config.Rdata"))
+    load(path(outputdir[i],"config.Rdata"))
     scen <- cfg$title
     #read-in reporting file
     a <- read.report(rep,as.list = FALSE)
     getNames(a,dim=1) <- scen
     #add to reporting csv file
     write.report2(a,file="output/agmip_report_comp.csv",append=TRUE,ndigit = 4,skipempty = FALSE)
-  } else missing <- c(missing,outputdirs[i])
+  } else missing <- c(missing,outputdir[i])
 }
 if (!is.null(missing)) {
   cat("\nList of folders with missing agmip_report.mif\n")

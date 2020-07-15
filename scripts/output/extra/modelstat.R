@@ -22,9 +22,9 @@ options(error=function()traceback(2))
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdirs <- lucode2::path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
+  outputdir <- lucode2::path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
   #Define arguments that can be read from command line
-  lucode2::readArgs("outputdirs")
+  lucode2::readArgs("outputdir")
 }
 ###############################################################################
 cat("\nStarting output generation\n")
@@ -32,15 +32,15 @@ cat("\nStarting output generation\n")
 out <- NULL
 missing <- NULL
 
-for (i in 1:length(outputdirs)) {
-  print(paste("Processing",outputdirs[i]))
+for (i in 1:length(outputdir)) {
+  print(paste("Processing",outputdir[i]))
   #gdx file
-  gdx<-path(outputdirs[i],"fulldata.gdx")
+  gdx<-path(outputdir[i],"fulldata.gdx")
   if(file.exists(gdx)) {
     tmp <- modelstat(gdx)
-    dimnames(tmp)[[3]] <- paste(outputdirs[i],dimnames(tmp)[[3]],sep=".")
+    dimnames(tmp)[[3]] <- paste(outputdir[i],dimnames(tmp)[[3]],sep=".")
     out <- mbind(out,tmp)
-  } else missing <- c(missing,outputdirs[i])
+  } else missing <- c(missing,outputdir[i])
 }
 write.magpie(out,paste("./output/modelstat_",basename(getwd()),".csv",sep=""))
 if (!is.null(missing)) {
