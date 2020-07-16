@@ -1,15 +1,13 @@
 $setglobal c32_timber_plantations  plantations
 * option: natveg, plantations
-$setglobal c32_aff_mask  unrestricted
+$setglobal c32_aff_mask  noboreal
 * options: unrestricted, noboreal, onlytropical
-$setglobal c32_aff_policy  npi
+$setglobal c32_aff_policy  ndc
 * options: none, npi, ndc
 
 $setglobal c32_aff_bgp  nobgp
 * options: ann,nobgp
-$setglobal c32_bgp_ac  ac10
-* options: ac0,ac10,ac20,ac30
-$setglobal c32_tcre_ctrl ann_TCREmean
+$setglobal c32_tcre_ctrl  ann_TCRElow
 * options: ann_TCREmean, ann_TCREhigh, ann_TCRElow
 
 scalars
@@ -27,7 +25,7 @@ scalars
   s32_aff_plantation              Switch for using growth curves for afforestation 0=natveg 1=plantations (1) / 0 /
   s32_timber_plantation           Switch for using growth curves for timber plantations 0=natveg 1=plantations (1) / 1 /
   s32_plant_carbon_foresight      Switch to allow plantations to be used as incentives for CDR (1) / 1 /
-  s32_tcre_local switch for local (1) or global (0) TRCE factors / 0 /
+  s32_tcre_local switch for local (1) or global (0) TRCE factors / 1 /
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)
