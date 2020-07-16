@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description:
+# description: Checks the runtime of several runs
 # comparison script: TRUE
 # ---------------------------------------------------------------
 
@@ -14,11 +14,11 @@
 library(lucode2, quietly = TRUE, warn.conflicts =FALSE)
 
 if(!exists("source_include")) {
- outputdirs <- c("output/default_2015-01-14_11.41.17",
+ outputdir <- c("output/default_2015-01-14_11.41.17",
                  "output/default_2015-01-14_12.28.56",
                  "output/default_2015-01-14_15.00.13",
                  "output/default_2015-01-14_15.36.12");
- lucode2::readArgs("outputdirs")
+ lucode2::readArgs("outputdir")
 }
 
-print(lucode2::readRuntime(outputdirs,plot=TRUE))
+print(lucode2::readRuntime(outputdir,plot=TRUE))
