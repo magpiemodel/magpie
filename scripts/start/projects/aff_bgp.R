@@ -87,7 +87,7 @@ if(run_setting=="ctr") bgp_setting="nobgp"
           if(tcreuncert_setting == "ann_TCRElow") uncertainty_flag="lowTCRE"
 
           # Update title
-          cfg$title <- paste0("BPHexp","_",bgp_flag,"_",ssp_flag,"_",area_flag,uncertainty_flag,"_","afforunrestricted","_","ac10to30")
+          cfg$title <- paste0("BPHexp","_",bgp_flag,"_",ssp_flag,"_",area_flag,"_",uncertainty_flag,"_","afforunrestricted","_","ac10to30")
 
           # Start the run
           start_run(cfg=cfg,codeCheck=FALSE)
