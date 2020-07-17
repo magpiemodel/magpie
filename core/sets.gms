@@ -255,10 +255,7 @@ sets
                     ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,ac95,ac100,
                     ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,acx /
 
-  ac_sub(ac) age classes
-  / ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
-  ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,ac95,ac100,
-  ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,acx /
+  ac_sub(ac) dynamic subset of ac depending on time step length
 
    when Temporal location relative to optimization / before, after /
 

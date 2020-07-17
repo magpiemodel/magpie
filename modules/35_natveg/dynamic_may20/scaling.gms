@@ -6,4 +6,4 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 vm_landdiff_natveg.scale = 10e4;
-vm_other_reduction.scale(j,ac_sub) = 10e-3;
+vm_other_reduction.scale(j,ac) = 10e-3;

@@ -5,8 +5,8 @@ p32_carbon_density_ac_forestry(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all
 
 ** Calculating the marginal of carbon density i.e. change in carbon density over two time steps
 ** The carbon densities are tC/ha/year so we don't have to divide by timestep length.
-loop(ac_sub,
-  p32_carbon_density_ac_marg(t_all,j,ac_sub) = p32_carbon_density_ac_forestry(t_all,j,ac_sub) - p32_carbon_density_ac_forestry(t_all,j,ac_sub-1);
+loop(ac$(ord(ac) > 1),
+  p32_carbon_density_ac_marg(t_all,j,ac) = p32_carbon_density_ac_forestry(t_all,j,ac) - p32_carbon_density_ac_forestry(t_all,j,ac-1);
   );
 p32_carbon_density_ac_marg(t_all,j,"ac0") = 0;
 
@@ -112,12 +112,9 @@ loop(t_all,
 ** Rotation used for establishment decision.
 p32_rot_length_ac_eqivalent(t_all,j) = p32_rotation_cellular_estb(t_all,j);
 
-** Define protect and harvest setting
-protect32(t,j,ac_sub) = no;
-protect32(t,j,ac_sub) = yes$(ord(ac_sub) >= m_yeardiff_forestry(t)/5 AND ord(ac_sub) < p32_rotation_cellular_harvesting(t,j));
-
-harvest32(t,j,ac_sub) = no;
-harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular_harvesting(t,j));
+** Define ini set
+ini32(j,ac) = no;
+ini32(j,ac) = yes$(ord(ac) < p32_rotation_cellular_estb("y1995",j));
 
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
@@ -135,9 +132,7 @@ p32_cdr_ac_plant(t,j,ac) = 0;
 ** Initialize parameter
 p32_land(t,j,type32,ac) = 0;
 
-** divide initial forestry area by number of age classes within protect32
-** since protect32 is TRUE for ord(ac_sub) < p32_rotation_cellular_estb(j) there is
-** one additional junk which is assigned to ac0
+** divide initial forestry area by number of age classes within ini32
 if(s32_initial_distribution = 0,
 ** Initialize with highest age class and don't shift it when intitial distribution is off
   p32_land(t,j,"plant","acx") = pcm_land(j,"forestry");
@@ -145,8 +140,7 @@ if(s32_initial_distribution = 0,
 elseif s32_initial_distribution = 1,
 ** Initialize with equal distribtuion in rotation age class
   p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular_estb("y1995",j);
-  p32_land("y1995",j,"plant",ac_sub)$(protect32("y1995",j,ac_sub)) = p32_plant_ini_ac(j);
-  p32_land("y1995",j,"plant","ac0") = p32_plant_ini_ac(j);
+  p32_land("y1995",j,"plant",ac)$(ini32(j,ac)) = p32_plant_ini_ac(j);
 
 ** Initial shifting of age classes
   p32_land(t,j,"plant",ac)$(ord(ac) > 1) = p32_land(t,j,"plant",ac-1);

@@ -13,8 +13,16 @@ s32_yeardiff = m_yeardiff_forestry(t);
 ac_additional(ac) = no;
 ac_additional(ac) = yes$(ord(ac) <= (s32_yeardiff/5));
 
-ac_establish(ac) = no;
-ac_establish(ac) = yes$(ord(ac) <= (s32_yeardiff/5));
+ac_est(ac) = no;
+ac_est(ac) = yes$(ord(ac) <= (s32_yeardiff/5));
+
+ac_sub(ac) = no;
+ac_sub(ac) = yes$(ord(ac) > (s32_yeardiff/5));
+
+display ac_est;
+display ac_sub;
+
+vm_forestry_reduction.fx(j,type32,ac_est) = 0;
 
 ** Start ndc **
 * Limit demand for prescribed NPI/NDC afforestation in `p32_aff_pol` if not enough suitable area (`p32_aff_pot`) for afforestation is available.
@@ -70,8 +78,8 @@ p32_cdr_ac(t,j,ac)$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planing_horizon/5)
 = p32_carbon_density_ac(t,j,"aff",ac,"vegc") - p32_carbon_density_ac(t,j,"aff",ac-1,"vegc");
 
 *' CDR from timber plantations for each unharvested age-class.
-p32_cdr_ac_plant(t,j,ac_sub)$(ord(ac_sub) > 1 AND protect32(t,j,ac_sub))
-= (p32_carbon_density_ac(t,j,"plant",ac_sub,"vegc") - p32_carbon_density_ac(t,j,"plant",ac_sub-1,"vegc")) * s32_plant_carbon_foresight;
+p32_cdr_ac_plant(t,j,ac)$(ord(ac) > 1 AND ord(ac) < p32_rotation_cellular_harvesting(t,j))
+= (p32_carbon_density_ac(t,j,"plant",ac,"vegc") - p32_carbon_density_ac(t,j,"plant",ac-1,"vegc")) * s32_plant_carbon_foresight;
 
 *' Regrowth of natural vegetation (natural succession) is modelled by shifting
 *' age-classes according to time step length. For first year of simulation, the
@@ -98,15 +106,10 @@ p32_land_before(t,j,type32,ac) = p32_land(t,j,type32,ac);
 vm_land.l(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 pcm_land(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 
-** Release bounds for ALL Age classes before we make harvest "indication" decisions
-v32_land.lo(j,"plant",ac) = 0;
-v32_land.up(j,"plant",ac) = Inf;
-
 ** Fix land with rotation length
-v32_land.fx(j,"plant",ac_sub)$protect32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
-
-** Set upper bound for plantations after rotation length
-v32_land.up(j,"plant",ac_sub)$harvest32(t,j,ac_sub) = pc32_land(j,"plant",ac_sub);
+v32_land.fx(j,"plant",ac)$(ac.off <= p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
+v32_land.up(j,"plant",ac)$(ac.off > p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
+v32_land.up(j,"plant",ac_est) = Inf;
 
 ** Fix timber plantation land in case the plantations for productive purposes
 ** need to be held at constant 1995 levels.
@@ -116,17 +119,21 @@ m_boundfix(v32_land,(j,"plant",ac_sub),l,10e-5);
 
 ** fix ndc afforestation forever, all age-classes are fixed except ac0
 v32_land.fx(j,"ndc",ac_sub) = pc32_land(j,"ndc",ac_sub);
-v32_land.up(j,"ndc",ac_establish) = Inf;
+v32_land.up(j,"ndc",ac_est) = Inf;
 
 ** fix c price induced afforestation based on s32_planing_horizon, fixed only until end of s32_planing_horizon, ac0 is free
-v32_land.fx(j,"aff",ac_sub)$(ord(ac_sub) <= s32_planing_horizon/5) = pc32_land(j,"aff",ac_sub);
-v32_land.up(j,"aff",ac_sub)$(ord(ac_sub) > s32_planing_horizon/5) = pc32_land(j,"aff",ac_sub);
-v32_land.up(j,"aff",ac_establish) = Inf;
+v32_land.fx(j,"aff",ac)$(ac.off <= s32_planing_horizon/5) = pc32_land(j,"aff",ac);
+v32_land.up(j,"aff",ac)$(ac.off > s32_planing_horizon/5) = pc32_land(j,"aff",ac);
+v32_land.up(j,"aff",ac_est) = Inf;
 
 ** Calculate future yield based on rotation length
-pc32_yield_forestry_future(j) = sum(ac_sub$(ord(ac_sub) = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac_sub,"forestry"));
+pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac,"forestry"));
 
 ** Plantation production share for future
 pc32_plant_prod_share_future(i)    			    = sum(t_ext$(t_ext.pos = pm_representative_rotation(t,i)),p32_plant_prod_share(t_ext,i));
+
+display p32_rotation_cellular_harvesting;
+display v32_land.lo;
+display v32_land.up;
 
 *** EOF presolve.gms ***

@@ -21,15 +21,17 @@ sets
  none, npi, ndc
  /
 
- protect32(t,j,ac) Age classes which need to be protected during rotation
+ protect32(j,ac) Age classes which need to be protected during rotation
 
  harvest32(t,j,ac) Age classes which are available for harvest after rotation
+
+ ini32(j,ac)
 
  mgmt_type Type of forestry management
  /normal,high/
 
  ac_additional(ac) Subset of ac to account for longer than five year time steps
- ac_establish(ac) Subset of ac to account for longer than five year time steps
+ ac_est(ac) Subset of ac to account for longer than five year time steps
 
  rotation_type Rotation type
  / min, low, def, high, bio /
@@ -44,7 +46,7 @@ aff_effect biochemical and local biophysical effect of afforestation on climate
 
 alias(ac,ac2);
 alias(ac_sub,ac_sub2);
-alias(ac_establish,ac_establish2);
+alias(ac_est,ac_est2);
 alias(t,t_alias);
 alias(t_all,t_all_alias);
 alias(j,j_alias);
