@@ -106,8 +106,14 @@ q35_other_change(j2,ac_sub)..
 *' to be secondary forest.
 
 q35_secdforest_conversion(j2)..
-                          v35_secdforest(j2,"ac0")
+                          sum(ac_est, v35_secdforest(j2,ac_est))
                           =e=
                           sum(ac_sub,vm_hvarea_secdforest(j2,ac_sub))
                         + vm_hvarea_primforest(j2)
                           ;
+
+q35_secdforest_est(j2,ac_est) ..
+v35_secdforest(j2,ac_est) =e= sum(ac_est2, v35_secdforest(j2,ac_est2))/card(ac_est2);
+
+q35_other_est(j2,ac_est) ..
+v35_other(j2,ac_est) =e= sum(ac_est2, v35_other(j2,ac_est2))/card(ac_est2);

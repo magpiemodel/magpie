@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 vm_secdforest_reduction.fx(j,ac_est) = 0;
-vm_other_reduction.fx(j,ac) = 0;
+vm_other_reduction.fx(j,ac_est) = 0;
 
 * Regrowth of natural vegetation (natural succession) is modelled by shifting age-classes according to time step length.
 s35_shift = m_yeardiff(t)/5;
@@ -106,10 +106,12 @@ v35_secdforest.lo(j,"acx") = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,
 );
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
 m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
+v35_secdforest.up(j,ac_est) = Inf;
 
 v35_other.lo(j,"acx") = p35_save_other(t,j);
 v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
 m_boundfix(v35_other,(j,ac_sub),l,10e-5);
+v35_other.up(j,ac_est) = Inf;
 
 * calculate carbon density
 * highest carbon density 1st time step to account for reshuffling

@@ -5,22 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-s32_yeardiff = m_yeardiff_forestry(t);
-
-** Declare new set to distribute newly established plantations evenly for longer
-** than 5 year time steps. We then overwrite this with yes for ac_additional
-** elements which are lower than difference between years.
-ac_additional(ac) = no;
-ac_additional(ac) = yes$(ord(ac) <= (s32_yeardiff/5));
-
-ac_est(ac) = no;
-ac_est(ac) = yes$(ord(ac) <= (s32_yeardiff/5));
-
-ac_sub(ac) = no;
-ac_sub(ac) = yes$(ord(ac) > (s32_yeardiff/5));
-
-display ac_est;
-display ac_sub;
+*s32_yeardiff = m_yeardiff_forestry(t);
 
 vm_forestry_reduction.fx(j,type32,ac_est) = 0;
 
@@ -84,7 +69,7 @@ p32_cdr_ac_plant(t,j,ac)$(ord(ac) > 1 AND ord(ac) < p32_rotation_cellular_harves
 *' Regrowth of natural vegetation (natural succession) is modelled by shifting
 *' age-classes according to time step length. For first year of simulation, the
 *' shift is just 1. Division by 5 happends because the age-classes exist in 5 year steps
-s32_shift = s32_yeardiff/5;
+s32_shift = m_yeardiff_forestry(t)/5;
 *' @stop
 
 *' Shifting of age-calsses in land.
@@ -131,9 +116,5 @@ pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j
 
 ** Plantation production share for future
 pc32_plant_prod_share_future(i)    			    = sum(t_ext$(t_ext.pos = pm_representative_rotation(t,i)),p32_plant_prod_share(t_ext,i));
-
-display p32_rotation_cellular_harvesting;
-display v32_land.lo;
-display v32_land.up;
 
 *** EOF presolve.gms ***

@@ -44,6 +44,8 @@ equations
  q35_primforest_change(j)                       Change in primary forest between timesteps (mio. ha per year)
  q35_other_change(j,ac)                     Change in other land between timesteps (mio. ha per year)
  q35_secdforest_conversion(j)                   Secondary forest remains secondary forest (mio. ha)
+ q35_secdforest_est(j,ac)					blub
+ q35_other_est(j,ac)						blub
 ;
 
 positive variables
@@ -88,5 +90,7 @@ parameters
  oq35_primforest_change(t,j,type)          Change in primary forest between timesteps (mio. ha per year)
  oq35_other_change(t,j,ac,type)            Change in other land between timesteps (mio. ha per year)
  oq35_secdforest_conversion(t,j,type)      Secondary forest remains secondary forest (mio. ha)
+ oq35_secdforest_est(t,j,ac,type)          blub
+ oq35_other_est(t,j,ac,type)               blub
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

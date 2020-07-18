@@ -77,7 +77,7 @@ equations
  q32_land_reduction(j,type32,ac)                    Land contraction (mio. ha)
  q32_cost_establishment(i)                          Present value of cost of establishment (mio. USD)
  q32_bgp_aff(j,ac)                                  Biophysical afforestation calculation (mio. tCeq)
- q32_ac_est(j,type32,ac)			blub
+ q32_forestry_est(j,type32,ac)			blub
 ;
 
 
@@ -110,6 +110,6 @@ parameters
  oq32_land_reduction(t,j,type32,ac,type)     Land contraction (mio. ha)
  oq32_cost_establishment(t,i,type)           Present value of cost of establishment (mio. USD)
  oq32_bgp_aff(t,j,ac,type)                   Biophysical afforestation calculation (mio. tCeq)
- oq32_ac_est(t,j,type32,ac,type)             blub
+ oq32_forestry_est(t,j,type32,ac,type)       blub
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

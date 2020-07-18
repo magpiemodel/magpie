@@ -147,9 +147,6 @@ q32_establishment_min_glo ..
               sum(i2, pm_demand_forestry_future(i2,"wood")* pc32_plant_prod_share_future(i2))
               ;
 
-q32_ac_est(j2,type32,ac_est) ..
-v32_land(j2,type32,ac_est) =e= sum(ac_est2, v32_land(j2,type32,ac_est2))/card(ac_est2);
-
 *' Regional minimum constraint for maintaining current forestry area patterns,
 *' while accounting for regional self sufficiency in (`pm_selfsuff_ext`) timber production.
 q32_establishment_min_reg(i2) ..
@@ -157,6 +154,9 @@ q32_establishment_min_reg(i2) ..
               =g=
               pm_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2) * sum(ct, pm_selfsuff_ext(ct,i2,"wood"))
               ;
+
+q32_forestry_est(j2,type32,ac_est) ..
+v32_land(j2,type32,ac_est) =e= sum(ac_est2, v32_land(j2,type32,ac_est2))/card(ac_est2);
 
 *' Change in forestry area is the difference between plantation area from previous time
 *' step ('pc32_land') and optimized plantation area from current time step ('v32_land')
