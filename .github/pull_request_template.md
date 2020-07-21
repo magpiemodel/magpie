@@ -28,6 +28,7 @@ Please fill following information wherever applicable.
 
 - [ ] Realizations:
 - [ ] Scalars/Constants:
+- [ ] Model interfaces added:
 - [ ] Other changes:
 
 # Checklist:
