@@ -6,18 +6,12 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description:
+# description: merge agmip-reports of single runs into one project-report
 # comparison script: TRUE
 # ---------------------------------------------------------------
 
-#########################
-#### check modelstat ####
-#########################
-# Version 1.0, Florian Humpenoeder
-#
 library(lucode2)
 library(magclass)
-library(luplot)
 library(quitte)
 
 options(error=function()traceback(2))
@@ -26,35 +20,33 @@ options(error=function()traceback(2))
 if(!exists("source_include")) {
   outputdir <- path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
   #Define arguments that can be read from command line
-  lucode2::readArgs("outputdir")
+  readArgs("outputdir")
 }
 ###############################################################################
 cat("\nStarting output generation\n")
 
-defor <- NULL
 missing <- NULL
+
+if(file.exists("output/agmip_report_comp.csv")) file.rename("output/agmip_report_comp.csv","output/agmip_report_comp.bak")
 
 for (i in 1:length(outputdir)) {
   print(paste("Processing",outputdir[i]))
   #gdx file
-  rep<-path(outputdir[i],"cell.land_0.5.mz")
+  rep<-path(outputdir[i],"agmip_report.mif")
   if(file.exists(rep)) {
     #get scenario name
     load(path(outputdir[i],"config.Rdata"))
     scen <- cfg$title
     #read-in reporting file
-    land_hr <- read.magpie(rep)
-    land_hr <- dimSums(land_hr[,c(2020,2050,2100),c("primforest","secdforest")],dim=3) - dimSums(setYears(land_hr[,1995,c("primforest","secdforest")],NULL),dim=3)
-    getCells(land_hr) <- paste("GLO",1:59199,sep=".")
-    getNames(land_hr) <- scen
-    defor <- mbind(defor,land_hr)
+    a <- read.report(rep,as.list = FALSE)
+    getNames(a,dim=1) <- scen
+    #add to reporting csv file
+    write.report2(a,file="output/agmip_report_comp.csv",append=TRUE,ndigit = 4,skipempty = FALSE)
   } else missing <- c(missing,outputdir[i])
 }
 if (!is.null(missing)) {
-  cat("\nList of folders with missing report.mif\n")
+  cat("\nList of folders with missing agmip_report.mif\n")
   print(missing)
 }
 
-plotmap2(defor,"output/defor_area.pdf",legend_range = c(-0.1,0.1),title = "Diff forest area compared to 1995",legendname = "Mha",midpoint = 0,lowcol = "darkred",midcol = "grey95",highcol = "darkgreen",plot_height=10,plot_width=30,legend_height = NULL)
-# plotmap2(defor[,2050,],"defor_2050_area.pdf",ncol=6,legend_range = c(-0.5,0.5),title = "Diff 2050",midpoint = 0,lowcol = "darkred",midcol = "grey95",highcol = "darkgreen",plot_height=10,plot_width=30,legend_height = NULL)
-# plotmap2(defor[,2100,],"defor_2100_area.pdf",ncol=6,legend_range = c(-0.5,0.5),title = "Diff 2100",midpoint = 0,lowcol = "darkred",midcol = "grey95",highcol = "darkgreen",plot_height=10,plot_width=30,legend_height = NULL)
+if(file.exists("output/agmip_report_comp.csv")) saveRDS(read.quitte("output/agmip_report_comp.csv"),file = "output/agmip_report_comp.rds")

@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description:
+# description: Interpolates land pools to 0.5 degree resolution - Cropland is split into Food/Feed and Bioenergy crops
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
