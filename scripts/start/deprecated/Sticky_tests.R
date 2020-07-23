@@ -11,9 +11,9 @@ source("config/default.cfg")
 #List of resolutions forruns
 resolutions<-c("200")
 #Factor cost realizations
-realization<-c("mixed_feb17","sticky_feb1")
+realization<-c("sticky_feb18")
 # Trade realization
-title<-c("default","Sticky_test_run")
+title<-c("Sticky_test_run")
 
 for (i in 1:length(resolutions)){
 for(j in 1:length(realization)){
