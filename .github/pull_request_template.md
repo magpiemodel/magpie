@@ -1,5 +1,3 @@
-# Description
-
 Please fill following information wherever applicable.
 
 ## Purpose of this PR
@@ -23,6 +21,7 @@ Please fill following information wherever applicable.
 
 - [ ] Runs using starting script which tests current defaults (using `test_runs.R`).
 - [ ] Runs using starting script which successfully runs the same scenarios as in `test_runs.R` but with the changes from PR.
+- [ ] (If applicable) Runs using different scenarios/mappings which are not the default (12 regions/c200 clusters).
 
 # Default configuration additions/changes:
 
