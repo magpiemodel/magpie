@@ -109,12 +109,9 @@ loop(t_all,
   p32_rotation_cellular_harvesting(t_all+1,j)$(abs(p32_rotation_cellular_harvesting(t_all+1,j) - p32_rotation_cellular_harvesting(t_all,j))>2 AND ord(t_all)<card(t_all)) = p32_rotation_cellular_harvesting(t_all,j);
   );
 
-** Rotation used for establishment decision.
-p32_rot_length_ac_eqivalent(t_all,j) = p32_rotation_cellular_estb(t_all,j);
-
 ** Define ini set
 ini32(j,ac) = no;
-ini32(j,ac) = yes$(ord(ac) < p32_rotation_cellular_estb("y1995",j));
+ini32(j,ac) = yes$(ord(ac) > 1 AND ac.off <= p32_rotation_cellular_harvesting("y1995",j));
 
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
@@ -139,13 +136,16 @@ if(s32_initial_distribution = 0,
 
 elseif s32_initial_distribution = 1,
 ** Initialize with equal distribtuion in rotation age class
-  p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular_estb("y1995",j);
+  p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular_harvesting("y1995",j);
   p32_land("y1995",j,"plant",ac)$(ini32(j,ac)) = p32_plant_ini_ac(j);
 
+display ini32;
+display p32_rotation_cellular_harvesting;
+
 ** Initial shifting of age classes
-  p32_land(t,j,"plant",ac)$(ord(ac) > 1) = p32_land(t,j,"plant",ac-1);
+*  p32_land(t,j,"plant",ac)$(ord(ac) > 1) = p32_land(t,j,"plant",ac-1);
 ** Reset ac0 to zero
-  p32_land("y1995",j,"plant","ac0") = 0;
+*  p32_land("y1995",j,"plant","ac0") = 0;
 
   );
 *display p32_land;

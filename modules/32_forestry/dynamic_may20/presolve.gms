@@ -92,8 +92,8 @@ vm_land.l(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 pcm_land(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 
 ** Fix land with rotation length
-v32_land.fx(j,"plant",ac)$(ac.off <= p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
-v32_land.up(j,"plant",ac)$(ac.off > p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
+v32_land.fx(j,"plant",ac)$(ac.off < p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
+v32_land.up(j,"plant",ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
 v32_land.up(j,"plant",ac_est) = Inf;
 
 ** Fix timber plantation land in case the plantations for productive purposes
