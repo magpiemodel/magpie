@@ -91,24 +91,31 @@ p32_land_before(t,j,type32,ac) = p32_land(t,j,type32,ac);
 vm_land.l(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 pcm_land(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 
+** reset all bounds
+v32_land.lo(j,type32,ac) = 0;
+v32_land.up(j,type32,ac) = Inf;
+
 ** Fix land with rotation length
 v32_land.fx(j,"plant",ac)$(ac.off < p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
 v32_land.up(j,"plant",ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
+v32_land.lo(j,"plant",ac_est) = 0;
 v32_land.up(j,"plant",ac_est) = Inf;
 
 ** Fix timber plantation land in case the plantations for productive purposes
 ** need to be held at constant 1995 levels.
 v32_land.fx(j,"plant",ac)$(s32_initial_distribution=0) = p32_land_start_ac(j,"plant",ac);
 
-m_boundfix(v32_land,(j,"plant",ac_sub),l,10e-5);
+*m_boundfix(v32_land,(j,"plant",ac_sub),l,10e-5);
 
 ** fix ndc afforestation forever, all age-classes are fixed except ac0
 v32_land.fx(j,"ndc",ac_sub) = pc32_land(j,"ndc",ac_sub);
+v32_land.lo(j,"ndc",ac_est) = 0;
 v32_land.up(j,"ndc",ac_est) = Inf;
 
 ** fix c price induced afforestation based on s32_planing_horizon, fixed only until end of s32_planing_horizon, ac0 is free
 v32_land.fx(j,"aff",ac)$(ac.off <= s32_planing_horizon/5) = pc32_land(j,"aff",ac);
 v32_land.up(j,"aff",ac)$(ac.off > s32_planing_horizon/5) = pc32_land(j,"aff",ac);
+v32_land.lo(j,"aff",ac_est) = 0;
 v32_land.up(j,"aff",ac_est) = Inf;
 
 ** Calculate future yield based on rotation length

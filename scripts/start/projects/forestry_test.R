@@ -55,7 +55,7 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "PR20401_acestablish6"
+identifier_flag <- "PR20401_acestablish7"
 
 cat(paste0("Test dynamic ac set"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
