@@ -155,6 +155,9 @@ q32_establishment_min_reg(i2) ..
               pm_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2) * sum(ct, pm_selfsuff_ext(ct,i2,"wood"))
               ;
 
+*' This constraint distributes additions to forestry land over ac_est, 
+*' which depends on the time step length (e.g. ac0 and ac5 for a 10 year time step).
+
 q32_forestry_est(j2,type32,ac_est) ..
 v32_land(j2,type32,ac_est) =e= sum(ac_est2, v32_land(j2,type32,ac_est2))/card(ac_est2);
 

@@ -42,15 +42,6 @@ loop (t,
       display "Year";
       display ct;
 	
-	  ac_est(ac) = no;
-	  ac_est(ac) = yes$(ord(ac) <= (m_yeardiff_forestry(t)/5));
-
-	  ac_sub(ac) = no;
-	  ac_sub(ac) = yes$(ord(ac) > (m_yeardiff_forestry(t)/5));
-
-	  display ac_est;
-	  display ac_sub;
-
 $batinclude "./modules/include.gms" presolve
 
 * intersolve for food demand model

@@ -21,5 +21,7 @@ vm_land.fx(j,"forestry") = sum((type32,ac), v32_land.l(j,type32,ac));
 
 * The change of forestry land is also set to zero. 
 vm_landdiff_forestry.fx = 0;
+vm_forestry_reduction.fx(j,type32,ac) = 0;
+
 
 *** EOF preloop.gms ***

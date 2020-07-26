@@ -2,29 +2,18 @@ sets
 ***FORESTRY COST TYPES***
 
  fcostsALL forestry factor cost types
- /
- recur,mon,harv
- /
+ / recur, mon, harv /
 
  fcosts32(fcostsALL) forestry factor cost per annum
- /
- recur,mon
- /
+ / recur, mon /
 
  type32 plantation type
- /
- aff, ndc, plant
- /
+ / aff, ndc, plant /
 
  pol32 afforestation policy type
- /
- none, npi, ndc
- /
+ / none, npi, ndc /
 
- ini32(j,ac)
-
- mgmt_type Type of forestry management
- /normal,high/
+ ini32(j,ac) subset for initialization of timber plantations 
 
  rotation_type Rotation type
  / min, low, def, high, bio /
@@ -33,7 +22,7 @@ sets
 / nobgp, ann, djf, jja /
 
 aff_effect biochemical and local biophysical effect of afforestation on climate
-/ bgc,bph /
+/ bgc, bph /
 
 ;
 

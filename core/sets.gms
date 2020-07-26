@@ -255,9 +255,9 @@ sets
                     ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,ac95,ac100,
                     ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,acx /
 
-  ac_est(ac) Subset of ac to account for longer than five year time steps
+  ac_est(ac) Dynamic subset of age classes for establishment
 
-  ac_sub(ac) dynamic subset of ac depending on time step length
+  ac_sub(ac) Dynamic subset of age classes excluding establishment
 
    chap_par Chapman-richards parameters / k,m /
 

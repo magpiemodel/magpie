@@ -6,10 +6,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 positive variables
- vm_cost_fore(i)                 Afforestation costs (mio. USD04MER per yr)
- vm_landdiff_forestry            Aggregated difference in forestry land compared to previous timestep (mio. ha)
- v32_land(j,type32,ac)           Forestry land pools (mio. ha)
- vm_cdr_aff(j,ac)   	         Expected CDR from afforestation depending on planning horizon (mio. tC)
+ vm_cost_fore(i)                    Forestry costs (Mio USD)
+ vm_landdiff_forestry            	Aggregated difference in forestry land compared to previous timestep (mio. ha)
+ v32_land(j,type32,ac)           	Forestry land pools (mio. ha)
+ vm_cdr_aff(j,ac,aff_effect) 		Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
+ vm_forestry_reduction(j,type32,ac)	Reduction of forestry land (mio. ha)
 ;
 
 parameters

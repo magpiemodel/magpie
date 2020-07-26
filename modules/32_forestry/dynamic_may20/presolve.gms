@@ -5,8 +5,17 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*s32_yeardiff = m_yeardiff_forestry(t);
+*define ac_est and ac_sub
+ac_est(ac) = no;
+ac_est(ac) = yes$(ord(ac) <= (m_yeardiff_forestry(t)/5));
 
+ac_sub(ac) = no;
+ac_sub(ac) = yes$(ord(ac) > (m_yeardiff_forestry(t)/5));
+
+display ac_est;
+display ac_sub;
+
+*variable fixing. Harvesting from ac_est is not possible.
 vm_forestry_reduction.fx(j,type32,ac_est) = 0;
 
 ** Start ndc **
@@ -105,8 +114,6 @@ v32_land.up(j,"plant",ac_est) = Inf;
 ** need to be held at constant 1995 levels.
 v32_land.fx(j,"plant",ac)$(s32_initial_distribution=0) = p32_land_start_ac(j,"plant",ac);
 
-*m_boundfix(v32_land,(j,"plant",ac_sub),l,10e-5);
-
 ** fix ndc afforestation forever, all age-classes are fixed except ac0
 v32_land.fx(j,"ndc",ac_sub) = pc32_land(j,"ndc",ac_sub);
 v32_land.lo(j,"ndc",ac_est) = 0;
@@ -117,6 +124,8 @@ v32_land.fx(j,"aff",ac)$(ac.off <= s32_planing_horizon/5) = pc32_land(j,"aff",ac
 v32_land.up(j,"aff",ac)$(ac.off > s32_planing_horizon/5) = pc32_land(j,"aff",ac);
 v32_land.lo(j,"aff",ac_est) = 0;
 v32_land.up(j,"aff",ac_est) = Inf;
+
+m_boundfix(v32_land,(j,type32,ac_sub),l,10e-5);
 
 ** Calculate future yield based on rotation length
 pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac,"forestry"));

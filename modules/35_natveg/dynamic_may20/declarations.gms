@@ -44,8 +44,8 @@ equations
  q35_primforest_change(j)                       Change in primary forest between timesteps (mio. ha per year)
  q35_other_change(j,ac)                     Change in other land between timesteps (mio. ha per year)
  q35_secdforest_conversion(j)                   Secondary forest remains secondary forest (mio. ha)
- q35_secdforest_est(j,ac)					blub
- q35_other_est(j,ac)						blub
+ q35_secdforest_est(j,ac)					Distribution of secdforest additions over ac_est (mio. ha)
+ q35_other_est(j,ac)						Distribution of other land additions over ac_est (mio. ha)
 ;
 
 positive variables
