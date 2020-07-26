@@ -30,9 +30,9 @@ options(error=function()traceback(2))
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdirs <- path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
+  outputdir <- path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
   #Define arguments that can be read from command line
-  readArgs("outputdirs")
+  readArgs("outputdir")
 }
 ###############################################################################
 cat("\nStarting output generation\n")
@@ -56,12 +56,12 @@ x$cost <- NULL
 
 missing <- NULL
 
-for (i in 1:length(outputdirs)) {
-  print(paste("Processing",outputdirs[i]))
-  gdx<-path(outputdirs[i],"fulldata.gdx")
-  rep<-path(outputdirs[i],"report.rds")
+for (i in 1:length(outputdir)) {
+  print(paste("Processing",outputdir[i]))
+  gdx<-path(outputdir[i],"fulldata.gdx")
+  rep<-path(outputdir[i],"report.rds")
   if(file.exists(gdx)) {
-    load(path(outputdirs[i],"config.Rdata"))
+    load(path(outputdir[i],"config.Rdata"))
     scen <- cfg$title
     prefix <- substring(scen, 1, 4)
 
@@ -135,7 +135,7 @@ for (i in 1:length(outputdirs)) {
     a <- collapseNames(add_dimension(a,dim = 3.1,add = "scenario",nm = scen),collapsedim = "data")
     x$cost <- mbind(x$cost,a)
 
-  } else missing <- c(missing,outputdirs[i])
+  } else missing <- c(missing,outputdir[i])
   a <- as.data.table(readRDS(rep))
   a <- a[variable %in% vars,]
   all <- rbind(all,a)

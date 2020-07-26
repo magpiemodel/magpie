@@ -21,9 +21,9 @@ options(error=function()traceback(2))
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdirs <- lucode2::path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
+  outputdir <- lucode2::path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
   #Define arguments that can be read from command line
-  lucode2::readArgs("outputdirs")
+  lucode2::readArgs("outputdir")
 }
 ###############################################################################
 cat("\nStarting output generation\n")
@@ -32,20 +32,20 @@ missing <- NULL
 
 if(file.exists("output/report_all.mif")) file.rename("output/report_all.mif","output/report_all.bak")
 
-for (i in 1:length(outputdirs)) {
-  print(paste("Processing",outputdirs[i]))
+for (i in 1:length(outputdir)) {
+  print(paste("Processing",outputdir[i]))
   #gdx file
-  rep<-path(outputdirs[i],"report.mif")
+  rep<-path(outputdir[i],"report.mif")
   if(file.exists(rep)) {
     #get scenario name
-    load(path(outputdirs[i],"config.Rdata"))
+    load(path(outputdir[i],"config.Rdata"))
     scen <- cfg$title
     #read-in reporting file
     a <- read.report(rep,as.list = FALSE)
     getNames(a,dim=1) <- scen
     #add to reporting mif file
     write.report2(a,file="output/report_all.mif",append=TRUE,ndigit = 4,skipempty = FALSE)
-  } else missing <- c(missing,outputdirs[i])
+  } else missing <- c(missing,outputdir[i])
 }
 if (!is.null(missing)) {
   cat("\nList of folders with missing report.mif\n")
