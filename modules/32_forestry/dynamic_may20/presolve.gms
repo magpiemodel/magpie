@@ -80,8 +80,8 @@ p32_land(t,j,type32,ac)$(ord(ac) > s32_shift) = p32_land(t-1,j,type32,ac-s32_shi
 * Account for cases at the end of the age class set (s32_shift > 1) which are not shifted by the above calculation
 p32_land(t,j,type32,"acx") = p32_land(t,j,type32,"acx") + sum(ac$(ord(ac) > card(ac)-s32_shift), p32_land(t-1,j,type32,ac));
 );
-*should not be necessary. Just to be on the save side
-p32_land(t,j,type32,"ac0") = 0;
+* set ac_est to zero
+p32_land(t,j,type32,ac_est) = 0;
 *' @stop
 
 ** Calculate v32_land.l
