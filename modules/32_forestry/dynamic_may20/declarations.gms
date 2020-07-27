@@ -26,7 +26,6 @@ parameters
  p32_rotation_offset                                offset calc in age class equivalents (1)
  p32_land_start_ac(j,type32,ac)                     Saving first value of starting land (mio. ha)
  p32_land_before(t,j,type32,ac)                     Saving time value of starting land (mio. ha)
- pm_demand_forestry_future(i,kforestry)           	Future forestry demand in current time step (tDM per yr)
  p32_plant_prod_share(t_ext,i) 					 	Share of overall production coming from plantations (1)
  pc32_plant_prod_share_future(i)                    Future Share of overall production coming from plantations in simulation step (1)
  p32_time(ac)                                       Time as a function of age-classes (yr)

@@ -15,6 +15,7 @@ positive variables
 
 parameters
  pc32_carbon_density(j,ag_pools) Above ground carbon density in optimization (tC per ha)
+ pm_representative_rotation(t_all,i)                Representative regional rotation (1)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
