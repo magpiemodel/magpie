@@ -41,7 +41,7 @@ loop (t,
 
       display "Year";
       display ct;
-	
+
 $batinclude "./modules/include.gms" presolve
 
 * intersolve for food demand model

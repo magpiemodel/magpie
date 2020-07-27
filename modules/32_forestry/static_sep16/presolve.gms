@@ -12,9 +12,6 @@ ac_est(ac) = yes$(ord(ac) <= (m_yeardiff_forestry(t)/5));
 ac_sub(ac) = no;
 ac_sub(ac) = yes$(ord(ac) > (m_yeardiff_forestry(t)/5));
 
-display ac_est;
-display ac_sub;
-
 *' @code
 *' Forestry above ground carbon stocks are calculated by multiplying plantations in 1995
 *' with the forestry above ground carbon density of the current time step (`pc32_carbon_density`).
