@@ -42,8 +42,8 @@ q32_bgp_aff(j2,ac) ..
 vm_cdr_aff(j2,ac,"bph") =e=
 v32_land(j2,"aff","ac0") * p32_aff_bgp(j2,ac);
 
-*' Lowest age class can only increase if total afforested land increases
-q32_aff_ac0(j2) ..
+*' ac_est can only increase if total afforested land increases
+q32_aff_est(j2) ..
 sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum((ct,ac), p32_land(ct,j2,"aff",ac));
 
 *-----------------------------------------------

@@ -66,7 +66,7 @@ equations
  q32_land_diff                                      Aggregated difference in forestry land compared to previous timestep (mio. ha)
  q32_max_aff                                        Maximum total global afforestation (mio. ha)
  q32_aff_pol(j)                                     Afforestation policy constraint (mio. ha)
- q32_aff_ac0(j)							            Afforestation constraint for youngest age class (mio. ha)
+ q32_aff_est(j)							            Afforestation constraint for establishment age classes (mio. ha)
  q32_forestry_reduction(j,type32,ac)            	Plantations area reduction (mio. ha)
  q32_cost_recur(i)                                  Recurruing costs (mio. USD)
  q32_establishment_max_glo                          Establishment in current time step for future demand (mio. ha)
@@ -87,7 +87,7 @@ parameters
  ov32_land_missing(t,j,type)                 Forestry land which can be used at extrmemly high costs in case not enough area is available for new establishment (mio. ha)
  ov_landdiff_forestry(t,type)                Aggregated difference in forestry land compared to previous timestep (mio. ha)
  ov32_cost_recur(t,i,type)                   Recurring forest management costs (USD per ha)
- ov_forestry_reduction(t,j,type32,ac,type)   Area harvested for timber production (mio. ha)
+ ov_forestry_reduction(t,j,type32,ac,type)   Reduction of forestry land (mio. ha)
  ov32_land_expansion(t,j,type32,ac,type)     Land expansion (mio. ha)
  ov32_land_reduction(t,j,type32,ac,type)     Land reduction (mio. ha)
  ov32_cost_establishment(t,i,type)           Cost of establishment calculated at the current time step (mio. USD)
@@ -99,7 +99,7 @@ parameters
  oq32_land_diff(t,type)                      Aggregated difference in forestry land compared to previous timestep (mio. ha)
  oq32_max_aff(t,type)                        Maximum total global afforestation (mio. ha)
  oq32_aff_pol(t,j,type)                      Afforestation policy constraint (mio. ha)
- oq32_aff_ac0(t,j,type)                      Afforestation constraint for youngest age class (mio. ha)
+ oq32_aff_est(t,j,type)                      Afforestation constraint for establishment age classes (mio. ha)
  oq32_forestry_reduction(t,j,type32,ac,type) Plantations area reduction (mio. ha)
  oq32_cost_recur(t,i,type)                   Recurruing costs (mio. USD)
  oq32_establishment_max_glo(t,type)          Establishment in current time step for future demand (mio. ha)
@@ -109,6 +109,6 @@ parameters
  oq32_land_reduction(t,j,type32,ac,type)     Land contraction (mio. ha)
  oq32_cost_establishment(t,i,type)           Present value of cost of establishment (mio. USD)
  oq32_bgp_aff(t,j,ac,type)                   Biophysical afforestation calculation (mio. tCeq)
- oq32_forestry_est(t,j,type32,ac,type)       blub
+ oq32_forestry_est(t,j,type32,ac,type)       Distribution of forestry establishment over ac_est (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

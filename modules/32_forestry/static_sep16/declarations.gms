@@ -19,9 +19,10 @@ parameters
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_fore(t,i,type)        Afforestation costs (mio. USD04MER per yr)
- ov_landdiff_forestry(t,type)  Aggregated difference in forestry land compared to previous timestep (mio. ha)
- ov32_land(t,j,type32,ac,type) Forestry land pools (mio. ha)
- ov_cdr_aff(t,j,ac,type)       Expected CDR from afforestation depending on planning horizon (mio. tC)
+ ov_cost_fore(t,i,type)                    Forestry costs (Mio USD)
+ ov_landdiff_forestry(t,type)              Aggregated difference in forestry land compared to previous timestep (mio. ha)
+ ov32_land(t,j,type32,ac,type)             Forestry land pools (mio. ha)
+ ov_cdr_aff(t,j,ac,aff_effect,type)        Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
+ ov_forestry_reduction(t,j,type32,ac,type) Reduction of forestry land (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

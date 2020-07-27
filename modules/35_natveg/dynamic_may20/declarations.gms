@@ -90,7 +90,7 @@ parameters
  oq35_primforest_change(t,j,type)          Change in primary forest between timesteps (mio. ha per year)
  oq35_other_change(t,j,ac,type)            Change in other land between timesteps (mio. ha per year)
  oq35_secdforest_conversion(t,j,type)      Secondary forest remains secondary forest (mio. ha)
- oq35_secdforest_est(t,j,ac,type)          blub
- oq35_other_est(t,j,ac,type)               blub
+ oq35_secdforest_est(t,j,ac,type)          Distribution of secdforest additions over ac_est (mio. ha)
+ oq35_other_est(t,j,ac,type)               Distribution of other land additions over ac_est (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
