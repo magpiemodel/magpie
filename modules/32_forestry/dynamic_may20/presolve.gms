@@ -15,7 +15,7 @@ ac_sub(ac) = yes$(ord(ac) > (m_yeardiff_forestry(t)/5));
 display ac_est;
 display ac_sub;
 
-*variable fixing. Harvesting from ac_est is not possible.
+*Reduction of ac_est is not possible.
 vm_forestry_reduction.fx(j,type32,ac_est) = 0;
 
 ** Start ndc **
