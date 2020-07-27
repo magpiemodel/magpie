@@ -1,5 +1,4 @@
 scalars
- s32_yeardiff									    Year diff forestry (yr)
  s32_shift                                          Number of 5-year age-classes corresponding to current time step length (1)
  p32_max_aff_area                                   Maximum global afforestation area that is greater or equal the exogenous policy target (mio. ha)
 ;
