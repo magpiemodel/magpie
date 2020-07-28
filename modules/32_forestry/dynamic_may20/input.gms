@@ -2,12 +2,12 @@ $setglobal c32_timber_plantations  plantations
 * option: natveg, plantations
 $setglobal c32_aff_mask  noboreal
 * options: unrestricted, noboreal, onlytropical
-$setglobal c32_aff_policy  ndc
+$setglobal c32_aff_policy  npi
 * options: none, npi, ndc
 
 $setglobal c32_aff_bgp  nobgp
 * options: ann,nobgp
-$setglobal c32_tcre_ctrl  ann_TCRElow
+$setglobal c32_tcre_ctrl  ann_TCREmean
 * options: ann_TCREmean, ann_TCREhigh, ann_TCRElow
 
 scalars
