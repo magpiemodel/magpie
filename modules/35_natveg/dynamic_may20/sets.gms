@@ -6,13 +6,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-  land35 Natveg land pools
-  / new, grow, old /
-
   pol35 Land protection policy
   / none, npi, ndc /
-
-  ac_land35(ac,land35) Mapping between age class and natveg land type
 
   prot_type Conservation priority areas
   / BH, CPD, FF, LW, WDPA /
@@ -45,5 +40,4 @@ sets
   /
 ;
 
-alias(ac,ac2);
 alias(ac_poulter,ac_poulter2);
