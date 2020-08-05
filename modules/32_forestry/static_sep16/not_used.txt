@@ -8,11 +8,8 @@
 name,type,reason
 pm_land_start, input, not used
 pm_interest, input, not used
-vm_forestry_reduction, var, not used
 sm_fix_SSP2, input, not needed
 pm_timber_yield, input, not used
 pm_carbon_density_ac_forestry, input, not used
 pm_selfsuff_ext, par, not used
-p32_land_start_ac, par, not used
 pm_demand_forestry_future, par, not used
-pm_representative_rotation, par, not used

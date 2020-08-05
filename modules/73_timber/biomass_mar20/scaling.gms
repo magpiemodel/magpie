@@ -6,6 +6,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 v73_cost_hvarea.scale(i) = 10e4;
-v73_hvarea_other.scale(j,ac_sub) = 10e-4;
+v73_hvarea_other.scale(j,ac) = 10e-4;
 vm_cost_timber.scale(i) = 10e5;
 v73_prod_heaven_timber.scale(j,kforestry) = 10e-3;

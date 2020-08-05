@@ -6,9 +6,9 @@
 # |  Contact: magpie@pik-potsdam.de
 
 
-######################################
-#### Script to start a MAgPIE run ####
-######################################
+# ----------------------------------------------------------
+# description: Start a set of runs with default and high resolution
+# ----------------------------------------------------------
 
 library(gms)
 library(magclass)
@@ -23,6 +23,7 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 
+#the high resolution can be adjusted in the output script "highres.R"
 cfg$output <- c("rds_report","highres")
 
 prefix <- "T07"

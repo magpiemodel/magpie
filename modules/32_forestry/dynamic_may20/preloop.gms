@@ -5,8 +5,8 @@ p32_carbon_density_ac_forestry(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all
 
 ** Calculating the marginal of carbon density i.e. change in carbon density over two time steps
 ** The carbon densities are tC/ha/year so we don't have to divide by timestep length.
-loop(ac_sub,
-  p32_carbon_density_ac_marg(t_all,j,ac_sub) = p32_carbon_density_ac_forestry(t_all,j,ac_sub) - p32_carbon_density_ac_forestry(t_all,j,ac_sub-1);
+loop(ac$(ord(ac) > 1),
+  p32_carbon_density_ac_marg(t_all,j,ac) = p32_carbon_density_ac_forestry(t_all,j,ac) - p32_carbon_density_ac_forestry(t_all,j,ac-1);
   );
 p32_carbon_density_ac_marg(t_all,j,"ac0") = 0;
 
@@ -109,16 +109,6 @@ loop(t_all,
   p32_rotation_cellular_harvesting(t_all+1,j)$(abs(p32_rotation_cellular_harvesting(t_all+1,j) - p32_rotation_cellular_harvesting(t_all,j))>2 AND ord(t_all)<card(t_all)) = p32_rotation_cellular_harvesting(t_all,j);
   );
 
-** Rotation used for establishment decision.
-p32_rot_length_ac_eqivalent(t_all,j) = p32_rotation_cellular_estb(t_all,j);
-
-** Define protect and harvest setting
-protect32(t,j,ac_sub) = no;
-protect32(t,j,ac_sub) = yes$(ord(ac_sub) < p32_rotation_cellular_harvesting(t,j));
-
-harvest32(t,j,ac_sub) = no;
-harvest32(t,j,ac_sub) = yes$(ord(ac_sub) >= p32_rotation_cellular_harvesting(t,j));
-
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
 
@@ -135,26 +125,21 @@ p32_cdr_ac_plant(t,j,ac) = 0;
 ** Initialize parameter
 p32_land(t,j,type32,ac) = 0;
 
-** divide initial forestry area by number of age classes within protect32
-** since protect32 is TRUE for ord(ac_sub) < p32_rotation_cellular_estb(j) there is
-** one additional junk which is assigned to ac0
+** Define ini32 set. ac0 is excluded here. Therefore no initial shifting is needed.
+ini32(j,ac) = no;
+ini32(j,ac) = yes$(ord(ac) > 1 AND ac.off <= p32_rotation_cellular_harvesting("y1995",j));
+
+** divide initial forestry area by number of age classes within ini32
 if(s32_initial_distribution = 0,
-** Initialize with highest age class and don't shift it when intitial distribution is off
+** Initialize with highest age class
   p32_land(t,j,"plant","acx") = pcm_land(j,"forestry");
 
 elseif s32_initial_distribution = 1,
-** Initialize with equal distribtuion in rotation age class
-  p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular_estb("y1995",j);
-  p32_land("y1995",j,"plant",ac_sub)$(protect32("y1995",j,ac_sub)) = p32_plant_ini_ac(j);
-  p32_land("y1995",j,"plant","ac0") = p32_plant_ini_ac(j);
+** Initialize with equal distribution among rotation age classes
+  p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular_harvesting("y1995",j);
+  p32_land("y1995",j,"plant",ac)$(ini32(j,ac)) = p32_plant_ini_ac(j);
 
-** Initial shifting of age classes
-  p32_land(t,j,"plant",ac)$(ord(ac) > 1) = p32_land(t,j,"plant",ac-1);
-** Reset ac0 to zero
-  p32_land("y1995",j,"plant","ac0") = 0;
-
-  );
-*display p32_land;
+);
 ** Initialization of land
 p32_land_start_ac(j,type32,ac) = p32_land("y1995",j,type32,ac);
 
