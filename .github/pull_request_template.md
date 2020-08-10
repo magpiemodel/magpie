@@ -1,7 +1,7 @@
 Please fill following information
-(Add additional info if you think its important and not covered by this PR):
+(Add additional info if you think its important and not covered by this Pull Request (PR)):
 
-## Purpose of this Pull Request (PR)
+## Purpose of this PR
 
 - Purpose
 
