@@ -8,5 +8,8 @@
 sets
    type32 plantation type
    / aff, ndc, plant /
+   
+	aff_effect biochemical and local biophysical effect of afforestation on climate
+   / bgc, bph /
 ;
 *** EOF sets.gms ***

@@ -10,7 +10,7 @@ if(s35_secdf_distribution = 0,
   i35_secdforest(j,"acx") = pcm_land(j,"secdforest");
 
   elseif s35_secdf_distribution = 1,
-  i35_secdforest(j,ac_sub) = pcm_land(j,"secdforest")/card(ac_sub);
+  i35_secdforest(j,ac) = pcm_land(j,"secdforest")/card(ac);
 );
 
 *use residual approach to avoid rounding errors

@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description:
+# description: Forces runstatistics submission in central repo
 # comparison script: FALSE
 # ---------------------------------------------------------------
 

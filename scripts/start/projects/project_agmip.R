@@ -1,17 +1,22 @@
-# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
+# ----------------------------------------------------------
+# description: AgMIP GlobEcon simulations 2020
+# ----------------------------------------------------------
+
 
 ######################################
 #### Script to start a MAgPIE run ####
 ######################################
 
-library(gms)
+library(lucode2)
 library(magclass)
+library(gms)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
@@ -24,18 +29,43 @@ cfg$force_download <- FALSE
 #cfg$results_folder <- "output/:title:"
 cfg$results_folder <- "output/:title::date:"
 
+cfg$output <- c("rds_report","projects/agmip_report","validation","extra/disaggregation")
+
+
+
+#################################################################
+# 1 Baseline SSP1-3 simulations "_NoMt_NoCC"                    #
+#################################################################
+
+
+### SSPs w/o mitigation ################
+cfg$title <- "SSP1_NoMt_NoCC"
+cfg <- gms::setScenario(cfg,c("SSP1","NPI"))
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- "SSP2_NoMt_NoCC"
+cfg <- gms::setScenario(cfg,c("SSP2","NPI"))
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- "SSP3_NoMt_NoCC"
+cfg <- gms::setScenario(cfg,c("SSP3","NPI"))
+start_run(cfg,codeCheck=FALSE)
+
+
+
+#reset:
+cfg <- gms::setScenario(cfg,c("SSP2","NPI"))
 
 
 
 
-##############################################
-# AgMIP diet scenarios January 2020          #
-##############################################
+#################################################################
+# 2 AgMIP diet scenarios based on SSP2 "SSP2_NoMt_NoCC_"        #
+#################################################################
 
 
-
-##############################################
-# EAT Lancet scenarios:
+#################################################################
+# 2A EAT Lancet scenarios "FlexA_":
 
 ### settings:
 cfg <- setScenario(cfg,c("SSP2","NPI"))
@@ -105,8 +135,8 @@ cfg <- setScenario(cfg,c("SSP2","NPI"))
 
 
 
-##############################################
-# Livestock diet scenarios:
+#################################################################
+# 2B Livestock diet scenarios "HalfRDoM_DEV" and "HalfRD_DEV":
 
 ### settings:
 
