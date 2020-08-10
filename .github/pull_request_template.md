@@ -1,6 +1,7 @@
-Please fill following information wherever applicable.
+Please fill following information
+(Add additional info if you think its important and not covered by this PR):
 
-## Purpose of this PR
+## Purpose of this Pull Request (PR)
 
 - Purpose
 
@@ -17,20 +18,24 @@ Please fill following information wherever applicable.
 - [ ] Minor change (Change which does not modify core model code i.e., in /modules).
 - [ ] Major change (fix or feature that would change current model behavior).
 
-# How Has This Been Tested?
+## How Has This Been Tested?
 
 - [ ] Runs using starting script which tests current defaults (using `test_runs.R`).
 - [ ] Runs using starting script which successfully runs the same scenarios as in `test_runs.R` but with the changes from PR.
 - [ ] (If applicable) Runs using different scenarios/mappings which are not the default (12 regions/c200 clusters).
 
-# Default configuration additions/changes:
+## *Additions* or *Changes* to default configuration (default.cfg):
+Additions are the introduction of new model components in default config
+
+Changes are deletion or updates to the existing model components in default config
 
 - [ ] Realizations:
+- [ ] Scenario switches:
 - [ ] Scalars/Constants:
-- [ ] Model interfaces added:
-- [ ] Other changes:
+- [ ] Model interfaces:
+- [ ] Others:
 
-# Checklist:
+## Checklist:
 
 - [ ] Self-review of my own code.
 - [ ] Added changes to `CHANGELOG.md`
