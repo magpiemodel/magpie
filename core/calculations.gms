@@ -10,6 +10,7 @@
 * optimization process. Hence these lines CAN INFLUENCE the optimization process
 * but CANNOT BE INFLUENCED by it.
 
+$batinclude "./modules/include.gms" start
 
 $batinclude "./modules/include.gms" preloop
 

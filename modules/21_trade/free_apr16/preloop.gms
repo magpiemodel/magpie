@@ -9,3 +9,6 @@
 
 *set vm_cost_trade zero in order to avoid a free variable
 vm_cost_trade.fx(i)               = 0;
+
+pm_selfsuff_ext(t_ext,i,kforestry) = f21_self_suff("y2150",i,kforestry);
+pm_selfsuff_ext(t_all,i,kforestry) = f21_self_suff(t_all,i,kforestry);

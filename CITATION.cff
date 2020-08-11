@@ -86,8 +86,8 @@ authors:
     email: popp@pik-potsdam.de
 
 title: MAgPIE - An Open Source land-use modeling framework
-version: 4.2dev
-date-released: 2020-04-15
+version: 4.2.1dev
+date-released: 2020-05-15
 repository-code: https://github.com/magpiemodel/magpie
 keywords:
   - landuse
