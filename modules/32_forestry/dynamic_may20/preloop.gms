@@ -143,9 +143,27 @@ elseif s32_initial_distribution = 1,
 ** Initialization of land
 p32_land_start_ac(j,type32,ac) = p32_land("y1995",j,type32,ac);
 
+
+
+
 *fix bph effect to zero for all age classes except the ac that is chosen for the bph effect to occur after planting (e.g. canopy closure)
+*fade-in from ac10 to ac30. First effect in ac10 (ord 3), last effect in ac30 (ord 7).
+ac_bph(ac) = no;
+ac_bph(ac) = yes$(ord(ac) >= 3 AND ord(ac) <= 7);
+display ac_bph;
+
 p32_aff_bgp(j,ac) = 0;
-p32_aff_bgp(j,"%c32_bgp_ac%") = f32_aff_bgp(j,"%c32_aff_bgp%");
+p32_tcre_glo(j) = 0;
+if(s32_tcre_local = 1,
+	p32_aff_bgp(j,ac_bph) = f32_aff_bgp(j,"%c32_aff_bgp%")/f32_tcre(j,"%c32_tcre_ctrl%")/card(ac_bph);
+else
+*m_weightedmean returns a global value, which is then used assigned to all j. We use land area as weight.
+  p32_tcre_glo(j2) = m_weightedmean(f32_tcre(j,"%c32_tcre_ctrl%"),sum(land, pcm_land(j,land)),j)
+  p32_aff_bgp(j,ac_bph) = f32_aff_bgp(j,"%c32_aff_bgp%")/p32_tcre_glo(j)/card(ac_bph)
+);
+
+
+
 
 ** Proportion of production coming from plantations
 p32_plant_prod_share(t_ext,i) = f32_plant_prod_share("y2100");
