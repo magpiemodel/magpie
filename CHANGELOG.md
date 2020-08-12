@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### changed
  - **scripts** updated selection routine for start and output scripts
  - **scripts** replaced lucode dependency with newer packages lucode2 and gms
- - **modules** Changes to the costs calculation in 13_tc, 39_landconversion, 41_area_equipped_for_irrigation and 58_peatland. For the current time step, the optimization costs include the annuity of the present investment. The values of costs in the shiny app and get from magpie4's reportCosts() function are the overall costs calculated in the postprocessing.
+ - **modules** Changes to the costs calculation in 13_tc, 39_landconversion, 41_area_equipped_for_irrigation and 58_peatland. For the current time step, the optimization costs include the annuity of the present investment. magpie4's reportCosts() function was modified to consider these changes.
 
 ### Removed
  - **scripts** removed GP_final start script due to obsolescence
