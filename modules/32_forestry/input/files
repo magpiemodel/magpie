@@ -5,3 +5,5 @@ aff_onlytropical.cs2
 npi_ndc_aff_pol.cs3
 f32_plant_prod_share.csv
 f32_bph_effect.cs3
+f32_bph_effect_noTCRE.cs3
+f32_localTCRE.cs3

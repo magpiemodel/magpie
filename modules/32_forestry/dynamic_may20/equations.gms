@@ -34,17 +34,17 @@ q32_cost_total(i2) .. vm_cost_fore(i2) =e=
 
 q32_cdr_aff(j2,ac) ..
 vm_cdr_aff(j2,ac,"bgc") =e=
-v32_land(j2,"aff","ac0") * sum(ct, p32_cdr_ac(ct,j2,ac))
-+ v32_land(j2,"plant","ac0") * sum(ct, p32_cdr_ac_plant(ct,j2,ac))
+sum(ac_est, v32_land(j2,"aff",ac_est)) * sum(ct, p32_cdr_ac(ct,j2,ac))
++ sum(ac_est, v32_land(j2,"plant",ac_est)) * sum(ct, p32_cdr_ac_plant(ct,j2,ac))
 ;
 
 q32_bgp_aff(j2,ac) ..
 vm_cdr_aff(j2,ac,"bph") =e=
 v32_land(j2,"aff","ac0") * p32_aff_bgp(j2,ac);
 
-*' Lowest age class can only increase if total afforested land increases
-q32_aff_ac0(j2) ..
-v32_land(j2,"aff","ac0") =l= sum(ac, v32_land(j2,"aff",ac)) - sum((ct,ac), p32_land(ct,j2,"aff",ac));
+*' ac_est can only increase if total afforested land increases
+q32_aff_est(j2) ..
+sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum((ct,ac), p32_land(ct,j2,"aff",ac));
 
 *-----------------------------------------------
 ****************** Land ************************
@@ -58,7 +58,7 @@ v32_land(j2,"aff","ac0") =l= sum(ac, v32_land(j2,"aff",ac)) - sum((ct,ac), p32_l
 *' The constraint `q32_aff_pol` accounts for the exogenous afforestation prescribed by NPI/NDC policies.
 
  q32_aff_pol(j2) ..
- v32_land(j2,"ndc","ac0") =e= sum(ct, p32_aff_pol_timestep(ct,j2));
+ sum(ac_est, v32_land(j2,"ndc",ac_est)) =e= sum(ct, p32_aff_pol_timestep(ct,j2));
 
 *' The constraint `q32_max_aff` accounts for the allowed maximum global
 *' afforestation defined in `p32_max_aff_area`. Note that NPI/NDC afforestation
@@ -135,14 +135,14 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 
 *' Global maximum constraint based on meeting all the future timber demand (`pm_demand_forestry_future`).
 q32_establishment_max_glo ..
-              sum(j2, (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) / m_timestep_length_forestry * pc32_yield_forestry_future(j2))
+              sum(j2, (sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry * pc32_yield_forestry_future(j2))
               =l=
               sum(i2, pm_demand_forestry_future(i2,"wood"))
               ;
 
 *' Global minimum constraint based on a proportion (`pc32_plant_prod_share_future`) of future timber demand (`pm_demand_forestry_future`).
 q32_establishment_min_glo ..
-              sum(j2, (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) / m_timestep_length_forestry * pc32_yield_forestry_future(j2))
+              sum(j2, (sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry * pc32_yield_forestry_future(j2))
               =g=
               sum(i2, pm_demand_forestry_future(i2,"wood")* pc32_plant_prod_share_future(i2))
               ;
@@ -150,10 +150,16 @@ q32_establishment_min_glo ..
 *' Regional minimum constraint for maintaining current forestry area patterns,
 *' while accounting for regional self sufficiency in (`pm_selfsuff_ext`) timber production.
 q32_establishment_min_reg(i2) ..
-              sum(cell(i2,j2), (v32_land(j2,"plant","ac0") + v32_land_missing(j2)) / m_timestep_length_forestry * pc32_yield_forestry_future(j2))
+              sum(cell(i2,j2), (sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry * pc32_yield_forestry_future(j2))
               =g=
               pm_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2) * sum(ct, pm_selfsuff_ext(ct,i2,"wood"))
               ;
+
+*' This constraint distributes additions to forestry land over ac_est, 
+*' which depends on the time step length (e.g. ac0 and ac5 for a 10 year time step).
+
+q32_forestry_est(j2,type32,ac_est) ..
+v32_land(j2,type32,ac_est) =e= sum(ac_est2, v32_land(j2,type32,ac_est2))/card(ac_est2);
 
 *' Change in forestry area is the difference between plantation area from previous time
 *' step ('pc32_land') and optimized plantation area from current time step ('v32_land')

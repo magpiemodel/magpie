@@ -26,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
  - **scripts** removed GP_final start script due to obsolescence
-
+ - **32_forestry** include new datasets of the bph effect of afforestation / replaced the bph ageclass switch with a fade-in between ac10 and ac30 in (dynamic_may20)
 ### fixed
 
 ## [4.2.1] - 2020-05-15
