@@ -4,3 +4,6 @@
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
+
+pc39_cost_landcon_past(j,land) = p39_cost_landcon_past(t,j,land);
+                             
