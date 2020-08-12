@@ -7,7 +7,7 @@
 
 *' @description This realization relates factor costs to volume of production of
 *' a given crop. The latter [17_production] depends on area harvested
-*' from [30_crop] and yields from [14_yields]. In other words, in this 
+*' from [30_crop] and yields from [14_yields]. In other words, in this
 *' implementation, factor costs entirely depend on the volume of production.
 *' As such, there are no incentives to allocate and concentrate production
 *' into more productive cells.
@@ -19,9 +19,10 @@
 
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "declarations" $include "./modules/38_factor_costs/fixed_per_ton_mar18/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/38_factor_costs/fixed_per_ton_mar18/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/38_factor_costs/fixed_per_ton_mar18/equations.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/38_factor_costs/fixed_per_ton_mar18/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/38_factor_costs/fixed_per_ton_mar18/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/38_factor_costs/sticky_feb18/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/38_factor_costs/sticky_feb18/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/38_factor_costs/sticky_feb18/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/38_factor_costs/sticky_feb18/equations.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/38_factor_costs/sticky_feb18/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/38_factor_costs/sticky_feb18/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
