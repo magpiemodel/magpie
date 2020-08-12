@@ -21,5 +21,4 @@
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%factor_costs%" == "fixed_per_ton_mar18" $include "./modules/38_factor_costs/fixed_per_ton_mar18/realization.gms"
 $Ifi "%factor_costs%" == "mixed_feb17" $include "./modules/38_factor_costs/mixed_feb17/realization.gms"
-$Ifi "%factor_costs%" == "sticky_feb18" $include "./modules/38_factor_costs/sticky_feb18/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

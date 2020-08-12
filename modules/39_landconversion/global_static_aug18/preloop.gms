@@ -13,3 +13,5 @@ i39_cost_establish(land_establish39) = s39_cost_establish;
 
 i39_cost_clearing(land) = 0;
 i39_cost_clearing(land_clearing39) = s39_cost_clearing;
+
+p39_cost_landcon_past(t,j,land) = 0;
