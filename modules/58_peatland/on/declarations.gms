@@ -19,8 +19,6 @@ parameters
  pc58_peatland_man(j,man58,land58)					Managed peatland (mio. ha)
  pc58_peatland_intact(j)							Intact peatland (mio. ha)
  p58_mapping_cell_climate(j,clcl58)				Mapping between cells and climate regions (binary)
- p58_peatland_cost_past(t,j)						Cost for managed peatland expansion from the past (mio. USD05MER per yr)
- pc58_peatland_cost_past(j)							Cost for managed peatland expansion from the past in the current time step (mio. USD05MER per yr)
 ;
 
 equations

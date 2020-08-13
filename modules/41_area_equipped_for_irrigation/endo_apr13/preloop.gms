@@ -6,5 +6,3 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 pc41_AEI_start(j)=f41_irrig(j);
-
-p41_cost_AEI_past(t,i) = 0;
