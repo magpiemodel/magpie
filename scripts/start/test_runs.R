@@ -37,24 +37,24 @@ cfg$results_folder <- "output/:title:"
 for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test should be for SSP2
   for(macc in c("PBL_2007","PBL_2019")) {
     for (co2_price_path in c("BAU","POL")) {
-      
+
       cfg$gms$c57_macc_version <- macc
-      
+
       if (co2_price_path == "BAU") {
         cfg <- setScenario(cfg,c(ssp,"NPI"))
         cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi" #update to most recent coupled runs asap
         cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
-        
+
       } else if (co2_price_path == "POL"){
         cfg <- setScenario(cfg,c(ssp,"NDC"))
         cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE" #update to most recent coupled runs asap
         cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE" ##update to most recent coupled runs asap
       }
-      
+
       cfg$title <- paste0(pr_flag,"_",user,"_",ssp,"-",co2_price_path,"_",macc) #Create easily distinguishable run title
-      
+
       cfg$output <- c("rds_report") # Only run rds_report after model run
-      
+
       start_run(cfg,codeCheck=TRUE) # Start MAgPIE run
       #cat(cfg$title)
     }
