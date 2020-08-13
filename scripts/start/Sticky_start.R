@@ -20,6 +20,6 @@ cfg$output <- c("interpolation","rds_report","disaggregation")
 
 
 #Factor costs realization
-cfg$gms$factor_costs <- realization[j]
+cfg$gms$factor_costs <- realization[1]
 
 start_run(cfg=cfg)
