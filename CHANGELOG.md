@@ -22,12 +22,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### changed
  - **scripts** updated selection routine for start and output scripts
  - **scripts** replaced lucode dependency with newer packages lucode2 and gms
+- **32_forestry** include new datasets of the bph effect of afforestation / replaced the bph ageclass switch with a fade-in between ac10 and ac30 in (dynamic_may20)
  - **modules**
  - **13_tc**, **39_landconversion**, **41_area_equipped_for_irrigation** and **58_peatland**. For the current time step, the optimization costs only include now the annuity of the present investment. magpie4's reportCosts() function was modified to consider these changes.
 
 ### Removed
  - **scripts** removed GP_final start script due to obsolescence
- - **32_forestry** include new datasets of the bph effect of afforestation / replaced the bph ageclass switch with a fade-in between ac10 and ac30 in (dynamic_may20)
+
 ### fixed
 
 ## [4.2.1] - 2020-05-15
