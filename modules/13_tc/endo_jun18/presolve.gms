@@ -5,7 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-pc13_tech_cost_past(i) = p13_tech_cost_past(t,i);
 
 pc13_land(i) = sum(cell(i,j),pcm_land(j,"crop"));
 
