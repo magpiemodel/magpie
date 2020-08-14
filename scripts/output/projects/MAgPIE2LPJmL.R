@@ -37,10 +37,9 @@ title <- cfg$title
 print("generating INMS output for the run: ")
 print(title)
 
-filename=paste0(outputdir,"report_",title,".mif")
-gdx=paste0(outputdir,"/fulldata.gdx")
+gdx <- paste0(outputdir,"/fulldata.gdx")
 
-tgz = paste0("/p/projects/landuse/data/input/archive/",strsplit(cfg$input[1],split = "c200")[[1]][[1]],"0.5.tgz")
+tgz <- paste0("/p/projects/landuse/data/input/archive/",strsplit(cfg$input[1],split = "c200")[[1]][[1]],"0.5.tgz")
 print(paste0("trying to extract lpj_yields_0.5.mz from ",tgz))
 untar(tarfile = tgz, files = "lpj_yields_0.5.mz", exdir=outputdir)
 
