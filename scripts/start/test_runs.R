@@ -25,7 +25,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # choose a meaningful Pull Request (PR) flag
-pr_flag <- "Default"
+pr_flag <- "PR_MACC"
 
 # Grab user name
 user <- Sys.info()[["user"]]
@@ -35,8 +35,10 @@ cfg$results_folder <- "output/:title:"
 ## Create a set of runs based on default.cfg
 
 for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test should be for SSP2
+  for(macc in c("PBL_2007","PBL_2019")) {
     for (co2_price_path in c("BAU","POL")) {
 
+      cfg$gms$c57_macc_version <- macc
 
       if (co2_price_path == "BAU") {
         cfg <- setScenario(cfg,c(ssp,"NPI"))
@@ -49,7 +51,7 @@ for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test shou
         cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE" ##update to most recent coupled runs asap
       }
 
-      cfg$title <- paste0(pr_flag,"_",user,"_",ssp,"-",co2_price_path) #Create easily distinguishable run title
+      cfg$title <- paste0(pr_flag,"_",user,"_",ssp,"-",co2_price_path,"_",macc) #Create easily distinguishable run title
 
       cfg$output <- c("rds_report") # Only run rds_report after model run
 
@@ -57,3 +59,4 @@ for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test shou
       #cat(cfg$title)
     }
   }
+}
