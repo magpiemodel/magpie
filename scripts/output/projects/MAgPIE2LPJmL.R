@@ -46,6 +46,8 @@ untar(tarfile = tgz, files = "lpj_yields_0.5.mz", exdir=outputdir)
 print("create an separate output directory for cellular results")
 outputpath<-paste0("./output/",title,"/")
 dir.create(outputpath)
+print("save origin path in folder so that original run data can be found")
+write.table(x = outputdir,file = paste0(outputpath,"origin_folder.txt"),row.names = FALSE,col.names = FALSE)
 
 print("starting cellular output generation using getReportMAgPIE2LPJmL")
 
