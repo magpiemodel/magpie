@@ -169,4 +169,13 @@ else
 p32_plant_prod_share(t_ext,i) = f32_plant_prod_share("y2100");
 p32_plant_prod_share(t_all,i) = f32_plant_prod_share(t_all);
 
+** Switch according to scenario if this ratio should be static or increasing over time
+** Values are overwritten in case we use a constant switch
+
+$ifthen "%c32_prod_ratio%" == "increasing"
+  p32_plant_prod_share(t_all,i) = p32_plant_prod_share(t_all,i);
+$elseif "%c32_prod_ratio%" == "constant"
+  p32_plant_prod_share(t_all,i) = p32_plant_prod_share("y1995",i);
+$endif
+
 **************************************************************************

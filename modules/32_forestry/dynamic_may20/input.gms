@@ -9,6 +9,8 @@ $setglobal c32_aff_bgp  nobgp
 * options: ann,nobgp
 $setglobal c32_tcre_ctrl  ann_TCREmean
 * options: ann_TCREmean, ann_TCREhigh, ann_TCRElow
+$setglobal c32_prod_ratio  increasing
+* options increasing, constant
 
 scalars
   s32_reESTBcost                  Re establishment cost (USD per ha) / 2000 /
