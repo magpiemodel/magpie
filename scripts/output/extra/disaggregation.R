@@ -7,8 +7,7 @@
 
 # --------------------------------------------------------------
 # description: Interpolates land pools to 0.5 degree resolution
-# type: single
-# position: 3
+# comparison script: FALSE
 # ---------------------------------------------------------------
 
 #Version 1.03 - Jan Philipp Dietrich

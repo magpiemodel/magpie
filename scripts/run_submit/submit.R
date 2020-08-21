@@ -80,7 +80,7 @@ rm(gams_runtime,input_data,module_setup,validation)
 comp <- FALSE
 submit <- "direct"
 output <- cfg$output
-outputdirs <- runfolder
+outputdir <- runfolder
 sys.source("output.R",envir=new.env())
 
 # get runtime for output
