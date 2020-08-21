@@ -25,7 +25,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # choose a meaningful Pull Request (PR) flag
-pr_flag <- "rc_Forestry_02"
+pr_flag <- "rc_Default_02"
 
 # Grab user name
 user <- Sys.info()[["user"]]
