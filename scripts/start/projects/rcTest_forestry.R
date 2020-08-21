@@ -57,9 +57,9 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "rc_Forestry_"
+identifier_flag <- "rc_Forestry_02"
 
-cat(paste0("Test dynamic ac set"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Release Candidate test"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 #xx = c()
 
