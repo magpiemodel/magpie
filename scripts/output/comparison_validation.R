@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description:
+# description: Creates an validation pdf out of several runs
 # comparison script: TRUE
 # ---------------------------------------------------------------
 
