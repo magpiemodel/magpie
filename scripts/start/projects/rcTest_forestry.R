@@ -63,7 +63,7 @@ cat(paste0("Release Candidate test"), file=paste0(log_folder,"/",identifier_flag
 
 #xx = c()
 
-for (co2_price_path in c("2deg")) {
+for (co2_price_path in c("NPI","2deg")) {
 
   for(s32_initial_distribution in c(1)){
 
