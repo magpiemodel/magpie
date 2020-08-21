@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: forestry simple test
+# description: Forestry test for release candidate 4p3
 # ----------------------------------------------------------
 
 ######################################
