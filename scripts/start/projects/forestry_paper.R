@@ -55,65 +55,62 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "Paper1_01"
+identifier_flag <- "Paper1_02"
 
 cat(paste0("New set of runs for first paper"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
-#xx = c()
+for(c32_prod_ratio in c("increasing","constant")){
+  for (co2_price_path in c("NPI")) {
 
-for (co2_price_path in c("NPI")) {
+    for(s32_initial_distribution in c(1)){
 
-  for(s32_initial_distribution in c(1)){
+      cfg$gms$s32_initial_distribution = s32_initial_distribution
+      cfg$gms$s73_demand_switch = s32_initial_distribution
 
-    cfg$gms$s32_initial_distribution = s32_initial_distribution
-    cfg$gms$s73_demand_switch = s32_initial_distribution
+      if(s32_initial_distribution == 1) timber_flag = "timberON"
+      if(s32_initial_distribution == 0) timber_flag = "timberOFF"
 
-    if(s32_initial_distribution == 1) timber_flag = "timberON"
-    if(s32_initial_distribution == 0) timber_flag = "timberOFF"
+      for(emis_policy in c("redd+_nosoil")){
 
-    for(emis_policy in c("redd+_nosoil")){
+        for(ssp in c("SSP1","SSP2","SSP3")){
+          if(emis_policy == "redd+_nosoil") cfg$gms$s32_plant_carbon_foresight = 1
+          if(emis_policy == "ssp_nosoil")   cfg$gms$s32_plant_carbon_foresight = 0
 
-      for(ssp in c("SSP1","SSP2","SSP3")){
-        if(emis_policy == "redd+_nosoil") cfg$gms$s32_plant_carbon_foresight = 1
-        if(emis_policy == "ssp_nosoil")   cfg$gms$s32_plant_carbon_foresight = 0
 
-        for(c32_prod_ratio in c("increasing","constant")){
-          if (co2_price_path == "NPI" && emis_policy == "redd+_nosoil") {
-            cfg <- setScenario(cfg,c(ssp,"NPI"))
-            cfg$gms$c56_emis_policy <- emis_policy
-            cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi" #update to most recent coupled runs asap
-            cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
-            cfg$gms$c32_prod_ratio <- c32_prod_ratio
-            pol_flag = "REDD+"
-            co2_price_path_flag = "Baseline"
-          } else if (co2_price_path == "2deg"){
-            cfg <- setScenario(cfg,c(ssp,"NDC"))
-            cfg$gms$c56_emis_policy <- emis_policy
-            cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
-            cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
-            cfg$gms$c32_prod_ratio <- c32_prod_ratio
-            if(emis_policy == "ssp_nosoil") pol_flag = ""
-            if(emis_policy == "redd+_nosoil") pol_flag = "REDD+"
-            co2_price_path_flag = "Policy"
-          } else if (ssp != "SSP2" && emis_policy!="redd+_nosoil"){
-            break
-          }
+            if (co2_price_path == "NPI" && emis_policy == "redd+_nosoil") {
+              cfg <- setScenario(cfg,c(ssp,"NPI"))
+              cfg$gms$c56_emis_policy <- emis_policy
+              cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi" #update to most recent coupled runs asap
+              cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
+              cfg$gms$c32_prod_ratio <- c32_prod_ratio
+              pol_flag = "REDD+"
+              co2_price_path_flag = "Baseline"
+            } else if (co2_price_path == "2deg" && emis_policy == "redd+_nosoil"){
+              cfg <- setScenario(cfg,c(ssp,"NDC"))
+              cfg$gms$c56_emis_policy <- emis_policy
+              cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+              cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+              cfg$gms$c32_prod_ratio <- c32_prod_ratio
+              if(emis_policy == "ssp_nosoil") pol_flag = ""
+              if(emis_policy == "redd+_nosoil") pol_flag = "REDD+"
+              co2_price_path_flag = "Policy"
+            }
+
+          #          cfg$gms$c56_pollutant_prices <- "coupling"
+          #          cfg$gms$c60_2ndgen_biodem <- "coupling"
+
+          #          file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
+          #          file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
+
+          #cfg$title <- paste0(identifier_flag,"_",ssp,"_",pol_flag,"_",co2_price_path_flag,"_",timber_flag)
+          #cfg$title <- paste0(identifier_flag,"_",ssp,"_",pol_flag,"_",co2_price_path_flag)
+          cfg$title <- paste0(identifier_flag,"_",ssp,"_",co2_price_path_flag,"_PlantShr_",c32_prod_ratio)
+
+          cfg$output <- c("rds_report")
+
+          #xx <- c(xx,cfg$title)
+          start_run(cfg,codeCheck=FALSE)
         }
-
-        #          cfg$gms$c56_pollutant_prices <- "coupling"
-        #          cfg$gms$c60_2ndgen_biodem <- "coupling"
-
-        #          file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
-        #          file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
-
-        #cfg$title <- paste0(identifier_flag,"_",ssp,"_",pol_flag,"_",co2_price_path_flag,"_",timber_flag)
-        #cfg$title <- paste0(identifier_flag,"_",ssp,"_",pol_flag,"_",co2_price_path_flag)
-        cfg$title <- paste0(identifier_flag,"_",ssp,"_",co2_price_path_flag,"_PlantShr_",c32_prod_ratio)
-
-        cfg$output <- c("rds_report")
-
-#        xx <- c(xx,cfg$title)
-        start_run(cfg,codeCheck=FALSE)
       }
     }
   }
