@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: simulate dynamic forest and timber production
+# description: Temporary script for forestry paper
 # ----------------------------------------------------------
 
 ######################################
