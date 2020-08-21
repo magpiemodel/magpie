@@ -6,8 +6,8 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description:
-# comparison script: TRUE
+# description: Creates a validation pdf out of an existing mif file, speeding up the process.
+# comparison script: FALSE
 # ---------------------------------------------------------------
 
 library(mip)
