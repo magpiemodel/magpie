@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: Forestry paper simulations 
+# description: Forestry paper simulations
 # ----------------------------------------------------------
 
 ######################################
@@ -30,7 +30,7 @@ source("config/default.cfg")
 ###########################################################################
 
 ### TIME
-#cfg$gms$c_timesteps <- "5year"
+cfg$gms$c_timesteps <- "5year"
 
 ### Other settings
 #cfg$gms$land <- "feb15"
@@ -55,9 +55,9 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "Paper1_03"
+identifier_flag <- "Paper1_04"
 
-cat(paste0("New set of runs for first paper including all setting changes"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("5 year runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 for(s32_fix_plant in c(0,1)){
 
