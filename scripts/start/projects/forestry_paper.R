@@ -110,7 +110,7 @@ for(s32_fix_plant in c(0,1)){
             #cfg$title <- paste0(identifier_flag,"_",ssp,"_",co2_price_path_flag,"_PlantShr_",c32_prod_ratio)
             cfg$title <- paste0(identifier_flag,"_",ssp,"_",co2_price_path_flag,"_",plant_area_flag,"_",timber_flag,"_",c32_prod_ratio)
 
-            cfg$output <- c("rds_report")
+            cfg$output <- c("rds_report","extra/disaggregation","extra/force_runstatistics")
 
             #xx <- c(xx,cfg$title)
             start_run(cfg,codeCheck=FALSE)
