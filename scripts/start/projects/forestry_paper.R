@@ -55,19 +55,19 @@ cfg$recalc_npi_ndc <- "ifneeded"
 log_folder <- "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "Paper1_02"
+identifier_flag <- "Paper1_03"
 
-cat(paste0("New set of runs for first paper"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("New set of runs for first paper including all setting changes"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 for(s32_fix_plant in c(0,1)){
 
   if(s32_fix_plant == 1) plant_area_flag = "PlantFIX"
   if(s32_fix_plant == 0) plant_area_flag = "PlantUNC"
 
-  for(c32_prod_ratio in c("increasing")){
+  for(c32_prod_ratio in c("increasing","constant")){
     for (co2_price_path in c("NPI")) {
 
-      for(s32_initial_distribution in c(1)){
+      for(s32_initial_distribution in c(1,0)){
 
         cfg$gms$s32_initial_distribution = s32_initial_distribution
         cfg$gms$s73_demand_switch = s32_initial_distribution
@@ -108,7 +108,7 @@ for(s32_fix_plant in c(0,1)){
             #          file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
 
             #cfg$title <- paste0(identifier_flag,"_",ssp,"_",co2_price_path_flag,"_PlantShr_",c32_prod_ratio)
-            cfg$title <- paste0(identifier_flag,"_",ssp,"_",co2_price_path_flag,"_",plant_area_flag)
+            cfg$title <- paste0(identifier_flag,"_",ssp,"_",co2_price_path_flag,"_",plant_area_flag,"_",timber_flag,"_",c32_prod_ratio)
 
             cfg$output <- c("rds_report")
 
