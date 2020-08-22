@@ -24,7 +24,8 @@ i70_feed_fadeout("y2040") = 0.3333;
 i70_feed_fadeout("y2045") = 0.1667;
 i70_feed_fadeout(t_all)$(m_year(t_all) >= 2050) = 0;
 
-if(s70_scp_feed = 1 AND m_year(t_all) > 2020,
+loop(t_all$(m_year(t_all) > 2020),
+if(s70_scp_feed = 1,
 *convert from DM to Nr
 im_feed_baskets(t_all,i,kap,kall70) = im_feed_baskets(t_all,i,kap,kall70)*fm_attributes("nr",kall70);
 im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")*fm_attributes("nr","scp");
@@ -36,4 +37,5 @@ im_feed_baskets(t_all,i,kap,kall70) =
 *convert back from Nr to DM
 im_feed_baskets(t_all,i,kap,kall70) = im_feed_baskets(t_all,i,kap,kall70)/fm_attributes("nr",kall70);
 im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")/fm_attributes("nr","scp");
+);
 );
