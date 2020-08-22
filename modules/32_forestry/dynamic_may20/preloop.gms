@@ -1,5 +1,14 @@
-** Calculation of Single rotation model rotation lengths
+** Keep the plantation area fixing flag as 0 till 2020. If the flag is set to 1
+loop(t_all,
+  if(m_year(t_all) <= sm_fix_SSP2 AND s32_fix_plant =1,
+  p32_fix_plant(t_all) = 0;
+  else
+  p32_fix_plant(t_all) = s32_fix_plant;
+  );
+  display  p32_fix_plant;
+);
 
+** Calculation of Single rotation model rotation lengths
 ** Using forestry carbon densitiy here via carbon density data exchange from carbon module.
 p32_carbon_density_ac_forestry(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc");
 

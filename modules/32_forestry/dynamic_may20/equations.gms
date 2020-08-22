@@ -133,6 +133,13 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 *' harvest (year in time step are accounted for).
 *' Here we define three constraints for establishing new plantation in simulation step
 
+*' Fix plantation area at cell level if s32_fix_plant=1. In case of s32_fix_plant=0, the RHS is just 0.
+*' This makes sure that if plantation area is constrained when the switch is activated.
+q32_fix_plant_area(j2) ..
+							sum(ac, v32_land(j2,"plant",ac))
+							=g=
+							sum((ct,ac), p32_land(ct,j2,"plant",ac)) * sum(ct,p32_fix_plant(ct));
+
 *' Global maximum constraint based on meeting all the future timber demand (`pm_demand_forestry_future`).
 q32_establishment_max_glo ..
               sum(j2, (sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry * pc32_yield_forestry_future(j2))
@@ -144,7 +151,7 @@ q32_establishment_max_glo ..
 q32_establishment_min_glo ..
               sum(j2, (sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry * pc32_yield_forestry_future(j2))
               =g=
-              sum(i2, pm_demand_forestry_future(i2,"wood")* pc32_plant_prod_share_future(i2))
+              sum(i2, pm_demand_forestry_future(i2,"wood")* pc32_plant_prod_share_future(i2)) * (1-sum(ct,p32_fix_plant(ct)))
               ;
 
 *' Regional minimum constraint for maintaining current forestry area patterns,
@@ -152,10 +159,10 @@ q32_establishment_min_glo ..
 q32_establishment_min_reg(i2) ..
               sum(cell(i2,j2), (sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry * pc32_yield_forestry_future(j2))
               =g=
-              pm_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2) * sum(ct, pm_selfsuff_ext(ct,i2,"wood"))
+              pm_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2) * sum(ct, pm_selfsuff_ext(ct,i2,"wood")) * (1-sum(ct,p32_fix_plant(ct)))
               ;
 
-*' This constraint distributes additions to forestry land over ac_est, 
+*' This constraint distributes additions to forestry land over ac_est,
 *' which depends on the time step length (e.g. ac0 and ac5 for a 10 year time step).
 
 q32_forestry_est(j2,type32,ac_est) ..

@@ -28,6 +28,7 @@ scalars
   s32_timber_plantation           Switch for using growth curves for timber plantations 0=natveg 1=plantations (1) / 1 /
   s32_plant_carbon_foresight      Switch to allow plantations to be used as incentives for CDR (1) / 1 /
   s32_tcre_local switch for local (1) or global (0) TRCE factors / 1 /
+  s32_fix_plant                   Fixing plantation area after 2020 / 0 /
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)
