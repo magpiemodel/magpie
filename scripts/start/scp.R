@@ -25,7 +25,7 @@ cfg$results_folder <- "output/:title:"
 
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 
-cfg$gms$c20_scp_type <- "sugr_cane"
+cfg$gms$c20_scp_type <- "sugar"
 cfg$gms$s15_elastic_demand <- 0
 
 cfg$title <- "SCP14_default"
