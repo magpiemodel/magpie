@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: Temporary script for forestry paper
+# description: Forestry paper simulations 
 # ----------------------------------------------------------
 
 ######################################
