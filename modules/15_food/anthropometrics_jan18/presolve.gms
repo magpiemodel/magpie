@@ -410,8 +410,7 @@ p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
                *(p15_kcal_pc_calibrated_plant_orig(t,i)
                + p15_kcal_pc_calibrated_rumdairy_orig(t,i) * (1-i15_rumdairy_fadeout(t,i)));
 
-
-if(s15_scp_food = 1,
+if(s15_scp_food = 1 AND m_year(t) > 2020,
 *conversion factor from kcal/cap/day to g protein/cap/day
 *g protein/cap/day = kcal/cap/day * t DM / mio kcal * t Protein / t DM
 i15_kcal_pc_to_protein_pc(t,kfo) =  1/f15_nutrition_attributes(t,kfo,"kcal") * f15_nutrition_attributes(t,kfo,"protein");
