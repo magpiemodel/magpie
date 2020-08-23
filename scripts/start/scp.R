@@ -28,17 +28,17 @@ cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c20_scp_type <- "sugar"
 cfg$gms$s15_elastic_demand <- 0
 
-cfg$title <- "SCP15_default"
+cfg$title <- "SCP16_default"
 cfg$gms$s70_scp_feed <- 0
 cfg$gms$s15_scp_food <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "SCP15_sugar_scpFeedOn"
-cfg$gms$s70_scp_feed <- 1
-cfg$gms$s15_scp_food <- 0
-start_run(cfg,codeCheck=FALSE)
+# cfg$title <- "SCP15_sugar_scpFeedOn"
+# cfg$gms$s70_scp_feed <- 1
+# cfg$gms$s15_scp_food <- 0
+# start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "SCP15_sugar_scpKapOn"
+cfg$title <- "SCP16_sugar_scpCattle"
 cfg$gms$s70_scp_feed <- 0
 cfg$gms$s15_scp_food <- 1
 start_run(cfg,codeCheck=FALSE)

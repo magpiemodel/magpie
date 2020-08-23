@@ -415,15 +415,15 @@ if(s15_scp_food = 1 AND m_year(t) > 2020,
 *g protein/cap/day = kcal/cap/day * t DM / mio kcal * t Protein / t DM
 i15_kcal_pc_to_protein_pc(t,kfo) =  1/f15_nutrition_attributes(t,kfo,"kcal") * f15_nutrition_attributes(t,kfo,"protein");
 *convert from kcal/cap/day to t Protein/cap/day
-p15_kcal_pc_calibrated(t,i,kfo_ap) = p15_kcal_pc_calibrated(t,i,kfo_ap) * i15_kcal_pc_to_protein_pc(t,kfo_ap);
+p15_kcal_pc_calibrated(t,i,kfo_rd) = p15_kcal_pc_calibrated(t,i,kfo_rd) * i15_kcal_pc_to_protein_pc(t,kfo_rd);
 p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp") * i15_kcal_pc_to_protein_pc(t,"scp");
-*replace kfo_ap with scp based on protein/cap/day
+*replace kfo_rd with scp based on protein/cap/day
 p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp")
-             + sum(kfo_ap, p15_kcal_pc_calibrated(t,i,kfo_ap) * (1-i15_kap_fadeout(t)));
-p15_kcal_pc_calibrated(t,i,kfo_ap) =
-               p15_kcal_pc_calibrated(t,i,kfo_ap) * i15_kap_fadeout(t);
+             + sum(kfo_rd, p15_kcal_pc_calibrated(t,i,kfo_rd) * (1-i15_kap_fadeout(t,i)));
+p15_kcal_pc_calibrated(t,i,kfo_rd) =
+               p15_kcal_pc_calibrated(t,i,kfo_rd) * i15_kap_fadeout(t,i);
 *convert back to kcal/cap/day
-p15_kcal_pc_calibrated(t,i,kfo_ap) = p15_kcal_pc_calibrated(t,i,kfo_ap)/i15_kcal_pc_to_protein_pc(t,kfo_ap);
+p15_kcal_pc_calibrated(t,i,kfo_rd) = p15_kcal_pc_calibrated(t,i,kfo_rd)/i15_kcal_pc_to_protein_pc(t,kfo_rd);
 p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp")/i15_kcal_pc_to_protein_pc(t,"scp");
 
 );

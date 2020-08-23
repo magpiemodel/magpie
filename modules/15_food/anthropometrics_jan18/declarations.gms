@@ -162,7 +162,7 @@ parameters
  p15_delta_income(t,i)                       Regional change in per capita income due to price shock on regional level (1)
  p15_lastiteration_delta_income(t,i)         Regional change in per capita income due to price shock of last iteration (1)
 
- i15_kap_fadeout(t_all)				         Fade out of kap in exchange for scp (1)
+ i15_kap_fadeout(t_all,i)				     Fade out of kap in exchange for scp (1)
  i15_kcal_pc_to_protein_pc(t,kfo)			 Conversion factor (1)
 ;
 
