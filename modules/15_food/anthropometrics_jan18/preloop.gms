@@ -111,6 +111,6 @@ i15_kap_fadeout("y2030",i) = 0.75;
 i15_kap_fadeout("y2035",i) = 0.5;
 i15_kap_fadeout("y2040",i) = 0.35;
 i15_kap_fadeout("y2045",i) = 0.25;
-i15_kap_fadeout(t_all,i)$(m_year(t_all) >= 2050) = 20;
+i15_kap_fadeout(t_all,i)$(m_year(t_all) >= 2050) = 0.20;
 
 i15_kap_fadeout(t_all,i) = i15_kap_fadeout(t_all,i) * im_development_state(t_all,i);
