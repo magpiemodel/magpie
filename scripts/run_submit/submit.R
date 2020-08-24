@@ -1,4 +1,4 @@
-# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 library(magclass)
-library(lucode)
+library(lucode2)
 library(magpie4)
 
 #options(error=function()traceback(2))
@@ -18,19 +18,26 @@ maindir <- cfg$magpie_folder
 # write the config file in the output_folder: config.log
 write(capture.output(cfg), file="config.log")
 
+# Capture start time
+timeGAMSStart <- Sys.time()
+
 cat("\nStarting MAgPIE...\n")
-begin<-Sys.time()
 system(paste("gams full.gms -errmsg=1 -lf=full.log -lo=",cfg$logoption,sep=""))
-gams_runtime<-Sys.time()-begin  #calculate runtime info
+
+# Capture runtimes
+timeGAMSEnd  <- Sys.time()
+gams_runtime <- timeGAMSEnd - timeGAMSStart
+timeOutputStart <- Sys.time()
+
 if(!file.exists("fulldata.gdx")) stop("MAgPIE model run did not finish properly (fulldata.gdx is missing). Please check full.lst for further information!")
 cat("\nMAgPIE run finished!\n")
 
-lucode::runstatistics(file       = "runstatistics.rda",
-                      modelstat  = magpie4::modelstat("fulldata.gdx"),
-                      config     = cfg,
-                      runtime    = gams_runtime,
-                      setup_info = lucode::setup_info(),
-                      submit     = cfg$runstatistics)
+lucode2::runstatistics(file       = "runstatistics.rda",
+                       modelstat  = magpie4::modelstat("fulldata.gdx"),
+                       config     = cfg,
+                       runtime    = gams_runtime,
+                       setup_info = lucode2::setup_info(),
+                       submit     = cfg$runstatistics)
 
 runfolder <- getwd()
 setwd(maindir)
@@ -64,7 +71,7 @@ if (exists("last.warning")) {
   validation$technical$last.warning <- c(validation$technical$last.warning,
                                          last.warning)
 }
-validation$technical$setup_info$model_run <- setup_info()
+validation$technical$setup_info$model_run <- lucode2::setup_info()
 save(validation,file=cfg$val_workspace, compress="xz")
 rm(gams_runtime,input_data,module_setup,validation)
 
@@ -73,7 +80,18 @@ rm(gams_runtime,input_data,module_setup,validation)
 comp <- FALSE
 submit <- "direct"
 output <- cfg$output
-outputdirs <- runfolder
+outputdir <- runfolder
 sys.source("output.R",envir=new.env())
+
+# get runtime for output
+timeOutputEnd <- Sys.time()
+
+# Save run statistics to local file
+cat("Saving timeGAMSStart, timeGAMSEnd, timeOutputStart and timeOutputStart to runstatistics.rda\n")
+lucode2::runstatistics(file           = paste0(cfg$results_folder, "/runstatistics.rda"),
+                      timeGAMSStart   = timeGAMSStart,
+                      timeGAMSEnd     = timeGAMSEnd,
+                      timeOutputStart = timeOutputStart,
+                      timeOutputEnd   = timeOutputEnd)
 
 print(warnings())

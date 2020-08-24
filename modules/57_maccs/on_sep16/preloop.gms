@@ -1,23 +1,27 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+$if "%c57_macc_version%" == "PBL_2007" s57_step_length = 5;
+$if "%c57_macc_version%" == "PBL_2019" s57_step_length = 20;
+
 $ontext
 Determine level of GHG emission abatement depending on GHG prices.
-There are 200 abatement steps. Each step is 5 USD per tC eq. Options at zero cost are in the first step.
+There are 201 abatement steps. Each step is 5 USD per tC eq in case of PBL_2007 and 
+20 USD per tC eq in case of PBL_2019. 
 Since the GHG prices are in USD per ton N and USD per ton CH4, conversion to USD per ton C eq is needed.
-In this realization, the old IPCC AR4 global warming potential factor for N2O (298) and CH4 (25) MUST be used because 
-Lucas et al used these parameters to convert USD per ton N2O and USD per ton CH4 into USD per ton C eq. 
+In this realization, the IPCC AR4 global warming potential factor for N2O (298) and CH4 (25) are used because 
+PBL used these parameters to convert USD per ton N2O and USD per ton CH4 into USD per ton C eq. 
 $offtext
 
-i57_mac_step_n2o(t,i) = min(201, ceil(im_pollutant_prices(t,i,"n2o_n_direct")/298*28/44*44/12 / 5) + 1);
-i57_mac_step_ch4(t,i) = min(201, ceil(im_pollutant_prices(t,i,"ch4")/25*44/12 / 5) + 1);
+i57_mac_step_n2o(t,i) = min(201, ceil(im_pollutant_prices(t,i,"n2o_n_direct")/298*28/44*44/12 / s57_step_length) + 1);
+i57_mac_step_ch4(t,i) = min(201, ceil(im_pollutant_prices(t,i,"ch4")/25*44/12 / s57_step_length) + 1);
 
 *Calculate technical mitigation depending on i57_mac_step_n2o and i57_mac_step_ch4.
-*At zero GHG prices i57_mac_step_n2o/i57_mac_step_ch4 are set to 1.
+*At zero GHG prices i57_mac_step_n2o and i57_mac_step_ch4 are set to 1.
 *Technical mitigation should be zero at zero GHG prices.
 *There the following calculations are only executed for ord(maccs_steps) > 1
 
@@ -64,23 +68,23 @@ p57_maccs_costs_integral(t,i,emis_source,pollutants) = 0;
 loop(maccs_steps$(ord(maccs_steps) > 1),
     p57_maccs_costs_integral(t,i,emis_source_inorg_fert_n2o,"n2o_n_direct")$(ord(maccs_steps) <= i57_mac_step_n2o(t,i)) =
     p57_maccs_costs_integral(t,i,emis_source_inorg_fert_n2o,"n2o_n_direct") +
-    (f57_maccs_n2o(t,i,"inorg_fert_n2o",maccs_steps) - f57_maccs_n2o(t,i,"inorg_fert_n2o",maccs_steps-1))*(ord(maccs_steps)-1)*5;
+    (f57_maccs_n2o(t,i,"inorg_fert_n2o",maccs_steps) - f57_maccs_n2o(t,i,"inorg_fert_n2o",maccs_steps-1))*(ord(maccs_steps)-1)*s57_step_length;
 
     p57_maccs_costs_integral(t,i,emis_source_awms_manure_n2o,"n2o_n_direct")$(ord(maccs_steps) <= i57_mac_step_n2o(t,i)) =
     p57_maccs_costs_integral(t,i,emis_source_awms_manure_n2o,"n2o_n_direct") +
-    (f57_maccs_n2o(t,i,"awms_manure_n2o",maccs_steps) - f57_maccs_n2o(t,i,"awms_manure_n2o",maccs_steps-1))*(ord(maccs_steps)-1)*5;
+    (f57_maccs_n2o(t,i,"awms_manure_n2o",maccs_steps) - f57_maccs_n2o(t,i,"awms_manure_n2o",maccs_steps-1))*(ord(maccs_steps)-1)*s57_step_length;
 
     p57_maccs_costs_integral(t,i,emis_source_rice_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step_ch4(t,i)) =
     p57_maccs_costs_integral(t,i,emis_source_rice_ch4,"ch4") +
-    (f57_maccs_ch4(t,i,"rice_ch4",maccs_steps) - f57_maccs_ch4(t,i,"rice_ch4",maccs_steps-1))*(ord(maccs_steps)-1)*5;
+    (f57_maccs_ch4(t,i,"rice_ch4",maccs_steps) - f57_maccs_ch4(t,i,"rice_ch4",maccs_steps-1))*(ord(maccs_steps)-1)*s57_step_length;
 
     p57_maccs_costs_integral(t,i,emis_source_ent_ferm_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step_ch4(t,i)) =
     p57_maccs_costs_integral(t,i,emis_source_ent_ferm_ch4,"ch4") +
-    (f57_maccs_ch4(t,i,"ent_ferm_ch4",maccs_steps) - f57_maccs_ch4(t,i,"ent_ferm_ch4",maccs_steps-1))*(ord(maccs_steps)-1)*5;
+    (f57_maccs_ch4(t,i,"ent_ferm_ch4",maccs_steps) - f57_maccs_ch4(t,i,"ent_ferm_ch4",maccs_steps-1))*(ord(maccs_steps)-1)*s57_step_length;
 
     p57_maccs_costs_integral(t,i,emis_source_awms_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step_ch4(t,i)) =
     p57_maccs_costs_integral(t,i,emis_source_awms_ch4,"ch4") +
-    (f57_maccs_ch4(t,i,"awms_ch4",maccs_steps) - f57_maccs_ch4(t,i,"awms_ch4",maccs_steps-1))*(ord(maccs_steps)-1)*5;
+    (f57_maccs_ch4(t,i,"awms_ch4",maccs_steps) - f57_maccs_ch4(t,i,"awms_ch4",maccs_steps-1))*(ord(maccs_steps)-1)*s57_step_length;
 );
 
 *Conversion from USD per ton C to USD per ton N and USD per ton CH4, using the old IPCC AR4 GWP factors.

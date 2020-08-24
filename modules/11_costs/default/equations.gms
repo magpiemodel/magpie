@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -12,7 +12,8 @@
 *' The global costs of production are represented by the sum of regional
 *' production costs of different production activities.
 
- q11_cost_reg(i2) .. v11_cost_reg(i2) =e= sum(kall, vm_cost_prod(i2,kall))
+ q11_cost_reg(i2) .. v11_cost_reg(i2) =e= sum(kall,vm_cost_prod(i2,kall))
+                   + vm_cost_inv(i2)
                    + sum((cell(i2,j2),land), vm_cost_landcon(j2,land))
                    + sum((cell(i2,j2),k), vm_cost_transp(j2,k))
                    + vm_tech_cost(i2)
@@ -24,12 +25,15 @@
                    + vm_cost_AEI(i2)
                    + vm_cost_trade(i2)
                    + vm_cost_fore(i2)
+                   + vm_cost_timber(i2)
                    + vm_cost_processing(i2)
                    + vm_bioenergy_utility(i2)
                    + vm_processing_substitution_cost(i2)
                    + vm_costs_additional_mon(i2)
                    + sum(cell(i2,j2),vm_cost_land_transition(j2))
-                   ;
+                   + sum(cell(i2,j2), vm_peatland_cost(j2))
+                   + vm_peatland_emis_cost(i2)
+;
 
 *' The total regional production cost calculation is based on the sum of different
 *' MAgPIE production activities. These individual costs are calculated by various
@@ -50,3 +54,5 @@
 *' Processing costs ([20_processing]),
 *' Punish costs for overrate cropland differences ([59_som]).
 *' Small costs for land transitions ([10_land]).
+*' Peatland degradation and restoration costs ([58_peatland]).
+*' Peatland emission costs ([56_ghg_policy]).

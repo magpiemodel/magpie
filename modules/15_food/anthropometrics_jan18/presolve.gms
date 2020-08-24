@@ -1,10 +1,27 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+
+
+if(m_year(t) <= sm_fix_SSP2,
+ i15_dem_intercept(iso,regr15)   = f15_demand_paras(regr15,"SSP2","intercept");
+ i15_dem_saturation(iso,regr15)  = f15_demand_paras(regr15,"SSP2","saturation");
+ i15_dem_halfsat(iso,regr15)     = f15_demand_paras(regr15,"SSP2","halfsaturation");
+ i15_dem_nonsat(iso,regr15)      = f15_demand_paras(regr15,"SSP2","non_saturation");
+else
+ i15_dem_intercept(iso,regr15)   = f15_demand_paras(regr15,"%c15_food_scenario%","intercept")*p15_country_dummy(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","intercept")*(1-p15_country_dummy(iso));
+ i15_dem_saturation(iso,regr15)  = f15_demand_paras(regr15,"%c15_food_scenario%","saturation")*p15_country_dummy(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","saturation")*(1-p15_country_dummy(iso));
+ i15_dem_halfsat(iso,regr15)     = f15_demand_paras(regr15,"%c15_food_scenario%","halfsaturation")*p15_country_dummy(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","halfsaturation")*(1-p15_country_dummy(iso));
+ i15_dem_nonsat(iso,regr15)      = f15_demand_paras(regr15,"%c15_food_scenario%","non_saturation")*p15_country_dummy(iso)
+                                 + f15_demand_paras(regr15,"%c15_food_scenario_noselect%","non_saturation")*(1-p15_country_dummy(iso));
+);
 
 option nlp = conopt4
 
@@ -80,13 +97,13 @@ if (sum(sameas(t_past,t),1) = 1,
 * Substitute milk demand in India with chicken, egg and fish (equally distributed) because milk demand in India shows an implausible increase
     	i15_livestock_kcal_structure_iso(t,"IND","livst_milk") =
                                  i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * i15_milk_share_fadeout_india(t);
-    	i15_livestock_kcal_structure_iso(t,"IND","livst_chick") = 
+    	i15_livestock_kcal_structure_iso(t,"IND","livst_chick") =
      							i15_livestock_kcal_structure_iso(t,"IND","livst_chick")
      							+ i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t)) * 1/3;
-    	i15_livestock_kcal_structure_iso(t,"IND","livst_egg") = 
+    	i15_livestock_kcal_structure_iso(t,"IND","livst_egg") =
      							i15_livestock_kcal_structure_iso(t,"IND","livst_egg")
      							+ i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t)) * 1/3;
-    	i15_livestock_kcal_structure_iso(t,"IND","fish") = 
+    	i15_livestock_kcal_structure_iso(t,"IND","fish") =
      							i15_livestock_kcal_structure_iso(t,"IND","fish")
      							+ i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t)) * 1/3;
  );
@@ -139,18 +156,13 @@ else
           p15_bodyheight(t,iso,sex,age++1,"preliminary") = p15_bodyheight(t,iso,sex,age,"preliminary");
 
 * replace age groups of 18 year old
-          p15_bodyheight(t,iso,"F","15--19","preliminary") =
-                 126.4*
+          p15_bodyheight(t,iso,sex,"15--19","preliminary") =
+                 f15_bodyheight_regr_paras(sex,"slope")*
                  (sum(underaged15,
                    p15_kcal_growth_food(t,iso,underaged15)
-                 )/3)**0.03467
+                 )/3)**f15_bodyheight_regr_paras(sex,"exponent")
                  ;
-          p15_bodyheight(t,iso,"M","15--19","preliminary") =
-                 131.8*
-                 (sum(underaged15,
-                   p15_kcal_growth_food(t,iso,underaged15)
-                 )/3)**0.03978
-                 ;
+
      );
 *adjust body height of kids proportional to over18 population
      p15_bodyheight(t,iso,"M","0--4","preliminary")=p15_bodyheight(t,iso,"M","15--19","preliminary")/176*92;
@@ -321,7 +333,7 @@ else
  p15_kcal_pc_initial_iso(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
  pm_kcal_pc_initial(t,i,kfo) =  p15_kcal_pc(t,i,kfo);
 
- o15_kcal_regr_initial(iso,kfo)=v15_kcal_regr.l(iso,kfo);
+ o15_kcal_regr_initial(t,iso,kfo)=v15_kcal_regr.l(iso,kfo);
 
 * Finally, we calibrate countries with zero food demand according to FAOSTAT
 * down to zero to match FAO world totals.
@@ -334,30 +346,30 @@ else
 
 
 *###############################################################################
-* ###### Exogenous food substitution scenarios
-
-* "Downwards convergence" of regional calorie oversupply due to food waste to the
-* waste reduction target, i.e. only for values that are higher than the target:
+* ###### Food substitution scenarios
 
 
 *' Substitution of ruminant beef with poultry:
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated(t,i,"livst_rum") =
-               p15_kcal_pc_calibrated_orig(t,i,"livst_rum") * i15_ruminant_fadeout(t);
+               p15_kcal_pc_calibrated_orig(t,i,"livst_rum") * i15_ruminant_fadeout(t,i);
 p15_kcal_pc_calibrated(t,i,"livst_chick") = p15_kcal_pc_calibrated_orig(t,i,"livst_chick")
-             + p15_kcal_pc_calibrated_orig(t,i,"livst_rum") * (1-i15_ruminant_fadeout(t));
+             + p15_kcal_pc_calibrated_orig(t,i,"livst_rum") * (1-i15_ruminant_fadeout(t,i));
+
 
 *' Substitution of fish with poultry:
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated(t,i,"fish") =
-               p15_kcal_pc_calibrated_orig(t,i,"fish") * i15_fish_fadeout(t);
+               p15_kcal_pc_calibrated_orig(t,i,"fish") * i15_fish_fadeout(t,i);
 p15_kcal_pc_calibrated(t,i,"livst_chick") = p15_kcal_pc_calibrated_orig(t,i,"livst_chick")
-             + p15_kcal_pc_calibrated_orig(t,i,"fish") * (1-i15_fish_fadeout(t));
+             + p15_kcal_pc_calibrated_orig(t,i,"fish") * (1-i15_fish_fadeout(t,i));
+
 
 *' Fade-out of alcohol consumption without substitution:
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated(t,i,"alcohol") =
-               p15_kcal_pc_calibrated_orig(t,i,"alcohol") * i15_alcohol_fadeout(t);
+               p15_kcal_pc_calibrated_orig(t,i,"alcohol") * i15_alcohol_fadeout(t,i);
+
 
 *' Substitution of livestock products (without fish) with plant-based food commodities:
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
@@ -373,10 +385,30 @@ p15_plant_kcal_structure_orig(t,i,kfo_pp)$(p15_kcal_pc_calibrated_plant_orig(t,i
                                /p15_kcal_pc_calibrated_plant_orig(t,i);
 
 p15_kcal_pc_calibrated(t,i,kfo_lp) = p15_livestock_kcal_structure_orig(t,i,kfo_lp)
-               *p15_kcal_pc_calibrated_livestock_orig(t,i)*i15_livestock_fadeout(t);
+               *p15_kcal_pc_calibrated_livestock_orig(t,i)*i15_livestock_fadeout(t,i);
 p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
                *(p15_kcal_pc_calibrated_plant_orig(t,i)
-               + p15_kcal_pc_calibrated_livestock_orig(t,i) * (1-i15_livestock_fadeout(t)));
+               + p15_kcal_pc_calibrated_livestock_orig(t,i) * (1-i15_livestock_fadeout(t,i)));
+
+
+*' Substitution of ruminant meat and dairy products with plant-based food commodities:
+p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
+p15_kcal_pc_calibrated_rumdairy_orig(t,i) = sum(kfo_rd,p15_kcal_pc_calibrated(t,i,kfo_rd));
+p15_kcal_pc_calibrated_plant_orig(t,i) = sum(kfo_pp,p15_kcal_pc_calibrated(t,i,kfo_pp));
+
+p15_rumdairy_kcal_structure_orig(t,i,kfo_rd)$(p15_kcal_pc_calibrated_rumdairy_orig(t,i)>0) =
+                               p15_kcal_pc_calibrated(t,i,kfo_rd)
+                               /p15_kcal_pc_calibrated_rumdairy_orig(t,i);
+
+p15_plant_kcal_structure_orig(t,i,kfo_pp)$(p15_kcal_pc_calibrated_plant_orig(t,i)>0) =
+                               p15_kcal_pc_calibrated(t,i,kfo_pp)
+                               /p15_kcal_pc_calibrated_plant_orig(t,i);
+
+p15_kcal_pc_calibrated(t,i,kfo_rd) = p15_rumdairy_kcal_structure_orig(t,i,kfo_rd)
+               *p15_kcal_pc_calibrated_rumdairy_orig(t,i)*i15_rumdairy_fadeout(t,i);
+p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
+               *(p15_kcal_pc_calibrated_plant_orig(t,i)
+               + p15_kcal_pc_calibrated_rumdairy_orig(t,i) * (1-i15_rumdairy_fadeout(t,i)));
 
 
 
@@ -433,8 +465,8 @@ if(s15_exo_waste = 1,
 * waste reduction target, i.e. only for values that are higher than the target:
 
 p15_demand2intake_ratio_scen(t,i)$(p15_demand2intake_ratio(t,i) > s15_waste_scen )
-                    = p15_demand2intake_ratio(t,i)*(1-i15_exo_foodscen_fader(t))
-                      + s15_waste_scen*i15_exo_foodscen_fader(t);
+                    = p15_demand2intake_ratio(t,i)*(1-i15_exo_foodscen_fader(t,i))
+                      + s15_waste_scen*i15_exo_foodscen_fader(t,i);
 
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated(t,i,kfo)$(p15_demand2intake_ratio(t,i) >0 ) = p15_kcal_pc_calibrated_orig(t,i,kfo)*(
@@ -518,11 +550,11 @@ i15_kcal_pc_scen_target(t,i,kfo) = (f15_calib_fsupply(i)*f15_overcons_FAOwaste(i
 *' 4.) In the last step, the regression-based calculation of daily per capita food demand
 *' is faded into the exogenous diet scenario according to a predefined speed of
 *' convergence (note that fading should start after the historical time slice of
-*' the EAT Lancet diet scenarios (y2010) as defined in `i15_exo_foodscen_fader(t)`):
+*' the EAT Lancet diet scenarios (y2010) as defined in `i15_exo_foodscen_fader(t,i)`):
 
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
-p15_kcal_pc_calibrated(t,i,kfo) = p15_kcal_pc_calibrated_orig(t,i,kfo) * (1-i15_exo_foodscen_fader(t))
-                        + i15_kcal_pc_scen_target(t,i,kfo) * i15_exo_foodscen_fader(t);
+p15_kcal_pc_calibrated(t,i,kfo) = p15_kcal_pc_calibrated_orig(t,i,kfo) * (1-i15_exo_foodscen_fader(t,i))
+                        + i15_kcal_pc_scen_target(t,i,kfo) * i15_exo_foodscen_fader(t,i);
 
 
 );

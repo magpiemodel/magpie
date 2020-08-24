@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -8,7 +8,7 @@
 *' @code
 *' Costs and CDR from afforestation are set to zero.
 vm_cost_fore.fx(i) = 0;
-vm_cdr_aff.fx(j,ac) = 0;
+vm_cdr_aff.fx(j,ac,aff_effect) = 0;
 
 *' All forestry land pools (aff, ndc, plant) are fixed to zero, 
 *' except forestry plantations, which are fixed to the level of 1995.
@@ -21,5 +21,9 @@ vm_land.fx(j,"forestry") = sum((type32,ac), v32_land.l(j,type32,ac));
 
 * The change of forestry land is also set to zero. 
 vm_landdiff_forestry.fx = 0;
+vm_forestry_reduction.fx(j,type32,ac) = 0;
+
+* A plausible guess is needed here. 
+pm_representative_rotation(t_all,i) = 1;
 
 *** EOF preloop.gms ***

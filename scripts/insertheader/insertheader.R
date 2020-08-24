@@ -1,4 +1,4 @@
-# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 insertheader <- function(maindir=".",
-                         header=c("(C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)",
+                         header=c("(C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)",
                                   "authors, and contributors see CITATION.cff file. This file is part",
                                   "of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of",
                                   "AGPL-3.0, you are granted additional permissions described in the",
@@ -19,7 +19,6 @@ insertheader <- function(maindir=".",
                                       ".lst", ".git-id", ".csv", ".Rdata"),
                          comments=c(".R"="#",".gms"="***",".cfg"="#",".csv"="*",".cs2"="*",
                                     ".cs3"="*",".cs4"="*",".sh"="#",".txt"="#"),
-                         line_endings="notwin",
                          key = "| ",
                          oldkey = NULL,
                          test_only=FALSE) {
@@ -88,13 +87,7 @@ insertheader <- function(maindir=".",
     done <- c(done,file)
 
     # Write file only if it was modified
-    if (writefile & !test_only) {
-      if (line_endings == "win") {
-        lucode:::writeLinesDOS(f,file)
-      } else {
-        writeLines(f,file)
-      }
-    }
+    if (writefile & !test_only) writeLines(f,file)
   }
 
   cat("Files ommitted:\n")
