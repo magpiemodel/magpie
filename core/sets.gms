@@ -135,16 +135,39 @@ sets
 sets time_annual Annual extended time steps
     / y1965*y2150 /
 
-    t_all 5-year time periods
+    t_ext 5-year time periods
+    /
+    y1965, y1970, y1975, y1980, y1985, y1990,
+    y1995, y2000, y2005, y2010, y2015, y2020, y2025, y2030, y2035, y2040,
+    y2045, y2050, y2055, y2060, y2065, y2070, y2075, y2080, y2085, y2090,
+    y2095, y2100, y2105, y2110, y2115, y2120, y2125, y2130, y2135, y2140,
+    y2145, y2150, y2155, y2160, y2165, y2170, y2175, y2180, y2185, y2190,
+    y2195, y2200, y2205, y2210, y2215, y2220, y2225, y2230, y2235, y2240,
+    y2245, y2250
+    /
+
+    t_all(t_ext) 5-year time periods
     / y1965, y1970, y1975, y1980, y1985, y1990,
       y1995, y2000, y2005, y2010, y2015, y2020, y2025, y2030, y2035, y2040,
       y2045, y2050, y2055, y2060, y2065, y2070, y2075, y2080, y2085, y2090,
       y2095, y2100, y2105, y2110, y2115, y2120, y2125, y2130, y2135, y2140,
       y2145, y2150 /
 
+    t_historical(t_all) Historical period
+    /   y1965, y1970, y1975, y1980, y1985, y1990 /
+
+    t_future(t_all) 5-year time periods
+    / y2105, y2110, y2115, y2120, y2125, y2130, y2135, y2140,
+      y2145, y2150 /
+
+    t_past_forestry(t_all) Forestry Timesteps with observed data
+    / y1965, y1970, y1975,
+     y1980, y1985, y1990,
+     y1995, y2000, y2005, y2010, y2015
+    /
 ;
 
-set t_past(t_all) Timesteps with observed data 
+set t_past(t_all) Timesteps with observed data
 $If "%c_past%"== "till_2010" /y1965, y1970, y1975, y1980, y1985, y1990,y1995, y2000, y2005, y2010/;
 $If "%c_past%"== "till_1965" /y1965/;
 $If "%c_past%"== "till_1975" /y1965, y1970, y1975/;
@@ -215,8 +238,14 @@ sets
   land_ag(land) Agricultural land pools
                   / crop, past /
 
-  land_natveg(land) Natural vegetation land pools
+  forest_land(land) land from which timber can be taken away
+  / forestry, primforest, secdforest,other /
+
+  land_natveg(forest_land) Natural vegetation land pools
         / primforest, secdforest, other /
+
+  forest_type forest type
+         / plantations, natveg /
 
    si Suitability classes
         / si0, nsi0 /
@@ -224,20 +253,11 @@ sets
 ***Forestry**
    ac Age classes  / ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
                     ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,ac95,ac100,
-                    ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,ac150,
-                    ac155,ac160,ac165,ac170,ac175,ac180,ac185,ac190,ac195,ac200,
-                    ac205,ac210,ac215,ac220,ac225,ac230,ac235,ac240,ac245,ac250,
-                    ac255,ac260,ac265,ac270,ac275,ac280,ac285,ac290,ac295,acx /
+                    ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,acx /
 
-  ac_sub(ac) age classes
-  / ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
-  ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,ac95,ac100,
-  ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,ac150,
-  ac155,ac160,ac165,ac170,ac175,ac180,ac185,ac190,ac195,ac200,
-  ac205,ac210,ac215,ac220,ac225,ac230,ac235,ac240,ac245,ac250,
-  ac255,ac260,ac265,ac270,ac275,ac280,ac285,ac290,ac295,acx /
+  ac_est(ac) Dynamic subset of age classes for establishment
 
-   when Temporal location relative to optimization / before, after /
+  ac_sub(ac) Dynamic subset of age classes excluding establishment
 
    chap_par Chapman-richards parameters / k,m /
 
@@ -334,5 +354,9 @@ secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, 
    /
 
 ;
+
+alias(ac,ac2);
+alias(ac_sub,ac_sub2);
+alias(ac_est,ac_est2);
 
 *** EOF sets.gms ***

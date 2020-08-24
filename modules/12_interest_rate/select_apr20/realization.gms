@@ -20,5 +20,4 @@
 $Ifi "%phase%" == "declarations" $include "./modules/12_interest_rate/select_apr20/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/12_interest_rate/select_apr20/input.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/12_interest_rate/select_apr20/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/12_interest_rate/select_apr20/presolve.gms"
 *######################## R SECTION END (PHASES) ###############################

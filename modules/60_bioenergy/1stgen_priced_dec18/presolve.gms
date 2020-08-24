@@ -16,9 +16,13 @@ if(m_year(t) <= sm_fix_SSP2,
              f60_1stgen_bioenergy_dem(t,i,"const2020",kall);
  i60_res_2ndgenBE_dem(t,i) =
              f60_res_2ndgenBE_dem(t,i,"ssp2");
-else 
+else
  i60_1stgen_bioenergy_dem(t,i,kall) =
              f60_1stgen_bioenergy_dem(t,i,"%c60_1stgen_biodem%",kall);
  i60_res_2ndgenBE_dem(t,i) =
              f60_res_2ndgenBE_dem(t,i,"%c60_res_2ndgenBE_dem%");
+);
+
+if(m_year(t) <= sm_fix_SSP2,
+i60_bioenergy_dem(t,i) = f60_bioenergy_dem(t,i,"R2M41-SSP2-NPi");
 );
