@@ -362,13 +362,6 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
     try(file.copy(Sys.glob(file), cfg$results_folder, overwrite=TRUE))
   }
 
-  # copy spam files to output folder
-  cfg$files2export$spam <- list.files(path="input/cellular", pattern = "*.spam",
-                                      full.names=TRUE)
-  for(file in cfg$files2export$spam) {
-    file.copy(file, cfg$results_folder, overwrite=TRUE)
-  }
-
   cfg$magpie_folder <- getwd()
 
   save(cfg, file=lucode2::path(cfg$results_folder, "config.Rdata"))
