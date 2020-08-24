@@ -30,7 +30,7 @@ source("config/default.cfg")
 ###########################################################################
 
 ### TIME
-cfg$gms$c_timesteps = "5year"
+cfg$gms$c_timesteps = "5year2150"
 
 ### Other settings
 #cfg$gms$land = "feb15"
@@ -55,21 +55,21 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "Paper1_04"
+identifier_flag = "Paper1_05"
 
-cat(paste0("5 year runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("5 year runs till 2150"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 for(s32_fix_plant in c(0,1)){
 
   cfg$gms$s32_fix_plant = s32_fix_plant
 
-  if(s32_fix_plant == 0) plant_area_flag = "PlantUNC"
-  if(s32_fix_plant == 1) plant_area_flag = "PlantFIX"
+  if(s32_fix_plant == 0) plant_area_flag = "IncreasingAfter2020"
+  if(s32_fix_plant == 1) plant_area_flag = "ConstantAfter2020"
 
-  for(c32_prod_ratio in c("increasing","constant")){
+  for(c32_prod_ratio in c("increasing")){
     for (co2_price_path in c("NPI")) {
 
-      for(s32_initial_distribution in c(1,0)){
+      for(s32_initial_distribution in c(1)){
 
         cfg$gms$s32_initial_distribution  = s32_initial_distribution
         cfg$gms$s73_demand_switch         = s32_initial_distribution
