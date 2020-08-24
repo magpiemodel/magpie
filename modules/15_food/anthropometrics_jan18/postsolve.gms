@@ -5,6 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+* For calculation of waste trajectories for exogenous diets:
+if ((sameas(t,"y2010")),
+    p15_demand2intake_ratio_ref(i) = p15_demand2intake_ratio(t,i);
+);
 
 *' The calibration parameter is added to the regression value.
 

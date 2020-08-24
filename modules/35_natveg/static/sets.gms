@@ -5,7 +5,3 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-sets
-  land35 Natveg land pools
-    / new, grow, old/
-;

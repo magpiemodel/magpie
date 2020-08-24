@@ -13,3 +13,4 @@ pm_land_start(j,land) = f10_land("y1995",j,land);
 pm_land_start(j,land)$(pm_land_start(j,land)<0) = 0;
 
 pcm_land(j,land) = pm_land_start(j,land);
+vm_land.l(j,land) = pcm_land(j,land);
