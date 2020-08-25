@@ -29,6 +29,7 @@ scalars
   s32_plant_carbon_foresight      Switch to allow plantations to be used as incentives for CDR (1) / 1 /
   s32_tcre_local switch for local (1) or global (0) TRCE factors / 1 /
   s32_fix_plant                   Fixing plantation area after 2020 / 0 /
+  s32_plant_share                 Constant propotion of production from plantations /0.33/
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)

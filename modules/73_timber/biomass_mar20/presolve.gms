@@ -15,4 +15,13 @@ v73_hvarea_other.fx(j,ac_est) = 0;
 v73_hvarea_forestry.fx(j,ac_est) = 0;
 
 ** Future demand relevant in current time step depending on rotation length
-pm_demand_forestry_future(i,kforestry)    = sum(t_ext$(t_ext.pos = pm_representative_rotation(t,i)),pm_demand_ext(t_ext,i,kforestry));
+$ifthen "%c73_foresight%" == "forward"
+    if(m_year(t) <= sm_fix_SSP2,
+    pm_demand_forestry_future(i,kforestry) = pm_demand_ext(t,i,kforestry);
+    else
+    pm_demand_forestry_future(i,kforestry)    = sum(t_ext$(t_ext.pos = pm_representative_rotation(t,i)),pm_demand_ext(t_ext,i,kforestry));
+    );
+$elseif "%c73_foresight%" == "myopic"
+** Future demand relevant in current time step depending on rotation length
+pm_demand_forestry_future(i,kforestry)    = pm_demand_ext(t,i,kforestry));
+$endif

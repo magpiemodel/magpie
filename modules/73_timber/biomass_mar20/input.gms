@@ -5,6 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+$setglobal c73_foresight forward
+
 scalars
   s73_timber_harvest_cost   Cost for harvesting timber (USD per ha) /200/
   s73_cost_multiplier       Multiplier for expensive harvest in natural vegetation (1) /2/
