@@ -12,6 +12,9 @@ source("scripts/start_functions.R")
 # Sources the default configuration file
 source("config/default.cfg")
 
+#recalibrate
+cfg$recalibrate <- "ifneeded"
+
 
 for(cc in c("nocc","cc")){
 
@@ -20,9 +23,6 @@ for(cc in c("nocc","cc")){
 
     # Set factor costs
     cfg$gms$factor_costs = "sticky_feb18"
-
-    #recalibrate
-    cfg$recalibrate <- TRUE
 
     #Change the results folder name
     cfg$title<-paste0("Sticky_",cc)

@@ -18,7 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **35_natveg** New realization for timber production from natural vegetation.
  - **57_maccs** Added MACCs from Harmsen PBL 2019
  - **scripts** added start script for making timber production runs (forestry.R)
- - **switch** New switch added to control the share of production coming from plantations.
+ - **switch** allowing constant or increasing shares of timber production coming from plantations
+ - **switch** allowing for constant or increasing area of timber plantations area after 2020
+ - **switch** allowing to fix a static portion of overall timber production coming from plantations
+ - **switch** added for allowing a using a forward looking or myopic timber demand for plantation establishment
 
 ### changed
  - **scripts** updated selection routine for start and output scripts
