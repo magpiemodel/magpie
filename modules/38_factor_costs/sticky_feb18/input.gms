@@ -7,15 +7,14 @@
 
 scalars
 
-*' @description based on AgTFP Agricultural total factor productivity from th USDA
-*'http://www.ers.usda.gov/data-products/international-agricultural-productivity.aspx
 
-*' share of capital in the factor costs excluding land rent and agricultural inputs
-  s38_capital_cost_share capital cost share (share of costs) / 0.46 /
+*' share of capital in the factor costs are based on the AgTFP Agricultural total factor productivity document by the USDA
+*'http://www.ers.usda.gov/data-products/international-agricultural-productivity.aspx
+s38_capital_cost_share capital cost share (share of costs) / 0.46 /
 *' depreciation rate assuming roughly 20 years linear depreciation for invesment goods
-  s38_depreciation_rate depreciation rate (share of costs)  / 0.05 /
+s38_depreciation_rate depreciation rate (share of costs)  / 0.05 /
 *' Share of immobile capital.
-  s38_immobile  immobile capital in perennial crops (share) / 0.7 /
+s38_immobile  immobile capital in perennial crops (share) / 0.7 /
 *' Initial management intensity
 s38_mi_start global management intensity in 1995 /0.47/
 *' Maximum fraction of the total gdp invested in capital in agriculture
