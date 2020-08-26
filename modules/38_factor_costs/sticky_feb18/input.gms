@@ -9,7 +9,7 @@ scalars
 
 
 *' share of capital in the factor costs are based on the AgTFP Agricultural total factor productivity document by the USDA
-*'http://www.ers.usda.gov/data-products/international-agricultural-productivity.aspx
+*' http://www.ers.usda.gov/data-products/international-agricultural-productivity.aspx
 s38_capital_cost_share capital cost share (share of costs) / 0.46 /
 *' depreciation rate assuming roughly 20 years linear depreciation for invesment goods
 s38_depreciation_rate depreciation rate (share of costs)  / 0.05 /
