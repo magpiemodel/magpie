@@ -9,7 +9,6 @@
 parameters
  pm_land_start(j,land)            Land initialization area (mio. ha)
  pcm_land(j,land)                 Land area in previous time step (mio. ha)
- pm_forestry_land_ratio(t_ext,i)  Ratio of plantation area development in historical time steps (1)
 ;
 
 variables
