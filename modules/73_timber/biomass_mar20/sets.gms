@@ -35,5 +35,10 @@ wood . (fibreboard,particle_board_and_osb,plywood,veneer_sheets,wood_pulp,sawnwo
 woodfuel . (wood_fuel)
 /
 
+foresight  Foresight allowed for timer demand 
+/
+forward, myopic
+/
+
 ;
 *** EOF sets.gms ***

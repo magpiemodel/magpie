@@ -6,6 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 $setglobal c73_foresight forward
+* options forward, myopic
 
 scalars
   s73_timber_harvest_cost   Cost for harvesting timber (USD per ha) /200/

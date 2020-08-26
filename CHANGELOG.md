@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **switch** allowing for constant or increasing area of timber plantations area after 2020
  - **switch** allowing to fix a static portion of overall timber production coming from plantations
  - **switch** added for allowing a using a forward looking or myopic timber demand for plantation establishment
+ - **10_land** Added an interface which calculates plantation area change in historical time period for use in the timber module.
 
 ### changed
  - **scripts** updated selection routine for start and output scripts

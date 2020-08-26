@@ -55,14 +55,15 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P06"
+identifier_flag = "P07"
 
-cat(paste0("5 year runs till 2150"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("5 year runs till 2100"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
+#xx <- c()
 for(c73_foresight in c("forward","myopic")){
   cfg$gms$c73_foresight = c73_foresight
 
-  for(s32_plant_share in c(0.10,0.15,0.20,0.25,0.30,0.35,0.40)){
+  for(s32_plant_share in c(0.10,0.20,0.30,0.40)){
     cfg$gms$s32_plant_share = s32_plant_share
 
     plant_share_flag <- paste0(s32_plant_share*100,"pc")
@@ -75,6 +76,8 @@ for(c73_foresight in c("forward","myopic")){
       if(s32_fix_plant == 1) plant_area_flag = "Const2020"
 
       for(c32_prod_ratio in c("increasing")){
+        cfg$gms$c32_prod_ratio        = c32_prod_ratio
+
         for (co2_price_path in c("NPI")) {
 
           for(s32_initial_distribution in c(1)){
@@ -87,7 +90,7 @@ for(c73_foresight in c("forward","myopic")){
 
             for(emis_policy in c("redd+_nosoil")){
 
-              for(ssp in c("SSP1","SSP2","SSP3")){
+              for(ssp in c("SSP2")){
                 if(emis_policy == "redd+_nosoil") cfg$gms$s32_plant_carbon_foresight = 1
                 if(emis_policy == "ssp_nosoil")   cfg$gms$s32_plant_carbon_foresight = 0
 
@@ -97,7 +100,6 @@ for(c73_foresight in c("forward","myopic")){
                     cfg$gms$c56_emis_policy       = emis_policy
                     cfg$gms$c56_pollutant_prices  = "R2M41-SSP2-NPi" #update to most recent coupled runs asap
                     cfg$gms$c60_2ndgen_biodem     = "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
-                    cfg$gms$c32_prod_ratio        = c32_prod_ratio
                     pol_flag                      = "REDD+"
                     co2_price_path_flag           = "Baseline"
                   } else if (co2_price_path == "2deg" && emis_policy == "redd+_nosoil"){
@@ -105,7 +107,6 @@ for(c73_foresight in c("forward","myopic")){
                     cfg$gms$c56_emis_policy       = emis_policy
                     cfg$gms$c56_pollutant_prices  = "SSPDB-SSP2-26-REMIND-MAGPIE"
                     cfg$gms$c60_2ndgen_biodem     = "SSPDB-SSP2-26-REMIND-MAGPIE"
-                    cfg$gms$c32_prod_ratio        = c32_prod_ratio
                     co2_price_path_flag           = "Policy"
                     if(emis_policy == "ssp_nosoil")   pol_flag = ""
                     if(emis_policy == "redd+_nosoil") pol_flag = "REDD+"

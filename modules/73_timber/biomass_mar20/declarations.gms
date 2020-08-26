@@ -13,6 +13,7 @@ pm_demand_ext(t_ext,i,kforestry)                                            Exte
 p73_demand_ext_original(t_ext,i,kforestry)                                  Original prescribed timber demand (mio. tDM per yr)
 p73_criterion	                                                              Criteria calculating timber demand adjustment (mio. tDM per yr)
 p73_timber_adjustment_ratio(t,i,kforestry)                                  Ratio between adjusted and prescribed timber demand (1)
+p73_foresight(foresight)                                                    Foresight allowed for timer demand (1)
 ;
 
 positive variables

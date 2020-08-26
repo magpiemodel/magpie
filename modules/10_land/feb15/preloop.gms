@@ -17,3 +17,14 @@ vm_cost_land_transition.fx(j) = 0;
 
 vm_croplandexpansion.fx(j,land) = 0;
 vm_croplandreduction.fx(j,land) = 0;
+
+*Ratio of plantation area development in historical period used for timber plantations
+*establishment decisions in the current steps
+
+*Initialize value with 1
+pm_forestry_land_ratio(t_ext,i) = 1;
+loop (t_ini10$(ord(t_ini10)>1),
+ pm_forestry_land_ratio(t_ini10,i) = (sum(cell(i,j),f10_land(t_ini10,j,"forestry"))/sum(cell(i,j),f10_land(t_ini10-1,j,"forestry")));
+);
+*Overwrite first time period value with 2nd year of simulation
+pm_forestry_land_ratio(t_ini10,i)$(ord(t_ini10)=1)                = pm_forestry_land_ratio(t_ini10+1,i);
