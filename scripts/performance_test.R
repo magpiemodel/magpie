@@ -1,4 +1,4 @@
-# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -9,7 +9,7 @@ source("scripts/start_functions.R")
 
 
 performance_start <- function(cfg="default.cfg",modulepath="modules/",id="performance",sequential=NA) {
-  require(lucode)
+  require(lucode2)
 
   if(!is.list(cfg)) {
     if(is.character(cfg)) {
@@ -35,7 +35,7 @@ performance_start <- function(cfg="default.cfg",modulepath="modules/",id="perfor
   try(start_run(cfg))
 
   m <- getModules(modulepath)
-  for(i in 1:dim(m)[1]) { 
+  for(i in 1:dim(m)[1]) {
     default <- cfg$gms[[m[i,"name"]]]
     r <- strsplit(m[i,"realizations"],",")[[1]]
     r <- r[r!=default]  #remove default case
@@ -51,7 +51,7 @@ performance_start <- function(cfg="default.cfg",modulepath="modules/",id="perfor
 
 performance_collect <- function(id="performance",results_folder="output/",plot=TRUE) {
   require(magpie4)
-  require(lucode)
+  require(lucode2)
   maindir <- getwd()
   on.exit(setwd(maindir))
   setwd(results_folder)

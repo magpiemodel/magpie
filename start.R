@@ -1,4 +1,4 @@
-# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -9,7 +9,8 @@
 #### MAgPIE output generation ####
 ##########################################################
 
-library(lucode)
+library(lucode2)
+library(gms)
 
 runOutputs <- function(runscripts=NULL, submit=NULL) {
 
@@ -24,27 +25,6 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
       on.exit(close(con))
     }
     return(s);
-  }
-
-
-  choose_module <- function(Rfolder,title="Please choose an outputmodule") {
-    forder <- paste0(Rfolder,"/order.cfg")
-    if(file.exists(forder)) {
-      order <- grep("(#|^$)",readLines(forder),invert=TRUE,value=TRUE)
-      if(length(order)==0) order <- NULL
-    } else {
-      order <- NULL
-    }
-    module <- gsub("\\.R$","",grep("\\.R$",list.files(Rfolder), value=TRUE))
-    #sort modules based on order.cfg
-    module <- intersect(union(order,module),module)
-    cat("\n",title,":\n", sep="")
-    cat(paste(1: length(module), gsub("_"," ",module,fixed=TRUE), sep=": " ),sep="\n")
-    cat("Number: ")
-    identifier <- get_line()
-    identifier <- as.numeric(strsplit(identifier,",")[[1]])
-    if (any(!(identifier %in% 1:length(module)))) stop("This choice (",identifier,") is not possible. Please type in a number between 1 and ",length(module))
-    return(module[identifier])
   }
 
   choose_submit <- function(title="Please choose run submission type") {
@@ -85,28 +65,32 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 
   runsubmit <- function(runscripts, submit) {
     for(rout in runscripts){
-      name   <- paste0("./scripts/start/",rout,".R")
-
+      name   <- paste0("./scripts/start/",rout)
       if(!file.exists(name)) {
-        warning("Script ",name, " could not be found. Skip execution!")
-        next
+        name2 <- paste0(name,".R")
+        if(!file.exists(name2)) {
+          warning("Script ",name2, " could not be found. Skip execution!")
+          next
+        }
+        name <- name2
       }
 
       cat("Executing",name,"\n")
-      srun_command <- paste0("srun --job-name=",rout," --output=",rout,"-%j.out --mail-type=END")
+      rout_name <- sub("\\.R$","",sub("/","_",rout))
+      sbatch_command <- paste0("sbatch --job-name=",rout_name," --output=",rout_name,"-%j.out --mail-type=END --wrap=\"Rscript ",name,"\"")
       if(submit=="direct") {
         tmp.env <- new.env()
         tmp.error <- try(sys.source(name,envir=tmp.env))
         if(!is.null(tmp.error)) warning("Script ",name," was stopped by an error and not executed properly!")
         rm(tmp.env)
       } else if(submit=="background") {
-        log <- format(Sys.time(), paste0(rout,"-%Y-%H-%M-%S-%OS3.log"))
+        log <- format(Sys.time(), paste0(rout_name,"-%Y-%H-%M-%S-%OS3.log"))
         system2("Rscript",name, stderr = log, stdout = log, wait=FALSE)
       } else if(submit=="slurmpriority") {
-        system(paste0(srun_command," --qos=priority Rscript ",name), wait=FALSE)
+        system(paste(sbatch_command,"--qos=priority"))
         Sys.sleep(1)
       } else if(submit=="slurmstandby") {
-        system(paste0(srun_command," --qos=standby Rscript ",name), wait=FALSE)
+        system(paste(sbatch_command,"--qos=standby"))
         Sys.sleep(1)
       } else if(submit=="debug") {
         tmp.env <- new.env()
@@ -120,14 +104,16 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 
 
 
-  if(is.null(runscripts)) runscripts <- choose_module("./scripts/start",
-                                                      "Choose start script")
+  if(is.null(runscripts)) runscripts <- gms::selectScript("./scripts/start")
+  if(is.null(runscripts)) {
+    message("No start script selected! Stop here.")
+    return(invisible(NULL))
+  }
   if(is.null(submit))     submit     <- choose_submit("Choose submission type")
-
   runsubmit(runscripts, submit)
 }
 
 
 runscripts <- submit <- NULL
-readArgs("runscripts","submit", .silent=TRUE)
+lucode2::readArgs("runscripts","submit", .silent=TRUE)
 runOutputs(runscripts=runscripts, submit=submit)

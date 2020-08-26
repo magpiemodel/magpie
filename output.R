@@ -1,4 +1,4 @@
-# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -9,9 +9,10 @@
 #### MAgPIE output generation ####
 ##########################################################
 
-library(lucode)
+library(lucode2)
+library(gms)
 
-runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
+runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
 
   get_line <- function(){
     # gets characters (line) from the terminal or from a connection
@@ -28,16 +29,17 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
 
   choose_folder <- function(title="Please choose a folder") {
     # try to use find because it is significantly quicker than list.dirs
-    tmp <- try(system("find ./output -name 'fulldata.gdx'", intern=TRUE,  ignore.stderr = TRUE), silent=TRUE)
+    tmp <- try(system("find ./output -name 'full.gms'", intern=TRUE,  ignore.stderr = TRUE), silent=TRUE)
     if("try-error" %in% class(tmp) | length(tmp)==0) {
       tmp <- base::list.dirs("./output/",recursive=TRUE)
       dirs <- NULL
       for (i in 1:length(tmp)) {
-        if (file.exists(path(tmp[i],"fulldata.gdx"))) dirs <- c(dirs,sub("./output/","",tmp[i]))
+        if (file.exists(path(tmp[i],"full.gms"))) dirs <- c(dirs,sub("./output/","",tmp[i]))
       }
     } else {
-      dirs <- sub("fulldata.gdx","",sub("./output/","",tmp, fixed=TRUE), fixed=TRUE)
+      dirs <- sub("full.gms","",sub("./output/","",tmp, fixed=TRUE), fixed=TRUE)
     }
+    dirs <- sort(dirs)
     dirs <- c("all",dirs)
     cat("\n",title,":\n", sep="")
     cat(paste(1:length(dirs), dirs, sep=": " ),sep="\n")
@@ -55,7 +57,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
     if(length(identifier==1) && identifier==(length(dirs)+1)){
       cat("\nInsert the search pattern or the regular expression: ")
       pattern <- get_line()
-      id <- grep(pattern=pattern, dirs[-1])
+      id <- grep(pattern=pattern, dirs[-1], perl=TRUE)
       # lists all directories matching the pattern and ask for confirmation
       cat("\n\nYou have chosen the following directories:\n")
       cat(paste(1:length(id), dirs[id+1], sep=": "), sep="\n")
@@ -71,33 +73,6 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
       return(paste0("./output/",dirs[identifier]))
     } else {
       return(paste0("./output/",dirs[identifier]))
-    }
-  }
-
-  choose_module <- function(Rfolder,title="Please choose an outputmodule") {
-    module <- gsub("\\.R$","",grep("\\.R$",list.files(Rfolder), value=TRUE))
-    cat("\n",title,":\n",sep="")
-    cat(paste(1: length(module), module, sep=": " ),sep="\n")
-    cat("Number: ")
-    identifier <- get_line()
-    identifier <- as.numeric(strsplit(identifier,",")[[1]])
-    if (any(!(identifier %in% 1:length(module)))) stop("This choice (",identifier,") is not possible. Please type in a number between 1 and ",length(module))
-    return(module[identifier])
-  }
-
-  choose_mode <- function(title="Please choose the output mode") {
-    modes <- c("Output for single run ","Comparison across runs")
-    cat("\n",title,":\n",sep="")
-    cat(paste(1:length(modes), modes, sep=": " ),sep="\n")
-    cat("Number: ")
-    identifier <- get_line()
-    identifier <- as.numeric(strsplit(identifier,",")[[1]])
-    if (identifier==1) {
-      return(FALSE)
-    } else if (identifier==2) {
-      return(TRUE)
-    } else {
-      stop("This mode is invalid. Please choose a valid mode")
     }
   }
 
@@ -135,68 +110,73 @@ runOutputs <- function(comp=NULL, output=NULL, outputdirs=NULL, submit=NULL) {
     return(comp)
   }
 
-  runsubmit <- function(output, outputdirs, comp, script_path) {
+  runsubmit <- function(output, alloutputdirs, submit, script_path) {
+    #Set value source_include so that loaded scripts know, that they are
+    #included as source (instead of a load from command line)
+    source_include <- TRUE
     # run output scripts over all choosen folders
     for(rout in output){
-      name   <- paste0(rout,".R")
+      name <- ifelse(file.exists(paste0(script_path,rout)), rout, paste0(rout,".R"))
       script <- paste0(script_path,name)
       if(!file.exists(script)) {
         warning("Script ",name, " could not be found. Skip execution!")
         next
       }
-      if(!comp) outputdir <- outputdirs
-      cat(" -> ",name)
-      if(submit=="direct") {
-        tmp.env <- new.env()
-        tmp.error <- try(sys.source(script,envir=tmp.env))
-        if(!is.null(tmp.error)) warning("Script ",name," was stopped by an error and not executed properly!")
-        rm(tmp.env)
-      } else if(submit=="background") {
-        system(paste0("Rscript output.R outputdirs=",paste(outputdirs,collapse=",")," comp=",comp,"  output=",rout," submit=direct &> ",format(Sys.time(), "blog_out-%Y-%H-%M-%S-%OS3.log")," &"))
-      } else if(submit=="slurm default") {
-        system(paste0("srun --qos=standby --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --time=200 --mem-per-cpu=8000 Rscript output.R outputdirs=",paste(outputdirs,collapse=",")," comp=",comp,"  output=",rout," submit=direct &"))
-        Sys.sleep(1)
-      } else if(submit=="slurm priority") {
-        system(paste0("srun --qos=priority --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --mem-per-cpu=8000 Rscript output.R outputdirs=",paste(outputdirs,collapse=",")," comp=",comp,"  output=",rout," submit=direct &"))
-        Sys.sleep(1)
-      } else if(submit=="debug") {
-        tmp.env <- new.env()
-        sys.source(script,envir=tmp.env)
-        rm(tmp.env)
+      header <- read_yaml_header(script)
+      comp <- (!is.null(header[["comparison script"]]) && isTRUE(header[["comparison script"]]))
+      if(comp) {
+		print("script executed as comparison script")
+        loop <- list(alloutputdirs)
       } else {
-        stop("Unknown submission type")
+		if(length(alloutputdirs)>1) {print("script executed multiple times in parallel")} else {print("script executed as single output script")}
+		loop <- alloutputdirs
+		print(loop)
+		print(str(loop))
+      }
+      for(outputdir in loop) {
+        message(" -> ",name)
+		print(paste0("starting script for outputdir",outputdir))
+        r_command <- paste0("Rscript output.R outputdir=",paste(outputdir,collapse=","),"  output=",rout," submit=direct")
+        sbatch_command <- paste0("sbatch --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --time=200 --mem-per-cpu=8000 --wrap=\"",r_command,"\"")
+        if(submit=="direct") {
+          tmp.env <- new.env()
+          tmp.error <- try(sys.source(script,envir=tmp.env))
+          if(!is.null(tmp.error)) warning("Script ",name," was stopped by an error and not executed properly!")
+          rm(tmp.env)
+        } else if(submit=="background") {
+          system(paste0(r_command," &> ",format(Sys.time(), "blog_out-%Y-%H-%M-%S-%OS3.log")," &"))
+        } else if(submit=="slurm default") {
+          system(paste(sbatch_command, "--qos=standby"))
+        } else if(submit=="slurm priority") {
+          system(paste(sbatch_command, "--qos=priority"))
+        } else if(submit=="debug") {
+          tmp.env <- new.env()
+          sys.source(script,envir=tmp.env)
+          rm(tmp.env)
+        } else {
+          stop("Unknown submission type")
+        }
       }
     }
   }
 
-
-  if(is.null(comp))       comp       <- choose_mode("Choose output type")
-  if(is.null(outputdirs)) outputdirs <- choose_folder("Choose runs")
-  if(is.null(output))     output     <- choose_module(ifelse(comp,"./scripts/output/comparison","./scripts/output/single"),
-                                                      "Choose output scripts")
+  if(is.null(outputdir)) outputdir <- choose_folder("Choose runs")
+  if(is.null(output))     output     <- gms::selectScript("./scripts/output")
   if(is.null(submit))     submit     <- choose_submit("Choose submission type")
-
-  #Set value source_include so that loaded scripts know, that they are
-  #included as source (instead of a load from command line)
-  source_include <- TRUE
-
-
-  if (comp) {
-    cat("Output comparsion mode\n")
-    runsubmit(output, outputdirs, TRUE, "scripts/output/comparison/")
-  } else {
-    cat("Run postprocessing mode\n")
-    for (outputdir in outputdirs) {
-      cat(paste("\nSubmit",outputdir))
-      runsubmit(output, outputdir, FALSE, "scripts/output/single/")
-    }
+  if(is.null(output)) {
+    message("No output script selected! Stop here.")
+    return(invisible(NULL))
   }
-  cat("\n\n")
+  if(is.null(outputdir)) {
+    message("No output folder selected! Stop here.")
+    return(invisible(NULL))
+  }
+  runsubmit(output, alloutputdirs = outputdir, submit, "scripts/output/")
 }
 
 if(!exists("source_include")) {
-  comp <- output <- outputdirs <- submit <- NULL
-  readArgs("comp","output","outputdirs","submit", .silent=TRUE)
+  output <- outputdir <- submit <- NULL
+  lucode2::readArgs("output","outputdir","submit", .silent=TRUE)
 }
 
-runOutputs(comp=comp, output=output, outputdirs = outputdirs, submit=submit)
+runOutputs(output=output, outputdir = outputdir, submit=submit)

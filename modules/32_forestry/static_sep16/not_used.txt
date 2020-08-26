@@ -1,9 +1,15 @@
-# |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
+
 name,type,reason
-pm_carbon_density_ac, input,not used
 pm_land_start, input, not used
+pm_interest, input, not used
+sm_fix_SSP2, input, not needed
+pm_timber_yield, input, not used
+pm_carbon_density_ac_forestry, input, not used
+pm_selfsuff_ext, par, not used
+pm_demand_forestry_future, par, not used

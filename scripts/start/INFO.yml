@@ -1,0 +1,5 @@
+type: start script
+description: Main selection of MAgPIE start scripts
+note: Scripts in this selection are actively managed and work out of the
+  box
+position: 1.0
