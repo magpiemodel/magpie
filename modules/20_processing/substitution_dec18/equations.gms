@@ -112,7 +112,7 @@ q20_processing_costs(i2) ..
 sum((ksd,processing20,kpr), v20_dem_processing(i2,processing20,kpr)
          *sum(ct,i20_processing_conversion_factors(ct,processing20,ksd,kpr))
          * i20_processing_unitcosts(ksd,kpr))
-         + (vm_prod_reg(i2,"scp") * sum(scptype, i20_scp_type_shr(scptype) * f20_scp_unitcosts(scptype)));
+         + (vm_prod_reg(i2,"scp") * sum(scptype, sum(ct, i20_scp_type_shr(ct,scptype)) * f20_scp_unitcosts(scptype)));
          ;
 
 *' Finally, we assume that any substitution of one product by another,

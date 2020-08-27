@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c20_scp_type  hydrogen
+$setglobal c20_scp_type  mixed
 
 table f20_processing_balanceflow(t_all,i,ksd) Processing balance flow  (mio. tDM)
 $ondelim

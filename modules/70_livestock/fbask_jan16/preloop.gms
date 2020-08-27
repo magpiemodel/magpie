@@ -17,12 +17,12 @@ loop(t_all,
 );
 
 i70_feed_fadeout(t_all)$(m_year(t_all) <= 2020) = 1;
-i70_feed_fadeout("y2025") = 0.8333;
-i70_feed_fadeout("y2030") = 0.6667;
+i70_feed_fadeout("y2025") = 0.9;
+i70_feed_fadeout("y2030") = 0.75;
 i70_feed_fadeout("y2035") = 0.5;
-i70_feed_fadeout("y2040") = 0.3333;
-i70_feed_fadeout("y2045") = 0.1667;
-i70_feed_fadeout(t_all)$(m_year(t_all) >= 2050) = 0;
+i70_feed_fadeout("y2040") = 0.35;
+i70_feed_fadeout("y2045") = 0.25;
+i70_feed_fadeout(t_all)$(m_year(t_all) >= 2050) = 0.2;
 
 loop(t_all$(m_year(t_all) > 2020),
 if(s70_scp_feed = 1,

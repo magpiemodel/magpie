@@ -25,25 +25,20 @@ cfg$results_folder <- "output/:title:"
 
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 
-prefix <- "SCP18"
+prefix <- "SCP19"
+
+cfg$gms$s15_elastic_demand <- 0
+
+cfg$title <- paste0(prefix,"_SSP2-Ref_mixed")
+cfg$gms$c20_scp_type <- "mixed"
+cfg$gms$s70_scp_feed <- 0
+cfg$gms$s15_scp_food <- 0
+start_run(cfg,codeCheck=FALSE)
 
 for (scp_type in c("mixed", "methane", "sugar", "cellulose","hydrogen")) {
+  cfg$title <- paste0(prefix,"_SSP2-CellAg_",scp_type)
   cfg$gms$c20_scp_type <- scp_type
-  cfg$gms$s15_elastic_demand <- 0
-  
-  cfg$title <- paste0(prefix,"_SSP2-Ref_",scp_type)
-  cfg$gms$s70_scp_feed <- 0
-  cfg$gms$s15_scp_food <- 0
-  start_run(cfg,codeCheck=FALSE)
-  
-  # cfg$title <- "SCP15_sugar_scpFeedOn"
-  # cfg$gms$s70_scp_feed <- 1
-  # cfg$gms$s15_scp_food <- 0
-  # start_run(cfg,codeCheck=FALSE)
-  
-  cfg$title <- paste0(prefix,"_SSP2-SCP_",scp_type)
   cfg$gms$s70_scp_feed <- 0
   cfg$gms$s15_scp_food <- 1
   start_run(cfg,codeCheck=FALSE)
-  
 }
