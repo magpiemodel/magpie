@@ -55,7 +55,7 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P10"
+identifier_flag = "P11"
 
 cat(paste0("5 year runs till 2150"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
@@ -111,7 +111,7 @@ for(c73_foresight in c("forward","myopic")){
                     if(emis_policy == "ssp_nosoil")   pol_flag = ""
                     if(emis_policy == "redd+_nosoil") pol_flag = "REDD+"
                   }
-                if(s32_fix_plant == 1 && c73_foresight == "myopic") break
+                if(s32_fix_plant == 1 && c73_foresight == "forward") break
 
                 #          cfg$gms$c56_pollutant_prices = "coupling"
                 #          cfg$gms$c60_2ndgen_biodem = "coupling"
