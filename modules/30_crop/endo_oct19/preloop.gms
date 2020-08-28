@@ -5,8 +5,11 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$ifthen "%c41_initial_irrigation_area%" == "Siebert" v41_AEI.fx(j)    = f41_irrig(j);
-$elseif "%c41_initial_irrigation_area%" == "LUH2v2"  v41_AEI.fx(j)    = f41_irrig_luh(t,j);
-$endif
 
-vm_cost_AEI.fx(i) = 0;
+*due to some rounding errors the input data currently may contain in some cases
+*very small, negative numbers. These numbers have to be set to 0 as area
+*cannot be smaller than 0!
+pm_croparea_start(j,kcr) = sum(w, f30_croparea("y1995",j,w,kcr));
+pm_croparea_start(j,kcr)$(pm_croparea_start(j,kcr)<0) = 0;
+
+pm_area(j,kcr,w)         = f30_croparea("y1995",j,kcr,w);

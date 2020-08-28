@@ -13,12 +13,12 @@ $setglobal c30_bioen_water  rainfed
 
 ********* CROPAREA INITIALISATION **********************************************
 
-table fm_croparea(t_all,j,w,kcr) Different croparea type areas (mio. ha)
+table f30_croparea(t_all,j,w,kcr) Different croparea type areas (mio. ha)
 $ondelim
 $include "./modules/30_crop/endo_jun13/input/f30_croparea_initialisation.cs3"
 $offdelim
 ;
-m_fillmissingyears(fm_croparea,"j,w,kcr");
+m_fillmissingyears(f30_croparea,"j,w,kcr");
 
 
 ********* CROP-ROTATIONAL CONSTRAINT *******************************************

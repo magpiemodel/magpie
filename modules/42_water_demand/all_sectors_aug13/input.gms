@@ -38,7 +38,7 @@ s42_env_flow_base_fraction         Fraction of available water that is reserved 
 s42_env_flow_fraction              Fraction of available water that is reserved for under protection policies (1) / 0.2 /
 ;
 
-$setglobal c42_watdem_scenario  nocc
+$setglobal c42_watdem_scenario  cc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
 
