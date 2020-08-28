@@ -55,78 +55,80 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P11"
+identifier_flag = "P12"
 
 cat(paste0("5 year runs till 2150"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 #xx <- c()
-for(c73_foresight in c("forward","myopic")){
-  cfg$gms$c73_foresight = c73_foresight
 
-  for(s32_plant_share in c(0.40)){
-    cfg$gms$s32_plant_share = s32_plant_share
+for(s32_plant_share in c(0.40)){
+  cfg$gms$s32_plant_share = s32_plant_share
 
-    plant_share_flag <- paste0(s32_plant_share*100,"pc")
+  plant_share_flag <- paste0(s32_plant_share*100,"pc")
 
-    for(s32_fix_plant in c(0,1)){
+  for(s32_fix_plant in c(0,1)){
 
-      cfg$gms$s32_fix_plant = s32_fix_plant
+    cfg$gms$s32_fix_plant = s32_fix_plant
 
-      if(s32_fix_plant == 0) plant_area_flag = "Incr2020"
-      if(s32_fix_plant == 1) plant_area_flag = "Const2020"
+    if(s32_fix_plant == 0) {
+      plant_area_flag = "Incr2020"
+      cfg$gms$c73_foresight = "forward"
+    }
+    if(s32_fix_plant == 1) {
+      plant_area_flag = "Const2020"
+      cfg$gms$c73_foresight = "myopic"
+    }
 
-      for(c32_prod_ratio in c("increasing")){
-        cfg$gms$c32_prod_ratio        = c32_prod_ratio
+    for(c32_prod_ratio in c("increasing")){
+      cfg$gms$c32_prod_ratio        = c32_prod_ratio
 
-        for (co2_price_path in c("NPI")) {
+      for (co2_price_path in c("NPI")) {
 
-          for(s32_initial_distribution in c(1)){
+        for(s32_initial_distribution in c(1)){
 
-            cfg$gms$s32_initial_distribution  = s32_initial_distribution
-            cfg$gms$s73_demand_switch         = s32_initial_distribution
+          cfg$gms$s32_initial_distribution  = s32_initial_distribution
+          cfg$gms$s73_demand_switch         = s32_initial_distribution
 
-            if(s32_initial_distribution == 1) timber_flag = "timberON"
-            if(s32_initial_distribution == 0) timber_flag = "timberOFF"
+          if(s32_initial_distribution == 1) timber_flag = "timberON"
+          if(s32_initial_distribution == 0) timber_flag = "timberOFF"
 
-            for(emis_policy in c("redd+_nosoil")){
+          for(emis_policy in c("redd+_nosoil")){
 
-              for(ssp in c("SSP1","SSP2","SSP3")){
-                if(emis_policy == "redd+_nosoil") cfg$gms$s32_plant_carbon_foresight = 1
-                if(emis_policy == "ssp_nosoil")   cfg$gms$s32_plant_carbon_foresight = 0
+            for(ssp in c("SSP2")){
+              if(emis_policy == "redd+_nosoil") cfg$gms$s32_plant_carbon_foresight = 1
+              if(emis_policy == "ssp_nosoil")   cfg$gms$s32_plant_carbon_foresight = 0
 
 
-                  if (co2_price_path == "NPI" && emis_policy == "redd+_nosoil") {
-                    cfg                           = setScenario(cfg,c(ssp,"NPI"))
-                    cfg$gms$c56_emis_policy       = emis_policy
-                    cfg$gms$c56_pollutant_prices  = "R2M41-SSP2-NPi" #update to most recent coupled runs asap
-                    cfg$gms$c60_2ndgen_biodem     = "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
-                    pol_flag                      = "REDD+"
-                    co2_price_path_flag           = "Baseline"
-                  } else if (co2_price_path == "2deg" && emis_policy == "redd+_nosoil"){
-                    cfg                           = setScenario(cfg,c(ssp,"NDC"))
-                    cfg$gms$c56_emis_policy       = emis_policy
-                    cfg$gms$c56_pollutant_prices  = "SSPDB-SSP2-26-REMIND-MAGPIE"
-                    cfg$gms$c60_2ndgen_biodem     = "SSPDB-SSP2-26-REMIND-MAGPIE"
-                    co2_price_path_flag           = "Policy"
-                    if(emis_policy == "ssp_nosoil")   pol_flag = ""
-                    if(emis_policy == "redd+_nosoil") pol_flag = "REDD+"
-                  }
-                if(s32_fix_plant == 1 && c73_foresight == "forward") break
+                if (co2_price_path == "NPI" && emis_policy == "redd+_nosoil") {
+                  cfg                           = setScenario(cfg,c(ssp,"NPI"))
+                  cfg$gms$c56_emis_policy       = emis_policy
+                  cfg$gms$c56_pollutant_prices  = "R2M41-SSP2-NPi" #update to most recent coupled runs asap
+                  cfg$gms$c60_2ndgen_biodem     = "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
+                  pol_flag                      = "REDD+"
+                  co2_price_path_flag           = "Baseline"
+                } else if (co2_price_path == "2deg" && emis_policy == "redd+_nosoil"){
+                  cfg                           = setScenario(cfg,c(ssp,"NDC"))
+                  cfg$gms$c56_emis_policy       = emis_policy
+                  cfg$gms$c56_pollutant_prices  = "SSPDB-SSP2-26-REMIND-MAGPIE"
+                  cfg$gms$c60_2ndgen_biodem     = "SSPDB-SSP2-26-REMIND-MAGPIE"
+                  co2_price_path_flag           = "Policy"
+                  if(emis_policy == "ssp_nosoil")   pol_flag = ""
+                  if(emis_policy == "redd+_nosoil") pol_flag = "REDD+"
+                }
 
-                #          cfg$gms$c56_pollutant_prices = "coupling"
-                #          cfg$gms$c60_2ndgen_biodem = "coupling"
+              #          cfg$gms$c56_pollutant_prices = "coupling"
+              #          cfg$gms$c60_2ndgen_biodem = "coupling"
 
-                #          file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
-                #          file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
+              #          file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
+              #          file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
 
-                #cfg$title = paste0(identifier_flag,"_",ssp,"_",co2_price_path_flag,"_PlantShr_",c32_prod_ratio)
-                cfg$title   = paste0(identifier_flag,"_",ssp,"_",plant_area_flag,"_",c73_foresight)
+              #cfg$title = paste0(identifier_flag,"_",ssp,"_",co2_price_path_flag,"_PlantShr_",c32_prod_ratio)
+              cfg$title   = paste0(identifier_flag,"_",ssp,"_",plant_area_flag)
 
-                cfg$output  = c("rds_report","extra/disaggregation","extra/force_runstatistics")
+              cfg$output  = c("rds_report","extra/disaggregation","extra/force_runstatistics")
 
 #                xx = c(xx,cfg$title)
-                start_run(cfg,codeCheck=FALSE)
-              }
+              start_run(cfg,codeCheck=FALSE)
             }
           }
         }

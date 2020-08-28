@@ -15,7 +15,7 @@ p32_carbon_density_ac_forestry(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all
 ** Calculating the marginal of carbon density i.e. change in carbon density over two time steps
 ** The carbon densities are tC/ha/year so we don't have to divide by timestep length.
 loop(ac$(ord(ac) > 1),
-  p32_carbon_density_ac_marg(t_all,j,ac) = p32_carbon_density_ac_forestry(t_all,j,ac) - p32_carbon_density_ac_forestry(t_all,j,ac-1);
+  p32_carbon_density_ac_marg(t_all,j,ac) = (p32_carbon_density_ac_forestry(t_all,j,ac) - p32_carbon_density_ac_forestry(t_all,j,ac-1))/5;
   );
 p32_carbon_density_ac_marg(t_all,j,"ac0") = 0;
 
@@ -73,7 +73,7 @@ p32_rot_length_ac_eqivalent(t_historical,j) = p32_rot_length_ac_eqivalent("y1995
 
 ** Holding rotation lengths constant after the end of this century.
 p32_rot_length_ac_eqivalent(t_future,j) = p32_rot_length_ac_eqivalent("y2100",j);
-
+display p32_rot_length_ac_eqivalent;
 ** Number of cells in each region
 p32_ncells(i) = sum(cell(i,j),1);
 
