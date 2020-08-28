@@ -15,7 +15,7 @@ $setglobal c30_bioen_water  rainfed
 
 table f30_croparea(t_all,j,w,kcr) Different croparea type areas (mio. ha)
 $ondelim
-$include "./modules/30_crop/endo_jun13/input/f30_croparea_initialisation.cs3"
+$include "./modules/30_crop/endo_oct19/input/f30_croparea_initialisation.cs3"
 $offdelim
 ;
 m_fillmissingyears(f30_croparea,"j,w,kcr");
@@ -26,14 +26,14 @@ m_fillmissingyears(f30_croparea,"j,w,kcr");
 parameter f30_rotation_max_shr(crp30) Maximum allowed area shares for each crop type (1)
 /
 $ondelim
-$include "./modules/30_crop/endo_jun13/input/f30_rotation_max.csv"
+$include "./modules/30_crop/endo_oct19/input/f30_rotation_max.csv"
 $offdelim
 /;
 
 parameter f30_rotation_min_shr(crp30) Minimum allowed area shares for each crop type (1)
 /
 $ondelim
-$include "./modules/30_crop/endo_jun13/input/f30_rotation_min.csv"
+$include "./modules/30_crop/endo_oct19/input/f30_rotation_min.csv"
 $offdelim
 /;
 
@@ -42,6 +42,6 @@ $offdelim
 
 table f30_land_si(j,si) Land area suitable and non-suitable as cropland (mio. ha)
 $ondelim
-$include "./modules/30_crop/endo_jun13/input/avl_land_si.cs3"
+$include "./modules/30_crop/endo_oct19/input/avl_land_si.cs3"
 $offdelim
 ;

@@ -7,7 +7,7 @@
 
 parameters
  pm_croparea_start(j,kcr)        Agricultural land initialization area (mio. ha)
- pm_area(j,kcr,w)                Initialization for crop and water type specific areas (mio. ha)
+ p30_area_w(j,kcr,w)                Initialization for crop and water type specific areas (mio. ha)
 ;
 
 positive variables

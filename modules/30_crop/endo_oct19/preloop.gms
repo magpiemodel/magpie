@@ -12,4 +12,4 @@
 pm_croparea_start(j,kcr) = sum(w, f30_croparea("y1995",j,w,kcr));
 pm_croparea_start(j,kcr)$(pm_croparea_start(j,kcr)<0) = 0;
 
-pm_area(j,kcr,w)         = f30_croparea("y1995",j,kcr,w);
+p30_area_w(j,kcr,w)         = f30_croparea("y1995",j,kcr,w);
