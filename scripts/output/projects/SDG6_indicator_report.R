@@ -38,8 +38,8 @@ print("copying water availability data for the run: ")
 print(title)
 
 # cluster-level data from preprocessing
-tgz <- cfg$input[1]
+tgz <- paste0("/p/projects/landuse/data/input/archive/",cfg$input[1])
 # Move necessary inputs to output folder
 untar(tarfile = tgz, files = c("lpj_watavail_total_c200.mz","lpj_watavail_grper_c200.mz","lpj_envflow_total_c200.mz","lpj_envflow_grper_c200.mz"), exdir=outputdir)
-print("copied")
-print()
+print("copied files:")
+print(c("lpj_watavail_total_c200.mz","lpj_watavail_grper_c200.mz","lpj_envflow_total_c200.mz","lpj_envflow_grper_c200.mz"))
