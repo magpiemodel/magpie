@@ -15,7 +15,7 @@ $setglobal c30_bioen_water  rainfed
 
 table f30_croparea(t_all,j,w,kcr) Different croparea type areas (mio. ha)
 $ondelim
-$include "./modules/30_crop/endo_oct19/input/f30_croparea_initialisation.cs3"
+$include "./modules/30_crop/endo_oct19/input/f30_croparea_w_initialisation.cs3"
 $offdelim
 ;
 m_fillmissingyears(f30_croparea,"j,w,kcr");
