@@ -9,3 +9,8 @@ name,type,reason
 vm_tau,input,questionnaire
 fm_tau1995,input,questionnaire
 vm_area,input,questionnaire
+pm_interest,input,questionnaire
+vm_prod,input,questionnaire
+pm_croparea_start,input,questionnaire
+im_gdp_pc_mer,input,questionnaire
+im_pop,input,questionnaire

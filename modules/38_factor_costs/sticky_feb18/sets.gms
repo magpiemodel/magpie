@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-p41_AEI_start(t,j) = pc41_AEI_start(j);
-v41_AEI.lo(j) = pc41_AEI_start(j);
-
-pc41_unitcost_AEI(i) = f41_c_irrig(t,i);
+sets
+  mobil38 types of capital
+  / mobile, immobile /
+;

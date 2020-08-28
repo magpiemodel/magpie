@@ -9,7 +9,7 @@ scalars
   s73_timber_harvest_cost   Cost for harvesting timber (USD per ha) /200/
   s73_cost_multiplier       Multiplier for expensive harvest in natural vegetation (1) /2/
   s73_free_prod_cost        Very high cost for using non existing land for plantation establishment (USD per tDM) /1000000/
-  s73_demand_switch         Logical switch to turn on or off timber demand 1=on 0=off (1)     /0/
+  s73_demand_switch         Logical switch to turn on or off timber demand 1=on 0=off (1)     / 0 /
 ;
 
 table f73_prod_specific_timber(t_past,iso,total_wood_products) End use timber product demand (mio. m3 per yr)
