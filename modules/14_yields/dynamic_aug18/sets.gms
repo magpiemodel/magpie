@@ -18,7 +18,7 @@ sets
   kve(k) Land-use activities
        / tece, maiz, trce, rice_pro, soybean, rapeseed, groundnut, sunflower,
          oilpalm, puls_pro, potato, cassav_sp, sugr_cane, sugr_beet, others,
-         foddr, pasture, cottn_pro, begr, betr, /
+         foddr, pasture, cottn_pro, begr, betr /
 
   kcr(kve) Cropping activities
        / tece, maiz, trce, rice_pro, soybean, rapeseed, groundnut, sunflower,
