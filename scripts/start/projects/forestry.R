@@ -55,16 +55,16 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P18"
+identifier_flag = "P19"
 
 cat(paste0("5 year runs till 2150"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
-for(c32_interest_rate in c("regional","global")){
+for(c32_interest_rate in c("regional")){
   cfg$gms$c32_interest_rate = c32_interest_rate
 
-  for(c73_foresight in c("forward")){
+  for(c73_foresight in c("forward","myopic")){
     cfg$gms$c73_foresight = c73_foresight
 
     for(s32_plant_share in c(0.25)){
@@ -124,7 +124,7 @@ for(c32_interest_rate in c("regional","global")){
                   #          file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
 
                   #cfg$title = paste0(identifier_flag,"_",ssp,"_",co2_price_path_flag,"_PlantShr_",c32_prod_ratio)
-                  cfg$title   = paste0(identifier_flag,"_",ssp,"_",plant_area_flag,"_",plant_share_flag,"_",c73_foresight,"_",c32_interest_rate)
+                  cfg$title   = paste0(identifier_flag,"_",ssp,"_",plant_area_flag,"_",c73_foresight)
 
                   cfg$output  = c("rds_report","extra/disaggregation","extra/force_runstatistics")
 
