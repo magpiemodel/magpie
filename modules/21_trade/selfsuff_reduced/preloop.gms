@@ -21,4 +21,4 @@ elseif (s21_trade_tariff=0),
 
 pm_selfsuff_ext(t_ext,i,kforestry) = f21_self_suff("y2150",i,kforestry);
 pm_selfsuff_ext(t_all,i,kforestry) = f21_self_suff(t_all,i,kforestry);
-pm_selfsuff_ext(t_ext,"MEA",kforestry) = 0.0001;
+pm_selfsuff_ext(t_ext,"MEA",kforestry) = 0.01;
