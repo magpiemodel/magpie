@@ -9,12 +9,14 @@
 i21_trade_bal_reduction(t_all,k_trade)=f21_trade_bal_reduction(t_all,"easytrade","%c21_trade_liberalization%");
 i21_trade_bal_reduction(t_all,k_hardtrade21)=f21_trade_bal_reduction(t_all,"hardtrade","%c21_trade_liberalization%");
 
-i21_trade_margin(i2,k_trade) = f21_trade_margin(i2,k_trade);
+i21_trade_margin(i,k_trade) = f21_trade_margin(i,k_trade);
+i21_trade_margin(i,"wood") = f21_trade_margin(i,"woodfuel");
 
 if ((s21_trade_tariff=1),
-    i21_trade_tariff(i2,k_trade) = f21_trade_tariff(i2,k_trade);
+    i21_trade_tariff(i,k_trade) = f21_trade_tariff(i,k_trade);
+    i21_trade_tariff(i,"wood") = i21_trade_tariff(i,"woodfuel");
 elseif (s21_trade_tariff=0),
-    i21_trade_tariff(i2,k_trade) = 0;
+    i21_trade_tariff(i,k_trade) = 0;
 );
 
 pm_selfsuff_ext(t_ext,i,kforestry) = f21_self_suff("y2150",i,kforestry);

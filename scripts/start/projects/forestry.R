@@ -44,7 +44,7 @@ cfg$gms$c60_biodem_level = 0
 # * 0: default settings (optfile will be ignored)
 cfg$gms$s80_optfile = 1
 ## Solver maxiter
-cfg$gms$s80_maxiter = 2
+#cfg$gms$s80_maxiter = 2
 
 ###########################################################################
 
@@ -55,15 +55,15 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P13"
+identifier_flag = "P14"
 
 cat(paste0("5 year runs till 2150"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
-#xx <- c()
-for(c73_foresight in c("forward","myopic")){
+xx <- c()
+for(c73_foresight in c("forward")){
   cfg$gms$c73_foresight = c73_foresight
 
-  for(s32_plant_share in c(0.10,0.15,0.20,0.25,0.30)){
+  for(s32_plant_share in c(0.25,0.30,0.35)){
     cfg$gms$s32_plant_share = s32_plant_share
 
     plant_share_flag <- paste0(s32_plant_share*100,"pc")
@@ -124,8 +124,8 @@ for(c73_foresight in c("forward","myopic")){
 
                 cfg$output  = c("rds_report","extra/disaggregation","extra/force_runstatistics")
 
-#                xx = c(xx,cfg$title)
-                start_run(cfg,codeCheck=FALSE)
+                xx = c(xx,cfg$title)
+#                start_run(cfg,codeCheck=FALSE)
               }
             }
           }
