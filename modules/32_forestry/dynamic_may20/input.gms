@@ -11,6 +11,8 @@ $setglobal c32_tcre_ctrl  ann_TCREmean
 * options: ann_TCREmean, ann_TCREhigh, ann_TCRElow
 $setglobal c32_prod_ratio  increasing
 * options increasing, constant
+$setglobal c32_interest_rate global
+* options regional, global
 
 scalars
   s32_reESTBcost                  Re establishment cost (USD per ha) / 2000 /
@@ -30,6 +32,7 @@ scalars
   s32_tcre_local switch for local (1) or global (0) TRCE factors / 1 /
   s32_fix_plant                   Fixing plantation area after 2020 / 0 /
   s32_plant_share                 Constant propotion of production from plantations /0.33/
+  s32_forestry_int_rate           Global interest rate for plantations / 0.05 /
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)
