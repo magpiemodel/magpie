@@ -55,7 +55,7 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P14"
+identifier_flag = "P15"
 
 cat(paste0("5 year runs till 2150"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
@@ -64,7 +64,7 @@ run_submission <- function(only_name=FALSE){
   for(c73_foresight in c("forward")){
     cfg$gms$c73_foresight = c73_foresight
 
-    for(s32_plant_share in c(0.25,0.30,0.35)){
+    for(s32_plant_share in c(0.20,0.25,0.30)){
       cfg$gms$s32_plant_share = s32_plant_share
 
       plant_share_flag <- paste0(s32_plant_share*100,"pc")
