@@ -42,7 +42,7 @@ cfg$gms$c60_biodem_level = 0
 ### OPTIMIZATION
 # * 1: using optfile for specified solver settings
 # * 0: default settings (optfile will be ignored)
-cfg$gms$s80_optfile = 1
+cfg$gms$s80_optfile = 0
 ## Solver maxiter
 cfg$gms$s80_maxiter = 5
 
