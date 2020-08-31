@@ -55,7 +55,7 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P21"
+identifier_flag = "P22"
 
 cat(paste0("5 year runs till 2100. Constant demand in MEA at 1995 levels"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
