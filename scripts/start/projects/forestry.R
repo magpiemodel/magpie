@@ -30,7 +30,7 @@ source("config/default.cfg")
 ###########################################################################
 
 ### TIME
-cfg$gms$c_timesteps = "5year2150"
+cfg$gms$c_timesteps = "5year"
 
 ### Other settings
 #cfg$gms$land = "feb15"
@@ -55,9 +55,9 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P20"
+identifier_flag = "P21"
 
-cat(paste0("5 year runs till 2150"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("5 year runs till 2100. Constant demand in MEA at 1995 levels"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
