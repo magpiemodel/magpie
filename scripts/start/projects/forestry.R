@@ -33,7 +33,7 @@ source("config/default.cfg")
 cfg$gms$c_timesteps = "5year"
 
 ### Other settings
-cfg$gms$land = "feb15"
+#cfg$gms$land = "feb15"
 #cfg$gms$c60_bioenergy_subsidy = 0
 
 ## Bioenergy demand 0=GLO
@@ -42,7 +42,7 @@ cfg$gms$c60_biodem_level = 0
 ### OPTIMIZATION
 # * 1: using optfile for specified solver settings
 # * 0: default settings (optfile will be ignored)
-cfg$gms$s80_optfile = 0
+cfg$gms$s80_optfile = 1
 ## Solver maxiter
 cfg$gms$s80_maxiter = 5
 
@@ -55,16 +55,16 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P22feb15"
+identifier_flag = "P23"
 
-cat(paste0("5 year runs till 2100. Constant demand in MEA at 1995 levels"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("5 year runs till 2100. Test with land matrix"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
 for(c32_interest_rate in c("regional")){
   cfg$gms$c32_interest_rate = c32_interest_rate
 
-  for(c73_foresight in c("forward")){
+  for(c73_foresight in c("forward","myopic")){
     cfg$gms$c73_foresight = c73_foresight
 
     for(s32_plant_share in c(0.25)){

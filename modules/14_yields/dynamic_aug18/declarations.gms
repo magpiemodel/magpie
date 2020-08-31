@@ -12,6 +12,8 @@ parameters
  p14_growing_stock(t,j,ac,forest_land,forest_type)               Forest growing stock (m3 per ha per yr)
  pm_timber_yield(t,j,ac,forest_land)               Forest growing stock (m3 per ha per yr)
  p14_growing_stock_report(t,j,ac,forest_land)               Forest growing stock (m3 per ha per yr)
+ p14_upsacling_reg(i)                                       Regional upscaling factor for plantation Carbon density (1)
+ p14_upsacling_cell(j)                                      Cellular upscaling factor for plantation Carbon density (1)
  ;
 
 positive variables

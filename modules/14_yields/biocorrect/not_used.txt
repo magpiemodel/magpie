@@ -11,3 +11,5 @@ pm_climate_class,input, not used
 pm_carbon_density_ac,input, not used
 pm_carbon_density_ac_forestry,input, not used
 pm_timber_yield, input, not used
+p14_upsacling_reg, input, not used
+p14_upsacling_cell, input, not used
