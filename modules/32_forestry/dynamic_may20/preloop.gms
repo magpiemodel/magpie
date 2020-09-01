@@ -5,7 +5,6 @@ loop(t_all,
   else
   p32_fix_plant(t_all) = s32_fix_plant;
   );
-  display  p32_fix_plant;
 );
 
 ** Calculation of Single rotation model rotation lengths
@@ -78,7 +77,7 @@ p32_rot_length_ac_eqivalent(t_historical,j) = p32_rot_length_ac_eqivalent("y1995
 
 ** Holding rotation lengths constant after the end of this century.
 p32_rot_length_ac_eqivalent(t_future,j) = p32_rot_length_ac_eqivalent("y2100",j);
-display p32_rot_length_ac_eqivalent;
+
 ** Number of cells in each region
 p32_ncells(i) = sum(cell(i,j),1);
 
@@ -193,5 +192,4 @@ $ifthen "%c32_prod_ratio%" == "increasing"
 $elseif "%c32_prod_ratio%" == "constant"
   p32_plant_prod_share(t_ext,i) = p32_plant_prod_share("y1995",i);
 $endif
-display p32_plant_prod_share;
 **************************************************************************

@@ -42,4 +42,3 @@ loop (t_ext,
  p73_hist_scaling(t_ext,i) = 1;
  );
 );
-display p73_hist_scaling;
