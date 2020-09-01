@@ -33,6 +33,7 @@ scalars
   s32_fix_plant                   Fixing plantation area after 2020 / 0 /
   s32_plant_share                 Constant propotion of production from plantations /0.33/
   s32_forestry_int_rate           Global interest rate for plantations / 0.05 /
+  s32_investment_cost             Additional investment cost in plantations (USD per tC per ha) / 1000 /
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)

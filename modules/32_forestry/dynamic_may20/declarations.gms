@@ -53,6 +53,7 @@ positive variables
  v32_land_expansion(j,type32,ac)                    Land expansion (mio. ha)
  v32_land_reduction(j,type32,ac)                    Land reduction (mio. ha)
  v32_cost_establishment(i)                          Cost of establishment calculated at the current time step (mio. USD)
+ v32_cost_extra_investment(j)                       Extra investment needed for establishing plantations in unproductive areas (mio. USD)
  ;
 
 variables
@@ -79,6 +80,7 @@ equations
  q32_bgp_aff(j,ac)                                  Biophysical afforestation calculation (mio. tCeq)
  q32_forestry_est(j,type32,ac)						Distribution of forestry establishment over ac_est (mio. ha)
  q32_fix_plant_area(j)                              Fixation of cellular plantation area based on area fix switch (mio. ha)
+ q32_cost_extra_investment(j)                       Extra investment needed for establishing plantations in unproductive areas (mio. USD)
 ;
 
 
@@ -93,6 +95,7 @@ parameters
  ov32_land_expansion(t,j,type32,ac,type)     Land expansion (mio. ha)
  ov32_land_reduction(t,j,type32,ac,type)     Land reduction (mio. ha)
  ov32_cost_establishment(t,i,type)           Cost of establishment calculated at the current time step (mio. USD)
+ ov32_cost_extra_investment(t,j,type)        Extra investment needed for establishing plantations in unproductive areas (mio. USD)
  ov_cdr_aff(t,j,ac,aff_effect,type)          Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
  oq32_cost_total(t,i,type)                   Total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                         Land constraint (mio. ha)
@@ -113,5 +116,6 @@ parameters
  oq32_bgp_aff(t,j,ac,type)                   Biophysical afforestation calculation (mio. tCeq)
  oq32_forestry_est(t,j,type32,ac,type)       Distribution of forestry establishment over ac_est (mio. ha)
  oq32_fix_plant_area(t,j,type)               Fixation of cellular plantation area based on area fix switch (mio. ha)
+ oq32_cost_extra_investment(t,j,type)        Extra investment needed for establishing plantations in unproductive areas (mio. USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

@@ -55,19 +55,19 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P23"
+identifier_flag = "P25"
 
 cat(paste0("5 year runs till 2100. Test with land matrix"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
-for(s52_plantation_threshold in c(2,3,5,8,10)){
+for(s52_plantation_threshold in c(3,5,8)){
   cfg$gms$s52_plantation_threshold <- s52_plantation_threshold
 
   for(c32_interest_rate in c("regional")){
     cfg$gms$c32_interest_rate = c32_interest_rate
 
-    for(c73_foresight in c("forward","myopic")){
+    for(c73_foresight in c("forward")){
       cfg$gms$c73_foresight = c73_foresight
 
       for(s32_plant_share in c(0.25)){
@@ -131,8 +131,8 @@ for(s52_plantation_threshold in c(2,3,5,8,10)){
 
                     cfg$output  = c("rds_report","extra/disaggregation","extra/force_runstatistics")
 
-  #                   xx = c(xx,cfg$title)
-                     start_run(cfg,codeCheck=FALSE)
+                     xx = c(xx,cfg$title)
+  #                   start_run(cfg,codeCheck=FALSE)
                   }
                 }
               }

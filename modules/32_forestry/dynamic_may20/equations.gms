@@ -24,6 +24,7 @@ q32_cost_total(i2) .. vm_cost_fore(i2) =e=
 								   v32_cost_recur(i2)
 								   + v32_cost_establishment(i2)
 								   + sum(cell(i2,j2), v32_land_missing(j2)) * s32_free_land_cost
+									 + sum(cell(i2,j2), v32_cost_extra_investment(j2))
 								   ;
 
 *-----------------------------------------------
@@ -161,6 +162,9 @@ q32_establishment_min_reg(i2) ..
               =g=
               pm_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2) * sum(ct, pm_selfsuff_ext(ct,i2,"wood")) * (1-sum(ct,p32_fix_plant(ct)))
               ;
+
+*' Extra investment costs
+q32_cost_extra_investment(j2).. v32_cost_extra_investment(j2) =e= sum(ac_est, v32_land(j2,"plant",ac_est)) * sum(ct,pm_investment_layer(ct,j2)) * s32_investment_cost;
 
 *' This constraint distributes additions to forestry land over ac_est,
 *' which depends on the time step length (e.g. ac0 and ac5 for a 10 year time step).
