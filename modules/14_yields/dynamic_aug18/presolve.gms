@@ -20,12 +20,9 @@
 *' biomass in tDM/ha.
 
 *` @code
-p14_upsacling_reg(i) = 1;
-p14_upsacling_cell(j) = sum(cell(i,j),p14_upsacling_reg(i));
-
 p14_growing_stock(t,j,ac,"forestry","plantations") =
     (
-      pm_carbon_density_ac_forestry(t,j,ac,"vegc") * p14_upsacling_cell(j)
+      pm_carbon_density_ac_forestry(t,j,ac,"vegc")
       / s14_carbon_fraction
       * f14_aboveground_fraction("forestry")
       / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"plantations"))
