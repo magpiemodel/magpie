@@ -18,10 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **35_natveg** New realization for timber production from natural vegetation.
  - **57_maccs** Added MACCs from Harmsen PBL 2019
  - **scripts** added start script for making timber production runs (forestry.R)
- - **switch** allowing constant or increasing shares of timber production coming from plantations
- - **switch** allowing for constant or increasing area of timber plantations area after 2020
- - **switch** allowing to fix a static portion of overall timber production coming from plantations
- - **switch** added for allowing a using a forward looking or myopic timber demand for plantation establishment
+ - **switch** allowing constant or increasing shares of timber production coming from plantations, allowing for constant or increasing area of timber plantations area after 2020, allowing to fix a static portion of overall timber production coming from plantations, added for allowing a using a forward looking or myopic timber demand for plantation establishment
+ - **scalars** Global interest rate for timber plantation's rotation length calculation, additional investment needed to setup timber plantations in unproductive cells.
 
 ### changed
  - **scripts** updated selection routine for start and output scripts
@@ -34,6 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **scripts** removed GP_final start script due to obsolescence
 
 ### fixed
+ - **32_forestry** Rotation length calculation based on correct marginals of growth function in timber plantations.
+ - **52_carbon** Fix to the Carbon densities received from LPJmL for timber plantations.
 
 ## [4.2.1] - 2020-05-15
 
