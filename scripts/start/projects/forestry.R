@@ -131,8 +131,8 @@ for(s52_plantation_threshold in c(3,5,8)){
 
                     cfg$output  = c("rds_report","extra/disaggregation","extra/force_runstatistics")
 
-                     xx = c(xx,cfg$title)
-  #                   start_run(cfg,codeCheck=FALSE)
+#                   xx = c(xx,cfg$title)
+                   start_run(cfg,codeCheck=FALSE)
                   }
                 }
               }
