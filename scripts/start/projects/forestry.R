@@ -128,8 +128,8 @@ for(c32_interest_rate in c("regional")){
 
                   cfg$output  = c("rds_report","extra/disaggregation","extra/force_runstatistics")
 
-                   xx = c(xx,cfg$title)
-#                 start_run(cfg,codeCheck=FALSE)
+#                   xx = c(xx,cfg$title)
+                 start_run(cfg,codeCheck=FALSE)
                 }
               }
             }
