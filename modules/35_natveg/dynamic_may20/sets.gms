@@ -10,7 +10,7 @@ sets
   / none, npi, ndc /
 
   prot_type Conservation priority areas
-  / BH, CPD, FF, LW, WDPA /
+  / BH, CPD, FF, LW, WDPA, HalfEarth /
 
   pol_stock35 Land types for land protection policies
   / forest, other /
