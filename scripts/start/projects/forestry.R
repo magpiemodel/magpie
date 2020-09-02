@@ -64,7 +64,7 @@ xx <- c()
 for(s32_investment_cost in c(200)){
   cfg$gms$s32_investment_cost <- s32_investment_cost
 
-  for(s52_plantation_threshold in c(5)){
+  for(s52_plantation_threshold in c(8)){
     cfg$gms$s52_plantation_threshold <- s52_plantation_threshold
 
     for(c32_interest_rate in c("regional")){
