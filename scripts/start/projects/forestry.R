@@ -55,13 +55,13 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P28"
+identifier_flag = "P29"
 
 cat(paste0("5 year runs till 2100. Test with land matrix"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
-for(s32_investment_cost in c(50,100,150,200,300)){
+for(s32_investment_cost in c(200)){
   cfg$gms$s32_investment_cost <- s32_investment_cost
 
   for(s52_plantation_threshold in c(8)){

@@ -18,7 +18,11 @@ pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = m_growth_vegc(pc52_carbon_den
 * This is specially applicable for middle east region where LPJmL reports quite low carbon densities. Provided the
 * wood production data from FAO, it is not possible to replicate past production patterns in middle east region
 * with such low carbon densities and yield.
-pm_carbon_density_ac_forestry(t_all,j,ac,"vegc")$(fm_carbon_density(t_all,j,"other","vegc") <= s52_plantation_threshold) = m_growth_vegc(pc52_carbon_density_start(t_all,j,"vegc"),s52_plantation_threshold,sum(clcl,pm_climate_class(j,clcl)*f52_growth_par(clcl,"k","plantations")),sum(clcl,pm_climate_class(j,clcl)*f52_growth_par(clcl,"m","plantations")),(ord(ac)-1));
+
+p52_scaling_factor(t_all,j) = s52_plantation_threshold/pm_carbon_density_ac_forestry(t_all,j,"acx","vegc");
+
+p52_scaling_factor(t_all,j)$(p52_scaling_factor(t_all,j) <= 1) = 1;
+pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * p52_scaling_factor(t_all,j);
 
 * Creating a layer where if carbon densities received from LPJmL are greater than a threshold then the model does
 * Not have to invest extra in setting up plantations in those cells but if the model uses updated carbon densities
@@ -26,8 +30,8 @@ pm_carbon_density_ac_forestry(t_all,j,ac,"vegc")$(fm_carbon_density(t_all,j,"oth
 * to the model for making establishment decisions. This layer makes sure that such granularity is preserved and model
 * still has access to the information about how low were the yields compared to the threshold. A penalty component is then
 * added in forestry module to make sure that the model does not use extremely unproductive cells for establishment decisions.
-pm_investment_layer(t_all,j)$(fm_carbon_density(t_all,j,"other","vegc")>s52_plantation_threshold) = 0;
-pm_investment_layer(t_all,j)$(fm_carbon_density(t_all,j,"other","vegc")<s52_plantation_threshold) = (s52_plantation_threshold - fm_carbon_density(t_all,j,"other","vegc"));
+pm_investment_layer(t_all,j)$(pm_carbon_density_ac_forestry(t_all,j,"acx","vegc")>=s52_plantation_threshold) = 0;
+pm_investment_layer(t_all,j)$(pm_carbon_density_ac_forestry(t_all,j,"acx","vegc")<s52_plantation_threshold) = (s52_plantation_threshold - pm_carbon_density_ac_forestry(t_all,j,"acx","vegc"));
 
 *calculate litter and soil carbon density based on linear growth funktion: carbon_density(ac) = intercept + slope*ac (20 year time horizon taken from IPCC)
 pm_carbon_density_ac_forestry(t_all,j,ac,"litc") = m_growth_litc_soilc(pc52_carbon_density_start(t_all,j,"litc"),fm_carbon_density(t_all,j,"other","litc"),(ord(ac)-1));
