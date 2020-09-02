@@ -61,16 +61,16 @@ cat(paste0("5 year runs till 2100. Test with land matrix"), file=paste0(log_fold
 
 xx <- c()
 
-for(s32_investment_cost in c(200)){
-  cfg$gms$s32_investment_cost <- s32_investment_cost
+#for(s32_investment_cost in c(200)){
+#  cfg$gms$s32_investment_cost <- s32_investment_cost
 
-  for(s52_plantation_threshold in c(8)){
-    cfg$gms$s52_plantation_threshold <- s52_plantation_threshold
+#  for(s52_plantation_threshold in c(8)){
+#    cfg$gms$s52_plantation_threshold <- s52_plantation_threshold
 
     for(c32_interest_rate in c("regional")){
       cfg$gms$c32_interest_rate = c32_interest_rate
 
-      for(c73_foresight in c("forward")){
+      for(c73_foresight in c("forward","myopic")){
         cfg$gms$c73_foresight = c73_foresight
 
         for(s32_plant_share in c(0.25)){
@@ -78,7 +78,7 @@ for(s32_investment_cost in c(200)){
 
           plant_share_flag <- paste0(s32_plant_share*100,"pc")
 
-          for(s32_fix_plant in c(0)){
+          for(s32_fix_plant in c(0,1)){
 
             cfg$gms$s32_fix_plant = s32_fix_plant
 
@@ -100,7 +100,7 @@ for(s32_investment_cost in c(200)){
 
                   for(emis_policy in c("redd+_nosoil")){
 
-                    for(ssp in c("SSP2")){
+                    for(ssp in c("SSP1","SSP2","SSP3")){
                       if(emis_policy == "redd+_nosoil") cfg$gms$s32_plant_carbon_foresight = 1
                       if(emis_policy == "ssp_nosoil")   cfg$gms$s32_plant_carbon_foresight = 0
 
@@ -134,8 +134,8 @@ for(s32_investment_cost in c(200)){
 
                       cfg$output  = c("rds_report","extra/disaggregation","extra/force_runstatistics")
 
-    #                   xx = c(xx,cfg$title)
-                     start_run(cfg,codeCheck=FALSE)
+#                       xx = c(xx,cfg$title)
+                        start_run(cfg,codeCheck=FALSE)
                     }
                   }
                 }
@@ -145,5 +145,5 @@ for(s32_investment_cost in c(200)){
         }
       }
     }
-  }
-}
+#  }
+#}
