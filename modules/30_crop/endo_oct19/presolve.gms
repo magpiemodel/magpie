@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -14,10 +14,10 @@ $else bioen_water_30("%c30_bioen_water%") = yes;
 $endif
 
 *' @code
-*' First, all 2nd generation bioenergy area is fixed to zero, irrespective of type and 
+*' First, all 2nd generation bioenergy area is fixed to zero, irrespective of type and
 *' rainfed/irrigation.
 vm_area.fx(j,kbe30,w)=0;
-*' Second, the bounds for 2nd generation bioenergy area are released depending on 
+*' Second, the bounds for 2nd generation bioenergy area are released depending on
 *' the dynamic sets bioen_type_30 and bioen_water_30.
 vm_area.up(j,bioen_type_30,bioen_water_30)=Inf;
 *' @stop

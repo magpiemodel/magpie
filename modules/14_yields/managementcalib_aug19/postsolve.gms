@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -22,4 +22,3 @@
  oq14_yield_crop(t,j,kcr,w,"lower")    = q14_yield_crop.lo(j,kcr,w);
  oq14_yield_past(t,j,w,"lower")        = q14_yield_past.lo(j,w);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
-

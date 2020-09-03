@@ -4,5 +4,9 @@
 # |  AGPL-3.0, you are granted additional permissions described in the
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
+
 name,type,reason
-fm_croparea,input,questionnaire
+pm_timber_yield, input, questionnaire
+pm_climate_class, input, questionnaire
+pm_carbon_density_ac, input, questionnaire
+pm_carbon_density_ac_forestry, input, questionnaire

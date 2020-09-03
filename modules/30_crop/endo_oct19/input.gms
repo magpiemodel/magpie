@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -26,14 +26,14 @@ m_fillmissingyears(f30_croparea,"j,w,kcr");
 parameter f30_rotation_max_shr(crp30) Maximum allowed area shares for each crop type (1)
 /
 $ondelim
-$include "./modules/30_crop/endo_jun13/input/f30_rotation_max.csv"
+$include "./modules/30_crop/endo_oct19/input/f30_rotation_max.csv"
 $offdelim
 /;
 
 parameter f30_rotation_min_shr(crp30) Minimum allowed area shares for each crop type (1)
 /
 $ondelim
-$include "./modules/30_crop/endo_jun13/input/f30_rotation_min.csv"
+$include "./modules/30_crop/endo_oct19/input/f30_rotation_min.csv"
 $offdelim
 /;
 
@@ -42,6 +42,6 @@ $offdelim
 
 table f30_land_si(j,si) Land area suitable and non-suitable as cropland (mio. ha)
 $ondelim
-$include "./modules/30_crop/endo_jun13/input/avl_land_si.cs3"
+$include "./modules/30_crop/endo_oct19/input/avl_land_si.cs3"
 $offdelim
 ;

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -11,5 +11,4 @@
 *cannot be smaller than 0!
 pm_croparea_start(j,kcr) = sum(w, f30_croparea("y1995",j,w,kcr));
 pm_croparea_start(j,kcr)$(pm_croparea_start(j,kcr)<0) = 0;
-
 pm_area(j,kcr,w)         = f30_croparea("y1995",j,kcr,w);
