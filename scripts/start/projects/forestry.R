@@ -55,7 +55,7 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P33"
+identifier_flag = "P34"
 
 cat(paste0("5 year runs till 2100. Force plantation harvest and production above ratio"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
@@ -70,7 +70,7 @@ xx <- c()
     for(c32_interest_rate in c("regional")){
       cfg$gms$c32_interest_rate = c32_interest_rate
 
-      for(c73_foresight in c("forward","myopic")){
+      for(c73_foresight in c("forward")){
         cfg$gms$c73_foresight = c73_foresight
 
         for(sm_plant_share in c(0.25)){
@@ -78,7 +78,7 @@ xx <- c()
 
           plant_share_flag <- paste0(sm_plant_share*100,"pc")
 
-          for(s32_fix_plant in c(0,1)){
+          for(s32_fix_plant in c(0)){
 
             cfg$gms$s32_fix_plant = s32_fix_plant
 

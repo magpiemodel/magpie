@@ -27,7 +27,6 @@ vm_hvarea_secdforest(j,ac)                                              Harveste
 v73_hvarea_other(j,ac)                                                  Harvested area from other land (mio. ha)
 vm_hvarea_primforest(j)                                                     Harvested area from primary forest (mio. ha)
 v73_hvarea_forestry(j,ac)                                               Harvested area from timber plantations (mio. ha)
-v73_cost_prod(i)                                                      Cost of producing timber from forests (mio. USD per ton)
 ;
 
 equations
@@ -43,7 +42,6 @@ q73_hvarea_primforest(j)                                                    Area
 q73_prod_other(j,ac)                                                    Production of woody biomass from other land (mio. tDM per yr)
 q73_hvarea_other(j,ac)                                                  Area harvested for woody biomass from other land (mio. tDM per yr)
 q73_min_prod_plantation(i)                                               Mimimum production which has to come from plantations (mio. tDM per yr)
-q73_cost_prod(i)                                                          Cost of producing timber from forests (mio. USD per ton)
 ;
 
 
