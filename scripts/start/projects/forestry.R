@@ -55,7 +55,7 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P32"
+identifier_flag = "P32x"
 
 cat(paste0("5 year runs till 2100. Force plantation harvest and production above ratio"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
