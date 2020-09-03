@@ -37,14 +37,14 @@ cfg$gms$c_timesteps = "5year"
 #cfg$gms$c60_bioenergy_subsidy = 0
 
 ## Bioenergy demand 0=GLO
-cfg$gms$c60_biodem_level = 0
+#cfg$gms$c60_biodem_level = 0
 
 ### OPTIMIZATION
 # * 1: using optfile for specified solver settings
 # * 0: default settings (optfile will be ignored)
 cfg$gms$s80_optfile = 1
 ## Solver maxiter
-cfg$gms$s80_maxiter = 5
+#cfg$gms$s80_maxiter = 5
 
 ###########################################################################
 
@@ -55,9 +55,9 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P30"
+identifier_flag = "P31"
 
-cat(paste0("5 year runs till 2100. Test with land matrix"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("5 year runs till 2100. Force plantation harvest"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
@@ -100,7 +100,7 @@ xx <- c()
 
                   for(emis_policy in c("redd+_nosoil")){
 
-                    for(ssp in c("SSP1","SSP2","SSP3")){
+                    for(ssp in c("SSP2")){
                       if(emis_policy == "redd+_nosoil") cfg$gms$s32_plant_carbon_foresight = 1
                       if(emis_policy == "ssp_nosoil")   cfg$gms$s32_plant_carbon_foresight = 0
 
@@ -134,8 +134,8 @@ xx <- c()
 
                       cfg$output  = c("rds_report","extra/disaggregation","extra/force_runstatistics")
 
-#                       xx = c(xx,cfg$title)
-                        start_run(cfg,codeCheck=FALSE)
+                       xx = c(xx,cfg$title)
+                       start_run(cfg,codeCheck=FALSE)
                     }
                   }
                 }

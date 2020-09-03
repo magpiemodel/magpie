@@ -101,11 +101,11 @@ pcm_land(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
 v32_land.lo(j,type32,ac) = 0;
 v32_land.up(j,type32,ac) = Inf;
 
-** Fix timber plantations until the end of the rotation. "ac.off" identical to "ord(ac)-1". 
+** Fix timber plantations until the end of the rotation. "ac.off" identical to "ord(ac)-1".
 ** The offset is needed because the first element of ac is ac0, which is not included in p32_rotation_cellular_harvesting.
 v32_land.fx(j,"plant",ac)$(ac.off < p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
-** After the rotation period, plantations are free for harvesting.
-v32_land.up(j,"plant",ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
+** After the rotation period, plantations are free for harvesting - We force plantations to be harvested after rotations.
+v32_land.fx(j,"plant",ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = 0;
 ** overwrite bounds for ac_est
 v32_land.lo(j,"plant",ac_est) = 0;
 v32_land.up(j,"plant",ac_est) = Inf;
