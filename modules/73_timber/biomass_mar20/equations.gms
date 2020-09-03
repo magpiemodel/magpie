@@ -59,7 +59,7 @@ q73_prod_timber(j2,kforestry)..
   ;
 
 q73_min_prod_plantation(i2) ..
-sum(cell(i2,j2),sum(ac_sub, v73_prod_forestry(j2,ac_sub,"wood"))) =g= sum(cell(i2,j2),vm_prod(j2,"wood")) * sm_plant_share;
+sum(cell(i2,j2),sum(ac_sub, v73_prod_forestry(j2,ac_sub,"wood"))) =n= sum(cell(i2,j2),vm_prod(j2,"wood")) * sm_plant_share;
 
 ** Timber plantation
 *' Woody biomass production from timber plantations is calculated by multiplying the
