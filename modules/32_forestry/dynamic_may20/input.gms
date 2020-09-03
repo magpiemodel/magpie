@@ -9,8 +9,6 @@ $setglobal c32_aff_bgp  nobgp
 * options: ann,nobgp
 $setglobal c32_tcre_ctrl  ann_TCREmean
 * options: ann_TCREmean, ann_TCREhigh, ann_TCRElow
-$setglobal c32_prod_ratio  increasing
-* options increasing, constant
 $setglobal c32_interest_rate global
 * options regional, global
 
@@ -31,7 +29,7 @@ scalars
   s32_plant_carbon_foresight      Switch to allow plantations to be used as incentives for CDR (1) / 1 /
   s32_tcre_local switch for local (1) or global (0) TRCE factors / 1 /
   s32_fix_plant                   Fixing plantation area after 2020 / 0 /
-  s32_plant_share                 Constant propotion of production from plantations /0.25/
+  sm_plant_share                  Constant propotion of production from plantations /0.25/
   s32_forestry_int_rate           Global interest rate for plantations / 0.05 /
   s32_investment_cost             Additional investment cost in plantations (USD per tC per ha) / 200 /
 ;

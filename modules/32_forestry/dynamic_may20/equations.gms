@@ -129,7 +129,7 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 **** New establishment decision
 *------------------------------
 *' New plantations are already established in the optimization step based on a certain
-*' percentage (`pc32_plant_prod_share_future`) of future demand (`pm_demand_forestry_future`)
+*' percentage (`sm_plant_share`) of future demand (`pm_demand_forestry_future`)
 *' This is based on the expected future yield (`pc32_yield_forestry_future`) at
 *' harvest (year in time step are accounted for).
 *' Here we define three constraints for establishing new plantation in simulation step
@@ -148,11 +148,11 @@ q32_establishment_max_glo ..
               sum(i2, pm_demand_forestry_future(i2,"wood"))
               ;
 
-*' Global minimum constraint based on a proportion (`pc32_plant_prod_share_future`) of future timber demand (`pm_demand_forestry_future`).
+*' Global minimum constraint based on a proportion (`sm_plant_share`) of future timber demand (`pm_demand_forestry_future`).
 q32_establishment_min_glo ..
               sum(j2, (sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry * pc32_yield_forestry_future(j2))
               =g=
-              sum(i2, pm_demand_forestry_future(i2,"wood")* pc32_plant_prod_share_future(i2)) * (1-sum(ct,p32_fix_plant(ct)))
+              sum(i2, pm_demand_forestry_future(i2,"wood")* sm_plant_share) * (1-sum(ct,p32_fix_plant(ct)))
               ;
 
 *' Regional minimum constraint for maintaining current forestry area patterns,
@@ -160,7 +160,7 @@ q32_establishment_min_glo ..
 q32_establishment_min_reg(i2) ..
               sum(cell(i2,j2), ((sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry) * pc32_yield_forestry_future(j2))
               =g=
-              pm_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2) * sum(ct, pm_selfsuff_ext(ct,i2,"wood")) * (1-sum(ct,p32_fix_plant(ct)))
+              pm_demand_forestry_future(i2,"wood") * sm_plant_share * sum(ct, pm_selfsuff_ext(ct,i2,"wood")) * (1-sum(ct,p32_fix_plant(ct)))
               ;
 
 *' Extra investment costs

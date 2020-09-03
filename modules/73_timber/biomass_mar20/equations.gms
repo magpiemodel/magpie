@@ -15,6 +15,7 @@ q73_cost_timber(i2)..
                     vm_cost_timber(i2)
                     =e=
                     v73_cost_hvarea(i2)
+                    + v73_cost_prod(i2)
                     + sum((cell(i2,j2),kforestry), v73_prod_heaven_timber(j2,kforestry)) * s73_free_prod_cost
                     ;
 
@@ -27,11 +28,21 @@ q73_cost_hvarea(i2)..
                     v73_cost_hvarea(i2)
                     =e=
                     sum(cell(i2,j2),
-                    sum(ac_sub, v73_hvarea_forestry(j2,ac_sub)) * s73_timber_harvest_cost
-                  + (sum(ac_sub, vm_hvarea_secdforest(j2,ac_sub))
-                  + sum(ac_sub, v73_hvarea_other(j2, ac_sub))
-                  + vm_hvarea_primforest(j2)) * (s73_timber_harvest_cost * s73_cost_multiplier))
+                    sum(ac_sub, v73_hvarea_forestry(j2,ac_sub)  * s73_timber_harvest_cost)
+                  + sum(ac_sub, vm_hvarea_secdforest(j2,ac_sub) * s73_timber_harvest_cost * s73_cost_multiplier)
+                  + sum(ac_sub, v73_hvarea_other(j2, ac_sub)    * s73_timber_harvest_cost * s73_cost_multiplier)
+                  + vm_hvarea_primforest(j2)                    * s73_timber_harvest_cost * s73_cost_multiplier)
                     ;
+
+q73_cost_prod(i2)..
+                    v73_cost_prod(i2)
+                    =e=
+                    sum((cell(i2,j2),ac_sub,kforestry),
+                    v73_prod_forestry(j2,ac_sub,kforestry)            * s73_timber_prod_cost
+                  + v73_prod_natveg(j2,"secdforest",ac_sub,kforestry) * s73_timber_prod_cost * s73_cost_multiplier
+                  + v73_prod_natveg(j2,"other",ac_sub,kforestry)      * s73_timber_prod_cost * s73_cost_multiplier
+                  + v73_prod_natveg(j2,"primforest","acx",kforestry)  * s73_timber_prod_cost * s73_cost_multiplier
+                    );
 
 *' The following equation describes cellular level production (in dry matter) of
 *' woody biomass `vm_prod_reg` as the sum of the cluster level production of
@@ -46,6 +57,9 @@ q73_prod_timber(j2,kforestry)..
   +
   v73_prod_heaven_timber(j2,kforestry);
   ;
+
+q73_min_prod_plantation(i2) ..
+sum(cell(i2,j2),sum(ac_sub, v73_prod_forestry(j2,ac_sub,"wood"))) =g= sum(cell(i2,j2),vm_prod(j2,"wood")) * sm_plant_share;
 
 ** Timber plantation
 *' Woody biomass production from timber plantations is calculated by multiplying the

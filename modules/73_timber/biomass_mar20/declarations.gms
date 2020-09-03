@@ -14,7 +14,7 @@ p73_demand_ext_original(t_ext,i,kforestry)                                  Orig
 p73_criterion	                                                              Criteria calculating timber demand adjustment (mio. tDM per yr)
 p73_timber_adjustment_ratio(t,i,kforestry)                                  Ratio between adjusted and prescribed timber demand (1)
 p73_foresight(foresight)                                                    Foresight allowed for timer demand (1)
- p73_hist_scaling(t_ext,i)                                                  Historical demand scaling factor (1)
+p73_hist_scaling(t_ext,i)                                                  Historical demand scaling factor (1)
 ;
 
 positive variables
@@ -27,6 +27,7 @@ vm_hvarea_secdforest(j,ac)                                              Harveste
 v73_hvarea_other(j,ac)                                                  Harvested area from other land (mio. ha)
 vm_hvarea_primforest(j)                                                     Harvested area from primary forest (mio. ha)
 v73_hvarea_forestry(j,ac)                                               Harvested area from timber plantations (mio. ha)
+v73_cost_prod(i)                                                      Cost of producing timber from forests (mio. USD per ton)
 ;
 
 equations
@@ -41,6 +42,8 @@ q73_prod_primforest(j)                                                      Prod
 q73_hvarea_primforest(j)                                                    Area harvested for woody biomass from primary forests (mio. tDM per yr)
 q73_prod_other(j,ac)                                                    Production of woody biomass from other land (mio. tDM per yr)
 q73_hvarea_other(j,ac)                                                  Area harvested for woody biomass from other land (mio. tDM per yr)
+q73_min_prod_plantation(i)                                               Mimimum production which has to come from plantations (mio. tDM per yr)
+q73_cost_prod(i)                                                          Cost of producing timber from forests (mio. USD per ton)
 ;
 
 
