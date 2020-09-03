@@ -37,7 +37,7 @@ q73_cost_hvarea(i2)..
 q73_cost_prod(i2)..
                     v73_cost_prod(i2)
                     =e=
-                    sum((cell(i2,j2),ac_sub,kforestry),
+                    0 * sum((cell(i2,j2),ac_sub,kforestry),
                     v73_prod_forestry(j2,ac_sub,kforestry)            * s73_timber_prod_cost
                   + v73_prod_natveg(j2,"secdforest",ac_sub,kforestry) * s73_timber_prod_cost * s73_cost_multiplier
                   + v73_prod_natveg(j2,"other",ac_sub,kforestry)      * s73_timber_prod_cost * s73_cost_multiplier
@@ -59,7 +59,7 @@ q73_prod_timber(j2,kforestry)..
   ;
 
 q73_min_prod_plantation(i2) ..
-sum(cell(i2,j2),sum(ac_sub, v73_prod_forestry(j2,ac_sub,"wood"))) =n= sum(cell(i2,j2),vm_prod(j2,"wood")) * sm_plant_share;
+sum(cell(i2,j2),sum(ac_sub, v73_prod_forestry(j2,ac_sub,"wood"))) =g= sum(cell(i2,j2),vm_prod(j2,"wood")) * sm_plant_share;
 
 ** Timber plantation
 *' Woody biomass production from timber plantations is calculated by multiplying the
