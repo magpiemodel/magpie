@@ -19,6 +19,7 @@ p73_hist_scaling(t_ext,i)                                                  Histo
 
 positive variables
 v73_cost_hvarea(i)                                                          Cost of harvesting timber from forests (mio. USD per yr)
+v73_cost_production(i)                                                      Cost of producing timber from forests (USD per tDM)
 v73_prod_forestry(j,ac,kforestry)                                       Production of woody biomass from commercial plantations (mio. tDM per yr)
 v73_prod_natveg(j,land_natveg,ac,kforestry)                             Production of woody biomass from natural vegetation (mio. tDM per yr)
 v73_prod_heaven_timber(j,kforestry)                                         Production of woody biomass from heaven (mio. tDM per yr)
@@ -32,6 +33,7 @@ v73_hvarea_forestry(j,ac)                                               Harveste
 equations
 q73_cost_timber(i)												                                  Actual cost of harvesting timber from forests (mio. USD per yr)
 q73_cost_hvarea(i)												                                  Cost of harvesting timber from forests (mio. USD per yr)
+q73_cost_production(i)                                                      Cost of producing timber from forests (USD per tDM)
 q73_prod_timber(j,kforestry)                                                Production of woody biomass from commercial plantations and natural vegetation (mio. tDM per yr)
 q73_prod_forestry(j,ac)                                                 Production of woody biomass from commercial plantations (mio. tDM per yr)
 q73_hvarea_forestry(j,ac)                                               Area harvested from commercial plantations (mio. ha per yr)
@@ -41,13 +43,14 @@ q73_prod_primforest(j)                                                      Prod
 q73_hvarea_primforest(j)                                                    Area harvested for woody biomass from primary forests (mio. tDM per yr)
 q73_prod_other(j,ac)                                                    Production of woody biomass from other land (mio. tDM per yr)
 q73_hvarea_other(j,ac)                                                  Area harvested for woody biomass from other land (mio. tDM per yr)
-q73_min_prod_plantation(i)                                               Mimimum production which has to come from plantations (mio. tDM per yr)
+q73_prod_timber_min(j)                                                  Minimum production from plantations (mio. tDM)
 ;
 
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov73_cost_hvarea(t,i,type)                          Cost of harvesting timber from forests (mio. USD per yr)
+ ov73_cost_production(t,i,type)                      Cost of producing timber from forests (USD per tDM)
  ov73_prod_forestry(t,j,ac,kforestry,type)           Production of woody biomass from commercial plantations (mio. tDM per yr)
  ov73_prod_natveg(t,j,land_natveg,ac,kforestry,type) Production of woody biomass from natural vegetation (mio. tDM per yr)
  ov73_prod_heaven_timber(t,j,kforestry,type)         Production of woody biomass from heaven (mio. tDM per yr)
@@ -58,6 +61,7 @@ parameters
  ov73_hvarea_forestry(t,j,ac,type)                   Harvested area from timber plantations (mio. ha)
  oq73_cost_timber(t,i,type)                          Actual cost of harvesting timber from forests (mio. USD per yr)
  oq73_cost_hvarea(t,i,type)                          Cost of harvesting timber from forests (mio. USD per yr)
+ oq73_cost_production(t,i,type)                      Cost of producing timber from forests (USD per tDM)
  oq73_prod_timber(t,j,kforestry,type)                Production of woody biomass from commercial plantations and natural vegetation (mio. tDM per yr)
  oq73_prod_forestry(t,j,ac,type)                     Production of woody biomass from commercial plantations (mio. tDM per yr)
  oq73_hvarea_forestry(t,j,ac,type)                   Area harvested from commercial plantations (mio. ha per yr)
@@ -67,5 +71,6 @@ parameters
  oq73_hvarea_primforest(t,j,type)                    Area harvested for woody biomass from primary forests (mio. tDM per yr)
  oq73_prod_other(t,j,ac,type)                        Production of woody biomass from other land (mio. tDM per yr)
  oq73_hvarea_other(t,j,ac,type)                      Area harvested for woody biomass from other land (mio. tDM per yr)
+ oq73_prod_timber_min(t,j,type)                      Minimum production from plantations (mio. tDM)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
