@@ -40,4 +40,4 @@ p73_hist_scaling(t_ext,i) = 1;
 loop (t$(m_year(t) <= sm_fix_SSP2),
  p73_hist_scaling(t,i) = sqrt(pm_demand_ext("y2020",i,"wood") / pm_demand_ext("y1995",i,"wood"));
 );
-p73_hist_scaling(t_ext,i) = 1;
+*p73_hist_scaling(t_ext,i) = 1;

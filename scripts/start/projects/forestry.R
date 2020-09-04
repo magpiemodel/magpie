@@ -103,7 +103,7 @@ for(s73_foresight in c(1)){
                 if(s32_fix_plant == 1 && s73_foresight == 1) break
 
 
-            cfg$title   = paste0(identifier_flag,"_",ssp,"_",foresight_flag,"_",plant_area_flag)
+            cfg$title   = paste0(identifier_flag,"_",ssp,"_",foresight_flag,"_",plant_area_flag,"_DemScaled")
 
             cfg$output  = c("rds_report","extra/force_runstatistics")
 
