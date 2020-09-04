@@ -9,7 +9,7 @@ $setglobal c32_aff_bgp  nobgp
 * options: ann,nobgp
 $setglobal c32_tcre_ctrl  ann_TCREmean
 * options: ann_TCREmean, ann_TCREhigh, ann_TCRElow
-$setglobal c32_interest_rate global
+$setglobal c32_interest_rate regional
 * options regional, global
 
 scalars

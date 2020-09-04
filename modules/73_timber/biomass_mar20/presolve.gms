@@ -5,6 +5,9 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+** scale harvesting costs per ha with age-classes
+p73_timber_harvest_cost(t,j,ac,forest_land) = (pm_timber_yield(t,j,ac,forest_land)/pm_timber_yield(t,j,"acx",forest_land)) * s73_timber_harvest_cost;
+
 ** Fixing variables
 v73_prod_natveg.fx(j,"other",ac,"wood") = 0;
 v73_prod_natveg.fx(j,"primforest",ac,kforestry)$(not sameas(ac,"acx")) = 0;

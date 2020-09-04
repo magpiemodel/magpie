@@ -15,7 +15,6 @@ q73_cost_timber(i2)..
                     vm_cost_timber(i2)
                     =e=
                     v73_cost_hvarea(i2)
-                    + v73_cost_production(i2)
                     + sum((cell(i2,j2),kforestry), v73_prod_heaven_timber(j2,kforestry)) * s73_free_prod_cost
                     ;
 
@@ -27,22 +26,11 @@ q73_cost_timber(i2)..
 q73_cost_hvarea(i2)..
                     v73_cost_hvarea(i2)
                     =e=
-                    sum(cell(i2,j2),
-                    sum(ac_sub, v73_hvarea_forestry(j2,ac_sub)  * s73_timber_harvest_cost)
-                  + sum(ac_sub, vm_hvarea_secdforest(j2,ac_sub) * s73_timber_harvest_cost * s73_cost_multiplier)
-                  + sum(ac_sub, v73_hvarea_other(j2, ac_sub)    * s73_timber_harvest_cost * s73_cost_multiplier)
-                  + vm_hvarea_primforest(j2)                    * s73_timber_harvest_cost * s73_cost_multiplier)
+                    sum((ct,cell(i2,j2),ac_sub), v73_hvarea_forestry(j2,ac_sub)  * p73_timber_harvest_cost(ct,j2,ac_sub,"forestry"))
+                  + sum((ct,cell(i2,j2),ac_sub), vm_hvarea_secdforest(j2,ac_sub) * p73_timber_harvest_cost(ct,j2,ac_sub,"secdforest"))
+                  + sum((ct,cell(i2,j2),ac_sub), v73_hvarea_other(j2, ac_sub)    * p73_timber_harvest_cost(ct,j2,ac_sub,"other"))
+                  + sum((ct,cell(i2,j2)),        vm_hvarea_primforest(j2)        * p73_timber_harvest_cost(ct,j2,"acx","primforest"))
                     ;
-
-q73_cost_production(i2)..
-                    v73_cost_production(i2)
-                    =e=
-                    sum((cell(i2,j2),ac_sub,kforestry),
-                    v73_prod_forestry(j2,ac_sub,kforestry)            * s73_timber_prod_cost
-                  + v73_prod_natveg(j2,"secdforest",ac_sub,kforestry) * s73_timber_prod_cost * s73_cost_multiplier
-                  + v73_prod_natveg(j2,"other",ac_sub,"woodfuel")     * s73_timber_prod_cost * s73_cost_multiplier
-                  + v73_prod_natveg(j2,"primforest","acx",kforestry)  * s73_timber_prod_cost * s73_cost_multiplier
-                    ) * s73_prod_cost_switch;
 
 *' The following equation describes cellular level production (in dry matter) of
 *' woody biomass `vm_prod_reg` as the sum of the cluster level production of
@@ -57,12 +45,6 @@ q73_prod_timber(j2,kforestry)..
   +
   v73_prod_heaven_timber(j2,kforestry);
 
-q73_prod_timber_min..
-  sum((j2,ac_sub), v73_prod_forestry(j2,ac_sub,"wood"))
-  =g=
-  sum(j2,vm_prod(j2,"wood")) * sm_plant_share
-  ;
-
 ** Timber plantation
 *' Woody biomass production from timber plantations is calculated by multiplying the
 *' area under production with corresponding yields of plantation forests.
@@ -70,13 +52,13 @@ q73_prod_timber_min..
 q73_prod_forestry(j2,ac_sub)..
                          sum(kforestry, v73_prod_forestry(j2,ac_sub,kforestry))
                          =l=
-                         sum(type32, vm_forestry_reduction(j2,type32,ac_sub)) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"forestry"));
+                         sum(type32, vm_forestry_reduction(j2,type32,ac_sub)) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"forestry")) / m_timestep_length_forestry;
 
 *' Real harvested area for timber plantations is based on the production realized
 *' from plantations divided by the corresponding growing stocks.
 
 q73_hvarea_forestry(j2,ac_sub) ..
-                          v73_hvarea_forestry(j2,ac_sub) / m_timestep_length_forestry
+                          v73_hvarea_forestry(j2,ac_sub)
                           =e=
                           sum(kforestry, v73_prod_forestry(j2,ac_sub,kforestry)) / sum(ct, pm_timber_yield(ct,j2,ac_sub,"forestry"));
 
@@ -87,13 +69,13 @@ q73_hvarea_forestry(j2,ac_sub) ..
 q73_prod_secdforest(j2,ac_sub)..
                            sum(kforestry, v73_prod_natveg(j2,"secdforest",ac_sub,kforestry))
                            =l=
-						    vm_secdforest_reduction(j2,ac_sub) * sum(ct,pm_timber_yield(ct,j2,ac_sub,"secdforest"));
+						    vm_secdforest_reduction(j2,ac_sub) * sum(ct,pm_timber_yield(ct,j2,ac_sub,"secdforest")) / m_timestep_length_forestry;
 
 *' Real harvested area for secondary forests is calculated based on the production
 *' realized from secondary forests divided by the corresponding growing stocks.
 
 q73_hvarea_secdforest(j2,ac_sub)..
-                          vm_hvarea_secdforest(j2,ac_sub) / m_timestep_length_forestry
+                          vm_hvarea_secdforest(j2,ac_sub)
                            =e=
                           sum(kforestry, v73_prod_natveg(j2,"secdforest",ac_sub,kforestry)) / sum(ct, pm_timber_yield(ct,j2,ac_sub,"secdforest"));
 
@@ -104,13 +86,13 @@ q73_hvarea_secdforest(j2,ac_sub)..
 q73_prod_primforest(j2)..
                            sum(kforestry, v73_prod_natveg(j2,"primforest","acx",kforestry))
                            =l=
-                           vm_primforest_reduction(j2) * sum(ct, pm_timber_yield(ct,j2,"acx","primforest"));
+                           vm_primforest_reduction(j2) * sum(ct, pm_timber_yield(ct,j2,"acx","primforest")) / m_timestep_length_forestry;
 
 *' Real harvested area for primary forests is calculated based on the production
 *' realized from primary forests divided by the corresponding growing stocks.
 
 q73_hvarea_primforest(j2)..
-                          vm_hvarea_primforest(j2) / m_timestep_length_forestry
+                          vm_hvarea_primforest(j2)
                            =e=
                           sum(kforestry, v73_prod_natveg(j2,"primforest","acx",kforestry)) / sum(ct, pm_timber_yield(ct,j2,"acx","primforest"));
 
@@ -122,14 +104,14 @@ q73_hvarea_primforest(j2)..
 q73_prod_other(j2,ac_sub)..
                           v73_prod_natveg(j2,"other",ac_sub,"woodfuel")
                           =l=
-                          vm_other_reduction(j2,ac_sub) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"other"))
+                          vm_other_reduction(j2,ac_sub) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"other")) / m_timestep_length_forestry
                           ;
 
 *' Real harvested area from other land is calculated based on the wood-fuel production
 *' realized from such areas divided by the corresponding growing stocks.
 
 q73_hvarea_other(j2,ac_sub)..
-                         v73_hvarea_other(j2, ac_sub) / m_timestep_length_forestry
+                         v73_hvarea_other(j2, ac_sub)
                           =e=
                          v73_prod_natveg(j2,"other",ac_sub,"woodfuel") / sum(ct, pm_timber_yield(ct,j2,ac_sub,"other"));
 
