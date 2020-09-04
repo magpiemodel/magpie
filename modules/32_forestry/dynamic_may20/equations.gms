@@ -152,7 +152,7 @@ q32_establishment_max_glo ..
 q32_establishment_min_glo ..
               sum(j2, (sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry * pc32_yield_forestry_future(j2))
               =g=
-              sum(i2, pm_demand_forestry_future(i2,"wood")* pc32_plant_prod_share_future(i2)) * (1-sum(ct,p32_fix_plant(ct)))
+              sum((i2,ct), pm_demand_forestry_future(i2,"wood")* pc32_plant_prod_share_future(ct,i2)) * (1-sum(ct,p32_fix_plant(ct)))
               ;
 
 *' Regional minimum constraint for maintaining current forestry area patterns,
@@ -160,7 +160,7 @@ q32_establishment_min_glo ..
 q32_establishment_min_reg(i2) ..
               sum(cell(i2,j2), ((sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry) * pc32_yield_forestry_future(j2))
               =g=
-              pm_demand_forestry_future(i2,"wood") * pc32_plant_prod_share_future(i2) * sum(ct, pm_selfsuff_ext(ct,i2,"wood")) * (1-sum(ct,p32_fix_plant(ct)))
+              pm_demand_forestry_future(i2,"wood") * sum(ct,pc32_plant_prod_share_future(ct,i2)) * sum(ct, pm_selfsuff_ext(ct,i2,"wood")) * (1-sum(ct,p32_fix_plant(ct)))
               ;
 
 *' Extra investment costs

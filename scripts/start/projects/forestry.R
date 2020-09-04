@@ -93,17 +93,16 @@ for(s73_foresight in c(1)){
             if(emis_policy == "redd+_nosoil") cfg$gms$s32_plant_carbon_foresight = 1
             if(emis_policy == "ssp_nosoil")   cfg$gms$s32_plant_carbon_foresight = 0
 
+            cfg                           = setScenario(cfg,c(ssp,"BASE"))
+            cfg$gms$c56_emis_policy       = emis_policy
+            cfg$gms$c56_pollutant_prices  = "R2M41-SSP2-NPi" #update to most recent coupled runs asap
+            cfg$gms$c60_2ndgen_biodem     = "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
+            pol_flag                      = "REDD+"
+            co2_price_path_flag           = "Baseline"
 
-                cfg                           = setScenario(cfg,c(ssp,"BASE"))
-                cfg$gms$c56_emis_policy       = emis_policy
-                cfg$gms$c56_pollutant_prices  = "R2M41-SSP2-NPi" #update to most recent coupled runs asap
-                cfg$gms$c60_2ndgen_biodem     = "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
-                pol_flag                      = "REDD+"
-                co2_price_path_flag           = "Baseline"
-                if(s32_fix_plant == 1 && s73_foresight == 1) break
+            if(s32_fix_plant == 1 && s73_foresight == 1) break
 
-
-            cfg$title   = paste0(identifier_flag,"_",ssp,"_",foresight_flag,"_",plant_area_flag,"_DemScaled")
+            cfg$title   = paste0(identifier_flag,"_",ssp,"_",foresight_flag,"_",plant_area_flag,"_DemScaledIncrShare")
 
             cfg$output  = c("rds_report","extra/force_runstatistics")
 
