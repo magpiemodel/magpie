@@ -9,7 +9,6 @@
 ## calculates policy for protecting different land pools from land use change
 calc_NPI_NDC <- function(policyregions = "iso",
                          pol_def_file = "policies/policy_definitions.csv",
-                         spatialheader_file = "../../input/spatial_header.rda",
                          cellmapping  = "policies/country2cell.rds",
                          land_stock_file = "../../modules/10_land/input/avl_land_t_0.5.mz",
                          map_file    = Sys.glob("../../input/clustermap_rev*.rds"),
@@ -82,7 +81,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
   npi_ad <- droplevels(subset(pol_def, policy=="npi" & landpool=="forest"))
   addtable(npi_ad[,c(-2,-3)])
   npi_ad <- calc_policy(npi_ad, forest_stock, pol_type="ad", pol_mapping=pol_mapping,
-                        spatialheader_file=spatialheader_file, map_file=map_file)
+                        map_file=map_file)
   getNames(npi_ad) <- "npi.forest"
   cat(paste0(" (time elapsed: ",format(proc.time()["elapsed"]-ptm,width=6,nsmall=2,digits=2),"s)\n"))
 
@@ -94,7 +93,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
   ndc_ad <- droplevels(subset(pol_def, policy=="ndc" & landpool=="forest"))
   addtable(ndc_ad[,c(-2,-3)])
   ndc_ad <- calc_policy(ndc_ad, forest_stock, pol_type="ad", pol_mapping=pol_mapping,
-                        spatialheader_file=spatialheader_file, map_file=map_file)
+                        map_file=map_file)
   getNames(ndc_ad) <- "ndc.forest"
   #Set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
   ndc_ad[,which(getYears(ndc_ad,as.integer=TRUE)<=2020),] <-
@@ -115,8 +114,8 @@ calc_NPI_NDC <- function(policyregions = "iso",
   addline("################")
   npi_aolc <- droplevels(subset(pol_def, policy=="npi" & landpool=="other"))
   addtable(npi_aolc[,c(-2,-3)])
-  npi_aolc <- calc_policy(npi_aolc, land_stock[,,"other"], pol_type="ad", pol_mapping=pol_mapping,
-                          spatialheader_file=spatialheader_file, map_file=map_file)
+  npi_aolc <- calc_policy(npi_aolc, land_stock[,,"other"], pol_type="ad",
+                          pol_mapping=pol_mapping, map_file=map_file)
   getNames(npi_aolc) <- "npi.other"
   cat(paste0(" (time elapsed: ",format(proc.time()["elapsed"]-ptm,width=6,nsmall=2,digits=2),"s)\n"))
 
@@ -127,8 +126,8 @@ calc_NPI_NDC <- function(policyregions = "iso",
   addline("################")
   ndc_aolc <- droplevels(subset(pol_def, policy=="ndc" & landpool=="other"))
   addtable(ndc_aolc[,c(-2,-3)])
-  ndc_aolc <- calc_policy(ndc_aolc,land_stock[,,"other"],pol_type="ad",pol_mapping=pol_mapping,
-                          spatialheader_file=spatialheader_file, map_file=map_file)
+  ndc_aolc <- calc_policy(ndc_aolc, land_stock[,,"other"], pol_type="ad",
+                          pol_mapping=pol_mapping, map_file=map_file)
   getNames(ndc_aolc) <- "ndc.other"
   #Set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
   ndc_aolc[,which(getYears(ndc_aolc,as.integer=TRUE)<=2020),] <-
@@ -159,7 +158,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
   addtable(npi_aff[,c(-2,-3)])
   npi_aff <- calc_policy(npi_aff, land_stock, pol_type="aff", pol_mapping=pol_mapping,
                          weight=dimSums(land_stock[,2005,c("crop","past")]),
-                         spatialheader_file=spatialheader_file, map_file=map_file)
+                         map_file=map_file)
   getNames(npi_aff) <- "npi"
   cat(paste0(" (time elapsed: ",format(proc.time()["elapsed"]-ptm,width=6,nsmall=2,digits=2),"s)\n"))
 
@@ -172,7 +171,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
   addtable(ndc_aff[,c(-2,-3)])
   ndc_aff <- calc_policy(ndc_aff, land_stock, pol_type="aff", pol_mapping=pol_mapping,
                          weight=dimSums(land_stock[,2005,c("crop","past")]),
-                         spatialheader_file=spatialheader_file, map_file=map_file)
+                         map_file=map_file)
   getNames(ndc_aff) <- "ndc"
   #set all values before 2015 to NPI values; copy the values til 2010 from the NPI data
   ndc_aff[,which(getYears(ndc_aff,as.integer=TRUE)<=2020),] <-
@@ -208,8 +207,7 @@ calc_flows <- function(stock) {
 
 ### calc npi & ndc policy
 calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
-                        weight=NULL, spatialheader_file = "../../input/spatial_header.rda",
-                        map_file = Sys.glob("../../input/clustermap_rev*.rds")) {
+                        weight=NULL, map_file = Sys.glob("../../input/clustermap_rev*.rds")) {
   ## pol_type = {"aff","ad"}
 
   require(madrat)
@@ -291,10 +289,9 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
     magpie_policy <- magpie_policy * flow * t_periods + stock
   }
 
-  load(spatialheader_file)
-  getCells(magpie_policy) <- spatial_header
-
-  magpie_policy <- madrat::toolAggregate(magpie_policy,map_file)
+  map <- readRDS(map_file)
+  getCells(magpie_policy) <- map$cell
+  magpie_policy <- madrat::toolAggregate(magpie_policy,map)
 
   return(magpie_policy)
 }
