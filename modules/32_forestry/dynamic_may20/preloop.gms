@@ -156,8 +156,11 @@ elseif s32_initial_distribution = 1,
 ** Initialization of land
 p32_land_start_ac(j,type32,ac) = p32_land("y1995",j,type32,ac);
 
-
-
+** Share of production coming from plantations
+** Proportion of production coming from plantations
+p32_plant_prod_share(t_ext,i) = f32_plant_prod_share("y2100");
+p32_plant_prod_share(t_all,i) = f32_plant_prod_share(t_all);
+*p32_plant_prod_share(t_ext,i) = sm_plant_share;
 
 *fix bph effect to zero for all age classes except the ac that is chosen for the bph effect to occur after planting (e.g. canopy closure)
 *fade-in from ac10 to ac30. First effect in ac10 (ord 3), last effect in ac30 (ord 7).
