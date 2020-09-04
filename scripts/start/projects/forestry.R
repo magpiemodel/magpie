@@ -107,8 +107,8 @@ for(s73_foresight in c(1)){
 
             cfg$output  = c("rds_report","extra/force_runstatistics")
 
-             xx = c(xx,cfg$title)
-             #start_run(cfg,codeCheck=FALSE)
+             #xx = c(xx,cfg$title)
+             start_run(cfg,codeCheck=FALSE)
           }
         }
       }
