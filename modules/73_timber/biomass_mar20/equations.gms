@@ -15,7 +15,7 @@ q73_cost_timber(i2)..
                     vm_cost_timber(i2)
                     =e=
                     v73_cost_hvarea(i2)
-                    + sum((cell(i2,j2),kforestry), v73_prod_heaven_timber(j2,kforestry)) * s73_free_prod_cost
+                    + sum((cell(i2,j2),kforestry), v73_prod_heaven_timber(j2,kforestry) * s73_free_prod_cost)
                     ;
 
 *' Harvested cost is defined as the cost incurred while removing biomass from forests.
@@ -60,7 +60,7 @@ q73_prod_forestry(j2,ac_sub)..
 q73_hvarea_forestry(j2,ac_sub) ..
                           v73_hvarea_forestry(j2,ac_sub)
                           =e=
-                          sum(kforestry, v73_prod_forestry(j2,ac_sub,kforestry)) / sum(ct, pm_timber_yield(ct,j2,ac_sub,"forestry"));
+                          sum(kforestry, v73_prod_forestry(j2,ac_sub,kforestry)) / sum(ct, pm_timber_yield(ct,j2,ac_sub,"forestry")) * m_timestep_length_forestry;
 
 ** Secondary forest
 *' Woody biomass production from secondary forests is calculated by multiplying the
@@ -77,7 +77,7 @@ q73_prod_secdforest(j2,ac_sub)..
 q73_hvarea_secdforest(j2,ac_sub)..
                           vm_hvarea_secdforest(j2,ac_sub)
                            =e=
-                          sum(kforestry, v73_prod_natveg(j2,"secdforest",ac_sub,kforestry)) / sum(ct, pm_timber_yield(ct,j2,ac_sub,"secdforest"));
+                          sum(kforestry, v73_prod_natveg(j2,"secdforest",ac_sub,kforestry)) / sum(ct, pm_timber_yield(ct,j2,ac_sub,"secdforest")) * m_timestep_length_forestry;
 
 ** Primary forest
 *' Woody biomass production from primary forests is calculated by multiplying the
@@ -94,7 +94,7 @@ q73_prod_primforest(j2)..
 q73_hvarea_primforest(j2)..
                           vm_hvarea_primforest(j2)
                            =e=
-                          sum(kforestry, v73_prod_natveg(j2,"primforest","acx",kforestry)) / sum(ct, pm_timber_yield(ct,j2,"acx","primforest"));
+                          sum(kforestry, v73_prod_natveg(j2,"primforest","acx",kforestry)) / sum(ct, pm_timber_yield(ct,j2,"acx","primforest")) * m_timestep_length_forestry;
 
 ** Other land
 *' Wood-fuel production from other land is calculated by multiplying the area under
@@ -113,6 +113,6 @@ q73_prod_other(j2,ac_sub)..
 q73_hvarea_other(j2,ac_sub)..
                          v73_hvarea_other(j2, ac_sub)
                           =e=
-                         v73_prod_natveg(j2,"other",ac_sub,"woodfuel") / sum(ct, pm_timber_yield(ct,j2,ac_sub,"other"));
+                         v73_prod_natveg(j2,"other",ac_sub,"woodfuel") / sum(ct, pm_timber_yield(ct,j2,ac_sub,"other")) * m_timestep_length_forestry;
 
 *** EOF equations.gms ***

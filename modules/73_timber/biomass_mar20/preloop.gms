@@ -35,10 +35,9 @@ pm_demand_ext(t_ext,i,kforestry) = round(p73_timber_demand_gdp_pop("y2150",i,kfo
 pm_demand_ext(t_all,i,kforestry) = round(p73_timber_demand_gdp_pop(t_all,i,kforestry) * f73_volumetric_conversion(kforestry),3);
 p73_demand_ext_original(t_ext,i,kforestry) = pm_demand_ext(t_ext,i,kforestry);
 
-loop (t_ext,
- if(m_year(t_ext) <= sm_fix_SSP2,
- p73_hist_scaling(t_ext,i) = pm_demand_ext("y2020",i,"wood") / pm_demand_ext("y1995",i,"wood");
- else
- p73_hist_scaling(t_ext,i) = 1;
- );
+*deactivated for now. Can be removed if no longer used.
+p73_hist_scaling(t_ext,i) = 1;
+loop (t$(m_year(t) <= sm_fix_SSP2),
+ p73_hist_scaling(t,i) = sqrt(pm_demand_ext("y2020",i,"wood") / pm_demand_ext("y1995",i,"wood"));
 );
+p73_hist_scaling(t_ext,i) = 1;

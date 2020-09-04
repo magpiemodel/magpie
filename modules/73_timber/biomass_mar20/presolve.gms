@@ -17,19 +17,14 @@ vm_hvarea_secdforest.fx(j,ac_est) = 0;
 v73_hvarea_other.fx(j,ac_est) = 0;
 v73_hvarea_forestry.fx(j,ac_est) = 0;
 
-** Feed parameter
-p73_foresight(foresight) = 0;
-p73_foresight("%c73_foresight%") = 1;
-** Future demand relevant in current time step depending on rotation length
-if(p73_foresight("forward") = 1,
-    if(m_year(t) <= sm_fix_SSP2,
+*Same demand for establishment until 2020, after 2020 depending on s73_foresight
+*s73_foresight=1 forward looking (establishment based on future demand), s73_foresight=0 myopic (establishment based on current demand)
+if(m_year(t) <= sm_fix_SSP2,
     pm_demand_forestry_future(i,kforestry)    = pm_demand_ext(t,i,kforestry) * p73_hist_scaling(t,i);
-    else
+else
+ if(s73_foresight=1,
     pm_demand_forestry_future(i,kforestry)    = sum(t_ext$(t_ext.pos = pm_representative_rotation(t,i)),pm_demand_ext(t_ext,i,kforestry));
-  );
-);
-
-if(p73_foresight("myopic") = 1,
-** Future demand relevant in current time step depending on rotation length
-    pm_demand_forestry_future(i,kforestry)    = pm_demand_ext(t,i,kforestry) * p73_hist_scaling(t,i);
+ else
+    pm_demand_forestry_future(i,kforestry)    = pm_demand_ext(t,i,kforestry);
+ );
 );

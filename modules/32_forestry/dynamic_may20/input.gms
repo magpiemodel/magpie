@@ -9,13 +9,13 @@ $setglobal c32_aff_bgp  nobgp
 * options: ann,nobgp
 $setglobal c32_tcre_ctrl  ann_TCREmean
 * options: ann_TCREmean, ann_TCREhigh, ann_TCRElow
-$setglobal c32_interest_rate regional
+$setglobal c32_interest_rate  regional
 * options regional, global
 
 scalars
   s32_reESTBcost                  Re establishment cost (USD per ha) / 2000 /
   s32_recurring_cost              Recurring costs (USD per ha) / 500 /
-  s32_harvesting_cost             Harvesting cost (USD per ha) / 200 /
+  s32_harvesting_cost             Harvesting cost (USD per tDM) / 200 /
   s32_planing_horizon             Afforestation planing horizon (years)            / 50 /
   s32_recurring_cost_multiplier   Cost multiplier for recurring costs only for testing (1)            / 10 /
   s32_rotation_extension          Rotation extension factor 1=original rotations 2=100 percent increase in rotations etc (1) / 1 /
@@ -29,7 +29,7 @@ scalars
   s32_plant_carbon_foresight      Switch to allow plantations to be used as incentives for CDR (1) / 1 /
   s32_tcre_local switch for local (1) or global (0) TRCE factors / 1 /
   s32_fix_plant                   Fixing plantation area after 2020 / 0 /
-  sm_plant_share                  Constant propotion of production from plantations /0.25/
+  sm_plant_share                  Constant propotion of production from plantations / 0.25 /
   s32_forestry_int_rate           Global interest rate for plantations / 0.05 /
   s32_investment_cost             Additional investment cost in plantations (USD per tC per ha) / 200 /
 ;
