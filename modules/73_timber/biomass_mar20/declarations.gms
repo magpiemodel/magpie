@@ -43,7 +43,7 @@ q73_prod_primforest(j)                                                      Prod
 q73_hvarea_primforest(j)                                                    Area harvested for woody biomass from primary forests (mio. tDM per yr)
 q73_prod_other(j,ac)                                                    Production of woody biomass from other land (mio. tDM per yr)
 q73_hvarea_other(j,ac)                                                  Area harvested for woody biomass from other land (mio. tDM per yr)
-q73_prod_timber_min(j)                                                  Minimum production from plantations (mio. tDM)
+q73_prod_timber_min                                                  Minimum production from plantations (mio. tDM)
 ;
 
 
@@ -71,6 +71,6 @@ parameters
  oq73_hvarea_primforest(t,j,type)                    Area harvested for woody biomass from primary forests (mio. tDM per yr)
  oq73_prod_other(t,j,ac,type)                        Production of woody biomass from other land (mio. tDM per yr)
  oq73_hvarea_other(t,j,ac,type)                      Area harvested for woody biomass from other land (mio. tDM per yr)
- oq73_prod_timber_min(t,j,type)                      Minimum production from plantations (mio. tDM)
+ oq73_prod_timber_min(t,type)                        Minimum production from plantations (mio. tDM)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

@@ -28,7 +28,7 @@
  oq73_hvarea_primforest(t,j,"marginal")                    = q73_hvarea_primforest.m(j);
  oq73_prod_other(t,j,ac,"marginal")                        = q73_prod_other.m(j,ac);
  oq73_hvarea_other(t,j,ac,"marginal")                      = q73_hvarea_other.m(j,ac);
- oq73_prod_timber_min(t,j,"marginal")                      = q73_prod_timber_min.m(j);
+ oq73_prod_timber_min(t,"marginal")                        = q73_prod_timber_min.m;
  ov73_cost_hvarea(t,i,"level")                             = v73_cost_hvarea.l(i);
  ov73_cost_production(t,i,"level")                         = v73_cost_production.l(i);
  ov73_prod_forestry(t,j,ac,kforestry,"level")              = v73_prod_forestry.l(j,ac,kforestry);
@@ -51,7 +51,7 @@
  oq73_hvarea_primforest(t,j,"level")                       = q73_hvarea_primforest.l(j);
  oq73_prod_other(t,j,ac,"level")                           = q73_prod_other.l(j,ac);
  oq73_hvarea_other(t,j,ac,"level")                         = q73_hvarea_other.l(j,ac);
- oq73_prod_timber_min(t,j,"level")                         = q73_prod_timber_min.l(j);
+ oq73_prod_timber_min(t,"level")                           = q73_prod_timber_min.l;
  ov73_cost_hvarea(t,i,"upper")                             = v73_cost_hvarea.up(i);
  ov73_cost_production(t,i,"upper")                         = v73_cost_production.up(i);
  ov73_prod_forestry(t,j,ac,kforestry,"upper")              = v73_prod_forestry.up(j,ac,kforestry);
@@ -74,7 +74,7 @@
  oq73_hvarea_primforest(t,j,"upper")                       = q73_hvarea_primforest.up(j);
  oq73_prod_other(t,j,ac,"upper")                           = q73_prod_other.up(j,ac);
  oq73_hvarea_other(t,j,ac,"upper")                         = q73_hvarea_other.up(j,ac);
- oq73_prod_timber_min(t,j,"upper")                         = q73_prod_timber_min.up(j);
+ oq73_prod_timber_min(t,"upper")                           = q73_prod_timber_min.up;
  ov73_cost_hvarea(t,i,"lower")                             = v73_cost_hvarea.lo(i);
  ov73_cost_production(t,i,"lower")                         = v73_cost_production.lo(i);
  ov73_prod_forestry(t,j,ac,kforestry,"lower")              = v73_prod_forestry.lo(j,ac,kforestry);
@@ -97,5 +97,5 @@
  oq73_hvarea_primforest(t,j,"lower")                       = q73_hvarea_primforest.lo(j);
  oq73_prod_other(t,j,ac,"lower")                           = q73_prod_other.lo(j,ac);
  oq73_hvarea_other(t,j,ac,"lower")                         = q73_hvarea_other.lo(j,ac);
- oq73_prod_timber_min(t,j,"lower")                         = q73_prod_timber_min.lo(j);
+ oq73_prod_timber_min(t,"lower")                           = q73_prod_timber_min.lo;
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################

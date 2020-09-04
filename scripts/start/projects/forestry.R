@@ -55,7 +55,7 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P35"
+identifier_flag = "P36"
 
 cat(paste0("Lord mighty of GAMS please make it run"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
@@ -122,7 +122,7 @@ for(s73_prod_cost_switch in c(1,0)){
 
                   cfg$title   = paste0(identifier_flag,"_",ssp,"_",c73_foresight,"_",plant_area_flag,"_",cost_flag)
 
-                  cfg$output  = c("rds_report","extra/disaggregation","extra/force_runstatistics")
+                  cfg$output  = c("rds_report","extra/force_runstatistics")
 
                    xx = c(xx,cfg$title)
                      start_run(cfg,codeCheck=FALSE)
