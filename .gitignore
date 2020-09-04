@@ -16,6 +16,7 @@ magpie_calib.*
 *.op2
 *.lst
 /output/
+*.log
 
 #ignore R support files
 .Rhistory

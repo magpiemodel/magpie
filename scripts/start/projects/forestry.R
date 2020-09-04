@@ -61,7 +61,7 @@ cat(paste0("Lord mighty of GAMS please make it run"), file=paste0(log_folder,"/"
 
 xx <- c()
 
-for(c73_foresight in c("forward","myopic")){
+for(c73_foresight in c("forward")){
   cfg$gms$c73_foresight = c73_foresight
 
   for(sm_plant_share in c(0.25)){
@@ -69,7 +69,7 @@ for(c73_foresight in c("forward","myopic")){
 
     plant_share_flag <- paste0(sm_plant_share*100,"pc")
 
-    for(s32_fix_plant in c(0,1)){
+    for(s32_fix_plant in c(0)){
 
       cfg$gms$s32_fix_plant = s32_fix_plant
 
