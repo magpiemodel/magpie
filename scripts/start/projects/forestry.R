@@ -55,14 +55,17 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P37"
+identifier_flag = "P38"
 
 cat(paste0("Lord mighty of GAMS please make it run"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
-for(c73_foresight in c("forward")){
-  cfg$gms$c73_foresight = c73_foresight
+for(s73_foresight in c(1)){
+  cfg$gms$s73_foresight = s73_foresight
+
+  if(s73_foresight == 1) foresight_flag = "Forward"
+  if(s73_foresight != 1) foresight_flag = "Myopic"
 
   for(sm_plant_share in c(0.25)){
     cfg$gms$sm_plant_share = sm_plant_share
@@ -97,15 +100,15 @@ for(c73_foresight in c("forward")){
                 cfg$gms$c60_2ndgen_biodem     = "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
                 pol_flag                      = "REDD+"
                 co2_price_path_flag           = "Baseline"
-                if(s32_fix_plant == 1 && c73_foresight == "forward") break
+                if(s32_fix_plant == 1 && s73_foresight == 1) break
 
 
-            cfg$title   = paste0(identifier_flag,"_",ssp,"_",c73_foresight,"_",plant_area_flag)
+            cfg$title   = paste0(identifier_flag,"_",ssp,"_",foresight_flag,"_",plant_area_flag)
 
             cfg$output  = c("rds_report","extra/force_runstatistics")
 
-             #xx = c(xx,cfg$title)
-             start_run(cfg,codeCheck=FALSE)
+             xx = c(xx,cfg$title)
+             #start_run(cfg,codeCheck=FALSE)
           }
         }
       }
