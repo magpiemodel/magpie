@@ -5,10 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-** Initialize  harvesting costs scaling per ha with age-classes
-p73_timber_harvest_cost(t,j,ac,forest_land) = 0;
-
-
 ** Set historical values to FAO values
 p73_forestry_demand_prod_specific(t_past,iso,total_wood_products) = f73_prod_specific_timber(t_past,iso,total_wood_products);
 
