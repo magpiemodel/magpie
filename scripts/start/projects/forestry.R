@@ -76,49 +76,36 @@ for(c73_foresight in c("forward")){
       if(s32_fix_plant == 0) plant_area_flag = "Incr2020"
       if(s32_fix_plant == 1) plant_area_flag = "Const2020"
 
-      for (co2_price_path in c("NPI")) {
+      for(s32_initial_distribution in c(1)){
 
-        for(s32_initial_distribution in c(1)){
+        cfg$gms$s32_initial_distribution  = s32_initial_distribution
+        cfg$gms$s73_demand_switch         = s32_initial_distribution
 
-          cfg$gms$s32_initial_distribution  = s32_initial_distribution
-          cfg$gms$s73_demand_switch         = s32_initial_distribution
+        if(s32_initial_distribution == 1) timber_flag = "timberON"
+        if(s32_initial_distribution == 0) timber_flag = "timberOFF"
 
-          if(s32_initial_distribution == 1) timber_flag = "timberON"
-          if(s32_initial_distribution == 0) timber_flag = "timberOFF"
+        for(emis_policy in c("redd+_nosoil")){
 
-          for(emis_policy in c("redd+_nosoil")){
-
-            for(ssp in c("SSP2")){
-              if(emis_policy == "redd+_nosoil") cfg$gms$s32_plant_carbon_foresight = 1
-              if(emis_policy == "ssp_nosoil")   cfg$gms$s32_plant_carbon_foresight = 0
+          for(ssp in c("SSP2")){
+            if(emis_policy == "redd+_nosoil") cfg$gms$s32_plant_carbon_foresight = 1
+            if(emis_policy == "ssp_nosoil")   cfg$gms$s32_plant_carbon_foresight = 0
 
 
-                if (co2_price_path == "NPI" && emis_policy == "redd+_nosoil") {
-                  cfg                           = setScenario(cfg,c(ssp,"NPI"))
-                  cfg$gms$c56_emis_policy       = emis_policy
-                  cfg$gms$c56_pollutant_prices  = "R2M41-SSP2-NPi" #update to most recent coupled runs asap
-                  cfg$gms$c60_2ndgen_biodem     = "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
-                  pol_flag                      = "REDD+"
-                  co2_price_path_flag           = "Baseline"
-                } else if (co2_price_path == "2deg" && emis_policy == "redd+_nosoil"){
-                  cfg                           = setScenario(cfg,c(ssp,"NDC"))
-                  cfg$gms$c56_emis_policy       = emis_policy
-                  cfg$gms$c56_pollutant_prices  = "SSPDB-SSP2-26-REMIND-MAGPIE"
-                  cfg$gms$c60_2ndgen_biodem     = "SSPDB-SSP2-26-REMIND-MAGPIE"
-                  co2_price_path_flag           = "Policy"
-                  if(emis_policy == "ssp_nosoil")   pol_flag = ""
-                  if(emis_policy == "redd+_nosoil") pol_flag = "REDD+"
-                }
-              if(s32_fix_plant == 1 && c73_foresight == "forward") break
+                cfg                           = setScenario(cfg,c(ssp,"BASE"))
+                cfg$gms$c56_emis_policy       = emis_policy
+                cfg$gms$c56_pollutant_prices  = "R2M41-SSP2-NPi" #update to most recent coupled runs asap
+                cfg$gms$c60_2ndgen_biodem     = "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
+                pol_flag                      = "REDD+"
+                co2_price_path_flag           = "Baseline"
+                if(s32_fix_plant == 1 && c73_foresight == "forward") break
 
 
-              cfg$title   = paste0(identifier_flag,"_",ssp,"_",c73_foresight,"_",plant_area_flag)
+            cfg$title   = paste0(identifier_flag,"_",ssp,"_",c73_foresight,"_",plant_area_flag)
 
-              cfg$output  = c("rds_report","extra/force_runstatistics")
+            cfg$output  = c("rds_report","extra/force_runstatistics")
 
-               #xx = c(xx,cfg$title)
-               start_run(cfg,codeCheck=FALSE)
-            }
+             #xx = c(xx,cfg$title)
+             start_run(cfg,codeCheck=FALSE)
           }
         }
       }
