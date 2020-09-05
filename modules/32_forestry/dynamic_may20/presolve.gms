@@ -131,5 +131,7 @@ m_boundfix(v32_land,(j,type32,ac_sub),l,10e-5);
 pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac,"forestry"));
 ** Plantation production share for future
 pc32_plant_prod_share_future(t,i) = sum(t_ext$(t_ext.pos = pm_representative_rotation(t,i)),p32_plant_prod_share(t_ext,i));
+** scale harvesting costs per ha with age-classes and select corresponding age-class
+pc32_timber_harvest_cost(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)), (pm_timber_yield(t,j,ac,"forestry")/pm_timber_yield(t,j,"acx","forestry")) * s32_harvesting_cost);
 
 *** EOF presolve.gms ***

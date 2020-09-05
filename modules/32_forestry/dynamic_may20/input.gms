@@ -15,7 +15,7 @@ $setglobal c32_interest_rate  regional
 scalars
   s32_reESTBcost                  Re establishment cost (USD per ha) / 2000 /
   s32_recurring_cost              Recurring costs (USD per ha) / 500 /
-  s32_harvesting_cost             Harvesting cost (USD per tDM) / 200 /
+  s32_harvesting_cost             Harvesting cost (USD per ha) / 200 /
   s32_planing_horizon             Afforestation planing horizon (years)            / 50 /
   s32_recurring_cost_multiplier   Cost multiplier for recurring costs only for testing (1)            / 10 /
   s32_rotation_extension          Rotation extension factor 1=original rotations 2=100 percent increase in rotations etc (1) / 1 /
