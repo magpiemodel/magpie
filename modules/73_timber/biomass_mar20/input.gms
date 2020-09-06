@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-  s73_timber_harvest_cost   Cost for harvesting timber (USD per ha) /10/
+  s73_timber_harvest_cost   Cost for harvesting timber (USD per ha) / 2000/
   s73_cost_multiplier       Multiplier for expensive harvest in natural vegetation (1) /2/
   s73_free_prod_cost        Very high cost for using non existing land for plantation establishment (USD per tDM) /1000000/
   s73_demand_switch         Logical switch to turn on or off timber demand 1=on 0=off (1)     / 1 /

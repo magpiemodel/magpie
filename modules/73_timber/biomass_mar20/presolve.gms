@@ -6,21 +6,27 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 ** scale harvesting costs per ha with age-classes
-p73_timber_harvest_cost(t,j,ac,forest_land) = (pm_timber_yield(t,j,ac,forest_land)/pm_timber_yield(t,j,"acx",forest_land)) * s73_timber_harvest_cost;
+*p73_timber_harvest_cost(t,j,ac,forest_land) = (pm_timber_yield(t,j,ac,forest_land)/pm_timber_yield(t,j,"acx",forest_land)) * s73_timber_harvest_cost;
+*p73_timber_harvest_cost(t,j,ac,forest_land)$(ord(ac) <= 5) = p73_timber_harvest_cost(t,j,"ac20",forest_land)
+*p73_timber_harvest_cost(t,j,ac,"forestry") = 0;
+p73_timber_harvest_cost(t,j,ac,"forestry") = s73_timber_harvest_cost;
+p73_timber_harvest_cost(t,j,ac,"secdforest") = s73_timber_harvest_cost * 1.5;
+p73_timber_harvest_cost(t,j,ac,"other") = s73_timber_harvest_cost * 1.5;
+p73_timber_harvest_cost(t,j,ac,"primforest") = s73_timber_harvest_cost * 2;
 
 ** Fixing variables
 v73_prod_natveg.fx(j,"other",ac,"wood") = 0;
 v73_prod_natveg.fx(j,"primforest",ac,kforestry)$(not sameas(ac,"acx")) = 0;
 v73_prod_forestry.fx(j,ac_est,kforestry) = 0;
 v73_prod_natveg.fx(j,land_natveg,ac_est,kforestry) = 0;
-vm_hvarea_secdforest.fx(j,ac_est) = 0;
-v73_hvarea_other.fx(j,ac_est) = 0;
-v73_hvarea_forestry.fx(j,ac_est) = 0;
+*vm_hvarea_secdforest.fx(j,ac_est) = 0;
+*vm_hvarea_other.fx(j,ac_est) = 0;
+*vm_hvarea_forestry.fx(j,ac_est) = 0;
 
 *Same demand for establishment until 2020, after 2020 depending on s73_foresight
 *s73_foresight=1 forward looking (establishment based on future demand), s73_foresight=0 myopic (establishment based on current demand)
 if(m_year(t) <= sm_fix_SSP2,
-    pm_demand_forestry_future(i,kforestry)    = pm_demand_ext(t,i,kforestry) * p73_hist_scaling(t,i);
+    pm_demand_forestry_future(i,kforestry)    = pm_demand_ext("y2010",i,kforestry);
 else
  if(s73_foresight=1,
     pm_demand_forestry_future(i,kforestry)    = sum(t_ext$(t_ext.pos = pm_representative_rotation(t,i)),pm_demand_ext(t_ext,i,kforestry));
