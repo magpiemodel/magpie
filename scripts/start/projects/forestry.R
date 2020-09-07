@@ -56,7 +56,7 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P39"
+identifier_flag = "P40"
 
 cat(paste0("Lord mighty of GAMS please make it run"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
@@ -90,7 +90,7 @@ for(s73_foresight in c(1,0)){
 
         for(emis_policy in c("redd+_nosoil")){
 
-          for(ssp in c("SSP2")){
+          for(ssp in c("SSP1","SSP2","SSP3")){
             if(emis_policy == "redd+_nosoil") cfg$gms$s32_plant_carbon_foresight = 1
             if(emis_policy == "ssp_nosoil")   cfg$gms$s32_plant_carbon_foresight = 0
 
