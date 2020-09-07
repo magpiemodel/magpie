@@ -56,24 +56,24 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P38"
+identifier_flag = "P39"
 
 cat(paste0("Lord mighty of GAMS please make it run"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
-for(s73_foresight in c(1)){
+for(s73_foresight in c(1,0)){
   cfg$gms$s73_foresight = s73_foresight
 
   if(s73_foresight == 1) foresight_flag = "Forward"
   if(s73_foresight != 1) foresight_flag = "Myopic"
 
-  for(sm_plant_share in c(0.25)){
-    cfg$gms$sm_plant_share = sm_plant_share
+  for(s32_plant_share in c(0.25)){
+    cfg$gms$s32_plant_share = s32_plant_share
 
-    plant_share_flag <- paste0(sm_plant_share*100,"pc")
+    plant_share_flag <- paste0(s32_plant_share*100,"pc")
 
-    for(s32_fix_plant in c(0)){
+    for(s32_fix_plant in c(0,1)){
 
       cfg$gms$s32_fix_plant = s32_fix_plant
 
@@ -103,12 +103,12 @@ for(s73_foresight in c(1)){
 
             if(s32_fix_plant == 1 && s73_foresight == 1) break
 
-            cfg$title   = paste0(identifier_flag,"_",ssp,"_",foresight_flag,"_",plant_area_flag,"_Inelastic")
+            cfg$title   = paste0(identifier_flag,"_",ssp,"_",foresight_flag,"_",plant_area_flag)
 
             cfg$output  = c("rds_report","extra/force_runstatistics")
 
-             #xx = c(xx,cfg$title)
-             start_run(cfg,codeCheck=FALSE)
+             xx = c(xx,cfg$title)
+             #start_run(cfg,codeCheck=FALSE)
           }
         }
       }

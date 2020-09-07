@@ -9,6 +9,9 @@ positive variables
   v35_secdforest(j,ac) 		Detailed stock of secdforest (mio. ha)
   v35_other(j,ac)      		Detailed stock of other land (mio. ha)
   vm_landdiff_natveg        Aggregated difference in other land compared to previous timestep (mio. ha)
+  vm_hvarea_secdforest(j,ac)                    Harvested area from secondary forest (mio. ha)
+  vm_hvarea_other(j,ac)                         Harvested area from other land (mio. ha)
+  vm_hvarea_primforest(j)                       Harvested area from primary forest (mio. ha)
 ;
 
 
@@ -19,4 +22,3 @@ parameters
  ov_landdiff_natveg(t,type)   Aggregated difference in other land compared to previous timestep (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
-
