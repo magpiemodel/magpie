@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **32_forestry** New realization for timber production from timber plantations. This builds up on previous forestry realization for afforestation.
  - **35_natveg** New realization for timber production from natural vegetation.
  - **57_maccs** Added MACCs from Harmsen PBL 2019
+ - **15_food** Added the option to include calories from alcohol consumption in healthy and sustainable EAT-Lancet diets.
  - **scripts** added start script for making timber production runs (forestry.R)
 
 ### changed
