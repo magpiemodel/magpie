@@ -148,13 +148,13 @@ $title magpie
 * 
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev46_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* Repository: http://rse.pik-potsdam.de/data/magpie/intern
 * 
-* Used data set: rev4.47_h12_magpie.tgz
+* Used data set: rev4.51Forestry_h12_magpie.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.47_h12_validation.tgz
+* Used data set: rev4.51Forestry_h12_validation.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
@@ -177,7 +177,7 @@ $title magpie
 * 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
-* Regions data revision: 4.47
+* Regions data revision: 4.51
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
@@ -197,7 +197,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Sat Aug 22 13:14:25 2020
+* Last modification (input data): Tue Sep 08 19:32:46 2020
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
