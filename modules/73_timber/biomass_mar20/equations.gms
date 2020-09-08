@@ -10,7 +10,7 @@
 *' Timber production cost covering cost of harvest as well as the cost incurred by
 *' utilizing free variable with a very high cost. Ideally this free variable is only
 *' used when there is no other way to meet timber demand. To make sure that timber plantations
-*' are harvested at rotation age, the economically optimal point in time, we assume zero 
+*' are harvested at rotation age, the economically optimal point in time, we assume zero
 *' costs for production from timber plantations, and higher costs for for production from
 *' natural vegetation.
 
@@ -18,8 +18,8 @@ q73_cost_timber(i2)..
                     vm_cost_timber(i2)
                     =e=
                     v73_cost_hvarea(i2)
-                    + sum((cell(i2,j2),ac,kforestry), v73_prod_forestry(j2,ac,kforestry) * 0)
-                    + sum((cell(i2,j2),land_natveg,ac,kforestry), v73_prod_natveg(j2,land_natveg,ac,kforestry) * 2000)
+                    + sum((cell(i2,j2),ac,kforestry), v73_prod_forestry(j2,ac,kforestry) * s73_timber_harvest_cost * 0)
+                    + sum((cell(i2,j2),land_natveg,ac,kforestry), v73_prod_natveg(j2,land_natveg,ac,kforestry) * s73_timber_harvest_cost)
                     + sum((cell(i2,j2),kforestry), v73_prod_heaven_timber(j2,kforestry) * s73_free_prod_cost)
                     ;
 
@@ -31,10 +31,10 @@ q73_cost_timber(i2)..
 q73_cost_hvarea(i2)..
                     v73_cost_hvarea(i2)
                     =e=
-                    sum((ct,cell(i2,j2),ac_sub), vm_hvarea_forestry(j2,ac_sub)  * s73_timber_harvest_cost)
-                  + sum((ct,cell(i2,j2),ac_sub), vm_hvarea_secdforest(j2,ac_sub) * s73_timber_harvest_cost * 1.5)
-                  + sum((ct,cell(i2,j2),ac_sub), vm_hvarea_other(j2, ac_sub)     * s73_timber_harvest_cost * 1.5)
-                  + sum((ct,cell(i2,j2)),        vm_hvarea_primforest(j2)        * s73_timber_harvest_cost * 2)
+                    sum((ct,cell(i2,j2),ac_sub), vm_hvarea_forestry(j2,ac_sub)   * s73_timber_harvest_cost)
+                  + sum((ct,cell(i2,j2),ac_sub), vm_hvarea_secdforest(j2,ac_sub) * s73_timber_harvest_cost * s73_cost_multiplier * 0.75)
+                  + sum((ct,cell(i2,j2),ac_sub), vm_hvarea_other(j2, ac_sub)     * s73_timber_harvest_cost * s73_cost_multiplier * 0.75)
+                  + sum((ct,cell(i2,j2)),        vm_hvarea_primforest(j2)        * s73_timber_harvest_cost * s73_cost_multiplier)
                     ;
 
 *' The following equation describes cellular level production (in dry matter) of
@@ -79,7 +79,7 @@ q73_prod_primforest(j2)..
 
 ** Other land
 *' Wood-fuel production from other land is calculated by multiplying the area under
-*' production with corresponding yields of other land, divided by the timestep length. 
+*' production with corresponding yields of other land, divided by the timestep length.
 *' Wood production from other landis not allowed.
 
 q73_prod_other(j2,ac_sub)..
