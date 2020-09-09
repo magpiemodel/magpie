@@ -5,7 +5,3 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
-pm_climate_class,input, not used
-pm_carbon_density_ac,input, not used
-pm_carbon_density_ac_forestry,input, not used
-pm_timber_yield, input, not used
