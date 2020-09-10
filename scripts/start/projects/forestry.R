@@ -56,13 +56,13 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P40"
+identifier_flag = "P41"
 
 cat(paste0("Lord mighty of GAMS please make it run"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
-for(s73_foresight in c(1,0)){
+for(s73_foresight in c(0)){
   cfg$gms$s73_foresight = s73_foresight
 
   if(s73_foresight == 1) foresight_flag = "Forward"
@@ -96,18 +96,19 @@ for(s73_foresight in c(1,0)){
 
             cfg                           = setScenario(cfg,c(ssp,"NPI"))
             cfg$gms$c56_emis_policy       = emis_policy
-            cfg$gms$c56_pollutant_prices  = "R2M41-SSP2-NPi" #update to most recent coupled runs asap
-            cfg$gms$c60_2ndgen_biodem     = "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
+            cfg$gms$c56_pollutant_prices  = "R2M41-SSP2-NPi" ## Update to most recent coupled runs asap
+            cfg$gms$c57_macc_version      = "PBL_2019"       ## Why is this not default?
+            cfg$gms$c60_2ndgen_biodem     = "R2M41-SSP2-NPi" ## Update to most recent coupled runs asap
             pol_flag                      = "REDD+"
             co2_price_path_flag           = "Baseline"
 
             if(s32_fix_plant == 1 && s73_foresight == 1) break
 
-            cfg$title   = paste0(identifier_flag,"_",ssp,"_",foresight_flag,"_",plant_area_flag)
+            cfg$title   = paste0(identifier_flag,"_",ssp,"_",plant_area_flag)
 
             cfg$output  = c("rds_report","extra/force_runstatistics")
 
-             #xx = c(xx,cfg$title)
+             xx = c(xx,cfg$title)
              start_run(cfg,codeCheck=FALSE)
           }
         }
