@@ -86,6 +86,8 @@ scalar s15_waste_scen Scenario target for the ratio between food demand and inta
 
 scalar s15_exo_diet Switch for transition towards exogenous diet scenario (1)  / 0 /;
 
+scalar s15_alc_scen Scenario target for the inclusion of alcohol in the EAT-Lancet diet (1)  / 0.014 /;
+
 scalar s15_rum_share_fadeout_india_strong 	switch for stronger ruminant fadeout in India (binary) / 1 /;
 
 scalar s15_milk_share_fadeout_india 		switch for milk fadeout in India (binary) / 1 /;
