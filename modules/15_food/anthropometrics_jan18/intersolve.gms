@@ -271,16 +271,45 @@ p15_kcal_pc_calibrated(t,i,kfo)$(p15_demand2intake_ratio(t,i) >0 ) = p15_kcal_pc
 );
 
 
+* Now, a second waste parameter can be calculated, which is needed for the construction  
+* of exogenous diet scenarios on the basis of calorie intake. This parameter describes 
+* the development of food waste over time and reflects either the exogenous food waste 
+* scenario or the original regression-based estimates for food calorie oversupply:
+
+p15_foodwaste_growth(t,i) = ( 1$(p15_demand2intake_ratio_ref(i) = 0)
+            + (p15_demand2intake_ratio_scen(t,i)/p15_demand2intake_ratio_ref(i))$(
+              p15_demand2intake_ratio_ref(i) > 0)
+              );
+
+
+
+
 * ###### Exogenous EAT Lancet diet scenario
 
 *' @code
 *' Transition to exogenous EAT Lancet diet scenarios:
 *' A part of the definition of exogenous diet scenarios is already accomplished
-*' in the presolve.gms, where the parameters `i15_intake_scen_target(t,i)`,
-*' `i15_intake_EATLancet(i,kfo)` and `i15_intake_detailed_scen_target(t,i,kfo)`
-*' are calculated.
+*' in the presolve.gms, where the parameters `i15_intake_scen_target(t,i)` and
+*' `i15_intake_EATLancet(i,kfo)` are calculated.
 
 if(s15_exo_diet = 1,
+
+* Food-specific calorie intake of the model-internal diet projections is 
+* estimated from daily per capita food calorie demand:
+p15_intake_detailed_regr(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo)
+	 	/(f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)*p15_foodwaste_growth(t,i));
+
+
+* Via 's15_alc_scen' a maximum target for alcohol consumption is defined.
+if(s15_alc_scen>0,
+i15_intake_detailed_scen_target(t,i,"alcohol") = p15_intake_detailed_regr(t,i,"alcohol"); 
+i15_intake_detailed_scen_target(t,i,"alcohol")$(i15_intake_detailed_scen_target(t,i,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,i))
+	= s15_alc_scen*i15_intake_scen_target(t,i);
+);
+
+i15_intake_detailed_scen_target(t,i,EAT_staples) = (
+          i15_intake_scen_target(t,i) - sum(EAT_nonstaples,i15_intake_EATLancet(i,EAT_nonstaples)) )*(
+          i15_intake_EATLancet(i,EAT_staples)/sum(EAT_staples2,i15_intake_EATLancet(i,EAT_staples2)) );
 
 
 *' Now, the calorie supply at household level is calculated by multiplying
@@ -292,10 +321,7 @@ if(s15_exo_diet = 1,
 
 * In case, no exogenous waste scenario is selceted, the original regression-
 * based estimates for food calorie oversupply are here used as waste scenario:
-p15_foodwaste_growth(t,i) = ( 1$(p15_demand2intake_ratio_ref(i) = 0)
-            + (p15_demand2intake_ratio_scen(t,i)/p15_demand2intake_ratio_ref(i))$(
-              p15_demand2intake_ratio_ref(i) > 0)
-              );
+
 
 i15_kcal_pc_scen_target(t,i,kfo) = (f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)
                                     *i15_intake_detailed_scen_target(t,i,kfo))
