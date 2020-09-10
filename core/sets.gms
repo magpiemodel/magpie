@@ -46,33 +46,33 @@ sets
        VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 
    j number of LPJ cells /
-       CAZ_1*CAZ_28,
-       CHA_29*CHA_51,
-       EUR_52*EUR_60,
-       IND_61*IND_67,
-       JPN_68*JPN_69,
-       LAM_70*LAM_100,
-       MEA_101*MEA_132,
-       NEU_133*NEU_142,
-       OAS_143*OAS_156,
-       REF_157*REF_166,
-       SSA_167*SSA_191,
-       USA_192*USA_200/
+       CAZ_1*CAZ_26,
+       CHA_27*CHA_48,
+       EUR_49*EUR_51,
+       IND_52*IND_58,
+       JPN_59*JPN_60,
+       LAM_61*LAM_93,
+       MEA_94*MEA_117,
+       NEU_118*NEU_123,
+       OAS_124*OAS_140,
+       REF_141*REF_151,
+       SSA_152*SSA_193,
+       USA_194*USA_200/
 
    cell(i,j) number of LPJ cells per region i
       /
-       CAZ . CAZ_1*CAZ_28
-       CHA . CHA_29*CHA_51
-       EUR . EUR_52*EUR_60
-       IND . IND_61*IND_67
-       JPN . JPN_68*JPN_69
-       LAM . LAM_70*LAM_100
-       MEA . MEA_101*MEA_132
-       NEU . NEU_133*NEU_142
-       OAS . OAS_143*OAS_156
-       REF . REF_157*REF_166
-       SSA . SSA_167*SSA_191
-       USA . USA_192*USA_200
+       CAZ . CAZ_1*CAZ_26
+       CHA . CHA_27*CHA_48
+       EUR . EUR_49*EUR_51
+       IND . IND_52*IND_58
+       JPN . JPN_59*JPN_60
+       LAM . LAM_61*LAM_93
+       MEA . MEA_94*MEA_117
+       NEU . NEU_118*NEU_123
+       OAS . OAS_124*OAS_140
+       REF . REF_141*REF_151
+       SSA . SSA_152*SSA_193
+       USA . USA_194*USA_200
       /
 
    i_to_iso(i,iso) mapping regions to iso countries

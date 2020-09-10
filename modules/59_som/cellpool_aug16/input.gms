@@ -52,7 +52,7 @@ $setglobal c59_som_scenario  nocc
 parameters f59_topsoilc_density(t_all,j) LPJ topsoil carbon density for natural vegetation (tC per ha)
 /
 $ondelim
-$include "./modules/59_som/input/lpj_carbon_topsoil.cs2"
+$include "./modules/59_som/input/lpj_carbon_topsoil.cs2b"
 $offdelim
 /
 ;
