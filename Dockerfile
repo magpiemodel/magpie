@@ -13,7 +13,10 @@ RUN apt-get update \
  && apt-get install -y libxml2-dev \
  && apt-get install -y libcurl4-openssl-dev \
  && apt-get install -y curl \
- && apt-get install -y texlive-full
+ && apt-get install -y texlive \
+ && apt-get install -y fonts-inconsolata \
+ && fc-cache -fv
+
 
 
 
