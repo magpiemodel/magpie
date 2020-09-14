@@ -1,10 +1,21 @@
 ** Keep the plantation area fixing flag as 0 till 2020. If the flag is set to 1
-loop(t_all,
-  if(m_year(t_all) <= sm_fix_SSP2 AND s32_fix_plant =1,
-  p32_fix_plant(t_all) = 0;
-  else
-  p32_fix_plant(t_all) = s32_fix_plant;
+if(s32_fix_plant = 1 OR s32_fix_plant = 0,
+  loop(t_all,
+    if(m_year(t_all) <= sm_fix_SSP2 AND s32_fix_plant =1,
+    p32_fix_plant(t_all) = 0;
+    else
+    p32_fix_plant(t_all) = s32_fix_plant;
+    );
   );
+  else
+  display "Unrecognized setting for s32_fix_plant, please select 1 or 0.";
+  abort "Invalid setting for s32_fix_plant.";
+);
+
+** Check if s32_plant_share is set correctly
+if(s32_plant_share < 0 OR s32_plant_share > 1,
+  display "Unrecognized setting for s32_plant_share, please select a value between 0 and 1.";
+  abort "Invalid setting for s32_plant_share.";
 );
 
 ** Calculation of Single rotation model rotation lengths

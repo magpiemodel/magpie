@@ -5,6 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+** Set multiplier values for cost of harvesting from natural vegetation
+p73_cost_multiplier(land_natveg) = s73_cost_multiplier;
+p73_cost_multiplier("primforest") = s73_cost_multiplier*s73_cost_multiplier;
+
 ** Set historical values to FAO values
 p73_forestry_demand_prod_specific(t_past,iso,total_wood_products) = f73_prod_specific_timber(t_past,iso,total_wood_products);
 
