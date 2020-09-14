@@ -14,14 +14,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
  - **modules** added endogenous implementation of local biophysical (bph) impacts of afforestation to existing realizations in modules 32_forestry (dynamic_oct19) and 56_ghg_policy (price_jan20). default = off
  - **73_timber** Added timber module which brings the ability of producing woody biomass for timber plantations and natural vegetation. Default = off.
- - **32_forestry** New realization for timber production from timber plantations. This builds up on previous forestry realization for afforestation.
- - **35_natveg** New realization for timber production from natural vegetation. New forest protection scenario.
+ - **32_forestry** New realization `dynamic_may20` for forestry land use dynamics. This builds up on previous forestry realization for afforestation.
+ - **35_natveg** New realization `dynamic_may20` for natural vegetation land use dynamics. New forest protection scenario.
  - **52_carbon** Added interface which is used for calculating additional investment needed in plantations when carbon stocks are lower than a specified threshold.
  - **57_maccs** Added MACCs from Harmsen PBL 2019
  - **15_food** Added the option to include calories from alcohol consumption in healthy and sustainable EAT-Lancet diets.
  - **scripts** added start script for making timber production runs (forestry.R)
- - **switch** Allowing for constant or increasing area of timber plantations area after 2020, allowing to fix a static portion of overall timber production coming from plantations, added for allowing a using a forward looking or myopic timber demand for plantation establishment
- - **scalars** Global interest rate for timber plantation's rotation length calculation, additional investment needed to setup timber plantations in unproductive cells.
+ - **switch** `s32_fix_plant`, `c32_interest_rate` in module **32_forestry**. `s73_foresight` in module **73_timber**
+ - **scalars** `s32_plant_share`, `s32_forestry_int_rate`, `s32_investment_cost`, `s52_plantation_threshold` in module **32_forestry**. `s73_timber_prod_cost`, `s73_timber_harvest_cost`,`s73_cost_multiplier`,`s73_free_prod_cost` in module **73_timber**. `s52_plantation_threshold` in **52_carbon**.
 
 ### changed
  - **scripts** updated selection routine for start and output scripts
