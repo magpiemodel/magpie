@@ -10,7 +10,7 @@
 #### Script to MAgPIE test runs ####
 ##########################################################
 
-library(lucode)
+library(gms)
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
@@ -24,7 +24,7 @@ cfg$gms$forestry  <- "static_sep16"
 
 fc_real <- c(mixed="mixed_feb17",fixed="fixed_per_ton_mar18", sticky="sticky_feb18")
 
-for(i in 1_length(fc_real)) {
+for(i in 1:length(fc_real)) {
   for(cc_nocc in c("nocc","cc")) {
     for (co2_price_path in c("BAU","POL")) {
 
