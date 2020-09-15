@@ -49,23 +49,28 @@
  					sum((j2,ac),
  							v35_other_expansion(j2,ac)
  						  + v35_other_reduction(j2,ac)
+ 						  + v35_secdforest_expansion(j2,ac)
  						  + v35_secdforest_reduction(j2,ac)
  						  + v35_primforest_reduction(j2));
 
- q35_other_expansion(j2,ac) ..
- 	v35_other_expansion(j2,ac) =g=
- 		v35_other(j2,ac) - pc35_other(j2,ac);
+ q35_other_expansion(j2,ac_est) ..
+ 	v35_other_expansion(j2,ac_est) =e=
+ 		v35_other(j2,ac_est) - pc35_other(j2,ac_est);
 
- q35_other_reduction(j2,ac) ..
- 	v35_other_reduction(j2,ac) =g=
- 		pc35_other(j2,ac) - v35_other(j2,ac);
+ q35_other_reduction(j2,ac_sub) ..
+ 	v35_other_reduction(j2,ac_sub) =e=
+ 		pc35_other(j2,ac_sub) - v35_other(j2,ac_sub);
 
- q35_secdforest_reduction(j2,ac) ..
- 	v35_secdforest_reduction(j2,ac) =g=
- 		pc35_secdforest(j2,ac) - v35_secdforest(j2,ac);
+ q35_secdforest_expansion(j2,ac_est) ..
+ 	v35_other_expansion(j2,ac_est) =e=
+ 		v35_secdforest(j2,ac_est) - pc35_secdforest(j2,ac_est);
+
+ q35_secdforest_reduction(j2,ac_sub) ..
+ 	v35_secdforest_reduction(j2,ac_sub) =e=
+ 		pc35_secdforest(j2,ac_sub) - v35_secdforest(j2,ac_sub);
 
  q35_primforest_reduction(j2) ..
- 	v35_primforest_reduction(j2) =g=
+ 	v35_primforest_reduction(j2) =e=
  		pcm_land(j2,"primforest") - vm_land(j2,"primforest");
 
 *******************************************************************************
@@ -75,30 +80,28 @@
 *' harvested area are received from the timber module [73_timber].
 
 
-*' Change in secondary forest compared to previous time step. Helps calculating
-*' production coming out of secondary forests.
+*' Harvested area from secondary forest 
 
-q35_secdforest_change(j2,ac_sub)..
-                           vm_secdforest_reduction(j2,ac_sub)
-                           =e=
-                           (pc35_secdforest(j2,ac_sub) - v35_secdforest(j2,ac_sub));
-
-
-*' Change in primary forest compared to previous time step. Helps calculating
-*' production coming out of primary forests.
-
-q35_primforest_change(j2)..
-                           vm_primforest_reduction(j2)
-                           =e=
-                           (pcm_land(j2,"primforest") - vm_land(j2,"primforest"));
+q35_hvarea_secdforest(j2,ac_sub)..
+                           vm_hvarea_secdforest(j2,ac_sub)
+                           =l=
+                           v35_secdforest_reduction(j2,ac_sub);
 
 
-*' Change in other land compared to previous time step. Helps calculating
-*' production of woodfuel coming out of other land.
-q35_other_change(j2,ac_sub)..
-                          vm_other_reduction(j2,ac_sub)
-                          =e=
-                          (pc35_other(j2,ac_sub)  - v35_other(j2,ac_sub));
+*' Harvested area from primary forest 
+
+q35_hvarea_primforest(j2)..
+                           vm_hvarea_primforest(j2)
+                           =l=
+                           v35_primforest_reduction(j2);
+
+
+*' Harvested area from other land
+
+q35_hvarea_other(j2,ac_sub)..
+                          vm_hvarea_other(j2,ac_sub)
+                          =l=
+                          v35_other_reduction(j2,ac_sub);
 
 
 *' Harvested secondary forest is still considered secondary forests due to

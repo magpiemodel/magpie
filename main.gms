@@ -145,60 +145,60 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
-* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev48_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: b07787909a9339225fd097c813277b19
-* Repository: /p/projects/landuse/data/input/archive
-* 
-* Used data set: rev4.51_h12_magpie.tgz
-* md5sum: 7d380cccd273baf44d169492b08cd98e
-* Repository: /p/projects/rd3mod/inputdata/output
-* 
-* Used data set: rev4.51_h12_validation.tgz
-* md5sum: 99e4aaca789892fc44896d4fcd0e0459
-* Repository: /p/projects/rd3mod/inputdata/output
-* 
+*
+* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev46_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+*
+* Used data set: rev4.52_h12_magpie.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+*
+* Used data set: rev4.52_h12_validation.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+*
 * Used data set: calibration_H12_c200_26Feb20.tgz
-* md5sum: 0fc75955deb5916d4ac078e8d817feda
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/intern
-* 
-* Used data set: additional_data_rev3.85.tgz
-* md5sum: 23bc2b7ff07da84b798d741c3d2ad3d2
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/intern
-* 
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+*
+* Used data set: additional_data_rev3.86.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+*
 * Low resolution: c200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    28   24   10    7    3   53   17    8   22    7   11   10
-* 
+*
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-* 
-* Regions data revision: 4.51
-* 
+*
+* Regions data revision: 4.52
+*
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
-* * Additional input folder: /p/projects/landuse/data/input/other/rev48
-* * Revision: 48
+* * Additional input folder: /p/projects/landuse/data/input/other/rev46
+* * Revision: 46
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-* 
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
-* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev48_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev48_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev46_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev46_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = cfg$spamfile, debug = FALSE, seed = cfg$seed)
-* 
-* 
-* 
-* Last modification (input data): Thu Sep  3 10:35:15 2020
-* 
+*
+*
+*
+* Last modification (input data): Thu Sep 10 09:59:16 2020
+*
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
