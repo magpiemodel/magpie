@@ -115,6 +115,15 @@ For post-processing model outputs *Latex* is required
 (https://www.latex-project.org/get/). To be seen by the model it also needs to
 added to the PATH variable of your system.
 
+To use Docker, build the magpie image using the command
+```
+sudo docker build -t magpie .
+```
+and run the container interactively using
+```
+sudo docker run -it magpie
+```
+
 ## HOW TO CONFIGURE
 Model run settings are set in `config/default.cfg` (or another config file of
 the same structure). New model scenarios can be created by adding a column to
