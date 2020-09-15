@@ -19,7 +19,7 @@ for (i in 1:length(resolutions)){
 for(j in 1:length(realization)){
 
 #Change the results folder name
-cfg$title<-paste0("LPjmL_Tests_",realization[j],"_HadGEM2_ES","_","rcp2p6","_CO2")
+cfg$title<-paste0("LPjmL_Tests_",realization[j],"_HadGEM2_ES","_","rcp6p0","_CO2")
 
 
 #recalibrate
