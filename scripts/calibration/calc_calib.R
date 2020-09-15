@@ -12,7 +12,7 @@
 
 calibration_run<-function(putfolder,calib_magpie_name,logoption=3){
 
-  require(lucode)
+  require(lucode2)
 
   # create putfolder for the calib run
   unlink(putfolder,recursive=TRUE)
@@ -25,8 +25,8 @@ calibration_run<-function(putfolder,calib_magpie_name,logoption=3){
   if(!file.copy("main.gms",paste(calib_magpie_name,".gms",sep=""))){
     stop(paste("Unable to create",paste(calib_magpie_name,".gms",sep="")))
   }
-  manipulateConfig(paste(calib_magpie_name,".gms",sep=""),c_timesteps=1)
-  manipulateConfig(paste(calib_magpie_name,".gms",sep=""),s_use_gdx=0)
+  lucode2::manipulateConfig(paste(calib_magpie_name,".gms",sep=""),c_timesteps=1)
+  lucode2::manipulateConfig(paste(calib_magpie_name,".gms",sep=""),s_use_gdx=0)
   file.copy(paste(calib_magpie_name,".gms",sep=""),putfolder)
 
   # execute calibration run

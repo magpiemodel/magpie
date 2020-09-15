@@ -6,21 +6,26 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 positive variables
- vm_cost_fore(i)                 Afforestation costs (mio. USD04MER per yr)
- vm_landdiff_forestry            Aggregated difference in forestry land compared to previous timestep (mio. ha)
- v32_land(j,type32,ac)           Forestry land pools (mio. ha)
- vm_cdr_aff(j,ac)   	         Expected CDR from afforestation depending on planning horizon (mio. tC)
+ vm_cost_fore(i)                    Forestry costs (Mio USD)
+ vm_landdiff_forestry            	Aggregated difference in forestry land compared to previous timestep (mio. ha)
+ v32_land(j,type32,ac)           	Forestry land pools (mio. ha)
+ vm_cdr_aff(j,ac,aff_effect) 		Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
+  v32_land_reduction(j,type32,ac)                    Forestry land reduction (mio. ha)
+ vm_hvarea_forestry(j,ac)                    		Harvested area from timber plantations (mio. ha)
 ;
 
 parameters
  pc32_carbon_density(j,ag_pools) Above ground carbon density in optimization (tC per ha)
+ pm_representative_rotation(t_all,i)                Representative regional rotation (1)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_fore(t,i,type)        Afforestation costs (mio. USD04MER per yr)
- ov_landdiff_forestry(t,type)  Aggregated difference in forestry land compared to previous timestep (mio. ha)
- ov32_land(t,j,type32,ac,type) Forestry land pools (mio. ha)
- ov_cdr_aff(t,j,ac,type)       Expected CDR from afforestation depending on planning horizon (mio. tC)
+ ov_cost_fore(t,i,type)                  Forestry costs (Mio USD)
+ ov_landdiff_forestry(t,type)            Aggregated difference in forestry land compared to previous timestep (mio. ha)
+ ov32_land(t,j,type32,ac,type)           Forestry land pools (mio. ha)
+ ov_cdr_aff(t,j,ac,aff_effect,type)      Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
+ ov32_land_reduction(t,j,type32,ac,type) Forestry land reduction (mio. ha)
+ ov_hvarea_forestry(t,j,ac,type)         Harvested area from timber plantations (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
