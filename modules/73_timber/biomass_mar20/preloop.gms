@@ -25,6 +25,12 @@ loop(t_all$(m_year(t_all) >= 2010 AND m_year(t_all) < 2150),
 );
 p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)$(im_gdp_pc_ppp_iso(t_all,iso)=0) = 0.0001;
 
+$ifthen "%c73_paper_scen%" == "nopaper"
+p73_forestry_demand_prod_specific(t_all,iso,"wood_pulp") = p73_forestry_demand_prod_specific(t_all,iso,"wood_pulp") * f73_diminish_paper(t_all);
+$elseif "%c73_paper_scen%" == "paper"
+p73_forestry_demand_prod_specific(t_all,iso,"wood_pulp") = p73_forestry_demand_prod_specific(t_all,iso,"wood_pulp");
+$endif
+
 p73_timber_demand_gdp_pop(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to_woodprod(kforestry,total_wood_products)),p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)) * s73_demand_switch;
 
 ** Woodfuel fix
