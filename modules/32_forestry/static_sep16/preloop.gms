@@ -10,7 +10,7 @@
 vm_cost_fore.fx(i) = 0;
 vm_cdr_aff.fx(j,ac,aff_effect) = 0;
 
-*' All forestry land pools (aff, ndc, plant) are fixed to zero, 
+*' All forestry land pools (aff, ndc, plant) are fixed to zero,
 *' except forestry plantations, which are fixed to the level of 1995.
 v32_land.fx(j,type32,ac) = 0;
 v32_land.fx(j,"plant","acx") = pcm_land(j,"forestry");
@@ -19,11 +19,12 @@ v32_land.fx(j,"plant","acx") = pcm_land(j,"forestry");
 * Aggregation of forestry land pools (`land32`).
 vm_land.fx(j,"forestry") = sum((type32,ac), v32_land.l(j,type32,ac));
 
-* The change of forestry land is also set to zero. 
+* The change of forestry land is also set to zero.
 vm_landdiff_forestry.fx = 0;
-vm_forestry_reduction.fx(j,type32,ac) = 0;
+v32_land_reduction.fx(j,type32,ac) = 0;
+vm_hvarea_forestry.fx(j,ac) = 0;
 
-* A plausible guess is needed here. 
-pm_representative_rotation(t_all,i) = 1;
+* Assuming 30y rotation in static case.
+pm_representative_rotation(t_all,i) = 30;
 
 *** EOF preloop.gms ***

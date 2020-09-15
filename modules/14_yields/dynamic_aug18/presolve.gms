@@ -43,7 +43,7 @@ p14_growing_stock(t,j,ac,land_natveg,"natveg") =
 p14_growing_stock(t,j,ac,land_natveg,"natveg") = p14_growing_stock(t,j,ac,land_natveg,"natveg")$(p14_growing_stock(t,j,ac,land_natveg,"natveg")>0)+0.0001$(p14_growing_stock(t,j,ac,land_natveg,"natveg")=0);
 p14_growing_stock(t,j,ac,"forestry","plantations") = p14_growing_stock(t,j,ac,"forestry","plantations")$(p14_growing_stock(t,j,ac,"forestry","plantations")>0)+0.0001$(p14_growing_stock(t,j,ac,"forestry","plantations")=0);
 
-** Used in equations -- Annual value hence division by timestep
+** Used in equations
 ***************************************************************
 ** If the plantation yield switch is on, forestry yields are treated are plantation yields
 pm_timber_yield(t,j,ac,"forestry")$(s14_timber_plantation_yield = 1) = p14_growing_stock(t,j,ac,"forestry","plantations") ;
