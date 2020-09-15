@@ -115,11 +115,12 @@ For post-processing model outputs *Latex* is required
 (https://www.latex-project.org/get/). To be seen by the model it also needs to
 added to the PATH variable of your system.
 
-To use Docker, build the magpie image using the command
+To use Docker, copy your `gamslice.txt`
+into the MAgPIE main directory, and build the magpie image using the command
 ```
 sudo docker build -t magpie .
 ```
-and run the container interactively using
+Run the container interactively using
 ```
 sudo docker run -it magpie
 ```
