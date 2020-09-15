@@ -13,15 +13,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **38_factor_costs** Added the new "sticky" realization to the factor costs module. The realization "sticky_feb18" favors expansion in cells with preexisting farmland and capital based on capital investment decisions.
 
  - **modules** added endogenous implementation of local biophysical (bph) impacts of afforestation to existing realizations in modules 32_forestry (dynamic_oct19) and 56_ghg_policy (price_jan20). default = off
- - **73_timber** Added timber module which brings the ability of producing woody biomass for timber plantations and natural vegetation. Default = off.
- - **32_forestry** New realization `dynamic_may20` for forestry land use dynamics. This builds up on previous forestry realization for afforestation.
+ - **73_timber** Added timber module which brings the ability of producing woody biomass for timber plantations and natural vegetation. Default = off. New switch: `s73_foresight`. New scalars : `s73_timber_prod_cost`, `s73_timber_harvest_cost`,`s73_cost_multiplier`,`s73_free_prod_cost`
+ - **32_forestry** New realization `dynamic_may20` for forestry land use dynamics. This builds up on previous forestry realization for afforestation. New switches: `s32_fix_plant`, `c32_interest_rate`. New scalars : `s32_plant_share`, `s32_forestry_int_rate`, `s32_investment_cost`, `s52_plantation_threshold`.
  - **35_natveg** New realization `dynamic_may20` for natural vegetation land use dynamics. New forest protection scenario.
- - **52_carbon** Added interface which is used for calculating additional investment needed in plantations when carbon stocks are lower than a specified threshold.
+ - **52_carbon** Added interface which is used for calculating additional investment needed in plantations when carbon stocks are lower than a specified threshold. New scalar: `s52_plantation_threshold`.
  - **57_maccs** Added MACCs from Harmsen PBL 2019
  - **15_food** Added the option to include calories from alcohol consumption in healthy and sustainable EAT-Lancet diets.
- - **scripts** added start script for making timber production runs (forestry.R)
- - **switch** `s32_fix_plant`, `c32_interest_rate` in module **32_forestry**. `s73_foresight` in module **73_timber**
- - **scalars** `s32_plant_share`, `s32_forestry_int_rate`, `s32_investment_cost`, `s52_plantation_threshold` in module **32_forestry**. `s73_timber_prod_cost`, `s73_timber_harvest_cost`,`s73_cost_multiplier`,`s73_free_prod_cost` in module **73_timber**. `s52_plantation_threshold` in **52_carbon**.
+ - **scripts** added start script for making timber production runs (forestry.R).
 
 ### changed
  - **scripts** updated selection routine for start and output scripts

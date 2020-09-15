@@ -7,7 +7,7 @@ parameters
  p32_aff_pol(t,j)                                   NDC forest stock (mio. ha)
  p32_aff_pol_timestep(t,j)                          NDC afforestation per time step (mio. ha)
  p32_aff_pot(t,j)                                   Potential afforestation area (mio. ha)
- p32_aff_togo(t)              		                  Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
+ p32_aff_togo(t)                                    Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
  p32_carbon_density_ac(t,j,type32,ac,ag_pools)      Carbon density for ac and ag_pools (tC per ha)
  p32_carbon_density_ac_forestry(t_all,j,ac)         Above ground carbon density for age classes and carbon pools (tC per ha)
  p32_carbon_density_ac_marg(t_all,j,ac)             Marginal above ground carbon density for age classes and carbon pools (tC per ha)
@@ -21,9 +21,9 @@ parameters
  p32_rot_length_ac_eqivalent(t_all,j)               Cellular rotation length of plantations translated to age class equivalent for future (1)
  p32_rotation_cellular_estb(t_all,j)                Establishment rotation length translated to age classes on cellular level (1)
  p32_rotation_cellular_harvesting(t_all,j)          Harvesting rotation length of plantations translated to age class equivalent for future (1)
- p32_cdr_ac(t,j,ac)						                      Non-cumulative CDR from afforestation plantations for each age-class depending on planning horizon (tC per ha)
- p32_cdr_ac_plant(t,j,ac)						                Non-cumulative CDR from timber plantations for each age-class depending on planning horizon (tC per ha)
- p32_rotation_offset                                offset calc in age class equivalents (1)
+ p32_cdr_ac(t,j,ac)                                 Non-cumulative CDR from afforestation plantations for each age-class depending on planning horizon (tC per ha)
+ p32_cdr_ac_plant(t,j,ac)                           Non-cumulative CDR from timber plantations for each age-class depending on planning horizon (tC per ha)
+ p32_rotation_offset                                Offset calc in age class equivalents (1)
  p32_land_start_ac(j,type32,ac)                     Saving first value of starting land (mio. ha)
  p32_land_before(t,j,type32,ac)                     Saving time value of starting land (mio. ha)
  p32_time(ac)                                       Time as a function of age-classes (yr)
@@ -43,7 +43,7 @@ parameters
 
 positive variables
  vm_cost_fore(i)                                    Forestry costs (Mio USD)
- v32_land(j,type32,ac)                          	  Forestry land pools (mio. ha)
+ v32_land(j,type32,ac)                              Forestry land pools (mio. ha)
  v32_land_missing(j)                                Forestry land which can be used at extrmemly high costs in case not enough area is available for new establishment (mio. ha)
  vm_landdiff_forestry                               Aggregated difference in forestry land compared to previous timestep (mio. ha)
  v32_cost_recur(i)                                  Recurring forest management costs (USD per ha)
@@ -51,11 +51,11 @@ positive variables
  v32_land_reduction(j,type32,ac)                    Forestry land reduction (mio. ha)
  v32_cost_establishment(i)                          Cost of establishment calculated at the current time step (mio. USD)
  v32_cost_extra_investment(j)                       Extra investment needed for establishing plantations in unproductive areas (mio. USD)
- vm_hvarea_forestry(j,ac)                    		    Harvested area from timber plantations (mio. ha)
+ vm_hvarea_forestry(j,ac)                           Harvested area from timber plantations (mio. ha)
  ;
 
 variables
- vm_cdr_aff(j,ac,aff_effect) 						            Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
+ vm_cdr_aff(j,ac,aff_effect)                        Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
  ;
 
 equations
@@ -66,17 +66,17 @@ equations
  q32_land_diff                                      Aggregated difference in forestry land compared to previous timestep (mio. ha)
  q32_max_aff                                        Maximum total global afforestation (mio. ha)
  q32_aff_pol(j)                                     Afforestation policy constraint (mio. ha)
- q32_aff_est(j)							                        Afforestation constraint for establishment age classes (mio. ha)
- q32_hvarea_forestry(j,ac)	            			      Plantations area harvest (mio. ha)
+ q32_aff_est(j)                                     Afforestation constraint for establishment age classes (mio. ha)
+ q32_hvarea_forestry(j,ac)                          Plantations area harvest (mio. ha)
  q32_cost_recur(i)                                  Recurruing costs (mio. USD)
  q32_establishment_max_glo                          Establishment in current time step for future demand (mio. ha)
  q32_establishment_min_glo                          Establishment in current time step for future demand (mio. ha)
  q32_establishment_min_reg(i)                       Establishment in current time step for future demand (mio. ha)
- q32_land_expansion(j,type32,ac)                	  Land expansion (mio. ha)
- q32_land_reduction(j,type32,ac)                	  Land contraction (mio. ha)
+ q32_land_expansion(j,type32,ac)                    Land expansion (mio. ha)
+ q32_land_reduction(j,type32,ac)                    Land contraction (mio. ha)
  q32_cost_establishment(i)                          Present value of cost of establishment (mio. USD)
  q32_bgp_aff(j,ac)                                  Biophysical afforestation calculation (mio. tCeq)
- q32_forestry_est(j,type32,ac)						          Distribution of forestry establishment over ac_est (mio. ha)
+ q32_forestry_est(j,type32,ac)                      Distribution of forestry establishment over ac_est (mio. ha)
  q32_fix_plant_area(j)                              Fixation of cellular plantation area based on area fix switch (mio. ha)
  q32_cost_extra_investment(j)                       Extra investment needed for establishing plantations in unproductive areas (mio. USD)
 ;
