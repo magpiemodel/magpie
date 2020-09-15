@@ -5,10 +5,10 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
-
-######################################
-#### Script to start a MAgPIE run ####
-######################################
+# ------------------------------------------------
+# description: start run with default.cfg settings
+# position: 1
+# ------------------------------------------------
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")

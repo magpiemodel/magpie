@@ -1,0 +1,3 @@
+description: Project-specific MAgPIE output scripts
+note: Scripts in this selection might require some manual adjustments before they work with the given MAgPIE version as they are not necessarily updated along with changes in the model code. Please provide a yml header to your script specifying "description" and "comparison script", otherwise it may not be processed correctly.
+position: 3.0
