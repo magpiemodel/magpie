@@ -56,7 +56,7 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "P41"
+identifier_flag = "A01"
 
 cat(paste0("Lord mighty of GAMS please make it run"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
