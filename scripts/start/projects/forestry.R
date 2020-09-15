@@ -62,7 +62,7 @@ cat(paste0("Lord mighty of GAMS please make it run"), file=paste0(log_folder,"/"
 
 xx <- c()
 
-for(c73_paper_scen in c("paper","nopaper")){
+for(c73_paper_scen in c("construction")){
   cfg$gms$c73_paper_scen <- c73_paper_scen
   for(s73_foresight in c(0)){
     cfg$gms$s73_foresight = s73_foresight

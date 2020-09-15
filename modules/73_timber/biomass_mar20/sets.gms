@@ -24,6 +24,11 @@ sawnwood,
 other_industrial_roundwood
 /
 
+construction_wood(total_wood_products)        Wood products used for building construction
+/
+fibreboard,particle_board_and_osb,plywood,veneer_sheets,sawnwood
+/
+
 wood_panels(wood_products)        Wood products used for panels construction
 /
 fibreboard,particle_board_and_osb,plywood,veneer_sheets
@@ -33,6 +38,11 @@ kforestry_to_woodprod(kforestry,total_wood_products) Mapping between intermediat
 /
 wood . (fibreboard,particle_board_and_osb,plywood,veneer_sheets,wood_pulp,sawnwood,other_sawnwood,other_industrial_roundwood)
 woodfuel . (wood_fuel)
+/
+
+scen_73 Forestry future scenario
+/
+nopaper, construction
 /
 
 ;

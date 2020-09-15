@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 $setglobal c73_paper_scen paper
-* options paper, nopaper
+* options paper, nopaper, construction
 
 scalars
   s73_timber_prod_cost      Cost for produccing a unit of timber (USD per tDM) / 2000/
@@ -39,10 +39,8 @@ $offdelim
 /
 ;
 
-parameter f73_diminish_paper(t_ext) Factor diminishing paper use  (1)
-/
+table f73_diminish_paper(t_ext,scen_73) Factor diminishing paper use  (1)
 $ondelim
 $include "./modules/73_timber/input/f73_diminish_paper.csv"
 $offdelim
-/
 ;
