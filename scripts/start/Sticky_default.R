@@ -12,24 +12,35 @@ source("config/default.cfg")
 resolutions<-c("200")
 #Factor cost realizations
 realization<-c("mixed_feb17","sticky_feb18")
-
+climate<-"cc"
 
 
 for (i in 1:length(resolutions)){
 for(j in 1:length(realization)){
 
 #Change the results folder name
-cfg$title<-paste0("LPjmL_Tests_",realization[j],"_c",resolutions[i])
+cfg$title<-paste0("LPjmL_Tests_",realization[j],"_HadGEM2_ES","_","rcp2p6","_CO2")
 
 
 #recalibrate
 cfg$recalibrate <- TRUE
 
+#recalc_npi_ndc
+cfg$recalc_npi_ndc <- TRUE
+
+#forestry
+cfg$gms$forestry  <- "static_sep16"
 
 
 #Factor costs realization
 cfg$gms$factor_costs <- realization[j]
 
+#Climate impact or not
+  cfg$gms$c14_yields_scenario  <- climate
+  cfg$gms$c42_watdem_scenario  <- climate
+  cfg$gms$c43_watavail_scenario<- climate
+  cfg$gms$c52_carbon_scenario  <- climate
+  cfg$gms$c59_som_scenario  <- climate
 
 start_run(cfg=cfg)
 }}
