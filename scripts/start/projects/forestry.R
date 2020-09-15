@@ -62,54 +62,57 @@ cat(paste0("Lord mighty of GAMS please make it run"), file=paste0(log_folder,"/"
 
 xx <- c()
 
-for(s73_foresight in c(0)){
-  cfg$gms$s73_foresight = s73_foresight
+for(c73_paper_scen in c("paper","nopaper")){
+  cfg$gms$c73_paper_scen <- c73_paper_scen
+  for(s73_foresight in c(0)){
+    cfg$gms$s73_foresight = s73_foresight
 
-  if(s73_foresight == 1) foresight_flag = "Forward"
-  if(s73_foresight != 1) foresight_flag = "Myopic"
+    if(s73_foresight == 1) foresight_flag = "Forward"
+    if(s73_foresight != 1) foresight_flag = "Myopic"
 
-  for(s32_plant_share in c(0.25)){
-    cfg$gms$s32_plant_share = s32_plant_share
+    for(s32_plant_share in c(0.25)){
+      cfg$gms$s32_plant_share = s32_plant_share
 
-    plant_share_flag <- paste0(s32_plant_share*100,"pc")
+      plant_share_flag <- paste0(s32_plant_share*100,"pc")
 
-    for(s32_fix_plant in c(0,1)){
+      for(s32_fix_plant in c(0)){
 
-      cfg$gms$s32_fix_plant = s32_fix_plant
+        cfg$gms$s32_fix_plant = s32_fix_plant
 
-      if(s32_fix_plant == 0) plant_area_flag = "Incr2020"
-      if(s32_fix_plant == 1) plant_area_flag = "Const2020"
+        if(s32_fix_plant == 0) plant_area_flag = "Incr2020"
+        if(s32_fix_plant == 1) plant_area_flag = "Const2020"
 
-      for(s32_initial_distribution in c(1)){
+        for(s32_initial_distribution in c(1)){
 
-        cfg$gms$s32_initial_distribution  = s32_initial_distribution
-        cfg$gms$s73_demand_switch         = s32_initial_distribution
+          cfg$gms$s32_initial_distribution  = s32_initial_distribution
+          cfg$gms$s73_demand_switch         = s32_initial_distribution
 
-        if(s32_initial_distribution == 1) timber_flag = "timberON"
-        if(s32_initial_distribution == 0) timber_flag = "timberOFF"
+          if(s32_initial_distribution == 1) timber_flag = "timberON"
+          if(s32_initial_distribution == 0) timber_flag = "timberOFF"
 
-        for(emis_policy in c("redd+_nosoil")){
+          for(emis_policy in c("redd+_nosoil")){
 
-          for(ssp in c("SSP1","SSP2","SSP3")){
-            if(emis_policy == "redd+_nosoil") cfg$gms$s32_plant_carbon_foresight = 1
-            if(emis_policy == "ssp_nosoil")   cfg$gms$s32_plant_carbon_foresight = 0
+            for(ssp in c("SSP2")){
+              if(emis_policy == "redd+_nosoil") cfg$gms$s32_plant_carbon_foresight = 1
+              if(emis_policy == "ssp_nosoil")   cfg$gms$s32_plant_carbon_foresight = 0
 
-            cfg                           = setScenario(cfg,c(ssp,"NPI"))
-            cfg$gms$c56_emis_policy       = emis_policy
-            cfg$gms$c56_pollutant_prices  = "R2M41-SSP2-NPi" ## Update to most recent coupled runs asap
-            cfg$gms$c57_macc_version      = "PBL_2019"       ## Why is this not default?
-            cfg$gms$c60_2ndgen_biodem     = "R2M41-SSP2-NPi" ## Update to most recent coupled runs asap
-            pol_flag                      = "REDD+"
-            co2_price_path_flag           = "Baseline"
+              cfg                           = setScenario(cfg,c(ssp,"NPI"))
+              cfg$gms$c56_emis_policy       = emis_policy
+              cfg$gms$c56_pollutant_prices  = "R2M41-SSP2-NPi" ## Update to most recent coupled runs asap
+              cfg$gms$c57_macc_version      = "PBL_2019"       ## Why is this not default?
+              cfg$gms$c60_2ndgen_biodem     = "R2M41-SSP2-NPi" ## Update to most recent coupled runs asap
+              pol_flag                      = "REDD+"
+              co2_price_path_flag           = "Baseline"
 
-            if(s32_fix_plant == 1 && s73_foresight == 1) break
+              if(s32_fix_plant == 1 && s73_foresight == 1) break
 
-            cfg$title   = paste0(identifier_flag,"_",ssp,"_",plant_area_flag)
+              cfg$title   = paste0(identifier_flag,"_",ssp,"_",cfg$gms$c73_paper_scen)
 
-            cfg$output  = c("rds_report","extra/force_runstatistics")
+              cfg$output  = c("rds_report","extra/force_runstatistics")
 
-             xx = c(xx,cfg$title)
-             start_run(cfg,codeCheck=FALSE)
+               xx = c(xx,cfg$title)
+               start_run(cfg,codeCheck=FALSE)
+            }
           }
         }
       }
