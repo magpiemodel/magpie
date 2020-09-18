@@ -12,14 +12,22 @@ source("config/default.cfg")
 resolutions<-c("200")
 #Factor cost realizations
 realization<-c("mixed_feb17","sticky_feb18")
-climate<-"nocc"
+climate<-c("nocc","cc")
 
 
-for (i in 1:length(resolutions)){
+for (i in 1:length(climate)){
 for(j in 1:length(realization)){
 
+
+#Inputs
+cfg$input <- c("rev4.47+mrmagpie6_h12_magpie.tgz",
+               "rev4.47+mrmagpie6_h12_cfc9a5551f05ca4efc6cbc7016516432_cellularmagpie.tgz",
+               "rev4.47+mrmagpie6_h12_validation.tgz",
+               "additional_data_rev3.85.tgz")
+
+
 #Change the results folder name
-cfg$title<-paste0("LPjmL_Tests_",realization[j],"_HadGEM2_ES","_","rcp6p0","_CO2_nocc")
+cfg$title<-paste0("LPjmL_Tests_",realization[j],"_c200","_HadGEM2_ES","_","rcp6p0","_CO2_",climate[i])
 
 
 #recalibrate
@@ -36,11 +44,11 @@ cfg$gms$forestry  <- "static_sep16"
 cfg$gms$factor_costs <- realization[j]
 
 #Climate impact or not
-  cfg$gms$c14_yields_scenario  <- climate
-  cfg$gms$c42_watdem_scenario  <- climate
-  cfg$gms$c43_watavail_scenario<- climate
-  cfg$gms$c52_carbon_scenario  <- climate
-  cfg$gms$c59_som_scenario  <- climate
+  cfg$gms$c14_yields_scenario  <- climate[i]
+  cfg$gms$c42_watdem_scenario  <- climate[i]
+  cfg$gms$c52_carbon_scenario  <- climate[i]
+  cfg$gms$c43_watavail_scenario<- climate[i]
+  cfg$gms$c59_som_scenario  <- climate[i]
 
 start_run(cfg=cfg)
 }}
