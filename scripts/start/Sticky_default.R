@@ -12,14 +12,14 @@ source("config/default.cfg")
 resolutions<-c("200")
 #Factor cost realizations
 realization<-c("mixed_feb17","sticky_feb18")
-climate<-"cc"
+climate<-"nocc"
 
 
 for (i in 1:length(resolutions)){
 for(j in 1:length(realization)){
 
 #Change the results folder name
-cfg$title<-paste0("LPjmL_Tests_",realization[j],"_HadGEM2_ES","_","rcp6p0","_CO2")
+cfg$title<-paste0("LPjmL_Tests_",realization[j],"_HadGEM2_ES","_","rcp6p0","_CO2_nocc")
 
 
 #recalibrate
