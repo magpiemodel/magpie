@@ -26,6 +26,8 @@ land_hr_file               <- path(outputdir,"avl_land_t_0.5.mz")
 land_hr_out_file           <- path(outputdir,"cell.land_0.5.mz")
 land_hr_share_out_file     <- path(outputdir,"cell.land_0.5_share.mz")
 croparea_hr_share_out_file <- path(outputdir,"cell.croparea_0.5_share.mz")
+land_hr_split_file         <- path(outputdir,"cell.land_split_0.5.mz")
+land_hr_shr_split_file     <- path(outputdir,"cell.land_split_0.5_share.mz")
 ################################################################################
 
 if(length(map_file)==0) stop("Could not find map file!")
@@ -84,3 +86,38 @@ area_shr_hr <- .dissagcrop(gdx, land_hr, map=map_file)
 .tmpwrite(area_shr_hr, croparea_hr_share_out_file,
           comment="unit: grid-cell land area fraction",
           message="Write outputs cell.cropara_share")
+
+
+.cropsplit <- function(area_shr_hr, land_hr, land_hr_split_file,
+                       land_hr_shr_split_file) {
+  land_hr <- land_hr[,getYears(area_shr_hr),]
+  area_hr <- area_shr_hr*dimSums(land_hr, dim=3)
+
+  # replace crop in land_hr in with crop_kfo_rf, crop_kfo_ir, crop_kbe_rf
+  # and crop_kbe_ir
+  kbe <- c("betr","begr")
+  kfo <- setdiff(getNames(area_hr,dim=1),kbe)
+  crop_kfo_rf <- setNames(dimSums(area_hr[,,kfo][,,"rainfed"],dim=3),
+                          "crop_kfo_rf")
+  crop_kfo_ir <- setNames(dimSums(area_hr[,,kfo][,,"irrigated"],dim=3),
+                          "crop_kfo_ir")
+  crop_kbe_rf <- setNames(dimSums(area_hr[,,kbe][,,"rainfed"],dim=3),
+                          "crop_kbe_rf")
+  crop_kbe_ir <- setNames(dimSums(area_hr[,,kbe][,,"irrigated"],dim=3),
+                          "crop_kbe_ir")
+  crop_hr <- mbind(crop_kfo_rf,crop_kfo_ir,crop_kbe_rf,crop_kbe_ir)
+  #drop crop
+  land_hr <- land_hr[,,"crop",invert=TRUE]
+  #combine land_hr with crop_hr.
+  land_hr <- mbind(crop_hr,land_hr)
+  #write landpool
+  .tmpwrite(land_hr, land_hr_split_file,
+            comment="unit: Mha per grid-cell",
+            message="Write cropsplit land area")
+
+  .tmpwrite(land_hr/dimSums(land_hr,dim=3), land_hr_shr_split_file,
+            comment="unit: grid-cell land area fraction",
+            message="Write cropsplit land area share")
+}
+
+.cropsplit(area_shr_hr, land_hr, land_hr_split_file,land_hr_shr_split_file)
