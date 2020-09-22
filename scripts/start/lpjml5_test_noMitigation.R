@@ -29,7 +29,7 @@ for (k in 1:length(clustering)){
                  "rev4.47+mrmagpie7_h12_238dd4e69b15586dde74376b6b84cdec_cellularmagpie_debug.tgz",
                  "rev4.47+mrmagpie6_h12_validation.tgz",
                  "additional_data_rev3.85.tgz",
-                 paste0("calibration_H12_",factors[j],"_feb18_21Sep20.tgz")
+                 paste0("calibration_H12_",realization[j],"_21Sep20.tgz")
                 )
 
         }else if(clustering=="n200"){
@@ -38,7 +38,7 @@ for (k in 1:length(clustering)){
                  "rev4.47+mrmagpie7_h12_4ade54491b634b981be2d6c4a0d17706_cellularmagpie_debug.tgz",
                  "rev4.47+mrmagpie6_h12_validation.tgz",
                  "additional_data_rev3.85.tgz",
-                paste0("calibration_H12_",factors[j],"_feb18_21Sep20.tgz")
+                paste0("calibration_H12_",realization[j],"_21Sep20.tgz")
               )
         }
 
