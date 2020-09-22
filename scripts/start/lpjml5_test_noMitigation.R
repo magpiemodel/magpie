@@ -23,7 +23,7 @@ for (k in 1:length(clustering)){
 
 
         #Inputs
-        if(clustering=="c200"){
+        if(clustering[k]=="c200"){
 
           cfg$input <- c("rev4.47+mrmagpie6_h12_magpie.tgz",
                  "rev4.47+mrmagpie7_h12_238dd4e69b15586dde74376b6b84cdec_cellularmagpie_debug.tgz",
@@ -32,7 +32,7 @@ for (k in 1:length(clustering)){
                  paste0("calibration_H12_",realization[j],"_21Sep20.tgz")
                 )
 
-        }else if(clustering=="n200"){
+        }else if(clustering[k]=="n200"){
 
           cfg$input <- c("rev4.47+mrmagpie6_h12_magpie.tgz",
                  "rev4.47+mrmagpie7_h12_4ade54491b634b981be2d6c4a0d17706_cellularmagpie_debug.tgz",
