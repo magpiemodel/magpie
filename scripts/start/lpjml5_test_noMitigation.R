@@ -51,7 +51,7 @@ for (k in 1:length(clustering)){
         cfg$recalibrate <- FALSE
 
         #recalc_npi_ndc
-        cfg$recalc_npi_ndc <- TRUE
+        #cfg$recalc_npi_ndc <- TRUE
 
         #forestry
         cfg$gms$forestry  <- "static_sep16"
