@@ -1,4 +1,0 @@
-type: output script
-description: Deprecated scripts (will be deleted on 1st Sep 2020)
-note: Scripts in this selection are deprecated and will soon be removed. Next scheduled deletion is on Sep 1st 2020. Please provide a yml header to your script specifying "description" and "comparison script", otherwise it may not be processed correctly.
-position: 10.0
