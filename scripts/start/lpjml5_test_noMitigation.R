@@ -9,11 +9,11 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 #List of clusterin types
-clustering<-c("n200")
+clustering<-c("n200","c200")
 
 #Factor cost realizations
-realization<-c("mixed_feb17")
-climate<-c("cc")
+realization<-c("mixed_feb17","sticky_feb18")
+climate<-c("cc","nocc")
 
 
 for (k in 1:length(clustering)){
