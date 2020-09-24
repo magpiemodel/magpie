@@ -25,7 +25,7 @@ for (k in 1:length(clustering)){
         if(clustering[k]=="c200"){
 
           cfg$input <- c("rev4.47+mrmagpie6_h12_magpie.tgz",
-                 "rev4.47+mrmagpie7_h12_238dd4e69b15586dde74376b6b84cdec_cellularmagpie_debug.tgz",
+                 "rev4.47+mrmagpie6_h12_cfc9a5551f05ca4efc6cbc7016516432_cellularmagpie.tgz",
                  "rev4.47+mrmagpie6_h12_validation.tgz",
                  "additional_data_rev3.85.tgz",
                  paste0("calibration_H12_",realization[j],"_21Sep20.tgz")
@@ -34,7 +34,7 @@ for (k in 1:length(clustering)){
         }else if(clustering[k]=="n200"){
 
           cfg$input <- c("rev4.47+mrmagpie6_h12_magpie.tgz",
-                 "rev4.47+mrmagpie7_h12_4ade54491b634b981be2d6c4a0d17706_cellularmagpie_debug.tgz",
+                 "rev4.47+mrmagpie6_h12_a6b8f5fe756c420d9f350b2b6fb8b4c2_cellularmagpie.tgz",
                  "rev4.47+mrmagpie6_h12_validation.tgz",
                  "additional_data_rev3.85.tgz",
                 paste0("calibration_H12_",realization[j],"_21Sep20.tgz")
@@ -43,7 +43,7 @@ for (k in 1:length(clustering)){
 
 
         #Change the results folder name
-        cfg$title<-paste0("LPj_T_",realization[j],"_",clustering[k],"_HadGEM2_ES","_","rcp2p6","_CO2_",climate[i])
+        cfg$title<-paste0("LPj_T_",realization[j],"_",clustering[k],"_HadGEM2_ES","_","rcp6p0","_CO2_",climate[i])
 
 
         #recalibrate
