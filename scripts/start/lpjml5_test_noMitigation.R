@@ -16,6 +16,7 @@ realization<-c("mixed_feb17","sticky_feb18")
 climate<-c("cc")
 AEI<-c("LUH2v2","Siebert")
 
+
 for (k in 1:length(clustering)){
   for (i in 1:length(AEI)){
     for(j in 1:length(realization)){
@@ -24,17 +25,17 @@ for (k in 1:length(clustering)){
         #Inputs
         if(clustering[k]=="c200"){
 
-          cfg$input <- c("rev4.47+mrmagpie6_h12_magpie.tgz",
+          cfg$input <- c("rev4.47+mrmagpie7_h12_magpie_debug.tgz",
                  "rev4.47+mrmagpie7_h12_238dd4e69b15586dde74376b6b84cdec_cellularmagpie_debug.tgz",
-                 "rev4.47+mrmagpie6_h12_validation.tgz",
+                 "rev4.47+mrmagpie7_h12_validation_debug.tgz",
                  "additional_data_rev3.85.tgz"
                 )
 
         }else if(clustering[k]=="n200"){
 
-          cfg$input <- c("rev4.47+mrmagpie6_h12_magpie.tgz",
+          cfg$input <- c("rev4.47+mrmagpie7_h12_magpie_debug.tgz",
                  "rev4.47+mrmagpie7_h12_4ade54491b634b981be2d6c4a0d17706_cellularmagpie_debug.tgz",
-                 "rev4.47+mrmagpie6_h12_validation.tgz",
+                 "rev4.47+mrmagpie7_h12_validation_debug.tgz",
                  "additional_data_rev3.85.tgz"
               )
         }
