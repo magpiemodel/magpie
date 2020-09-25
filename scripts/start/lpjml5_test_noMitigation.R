@@ -41,7 +41,7 @@ for (k in 1:length(clustering)){
 
 
         #Change the results folder name
-        cfg$title<-paste0("CalibRuns/LPj_T_CALIB_",realization[j],"_",clustering[k],"_",AEI[i],"_","rcp2p6","_CO2_",climate[i])
+        cfg$title<-paste0("LPj_T_CALIB_",realization[j],"_",clustering[k],"_",AEI[i],"_","rcp2p6","_CO2_",climate[i])
 
 
         #recalibrate
