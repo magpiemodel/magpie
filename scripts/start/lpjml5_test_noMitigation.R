@@ -13,7 +13,7 @@ clustering<-c("n200","c200")
 
 #Factor cost realizations
 realization<-c("mixed_feb17","sticky_feb18")
-climate<-c("cc","nocc")
+climate<-c("cc")
 
 
 for (k in 1:length(clustering)){
@@ -27,8 +27,7 @@ for (k in 1:length(clustering)){
           cfg$input <- c("rev4.47+mrmagpie6_h12_magpie.tgz",
                  "rev4.47+mrmagpie6_h12_cfc9a5551f05ca4efc6cbc7016516432_cellularmagpie.tgz",
                  "rev4.47+mrmagpie6_h12_validation.tgz",
-                 "additional_data_rev3.85.tgz",
-                 paste0("calibration_H12_",realization[j],"_21Sep20.tgz")
+                 "additional_data_rev3.85.tgz"
                 )
 
         }else if(clustering[k]=="n200"){
@@ -36,18 +35,17 @@ for (k in 1:length(clustering)){
           cfg$input <- c("rev4.47+mrmagpie6_h12_magpie.tgz",
                  "rev4.47+mrmagpie6_h12_a6b8f5fe756c420d9f350b2b6fb8b4c2_cellularmagpie.tgz",
                  "rev4.47+mrmagpie6_h12_validation.tgz",
-                 "additional_data_rev3.85.tgz",
-                paste0("calibration_H12_",realization[j],"_21Sep20.tgz")
+                 "additional_data_rev3.85.tgz"
               )
         }
 
 
         #Change the results folder name
-        cfg$title<-paste0("LPj_T_",realization[j],"_",clustering[k],"_HadGEM2_ES","_","rcp6p0","_CO2_",climate[i])
+        cfg$title<-paste0("LPj_T_CALIB_",realization[j],"_",clustering[k],"_HadGEM2_ES","_","rcp2p6","_CO2_",climate[i])
 
 
         #recalibrate
-        cfg$recalibrate <- FALSE
+        cfg$recalibrate <- TRUE
 
         #recalc_npi_ndc
         #cfg$recalc_npi_ndc <- TRUE
