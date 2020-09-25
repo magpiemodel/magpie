@@ -5,6 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+$setglobal c41_initial_irrigation_area  LUH2v2
+
 parameters
 f41_irrig(j) Available area equipped for irrigation [AVL] (mio. ha)
 /
