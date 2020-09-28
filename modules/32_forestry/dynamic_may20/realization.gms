@@ -30,6 +30,8 @@
 *' e.g. if a plantation has been established with a rotation length of 30 years
 *' it will be harvested after 30 years, even so the rotation length in the prevailing
 *' time step, used for establishment, is shorter or longer.
+*'   
+*' ![Calculation of rotation lengths using interest rate and vegetation Carbon growth functions based on single rotation model](rotation_length.png){ width=100% }
 
 *' @limitations Rotation lengths for timber plantations are not endogenous.
 

@@ -19,6 +19,8 @@ parameters
  pm_carbon_density_ac_forestry(t_all,j,ac,ag_pools)    Above ground plantation carbon density for age classes and carbon pools (tC per ha)
  pc52_carbon_density_start(t_all,j,ag_pools)  Above ground carbon density for new land in other land pool (tC per ha)
  pcm_carbon_stock(j,land,c_pools)         Current carbon in vegetation soil and litter for different land types (mio. tC)
+ pm_investment_layer(t_all,j)             Difference between needed and observed LPJmL carbon densities in clusters where LPJmL values area lower than a threshold (tC per ha)
+ p52_scaling_factor(t_all,j)              Scaling factor for plantation yields (1)
 ;
 
 equations

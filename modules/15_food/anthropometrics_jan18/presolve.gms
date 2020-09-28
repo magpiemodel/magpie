@@ -475,6 +475,19 @@ p15_kcal_pc_calibrated(t,i,kfo)$(p15_demand2intake_ratio(t,i) >0 ) = p15_kcal_pc
 );
 
 
+* Now, a second waste parameter can be calculated, which is needed for the construction  
+* of exogenous diet scenarios on the basis of calorie intake. This parameter describes 
+* the development of food waste over time and reflects either the exogenous food waste 
+* scenario or the original regression-based estimates for food calorie oversupply:
+
+p15_foodwaste_growth(t,i) = ( 1$(p15_demand2intake_ratio_ref(i) = 0)
+            + (p15_demand2intake_ratio_scen(t,i)/p15_demand2intake_ratio_ref(i))$(
+              p15_demand2intake_ratio_ref(i) > 0)
+              );
+
+
+
+
 * ###### Exogenous EAT Lancet diet scenario
 
 *' @code
@@ -511,19 +524,29 @@ $endif
 
 *' 2.) The second step defines the daily per capita intake of different food
 *' commodities by filling up the scenario target for total daily per capita food
-*' intake according to different scenario assumptions on dietary patterns.
-*' In case that total daily calorie intake is not equal to EAT Lancet intake,
-*' only the calories for staple crops are modified and calories for non-staple food
-*' commodities are preserved.
+*' intake according to different scenario assumptions on dietary patterns. Calories 
+*' for staple crops can be modified in order to meet the total calorie target.
 
-if ( sum(i,(i15_intake_scen_target(t,i) - sum(kfo,i15_intake_EATLancet(i,kfo))**2 ) )  = 0,
-    i15_intake_detailed_scen_target(t,i,kfo) = i15_intake_EATLancet(i,kfo);
-else
-    i15_intake_detailed_scen_target(t,i,EAT_nonstaples) = i15_intake_EATLancet(i,EAT_nonstaples);
-    i15_intake_detailed_scen_target(t,i,EAT_staples) = (
-            i15_intake_scen_target(t,i) - sum(EAT_nonstaples,i15_intake_EATLancet(i,EAT_nonstaples)) )*(
-            i15_intake_EATLancet(i,EAT_staples)/sum(EAT_staples2,i15_intake_EATLancet(i,EAT_staples2)) );
+* Food-specific calorie intake of the model-internal diet projections is 
+* estimated from daily per capita food calorie demand:
+p15_intake_detailed_regr(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo)
+	 	/(f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)*p15_foodwaste_growth(t,i));
+
+
+i15_intake_detailed_scen_target(t,i,EAT_nonstaples) = i15_intake_EATLancet(i,EAT_nonstaples);
+
+* The EAT-Lancet diet only allows for added sugars, but does not include processed food or 
+* alcohol. Via 's15_alc_scen' a maximum target for alcohol consumption can be defined.
+if(s15_alc_scen>0,
+i15_intake_detailed_scen_target(t,i,"alcohol") = p15_intake_detailed_regr(t,i,"alcohol"); 
+i15_intake_detailed_scen_target(t,i,"alcohol")$(i15_intake_detailed_scen_target(t,i,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,i))
+	= s15_alc_scen*i15_intake_scen_target(t,i);
 );
+
+i15_intake_detailed_scen_target(t,i,EAT_staples) = (
+          i15_intake_scen_target(t,i) - sum(EAT_nonstaples,i15_intake_EATLancet(i,EAT_nonstaples)) )*(
+          i15_intake_EATLancet(i,EAT_staples)/sum(EAT_staples2,i15_intake_EATLancet(i,EAT_staples2)) );
+
 
 *' 3.) The third step estimates the calorie supply at household level by multiplying
 *' daily per capita calorie intake with a ratio  of supply to intake
@@ -535,13 +558,6 @@ else
 *' of the EAT Lancet diet scenarios (y2010). A multiplicative factor accounts for
 *' increases in food waste over time relative to the only historical time slice
 *' of the EAT Lancet diet scenarios, according to the regression-based approach.
-
-* In case, no exogenous waste scenario is selceted, the original regression-
-* based estimates for food calorie oversupply are used as waste scenario:
-p15_foodwaste_growth(t,i) = ( 1$(p15_demand2intake_ratio_ref(i) = 0)
-            + (p15_demand2intake_ratio_scen(t,i)/p15_demand2intake_ratio_ref(i))$(
-              p15_demand2intake_ratio_ref(i) > 0)
-              );
 
 i15_kcal_pc_scen_target(t,i,kfo) = (f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)
                                     *i15_intake_detailed_scen_target(t,i,kfo))
