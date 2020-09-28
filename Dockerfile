@@ -1,4 +1,4 @@
-#FROM rocker/r-ver:3.6.2
+FROM rocker/r-ver:3.6.2
 
 RUN mkdir /home/magpie
 COPY . /home/magpie/
