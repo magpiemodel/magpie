@@ -6,8 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------
-# description: calculate and store new calibration for different
-# factor costs, AEI and clustering
+# description: calculate and store new calibration for different factor costs, AEI and clustering
 # --------------------------------------------------------
 
 
