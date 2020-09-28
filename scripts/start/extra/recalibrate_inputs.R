@@ -6,7 +6,8 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------
-# description: calculate and store new calibration
+# description: calculate and store new calibration for different
+# factor costs, AEI and clustering
 # --------------------------------------------------------
 
 
@@ -19,11 +20,6 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-#removes previous calibration factors
-remove <- dir(pattern=c(".cs3"))
-file.remove(remove,recursive=FALSE) 
-
-
 cfg$results_folder <- "output/:title:"
 cfg$recalibrate <- TRUE
 
@@ -34,6 +30,12 @@ AEI<-c("LUH2v2","Siebert")
 for (i in realization){
   for (k in clustering){
     for (av in AEI){
+
+#removes previous calibration factors
+remove <- dir(pattern=c(".cs3"))
+file.remove(remove,recursive=FALSE)
+
+
 cfg$title <- paste0("calib_run_",i,"_",k,"_",av)
 
 #Selects factor costs realization
