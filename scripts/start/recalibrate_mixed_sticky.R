@@ -20,7 +20,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-remove <- dir(pattern=c("*.cs3")) # ?dir
+remove <- dir(pattern=c(".cs3")) # ?dir
 file.remove(remove,recursive=FALSE) # ?file.remove
 
 
