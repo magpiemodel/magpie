@@ -14,6 +14,8 @@ RUN apt-get update \
  && apt-get install -y curl \
  && apt-get install -y texlive \
  && apt-get install -y fonts-inconsolata \
+ && apt-get install -y pandoc \
+ && apt-get install -y pandoc-citeproc \
  && fc-cache -fv
 
 
