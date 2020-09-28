@@ -1,7 +1,6 @@
-FROM rocker/r-ver:3.6.2
-#FROM 93ba738693f5
+#FROM rocker/r-ver:3.6.2
 
-#RUN mkdir /home/magpie
+RUN mkdir /home/magpie
 COPY . /home/magpie/
 
 RUN apt-get update \
@@ -23,22 +22,22 @@ RUN apt-get update \
 RUN R -e "options(repos = \
   list(CRAN = 'https://cran.rstudio.com/',pik='https://rse.pik-potsdam.de/r/packages')); \
   install.packages(c('gdxrrw', \
-          'ggplot2', \
-          'curl', \
-          'gdx', \
-          'magclass', \
-          'madrat', \
-          'mip', \
-          'lucode2', \
-          'magpie4', \
-          'magpiesets', \
-          'lusweave', \
-          'luscale', \
-          'goxygen', \
-          'luplot'))"
+           'ggplot2', \
+           'curl', \
+           'gdx', \
+           'magclass', \
+           'madrat', \
+           'mip', \
+           'lucode2', \
+           'magpie4', \
+           'magpiesets', \
+           'lusweave', \
+           'luscale', \
+           'goxygen', \
+           'luplot'))"
 
-# Set GAMS version
-ENV LATEST=24.8.5
+Set GAMS version
+ENV LATEST=30.3.0
 ENV GAMS_VERSION=${LATEST}
 
 # Set GAMS bit architecture, either 'x64_64' or 'x86_32'
@@ -51,17 +50,18 @@ RUN curl -SL "https://d37drm4t2jghv5.cloudfront.net/distributions/${LATEST}/linu
 # Install GAMS
 RUN cd /opt/gams &&\
     chmod +x gams.exe; sync &&\
+    cp /home/magpie/gamslice.txt . &&\
     ./gams.exe &&\
     rm -rf gams.exe
 
+COPY gamslice.txt /opt/gams/gams30.3_linux_x64_64_sfx/gamslice.txt
 # Add GAMS path to user env path
 RUN GAMS_PATH=$(dirname $(find / -name gams -type f -executable -print)) &&\
-    ln -s $GAMS_PATH/gams /usr/local/bin/gams &&\
+    ln -s $GAMS_PATH /usr/local/bin &&\
     echo "export PATH=\$PATH:$GAMS_PATH" >> ~/.bashrc &&\
     cd $GAMS_PATH &&\
     ./gamsinst -a
 
-COPY gamslice.txt /opt/gams/gams24.8_linux_x64_64_sfx/gamslice.txt
+COPY gamslice.txt /opt/gams/gams30.3_linux_x64_64_sfx/gamslice.txt
 
 CMD  cd /home/magpie && Rscript start.R
-
