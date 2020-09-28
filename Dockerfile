@@ -36,7 +36,7 @@ RUN R -e "options(repos = \
            'goxygen', \
            'luplot'))"
 
-Set GAMS version
+# Set GAMS version
 ENV LATEST=30.3.0
 ENV GAMS_VERSION=${LATEST}
 
