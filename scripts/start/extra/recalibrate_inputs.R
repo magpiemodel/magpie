@@ -45,7 +45,7 @@ cfg$output <- c("report")
 cfg$sequential <- TRUE
 
 #Selects inputs based on clustering
-if(clustering[k]=="c200"){
+if(k=="c200"){
 
   cfg$input <- c("rev4.47+mrmagpie7_h12_magpie_debug.tgz",
          "rev4.47+mrmagpie7_h12_238dd4e69b15586dde74376b6b84cdec_cellularmagpie_debug.tgz",
@@ -53,19 +53,18 @@ if(clustering[k]=="c200"){
          "additional_data_rev3.85.tgz"
         )
 
-}else if(clustering[k]=="n200"){
+}else if(k=="n200"){
 
   cfg$input <- c("rev4.47+mrmagpie7_h12_magpie_debug.tgz",
          "rev4.47+mrmagpie7_h12_4ade54491b634b981be2d6c4a0d17706_cellularmagpie_debug.tgz",
          "rev4.47+mrmagpie7_h12_validation_debug.tgz",
          "additional_data_rev3.85.tgz"
       )
-
+}
 
 # AEI switch
 
 cfg$gms$c41_initial_irrigation_area  <- av
-}
 
 start_run(cfg,codeCheck=FALSE)
 magpie4::submitCalibration(paste0("H12_",i,"_",k,"_",av))
