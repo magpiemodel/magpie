@@ -21,7 +21,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 #removes previous calibration factors
-remove <- dir(pattern=c("*.cs3")) #
+remove <- dir(pattern=c(".cs3")) #
 file.remove(remove,recursive=FALSE) #
 
 
