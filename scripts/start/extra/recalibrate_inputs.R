@@ -6,8 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------
-# description: calculate and store new calibration factors for different factor
-# costs realization, clustering and available irrigated area
+# description: calculate and store new calibration
 # --------------------------------------------------------
 
 
@@ -21,8 +20,8 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 #removes previous calibration factors
-remove <- dir(pattern=c(".cs3")) #
-file.remove(remove,recursive=FALSE) #
+remove <- dir(pattern=c(".cs3"))
+file.remove(remove,recursive=FALSE) 
 
 
 cfg$results_folder <- "output/:title:"
