@@ -25,17 +25,20 @@ cfg$recalibrate <- TRUE
 realization<-c("mixed_feb17","sticky_feb18")
 clustering<-c("n200","c200")
 AEI<-c("LUH2v2","Siebert")
+preloopCalib<-c("managementcalib_aug19","dynamic_aug18")
 
 for (i in realization){
   for (k in clustering){
     for (av in AEI){
-
+      for (p in preloopCalib){
 #removes previous calibration factors
 remove <- dir(pattern=c(".cs3"))
 file.remove(remove,recursive=FALSE)
 
 
-cfg$title <- paste0("calib_run_",i,"_",k,"_",av)
+cfg$gms$yields <- p
+
+cfg$title <- paste0("calib_run_",i,"_",k,"_",av,"_",p)
 
 #Selects factor costs realization
 cfg$gms$factor_costs <- i
@@ -66,7 +69,9 @@ if(k=="c200"){
 
 cfg$gms$c41_initial_irrigation_area  <- av
 
+
 start_run(cfg,codeCheck=FALSE)
-magpie4::submitCalibration(paste0("H12_",i,"_",k,"_",av))
+magpie4::submitCalibration(paste0("H12_",i,"_",k,"_",av,"_",p))
 }
 }}
+}
