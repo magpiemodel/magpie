@@ -15,7 +15,6 @@ p73_criterion	                                                              Crit
 p73_timber_adjustment_ratio(t,i,kforestry)                                  Ratio between adjusted and prescribed timber demand (1)
 p73_timber_harvest_cost(t,j,ac,forest_land)									                Harvesting costs as a function of carbon density (USD per ac per ha)
 p73_cost_multiplier(land_natveg)                                            Cost multiplier for natural vegetation to make harvests expensive by a factor (1)
-p73_glo_dem(t_all,kforestry)
 ;
 
 positive variables
