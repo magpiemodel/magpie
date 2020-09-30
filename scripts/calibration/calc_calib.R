@@ -83,9 +83,18 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,cali
   calib_correction <- area_factor * tc_factor
   calib_divergence <- abs(calib_correction-1)
 
+# in case it is the first step, it starts with all of the factors equal to 1
+  if (calibration_step==1){
   old_calib        <- magpiesort(read.magpie(calib_file))
-  calib_factor     <- old_calib * (damping_factor*(calib_correction-1) + 1)
+  cells_calib<-getCells(old_calib)
+  names_calib<-getNames(old_calib)
+  years_calib<-getYears(old_calib)
+  old_calib        <- new.magpie(cells_and_regions = getCells(old_calib),names = getNames(old_calib),years = getYears(old_calib),sort = TRUE,fill = 1)
+}else{
+  old_calib        <- magpiesort(read.magpie(calib_file))
+}
 
+  calib_factor     <- old_calib * (damping_factor*(calib_correction-1) + 1)
   if(!is.null(crop_max)) {
     above_limit <- (calib_factor[,,"crop"] > crop_max)
     calib_factor[,,"crop"][above_limit]  <- crop_max
