@@ -62,8 +62,8 @@ cat(paste0("Lord mighty of GAMS please make it run"), file=paste0(log_folder,"/"
 
 xx <- c()
 
-for(c73_paper_scen in c("construction")){
-  cfg$gms$c73_paper_scen <- c73_paper_scen
+for(c73_wood_scen in c("default")){
+  cfg$gms$c73_wood_scen <- c73_wood_scen
   for(s73_foresight in c(0)){
     cfg$gms$s73_foresight = s73_foresight
 
@@ -106,7 +106,7 @@ for(c73_paper_scen in c("construction")){
 
               if(s32_fix_plant == 1 && s73_foresight == 1) break
 
-              cfg$title   = paste0(identifier_flag,"_",ssp,"_",cfg$gms$c73_paper_scen)
+              cfg$title   = paste0(identifier_flag,"_",ssp,"_",cfg$gms$c73_wood_scen)
 
               cfg$output  = c("rds_report","extra/force_runstatistics")
 

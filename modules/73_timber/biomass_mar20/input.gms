@@ -5,8 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c73_paper_scen paper
-* options paper, nopaper, construction
+$setglobal c73_wood_scen default
+* options default, nopaper, construction
 
 scalars
   s73_timber_prod_cost      Cost for produccing a unit of timber (USD per tDM) / 2000/
