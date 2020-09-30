@@ -9,8 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### added
 - **main** Added Dockerfile for running MAgPIE in a container
+- **73_timber** New scenario switch `c73_wood_scen`.
 
-### changed 
+### changed
 
 ### fixed
 
