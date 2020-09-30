@@ -35,6 +35,7 @@ for (i in realization){
 remove <- dir(pattern=c(".cs3"))
 file.remove(remove,recursive=FALSE)
 
+cfg$force_download <- TRUE
 
 cfg$gms$yields <- p
 
