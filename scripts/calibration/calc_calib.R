@@ -83,13 +83,11 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,cali
   calib_correction <- area_factor * tc_factor
   calib_divergence <- abs(calib_correction-1)
 
-# in case it is the first step, it forces the initial factors to be equal to 1
+###-> in case it is the first step, it forces the initial factors to be equal to 1
   if (calibration_step==1){
   old_calib        <- magpiesort(read.magpie(calib_file))
-  cells_calib<-getCells(old_calib)
-  names_calib<-getNames(old_calib)
-  years_calib<-getYears(old_calib)
   old_calib        <- new.magpie(cells_and_regions = getCells(old_calib),names = getNames(old_calib),years = getYears(old_calib),sort = TRUE,fill = 1)
+####
 }else{
   old_calib        <- magpiesort(read.magpie(calib_file))
 }
@@ -122,6 +120,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,cali
 
   # in case of sufficient convergence, stop here (no additional update of
   # calibration factors!)
+  ###->Also selects best calibration factor for each region and from the all the calibration steps
   if(all(calib_divergence < calib_accuracy) |  calibration_step==n_maxcalib) {
 
     calib_best<-new.magpie(cells_and_regions = getCells(calib_divergence),years = getYears(calib_divergence),names = c("crop","past"))
@@ -144,7 +143,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,cali
     write.magpie(round(setYears(calib_best,NULL),2), calib_file, comment = comment)
 
     write_log(calib_best,     "calib_factor.cs3"     , "Best")
-
+####
   return(TRUE)
 } else {
   comment <- c(" description: Regional yield calibration file",
