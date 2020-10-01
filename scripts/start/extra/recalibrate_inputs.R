@@ -22,10 +22,14 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$recalibrate <- TRUE
 
-realization<-c("mixed_feb17","sticky_feb18")
-clustering<-c("n200","c200")
-AEI<-c("LUH2v2","Siebert")
-preloopCalib<-c("managementcalib_aug19","dynamic_aug18")
+#realization<-c("mixed_feb17","sticky_feb18")
+realization<-c("mixed_feb17")
+#clustering<-c("n200","c200")
+clustering<-c("n200")
+#AEI<-c("LUH2v2","Siebert")
+AEI<-c("LUH2v2")
+#preloopCalib<-c("managementcalib_aug19","dynamic_aug18")
+preloopCalib<-c("managementcalib_aug19")
 
 for (i in realization){
   for (k in clustering){
