@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -18,7 +18,7 @@
 
 q60_bioenergy(i2,kall) ..
       vm_dem_bioen(i2,kall) * fm_attributes("ge",kall) =g=
-      sum(ct,i60_1stgen_bioenergy_dem(ct,i2,kall) ) +
+      sum(ct, i60_1stgen_bioenergy_dem(ct,i2,kall)) +
       v60_2ndgen_bioenergy_dem_dedicated(i2,kall) +
       v60_2ndgen_bioenergy_dem_residues(i2,kall)
       ;
@@ -66,10 +66,10 @@ q60_res_2ndgenBE(i2) ..
   =g=
   sum(ct,i60_res_2ndgenBE_dem(ct,i2));
 
-*' Finally, an incentive of 300 USD05MER per ton is provided for the production of 1st generation
+*' Finally, an incentive is provided for the production of 1st generation
 *' bioenergy from oils and ethanol even beyond the exogeneous minimum demand.
 *' The incentive is kept low, but should provide a more realistic
 *' overproduction from couple products.
 
 q60_bioenergy_incentive(i2).. vm_bioenergy_utility(i2)
-          =e= sum(k1st60, vm_dem_bioen(i2,k1st60) * (-300));
+          =e= sum(k1st60, vm_dem_bioen(i2,k1st60) * (-c60_bioenergy_subsidy));

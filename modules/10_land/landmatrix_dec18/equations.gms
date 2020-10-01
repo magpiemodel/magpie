@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -12,7 +12,7 @@
 
  q10_transition_matrix(j2) ..
 	sum((land_from10,land_to10), v10_lu_transitions(j2,land_from10,land_to10)) =e=
-	sum(land, pm_land_start(j2,land));
+	sum(land, pcm_land(j2,land));
 
  q10_transition_to(j2,land_to10) ..
 	sum(land_from10, v10_lu_transitions(j2,land_from10,land_to10)) =e=

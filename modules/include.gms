@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -41,11 +41,13 @@ $include "./modules/54_phosphorus/module.gms"
 $include "./modules/55_awms/module.gms"
 $include "./modules/56_ghg_policy/module.gms"
 $include "./modules/57_maccs/module.gms"
+$include "./modules/58_peatland/module.gms"
 $include "./modules/59_som/module.gms"
 $include "./modules/60_bioenergy/module.gms"
 $include "./modules/62_material/module.gms"
 $include "./modules/70_livestock/module.gms"
 $include "./modules/71_disagg_lvst/module.gms"
+$include "./modules/73_timber/module.gms"
 $include "./modules/80_optimization/module.gms"
 *######################## R SECTION END (MODULES) ##############################
 $offrecurse

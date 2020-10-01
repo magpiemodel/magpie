@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -17,3 +17,7 @@ elseif (s21_trade_tariff=0),
     i21_trade_tariff(i2,k_trade) = 0;
 );
 
+pm_selfsuff_ext(t_ext,i,kforestry) = f21_self_suff("y2150",i,kforestry);
+pm_selfsuff_ext(t_all,i,kforestry) = f21_self_suff(t_all,i,kforestry);
+*Implausible jumps in selfsuff for wood in some regions.
+pm_selfsuff_ext(tstart21,i,kforestry) = f21_self_suff("y2010",i,kforestry);

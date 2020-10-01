@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -10,6 +10,7 @@
 * optimization process. Hence these lines CAN INFLUENCE the optimization process
 * but CANNOT BE INFLUENCED by it.
 
+$batinclude "./modules/include.gms" start
 
 $batinclude "./modules/include.gms" preloop
 

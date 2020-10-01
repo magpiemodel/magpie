@@ -1,4 +1,4 @@
-*** |  (C) 2008-2019 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -23,5 +23,5 @@
 *' @authors Benjamin Bodirsky, Florian Humpenoeder
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%ghg_policy%" == "price_jan19" $include "./modules/56_ghg_policy/price_jan19/realization.gms"
+$Ifi "%ghg_policy%" == "price_jan20" $include "./modules/56_ghg_policy/price_jan20/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
