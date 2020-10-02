@@ -9,13 +9,14 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 #List of clusterin types
-clustering<-c("n200","c200")
+#clustering<-c("n200","c200")
+clustering<-c("c200")
 
 #Factor cost realizations
 realization<-c("mixed_feb17","sticky_feb18")
 climate<-c("cc")
-AEI<-c("LUH2v2","Siebert")
-
+#AEI<-c("LUH2v2","Siebert")
+AEI<-c("LUH2v2")
 
 for (k in 1:length(clustering)){
   for (i in 1:length(AEI)){

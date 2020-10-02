@@ -84,13 +84,8 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,cali
   calib_divergence <- abs(calib_correction-1)
 
 ###-> in case it is the first step, it forces the initial factors to be equal to 1
-  if (calibration_step==1){
   old_calib        <- magpiesort(read.magpie(calib_file))
-  old_calib        <- new.magpie(cells_and_regions = getCells(old_calib),names = getNames(old_calib),years = getYears(old_calib),sort = TRUE,fill = 1)
-####
-}else{
-  old_calib        <- magpiesort(read.magpie(calib_file))
-}
+  if(calibration_step==1) old_calib[,,] <- 1
 
   calib_factor     <- old_calib * (damping_factor*(calib_correction-1) + 1)
   if(!is.null(crop_max)) {
@@ -120,7 +115,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,cali
 
   # in case of sufficient convergence, stop here (no additional update of
   # calibration factors!)
-  ###->Also selects best calibration factor for each region and from the all the calibration steps
+  ###-Select best calibration factor for each region and from the all the calibration steps
   if(all(calib_divergence < calib_accuracy) |  calibration_step==n_maxcalib) {
 
     calib_best<-new.magpie(cells_and_regions = getCells(calib_divergence),years = getYears(calib_divergence),names = c("crop","past"))

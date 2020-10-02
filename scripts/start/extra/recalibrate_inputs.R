@@ -19,7 +19,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-cfg$results_folder <- "output/:title:"
+cfg$results_folder <- "output/:title::date:"
 cfg$recalibrate <- TRUE
 
 #realization<-c("mixed_feb17","sticky_feb18")
@@ -49,7 +49,7 @@ cfg$title <- paste0("calib_run_",i,"_",k,"_",av,"_",p)
 cfg$gms$factor_costs <- i
 
 cfg$gms$c_timesteps <- 1
-cfg$output <- c("report")
+cfg$output <- c("rds_report")
 cfg$sequential <- TRUE
 
 #Selects inputs based on clustering
