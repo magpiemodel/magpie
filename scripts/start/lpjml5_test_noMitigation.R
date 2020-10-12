@@ -10,7 +10,7 @@ source("config/default.cfg")
 
 #List of clusterin types
 #clustering<-c("n200","c200")
-clustering<-c("c200")
+clustering<-c("c200","m200")
 
 #Factor cost realizations
 realization<-c("mixed_feb17","sticky_feb18")
@@ -26,24 +26,24 @@ for (k in 1:length(clustering)){
         #Inputs
         if(clustering[k]=="c200"){
 
-          cfg$input <- c("rev4.47+mrmagpie7_h12_magpie_debug.tgz",
-                 "rev4.47+mrmagpie7_h12_238dd4e69b15586dde74376b6b84cdec_cellularmagpie_debug.tgz",
-                 "rev4.47+mrmagpie7_h12_validation_debug.tgz",
+          cfg$input <- c("rev4.51+mrmagpie8_h12_magpie_debug.tgz",
+                 "rev4.51+mrmagpie8_h12_cfc9a5551f05ca4efc6cbc7016516432_cellularmagpie_debug.tgz",
+                 "rev4.51+mrmagpie8_h12_validation_debug.tgz",
                  "additional_data_rev3.85.tgz"
                 )
 
-        }else if(clustering[k]=="n200"){
+        }else if(clustering[k]=="m200"){
 
-          cfg$input <- c("rev4.47+mrmagpie7_h12_magpie_debug.tgz",
-                 "rev4.47+mrmagpie7_h12_4ade54491b634b981be2d6c4a0d17706_cellularmagpie_debug.tgz",
-                 "rev4.47+mrmagpie7_h12_validation_debug.tgz",
+          cfg$input <- c("rev4.51+mrmagpie8_h12_magpie_debug.tgz",
+                 "rev4.51+mrmagpie8_h12_0fd3d50f15b9a42b430a6039e951d873_cellularmagpie_debug.tgz",
+                 "rev4.51+mrmagpie8_h12_validation_debug.tgz",
                  "additional_data_rev3.85.tgz"
               )
         }
 
 
         #Change the results folder name
-        cfg$title<-paste0("LPj_T_BestCalib_",realization[j],"_",clustering[k],"_",AEI[i],"_","rcp2p6","_CO2_",climate[1])
+        cfg$title<-paste0("LPj_T_BC_",realization[j],"_",clustering[k],"_",AEI[i],"_","rcp2p6","_CO2_",climate[1])
 
 
         #recalibrate
