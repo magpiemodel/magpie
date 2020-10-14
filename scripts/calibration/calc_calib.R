@@ -112,6 +112,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,cali
   write_log(calib_divergence, "calib_divergence.cs3" , calibration_step)
   write_log(area_factor,      "calib_area_factor.cs3", calibration_step)
   write_log(tc_factor,        "calib_tc_factor.cs3"  , calibration_step)
+  write_log(calib_factor,     "calib_factor.cs3"     , calibration_step)
 
   # in case of sufficient convergence, stop here (no additional update of
   # calibration factors!)
@@ -140,17 +141,6 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,cali
     write_log(calib_best,     "calib_factor.cs3"     , "Best")
 ####
   return(TRUE)
-} else {
-  comment <- c(" description: Regional yield calibration file",
-               " unit: -",
-               paste0(" note: Calibration step ",calibration_step),
-               " origin: scripts/calibration/calc_calib.R (path relative to model main directory)",
-               paste0(" creation date: ",date()))
-  write.magpie(round(setYears(calib_factor,NULL),2), calib_file, comment = comment)
-
-  write_log(calib_factor,     "calib_factor.cs3"     , calibration_step)
-
-  return(FALSE)
 }
 
 
