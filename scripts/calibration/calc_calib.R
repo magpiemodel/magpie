@@ -121,15 +121,17 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,cali
 
     calib_best<-new.magpie(cells_and_regions = getCells(calib_divergence),years = getYears(calib_divergence),names = c("crop","past"))
 
+    divergence_data<-read.csv("calib_divergence.cs3")
     factors_data<-read.csv("calib_factor.cs3")
-    factors_data$Diff_crop<-abs(factors_data$crop-1)
-    factors_data$Diff_past<-abs(factors_data$past-1)
 
     for (i in getCells(calib_best)){
-        factors_data_sub<-subset(factors_data,dummy==i)
-        calib_best[i,NULL,"crop"]<-factors_data_sub[which.min(factors_data_sub$Diff_crop),"crop"]
-        calib_best[i,NULL,"past"]<-factors_data_sub[which.min(factors_data_sub$Diff_past),"past"]
+      factors_data_sub<-subset(factors_data,dummy==i)
+      divergence_data_sub<-subset(divergence_data,dummy==i)
+
+      calib_best[i,NULL,"crop"]<-factors_data_sub[which.min(divergence_data_sub$crop),"crop"]
+      calib_best[i,NULL,"past"]<-factors_data_sub[which.min(divergence_data_sub$past),"past"]
     }
+
 
     comment <- c(" description: Regional yield calibration file",
                  " unit: -",
@@ -138,7 +140,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,cali
                  paste0(" creation date: ",date()))
     write.magpie(round(setYears(calib_best,NULL),2), calib_file, comment = comment)
 
-    write_log(calib_best,     "calib_factor.cs3"     , "Best")
+    write_log(calib_best,     "calib_factor.cs3"     , "best")
 ####
   return(TRUE)
 }
