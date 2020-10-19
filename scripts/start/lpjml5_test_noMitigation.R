@@ -44,7 +44,7 @@ for (k in 1:length(clustering)){
 
         #Change the results folder name
         #NBC STANDS FOR NEW BEST CALIBRATION
-        cfg$title<-paste0("LPj_T_NBC_",realization[j],"_",clustering[k],"_",AEI[i],"_","rcp6p0","_CO2_",climate[1])
+        cfg$title<-paste0("LPj_T_NBC_TEST",realization[j],"_",clustering[k],"_",AEI[i],"_","rcp6p0","_CO2_",climate[1])
 
 
         #recalibrate
@@ -68,6 +68,7 @@ for (k in 1:length(clustering)){
         cfg$gms$c52_carbon_scenario  <- climate[1]
         cfg$gms$c43_watavail_scenario<- climate[1]
         cfg$gms$c59_som_scenario  <- climate[1]
+        cfg$gms$calib_maxiter <- 2
 
         start_run(cfg=cfg)
         }
