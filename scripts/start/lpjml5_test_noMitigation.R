@@ -10,7 +10,7 @@ source("config/default.cfg")
 
 #List of clusterin types
 #clustering<-c("n200","c200")
-clustering<-c("c200","m200")
+clustering<-c("m200_Land","m200_Prod")
 
 #Factor cost realizations
 realization<-c("mixed_feb17","sticky_feb18")
@@ -22,29 +22,45 @@ for (k in 1:length(clustering)){
   for (i in 1:length(AEI)){
     for(j in 1:length(realization)){
 
+      if(clustering[k]=="m200_Land"){
 
-        #Inputs
-        if(clustering[k]=="c200"){
-
-          cfg$input <- c("rev4.51+mrmagpie8_h12_magpie_debug.tgz",
-                 "rev4.51+mrmagpie8_h12_cfc9a5551f05ca4efc6cbc7016516432_cellularmagpie_debug.tgz",
-                 "rev4.51+mrmagpie8_h12_validation_debug.tgz",
-                 "additional_data_rev3.85.tgz"
-                )
-
-        }else if(clustering[k]=="m200"){
-
-          cfg$input <- c("rev4.51+mrmagpie8_h12_magpie_debug.tgz",
-                 "rev4.51+mrmagpie8_h12_0fd3d50f15b9a42b430a6039e951d873_cellularmagpie_debug.tgz",
-                 "rev4.51+mrmagpie8_h12_validation_debug.tgz",
-                 "additional_data_rev3.85.tgz"
+        cfg$input <- c("rev4.51+mrmagpie8_h12_magpie.tgz",
+               "rev4.51+mrmagpie8_h12_93ba9cce36beb9a8e242a1fc6b1776cd_cellularmagpie.tgz",
+               "rev4.51+mrmagpie8_h12_validation.tgz",
+               "additional_data_rev3.85.tgz"
               )
-        }
+
+      }else if(clustering[k]=="sticky_feb18"){
+
+        cfg$input <- c("rev4.51+mrmagpie8_h12_magpie.tgz",
+               "rev4.51+mrmagpie8_h12_4d77b3919c13daf7d986d7b542a45282_cellularmagpie.tgz",
+               "rev4.51+mrmagpie8_h12_validation.tgz",
+               "additional_data_rev3.85.tgz"
+            )
+      }
+
+#        #Inputs
+#        if(clustering[k]=="c200"){
+#
+#          cfg$input <- c("rev4.51+mrmagpie8_h12_magpie_debug.tgz",
+#                 "rev4.51+mrmagpie8_h12_cfc9a5551f05ca4efc6cbc7016516432_cellularmagpie_debug.tgz",
+#                 "rev4.51+mrmagpie8_h12_validation_debug.tgz",
+#                 "additional_data_rev3.85.tgz"
+#                )
+#
+#        }else if(clustering[k]=="m200"){
+#
+#          cfg$input <- c("rev4.51+mrmagpie8_h12_magpie_debug.tgz",
+#                 "rev4.51+mrmagpie8_h12_0fd3d50f15b9a42b430a6039e951d873_cellularmagpie_debug.tgz",
+#                 "rev4.51+mrmagpie8_h12_validation_debug.tgz",
+#                 "additional_data_rev3.85.tgz"
+#              )
+#        }
 
 
         #Change the results folder name
         #NBC STANDS FOR NEW BEST CALIBRATION
-        cfg$title<-paste0("LPj_T_NBC_",realization[j],"_",clustering[k],"_",AEI[i],"_","rcp6p0","_CO2_",climate[1])
+        cfg$title<-paste0("LPj_T_NBC_",realization[j],"_",clustering[k],"_","rcp6p0","_CO2_",climate[1])
 
 
         #recalibrate
