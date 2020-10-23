@@ -18,9 +18,10 @@ climate<-c("cc")
 #AEI<-c("LUH2v2","Siebert")
 AEI<-c("LUH2v2")
 
-SSP<-c("SSP1","SSP2","SSP2","SSP5","SSP2","SSP2","SSP3")
-RCP<-c("2p6","2p6","6p0","8p5","2p6","6p0","7p0")
-MIT<-c("26","26","60","85","60","45","60")
+#missing inputs lpj 7p0 ,"SSP3","7p0",,"60"
+SSP<-c("SSP1","SSP2","SSP2","SSP5","SSP2","SSP2")
+RCP<-c("2p6","2p6","6p0","8p5","2p6","6p0")
+MIT<-c("26","26","60","85","60","45")
 #HadGEM2_ES, IPSL_CM5A_LR, GFDL_ESM2M, MIROC_ESM_CHEM, NorESM1_M
 ClimateModel<-c("HadGEM2_ES", "IPSL_CM5A_LR", "GFDL_ESM2M")
 
