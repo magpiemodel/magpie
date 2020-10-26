@@ -123,13 +123,13 @@ sudo docker build -t magpie .
 ```
 Basic usage: Run the container (note the use of an absolute path) using
 ```
-sudo docker run /an/absolute/path/to/a/folder/:/home/magpie/output -it magpie
+sudo docker run -v /an/absolute/path/to/a/folder/:/home/magpie/output -it magpie
 ```
 Note: this will run MAgPIE with the default settings, if you want to change them choose the
 
 Advanced usage: Run the container interactively using
 ```
-sudo docker run /an/absolute/path/to/a/folder/:/home/magpie/output -it magpie bash
+sudo docker run -v /an/absolute/path/to/a/folder/:/home/magpie/output -it magpie bash
 ```
 
 ## HOW TO CONFIGURE
