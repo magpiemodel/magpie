@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### changed 
 
 ### fixed
+- **35_natveg** Bugfix "v35_secdforest_expansion"
 
 
 
