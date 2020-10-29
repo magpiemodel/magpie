@@ -15,7 +15,15 @@ pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = m_growth_vegc(pc52_carbon_den
 *Creating a scaling factor for carbon densities which are lower than the threshold. This will
 *hlep upscale these numbers in later stage. We compare the maximum stable carbon density from LPJmL
 *with the threshold.
-p52_scaling_factor(t_all,j) = s52_plantation_threshold/pm_carbon_density_ac_forestry(t_all,j,"acx","vegc");
+
+*Initialize the scalaing factor as 1
+p52_scaling_factor(t_all,j) = 1;
+
+*Update scaling factor for every cell where carbon density is greater than 0 to avoid division bx zero error
+*This also makes sure that there are always reasonable numbers in zero carbon density cells
+p52_scaling_factor(t_all,j)$(pm_carbon_density_ac_forestry(t_all,j,"acx","vegc")>0) = s52_plantation_threshold/pm_carbon_density_ac_forestry(t_all,j,"acx","vegc");
+*Cells with zero carbon density would have to use the maximum threshold number for bringing the yields up to plantation levels.
+p52_scaling_factor(t_all,j)$(pm_carbon_density_ac_forestry(t_all,j,"acx","vegc")=0) = s52_plantation_threshold;
 
 *Comparison above would yield values lower than 1 when LPJmL carbon densities are higher than threshold.
 p52_scaling_factor(t_all,j)$(p52_scaling_factor(t_all,j) <= 1) = 1;
