@@ -10,10 +10,10 @@ source("config/default.cfg")
 
 #List of clusterin types
 #clustering<-c("n200","c200")
-clustering<-c("m200_Prod")
+clustering<-c("c200")
 
 #Factor cost realizations
-realization<-c("mixed_feb17","sticky_feb18")
+realization<-c("mixed_feb17")
 climate<-c("cc")
 #AEI<-c("LUH2v2","Siebert")
 AEI<-c("LUH2v2")
@@ -38,9 +38,9 @@ for (k in 1:length(clustering)){
 #               "rev4.51+mrmagpie8_h12_validation.tgz",
 #               "additional_data_rev3.85.tgz"
 #            )
-#      }
+      }
 
-#        #Inputs
+        #Inputs
 #        if(clustering[k]=="c200"){
 #
 #          cfg$input <- c("rev4.51+mrmagpie8_h12_magpie_debug.tgz",
@@ -58,11 +58,11 @@ for (k in 1:length(clustering)){
 #              )
 #        }
 
-        cfg$input <- c("rev4.51+mrmagpie8_h12_magpie.tgz",
-               "rev4.51+mrmagpie8_h12_ecbf5173fe4051486f34f8764d9fc8e7_cellularmagpie.tgz",
-               "rev4.51+mrmagpie8_h12_validation.tgz",
-               "additional_data_rev3.85.tgz"
-              )
+#        cfg$input <- c("rev4.51+mrmagpie8_h12_magpie.tgz",
+#               "rev4.51+mrmagpie8_h12_ecbf5173fe4051486f34f8764d9fc8e7_cellularmagpie.tgz",
+#               "rev4.51+mrmagpie8_h12_validation.tgz",
+#               "additional_data_rev3.85.tgz"
+#              )
 
         #Change the results folder name
         #NBC STANDS FOR NEW BEST CALIBRATION
