@@ -23,9 +23,9 @@ cfg$results_folder <- "output/:title::date:"
 cfg$recalibrate <- TRUE
 
 #realization<-c("mixed_feb17","sticky_feb18")
-realization<-c("mixed_feb17")
+realization<-c("sticky_feb18")
 #clustering<-c("n200","c200")
-clustering<-c("n200")
+clustering<-c("c200")
 #AEI<-c("LUH2v2","Siebert")
 AEI<-c("LUH2v2")
 #preloopCalib<-c("managementcalib_aug19","dynamic_aug18")

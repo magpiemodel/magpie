@@ -16,7 +16,7 @@ clustering<-c("m200")
 realization<-c("sticky_feb18","mixed_feb17")
 climate<-c("cc")
 #AEI<-c("LUH2v2","Siebert")
-AEI<-c("LUH2v2")
+#AEI<-c("LUH2v2")
 
 #missing inputs lpj 7p0 ,"SSP3","7p0",,"60"
 SSP<-c("SSP1","SSP2","SSP2","SSP5","SSP2","SSP2")
