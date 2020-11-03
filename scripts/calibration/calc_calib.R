@@ -73,7 +73,7 @@ get_yieldcalib <- function(gdx_file) {
 }
 
 # Calculate the correction factor and save it
-update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,calibrate_cropland=TRUE,damping_factor=0.8, calib_file, crop_max=100, calibration_step="",n_maxcalib=20){
+update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,calibrate_cropland=TRUE,damping_factor=0.8, calib_file, crop_max=5, calibration_step="",n_maxcalib=20){
   require(magclass)
   require(magpie4)
   if(!(modelstat(gdx_file)[1,1,1]%in%c(1,2,7))) stop("Calibration run infeasible")
@@ -85,8 +85,8 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,cali
 
 ###-> in case it is the first step, it forces the initial factors to be equal to 1
   old_calib        <- magpiesort(read.magpie(calib_file))
-  #initial guess equal to 0.5
-  if(calibration_step==1) old_calib[,,] <- 0.9
+  #initial guess equal to 1
+  if(calibration_step==1) old_calib[,,] <- 1
 
   calib_factor     <- old_calib * (damping_factor*(calib_correction-1) + 1)
   if(!is.null(crop_max)) {

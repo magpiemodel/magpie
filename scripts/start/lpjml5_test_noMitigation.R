@@ -66,7 +66,7 @@ for (k in 1:length(clustering)){
 
         #Change the results folder name
         #NBC STANDS FOR NEW BEST CALIBRATION
-        cfg$title<-paste0("LPj_T_NBC_",realization[j],"_",clustering[k],"_","rcp8p5","_CO2_",climate[1])
+        cfg$title<-paste0("LPj_T_NBC_",realization[j],"_",clustering[k],"_","rcp2p6","_CO2_",climate[1])
 
 
         #recalibrate
