@@ -23,7 +23,7 @@ https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpi
 A framework description paper has been published in
 Geoscientific Model Development (GMD): https://doi.org/10.5194/gmd-12-1299-2019
 
-The model documentation for version 4.3.0 can be found at
+The model documentation for version 4.3 can be found at
 https://rse.pik-potsdam.de/doc/magpie/4.3/
 
 A most recent version of the documentation can also be extracted from the
@@ -114,6 +114,23 @@ install.packages(pkgs)
 For post-processing model outputs *Latex* is required
 (https://www.latex-project.org/get/). To be seen by the model it also needs to
 added to the PATH variable of your system.
+
+## DOCKER
+To use Docker, copy your `gamslice.txt`
+into the MAgPIE main directory, and build the magpie image using the command
+```
+sudo docker build -t magpie .
+```
+Basic usage: Run the container (note the use of an absolute path) using
+```
+sudo docker run -v /an/absolute/path/to/a/folder/:/home/magpie/output -it magpie
+```
+Note: this will run MAgPIE with the default settings, if you want to change them choose the
+
+Advanced usage: Run the container interactively using
+```
+sudo docker run -v /an/absolute/path/to/a/folder/:/home/magpie/output -it magpie bash
+```
 
 ## HOW TO CONFIGURE
 Model run settings are set in `config/default.cfg` (or another config file of

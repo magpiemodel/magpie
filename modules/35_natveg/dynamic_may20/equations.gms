@@ -62,7 +62,7 @@
  		pc35_other(j2,ac_sub) - v35_other(j2,ac_sub);
 
  q35_secdforest_expansion(j2,ac_est) ..
- 	v35_other_expansion(j2,ac_est) =e=
+ 	v35_secdforest_expansion(j2,ac_est) =e=
  		v35_secdforest(j2,ac_est) - pc35_secdforest(j2,ac_est);
 
  q35_secdforest_reduction(j2,ac_sub) ..
