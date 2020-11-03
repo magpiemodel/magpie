@@ -22,48 +22,6 @@ for (k in 1:length(clustering)){
   for (i in 1:length(AEI)){
     for(j in 1:length(realization)){
 
-
-#      if(clustering[k]=="m200_Land"){
-#
-#        cfg$input <- c("rev4.51+mrmagpie8_h12_magpie.tgz",
-#               "rev4.51+mrmagpie8_h12_93ba9cce36beb9a8e242a1fc6b1776cd_cellularmagpie.tgz",
-#               "rev4.51+mrmagpie8_h12_validation.tgz",
-#               "additional_data_rev3.85.tgz"
-#              )
-#
-#      }else if(clustering[k]=="sticky_feb18"){
-#
-#        cfg$input <- c("rev4.51+mrmagpie8_h12_magpie.tgz",
-#               "rev4.51+mrmagpie8_h12_4d77b3919c13daf7d986d7b542a45282_cellularmagpie.tgz",
-#               "rev4.51+mrmagpie8_h12_validation.tgz",
-#               "additional_data_rev3.85.tgz"
-#            )
-      }
-
-        #Inputs
-#        if(clustering[k]=="c200"){
-#
-#          cfg$input <- c("rev4.51+mrmagpie8_h12_magpie_debug.tgz",
-#                 "rev4.51+mrmagpie8_h12_cfc9a5551f05ca4efc6cbc7016516432_cellularmagpie_debug.tgz",
-#                 "rev4.51+mrmagpie8_h12_validation_debug.tgz",
-#                 "additional_data_rev3.85.tgz"
-#                )
-#
-#        }else if(clustering[k]=="m200"){
-#
-#          cfg$input <- c("rev4.51+mrmagpie8_h12_magpie_debug.tgz",
-#                 "rev4.51+mrmagpie8_h12_0fd3d50f15b9a42b430a6039e951d873_cellularmagpie_debug.tgz",
-#                 "rev4.51+mrmagpie8_h12_validation_debug.tgz",
-#                 "additional_data_rev3.85.tgz"
-#              )
-#        }
-
-#        cfg$input <- c("rev4.51+mrmagpie8_h12_magpie.tgz",
-#               "rev4.51+mrmagpie8_h12_ecbf5173fe4051486f34f8764d9fc8e7_cellularmagpie.tgz",
-#               "rev4.51+mrmagpie8_h12_validation.tgz",
-#               "additional_data_rev3.85.tgz"
-#              )
-
         #Change the results folder name
         #NBC STANDS FOR NEW BEST CALIBRATION
         cfg$title<-paste0("LPj_T_NBC_",realization[j],"_",clustering[k],"_","rcp2p6","_CO2_",climate[1])
@@ -95,3 +53,45 @@ for (k in 1:length(clustering)){
         }
       }
     }
+
+    #
+    #      if(clustering[k]=="m200_Land"){
+    #
+    #        cfg$input <- c("rev4.51+mrmagpie8_h12_magpie.tgz",
+    #               "rev4.51+mrmagpie8_h12_93ba9cce36beb9a8e242a1fc6b1776cd_cellularmagpie.tgz",
+    #               "rev4.51+mrmagpie8_h12_validation.tgz",
+    #               "additional_data_rev3.85.tgz"
+    #              )
+    #
+    #      }else if(clustering[k]=="sticky_feb18"){
+    #
+    #        cfg$input <- c("rev4.51+mrmagpie8_h12_magpie.tgz",
+    #               "rev4.51+mrmagpie8_h12_4d77b3919c13daf7d986d7b542a45282_cellularmagpie.tgz",
+    #               "rev4.51+mrmagpie8_h12_validation.tgz",
+    #               "additional_data_rev3.85.tgz"
+    #            )
+    #      }
+
+            #Inputs
+    #        if(clustering[k]=="c200"){
+    #
+    #          cfg$input <- c("rev4.51+mrmagpie8_h12_magpie_debug.tgz",
+    #                 "rev4.51+mrmagpie8_h12_cfc9a5551f05ca4efc6cbc7016516432_cellularmagpie_debug.tgz",
+    #                 "rev4.51+mrmagpie8_h12_validation_debug.tgz",
+    #                 "additional_data_rev3.85.tgz"
+    #                )
+    #
+    #        }else if(clustering[k]=="m200"){
+    #
+    #          cfg$input <- c("rev4.51+mrmagpie8_h12_magpie_debug.tgz",
+    #                 "rev4.51+mrmagpie8_h12_0fd3d50f15b9a42b430a6039e951d873_cellularmagpie_debug.tgz",
+    #                 "rev4.51+mrmagpie8_h12_validation_debug.tgz",
+    #                 "additional_data_rev3.85.tgz"
+    #              )
+    #        }
+
+    #        cfg$input <- c("rev4.51+mrmagpie8_h12_magpie.tgz",
+    #               "rev4.51+mrmagpie8_h12_ecbf5173fe4051486f34f8764d9fc8e7_cellularmagpie.tgz",
+    #               "rev4.51+mrmagpie8_h12_validation.tgz",
+    #               "additional_data_rev3.85.tgz"
+    #              )
