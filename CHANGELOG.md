@@ -5,31 +5,52 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+
+## [Unreleased] 
 
 ### added
 
-- **modules**
-- **38_factor_costs** Added the new "sticky" realization to the factor costs module. The realization "sticky_feb18" favors expansion in cells with preexisting farmland and capital based on capital investment decisions.
-
- - **modules** added endogenous implementation of local biophysical (bph) impacts of afforestation to existing realizations in modules 32_forestry (dynamic_oct19) and 56_ghg_policy (price_jan20). default = off
- - **73_timber** Added timber module which brings the ability of producing woody biomass for timber plantations and natural vegetation. Default = off.
- - **32_forestry** New realization for timber production from timber plantations. This builds up on previous forestry realization for afforestation.
- - **35_natveg** New realization for timber production from natural vegetation.
- - **57_maccs** Added MACCs from Harmsen PBL 2019
- - **scripts** added start script for making timber production runs (forestry.R)
-
 ### changed
- - **scripts** updated selection routine for start and output scripts
- - **scripts** replaced lucode dependency with newer packages lucode2 and gms
-- **32_forestry** include new datasets of the bph effect of afforestation / replaced the bph ageclass switch with a fade-in between ac10 and ac30 in (dynamic_may20)
- - **modules**
- - **13_tc**, **39_landconversion**, **41_area_equipped_for_irrigation** and **58_peatland**. For the current time step, the optimization costs only include now the annuity of the present investment. magpie4's reportCosts() function was modified to consider these changes.
 
-### Removed
- - **scripts** removed GP_final start script due to obsolescence
+### removed
 
 ### fixed
+
+## [4.3.1] - 2020-11-03
+
+### added
+- **main** Added Dockerfile for running MAgPIE in a container
+
+### fixed
+- **35_natveg** Bugfix "v35_secdforest_expansion"
+- **52_carbon** Bugfix "p52_scaling_factor" for climate change runs
+
+## [4.3.0] - 2020-09-15
+
+### added
+- **38_factor_costs** Added the new "sticky" realization to the factor costs module. The realization "sticky_feb18" favors expansion in cells with preexisting farmland and capital based on capital investment decisions.
+- **modules** added endogenous implementation of local biophysical (bph) impacts of afforestation to existing realizations in modules 32_forestry (dynamic_oct19) and 56_ghg_policy (price_jan20). default = off
+- **73_timber** Added timber module which brings the ability of producing woody biomass for timber plantations and natural vegetation. Default = off. New switch: `s73_foresight`. New scalars : `s73_timber_prod_cost`, `s73_timber_harvest_cost`,`s73_cost_multiplier`,`s73_free_prod_cost`
+- **32_forestry** New realization `dynamic_may20` for forestry land use dynamics. This builds up on previous forestry realization for afforestation. New switches: `s32_fix_plant`, `c32_interest_rate`. New scalars : `s32_plant_share`, `s32_forestry_int_rate`, `s32_investment_cost`, `s52_plantation_threshold`.
+- **35_natveg** New realization `dynamic_may20` for natural vegetation land use dynamics. New forest protection scenario.
+- **52_carbon** Added interface which is used for calculating additional investment needed in plantations when carbon stocks are lower than a specified threshold. New scalar: `s52_plantation_threshold`.
+- **57_maccs** Added MACCs from Harmsen PBL 2019
+- **15_food** Added the option to include calories from alcohol consumption in healthy and sustainable EAT-Lancet diets.
+- **scripts** added start script for making timber production runs (forestry.R).
+
+### changed
+- **scripts** updated selection routine for start and output scripts
+- **scripts** replaced lucode dependency with newer packages lucode2 and gms
+- **32_forestry** include new datasets of the bph effect of afforestation / replaced the bph ageclass switch with a fade-in between ac10 and ac30 in (dynamic_may20)
+ - **13_tc**, **39_landconversion**, **41_area_equipped_for_irrigation** and **58_peatland**. For the current time step, the optimization costs only include now the annuity of the present investment. magpie4's reportCosts() function was modified to consider these changes.
+
+### removed
+ - **scripts** deleted outdated start and output scripts
+
+### fixed
+ - **32_forestry** Rotation length calculation based on correct marginals of growth function in timber plantations. Clearer calculations for harvested area for timber production.
+ - **35_natveg** Clearer calculations for harvested area for timber production.
+ - **52_carbon** Fix to the Carbon densities received from LPJmL for timber plantations.
 
 ## [4.2.1] - 2020-05-15
 
@@ -71,7 +92,7 @@ This release version is focussed on consistency between the MAgPIE setup and the
 ### changed
  - **config** new default ghg emission pricing policy "redd+_nosoil" in c56_emis_policy. Includes all pools included in the previous default "SSP_nosoil", and in addition "forestry".
  - **13_tau** lower bound for vm_tau for historical time steps
- - **50_nr_soil_budget** atmospheric deposition is now estimated on the cluster-level instead of the region level to improve spatial patterns.  
+ - **50_nr_soil_budget** atmospheric deposition is now estimated on the cluster-level instead of the region level to improve spatial patterns.
  - **56_ghg_policy** updated scenarios in f56_emis_policy: none, all natural (called 'ssp') and all land use change emissions (pure co2) being included in greenhouse gas pricing. ssp and all also featuring additional scenarios excluding soil carbon pricing (marked with '_nosoil' postscript).
  - **56_ghg_policy** Several changes regarding afforestation: use of detailed formula for incentive calculation instead of simplified Hotelling formula, 50 year planning horizon (instead of 80 years), phase-in of GHG prices deactivated by default (now done in REMIND), CO2 price reduction factor deactivated by default, introduced buffer reduction factor of 20% for afforestation.
  - **59_som** updated cellpool_aug16 realization to use new interfaces from land module on land use type specific land expansion and reduction as well as crop type specific land initialization pattern. Additionally added irrigation as stock change factor sub-type. N fertilizer from soil organic matter decomposition is truncated after threshold to avoid unrealistically high fertilization rates.
@@ -140,7 +161,9 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.2.1...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.3.1...develop
+[4.3.1]: https://github.com/magpiemodel/magpie/compare/v4.3.0...v4.3.1
+[4.3.0]: https://github.com/magpiemodel/magpie/compare/v4.2.1...v4.3.0
 [4.2.1]: https://github.com/magpiemodel/magpie/compare/v4.2.0...v4.2.1
 [4.2.0]: https://github.com/magpiemodel/magpie/compare/v4.1.1...v4.2.0
 [4.1.1]: https://github.com/magpiemodel/magpie/compare/v4.1.0...v4.1.1
