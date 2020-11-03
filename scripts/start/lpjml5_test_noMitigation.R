@@ -13,12 +13,12 @@ source("config/default.cfg")
 clustering<-c("c200")
 
 #Factor cost realizations
-realization<-c("mixed_feb17")
-climate<-c("cc")
+realization<-c("mixed_feb17","sticky_feb18")
+climate<-c("cc","nocc")
 #AEI<-c("LUH2v2","Siebert")
 AEI<-c("LUH2v2")
 
-for (k in 1:length(clustering)){
+for (k in 1:length(climate)){
   for (i in 1:length(AEI)){
     for(j in 1:length(realization)){
 
@@ -43,11 +43,11 @@ for (k in 1:length(clustering)){
         cfg$gms$factor_costs <- realization[j]
 
         #Climate impact or not
-        cfg$gms$c14_yields_scenario  <- climate[1]
-        cfg$gms$c42_watdem_scenario  <- climate[1]
-        cfg$gms$c52_carbon_scenario  <- climate[1]
-        cfg$gms$c43_watavail_scenario<- climate[1]
-        cfg$gms$c59_som_scenario  <- climate[1]
+        cfg$gms$c14_yields_scenario  <- climate[k]
+        cfg$gms$c42_watdem_scenario  <- climate[k]
+        cfg$gms$c52_carbon_scenario  <- climate[k]
+        cfg$gms$c43_watavail_scenario<- climate[k]
+        cfg$gms$c59_som_scenario  <- climate[k]
 
         start_run(cfg=cfg)
         }
