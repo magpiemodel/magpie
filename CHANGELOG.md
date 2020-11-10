@@ -5,16 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+
+## [Unreleased] 
+
+### added
+
+### changed
+
+### removed
+
+### fixed
+
+## [4.3.1] - 2020-11-03
 
 ### added
 - **main** Added Dockerfile for running MAgPIE in a container
 
-### changed 
-
 ### fixed
-
-
+- **35_natveg** Bugfix "v35_secdforest_expansion"
+- **52_carbon** Bugfix "p52_scaling_factor" for climate change runs
 
 ## [4.3.0] - 2020-09-15
 
@@ -152,7 +161,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.3.0...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.3.1...develop
+[4.3.1]: https://github.com/magpiemodel/magpie/compare/v4.3.0...v4.3.1
 [4.3.0]: https://github.com/magpiemodel/magpie/compare/v4.2.1...v4.3.0
 [4.2.1]: https://github.com/magpiemodel/magpie/compare/v4.2.0...v4.2.1
 [4.2.0]: https://github.com/magpiemodel/magpie/compare/v4.1.1...v4.2.0
