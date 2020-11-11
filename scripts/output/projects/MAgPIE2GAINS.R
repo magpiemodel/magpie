@@ -45,22 +45,36 @@ gdx <- paste0(outputdir,"/fulldata.gdx")
 #untar(tarfile = tgz, files = "lpj_yields_0.5.mz", exdir=outputdir)
 
 
-#print("save origin path in folder so that original run data can be found")
-#write.table(x = outputdir,file = paste0(outputpath,"origin_folder.txt"),row.names = FALSE,col.names = FALSE)
-
 print("create an separate output directory for cellular results")
 outputpath<-paste0("./output/",title,"_GAINS", "/")
 dir.create(outputpath)
+write.table(x = outputdir,file = paste0(outputpath,"origin_folder.txt"),row.names = FALSE,col.names = FALSE)
+
 
 print("starting cellular output generation using getReportMAgPIE2GAINS")
 
 a <- getReportMAgPIE2GAINS(gdx = gdx,
                            folder=outputpath,
                            dir=outputdir)
+
 print(".nc outputs generated, now converting to GAINs mapping")
 
 
-files <- paste0(outputpath, c("NitrogenBudgetNonagland","NitrogenBudgetPasture","NitrogenBudgetCropland",
-   "CroplandAreaPhysical","LandAreaPhysical"), ".nc")
+files <- file.path(paste0(outputpath, c("NitrogenExcretion",
+                                        "NitrogenBudgetNonagland",
+                                        "NitrogenBudgetPasture",
+                                        "NitrogenBudgetCropland",
+                                        "CroplandAreaPhysical",
+                                         "LandAreaPhysical"), ".nc"))
 
-lapply(X=files, FUN=nc2gains, check=FALSE)
+lapply(X=files, FUN=nc2gains, check=TRUE)
+
+
+files <- file.path(paste0(outputpath,
+                          c("NitrogenBudgetNonagland","NitrogenBudgetPasture"), ".nc"))
+
+
+
+
+
+
