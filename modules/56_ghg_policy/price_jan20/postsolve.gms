@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-
+p56_emissions_reg(t,i,emis_source,pollutants) = vm_emissions_reg.l(i,emis_source,pollutants);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_peatland_emis_cost(t,i,"marginal")                                 = vm_peatland_emis_cost.m(i);
