@@ -41,10 +41,16 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
 
  q56_emission_costs_reg_yearly(i2,emis_reg_yr56) ..
                  v56_emission_costs_reg_yearly(i2,emis_reg_yr56) =e=
-                 sum(pollutants,
-                     vm_emissions_reg(i2,emis_reg_yr56,pollutants) *
-                     sum(ct, p56_emis_policy(ct,i2,pollutants,emis_reg_yr56) *
-                     im_pollutant_prices(ct,i2,pollutants)));
+                 sum(pollutants_long,
+                     vm_emissions_reg(i2,emis_reg_yr56,pollutants_long) *
+                     sum(ct, p56_emis_policy(ct,i2,pollutants_long,emis_reg_yr56) *
+                     im_pollutant_prices(ct,i2,pollutants_long)))
+               + sum(pollutants_short,
+                     (vm_emissions_reg(i2,emis_reg_yr56,pollutants_short)*(1-s56_gwpstar) + 
+                     (4 * vm_emissions_reg(i2,emis_reg_yr56,pollutants_short)
+                     -3.75 * pc56_emissions_reg_before(i2,emis_reg_yr56,pollutants_short)) * s56_gwpstar) *
+                     sum(ct, p56_emis_policy(ct,i2,pollutants_short,emis_reg_yr56) *
+                     im_pollutant_prices(ct,i2,pollutants_short)));
 
 
  q56_emission_costs_cell_yearly(j2,emis_cell_yr56) ..
