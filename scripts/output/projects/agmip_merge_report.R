@@ -13,6 +13,7 @@
 library(lucode2)
 library(magclass)
 library(quitte)
+library(madrat)
 
 options(error=function()traceback(2))
 
@@ -27,7 +28,7 @@ cat("\nStarting output generation\n")
 
 missing <- NULL
 
-if(file.exists("output/agmip_report_comp.csv")) file.rename("output/agmip_report_comp.csv","output/agmip_report_comp.bak")
+if(file.exists("output/agmip_report_full.csv")) file.rename("output/agmip_report_full.csv","output/agmip_report_full.bak")
 
 for (i in 1:length(outputdir)) {
   print(paste("Processing",outputdir[i]))
@@ -41,7 +42,7 @@ for (i in 1:length(outputdir)) {
     a <- read.report(rep,as.list = FALSE)
     getNames(a,dim=1) <- scen
     #add to reporting csv file
-    write.report2(a,file="output/agmip_report_comp.csv",append=TRUE,ndigit = 4,skipempty = FALSE)
+    write.report2(a,file="output/agmip_report_full.csv",append=TRUE,ndigit = 4,skipempty = FALSE)
   } else missing <- c(missing,outputdir[i])
 }
 if (!is.null(missing)) {
@@ -49,4 +50,9 @@ if (!is.null(missing)) {
   print(missing)
 }
 
-if(file.exists("output/agmip_report_comp.csv")) saveRDS(read.quitte("output/agmip_report_comp.csv"),file = "output/agmip_report_comp.rds")
+if(file.exists("output/agmip_report_full.csv")) {
+  saveRDS(read.quitte("output/agmip_report_full.csv"),file = "output/agmip_report_full.rds")
+  agmip_report_full <- read.report(file="agmip_report_full.csv")
+  write.reportProject(mif=agmip_report_full,mapping = toolMappingFile("reportingVariables","mapping_magpie_agmip.csv"), file = "agmip_report_GWPstar_nov20.csv",format="AgMIP")
+}
+
