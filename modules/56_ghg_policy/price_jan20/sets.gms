@@ -30,6 +30,15 @@ sets
    nh3_n, no2_n,
    no3_n /
 
+   pollutants_long(pollutants) subset of long-lived pollutants_all that can be taxed
+   / co2_c,
+   n2o_n_direct, n2o_n_indirect,
+   nh3_n, no2_n,
+   no3_n /
+
+   pollutants_short(pollutants) subset of short lived pollutants_all that can be taxed
+   / ch4 /
+
    n_pollutants(pollutants) subset of n pollutants
    / n2o_n_direct,n2o_n_indirect,
    nh3_n, no2_n,
