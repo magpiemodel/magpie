@@ -92,6 +92,8 @@ sets
    rice, ent_ferm,  beccs/
 
    ac_exp(ac) age-class corresponding to planning horizon
+   
+   t20(t) 20 years before or closest match
 ;
 
 $onempty
