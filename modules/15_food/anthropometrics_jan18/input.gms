@@ -28,6 +28,7 @@ $setglobal c15_fishscen  constant
 $setglobal c15_alcscen  constant
 $setglobal c15_livescen  constant
 $setglobal c15_rumdairyscen  constant
+$setglobal c15_livescen_target  constant
 
 
 $setglobal c15_exo_scen_targetyear  y2050
@@ -91,6 +92,8 @@ scalar s15_alc_scen Scenario target for the inclusion of alcohol in the EAT-Lanc
 scalar s15_rum_share_fadeout_india_strong 	switch for stronger ruminant fadeout in India (binary) / 1 /;
 
 scalar s15_milk_share_fadeout_india 		switch for milk fadeout in India (binary) / 1 /;
+
+scalar s15_kcal_pc_livestock_intake_target target for livestock intake (kcal per cap per day) / 430 /;
 
 
 table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of heterogeneous products and processes (mio. tDM)

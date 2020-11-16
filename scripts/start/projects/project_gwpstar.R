@@ -48,9 +48,10 @@ start_run(cfg,codeCheck=FALSE)
 cfg$title <- "SSP2_RCPREF_C0000_LSPCUT"
 cfg <- gms::setScenario(cfg,c("SSP2","NPI"))
 cfg <- setScenario(cfg,c("SSP2","NPI"))
-cfg$gms$s15_exo_diet <- 1
-cfg$gms$c15_kcal_scen <- "healthy_BMI"
-cfg$gms$c15_EAT_scen <- "FLX"
+cfg$gms$c15_livescen_target <- "lin_zero_20_70"
+# cfg$gms$s15_exo_diet <- 1
+# cfg$gms$c15_kcal_scen <- "healthy_BMI"
+# cfg$gms$c15_EAT_scen <- "FLX"
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
 cfg$gms$s56_gwpstar <- 0
 start_run(cfg,codeCheck=FALSE)

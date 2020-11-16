@@ -104,4 +104,5 @@ i15_fish_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitutio
 i15_alcohol_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_alcscen%"));
 i15_livestock_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_livescen%"));
 i15_rumdairy_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_rumdairyscen%"));
+i15_livestock_fadeout_threshold(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_livescen_target%"));
 

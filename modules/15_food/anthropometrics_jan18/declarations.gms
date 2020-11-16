@@ -107,6 +107,7 @@ parameters
   i15_alcohol_fadeout(t,i)                         Alcohol fadeout share (1)
   i15_livestock_fadeout(t,i)                       Livestock fadeout share (1)
   i15_rumdairy_fadeout(t,i)                        Ruminant meat and dairy fadeout share (1)
+  i15_livestock_fadeout_threshold(t,i)             Livestock fadeout share for threshold (1)
 
  i15_staples_kcal_structure_iso(t,iso,kfo_st)        Share of single staple products within total staples (1)
  i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap)  Share of single livestock products within total livestock products (uncorrected for future changes in shares) (1)
@@ -137,7 +138,8 @@ parameters
  p15_livestock_kcal_structure_orig(t,i,kfo_lp)   Auxiliary parameter for livestock kcal structure - basis for scenarios of livestock food substitution (1)
  p15_rumdairy_kcal_structure_orig(t,i,kfo_rd)    Auxiliary parameter for ruminant and dairy kcal structure - basis for scenarios of ruminant-based food substitution (1)
  p15_plant_kcal_structure_orig(t,i,kfo_pp)       Auxiliary parameter for plant-based food kcal structure - basis for scenarios of livestock food substitution (1)
-
+ p15_kcal_pc_livestock_supply_target(i)		 	 Target of per capita livestock consumption (kcal per capita per day)
+ 
  p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)     Calibrated estimates of BMI share for population groups  (1)
  p15_intake_total_iso_calibrated(t,iso)                Total food intake in a country (kcal per capita per day)
  p15_intake_total_calibrated(t,i)                      Total regional food intake (kcal per capita per day)
