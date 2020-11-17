@@ -60,18 +60,14 @@ a <- getReportMAgPIE2GAINS(gdx = gdx,
 print(".nc outputs generated, now converting to GAINs mapping")
 
 
-files <- file.path(paste0(outputpath, c("NitrogenExcretion",
-                                        "NitrogenBudgetNonagland",
+files <- file.path(paste0(outputpath, c("NitrogenBudgetNonagland",
                                         "NitrogenBudgetPasture",
                                         "NitrogenBudgetCropland",
                                         "CroplandAreaPhysical",
-                                         "LandAreaPhysical"), ".nc"))
+                                        "LandAreaPhysical",
+                                        "NitrogenExcretion"), ".nc"))
 
 lapply(X=files, FUN=nc2gains, check=TRUE)
-
-
-files <- file.path(paste0(outputpath,
-                          c("NitrogenBudgetNonagland","NitrogenBudgetPasture"), ".nc"))
 
 
 
