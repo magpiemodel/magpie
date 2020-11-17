@@ -32,58 +32,51 @@ cfg$force_replace <- TRUE
 
 cfg$output <- c("rds_report","projects/agmip_report","validation","extra/disaggregation")
 
-
+prefix <- "V1"
 
 #################################################################
 # 1 Baseline SSP1-3 simulations "_NoMt_NoCC"                    #
 #################################################################
 
 
-cfg$title <- "SSP2_RCPREF_C0000_REFDIET"
+cfg$title <- paste(prefix,"SSP2_RCPREF_C0000_REFDIET",sep = "_")
 cfg <- gms::setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
 cfg$gms$s56_gwpstar <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "SSP2_RCPREF_C0000_LSPCUT"
+cfg$title <- paste(prefix,"SSP2_RCPREF_C0000_LSPCUT")
 cfg <- gms::setScenario(cfg,c("SSP2","NPI"))
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c15_livescen_target <- "lin_zero_20_70"
-# cfg$gms$s15_exo_diet <- 1
-# cfg$gms$c15_kcal_scen <- "healthy_BMI"
-# cfg$gms$c15_EAT_scen <- "FLX"
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
 cfg$gms$s56_gwpstar <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "SSP2_RCPREF_C0150_REFDIET"
+cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_REFDIET")
 cfg <- gms::setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$s56_gwpstar <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "SSP2_RCPREF_C0150_GWPSTAR_REFDIET"
+cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_GWPSTAR_REFDIET")
 cfg <- gms::setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$s56_gwpstar <- 1
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "SSP2_RCPREF_C0150_LSPCUT"
+cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_LSPCUT")
 cfg <- gms::setScenario(cfg,c("SSP2","NPI"))
 cfg <- setScenario(cfg,c("SSP2","NPI"))
-cfg$gms$s15_exo_diet <- 1
-cfg$gms$c15_kcal_scen <- "healthy_BMI"
-cfg$gms$c15_EAT_scen <- "FLX"
+cfg$gms$c15_livescen_target <- "lin_zero_20_70"
 cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$s56_gwpstar <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- "SSP2_RCPREF_C0150_GWPSTAR_LSPCUT"
+cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_GWPSTAR_LSPCUT")
 cfg <- gms::setScenario(cfg,c("SSP2","NPI"))
 cfg <- setScenario(cfg,c("SSP2","NPI"))
-cfg$gms$s15_exo_diet <- 1
-cfg$gms$c15_kcal_scen <- "healthy_BMI"
-cfg$gms$c15_EAT_scen <- "FLX"
+cfg$gms$c15_livescen_target <- "lin_zero_20_70"
 cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$s56_gwpstar <- 1
 start_run(cfg,codeCheck=FALSE)
