@@ -45,7 +45,7 @@ cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
 cfg$gms$s56_gwpstar <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"SSP2_RCPREF_C0000_LSPCUT")
+cfg$title <- paste(prefix,"SSP2_RCPREF_C0000_LSPCUT",sep = "_")
 cfg <- gms::setScenario(cfg,c("SSP2","NPI"))
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c15_livescen_target <- "lin_zero_20_70"
@@ -53,19 +53,19 @@ cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
 cfg$gms$s56_gwpstar <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_REFDIET")
+cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_REFDIET",sep = "_")
 cfg <- gms::setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$s56_gwpstar <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_GWPSTAR_REFDIET")
+cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_GWPSTAR_REFDIET",sep = "_")
 cfg <- gms::setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$s56_gwpstar <- 1
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_LSPCUT")
+cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_LSPCUT",sep = "_")
 cfg <- gms::setScenario(cfg,c("SSP2","NPI"))
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c15_livescen_target <- "lin_zero_20_70"
@@ -73,7 +73,7 @@ cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$s56_gwpstar <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_GWPSTAR_LSPCUT")
+cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_GWPSTAR_LSPCUT",sep = "_")
 cfg <- gms::setScenario(cfg,c("SSP2","NPI"))
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c15_livescen_target <- "lin_zero_20_70"
