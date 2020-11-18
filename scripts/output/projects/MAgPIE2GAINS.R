@@ -10,7 +10,7 @@
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
-#Version 1.00 - Benjamin Leon Bodirsky
+#Version 1.00 - Benjamin Leon Bodirsky, David M Chen
 # 1.00: first working version
 
 library(lucode2)
