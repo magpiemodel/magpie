@@ -25,6 +25,10 @@ positive variables
 ;
 
 equations
+<<<<<<< HEAD
+=======
+ q10_land(j)                        	Land conversion constraint (mio. ha)
+>>>>>>> parent of 47363a4d... degr start scripts and gdp degr data
  q10_transition_matrix(j)			        Land transition constraint cell area (mio. ha)
  q10_transition_to(j,land_to10)		    Land transition constraint to (mio. ha)
  q10_transition_from(j,land_from10)	  Land transition constraint from (mio. ha)
@@ -46,6 +50,7 @@ parameters
  ov_croplandreduction(t,j,land,type)                 Targets of cropland reduction (mio. ha)
  ov_cost_land_transition(t,j,type)                   Costs for lu transitions (mio. USD05MER per yr)
  ov10_lu_transitions(t,j,land_from10,land_to10,type) Land transitions between time steps (mio. ha)
+ oq10_land(t,j,type)                                 Land conversion constraint (mio. ha)
  oq10_transition_matrix(t,j,type)                    Land transition constraint cell area (mio. ha)
  oq10_transition_to(t,j,land_to10,type)              Land transition constraint to (mio. ha)
  oq10_transition_from(t,j,land_from10,type)          Land transition constraint from (mio. ha)
