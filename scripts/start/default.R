@@ -15,3 +15,8 @@ source("scripts/start_functions.R")
 
 #start MAgPIE run
 start_run(cfg="default.cfg")
+
+cfg$force_download <- TRUE
+
+cfg$gms$land <- "feb15"     
+

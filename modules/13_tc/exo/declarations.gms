@@ -23,7 +23,7 @@ parameters
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_tau(t,i,type)                 Agricultural land use intensity tau (1)
- ov_tech_cost(t,i,type)           Costs of TC (mio. USD05PPP per yr)
+ ov_tau(t,i,type)       Agricultural land use intensity tau (1)
+ ov_tech_cost(t,i,type) Costs of TC (mio. USD05PPP per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
