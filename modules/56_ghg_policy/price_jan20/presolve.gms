@@ -10,6 +10,6 @@
 p56_diff(t2) = abs(m_year(t2) - (m_year(t) - 20));
 s56_min = smin(t2, p56_diff(t2));
 t20(t2) = p56_diff(t2) = s56_min;
-display ct;
-display t20;
-pc56_emissions_reg_before(i,emis_source,pollutants) = sum(t20, p56_emissions_reg(t20,i,emis_source,pollutants));
+*display ct;
+*display t20;
+p56_emissions_reg_before(t,i,emis_source,pollutants) = sum(t20, p56_emissions_reg(t20,i,emis_source,pollutants));

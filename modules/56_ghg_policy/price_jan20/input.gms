@@ -35,6 +35,12 @@ sets
                           VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 ;
 
+sets
+$onempty
+   pollutants_gwpstar(pollutants) pollutants that should be taxed based on the GWPstar /  /
+$offempty
+;
+
 scalars
   s56_reward_neg_emis reward CDR from all sources (-Inf) or only from afforestation (0) (1) / 0 /
   s56_limit_ch4_n2o_price upper limit for CH4 and N2O GHG prices (USD05MER per tC) / 1000 /

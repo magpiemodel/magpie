@@ -6,6 +6,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 p56_emissions_reg(t,i,emis_source,pollutants) = 0;
+pollutants_gwp100(pollutants) = not pollutants_gwpstar(pollutants);
+*display pollutants_gwp100;
+*display pollutants_gwpstar;
 
 ***fix vm_btm_cell to zero for non-CO2 emissions from land-use change
 vm_btm_cell.fx(j,emis_source_cell,pollutants)$(not sameas(pollutants,"co2_c")) = 0;

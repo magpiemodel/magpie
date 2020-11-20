@@ -37,20 +37,23 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
 *** Emission costs
 
 *' **Emission costs** are calculated by multiplying regional and cellular emissions by the emission price `im_pollutant_prices`
-*' taking into account the price policy that was defined above in `f56_emis_policy`.
+*' taking into account the price policy that was defined above in `p56_emis_policy`.
+*' The underlying basic formula used for `pollutants_gwp100` is: 
+*' `emis_cost(t) = emis(t) * CO2_price(t) * GWP100`.
+*' The underlying formula used for `pollutants_gwpstar`, based on @Lynch2020 equation 3, is:
+*' `emis_cost(t) = (4 * emis(t) - 3.75 * emis(t-20)) * CO2_price * GWP100`.
 
  q56_emission_costs_reg_yearly(i2,emis_reg_yr56) ..
                  v56_emission_costs_reg_yearly(i2,emis_reg_yr56) =e=
-                 sum(pollutants_long,
-                     vm_emissions_reg(i2,emis_reg_yr56,pollutants_long) *
-                     sum(ct, p56_emis_policy(ct,i2,pollutants_long,emis_reg_yr56) *
-                     im_pollutant_prices(ct,i2,pollutants_long)))
-               + sum(pollutants_short,
-                     (vm_emissions_reg(i2,emis_reg_yr56,pollutants_short)*(1-s56_gwpstar) + 
-                     (4 * vm_emissions_reg(i2,emis_reg_yr56,pollutants_short)
-                     -3.75 * pc56_emissions_reg_before(i2,emis_reg_yr56,pollutants_short)) * s56_gwpstar) *
-                     sum(ct, p56_emis_policy(ct,i2,pollutants_short,emis_reg_yr56) *
-                     im_pollutant_prices(ct,i2,pollutants_short)));
+                 sum(pollutants_gwp100,
+                     vm_emissions_reg(i2,emis_reg_yr56,pollutants_gwp100) *
+                     sum(ct, p56_emis_policy(ct,i2,pollutants_gwp100,emis_reg_yr56) *
+                     im_pollutant_prices(ct,i2,pollutants_gwp100)))
+               + sum(pollutants_gwpstar,
+                     (4 * vm_emissions_reg(i2,emis_reg_yr56,pollutants_gwpstar) 
+                     - 3.75 * sum(ct, p56_emissions_reg_before(ct,i2,emis_reg_yr56,pollutants_gwpstar))) *
+                     sum(ct, p56_emis_policy(ct,i2,pollutants_gwpstar,emis_reg_yr56) *
+                     im_pollutant_prices(ct,i2,pollutants_gwpstar)));
 
 
  q56_emission_costs_cell_yearly(j2,emis_cell_yr56) ..
