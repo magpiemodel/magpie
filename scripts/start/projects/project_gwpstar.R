@@ -32,7 +32,7 @@ cfg$force_replace <- TRUE
 
 cfg$output <- c("rds_report","projects/agmip_report","validation","extra/disaggregation")
 
-prefix <- "V3"
+prefix <- "V4"
 
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 

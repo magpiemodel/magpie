@@ -17,8 +17,22 @@ In this realization, the IPCC AR4 global warming potential factor for N2O (298) 
 PBL used these parameters to convert USD per ton N2O and USD per ton CH4 into USD per ton C eq. 
 $offtext
 
-i57_mac_step_n2o(t,i) = min(201, ceil(im_pollutant_prices(t,i,"n2o_n_direct")/298*28/44*44/12 / s57_step_length) + 1);
-i57_mac_step_ch4(t,i) = min(201, ceil(im_pollutant_prices(t,i,"ch4")/25*44/12 / s57_step_length) + 1);
+$ontext
+The pollutant price used in the ´57_maccs´ module should reflect the marginal cost 
+of one additional unit of emission based on the formulation of emission costs
+in the `56_ghg_policy` module (`q56_emission_costs_reg_yearly`).
+In the case of GWP100 (`pollutants_gwp100`), the marginal cost are equal to the pollutant 
+price used in `56_ghg_policy`.
+In the case of GWPstar (`pollutants_gwpstar`), the marginal cost are equal to the pollutant 
+price used in `56_ghg_policy` multiplied by a factor of 4 (first derivative of the 
+GWPstar cost function, based on @Lynch2020 equation 3).
+$offtext
+
+i57_pollutant_prices(t,i,pollutants_gwp100) = im_pollutant_prices(t,i,pollutants_gwp100);
+i57_pollutant_prices(t,i,pollutants_gwpstar) = i57_pollutant_prices(t,i,pollutants_gwpstar)*4;
+
+i57_mac_step_n2o(t,i) = min(201, ceil(i57_pollutant_prices(t,i,"n2o_n_direct")/298*28/44*44/12 / s57_step_length) + 1);
+i57_mac_step_ch4(t,i) = min(201, ceil(i57_pollutant_prices(t,i,"ch4")/25*44/12 / s57_step_length) + 1);
 
 *Calculate technical mitigation depending on i57_mac_step_n2o and i57_mac_step_ch4.
 *At zero GHG prices i57_mac_step_n2o and i57_mac_step_ch4 are set to 1.
