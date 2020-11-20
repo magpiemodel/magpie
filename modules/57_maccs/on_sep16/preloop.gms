@@ -29,7 +29,7 @@ GWPstar cost function, based on @Lynch2020 equation 3).
 $offtext
 
 i57_pollutant_prices(t,i,pollutants_gwp100) = im_pollutant_prices(t,i,pollutants_gwp100);
-i57_pollutant_prices(t,i,pollutants_gwpstar) = i57_pollutant_prices(t,i,pollutants_gwpstar)*4;
+i57_pollutant_prices(t,i,pollutants_gwpstar) = im_pollutant_prices(t,i,pollutants_gwpstar)*4;
 
 i57_mac_step_n2o(t,i) = min(201, ceil(i57_pollutant_prices(t,i,"n2o_n_direct")/298*28/44*44/12 / s57_step_length) + 1);
 i57_mac_step_ch4(t,i) = min(201, ceil(i57_pollutant_prices(t,i,"ch4")/25*44/12 / s57_step_length) + 1);
