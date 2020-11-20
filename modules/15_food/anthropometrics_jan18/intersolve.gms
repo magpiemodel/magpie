@@ -145,7 +145,7 @@ if (s15_elastic_demand = 1 AND m_year(t) > sm_fix_SSP2,
 * ###### Food substitution scenarios
 
 
-*' Substitution of ruminant beef with poultry:
+* Substitution of ruminant beef with poultry:
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated(t,i,"livst_rum") =
                p15_kcal_pc_calibrated_orig(t,i,"livst_rum") * i15_ruminant_fadeout(t,i);
@@ -153,7 +153,7 @@ p15_kcal_pc_calibrated(t,i,"livst_chick") = p15_kcal_pc_calibrated_orig(t,i,"liv
              + p15_kcal_pc_calibrated_orig(t,i,"livst_rum") * (1-i15_ruminant_fadeout(t,i));
 
 
-*' Substitution of fish with poultry:
+* Substitution of fish with poultry:
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated(t,i,"fish") =
                p15_kcal_pc_calibrated_orig(t,i,"fish") * i15_fish_fadeout(t,i);
@@ -161,13 +161,13 @@ p15_kcal_pc_calibrated(t,i,"livst_chick") = p15_kcal_pc_calibrated_orig(t,i,"liv
              + p15_kcal_pc_calibrated_orig(t,i,"fish") * (1-i15_fish_fadeout(t,i));
 
 
-*' Fade-out of alcohol consumption without substitution:
+* Fade-out of alcohol consumption without substitution:
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated(t,i,"alcohol") =
                p15_kcal_pc_calibrated_orig(t,i,"alcohol") * i15_alcohol_fadeout(t,i);
 
 
-*' Substitution of livestock products (without fish) with plant-based food commodities:
+* Substitution of livestock products (without fish) with plant-based food commodities:
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated_livestock_orig(t,i) = sum(kfo_lp,p15_kcal_pc_calibrated(t,i,kfo_lp));
 p15_kcal_pc_calibrated_plant_orig(t,i) = sum(kfo_pp,p15_kcal_pc_calibrated(t,i,kfo_pp));
@@ -187,7 +187,7 @@ p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
                + p15_kcal_pc_calibrated_livestock_orig(t,i) * (1-i15_livestock_fadeout(t,i)));
 
 
-*' Substitution of ruminant meat and dairy products with plant-based food commodities:
+* Substitution of ruminant meat and dairy products with plant-based food commodities:
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated_rumdairy_orig(t,i) = sum(kfo_rd,p15_kcal_pc_calibrated(t,i,kfo_rd));
 p15_kcal_pc_calibrated_plant_orig(t,i) = sum(kfo_pp,p15_kcal_pc_calibrated(t,i,kfo_pp));
@@ -206,8 +206,8 @@ p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
                *(p15_kcal_pc_calibrated_plant_orig(t,i)
                + p15_kcal_pc_calibrated_rumdairy_orig(t,i) * (1-i15_rumdairy_fadeout(t,i)));
 
-*' Conditional substitution of livestock products (without fish) with plant-based food commodities:
-*' if original intake > 430 kcal/cap/day
+* Conditional substitution of livestock products (without fish) with plant-based food commodities:
+* if original intake > 430 kcal/cap/day
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated_livestock_orig(t,i) = sum(kfo_lp,p15_kcal_pc_calibrated(t,i,kfo_lp));
 p15_kcal_pc_calibrated_plant_orig(t,i) = sum(kfo_pp,p15_kcal_pc_calibrated(t,i,kfo_pp));
