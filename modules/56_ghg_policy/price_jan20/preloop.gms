@@ -6,9 +6,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 p56_emissions_reg(t,i,emis_source,pollutants) = 0;
-pollutants_gwp100(pollutants) = not pollutants_gwpstar(pollutants);
-*display pollutants_gwp100;
-*display pollutants_gwpstar;
+poll_gwp100(pollutants) = not poll_gwpstar(pollutants);
+*display poll_gwp100;
+*display poll_gwpstar;
 
 ***fix vm_btm_cell to zero for non-CO2 emissions from land-use change
 vm_btm_cell.fx(j,emis_source_cell,pollutants)$(not sameas(pollutants,"co2_c")) = 0;
@@ -111,3 +111,49 @@ p56_c_price_aff(t_all,i,ac)$(ac.off >= s56_c_price_exp_aff/5) = sum(ac_exp, p56_
 p56_c_price_aff(t_all,i,ac)$(m_year(t_all)<s56_ghgprice_start) = 0;
 
 display p56_c_price_aff;
+
+*' @code
+*' The pollutant price `im_pollutant_prices` should reflect the marginal cost (i.e. the price) 
+*' of one additional unit of emission based on the formulation of emission costs
+*' in the equation `q56_emission_costs_reg_yearly`.
+*'
+*' Conceptually, emission costs are obtained by conversion of all GHG emissions to CO2eq, using 
+*' AR5 GWP100 factors, and multiplication with the CO2 price. However, for short-lived
+*' climate pollutants the alternative GWP* metric (GWPstar hereafter) has been proposed by @Allen_2018.
+*' While GWP100 tracks the level of emissions, GWPstar tracks the change of emissions. 
+*'
+*' For GWP100, the underlying basic formula used for the calculation of emission cost (`poll_gwp100`) is: 
+*'
+*' `emis_cost(t) = emis(t) * CO2_price(t) * GWP100`
+*'
+*' First derivative (emis(t) is a variable):
+*'
+*' `marg_emis_cost(t) = CO2_price * GWP100`
+*'
+*' Therefore, in the case of GWP100 the marginal emission cost (as derived from 
+*' emission cost function) and the initial emission price (im_pollutant_prices) agree.
+*' Therefore, no change is needed in case of GWP100.
+*'
+im_pollutant_prices(t,i,poll_gwp100) = im_pollutant_prices(t,i,poll_gwp100);
+*'
+*' For GWPstar, the underlying formula, based on @Lynch2020 equation 3, used for 
+*' the calculation of emission cost (`poll_gwpstar`) is: 
+*'
+*' `emis_cost(t) = (4 * emis(t) - 3.75 * emis(t-20)) * CO2_price * GWP100`
+*'
+*' First derivative (myopic case: emis(t) is a variable; emis(t-20) is a parameter):
+*'
+*' `marg_emis_cost(t) = 4 * CO2_price * GWP100`
+*'
+*' Therefore, in the case of GWPstar the marginal emission cost (as derived from 
+*' emission cost function) and the initial emission price (im_pollutant_prices) differ 
+*' by a factor of 4.
+*' Therefore, the initial emission price (im_pollutant_prices) needs to multiplied by factor 4.
+*'
+im_pollutant_prices(t,i,poll_gwpstar) = 4 * im_pollutant_prices(t,i,poll_gwpstar);
+*'
+*' This adjustment of `im_pollutant_prices` in the case of GWPstar is of particular 
+*' importance for the [57_maccs] module, which needs to see the marginal cost 
+*' of one additional unit of emission based on the formulation of emission costs 
+*' in [56_ghg_policy].
+*' @stop

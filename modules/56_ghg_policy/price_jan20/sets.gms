@@ -30,7 +30,7 @@ sets
    nh3_n, no2_n,
    no3_n /
 
-   pollutants_gwp100(pollutants) pollutants that should be taxed based on the GWP100
+   poll_gwp100(pollutants) pollutants that should be taxed based on the GWP100
 
    n_pollutants(pollutants) subset of n pollutants
    / n2o_n_direct,n2o_n_indirect,

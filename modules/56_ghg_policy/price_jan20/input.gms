@@ -37,7 +37,7 @@ sets
 
 sets
 $onempty
-   pollutants_gwpstar(pollutants) pollutants that should be taxed based on the GWPstar /  /
+   poll_gwpstar(pollutants) pollutants that should be taxed based on the GWPstar /  /
 $offempty
 ;
 

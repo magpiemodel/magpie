@@ -32,7 +32,55 @@ cfg$force_replace <- TRUE
 
 cfg$output <- c("rds_report","projects/agmip_report","validation","extra/disaggregation")
 
-prefix <- "V6"
+prefix <- "V7"
+#V7: PBL_2007
+#V8: PBL_2019
+
+cfg <- setScenario(cfg,c("SSP2","NPI"))
+cfg$gms$c57_macc_version  <- "PBL_2007"                # def = PBL_2007
+cfg$gms$s56_limit_ch4_n2o_price <- 1000   # def = 1000
+
+
+cfg$title <- paste(prefix,"SSP2_RCPREF_C0000_REFDIET",sep = "_")
+cfg$gms$c15_livescen_target <- "constant"
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
+cfg$gms$poll_gwpstar <- ""
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- paste(prefix,"SSP2_RCPREF_C0000_LSPCUT",sep = "_")
+cfg$gms$c15_livescen_target <- "lin_zero_20_70"
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
+cfg$gms$poll_gwpstar <- ""
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_REFDIET",sep = "_")
+cfg$gms$c15_livescen_target <- "constant"
+cfg$gms$c56_pollutant_prices <- "coupling"
+cfg$gms$poll_gwpstar <- ""
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_GWPSTAR_REFDIET",sep = "_")
+cfg$gms$c15_livescen_target <- "constant"
+cfg$gms$c56_pollutant_prices <- "coupling"
+cfg$gms$poll_gwpstar <- "ch4"
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_LSPCUT",sep = "_")
+cfg$gms$c15_livescen_target <- "lin_zero_20_70"
+cfg$gms$c56_pollutant_prices <- "coupling"
+cfg$gms$poll_gwpstar <- ""
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_GWPSTAR_LSPCUT",sep = "_")
+cfg$gms$c15_livescen_target <- "lin_zero_20_70"
+cfg$gms$c56_pollutant_prices <- "coupling"
+cfg$gms$poll_gwpstar <- "ch4"
+start_run(cfg,codeCheck=FALSE)
+
+#####
+prefix <- "V8"
+#V7: PBL_2007
+#V8: PBL_2019
 
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c57_macc_version  <- "PBL_2019"                # def = PBL_2007
@@ -42,36 +90,36 @@ cfg$gms$s56_limit_ch4_n2o_price <- 4000   # def = 1000
 cfg$title <- paste(prefix,"SSP2_RCPREF_C0000_REFDIET",sep = "_")
 cfg$gms$c15_livescen_target <- "constant"
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
-cfg$gms$pollutants_gwpstar <- ""
+cfg$gms$poll_gwpstar <- ""
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- paste(prefix,"SSP2_RCPREF_C0000_LSPCUT",sep = "_")
 cfg$gms$c15_livescen_target <- "lin_zero_20_70"
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
-cfg$gms$pollutants_gwpstar <- ""
+cfg$gms$poll_gwpstar <- ""
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_REFDIET",sep = "_")
 cfg$gms$c15_livescen_target <- "constant"
 cfg$gms$c56_pollutant_prices <- "coupling"
-cfg$gms$pollutants_gwpstar <- ""
+cfg$gms$poll_gwpstar <- ""
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_GWPSTAR_REFDIET",sep = "_")
 cfg$gms$c15_livescen_target <- "constant"
 cfg$gms$c56_pollutant_prices <- "coupling"
-cfg$gms$pollutants_gwpstar <- "ch4"
+cfg$gms$poll_gwpstar <- "ch4"
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_LSPCUT",sep = "_")
 cfg$gms$c15_livescen_target <- "lin_zero_20_70"
 cfg$gms$c56_pollutant_prices <- "coupling"
-cfg$gms$pollutants_gwpstar <- ""
+cfg$gms$poll_gwpstar <- ""
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_GWPSTAR_LSPCUT",sep = "_")
 cfg$gms$c15_livescen_target <- "lin_zero_20_70"
 cfg$gms$c56_pollutant_prices <- "coupling"
-cfg$gms$pollutants_gwpstar <- "ch4"
+cfg$gms$poll_gwpstar <- "ch4"
 start_run(cfg,codeCheck=FALSE)
 

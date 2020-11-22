@@ -78,7 +78,7 @@ $title magpie
 *' of fertilizer spreaders) (@popp_land-use_2014, @stevanovic_mitigation_2017). In addition,
 *' the model covers land-based carbon removal technologies such as bioenergy with carbon capture
 *' and sequestration (CCS) and afforestation (@humpenoder_investigating_2014,
-*' @humpenoder_large-scale_2017, @kreidenweis_afforestation_2016).
+*' @humpenoeder_bioenergy_2018, @kreidenweis_afforestation_2016).
 *'
 *' In response to all involved demand for agricultural commodities, costs of production,
 *' biophysical constraints and land-related policies, MAgPIE simulates major dynamics of

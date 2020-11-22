@@ -10,7 +10,6 @@ scalars
 ;
 
 parameters
- i57_pollutant_prices(t,i,pollutants)      	  Certificate prices for N2O-N CH4 CO2-C used in the maccs module (USD05MER per Mg)
  im_maccs_mitigation(t,i,emis_source,pollutants)        Technical mitigation of GHG emissions (percent)
  i57_mac_step_n2o(t,i)                                  Helper to map N2O prices and maccs_steps (1)
  i57_mac_step_ch4(t,i)                                  Helper to map CH4 prices and maccs_steps (1)
