@@ -32,7 +32,7 @@ cfg$force_replace <- TRUE
 
 cfg$output <- c("rds_report","projects/agmip_report","validation","extra/disaggregation")
 
-prefix <- "V7"
+prefix <- "V9"
 #V7: PBL_2007
 #V8: PBL_2019
 
@@ -78,7 +78,7 @@ cfg$gms$poll_gwpstar <- "ch4"
 start_run(cfg,codeCheck=FALSE)
 
 #####
-prefix <- "V8"
+prefix <- "V10"
 #V7: PBL_2007
 #V8: PBL_2019
 
