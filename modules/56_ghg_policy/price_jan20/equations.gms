@@ -55,7 +55,7 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
                      sum(ct, p56_emis_policy(ct,i2,pollutants_gwpstar,emis_reg_yr56) *
                      im_pollutant_prices(ct,i2,pollutants_gwpstar)));
 
-
+* emis_cell_yr56 is an empty set. This equation needs to be adjusted to gwpstar if emis_cell_yr56 is no longer empty. 
  q56_emission_costs_cell_yearly(j2,emis_cell_yr56) ..
                  v56_emission_costs_cell_yearly(j2,emis_cell_yr56) =e=
                  sum(pollutants,

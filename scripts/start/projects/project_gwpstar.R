@@ -32,9 +32,12 @@ cfg$force_replace <- TRUE
 
 cfg$output <- c("rds_report","projects/agmip_report","validation","extra/disaggregation")
 
-prefix <- "V5"
+prefix <- "V6"
 
 cfg <- setScenario(cfg,c("SSP2","NPI"))
+cfg$gms$c57_macc_version  <- "PBL_2019"                # def = PBL_2007
+cfg$gms$s56_limit_ch4_n2o_price <- 4000   # def = 1000
+
 
 cfg$title <- paste(prefix,"SSP2_RCPREF_C0000_REFDIET",sep = "_")
 cfg$gms$c15_livescen_target <- "constant"
