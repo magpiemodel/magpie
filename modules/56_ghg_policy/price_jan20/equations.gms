@@ -37,36 +37,16 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
 *** Emission costs
 
 *' **Emission costs** are calculated by multiplying regional and cellular emissions by the emission price `im_pollutant_prices`
-*' taking into account the price policy that was defined above in `p56_emis_policy`.
-*'
-*' The underlying basic formula used for `poll_gwp100` is: 
-*'
-*' `emis_cost(t) = emis(t) * CO2_price(t) * GWP100`.
-*'
-*' The underlying formula used for `poll_gwpstar`, based on @Lynch2020 equation 3, is:
-*'
-*' `emis_cost(t) = (4 * emis(t) - 3.75 * emis(t-20)) * CO2_price * GWP100`.
-*'
-*' This can be re-written as:
-*'
-*' `emis_cost(t) = (1 * emis(t) - 3.75/4 * emis(t-20)) * 4 * CO2_price * GWP100`.
-*'
-*' Since the factor 4 is already accounted for in `im_pollutant_prices(t,i,poll_gwpstar)`
-*' (see `preloop.gms` in code or below in documentation) the factor 4 does not show up in the equation below. 
+*' taking into account the price policy that was defined above in `f56_emis_policy`.
 
  q56_emission_costs_reg_yearly(i2,emis_reg_yr56) ..
                  v56_emission_costs_reg_yearly(i2,emis_reg_yr56) =e=
-                 sum(poll_gwp100,
-                     vm_emissions_reg(i2,emis_reg_yr56,poll_gwp100) *
-                     sum(ct, p56_emis_policy(ct,i2,poll_gwp100,emis_reg_yr56) *
-                     im_pollutant_prices(ct,i2,poll_gwp100)))
-               + sum(poll_gwpstar,
-                     (1 * vm_emissions_reg(i2,emis_reg_yr56,poll_gwpstar) 
-                     - 3.75/4 * sum(ct, p56_emissions_reg_before(ct,i2,emis_reg_yr56,poll_gwpstar))) *
-                     sum(ct, p56_emis_policy(ct,i2,poll_gwpstar,emis_reg_yr56) *
-                     im_pollutant_prices(ct,i2,poll_gwpstar)));
+                 sum(pollutants,
+                     vm_emissions_reg(i2,emis_reg_yr56,pollutants) *
+                     sum(ct, p56_emis_policy(ct,i2,pollutants,emis_reg_yr56) *
+                     im_pollutant_prices(ct,i2,pollutants)));
 
-* emis_cell_yr56 is an empty set. The equation below needs to be adjusted to gwpstar if emis_cell_yr56 is no longer empty. 
+
  q56_emission_costs_cell_yearly(j2,emis_cell_yr56) ..
                  v56_emission_costs_cell_yearly(j2,emis_cell_yr56) =e=
                  sum(pollutants,

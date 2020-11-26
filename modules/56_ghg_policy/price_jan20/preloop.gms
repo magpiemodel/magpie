@@ -5,11 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-p56_emissions_reg(t,i,emis_source,pollutants) = 0;
-poll_gwp100(pollutants) = not poll_gwpstar(pollutants);
-*display poll_gwp100;
-*display poll_gwpstar;
-
 ***fix vm_btm_cell to zero for non-CO2 emissions from land-use change
 vm_btm_cell.fx(j,emis_source_cell,pollutants)$(not sameas(pollutants,"co2_c")) = 0;
 ***fix vm_btm_cell to zero for CO2 emissions from ag. production (non land-use change)
@@ -46,6 +41,15 @@ im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices(t_all,i,pollutant
 ***save im_pollutant_prices to parameter
 p56_pollutant_prices_input(t_all,i,pollutants) = im_pollutant_prices(t_all,i,pollutants);
 
+
+***limit CH4 and N2O GHG prices based on s56_limit_ch4_n2o_price
+*12/44 conversion from USD per tC to USD per tCO2
+*28 and 265 Global Warming Potentials from AR5 WG1 CH08 Table 8.7, conversion from USD per tCO2 to USD per tCH4 and USD per tN2O
+*44/28 conversion from USD per tN2O to USD per tN
+im_pollutant_prices(t_all,i,"ch4")$(im_pollutant_prices(t_all,i,"ch4") > s56_limit_ch4_n2o_price*12/44*28) = s56_limit_ch4_n2o_price*12/44*28;
+im_pollutant_prices(t_all,i,"n2o_n_direct")$(im_pollutant_prices(t_all,i,"n2o_n_direct") > s56_limit_ch4_n2o_price*12/44*265*44/28) = s56_limit_ch4_n2o_price*12/44*265*44/28;
+im_pollutant_prices(t_all,i,"n2o_n_indirect")$(im_pollutant_prices(t_all,i,"n2o_n_indirect") > s56_limit_ch4_n2o_price*12/44*265*44/28) = s56_limit_ch4_n2o_price*12/44*265*44/28;
+
 ***apply reduction factor on CO2 price to account for potential negative side effects
 ***lowers the economic incentive for CO2 emission reduction (avoided deforestation) and afforestation
 im_pollutant_prices(t_all,i,"co2_c") = im_pollutant_prices(t_all,i,"co2_c")*s56_cprice_red_factor;
@@ -61,60 +65,6 @@ im_pollutant_prices(t_all,i,pollutants)$(m_year(t_all) >= s56_ghgprice_start+20)
 );
 ***multiply GHG prices with development state to account for institutional requirements needed for implementing a GHG pricing scheme
 im_pollutant_prices(t_all,i,pollutants)$(s56_ghgprice_devstate_scaling = 1) = im_pollutant_prices(t_all,i,pollutants)*im_development_state(t_all,i);
-
-*' @code
-*' The pollutant price `im_pollutant_prices` should reflect the marginal cost (i.e. the price) 
-*' of one additional unit of emission based on the formulation of emission costs
-*' in the equation `q56_emission_costs_reg_yearly`.
-*'
-*' Conceptually, emission costs are obtained by conversion of all GHG emissions to CO2eq, using 
-*' AR5 GWP100 factors, and multiplication with the CO2 price. However, for short-lived
-*' climate pollutants the alternative GWP* metric (GWPstar hereafter) has been proposed by @Allen_2018.
-*' While GWP100 tracks the level of emissions, GWPstar tracks the change of emissions. 
-*'
-*' For GWP100, the underlying basic formula used for the calculation of emission cost (`poll_gwp100`) is: 
-*'
-*' `emis_cost(t) = emis(t) * CO2_price(t) * GWP100`
-*'
-*' First derivative (emis(t) is a variable):
-*'
-*' `marg_emis_cost(t) = CO2_price * GWP100`
-*'
-*' Therefore, in the case of GWP100 the marginal emission cost (as derived from 
-*' emission cost function) and the initial emission price (im_pollutant_prices) agree.
-*' Therefore, no change is needed in case of GWP100.
-*'
-im_pollutant_prices(t,i,poll_gwp100) = im_pollutant_prices(t,i,poll_gwp100);
-*'
-*' For GWPstar, the underlying formula, based on @Lynch2020 equation 3, used for 
-*' the calculation of emission cost (`poll_gwpstar`) is: 
-*'
-*' `emis_cost(t) = (4 * emis(t) - 3.75 * emis(t-20)) * CO2_price * GWP100`
-*'
-*' First derivative (myopic case: emis(t) is a variable; emis(t-20) is a parameter):
-*'
-*' `marg_emis_cost(t) = 4 * CO2_price * GWP100`
-*'
-*' Therefore, in the case of GWPstar the marginal emission cost (as derived from 
-*' emission cost function) and the initial emission price (im_pollutant_prices) differ 
-*' by a factor of 4.
-*' Therefore, the initial emission price (im_pollutant_prices) needs to multiplied by factor 4.
-*'
-im_pollutant_prices(t,i,poll_gwpstar) = 4 * im_pollutant_prices(t,i,poll_gwpstar);
-*'
-*' This adjustment of `im_pollutant_prices` in the case of GWPstar is of particular 
-*' importance for the [57_maccs] module, which needs to see the marginal cost 
-*' of one additional unit of emission based on the formulation of emission costs 
-*' in [56_ghg_policy].
-*' @stop
-
-***limit CH4 and N2O GHG prices based on s56_limit_ch4_n2o_price
-*12/44 conversion from USD per tC to USD per tCO2
-*28 and 265 Global Warming Potentials from AR5 WG1 CH08 Table 8.7, conversion from USD per tCO2 to USD per tCH4 and USD per tN2O
-*44/28 conversion from USD per tN2O to USD per tN
-im_pollutant_prices(t_all,i,"ch4")$(im_pollutant_prices(t_all,i,"ch4") > s56_limit_ch4_n2o_price*12/44*28) = s56_limit_ch4_n2o_price*12/44*28;
-im_pollutant_prices(t_all,i,"n2o_n_direct")$(im_pollutant_prices(t_all,i,"n2o_n_direct") > s56_limit_ch4_n2o_price*12/44*265*44/28) = s56_limit_ch4_n2o_price*12/44*265*44/28;
-im_pollutant_prices(t_all,i,"n2o_n_indirect")$(im_pollutant_prices(t_all,i,"n2o_n_indirect") > s56_limit_ch4_n2o_price*12/44*265*44/28) = s56_limit_ch4_n2o_price*12/44*265*44/28;
 
 ***GHG emission policy
 p56_emis_policy(t,i,pollutants,emis_source) = f56_emis_policy("%c56_emis_policy%",pollutants,emis_source);
@@ -142,8 +92,8 @@ loop(t,
     until s56_counter = s56_timesteps-1);
   );
 );
-*display p56_pollutant_prices_input;
-*display im_pollutant_prices;
+display p56_pollutant_prices_input;
+display im_pollutant_prices;
 *initialize age-class dependent C price with same C price for all age-classes
 p56_c_price_aff(t_all,i,ac) = im_pollutant_prices(t_all,i,"co2_c");
 *Shift C prices in age-classes for reflecting foresight.
@@ -155,4 +105,4 @@ p56_c_price_aff(t_all,i,ac)$(ac.off >= s56_c_price_exp_aff/5) = sum(ac_exp, p56_
 *zero C price before starting year
 p56_c_price_aff(t_all,i,ac)$(m_year(t_all)<s56_ghgprice_start) = 0;
 
-*display p56_c_price_aff;
+display p56_c_price_aff;

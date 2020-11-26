@@ -5,10 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-scalar
-  s56_min Helper for 20 year ago calculation (numeric)
-;
-
 parameters
  im_pollutant_prices(t_all,i,pollutants)      	  Certificate prices for N2O-N CH4 CO2-C used in the model (USD05MER per Mg)
  p56_pollutant_prices_input(t_all,i,pollutants)   Certificate prices for N2O-N CH4 CO2-C from input files (USD05MER per Mg)
@@ -17,9 +13,6 @@ parameters
  pc56_c_price_induced_aff					                Helper for fixing C price driven afforestation to zero for historic time steps (binary)
  p56_region_price_shr(t_all,i)	                  GHG price share of the region (1)
  p56_country_dummy(iso)		                        Dummy parameter indicating whether country is affected by selected GHG policy (1)
- p56_emissions_reg(t,i,emis_source,pollutants)		 Regional emissions by source and gas after technical mitigation N CH4 C (Tg per yr)
- p56_emissions_reg_before(t,i,emis_source,pollutants) Regional emissions 20 years ago by source and gas after technical mitigation N CH4 C (Tg per yr)
- p56_diff(t)										 Helper for 20 year ago calculation (numeric)
 ;
 
 equations

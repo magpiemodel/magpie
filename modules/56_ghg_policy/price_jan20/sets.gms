@@ -30,8 +30,6 @@ sets
    nh3_n, no2_n,
    no3_n /
 
-   poll_gwp100(pollutants) pollutants that should be taxed based on the GWP100
-
    n_pollutants(pollutants) subset of n pollutants
    / n2o_n_direct,n2o_n_indirect,
    nh3_n, no2_n,
@@ -85,8 +83,6 @@ sets
    rice, ent_ferm,  beccs/
 
    ac_exp(ac) age-class corresponding to planning horizon
-   
-   t20(t) 20 years before or closest match   
 ;
 
 $onempty
