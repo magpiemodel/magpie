@@ -10,7 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### added
 - **15_food** Added the option to fade out livestock demand towards a target level in kcal/cap/day.
-- **56_ghg_policy** Added the option to use GWP* based pricing for CH4 emissions (instead of GWP100).
 
 ### changed
 - **scripts** Updated AgMIP output scripts.
