@@ -39,6 +39,10 @@ for (i in 1:length(outputdir)) {
     #get scenario name
     load(path(outputdir[i],"config.Rdata"))
     scen <- cfg$title
+    #Remove prefix starting with "V", like "V2"
+    scen_parts <- unlist(strsplit(scen,"_"))
+    remove <- grep("V[0-9]",scen_parts)
+    if (length(remove)>0) scen <- paste(scen_parts[-remove],collapse = "_")
     #read-in reporting file
     a <- read.report(rep,as.list = FALSE)
     getNames(a,dim=1) <- scen
