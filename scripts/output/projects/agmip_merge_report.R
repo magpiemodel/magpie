@@ -58,7 +58,7 @@ if (!is.null(missing)) {
 if(file.exists("output/agmip_report_full.csv")) {
   #saveRDS(read.quitte("output/agmip_report_full.csv"),file = "output/agmip_report_full.rds")
   #agmip_report_full <- read.report(file="agmip_report_full.csv")
-  write.reportProject(mif="output/agmip_report_full.csv",mapping = system.file("extdata",mapping="variablemappingAgMIP.csv",package = "magpie4"), file = "output/agmip_report_Nov20.csv",format="AgMIP")
-  #write.reportProject(mif="output/agmip_report_full.csv",mapping = "mapping_magpie_agmip.csv", file = "agmip_report_Nov20.csv",format="AgMIP")
+  write.reportProject(mif="output/agmip_report_full.csv",mapping = system.file("extdata",mapping="variablemappingAgMIP.csv",package = "magpie4"), file = "output/agmip_report_subset.csv",format="AgMIP")
+  #write.reportProject(mif="output/agmip_report_full.csv",mapping = "mapping_magpie_agmip.csv", file = "agmip_report_subset.csv",format="AgMIP")
 }
 
