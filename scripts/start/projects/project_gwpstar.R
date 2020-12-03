@@ -70,12 +70,12 @@ cfg$gms$c56_pollutant_prices <- "coupling"
 
 cfg$gms$s15_livescen_target_subst <- 0
 
-cfg$title <- paste(prefix,"SSP2_RCPREF_C0000_REFDIET",sep = "_")
+cfg$title <- paste(prefix,"SSP2_RCPREF_CP0000_REFDIET",sep = "_")
 cfg$gms$c15_livescen_target <- "constant"
 pollutant_prices(price_ref = 0,CH4_factor = 1)
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_REFDIET",sep = "_")
+cfg$title <- paste(prefix,"SSP2_RCPREF_CP0150_REFDIET",sep = "_")
 cfg$gms$c15_livescen_target <- "constant"
 pollutant_prices(price_ref = 150,CH4_factor = 1)
 start_run(cfg,codeCheck=FALSE)
@@ -91,7 +91,7 @@ pollutant_prices(price_ref = 150,CH4_factor = 4)
 start_run(cfg,codeCheck=FALSE)
 
 
-cfg$title <- paste(prefix,"SSP2_RCPREF_C0500_REFDIET",sep = "_")
+cfg$title <- paste(prefix,"SSP2_RCPREF_CP0500_REFDIET",sep = "_")
 cfg$gms$c15_livescen_target <- "constant"
 pollutant_prices(price_ref = 500,CH4_factor = 1)
 start_run(cfg,codeCheck=FALSE)
@@ -107,12 +107,12 @@ pollutant_prices(price_ref = 500,CH4_factor = 4)
 start_run(cfg,codeCheck=FALSE)
 
 
-cfg$title <- paste(prefix,"SSP2_RCPREF_C0000_LSPCUT",sep = "_")
+cfg$title <- paste(prefix,"SSP2_RCPREF_CP0000_LSPCUT",sep = "_")
 cfg$gms$c15_livescen_target <- "lin_zero_20_70"
 pollutant_prices(price_ref = 0,CH4_factor = 1)
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"SSP2_RCPREF_C0150_LSPCUT",sep = "_")
+cfg$title <- paste(prefix,"SSP2_RCPREF_CP0150_LSPCUT",sep = "_")
 cfg$gms$c15_livescen_target <- "lin_zero_20_70"
 pollutant_prices(price_ref = 150,CH4_factor = 1)
 start_run(cfg,codeCheck=FALSE)
@@ -127,7 +127,7 @@ cfg$gms$c15_livescen_target <- "lin_zero_20_70"
 pollutant_prices(price_ref = 150,CH4_factor = 4)
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"SSP2_RCPREF_C0500_LSPCUT",sep = "_")
+cfg$title <- paste(prefix,"SSP2_RCPREF_CP0500_LSPCUT",sep = "_")
 cfg$gms$c15_livescen_target <- "lin_zero_20_70"
 pollutant_prices(price_ref = 500,CH4_factor = 1)
 start_run(cfg,codeCheck=FALSE)
