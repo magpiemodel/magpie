@@ -410,8 +410,8 @@ p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
                *(p15_kcal_pc_calibrated_plant_orig(t,i)
                + p15_kcal_pc_calibrated_rumdairy_orig(t,i) * (1-i15_rumdairy_fadeout(t,i)));
 
-* Conditional substitution of livestock products (without fish) with plant-based food commodities, 
-* depending on s15_kcal_pc_livestock_intake_target.
+* Conditional reduction of livestock products (without fish) depending on s15_kcal_pc_livestock_intake_target.
+* Optional substitution with plant-based products depending on s15_livescen_target_subst.
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated_livestock_orig(t,i) = sum(kfo_lp,p15_kcal_pc_calibrated(t,i,kfo_lp));
 p15_kcal_pc_calibrated_plant_orig(t,i) = sum(kfo_pp,p15_kcal_pc_calibrated(t,i,kfo_pp));
@@ -430,7 +430,7 @@ loop(i$(p15_kcal_pc_calibrated_livestock_orig(t,i) > p15_kcal_pc_livestock_suppl
 p15_kcal_pc_calibrated(t,i,kfo_lp) = p15_livestock_kcal_structure_orig(t,i,kfo_lp)
                * (p15_kcal_pc_livestock_supply_target(i)*(1-i15_livestock_fadeout_threshold(t,i))
                + p15_kcal_pc_calibrated_livestock_orig(t,i)*i15_livestock_fadeout_threshold(t,i));
-p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
+p15_kcal_pc_calibrated(t,i,kfo_pp)$(s15_livescen_target_subst = 1) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
 				* (p15_kcal_pc_calibrated_plant_orig(t,i)
 			    + (p15_kcal_pc_calibrated_livestock_orig(t,i) - sum(kfo_lp, p15_kcal_pc_calibrated(t,i,kfo_lp))));
 );

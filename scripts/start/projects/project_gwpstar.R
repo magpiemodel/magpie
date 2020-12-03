@@ -59,7 +59,7 @@ cfg$force_replace <- TRUE
 
 cfg$output <- c("rds_report","projects/agmip_report","validation","extra/disaggregation")
 
-prefix <- "V13"
+prefix <- "V14"
 
 cfg$gms$c_timesteps <- "5year2070"
 
@@ -67,6 +67,8 @@ cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c57_macc_version  <- "PBL_2019"   # def = PBL_2007
 cfg$gms$s56_limit_ch4_n2o_price <- 4000   # def = 1000
 cfg$gms$c56_pollutant_prices <- "coupling"
+
+cfg$gms$s15_livescen_target_subst <- 0
 
 cfg$title <- paste(prefix,"SSP2_RCPREF_C0000_REFDIET",sep = "_")
 cfg$gms$c15_livescen_target <- "constant"
