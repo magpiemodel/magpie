@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### added
 - **15_food** Added the option to fade out livestock demand towards a target level in kcal/cap/day.
 - **35_natveg** Added HalfEarth scenario to protection scenarios
+- **56_ghg_policy** Added new scenario to emission policy
 
 ### changed
 - **scripts** Updated AgMIP output scripts.
