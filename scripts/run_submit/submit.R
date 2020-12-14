@@ -31,28 +31,38 @@ timeOutputStart <- Sys.time()
 
 if(!file.exists("fulldata.gdx")) stop("MAgPIE model run did not finish properly (fulldata.gdx is missing). Please check full.lst for further information!")
 cat("\nMAgPIE run finished!\n")
-ms_all <- magpie4::modelstat("fulldata.gdx")
-ms <- as.numeric(ms_all)
-ms <- tail(ms[ms!=0],1)
-if(ms==1)  cat("\nLast known model status is",ms,": Optimal solution achieved.\n")
-if(ms==2)  cat("\nLast known model status is",ms,": Local optimal solution achieved. MAgPIE run was successful.\n")
-if(ms==3)  cat("\nLast known model status is",ms,": Unbounded model found.\n")
-if(ms==4)  cat("\nLast known model status is",ms,": Infeasible model found.\n")
-if(ms==5)  cat("\nLast known model status is",ms,": Locally infeasible model found.\n")
-if(ms==6)  cat("\nLast known model status is",ms,": Solver terminated early and model was still infeasible. \n")
-if(ms==7)  cat("\nLast known model status is",ms,": Solver terminated early and model was feasible but not yet optimal.\n")
-if(ms==8)  cat("\nLast known model status is",ms,": Integer solution found.\n")
-if(ms==9)  cat("\nLast known model status is",ms,": Solver terminated early with a non integer solution found.\n")
-if(ms==10) cat("\nLast known model status is",ms,": No feasible integer solution could be found.\n")
-if(ms==11) cat("\nLast known model status is",ms,": Licensing problem. Check if you correctly applied solver licence for MAgPIE in GAMS.\n")
-if(ms==12) cat("\nLast known model status is",ms,": Error - No cause known.\n")
-if(ms==13) cat("\nLast known model status is",ms,": Error - No solution attained.\n")
-if(ms==14) cat("\nLast known model status is",ms,": No solution returned.\n")
-if(ms==15) cat("\nLast known model status is",ms,": Unique solution in a CNS models.\n")
-if(ms==16) cat("\nLast known model status is",ms,": Feasible solution in a CNS models.\n")
-if(ms==17) cat("\nLast known model status is",ms,": Singular in a CNS models.\n")
-if(ms==18) cat("\nLast known model status is",ms,": Unbounded - no solution.\n")
-if(ms==19) cat("\nLast known model status is",ms,": Infeasible - no solution.\n")
+
+gams_modelstats <- c("Optimal solution achieved.",
+                     "Local optimal solution achieved.",
+                     "Unbounded model found.",
+                     "Infeasible model found.",
+                     "Locally infeasible model found.",
+                     "Solver terminated early and model was still infeasible. ",
+                     "Solver terminated early and model was feasible but not yet optimal.",
+                     "Integer solution found.",
+                     "Solver terminated early with a non integer solution found.",
+                     "No feasible integer solution could be found.",
+                     "Licensing problem. Check if you correctly applied solver licence for MAgPIE in GAMS.",
+                     "Error - No cause known.",
+                     "Error - No solution attained.",
+                     "No solution returned.",
+                     "Unique solution in a CNS models.",
+                     "Feasible solution in a CNS models.",
+                     "Singular in a CNS models.",
+                     "Unbounded - no solution.",
+                     "Infeasible - no solution.")
+names(gams_modelstats) <- 1:length(gams_modelstats)
+
+ms_all <- as.numeric(magpie4::modelstat("fulldata.gdx"))
+ms <- unique(ms_all[ms_all!=0])
+
+if(length(ms)== 1) cat("\nModel finished with modelstat",ms,":",gams_modelstats[as.numeric(names(gams_modelstats)) %in% ms],"\n")
+if(length(ms) > 1){
+  cat("\nModel finished with following modelstats\n")
+  for(i in 1:length(ms)){
+    cat("\n",ms[i],":",gams_modelstats[as.numeric(names(gams_modelstats)) %in% ms[i]],"\n")
+  }
+}
 
 lucode2::runstatistics(file       = "runstatistics.rda",
                        modelstat  = magpie4::modelstat("fulldata.gdx"),
