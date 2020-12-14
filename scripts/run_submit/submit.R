@@ -55,11 +55,11 @@ gams_modelstats <- c("1" ="Optimal solution achieved.",
 ms_all <- as.numeric(magpie4::modelstat("fulldata.gdx"))
 ms <- unique(ms_all[ms_all!=0])
 
-if(length(ms)== 1) cat("\nModel finished with modelstat",ms,":",gams_modelstats[as.numeric(names(gams_modelstats)) %in% ms],"\n")
+if(length(ms)== 1) message("Model finished with modelstat ",ms,":",gams_modelstats[as.numeric(names(gams_modelstats)) %in% ms])
 if(length(ms) > 1){
-  message("\nFollowing modelstats were observed during simulation:\n")
+  message("Following modelstats were observed during simulation:")
   for(i in 1:length(ms)){
-    message("\n",ms[i],":",gams_modelstats[as.numeric(names(gams_modelstats)) %in% ms[i]],"\n")
+    message(ms[i],":",gams_modelstats[as.numeric(names(gams_modelstats)) %in% ms[i]])
   }
 }
 
