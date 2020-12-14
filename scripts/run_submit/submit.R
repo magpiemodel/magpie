@@ -58,7 +58,7 @@ ms <- unique(ms_all[ms_all!=0])
 
 if(length(ms)== 1) cat("\nModel finished with modelstat",ms,":",gams_modelstats[as.numeric(names(gams_modelstats)) %in% ms],"\n")
 if(length(ms) > 1){
-  cat("\nModel finished with following modelstats\n")
+  cat("\nFollowing modelstats were observed during simulation:\n")
   for(i in 1:length(ms)){
     cat("\n",ms[i],":",gams_modelstats[as.numeric(names(gams_modelstats)) %in% ms[i]],"\n")
   }
