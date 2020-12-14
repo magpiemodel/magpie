@@ -32,35 +32,34 @@ timeOutputStart <- Sys.time()
 if(!file.exists("fulldata.gdx")) stop("MAgPIE model run did not finish properly (fulldata.gdx is missing). Please check full.lst for further information!")
 cat("\nMAgPIE run finished!\n")
 
-gams_modelstats <- c("Optimal solution achieved.",
-                     "Local optimal solution achieved.",
-                     "Unbounded model found.",
-                     "Infeasible model found.",
-                     "Locally infeasible model found.",
-                     "Solver terminated early and model was still infeasible. ",
-                     "Solver terminated early and model was feasible but not yet optimal.",
-                     "Integer solution found.",
-                     "Solver terminated early with a non integer solution found.",
-                     "No feasible integer solution could be found.",
-                     "Licensing problem. Check if you correctly applied solver licence for MAgPIE in GAMS.",
-                     "Error - No cause known.",
-                     "Error - No solution attained.",
-                     "No solution returned.",
-                     "Unique solution in a CNS models.",
-                     "Feasible solution in a CNS models.",
-                     "Singular in a CNS models.",
-                     "Unbounded - no solution.",
-                     "Infeasible - no solution.")
-names(gams_modelstats) <- 1:length(gams_modelstats)
+gams_modelstats <- c("1" ="Optimal solution achieved.",
+                     "2" ="Local optimal solution achieved.",
+                     "3" ="Unbounded model found.",
+                     "4" ="Infeasible model found.",
+                     "5" ="Locally infeasible model found.",
+                     "6" ="Solver terminated early and model was still infeasible. ",
+                     "7" ="Solver terminated early and model was feasible but not yet optimal.",
+                     "8" ="Integer solution found.",
+                     "9" ="Solver terminated early with a non integer solution found.",
+                     "10"="No feasible integer solution could be found.",
+                     "11"="Licensing problem. Check if you correctly applied solver licence for MAgPIE in GAMS.",
+                     "12"="Error - No cause known.",
+                     "13"="Error - No solution attained.",
+                     "14"="No solution returned.",
+                     "15"="Unique solution in a CNS models.",
+                     "16"="Feasible solution in a CNS models.",
+                     "17"="Singular in a CNS models.",
+                     "18"="Unbounded - no solution.",
+                     "19"="Infeasible - no solution.")
 
 ms_all <- as.numeric(magpie4::modelstat("fulldata.gdx"))
 ms <- unique(ms_all[ms_all!=0])
 
 if(length(ms)== 1) cat("\nModel finished with modelstat",ms,":",gams_modelstats[as.numeric(names(gams_modelstats)) %in% ms],"\n")
 if(length(ms) > 1){
-  cat("\nFollowing modelstats were observed during simulation:\n")
+  message("\nFollowing modelstats were observed during simulation:\n")
   for(i in 1:length(ms)){
-    cat("\n",ms[i],":",gams_modelstats[as.numeric(names(gams_modelstats)) %in% ms[i]],"\n")
+    message("\n",ms[i],":",gams_modelstats[as.numeric(names(gams_modelstats)) %in% ms[i]],"\n")
   }
 }
 
