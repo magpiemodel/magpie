@@ -45,9 +45,9 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC05"
+identifier_flag = "DEC06"
 
-cat(paste0("GMD paper runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Parametrize growth curve lower for natveg higher for plantations"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
