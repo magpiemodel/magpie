@@ -47,7 +47,7 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "DEC06"
 
-cat(paste0("Parametrize growth curve lower for natveg higher for plantations"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Secdf primf goes to other land after harvest"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 

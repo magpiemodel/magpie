@@ -80,7 +80,7 @@
 *' harvested area are received from the timber module [73_timber].
 
 
-*' Harvested area from secondary forest 
+*' Harvested area from secondary forest
 
 q35_hvarea_secdforest(j2,ac_sub)..
                            vm_hvarea_secdforest(j2,ac_sub)
@@ -88,7 +88,7 @@ q35_hvarea_secdforest(j2,ac_sub)..
                            v35_secdforest_reduction(j2,ac_sub);
 
 
-*' Harvested area from primary forest 
+*' Harvested area from primary forest
 
 q35_hvarea_primforest(j2)..
                            vm_hvarea_primforest(j2)
@@ -109,7 +109,7 @@ q35_hvarea_other(j2,ac_sub)..
 *' to be secondary forest.
 
 q35_secdforest_conversion(j2)..
-                          sum(ac_est, v35_secdforest(j2,ac_est))
+                          sum(ac_est, v35_other(j2,ac_est))
                           =e=
                           sum(ac_sub,vm_hvarea_secdforest(j2,ac_sub))
                         + vm_hvarea_primforest(j2)
