@@ -5,6 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+
+$setglobal c73_wood_scen default
+* options default, nopaper, construction
+
 scalars
   s73_timber_prod_cost      Cost for produccing a unit of timber (USD per tDM) / 2000/
   s73_timber_harvest_cost   Cost for harvesting timber (USD per ha) / 2000/
@@ -34,4 +38,10 @@ $ondelim
 $include "./modules/73_timber/input/f73_volumetric_conversion.csv"
 $offdelim
 /
+;
+
+table f73_demand_modifier(t_ext,scen_73) Factor diminishing paper use  (1)
+$ondelim
+$include "./modules/73_timber/input/f73_demand_modifier.csv"
+$offdelim
 ;

@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### fixed
 - **35_natveg** Bugfix "v35_secdforest_expansion"
 - **52_carbon** Bugfix "p52_scaling_factor" for climate change runs
+- **73_timber** New scenario switch `c73_wood_scen`.
 
 ## [4.3.0] - 2020-09-15
 
