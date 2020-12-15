@@ -24,6 +24,14 @@ loop(t_all$(m_year(t_all) >= 2010 AND m_year(t_all) < 2150),
           ;
 );
 p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)$(im_gdp_pc_ppp_iso(t_all,iso)=0) = 0.0001;
+p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)$(p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)=0) = 0.00000001;
+
+p73_base_min(iso,total_wood_products) = p73_forestry_demand_prod_specific("y1995",iso,total_wood_products) * 0.05;
+
+loop(t_all$(m_year(t_all) >= 2020 AND m_year(t_all) < 2150),
+  p73_diff(t_all+1,iso,total_wood_products) = p73_forestry_demand_prod_specific(t_all+1,iso,total_wood_products) - p73_forestry_demand_prod_specific(t_all,iso,total_wood_products);
+  p73_forestry_demand_prod_specific(t_all+1,iso,total_wood_products)$(p73_diff(t_all+1,iso,total_wood_products) > p73_base_min(iso,total_wood_products)) = p73_forestry_demand_prod_specific(t_all,iso,total_wood_products) + p73_base_min(iso,total_wood_products);
+  );
 
 $ifthen "%c73_wood_scen%" == "nopaper"
 p73_forestry_demand_prod_specific(t_all,iso,"wood_pulp") = p73_forestry_demand_prod_specific(t_all,iso,"wood_pulp") * f73_demand_modifier(t_all,"%c73_wood_scen%");
