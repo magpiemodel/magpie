@@ -47,7 +47,7 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "DEC07"
 
-cat(paste0("Secdf primf goes to other land after harvest"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("upscale for higher plantation growth"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
@@ -55,27 +55,31 @@ for(ssp in c("SSP2")){
 
   cfg = setScenario(cfg,c(ssp,"forestry"))
 
-  if(cfg$gms$s32_fix_plant == 1 && cfg$gms$s73_foresight == 1) break
+  for(s52_upscaling in c(1.1,1.3,1.5,1.7,2.0)){
+    cfg$gms$s52_upscaling = s52_upscaling
 
-  if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
-  if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
+    if(cfg$gms$s32_fix_plant == 1 && cfg$gms$s73_foresight == 1) break
 
-  plant_share_flag <- paste0(cfg$gms$s32_plant_share*100,"pc")
+    if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
+    if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
 
-  if(cfg$gms$s73_demand_switch == 1) timber_flag = "timberON"
-  if(cfg$gms$s73_demand_switch == 0) timber_flag = "timberOFF"
+    plant_share_flag <- paste0(cfg$gms$s32_plant_share*100,"pc")
 
-  if(cfg$gms$s32_fix_plant == 0) plant_area_flag = "Baseline"
-  if(cfg$gms$s32_fix_plant == 1) plant_area_flag = "Constrained"
+    if(cfg$gms$s73_demand_switch == 1) timber_flag = "timberON"
+    if(cfg$gms$s73_demand_switch == 0) timber_flag = "timberOFF"
+
+    if(cfg$gms$s32_fix_plant == 0) plant_area_flag = "Baseline"
+    if(cfg$gms$s32_fix_plant == 1) plant_area_flag = "Constrained"
 
 
 
-  cfg$title   = paste0(identifier_flag,"_",ssp,"_",plant_area_flag)
+    cfg$title   = paste0(identifier_flag,"_",ssp,"_",plant_area_flag,"_",paste0((s52_upscaling-1)*100))
 
-  cfg$output  = c("rds_report","extra/force_runstatistics")
+    cfg$output  = c("rds_report","extra/force_runstatistics")
 
-   xx = c(xx,cfg$title)
-   start_run(cfg,codeCheck=FALSE)
+     xx = c(xx,cfg$title)
+     #start_run(cfg,codeCheck=FALSE)
+  }
 }
 
 

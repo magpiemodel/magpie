@@ -11,6 +11,7 @@ $setglobal c52_carbon_scenario  nocc
 
 scalars
 s52_plantation_threshold  Minimum threshold of carbon densities in timber plantations (tC per ha) / 8 /
+s52_upscaling Upscaling of plantation growth parameters /1/
 ;
 
 table fm_carbon_density(t_all,j,land,c_pools) LPJmL carbon density for land and carbon pools (tC per ha)
@@ -29,5 +30,5 @@ $include "./modules/52_carbon/input/f52_growth_par.csv"
 $offdelim
 /
 ;
-f52_growth_par(clcl,"k","plantations") = f52_growth_par(clcl,"k","plantations") * 3;
-f52_growth_par(clcl,"m","plantations") = f52_growth_par(clcl,"m","plantations") * 3;
+f52_growth_par(clcl,"k","plantations") = f52_growth_par(clcl,"k","plantations") * s52_upscaling;
+f52_growth_par(clcl,"m","plantations") = f52_growth_par(clcl,"m","plantations") + (s52_upscaling/2);
