@@ -29,5 +29,5 @@ $include "./modules/52_carbon/input/f52_growth_par.csv"
 $offdelim
 /
 ;
-f52_growth_par(clcl,"k","plantations") = f52_growth_par(clcl,"k","plantations") * 10;
-f52_growth_par(clcl,"m","plantations") = f52_growth_par(clcl,"m","plantations") * 10;
+f52_growth_par(clcl,"k","plantations") = f52_growth_par(clcl,"k","plantations") * 3;
+f52_growth_par(clcl,"m","plantations") = f52_growth_par(clcl,"m","plantations") * 3;
