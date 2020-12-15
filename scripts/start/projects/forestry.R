@@ -45,7 +45,7 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC06"
+identifier_flag = "DEC07"
 
 cat(paste0("Secdf primf goes to other land after harvest"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
