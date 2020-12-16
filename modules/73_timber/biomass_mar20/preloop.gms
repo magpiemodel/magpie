@@ -28,9 +28,11 @@ p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)$(p73_forestry_d
 
 p73_base_min(iso,total_wood_products) = p73_forestry_demand_prod_specific("y1995",iso,total_wood_products) * 0.05;
 
-loop(t_all$(m_year(t_all) >= 2020 AND m_year(t_all) < 2150),
-  p73_diff(t_all+1,iso,total_wood_products) = p73_forestry_demand_prod_specific(t_all+1,iso,total_wood_products) - p73_forestry_demand_prod_specific(t_all,iso,total_wood_products);
-  p73_forestry_demand_prod_specific(t_all+1,iso,total_wood_products)$(p73_diff(t_all+1,iso,total_wood_products) > p73_base_min(iso,total_wood_products)) = p73_forestry_demand_prod_specific(t_all,iso,total_wood_products) + p73_base_min(iso,total_wood_products);
+if(s73_demand_dampener = 1,
+  loop(t_all$(m_year(t_all) >= 2020 AND m_year(t_all) < 2150),
+    p73_diff(t_all+1,iso,total_wood_products) = p73_forestry_demand_prod_specific(t_all+1,iso,total_wood_products) - p73_forestry_demand_prod_specific(t_all,iso,total_wood_products);
+    p73_forestry_demand_prod_specific(t_all+1,iso,total_wood_products)$(p73_diff(t_all+1,iso,total_wood_products) > p73_base_min(iso,total_wood_products)) = p73_forestry_demand_prod_specific(t_all,iso,total_wood_products) + p73_base_min(iso,total_wood_products);
+    );
   );
 
 $ifthen "%c73_wood_scen%" == "nopaper"

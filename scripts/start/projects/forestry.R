@@ -45,13 +45,13 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC14"
+identifier_flag = "DEC15"
 
-cat(paste0("Fix heaven prod to 0. NPI insead of none"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("SSP Runs with dampener switch off. Fix heaven prod to 0. NPI insead of none"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
-for(ssp in c("SSP2")){
+for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
 
   cfg = setScenario(cfg,c(ssp,"forestry"))
 
