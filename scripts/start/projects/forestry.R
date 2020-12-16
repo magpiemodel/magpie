@@ -45,9 +45,9 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC13"
+identifier_flag = "DEC14"
 
-cat(paste0("Very low trade margin kforestry"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Fix heaven prod to 0. NPI insead of none"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
@@ -60,8 +60,6 @@ for(ssp in c("SSP2")){
   if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
   if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
 
-  plant_share_flag <- paste0(cfg$gms$s32_plant_share*100,"pc")
-
   if(cfg$gms$s73_demand_switch == 1) timber_flag = "timberON"
   if(cfg$gms$s73_demand_switch == 0) timber_flag = "timberOFF"
 
@@ -69,10 +67,10 @@ for(ssp in c("SSP2")){
   if(cfg$gms$s32_fix_plant == 1) plant_area_flag = "Constrained"
 
 
-
   cfg$title   = paste0(identifier_flag,"_",ssp,"_",plant_area_flag)
 
-  cfg$output  = c("rds_report","extra/force_runstatistics")
+  #cfg$output  = c("rds_report","extra/force_runstatistics")
+  cfg$output  = c()
 
    xx = c(xx,cfg$title)
    start_run(cfg,codeCheck=FALSE)

@@ -12,9 +12,9 @@ c15_EAT_scen;;;;;;;;FLX;;;;;;;FLX;;;;;;
 c21_trade_liberalization;;;l908080r807070;l909090r808080;l909595r809090;l908080r807070;l908080r807070;l908080r807070;;;;;;;;l908080r807070;l909090r808080;l909595r809090;l908080r807070;l908080r807070;
 s32_max_aff_area;;;Inf;Inf;Inf;Inf;Inf;500;;;;;;;;Inf;Inf;Inf;Inf;Inf;Inf
 c32_aff_mask;;;noboreal;noboreal;noboreal;noboreal;noboreal;onlytropical;;;;;;;;noboreal;noboreal;noboreal;noboreal;noboreal;
-c32_aff_policy;;;;;;;;;none;npi;ndc;;;;;;;;;;none
-c35_ad_policy;;;;;;;;;none;npi;ndc;;;;;;;;;;none
-c35_aolc_policy;;;;;;;;;none;npi;ndc;;;;;;;;;;none
+c32_aff_policy;;;;;;;;;none;npi;ndc;;;;;;;;;;npi
+c35_ad_policy;;;;;;;;;none;npi;ndc;;;;;;;;;;npi
+c35_aolc_policy;;;;;;;;;none;npi;ndc;;;;;;;;;;npi
 c35_protect_scenario;;;WDPA;WDPA;WDPA;WDPA;WDPA;BH;;;;;;;;WDPA;WDPA;WDPA;WDPA;WDPA;
 s42_irrig_eff_scenario;;;2;2;2;2;2;3;;;;;;;;1;1;1;1;1;
 c42_env_flow_policy;;;on;off;off;mixed;on;on;;;;;;;;on;off;off;mixed;on;
