@@ -75,7 +75,7 @@ for(ssp in c("SSP2")){
   cfg$output  = c("rds_report","extra/force_runstatistics")
 
    xx = c(xx,cfg$title)
-   #start_run(cfg,codeCheck=FALSE)
+   start_run(cfg,codeCheck=FALSE)
 
 }
 
