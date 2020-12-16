@@ -5,13 +5,11 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-f21_self_suff(t_all,i,kforestry) = f21_self_suff(t_all,i,kforestry) * 1.2;
-
 i21_trade_bal_reduction(t_all,k_trade)=f21_trade_bal_reduction(t_all,"easytrade","%c21_trade_liberalization%");
 i21_trade_bal_reduction(t_all,k_hardtrade21)=f21_trade_bal_reduction(t_all,"hardtrade","%c21_trade_liberalization%");
 
 i21_trade_margin(i,k_trade) = f21_trade_margin(i,k_trade);
-i21_trade_margin(i,"wood") = f21_trade_margin(i,"tece");
+i21_trade_margin(i,"wood") = f21_trade_margin(i,"tece")*0.1;
 i21_trade_margin(i,"woodfuel") = i21_trade_margin(i,"wood") * 0.5;
 
 if ((s21_trade_tariff=1),
