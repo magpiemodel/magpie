@@ -45,15 +45,17 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC08"
+identifier_flag = "DEC09"
 
-cat(paste0("No upscaling of growth parameters. Plantations can be removed half of their rotations"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Equal secdf, No upscaling of growth parameters. Plantations can be removed half of their rotations"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
 for(ssp in c("SSP2")){
 
   cfg = setScenario(cfg,c(ssp,"forestry"))
+
+  cfg$gms$s35_secdf_distribution = 1
 
   if(cfg$gms$s32_fix_plant == 1 && cfg$gms$s73_foresight == 1) break
 
