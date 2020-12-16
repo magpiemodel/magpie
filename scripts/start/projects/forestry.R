@@ -69,7 +69,7 @@ for(ssp in c("SSP2")){
 
   cfg$title   = paste0(identifier_flag,"_",ssp,"_",plant_area_flag)
 
-  #cfg$output  = c("rds_report","extra/force_runstatistics")
+  cfg$output  = c("extra/timestep_duration")
   cfg$output  = c()
 
    xx = c(xx,cfg$title)
