@@ -45,9 +45,9 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC11"
+identifier_flag = "DEC12"
 
-cat(paste0("Lower trade margin for kforestry"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("higher kforestry self suff"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
