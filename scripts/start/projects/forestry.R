@@ -51,7 +51,7 @@ cat(paste0("High cost of prodn from heaven"), file=paste0(log_folder,"/",identif
 
 xx <- c()
 
-for(ssp in c("SSP2")){
+for(ssp in c("SSP1","SSP3","SSP4","SSP5")){
 
   cfg = setScenario(cfg,c(ssp,"forestry"))
 
