@@ -18,7 +18,7 @@ q73_cost_timber(i2)..
                     vm_cost_timber(i2)
                     =e=
                     v73_cost_hvarea(i2)
-                    + sum((cell(i2,j2),land_natveg,ac,kforestry), v73_prod_natveg(j2,land_natveg,ac,kforestry) * s73_timber_harvest_cost)
+                    + sum((cell(i2,j2),land_natveg,ac,kforestry), v73_prod_natveg(j2,land_natveg,ac,kforestry) * s73_timber_prod_cost)
                     + sum((cell(i2,j2),kforestry), v73_prod_heaven_timber(j2,kforestry) * s73_free_prod_cost)
                     ;
 
@@ -30,10 +30,10 @@ q73_cost_timber(i2)..
 q73_cost_hvarea(i2)..
                     v73_cost_hvarea(i2)
                     =e=
-                    sum((ct,cell(i2,j2),ac_sub), vm_hvarea_forestry(j2,ac_sub)   * s73_timber_harvest_cost)
-                  + sum((ct,cell(i2,j2),ac_sub), vm_hvarea_secdforest(j2,ac_sub) * s73_timber_harvest_cost * p73_cost_multiplier("secdforest"))
-                  + sum((ct,cell(i2,j2),ac_sub), vm_hvarea_other(j2, ac_sub)     * s73_timber_harvest_cost * p73_cost_multiplier("other"))
-                  + sum((ct,cell(i2,j2)),        vm_hvarea_primforest(j2)        * s73_timber_harvest_cost * p73_cost_multiplier("primforest"))
+                    sum((ct,cell(i2,j2),ac_sub), vm_hvarea_forestry(j2,ac_sub)   * p73_timber_harvest_cost(ct,j2,ac_sub,"forestry"))
+                  + sum((ct,cell(i2,j2),ac_sub), vm_hvarea_secdforest(j2,ac_sub) * p73_timber_harvest_cost(ct,j2,ac_sub,"secdforest"))
+                  + sum((ct,cell(i2,j2),ac_sub), vm_hvarea_other(j2, ac_sub)     * p73_timber_harvest_cost(ct,j2,ac_sub,"other"))
+                  + sum((ct,cell(i2,j2)),        vm_hvarea_primforest(j2)        * p73_timber_harvest_cost(ct,j2,"acx","primforest"))
                     ;
 
 *' The following equation describes cellular level production (in dry matter) of
