@@ -34,16 +34,6 @@ else
 ** END ndc **
 
 *' @code
-*' Certain areas (e.g. the boreal zone) are excluded from endogenous afforestation.
-** DON'T USE TYPE32 SET HERE
-if(m_year(t) <= sm_fix_SSP2,
-	v32_land.fx(j,"aff","ac0") = 0;
-else
-	v32_land.lo(j,"aff","ac0") = 0;
-	v32_land.up(j,"aff","ac0") = f32_aff_mask(j) * sum(land, pcm_land(j,land));
-);
-*' No afforestation is allowed if carbon density <= 20 tc/ha
-v32_land.fx(j,"aff","ac0")$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
 
 *' Afforestation switch:
 *' 0 = Use natveg carbon densities for afforestation,
@@ -114,16 +104,27 @@ v32_land.up(j,"plant",ac_est) = Inf;
 ** need to be held at constant 1995 levels.
 v32_land.fx(j,"plant",ac)$(s32_initial_distribution=0) = p32_land_start_ac(j,"plant",ac);
 
-** fix ndc afforestation forever, all age-classes are fixed except ac0
+** fix ndc afforestation forever, all age-classes are fixed except ac_est
 v32_land.fx(j,"ndc",ac_sub) = pc32_land(j,"ndc",ac_sub);
 v32_land.lo(j,"ndc",ac_est) = 0;
 v32_land.up(j,"ndc",ac_est) = Inf;
 
-** fix c price induced afforestation based on s32_planing_horizon, fixed only until end of s32_planing_horizon, ac0 is free
+** fix c price induced afforestation based on s32_planing_horizon, fixed only until end of s32_planing_horizon, ac_est is free
 v32_land.fx(j,"aff",ac)$(ac.off <= s32_planing_horizon/5) = pc32_land(j,"aff",ac);
 v32_land.up(j,"aff",ac)$(ac.off > s32_planing_horizon/5) = pc32_land(j,"aff",ac);
 v32_land.lo(j,"aff",ac_est) = 0;
 v32_land.up(j,"aff",ac_est) = Inf;
+
+** Certain areas (e.g. the boreal zone) are excluded from endogenous afforestation.
+** DON'T USE TYPE32 SET HERE
+if(m_year(t) <= sm_fix_SSP2,
+	v32_land.fx(j,"aff",ac_est) = 0;
+else
+	v32_land.lo(j,"aff",ac_est) = 0;
+	v32_land.up(j,"aff",ac_est) = f32_aff_mask(j) * sum(land, pcm_land(j,land));
+);
+*' No afforestation is allowed if carbon density <= 20 tc/ha
+v32_land.fx(j,"aff",ac_est)$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
 
 m_boundfix(v32_land,(j,type32,ac_sub),l,10e-5);
 
