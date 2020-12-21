@@ -26,7 +26,6 @@ scalars
   s32_max_aff_area                Maximum total global afforestation (mio. ha)    / Inf /
   s32_aff_plantation              Switch for using growth curves for afforestation 0=natveg 1=plantations (1) / 0 /
   s32_timber_plantation           Switch for using growth curves for timber plantations 0=natveg 1=plantations (1) / 1 /
-  s32_plant_carbon_foresight      Switch to allow plantations to be used as incentives for CDR (1) / 1 /
   s32_tcre_local                  Switch for local (1) or global (0) TRCE factors (1) / 1 /
   s32_fix_plant                   Fixing plantation area after sm_fix_SSP2 0=Not fixed 1=Fixed (1) / 0 /
   s32_plant_share                 Constant percentage of production which can come from plantations (1) / 0.25 /
