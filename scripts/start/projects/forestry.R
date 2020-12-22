@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC18"
+identifier_flag = "DEC19"
 
 cat(paste0("High cost of prodn from heaven"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
