@@ -11,7 +11,7 @@ $setglobal c35_aolc_policy  npi
 
 scalars
 s35_natveg_harvest_shr Constrains the allowed wood harvest from natural vegetation (1=unconstrained) (1) /1/
-s35_secdf_distribution Flag for secdf initialization (0=all secondary forest in highest age class 1=Equal distribution among all age classes) (1) /0/
+s35_secdf_distribution Flag for secdf initialization (0=all secondary forest in highest age class 1=Equal distribution among all age classes 2=Poulter distribution from MODIS satellite data) (1) /0/
 ;
 
 table f35_protect_area(j,prot_type) Conservation priority areas (mio. ha)
@@ -23,5 +23,11 @@ $offdelim
 table f35_min_land_stock(t_all,j,pol35,pol_stock35) Land protection policies [minimum land stock] (Mha)
 $ondelim
 $include "./modules/35_natveg/input/npi_ndc_ad_aolc_pol.cs3"
+$offdelim
+;
+
+table f35_secdf_ac_dist(j,ac_poulter) Poulter age-class area in each cluster (1)
+$ondelim
+$include "./modules/35_natveg/input/forestageclasses.cs3"
 $offdelim
 ;

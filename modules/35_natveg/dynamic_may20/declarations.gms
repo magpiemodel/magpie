@@ -25,6 +25,8 @@ parameters
  p35_min_other(t,j)      		                    Minimum other land stock [land protection policies] (Mha)
  p35_carbon_density_secdforest(t,j,ac,ag_pools) Carbon density secdforest (tC per ha)
  p35_carbon_density_other(t,j,ac,ag_pools) 	    Carbon density other land (tC per ha)
+ i35_secdf_ac_dist(j,ac_poulter)                xx
+ p35_poulter_dist(j,ac)                         xx
 ;
 
 equations

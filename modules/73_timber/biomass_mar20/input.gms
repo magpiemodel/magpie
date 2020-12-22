@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-$setglobal c73_wood_scen default
+$setglobal c73_wood_scen  default
 * options default, nopaper, construction
 
 scalars

@@ -45,35 +45,49 @@ cfg$recalc_npi_ndc = "ifneeded"
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC16"
+identifier_flag = "DEC17"
 
 cat(paste0("High cost of prodn from heaven"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
-for(ssp in c("SSP1","SSP3","SSP4","SSP5")){
+for(ssp in c("SSP2")){
 
-  cfg = setScenario(cfg,c(ssp,"forestry"))
+  for(s35_secdf_distribution in c(0,1,2)){
 
-  if(cfg$gms$s32_fix_plant == 1 && cfg$gms$s73_foresight == 1) break
+    for(scen in c("forestry","NPI")){
 
-  if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
-  if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
+      cfg = setScenario(cfg,c(ssp,scen))
 
-  if(cfg$gms$s73_demand_switch == 1) timber_flag = "timberON"
-  if(cfg$gms$s73_demand_switch == 0) timber_flag = "timberOFF"
+      cfg$gms$s35_secdf_distribution = s35_secdf_distribution
 
-  if(cfg$gms$s32_fix_plant == 0) plant_area_flag = "Baseline"
-  if(cfg$gms$s32_fix_plant == 1) plant_area_flag = "Constrained"
+      if(cfg$gms$s32_fix_plant == 1 && cfg$gms$s73_foresight == 1) break
 
+      if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
+      if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
 
-  cfg$title   = paste0(identifier_flag,"_",ssp,"_",plant_area_flag)
+      if(cfg$gms$s73_demand_switch == 1) timber_flag = "timberON"
+      if(cfg$gms$s73_demand_switch == 0) timber_flag = "timberOFF"
 
-  cfg$output  = c("extra/timestep_duration")
+      if(cfg$gms$s32_fix_plant == 0) plant_area_flag = "Baseline"
+      if(cfg$gms$s32_fix_plant == 1) plant_area_flag = "Constrained"
 
-   xx = c(xx,cfg$title)
-   start_run(cfg,codeCheck=FALSE)
+      if(cfg$gms$s35_secdf_distribution == 0) dist_flag = "ACx"
+      if(cfg$gms$s35_secdf_distribution == 1) dist_flag = "Equal"
+      if(cfg$gms$s35_secdf_distribution == 2) dist_flag = "Poulter"
 
+      if(scen=="NPI") scen_flag="NoForestry"
+      if(scen=="forestry") scen_flag="Forestry"
+
+#      cfg$title   = paste0(identifier_flag,"_",ssp,"_",plant_area_flag,"_",scen_flag,"_",dist_flag)
+      cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",dist_flag)
+      cfg$output  = c("extra/timestep_duration")
+
+       xx = c(xx,cfg$title)
+       #start_run(cfg,codeCheck=FALSE)
+
+    }
+  }
 }
 
 

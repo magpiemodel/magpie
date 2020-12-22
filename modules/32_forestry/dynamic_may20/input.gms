@@ -20,7 +20,7 @@ scalars
   s32_recurring_cost_multiplier   Cost multiplier for recurring costs only for testing (1)            / 10 /
   s32_rotation_extension          Rotation extension factor 1=original rotations 2=100 percent increase in rotations etc (1) / 1 /
   s32_faustmann_rotation          Switch to activate faustmann rotations (1) / 0 /
-  s32_initial_distribution        Switch to Activate ageclass distribution in plantations 1=on 0=off (1) / 0 /
+  s32_initial_distribution        Switch to Activate ageclass distribution in plantations 1=on 0=off (1) / 1 /
   s32_price                       Price for timber (USD)      / 45 /
   s32_free_land_cost              Very high cost for using non existing land for plantation establishment (USD per ha) /1000000/
   s32_max_aff_area                Maximum total global afforestation (mio. ha)    / Inf /
@@ -29,7 +29,7 @@ scalars
   s32_plant_carbon_foresight      Switch to allow plantations to be used as incentives for CDR 0=off 1=on (1) / 1 /
   s32_tcre_local                  Switch for local (1) or global (0) TRCE factors (1) / 1 /
   s32_fix_plant                   Fixing plantation area after sm_fix_SSP2 0=Not fixed 1=Fixed (1) / 0 /
-  s32_plant_share                 Constant percentage of production which can come from plantations (1) / 0.25 /
+  s32_plant_share                 Constant percentage of production which can come from plantations (1) / 0.33 /
   s32_forestry_int_rate           Global interest rate for plantations (percent) / 0.05 /
   s32_investment_cost             Additional investment cost in plantations (USD per tC per ha) / 200 /
 ;
