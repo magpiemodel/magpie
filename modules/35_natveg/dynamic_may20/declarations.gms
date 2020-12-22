@@ -27,6 +27,7 @@ parameters
  p35_carbon_density_other(t,j,ac,ag_pools) 	    Carbon density other land (tC per ha)
  i35_secdf_ac_dist(j,ac_poulter)                xx
  p35_poulter_dist(j,ac)                         xx
+ p35_forest_fire(i)                             forest fire loss of area as a share (1)
 ;
 
 equations

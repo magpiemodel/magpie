@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC17"
+identifier_flag = "DEC18"
 
 cat(paste0("High cost of prodn from heaven"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
@@ -31,7 +31,7 @@ xx <- c()
 
 for(ssp in c("SSP2")){
 
-  for(s35_secdf_distribution in c(0,1,2)){
+  for(s35_secdf_distribution in c(2)){
 
     for(scen in c("forestry","NPI")){
 

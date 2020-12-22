@@ -37,3 +37,18 @@ p35_min_other(t,j) = f35_min_land_stock(t,j,"%c35_ad_policy%","other");
 *initialize parameter
 p35_other(t,j,ac) = 0;
 p35_secdforest(t,j,ac) = 0;
+
+*initialize forest fire parameter
+*Table 1 DOI: 10.1126/science.aau3445
+p35_forest_fire("CAZ") = 0.53;
+p35_forest_fire("CHA") = 0.58;
+p35_forest_fire("EUR") = 0.01;
+p35_forest_fire("IND") = 0.58;
+p35_forest_fire("JPN") = 0.53;
+p35_forest_fire("LAM") = 0.01;
+p35_forest_fire("MEA") = 0.01;
+p35_forest_fire("NEU") = 0.01;
+p35_forest_fire("OAS") = 0.01;
+p35_forest_fire("REF") = 0.01;
+p35_forest_fire("SSA") = 0.01;
+p35_forest_fire("USA") = 0.40;

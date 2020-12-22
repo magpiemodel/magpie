@@ -20,6 +20,9 @@ else
     p35_other(t,j,"acx") = p35_other(t,j,"acx")
                   + sum(ac$(ord(ac) > card(ac)-s35_shift), p35_other(t-1,j,ac));
 
+* Shift ageclasses due to forest fires
+		p35_secdforest(t,j,"ac0") = sum(ac,p35_secdforest(t,j,ac)$(not sameas(ac,"ac0"))) * sum(cell(i,j),p35_forest_fire(i));
+		p35_secdforest(t,j,ac)$(not sameas(ac,"ac0")) = p35_secdforest(t,j,ac)$(not sameas(ac,"ac0")) * (1-sum(cell(i,j),p35_forest_fire(i)));
 * example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s35_shift = 1)
     p35_secdforest(t,j,ac)$(ord(ac) > s35_shift) = p35_secdforest(t-1,j,ac-s35_shift);
 * account for cases at the end of the age class set (s35_shift > 1) which are not shifted by the above calculation
