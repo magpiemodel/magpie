@@ -20,28 +20,6 @@ library(gms)
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
-#start MAgPIE run
-source("config/default.cfg")
-
-#cfg$force_download = TRUE
-
-###########################################################################
-##################### Forestry specific settings ##########################
-###########################################################################
-
-### OPTIMIZATION
-# * 1: using optfile for specified solver settings
-# * 0: default settings (optfile will be ignored)
-cfg$gms$s80_optfile = 1
-## Solver maxiter
-cfg$gms$s80_maxiter = 5
-
-###########################################################################
-
-cfg$results_folder = "output/:title:"
-
-cfg$recalc_npi_ndc = "ifneeded"
-
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
@@ -56,6 +34,15 @@ for(ssp in c("SSP2")){
   for(s35_secdf_distribution in c(0,1,2)){
 
     for(scen in c("forestry","NPI")){
+
+      source("config/default.cfg")
+
+      cfg$gms$s80_optfile = 1
+      cfg$gms$s80_maxiter = 5
+
+      cfg$results_folder = "output/:title:"
+
+      cfg$recalc_npi_ndc = "ifneeded"
 
       cfg = setScenario(cfg,c(ssp,scen))
 
