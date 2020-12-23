@@ -5,21 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* Shift ageclasses due to forest fires
-	if(s35_forest_damage=1,
-*		p35_secdforest(t,j,"ac0") = sum(ac,p35_secdforest(t,j,ac)$(not sameas(ac,"ac0"))) * (1-sum(cell(i,j),1-f35_forest_lost_share(i,"wildfire"))**m_timestep_length_forestry);
-*		p35_secdforest(t,j,ac)$(not sameas(ac,"ac0")) = p35_secdforest(t,j,ac)$(not sameas(ac,"ac0")) * sum(cell(i,j),1-f35_forest_lost_share(i,"wildfire"))**m_timestep_length_forestry;
-		v35_secdforest.l(j,"ac0") = sum(ac,v35_secdforest.l(j,ac)$(not sameas(ac,"ac0"))) * (1-sum(cell(i,j),1-f35_forest_lost_share(i,"wildfire"))**m_timestep_length_forestry);
-		v35_secdforest.l(j,ac)$(not sameas(ac,"ac0")) = v35_secdforest.l(j,ac)$(not sameas(ac,"ac0")) * sum(cell(i,j),1-f35_forest_lost_share(i,"wildfire"))**m_timestep_length_forestry;
-		);
-	if(s35_forest_damage=2,
-*		p35_secdforest(t,j,"ac0") = sum(ac,p35_secdforest(t,j,ac)$(not sameas(ac,"ac0"))) * (1-sum((cell(i,j),combined_loss),1-f35_forest_lost_share(i,combined_loss))**m_timestep_length_forestry);
-*    p35_secdforest(t,j,ac)$(not sameas(ac,"ac0")) = p35_secdforest(t,j,ac)$(not sameas(ac,"ac0")) * sum((cell(i,j),combined_loss),1-f35_forest_lost_share(i,combined_loss))**m_timestep_length_forestry;
-		v35_secdforest.l(j,"ac0") = sum(ac,v35_secdforest.l(j,ac)$(not sameas(ac,"ac0"))) * (1-sum((cell(i,j),combined_loss),1-f35_forest_lost_share(i,combined_loss))**m_timestep_length_forestry);
-    v35_secdforest.l(j,ac)$(not sameas(ac,"ac0")) = v35_secdforest.l(j,ac)$(not sameas(ac,"ac0")) * sum((cell(i,j),combined_loss),1-f35_forest_lost_share(i,combined_loss))**m_timestep_length_forestry;
-		);
-
-
 *secdforest age class calculation
 p35_secdforest(t,j,ac) = v35_secdforest.l(j,ac);
 

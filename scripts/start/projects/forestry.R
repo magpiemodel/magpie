@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC23"
+identifier_flag = "DEC24"
 
-cat(paste0("Fire loss in postsolve"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Reformat forest loss shifts"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
