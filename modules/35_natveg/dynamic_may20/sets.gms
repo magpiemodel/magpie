@@ -38,6 +38,14 @@ sets
   class14  .  (ac140)
   class15  .  (acx)
   /
+
+  driver_source Source of deforestation drivers
+  / overall, deforestation, shifting_agriculture,
+  forestry, wildfire, urbanization /
+
+  combined_loss(driver_source) Combined loss from fire plus agriculture
+  / shifting_agriculture,wildfire /
+
 ;
 
 alias(ac_poulter,ac_poulter2);

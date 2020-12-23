@@ -21,8 +21,13 @@ else
                   + sum(ac$(ord(ac) > card(ac)-s35_shift), p35_other(t-1,j,ac));
 
 * Shift ageclasses due to forest fires
-		p35_secdforest(t,j,"ac0") = sum(ac,p35_secdforest(t,j,ac)$(not sameas(ac,"ac0"))) * sum(cell(i,j),p35_forest_fire(i));
-		p35_secdforest(t,j,ac)$(not sameas(ac,"ac0")) = p35_secdforest(t,j,ac)$(not sameas(ac,"ac0")) * (1-sum(cell(i,j),p35_forest_fire(i)));
+$ifthen "%c35_forest_damage%" == "wildfire"
+		p35_secdforest(t,j,"ac0") = sum(ac,p35_secdforest(t,j,ac)$(not sameas(ac,"ac0"))) * (1-sum(cell(i,j),1-f35_forest_lost_share(i,"%c35_forest_damage%"))**m_timestep_length_forestry);
+		p35_secdforest(t,j,ac)$(not sameas(ac,"ac0")) = p35_secdforest(t,j,ac)$(not sameas(ac,"ac0")) * sum(cell(i,j),1-f35_forest_lost_share(i,"%c35_forest_damage%"))**m_timestep_length_forestry;
+$elseif "%c35_forest_damage%" = "combined"
+    p35_secdforest(t,j,"ac0") = sum(ac,p35_secdforest(t,j,ac)$(not sameas(ac,"ac0"))) * (1-sum((cell(i,j),combined_loss),1-f35_forest_lost_share(i,combined_loss))**m_timestep_length_forestry);
+    p35_secdforest(t,j,ac)$(not sameas(ac,"ac0")) = p35_secdforest(t,j,ac)$(not sameas(ac,"ac0")) * sum((cell(i,j),combined_loss),1-f35_forest_lost_share(i,combined_loss))**m_timestep_length_forestry;
+$endif
 * example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s35_shift = 1)
     p35_secdforest(t,j,ac)$(ord(ac) > s35_shift) = p35_secdforest(t-1,j,ac-s35_shift);
 * account for cases at the end of the age class set (s35_shift > 1) which are not shifted by the above calculation

@@ -19,7 +19,7 @@ scalars
   s73_demand_dampener       Switch to dampen future demand jumps not more than 5pc of base year 0=off 1=on /0/
 ;
 
-table f73_prod_specific_timber(t_past,iso,total_wood_products) End use timber product demand (mio. m3 per yr)
+table f73_prod_specific_timber(t_past_forestry,iso,total_wood_products) End use timber product demand (mio. m3 per yr)
 $ondelim
 $include "./modules/73_timber/input/f73_prod_specific_timber.csv"
 $offdelim

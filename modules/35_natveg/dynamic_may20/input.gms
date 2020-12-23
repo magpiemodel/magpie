@@ -8,6 +8,8 @@
 $setglobal c35_protect_scenario  WDPA
 $setglobal c35_ad_policy  npi
 $setglobal c35_aolc_policy  npi
+$setglobal c35_forest_damage  none
+* Options = none, wildfire, combined
 
 scalars
 s35_natveg_harvest_shr Constrains the allowed wood harvest from natural vegetation (1=unconstrained) (1) /1/
@@ -31,3 +33,16 @@ $ondelim
 $include "./modules/35_natveg/input/forestageclasses.cs3"
 $offdelim
 ;
+
+table f35_forest_lost_share(i,driver_source) Share of area damanged by forest fires (1)
+$ondelim
+$include "./modules/35_natveg/input/f35_forest_lost_share.cs3"
+$offdelim
+;
+
+parameter f35_forest_disturbance_share(i) Share of area damanged by forest disturbances (1)
+/
+$ondelim
+$include "./modules/35_natveg/input/f35_forest_disturbance_share.cs4"
+$offdelim
+/;

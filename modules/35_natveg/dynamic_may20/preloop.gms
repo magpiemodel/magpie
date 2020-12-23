@@ -37,19 +37,3 @@ p35_min_other(t,j) = f35_min_land_stock(t,j,"%c35_ad_policy%","other");
 *initialize parameter
 p35_other(t,j,ac) = 0;
 p35_secdforest(t,j,ac) = 0;
-
-*initialize forest fire parameter
-*Table 1 DOI: 10.1126/science.aau3445
-*Annual lost area to wildfire is divided by area under forest from FAO to reach this number
-p35_forest_fire("CAZ") = 0.0007;
-p35_forest_fire("CHA") = 0.0118;
-p35_forest_fire("EUR") = 0.0001;
-p35_forest_fire("IND") = 0.0349;
-p35_forest_fire("JPN") = 0.0010;
-p35_forest_fire("LAM") = 0.0001;
-p35_forest_fire("MEA") = 0.0010;
-p35_forest_fire("NEU") = 0.0004;
-p35_forest_fire("OAS") = 0.0001;
-p35_forest_fire("REF") = 0.0030;
-p35_forest_fire("SSA") = 0.0001;
-p35_forest_fire("USA") = 0.0060;
