@@ -145,53 +145,49 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-*
-* Used data set: rev4.47+mrmagpie7_h12_magpie_debug.tgz
-* md5sum: a58714fb6fb90190bb2e5a12409a252a
+* 
+* Used data set: rev4.51+mrmagpie9_h12_magpie_debug.tgz
+* md5sum: 562ac61ced79a18b184d71e5a5c993a3
 * Repository: /p/projects/rd3mod/inputdata/output
-*
-* Used data set: rev4.47+mrmagpie7_h12_238dd4e69b15586dde74376b6b84cdec_cellularmagpie_debug.tgz
-* md5sum: fe93b4c90d084954089ac08e530497e2
+* 
+* Used data set: rev4.51+mrmagpie9_h12_cfc9a5551f05ca4efc6cbc7016516432_cellularmagpie_debug.tgz
+* md5sum: ffd3b3305a3e81062f317fb242330dc2
 * Repository: /p/projects/rd3mod/inputdata/output
-*
-* Used data set: rev4.47+mrmagpie7_h12_validation_debug.tgz
-* md5sum: a6888ab63e909b72ae57c7199e8b7d1a
+* 
+* Used data set: rev4.51+mrmagpie8_h12_validation_debug.tgz
+* md5sum: 5969ead6931960c4fcd3c705aad5a894
 * Repository: /p/projects/rd3mod/inputdata/output
-*
-* Used data set: calibration_H12_c200_26Feb20.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-*
+* 
 * Used data set: additional_data_rev3.85.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-*
+* md5sum: 23bc2b7ff07da84b798d741c3d2ad3d2
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/intern
+* 
 * Low resolution: c200
 * High resolution: 0.5
-*
+* 
 * Total number of cells: 200
-*
+* 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    26   22    3    7    2   33   24    6   17   11   42    7
-*
+* 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-*
-* Regions data revision: 4.47
-*
+* 
+* Regions data revision: 4.51
+* 
 * lpj2magpie settings:
-* * LPJmL data: HadGEM2_ES:rcp2p6:co2
-* * Revision: 4.47
-*
+* * LPJmL data: HadGEM2_ES:rcp6p0:co2
+* * Revision: 4.51
+* 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
 * * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * * Call: do.call(functiononly, args)
-*
-*
-* Last modification (input data): Thu Sep 10 12:17:34 2020
-*
+* 
+* 
+* Last modification (input data): Tue Nov  3 23:05:34 2020
+* 
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
@@ -216,7 +212,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  default
+$setglobal c_title  NewLPJ_TCinPasture_sticky_feb18_rcp6p0_nocc
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
@@ -249,7 +245,7 @@ $setglobal forestry  static_sep16
 $setglobal urban  static
 $setglobal natveg  dynamic_may20
 
-$setglobal factor_costs  mixed_feb17
+$setglobal factor_costs  sticky_feb18
 $setglobal landconversion  global_static_aug18
 
 $setglobal transport  gtap_nov12

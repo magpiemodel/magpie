@@ -12,6 +12,10 @@ $setglobal c14_yields_scenario  nocc
 scalar s14_limit_calib   Relative managament calibration switch (1=limited 0=pure relative) / 1 /;
 
 scalars
+  s14_yld_past_switch  Spillover parameter for translating technological change in the crop sector into pasture yield increases  (1)     / 0.25 /
+;
+
+scalars
   s14_timber_plantation_yield Plantation yield switch (0=natveg yields 1=plantation yields) (1) / 1 /
   s14_carbon_fraction Carbon fraction for conversion of biomass to dry matter (1) / 0.5/
 ;
