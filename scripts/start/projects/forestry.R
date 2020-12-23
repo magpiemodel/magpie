@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC21"
+identifier_flag = "DEC22"
 
 cat(paste0("High cost of prodn from heaven"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
@@ -37,7 +37,7 @@ for(ssp in c("SSP2")){
 
       source("config/default.cfg")
 
-      for(c35_forest_damage in c("none","wildfire","combined")){
+      for(s35_forest_damage in c(0,1,2)){
 
         cfg$gms$s80_optfile = 1
         cfg$gms$s80_maxiter = 5
@@ -48,7 +48,7 @@ for(ssp in c("SSP2")){
 
         cfg = setScenario(cfg,c(ssp,scen))
 
-        cfg$gms$c35_forest_damage = c35_forest_damage
+        cfg$gms$s35_forest_damage = s35_forest_damage
 
         cfg$gms$s35_secdf_distribution = s35_secdf_distribution
 
@@ -67,11 +67,15 @@ for(ssp in c("SSP2")){
         if(cfg$gms$s35_secdf_distribution == 1) dist_flag = "Equal"
         if(cfg$gms$s35_secdf_distribution == 2) dist_flag = "Poulter"
 
+        if(cfg$gms$s35_forest_damage == 0) damage_flg = "None"
+        if(cfg$gms$s35_forest_damage == 1) damage_flg = "Wildfire"
+        if(cfg$gms$s35_forest_damage == 2) damage_flg = "Combined"
+
         if(scen=="NPI") scen_flag="NoForestry"
         if(scen=="forestry") scen_flag="Forestry"
 
   #      cfg$title   = paste0(identifier_flag,"_",ssp,"_",plant_area_flag,"_",scen_flag,"_",dist_flag)
-        cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",dist_flag,"_",c35_forest_damage)
+        cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",dist_flag,"_",damage_flg)
         cfg$output  = c("extra/timestep_duration")
 
          xx = c(xx,cfg$title)

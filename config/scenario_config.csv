@@ -45,4 +45,4 @@ s32_initial_distribution;;;;;;;;;;;;;;;;;;;;;1
 s73_demand_switch;;;;;;;;;;;;;;;;;;;;;1
 s32_plant_carbon_foresight;;;;;;;;;;;;;;;;;;;;;1
 c57_macc_version;;;;;;;;;;;;;;;;;;;;;PBL_2019
-c35_forest_damage;;;;;;;;;;;;;;;;;;;;;none
+s35_forest_damage;;;;;;;;;;;;;;;;;;;;;0
