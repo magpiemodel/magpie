@@ -16,5 +16,5 @@ kpr(kall) Products that can be processed
 knpr(kall) Plant-based products that cannot be processed
    /alcohol,distillers_grain,ethanol,fibres,fish,livst_chick,livst_egg,livst_milk,
    livst_pig,livst_rum,oils,oilcakes,pasture,puls_pro,res_cereals,res_fibrous,
-   res_nonfibrous,scp/
+   res_nonfibrous,scp,wood,woodfuel/
 ;

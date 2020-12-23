@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-*' @code calculation of capital needed per unit produced
+*' calculation of capital needed per unit produced
 i38_capital_need(i,kcr,"mobile") = f38_fac_req_per_ton(kcr) * s38_capital_cost_share / pm_interest(t,i) * (1-s38_immobile);
 i38_capital_need(i,kcr,"immobile") = f38_fac_req_per_ton(kcr)*s38_capital_cost_share / pm_interest(t,i) * s38_immobile;
 

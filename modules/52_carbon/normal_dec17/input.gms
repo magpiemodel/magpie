@@ -9,6 +9,10 @@ $setglobal c52_carbon_scenario  nocc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
 
+scalars
+s52_plantation_threshold  Minimum threshold of carbon densities in timber plantations (tC per ha) / 8 /
+;
+
 table fm_carbon_density(t_all,j,land,c_pools) LPJmL carbon density for land and carbon pools (tC per ha)
 $ondelim
 $include "./modules/52_carbon/input/lpj_carbon_stocks.cs3"

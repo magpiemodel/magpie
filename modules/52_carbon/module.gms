@@ -12,10 +12,10 @@
 *' on cellular level to all land modules ([30_crop], [31_past], [32_forestry],
 *' [34_urban] and [35_natveg]), and in return it gets the current carbon stock
 *' levels from respective land pools. The module also accounts for changes in
-*' terrestrial carbon stocks cause by climate change effects on biosphere [45_climate].   
+*' terrestrial carbon stocks cause by climate change effects on biosphere [45_climate].
 *'
 *'
-*' @authors Benjamin Leon Bodirsky, Florian Humpenoeder
+*' @authors Benjamin Leon Bodirsky, Florian Humpenoeder, Abhijeet Mishra
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%carbon%" == "normal_dec17" $include "./modules/52_carbon/normal_dec17/realization.gms"
