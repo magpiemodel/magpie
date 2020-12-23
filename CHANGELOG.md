@@ -6,11 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [Unreleased] 
+## [Unreleased]
 
 ### added
+- **15_food** Added the option to fade out livestock demand towards a target level in kcal/cap/day.
+- **35_natveg** Added HalfEarth scenario to protection scenarios
 
 ### changed
+- **scripts** Updated AgMIP output scripts.
 
 ### removed
 

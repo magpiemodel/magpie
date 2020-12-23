@@ -78,7 +78,7 @@ $title magpie
 *' of fertilizer spreaders) (@popp_land-use_2014, @stevanovic_mitigation_2017). In addition,
 *' the model covers land-based carbon removal technologies such as bioenergy with carbon capture
 *' and sequestration (CCS) and afforestation (@humpenoder_investigating_2014,
-*' @humpenoder_large-scale_2017, @kreidenweis_afforestation_2016).
+*' @humpenoeder_bioenergy_2018, @kreidenweis_afforestation_2016).
 *'
 *' In response to all involved demand for agricultural commodities, costs of production,
 *' biophysical constraints and land-related policies, MAgPIE simulates major dynamics of
@@ -146,21 +146,25 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.51+mrmagpie9_h12_magpie_debug.tgz
-* md5sum: 562ac61ced79a18b184d71e5a5c993a3
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev48_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: rev4.51+mrmagpie9_h12_cfc9a5551f05ca4efc6cbc7016516432_cellularmagpie_debug.tgz
-* md5sum: ffd3b3305a3e81062f317fb242330dc2
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: rev4.52_h12_magpie.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: rev4.51+mrmagpie8_h12_validation_debug.tgz
-* md5sum: 5969ead6931960c4fcd3c705aad5a894
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: rev4.52_h12_validation.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev3.85.tgz
-* md5sum: 23bc2b7ff07da84b798d741c3d2ad3d2
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/intern
+* Used data set: calibration_H12_c200_26Feb20.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* 
+* Used data set: additional_data_rev3.88.tgz
+* md5sum: 5c43242889d06b94cbd8439bc1d8b166
+* Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/input_data/
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -169,24 +173,31 @@ $title magpie
 * 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*    26   22    3    7    2   33   24    6   17   11   42    7
+*    28   24   10    7    3   53   17    8   22    7   11   10
 * 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
-* Regions data revision: 4.51
+* Regions data revision: 4.52
 * 
 * lpj2magpie settings:
-* * LPJmL data: HadGEM2_ES:rcp6p0:co2
-* * Revision: 4.51
+* * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
+* * Additional input folder: /p/projects/landuse/data/input/other/rev48
+* * Revision: 48
+* * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
 * 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
+* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev48_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev48_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * * Regionscode: 690d3718e151be1b450b394c1064b1c5
-* * Call: do.call(functiononly, args)
+* * (clustering) n-repeat: 5
+* * (clustering) n-redistribute: 0
+* * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = cfg$spamfile, debug = FALSE, seed = cfg$seed)
 * 
 * 
-* Last modification (input data): Tue Nov  3 23:05:34 2020
+* 
+* Last modification (input data): Mon Nov 16 12:12:24 2020
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -212,7 +223,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  NewLPJ_TCinPasture_sticky_feb18_rcp6p0_nocc
+$setglobal c_title  default
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
@@ -226,7 +237,7 @@ $setglobal land  landmatrix_dec18
 $setglobal costs  default
 $setglobal interest_rate  select_apr20
 $setglobal tc  endo_jun18
-$setglobal yields  managementcalib_aug19
+$setglobal yields  dynamic_aug18
 
 $setglobal food  anthropometrics_jan18
 $setglobal demand  sector_may15
@@ -240,12 +251,12 @@ $setglobal trade  selfsuff_reduced
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
 
-$setglobal forestry  static_sep16
+$setglobal forestry  dynamic_may20
 
 $setglobal urban  static
 $setglobal natveg  dynamic_may20
 
-$setglobal factor_costs  sticky_feb18
+$setglobal factor_costs  mixed_feb17
 $setglobal landconversion  global_static_aug18
 
 $setglobal transport  gtap_nov12
