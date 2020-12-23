@@ -5,8 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_secdforest_reduction.fx(j,ac_est) = 0;
-vm_other_reduction.fx(j,ac_est) = 0;
+vm_hvarea_secdforest.fx(j,ac_est) = 0;
+vm_hvarea_other.fx(j,ac_est) = 0;
 
 * Regrowth of natural vegetation (natural succession) is modelled by shifting age-classes according to time step length.
 s35_shift = m_yeardiff(t)/5;
@@ -62,6 +62,10 @@ $elseif "%c35_protect_scenario%" == "full"
   p35_save_primforest(t,j) = pcm_land(j,"primforest");
   p35_save_secdforest(t,j) = pcm_land(j,"secdforest");
   p35_save_other(t,j) = pcm_land(j,"other");
+$elseif "%c35_protect_scenario%" == "forest"
+	  p35_save_primforest(t,j) = pcm_land(j,"primforest");
+	  p35_save_secdforest(t,j) = pcm_land(j,"secdforest");
+	  p35_save_other(t,j) = 0;
 $elseif "%c35_protect_scenario%" == "WDPA"
   p35_save_primforest(t,j) = p35_protect_shr(t,j,"WDPA")*pm_land_start(j,"primforest");
   p35_save_secdforest(t,j) = p35_protect_shr(t,j,"WDPA")*pm_land_start(j,"secdforest");

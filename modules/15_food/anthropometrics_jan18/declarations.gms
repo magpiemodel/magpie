@@ -150,13 +150,17 @@ parameters
  i15_intake_scen_target(t,i)                  Target for total per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
  i15_intake_EATLancet(i,kfo)                  Food-specific per capita calorie intake according to EAT Lancet diet scenario (kcal per capita per day)
  i15_intake_detailed_scen_target(t,i,kfo)     Target for food-specific per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
+ p15_intake_detailed_regr(t,i,kfo)                     Food-specific per capita calorie intake according to regression-based projections (kcal per capita per day)
+
  p15_demand2intake_ratio_ref(i)               Ratio between food calorie demand and intake for the historical time step of EAT Lancet diets (1)
  p15_foodwaste_growth(t,i)                    Increase in food waste over time relative to the historical time step of EAT Lancet diets (1)
  i15_kcal_pc_scen_target(t,i,kfo)             Target for per capita food consumption according to an exogenous diet scenario (kcal per capita per day)
  i15_exo_foodscen_fader(t,i)                  Fader that converges per capita food consumption to an exogenous diet scenario (1)
+
 * country-specific scenario switch
  p15_country_dummy(iso)                       Dummy parameter indicating whether country is affected by diet scenarios (1)
  p15_foodscen_region_shr(t_all,i)             Weighted share of region with regards to diet scenario of countries (1)
+
 * calculate diet iteration breakpoint
  p15_income_pc_real_ppp(t,i)                 Regional per capita income after price shock on regional level (USD05PPP per capita)
  p15_delta_income(t,i)                       Regional change in per capita income due to price shock on regional level (1)

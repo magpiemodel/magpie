@@ -9,3 +9,5 @@ sets
   mobil38 types of capital
   / mobile, immobile /
 ;
+
+*** EOF sets.gms ***
