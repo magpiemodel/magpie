@@ -17,6 +17,7 @@ p73_timber_harvest_cost(t,j,ac,forest_land)									                Harvesting c
 p73_cost_multiplier(land_natveg)                                            Cost multiplier for natural vegetation to make harvests expensive by a factor (1)
 p73_base_min(iso,total_wood_products)                                       Percentage of initial demand above which a jump is not permitted between time steps (mio. tDM)
 p73_diff(t_all,iso,total_wood_products)                                     Difference in timber demand between time steps (mio. tDM)
+p73_demand_calib(t_all,i,kforestry)                                         Additive calibration factor for timber demand
 ;
 
 positive variables
