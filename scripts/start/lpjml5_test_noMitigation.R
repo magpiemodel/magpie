@@ -2,6 +2,8 @@
 #### Script to start a MAgPIE run using different factor_costs realizations ##########
 ######################################################################################
 
+library(gms)
+
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
@@ -13,19 +15,20 @@ source("config/default.cfg")
 clustering<-c("c200")
 
 #Factor cost realizations
-realization<-c("mixed_feb17")
-climate<-c("cc")
+realization<-c("mixed_feb17","sticky_feb18")
+climate<-c("cc","nocc")
 #AEI<-c("LUH2v2","Siebert")
 AEI<-c("LUH2v2")
 
-for (k in 1:length(clustering)){
+for (k in 1:length(climate)){
   for (i in 1:length(AEI)){
     for(j in 1:length(realization)){
 
         #Change the results folder name
         #NBC STANDS FOR NEW BEST CALIBRATION
-        cfg$title<-paste0("LPj_T_NBC_",realization[j],"_",clustering[k],"_","rcp2p6","_CO2_",climate[1])
+        cfg$title<-paste0("NewLPJ_TCinPasture_",realization[j],"_rcp6p0_",climate[k])
 
+        cfg <- setScenario(cfg,climate[k])
 
         #recalibrate
         cfg$recalibrate <- TRUE
@@ -43,11 +46,6 @@ for (k in 1:length(clustering)){
         cfg$gms$factor_costs <- realization[j]
 
         #Climate impact or not
-        cfg$gms$c14_yields_scenario  <- climate[1]
-        cfg$gms$c42_watdem_scenario  <- climate[1]
-        cfg$gms$c52_carbon_scenario  <- climate[1]
-        cfg$gms$c43_watavail_scenario<- climate[1]
-        cfg$gms$c59_som_scenario  <- climate[1]
 
         start_run(cfg=cfg)
         }

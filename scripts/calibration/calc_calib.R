@@ -73,7 +73,7 @@ get_yieldcalib <- function(gdx_file) {
 }
 
 # Calculate the correction factor and save it
-update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,calibrate_cropland=TRUE,damping_factor=0.8, calib_file, crop_max=5, calibration_step="",n_maxcalib=20){
+update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,calibrate_cropland=TRUE,damping_factor=0.8, calib_file, crop_max=2, calibration_step="",n_maxcalib=20){
   require(magclass)
   require(magpie4)
   if(!(modelstat(gdx_file)[1,1,1]%in%c(1,2,7))) stop("Calibration run infeasible")
@@ -162,6 +162,7 @@ calibrate_magpie <- function(n_maxcalib = 1,
                              calib_accuracy = 0.1,
                              calibrate_pasture = FALSE,
                              calibrate_cropland = TRUE,
+                             crop_max =2,
                              calib_magpie_name = "magpie_calib",
                              damping_factor = 0.6,
                              calib_file = "modules/14_yields/input/f14_yld_calib.csv",
@@ -176,7 +177,7 @@ calibrate_magpie <- function(n_maxcalib = 1,
     cat(paste("\nStarting calibration iteration",i,"\n"))
     calibration_run(putfolder=putfolder, calib_magpie_name=calib_magpie_name, logoption=logoption)
     if(debug) file.copy(paste0(putfolder,"/fulldata.gdx"),paste0("fulldata_calib",i,".gdx"))
-    done <- update_calib(gdx_file=paste0(putfolder,"/fulldata.gdx"),calib_accuracy=calib_accuracy, calibrate_pasture=calibrate_pasture,calibrate_cropland=calibrate_cropland,damping_factor=damping_factor, calib_file=calib_file, calibration_step=i,n_maxcalib=n_maxcalib)
+    done <- update_calib(gdx_file=paste0(putfolder,"/fulldata.gdx"),calib_accuracy=calib_accuracy, calibrate_pasture=calibrate_pasture,calibrate_cropland=calibrate_cropland,crop_max=crop_max,damping_factor=damping_factor, calib_file=calib_file, calibration_step=i,n_maxcalib=n_maxcalib)
     if(done){
       break
     }
