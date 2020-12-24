@@ -32,6 +32,7 @@ scalars
   s32_plant_share                 Constant percentage of production which can come from plantations (1) / 0.33 /
   s32_forestry_int_rate           Global interest rate for plantations (percent) / 0.05 /
   s32_investment_cost             Additional investment cost in plantations (USD per tC per ha) / 200 /
+  s32_distribution_type           Which type of distribution shall be used for initializing plantations (0=equal distribution 1=FAO distribution) /0/
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)
@@ -73,5 +74,12 @@ parameter f32_ac_dist(ac) Age class distribution share (1)
 /
 $ondelim
 $include "./modules/32_forestry/input/f32_ac_dist.csv"
+$offdelim
+/;
+
+parameter f32_gs_target(i) Growing stock target in each region (m3 per ha)
+/
+$ondelim
+$include "./modules/32_forestry/input/f32_gs_target.cs4"
 $offdelim
 /;

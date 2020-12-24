@@ -127,6 +127,11 @@ v32_land.up(j,"aff",ac_est) = Inf;
 
 m_boundfix(v32_land,(j,type32,ac_sub),l,10e-5);
 
+** Calibrate plantations yielsds
+p32_gs_diff(j)$(sum(cell(i,j),f32_gs_target(i)) - sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac,"forestry")) > 0) = sum(cell(i,j),f32_gs_target(i)) / sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac,"forestry"));
+pm_timber_yield(t,j,ac,"forestry") = pm_timber_yield(t,j,ac,"forestry")$(ord(ac) = p32_rotation_cellular_estb(t,j)) * p32_gs_diff(j);
+display p32_gs_diff;
+
 ** Calculate future yield based on rotation length
 pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac,"forestry"));
 

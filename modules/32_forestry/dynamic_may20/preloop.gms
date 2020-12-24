@@ -160,10 +160,14 @@ if(s32_initial_distribution = 0,
 
 elseif s32_initial_distribution = 1,
 ** Initialize with equal distribution among rotation age classes
-*  p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular_harvesting("y1995",j);
-*  p32_land("y1995",j,"plant",ac)$(ini32(j,ac)) = p32_plant_ini_ac(j);
-  p32_plant_ini_ac(j) = pm_land_start(j,"forestry");
-  p32_land("y1995",j,"plant",ac) = p32_plant_ini_ac(j) * f32_ac_dist(ac);
+  if(s32_distribution_type = 0,
+    p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular_harvesting("y1995",j);
+    p32_land("y1995",j,"plant",ac)$(ini32(j,ac)) = p32_plant_ini_ac(j);
+    );
+  if(s32_distribution_type = 1,
+    p32_plant_ini_ac(j) = pm_land_start(j,"forestry");
+    p32_land("y1995",j,"plant",ac) = p32_plant_ini_ac(j) * f32_ac_dist(ac);
+    );
 );
 
 ** Initialization of land

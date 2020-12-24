@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC25"
+identifier_flag = "DEC26"
 
-cat(paste0("Initialize plantation area with FAO distribution"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("GS calibration for plantations based on FAO data"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
