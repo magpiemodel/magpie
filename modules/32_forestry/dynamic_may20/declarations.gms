@@ -41,6 +41,7 @@ parameters
  p32_fix_plant(t_ext)                               Parameter deciding if plantation area shall be fixed after 2020 (1)
  p32_ac_dist(ac)                                    Distribution of age classes used for initialization of plantations (1)
  p32_gs_diff(j)                                     Ratio of difference between FAO and MAgPIE growing stocks in m3 per ha comparison (1)
+ p32_gs_diff_indicator(t,j)                         Difference between FAO and MAgPIE growing stocks (m3 per ha comparison)
 ;
 
 positive variables
