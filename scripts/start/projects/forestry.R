@@ -25,7 +25,7 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "DEC27"
 
-cat(paste0("GS calibration for plantations based on FAO data"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Manual GS calibration for plantations based on FAO data"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
