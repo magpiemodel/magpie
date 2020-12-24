@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC24"
+identifier_flag = "DEC25"
 
-cat(paste0("Reformat forest loss shifts"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Initialize plantation area with FAO distribution"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
@@ -37,7 +37,7 @@ for(ssp in c("SSP2")){
 
       source("config/default.cfg")
 
-      for(s35_forest_damage in c(0,1,2)){
+      for(s35_forest_damage in c(0)){
 
         cfg$gms$s80_optfile = 1
         cfg$gms$s80_maxiter = 5

@@ -39,6 +39,7 @@ parameters
  p32_aff_bgp(j,ac)                                  Biophysical impact of afforestation (tCeq per ha)
  p32_tcre_glo(j)                                    Global mean Transient Climate Response to cumulative Emissions (degree C per tC per ha)
  p32_fix_plant(t_ext)                               Parameter deciding if plantation area shall be fixed after 2020 (1)
+ p32_ac_dist(ac)                                    Distribution of age classes used for initialization of plantations (1)
 ;
 
 positive variables
