@@ -40,7 +40,7 @@ parameters
  p32_tcre_glo(j)                                    Global mean Transient Climate Response to cumulative Emissions (degree C per tC per ha)
  p32_fix_plant(t_ext)                               Parameter deciding if plantation area shall be fixed after 2020 (1)
  p32_ac_dist(ac)                                    Distribution of age classes used for initialization of plantations (1)
- p32_gs_diff(j)                                     xy
+ p32_gs_diff(j)                                     Ratio of difference between FAO and MAgPIE growing stocks in m3 per ha comparison (1)
 ;
 
 positive variables
