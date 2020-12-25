@@ -127,6 +127,7 @@ v32_land.up(j,"aff",ac_est) = Inf;
 
 m_boundfix(v32_land,(j,type32,ac_sub),l,10e-5);
 
+$ontext
 ** Calibrate plantations yields
 
 ** What is the existing Growing stock in MAgPIE for initialization in MtDM
@@ -160,6 +161,7 @@ p32_needed_yield(j,ac)$(p32_land("y1995",j,"plant",ac)>0 AND p32_gs_cell_ac(j,ac
 pm_timber_yield(t,j,ac,"forestry")$(pm_timber_yield(t,j,ac,"forestry")<p32_needed_yield(j,ac)) = p32_needed_yield(j,ac);
 p32_absolute_gs_new(t,j,ac) = p32_land(t,j,"plant",ac) * p32_needed_yield(j,ac);
 display p32_land, p32_gs_cell_ac,f32_gs_absolutetarget,p32_target_gs_dist,p32_gs_cell,p32_absolute_gs_new,p32_needed_yield;
+$$offtext
 
 ** Calculate future yield based on rotation length
 pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac,"forestry"));
