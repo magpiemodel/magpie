@@ -33,12 +33,12 @@ for(ssp in c("SSP2")){
 
   for(s35_secdf_distribution in c(0)){
 
-    for(s32_distribution_type in c(0,1)){
+    for(s32_distribution_type in c(1)){
       for(scen in c("forestry")){
 
-        source("config/default.cfg")
-
         for(s35_forest_damage in c(0)){
+
+          source("config/default.cfg")
 
           cfg$gms$s80_optfile = 1
           cfg$gms$s80_maxiter = 5
@@ -49,8 +49,8 @@ for(ssp in c("SSP2")){
 
           cfg = setScenario(cfg,c(ssp,scen))
 
+          cfg$gms$s32_distribution_type = s32_distribution_type
           cfg$gms$s35_forest_damage = s35_forest_damage
-
           cfg$gms$s35_secdf_distribution = s35_secdf_distribution
 
           if(cfg$gms$s32_fix_plant == 1 && cfg$gms$s73_foresight == 1) break
