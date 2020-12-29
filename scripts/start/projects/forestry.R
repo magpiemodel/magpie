@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC29"
+identifier_flag = "DEC30"
 
 cat(paste0("Demand jump tied to max 10% increase"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 

@@ -51,10 +51,8 @@ loop (t_past_forestry,
   p73_timber_demand_gdp_pop(t_past_forestry,i,"wood")$(p73_demand_calib(t_past_forestry,i,"wood")>0) = p73_timber_demand_gdp_pop(t_past_forestry,i,"wood") - p73_demand_calib(t_past_forestry,i,"wood");
 );
 loop (t_all$(m_year(t_all)>=2020),
-*  p73_timber_demand_gdp_pop(t_all,i,"wood")$((sum(t_past_forestry,p73_demand_calib(t_past_forestry,i,"wood"))/card(t_past_forestry))>0) = p73_timber_demand_gdp_pop(t_all,i,"wood") - (sum(t_past_forestry,p73_demand_calib(t_past_forestry,i,"wood"))/card(t_past_forestry));
-  p73_timber_demand_gdp_pop(t_all,i,"wood")$(p73_timber_demand_gdp_pop(t_all-1,i,"wood")/p73_timber_demand_gdp_pop(t_all,i,"wood") > 0.10) = p73_timber_demand_gdp_pop(t_all-1,i,"wood") * 1.10;
+  p73_timber_demand_gdp_pop(t_all,i,"wood")$(p73_timber_demand_gdp_pop(t_all,i,"wood")/sum(i_to_iso(i,iso),p73_forestry_demand_prod_specific(t_all-1,iso,"industrial_roundwood")) > 1.05) = p73_timber_demand_gdp_pop(t_all-1,i,"wood") * 1.05;
 );
-display p73_timber_demand_gdp_pop,p73_demand_calib;
 
 ** Woodfuel fix
 ** We only model 50% of woodfuel demand. Similar assumption to IMAGE
