@@ -25,7 +25,7 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "DEC30"
 
-cat(paste0("Demand jump tied to max 10% increase"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Demand jump fix max allowed jump is 5% compared to indrw calculated data"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
