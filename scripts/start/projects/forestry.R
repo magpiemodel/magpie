@@ -23,20 +23,20 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC27"
+identifier_flag = "DEC28"
 
-cat(paste0("Manual GS calibration for plantations based on FAO data"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Correct damage calculation"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
 for(ssp in c("SSP2")){
 
-  for(s35_secdf_distribution in c(0)){
+  for(s35_secdf_distribution in c(0,2)){
 
-    for(s32_distribution_type in c(1)){
+    for(s32_distribution_type in c(0,1)){
       for(scen in c("forestry")){
 
-        for(s35_forest_damage in c(0)){
+        for(s35_forest_damage in c(0,1,2)){
 
           source("config/default.cfg")
 

@@ -19,15 +19,6 @@ else
 * account for cases at the end of the age class set (s35_shift > 1) which are not shifted by the above calculation
     p35_other(t,j,"acx") = p35_other(t,j,"acx")
                   + sum(ac$(ord(ac) > card(ac)-s35_shift), p35_other(t-1,j,ac));
-* Shift ageclasses due to forest fires
-	if(s35_forest_damage=1,
-		p35_secdforest(t,j,"ac0") = sum(ac,p35_secdforest(t,j,ac)$(not sameas(ac,"ac0")) * sum(cell(i,j),f35_forest_lost_share(i,"wildfire")*m_timestep_length_forestry));
-		p35_secdforest(t,j,ac)$(not sameas(ac,"ac0")) = p35_secdforest(t,j,ac)$(not sameas(ac,"ac0")) * sum(cell(i,j),1-f35_forest_lost_share(i,"wildfire")*m_timestep_length_forestry);
-		);
-	if(s35_forest_damage=2,
-		p35_secdforest(t,j,"ac0") = sum(ac,p35_secdforest(t,j,ac)$(not sameas(ac,"ac0")) * sum((cell(i,j),combined_loss),f35_forest_lost_share(i,combined_loss)*m_timestep_length_forestry));
-		p35_secdforest(t,j,ac)$(not sameas(ac,"ac0")) = p35_secdforest(t,j,ac)$(not sameas(ac,"ac0")) * sum((cell(i,j),combined_loss),1-f35_forest_lost_share(i,combined_loss)*m_timestep_length_forestry)
-		);
 
 * Usual shift
 * example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s35_shift = 1)
@@ -36,6 +27,18 @@ else
     p35_secdforest(t,j,"acx") = p35_secdforest(t,j,"acx")
                   + sum(ac$(ord(ac) > card(ac)-s35_shift), p35_secdforest(t-1,j,ac));
 );
+
+* Shift ageclasses due to forest fires
+	if(s35_forest_damage=1,
+		p35_disturbance_loss(t,j,ac_sub) = p35_secdforest(t,j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"wildfire"))*m_timestep_length_forestry;
+		p35_secdforest(t,j,ac_est) = p35_secdforest(t,j,ac_est) + sum(ac_sub,p35_disturbance_loss(t,j,ac_sub))/card(ac_est);
+    p35_secdforest(t,j,ac_sub) = p35_secdforest(t,j,ac_sub) - p35_disturbance_loss(t,j,ac_sub);
+		);
+	if(s35_forest_damage=2,
+		p35_disturbance_loss(t,j,ac_sub) = p35_secdforest(t,j,ac_sub) * sum((cell(i,j),combined_loss),f35_forest_lost_share(i,combined_loss))*m_timestep_length_forestry;
+		p35_secdforest(t,j,ac_est) = p35_secdforest(t,j,ac_est) + sum(ac_sub,p35_disturbance_loss(t,j,ac_sub))/card(ac_est);
+    p35_secdforest(t,j,ac_sub) = p35_secdforest(t,j,ac_sub) - p35_disturbance_loss(t,j,ac_sub);
+		);
 
 *' @code
 *' If the vegetation carbon density in a simulation unit due to regrowth

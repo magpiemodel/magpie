@@ -25,9 +25,10 @@ parameters
  p35_min_other(t,j)      		                    Minimum other land stock [land protection policies] (Mha)
  p35_carbon_density_secdforest(t,j,ac,ag_pools) Carbon density secdforest (tC per ha)
  p35_carbon_density_other(t,j,ac,ag_pools) 	    Carbon density other land (tC per ha)
- i35_secdf_ac_dist(j,ac_poulter)                xx
- p35_poulter_dist(j,ac)                         xx
+ i35_secdf_ac_dist(j,ac_poulter)                Distribution of ageclass in secondary forest (mio. ha)
+ p35_poulter_dist(j,ac)                         Share of age-classes in secondary forest (1)
  p35_forest_fire(i)                             forest fire loss of area as a share (1)
+ p35_disturbance_loss(t,j,ac)                   Loss due to disturbances in secondary forest (mio. ha)
 ;
 
 equations
