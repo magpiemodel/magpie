@@ -140,7 +140,7 @@ m_boundfix(v35_other,(j,ac_sub),l,10e-5);
 
 * calculate carbon density
 * highest carbon density 1st time step to account for reshuffling
-if((ord(t) = 1),
+if((ord(t) = 1) AND s35_secdf_distribution=0,
 	p35_carbon_density_secdforest(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,"acx",ag_pools);
 	p35_carbon_density_other(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,"acx",ag_pools);
 else

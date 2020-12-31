@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC30"
+identifier_flag = "DEC31"
 
-cat(paste0("Demand jump fix max allowed jump is 5% compared to indrw calculated data"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Possible fix for carbon density in secdf in first time step. Distribution of age-class in other land"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
@@ -33,7 +33,7 @@ for(ssp in c("SSP2")){
 
   for(s35_secdf_distribution in c(2)){
 
-    for(s32_distribution_type in c(0,1)){
+    for(s32_distribution_type in c(1)){
       for(scen in c("forestry")){
 
         for(s35_forest_damage in c(0,1,2)){
