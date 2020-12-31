@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC31"
+identifier_flag = "DEC32"
 
-cat(paste0("Possible fix for carbon density in secdf in first time step. Distribution of age-class in other land"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Other land starts with acx. Possible fix for carbon density in secdf in first time step."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
