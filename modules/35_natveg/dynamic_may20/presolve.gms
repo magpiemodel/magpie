@@ -148,6 +148,8 @@ else
 	p35_carbon_density_other(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
 );
 
+** not good to change pcm_carbon_stock in presolve, because it creates inconsistencies with ov_carbon_stock
+$ontext
 * update pcm_carbon_stock. Needed for shifting from other land to secdforest (p35_recovered_forest).
 pcm_carbon_stock(j,"secdforest",ag_pools) =
            sum(ac, pc35_secdforest(j,ac)
@@ -156,6 +158,7 @@ pcm_carbon_stock(j,"secdforest",ag_pools) =
 pcm_carbon_stock(j,"other",ag_pools) =
            sum(ac, pc35_other(j,ac)
            * p35_carbon_density_other(t,j,ac,ag_pools));
+$offtext
 
 p35_min_forest(t,j)$(p35_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j,"secdforest")) = pcm_land(j,"primforest") + pcm_land(j,"secdforest");
 p35_min_other(t,j)$(p35_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");

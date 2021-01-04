@@ -25,7 +25,7 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "DEC33"
 
-cat(paste0("Harvested secdf primf is secdf. Processing off, bioenergy subsidy is 0"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Not changing pcm_carbon_stock in presolve due to inconsisteny with ov_carbon_stock"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
