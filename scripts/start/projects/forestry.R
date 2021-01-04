@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC32T"
+identifier_flag = "DEC33"
 
 cat(paste0("Harvested secdf primf is secdf. Processing off, bioenergy subsidy is 0"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
