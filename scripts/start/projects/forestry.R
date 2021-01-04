@@ -25,7 +25,7 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "DEC37"
 
-cat(paste0("Initialize secdf and other with information in preloop. Changing/Unchanged pcm_carbon_stock in presolve due to inconsisteny with ov_carbon_stock"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("loss calculation in postsolve. Changing/Unchanged pcm_carbon_stock in presolve due to inconsisteny with ov_carbon_stock"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 

@@ -8,31 +8,19 @@
 vm_hvarea_secdforest.fx(j,ac_est) = 0;
 vm_hvarea_other.fx(j,ac_est) = 0;
 
-* Shift ageclasses due to forest fires
-if(s35_forest_damage=1,
-	p35_disturbance_loss(t,j,ac_sub) = p35_secdforest(t,j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"wildfire"))*m_timestep_length_forestry;
-	);
-
-if(s35_forest_damage=2,
-	p35_disturbance_loss(t,j,ac_sub) = p35_secdforest(t,j,ac_sub) * sum((cell(i,j),combined_loss),f35_forest_lost_share(i,combined_loss))*m_timestep_length_forestry;
-	);
-
 * Regrowth of natural vegetation (natural succession) is modelled by shifting age-classes according to time step length.
 s35_shift = m_yeardiff(t)/5;
 if((ord(t) = 1),
 	p35_secdforest(t,j,ac) = i35_secdforest(j,ac);
 	p35_other(t,j,ac) = i35_other(j,ac);
-	p35_secdforest(t,j,ac_est) = p35_secdforest(t,j,ac_est) + sum(ac_sub,p35_disturbance_loss(t,j,ac_sub))/card(ac_est);
-  p35_secdforest(t,j,ac_sub) = p35_secdforest(t,j,ac_sub) - p35_disturbance_loss(t,j,ac_sub);
+
 else
 * example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s35_shift = 1)
     p35_other(t,j,ac)$(ord(ac) > s35_shift) = p35_other(t-1,j,ac-s35_shift);
 * account for cases at the end of the age class set (s35_shift > 1) which are not shifted by the above calculation
     p35_other(t,j,"acx") = p35_other(t,j,"acx")
                   + sum(ac$(ord(ac) > card(ac)-s35_shift), p35_other(t-1,j,ac));
-* Disturbance losses
-		p35_secdforest(t,j,ac_est) = p35_secdforest(t,j,ac_est) + sum(ac_sub,p35_disturbance_loss(t,j,ac_sub))/card(ac_est);
-		p35_secdforest(t,j,ac_sub) = p35_secdforest(t,j,ac_sub) - p35_disturbance_loss(t,j,ac_sub);
+
 * Usual shift
 * example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s35_shift = 1)
     p35_secdforest(t,j,ac)$(ord(ac) > s35_shift) = p35_secdforest(t-1,j,ac-s35_shift);

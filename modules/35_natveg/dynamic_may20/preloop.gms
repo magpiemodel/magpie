@@ -34,7 +34,5 @@ p35_min_forest(t,j) = f35_min_land_stock(t,j,"%c35_ad_policy%","forest");
 p35_min_other(t,j) = f35_min_land_stock(t,j,"%c35_ad_policy%","other");
 
 *initialize parameter
-*p35_other(t,j,ac) = 0;
-*p35_secdforest(t,j,ac) = 0;
-p35_other(t,j,ac) = i35_other(j,ac);
-p35_secdforest(t,j,ac) = i35_secdforest(j,ac);
+p35_other(t,j,ac) = 0;
+p35_secdforest(t,j,ac) = 0;
