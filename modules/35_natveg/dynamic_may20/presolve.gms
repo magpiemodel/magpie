@@ -8,6 +8,19 @@
 vm_hvarea_secdforest.fx(j,ac_est) = 0;
 vm_hvarea_other.fx(j,ac_est) = 0;
 
+* Shift ageclasses due to forest fires
+if(s35_forest_damage=1,
+	p35_disturbance_loss(t,j,ac_sub) = p35_secdforest(t,j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"wildfire"))*m_timestep_length_forestry;
+	p35_secdforest(t,j,ac_est) = p35_secdforest(t,j,ac_est) + sum(ac_sub,p35_disturbance_loss(t,j,ac_sub))/card(ac_est);
+  p35_secdforest(t,j,ac_sub) = p35_secdforest(t,j,ac_sub) - p35_disturbance_loss(t,j,ac_sub);
+	);
+
+if(s35_forest_damage=2,
+	p35_disturbance_loss(t,j,ac_sub) = p35_secdforest(t,j,ac_sub) * sum((cell(i,j),combined_loss),f35_forest_lost_share(i,combined_loss))*m_timestep_length_forestry;
+	p35_secdforest(t,j,ac_est) = p35_secdforest(t,j,ac_est) + sum(ac_sub,p35_disturbance_loss(t,j,ac_sub))/card(ac_est);
+  p35_secdforest(t,j,ac_sub) = p35_secdforest(t,j,ac_sub) - p35_disturbance_loss(t,j,ac_sub);
+	);
+
 * Regrowth of natural vegetation (natural succession) is modelled by shifting age-classes according to time step length.
 s35_shift = m_yeardiff(t)/5;
 if((ord(t) = 1),
@@ -27,18 +40,6 @@ else
     p35_secdforest(t,j,"acx") = p35_secdforest(t,j,"acx")
                   + sum(ac$(ord(ac) > card(ac)-s35_shift), p35_secdforest(t-1,j,ac));
 );
-
-* Shift ageclasses due to forest fires
-	if(s35_forest_damage=1,
-		p35_disturbance_loss(t,j,ac_sub) = p35_secdforest(t,j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"wildfire"))*m_timestep_length_forestry;
-		p35_secdforest(t,j,ac_est) = p35_secdforest(t,j,ac_est) + sum(ac_sub,p35_disturbance_loss(t,j,ac_sub))/card(ac_est);
-    p35_secdforest(t,j,ac_sub) = p35_secdforest(t,j,ac_sub) - p35_disturbance_loss(t,j,ac_sub);
-		);
-	if(s35_forest_damage=2,
-		p35_disturbance_loss(t,j,ac_sub) = p35_secdforest(t,j,ac_sub) * sum((cell(i,j),combined_loss),f35_forest_lost_share(i,combined_loss))*m_timestep_length_forestry;
-		p35_secdforest(t,j,ac_est) = p35_secdforest(t,j,ac_est) + sum(ac_sub,p35_disturbance_loss(t,j,ac_sub))/card(ac_est);
-    p35_secdforest(t,j,ac_sub) = p35_secdforest(t,j,ac_sub) - p35_disturbance_loss(t,j,ac_sub);
-		);
 
 *' @code
 *' If the vegetation carbon density in a simulation unit due to regrowth
@@ -140,25 +141,28 @@ m_boundfix(v35_other,(j,ac_sub),l,10e-5);
 
 * calculate carbon density
 * highest carbon density 1st time step to account for reshuffling
-if((ord(t) = 1) AND s35_secdf_distribution=0,
+
+p35_carbon_density_secdforest(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
+p35_carbon_density_other(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
+
+if((ord(t) = 1 AND s35_secdf_distribution=0),
 	p35_carbon_density_secdforest(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,"acx",ag_pools);
 	p35_carbon_density_other(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,"acx",ag_pools);
-else
-	p35_carbon_density_secdforest(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
-	p35_carbon_density_other(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
 );
 
 ** not good to change pcm_carbon_stock in presolve, because it creates inconsistencies with ov_carbon_stock
-$ontext
-* update pcm_carbon_stock. Needed for shifting from other land to secdforest (p35_recovered_forest).
-pcm_carbon_stock(j,"secdforest",ag_pools) =
-           sum(ac, pc35_secdforest(j,ac)
-           * p35_carbon_density_secdforest(t,j,ac,ag_pools));
 
-pcm_carbon_stock(j,"other",ag_pools) =
-           sum(ac, pc35_other(j,ac)
-           * p35_carbon_density_other(t,j,ac,ag_pools));
-$offtext
+if(s35_cstock_modifier=1,
+* update pcm_carbon_stock. Needed for shifting from other land to secdforest (p35_recovered_forest).
+	pcm_carbon_stock(j,"secdforest",ag_pools) =
+	           sum(ac, pc35_secdforest(j,ac)
+	           * p35_carbon_density_secdforest(t,j,ac,ag_pools));
+
+	pcm_carbon_stock(j,"other",ag_pools) =
+	           sum(ac, pc35_other(j,ac)
+	           * p35_carbon_density_other(t,j,ac,ag_pools));
+	);
+
 
 p35_min_forest(t,j)$(p35_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j,"secdforest")) = pcm_land(j,"primforest") + pcm_land(j,"secdforest");
 p35_min_other(t,j)$(p35_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");
