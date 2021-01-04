@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased] 
 
 ### added
+ - MAgPIE2GAINS output script to convert magpie files into nc and csv's with GAINS regional mapping - through INSM project
 
 ### changed
 
