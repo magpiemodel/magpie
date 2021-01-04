@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC32"
+identifier_flag = "DEC32T"
 
 cat(paste0("Other land starts with acx. Possible fix for carbon density in secdf in first time step."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
@@ -31,9 +31,9 @@ xx <- c()
 
 for(ssp in c("SSP2")){
 
-  for(s35_secdf_distribution in c(2)){
+  for(s35_secdf_distribution in c(0,1,2)){
 
-    for(s32_distribution_type in c(1)){
+    for(s32_distribution_type in c(0,1)){
       for(scen in c("forestry")){
 
         for(s35_forest_damage in c(0,1,2)){
@@ -48,6 +48,8 @@ for(ssp in c("SSP2")){
           cfg$recalc_npi_ndc = "ifneeded"
 
           cfg = setScenario(cfg,c(ssp,scen))
+
+          cfg$gms$c_timesteps <- "4"
 
           cfg$gms$s32_distribution_type = s32_distribution_type
           cfg$gms$s35_forest_damage = s35_forest_damage
@@ -79,7 +81,7 @@ for(ssp in c("SSP2")){
           if(scen=="forestry") scen_flag="Forestry"
 
     #      cfg$title   = paste0(identifier_flag,"_",ssp,"_",plant_area_flag,"_",scen_flag,"_",dist_flag)
-          cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",dist_flag,"_",damage_flg,"_",init_flag)
+          cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",dist_flag,"_",init_flag,"_",damage_flg)
           cfg$output  = c("extra/timestep_duration")
 
            xx = c(xx,cfg$title)
