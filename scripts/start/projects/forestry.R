@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC36"
+identifier_flag = "DEC37"
 
-cat(paste0("Changing/Unchanged pcm_carbon_stock in presolve due to inconsisteny with ov_carbon_stock"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Initialize secdf and other with information in preloop. Changing/Unchanged pcm_carbon_stock in presolve due to inconsisteny with ov_carbon_stock"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
@@ -38,7 +38,7 @@ for(ssp in c("SSP2")){
 
         for(s35_forest_damage in c(0,1,2)){
 
-          for(s35_cstock_modifier in c(0,1)){
+          for(s35_cstock_modifier in c(0)){
 
             source("config/default.cfg")
 
