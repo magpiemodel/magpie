@@ -154,7 +154,7 @@ if(ord(t)=1,
 * Calculate Scaling factor
   p32_gs_scaling_reg(i,ac) = 1;
   p32_gs_scaling_reg(i,ac)$(p32_gs_reg_ac(i,ac)>0) = (p32_target_gs_reg(i,ac)/p32_gs_reg_ac(i,ac));
-  p32_gs_scaling_reg(i,ac)$(p32_gs_scaling_reg(i,ac)<0.5) = 0.5
+  p32_gs_scaling_reg(i,ac)$(p32_gs_scaling_reg(i,ac)<0.5) = 0.5;
   );
 *display p32_gs_scaling_reg,p32_gs_reg_ac,p32_gs_distribution_reg,p32_target_gs_reg;
 ** Update timber yield
