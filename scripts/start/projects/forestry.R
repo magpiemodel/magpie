@@ -36,7 +36,7 @@ for(ssp in c("SSP2")){
     for(s32_distribution_type in c(0)){
       for(scen in c("forestry")){
 
-        for(s35_forest_damage in c(0,2)){
+        for(s35_forest_damage in c(1)){
 
           for(s35_cstock_modifier in c(1)){
 
