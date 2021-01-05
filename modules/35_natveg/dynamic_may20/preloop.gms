@@ -18,10 +18,11 @@ elseif s35_secdf_distribution = 2,
 * Ben Poulter age class distribution
   i35_secdf_ac_dist(j,ac_poulter) = f35_secdf_ac_dist(j,ac_poulter);
 **changes subject to confirmation;
-*classes 1 and 2 include plantation and are therefore excluded
+*classes 1, 2, 3 include plantation and are therefore excluded
+*As disturbance history (fire) would affect the age structure
+*We use the sahre from class 4 to be in class 1,2,3
 *class 15 is primary forest and is therefore excluded
-  i35_secdf_ac_dist(j,"class1") = 0;
-  i35_secdf_ac_dist(j,"class2") = 0;
+  i35_secdf_ac_dist(j,ac_poulter_young) = i35_secdf_ac_dist(j,"class4");
   i35_secdf_ac_dist(j,"class15") = 0;
   p35_poulter_dist(j,ac)$(sum(ac_poulter,i35_secdf_ac_dist(j,ac_poulter)$(not sameas(ac_poulter,"class15")))>0) = sum(ac_poulter_to_ac(ac_poulter,ac),i35_secdf_ac_dist(j,ac_poulter)$(not sameas(ac_poulter,"class15"))/sum(ac_poulter2,i35_secdf_ac_dist(j,ac_poulter2)$(not sameas(ac_poulter2,"class15"))));
   i35_secdforest(j,ac)$(not sameas(ac,"ac0")) = pcm_land(j,"secdforest")*p35_poulter_dist(j,ac);

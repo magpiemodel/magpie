@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC39"
+identifier_flag = "DEC40"
 
-cat(paste0("Calibrartion of absolute GS for managed forest"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Class 1,2,3 from poulter set use class 4 value"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 

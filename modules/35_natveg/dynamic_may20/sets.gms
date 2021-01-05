@@ -20,6 +20,9 @@ sets
   class6, class7, class8, class9, class10,
   class11, class12, class13, class14, class15 /
 
+  ac_poulter_young(ac_poulter) Young age classes which probably beling to managed forest
+  / class1, class2, class3 /
+
   ac_poulter_to_ac(ac_poulter,ac) mapping between ac and ac_poulter
   /
   class1   .  (ac10)
