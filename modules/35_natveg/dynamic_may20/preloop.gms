@@ -42,3 +42,7 @@ p35_min_other(t,j) = f35_min_land_stock(t,j,"%c35_ad_policy%","other");
 *initialize parameter
 p35_other(t,j,ac) = 0;
 p35_secdforest(t,j,ac) = 0;
+
+* initialize forest disturbance losses
+pc35_disturbance_loss_secdf(j,ac) = 0;
+pc35_disturbance_loss_primf(j) = 0;
