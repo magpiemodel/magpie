@@ -80,7 +80,7 @@ for(ssp in c("SSP2")){
     #      cfg$title   = paste0(identifier_flag,"_",ssp,"_",plant_area_flag,"_",scen_flag,"_",dist_flag)
     #      cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",dist_flag,"_",init_flag,"_",damage_flg)
           cfg$title   = paste0(identifier_flag,"_",dist_flag,"_",damage_flg)
-          cfg$output  = c("extra/timestep_duration")
+          cfg$output  = c("extra/timestep_duration","rds_report")
 
            xx = c(xx,cfg$title)
            start_run(cfg,codeCheck=FALSE)
