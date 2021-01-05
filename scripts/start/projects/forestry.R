@@ -23,20 +23,20 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC40Nscale"
+identifier_flag = "DEC41"
 
-cat(paste0("Default gs scaling to be 1 and not less than 0.5 allowed"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Scaling for both natveg yield and plantation yield"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
 for(ssp in c("SSP2")){
 
-  for(s35_secdf_distribution in c(2)){
+  for(s35_secdf_distribution in c(1,2)){
 
     for(s32_distribution_type in c(0)){
       for(scen in c("forestry")){
 
-        for(s35_forest_damage in c(0)){
+        for(s35_forest_damage in c(0,1,2)){
           source("config/default.cfg")
 
           cfg$gms$s80_optfile = 1
