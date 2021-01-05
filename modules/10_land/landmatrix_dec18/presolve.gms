@@ -9,8 +9,8 @@
 
 *' @code Some of the land use transitions are restricted:
 
-*' No afforestation on natveg areas
-*v10_lu_transitions.fx(j,"primforest","forestry") = 0;
+*' No planted forest on natveg areas
+v10_lu_transitions.fx(j,"primforest","forestry") = 0;
 *v10_lu_transitions.fx(j,"secdforest","forestry") = 0;
 *v10_lu_transitions.fx(j,"other","forestry") = 0;
 
