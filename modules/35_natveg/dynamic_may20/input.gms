@@ -11,9 +11,8 @@ $setglobal c35_aolc_policy  npi
 
 scalars
 s35_natveg_harvest_shr Constrains the allowed wood harvest from natural vegetation (1=unconstrained) (1) /1/
-s35_secdf_distribution Flag for secdf initialization (0=all secondary forest in highest age class 1=Equal distribution among all age classes 2=Poulter distribution from MODIS satellite data) (1) /0/
-s35_forest_damage Damage simulation in forests (0=none 1=Wildfire 2=Combination of wildfire and shiftingagriculture) /0/
-s35_cstock_modifier The carbon stocks be modified in presolve (0=no 1=yes) /1/
+s35_secdf_distribution Flag for secdf initialization (0=all secondary forest in highest age class 1=Equal distribution among all age classes 2=Poulter distribution from MODIS satellite data) (1) /2/
+s35_forest_damage Damage simulation in forests (0=none 1=Wildfire 2=Combination of wildfire and shiftingagriculture) /2/
 ;
 
 table f35_protect_area(j,prot_type) Conservation priority areas (mio. ha)
