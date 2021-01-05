@@ -31,12 +31,12 @@ xx <- c()
 
 for(ssp in c("SSP2")){
 
-  for(s35_secdf_distribution in c(1,2)){
+  for(s35_secdf_distribution in c(1)){
 
     for(s32_distribution_type in c(0)){
       for(scen in c("forestry")){
 
-        for(s35_forest_damage in c(0,1,2)){
+        for(s35_forest_damage in c(0)){
           source("config/default.cfg")
 
           cfg$gms$s80_optfile = 1
