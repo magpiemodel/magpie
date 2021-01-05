@@ -25,7 +25,7 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "DEC40"
 
-cat(paste0("Class 1,2,3 from poulter set use class 4 value"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Default gs scaling to be 1 and not less than 0.5 allowed"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
