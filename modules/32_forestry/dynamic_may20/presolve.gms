@@ -135,7 +135,7 @@ if(ord(t)=1,
 
 ** What is the existing Growing stock in MAgPIE for initialization in MtDM
 ** Area is Mha and yield is tDM/ha
-  p32_gs_reg_ac(i,ac) = sum(cell(i,j),p32_land("y1995",j,"plant",ac) * pm_timber_yield("y1995",j,ac,"forestry"));
+  p32_gs_reg_ac(i,ac) = sum(cell(i,j),p32_land_start_ac * pm_timber_yield("y1995",j,ac,"forestry"));
 ** Sum over age class because we don't want to have growing stocks distributed to cells with no plantations.
   p32_gs_reg(i) = sum(ac,p32_gs_reg_ac(i,ac));
 
