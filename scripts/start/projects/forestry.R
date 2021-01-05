@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC40x"
+identifier_flag = "DEC40Nscale"
 
 cat(paste0("Default gs scaling to be 1 and not less than 0.5 allowed"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
