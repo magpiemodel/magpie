@@ -45,10 +45,3 @@ $ondelim
 $include "./modules/35_natveg/input/f35_forest_disturbance_share.cs4"
 $offdelim
 /;
-
-parameter f35_gs_absolutetarget(i) Absolute growing stock target in each region (mio m3)
-/
-$ondelim
-$include "./modules/35_natveg/input/f35_gs_absolutetarget.cs4"
-$offdelim
-/;

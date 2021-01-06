@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC41"
+identifier_flag = "DEC42"
 
-cat(paste0("Scaling for both natveg yield and plantation yield"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Calibration factor and plantation CARBON density based on relative growing stock"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 

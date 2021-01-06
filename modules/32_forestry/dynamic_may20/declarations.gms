@@ -46,13 +46,9 @@ parameters
  p32_absolute_gs_new(t,j,ac)                        Updated growing stock in each time step (mio. tDM)
  p32_leftover_target(i)                             Leftover target growing stock distribution (mio. tDM)
  p32_needed_yield(j,ac)                             Updated yield for plantations (tDM per ha)
- p32_gs_distribution(j,ac)
- p32_gs_scaling(j,ac)
- p32_gs_reg_ac(i,ac)
- p32_gs_distribution_reg(i,ac)
- p32_target_gs_reg(i,ac)
- p32_gs_scaling_reg(i,ac)
- p32_gs_reg(i)
+ p32_target_gs_reg(i)
+ p32_gs_scaling_reg(i)
+ p32_gs_new(i)
 ;
 
 positive variables

@@ -90,3 +90,10 @@ $ondelim
 $include "./modules/32_forestry/input/f32_gs_absolutetarget.cs4"
 $offdelim
 /;
+
+parameter f32_gs_relativetarget(i) Relative growing stock target in each region (mio m3 per ha)
+/
+$ondelim
+$include "./modules/32_forestry/input/f32_gs_relativetarget.cs4"
+$offdelim
+/;

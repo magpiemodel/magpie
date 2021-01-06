@@ -127,40 +127,6 @@ v32_land.up(j,"aff",ac_est) = Inf;
 
 m_boundfix(v32_land,(j,type32,ac_sub),l,10e-5);
 
-
-if(ord(t)=1,
-*******************************************************************************
-** Calibrate plantations yields
-*******************************************************************************
-
-** What is the existing Growing stock in MAgPIE for initialization in MtDM
-** Area is Mha and yield is tDM/ha
-  p32_gs_reg_ac(i,ac) = sum(cell(i,j),p32_land_start_ac(j,"plant",ac) * pm_timber_yield("y1995",j,ac,"forestry"));
-** Sum over age class because we don't want to have growing stocks distributed to cells with no plantations.
-  p32_gs_reg(i) = sum(ac,p32_gs_reg_ac(i,ac));
-
-** Convert FAO Growing stock (Mm3) to MtDM (Not allowed less than 10 Mm3 in any world region)
-** This will be the target growing stock which we try to match
-  f32_gs_absolutetarget(i)$(f32_gs_absolutetarget(i)<10) = 10;
-  f32_gs_absolutetarget(i) = f32_gs_absolutetarget(i) * 0.6;
-
-** How is the growing stock distributed in each region over each ac
-  p32_gs_distribution_reg(i,ac)$(p32_gs_reg(i)>0) = p32_gs_reg_ac(i,ac)/p32_gs_reg(i);
-
-** We only know our target values at regional level. This has to be divided correctly in each region for each age class
-** We multiply this regional target of growing stock with a region and age-class specific share from the modeled growing stock
-  p32_target_gs_reg(i,ac)$(p32_gs_reg_ac(i,ac)>0) =  f32_gs_absolutetarget(i) * p32_gs_distribution_reg(i,ac);
-
-* Calculate Scaling factor
-  p32_gs_scaling_reg(i,ac) = 1;
-  p32_gs_scaling_reg(i,ac)$(p32_gs_reg_ac(i,ac)>0) = (p32_target_gs_reg(i,ac)/p32_gs_reg_ac(i,ac));
-  p32_gs_scaling_reg(i,ac)$(p32_gs_scaling_reg(i,ac)<0.5) = 0.5;
-  );
-*display p32_gs_scaling_reg,p32_gs_reg_ac,p32_gs_distribution_reg,p32_target_gs_reg;
-** Update timber yield
-pm_timber_yield(t,j,ac,"forestry") = pm_timber_yield(t,j,ac,"forestry") * sum(cell(i,j),p32_gs_scaling_reg(i,ac));
-
 ** Calculate future yield based on rotation length
 pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac,"forestry"));
-
 *** EOF presolve.gms ***

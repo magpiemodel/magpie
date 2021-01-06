@@ -30,14 +30,6 @@ parameters
  p35_forest_fire(i)                             forest fire loss of area as a share (1)
  pc35_disturbance_loss_secdf(j,ac)                 Loss due to disturbances in secondary forest (mio. ha)
  pc35_disturbance_loss_primf(j)                   Loss due to disturbances in primary forest (mio. ha)
- p35_primforest_dummy(t,j,ac)
- p35_gs_reg_secdf(i,ac)
- p35_gs_reg_primf(i,ac)
- p35_gs_secdf(i)
- p35_gs_primf(i)
- p35_gs_distribution(i,ac)
- p35_target_gs_reg(i,ac)
- p35_gs_scaling_reg(i,ac)
 ;
 
 equations

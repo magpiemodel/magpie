@@ -32,8 +32,9 @@ p52_scaling_factor(t_all,j)$(p52_scaling_factor(t_all,j) <= 1) = 1;
 * to the model for making establishment decisions. This layer makes sure that such granularity is preserved and model
 * still has access to the information about how low were the yields compared to the threshold. A penalty component is then
 * added in forestry module to make sure that the model does not use extremely unproductive cells for establishment decisions.
-pm_investment_layer(t_all,j)$(p52_scaling_factor(t_all,j) <= 1) = 0;
-pm_investment_layer(t_all,j)$(p52_scaling_factor(t_all,j) >  1) = s52_plantation_threshold - pm_carbon_density_ac_forestry(t_all,j,"acx","vegc");
+*pm_investment_layer(t_all,j)$(p52_scaling_factor(t_all,j) <= 1) = 0;
+*pm_investment_layer(t_all,j)$(p52_scaling_factor(t_all,j) >  1) = s52_plantation_threshold - pm_carbon_density_ac_forestry(t_all,j,"acx","vegc");
+pm_investment_layer(t_all,j) = 0;
 
 * Certain cells have quite low carbon density and with a lower rotation length, it is not possioble to produce
 * any reasonable amount of thimber. This has impact on timber yield calculations. With higher carbon densities
@@ -41,7 +42,7 @@ pm_investment_layer(t_all,j)$(p52_scaling_factor(t_all,j) >  1) = s52_plantation
 * This is specially applicable for middle east region where LPJmL reports quite low carbon densities. Provided the
 * wood production data from FAO, it is not possible to replicate past production patterns in middle east region
 * with such low carbon densities and yield.
-pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * p52_scaling_factor(t_all,j);
+*pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * p52_scaling_factor(t_all,j);
 
 *calculate litter and soil carbon density based on linear growth funktion: carbon_density(ac) = intercept + slope*ac (20 year time horizon taken from IPCC)
 pm_carbon_density_ac_forestry(t_all,j,ac,"litc") = m_growth_litc_soilc(pc52_carbon_density_start(t_all,j,"litc"),fm_carbon_density(t_all,j,"other","litc"),(ord(ac)-1));
