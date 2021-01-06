@@ -196,6 +196,7 @@ else
 
 p32_target_gs_reg(i)  = sum((cell(i,j),ac),pm_timber_yield_initial(j,ac,"forestry") * p32_land_start_ac(j,"plant",ac))/ sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac));
 p32_gs_scaling_reg(i) = f32_gs_relativetarget(i) * 0.6 / p32_target_gs_reg(i);
+p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i)>10) = 10;
 
 *display p32_gs_scaling_reg,p32_gs_reg_ac,p32_gs_distribution_reg,p32_target_gs_reg;
 ** Update c-densitiy
