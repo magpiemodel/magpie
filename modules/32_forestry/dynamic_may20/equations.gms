@@ -144,14 +144,14 @@ q32_fix_plant_area(j2) ..
 *' Global maximum constraint based on meeting all the future timber demand (`pm_demand_forestry_future`).
 q32_establishment_max_glo ..
               sum(j2, (sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry * pc32_yield_forestry_future(j2))
-              =l=
+              =n=
               sum(i2, pm_demand_forestry_future(i2,"wood"))
               ;
 
 *' Global minimum constraint based on a proportion (`pc32_plant_prod_share_future`) of future timber demand (`pm_demand_forestry_future`).
 q32_establishment_min_glo ..
               sum(j2, (sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry * pc32_yield_forestry_future(j2))
-              =g=
+              =n=
               sum((i2,ct), pm_demand_forestry_future(i2,"wood") * s32_plant_share) * (1-sum(ct,p32_fix_plant(ct)))
               ;
 
@@ -160,7 +160,8 @@ q32_establishment_min_glo ..
 q32_establishment_min_reg(i2) ..
               sum(cell(i2,j2), ((sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry) * pc32_yield_forestry_future(j2))
               =g=
-              pm_demand_forestry_future(i2,"wood") * s32_plant_share * sum(ct, pm_selfsuff_ext(ct,i2,"wood")) * (1-sum(ct,p32_fix_plant(ct)))
+*              pm_demand_forestry_future(i2,"wood") * s32_plant_share * sum(ct, pm_selfsuff_ext(ct,i2,"wood")) * (1-sum(ct,p32_fix_plant(ct)))
+              pm_demand_forestry_future(i2,"wood") * sum(ct,f32_plant_prod_share(ct)) * (1-sum(ct,p32_fix_plant(ct)))
               ;
 
 *' Extra investment costs
