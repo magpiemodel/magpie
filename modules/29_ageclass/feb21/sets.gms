@@ -34,7 +34,7 @@ class11  .  (ac105,ac110)
 class12  .  (ac115,ac120)
 class13  .  (ac125,ac130)
 class14  .  (ac135,ac140)
-class15  .  (acx)
+class15  .  (ac145,ac150)
 /
 
 ;
