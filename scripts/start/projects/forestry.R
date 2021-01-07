@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC44x"
+identifier_flag = "DEC45a"
 
 cat(paste0("Estb plantations for full demand"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 

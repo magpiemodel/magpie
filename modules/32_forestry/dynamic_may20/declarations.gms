@@ -50,6 +50,7 @@ parameters
  p32_gs_scaling_reg(i)                              Calibration factor for scaling up the relative growing stock (1)
  p32_gs_new(i)                                      Updated relative growing stock (mio m3 per ha)
  p32_rotatiom_dist(j,ac)                            Poulter distribution within celular rotation lengths (1)
+ p32_prod_abare(t_all,i)
 ;
 
 positive variables

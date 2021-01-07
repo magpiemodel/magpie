@@ -161,7 +161,7 @@ q32_establishment_min_reg(i2) ..
               sum(cell(i2,j2), ((sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry) * pc32_yield_forestry_future(j2))
               =g=
 *              pm_demand_forestry_future(i2,"wood") * s32_plant_share * sum(ct, pm_selfsuff_ext(ct,i2,"wood")) * (1-sum(ct,p32_fix_plant(ct)))
-              pm_demand_forestry_future(i2,"wood") * (1-sum(ct,p32_fix_plant(ct)))
+              pm_demand_forestry_future(i2,"wood") * sum(ct,p32_prod_abare(ct,i2)) * (1-sum(ct,p32_fix_plant(ct)))
               ;
 
 *' Extra investment costs

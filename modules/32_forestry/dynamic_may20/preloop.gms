@@ -218,3 +218,24 @@ pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry
 
 p32_gs_new(i) = (sum((cell(i,j),ac),pm_timber_yield_initial(j,ac,"forestry") * p32_land_start_ac(j,"plant",ac)) * p32_gs_scaling_reg(i) / sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac)))/0.6;
 display p32_gs_scaling_reg,p32_gs_new;
+
+*******************************************
+p32_prod_abare(t_all,i) = 0.33;
+p32_prod_abare("y1995","CAZ") = 0.55;
+p32_prod_abare("y1995","CHA") = 0.33;
+p32_prod_abare("y1995","EUR") = 0.46;
+p32_prod_abare("y1995","IND") = 0.33;
+p32_prod_abare("y1995","JPN") = 0.33;
+p32_prod_abare("y1995","LAM") = 0.63;
+p32_prod_abare("y1995","MEA") = 0.33;
+p32_prod_abare("y1995","NEU") = 0.46;
+p32_prod_abare("y1995","OAS") = 0.33;
+p32_prod_abare("y1995","REF") = 0.46;
+p32_prod_abare("y1995","SSA") = 0.20;
+p32_prod_abare("y1995","USA") = 0.22;
+
+loop (t_all$(m_year(t_all) > 1995 AND m_year(t_all) < 2150),
+ p32_prod_abare(t_all,i) = p32_prod_abare(t_all-1,i) * 1.05;
+);
+p32_prod_abare(t_all,i)$(p32_prod_abare(t_all,i) > 0.80) = 0.80;
+display p32_prod_abare;
