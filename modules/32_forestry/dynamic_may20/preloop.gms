@@ -222,7 +222,7 @@ display p32_gs_scaling_reg,p32_gs_new;
 *******************************************
 p32_prod_abare(t_all,i) = 0.33;
 p32_prod_abare("y1995","CAZ") = 0.55;
-p32_prod_abare("y1995","CHA") = 0.33;
+p32_prod_abare("y1995","CHA") = 0.20;
 p32_prod_abare("y1995","EUR") = 0.46;
 p32_prod_abare("y1995","IND") = 0.33;
 p32_prod_abare("y1995","JPN") = 0.33;
@@ -237,5 +237,5 @@ p32_prod_abare("y1995","USA") = 0.22;
 loop (t_all$(m_year(t_all) > 1995 AND m_year(t_all) < 2150),
  p32_prod_abare(t_all,i) = p32_prod_abare(t_all-1,i) * 1.05;
 );
-p32_prod_abare(t_all,i)$(p32_prod_abare(t_all,i) > 0.80) = 0.80;
+p32_prod_abare(t_all,i)$(p32_prod_abare(t_all,i) > 0.66) = 0.80;
 display p32_prod_abare;
