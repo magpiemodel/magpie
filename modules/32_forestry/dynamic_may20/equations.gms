@@ -158,10 +158,11 @@ q32_establishment_min_glo ..
 *' Regional minimum constraint for maintaining current forestry area patterns,
 *' while accounting for regional self sufficiency in (`pm_selfsuff_ext`) timber production.
 q32_establishment_min_reg(i2) ..
-              sum(cell(i2,j2), ((sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry) * pc32_yield_forestry_future(j2))
+*              sum(cell(i2,j2), ((sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry) * pc32_yield_forestry_future(j2))
+              sum((cell(i2,j2),ac_est), v32_land(j2,"plant",ac_est) + v32_land_missing(j2))
               =g=
 *              pm_demand_forestry_future(i2,"wood") * s32_plant_share * sum(ct, pm_selfsuff_ext(ct,i2,"wood")) * (1-sum(ct,p32_fix_plant(ct)))
-              pm_demand_forestry_future(i2,"wood") * sum(ct,f32_plant_prod_share(ct)) * (1-sum(ct,p32_fix_plant(ct)))
+							sum((cell(i2,j2),ac_sub),vm_hvarea_forestry(j2,ac_sub)) * (1 + sum(ct,f32_plant_prod_share(ct)))
               ;
 
 *' Extra investment costs

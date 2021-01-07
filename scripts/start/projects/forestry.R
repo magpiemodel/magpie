@@ -25,7 +25,7 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "DEC44x"
 
-cat(paste0("Age class module added. Poulter distribution in plantations"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Estb more than harvest"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
