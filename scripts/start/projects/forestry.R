@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC45b"
+identifier_flag = "DEC45c"
 
-cat(paste0("Estb according to abare data. China starts at 20pc. Overall cap at 66pc"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Regional min and max for estb."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
