@@ -25,7 +25,7 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "DEC45a"
 
-cat(paste0("Estb plantations for full demand"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Estb according to abare data"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
