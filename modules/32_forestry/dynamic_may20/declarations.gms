@@ -127,6 +127,5 @@ parameters
  oq32_forestry_est(t,j,type32,ac,type)   Distribution of forestry establishment over ac_est (mio. ha)
  oq32_fix_plant_area(t,j,type)           Fixation of cellular plantation area based on area fix switch (mio. ha)
  oq32_cost_extra_investment(t,j,type)    Extra investment needed for establishing plantations in unproductive areas (mio. USD)
- oq32_establishment_max_reg(t,i,type)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

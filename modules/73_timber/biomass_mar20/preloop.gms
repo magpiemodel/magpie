@@ -57,7 +57,7 @@ loop (t_all$(m_year(t_all)>=2020),
 ** Woodfuel fix
 ** We only model 50% of woodfuel demand. Similar assumption to IMAGE
 ** This can be done according to development stage of regions as well but the results are buggy.
-p73_timber_demand_gdp_pop(t_all,i,"woodfuel") = p73_timber_demand_gdp_pop(t_all,i,"woodfuel") * 0.5;
+*p73_timber_demand_gdp_pop(t_all,i,"woodfuel") = p73_timber_demand_gdp_pop(t_all,i,"woodfuel") * 0.5;
 *p73_timber_demand_gdp_pop(t_all,i,"woodfuel")$(im_development_state(t_all,i)<1) = p73_timber_demand_gdp_pop(t_all,i,"woodfuel") * 0.5;
 
 * p73_timber_demand_gdp_pop in in mio m^3
