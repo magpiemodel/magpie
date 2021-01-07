@@ -25,7 +25,7 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "DEC45c"
 
-cat(paste0("Regional min and max for estb."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("revert Regional min and max for estb."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
