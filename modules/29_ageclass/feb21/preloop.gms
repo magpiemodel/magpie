@@ -10,10 +10,7 @@ i29_forestclass_ac(j,ac) = sum(ac_poulter_to_ac(ac_poulter,ac),f29_forestageclas
 
 * As summing over makes double counting (two magpie age classes in one poulter class)
 * We divide by 2
-i29_forestclass_ac(j,ac)$(not sameas(ac,"acx")) = i29_forestclass_ac(j,ac)/2;
-
-* We don't want acx calculations for our distribution, acx is primary forest
-i29_forestclass_ac(j,"acx") = 0;
+i29_forestclass_ac(j,ac) = i29_forestclass_ac(j,ac)/2;
 
 * Distribution for plantations to be used in forestry module
 im_plantedclass_ac(j,ac) = i29_forestclass_ac(j,ac);
