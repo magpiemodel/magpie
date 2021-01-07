@@ -27,12 +27,6 @@ $include "./modules/35_natveg/input/npi_ndc_ad_aolc_pol.cs3"
 $offdelim
 ;
 
-table f35_secdf_ac_dist(j,ac_poulter) Poulter age-class area in each cluster (1)
-$ondelim
-$include "./modules/35_natveg/input/forestageclasses.cs3"
-$offdelim
-;
-
 table f35_forest_lost_share(i,driver_source) Share of area damanged by forest fires (1)
 $ondelim
 $include "./modules/35_natveg/input/f35_forest_lost_share.cs3"

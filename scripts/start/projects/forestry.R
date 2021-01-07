@@ -25,15 +25,15 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "DEC43"
 
-cat(paste0("Capping calibration factor for plantation carbon stock at 10"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Age class module added. Poulter distribution in plantations"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
 for(ssp in c("SSP2")){
 
-  for(s35_secdf_distribution in c(0,1,2)){
+  for(s35_secdf_distribution in c(1,2)){
 
-    for(s32_distribution_type in c(0)){
+    for(s32_distribution_type in c(0,2)){
       for(scen in c("forestry")){
 
         for(s35_forest_damage in c(0,1,2)){
@@ -65,6 +65,7 @@ for(ssp in c("SSP2")){
 
           if(cfg$gms$s32_distribution_type == 0) init_flag = "Equal"
           if(cfg$gms$s32_distribution_type == 1) init_flag = "FAO"
+          if(cfg$gms$s32_distribution_type == 2) init_flag = "Poulter"
 
           if(cfg$gms$s35_secdf_distribution == 0) dist_flag = "ACx"
           if(cfg$gms$s35_secdf_distribution == 1) dist_flag = "Equal"
@@ -79,7 +80,7 @@ for(ssp in c("SSP2")){
 
     #      cfg$title   = paste0(identifier_flag,"_",ssp,"_",plant_area_flag,"_",scen_flag,"_",dist_flag)
     #      cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",dist_flag,"_",init_flag,"_",damage_flg)
-          cfg$title   = paste0(identifier_flag,"_",dist_flag,"_",damage_flg)
+          cfg$title   = paste0(identifier_flag,"_N",dist_flag,"_P",init_flag,"_",damage_flg)
           cfg$output  = c("extra/timestep_duration","rds_report")
 
            xx = c(xx,cfg$title)

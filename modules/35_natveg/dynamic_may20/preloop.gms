@@ -15,20 +15,10 @@ elseif s35_secdf_distribution = 1,
 * ac0 is excluded here. Therefore no initial shifting is needed.
   i35_secdforest(j,ac)$(not sameas(ac,"ac0")) = pcm_land(j,"secdforest")/(card(ac)-1);
 elseif s35_secdf_distribution = 2,
-* Ben Poulter age class distribution
-  i35_secdf_ac_dist(j,ac_poulter) = f35_secdf_ac_dist(j,ac_poulter);
-**changes subject to confirmation;
-*classes 1, 2, 3 include plantation and are therefore excluded
-*As disturbance history (fire) would affect the age structure
-*We use the sahre from class 4 to be in class 1,2,3
-*class 15 is primary forest and is therefore excluded
-  i35_secdf_ac_dist(j,ac_poulter_young)$(i35_secdf_ac_dist(j,ac_poulter_young) > i35_secdf_ac_dist(j,"class4")) = i35_secdf_ac_dist(j,"class4");
-  i35_secdf_ac_dist(j,"class15") = 0;
-  p35_poulter_dist(j,ac)$(sum(ac_poulter,i35_secdf_ac_dist(j,ac_poulter)$(not sameas(ac_poulter,"class15")))>0) = sum(ac_poulter_to_ac(ac_poulter,ac),i35_secdf_ac_dist(j,ac_poulter)$(not sameas(ac_poulter,"class15"))/sum(ac_poulter2,i35_secdf_ac_dist(j,ac_poulter2)$(not sameas(ac_poulter2,"class15"))));
-  i35_secdforest(j,ac)$(not sameas(ac,"ac0")) = pcm_land(j,"secdforest")*p35_poulter_dist(j,ac);
+  i35_secdforest(j,ac)$(not sameas(ac,"ac0")) = pcm_land(j,"secdforest")*pm_poulter_dist(j,ac);
 );
 
-display p35_poulter_dist,i35_secdforest,pcm_land,i35_secdf_ac_dist;
+display pm_poulter_dist,i35_secdforest;
 
 *use residual approach to avoid rounding errors
 i35_secdforest(j,"acx") = i35_secdforest(j,"acx") + (pcm_land(j,"secdforest") - sum(ac, i35_secdforest(j,ac)));

@@ -197,7 +197,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Wed Jan 06 17:36:45 2021
+* Last modification (input data): Thu Jan 07 12:54:46 2021
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -247,6 +247,8 @@ $setglobal residues  flexreg_apr16
 $setglobal processing  substitution_dec18
 
 $setglobal trade  selfsuff_reduced
+
+$setglobal ageclass  feb21
 
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13

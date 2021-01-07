@@ -32,7 +32,7 @@ scalars
   s32_plant_share                 Constant percentage of production which can come from plantations (1) / 0.33 /
   s32_forestry_int_rate           Global interest rate for plantations (percent) / 0.05 /
   s32_investment_cost             Additional investment cost in plantations (USD per tC per ha) / 200 /
-  s32_distribution_type           Which type of distribution shall be used for initializing plantations (0=equal distribution 1=FAO distribution) /0/
+  s32_distribution_type           Which type of distribution shall be used for initializing plantations (0=equal distribution 1=FAO distribution 2=Poulter distribution) /2/
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)

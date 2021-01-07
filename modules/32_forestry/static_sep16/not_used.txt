@@ -14,3 +14,5 @@ pm_carbon_density_ac_forestry, input, not used
 pm_selfsuff_ext, par, not used
 pm_demand_forestry_future, par, not used
 pm_investment_layer, par, not used
+pm_timber_yield_initial, par, not used
+im_plantedclass_ac, par, not used

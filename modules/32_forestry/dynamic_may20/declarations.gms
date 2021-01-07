@@ -46,9 +46,10 @@ parameters
  p32_absolute_gs_new(t,j,ac)                        Updated growing stock in each time step (mio. tDM)
  p32_leftover_target(i)                             Leftover target growing stock distribution (mio. tDM)
  p32_needed_yield(j,ac)                             Updated yield for plantations (tDM per ha)
- p32_target_gs_reg(i)
- p32_gs_scaling_reg(i)
- p32_gs_new(i)
+ p32_observed_gs_reg(i)                             Observed growing stock (tDM per ha)
+ p32_gs_scaling_reg(i)                              Calibration factor for scaling up the relative growing stock (1)
+ p32_gs_new(i)                                      Updated relative growing stock (mio m3 per ha)
+ p32_rotatiom_dist(j,ac)                            Poulter distribution within celular rotation lengths (1)
 ;
 
 positive variables
