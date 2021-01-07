@@ -25,7 +25,7 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "DEC44x"
 
-cat(paste0("Estb more than harvest"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Estb plantations for full demand"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
@@ -81,7 +81,7 @@ for(ssp in c("SSP2")){
     #      cfg$title   = paste0(identifier_flag,"_",ssp,"_",plant_area_flag,"_",scen_flag,"_",dist_flag)
     #      cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",dist_flag,"_",init_flag,"_",damage_flg)
           cfg$title   = paste0(identifier_flag,"_N",dist_flag,"_P",init_flag,"_",damage_flg)
-          cfg$output  = c("extra/timestep_duration","rds_report")
+          cfg$output  = c("extra/timestep_duration")
 
            xx = c(xx,cfg$title)
            start_run(cfg,codeCheck=FALSE)
