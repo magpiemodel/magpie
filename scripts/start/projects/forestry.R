@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC45e"
+identifier_flag = "DEC45f"
 
-cat(paste0("Corrected share for plantation establishment"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Included self suff for estb decision"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
