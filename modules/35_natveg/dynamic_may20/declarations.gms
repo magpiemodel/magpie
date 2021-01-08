@@ -28,6 +28,8 @@ parameters
  p35_forest_fire(i)                             forest fire loss of area as a share (1)
  pc35_disturbance_loss_secdf(j,ac)                 Loss due to disturbances in secondary forest (mio. ha)
  pc35_disturbance_loss_primf(j)                   Loss due to disturbances in primary forest (mio. ha)
+ i35_plantedclass_ac(j,ac)                       Area of age-classes in secondary forest (1)
+ p35_poulter_dist(j,ac)                          Share of age-classes in secondary forest (1)
 ;
 
 equations

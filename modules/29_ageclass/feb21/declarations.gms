@@ -6,7 +6,5 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameter
- i29_forestclass_ac(j,ac)                       Distribution of ageclass in secondary forest (mio. ha)
  im_plantedclass_ac(j,ac)                       Raw Distribution of ageclass in secondary forest as a proxy for planted forest (mio. ha)
- pm_poulter_dist(j,ac)                          Share of age-classes in secondary forest (1)
 ;
