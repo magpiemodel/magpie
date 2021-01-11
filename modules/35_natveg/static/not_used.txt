@@ -11,4 +11,4 @@ v35_secdforest_reduction, variable, not used
 v35_primforest_reduction, variable, not used
 v35_other_reduction, variable, not used
 sm_fix_SSP2, input, not used
-pm_poulter_dist, par, not used
+im_plantedclass_ac, par, not used

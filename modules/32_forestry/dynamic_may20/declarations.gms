@@ -48,9 +48,7 @@ parameters
  p32_needed_yield(j,ac)                             Updated yield for plantations (tDM per ha)
  p32_observed_gs_reg(i)                             Observed growing stock (tDM per ha)
  p32_gs_scaling_reg(i)                              Calibration factor for scaling up the relative growing stock (1)
- p32_gs_new(i)                                      Updated relative growing stock (mio m3 per ha)
- p32_rotatiom_dist(j,ac)                            Poulter distribution within celular rotation lengths (1)
- p32_prod_abare(t_all,i)
+ p32_rotation_dist(j,ac)                            Poulter distribution within celular rotation lengths (1)
 ;
 
 positive variables
@@ -81,8 +79,6 @@ equations
  q32_aff_est(j)                                     Afforestation constraint for establishment age classes (mio. ha)
  q32_hvarea_forestry(j,ac)                          Plantations area harvest (mio. ha)
  q32_cost_recur(i)                                  Recurruing costs (mio. USD)
- q32_establishment_max_glo                          Establishment in current time step for future demand (mio. ha)
- q32_establishment_min_glo                          Establishment in current time step for future demand (mio. ha)
  q32_establishment_min_reg(i)                       Establishment in current time step for future demand (mio. ha)
  q32_land_expansion(j,type32,ac)                    Land expansion (mio. ha)
  q32_land_reduction(j,type32,ac)                    Land contraction (mio. ha)
@@ -117,8 +113,6 @@ parameters
  oq32_aff_est(t,j,type)                  Afforestation constraint for establishment age classes (mio. ha)
  oq32_hvarea_forestry(t,j,ac,type)       Plantations area harvest (mio. ha)
  oq32_cost_recur(t,i,type)               Recurruing costs (mio. USD)
- oq32_establishment_max_glo(t,type)      Establishment in current time step for future demand (mio. ha)
- oq32_establishment_min_glo(t,type)      Establishment in current time step for future demand (mio. ha)
  oq32_establishment_min_reg(t,i,type)    Establishment in current time step for future demand (mio. ha)
  oq32_land_expansion(t,j,type32,ac,type) Land expansion (mio. ha)
  oq32_land_reduction(t,j,type32,ac,type) Land contraction (mio. ha)

@@ -170,8 +170,8 @@ elseif s32_initial_distribution = 1,
     );
   if(s32_distribution_type = 2,
     p32_plant_ini_ac(j) = pm_land_start(j,"forestry");
-    p32_rotatiom_dist(j,ac) =  (im_plantedclass_ac(j,ac)$(ini32(j,ac))/sum(ac2,im_plantedclass_ac(j,ac2)$(ini32(j,ac2))))$(sum(ac2,im_plantedclass_ac(j,ac2)$(ini32(j,ac2))));
-    p32_land("y1995",j,"plant",ac)$(ini32(j,ac)) = p32_plant_ini_ac(j) * p32_rotatiom_dist(j,ac);
+    p32_rotation_dist(j,ac) =  (im_plantedclass_ac(j,ac)$(ini32(j,ac))/sum(ac2,im_plantedclass_ac(j,ac2)$(ini32(j,ac2))))$(sum(ac2,im_plantedclass_ac(j,ac2)$(ini32(j,ac2))));
+    p32_land("y1995",j,"plant",ac)$(ini32(j,ac)) = p32_plant_ini_ac(j) * p32_rotation_dist(j,ac);
 
 *use residual approach to avoid distributional errors i.e., poulter set with no plantations but luh reporting plantations in a cell
     loop (j,
@@ -181,8 +181,6 @@ elseif s32_initial_distribution = 1,
     );
     );
 );
-
-display p32_rotatiom_dist,p32_land,pm_land_start;
 
 ** Initialization of land
 p32_land_start_ac(j,type32,ac) = p32_land("y1995",j,type32,ac);
@@ -212,36 +210,5 @@ p32_observed_gs_reg(i)  = sum((cell(i,j),ac),pm_timber_yield_initial(j,ac,"fores
 p32_gs_scaling_reg(i) = f32_gs_relativetarget(i) * 0.6 / p32_observed_gs_reg(i);
 p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i)>10) = 10;
 
-*display p32_gs_scaling_reg,p32_gs_reg_ac,p32_gs_distribution_reg,p32_observed_gs_reg;
 ** Update c-densitiy
 pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * sum(cell(i,j),p32_gs_scaling_reg(i));
-
-p32_gs_new(i) = (sum((cell(i,j),ac),pm_timber_yield_initial(j,ac,"forestry") * p32_land_start_ac(j,"plant",ac)) * p32_gs_scaling_reg(i) / sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac)))/0.6;
-display p32_gs_scaling_reg,p32_gs_new;
-
-*******************************************
-p32_prod_abare(t_all,i) = 0.33;
-p32_prod_abare("y1995","CAZ") = 0.55;
-p32_prod_abare("y1995","CHA") = 0.33;
-p32_prod_abare("y1995","EUR") = 0.46;
-p32_prod_abare("y1995","IND") = 0.33;
-p32_prod_abare("y1995","JPN") = 0.33;
-p32_prod_abare("y1995","LAM") = 0.63;
-p32_prod_abare("y1995","MEA") = 0.33;
-p32_prod_abare("y1995","NEU") = 0.46;
-p32_prod_abare("y1995","OAS") = 0.33;
-p32_prod_abare("y1995","REF") = 0.46;
-p32_prod_abare("y1995","SSA") = 0.20;
-p32_prod_abare("y1995","USA") = 0.22;
-
-loop (t_all$(m_year(t_all) > 1995 AND m_year(t_all) < 2020),
- p32_prod_abare(t_all,i) = p32_prod_abare(t_all-1,i) * 1.05;
-);
-loop (t_all$(m_year(t_all) >= 2020 AND m_year(t_all) < 2050),
- p32_prod_abare(t_all,i) = p32_prod_abare(t_all-1,i) * 1.01;
-);
-loop (t_all$(m_year(t_all) >= 2050 AND m_year(t_all) < 2150),
- p32_prod_abare(t_all,i) = p32_prod_abare(t_all-1,i) * 1.005;
-);
-p32_prod_abare(t_all,i)$(p32_prod_abare(t_all,i) > 1) = 1;
-display p32_prod_abare;

@@ -28,8 +28,6 @@ elseif s35_secdf_distribution = 2,
  i35_secdforest(j,ac)$(not sameas(ac,"ac0")) = pcm_land(j,"secdforest")*p35_poulter_dist(j,ac);
 );
 
-display i35_plantedclass_ac,p35_poulter_dist,i35_secdforest;
-
 *use residual approach to avoid rounding errors
 i35_secdforest(j,"acx") = i35_secdforest(j,"acx") + (pcm_land(j,"secdforest") - sum(ac, i35_secdforest(j,ac)));
 
