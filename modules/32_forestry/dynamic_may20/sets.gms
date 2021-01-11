@@ -13,7 +13,7 @@ sets
  pol32 afforestation policy type
  / none, npi, ndc /
 
- ini32(j,ac) subset for initialization of timber plantations 
+ ini32(j,ac) subset for initialization of timber plantations
 
  rotation_type Rotation type
  / min, low, def, high, bio /
@@ -28,6 +28,12 @@ aff_effect biochemical and local biophysical effect of afforestation on climate
 / bgc, bph /
 
 ac_bph(ac) fade-in of bph effect over age-classes
+
+inter32 Interpolation of scenario from FAO study on proportion of roundwood production coming from plantations
+/abare, brown/
+
+scen32 Scenario for development of roundwood production share from plantations
+/ constant,h5s5l5,h5s2l2,h5s2l1,h5s1l1,h5s1l05 /
 
 ;
 

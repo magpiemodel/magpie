@@ -11,6 +11,10 @@ $setglobal c32_tcre_ctrl  ann_TCREmean
 * options: ann_TCREmean, ann_TCREhigh, ann_TCRElow
 $setglobal c32_interest_rate  regional
 * options regional, global
+$setglobal c32_dev_scen  abare
+* options abare, brown
+$setglobal c32_incr_rate  h5s1l05
+* options constant,h5s5l5,h5s2l2,h5s2l1,h5s1l1,h5s1l05
 
 scalars
   s32_reESTBcost                  Re establishment cost (USD per ha) / 2000 /
@@ -97,3 +101,9 @@ $ondelim
 $include "./modules/32_forestry/input/f32_gs_relativetarget.cs4"
 $offdelim
 /;
+
+table f32_plantation_contribution(t_ext,i,inter32,scen32) Share of roundwood production coming from timber plantations (percent)
+$ondelim
+$include "./modules/32_forestry/input/f32_plantation_contribution.cs3"
+$ondelim
+;
