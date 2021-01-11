@@ -83,7 +83,7 @@ for(ssp in c("SSP2")){
           cfg$output  = c("extra/timestep_duration")
 
            xx = c(xx,cfg$title)
-           #start_run(cfg,codeCheck=FALSE)
+           start_run(cfg,codeCheck=FALSE)
         }
       }
     }
@@ -148,7 +148,7 @@ for(ssp in c("SSP2")){
           cfg$output  = c("extra/timestep_duration")
 
            xx = c(xx,cfg$title)
-           #start_run(cfg,codeCheck=FALSE)
+           start_run(cfg,codeCheck=FALSE)
         }
       }
     }
