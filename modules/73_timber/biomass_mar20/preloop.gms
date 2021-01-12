@@ -29,13 +29,7 @@ p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)$(p73_forestry_d
 
 p73_base_min(iso,total_wood_products) = p73_forestry_demand_prod_specific("y1995",iso,total_wood_products) * 0.05;
 
-if(s73_demand_dampener = 1,
-  loop(t_all$(m_year(t_all) >= 2020 AND m_year(t_all) < 2150),
-    p73_diff(t_all+1,iso,total_wood_products) = p73_forestry_demand_prod_specific(t_all+1,iso,total_wood_products) - p73_forestry_demand_prod_specific(t_all,iso,total_wood_products);
-    p73_forestry_demand_prod_specific(t_all+1,iso,total_wood_products)$(p73_diff(t_all+1,iso,total_wood_products) > p73_base_min(iso,total_wood_products)) = p73_forestry_demand_prod_specific(t_all,iso,total_wood_products) + p73_base_min(iso,total_wood_products);
-    );
-  );
-
+** Alternative wood use scenarios
 $ifthen "%c73_wood_scen%" == "nopaper"
 p73_forestry_demand_prod_specific(t_all,iso,"wood_pulp") = p73_forestry_demand_prod_specific(t_all,iso,"wood_pulp") * f73_demand_modifier(t_all,"%c73_wood_scen%");
 $elseif "%c73_wood_scen%" == "default"
@@ -46,22 +40,19 @@ $endif
 
 p73_timber_demand_gdp_pop(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to_woodprod(kforestry,total_wood_products)),p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)) * s73_demand_switch;
 
+** Hard additive calibration for timber demand
 loop (t_past_forestry,
   p73_demand_calib(t_past_forestry,i,"wood") = p73_timber_demand_gdp_pop(t_past_forestry,i,"wood") - sum(i_to_iso(i,iso),p73_forestry_demand_prod_specific(t_past_forestry,iso,"industrial_roundwood"));
   p73_timber_demand_gdp_pop(t_past_forestry,i,"wood")$(p73_demand_calib(t_past_forestry,i,"wood")>0) = p73_timber_demand_gdp_pop(t_past_forestry,i,"wood") - p73_demand_calib(t_past_forestry,i,"wood");
 );
 loop (t_all$(m_year(t_all)>=2020),
-  p73_timber_demand_gdp_pop(t_all,i,"wood")$(p73_timber_demand_gdp_pop(t_all,i,"wood")/sum(i_to_iso(i,iso),p73_forestry_demand_prod_specific(t_all-1,iso,"industrial_roundwood")) > 1.05) = p73_timber_demand_gdp_pop(t_all-1,i,"wood") * 1.05;
+  p73_timber_demand_gdp_pop(t_all,i,"wood")$(p73_timber_demand_gdp_pop(t_all,i,"wood")/sum(i_to_iso(i,iso),p73_forestry_demand_prod_specific(t_all-1,iso,"industrial_roundwood")) > s73_increase_ceiling) = p73_timber_demand_gdp_pop(t_all-1,i,"wood") * s73_increase_ceiling;
 );
 
-** Woodfuel fix
-** We only model 50% of woodfuel demand. Similar assumption to IMAGE
-** This can be done according to development stage of regions as well but the results are buggy.
-*p73_timber_demand_gdp_pop(t_all,i,"woodfuel") = p73_timber_demand_gdp_pop(t_all,i,"woodfuel") * 0.5;
-*p73_timber_demand_gdp_pop(t_all,i,"woodfuel")$(im_development_state(t_all,i)<1) = p73_timber_demand_gdp_pop(t_all,i,"woodfuel") * 0.5;
-
-* p73_timber_demand_gdp_pop in in mio m^3
-* pm_demand_ext in mio ton DM
+** Convert to tDM from mio m3
+** p73_timber_demand_gdp_pop is in mio m^3
+** pm_demand_ext in mio ton DM
+** Hold constraint beyond 2150 - First every time step gets 2150 values
 pm_demand_ext(t_ext,i,kforestry) = round(p73_timber_demand_gdp_pop("y2150",i,kforestry) * f73_volumetric_conversion(kforestry),3);
+** overwrite timesteps below 2150 with actual values
 pm_demand_ext(t_all,i,kforestry) = round(p73_timber_demand_gdp_pop(t_all,i,kforestry) * f73_volumetric_conversion(kforestry),3);
-p73_demand_ext_original(t_ext,i,kforestry) = pm_demand_ext(t_ext,i,kforestry);

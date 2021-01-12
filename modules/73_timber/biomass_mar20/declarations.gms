@@ -10,13 +10,9 @@ p73_timber_demand_gdp_pop(t_all,i,kforestry)                                Timb
 p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)            End product specific timber demand (mio. m3 per yr)
 pm_demand_forestry_future(i,kforestry)           						                 Future forestry demand in current time step (tDM per yr)
 pm_demand_ext(t_ext,i,kforestry)                                            Extended demand for timber beyound simulation (mio. tDM per yr)
-p73_demand_ext_original(t_ext,i,kforestry)                                  Original prescribed timber demand (mio. tDM per yr)
-p73_criterion	                                                              Criteria calculating timber demand adjustment (mio. tDM per yr)
-p73_timber_adjustment_ratio(t,i,kforestry)                                  Ratio between adjusted and prescribed timber demand (1)
 p73_timber_harvest_cost(t,j,ac,forest_land)									                Harvesting costs as a function of carbon density (USD per ac per ha)
 p73_cost_multiplier(land_natveg)                                            Cost multiplier for natural vegetation to make harvests expensive by a factor (1)
 p73_base_min(iso,total_wood_products)                                       Percentage of initial demand above which a jump is not permitted between time steps (mio. tDM)
-p73_diff(t_all,iso,total_wood_products)                                     Difference in timber demand between time steps (mio. tDM)
 p73_demand_calib(t_all,i,kforestry)                                         Additive calibration factor for timber demand
 ;
 

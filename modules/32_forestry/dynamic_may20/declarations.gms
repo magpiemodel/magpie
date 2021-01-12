@@ -39,13 +39,6 @@ parameters
  p32_aff_bgp(j,ac)                                  Biophysical impact of afforestation (tCeq per ha)
  p32_tcre_glo(j)                                    Global mean Transient Climate Response to cumulative Emissions (degree C per tC per ha)
  p32_fix_plant(t_ext)                               Parameter deciding if plantation area shall be fixed after 2020 (1)
- p32_ac_dist(ac)                                    Distribution of age classes used for initialization of plantations (1)
- p32_gs_cell_ac(j,ac)                               Initial growing stock in MAgPIE (mio. tDM)
- p32_target_gs_dist(j,ac)                           Target growing stock from FAO (mio. tDM)
- p32_gs_cell(j)                                     Total growing stock in a cell (mio. tDM)
- p32_absolute_gs_new(t,j,ac)                        Updated growing stock in each time step (mio. tDM)
- p32_leftover_target(i)                             Leftover target growing stock distribution (mio. tDM)
- p32_needed_yield(j,ac)                             Updated yield for plantations (tDM per ha)
  p32_observed_gs_reg(i)                             Observed growing stock (tDM per ha)
  p32_gs_scaling_reg(i)                              Calibration factor for scaling up the relative growing stock (1)
  p32_rotation_dist(j,ac)                            Poulter distribution within celular rotation lengths (1)
@@ -60,7 +53,6 @@ positive variables
  v32_land_expansion(j,type32,ac)                    Forestry land expansion (mio. ha)
  v32_land_reduction(j,type32,ac)                    Forestry land reduction (mio. ha)
  v32_cost_establishment(i)                          Cost of establishment calculated at the current time step (mio. USD)
- v32_cost_extra_investment(j)                       Extra investment needed for establishing plantations in unproductive areas (mio. USD)
  vm_hvarea_forestry(j,ac)                           Harvested area from timber plantations (mio. ha)
  ;
 
@@ -86,7 +78,6 @@ equations
  q32_bgp_aff(j,ac)                                  Biophysical afforestation calculation (mio. tCeq)
  q32_forestry_est(j,type32,ac)                      Distribution of forestry establishment over ac_est (mio. ha)
  q32_fix_plant_area(j)                              Fixation of cellular plantation area based on area fix switch (mio. ha)
- q32_cost_extra_investment(j)                       Extra investment needed for establishing plantations in unproductive areas (mio. USD)
 ;
 
 
@@ -100,7 +91,6 @@ parameters
  ov32_land_expansion(t,j,type32,ac,type) Forestry land expansion (mio. ha)
  ov32_land_reduction(t,j,type32,ac,type) Forestry land reduction (mio. ha)
  ov32_cost_establishment(t,i,type)       Cost of establishment calculated at the current time step (mio. USD)
- ov32_cost_extra_investment(t,j,type)    Extra investment needed for establishing plantations in unproductive areas (mio. USD)
  ov_hvarea_forestry(t,j,ac,type)         Harvested area from timber plantations (mio. ha)
  ov_cdr_aff(t,j,ac,aff_effect,type)      Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
  oq32_cost_total(t,i,type)               Total forestry costs constraint (mio. USD)
@@ -120,6 +110,5 @@ parameters
  oq32_bgp_aff(t,j,ac,type)               Biophysical afforestation calculation (mio. tCeq)
  oq32_forestry_est(t,j,type32,ac,type)   Distribution of forestry establishment over ac_est (mio. ha)
  oq32_fix_plant_area(t,j,type)           Fixation of cellular plantation area based on area fix switch (mio. ha)
- oq32_cost_extra_investment(t,j,type)    Extra investment needed for establishing plantations in unproductive areas (mio. USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

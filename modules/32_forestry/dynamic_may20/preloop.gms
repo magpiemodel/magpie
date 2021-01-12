@@ -12,12 +12,6 @@ if(s32_fix_plant = 1 OR s32_fix_plant = 0,
   abort "Invalid setting for s32_fix_plant.";
 );
 
-** Check if s32_plant_share is set correctly
-if(s32_plant_share < 0 OR s32_plant_share > 1,
-  display "Unrecognized setting for s32_plant_share, please select a value between 0 and 1.";
-  abort "Invalid setting for s32_plant_share.";
-);
-
 ** Calculation of Single rotation model rotation lengths
 ** Using forestry carbon densitiy here via carbon density data exchange from carbon module.
 p32_carbon_density_ac_forestry(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc");
@@ -207,7 +201,7 @@ else
 *******************************************************************************
 
 p32_observed_gs_reg(i)  = sum((cell(i,j),ac),pm_timber_yield_initial(j,ac,"forestry") * p32_land_start_ac(j,"plant",ac))/ sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac));
-p32_gs_scaling_reg(i) = f32_gs_relativetarget(i) * 0.6 / p32_observed_gs_reg(i);
+p32_gs_scaling_reg(i) = f32_gs_relativetarget(i) * s32_wood_density / p32_observed_gs_reg(i);
 p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i)>10) = 10;
 
 ** Update c-densitiy

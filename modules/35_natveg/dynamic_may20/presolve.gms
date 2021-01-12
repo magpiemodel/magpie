@@ -129,10 +129,26 @@ m_boundfix(vm_land,(j,"primforest"),l,10e-5);
 v35_secdforest.lo(j,ac) = 0;
 v35_secdforest.up(j,ac) = Inf;
 ** Setting bounds for only allowing s35_natveg_harvest_shr percentage of available primf to be harvested (highest age class)
-if (sum(sameas(t_past,t),1) = 1,
-v35_secdforest.lo(j,"acx") = p35_save_secdforest(t,j);
-else
-v35_secdforest.lo(j,"acx") = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx"), p35_save_secdforest(t,j));
+if(s35_secdf_distribution = 0,
+	if (sum(sameas(t_past,t),1) = 1,
+	v35_secdforest.lo(j,"acx") = p35_save_secdforest(t,j);
+	else
+	v35_secdforest.lo(j,"acx") = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx"), p35_save_secdforest(t,j));
+	);
+);
+if(s35_secdf_distribution = 1,
+	if (sum(sameas(t_past,t),1) = 1,
+	v35_secdforest.lo(j,ac)$(not sameas(ac,"ac0")) = p35_save_secdforest(t,j)/(card(ac)-1);
+	else
+	v35_secdforest.lo(j,ac)$(not sameas(ac,"ac0")) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac)$(not sameas(ac,"ac0"))/(card(ac)-1), p35_save_secdforest(t,j)/(card(ac)-1));
+	);
+);
+if(s35_secdf_distribution = 2,
+	if (sum(sameas(t_past,t),1) = 1,
+	v35_secdforest.lo(j,ac)$(not sameas(ac,"ac0")) = p35_save_secdforest(t,j)*p35_poulter_dist(j,ac);
+	else
+	v35_secdforest.lo(j,ac)$(not sameas(ac,"ac0")) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac)*p35_poulter_dist(j,ac), p35_save_secdforest(t,j)*p35_poulter_dist(j,ac));
+	);
 );
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
 m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
@@ -150,12 +166,6 @@ m_boundfix(v35_other,(j,ac_sub),l,10e-5);
 
 p35_carbon_density_secdforest(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
 p35_carbon_density_other(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
-
-**delete?
-*if((ord(t) = 1 AND s35_secdf_distribution=0),
-*	p35_carbon_density_secdforest(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,"acx",ag_pools);
-*	p35_carbon_density_other(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,"acx",ag_pools);
-*);
 
 p35_min_forest(t,j)$(p35_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j,"secdforest")) = pcm_land(j,"primforest") + pcm_land(j,"secdforest");
 p35_min_other(t,j)$(p35_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");
