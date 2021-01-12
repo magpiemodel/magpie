@@ -28,68 +28,54 @@ identifier_flag = "DEC50"
 cat(paste0("Revert bugfix in forest protetcion according to initial distribution"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
+for(scen in c("forestry","nocc")){
 
-for(ssp in c("SSP2")){
+  for(ssp in c("SSP2")){
 
-  for(s35_secdf_distribution in c(2)){
+    source("config/default.cfg")
 
-    for(s32_distribution_type in c(2)){
-      for(scen in c("forestry","nocc")){
+    cfg$gms$s80_maxiter = 5
 
-        for(s35_forest_damage in c(2)){
-          source("config/default.cfg")
+    cfg$results_folder = "output/:title:"
 
-          cfg$gms$s80_maxiter = 5
+    cfg$recalc_npi_ndc = "ifneeded"
 
-          cfg$results_folder = "output/:title:"
+    cfg = setScenario(cfg,c(ssp,scen))
 
-          cfg$recalc_npi_ndc = "ifneeded"
 
-          cfg = setScenario(cfg,c(ssp,scen))
+    if(cfg$gms$s32_fix_plant == 1 && cfg$gms$s73_foresight == 1) break
 
-          cfg$gms$c_timesteps <- "coup2100"
+    if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
+    if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
 
-          cfg$gms$s32_distribution_type = s32_distribution_type
-          cfg$gms$s35_forest_damage = s35_forest_damage
-          cfg$gms$s35_secdf_distribution = s35_secdf_distribution
+    if(cfg$gms$s73_demand_switch == 1) timber_flag = "timberON"
+    if(cfg$gms$s73_demand_switch == 0) timber_flag = "timberOFF"
 
-          if(cfg$gms$s32_fix_plant == 1 && cfg$gms$s73_foresight == 1) break
+    if(cfg$gms$s32_fix_plant == 0) plant_area_flag = "Baseline"
+    if(cfg$gms$s32_fix_plant == 1) plant_area_flag = "Constrained"
 
-          if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
-          if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
+    if(cfg$gms$s32_distribution_type == 0) init_flag = "Equal"
+    if(cfg$gms$s32_distribution_type == 1) init_flag = "FAO"
+    if(cfg$gms$s32_distribution_type == 2) init_flag = "Poulter"
 
-          if(cfg$gms$s73_demand_switch == 1) timber_flag = "timberON"
-          if(cfg$gms$s73_demand_switch == 0) timber_flag = "timberOFF"
+    if(cfg$gms$s35_secdf_distribution == 0) dist_flag = "ACx"
+    if(cfg$gms$s35_secdf_distribution == 1) dist_flag = "Equal"
+    if(cfg$gms$s35_secdf_distribution == 2) dist_flag = "Poulter"
 
-          if(cfg$gms$s32_fix_plant == 0) plant_area_flag = "Baseline"
-          if(cfg$gms$s32_fix_plant == 1) plant_area_flag = "Constrained"
+    if(cfg$gms$s35_forest_damage == 0) damage_flg = "None"
+    if(cfg$gms$s35_forest_damage == 1) damage_flg = "Wildfire"
+    if(cfg$gms$s35_forest_damage == 2) damage_flg = "Combined"
 
-          if(cfg$gms$s32_distribution_type == 0) init_flag = "Equal"
-          if(cfg$gms$s32_distribution_type == 1) init_flag = "FAO"
-          if(cfg$gms$s32_distribution_type == 2) init_flag = "Poulter"
+    if(scen=="nocc") scen_flag="Default"
+    if(scen=="forestry") scen_flag="Forestry"
 
-          if(cfg$gms$s35_secdf_distribution == 0) dist_flag = "ACx"
-          if(cfg$gms$s35_secdf_distribution == 1) dist_flag = "Equal"
-          if(cfg$gms$s35_secdf_distribution == 2) dist_flag = "Poulter"
+    cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",plant_area_flag)
+    cfg$output  = c("extra/timestep_duration")
 
-          if(cfg$gms$s35_forest_damage == 0) damage_flg = "None"
-          if(cfg$gms$s35_forest_damage == 1) damage_flg = "Wildfire"
-          if(cfg$gms$s35_forest_damage == 2) damage_flg = "Combined"
-
-          if(scen=="nocc") scen_flag="Default"
-          if(scen=="forestry") scen_flag="Forestry"
-
-          cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",plant_area_flag)
-          cfg$output  = c("extra/timestep_duration")
-
-           xx = c(xx,cfg$title)
-           start_run(cfg,codeCheck=FALSE)
-        }
-      }
-    }
+     xx = c(xx,cfg$title)
+     start_run(cfg,codeCheck=FALSE)
   }
 }
-
 #########################################################################################
 
 #### COPY FROM ABOV FIRST #####
