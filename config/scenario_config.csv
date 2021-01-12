@@ -39,7 +39,6 @@ c52_carbon_scenario;cc;nocc;;;;;;;;;;;;;;cc;cc;cc;cc;cc;
 c59_som_scenario;cc;nocc;;;;;;;;;;;;cc;;cc;cc;cc;cc;cc;
 c56_emis_policy;;;;;;;;;;;;;;;;;;;;;redd+_nosoil
 s73_foresight;;;;;;;;;;;;;;;;;;;;;0
-s32_plant_share;;;;;;;;;;;;;;;;;;;;;0.33
 s32_fix_plant;;;;;;;;;;;;;;;;;;;;;0
 s32_initial_distribution;;;;;;;;;;;;;;;;;;;;;1
 s73_demand_switch;;;;;;;;;;;;;;;;;;;;;1
