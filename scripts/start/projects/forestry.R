@@ -25,7 +25,7 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "DEC52"
 
-cat(paste0("Revert bugfix in forest protetcion according to initial distribution. Coup2100 runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Possible bugfix in forest protetcion according to initial distribution. Coup2100 runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry","nocc")){
