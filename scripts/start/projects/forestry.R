@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC55"
+identifier_flag = "DEC56"
 
-cat(paste0("re-activate forest protection according to initial distribution in natveg"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Removed manual selfsuff fix in MEA JPN AND REF for kforestry"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry","nocc")){
