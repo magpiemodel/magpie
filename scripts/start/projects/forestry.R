@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC51"
+identifier_flag = "DEC52"
 
 cat(paste0("Revert bugfix in forest protetcion according to initial distribution. Coup2100 runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 

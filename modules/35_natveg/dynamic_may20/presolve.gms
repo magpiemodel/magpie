@@ -129,10 +129,15 @@ m_boundfix(vm_land,(j,"primforest"),l,10e-5);
 v35_secdforest.lo(j,ac) = 0;
 v35_secdforest.up(j,ac) = Inf;
 ** Setting bounds for only allowing s35_natveg_harvest_shr percentage of available primf to be harvested (highest age class)
+if(s35_secdf_distribution=2,
+	p35_save_dist(j,ac_sub) = (pc35_secdforest(j,ac_sub)/sum(ac_sub2,pc35_secdforest(j,ac_sub2)))$(sum(ac_sub2,pc35_secdforest(j,ac_sub2))>0);
+	);
 if (sum(sameas(t_past,t),1) = 1,
-v35_secdforest.lo(j,"acx") = p35_save_secdforest(t,j);
+v35_secdforest.lo(j,"acx") = p35_save_secdforest(t,j)$(s35_secdf_distribution=0);
+v35_secdforest.lo(j,ac_sub) = (p35_save_secdforest(t,j)*p35_save_dist(j,ac_sub))$(s35_secdf_distribution=2);
 else
-v35_secdforest.lo(j,"acx") = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx"), p35_save_secdforest(t,j));
+v35_secdforest.lo(j,"acx") = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx"), p35_save_secdforest(t,j))$(s35_secdf_distribution=0);
+v35_secdforest.lo(j,ac_sub) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub), p35_save_secdforest(t,j) * p35_save_dist(j,ac_sub))$(s35_secdf_distribution=2);
 );
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
 m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);

@@ -29,6 +29,7 @@ parameters
  pc35_disturbance_loss_primf(j)                   Loss due to disturbances in primary forest (mio. ha)
  i35_plantedclass_ac(j,ac)                       Area of age-classes in secondary forest (1)
  p35_poulter_dist(j,ac)                          Share of age-classes in secondary forest (1)
+ p35_save_dist(j,ac)                             Distribution of secondary forest saving (1)
 ;
 
 equations
