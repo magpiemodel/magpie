@@ -23,12 +23,12 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC52"
+identifier_flag = "DEC52a"
 
-cat(paste0("Possible bugfix in forest protetcion according to initial distribution. Coup2100 runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Check what caused emission drop. Possible bugfix in forest protetcion according to initial distribution. Coup2100 runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
-for(scen in c("forestry","nocc")){
+for(scen in c("forestry")){
 
   for(ssp in c("SSP2")){
 
