@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC52a"
+identifier_flag = "DEC53"
 
-cat(paste0("Check what caused emission drop. Possible bugfix in forest protetcion according to initial distribution. Coup2100 runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Activate forest damage"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry")){
