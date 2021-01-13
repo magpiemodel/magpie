@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC54"
+identifier_flag = "DEC55"
 
 cat(paste0("re-activate forest protection according to initial distribution in natveg"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 

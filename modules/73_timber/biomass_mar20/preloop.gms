@@ -7,6 +7,8 @@
 
 ** Set multiplier values for cost of harvesting from natural vegetation
 p73_cost_multiplier(land_natveg) = s73_cost_multiplier;
+** Primary forests are made more expensive to harvest due to need for
+** specialized machinery and labor and difficulty in reaching inaccessible areas
 p73_cost_multiplier("primforest") = s73_cost_multiplier*s73_cost_multiplier;
 
 ** Set historical values to FAO values
@@ -23,11 +25,9 @@ loop(t_all$(m_year(t_all) >= 2015 AND m_year(t_all) < 2150),
           ((im_gdp_pc_ppp_iso(t_all+1,iso)/im_gdp_pc_ppp_iso(t_all,iso))**f73_income_elasticity(total_wood_products))$(im_gdp_pc_ppp_iso(t_all,iso)>0)
           ;
 );
-*
+* Fill in very small values
 p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)$(im_gdp_pc_ppp_iso(t_all,iso)=0) = 0.000001;
 p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)$(p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)=0) = 0.00000001;
-
-p73_base_min(iso,total_wood_products) = p73_forestry_demand_prod_specific("y1995",iso,total_wood_products) * 0.05;
 
 ** Alternative wood use scenarios
 $ifthen "%c73_wood_scen%" == "nopaper"
@@ -38,6 +38,7 @@ $elseif "%c73_wood_scen%" == "construction"
 p73_forestry_demand_prod_specific(t_all,iso,construction_wood) = p73_forestry_demand_prod_specific(t_all,iso,construction_wood) * f73_demand_modifier(t_all,"%c73_wood_scen%");
 $endif
 
+** Aggregate from ISO country level to MAgPIE region level
 p73_timber_demand_gdp_pop(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to_woodprod(kforestry,total_wood_products)),p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)) * s73_demand_switch;
 
 ** Hard additive calibration for timber demand

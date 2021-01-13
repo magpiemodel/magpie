@@ -31,10 +31,11 @@ elseif s35_secdf_distribution = 2,
 *use residual approach to avoid rounding errors
 i35_secdforest(j,"acx") = i35_secdforest(j,"acx") + (pcm_land(j,"secdforest") - sum(ac, i35_secdforest(j,ac)));
 
+** Initialize values to be used in presolve
 p35_protect_shr(t,j,prot_type) = 0;
-
 p35_recovered_forest(t,j,ac) = 0;
 
+** Initialize forest protection
 p35_min_forest(t,j) = f35_min_land_stock(t,j,"%c35_ad_policy%","forest");
 p35_min_other(t,j) = f35_min_land_stock(t,j,"%c35_ad_policy%","other");
 

@@ -12,7 +12,6 @@ pm_demand_forestry_future(i,kforestry)           						                 Future f
 pm_demand_ext(t_ext,i,kforestry)                                            Extended demand for timber beyound simulation (mio. tDM per yr)
 p73_timber_harvest_cost(t,j,ac,forest_land)									                Harvesting costs as a function of carbon density (USD per ac per ha)
 p73_cost_multiplier(land_natveg)                                            Cost multiplier for natural vegetation to make harvests expensive by a factor (1)
-p73_base_min(iso,total_wood_products)                                       Percentage of initial demand above which a jump is not permitted between time steps (mio. tDM)
 p73_demand_calib(t_all,i,kforestry)                                         Additive calibration factor for timber demand
 ;
 

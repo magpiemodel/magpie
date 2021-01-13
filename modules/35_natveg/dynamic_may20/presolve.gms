@@ -5,6 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+** Youngest age classes are not allowed to be harvested
 vm_hvarea_secdforest.fx(j,ac_est) = 0;
 vm_hvarea_other.fx(j,ac_est) = 0;
 
