@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC56"
+identifier_flag = "DEC57"
 
-cat(paste0("Removed manual selfsuff fix in MEA JPN AND REF for kforestry"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Uncapped GS Calibration"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry","nocc")){

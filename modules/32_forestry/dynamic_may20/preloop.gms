@@ -202,7 +202,7 @@ else
 
 p32_observed_gs_reg(i)  = sum((cell(i,j),ac),pm_timber_yield_initial(j,ac,"forestry") * p32_land_start_ac(j,"plant",ac))/ sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac));
 p32_gs_scaling_reg(i) = f32_gs_relativetarget(i) * s32_wood_density / p32_observed_gs_reg(i);
-p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i)>10) = 10;
+*p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i)>10) = 10;
 
 ** Update c-densitiy
 pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * sum(cell(i,j),p32_gs_scaling_reg(i));
