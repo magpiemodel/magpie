@@ -25,7 +25,7 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "DEC58"
 
-cat(paste0("Pure timbe ron off runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Pure timber on off runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry")){
@@ -72,7 +72,7 @@ for(scen in c("forestry")){
       cfg$output  = c("extra/timestep_duration")
 
        xx = c(xx,cfg$title)
-       #start_run(cfg,codeCheck=FALSE)
+       start_run(cfg,codeCheck=FALSE)
     }
   }
 }
