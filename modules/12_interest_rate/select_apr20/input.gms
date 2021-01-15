@@ -46,6 +46,14 @@ sets
                           VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 ;
 
+parameter f12_interest_fader(t_all) Protection scenario fader (1)
+/
+$ondelim
+$include "./modules/15_food/input/f12_interest_fader.csv"
+$offdelim
+/
+;
+
 $if "%c12_interest_rate%" == "coupling" parameter f12_interest_coupling(t_all) Interest rate (% per yr)
 $if "%c12_interest_rate%" == "coupling" /
 $if "%c12_interest_rate%" == "coupling" $ondelim

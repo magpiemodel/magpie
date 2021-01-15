@@ -14,6 +14,14 @@ s35_natveg_harvest_shr Constrains the allowed wood harvest from natural vegetati
 s35_secdf_distribution Flag for secdf initialization (0=all secondary forest in highest age class 1=Equal distribution among all age classes) (1) /0/
 ;
 
+parameter f35_protection_fader(t_all) Protection scenario fader (1)
+/
+$ondelim
+$include "./modules/15_food/input/f35_protection_fader.csv"
+$offdelim
+/
+;
+
 table f35_protect_area(j,prot_type) Conservation priority areas (mio. ha)
 $ondelim
 $include "./modules/35_natveg/input/protect_area.cs3"
