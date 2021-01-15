@@ -17,7 +17,7 @@ s35_secdf_distribution Flag for secdf initialization (0=all secondary forest in 
 parameter f35_protection_fader(t_all) Protection scenario fader (1)
 /
 $ondelim
-$include "./modules/15_food/input/f35_protection_fader.csv"
+$include "./modules/35_natveg/input/f35_protection_fader.csv"
 $offdelim
 /
 ;

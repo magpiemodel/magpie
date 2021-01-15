@@ -49,7 +49,7 @@ sets
 parameter f12_interest_fader(t_all) Protection scenario fader (1)
 /
 $ondelim
-$include "./modules/15_food/input/f12_interest_fader.csv"
+$include "./modules/12_interest_rate/input/f12_interest_fader.csv"
 $offdelim
 /
 ;
