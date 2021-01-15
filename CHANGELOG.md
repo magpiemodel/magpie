@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **35_natveg** Added HalfEarth scenario to protection scenarios
 - **56_ghg_policy** Added new scenario to emission policy
 - **29_ageclass** New age-class module
-- **32_forestry** Simplified routine for plantation establishments. Added plantation area initialization based on MODIS data. Calibration to FAO growing stocks via carbon densities. New switches: `s32_distribution_type `, `c32_dev_scen`, `c32_incr_rate `
+- **32_forestry** Simplified routine for plantation establishments. Added plantation area initialization based on MODIS data. Calibration to FAO growing stocks via carbon densities. New switches: `s32_distribution_type `, `c32_dev_scen` (this is renamed `c73_wood_scen`), `c32_incr_rate `
 - **35_natveg** Added distribution in secondary forest based on Poulter et al. 2019. Added forest damages due to wildfire and shifting agriculture. Bugfix in forest protection calculations. New switches: `s35_secdf_distribution`, `s35_forest_damage`
 - **52_carbon** Simplified routine for carbon stock calculations in timber plantations and cleanup of unused code.
 - **73_timber** Additive calibration with FAO data for roundwood demand. New switches: `c73_wood_scen`
