@@ -29,18 +29,18 @@ q32_cost_total(i2) .. vm_cost_fore(i2) =e=
 *-----------------------------------------------
 ****** Carbon price induced afforestation ******
 *-----------------------------------------------
-*' The interface `vm_cdr_aff` provides the projected bgc (CDR) and local bph effects of an afforestation
-*' activity for a planning horizon of 30 years `s32_planing_horizon` to the [56_ghg_policy] module.
+*' The interface `vm_cdr_aff` provides the projected biogeochemical (bgc) carbon sequestration
+*' and the local biophysical (bph) warming/cooling effects of an afforestation
+*' activity for a planning horizon of 50 years `s32_planing_horizon` to the [56_ghg_policy] module.
 
 q32_cdr_aff(j2,ac) ..
 vm_cdr_aff(j2,ac,"bgc") =e=
 sum(ac_est, v32_land(j2,"aff",ac_est)) * sum(ct, p32_cdr_ac(ct,j2,ac))
-+ sum(ac_est, v32_land(j2,"plant",ac_est)) * sum(ct, p32_cdr_ac_plant(ct,j2,ac))
 ;
 
 q32_bgp_aff(j2,ac) ..
 vm_cdr_aff(j2,ac,"bph") =e=
-v32_land(j2,"aff","ac0") * p32_aff_bgp(j2,ac);
+sum(ac_est, v32_land(j2,"aff",ac_est)) * p32_aff_bgp(j2,ac);
 
 *' ac_est can only increase if total afforested land increases
 q32_aff_est(j2) ..
@@ -109,7 +109,7 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
 q32_cost_establishment(i2)..
 						v32_cost_establishment(i2)
 						=e=
-            (sum((cell(i2,j2),type32), v32_land(j2,type32,"ac0") * s32_reESTBcost)
+            (sum((cell(i2,j2),type32,ac_est), v32_land(j2,type32,ac_est) * s32_reESTBcost)
 *            +sum(cell(i2,j2), v32_land(j2,"plant","ac0") * s32_harvesting_cost)
 *              /((1+sum(ct,pm_interest(ct,i2)))**sum(ct,(p32_rotation_regional(ct,i2))))
               )
