@@ -79,20 +79,6 @@ $include "./modules/32_forestry/input/f32_ac_dist.csv"
 $offdelim
 /;
 
-parameter f32_gs_target(i) Growing stock target in each region (m3 per ha)
-/
-$ondelim
-$include "./modules/32_forestry/input/f32_gs_target.cs4"
-$offdelim
-/;
-
-parameter f32_gs_absolutetarget(i) Absolute growing stock target in each region (mio m3)
-/
-$ondelim
-$include "./modules/32_forestry/input/f32_gs_absolutetarget.cs4"
-$offdelim
-/;
-
 parameter f32_gs_relativetarget(i) Relative growing stock target in each region (mio m3 per ha)
 /
 $ondelim
