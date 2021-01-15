@@ -25,7 +25,7 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "DEC58"
 
-cat(paste0("Uncapped GS Calibration"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Pure timbe ron off runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry")){
@@ -41,9 +41,6 @@ for(scen in c("forestry")){
     cfg$recalc_npi_ndc = "ifneeded"
 
     cfg = setScenario(cfg,c(ssp,scen))
-
-
-    if(cfg$gms$s32_fix_plant == 1 && cfg$gms$s73_foresight == 1) break
 
     if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
     if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
@@ -75,7 +72,7 @@ for(scen in c("forestry")){
       cfg$output  = c("extra/timestep_duration")
 
        xx = c(xx,cfg$title)
-       start_run(cfg,codeCheck=FALSE)
+       #start_run(cfg,codeCheck=FALSE)
     }
   }
 }
