@@ -12,6 +12,7 @@ scalars
 parameters
  i35_secdforest(j,ac)							              Inital secdforest (mio. ha)
  i35_other(j,ac)								                Inital other land (mio. ha)
+ i35_protect_fader(t_all)                       Fader for half earth protection scenario (1)
  p35_secdforest(t,j,ac)  	                      Secdforest per age class (mio. ha)
  p35_other(t,j,ac)   	  	                      Other land per age class (mio. ha)
  pc35_secdforest(j,ac)    	                    Secdforest per age class in current time step (mio. ha)
