@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** Updated AgMIP output scripts.
 - **35_natveg** Fader for HalfEarth protection policy
 - **12_interest_rate** Interest fader changed to csv
+- **tests** Replaced TravisCI with GithubActions
 
 ### removed
 
