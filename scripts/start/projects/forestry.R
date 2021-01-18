@@ -48,7 +48,7 @@ for(scen in c("forestry")){
     cfg$gms$c57_macc_version = "PBL_2019"
     cfg$gms$c60_biodem_level <- 0
 
-    for(s73_timber_demand_switch in c(0,1)){
+    for(s73_timber_demand_switch in c(0)){
       cfg$gms$s73_timber_demand_switch <- s73_timber_demand_switch
       if(cfg$gms$s73_timber_demand_switch == 1) timber_flag = "timberON"
       if(cfg$gms$s73_timber_demand_switch == 0) timber_flag = "timberOFF"
