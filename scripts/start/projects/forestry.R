@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC60"
+identifier_flag = "DEC61"
 
 cat(paste0("Time component for forest damanges. Pure timber off"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
@@ -48,7 +48,9 @@ for(scen in c("forestry")){
     cfg$gms$c57_macc_version = "PBL_2019"
     cfg$gms$c60_biodem_level <- 0
 
-    for(sm_timber_demand_switch in c(0,1)){
+    for(sm_timber_demand_switch in c(0)){
+
+        cfg$gms$sm_timber_demand_switch = sm_timber_demand_switch
 
         if(cfg$gms$sm_timber_demand_switch == 1) timber_flag = "timberON"
         if(cfg$gms$sm_timber_demand_switch == 0) timber_flag = "timberOFF"
