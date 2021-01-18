@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC59"
+identifier_flag = "DEC60"
 
-cat(paste0("Time component for forest damanges. Default and forestry run"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Time component for forest damanges. Pure timber off"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry")){
@@ -47,6 +47,7 @@ for(scen in c("forestry")){
 
     cfg$gms$c57_macc_version = "PBL_2019"
     cfg$gms$c60_biodem_level <- 0
+    cfg$gms$s73_timber_demand_switch = 0
 
       if(cfg$gms$s73_timber_demand_switch == 1) timber_flag = "timberON"
       if(cfg$gms$s73_timber_demand_switch == 0) timber_flag = "timberOFF"
@@ -69,11 +70,11 @@ for(scen in c("forestry")){
       if(scen=="nocc") scen_flag="Default"
       if(scen=="forestry") scen_flag="Forestry"
 
-      cfg$title   = paste0(identifier_flag,"_",scen_flag)
+      cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",timber_flag)
       cfg$output  = c("extra/timestep_duration")
 
        xx = c(xx,cfg$title)
-       start_run(cfg,codeCheck=FALSE)
+       #start_run(cfg,codeCheck=FALSE)
 
   }
 }

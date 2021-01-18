@@ -99,6 +99,8 @@ v32_land.up(j,"plant",ac_est) = Inf;
 ** Fix timber plantation land in case the plantations for productive purposes
 ** need to be held at constant 1995 levels.
 v32_land.fx(j,"plant",ac)$(s32_initial_distribution=0) = p32_land_start_ac(j,"plant",ac);
+** Fix land in case no production
+v32_land.fx(j,"plant",ac)$(s73_timber_demand_switch=0) = p32_land_start_ac(j,"plant",ac);
 
 ** fix ndc afforestation forever, all age-classes are fixed except ac_est
 v32_land.fx(j,"ndc",ac_sub) = pc32_land(j,"ndc",ac_sub);
@@ -126,8 +128,5 @@ m_boundfix(v32_land,(j,type32,ac_sub),l,10e-5);
 
 ** Calculate future yield based on rotation length
 pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac,"forestry"));
-
-** Fix in case of demand being off
-v32_land.fx(j,"plant",ac)$(s73_timber_demand_switch=0) = p32_land_start_ac(j,"plant",ac);
 
 *** EOF presolve.gms ***
