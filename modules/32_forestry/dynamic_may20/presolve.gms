@@ -128,6 +128,6 @@ m_boundfix(v32_land,(j,type32,ac_sub),l,10e-5);
 pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac,"forestry"));
 
 ** Fix in case of demand being off
-v32_land.fx(j,"plant",ac)$(sm_timber_demand_switch=0) = p32_land_start_ac(j,"plant",ac);
+v32_land.fx(j,"plant",ac)$(s73_timber_demand_switch=0) = p32_land_start_ac(j,"plant",ac);
 
 *** EOF presolve.gms ***

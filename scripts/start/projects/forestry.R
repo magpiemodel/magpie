@@ -48,10 +48,10 @@ for(scen in c("forestry")){
     cfg$gms$c57_macc_version = "PBL_2019"
     cfg$gms$c60_biodem_level <- 0
 
-    for(sm_timber_demand_switch in c(0,1)){
-      cfg$gms$sm_timber_demand_switch <- sm_timber_demand_switch
-      if(cfg$gms$sm_timber_demand_switch == 1) timber_flag = "timberON"
-      if(cfg$gms$sm_timber_demand_switch == 0) timber_flag = "timberOFF"
+    for(s73_timber_demand_switch in c(0,1)){
+      cfg$gms$s73_timber_demand_switch <- s73_timber_demand_switch
+      if(cfg$gms$s73_timber_demand_switch == 1) timber_flag = "timberON"
+      if(cfg$gms$s73_timber_demand_switch == 0) timber_flag = "timberOFF"
 
       if(cfg$gms$s32_fix_plant == 0) plant_area_flag = "Baseline"
       if(cfg$gms$s32_fix_plant == 1) plant_area_flag = "Constrained"

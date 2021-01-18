@@ -41,7 +41,7 @@ c56_emis_policy;;;;;;;;;;;;;;;;;;;;;redd+_nosoil
 s73_foresight;;;;;;;;;;;;;;;;;;;;;0
 s32_fix_plant;;;;;;;;;;;;;;;;;;;;;0
 s32_initial_distribution;;;;;;;;;;;;;;;;;;;;;1
-sm_timber_demand_switch;;;;;;;;;;;;;;;;;;;;;1
+s73_timber_demand_switch;;;;;;;;;;;;;;;;;;;;;1
 c57_macc_version;;;;;;;;;;;;;;;;;;;;;PBL_2019
 s35_forest_damage;;;;;;;;;;;;;;;;;;;;;2
 s32_distribution_type;;;;;;;;;;;;;;;;;;;;;2

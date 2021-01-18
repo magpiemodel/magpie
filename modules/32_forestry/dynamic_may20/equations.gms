@@ -143,7 +143,7 @@ q32_fix_plant_area(j2) ..
 *' Regional minimum constraint for maintaining current forestry area patterns,
 *' while accounting for regional self sufficiency in (`pm_selfsuff_ext`) timber production.
 q32_establishment_min_reg(i2) ..
-              sum(cell(i2,j2), ((sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry) * pc32_yield_forestry_future(j2))
+              sum(cell(i2,j2), ((sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry) * pc32_yield_forestry_future(j2)) * s73_timber_demand_switch
               =g=
               sum(kforestry, pm_demand_forestry_future(i2,kforestry) * sum(ct, pm_selfsuff_ext(ct,i2,kforestry))) * sum(ct,f32_plantation_contribution(ct,i2,"%c32_dev_scen%","%c32_incr_rate%")) * (1-sum(ct,p32_fix_plant(ct)))
               ;
