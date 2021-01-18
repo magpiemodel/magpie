@@ -44,5 +44,5 @@ p35_other(t,j,ac) = 0;
 p35_secdforest(t,j,ac) = 0;
 
 * initialize forest disturbance losses
-pc35_disturbance_loss_secdf(j,ac) = 0;
-pc35_disturbance_loss_primf(j) = 0;
+p35_disturbance_loss_secdf(t,j,ac) = 0;
+p35_disturbance_loss_primf(t,j) = 0;

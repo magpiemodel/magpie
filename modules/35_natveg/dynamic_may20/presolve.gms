@@ -19,18 +19,18 @@ else
 
 * Shift ageclasses due to forest fires, first calculate damages
 if(s35_forest_damage=1,
-	pc35_disturbance_loss_secdf(j,ac_sub) = pc35_secdforest(j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"wildfire"))*m_timestep_length_forestry;
-	pc35_disturbance_loss_primf(j) = pcm_land(j,"primforest") * sum(cell(i,j),f35_forest_lost_share(i,"wildfire"))*m_timestep_length_forestry;
+	p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"wildfire"))*m_timestep_length_forestry;
+	p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum(cell(i,j),f35_forest_lost_share(i,"wildfire"))*m_timestep_length_forestry;
 	);
 
 if(s35_forest_damage=2,
-	pc35_disturbance_loss_secdf(j,ac_sub) = pc35_secdforest(j,ac_sub) * sum((cell(i,j),combined_loss),f35_forest_lost_share(i,combined_loss))*m_timestep_length_forestry;
-	pc35_disturbance_loss_primf(j) = pcm_land(j,"primforest") * sum((cell(i,j),combined_loss),f35_forest_lost_share(i,combined_loss))*m_timestep_length_forestry;
+	p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum((cell(i,j),combined_loss),f35_forest_lost_share(i,combined_loss))*m_timestep_length_forestry;
+	p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum((cell(i,j),combined_loss),f35_forest_lost_share(i,combined_loss))*m_timestep_length_forestry;
 	);
 * Distribution of damages correctly
-	pc35_secdforest(j,ac_est) = pc35_secdforest(j,ac_est) + sum(ac_sub,pc35_disturbance_loss_secdf(j,ac_sub))/card(ac_est) + pc35_disturbance_loss_primf(j)/card(ac_est);
-  pc35_secdforest(j,ac_sub) = pc35_secdforest(j,ac_sub) - pc35_disturbance_loss_secdf(j,ac_sub);
-  pcm_land(j,"primforest") = pcm_land(j,"primforest") - pc35_disturbance_loss_primf(j);
+	pc35_secdforest(j,ac_est) = pc35_secdforest(j,ac_est) + sum(ac_sub,p35_disturbance_loss_secdf(t,j,ac_sub))/card(ac_est) + p35_disturbance_loss_primf(t,j)/card(ac_est);
+  pc35_secdforest(j,ac_sub) = pc35_secdforest(j,ac_sub) - p35_disturbance_loss_secdf(t,j,ac_sub);
+  pcm_land(j,"primforest") = pcm_land(j,"primforest") - p35_disturbance_loss_primf(t,j);
   vm_land.l(j,"primforest") = pcm_land(j,"primforest");
 
 * Regrowth of natural vegetation (natural succession) is modelled by shifting age-classes according to time step length.

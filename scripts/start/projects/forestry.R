@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC58"
+identifier_flag = "DEC59"
 
-cat(paste0("Pure timber on off runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Time component for forest damanges. Bugfix in Pure timber on off runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry")){
@@ -45,10 +45,13 @@ for(scen in c("forestry")){
     if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
     if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
 
-    for(s73_demand_switch in c(0,1)){
-      cfg$gms$s73_demand_switch <- s73_demand_switch
-      if(cfg$gms$s73_demand_switch == 1) timber_flag = "timberON"
-      if(cfg$gms$s73_demand_switch == 0) timber_flag = "timberOFF"
+    cfg$gms$c57_macc_version = "PBL_2019"
+    cfg$gms$c60_biodem_level <- 0
+
+    for(sm_timber_demand_switch in c(0,1)){
+      cfg$gms$sm_timber_demand_switch <- sm_timber_demand_switch
+      if(cfg$gms$sm_timber_demand_switch == 1) timber_flag = "timberON"
+      if(cfg$gms$sm_timber_demand_switch == 0) timber_flag = "timberOFF"
 
       if(cfg$gms$s32_fix_plant == 0) plant_area_flag = "Baseline"
       if(cfg$gms$s32_fix_plant == 1) plant_area_flag = "Constrained"
