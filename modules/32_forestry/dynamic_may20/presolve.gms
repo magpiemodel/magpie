@@ -99,8 +99,10 @@ v32_land.up(j,"plant",ac_est) = Inf;
 ** Fix timber plantation land in case the plantations for productive purposes
 ** need to be held at constant 1995 levels.
 v32_land.fx(j,"plant",ac)$(s32_initial_distribution=0) = p32_land_start_ac(j,"plant",ac);
-** Fix land in case no production
-v32_land.fx(j,"plant",ac)$(s73_timber_demand_switch=0) = p32_land_start_ac(j,"plant",ac);
+
+if(sm_timber_demand_switch = 0,
+v32_land.fx(j,"plant",ac) = p32_land(t,j,"plant",ac);
+);
 
 ** fix ndc afforestation forever, all age-classes are fixed except ac_est
 v32_land.fx(j,"ndc",ac_sub) = pc32_land(j,"ndc",ac_sub);

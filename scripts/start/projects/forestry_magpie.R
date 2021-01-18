@@ -57,8 +57,8 @@ for(ssp in c("SSP2")){
           if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
           if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
 
-          if(cfg$gms$s73_timber_demand_switch == 1) timber_flag = "timberON"
-          if(cfg$gms$s73_timber_demand_switch == 0) timber_flag = "timberOFF"
+          if(cfg$gms$sm_timber_demand_switch == 1) timber_flag = "timberON"
+          if(cfg$gms$sm_timber_demand_switch == 0) timber_flag = "timberOFF"
 
           if(cfg$gms$s32_fix_plant == 0) plant_area_flag = "Baseline"
           if(cfg$gms$s32_fix_plant == 1) plant_area_flag = "Constrained"

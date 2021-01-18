@@ -14,7 +14,7 @@ scalars
   s73_timber_harvest_cost   Cost for harvesting timber (USD per ha) / 2000/
   s73_cost_multiplier       Multiplier for expensive harvest in natural vegetation (1) /1.5/
   s73_free_prod_cost        Very high cost for using non existing land for plantation establishment (USD per tDM) /1000000000/
-  s73_timber_demand_switch         Logical switch to turn on or off timber demand 1=on 0=off (1)     / 1 /
+  sm_timber_demand_switch         Logical switch to turn on or off timber demand 1=on 0=off (1)     / 0 /
   s73_foresight				      Boolean switch for establishment demand assumption 1=forward looking 0=myopic (1) / 0 /
   s73_increase_ceiling      Limiter for not allowing a demand jump between time steps beyond a certain limit (1) /1.05/
 ;
