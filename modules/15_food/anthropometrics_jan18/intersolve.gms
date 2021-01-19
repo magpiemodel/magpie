@@ -16,13 +16,6 @@ option nlp = conopt4;
 *' module is executed once again.
 *' @stop
 
-p15_iteration_counter(t) = p15_iteration_counter(t) + 1;
-
-current_iter15(iter15) = no;
-current_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)) = yes;
-last_iter15(iter15) = no;
-last_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)-1) = yes;
-
 if (magpie.modelstat = NA,
     q15_food_demand.m(i,kfo)=0;
     p15_prices_kcal(t,iso,kfo,current_iter15)=i15_prices_initial_kcal(iso,kfo)*f15_price_index(t);
@@ -30,6 +23,13 @@ else
     display "Coupling: Reading out marginal costs from MAgPIE as shock to demand model";
     p15_prices_kcal(t,iso,kfo,current_iter15)=sum(i_to_iso(i,iso), q15_food_demand.m(i,kfo));
 );
+
+
+p15_iteration_counter(t) = p15_iteration_counter(t) + 1;
+current_iter15(iter15) = no;
+current_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)) = yes;
+last_iter15(iter15) = no;
+last_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)-1) = yes;
 
 display "starting m15_food_demand model....";
 
