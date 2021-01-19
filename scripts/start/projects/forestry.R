@@ -23,12 +23,12 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC61"
+identifier_flag = "DEC62"
 
-cat(paste0("Time component for forest damanges. Pure timber off"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Aff bugfix"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
-for(scen in c("forestry")){
+for(scen in c("forestry","nocc")){
 
   for(ssp in c("SSP2")){
 
@@ -48,37 +48,33 @@ for(scen in c("forestry")){
     cfg$gms$c57_macc_version = "PBL_2019"
     cfg$gms$c60_biodem_level <- 0
 
-    for(sm_timber_demand_switch in c(0)){
 
-        cfg$gms$sm_timber_demand_switch = sm_timber_demand_switch
+    if(cfg$gms$sm_timber_demand_switch == 1) timber_flag = "timberON"
+    if(cfg$gms$sm_timber_demand_switch == 0) timber_flag = "timberOFF"
 
-        if(cfg$gms$sm_timber_demand_switch == 1) timber_flag = "timberON"
-        if(cfg$gms$sm_timber_demand_switch == 0) timber_flag = "timberOFF"
+    if(cfg$gms$s32_fix_plant == 0) plant_area_flag = "Baseline"
+    if(cfg$gms$s32_fix_plant == 1) plant_area_flag = "Constrained"
 
-        if(cfg$gms$s32_fix_plant == 0) plant_area_flag = "Baseline"
-        if(cfg$gms$s32_fix_plant == 1) plant_area_flag = "Constrained"
+    if(cfg$gms$s32_distribution_type == 0) init_flag = "Equal"
+    if(cfg$gms$s32_distribution_type == 1) init_flag = "FAO"
+    if(cfg$gms$s32_distribution_type == 2) init_flag = "Poulter"
 
-        if(cfg$gms$s32_distribution_type == 0) init_flag = "Equal"
-        if(cfg$gms$s32_distribution_type == 1) init_flag = "FAO"
-        if(cfg$gms$s32_distribution_type == 2) init_flag = "Poulter"
+    if(cfg$gms$s35_secdf_distribution == 0) dist_flag = "ACx"
+    if(cfg$gms$s35_secdf_distribution == 1) dist_flag = "Equal"
+    if(cfg$gms$s35_secdf_distribution == 2) dist_flag = "Poulter"
 
-        if(cfg$gms$s35_secdf_distribution == 0) dist_flag = "ACx"
-        if(cfg$gms$s35_secdf_distribution == 1) dist_flag = "Equal"
-        if(cfg$gms$s35_secdf_distribution == 2) dist_flag = "Poulter"
+    if(cfg$gms$s35_forest_damage == 0) damage_flg = "None"
+    if(cfg$gms$s35_forest_damage == 1) damage_flg = "Wildfire"
+    if(cfg$gms$s35_forest_damage == 2) damage_flg = "Combined"
 
-        if(cfg$gms$s35_forest_damage == 0) damage_flg = "None"
-        if(cfg$gms$s35_forest_damage == 1) damage_flg = "Wildfire"
-        if(cfg$gms$s35_forest_damage == 2) damage_flg = "Combined"
+    if(scen=="nocc") scen_flag="Default"
+    if(scen=="forestry") scen_flag="Forestry"
 
-        if(scen=="nocc") scen_flag="Default"
-        if(scen=="forestry") scen_flag="Forestry"
+    cfg$title   = paste0(identifier_flag,"_",scen_flag)
+    cfg$output  = c("extra/timestep_duration")
 
-        cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",timber_flag)
-        cfg$output  = c("extra/timestep_duration")
-
-         xx = c(xx,cfg$title)
-         start_run(cfg,codeCheck=FALSE)
-    }
+     xx = c(xx,cfg$title)
+     start_run(cfg,codeCheck=FALSE)
   }
 }
 #########################################################################################
