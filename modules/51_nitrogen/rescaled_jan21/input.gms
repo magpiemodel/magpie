@@ -16,14 +16,14 @@ $offdelim
 
 table f51_ef_n_soil(n_pollutants_direct,emis_source_n_cropsoils51) ipcc emission factors for various emission types X (tX-N per tN)
 $ondelim
-$include "./modules/51_nitrogen/ipcc2006_sep16/input/f51_ef_n_soil.cs3"
+$include "./modules/51_nitrogen/rescaled_jan21/input/f51_ef_n_soil.cs3"
 $offdelim
 ;
 
 parameter f51_ef3_confinement(i,kli,awms_conf,n_pollutants_direct) emissions from manure managed in confinement for various emission types X (tX-N per tN)
 /
 $ondelim
-$include "./modules/51_nitrogen/ipcc2006_sep16/input/f51_ef3_confinement.cs4"
+$include "./modules/51_nitrogen/rescaled_jan21/input/f51_ef3_confinement.cs4"
 $offdelim
 /
 ;
@@ -31,6 +31,6 @@ $offdelim
 parameter f51_ef3_prp(i,n_pollutants_direct,kli) emissions from manure on pasture range and paddocks for various emission types X (tX-N per tN)
 /
 $ondelim
-$include "./modules/51_nitrogen/ipcc2006_sep16/input/f51_ef3_prp.cs4"
+$include "./modules/51_nitrogen/rescaled_jan21/input/f51_ef3_prp.cs4"
 $offdelim
 /;
