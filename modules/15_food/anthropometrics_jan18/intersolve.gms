@@ -380,8 +380,8 @@ p15_kcal_pc_calibrated(t,i,kfo) = p15_kcal_pc_calibrated_orig(t,i,kfo) * (1-i15_
   else
        sm_intersolve=1;
        display "Success: convergence between MAgPIE and Food Demand Model reached.";
-       display "requiring ",p15_iteration_counter," runs of food demand model ";
-       display "and ", p15_iteration_counter-1, " runs with MAgPIE.";
+       display "requiring ",p15_iteration_counter," runs of food demand model, ";
+       display "and one run less with MAgPIE.";
 * set back convergence indicators for next timestep
   );
 
