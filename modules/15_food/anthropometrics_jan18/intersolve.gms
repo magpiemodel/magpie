@@ -31,6 +31,7 @@ current_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)) = yes;
 last_iter15(iter15) = no;
 last_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)-1) = yes;
 
+display "starting iteration number ", p15_iteration_counter;
 display "starting m15_food_demand model....";
 
 solve m15_food_demand USING nlp MAXIMIZING v15_objective ;
@@ -94,7 +95,6 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
 *' @stop
 
 
-display "finished iteration number ", p15_iteration_counter;
 display "convergence measure:",p15_convergence_measure;
 
 if (s15_elastic_demand = 1 AND m_year(t) > sm_fix_SSP2,
@@ -102,6 +102,7 @@ if (s15_elastic_demand = 1 AND m_year(t) > sm_fix_SSP2,
   if ((sum(current_iter15,p15_convergence_measure(t,current_iter15)) > s15_convergence and p15_iteration_counter(t) <= s15_maxiter),
 
         display "convergence between MAgPIE and Food Demand Model not yet reached";
+        display "starting magpie in iteration number ", p15_iteration_counter;
         sm_intersolve=0;
 
 * saving regression outcome for postprocessing
@@ -378,7 +379,9 @@ p15_kcal_pc_calibrated(t,i,kfo) = p15_kcal_pc_calibrated_orig(t,i,kfo) * (1-i15_
       display "Warning: convergence between MAgPIE and Food Demand Model not reached after ",p15_iteration_counter," iterations. Continue to next time step!";
   else
        sm_intersolve=1;
-       display "Success: convergence between MAgPIE and Food Demand Model reached after ",p15_iteration_counter," iterations";
+       display "Success: convergence between MAgPIE and Food Demand Model reached."
+       display "requiring ",p15_iteration_counter," runs of food demand model ";
+       display "and ", p15_iteration_counter-1, " runs with MAgPIE.";
 * set back convergence indicators for next timestep
   );
 

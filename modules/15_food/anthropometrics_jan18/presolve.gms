@@ -220,6 +220,10 @@ vm_dem_food.fx(i,knf)=0;
 
 p15_iteration_counter(t) = 1;
 
+* activating the first iteration
+current_iter15(iter15) = no;
+current_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)) = yes;
+
 display "starting demand model for initialisation run....";
 
 

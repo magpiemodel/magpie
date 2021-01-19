@@ -104,9 +104,3 @@ i15_livestock_fadeout_threshold(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_f
 i15_prices_initial_kcal(iso,kfo)$(f15_nutrition_attributes("y1995",kfo,"kcal")>0) = f15_prices_initial(kfo)
                                                                                   / (f15_nutrition_attributes("y1995",kfo,"kcal")*10**6);
 p15_prices_kcal(t,iso,kfo,"iter1")=i15_prices_initial_kcal(iso,kfo);
-
-* activating the first iteration
-current_iter15(iter15) = no;
-current_iter15(iter15)$(ord(iter15)=1) = yes;
-p15_delta_income(t,i,iter15) = NA;
-p15_delta_income(t,i,"iter1") = 1;
