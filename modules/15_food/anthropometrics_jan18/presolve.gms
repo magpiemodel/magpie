@@ -223,6 +223,7 @@ p15_iteration_counter(t) = 1;
 * activating the first iteration
 current_iter15(iter15) = no;
 current_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)) = yes;
+p15_delta_income(t,i,current_iter15) = 1;
 
 display "starting demand model for initialisation run....";
 
