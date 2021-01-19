@@ -19,3 +19,5 @@ vm_dem_seed,input, not needed
 vm_land,input,questionnaire
 sm_fix_SSP2, input, not used
 im_pop_iso, input, not used
+vm_nr_eff,input,not needed
+vm_nr_eff_pasture,input,not needed
