@@ -15,11 +15,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### changed
 - **scripts** Updated AgMIP output scripts.
+- **35_natveg** Fader for HalfEarth protection policy
+- **12_interest_rate** Interest fader changed to csv
+- **tests** Replaced TravisCI with GithubActions
 
 ### removed
 
 ### fixed
 - **32_forestry** Bugfixes for "ac_est" and carbon treshold afforestation; removed plantations from "vm_cdr_aff".
+- **core** bugfix m_fillmissingyears macro; was running over t before; now running over t_all_
 
 ## [4.3.1] - 2020-11-03
 

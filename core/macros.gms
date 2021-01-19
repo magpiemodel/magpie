@@ -64,11 +64,11 @@ $macro m_annuity_costs_update(past_costs, cost_annuity, invest_horizon) past_cos
 * fill empty years with values from previous time step
 * input = name of input parameter
 * sets = all sets except of t_all written in quotes (e.g. "kve,w")
-$macro m_fillmissingyears(input,sets) loop(t, \
-          ct(t) = yes;     \
-          if(sum((ct,&&sets),input(ct,&&sets))=0,    \
-            input(t,&&sets) = input(t-1,&&sets);    \
-            display "Data gap in input filled with data from previous time step for the following year: ",ct;    \
+$macro m_fillmissingyears(input,sets) loop(t_all, \
+          ct_all(t_all) = yes;     \
+          if(sum((ct_all,&&sets),input(ct_all,&&sets))=0,    \
+            input(t_all,&&sets) = input(t_all-1,&&sets);    \
+            display "Data gap in input filled with data from previous time step for the following year: ",ct_all;    \
           ); \
-          ct(t) = no;    \
+          ct_all(t_all) = no;    \
        );
