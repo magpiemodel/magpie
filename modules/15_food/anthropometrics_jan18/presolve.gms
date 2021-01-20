@@ -218,11 +218,14 @@ vm_dem_food.fx(i,knf)=0;
 
 *** Food demand model is calculated the first time for the current time step, using standard prices
 
+* activating the first iteration
 p15_iteration_counter(t) = 1;
 
-* activating the first iteration
+* The set current_iter15 includes only one element with the set element
+* of the current iteration, e.g. "iter2"
 current_iter15(iter15) = no;
 current_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)) = yes;
+
 p15_delta_income(t,i,current_iter15) = 1;
 
 display "starting demand model for initialisation run....";

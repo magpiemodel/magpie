@@ -24,10 +24,13 @@ else
     p15_prices_kcal(t,iso,kfo,current_iter15)=sum(i_to_iso(i,iso), q15_food_demand.m(i,kfo));
 );
 
-
+* A new iteration is started
 p15_iteration_counter(t) = p15_iteration_counter(t) + 1;
+* The set current iter includes only one element with the set element 
+* of the current iteration, e.g. "iter2"
 current_iter15(iter15) = no;
 current_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)) = yes;
+* Now we also define a set for the last iteration
 last_iter15(iter15) = no;
 last_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)-1) = yes;
 
@@ -286,12 +289,12 @@ if(s15_exo_waste = 1,
 * "Downwards convergence" of regional calorie oversupply due to food waste to the
 * waste reduction target, i.e. only for values that are higher than the target:
 
-p15_demand2intake_ratio_scen(t,i)$(p15_demand2intake_ratio(t,i) > s15_waste_scen )
+    p15_demand2intake_ratio_scen(t,i)$(p15_demand2intake_ratio(t,i) > s15_waste_scen )
                     = p15_demand2intake_ratio(t,i)*(1-i15_exo_foodscen_fader(t,i))
                       + s15_waste_scen*i15_exo_foodscen_fader(t,i);
 
-p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
-p15_kcal_pc_calibrated(t,i,kfo)$(p15_demand2intake_ratio(t,i) >0 ) = p15_kcal_pc_calibrated_orig(t,i,kfo)*(
+    p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
+    p15_kcal_pc_calibrated(t,i,kfo)$(p15_demand2intake_ratio(t,i) >0 ) = p15_kcal_pc_calibrated_orig(t,i,kfo)*(
                       p15_demand2intake_ratio_scen(t,i)/p15_demand2intake_ratio(t,i) );
 
 );
@@ -322,18 +325,18 @@ if(s15_exo_diet = 1,
 
 * Food-specific calorie intake of the model-internal diet projections is
 * estimated from daily per capita food calorie demand:
-p15_intake_detailed_regr(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo)
-	 	/(f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)*p15_foodwaste_growth(t,i));
+  p15_intake_detailed_regr(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo)
+	 	 /(f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)*p15_foodwaste_growth(t,i));
 
 
 * Via 's15_alc_scen' a maximum target for alcohol consumption is defined.
-if(s15_alc_scen>0,
-i15_intake_detailed_scen_target(t,i,"alcohol") = p15_intake_detailed_regr(t,i,"alcohol");
-i15_intake_detailed_scen_target(t,i,"alcohol")$(i15_intake_detailed_scen_target(t,i,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,i))
-	= s15_alc_scen*i15_intake_scen_target(t,i);
-);
+  if(s15_alc_scen>0,
+    i15_intake_detailed_scen_target(t,i,"alcohol") = p15_intake_detailed_regr(t,i,"alcohol");
+    i15_intake_detailed_scen_target(t,i,"alcohol")$(i15_intake_detailed_scen_target(t,i,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,i))
+	   = s15_alc_scen*i15_intake_scen_target(t,i);
+     );
 
-i15_intake_detailed_scen_target(t,i,EAT_staples) = (
+  i15_intake_detailed_scen_target(t,i,EAT_staples) = (
           i15_intake_scen_target(t,i) - sum(EAT_nonstaples,i15_intake_EATLancet(i,EAT_nonstaples)) )*(
           i15_intake_EATLancet(i,EAT_staples)/sum(EAT_staples2,i15_intake_EATLancet(i,EAT_staples2)) );
 
@@ -349,7 +352,7 @@ i15_intake_detailed_scen_target(t,i,EAT_staples) = (
 * based estimates for food calorie oversupply are here used as waste scenario:
 
 
-i15_kcal_pc_scen_target(t,i,kfo) = (f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)
+    i15_kcal_pc_scen_target(t,i,kfo) = (f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)
                                     *i15_intake_detailed_scen_target(t,i,kfo))
                                     *p15_foodwaste_growth(t,i);
 
@@ -357,8 +360,8 @@ i15_kcal_pc_scen_target(t,i,kfo) = (f15_calib_fsupply(i)*f15_overcons_FAOwaste(i
 *' is faded into the exogenous diet scenario according to a predefined spped of
 *' convergence:
 
-p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
-p15_kcal_pc_calibrated(t,i,kfo) = p15_kcal_pc_calibrated_orig(t,i,kfo) * (1-i15_exo_foodscen_fader(t,i))
+    p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
+    p15_kcal_pc_calibrated(t,i,kfo) = p15_kcal_pc_calibrated_orig(t,i,kfo) * (1-i15_exo_foodscen_fader(t,i))
                         + i15_kcal_pc_scen_target(t,i,kfo) * i15_exo_foodscen_fader(t,i);
 
 
