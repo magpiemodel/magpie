@@ -25,7 +25,7 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "DEC63"
 
-cat(paste0("Eual dist run. No wildfire"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Eual dist run. Only shift fire"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry","nocc")){
@@ -64,7 +64,7 @@ for(scen in c("forestry","nocc")){
     if(cfg$gms$s35_secdf_distribution == 2) dist_flag = "Poulter"
 
     if(cfg$gms$s35_forest_damage == 0) damage_flg = "None"
-    if(cfg$gms$s35_forest_damage == 1) damage_flg = "Wildfire"
+    if(cfg$gms$s35_forest_damage == 1) damage_flg = "Shifting"
     if(cfg$gms$s35_forest_damage == 2) damage_flg = "Combined"
 
     if(scen=="nocc") scen_flag="Default"
