@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC62"
+identifier_flag = "DEC63"
 
-cat(paste0("Aff bugfix"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Eual dist run. No wildfire"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry","nocc")){
@@ -70,7 +70,7 @@ for(scen in c("forestry","nocc")){
     if(scen=="nocc") scen_flag="Default"
     if(scen=="forestry") scen_flag="Forestry"
 
-    cfg$title   = paste0(identifier_flag,"_",scen_flag)
+    cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",init_flag,"_",dist_flag,"_",damage_flg)
     cfg$output  = c("extra/timestep_duration")
 
      xx = c(xx,cfg$title)
