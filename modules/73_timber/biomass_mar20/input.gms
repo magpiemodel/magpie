@@ -19,7 +19,7 @@ scalars
   s73_increase_ceiling      Limiter for not allowing a demand jump between time steps beyond a certain limit (1) /1.05/
 ;
 
-table f73_prod_specific_timber(t_past_forestry,iso,total_wood_products) End use timber product demand (mio. m3 per yr)
+table f73_prod_specific_timber(t_all,iso,total_wood_products) End use timber product demand (mio. m3 per yr)
 $ondelim
 $include "./modules/73_timber/input/f73_prod_specific_timber.csv"
 $offdelim

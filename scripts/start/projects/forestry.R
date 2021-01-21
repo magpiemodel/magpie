@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC64a"
+identifier_flag = "DEC64b"
 
-cat(paste0("Cleanup for harvesting costs and cheaper multiplier. Other land harvest cheaper"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Updated scenario for plantation estb h2s1l05"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry")){
