@@ -149,27 +149,32 @@ ini32(j,ac) = yes$(ord(ac) > 1 AND ac.off <= p32_rotation_cellular_harvesting("y
 ** divide initial forestry area by number of age classes within ini32
 if(s32_initial_distribution = 0,
 ** Initialize with highest age class
-  p32_land(t,j,"plant","acx") = pcm_land(j,"forestry");
+  p32_land(t,j,"plant","acx") = pcm_land(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
+  p32_land(t,j,"ndc","acx")   = pcm_land(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i));
 
 elseif s32_initial_distribution = 1,
 ** Initialize with equal distribution among rotation age classes
   if(s32_distribution_type = 0,
-    p32_plant_ini_ac(j) = pm_land_start(j,"forestry")/p32_rotation_cellular_harvesting("y1995",j);
+    p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
     p32_land("y1995",j,"plant",ac)$(ini32(j,ac)) = p32_plant_ini_ac(j);
+    p32_land("y1995",j,"ndc",ac)$(ini32(j,ac))   = pm_land_start(j,"forestry") * sum(cell(i,j),1- f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
     );
   if(s32_distribution_type = 1,
-    p32_plant_ini_ac(j) = pm_land_start(j,"forestry");
+    p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
     p32_land("y1995",j,"plant",ac) = p32_plant_ini_ac(j) * f32_ac_dist(ac);
+    p32_land("y1995",j,"ndc",ac)   = pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i)) * f32_ac_dist(ac);
     );
   if(s32_distribution_type = 2,
-    p32_plant_ini_ac(j) = pm_land_start(j,"forestry");
+    p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
     p32_rotation_dist(j,ac) =  (im_plantedclass_ac(j,ac)$(ini32(j,ac))/sum(ac2,im_plantedclass_ac(j,ac2)$(ini32(j,ac2))))$(sum(ac2,im_plantedclass_ac(j,ac2)$(ini32(j,ac2))));
     p32_land("y1995",j,"plant",ac)$(ini32(j,ac)) = p32_plant_ini_ac(j) * p32_rotation_dist(j,ac);
+    p32_land("y1995",j,"ndc",ac)$(ini32(j,ac))   = pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i)) * p32_rotation_dist(j,ac);
 
 *use residual approach to avoid distributional errors i.e., poulter set with no plantations but luh reporting plantations in a cell
     loop (j,
       if(sum(ac,p32_land("y1995",j,"plant",ac)$(ini32(j,ac))) = 0,
-      p32_land("y1995",j,"plant",ac)$(ini32(j,ac)) =  pm_land_start(j,"forestry")/p32_rotation_cellular_harvesting("y1995",j);
+      p32_land("y1995",j,"plant",ac)$(ini32(j,ac)) =  pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
+      p32_land("y1995",j,"ndc",ac)$(ini32(j,ac))   =  pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
        );
     );
     );
@@ -199,9 +204,10 @@ else
 ** Calibrate plantations yields
 *******************************************************************************
 
-p32_observed_gs_reg(i)  = sum((cell(i,j),ac),pm_timber_yield_initial(j,ac,"forestry") * p32_land_start_ac(j,"plant",ac))/ sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac));
-p32_gs_scaling_reg(i) = f32_gs_relativetarget(i) * s32_wood_density / p32_observed_gs_reg(i);
+p32_observed_gs_reg(i)  = (sum((cell(i,j),ac),(pm_timber_yield_initial(j,ac,"forestry") / s32_wood_density) * p32_land_start_ac(j,"plant",ac))/ sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac)))$(sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac))>0) + 1;
+p32_gs_scaling_reg(i) = f32_gs_relativetarget(i) / p32_observed_gs_reg(i);
 *p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i)>10) = 10;
+display p32_land_start_ac,p32_gs_scaling_reg;
 
 ** Update c-densitiy
 pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * sum(cell(i,j),p32_gs_scaling_reg(i));

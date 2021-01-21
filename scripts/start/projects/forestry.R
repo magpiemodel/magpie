@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC63"
+identifier_flag = "DEC64"
 
-cat(paste0("Eual dist run. Only shift fire"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("NDC as other plantations init, activate shiting agri fire. Activate poulter dist in secdf"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry","nocc")){

@@ -17,7 +17,7 @@ else
  	pc35_other(j,ac) = p35_other(t-1,j,ac);
 );
 
-* Shift ageclasses due to forest fires, first calculate damages
+* Shift ageclasses due to shifting agriculture fires, first calculate damages
 if(s35_forest_damage=1,
 	p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry;
 	p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry;
