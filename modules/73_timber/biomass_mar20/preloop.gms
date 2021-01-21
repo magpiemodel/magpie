@@ -5,14 +5,17 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-** Set multiplier values for cost of harvesting from natural vegetation
-p73_cost_multiplier(land_natveg) = s73_cost_multiplier;
-** Primary forests are made more expensive to harvest due to need for
-** specialized machinery and labor and difficulty in reaching inaccessible areas
-p73_cost_multiplier("primforest") = s73_cost_multiplier*s73_cost_multiplier;
-
 ** Set historical values to FAO values
 p73_forestry_demand_prod_specific(t_past_forestry,iso,total_wood_products) = f73_prod_specific_timber(t_past_forestry,iso,total_wood_products);
+
+** Harvesting Costs
+** Set multiplier values for cost of harvesting
+p73_timber_harvest_cost(t,j,ac,"forestry")    = s73_timber_harvest_cost;
+** Natural vegetation are made more expensive to harvest due to need for
+** specialized machinery and labor and difficulty in reaching inaccessible areas
+p73_timber_harvest_cost(t,j,ac,"secdforest")  = s73_timber_harvest_cost * s73_cost_multiplier;
+p73_timber_harvest_cost(t,j,ac,"other")       = s73_timber_harvest_cost / 2;
+p73_timber_harvest_cost(t,j,ac,"primforest")  = s73_timber_harvest_cost * s73_cost_multiplier * s73_cost_multiplier;
 
 ** Loop over time to calculate future demand
 ** Calculations based on Lauri et al. 2019

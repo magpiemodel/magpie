@@ -9,10 +9,6 @@
 *p73_timber_harvest_cost(t,j,ac,forest_land) = (pm_timber_yield(t,j,ac,forest_land)/pm_timber_yield(t,j,"acx",forest_land)) * s73_timber_harvest_cost;
 *p73_timber_harvest_cost(t,j,ac,forest_land)$(ord(ac) <= 5) = p73_timber_harvest_cost(t,j,"ac20",forest_land)
 *p73_timber_harvest_cost(t,j,ac,"forestry") = 0;
-p73_timber_harvest_cost(t,j,ac,"forestry")    = s73_timber_harvest_cost;
-p73_timber_harvest_cost(t,j,ac,"secdforest")  = s73_timber_harvest_cost * s73_cost_multiplier;
-p73_timber_harvest_cost(t,j,ac,"other")       = s73_timber_harvest_cost * s73_cost_multiplier;
-p73_timber_harvest_cost(t,j,ac,"primforest")  = s73_timber_harvest_cost * s73_cost_multiplier * s73_cost_multiplier;
 
 ** Fixing variables
 v73_prod_natveg.fx(j,"other",ac,"wood") = 0;
