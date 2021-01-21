@@ -28,7 +28,7 @@ identifier_flag = "DEC64a"
 cat(paste0("Cleanup for harvesting costs and cheaper multiplier. Other land harvest cheaper"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
-for(scen in c("forestry","nocc")){
+for(scen in c("forestry")){
 
   for(ssp in c("SSP2")){
 
