@@ -70,7 +70,7 @@ for(scen in c("forestry","nocc")){
     if(scen=="nocc") scen_flag="Default"
     if(scen=="forestry") scen_flag="Forestry"
 
-    cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",init_flag,"_",dist_flag,"_",damage_flg)
+    cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",dist_flag,"_",damage_flg)
     cfg$output  = c("extra/timestep_duration")
 
      xx = c(xx,cfg$title)
