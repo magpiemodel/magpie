@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "DEC64b"
+identifier_flag = "DEC65"
 
-cat(paste0("Updated scenario for plantation estb h2s1l05"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("revert back additional scen"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry")){
@@ -70,7 +70,7 @@ for(scen in c("forestry")){
     if(scen=="nocc") scen_flag="Default"
     if(scen=="forestry") scen_flag="Forestry"
 
-    cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",dist_flag,"_",damage_flg)
+    cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",dist_flag)
     cfg$output  = c("extra/timestep_duration")
 
      xx = c(xx,cfg$title)
@@ -80,6 +80,57 @@ for(scen in c("forestry")){
 #########################################################################################
 
 #### COPY FROM ABOV FIRST #####
+
+for(scen in c("nocc")){
+
+  for(ssp in c("SSP2")){
+
+    source("config/default.cfg")
+
+    cfg$gms$s80_maxiter = 5
+    cfg$results_folder = "output/:title:"
+    cfg$recalc_npi_ndc = "ifneeded"
+    cfg = setScenario(cfg,c(ssp,scen))
+
+      for(s35_secdf_distribution in c(0,2)){
+      cfg$gms$s35_secdf_distribution <- s35_secdf_distribution
+
+      if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
+      if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
+
+      cfg$gms$c57_macc_version = "PBL_2019"
+      cfg$gms$c60_biodem_level <- 0
+
+
+      if(cfg$gms$sm_timber_demand_switch == 1) timber_flag = "timberON"
+      if(cfg$gms$sm_timber_demand_switch == 0) timber_flag = "timberOFF"
+
+      if(cfg$gms$s32_fix_plant == 0) plant_area_flag = "Baseline"
+      if(cfg$gms$s32_fix_plant == 1) plant_area_flag = "Constrained"
+
+      if(cfg$gms$s32_distribution_type == 0) init_flag = "Equal"
+      if(cfg$gms$s32_distribution_type == 1) init_flag = "FAO"
+      if(cfg$gms$s32_distribution_type == 2) init_flag = "Poulter"
+
+      if(cfg$gms$s35_secdf_distribution == 0) dist_flag = "ACx"
+      if(cfg$gms$s35_secdf_distribution == 1) dist_flag = "Equal"
+      if(cfg$gms$s35_secdf_distribution == 2) dist_flag = "Poulter"
+
+      if(cfg$gms$s35_forest_damage == 0) damage_flg = "None"
+      if(cfg$gms$s35_forest_damage == 1) damage_flg = "Shifting"
+      if(cfg$gms$s35_forest_damage == 2) damage_flg = "Combined"
+
+      if(scen=="nocc") scen_flag="Default"
+      if(scen=="forestry") scen_flag="Forestry"
+
+      cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",dist_flag)
+      cfg$output  = c("extra/timestep_duration")
+
+       xx = c(xx,cfg$title)
+       start_run(cfg,codeCheck=FALSE)
+    }
+  }
+}
 
 #          cfg$gms$c56_pollutant_prices = "coupling"
 #          cfg$gms$c60_2ndgen_biodem = "coupling"

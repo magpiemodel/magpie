@@ -12,7 +12,7 @@
 
 #Version 1.00 - Abhijeet Mishra
 # 1.00: first working version [AM]
-# 1.xx: Description [Initials]
+# 1.10: Bugfix to calculate all times in single units [AM]
 
 library(magpie4)
 library(magpiesets)
