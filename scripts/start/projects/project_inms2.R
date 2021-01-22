@@ -70,7 +70,7 @@ cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$force_download <- TRUE
 #cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
-#calib<-magpie4::submitCalibration(name = "INMS_v5")
+calib<-magpie4::submitCalibration(name = "INMS_v5")
 
 #calib<-"calibration_calibration_inms_may2020_09Jul20.tgz"
 
