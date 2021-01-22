@@ -27,7 +27,7 @@ buildInputVector <- function(regionmapping   = "agmip",
                              madrat_rev      = "4.57",
                              validation_rev  = "4.57",
                              calibration     = "calibration_inms_c200_Jan2021.tgz",
-                             additional_data = "additional_data_rev3.85.tgz") {
+                             additional_data = "additional_data_rev3.92.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
                 mag="c30c1c580039c2b300d86cc46ff4036a",
@@ -40,6 +40,8 @@ buildInputVector <- function(regionmapping   = "agmip",
   validation  <- paste0("rev",validation_rev,"_", mappings[regionmapping], "_validation", ".tgz")
   return(c(archive,madrat,validation,calibration,additional_data))
 }
+
+
 
 ### General settings ###
 general_settings<-function(title) {
@@ -67,7 +69,7 @@ cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$force_download <- TRUE
 cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
-calib<-magpie4::submitCalibration(name = "calibration_inms_c200_Jan2021")
+calib<-magpie4::submitCalibration(name = "calibration_H12_c200_26Feb20")
 
 #calib<-"calibration_calibration_inms_may2020_09Jul20.tgz"
 
