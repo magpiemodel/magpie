@@ -13,6 +13,9 @@
 *' as well as leached NO3 later result in indirect emissions of N2O when they are redeposited,
 *' nitrified and dinitrified.
 *'
+*' Emissions are rescaled using the nitrogen uptake efficiency. This is done to keep consistency
+*' of emissions with nitrogen surplus and take account for improved emission factors when NUE increases.
+*'
 *' Manure applied to croplands:
  q51_emissions_man_crop(i2,n_pollutants_direct)..
                  vm_btm_reg(i2,"man_crop",n_pollutants_direct)
