@@ -26,7 +26,7 @@ buildInputVector <- function(regionmapping   = "agmip",
                              archive_rev     = "52",
                              madrat_rev      = "4.57",
                              validation_rev  = "4.57",
-                             calibration     = "calibration_inms_c200_08Jul2020.tgz",
+                             calibration     = "calibration_inms_c200_jan2021.tgz",
                              additional_data = "additional_data_rev3.85.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
@@ -51,7 +51,7 @@ general_settings<-function(title) {
   cfg$gms$factor_costs <- "sticky_feb18"
   cfg$gms$s15_elastic_demand <- 0
   cfg$gms$nitrogen <- "rescaled_jan21"
-  cfg$title <- paste0("inms_",title,"_v4")
+  cfg$title <- paste0("inms_",title,"_v5")
   cfg$recalibrate <- FALSE
   return(cfg)
 }
@@ -67,7 +67,7 @@ cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$force_download <- TRUE
 cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
-calib<-magpie4::submitCalibration(name = "calibration_inms_may2020")
+calib<-magpie4::submitCalibration(name = "calibration_inms_c200_jan2021")
 
 #calib<-"calibration_calibration_inms_may2020_09Jul20.tgz"
 
