@@ -11,14 +11,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### added
 - **15_food** Added the option to fade out livestock demand towards a target level in kcal/cap/day.
 - **35_natveg** Added HalfEarth scenario to protection scenarios
-- **scripts** Updated AgMIP output scripts.
-- **scripts** MAgPIE2GAINS output script INMS project
+- **56_ghg_policy** Added new scenario to emission policy
 
 ### changed
+- **scripts** Updated AgMIP output scripts.
+- **35_natveg** Fader for HalfEarth protection policy
+- **12_interest_rate** Interest fader changed to csv
+- **tests** Replaced TravisCI with GithubActions
 
 ### removed
 
 ### fixed
+- **32_forestry** Bugfixes for "ac_est" and carbon treshold afforestation; removed plantations from "vm_cdr_aff".
+- **core** bugfix m_fillmissingyears macro; was running over t before; now running over t_all_
 
 ## [4.3.1] - 2020-11-03
 

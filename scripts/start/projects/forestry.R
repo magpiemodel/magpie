@@ -91,8 +91,6 @@ for(s73_foresight in c(0)){
         for(emis_policy in c("redd+_nosoil")){
 
           for(ssp in c("SSP1","SSP2","SSP3")){
-            if(emis_policy == "redd+_nosoil") cfg$gms$s32_plant_carbon_foresight = 1
-            if(emis_policy == "ssp_nosoil")   cfg$gms$s32_plant_carbon_foresight = 0
 
             cfg                           = setScenario(cfg,c(ssp,"NPI"))
             cfg$gms$c56_emis_policy       = emis_policy
