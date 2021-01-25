@@ -68,9 +68,3 @@ files <- file.path(paste0(outputpath, c("NitrogenBudgetNonagland",
                                         "NitrogenExcretion"), ".nc"))
 
 lapply(X=files, FUN=nc2gains, check=TRUE)
-
-
-
-
-
-

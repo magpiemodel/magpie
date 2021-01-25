@@ -6,10 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [Unreleased] 
+## [Unreleased]
 
 ### added
- - MAgPIE2GAINS output script to convert magpie files into nc and csv's with GAINS regional mapping - through INSM project
+- **15_food** Added the option to fade out livestock demand towards a target level in kcal/cap/day.
+- **35_natveg** Added HalfEarth scenario to protection scenarios
+- **scripts** Updated AgMIP output scripts.
+- **scripts** MAgPIE2GAINS output script INMS project
 
 ### changed
 
