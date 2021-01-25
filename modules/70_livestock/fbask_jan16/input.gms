@@ -19,7 +19,6 @@ $setglobal c70_soybean_scen  constant
 
 scalars
   s70_pyld_intercept     Intercept of linear relationship determining pasture intensification (1)        / 0.24 /
-  s70_scp_feed			 scp as feed on (1) or off (0)													/ 0 /	
 ;
 
 table f70_feed_baskets(t_all,i,kap,kall,feed_scen70) Feed baskets in tDM per tDM livestock product (1)
