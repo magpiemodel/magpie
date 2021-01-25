@@ -104,8 +104,10 @@ i15_fish_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitutio
 i15_alcohol_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_alcscen%"));
 i15_livestock_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_livescen%"));
 i15_rumdairy_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_rumdairyscen%"));
+i15_rumdairy_scp_fadeout(t,i) = (1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_rumdairy_scp_scen%")))*im_development_state(t,i);
 i15_livestock_fadeout_threshold(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_livescen_target%"));
 
+$ontext
 i15_kap_fadeout(t_all,i)$(m_year(t_all) <= 2020) = 1;
 i15_kap_fadeout("y2025",i) = 0.9;
 i15_kap_fadeout("y2030",i) = 0.75;
@@ -115,3 +117,4 @@ i15_kap_fadeout("y2045",i) = 0.25;
 i15_kap_fadeout(t_all,i)$(m_year(t_all) >= 2050) = 0.20;
 
 i15_kap_fadeout(t_all,i) = i15_kap_fadeout(t_all,i) * im_development_state(t_all,i);
+$offtext

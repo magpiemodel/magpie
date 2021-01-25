@@ -16,26 +16,46 @@ loop(t_all,
  );
 );
 
-i70_feed_fadeout(t_all)$(m_year(t_all) <= 2020) = 1;
-i70_feed_fadeout("y2025") = 0.9;
-i70_feed_fadeout("y2030") = 0.75;
-i70_feed_fadeout("y2035") = 0.5;
-i70_feed_fadeout("y2040") = 0.35;
-i70_feed_fadeout("y2045") = 0.25;
-i70_feed_fadeout(t_all)$(m_year(t_all) >= 2050) = 0.2;
 
-loop(t_all$(m_year(t_all) > 2020),
-if(s70_scp_feed = 1,
+* Switch to determine countries for which feed substitution scenarios shall be applied.
+* In the default case, the food scenario affects all countries when activated.
+p70_country_dummy(iso) = 0;
+p70_country_dummy(scen_countries70) = 1;
+
+
+* Because MAgPIE is not run at country-level, but at region level, a region
+* share is calculated that translates the countries' influence to regional level.
+* Countries are weighted by their population size.
+p70_feedscen_region_shr(t_all,i) = sum(i_to_iso(i,iso), p70_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
+
+* Feed substitution scenarios including functional forms, targets and transition periods
+* Note: p70_feedscen_region_shr(t,i) is 1 in the default case)
+i70_all_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*(1-f70_feed_substitution_fader(t_all,"%c70_all_scen%"));
+i70_soybean_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*(1-f70_feed_substitution_fader(t_all,"%c70_soybean_scen%"));
+
+*** Substitution of all feed commodities with single-cell protein (SCP)
 *convert from DM to Nr
 im_feed_baskets(t_all,i,kap,kall70) = im_feed_baskets(t_all,i,kap,kall70)*fm_attributes("nr",kall70);
 im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")*fm_attributes("nr","scp");
 *replace feed with SCP based on Nr
 im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")
-             + sum(kall70, im_feed_baskets(t_all,i,kap,kall70) * (1-i70_feed_fadeout(t_all)));
+             + sum(kall70, im_feed_baskets(t_all,i,kap,kall70) * (1-i70_all_fadeout(t_all,i)));
 im_feed_baskets(t_all,i,kap,kall70) =
-               im_feed_baskets(t_all,i,kap,kall70) * i70_feed_fadeout(t_all);
+               im_feed_baskets(t_all,i,kap,kall70) * i70_all_fadeout(t_all,i);
 *convert back from Nr to DM
 im_feed_baskets(t_all,i,kap,kall70) = im_feed_baskets(t_all,i,kap,kall70)/fm_attributes("nr",kall70);
 im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")/fm_attributes("nr","scp");
-);
-);
+
+*** Substitution of soybean feed with single-cell protein (SCP)
+*convert from DM to Nr
+im_feed_baskets(t_all,i,kap,"soybean") = im_feed_baskets(t_all,i,kap,"soybean")*fm_attributes("nr","soybean");
+im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")*fm_attributes("nr","scp");
+*replace feed with SCP based on Nr
+im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")
+             + im_feed_baskets(t_all,i,kap,"soybean") * (1-i70_soybean_fadeout(t_all,i));
+im_feed_baskets(t_all,i,kap,"soybean") =
+               im_feed_baskets(t_all,i,kap,"soybean") * i70_soybean_fadeout(t_all,i);
+*convert back from Nr to DM
+im_feed_baskets(t_all,i,kap,"soybean") = im_feed_baskets(t_all,i,kap,"soybean")/fm_attributes("nr","soybean");
+im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")/fm_attributes("nr","scp");
+

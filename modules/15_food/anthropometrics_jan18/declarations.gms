@@ -107,6 +107,7 @@ parameters
   i15_alcohol_fadeout(t,i)                         Alcohol fadeout share (1)
   i15_livestock_fadeout(t,i)                       Livestock fadeout share (1)
   i15_rumdairy_fadeout(t,i)                        Ruminant meat and dairy fadeout share (1)
+  i15_rumdairy_scp_fadeout(t,i)                    Ruminant meat and dairy fadeout share to be replaced by SCP (1)
   i15_livestock_fadeout_threshold(t,i)             Livestock fadeout share for threshold (1)
 
  i15_staples_kcal_structure_iso(t,iso,kfo_st)        Share of single staple products within total staples (1)
@@ -168,7 +169,6 @@ parameters
  p15_delta_income(t,i)                       Regional change in per capita income due to price shock on regional level (1)
  p15_lastiteration_delta_income(t,i)         Regional change in per capita income due to price shock of last iteration (1)
 
- i15_kap_fadeout(t_all,i)				     Fade out of kap in exchange for scp (1)
  i15_kcal_pc_to_protein_pc(t,kfo)			 Conversion factor (1)
 ;
 
