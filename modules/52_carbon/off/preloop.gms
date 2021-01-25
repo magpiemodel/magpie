@@ -7,3 +7,4 @@
 
 pm_carbon_density_ac(t,j,ac,c_pools) = 0;
 pm_carbon_density_ac_forestry(t,j,ac,c_pools) = 0;
+pm_investment_layer(t_all,j) = 0;

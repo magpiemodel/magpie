@@ -5,12 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-** Change rotation based on switch. If not use calculation before faustmann
+* initialize secdforest area depending on switch.
 if(s35_secdf_distribution = 0,
   i35_secdforest(j,"acx") = pcm_land(j,"secdforest");
-
-  elseif s35_secdf_distribution = 1,
-  i35_secdforest(j,ac) = pcm_land(j,"secdforest")/card(ac);
+elseif s35_secdf_distribution = 1,
+* ac0 is excluded here. Therefore no initial shifting is needed.
+  i35_secdforest(j,ac)$(not sameas(ac,"ac0")) = pcm_land(j,"secdforest")/(card(ac)-1);
 );
 
 *use residual approach to avoid rounding errors

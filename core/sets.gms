@@ -182,7 +182,9 @@ $If "%c_timesteps%"== "TS_benni" /y1995,y2000,y2005,y2010,y2020,y2030,y2040,y205
 $If "%c_timesteps%"== "TS_WB" /y1995,y2000,y2005,y2010,y2020,y2030,y2040,y2050,y2060,y2070,y2080/;
 $If "%c_timesteps%"== "5year" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2065,y2070,y2075,y2080,y2085,y2090,y2095,y2100/;
 $If "%c_timesteps%"== "5year2050" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050/;
+$If "%c_timesteps%"== "5year2070" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2065,y2070/;
 $If "%c_timesteps%"== "quicktest" /y1995,y2010,y2025/;
+$If "%c_timesteps%"== "quicktest2" /y1995,y2020,y2050,y2100/;
 $If "%c_timesteps%"== "1" /y1995/;
 $If "%c_timesteps%"== "2" /y1995,y2000/;
 $If "%c_timesteps%"== "3" /y1995,y2000,y2010/;
@@ -203,6 +205,7 @@ $If "%c_timesteps%"=="17" /y1995,y2000,y2010,y2020,y2030,y2040,y2050,y2060,y2070
 $If "%c_timesteps%"=="past" /y1965,y1970,y1975,y1980,y1985,y1990,y1995,y2000,y2005,y2010/;
 $If "%c_timesteps%"=="pastandfuture" /y1965,y1970,y1975,y1980,y1985,y1990,y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2065,y2070,y2075,y2080,y2085,y2090,y2095,y2100/;
 set ct(t) Current time period;
+set ct_all(t_all) Current time period for loops over t_all;
 
 alias(t,t2);
 
@@ -253,7 +256,8 @@ sets
 ***Forestry**
    ac Age classes  / ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
                     ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,ac95,ac100,
-                    ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,acx /
+                    ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,
+                    ac150,ac155,acx /
 
   ac_est(ac) Dynamic subset of age classes for establishment
 

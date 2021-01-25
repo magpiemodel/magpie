@@ -5,12 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description This realization relates factor costs to volume of production of
-*' a given crop. The latter [17_production] depends on area harvested
-*' from [30_crop] and yields from [14_yields]. In other words, in this
-*' implementation, factor costs entirely depend on the volume of production.
-*' As such, there are no incentives to allocate and concentrate production
-*' into more productive cells.
+*' @description The main goal of this realization is to improve crop patterns at different spatial
+*' scales. Specifically, the goal is reached by reducing capital relocation flexibility between
+*' crop types. In the "sticky" realization, the factor costs are separated into variable and
+*' capital investment costs. Then, capital is furtherly divided into immobile and mobile, where
+*' mobility is defined between crops. In this way, changes in cropland are favored in locations
+*' with existing capital stocks.
 
 *' @limitations This realization assumes that factor costs, within a region,
 *' purely depend on the production and are independent of the area under cultivation.

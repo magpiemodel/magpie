@@ -107,6 +107,7 @@ parameters
   i15_alcohol_fadeout(t,i)                         Alcohol fadeout share (1)
   i15_livestock_fadeout(t,i)                       Livestock fadeout share (1)
   i15_rumdairy_fadeout(t,i)                        Ruminant meat and dairy fadeout share (1)
+  i15_livestock_fadeout_threshold(t,i)             Livestock fadeout share for threshold (1)
 
  i15_staples_kcal_structure_iso(t,iso,kfo_st)        Share of single staple products within total staples (1)
  i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap)  Share of single livestock products within total livestock products (uncorrected for future changes in shares) (1)
@@ -137,7 +138,8 @@ parameters
  p15_livestock_kcal_structure_orig(t,i,kfo_lp)   Auxiliary parameter for livestock kcal structure - basis for scenarios of livestock food substitution (1)
  p15_rumdairy_kcal_structure_orig(t,i,kfo_rd)    Auxiliary parameter for ruminant and dairy kcal structure - basis for scenarios of ruminant-based food substitution (1)
  p15_plant_kcal_structure_orig(t,i,kfo_pp)       Auxiliary parameter for plant-based food kcal structure - basis for scenarios of livestock food substitution (1)
-
+ p15_kcal_pc_livestock_supply_target(i)		 	 Target of per capita livestock consumption (kcal per capita per day)
+ 
  p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)     Calibrated estimates of BMI share for population groups  (1)
  p15_intake_total_iso_calibrated(t,iso)                Total food intake in a country (kcal per capita per day)
  p15_intake_total_calibrated(t,i)                      Total regional food intake (kcal per capita per day)
@@ -150,13 +152,17 @@ parameters
  i15_intake_scen_target(t,i)                  Target for total per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
  i15_intake_EATLancet(i,kfo)                  Food-specific per capita calorie intake according to EAT Lancet diet scenario (kcal per capita per day)
  i15_intake_detailed_scen_target(t,i,kfo)     Target for food-specific per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
+ p15_intake_detailed_regr(t,i,kfo)                     Food-specific per capita calorie intake according to regression-based projections (kcal per capita per day)
+
  p15_demand2intake_ratio_ref(i)               Ratio between food calorie demand and intake for the historical time step of EAT Lancet diets (1)
  p15_foodwaste_growth(t,i)                    Increase in food waste over time relative to the historical time step of EAT Lancet diets (1)
  i15_kcal_pc_scen_target(t,i,kfo)             Target for per capita food consumption according to an exogenous diet scenario (kcal per capita per day)
  i15_exo_foodscen_fader(t,i)                  Fader that converges per capita food consumption to an exogenous diet scenario (1)
+
 * country-specific scenario switch
  p15_country_dummy(iso)                       Dummy parameter indicating whether country is affected by diet scenarios (1)
  p15_foodscen_region_shr(t_all,i)             Weighted share of region with regards to diet scenario of countries (1)
+
 * calculate diet iteration breakpoint
  p15_income_pc_real_ppp(t,i)                 Regional per capita income after price shock on regional level (USD05PPP per capita)
  p15_delta_income(t,i)                       Regional change in per capita income due to price shock on regional level (1)

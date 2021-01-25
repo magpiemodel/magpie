@@ -349,7 +349,7 @@ else
 * ###### Food substitution scenarios
 
 
-*' Substitution of ruminant beef with poultry:
+* Substitution of ruminant beef with poultry:
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated(t,i,"livst_rum") =
                p15_kcal_pc_calibrated_orig(t,i,"livst_rum") * i15_ruminant_fadeout(t,i);
@@ -357,7 +357,7 @@ p15_kcal_pc_calibrated(t,i,"livst_chick") = p15_kcal_pc_calibrated_orig(t,i,"liv
              + p15_kcal_pc_calibrated_orig(t,i,"livst_rum") * (1-i15_ruminant_fadeout(t,i));
 
 
-*' Substitution of fish with poultry:
+* Substitution of fish with poultry:
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated(t,i,"fish") =
                p15_kcal_pc_calibrated_orig(t,i,"fish") * i15_fish_fadeout(t,i);
@@ -365,13 +365,13 @@ p15_kcal_pc_calibrated(t,i,"livst_chick") = p15_kcal_pc_calibrated_orig(t,i,"liv
              + p15_kcal_pc_calibrated_orig(t,i,"fish") * (1-i15_fish_fadeout(t,i));
 
 
-*' Fade-out of alcohol consumption without substitution:
+* Fade-out of alcohol consumption without substitution:
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated(t,i,"alcohol") =
                p15_kcal_pc_calibrated_orig(t,i,"alcohol") * i15_alcohol_fadeout(t,i);
 
 
-*' Substitution of livestock products (without fish) with plant-based food commodities:
+* Substitution of livestock products (without fish) with plant-based food commodities:
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated_livestock_orig(t,i) = sum(kfo_lp,p15_kcal_pc_calibrated(t,i,kfo_lp));
 p15_kcal_pc_calibrated_plant_orig(t,i) = sum(kfo_pp,p15_kcal_pc_calibrated(t,i,kfo_pp));
@@ -391,7 +391,7 @@ p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
                + p15_kcal_pc_calibrated_livestock_orig(t,i) * (1-i15_livestock_fadeout(t,i)));
 
 
-*' Substitution of ruminant meat and dairy products with plant-based food commodities:
+* Substitution of ruminant meat and dairy products with plant-based food commodities:
 p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
 p15_kcal_pc_calibrated_rumdairy_orig(t,i) = sum(kfo_rd,p15_kcal_pc_calibrated(t,i,kfo_rd));
 p15_kcal_pc_calibrated_plant_orig(t,i) = sum(kfo_pp,p15_kcal_pc_calibrated(t,i,kfo_pp));
@@ -410,24 +410,31 @@ p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
                *(p15_kcal_pc_calibrated_plant_orig(t,i)
                + p15_kcal_pc_calibrated_rumdairy_orig(t,i) * (1-i15_rumdairy_fadeout(t,i)));
 
-if(s15_scp_food = 1 AND m_year(t) > 2020,
-*conversion factor from kcal/cap/day to g protein/cap/day
-*g protein/cap/day = kcal/cap/day * t DM / mio kcal * t Protein / t DM
-i15_kcal_pc_to_protein_pc(t,kfo) =  1/f15_nutrition_attributes(t,kfo,"kcal") * f15_nutrition_attributes(t,kfo,"protein");
-*convert from kcal/cap/day to t Protein/cap/day
-p15_kcal_pc_calibrated(t,i,kfo_rd) = p15_kcal_pc_calibrated(t,i,kfo_rd) * i15_kcal_pc_to_protein_pc(t,kfo_rd);
-p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp") * i15_kcal_pc_to_protein_pc(t,"scp");
-*replace kfo_rd with scp based on protein/cap/day
-p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp")
-             + sum(kfo_rd, p15_kcal_pc_calibrated(t,i,kfo_rd) * (1-i15_kap_fadeout(t,i)));
-p15_kcal_pc_calibrated(t,i,kfo_rd) =
-               p15_kcal_pc_calibrated(t,i,kfo_rd) * i15_kap_fadeout(t,i);
-*convert back to kcal/cap/day
-p15_kcal_pc_calibrated(t,i,kfo_rd) = p15_kcal_pc_calibrated(t,i,kfo_rd)/i15_kcal_pc_to_protein_pc(t,kfo_rd);
-p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp")/i15_kcal_pc_to_protein_pc(t,"scp");
+* Conditional reduction of livestock products (without fish) depending on s15_kcal_pc_livestock_intake_target.
+* Optional substitution with plant-based products depending on s15_livescen_target_subst.
+p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
+p15_kcal_pc_calibrated_livestock_orig(t,i) = sum(kfo_lp,p15_kcal_pc_calibrated(t,i,kfo_lp));
+p15_kcal_pc_calibrated_plant_orig(t,i) = sum(kfo_pp,p15_kcal_pc_calibrated(t,i,kfo_pp));
 
+p15_livestock_kcal_structure_orig(t,i,kfo_lp)$(p15_kcal_pc_calibrated_livestock_orig(t,i)>0) =
+                               p15_kcal_pc_calibrated(t,i,kfo_lp)
+                               /p15_kcal_pc_calibrated_livestock_orig(t,i);
+
+p15_plant_kcal_structure_orig(t,i,kfo_pp)$(p15_kcal_pc_calibrated_plant_orig(t,i)>0) =
+                               p15_kcal_pc_calibrated(t,i,kfo_pp)
+                               /p15_kcal_pc_calibrated_plant_orig(t,i);
+
+p15_kcal_pc_livestock_supply_target(i) = s15_kcal_pc_livestock_intake_target * f15_overcons_FAOwaste(i,"livst_rum");
+
+loop(i$(p15_kcal_pc_calibrated_livestock_orig(t,i) > p15_kcal_pc_livestock_supply_target(i)),
+p15_kcal_pc_calibrated(t,i,kfo_lp) = p15_livestock_kcal_structure_orig(t,i,kfo_lp)
+               * (p15_kcal_pc_livestock_supply_target(i)*(1-i15_livestock_fadeout_threshold(t,i))
+               + p15_kcal_pc_calibrated_livestock_orig(t,i)*i15_livestock_fadeout_threshold(t,i));
+p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
+				* (p15_kcal_pc_calibrated_plant_orig(t,i)
+			    + (p15_kcal_pc_calibrated_livestock_orig(t,i) - 
+			    sum(kfo_lp, p15_kcal_pc_calibrated(t,i,kfo_lp))) * s15_livescen_target_subst);
 );
-
 
 
 *###############################################################################
@@ -491,6 +498,19 @@ p15_kcal_pc_calibrated(t,i,kfo)$(p15_demand2intake_ratio(t,i) >0 ) = p15_kcal_pc
 );
 
 
+* Now, a second waste parameter can be calculated, which is needed for the construction  
+* of exogenous diet scenarios on the basis of calorie intake. This parameter describes 
+* the development of food waste over time and reflects either the exogenous food waste 
+* scenario or the original regression-based estimates for food calorie oversupply:
+
+p15_foodwaste_growth(t,i) = ( 1$(p15_demand2intake_ratio_ref(i) = 0)
+            + (p15_demand2intake_ratio_scen(t,i)/p15_demand2intake_ratio_ref(i))$(
+              p15_demand2intake_ratio_ref(i) > 0)
+              );
+
+
+
+
 * ###### Exogenous EAT Lancet diet scenario
 
 *' @code
@@ -527,19 +547,29 @@ $endif
 
 *' 2.) The second step defines the daily per capita intake of different food
 *' commodities by filling up the scenario target for total daily per capita food
-*' intake according to different scenario assumptions on dietary patterns.
-*' In case that total daily calorie intake is not equal to EAT Lancet intake,
-*' only the calories for staple crops are modified and calories for non-staple food
-*' commodities are preserved.
+*' intake according to different scenario assumptions on dietary patterns. Calories 
+*' for staple crops can be modified in order to meet the total calorie target.
 
-if ( sum(i,(i15_intake_scen_target(t,i) - sum(kfo,i15_intake_EATLancet(i,kfo))**2 ) )  = 0,
-    i15_intake_detailed_scen_target(t,i,kfo) = i15_intake_EATLancet(i,kfo);
-else
-    i15_intake_detailed_scen_target(t,i,EAT_nonstaples) = i15_intake_EATLancet(i,EAT_nonstaples);
-    i15_intake_detailed_scen_target(t,i,EAT_staples) = (
-            i15_intake_scen_target(t,i) - sum(EAT_nonstaples,i15_intake_EATLancet(i,EAT_nonstaples)) )*(
-            i15_intake_EATLancet(i,EAT_staples)/sum(EAT_staples2,i15_intake_EATLancet(i,EAT_staples2)) );
+* Food-specific calorie intake of the model-internal diet projections is 
+* estimated from daily per capita food calorie demand:
+p15_intake_detailed_regr(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo)
+	 	/(f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)*p15_foodwaste_growth(t,i));
+
+
+i15_intake_detailed_scen_target(t,i,EAT_nonstaples) = i15_intake_EATLancet(i,EAT_nonstaples);
+
+* The EAT-Lancet diet only allows for added sugars, but does not include processed food or 
+* alcohol. Via 's15_alc_scen' a maximum target for alcohol consumption can be defined.
+if(s15_alc_scen>0,
+i15_intake_detailed_scen_target(t,i,"alcohol") = p15_intake_detailed_regr(t,i,"alcohol"); 
+i15_intake_detailed_scen_target(t,i,"alcohol")$(i15_intake_detailed_scen_target(t,i,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,i))
+	= s15_alc_scen*i15_intake_scen_target(t,i);
 );
+
+i15_intake_detailed_scen_target(t,i,EAT_staples) = (
+          i15_intake_scen_target(t,i) - sum(EAT_nonstaples,i15_intake_EATLancet(i,EAT_nonstaples)) )*(
+          i15_intake_EATLancet(i,EAT_staples)/sum(EAT_staples2,i15_intake_EATLancet(i,EAT_staples2)) );
+
 
 *' 3.) The third step estimates the calorie supply at household level by multiplying
 *' daily per capita calorie intake with a ratio  of supply to intake
@@ -551,13 +581,6 @@ else
 *' of the EAT Lancet diet scenarios (y2010). A multiplicative factor accounts for
 *' increases in food waste over time relative to the only historical time slice
 *' of the EAT Lancet diet scenarios, according to the regression-based approach.
-
-* In case, no exogenous waste scenario is selceted, the original regression-
-* based estimates for food calorie oversupply are used as waste scenario:
-p15_foodwaste_growth(t,i) = ( 1$(p15_demand2intake_ratio_ref(i) = 0)
-            + (p15_demand2intake_ratio_scen(t,i)/p15_demand2intake_ratio_ref(i))$(
-              p15_demand2intake_ratio_ref(i) > 0)
-              );
 
 i15_kcal_pc_scen_target(t,i,kfo) = (f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)
                                     *i15_intake_detailed_scen_target(t,i,kfo))
