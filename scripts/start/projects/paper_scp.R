@@ -5,6 +5,10 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
+# ----------------------------------------------------------
+# description: SCP paper runs
+# ----------------------------------------------------------
+
 
 ######################################
 #### Script to start a MAgPIE run ####
@@ -25,7 +29,7 @@ cfg$results_folder <- "output/:title:"
 
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 
-prefix <- "SCP20"
+prefix <- "SCP21"
 
 cfg$gms$s15_elastic_demand <- 0
 
