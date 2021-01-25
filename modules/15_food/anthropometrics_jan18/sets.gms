@@ -9,8 +9,8 @@ sets
 
    iter15 iterations between food demand model and magpie
    /iter1*iter10/   
-   current_iter15(iter15)  currently active iteration
-   last_iter15(iter15)     last active iteration
+   curr_iter15(iter15)  currently active iteration
+   prev_iter15(iter15)     last active iteration
 
    underaged15(age) Group of underaged age classes
    /0--4,5--9,10--14/

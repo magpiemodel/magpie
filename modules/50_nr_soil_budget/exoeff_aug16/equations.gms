@@ -8,7 +8,7 @@
 *' @equations
 
 
-*' For cropland the equation `q50_nr_bal_crp` balances the withdrawls of nitrogen with the share of all
+*' For cropland the equation `q50_nr_bal_crp` balances the withdrawals of nitrogen with the share of all
 *' incoming fluxes that can be uptaken by the crop.
 
  q50_nr_bal_crp(i2) ..
@@ -30,7 +30,7 @@ q50_nr_inputs(i2) ..
                   + sum(ct,f50_nitrogen_balanceflow(ct,i2))
                   + v50_nr_deposition(i2,"crop");
 
-*' Withdrawls from cropland consist of nitrogen in the harvested crop plus nitrogen in residues (above and below ground)
+*' withdrawals from cropland consist of nitrogen in the harvested crop plus nitrogen in residues (above and below ground)
 *' minus the part of nitrogen which is fixed within the crop, minus nitrogen inflow from seeds.
  q50_nr_withdrawals(i2,kcr) ..
                  v50_nr_withdrawals(i2,kcr) =e=

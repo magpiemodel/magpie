@@ -48,7 +48,7 @@ q15_aim ..
 q15_budget(iso) ..
          v15_income_pc_real_ppp_iso(iso) =e=
          sum(kfo, v15_kcal_regr(iso,kfo)*365
-         *(i15_prices_initial_kcal(iso,kfo)-sum((ct,current_iter15), p15_prices_kcal(ct,iso,kfo,current_iter15))))
+         *(i15_prices_initial_kcal(iso,kfo)-sum((ct,curr_iter15), p15_prices_kcal(ct,iso,kfo,curr_iter15))))
          + sum(ct,im_gdp_pc_ppp_iso(ct,iso)) + v15_income_balance(iso);
 
 *' The budget constraint calculates the real income after a possible price

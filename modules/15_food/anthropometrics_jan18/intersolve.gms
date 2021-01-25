@@ -18,21 +18,21 @@ option nlp = conopt4;
 
 if (magpie.modelstat = NA,
     q15_food_demand.m(i,kfo)=0;
-    p15_prices_kcal(t,iso,kfo,current_iter15)=i15_prices_initial_kcal(iso,kfo)*f15_price_index(t);
+    p15_prices_kcal(t,iso,kfo,curr_iter15)=i15_prices_initial_kcal(iso,kfo)*f15_price_index(t);
 else
     display "Coupling: Reading out marginal costs from MAgPIE as shock to demand model";
-    p15_prices_kcal(t,iso,kfo,current_iter15)=sum(i_to_iso(i,iso), q15_food_demand.m(i,kfo));
+    p15_prices_kcal(t,iso,kfo,curr_iter15)=sum(i_to_iso(i,iso), q15_food_demand.m(i,kfo));
 );
 
 * A new iteration is started
 p15_iteration_counter(t) = p15_iteration_counter(t) + 1;
 * The set current iter includes only one element with the set element 
 * of the current iteration, e.g. "iter2"
-current_iter15(iter15) = no;
-current_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)) = yes;
+curr_iter15(iter15) = no;
+curr_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)) = yes;
 * Now we also define a set for the last iteration
-last_iter15(iter15) = no;
-last_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)-1) = yes;
+prev_iter15(iter15) = no;
+prev_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)-1) = yes;
 
 display "starting iteration number ", p15_iteration_counter;
 display "starting m15_food_demand model....";
@@ -66,7 +66,7 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
 
 
 
- p15_delta_income(t,i,current_iter15) = p15_income_pc_real_ppp(t,i) /
+ p15_delta_income(t,i,curr_iter15) = p15_income_pc_real_ppp(t,i) /
 						( sum(i_to_iso(i,iso),
                                im_gdp_pc_ppp_iso(t,iso)
                                * im_pop_iso(t,iso)
@@ -78,8 +78,8 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
 * estimate convergence measure for deciding to stop iteration
 
 
- p15_convergence_measure(t,current_iter15) =smax(i,
-                              abs(p15_delta_income(t,i,current_iter15) / sum(last_iter15,p15_delta_income(t,i,last_iter15))- 1)
+ p15_convergence_measure(t,curr_iter15) =smax(i,
+                              abs(p15_delta_income(t,i,curr_iter15) / sum(prev_iter15,p15_delta_income(t,i,prev_iter15))- 1)
                             );
 
 
@@ -102,7 +102,7 @@ display "convergence measure:",p15_convergence_measure;
 
 if (s15_elastic_demand = 1 AND m_year(t) > sm_fix_SSP2,
   display "elastic demand model is activated";
-  if ((sum(current_iter15,p15_convergence_measure(t,current_iter15)) > s15_convergence and p15_iteration_counter(t) <= s15_maxiter),
+  if ((sum(curr_iter15,p15_convergence_measure(t,curr_iter15)) > s15_convergence and p15_iteration_counter(t) <= s15_maxiter),
 
         display "convergence between MAgPIE and Food Demand Model not yet reached";
         display "starting magpie in iteration number ", p15_iteration_counter;
