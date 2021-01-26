@@ -13,7 +13,11 @@
 *' multiplying pasture area `vm_land` with cellular rainfed pasture yields
 *' `vm_yld` which are delivered by the module [14_yields]:
 
-q31_prod(j2) ..
+q31_prod(j2)$s31_unequal ..
+ vm_prod(j2,"pasture") =l= vm_land(j2,"past")
+ 						   * vm_yld(j2,"pasture","rainfed");
+
+q31_prod_equal(j2)$(1-s31_unequal) ..
  vm_prod(j2,"pasture") =e= vm_land(j2,"past")
  						   * vm_yld(j2,"pasture","rainfed");
 
