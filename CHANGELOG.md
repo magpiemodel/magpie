@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### added
+- **51_nitrogen** new module realization rescaled_jan21, which rescales n-related emissions with nitrogen surplus to account for lower emissions with higher NUE
+
+### changed
+- **50_nr_soil_budget** added necessary interfaces to 50_nitrogen module
+- **runscripts** adapted to new input data and model version
+- **15_food** better documentation of parameters over model iterations
+
+### added
 - **15_food** Added the option to fade out livestock demand towards a target level in kcal/cap/day.
 - **35_natveg** Added HalfEarth scenario to protection scenarios
 - **56_ghg_policy** Added new scenario to emission policy
@@ -23,11 +31,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### changed
 - **scripts** Updated AgMIP output scripts.
+- **35_natveg** Fader for HalfEarth protection policy
+- **12_interest_rate** Interest fader changed to csv
+- **tests** Replaced TravisCI with GithubActions
 
 ### removed
 
 ### fixed
 - **32_forestry** Bugfixes for "ac_est" and carbon treshold afforestation; removed plantations from "vm_cdr_aff".
+- **core** bugfix m_fillmissingyears macro; was running over t before; now running over t_all_
 
 ## [4.3.1] - 2020-11-03
 
