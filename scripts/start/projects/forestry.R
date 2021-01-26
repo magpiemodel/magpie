@@ -25,7 +25,7 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "JAN03"
 
-cat(paste0("revert back additional scen"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Food demand exo"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry")){
