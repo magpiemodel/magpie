@@ -218,7 +218,15 @@ vm_dem_food.fx(i,knf)=0;
 
 *** Food demand model is calculated the first time for the current time step, using standard prices
 
-p15_iteration_counter(t)    =0;
+* activating the first iteration
+p15_iteration_counter(t) = 1;
+
+* The set curr_iter15 includes only one element with the set element
+* of the current iteration, e.g. "iter2"
+curr_iter15(iter15) = no;
+curr_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)) = yes;
+
+p15_delta_income(t,i,curr_iter15) = 1;
 
 display "starting demand model for initialisation run....";
 
@@ -244,10 +252,10 @@ v15_income_pc_real_ppp_iso.lo(iso)=10;
 v15_income_pc_real_ppp_iso.up(iso)=Inf;
 
 * saving regression outcome for per capita food demand for different foods
-p15_kcal_regr(t, iso, kfo)=v15_kcal_regr.l(iso, kfo);
+p15_kcal_regr(t, iso, kfo) = v15_kcal_regr.l(iso, kfo);
 
 * saving regression outcome for BMI shares
-p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)=v15_bmi_shr_regr.l(iso,sex,age,bmi_group15);
+p15_bmi_shr_regr(t,iso,sex,age,bmi_group15 )= v15_bmi_shr_regr.l(iso,sex,age,bmi_group15);
 
 * deriving calibration values
 
@@ -432,7 +440,7 @@ p15_kcal_pc_calibrated(t,i,kfo_lp) = p15_livestock_kcal_structure_orig(t,i,kfo_l
                + p15_kcal_pc_calibrated_livestock_orig(t,i)*i15_livestock_fadeout_threshold(t,i));
 p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
 				* (p15_kcal_pc_calibrated_plant_orig(t,i)
-			    + (p15_kcal_pc_calibrated_livestock_orig(t,i) - 
+			    + (p15_kcal_pc_calibrated_livestock_orig(t,i) -
 			    sum(kfo_lp, p15_kcal_pc_calibrated(t,i,kfo_lp))) * s15_livescen_target_subst);
 );
 
@@ -498,9 +506,9 @@ p15_kcal_pc_calibrated(t,i,kfo)$(p15_demand2intake_ratio(t,i) >0 ) = p15_kcal_pc
 );
 
 
-* Now, a second waste parameter can be calculated, which is needed for the construction  
-* of exogenous diet scenarios on the basis of calorie intake. This parameter describes 
-* the development of food waste over time and reflects either the exogenous food waste 
+* Now, a second waste parameter can be calculated, which is needed for the construction
+* of exogenous diet scenarios on the basis of calorie intake. This parameter describes
+* the development of food waste over time and reflects either the exogenous food waste
 * scenario or the original regression-based estimates for food calorie oversupply:
 
 p15_foodwaste_growth(t,i) = ( 1$(p15_demand2intake_ratio_ref(i) = 0)
@@ -547,10 +555,10 @@ $endif
 
 *' 2.) The second step defines the daily per capita intake of different food
 *' commodities by filling up the scenario target for total daily per capita food
-*' intake according to different scenario assumptions on dietary patterns. Calories 
+*' intake according to different scenario assumptions on dietary patterns. Calories
 *' for staple crops can be modified in order to meet the total calorie target.
 
-* Food-specific calorie intake of the model-internal diet projections is 
+* Food-specific calorie intake of the model-internal diet projections is
 * estimated from daily per capita food calorie demand:
 p15_intake_detailed_regr(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo)
 	 	/(f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)*p15_foodwaste_growth(t,i));
@@ -558,10 +566,10 @@ p15_intake_detailed_regr(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo)
 
 i15_intake_detailed_scen_target(t,i,EAT_nonstaples) = i15_intake_EATLancet(i,EAT_nonstaples);
 
-* The EAT-Lancet diet only allows for added sugars, but does not include processed food or 
+* The EAT-Lancet diet only allows for added sugars, but does not include processed food or
 * alcohol. Via 's15_alc_scen' a maximum target for alcohol consumption can be defined.
 if(s15_alc_scen>0,
-i15_intake_detailed_scen_target(t,i,"alcohol") = p15_intake_detailed_regr(t,i,"alcohol"); 
+i15_intake_detailed_scen_target(t,i,"alcohol") = p15_intake_detailed_regr(t,i,"alcohol");
 i15_intake_detailed_scen_target(t,i,"alcohol")$(i15_intake_detailed_scen_target(t,i,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,i))
 	= s15_alc_scen*i15_intake_scen_target(t,i);
 );

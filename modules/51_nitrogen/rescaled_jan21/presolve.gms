@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_nr_inorg_fert_reg.fx(i,land_ag) = 0;
-vm_nr_inorg_fert_costs.fx(i) = 0;
-vm_nr_eff.fx(i) =0.6;
-vm_nr_eff_pasture.fx(i) = 0.66;
+
+ vm_btm_reg.fx(i,emis_source_nonitrogen51,n_pollutants) = 0;
+
+*** EOF solve.gms ***
