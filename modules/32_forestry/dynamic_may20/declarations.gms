@@ -22,7 +22,6 @@ parameters
  p32_rotation_cellular_estb(t_all,j)                Establishment rotation length translated to age classes on cellular level (1)
  p32_rotation_cellular_harvesting(t_all,j)          Harvesting rotation length of plantations translated to age class equivalent for future (1)
  p32_cdr_ac(t,j,ac)                                 Non-cumulative CDR from afforestation plantations for each age-class depending on planning horizon (tC per ha)
- p32_cdr_ac_plant(t,j,ac)                           Non-cumulative CDR from timber plantations for each age-class depending on planning horizon (tC per ha)
  p32_rotation_offset                                Offset calc in age class equivalents (1)
  p32_land_start_ac(j,type32,ac)                     Saving first value of starting land (mio. ha)
  p32_land_before(t,j,type32,ac)                     Saving time value of starting land (mio. ha)
