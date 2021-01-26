@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN02"
+identifier_flag = "JAN02a"
 
 cat(paste0("revert back additional scen"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
@@ -42,11 +42,12 @@ for(scen in c("forestry")){
 
     cfg = setScenario(cfg,c(ssp,scen))
 
-    for(c35_protect_scenario in c("WDPA","BH","FF","LW")){
+    for(c35_protect_scenario in c("WDPA")){
 
-      for(c73_wood_scen in c("default","construction")){
+      for(c73_wood_scen in c("default")){
         cfg$gms$c35_protect_scenario <- c35_protect_scenario
         cfg$gms$c73_wood_scen <- c73_wood_scen
+        cfg$gms$s15_elastic_demand <- 0
 
 
         if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
