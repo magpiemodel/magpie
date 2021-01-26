@@ -14,7 +14,7 @@ scalars
   s73_foresight				      Boolean switch for establishment demand assumption 1=forward looking 0=myopic (1) / 0 /
 ;
 
-table f73_prod_specific_timber(t_past,iso,total_wood_products) End use timber product demand (mio. m3 per yr)
+table f73_prod_specific_timber(t_all,iso,total_wood_products) End use timber product demand (mio. m3 per yr)
 $ondelim
 $include "./modules/73_timber/input/f73_prod_specific_timber.csv"
 $offdelim
