@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN01"
+identifier_flag = "JAN02"
 
 cat(paste0("revert back additional scen"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
