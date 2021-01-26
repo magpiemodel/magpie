@@ -33,33 +33,71 @@ prefix <- "SCP23"
 
 cfg$gms$s15_elastic_demand <- 0
 
-cfg$title <- paste0(prefix,"_SSP2_SCPoff")
+### Ref
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
+
+cfg$title <- paste0(prefix,"_SSP2_Ref_SCPoff")
 cfg$gms$c20_scp_type <- "mixed"
 cfg$gms$c15_rumdairy_scp_scen <- "constant"
 cfg$gms$c70_cereal_scen <- "constant"
 cfg$gms$c70_foddr_scen <- "constant"
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste0(prefix,"_SSP2_SCPfood")
+cfg$title <- paste0(prefix,"_SSP2_Ref_SCPfood")
 cfg$gms$c20_scp_type <- "mixed"
 cfg$gms$c15_rumdairy_scp_scen <- "sigmoid_20pc_20_50"
 cfg$gms$c70_cereal_scen <- "constant"
 cfg$gms$c70_foddr_scen <- "constant"
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste0(prefix,"_SSP2_SCPfeed")
+cfg$title <- paste0(prefix,"_SSP2_Ref_SCPfeed")
 cfg$gms$c20_scp_type <- "mixed"
 cfg$gms$c15_rumdairy_scp_scen <- "constant"
 cfg$gms$c70_cereal_scen <- "sigmoid_20pc_20_50"
 cfg$gms$c70_foddr_scen <- "sigmoid_20pc_20_50"
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste0(prefix,"_SSP2_SCPfoodfeed")
+cfg$title <- paste0(prefix,"_SSP2_Ref_SCPfoodfeed")
 cfg$gms$c20_scp_type <- "mixed"
 cfg$gms$c15_rumdairy_scp_scen <- "sigmoid_20pc_20_50"
 cfg$gms$c70_cereal_scen <- "sigmoid_20pc_20_50"
 cfg$gms$c70_foddr_scen <- "sigmoid_20pc_20_50"
 start_run(cfg,codeCheck=FALSE)
+
+### Pol
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
+
+cfg$title <- paste0(prefix,"_SSP2_Pol_SCPoff")
+cfg$gms$c20_scp_type <- "mixed"
+cfg$gms$c15_rumdairy_scp_scen <- "constant"
+cfg$gms$c70_cereal_scen <- "constant"
+cfg$gms$c70_foddr_scen <- "constant"
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- paste0(prefix,"_SSP2_Pol_SCPfood")
+cfg$gms$c20_scp_type <- "mixed"
+cfg$gms$c15_rumdairy_scp_scen <- "sigmoid_20pc_20_50"
+cfg$gms$c70_cereal_scen <- "constant"
+cfg$gms$c70_foddr_scen <- "constant"
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- paste0(prefix,"_SSP2_Pol_SCPfeed")
+cfg$gms$c20_scp_type <- "mixed"
+cfg$gms$c15_rumdairy_scp_scen <- "constant"
+cfg$gms$c70_cereal_scen <- "sigmoid_20pc_20_50"
+cfg$gms$c70_foddr_scen <- "sigmoid_20pc_20_50"
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- paste0(prefix,"_SSP2_Pol_SCPfoodfeed")
+cfg$gms$c20_scp_type <- "mixed"
+cfg$gms$c15_rumdairy_scp_scen <- "sigmoid_20pc_20_50"
+cfg$gms$c70_cereal_scen <- "sigmoid_20pc_20_50"
+cfg$gms$c70_foddr_scen <- "sigmoid_20pc_20_50"
+start_run(cfg,codeCheck=FALSE)
+
+
 
 # for (scp_type in c("mixed", "methane", "sugar", "cellulose","hydrogen")) {
 #   cfg$title <- paste0(prefix,"_SSP2-CellAg_",scp_type)
