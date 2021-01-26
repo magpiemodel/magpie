@@ -29,32 +29,36 @@ cfg$results_folder <- "output/:title:"
 
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 
-prefix <- "SCP22"
+prefix <- "SCP23"
 
 cfg$gms$s15_elastic_demand <- 0
 
 cfg$title <- paste0(prefix,"_SSP2_SCPoff")
 cfg$gms$c20_scp_type <- "mixed"
 cfg$gms$c15_rumdairy_scp_scen <- "constant"
-cfg$gms$c70_all_scen <- "constant"
+cfg$gms$c70_cereal_scen <- "constant"
+cfg$gms$c70_foddr_scen <- "constant"
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- paste0(prefix,"_SSP2_SCPfood")
 cfg$gms$c20_scp_type <- "mixed"
 cfg$gms$c15_rumdairy_scp_scen <- "sigmoid_20pc_20_50"
-cfg$gms$c70_all_scen <- "constant"
+cfg$gms$c70_cereal_scen <- "constant"
+cfg$gms$c70_foddr_scen <- "constant"
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- paste0(prefix,"_SSP2_SCPfeed")
 cfg$gms$c20_scp_type <- "mixed"
 cfg$gms$c15_rumdairy_scp_scen <- "constant"
-cfg$gms$c70_all_scen <- "sigmoid_20pc_20_50"
+cfg$gms$c70_cereal_scen <- "sigmoid_20pc_20_50"
+cfg$gms$c70_foddr_scen <- "sigmoid_20pc_20_50"
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- paste0(prefix,"_SSP2_SCPfoodfeed")
 cfg$gms$c20_scp_type <- "mixed"
 cfg$gms$c15_rumdairy_scp_scen <- "sigmoid_20pc_20_50"
-cfg$gms$c70_all_scen <- "sigmoid_20pc_20_50"
+cfg$gms$c70_cereal_scen <- "sigmoid_20pc_20_50"
+cfg$gms$c70_foddr_scen <- "sigmoid_20pc_20_50"
 start_run(cfg,codeCheck=FALSE)
 
 # for (scp_type in c("mixed", "methane", "sugar", "cellulose","hydrogen")) {

@@ -30,32 +30,32 @@ p70_feedscen_region_shr(t_all,i) = sum(i_to_iso(i,iso), p70_country_dummy(iso) *
 
 * Feed substitution scenarios including functional forms, targets and transition periods
 * Note: p70_feedscen_region_shr(t,i) is 1 in the default case)
-i70_all_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*(1-f70_feed_substitution_fader(t_all,"%c70_all_scen%"));
-i70_soybean_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*(1-f70_feed_substitution_fader(t_all,"%c70_soybean_scen%"));
+i70_cereal_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*(1-f70_feed_substitution_fader(t_all,"%c70_all_scen%"));
+i70_foddr_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*(1-f70_feed_substitution_fader(t_all,"%c70_soybean_scen%"));
 
-*** Substitution of all feed commodities with single-cell protein (SCP)
+*** Substitution of cereal feed with single-cell protein (SCP)
 *convert from DM to Nr
-im_feed_baskets(t_all,i,kap,kall70) = im_feed_baskets(t_all,i,kap,kall70)*fm_attributes("nr",kall70);
+im_feed_baskets(t_all,i,kap,kcer70) = im_feed_baskets(t_all,i,kap,kcer70)*fm_attributes("nr",kcer70);
 im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")*fm_attributes("nr","scp");
 *replace feed with SCP based on Nr
 im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")
-             + sum(kall70, im_feed_baskets(t_all,i,kap,kall70) * (1-i70_all_fadeout(t_all,i)));
-im_feed_baskets(t_all,i,kap,kall70) =
-               im_feed_baskets(t_all,i,kap,kall70) * i70_all_fadeout(t_all,i);
+             + sum(kcer70, im_feed_baskets(t_all,i,kap,kcer70) * (1-i70_cereal_fadeout(t_all,i)));
+im_feed_baskets(t_all,i,kap,kcer70) =
+               im_feed_baskets(t_all,i,kap,kcer70) * i70_cereal_fadeout(t_all,i);
 *convert back from Nr to DM
-im_feed_baskets(t_all,i,kap,kall70) = im_feed_baskets(t_all,i,kap,kall70)/fm_attributes("nr",kall70);
+im_feed_baskets(t_all,i,kap,kcer70) = im_feed_baskets(t_all,i,kap,kcer70)/fm_attributes("nr",kcer70);
 im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")/fm_attributes("nr","scp");
 
-*** Substitution of soybean feed with single-cell protein (SCP)
+*** Substitution of foddr feed with single-cell protein (SCP)
 *convert from DM to Nr
-im_feed_baskets(t_all,i,kap,"soybean") = im_feed_baskets(t_all,i,kap,"soybean")*fm_attributes("nr","soybean");
+im_feed_baskets(t_all,i,kap,"foddr") = im_feed_baskets(t_all,i,kap,"foddr")*fm_attributes("nr","foddr");
 im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")*fm_attributes("nr","scp");
 *replace feed with SCP based on Nr
 im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")
-             + im_feed_baskets(t_all,i,kap,"soybean") * (1-i70_soybean_fadeout(t_all,i));
-im_feed_baskets(t_all,i,kap,"soybean") =
-               im_feed_baskets(t_all,i,kap,"soybean") * i70_soybean_fadeout(t_all,i);
+             + im_feed_baskets(t_all,i,kap,"foddr") * (1-i70_foddr_fadeout(t_all,i));
+im_feed_baskets(t_all,i,kap,"foddr") =
+               im_feed_baskets(t_all,i,kap,"foddr") * i70_foddr_fadeout(t_all,i);
 *convert back from Nr to DM
-im_feed_baskets(t_all,i,kap,"soybean") = im_feed_baskets(t_all,i,kap,"soybean")/fm_attributes("nr","soybean");
+im_feed_baskets(t_all,i,kap,"foddr") = im_feed_baskets(t_all,i,kap,"foddr")/fm_attributes("nr","foddr");
 im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")/fm_attributes("nr","scp");
 

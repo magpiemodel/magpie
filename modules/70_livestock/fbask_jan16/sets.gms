@@ -30,13 +30,8 @@ sets
    sys_dairy .livst_milk
    /
 
-   kall70(kall) All products except scp
-   /
-   tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,oilpalm,puls_pro,
-   potato,cassav_sp,sugr_cane,sugr_beet,others,cottn_pro,
-   oilcakes,
-   livst_rum, livst_pig,livst_chick, livst_egg, livst_milk, fish
-   /
+   kcer70(kall) Cereals
+   / tece, maiz, trce, rice_pro /
 
   fadeoutscen70  Feed substitution scenarios including functional forms with targets and transition periods
        / constant,
