@@ -32,15 +32,6 @@ loop(t_all$(m_year(t_all) >= 2015 AND m_year(t_all) < 2150),
 p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)$(im_gdp_pc_ppp_iso(t_all,iso)=0) = 0.000001;
 p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)$(p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)=0) = 0.00000001;
 
-** Alternative wood use scenarios
-$ifthen "%c73_wood_scen%" == "nopaper"
-p73_forestry_demand_prod_specific(t_all,iso,"wood_pulp") = p73_forestry_demand_prod_specific(t_all,iso,"wood_pulp") * f73_demand_modifier(t_all,"%c73_wood_scen%");
-$elseif "%c73_wood_scen%" == "default"
-p73_forestry_demand_prod_specific(t_all,iso,"wood_pulp") = p73_forestry_demand_prod_specific(t_all,iso,"wood_pulp");
-$elseif "%c73_wood_scen%" == "construction"
-p73_forestry_demand_prod_specific(t_all,iso,construction_wood) = p73_forestry_demand_prod_specific(t_all,iso,construction_wood) * f73_demand_modifier(t_all,"%c73_wood_scen%");
-$endif
-
 ** Aggregate from ISO country level to MAgPIE region level
 p73_timber_demand_gdp_pop(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to_woodprod(kforestry,total_wood_products)),p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)) * sm_timber_demand_switch;
 
@@ -52,6 +43,11 @@ loop (t_past_forestry,
 loop (t_all$(m_year(t_all)>=2020),
   p73_timber_demand_gdp_pop(t_all,i,"wood")$(p73_timber_demand_gdp_pop(t_all,i,"wood")/sum(i_to_iso(i,iso),p73_forestry_demand_prod_specific(t_all-1,iso,"industrial_roundwood")) > s73_increase_ceiling) = p73_timber_demand_gdp_pop(t_all-1,i,"wood") * s73_increase_ceiling;
 );
+
+** Alternative wood use scenarios
+$ifthen "%c73_wood_scen%" == "construction"
+p73_timber_demand_gdp_pop(t_all,i,"wood") = p73_timber_demand_gdp_pop(t_all,i,"wood") * f73_demand_modifier(t_all,"%c73_wood_scen%");
+$endif
 
 ** Convert to tDM from mio m3
 ** p73_timber_demand_gdp_pop is in mio m^3
