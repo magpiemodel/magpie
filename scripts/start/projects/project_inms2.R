@@ -23,11 +23,11 @@ buildInputVector <- function(regionmapping   = "agmip",
                              co2             = "co2",
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "c200",
-                             archive_rev     = "44",
-                             madrat_rev      = "4.47",
-                             validation_rev  = "4.47",
-                             calibration     = "calibration_inms_c200_08Jul2020.tgz",
-                             additional_data = "additional_data_rev3.85.tgz") {
+                             archive_rev     = "52",
+                             madrat_rev      = "4.57",
+                             validation_rev  = "4.57",
+                             calibration     = "calibration_calibration_inms_may2020_09Jul20.tgz",
+                             additional_data = "additional_data_rev3.92.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
                 mag="c30c1c580039c2b300d86cc46ff4036a",
@@ -41,6 +41,8 @@ buildInputVector <- function(regionmapping   = "agmip",
   return(c(archive,madrat,validation,calibration,additional_data))
 }
 
+
+
 ### General settings ###
 general_settings<-function(title) {
   source("config/default.cfg")
@@ -50,7 +52,9 @@ general_settings<-function(title) {
   cfg$gms$som <- "cellpool_aug16"
   cfg$gms$factor_costs <- "sticky_feb18"
   cfg$gms$s15_elastic_demand <- 0
-  cfg$title <- paste0("inms_",run_flag,"_",title,"_v3")
+  cfg$gms$nitrogen <- "rescaled_jan21"
+  cfg$title <- paste0("inms_",title,"_v5")
+  cfg$calib_cropland <- FALSE
   cfg$recalibrate <- FALSE
   return(cfg)
 }
@@ -60,13 +64,13 @@ general_settings<-function(title) {
 cfg<-general_settings(title="SSP2_RCP4p5_Calib")
 cfg<-lucode::setScenario(cfg,"SSP2")
 cfg<-lucode::setScenario(cfg,"cc")
-cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms")
+cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms",calibration="calibration_inms_c200_08Jul2020.tgz")
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$force_download <- TRUE
-cfg$recalibrate <- TRUE
+#cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
-calib<-magpie4::submitCalibration(name = "calibration_inms_may2020")
+calib<-magpie4::submitCalibration(name = "INMS_v5")
 
 #calib<-"calibration_calibration_inms_may2020_09Jul20.tgz"
 
