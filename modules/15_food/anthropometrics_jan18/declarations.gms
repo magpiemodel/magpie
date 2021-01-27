@@ -68,14 +68,14 @@ parameters
 * technical
  p15_modelstat(t)                       Model solver status (1)
  p15_iteration_counter(t)               Number of iterations required for reaching an equilibrium between food demand model and magpie (1)
- p15_convergence_measure(t)             Convergence measure to decide for continuation or stop of food_demand - magpie iteration (1)
+ p15_convergence_measure(t,iter15)      Convergence measure to decide for continuation or stop of food_demand - magpie iteration (1)
  i15_dem_intercept(iso,regr15)          Food regression parameters intercept in kcal or as share (X)
  i15_dem_saturation(iso,regr15)             Food regression parameters saturation in kcal or as share (X)
  i15_dem_halfsat(iso,regr15)                Food regression parameters halfsaturation (USD05PPP per cap)
  i15_dem_nonsat(iso,regr15)                 Food regression parameters nonsaturation (1)
 
 *prices
- p15_prices_kcal(t,iso,kfo)                        Prices from MAgPIE after optimization (USD05PPP per kcal)
+ p15_prices_kcal(t,iso,kfo,iter15)                 Prices from MAgPIE after optimization (USD05PPP per kcal)
  i15_prices_initial_kcal(iso,kfo)                  Initial prices that capture the approximate level of prices in 1961-2010 (USD05PPP per kcal)
 
 * anthropometrics
@@ -139,7 +139,7 @@ parameters
  p15_rumdairy_kcal_structure_orig(t,i,kfo_rd)    Auxiliary parameter for ruminant and dairy kcal structure - basis for scenarios of ruminant-based food substitution (1)
  p15_plant_kcal_structure_orig(t,i,kfo_pp)       Auxiliary parameter for plant-based food kcal structure - basis for scenarios of livestock food substitution (1)
  p15_kcal_pc_livestock_supply_target(i)		 	 Target of per capita livestock consumption (kcal per capita per day)
- 
+
  p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)     Calibrated estimates of BMI share for population groups  (1)
  p15_intake_total_iso_calibrated(t,iso)                Total food intake in a country (kcal per capita per day)
  p15_intake_total_calibrated(t,i)                      Total regional food intake (kcal per capita per day)
@@ -164,10 +164,8 @@ parameters
  p15_foodscen_region_shr(t_all,i)             Weighted share of region with regards to diet scenario of countries (1)
 
 * calculate diet iteration breakpoint
- p15_income_pc_real_ppp(t,i)                 Regional per capita income after price shock on regional level (USD05PPP per capita)
- p15_delta_income(t,i)                       Regional change in per capita income due to price shock on regional level (1)
- p15_lastiteration_delta_income(t,i)         Regional change in per capita income due to price shock of last iteration (1)
-
+ p15_income_pc_real_ppp(t,i)                  Regional per capita income after price shock on regional level (USD05PPP per capita)
+ p15_delta_income(t,i,iter15)                 Regional change in per capita income due to price shock on regional level (1)
 ;
 
 scalars
