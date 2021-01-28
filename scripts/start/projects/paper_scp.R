@@ -29,7 +29,7 @@ cfg$results_folder <- "output/:title:"
 
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 
-prefix <- "SCP23"
+prefix <- "SCP24"
 
 cfg$gms$s15_elastic_demand <- 0
 

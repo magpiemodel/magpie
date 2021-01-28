@@ -30,8 +30,8 @@ p70_feedscen_region_shr(t_all,i) = sum(i_to_iso(i,iso), p70_country_dummy(iso) *
 
 * Feed substitution scenarios including functional forms, targets and transition periods
 * Note: p70_feedscen_region_shr(t,i) is 1 in the default case)
-i70_cereal_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*(1-f70_feed_substitution_fader(t_all,"%c70_all_scen%"));
-i70_foddr_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*(1-f70_feed_substitution_fader(t_all,"%c70_soybean_scen%"));
+i70_cereal_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*(1-f70_feed_substitution_fader(t_all,"%c70_cereal_scen%"));
+i70_foddr_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*(1-f70_feed_substitution_fader(t_all,"%c70_foddr_scen%"));
 
 *** Substitution of cereal feed with single-cell protein (SCP)
 *convert from DM to Nr
