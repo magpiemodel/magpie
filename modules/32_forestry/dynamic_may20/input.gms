@@ -35,6 +35,7 @@ scalars
   s32_investment_cost             Additional investment cost in plantations (USD per tC per ha) / 200 /
   s32_distribution_type           Which type of distribution shall be used for initializing plantations (0=equal distribution 1=FAO distribution 2=Poulter distribution) /0/
   s32_wood_density                Representative wood density based on IPCC in (tDM per m3) /0.6/
+  s32_dampener bla bla /0.75/
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)
