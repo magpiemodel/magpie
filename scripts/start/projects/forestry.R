@@ -25,7 +25,7 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "JAN06"
 
-cat(paste0("Food demand exo"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("lower harvesting costs. lower prod cost from natveg"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry")){
