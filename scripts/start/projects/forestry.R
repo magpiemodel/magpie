@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN06"
+identifier_flag = "JAN07"
 
 cat(paste0("lower harvesting costs. lower prod cost from natveg"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
