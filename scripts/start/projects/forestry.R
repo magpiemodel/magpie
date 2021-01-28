@@ -82,7 +82,7 @@ for(scen in c("forestry","nocc")){
         cfg$output  = c("extra/timestep_duration")
 
          xx = c(xx,cfg$title)
-         #start_run(cfg,codeCheck=FALSE)
+         start_run(cfg,codeCheck=FALSE)
       }
     }
   }
