@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN05"
+identifier_flag = "JAN06"
 
 cat(paste0("Food demand exo"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
@@ -45,9 +45,6 @@ for(scen in c("forestry")){
     for(c35_protect_scenario in c("WDPA")){
 
       for(c73_wood_scen in c("default")){
-
-        for(s32_dampener in c(0.6,0.65,0.70,0.75,0.80,0.85,0.90,0.95)){
-          cfg$gms$s32_dampener <- s32_dampener
 
           cfg$gms$c35_protect_scenario <- c35_protect_scenario
           cfg$gms$c73_wood_scen <- c73_wood_scen
@@ -82,12 +79,11 @@ for(scen in c("forestry")){
           if(scen=="nocc") scen_flag="Default"
           if(scen=="forestry") scen_flag="Forestry"
 
-          cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",cfg$gms$s32_dampener)
+          cfg$title   = paste0(identifier_flag,"_",scen_flag)
           cfg$output  = c("extra/timestep_duration")
 
            xx = c(xx,cfg$title)
            start_run(cfg,codeCheck=FALSE)
-        }
       }
     }
   }
