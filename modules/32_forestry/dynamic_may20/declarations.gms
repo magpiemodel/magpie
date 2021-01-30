@@ -41,6 +41,7 @@ parameters
  p32_observed_gs_reg(i)                             Observed growing stock (tDM per ha)
  p32_gs_scaling_reg(i)                              Calibration factor for scaling up the relative growing stock (1)
  p32_rotation_dist(j,ac)                            Poulter distribution within celular rotation lengths (1)
+ p32_updated_gs_reg(t,i)                            bla blu
 ;
 
 positive variables

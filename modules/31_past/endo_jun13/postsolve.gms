@@ -5,6 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+** Deactivate this in case you want to use pasture prodn
+** Cost even after calibrartion phase
 s31_fac_req_past = 0;
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################

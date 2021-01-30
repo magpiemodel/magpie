@@ -132,4 +132,9 @@ m_boundfix(v32_land,(j,type32,ac_sub),l,10e-5);
 ** Calculate future yield based on rotation length
 pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac,"forestry"));
 
+** Display
+p32_updated_gs_reg(t,i) = 1;
+p32_updated_gs_reg(t,i)$(sum((cell(i,j),ac),p32_land(t,j,"plant",ac))>0) = (sum((cell(i,j),ac),(pm_timber_yield(t,j,ac,"forestry") / s32_wood_density) * p32_land(t,j,"plant",ac))/ sum((cell(i,j),ac),p32_land(t,j,"plant",ac)));
+display f32_gs_relativetarget,p32_updated_gs_reg;
+
 *** EOF presolve.gms ***

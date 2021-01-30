@@ -150,11 +150,11 @@ $title magpie
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
-* Used data set: rev4.57_h12_magpie.tgz
+* Used data set: rev4.57AM_h12_magpie.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.57_h12_validation.tgz
+* Used data set: rev4.57AM_h12_validation.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
@@ -197,7 +197,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Tue Jan 26 14:30:32 2021
+* Last modification (input data): Sat Jan 30 16:26:58 2021
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
