@@ -204,7 +204,7 @@ else
 ** Calibrate plantations yields
 *******************************************************************************
 p32_observed_gs_reg(i) = 1;
-p32_observed_gs_reg(i)$(sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac))>0)  = (sum((cell(i,j),ac),(pm_timber_yield_initial(j,ac,"forestry") / s32_wood_density) * p32_land_start_ac(j,"plant",ac))/ sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac)));
+p32_observed_gs_reg(i)$(f32_gs_relativetarget(i)>0)  = (sum((cell(i,j),ac),(pm_timber_yield_initial(j,ac,"forestry") / s32_wood_density) * p32_land_start_ac(j,"plant",ac))/ sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac)));
 p32_gs_scaling_reg(i) = f32_gs_relativetarget(i) / p32_observed_gs_reg(i);
 p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) < 1) = 1;
 *p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i)>10) = 10;
@@ -212,3 +212,8 @@ display p32_land_start_ac,p32_gs_scaling_reg;
 
 ** Update c-densitiy
 pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * sum(cell(i,j),p32_gs_scaling_reg(i));
+
+** Calculate plantation contribution scaled to Growing stock in plantations
+p32_plantation_contribution(t_ext,i) = 0.01;
+p32_plantation_contribution(t_ext,i)$(f32_gs_relativetarget(i)>0) = f32_plantation_contribution(t_ext,i,"%c32_dev_scen%","%c32_incr_rate%");
+display p32_plantation_contribution;

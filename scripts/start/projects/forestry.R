@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN09b"
+identifier_flag = "JAN09c"
 
-cat(paste0("Jumpy woodfueld demand fix between 2015 and 2020"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Prodn ratio matched to reported GS. Jumpy woodfueld demand fix between 2015 and 2020"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry")){
