@@ -7,7 +7,7 @@
 
 ** Deactivate this in case you want to use pasture prodn
 ** Cost even after calibrartion phase
-s31_fac_req_past = 0;
+*s31_fac_req_past = 0;
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  oq31_prod(t,j,"marginal")            = q31_prod.m(j);
