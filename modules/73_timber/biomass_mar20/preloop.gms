@@ -14,7 +14,7 @@ p73_timber_harvest_cost(t,j,ac,"forestry")    = s73_timber_harvest_cost;
 ** Natural vegetation are made more expensive to harvest due to need for
 ** specialized machinery and labor and difficulty in reaching inaccessible areas
 p73_timber_harvest_cost(t,j,ac,"secdforest")  = s73_timber_harvest_cost * s73_cost_multiplier;
-p73_timber_harvest_cost(t,j,ac,"other")       = s73_timber_harvest_cost * s73_cost_multiplier;
+p73_timber_harvest_cost(t,j,ac,"other")       = s73_timber_harvest_cost / 2;
 p73_timber_harvest_cost(t,j,ac,"primforest")  = s73_timber_harvest_cost * s73_cost_multiplier * s73_cost_multiplier;
 
 ** Loop over time to calculate future demand
