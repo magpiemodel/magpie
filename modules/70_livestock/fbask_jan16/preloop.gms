@@ -30,32 +30,28 @@ p70_feedscen_region_shr(t_all,i) = sum(i_to_iso(i,iso), p70_country_dummy(iso) *
 
 * Feed substitution scenarios including functional forms, targets and transition periods
 * Note: p70_feedscen_region_shr(t,i) is 1 in the default case)
-i70_cereal_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*(1-f70_feed_substitution_fader(t_all,"%c70_cereal_scen%"));
-i70_foddr_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*(1-f70_feed_substitution_fader(t_all,"%c70_foddr_scen%"));
+i70_cereal_scp_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*(1-f70_feed_substitution_fader(t_all,"%c70_cereal_scp_scen%"));
+i70_foddr_scp_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*(1-f70_feed_substitution_fader(t_all,"%c70_foddr_scp_scen%"));
 
-*** Substitution of cereal feed with single-cell protein (SCP)
-*convert from DM to Nr
-im_feed_baskets(t_all,i,kap,kcer70) = im_feed_baskets(t_all,i,kap,kcer70)*fm_attributes("nr",kcer70);
-im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")*fm_attributes("nr","scp");
-*replace feed with SCP based on Nr
+
+*** Substitution of cereal feed (kcer70) with single-cell protein (SCP) based on Nr
+* Before the substitution, kcer70 is converted from DM to Nr
+* using fm_attributes("nr",kcer70).
+* After the substitution of kcer70 with SCP (1-i70_cereal_scp_fadeout), SCP is converted
+* back DM fm_attributes("nr","scp").
 im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")
-             + sum(kcer70, im_feed_baskets(t_all,i,kap,kcer70) * (1-i70_cereal_fadeout(t_all,i)));
+             + sum(kcer70, im_feed_baskets(t_all,i,kap,kcer70) * (1-i70_cereal_scp_fadeout(t_all,i)) *
+             fm_attributes("nr",kcer70)) / fm_attributes("nr","scp");
 im_feed_baskets(t_all,i,kap,kcer70) =
-               im_feed_baskets(t_all,i,kap,kcer70) * i70_cereal_fadeout(t_all,i);
-*convert back from Nr to DM
-im_feed_baskets(t_all,i,kap,kcer70) = im_feed_baskets(t_all,i,kap,kcer70)/fm_attributes("nr",kcer70);
-im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")/fm_attributes("nr","scp");
+               im_feed_baskets(t_all,i,kap,kcer70) * i70_cereal_scp_fadeout(t_all,i);
 
-*** Substitution of foddr feed with single-cell protein (SCP)
-*convert from DM to Nr
-im_feed_baskets(t_all,i,kap,"foddr") = im_feed_baskets(t_all,i,kap,"foddr")*fm_attributes("nr","foddr");
-im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")*fm_attributes("nr","scp");
-*replace feed with SCP based on Nr
+*** Substitution of foddr feed with single-cell protein (SCP) based on Nr
+* Before the substitution, foddr is converted from DM to Nr
+* using fm_attributes("nr","foddr").
+* After the substitution of foddr with SCP (1-i70_foddr_scp_fadeout), SCP is converted
+* back DM fm_attributes("nr","scp").
 im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")
-             + im_feed_baskets(t_all,i,kap,"foddr") * (1-i70_foddr_fadeout(t_all,i));
+             + (im_feed_baskets(t_all,i,kap,"foddr") * (1-i70_foddr_scp_fadeout(t_all,i)) * 
+             fm_attributes("nr","foddr")) / fm_attributes("nr","scp");
 im_feed_baskets(t_all,i,kap,"foddr") =
-               im_feed_baskets(t_all,i,kap,"foddr") * i70_foddr_fadeout(t_all,i);
-*convert back from Nr to DM
-im_feed_baskets(t_all,i,kap,"foddr") = im_feed_baskets(t_all,i,kap,"foddr")/fm_attributes("nr","foddr");
-im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")/fm_attributes("nr","scp");
-
+               im_feed_baskets(t_all,i,kap,"foddr") * i70_foddr_scp_fadeout(t_all,i);

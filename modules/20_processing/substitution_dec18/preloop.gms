@@ -27,6 +27,3 @@ i20_processing_conversion_factors(t,"breeding","scp",kpr) = i20_scp_conversion_f
 *Therefore, the share of the respective feedstock is set to 1.
 i20_processing_shares(t_all,i,"scp",kpr) = 0;
 i20_processing_shares(t_all,i,"scp",kpr)$(i20_scp_conversion_factors(t_all,kpr) > 0) = 1;
-*Cost for SCP are handled differently. See equations. 
-i20_processing_unitcosts("scp",kpr) = 0;
-

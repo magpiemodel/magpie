@@ -23,8 +23,8 @@ parameters
  p70_cattle_stock_proxy(t,i)                      Proxy for cattle stocks needed to fullfil domestic food demand (mio. animals per yr)
  p70_incr_cattle(t,i)                             Change in estimated cattle stocks attributed to food demand projections (1)
  pm_past_mngmnt_factor(t,i)                       Regional pasture management intensification factor (1)
- i70_cereal_fadeout(t_all,i)                      Feed fadeout share to be replaced by SCP (1)
- i70_foddr_fadeout(t_all,i)                		  Soybean fadeout share to be replaced by SCP (1)
+ i70_cereal_scp_fadeout(t_all,i)                  Cereal feed fadeout (share 0-1) to be replaced by SCP (1)
+ i70_foddr_scp_fadeout(t_all,i)                	  Fooder fadeout (share 0-1) to be replaced by SCP (1)
  p70_country_dummy(iso)                           Dummy parameter indicating whether country is affected by feed scenarios (1)
  p70_feedscen_region_shr(t_all,i)                 Weighted share of region with regards to feed scenario of countries (1)
 ;

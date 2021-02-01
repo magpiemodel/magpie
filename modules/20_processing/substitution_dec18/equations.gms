@@ -111,9 +111,7 @@ q20_processing_costs(i2) ..
  vm_cost_processing(i2) =e=
 sum((ksd,processing20,kpr), v20_dem_processing(i2,processing20,kpr)
          *sum(ct,i20_processing_conversion_factors(ct,processing20,ksd,kpr))
-         * i20_processing_unitcosts(ksd,kpr))
-         + (vm_prod_reg(i2,"scp") * sum(scptype, sum(ct, i20_scp_type_shr(ct,scptype)) * f20_scp_unitcosts(scptype)));
-         ;
+         * i20_processing_unitcosts(ksd,kpr));
 
 *' Finally, we assume that any substitution of one product by another,
 *' diverging from our initial demand estimates, comes at a loss of utility.
