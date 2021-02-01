@@ -8,5 +8,4 @@
 
 scalars
   s31_fac_req_past  Factor requirements (USD05MER per tDM)          / 1 /
-  s31_unequal  switch for unequal (1) and equal (0) pasture production (binary)   / 1 /
 ;
