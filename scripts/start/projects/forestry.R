@@ -23,12 +23,12 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN09g"
+identifier_flag = "JAN10"
 
-cat(paste0("Revert pasture module changes, add residue prodn from indrw, add other land conversion eqn"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Easier trade with relaxed self suff pool. Revert pasture module changes, add residue prodn from indrw, add other land conversion eqn"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
-for(scen in c("forestry")){
+for(scen in c("forestry","nocc")){
 
   for(ssp in c("SSP2")){
 

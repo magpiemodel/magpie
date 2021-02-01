@@ -37,9 +37,17 @@ q73_cost_hvarea(i2)..
                   + sum((ct,cell(i2,j2)),        vm_hvarea_primforest(j2)        * p73_timber_harvest_cost(ct,j2,"acx","primforest"))
                     ;
 
-*' The following equation describes cellular level production (in dry matter) of
+*' The following equations describes cellular level production (in dry matter) of
 *' woody biomass `vm_prod_reg` as the sum of the cluster level production of
-*' timber coming from 'v73_prod_forestry' and 'v73_prod_natveg'.
+*' timber coming from 'v73_prod_forestry' and 'v73_prod_natveg'. When production
+*' capabilities are exhausted, the model can produce roundwood without using any
+*' land resources but by paying a very high cost ('s73_free_prod_cost').
+
+
+*' The production equation is split in two parts, one each for industrial roundwood
+*' and wood fuel production. Woodfuel production, in addition to usual production
+*' channels, can also use residues left from industrial roundwood harvest for meeting
+*' overall wood fuel production targets.
 
 q73_prod_wood(j2)..
   vm_prod(j2,"wood")
@@ -61,10 +69,14 @@ q73_prod_woodfuel(j2)..
   +
   v73_prod_heaven_timber(j2,"woodfuel");
 
+*' Production of residues is calculated based on `s73_residue_ratio`. This fraction
+*' of industrial roundwood production is assumed to be lost during harvesting processes.
+*' 
+
 q73_prod_residues(j2)..
   v73_prod_residues(j2)
   =l=
-  vm_prod(j2,"wood") * 0.15
+  vm_prod(j2,"wood") * s73_residue_ratio
   ;
 
 ** Timber plantation
