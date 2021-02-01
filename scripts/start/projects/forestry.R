@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN09f"
+identifier_flag = "JAN09g"
 
-cat(paste0("Pasture equality. Again activate cheaper prodn of woodfuel from other land. Pasture production cost after CALIBRATION"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Revert pasture module changes, add residue prodn from indrw, add other land conversion eqn"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry")){

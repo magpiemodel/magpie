@@ -19,6 +19,7 @@ q73_cost_timber(i2)..
                     =e=
                     v73_cost_hvarea(i2)
                     + sum((cell(i2,j2),land_natveg,ac,kforestry), v73_prod_natveg(j2,land_natveg,ac,kforestry) * s73_timber_prod_cost)
+                    + sum(cell(i2,j2), v73_prod_residues(j2) * 2)
                     + sum((cell(i2,j2),kforestry), v73_prod_heaven_timber(j2,kforestry) * s73_free_prod_cost)
                     ;
 
@@ -40,14 +41,31 @@ q73_cost_hvarea(i2)..
 *' woody biomass `vm_prod_reg` as the sum of the cluster level production of
 *' timber coming from 'v73_prod_forestry' and 'v73_prod_natveg'.
 
-q73_prod_timber(j2,kforestry)..
-  vm_prod(j2,kforestry)
+q73_prod_wood(j2)..
+  vm_prod(j2,"wood")
   =e=
-  sum(ac_sub, v73_prod_forestry(j2,ac_sub,kforestry))
+  sum(ac_sub, v73_prod_forestry(j2,ac_sub,"wood"))
   +
-  sum((land_natveg,ac_sub),v73_prod_natveg(j2,land_natveg,ac_sub,kforestry))
+  sum((land_natveg,ac_sub),v73_prod_natveg(j2,land_natveg,ac_sub,"wood"))
   +
-  v73_prod_heaven_timber(j2,kforestry);
+  v73_prod_heaven_timber(j2,"wood");
+
+q73_prod_woodfuel(j2)..
+  vm_prod(j2,"woodfuel")
+  =e=
+  sum(ac_sub, v73_prod_forestry(j2,ac_sub,"woodfuel"))
+  +
+  sum((land_natveg,ac_sub),v73_prod_natveg(j2,land_natveg,ac_sub,"woodfuel"))
+  +
+  v73_prod_residues(j2)
+  +
+  v73_prod_heaven_timber(j2,"woodfuel");
+
+q73_prod_residues(j2)..
+  v73_prod_residues(j2)
+  =l=
+  vm_prod(j2,"wood") * 0.15
+  ;
 
 ** Timber plantation
 *' Woody biomass production from timber plantations is calculated by multiplying the

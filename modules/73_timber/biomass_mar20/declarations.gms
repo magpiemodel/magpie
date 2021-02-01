@@ -20,16 +20,20 @@ v73_prod_forestry(j,ac,kforestry)                                           Prod
 v73_prod_natveg(j,land_natveg,ac,kforestry)                                 Production of woody biomass from natural vegetation (mio. tDM per yr)
 v73_prod_heaven_timber(j,kforestry)                                         Production of woody biomass from heaven (mio. tDM per yr)
 vm_cost_timber(i)				                                                    Actual cost of harvesting timber from forests (mio. USD per yr)
+v73_prod_residues(j)                                                        Production of residues from industrial roundwood harvest(mio. tDM per yr)
 ;
 
 equations
 q73_cost_timber(i)												                                  Actual cost of harvesting timber from forests (mio. USD per yr)
 q73_cost_hvarea(i)												                                  Cost of harvesting timber from forests (mio. USD per yr)
-q73_prod_timber(j,kforestry)                                                Production of woody biomass from commercial plantations and natural vegetation (mio. tDM per yr)
+*q73_prod_timber(j,kforestry)                                                Production of woody biomass from commercial plantations and natural vegetation (mio. tDM per yr)
 q73_prod_forestry(j,ac)                                                     Production of woody biomass from commercial plantations (mio. tDM per yr)
 q73_prod_secdforest(j,ac)                                                   Production of woody biomass from secondary forests (mio. tDM per yr)
 q73_prod_primforest(j)                                                      Production of woody biomass from primary forests (mio. tDM per yr)
 q73_prod_other(j,ac)                                                        Production of woody biomass from other land (mio. tDM per yr)
+q73_prod_wood(j)                                                            Production of industrial roundwood (mio. tDM per yr)
+q73_prod_woodfuel(j)                                                        Production of wood fuel (mio. tDM per yr)
+q73_prod_residues(j)                                                        Production of residues from industrial roundwood harvest(mio. tDM per yr)
 ;
 
 
@@ -40,12 +44,15 @@ parameters
  ov73_prod_natveg(t,j,land_natveg,ac,kforestry,type) Production of woody biomass from natural vegetation (mio. tDM per yr)
  ov73_prod_heaven_timber(t,j,kforestry,type)         Production of woody biomass from heaven (mio. tDM per yr)
  ov_cost_timber(t,i,type)                            Actual cost of harvesting timber from forests (mio. USD per yr)
+ ov73_prod_residues(t,j,type)                        Production of residues from industrial roundwood harvest(mio. tDM per yr)
  oq73_cost_timber(t,i,type)                          Actual cost of harvesting timber from forests (mio. USD per yr)
  oq73_cost_hvarea(t,i,type)                          Cost of harvesting timber from forests (mio. USD per yr)
- oq73_prod_timber(t,j,kforestry,type)                Production of woody biomass from commercial plantations and natural vegetation (mio. tDM per yr)
  oq73_prod_forestry(t,j,ac,type)                     Production of woody biomass from commercial plantations (mio. tDM per yr)
  oq73_prod_secdforest(t,j,ac,type)                   Production of woody biomass from secondary forests (mio. tDM per yr)
  oq73_prod_primforest(t,j,type)                      Production of woody biomass from primary forests (mio. tDM per yr)
  oq73_prod_other(t,j,ac,type)                        Production of woody biomass from other land (mio. tDM per yr)
+ oq73_prod_wood(t,j,type)                            Production of industrial roundwood (mio. tDM per yr)
+ oq73_prod_woodfuel(t,j,type)                        Production of wood fuel (mio. tDM per yr)
+ oq73_prod_residues(t,j,type)                        Production of residues from industrial roundwood harvest(mio. tDM per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

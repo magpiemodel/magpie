@@ -115,6 +115,14 @@ q35_secdforest_conversion(j2)..
                         + vm_hvarea_primforest(j2)
                           ;
 
+*' Harvested other land is still considered other land
+
+q35_other_conversion(j2)..
+                          sum(ac_est, v35_other(j2,ac_est))
+                          =g=
+                          sum(ac_sub,vm_hvarea_other(j2,ac_sub))
+                          ;
+
 *' The following two constraints distribute additions to secdforest and other land
 *' over ac_est, which depends on the time step length (e.g. ac0 and ac5 for a 10 year time step).
 
