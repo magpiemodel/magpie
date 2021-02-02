@@ -15,7 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **50_nr_soil_budget** added necessary interfaces to 50_nitrogen module
 - **runscripts** adapted to new input data and model version
 - **15_food** better documentation of parameters over model iterations
-- comparison_validation bugfixed
+- **20_processing** added different options for Single-Cell Protein production
+- **15_food*** added scenario switch for ruminant and dairy replacement by Single-Cell Protein
+- **70_livestock*** added scenario switch for feed replacement (crop and forage) by Single-Cell Protein
+- comparison_validation.R bugfixed
 
 ### added
 - **15_food** Added the option to fade out livestock demand towards a target level in kcal/cap/day.
