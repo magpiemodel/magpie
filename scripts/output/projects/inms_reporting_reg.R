@@ -37,13 +37,13 @@ wdbefore=getwd()
 on.exit(setwd(wdbefore))
 setwd(outputdir)
 
-load( "/config.Rdata")
+load( "config.Rdata")
 title <- cfg$title
 print("generating INMS output for the run: ")
 print(title)
 
 filename=paste0("report_",title,".mif")
-gdx=paste0("/fulldata.gdx")
+gdx=paste0("fulldata.gdx")
 a=getReportINMS(gdx,file=filename,scenario = title)
 
 print(filename)
