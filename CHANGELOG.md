@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **50_nr_soil_budget** added necessary interfaces to 50_nitrogen module
 - **runscripts** adapted to new input data and model version
 - **15_food** better documentation of parameters over model iterations
+- comparison_validation bugfixed
 
 ### added
 - **15_food** Added the option to fade out livestock demand towards a target level in kcal/cap/day.
@@ -26,6 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **35_natveg** Fader for HalfEarth protection policy
 - **12_interest_rate** Interest fader changed to csv
 - **tests** Replaced TravisCI with GithubActions
+- default.cfg exogenous demand is now default
+- defautl.cfg changed to new input data with higher fish price (corrected for DM)
 
 ### removed
 

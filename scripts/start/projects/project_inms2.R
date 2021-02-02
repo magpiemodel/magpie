@@ -54,7 +54,7 @@ general_settings<-function(title) {
   cfg$gms$s15_elastic_demand <- 0
   cfg$gms$nitrogen <- "rescaled_jan21"
   cfg$title <- paste0("inms_",title,"_v5")
-  cfg$calib_cropland <- FALSE
+  #cfg$calib_cropland <- FALSE
   cfg$recalibrate <- FALSE
   return(cfg)
 }

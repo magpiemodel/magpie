@@ -15,22 +15,22 @@ library(magpie4)
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdirs    <-"."
+  outputdir    <-"."
 }
 hist    <- "input/validation.mif"
 file    <- paste0("comparison_validation_",format(Sys.time(), "%Y%H%M%S"),".pdf")
 ###############################################################################
 
 x <- NULL; i <- 1
-for(outputdir in outputdirs) {
-  config <- path(outputdir,"config.Rdata")
+for(outputdir_x in outputdir) {
+  config <- path(outputdir_x,"config.Rdata")
   if(file.exists(config)) {
     load(config)
     title <- cfg$title
   } else {
     title <- paste0("run",i)
   }
-  gdx <- paste0(outputdir, "/fulldata.gdx")
+  gdx <- paste0(outputdir_x, "/fulldata.gdx")
   if(!is.null(x)) {
     scenarios <- getNames(x,dim=2)
     if(title %in% scenarios) {
