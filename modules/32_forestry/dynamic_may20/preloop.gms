@@ -144,7 +144,7 @@ p32_land(t,j,type32,ac) = 0;
 
 ** Define ini32 set. ac0 is excluded here. Therefore no initial shifting is needed.
 ini32(j,ac) = no;
-ini32(j,ac) = yes$(ord(ac) > 1 AND ac.off <= p32_rotation_cellular_harvesting("y1995",j));
+ini32(j,ac) = yes$(ord(ac) >= 1 AND ac.off <= p32_rotation_cellular_harvesting("y1995",j));
 
 ** divide initial forestry area by number of age classes within ini32
 if(s32_initial_distribution = 0,
@@ -203,9 +203,10 @@ else
 *******************************************************************************
 ** Calibrate plantations yields
 *******************************************************************************
-p32_observed_gs_reg(i) = 1;
-p32_observed_gs_reg(i)$(f32_gs_relativetarget(i)>0)  = (sum((cell(i,j),ac),(pm_timber_yield_initial(j,ac,"forestry") / sm_wood_density) * p32_land_start_ac(j,"plant",ac))/ sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac)));
-p32_gs_scaling_reg(i) = f32_gs_relativetarget(i) / p32_observed_gs_reg(i);
+p32_observed_gs_reg(i) = 0;
+p32_observed_gs_reg(i)$(f32_gs_relativetarget(i)>0)  = (sum((cell(i,j),ac),(pm_timber_yield_initial(j,ac,"forestry")$(not sameas(ac,"ac0")) / sm_wood_density) * p32_land_start_ac(j,"plant",ac)$(not sameas(ac,"ac0")))/ sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac)$(not sameas(ac,"ac0"))));
+p32_gs_scaling_reg(i) = 1;
+p32_gs_scaling_reg(i)$(f32_gs_relativetarget(i)>0) = f32_gs_relativetarget(i) / p32_observed_gs_reg(i);
 p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) < 1) = 1;
 *p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i)>10) = 10;
 display p32_land_start_ac,p32_gs_scaling_reg;

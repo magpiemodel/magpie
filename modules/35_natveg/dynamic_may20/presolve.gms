@@ -174,5 +174,5 @@ p35_land(t,j,land_natveg,ac) = 0;
 p35_land(t,j,"primforest","acx") = pcm_land(j,"primforest");
 p35_land(t,j,"secdforest",ac) = p35_secdforest(t,j,ac);
 *p35_land(t,j,"other",ac) = p35_other(t,j,ac):
-p35_updated_gs_natfor(i,t) = (sum((cell(i,j),ac,land_natveg),(pm_timber_yield(t,j,ac,land_natveg) / sm_wood_density) * p35_land(t,j,land_natveg,ac))/ sum((cell(i,j),ac,land_natveg), p35_land(t,j,land_natveg,ac)));
+p35_updated_gs_natfor(t,i) = (sum((cell(i,j),ac,land_natveg),(pm_timber_yield(t,j,ac,land_natveg) / sm_wood_density) * p35_land(t,j,land_natveg,ac))/ sum((cell(i,j),ac,land_natveg), p35_land(t,j,land_natveg,ac)));
 display p35_updated_gs_natfor;
