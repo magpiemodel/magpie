@@ -60,6 +60,6 @@ missingyears=function(x){
 #a=c(missingyears(ssp1),missingyears(ssp2))
 a=missingyears(mif)
 
-write.reportProject(a,mapping="mapping_inms.csv",file=paste0("report_inms.mif"))
+write.reportProject(a,mapping=paste0(wdbefore,"/mapping_inms.csv"),file="report_inms.mif")
 #write.report2(a,file="magpie_results_nov2019.mif")
 
