@@ -5,8 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-i39_cost_establish(land) = 0;
-i39_cost_establish(land_establish39) = s39_cost_establish;
-
-i39_cost_clearing(land) = 0;
-i39_cost_clearing(land_clearing39) = s39_cost_clearing;
+scalars
+s39_cost_establish   Cost for establishing new land use (USD per ha)                 /8000/
+s39_cost_clearing    Clearing costs linked to removed carbon densities (USD per tC)  /5/
+;

@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN12"
+identifier_flag = "JAN13"
 
-cat(paste0("Added back class 15 from poulter data"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("remove class 15 from distribution but cheaper LC estb and clearing costs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry")){
@@ -46,44 +46,54 @@ for(scen in c("forestry")){
 
       for(c73_wood_scen in c("default")){
 
-          cfg$gms$c35_protect_scenario <- c35_protect_scenario
-          cfg$gms$c73_wood_scen <- c73_wood_scen
-          cfg$gms$s15_elastic_demand <- 0
+        for(s39_cost_establish in c(1000,3000,5000)){
+          cfg$gms$s39_cost_establish = s39_cost_establish
+
+          for(s39_cost_clearing in c(1,3)){
+            cfg$gms$s39_cost_clearing = s39_cost_clearing
+
+            cfg$gms$cfg$recalibrate <- TRUE
+
+            cfg$gms$c35_protect_scenario <- c35_protect_scenario
+            cfg$gms$c73_wood_scen <- c73_wood_scen
+            cfg$gms$s15_elastic_demand <- 0
 
 
-          if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
-          if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
+            if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
+            if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
 
-          cfg$gms$c57_macc_version = "PBL_2019"
-          cfg$gms$c60_biodem_level <- 0
+            cfg$gms$c57_macc_version = "PBL_2019"
+            cfg$gms$c60_biodem_level <- 0
 
 
-          if(cfg$gms$sm_timber_demand_switch == 1) timber_flag = "timberON"
-          if(cfg$gms$sm_timber_demand_switch == 0) timber_flag = "timberOFF"
+            if(cfg$gms$sm_timber_demand_switch == 1) timber_flag = "timberON"
+            if(cfg$gms$sm_timber_demand_switch == 0) timber_flag = "timberOFF"
 
-          if(cfg$gms$s32_fix_plant == 0) plant_area_flag = "Baseline"
-          if(cfg$gms$s32_fix_plant == 1) plant_area_flag = "Constrained"
+            if(cfg$gms$s32_fix_plant == 0) plant_area_flag = "Baseline"
+            if(cfg$gms$s32_fix_plant == 1) plant_area_flag = "Constrained"
 
-          if(cfg$gms$s32_distribution_type == 0) init_flag = "Equal"
-          if(cfg$gms$s32_distribution_type == 1) init_flag = "FAO"
-          if(cfg$gms$s32_distribution_type == 2) init_flag = "Poulter"
+            if(cfg$gms$s32_distribution_type == 0) init_flag = "Equal"
+            if(cfg$gms$s32_distribution_type == 1) init_flag = "FAO"
+            if(cfg$gms$s32_distribution_type == 2) init_flag = "Poulter"
 
-          if(cfg$gms$s35_secdf_distribution == 0) dist_flag = "ACx"
-          if(cfg$gms$s35_secdf_distribution == 1) dist_flag = "Equal"
-          if(cfg$gms$s35_secdf_distribution == 2) dist_flag = "Poulter"
+            if(cfg$gms$s35_secdf_distribution == 0) dist_flag = "ACx"
+            if(cfg$gms$s35_secdf_distribution == 1) dist_flag = "Equal"
+            if(cfg$gms$s35_secdf_distribution == 2) dist_flag = "Poulter"
 
-          if(cfg$gms$s35_forest_damage == 0) damage_flg = "None"
-          if(cfg$gms$s35_forest_damage == 1) damage_flg = "Shifting"
-          if(cfg$gms$s35_forest_damage == 2) damage_flg = "Combined"
+            if(cfg$gms$s35_forest_damage == 0) damage_flg = "None"
+            if(cfg$gms$s35_forest_damage == 1) damage_flg = "Shifting"
+            if(cfg$gms$s35_forest_damage == 2) damage_flg = "Combined"
 
-          if(scen=="nocc") scen_flag="Default"
-          if(scen=="forestry") scen_flag="Forestry"
+            if(scen=="nocc") scen_flag="Default"
+            if(scen=="forestry") scen_flag="Forestry"
 
-          cfg$title   = paste0(identifier_flag,"_",scen_flag)
-          cfg$output  = c("extra/timestep_duration")
+            cfg$title   = paste0(identifier_flag,"_",scen_flag,"_Estb",cfg$gms$s39_cost_establish,"_Clear",cfg$gms$s39_cost_clearing)
+            cfg$output  = c("extra/timestep_duration")
 
-           xx = c(xx,cfg$title)
-           start_run(cfg,codeCheck=FALSE)
+             xx = c(xx,cfg$title)
+             start_run(cfg,codeCheck=FALSE)
+          }
+        }
       }
     }
   }
