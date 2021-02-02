@@ -68,7 +68,7 @@ cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping=
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$force_download <- TRUE
-#cfg$recalibrate <- TRUE
+cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
 calib<-magpie4::submitCalibration(name = "INMS_v5")
 
