@@ -6,8 +6,10 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 * Ben Poulter age class distribution
-im_plantedclass_ac(j,ac)  = sum(ac_poulter_to_ac(ac_poulter,ac),f29_forestageclasses(j,ac_poulter));
+im_plantedclass_ac(j,ac)  = 0;
+im_plantedclass_ac(j,ac)  = sum(ac_poulter_to_ac(ac_poulter,ac),f29_forestageclasses(j,ac_poulter)$(not sameas(ac_poulter,"class15")));
 
 * As summing over makes double counting (two magpie age classes in one poulter class)
 * We divide by 2
 im_plantedclass_ac(j,ac)  = im_plantedclass_ac(j,ac) /2;
+display im_plantedclass_ac,f29_forestageclasses;

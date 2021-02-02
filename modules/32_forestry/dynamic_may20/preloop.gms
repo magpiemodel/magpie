@@ -204,7 +204,7 @@ else
 ** Calibrate plantations yields
 *******************************************************************************
 p32_observed_gs_reg(i) = 1;
-p32_observed_gs_reg(i)$(f32_gs_relativetarget(i)>0)  = (sum((cell(i,j),ac),(pm_timber_yield_initial(j,ac,"forestry") / s32_wood_density) * p32_land_start_ac(j,"plant",ac))/ sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac)));
+p32_observed_gs_reg(i)$(f32_gs_relativetarget(i)>0)  = (sum((cell(i,j),ac),(pm_timber_yield_initial(j,ac,"forestry") / sm_wood_density) * p32_land_start_ac(j,"plant",ac))/ sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac)));
 p32_gs_scaling_reg(i) = f32_gs_relativetarget(i) / p32_observed_gs_reg(i);
 p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) < 1) = 1;
 *p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i)>10) = 10;

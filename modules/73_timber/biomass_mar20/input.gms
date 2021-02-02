@@ -20,6 +20,10 @@ scalars
   s73_residue_ratio         Proportion of overall industrial roundwood production which ends up as residue during harvest (1) / 0.15/
 ;
 
+** Residue numbers from
+** "Spatially explicit assessment of roundwood and logging residues availability and costs for the EU28"
+** "The total potential volume of logging residues in the “Reference scenario” is estimated to be 79 Mm3, corresponding to 13.5% of the roundwood potential volume. "
+
 table f73_prod_specific_timber(t_all,iso,total_wood_products) End use timber product demand (mio. m3 per yr)
 $ondelim
 $include "./modules/73_timber/input/f73_prod_specific_timber.csv"
@@ -34,7 +38,7 @@ $offdelim
 /
 ;
 
-parameter f73_volumetric_conversion(kforestry) Income elasticities of wood products (1)
+parameter f73_volumetric_conversion(kforestry) Volumetric conversion from mio t to m3 of wood (1)
 /
 $ondelim
 $include "./modules/73_timber/input/f73_volumetric_conversion.csv"

@@ -134,7 +134,7 @@ pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j
 
 ** Display
 p32_updated_gs_reg(t,i) = 1;
-p32_updated_gs_reg(t,i)$(sum((cell(i,j),ac),p32_land(t,j,"plant",ac))>0) = (sum((cell(i,j),ac),(pm_timber_yield(t,j,ac,"forestry") / s32_wood_density) * p32_land(t,j,"plant",ac))/ sum((cell(i,j),ac),p32_land(t,j,"plant",ac)));
+p32_updated_gs_reg(t,i)$(sum((cell(i,j),ac),p32_land(t,j,"plant",ac))>0) = (sum((cell(i,j),ac),(pm_timber_yield(t,j,ac,"forestry") / sm_wood_density) * p32_land(t,j,"plant",ac))/ sum((cell(i,j),ac),p32_land(t,j,"plant",ac)));
 display f32_gs_relativetarget,p32_updated_gs_reg;
 
 *** EOF presolve.gms ***

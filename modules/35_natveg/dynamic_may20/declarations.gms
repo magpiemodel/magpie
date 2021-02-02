@@ -30,6 +30,8 @@ parameters
  i35_plantedclass_ac(j,ac)                       Area of age-classes in secondary forest (1)
  p35_poulter_dist(j,ac)                          Share of age-classes in secondary forest (1)
  p35_save_dist(j,ac)                             Distribution of secondary forest saving (1)
+ p35_land(t,j,land_natveg,ac)
+ p35_updated_gs_natfor(i,t)
 ;
 
 equations

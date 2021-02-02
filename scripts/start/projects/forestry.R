@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN10"
+identifier_flag = "JAN11"
 
-cat(paste0("Easier trade with relaxed self suff pool. Revert pasture module changes, add residue prodn from indrw, add other land conversion eqn"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("No class 15 from poulter data"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry","nocc")){
