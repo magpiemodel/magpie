@@ -23,12 +23,12 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN11"
+identifier_flag = "JAN12"
 
-cat(paste0("No class 15 from poulter data"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Added back class 15 from poulter data"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
-for(scen in c("forestry","nocc")){
+for(scen in c("forestry")){
 
   for(ssp in c("SSP2")){
 
