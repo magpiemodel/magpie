@@ -8,17 +8,81 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### changed
+- **50_nr_soil_budget** added necessary interfaces to 50_nitrogen module
+- **runscripts** adapted to new input data and model version
+- **15_food** better documentation of parameters over model iterations
+- **20_processing** added different options for Single-Cell Protein production
+- **15_food*** added scenario switch for ruminant and dairy replacement by Single-Cell Protein
+- **70_livestock*** added scenario switch for feed replacement (crop and forage) by Single-Cell Protein
+
+### added
+- **15_food** Added the option to fade out livestock demand towards a target level in kcal/cap/day.
+- **35_natveg** Added HalfEarth scenario to protection scenarios
+- **51_nitrogen** new module realization rescaled_jan21, which rescales n-related emissions with nitrogen surplus to account for lower emissions with higher NUE
+- **56_ghg_policy** Added new scenario to emission policy
+- **scripts** added output script for disaggregation of land transitions
+
+### changed
+- **scripts** Updated AgMIP output scripts.
+- **35_natveg** Fader for HalfEarth protection policy
+- **12_interest_rate** Interest fader changed to csv
+- **tests** Replaced TravisCI with GithubActions
+
+### removed
+
+### fixed
+- **32_forestry** Bugfixes for "ac_est" and carbon treshold afforestation; removed plantations from "vm_cdr_aff".
+- **core** bugfix m_fillmissingyears macro; was running over t before; now running over t_all_
+
+## [4.3.1] - 2020-11-03
+
+### added
+- **main** Added Dockerfile for running MAgPIE in a container
+
+### fixed
+- **35_natveg** Bugfix "v35_secdforest_expansion"
+- **52_carbon** Bugfix "p52_scaling_factor" for climate change runs
+
+## [4.3.0] - 2020-09-15
+
+### added
+- **38_factor_costs** Added the new "sticky" realization to the factor costs module. The realization "sticky_feb18" favors expansion in cells with preexisting farmland and capital based on capital investment decisions.
+- **modules** added endogenous implementation of local biophysical (bph) impacts of afforestation to existing realizations in modules 32_forestry (dynamic_oct19) and 56_ghg_policy (price_jan20). default = off
+- **73_timber** Added timber module which brings the ability of producing woody biomass for timber plantations and natural vegetation. Default = off. New switch: `s73_foresight`. New scalars : `s73_timber_prod_cost`, `s73_timber_harvest_cost`,`s73_cost_multiplier`,`s73_free_prod_cost`
+- **32_forestry** New realization `dynamic_may20` for forestry land use dynamics. This builds up on previous forestry realization for afforestation. New switches: `s32_fix_plant`, `c32_interest_rate`. New scalars : `s32_plant_share`, `s32_forestry_int_rate`, `s32_investment_cost`, `s52_plantation_threshold`.
+- **35_natveg** New realization `dynamic_may20` for natural vegetation land use dynamics. New forest protection scenario.
+- **52_carbon** Added interface which is used for calculating additional investment needed in plantations when carbon stocks are lower than a specified threshold. New scalar: `s52_plantation_threshold`.
+- **57_maccs** Added MACCs from Harmsen PBL 2019
+- **15_food** Added the option to include calories from alcohol consumption in healthy and sustainable EAT-Lancet diets.
+- **scripts** added start script for making timber production runs (forestry.R).
+
+### changed
+- **scripts** updated selection routine for start and output scripts
+- **scripts** replaced lucode dependency with newer packages lucode2 and gms
+- **32_forestry** include new datasets of the bph effect of afforestation / replaced the bph ageclass switch with a fade-in between ac10 and ac30 in (dynamic_may20)
+ - **13_tc**, **39_landconversion**, **41_area_equipped_for_irrigation** and **58_peatland**. For the current time step, the optimization costs only include now the annuity of the present investment. magpie4's reportCosts() function was modified to consider these changes.
+
+### removed
+ - **scripts** deleted outdated start and output scripts
+
+### fixed
+ - **32_forestry** Rotation length calculation based on correct marginals of growth function in timber plantations. Clearer calculations for harvested area for timber production.
+ - **35_natveg** Clearer calculations for harvested area for timber production.
+ - **52_carbon** Fix to the Carbon densities received from LPJmL for timber plantations.
+
+## [4.2.1] - 2020-05-15
+
 ### added
  - **modules** added option of regional scenario switches in modules 12_interest_rate, 15_food, 42_water_demand, 50_nr_soil_budget, 55_awms, 56_ghg_policy, 60_bioenergy
  - **58_peatland** added peatland module. Two realizations: off (=default) and on.
  - **80_optimization** added realization for parallel optimization of regions in combination with fixed trade patterns.
  - **metadata** added .zenodo.json metadata file for proper metadata information in ZENODO releases
- - **scripts** added output script for disaggregation of land transitions
 
 ### changed
  - **12_interest_rate** merged the two realizations (glo_jan16 and reg_feb18) into one (select_apr20) with same functionality and add on of option to choose different interest rate scenarios for different regions selected via country switch select_countries12
  - **scripts** streamlined and improved performance of NPI/NDC preprocessing
- 
+
 ### fixed
  - **56_ghg_policy and 60_bioenergy** update of GHG prices and 2nd generation bioenergy demand from SSPDB to most recent snapshot
  - **NPI/NDC policy calculations** revision of calculation method
@@ -31,7 +95,7 @@ This release version is focussed on consistency between the MAgPIE setup and the
 
 ### added
  - **config** Added new socioeconomic scenario (SDP) to scenario_config.csv (which include all switches to define among others the SSP scenarios). For the parametrization of the new SDP (Sustainable Development Pathway) scenario, the list of scenario switches was extended to account for a broad range of sustainability dimensions.
- - **10_land** added new land realization landmatrix_dec18 to directly track land transition between land use types 
+ - **10_land** added new land realization landmatrix_dec18 to directly track land transition between land use types
  - **15_food** stronger ruminant fade out in India
  - **15_food** Added exogenous food substitution scenarios that can be selected via settings in the config-file, defining speed of convergence, scenario targets and transition periods (applied after the food demand model is executed). Among these scenarios are the substitution of livestock products with plant-based food commodities and the substitution of beef or fish with poultry. The food substitution scenarios are based on the model-native, regression-based calculation of food intake and demand.
  - **15_food** Added exogenous EAT Lancet diet scenarios: It is now possible to define in the config-file exogenous diet scenarios that replace the regression-based calculation of food intake and demand. Possible settings are the target for total calorie intake (e.g. according to a healthy BMI) and variants of the EAT Lancet diet (e.g. in addition to the flexitarian a vegetarian or vegan variant).
@@ -39,7 +103,7 @@ This release version is focussed on consistency between the MAgPIE setup and the
  - **30_crop** added crop specific land use initialization pattern (used as interface for other modules)
  - **50_nr_soil_budget and 55_awms** Additional inputs for the GoodPractice Scenario.
  - **52_carbon** Added new forest growth curve parameters based on Braakhekke et al. 2019. Growth curves are now differentiated between natural vegetation (default) and plantations.
- - **59_som** added new realization static_jan19 (new default) including all soil carbon related calculations. Before all carbon pools were updated in the specific land use type modules. This still holds true for the above ground pools (vegetation and litter carbon) 
+ - **59_som** added new realization static_jan19 (new default) including all soil carbon related calculations. Before all carbon pools were updated in the specific land use type modules. This still holds true for the above ground pools (vegetation and litter carbon)
  - **.gitattributes** file added to set line ending handling to auto for all text files
  - **scaling** added scaling.gms files for several modules to improve optimization (based on gdx::calc_scaling)
  - **scripts** added output scripts for global soil carbon maps (SoilMaps.R).
@@ -47,7 +111,7 @@ This release version is focussed on consistency between the MAgPIE setup and the
 ### changed
  - **config** new default ghg emission pricing policy "redd+_nosoil" in c56_emis_policy. Includes all pools included in the previous default "SSP_nosoil", and in addition "forestry".
  - **13_tau** lower bound for vm_tau for historical time steps
- - **50_nr_soil_budget** atmospheric deposition is now estimated on the cluster-level instead of the region level to improve spatial patterns.  
+ - **50_nr_soil_budget** atmospheric deposition is now estimated on the cluster-level instead of the region level to improve spatial patterns.
  - **56_ghg_policy** updated scenarios in f56_emis_policy: none, all natural (called 'ssp') and all land use change emissions (pure co2) being included in greenhouse gas pricing. ssp and all also featuring additional scenarios excluding soil carbon pricing (marked with '_nosoil' postscript).
  - **56_ghg_policy** Several changes regarding afforestation: use of detailed formula for incentive calculation instead of simplified Hotelling formula, 50 year planning horizon (instead of 80 years), phase-in of GHG prices deactivated by default (now done in REMIND), CO2 price reduction factor deactivated by default, introduced buffer reduction factor of 20% for afforestation.
  - **59_som** updated cellpool_aug16 realization to use new interfaces from land module on land use type specific land expansion and reduction as well as crop type specific land initialization pattern. Additionally added irrigation as stock change factor sub-type. N fertilizer from soil organic matter decomposition is truncated after threshold to avoid unrealistically high fertilization rates.
@@ -70,7 +134,7 @@ This version provides the model version used for the publication starved, stuffe
 
 ### added
 - **scripts** a startscript that allows the exchange of model parameters as a sensitivity analysis
- 
+
 ### changed
 - **core** allow for flexible calibration period of the model, which allows for uncalibrated runs of the past for validation purposes
 - **15_food** Parameters for bodyheight regressions were included explicitly as input parameters
@@ -116,7 +180,10 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.2.0...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.3.1...develop
+[4.3.1]: https://github.com/magpiemodel/magpie/compare/v4.3.0...v4.3.1
+[4.3.0]: https://github.com/magpiemodel/magpie/compare/v4.2.1...v4.3.0
+[4.2.1]: https://github.com/magpiemodel/magpie/compare/v4.2.0...v4.2.1
 [4.2.0]: https://github.com/magpiemodel/magpie/compare/v4.1.1...v4.2.0
 [4.1.1]: https://github.com/magpiemodel/magpie/compare/v4.1.0...v4.1.1
 [4.1.0]: https://github.com/magpiemodel/magpie/compare/v4.0.1...v4.1.0
