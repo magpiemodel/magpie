@@ -71,7 +71,7 @@ for(scen in c("forestry")){
           if(cfg$gms$s32_distribution_type == 0) init_flag = "Equal"
           if(cfg$gms$s32_distribution_type == 1) init_flag = "FAO"
           if(cfg$gms$s32_distribution_type == 2) init_flag = "Poulter"
-          if(cfg$gms$s32_distribution_type == 2) init_flag = "Manual"
+          if(cfg$gms$s32_distribution_type == 3) init_flag = "Manual"
 
           if(cfg$gms$s35_secdf_distribution == 0) dist_flag = "ACx"
           if(cfg$gms$s35_secdf_distribution == 1) dist_flag = "Equal"
