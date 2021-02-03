@@ -8,9 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### added
-- **51_nitrogen** new module realization rescaled_jan21, which rescales n-related emissions with nitrogen surplus to account for lower emissions with higher NUE
-
 ### changed
 - **50_nr_soil_budget** added necessary interfaces to 50_nitrogen module
 - **runscripts** adapted to new input data and model version
@@ -22,7 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### added
 - **15_food** Added the option to fade out livestock demand towards a target level in kcal/cap/day.
 - **35_natveg** Added HalfEarth scenario to protection scenarios
+- **51_nitrogen** new module realization rescaled_jan21, which rescales n-related emissions with nitrogen surplus to account for lower emissions with higher NUE
 - **56_ghg_policy** Added new scenario to emission policy
+- **scripts** added output script for disaggregation of land transitions
 
 ### changed
 - **scripts** Updated AgMIP output scripts.
