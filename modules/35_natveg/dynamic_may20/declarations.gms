@@ -32,6 +32,9 @@ parameters
  p35_save_dist(j,ac)                             Distribution of secondary forest saving (1)
  p35_land(t,j,land_natveg,ac)
  p35_updated_gs_natfor(t,i)
+ p35_land_start_ac(j,ac,land_natveg)
+ p35_observed_gs_reg(i)
+ p35_gs_scaling_reg(i)
 ;
 
 equations

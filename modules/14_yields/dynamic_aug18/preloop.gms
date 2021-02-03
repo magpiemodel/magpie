@@ -34,7 +34,16 @@ p14_growing_stock_initial(j,ac,"forestry","plantations") =
      )
     ;
 
+p14_growing_stock_initial(j,ac,land_natveg,"natveg") =
+    (
+       pm_carbon_density_ac("y1995",j,ac,"vegc")
+      / s14_carbon_fraction
+      * f14_aboveground_fraction(land_natveg)
+      / sum(clcl, pm_climate_class(j,clcl) * f14_ipcc_bce(clcl,"natveg"))
+     )
+    ;
 **** Hard constraint to always have a positive number in p14_growing_stock
+p14_growing_stock_initial(j,ac,land_natveg,"natveg") = p14_growing_stock_initial(j,ac,land_natveg,"natveg")$(p14_growing_stock_initial(j,ac,land_natveg,"natveg")>0)+0.0001$(p14_growing_stock_initial(j,ac,land_natveg,"natveg")=0);
 p14_growing_stock_initial(j,ac,"forestry","plantations") = p14_growing_stock_initial(j,ac,"forestry","plantations")$(p14_growing_stock_initial(j,ac,"forestry","plantations")>0)+0.0001$(p14_growing_stock_initial(j,ac,"forestry","plantations")=0);
 
 ** Used in equations
@@ -43,3 +52,5 @@ p14_growing_stock_initial(j,ac,"forestry","plantations") = p14_growing_stock_ini
 pm_timber_yield_initial(j,ac,"forestry")$(s14_timber_plantation_yield = 1) = p14_growing_stock_initial(j,ac,"forestry","plantations") ;
 ** If the plantation yield switch is off, then the forestry yields are given the same values as secdforest yields,
 pm_timber_yield_initial(j,ac,"forestry")$(s14_timber_plantation_yield = 0) = pm_timber_yield_initial(j,ac,"secdforest");
+** Natveg yields are unchanged and doesn't depend on plantation yield switch
+pm_timber_yield_initial(j,ac,land_natveg) = p14_growing_stock_initial(j,ac,land_natveg,"natveg");

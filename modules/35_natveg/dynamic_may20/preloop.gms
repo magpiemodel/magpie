@@ -46,3 +46,21 @@ p35_secdforest(t,j,ac) = 0;
 * initialize forest disturbance losses
 p35_disturbance_loss_secdf(t,j,ac) = 0;
 p35_disturbance_loss_primf(t,j) = 0;
+
+**************************************************************************
+*******************************************************************************
+** Calibrate Natural vegetation yields
+*******************************************************************************
+p35_land_start_ac(j,ac,land_natveg) = 0;
+p35_land_start_ac(j,"acx","primforest") = pcm_land(j,"primforest");
+p35_land_start_ac(j,ac,"secdforest") = i35_secdforest(j,ac);
+p35_observed_gs_reg(i) = 0;
+p35_observed_gs_reg(i)$(f35_gs_relativetarget(i)>0)  = (sum((cell(i,j),ac,land_natveg),(pm_timber_yield_initial(j,ac,land_natveg)$(not sameas(ac,"ac0")) / sm_wood_density) * p35_land_start_ac(j,ac,land_natveg)$(not sameas(ac,"ac0")))/ sum((cell(i,j),ac,land_natveg),p35_land_start_ac(j,ac,land_natveg)$(not sameas(ac,"ac0"))));
+p35_gs_scaling_reg(i) = 1;
+p35_gs_scaling_reg(i)$(f35_gs_relativetarget(i)>0) = f35_gs_relativetarget(i) / p35_observed_gs_reg(i);
+*p35_gs_scaling_reg(i)$(p35_gs_scaling_reg(i) < 1) = 1;
+*p35_gs_scaling_reg(i)$(p35_gs_scaling_reg(i)>10) = 10;
+display p35_land_start_ac,f35_gs_relativetarget,p35_observed_gs_reg,p35_gs_scaling_reg;
+
+** Update c-densitiy
+pm_carbon_density_ac(t_all,j,ac,"vegc") = pm_carbon_density_ac(t_all,j,ac,"vegc") * sum(cell(i,j),p35_gs_scaling_reg(i));

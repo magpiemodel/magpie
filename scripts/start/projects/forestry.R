@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN14"
+identifier_flag = "JAN15"
 
-cat(paste0("AC0 in initialization set but no ac0 in calibration step. Added class 15 again."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Calibrate natveg gs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry")){
