@@ -42,9 +42,9 @@ parameters
  p32_gs_scaling_reg(i)                              Calibration factor for scaling up the relative growing stock (1)
  p32_rotation_dist(j,ac)                            Poulter distribution within celular rotation lengths (1)
  p32_updated_gs_reg(t,i)                            bla blu
- p32_plantation_contribution(t_ext,i)               bla bla
+ p32_plantation_contribution(t_ext,i)               Share of roundwood production coming from timber plantations (percent)
  p32_ac_dist_flag(j,ac)
- p32_ac_dist(j,ac) 
+ p32_ac_dist(j,ac)
 ;
 
 positive variables
