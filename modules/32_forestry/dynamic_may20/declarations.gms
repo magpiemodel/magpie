@@ -43,6 +43,8 @@ parameters
  p32_rotation_dist(j,ac)                            Poulter distribution within celular rotation lengths (1)
  p32_updated_gs_reg(t,i)                            bla blu
  p32_plantation_contribution(t_ext,i)               bla bla
+ p32_ac_dist_flag(j,ac)
+ p32_ac_dist(j,ac) 
 ;
 
 positive variables
