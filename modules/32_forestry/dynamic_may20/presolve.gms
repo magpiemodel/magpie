@@ -133,7 +133,7 @@ v32_land.fx(j,"aff",ac_est)$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0
 m_boundfix(v32_land,(j,type32,ac_sub),l,10e-5);
 
 ** Calculate future yield based on rotation length
-pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)), pm_timber_yield(t,j,ac,"forestry"));
+pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)-1), pm_timber_yield(t,j,ac,"forestry"));
 
 ** Display
 p32_updated_gs_reg(t,i) = 1;

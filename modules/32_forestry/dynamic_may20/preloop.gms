@@ -144,7 +144,7 @@ p32_land(t,j,type32,ac) = 0;
 
 ** Define ini32 set. ac0 is excluded here. Therefore no initial shifting is needed.
 ini32(j,ac) = no;
-ini32(j,ac) = yes$(ord(ac) >= 1 AND ac.off <= p32_rotation_cellular_harvesting("y1995",j));
+ini32(j,ac) = yes$(ord(ac) >= 1 AND ac.off < p32_rotation_cellular_harvesting("y1995",j));
 
 ** divide initial forestry area by number of age classes within ini32
 if(s32_initial_distribution = 0,
@@ -183,7 +183,7 @@ elseif s32_initial_distribution = 1,
 ** Set all acs to 0
       p32_ac_dist_flag(j,ac) = 0;
 ** Calculate reverse of age-classes, if rotation is 11acs, then ac0 should get a value of 11, 11th ac should get value of 1
-      p32_ac_dist_flag(j,ac) = (p32_rotation_cellular_harvesting("y1995",j)-((ord(ac)-1)))$(ord(ac) <= p32_rotation_cellular_harvesting("y1995",j));
+      p32_ac_dist_flag(j,ac) = (10*p32_rotation_cellular_harvesting("y1995",j)-((ord(ac)-1))*5)$(ord(ac) <= p32_rotation_cellular_harvesting("y1995",j));
 ** Calculate the weights, youngest age-class will have highest weight
       p32_ac_dist(j,ac) = (p32_ac_dist_flag(j,ac) / (sum(ac2,p32_ac_dist_flag(j,ac2)) + ord(ac)))$(ord(ac) <= p32_rotation_cellular_harvesting("y1995",j));
 ** there can be isntances where this distribution is not summing up to 1, in that case we take the excess and remove it evenly from all age-classes
