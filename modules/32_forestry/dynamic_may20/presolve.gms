@@ -66,7 +66,10 @@ s32_shift = m_yeardiff_forestry(t)/5;
 
 *' Shifting of age-calsses in land.
 *` @code
-if((ord(t)>1),
+if((ord(t)=1),
+p32_land(t,j,type32,ac)$(ord(ac) > s32_shift) = p32_land(t,j,type32,ac-s32_shift);
+p32_land(t,j,type32,"acx") = p32_land(t,j,type32,"acx") + sum(ac$(ord(ac) > card(ac)-s32_shift), p32_land(t,j,type32,ac));
+else
 * Example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s32_shift = 1)
 p32_land(t,j,type32,ac)$(ord(ac) > s32_shift) = p32_land(t-1,j,type32,ac-s32_shift);
 * Account for cases at the end of the age class set (s32_shift > 1) which are not shifted by the above calculation
