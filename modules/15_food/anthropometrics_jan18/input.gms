@@ -22,12 +22,13 @@ $setglobal c15_rum_share  mixed
 *   options:   constant,
 *              lin_zero_10_50, lin_zero_20_50, lin_zero_20_30, lin_50pc_20_50, lin_50pc_20_50_extend65, lin_50pc_20_50_extend80,
 *              lin_50pc_10_50_extend90, lin_75pc_10_50_extend90, lin_80pc_20_50, lin_80pc_20_50_extend95, lin_90pc_20_50_extend95,
-*              lin_99-98-90pc_20_50-60-100
+*              lin_99-98-90pc_20_50-60-100, sigmoid_20pc_20_50
 $setglobal c15_rumscen  constant
 $setglobal c15_fishscen  constant
 $setglobal c15_alcscen  constant
 $setglobal c15_livescen  constant
 $setglobal c15_rumdairyscen  constant
+$setglobal c15_rumdairy_scp_scen  constant
 $setglobal c15_livescen_target  constant
 
 
