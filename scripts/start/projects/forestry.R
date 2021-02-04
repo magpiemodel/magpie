@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN18"
+identifier_flag = "JAN19"
 
 cat(paste0("Bugfix final rotation class exclusion"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
@@ -47,6 +47,7 @@ for(scen in c("forestry","nocc")){
       for(c73_wood_scen in c("default")){
         for(s32_distribution_type in c(3)){
           cfg$gms$s32_distribution_type = s32_distribution_type
+          cfg$gms$c_timesteps <- "5year"
 
           cfg$gms$cfg$recalibrate <- "ifneeded"
 
