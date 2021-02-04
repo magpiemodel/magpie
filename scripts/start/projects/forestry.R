@@ -28,7 +28,7 @@ identifier_flag = "JAN18"
 cat(paste0("Bugfix final rotation class exclusion"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
-for(scen in c("forestry")){
+for(scen in c("forestry","nocc")){
 
   for(ssp in c("SSP2")){
 
@@ -45,7 +45,7 @@ for(scen in c("forestry")){
     for(c35_protect_scenario in c("WDPA")){
 
       for(c73_wood_scen in c("default")){
-        for(s32_distribution_type in c(0,1,2,3)){
+        for(s32_distribution_type in c(3)){
           cfg$gms$s32_distribution_type = s32_distribution_type
 
           cfg$gms$cfg$recalibrate <- "ifneeded"
@@ -84,7 +84,7 @@ for(scen in c("forestry")){
           if(scen=="nocc") scen_flag="Default"
           if(scen=="forestry") scen_flag="Forestry"
 
-          cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",init_flag)
+          cfg$title   = paste0(identifier_flag,"_",scen_flag)
           cfg$output  = c("extra/timestep_duration")
 
            xx = c(xx,cfg$title)
