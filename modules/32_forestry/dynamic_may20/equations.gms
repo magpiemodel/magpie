@@ -144,7 +144,7 @@ q32_fix_plant_area(j2) ..
 *' while accounting for regional self sufficiency in (`pm_selfsuff_ext`) timber production.
 q32_establishment_min_reg(i2) ..
               sum(cell(i2,j2), ((sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry) * pc32_yield_forestry_future(j2))
-              =g=
+              =e=
               sum(kforestry, pm_demand_forestry_future(i2,kforestry) * min(0.8,sum(ct, pm_selfsuff_ext(ct,i2,kforestry)))) * sum(ct,p32_plantation_contribution(ct,i2)) * (1-sum(ct,p32_fix_plant(ct)))
               ;
 

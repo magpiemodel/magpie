@@ -25,7 +25,7 @@ dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "JAN21"
 
-cat(paste0("Pasture equality. Bioen subsidy 0"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Estb equality. pasture reverted to less than specification"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry","nocc")){
