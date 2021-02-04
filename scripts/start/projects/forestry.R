@@ -23,9 +23,9 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN16"
+identifier_flag = "JAN18"
 
-cat(paste0("BUgfix final rotation class exclusion"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Bugfix final rotation class exclusion"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry")){
