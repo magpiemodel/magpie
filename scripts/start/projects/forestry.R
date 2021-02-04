@@ -23,12 +23,12 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN22"
+identifier_flag = "JAN23"
 
-cat(paste0("Estb equality. pasture reverted to less than specification"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Ceiling jump 2.5%"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
-for(scen in c("forestry","nocc")){
+for(scen in c("forestry")){
 
   for(ssp in c("SSP2")){
 
