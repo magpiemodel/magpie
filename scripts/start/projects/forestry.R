@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN20"
+identifier_flag = "JAN21"
 
 cat(paste0("Pasture equality. Bioen subsidy 0"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
