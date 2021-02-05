@@ -8,5 +8,6 @@
 
 
 vm_res_biomass_ag.fx(i,kcr,attributes) = 0;
-vm_res_biomass_bg.fx(i,kcr,dm_nr) = 0;
-vm_res_recycling.fx(i,npk) = 0;
+vm_res_biomass_bg.fx(i,kcr,dm_nr)      = 0;
+vm_res_recycling.fx(i,npk)             = 0;
+vm_res_ag_burn.fx(i,kcr,attributes)    = 0;

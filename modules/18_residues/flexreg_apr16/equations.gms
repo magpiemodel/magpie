@@ -39,10 +39,10 @@
                   vm_res_biomass_ag(i2,kcr,attributes)
                   =e=
                   v18_res_ag_removal(i2,kcr,attributes)
-                  + v18_res_ag_burn(i2,kcr,attributes)
+                  + vm_res_ag_burn(i2,kcr,attributes)
                   + v18_res_ag_recycling(i2,kcr,attributes);
 
-*' The amount of residues burned on fields in a region `v18_res_ag_burn` is
+*' The amount of residues burned on fields in a region `vm_res_ag_burn` is
 *' determined by the share (ic18_res_use_min_shr) of AG residue biomass.
 *' Based on @smil_nitrogen_1999, residue burning is fixed to 15% of total AG
 *' crop residue dry matter in developed and 25% in developing regions for each
@@ -50,7 +50,7 @@
 *' kept constant or reduced to 10% and 0% in 2050.
 
  q18_res_field_burn(i2,kcr,attributes) ..
-                  v18_res_ag_burn(i2,kcr,attributes)
+                  vm_res_ag_burn(i2,kcr,attributes)
                   =e=
                   sum(ct, im_development_state(ct,i2) * i18_res_use_burn(ct,"high_income",kcr)
                   + (1-im_development_state(ct,i2)) * i18_res_use_burn(ct,"low_income",kcr))
@@ -82,7 +82,7 @@
                   vm_res_recycling(i2,"nr")
                   =e=
                   sum(kcr,  v18_res_ag_recycling(i2,kcr,"nr")
-                    + v18_res_ag_burn(i2,kcr,"nr")*(1-f18_res_combust_eff(kcr))
+                    + vm_res_ag_burn(i2,kcr,"nr")*(1-f18_res_combust_eff(kcr))
                     + vm_res_biomass_bg(i2,kcr,"nr")
                   );
 
@@ -97,7 +97,7 @@
                   =e=
                   sum(kcr,
                     v18_res_ag_recycling(i2,kcr,pk18)
-                    + v18_res_ag_burn(i2,kcr,pk18)
+                    + vm_res_ag_burn(i2,kcr,pk18)
                   );
 
 *' Costs of residues production are determined as factor costs per ton

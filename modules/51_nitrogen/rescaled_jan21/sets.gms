@@ -17,7 +17,6 @@ sets
 
    emis_source_nonitrogen51(emis_source) Emission sources
    / rice, ent_ferm,
-     resid_burn,
      crop_vegc, crop_litc, crop_soilc,
      past_vegc, past_litc, past_soilc,
      forestry_vegc, forestry_litc, forestry_soilc,

@@ -34,3 +34,10 @@ $ondelim
 $include "./modules/51_nitrogen/rescaled_jan21/input/f51_ef3_prp.cs4"
 $offdelim
 /;
+
+parameter f51_ef_resid_burn(n_pollutants_direct) emission factor for residual burning (tX-N per t DM)
+/
+$ondelim
+$include "./modules/51_nitrogen/rescaled_jan21/input/f51_ef_resid_burn.cs4"
+$offdelim
+/;
