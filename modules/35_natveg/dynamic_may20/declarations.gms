@@ -30,11 +30,11 @@ parameters
  i35_plantedclass_ac(j,ac)                       Area of age-classes in secondary forest (1)
  p35_poulter_dist(j,ac)                          Share of age-classes in secondary forest (1)
  p35_save_dist(j,ac)                             Distribution of secondary forest saving (1)
- p35_land(t,j,land_natveg,ac)
- p35_updated_gs_natfor(t,i)
- p35_land_start_ac(j,ac,land_natveg)
- p35_observed_gs_reg(i)
- p35_gs_scaling_reg(i)
+ p35_land(t,j,land_natveg,ac)                    Natural vegetation area (mio. ha)
+ p35_updated_gs_natfor(t,i)                      Updated growing stock in natural forests after calibration (m3 per ha)
+ p35_land_start_ac(j,ac,land_natveg)             Initial Natural vegetation area (mio. ha)
+ p35_observed_gs_reg(i)                          Observed growing stock in natural forests before calibration (m3 per ha)
+ p35_gs_scaling_reg(i)                           Regional calibration factors for natural vegetation yields (1)
 ;
 
 equations

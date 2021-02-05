@@ -13,7 +13,7 @@ parameters
 ;
 
 variable
- vm_carbon_stock_reduction(j,land,c_pools)	Reduction in carbon stocks compared to previous time step (mio tC per time step)
+ v52_carbon_stock_reduction(j,land,c_pools)	Reduction in carbon stocks compared to previous time step (mio tC per time step)
 ;
 
 positive variables

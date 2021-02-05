@@ -139,9 +139,6 @@ s32_max_aff_area = max(s32_max_aff_area, sum(j, smax(t2, p32_aff_pol(t2,j))) );
 
 p32_cdr_ac(t,j,ac) = 0;
 
-** Initialize parameter
-p32_land(t,j,type32,ac) = 0;
-
 ** Define ini32 set. ac0 is excluded here. Therefore no initial shifting is needed.
 ini32(j,ac) = no;
 ini32(j,ac) = yes$(ord(ac) >= 1 AND ac.off < p32_rotation_cellular_harvesting("y1995",j));
@@ -149,32 +146,32 @@ ini32(j,ac) = yes$(ord(ac) >= 1 AND ac.off < p32_rotation_cellular_harvesting("y
 ** divide initial forestry area by number of age classes within ini32
 if(s32_initial_distribution = 0,
 ** Initialize with highest age class
-  p32_land(t,j,"plant","acx") = pcm_land(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
-  p32_land(t,j,"ndc","acx")   = pcm_land(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i));
+  p32_land_start_ac(j,"plant","acx") = pcm_land(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
+  p32_land_start_ac(j,"ndc","acx")   = pcm_land(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i));
 
 elseif s32_initial_distribution = 1,
 ** Initialize with equal distribution among rotation age classes
   if(s32_distribution_type = 0,
     p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
-    p32_land("y1995",j,"plant",ac)$(ini32(j,ac)) = p32_plant_ini_ac(j);
-    p32_land("y1995",j,"ndc",ac)$(ini32(j,ac))   = pm_land_start(j,"forestry") * sum(cell(i,j),1- f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
+    p32_land_start_ac(j,"plant",ac)$(ini32(j,ac)) = p32_plant_ini_ac(j);
+    p32_land_start_ac(j,"ndc",ac)$(ini32(j,ac))   = pm_land_start(j,"forestry") * sum(cell(i,j),1- f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
     );
   if(s32_distribution_type = 1,
     p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
-    p32_land("y1995",j,"plant",ac) = p32_plant_ini_ac(j) * f32_ac_dist(ac);
-    p32_land("y1995",j,"ndc",ac)   = pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i)) * f32_ac_dist(ac);
+    p32_land_start_ac(j,"plant",ac) = p32_plant_ini_ac(j) * f32_ac_dist(ac);
+    p32_land_start_ac(j,"ndc",ac)   = pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i)) * f32_ac_dist(ac);
     );
   if(s32_distribution_type = 2,
     p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
     p32_rotation_dist(j,ac) =  (im_plantedclass_ac(j,ac)$(ini32(j,ac))/sum(ac2,im_plantedclass_ac(j,ac2)$(ini32(j,ac2))))$(sum(ac2,im_plantedclass_ac(j,ac2)$(ini32(j,ac2))));
-    p32_land("y1995",j,"plant",ac)$(ini32(j,ac)) = p32_plant_ini_ac(j) * p32_rotation_dist(j,ac);
-    p32_land("y1995",j,"ndc",ac)$(ini32(j,ac))   = pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i)) * p32_rotation_dist(j,ac);
+    p32_land_start_ac(j,"plant",ac)$(ini32(j,ac)) = p32_plant_ini_ac(j) * p32_rotation_dist(j,ac);
+    p32_land_start_ac(j,"ndc",ac)$(ini32(j,ac))   = pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i)) * p32_rotation_dist(j,ac);
 
 *use residual approach to avoid distributional errors i.e., poulter set with no plantations but luh reporting plantations in a cell
     loop (j,
-      if(sum(ac,p32_land("y1995",j,"plant",ac)$(ini32(j,ac))) = 0,
-      p32_land("y1995",j,"plant",ac)$(ini32(j,ac)) =  pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
-      p32_land("y1995",j,"ndc",ac)$(ini32(j,ac))   =  pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
+      if(sum(ac,p32_land_start_ac(j,"plant",ac)$(ini32(j,ac))) = 0,
+      p32_land_start_ac(j,"plant",ac)$(ini32(j,ac)) =  pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
+      p32_land_start_ac(j,"ndc",ac)$(ini32(j,ac))   =  pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
        );
     );
     );
@@ -193,15 +190,15 @@ elseif s32_initial_distribution = 1,
 ** Isolate plantations from planted forest (forestry)
     p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
 ** Divide plantations according to distribution
-    p32_land("y1995",j,"plant",ac) = p32_plant_ini_ac(j) * p32_ac_dist(j,ac);
+    p32_land_start_ac(j,"plant",ac) = p32_plant_ini_ac(j) * p32_ac_dist(j,ac);
 ** Divide NDCs according to same distribution
-    p32_land("y1995",j,"ndc",ac)   = pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i)) * p32_ac_dist(j,ac);
+    p32_land_start_ac(j,"ndc",ac)   = pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i)) * p32_ac_dist(j,ac);
     );
 );
 
 display p32_ac_dist_flag,p32_ac_dist;
 ** Initialization of land
-p32_land_start_ac(j,type32,ac) = p32_land("y1995",j,type32,ac);
+*p32_land_start_ac(j,type32,ac) = p32_land("y1995",j,type32,ac);
 
 *fix bph effect to zero for all age classes except the ac that is chosen for the bph effect to occur after planting (e.g. canopy closure)
 *fade-in from ac10 to ac30. First effect in ac10 (ord 3), last effect in ac30 (ord 7).

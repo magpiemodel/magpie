@@ -41,11 +41,11 @@ parameters
  p32_observed_gs_reg(i)                             Observed growing stock (tDM per ha)
  p32_gs_scaling_reg(i)                              Calibration factor for scaling up the relative growing stock (1)
  p32_rotation_dist(j,ac)                            Poulter distribution within celular rotation lengths (1)
- p32_updated_gs_reg(t,i)                            bla blu
+ p32_updated_gs_reg(t,i)                            Updated growing stock information after calibration (m3 per ha)
  p32_plantation_contribution(t_ext,i)               Share of roundwood production coming from timber plantations (percent)
- p32_ac_dist_flag(j,ac)
- p32_ac_dist(j,ac)
- p32_hist_estb_calib(t,i)
+ p32_ac_dist_flag(j,ac)                             Distribution flag with inverse weights according to age-classes (1)
+ p32_ac_dist(j,ac)                                  Actual share of age-class distribution (1)
+ p32_hist_estb_calib(t,i)                           Historical calibration factors for regions where new plantation establishment is lower (1)
 ;
 
 positive variables
