@@ -23,11 +23,11 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN24"
+identifier_flag = "JAN25"
 cat(paste0("DEVState Runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
-for(scen in c("forestry","nocc")){
+for(scen in c("forestry")){
 
   for(ssp in c("SSP2")){
 
@@ -48,7 +48,7 @@ for(scen in c("forestry","nocc")){
 
           cfg$gms$s32_distribution_type = s32_distribution_type
 
-          for(land_conversion in c("devstate_feb21","global_static_aug18")){
+          for(land_conversion in c("devstate_feb21")){
 
   #          cfg$gms$c_timesteps <- "5year"
 
@@ -93,11 +93,11 @@ for(scen in c("forestry","nocc")){
             if(scen=="nocc") scen_flag="Default"
             if(scen=="forestry") scen_flag="Forestry"
 
-            cfg$title   = paste0(identifier_flag,"_",scen_flag,"_LC",lc_flag)
+            cfg$title   = paste0(identifier_flag,"_",scen_flag)
             cfg$output  = c("extra/timestep_duration")
 
              xx = c(xx,cfg$title)
-             start_run(cfg,codeCheck=FALSE)
+             #tart_run(cfg,codeCheck=FALSE)
           }
         }
       }

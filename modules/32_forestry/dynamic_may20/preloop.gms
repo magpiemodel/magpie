@@ -178,6 +178,7 @@ elseif s32_initial_distribution = 1,
        );
     );
     );
+
   if(s32_distribution_type = 3,
     loop(j,
 ** Set all acs to 0
@@ -236,4 +237,8 @@ pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry
 ** Calculate plantation contribution scaled to Growing stock in plantations
 p32_plantation_contribution(t_ext,i) = 0.01;
 p32_plantation_contribution(t_ext,i)$(f32_gs_relativetarget(i)>0) = f32_plantation_contribution(t_ext,i,"%c32_dev_scen%","%c32_incr_rate%");
+p32_plantation_contribution(t_ext,"LAM") = p32_plantation_contribution(t_ext,"LAM") * 1.2 ;
+p32_plantation_contribution(t_ext,"OAS") = p32_plantation_contribution(t_ext,"OAS") * 1.5;
+p32_plantation_contribution(t_ext,"EUR")= f32_plantation_contribution(t_ext,"EUR","brown","%c32_incr_rate%");
+p32_plantation_contribution(t_ext,i)$(p32_plantation_contribution(t_ext,i)>1) = 1;
 display p32_plantation_contribution;

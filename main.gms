@@ -259,7 +259,7 @@ $setglobal urban  static
 $setglobal natveg  dynamic_may20
 
 $setglobal factor_costs  mixed_feb17
-$setglobal landconversion  global_static_aug18
+$setglobal landconversion  devstate_feb21
 
 $setglobal transport  gtap_nov12
 $setglobal area_equipped_for_irrigation  endo_apr13
