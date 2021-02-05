@@ -24,7 +24,7 @@ log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "JAN25"
-cat(paste0("DEVState Runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("Manual fix for LAM demand. and LAM and OAS prod contrib "), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry")){
@@ -97,7 +97,7 @@ for(scen in c("forestry")){
             cfg$output  = c("extra/timestep_duration")
 
              xx = c(xx,cfg$title)
-             #tart_run(cfg,codeCheck=FALSE)
+             tart_run(cfg,codeCheck=FALSE)
           }
         }
       }
