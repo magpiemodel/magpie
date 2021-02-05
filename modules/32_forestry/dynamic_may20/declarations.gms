@@ -45,6 +45,7 @@ parameters
  p32_plantation_contribution(t_ext,i)               Share of roundwood production coming from timber plantations (percent)
  p32_ac_dist_flag(j,ac)
  p32_ac_dist(j,ac)
+ p32_hist_estb_calib(t,i)
 ;
 
 positive variables

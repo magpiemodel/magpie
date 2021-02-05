@@ -67,8 +67,8 @@ s32_shift = m_yeardiff_forestry(t)/5;
 *' Shifting of age-calsses in land.
 *` @code
 if((ord(t)=1),
-p32_land(t,j,type32,ac)$(ord(ac) > s32_shift) = p32_land(t,j,type32,ac-s32_shift);
-p32_land(t,j,type32,"acx") = p32_land(t,j,type32,"acx") + sum(ac$(ord(ac) > card(ac)-s32_shift), p32_land(t,j,type32,ac));
+p32_land(t,j,type32,ac)$(ord(ac) > s32_shift) = p32_land_start_ac(j,type32,ac-s32_shift);
+p32_land(t,j,type32,"acx") = p32_land(t,j,type32,"acx") + sum(ac$(ord(ac) > card(ac)-s32_shift), p32_land_start_ac(j,type32,ac));
 else
 * Example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s32_shift = 1)
 p32_land(t,j,type32,ac)$(ord(ac) > s32_shift) = p32_land(t-1,j,type32,ac-s32_shift);
@@ -139,5 +139,12 @@ pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j
 p32_updated_gs_reg(t,i) = 1;
 p32_updated_gs_reg(t,i)$(sum((cell(i,j),ac_sub),p32_land(t,j,"plant",ac_sub))>0) = (sum((cell(i,j),ac_sub),(pm_timber_yield(t,j,ac_sub,"forestry") / sm_wood_density) * p32_land(t,j,"plant",ac_sub))/ sum((cell(i,j),ac_sub),p32_land(t,j,"plant",ac_sub)));
 display f32_gs_relativetarget,p32_updated_gs_reg;
+
+** Additional calibration for area
+p32_hist_estb_calib(t,i) = 1;
+if(m_year(t) > 1995 AND m_year(t) < sm_fix_SSP2,
+p32_hist_estb_calib(t,"LAM") = p32_hist_estb_calib(t-1,"LAM") + 0.25;
+p32_hist_estb_calib(t,"OAS") = p32_hist_estb_calib(t-1,"LAM") + 0.25;
+);
 
 *** EOF presolve.gms ***
