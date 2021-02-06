@@ -13,19 +13,10 @@ variables
  vm_cost_landcon(j,land)          Land conversion costs (mio. USD05MER per yr)
 ;
 
-scalar
- s39_cost_establish_crop               Global land establishment costs (USD05MER per hectare)
- s39_cost_establish_past               Global land establishment costs (USD05MER per hectare)
- s39_cost_establish_forestry               Global land establishment costs (USD05MER per hectare)
- s39_cost_establish_urban               Global land establishment costs (USD05MER per hectare)
- s39_cost_clearing                Global land clearing costs (USD05MER per ton C)
-;
-
 parameters
- i39_cost_establish(t,i,land)			         Global land establishment costs (USD05MER per hectare)
- i39_cost_clearing(t,i,land)               Global land clearing costs (USD05MER per ton C)
+ i39_cost_establish(t,i,land)	land expansion costs (USD05MER per hectare)
+ i39_cost_clearing(t,i,land)    land clearing costs (USD05MER per ton C)
 ;
-
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters

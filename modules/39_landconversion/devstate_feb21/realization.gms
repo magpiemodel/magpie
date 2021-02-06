@@ -6,6 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description
+*' TEXT NEEDS UPDATE
 *' In this realization, per hectare land conversion costs are separated into 
 *' costs for expansion of cropland, pasture and forestry (establishment costs) and 
 *' costs for clearing of primary forest, secondary forest and other natural land (clearing costs).

@@ -6,21 +6,10 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-s39_cost_establish_crop   	Cost for establishing new land use (USD per ha)      /8000/
-s39_cost_establish_past   	Cost for establishing new land use (USD per ha)      /4000/
-s39_cost_establish_forestry   Cost for establishing new land use (USD per ha)  	 /2000/
-s39_cost_establish_urban   	Cost for establishing new land use (USD per ha)      /10000/
-s39_cost_clearing_hist    	Clearing costs linked to removed carbon densities (USD per tC)  /-1/
-s39_cost_clearing_future    Clearing costs linked to removed carbon densities (USD per tC)  /0/
+s39_cost_establish_crop   	Cost for cropland expansion (USD05MER per hectare)  /8000/
+s39_cost_establish_past   	Cost for pasture expansion (USD05MER per hectare)  /4000/
+s39_cost_establish_forestry Cost for foresty expansion (USD05MER per hectare)  /2000/
+s39_cost_establish_urban   	Cost for urban expansion (USD05MER per hectare)  /10000/
+s39_cost_clearing_hist    	Clearing costs linked to removed biomass (USD05MER per ton C)  /0/
+s39_cost_clearing_future    Clearing costs linked to removed biomass (USD05MER per ton C)  /0/
 ;
-
-$ontext
-*For MAgIE default without forestry use these settings:
-s39_cost_establish_crop   	Cost for establishing new land use (USD per ha)      /8000/
-s39_cost_establish_past   	Cost for establishing new land use (USD per ha)      /8000/
-s39_cost_establish_forestry   Cost for establishing new land use (USD per ha)  	 /8000/
-s39_cost_establish_urban   	Cost for establishing new land use (USD per ha)      /8000/
-s39_cost_clearing_hist    	Clearing costs linked to removed carbon densities (USD per tC)  /5/
-s39_cost_clearing_future    Clearing costs linked to removed carbon densities (USD per tC)  /5/
-$offtext
-

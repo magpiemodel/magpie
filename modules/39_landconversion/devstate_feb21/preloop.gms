@@ -5,18 +5,17 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-i39_cost_establish(t,i,land) = 0;
-i39_cost_establish(t,i,"crop") = s39_cost_establish_crop * im_development_state(t,i);
-i39_cost_establish(t,i,"past") = s39_cost_establish_past * im_development_state(t,i);
-i39_cost_establish(t,i,"forestry") = s39_cost_establish_forestry * im_development_state(t,i);
-i39_cost_establish(t,i,"urban") = s39_cost_establish_urban * im_development_state(t,i);
-*i39_cost_establish(t,i,land_establish39) = s39_cost_establish * (im_development_state(t,i)**2);
-
-i39_cost_clearing(t,i,land) = 0;
-loop(t,
- if(m_year(t) <= sm_fix_SSP2,
-  i39_cost_clearing(t,i,land_clearing39) = s39_cost_clearing_hist;
+if (sum(sameas(t_past,t),1) = 1,
+	i39_cost_clearing(t,i,land_clearing39) = s39_cost_clearing_hist;
+	i39_cost_establish(t,i,"crop") = s39_cost_establish_crop * im_development_state(t,i);
+	i39_cost_establish(t,i,"past") = s39_cost_establish_past * im_development_state(t,i);
+	i39_cost_establish(t,i,"forestry") = s39_cost_establish_forestry * im_development_state(t,i);
+	i39_cost_establish(t,i,"urban") = s39_cost_establish_urban * im_development_state(t,i);
 else
-  i39_cost_clearing(t,i,land_clearing39) = s39_cost_clearing_future;
- );
+	i39_cost_clearing(t,i,land_clearing39) = s39_cost_clearing_future;
+	i39_cost_establish(t,i,"crop") = s39_cost_establish_crop;
+	i39_cost_establish(t,i,"past") = s39_cost_establish_past;
+	i39_cost_establish(t,i,"forestry") = s39_cost_establish_forestry;
+	i39_cost_establish(t,i,"urban") = s39_cost_establish_urban;
 );
+
