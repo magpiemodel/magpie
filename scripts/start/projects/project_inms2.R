@@ -53,7 +53,7 @@ general_settings<-function(title) {
   cfg$gms$factor_costs <- "sticky_feb18"
   cfg$gms$s15_elastic_demand <- 0
   cfg$gms$nitrogen <- "rescaled_jan21"
-  cfg$title <- paste0("inms_",title,"_v5")
+  cfg$title <- paste0(title,"_v6")
   #cfg$calib_cropland <- FALSE
   cfg$recalibrate <- FALSE
   return(cfg)
@@ -70,7 +70,7 @@ cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$force_download <- TRUE
 cfg$recalibrate <- TRUE
 start_run(cfg=cfg,codeCheck=codeCheck)
-calib<-magpie4::submitCalibration(name = "INMS_v5")
+calib<-magpie4::submitCalibration(name = "INMS_v6")
 
 #calib<-"calibration_calibration_inms_may2020_09Jul20.tgz"
 
