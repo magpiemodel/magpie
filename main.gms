@@ -162,9 +162,9 @@ $title magpie
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev3.94.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* Used data set: additional_data_rev3.95.tgz
+* md5sum: 87ab0375e1114e5188ab45cbaa2e818e
+* Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/input_data/
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -197,7 +197,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Mon Feb  1 12:27:24 2021
+* Last modification (input data): Wed Feb  3 11:30:50 2021
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 

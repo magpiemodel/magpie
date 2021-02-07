@@ -37,13 +37,6 @@ $ondelim
 $include "./modules/20_processing/substitution_dec18/input/f20_calibration.cs3"
 $offdelim       ;
 
-parameter f20_scp_unitcosts(scptype) Costs of production of one unit of SCP exclusive of feedstock costs (USD per t)
-/
-$ondelim
-$include "./modules/20_processing/input/f20_scp_unitcosts.csv"
-$offdelim
-/;
-
 table  f20_scp_type_shr(scptype,scen20)  selected scenario values for scp type (1)
 $ondelim
 $include "./modules/20_processing/input/f20_scp_type_shr.csv"
