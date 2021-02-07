@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN26"
+identifier_flag = "JAN27"
 cat(paste0("Additional calib for estb in hist period. p32_land_star_ac fix instead of p32_land"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
