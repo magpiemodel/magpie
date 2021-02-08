@@ -51,7 +51,7 @@ for(scen in c("forestry","nocc")){
 
           cfg$gms$landconversion <- land_conversion
 
-          cfg$gms$cfg$recalibrate <- "ifneeded"
+          cfg$gms$recalibrate <- "ifneeded"
 
           cfg$gms$c35_protect_scenario <- c35_protect_scenario
           cfg$gms$c73_wood_scen <- c73_wood_scen
