@@ -24,8 +24,8 @@ buildInputVector <- function(regionmapping   = "agmip",
                              climate_model   = "IPSL_CM5A_LR",
                              resolution      = "c200",
                              archive_rev     = "52",
-                             madrat_rev      = "4.57",
-                             validation_rev  = "4.57",
+                             madrat_rev      = "4.57bb",
+                             validation_rev  = "4.57bb",
                              calibration     = "calibration_INMS_v5_28Jan21.tgz",
                              additional_data = "additional_data_rev3.95.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
@@ -53,7 +53,8 @@ general_settings<-function(title) {
   cfg$gms$factor_costs <- "sticky_feb18"
   cfg$gms$s15_elastic_demand <- 0
   cfg$gms$nitrogen <- "rescaled_jan21"
-  cfg$title <- paste0(title,"_v6")
+  cfg$gms$som <- "static_jan19"
+  cfg$title <- paste0(title,"_v7")
   #cfg$calib_cropland <- FALSE
   cfg$recalibrate <- FALSE
   return(cfg)

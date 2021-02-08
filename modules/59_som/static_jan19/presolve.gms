@@ -5,5 +5,11 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_nr_som.fx(j)=0;
-vm_nr_som_fertilizer.fx(j)=0;
+vm_nr_som.fx(j) = 0;
+vm_nr_som_fertilizer.fx(j) = 0;
+
+$if "%c59_exo_scen%" == "constant" vm_nr_som.fx(j) = f59_som_exogenous(t_all,"constant");
+$if "%c59_exo_scen%" == "constant" vm_nr_som_fertilizer.fx(j) = f59_som_exogenous(t_all,"constant");
+
+$if "%c59_exo_scen%" == "fadeout_2050" vm_nr_som.fx(j) = f59_som_exogenous(t_all,"fadeout_2050");
+$if "%c59_exo_scen%" == "fadeout_2050" vm_nr_som_fertilizer.fx(j) = f59_som_exogenous(t_all,"fadeout_2050");
