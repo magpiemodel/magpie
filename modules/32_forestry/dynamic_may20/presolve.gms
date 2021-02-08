@@ -142,7 +142,7 @@ display f32_gs_relativetarget,p32_updated_gs_reg;
 
 ** Additional calibration for area
 p32_hist_estb_calib(t,i) = 1;
-$$ontext
+$ontext
 if(m_year(t) > 1995 AND m_year(t) < sm_fix_SSP2,
 p32_hist_estb_calib(t,"LAM") = p32_hist_estb_calib(t-1,"LAM") + 1;
 p32_hist_estb_calib(t,"OAS") = p32_hist_estb_calib(t-1,"OAS") + 1;

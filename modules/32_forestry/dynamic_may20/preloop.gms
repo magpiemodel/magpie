@@ -226,9 +226,12 @@ p32_gs_scaling_reg(i) = 1;
 p32_gs_scaling_reg(i)$(f32_gs_relativetarget(i)>0) = f32_gs_relativetarget(i) / p32_observed_gs_reg(i);
 p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) < 1) = 1;
 *p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i)>50) = 50;
-display p32_land_start_ac,p32_gs_scaling_reg;
+display p32_land_start_ac;
 
 ** Update c-densitiy
+p32_gs_scaling_reg("LAM") = p32_gs_scaling_reg("LAM") /3 ;
+p32_gs_scaling_reg("OAS") = p32_gs_scaling_reg("OAS") /3 ;
+display p32_gs_scaling_reg;
 pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * sum(cell(i,j),p32_gs_scaling_reg(i));
 
 ** Calculate plantation contribution scaled to Growing stock in plantations
