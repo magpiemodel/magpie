@@ -11,10 +11,10 @@
 *p73_timber_harvest_cost(t,j,ac,"forestry") = 0;
 
 ** Fixing variables
+v73_prod_forestry.fx(j,ac_est,kforestry) = 0;
+v73_prod_natveg.fx(j,land_natveg,ac_est,kforestry) = 0;
 v73_prod_natveg.fx(j,"other",ac,"wood") = 0;
 v73_prod_natveg.fx(j,"primforest",ac,kforestry)$(not sameas(ac,"acx")) = 0;
-v73_prod_forestry.fx(j,ac_est,kforestry) = 0;
-*v73_prod_natveg.fx(j,land_natveg,ac_est,kforestry) = 0;
 *v73_prod_heaven_timber.fx(j,kforestry) = 0;
 *vm_hvarea_secdforest.fx(j,ac_est) = 0;
 *vm_hvarea_other.fx(j,ac_est) = 0;
