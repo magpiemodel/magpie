@@ -8,8 +8,8 @@
 vm_nr_som.fx(j) = 0;
 vm_nr_som_fertilizer.fx(j) = 0;
 
-$if "%c59_exo_scen%" == "constant" vm_nr_som.fx(j) = f59_som_exogenous(t_all,"constant");
-$if "%c59_exo_scen%" == "constant" vm_nr_som_fertilizer.fx(j) = f59_som_exogenous(t_all,"constant");
+$if "%c59_exo_scen%" == "constant" i59_nr_som_exogenous_per_ha(t,i) = f59_som_exogenous(t,i,"constant")/sum(cell(i,j),pcm_land(j,"crop"));
+$if "%c59_exo_scen%" == "fadeout_2050" i59_nr_som_exogenous_per_ha(t,i) = f59_som_exogenous(t,i,"fadeout_2050")/sum(cell(i,j),pcm_land(j,"crop"));
 
-$if "%c59_exo_scen%" == "fadeout_2050" vm_nr_som.fx(j) = f59_som_exogenous(t_all,"fadeout_2050");
-$if "%c59_exo_scen%" == "fadeout_2050" vm_nr_som_fertilizer.fx(j) = f59_som_exogenous(t_all,"fadeout_2050");
+vm_nr_som.fx(j) = sum(cell(i,j),i59_nr_som_exogenous_per_ha(t,i)*pcm_land(j,"crop"));
+vm_nr_som_fertilizer.fx(j) = sum(cell(i,j),i59_nr_som_exogenous_per_ha(t,i)*pcm_land(j,"crop"));

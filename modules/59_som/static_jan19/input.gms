@@ -9,7 +9,7 @@ $setglobal c59_static_spatial_level  cellular
 *   options:   cellular  (use preprocessed cellular stock change factors)
 *              cluster   (use cshare_released on cluster within gams)
 
-$setglobal c59_som_scenario  nocc
+$setglobal c59_som_scenario  cc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
 
@@ -36,10 +36,8 @@ $offdelim
 /
 ;
 
-parameters f59_som_exogenous(t_all,exo_scen59) Nr released through changing soil organic matter
-/
+table f59_som_exogenous(t_all,i,exo_scen59) Nr released through changing soil organic matter
 $ondelim
-$include "./modules/59_som/static_jan19/input/f59_som_exogenous.cs2"
+$include "./modules/59_som/static_jan19/input/f59_som_exogenous.cs3"
 $offdelim
-/
 ;
