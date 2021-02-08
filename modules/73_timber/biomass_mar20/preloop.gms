@@ -35,16 +35,22 @@ loop(t_all$(m_year(t_all) >= 2015 AND m_year(t_all) < 2150),
 ** Aggregate from ISO country level to MAgPIE region level
 p73_timber_demand_gdp_pop(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to_woodprod(kforestry,total_wood_products)),p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)) * sm_timber_demand_switch;
 
+display p73_timber_demand_gdp_pop;
+
 ** Hard additive calibration for timber demand
-if(sm_timber_demand_switch = 1,
-  loop (t_all$(m_year(t_all)<sm_fix_SSP2),
-    p73_demand_calib(t_all,i,"wood") = f73_regional_timber_demand(t_all,i,"industrial_roundwood") - p73_timber_demand_gdp_pop(t_all,i,"wood");
-    p73_timber_demand_gdp_pop(t_all,i,"wood") = (p73_timber_demand_gdp_pop(t_all,i,"wood") + p73_demand_calib(t_all,i,"wood"));
-  );
+loop (t_all,
+  if(m_year(t_all) < sm_fix_SSP2,
+      p73_demand_calib(t_all,i,"wood") = f73_regional_timber_demand(t_all,i,"industrial_roundwood") - p73_timber_demand_gdp_pop(t_all,i,"wood");
+      p73_timber_demand_gdp_pop(t_all,i,"wood") = p73_timber_demand_gdp_pop(t_all,i,"wood") + p73_demand_calib(t_all,i,"wood");
+    );
+*    if(m_year(t_all)>=2015,
+*        p73_timber_demand_gdp_pop(t_all,i,"wood") = p73_timber_demand_gdp_pop(t_all,i,"wood") + p73_demand_calib("y2015",i,"wood");
+*      );
 );
+
 display p73_timber_demand_gdp_pop,p73_demand_calib;
 
-loop (t_all$(m_year(t_all)>=sm_fix_SSP2),
+loop (t_all$(m_year(t_all)>=2015),
   p73_timber_demand_gdp_pop(t_all,i,"wood")$(p73_timber_demand_gdp_pop(t_all,i,"wood")/sum(i_to_iso(i,iso),p73_forestry_demand_prod_specific(t_all-1,iso,"industrial_roundwood")) > s73_increase_ceiling) = p73_timber_demand_gdp_pop(t_all-1,i,"wood") * s73_increase_ceiling;
 );
 

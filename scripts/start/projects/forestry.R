@@ -23,8 +23,8 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN28"
-cat(paste0("No additional calib for estb in hist period. GS Scaling reduced for LAM and MEA"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+identifier_flag = "JAN29"
+cat(paste0("Manual estb calib for all time steps"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(scen in c("forestry","nocc")){
