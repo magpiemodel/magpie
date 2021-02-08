@@ -196,7 +196,6 @@ elseif s32_initial_distribution = 1,
     );
 );
 
-display p32_ac_dist_flag,p32_ac_dist;
 ** Initialization of land
 *p32_land_start_ac(j,type32,ac) = p32_land("y1995",j,type32,ac);
 
@@ -225,7 +224,7 @@ p32_observed_gs_reg(i)$(f32_gs_relativetarget(i)>0)  = (sum((cell(i,j),ac),(pm_t
 p32_gs_scaling_reg(i) = 1;
 p32_gs_scaling_reg(i)$(f32_gs_relativetarget(i)>0) = f32_gs_relativetarget(i) / p32_observed_gs_reg(i);
 p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) < 1) = 1;
-*p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i)>50) = 50;
+
 display p32_land_start_ac;
 
 ** Update c-densitiy
@@ -236,5 +235,3 @@ pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry
 p32_plantation_contribution(t_ext,i) = 0.001;
 p32_plantation_contribution(t_ext,i)$(f32_gs_relativetarget(i)>0) = f32_plantation_contribution(t_ext,i,"%c32_dev_scen%","%c32_incr_rate%");
 p32_plantation_contribution(t_ext,"EUR")= f32_plantation_contribution(t_ext,"EUR","brown","%c32_incr_rate%");
-*p32_plantation_contribution(t_ext,i)$(p32_plantation_contribution(t_ext,i)>1) = 1;
-display p32_plantation_contribution;

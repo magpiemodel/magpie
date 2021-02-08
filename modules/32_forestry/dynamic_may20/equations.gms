@@ -145,7 +145,7 @@ q32_fix_plant_area(j2) ..
 q32_establishment_min_reg(i2) ..
               sum(cell(i2,j2), ((sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry) * pc32_yield_forestry_future(j2))
               =e=
-              sum((ct,kforestry), pm_demand_forestry_future(i2,kforestry) *  min(0.7, pm_selfsuff_ext(ct,i2,kforestry)) * p32_plantation_contribution(ct,i2) * p32_estb_calib(i2)) * (1-sum(ct,p32_fix_plant(ct)))
+              sum((ct,kforestry), pm_demand_forestry_future(i2,kforestry) *  min(0.7, pm_selfsuff_ext(ct,i2,kforestry)) * p32_plantation_contribution(ct,i2) * f32_estb_calib(i2)) * (1-sum(ct,p32_fix_plant(ct)))
               ;
 
 *' This constraint distributes additions to forestry land over ac_est,

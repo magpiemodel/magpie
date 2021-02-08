@@ -97,3 +97,10 @@ $ondelim
 $include "./modules/32_forestry/input/f32_plantedforest.cs4"
 $offdelim
 /;
+
+parameter f32_estb_calib(i) Calibration factor for plantation forest establishment (1)
+/
+$ondelim
+$include "./modules/32_forestry/input/f32_estb_calib.cs4"
+$offdelim
+/;
