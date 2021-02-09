@@ -5,6 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+* Lower bound on vm_tau for t_past results in very low land expansion. 
+* Lower costs for land conversion in t_past based on im_development_state
+*' aim for a better balance of land expansion and intensification. 
+
 if (sum(sameas(t_past,t),1) = 1,
 	i39_cost_clearing(t,i,land_clearing39) = s39_cost_clearing_hist;
 	i39_cost_establish(t,i,"crop") = s39_cost_establish_crop * im_development_state(t,i);
