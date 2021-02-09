@@ -8,6 +8,7 @@
 ** Set historical values to FAO values
 p73_forestry_demand_prod_specific(t_past_forestry,iso,total_wood_products) = f73_prod_specific_timber(t_past_forestry,iso,total_wood_products);
 
+$ontext
 ** Harvesting Costs
 ** Set multiplier values for cost of harvesting
 p73_timber_harvest_cost(t,j,ac,"forestry")    = s73_timber_harvest_cost;
@@ -16,6 +17,7 @@ p73_timber_harvest_cost(t,j,ac,"forestry")    = s73_timber_harvest_cost;
 p73_timber_harvest_cost(t,j,ac,"secdforest")  = s73_timber_harvest_cost * s73_cost_multiplier;
 p73_timber_harvest_cost(t,j,ac,"other")       = s73_timber_harvest_cost / 2;
 p73_timber_harvest_cost(t,j,ac,"primforest")  = s73_timber_harvest_cost * s73_cost_multiplier * s73_cost_multiplier;
+$offtext
 
 ** Loop over time to calculate future demand
 ** Calculations based on Lauri et al. 2019

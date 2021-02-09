@@ -7,34 +7,40 @@
 
 *' @equations
 
-*' Timber production cost covering cost of harvest as well as the cost incurred by
+*' Timber production cost include the cost for producing wood, woodfuel and residues,
+*' as well as additional costs for harvesting (see below) and technical costs for a slack variable.
+*' cost of harvest as well as the cost incurred by
 *' utilizing free variable with a very high cost. Ideally this free variable is only
-*' used when there is no other way to meet timber demand. To make sure that timber plantations
-*' are harvested at rotation age, the economically optimal point in time, we assume zero
-*' costs for production from timber plantations, and higher costs for for production from
-*' natural vegetation.
+*' used when there is no other way to meet timber demand.
 
 q73_cost_timber(i2)..
                     vm_cost_timber(i2)
                     =e=
-                    v73_cost_hvarea(i2)
-                    + sum((cell(i2,j2),land_natveg,ac,kforestry), v73_prod_natveg(j2,land_natveg,ac,kforestry) * s73_timber_prod_cost)
-                    + sum(cell(i2,j2), v73_prod_residues(j2) * 2)
+                      sum(cell(i2,j2), vm_prod(j2,"wood"))      * s73_timber_prod_cost_wood
+                    + sum(cell(i2,j2), vm_prod(j2,"woodfuel"))  * s73_timber_prod_cost_woodfuel
+                    + sum(cell(i2,j2), v73_prod_residues(j2))   * s73_reisdue_removal_cost
                     + sum((cell(i2,j2),kforestry), v73_prod_heaven_timber(j2,kforestry) * s73_free_prod_cost)
+                    + v73_cost_hvarea(i2)
                     ;
 
-*' Harvested cost is defined as the cost incurred while removing biomass from forests.
-*' Harvestig natural vegetation is made less attractive to the model by providing higher
-*' harvesting costs. This is to mimic the difficulties in accessing primary and secondary
-*' forests.
+*' Harvesting cost is defined as the cost incurred while removing biomass from forests.
+*' To make sure that timber plantations are harvested at rotation age,
+*' the economically optimal point in time, we assume negative per-hectare harvesting costs for timber plantations.
+*' Otherwise, harvesting from natural forest would be preferred over harvest from timber plantations,
+*' mainly because the growing stock at rotation age (e.g. 50 years) in timber plantations is smaller
+*' compared to the growing stock of old-growth primary and secondary forest (> 100 years).
+*' For natural forest, per-hectare harvesting costs are positive to make sure that older
+*' forest with higher growing stock is preferred over younger forest.
+*' To mimic the difficulties in accessing primary forest,
+*' per-hectare harvesting costs for primary forest are higher than for secondary forest.
 
 q73_cost_hvarea(i2)..
                     v73_cost_hvarea(i2)
                     =e=
-                    sum((ct,cell(i2,j2),ac_sub), vm_hvarea_forestry(j2,ac_sub)   * p73_timber_harvest_cost(ct,j2,ac_sub,"forestry"))
-                  + sum((ct,cell(i2,j2),ac_sub), vm_hvarea_secdforest(j2,ac_sub) * p73_timber_harvest_cost(ct,j2,ac_sub,"secdforest"))
-                  + sum((ct,cell(i2,j2),ac_sub), vm_hvarea_other(j2, ac_sub)     * p73_timber_harvest_cost(ct,j2,ac_sub,"other"))
-                  + sum((ct,cell(i2,j2)),        vm_hvarea_primforest(j2)        * p73_timber_harvest_cost(ct,j2,"acx","primforest"))
+                    sum((ct,cell(i2,j2),ac_sub), vm_hvarea_forestry(j2,ac_sub))   * s73_timber_harvest_cost_forestry
+                  + sum((ct,cell(i2,j2),ac_sub), vm_hvarea_secdforest(j2,ac_sub)) * s73_timber_harvest_cost_secdforest
+                  + sum((ct,cell(i2,j2),ac_sub), vm_hvarea_other(j2, ac_sub))     * s73_timber_harvest_cost_other
+                  + sum((ct,cell(i2,j2)),        vm_hvarea_primforest(j2))        * s73_timber_harvest_cost_primforest
                     ;
 
 *' The following equations describes cellular level production (in dry matter) of
