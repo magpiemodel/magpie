@@ -253,10 +253,10 @@ $setglobal ageclass  feb21
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
 
-$setglobal forestry  dynamic_may20
+$setglobal forestry  dynamic_feb21
 
 $setglobal urban  static
-$setglobal natveg  dynamic_may20
+$setglobal natveg  dynamic_feb21
 
 $setglobal factor_costs  mixed_feb17
 $setglobal landconversion  devstate_feb21
@@ -284,7 +284,7 @@ $setglobal livestock  fbask_jan16
 
 $setglobal disagg_lvst  foragebased_aug18
 
-$setglobal timber  biomass_mar20
+$setglobal timber  on
 
 $setglobal optimization  nlp_apr17
 
