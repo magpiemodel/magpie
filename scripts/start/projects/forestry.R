@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN32"
+identifier_flag = "JAN33"
 cat(paste0("MEA planted area cellular fix"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
