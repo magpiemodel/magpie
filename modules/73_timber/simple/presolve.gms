@@ -31,7 +31,8 @@
 
 * changes in magpie4 R library needed.
 
-vm_cost_timber.fx(i) = 0;
+*vm_cost_timber.fx(i) = 0;
+*vm_prod.fx(j,kforestry) = 0;
 vm_hvarea_forestry.fx(j,ac_sub) = v32_land.l(j,"plant",ac_sub) - v32_land.lo(j,"plant",ac_sub);
 vm_hvarea_secdforest.fx(j,ac_sub) = (v35_secdforest.l(j,ac_sub) - v35_secdforest.lo(j,ac_sub))*0.005*m_timestep_length_forestry;
 vm_hvarea_primforest.fx(j) = (vm_land.l(j,"primforest") - vm_land.lo(j,"primforest"))*0.0001*m_timestep_length_forestry;

@@ -6,16 +6,17 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
-pm_demand_forestry_future(i,kforestry)                                      Future forestry demand in current time step (tDM per yr)
-pm_demand_ext(t_ext,i,kforestry)                                            Extended demand for timber beyound simulation (mio. tDM per yr)
+ pm_demand_forestry_future(i,kforestry)      Future forestry demand in current time step (tDM per yr)
+ pm_demand_ext(t_ext,i,kforestry)            Extended demand for timber beyound simulation (mio. tDM per yr)
 ;
 
 variables
-vm_cost_timber(i)				                                                    Actual cost of harvesting timber from forests (mio. USD per yr)
+ vm_cost_timber(i)				Actual cost of harvesting timber from forests (mio. USD per yr)
 ;
 
 equations 
-q73_est(j) blub2
+ q73_cost_timber(i)				Actual cost of harvesting timber from forests (mio. USD per yr)
+ q73_est(j) blub2
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

@@ -8,10 +8,10 @@
 *' @equations
 
 *' Timber production cost include the cost for producing wood, woodfuel and residues,
-*' as well as additional costs for harvesting (see below) and technical costs for a slack variable.
-*' cost of harvest as well as the cost incurred by
-*' utilizing free variable with a very high cost. Ideally this free variable is only
-*' used when there is no other way to meet timber demand.
+*' as well as additional costs for harvesting (see below) and technical costs for a slack variable ('v73_prod_heaven_timber').
+*' The slack variable (high costs) is only used as a last resort when there is no other way to meet the timber demand. 
+*' The purpose of the slack variable is to assure technically feasibility of the model under all conditions and to 
+*' indicate shortage of wood supply. 
 
 q73_cost_timber(i2)..
                     vm_cost_timber(i2)
