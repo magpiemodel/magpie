@@ -94,6 +94,7 @@ for(scen in c("forestry","nocc")){
           cfg$output  = c("extra/timestep_duration")
 
            xx = c(xx,cfg$title)
+           cfg$gms$s80_optfile <- 1
            start_run(cfg,codeCheck=FALSE)
 
         }
