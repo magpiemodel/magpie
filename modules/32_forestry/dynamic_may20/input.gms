@@ -33,7 +33,8 @@ scalars
   s32_fix_plant                   Fixing plantation area after sm_fix_SSP2 0=Not fixed 1=Fixed (1) / 0 /
   s32_forestry_int_rate           Global interest rate for plantations (percent) / 0.05 /
   s32_investment_cost             Additional investment cost in plantations (USD per tC per ha) / 200 /
-  s32_distribution_type           Which type of distribution shall be used for initializing plantations (0=equal distribution 1=FAO distribution 2=Poulter distribution 3=Manual distribution) /3/
+  s32_distribution_type           Which type of distribution shall be used for initializing plantations 0=equal distribution 1=FAO distribution 2=Poulter distribution 3=Manual distribution (1) /3/
+  s32_max_self_suff               Upper ceiling for the self sufficiency used in calculation for establishment decision (1) / 0.8 /
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)
