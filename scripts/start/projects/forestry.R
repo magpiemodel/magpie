@@ -64,6 +64,7 @@ for(scen in c("forestry","nocc")){
 
          xx = c(xx,cfg$title)
          cfg$gms$s80_optfile <- 1
+         cfg$results_folder = "output/:title:"
          start_run(cfg,codeCheck=FALSE)
       }
     }
