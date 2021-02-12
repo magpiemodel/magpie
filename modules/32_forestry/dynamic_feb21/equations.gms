@@ -167,7 +167,7 @@ q32_hvarea_forestry(j2,ac_sub) ..
                           =l=
                           v32_land_reduction(j2,"plant",ac_sub);
 
-** Timber plantation
+** Timber plantation 
 *' Woody biomass production from timber plantations is calculated by multiplying the
 *' area under production with corresponding yields of plantation forests, divided by the timestep length.
 
