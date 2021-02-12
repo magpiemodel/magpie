@@ -10,7 +10,7 @@ $setglobal c35_ad_policy  npi
 $setglobal c35_aolc_policy  npi
 
 scalars
-  s35_hvarea Flag for harvested area (0=zero, 1=exognous 2=endogneous)	/ 2 /
+  s35_hvarea Flag for harvested area (0=zero 1=exognous 2=endogneous)	/ 2 /
   s35_timber_harvest_cost_secdforest   Cost for harvesting from secondary forest (USD per ha) / 2000/
   s35_timber_harvest_cost_other        Cost for harvesting from other land (USD per ha) / 2000/
   s35_timber_harvest_cost_primforest   Cost for harvesting from primary forest (USD per ha) / 3000/
