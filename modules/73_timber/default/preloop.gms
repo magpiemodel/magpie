@@ -32,7 +32,7 @@ loop(t_all$(m_year(t_all) >= 2015 AND m_year(t_all) < 2150),
 );
 
 ** Aggregate from ISO country level to MAgPIE region level
-p73_timber_demand_gdp_pop(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to_woodprod(kforestry,total_wood_products)),p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)) * sm_timber_demand_switch;
+p73_timber_demand_gdp_pop(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to_woodprod(kforestry,total_wood_products)),p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)) * s73_timber_demand_switch ;
 
 ** Hard additive calibration for timber demand
 loop (t_all,

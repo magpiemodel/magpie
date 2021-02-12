@@ -19,12 +19,12 @@
 *' @limitations Timber demand cannot be determined endogenously
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/73_timber/on/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/73_timber/on/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/73_timber/on/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/73_timber/on/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/73_timber/on/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/73_timber/on/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/73_timber/on/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/73_timber/on/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/73_timber/default/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/73_timber/default/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/73_timber/default/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/73_timber/default/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/73_timber/default/scaling.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/73_timber/default/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/73_timber/default/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/73_timber/default/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

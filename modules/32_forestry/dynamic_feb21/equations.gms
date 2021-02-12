@@ -93,9 +93,9 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
  q32_land_reduction(j2,type32,ac_sub) ..
  	v32_land_reduction(j2,type32,ac_sub) =e= pc32_land(j2,type32,ac_sub) - v32_land(j2,type32,ac_sub);
 
-*----------------------------------------------------
-********** Timber for prodcution purposes ************
-*----------------------------------------------------
+************************************************************
+**** Timber production related equations in plantations ****
+************************************************************
 
 **** Cost calculations
 *---------------------
@@ -134,19 +134,12 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 *' harvest (year in time step are accounted for).
 *' Here we define three constraints for establishing new plantation in simulation step
 
-*' Fix plantation area at cell level if s32_fix_plant=1. In case of s32_fix_plant=0, the RHS is just 0.
-*' This makes sure that if plantation area is constrained when the switch is activated.
-q32_fix_plant_area(j2) ..
-							sum(ac, v32_land(j2,"plant",ac))
-							=g=
-							sum((ct,ac), p32_land(ct,j2,"plant",ac)) * sum(ct,p32_fix_plant(ct));
-
 *' Regional minimum constraint for maintaining current forestry area patterns,
 *' while accounting for regional self sufficiency in (`pm_selfsuff_ext`) timber production.
 q32_establishment_dynamic(i2)$(s32_hvarea = 2) ..
               sum(cell(i2,j2), ((sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry) * pc32_yield_forestry_future(j2))
               =e=
-              sum((ct,kforestry), pm_demand_forestry_future(i2,kforestry) *  min(s32_max_self_suff, pm_selfsuff_ext(ct,i2,kforestry)) * p32_plantation_contribution(ct,i2) * f32_estb_calib(i2)) * (1-sum(ct,p32_fix_plant(ct)))
+              sum((ct,kforestry), pm_demand_forestry_future(i2,kforestry) *  min(s32_max_self_suff, pm_selfsuff_ext(ct,i2,kforestry)) * p32_plantation_contribution(ct,i2) * f32_estb_calib(i2))
               ;
 
 q32_establishment_fixed(j2)$(s32_hvarea = 1)..
@@ -167,7 +160,7 @@ q32_hvarea_forestry(j2,ac_sub) ..
                           =l=
                           v32_land_reduction(j2,"plant",ac_sub);
 
-** Timber plantation 
+** Timber plantation
 *' Woody biomass production from timber plantations is calculated by multiplying the
 *' area under production with corresponding yields of plantation forests, divided by the timestep length.
 

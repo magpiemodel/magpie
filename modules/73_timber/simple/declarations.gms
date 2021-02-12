@@ -21,7 +21,8 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_timber(t,i,type) Actual cost of harvesting timber from forests (mio. USD per yr)
- oq73_est(t,j,type)       blub2
+ ov_cost_timber(t,i,type)   Actual cost of harvesting timber from forests (mio. USD per yr)
+ oq73_cost_timber(t,i,type) Actual cost of harvesting timber from forests (mio. USD per yr)
+ oq73_est(t,j,type)         blub2
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

@@ -37,7 +37,6 @@ parameters
  pm_representative_rotation(t_all,i)                Representative regional rotation (1)
  p32_aff_bgp(j,ac)                                  Biophysical impact of afforestation (tCeq per ha)
  p32_tcre_glo(j)                                    Global mean Transient Climate Response to cumulative Emissions (degree C per tC per ha)
- p32_fix_plant(t_ext)                               Parameter deciding if plantation area shall be fixed after 2020 (1)
  p32_observed_gs_reg(i)                             Observed growing stock (tDM per ha)
  p32_gs_scaling_reg(i)                              Calibration factor for scaling up the relative growing stock (1)
  p32_rotation_dist(j,ac)                            Poulter distribution within celular rotation lengths (1)
@@ -83,7 +82,6 @@ equations
  q32_cost_establishment(i)                          Present value of cost of establishment (mio. USD)
  q32_bgp_aff(j,ac)                                  Biophysical afforestation calculation (mio. tCeq)
  q32_forestry_est(j,type32,ac)                      Distribution of forestry establishment over ac_est (mio. ha)
- q32_fix_plant_area(j)                              Fixation of cellular plantation area based on area fix switch (mio. ha)
  q32_cost_hvarea(i)									Cost of harvesting timber from forests (mio. USD per yr)
  q32_prod_forestry(j)                               Production of woody biomass from commercial plantations (mio. tDM per yr)
 ;
@@ -120,7 +118,6 @@ parameters
  oq32_cost_establishment(t,i,type)       Present value of cost of establishment (mio. USD)
  oq32_bgp_aff(t,j,ac,type)               Biophysical afforestation calculation (mio. tCeq)
  oq32_forestry_est(t,j,type32,ac,type)   Distribution of forestry establishment over ac_est (mio. ha)
- oq32_fix_plant_area(t,j,type)           Fixation of cellular plantation area based on area fix switch (mio. ha)
  oq32_cost_hvarea(t,i,type)              Cost of harvesting timber from forests (mio. USD per yr)
  oq32_prod_forestry(t,j,type)            Production of woody biomass from commercial plantations (mio. tDM per yr)
 ;

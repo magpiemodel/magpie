@@ -1,17 +1,3 @@
-** Keep the plantation area fixing flag as 0 till 2020. If the flag is set to 1
-if(s32_fix_plant = 1 OR s32_fix_plant = 0,
-  loop(t_all,
-    if(m_year(t_all) <= sm_fix_SSP2 AND s32_fix_plant =1,
-    p32_fix_plant(t_all) = 0;
-    else
-    p32_fix_plant(t_all) = s32_fix_plant;
-    );
-  );
-  else
-  display "Unrecognized setting for s32_fix_plant, please select 1 or 0.";
-  abort "Invalid setting for s32_fix_plant.";
-);
-
 ** Calculation of Single rotation model rotation lengths
 ** Using forestry carbon densitiy here via carbon density data exchange from carbon module.
 p32_carbon_density_ac_forestry(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc");
@@ -151,17 +137,16 @@ if(s32_initial_distribution = 0,
 
 elseif s32_initial_distribution = 1,
 ** Initialize with equal distribution among rotation age classes
-  if(s32_distribution_type = 0,
     p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
     p32_land_start_ac(j,"plant",ac)$(ini32(j,ac)) = p32_plant_ini_ac(j);
     p32_land_start_ac(j,"ndc",ac)$(ini32(j,ac))   = pm_land_start(j,"forestry") * sum(cell(i,j),1- f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
-    );
-  if(s32_distribution_type = 1,
+
+elseif s32_initial_distribution = 2,
     p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
     p32_land_start_ac(j,"plant",ac) = p32_plant_ini_ac(j) * f32_ac_dist(ac);
     p32_land_start_ac(j,"ndc",ac)   = pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i)) * f32_ac_dist(ac);
-    );
-  if(s32_distribution_type = 2,
+
+elseif s32_initial_distribution = 3,
     p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
     p32_rotation_dist(j,ac) =  (im_plantedclass_ac(j,ac)$(ini32(j,ac))/sum(ac2,im_plantedclass_ac(j,ac2)$(ini32(j,ac2))))$(sum(ac2,im_plantedclass_ac(j,ac2)$(ini32(j,ac2))));
     p32_land_start_ac(j,"plant",ac)$(ini32(j,ac)) = p32_plant_ini_ac(j) * p32_rotation_dist(j,ac);
@@ -174,26 +159,25 @@ elseif s32_initial_distribution = 1,
       p32_land_start_ac(j,"ndc",ac)$(ini32(j,ac))   =  pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
        );
     );
-    );
 
-  if(s32_distribution_type = 3,
+elseif s32_initial_distribution = 4,
     loop(j,
 ** Set all acs to 0
-      p32_ac_dist_flag(j,ac) = 0;
+    p32_ac_dist_flag(j,ac) = 0;
 ** Calculate reverse of age-classes, if rotation is 11acs, then ac0 should get a value of 11, 11th ac should get value of 1
-      p32_ac_dist_flag(j,ac) = (10*p32_rotation_cellular_harvesting("y1995",j)-((ord(ac)-1))*5)$(ord(ac) <= p32_rotation_cellular_harvesting("y1995",j));
+    p32_ac_dist_flag(j,ac) = (10*p32_rotation_cellular_harvesting("y1995",j)-((ord(ac)-1))*5)$(ord(ac) <= p32_rotation_cellular_harvesting("y1995",j));
 ** Calculate the weights, youngest age-class will have highest weight
-      p32_ac_dist(j,ac) = (p32_ac_dist_flag(j,ac) / (sum(ac2,p32_ac_dist_flag(j,ac2)) + ord(ac)))$(ord(ac) <= p32_rotation_cellular_harvesting("y1995",j));
+    p32_ac_dist(j,ac) = (p32_ac_dist_flag(j,ac) / (sum(ac2,p32_ac_dist_flag(j,ac2)) + ord(ac)))$(ord(ac) <= p32_rotation_cellular_harvesting("y1995",j));
 ** there can be isntances where this distribution is not summing up to 1, in that case we take the excess and remove it evenly from all age-classes
-      p32_ac_dist(j,ac)$(sum(ac2, p32_ac_dist(j,ac2))>1) = (p32_ac_dist(j,ac) - (sum(ac2, p32_ac_dist(j,ac2))-1)/p32_ac_dist_flag(j,"ac0"))$(ord(ac) <= p32_rotation_cellular_harvesting("y1995",j));
-      );
+    p32_ac_dist(j,ac)$(sum(ac2, p32_ac_dist(j,ac2))>1) = (p32_ac_dist(j,ac) - (sum(ac2, p32_ac_dist(j,ac2))-1)/p32_ac_dist_flag(j,"ac0"))$(ord(ac) <= p32_rotation_cellular_harvesting("y1995",j));
+    );
 ** Isolate plantations from planted forest (forestry)
     p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
 ** Divide plantations according to distribution
     p32_land_start_ac(j,"plant",ac) = p32_plant_ini_ac(j) * p32_ac_dist(j,ac);
 ** Divide NDCs according to same distribution
     p32_land_start_ac(j,"ndc",ac)   = pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i)) * p32_ac_dist(j,ac);
-    );
+
 );
 
 ** Initialization of land
