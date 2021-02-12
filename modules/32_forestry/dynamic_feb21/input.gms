@@ -17,7 +17,7 @@ $setglobal c32_incr_rate  h5s1l05
 * options constant,h5s5l5,h5s2l2,h5s2l1,h5s1l1,h5s1l05,h2s1l05
 
 scalars
-  s32_hvarea 					  Flag for harvested area and establishemt (0=zero, 1=exognous 2=endogneous)	/ 2 /
+  s32_hvarea 					  Flag for harvested area and establishemt (0=zero 1=exognous 2=endogneous)	/ 2 /
   s32_reESTBcost                  Re establishment cost (USD per ha) / 2000 /
   s32_recurring_cost              Recurring costs (USD per ha) / 500 /
   s32_harvesting_cost             Harvesting cost (USD per ha) / -2000 /

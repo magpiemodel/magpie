@@ -143,13 +143,13 @@ q32_fix_plant_area(j2) ..
 
 *' Regional minimum constraint for maintaining current forestry area patterns,
 *' while accounting for regional self sufficiency in (`pm_selfsuff_ext`) timber production.
-q32_establishment_dynamic(i2)$(s32_hvarea = 1) ..
+q32_establishment_dynamic(i2)$(s32_hvarea = 2) ..
               sum(cell(i2,j2), ((sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry) * pc32_yield_forestry_future(j2))
               =e=
               sum((ct,kforestry), pm_demand_forestry_future(i2,kforestry) *  min(s32_max_self_suff, pm_selfsuff_ext(ct,i2,kforestry)) * p32_plantation_contribution(ct,i2) * f32_estb_calib(i2)) * (1-sum(ct,p32_fix_plant(ct)))
               ;
 
-q32_establishment_fixed(j2)$(s32_hvarea = 0).. 
+q32_establishment_fixed(j2)$(s32_hvarea = 1)..
 	sum(ac_est, v32_land(j2,"plant",ac_est)) =e= sum(ac_sub, v32_hvarea_forestry(j2,ac_sub));
 
 
@@ -176,6 +176,14 @@ q32_prod_forestry(j2)..
                          =e=
                          sum(ac_sub, v32_hvarea_forestry(j2,ac_sub) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"forestry"))) / m_timestep_length_forestry;
 
+*' Harvesting cost in plantations is defined as the cost incurred while removing
+*' biomass from such forests. To make sure that timber plantations are harvested
+*' at rotation age, the economically optimal point in time, we assume negative
+*' per-hectare harvesting costs for timber plantations. Otherwise, harvesting from
+*' natural forest would be preferred over harvest from timber plantations, mainly
+*' because the growing stock at rotation age (e.g. 50 years) in timber plantations
+*' is smaller compared to the growing stock of old-growth primary and secondary
+*' forest (> 100 years).
 
 q32_cost_hvarea(i2)..
                     v32_cost_hvarea(i2)

@@ -8,10 +8,11 @@
 *' @equations
 
 *' Timber production cost include the cost for producing wood, woodfuel and residues,
-*' as well as additional costs for harvesting (see below) and technical costs for a slack variable ('v73_prod_heaven_timber').
-*' The slack variable (high costs) is only used as a last resort when there is no other way to meet the timber demand. 
-*' The purpose of the slack variable is to assure technically feasibility of the model under all conditions and to 
-*' indicate shortage of wood supply. 
+*' as well as additional costs for harvesting (see below) and technical costs for
+*' a slack variable ('v73_prod_heaven_timber'). The slack variable (high costs)
+*' is only used as a last resort when there is no other way to meet the timber
+*' demand. The purpose of the slack variable is to assure technically feasibility
+*' of the model under all conditions and to indicate shortage of wood supply, if any.
 
 q73_cost_timber(i2)..
                     vm_cost_timber(i2)
@@ -22,26 +23,12 @@ q73_cost_timber(i2)..
                     + sum((cell(i2,j2),kforestry), v73_prod_heaven_timber(j2,kforestry) * s73_free_prod_cost)
                     ;
 
-*' Harvesting cost is defined as the cost incurred while removing biomass from forests.
-*' To make sure that timber plantations are harvested at rotation age,
-*' the economically optimal point in time, we assume negative per-hectare harvesting costs for timber plantations.
-*' Otherwise, harvesting from natural forest would be preferred over harvest from timber plantations,
-*' mainly because the growing stock at rotation age (e.g. 50 years) in timber plantations is smaller
-*' compared to the growing stock of old-growth primary and secondary forest (> 100 years).
-*' For natural forest, per-hectare harvesting costs are positive to make sure that older
-*' forest with higher growing stock is preferred over younger forest.
-*' To mimic the difficulties in accessing primary forest,
-*' per-hectare harvesting costs for primary forest are higher than for secondary forest.
-
-
 *' The following equations describes cellular level production (in dry matter) of
 *' woody biomass `vm_prod_reg` as the sum of the cluster level production of
 *' timber coming from 'v73_prod_forestry' and 'v73_prod_natveg'. When production
 *' capabilities are exhausted, the model can produce roundwood without using any
 *' land resources but by paying a very high cost ('s73_free_prod_cost').
-
-
-*' The production equation is split in two parts, one each for industrial roundwood
+*' Timber production equation is split in two parts, one each for industrial roundwood
 *' and wood fuel production. Woodfuel production, in addition to usual production
 *' channels, can also use residues left from industrial roundwood harvest for meeting
 *' overall wood fuel production targets.
@@ -68,9 +55,11 @@ q73_prod_woodfuel(j2)..
 
 *' Production of residues is calculated based on `s73_residue_ratio`. This fraction
 *' of industrial roundwood production is assumed to be lost during harvesting processes.
-*' USDA reports that ca. 30% of roundwood harvested can be residues (@oswalt2019forest).
+*' USDA reports that ca. 30% of roundwood harvested are residues (@oswalt2019forest).
 *' Not all of this residue is recoverwed from forest and we assume 50% of residue
-*' removal based on @pokharel2017factors .
+*' removal based on @pokharel2017factors. These numebrs (residue levels and residude
+*' removals vary strongly among different studies, the numbers used here are from
+*' a USDA report on state of forests in USA which has consistent reporting over years)
 
 q73_prod_residues(j2)..
   v73_prod_residues(j2)

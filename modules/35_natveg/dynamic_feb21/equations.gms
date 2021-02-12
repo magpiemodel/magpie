@@ -73,12 +73,16 @@
  	v35_primforest_reduction(j2) =e=
  		pcm_land(j2,"primforest") - vm_land(j2,"primforest");
 
-*******************************************************************************
-**** Natveg related equations used for production
+*******************************************************************
+**** Timber production related equations in natural vegetation ****
+*******************************************************************
 
-*' Harvesting costs are paid everytime natural vegetation is harvested. The "real"
-*' harvested area are received from the timber module [73_timber].
-
+*' For natural forest, per-hectare harvesting costs are positive to make sure that older
+*' forest with higher growing stock is preferred over younger forest.
+*' To mimic the difficulties in accessing primary forest, per-hectare harvesting
+*' costs for primary forest are higher than for secondary forest. Harvesting costs
+*' are paid everytime natural vegetation is harvested. The "real" harvested area
+*' are received from the timber module [73_timber].
 
 q35_cost_hvarea(i2)..
                     vm_cost_hvarea_natveg(i2)
@@ -117,23 +121,21 @@ q35_prod_other(j2)..
                           sum(ac_sub, v35_hvarea_other(j2,ac_sub) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"other"))) / m_timestep_length_forestry
                           ;
 
-*' Harvested area from secondary forest
+*' Following equations show the harvested area from natural vegetation i.e. primary
+*' forests, secondary forests and other land. Important to note here that no wood
+*' production should be realized from other land. Harvested area for production
+*' purposes can be lower oe equal than land reduction in natural vegetation as
+*' not all lost area is (or should be) used for production.
 
 q35_hvarea_secdforest(j2,ac_sub)..
                            v35_hvarea_secdforest(j2,ac_sub)
                            =l=
                            v35_secdforest_reduction(j2,ac_sub);
 
-
-*' Harvested area from primary forest
-
 q35_hvarea_primforest(j2)..
                            v35_hvarea_primforest(j2)
                            =l=
                            v35_primforest_reduction(j2);
-
-
-*' Harvested area from other land
 
 q35_hvarea_other(j2,ac_sub)..
                           v35_hvarea_other(j2,ac_sub)
@@ -143,7 +145,8 @@ q35_hvarea_other(j2,ac_sub)..
 
 *' Harvested secondary forest is still considered secondary forests due to
 *' restrictive NPI definitions. Also primary forest harvested will be considered
-*' to be secondary forest.
+*' to be secondary forest i.e., harvested primary forest gets reclassified as
+*' secondary forest and ends up in the youngest age-class (and follows regrowth)
 
 q35_secdforest_conversion(j2)..
                           sum(ac_est, v35_secdforest(j2,ac_est))

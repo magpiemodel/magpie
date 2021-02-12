@@ -140,11 +140,11 @@ p32_updated_gs_reg(t,i) = 1;
 p32_updated_gs_reg(t,i)$(sum((cell(i,j),ac_sub),p32_land(t,j,"plant",ac_sub))>0) = (sum((cell(i,j),ac_sub),(pm_timber_yield(t,j,ac_sub,"forestry") / sm_wood_density) * p32_land(t,j,"plant",ac_sub))/ sum((cell(i,j),ac_sub),p32_land(t,j,"plant",ac_sub)));
 display f32_gs_relativetarget,p32_updated_gs_reg;
 
-if (s32_hvarea = 0,
+if(s32_hvarea = 0,
  v32_hvarea_forestry.fx(j,ac_sub) = 0;
-else if (s32_hvarea = 1)
+elseif s32_hvarea = 1,
  v32_hvarea_forestry.fx(j,ac_sub) = v32_land.l(j,"plant",ac_sub) - v32_land.lo(j,"plant",ac_sub);
-); 
+);
 
 
 *** EOF presolve.gms ***
