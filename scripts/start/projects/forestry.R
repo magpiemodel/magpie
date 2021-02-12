@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JAN33"
+identifier_flag = "FEB01"
 cat(paste0("MEA planted area cellular fix"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
@@ -53,28 +53,8 @@ for(scen in c("forestry","nocc")){
         cfg$gms$c57_macc_version = "PBL_2019"
         cfg$gms$c60_biodem_level <- 0
 
-
-        if(cfg$gms$sm_timber_demand_switch == 1) timber_flag = "timberON"
-        if(cfg$gms$sm_timber_demand_switch == 0) timber_flag = "timberOFF"
-
-        if(cfg$gms$s32_fix_plant == 0) plant_area_flag = "Baseline"
-        if(cfg$gms$s32_fix_plant == 1) plant_area_flag = "Constrained"
-
         if(cfg$gms$landconversion == "devstate_feb21")      lc_flag = "DevState"
         if(cfg$gms$landconversion == "global_static_aug18") lc_flag = "Default"
-
-        if(cfg$gms$s32_distribution_type == 0) init_flag = "Equal"
-        if(cfg$gms$s32_distribution_type == 1) init_flag = "FAO"
-        if(cfg$gms$s32_distribution_type == 2) init_flag = "Poulter"
-        if(cfg$gms$s32_distribution_type == 3) init_flag = "Manual"
-
-        if(cfg$gms$s35_secdf_distribution == 0) dist_flag = "ACx"
-        if(cfg$gms$s35_secdf_distribution == 1) dist_flag = "Equal"
-        if(cfg$gms$s35_secdf_distribution == 2) dist_flag = "Poulter"
-
-        if(cfg$gms$s35_forest_damage == 0) damage_flg = "None"
-        if(cfg$gms$s35_forest_damage == 1) damage_flg = "Shifting"
-        if(cfg$gms$s35_forest_damage == 2) damage_flg = "Combined"
 
         if(scen=="nocc") scen_flag="Default"
         if(scen=="forestry") scen_flag="Forestry"
