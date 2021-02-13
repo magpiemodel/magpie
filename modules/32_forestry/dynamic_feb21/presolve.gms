@@ -14,6 +14,7 @@ ac_sub(ac) = yes$(ord(ac) > (m_yeardiff_forestry(t)/5));
 
 *Reduction of ac_est is not possible.
 v32_hvarea_forestry.fx(j,ac_est) = 0;
+v32_land_reduction.fx(j,type32,ac_est) = 0;
 
 ** Start ndc **
 * Limit demand for prescribed NPI/NDC afforestation in `p32_aff_pol` if not enough suitable area (`p32_aff_pot`) for afforestation is available.
@@ -81,27 +82,43 @@ p32_land(t,j,type32,ac_est) = 0;
 
 ** Calculate v32_land.l
 v32_land.l(j,type32,ac) = p32_land(t,j,type32,ac);
-pc32_land(j,type32,ac) = p32_land(t,j,type32,ac);
+pc32_land(j,type32,ac) = v32_land.l(j,type32,ac);
 p32_land_before(t,j,type32,ac) = p32_land(t,j,type32,ac);
-vm_land.l(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
-pcm_land(j,"forestry") = sum((type32,ac), p32_land(t,j,type32,ac));
+vm_land.l(j,"forestry") = sum((type32,ac), v32_land.l(j,type32,ac));
+pcm_land(j,"forestry") = sum((type32,ac), v32_land.l(j,type32,ac));
 
 ** reset all bounds
 v32_land.lo(j,type32,ac) = 0;
 v32_land.up(j,type32,ac) = Inf;
 
+if(s32_hvarea = 0,
+*** zero. Fixed timber plantations. No harvest. No establisment.
+  v32_hvarea_forestry.fx(j,ac_sub) = 0;
+  v32_land.fx(j,"plant",ac) = pc32_land(j,"plant",ac);
+  s32_establishment_static = 1;
+  s32_establishment_dynamic = 0;
+elseif s32_hvarea = 1,
+*** exogenous. All timber plantations are harvested at rotation age and are re-established such that the total plantation area remains constant.
+  v32_land.fx(j,"plant",ac)$(ac.off < p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
+  v32_land.fx(j,"plant",ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = 0;
+  v32_hvarea_forestry.fx(j,ac_sub) = pc32_land(j,"plant",ac_sub) - v32_land.l(j,"plant",ac_sub);
+*  $(ac.off >= p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
+  s32_establishment_static = 1;
+  s32_establishment_dynamic = 0;
+elseif s32_hvarea = 2,
+*** endogenous. All plantations are harvested at rotation age. Plantation establishment is endogenous.
 ** Fix timber plantations until the end of the rotation. "ac.off" identical to "ord(ac)-1".
 ** The offset is needed because the first element of ac is ac0, which is not included in p32_rotation_cellular_harvesting.
-v32_land.fx(j,"plant",ac)$(ac.off < p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
+  v32_land.fx(j,"plant",ac)$(ac.off < p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
 ** After the rotation period, plantations are free for harvesting - We force plantations to be harvested after rotations.
-v32_land.up(j,"plant",ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
+  v32_land.fx(j,"plant",ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = 0;
+  s32_establishment_static = 0;
+  s32_establishment_dynamic = 1;
+);
 ** overwrite bounds for ac_est
 v32_land.lo(j,"plant",ac_est) = 0;
 v32_land.up(j,"plant",ac_est) = Inf;
 
-** Fix timber plantation land in case the plantations for productive purposes
-** need to be held at constant 1995 levels.
-v32_land.fx(j,"plant",ac)$(s32_initial_distribution=0) = p32_land_start_ac(j,"plant",ac);
 
 ** fix ndc afforestation forever, all age-classes are fixed except ac_est
 v32_land.fx(j,"ndc",ac_sub) = pc32_land(j,"ndc",ac_sub);
@@ -126,7 +143,7 @@ else
 *' No afforestation is allowed if carbon density <= 20 tc/ha
 v32_land.fx(j,"aff",ac_est)$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
 
-m_boundfix(v32_land,(j,type32,ac_sub),l,10e-5);
+m_boundfix(v32_land,(j,type32,ac_sub),up,10e-5);
 
 ** Calculate future yield based on rotation length
 pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)-1), pm_timber_yield(t,j,ac,"forestry"));
@@ -135,12 +152,5 @@ pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j
 p32_updated_gs_reg(t,i) = 1;
 p32_updated_gs_reg(t,i)$(sum((cell(i,j),ac_sub),p32_land(t,j,"plant",ac_sub))>0) = (sum((cell(i,j),ac_sub),(pm_timber_yield(t,j,ac_sub,"forestry") / sm_wood_density) * p32_land(t,j,"plant",ac_sub))/ sum((cell(i,j),ac_sub),p32_land(t,j,"plant",ac_sub)));
 display f32_gs_relativetarget,p32_updated_gs_reg;
-
-if(s32_hvarea = 0,
- v32_hvarea_forestry.fx(j,ac_sub) = 0;
-elseif s32_hvarea = 1,
- v32_hvarea_forestry.fx(j,ac_sub) = v32_land.l(j,"plant",ac_sub) - v32_land.lo(j,"plant",ac_sub);
-);
-
 
 *** EOF presolve.gms ***

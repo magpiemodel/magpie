@@ -125,7 +125,7 @@ s32_max_aff_area = max(s32_max_aff_area, sum(j, smax(t2, p32_aff_pol(t2,j))) );
 
 p32_cdr_ac(t,j,ac) = 0;
 
-** Define ini32 set. ac0 is excluded here. Therefore no initial shifting is needed.
+** Define ini32 set. ac0 is included here. Therefore, initial shifting in presolve.
 ini32(j,ac) = no;
 ini32(j,ac) = yes$(ord(ac) >= 1 AND ac.off < p32_rotation_cellular_harvesting("y1995",j));
 
@@ -221,4 +221,5 @@ p32_plantation_contribution(t_ext,i)$(f32_gs_relativetarget(i)>0) = f32_plantati
 p32_plantation_contribution(t_ext,"EUR")= f32_plantation_contribution(t_ext,"EUR","brown","%c32_incr_rate%");
 
 f32_estb_calib("REF") = 0.5;
+f32_estb_calib("EUR") = 0.8;
 p32_plantation_contribution(t_ext,"REF") = 0.01;

@@ -24,3 +24,5 @@ vm_landdiff_natveg.fx = 0;
 vm_hvarea_secdforest.fx(j,ac)  = 0;
 vm_hvarea_other.fx(j,ac)       = 0;
 vm_hvarea_primforest.fx(j)     = 0;
+
+vm_cost_hvarea_natveg.fx(i) = 0;

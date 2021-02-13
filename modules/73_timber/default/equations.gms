@@ -35,7 +35,7 @@ q73_cost_timber(i2)..
 
 q73_prod_wood(j2)..
   vm_prod(j2,"wood")
-  =e=
+  =l=
   vm_prod_forestry(j2,"wood")
   +
   sum((land_natveg),vm_prod_natveg(j2,land_natveg,"wood"))
@@ -44,7 +44,7 @@ q73_prod_wood(j2)..
 
 q73_prod_woodfuel(j2)..
   vm_prod(j2,"woodfuel")
-  =e=
+  =l=
   vm_prod_forestry(j2,"woodfuel")
   +
   sum((land_natveg),vm_prod_natveg(j2,land_natveg,"woodfuel"))

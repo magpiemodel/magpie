@@ -176,6 +176,9 @@ display p35_updated_gs_natfor;
 ** Youngest age classes are not allowed to be harvested
 v35_hvarea_secdforest.fx(j,ac_est) = 0;
 v35_hvarea_other.fx(j,ac_est) = 0;
+v35_secdforest_reduction.fx(j,ac_est) = 0;
+v35_other_reduction.fx(j,ac_est) = 0;
+
 
 vm_prod_natveg.fx(j,"other","wood") = 0;
 
@@ -184,7 +187,7 @@ if(s35_hvarea = 0,
  v35_hvarea_primforest.fx(j) = 0;
  v35_hvarea_other.fx(j,ac_sub) = 0;
 elseif s35_hvarea = 1,
- v35_hvarea_secdforest.fx(j,ac_sub) = (v35_secdforest.l(j,ac_sub) - v35_secdforest.lo(j,ac_sub))*0.005*m_timestep_length_forestry;
- v35_hvarea_primforest.fx(j) = (vm_land.l(j,"primforest") - vm_land.lo(j,"primforest"))*0.0001*m_timestep_length_forestry;
- v35_hvarea_other.fx(j,ac_sub) = (v35_other.l(j,ac_sub) - v35_other.lo(j,ac_sub))*0*m_timestep_length_forestry;
+ v35_hvarea_secdforest.fx(j,ac_sub) = (v35_secdforest.l(j,ac_sub) - v35_secdforest.lo(j,ac_sub))*s35_hvarea_secdforest*m_timestep_length_forestry;
+ v35_hvarea_primforest.fx(j) = (vm_land.l(j,"primforest") - vm_land.lo(j,"primforest"))*s35_hvarea_primforest*m_timestep_length_forestry;
+ v35_hvarea_other.fx(j,ac_sub) = (v35_other.l(j,ac_sub) - v35_other.lo(j,ac_sub))*s35_hvarea_other*m_timestep_length_forestry;
 );

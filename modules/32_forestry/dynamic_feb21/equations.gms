@@ -136,14 +136,14 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 
 *' Regional minimum constraint for maintaining current forestry area patterns,
 *' while accounting for regional self sufficiency in (`pm_selfsuff_ext`) timber production.
-q32_establishment_dynamic(i2)$(s32_hvarea = 2) ..
+q32_establishment_dynamic(i2)$s32_establishment_dynamic ..
               sum(cell(i2,j2), ((sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry) * pc32_yield_forestry_future(j2))
               =e=
               sum((ct,kforestry), pm_demand_forestry_future(i2,kforestry) *  min(s32_max_self_suff, pm_selfsuff_ext(ct,i2,kforestry)) * p32_plantation_contribution(ct,i2) * f32_estb_calib(i2))
               ;
 
-q32_establishment_fixed(j2)$(s32_hvarea = 1)..
-	sum(ac_est, v32_land(j2,"plant",ac_est)) =e= sum(ac_sub, v32_hvarea_forestry(j2,ac_sub));
+q32_establishment_fixed(j2)$s32_establishment_static ..
+	sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2) =e= sum(ac_sub, v32_hvarea_forestry(j2,ac_sub));
 
 
 *' This constraint distributes additions to forestry land over ac_est,

@@ -12,6 +12,7 @@ positive variables
   vm_hvarea_secdforest(j,ac)                    Harvested area from secondary forest (mio. ha)
   vm_hvarea_other(j,ac)                         Harvested area from other land (mio. ha)
   vm_hvarea_primforest(j)                       Harvested area from primary forest (mio. ha)
+  vm_cost_hvarea_natveg(i)						blub
 ;
 
 
