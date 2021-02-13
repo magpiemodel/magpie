@@ -24,5 +24,6 @@ parameters
  ov_hvarea_secdforest(t,j,ac,type) Harvested area from secondary forest (mio. ha)
  ov_hvarea_other(t,j,ac,type)      Harvested area from other land (mio. ha)
  ov_hvarea_primforest(t,j,type)    Harvested area from primary forest (mio. ha)
+ ov_cost_hvarea_natveg(t,i,type)   blub
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
