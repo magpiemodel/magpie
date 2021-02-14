@@ -23,11 +23,11 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "FEB03a"
+identifier_flag = "FEB04"
 cat(paste0("MEA planted area cellular fix"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
-for(scen in c("forestry")){
+for(scen in c("forestry","nocc")){
 
     for(ssp in c("SSP2")){
       source("config/default.cfg")
