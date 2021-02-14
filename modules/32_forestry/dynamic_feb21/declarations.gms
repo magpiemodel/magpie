@@ -49,6 +49,8 @@ parameters
  ;
 
 positive variables
+ vm_cost_fore(i)                                    Forestry costs (Mio USD)
+ v32_cost_hvarea(i)                                 Cost of harvesting timber from forests (mio. USD per yr)
  v32_land(j,type32,ac)                              Forestry land pools (mio. ha)
  v32_land_missing(j)                                Forestry land which can be used at extrmemly high costs in case not enough area is available for new establishment (mio. ha)
  vm_landdiff_forestry                               Aggregated difference in forestry land compared to previous timestep (mio. ha)
@@ -61,9 +63,7 @@ positive variables
  ;
 
 variables
- vm_cost_fore(i)                                    Forestry costs (Mio USD)
  vm_cdr_aff(j,ac,aff_effect)                        Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
- v32_cost_hvarea(i)                                 Cost of harvesting timber from forests (mio. USD per yr)
  ;
 
 equations
@@ -91,6 +91,8 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
+ ov_cost_fore(t,i,type)                  Forestry costs (Mio USD)
+ ov32_cost_hvarea(t,i,type)              Cost of harvesting timber from forests (mio. USD per yr)
  ov32_land(t,j,type32,ac,type)           Forestry land pools (mio. ha)
  ov32_land_missing(t,j,type)             Forestry land which can be used at extrmemly high costs in case not enough area is available for new establishment (mio. ha)
  ov_landdiff_forestry(t,type)            Aggregated difference in forestry land compared to previous timestep (mio. ha)
@@ -100,9 +102,7 @@ parameters
  ov32_cost_establishment(t,i,type)       Cost of establishment calculated at the current time step (mio. USD)
  ov32_hvarea_forestry(t,j,ac,type)       Harvested area from timber plantations (mio. ha)
  ov_prod_forestry(t,j,kforestry,type)    Production of woody biomass from commercial plantations (mio. tDM per yr)
- ov_cost_fore(t,i,type)                  Forestry costs (Mio USD)
  ov_cdr_aff(t,j,ac,aff_effect,type)      Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
- ov32_cost_hvarea(t,i,type)              Cost of harvesting timber from forests (mio. USD per yr)
  oq32_cost_total(t,i,type)               Total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                     Land constraint (mio. ha)
  oq32_cdr_aff(t,j,ac,type)               Calculation of CDR from afforestation (mio. tC)
