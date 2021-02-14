@@ -24,6 +24,7 @@
 *' If the trade balance reduction equals 1 (`f21_self_suff(ct,i2,k_trade) = 1`), all demand enters the self-sufficiency pool.
 *' If it equals 0, all demand enters the comparative advantage pool.
 
+*' Lower bound for production.
 
  q21_trade_reg(i2,k_trade)..
  vm_prod_reg(i2,k_trade) =g=
@@ -34,13 +35,14 @@
  *sum(ct,i21_trade_bal_reduction(ct,k_trade))
  $(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
 
-
- q21_trade_reg_up(i2,k_trade)..
- vm_prod_reg(i2,k_trade) =l=
- ((vm_supply(i2,k_trade) + v21_excess_prod(i2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade)))
- $(sum(ct,f21_self_suff(ct,i2,k_trade) >= 1))
- + (vm_supply(i2,k_trade)*sum(ct,f21_self_suff(ct,i2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade)))
- $(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
+*' Upper bound for production. Upper bound does not apply on wood and woodfuel production to allow for exogenous timber harvesting scenarios.
+ 
+ q21_trade_reg_up(i2,k_trade_excl_timber) ..
+ vm_prod_reg(i2,k_trade_excl_timber) =l=
+ ((vm_supply(i2,k_trade_excl_timber) + v21_excess_prod(i2,k_trade_excl_timber))/sum(ct,i21_trade_bal_reduction(ct,k_trade_excl_timber)))
+ $(sum(ct,f21_self_suff(ct,i2,k_trade_excl_timber) >= 1))
+ + (vm_supply(i2,k_trade_excl_timber)*sum(ct,f21_self_suff(ct,i2,k_trade_excl_timber))/sum(ct,i21_trade_bal_reduction(ct,k_trade_excl_timber)))
+ $(sum(ct,f21_self_suff(ct,i2,k_trade_excl_timber) < 1));
 
 *' The global excess demand of each tradable good `v21_excess_demad` equals to
 *' the sum over all the imports of importing regions.
