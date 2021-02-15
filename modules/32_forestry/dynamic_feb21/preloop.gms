@@ -178,6 +178,14 @@ elseif s32_initial_distribution = 4,
 ** Divide NDCs according to same distribution
     p32_land_start_ac(j,"ndc",ac)   = pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i)) * p32_ac_dist(j,ac);
 
+*use residual approach to avoid distributional errors i.e., poulter set with no plantations but luh reporting plantations in a cell
+    loop (j,
+      if(sum(ac,p32_land_start_ac(j,"plant",ac)$(ini32(j,ac))) = 0,
+      p32_land_start_ac(j,"plant",ac)$(ini32(j,ac)) =  pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
+      p32_land_start_ac(j,"ndc",ac)$(ini32(j,ac))   =  pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
+       );
+    );
+
 );
 
 ** Initialization of land
