@@ -11,13 +11,10 @@
 *' and natural vegetation [35_natveg]. Timber can be produced from both commercial plantations
 *' and natural forests. The module feeds `vm_prod` at cluster level to [17_production] and
 *' [21_trade] modules. This module also calculates the "real" harvested area in natural
-*' forests i.e. `vm_hvarea_primforest`,`vm_hvarea_secdforest` and `v73_hvarea_other`.
+*' forests i.e. `v35_hvarea_primforest`,`v35_hvarea_secdforest` and `v73_hvarea_other`.
 *'
 *' @authors Abhijeet Mishra, Florian Humpenöder
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%timber%" == "biomass_mar20" $include "./modules/73_timber/biomass_mar20/realization.gms"
 $Ifi "%timber%" == "default" $include "./modules/73_timber/default/realization.gms"
-$Ifi "%timber%" == "off" $include "./modules/73_timber/off/realization.gms"
-$Ifi "%timber%" == "simple" $include "./modules/73_timber/simple/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

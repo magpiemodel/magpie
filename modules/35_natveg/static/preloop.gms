@@ -21,8 +21,8 @@ vm_land.fx(j,"other") = sum(ac, v35_other.l(j,ac));
 vm_landdiff_natveg.fx = 0;
 
 *Fix natveg harvest
-vm_hvarea_secdforest.fx(j,ac)  = 0;
-vm_hvarea_other.fx(j,ac)       = 0;
-vm_hvarea_primforest.fx(j)     = 0;
+v35_hvarea_secdforest.fx(j,ac)  = 0;
+v35_hvarea_other.fx(j,ac)       = 0;
+v35_hvarea_primforest.fx(j)     = 0;
 
 vm_cost_hvarea_natveg.fx(i) = 0;

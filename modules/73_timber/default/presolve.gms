@@ -16,9 +16,6 @@
 *v73_prod_natveg.fx(j,"other",ac,"wood") = 0;
 *v73_prod_natveg.fx(j,"primforest",ac,kforestry)$(not sameas(ac,"acx")) = 0;
 *v73_prod_heaven_timber.fx(j,kforestry) = 0;
-*vm_hvarea_secdforest.fx(j,ac_est) = 0;
-*vm_hvarea_other.fx(j,ac_est) = 0;
-*vm_hvarea_forestry.fx(j,ac_est) = 0;
 
 *Same demand for establishment until 2020, after 2020 depending on s73_foresight
 *s73_foresight=1 forward looking (establishment based on future demand), s73_foresight=0 myopic (establishment based on current demand)

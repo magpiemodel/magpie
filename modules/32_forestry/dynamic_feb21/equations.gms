@@ -170,13 +170,7 @@ q32_prod_forestry(j2)..
                          sum(ac_sub, v32_hvarea_forestry(j2,ac_sub) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"forestry"))) / m_timestep_length_forestry;
 
 *' Harvesting cost in plantations is defined as the cost incurred while removing
-*' biomass from such forests. To make sure that timber plantations are harvested
-*' at rotation age, the economically optimal point in time, we assume negative
-*' per-hectare harvesting costs for timber plantations. Otherwise, harvesting from
-*' natural forest would be preferred over harvest from timber plantations, mainly
-*' because the growing stock at rotation age (e.g. 50 years) in timber plantations
-*' is smaller compared to the growing stock of old-growth primary and secondary
-*' forest (> 100 years).
+*' biomass from such forests. 
 
 q32_cost_hvarea(i2)..
                     v32_cost_hvarea(i2)

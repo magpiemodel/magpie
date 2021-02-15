@@ -105,6 +105,13 @@ elseif s32_hvarea = 1,
 *  $(ac.off >= p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
   s32_establishment_static = 1;
   s32_establishment_dynamic = 0;
+
+** Timber plantations can be harvested at rotation age (the economically
+** optimal point in time harvesting usually natural forests would be preferred over harvest
+** from timber plantations, mainly because the growing stock at rotation age (e.g. 50 years)
+** in timber plantations is smaller compared to the growing stock of old-growth primary and
+** secondary forest (> 100 years).
+
 elseif s32_hvarea = 2,
 *** endogenous. All plantations are harvested at rotation age. Plantation establishment is endogenous.
 ** Fix timber plantations until the end of the rotation. "ac.off" identical to "ord(ac)-1".

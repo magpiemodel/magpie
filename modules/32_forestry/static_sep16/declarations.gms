@@ -11,7 +11,7 @@ positive variables
  v32_land(j,type32,ac)           	Forestry land pools (mio. ha)
  vm_cdr_aff(j,ac,aff_effect) 		Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
   v32_land_reduction(j,type32,ac)                    Forestry land reduction (mio. ha)
- vm_hvarea_forestry(j,ac)                    		Harvested area from timber plantations (mio. ha)
+ v32_hvarea_forestry(j,ac)                    		Harvested area from timber plantations (mio. ha)
 ;
 
 parameters
