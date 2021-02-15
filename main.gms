@@ -163,8 +163,8 @@ $title magpie
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/calibration
 * 
 * Used data set: additional_data_rev3.95.tgz
-* md5sum: 87ab0375e1114e5188ab45cbaa2e818e
-* Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/input_data/
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -197,7 +197,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Fri Feb 12 22:49:18 2021
+* Last modification (input data): Mon Feb 15 17:50:00 2021
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 

@@ -226,8 +226,3 @@ pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry
 ** Calculate plantation contribution scaled to Growing stock in plantations
 p32_plantation_contribution(t_ext,i) = 0.001;
 p32_plantation_contribution(t_ext,i)$(f32_gs_relativetarget(i)>0) = f32_plantation_contribution(t_ext,i,"%c32_dev_scen%","%c32_incr_rate%");
-p32_plantation_contribution(t_ext,"EUR")= f32_plantation_contribution(t_ext,"EUR","brown","%c32_incr_rate%");
-
-f32_estb_calib("REF") = 0.5;
-f32_estb_calib("EUR") = 0.8;
-p32_plantation_contribution(t_ext,"REF") = 0.01;
