@@ -1,8 +1,8 @@
 scalars
  s32_shift                                          Number of 5-year age-classes corresponding to current time step length (1)
  p32_max_aff_area                                   Maximum global afforestation area that is greater or equal the exogenous policy target (mio. ha)
- s32_establishment_dynamic							blub
- s32_establishment_static							blub
+ s32_establishment_dynamic                          If plantations should be dynamic (including establishment and harvest decsions)
+ s32_establishment_static                           Static plantations with no establishmnet no harvest no regrowth
 ;
 
 parameters
