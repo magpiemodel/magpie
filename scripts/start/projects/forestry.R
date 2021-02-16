@@ -23,12 +23,12 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "FEB06"
+identifier_flag = "FEB07"
 cat(paste0("Tests for pull request"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(s80_maxiter in c(5)){
-  for(scen in c("forestry","nocc")){
+  for(scen in c("nocc","forestry","forestry_exo_noprod","forestry_exo_prod")){
 
       for(ssp in c("SSP2")){
         source("config/default.cfg")
@@ -57,16 +57,18 @@ for(s80_maxiter in c(5)){
           if(cfg$gms$landconversion == "devstate_feb21")      lc_flag = "DevState"
           if(cfg$gms$landconversion == "global_static_aug18") lc_flag = "Default"
 
-          if(scen=="nocc") scen_flag="Default"
-          if(scen=="forestry") scen_flag="Forestry"
+          if(scen=="nocc")                  scen_flag="Default"
+          if(scen=="forestry")              scen_flag="Forestry"
+          if(scen=="forestry_exo_noprod")   scen_flag="ForestryExoNP"
+          if(scen=="forestry_exo_prod")     scen_flag="ForestryExoProd"
 
-          cfg$title   = paste0(identifier_flag,"_",scen_flag,"_AllThreadCore")
+          cfg$title   = paste0(identifier_flag,"_",scen_flag)
           cfg$output  = c("extra/timestep_duration")
 
            xx = c(xx,cfg$title)
            cfg$gms$s80_optfile <- 1
            cfg$results_folder = "output/:title:"
-           start_run(cfg,codeCheck=FALSE)
+           #start_run(cfg,codeCheck=FALSE)
         }
       }
    }
