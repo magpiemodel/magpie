@@ -26,7 +26,7 @@ buildInputVector <- function(regionmapping   = "agmip",
                              archive_rev     = "52",
                              madrat_rev      = "4.57bb4",
                              validation_rev  = "4.57bb4",
-                             calibration     = "calibration_INMS_v5_28Jan21.tgz",
+                             calibration     =  "calibration_INMS_v6_16Feb21.tgz",
                              additional_data = "additional_data_rev3.95.tgz") {
   mappings <- c(h11="8a828c6ed5004e77d1ba2025e8ea2261",
                 h12="690d3718e151be1b450b394c1064b1c5",
@@ -69,11 +69,11 @@ cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping=
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$force_download <- TRUE
-cfg$recalibrate <- TRUE
+cfg$recalibrate <- FALSE
 start_run(cfg=cfg,codeCheck=codeCheck)
 calib<-magpie4::submitCalibration(name = "INMS_v6")
 
-#calib<-"calibration_calibration_inms_may2020_09Jul20.tgz"
+calib<- "calibration_INMS_v6_16Feb21.tgz"
 
 
 ###############################################################################
