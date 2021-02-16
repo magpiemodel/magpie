@@ -20,5 +20,5 @@ $endif
  );
 );
 
-pc13_tau(i)      = fm_tau1995(i);
+pcm_tau(i)      = fm_tau1995(i);
 pc13_tcguess(i)  = f13_tcguess(i);

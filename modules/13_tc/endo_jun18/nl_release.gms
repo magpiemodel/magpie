@@ -7,5 +7,5 @@
 
 * ### nl_release ###
 
-vm_tau.lo(i) =    pc13_tau(i);
-vm_tau.up(i) =  2*pc13_tau(i);
+vm_tau.lo(i) =    pcm_tau(i);
+vm_tau.up(i) =  2*pcm_tau(i);

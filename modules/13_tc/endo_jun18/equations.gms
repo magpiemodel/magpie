@@ -37,5 +37,5 @@ q13_cost_tc(i2) ..
 *' (annuity with infinite time horizon):
 
 q13_tech_cost(i2) ..
- vm_tech_cost(i2)=e= (vm_tau(i2)/pc13_tau(i2)-1) * v13_cost_tc(i2)
+ vm_tech_cost(i2)=e= (vm_tau(i2)/pcm_tau(i2)-1) * v13_cost_tc(i2)
                                * sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)));

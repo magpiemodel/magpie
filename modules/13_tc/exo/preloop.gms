@@ -20,6 +20,6 @@ $endif
  );
 );
 
-pc13_tau(i)      = fm_tau1995(i);
+pcm_tau(i)      = fm_tau1995(i);
 
 p13_tech_cost_past(t,i) = 0;
