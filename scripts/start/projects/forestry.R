@@ -27,47 +27,49 @@ identifier_flag = "FEB04"
 cat(paste0("MEA planted area cellular fix"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
-for(scen in c("forestry","nocc")){
+for(s80_maxiter in c(5,15,30)){
+  for(scen in c("forestry","nocc")){
 
-    for(ssp in c("SSP2")){
-      source("config/default.cfg")
+      for(ssp in c("SSP2")){
+        source("config/default.cfg")
 
-      cfg$gms$s80_maxiter = 5
+        cfg$gms$s80_maxiter = s80_maxiter
 
-      cfg = setScenario(cfg,c(ssp,scen))
+        cfg = setScenario(cfg,c(ssp,scen))
 
-      for(land_conversion in c("devstate_feb21")){
-        #cfg$gms$c_timesteps <- "5year"
+        for(land_conversion in c("devstate_feb21")){
+          #cfg$gms$c_timesteps <- "5year"
 
-        cfg$gms$landconversion <- land_conversion
+          cfg$gms$landconversion <- land_conversion
 
-        cfg$gms$recalibrate <- "ifneeded"
-
-
-        cfg$gms$s15_elastic_demand <- 0
+          cfg$gms$recalibrate <- "ifneeded"
 
 
-        if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
-        if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
+          cfg$gms$s15_elastic_demand <- 0
 
-        cfg$gms$c57_macc_version = "PBL_2019"
-        cfg$gms$c60_biodem_level <- 0
 
-        if(cfg$gms$landconversion == "devstate_feb21")      lc_flag = "DevState"
-        if(cfg$gms$landconversion == "global_static_aug18") lc_flag = "Default"
+          if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
+          if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
 
-        if(scen=="nocc") scen_flag="Default"
-        if(scen=="forestry") scen_flag="Forestry"
+          cfg$gms$c57_macc_version = "PBL_2019"
+          cfg$gms$c60_biodem_level <- 0
 
-        cfg$title   = paste0(identifier_flag,"_",scen_flag)
-        cfg$output  = c("extra/timestep_duration")
+          if(cfg$gms$landconversion == "devstate_feb21")      lc_flag = "DevState"
+          if(cfg$gms$landconversion == "global_static_aug18") lc_flag = "Default"
 
-         xx = c(xx,cfg$title)
-         cfg$gms$s80_optfile <- 1
-         cfg$results_folder = "output/:title:"
-         start_run(cfg,codeCheck=FALSE)
+          if(scen=="nocc") scen_flag="Default"
+          if(scen=="forestry") scen_flag="Forestry"
+
+          cfg$title   = paste0(identifier_flag,"_",scen_flag,"_NoOptIter",s80_maxiter)
+          cfg$output  = c("extra/timestep_duration")
+
+           xx = c(xx,cfg$title)
+           cfg$gms$s80_optfile <- 0
+           cfg$results_folder = "output/:title:"
+           #start_run(cfg,codeCheck=FALSE)
+        }
       }
-    }
+   }
 }
 
 #          cfg$gms$c56_pollutant_prices = "coupling"
