@@ -23,14 +23,12 @@ magpie.optfile   = s80_optfile ;
 magpie.scaleopt  = 1 ;
 magpie.solprint  = 0 ;
 magpie.holdfixed = 1 ;
-magpie.threads=0;
 
 $onecho > conopt4.opt
 Tol_Obj_Change = 3.0e-6
 Tol_Feas_Min = 4.0e-7
 Tol_Feas_Max = 4.0e-6
 Tol_Feas_Tria = 4.0e-6
-threads=0
 $offecho
 
 $onecho > conopt4.op2
@@ -47,7 +45,7 @@ repeat(
 * if solve stopped with an error, try it again without pre-processing
     if((magpie.modelstat = 13),
       display "WARNING: Modelstat 13 | retry without Conopt4 pre-processing";
-	  magpie.optfile = 2 
+	  magpie.optfile = 2
       solve magpie USING nlp MINIMIZING vm_cost_glo;
       magpie.optfile   = s80_optfile ;
     );

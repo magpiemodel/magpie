@@ -23,8 +23,8 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "FEB05"
-cat(paste0("Thread setting test"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+identifier_flag = "FEB06"
+cat(paste0("Tests for pull request"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 for(s80_maxiter in c(5)){
