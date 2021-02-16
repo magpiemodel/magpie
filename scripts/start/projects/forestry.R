@@ -23,11 +23,11 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "FEB04"
-cat(paste0("MEA planted area cellular fix"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+identifier_flag = "FEB05"
+cat(paste0("Thread setting test"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
-for(s80_maxiter in c(5,15,30)){
+for(s80_maxiter in c(5)){
   for(scen in c("forestry","nocc")){
 
       for(ssp in c("SSP2")){
@@ -60,13 +60,13 @@ for(s80_maxiter in c(5,15,30)){
           if(scen=="nocc") scen_flag="Default"
           if(scen=="forestry") scen_flag="Forestry"
 
-          cfg$title   = paste0(identifier_flag,"_",scen_flag,"_NoOptIter",s80_maxiter)
+          cfg$title   = paste0(identifier_flag,"_",scen_flag,"_AllThreadCore")
           cfg$output  = c("extra/timestep_duration")
 
            xx = c(xx,cfg$title)
-           cfg$gms$s80_optfile <- 0
+           cfg$gms$s80_optfile <- 1
            cfg$results_folder = "output/:title:"
-           #start_run(cfg,codeCheck=FALSE)
+           start_run(cfg,codeCheck=FALSE)
         }
       }
    }
