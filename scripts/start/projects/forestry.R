@@ -68,7 +68,7 @@ for(s80_maxiter in c(5)){
            xx = c(xx,cfg$title)
            cfg$gms$s80_optfile <- 1
            cfg$results_folder = "output/:title:"
-           #start_run(cfg,codeCheck=FALSE)
+           start_run(cfg,codeCheck=FALSE)
         }
       }
    }
