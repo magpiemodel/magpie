@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: extract inms-report in mif format from run 
+# description: extract inms-report in mif format from run
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
@@ -22,10 +22,10 @@ print("Start inms reporting reg runscript")
 ############################# BASIC CONFIGURATION #######################################
 
 if(!exists("source_include")) {
-  
+
   title       <- "inms_SSP2_RCP4p5_PolicyLow_v4"
   outputdir       <- "output/inms_SSP2_RCP4p5_PolicyLow_v4_2020-07-13_15.37.07"
-  
+
   ###Define arguments that can be read from command line
   readArgs("outputdir","title")
 }
@@ -53,7 +53,7 @@ mif=read.report(filename)
 missingyears=function(x){
   history=paste0("y",1965+((0:5)*5))
   x[[1]][[1]] <- time_interpolate(x[[1]][[1]],interpolated_year = c(history,paste0("y",2005+((0:9)*10))),integrate_interpolated_years = TRUE)
-  x[[1]][[1]][,history,] = 0
+  x[[1]][[1]][,history,] = NA
   return(x)
 }
 
@@ -63,4 +63,3 @@ a=missingyears(mif)
 write.reportProject(a,mapping=paste0(wdbefore,"/mapping_inms.csv"),file="report_inms.mif")
 #write.report2(a,file="magpie_results_nov2019.mif")
 warnings()
-
