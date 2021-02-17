@@ -137,16 +137,21 @@ if(s32_initial_distribution = 0,
 
 elseif s32_initial_distribution = 1,
 ** Initialize with equal distribution among rotation age classes
+** Plantated forest area is divided into ndcs (other planted forest) and plantations
     p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
     p32_land_start_ac(j,"plant",ac)$(ini32(j,ac)) = p32_plant_ini_ac(j);
     p32_land_start_ac(j,"ndc",ac)$(ini32(j,ac))   = pm_land_start(j,"forestry") * sum(cell(i,j),1- f32_plantedforest(i))/p32_rotation_cellular_harvesting("y1995",j);
 
 elseif s32_initial_distribution = 2,
+** Initialize with distribution based on FAO data (but this distribution is applied to all cells globally)
+** Plantated forest area is divided into ndcs (other planted forest) and plantations
     p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
     p32_land_start_ac(j,"plant",ac) = p32_plant_ini_ac(j) * f32_ac_dist(ac);
     p32_land_start_ac(j,"ndc",ac)   = pm_land_start(j,"forestry") * sum(cell(i,j),1-f32_plantedforest(i)) * f32_ac_dist(ac);
 
 elseif s32_initial_distribution = 3,
+** Initialize with Poulter distribution among rotation age classes
+** Plantated forest area is divided into ndcs (other planted forest) and plantations
     p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
     p32_rotation_dist(j,ac) =  (im_plantedclass_ac(j,ac)$(ini32(j,ac))/sum(ac2,im_plantedclass_ac(j,ac2)$(ini32(j,ac2))))$(sum(ac2,im_plantedclass_ac(j,ac2)$(ini32(j,ac2))));
     p32_land_start_ac(j,"plant",ac)$(ini32(j,ac)) = p32_plant_ini_ac(j) * p32_rotation_dist(j,ac);
@@ -161,6 +166,8 @@ elseif s32_initial_distribution = 3,
     );
 
 elseif s32_initial_distribution = 4,
+** Initialize with Manual distribution among rotation age classes
+** Plantated forest area is divided into ndcs (other planted forest) and plantations
     loop(j,
 ** Set all acs to 0
     p32_ac_dist_flag(j,ac) = 0;
@@ -207,22 +214,28 @@ else
   p32_aff_bgp(j,ac_bph) = f32_aff_bgp(j,"%c32_aff_bgp%")/p32_tcre_glo(j)/card(ac_bph)
 );
 
+** Calculate plantation contribution scaled to Growing stock in plantations
+** Initialize with low values
+p32_plantation_contribution(t_ext,i) = 0.001;
+** Fill parameter with input file based on scenario settings
+p32_plantation_contribution(t_ext,i)$(f32_gs_relativetarget(i)>0) = f32_plantation_contribution(t_ext,i,"%c32_dev_scen%","%c32_incr_rate%");
+
 **************************************************************************
 *******************************************************************************
 ** Calibrate plantations yields
 *******************************************************************************
+** Initialize with 0 cvalues
 p32_observed_gs_reg(i) = 0;
+** Wherever FAO reports >0 growing stock, we calculate how much growing stock MAGPIE
+** sees even before optimization starts
 p32_observed_gs_reg(i)$(f32_gs_relativetarget(i)>0)  = (sum((cell(i,j),ac),(pm_timber_yield_initial(j,ac,"forestry")$(not sameas(ac,"ac0")) / sm_wood_density) * p32_land_start_ac(j,"plant",ac)$(not sameas(ac,"ac0")))/ sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac)$(not sameas(ac,"ac0"))));
+** Initialze calibration factor for growing stocks as 1
+** we dont set it to 0 as we don't want to modify carbon densities by multiplication with 0 later
 p32_gs_scaling_reg(i) = 1;
+** Calculate the ratio between target growing stock (reported by FAO) and observed growing stock (value at initialization in MAgPIE)
 p32_gs_scaling_reg(i)$(f32_gs_relativetarget(i)>0) = f32_gs_relativetarget(i) / p32_observed_gs_reg(i);
+** Calibration factor lower than 1 are set to 1
 p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) < 1) = 1;
 
-display p32_land_start_ac;
-
-** Update c-densitiy
-display p32_gs_scaling_reg;
+** Update c-densitiy based on calibration factor for growing stocks
 pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * sum(cell(i,j),p32_gs_scaling_reg(i));
-
-** Calculate plantation contribution scaled to Growing stock in plantations
-p32_plantation_contribution(t_ext,i) = 0.001;
-p32_plantation_contribution(t_ext,i)$(f32_gs_relativetarget(i)>0) = f32_plantation_contribution(t_ext,i,"%c32_dev_scen%","%c32_incr_rate%");

@@ -111,8 +111,6 @@ q32_cost_establishment(i2)..
 						v32_cost_establishment(i2)
 						=e=
             (sum((cell(i2,j2),type32,ac_est), v32_land(j2,type32,ac_est) * s32_reESTBcost)
-*            +sum(cell(i2,j2), v32_land(j2,"plant","ac0") * s32_harvesting_cost)
-*              /((1+sum(ct,pm_interest(ct,i2)))**sum(ct,(p32_rotation_regional(ct,i2))))
               )
             * sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
 
@@ -129,18 +127,29 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 **** New establishment decision
 *------------------------------
 *' New plantations are already established in the optimization step based on a certain
-*' percentage (`pc32_plant_prod_share_future`) of future demand (`pm_demand_forestry_future`)
-*' This is based on the expected future yield (`pc32_yield_forestry_future`) at
-*' harvest (year in time step are accounted for).
-*' Here we define three constraints for establishing new plantation in simulation step
+*' percentage (`p32_plantation_contribution`) of current demand (`pm_demand_forestry_future`).
+*' Its called `pm_demand_forestry_future` because the model also has a foresight switch which
+*' give the model an ability to account for future changes in demand. By default `pm_demand_forestry_future`
+*' is set to existing roundwood demand. As plantation establishment decisions should
+*' also know some indication of expected future yields, we calculate how much yield
+*' newly established plantation can realize based on rotation lengths. This is defined as
+*' the expected future yield (`pc32_yield_forestry_future`) at harvest (year in time
+*' step are accounted for).
 
 *' Regional minimum constraint for maintaining current forestry area patterns,
-*' while accounting for regional self sufficiency in (`pm_selfsuff_ext`) timber production.
+*' while accounting for regional self sufficiency in (`pm_selfsuff_ext` but capped at
+*' `s32_max_self_suff) timber production but defined according to `s32_establishment_dynamic`.
+
 q32_establishment_dynamic(i2)$s32_establishment_dynamic ..
               sum(cell(i2,j2), ((sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry) * pc32_yield_forestry_future(j2))
               =e=
               sum((ct,kforestry), pm_demand_forestry_future(i2,kforestry) *  min(s32_max_self_suff, pm_selfsuff_ext(ct,i2,kforestry)) * p32_plantation_contribution(ct,i2) * f32_estb_calib(i2))
               ;
+
+*' If plantations have to be static (defined by `s32_establishment_static`) then
+*' the model simply establishes the amount of plantations which are harvested.
+*' this keeps the plantation area static but accounts for age-class changes and
+*' regrowth during every time step.
 
 q32_establishment_fixed(j2)$s32_establishment_static ..
 	sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2) =e= sum(ac_sub, v32_hvarea_forestry(j2,ac_sub));
@@ -170,7 +179,7 @@ q32_prod_forestry(j2)..
                          sum(ac_sub, v32_hvarea_forestry(j2,ac_sub) * sum(ct, pm_timber_yield(ct,j2,ac_sub,"forestry"))) / m_timestep_length_forestry;
 
 *' Harvesting cost in plantations is defined as the cost incurred while removing
-*' biomass from such forests. 
+*' biomass from such forests.
 
 q32_cost_hvarea(i2)..
                     v32_cost_hvarea(i2)

@@ -5,20 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-** scale harvesting costs per ha with age-classes
-*p73_timber_harvest_cost(t,j,ac,forest_land) = (pm_timber_yield(t,j,ac,forest_land)/pm_timber_yield(t,j,"acx",forest_land)) * s73_timber_harvest_cost;
-*p73_timber_harvest_cost(t,j,ac,forest_land)$(ord(ac) <= 5) = p73_timber_harvest_cost(t,j,"ac20",forest_land)
-*p73_timber_harvest_cost(t,j,ac,"forestry") = 0;
+** Current demand for establishment until 2020, after 2020 depending on s73_foresight
+** s73_foresight=1 forward looking (establishment based on future demand),
+** s73_foresight=0 myopic (establishment based on current demand)
 
-** Fixing variables
-*v73_prod_forestry.fx(j,ac_est,kforestry) = 0;
-*v73_prod_natveg.fx(j,land_natveg,ac_est,kforestry) = 0;
-*v73_prod_natveg.fx(j,"other",ac,"wood") = 0;
-*v73_prod_natveg.fx(j,"primforest",ac,kforestry)$(not sameas(ac,"acx")) = 0;
-*v73_prod_heaven_timber.fx(j,kforestry) = 0;
-
-*Same demand for establishment until 2020, after 2020 depending on s73_foresight
-*s73_foresight=1 forward looking (establishment based on future demand), s73_foresight=0 myopic (establishment based on current demand)
 if(m_year(t) <= sm_fix_SSP2,
 *    pm_demand_forestry_future(i,kforestry)    = pm_demand_ext("y2010",i,kforestry)*1.5;
     pm_demand_forestry_future(i,kforestry)    = pm_demand_ext(t,i,kforestry);

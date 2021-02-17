@@ -26,6 +26,6 @@ parameters
  ov32_land(t,j,type32,ac,type)           Forestry land pools (mio. ha)
  ov_cdr_aff(t,j,ac,aff_effect,type)      Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
  ov32_land_reduction(t,j,type32,ac,type) Forestry land reduction (mio. ha)
- ov_hvarea_forestry(t,j,ac,type)         Harvested area from timber plantations (mio. ha)
+ ov32_hvarea_forestry(t,j,ac,type)       Harvested area from timber plantations (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
