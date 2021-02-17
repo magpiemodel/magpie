@@ -53,7 +53,7 @@ mif=read.report(filename)
 missingyears=function(x){
   history=paste0("y",1965+((0:5)*5))
   x[[1]][[1]] <- time_interpolate(x[[1]][[1]],interpolated_year = c(history,paste0("y",2005+((0:9)*10))),integrate_interpolated_years = TRUE)
-  x[[1]][[1]][,history,] = NA
+  x[[1]][[1]][,history,] = 0
   return(x)
 }
 
