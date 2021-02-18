@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **21_trade** Added scalar `s21_trade_bal_damper` and new set `k_trade_excl_timber`
 - **29_ageclass** New age-class module
 - **32_forestry** added new default realization
-- **32_forestry** Simplified routine for plantation establishments. Added plantation area initialization based on MODIS data. Calibration to FAO growing stocks via carbon densities. New switches: `s32_distribution_type `, `c32_dev_scen` (this is renamed `c73_wood_scen`), `c32_incr_rate`, `c32_dev_scen`, `c32_incr_rate`, `s32_hvarea`, `s32_establishment_dynamic`, `s32_establishment_static`, `s32_max_self_suff`
+- **32_forestry** Simplified routine for plantation establishments. Added plantation area initialization based on MODIS data. Calibration to FAO growing stocks via carbon densities. New switches: `s32_distribution_type `, `s32_hvarea`, `s32_establishment_dynamic`, `s32_establishment_static`, `s32_max_self_suff`. New settings `c32_dev_scen`, `c32_incr_rate`, `c32_incr_rate`
 - **35_natveg** Added new default realization
 - **35_natveg** Added distribution in secondary forest based on Poulter et al. 2019. Added forest damages due to wildfire and shifting agriculture. Bugfix in forest protection calculations. New switches: `s35_secdf_distribution`, `s35_forest_damage`, `s35_hvarea`
 - **35_natveg** Added HalfEarth scenario to protection scenarios
@@ -30,8 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **52_carbon** Simplified routine for carbon stock calculations in timber plantations and cleanup of unused code.
 - **56_ghg_policy** Added new scenario to emission policy
 - **73_timber** Additive calibration with FAO data for roundwood demand. New switches: `c73_wood_scen`
-- **73_timber** Added new realization
-- **deafult.cfg** New `forestry` scenario which simulates timber production in MAgPIE
+- **73_timber** Added new realization `default` (modified version of previous realization)
+- **default.cfg** New `forestry` scenario which simulates timber production in MAgPIE
 - **scenario.csv** Added three plantation scenarios
 - **scaling** Updated scaling across the modules
 - **scripts** Updated to `forestry` script with general cleanup for publication. Added `forestry_magpie` script for generic forestry runs.
