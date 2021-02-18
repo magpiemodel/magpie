@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "FEB07"
+identifier_flag = "FEB08"
 cat(paste0("Tests for pull request"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
@@ -51,15 +51,14 @@ for(s80_maxiter in c(5)){
           if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
           if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
 
-          cfg$gms$c57_macc_version = "PBL_2019"
-          cfg$gms$c60_biodem_level <- 0
+#          cfg$gms$c57_macc_version = "PBL_2019"
 
           if(cfg$gms$landconversion == "devstate_feb21")      lc_flag = "DevState"
           if(cfg$gms$landconversion == "global_static_aug18") lc_flag = "Default"
 
           if(scen=="nocc")                  scen_flag="Default"
           if(scen=="forestry")              scen_flag="Forestry"
-          if(scen=="forestry_exo_noprod")   scen_flag="ForestryExoNP"
+          if(scen=="forestry_exo_noprod")   scen_flag="ForestryExoNoProd"
           if(scen=="forestry_exo_prod")     scen_flag="ForestryExoProd"
 
           cfg$title   = paste0(identifier_flag,"_",scen_flag)
