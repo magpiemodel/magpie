@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "FEB08"
+identifier_flag = "FEB09"
 cat(paste0("Tests for pull request"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
@@ -42,11 +42,7 @@ for(s80_maxiter in c(30)){
 
           cfg$gms$landconversion <- land_conversion
 
-          cfg$gms$recalibrate <- "ifneeded"
-
-
           cfg$gms$s15_elastic_demand <- 0
-
 
           if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
           if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
