@@ -55,6 +55,8 @@ general_settings<-function(title) {
   cfg$gms$nitrogen <- "rescaled_jan21"
   cfg$gms$som <- "static_jan19"
   cfg$title <- paste0(title,"_v8")
+  cfg$gms$maccs  <- "on_sep16"
+  cfg$gms$c56_emis_policy <- "maccs_excl_cropland_n2o"
   #cfg$calib_cropland <- FALSE
   cfg$recalibrate <- FALSE
   return(cfg)
