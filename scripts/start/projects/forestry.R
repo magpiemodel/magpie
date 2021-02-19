@@ -23,12 +23,16 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "FEB09"
+identifier_flag = "FEB09b"
 cat(paste0("Tests for pull request"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
+
+#scen_vector <- c("nocc","forestry","forestry_exo_noprod","forestry_exo_prod")
+scen_vector <- c("forestry")
+
 for(s80_maxiter in c(30)){
-  for(scen in c("nocc","forestry","forestry_exo_noprod","forestry_exo_prod")){
+  for(scen in scen_vector){
 
       for(ssp in c("SSP2")){
         source("config/default.cfg")
