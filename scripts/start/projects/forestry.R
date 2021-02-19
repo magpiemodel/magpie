@@ -23,13 +23,13 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "FEB10"
+identifier_flag = "FEB11"
 cat(paste0("Tests for pull request"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
-scen_vector <- c("nocc","forestry","forestry_exo_noprod","forestry_exo_prod")
-#scen_vector <- c("forestry")
+#scen_vector <- c("nocc","forestry","forestry_exo_noprod","forestry_exo_prod")
+scen_vector <- c("forestry","nocc")
 
 for(s80_maxiter in c(30)){
   for(scen in scen_vector){
@@ -51,6 +51,9 @@ for(s80_maxiter in c(30)){
           if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
           if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
 
+          cfg$gms$c60_biodem_level <- 0
+          cfg$gms$c60_bioenergy_subsidy <- 0
+
 #          cfg$gms$c57_macc_version = "PBL_2019"
 
           if(cfg$gms$landconversion == "devstate_feb21")      lc_flag = "DevState"
@@ -65,9 +68,9 @@ for(s80_maxiter in c(30)){
           cfg$output  = c("extra/timestep_duration")
 
            xx = c(xx,cfg$title)
-           cfg$gms$s80_optfile <- 0
+           cfg$gms$s80_optfile <- 1
            cfg$results_folder = "output/:title:"
-           start_run(cfg,codeCheck=FALSE)
+           #start_run(cfg,codeCheck=FALSE)
         }
       }
    }
