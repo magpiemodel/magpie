@@ -27,7 +27,7 @@ identifier_flag = "FEB08"
 cat(paste0("Tests for pull request"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
-for(s80_maxiter in c(5)){
+for(s80_maxiter in c(30)){
   for(scen in c("nocc","forestry","forestry_exo_noprod","forestry_exo_prod")){
 
       for(ssp in c("SSP2")){
@@ -65,7 +65,7 @@ for(s80_maxiter in c(5)){
           cfg$output  = c("extra/timestep_duration")
 
            xx = c(xx,cfg$title)
-           cfg$gms$s80_optfile <- 1
+           cfg$gms$s80_optfile <- 0
            cfg$results_folder = "output/:title:"
            start_run(cfg,codeCheck=FALSE)
         }
