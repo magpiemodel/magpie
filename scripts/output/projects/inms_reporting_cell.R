@@ -36,6 +36,7 @@ load(paste0(outputdir, "/config.Rdata"))
 title <- cfg$title
 print("generating INMS output for the run: ")
 print(title)
+title=strsplit(title,"_v")
 
 gdx <- paste0(outputdir,"/fulldata.gdx")
 

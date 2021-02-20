@@ -54,7 +54,7 @@ general_settings<-function(title) {
   cfg$gms$s15_elastic_demand <- 0
   cfg$gms$nitrogen <- "rescaled_jan21"
   cfg$gms$som <- "static_jan19"
-  cfg$title <- paste0(title,"_v9")
+  cfg$title <- paste0(title,"_v10")
   cfg$gms$maccs  <- "on_sep16"
   cfg$gms$c56_emis_policy <- "maccs_excl_cropland_n2o"
   #cfg$calib_cropland <- FALSE
