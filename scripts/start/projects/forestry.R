@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "FEB11"
+identifier_flag = "FEB12"
 cat(paste0("Tests for pull request"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
@@ -50,9 +50,6 @@ for(s80_maxiter in c(30)){
 
           if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
           if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
-
-          cfg$gms$c60_biodem_level <- 0
-          cfg$gms$c60_bioenergy_subsidy <- 0
 
 #          cfg$gms$c57_macc_version = "PBL_2019"
 
