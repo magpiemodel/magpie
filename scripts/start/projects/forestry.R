@@ -23,13 +23,13 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "FEB12"
-cat(paste0("Tests for pull request"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+identifier_flag = "FEB14"
+cat(paste0("Remove LC realization. set s39_cost_clearing to 0."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
 #scen_vector <- c("nocc","forestry","forestry_exo_noprod","forestry_exo_prod")
-scen_vector <- c("forestry","nocc")
+scen_vector <- c("nocc","forestry")
 
 for(s80_maxiter in c(30)){
   for(scen in scen_vector){
@@ -41,10 +41,7 @@ for(s80_maxiter in c(30)){
 
         cfg = setScenario(cfg,c(ssp,scen))
 
-        for(land_conversion in c("devstate_feb21")){
           #cfg$gms$c_timesteps <- "5year"
-
-          cfg$gms$landconversion <- land_conversion
 
           cfg$gms$s15_elastic_demand <- 0
 
@@ -53,8 +50,7 @@ for(s80_maxiter in c(30)){
 
 #          cfg$gms$c57_macc_version = "PBL_2019"
 
-          if(cfg$gms$landconversion == "devstate_feb21")      lc_flag = "DevState"
-          if(cfg$gms$landconversion == "global_static_aug18") lc_flag = "Default"
+          cfg$gms$crop = "endo_feb20"
 
           if(scen=="nocc")                  scen_flag="Default"
           if(scen=="forestry")              scen_flag="Forestry"
@@ -68,7 +64,7 @@ for(s80_maxiter in c(30)){
            cfg$gms$s80_optfile <- 1
            cfg$results_folder = "output/:title:"
            start_run(cfg,codeCheck=FALSE)
-        }
+
       }
    }
 }
