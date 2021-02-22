@@ -29,7 +29,7 @@ cat(paste0("Remove LC realization. set s39_cost_clearing to 0."), file=paste0(lo
 xx <- c()
 
 #scen_vector <- c("nocc","forestry","forestry_exo_noprod","forestry_exo_prod")
-scen_vector <- c("forestry")
+scen_vector <- c("nocc")
 
 for(s80_maxiter in c(30)){
   for(scen in scen_vector){

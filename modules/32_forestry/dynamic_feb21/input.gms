@@ -17,14 +17,14 @@ $setglobal c32_incr_rate  h5s1l05
 * options constant,h5s5l5,h5s2l2,h5s2l1,h5s1l1,h5s1l05,h2s1l05
 
 scalars
-  s32_hvarea 					  Flag for harvested area and establishemt (0=zero 1=exognous 2=endogneous)	/ 2 /
+  s32_hvarea 					  Flag for harvested area and establishemt (0=zero 1=exognous 2=endogneous)	/ 0 /
   s32_reESTBcost                  Re establishment cost (USD per ha) / 2000 /
   s32_recurring_cost              Recurring costs (USD per ha) / 500 /
   s32_harvesting_cost             Harvesting cost (USD per ha) / 2000 /
   s32_planing_horizon             Afforestation planing horizon (years)            / 50 /
   s32_rotation_extension          Rotation extension factor 1=original rotations 2=100 percent increase in rotations etc (1) / 1 /
   s32_faustmann_rotation          Switch to activate faustmann rotations (1=on 0=off) / 0 /
-  s32_initial_distribution        Switch to Activate ageclass distribution in plantations 0=off 1=equal distribution 2=FAO distribution 3=Poulter distribution 4=Manual distribution (1) / 4 /
+  s32_initial_distribution        Switch to Activate ageclass distribution in plantations 0=off 1=equal distribution 2=FAO distribution 3=Poulter distribution 4=Manual distribution (1) / 0 /
   s32_price                       Price for timber (USD)      / 45 /
   s32_free_land_cost              Very high cost for using non existing land for plantation establishment (USD per ha) /10000/
   s32_max_aff_area                Maximum total global afforestation (mio. ha)    / Inf /

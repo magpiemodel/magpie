@@ -25,7 +25,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **35_natveg** Added new default realization
 - **35_natveg** Added distribution in secondary forest based on Poulter et al. 2019. Added forest damages due to wildfire and shifting agriculture. Bugfix in forest protection calculations. New switches: `s35_secdf_distribution`, `s35_forest_damage`, `s35_hvarea`
 - **35_natveg** Added HalfEarth scenario to protection scenarios
-- **39_landconversion** Added new realization `devstate_feb21`
 - **51_nitrogen** new module realization rescaled_jan21, which rescales n-related emissions with nitrogen surplus to account for lower emissions with higher NUE
 - **52_carbon** Simplified routine for carbon stock calculations in timber plantations and cleanup of unused code.
 - **56_ghg_policy** Added new scenario to emission policy
