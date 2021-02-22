@@ -50,8 +50,6 @@ for(s80_maxiter in c(30)){
 
 #          cfg$gms$c57_macc_version = "PBL_2019"
 
-          cfg$gms$crop = "endo_feb20"
-
           if(scen=="nocc")                  scen_flag="Default"
           if(scen=="forestry")              scen_flag="Forestry"
           if(scen=="forestry_exo_noprod")   scen_flag="ForestryExoNoProd"
