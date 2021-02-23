@@ -23,13 +23,13 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "FEB14"
-cat(paste0("Remove LC realization. set s39_cost_clearing to 0."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+identifier_flag = "FEB15"
+cat(paste0("Updated calibration factors"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
 #scen_vector <- c("nocc","forestry","forestry_exo_noprod","forestry_exo_prod")
-scen_vector <- c("nocc")
+scen_vector <- c("nocc","forestry")
 
 for(s80_maxiter in c(30)){
   for(scen in scen_vector){
