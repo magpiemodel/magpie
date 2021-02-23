@@ -10,13 +10,13 @@ p73_forestry_demand_prod_specific(t_past_forestry,iso,total_wood_products) = f73
 
 ** Loop over time to calculate future demand
 ** Calculations based on Lauri et al. 2019
-loop(t_all$(m_year(t_all) >= 2015 AND m_year(t_all) < 2150),
-   p73_forestry_demand_prod_specific(t_all+1,iso,total_wood_products)
-          = p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)
+loop(t_all$(m_year(t_all) >= sm_fix_SSP2 AND m_year(t_all) <= 2150),
+   p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)$(im_gdp_pc_ppp_iso(t_all,iso)>0 AND im_pop_iso(t_all,iso)>0)
+          = p73_forestry_demand_prod_specific(t_all-1,iso,total_wood_products)
           *
-          (im_pop_iso(t_all+1,iso)/im_pop_iso(t_all,iso))$(im_pop_iso(t_all,iso)>0)
+          (im_pop_iso(t_all,iso)/im_pop_iso(t_all-1,iso))
           *
-          ((im_gdp_pc_ppp_iso(t_all+1,iso)/im_gdp_pc_ppp_iso(t_all,iso))**f73_income_elasticity(total_wood_products))$(im_gdp_pc_ppp_iso(t_all,iso)>0)
+          ((im_gdp_pc_ppp_iso(t_all,iso)/im_gdp_pc_ppp_iso(t_all-1,iso))**f73_income_elasticity(total_wood_products))
           ;
 );
 
@@ -32,11 +32,12 @@ if(s73_timber_demand_switch=1,
       );
   );
 
-  loop (t_all$(m_year(t_all)>=2015),
+  loop (t_all$(m_year(t_all)>=sm_fix_SSP2),
+    p73_timber_demand_gdp_pop(t_all,i,"wood")$(p73_timber_demand_gdp_pop(t_all,i,"wood")<p73_timber_demand_gdp_pop(t_all-1,i,"wood")) = p73_timber_demand_gdp_pop(t_all-1,i,"wood") * s73_increase_ceiling;
     p73_timber_demand_gdp_pop(t_all,i,"wood")$(p73_timber_demand_gdp_pop(t_all,i,"wood")/sum(i_to_iso(i,iso),p73_forestry_demand_prod_specific(t_all-1,iso,"industrial_roundwood")) > s73_increase_ceiling) = p73_timber_demand_gdp_pop(t_all-1,i,"wood") * s73_increase_ceiling;
   );
 );
-
+display p73_timber_demand_gdp_pop;
 ** Alternative wood use scenarios
 $ifthen "%c73_wood_scen%" == "construction"
 p73_timber_demand_gdp_pop(t_all,i,"wood") = p73_timber_demand_gdp_pop(t_all,i,"wood") * f73_demand_modifier(t_all,"%c73_wood_scen%");
