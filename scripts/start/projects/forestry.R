@@ -28,8 +28,8 @@ cat(paste0("Updated calibration factors"), file=paste0(log_folder,"/",identifier
 
 xx <- c()
 
-#scen_vector <- c("nocc","forestry","forestry_exo_noprod","forestry_exo_prod")
-scen_vector <- c("nocc","forestry")
+#scen_vector <- c("ForestryOff","ForestryEndo","ForestryExo")
+scen_vector <- c("ForestryOff","ForestryEndo")
 
 for(s80_maxiter in c(30)){
   for(scen in scen_vector){
@@ -39,7 +39,7 @@ for(s80_maxiter in c(30)){
 
         cfg$gms$s80_maxiter = s80_maxiter
 
-        cfg = setScenario(cfg,c(ssp,scen))
+        cfg = setScenario(cfg,c(ssp,"NPI",scen))
 
           #cfg$gms$c_timesteps <- "5year"
 
@@ -50,10 +50,9 @@ for(s80_maxiter in c(30)){
 
 #          cfg$gms$c57_macc_version = "PBL_2019"
 
-          if(scen=="nocc")                  scen_flag="Default"
-          if(scen=="forestry")              scen_flag="Forestry"
-          if(scen=="forestry_exo_noprod")   scen_flag="ForestryExoNoProd"
-          if(scen=="forestry_exo_prod")     scen_flag="ForestryExoProd"
+          if(scen=="ForestryOff")           scen_flag="Default"
+          if(scen=="ForestryEndo")          scen_flag="Forestry"
+          if(scen=="ForestryExo")           scen_flag="ForestryExo"
 
           cfg$title   = paste0(identifier_flag,"_",scen_flag)
           cfg$output  = c("extra/timestep_duration")
