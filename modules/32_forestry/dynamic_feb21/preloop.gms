@@ -234,14 +234,18 @@ p32_plantation_contribution(t_ext,i)$(f32_gs_relativetarget(i)>0) = f32_plantati
 p32_observed_gs_reg(i) = 0;
 ** Wherever FAO reports >0 growing stock, we calculate how much growing stock MAGPIE
 ** sees even before optimization starts
-p32_observed_gs_reg(i)$(f32_gs_relativetarget(i)>0)  = (sum((cell(i,j),ac),(pm_timber_yield_initial(j,ac,"forestry")$(not sameas(ac,"ac0")) / sm_wood_density) * p32_land_start_ac(j,"plant",ac)$(not sameas(ac,"ac0")))/ sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac)$(not sameas(ac,"ac0"))));
+p32_observed_gs_reg(i)$(f32_gs_relativetarget(i)>0)  = (sum((cell(i,j),ac),(pm_timber_yield_initial(j,ac,"forestry") / sm_wood_density) * p32_land_start_ac(j,"plant",ac))/ sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac)));
 ** Initialze calibration factor for growing stocks as 1
 ** we dont set it to 0 as we don't want to modify carbon densities by multiplication with 0 later
 p32_gs_scaling_reg(i) = 1;
 ** Calculate the ratio between target growing stock (reported by FAO) and observed growing stock (value at initialization in MAgPIE)
 p32_gs_scaling_reg(i)$(f32_gs_relativetarget(i)>0) = f32_gs_relativetarget(i) / p32_observed_gs_reg(i);
-** Calibration factor lower than 1 are set to 1
+** Calibration factors lower than 1 are set to 1
 p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) < 1) = 1;
+** Calibration factors above 5 and below 200 are limited to 5 to avoid implausible high growing stocks in cells with high carbon density.
+p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) > 5 AND p32_gs_scaling_reg(i) < 200) = 5;
+** However, in some cases (regions with very low carbon density) high calibration factors might be needed. Otherwise the growing stock in the model would much lower than in the observed data, causing infeasibilities. 
+p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) >= 200) = 200;
 
 ** Update c-densitiy based on calibration factor for growing stocks
 pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * sum(cell(i,j),p32_gs_scaling_reg(i));
