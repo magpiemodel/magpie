@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "FEB16"
+identifier_flag = "FEB17"
 cat(paste0("Updated calibration factors"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
