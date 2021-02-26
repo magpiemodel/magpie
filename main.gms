@@ -204,7 +204,6 @@ $title magpie
 *
 * Last modification (input data): Wed Feb  3 11:30:50 2021
 *
->>>>>>> a40cbdccc7ca2e5a119a9831760a8d0641fef833
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
