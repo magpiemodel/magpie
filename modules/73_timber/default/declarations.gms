@@ -24,17 +24,19 @@ q73_cost_timber(i)												                                  Actual cost of h
 q73_prod_wood(j)                                                            Production of industrial roundwood (mio. tDM per yr)
 q73_prod_woodfuel(j)                                                        Production of wood fuel (mio. tDM per yr)
 q73_prod_residues(j)                                                        Production of residues from industrial roundwood harvest(mio. tDM per yr)
+q73_prod_forestry_upper(i,kforestry)										Upper bound on production from plantations (mio. tDM per yr)
 ;
 
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_timber(t,i,type)                    Actual cost of harvesting timber from forests (mio. USD per yr)
- ov73_prod_heaven_timber(t,j,kforestry,type) Production of woody biomass from heaven (mio. tDM per yr)
- ov73_prod_residues(t,j,type)                Production of residues from industrial roundwood harvest(mio. tDM per yr)
- oq73_cost_timber(t,i,type)                  Actual cost of harvesting timber from forests (mio. USD per yr)
- oq73_prod_wood(t,j,type)                    Production of industrial roundwood (mio. tDM per yr)
- oq73_prod_woodfuel(t,j,type)                Production of wood fuel (mio. tDM per yr)
- oq73_prod_residues(t,j,type)                Production of residues from industrial roundwood harvest(mio. tDM per yr)
+ ov_cost_timber(t,i,type)                     Actual cost of harvesting timber from forests (mio. USD per yr)
+ ov73_prod_heaven_timber(t,j,kforestry,type)  Production of woody biomass from heaven (mio. tDM per yr)
+ ov73_prod_residues(t,j,type)                 Production of residues from industrial roundwood harvest(mio. tDM per yr)
+ oq73_cost_timber(t,i,type)                   Actual cost of harvesting timber from forests (mio. USD per yr)
+ oq73_prod_wood(t,j,type)                     Production of industrial roundwood (mio. tDM per yr)
+ oq73_prod_woodfuel(t,j,type)                 Production of wood fuel (mio. tDM per yr)
+ oq73_prod_residues(t,j,type)                 Production of residues from industrial roundwood harvest(mio. tDM per yr)
+ oq73_prod_forestry_upper(t,i,kforestry,type) Upper bound on production from plantations (mio. tDM per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

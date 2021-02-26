@@ -67,4 +67,11 @@ q73_prod_residues(j2)..
   vm_prod(j2,"wood") * s73_residue_ratio
   ;
 
+*' Upper bound on production from plantations
+q73_prod_forestry_upper(i2,kforestry)..
+	sum(cell(i2,j2), vm_prod_forestry(j2,kforestry))
+	=l=
+	sum(cell(i2,j2), vm_prod(j2,kforestry))*sum(ct, pm_plantation_contribution(ct,i2));
+
+
 *** EOF equations.gms ***
