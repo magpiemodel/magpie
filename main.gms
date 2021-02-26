@@ -199,11 +199,6 @@ $title magpie
 *
 * Last modification (input data): Wed Feb  3 11:30:50 2021
 *
-*
-*
-*
-* Last modification (input data): Wed Feb  3 11:30:50 2021
-*
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
