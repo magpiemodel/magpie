@@ -176,11 +176,7 @@ $title magpie
 *    28   24   10    7    3   53   17    8   22    7   11   10
 *
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-<<<<<<< HEAD
-*
-=======
-*
->>>>>>> a40cbdccc7ca2e5a119a9831760a8d0641fef833
+
 * Regions data revision: 4.57
 *
 * lpj2magpie settings:
@@ -203,7 +199,6 @@ $title magpie
 *
 * Last modification (input data): Wed Feb  3 11:30:50 2021
 *
-=======
 *
 *
 *
