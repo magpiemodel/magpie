@@ -150,21 +150,21 @@ $title magpie
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 *
-* Used data set: rev4.52_h12_magpie.tgz
+* Used data set: rev4.57_h12_magpie.tgz
 * md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 *
-* Used data set: rev4.52_h12_validation.tgz
+* Used data set: rev4.57_h12_validation.tgz
 * md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 *
 * Used data set: calibration_H12_c200_26Feb20.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 *
-* Used data set: additional_data_rev3.92.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* Used data set: additional_data_rev3.95.tgz
+* md5sum: 87ab0375e1114e5188ab45cbaa2e818e
+* Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/input_data/
 *
 * Low resolution: c200
 * High resolution: 0.5
@@ -177,8 +177,8 @@ $title magpie
 *
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 *
-* Regions data revision: 4.52
-*
+* Regions data revision: 4.57
+* 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
 * * Additional input folder: /p/projects/landuse/data/input/other/rev50
@@ -194,11 +194,19 @@ $title magpie
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = cfg$spamfile, debug = FALSE, seed = cfg$seed)
+<<<<<<< HEAD
 *
 *
 *
 * Last modification (input data): Mon Jan 18 17:49:23 2021
 *
+=======
+*
+*
+*
+* Last modification (input data): Wed Feb  3 11:30:50 2021
+*
+>>>>>>> a40cbdccc7ca2e5a119a9831760a8d0641fef833
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
