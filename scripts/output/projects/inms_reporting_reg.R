@@ -44,7 +44,7 @@ print(title)
 
 filename=paste0("report_",title,".mif")
 gdx=paste0("fulldata.gdx")
-a=getReportINMS(gdx,file=filename,scenario = title)
+a=getReportINMS(gdx,file=filename,scenario = title,dir=".")
 
 print(filename)
 mif=read.report(filename)
