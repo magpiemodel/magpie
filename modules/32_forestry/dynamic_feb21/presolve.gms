@@ -156,9 +156,9 @@ m_boundfix(v32_land,(j,type32,ac_sub),up,10e-5);
 ** Calculate future yield based on rotation length
 if((ord(t)=1),
 pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)-1), pm_timber_yield(t,j,ac,"forestry"));
-pc32_area_rototation(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)-1), p32_land(t,j,"plant",ac));
+pc32_area_rotation(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)-1), p32_land(t,j,"plant",ac));
 );
-pc32_yield_forestry_future_reg(i) = m_weightedmean(pc32_yield_forestry_future(j),pc32_area_rototation(j),(cell(i,j)));
+pc32_yield_forestry_future_reg(i) = m_weightedmean(pc32_yield_forestry_future(j),pc32_area_rotation(j),(cell(i,j)));
 pc32_yield_forestry_future_reg(i)$(pc32_yield_forestry_future_reg(i) = 0) =  smax(cell(i,j),pc32_yield_forestry_future(j));
 
 ** Display
