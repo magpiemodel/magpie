@@ -125,6 +125,7 @@ elseif s32_hvarea = 2,
 ** overwrite bounds for ac_est
 v32_land.lo(j,"plant",ac_est) = 0;
 v32_land.up(j,"plant",ac_est) = Inf;
+v32_land.l(j,"plant",ac_est) = 0.001;
 
 
 ** fix ndc afforestation forever, all age-classes are fixed except ac_est
@@ -153,7 +154,12 @@ v32_land.fx(j,"aff",ac_est)$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0
 m_boundfix(v32_land,(j,type32,ac_sub),up,10e-5);
 
 ** Calculate future yield based on rotation length
+if((ord(t)=1),
 pc32_yield_forestry_future(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)-1), pm_timber_yield(t,j,ac,"forestry"));
+pc32_area_rototation(j) = sum(ac$(ord(ac) = p32_rotation_cellular_estb(t,j)-1), p32_land(t,j,"plant",ac));
+);
+pc32_yield_forestry_future_reg(i) = m_weightedmean(pc32_yield_forestry_future(j),pc32_area_rototation(j),(cell(i,j)));
+pc32_yield_forestry_future_reg(i)$(pc32_yield_forestry_future_reg(i) = 0) =  smax(cell(i,j),pc32_yield_forestry_future(j));
 
 ** Display
 p32_updated_gs_reg(t,i) = 1;

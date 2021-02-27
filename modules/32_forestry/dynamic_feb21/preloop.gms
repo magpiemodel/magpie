@@ -242,10 +242,6 @@ p32_gs_scaling_reg(i) = 1;
 p32_gs_scaling_reg(i)$(f32_gs_relativetarget(i)>0) = f32_gs_relativetarget(i) / p32_observed_gs_reg(i);
 ** Calibration factors lower than 1 are set to 1
 p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) < 1) = 1;
-** Calibration factors above 5 and below 200 are limited to 5 to avoid implausible high growing stocks in cells with high carbon density.
-*p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) > 5 AND p32_gs_scaling_reg(i) < 200) = 5;
-** However, in some cases (regions with very low carbon density) high calibration factors might be needed. Otherwise the growing stock in the model would much lower than in the observed data, causing infeasibilities.
-*p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) >= 200) = 200;
 
 ** Update c-densitiy based on calibration factor for growing stocks
 pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * sum(cell(i,j),p32_gs_scaling_reg(i));

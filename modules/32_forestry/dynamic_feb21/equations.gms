@@ -136,15 +136,22 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 *' the expected future yield (`pc32_yield_forestry_future`) at harvest (year in time
 *' step are accounted for).
 
-*' Regional minimum constraint for maintaining current forestry area patterns,
-*' while accounting for regional self sufficiency in (`pm_selfsuff_ext` but capped at
-*' `s32_max_self_suff) timber production but defined according to `s32_establishment_dynamic`.
+*' Area constraint for plantation establishment based on expected average regional timber yield at rotation age
+*' (`pc32_yield_forestry_future_reg`) to ovoid overspecialization of plantation establishment towards highly productive cells. 
 
 q32_establishment_dynamic(i2)$s32_establishment_dynamic ..
-              sum(cell(i2,j2), ((sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry) * pc32_yield_forestry_future(j2))
+              sum(cell(i2,j2), ((sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry) * pc32_yield_forestry_future_reg(i2))
               =e=
               sum((ct,kforestry), pm_demand_forestry_future(i2,kforestry) *  min(s32_max_self_suff, pm_selfsuff_ext(ct,i2,kforestry)) * pm_plantation_contribution(ct,i2) * f32_estb_calib(i2))
               ;
+
+*' Constraint to maintain the average regional timber yield at rotation age, accounting for the cellular timber yield (`pc32_yield_forestry_future`).
+
+q32_establishment_dynamic_yield(i2)$s32_establishment_dynamic ..
+			sum(cell(i2,j2), (sum(ac_est, v32_land(j2,"plant",ac_est))+v32_land_missing(j2)) * pc32_yield_forestry_future(j2)) 
+			/ (sum(cell(i2,j2), sum(ac_est, v32_land(j2,"plant",ac_est))+v32_land_missing(j2)))
+			=e= 
+			pc32_yield_forestry_future_reg(i2);
 
 *' If plantations have to be static (defined by `s32_establishment_static`) then
 *' the model simply establishes the amount of plantations which are harvested.

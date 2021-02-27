@@ -70,7 +70,7 @@ q73_prod_residues(j2)..
 *' Upper bound on production from plantations
 q73_prod_forestry_upper(i2,kforestry)..
 	sum(cell(i2,j2), vm_prod_forestry(j2,kforestry))
-	=l=
+	=n=
 	sum(cell(i2,j2), vm_prod(j2,kforestry))*sum(ct, pm_plantation_contribution(ct,i2));
 
 
