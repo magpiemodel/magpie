@@ -23,13 +23,13 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "FEB22"
+identifier_flag = "FEB30"
 cat(paste0("Updated calibration factors"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
 #scen_vector <- c("ForestryOff","ForestryEndo","ForestryExo")
-scen_vector <- c("ForestryOff","ForestryEndo")
+scen_vector <- c("ForestryEndo","ForestryOff")
 
 for(s80_maxiter in c(5)){
   for(scen in scen_vector){

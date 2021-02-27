@@ -19,7 +19,7 @@ $setglobal c32_interest_rate  regional
 * options regional, global
 $setglobal c32_dev_scen  abare
 * options abare, brown
-$setglobal c32_incr_rate  h5s1l05
+$setglobal c32_incr_rate  h5s2l1
 * options constant,h5s5l5,h5s2l2,h5s2l1,h5s1l1,h5s1l05,h2s1l05
 
 scalars
@@ -32,7 +32,7 @@ scalars
   s32_faustmann_rotation          Switch to activate faustmann rotations (1=on 0=off) / 0 /
   s32_initial_distribution        Switch to Activate ageclass distribution in plantations 0=off 1=equal distribution 2=FAO distribution 3=Poulter distribution 4=Manual distribution (1) / 0 /
   s32_price                       Price for timber (USD)      / 45 /
-  s32_free_land_cost              Very high cost for using non existing land for plantation establishment (USD per ha) /10000/
+  s32_free_land_cost              Very high cost for using non existing land for plantation establishment (USD per ha) /1000000/
   s32_max_aff_area                Maximum total global afforestation (mio. ha)    / Inf /
   s32_aff_plantation              Switch for using growth curves for afforestation 0=natveg 1=plantations (1) / 0 /
   s32_timber_plantation           Switch for using growth curves for timber plantations 0=natveg 1=plantations (1) / 1 /
