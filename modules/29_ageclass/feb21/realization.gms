@@ -5,12 +5,17 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description  The age-class module calculates the distribution of secondary
-*' forests and timber plantations based on Poulter dataset. This is used in
-*' [32_forestry] and [35_natveg] for initialization of forest areas.
+*' @description  This realization calculates use the results from @poulter2018global
+*' for secondary forests (and timber plantations) based on MODIS satellite data.
+*' This is used in [32_forestry] and [35_natveg] for initialization of forest areas
+*' based on specification of endogenous (or exogenous) forest harvests. These numbers
+*' are the most consistent dataset available on spatial scale and are preferred over
+*' extarcting such numbers from LUH data due to ease of generating these numbers.
 
-*' @limitations For the time being, this approach is not applied to livestock
-*' products.
+*' @limitations Forest fires change how the age structures of secondary or
+*' human-intervention forests over time. This being a satellite observation data
+*' probably includes such disturbances. These disturbances are not modeled extensively
+*' in MAgPIE and hence using these numbers directly in the model might generate biases.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/29_ageclass/feb21/sets.gms"

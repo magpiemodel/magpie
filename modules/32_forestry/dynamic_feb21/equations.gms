@@ -127,7 +127,7 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 **** New establishment decision
 *------------------------------
 *' New plantations are already established in the optimization step based on a certain
-*' percentage (`pm_plantation_contribution`) of current demand (`pm_demand_forestry_future`).
+*' percentage (`p32_plantation_contribution`) of current demand (`pm_demand_forestry_future`).
 *' Its called `pm_demand_forestry_future` because the model also has a foresight switch which
 *' give the model an ability to account for future changes in demand. By default `pm_demand_forestry_future`
 *' is set to existing roundwood demand. As plantation establishment decisions should
@@ -142,7 +142,7 @@ q32_cost_recur(i2) .. v32_cost_recur(i2) =e=
 q32_establishment_dynamic(i2)$s32_establishment_dynamic ..
               sum(cell(i2,j2), ((sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2)) / m_timestep_length_forestry) * pc32_yield_forestry_future_reg(i2))
               =e=
-              sum((ct,kforestry), pm_demand_forestry_future(i2,kforestry) *  min(s32_max_self_suff, pm_selfsuff_ext(ct,i2,kforestry)) * pm_plantation_contribution(ct,i2) * f32_estb_calib(i2))
+              sum((ct,kforestry), pm_demand_forestry_future(i2,kforestry) *  min(s32_max_self_suff, pm_selfsuff_ext(ct,i2,kforestry)) * p32_plantation_contribution(ct,i2) * f32_estb_calib(i2))
               ;
 
 *' Constraint to maintain the average regional timber yield at rotation age, accounting for the cellular timber yield (`pc32_yield_forestry_future`).

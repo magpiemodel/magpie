@@ -222,9 +222,9 @@ else
 
 ** Calculate plantation contribution scaled to Growing stock in plantations
 ** Initialize with low values
-pm_plantation_contribution(t_ext,i) = 0.001;
+p32_plantation_contribution(t_ext,i) = 0.001;
 ** Fill parameter with input file based on scenario settings
-pm_plantation_contribution(t_ext,i)$(f32_gs_relativetarget(i)>0) = f32_plantation_contribution(t_ext,i,"%c32_dev_scen%","%c32_incr_rate%");
+p32_plantation_contribution(t_ext,i)$(f32_gs_relativetarget(i)>0) = f32_plantation_contribution(t_ext,i,"%c32_dev_scen%","%c32_incr_rate%");
 
 **************************************************************************
 *******************************************************************************

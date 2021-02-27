@@ -14,8 +14,6 @@ i21_trade_bal_reduction(t_all,"wood") = i21_trade_bal_reduction(t_all,"wood") * 
 i21_trade_bal_reduction(t_all,"woodfuel") = i21_trade_bal_reduction(t_all,"wood");
 
 i21_trade_margin(i,k_trade) = f21_trade_margin(i,k_trade);
-i21_trade_margin(i,"wood") = i21_trade_margin(i,"others");
-i21_trade_margin(i,"woodfuel") = i21_trade_margin(i,"wood");
 
 if ((s21_trade_tariff=1),
     i21_trade_tariff(i,k_trade) = f21_trade_tariff(i,k_trade);
