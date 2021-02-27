@@ -41,5 +41,5 @@ c59_som_scenario;cc;nocc;;;;;;;;;;;;cc;;cc;cc;cc;cc;cc;;;
 s32_initial_distribution;;;;;;;;;;;;;;;;;;;;;4;4;0
 s32_hvarea;;;;;;;;;;;;;;;;;;;;;2;1;0
 s35_secdf_distribution;;;;;;;;;;;;;;;;;;;;;2;2;0
-s35_hvarea;;;;;;;;;;;;;;;;;;;;;2;1;0
-s73_timber_demand_switch;;;;;;;;;;;;;;;;;;;;;1;0;0
+s35_hvarea;;;;;;;;;;;;;;;;;;;;;2;2;0
+s73_timber_demand_switch;;;;;;;;;;;;;;;;;;;;;1;1;0
