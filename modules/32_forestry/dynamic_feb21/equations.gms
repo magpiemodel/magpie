@@ -159,7 +159,7 @@ q32_establishment_dynamic_yield(i2)$s32_establishment_dynamic ..
 *' regrowth during every time step.
 
 q32_establishment_fixed(j2)$s32_establishment_static ..
-	sum(ac_est, v32_land(j2,"plant",ac_est)) + v32_land_missing(j2) =e= sum(ac_sub, v32_hvarea_forestry(j2,ac_sub));
+	sum(ac, v32_land(j2,"plant",ac)) =e= sum(ac, pc32_land(j2,"plant",ac));
 
 
 *' This constraint distributes additions to forestry land over ac_est,

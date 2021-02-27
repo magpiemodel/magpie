@@ -101,8 +101,6 @@ elseif s32_hvarea = 1,
 *** exogenous. All timber plantations are harvested at rotation age and are re-established such that the total plantation area remains constant.
   v32_land.fx(j,"plant",ac)$(ac.off < p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
   v32_land.fx(j,"plant",ac)$(ac.off >= p32_rotation_cellular_harvesting(t,j)) = 0;
-  v32_hvarea_forestry.fx(j,ac_sub) = pc32_land(j,"plant",ac_sub) - v32_land.l(j,"plant",ac_sub);
-*  $(ac.off >= p32_rotation_cellular_harvesting(t,j)) = pc32_land(j,"plant",ac);
   s32_establishment_static = 1;
   s32_establishment_dynamic = 0;
 
