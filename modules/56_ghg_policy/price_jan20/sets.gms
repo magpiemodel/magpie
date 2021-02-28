@@ -60,10 +60,10 @@ sets
    scen56 emission policy scenarios /
        none,
        all,
-       ssp,
-       ssp_nosoil,
-       redd+_nosoil,
        all_nosoil,
+       redd_nosoil,
+       redd+_nosoil,
+       redd+natveg_nosoil,
        maccs_excl_cropland_n2o /
 ;
 *######################### R SECTION END (SETS) ################################
