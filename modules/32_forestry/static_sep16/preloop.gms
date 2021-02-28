@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -22,7 +22,7 @@ vm_land.fx(j,"forestry") = sum((type32,ac), v32_land.l(j,type32,ac));
 * The change of forestry land is also set to zero.
 vm_landdiff_forestry.fx = 0;
 v32_land_reduction.fx(j,type32,ac) = 0;
-vm_hvarea_forestry.fx(j,ac) = 0;
+v32_hvarea_forestry.fx(j,ac) = 0;
 
 * Assuming 30y rotation in static case.
 pm_representative_rotation(t_all,i) = 30;
