@@ -42,7 +42,6 @@ sets
        SSPDB-SSP5-45-REMIND-MAGPIE,
        SSPDB-SSP5-60-REMIND-MAGPIE,
        SSPDB-SSP5-Ref-REMIND-MAGPIE /
-      /
 ;
 *######################### R SECTION END (SETS) ################################
 *###############################################################################

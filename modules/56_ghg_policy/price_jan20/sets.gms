@@ -56,7 +56,15 @@ sets
        SSPDB-SSP5-45-REMIND-MAGPIE,
        SSPDB-SSP5-60-REMIND-MAGPIE,
        SSPDB-SSP5-Ref-REMIND-MAGPIE /
-      /
+
+   scen56 emission policy scenarios /
+       none,
+       all,
+       ssp,
+       ssp_nosoil,
+       redd+_nosoil,
+       all_nosoil,
+       maccs_excl_cropland_n2o /
 ;
 *######################### R SECTION END (SETS) ################################
 *###############################################################################
@@ -101,9 +109,6 @@ sets
 
    emis_source_n_cropsoils51(emis_source) activities that lead to emissions
    / inorg_fert, man_crop, resid, som, rice /
-
-  scen56 emission policy scenarios
-  / none, all, ssp, ssp_nosoil, redd+_nosoil, all_nosoil, maccs_excl_cropland_n2o /
 
    emis_cell_one56(emis_source_cell) cellular oneoff emission sources
    /crop_vegc, crop_litc, crop_soilc, past_vegc, past_litc, past_soilc, forestry_vegc,

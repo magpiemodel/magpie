@@ -83,9 +83,12 @@
     return(content)
   }
   
-  ### scen56
-  scen56 <- magclass::read.magpie("modules/56_ghg_policy/input/f56_pollutant_prices.cs3")
-  scen56 <- magclass::getNames(scen56,dim=2)
+  ### ghgscen56
+  ghgscen56 <- magclass::read.magpie("modules/56_ghg_policy/input/f56_pollutant_prices.cs3")
+  ghgscen56 <- magclass::getNames(ghgscen56,dim=2)
+  
+  scen56 <- magclass::read.magpie("modules/56_ghg_policy/input/f56_emis_policy.csv",file_type = "cs3")
+  scen56 <- magclass::getNames(scen56,dim=1)
   
   subject <- 'SETS'
   modification_warning <- c(
@@ -97,15 +100,18 @@
   
   # write set with nice formatting (1 scenario per line)
   content <- c(content,'   ghgscen56 ghg price scenarios /')
-  content <- c(content, .tmp(scen56, suffix1=",", suffix2=" /",n = 1))
+  content <- c(content, .tmp(ghgscen56, suffix1=",", suffix2=" /",n = 1))
+  content <- c(content,'')
   
-  content <- c(content,'      /',';')
+  content <- c(content,'   scen56 emission policy scenarios /')
+  content <- c(content, .tmp(scen56, suffix1=",", suffix2=" /",n = 1))
+  content <- c(content,';')
   
   gms::replace_in_file("modules/56_ghg_policy/price_jan20/sets.gms",content,subject)
   
-  ### scen60
-  scen60 <- magclass::read.magpie("modules/60_bioenergy/input/f60_bioenergy_dem.cs3")
-  scen60 <- magclass::getNames(scen60,dim=1)
+  ### scen2nd60
+  scen2nd60 <- magclass::read.magpie("modules/60_bioenergy/input/f60_bioenergy_dem.cs3")
+  scen2nd60 <- magclass::getNames(scen2nd60,dim=1)
   
   subject <- 'SETS'
   modification_warning <- c(
@@ -117,9 +123,9 @@
   
   # write set with nice formatting (1 scenario per line)
   content <- c(content,'   scen2nd60 second generation bioenergy scenarios /')
-  content <- c(content, .tmp(scen60, suffix1=",", suffix2=" /",n = 1))
+  content <- c(content, .tmp(scen2nd60, suffix1=",", suffix2=" /",n = 1))
   
-  content <- c(content,'      /',';')
+  content <- c(content,';')
   
   gms::replace_in_file("modules/60_bioenergy/1stgen_priced_dec18/sets.gms",content,subject)
 }
