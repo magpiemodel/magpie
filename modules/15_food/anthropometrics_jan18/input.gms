@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -73,14 +73,14 @@ sets
 ;
 
 
-scalar s15_elastic_demand  Elastic demand switch (1=elastic 0=exogenous) (1) / 1 /;
+scalar s15_elastic_demand  Elastic demand switch (1=elastic 0=exogenous) (1) / 0 /;
 
 scalar s15_calibrate Calibration switch (1=calibrated 0=pure regression outcomes) (1) / 1 /;
 * only for per-capita calories, not for e.g. calibration of transformation parameters between per-capita calories in dm
 
-scalar s15_maxiter Scalar defining maximum number of iterations (1) / 6 /;
+scalar s15_maxiter Scalar defining maximum number of iterations (1) / 5 /;
 
-scalar s15_convergence Convergence criterion (1) / 0.01 /;
+scalar s15_convergence Convergence criterion (1) / 0.005 /;
 * maximum relative per-capita gdp difference within a region between two iteratios
 
 scalar s15_exo_waste Switch for transition towards exogenous food waste scenario (1)  / 0 /;

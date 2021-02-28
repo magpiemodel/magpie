@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -9,8 +9,8 @@
 
 *' @code Some of the land use transitions are restricted:
 
-*' No afforestation on natveg areas
-*v10_lu_transitions.fx(j,"primforest","forestry") = 0;
+*' No planted forest on natveg areas
+v10_lu_transitions.fx(j,"primforest","forestry") = 0;
 *v10_lu_transitions.fx(j,"secdforest","forestry") = 0;
 *v10_lu_transitions.fx(j,"other","forestry") = 0;
 
