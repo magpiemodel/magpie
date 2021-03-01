@@ -8,6 +8,27 @@
 ################################################################################
 # Define internal functions
 ################################################################################
+
+.set_modification <- function() {
+  modification_warning <- c(
+    '*THIS CODE IS CREATED AUTOMATICALLY, DO NOT MODIFY THESE LINES DIRECTLY',
+    '*ANY DIRECT MODIFICATION WILL BE LOST AFTER NEXT INPUT DOWNLOAD',
+    '*CHANGES CAN BE DONE USING THE INPUT DOWNLOADER UNDER SCRIPTS/DOWNLOAD',
+    '*THERE YOU CAN ALSO FIND ADDITIONAL INFORMATION')
+  return(modification_warning)
+}
+
+.set_formatting <- function(x,prefix="", suffix1="", suffix2=" /", collapse=",", n=10) {
+  content <- NULL
+  tmp <- lapply(split(x, ceiling(seq_along(x)/n)),paste,collapse=collapse)
+  end <- suffix1
+  for(i in 1:length(tmp)) {
+    if(i==length(tmp)) end <- suffix2
+    content <- c(content,paste0('       ',prefix,tmp[[i]],end))
+  }
+  return(content)
+}
+
 .update_sets <- function(cpr,map) {
   require(gms)
 
@@ -26,31 +47,14 @@
     j <- j+cpr[i]
   }
 
-  .tmp <- function(x,prefix="", suffix1="", suffix2=" /", collapse=",", n=10) {
-    content <- NULL
-    tmp <- lapply(split(x, ceiling(seq_along(x)/n)),paste,collapse=collapse)
-    end <- suffix1
-    for(i in 1:length(tmp)) {
-      if(i==length(tmp)) end <- suffix2
-      content <- c(content,paste0('       ',prefix,tmp[[i]],end))
-    }
-    return(content)
-  }
-
   subject <- 'SETS'
-  modification_warning <- c(
-    '*THIS CODE IS CREATED AUTOMATICALLY, DO NOT MODIFY THESE LINES DIRECTLY',
-    '*ANY DIRECT MODIFICATION WILL BE LOST AFTER NEXT INPUT DOWNLOAD',
-    '*CHANGES CAN BE DONE USING THE INPUT DOWNLOADER UNDER SCRIPTS/DOWNLOAD',
-    '*THERE YOU CAN ALSO FIND ADDITIONAL INFORMATION')
-  content <- c(modification_warning,'','sets','')
+  content <- c(.set_modification(),'','sets','')
 
   content <- c(content,paste('   i all economic regions /',paste(names(cpr),collapse=','),'/',sep=''),'')
 
   # write iso set with nice formatting (10 countries per line)
-  tmp <- lapply(split(map$CountryCode, ceiling(seq_along(map$CountryCode)/10)),paste,collapse=",")
   content <- c(content,'   iso list of iso countries /')
-  content <- c(content, .tmp(map$CountryCode, suffix1=",", suffix2=" /"))
+  content <- c(content, .set_formatting(map$CountryCode, suffix1=",", suffix2=" /"))
 
   content <- c(content,  '', paste('   j number of LPJ cells /\n       ',paste(cells,collapse=',\n       '),'/',sep=''),'',
                '   cell(i,j) number of LPJ cells per region i','      /')
@@ -62,7 +66,7 @@
   content <- c(content,'   i_to_iso(i,iso) mapping regions to iso countries','      /')
   map$RegionCode <- as.factor(map$RegionCode)
   for(i in levels(map$RegionCode)) {
-    content <- c(content, .tmp(map$CountryCode[map$RegionCode==i], prefix=paste0(i," . ("), suffix1=")", suffix2=")"))
+    content <- c(content, .set_formatting(map$CountryCode[map$RegionCode==i], prefix=paste0(i," . ("), suffix1=")", suffix2=")"))
 
   }
   content <- c(content,'      /',';')
@@ -72,17 +76,6 @@
 .update_sets_bioen_ghgprice_scen <- function() {
   require(gms)
   
-  .tmp <- function(x,prefix="", suffix1="", suffix2=" /", collapse=",", n=10) {
-    content <- NULL
-    tmp <- lapply(split(x, ceiling(seq_along(x)/n)),paste,collapse=collapse)
-    end <- suffix1
-    for(i in 1:length(tmp)) {
-      if(i==length(tmp)) end <- suffix2
-      content <- c(content,paste0('       ',prefix,tmp[[i]],end))
-    }
-    return(content)
-  }
-  
   ### ghgscen56
   ghgscen56 <- magclass::read.magpie("modules/56_ghg_policy/input/f56_pollutant_prices.cs3")
   ghgscen56 <- magclass::getNames(ghgscen56,dim=2)
@@ -91,20 +84,15 @@
   scen56 <- magclass::getNames(scen56,dim=1)
   
   subject <- 'SETS'
-  modification_warning <- c(
-    '*THIS CODE IS CREATED AUTOMATICALLY, DO NOT MODIFY THESE LINES DIRECTLY',
-    '*ANY DIRECT MODIFICATION WILL BE LOST AFTER NEXT INPUT DOWNLOAD',
-    '*CHANGES CAN BE DONE USING THE INPUT DOWNLOADER UNDER SCRIPTS/DOWNLOAD',
-    '*THERE YOU CAN ALSO FIND ADDITIONAL INFORMATION')
-  content <- c(modification_warning,'','sets','')
+  content <- c(.set_modification(),'','sets','')
   
   # write set with nice formatting (1 scenario per line)
   content <- c(content,'   ghgscen56 ghg price scenarios /')
-  content <- c(content, .tmp(ghgscen56, suffix1=",", suffix2=" /",n = 1))
+  content <- c(content, .set_formatting(ghgscen56, suffix1=",", suffix2=" /",n = 1))
   content <- c(content,'')
   
   content <- c(content,'   scen56 emission policy scenarios /')
-  content <- c(content, .tmp(scen56, suffix1=",", suffix2=" /",n = 1))
+  content <- c(content, .set_formatting(scen56, suffix1=",", suffix2=" /",n = 1))
   content <- c(content,';')
   
   gms::replace_in_file("modules/56_ghg_policy/price_jan20/sets.gms",content,subject)
@@ -114,16 +102,11 @@
   scen2nd60 <- magclass::getNames(scen2nd60,dim=1)
   
   subject <- 'SETS'
-  modification_warning <- c(
-    '*THIS CODE IS CREATED AUTOMATICALLY, DO NOT MODIFY THESE LINES DIRECTLY',
-    '*ANY DIRECT MODIFICATION WILL BE LOST AFTER NEXT INPUT DOWNLOAD',
-    '*CHANGES CAN BE DONE USING THE INPUT DOWNLOADER UNDER SCRIPTS/DOWNLOAD',
-    '*THERE YOU CAN ALSO FIND ADDITIONAL INFORMATION')
-  content <- c(modification_warning,'','sets','')
+  content <- c(.set_modification(),'','sets','')
   
   # write set with nice formatting (1 scenario per line)
   content <- c(content,'   scen2nd60 second generation bioenergy scenarios /')
-  content <- c(content, .tmp(scen2nd60, suffix1=",", suffix2=" /",n = 1))
+  content <- c(content, .set_formatting(scen2nd60, suffix1=",", suffix2=" /",n = 1))
   
   content <- c(content,';')
   
