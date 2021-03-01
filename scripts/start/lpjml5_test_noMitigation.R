@@ -26,7 +26,7 @@ for (k in 1:length(climate)){
 
         #Change the results folder name
         #NBC STANDS FOR NEW BEST CALIBRATION
-        cfg$title<-paste0("NewLPJ_TCinPasture_",realization[j],"_rcp6p0_",climate[k])
+        cfg$title<-paste0("LPJGGCMI_TCinPasture_",realization[j],"_rcp6p0_",climate[k])
 
         cfg <- setScenario(cfg,climate[k])
 
