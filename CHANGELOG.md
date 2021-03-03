@@ -36,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scaling** Updated scaling across the modules
 - **scripts** Updated to `forestry` script with general cleanup for publication. Added `forestry_magpie` script for generic forestry runs.
 - **scripts** added output script for disaggregation of land transitions
+- **scripts** added output script for disaggregation to GAINS regions
 - **scripts** Automatic sets for 56_ghg_policy and 60_bioenergy
 
 ### changed
