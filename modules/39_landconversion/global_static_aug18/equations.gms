@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -14,5 +14,5 @@
 
 q39_cost_landcon(j2,land) .. vm_cost_landcon(j2,land) =e=
 	(vm_landexpansion(j2,land)*i39_cost_establish(land)
- 	+ vm_carbon_stock_reduction(j2,land,"vegc")*i39_cost_clearing(land))
+ 	+ vm_carbon_stock_change(j2,land,"vegc")*i39_cost_clearing(land))
  	* sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
