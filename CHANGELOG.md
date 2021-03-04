@@ -9,27 +9,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
-- **50_nr_soil_budget** added necessary interfaces to 50_nitrogen module
 - **runscripts** adapted to new input data and model version
 - **15_food** better documentation of parameters over model iterations
 - **20_processing** added different options for Single-Cell Protein production
 - **15_food*** added scenario switch for ruminant and dairy replacement by Single-Cell Protein
+- **50_nr_soil_budget** added necessary interfaces to 50_nitrogen module
 - **70_livestock*** added scenario switch for feed replacement (crop and forage) by Single-Cell Protein
 
 ### added
 - **15_food** Added the option to fade out livestock demand towards a target level in kcal/cap/day.
+- **21_trade** Added scalar `s21_trade_bal_damper` and new set `k_trade_excl_timber`
+- **29_ageclass** New age-class module
+- **32_forestry** added new default realization
+- **32_forestry** Simplified routine for plantation establishments. Added plantation area initialization based on MODIS data. Calibration to FAO growing stocks via carbon densities. New switches: `s32_distribution_type `, `s32_hvarea`, `s32_establishment_dynamic`, `s32_establishment_static`, `s32_max_self_suff`. New settings `c32_dev_scen`, `c32_incr_rate`, `c32_incr_rate`
+- **35_natveg** Added new default realization
+- **35_natveg** Added distribution in secondary forest based on Poulter et al. 2019. Added forest damages due to wildfire and shifting agriculture. Bugfix in forest protection calculations. New switches: `s35_secdf_distribution`, `s35_forest_damage`, `s35_hvarea`
 - **35_natveg** Added HalfEarth scenario to protection scenarios
 - **51_nitrogen** new module realization rescaled_jan21, which rescales n-related emissions with nitrogen surplus to account for lower emissions with higher NUE
-- **56_ghg_policy** Added new scenario to emission policy
+- **52_carbon** Simplified routine for carbon stock calculations in timber plantations and cleanup of unused code.
+- **56_ghg_policy** Added new scenario to emission policy, Automatic sets for scenarios
+- **60_bioenergy** Automatic sets for scenarios
+- **73_timber** Additive calibration with FAO data for roundwood demand. New switches: `c73_wood_scen`
+- **73_timber** Added new realization `default` (modified version of previous realization)
+- **default.cfg** New `forestry` scenario which simulates timber production in MAgPIE
+- **scenario.csv** Added three plantation scenarios
+- **scaling** Updated scaling across the modules
+- **scripts** Updated to `forestry` script with general cleanup for publication. Added `forestry_magpie` script for generic forestry runs.
 - **scripts** added output script for disaggregation of land transitions
+- **scripts** added output script for disaggregation to GAINS regions
+- **scripts** Automatic sets for 56_ghg_policy and 60_bioenergy
 
 ### changed
 - **scripts** Updated AgMIP output scripts.
-- **35_natveg** Fader for HalfEarth protection policy
 - **12_interest_rate** Interest fader changed to csv
+- **35_natveg** Fader for HalfEarth protection policy
 - **tests** Replaced TravisCI with GithubActions
 
 ### removed
+- **32_forestry** Removed previous default realization
+- **35_natveg** Removed previous default realization
+- **73_timber** Removed previous default realization
 
 ### fixed
 - **32_forestry** Bugfixes for "ac_est" and carbon treshold afforestation; removed plantations from "vm_cdr_aff".
@@ -43,6 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### fixed
 - **35_natveg** Bugfix "v35_secdforest_expansion"
 - **52_carbon** Bugfix "p52_scaling_factor" for climate change runs
+- **73_timber** New scenario switch `c73_wood_scen`.
 
 ## [4.3.0] - 2020-09-15
 

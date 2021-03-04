@@ -1,4 +1,4 @@
-# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -21,7 +21,7 @@ cfg$results_folder <- "output/:title:"
 cfg$recalibrate <- TRUE
 cfg$title <- "calib_run"
 cfg$gms$c_timesteps <- 1
-cfg$output <- c("report")
+cfg$output <- c("rds_report")
 cfg$sequential <- TRUE
 start_run(cfg,codeCheck=FALSE)
 magpie4::submitCalibration("H12")
