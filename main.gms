@@ -145,6 +145,7 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
+
 *
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: NA
@@ -162,7 +163,7 @@ $title magpie
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/calibration
 *
-* Used data set: additional_data_rev3.95.tgz
+* Used data set: additional_data_rev3.98.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 *
@@ -197,7 +198,7 @@ $title magpie
 *
 *
 *
-* Last modification (input data): Sat Feb 27 15:34:34 2021
+* Last modification (input data): Sun Feb 28 21:26:13 2021
 *
 *###################### R SECTION END (VERSION INFO) ###########################
 
