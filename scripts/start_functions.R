@@ -1,4 +1,4 @@
-# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -8,7 +8,43 @@
 ################################################################################
 # Define internal functions
 ################################################################################
-.update_sets <- function(cpr,map) {
+
+.set_formatting <- function(x,space='       ',prefix="", suffix1=",", suffix2=" /", collapse=",", n=10) {
+  content <- NULL
+  tmp <- lapply(split(x, ceiling(seq_along(x)/n)),paste,collapse=collapse)
+  end <- suffix1
+  for(i in 1:length(tmp)) {
+    if(i==length(tmp)) end <- suffix2
+    content <- c(content,paste0(space,prefix,tmp[[i]],end))
+  }
+  return(content)
+}
+
+.write_sets <- function(name,desc,items,n,suffix,file) {
+  
+  if ((length(name)+length(desc)+length(items)+length(n)+length(suffix))/5 != length(name)) stop("Same number of entries for name, desc, items, n and suffix is required")
+
+  subject <- 'SETS'
+  header <- c(
+    '*THIS CODE IS CREATED AUTOMATICALLY, DO NOT MODIFY THESE LINES DIRECTLY',
+    '*ANY DIRECT MODIFICATION WILL BE LOST AFTER NEXT INPUT DOWNLOAD',
+    '*CHANGES CAN BE DONE USING THE INPUT DOWNLOADER UNDER SCRIPTS/DOWNLOAD',
+    '*THERE YOU CAN ALSO FIND ADDITIONAL INFORMATION')
+
+  content <- c(header,'','sets','')
+  
+  
+  for (i in 1:length(name)) {
+    content <- c(content,paste0('   ',name[[i]],' ',desc[[i]],' /'))
+    content <- c(content, .set_formatting(items[[i]], suffix1=suffix[[i]], suffix2=" /",n = n[[i]]))
+    content <- c(content,'')
+  }
+  content <- c(content,';')
+  
+  gms::replace_in_file(file,content,subject)
+}
+
+.update_sets_core <- function(cpr,map) {
   require(gms)
 
   reg1 <- unique(map$RegionCode)
@@ -26,47 +62,59 @@
     j <- j+cpr[i]
   }
 
-  .tmp <- function(x,prefix="", suffix1="", suffix2=" /", collapse=",", n=10) {
-    content <- NULL
-    tmp <- lapply(split(x, ceiling(seq_along(x)/n)),paste,collapse=collapse)
-    end <- suffix1
-    for(i in 1:length(tmp)) {
-      if(i==length(tmp)) end <- suffix2
-      content <- c(content,paste0('       ',prefix,tmp[[i]],end))
-    }
-    return(content)
-  }
-
-  subject <- 'SETS'
-  modification_warning <- c(
-    '*THIS CODE IS CREATED AUTOMATICALLY, DO NOT MODIFY THESE LINES DIRECTLY',
-    '*ANY DIRECT MODIFICATION WILL BE LOST AFTER NEXT INPUT DOWNLOAD',
-    '*CHANGES CAN BE DONE USING THE INPUT DOWNLOADER UNDER SCRIPTS/DOWNLOAD',
-    '*THERE YOU CAN ALSO FIND ADDITIONAL INFORMATION')
-  content <- c(modification_warning,'','sets','')
-
-  content <- c(content,paste('   i all economic regions /',paste(names(cpr),collapse=','),'/',sep=''),'')
-
-  # write iso set with nice formatting (10 countries per line)
-  tmp <- lapply(split(map$CountryCode, ceiling(seq_along(map$CountryCode)/10)),paste,collapse=",")
-  content <- c(content,'   iso list of iso countries /')
-  content <- c(content, .tmp(map$CountryCode, suffix1=",", suffix2=" /"))
-
-  content <- c(content,  '', paste('   j number of LPJ cells /\n       ',paste(cells,collapse=',\n       '),'/',sep=''),'',
-               '   cell(i,j) number of LPJ cells per region i','      /')
+  map_i_to_j <- NULL
   for(i in 1:length(cpr)) {
-    content <- c(content,paste('       ',names(cpr)[i],' . ',cells[i],sep=''))
+    map_i_to_j <- c(map_i_to_j,paste('',names(cpr)[i],' . ',cells[i],sep=''))
   }
-  content <- c(content,'      /','')
+  #map_i_to_j <- paste(names(cpr),cells,sep=" . ")
 
-  content <- c(content,'   i_to_iso(i,iso) mapping regions to iso countries','      /')
   map$RegionCode <- as.factor(map$RegionCode)
+  map_i_to_iso <- NULL
   for(i in levels(map$RegionCode)) {
-    content <- c(content, .tmp(map$CountryCode[map$RegionCode==i], prefix=paste0(i," . ("), suffix1=")", suffix2=")"))
-
+    map_i_to_iso <- c(map_i_to_iso, .set_formatting(map$CountryCode[map$RegionCode==i],space = '', prefix=paste0(i," . ("), suffix1=")", suffix2=")"))
   }
-  content <- c(content,'      /',';')
-  gms::replace_in_file("core/sets.gms",content,subject)
+  
+  name <- list("i","iso","j","cell(i,j)","i_to_iso(i,iso)")
+  desc <- list("all economic regions","list of iso countries","number of LPJ cells","number of LPJ cells per region i","mapping regions to iso countries")
+  items <- list(names(cpr),map$CountryCode,cells,map_i_to_j,map_i_to_iso)
+  n <- c(12,10,1,1,1)
+  suffix <- c(",",",",",","","")
+  file <- "core/sets.gms"
+  
+  .write_sets(name,desc,items,n,suffix,file)
+}
+
+.update_sets_modules <- function() {
+  require(gms)
+  
+  ### 56_ghg_policy
+  ghgscen56 <- magclass::read.magpie("modules/56_ghg_policy/input/f56_pollutant_prices.cs3")
+  ghgscen56 <- magclass::getNames(ghgscen56,dim=2)
+  
+  scen56 <- magclass::read.magpie("modules/56_ghg_policy/input/f56_emis_policy.csv",file_type = "cs3")
+  scen56 <- magclass::getNames(scen56,dim=1)
+  
+  name <- list("ghgscen56","scen56")
+  desc <- list("ghg price scenarios","emission policy scenarios")
+  items <- list(ghgscen56,scen56)
+  n <- c(1,1)
+  suffix <- c(",",",")
+  file <- "modules/56_ghg_policy/price_jan20/sets.gms"
+
+  .write_sets(name,desc,items,n,suffix,file)
+  
+  ### 60_bioenergy
+  scen2nd60 <- magclass::read.magpie("modules/60_bioenergy/input/f60_bioenergy_dem.cs3")
+  scen2nd60 <- magclass::getNames(scen2nd60,dim=1)
+  
+  name <- list("scen2nd60")
+  desc <- list("second generation bioenergy scenarios")
+  items <- list(scen2nd60)
+  n <- c(1)
+  suffix <- c(",")
+  file <- "modules/60_bioenergy/1stgen_priced_dec18/sets.gms"
+  
+  .write_sets(name,desc,items,n,suffix,file)
 }
 
 # Function to extract information from info.txt
@@ -161,7 +209,8 @@ download_and_update <- function(cfg) {
   # read spatial_header, map, reg_revision and regionscode
   load("input/spatial_header.rda")
   .update_info(filemap,cpr,regionscode,reg_revision, warnings)
-  .update_sets(cpr,map)
+  .update_sets_core(cpr,map)
+  .update_sets_modules()
 }
 
 

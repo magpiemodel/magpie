@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -13,16 +13,10 @@ variables
  vm_cost_landcon(j,land)          Land conversion costs (mio. USD05MER per yr)
 ;
 
-scalar
- s39_cost_establish               Global land establishment costs (USD05MER per hectare)
- s39_cost_clearing                Global land clearing costs (USD05MER per ton C)
-;
-
 parameters
- i39_cost_establish(land)			         Global land establishment costs (USD05MER per hectare)
- i39_cost_clearing(land)               Global land clearing costs (USD05MER per ton C)
+ i39_cost_establish(land)		Global land establishment costs (USD05MER per hectare)
+ i39_cost_clearing(land)        Global land clearing costs (USD05MER per ton C)
 ;
-
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters

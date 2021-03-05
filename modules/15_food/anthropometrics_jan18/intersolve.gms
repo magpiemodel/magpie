@@ -1,11 +1,11 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-option nlp = conopt4
+option nlp = conopt4;
 
 * retrieving interfaces from MAgPIE
 * calculate prices for providing 1 kcal per day of one commodity
@@ -18,14 +18,23 @@ option nlp = conopt4
 
 if (magpie.modelstat = NA,
     q15_food_demand.m(i,kfo)=0;
-    p15_prices_kcal(t,iso,kfo)=i15_prices_initial_kcal(iso,kfo)*f15_price_index(t);
+    p15_prices_kcal(t,iso,kfo,curr_iter15)=i15_prices_initial_kcal(iso,kfo)*f15_price_index(t);
 else
     display "Coupling: Reading out marginal costs from MAgPIE as shock to demand model";
-    p15_prices_kcal(t,iso,kfo)=sum(i_to_iso(i,iso), q15_food_demand.m(i,kfo));
+    p15_prices_kcal(t,iso,kfo,curr_iter15)=sum(i_to_iso(i,iso), q15_food_demand.m(i,kfo));
 );
 
-p15_iteration_counter(t)= p15_iteration_counter(t) + 1;
+* A new iteration is started
+p15_iteration_counter(t) = p15_iteration_counter(t) + 1;
+* The set current iter includes only one element with the set element 
+* of the current iteration, e.g. "iter2"
+curr_iter15(iter15) = no;
+curr_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)) = yes;
+* Now we also define a set for the last iteration
+prev_iter15(iter15) = no;
+prev_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)-1) = yes;
 
+display "starting iteration number ", p15_iteration_counter;
 display "starting m15_food_demand model....";
 
 solve m15_food_demand USING nlp MAXIMIZING v15_objective ;
@@ -57,7 +66,7 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
 
 
 
- p15_delta_income(t,i) = p15_income_pc_real_ppp(t,i) /
+ p15_delta_income(t,i,curr_iter15) = p15_income_pc_real_ppp(t,i) /
 						( sum(i_to_iso(i,iso),
                                im_gdp_pc_ppp_iso(t,iso)
                                * im_pop_iso(t,iso)
@@ -69,13 +78,10 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
 * estimate convergence measure for deciding to stop iteration
 
 
- p15_convergence_measure(t) =smax(i,
-                              abs(p15_delta_income(t,i) / p15_lastiteration_delta_income(t,i)- 1)
+ p15_convergence_measure(t,curr_iter15) =smax(i,
+                              abs(p15_delta_income(t,i,curr_iter15) / sum(prev_iter15,p15_delta_income(t,i,prev_iter15))- 1)
                             );
 
-
-* keeping current deltas for estimating convergence in next timestep
- p15_lastiteration_delta_income(t,i) = p15_delta_income(t,i);
 
 
 *' @code
@@ -92,14 +98,14 @@ if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
 *' @stop
 
 
-display "finished iteration number ", p15_iteration_counter;
 display "convergence measure:",p15_convergence_measure;
 
 if (s15_elastic_demand = 1 AND m_year(t) > sm_fix_SSP2,
   display "elastic demand model is activated";
-  if ((p15_convergence_measure(t) > s15_convergence and p15_iteration_counter(t) <= s15_maxiter),
+  if ((sum(curr_iter15,p15_convergence_measure(t,curr_iter15)) > s15_convergence and p15_iteration_counter(t) <= s15_maxiter),
 
         display "convergence between MAgPIE and Food Demand Model not yet reached";
+        display "starting magpie in iteration number ", p15_iteration_counter;
         sm_intersolve=0;
 
 * saving regression outcome for postprocessing
@@ -228,7 +234,7 @@ p15_kcal_pc_calibrated(t,i,kfo_lp) = p15_livestock_kcal_structure_orig(t,i,kfo_l
                + p15_kcal_pc_calibrated_livestock_orig(t,i)*i15_livestock_fadeout_threshold(t,i));
 p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
 				* (p15_kcal_pc_calibrated_plant_orig(t,i)
-			    + (p15_kcal_pc_calibrated_livestock_orig(t,i) - 
+			    + (p15_kcal_pc_calibrated_livestock_orig(t,i) -
 			    sum(kfo_lp, p15_kcal_pc_calibrated(t,i,kfo_lp))) * s15_livescen_target_subst);
 );
 
@@ -283,20 +289,20 @@ if(s15_exo_waste = 1,
 * "Downwards convergence" of regional calorie oversupply due to food waste to the
 * waste reduction target, i.e. only for values that are higher than the target:
 
-p15_demand2intake_ratio_scen(t,i)$(p15_demand2intake_ratio(t,i) > s15_waste_scen )
+    p15_demand2intake_ratio_scen(t,i)$(p15_demand2intake_ratio(t,i) > s15_waste_scen )
                     = p15_demand2intake_ratio(t,i)*(1-i15_exo_foodscen_fader(t,i))
                       + s15_waste_scen*i15_exo_foodscen_fader(t,i);
 
-p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
-p15_kcal_pc_calibrated(t,i,kfo)$(p15_demand2intake_ratio(t,i) >0 ) = p15_kcal_pc_calibrated_orig(t,i,kfo)*(
+    p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
+    p15_kcal_pc_calibrated(t,i,kfo)$(p15_demand2intake_ratio(t,i) >0 ) = p15_kcal_pc_calibrated_orig(t,i,kfo)*(
                       p15_demand2intake_ratio_scen(t,i)/p15_demand2intake_ratio(t,i) );
 
 );
 
 
-* Now, a second waste parameter can be calculated, which is needed for the construction  
-* of exogenous diet scenarios on the basis of calorie intake. This parameter describes 
-* the development of food waste over time and reflects either the exogenous food waste 
+* Now, a second waste parameter can be calculated, which is needed for the construction
+* of exogenous diet scenarios on the basis of calorie intake. This parameter describes
+* the development of food waste over time and reflects either the exogenous food waste
 * scenario or the original regression-based estimates for food calorie oversupply:
 
 p15_foodwaste_growth(t,i) = ( 1$(p15_demand2intake_ratio_ref(i) = 0)
@@ -317,20 +323,20 @@ p15_foodwaste_growth(t,i) = ( 1$(p15_demand2intake_ratio_ref(i) = 0)
 
 if(s15_exo_diet = 1,
 
-* Food-specific calorie intake of the model-internal diet projections is 
+* Food-specific calorie intake of the model-internal diet projections is
 * estimated from daily per capita food calorie demand:
-p15_intake_detailed_regr(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo)
-	 	/(f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)*p15_foodwaste_growth(t,i));
+  p15_intake_detailed_regr(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo)
+	 	 /(f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)*p15_foodwaste_growth(t,i));
 
 
 * Via 's15_alc_scen' a maximum target for alcohol consumption is defined.
-if(s15_alc_scen>0,
-i15_intake_detailed_scen_target(t,i,"alcohol") = p15_intake_detailed_regr(t,i,"alcohol"); 
-i15_intake_detailed_scen_target(t,i,"alcohol")$(i15_intake_detailed_scen_target(t,i,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,i))
-	= s15_alc_scen*i15_intake_scen_target(t,i);
-);
+  if(s15_alc_scen>0,
+    i15_intake_detailed_scen_target(t,i,"alcohol") = p15_intake_detailed_regr(t,i,"alcohol");
+    i15_intake_detailed_scen_target(t,i,"alcohol")$(i15_intake_detailed_scen_target(t,i,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,i))
+	   = s15_alc_scen*i15_intake_scen_target(t,i);
+     );
 
-i15_intake_detailed_scen_target(t,i,EAT_staples) = (
+  i15_intake_detailed_scen_target(t,i,EAT_staples) = (
           i15_intake_scen_target(t,i) - sum(EAT_nonstaples,i15_intake_EATLancet(i,EAT_nonstaples)) )*(
           i15_intake_EATLancet(i,EAT_staples)/sum(EAT_staples2,i15_intake_EATLancet(i,EAT_staples2)) );
 
@@ -346,7 +352,7 @@ i15_intake_detailed_scen_target(t,i,EAT_staples) = (
 * based estimates for food calorie oversupply are here used as waste scenario:
 
 
-i15_kcal_pc_scen_target(t,i,kfo) = (f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)
+    i15_kcal_pc_scen_target(t,i,kfo) = (f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)
                                     *i15_intake_detailed_scen_target(t,i,kfo))
                                     *p15_foodwaste_growth(t,i);
 
@@ -354,8 +360,8 @@ i15_kcal_pc_scen_target(t,i,kfo) = (f15_calib_fsupply(i)*f15_overcons_FAOwaste(i
 *' is faded into the exogenous diet scenario according to a predefined spped of
 *' convergence:
 
-p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
-p15_kcal_pc_calibrated(t,i,kfo) = p15_kcal_pc_calibrated_orig(t,i,kfo) * (1-i15_exo_foodscen_fader(t,i))
+    p15_kcal_pc_calibrated_orig(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo);
+    p15_kcal_pc_calibrated(t,i,kfo) = p15_kcal_pc_calibrated_orig(t,i,kfo) * (1-i15_exo_foodscen_fader(t,i))
                         + i15_kcal_pc_scen_target(t,i,kfo) * i15_exo_foodscen_fader(t,i);
 
 
@@ -376,7 +382,9 @@ p15_kcal_pc_calibrated(t,i,kfo) = p15_kcal_pc_calibrated_orig(t,i,kfo) * (1-i15_
       display "Warning: convergence between MAgPIE and Food Demand Model not reached after ",p15_iteration_counter," iterations. Continue to next time step!";
   else
        sm_intersolve=1;
-       display "Success: convergence between MAgPIE and Food Demand Model reached after ",p15_iteration_counter," iterations";
+       display "Success: convergence between MAgPIE and Food Demand Model reached.";
+       display "requiring ",p15_iteration_counter," runs of food demand model, ";
+       display "and one run less with MAgPIE.";
 * set back convergence indicators for next timestep
   );
 

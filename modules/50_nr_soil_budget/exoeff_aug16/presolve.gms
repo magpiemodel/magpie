@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -20,14 +20,14 @@ p50_pastneff_region_shr(t,i) = sum(i_to_iso(i,iso), p50_country_dummy_pastneff(i
 
 * Nitrogen use efficiency
 if(m_year(t) <= sm_fix_SSP2,
- v50_nr_eff.fx(i) = f50_snupe(t,i,"neff60_60_starty2010") * p50_cropneff_region_shr(t,i)
+ vm_nr_eff.fx(i) = f50_snupe(t,i,"neff60_60_starty2010") * p50_cropneff_region_shr(t,i)
                     + f50_snupe(t,i,"neff60_60_starty2010") * (1-p50_cropneff_region_shr(t,i));
- v50_nr_eff_pasture.fx(i) = f50_nue_pasture(t,i,"constant") * p50_pastneff_region_shr(t,i)
+ vm_nr_eff_pasture.fx(i) = f50_nue_pasture(t,i,"constant") * p50_pastneff_region_shr(t,i)
                             + f50_nue_pasture(t,i,"constant") * (1-p50_pastneff_region_shr(t,i));
 else
- v50_nr_eff.fx(i) = f50_snupe(t,i,"%c50_scen_neff%") * p50_cropneff_region_shr(t,i)
+ vm_nr_eff.fx(i) = f50_snupe(t,i,"%c50_scen_neff%") * p50_cropneff_region_shr(t,i)
                     + f50_snupe(t,i,"%c50_scen_neff_noselect%") * (1-p50_cropneff_region_shr(t,i));
- v50_nr_eff_pasture.fx(i) = f50_nue_pasture(t,i,"%c50_scen_neff_pasture%") * p50_pastneff_region_shr(t,i)
+ vm_nr_eff_pasture.fx(i) = f50_nue_pasture(t,i,"%c50_scen_neff_pasture%") * p50_pastneff_region_shr(t,i)
                             + f50_nue_pasture(t,i,"%c50_scen_neff_pasture_noselect%") * (1-p50_pastneff_region_shr(t,i));
 );
 
