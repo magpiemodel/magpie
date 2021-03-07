@@ -18,6 +18,10 @@ i20_processing_conversion_factors(t_all,processing20,ksd,kpr) = f20_processing_c
 i20_processing_shares(t_all,i,ksd,kpr) = f20_processing_shares(t_all,i,ksd,kpr);
 i20_processing_unitcosts(ksd,kpr) = f20_processing_unitcosts(ksd,kpr);
 
+*SCP unitcosts are accounted for separately in f20_scp_unitcosts.
+*This is needed to include costs for scp_hydrogen, which does not depend on land-based feedstock.
+i20_processing_unitcosts("scp",kpr) = 0;
+
 *SCP can be produced via different routes. The feedstock conversion_factor for SCP accounts for the mix of SCP routes.
 i20_scp_conversion_factors(t_all,kpr) = sum(scptype,i20_scp_type_shr(t_all,scptype)*f20_scp_conversionmatrix(kpr,scptype));
 i20_processing_conversion_factors(t,"breeding","scp",kpr) = i20_scp_conversion_factors(t,kpr);
@@ -27,3 +31,5 @@ i20_processing_conversion_factors(t,"breeding","scp",kpr) = i20_scp_conversion_f
 *Therefore, the share of the respective feedstock is set to 1.
 i20_processing_shares(t_all,i,"scp",kpr) = 0;
 i20_processing_shares(t_all,i,"scp",kpr)$(i20_scp_conversion_factors(t_all,kpr) > 0) = 1;
+
+
