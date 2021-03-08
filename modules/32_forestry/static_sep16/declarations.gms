@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -11,7 +11,7 @@ positive variables
  v32_land(j,type32,ac)           	Forestry land pools (mio. ha)
  vm_cdr_aff(j,ac,aff_effect) 		Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
   v32_land_reduction(j,type32,ac)                    Forestry land reduction (mio. ha)
- vm_hvarea_forestry(j,ac)                    		Harvested area from timber plantations (mio. ha)
+ v32_hvarea_forestry(j,ac)                    		Harvested area from timber plantations (mio. ha)
 ;
 
 parameters
@@ -26,6 +26,6 @@ parameters
  ov32_land(t,j,type32,ac,type)           Forestry land pools (mio. ha)
  ov_cdr_aff(t,j,ac,aff_effect,type)      Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
  ov32_land_reduction(t,j,type32,ac,type) Forestry land reduction (mio. ha)
- ov_hvarea_forestry(t,j,ac,type)         Harvested area from timber plantations (mio. ha)
+ ov32_hvarea_forestry(t,j,ac,type)       Harvested area from timber plantations (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

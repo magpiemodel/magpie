@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -96,6 +96,7 @@ i15_fish_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitutio
 i15_alcohol_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_alcscen%"));
 i15_livestock_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_livescen%"));
 i15_rumdairy_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_rumdairyscen%"));
+i15_rumdairy_scp_fadeout(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_rumdairy_scp_scen%"));
 i15_livestock_fadeout_threshold(t,i) = 1 - p15_foodscen_region_shr(t,i)*(1-f15_food_substitution_fader(t,"%c15_livescen_target%"));
 
 

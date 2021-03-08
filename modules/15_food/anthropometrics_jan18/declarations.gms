@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -107,7 +107,10 @@ parameters
   i15_alcohol_fadeout(t,i)                         Alcohol fadeout share (1)
   i15_livestock_fadeout(t,i)                       Livestock fadeout share (1)
   i15_rumdairy_fadeout(t,i)                        Ruminant meat and dairy fadeout share (1)
+  i15_rumdairy_scp_fadeout(t,i)                    Ruminant meat and dairy fadeout share to be replaced by SCP (1)
   i15_livestock_fadeout_threshold(t,i)             Livestock fadeout share for threshold (1)
+
+  i15_protein_to_kcal_ratio(t,kfo)			 	   protein-to-kcal ratio (g protein per kcal)
 
  i15_staples_kcal_structure_iso(t,iso,kfo_st)        Share of single staple products within total staples (1)
  i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap)  Share of single livestock products within total livestock products (uncorrected for future changes in shares) (1)

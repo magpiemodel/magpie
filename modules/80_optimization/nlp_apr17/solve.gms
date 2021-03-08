@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -45,7 +45,7 @@ repeat(
 * if solve stopped with an error, try it again without pre-processing
     if((magpie.modelstat = 13),
       display "WARNING: Modelstat 13 | retry without Conopt4 pre-processing";
-	  magpie.optfile = 2 
+	  magpie.optfile = 2
       solve magpie USING nlp MINIMIZING vm_cost_glo;
       magpie.optfile   = s80_optfile ;
     );
