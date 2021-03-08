@@ -14,10 +14,11 @@ parameters
  i14_regions_yields(t,i,kcr)                            FAO yields per region (tDM per ha per yr)
  i14_lambda_yields(t,i,kcr)                             Scaling factor for non-linear management calibration (1)
  i14_managementcalib(t,j,kcr,w)                         Regional management calibration factor accounting for FAO yield levels (1)
- p14_growing_stock(t,j,ac,forest_land,forest_type)      Forest growing stock (m3 per ha per yr)
- pm_timber_yield(t,j,ac,forest_land)                    Forest growing stock (m3 per ha per yr)
- p14_growing_stock_report(t,j,ac,forest_land)           Forest growing stock (m3 per ha per yr)
-;
+p14_growing_stock(t,j,ac,forest_land,forest_type)               Forest growing stock (tDM per ha per yr)
+ pm_timber_yield(t,j,ac,forest_land)               Forest growing stock (tDM per ha per yr)
+ p14_growing_stock_initial(j,ac,forest_land,forest_type)      Initial Forest growing stock (tDM per ha per yr)
+ pm_timber_yield_initial(j,ac,forest_land)                      Initial Forest yield (tDM per ha per yr)
+ ;
 
 positive variables
  vm_yld(j,kve,w)                     Yields (variable because of technical change) (tDM per ha per yr)

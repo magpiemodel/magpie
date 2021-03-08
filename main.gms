@@ -145,60 +145,48 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-
-* 
-* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-* 
-* Used data set: rev4.58_h12_magpie.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
 * Used data set: rev4.58_h12_validation.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
-* Used data set: calibration_H12_c200_23Feb21.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/calibration
+* md5sum: ab0b7f801add92bd959184e6ba12bd56
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Used data set: additional_data_rev3.98.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* md5sum: 9c99aec425d4774a1ff7a853cd1ae495
+* Repository: /p/projects/landuse/data/input/archive
+* 
+* Used data set: rev4.58+mrmagpie_LPJmL_new_h12_ee4336a969c590c612a80f2a9db04bdc_cellularmagpie_debug.tgz
+* md5sum: ed48337c75e764cb67ed85b0b064a13a
+* Repository: /p/projects/rd3mod/inputdata/output
+* 
+* Used data set: rev4.58+mrmagpie_LPJmL_new_h12_magpie_debug.tgz
+* md5sum: 5de7e0b72f1dac60d82a67bad0d1f540
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Low resolution: c200
 * High resolution: 0.5
-*
+* 
 * Total number of cells: 200
-*
+* 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*    28   24   10    7    3   53   17    8   22    7   11   10
-*
+*     8   22    7    7    1   39   27    7   11   13   39   19
+* 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
 * Regions data revision: 4.58
 * 
 * lpj2magpie settings:
-* * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
-* * Additional input folder: /p/projects/landuse/data/input/other/rev52
-* * Revision: 52
-* * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-*
+* * LPJmL data: GFDL-ESM4:ssp370
+* * Revision: 4.58
+* 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
-* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * * Regionscode: 690d3718e151be1b450b394c1064b1c5
-* * (clustering) n-repeat: 5
-* * (clustering) n-redistribute: 0
-* * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = cfg$spamfile, debug = FALSE, seed = cfg$seed)
+* * Call: do.call(functiononly, args)
 * 
 * 
-* 
-* Last modification (input data): Sun Feb 28 21:26:13 2021
+* Last modification (input data): Fri Mar  5 19:31:40 2021
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -238,7 +226,7 @@ $setglobal land  landmatrix_dec18
 $setglobal costs  default
 $setglobal interest_rate  select_apr20
 $setglobal tc  endo_jun18
-$setglobal yields  dynamic_aug18
+$setglobal yields  managementcalib_aug19
 
 $setglobal food  anthropometrics_jan18
 $setglobal demand  sector_may15

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -51,8 +51,3 @@ pm_timber_yield(t,j,ac,"forestry")$(s14_timber_plantation_yield = 1) = p14_growi
 pm_timber_yield(t,j,ac,land_natveg) = p14_growing_stock(t,j,ac,land_natveg,"natveg");
 ** If the plantation yield switch is off, then the forestry yields are given the same values as secdforest yields,
 pm_timber_yield(t,j,ac,"forestry")$(s14_timber_plantation_yield = 0) = pm_timber_yield(t,j,ac,"secdforest");
-
-** Used in reporting in magpie4 library
-p14_growing_stock_report(t,j,ac,"forestry")$(s14_timber_plantation_yield = 1) = p14_growing_stock(t,j,ac,"forestry","plantations");
-p14_growing_stock_report(t,j,ac,land_natveg) = p14_growing_stock(t,j,ac,land_natveg,"natveg");
-p14_growing_stock_report(t,j,ac,"forestry")$(s14_timber_plantation_yield = 0) = p14_growing_stock_report(t,j,ac,"secdforest");
