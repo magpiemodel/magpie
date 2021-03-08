@@ -11,6 +11,7 @@ bigfiles <- function(max=512) {
   if(nrow(out)>0) {
     stop(nrow(out), " files with size > ",max,"kb detected: \n",paste0(out$files," (", out$size, "kb)", collapse = "\n"))
   }
+  message("All files are smaller than ",max,"kb")
 }
 
 bigfiles(512)
