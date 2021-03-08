@@ -29,41 +29,47 @@ cat(paste0("Forestry on-off runs"), file=paste0(log_folder,"/",identifier_flag,"
 xx <- c()
 
 #scen_vector <- c("ForestryOff","ForestryEndo","ForestryExo")
-scen_vector <- c("ForestryEndo","ForestryOff")
+scen_vector <- c("ForestryEndo")
 
-for(s80_maxiter in c(5)){
-  for(scen in scen_vector){
+for(c73_wood_scen in c("default","construction")){
 
-      for(ssp in c("SSP2")){
-        source("config/default.cfg")
+  for(s80_maxiter in c(5)){
+    for(scen in scen_vector){
 
-        cfg$gms$s80_maxiter = s80_maxiter
+        for(ssp in c("SSP2")){
+          source("config/default.cfg")
 
-        cfg = setScenario(cfg,c(ssp,"NPI",scen))
+          cfg$gms$s80_maxiter = s80_maxiter
 
-          #cfg$gms$c_timesteps <- "5year"
+          cfg = setScenario(cfg,c(ssp,"NPI",scen))
 
-          cfg$gms$s15_elastic_demand <- 0
+            #cfg$gms$c_timesteps <- "5year"
 
-          if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
-          if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
+            cfg$gms$s15_elastic_demand <- 0
 
-#          cfg$gms$c57_macc_version = "PBL_2019"
+            if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
+            if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
 
-          if(scen=="ForestryOff")           scen_flag="Default"
-          if(scen=="ForestryEndo")          scen_flag="Forestry"
-          if(scen=="ForestryExo")           scen_flag="ForestryExo"
+  #          cfg$gms$c57_macc_version = "PBL_2019"
 
-          cfg$title   = paste0(identifier_flag,"_",scen_flag)
-          cfg$output  = c("extra/timestep_duration")
+            if(scen=="ForestryOff")           scen_flag="Default"
+            if(scen=="ForestryEndo")          scen_flag="Forestry"
+            if(scen=="ForestryExo")           scen_flag="ForestryExo"
 
-           xx = c(xx,cfg$title)
-           cfg$gms$s80_optfile <- 1
-           cfg$results_folder = "output/:title:"
-           start_run(cfg,codeCheck=FALSE)
+            cfg$gms$c73_wood_scen = c73_wood_scen
 
-      }
-   }
+            cfg$title   = paste0(identifier_flag,"_",scen_flag,"Endo_",c73_wood_scen)
+            cfg$output  = c("extra/timestep_duration")
+
+             xx = c(xx,cfg$title)
+             cfg$gms$s80_optfile <- 1
+             cfg$results_folder = "output/:title:"
+             start_run(cfg,codeCheck=FALSE)
+
+        }
+     }
+  }
+
 }
 
 #          cfg$gms$c56_pollutant_prices = "coupling"
