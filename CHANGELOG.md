@@ -38,6 +38,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** added output script for disaggregation of land transitions
 - **scripts** added output script for disaggregation to GAINS regions
 - **scripts** Automatic sets for 56_ghg_policy and 60_bioenergy
+- **scripts** Added pre-commit hook
+
 
 ### changed
 - **scripts** Updated AgMIP output scripts.
