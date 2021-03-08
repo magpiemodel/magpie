@@ -1,0 +1,16 @@
+#!/usr/bin/env Rscript
+
+# make sure that files are not too big
+
+bigfiles <- function(max=512) {
+  files <- system("git diff --cached --name-only", intern=TRUE)
+  out <- data.frame(files=files,size=round(file.size(files)/1024,2))
+  out <- out[out$size > max,]
+  if(nrow(out)>0) {
+    stop("Files with size > ",max,"kb detected: ",paste0(out$files," (", out$size, "kb)", collapse = ", "))
+  }
+}
+
+bigfiles(512)
+
+
