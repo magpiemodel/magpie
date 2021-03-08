@@ -12,35 +12,29 @@ source("config/default.cfg")
 
 #List of clusterin types
 #clustering<-c("n200","c200")
-clustering<-c("c200")
+#clustering<-c("c200")
 
 #Factor cost realizations
 realization<-c("mixed_feb17","sticky_feb18")
 climate<-c("cc","nocc")
 #AEI<-c("LUH2v2","Siebert")
-AEI<-c("LUH2v2")
+#AEI<-c("LUH2v2")
 
 for (k in 1:length(climate)){
-  for (i in 1:length(AEI)){
+#  for (i in 1:length(AEI)){
     for(j in 1:length(realization)){
 
         #Change the results folder name
         #NBC STANDS FOR NEW BEST CALIBRATION
-        cfg$title<-paste0("LPJGGCMI_TCinPasture_",realization[j],"_rcp6p0_",climate[k])
+        cfg$title<-paste0("New_LPJmL_GFDL_ssp370_",realization[j],"_",climate[k])
 
         cfg <- setScenario(cfg,climate[k])
 
         #recalibrate
         cfg$recalibrate <- TRUE
 
-        #recalc_npi_ndc
-        #cfg$recalc_npi_ndc <- TRUE
-
-        #forestry
-        cfg$gms$forestry  <- "static_sep16"
-
         #AEI
-        cfg$gms$c41_initial_irrigation_area  <- AEI[i]
+#        cfg$gms$c41_initial_irrigation_area  <- AEI[i]
 
         #Factor costs realization
         cfg$gms$factor_costs <- realization[j]
@@ -50,7 +44,7 @@ for (k in 1:length(climate)){
         start_run(cfg=cfg)
         }
       }
-    }
+#    }
 
     #
     #      if(clustering[k]=="m200_Land"){
