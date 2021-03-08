@@ -145,6 +145,7 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
+
 * 
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: NA
@@ -162,19 +163,19 @@ $title magpie
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/calibration
 * 
-* Used data set: additional_data_rev3.95.tgz
+* Used data set: additional_data_rev3.98.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Low resolution: c200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    28   24   10    7    3   53   17    8   22    7   11   10
-* 
+*
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
 * Regions data revision: 4.58
@@ -184,7 +185,7 @@ $title magpie
 * * Additional input folder: /p/projects/landuse/data/input/other/rev52
 * * Revision: 52
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-* 
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
@@ -197,7 +198,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Sat Feb 27 15:34:34 2021
+* Last modification (input data): Sun Feb 28 21:26:13 2021
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 

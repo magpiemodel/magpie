@@ -27,7 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **35_natveg** Added HalfEarth scenario to protection scenarios
 - **51_nitrogen** new module realization rescaled_jan21, which rescales n-related emissions with nitrogen surplus to account for lower emissions with higher NUE
 - **52_carbon** Simplified routine for carbon stock calculations in timber plantations and cleanup of unused code.
-- **56_ghg_policy** Added new scenario to emission policy
+- **56_ghg_policy** Added new scenario to emission policy, Automatic sets for scenarios
+- **60_bioenergy** Automatic sets for scenarios
 - **73_timber** Additive calibration with FAO data for roundwood demand. New switches: `c73_wood_scen`
 - **73_timber** Added new realization `default` (modified version of previous realization)
 - **default.cfg** New `forestry` scenario which simulates timber production in MAgPIE
@@ -35,6 +36,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scaling** Updated scaling across the modules
 - **scripts** Updated to `forestry` script with general cleanup for publication. Added `forestry_magpie` script for generic forestry runs.
 - **scripts** added output script for disaggregation of land transitions
+- **scripts** added output script for disaggregation to GAINS regions
+- **scripts** Automatic sets for 56_ghg_policy and 60_bioenergy
 
 ### changed
 - **scripts** Updated AgMIP output scripts.
