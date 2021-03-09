@@ -62,6 +62,9 @@ equations
  q35_prod_primforest(j)                                                      Production of woody biomass from primary forests (mio. tDM per yr)
  q35_prod_other(j)                                                        Production of woody biomass from other land (mio. tDM per yr)
  q35_cost_hvarea(i) blub
+ q35_bv_primary(j2,potnatveg)                  Biodiversity value of primary forest (Mha)
+ q35_bv_secondary(j2,potnatveg)                Biodiversity value of secondary vegetation (Mha)
+
 ;
 
 positive variables
@@ -120,5 +123,7 @@ parameters
  oq35_prod_primforest(t,j,type)                 Production of woody biomass from primary forests (mio. tDM per yr)
  oq35_prod_other(t,j,type)                      Production of woody biomass from other land (mio. tDM per yr)
  oq35_cost_hvarea(t,i,type)                     blub
+ oq35_bv_primary(t,j2,potnatveg,type)           Biodiversity value of primary forest (Mha)
+ oq35_bv_secondary(t,j2,potnatveg,type)         Biodiversity value of secondary vegetation (Mha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

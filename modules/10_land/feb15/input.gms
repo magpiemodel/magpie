@@ -10,3 +10,9 @@ $ondelim
 $include "./modules/10_land/input/avl_land_t.cs3"
 $offdelim
 ;
+
+table fm_luh2_side_layers(j,luh2_side_layers10) luh2 side layers (grid cell share)
+$ondelim
+$include "./modules/10_land/input/luh2_side_layers.cs3"
+$offdelim
+;

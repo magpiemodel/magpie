@@ -266,7 +266,7 @@ $setglobal transport  gtap_nov12
 $setglobal area_equipped_for_irrigation  endo_apr13
 $setglobal water_demand  agr_sector_aug13
 $setglobal water_availability  total_water_aug13
-$setglobal biodiversity  bii_btc_mar21
+$setglobal biodiversity  bv_btc_mar21
 $setglobal climate  static
 
 $setglobal nr_soil_budget  exoeff_aug16

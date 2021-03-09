@@ -17,4 +17,13 @@ vm_carbon_stock.fx(j,"secdforest",ag_pools) =
 *'
 vm_carbon_stock.fx(j,"other",ag_pools) =
           vm_land.l(j,"other")*fm_carbon_density(t,j,"other",ag_pools);
+
+
+*' The following equations calculate the biodiversity value for primary and secondary vegetation
+vm_bv.fx(j,"primary",potnatveg) =
+ 					pcm_land(j,"primforest") * fm_bii_coeff("primary",potnatveg) * fm_luh2_side_layers(j,potnatveg);
+
+vm_bv.fx(j,"secondary",potnatveg) =
+          sum(ac_mature, v35_secdforest(j,ac_mature) + v35_other(j,ac_mature)) * fm_bii_coeff("secd_mature",potnatveg) * fm_luh2_side_layers(j,potnatveg)
+        + sum(ac_mature, v35_secdforest(j,ac_mature) + v35_other(j,ac_mature)) * fm_bii_coeff("secd_young",potnatveg) * fm_luh2_side_layers(j,potnatveg);
 *' @stop

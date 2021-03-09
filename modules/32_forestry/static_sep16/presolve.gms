@@ -16,8 +16,22 @@ ac_sub(ac) = yes$(ord(ac) > (m_yeardiff_forestry(t)/5));
 *' Forestry above ground carbon stocks are calculated by multiplying plantations in 1995
 *' with the forestry above ground carbon density of the current time step (`pc32_carbon_density`).
 pc32_carbon_density(j,ag_pools) = fm_carbon_density(t,j,"forestry",ag_pools);
-vm_carbon_stock.fx(j,"forestry",ag_pools) = 
+vm_carbon_stock.fx(j,"forestry",ag_pools) =
 	sum((type32,ac), v32_land.l(j,type32,ac)*pm_carbon_density_ac(t,j,ac,ag_pools));
+
+*' Biodiversity value
+
+vm_bv.fx(j,"aff",potnatveg) =
+          v32_land(j,"aff",ac_mature) * fm_bii_coeff("secd_mature",potnatveg) * fm_luh2_side_layers(j,potnatveg)
+        + v32_land(j,"aff",ac_young) * fm_bii_coeff("secd_young",potnatveg) * fm_luh2_side_layers(j,potnatveg);
+
+vm_bv.fx(j,"ndc",potnatveg) =
+          v32land(j,"ndc",ac_mature) * fm_bii_coeff("secd_mature",potnatveg) * fm_luh2_side_layers(j,potnatveg)
+        + v32land(j,"ndc",ac_young) * fm_bii_coeff("secd_young",potnatveg) * fm_luh2_side_layers(j,potnatveg);
+
+vm_bv.fx(j,"plant",potnatveg) =
+          v32_land(j,"plant",ac) * fm_bii_coeff("timber",potnatveg) * fm_luh2_side_layers(j,potnatveg);
+
 
 *' Wood demand is also set to zero because forestry is not modeled in this realization.
 vm_supply.fx(i2,kforestry) = 0;
