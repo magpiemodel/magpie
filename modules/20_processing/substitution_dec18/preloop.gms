@@ -18,8 +18,9 @@ i20_processing_conversion_factors(t_all,processing20,ksd,kpr) = f20_processing_c
 i20_processing_shares(t_all,i,ksd,kpr) = f20_processing_shares(t_all,i,ksd,kpr);
 i20_processing_unitcosts(ksd,kpr) = f20_processing_unitcosts(ksd,kpr);
 
-*SCP unitcosts are accounted for separately in f20_scp_unitcosts.
-*This is needed to include costs for scp_hydrogen, which does not depend on land-based feedstock.
+*Costs for single-cell protein production (scp) are accounted for separately in f20_scp_unitcosts (see 'q20_processing_costs').
+*Separate accounting is needed because scp_hydrogen has no land requirements, and thus otherwise would have no costs.
+*To avoid double accounting the processing costs of scp_methane, scp_sugar and scp_cellulose are set to zero.
 i20_processing_unitcosts("scp",kpr) = 0;
 
 *SCP can be produced via different routes. The feedstock conversion_factor for SCP accounts for the mix of SCP routes.
