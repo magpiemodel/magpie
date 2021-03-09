@@ -12,7 +12,6 @@ sets
 	bii_class44 bii land cover classes
 		/ crop_ann, crop_per, manpast, rangeland, urban, primary, secd_mature, secd_young, timber /
 
-
 	price_biodiv44	price paths biodiv loss
 		/ p0,p1,p1_p10,p10,p10_p100,p1_p1000,p10_p10000 /
 

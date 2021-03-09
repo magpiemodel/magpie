@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **70_livestock*** added scenario switch for feed replacement (crop and forage) by Single-Cell Protein
 
 ### added
+- **44_biodiversity** New biodiversity module. The realization bv_btc_mar21 now allows to calculate an area-based biodiversity value across all land types. Switch `c44_price_bv_loss` to implement cost for biodiversity loss.
 - **15_food** Added the option to fade out livestock demand towards a target level in kcal/cap/day.
 - **21_trade** Added scalar `s21_trade_bal_damper` and new set `k_trade_excl_timber`
 - **29_ageclass** New age-class module

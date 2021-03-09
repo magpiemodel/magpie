@@ -4,7 +4,7 @@
 *** or later. See LICENSE file or go to http://www.gnu.org/licenses/
 *** Contact: magpie@pik-potsdam.de
 
-pc44_bv_weighted(j,bii_class44) = v44_bv_weighted.l(j,bii_class44);
+pc44_bv_weighted(j,landcover44) = v44_bv_weighted.l(j,landcover44);
 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################

@@ -26,8 +26,8 @@ vm_bv.fx(j,"aff",potnatveg) =
         + v32_land(j,"aff",ac_young) * fm_bii_coeff("secd_young",potnatveg) * fm_luh2_side_layers(j,potnatveg);
 
 vm_bv.fx(j,"ndc",potnatveg) =
-          v32land(j,"ndc",ac_mature) * fm_bii_coeff("secd_mature",potnatveg) * fm_luh2_side_layers(j,potnatveg)
-        + v32land(j,"ndc",ac_young) * fm_bii_coeff("secd_young",potnatveg) * fm_luh2_side_layers(j,potnatveg);
+          v32_land(j,"ndc",ac_mature) * fm_bii_coeff("secd_mature",potnatveg) * fm_luh2_side_layers(j,potnatveg)
+        + v32_land(j,"ndc",ac_young) * fm_bii_coeff("secd_young",potnatveg) * fm_luh2_side_layers(j,potnatveg);
 
 vm_bv.fx(j,"plant",potnatveg) =
           v32_land(j,"plant",ac) * fm_bii_coeff("timber",potnatveg) * fm_luh2_side_layers(j,potnatveg);
