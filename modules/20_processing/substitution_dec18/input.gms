@@ -46,3 +46,10 @@ table f20_scp_conversionmatrix(kpr,scptype) Conversion matrix to derive tons of 
 $ondelim
 $include "./modules/20_processing/input/f20_scp_conversionmatrix.csv"
 $offdelim       ;
+
+parameter f20_scp_unitcosts(scptype) Costs of production of one unit of SCP exclusive of feedstock costs (USD per tDM)
+/
+$ondelim
+$include "./modules/20_processing/input/f20_scp_unitcosts.csv"
+$offdelim
+/;
