@@ -7,7 +7,7 @@
 sets
 
 	landcover44 land cover classes used in bii calculation
-		/ crop_ann, crop_per, manpast, rangeland, urban, ndc, aff, primary, secd_mature, secd_young, plant /
+		/ crop_ann, crop_per, manpast, rangeland, urban, ndc, aff, primary, secondary, plant /
 
 	bii_class44 bii land cover classes
 		/ crop_ann, crop_per, manpast, rangeland, urban, primary, secd_mature, secd_young, timber /
