@@ -30,7 +30,7 @@ cfg$output <- c("rds_report")
 
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 
-prefix <- "SCP30"
+prefix <- "SCP31"
 cfg$gms$s80_optfile <- 1
 cfg$gms$s80_maxiter <- 5
 
