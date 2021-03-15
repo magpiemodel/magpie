@@ -36,7 +36,8 @@ cfg$gms$s80_maxiter <- 5
 
 cfg$gms$s15_elastic_demand <- 0
 
-for (pol in c("Ref","1p5deg")) {
+#1p5deg
+for (pol in c("Ref")) {
   for (scp_level in c(0,20,50,80)) {
     for (scp_type in c("mixed")) {
       if (pol == "Ref") {
