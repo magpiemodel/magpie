@@ -49,6 +49,9 @@ for(c73_wood_scen in c("default")){
             if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
             if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
 
+            cfg$force_download <- TRUE
+            cfg$recalibrate <- "ifneeded"     # def = "ifneeded"
+
             if(scen=="ForestryOff")           scen_flag="Default"
             if(scen=="ForestryEndo")          scen_flag="Forestry"
             if(scen=="ForestryExo")           scen_flag="ForestryExo"
