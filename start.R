@@ -114,6 +114,8 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 }
 
 
+system("git config core.hooksPath .githooks")
+
 runscripts <- submit <- NULL
 lucode2::readArgs("runscripts","submit", .silent=TRUE)
 runOutputs(runscripts=runscripts, submit=submit)
