@@ -6,15 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [Unreleased]
+## [4.3.2] - 2021-03-17
 
 ### changed
-- **runscripts** adapted to new input data and model version
+- **12_interest_rate** Interest fader changed to csv
 - **15_food** better documentation of parameters over model iterations
-- **20_processing** added different options for Single-Cell Protein production
 - **15_food*** added scenario switch for ruminant and dairy replacement by Single-Cell Protein
+- **20_processing** added different options for Single-Cell Protein production
+- **35_natveg** Fader for HalfEarth protection policy
 - **50_nr_soil_budget** added necessary interfaces to 50_nitrogen module
 - **70_livestock*** added scenario switch for feed replacement (crop and forage) by Single-Cell Protein
+- **scripts** Updated AgMIP output scripts.
+- **runscripts** adapted to new input data and model version
+- **tests** Replaced TravisCI with GithubActions
 
 ### added
 - **15_food** Added the option to fade out livestock demand towards a target level in kcal/cap/day.
@@ -35,12 +39,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scaling** Updated scaling across the modules
 - **scripts** Updated to `forestry` script with general cleanup for publication. Added `forestry_magpie` script for generic forestry runs.
 - **scripts** added output script for disaggregation of land transitions
-
-### changed
-- **scripts** Updated AgMIP output scripts.
-- **12_interest_rate** Interest fader changed to csv
-- **35_natveg** Fader for HalfEarth protection policy
-- **tests** Replaced TravisCI with GithubActions
 
 ### removed
 - **32_forestry** Removed previous default realization
@@ -197,7 +195,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.3.1...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.3.2...develop
+[4.3.2]: https://github.com/magpiemodel/magpie/compare/v4.3.1...v4.3.2
 [4.3.1]: https://github.com/magpiemodel/magpie/compare/v4.3.0...v4.3.1
 [4.3.0]: https://github.com/magpiemodel/magpie/compare/v4.2.1...v4.3.0
 [4.2.1]: https://github.com/magpiemodel/magpie/compare/v4.2.0...v4.2.1
