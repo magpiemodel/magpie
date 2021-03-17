@@ -31,7 +31,7 @@ xx <- c()
 #scen_vector <- c("ForestryOff","ForestryEndo","ForestryExo")
 scen_vector <- c("ForestryEndo")
 
-for(c73_wood_scen in c("default","construction")){
+for(c73_wood_scen in c("default")){
 
   for(s80_maxiter in c(5)){
     for(scen in scen_vector){

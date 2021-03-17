@@ -11,6 +11,13 @@ p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)            End 
 pm_demand_forestry_future(i,kforestry)                                      Future forestry demand in current time step (tDM per yr)
 pm_demand_ext(t_ext,i,kforestry)                                            Extended demand for timber beyound simulation (mio. tDM per yr)
 p73_demand_calib(t_all,i,kforestry)                                         Additive calibration factor for timber demand
+p73_urban_pop(t_all,i,build_scen)                                           xx
+p73_building_timber(t_all,iso,build_scen)                                   xx
+p73_dem_scen(build_scen)                                                    xx
+p73_urban_share(t_all,i)                                                    xx
+p73_crude_build_demand(build_scen)                                          xx
+p73_dampener                                                                xx
+p73_glo_wood(t_all)                                                         xx
 ;
 
 positive variables

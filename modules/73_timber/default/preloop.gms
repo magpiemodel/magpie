@@ -29,7 +29,7 @@ p73_building_timber(t_all,iso,build_scen)
 ** Req per cap tKg/cap ((kg/cap) / 1e3)
         * 7440 / 1000
 ** Scenario
-        * p73_dem_scen(build_scen)
+        * p73_dem_scen(build_scen);
 ** We don't [* 2] afterwards wher Galina assumes that 50% of roundwood is wasted during processing
 
 
@@ -63,3 +63,32 @@ $endif
 pm_demand_ext(t_ext,i,kforestry) = round(p73_timber_demand_gdp_pop("y2150",i,kforestry) * f73_volumetric_conversion(kforestry),3);
 ** overwrite timesteps below 2150 with actual values
 pm_demand_ext(t_all,i,kforestry) = round(p73_timber_demand_gdp_pop(t_all,i,kforestry) * f73_volumetric_conversion(kforestry),3);
+
+**** Extend for Galina et al demand scenarios
+
+loop (t_all$(m_year(t_all)>=sm_fix_SSP2 AND m_year(t_all) <= 2050),
+   p73_dampener = 0.002;
+** Dampeneer = 1/sum(1to30) (i.e. 2020-2050)
+   display p73_dampener;
+   pm_demand_ext(t_all,i,"wood")$(m_year(t_all)=2020) =
+   pm_demand_ext(t_all,i,"wood")
+   +
+   p73_crude_build_demand("%c73_build_demand%") * (im_pop(t_all,i)/sum(i2, im_pop(t_all,i2))) * p73_dampener * (1);
+
+  pm_demand_ext(t_all,i,"wood") =
+  pm_demand_ext(t_all,i,"wood")
+  +
+  p73_crude_build_demand("%c73_build_demand%") * (im_pop(t_all,i)/sum(i2, im_pop(t_all,i2))) * p73_dampener * (m_year(t_all) - 2020);
+);
+pm_demand_ext("y2055",i,"wood") = pm_demand_ext("y2050",i,"wood");
+
+loop (t_all$(m_year(t_all)>2055 AND m_year(t_all) <= 2150),
+   p73_dampener = 0.00078;
+** 1/(sum1:50) 
+   pm_demand_ext(t_all,i,"wood") =
+   pm_demand_ext(t_all,i,"wood")
+   +
+   p73_crude_build_demand("%c73_build_demand%") * 1.25 * (im_pop(t_all,i)/sum(i2, im_pop(t_all,i2))) * p73_dampener * (m_year(t_all) - 2045);
+);
+p73_glo_wood(t_all) = sum(i,pm_demand_ext(t_all,i,"wood"));
+display p73_glo_wood;

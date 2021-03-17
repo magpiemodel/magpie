@@ -24,6 +24,7 @@ $Ifi "%phase%" == "declarations" $include "./modules/73_timber/default/declarati
 $Ifi "%phase%" == "input" $include "./modules/73_timber/default/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/73_timber/default/equations.gms"
 $Ifi "%phase%" == "scaling" $include "./modules/73_timber/default/scaling.gms"
+$Ifi "%phase%" == "start" $include "./modules/73_timber/default/start.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/73_timber/default/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/73_timber/default/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/73_timber/default/postsolve.gms"
