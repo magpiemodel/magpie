@@ -61,7 +61,7 @@ for(c73_wood_scen in c("default")){
             xx = c(xx,cfg$title)
             cfg$gms$s80_optfile <- 1
             cfg$results_folder = "output/:title:"
-#            start_run(cfg,codeCheck=FALSE)
+            start_run(cfg,codeCheck=FALSE)
           }
         }
      }
