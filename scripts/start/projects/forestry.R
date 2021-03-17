@@ -43,14 +43,11 @@ for(c73_wood_scen in c("default")){
 
           cfg = setScenario(cfg,c(ssp,"NPI",scen))
 
-            #cfg$gms$c_timesteps <- "5year"
-
+          for (c73_build_demand in c("BAU","10pc","50pc","90pc")) {
             cfg$gms$s15_elastic_demand <- 0
 
             if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
             if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
-
-  #          cfg$gms$c57_macc_version = "PBL_2019"
 
             if(scen=="ForestryOff")           scen_flag="Default"
             if(scen=="ForestryEndo")          scen_flag="Forestry"
@@ -58,18 +55,17 @@ for(c73_wood_scen in c("default")){
 
             cfg$gms$c73_wood_scen = c73_wood_scen
 
-            cfg$title   = paste0(identifier_flag,"_",scen_flag,"Endo_",c73_wood_scen)
+            cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",c73_build_demand)
             cfg$output  = c("extra/timestep_duration")
 
-             xx = c(xx,cfg$title)
-             cfg$gms$s80_optfile <- 1
-             cfg$results_folder = "output/:title:"
-             start_run(cfg,codeCheck=FALSE)
-
+            xx = c(xx,cfg$title)
+            cfg$gms$s80_optfile <- 1
+            cfg$results_folder = "output/:title:"
+#            start_run(cfg,codeCheck=FALSE)
+          }
         }
      }
   }
-
 }
 
 #          cfg$gms$c56_pollutant_prices = "coupling"

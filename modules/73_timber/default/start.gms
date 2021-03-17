@@ -55,3 +55,6 @@ p73_crude_build_demand("BAU")  = 200;
 p73_crude_build_demand("10pc") = 4015;
 p73_crude_build_demand("50pc") = 20000;
 p73_crude_build_demand("90pc") = 36135;
+
+** Multiply with 2 assuming needed demand in 2020-2050 is repreated in 2050-2100
+p73_crude_build_demand(build_scen) = p73_crude_build_demand(build_scen) * 2;
