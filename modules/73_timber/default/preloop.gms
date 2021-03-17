@@ -20,6 +20,19 @@ loop(t_all$(m_year(t_all) >= sm_fix_SSP2 AND m_year(t_all) <= 2150),
           ;
 );
 
+p73_urban_pop(t_all,i,build_scen) = sum(i_to_iso(i,iso), im_pop_iso(t_all,iso)) * p73_urban_share(t_all,i);
+
+p73_building_timber(t_all,iso,build_scen)
+        =
+** Mio Cap
+        (im_pop_iso(t_all,iso) - im_pop_iso(t_all-1,iso))
+** Req per cap tKg/cap ((kg/cap) / 1e3)
+        * 7440 / 1000
+** Scenario
+        * p73_dem_scen(build_scen)
+** We don't [* 2] afterwards wher Galina assumes that 50% of roundwood is wasted during processing
+
+
 ** Aggregate from ISO country level to MAgPIE region level
 p73_timber_demand_gdp_pop(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to_woodprod(kforestry,total_wood_products)),p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)) * s73_timber_demand_switch ;
 
