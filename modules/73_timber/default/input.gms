@@ -8,7 +8,7 @@
 
 $setglobal c73_wood_scen  default
 * options default, construction
-$setglobal c73_build_demand  90pc
+$setglobal c73_build_demand  BAU
 * options BAU, 10pc, 50pc, 90pc
 
 scalars
