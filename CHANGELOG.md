@@ -11,11 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### changed
 - **12_interest_rate** Interest fader changed to csv
 - **15_food** better documentation of parameters over model iterations
-- **15_food*** added scenario switch for ruminant and dairy replacement by Single-Cell Protein
+- **15_food** added scenario switch for ruminant and dairy replacement by Single-Cell Protein
 - **20_processing** added different options for Single-Cell Protein production
 - **35_natveg** Fader for HalfEarth protection policy
 - **50_nr_soil_budget** added necessary interfaces to 50_nitrogen module
-- **70_livestock*** added scenario switch for feed replacement (crop and forage) by Single-Cell Protein
+- **70_livestock** added scenario switch for feed replacement (crop and forage) by Single-Cell Protein
 - **scripts** Updated AgMIP output scripts.
 - **runscripts** adapted to new input data and model version
 - **tests** Replaced TravisCI with GithubActions
