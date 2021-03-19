@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -28,7 +28,6 @@ $Ifi "%phase%" == "input" $include "./modules/52_carbon/normal_dec17/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/52_carbon/normal_dec17/equations.gms"
 $Ifi "%phase%" == "scaling" $include "./modules/52_carbon/normal_dec17/scaling.gms"
 $Ifi "%phase%" == "start" $include "./modules/52_carbon/normal_dec17/start.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/52_carbon/normal_dec17/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/52_carbon/normal_dec17/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/52_carbon/normal_dec17/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

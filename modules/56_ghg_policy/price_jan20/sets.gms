@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -70,7 +70,7 @@ sets
    	SSPDB-SSP5-Ref-REMIND-MAGPIE/
 
   scen56 emission policy scenarios
-  / none, all, ssp, ssp_nosoil, redd+_nosoil, all_nosoil /
+  / none, all, ssp, ssp_nosoil, redd+_nosoil, all_nosoil, maccs_excl_cropland_n2o /
 
    emis_cell_one56(emis_source_cell) cellular oneoff emission sources
    /crop_vegc, crop_litc, crop_soilc, past_vegc, past_litc, past_soilc, forestry_vegc,
