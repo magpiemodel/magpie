@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### added
+- **15_food*** added 3 sigmoid food substitution scenarios
+- **56_ghg_policy** Automatic sets for scenarios
+- **60_bioenergy** Automatic sets for scenarios
+- **70_livestock*** added 3 sigmoid feed substitution scenarios
+- **scripts** added output script for disaggregation to GAINS regions
+- **scripts** Automatic sets for 56_ghg_policy and 60_bioenergy
+- **scripts** Added pre-commit hook
+
+### fixed
+- **60_bioenergy** Minimal bioenergy demand
+
 
 ## [4.3.2] - 2021-03-17
 
@@ -21,7 +35,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **tests** Replaced TravisCI with GithubActions
 
 ### added
-- **15_food*** added 3 sigmoid food substitution scenarios
 - **15_food** Added the option to fade out livestock demand towards a target level in kcal/cap/day.
 - **21_trade** Added scalar `s21_trade_bal_damper` and new set `k_trade_excl_timber`
 - **29_ageclass** New age-class module
@@ -32,9 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **35_natveg** Added HalfEarth scenario to protection scenarios
 - **51_nitrogen** new module realization rescaled_jan21, which rescales n-related emissions with nitrogen surplus to account for lower emissions with higher NUE
 - **52_carbon** Simplified routine for carbon stock calculations in timber plantations and cleanup of unused code.
-- **56_ghg_policy** Added new scenario to emission policy, Automatic sets for scenarios
-- **60_bioenergy** Automatic sets for scenarios
-- **70_livestock*** added 3 sigmoid feed substitution scenarios
+- **56_ghg_policy** Added new scenario to emission policy
 - **73_timber** Additive calibration with FAO data for roundwood demand. New switches: `c73_wood_scen`
 - **73_timber** Added new realization `default` (modified version of previous realization)
 - **default.cfg** New `forestry` scenario which simulates timber production in MAgPIE
@@ -42,10 +53,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scaling** Updated scaling across the modules
 - **scripts** Updated to `forestry` script with general cleanup for publication. Added `forestry_magpie` script for generic forestry runs.
 - **scripts** added output script for disaggregation of land transitions
-- **scripts** added output script for disaggregation to GAINS regions
-- **scripts** Automatic sets for 56_ghg_policy and 60_bioenergy
-- **scripts** Added pre-commit hook
-
 
 ### removed
 - **32_forestry** Removed previous default realization
@@ -54,7 +61,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### fixed
 - **32_forestry** Bugfixes for "ac_est" and carbon treshold afforestation; removed plantations from "vm_cdr_aff".
-- **60_bioenergy** Minimal bioenergy demand
 - **core** bugfix m_fillmissingyears macro; was running over t before; now running over t_all_
 
 ## [4.3.1] - 2020-11-03
