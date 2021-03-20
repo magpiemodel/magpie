@@ -58,10 +58,10 @@ equations
  q35_hvarea_other(j,ac)							            Harvested area other land (mio. ha)
  q35_hvarea_secdforest(j,ac)					          Harvested area secdforest (mio. ha)
  q35_hvarea_primforest(j)						            Harvested area primforest (mio. ha)
- q35_prod_secdforest(j)                                                   Production of woody biomass from secondary forests (mio. tDM per yr)
- q35_prod_primforest(j)                                                      Production of woody biomass from primary forests (mio. tDM per yr)
- q35_prod_other(j)                                                        Production of woody biomass from other land (mio. tDM per yr)
- q35_cost_hvarea(i) blub
+ q35_prod_secdforest(j)                         Production of woody biomass from secondary forests (mio. tDM per yr)
+ q35_prod_primforest(j)                         Production of woody biomass from primary forests (mio. tDM per yr)
+ q35_prod_other(j)                              Production of woody biomass from other land (mio. tDM per yr)
+ q35_cost_hvarea(i)                             Cost of harvesting natural vegetation (mio. USD)
 ;
 
 positive variables
@@ -77,7 +77,7 @@ positive variables
   v35_hvarea_other(j,ac)                         Harvested area from other land (mio. ha)
   v35_hvarea_primforest(j)                       Harvested area from primary forest (mio. ha)
   vm_prod_natveg(j,land_natveg,kforestry)       Production of woody biomass from natural vegetation (mio. tDM per yr)
- vm_cost_hvarea_natveg(i)						blub
+ vm_cost_hvarea_natveg(i)                       Cost of harvesting natural vegetation (mio. USD)
 ;
 
 
@@ -95,7 +95,7 @@ parameters
  ov35_hvarea_other(t,j,ac,type)                 Harvested area from other land (mio. ha)
  ov35_hvarea_primforest(t,j,type)               Harvested area from primary forest (mio. ha)
  ov_prod_natveg(t,j,land_natveg,kforestry,type) Production of woody biomass from natural vegetation (mio. tDM per yr)
- ov_cost_hvarea_natveg(t,i,type)                blub
+ ov_cost_hvarea_natveg(t,i,type)                Cost of harvesting natural vegetation (mio. USD)
  oq35_land_secdforest(t,j,type)                 Secdforest land pool calculation (mio. ha)
  oq35_land_other(t,j,type)                      Other land pool calculation (mio. ha)
  oq35_carbon_primforest(t,j,ag_pools,type)      Primforest carbon stock calculation (mio tC)
@@ -119,6 +119,6 @@ parameters
  oq35_prod_secdforest(t,j,type)                 Production of woody biomass from secondary forests (mio. tDM per yr)
  oq35_prod_primforest(t,j,type)                 Production of woody biomass from primary forests (mio. tDM per yr)
  oq35_prod_other(t,j,type)                      Production of woody biomass from other land (mio. tDM per yr)
- oq35_cost_hvarea(t,i,type)                     blub
+ oq35_cost_hvarea(t,i,type)                     Cost of harvesting natural vegetation (mio. USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
