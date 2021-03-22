@@ -1,6 +1,6 @@
 {
   "title": "MAgPIE - An Open Source land-use modeling framework",
-  "version": "4.3.1",
+  "version": "4.3.2",
   "creators": [
     {
       "name": "Dietrich, Jan Philipp",
@@ -48,6 +48,10 @@
       "affiliation": "Potsdam Institute for Climate Impact Research"
     },
     {
+      "name": "von Jeetze, Patrick",
+      "affiliation": "Potsdam Institute for Climate Impact Research"
+    },
+    {
       "name": "Klein, David",
       "affiliation": "Potsdam Institute for Climate Impact Research"
     },
@@ -76,5 +80,5 @@
   "license": {
     "id": "AGPL-3.0-or-later"
   },
-  "publication_date": "2020-11-03"
+  "publication_date": "2021-03-17"
 }

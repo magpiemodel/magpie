@@ -13,7 +13,7 @@ $include "./modules/44_biodiversity/bv_btc_mar21/input/f44_bii_coeff.cs3"
 $offdelim
 ;
 
-table f44_price_biodiv_loss(t_all,price_biodiv44) price biodiv loss
+table f44_price_bv_loss(t_all,price_biodiv44) price biodiv loss
 $ondelim
 $include "./modules/44_biodiversity/bv_btc_mar21/input/f44_price_biodiv_loss.csv"
 $offdelim
