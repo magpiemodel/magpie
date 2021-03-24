@@ -63,3 +63,9 @@ $ondelim
 $include "./modules/73_timber/input/f73_regional_timber_demand.csv"
 $offdelim
 ;
+
+table f73_construction_wood_demand(t_all,i,pop_scen09,build_scen) Construction wood demand (mio. m3 per yr)
+$ondelim
+$include "./modules/73_timber/input/f73_construction_wood_demand.cs3"
+$offdelim
+;

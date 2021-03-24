@@ -66,6 +66,7 @@ pm_demand_ext(t_all,i,kforestry) = round(p73_timber_demand_gdp_pop(t_all,i,kfore
 
 **** Extend for Galina et al demand scenarios
 
+$ontext
 loop (t_all$(m_year(t_all)>=sm_fix_SSP2 AND m_year(t_all) <= 2100),
    p73_dampener = 0.00031;
 ** Dampeneer = 1/sum(1to80) (i.e. 2020-2100)
@@ -80,6 +81,11 @@ loop (t_all$(m_year(t_all)>=sm_fix_SSP2 AND m_year(t_all) <= 2100),
   +
   p73_crude_build_demand("%c73_build_demand%") * (im_pop(t_all,i)/sum(i2, im_pop(t_all,i2))) * p73_dampener * (m_year(t_all) - 2020);
 );
+$offtext
+
+pm_demand_ext(t_all,i,"wood") = pm_demand_ext(t_all,i,"wood") + f73_construction_wood_demand(t_all,i,"%c09_pop_scenario%","%c73_build_demand%");
+
+pm_demand_ext(t_all,i,"wood")$(m_year(t_all)>2100) = pm_demand_ext("y2100",i,"wood");
 
 p73_glo_wood(t_all) = sum(i,pm_demand_ext(t_all,i,"wood"));
 display p73_glo_wood;
