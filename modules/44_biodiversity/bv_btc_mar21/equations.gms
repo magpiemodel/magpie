@@ -6,7 +6,7 @@
 
 *' @equations
 
-*' The constraint `q44_cost_bv_loss(j2)` allows to introduce a price on biodiversity value loss. The total biodiversity value difference in each cluster is multiplied a cost factor.
+*' The constraint `q44_cost_bv_loss(j2)` allows to introduce a price on biodiversity value loss. The total biodiversity value difference in each cluster is multiplied with a cost factor.
  q44_cost_bv_loss(j2) .. vm_cost_bv_loss(j2)
  					=e=
  					v44_bv_loss(j2) * pc44_price_bv_loss;
