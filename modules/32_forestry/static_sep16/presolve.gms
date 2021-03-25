@@ -21,16 +21,16 @@ vm_carbon_stock.fx(j,"forestry",ag_pools) =
 
 *' Biodiversity value
 
-vm_bv.fx(j,"aff",potnatveg) =
-          v32_land(j,"aff",ac_mature) * fm_bii_coeff("secd_mature",potnatveg) * fm_luh2_side_layers(j,potnatveg)
-        + v32_land(j,"aff",ac_young) * fm_bii_coeff("secd_young",potnatveg) * fm_luh2_side_layers(j,potnatveg);
+vm_bv.fx(j,"aff_co2p",potnatveg) =
+          v32_land.l(j,"aff",ac_mature) * fm_bii_coeff("secd_mature",potnatveg) * fm_luh2_side_layers(j,potnatveg)
+        + v32_land.l(j,"aff",ac_young) * fm_bii_coeff("secd_young",potnatveg) * fm_luh2_side_layers(j,potnatveg);
 
-vm_bv.fx(j,"ndc",potnatveg) =
-          v32_land(j,"ndc",ac_mature) * fm_bii_coeff("secd_mature",potnatveg) * fm_luh2_side_layers(j,potnatveg)
-        + v32_land(j,"ndc",ac_young) * fm_bii_coeff("secd_young",potnatveg) * fm_luh2_side_layers(j,potnatveg);
+vm_bv.fx(j,"aff_ndc",potnatveg) =
+          v32_land.l(j,"ndc",ac_mature) * fm_bii_coeff("secd_mature",potnatveg) * fm_luh2_side_layers(j,potnatveg)
+        + v32_land.l(j,"ndc",ac_young) * fm_bii_coeff("secd_young",potnatveg) * fm_luh2_side_layers(j,potnatveg);
 
 vm_bv.fx(j,"plant",potnatveg) =
-          v32_land(j,"plant",ac) * fm_bii_coeff("timber",potnatveg) * fm_luh2_side_layers(j,potnatveg);
+          v32_land.l(j,"plant",ac) * fm_bii_coeff("timber",potnatveg) * fm_luh2_side_layers(j,potnatveg);
 
 
 *' Wood demand is also set to zero because forestry is not modeled in this realization.

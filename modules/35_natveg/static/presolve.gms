@@ -20,10 +20,14 @@ vm_carbon_stock.fx(j,"other",ag_pools) =
 
 
 *' The following equations calculate the biodiversity value for primary and secondary vegetation
-vm_bv.fx(j,"primary",potnatveg) =
+vm_bv.fx(j,"primforest",potnatveg) =
  					pcm_land(j,"primforest") * fm_bii_coeff("primary",potnatveg) * fm_luh2_side_layers(j,potnatveg);
 
-vm_bv.fx(j,"secondary",potnatveg) =
-          sum(ac_mature, v35_secdforest(j,ac_mature) + v35_other(j,ac_mature)) * fm_bii_coeff("secd_mature",potnatveg) * fm_luh2_side_layers(j,potnatveg)
-        + sum(ac_mature, v35_secdforest(j,ac_mature) + v35_other(j,ac_mature)) * fm_bii_coeff("secd_young",potnatveg) * fm_luh2_side_layers(j,potnatveg);
+vm_bv.fx(j,"secdforest",potnatveg) =
+          sum(ac_mature, v35_secdforest.l(j,ac_mature)) * fm_bii_coeff("secd_mature",potnatveg) * fm_luh2_side_layers(j,potnatveg)
+        + sum(ac_young, v35_secdforest.l(j,ac_mature)) * fm_bii_coeff("secd_young",potnatveg) * fm_luh2_side_layers(j,potnatveg);
+
+vm_bv.fx(j,"other",potnatveg) =
+          sum(ac_mature, v35_other.l(j,ac_mature)) * fm_bii_coeff("secd_mature",potnatveg) * fm_luh2_side_layers(j,potnatveg)
+        + sum(ac_young, v35_other.l(j,ac_mature)) * fm_bii_coeff("secd_young",potnatveg) * fm_luh2_side_layers(j,potnatveg);
 *' @stop
