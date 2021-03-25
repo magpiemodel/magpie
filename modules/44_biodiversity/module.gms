@@ -6,11 +6,11 @@
 
 *' @title Biodiversity
 *'
-*' @description In the biodiversity module biodiversity values are computed for each
-*' land cover type. The calculations are based on the Biodiversity Intactness Index (BII).
-*' BII values for each land cover type are multiplied by the respective land area and
-*' are weighted by cluster-specific range-rarity. The module also allows to introduce costs
-*' on the loss of the total biodiversity value.
+*' @description The biodiversity module estimates how the changes in land pools
+*' affect terrestrial biodiversity. It requires information about the land
+*' area of the different land pools provided by all land modules ([30_crop], [31_past], [32_forestry],
+*' [34_urban] and [35_natveg]), as well as module [10_land] about the potential natural vegetation.
+*'
 *'
 *' @authors Patrick v. Jeetze, Florian Humpenöder
 

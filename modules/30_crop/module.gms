@@ -6,11 +6,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-*' @title Cropland 
+*' @title Cropland
 
-*' @description The cropland module simulates the dynamics of cropland area and 
-*' agricultural crop production and calculates corresponding carbon contents of 
-*' the existing cropland. 
+*' @description The cropland module simulates the dynamics of cropland area and
+*' agricultural crop production and calculates corresponding carbon contents and of
+*' the biodiversity value of the existing cropland.
 
 *' @authors Jan Philipp Dietrich, Florian Humpenöder, Benjamin Bodirsky
 
