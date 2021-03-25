@@ -122,12 +122,8 @@ parameters
  oq35_prod_secdforest(t,j,type)                 Production of woody biomass from secondary forests (mio. tDM per yr)
  oq35_prod_primforest(t,j,type)                 Production of woody biomass from primary forests (mio. tDM per yr)
  oq35_prod_other(t,j,type)                      Production of woody biomass from other land (mio. tDM per yr)
-<<<<<<< HEAD
- oq35_cost_hvarea(t,i,type)                     blub
+ oq35_cost_hvarea(t,i,type)                     Cost of harvesting natural vegetation (mio. USD)
  oq35_bv_primary(t,j,potnatveg,type)            Biodiversity value of primary forest (Mha)
  oq35_bv_secondary(t,j,potnatveg,type)          Biodiversity value of secondary vegetation (Mha)
-=======
- oq35_cost_hvarea(t,i,type)                     Cost of harvesting natural vegetation (mio. USD)
->>>>>>> bf479664afd89f0461e8055ddcc45391ee51d80d
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
