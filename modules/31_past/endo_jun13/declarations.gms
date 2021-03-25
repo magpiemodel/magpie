@@ -21,7 +21,7 @@ parameters
  oq31_carbon(t,j,ag_pools,type)        Above ground carbon content calculation for pasture (mio tC)
  oq31_cost_prod_past(t,i,type)         Costs for putting animals on pastures (mio. USD05MER per yr)
  oq31_bv_manpast(t,j,potnatveg,type)   Biodiversity value for managed pastures
- oq31_bv_rangeland(t,j,potnatveg,type) Biodiversity value for managed pastures
+ oq31_bv_rangeland(t,j,potnatveg,type) Biodiversity value for rangeland
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

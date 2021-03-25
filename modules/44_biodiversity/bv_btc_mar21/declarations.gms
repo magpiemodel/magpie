@@ -5,7 +5,7 @@
 *** Contact: magpie@pik-potsdam.de
 
 parameters
- pc44_bv_weighted(j,landcover44)		        current range rarity weighted bii (Mha)
+ pc44_bv_weighted(j,landcover44)		        Current range rarity weighted bii (Mha)
  p44_price_bv_loss(t)			                biodiversity value loss price factor (US$ per ha of bv loss)
  pc44_price_bv_loss			                    biodiversity value loss price factor (US$ per ha of bv loss)
 ;
@@ -22,10 +22,10 @@ positive variables
 ;
 
 equations
- q44_bv_loss(j)                                 total biodiversity value loss constraint
- q44_diff_bv_landcover(j,landcover44)			biodiversity value loss constraint per land class
- q44_bv_weighted(j,landcover44)		            biodiversity value stock constraint
- q44_cost_bv_loss(j)			                biodiversity value loss cost constraint
+ q44_bv_loss(j)                                 zotal biodiversity value loss constraint (Mha)
+ q44_diff_bv_landcover(j,landcover44)			biodiversity value loss constraint per land class (Mha)
+ q44_bv_weighted(j,landcover44)		            biodiversity value stock constraint (Mha)
+ q44_cost_bv_loss(j)			                biodiversity value loss cost constraint (mio US$)
 ;
 
 
