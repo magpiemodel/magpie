@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### added
+- **44_biodiversity** New biodiversity module. The realization bv_btc_mar21 now allows to calculate an area-based biodiversity value across all land types. Switch `c44_price_bv_loss` to implement cost for biodiversity loss.
 - **15_food*** added 3 sigmoid food substitution scenarios
 - **56_ghg_policy** Automatic sets for scenarios
 - **60_bioenergy** Automatic sets for scenarios
