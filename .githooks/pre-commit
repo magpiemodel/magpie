@@ -1,19 +1,23 @@
 #!/usr/bin/env Rscript
 
+if(!requireNamespace("gms", quietly = TRUE)) install.packages("gms", repos = c("https://rse.pik-potsdam.de/r/packages/", "https://cloud.r-project.org"))
+
+# run codeCheck
+null <- gms::codeCheck(strict=TRUE)
+message("")
+
 # make sure that files are not too big
 
-bigfiles <- function(max=512) {
+maxfilesize <- function(max=512) {
   files <- union(system("git ls-tree -r HEAD --name-only", intern=TRUE),
                  system("git diff --cached --name-only", intern=TRUE))
   out <- data.frame(files=files,size=round(file.size(files)/1024,2))
   out <- out[!is.na(out$size),]
   out <- out[out$size > max,]
   if(nrow(out)>0) {
-    stop(nrow(out), " files with size > ",max,"kb detected: \n",paste0(out$files," (", out$size, "kb)", collapse = "\n"))
+    stop(nrow(out), " files with size > ",max,"kB detected: \n",paste0(out$files," (", out$size, "kB)", collapse = "\n"))
   }
-  message("All files are smaller than ",max,"kb")
+  message("All files are smaller than ",max,"kB\n")
 }
 
-bigfiles(512)
-
-
+maxfilesize(250)

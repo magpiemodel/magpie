@@ -12,7 +12,7 @@ positive variables
   v35_hvarea_secdforest(j,ac)                    Harvested area from secondary forest (mio. ha)
   v35_hvarea_other(j,ac)                         Harvested area from other land (mio. ha)
   v35_hvarea_primforest(j)                       Harvested area from primary forest (mio. ha)
-  vm_cost_hvarea_natveg(i)						blub
+  vm_cost_hvarea_natveg(i)						Cost of harvesting natural vegetation (mio. USD)
 ;
 
 
@@ -24,6 +24,6 @@ parameters
  ov35_hvarea_secdforest(t,j,ac,type) Harvested area from secondary forest (mio. ha)
  ov35_hvarea_other(t,j,ac,type)      Harvested area from other land (mio. ha)
  ov35_hvarea_primforest(t,j,type)    Harvested area from primary forest (mio. ha)
- ov_cost_hvarea_natveg(t,i,type)     blub
+ ov_cost_hvarea_natveg(t,i,type)     Cost of harvesting natural vegetation (mio. USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

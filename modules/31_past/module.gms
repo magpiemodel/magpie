@@ -12,7 +12,7 @@
 *' of pasture biomass and the carbon content of pasture land. Therefore, the
 *' module requires cellular information about the carbon density related to the
 *' different pasture carbon pools. Furthermore, it delivers regional production
-*' costs associated with pastures.
+*' costs associated with pastures and biodiversity values for pasture and rangeland.
 *'
 *' @authors Isabelle Weindl, Jan Philipp Dietrich
 
