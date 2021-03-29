@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "MAR04"
+identifier_flag = "MAR04Exo"
 cat(paste0("Building demand runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
@@ -44,6 +44,8 @@ for(c73_wood_scen in c("default")){
           cfg = setScenario(cfg,c(ssp,"NPI",scen))
 
           for (c73_build_demand in c("BAU","10pc","50pc","90pc")) {
+
+            cfg$gms$tc <- "exo"
 
             cfg$gms$c73_build_demand <- c73_build_demand
             cfg$gms$s15_elastic_demand <- 0
