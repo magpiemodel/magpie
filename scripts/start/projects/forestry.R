@@ -23,8 +23,8 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "MAR04Exo"
-cat(paste0("Building demand runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+identifier_flag = "MAR05"
+cat(paste0("Building demand runs with extra forest protection scenarios"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
@@ -45,30 +45,35 @@ for(c73_wood_scen in c("default")){
 
           for (c73_build_demand in c("BAU","10pc","50pc","90pc")) {
 
-            cfg$gms$tc <- "exo"
+            for(c35_protect_scenario in c("BH","HalfEarth")){
 
-            cfg$gms$c73_build_demand <- c73_build_demand
-            cfg$gms$s15_elastic_demand <- 0
+              cfg$gms$c35_protect_scenario <- c35_protect_scenario
 
-            if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
-            if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
+              #cfg$gms$tc <- "exo"
 
-            cfg$force_download <- TRUE
-            cfg$recalibrate <- "ifneeded"     # def = "ifneeded"
+              cfg$gms$c73_build_demand <- c73_build_demand
+              cfg$gms$s15_elastic_demand <- 0
 
-            if(scen=="ForestryOff")           scen_flag="Default"
-            if(scen=="ForestryEndo")          scen_flag="Forestry"
-            if(scen=="ForestryExo")           scen_flag="ForestryExo"
+              if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
+              if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
 
-            cfg$gms$c73_wood_scen = c73_wood_scen
+              cfg$force_download <- TRUE
+              cfg$recalibrate <- "ifneeded"     # def = "ifneeded"
 
-            cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",c73_build_demand)
-            cfg$output  = c("extra/timestep_duration")
+              if(scen=="ForestryOff")           scen_flag="Default"
+              if(scen=="ForestryEndo")          scen_flag="Forestry"
+              if(scen=="ForestryExo")           scen_flag="ForestryExo"
 
-            xx = c(xx,cfg$title)
-            cfg$gms$s80_optfile <- 1
-            cfg$results_folder = "output/:title:"
-            start_run(cfg,codeCheck=FALSE)
+              cfg$gms$c73_wood_scen = c73_wood_scen
+
+              cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",c35_protect_scenario,"_",c73_build_demand)
+              cfg$output  = c("extra/timestep_duration")
+
+              xx = c(xx,cfg$title)
+              cfg$gms$s80_optfile <- 1
+              cfg$results_folder = "output/:title:"
+              start_run(cfg,codeCheck=FALSE)
+            }
           }
         }
      }
