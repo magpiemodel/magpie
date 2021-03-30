@@ -20,19 +20,6 @@ loop(t_all$(m_year(t_all) >= sm_fix_SSP2 AND m_year(t_all) <= 2150),
           ;
 );
 
-p73_urban_pop(t_all,i,build_scen) = sum(i_to_iso(i,iso), im_pop_iso(t_all,iso)) * p73_urban_share(t_all,i);
-
-p73_building_timber(t_all,iso,build_scen)
-        =
-** Mio Cap
-        (im_pop_iso(t_all,iso) - im_pop_iso(t_all-1,iso))
-** Req per cap tKg/cap ((kg/cap) / 1e3)
-        * 7440 / 1000
-** Scenario
-        * p73_dem_scen(build_scen);
-** We don't [* 2] afterwards wher Galina assumes that 50% of roundwood is wasted during processing
-
-
 ** Aggregate from ISO country level to MAgPIE region level
 p73_timber_demand_gdp_pop(t_all,i,kforestry) = sum((i_to_iso(i,iso),kforestry_to_woodprod(kforestry,total_wood_products)),p73_forestry_demand_prod_specific(t_all,iso,total_wood_products)) * s73_timber_demand_switch ;
 
@@ -60,30 +47,30 @@ $endif
 ** p73_timber_demand_gdp_pop is in mio m^3
 ** pm_demand_ext in mio ton DM
 ** Hold constraint beyond 2150 - First every time step gets 2150 values
+**** Extend for Galina et al demand scenarios
 pm_demand_ext(t_ext,i,kforestry) = round(p73_timber_demand_gdp_pop("y2150",i,kforestry) * f73_volumetric_conversion(kforestry),3);
 ** overwrite timesteps below 2150 with actual values
 pm_demand_ext(t_all,i,kforestry) = round(p73_timber_demand_gdp_pop(t_all,i,kforestry) * f73_volumetric_conversion(kforestry),3);
 
-**** Extend for Galina et al demand scenarios
+p73_demand_modifier(t_all) = 1;
+p73_fraction(t_all) = s73_expansion/80;
 
-$ontext
-loop (t_all$(m_year(t_all)>=sm_fix_SSP2 AND m_year(t_all) <= 2100),
-   p73_dampener = 0.00031;
-** Dampeneer = 1/sum(1to80) (i.e. 2020-2100)
-   display p73_dampener;
-   pm_demand_ext(t_all,i,"wood")$(m_year(t_all)=2020) =
-   pm_demand_ext(t_all,i,"wood")
-   +
-   p73_crude_build_demand("%c73_build_demand%") * (im_pop(t_all,i)/sum(i2, im_pop(t_all,i2))) * p73_dampener * (1);
-
-  pm_demand_ext(t_all,i,"wood") =
-  pm_demand_ext(t_all,i,"wood")
-  +
-  p73_crude_build_demand("%c73_build_demand%") * (im_pop(t_all,i)/sum(i2, im_pop(t_all,i2))) * p73_dampener * (m_year(t_all) - 2020);
+loop(t_all$(m_year(t_all)>2020 AND m_year(t_all)<=2100),
+ p73_demand_modifier(t_all) = p73_demand_modifier(t_all) + p73_fraction(t_all);
+ p73_fraction(t_all+1)      = p73_fraction(t_all) + (s73_expansion/80 * 5);
 );
-$offtext
+p73_fraction(t_all)$(m_year(t_all)>2100)        = p73_fraction("y2100");
+p73_demand_modifier(t_all)$(m_year(t_all)>2100) = p73_demand_modifier("y2100");
+display p73_fraction;
+display p73_demand_modifier;
 
-pm_demand_ext(t_all,i,"wood") = pm_demand_ext(t_all,i,"wood") + f73_construction_wood_demand(t_all,i,"%c09_pop_scenario%","%c73_build_demand%");
+if(s73_expansion = 0,
+  pm_demand_ext(t_all,i,"wood") = pm_demand_ext(t_all,i,"wood") + f73_construction_wood_demand(t_all,i,"%c09_pop_scenario%","%c73_build_demand%");
+  );
+
+if(s73_expansion > 0,
+  pm_demand_ext(t_all,i,"wood") = pm_demand_ext(t_all,i,"wood") * p73_demand_modifier(t_all);
+  );
 
 pm_demand_ext(t_all,i,"wood")$(m_year(t_all)>2100) = pm_demand_ext("y2100",i,"wood");
 
