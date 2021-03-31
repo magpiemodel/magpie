@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "MAR05"
+identifier_flag = "MAR05a"
 cat(paste0("Building demand runs with extra forest protection scenarios"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
@@ -47,7 +47,7 @@ for(c73_wood_scen in c("default")){
 
             for(c35_protect_scenario in c("BH")){
 
-              for(s73_expansion in c(1,2,4,9,14,19)){
+              for(s73_expansion in c(0)){
 
                 cfg$gms$c35_protect_scenario <- c35_protect_scenario
 
@@ -70,13 +70,13 @@ for(c73_wood_scen in c("default")){
 
                 cfg$gms$c73_wood_scen = c73_wood_scen
 
-                cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",as.character(1+s73_expansion),"x","_",c73_build_demand)
+                cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",c73_build_demand)
                 cfg$output  = c("extra/timestep_duration")
 
                 xx = c(xx,cfg$title)
                 cfg$gms$s80_optfile <- 1
                 cfg$results_folder = "output/:title:"
-                start_run(cfg,codeCheck=FALSE)
+                #start_run(cfg,codeCheck=FALSE)
               }
             }
           }
