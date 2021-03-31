@@ -53,6 +53,15 @@ q73_prod_woodfuel(j2)..
   +
   v73_prod_heaven_timber(j2,"woodfuel");
 
+q73_prod_constr(j2)..
+  vm_prod(j2,"constr_wood")
+  =g=
+  vm_prod_forestry(j2,"constr_wood")
+  +
+  sum((land_natveg),vm_prod_natveg(j2,land_natveg,"constr_wood"))
+  +
+  v73_prod_heaven_timber(j2,"constr_wood");
+
 *' Production of residues is calculated based on `s73_residue_ratio`. This fraction
 *' of industrial roundwood production is assumed to be lost during harvesting processes.
 *' USDA reports that ca. 30% of roundwood harvested are residues (@oswalt2019forest).
@@ -64,7 +73,7 @@ q73_prod_woodfuel(j2)..
 q73_prod_residues(j2)..
   v73_prod_residues(j2)
   =l=
-  vm_prod(j2,"wood") * s73_residue_ratio
+  (vm_prod(j2,"wood") + vm_prod(j2,"constr_wood")) * s73_residue_ratio
   ;
 
 *** EOF equations.gms ***

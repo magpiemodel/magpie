@@ -5,6 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+f21_self_suff(t_all,i,"constr_wood") = f21_self_suff(t_all,i,"wood");
+f21_exp_shr(t_all,i,"constr_wood") = f21_exp_shr(t_all,i,"wood");
+f21_trade_balanceflow(t_all,"constr_wood") = f21_trade_balanceflow(t_all,"wood");
+f21_trade_margin(i,"constr_wood") = f21_trade_margin(i,"wood");
+f21_trade_tariff(i,"constr_wood") = f21_trade_tariff(i,"wood");
+
 i21_trade_bal_reduction(t_all,k_trade)=f21_trade_bal_reduction(t_all,"easytrade","%c21_trade_liberalization%");
 i21_trade_bal_reduction(t_all,k_hardtrade21)=f21_trade_bal_reduction(t_all,"hardtrade","%c21_trade_liberalization%");
 

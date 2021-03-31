@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c35_protect_scenario  WDPA
+$setglobal c35_protect_scenario  BH
 $setglobal c35_ad_policy  npi
 $setglobal c35_aolc_policy  npi
 

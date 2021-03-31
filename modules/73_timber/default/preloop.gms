@@ -66,6 +66,7 @@ display p73_demand_modifier;
 
 if(s73_expansion = 0,
   pm_demand_ext(t_all,i,"constr_wood") = f73_construction_wood_demand(t_all,i,"%c09_pop_scenario%","%c73_build_demand%");
+  pm_demand_ext(t_all,i,"constr_wood")$(m_year(t_all)<=2020) = pm_demand_ext("y2025",i,"constr_wood");
   );
 
 if(s73_expansion > 0,
@@ -75,4 +76,6 @@ if(s73_expansion > 0,
 pm_demand_ext(t_all,i,kforestry)$(m_year(t_all)>2100) = pm_demand_ext("y2100",i,kforestry);
 
 p73_glo_wood(t_all,kforestry) = sum(i,pm_demand_ext(t_all,i,kforestry));
+
+display pm_demand_ext;
 display p73_glo_wood;

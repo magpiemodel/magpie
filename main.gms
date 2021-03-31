@@ -164,7 +164,11 @@ $title magpie
 * 
 * Used data set: additional_data_rev3.99.tgz
 * md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* 
+* Used data set: exo_tau_20210329.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/magpie/users/mishra/projects/abhimishr/exo_tau_BAU_run/tgz
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -197,7 +201,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Wed Mar 24 17:11:52 2021
+* Last modification (input data): Wed Mar 31 15:53:33 2021
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -223,7 +227,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  MAR01_Forestry_90pc
+$setglobal c_title  MAR05a_Forestry_BAU
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
