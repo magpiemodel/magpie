@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -106,12 +106,19 @@ q20_processing_substitution_brans(i2) ..
 *' are specific for the different conversion routes and are collected, interpolated,
 *' and extrapolated from the related literature (e.g. @adanacioglu_profitability_2011, @pikaar_decoupling_2018, @valco_thecost_2016)
 *' complemented with best educated guess by the module authors.
+*' Costs for single-cell protein production (scp) are handled differently because 
+*' scp production with hydrogen as substrate (scp_hydrogen) has no land requirements, and thus 
+*' would have no costs (`i20_processing_conversion_factors` is 0 for scp_hydrogen).
+*' All other scp production routes (scp_methane,scp_sugar,scp_cellulose) have land requirements 
+*' mapped to specific crops (`f20_scp_conversionmatrix`). 
 
 q20_processing_costs(i2) ..
  vm_cost_processing(i2) =e=
 sum((ksd,processing20,kpr), v20_dem_processing(i2,processing20,kpr)
          *sum(ct,i20_processing_conversion_factors(ct,processing20,ksd,kpr))
-         * i20_processing_unitcosts(ksd,kpr));
+         * i20_processing_unitcosts(ksd,kpr))
+         + (vm_prod_reg(i2,"scp") * sum(scptype, sum(ct, i20_scp_type_shr(ct,scptype)) * f20_scp_unitcosts(scptype)));
+         ;
 
 *' Finally, we assume that any substitution of one product by another,
 *' diverging from our initial demand estimates, comes at a loss of utility.

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -21,6 +21,8 @@ vm_land.fx(j,"other") = sum(ac, v35_other.l(j,ac));
 vm_landdiff_natveg.fx = 0;
 
 *Fix natveg harvest
-vm_hvarea_secdforest.fx(j,ac)  = 0;
-vm_hvarea_other.fx(j,ac)       = 0;
-vm_hvarea_primforest.fx(j)     = 0;
+v35_hvarea_secdforest.fx(j,ac)  = 0;
+v35_hvarea_other.fx(j,ac)       = 0;
+v35_hvarea_primforest.fx(j)     = 0;
+
+vm_cost_hvarea_natveg.fx(i) = 0;

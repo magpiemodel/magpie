@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -16,7 +16,8 @@
 
 sets
 
-   i all economic regions /CAZ,CHA,EUR,IND,JPN,LAM,MEA,NEU,OAS,REF,SSA,USA/
+   i all economic regions /
+       CAZ,CHA,EUR,IND,JPN,LAM,MEA,NEU,OAS,REF,SSA,USA /
 
    iso list of iso countries /
        ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
@@ -57,10 +58,9 @@ sets
        OAS_151*OAS_172,
        REF_173*REF_179,
        SSA_180*SSA_190,
-       USA_191*USA_200/
+       USA_191*USA_200 /
 
-   cell(i,j) number of LPJ cells per region i
-      /
+   cell(i,j) number of LPJ cells per region i /
        CAZ . CAZ_1*CAZ_28
        CHA . CHA_29*CHA_52
        EUR . EUR_53*EUR_62
@@ -72,11 +72,9 @@ sets
        OAS . OAS_151*OAS_172
        REF . REF_173*REF_179
        SSA . SSA_180*SSA_190
-       USA . USA_191*USA_200
-      /
+       USA . USA_191*USA_200 /
 
-   i_to_iso(i,iso) mapping regions to iso countries
-      /
+   i_to_iso(i,iso) mapping regions to iso countries /
        CAZ . (AUS,CAN,HMD,NZL,SPM)
        CHA . (CHN,HKG,MAC,TWN)
        EUR . (ALA,AUT,BEL,BGR,CYP,CZE,DEU,DNK,ESP,EST)
@@ -109,8 +107,8 @@ sets
        SSA . (MYT,NAM,NER,NGA,REU,RWA,SEN,SHN,SLE,SOM)
        SSA . (SSD,STP,SWZ,SYC,TCD,TGO,TZA,UGA,ZAF,ZMB)
        SSA . (ZWE)
-       USA . (USA)
-      /
+       USA . (USA) /
+
 ;
 *######################### R SECTION END (SETS) ################################
 *###############################################################################
@@ -254,10 +252,18 @@ sets
         / si0, nsi0 /
 
 ***Forestry**
-   ac Age classes  / ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
+  ac Age classes  / ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
                     ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,ac95,ac100,
                     ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,
                     ac150,ac155,acx /
+
+  ac_young(ac) age classes young
+                  / ac5,ac10,ac15,ac20,ac25,ac30 /
+
+  ac_mature(ac) age classes mature
+                     / ac35,ac40,ac45,ac50,ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,
+                       ac95,ac100,ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,
+                       ac145,ac150,ac155,acx /
 
   ac_est(ac) Dynamic subset of age classes for establishment
 

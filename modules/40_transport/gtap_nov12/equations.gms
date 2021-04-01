@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -30,7 +30,7 @@ q40_cost_transport(j2,k) ..
 
 *'
 *' ![Travel time to major cities (in hours and days)
-*' [@nelson_transport_2008]](travel_time_map.png){ width=100% }
+*' [@nelson_transport_2008]](travel_time_map.jpg){ width=100% }
 *'
 *' Relative transport costs `f40_transport_costs(k)` are calibrated using total
 *' agricultural transport costs taken from the GTAP 7 database (see @narayanan_gtap7_2008
