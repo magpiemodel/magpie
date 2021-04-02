@@ -30,7 +30,7 @@ q40_cost_transport(j2,k) ..
 
 *'
 *' ![Travel time to major cities (in hours and days)
-*' [@nelson_transport_2008]](travel_time_map.png){ width=100% }
+*' [@nelson_transport_2008]](travel_time_map.jpg){ width=100% }
 *'
 *' Relative transport costs `f40_transport_costs(k)` are calibrated using total
 *' agricultural transport costs taken from the GTAP 7 database (see @narayanan_gtap7_2008
