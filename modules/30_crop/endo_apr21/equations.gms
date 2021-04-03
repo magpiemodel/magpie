@@ -12,13 +12,15 @@
  q30_cropland(j2)  ..
    sum((kcr,w), vm_area(j2,kcr,w)) =e= vm_land(j2,"crop");
 
-*' We assume that crop production can only take place on suitable cropland area;
-*' we use a suitability index (SI) map from @ramankutty_suitability_2002 to exclude areas
-*' from cropland production that have low suitability, e.g. due to strong slopes.
-*' The cultivated area therefore has to be smaller than the "si0" cropland area:
+*' We assume that crop production can only take place on suitable cropland area.
+*' We use a suitability index (SI) map from @zabel_global_2014 to exclude areas
+*' from cropland production that have a low suitability, e.g. due to steep slopes,
+*' to estimate the available cropland area. The cultivated area therefore has
+*' to be smaller than the available cropland area. Moreover, the available cropland
+*' can be reduced by setting aside cropland for other land cover types.
 
- q30_suitability(j2)  ..
-   vm_land(j2,"crop") =l= f30_land_si(j2,"si0");
+ q30_avl_cropland(j2)  ..
+   vm_land(j2,"crop") =l= p30_avl_cropland(j2);
 
 *' As additional constraints minimum and maximum rotational constraints limit
 *' the placing of crops. On the one hand, these rotational constraints reflect

@@ -36,10 +36,10 @@ parameters
  ov_cost_bv_loss(t,j,type)                    biodiversity value loss cost (mio US$)
  ov_bv(t,j,landcover44,potnatveg,type)        biodiversity value for all land cover classes (unweighted) (Mha)
  ov44_bv_weighted(t,j,landcover44,type)       range rarity weighted biodiversity value (Mha)
- oq44_bv_loss(t,j,type)                       total biodiversity value loss constraint
- oq44_diff_bv_landcover(t,j,landcover44,type) biodiversity value loss constraint per land class
- oq44_bv_weighted(t,j,landcover44,type)       biodiversity value stock constraint
- oq44_cost_bv_loss(t,j,type)                  biodiversity value loss cost constraint
+ oq44_bv_loss(t,j,type)                       zotal biodiversity value loss constraint (Mha)
+ oq44_diff_bv_landcover(t,j,landcover44,type) biodiversity value loss constraint per land class (Mha)
+ oq44_bv_weighted(t,j,landcover44,type)       biodiversity value stock constraint (Mha)
+ oq44_cost_bv_loss(t,j,type)                  biodiversity value loss cost constraint (mio US$)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

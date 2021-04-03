@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### added
+- **30_crop** Added option to set aside share of the available cropland for biodiversity and ecosystem services. New switches `s30_set_aside_shr` and `c30_set_aside_target` to specify the share that should be set aside and the target year.
+- **30_crop** Changed input data regarding cropland suitability. Added new switch `c30_marginal_land`, which provides different options for including marginal cropland.
+
+## [4.3.3] - 2021-03-30
+
+### added
 - **44_biodiversity** New biodiversity module. The realization bv_btc_mar21 now allows to calculate an area-based biodiversity value across all land types. Switch `c44_price_bv_loss` to implement cost for biodiversity loss.
 - **15_food*** added 3 sigmoid food substitution scenarios
 - **56_ghg_policy** Automatic sets for scenarios
@@ -19,7 +25,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### fixed
 - **60_bioenergy** Minimal bioenergy demand
-
 
 ## [4.3.2] - 2021-03-17
 

@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description The endo_jun13 realization calculates the crop specific
+*' @description The endo_apr21 realization calculates the crop specific
 *' agricultural land use endogenously based on yield data coming from the
 *' module [14_yields] and the rotational as well as suitability constrains
 *' stated in the input data of the module.
@@ -16,14 +16,19 @@
 *' [41_area_equipped_for_irrigation], [42_water_demand], [50_nr_soil_budget],
 *' [53_methane] and [59_som].
 
+*' This realisation also includes the option to set aside a given share of
+*' the total available cropland for other land cover classes (by a given target
+*' year), in order to provide species habitats and to benefit from ecosystem
+*' services in agricultural landscapes.
+
 *' @limitations There are currently no known limitations of this realization.
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/30_crop/endo_jun13/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/30_crop/endo_jun13/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/30_crop/endo_jun13/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/30_crop/endo_jun13/equations.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/30_crop/endo_jun13/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/30_crop/endo_jun13/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/30_crop/endo_jun13/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/30_crop/endo_apr21/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/30_crop/endo_apr21/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/30_crop/endo_apr21/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/30_crop/endo_apr21/equations.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/30_crop/endo_apr21/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/30_crop/endo_apr21/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/30_crop/endo_apr21/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
