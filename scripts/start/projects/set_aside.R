@@ -22,29 +22,28 @@ source("config/default.cfg")
 cfg$qos <- "priority"
 
 
-# biodiversity scenarios
-#bvPriceScen <- c("p0","p1_p10","p10_p100","p10_p10000")
-bvPriceScen <- c("p0", "p10_p10000")
+# set-aside scenarios
+setAsideScen <- c(0, 0.2)
 
 # Test different price levels
 
-  for (pricelevel in bvPriceScen) {
+  for (s in setAsideScen) {
 
     # basic scenario setting
     cfg <- setScenario(cfg, c("SSP2", "NPI"))
     cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
     cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
 
-    # biodiversity price
-    cfg$gms$c44_price_bv_loss <- pricelevel
+    # set aside share
+    cfg$gms$s30_set_aside_shr <- s
+    # target year
+    cfg$gms$c30_set_aside_target <- "by2030"
 
     # Updating the title
-    cfg$title = paste0("SSP2_NPI_bv_",pricelevel)
+    cfg$title = paste0("SSP2_NPI_set_aside_",s)
 
     # Start run
     start_run(cfg=cfg,codeCheck=TRUE)
 
   }
-
-
 

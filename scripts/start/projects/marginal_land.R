@@ -22,24 +22,23 @@ source("config/default.cfg")
 cfg$qos <- "priority"
 
 
-# biodiversity scenarios
-#bvPriceScen <- c("p0","p1_p10","p10_p100","p10_p10000")
-bvPriceScen <- c("p0", "p10_p10000")
+# marginal land scenarios
+marginalLandScen <- c("all_marginal", "half_marginal", "no_marginal" )
 
 # Test different price levels
 
-  for (pricelevel in bvPriceScen) {
+  for (m in marginalLandScen) {
 
     # basic scenario setting
     cfg <- setScenario(cfg, c("SSP2", "NPI"))
     cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
     cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
 
-    # biodiversity price
-    cfg$gms$c44_price_bv_loss <- pricelevel
+    #marginal land scenario
+    cfg$gms$c30_marginal_land <- m
 
     # Updating the title
-    cfg$title = paste0("SSP2_NPI_bv_",pricelevel)
+    cfg$title = paste0("SSP2_NPI_",m)
 
     # Start run
     start_run(cfg=cfg,codeCheck=TRUE)
