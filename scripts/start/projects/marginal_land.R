@@ -27,7 +27,7 @@ marginalLandScen <- c("all_marginal", "half_marginal", "no_marginal" )
 
 # Test different price levels
 
-  for (m in marginalLandScen) {
+  for (marg in marginalLandScen) {
 
     # basic scenario setting
     cfg <- setScenario(cfg, c("SSP2", "NPI"))
@@ -35,10 +35,10 @@ marginalLandScen <- c("all_marginal", "half_marginal", "no_marginal" )
     cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
 
     #marginal land scenario
-    cfg$gms$c30_marginal_land <- m
+    cfg$gms$c30_marginal_land <- marg
 
     # Updating the title
-    cfg$title = paste0("SSP2_NPI_",m)
+    cfg$title = paste0("SSP2_NPI_",marg)
 
     # Start run
     start_run(cfg=cfg,codeCheck=TRUE)

@@ -24,10 +24,11 @@ cfg$qos <- "priority"
 
 # set-aside scenarios
 setAsideScen <- c(0, 0.2)
+setAsideNames <- c("0per", "20per")
 
 # Test different price levels
 
-  for (s in setAsideScen) {
+  for (s in 1:length(setAsideScen)) {
 
     # basic scenario setting
     cfg <- setScenario(cfg, c("SSP2", "NPI"))
@@ -35,12 +36,12 @@ setAsideScen <- c(0, 0.2)
     cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
 
     # set aside share
-    cfg$gms$s30_set_aside_shr <- s
+    cfg$gms$s30_set_aside_shr <- setAsideScen[s]
     # target year
     cfg$gms$c30_set_aside_target <- "by2030"
 
     # Updating the title
-    cfg$title = paste0("SSP2_NPI_set_aside_",s)
+    cfg$title = paste0("SSP2_NPI_set_aside_",setAsideNames[s])
 
     # Start run
     start_run(cfg=cfg,codeCheck=TRUE)

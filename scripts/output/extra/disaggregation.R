@@ -10,15 +10,17 @@
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
-#Version 1.03 - Jan Philipp Dietrich
+#Version 1.03 - Jan Philipp Dietrich, Patrick v. Jeetze
 # 1.00: first working version
 # 1.01: execution of reshape_folder function added at the end
 # 1.02: uses now the land function to read the simulated land input
 # 1.03: introduced function interpolate, all possible input is read from the GDX file now
+# 1.04: changed to function interpolateAvlCroplandWeighted
 
 library(lucode2)
 library(magpie4)
 library(luscale)
+library(dplyr)
 
 ############################# BASIC CONFIGURATION #######################################
 land_lr_file     <- "avl_land_t.cs3"
@@ -27,8 +29,11 @@ land_hr_out_file           <- "cell.land_0.5.mz"
 land_hr_share_out_file     <- "cell.land_0.5_share.mz"
 croparea_hr_share_out_file <- "cell.croparea_0.5_share.mz"
 
-prev_year        <- "y1985"            #timestep before calculations in MAgPIE
-in_folder        <- "modules/10_land/input"
+year_ini        <- "y1985"            # timestep before calculations in MAgPIE
+
+# input data directories
+dir_land        <- "modules/10_land/input"  # input from land module
+dir_crop        <- "modules/30_crop/endo_apr21/input" # input from crop module
 
 if(!exists("source_include")) {
   sum_spam_file    <- "0.5-to-n200_sum.spam"
@@ -67,20 +72,31 @@ print(sum_spam_file)
 gdx          <- path(outputdir,"fulldata.gdx")
 land_ini_lr  <- readGDX(gdx,"f10_land","f_land", format="first_found")[,"y1995",]
 land_lr      <- land(gdx,sum=FALSE,level="cell")
-land_ini_hr  <- read.magpie(path(in_folder,land_hr_file))[,"y1995",]
+land_ini_hr  <- read.magpie(path(dir_land,land_hr_file))[,"y1995",]
 land_ini_hr  <- land_ini_hr[,,getNames(land_lr)]
 if(any(land_ini_hr < 0)) {
   warning(paste0("Negative values in inital high resolution dataset detected and set to 0. Check the file ",land_hr_file))
   land_ini_hr[which(land_ini_hr < 0,arr.ind = T)] <- 0
 }
+avl_cropland_lr <- path(dir_crop, "avl_cropland.cs3")           # available cropland (low resolution)
+avl_cropland_hr <- path(dir_crop, "avl_cropland_0.5.mz")        # available cropland (high resolution)
+marginal_land <- cfg$gms$c30_marginal_land                      # marginal land scenario
+set_aside_shr <- cfg$gms$s30_set_aside_shr                      # set aside share (default: 0)
+target_year <- cfg$gms$c30_set_aside_target                     # target year of set aside policy (default: "none")
+set_aside_fader <- select(read.csv(path(dir_crop, "f30_set_aside_fader.csv"), row.names = 1),target_year)
 
-# Start interpolation (use interpolate from luscale)
+# Start interpolation (use interpolateAvlCroplandWeighted from luscale)
 print("Disaggregation")
-land_hr <- interpolate( x          = land_lr,
-                        x_ini_lr   = land_ini_lr,
-                        x_ini_hr   = land_ini_hr,
-                        spam       = path(outputdir,sum_spam_file),
-                        prev_year  = prev_year)
+land_hr <- interpolateAvlCroplandWeighted( x          = land_lr,
+                                           x_ini_lr   = land_ini_lr,
+                                           x_ini_hr   = land_ini_hr,
+                                           avl_cropland_lr = avl_cropland_lr,
+                                           avl_cropland_hr = avl_cropland_hr,
+                                           spam       = path(outputdir,sum_spam_file),
+                                           marginal_land = marginal_land,
+                                           set_aside_shr = set_aside_shr,
+                                           set_aside_fader = NULL,
+                                           year_ini  = year_ini)
 
 
 # Write outputs
@@ -108,7 +124,7 @@ print("Disaggregation crop types")
 # get rid of y1985
 land_hr  <- land_hr[,-1,]
 
-# total crop tpye specific croparea
+# total crop type specific land area
 area     <- croparea(gdx,level="cell",products="kcr",product_aggr=FALSE,water_aggr = FALSE)
 
 # share of crop types in terms of croparea
