@@ -46,7 +46,7 @@ $offdelim
 ********* AVAILABLE CROPLAND *******************************************
 
 scalar
-s30_set_aside_shr   Share of available cropland that is witheld for other land cover types / 0 /
+s30_set_aside_shr   Share of available cropland that is witheld for other land cover types (unitless) / 0 /
 ;
 
 table f30_avl_cropland(j,marginal_land30) Available land area for cropland (mio. ha)
@@ -55,7 +55,7 @@ $include "./modules/30_crop/endo_apr21/input/avl_cropland.cs3"
 $offdelim
 ;
 
-table f30_set_aside_fader(t_all,set_aside_target30) Fader for share of set aside cropland
+table f30_set_aside_fader(t_all,set_aside_target30) Fader for share of set aside cropland (unitless)
 $ondelim
 $include "./modules/30_crop/endo_apr21/input/f30_set_aside_fader.csv"
 $offdelim
