@@ -78,8 +78,7 @@ if(any(land_ini_hr < 0)) {
   warning(paste0("Negative values in inital high resolution dataset detected and set to 0. Check the file ",land_hr_file))
   land_ini_hr[which(land_ini_hr < 0,arr.ind = T)] <- 0
 }
-avl_cropland_lr <- path(dir_crop, "avl_cropland.cs3")           # available cropland (low resolution)
-avl_cropland_hr <- path(dir_crop, "avl_cropland_0.5.mz")        # available cropland (high resolution)
+avl_cropland_hr <- path(outputdir, "avl_cropland_0.5.mz")       # available cropland (at high resolution)
 marginal_land <- cfg$gms$c30_marginal_land                      # marginal land scenario
 set_aside_shr <- cfg$gms$s30_set_aside_shr                      # set aside share (default: 0)
 target_year <- cfg$gms$c30_set_aside_target                     # target year of set aside policy (default: "none")
@@ -90,12 +89,11 @@ print("Disaggregation")
 land_hr <- interpolateAvlCroplandWeighted( x          = land_lr,
                                            x_ini_lr   = land_ini_lr,
                                            x_ini_hr   = land_ini_hr,
-                                           avl_cropland_lr = avl_cropland_lr,
                                            avl_cropland_hr = avl_cropland_hr,
                                            spam       = path(outputdir,sum_spam_file),
                                            marginal_land = marginal_land,
                                            set_aside_shr = set_aside_shr,
-                                           set_aside_fader = NULL,
+                                           set_aside_fader = set_aside_fader,
                                            year_ini  = year_ini)
 
 
