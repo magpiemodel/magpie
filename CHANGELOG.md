@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### changed
+
+### added
+
+### removed
+
+### fixed
+
+
+## [4.3.3] - 2021-03-30
+
 ### added
 - **44_biodiversity** New biodiversity module. The realization bv_btc_mar21 now allows to calculate an area-based biodiversity value across all land types. Switch `c44_price_bv_loss` to implement cost for biodiversity loss.
 - **15_food*** added 3 sigmoid food substitution scenarios
@@ -210,7 +221,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.3.2...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.3.3...develop
+[4.3.2]: https://github.com/magpiemodel/magpie/compare/v4.3.2...v4.3.3
 [4.3.2]: https://github.com/magpiemodel/magpie/compare/v4.3.1...v4.3.2
 [4.3.1]: https://github.com/magpiemodel/magpie/compare/v4.3.0...v4.3.1
 [4.3.0]: https://github.com/magpiemodel/magpie/compare/v4.2.1...v4.3.0
