@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "MAR05b"
+identifier_flag = "MAR06"
 cat(paste0("Building demand runs with extra forest protection scenarios"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
@@ -43,42 +43,49 @@ for(c73_wood_scen in c("default")){
 
           cfg = setScenario(cfg,c(ssp,"NPI",scen))
 
-          for (c73_build_demand in c("BAU")) {
+          for(c21_trade_liberalization in c("l909090r808080","l908080r807070")) {
 
-            for(c35_protect_scenario in c("BH")){
+            if(c21_trade_liberalization=="l909090r808080")    trade_flag="DefTrade"
+            if(c21_trade_liberalization=="l908080r807070")    trade_flag="LibTrade"
 
-              for(s73_expansion in c(0)){
+            for (c73_build_demand in c("BAU","10pc", "50pc", "90pc")) {
 
-                cfg$gms$c35_protect_scenario <- c35_protect_scenario
+              for(c35_protect_scenario in c("WDPA","BH","LW","HalfEarth")){
 
-                cfg$gms$s73_expansion <- s73_expansion
+                for(s73_expansion in c(0)){
 
-                #cfg$gms$tc <- "exo"
+                  cfg$gms$c35_protect_scenario <- c35_protect_scenario
 
-                cfg$gms$c73_build_demand <- c73_build_demand
-                cfg$gms$s15_elastic_demand <- 0
+                  cfg$gms$s73_expansion <- s73_expansion
 
-                if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
-                if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
+                  #cfg$gms$tc <- "exo"
 
-                cfg$force_download <- TRUE
-                cfg$recalibrate <- "ifneeded"     # def = "ifneeded"
+                  cfg$gms$c73_build_demand <- c73_build_demand
+                  cfg$gms$s15_elastic_demand <- 0
 
-                if(scen=="ForestryOff")           scen_flag="Default"
-                if(scen=="ForestryEndo")          scen_flag="Forestry"
-                if(scen=="ForestryExo")           scen_flag="ForestryExo"
+                  if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
+                  if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
 
-                cfg$gms$c73_wood_scen = c73_wood_scen
+                  cfg$force_download <- TRUE
+                  cfg$recalibrate <- "ifneeded"     # def = "ifneeded"
 
-                cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",c73_build_demand)
-                cfg$output  = c("extra/timestep_duration")
+                  if(scen=="ForestryOff")           scen_flag="Default"
+                  if(scen=="ForestryEndo")          scen_flag="Forestry"
+                  if(scen=="ForestryExo")           scen_flag="ForestryExo"
 
-                xx = c(xx,cfg$title)
-                cfg$gms$s80_optfile <- 1
-                cfg$results_folder = "output/:title:"
-                start_run(cfg,codeCheck=FALSE)
+                  cfg$gms$c73_wood_scen = c73_wood_scen
+
+                  cfg$title   = paste0(identifier_flag,"_",trade_flag,"_",c73_build_demand,"_",c35_protect_scenario)
+                  cfg$output  = c("extra/timestep_duration")
+
+                  xx = c(xx,cfg$title)
+                  cfg$gms$s80_optfile <- 1
+                  cfg$results_folder = "output/:title:"
+                  #start_run(cfg,codeCheck=FALSE)
+                }
               }
             }
+
           }
         }
      }
