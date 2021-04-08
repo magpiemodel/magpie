@@ -96,7 +96,6 @@ land_hr <- interpolateAvlCroplandWeighted( x          = land_lr,
                                            set_aside_fader = set_aside_fader,
                                            year_ini  = year_ini)
 
-
 # Write outputs
 
 print("Write outputs cell.land")
