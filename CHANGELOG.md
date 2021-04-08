@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### changed
+
+### added
+
+### removed
+
+### fixed
+
+
+## [4.3.3] - 2021-03-30
+
 ### added
 - **30_crop** Added option to set aside share of the available cropland for biodiversity and ecosystem services. New switches `s30_set_aside_shr` and `c30_set_aside_target` to specify the share that should be set aside and the target year.
 - **30_crop** Changed input data regarding cropland suitability. Added new switch `c30_marginal_land`, which provides different options for including marginal cropland.
@@ -215,7 +226,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.3.2...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.3.3...develop
+[4.3.2]: https://github.com/magpiemodel/magpie/compare/v4.3.2...v4.3.3
 [4.3.2]: https://github.com/magpiemodel/magpie/compare/v4.3.1...v4.3.2
 [4.3.1]: https://github.com/magpiemodel/magpie/compare/v4.3.0...v4.3.1
 [4.3.0]: https://github.com/magpiemodel/magpie/compare/v4.2.1...v4.3.0
