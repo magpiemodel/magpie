@@ -14,13 +14,6 @@
 *' The module also calculates the costs of crop residue harvest when it is used
 *' for feed or material purposes.
 *'
-*' The module feeds residual biomass calculations into [50_nr_soil_budget] and
-*' [51_nitrogen].
-*'
-*' When set to "off", residual biomass aboveground (vm_res_biomass_ag) and 
-*' belowground (vm_res_biomass_bg) are set to 0, as well as biomass to be 
-*' recycled (vm_res_recycling) or burned as agricultural residues (vm_res_ag_burn).
-
 *' @authors Benjamin Leon Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
