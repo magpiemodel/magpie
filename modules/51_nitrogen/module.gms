@@ -9,6 +9,10 @@
 *' @description
 *' The nitrogen module calculates nitrogeneous emissions before technical
 *' mitigation, including N2O, NOx, NH3, NO3- and N2.
+*'
+*' The Nitrogen module recieves input from [56_ghg_policy], [55_awms], [18_residues],
+*' and [50_nr_soil_budget].
+
 *' @authors Benjamin Leon Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
