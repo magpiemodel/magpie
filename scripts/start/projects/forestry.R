@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "MAR06"
+identifier_flag = "MAR07"
 cat(paste0("Building demand runs with extra forest protection scenarios"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
@@ -85,7 +85,7 @@ for(c73_wood_scen in c("default")){
                   all_configs[[cfg$title]] <- cfg
                   cfg$gms$s80_optfile <- 1
                   cfg$results_folder = "output/:title:"
-                  #start_run(cfg,codeCheck=FALSE)
+                  start_run(cfg,codeCheck=FALSE)
                 }
               }
             }
@@ -96,10 +96,10 @@ for(c73_wood_scen in c("default")){
   }
 }
 
-for(i in names(all_configs)){
-  message(i)
-  print(all_configs[[i]]$gms$c73_build_demand)
-}
+#for(i in names(all_configs)){
+#  message(i)
+#  print(all_configs[[i]]$gms$c73_build_demand)
+#}
 
 
 #          cfg$gms$c56_pollutant_prices = "coupling"
