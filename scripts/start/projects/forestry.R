@@ -27,6 +27,7 @@ identifier_flag = "MAR06"
 cat(paste0("Building demand runs with extra forest protection scenarios"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
+all_configs <- list()
 
 #scen_vector <- c("ForestryOff","ForestryEndo","ForestryExo")
 scen_vector <- c("ForestryEndo")
@@ -45,8 +46,10 @@ for(c73_wood_scen in c("default")){
 
           for(c21_trade_liberalization in c("l909090r808080","l908080r807070")) {
 
-            if(c21_trade_liberalization=="l909090r808080")    trade_flag="DefTrade"
-            if(c21_trade_liberalization=="l908080r807070")    trade_flag="LibTrade"
+            cfg$gms$c21_trade_liberalization <- c21_trade_liberalization
+
+            if(cfg$gms$c21_trade_liberalization=="l909090r808080")    trade_flag="DefTrade"
+            if(cfg$gms$c21_trade_liberalization=="l908080r807070")    trade_flag="LibTrade"
 
             for (c73_build_demand in c("BAU","10pc", "50pc", "90pc")) {
 
@@ -79,9 +82,10 @@ for(c73_wood_scen in c("default")){
                   cfg$output  = c("extra/timestep_duration")
 
                   xx = c(xx,cfg$title)
+                  all_configs[[cfg$title]] <- cfg
                   cfg$gms$s80_optfile <- 1
                   cfg$results_folder = "output/:title:"
-                  start_run(cfg,codeCheck=FALSE)
+                  #start_run(cfg,codeCheck=FALSE)
                 }
               }
             }
@@ -91,6 +95,12 @@ for(c73_wood_scen in c("default")){
      }
   }
 }
+
+for(i in names(all_configs)){
+  message(i)
+  print(all_configs[[i]]$gms$c73_build_demand)
+}
+
 
 #          cfg$gms$c56_pollutant_prices = "coupling"
 #          cfg$gms$c60_2ndgen_biodem = "coupling"

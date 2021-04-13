@@ -12,7 +12,6 @@
  oq73_cost_timber(t,i,"marginal")                  = q73_cost_timber.m(i);
  oq73_prod_wood(t,j,"marginal")                    = q73_prod_wood.m(j);
  oq73_prod_woodfuel(t,j,"marginal")                = q73_prod_woodfuel.m(j);
- oq73_prod_constr(t,j,"marginal")                  = q73_prod_constr.m(j);
  oq73_prod_residues(t,j,"marginal")                = q73_prod_residues.m(j);
  ov_cost_timber(t,i,"level")                       = vm_cost_timber.l(i);
  ov73_prod_heaven_timber(t,j,kforestry,"level")    = v73_prod_heaven_timber.l(j,kforestry);
@@ -20,7 +19,6 @@
  oq73_cost_timber(t,i,"level")                     = q73_cost_timber.l(i);
  oq73_prod_wood(t,j,"level")                       = q73_prod_wood.l(j);
  oq73_prod_woodfuel(t,j,"level")                   = q73_prod_woodfuel.l(j);
- oq73_prod_constr(t,j,"level")                     = q73_prod_constr.l(j);
  oq73_prod_residues(t,j,"level")                   = q73_prod_residues.l(j);
  ov_cost_timber(t,i,"upper")                       = vm_cost_timber.up(i);
  ov73_prod_heaven_timber(t,j,kforestry,"upper")    = v73_prod_heaven_timber.up(j,kforestry);
@@ -28,7 +26,6 @@
  oq73_cost_timber(t,i,"upper")                     = q73_cost_timber.up(i);
  oq73_prod_wood(t,j,"upper")                       = q73_prod_wood.up(j);
  oq73_prod_woodfuel(t,j,"upper")                   = q73_prod_woodfuel.up(j);
- oq73_prod_constr(t,j,"upper")                     = q73_prod_constr.up(j);
  oq73_prod_residues(t,j,"upper")                   = q73_prod_residues.up(j);
  ov_cost_timber(t,i,"lower")                       = vm_cost_timber.lo(i);
  ov73_prod_heaven_timber(t,j,kforestry,"lower")    = v73_prod_heaven_timber.lo(j,kforestry);
@@ -36,6 +33,5 @@
  oq73_cost_timber(t,i,"lower")                     = q73_cost_timber.lo(i);
  oq73_prod_wood(t,j,"lower")                       = q73_prod_wood.lo(j);
  oq73_prod_woodfuel(t,j,"lower")                   = q73_prod_woodfuel.lo(j);
- oq73_prod_constr(t,j,"lower")                     = q73_prod_constr.lo(j);
  oq73_prod_residues(t,j,"lower")                   = q73_prod_residues.lo(j);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################

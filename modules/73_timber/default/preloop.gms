@@ -65,14 +65,15 @@ display p73_fraction;
 display p73_demand_modifier;
 
 if(s73_expansion = 0,
-  pm_demand_ext(t_all,i,"constr_wood") = f73_construction_wood_demand(t_all,i,"%c09_pop_scenario%","%c73_build_demand%");
-  pm_demand_ext(t_all,i,"constr_wood")$(m_year(t_all)<=2020) = f73_construction_wood_demand("y2025",i,"%c09_pop_scenario%","BAU");
+  p73_demand_constr_wood(t_all,i) = f73_construction_wood_demand(t_all,i,"%c09_pop_scenario%","%c73_build_demand%");
+  p73_demand_constr_wood(t_all,i)$(m_year(t_all)<=2020) = f73_construction_wood_demand("y2025",i,"%c09_pop_scenario%","BAU");
   );
 
 if(s73_expansion > 0,
-  pm_demand_ext(t_all,i,"constr_wood") = pm_demand_ext(t_all,i,"wood") * p73_demand_modifier(t_all);
+  p73_demand_constr_wood(t_all,i) = p73_demand_constr_wood(t_all,i) * p73_demand_modifier(t_all);
   );
 
+pm_demand_ext(t_all,i,"wood") = pm_demand_ext(t_all,i,"wood") + p73_demand_constr_wood(t_all,i);
 pm_demand_ext(t_all,i,kforestry)$(m_year(t_all)>2100) = pm_demand_ext("y2100",i,kforestry);
 
 p73_glo_wood(t_all,kforestry) = sum(i,pm_demand_ext(t_all,i,kforestry));

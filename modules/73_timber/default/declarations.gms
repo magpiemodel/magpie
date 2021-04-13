@@ -14,6 +14,7 @@ p73_demand_calib(t_all,i,kforestry)                                         Addi
 p73_glo_wood(t_all,kforestry)                                               xx
 p73_demand_modifier(t_all)                                                  xx
 p73_fraction(t_all)                                                         xx
+p73_demand_constr_wood(t_all,i)                                             Demand for construction wood
 ;
 
 positive variables
@@ -26,7 +27,6 @@ equations
 q73_cost_timber(i)												                                  Actual cost of harvesting timber from forests (mio. USD per yr)
 q73_prod_wood(j)                                                            Production of industrial roundwood (mio. tDM per yr)
 q73_prod_woodfuel(j)                                                        Production of wood fuel (mio. tDM per yr)
-q73_prod_constr(j)                                                          Production of construction wood (mio. tDM per yr)
 q73_prod_residues(j)                                                        Production of residues from industrial roundwood harvest(mio. tDM per yr)
 ;
 
@@ -39,7 +39,6 @@ parameters
  oq73_cost_timber(t,i,type)                  Actual cost of harvesting timber from forests (mio. USD per yr)
  oq73_prod_wood(t,j,type)                    Production of industrial roundwood (mio. tDM per yr)
  oq73_prod_woodfuel(t,j,type)                Production of wood fuel (mio. tDM per yr)
- oq73_prod_constr(t,j,type)                  Production of construction wood (mio. tDM per yr)
  oq73_prod_residues(t,j,type)                Production of residues from industrial roundwood harvest(mio. tDM per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
