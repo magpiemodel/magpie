@@ -6,9 +6,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description No representation of crop residues in the model. Residual biomass 
-*' aboveground (vm_res_biomass_ag) and belowground (vm_res_biomass_bg) are set to 0, 
-*' as well as biomass to be recycled (vm_res_recycling) or burned as agricultural 
-*' residues (vm_res_ag_burn). Therefore, these types of crop residues are left unaccounted
+*' aboveground (`vm_res_biomass_ag`) and belowground (`vm_res_biomass_bg`) are set to 0, 
+*' as well as biomass to be recycled (`vm_res_recycling`) or burned as agricultural 
+*' residues (`vm_res_ag_burn`). Therefore, these types of crop residues are left unaccounted
 *' for within any modules using these interface variable.
 
 *' @limitations Should not be used if emission estimates are required or
