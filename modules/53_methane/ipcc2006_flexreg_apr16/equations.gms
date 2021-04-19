@@ -34,7 +34,7 @@
 *' can be either for meat (`livst_rum`) or for milk (`livst_milk`). The parameter `fm_attributes`
 *' in MAgPIE captures a content of some thing (e.g. gross energy-ge, dry matter-dm, reactive nitrogen-nr)
 *' in a given commodity.
-*' These attributes or coefficients are then used in content conversions in may modules of the model.
+*' These attributes or coefficients are then used in content conversions in many modules of the model.
 *'
 *' The second equation of this realization is meant to calculate CH4 emission from
 *' animal waste management (AWM). In general, AWM depends on the amount of manure
@@ -58,3 +58,10 @@
    vm_btm_reg(i2,"rice","ch4") =e=
           sum((cell(i2,j2),w), vm_area(j2,"rice_pro",w)
               * sum(ct,f53_ef_ch4_rice(ct,i2)));
+
+
+*' emissions from burning crop residues, CH4
+ q53_emissions_resid_burn(i2,pollutants)..
+                 vm_btm_reg(i2,"resid_burn",pollutants)
+                 =e=
+                 sum(kcr, vm_res_ag_burn(i2,kcr,"dm")) * f53_ef_resid_burn(pollutants);

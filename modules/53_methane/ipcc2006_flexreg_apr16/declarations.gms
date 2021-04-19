@@ -10,6 +10,7 @@ equations
  q53_emissionbal_ch4_ent_ferm(i)                   Detailed ch4 constraint for enteric fermentation before technical mitigation (tCH4)
  q53_emissionbal_ch4_awms(i)                       Detailed ch4 constraint for animal waste management systems before technical mitigation (tCH4)
  q53_emissionbal_ch4_rice(i)                       Detailed ch4 constraint for rice before technical mitigation (tCH4)
+ q53_emissions_resid_burn(i,pollutants)            Estimates ch4 emissions from residues burning (Mt X-N)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
