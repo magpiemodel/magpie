@@ -21,10 +21,6 @@ $offdelim
 /
 ;
 
-parameter f53_ef_ch4_res_ag_burn(pollutants) CH4 emissions from the burning of agricultural residues (tCH4 per tDM)
-/
-$ondelim
-$include "./modules/53_methane/input/f53_ef_resid_burn.cs4"
-$offdelim
-/
+scalar
+    s53_ef_ch4_res_ag_burn CH4 emissions from the burning of agricultural residues (tCH4 per tDM) / 0.0027 /
 ;

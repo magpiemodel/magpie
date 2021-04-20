@@ -8,7 +8,7 @@
 *' @equations
 *'
 *' We calculate methane emissions before technical mitigation(btm) in each regions (reg) (`vm_btm_reg`)
-*' from the aforementioned three sources of emissions step-by-step in the following three equations.
+*' from the aforementioned four sources of emissions step-by-step in the following four equations.
 *'
 *' The first equation describes how CH4 emission from enteric fermentation is calculated.
 *' The equation shows that total methane from enteric fermentation depends on
@@ -29,7 +29,7 @@
 
 *' As such, methane from enteric fermentation depends on the feed quality and the purpose of livestock farming.
 *' The feed quality (measured by energy content of the feed type) can be `k_conc53`
-*'  ( with high energy contents, for example, temperate and tropical cereals, maize,pulses) or `k_noconc53`
+*' (with high energy contents, for example, temperate and tropical cereals, maize,pulses) or `k_noconc53`
 *' (for example, pasture, fodder,crop residues). The purpose of livestock raising `k_ruminants53`
 *' can be either for meat (`livst_rum`) or for milk (`livst_milk`). The parameter `fm_attributes`
 *' in MAgPIE captures a content of some thing (e.g. gross energy-ge, dry matter-dm, reactive nitrogen-nr)
@@ -38,11 +38,11 @@
 *'
 *' The second equation of this realization is meant to calculate CH4 emission from
 *' animal waste management (AWM). In general, AWM depends on the amount of manure
-*' excreted in confinements (such as stables or barns) (see [55_awms])and its
+*' excreted in confinements (such as stables or barns) (see [55_awms]) and its
 *' subsequent storage.
 *' We calculate the CH4 emission per unit of nitrogen in manure based on @ipcc_2006_2006
-*' and Manure Management Emissions from @FAOSTAT .
-*' See the  module for more on calculation of methane from animal waste(or manure) .
+*' and Manure Management Emissions from @FAOSTAT.
+*' See the module for more on calculation of methane from animal waste(or manure).
 
  q53_emissionbal_ch4_awms(i2) ..
   vm_btm_reg(i2,"awms","ch4") =e=
@@ -60,8 +60,10 @@
               * sum(ct,f53_ef_ch4_rice(ct,i2)));
 
 
-*' emissions from burning crop residues, CH4
- q53_emissions_resid_burn(i2,pollutants)..
-                 vm_btm_reg(i2,"resid_burn",pollutants)
-                 =e=
-                 sum(kcr, vm_res_ag_burn(i2,kcr,"dm")) * f53_ef_resid_burn(pollutants);
+*' The fourth equation calculates emissions from burning crop residues for CH4. 
+*' This calculation follows the 2019 Refinement to the 2006 IPPC Guidelines for 
+*' National Greenhouse Gas Inventories, Eq. 2.27.
+
+ q53_emissions_resid_burn(i2) ..
+    vm_btm_reg(i2,"resid_burn","ch4") =e=
+      sum(kcr, vm_res_ag_burn(i2,kcr,"dm")) * s53_ef_ch4_res_ag_burn;
