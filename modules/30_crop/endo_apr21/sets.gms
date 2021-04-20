@@ -41,4 +41,16 @@ sets
 
    bioen_type_30(kbe30) dynamic set bioen type
    bioen_water_30(w) dynamic set bioen water
+
+   crop_ann30(kcr) annual crops
+    / tece, maiz, trce, rice_pro, rapeseed, sunflower, potato, cassav_sp, sugr_beet, others, cottn_pro, foddr, soybean, groundnut, puls_pro /
+
+   crop_per30(kcr) perennial crops
+    / oilpalm, begr, sugr_cane, betr /
+
+   marginal_land30 Cropland availability scenarios
+    / all_marginal, q33_marginal, q50_marginal, q66_marginal, q75_marginal, no_marginal  /
+
+   set_aside_target30 Target year for set aside policy
+   / none, by2030, by2050 /
 ;

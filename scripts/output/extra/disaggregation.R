@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -10,25 +10,60 @@
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
+#Version 1.03 - Jan Philipp Dietrich, Patrick v. Jeetze
+# 1.00: first working version
+# 1.01: execution of reshape_folder function added at the end
+# 1.02: uses now the land function to read the simulated land input
+# 1.03: introduced function interpolate, all possible input is read from the GDX file now
+# 1.04: changed to function interpolateAvlCroplandWeighted
+
 library(lucode2)
 library(magpie4)
 library(luscale)
-library(madrat)
+library(dplyr)
 
-############################# BASIC CONFIGURATION ##############################
+############################# BASIC CONFIGURATION #######################################
+land_lr_file     <- "avl_land_t.cs3"
+land_hr_file     <- "avl_land_t_0.5.mz"
+land_hr_out_file           <- "cell.land_0.5.mz"
+land_hr_share_out_file     <- "cell.land_0.5_share.mz"
+croparea_hr_share_out_file <- "cell.croparea_0.5_share.mz"
+
+year_ini        <- "y1985"            # timestep before calculations in MAgPIE
+
+# input data directories
+dir_land        <- "modules/10_land/input"  # input from land module
+dir_crop        <- "modules/30_crop/endo_apr21/input" # input from crop module
+
 if(!exists("source_include")) {
-  outputdir <- "output/SSP2_Ref_c200"
-  readArgs("outputdir")
+  title       <- "base_run"
+  outputdir       <- "output/SSP2_Ref_c200"
+
+  ###Define arguments that can be read from command line
+  readArgs("outputdir","title")
 }
+#########################################################################################
+
+load(paste0(outputdir, "/config.Rdata"))
+title <- cfg$title
+print(title)
+
+# Function to extract information from info.txt
+get_info <- function(file, grep_expression, sep, pattern="", replacement="") {
+  if(!file.exists(file)) return("#MISSING#")
+  file <- readLines(file, warn=FALSE)
+  tmp <- grep(grep_expression, file, value=TRUE)
+  tmp <- strsplit(tmp, sep)
+  tmp <- sapply(tmp, "[[", 2)
+  tmp <- gsub(pattern, replacement ,tmp)
+  if(all(!is.na(as.logical(tmp)))) return(as.vector(sapply(tmp, as.logical)))
+  if (all(!(regexpr("[a-zA-Z]",tmp) > 0))) {
+    tmp <- as.numeric(tmp)
+  }
+  return(tmp)
+}
+low_res       <- get_info(paste0(outputdir,"/info.txt"),"^\\* Output ?resolution:",": ")
 map_file                   <- Sys.glob(path(outputdir, "clustermap_*.rds"))
-gdx                        <- path(outputdir,"fulldata.gdx")
-land_hr_file               <- path(outputdir,"avl_land_t_0.5.mz")
-land_hr_out_file           <- path(outputdir,"cell.land_0.5.mz")
-land_hr_share_out_file     <- path(outputdir,"cell.land_0.5_share.mz")
-croparea_hr_share_out_file <- path(outputdir,"cell.croparea_0.5_share.mz")
-land_hr_split_file         <- path(outputdir,"cell.land_split_0.5.mz")
-land_hr_shr_split_file     <- path(outputdir,"cell.land_split_0.5_share.mz")
-################################################################################
 
 if(length(map_file)==0) stop("Could not find map file!")
 if(length(map_file)>1) {
@@ -36,88 +71,85 @@ if(length(map_file)>1) {
   map_file <- map_file[1]
 }
 
+print(map_file)
+
+
 # Load input data
-
-land_lr   <- land(gdx,sum=FALSE,level="cell")
-land_ini  <- setYears(read.magpie(land_hr_file)[,"y1995",],NULL)
-land_ini  <- land_ini[,,getNames(land_lr)]
-if(any(land_ini < 0)) {
-  warning(paste0("Negative values in inital high resolution dataset ",
-                 "detected and set to 0. Check the file ",land_hr_file))
-  land_ini[which(land_ini < 0,arr.ind = T)] <- 0
+gdx          <- path(outputdir,"fulldata.gdx")
+land_ini_lr  <- readGDX(gdx,"f10_land","f_land", format="first_found")[,"y1995",]
+land_lr      <- land(gdx,sum=FALSE,level="cell")
+land_ini_hr  <- read.magpie(path(dir_land,land_hr_file))[,"y1995",]
+land_ini_hr  <- land_ini_hr[,,getNames(land_lr)]
+if(any(land_ini_hr < 0)) {
+  warning(paste0("Negative values in inital high resolution dataset detected and set to 0. Check the file ",land_hr_file))
+  land_ini_hr[which(land_ini_hr < 0,arr.ind = T)] <- 0
 }
+avl_cropland_hr <- path(outputdir, "avl_cropland_0.5.mz")       # available cropland (at high resolution)
+marginal_land <- cfg$gms$c30_marginal_land                      # marginal land scenario
+set_aside_shr <- cfg$gms$s30_set_aside_shr                      # set aside share (default: 0)
+target_year <- cfg$gms$c30_set_aside_target                     # target year of set aside policy (default: "none")
+set_aside_fader <- select(read.csv(path(dir_crop, "f30_set_aside_fader.csv"), row.names = 1),target_year)
 
-# Start interpolation (use interpolate from luscale)
-message("Disaggregation")
-land_hr <- luscale::interpolate2(x     = land_lr,
-                                 x_ini = land_ini,
-                                 map   = map_file)
-
+# Start interpolation (use interpolateAvlCroplandWeighted from luscale)
+print("Disaggregation")
+land_hr <- interpolateAvlCroplandWeighted( x          = land_lr,
+                                           x_ini_lr   = land_ini_lr,
+                                           x_ini_hr   = land_ini_hr,
+                                           avl_cropland_hr = avl_cropland_hr,
+                                           map        = map_file, # have a look on interpolate2
+                                           #spam       = path(outputdir,sum_spam_file),
+                                           marginal_land = marginal_land,
+                                           set_aside_shr = set_aside_shr,
+                                           set_aside_fader = set_aside_fader,
+                                           year_ini  = year_ini)
 
 # Write outputs
 
-.dissagcrop <- function(gdx, land_hr, map) {
-  message("Disaggregation crop types")
-  area     <- croparea(gdx, level="cell", products="kcr",
-                       product_aggr=FALSE,water_aggr = FALSE)
-  area_shr <- area/(dimSums(area,dim=3) + 10^-10)
+print("Write outputs cell.land")
+# write landpool
+write.magpie(land_hr,path(outputdir,paste(land_hr_out_file,sep="_")),comment="unit: Mha per grid-cell")
+write.magpie(land_hr,path(outputdir,paste(sub(".mz",".nc",land_hr_out_file),sep="_")),comment="unit: Mha per grid-cell", verbose=FALSE)
 
-  # calculate share of crop land on total cell area
-  crop_shr <- land_hr/dimSums(land_hr, dim=3)
-  crop_shr <- setNames(crop_shr[,getYears(area_shr),"crop"],NULL)
-  # calculate crop area as share of total cell area
-  area_shr_hr <- madrat::toolAggregate(area_shr, map, to="cell") * crop_shr
-  return(area_shr_hr)
-}
+print("Write outputs cell.land_share")
+# calculate share of land pools in terms of tatal cell size
+land_shr_hr <- land_hr/dimSums(land_hr,dim=3.1)
+# write landpool shares
+write.magpie(land_shr_hr,path(outputdir,paste(land_hr_share_out_file,sep="_")),comment="unit: grid-cell land area fraction")
+write.magpie(land_shr_hr,path(outputdir,paste(sub(".mz",".nc",land_hr_share_out_file),sep="_")),comment="unit: grid-cell land area fraction", verbose=FALSE)
 
-.tmpwrite <- function(x,file,comment,message) {
-  write.magpie(x, file, comment=comment)
-  write.magpie(x, sub(".mz",".nc",file), comment=comment, verbose=FALSE)
-}
+# Write spam files (crop weighted for each time step)
+#for(y in getYears(land_hr)) create_spam(land_hr[,y,"crop"],read.spam(path(outputdir,sum_spam_file)),fname=path(outputdir,sub("sum",paste("crop_weighted_mean",y,sep="_"),sum_spam_file)))
+#Please look on: https://github.com/k4rst3ns/magpie/blob/f_new_calib_lpjml5/scripts/output/extra/disaggregation.R -> I don't know what replaces the yearly crop_weightes_mean - spam files now.
 
-.tmpwrite(land_hr, land_hr_out_file, comment="unit: Mha per grid-cell",
-          message="Write outputs cell.land")
-.tmpwrite(land_hr/dimSums(land_hr,dim=3.1), land_hr_share_out_file,
-          comment="unit: grid-cell land area fraction",
-          message="Write outputs cell.land_share")
+# Disaggregate other cellular files
+reshape_folder(outputdir)
 
-area_shr_hr <- .dissagcrop(gdx, land_hr, map=map_file)
+print("Disaggregation crop types")
+# detailed output (crop types, rf + if), disaggregate shares of cropland within cluster level to cellular level
+# get rid of y1985
+land_hr  <- land_hr[,-1,]
 
-.tmpwrite(area_shr_hr, croparea_hr_share_out_file,
-          comment="unit: grid-cell land area fraction",
-          message="Write outputs cell.cropara_share")
+# total crop type specific land area
+area     <- croparea(gdx,level="cell",products="kcr",product_aggr=FALSE,water_aggr = FALSE)
 
+# share of crop types in terms of croparea
+area_shr <- area/dimSums(area,dim=c(3.1,3.2))
 
-.cropsplit <- function(area_shr_hr, land_hr, land_hr_split_file,
-                       land_hr_shr_split_file) {
-  land_hr <- land_hr[,getYears(area_shr_hr),]
-  area_hr <- area_shr_hr*dimSums(land_hr, dim=3)
+# set inf to 0
+area_shr[is.na(area_shr)]       <- 0
+area_shr[is.nan(area_shr)]      <- 0
+area_shr[is.infinite(area_shr)] <- 0
 
-  # replace crop in land_hr in with crop_kfo_rf, crop_kfo_ir, crop_kbe_rf
-  # and crop_kbe_ir
-  kbe <- c("betr","begr")
-  kfo <- setdiff(getNames(area_hr,dim=1),kbe)
-  crop_kfo_rf <- setNames(dimSums(area_hr[,,kfo][,,"rainfed"],dim=3),
-                          "crop_kfo_rf")
-  crop_kfo_ir <- setNames(dimSums(area_hr[,,kfo][,,"irrigated"],dim=3),
-                          "crop_kfo_ir")
-  crop_kbe_rf <- setNames(dimSums(area_hr[,,kbe][,,"rainfed"],dim=3),
-                          "crop_kbe_rf")
-  crop_kbe_ir <- setNames(dimSums(area_hr[,,kbe][,,"irrigated"],dim=3),
-                          "crop_kbe_ir")
-  crop_hr <- mbind(crop_kfo_rf,crop_kfo_ir,crop_kbe_rf,crop_kbe_ir)
-  #drop crop
-  land_hr <- land_hr[,,"crop",invert=TRUE]
-  #combine land_hr with crop_hr.
-  land_hr <- mbind(crop_hr,land_hr)
-  #write landpool
-  .tmpwrite(land_hr, land_hr_split_file,
-            comment="unit: Mha per grid-cell",
-            message="Write cropsplit land area")
+# disaggregate share of crop types in terms of croparea to 0.5 resolution
+#area_shr_hr <- speed_aggregate(area_shr,t(read.spam(path(outputdir,sum_spam_file))))
+area_shr_hr <- madrat::toolAggregate(area_shr, map_file, to="cell")
+# calculate crop tpye specific croparea in 0.5 resolution
+area_hr     <- area_shr_hr*setNames(land_hr[,,"crop"],NULL)
 
-  .tmpwrite(land_hr/dimSums(land_hr,dim=3), land_hr_shr_split_file,
-            comment="unit: grid-cell land area fraction",
-            message="Write cropsplit land area share")
-}
+# calculate share of crop types in terms of total cell size
+area_shr_hr <- area_hr/dimSums(land_hr,dim=3.1)
 
-.cropsplit(area_shr_hr, land_hr, land_hr_split_file,land_hr_shr_split_file)
+print("Write outputs cell.cropara_share")
+# write share of crop types in terms of total cell size
+write.magpie(area_shr_hr,path(outputdir,paste(croparea_hr_share_out_file,sep="_")),comment="unit: grid-cell land area fraction")
+write.magpie(area_shr_hr,path(outputdir,paste(sub(".mz",".nc",croparea_hr_share_out_file),sep="_")),comment="unit: grid-cell land area fraction", verbose=FALSE)

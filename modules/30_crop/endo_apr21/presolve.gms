@@ -14,13 +14,18 @@ $else bioen_water_30("%c30_bioen_water%") = yes;
 $endif
 
 *' @code
-*' First, all 2nd generation bioenergy area is fixed to zero, irrespective of type and 
+*' First, all 2nd generation bioenergy area is fixed to zero, irrespective of type and
 *' rainfed/irrigation.
 vm_area.fx(j,kbe30,w)=0;
-*' Second, the bounds for 2nd generation bioenergy area are released depending on 
+*' Second, the bounds for 2nd generation bioenergy area are released depending on
 *' the dynamic sets bioen_type_30 and bioen_water_30.
 vm_area.up(j,bioen_type_30,bioen_water_30)=Inf;
 *' @stop
 
 crpmax30(crp30) = yes$(f30_rotation_max_shr(crp30) < 1);
 crpmin30(crp30) = yes$(f30_rotation_min_shr(crp30) > 0);
+
+*' @code
+*' Set aside cropland policy is fading in after 2020
+p30_avl_cropland(j) = (f30_avl_cropland(j,"%c30_marginal_land%")) * (1 - f30_set_aside_fader(t,"%c30_set_aside_target%")*s30_set_aside_shr);
+*' @stop

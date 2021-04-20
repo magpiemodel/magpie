@@ -42,7 +42,8 @@ jobs:
           remotes::install_cran("gms", repos=repos)
         shell: Rscript {0}
         
-      - name: codeCheck
-        run: null <- gms::codeCheck(strict=TRUE)
+      - name: pre-commit Hook
+        run: source(".githooks/pre-commit")
         shell: Rscript {0}
-        
+
+
