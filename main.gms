@@ -145,60 +145,49 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-*
-* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-*
-* Used data set: rev4.58_h12_magpie.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-*
-* Used data set: rev4.58_h12_validation.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-*
-* Used data set: calibration_H12_c200_23Feb21.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-*
-* Used data set: additional_data_rev3.99.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-*
+* 
+* Used data set: rev4.59SmashingPumpkins_h12_validation_debug.tgz
+* md5sum: 4509d720610e3cf6006aa7ab6c77cea4
+* Repository: /p/projects/rd3mod/inputdata/output
+* 
+* Used data set: additional_data_rev3.98.tgz
+* md5sum: 9c99aec425d4774a1ff7a853cd1ae495
+* Repository: /p/projects/landuse/data/input/archive
+* 
+* Used data set: rev4.59SmashingPumpkins_h12_024608f1_cellularmagpie_debug.tgz
+* md5sum: 9b532322922f6f099f48900c4f7fc7fd
+* Repository: /p/projects/rd3mod/inputdata/output
+* 
+* Used data set: rev4.59SmashingPumpkins_h12_magpie_debug.tgz
+* md5sum: 10d81d7c2aaac00bd9fc8b9342786ffa
+* Repository: /p/projects/rd3mod/inputdata/output
+* 
 * Low resolution: c200
 * High resolution: 0.5
-*
+* 
 * Total number of cells: 200
-*
+* 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*    28   24   10    7    3   53   17    8   22    7   11   10
-*
-* Regionscode: 690d3718e151be1b450b394c1064b1c5
-*
-* Regions data revision: 4.58
-*
+*     7   22    8    7    1   41   26    7   12   13   38   18
+* 
+* Regionscode: 62eff8f7
+* 
+* Regions data revision: 4.59
+* 
 * lpj2magpie settings:
-* * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
-* * Additional input folder: /p/projects/landuse/data/input/other/rev52
-* * Revision: 52
-* * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-*
+* * LPJmL data: GFDL-ESM4:ssp370
+* * Revision: 4.59
+* 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
-* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* * Regionscode: 690d3718e151be1b450b394c1064b1c5
-* * (clustering) n-repeat: 5
-* * (clustering) n-redistribute: 0
-* * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = cfg$spamfile, debug = FALSE, seed = cfg$seed)
-*
-*
-*
-* Last modification (input data): Sat Apr 03 12:54:12 2021
-*
+* * Regionscode: 62eff8f7
+* * Call: do.call(functiononly, args)
+* 
+* 
+* Last modification (input data): Tue Apr 20 19:27:35 2021
+* 
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper

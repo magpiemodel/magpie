@@ -21,7 +21,7 @@ $setglobal c30_set_aside_target  none
 
 table fm_croparea(t_all,j,w,kcr) Different croparea type areas (mio. ha)
 $ondelim
-$include "./modules/30_crop/endo_jun13/input/f30_croparea_w_initialisation.cs3"
+$include "./modules/30_crop/endo_apr21/input/f30_croparea_w_initialisation.cs3"
 $offdelim
 ;
 m_fillmissingyears(fm_croparea,"j,w,kcr");
