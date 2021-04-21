@@ -23,7 +23,7 @@ cfg$qos <- "priority"
 
 
 # marginal land scenarios
-marginalLandScen <- c("q50_marginal")
+marginalLandScen <- c("all_marginal", "q33_marginal", "q50_marginal", "q66_marginal", "q75_marginal", "no_marginal")
 
 # Test different price levels
 
