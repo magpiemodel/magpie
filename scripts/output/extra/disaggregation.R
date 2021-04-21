@@ -84,17 +84,17 @@ set_aside_shr <- cfg$gms$s30_set_aside_shr                      # set aside shar
 target_year <- cfg$gms$c30_set_aside_target                     # target year of set aside policy (default: "none")
 set_aside_fader <- select(read.csv(path(dir_crop, "f30_set_aside_fader.csv"), row.names = 1),target_year)
 
-# Start interpolation (use interpolateAvlCroplandWeighted from luscale)
+# Start interpolation (use interpolateAvlCroplandWeighted_spam from luscale)
 print("Disaggregation")
-land_hr <- interpolateAvlCroplandWeighted( x          = land_lr,
-                                           x_ini_lr   = land_ini_lr,
-                                           x_ini_hr   = land_ini_hr,
-                                           avl_cropland_hr = avl_cropland_hr,
-                                           spam       = path(outputdir,sum_spam_file),
-                                           marginal_land = marginal_land,
-                                           set_aside_shr = set_aside_shr,
-                                           set_aside_fader = set_aside_fader,
-                                           year_ini  = year_ini)
+land_hr <- interpolateAvlCroplandWeighted_spam(x          = land_lr,
+                                               x_ini_lr   = land_ini_lr,
+                                               x_ini_hr   = land_ini_hr,
+                                               avl_cropland_hr = avl_cropland_hr,
+                                               spam       = path(outputdir,sum_spam_file),
+                                               marginal_land = marginal_land,
+                                               set_aside_shr = set_aside_shr,
+                                               set_aside_fader = set_aside_fader,
+                                               year_ini  = year_ini)
 
 # Write outputs
 
