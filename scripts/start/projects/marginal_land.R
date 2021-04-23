@@ -29,6 +29,10 @@ marginalLandScen <- c("all_marginal", "q33_marginal", "q50_marginal", "q66_margi
 
   for (marg in marginalLandScen) {
 
+
+    # recalibration
+    cfg$recalibrate <- TRUE
+
     # basic scenario setting
     cfg <- setScenario(cfg, c("SSP2", "NPI"))
     cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
@@ -38,10 +42,15 @@ marginalLandScen <- c("all_marginal", "q33_marginal", "q50_marginal", "q66_margi
     cfg$gms$c30_marginal_land <- marg
 
     # Updating the title
-    cfg$title = paste0("SSP2_NPI_",marg)
+    cfg$title = paste0("SSP2_NPI_",marg,"_new")
+
+    cfg$results_folder <- "output/:title:"
 
     # Start run
     start_run(cfg=cfg,codeCheck=TRUE)
+
+    # submit calibration
+    magpie4::submitCalibration(paste0("H12_",marg,"_22Apr2021"))
 
   }
 

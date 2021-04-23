@@ -223,7 +223,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  default
+$setglobal c_title  SSP2_NPI_all_marginal_new
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
