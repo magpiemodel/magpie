@@ -15,6 +15,7 @@
 ######################################
 
 library(gms)
+library(lucode2)
 library(magclass)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
@@ -30,8 +31,7 @@ cfg$output <- c("rds_report")
 
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 
-prefix <- "SCP33"
-#cfg$gms$land <- "feb15"
+prefix <- "SCP34"
 cfg$qos <- "priority"
 
 cfg$gms$s80_optfile <- 1
@@ -39,22 +39,34 @@ cfg$gms$s80_maxiter <- 30
 
 cfg$gms$s15_elastic_demand <- 0
 
-#1p5deg
+cfg$gms$c20_scp_type <- "sugar"
+
+
+#ref
 for (pol in c("Ref")) {
-  for (scp_level in c(0,20,50,80)) {
-    for (scp_type in c("mixed")) {
-      if (pol == "Ref") {
-        cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
-        cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
-      } else if (pol == "1p5deg") {
-        cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
-        cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
-      }
-      cfg$title <- paste(prefix,paste0("SSP2-",pol,"-BioTech",scp_level),scp_type,sep="_")
-      cfg$gms$c20_scp_type <- scp_type
+  if (pol == "Ref") {
+    cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
+    cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
+  } else if (pol == "1p5deg") {
+    cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
+    cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
+  }
+  for (livst_type in c("RuminantMeat+Dairy","RuminantMeat","Dairy")) {
+    if (livst_type == "RuminantMeat+Dairy") {
+      file.copy(from = "modules/15_food/anthropometrics_jan18/sets_rd.gms", to = "modules/15_food/anthropometrics_jan18/sets.gms",overwrite = TRUE)
+    } else if (livst_type == "RuminantMeat") {
+      file.copy(from = "modules/15_food/anthropometrics_jan18/sets_r.gms", to = "modules/15_food/anthropometrics_jan18/sets.gms",overwrite = TRUE)
+    } else if (livst_type == "Dairy") {
+      file.copy(from = "modules/15_food/anthropometrics_jan18/sets_d.gms", to = "modules/15_food/anthropometrics_jan18/sets.gms",overwrite = TRUE)
+    }
+    for (scp_level in c(0,20,50,80)) {
+      cfg$title <- paste(prefix,paste0("SSP2-",pol,"-BioTech",scp_level),livst_type,sep="_")
       if (scp_level == 0) scp_scen <- "constant" else if (scp_level == 20) scp_scen <- "sigmoid_80pc_20_50" else if (scp_level == 50) scp_scen <- "sigmoid_50pc_20_50" else if (scp_level == 80) scp_scen <- "sigmoid_20pc_20_50"
       cfg$gms$c15_rumdairy_scp_scen <- scp_scen
       start_run(cfg,codeCheck=FALSE)
     }
   }
 }
+
+#rd is default. revert back
+file.copy(from = "modules/15_food/anthropometrics_jan18/sets_rd.gms", to = "modules/15_food/anthropometrics_jan18/sets.gms",overwrite = TRUE)
