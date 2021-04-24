@@ -53,11 +53,11 @@ for (pol in c("Ref")) {
   }
   for (livst_type in c("RuminantMeat+Dairy","RuminantMeat","Dairy")) {
     if (livst_type == "RuminantMeat+Dairy") {
-      file.copy(from = "modules/15_food/anthropometrics_jan18/sets_rd.gms", to = "modules/15_food/anthropometrics_jan18/sets.gms",overwrite = TRUE)
+      cfg$gms$kfo_rd <- "livst_rum,livst_milk"
     } else if (livst_type == "RuminantMeat") {
-      file.copy(from = "modules/15_food/anthropometrics_jan18/sets_r.gms", to = "modules/15_food/anthropometrics_jan18/sets.gms",overwrite = TRUE)
+      cfg$gms$kfo_rd <- "livst_rum"
     } else if (livst_type == "Dairy") {
-      file.copy(from = "modules/15_food/anthropometrics_jan18/sets_d.gms", to = "modules/15_food/anthropometrics_jan18/sets.gms",overwrite = TRUE)
+      cfg$gms$kfo_rd <- "livst_milk"
     }
     for (scp_level in c(0,20,50,80)) {
       cfg$title <- paste(prefix,paste0("SSP2-",pol,"-BioTech",scp_level),livst_type,sep="_")
