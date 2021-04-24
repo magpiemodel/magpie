@@ -27,11 +27,11 @@ source("config/default.cfg")
 #cfg$force_download <- TRUE
 
 cfg$results_folder <- "output/:title:"
-cfg$output <- c("rds_report")
+cfg$output <- c("rds_report","disaggregation")
 
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 
-prefix <- "SCP34"
+prefix <- "SCP35"
 cfg$qos <- "priority"
 
 cfg$gms$s80_optfile <- 1
