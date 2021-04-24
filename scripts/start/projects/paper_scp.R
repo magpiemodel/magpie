@@ -27,7 +27,7 @@ source("config/default.cfg")
 #cfg$force_download <- TRUE
 
 cfg$results_folder <- "output/:title:"
-cfg$output <- c("rds_report","disaggregation")
+cfg$output <- c("rds_report","extra/disaggregation")
 
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 
