@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### added
+- **config** The set "kfo_rd" (livst_rum, livst_milk), which is used in the food substitution scenarios c15_rumdairy_scp_scen and c15_rumdairyscen, has been added to the default.cfg file. This allows for sensitivity scenarios (e.g. only livst_milk or only livst_rum).
+
+### fixed
+- **20_processing** The "mixed" scenario for single-cell protein production (c20_scp_type) was not working as expected. The corresponding code in 20_processing has been updated.
+
+
 ## [4.3.3] - 2021-03-30
 
 ### added
