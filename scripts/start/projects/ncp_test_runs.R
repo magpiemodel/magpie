@@ -13,15 +13,15 @@ source("scripts/performance_test.R")
 # set defaults
 codeCheck <- FALSE
 
-scenNames <- c("SSP2_NPI_base", "SSP2_CCpolicy", "SSP2_CCpolicy_plant", "SSP2_CCredd", "SSP2_CCall", "SSP2_CCpolicy_NCP2030", 
+scenNames <- c("SSP2_NPI_base", "SSP2_CCpolicy", "SSP2_CCpolicy_plant", "SSP2_CCredd", "SSP2_CCall", "SSP2_CCpolicy_NCP2030",
                "SSP2_CCpolicy_NCP2050", "SSP2_CCredd_NCP2030", "SSP2_CCredd_NCP2050", "SSP2_CCall_NCP", "SSP2_PA_full")
 
 for (scen in scenNames) {
-   
+
    source("config/default.cfg")
-   
+
    if (scen == "SSP2_NPI_base") {
-      
+
       # basic scenario setting
       cfg <- setScenario(cfg, c("SSP2", "NPI"))
       # tc
@@ -33,13 +33,13 @@ for (scen in scenNames) {
       cfg$gms$c56_emis_policy <- "redd+natveg_nosoil"
       # bioenergy setting
       cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
-      
+
       #marginal land scenario
-      cfg$gms$c30_marginal_land <- "q75_marginal"
-      
-      
+      cfg$gms$c30_marginal_land <- "q33_marginal"
+
+
    } else if (scen == "SSP2_CCpolicy") {
-      
+
       # basic scenario setting
       cfg <- setScenario(cfg, c("SSP2", "NDC"))
       # tc
@@ -51,12 +51,12 @@ for (scen in scenNames) {
       cfg$gms$c56_emis_policy <- "redd+natveg_nosoil"
       # bioenergy setting
       cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
-      
+
       #marginal land scenario
-      cfg$gms$c30_marginal_land <- "q75_marginal"
-      
+      cfg$gms$c30_marginal_land <- "q33_marginal"
+
    } else if (scen == "SSP2_CCpolicy_plant") {
-      
+
       # basic scenario setting
       cfg <- setScenario(cfg, c("SSP2", "NDC"))
       # tc
@@ -69,12 +69,12 @@ for (scen in scenNames) {
       cfg$gms$c56_emis_policy <- "redd+natveg_nosoil"
       # bioenergy setting
       cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
-      
+
       #marginal land scenario
-      cfg$gms$c30_marginal_land <- "q75_marginal"
-      
+      cfg$gms$c30_marginal_land <- "q33_marginal"
+
    } else if (scen == "SSP2_CCredd") {
-      
+
       # basic scenario setting
       cfg <- setScenario(cfg, c("SSP2", "NDC"))
       # tc
@@ -86,12 +86,12 @@ for (scen in scenNames) {
       cfg$gms$c56_emis_policy <- "redd+_nosoil"
       # bioenergy setting
       cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
-      
+
       #marginal land scenario
-      cfg$gms$c30_marginal_land <- "q75_marginal"
-      
+      cfg$gms$c30_marginal_land <- "q33_marginal"
+
    } else if (scen == "SSP2_CCall") {
-      
+
       # basic scenario setting
       cfg <- setScenario(cfg, c("SSP2", "NDC"))
       # tc
@@ -103,12 +103,12 @@ for (scen in scenNames) {
       cfg$gms$c56_emis_policy <- "all"
       # bioenergy setting
       cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
-      
+
       #marginal land scenario
-      cfg$gms$c30_marginal_land <- "q75_marginal"
-      
+      cfg$gms$c30_marginal_land <- "q33_marginal"
+
    } else if (scen == "SSP2_CCpolicy_NCP2030") {
-      
+
       # basic scenario setting
       cfg <- setScenario(cfg, c("SSP2", "NDC"))
       # tc
@@ -120,17 +120,17 @@ for (scen in scenNames) {
       cfg$gms$c56_emis_policy <- "redd+natveg_nosoil"
       # bioenergy setting
       cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
-      
+
       #marginal land scenario
-      cfg$gms$c30_marginal_land <- "q75_marginal"
-      
+      cfg$gms$c30_marginal_land <- "q33_marginal"
+
       # set aside share
       cfg$gms$s30_set_aside_shr <- 0.2
       # target year
       cfg$gms$c30_set_aside_target <- "by2030"
-      
+
    } else if (scen == "SSP2_CCpolicy_NCP2050") {
-      
+
       # basic scenario setting
       cfg <- setScenario(cfg, c("SSP2", "NDC"))
       # tc
@@ -142,17 +142,17 @@ for (scen in scenNames) {
       cfg$gms$c56_emis_policy <- "redd+natveg_nosoil"
       # bioenergy setting
       cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
-      
+
       #marginal land scenario
-      cfg$gms$c30_marginal_land <- "q75_marginal"
-      
+      cfg$gms$c30_marginal_land <- "q33_marginal"
+
       # set aside share
       cfg$gms$s30_set_aside_shr <- 0.2
       # target year
       cfg$gms$c30_set_aside_target <- "by2050"
-      
+
    } else if (scen == "SSP2_CCredd_NCP2030") {
-      
+
       # basic scenario setting
       cfg <- setScenario(cfg, c("SSP2", "NDC"))
       # tc
@@ -164,17 +164,17 @@ for (scen in scenNames) {
       cfg$gms$c56_emis_policy <- "redd+_nosoil"
       # bioenergy setting
       cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
-      
+
       #marginal land scenario
-      cfg$gms$c30_marginal_land <- "q75_marginal"
-      
+      cfg$gms$c30_marginal_land <- "q33_marginal"
+
       # set aside share
       cfg$gms$s30_set_aside_shr <- 0.2
       # target year
       cfg$gms$c30_set_aside_target <- "by2030"
-      
+
    } else if (scen == "SSP2_CCredd_NCP2050") {
-      
+
       # basic scenario setting
       cfg <- setScenario(cfg, c("SSP2", "NDC"))
       # tc
@@ -186,17 +186,17 @@ for (scen in scenNames) {
       cfg$gms$c56_emis_policy <- "redd+_nosoil"
       # bioenergy setting
       cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
-      
+
       #marginal land scenario
-      cfg$gms$c30_marginal_land <- "q75_marginal"
-      
+      cfg$gms$c30_marginal_land <- "q33_marginal"
+
       # set aside share
       cfg$gms$s30_set_aside_shr <- 0.2
       # target year
-      cfg$gms$c30_set_aside_target <- "by2050"   
-      
+      cfg$gms$c30_set_aside_target <- "by2050"
+
    } else if (scen == "SSP2_CCall_NCP") {
-      
+
       # basic scenario setting
       cfg <- setScenario(cfg, c("SSP2", "NDC"))
       # tc
@@ -208,17 +208,17 @@ for (scen in scenNames) {
       cfg$gms$c56_emis_policy <- "all"
       # bioenergy setting
       cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
-      
+
       #marginal land scenario
-      cfg$gms$c30_marginal_land <- "q75_marginal"
-      
+      cfg$gms$c30_marginal_land <- "q33_marginal"
+
       # set aside share
       cfg$gms$s30_set_aside_shr <- 0.2
       # target year
       cfg$gms$c30_set_aside_target <- "by2030"
-      
+
    } else if (scen == "SSP2_PA_full") {
-      
+
       # basic scenario setting
       cfg <- setScenario(cfg, c("SSP2", "NPI"))
       # tc
@@ -230,15 +230,15 @@ for (scen in scenNames) {
       cfg$gms$c56_emis_policy <- "redd+natveg_nosoil"
       # bioenergy setting
       cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
-      
+
       #marginal land scenario
-      cfg$gms$c30_marginal_land <- "q75_marginal"
-      
+      cfg$gms$c30_marginal_land <- "q33_marginal"
+
       # protected areas
       cfg$gms$c35_protect_scenario <- "full"
-      
+
    }
-   
+
    cfg$title <- scen
    start_run(cfg = cfg, codeCheck = codeCheck)
 }
