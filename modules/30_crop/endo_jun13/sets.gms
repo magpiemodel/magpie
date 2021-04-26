@@ -41,4 +41,11 @@ sets
 
    bioen_type_30(kbe30) dynamic set bioen type
    bioen_water_30(w) dynamic set bioen water
+
+   crop_ann30(kcr) annual crops
+    / tece, maiz, trce, rice_pro, rapeseed, sunflower, potato, cassav_sp, sugr_beet, others, cottn_pro, foddr, soybean, groundnut, puls_pro /
+
+   crop_per30(kcr) perennial crops
+    / oilpalm, begr, sugr_cane, betr /
+
 ;
