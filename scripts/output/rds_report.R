@@ -38,7 +38,7 @@ write.report2(report, file=mif)
 q <- as.quitte(report)
 if(all(is.na(q$value))) stop("No values in reporting!")
 
-saveRDS(q,file=rds)
+saveRDS(q,file=rds, version = 2)
 
 if(file.exists(runstatistics) & dir.exists(resultsarchive)) {
   stats <- list()
@@ -55,7 +55,7 @@ if(file.exists(runstatistics) & dir.exists(resultsarchive)) {
   }
 
   # Save report to results archive
-  saveRDS(q,file=paste0(resultsarchive,"/",stats$id,".rds"))
+  saveRDS(q,file=paste0(resultsarchive,"/",stats$id,".rds"), version = 2)
   cwd <- getwd()
   setwd(resultsarchive)
   system("ls 1*.rds > files")

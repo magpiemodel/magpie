@@ -252,10 +252,18 @@ sets
         / si0, nsi0 /
 
 ***Forestry**
-   ac Age classes  / ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
+  ac Age classes  / ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
                     ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,ac95,ac100,
                     ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,
                     ac150,ac155,acx /
+
+  ac_young(ac) age classes young
+                  / ac5,ac10,ac15,ac20,ac25,ac30 /
+
+  ac_mature(ac) age classes mature
+                     / ac35,ac40,ac45,ac50,ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,
+                       ac95,ac100,ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,
+                       ac145,ac150,ac155,acx /
 
   ac_est(ac) Dynamic subset of age classes for establishment
 

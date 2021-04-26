@@ -95,6 +95,9 @@ equations
  q32_forestry_est(j,type32,ac)                      Distribution of forestry establishment over ac_est (mio. ha)
  q32_cost_hvarea(i)									Cost of harvesting timber from forests (mio. USD per yr)
  q32_prod_forestry(j)                               Production of woody biomass from commercial plantations (mio. tDM per yr)
+ q32_bv_aff(j,potnatveg)                           Biodiversity value for aff forestry land (Mha)
+ q32_bv_ndc(j,potnatveg)                           Biodiversity value for ndc forestry land (Mha)
+ q32_bv_plant(j,potnatveg)                         Biodiversity value for plantations (Mha)
 ;
 
 
@@ -132,5 +135,8 @@ parameters
  oq32_forestry_est(t,j,type32,ac,type)      Distribution of forestry establishment over ac_est (mio. ha)
  oq32_cost_hvarea(t,i,type)                 Cost of harvesting timber from forests (mio. USD per yr)
  oq32_prod_forestry(t,j,type)               Production of woody biomass from commercial plantations (mio. tDM per yr)
+ oq32_bv_aff(t,j,potnatveg,type)            Biodiversity value for aff forestry land (Mha)
+ oq32_bv_ndc(t,j,potnatveg,type)            Biodiversity value for ndc forestry land (Mha)
+ oq32_bv_plant(t,j,potnatveg,type)          Biodiversity value for plantations (Mha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
