@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -68,14 +68,14 @@ parameters
 * technical
  p15_modelstat(t)                       Model solver status (1)
  p15_iteration_counter(t)               Number of iterations required for reaching an equilibrium between food demand model and magpie (1)
- p15_convergence_measure(t)             Convergence measure to decide for continuation or stop of food_demand - magpie iteration (1)
+ p15_convergence_measure(t,iter15)      Convergence measure to decide for continuation or stop of food_demand - magpie iteration (1)
  i15_dem_intercept(iso,regr15)          Food regression parameters intercept in kcal or as share (X)
  i15_dem_saturation(iso,regr15)             Food regression parameters saturation in kcal or as share (X)
  i15_dem_halfsat(iso,regr15)                Food regression parameters halfsaturation (USD05PPP per cap)
  i15_dem_nonsat(iso,regr15)                 Food regression parameters nonsaturation (1)
 
 *prices
- p15_prices_kcal(t,iso,kfo)                        Prices from MAgPIE after optimization (USD05PPP per kcal)
+ p15_prices_kcal(t,iso,kfo,iter15)                 Prices from MAgPIE after optimization (USD05PPP per kcal)
  i15_prices_initial_kcal(iso,kfo)                  Initial prices that capture the approximate level of prices in 1961-2010 (USD05PPP per kcal)
 
 * anthropometrics
@@ -107,6 +107,10 @@ parameters
   i15_alcohol_fadeout(t,i)                         Alcohol fadeout share (1)
   i15_livestock_fadeout(t,i)                       Livestock fadeout share (1)
   i15_rumdairy_fadeout(t,i)                        Ruminant meat and dairy fadeout share (1)
+  i15_rumdairy_scp_fadeout(t,i)                    Ruminant meat and dairy fadeout share to be replaced by SCP (1)
+  i15_livestock_fadeout_threshold(t,i)             Livestock fadeout share for threshold (1)
+
+  i15_protein_to_kcal_ratio(t,kfo)			 	   protein-to-kcal ratio (g protein per kcal)
 
  i15_staples_kcal_structure_iso(t,iso,kfo_st)        Share of single staple products within total staples (1)
  i15_livestock_kcal_structure_iso_raw(t,iso,kfo_ap)  Share of single livestock products within total livestock products (uncorrected for future changes in shares) (1)
@@ -137,6 +141,7 @@ parameters
  p15_livestock_kcal_structure_orig(t,i,kfo_lp)   Auxiliary parameter for livestock kcal structure - basis for scenarios of livestock food substitution (1)
  p15_rumdairy_kcal_structure_orig(t,i,kfo_rd)    Auxiliary parameter for ruminant and dairy kcal structure - basis for scenarios of ruminant-based food substitution (1)
  p15_plant_kcal_structure_orig(t,i,kfo_pp)       Auxiliary parameter for plant-based food kcal structure - basis for scenarios of livestock food substitution (1)
+ p15_kcal_pc_livestock_supply_target(i)		 	 Target of per capita livestock consumption (kcal per capita per day)
 
  p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)     Calibrated estimates of BMI share for population groups  (1)
  p15_intake_total_iso_calibrated(t,iso)                Total food intake in a country (kcal per capita per day)
@@ -162,10 +167,8 @@ parameters
  p15_foodscen_region_shr(t_all,i)             Weighted share of region with regards to diet scenario of countries (1)
 
 * calculate diet iteration breakpoint
- p15_income_pc_real_ppp(t,i)                 Regional per capita income after price shock on regional level (USD05PPP per capita)
- p15_delta_income(t,i)                       Regional change in per capita income due to price shock on regional level (1)
- p15_lastiteration_delta_income(t,i)         Regional change in per capita income due to price shock of last iteration (1)
-
+ p15_income_pc_real_ppp(t,i)                  Regional per capita income after price shock on regional level (USD05PPP per capita)
+ p15_delta_income(t,i,iter15)                 Regional change in per capita income due to price shock on regional level (1)
 ;
 
 scalars

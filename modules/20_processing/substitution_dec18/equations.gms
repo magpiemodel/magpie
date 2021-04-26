@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -42,13 +42,13 @@ q20_processing_aggregation_cotton(i2) ..
 
 
 *' The fourth equation below describes the transformation of primary products into secondary products.
-*' The processing conversion factors (`f20_processing_conversion_factors_cf`) indicate how much secondary products
+*' The processing conversion factors (`i20_processing_conversion_factors_cf`) indicate how much secondary products
 *' can be derived from one unit of a specific primary product. The conversion factors are globally
 *' equal to avoid path-dependencies in future outlooks based on historical patterns.
 *' Historical differences in conversion efficiencies are instead considered using
 *' a static balanceflow.
 *' To avoid perfect substitutability between different primary commodities being transformed into the same
-*' secondary product (e.g. oil from sunflower or oil palm), we use share factor coefficients, `f20_processing_shares`,
+*' secondary product (e.g. oil from sunflower or oil palm), we use share factor coefficients, `i20_processing_shares`,
 *' which indicate how much of the secondary products comes from which primary products.
 *' The parameter `f20_processing_balanceflow` accounts for differences in conversion efficiency among various countries
 *' whereas the conversion factors remain global. The `v20_secondary_substitutes` are used to avoid overproduction of couple products: for each couple product,
@@ -58,9 +58,9 @@ q20_processing_aggregation_cotton(i2) ..
 
 q20_processing(i2,kpr,ksd) ..
   sum(processing20, v20_dem_processing(i2,processing20,kpr)
-         * sum(ct,f20_processing_conversion_factors(ct,processing20,ksd,kpr)))  =e=
+         * sum(ct,i20_processing_conversion_factors(ct,processing20,ksd,kpr)))  =e=
  (vm_prod_reg(i2,ksd) - sum(ct,f20_processing_balanceflow(ct,i2,ksd)))
-         * sum(ct,f20_processing_shares(ct,i2,ksd,kpr))
+         * sum(ct,i20_processing_shares(ct,i2,ksd,kpr))
          - v20_secondary_substitutes(i2,ksd,kpr)
          + vm_secondary_overproduction(i2,ksd,kpr);
 
@@ -102,20 +102,23 @@ q20_processing_substitution_brans(i2) ..
 *' depend on the type of the primary product (e.g. maize, sugar cane, cotton),
 *' the type of the process (e.g. milling, refining, ginning),
 *' and the type of secondary product (e.g. brans, sugar, fiber) product.
-*' The unit costs of processing, `f20_processing_unitcosts`,
+*' The unit costs of processing, `i20_processing_unitcosts`,
 *' are specific for the different conversion routes and are collected, interpolated,
 *' and extrapolated from the related literature (e.g. @adanacioglu_profitability_2011, @pikaar_decoupling_2018, @valco_thecost_2016)
 *' complemented with best educated guess by the module authors.
-
-
+*' Costs for single-cell protein production (scp) are handled differently because 
+*' scp production with hydrogen as substrate (scp_hydrogen) has no land requirements, and thus 
+*' would have no costs (`i20_processing_conversion_factors` is 0 for scp_hydrogen).
+*' All other scp production routes (scp_methane,scp_sugar,scp_cellulose) have land requirements 
+*' mapped to specific crops (`f20_scp_conversionmatrix`). 
 
 q20_processing_costs(i2) ..
  vm_cost_processing(i2) =e=
 sum((ksd,processing20,kpr), v20_dem_processing(i2,processing20,kpr)
-         *sum(ct,f20_processing_conversion_factors(ct,processing20,ksd,kpr))
-         * (
-            f20_processing_unitcosts(ksd,kpr)
-         ));
+         *sum(ct,i20_processing_conversion_factors(ct,processing20,ksd,kpr))
+         * i20_processing_unitcosts(ksd,kpr))
+         + (vm_prod_reg(i2,"scp") * sum(scptype, sum(ct, i20_scp_type_shr(ct,scptype)) * f20_scp_unitcosts(scptype)));
+         ;
 
 *' Finally, we assume that any substitution of one product by another,
 *' diverging from our initial demand estimates, comes at a loss of utility.
@@ -135,5 +138,5 @@ q20_substitution_utility_loss(i2) ..
         * 200
       ) +
       sum((ksd,processing20,kpr), v20_dem_processing(i2,processing20,kpr)
-        *sum(ct,f20_processing_conversion_factors(ct,processing20,ksd,kpr))
+        *sum(ct,i20_processing_conversion_factors(ct,processing20,ksd,kpr))
         * (f20_quality_cost(ksd,kpr)+f20_calibration(ksd,kpr)));

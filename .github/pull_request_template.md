@@ -38,6 +38,7 @@ Changes are deletion or updates to the existing model components in default conf
 ## Checklist:
 
 - [ ] Self-review of my own code.
+- [ ] Compilation check (model starts without compilation errors).
 - [ ] Added changes to `CHANGELOG.md`
 - [ ] No hard coded numbers and cluster/country/region names.
 - [ ] The code doesn't contain declared but unused parameters or variables.

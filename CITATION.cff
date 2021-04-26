@@ -45,16 +45,21 @@ authors:
     given-names: Abhijeet
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: mishra@pik-potsdam.de
-  
+
   - family-names: Beier
     given-names: Felicitas Dorothea
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: beier@pik-potsdam.de
-    
+
   - family-names: Molina Bacca
     given-names: Edna Johanna
-    affiliation: "Potsdam Institute for Climate Impact Research" 
+    affiliation: "Potsdam Institute for Climate Impact Research"
     email: mbacca@pik-potsdam.de
+
+  - family-names: von Jeetze
+    given-names: Patrick
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: vjeetze@pik-potsdam.de
 
   - family-names: Klein
     given-names: David
@@ -86,8 +91,8 @@ authors:
     email: popp@pik-potsdam.de
 
 title: MAgPIE - An Open Source land-use modeling framework
-version: 4.3.0
-date-released: 2020-09-15
+version: 4.3.3
+date-released: 2021-03-30
 repository-code: https://github.com/magpiemodel/magpie
 keywords:
   - landuse

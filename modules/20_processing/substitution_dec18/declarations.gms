@@ -1,10 +1,17 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+parameters
+ i20_processing_shares(t_all,i,ksd,kpr)			    Shares of secondary products coming from a primary product (1)
+ i20_processing_conversion_factors(t_all,processing20,ksd,kpr) Conversion factors of primary products into secondary products (1)
+ i20_processing_unitcosts(ksd,kpr)   				Costs of transforming x units kpr into 1 unit ksd (USD05MER per tDM)
+ i20_scp_type_shr(t_all,scptype)                    Share of SCP each type (1)
+ i20_scp_conversion_factors(t_all,kpr)				SCP conversion factors (1)
+ ;
 
 
 positive variables
@@ -20,7 +27,7 @@ variables
 ;
 
 equations
-     q20_processing(i,kpr,ksd)                          Processing equation (mio. tDM per yr)
+     q20_processing(i,kpr,ksd)                        	Processing equation (mio. tDM per yr)
      q20_processing_aggregation_nocereals(i,kpr)        Connecting processing activity to processing flows (mio. tDM per yr)
      q20_processing_aggregation_cereals(i,kcereals20)   Connecting processing activity to food use for milling (mio. tDM per yr)
      q20_processing_aggregation_cotton(i)               Connecting processing activity to production for cotton ginning (mio. tDM per yr)

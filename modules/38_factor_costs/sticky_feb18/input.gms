@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -21,7 +21,7 @@ s38_mi_start global management intensity in 1995 /0.47/
 s38_fraction_gdp maximum percentage of the overall GDP /0.15/
 ;
 
-parameter f38_fac_req_per_ton(kcr) Factor requirements (US$05 per ton DM)
+parameter f38_fac_req_per_ton(kcr) Factor requirements (USD05 per ton DM)
 /
 $ondelim
 $include "./modules/38_factor_costs/input/f38_fac_req_per_ton.csv"

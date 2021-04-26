@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -15,3 +15,43 @@ loop(t_all,
   im_feed_baskets(t_all,i,kap,kall) = f70_feed_baskets(t_all,i,kap,kall,"%c70_feed_scen%");
  );
 );
+
+
+* Switch to determine countries for which feed substitution scenarios shall be applied.
+* In the default case, the food scenario affects all countries when activated.
+p70_country_dummy(iso) = 0;
+p70_country_dummy(scen_countries70) = 1;
+
+
+* Because MAgPIE is not run at country-level, but at region level, a region
+* share is calculated that translates the countries' influence to regional level.
+* Countries are weighted by their population size.
+p70_feedscen_region_shr(t_all,i) = sum(i_to_iso(i,iso), p70_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
+
+* Feed substitution scenarios including functional forms, targets and transition periods
+* Note: p70_feedscen_region_shr(t,i) is 1 in the default case)
+i70_cereal_scp_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*(1-f70_feed_substitution_fader(t_all,"%c70_cereal_scp_scen%"));
+i70_foddr_scp_fadeout(t_all,i) = 1 - p70_feedscen_region_shr(t_all,i)*(1-f70_feed_substitution_fader(t_all,"%c70_foddr_scp_scen%"));
+
+
+*** Substitution of cereal feed (kcer70) with single-cell protein (SCP) based on Nr
+* Before the substitution, kcer70 is converted from DM to Nr
+* using fm_attributes("nr",kcer70).
+* After the substitution of kcer70 with SCP (1-i70_cereal_scp_fadeout), SCP is converted
+* back DM fm_attributes("nr","scp").
+im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")
+             + sum(kcer70, im_feed_baskets(t_all,i,kap,kcer70) * (1-i70_cereal_scp_fadeout(t_all,i)) *
+             fm_attributes("nr",kcer70)) / fm_attributes("nr","scp");
+im_feed_baskets(t_all,i,kap,kcer70) =
+               im_feed_baskets(t_all,i,kap,kcer70) * i70_cereal_scp_fadeout(t_all,i);
+
+*** Substitution of foddr feed with single-cell protein (SCP) based on Nr
+* Before the substitution, foddr is converted from DM to Nr
+* using fm_attributes("nr","foddr").
+* After the substitution of foddr with SCP (1-i70_foddr_scp_fadeout), SCP is converted
+* back DM fm_attributes("nr","scp").
+im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")
+             + (im_feed_baskets(t_all,i,kap,"foddr") * (1-i70_foddr_scp_fadeout(t_all,i)) * 
+             fm_attributes("nr","foddr")) / fm_attributes("nr","scp");
+im_feed_baskets(t_all,i,kap,"foddr") =
+               im_feed_baskets(t_all,i,kap,"foddr") * i70_foddr_scp_fadeout(t_all,i);

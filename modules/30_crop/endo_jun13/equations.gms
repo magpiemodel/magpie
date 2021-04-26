@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -52,3 +52,13 @@
  q30_carbon(j2,ag_pools) ..
  vm_carbon_stock(j2,"crop",ag_pools) =e=
    vm_land(j2,"crop") * sum(ct,fm_carbon_density(ct,j2,"crop",ag_pools));
+
+
+*' The biodiversity value for cropland is calculated separately for annual and perennial crops:
+ q30_bv_ann(j2,potnatveg) .. vm_bv(j2,"crop_ann",potnatveg)
+ 					=e=
+ 					sum((crop_ann30,w), vm_area(j2,crop_ann30,w)) * fm_bii_coeff("crop_ann",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
+
+ q30_bv_per(j2,potnatveg) .. vm_bv(j2,"crop_per",potnatveg)
+ 					=e=
+ 					sum((crop_per30,w), vm_area(j2,crop_per30,w)) * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
