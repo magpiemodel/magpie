@@ -162,6 +162,10 @@ $title magpie
 * md5sum: 10d81d7c2aaac00bd9fc8b9342786ffa
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
+* Used data set: ZabelPatch_q33_marginal.tgz
+* md5sum: a02725732483fd7ae5d4ce33078d3044
+* Repository: ./patch_inputdata
+* 
 * Low resolution: c200
 * High resolution: 0.5
 * 
@@ -186,7 +190,7 @@ $title magpie
 * * Call: do.call(functiononly, args)
 * 
 * 
-* Last modification (input data): Tue Apr 20 19:27:35 2021
+* Last modification (input data): Mon Apr 26 19:07:38 2021
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -226,7 +230,7 @@ $setglobal land  landmatrix_dec18
 $setglobal costs  default
 $setglobal interest_rate  select_apr20
 $setglobal tc  endo_jun18
-$setglobal yields  dynamic_aug18
+$setglobal yields  managementcalib_aug19
 
 $setglobal food  anthropometrics_jan18
 $setglobal demand  sector_may15
