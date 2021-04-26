@@ -1,6 +1,6 @@
 ## :bird: Purpose of this PR :bird:
 
-This PR add major re-writing of current roundwood production routine. Production equations have now moved to respective forestry and natveg modules and then sent back to timber module. The module contracts have also now changed. Forestry (32_forestry) and natveg module (35_nateveg) now handle land movements along with harvesting decisions, age-class shifting decisions and new plantation establishment decisions. The Timber (73_timber) module now handles mainly the demand calculations and residue accounting from industrial roundwood production, and combines the different sources of timber harvest from 32_forestry and 35_natveg. This PR also improves the current default branch's runtime so we also introduce performance improvements.
+- Briefly explain the purpose of this pull request
 
 ## :wrench: Checklist for PR creator :wrench:
 
