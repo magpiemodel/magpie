@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @title Production
+*' @title Age class
 
 *' @description The age-class module calculates the distribution of secondary
 *' forests and timber plantations based on Poulter dataset. This is used in
