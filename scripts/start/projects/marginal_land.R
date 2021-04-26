@@ -23,11 +23,15 @@ cfg$qos <- "priority"
 
 
 # marginal land scenarios
-marginalLandScen <- c("q50_marginal")
+marginalLandScen <- c("all_marginal", "q33_marginal", "no_marginal")
 
 # Test different price levels
 
   for (marg in marginalLandScen) {
+
+
+    # recalibration
+    cfg$recalibrate <- TRUE
 
     # basic scenario setting
     cfg <- setScenario(cfg, c("SSP2", "NPI"))
@@ -38,10 +42,15 @@ marginalLandScen <- c("q50_marginal")
     cfg$gms$c30_marginal_land <- marg
 
     # Updating the title
-    cfg$title = paste0("SSP2_NPI_",marg)
+    cfg$title = paste0("SSP2_NPI_",marg,"_new")
+
+    cfg$results_folder <- "output/:title:"
 
     # Start run
     start_run(cfg=cfg,codeCheck=TRUE)
+
+    # submit calibration
+    magpie4::submitCalibration(paste0("H12_",marg,"_22Apr2021"))
 
   }
 
