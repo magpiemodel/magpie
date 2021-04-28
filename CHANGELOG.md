@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **51_nitrogen** New calculations for emissions from agricultural residues (vm_res_ag_burn)
 
 ### added
 
