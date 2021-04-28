@@ -1,51 +1,57 @@
-Please fill following information
-(Add additional info if you think its important and not covered by this Pull Request (PR)):
+## :bird: Purpose of this PR :bird:
 
-## Purpose of this PR
+- Briefly explain the purpose of this pull request
 
-- Purpose
+## :wrench: Checklist for PR creator :wrench:
 
-## Performance loss/gain from current default behavior
+- [ ] Labeling pull request correctly [from the label list](https://github.com/magpiemodel/magpie/labels).
 
-- Add an image using plot from `shinyresults::appResults()` and annotate accordingly.
+* Low risk : Simple bugfixes (missing files, updated documentation, typos) or Start/output scripts
+* Medium risk : New realization / Changes to existing realization / Other changes which don't modify default.cfg
+* High risk : New input files (if cfg$input is changed in default.cfg) / Modification to core model (eg. changes in equations, calculations, introduction of new sets etc.) / Other changes in default.cfg
 
-- %performance loss/gain = 100*Runtime from PR/Runtime from current default from develop branch.
+- [ ] Providing additional information based on PR label
 
-## Type of change
+* Low risk : No new model run needed.
+* Medium risk : Default run based on the current version of the fork from which PR is made
+* High risk
+  * Default run from the current develop branch
+  * Default run based on the current version of the fork from which PR is made
 
-- [ ] Bug fix (Change which fixes an issue).
-- [ ] New feature (Change which adds functionality).
-- [ ] Minor change (Change which does not modify core model code i.e., in /modules).
-- [ ] Major change (fix or feature that would change current model behavior).
+- [ ] :chart_with_downwards_trend: Performance loss/gain from current default behavior :chart_with_upwards_trend:
+  * Current develop branch default : ** mins
+  * This PR's default :  ** mins
 
-## How Has This Been Tested?
-
-- [ ] Runs using starting script which tests current defaults (using `test_runs.R`).
-- [ ] Runs using starting script which successfully runs the same scenarios as in `test_runs.R` but with the changes from PR.
-- [ ] (If applicable) Runs using different scenarios/mappings which are not the default (12 regions/c200 clusters).
-
-## *Additions* or *Changes* to default configuration (default.cfg):
-Additions are the introduction of new model components in default config
-
-Changes are deletion or updates to the existing model components in default config
-
-- [ ] Realizations:
-- [ ] Scenario switches:
-- [ ] Scalars/Constants:
-- [ ] Model interfaces:
-- [ ] Others:
-
-## Checklist:
-
-- [ ] Self-review of my own code.
-- [ ] Compilation check (model starts without compilation errors).
 - [ ] Added changes to `CHANGELOG.md`
+- [ ] Compilation check (model starts without compilation errors - use `gams main.gms action=c` in model folder for testing).
 - [ ] No hard coded numbers and cluster/country/region names.
-- [ ] The code doesn't contain declared but unused parameters or variables.
-- [ ] In-code comments added including documentation comments.
-- [ ] Compiled and checked resulting documentation with `goxygen::goxygen()` for the new/updated parts.
-- [ ] Changes to `magpie4` R library for post processing of model output (ideally backward compatible).
+- [ ] The new code doesn't contain declared but unused parameters or variables.
+- [ ] Where relevant, In-code comments added including documentation comments.
+- [ ] Made sure that documentation created with [`goxygen`](https://github.com/pik-piam/goxygen) is okay (use `goxygen::goxygen()` for testing).
+- [ ] Changes to [`magpie4`](https://github.com/pik-piam/magpie4) R library for post processing of model output (ideally backward compatible).
+- [ ] Self-review of my own code.
+- [ ] For high risk runs: validation of major model indicators - Land-use, emissions, food prices, Tau.  %Delete this line in case it is not a high risk run%
 
-## Special comments/warnings
+## :warning: Additional notes or warnings :warning:
+NA
 
-- Notes
+## :rotating_light: Checklist for RSE reviewer :rotating_light:
+
+- [ ] PR is labeled correctly.
+- [ ] `CHANGELOG` is updated correctly
+- [ ] No hard coded numbers and cluster/country/region names.
+- [ ] No unnecessary increase in module interfaces
+- [ ] All required updates in interfaces (if any) have been properly adressed in the module contracts
+- [ ] In-code comments and documentation comments are satisfactory.
+- [ ] model behavior/performance is satisfactory.
+- [ ] Requested changes (if any) were applied correctly
+
+## :rotating_light: Checklist for MAgPIE reviewer :rotating_light:
+
+- [ ] PR is labeled correctly.
+- [ ] `CHANGELOG` is updated correctly
+- [ ] No hard coded numbers and cluster/country/region names.
+- [ ] Changes to the model are scientifically sound
+- [ ] In-code comments and documentation comments are satisfactory.
+- [ ] model behavior/performance is satisfactory.
+- [ ] Requested changes (if any) were applied correctly
