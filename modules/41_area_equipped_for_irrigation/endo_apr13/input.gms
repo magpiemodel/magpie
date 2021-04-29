@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c41_initial_irrigation_area  LUH2v2
+$setglobal c41_initial_irrigation_area  Siebert
 
 table f41_c_irrig(t_all,i) Irrigation investment costs (USD04MER per ha)
 $ondelim

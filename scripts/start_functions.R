@@ -181,6 +181,24 @@
 }
 
 
+.spam2rds <- function(spatial_header, cells_tmp, 
+                      outfile  = "clustermap_rev0_dummy.rds", 
+                      spamfile = Sys.glob("input/0.5-to-*_sum.spam")) {
+
+  
+
+
+  print("works")
+  sp  <- luscale::read.spam(spamfile)
+  a   <- apply(sp, 2, function(x) return(which(x == 1)))
+  out <- data.frame(cell = cells_tmp, region = sub("\\..*$","",spatial_header), 
+                    country = sub("\\..*$","",cells_tmp), global = "GLO")
+  out$cluster <- paste0(out$region,".",a)
+  out <- out[,c("cell", "cluster","region","country","global")]
+  saveRDS(out, paste0("input/",outfile), version = 2)
+}
+
+
 ################################################################################
 ######################### MAIN FUNCTIONS #######################################
 ################################################################################
@@ -204,10 +222,14 @@ download_and_update <- function(cfg) {
   # updating the general information in magpie.gms and input/info.txt
   # and .update_sets, which is updating the resolution- and region-depending
   # sets in core/sets.gms
-  tmp <- magclass::read.magpie("modules/10_land/input/avl_land_t.cs3")
-  cpr <- magclass::getCPR(tmp)
+  tmp  <- magclass::read.magpie("modules/10_land/input/avl_land_t.cs3")
+  cpr  <- magclass::getCPR(tmp)
+  tmp2 <- magclass::read.magpie("modules/10_land/input/avl_land_t_0.5.mz")
+  cel  <- magclass::getItems(tmp2,1) 
   # read spatial_header, map, reg_revision and regionscode
   load("input/spatial_header.rda")
+  map_file <- "input/clustermap_rev*.rds"
+  if(!file.exists(map_file)) .spam2rds(spatial_header, cel, "clustermap_rev0_dummy.rds")
   .update_info(filemap,cpr,regionscode,reg_revision, warnings)
   .update_sets_core(cpr,map)
   .update_sets_modules()
