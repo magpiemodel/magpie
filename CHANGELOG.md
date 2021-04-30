@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### fixed
 - **20_processing** The "mixed" scenario for single-cell protein production (c20_scp_type) was not working as expected. The corresponding code in 20_processing has been updated.
+- **15_food** single-cell protein substitution scenarios included in intersolve.gms.
 
 
 ## [4.3.3] - 2021-03-30
