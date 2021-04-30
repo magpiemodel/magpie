@@ -8,12 +8,12 @@
 *' @title Residues
 *'
 *' @description The residues module calculates the production of crop residues
-*' (straw etc.) and its subsequent use. Residues can be burned, used for feed,
-*' recycled to soils or used for other purposes (construction, fuel etc).
+*' (straw, etc.) and its subsequent use. Residues can be burned, used for feed,
+*' recycled to soils or used for other purposes (construction, fuel, etc.).
 *'
 *' The module also calculates the costs of crop residue harvest when it is used
 *' for feed or material purposes.
-
+*'
 *' @authors Benjamin Leon Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
