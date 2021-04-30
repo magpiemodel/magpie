@@ -163,8 +163,8 @@ $title magpie
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: additional_data_rev4.00.tgz
-* md5sum: 0d25d76eb2e080c8d42f92265b05bbfc
-* Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/input_data/
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -197,7 +197,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Sat Apr 24 11:43:21 2021
+* Last modification (input data): Fri Apr 30 11:03:40 2021
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
