@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c52_carbon_scenario  nocc
+$setglobal c52_carbon_scenario  cc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
 

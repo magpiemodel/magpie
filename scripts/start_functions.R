@@ -228,8 +228,8 @@ download_and_update <- function(cfg) {
   cel  <- magclass::getItems(tmp2,1) 
   # read spatial_header, map, reg_revision and regionscode
   load("input/spatial_header.rda")
-  map_file <- "input/clustermap_rev*.rds"
-  if(!file.exists(map_file)) .spam2rds(spatial_header, cel, "clustermap_rev0_dummy.rds")
+  rds <- any(grepl(pattern = "clustermap_rev.*.rds", x=list.files("input")))
+  if(!rds) .spam2rds(spatial_header, cel, "clustermap_rev0_dummy.rds")
   .update_info(filemap,cpr,regionscode,reg_revision, warnings)
   .update_sets_core(cpr,map)
   .update_sets_modules()

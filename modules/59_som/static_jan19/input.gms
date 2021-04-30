@@ -9,7 +9,7 @@ $setglobal c59_static_spatial_level  cellular
 *   options:   cellular  (use preprocessed cellular stock change factors)
 *              cluster   (use cshare_released on cluster within gams)
 
-$setglobal c59_som_scenario  nocc
+$setglobal c59_som_scenario  cc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
 
