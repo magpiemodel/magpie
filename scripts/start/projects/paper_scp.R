@@ -31,7 +31,7 @@ cfg$output <- c("rds_report","extra/disaggregation")
 
 cfg <- setScenario(cfg,c("SSP2","NPI"))
 
-prefix <- "SCP35"
+prefix <- "SCP36"
 cfg$qos <- "priority"
 
 cfg$gms$s80_optfile <- 1

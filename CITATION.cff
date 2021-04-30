@@ -9,6 +9,7 @@ authors:
 
   - family-names: Bodirsky
     given-names: Benjamin Leon
+    orcid: https://orcid.org/0000-0002-8242-6712
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: bodirsky@pik-potsdam.de
 
@@ -19,6 +20,7 @@ authors:
 
   - family-names: Humpenöder
     given-names: Florian
+    orcid: https://orcid.org/0000-0003-2927-9407
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: humpenoeder@pik-potsdam.de
 
@@ -43,6 +45,7 @@ authors:
 
   - family-names: Mishra
     given-names: Abhijeet
+    orcid: https://orcid.org/0000-0002-8287-9922
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: mishra@pik-potsdam.de
 
@@ -53,13 +56,26 @@ authors:
 
   - family-names: Molina Bacca
     given-names: Edna Johanna
+    orcid: https://orcid.org/0000-0001-6530-1849
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: mbacca@pik-potsdam.de
 
   - family-names: von Jeetze
     given-names: Patrick
+    orcid: https://orcid.org/0000-0002-1197-4412
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: vjeetze@pik-potsdam.de
+
+  - family-names: Windisch
+    given-names: Michael
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: windisch@pik-potsdam.de
+
+  - family-names: Crawford
+    given-names: Michael Scott
+    orcid: https://orcid.org/0000-0003-1282-400X
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: crawford@pik-potsdam.de
 
   - family-names: Klein
     given-names: David
@@ -82,11 +98,13 @@ authors:
 
   - family-names: Lotze-Campen
     given-names: Hermann
+    orcid: https://orcid.org/0000-0002-0003-5508
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: lotze-campen@pik-potsdam.de
 
   - family-names: Popp
     given-names: Alexander
+    orcid: https://orcid.org/0000-0001-9500-1986
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: popp@pik-potsdam.de
 
