@@ -21,6 +21,7 @@ parameters
  oq51_emissions_inorg_fert(t,i,n_pollutants_direct,type) estimates various emission types X from inorganic fertilizer before technical mitigation (Mt X-N)
  oq51_emissions_man_crop(t,i,n_pollutants_direct,type)   estimates various emission types X from manure on cropland before technical mitigation   (Mt X-N)
  oq51_emissions_resid(t,i,n_pollutants_direct,type)      estimates various emission types X from residues before technical mitigation            (Mt X-N)
+ oq51_emissions_resid_burn(t,i,n_pollutants_direct,type) estimates various emission types X from residues burning (Mt X-N)
  oq51_emissions_som(t,i,n_pollutants_direct,type)        estimates various emission types X from soil organic matter loss before technical mitigation (Mt X-N)
  oq51_emissionbal_man_past(t,i,n_pollutants_direct,type) estimates various emission types X from manure on pasture land before technical mitigation (Mt X-N)
  oq51_emissionbal_awms(t,i,n_pollutants_direct,type)     estimates various emission types X from animal waste management systems before technical mitigation  (Mt X-N)

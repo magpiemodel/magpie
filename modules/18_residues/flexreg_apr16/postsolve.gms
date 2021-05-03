@@ -14,7 +14,7 @@
  ov_res_biomass_bg(t,i,kcr,dm_nr,"marginal")           = vm_res_biomass_bg.m(i,kcr,dm_nr);
  ov18_res_ag_removal(t,i,kcr,attributes,"marginal")    = v18_res_ag_removal.m(i,kcr,attributes);
  ov18_res_ag_recycling(t,i,kcr,attributes,"marginal")  = v18_res_ag_recycling.m(i,kcr,attributes);
- ovm_res_ag_burn(t,i,kcr,attributes,"marginal")        = vm_res_ag_burn.m(i,kcr,attributes);
+ ov_res_ag_burn(t,i,kcr,attributes,"marginal")         = vm_res_ag_burn.m(i,kcr,attributes);
  ov_res_recycling(t,i,npk,"marginal")                  = vm_res_recycling.m(i,npk);
  oq18_prod_res_ag_reg(t,i,kcr,attributes,"marginal")   = q18_prod_res_ag_reg.m(i,kcr,attributes);
  oq18_prod_res_bg_reg(t,i,kcr,dm_nr,"marginal")        = q18_prod_res_bg_reg.m(i,kcr,dm_nr);
