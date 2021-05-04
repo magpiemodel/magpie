@@ -56,6 +56,6 @@ for (pol in c("Ref","Climate","Climate+Nature")) {
     cfg$gms$c35_protect_scenario <- "LW"
     cfg$gms$c44_price_bv_loss <- "p10_p10000"
   }
-  cfg$title <- paste(prefix,paste0("SSP2-",pol,sep="_"))
+  cfg$title <- paste(prefix,paste0("SSP2-",pol),sep="_")
   start_run(cfg,codeCheck=FALSE)
 }
