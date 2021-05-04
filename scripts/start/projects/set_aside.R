@@ -14,6 +14,7 @@ library(lucode2)
 library(magclass)
 library(magpie4)
 library(gms)
+library(stringr)
 
 source("scripts/start_functions.R")
 source("scripts/performance_test.R")
@@ -22,29 +23,30 @@ source("config/default.cfg")
 cfg$qos <- "priority"
 
 
-# biodiversity scenarios
-#bvPriceScen <- c("p0","p1_p10","p10_p100","p10_p10000")
-bvPriceScen <- c("p0", "p10_p10000")
+# set-aside scenarios
+setAsideScen <- c(0, 0.1, 0.2, 0.3)
+setAsideNames <- c("0per", "10per", "20per", "30per")
+targetYear <- c("by2030", "by2050")
 
 # Test different price levels
-
-  for (pricelevel in bvPriceScen) {
+for (by in targetYear){
+  for (s in 1:length(setAsideScen)) {
 
     # basic scenario setting
     cfg <- setScenario(cfg, c("SSP2", "NPI"))
     cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
     cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
 
-    # biodiversity price
-    cfg$gms$c44_price_bv_loss <- pricelevel
+    # set aside share
+    cfg$gms$s30_set_aside_shr <- setAsideScen[s]
+    # target year
+    cfg$gms$c30_set_aside_target <- by
 
     # Updating the title
-    cfg$title = paste0("SSP2_NPI_bv_",pricelevel)
+    cfg$title = paste0("SSP2_NPI_set_aside_",setAsideNames[s],str_to_title(by))
 
     # Start run
     start_run(cfg=cfg,codeCheck=TRUE)
 
   }
-
-
-
+}
