@@ -99,8 +99,10 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
 
 q32_bv_aff(j2,potnatveg) .. vm_bv(j2,"aff_co2p",potnatveg)
  				  =e=
-          sum(ac_mature, v32_land(j2,"aff",ac_mature)) * fm_bii_coeff("secd_mature",potnatveg) * fm_luh2_side_layers(j2,potnatveg)
-          + sum(ac_young, v32_land(j2,"aff",ac_young)) * fm_bii_coeff("secd_young",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
+          sum(ac_mature, v32_land(j2,"aff",ac_mature)) * fm_luh2_side_layers(j2,potnatveg) * 
+          (fm_bii_coeff("secd_mature",potnatveg)*(1-s32_aff_plantation) + fm_bii_coeff("timber",potnatveg)*(s32_aff_plantation))
+          + sum(ac_young, v32_land(j2,"aff",ac_young)) * fm_luh2_side_layers(j2,potnatveg) * 
+          (fm_bii_coeff("secd_young",potnatveg)*(1-s32_aff_plantation) + fm_bii_coeff("timber",potnatveg)*(s32_aff_plantation));
 
 q32_bv_ndc(j2,potnatveg) .. vm_bv(j2,"aff_ndc",potnatveg)
  					=e=
@@ -109,7 +111,11 @@ q32_bv_ndc(j2,potnatveg) .. vm_bv(j2,"aff_ndc",potnatveg)
 
 q32_bv_plant(j2,potnatveg) .. vm_bv(j2,"plant",potnatveg)
  					=e=
-          sum(ac, v32_land(j2,"plant",ac)) * fm_bii_coeff("timber",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
+          sum(ac_mature, v32_land(j2,"plant",ac_mature)) * fm_luh2_side_layers(j2,potnatveg) * 
+		  (fm_bii_coeff("secd_mature",potnatveg)*(1-s32_timber_plantation) + fm_bii_coeff("timber",potnatveg)*(s32_timber_plantation))
+        + sum(ac_young, v32_land(j2,"plant",ac_young)) * fm_luh2_side_layers(j2,potnatveg) * 
+		  (fm_bii_coeff("secd_young",potnatveg)*(1-s32_timber_plantation) + fm_bii_coeff("timber",potnatveg)*(s32_timber_plantation));
+
 
 ************************************************************
 **** Timber production related equations in plantations ****
