@@ -13,17 +13,14 @@
 library(gms)
 source("scripts/start_functions.R")
 source("config/default.cfg")
+source("scripts/start/extra/lpjml_addon.R")
 
-cfg$input <- c("rev4.59irrig_is_rainf_h12_magpie_debug.tgz",
-               "rev4.59irrig_is_rainf_h12_83796d6b_cellularmagpie_debug.tgz",
-               "rev4.59irrig_is_rainf_h12_validation_debug.tgz",
-               "additional_data_rev4.02.tgz")
-
-cfg$title                            <- "default_lpjml5"
-cfg$crop_calib_max                   <- 1.5
-cfg$gms$yields                       <- "managementcalib_aug19"
-cfg$gms$s14_yld_past_switch          <- 0.25
-cfg$gms$c41_initial_irrigation_area  <- "LUH2v2"
-cfg                                  <- setScenario(cfg,"cc")
+cfg$title          <- "PRtest_cropsuit33_lpjml5"
+cfg$force_download <- TRUE
+cfg$recalibrate    <- TRUE
+cfg$gms$crop       <- "endo_apr21"
 start_run(cfg=cfg)
 
+cfg$gms$c30_marginal_land <- "all_marginal"   # def = "q33_marginal"
+cfg$title          <- "PRtest_cropsuitall_lpjml5"
+start_run(cfg=cfg)

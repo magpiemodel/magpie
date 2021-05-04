@@ -25,5 +25,4 @@ cfg$gms$yields                       <- "managementcalib_aug19"
 cfg$gms$s14_yld_past_switch          <- 0.25
 cfg$gms$c41_initial_irrigation_area  <- "LUH2v2"
 cfg                                  <- setScenario(cfg,"cc")
-start_run(cfg=cfg)
 

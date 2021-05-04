@@ -14,16 +14,11 @@ library(gms)
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
-cfg$input <- c("rev4.59irrig_is_rainf_h12_magpie_debug.tgz",
-               "rev4.59irrig_is_rainf_h12_83796d6b_cellularmagpie_debug.tgz",
-               "rev4.59irrig_is_rainf_h12_validation_debug.tgz",
-               "additional_data_rev4.02.tgz")
+cfg$title          <- "PRtest_default_fbranch"
+start_run(cfg=cfg)
 
-cfg$title                            <- "default_lpjml5"
-cfg$crop_calib_max                   <- 1.5
-cfg$gms$yields                       <- "managementcalib_aug19"
-cfg$gms$s14_yld_past_switch          <- 0.25
-cfg$gms$c41_initial_irrigation_area  <- "LUH2v2"
-cfg                                  <- setScenario(cfg,"cc")
+cfg$title          <- "PRtest_default_fbranch+recalib"
+cfg$force_download <- TRUE
+cfg$recalibrate    <- TRUE 
 start_run(cfg=cfg)
 
