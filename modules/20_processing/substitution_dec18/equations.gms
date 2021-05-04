@@ -107,17 +107,17 @@ q20_processing_substitution_brans(i2) ..
 *' and extrapolated from the related literature (e.g. @adanacioglu_profitability_2011, @pikaar_decoupling_2018, @valco_thecost_2016)
 *' complemented with best educated guess by the module authors.
 *' Costs for single-cell protein production (scp) are handled differently because 
-*' scp production with hydrogen as substrate (scp_hydrogen) has no land requirements, and thus 
-*' would have no costs (`i20_processing_conversion_factors` is 0 for scp_hydrogen).
-*' All other scp production routes (scp_methane,scp_sugar,scp_cellulose) have land requirements 
-*' mapped to specific crops (`f20_scp_conversionmatrix`). 
+*' scp production with hydrogen as substrate has no land requirements, and thus 
+*' would have no cost.
+*' All other scp production routes (mixed, methane, sugar and cellulose) have land requirements 
+*' mapped to specific crops (`f20_scp_processing_shares`). 
 
 q20_processing_costs(i2) ..
  vm_cost_processing(i2) =e=
 sum((ksd,processing20,kpr), v20_dem_processing(i2,processing20,kpr)
          *sum(ct,i20_processing_conversion_factors(ct,processing20,ksd,kpr))
          * i20_processing_unitcosts(ksd,kpr))
-         + (vm_prod_reg(i2,"scp") * sum(scptype, sum(ct, i20_scp_type_shr(ct,scptype)) * f20_scp_unitcosts(scptype)));
+         + (vm_prod_reg(i2,"scp") * sum(scptype, sum(ct, f20_scp_type_shr(scptype,"%c20_scp_type%")) * f20_scp_unitcosts(scptype)));
          ;
 
 *' Finally, we assume that any substitution of one product by another,

@@ -9,8 +9,6 @@ parameters
  i20_processing_shares(t_all,i,ksd,kpr)			    Shares of secondary products coming from a primary product (1)
  i20_processing_conversion_factors(t_all,processing20,ksd,kpr) Conversion factors of primary products into secondary products (1)
  i20_processing_unitcosts(ksd,kpr)   				Costs of transforming x units kpr into 1 unit ksd (USD05MER per tDM)
- i20_scp_type_shr(t_all,scptype)                    Share of SCP each type (1)
- i20_scp_conversion_factors(t_all,kpr)				SCP conversion factors (1)
  ;
 
 

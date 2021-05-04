@@ -162,7 +162,7 @@ $title magpie
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev3.99.tgz
+* Used data set: additional_data_rev4.00.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
@@ -197,7 +197,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Tue May  4 23:06:57 2021
+* Last modification (input data): Tue May  4 23:29:35 2021
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
