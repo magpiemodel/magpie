@@ -29,11 +29,12 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation")
 
-prefix <- "VE01"
+prefix <- "VE02"
 cfg$qos <- "priority"
 
 cfg$gms$s80_optfile <- 1
 cfg$gms$s80_maxiter <- 30
+
 
 #ref
 for (pol in c("Ref","Climate","Climate+Nature")) {
