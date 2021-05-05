@@ -13,6 +13,6 @@
 *' is multiplied with an annuity factor to distribute these costs over time.
 
 q39_cost_landcon(j2,land) .. vm_cost_landcon(j2,land) =e=
-	(vm_landexpansion(j2,land)*i39_cost_establish(land)
- 	+ v10_landreduction(j2,land)*i39_cost_clearing(land))
+	(vm_landexpansion(j2,land)*sum(ct, i39_cost_establish(ct,land))
+ 	+ v10_landreduction(j2,land)*sum(ct, i39_cost_clearing(ct,land)))
  	* sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));

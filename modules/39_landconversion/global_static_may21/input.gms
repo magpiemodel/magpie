@@ -7,5 +7,13 @@
 
 scalars
  s39_cost_establish   Cost for establishing new land use (USD05MER per hectare)    /500/
- s39_cost_clearing    Clearing costs linked to removed biomass (USD05MER per hectare)  /6000/
+ s39_cost_clearing    Clearing costs linked to removed biomass (USD05MER per hectare)  /8000/
+;
+
+parameter f39_cost_fader(t_all) cost fader (1)
+/
+$ondelim
+$include "./modules/39_landconversion/input/f39_cost_fader.csv"
+$offdelim
+/
 ;

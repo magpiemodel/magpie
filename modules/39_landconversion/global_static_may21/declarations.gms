@@ -14,8 +14,8 @@ variables
 ;
 
 parameters
- i39_cost_establish(land)		Global land establishment costs (USD05MER per hectare)
- i39_cost_clearing(land)        Global land clearing costs (USD05MER per hectare)
+ i39_cost_establish(t,land)		Global land establishment costs (USD05MER per hectare)
+ i39_cost_clearing(t,land)        Global land clearing costs (USD05MER per hectare)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
