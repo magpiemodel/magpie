@@ -29,7 +29,7 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation")
 
-prefix <- "VE05"
+prefix <- "VE06"
 cfg$qos <- "priority"
 
 cfg$gms$s80_optfile <- 1
@@ -38,9 +38,10 @@ cfg$gms$s80_maxiter <- 30
 cfg$gms$s32_planing_horizon <- 50
 cfg$gms$c35_protect_scenario <- "WDPA"
 cfg$gms$landconversion <- "global_static_may21"
+cfg$gms$c56_emis_policy <- "redd+_nosoil"
 
 #ref
-for (pol in c("Ref","Climate","Climate+Nature")) {
+for (pol in c("Ref","Climate","Climate+Nature","ClimatePlant+NatureP10","ClimateNatveg+NatureP0")) {
   if (pol == "Ref") {
     cfg <- setScenario(cfg,c("SSP2","NPI"))
     cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
