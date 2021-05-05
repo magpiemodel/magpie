@@ -7,5 +7,6 @@
 
 scalars
 s39_cost_establish   Cost for establishing new land use (USD05MER per hectare)    /8000/
+s39_cost_establish_forestry   Cost for extending forestry land (USD05MER per hectare)    /2000/
 s39_cost_clearing    Clearing costs linked to removed biomass (USD05MER per ton C)  /0/
 ;

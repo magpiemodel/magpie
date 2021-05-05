@@ -29,7 +29,7 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation")
 
-prefix <- "VE02"
+prefix <- "VE03"
 cfg$qos <- "priority"
 
 cfg$gms$s80_optfile <- 1
@@ -37,7 +37,7 @@ cfg$gms$s80_maxiter <- 30
 
 
 #ref
-for (pol in c("Ref","Climate","Climate+Nature")) {
+for (pol in c("Ref","Climate","Climate+Nature","Climate+NaturePrice")) {
   if (pol == "Ref") {
     cfg <- setScenario(cfg,c("SSP2","NPI"))
     cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
@@ -54,7 +54,15 @@ for (pol in c("Ref","Climate","Climate+Nature")) {
     cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
     cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
     cfg$gms$s32_aff_plantation <- 0
-    cfg$gms$c35_protect_scenario <- "LW"
+    cfg$gms$c35_protect_scenario <- "WDPA"
+    #    cfg$gms$c35_protect_scenario <- "LW"
+    cfg$gms$c44_price_bv_loss <- "p0"
+  } else if (pol == "Climate+NaturePrice") {
+    cfg <- setScenario(cfg,c("SSP2","NDC"))
+    cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
+    cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
+    cfg$gms$s32_aff_plantation <- 0
+    cfg$gms$c35_protect_scenario <- "WDPA"
     cfg$gms$c44_price_bv_loss <- "p10_p10000"
   }
   cfg$title <- paste(prefix,paste0("SSP2-",pol),sep="_")
