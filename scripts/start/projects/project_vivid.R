@@ -37,6 +37,7 @@ cfg$gms$s80_maxiter <- 30
 
 cfg$gms$s32_planing_horizon <- 50
 cfg$gms$c35_protect_scenario <- "WDPA"
+cfg$gms$landconversion <- "global_static_may21"
 
 #ref
 for (pol in c("Ref","Climate","Climate+Nature")) {
