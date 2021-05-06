@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
- s39_cost_establish   Cost for establishing new land use (USD05MER per hectare)    /500/
+ s39_cost_establish   Cost for establishing new land use (USD05MER per hectare)    /1000/
  s39_cost_clearing    Clearing costs linked to removed biomass (USD05MER per hectare)  /8000/
 ;
 
