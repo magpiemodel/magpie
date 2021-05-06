@@ -29,7 +29,7 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation")
 
-prefix <- "VE09"
+prefix <- "VE10"
 cfg$qos <- "priority"
 
 cfg$gms$s80_optfile <- 1
