@@ -36,6 +36,8 @@ for (i in realization){
 
  cfg$force_download <- TRUE
 
+cfg$gms$factor_costs <- i
+
  if(i=="sticky_feb18"){
    cfg$title <- paste0("calib_run_EPIC_mang",i,"_",so)
    cfg$gms$c38_sticky_mode  <- so
