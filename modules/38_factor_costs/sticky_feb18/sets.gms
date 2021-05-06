@@ -8,10 +8,9 @@
 sets
   mobil38 types of capital
   / mobile, immobile /
-;
 
-reg regression parameters for dynamic sticky
-/slope, intersept/
-;
+ reg regression parameters for dynamic sticky
+ /slope, intersept/
+ ;
 
 *** EOF sets.gms ***
