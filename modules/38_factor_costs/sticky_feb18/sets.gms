@@ -10,4 +10,8 @@ sets
   / mobile, immobile /
 ;
 
+reg regression parameters for dynamic sticky
+/slope, intersect/
+;
+
 *** EOF sets.gms ***

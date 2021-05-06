@@ -9,74 +9,61 @@
 # description: calculate and store new calibration for different factor costs, AEI and clustering
 # --------------------------------------------------------
 
-
+library(gms)
 library(magpie4)
 library(magclass)
-
+options(warn=-1)
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
 #start MAgPIE run
 source("config/default.cfg")
 
-cfg$results_folder <- "output/:title::date:"
-cfg$recalibrate <- TRUE
 
-#realization<-c("mixed_feb17","sticky_feb18")
 realization<-c("sticky_feb18")
-#clustering<-c("n200","c200")
-clustering<-c("c200")
-#AEI<-c("LUH2v2","Siebert")
-AEI<-c("LUH2v2")
-#preloopCalib<-c("managementcalib_aug19","dynamic_aug18")
-preloopCalib<-c("managementcalib_aug19")
+sticky_modes<-c("dynamic")
 
+input <- c("rev4.59SmashingPumpkins+ISIMIPyieldsTEST+ISIMIPyields_EPIC-IIASA:ukesm1-0-ll:ssp585:default_h12_df1b093f_cellularmagpie_debug.tgz",
+         "rev4.59SmashingPumpkins+StickyFiles_h12_magpie_debug.tgz",
+         "rev4.59SmashingPumpkins+ISIMIPyieldsTEST+ISIMIPyields_EPIC-IIASA:ukesm1-0-ll:ssp585:default_h12_validation_debug.tgz",
+         "additional_data_rev3.99.tgz",
+         "Zabelirrig_SP.tgz"
+         )
+#,
+# ### Normal
 for (i in realization){
-  for (k in clustering){
-    for (av in AEI){
-      for (p in preloopCalib){
-#removes previous calibration factors
-remove <- dir(pattern=c(".cs3"))
-file.remove(remove,recursive=FALSE)
+  for (so in sticky_modes) {
 
-cfg$force_download <- TRUE
+ cfg$force_download <- TRUE
 
-cfg$gms$yields <- p
+ if(i=="sticky_feb18"){
+   cfg$title <- paste0("calib_run_EPIC_mang",i,"_",so)
+   cfg$gms$c38_sticky_mode  <- so
+   cfg$crop_calib_max <- 2
+ }else{
+    cfg$title <- paste0("calib_run_EPIC_mang",i,"_")
+    cfg$crop_calib_max <- 1
+ }
 
-cfg$title <- paste0("calib_run_",i,"_",k,"_",av,"_",p)
+ cfg$input <- input
 
-#Selects factor costs realization
-cfg$gms$factor_costs <- i
-
-cfg$gms$c_timesteps <- 1
-cfg$output <- c("rds_report")
-cfg$sequential <- TRUE
-
-#Selects inputs based on clustering
-if(k=="c200"){
-
-  cfg$input <- c("rev4.47+mrmagpie7_h12_magpie_debug.tgz",
-         "rev4.47+mrmagpie7_h12_238dd4e69b15586dde74376b6b84cdec_cellularmagpie_debug.tgz",
-         "rev4.47+mrmagpie7_h12_validation_debug.tgz",
-         "additional_data_rev3.85.tgz"
-        )
-
-}else if(k=="n200"){
-
-  cfg$input <- c("rev4.47+mrmagpie7_h12_magpie_debug.tgz",
-         "rev4.47+mrmagpie7_h12_4ade54491b634b981be2d6c4a0d17706_cellularmagpie_debug.tgz",
-         "rev4.47+mrmagpie7_h12_validation_debug.tgz",
-         "additional_data_rev3.85.tgz"
-      )
-}
-
-# AEI switch
-
-cfg$gms$c41_initial_irrigation_area  <- av
+ cfg$results_folder <- "output/:title::date:"
+ cfg$recalibrate <- TRUE
+ cfg$gms$yields  <- "managementcalib_aug19"
 
 
-start_run(cfg,codeCheck=FALSE)
-magpie4::submitCalibration(paste0("H12_",i,"_",k,"_",av,"_",p))
-}
-}}
+ cfg$gms$c_timesteps <- 1
+ cfg$output <- c("rds_report")
+ cfg$sequential <- TRUE
+
+
+
+
+ start_run(cfg,codeCheck=FALSE)
+ if(i=="sticky_feb18"){
+   magpie4::submitCalibration(paste0("H12","_EPIC_",i,"_mang_",so))
+ }else{
+   magpie4::submitCalibration(paste0("H12","_EPIC_",i,"_mang_"))
+ }
+ }
 }
