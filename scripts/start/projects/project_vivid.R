@@ -35,7 +35,7 @@ cfg$qos <- "priority"
 cfg$gms$s80_optfile <- 1
 cfg$gms$s80_maxiter <- 30
 
-cfg$gms$s32_planing_horizon <- 50
+cfg$gms$s32_planing_horizon <- 100
 cfg$gms$c35_protect_scenario <- "WDPA"
 cfg$gms$c56_emis_policy <- "redd+_nosoil"
 
