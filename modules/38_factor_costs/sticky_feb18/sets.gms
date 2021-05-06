@@ -11,7 +11,7 @@ sets
 ;
 
 reg regression parameters for dynamic sticky
-/slope, intersect/
+/slope, intersept/
 ;
 
 *** EOF sets.gms ***
