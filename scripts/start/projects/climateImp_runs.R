@@ -34,7 +34,7 @@ input<-c("additional_data_rev4.02.tgz",
          "rev4.59SmashingPumpkins+StickyFiles_h12_magpie_debug.tgz",
          "rev4.59SmashingPumpkins+ISIMIPyields_h12_validation_debug.tgz")
 
-calibration<-("calibration_H12_rcp7p0_EPIC_GFDL_mixed_feb17__07May21.tgz",
+calibration<-c("calibration_H12_rcp7p0_EPIC_GFDL_mixed_feb17__07May21.tgz",
               "calibration_H12_rcp7p0_EPIC_GFDL_sticky_feb18_dynamic_07May21.tgz")
 
 
