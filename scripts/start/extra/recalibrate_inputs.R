@@ -20,7 +20,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 
-realization<-c("mixed")
+realization<-c("mixed_feb17")
 sticky_modes<-c("")
 
 combo<-c("rcp7p0_EPIC_GFDL","rcp7p0_CYGMA_GFDL",
