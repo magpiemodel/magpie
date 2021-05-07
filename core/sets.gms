@@ -258,7 +258,7 @@ sets
                     ac150,ac155,acx /
 
   ac_young(ac) age classes young
-                  / ac5,ac10,ac15,ac20,ac25,ac30 /
+                  / ac0,ac5,ac10,ac15,ac20,ac25,ac30 /
 
   ac_mature(ac) age classes mature
                      / ac35,ac40,ac45,ac50,ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,
