@@ -31,7 +31,7 @@ combo<-c(#"rcp7p0_EPIC_GFDL","rcp7p0_CYGMA_GFDL",
         "rcp7p0_EPIC_UKESM","rcp7p0_CYGMA_UKESM"
         )
 
-hashes_combos<-c("669b91c3","c6f10324",
+hashes_combos<-c(#"669b91c3","c6f10324",
                  "d972a1ce","5b2b868c","82675b72",
                  "c0547439","e61ed473","256c3ab7",
                  "6bd5239a","41ad9618")
