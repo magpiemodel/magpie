@@ -20,52 +20,56 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 
-realization<-c("sticky_feb18")
-sticky_modes<-c("dynamic")
+realization<-c("mixed")
+sticky_modes<-c("")
 
-input <- c("rev4.59SmashingPumpkins+ISIMIPyieldsTEST+ISIMIPyields_EPIC-IIASA:ukesm1-0-ll:ssp585:default_h12_df1b093f_cellularmagpie_debug.tgz",
+combo<-c("rcp7p0_EPIC_GFDL","rcp7p0_CYGMA_GFDL",
+        "rcp8p5_CYGMA_GFDL","rcp8p5_pDSSAT_GFDL","rcp8p5_EPIC_GFDL",
+        "rcp8p5_EPIC_UKESM","rcp8p5_CYGMA_UKESM","rcp8p5_pDSSAT_UKESM",
+        "rcp7p0_EPIC_UKESM","rcp7p0_CYGMA_UKESM",
+        )
+
+hashes_combos<-c("669b91c3","c6f10324",
+                 "d972a1ce","5b2b868c","82675b72",
+                 "c0547439","e61ed473","256c3ab7",
+                 "6bd5239a","41ad9618")
+
+
+input<-c("additional_data_rev4.02.tgz",
          "rev4.59SmashingPumpkins+StickyFiles_h12_magpie_debug.tgz",
-         "rev4.59SmashingPumpkins+ISIMIPyieldsTEST+ISIMIPyields_EPIC-IIASA:ukesm1-0-ll:ssp585:default_h12_validation_debug.tgz",
-         "additional_data_rev3.99.tgz",
-         "Zabelirrig_SP.tgz"
-         )
-#,
-# ### Normal
+         "rev4.59SmashingPumpkins+ISIMIPyields_h12_validation_debug.tgz")
+
+aux<-1
+
+### Normal
 for (i in realization){
-  for (so in sticky_modes) {
+  for (com in combo){
+    for (so in sticky_modes) {
 
- cfg$force_download <- TRUE
+          cfg$force_download <- TRUE
+          cfg$gms$factor_costs <- i
 
-cfg$gms$factor_costs <- i
+          cfg$title <- paste0("calib_",com,"_",i,"_",so)
+          #cfg$gms$c38_sticky_mode  <- so
 
- if(i=="sticky_feb18"){
-   cfg$title <- paste0("calib_run_EPIC_mang",i,"_",so)
-   cfg$gms$c38_sticky_mode  <- so
-   cfg$crop_calib_max <- 2
- }else{
-    cfg$title <- paste0("calib_run_EPIC_mang",i,"_")
-    cfg$crop_calib_max <- 1
- }
+          cfg$input <- c(input,
+                         paste0("rev4.59SmashingPumpkins+ISIMIPyields_h12_",hashes_combos[aux],"_cellularmagpie_debug.tgz"))
 
- cfg$input <- input
-
- cfg$results_folder <- "output/:title::date:"
- cfg$recalibrate <- TRUE
- cfg$gms$yields  <- "managementcalib_aug19"
+          cfg$crop_calib_max <- 2
+          cfg$recalibrate <- TRUE
+          cfg$results_folder <- "output/:title::date:"
+          cfg$gms$yields  <- "managementcalib_aug19"
 
 
- cfg$gms$c_timesteps <- 1
- cfg$output <- c("rds_report")
- cfg$sequential <- TRUE
+          cfg$gms$c_timesteps <- 1
+          cfg$output <- c("rds_report")
+          cfg$sequential <- TRUE
 
+         start_run(cfg,codeCheck=FALSE)
 
+         magpie4::submitCalibration(paste0("H12_",com,"_",i,"_",so))
 
-
- start_run(cfg,codeCheck=FALSE)
- if(i=="sticky_feb18"){
-   magpie4::submitCalibration(paste0("H12","_EPIC_",i,"_mang_",so))
- }else{
-   magpie4::submitCalibration(paste0("H12","_EPIC_",i,"_mang_"))
- }
- }
-}
+         aux<-aux+1
+       }
+     }
+   }
