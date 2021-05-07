@@ -147,24 +147,24 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* md5sum: b115c870fd204b86d32b5ed664c2d00f
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.58_h12_magpie.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* md5sum: b724f1cb10bedf71ac07f41e0735bf63
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.58_h12_validation.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* md5sum: c47c243394e9430bba92aebce37ed652
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: calibration_H12_c200_23Feb21.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* md5sum: 8c013375008a959aaa0023030f53c2c2
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: additional_data_rev4.00.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* md5sum: 0d25d76eb2e080c8d42f92265b05bbfc
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -197,7 +197,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Tue May  4 23:29:35 2021
+* Last modification (input data): Wed May  5 00:57:10 2021
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -223,7 +223,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  default
+$setglobal c_title  PRtest_default_fbranch+recalib
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
