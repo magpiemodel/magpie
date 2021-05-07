@@ -15,8 +15,8 @@ source("config/default.cfg")
 
 #realization<-c("sticky_feb18")
 #sticky_modes<-c("dynamic")
-realization<-c("mixed_feb17","sticky_feb18")
-sticky_modes<-c("","dynamic")
+realization<-c("sticky_feb18")
+
 
 combo<-c("rcp7p0_EPIC_GFDL")#,"rcp7p0_CYGMA_GFDL","rcp8p5_CYGMA_GFDL",
 #        "rcp8p5_pDSSAT_GFDL","rcp8p5_EPIC_GFDL",
@@ -41,6 +41,13 @@ calibration<-c("calibration_H12_rcp7p0_EPIC_GFDL_mixed_feb17__07May21.tgz",
 ### Normal
 for (i in realization){
   for (com in combo){
+
+    if(i == "sticky_feb18"){
+    sticky_modes<-c("dynamic")
+  }else{
+    sticky_modes<-c("")
+  }
+
     for (so in sticky_modes) {
       for (c in climate){
 
