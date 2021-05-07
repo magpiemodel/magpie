@@ -26,14 +26,16 @@ realization<-c("mixed_feb17")
 sticky_modes<-c("")
 
 combo<-c(#"rcp7p0_EPIC_GFDL","rcp7p0_CYGMA_GFDL","rcp8p5_CYGMA_GFDL",
-        #"rcp8p5_pDSSAT_GFDL","rcp8p5_EPIC_GFDL","rcp8p5_CYGMA_UKESM","rcp8p5_pDSSAT_UKESM",
-        "rcp7p0_CYGMA_UKESM","rcp8p5_EPIC_UKESM",
+        #"rcp8p5_pDSSAT_GFDL","rcp8p5_EPIC_GFDL","rcp8p5_CYGMA_UKESM","rcp8p5_pDSSAT_UKESM","rcp7p0_CYGMA_UKESM",
+        "rcp8p5_EPIC_GFDL",
+        "rcp8p5_EPIC_UKESM",
         "rcp7p0_EPIC_UKESM"
         )
 
 hashes_combos<-c(#"669b91c3","c6f10324","d972a1ce",
-                 #"5b2b868c","82675b72","e61ed473","256c3ab7",
-                 "41ad9618","c0547439",
+                 #"5b2b868c","e61ed473","256c3ab7","41ad9618",
+                 "82675b72",
+                 "c0547439",
                  "6bd5239a")
 
 
