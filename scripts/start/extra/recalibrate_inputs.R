@@ -20,8 +20,8 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 
-realization<-c("mixed_feb17")
-sticky_modes<-c("")
+realization<-c("sticky_feb18")
+sticky_modes<-c("dynamic")
 
 combo<-c("rcp7p0_EPIC_GFDL","rcp7p0_CYGMA_GFDL",
         "rcp8p5_CYGMA_GFDL","rcp8p5_pDSSAT_GFDL","rcp8p5_EPIC_GFDL",
@@ -46,24 +46,24 @@ for (i in realization){
   for (com in combo){
     for (so in sticky_modes) {
 
-          cfg$force_download <- TRUE
-          cfg$gms$factor_costs <- i
-
+          #configurations
           cfg$title <- paste0("calib_",com,"_",i,"_",so)
-          #cfg$gms$c38_sticky_mode  <- so
-
-          cfg$input <- c(input,
-                         paste0("rev4.59SmashingPumpkins+ISIMIPyields_h12_",hashes_combos[aux],"_cellularmagpie_debug.tgz"))
-
+          cfg$force_download <- TRUE
           cfg$crop_calib_max <- 2
           cfg$recalibrate <- TRUE
           cfg$results_folder <- "output/:title::date:"
-          cfg$gms$yields  <- "managementcalib_aug19"
-
-
+          cfg$input <- c(input,
+                         paste0("rev4.59SmashingPumpkins+ISIMIPyields_h12_",hashes_combos[aux],"_cellularmagpie_debug.tgz"))
           cfg$gms$c_timesteps <- 1
           cfg$output <- c("rds_report")
           cfg$sequential <- TRUE
+
+          #Special modules
+          cfg$gms$factor_costs <- i
+          if(i == "sticky_feb18"){
+          cfg$gms$c38_sticky_mode  <- so
+           }
+          cfg$gms$yields  <- "managementcalib_aug19"
 
          start_run(cfg,codeCheck=FALSE)
 
