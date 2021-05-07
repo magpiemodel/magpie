@@ -34,8 +34,7 @@ input<-c("additional_data_rev4.02.tgz",
          "rev4.59SmashingPumpkins+StickyFiles_h12_magpie_debug.tgz",
          "rev4.59SmashingPumpkins+ISIMIPyields_h12_validation_debug.tgz")
 
-calibration<-c("calibration_H12_rcp7p0_EPIC_GFDL_mixed_feb17__07May21.tgz",
-              "calibration_H12_rcp7p0_EPIC_GFDL_sticky_feb18_dynamic_07May21.tgz")
+calibration<-c("calibration_H12_rcp7p0_EPIC_GFDL_sticky_feb18_dynamic_07May21.tgz")
 
 
 ### Normal
@@ -57,7 +56,7 @@ for (i in realization){
           cfg$title<-paste0("NewBranch_",com,"_",i,"_",so,"_",c,"_")
           cfg$input <- c(input,
                          paste0("rev4.59SmashingPumpkins+ISIMIPyields_h12_",hashes_combos[1],"_cellularmagpie_debug.tgz"),
-                         paste0("calibration_H12_rcp7p0_EPIC_GFDL_",i,"__07May21.tgz") )
+                         calibration)
 
           cfg$output <- c("rds_report")
 
