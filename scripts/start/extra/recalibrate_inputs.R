@@ -26,7 +26,7 @@ sticky_modes<-c("")
 combo<-c("rcp7p0_EPIC_GFDL","rcp7p0_CYGMA_GFDL",
         "rcp8p5_CYGMA_GFDL","rcp8p5_pDSSAT_GFDL","rcp8p5_EPIC_GFDL",
         "rcp8p5_EPIC_UKESM","rcp8p5_CYGMA_UKESM","rcp8p5_pDSSAT_UKESM",
-        "rcp7p0_EPIC_UKESM","rcp7p0_CYGMA_UKESM",
+        "rcp7p0_EPIC_UKESM","rcp7p0_CYGMA_UKESM"
         )
 
 hashes_combos<-c("669b91c3","c6f10324",
