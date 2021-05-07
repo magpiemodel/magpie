@@ -29,7 +29,7 @@ $offdelim       ;
 
 table f20_quality_cost(ksd,kpr)   Costs for difference in quality between secondary products from diverging origins (USD per tDM)
 $ondelim
-$include "./modules/20_processing/substitution_dec18/input/f20_quality_cost.cs3"
+$include "./modules/20_processing/substitution_may21/input/f20_quality_cost.cs3"
 $offdelim       ;
 
 table  f20_scp_type_shr(scptype,scen20)  selected scenario values for scp type (1)
