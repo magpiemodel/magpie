@@ -12,6 +12,7 @@ source("config/default.cfg")
 realization<-c("mixed_feb17","sticky_feb18")
 combo<-c("rcp7p0_LPJML_GFDL_newParam"
         )
+climate<-c("cc","nocc")
 
 #hashes_combos<-c("")
 
@@ -36,6 +37,7 @@ for (i in realization){
   }
 
     for (so in sticky_modes) {
+      for (c in climate){
 
           #configurations
           cfg$title<-paste0("NewBranch_",com,"_",i,"_",so,"_",c,"_")
@@ -60,3 +62,4 @@ for (i in realization){
        }
      }
    }
+}
