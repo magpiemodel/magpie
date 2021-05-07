@@ -20,10 +20,12 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 
-realization<-c("sticky_feb18")
-sticky_modes<-c("dynamic")
+#realization<-c("sticky_feb18")
+#sticky_modes<-c("dynamic")
+realization<-c("mixed_feb17")
+sticky_modes<-c("")
 
-combo<-c("rcp7p0_EPIC_GFDL","rcp7p0_CYGMA_GFDL",
+combo<-c(#"rcp7p0_EPIC_GFDL","rcp7p0_CYGMA_GFDL",
         "rcp8p5_CYGMA_GFDL","rcp8p5_pDSSAT_GFDL","rcp8p5_EPIC_GFDL",
         "rcp8p5_EPIC_UKESM","rcp8p5_CYGMA_UKESM","rcp8p5_pDSSAT_UKESM",
         "rcp7p0_EPIC_UKESM","rcp7p0_CYGMA_UKESM"
