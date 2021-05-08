@@ -22,4 +22,7 @@ sets
   combined_loss(driver_source) Combined loss from fire plus agriculture
   / shifting_agriculture,wildfire /
 
+  prot_target35 Target year for set aside policy
+   / none, by2030, by2050 /
+
 ;

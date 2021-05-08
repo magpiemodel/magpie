@@ -83,6 +83,19 @@ $elseif "%c35_protect_scenario%" == "forest"
 	  p35_save_primforest(t,j) = pcm_land(j,"primforest");
 	  p35_save_secdforest(t,j) = pcm_land(j,"secdforest");
 	  p35_save_other(t,j) = 0;
+$elseif "%c35_protect_scenario%" == "Forest+BH"
+    p35_forest_protect_shr(t,j) = p35_protect_shr(t,j,"BH");
+    p35_forest_protect_shr(t,j)$(p35_forest_protect_shr(t,j) < p35_protect_shr(t,j,"FF")) = p35_protect_shr(t,j,"FF");
+    if (m_year(t) < 2030,
+    p35_save_primforest(t,j) = (p35_protect_shr(t,j,"WDPA")+2*f35_protection_fader(t, "by2030")*p35_forest_protect_shr(t,j))*pm_land_start(j,"primforest");
+    else
+    p35_save_primforest(t,j) = pcm_land(j,"primforest");
+    );
+    p35_save_secdforest(t,j) = (p35_protect_shr(t,j,"WDPA")+f35_protection_fader(t, "by2030")*p35_forest_protect_shr(t,j))*pm_land_start(j,"secdforest");
+	  p35_save_other(t,j) = (p35_protect_shr(t,j,"WDPA")+f35_protection_fader(t, "by2030")*p35_protect_shr(t,j,"BH"))*pm_land_start(j,"other");
+    p35_save_primforest(t,j)$(p35_save_primforest(t,j) > pcm_land(j,"primforest")) = pcm_land(j,"primforest");
+    p35_save_secdforest(t,j)$(p35_save_secdforest(t,j) > pcm_land(j,"secdforest")) = pcm_land(j,"secdforest");
+	  p35_save_other(t,j)$(p35_save_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");
 $elseif "%c35_protect_scenario%" == "WDPA"
   p35_save_primforest(t,j) = p35_protect_shr(t,j,"WDPA")*pm_land_start(j,"primforest");
   p35_save_secdforest(t,j) = p35_protect_shr(t,j,"WDPA")*pm_land_start(j,"secdforest");
@@ -93,9 +106,9 @@ $elseif "%c35_protect_scenario%" == "HalfEarth"
 p35_protect_shr(t,j,"HalfEarth")$(p35_protect_shr(t,j,"HalfEarth") < p35_protect_shr(t,j,"WDPA")) = p35_protect_shr(t,j,"WDPA");
 
 * half earth scenario begins fading in after 2020:
-p35_save_primforest(t,j) = (p35_protect_shr(t,j,"WDPA")+f35_protection_fader(t)*(p35_protect_shr(t,j,"HalfEarth")-p35_protect_shr(t,j,"WDPA")))*pm_land_start(j,"primforest");
-p35_save_secdforest(t,j) = (p35_protect_shr(t,j,"WDPA")+f35_protection_fader(t)*(p35_protect_shr(t,j,"HalfEarth")-p35_protect_shr(t,j,"WDPA")))*pm_land_start(j,"secdforest");
-p35_save_other(t,j)      = (p35_protect_shr(t,j,"WDPA")+f35_protection_fader(t)*(p35_protect_shr(t,j,"HalfEarth")-p35_protect_shr(t,j,"WDPA")))*pm_land_start(j,"other");
+p35_save_primforest(t,j) = (p35_protect_shr(t,j,"WDPA")+f35_protection_fader(t, "by2050")*(p35_protect_shr(t,j,"HalfEarth")-p35_protect_shr(t,j,"WDPA")))*pm_land_start(j,"primforest");
+p35_save_secdforest(t,j) = (p35_protect_shr(t,j,"WDPA")+f35_protection_fader(t, "by2050")*(p35_protect_shr(t,j,"HalfEarth")-p35_protect_shr(t,j,"WDPA")))*pm_land_start(j,"secdforest");
+p35_save_other(t,j)      = (p35_protect_shr(t,j,"WDPA")+f35_protection_fader(t, "by2050")*(p35_protect_shr(t,j,"HalfEarth")-p35_protect_shr(t,j,"WDPA")))*pm_land_start(j,"other");
 $else
 * conservation priority scenarios start in 2020, in addition to WDPA protection
   if (m_year(t) <= sm_fix_SSP2,
