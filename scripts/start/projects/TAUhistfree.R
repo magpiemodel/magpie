@@ -29,7 +29,7 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report")
 
-prefix <- "THF01"
+prefix <- "THF02"
 cfg$qos <- "priority"
 
 cfg$gms$s80_optfile <- 1
@@ -50,8 +50,7 @@ for (scen in c("REF","POL")) {
     cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
     cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
   }
-  #"Ag","AgF",
-  for (sec in c("AgFsecdini0")) {
+  for (sec in c("Ag","AgF","AgFsecdini0")) {
     if (sec == "Ag") {
       cfg <- setScenario(cfg,c("ForestryOff"))
     } else if (sec == "AgF") {
@@ -66,14 +65,14 @@ for (scen in c("REF","POL")) {
       } else if (TC == "TCfree") {
         cfg$gms$s13_tau_hist_lower_bound <- 0
       }
-      for (LC in c("LC8000","LC821")) {
-        if (LC == "LC8000") {
+      for (LC in c("LC888","LC881")) {
+        if (LC == "LC888") {
           cfg$gms$s39_cost_establish_crop <- 8000
           cfg$gms$s39_cost_establish_past <- 8000
           cfg$gms$s39_cost_establish_forestry <- 8000
-        } else if (LC == "LC821") {
+        } else if (LC == "LC881") {
           cfg$gms$s39_cost_establish_crop <- 8000
-          cfg$gms$s39_cost_establish_past <- 2000
+          cfg$gms$s39_cost_establish_past <- 8000
           cfg$gms$s39_cost_establish_forestry <- 1000
         }
         cfg$title <- paste(prefix,"SSP2",scen,sec,TC,LC,sep="_")
