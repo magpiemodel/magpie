@@ -50,11 +50,15 @@ for (scen in c("REF","POL")) {
     cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
     cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
   }
-  for (sec in c("Ag","AgF")) {
+  #"Ag","AgF",
+  for (sec in c("AgFsecdini0")) {
     if (sec == "Ag") {
       cfg <- setScenario(cfg,c("ForestryOff"))
     } else if (sec == "AgF") {
       cfg <- setScenario(cfg,c("ForestryEndo"))
+    } else if (sec == "AgFsecdini0") {
+      cfg <- setScenario(cfg,c("ForestryEndo"))
+      cfg$gms$s35_secdf_distribution <- 0
     }
     for (TC in c("TCfix","TCfree")) {
       if (TC == "TCfix") {
