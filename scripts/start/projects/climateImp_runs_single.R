@@ -78,7 +78,7 @@ for (i in realization){
 
           cfg$input <- c(input,
                          paste0("rev4.59SmashingPumpkins+ISIMIPyields_h12_",hashes_combos[aux],"_cellularmagpie_debug.tgz"),
-                         calib[[com]][[so]])
+                         calib[[com]][[i]])
           cfg$output <- c("rds_report")
 
 
