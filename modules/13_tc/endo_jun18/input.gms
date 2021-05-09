@@ -6,6 +6,10 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
+scalars
+ s13_tau_hist_lower_bound	logical switch for setting a lower bound on TAU in historic time steps (0=off 1=on) / 0 /
+;
+
 parameter fm_tau1995(i) Agricultural land use intensity tau in 1995 (1)
 /
 $ondelim
