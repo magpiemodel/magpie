@@ -69,7 +69,7 @@ aux<-1
 for (i in realization){
   for (com in combo){
     for (so in sticky_modes){
-      if (com=="rcp8p5_EPIC_UKESM"){
+      if (com=="rcp7p0_EPIC_GFDL"){
         climate<-c("nocc")
       }else{
         climate<-c("cc","nocc")
