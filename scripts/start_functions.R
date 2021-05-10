@@ -10,6 +10,11 @@
 ################################################################################
 
 .set_formatting <- function(x) {
+  
+  if(is.data.frame(x)) {
+    stop("not yet implemented!")
+  }
+  
   content <- NULL
   isMap <- function(x) return(grepl(".", x[1], fixed = TRUE))
   if (isMap(x)) {
@@ -73,17 +78,7 @@
     cells <- c(cells,paste(names(cpr)[i],"_",j+1,"*",names(cpr)[i],"_",j+cpr[i],sep=""))
     j <- j + cpr[i]
   }
-
-  map_i_to_j <- NULL
-  for (i in 1:length(cpr)) {
-    map_i_to_j <- c(map_i_to_j,paste('',names(cpr)[i],' . ',cells[i] ,sep = ''))
-  }
-
-  map$RegionCode <- as.factor(map$RegionCode)
-  map_i_to_iso <- NULL
-  for (i in levels(map$RegionCode)) {
-    map_i_to_iso <- c(map_i_to_iso, paste0(i, " .(", paste(map$CountryCode[map$RegionCode == i], collapse = ",") ,")"))
-  }
+  ij <- data.frame(i=names(cpr),j=cells)
 
   sets <- list(list(name = "i",
                     desc = "all economic regions",
@@ -96,10 +91,10 @@
                     items = cells),
                list(name = "cell(i,j)",
                     desc = "number of LPJ cells per region i",
-                    items = map_i_to_j),
+                    items = ij),
                list(name = "i_to_iso(i,iso)",
                     desc = "mapping regions to iso countries",
-                    items = map_i_to_iso))
+                    items = map[2:3]))
   
   .write_sets(sets)#, "core/sets.gms")
 }
