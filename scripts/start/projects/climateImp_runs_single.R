@@ -25,8 +25,7 @@ combo<-c(#"rcp7p0_CYGMA_GFDL","rcp8p5_CYGMA_GFDL",
         "rcp8p5_EPIC_GFDL",
         "rcp8p5_EPIC_UKESM",
         "rcp7p0_EPIC_UKESM",
-        "rcp7p0_EPIC_GFDL"
-        )
+        "rcp7p0_EPIC_GFDL")
 
 hashes_combos<-c(#"c6f10324","d972a1ce",
                 #"5b2b868c","e61ed473","256c3ab7",
@@ -34,8 +33,7 @@ hashes_combos<-c(#"c6f10324","d972a1ce",
                  "82675b72",
                  "c0547439",
                  "6bd5239a",
-                 "669b91c3"
-)
+                 "669b91c3")
 
 climate<-c("cc","nocc")
 input<-c("additional_data_rev4.02.tgz",
@@ -71,7 +69,12 @@ aux<-1
 for (i in realization){
   for (com in combo){
     for (so in sticky_modes){
-        for (c in climate){
+      if (com=="rcp8p5_EPIC_UKESM"){
+        climate<-c("nocc")
+      }else{
+        climate<-c("cc","nocc")
+      }
+              for (c in climate){
 
           cfg<-gms::setScenario(cfg,c)
           #configurations
