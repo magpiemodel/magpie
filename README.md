@@ -24,8 +24,8 @@ https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpi
 A framework description paper has been published in
 Geoscientific Model Development (GMD): https://doi.org/10.5194/gmd-12-1299-2019
 
-The model documentation for version 4.3.3 can be found at
-https://rse.pik-potsdam.de/doc/magpie/4.3.3/
+The model documentation for version 4.3.4 can be found at
+https://rse.pik-potsdam.de/doc/magpie/4.3.4/
 
 A most recent version of the documentation can also be extracted from the
 model source code via the R package goxygen

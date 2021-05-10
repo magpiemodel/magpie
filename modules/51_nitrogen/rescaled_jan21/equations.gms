@@ -8,10 +8,10 @@
 *' @equations
 
 *' Nitrogeneous emissions stem from manure applied to croplands, inorganic fertilizers,
-*' crop residues decaying on fields, soil organic matter loss, animal waste management, and
-*' manure excreted on pasture land. Additionally,  part of the NH3 and NOx emissions
-*' as well as leached NO3 later result in indirect emissions of N2O when they are redeposited,
-*' nitrified and dinitrified.
+*' crop residues decaying on fields, the burning of agricultural residues,
+*' soil organic matter loss, animal waste management, and manure excreted on pasture land. 
+*' Additionally,  part of the NH3 and NOx emissions as well as leached NO3 later result
+*' in indirect emissions of N2O when they are redeposited, nitrified and dinitrified.
 *'
 *' Emissions are rescaled using the nitrogen uptake efficiency. This is done to keep consistency
 *' of emissions with nitrogen surplus and take account for improved emission factors when NUE increases.
@@ -42,6 +42,12 @@
                  =e=
                  vm_res_recycling(i2,"nr") * f51_ef_n_soil(n_pollutants_direct,"resid")
                  / (1-s51_snupe_base) * (1-vm_nr_eff(i2));
+
+*' emissions from burning crop residues, N2O and NOx
+ q51_emissions_resid_burn(i2,n_pollutants_direct)..
+                 vm_btm_reg(i2,"resid_burn",n_pollutants_direct)
+                 =e=
+                 sum(kcr, vm_res_ag_burn(i2,kcr,"dm")) * f51_ef_resid_burn(n_pollutants_direct);
 
 *' soil organic matter loss:
  q51_emissions_som(i2,n_pollutants_direct)..
