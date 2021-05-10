@@ -7,7 +7,7 @@
 
 
 scalars
- s13_tau_hist_lower_bound	logical switch for setting a lower bound on TAU in historic time steps (0=off 1=on) / 0 /
+ s13_ignore_tau_historical	ignore historial tau (1) or use it as lower bound (0) (binary) / 1 /
 ;
 
 parameter fm_tau1995(i) Agricultural land use intensity tau in 1995 (1)

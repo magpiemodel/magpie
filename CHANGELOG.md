@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
-- **13_tc_** removed lower bound on TAU for historic timesteps
+- **13_tc_** added switch to ignore historic tau patterns in historic time steps (new default)
 - **39_landconversion** lower costs for expansion of forestry land
 
 ### added

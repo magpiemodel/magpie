@@ -245,3 +245,11 @@ p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) < 1) = 1;
 
 ** Update c-densitiy based on calibration factor for growing stocks
 pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * sum(cell(i,j),p32_gs_scaling_reg(i));
+
+** set bii coefficients depending on choice of growth curve 
+p32_bii_coeff(type32,bii_secd,potnatveg) = 0;
+p32_bii_coeff("aff","secd_young",potnatveg) = fm_bii_coeff("secd_young",potnatveg)*(1-s32_aff_plantation) + fm_bii_coeff("timber",potnatveg)*(s32_aff_plantation);
+p32_bii_coeff("aff","secd_mature",potnatveg) = fm_bii_coeff("secd_mature",potnatveg)*(1-s32_aff_plantation) + fm_bii_coeff("timber",potnatveg)*(s32_aff_plantation);
+p32_bii_coeff("ndc",bii_secd,potnatveg) = fm_bii_coeff(bii_secd,potnatveg);
+p32_bii_coeff("plant","secd_young",potnatveg) = fm_bii_coeff("secd_young",potnatveg)*(1-s32_timber_plantation) + fm_bii_coeff("timber",potnatveg)*(s32_timber_plantation);
+p32_bii_coeff("plant","secd_mature",potnatveg) = fm_bii_coeff("secd_mature",potnatveg)*(1-s32_timber_plantation) + fm_bii_coeff("timber",potnatveg)*(s32_timber_plantation);
