@@ -9,12 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **13_tc_** removed lower bound on TAU for historic timesteps
+- **39_landconversion** lower costs for expansion of forestry land
 
 ### added
 
 ### removed
 
 ### fixed
+- **32_foresty** BII coefficients now correspond to the choice of growth curve
+- **core** "ac0" added to set ac_young, which is needed in the biodiversity module for pricing biodiversity loss
 
 
 
