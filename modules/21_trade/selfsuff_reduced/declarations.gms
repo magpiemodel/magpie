@@ -33,16 +33,16 @@ equations
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov21_excess_dem(t,k_trade,type)       Global excess demand (mio. tDM per yr)
- ov21_excess_prod(t,i,k_trade,type)    Regional excess production (mio. tDM per yr)
+ ov21_excess_prod(t,h,k_trade,type)    Regional excess production (mio. tDM per yr)
  ov_cost_trade(t,i,type)               Regional  trade costs (mio. USD05MER per yr)
- ov21_cost_trade_reg(t,i,k_trade,type) Regional trade costs for each tradable commodity (mio. USD05MER per yr)
+ ov21_cost_trade_reg(t,h,k_trade,type) Regional trade costs for each tradable commodity (mio. USD05MER per yr)
  oq21_trade_glo(t,k_trade,type)        Global production constraint (mio. tDM per yr)
- oq21_notrade(t,i,k_notrade,type)      Regional production constraint of non-tradable commodities (mio. tDM per yr)
- oq21_trade_reg(t,i,k_trade,type)      Regional trade balances i.e. minimum self-sufficiency ratio (1)
- oq21_trade_reg_up(t,i,k_trade,type)   Regional trade balances i.e. maximum self-sufficiency ratio (1)
+ oq21_notrade(t,h,k_notrade,type)      Regional production constraint of non-tradable commodities (mio. tDM per yr)
+ oq21_trade_reg(t,h,k_trade,type)      Regional trade balances i.e. minimum self-sufficiency ratio (1)
+ oq21_trade_reg_up(t,h,k_trade,type)   Regional trade balances i.e. maximum self-sufficiency ratio (1)
  oq21_excess_dem(t,k_trade,type)       Global excess demand (mio. tDM per yr)
- oq21_excess_supply(t,i,k_trade,type)  Regional excess production (mio. tDM per yr)
- oq21_cost_trade(t,i,type)             Regional  trade costs (mio. USD05MER per yr)
- oq21_cost_trade_reg(t,i,k_trade,type) Regional trade costs for each tradable commodity (mio. USD05MER per yr)
+ oq21_excess_supply(t,h,k_trade,type)  Regional excess production (mio. tDM per yr)
+ oq21_cost_trade(t,h,type)             Regional  trade costs (mio. USD05MER per yr)
+ oq21_cost_trade_reg(t,h,k_trade,type) Regional trade costs for each tradable commodity (mio. USD05MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

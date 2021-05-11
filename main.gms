@@ -158,10 +158,6 @@ $title magpie
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_c200_23Feb21.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
 * Used data set: additional_data_rev4.00.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
@@ -197,7 +193,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Tue May 11 13:29:01 2021
+* Last modification (input data): Tue May 11 15:21:14 2021
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 

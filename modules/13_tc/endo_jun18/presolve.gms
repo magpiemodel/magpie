@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-pc13_land(h) = sum((supreg(h,i),cell(i,j)),pcm_land(j,"crop"));
+pc13_land(i) = sum(cell(i,j),pcm_land(j,"crop"));
 
 if (sum(sameas(t_past,t),1) = 1,
 	vm_tau.lo(h) =    f13_tau_historical(t,h);
