@@ -103,7 +103,7 @@ realization<-c("sticky_feb18","mixed_feb17")
 #    }
 # }
 #
- combo<-c("rcp7p0_LPJML_GFDL_newParam")
+ combo<-c("rcp7p0_LPJML_GFDL_bugFix")
  climate<-c("cc","nocc")
 #
 # #hashes_combos<-c("")
@@ -112,9 +112,11 @@ realization<-c("sticky_feb18","mixed_feb17")
  input<-c("additional_data_rev4.02.tgz",
           "rev4.59SmashingPumpkins+StickyFiles_h12_magpie_debug.tgz",
           "rev4.59SmashingPumpkins+ISIMIPyields_h12_validation_debug.tgz")
+
  calib<-list()
- calib[["mixed_feb17"]]<-"calibration_H12_rcp7p0_LPJML_GFDL_newParam_mixed_feb17__07May21.tgz"
- calib[["sticky_feb18"]]<-"calibration_H12_rcp7p0_LPJML_GFDL_newParam_sticky_feb18_dynamic_07May21.tgz"
+ calib[["mixed_feb17"]][[""]]<-"calibration_H12_rcp7p0_LPJML_GFDL_newParam_mixed_feb17__11May21.tgz"
+ calib[["sticky_feb18"]][["dynamic"]]<-"calibration_H12_rcp7p0_LPJML_GFDL_newParam_sticky_feb18_dynamic_11May21.tgz"
+ calib[["sticky_feb18"]][["free"]]<-"calibration_H12_rcp7p0_LPJML_GFDL_newParam_sticky_feb18_free_11May21.tgz"
 
 #aux<-1
 
@@ -123,7 +125,7 @@ for (i in realization){
   for (com in combo){
 
     if(i == "sticky_feb18"){
-    sticky_modes<-c("dynamic")
+    sticky_modes<-c("dynamic","free")
   }else{
     sticky_modes<-c("")
   }
@@ -133,14 +135,15 @@ for (i in realization){
 
           cfg<-gms::setScenario(cfg,c)
           #configurations
-          cfg$title<-paste0("NewBra_F_",com,"_",i,"_",so,"_",c,"_")
+          cfg$title<-paste0("ClIm_",com,"_",i,"_",so,"_",c,"_")
           cfg$input <- c(input,
-                         paste0("rev4.59newparam_h12_c5cdbf33_cellularmagpie_debug.tgz"),
-                         calib[[i]])
+                         paste0("rev4.59newparam+proxyYieldFix_h12_c5cdbf33_cellularmagpie_debug.tgz"),
+                         calib[[i]][[so]])
 
 
           cfg$output <- c("rds_report")
-
+          cfg$gms$s14_yld_past_switch          <- 0.25
+          cfg$gms$c41_initial_irrigation_area  <- "LUH2v2"
 
           #Special modules
           cfg$gms$factor_costs <- i
