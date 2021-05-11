@@ -21,7 +21,7 @@ source("config/default.cfg")
 
 
 realization<-c("sticky_feb18")
-sticky_modes<-c("dynamic")
+sticky_modes<-c("free")
 #realization<-c("mixed_feb17")
 #sticky_modes<-c("")
 
