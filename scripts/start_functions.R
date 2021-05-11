@@ -9,58 +9,6 @@
 # Define internal functions
 ################################################################################
 
-.set_formatting <- function(x) {
-  
-  if(is.data.frame(x)) {
-    stop("not yet implemented!")
-  }
-  
-  content <- NULL
-  isMap <- function(x) return(grepl(".", x[1], fixed = TRUE))
-  if (isMap(x)) {
-    suffix <- ""
-    n <- 1
-  } else {
-    suffix <- ","
-    maxlen <- max(nchar(x))
-    if(maxlen > 5) {
-      n <- 1
-    } else {
-      n <- max(1, floor(74/(maxlen + 2)))
-    }
-  }
-  tmp <- lapply(split(x, ceiling(seq_along(x)/n)), paste, collapse = ", ")
-  end <- ","
-  start <- "    / "
-  for (i in 1:length(tmp)) {
-    if (i == length(tmp)) end <- " /"
-    content <- c(content,paste0(start,tmp[[i]],end))
-    start <- "      "
-  }
-  return(content)
-}
-
-.write_sets <- function(sets, file = NULL) {
-
-  header <- c(
-    '*THIS CODE IS CREATED AUTOMATICALLY, DO NOT MODIFY THESE LINES DIRECTLY',
-    '*ANY DIRECT MODIFICATION WILL BE LOST AFTER NEXT INPUT DOWNLOAD',
-    '*CHANGES CAN BE DONE USING THE INPUT DOWNLOADER UNDER SCRIPTS/DOWNLOAD',
-    '*THERE YOU CAN ALSO FIND ADDITIONAL INFORMATION')
-
-  content <- c(header,'','sets','')
-
-  for (s in sets) {
-    content <- c(content, paste0('  ', s$name, ' ', s$desc))
-    content <- c(content, .set_formatting(s$items))
-    content <- c(content,'')
-  }
-  content <- c(content,';')
-
-  if(is.null(file)) cat(content, sep = "\n")
-  else gms::replace_in_file(file, content, 'SETS')
-}
-
 .update_sets_core <- function(cpr,map) {
   require(gms)
 
@@ -94,9 +42,9 @@
                     items = ij),
                list(name = "i_to_iso(i,iso)",
                     desc = "mapping regions to iso countries",
-                    items = map[2:3]))
+                    items = map[3:2][order(map[3]),]))
   
-  .write_sets(sets)#, "core/sets.gms")
+  gms::writeSets(sets, "core/sets.gms")
 }
 
 .update_sets_modules <- function() {
@@ -116,7 +64,7 @@
                    desc = "emission policy scenarios",
                    items = scen56))
 
-  .write_sets(sets, "modules/56_ghg_policy/price_jan20/sets.gms")
+  gms::writeSets(sets, "modules/56_ghg_policy/price_jan20/sets.gms")
 
   ### 60_bioenergy
   scen2nd60 <- magclass::read.magpie("modules/60_bioenergy/input/f60_bioenergy_dem.cs3")
@@ -126,7 +74,7 @@
                     desc = "second generation bioenergy scenarios",
                     items = scen2nd60))
   
-  .write_sets(sets , "modules/60_bioenergy/1stgen_priced_dec18/sets.gms")
+  gms::writeSets(sets , "modules/60_bioenergy/1stgen_priced_dec18/sets.gms")
 }
 
 # Function to extract information from info.txt
