@@ -9,10 +9,17 @@
 # Define internal functions
 ################################################################################
 
+.getColumn <- function(map, what) {
+  col <- which(names(map) %in% what)
+  if (length(col) == 0) stop("No fitting column found")
+  else if (length(col) > 1) stop("Ambiguous column selection")
+  return(as.character(map[[col]]))
+}
+
 .update_sets_core <- function(cpr,map) {
   require(gms)
 
-  reg1 <- unique(map$RegionCode)
+  reg1 <- unique(.getColumn(map, c("region","RegionCode")))
   reg2 <- names(cpr)
   if(!all(union(reg1,reg2) %in% intersect(reg1,reg2))) {
     stop("Inconsistent region information!",
@@ -23,17 +30,22 @@
 
   j <- 0; cells <- NULL
   for (i in 1:length(cpr)) {
-    cells <- c(cells,paste(names(cpr)[i],"_",j+1,"*",names(cpr)[i],"_",j+cpr[i],sep=""))
+    if (cpr[i] == 1) {
+      cells <- c(cells, paste0(names(cpr)[i], "_", j + 1))
+    } else {
+      cells <- c(cells, paste0(names(cpr)[i], "_", j + 1, "*", 
+                               names(cpr)[i], "_", j + cpr[i]))
+    }
     j <- j + cpr[i]
   }
-  ij <- data.frame(i=names(cpr),j=cells)
+  ij <- data.frame(i = names(cpr), j = cells)
 
   sets <- list(list(name = "i",
                     desc = "all economic regions",
                     items = names(cpr)),
                list(name = "iso",
                     desc = "list of iso countries",
-                    items = map$CountryCode),
+                    items = .getColumn(map, c("country","CountryCode"))),
                list(name = "j",
                     desc = "number of LPJ cells",
                     items = cells),
