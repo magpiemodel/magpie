@@ -38,7 +38,7 @@ for (i in realization){
   for (com in combo){
 
     if(i == "sticky_feb18"){
-    sticky_modes<-c("dynamic")
+    sticky_modes<-c("dynamic","free")
   }else{
     sticky_modes<-c("")
   }
@@ -52,10 +52,13 @@ for (i in realization){
           cfg$recalibrate <- TRUE
           cfg$results_folder <- "output/:title::date:"
           cfg$input <- c(input,
-                         paste0("rev4.59newparam_h12_c5cdbf33_cellularmagpie_debug.tgz"))
+                         paste0("rev4.59newparam+proxyYieldFix_h12_c5cdbf33_cellularmagpie_debug.tgz"))
           cfg$gms$c_timesteps <- 1
           cfg$output <- c("rds_report")
           cfg$sequential <- TRUE
+
+          cfg$gms$s14_yld_past_switch          <- 0.25
+          cfg$gms$c41_initial_irrigation_area  <- "LUH2v2"
 
           #Special modules
           cfg$gms$factor_costs <- i
