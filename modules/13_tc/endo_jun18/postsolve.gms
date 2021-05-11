@@ -8,10 +8,10 @@
 * Overall TC cost for the current timestep
 
 if((ord(t)>1),
- pc13_tcguess(i) = (vm_tau.l(i)/pcm_tau(i))**(1/m_yeardiff(t)) - 1;
+ pc13_tcguess(h) = (vm_tau.l(h)/pcm_tau(h))**(1/m_yeardiff(t)) - 1;
 );
 
-pcm_tau(i) = vm_tau.l(i);
+pcm_tau(h) = vm_tau.l(h);
 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################

@@ -9,17 +9,14 @@
 # Define internal functions
 ################################################################################
 
-.getColumn <- function(map, what) {
-  col <- which(names(map) %in% what)
-  if (length(col) == 0) stop("No fitting column found")
-  else if (length(col) > 1) stop("Ambiguous column selection")
-  return(as.character(map[[col]]))
-}
-
 .update_sets_core <- function(cpr,map) {
   require(gms)
-
-  reg1 <- unique(.getColumn(map, c("region","RegionCode")))
+  
+  if (!("region" %in% names(map)))      map$region <- map$RegionCode
+  if (!("country" %in% names(map)))     map$country <- map$CountryCode
+  if (!("superregion" %in% names(map))) map$superregion <- map$region
+  
+  reg1 <- unique(as.character(map$region))
   reg2 <- names(cpr)
   if(!all(union(reg1,reg2) %in% intersect(reg1,reg2))) {
     stop("Inconsistent region information!",
@@ -39,13 +36,22 @@
     j <- j + cpr[i]
   }
   ij <- data.frame(i = names(cpr), j = cells)
-
-  sets <- list(list(name = "i",
+  
+  hi <- unique(map[c("superregion", "region")])
+  hi <- hi[order(hi$superregion),]
+  
+  sets <- list(list(name = "h",
+                    desc = "all superregional economic regions",
+                    items = sort(unique(as.character(map$superregion)))),
+               list(name = "i",
                     desc = "all economic regions",
                     items = names(cpr)),
+               list(name = "supreg(h,i)",
+                    desc = "mapping of superregions to its regions",
+                    items = hi),
                list(name = "iso",
                     desc = "list of iso countries",
-                    items = .getColumn(map, c("country","CountryCode"))),
+                    items = as.character(map$country)),
                list(name = "j",
                     desc = "number of LPJ cells",
                     items = cells),
@@ -54,7 +60,7 @@
                     items = ij),
                list(name = "i_to_iso(i,iso)",
                     desc = "mapping regions to iso countries",
-                    items = map[3:2][order(map[3]),]))
+                    items = map[c("region","country")][order(map$region),]))
   
   gms::writeSets(sets, "core/sets.gms")
 }

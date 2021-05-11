@@ -5,8 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-p13_tech_cost_past(t2,i) = p13_tech_cost_past(t2,i) + p13_tech_cost_annuity(i);
-pcm_tau(i) = vm_tau.l(i);
+p13_tech_cost_past(t2,h) = p13_tech_cost_past(t2,h) + p13_tech_cost_annuity(h);
+pcm_tau(h) = vm_tau.l(h);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_tau(t,i,"marginal")       = vm_tau.m(i);

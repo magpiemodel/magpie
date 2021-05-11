@@ -146,25 +146,25 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: b115c870fd204b86d32b5ed664c2d00f
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_c200_1028489d.tgz
+* md5sum: ecdcc472e2d7cd3dfc24a35c2cd0d37a
+* Repository: repo
 * 
-* Used data set: rev4.58_h12_magpie.tgz
-* md5sum: b724f1cb10bedf71ac07f41e0735bf63
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: rev4.58eiei3_1028489d_magpie.tgz
+* md5sum: 17ba75ea154ac9568708ade99e594cc2
+* Repository: repo
 * 
 * Used data set: rev4.58_h12_validation.tgz
-* md5sum: c47c243394e9430bba92aebce37ed652
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: calibration_H12_c200_23Feb21.tgz
-* md5sum: 8c013375008a959aaa0023030f53c2c2
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: additional_data_rev4.00.tgz
-* md5sum: 0d25d76eb2e080c8d42f92265b05bbfc
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -172,10 +172,10 @@ $title magpie
 * Total number of cells: 200
 * 
 * Number of cells per region:
-*   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*    28   24   10    7    3   53   17    8   22    7   11   10
+*   CAZ  CHA  DEU  EUC  EUN  EUS  EUW  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
+*    28   23    1    3    2    7    4    7    3   49   15    8   22    7   11   10
 * 
-* Regionscode: 690d3718e151be1b450b394c1064b1c5
+* Regionscode: 1028489d
 * 
 * Regions data revision: 4.58
 * 
@@ -189,15 +189,15 @@ $title magpie
 * * Input resolution: 0.5
 * * Output resolution: c200
 * * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* * Regionscode: 690d3718e151be1b450b394c1064b1c5
+* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_c200_1028489d.tgz
+* * Regionscode: 1028489d
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = cfg$spamfile, debug = FALSE, seed = cfg$seed)
 * 
 * 
 * 
-* Last modification (input data): Wed May  5 00:57:10 2021
+* Last modification (input data): Tue May 11 13:29:01 2021
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -223,7 +223,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  PRtest_default_fbranch+recalib
+$setglobal c_title  default
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
