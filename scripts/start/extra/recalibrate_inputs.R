@@ -20,10 +20,10 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 
-realization<-c("sticky_feb18")
-sticky_modes<-c("free")
-#realization<-c("mixed_feb17")
-#sticky_modes<-c("")
+#realization<-c("sticky_feb18")
+#sticky_modes<-c("free")
+realization<-c("mixed_feb17")
+sticky_modes<-c("")
 
 combo<-c("rcp7p0_CYGMA_GFDL","rcp8p5_CYGMA_GFDL",
         "rcp8p5_pDSSAT_GFDL","rcp8p5_CYGMA_UKESM","rcp8p5_pDSSAT_UKESM",
@@ -56,7 +56,7 @@ for (i in realization){
     for (so in sticky_modes) {
 
           #configurations
-          cfg$title <- paste0("calib_",com,"_",i,"_",so)
+          cfg$title <- paste0("calib_fix_",com,"_",i,"_",so)
           cfg$force_download <- TRUE
           cfg$crop_calib_max <- 2
           cfg$recalibrate <- TRUE
@@ -67,6 +67,9 @@ for (i in realization){
           cfg$output <- c("rds_report")
           cfg$sequential <- TRUE
 
+          cfg$gms$s14_yld_past_switch          <- 0.25
+          cfg$gms$c41_initial_irrigation_area  <- "LUH2v2"
+
           #Special modules
           cfg$gms$factor_costs <- i
           if(i == "sticky_feb18"){
@@ -76,7 +79,7 @@ for (i in realization){
 
          start_run(cfg,codeCheck=FALSE)
 
-         magpie4::submitCalibration(paste0("H12_",com,"_",i,"_",so))
+         magpie4::submitCalibration(paste0("H12_fix_",com,"_",i,"_",so))
 
          aux<-aux+1
        }
