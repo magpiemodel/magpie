@@ -243,5 +243,10 @@ p32_gs_scaling_reg(i)$(f32_gs_relativetarget(i)>0) = f32_gs_relativetarget(i) / 
 ** Calibration factors lower than 1 are set to 1
 p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) < 1) = 1;
 
+** Save upscaled carbon density in a parameter - This will be useful in places Wherever we
+** want to use growth functions for plantations parametrized based on Braakhekke et al 2019
+** but not upscaled to match FAO growing stocks.
+p32_c_density_ac_fast_forestry(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc");
+
 ** Update c-densitiy based on calibration factor for growing stocks
-pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * sum(cell(i,j),p32_gs_scaling_reg(i));
+pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * sum(cell(i,j),p32_gs_scaling_reg(i));;

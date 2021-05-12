@@ -42,7 +42,12 @@ else
 if(s32_aff_plantation = 0,
  p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
 elseif s32_aff_plantation = 1,
- p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_ac_forestry(t,j,ac,ag_pools);
+** If afforestation plantations are assumed to use plantation carbon densities
+** we still want these afforestation plantations to use uncalibrated carbon densities.
+** If we allow afforestation plantations to use upscaled/calibrated carbon densities,
+** same as timber plantations (in timber production runs with co2 prices) it causes
+** very high deforestation in favor of afforestation (especially in Latin America)
+ p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = p32_c_density_ac_fast_forestry(t,j,ac);
 );
 *' Timber plantations switch:
 *' 0 = Use natveg carbon densities for timber plantations,

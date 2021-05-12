@@ -54,6 +54,7 @@ parameters
  p32_plantation_contribution(t_ext,i)               Share of roundwood production coming from timber plantations (percent)
  p32_ac_dist_flag(j,ac)                             Distribution flag with inverse weights according to age-classes (1)
  p32_ac_dist(j,ac)                                  Actual share of age-class distribution (1)
+ p32_c_density_ac_fast_forestry(t_all,j,ac)         Carbon densities in plantations based on Braakhekke et al (tC per ha)
  ;
 
 positive variables
