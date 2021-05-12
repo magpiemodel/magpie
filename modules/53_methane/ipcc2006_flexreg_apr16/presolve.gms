@@ -4,3 +4,5 @@
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
+
+ vm_btm_reg.fx(i,emis_source_nomethane53,"ch4") = 0;
