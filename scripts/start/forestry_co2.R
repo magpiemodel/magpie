@@ -41,8 +41,14 @@ for(c56_pollutant_prices in c("R2M41-SSP2-NPi","SSPDB-SSP2-26-REMIND-MAGPIE")){
     if(cfg$gms$s32_aff_plantation == 1) aff_flag <- "AffPlant"
     if(cfg$gms$s32_aff_plantation == 0) aff_flag <- "AffNatVeg"
 
-    if(cfg$gms$c56_pollutant_prices == "SSPDB-SSP2-26-REMIND-MAGPIE") co2_flag = "CO2p"
-    if(cfg$gms$c56_pollutant_prices == "R2M41-SSP2-NPi") co2_flag = "Baseline"
+    if(cfg$gms$c56_pollutant_prices == "SSPDB-SSP2-26-REMIND-MAGPIE") {
+      co2_flag = "CO2p"
+      cfg <- setScenario(cfg,c(ssp,"NDC"))
+    }
+    if(cfg$gms$c56_pollutant_prices == "R2M41-SSP2-NPi") {
+      co2_flag = "Baseline"
+      cfg <- setScenario(cfg,c(ssp,"NPI"))
+    }
 
     cfg$title <- paste0(run_flag,"_","ForestryEndo","_",co2_flag,"_",aff_flag)
     xx = c(xx,cfg$title)
