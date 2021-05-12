@@ -11,14 +11,11 @@ positive variable
 ;
 
 parameters
- p13_cost_tc(h)              Technical change costs per region (mio. USD05PPP)
- p13_tech_cost_annuity(h)    Annuity costs of TC (mio. USD05PPP per yr)
- pc13_land(h)                Crop land area per region (mio ha)
- pcm_tau(h)                 Tau factor of the previous time step (1)
- p13_tech_cost_past(t,h)     Costs for TC from past (mio. USD05PPP per yr)
- pc13_tech_cost_past(h)      Current costs for TC from past (mio. USD05PPP per yr)
- i13_tc_factor(t)          Regression factor (USD05PPP per ha)
- i13_tc_exponent(t)        Regression exponent (1)
+ p13_cost_tc(i)              Technical change costs per region (mio. USD05PPP)
+ pc13_land(i)                Crop land area per region (mio ha)
+ pcm_tau(h)                  Tau factor of the previous time step (1)
+ i13_tc_factor(t)            Regression factor (USD05PPP per ha)
+ i13_tc_exponent(t)          Regression exponent (1)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

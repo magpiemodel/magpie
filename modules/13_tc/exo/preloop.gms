@@ -16,5 +16,3 @@ loop(t,
 );
 
 pcm_tau(h) = fm_tau1995(h);
-
-p13_tech_cost_past(t,h) = 0;
