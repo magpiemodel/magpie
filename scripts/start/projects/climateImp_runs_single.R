@@ -70,12 +70,22 @@ aux<-1
 
   for (com in combo){
     for (i in realization){
+      
+      if(i == "sticky_feb18"){
+        sticky_modes<-c("dynamic","free")
+      }else{
+        sticky_modes<-c("")
+      }
+      
         for (so in sticky_modes){
           if(com == "rcp8p5_CYGMA_UKESM" & i == "sticky_feb18" & so == "dynamic"){
             climate<-c("nocc")
           }else{
             climate<-c("cc","nocc")
           }
+          
+          
+          
               for (c in climate){
 
           calib<-list()
