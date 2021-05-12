@@ -97,11 +97,19 @@ aux<-1
     for (so in sticky_modes){
               for (c in climate){
 
-
+          calib<-list()
           cfg<-gms::setScenario(cfg,c)
           #configurations
           cfg$title<-paste0("ClIm_",com,"_",i,"_",so,"_",c,"_")
           cfg$recalibrate <- FALSE
+
+          if(so == ""){
+            calib <- calib1
+          }else if (so == "dynamic"){
+            calib <- calib2
+          }else if (so == "free"){
+            calib <- calib3
+          }
 
           cfg$input <- c(calib[[com]][[i]][[so]],
                          input,
