@@ -54,7 +54,7 @@ parameters
  p32_plantation_contribution(t_ext,i)               Share of roundwood production coming from timber plantations (percent)
  p32_ac_dist_flag(j,ac)                             Distribution flag with inverse weights according to age-classes (1)
  p32_ac_dist(j,ac)                                  Actual share of age-class distribution (1)
- p32_bii_coeff(type32,bii_secd,potnatveg)			bii coeff (unitless)
+ p32_bii_coeff(type32,bii_class_secd,potnatveg)		bii coeff (unitless)
  ;
 
 positive variables

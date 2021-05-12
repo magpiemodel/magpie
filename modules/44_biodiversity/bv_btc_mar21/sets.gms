@@ -12,10 +12,10 @@ sets
 	bii_class44 bii coefficent land cover classes
 		/ crop_ann, crop_per, manpast, rangeland, urban, primary, secd_mature, secd_young, timber /
 
-	bii_secd(bii_class44) bii coefficent land cover classes secondary vegetation
+	bii_class_secd(bii_class44) bii coefficent land cover classes secondary vegetation
 		/ secd_mature, secd_young /
 
-	ac_to_bii_secd(ac,bii_secd) Mapping between forest ageclasses and bii coefficent land cover classes 
+	ac_to_bii_class_secd(ac,bii_class_secd) Mapping between forest ageclasses and bii coefficent land cover classes 
 	/ (ac0,ac5,ac10,ac15,ac20,ac25,ac30)    . (secd_young)
 	  (ac35,ac40,ac45,ac50,ac55,ac60,
   	   ac65,ac70,ac75,ac80,ac85,ac90,
