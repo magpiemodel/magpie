@@ -103,7 +103,7 @@ aux<-1
 
           cfg$input <- c(input,
                          paste0("rev4.59SmashingPumpkins+ISIMIPyields_h12_",hashes_combos[aux],"_cellularmagpie_debug.tgz"),
-                         calib[[com]][[i]])
+                         calib[[com]][[i]][[so]])
           cfg$output <- c("rds_report")
 
 
