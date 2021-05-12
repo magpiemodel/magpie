@@ -44,39 +44,41 @@ input<-c("additional_data_rev4.02.tgz",
          "rev4.59SmashingPumpkins+StickyFiles_h12_magpie_debug.tgz",
          "rev4.59SmashingPumpkins+ISIMIPyields_h12_validation_debug.tgz")
 
-calib<-list()
-calib[["rcp7p0_CYGMA_GFDL"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp7p0_CYGMA_GFDL_mixed_feb17__11May21.tgz"
-calib[["rcp8p5_CYGMA_GFDL"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp8p5_CYGMA_GFDL_mixed_feb17__11May21.tgz"
-calib[["rcp8p5_pDSSAT_GFDL"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp8p5_pDSSAT_GFDL_mixed_feb17__11May21.tgz"
-calib[["rcp8p5_CYGMA_UKESM"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp8p5_CYGMA_UKESM_mixed_feb17__11May21.tgz"
-calib[["rcp8p5_pDSSAT_UKESM"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp8p5_pDSSAT_UKESM_mixed_feb17__11May21.tgz"
-calib[["rcp7p0_CYGMA_UKESM"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp7p0_CYGMA_UKESM_mixed_feb17__12May21.tgz"
-calib[["rcp8p5_EPIC_GFDL"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp8p5_EPIC_GFDL_mixed_feb17__12May21.tgz"
-calib[["rcp8p5_EPIC_UKESM"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp8p5_EPIC_UKESM_mixed_feb17__12May21.tgz"
-calib[["rcp7p0_EPIC_UKESM"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp7p0_EPIC_UKESM_mixed_feb17__12May21.tgz"
-calib[["rcp7p0_EPIC_GFDL"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp7p0_EPIC_GFDL_mixed_feb17__12May21.tgz"
+calib1<-list()
+calib1[["rcp7p0_CYGMA_GFDL"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp7p0_CYGMA_GFDL_mixed_feb17__11May21.tgz"
+calib1[["rcp8p5_CYGMA_GFDL"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp8p5_CYGMA_GFDL_mixed_feb17__11May21.tgz"
+calib1[["rcp8p5_pDSSAT_GFDL"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp8p5_pDSSAT_GFDL_mixed_feb17__11May21.tgz"
+calib1[["rcp8p5_CYGMA_UKESM"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp8p5_CYGMA_UKESM_mixed_feb17__11May21.tgz"
+calib1[["rcp8p5_pDSSAT_UKESM"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp8p5_pDSSAT_UKESM_mixed_feb17__11May21.tgz"
+calib1[["rcp7p0_CYGMA_UKESM"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp7p0_CYGMA_UKESM_mixed_feb17__12May21.tgz"
+calib1[["rcp8p5_EPIC_GFDL"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp8p5_EPIC_GFDL_mixed_feb17__12May21.tgz"
+calib1[["rcp8p5_EPIC_UKESM"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp8p5_EPIC_UKESM_mixed_feb17__12May21.tgz"
+calib1[["rcp7p0_EPIC_UKESM"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp7p0_EPIC_UKESM_mixed_feb17__12May21.tgz"
+calib1[["rcp7p0_EPIC_GFDL"]][["mixed_feb17"]][[""]]<-"calibration_H12_fix_rcp7p0_EPIC_GFDL_mixed_feb17__12May21.tgz"
 
-calib[["rcp7p0_CYGMA_GFDL"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp7p0_CYGMA_GFDL_sticky_feb18_dynamic_11May21.tgz"
-calib[["rcp8p5_CYGMA_GFDL"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp8p5_CYGMA_GFDL_sticky_feb18_dynamic_11May21.tgz"
-calib[["rcp8p5_pDSSAT_GFDL"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp8p5_pDSSAT_GFDL_sticky_feb18_dynamic_11May21.tgz"
-calib[["rcp8p5_CYGMA_UKESM"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp8p5_CYGMA_UKESM_sticky_feb18_dynamic_11May21.tgz"
-calib[["rcp8p5_pDSSAT_UKESM"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp8p5_pDSSAT_UKESM_sticky_feb18_dynamic_11May21.tgz"
-calib[["rcp7p0_CYGMA_UKESM"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp7p0_CYGMA_UKESM_sticky_feb18_dynamic_11May21.tgz"
-calib[["rcp8p5_EPIC_GFDL"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp8p5_EPIC_GFDL_sticky_feb18_dynamic_11May21.tgz"
-calib[["rcp8p5_EPIC_UKESM"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp8p5_EPIC_UKESM_sticky_feb18_dynamic_12May21.tgz"
-calib[["rcp7p0_EPIC_UKESM"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp7p0_EPIC_UKESM_sticky_feb18_dynamic_12May21.tgz"
-calib[["rcp7p0_EPIC_GFDL"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp7p0_EPIC_GFDL_sticky_feb18_dynamic_12May21.tgz"
+calib2<-list()
+calib2[["rcp7p0_CYGMA_GFDL"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp7p0_CYGMA_GFDL_sticky_feb18_dynamic_11May21.tgz"
+calib2[["rcp8p5_CYGMA_GFDL"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp8p5_CYGMA_GFDL_sticky_feb18_dynamic_11May21.tgz"
+calib2[["rcp8p5_pDSSAT_GFDL"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp8p5_pDSSAT_GFDL_sticky_feb18_dynamic_11May21.tgz"
+calib2[["rcp8p5_CYGMA_UKESM"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp8p5_CYGMA_UKESM_sticky_feb18_dynamic_11May21.tgz"
+calib2[["rcp8p5_pDSSAT_UKESM"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp8p5_pDSSAT_UKESM_sticky_feb18_dynamic_11May21.tgz"
+calib2[["rcp7p0_CYGMA_UKESM"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp7p0_CYGMA_UKESM_sticky_feb18_dynamic_11May21.tgz"
+calib2[["rcp8p5_EPIC_GFDL"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp8p5_EPIC_GFDL_sticky_feb18_dynamic_11May21.tgz"
+calib2[["rcp8p5_EPIC_UKESM"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp8p5_EPIC_UKESM_sticky_feb18_dynamic_12May21.tgz"
+calib2[["rcp7p0_EPIC_UKESM"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp7p0_EPIC_UKESM_sticky_feb18_dynamic_12May21.tgz"
+calib2[["rcp7p0_EPIC_GFDL"]][["sticky_feb18"]][["dynamic"]]<-"calibration_H12_fix_rcp7p0_EPIC_GFDL_sticky_feb18_dynamic_12May21.tgz"
 
-calib[["rcp7p0_CYGMA_GFDL"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp7p0_CYGMA_GFDL_sticky_feb18_free_11May21.tgz"
-calib[["rcp8p5_CYGMA_GFDL"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp8p5_CYGMA_GFDL_sticky_feb18_free_11May21.tgz"
-calib[["rcp8p5_pDSSAT_GFDL"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp8p5_pDSSAT_GFDL_sticky_feb18_free_11May21.tgz"
-calib[["rcp8p5_CYGMA_UKESM"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp8p5_CYGMA_UKESM_sticky_feb18_free_11May21.tgz"
-calib[["rcp8p5_pDSSAT_UKESM"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp8p5_pDSSAT_UKESM_sticky_feb18_free_11May21.tgz"
-calib[["rcp7p0_CYGMA_UKESM"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp7p0_CYGMA_UKESM_sticky_feb18_free_11May21.tgz"
-calib[["rcp8p5_EPIC_GFDL"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp8p5_EPIC_GFDL_sticky_feb18_free_11May21.tgz"
-calib[["rcp8p5_EPIC_UKESM"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp8p5_EPIC_UKESM_sticky_feb18_free_11May21.tgz"
-calib[["rcp7p0_EPIC_UKESM"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp7p0_EPIC_UKESM_sticky_feb18_free_12May21.tgz"
-calib[["rcp7p0_EPIC_GFDL"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp7p0_EPIC_GFDL_sticky_feb18_free_12May21.tgz"
+calib3<-list()
+calib3[["rcp7p0_CYGMA_GFDL"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp7p0_CYGMA_GFDL_sticky_feb18_free_11May21.tgz"
+calib3[["rcp8p5_CYGMA_GFDL"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp8p5_CYGMA_GFDL_sticky_feb18_free_11May21.tgz"
+calib3[["rcp8p5_pDSSAT_GFDL"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp8p5_pDSSAT_GFDL_sticky_feb18_free_11May21.tgz"
+calib3[["rcp8p5_CYGMA_UKESM"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp8p5_CYGMA_UKESM_sticky_feb18_free_11May21.tgz"
+calib3[["rcp8p5_pDSSAT_UKESM"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp8p5_pDSSAT_UKESM_sticky_feb18_free_11May21.tgz"
+calib3[["rcp7p0_CYGMA_UKESM"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp7p0_CYGMA_UKESM_sticky_feb18_free_11May21.tgz"
+calib3[["rcp8p5_EPIC_GFDL"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp8p5_EPIC_GFDL_sticky_feb18_free_11May21.tgz"
+calib3[["rcp8p5_EPIC_UKESM"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp8p5_EPIC_UKESM_sticky_feb18_free_11May21.tgz"
+calib3[["rcp7p0_EPIC_UKESM"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp7p0_EPIC_UKESM_sticky_feb18_free_12May21.tgz"
+calib3[["rcp7p0_EPIC_GFDL"]][["sticky_feb18"]][["free"]]<-"calibration_H12_fix_rcp7p0_EPIC_GFDL_sticky_feb18_free_12May21.tgz"
 
 
 
@@ -101,9 +103,10 @@ aux<-1
           cfg$title<-paste0("ClIm_",com,"_",i,"_",so,"_",c,"_")
           cfg$recalibrate <- FALSE
 
-          cfg$input <- c(input,
-                         paste0("rev4.59SmashingPumpkins+ISIMIPyields_h12_",hashes_combos[aux],"_cellularmagpie_debug.tgz"),
-                         calib[[com]][[i]][[so]])
+          cfg$input <- c(calib[[com]][[i]][[so]],
+                         input,
+                         paste0("rev4.59SmashingPumpkins+ISIMIPyields_h12_",hashes_combos[aux],"_cellularmagpie_debug.tgz")
+                         )
           cfg$output <- c("rds_report")
 
 
