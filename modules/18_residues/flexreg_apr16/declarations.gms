@@ -40,7 +40,7 @@ parameters
  ov_res_biomass_bg(t,i,kcr,dm_nr,type)           Production of belowground residues in each region (mio. tDM)
  ov18_res_ag_removal(t,i,kcr,attributes,type)    Removal of crop residues in respective attribute units DM GJ Nr P K WM C (mio. tX)
  ov18_res_ag_recycling(t,i,kcr,attributes,type)  Recylcing of crop residues to soils in respective attribute units DM GJ Nr P K WM C (mio. tX)
- ovm_res_ag_burn(t,i,kcr,attributes,type)        Residues burned on fields in respective attribute units DM GJ Nr P K WM C (mio. tX)
+ ov_res_ag_burn(t,i,kcr,attributes,type)         Residues burned on fields in respective attribute units DM GJ Nr P K WM C (mio. tX)
  ov_res_recycling(t,i,npk,type)                  Residues recycled to croplands in respective nutrients Nr P K units (mio. tX)
  oq18_prod_res_ag_reg(t,i,kcr,attributes,type)   Production constraint of aboveground residues (mio. tDM)
  oq18_prod_res_bg_reg(t,i,kcr,dm_nr,type)        Production constraint of belowground residues (mio. tDM)
