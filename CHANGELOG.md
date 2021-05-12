@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **30_crop** Changed input data regarding cropland suitability. Added new switch `c30_marginal_land`, which provides different options for including marginal cropland.
 
 ### removed
+- **13_tc** Removed disfuctional setting c13_tccost = "mixed"
 
 ### fixed
 
