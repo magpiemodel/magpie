@@ -126,6 +126,7 @@ aux<-1
           cfg$gms$yields  <- "managementcalib_aug19"
           cfg$gms$s14_yld_past_switch          <- 0.25
           cfg$gms$c41_initial_irrigation_area  <- "LUH2v2"
+          cfg$qos <- "standby"
 
          start_run(cfg,codeCheck=FALSE)
 
