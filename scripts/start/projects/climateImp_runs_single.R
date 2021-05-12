@@ -16,28 +16,10 @@ source("config/default.cfg")
 
 realization<-c("sticky_feb18","mixed_feb17")
 
-combo<-c("rcp7p0_EPIC_GFDL",
-         "rcp7p0_CYGMA_GFDL",
-         "rcp8p5_EPIC_UKESM",
-         "rcp8p5_CYGMA_UKESM",
-         "rcp8p5_pDSSAT_UKESM",
-         "rcp8p5_EPIC_GFDL",
-         "rcp7p0_EPIC_UKESM",
-         "rcp8p5_CYGMA_GFDL",
-         "rcp8p5_pDSSAT_GFDL",
-         "rcp7p0_CYGMA_UKESM")
-
-hashes_combos<-c("669b91c3",
-                 "c6f10324",
-                 "c0547439",
-                 "e61ed473",
-                 "256c3ab7",
-                 "82675b72",
-                 "6bd5239a",
-                 "d972a1ce",
-                 "5b2b868c",
-                 "41ad9618"
-                )
+#"rcp7p0_EPIC_GFDL",
+combo<-c("rcp7p0_CYGMA_GFDL","rcp8p5_EPIC_UKESM","rcp8p5_CYGMA_UKESM","rcp8p5_pDSSAT_UKESM","rcp8p5_EPIC_GFDL","rcp7p0_EPIC_UKESM","rcp8p5_CYGMA_GFDL","rcp8p5_pDSSAT_GFDL","rcp7p0_CYGMA_UKESM")
+#"669b91c3",
+hashes_combos<-c("c6f10324","c0547439","e61ed473","256c3ab7","82675b72","6bd5239a","d972a1ce","5b2b868c","41ad9618")
 
 climate<-c("cc","nocc")
 input<-c("additional_data_rev4.02.tgz",
@@ -87,6 +69,12 @@ aux<-1
 ### Normal
 
   for (com in combo){
+    if(com == "rcp7p0_CYGMA_GFDL"){
+      realization<-c("mixed_feb17")
+   }else{
+     realization<-c("sticky_feb18","mixed_feb17")
+    }
+
     for (i in realization){
          if(i == "sticky_feb18"){
          sticky_modes<-c("dynamic","free")
