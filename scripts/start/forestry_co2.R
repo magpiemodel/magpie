@@ -47,6 +47,6 @@ for(c56_pollutant_prices in c("R2M41-SSP2-NPi","SSPDB-SSP2-26-REMIND-MAGPIE")){
     cfg$title <- paste0(run_flag,"_","ForestryEndo","_",co2_flag,"_",aff_flag)
     xx = c(xx,cfg$title)
     cfg$results_folder = "output/:title:"
-    #start_run(cfg,codeCheck=FALSE)
+    start_run(cfg,codeCheck=FALSE)
   }
 }
