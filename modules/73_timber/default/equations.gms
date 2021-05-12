@@ -14,7 +14,7 @@
 *' demand. The purpose of the slack variable is to assure technically feasibility
 *' of the model under all conditions and to indicate shortage of wood supply, if any.
 
-q73_cost_timber(i2)..
+q73_cost_timber(i2)$s73_timber_demand_switch..
                     vm_cost_timber(i2)
                     =e=
                       (sum(cell(i2,j2), vm_prod(j2,"wood"))      * s73_timber_prod_cost_wood
