@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description
-*' The realization substitution_dec18 includes the calibration factors that are used to reduce the substitution of oils by other oils.
+*' The realization substitution_may21 excludes the calibration factors that are used in substitution_dec18 in order to reduce the substitution of oils by other oils.
 *'
 *' @authors Benjamin Leon Bodirsky, Florian Humpenöder, Edna Molina Bacca
 
