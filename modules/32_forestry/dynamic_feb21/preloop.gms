@@ -120,14 +120,14 @@ loop(t_all,
   );
 
 ** Afforestation policies NPI and NDCs
-p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
+p32_aff_pol(t,j) = round(f32_aff_pol(t,j,"%c32_aff_policy%"),6);
 
 * Calculate the remaining exogenous afforestation with respect to the maximum exogenous target over time.
 * `p32_aff_togo` is used to adjust `s32_max_aff_area` in the constraint `q32_max_aff`.
-p32_aff_togo(t) = sum(j, smax(t2, p32_aff_pol(t2,j)) - p32_aff_pol(t,j));
+p32_aff_togo(t) = smax(t2, sum(j, p32_aff_pol(t2,j))) - sum(j, p32_aff_pol(t,j));
 
 * Adjust the afforestation limit `s32_max_aff_area` upwards, if it is below the exogenous policy target.
-s32_max_aff_area = max(s32_max_aff_area, sum(j, smax(t2, p32_aff_pol(t2,j))) );
+s32_max_aff_area = max(s32_max_aff_area, smax(t2, sum(j, p32_aff_pol(t2,j))) );
 
 p32_cdr_ac(t,j,ac) = 0;
 
