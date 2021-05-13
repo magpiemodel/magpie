@@ -25,9 +25,16 @@ if(s35_forest_damage=2,
 	);
 * Distribution of damages correctly
 	pc35_secdforest(j,ac_est) = pc35_secdforest(j,ac_est) + sum(ac_sub,p35_disturbance_loss_secdf(t,j,ac_sub))/card(ac_est) + p35_disturbance_loss_primf(t,j)/card(ac_est);
+
+$ifthen "%c35_protect_scenario%" == "FF+BH" or "full" or "forest" or "FF" or "HalfEarth"
+  pc35_secdforest(j,ac_sub) = pc35_secdforest(j,ac_sub) - (1 - f35_protection_fader(t, "by2050"))* p35_disturbance_loss_secdf(t,j,ac_sub);
+  pcm_land(j,"primforest") = pcm_land(j,"primforest") - (1 - f35_protection_fader(t, "by2030"))* p35_disturbance_loss_primf(t,j);
+  vm_land.l(j,"primforest") = pcm_land(j,"primforest");
+$else
   pc35_secdforest(j,ac_sub) = pc35_secdforest(j,ac_sub) - p35_disturbance_loss_secdf(t,j,ac_sub);
   pcm_land(j,"primforest") = pcm_land(j,"primforest") - p35_disturbance_loss_primf(t,j);
   vm_land.l(j,"primforest") = pcm_land(j,"primforest");
+$endif
 
 * Regrowth of natural vegetation (natural succession) is modelled by shifting age-classes according to time step length.
 s35_shift = m_timestep_length_forestry/5;
@@ -83,7 +90,7 @@ $elseif "%c35_protect_scenario%" == "forest"
 	  p35_save_primforest(t,j) = pcm_land(j,"primforest");
 	  p35_save_secdforest(t,j) = pcm_land(j,"secdforest");
 	  p35_save_other(t,j) = 0;
-$elseif "%c35_protect_scenario%" == "Forest+BH"
+$elseif "%c35_protect_scenario%" == "FF+BH"
     p35_forest_protect_shr(t,j) = p35_protect_shr(t,j,"BH");
     p35_forest_protect_shr(t,j)$(p35_forest_protect_shr(t,j) < p35_protect_shr(t,j,"FF")) = p35_protect_shr(t,j,"FF");
     if (m_year(t) < 2030,
