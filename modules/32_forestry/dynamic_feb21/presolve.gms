@@ -35,21 +35,17 @@ else
 *' @code
 
 *' Afforestation switch:
-*' 0 = Use natveg carbon densities for afforestation,
-*' 1 = Use plantation carbon densities for afforestation.
+*' 0 = Use natveg growth curve towards LPJmL natural vegetation
+*' 1 = Use plantation growth curve (faster than natveg) towards LPJmL natural vegetation
 if(s32_aff_plantation = 0,
  p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
 elseif s32_aff_plantation = 1,
- p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = pm_carbon_density_ac_forestry(t,j,ac,ag_pools);
+ p32_carbon_density_ac(t,j,"aff",ac,ag_pools) = p32_c_density_ac_fast_forestry(t,j,ac);
 );
-*' Timber plantations switch:
-*' 0 = Use natveg carbon densities for timber plantations,
-*' 1 = Use plantation carbon densities for timber plantations.
-if(s32_timber_plantation = 0,
- p32_carbon_density_ac(t,j,"plant",ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
-elseif s32_timber_plantation = 1,
- p32_carbon_density_ac(t,j,"plant",ac,ag_pools) = pm_carbon_density_ac_forestry(t,j,ac,ag_pools);
-);
+
+*' Timber plantations carbon densities:
+p32_carbon_density_ac(t,j,"plant",ac,ag_pools) = pm_carbon_density_ac_forestry(t,j,ac,ag_pools);
+
 *' NDC carbon densities are natveg carbon densities.
 p32_carbon_density_ac(t,j,"ndc",ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
 

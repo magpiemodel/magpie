@@ -55,7 +55,8 @@ parameters
  p32_ac_dist_flag(j,ac)                             Distribution flag with inverse weights according to age-classes (1)
  p32_ac_dist(j,ac)                                  Actual share of age-class distribution (1)
  p32_bii_coeff(type32,bii_class_secd,potnatveg)		bii coeff (unitless)
- ;
+ p32_c_density_ac_fast_forestry(t_all,j,ac)         Carbon densities in plantations based on Braakhekke et al (tC per ha)
+;
 
 positive variables
  vm_cost_fore(i)                                    Forestry costs (Mio USD)
@@ -69,11 +70,11 @@ positive variables
  v32_cost_establishment(i)                          Cost of establishment calculated at the current time step (mio. USD)
  v32_hvarea_forestry(j,ac)                          Harvested area from timber plantations (mio. ha)
  vm_prod_forestry(j,kforestry)                      Production of woody biomass from commercial plantations (mio. tDM per yr)
- ;
+;
 
 variables
  vm_cdr_aff(j,ac,aff_effect)                        Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
- ;
+;
 
 equations
  q32_cost_total(i)                                  Total forestry costs constraint (mio. USD)

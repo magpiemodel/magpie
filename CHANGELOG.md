@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### fixed
 - **32_foresty** BII coefficients for CO2 price driven afforestation
+- **32_foresty** growth curve CO2 price driven afforestation
 - **32_foresty** NPI/NDC afforestation infeasibility
 - **44_biodiversity** ac0 included in pricing of biodiversity loss
 
