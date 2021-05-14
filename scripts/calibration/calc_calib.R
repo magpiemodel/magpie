@@ -176,7 +176,7 @@ calibrate_magpie <- function(n_maxcalib = 1,
                              putfolder = "calib_run",
                              data_workspace = NULL,
                              logoption = 3,
-                             debug = FALSE
+                             debug = FALSE,
                              best_calib = FALSE) {
 
   require(magclass)
