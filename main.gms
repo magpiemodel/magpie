@@ -145,49 +145,60 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
-* Used data set: rev4.59irrig_is_rainf_h12_magpie_debug.tgz
-* md5sum: a1b4177ce154dd3a9fe2fa7963116813
-* Repository: /p/projects/rd3mod/inputdata/output
-* 
-* Used data set: rev4.59irrig_is_rainf_h12_83796d6b_cellularmagpie_debug.tgz
-* md5sum: d56c7ada4073552a3447c588155b57f6
-* Repository: /p/projects/rd3mod/inputdata/output
-* 
-* Used data set: rev4.59irrig_is_rainf_h12_validation_debug.tgz
-* md5sum: a12ecd373b7ac12e1c25f6aa93dd9011
-* Repository: /p/projects/rd3mod/inputdata/output
-* 
-* Used data set: additional_data_rev4.02.tgz
-* md5sum: bcc0a390051f7ef28cb48abeb31662a5
-* Repository: /p/projects/landuse/data/input/archive
-* 
+*
+* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* md5sum: b115c870fd204b86d32b5ed664c2d00f
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+*
+* Used data set: rev4.58_h12_magpie.tgz
+* md5sum: b724f1cb10bedf71ac07f41e0735bf63
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+*
+* Used data set: rev4.58_h12_validation.tgz
+* md5sum: c47c243394e9430bba92aebce37ed652
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+*
+* Used data set: calibration_H12_c200_23Feb21.tgz
+* md5sum: 8c013375008a959aaa0023030f53c2c2
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+*
+* Used data set: additional_data_rev4.00.tgz
+* md5sum: 0d25d76eb2e080c8d42f92265b05bbfc
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+*
 * Low resolution: c200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*     7   22    9    7    1   37   26    8   14   16   33   20
-* 
-* Regionscode: 62eff8f7
-* 
-* Regions data revision: 4.59
-* 
+*    28   24   10    7    3   53   17    8   22    7   11   10
+*
+* Regionscode: 690d3718e151be1b450b394c1064b1c5
+*
+* Regions data revision: 4.58
+*
 * lpj2magpie settings:
-* * LPJmL data: GFDL-ESM4:ssp370
-* * Revision: 4.59
-* 
+* * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
+* * Additional input folder: /p/projects/landuse/data/input/other/rev52
+* * Revision: 52
+* * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
-* * Regionscode: 62eff8f7
-* * Call: do.call(functiononly, args)
-* 
-* 
-* Last modification (input data): Fri Apr 30 14:21:52 2021
-* 
+* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* * Regionscode: 690d3718e151be1b450b394c1064b1c5
+* * (clustering) n-repeat: 5
+* * (clustering) n-redistribute: 0
+* * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = cfg$spamfile, debug = FALSE, seed = cfg$seed)
+*
+*
+*
+* Last modification (input data): Wed May  5 00:57:10 2021
+*
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
@@ -212,7 +223,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  default_lpjml5
+$setglobal c_title  PRtest_default_fbranch+recalib
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
@@ -226,7 +237,7 @@ $setglobal land  landmatrix_dec18
 $setglobal costs  default
 $setglobal interest_rate  select_apr20
 $setglobal tc  endo_jun18
-$setglobal yields  managementcalib_aug19
+$setglobal yields  dynamic_aug18
 
 $setglobal food  anthropometrics_jan18
 $setglobal demand  sector_may15

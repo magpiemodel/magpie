@@ -28,6 +28,8 @@ land_hr_share_out_file     <- path(outputdir,"cell.land_0.5_share.mz")
 croparea_hr_share_out_file <- path(outputdir,"cell.croparea_0.5_share.mz")
 land_hr_split_file         <- path(outputdir,"cell.land_split_0.5.mz")
 land_hr_shr_split_file     <- path(outputdir,"cell.land_split_0.5_share.mz")
+
+load(paste0(outputdir, "/config.Rdata"))
 ################################################################################
 
 if(length(map_file)==0) stop("Could not find map file!")
@@ -36,23 +38,52 @@ if(length(map_file)>1) {
   map_file <- map_file[1]
 }
 
-# Load input data
+if (cfg$gms$crop=="endo_apr21"){
 
-land_lr   <- land(gdx,sum=FALSE,level="cell")
-land_ini  <- setYears(read.magpie(land_hr_file)[,"y1995",],NULL)
-land_ini  <- land_ini[,,getNames(land_lr)]
-if(any(land_ini < 0)) {
-  warning(paste0("Negative values in inital high resolution dataset ",
-                 "detected and set to 0. Check the file ",land_hr_file))
-  land_ini[which(land_ini < 0,arr.ind = T)] <- 0
+  # Load input data
+  land_ini_lr  <- readGDX(gdx,"f10_land","f_land", format="first_found")[,"y1995",]
+  land_lr      <- land(gdx,sum=FALSE,level="cell")
+  land_ini_hr  <- read.magpie(land_hr_file)[,"y1995",]
+  land_ini_hr  <- land_ini_hr[,,getNames(land_lr)]
+  if(any(land_ini_hr < 0)) {
+    warning(paste0("Negative values in inital high resolution dataset detected and set to 0. Check the file ",land_hr_file))
+    land_ini_hr[which(land_ini_hr < 0,arr.ind = T)] <- 0
+  }
+  avl_cropland_hr <- path(outputdir, "avl_cropland_0.5.mz")       # available cropland (at high resolution)
+  marginal_land <- cfg$gms$c30_marginal_land                      # marginal land scenario
+  set_aside_shr <- cfg$gms$s30_set_aside_shr                      # set aside share (default: 0)
+  target_year <- cfg$gms$c30_set_aside_target                     # target year of set aside policy (default: "none")
+  set_aside_fader  <- readGDX(gdx,"f30_set_aside_fader", format="first_found")[,,target_year]
+
+  # Start interpolation (use interpolateAvlCroplandWeighted from luscale)
+  print("Disaggregation")
+  land_hr <- interpolateAvlCroplandWeighted(x          = land_lr,
+                                            x_ini_lr   = land_ini_lr,
+                                            x_ini_hr   = land_ini_hr,
+                                            avl_cropland_hr = avl_cropland_hr,
+                                            map        = map_file,
+                                            marginal_land = marginal_land,
+                                            set_aside_shr = set_aside_shr,
+                                            set_aside_fader = set_aside_fader)
+
+}else if (cfg$gms$crop=="endo_jun13") {
+
+  # Load input data
+  land_lr   <- land(gdx,sum=FALSE,level="cell")
+  land_ini  <- setYears(read.magpie(land_hr_file)[,"y1995",],NULL)
+  land_ini  <- land_ini[,,getNames(land_lr)]
+  if(any(land_ini < 0)) {
+    warning(paste0("Negative values in inital high resolution dataset ",
+                   "detected and set to 0. Check the file ",land_hr_file))
+    land_ini[which(land_ini < 0,arr.ind = T)] <- 0
+  }
+
+  # Start interpolation (use interpolate from luscale)
+  message("Disaggregation")
+  land_hr <- luscale::interpolate2(x     = land_lr,
+                                   x_ini = land_ini,
+                                   map   = map_file)
 }
-
-# Start interpolation (use interpolate from luscale)
-message("Disaggregation")
-land_hr <- luscale::interpolate2(x     = land_lr,
-                                 x_ini = land_ini,
-                                 map   = map_file)
-
 
 # Write outputs
 

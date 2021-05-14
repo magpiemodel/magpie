@@ -33,6 +33,12 @@
                  =e=
                  vm_res_recycling(i2,"nr") * f51_ef_n_soil(n_pollutants_direct,"resid");
 
+*' emissions from burning crop residues, N2O and NOx
+ q51_emissions_resid_burn(i2,n_pollutants_direct)..
+                 vm_btm_reg(i2,"resid_burn",n_pollutants_direct)
+                 =e=
+                 sum(kcr, vm_res_ag_burn(i2,kcr,"dm")) * f51_ef_resid_burn(n_pollutants_direct);
+
 *' soil organic matter loss:
  q51_emissions_som(i2,n_pollutants_direct)..
                  vm_btm_reg(i2,"som",n_pollutants_direct)

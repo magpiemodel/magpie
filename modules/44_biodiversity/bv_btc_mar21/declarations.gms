@@ -1,8 +1,9 @@
-*** (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK),
-*** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** or later. See LICENSE file or go to http://www.gnu.org/licenses/
-*** Contact: magpie@pik-potsdam.de
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
+*** |  Contact: magpie@pik-potsdam.de
 
 parameters
  pc44_bv_weighted(j,landcover44)		        Current range rarity weighted bii (Mha)
@@ -22,7 +23,7 @@ positive variables
 ;
 
 equations
- q44_bv_loss(j)                                 zotal biodiversity value loss constraint (Mha)
+ q44_bv_loss(j)                                 total biodiversity value loss constraint (Mha)
  q44_diff_bv_landcover(j,landcover44)			biodiversity value loss constraint per land class (Mha)
  q44_bv_weighted(j,landcover44)		            biodiversity value stock constraint (Mha)
  q44_cost_bv_loss(j)			                biodiversity value loss cost constraint (mio USD)
@@ -36,7 +37,7 @@ parameters
  ov_cost_bv_loss(t,j,type)                    biodiversity value loss cost (mio USD)
  ov_bv(t,j,landcover44,potnatveg,type)        biodiversity value for all land cover classes (unweighted) (Mha)
  ov44_bv_weighted(t,j,landcover44,type)       range rarity weighted biodiversity value (Mha)
- oq44_bv_loss(t,j,type)                       zotal biodiversity value loss constraint (Mha)
+ oq44_bv_loss(t,j,type)                       total biodiversity value loss constraint (Mha)
  oq44_diff_bv_landcover(t,j,landcover44,type) biodiversity value loss constraint per land class (Mha)
  oq44_bv_weighted(t,j,landcover44,type)       biodiversity value stock constraint (Mha)
  oq44_cost_bv_loss(t,j,type)                  biodiversity value loss cost constraint (mio USD)

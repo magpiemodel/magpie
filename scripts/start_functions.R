@@ -185,10 +185,6 @@
                       outfile  = "clustermap_rev0_dummy.rds",
                       spamfile = Sys.glob("input/0.5-to-*_sum.spam")) {
 
-
-
-
-  print("works")
   sp  <- luscale::read.spam(spamfile)
   a   <- apply(sp, 2, function(x) return(which(x == 1)))
   out <- data.frame(cell = cells_tmp, region = sub("\\..*$","",spatial_header),

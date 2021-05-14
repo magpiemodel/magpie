@@ -45,6 +45,6 @@ bvPriceScen <- c("p0", "p10_p10000")
     start_run(cfg=cfg,codeCheck=TRUE)
 
   }
-}
+
 
 

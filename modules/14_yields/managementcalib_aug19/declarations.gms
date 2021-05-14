@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -9,7 +9,7 @@ parameters
  i14_yields_calib(t,j,kve,w)                            Calibrated biophysical input yields (excluding technological change) (tDM per ha per yr)
  p14_pyield_LPJ_reg(t_all,i)                            Regional average input yields aggregated from clusters with initial pasture area as weights (tDM per ha per yr)
  p14_pyield_corr(t,i)                                   Regional pasture management correction for historical time steps (1)
- i14_croparea_total(t_all,j)                            Cellular water type specific cropareas (mio. ha)
+ i14_croparea_total(t_all,j)                            Cellular croparea (mio. ha)
  i14_lpj_yields_hist(t_all,i,kcr)                       Biophysical input yields average over region and water supply type at the historical reference year (tDM per ha per yr)
  i14_regions_yields(t,i,kcr)                            FAO yields per region (tDM per ha per yr)
  i14_lambda_yields(t,i,kcr)                             Scaling factor for non-linear management calibration (1)
