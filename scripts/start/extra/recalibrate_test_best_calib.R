@@ -27,6 +27,7 @@ cfg$gms$c_timesteps <- 1
 cfg$output <- c("rds_report")
 cfg$sequential <- TRUE
 cfg$best_calib <- best
+cfg$crop_calib_max                   <- 1.5
 
 start_run(cfg,codeCheck=FALSE)
 magpie4::submitCalibration("H12_best_calib_",best)
