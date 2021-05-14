@@ -18,7 +18,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-for (best in c(TRUE,FALSE)){
+for (best in c(FALSE,TRUE)){
 
 cfg$results_folder <- "output/:title:"
 cfg$recalibrate <- TRUE
