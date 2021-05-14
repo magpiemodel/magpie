@@ -420,7 +420,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
                      calib_file = calib_file,
                      data_workspace = cfg$val_workspace,
                      logoption = 3,
-                     debug = cfg$debug
+                     debug = cfg$debug,
                      best_calib = cfg$best_calib)
     file.copy("calibration_results.pdf", cfg$results_folder, overwrite=TRUE)
     cat("Calibration factor calculated!\n")
