@@ -139,4 +139,4 @@ q20_substitution_utility_loss(i2) ..
       ) +
       sum((ksd,processing20,kpr), v20_dem_processing(i2,processing20,kpr)
         *sum(ct,i20_processing_conversion_factors(ct,processing20,ksd,kpr))
-        * (f20_quality_cost(ksd,kpr)));
+        * (f20_quality_cost(ksd,kpr)+f20_calibration(ksd,kpr)));
