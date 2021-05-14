@@ -73,7 +73,7 @@ get_yieldcalib <- function(gdx_file) {
 }
 
 # Calculate the correction factor and save it
-update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,calibrate_cropland=TRUE,damping_factor=0.8, calib_file, crop_max=2, calibration_step="",n_maxcalib=20){
+update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,calibrate_cropland=TRUE,damping_factor=0.8, calib_file, crop_max=2, calibration_step="",n_maxcalib=20, best_calib = FALSE){
   require(magclass)
   require(magpie4)
   if(!(modelstat(gdx_file)[1,1,1]%in%c(1,2,7))) stop("Calibration run infeasible")
@@ -117,9 +117,13 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,cali
 
   # in case of sufficient convergence, stop here (no additional update of
   # calibration factors!)
-  ###-Select best calibration factor for each region and from the all the calibration steps
   if(all(calib_divergence < calib_accuracy) |  calibration_step==n_maxcalib) {
 
+    ### Depending on the selected calibration selection type (best_calib FALSE or TRUE)
+    # the reported and used regional calibration factors can be either the ones of the last iteration,
+    # or the "best" based on the iteration value with the lower divergence.
+    if (best_calib == TRUE){
+    ###-Select best calibration factor for each region and from the all the calibration steps
     calib_best<-new.magpie(cells_and_regions = getCells(calib_divergence),years = getYears(calib_divergence),names = c("crop","past"))
 
     divergence_data<-read.csv("calib_divergence.cs3")
@@ -145,6 +149,9 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,cali
 ####
   return(TRUE)
 }else{
+  return(TRUE)
+}
+}else{
   comment <- c(" description: Regional yield calibration file",
                " unit: -",
                paste0(" note: Calibration step ",calibration_step),
@@ -169,7 +176,8 @@ calibrate_magpie <- function(n_maxcalib = 1,
                              putfolder = "calib_run",
                              data_workspace = NULL,
                              logoption = 3,
-                             debug = FALSE) {
+                             debug = FALSE
+                             best_calib = FALSE) {
 
   require(magclass)
 
@@ -177,7 +185,7 @@ calibrate_magpie <- function(n_maxcalib = 1,
     cat(paste("\nStarting calibration iteration",i,"\n"))
     calibration_run(putfolder=putfolder, calib_magpie_name=calib_magpie_name, logoption=logoption)
     if(debug) file.copy(paste0(putfolder,"/fulldata.gdx"),paste0("fulldata_calib",i,".gdx"))
-    done <- update_calib(gdx_file=paste0(putfolder,"/fulldata.gdx"),calib_accuracy=calib_accuracy, calibrate_pasture=calibrate_pasture,calibrate_cropland=calibrate_cropland,crop_max=crop_max,damping_factor=damping_factor, calib_file=calib_file, calibration_step=i,n_maxcalib=n_maxcalib)
+    done <- update_calib(gdx_file=paste0(putfolder,"/fulldata.gdx"),calib_accuracy=calib_accuracy, calibrate_pasture=calibrate_pasture,calibrate_cropland=calibrate_cropland,crop_max=crop_max,damping_factor=damping_factor, calib_file=calib_file, calibration_step=i,n_maxcalib=n_maxcalib,best_calib = FALSE)
     if(done){
       break
     }
