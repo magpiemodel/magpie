@@ -22,7 +22,7 @@ for (best in c(TRUE,FALSE)){
 
 cfg$results_folder <- "output/:title:"
 cfg$recalibrate <- TRUE
-cfg$title <- "calib_run"
+cfg$title <- paste0("calib_run_",best)
 cfg$gms$c_timesteps <- 1
 cfg$output <- c("rds_report")
 cfg$sequential <- TRUE
