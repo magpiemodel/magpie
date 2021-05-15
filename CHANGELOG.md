@@ -10,14 +10,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### changed
 
+- New standard for cluster to region mapping (rds-files) is used in all scripts. If old spam files are provided by input data, rds-mapping file is created.
+- Changed file format from cs2 to cs2b for cellular input files with a single data column.
+- Moved most of cropping related set definitions (k, kve, kcr) from **16_demand** to **14_yield**.
+
 ### added
-- **30_crop** Added option to set aside share of the available cropland for biodiversity and ecosystem services. New switches `s30_set_aside_shr` and `c30_set_aside_target` to specify the share that should be set aside and the target year.
-- **30_crop** Changed input data regarding cropland suitability. Added new switch `c30_marginal_land`, which provides different options for including marginal cropland.
+- **14_yield** Added new realization "managementcalib_aug19" that is able to calibrated yield data coming from uncalibrated crop models (e.g. LPJmL yields for unlimited N supply). The yield calibration is either a purely multipicative factor or is limited to additive change in case of a underestimated FAO yield by the initial crop model yields (based on the switch "s14_limit_calib"). For pastures spillover of crop yield increases due to technological change from the previous time step are allowed and can be scaled using "s14_yld_past_switch".
+
+- **20_processing** Added new almost identical realization that excludes a calibration of the oil crop demand for oils (Note: old realization can be removed, when old yield realizations are deleted).
+
+- **30_crop** Added new realization "end_apr21" that has a option to set aside share of the available cropland for biodiversity and ecosystem services. New switches `s30_set_aside_shr` and `c30_set_aside_target` are included to specify the share that should be set aside and the target year. Additionally, new input data regarding cropland suitability is used including the  new switch `c30_marginal_land`, which provides different options for including marginal land as cropland.
+
+- **41_area_equipped_for_irrigation** Added switch for using different input data including new LUH2v2 consistent initialisation pattern.
+
+- **calibration run** has two new feature: 1. Upper bound to cropland factor can be added ("crop_calib_max"). 2. Best calibration factor (factor with the lowest divergence) can be picked individually for each regions based on all calibration factors caculated during the calibration run iteration ("best_calib"). 
+
+- **disaggregation** Added new disaggregation script that is in line with new crop realisation and can account for cropland suitability on grid level during disaggregation.
+
+- Added new interfaces for tau factor of the previous time step ("pcm_tau" in **13_tc**) and historic croparea ("fm_croparea" in **30_crop**)
 
 ### removed
 
 ### fixed
-
 
 
 ## [4.3.4] - 2021-04-30
