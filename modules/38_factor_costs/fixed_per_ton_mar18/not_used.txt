@@ -12,5 +12,4 @@ vm_area,input,questionnaire
 pm_interest,input,questionnaire
 vm_prod,input,questionnaire
 pm_croparea_start,input,questionnaire
-im_gdp_pc_mer,input,questionnaire
-im_pop,input,questionnaire
+im_gdp_pc_ppp_iso,input,questionnaire
