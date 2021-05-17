@@ -21,37 +21,108 @@ i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w) * sum(cell
 
 
 ***YIELD MANAGEMENT CALIBRATION************************************************************
+
+
+*' @code
+
+*' The following equations calibrate cellular yield pattern ('f14_yields') to match
+*' FAO historical yields ('f14_regions_yields') by calculating a calibration term
+*' called 'i14_managementcalib'. For most cases 'i14_managementcalib' is the ratio
+*' of the historical yields reported by FAO ('f14_regions_yields') and regional mean yields
+*' ('i14_lpj_yields_hist') given historic croparea patterns ('fm_croparea') and 
+*' cellular yields comming from crop models like LPJmL ('f14_yields'). 
+*' In this cases 'i14_managementcalib' represents a purely relative calibration factors, that
+*' just depends on the initial conditions in the starting year.
+*' 
+*' However, when FAO yields are significantly higher than given by the cellular yield inputs, 
+*' the relative calibration terms can lead to unrealistically large yields in the case of 
+*' future yield increases within the cellular yield patterns.
+*' 
+*' To address this issue, the factor 'i14_lambda_yields' determines the degree 
+*' to which the baseline (FAO) is under or over estimated and therefor controls, 
+*' if the calibration factor is applied as an absolute or relative change. 
+*' For overestimated FAO yields, 'i14_lambda_yields' is 1, which is equivalent
+*' to an entirely relative calibration. For underestimated yields, 'i14_lambda_yields'
+*' is calculated as the squared root of the ratio between LPJmL yields and FAO historical
+*' yields, and as 'i14_lambda_yields'  approaches 0, it reduces the applied relative change
+*' resulting in a mean change increasingly similar to an additive term (@Heinke.2013).
+
+*' This concept is refered to as a limited calibration, as it limites the calibration 
+*' to an additive term in case of a strongly under estimated baseline. The scalar 
+*' 's14_limit_calib' can be used to swith limited calibration  on (1) and off (0).
+
 i14_croparea_total(t_all,j) = sum((kcr,w), fm_croparea(t_all,j,w,kcr));
-i14_lpj_yields_hist(t_past,i,knbe14) = (sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14) * f14_yields(t_past,j,knbe14,w)) /
-                                             sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14)))$(sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14))>0) +
-																            (sum((cell(i,j),w), i14_croparea_total(t_past,j) * f14_yields(t_past,j,knbe14,w)) /
-																      	     sum(cell(i,j), i14_croparea_total(t_past,j)))$(sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14))=0);
-loop(t, if(sum(sameas(t,"y1995"),1)=1,
-          if ((s14_limit_calib = 0),
-			      i14_lambda_yields(t,i,knbe14) = 1;
-					Elseif (s14_limit_calib =1 ),
-            i14_lambda_yields(t,i,knbe14) = 1$(f14_regions_yields(t,i,knbe14) <= i14_lpj_yields_hist(t,i,knbe14))
-                                            + sqrt(i14_lpj_yields_hist(t,i,knbe14)/f14_regions_yields(t,i,knbe14))$
-                                               (f14_regions_yields(t,i,knbe14) > i14_lpj_yields_hist(t,i,knbe14));
-           );
-           i14_regions_yields(t,i,knbe14) = f14_regions_yields(t,i,knbe14);
-		    Else
-		      i14_lpj_yields_hist(t,i,knbe14) = i14_lpj_yields_hist(t-1,i,knbe14);
+
+*' To calculate regional yields ('i14_lpj_yields_hist') from the given cellular input pattern 
+*' historic croparea patterns ('fm_croprea') are used. In rare cases, where a region has 
+*' no croparea reported for a given crop type, the total croparea is used to calculate 
+*' a proxy yield used for the calibration given by the following equation
+
+i14_lpj_yields_hist(t_past,i,knbe14) 
+   = (sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14) * f14_yields(t_past,j,knbe14,w)) /
+      sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14)))$(sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14))>0) 
+   + (sum((cell(i,j),w), i14_croparea_total(t_past,j) * f14_yields(t_past,j,knbe14,w)) /
+      sum(cell(i,j), i14_croparea_total(t_past,j)))$(sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14))=0);
+
+
+*' The factor 'i14_lambda_yields' is calculated for the initial time step depending 
+*' on the setting 's14_limit_calib' and than hold constant for all other time steps.
+*' The regional FAO yield and regional yield of the crop model input of the initial
+*' time step is kept constant in the two parameters 'i14_regions_yields' and 
+*' 'i14_lpj_yields_hist': 
+ 
+loop(t, 
+     if(sum(sameas(t,"y1995"),1)=1,
+
+          if    ((s14_limit_calib = 0),
+               i14_lambda_yields(t,i,knbe14) = 1;
+
+          Elseif (s14_limit_calib =1 ),
+               i14_lambda_yields(t,i,knbe14) = 
+                    1$(f14_regions_yields(t,i,knbe14) <= i14_lpj_yields_hist(t,i,knbe14))
+                    + sqrt(i14_lpj_yields_hist(t,i,knbe14)/f14_regions_yields(t,i,knbe14))$
+                    (f14_regions_yields(t,i,knbe14) > i14_lpj_yields_hist(t,i,knbe14));
+          );
+
+          i14_regions_yields(t,i,knbe14) = f14_regions_yields(t,i,knbe14);
+         
+     Else
+          i14_lpj_yields_hist(t,i,knbe14) = i14_lpj_yields_hist(t-1,i,knbe14);
           i14_regions_yields(t,i,knbe14)  = i14_regions_yields(t-1,i,knbe14);
-		    	i14_lambda_yields(t,i,knbe14)   = i14_lambda_yields(t-1,i,knbe14);
-		);
+          i14_lambda_yields(t,i,knbe14)   = i14_lambda_yields(t-1,i,knbe14);
+     );
 );
+
+
+*' The calibrated, cellular yield 'i14_yields_calib' is calculated for each time step depending 
+*' on the constant values 'i14_lpj_yields_hist', 'i14_regions_yields', 'i14_lambda_yields' 
+*' and the uncalibrated, cellular yield 'f14_yields' following the idea of eq. (9) in @Heinke.2013:
+
 i14_managementcalib(t,j,knbe14,w) =
   1 + (sum(cell(i,j), i14_regions_yields(t,i,knbe14) - i14_lpj_yields_hist(t,i,knbe14)) /
-                                          f14_yields(t,j,knbe14,w) *
+                             f14_yields(t,j,knbe14,w) *
       (f14_yields(t,j,knbe14,w) / (sum(cell(i,j),i14_lpj_yields_hist(t,i,knbe14))+10**(-8))) **
-                             sum(cell(i,j),i14_lambda_yields(t,i,knbe14)))$
-																			  (f14_yields(t,j,knbe14,w)>0);
+                             sum(cell(i,j),i14_lambda_yields(t,i,knbe14)))$(f14_yields(t,j,knbe14,w)>0);
+
+
 i14_yields_calib(t,j,knbe14,w)    = i14_managementcalib(t,j,knbe14,w) * f14_yields(t,j,knbe14,w);
+
+*' Note that the calculation is split into two parts for better readability. 
+*' @stop
+
+
 ***YIELD CALIBRATION***********************************************************************
+
+*' @code 
+*' Calibrated yields are additionally adjusted by calibration factors 'f14_yld_calib' 
+*' determined in a calibration run. As MAgPIE optimizes yield pattern and FAO regional 
+*' yields are outlier corrected, historical production and croparea can only be reproduced
+*' with this additional step of correction: 
+
 i14_yields_calib(t,j,kcr,w)       = i14_yields_calib(t,j,kcr,w)      *sum(cell(i,j),f14_yld_calib(i,"crop"));
 i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w)*sum(cell(i,j),f14_yld_calib(i,"past"));
 
+*' @stop
 
 ****
 ****

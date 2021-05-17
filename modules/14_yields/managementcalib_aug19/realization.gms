@@ -5,9 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In the dynamic_aug18 realization, the crop yield calculations
-*' are identical as in the above described realization (biocorrect).
-*' Additionally, this realization also calculates the growing stocks in commercial
+*' @description In the managementcalib_aug19 realization, the crop yields
+*' are calibrated to FAO regional yield levels of the initial time step.
+*' Pasture yields are calulcated based on pasture demand to account for 
+*' in- and extensification of managed grasslands. Technological change spillover
+*' from crop yield increases of the time step before are included additionally.
+*' This realization also calculates the growing stocks in commercial
 *' plantations and natural vegetation using LPJmL Carbon stocks.
 *'
 *' @limitations The exogenous implementation of pasture intensification cannot
