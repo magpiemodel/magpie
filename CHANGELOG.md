@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **calibration run** has two new features: 1. Upper bound to cropland factor can be added ("crop_calib_max"). 2. Best calibration factor (factor with the lowest divergence) can be picked individually for each regions based on all calibration factors caculated during the calibration run iteration ("best_calib").
 
-- **disaggregation** Added new disaggregation script that is in line with new crop realisation and can account for cropland suitability on grid level during disaggregation.
+- **disaggregation** Added new disaggregation script that is in line with new crop realisation and can account for cropland availabilty on grid level during disaggregation (see `interpolateAvlCroplandWeighted()` in package `luscale` for further details).
 
 - Added new interfaces for tau factor of the previous time step ("pcm_tau" in **13_tc**) and historic croparea ("fm_croparea" in **30_crop**)
 
