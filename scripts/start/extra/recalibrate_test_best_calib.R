@@ -21,7 +21,7 @@ source("config/default.cfg")
 realization<-c("mixed_feb17","sticky_feb18")
 
 for (best in c(FALSE,TRUE)){
-for (i in realisation)
+for (i in realization)
 cfg$input <- c("additional_data_rev4.02.tgz",
                "rev4.59newparam+proxyYieldFix_h12_magpie_debug.tgz",
                "rev4.59newparam+proxyYieldFix_h12_c5cdbf33_cellularmagpie_debug.tgz",
