@@ -36,7 +36,7 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 
 cfg$gms$peatland  <- "on_target"
-cfg$gms$s58_rewetting_switch  <- -Inf
+cfg$gms$s58_rewetting_switch  <- Inf
 cfg$gms$s80_optfile <- 1
 cfg$gms$s80_maxiter <- 30
 cfg$gms$s56_peatland_policy <- 0
@@ -47,7 +47,7 @@ cfg <- setScenario(cfg,c("SSP2","NPI","ForestryEndo"))
 cfg$output <- c("rds_report")
 #download_and_update(cfg)
 
-prefix <- "PT01"
+prefix <- "PT02"
 
 #Ref
 cfg$title <- paste(prefix,"SSP2","Ref",sep="_")
