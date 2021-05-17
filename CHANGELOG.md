@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New standard for cluster to region mapping (rds-files) is used in all scripts. If old spam files are provided by input data, rds-mapping file is created.
 - Changed file format from cs2 to cs2b for cellular input files with a single data column.
 - Moved most of cropping related set definitions (k, kve, kcr) from **16_demand** to **14_yield**.
+- **38_factor_costs** Realization 'sticky_feb18' extended to differentiate capital requirements between regions and their specific development status (GDP) in each time step of the magpie run. The changes in the "sticky" realization also include an additional switch so it can be operated as "dynamic" (change of each region capital share at each time step) or "free"  (capital shares equal to zero and equivalent to the 'fixed_per_ton_mar18' realization).
 
 ### added
 - **14_yield** Added new realization "managementcalib_aug19" that is able to calibrated yield data coming from uncalibrated crop models (e.g. LPJmL yields for unlimited N supply). The yield calibration is either a purely multipicative factor or is limited to additive change in case of a underestimated FAO yield by the initial crop model yields (based on the switch "s14_limit_calib"). For pastures spillover of crop yield increases due to technological change from the previous time step are allowed and can be scaled using "s14_yld_past_switch".
@@ -23,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **41_area_equipped_for_irrigation** Added switch for using different input data including new LUH2v2 consistent initialisation pattern.
 
-- **calibration run** has two new feature: 1. Upper bound to cropland factor can be added ("crop_calib_max"). 2. Best calibration factor (factor with the lowest divergence) can be picked individually for each regions based on all calibration factors caculated during the calibration run iteration ("best_calib"). 
+- **calibration run** has two new feature: 1. Upper bound to cropland factor can be added ("crop_calib_max"). 2. Best calibration factor (factor with the lowest divergence) can be picked individually for each regions based on all calibration factors caculated during the calibration run iteration ("best_calib").
 
 - **disaggregation** Added new disaggregation script that is in line with new crop realisation and can account for cropland suitability on grid level during disaggregation.
 
