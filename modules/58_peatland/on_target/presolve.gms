@@ -60,6 +60,8 @@ else
 	v58_peatland_intact.fx(j) = pc58_peatland_intact(j);
 	v58_lu_transitions.fx(j,from58,to58)$(not sameas(from58,to58)) = 0;
 
+	pc58_peatland_man_inital(j,man58,land58) = pc58_peatland_man(j,man58,land58);
+
 	else	
 	p58_scaling_factor(j) = p58_peatland_area(j)/p58_land_area(j);
 *define bound for peatland area after 2015
@@ -71,6 +73,8 @@ else
 	v58_peatland_intact.lo(j) = 0;
 	v58_peatland_intact.up(j) = pc58_peatland_intact(j);
 	v58_peatland_intact.l(j) = pc58_peatland_intact(j);
+
+	v58_peatland_man.lo(j,"rewet",land58) = s58_rewetting_target_2050*f58_rewetting_fader(t)*(pc58_peatland_man_inital(j,"degrad",land58)+pc58_peatland_man_inital(j,"unused",land58));
 
 *define allowed transitions within peatland area	
 	v58_lu_transitions.fx(j,from58,to58)$(not sameas(from58,to58)) = 0;
