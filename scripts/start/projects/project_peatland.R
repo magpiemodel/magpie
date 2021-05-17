@@ -47,7 +47,7 @@ cfg <- setScenario(cfg,c("SSP2","NPI","ForestryEndo"))
 cfg$output <- c("rds_report")
 #download_and_update(cfg)
 
-prefix <- "PT04"
+prefix <- "PT05"
 
 #Ref
 cfg$title <- paste(prefix,"SSP2","Ref",sep="_")
