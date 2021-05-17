@@ -37,6 +37,10 @@ cfg$best_calib <- best
 cfg$crop_calib_max<- 1.5
 cfg$gms$factor_costs <- i
 cfg$gms$c38_sticky_mode <- "dynamic"
+cfg$gms$yields                       <- "managementcalib_aug19"
+cfg$gms$s14_yld_past_switch          <- 0.25
+cfg$gms$processing                   <- "substitution_may21"
+cfg$gms$c41_initial_irrigation_area  <- "LUH2v2"
 
 
 start_run(cfg,codeCheck=FALSE)
