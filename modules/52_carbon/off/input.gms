@@ -8,6 +8,7 @@
 $setglobal c52_carbon_scenario  nocc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
+*             nocc2020 (no climate change after 2020)
 
 table fm_carbon_density(t_all,j,land,c_pools) LPJmL carbon density for land and carbon pools (tC per ha)
 $ondelim
@@ -15,4 +16,5 @@ $include "./modules/52_carbon/input/lpj_carbon_stocks.cs3"
 $offdelim
 ;
 $if "%c52_carbon_scenario%" == "nocc" fm_carbon_density(t_all,j,land,c_pools) = fm_carbon_density("y1995",j,land,c_pools);
+$if "%c52_carbon_scenario%" == "nocc2020" fm_carbon_density(t_nocc2020,j,land,c_pools) = fm_carbon_density("y2020",j,land,c_pools);
 m_fillmissingyears(fm_carbon_density,"j,land,c_pools");

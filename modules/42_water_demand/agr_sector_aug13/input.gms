@@ -37,6 +37,7 @@ s42_env_flow_fraction              Fraction of available water that is reserved 
 $setglobal c42_watdem_scenario  nocc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
+*             nocc2020 (no climate change after 2020)
 
 * Set-switch for countries affected by EFP
 * Default: all iso countries selected
@@ -75,6 +76,8 @@ $include "./modules/42_water_demand/input/lpj_airrig.cs2"
 $offdelim
 ;
 $if "%c42_watdem_scenario%" == "nocc" f42_wat_req_kve(t_all,j,kve) = f42_wat_req_kve("y1995",j,kve);
+$if "%c42_watdem_scenario%" == "nocc2020" f42_wat_req_kve(t_nocc2020,j,kve) = f42_wat_req_kve("y2020",j,kve);
+
 m_fillmissingyears(f42_wat_req_kve,"j,kve");
 
 
@@ -93,6 +96,7 @@ $include "./modules/42_water_demand/input/lpj_envflow_grper.cs2"
 $offdelim
 /;
 $if "%c42_watdem_scenario%" == "nocc" f42_env_flows(t_all,j) = f42_env_flows("y1995",j);
+$if "%c42_watdem_scenario%" == "nocc2020" f42_env_flows(t_nocc2020,j) = f42_env_flows("y2020",j);
 m_fillmissingyears(f42_env_flows,"j");
 
 $setglobal c42_env_flow_policy  off

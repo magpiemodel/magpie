@@ -8,6 +8,7 @@
 $setglobal c14_yields_scenario  nocc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
+*             nocc2020 (no climate change after 2020)
 
 scalars
   s14_yld_past_switch  Spillover parameter for translating technological change in the crop sector into pasture yield increases  (1)     / 0.25 /
@@ -24,6 +25,7 @@ $ondelim
 $include "./modules/14_yields/input/lpj_yields.cs3"
 $offdelim
 ;
-* set values to 1995 if nocc scenario is used
+* set values to 1995 if nocc scenario is used, or to 2020 after 2025 if nocc2020 is used
 $if "%c14_yields_scenario%" == "nocc" f14_yields(t_all,j,kve,w) = f14_yields("y1995",j,kve,w);
+$if "%c14_yields_scenario%" == "nocc2020" f14_yields(t_nocc2020,j,kve,w) = f14_yields("y2020",j,kve,w);
 m_fillmissingyears(f14_yields,"j,kve,w");

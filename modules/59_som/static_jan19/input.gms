@@ -12,6 +12,7 @@ $setglobal c59_static_spatial_level  cellular
 $setglobal c59_som_scenario  nocc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
+*             nocc2020 (no climate change after 2020)
 
 parameters f59_topsoilc_density(t_all,j) LPJ topsoil carbon density for natural vegetation (tC per ha)
 /
@@ -21,6 +22,7 @@ $offdelim
 /
 ;
 $if "%c59_som_scenario%" == "nocc" f59_topsoilc_density(t_all,j) = f59_topsoilc_density("y1995",j);
+$if "%c59_som_scenario%" == "nocc2020" f59_topsoilc_density(t_nocc2020,j) = f59_topsoilc_density("y2020",j);
 m_fillmissingyears(f59_topsoilc_density,"j");
 
 parameters f59_cshare_released(j) Share of soil carbon that is released on cropland compared to natural vegetation after 20 years (1)
