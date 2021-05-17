@@ -13,21 +13,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New standard for cluster to region mapping (rds-files) is used in all scripts. If old spam files are provided by input data, rds-mapping file is created.
 - Changed file format from cs2 to cs2b for cellular input files with a single data column.
 - Moved most of cropping related set definitions (k, kve, kcr) from **16_demand** to **14_yield**.
+- **38_factor_costs** Realization `sticky_feb18` extended to differentiate capital requirements between regions and their specific development status (GDP) in each time step of the magpie run. The changes in the `sticky` realization also include an additional switch so it can be operated as `dynamic` (change of each region capital share at each time step) or `free` (capital shares equal to zero and equivalent to the `fixed_per_ton_mar18` realization).
 
 ### added
-- **14_yield** Added new realization "managementcalib_aug19" that is able to calibrate yield data coming from uncalibrated crop models (e.g. LPJmL yields for unlimited N supply). The yield calibration is either a purely multipicative factor or is limited to additive change in case of a underestimated FAO yield by the initial crop model yields (based on the switch "s14_limit_calib"). For pastures spillover of crop yield increases due to technological change from the previous time step are allowed and can be scaled using "s14_yld_past_switch".
+- **14_yield** Added new realization `managementcalib_aug19` that is able to calibrate yield data coming from uncalibrated crop models (e.g. LPJmL yields for unlimited N supply). The yield calibration is either a purely multipicative factor or is limited to additive change in case of a underestimated FAO yield by the initial crop model yields (based on the switch `s14_limit_calib`). For pastures spillover of crop yield increases due to technological change from the previous time step are allowed and can be scaled using `s14_yld_past_switch`.
 
 - **20_processing** Added new almost identical realization that excludes a calibration of the oil crop demand for oils (Note: old realization can be removed, when old yield realizations are deleted).
 
-- **30_crop** Added new realization "end_apr21". The realisation includes new input data for available cropland and a new switch `c30_marginal_land`, which provides different options for including marginal land as cropland. Furthermore, a given share of the available cropland can be set aside for the provisioning of nature's contribution to people and to promote biodiversity. The new switches `s30_set_aside_shr` and `c30_set_aside_target` are included to specify the share that should be set aside and the target year.
+- **30_crop** Added new realization `end_apr21`. The realisation includes new input data for available cropland and a new switch `c30_marginal_land`, which provides different options for including marginal land as cropland. Furthermore, a given share of the available cropland can be set aside for the provisioning of natures contribution to people and to promote biodiversity. The new switches `s30_set_aside_shr` and `c30_set_aside_target` are included to specify the share that should be set aside and the target year.
 
 - **41_area_equipped_for_irrigation** Added switch for using different input data including new LUH2v2 consistent initialisation pattern.
 
-- **calibration run** has two new features: 1. Upper bound to cropland factor can be added ("crop_calib_max"). 2. Best calibration factor (factor with the lowest divergence) can be picked individually for each regions based on all calibration factors caculated during the calibration run iteration ("best_calib").
+- **calibration run** has two new features: 1. Upper bound to cropland factor can be added (`crop_calib_max`). 2. Best calibration factor (factor with the lowest divergence) can be picked individually for each regions based on all calibration factors caculated during the calibration run iteration (`best_calib`).
 
 - **disaggregation** Added new disaggregation script that is in line with new crop realisation and can account for cropland availabilty on grid level during disaggregation (see `interpolateAvlCroplandWeighted()` in package `luscale` for further details).
 
-- Added new interfaces for tau factor of the previous time step ("pcm_tau" in **13_tc**) and historic croparea ("fm_croparea" in **30_crop**)
+- Added new interfaces for tau factor of the previous time step (`pcm_tau` in **13_tc**) and historic croparea (`fm_croparea` in **30_crop**)
 
 ### removed
 

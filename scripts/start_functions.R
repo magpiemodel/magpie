@@ -21,7 +21,7 @@
 }
 
 .write_sets <- function(name,desc,items,n,suffix,file) {
-  
+
   if ((length(name)+length(desc)+length(items)+length(n)+length(suffix))/5 != length(name)) stop("Same number of entries for name, desc, items, n and suffix is required")
 
   subject <- 'SETS'
@@ -32,15 +32,15 @@
     '*THERE YOU CAN ALSO FIND ADDITIONAL INFORMATION')
 
   content <- c(header,'','sets','')
-  
-  
+
+
   for (i in 1:length(name)) {
     content <- c(content,paste0('   ',name[[i]],' ',desc[[i]],' /'))
     content <- c(content, .set_formatting(items[[i]], suffix1=suffix[[i]], suffix2=" /",n = n[[i]]))
     content <- c(content,'')
   }
   content <- c(content,';')
-  
+
   gms::replace_in_file(file,content,subject)
 }
 
@@ -73,27 +73,27 @@
   for(i in levels(map$RegionCode)) {
     map_i_to_iso <- c(map_i_to_iso, .set_formatting(map$CountryCode[map$RegionCode==i],space = '', prefix=paste0(i," . ("), suffix1=")", suffix2=")"))
   }
-  
+
   name <- list("i","iso","j","cell(i,j)","i_to_iso(i,iso)")
   desc <- list("all economic regions","list of iso countries","number of LPJ cells","number of LPJ cells per region i","mapping regions to iso countries")
   items <- list(names(cpr),map$CountryCode,cells,map_i_to_j,map_i_to_iso)
   n <- c(12,10,1,1,1)
   suffix <- c(",",",",",","","")
   file <- "core/sets.gms"
-  
+
   .write_sets(name,desc,items,n,suffix,file)
 }
 
 .update_sets_modules <- function() {
   require(gms)
-  
+
   ### 56_ghg_policy
   ghgscen56 <- magclass::read.magpie("modules/56_ghg_policy/input/f56_pollutant_prices.cs3")
   ghgscen56 <- magclass::getNames(ghgscen56,dim=2)
-  
+
   scen56 <- magclass::read.magpie("modules/56_ghg_policy/input/f56_emis_policy.csv",file_type = "cs3")
   scen56 <- magclass::getNames(scen56,dim=1)
-  
+
   name <- list("ghgscen56","scen56")
   desc <- list("ghg price scenarios","emission policy scenarios")
   items <- list(ghgscen56,scen56)
@@ -102,18 +102,18 @@
   file <- "modules/56_ghg_policy/price_jan20/sets.gms"
 
   .write_sets(name,desc,items,n,suffix,file)
-  
+
   ### 60_bioenergy
   scen2nd60 <- magclass::read.magpie("modules/60_bioenergy/input/f60_bioenergy_dem.cs3")
   scen2nd60 <- magclass::getNames(scen2nd60,dim=1)
-  
+
   name <- list("scen2nd60")
   desc <- list("second generation bioenergy scenarios")
   items <- list(scen2nd60)
   n <- c(1)
   suffix <- c(",")
   file <- "modules/60_bioenergy/1stgen_priced_dec18/sets.gms"
-  
+
   .write_sets(name,desc,items,n,suffix,file)
 }
 
@@ -181,13 +181,13 @@
 }
 
 
-.spam2rds <- function(spatial_header, cells_tmp, 
-                      outfile  = "clustermap_rev0_dummy.rds", 
+.spam2rds <- function(spatial_header, cells_tmp,
+                      outfile  = "clustermap_rev0_dummy.rds",
                       spamfile = Sys.glob("input/0.5-to-*_sum.spam")) {
 
   sp  <- luscale::read.spam(spamfile)
   a   <- apply(sp, 2, function(x) return(which(x == 1)))
-  out <- data.frame(cell = cells_tmp, region = sub("\\..*$","",spatial_header), 
+  out <- data.frame(cell = cells_tmp, region = sub("\\..*$","",spatial_header),
                     country = sub("\\..*$","",cells_tmp), global = "GLO")
   out$cluster <- paste0(out$region,".",a)
   out <- out[,c("cell", "cluster","region","country","global")]
@@ -221,7 +221,7 @@ download_and_update <- function(cfg) {
   tmp  <- magclass::read.magpie("modules/10_land/input/avl_land_t.cs3")
   cpr  <- magclass::getCPR(tmp)
   tmp2 <- magclass::read.magpie("modules/10_land/input/avl_land_t_0.5.mz")
-  cel  <- magclass::getItems(tmp2,1) 
+  cel  <- magclass::getItems(tmp2,1)
   # read spatial_header, map, reg_revision and regionscode
   load("input/spatial_header.rda")
   rds <- any(grepl(pattern = "clustermap_rev.*.rds", x=list.files("input")))
@@ -420,7 +420,8 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
                      calib_file = calib_file,
                      data_workspace = cfg$val_workspace,
                      logoption = 3,
-                     debug = cfg$debug)
+                     debug = cfg$debug,
+                     best_calib = cfg$best_calib)
     file.copy("calibration_results.pdf", cfg$results_folder, overwrite=TRUE)
     cat("Calibration factor calculated!\n")
   }
