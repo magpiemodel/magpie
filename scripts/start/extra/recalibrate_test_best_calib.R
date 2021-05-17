@@ -18,7 +18,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-realization<-("mixed_feb17","sticky_feb18")
+realization<-c("mixed_feb17","sticky_feb18")
 
 for (best in c(FALSE,TRUE)){
 for (i in realisation)
