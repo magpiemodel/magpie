@@ -10,6 +10,7 @@ scalars
   s58_rewet_cost_onetime One-time costs for peatland rewetting (USD05MER per ha) / 7000 /
   s58_rewet_cost_recur Recurring costs for peatland rewetting (USD05MER per ha) / 200 /
   s58_rewetting_target_2050 target for 2050 / 0 /
+  s58_rewet_reward reward per ha for peatland rewetting / 0 /
 ;
 
 parameter f58_rewetting_fader(t_all) rewetting fader (1)

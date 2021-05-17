@@ -37,6 +37,7 @@ equations
 ;
 
 variables
+ vm_peatland_cost(j)						One-time and recurring cost of managed peatland (mio. USD05MER per yr)
  v58_peatland_emis(j,emis58)				Detailed GHG emissions from managed peatland (t CO2eq per year)
 ;
 
@@ -45,7 +46,6 @@ positive variables
  v58_expansion(j,stat58)					Peatland expansion (mio. ha)
  v58_reduction(j,stat58)					Peatland reduction (mio. ha)
  vm_peatland_emis(j) 						GHG emissions from managed peatland (t CO2eq per year)
- vm_peatland_cost(j)						One-time and recurring cost of managed peatland (mio. USD05MER per yr)
  v58_peatland_man(j,man58,land58)			Managed peatland (mio. ha)
  v58_peatland_intact(j)						Intact peatland (mio. ha)
  v58_peatland_cost_annuity(j)				Annuity costs of managed peatland expansion in the current timestep (mio. USD05MER per yr)

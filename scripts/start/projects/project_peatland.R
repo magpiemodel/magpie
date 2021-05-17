@@ -7,7 +7,7 @@
 
 
 # ----------------------------------------------------------
-# description: runs for peatland paper (might be useful as draft for other papers/projects)
+# description: peatland dev
 # ----------------------------------------------------------
 
 library(gms)
@@ -47,14 +47,14 @@ cfg <- setScenario(cfg,c("SSP2","NPI","ForestryEndo"))
 cfg$output <- c("rds_report")
 #download_and_update(cfg)
 
-prefix <- "PT03"
+prefix <- "PT04"
 
 #Ref
 cfg$title <- paste(prefix,"SSP2","Ref",sep="_")
-cfg$gms$s58_rewetting_target_2050 <- 0
+cfg$gms$s58_rewet_reward <- 0
 start_run(cfg,codeCheck=FALSE)
 
 #PeatRestor
 cfg$title <- paste(prefix,"SSP2","Ref","PeatRestor",sep="_")
-cfg$gms$s58_rewetting_target_2050 <- 1
+cfg$gms$s58_rewet_reward <- 30000
 start_run(cfg,codeCheck=FALSE)
