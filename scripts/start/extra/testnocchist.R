@@ -1,5 +1,4 @@
 
-@@ -1,37 +0,0 @@
 # |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
@@ -32,7 +31,7 @@ for(cc in c("nocc_hist","nocc")){
     cfg<-gms::setScenario(cfg,cc)
 
     #Change the results folder name
-    cfg$title<-paste0("Mixed_dollar_hist_",cc)	
+    cfg$title<-paste0("Mixed_dollar_hist_",cc)
 
     # Start run
     start_run(cfg=cfg)
