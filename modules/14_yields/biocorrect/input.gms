@@ -25,7 +25,7 @@ $ondelim
 $include "./modules/14_yields/input/lpj_yields.cs3"
 $offdelim
 ;
-* set values to 1995 if nocc scenario is used, or to 2020 after 2025 if nocc_hist is used
+* set values to 1995 if nocc scenario is used, or to sm_fix_SSP2 after 2025 if nocc_hist is used
 $if "%c14_yields_scenario%" == "nocc" f14_yields(t_all,j,kve,w) = f14_yields("y1995",j,kve,w);
 $if "%c14_yields_scenario%" == "nocc_hist" f14_yields(t_all,j,kve,w)$(m_year(t_all) > sm_fix_SSP2) = f14_yields("y2020",j,kve,w);
 m_fillmissingyears(f14_yields,"j,kve,w");
