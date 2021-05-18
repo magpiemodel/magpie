@@ -8,7 +8,7 @@
 $setglobal c43_watavail_scenario  nocc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
-*             nocc2020 (no climate change after 2020)
+*             nocc_hist (no climate change after year defined by sm_fix_SSP2)
 
 parameters
 f43_wat_avail(t_all,j) Surface water available for irrigation per cell from LPJmL (mio. m^3 per yr)
@@ -19,5 +19,5 @@ $offdelim
 /
 ;
 $if "%c43_watavail_scenario%" == "nocc" f43_wat_avail(t_all,j) = f43_wat_avail("y1995",j);
-$if "%c43_watavail_scenario%" == "nocc2020" f43_wat_avail(t_all,j)$(m_year(t_all) > 2020) = f43_wat_avail("y2020",j);
+$if "%c43_watavail_scenario%" == "nocc_hist" f43_wat_avail(t_all,j)$(m_year(t_all) > sm_fix_SSP2) = f43_wat_avail("y2020",j);
 m_fillmissingyears(f43_wat_avail,"j");

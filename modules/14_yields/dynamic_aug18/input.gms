@@ -8,7 +8,7 @@
 $setglobal c14_yields_scenario  nocc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
-*             nocc2020 (no climate change after 2020)
+*             nocc_hist (no climate change after year defined by sm_fix_SSP2)
 
 scalars
   s14_timber_plantation_yield Plantation yield switch (0=natveg yields 1=plantation yields) (1) / 1 /
@@ -26,9 +26,9 @@ $ondelim
 $include "./modules/14_yields/input/lpj_yields.cs3"
 $offdelim
 ;
-* set values to 1995 if nocc scenario is used, or to 2020 after 2025 if nocc2020 is used
+* set values to 1995 if nocc scenario is used, or to 2020 after 2025 if nocc_hist is used
 $if "%c14_yields_scenario%" == "nocc" f14_yields(t_all,j,kve,w) = f14_yields("y1995",j,kve,w);
-$if "%c14_yields_scenario%" == "nocc2020" f14_yields(t_all,j,kve,w)$(m_year(t_all) > 2020) = f14_yields("y2020",j,kve,w);
+$if "%c14_yields_scenario%" == "nocc_hist" f14_yields(t_all,j,kve,w)$(m_year(t_all) > sm_fix_SSP2) = f14_yields("y2020",j,kve,w);
 
 m_fillmissingyears(f14_yields,"j,kve,w");
 
