@@ -26,7 +26,7 @@ if(s35_forest_damage=2,
 * Distribution of damages correctly
 	pc35_secdforest(j,ac_est) = pc35_secdforest(j,ac_est) + sum(ac_sub,p35_disturbance_loss_secdf(t,j,ac_sub))/card(ac_est) + p35_disturbance_loss_primf(t,j)/card(ac_est);
 
-$ifthen "%c35_protect_scenario%" == "FF+BH" or "full" or "forest" or "FF" or "HalfEarth"
+$ifthen "%c35_protect_scenario%" == "FF+BH"
   pc35_secdforest(j,ac_sub) = pc35_secdforest(j,ac_sub) - (1 - f35_protection_fader(t, "by2050"))* p35_disturbance_loss_secdf(t,j,ac_sub);
   pcm_land(j,"primforest") = pcm_land(j,"primforest") - (1 - f35_protection_fader(t, "by2030"))* p35_disturbance_loss_primf(t,j);
   vm_land.l(j,"primforest") = pcm_land(j,"primforest");
