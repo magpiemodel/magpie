@@ -25,6 +25,11 @@ parameters
  p38_capital_immobile(t,j,kcr)       Preexisting immobile capital stocks before investment (mio USD05MER)
  p38_capital_mobile(t,j)             Preexisting mobile capital stocks before investment (mio USD05MER)
 
+ p38_capital_immobile_t(j,kcr)       Preexisting immobile capital stocks before investment in each time step (mio USD05MER)
+ p38_capital_mobile_t(j)             Preexisting mobile capital stocks before investment in each time step (mio USD05MER)
+
+ p38_capital_cost_share(i)           Capital share for dynamic calculation
+ p38_share_calibration(i)            Summation factor used to calibrate calculated capital shares with historical values
 ;
 
 
