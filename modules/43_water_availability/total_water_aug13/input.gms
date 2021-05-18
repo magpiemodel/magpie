@@ -19,5 +19,5 @@ $offdelim
 /
 ;
 $if "%c43_watavail_scenario%" == "nocc" f43_wat_avail(t_all,j) = f43_wat_avail("y1995",j);
-$if "%c43_watavail_scenario%" == "nocc2020" f43_wat_avail(t_nocc2020,j) = f43_wat_avail("y2020",j);
+$if "%c43_watavail_scenario%" == "nocc2020" f43_wat_avail(t_all,j)$(m_year(t_all) > 2020) = f43_wat_avail("y2020",j);
 m_fillmissingyears(f43_wat_avail,"j");

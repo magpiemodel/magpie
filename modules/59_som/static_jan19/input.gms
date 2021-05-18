@@ -22,7 +22,7 @@ $offdelim
 /
 ;
 $if "%c59_som_scenario%" == "nocc" f59_topsoilc_density(t_all,j) = f59_topsoilc_density("y1995",j);
-$if "%c59_som_scenario%" == "nocc2020" f59_topsoilc_density(t_nocc2020,j) = f59_topsoilc_density("y2020",j);
+$if "%c59_som_scenario%" == "nocc2020" f59_topsoilc_density(t_all,j)$(m_year(t_all) > 2020) = f59_topsoilc_density("y2020",j);
 m_fillmissingyears(f59_topsoilc_density,"j");
 
 parameters f59_cshare_released(j) Share of soil carbon that is released on cropland compared to natural vegetation after 20 years (1)

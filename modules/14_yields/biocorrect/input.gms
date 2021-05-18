@@ -27,5 +27,5 @@ $offdelim
 ;
 * set values to 1995 if nocc scenario is used, or to 2020 after 2025 if nocc2020 is used
 $if "%c14_yields_scenario%" == "nocc" f14_yields(t_all,j,kve,w) = f14_yields("y1995",j,kve,w);
-$if "%c14_yields_scenario%" == "nocc2020" f14_yields(t_nocc2020,j,kve,w) = f14_yields("y2020",j,kve,w);
+$if "%c14_yields_scenario%" == "nocc2020" f14_yields(t_all,j,kve,w)$(m_year(t_all) > 2020) = f14_yields("y2020",j,kve,w);
 m_fillmissingyears(f14_yields,"j,kve,w");
