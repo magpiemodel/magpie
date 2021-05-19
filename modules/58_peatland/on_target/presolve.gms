@@ -93,5 +93,8 @@ else
 	v58_lu_transitions.up(j,"unused_crop","rewet_crop") = Inf;
 	v58_lu_transitions.up(j,"unused_past","rewet_past") = Inf;
 	v58_lu_transitions.up(j,"unused_forestry","rewet_forestry") = Inf;
+	v58_lu_transitions.up(j,"rewet_crop","degrad_crop") = Inf;
+	v58_lu_transitions.up(j,"rewet_past","degrad_past") = Inf;
+	v58_lu_transitions.up(j,"rewet_forestry","degrad_forestry") = Inf;
 	);
 );
