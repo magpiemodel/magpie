@@ -76,7 +76,7 @@ $ontext
 $offtext
 
  q58_peatland_rewet(j2,land58) ..
- v58_peatland_man(j2,"rewet",land58) =l= sum(degrad58, pc58_peatland_man(j2,degrad58,land58) - v58_peatland_man(j2,degrad58,land58));
+ v58_peatland_man(j2,"rewet",land58) - pc58_peatland_man(j2,"rewet",land58) =l= sum(degrad58, pc58_peatland_man(j2,degrad58,land58) - v58_peatland_man(j2,degrad58,land58));
 
 
  q58_peatland_cost(j2) ..
