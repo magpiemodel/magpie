@@ -16,5 +16,5 @@ $include "./modules/52_carbon/input/lpj_carbon_stocks.cs3"
 $offdelim
 ;
 $if "%c52_carbon_scenario%" == "nocc" fm_carbon_density(t_all,j,land,c_pools) = fm_carbon_density("y1995",j,land,c_pools);
-$if "%c52_carbon_scenario%" == "nocc_hist" fm_carbon_density(t_all,j,land,c_pools)$(m_year(t_all) > sm_fix_cc) = fm_carbon_density(m_y_year(sm_fix_cc),j,land,c_pools);
+$if "%c52_carbon_scenario%" == "nocc_hist" fm_carbon_density(t_all,j,land,c_pools)$(m_year(t_all) > sm_fix_cc) = fm_carbon_density(t_all,j,land,c_pools)$(m_year(t_all) = sm_fix_cc);
 m_fillmissingyears(fm_carbon_density,"j,land,c_pools");

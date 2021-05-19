@@ -17,7 +17,7 @@ for(cc in c("nocc_hist","nocc")){
     cfg<-gms::setScenario(cfg,cc)
 
     #Change the results folder name
-    cfg$title<-paste0("Mixed_dollar_hist_flex",cc)
+    cfg$title<-paste0("Mixed_dollar_hist_flex2",cc)
 
     # Start run
     start_run(cfg=cfg)
