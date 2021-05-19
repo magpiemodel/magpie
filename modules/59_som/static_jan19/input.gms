@@ -10,8 +10,9 @@ $setglobal c59_static_spatial_level  cellular
 *              cluster   (use cshare_released on cluster within gams)
 
 $setglobal c59_som_scenario  nocc
-*   options:   cc  (climate change)
-*             nocc (no climate change)
+*   options:  cc        (climate change)
+*             nocc      (no climate change)
+*             nocc_hist (no climate change after year defined by sm_fix_cc)
 
 parameters f59_topsoilc_density(t_all,j) LPJ topsoil carbon density for natural vegetation (tC per ha)
 /
@@ -21,6 +22,7 @@ $offdelim
 /
 ;
 $if "%c59_som_scenario%" == "nocc" f59_topsoilc_density(t_all,j) = f59_topsoilc_density("y1995",j);
+$if "%c59_som_scenario%" == "nocc_hist" f59_topsoilc_density(t_all,j)$(m_year(t_all) > sm_fix_cc) = f59_topsoilc_density(t_all,j)$(m_year(t_all) = sm_fix_cc);
 m_fillmissingyears(f59_topsoilc_density,"j");
 
 parameters f59_cshare_released(j) Share of soil carbon that is released on cropland compared to natural vegetation after 20 years (1)
