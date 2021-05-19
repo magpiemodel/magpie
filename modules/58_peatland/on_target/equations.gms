@@ -73,10 +73,14 @@ $ontext
 	sum(stat_rewet58, v58_lu_transitions(j2,stat_degrad58,stat_rewet58))
 	=e=
 	0;
-$offtext
+
 
  q58_peatland_rewet(j2,land58) ..
  v58_peatland_man(j2,"rewet",land58) - pc58_peatland_man(j2,"rewet",land58) =l= sum(degrad58, pc58_peatland_man(j2,degrad58,land58) - v58_peatland_man(j2,degrad58,land58));
+$offtext
+
+ q58_peatland_rewet(j2) ..
+ sum(stat_rewet58, v58_expansion(j2,stat_rewet58)) =l= sum(stat_degrad58, v58_reduction(j2,stat_degrad58));
 
 
  q58_peatland_cost(j2) ..
