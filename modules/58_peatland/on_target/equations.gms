@@ -67,12 +67,17 @@
 
 *' Either conversion of intact to degraded peatland OR conversion of degraded to rewetted peatland.
 *' This constraint avoid the conversion of intact peatland into rewetted peatland.
-
+$ontext
  q58_peatland_intact(j2,stat_degrad58) ..
 	v58_lu_transitions(j2,"intact",stat_degrad58) *
 	sum(stat_rewet58, v58_lu_transitions(j2,stat_degrad58,stat_rewet58))
 	=e=
 	0;
+$offtext
+
+ q58_peatland_rewet(j2,land58) ..
+ v58_peatland_man(j2,"rewet",land58) =l= sum(degrad58, pc58_peatland_man(j2,degrad58,land58) - v58_peatland_man(j2,degrad58,land58));
+
 
  q58_peatland_cost(j2) ..
 	vm_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2) 

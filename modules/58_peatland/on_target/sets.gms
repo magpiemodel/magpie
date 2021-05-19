@@ -9,6 +9,9 @@ sets
  
   man58 Peatland status managed
     / degrad, unused, rewet /
+
+  degrad58(man58) Peatland status managed
+    / degrad, unused /
   
   ef58(man58) Peatland ef categories
     / degrad, rewet /
