@@ -6,9 +6,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 $setglobal c52_carbon_scenario  nocc
-*   options:   cc  (climate change)
-*             nocc (no climate change)
-*             nocc_hist (no climate change after year defined by sm_fix_SSP2)
+*   options:  cc        (climate change)
+*             nocc      (no climate change)
+*             nocc_hist (no climate change after year defined by sm_fix_cc)
 
 table fm_carbon_density(t_all,j,land,c_pools) LPJmL carbon density for land and carbon pools (tC per ha)
 $ondelim
@@ -17,7 +17,7 @@ $offdelim
 ;
 
 $if "%c52_carbon_scenario%" == "nocc" fm_carbon_density(t_all,j,land,c_pools) = fm_carbon_density("y1995",j,land,c_pools);
-$if "%c52_carbon_scenario%" == "nocc_hist" fm_carbon_density(t_all,j,land,c_pools)$(m_year(t_all) > sm_fix_SSP2) = fm_carbon_density("y2020",j,land,c_pools);
+$if "%c52_carbon_scenario%" == "nocc_hist" fm_carbon_density(t_all,j,land,c_pools)$(m_year(t_all) > sm_fix_cc) = fm_carbon_density(m_y_year(sm_fix_cc),j,land,c_pools);
 m_fillmissingyears(fm_carbon_density,"j,land,c_pools");
 
 parameter f52_growth_par(clcl,chap_par,forest_type) Parameters for chapman-richards equation (1)
