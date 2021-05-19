@@ -74,4 +74,4 @@ $macro m_fillmissingyears(input,sets) loop(t_all, \
        );
 
 * Turns a year defined as a scalar to the set format
-$macro m_y_year(scalar_year) time_annual$sameas(ord(time_annual),scalar_year-1964)
+$macro m_y_year(scalar_year) t$sameas(t,time_annual$(ord(time_annual),scalar_year-1964))
