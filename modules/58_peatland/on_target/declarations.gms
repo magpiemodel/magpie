@@ -20,6 +20,7 @@ parameters
  pc58_peatland_man_inital(j,man58,land58)			Managed peatland at initialization (mio. ha)
  pc58_peatland_intact(j)							Intact peatland (mio. ha)
  p58_mapping_cell_climate(j,clcl58)				Mapping between cells and climate regions (binary)
+ p58_peatland_degrad_weight(j,land58)
 ;
 
 equations
@@ -36,7 +37,9 @@ equations
  q58_peatland_cost_annuity(j)					Annuity costs of managed peatland expansion in the current timestep (mio. USD05MER per yr)
  q58_peatland_emis_detail(j,emis58)				Detailed GHG emissions from managed peatland (t CO2eq per year)
  q58_peatland_emis(j)							GHG emissions from managed peatland (t CO2eq per year)
-;
+ q58_peatland_degrad_ini(j,land58)
+ q58_peatland_degrad_ini2(j,land58)
+ ;
 
 variables
  vm_peatland_cost(j)						One-time and recurring cost of managed peatland (mio. USD05MER per yr)
@@ -76,5 +79,7 @@ parameters
  oq58_peatland_cost_annuity(t,j,type)       Annuity costs of managed peatland expansion in the current timestep (mio. USD05MER per yr)
  oq58_peatland_emis_detail(t,j,emis58,type) Detailed GHG emissions from managed peatland (t CO2eq per year)
  oq58_peatland_emis(t,j,type)               GHG emissions from managed peatland (t CO2eq per year)
+ oq58_peatland_degrad_ini(t,j,land58,type)  
+ oq58_peatland_degrad_ini2(t,j,land58,type) 
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

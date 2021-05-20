@@ -43,20 +43,12 @@ p58_land_area(j) = sum(land, pcm_land(j,land));
 	p58_scaling_factor(j) = p58_peatland_area(j)/p58_land_area(j);
 	p58_peatland_degrad_unused(j) = f58_peatland_degrad(j);
 *First step: cropland
-	pc58_peatland_man(j,"degrad","crop") = min(p58_peatland_degrad_unused(j),pcm_land(j,"crop")*p58_scaling_factor(j));
-	p58_peatland_degrad_unused(j) = p58_peatland_degrad_unused(j)-pc58_peatland_man(j,"degrad","crop");
-*Second step: pasture
-	pc58_peatland_man(j,"degrad","past") = min(p58_peatland_degrad_unused(j),pcm_land(j,"past")*p58_scaling_factor(j));
-	p58_peatland_degrad_unused(j) = p58_peatland_degrad_unused(j)-pc58_peatland_man(j,"degrad","past");
-*Third step: forestry
-	pc58_peatland_man(j,"degrad","forestry") = min(p58_peatland_degrad_unused(j),pcm_land(j,"forestry")*p58_scaling_factor(j));
-	p58_peatland_degrad_unused(j) = p58_peatland_degrad_unused(j)-pc58_peatland_man(j,"degrad","forestry");
-*Finally, the remaining undistributed degraded peatland is distributed among crop, past and forestry.
-	p58_peatland_degrad_used(j) = sum(land58, pc58_peatland_man(j,"degrad",land58));
-	p58_peatland_degrad_unused_weight(j,land58) = 1/card(land58);
-	p58_peatland_degrad_unused_weight(j,land58)$(p58_peatland_degrad_used(j) > 0) = pc58_peatland_man(j,"degrad",land58)/p58_peatland_degrad_used(j);
-	pc58_peatland_man(j,"unused",land58) = p58_peatland_degrad_unused(j)*p58_peatland_degrad_unused_weight(j,land58);
-	p58_peatland_degrad_unused(j) = p58_peatland_degrad_unused(j)-sum(land58, pc58_peatland_man(j,"unused",land58));
+*crop_prio: 50% 25% and 25% 
+*land-basee: weight = pcm_land(j,land58) / sum(land58, pcm_land(j,land58))
+*equal: weight = 1/card(land58);
+    p58_peatland_degrad_weight(j,land58) = 1/card(land58);
+    p58_peatland_degrad_weight(j,land58)$(sum(land58_2, pcm_land(j,land58_2)) > 0) = pcm_land(j,land58) / sum(land58_2, pcm_land(j,land58_2));
+	pc58_peatland_man(j,"degrad",land58) = f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58);
 
 	pc58_peatland_man_inital(j,man58,land58) = pc58_peatland_man(j,man58,land58);
 

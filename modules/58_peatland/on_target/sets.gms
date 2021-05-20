@@ -81,3 +81,4 @@ sets
 ;
 
 alias (stat58, from58, to58);
+alias (land58, land58_2);

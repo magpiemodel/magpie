@@ -38,3 +38,10 @@
 	v58_lu_transitions.up(j,"rewet_crop","degrad_crop") = Inf;
 	v58_lu_transitions.up(j,"rewet_past","degrad_past") = Inf;
 	v58_lu_transitions.up(j,"rewet_forestry","degrad_forestry") = Inf;
+
+if(m_year(t) <= sm_fix_SSP2,
+	s58_ini = 1;
+else
+	s58_ini = 0;
+);
+
