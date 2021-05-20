@@ -60,19 +60,19 @@
 *' If cropland expands by 5 Mha, 1 Mha of intact peatland is converted to degraded peatland (5 Mha*0.2).
 *' If the total cell would become cropland, degraded peatland would equal to the total peatland area (50 Mha * 0.2 = 10 Mha).
 
- q58_peatland_degrad_ini(j2,land58)$(s58_ini = 1) ..
-	v58_peatland_man(j2,"degrad",land58) =l= vm_land(j2,land58)*p58_scaling_factor(j2);
+ q58_peatland_degrad_ini(j2,land58) ..
+	v58_peatland_man(j2,"degrad",land58) =g= vm_land(j2,land58)*p58_scaling_factor(j2);
    
+$ontext
  q58_peatland_degrad_ini2(j2,land58)$(s58_ini = 1) ..
-   v58_peatland_man(j2,"unused",land58) + v58_peatland_man(j2,"degrad",land58) =e= pc58_peatland_man(j2,"degrad",land58);
+   v58_peatland_man(j2,"degrad",land58) =e= pc58_peatland_man(j2,"degrad",land58);
 
  q58_peatland_degrad(j2,land58)$(s58_ini = 0) ..   
-	v58_peatland_man(j2,"degrad",land58) =e= pc58_peatland_man(j2,"degrad",land58)
+	v58_peatland_man(j2,"degrad",land58) =g= pc58_peatland_man(j2,"degrad",land58)
 	+ ((vm_land(j2,land58)-pcm_land(j2,land58))*p58_scaling_factor(j2));
 
 *' Either conversion of intact to degraded peatland OR conversion of degraded to rewetted peatland.
 *' This constraint avoid the conversion of intact peatland into rewetted peatland.
-$ontext
  q58_peatland_intact(j2,stat_degrad58) ..
 	v58_lu_transitions(j2,"intact",stat_degrad58) *
 	sum(stat_rewet58, v58_lu_transitions(j2,stat_degrad58,stat_rewet58))
@@ -98,7 +98,7 @@ $offtext
 							- sum(stat_rewet58, v58_expansion(j2,stat_rewet58) * s58_rewet_reward)
 							+ sum(stat_rewet58, v58_reduction(j2,stat_rewet58) * s58_rewet_reward)
 							+ v58_reduction(j2,"intact") * s58_rewet_reward
-							+ sum(land58,v58_peatland_man(j2,"unused",land58)*1000)$(s58_ini = 1)
+*							+ sum(land58,v58_peatland_man(j2,"unused",land58)*1000)$(s58_ini = 1)
 							;
 							
  q58_peatland_cost_annuity(j2) ..

@@ -29,7 +29,7 @@ equations
  q58_transition_from(j,from58)					Peatland transitions from (mio. ha)
  q58_expansion(j,to58)							Peatland expansion (mio. ha)
  q58_reduction(j,from58)						Peatland reduction (mio. ha)
- q58_peatland_degrad(j,land58)					Degraded peatland area constraint (mio. ha)
+* q58_peatland_degrad(j,land58)					Degraded peatland area constraint (mio. ha)
 * q58_peatland_intact(j,stat_degrad58)			Intact to degrad peatland constraint (mio. ha)
  q58_peatland_rewet(j)							Intact to degrad peatland constraint (mio. ha)
  q58_peatland_intact(j)							Intact to degrad peatland constraint (mio. ha)
@@ -38,7 +38,7 @@ equations
  q58_peatland_emis_detail(j,emis58)				Detailed GHG emissions from managed peatland (t CO2eq per year)
  q58_peatland_emis(j)							GHG emissions from managed peatland (t CO2eq per year)
  q58_peatland_degrad_ini(j,land58)
- q58_peatland_degrad_ini2(j,land58)
+* q58_peatland_degrad_ini2(j,land58)
  ;
 
 variables
@@ -72,7 +72,6 @@ parameters
  oq58_transition_from(t,j,from58,type)      Peatland transitions from (mio. ha)
  oq58_expansion(t,j,to58,type)              Peatland expansion (mio. ha)
  oq58_reduction(t,j,from58,type)            Peatland reduction (mio. ha)
- oq58_peatland_degrad(t,j,land58,type)      Degraded peatland area constraint (mio. ha)
  oq58_peatland_rewet(t,j,type)              Intact to degrad peatland constraint (mio. ha)
  oq58_peatland_intact(t,j,type)             Intact to degrad peatland constraint (mio. ha)
  oq58_peatland_cost(t,j,type)               One-time and recurring cost of managed peatland (mio. USD05MER per yr)
@@ -80,6 +79,5 @@ parameters
  oq58_peatland_emis_detail(t,j,emis58,type) Detailed GHG emissions from managed peatland (t CO2eq per year)
  oq58_peatland_emis(t,j,type)               GHG emissions from managed peatland (t CO2eq per year)
  oq58_peatland_degrad_ini(t,j,land58,type)  
- oq58_peatland_degrad_ini2(t,j,land58,type) 
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
