@@ -65,11 +65,7 @@
 	+ ((vm_land(j2,land58)-pcm_land(j2,land58))*p58_scaling_factor(j2))$(sum(ct, m_year(ct))>sm_fix_SSP2);
 
  q58_peatland_rewet(j2) ..
- sum(stat_rewet58, v58_expansion(j2,stat_rewet58)) =l= sum(stat_degrad58, v58_reduction(j2,stat_degrad58));
-
- q58_peatland_intact(j2) ..
-	v58_reduction(j2,"intact") =l= sum(stat_degrad58, v58_expansion(j2,stat_degrad58));
-
+ sum(stat_rewet58, v58_expansion(j2,stat_rewet58)) * v58_reduction(j2,"intact") =e= 0;
 
  q58_peatland_cost(j2) ..
 	vm_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2) 
