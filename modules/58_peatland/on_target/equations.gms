@@ -85,10 +85,10 @@ $(sum(ct, m_year(ct))>2015)
 $offtext
 
 
- q58_peatland_rewet(j2)$(s58_ini = 0) ..
+ q58_peatland_rewet(j2) ..
  sum(stat_rewet58, v58_expansion(j2,stat_rewet58)) =l= sum(stat_degrad58, v58_reduction(j2,stat_degrad58));
 
- q58_peatland_intact(j2)$(s58_ini = 0) ..
+ q58_peatland_intact(j2) ..
 	v58_reduction(j2,"intact") =l= sum(stat_degrad58, v58_expansion(j2,stat_degrad58));
 
 

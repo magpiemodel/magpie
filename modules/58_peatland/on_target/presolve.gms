@@ -5,6 +5,20 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+if(m_year(t) <= sm_fix_SSP2,
+	s58_ini = 1;
+	v58_peatland_man.fx(j,"rewet",land58) = 0;
+    p58_peatland_degrad_weight(j,land58) = 1/card(land58);
+    p58_peatland_degrad_weight(j,land58)$(sum(land58_2, pcm_land(j,land58_2)) > 0) = pcm_land(j,land58) / sum(land58_2, pcm_land(j,land58_2));
+	pc58_peatland_man(j,"degrad",land58) = f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58);
+
+else
+	s58_ini = 0;
+	v58_peatland_man.lo(j,"rewet",land58) = 0;
+	v58_peatland_man.up(j,"rewet",land58) = s58_rewetting_switch;
+);
+
+
 
 *define bound for peatland area
 	v58_peatland_man.lo(j,man58,land58) = 0;
@@ -37,13 +51,4 @@
 	v58_lu_transitions.up(j,"rewet_crop","degrad_crop") = Inf;
 	v58_lu_transitions.up(j,"rewet_past","degrad_past") = Inf;
 	v58_lu_transitions.up(j,"rewet_forestry","degrad_forestry") = Inf;
-
-if(m_year(t) <= sm_fix_SSP2,
-	s58_ini = 1;
-	v58_peatland_man.fx(j,"rewet",land58) = 0;
-else
-	s58_ini = 0;
-	v58_peatland_man.lo(j,"rewet",land58) = 0;
-	v58_peatland_man.up(j,"rewet",land58) = s58_rewetting_switch;
-);
 

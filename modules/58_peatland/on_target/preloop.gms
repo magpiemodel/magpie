@@ -46,9 +46,4 @@ p58_land_area(j) = sum(land, pcm_land(j,land));
 *crop_prio: 50% 25% and 25% 
 *land-basee: weight = pcm_land(j,land58) / sum(land58, pcm_land(j,land58))
 *equal: weight = 1/card(land58);
-    p58_peatland_degrad_weight(j,land58) = 1/card(land58);
-    p58_peatland_degrad_weight(j,land58)$(sum(land58_2, pcm_land(j,land58_2)) > 0) = pcm_land(j,land58) / sum(land58_2, pcm_land(j,land58_2));
-	pc58_peatland_man(j,"degrad",land58) = f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58);
-
-	pc58_peatland_man_inital(j,man58,land58) = pc58_peatland_man(j,man58,land58);
 
