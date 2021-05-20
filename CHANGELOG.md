@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### removed
 
 ### fixed
+- **35_natveg** option to fade out damage from shifting agriculture by 2030
 - **32_foresty** BII coefficients for CO2 price driven afforestation
 - **44_biodiversity** ac0 included in pricing of biodiversity loss
 
