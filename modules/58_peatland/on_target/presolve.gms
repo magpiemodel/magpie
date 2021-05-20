@@ -10,7 +10,6 @@
 	v58_peatland_man.lo(j,man58,land58) = 0;
 	v58_peatland_man.up(j,"degrad",land58) = Inf;
 	v58_peatland_man.up(j,"unused",land58) = Inf;
-	v58_peatland_man.up(j,"rewet",land58) = s58_rewetting_switch;
 	v58_peatland_man.l(j,man58,land58) = pc58_peatland_man(j,man58,land58);
 	v58_peatland_intact.lo(j) = 0;
 	v58_peatland_intact.up(j) = pc58_peatland_intact(j);
@@ -41,7 +40,10 @@
 
 if(m_year(t) <= sm_fix_SSP2,
 	s58_ini = 1;
+	v58_peatland_man.fx(j,"rewet",land58) = 0;
 else
 	s58_ini = 0;
+	v58_peatland_man.lo(j,"rewet",land58) = 0;
+	v58_peatland_man.up(j,"rewet",land58) = s58_rewetting_switch;
 );
 
