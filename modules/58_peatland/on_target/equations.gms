@@ -79,15 +79,20 @@ $ontext
  v58_peatland_man(j2,"rewet",land58) - pc58_peatland_man(j2,"rewet",land58) =l= sum(degrad58, pc58_peatland_man(j2,degrad58,land58) - v58_peatland_man(j2,degrad58,land58));
 $offtext
 
+
  q58_peatland_rewet(j2) ..
  sum(stat_rewet58, v58_expansion(j2,stat_rewet58)) =l= sum(stat_degrad58, v58_reduction(j2,stat_degrad58));
+
+ q58_peatland_intact(j2) ..
+	v58_reduction(j2,"intact") =l= sum(stat_degrad58, v58_expansion(j2,stat_degrad58));
 
 
  q58_peatland_cost(j2) ..
 	vm_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2) 
 							+ sum(land58, v58_peatland_man(j2,"rewet",land58) * s58_rewet_cost_recur)
 							- sum(stat_rewet58, v58_expansion(j2,stat_rewet58) * s58_rewet_reward)
-							+ sum(stat_rewet58, v58_reduction(j2,stat_rewet58) * s58_rewet_reward);
+							+ sum(stat_rewet58, v58_reduction(j2,stat_rewet58) * s58_rewet_reward)
+							+ v58_reduction(j2,"intact") * s58_rewet_reward;
 							
  q58_peatland_cost_annuity(j2) ..
 	v58_peatland_cost_annuity(j2) =e=
