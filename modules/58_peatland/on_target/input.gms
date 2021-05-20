@@ -6,12 +6,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-  s58_ini / 1 /
   s58_rewetting_switch Peatland rewetting on (Inf) or off (0) / 0 /
   s58_rewet_cost_onetime One-time costs for peatland rewetting (USD05MER per ha) / 7000 /
   s58_rewet_cost_recur Recurring costs for peatland rewetting (USD05MER per ha) / 200 /
-  s58_rewetting_target_2050 target for 2050 / 0 /
-  s58_rewet_reward reward per ha for peatland rewetting / 0 /
+  s58_rewet_reward reward for peatland rewetting (USD05MER per ha) / 0 /
+  s58_intact_conversion_cost intact peatland conversion costs (USD05MER per ha) / 1000 /
 ;
 
 parameter f58_rewetting_fader(t_all) rewetting fader (1)

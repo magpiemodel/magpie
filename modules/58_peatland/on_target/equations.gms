@@ -62,29 +62,7 @@
 
  q58_peatland_degrad(j2,land58) ..   
 	v58_peatland_man(j2,"degrad",land58) =e= pc58_peatland_man(j2,"degrad",land58)
-	+ ((vm_land(j2,land58)-pcm_land(j2,land58))*p58_scaling_factor(j2))$(s58_ini = 0);
-
-$ontext
- q58_peatland_degrad_ini2(j2,land58)$(s58_ini = 1) ..
-   v58_peatland_man(j2,"degrad",land58) =e= pc58_peatland_man(j2,"degrad",land58);
-
- q58_peatland_degrad_ini(j2,land58) ..
-	v58_peatland_man(j2,"degrad",land58) =g= vm_land(j2,land58)*p58_scaling_factor(j2);
-   
-
-*' Either conversion of intact to degraded peatland OR conversion of degraded to rewetted peatland.
-*' This constraint avoid the conversion of intact peatland into rewetted peatland.
- q58_peatland_intact(j2,stat_degrad58) ..
-	v58_lu_transitions(j2,"intact",stat_degrad58) *
-	sum(stat_rewet58, v58_lu_transitions(j2,stat_degrad58,stat_rewet58))
-	=e=
-	0;
-
-$(sum(ct, m_year(ct))>2015)
- q58_peatland_rewet(j2,land58) ..
- v58_peatland_man(j2,"rewet",land58) - pc58_peatland_man(j2,"rewet",land58) =l= sum(degrad58, pc58_peatland_man(j2,degrad58,land58) - v58_peatland_man(j2,degrad58,land58));
-$offtext
-
+	+ ((vm_land(j2,land58)-pcm_land(j2,land58))*p58_scaling_factor(j2))$(sum(ct, m_year(ct))>sm_fix_SSP2);
 
  q58_peatland_rewet(j2) ..
  sum(stat_rewet58, v58_expansion(j2,stat_rewet58)) =l= sum(stat_degrad58, v58_reduction(j2,stat_degrad58));
@@ -95,16 +73,14 @@ $offtext
 
  q58_peatland_cost(j2) ..
 	vm_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2) 
-							+ sum(land58, v58_peatland_man(j2,"rewet",land58) * s58_rewet_cost_recur)
-							- sum(stat_rewet58, v58_expansion(j2,stat_rewet58) * s58_rewet_reward)
-							+ sum(stat_rewet58, v58_reduction(j2,stat_rewet58) * s58_rewet_reward)
-							+ v58_reduction(j2,"intact") * s58_rewet_reward
-*							+ sum(land58,v58_peatland_man(j2,"unused",land58)*1000)$(s58_ini = 1)
-							;
+							+ sum(land58, v58_peatland_man(j2,"rewet",land58) * s58_rewet_cost_recur);
 							
  q58_peatland_cost_annuity(j2) ..
 	v58_peatland_cost_annuity(j2) =e=
-    sum((from58,stat_rewet58), v58_lu_transitions(j2,from58,stat_rewet58) * s58_rewet_cost_onetime)
+    (sum(stat_rewet58, v58_expansion(j2,stat_rewet58) * s58_rewet_cost_onetime)
+    - sum(stat_rewet58, v58_expansion(j2,stat_rewet58) * s58_rewet_reward)
+    + sum(stat_rewet58, v58_reduction(j2,stat_rewet58) * s58_rewet_reward)
+    + v58_reduction(j2,"intact") * s58_intact_conversion_cost)
 	* sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
 
  q58_peatland_emis_detail(j2,emis58) ..

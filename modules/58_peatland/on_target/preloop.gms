@@ -38,14 +38,11 @@ p58_land_area(j) = sum(land, pcm_land(j,land));
 *' 3 peatland categories: intact, degraded and unused. And for degraded and unused
 *' we know the current/previous land use: cropland, pasture and forestry.
 *' @stop
+
 	pc58_peatland_intact(j) = f58_peatland_intact(j);
 	p58_peatland_area(j) = f58_peatland_degrad(j) + f58_peatland_intact(j);
 	p58_scaling_factor(j) = p58_peatland_area(j)/p58_land_area(j);
 	p58_peatland_degrad_unused(j) = f58_peatland_degrad(j);
-*First step: cropland
-*crop_prio: 50% 25% and 25% 
-*land-basee: weight = pcm_land(j,land58) / sum(land58, pcm_land(j,land58))
-*equal: weight = 1/card(land58);
 
     p58_peatland_degrad_weight(j,land58) = 1/card(land58);
     p58_peatland_degrad_weight(j,land58)$(sum(land58_2, pcm_land(j,land58_2)) > 0) = pcm_land(j,land58) / sum(land58_2, pcm_land(j,land58_2));
