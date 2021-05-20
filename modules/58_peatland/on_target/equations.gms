@@ -63,7 +63,7 @@
  q58_peatland_degrad(j2,land58) ..
 	v58_peatland_man(j2,"degrad",land58) =e=
     pc58_peatland_man(j2,"degrad",land58)
-	+ ((vm_land(j2,land58)-pcm_land(j2,land58))*p58_scaling_factor(j2))$(sum(ct, m_year(ct))>2015);
+	+ ((vm_land(j2,land58)-pcm_land(j2,land58))*p58_scaling_factor(j2));
 
 *' Either conversion of intact to degraded peatland OR conversion of degraded to rewetted peatland.
 *' This constraint avoid the conversion of intact peatland into rewetted peatland.
