@@ -8,6 +8,7 @@
 $setglobal c35_protect_scenario  WDPA
 $setglobal c35_ad_policy  npi
 $setglobal c35_aolc_policy  npi
+$setglobal c35_forest_damage_end  by2050
 
 scalars
 s35_hvarea Flag for harvested area (0=zero 1=exognous 2=endogneous)	/ 0 /
