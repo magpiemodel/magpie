@@ -69,14 +69,14 @@
 
  q58_peatland_cost(j2) ..
 	vm_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2) 
-							+ sum(land58, v58_peatland_man(j2,"rewet",land58) * s58_rewet_cost_recur);
+							+ sum(land58, v58_peatland_man(j2,"rewet",land58) * s58_cost_rewet_recur)
+							+ sum((degrad58,land58), v58_peatland_man(j2,degrad58,land58) * s58_cost_degrad_recur)$(sum(ct, m_year(ct))>sm_fix_SSP2);
 							
  q58_peatland_cost_annuity(j2) ..
 	v58_peatland_cost_annuity(j2) =e=
-    (sum(stat_rewet58, v58_expansion(j2,stat_rewet58) * s58_rewet_cost_onetime)
-    - sum(stat_rewet58, v58_expansion(j2,stat_rewet58) * s58_rewet_reward)$(sum(ct, m_year(ct))>sm_fix_SSP2)
-    + sum(stat_rewet58, v58_reduction(j2,stat_rewet58) * s58_rewet_reward)$(sum(ct, m_year(ct))>sm_fix_SSP2)
-    + v58_reduction(j2,"intact") * s58_intact_conversion_cost)
+    (sum(stat_rewet58, v58_expansion(j2,stat_rewet58) * s58_cost_rewet_onetime)
+    + sum(stat_rewet58, v58_reduction(j2,stat_rewet58) * s58_cost_degrad_onetime)
+    + v58_reduction(j2,"intact") * s58_cost_degrad_onetime)
 	* sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
 
  q58_peatland_emis_detail(j2,emis58) ..
