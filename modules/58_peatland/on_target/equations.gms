@@ -74,8 +74,8 @@
  q58_peatland_cost_annuity(j2) ..
 	v58_peatland_cost_annuity(j2) =e=
     (sum(stat_rewet58, v58_expansion(j2,stat_rewet58) * s58_rewet_cost_onetime)
-    - sum(stat_rewet58, v58_expansion(j2,stat_rewet58) * s58_rewet_reward)
-    + sum(stat_rewet58, v58_reduction(j2,stat_rewet58) * s58_rewet_reward)
+    - sum(stat_rewet58, v58_expansion(j2,stat_rewet58) * s58_rewet_reward)$(sum(ct, m_year(ct))>sm_fix_SSP2)
+    + sum(stat_rewet58, v58_reduction(j2,stat_rewet58) * s58_rewet_reward)$(sum(ct, m_year(ct))>sm_fix_SSP2)
     + v58_reduction(j2,"intact") * s58_intact_conversion_cost)
 	* sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
 

@@ -47,7 +47,7 @@ cfg <- setScenario(cfg,c("SSP2","NPI","ForestryEndo"))
 cfg$output <- c("rds_report")
 #download_and_update(cfg)
 
-prefix <- "PT24"
+prefix <- "PT25"
 
 #Ref
 cfg$title <- paste(prefix,"SSP2","Ref",sep="_")
@@ -56,5 +56,5 @@ start_run(cfg,codeCheck=FALSE)
 
 #PeatRestor
 cfg$title <- paste(prefix,"SSP2","Ref","PeatRestor",sep="_")
-cfg$gms$s58_rewet_reward <- 80000
+cfg$gms$s58_rewet_reward <- 50000
 start_run(cfg,codeCheck=FALSE)
