@@ -47,7 +47,7 @@ cfg <- setScenario(cfg,c("SSP2","NPI","ForestryEndo"))
 cfg$output <- c("rds_report")
 #download_and_update(cfg)
 
-prefix <- "PT29"
+prefix <- "PT30"
 
 #Ref
 cfg$title <- paste(prefix,"SSP2","Ref",sep="_")
@@ -55,6 +55,14 @@ cfg$gms$s58_cost_degrad_recur <- 0
 start_run(cfg,codeCheck=FALSE)
 
 #PeatRestor
-cfg$title <- paste(prefix,"SSP2","Ref","PeatRestor",sep="_")
-cfg$gms$s58_cost_degrad_recur <- 50000
+cfg$title <- paste(prefix,"SSP2","costDegrad",sep="_")
+cfg$gms$s58_cost_degrad_recur <- 10000
+start_run(cfg,codeCheck=FALSE)
+
+#PeatRestor
+cfg$title <- paste(prefix,"SSP2","1p5deg",sep="_")
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
+cfg$gms$s56_peatland_policy <- 1
+cfg$gms$s58_cost_degrad_recur <- 0
 start_run(cfg,codeCheck=FALSE)
