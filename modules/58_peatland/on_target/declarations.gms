@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- p58_scaling_factor(t,j)							Scaling factor for managed peatland (1)
+ p58_scaling_factor(j)								Scaling factor for managed peatland (1)
  p58_intact_ratio(t,j)								Ratio of intact and total peatland (1)
  p58_peatland_degrad_used(j)						Intermediate calculation in peatland initialization (mio. ha)
  p58_peatland_degrad_unused(j)						Intermediate calculation in peatland initialization (mio. ha)
