@@ -14,7 +14,7 @@ parameters
  p58_land_area(j)									Total land area (mio. ha)
  p58_peatland_area(j)								Total peatland area (mio. ha)
  p58_ipcc_wetland_ef(clcl58,land58,emis58,man58) Wetland GWP100 emission factors (t CO2eq per ha)
- pc58_man_land(j)									Total managed land (mio. ha)
+ p58_man_land_area(j)								Total managed land (mio. ha)
  pc58_man_land_shr(j,land58)						Share of total managed land (1)
  pc58_peatland_man(j,man58,land58)					Managed peatland (mio. ha)
  pc58_peatland_man_inital(j,man58,land58)			Managed peatland at initialization (mio. ha)
@@ -55,9 +55,9 @@ positive variables
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
+ ov58_peatland_emis(t,j,emis58,type)        Detailed GHG emissions from managed peatland (t CO2eq per year)
  ov_peatland_cost(t,j,type)                 One-time and recurring cost of managed peatland (mio. USD05MER per yr)
  ov58_peatland_cost_annuity(t,j,type)       Annuity costs of managed peatland expansion in the current timestep (mio. USD05MER per yr)
- ov58_peatland_emis(t,j,emis58,type)        Detailed GHG emissions from managed peatland (t CO2eq per year)
  ov58_lu_transitions(t,j,from58,to58,type)  Peatland transitions (mio. ha)
  ov58_expansion(t,j,stat58,type)            Peatland expansion (mio. ha)
  ov58_reduction(t,j,stat58,type)            Peatland reduction (mio. ha)
