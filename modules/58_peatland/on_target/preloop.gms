@@ -41,6 +41,5 @@ p58_land_area(j) = sum(land, pcm_land(j,land));
 
 	pc58_peatland_intact(j) = f58_peatland_intact(j);
 	p58_peatland_area(j) = f58_peatland_degrad(j) + f58_peatland_intact(j);
-	p58_scaling_factor(j) = p58_peatland_area(j)/p58_land_area(j);
-	p58_peatland_degrad_unused(j) = f58_peatland_degrad(j);
 
+i58_cost_degrad_recur(t) = s58_cost_degrad_recur*f58_cost_degrad_fader(t);

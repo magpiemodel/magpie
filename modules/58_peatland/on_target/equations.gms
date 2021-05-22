@@ -62,7 +62,7 @@
 
  q58_peatland_degrad(j2,land58) ..   
 	v58_peatland_man(j2,"degrad",land58) =e= pc58_peatland_man(j2,"degrad",land58)
-	+ ((vm_land(j2,land58)-pcm_land(j2,land58))*p58_scaling_factor(j2))$(sum(ct, m_year(ct))>=sm_fix_SSP2);
+	+ ((vm_land(j2,land58)-pcm_land(j2,land58))*sum(ct, p58_scaling_factor(ct,j2)));
 
  q58_peatland_rewet(j2) ..
  sum(stat_rewet58, v58_expansion(j2,stat_rewet58)) * v58_reduction(j2,"intact") =e= 0;
@@ -70,7 +70,7 @@
  q58_peatland_cost(j2) ..
 	vm_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2) 
 							+ sum(land58, v58_peatland_man(j2,"rewet",land58) * s58_cost_rewet_recur)
-							+ sum((degrad58,land58), v58_peatland_man(j2,degrad58,land58) * s58_cost_degrad_recur)$(sum(ct, m_year(ct))>sm_fix_SSP2);
+							+ sum((degrad58,land58), v58_peatland_man(j2,degrad58,land58) * sum(ct, i58_cost_degrad_recur(ct)));
 							
  q58_peatland_cost_annuity(j2) ..
 	v58_peatland_cost_annuity(j2) =e=

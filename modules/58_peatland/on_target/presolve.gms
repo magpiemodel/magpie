@@ -8,8 +8,11 @@
   if (m_year(t) <= sm_fix_SSP2,
     p58_peatland_degrad_weight(j,land58) = 1/card(land58);
     p58_peatland_degrad_weight(j,land58)$(sum(land58_2, pcm_land(j,land58_2)) > 0) = pcm_land(j,land58) / sum(land58_2, pcm_land(j,land58_2));
-	pc58_peatland_man(j,"degrad",land58) = f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58);
+	pc58_peatland_man(j,"degrad",land58) = min(pcm_land(j,land58),f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58));
+	pc58_peatland_man(j,"unused",land58) = f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58) - pc58_peatland_man(j,"degrad",land58);
+	p58_scaling_factor(t,j) = 0;
   else
+  	p58_scaling_factor(t,j) = p58_peatland_area(j)/p58_land_area(j);
   );
 
 

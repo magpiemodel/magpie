@@ -13,7 +13,7 @@ scalars
   s58_rewetting_switch Peatland rewetting on (Inf) or off (0) / Inf /
 ;
 
-parameter f58_rewetting_fader(t_all) rewetting fader (1)
+parameter f58_cost_degrad_fader(t_all) degrad cost fader (1)
 /
 $ondelim
 $include "./modules/58_peatland/input/f35_protection_fader.csv"
