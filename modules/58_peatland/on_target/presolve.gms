@@ -5,6 +5,15 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+  if (m_year(t) <= sm_fix_SSP2,
+    p58_peatland_degrad_weight(j,land58) = 1/card(land58);
+    p58_peatland_degrad_weight(j,land58)$(sum(land58_2, pcm_land(j,land58_2)) > 0) = pcm_land(j,land58) / sum(land58_2, pcm_land(j,land58_2));
+	pc58_peatland_man(j,"degrad",land58) = f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58);
+  else
+  );
+
+
+
 *define bound for peatland area
 	v58_peatland_man.lo(j,man58,land58) = 0;
 	v58_peatland_man.up(j,"degrad",land58) = Inf;
