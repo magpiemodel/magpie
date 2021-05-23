@@ -40,12 +40,12 @@ equations
  ;
 
 variables
+ vm_peatland_cost(j)						One-time and recurring cost of managed peatland (mio. USD05MER per yr)
+ v58_peatland_cost_annuity(j)				Annuity costs of managed peatland expansion in the current timestep (mio. USD05MER per yr)
  v58_peatland_emis(j,emis58)				Detailed GHG emissions from managed peatland (t CO2eq per year)
 ;
 
 positive variables
- vm_peatland_cost(j)						One-time and recurring cost of managed peatland (mio. USD05MER per yr)
- v58_peatland_cost_annuity(j)				Annuity costs of managed peatland expansion in the current timestep (mio. USD05MER per yr)
  v58_lu_transitions(j,from58,to58)			Peatland transitions (mio. ha)
  v58_expansion(j,stat58)					Peatland expansion (mio. ha)
  v58_reduction(j,stat58)					Peatland reduction (mio. ha)
@@ -56,9 +56,9 @@ positive variables
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov58_peatland_emis(t,j,emis58,type)        Detailed GHG emissions from managed peatland (t CO2eq per year)
  ov_peatland_cost(t,j,type)                 One-time and recurring cost of managed peatland (mio. USD05MER per yr)
  ov58_peatland_cost_annuity(t,j,type)       Annuity costs of managed peatland expansion in the current timestep (mio. USD05MER per yr)
+ ov58_peatland_emis(t,j,emis58,type)        Detailed GHG emissions from managed peatland (t CO2eq per year)
  ov58_lu_transitions(t,j,from58,to58,type)  Peatland transitions (mio. ha)
  ov58_expansion(t,j,stat58,type)            Peatland expansion (mio. ha)
  ov58_reduction(t,j,stat58,type)            Peatland reduction (mio. ha)

@@ -75,8 +75,7 @@
 							
  q58_peatland_cost_annuity(j2) ..
 	v58_peatland_cost_annuity(j2) =e=
-    (sum(stat_rewet58, v58_expansion(j2,stat_rewet58) * s58_cost_rewet_onetime)
-    + sum(stat_rewet58, v58_reduction(j2,stat_rewet58) * s58_cost_degrad_onetime)
+    ((sum(stat_rewet58, v58_expansion(j2,stat_rewet58) + v58_reduction(j2,stat_rewet58)) * s58_cost_rewet_onetime)
     + v58_reduction(j2,"intact") * s58_cost_degrad_onetime)
 	* sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
 

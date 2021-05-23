@@ -5,26 +5,26 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-p58_peatland_area(j) = sum((man58,land58), v58_peatland_man.l(j,man58,land58)) + v58_peatland_intact.l(j);
-p58_land_area(j) = sum(land, vm_land.l(j,land));
-p58_scaling_factor(j) = p58_peatland_area(j)/p58_land_area(j);
+*p58_peatland_area(j) = sum((man58,land58), v58_peatland_man.l(j,man58,land58)) + v58_peatland_intact.l(j);
+*p58_land_area(j) = sum(land, vm_land.l(j,land));
+*58_scaling_factor(j) = p58_peatland_area(j)/p58_land_area(j);
   
-if (m_year(t) <= sm_fix_SSP2,
-	p58_man_land_area(j) = sum(land58, vm_land.l(j,land58));
-    p58_peatland_degrad_weight(j,land58) = 1/card(land58);
-    p58_peatland_degrad_weight(j,land58)$(p58_man_land_area(j) > 0) = vm_land.l(j,land58) / p58_man_land_area(j);
+if (m_year(t) = sm_fix_SSP2,
+*	p58_man_land_area(j) = sum(land58, vm_land.l(j,land58));
+*    p58_peatland_degrad_weight(j,land58) = 1/card(land58);
+*    p58_peatland_degrad_weight(j,land58)$(p58_man_land_area(j) > 0) = vm_land.l(j,land58) / p58_man_land_area(j);
 	pc58_peatland_man(j,"degrad",land58) = min(vm_land.l(j,land58)*p58_scaling_factor(j),f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58));
 	pc58_peatland_man(j,"unused",land58) = f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58) - pc58_peatland_man(j,"degrad",land58);
-else
+elseif m_year(t) > sm_fix_SSP2,
 	pc58_peatland_man(j,man58,land58) = v58_peatland_man.l(j,man58,land58);
 );
 
 pc58_peatland_intact(j) = v58_peatland_intact.l(j);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
- ov58_peatland_emis(t,j,emis58,"marginal")        = v58_peatland_emis.m(j,emis58);
  ov_peatland_cost(t,j,"marginal")                 = vm_peatland_cost.m(j);
  ov58_peatland_cost_annuity(t,j,"marginal")       = v58_peatland_cost_annuity.m(j);
+ ov58_peatland_emis(t,j,emis58,"marginal")        = v58_peatland_emis.m(j,emis58);
  ov58_lu_transitions(t,j,from58,to58,"marginal")  = v58_lu_transitions.m(j,from58,to58);
  ov58_expansion(t,j,stat58,"marginal")            = v58_expansion.m(j,stat58);
  ov58_reduction(t,j,stat58,"marginal")            = v58_reduction.m(j,stat58);
@@ -42,9 +42,9 @@ pc58_peatland_intact(j) = v58_peatland_intact.l(j);
  oq58_peatland_cost_annuity(t,j,"marginal")       = q58_peatland_cost_annuity.m(j);
  oq58_peatland_emis_detail(t,j,emis58,"marginal") = q58_peatland_emis_detail.m(j,emis58);
  oq58_peatland_emis(t,j,"marginal")               = q58_peatland_emis.m(j);
- ov58_peatland_emis(t,j,emis58,"level")           = v58_peatland_emis.l(j,emis58);
  ov_peatland_cost(t,j,"level")                    = vm_peatland_cost.l(j);
  ov58_peatland_cost_annuity(t,j,"level")          = v58_peatland_cost_annuity.l(j);
+ ov58_peatland_emis(t,j,emis58,"level")           = v58_peatland_emis.l(j,emis58);
  ov58_lu_transitions(t,j,from58,to58,"level")     = v58_lu_transitions.l(j,from58,to58);
  ov58_expansion(t,j,stat58,"level")               = v58_expansion.l(j,stat58);
  ov58_reduction(t,j,stat58,"level")               = v58_reduction.l(j,stat58);
@@ -62,9 +62,9 @@ pc58_peatland_intact(j) = v58_peatland_intact.l(j);
  oq58_peatland_cost_annuity(t,j,"level")          = q58_peatland_cost_annuity.l(j);
  oq58_peatland_emis_detail(t,j,emis58,"level")    = q58_peatland_emis_detail.l(j,emis58);
  oq58_peatland_emis(t,j,"level")                  = q58_peatland_emis.l(j);
- ov58_peatland_emis(t,j,emis58,"upper")           = v58_peatland_emis.up(j,emis58);
  ov_peatland_cost(t,j,"upper")                    = vm_peatland_cost.up(j);
  ov58_peatland_cost_annuity(t,j,"upper")          = v58_peatland_cost_annuity.up(j);
+ ov58_peatland_emis(t,j,emis58,"upper")           = v58_peatland_emis.up(j,emis58);
  ov58_lu_transitions(t,j,from58,to58,"upper")     = v58_lu_transitions.up(j,from58,to58);
  ov58_expansion(t,j,stat58,"upper")               = v58_expansion.up(j,stat58);
  ov58_reduction(t,j,stat58,"upper")               = v58_reduction.up(j,stat58);
@@ -82,9 +82,9 @@ pc58_peatland_intact(j) = v58_peatland_intact.l(j);
  oq58_peatland_cost_annuity(t,j,"upper")          = q58_peatland_cost_annuity.up(j);
  oq58_peatland_emis_detail(t,j,emis58,"upper")    = q58_peatland_emis_detail.up(j,emis58);
  oq58_peatland_emis(t,j,"upper")                  = q58_peatland_emis.up(j);
- ov58_peatland_emis(t,j,emis58,"lower")           = v58_peatland_emis.lo(j,emis58);
  ov_peatland_cost(t,j,"lower")                    = vm_peatland_cost.lo(j);
  ov58_peatland_cost_annuity(t,j,"lower")          = v58_peatland_cost_annuity.lo(j);
+ ov58_peatland_emis(t,j,emis58,"lower")           = v58_peatland_emis.lo(j,emis58);
  ov58_lu_transitions(t,j,from58,to58,"lower")     = v58_lu_transitions.lo(j,from58,to58);
  ov58_expansion(t,j,stat58,"lower")               = v58_expansion.lo(j,stat58);
  ov58_reduction(t,j,stat58,"lower")               = v58_reduction.lo(j,stat58);
