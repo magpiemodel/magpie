@@ -47,7 +47,7 @@ cfg$gms$s80_maxiter <- 30
 cfg$output <- c("rds_report")
 #download_and_update(cfg)
 
-prefix <- "PT31"
+prefix <- "PT32"
 
 #SSP2 REF
 cfg$title <- paste(prefix,"SSP2","REF","PeatOn100",sep="_")
