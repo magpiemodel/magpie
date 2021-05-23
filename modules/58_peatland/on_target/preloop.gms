@@ -48,5 +48,5 @@ p58_peatland_degrad_weight(j,land58)$(p58_man_land_area(j) > 0) = pcm_land(j,lan
 pc58_peatland_man(j,man58,land58) = 0;
 pc58_peatland_man(j,"degrad",land58) = min(pcm_land(j,land58)*p58_scaling_factor(j),f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58));
 pc58_peatland_man(j,"unused",land58) = f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58) - pc58_peatland_man(j,"degrad",land58);
-
-i58_cost_degrad_recur(t) = s58_cost_degrad_recur*f58_cost_degrad_fader(t);
+*f58_cost_degrad_fader(t)
+i58_cost_degrad_recur(t) = s58_cost_degrad_recur;
