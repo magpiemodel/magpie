@@ -39,39 +39,83 @@ cfg$gms$peatland  <- "on_target"
 cfg$gms$s58_rewetting_switch  <- Inf
 cfg$gms$s80_optfile <- 1
 cfg$gms$s80_maxiter <- 30
-cfg$gms$s56_peatland_policy <- 0
-cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
-cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
-cfg <- setScenario(cfg,c("SDP","NPI","ForestryEndo"))
+# cfg$gms$s56_peatland_policy <- 0
+# cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
+# cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
+# cfg <- setScenario(cfg,c("SDP","NPI","ForestryEndo"))
 
 cfg$output <- c("rds_report")
 #download_and_update(cfg)
 
-prefix <- "PT30"
+prefix <- "PT31"
 
-cfg$gms$peatland  <- "off"
-cfg$gms$s58_rewetting_switch  <- 0
-
-#Ref
-cfg$title <- paste(prefix,"SDP","Ref","PeatOff",sep="_")
-cfg$gms$s58_cost_degrad_recur <- 0
-start_run(cfg,codeCheck=FALSE)
-
+#SSP2 REF
+cfg$title <- paste(prefix,"SSP2","REF","PeatOn100",sep="_")
 cfg <- setScenario(cfg,c("SSP2","NPI","ForestryEndo"))
-cfg$title <- paste(prefix,"SSP2","Ref","PeatOff",sep="_")
+cfg$gms$peatland  <- "on_target"
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
+cfg$gms$s56_peatland_policy <- 0
+cfg$gms$s58_cost_degrad_recur <- 0
+cfg$gms$s58_cost_degrad_onetime <- 100
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- paste(prefix,"SSP2","REF","PeatOn0",sep="_")
+cfg <- setScenario(cfg,c("SSP2","NPI","ForestryEndo"))
+cfg$gms$peatland  <- "on_target"
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
+cfg$gms$s56_peatland_policy <- 0
+cfg$gms$s58_cost_degrad_recur <- 0
+cfg$gms$s58_cost_degrad_onetime <- 0
+start_run(cfg,codeCheck=FALSE)
+
+
+cfg$title <- paste(prefix,"SSP2","REF","PeatOff",sep="_")
+cfg <- setScenario(cfg,c("SSP2","NPI","ForestryEndo"))
+cfg$gms$peatland  <- "off"
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
+cfg$gms$s56_peatland_policy <- 0
 cfg$gms$s58_cost_degrad_recur <- 0
 start_run(cfg,codeCheck=FALSE)
 
 
-#PeatRestor
-cfg$title <- paste(prefix,"SDP","costDegrad",sep="_")
-cfg$gms$s58_cost_degrad_recur <- 10000
-#start_run(cfg,codeCheck=FALSE)
-
-#PeatRestor
-cfg$title <- paste(prefix,"SDP","1p5deg",sep="_")
-cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
-cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
-cfg$gms$s56_peatland_policy <- 1
-cfg$gms$s58_cost_degrad_recur <- 0
-#start_run(cfg,codeCheck=FALSE)
+# #SSP2 POL
+# cfg$title <- paste(prefix,"SSP2","1p5deg","PeatOn",sep="_")
+# cfg <- setScenario(cfg,c("SSP2","NDC","ForestryEndo"))
+# cfg$gms$peatland  <- "on_target"
+# cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
+# cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
+# cfg$gms$s56_peatland_policy <- 1
+# cfg$gms$s58_cost_degrad_recur <- 0
+# start_run(cfg,codeCheck=FALSE)
+# 
+# cfg$title <- paste(prefix,"SSP2","1p5deg","PeatOff",sep="_")
+# cfg <- setScenario(cfg,c("SSP2","NDC","ForestryEndo"))
+# cfg$gms$peatland  <- "off"
+# cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
+# cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
+# cfg$gms$s56_peatland_policy <- 0
+# cfg$gms$s58_cost_degrad_recur <- 0
+# start_run(cfg,codeCheck=FALSE)
+# 
+# 
+# #SDP POL
+# cfg$title <- paste(prefix,"SDP","1p5deg","PeatOn",sep="_")
+# cfg <- setScenario(cfg,c("SDP","NDC","ForestryEndo"))
+# cfg$gms$peatland  <- "on_target"
+# cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
+# cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
+# cfg$gms$s56_peatland_policy <- 1
+# cfg$gms$s58_cost_degrad_recur <- 0
+# start_run(cfg,codeCheck=FALSE)
+# 
+# cfg$title <- paste(prefix,"SDP","1p5deg","PeatOff",sep="_")
+# cfg <- setScenario(cfg,c("SDP","NDC","ForestryEndo"))
+# cfg$gms$peatland  <- "off"
+# cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
+# cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
+# cfg$gms$s56_peatland_policy <- 0
+# cfg$gms$s58_cost_degrad_recur <- 0
+# start_run(cfg,codeCheck=FALSE)
