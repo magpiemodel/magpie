@@ -7,7 +7,7 @@
 
 *' @description In the managementcalib_aug19 realization, the crop yields
 *' are calibrated to FAO regional yield levels of the initial time step.
-*' Pasture yields are calulcated based on pasture demand to account for 
+*' Pasture yields are calulcated based on pasture demand to account for
 *' in- and extensification of managed grasslands. Technological change spillover
 *' from crop yield increases of the time step before are included additionally.
 *' This realization also calculates the growing stocks in commercial
@@ -15,7 +15,8 @@
 *'
 *' @limitations The exogenous implementation of pasture intensification cannot
 *' capture feedbacks between land scarcity and efforts to improve pasture
-*' management.
+*' management. And, the magnitude of spillover effects from technological change
+*' in  the crop sector towards improvements in pasture management is very uncertain.
 
 
 *####################### R SECTION START (PHASES) ##############################
