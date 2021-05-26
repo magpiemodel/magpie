@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
-
+- **13_tc_** added switch to ignore historic tau patterns in historic time steps (new default)
+- **39_landconversion** lower costs for expansion of forestry land
 - New standard for cluster to region mapping (rds-files) is used in all scripts. If old spam files are provided by input data, rds-mapping file is created.
 - Changed file format from cs2 to cs2b for cellular input files with a single data column.
 - Moved most of cropping related set definitions (k, kve, kcr) from **16_demand** to **14_yield**.
@@ -32,10 +33,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added new interfaces for tau factor of the previous time step (`pcm_tau` in **13_tc**) and historic croparea (`fm_croparea` in **30_crop**)
 
 ### removed
+- **core** "removed sets ac_young and ac_mature (no longer needed due to changes in 44_biodiversity)
 
 ### fixed
 - **35_natveg** option to fade out damage from shifting agriculture by 2030
 - **32_foresty** BII coefficients for CO2 price driven afforestation
+- **32_foresty** growth curve CO2 price driven afforestation
+- **32_foresty** NPI/NDC afforestation infeasibility
 - **44_biodiversity** ac0 included in pricing of biodiversity loss
 
 ## [4.3.4] - 2021-04-30
@@ -51,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### fixed
 - **20_processing** The "mixed" scenario for single-cell protein production (c20_scp_type) was not working as expected. The corresponding code in 20_processing has been updated.
 - **15_food** single-cell protein substitution scenarios included in intersolve.gms.
+- **09_drivers** migration of sm_fix_SSP2 and sm_fix_cc declaration from the core declarations to the drivers module. This will allow to set the scalars properly .
 
 
 ## [4.3.3] - 2021-03-30
@@ -67,6 +72,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### fixed
 - **60_bioenergy** Minimal bioenergy demand
+
 
 ## [4.3.2] - 2021-03-17
 

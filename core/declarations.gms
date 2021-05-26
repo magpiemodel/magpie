@@ -7,9 +7,7 @@
 
 scalars
  sm_intersolve              if 0 finish loop or if 1 iterate optimization (1) /0/
- sm_fix_SSP2			        	year until which all parameters are fixed to SSP2 values (year) / 2020 /
- sm_fix_cc				          year until which all parameters affected by cc are fixed to historical values (year) / 2020 /
-
+ 
 ;
 
 *** EOF declarations.gms ***

@@ -12,6 +12,6 @@
 library(gms)
 source("scripts/start_functions.R")
 source("config/default.cfg")
-source("scripts/extra/lpjml_addon.R")
+source("scripts/start/extra/lpjml_addon.R")
 start_run(cfg=cfg)
 
