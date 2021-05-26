@@ -230,7 +230,7 @@ p32_plantation_contribution(t_ext,i)$(f32_gs_relativetarget(i)>0) = f32_plantati
 *******************************************************************************
 ** Calibrate plantations yields
 *******************************************************************************
-** Initialize with 0 cvalues
+** Initialize with 0 values
 p32_observed_gs_reg(i) = 0;
 ** Wherever FAO reports >0 growing stock, we calculate how much growing stock MAGPIE
 ** sees even before optimization starts
@@ -238,9 +238,9 @@ p32_observed_gs_reg(i)$(f32_gs_relativetarget(i)>0)  = (sum((cell(i,j),ac),(pm_t
 ** Initialze calibration factor for growing stocks as 1
 ** we dont set it to 0 as we don't want to modify carbon densities by multiplication with 0 later
 p32_gs_scaling_reg(i) = 1;
-** Calculate the ratio between target growing stock (reported by FAO) and observed growing stock (value at initialization in MAgPIE)
+** Calculate the ratio between target growing stock (reported by FAO) and observed growing stock (value at initialization in MAgPIE - dependent on plantation initialization)
 p32_gs_scaling_reg(i)$(f32_gs_relativetarget(i)>0) = f32_gs_relativetarget(i) / p32_observed_gs_reg(i);
-** Calibration factors lower than 1 are set to 1
+** Calibration factors lower than 1 are set to 1 as we do not want to suppress the observed growing stock in MAgPIE
 p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) < 1) = 1;
 
 ** Update c-densitiy based on calibration factor for growing stocks
