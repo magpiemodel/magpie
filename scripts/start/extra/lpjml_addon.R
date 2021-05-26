@@ -13,7 +13,9 @@ library(gms)
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
-cfg$input <- c("additional_data_rev4.04.tgz",
+
+
+cfg$input <- c(cfg$input[grep("additional_data", cfg$input)],
                "rev4.59_h12_magpie.tgz",
                "rev4.59_h12_c5cdbf33_cellularmagpie_c200_GFDL-ESM4-ssp370_lpjml-47a77da3.tgz",
                "rev4.59_h12_validation.tgz")
@@ -25,6 +27,7 @@ cfg$gms$yields                       <- "managementcalib_aug19"
 cfg$gms$s14_yld_past_switch          <- 0.25
 cfg$gms$processing                   <- "substitution_may21"
 cfg$gms$crop                         <- "endo_apr21"
+cfg$gms$factor_cost                  <- "sticky_feb18"
 cfg$gms$c41_initial_irrigation_area  <- "LUH2v2"
 cfg                                  <- setScenario(cfg,"cc")
 
