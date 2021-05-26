@@ -5,17 +5,26 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In the managementcalib_aug19 realization, the crop yields
-*' are calibrated to FAO regional yield levels of the initial time step.
-*' Pasture yields are calulcated based on pasture demand to account for 
-*' in- and extensification of managed grasslands. Technological change spillover
-*' from crop yield increases of the time step before are included additionally.
-*' This realization also calculates the growing stocks in commercial
-*' plantations and natural vegetation using LPJmL Carbon stocks.
+*' @description The managementcalib_aug19 realization reads in the LPJmL data and
+*' performs several corrections. First, a bioenergy yield correction is performed.
+*' As there is currently no robust information on bioenergy yields available
+*' in [@FAOSTAT], it is assumed that the LPJmL yields for bioenergy correspond
+*' to the yields achieved under the highest currently observed value of the $\tau$
+*' factor representing agricultural land-use intensity. Pasture yields are
+*' calculated based on pasture demand to account for in- and extensification of
+*' managed grasslands. Technological change spillover from crop yield increases
+*' of the time step before is included additionally. Second, yields for all other
+*' crops are corrected on the regional level by applying a calibration factor
+*' that does not differentiate between crops. Pasture yields have their own
+*' regional calibration factors. Applied calibration factors are derived via 
+*' comparing cropland and pasture areas in the initial time step with values
+*' reported by FAO [@FAOSTAT]. This realization also calculates the growing
+*' stocks in commercial plantations and natural vegetation using LPJmL Carbon stocks.
 *'
 *' @limitations The exogenous implementation of pasture intensification cannot
 *' capture feedbacks between land scarcity and efforts to improve pasture
-*' management.
+*' management. And, the magnitude of spillover effects from technological change
+*' in  the crop sector towards improvements in pasture management is very uncertain.
 
 
 *####################### R SECTION START (PHASES) ##############################
