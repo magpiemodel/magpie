@@ -9,14 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **13_tc_** added switch to ignore historic tau patterns in historic time steps (new default)
+- **39_landconversion** lower costs for expansion of forestry land
 
 ### added
 
 ### removed
+- **core** "removed sets ac_young and ac_mature (no longer needed due to changes in 44_biodiversity)
 
 ### fixed
-
-
+- **32_foresty** BII coefficients for CO2 price driven afforestation
+- **32_foresty** growth curve CO2 price driven afforestation
+- **32_foresty** NPI/NDC afforestation infeasibility
+- **44_biodiversity** ac0 included in pricing of biodiversity loss
 
 ## [4.3.4] - 2021-04-30
 
