@@ -26,15 +26,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.3.4] - 2021-04-30
 
 ### changed
+- **53_methane** New calculations for emissions from agricultural residues (vm_res_ag_burn)
 - **51_nitrogen** New calculations for emissions from agricultural residues (vm_res_ag_burn)
 - **citation file** added new contributors
 
 ### added
 - **config** The set "kfo_rd" (livst_rum, livst_milk), which is used in the food substitution scenarios c15_rumdairy_scp_scen and c15_rumdairyscen, has been added to the default.cfg file. This allows for sensitivity scenarios (e.g. only livst_milk or only livst_rum).
+- A new scenario (nocc_hist) was added to the cc/nocc switch. In this scenario, parameters affected by the cc/nocc switch in **14_yields**,**42_water_demand**,**43_water_availability**,**52_carbon**,**59_som** keep their historical/variable values up to the year defined by sm_fix_cc. Afterwards, sm_fix_cc values are kept constant for the overall run horizon.
 
 ### fixed
 - **20_processing** The "mixed" scenario for single-cell protein production (c20_scp_type) was not working as expected. The corresponding code in 20_processing has been updated.
 - **15_food** single-cell protein substitution scenarios included in intersolve.gms.
+
+- **09_drivers** migration of sm_fix_SSP2 and sm_fix_cc declaration from the core declarations to the drivers module. This will allow to set the scalars properly .
 
 
 ## [4.3.3] - 2021-03-30
