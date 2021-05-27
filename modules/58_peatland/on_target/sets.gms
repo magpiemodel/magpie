@@ -7,13 +7,13 @@
 
 sets
  
-  man58 Peatland status managed
+  man58 State of managed peatland
     / degrad, unused, rewet /
 
-  degrad58(man58) Peatland status managed
+  degrad58(man58) State of degraded peatland
     / degrad, unused /
   
-  ef58(man58) Peatland ef categories
+  ef58(man58) Peatland emissions factors
     / degrad, rewet /
 
   land58(land) Managed land types

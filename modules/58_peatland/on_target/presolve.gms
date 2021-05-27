@@ -5,8 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-sm_fix_SSP2 = 1995;
-
 *define bound for peatland area
 	v58_peatland_man.lo(j,man58,land58) = 0;
 	v58_peatland_man.up(j,"degrad",land58) = Inf;

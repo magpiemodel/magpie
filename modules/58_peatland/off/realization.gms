@@ -5,7 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In this realization GHG emissions from degrading peatlands are assumed zero.
+*' @description In this realization, peatlands do not exist. Therefore, 
+*' GHG emissions from degrading peatlands are assumed zero.
 
 *' @limitations GHG emissions from degrading peatlands are assumed zero
 

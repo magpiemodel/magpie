@@ -7,6 +7,8 @@
 
 *' @equations
 
+*' Land transition matrix for peatland area
+
  q58_transition_matrix(j2) ..
 	sum((from58,to58), v58_lu_transitions(j2,from58,to58)) =e=
 	p58_peatland_area(j2);
@@ -50,8 +52,8 @@
         sum(to58$(not sameas(from58,to58)),
         v58_lu_transitions(j2,from58,to58));
 
-*' Future peatland degradation (v58_peatland_man) depends on changes of managed land,
-*' scaled with  the ratio of total peatland area and total land area (p58_scaling_factor).
+*' Future peatland degradation (`v58_peatland_man`) depends on changes of managed land,
+*' scaled with the ratio of total peatland area and total land area (`p58_scaling_factor`).
 *' By multiplying changes in managed land with this scaling factor we implicitly assume
 *' that intact peatlands are distributed equally within a grid cell.
 *' The following example illustrates the mechanism used for projecting peatland dynamics:
@@ -65,19 +67,26 @@
     pc58_peatland_man(j2,"degrad",land58)
 	+ ((vm_land(j2,land58)-pcm_land(j2,land58))*p58_scaling_factor(j2))$(sum(ct, m_year(ct))>sm_fix_SSP2);
 
+*' Either conversion of intact to degraded peatland OR conversion of degraded to rewetted peatland.
+*' This constraint avoids the conversion of intact peatland into rewetted peatland.
+
  q58_peatland_rewet(j2) ..
  sum(stat_rewet58, v58_expansion(j2,stat_rewet58)) * v58_reduction(j2,"intact") =e= 0;
+
+*' Costs for peatland degradation and rewetting
 
  q58_peatland_cost(j2) ..
 	vm_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2) 
 							+ sum(land58, v58_peatland_man(j2,"rewet",land58) * s58_cost_rewet_recur)
-							+ sum((degrad58,land58), v58_peatland_man(j2,degrad58,land58) * sum(ct, i58_cost_degrad_recur(ct)));
+							+ sum((degrad58,land58), v58_peatland_man(j2,degrad58,land58) * s58_cost_degrad_recur);
 							
  q58_peatland_cost_annuity(j2) ..
 	v58_peatland_cost_annuity(j2) =e=
     ((sum(stat_rewet58, v58_expansion(j2,stat_rewet58) + v58_reduction(j2,stat_rewet58)) * s58_cost_rewet_onetime)
     + v58_reduction(j2,"intact") * s58_cost_degrad_onetime)
 	* sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
+
+*' GHG emissions from managed peatlands (degraded and rewetted)
 
  q58_peatland_emis_detail(j2,emis58) ..
 	v58_peatland_emis(j2,emis58) =e=
