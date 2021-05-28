@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "MAR07"
+identifier_flag = "MAY01"
 cat(paste0("Building demand runs with extra forest protection scenarios"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
@@ -34,7 +34,7 @@ scen_vector <- c("ForestryEndo")
 
 for(c73_wood_scen in c("default")){
 
-  for(s80_maxiter in c(5)){
+  for(s80_maxiter in c(30)){
     for(scen in scen_vector){
 
         for(ssp in c("SSP2")){
@@ -83,9 +83,9 @@ for(c73_wood_scen in c("default")){
 
                   xx = c(xx,cfg$title)
                   all_configs[[cfg$title]] <- cfg
-                  cfg$gms$s80_optfile <- 1
+                  #cfg$gms$s80_optfile <- 1
                   cfg$results_folder = "output/:title:"
-                  start_run(cfg,codeCheck=FALSE)
+                  #start_run(cfg,codeCheck=FALSE)
                 }
               }
             }
