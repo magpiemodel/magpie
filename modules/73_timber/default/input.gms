@@ -70,3 +70,4 @@ $ondelim
 $include "./modules/73_timber/input/f73_construction_wood_demand.cs3"
 $offdelim
 ;
+f73_construction_wood_demand(t_all,i,pop_scen09,"BAU") = 0;
