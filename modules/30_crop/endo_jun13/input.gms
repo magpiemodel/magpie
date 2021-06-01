@@ -11,6 +11,9 @@ $setglobal c30_bioen_type  all
 $setglobal c30_bioen_water  rainfed
 * options: rainfed, irrigated, all
 
+$setglobal c30_rotation_constraints on
+*options: on, off
+
 ********* CROPAREA INITIALISATION **********************************************
 
 table fm_croparea(t_all,j,w,kcr) Different croparea type areas (mio. ha)
@@ -29,7 +32,7 @@ $ondelim
 $include "./modules/30_crop/endo_jun13/input/f30_rotation_max.csv"
 $offdelim
 /;
-$if "%c30_rotation_constrains%" == "off" f30_rotation_max_shr(crp30) = 1;
+$if "%c30_rotation_constraints%" == "off" f30_rotation_max_shr(crp30) = 1;
 
 
 parameter f30_rotation_min_shr(crp30) Minimum allowed area shares for each crop type (1)
@@ -38,7 +41,7 @@ $ondelim
 $include "./modules/30_crop/endo_jun13/input/f30_rotation_min.csv"
 $offdelim
 /;
-$if "%c30_rotation_constrains%" == "off" f30_rotation_min_shr(crp30) = 0;
+$if "%c30_rotation_constraints%" == "off" f30_rotation_min_shr(crp30) = 0;
 
 
 ********* SUITABILITY CONSTRAINT *******************************************

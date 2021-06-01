@@ -8,7 +8,7 @@
 $setglobal c41_initial_irrigation_area  Siebert
 
 parameters
-f41_irrig(j) Available area equipped for irrigation [AVL] (mio. ha)
+f41_irrig(j) Available area equipped for irrigation according to Siebert [AVL] (mio. ha)
 /
 $ondelim
 $include "./modules/41_area_equipped_for_irrigation/input/avl_irrig.cs2"
@@ -17,7 +17,7 @@ $offdelim
 ;
 
 parameters
-f41_irrig_luh(t_all,j) Available area equipped for irrigation [AVL] (mio. ha)
+f41_irrig_luh(t_ini41,j) Available area equipped for irrigation according to LUH [AVL] (mio. ha)
 /
 $ondelim
 $include "./modules/41_area_equipped_for_irrigation/input/avl_irrig_luh_t.cs2"

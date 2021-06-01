@@ -7,7 +7,7 @@
 
 *' @description The endo_apr21 realization calculates the crop specific
 *' agricultural land use endogenously based on yield data coming from the
-*' module [14_yields] and the rotational as well as suitability constrains
+*' module [14_yields] and the rotational as well as suitability constraints
 *' stated in the input data of the module.
 *'
 *' Cropland areas are linked to the crop specific production and the carbon

@@ -11,10 +11,10 @@
 
 *** YIELDS
 
-*` `pm_carbon_density_ac_forestry` for vegetation Carbon is above + below ground
+*` `pm_carbon_density_ac_forestry` for vegetation Carbon is above- and belowground
 *' carbon density. We convert Carbon density in tC/ha to tDM/ha by using carbon
 *' fraction of `s14_carbon_fraction` in tC/tDM. For assessing wood harvesting
-*' we need only above ground biomass information, therefore we multiply with
+*' we need only aboveground biomass information, therefore we multiply with
 *' aboveground `f14_aboveground_fraction`. Additionally, we divide aboveground
 *' tree biomass by biomass conversion and expansion (BCE) factor to get stem
 *' biomass in tDM/ha.
@@ -45,7 +45,7 @@ p14_growing_stock(t,j,ac,"forestry","plantations") = p14_growing_stock(t,j,ac,"f
 
 ** Used in equations -- Annual value hence division by timestep
 ***************************************************************
-** If the plantation yield switch is on, forestry yields are treated are plantation yields
+** If the plantation yield switch is on, forestry yields are treated as plantation yields
 pm_timber_yield(t,j,ac,"forestry")$(s14_timber_plantation_yield = 1) = p14_growing_stock(t,j,ac,"forestry","plantations") ;
 ** Natveg yields are unchanged and doesn't depend on plantation yield switch
 pm_timber_yield(t,j,ac,land_natveg) = p14_growing_stock(t,j,ac,land_natveg,"natveg");
