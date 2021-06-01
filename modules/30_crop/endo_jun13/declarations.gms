@@ -5,10 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-parameters
- pm_croparea_start(j,kcr)        Agricultural land initialization area (mio. ha)
-;
-
 positive variables
  vm_area(j,kcr,w)                Agricultural production area (mio. ha)
 ;

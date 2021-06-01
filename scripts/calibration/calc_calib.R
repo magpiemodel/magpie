@@ -64,7 +64,8 @@ get_yieldcalib <- function(gdx_file) {
     return(superAggregate(y,level="reg",aggr_type="mean", na.rm=TRUE))
   }
 
-  y_ini <- prep(readGDX(gdx_file,"i14_yields","i14_yields_calib"))
+  y_ini <- prep(readGDX(gdx_file, "i14_yields","i14_yields_calib", 
+                        format = "first_found", react = "silent"))
   y     <- prep(readGDX(gdx_file,"vm_yld")[,,"l"])
 
   out <- y/y_ini
