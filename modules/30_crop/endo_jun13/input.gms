@@ -11,7 +11,7 @@ $setglobal c30_bioen_type  all
 $setglobal c30_bioen_water  rainfed
 * options: rainfed, irrigated, all
 
-$setglobal c30_rotation_constraints on
+$setglobal c30_rotation_constraints  on
 *options: on, off
 
 ********* CROPAREA INITIALISATION **********************************************
