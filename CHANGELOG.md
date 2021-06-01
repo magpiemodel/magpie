@@ -45,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.3.4] - 2021-04-30
 
 ### changed
+- **53_methane** New calculations for emissions from agricultural residues (vm_res_ag_burn)
 - **51_nitrogen** New calculations for emissions from agricultural residues (vm_res_ag_burn)
 - **citation file** added new contributors
 
