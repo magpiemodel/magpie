@@ -5,15 +5,17 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In this realization GHG emissions from degrading/drained peatlands
-*' are calculated based on GHG emission factors from the 
-*' "2013 Supplement to the 2006 IPCC Guidelines for National Greenhouse Gas Inventories: Wetlands".
-*' Also rewetting of drained peatlands as mitigation option is available. 
+*' @description In this realization, the state of peatlands is modelled as described in @humpenoder_peatland_2020.
+*' The initial map of peatland area consists of intact and degraded peatland area for 2015. 
+*' Future peatland dynamics depend on the ratio of total peatland area and total land area. 
+*' GHG emissions from degraded and rewetted peatlands as are calculated based on GHG emission factors from the 
+*' "2013 Supplement to the 2006 IPCC Guidelines for National Greenhouse Gas Inventories: Wetlands". 
 *' @stop
 
 
 *'
-*' @limitations Organic carbon stocks in peatlands are not accounted for. 
+*' @limitations Peatland area and GHG emissions are fixed at 2015 levels, depending on sm_fix_SSP2.
+*' Organic carbon stocks in peatlands are not accounted for. 
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/58_peatland/on/sets.gms"
