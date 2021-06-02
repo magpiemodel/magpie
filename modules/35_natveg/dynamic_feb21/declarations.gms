@@ -16,7 +16,8 @@ parameters
  p35_other(t,j,ac)   	  	                      Other land per age class (mio. ha)
  pc35_secdforest(j,ac)    	                    Secdforest per age class in current time step (mio. ha)
  pc35_other(j,ac)   	  	                      Other land per age class in current time step (mio. ha)
- p35_protect_shr(t,j,prot_type)                 Protection share for primforest secdforest and other land (1)
+ p35_protect_shr(t,j,prot_type)                 Protection share for primforest, secdforest and other land (1)
+ p35_forest_protect_shr(t,j)          Protection share for primforest and secdforest only
  p35_save_primforest(t,j) 		                  Primforest protection (mio. ha)
  p35_save_secdforest(t,j)		                    Secdforest protection (mio. ha)
  p35_save_other(t,j)			                      Other land protection (mio. ha)

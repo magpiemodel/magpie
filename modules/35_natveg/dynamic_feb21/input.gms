@@ -8,6 +8,7 @@
 $setglobal c35_protect_scenario  WDPA
 $setglobal c35_ad_policy  npi
 $setglobal c35_aolc_policy  npi
+$setglobal c35_forest_damage_end  by2050
 
 scalars
 s35_hvarea Flag for harvested area (0=zero 1=exognous 2=endogneous)	/ 0 /
@@ -22,12 +23,10 @@ s35_secdf_distribution Flag for secdf initialization (0=all secondary forest in 
 s35_forest_damage Damage simulation in forests (0=none 1=shifting agriculture 2=Combination of wildfire and shifting agriculture) / 1 /
 ;
 
-parameter f35_protection_fader(t_all) Protection scenario fader (1)
-/
+table f35_protection_fader(t_all, prot_target35) Protection scenario fader (1)
 $ondelim
 $include "./modules/35_natveg/input/f35_protection_fader.csv"
 $offdelim
-/
 ;
 
 table f35_protect_area(j,prot_type) Conservation priority areas (mio. ha)

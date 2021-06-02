@@ -48,7 +48,7 @@ sets
    crop_per30(kcr) perennial crops
     / oilpalm, begr, sugr_cane, betr /
 
-   marginal_land30 Cropland availability scenarios
+   marginal_land30 Marginal land scenarios
     / all_marginal, q33_marginal, no_marginal  /
 
    set_aside_target30 Target year for set aside policy

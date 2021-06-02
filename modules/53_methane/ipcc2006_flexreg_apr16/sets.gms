@@ -21,7 +21,6 @@ k_ruminants53(kli) ruminant subset
 
 emis_source_nomethane53(emis_source) emission sources
    / inorg_fert, man_crop, resid, man_past, som,
-     resid_burn,
      crop_vegc, crop_litc, crop_soilc,
      past_vegc, past_litc, past_soilc,
      forestry_vegc, forestry_litc, forestry_soilc,

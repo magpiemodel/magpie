@@ -21,8 +21,8 @@
 *' The module returns yields for all crops and for pasture, which is then used
 *' by the modules [30_crop] and [31_past].
 *'
-*' @authors Jan Philipp Dietrich, Isabelle Weindl, Florian Humpenöder, Anne Biewald
-
+*' @authors Jan Philipp Dietrich, Isabelle Weindl, Florian Humpenöder,
+*' Anne Biewald, Kristine Karstens
 
 
 *###################### R SECTION START (MODULETYPES) ##########################

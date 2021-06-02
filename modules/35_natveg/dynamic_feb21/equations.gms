@@ -39,13 +39,13 @@
 
  q35_bv_secdforest(j2,potnatveg) .. vm_bv(j2,"secdforest",potnatveg)
  					=e=
-          sum(ac_mature, v35_secdforest(j2,ac_mature)) * fm_bii_coeff("secd_mature",potnatveg) * fm_luh2_side_layers(j2,potnatveg)
-        + sum(ac_young, v35_secdforest(j2,ac_young)) * fm_bii_coeff("secd_young",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
+          sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v35_secdforest(j2,ac)) * 
+          fm_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);
 
  q35_bv_other(j2,potnatveg) .. vm_bv(j2,"other",potnatveg)
  					=e=
-          sum(ac_mature, v35_other(j2,ac_mature)) * fm_bii_coeff("secd_mature",potnatveg) * fm_luh2_side_layers(j2,potnatveg)
-        + sum(ac_young, v35_other(j2,ac_young)) * fm_bii_coeff("secd_young",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
+          sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v35_other(j2,ac)) * 
+          fm_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);
 
 *' NPI/NDC land protection policies are implemented as minium forest land and other land stock.
 

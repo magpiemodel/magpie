@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c41_initial_irrigation_area  Siebert
+$setglobal c41_initial_irrigation_area  LUH2v2
 
 table f41_c_irrig(t_all,i) Irrigation investment costs (USD04MER per ha)
 $ondelim
@@ -14,7 +14,7 @@ $offdelim
 ;
 
 parameters
-f41_irrig(j) Available area equipped for irrigation [AVL] (mio. ha)
+f41_irrig(j) Available area equipped for irrigation according to Siebert [AVL] (mio. ha)
 /
 $ondelim
 $include "./modules/41_area_equipped_for_irrigation/input/avl_irrig.cs2"
@@ -23,7 +23,7 @@ $offdelim
 ;
 
 parameters
-f41_irrig_luh(t_ini41,j) Available area equipped for irrigation [AVL] (mio. ha)
+f41_irrig_luh(t_ini41,j) Available area equipped for irrigation according to LUH [AVL] (mio. ha)
 /
 $ondelim
 $include "./modules/41_area_equipped_for_irrigation/input/avl_irrig_luh_t.cs2"

@@ -5,6 +5,11 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @description
+*' The realization substitution_may21 excludes the calibration factors that are used in substitution_dec18 in order to reduce the substitution of oils by other oils.
+*'
+*' @authors Benjamin Leon Bodirsky, Florian Humpenöder, Edna Molina Bacca
+
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/20_processing/substitution_may21/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/20_processing/substitution_may21/declarations.gms"

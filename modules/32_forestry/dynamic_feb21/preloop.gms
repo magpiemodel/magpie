@@ -120,14 +120,14 @@ loop(t_all,
   );
 
 ** Afforestation policies NPI and NDCs
-p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
+p32_aff_pol(t,j) = round(f32_aff_pol(t,j,"%c32_aff_policy%"),6);
 
 * Calculate the remaining exogenous afforestation with respect to the maximum exogenous target over time.
 * `p32_aff_togo` is used to adjust `s32_max_aff_area` in the constraint `q32_max_aff`.
-p32_aff_togo(t) = sum(j, smax(t2, p32_aff_pol(t2,j)) - p32_aff_pol(t,j));
+p32_aff_togo(t) = smax(t2, sum(j, p32_aff_pol(t2,j))) - sum(j, p32_aff_pol(t,j));
 
 * Adjust the afforestation limit `s32_max_aff_area` upwards, if it is below the exogenous policy target.
-s32_max_aff_area = max(s32_max_aff_area, sum(j, smax(t2, p32_aff_pol(t2,j))) );
+s32_max_aff_area = max(s32_max_aff_area, smax(t2, sum(j, p32_aff_pol(t2,j))) );
 
 p32_cdr_ac(t,j,ac) = 0;
 
@@ -230,7 +230,7 @@ p32_plantation_contribution(t_ext,i)$(f32_gs_relativetarget(i)>0) = f32_plantati
 *******************************************************************************
 ** Calibrate plantations yields
 *******************************************************************************
-** Initialize with 0 cvalues
+** Initialize with 0 values
 p32_observed_gs_reg(i) = 0;
 ** Wherever FAO reports >0 growing stock, we calculate how much growing stock MAGPIE
 ** sees even before optimization starts
@@ -243,5 +243,19 @@ p32_gs_scaling_reg(i)$(f32_gs_relativetarget(i)>0) = f32_gs_relativetarget(i) / 
 ** Calibration factors lower than 1 are set to 1
 p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) < 1) = 1;
 
-** Update c-densitiy based on calibration factor for growing stocks
+** Save pm_carbon_density_ac_forestry in a parameter before upscaling to FAO growing stocks.
+** This allows to use plantation growth curves for CO2 price driven afforestation.
+p32_c_density_ac_fast_forestry(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc");
+
+** Update c-density for timber plantations based on calibration factor to match FAO growing stocks
 pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * sum(cell(i,j),p32_gs_scaling_reg(i));
+
+** set bii coefficients
+p32_bii_coeff(type32,bii_class_secd,potnatveg) = 0;
+if(s32_aff_bii_coeff = 0,
+ p32_bii_coeff("aff",bii_class_secd,potnatveg) = fm_bii_coeff(bii_class_secd,potnatveg)
+elseif s32_aff_bii_coeff = 1,
+ p32_bii_coeff("aff",bii_class_secd,potnatveg) = fm_bii_coeff("timber",potnatveg)
+);
+p32_bii_coeff("ndc",bii_class_secd,potnatveg) = fm_bii_coeff(bii_class_secd,potnatveg);
+p32_bii_coeff("plant",bii_class_secd,potnatveg) = fm_bii_coeff("timber",potnatveg);

@@ -5,9 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-scalars
- s39_cost_establish_crop   Cost for establishing new land use (USD05MER per hectare)    /8000/
- s39_cost_establish_past   Cost for establishing new land use (USD05MER per hectare)    /8000/
- s39_cost_establish_forestry   Cost for establishing new land use (USD05MER per hectare)    /1000/
- s39_cost_clearing    Clearing costs linked to removed biomass (USD05MER per ton C)  /0/
-;
+table f21_self_suff(t_all,i,kall) Regional self-sufficiency rates (1)
+$ondelim
+$include "./modules/21_trade/input/f21_trade_self_suff.cs3"
+$offdelim;

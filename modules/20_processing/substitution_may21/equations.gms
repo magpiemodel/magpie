@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @equations
-*' The series of equations below show the aggregation of secondary products from
+*' The series of equations below show the aggregation of secondary products
 *' from non-cereals (through alcohol fermentation, single cell protein breeding,
 *' oil extracting, sugar refining or ethanol distilling processes),
 *' cereals (through milling process), and cotton (through ginning process).

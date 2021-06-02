@@ -11,11 +11,14 @@ $setglobal c30_bioen_type  all
 $setglobal c30_bioen_water  rainfed
 * options: rainfed, irrigated, all
 
-$setglobal c30_marginal_land  q33_marginal
+$setglobal c30_marginal_land  all_marginal
 * options: all_marginal, q33_marginal, no_marginal
 
 $setglobal c30_set_aside_target  none
 * options: none, by2030, by2020
+
+$setglobal c30_rotation_constraints  on
+*options: on, off
 
 ********* CROPAREA INITIALISATION **********************************************
 
@@ -26,7 +29,6 @@ $offdelim
 ;
 m_fillmissingyears(fm_croparea,"j,w,kcr");
 
-
 ********* CROP-ROTATIONAL CONSTRAINT *******************************************
 
 parameter f30_rotation_max_shr(crp30) Maximum allowed area shares for each crop type (1)
@@ -35,6 +37,8 @@ $ondelim
 $include "./modules/30_crop/endo_apr21/input/f30_rotation_max.csv"
 $offdelim
 /;
+$if "%c30_rotation_constraints%" == "off" f30_rotation_max_shr(crp30) = 1;
+
 
 parameter f30_rotation_min_shr(crp30) Minimum allowed area shares for each crop type (1)
 /
@@ -42,6 +46,7 @@ $ondelim
 $include "./modules/30_crop/endo_apr21/input/f30_rotation_min.csv"
 $offdelim
 /;
+$if "%c30_rotation_constraints%" == "off" f30_rotation_min_shr(crp30) = 0;
 
 
 ********* AVAILABLE CROPLAND *******************************************

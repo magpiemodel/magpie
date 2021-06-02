@@ -11,11 +11,11 @@
 
 .update_sets_core <- function(cpr,map) {
   require(gms)
-  
+
   if (!("region" %in% names(map)))      map$region <- map$RegionCode
   if (!("country" %in% names(map)))     map$country <- map$CountryCode
   if (!("superregion" %in% names(map))) map$superregion <- map$region
-  
+
   reg1 <- unique(as.character(map$region))
   reg2 <- names(cpr)
   if(!all(union(reg1,reg2) %in% intersect(reg1,reg2))) {
@@ -30,16 +30,16 @@
     if (cpr[i] == 1) {
       cells <- c(cells, paste0(names(cpr)[i], "_", j + 1))
     } else {
-      cells <- c(cells, paste0(names(cpr)[i], "_", j + 1, "*", 
+      cells <- c(cells, paste0(names(cpr)[i], "_", j + 1, "*",
                                names(cpr)[i], "_", j + cpr[i]))
     }
     j <- j + cpr[i]
   }
   ij <- data.frame(i = names(cpr), j = cells)
-  
+
   hi <- unique(map[c("superregion", "region")])
   hi <- hi[order(hi$superregion),]
-  
+
   sets <- list(list(name = "h",
                     desc = "all superregional economic regions",
                     items = sort(unique(as.character(map$superregion)))),
@@ -61,7 +61,7 @@
                list(name = "i_to_iso(i,iso)",
                     desc = "mapping regions to iso countries",
                     items = map[c("region","country")][order(map$region),]))
-  
+
   gms::writeSets(sets, "core/sets.gms")
 }
 
@@ -91,7 +91,7 @@
   sets <- list(list(name = "scen2nd60",
                     desc = "second generation bioenergy scenarios",
                     items = scen2nd60))
-  
+
   gms::writeSets(sets , "modules/60_bioenergy/1stgen_priced_dec18/sets.gms")
 }
 
@@ -398,7 +398,8 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
                      calib_file = calib_file,
                      data_workspace = cfg$val_workspace,
                      logoption = 3,
-                     debug = cfg$debug)
+                     debug = cfg$debug,
+                     best_calib = cfg$best_calib)
     file.copy("calibration_results.pdf", cfg$results_folder, overwrite=TRUE)
     cat("Calibration factor calculated!\n")
   }

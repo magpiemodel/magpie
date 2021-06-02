@@ -24,8 +24,9 @@ source("scripts/start_functions.R")
 # Source default cfg. This loads the object "cfg" in R environment
 source("config/default.cfg")
 
-# choose a meaningful Pull Request (PR) flag
-pr_flag <- "PR_MACC"
+# choose a meaningful Pull Request (PR) flag. 
+# example for high risk modification requiring runs from the current develop and the feature branch to be merged: PR276_develop, PR276_TAUhistfree
+pr_flag <- "PRXXX"
 
 # Grab user name
 user <- Sys.info()[["user"]]
@@ -34,29 +35,25 @@ cfg$results_folder <- "output/:title:"
 
 ## Create a set of runs based on default.cfg
 
-for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test should be for SSP2
-  for(macc in c("PBL_2007","PBL_2019")) {
-    for (co2_price_path in c("BAU","POL")) {
-
-      cfg$gms$c57_macc_version <- macc
-
-      if (co2_price_path == "BAU") {
+for(ssp in c("SSP1","SSP2")) { ## Add SSP* here for testing other SSPs. Basic test should be for at least two SSPs to check if results until 2020 are identical
+    for (climpol in c("Ref","1p5deg")) {
+      if (climpol == "Ref") {
         cfg <- setScenario(cfg,c(ssp,"NPI"))
         cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi" #update to most recent coupled runs asap
         cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
-
-      } else if (co2_price_path == "POL"){
+        
+      } else if (climpol == "1p5deg"){
         cfg <- setScenario(cfg,c(ssp,"NDC"))
-        cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE" #update to most recent coupled runs asap
-        cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE" ##update to most recent coupled runs asap
+        cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600" #update to most recent coupled runs asap
+        cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600" ##update to most recent coupled runs asap
       }
-
-      cfg$title <- paste0(pr_flag,"_",user,"_",ssp,"-",co2_price_path,"_",macc) #Create easily distinguishable run title
-
+      
+#      cfg$title <- paste0(pr_flag,"_",user,"_",ssp,"-",climpol) #Create easily distinguishable run title
+      cfg$title <- paste0(pr_flag,"_",ssp,"-",climpol) #Create easily distinguishable run title
+      
       cfg$output <- c("rds_report") # Only run rds_report after model run
-
+      
       start_run(cfg,codeCheck=TRUE) # Start MAgPIE run
       #cat(cfg$title)
     }
-  }
 }

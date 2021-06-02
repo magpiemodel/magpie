@@ -8,7 +8,7 @@
 
 pc13_land(i) = sum(cell(i,j),pcm_land(j,"crop"));
 
-if (sum(sameas(t_past,t),1) = 1,
+if (sum(sameas(t_past,t),1) = 1 AND s13_ignore_tau_historical = 0,
 	vm_tau.lo(h) =    f13_tau_historical(t,h);
 else
 	vm_tau.lo(h) =    pcm_tau(h);

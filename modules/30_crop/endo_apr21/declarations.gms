@@ -6,7 +6,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- pm_croparea_start(j,kcr)        Agricultural land initialization area (mio. ha)
  p30_avl_cropland(j)             Total available land for crop cultivation (mio. ha)
 ;
 
