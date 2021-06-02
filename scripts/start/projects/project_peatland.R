@@ -18,7 +18,6 @@ library(magpie4)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
-source("scripts/start/extra/lpjml_addon.R")
 
 getInput <- function(gdx,ghg_price=TRUE,biodem=TRUE) {
   if(ghg_price) {
@@ -34,6 +33,7 @@ getInput <- function(gdx,ghg_price=TRUE,biodem=TRUE) {
 
 #start MAgPIE run
 source("config/default.cfg")
+
 cfg$results_folder <- "output/:title:"
 
 cfg$gms$peatland  <- "on"
@@ -50,6 +50,17 @@ cfg$output <- c("rds_report")
 
 prefix <- "PT36"
 
+cfg$title <- paste(prefix,"SSP2","REF","PeatOnDefault",sep="_")
+cfg <- setScenario(cfg,c("SSP2","NPI","ForestryEndo"))
+cfg$gms$peatland  <- "on"
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
+cfg$gms$s56_peatland_policy <- 0
+cfg$gms$s58_cost_rewet_onetime <- 0
+start_run(cfg,codeCheck=FALSE)
+
+
+source("scripts/start/extra/lpjml_addon.R")
 cfg$title <- paste(prefix,"SSP2","REF","PeatOn2000",sep="_")
 cfg <- setScenario(cfg,c("SSP2","NPI","ForestryEndo"))
 cfg$gms$peatland  <- "on"
@@ -59,6 +70,7 @@ cfg$gms$s56_peatland_policy <- 0
 cfg$gms$s58_cost_rewet_onetime <- 0
 cfg$gms$sm_fix_SSP2 <- 1995
 start_run(cfg,codeCheck=FALSE)
+cfg$gms$sm_fix_SSP2 <- 2020
 
 #SSP2 REF
 
@@ -143,6 +155,25 @@ start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- paste(prefix,"SDP","1p5deg","PeatOff",sep="_")
 cfg <- setScenario(cfg,c("SDP","NDC","ForestryEndo"))
+cfg$gms$peatland  <- "off"
+cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"
+cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"
+cfg$gms$s56_peatland_policy <- 0
+cfg$gms$s58_cost_rewet_onetime <- 0
+start_run(cfg,codeCheck=FALSE)
+
+### SSP3
+cfg$title <- paste(prefix,"SSP3","1p5deg","PeatOn",sep="_")
+cfg <- setScenario(cfg,c("SSP3","NDC","ForestryEndo"))
+cfg$gms$peatland  <- "on"
+cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"
+cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"
+cfg$gms$s56_peatland_policy <- 1
+cfg$gms$s58_cost_rewet_onetime <- 0
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- paste(prefix,"SSP3","1p5deg","PeatOff",sep="_")
+cfg <- setScenario(cfg,c("SSP3","NDC","ForestryEndo"))
 cfg$gms$peatland  <- "off"
 cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"
 cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"
