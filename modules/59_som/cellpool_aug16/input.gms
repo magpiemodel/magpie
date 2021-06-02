@@ -45,7 +45,7 @@ $if "%c59_irrigation_scenario%" == "off" f59_cratio_irrigation(climate59,w,kcr) 
 * $offdelim
 * ;
 
-$setglobal c59_som_scenario  nocc
+$setglobal c59_som_scenario  cc
 *   options:  cc        (climate change)
 *             nocc      (no climate change)
 *             nocc_hist (no climate change after year defined by sm_fix_cc)
@@ -53,7 +53,7 @@ $setglobal c59_som_scenario  nocc
 parameters f59_topsoilc_density(t_all,j) LPJ topsoil carbon density for natural vegetation (tC per ha)
 /
 $ondelim
-$include "./modules/59_som/input/lpj_carbon_topsoil.cs2"
+$include "./modules/59_som/input/lpj_carbon_topsoil.cs2b"
 $offdelim
 /
 ;

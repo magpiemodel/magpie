@@ -9,7 +9,7 @@ $setglobal c59_static_spatial_level  cellular
 *   options:   cellular  (use preprocessed cellular stock change factors)
 *              cluster   (use cshare_released on cluster within gams)
 
-$setglobal c59_som_scenario  nocc
+$setglobal c59_som_scenario  cc
 *   options:  cc        (climate change)
 *             nocc      (no climate change)
 *             nocc_hist (no climate change after year defined by sm_fix_cc)
@@ -17,7 +17,7 @@ $setglobal c59_som_scenario  nocc
 parameters f59_topsoilc_density(t_all,j) LPJ topsoil carbon density for natural vegetation (tC per ha)
 /
 $ondelim
-$include "./modules/59_som/input/lpj_carbon_topsoil.cs2"
+$include "./modules/59_som/input/lpj_carbon_topsoil.cs2b"
 $offdelim
 /
 ;
@@ -28,7 +28,7 @@ m_fillmissingyears(f59_topsoilc_density,"j");
 parameters f59_cshare_released(j) Share of soil carbon that is released on cropland compared to natural vegetation after 20 years (1)
 /
 $ondelim
-$include "./modules/59_som/static_jan19/input/cshare_released.cs2"
+$include "./modules/59_som/static_jan19/input/cshare_released.cs2b"
 $offdelim
 /
 ;
