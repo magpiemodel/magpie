@@ -35,16 +35,9 @@ getInput <- function(gdx,ghg_price=TRUE,biodem=TRUE) {
 source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
-
-cfg$gms$peatland  <- "on"
 cfg$gms$s58_rewetting_switch  <- Inf
 cfg$gms$s80_optfile <- 1
 cfg$gms$s80_maxiter <- 30
-# cfg$gms$s56_peatland_policy <- 0
-# cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-NPi"
-# cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-NPi"
-# cfg <- setScenario(cfg,c("SDP","NPI","ForestryEndo"))
-
 cfg$output <- c("rds_report")
 #download_and_update(cfg)
 
@@ -59,8 +52,25 @@ cfg$gms$s56_peatland_policy <- 0
 cfg$gms$s58_cost_rewet_onetime <- 0
 start_run(cfg,codeCheck=FALSE)
 
+cfg$title <- paste(prefix,"SSP2","1p5deg","PeatOnDefault",sep="_")
+cfg <- setScenario(cfg,c("SSP2","NDC","ForestryEndo"))
+cfg$gms$peatland  <- "on"
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
+cfg$gms$s56_peatland_policy <- 1
+cfg$gms$s58_cost_rewet_onetime <- 0
+start_run(cfg,codeCheck=FALSE)
+
 
 source("scripts/start/extra/lpjml_addon.R")
+
+cfg$results_folder <- "output/:title:"
+cfg$gms$s58_rewetting_switch  <- Inf
+cfg$gms$s80_optfile <- 1
+cfg$gms$s80_maxiter <- 30
+cfg$output <- c("rds_report")
+#download_and_update(cfg)
+
 cfg$title <- paste(prefix,"SSP2","REF","PeatOn2000",sep="_")
 cfg <- setScenario(cfg,c("SSP2","NPI","ForestryEndo"))
 cfg$gms$peatland  <- "on"
