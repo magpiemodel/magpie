@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 p13_tech_cost_past(t2,i) = p13_tech_cost_past(t2,i) + p13_tech_cost_annuity(i);
-pc13_tau(i) = vm_tau.l(i);
+pcm_tau(i) = vm_tau.l(i);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_tau(t,i,"marginal")       = vm_tau.m(i);

@@ -18,7 +18,7 @@ equations
 
 parameters
  pc13_land(i)                Crop land area per region (mio ha)
- pc13_tau(i)                 Tau factor of the previous time step (1)
+ pcm_tau(i)                  Tau factor of the previous time step (1)
  pc13_tcguess(i)             Guess for annual tc rates in the next time step (1)
  i13_tc_factor(t,i)          Regression factor (USD05PPP per ha)
  i13_tc_exponent(t,i)        Regression exponent (1)

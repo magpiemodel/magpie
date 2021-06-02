@@ -230,7 +230,7 @@ p32_plantation_contribution(t_ext,i)$(f32_gs_relativetarget(i)>0) = f32_plantati
 *******************************************************************************
 ** Calibrate plantations yields
 *******************************************************************************
-** Initialize with 0 cvalues
+** Initialize with 0 values
 p32_observed_gs_reg(i) = 0;
 ** Wherever FAO reports >0 growing stock, we calculate how much growing stock MAGPIE
 ** sees even before optimization starts
