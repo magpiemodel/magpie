@@ -13,7 +13,7 @@ parameters
 ;
 
 positive variables
- vm_cost_trade(h)                            Regional  trade costs (mio. USD05MER per yr)
+ vm_cost_trade(i)                            Regional  trade costs (mio. USD05MER per yr)
 ;
 
 equations

@@ -9,11 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
-- **13_tc_** added switch to ignore historic tau patterns in historic time steps (new default)
+- **13_tc** added switch to ignore historic tau patterns in historic time steps (new default)
 - **16_demand** Moved most of cropping related set definitions (k, kve, kcr) from **16_demand** to **14_yield**
 - **38_factor_costs** Realization `sticky_feb18` extended to differentiate capital requirements between regions and their specific development status (GDP) in each time step of the magpie run. The changes in the `sticky` realization also include an additional switch so it can be operated as `dynamic` (change of each region capital share at each time step) or `free` (capital shares equal to zero and equivalent to the `fixed_per_ton_mar18` realization).
 - **39_landconversion** lower costs for expansion of forestry land
+- **80_optimization** **nlp_par** parallelizes now on superregional level `h` instead of regional level `i` as before.
 - **script** New standard for cluster to region mapping (rds-files) is used in all scripts. If old spam files are provided by input data, rds-mapping file is created.
+- **start scripts** improved function for GAMS set creation from R and outsourced it to package `gms`
 - **inputs** Changed file format from cs2 to cs2b for cellular input files with a single data column
 
 ### added
@@ -26,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **41_area_equipped_for_irrigation** Added switch for using different input data including new LUH2v2 consistent initialisation pattern.
 - **calibration run** has two new features: 1. Upper bound to cropland factor can be added (`crop_calib_max`). 2. Best calibration factor (factor with the lowest divergence) can be picked individually for each regions based on all calibration factors calculated during the calibration run iteration (`best_calib`).
 - **disaggregation** Added new disaggregation script that is in line with new crop realisation and can account for cropland availabilty on grid level during disaggregation (see `interpolateAvlCroplandWeighted()` in package `luscale` for further details).
+- **sets** added superregional layer `h` as additional spatial layer and moved constraints in **13_tc** and **21_trade** partly to the superregional level.
 
 ### removed
 - **13_tc** Removed disfuctional setting c13_tccost = "mixed"
