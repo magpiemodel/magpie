@@ -23,7 +23,7 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_trade(t,h,type)          Regional  trade costs (mio. USD05MER per yr)
+ ov_cost_trade(t,i,type)          Regional  trade costs (mio. USD05MER per yr)
  oq21_trade_glo(t,k_trade,type)   Global production constraint (mio. tDM per yr)
  oq21_notrade(t,h,k_notrade,type) Regional production constraint of non-tradable commodities (mio. tDM per yr)
 ;
