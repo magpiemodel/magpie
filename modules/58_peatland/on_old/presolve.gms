@@ -8,7 +8,7 @@
 p58_peatland_area(j) = sum((man58,land58), pc58_peatland_man(j,man58,land58)) + pc58_peatland_intact(j);
 p58_land_area(j) = sum(land, pcm_land(j,land));
 
-if(m_year(t) < 2015,
+if(m_year(t) < sm_fix_SSP2,
 	v58_peatland_man.fx(j,man58,land58) = 0;
 	v58_peatland_intact.fx(j) = 0;
 	v58_lu_transitions.fx(j,from58,to58)$(not sameas(from58,to58)) = 0;

@@ -10,3 +10,4 @@ vm_land, input, not used
 pcm_land, input, not used
 pm_interest, input, not used
 pm_climate_class, input, not used
+sm_fix_SSP2, input, not used
