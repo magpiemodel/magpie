@@ -36,8 +36,8 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 cfg$gms$s58_rewetting_switch  <- Inf
-cfg$gms$s80_optfile <- 1
-cfg$gms$s80_maxiter <- 30
+#cfg$gms$s80_optfile <- 1
+#cfg$gms$s80_maxiter <- 30
 cfg$output <- c("rds_report")
 #download_and_update(cfg)
 
@@ -64,8 +64,8 @@ source("scripts/start/extra/lpjml_addon.R")
 
 cfg$results_folder <- "output/:title:"
 cfg$gms$s58_rewetting_switch  <- Inf
-cfg$gms$s80_optfile <- 1
-cfg$gms$s80_maxiter <- 30
+#cfg$gms$s80_optfile <- 1
+#cfg$gms$s80_maxiter <- 30
 cfg$output <- c("rds_report")
 #download_and_update(cfg)
 
