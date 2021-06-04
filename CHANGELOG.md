@@ -23,7 +23,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **20_processing** Added new almost identical realization that excludes a calibration of the oil crop demand for oils (Note: old realization can be removed, when old yield realizations are deleted).
 - **30_crop** Added new realization `endo_apr21`. The realisation includes new input data for available cropland and a new switch `c30_marginal_land`, which provides different options for including marginal land as cropland. Furthermore, a given share of the available cropland can be set aside for the provisioning of natures contribution to people and to promote biodiversity. The new switches `s30_set_aside_shr` and `c30_set_aside_target` are included to specify the share that should be set aside and the target year.
 - **30_crop** Added new interface parameter historic croparea (`fm_croparea`)
+- **30_crop** Added new option `policy_countries30` for country specific set aside share
 - **35_natveg** Added new option `"FF+BH"` for protected areas.
+- **35_natveg** Added new option `policy_countries35` for country specific land protection
 - **38_factor_costs** Added scaling factors for improving model run time
 - **41_area_equipped_for_irrigation** Added switch for using different input data including new LUH2v2 consistent initialisation pattern.
 - **58_peatland** Added option for one-time and recurring costs of peatland degradation (USD05MER per ha)
