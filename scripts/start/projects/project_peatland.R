@@ -129,6 +129,7 @@ cfg$gms$s56_peatland_policy <- 0
 start_run(cfg,codeCheck=FALSE)
 
 
+
 #SSP2 POL
 cfg$title <- paste(prefix,"SSP2","1p5deg","PeatPolOn",sep="_")
 cfg <- setScenario(cfg,c("SSP2","NDC","ForestryEndo"))
@@ -137,6 +138,22 @@ cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"
 cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"
 cfg$gms$s56_peatland_policy <- 1
 start_run(cfg,codeCheck=FALSE)
+
+#SSP2 POL
+cfg$title <- paste(prefix,"SSP2","1p5deg","PeatPolOn_ProtSetAside",sep="_")
+cfg <- setScenario(cfg,c("SSP2","NDC","ForestryEndo"))
+cfg$gms$s30_set_aside_shr <- 0.2
+cfg$gms$c30_set_aside_target <- "by2030"
+cfg$gms$c35_protect_scenario <- "FF+BH"
+cfg$gms$peatland  <- "on"
+cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"
+cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"
+cfg$gms$s56_peatland_policy <- 1
+start_run(cfg,codeCheck=FALSE)
+
+cfg$gms$s30_set_aside_shr <- 0
+cfg$gms$c30_set_aside_target <- "none"
+cfg$gms$c35_protect_scenario <- "WDPA"
 
 cfg$title <- paste(prefix,"SSP2","1p5deg","PeatPolOff",sep="_")
 cfg <- setScenario(cfg,c("SSP2","NDC","ForestryEndo"))
