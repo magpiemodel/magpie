@@ -43,15 +43,15 @@ cfg$output <- c("rds_report")
 
 prefix <- "PT39"
 
-cfg$title <- paste(prefix,"SSP2","REF","PeatOff",sep="_")
-cfg <- setScenario(cfg,c("SSP2","NPI","ForestryEndo"))
-cfg$gms$peatland  <- "off"
-cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
-cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
-cfg$gms$s56_peatland_policy <- 0
-start_run(cfg,codeCheck=FALSE)
+# cfg$title <- paste(prefix,"SSP2","REF","PeatOff",sep="_")
+# cfg <- setScenario(cfg,c("SSP2","NPI","ForestryEndo"))
+# cfg$gms$peatland  <- "off"
+# cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
+# cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
+# cfg$gms$s56_peatland_policy <- 0
+# start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"SSP2","REF","PeatOn",sep="_")
+cfg$title <- paste(prefix,"SSP2","REF","PeatOn2",sep="_")
 cfg <- setScenario(cfg,c("SSP2","NPI","ForestryEndo"))
 cfg$gms$peatland  <- "on"
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
@@ -68,7 +68,7 @@ cfg$gms$peatland  <- "on"
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
 cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
 cfg$gms$s56_peatland_policy <- 0
-start_run(cfg,codeCheck=FALSE)
+#start_run(cfg,codeCheck=FALSE)
 
 # cfg$title <- paste(prefix,"SSP2","1p5deg","PeatOn",sep="_")
 # cfg <- setScenario(cfg,c("SSP2","NDC","ForestryEndo"))
