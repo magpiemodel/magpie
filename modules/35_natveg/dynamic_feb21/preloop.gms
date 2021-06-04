@@ -43,7 +43,7 @@ p35_protect_shr(t,j,"CPD",land_natveg) = p35_protect_shr_ini(j,"WDPA") * (1-f35_
 p35_protect_shr(t,j,"LW",land_natveg) = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + p35_protect_shr_ini(j,"LW"))*f35_protection_fader(t,"%c35_protect_fadein%");
 
 p35_protect_shr(t,j,"FF+BH","primforest") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + 1*f35_protection_fader(t,"%c35_protect_fadein%");
-p35_protect_shr(t,j,"FF+BH","secdforest") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + p35_protect_shr_ini(j,"BH"))*f35_protection_fader(t,"%c35_protect_fadein%");
+p35_protect_shr(t,j,"FF+BH","secdforest") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + max(p35_protect_shr_ini(j,"FF"),p35_protect_shr_ini(j,"BH")))*f35_protection_fader(t,"%c35_protect_fadein%");
 p35_protect_shr(t,j,"FF+BH","other") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + p35_protect_shr_ini(j,"BH"))*f35_protection_fader(t,"%c35_protect_fadein%");
 
 * Correction of Half Earth protection share
