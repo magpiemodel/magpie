@@ -57,10 +57,10 @@ cfg$gms$peatland  <- "on"
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
 cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
 cfg$gms$s56_peatland_policy <- 0
-start_run(cfg,codeCheck=FALSE)
+#start_run(cfg,codeCheck=FALSE)
 
-cfg$gms$s80_optfile <- 1
-cfg$gms$s80_maxiter <- 30
+# cfg$gms$s80_optfile <- 1
+# cfg$gms$s80_maxiter <- 30
 
 cfg$title <- paste(prefix,"SSP2","REF","PeatOnOpt",sep="_")
 cfg <- setScenario(cfg,c("SSP2","NPI","ForestryEndo"))
@@ -70,13 +70,13 @@ cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi"
 cfg$gms$s56_peatland_policy <- 0
 #start_run(cfg,codeCheck=FALSE)
 
-# cfg$title <- paste(prefix,"SSP2","1p5deg","PeatOn",sep="_")
-# cfg <- setScenario(cfg,c("SSP2","NDC","ForestryEndo"))
-# cfg$gms$peatland  <- "on"
-# cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
-# cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
-# cfg$gms$s56_peatland_policy <- 1
-# start_run(cfg,codeCheck=FALSE)
+cfg$title <- paste(prefix,"SSP2","1p5deg","PeatOn",sep="_")
+cfg <- setScenario(cfg,c("SSP2","NDC","ForestryEndo"))
+cfg$gms$peatland  <- "on"
+cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
+cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-Budg600"
+cfg$gms$s56_peatland_policy <- 1
+start_run(cfg,codeCheck=FALSE)
 # 
 # 
 # source("scripts/start/extra/lpjml_addon.R")
