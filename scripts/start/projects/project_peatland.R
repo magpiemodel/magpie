@@ -51,7 +51,7 @@ prefix <- "PT39"
 # cfg$gms$s56_peatland_policy <- 0
 # start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"SSP2","REF","PeatOn2",sep="_")
+cfg$title <- paste(prefix,"SSP2","REF","PeatOn3",sep="_")
 cfg <- setScenario(cfg,c("SSP2","NPI","ForestryEndo"))
 cfg$gms$peatland  <- "on"
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"

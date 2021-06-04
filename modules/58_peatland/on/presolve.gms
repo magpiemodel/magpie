@@ -9,11 +9,7 @@
 	v58_peatland_man.lo(j,man58,land58) = 0;
 	v58_peatland_man.up(j,"degrad",land58) = Inf;
 	v58_peatland_man.up(j,"unused",land58) = Inf;
-	v58_peatland_man.up(j,"rewet",land58) = s58_rewetting_switch;
 	v58_peatland_man.l(j,man58,land58) = pc58_peatland_man(j,man58,land58);
-	v58_peatland_intact.lo(j) = 0;
-	v58_peatland_intact.up(j) = pc58_peatland_intact(j);
-	v58_peatland_intact.l(j) = pc58_peatland_intact(j);
 
 *define allowed transitions within peatland area	
 	v58_lu_transitions.fx(j,from58,to58)$(not sameas(from58,to58)) = 0;
@@ -37,11 +33,17 @@
 	v58_lu_transitions.up(j,"rewet_forestry","degrad_forestry") = Inf;
 
 if (m_year(t) <= sm_fix_SSP2,
+	v58_peatland_man.fx(j,"rewet",land58) = 0;
+	v58_peatland_intact.fx(j) = pc58_peatland_intact(j);
 	i58_cost_rewet_recur(t) = 0;
 	i58_cost_rewet_onetime(t) = 0;
 	i58_cost_degrad_recur(t) = 0;
 	i58_cost_degrad_onetime(t) = 0;
 else
+	v58_peatland_man.up(j,"rewet",land58) = s58_rewetting_switch;
+	v58_peatland_intact.lo(j) = 0;
+	v58_peatland_intact.up(j) = pc58_peatland_intact(j);
+	v58_peatland_intact.l(j) = pc58_peatland_intact(j);
 	i58_cost_rewet_recur(t) = s58_cost_rewet_recur;
 	i58_cost_rewet_onetime(t) = s58_cost_rewet_onetime;
 	i58_cost_degrad_recur(t) = s58_cost_degrad_recur;
