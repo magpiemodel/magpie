@@ -27,5 +27,9 @@ crpmin30(crp30) = yes$(f30_rotation_min_shr(crp30) > 0);
 
 *' @code
 *' Set aside cropland policy is fading in after 2020
-p30_avl_cropland(j) = (f30_avl_cropland(j,"%c30_marginal_land%")) * (1 - f30_set_aside_fader(t,"%c30_set_aside_target%")*s30_set_aside_shr);
+p30_set_aside_shr(t,j) = ;
+p30_avl_cropland(j) = f30_avl_cropland(j,"%c30_marginal_land%") * 
+	(1 - f30_set_aside_fader(t,"%c30_set_aside_target%") * 
+	(s30_set_aside_shr * sum(cell(i,j), p30_region_setaside_shr(t,i)) 
+	+ s30_set_aside_shr_noselect * sum(cell(i,j), 1-p30_region_setaside_shr(t,i)))); 
 *' @stop

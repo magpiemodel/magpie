@@ -6,7 +6,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- p30_avl_cropland(j)             Total available land for crop cultivation (mio. ha)
+ p30_avl_cropland(j)             	Total available land for crop cultivation (mio. ha)
+ p30_region_setaside_shr(t_all,i)	Set-aside share of the region (1)
+ p30_country_dummy(iso)		        Dummy parameter indicating whether country is affected by selected set-aside policy (1)
 ;
 
 positive variables

@@ -40,6 +40,7 @@ if (m_year(t) <= sm_fix_SSP2,
 	i58_cost_degrad_recur(t) = 0;
 	i58_cost_degrad_onetime(t) = 0;
 else
+	v58_peatland_man.lo(j,"rewet",land58) = 0;
 	v58_peatland_man.up(j,"rewet",land58) = s58_rewetting_switch;
 	v58_peatland_intact.lo(j) = 0;
 	v58_peatland_intact.up(j) = pc58_peatland_intact(j);

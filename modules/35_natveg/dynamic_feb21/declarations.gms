@@ -10,13 +10,15 @@ scalars
 ;
 
 parameters
- i35_secdforest(j,ac)							              Inital secdforest (mio. ha)
- i35_other(j,ac)								                Inital other land (mio. ha)
+ i35_secdforest(j,ac)							  Inital secdforest (mio. ha)
+ i35_other(j,ac)								  Inital other land (mio. ha)
  p35_secdforest(t,j,ac)  	                      Secdforest per age class (mio. ha)
  p35_other(t,j,ac)   	  	                      Other land per age class (mio. ha)
- pc35_secdforest(j,ac)    	                    Secdforest per age class in current time step (mio. ha)
+ pc35_secdforest(j,ac)    	                      Secdforest per age class in current time step (mio. ha)
  pc35_other(j,ac)   	  	                      Other land per age class in current time step (mio. ha)
- p35_protect_shr(t,j,prot_type)                 Protection share for primforest, secdforest and other land (1)
+ p35_protect_shr_ini(j,prot_type_all)   		  Land protection share for primforest, secdforest and other land (1)
+ p35_protect_shr(t,j,prot_type_all,land_natveg)   Land protection share for primforest, secdforest and other land (1)
+ p35_save_natveg(t,j,land_natveg)				  Land protection for primforest, secdforest and other land (mio. ha)
  p35_forest_protect_shr(t,j)          Protection share for primforest and secdforest only
  p35_save_primforest(t,j) 		                  Primforest protection (mio. ha)
  p35_save_secdforest(t,j)		                    Secdforest protection (mio. ha)
@@ -36,6 +38,8 @@ parameters
  p35_land_start_ac(j,ac,land_natveg)             Initial Natural vegetation area (mio. ha)
  p35_observed_gs_reg(i)                          Observed growing stock in natural forests before calibration (m3 per ha)
  p35_gs_scaling_reg(i)                           Regional calibration factors for natural vegetation yields (1)
+ p35_region_prot_shr(t_all,i)	                 Land protection share of the region (1)
+ p35_country_dummy(iso)		                     Dummy parameter indicating whether country is affected by selected land protection policy (1)
 ;
 
 equations
