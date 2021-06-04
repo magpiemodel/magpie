@@ -41,7 +41,7 @@ cfg$gms$s80_maxiter <- 30
 cfg$output <- c("rds_report")
 #download_and_update(cfg)
 
-prefix <- "PT37"
+prefix <- "PT38"
 
 cfg$title <- paste(prefix,"SSP2","REF","PeatPolOffDefault",sep="_")
 cfg <- setScenario(cfg,c("SSP2","NPI","ForestryEndo"))
