@@ -77,13 +77,13 @@
 
  q58_peatland_cost(j2) ..
 	vm_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2) 
-							+ sum(land58, v58_peatland_man(j2,"rewet",land58) * s58_cost_rewet_recur)
-							+ sum((degrad58,land58), v58_peatland_man(j2,degrad58,land58) * s58_cost_degrad_recur);
+							+ sum(land58, v58_peatland_man(j2,"rewet",land58) * sum(ct, i58_cost_rewet_recur(ct))
+							+ sum((degrad58,land58), v58_peatland_man(j2,degrad58,land58) * sum(ct, i58_cost_degrad_recur(ct));
 							
  q58_peatland_cost_annuity(j2) ..
 	v58_peatland_cost_annuity(j2) =e=
-    ((sum(stat_rewet58, v58_expansion(j2,stat_rewet58) + v58_reduction(j2,stat_rewet58)) * s58_cost_rewet_onetime)
-    + v58_reduction(j2,"intact") * s58_cost_degrad_onetime)
+    (sum(stat_rewet58, v58_expansion(j2,stat_rewet58)) * sum(ct, i58_cost_rewet_onetime(ct))
+    + (v58_reduction(j2,"intact") + sum(stat_rewet58, v58_reduction(j2,stat_rewet58))) * sum(ct, i58_cost_degrad_onetime(ct)))
 	* sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
 
 *' GHG emissions from managed peatlands (degraded and rewetted)

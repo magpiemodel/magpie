@@ -35,10 +35,17 @@
 if (m_year(t) <= sm_fix_SSP2,
 	v58_peatland_man.fx(j,"rewet",land58) = 0;
 	v58_peatland_intact.fx(j) = pc58_peatland_intact(j);
+	i58_cost_rewet_recur(t) = 0;
+	i58_cost_rewet_onetime(t) = 0;
+	i58_cost_degrad_recur(t) = 0;
+	i58_cost_degrad_onetime(t) = 0;
 else
 	v58_peatland_man.up(j,"rewet",land58) = s58_rewetting_switch;
 	v58_peatland_intact.lo(j) = 0;
 	v58_peatland_intact.up(j) = pc58_peatland_intact(j);
 	v58_peatland_intact.l(j) = pc58_peatland_intact(j);
-
+	i58_cost_rewet_recur(t) = s58_cost_rewet_recur;
+	i58_cost_rewet_onetime(t) = s58_cost_rewet_onetime;
+	i58_cost_degrad_recur(t) = s58_cost_degrad_recur;
+	i58_cost_degrad_onetime(t) = s58_cost_degrad_onetime;
 );

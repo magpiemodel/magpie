@@ -21,6 +21,10 @@ parameters
  pc58_peatland_intact(j)							Intact peatland (mio. ha)
  p58_mapping_cell_climate(j,clcl58)					Mapping between cells and climate regions (binary)
  p58_peatland_degrad_weight(j,land58)				Weight for peatland distribution to land58 (1)
+ i58_cost_rewet_recur(t)							Recurring costs for rewetted peatland (USD05MER per ha)
+ i58_cost_rewet_onetime(t) 							One-time costs for peatland restoration (USD05MER per ha)
+ i58_cost_degrad_recur(t)							Recurring costs for degraded peatland (USD05MER per ha)
+ i58_cost_degrad_onetime(t)							One-time costs for peatland degradation (USD05MER per ha)
 ;
 
 equations
