@@ -77,8 +77,8 @@
 
  q58_peatland_cost(j2) ..
 	vm_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2) 
-							+ sum(land58, v58_peatland_man(j2,"rewet",land58) * sum(ct, i58_cost_rewet_recur(ct))
-							+ sum((degrad58,land58), v58_peatland_man(j2,degrad58,land58) * sum(ct, i58_cost_degrad_recur(ct));
+							+ sum(land58, v58_peatland_man(j2,"rewet",land58)) * sum(ct, i58_cost_rewet_recur(ct))
+							+ sum((degrad58,land58), v58_peatland_man(j2,degrad58,land58)) * sum(ct, i58_cost_degrad_recur(ct));
 							
  q58_peatland_cost_annuity(j2) ..
 	v58_peatland_cost_annuity(j2) =e=
