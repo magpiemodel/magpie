@@ -8,7 +8,7 @@
 *' @description In this realization, peatlands do not exist. Therefore, 
 *' GHG emissions from degrading peatlands are assumed zero.
 
-*' @limitations GHG emissions from degrading peatlands are assumed zero
+*' @limitations Peatland area and associated GHG emissions are fixed to zero.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "declarations" $include "./modules/58_peatland/off/declarations.gms"

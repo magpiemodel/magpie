@@ -14,8 +14,8 @@
 
 
 *'
-*' @limitations Peatland area and GHG emissions are fixed at 2015 levels, depending on sm_fix_SSP2.
-*' Organic carbon stocks in peatlands are not accounted for. 
+*' @limitations Peatland area and GHG emissions are fixed to 2015 levels for the historic period, 
+*' depending on `sm_fix_SSP2`. Organic carbon stocks in peatlands are not accounted for. 
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/58_peatland/on/sets.gms"
