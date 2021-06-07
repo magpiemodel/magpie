@@ -33,7 +33,7 @@ cfg$results_folder <- "output/:title:"
 
 for(tc in c("endo_jun18","exo")) { 
     for (trade in c("exo","free_apr16","selfsuff_reduced","off")) {
-      cfg <- setScenario(cfg,c(ssp,"NPI"))
+      #cfg <- setScenario(cfg,c(ssp,"NPI"))
       cfg$gms$tc <- tc
       cfg$gms$trade <- trade
         

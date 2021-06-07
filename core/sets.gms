@@ -18,13 +18,12 @@ sets
     / CAZ, CHA, EUR, IND, JPN, LAM, MEA, NEU, OAS, REF, SSA, USA /
 
   i all economic regions
-    / CAZ, CHA, DEU, EUC, EUN, EUS, EUW, IND, JPN, LAM, MEA, NEU, OAS, REF,
-      SSA, USA /
+    / CAZ, CHA, EUR, IND, JPN, LAM, MEA, NEU, OAS, REF, SSA, USA /
 
   supreg(h,i) mapping of superregions to its regions
     / CAZ . (CAZ)
       CHA . (CHA)
-      EUR . (EUN, EUW, EUC, EUS, DEU)
+      EUR . (EUR)
       IND . (IND)
       JPN . (JPN)
       LAM . (LAM)
@@ -57,16 +56,12 @@ sets
 
   j number of LPJ cells
     / CAZ_1*CAZ_28,
-      CHA_29*CHA_51,
-      DEU_52,
-      EUC_53*EUC_55,
-      EUN_56*EUN_57,
-      EUS_58*EUS_64,
-      EUW_65*EUW_68,
-      IND_69*IND_75,
-      JPN_76*JPN_78,
-      LAM_79*LAM_127,
-      MEA_128*MEA_142,
+      CHA_29*CHA_52,
+      EUR_53*EUR_62,
+      IND_63*IND_69,
+      JPN_70*JPN_72,
+      LAM_73*LAM_125,
+      MEA_126*MEA_142,
       NEU_143*NEU_150,
       OAS_151*OAS_172,
       REF_173*REF_179,
@@ -75,16 +70,12 @@ sets
 
   cell(i,j) number of LPJ cells per region i
     / CAZ . (CAZ_1*CAZ_28)
-      CHA . (CHA_29*CHA_51)
-      DEU . (DEU_52)
-      EUC . (EUC_53*EUC_55)
-      EUN . (EUN_56*EUN_57)
-      EUS . (EUS_58*EUS_64)
-      EUW . (EUW_65*EUW_68)
-      IND . (IND_69*IND_75)
-      JPN . (JPN_76*JPN_78)
-      LAM . (LAM_79*LAM_127)
-      MEA . (MEA_128*MEA_142)
+      CHA . (CHA_29*CHA_52)
+      EUR . (EUR_53*EUR_62)
+      IND . (IND_63*IND_69)
+      JPN . (JPN_70*JPN_72)
+      LAM . (LAM_73*LAM_125)
+      MEA . (MEA_126*MEA_142)
       NEU . (NEU_143*NEU_150)
       OAS . (OAS_151*OAS_172)
       REF . (REF_173*REF_179)
@@ -94,11 +85,9 @@ sets
   i_to_iso(i,iso) mapping regions to iso countries
     / CAZ . (AUS, CAN, HMD, NZL, SPM)
       CHA . (CHN, HKG, MAC, TWN)
-      DEU . (DEU)
-      EUC . (BGR, CZE, EST, HRV, HUN, LTU, LVA, POL, ROU, SVK, SVN)
-      EUN . (ALA, DNK, FIN, FRO, GBR, GGY, GIB, IMN, IRL, JEY, SWE)
-      EUS . (CYP, ESP, GRC, ITA, MLT, PRT)
-      EUW . (AUT, BEL, FRA, LUX, NLD)
+      EUR . (ALA, AUT, BEL, BGR, CYP, CZE, DEU, DNK, ESP, EST, FIN, FRA, FRO)
+      EUR . (GBR, GGY, GIB, GRC, HRV, HUN, IMN, IRL, ITA, JEY, LTU, LUX, LVA)
+      EUR . (MLT, NLD, POL, PRT, ROU, SVK, SVN, SWE)
       IND . (IND)
       JPN . (JPN)
       LAM . (ABW, AIA, ARG, ATA, ATG, BES, BHS, BLM, BLZ, BMU, BOL, BRA, BRB)
