@@ -90,7 +90,7 @@ cfg$gms$c35_forest_damage_end <- "by2030"
 #1.5 degree policy
 cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"
 cfg$gms$c56_pollutant_prices_noselect <- "R2M41-SSP2-NPi"
-cfg$gms$policy_countries56  <- oecd_countries#oecd_countries #todo
+cfg$gms$policy_countries56  <- oecd_countries
 cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"
 #default food scenario
 cfg$gms$c15_food_scenario <- "SSP4"
@@ -102,7 +102,7 @@ cfg$gms$c15_EAT_scen <- "FLX"
 cfg$gms$c15_kcal_scen <- "healthy_BMI"
 cfg$gms$s15_exo_waste <- 1
 cfg$gms$s15_waste_scen <- 1.2
-cfg$gms$scen_countries15  <- oecd_countries #todo
+cfg$gms$scen_countries15  <- oecd_countries
 #AFF
 cfg$gms$s32_planing_horizon <- 50
 cfg$gms$s32_aff_plantation <- 1
@@ -110,6 +110,6 @@ cfg$gms$s32_max_aff_area <- Inf
 cfg$gms$c32_aff_mask <- "noboreal"
 #EFP
 cfg$gms$c42_env_flow_policy <- "on"
-cfg$gms$EFP_countries  <- oecd_countries #todo
+cfg$gms$EFP_countries  <- oecd_countries
 start_run(cfg,codeCheck=FALSE)
 
