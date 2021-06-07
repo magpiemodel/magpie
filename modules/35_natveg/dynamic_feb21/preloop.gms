@@ -32,19 +32,19 @@ p35_protect_shr(t,j,"Forest",land_natveg) = p35_protect_shr(t,j,"WDPA",land_natv
 p35_protect_shr(t,j,"Forest","primforest") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + 1*f35_protection_fader(t,"%c35_protect_fadein%");
 p35_protect_shr(t,j,"Forest","secdforest") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + 1*f35_protection_fader(t,"%c35_protect_fadein%");
 
-p35_protect_shr(t,j,"Forest+Other",land_natveg) = p35_protect_shr(t,j,"WDPA",land_natveg);
-p35_protect_shr(t,j,"Forest+Other","primforest") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + 1*f35_protection_fader(t,"%c35_protect_fadein%");
-p35_protect_shr(t,j,"Forest+Other","secdforest") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + 1*f35_protection_fader(t,"%c35_protect_fadein%");
-p35_protect_shr(t,j,"Forest+Other","other") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + 1*f35_protection_fader(t,"%c35_protect_fadein%");
+p35_protect_shr(t,j,"Forest_Other",land_natveg) = p35_protect_shr(t,j,"WDPA",land_natveg);
+p35_protect_shr(t,j,"Forest_Other","primforest") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + 1*f35_protection_fader(t,"%c35_protect_fadein%");
+p35_protect_shr(t,j,"Forest_Other","secdforest") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + 1*f35_protection_fader(t,"%c35_protect_fadein%");
+p35_protect_shr(t,j,"Forest_Other","other") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + 1*f35_protection_fader(t,"%c35_protect_fadein%");
 
 p35_protect_shr(t,j,"BH",land_natveg) = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + p35_protect_shr_ini(j,"BH"))*f35_protection_fader(t,"%c35_protect_fadein%");
 p35_protect_shr(t,j,"FF",land_natveg) = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + p35_protect_shr_ini(j,"FF"))*f35_protection_fader(t,"%c35_protect_fadein%");
 p35_protect_shr(t,j,"CPD",land_natveg) = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + p35_protect_shr_ini(j,"CPD"))*f35_protection_fader(t,"%c35_protect_fadein%");
 p35_protect_shr(t,j,"LW",land_natveg) = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + p35_protect_shr_ini(j,"LW"))*f35_protection_fader(t,"%c35_protect_fadein%");
 
-p35_protect_shr(t,j,"FF+BH","primforest") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + 1*f35_protection_fader(t,"%c35_protect_fadein%");
-p35_protect_shr(t,j,"FF+BH","secdforest") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + max(p35_protect_shr_ini(j,"FF"),p35_protect_shr_ini(j,"BH")))*f35_protection_fader(t,"%c35_protect_fadein%");
-p35_protect_shr(t,j,"FF+BH","other") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + p35_protect_shr_ini(j,"BH"))*f35_protection_fader(t,"%c35_protect_fadein%");
+p35_protect_shr(t,j,"FF_BH","primforest") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + 1*f35_protection_fader(t,"%c35_protect_fadein%");
+p35_protect_shr(t,j,"FF_BH","secdforest") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + max(p35_protect_shr_ini(j,"FF"),p35_protect_shr_ini(j,"BH")))*f35_protection_fader(t,"%c35_protect_fadein%");
+p35_protect_shr(t,j,"FF_BH","other") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + p35_protect_shr_ini(j,"BH"))*f35_protection_fader(t,"%c35_protect_fadein%");
 
 * Correction of Half Earth protection share
 * Note: Half Earth already contains WDPA protection

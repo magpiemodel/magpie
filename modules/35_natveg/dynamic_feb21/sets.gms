@@ -10,7 +10,7 @@ sets
   / none, npi, ndc /
 
   prot_type_all Conservation priority areas
-  / BH, CPD, FF, LW, WDPA, HalfEarth, FF+BH, Forest, Forest+Other, PrimForest, SecdForest /
+  / BH, CPD, FF, LW, WDPA, HalfEarth, FF_BH, Forest, Forest_Other, PrimForest, SecdForest /
 
   prot_type(prot_type_all) Conservation priority areas
   / BH, CPD, FF, LW, WDPA, HalfEarth /
