@@ -32,7 +32,7 @@
 	v58_lu_transitions.up(j,"rewet_past","degrad_past") = Inf;
 	v58_lu_transitions.up(j,"rewet_forestry","degrad_forestry") = Inf;
 
-if (m_year(t) <= sm_fix_SSP2,
+if (m_year(t) <= s58_fix_peatland,
 	v58_peatland_man.fx(j,"rewet",land58) = 0;
 	v58_peatland_intact.fx(j) = pc58_peatland_intact(j);
 	i58_cost_rewet_recur(t) = 0;

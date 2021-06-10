@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 * Update of degraded peatland based on current managed land in the last time steps of fixed peatland area.  
-if (m_year(t) = sm_fix_SSP2,
+if (m_year(t) = s58_fix_peatland,
 	pc58_peatland_man(j,"degrad",land58) = min(vm_land.l(j,land58)*p58_scaling_factor(j),f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58));
 	pc58_peatland_man(j,"unused",land58) = f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58) - pc58_peatland_man(j,"degrad",land58);
 else
