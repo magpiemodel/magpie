@@ -27,7 +27,7 @@ cfg$info$user <- Sys.info()[["user"]] # Grab user name
 cfg$output <- c("rds_report") # Only run rds_report after model run
 
 # support function to create standardized title
-.title <- function(..., cfg=cfg) return(paste(...,cfg$info$flag, sep="_"))
+.title <- function(...) return(paste(...,cfg$info$flag, sep="_"))
 
 # start a run with default settings
 cfg$title <- .title("default")
