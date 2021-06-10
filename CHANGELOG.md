@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **38_factor_costs** Realization `sticky_feb18` extended to differentiate capital requirements between regions and their specific development status (GDP) in each time step of the magpie run. The changes in the `sticky` realization also include an additional switch so it can be operated as `dynamic` (change of each region capital share at each time step) or `free` (capital shares equal to zero and equivalent to the `fixed_per_ton_mar18` realization).
 - **35_natveg** Calculation of land protection policies revised and moved from presolve.gms to preloop.gms
 - **39_landconversion** lower costs for expansion of forestry land
-- **58_peatland** Peatland area is initialized in 1995 based on levels for the year 2015, and hold fixed depending on `sm_fix_SSP2`. This provides a better proxy for peatland area and associated GHG emissions for the historic period, which where assumed zero in previous versions.
+- **58_peatland** Peatland area is initialized in 1995 based on levels for the year 2015, and hold fixed depending on `s58_fix_peatland`. This provides a better proxy for peatland area and associated GHG emissions for the historic period, which where assumed zero in previous versions.
 - **script** New standard for cluster to region mapping (rds-files) is used in all scripts. If old spam files are provided by input data, rds-mapping file is created.
 - **inputs** Changed file format from cs2 to cs2b for cellular input files with a single data column
 
