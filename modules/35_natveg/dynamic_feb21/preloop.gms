@@ -13,7 +13,8 @@ p35_country_dummy(policy_countries35) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by their population size.
-p35_region_prot_shr(t_all,i) = sum(i_to_iso(i,iso), p35_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
+i35_land_iso(iso) = sum(land, f35_land_iso("y1995",iso,land));
+p35_region_prot_shr(i) = sum(i_to_iso(i,iso), p35_country_dummy(iso) * i35_land_iso(iso)) / sum(i_to_iso(i,iso), i35_land_iso(iso));
 
 ** Land protection scenarios (WDPA and different conservation priority areas)
 p35_protect_shr_ini(j,prot_type_all) = 0;
@@ -58,8 +59,8 @@ p35_protect_shr(t,j,prot_type_all,land_natveg)$(p35_protect_shr(t,j,prot_type_al
 * calculate protected areas
 p35_save_natveg(t,j,land_natveg) = 
 	pm_land_start(j,land_natveg) * sum(cell(i,j), 
-	p35_protect_shr(t,j,"%c35_protect_scenario%",land_natveg) * p35_region_prot_shr(t,i)
-	+ p35_protect_shr(t,j,"%c35_protect_scenario_noselect%",land_natveg) * (1-p35_region_prot_shr(t,i)));
+	p35_protect_shr(t,j,"%c35_protect_scenario%",land_natveg) * p35_region_prot_shr(i)
+	+ p35_protect_shr(t,j,"%c35_protect_scenario_noselect%",land_natveg) * (1-p35_region_prot_shr(i)));
 
 
 i35_other(j,ac) = 0;

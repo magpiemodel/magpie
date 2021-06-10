@@ -92,6 +92,12 @@ $include "./modules/30_crop/endo_apr21/input/avl_cropland.cs3"
 $offdelim
 ;
 
+table f30_avl_cropland_iso(iso,marginal_land30) Available land area for cropland at ISO level (mio. ha)
+$ondelim
+$include "./modules/30_crop/endo_apr21/input/avl_cropland_iso.cs3"
+$offdelim
+;
+
 table f30_set_aside_fader(t_all,set_aside_target30) Fader for share of set aside cropland (unitless)
 $ondelim
 $include "./modules/30_crop/endo_apr21/input/f30_set_aside_fader.csv"

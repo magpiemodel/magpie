@@ -31,7 +31,7 @@ source("scripts/start/extra/lpjml_addon.R")
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation","extra/disaggregation_transitions")
 
-prefix <- "LAMA19"
+prefix <- "LAMA20"
 # cfg$gms$s80_optfile <- 1
 # cfg$gms$s80_maxiter <- 30
 
@@ -40,8 +40,8 @@ prefix <- "LAMA19"
 #Scenario 1, based on SDP
 cfg$title <- paste(prefix,"SSP1-1p5deg",sep="_")
 cfg <- setScenario(cfg,c("SDP","NDC","ForestryEndo"))
-cfg$gms$c35_protect_scenario <- "FF+BH"
-cfg$gms$c35_protect_scenario_noselect <- "FF+BH"
+cfg$gms$c35_protect_scenario <- "FF_BH"
+cfg$gms$c35_protect_scenario_noselect <- "FF_BH"
 cfg$gms$policy_countries35  <- all_iso_countries
 cfg$gms$s30_set_aside_shr <- 0.2
 cfg$gms$s30_set_aside_shr_noselect <- 0.2
@@ -78,7 +78,7 @@ start_run(cfg,codeCheck=FALSE)
 #Scenario 2, based on SSP4
 cfg$title <- paste(prefix,"SSP4-1p5deg",sep="_")
 cfg <- setScenario(cfg,c("SSP4","NDC","ForestryEndo"))
-cfg$gms$c35_protect_scenario <- "FF+BH"
+cfg$gms$c35_protect_scenario <- "FF_BH"
 cfg$gms$c35_protect_scenario_noselect <- "WDPA"
 cfg$gms$policy_countries35  <- oecd_countries
 cfg$gms$s30_set_aside_shr <- 0.2

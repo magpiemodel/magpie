@@ -34,8 +34,9 @@ parameters
  p35_land_start_ac(j,ac,land_natveg)              Initial Natural vegetation area (mio. ha)
  p35_observed_gs_reg(i)                           Observed growing stock in natural forests before calibration (m3 per ha)
  p35_gs_scaling_reg(i)                            Regional calibration factors for natural vegetation yields (1)
- p35_region_prot_shr(t_all,i)	                  Land protection share of the region (1)
+ p35_region_prot_shr(i)	                  		  Land protection share of the region (1)
  p35_country_dummy(iso)		                      Dummy parameter indicating whether country is affected by selected land protection policy (1)
+ i35_land_iso(iso)								  Total land area at ISO level (mio. ha)
 ;
 
 equations
@@ -82,7 +83,7 @@ positive variables
   v35_hvarea_other(j,ac)                        Harvested area from other land (mio. ha)
   v35_hvarea_primforest(j)                      Harvested area from primary forest (mio. ha)
   vm_prod_natveg(j,land_natveg,kforestry)       Production of woody biomass from natural vegetation (mio. tDM per yr)
- vm_cost_hvarea_natveg(i)                       Cost of harvesting natural vegetation (mio. USD)
+  vm_cost_hvarea_natveg(i)                      Cost of harvesting natural vegetation (mio. USD)
 ;
 
 

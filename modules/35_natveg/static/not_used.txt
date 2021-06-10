@@ -15,4 +15,3 @@ pm_timber_yield, par, not used
 pm_timber_yield_initial, par, not used
 sm_wood_density, scalar, not used
 vm_prod_natveg, var, not used
-im_pop_iso, input, not used

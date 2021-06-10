@@ -80,6 +80,11 @@ $include "./modules/35_natveg/input/f35_forest_lost_share.cs3"
 $offdelim
 ;
 
+table f35_land_iso(t_ini10,iso,land) Land area for different land pools at ISO level (mio. ha)
+$ondelim
+$include "./modules/35_natveg/input/avl_land_t_iso.cs3"
+$offdelim;
+
 parameter f35_forest_disturbance_share(i) Share of area damanged by forest disturbances (1)
 /
 $ondelim
