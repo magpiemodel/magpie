@@ -28,7 +28,7 @@ s35_forest_damage Damage simulation in forests (0=none 1=shifting agriculture 2=
 * Set-switch for countries affected by regional land protection policy
 * Default: all iso countries selected
 sets
-  policy_countries35(iso) countries to be affected by ghg policy / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
+  policy_countries35(iso) countries to be affected by land protection policy / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
                           ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
                           BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
                           BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,

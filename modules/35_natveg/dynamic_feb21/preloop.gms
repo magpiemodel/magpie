@@ -12,7 +12,7 @@ p35_country_dummy(iso) = 0;
 p35_country_dummy(policy_countries35) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
-* Countries are weighted by their population size.
+* Countries are weighted by total land area.
 i35_land_iso(iso) = sum(land, f35_land_iso("y1995",iso,land));
 p35_region_prot_shr(i) = sum(i_to_iso(i,iso), p35_country_dummy(iso) * i35_land_iso(iso)) / sum(i_to_iso(i,iso), i35_land_iso(iso));
 
