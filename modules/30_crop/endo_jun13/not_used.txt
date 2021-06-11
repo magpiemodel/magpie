@@ -5,13 +5,3 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
-pm_carbon_density_ac, input,not used
-pm_land_start, input,not used
-v35_secdforest_reduction, variable, not used
-v35_primforest_reduction, variable, not used
-v35_other_reduction, variable, not used
-im_plantedclass_ac, par, not used
-pm_timber_yield, par, not used
-pm_timber_yield_initial, par, not used
-sm_wood_density, scalar, not used
-vm_prod_natveg, var, not used
