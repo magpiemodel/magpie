@@ -14,9 +14,9 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 cfg$input <- c(cfg$input[grep("additional_data", cfg$input)],
-               "rev4.59_h12_magpie.tgz",
-               "rev4.59_h12_c5cdbf33_cellularmagpie_c200_GFDL-ESM4-ssp370_lpjml-47a77da3.tgz",
-               "rev4.59_h12_validation.tgz",
+               "rev4.61_h12_magpie.tgz",
+               "rev4.61_h12_42b44dcd_cellularmagpie_c200_GFDL-ESM4-ssp370_lpjml-ab83aee4.tgz",
+               "rev4.61_h12_validation.tgz",
                "calibration_H12_newlpjml_bestcalib_fc-sticky-dynamic_crop-endoApr21-allM_20May21.tgz")
 # see /p/projects/magpie/data/input/calibration for more available calibration factors
 
