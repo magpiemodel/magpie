@@ -14,7 +14,7 @@ parameters
  p13_cost_tc(i)              Technical change costs per region (mio. USD05PPP)
  p13_tech_cost_annuity(i)    Annuity costs of TC (mio. USD05PPP per yr)
  pc13_land(i)                Crop land area per region (mio ha)
- pc13_tau(i)                 Tau factor of the previous time step (1)
+ pcm_tau(i)                 Tau factor of the previous time step (1)
  p13_tech_cost_past(t,i)     Costs for TC from past (mio. USD05PPP per yr)
  pc13_tech_cost_past(i)      Current costs for TC from past (mio. USD05PPP per yr)
  i13_tc_factor(t,i)          Regression factor (USD05PPP per ha)

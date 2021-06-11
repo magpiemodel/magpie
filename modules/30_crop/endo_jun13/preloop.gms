@@ -5,9 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-
 *due to some rounding errors the input data currently may contain in some cases
 *very small, negative numbers. These numbers have to be set to 0 as area
 *cannot be smaller than 0!
-pm_croparea_start(j,kcr) = f30_croparea("y1995",j,kcr);
-pm_croparea_start(j,kcr)$(pm_croparea_start(j,kcr)<0) = 0;
+fm_croparea(t_past,j,w,kcr)$(fm_croparea(t_past,j,w,kcr)) = 0;
+
