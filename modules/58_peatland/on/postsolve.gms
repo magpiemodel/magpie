@@ -1,11 +1,9 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
-
-p58_peatland_cost_past(t2,j) = p58_peatland_cost_past(t2,j) + v58_peatland_cost_annuity.l(j);
 
 pc58_peatland_man(j,man58,land58) = v58_peatland_man.l(j,man58,land58);
 pc58_peatland_intact(j) = v58_peatland_intact.l(j);

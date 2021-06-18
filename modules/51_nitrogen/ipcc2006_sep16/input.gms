@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -31,5 +31,12 @@ parameter f51_ef3_prp(i,n_pollutants_direct,kli) emissions from manure on pastur
 /
 $ondelim
 $include "./modules/51_nitrogen/ipcc2006_sep16/input/f51_ef3_prp.cs4"
+$offdelim
+/;
+
+parameter f51_ef_resid_burn(n_pollutants_direct) emission factor for residual burning (tX-N per t DM)
+/
+$ondelim
+$include "./modules/51_nitrogen/ipcc2006_sep16/input/f51_ef_resid_burn.cs4"
 $offdelim
 /;

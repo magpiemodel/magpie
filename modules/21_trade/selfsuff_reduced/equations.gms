@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -24,6 +24,7 @@
 *' If the trade balance reduction equals 1 (`f21_self_suff(ct,i2,k_trade) = 1`), all demand enters the self-sufficiency pool.
 *' If it equals 0, all demand enters the comparative advantage pool.
 
+*' Lower bound for production.
 
  q21_trade_reg(i2,k_trade)..
  vm_prod_reg(i2,k_trade) =g=
@@ -34,9 +35,9 @@
  *sum(ct,i21_trade_bal_reduction(ct,k_trade))
  $(sum(ct,f21_self_suff(ct,i2,k_trade) < 1));
 
-
-
- q21_trade_reg_up(i2,k_trade)..
+*' Upper bound for production. 
+ 
+ q21_trade_reg_up(i2,k_trade) ..
  vm_prod_reg(i2,k_trade) =l=
  ((vm_supply(i2,k_trade) + v21_excess_prod(i2,k_trade))/sum(ct,i21_trade_bal_reduction(ct,k_trade)))
  $(sum(ct,f21_self_suff(ct,i2,k_trade) >= 1))

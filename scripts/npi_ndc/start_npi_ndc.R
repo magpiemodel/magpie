@@ -1,4 +1,4 @@
-# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -20,7 +20,6 @@ calc_NPI_NDC <- function(policyregions = "iso",
 
   require(magclass)
   require(luscale)
-  require(lucode)
   require(madrat)
 
   # load the cell mapping policy
@@ -215,7 +214,6 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
   ## pol_type = {"aff","ad"}
 
   require(luscale)
-  require(lucode)
   require(madrat)
 
   #extent stock beyond last observed value with constant values from the last year
@@ -231,10 +229,10 @@ calc_policy <- function(policy, stock, pol_type="aff", pol_mapping=pol_mapping,
   #select and filter countries that exist in the chosen policy mapping
   policy_countries <- intersect(policy$dummy,unique(pol_mapping))
   policy <- policy[policy$dummy %in% policy_countries,]
-  
+
   #create key to distinguish different cases of baseyear, targetyear combinations
   policy$key <- paste(policy$baseyear,policy$targetyear)
-  
+
 
   #set stock to zero or Inf for countries without policies
   # (representing no constraint for min and max constraints)

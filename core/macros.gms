@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -39,11 +39,21 @@ $macro m_year(t) (sum(time_annual,ord(time_annual)$sameas(t,time_annual)) + 1964
 * sets the difference for the first time step to one.
 $macro m_yeardiff(t) (1$(ord(t)=1) + (m_year(t)-m_year(t-1))$(ord(t)>1))
 
+* calculates the difference in years to the previous time step and
+* sets the difference for the first time step to five.
+$macro m_yeardiff_forestry(t) (5$(ord(t)=1) + (m_year(t)-m_year(t-1))$(ord(t)>1))
+
 * same as m_yeardiff but only for the current time step and written in a way
 * that it can be used within equations (no t dependency)
 * ATTENTION: t2 needs to exist as alias of t to get this macro working!
 * ATTENTION: ct needs to exist as set containing only the current time step
 $macro m_timestep_length sum((ct,t2),(1$(ord(t2)=1) + (m_year(t2)-m_year(t2-1))$(ord(t2)>1))$sameas(ct,t2))
+
+* same as m_yeardiff but only for the current time step and written in a way
+* that it can be used within equations (no t dependency)
+* ATTENTION: t2 needs to exist as alias of t to get this macro working!
+* ATTENTION: ct needs to exist as set containing only the current time step
+$macro m_timestep_length_forestry sum((ct,t2),(5$(ord(t2)=1) + (m_year(t2)-m_year(t2-1))$(ord(t2)>1))$sameas(ct,t2))
 
 * update total costs by distribute annuity costs over all years within the given time horizon
 $macro m_annuity_costs_update(past_costs, cost_annuity, invest_horizon) past_costs = past_costs \
@@ -54,11 +64,11 @@ $macro m_annuity_costs_update(past_costs, cost_annuity, invest_horizon) past_cos
 * fill empty years with values from previous time step
 * input = name of input parameter
 * sets = all sets except of t_all written in quotes (e.g. "kve,w")
-$macro m_fillmissingyears(input,sets) loop(t, \
-          ct(t) = yes;     \
-          if(sum((ct,&&sets),input(ct,&&sets))=0,    \
-            input(t,&&sets) = input(t-1,&&sets);    \
-            display "Data gap in input filled with data from previous time step for the following year: ",ct;    \
+$macro m_fillmissingyears(input,sets) loop(t_all, \
+          ct_all(t_all) = yes;     \
+          if(sum((ct_all,&&sets),input(ct_all,&&sets))=0,    \
+            input(t_all,&&sets) = input(t_all-1,&&sets);    \
+            display "Data gap in input filled with data from previous time step for the following year: ",ct_all;    \
           ); \
-          ct(t) = no;    \
+          ct_all(t_all) = no;    \
        );

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -20,6 +20,8 @@ equations
  q30_rotation_min(j,crp30,w)     Local minimum rotational constraints (mio. ha)
  q30_prod(j,kcr)                 Production of cropped products (mio. tDM)
  q30_carbon(j,ag_pools)          Cropland above ground carbon content calculation (mio. tC)
+ q30_bv_ann(j,potnatveg)         Biodiversity value of annual cropland (Mha)
+ q30_bv_per(j,potnatveg)         Biodiversity value of perennial cropland (Mha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -31,6 +33,8 @@ parameters
  oq30_rotation_min(t,j,crp30,w,type) Local minimum rotational constraints (mio. ha)
  oq30_prod(t,j,kcr,type)             Production of cropped products (mio. tDM)
  oq30_carbon(t,j,ag_pools,type)      Cropland above ground carbon content calculation (mio. tC)
+ oq30_bv_ann(t,j,potnatveg,type)     Biodiversity value of annual cropland (Mha)
+ oq30_bv_per(t,j,potnatveg,type)     Biodiversity value of perennial cropland (Mha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

@@ -1,20 +1,21 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description This realization applies pollutant prices to different 
-*' emission types depending on the emission pricing policy defined in `f56_emis_policy`. 
-*' In addition, the average annual reward for carbon dioxide removal (CDR) 
-*' from afforestation [32_forestry] is calculated as the present value (PV) of all 
-*' future cash flows multiplied with an annuity factor. The PV is obtained by 
-*' multiplication of `vm_cdr_aff` with the corresponding carbon price and subsequent 
-*' discouting based on the given discount rate `pm_interest`. 
-*' Technically, the reward for CDR from afforestation is a negative cash flow 
-*' lowering the costs in the objective function of the model. 
-*' If pollutant prices are zero, which is the default for reference scenarios without 
+*' @description This realization applies pollutant prices to different
+*' emission types depending on the emission pricing policy defined in `f56_emis_policy`.
+*' In addition, the average annual reward for carbon dioxide removal (CDR)
+*' and the reward or penalty of local biophysical effects
+*' from afforestation [32_forestry] is calculated as the present value (PV) of all
+*' future cash flows multiplied with an annuity factor. The PV is obtained by
+*' multiplication of `vm_cdr_aff` with the corresponding carbon price and subsequent
+*' discouting based on the given discount rate `pm_interest`.
+*' Technically, the reward for CDR and bph effects from afforestation is a negative cash flow
+*' lowering the costs in the objective function of the model.
+*' If pollutant prices are zero, which is the default for reference scenarios without
 *' mitigation, total emission costs entering the objective function are zero.
 
 *####################### R SECTION START (PHASES) ##############################

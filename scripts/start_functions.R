@@ -1,4 +1,4 @@
-# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -8,7 +8,44 @@
 ################################################################################
 # Define internal functions
 ################################################################################
-.update_sets <- function(cpr,map) {
+
+.set_formatting <- function(x,space='       ',prefix="", suffix1=",", suffix2=" /", collapse=",", n=10) {
+  content <- NULL
+  tmp <- lapply(split(x, ceiling(seq_along(x)/n)),paste,collapse=collapse)
+  end <- suffix1
+  for(i in 1:length(tmp)) {
+    if(i==length(tmp)) end <- suffix2
+    content <- c(content,paste0(space,prefix,tmp[[i]],end))
+  }
+  return(content)
+}
+
+.write_sets <- function(name,desc,items,n,suffix,file) {
+  
+  if ((length(name)+length(desc)+length(items)+length(n)+length(suffix))/5 != length(name)) stop("Same number of entries for name, desc, items, n and suffix is required")
+
+  subject <- 'SETS'
+  header <- c(
+    '*THIS CODE IS CREATED AUTOMATICALLY, DO NOT MODIFY THESE LINES DIRECTLY',
+    '*ANY DIRECT MODIFICATION WILL BE LOST AFTER NEXT INPUT DOWNLOAD',
+    '*CHANGES CAN BE DONE USING THE INPUT DOWNLOADER UNDER SCRIPTS/DOWNLOAD',
+    '*THERE YOU CAN ALSO FIND ADDITIONAL INFORMATION')
+
+  content <- c(header,'','sets','')
+  
+  
+  for (i in 1:length(name)) {
+    content <- c(content,paste0('   ',name[[i]],' ',desc[[i]],' /'))
+    content <- c(content, .set_formatting(items[[i]], suffix1=suffix[[i]], suffix2=" /",n = n[[i]]))
+    content <- c(content,'')
+  }
+  content <- c(content,';')
+  
+  gms::replace_in_file(file,content,subject)
+}
+
+.update_sets_core <- function(cpr,map) {
+  require(gms)
 
   reg1 <- unique(map$RegionCode)
   reg2 <- names(cpr)
@@ -25,47 +62,59 @@
     j <- j+cpr[i]
   }
 
-  .tmp <- function(x,prefix="", suffix1="", suffix2=" /", collapse=",", n=10) {
-    content <- NULL
-    tmp <- lapply(split(x, ceiling(seq_along(x)/n)),paste,collapse=collapse)
-    end <- suffix1
-    for(i in 1:length(tmp)) {
-      if(i==length(tmp)) end <- suffix2
-      content <- c(content,paste0('       ',prefix,tmp[[i]],end))
-    }
-    return(content)
-  }
-
-  subject <- 'SETS'
-  modification_warning <- c(
-    '*THIS CODE IS CREATED AUTOMATICALLY, DO NOT MODIFY THESE LINES DIRECTLY',
-    '*ANY DIRECT MODIFICATION WILL BE LOST AFTER NEXT INPUT DOWNLOAD',
-    '*CHANGES CAN BE DONE USING THE INPUT DOWNLOADER UNDER SCRIPTS/DOWNLOAD',
-    '*THERE YOU CAN ALSO FIND ADDITIONAL INFORMATION')
-  content <- c(modification_warning,'','sets','')
-
-  content <- c(content,paste('   i all economic regions /',paste(names(cpr),collapse=','),'/',sep=''),'')
-
-  # write iso set with nice formatting (10 countries per line)
-  tmp <- lapply(split(map$CountryCode, ceiling(seq_along(map$CountryCode)/10)),paste,collapse=",")
-  content <- c(content,'   iso list of iso countries /')
-  content <- c(content, .tmp(map$CountryCode, suffix1=",", suffix2=" /"))
-
-  content <- c(content,  '', paste('   j number of LPJ cells /\n       ',paste(cells,collapse=',\n       '),'/',sep=''),'',
-               '   cell(i,j) number of LPJ cells per region i','      /')
+  map_i_to_j <- NULL
   for(i in 1:length(cpr)) {
-    content <- c(content,paste('       ',names(cpr)[i],' . ',cells[i],sep=''))
+    map_i_to_j <- c(map_i_to_j,paste('',names(cpr)[i],' . ',cells[i],sep=''))
   }
-  content <- c(content,'      /','')
+  #map_i_to_j <- paste(names(cpr),cells,sep=" . ")
 
-  content <- c(content,'   i_to_iso(i,iso) mapping regions to iso countries','      /')
   map$RegionCode <- as.factor(map$RegionCode)
+  map_i_to_iso <- NULL
   for(i in levels(map$RegionCode)) {
-    content <- c(content, .tmp(map$CountryCode[map$RegionCode==i], prefix=paste0(i," . ("), suffix1=")", suffix2=")"))
-
+    map_i_to_iso <- c(map_i_to_iso, .set_formatting(map$CountryCode[map$RegionCode==i],space = '', prefix=paste0(i," . ("), suffix1=")", suffix2=")"))
   }
-  content <- c(content,'      /',';')
-  lucode::replace_in_file("core/sets.gms",content,subject)
+  
+  name <- list("i","iso","j","cell(i,j)","i_to_iso(i,iso)")
+  desc <- list("all economic regions","list of iso countries","number of LPJ cells","number of LPJ cells per region i","mapping regions to iso countries")
+  items <- list(names(cpr),map$CountryCode,cells,map_i_to_j,map_i_to_iso)
+  n <- c(12,10,1,1,1)
+  suffix <- c(",",",",",","","")
+  file <- "core/sets.gms"
+  
+  .write_sets(name,desc,items,n,suffix,file)
+}
+
+.update_sets_modules <- function() {
+  require(gms)
+  
+  ### 56_ghg_policy
+  ghgscen56 <- magclass::read.magpie("modules/56_ghg_policy/input/f56_pollutant_prices.cs3")
+  ghgscen56 <- magclass::getNames(ghgscen56,dim=2)
+  
+  scen56 <- magclass::read.magpie("modules/56_ghg_policy/input/f56_emis_policy.csv",file_type = "cs3")
+  scen56 <- magclass::getNames(scen56,dim=1)
+  
+  name <- list("ghgscen56","scen56")
+  desc <- list("ghg price scenarios","emission policy scenarios")
+  items <- list(ghgscen56,scen56)
+  n <- c(1,1)
+  suffix <- c(",",",")
+  file <- "modules/56_ghg_policy/price_jan20/sets.gms"
+
+  .write_sets(name,desc,items,n,suffix,file)
+  
+  ### 60_bioenergy
+  scen2nd60 <- magclass::read.magpie("modules/60_bioenergy/input/f60_bioenergy_dem.cs3")
+  scen2nd60 <- magclass::getNames(scen2nd60,dim=1)
+  
+  name <- list("scen2nd60")
+  desc <- list("second generation bioenergy scenarios")
+  items <- list(scen2nd60)
+  n <- c(1)
+  suffix <- c(",")
+  file <- "modules/60_bioenergy/1stgen_priced_dec18/sets.gms"
+  
+  .write_sets(name,desc,items,n,suffix,file)
 }
 
 # Function to extract information from info.txt
@@ -128,7 +177,7 @@
                paste('Last modification (input data):',date()),
                '')
   writeLines(content,'input/info.txt')
-  lucode::replace_in_file("main.gms",paste('*',content),subject)
+  gms::replace_in_file("main.gms",paste('*',content),subject)
 }
 
 
@@ -141,11 +190,11 @@ download_and_update <- function(cfg) {
 
   # Delete previously downloaded files, download new files and distribute
   # them within the model.
-  filemap <- lucode::download_distribute(files        = cfg$input,
-                                         repositories = cfg$repositories, # defined in your local .Rprofile or on the cluster /p/projects/rd3mod/R/.Rprofile
-                                         modelfolder  = ".",
-                                         additionalDelete="scripts/downloader/inputdelete.cfg",
-                                         debug        = cfg$debug)
+  filemap <- gms::download_distribute(files        = cfg$input,
+                                      repositories = cfg$repositories, # defined in your local .Rprofile or on the cluster /p/projects/rd3mod/R/.Rprofile
+                                      modelfolder  = ".",
+                                      additionalDelete="scripts/downloader/inputdelete.cfg",
+                                      debug        = cfg$debug)
 
   # In the following the GAMS sourcecode files magpie.gms and core/sets.gms
   # are manipulated. Therefore some information about the number of cells per
@@ -160,7 +209,8 @@ download_and_update <- function(cfg) {
   # read spatial_header, map, reg_revision and regionscode
   load("input/spatial_header.rda")
   .update_info(filemap,cpr,regionscode,reg_revision, warnings)
-  .update_sets(cpr,map)
+  .update_sets_core(cpr,map)
+  .update_sets_modules()
 }
 
 
@@ -169,8 +219,13 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
 
   timePrepareStart <- Sys.time()
 
-  if (!requireNamespace("lucode", quietly = TRUE)) {
-    stop("Package \"lucode\" needed for this function to work. Please install it.",
+  if (!requireNamespace("gms", quietly = TRUE)) {
+    stop("Package \"gms\" needed for this function to work. Please install it.",
+         call. = FALSE)
+  }
+
+  if (!requireNamespace("lucode2", quietly = TRUE)) {
+    stop("Package \"lucode2\" needed for this function to work. Please install it.",
          call. = FALSE)
   }
 
@@ -185,12 +240,12 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   on.exit(setwd(maindir))
 
   if(lock_model) {
-    lock_id <- lucode::model_lock(timeout1=1)
-    on.exit(lucode::model_unlock(lock_id), add=TRUE)
+    lock_id <- gms::model_lock(timeout1=1)
+    on.exit(gms::model_unlock(lock_id), add=TRUE)
   }
 
-  if(!is.null(scenario)) cfg <- lucode::setScenario(cfg,scenario)
-  cfg <- lucode::check_config(cfg)
+  if(!is.null(scenario)) cfg <- gms::setScenario(cfg,scenario)
+  cfg <- gms::check_config(cfg)
 
   # Make 'title' a setglobal in gams to include it in the gdx
   cfg$gms$c_title <- cfg$title
@@ -216,28 +271,28 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   # and used as input by the model
   if (!is.null(path_to_report)) {
     getReportData(path_to_report, LU_pricing)
-    cfg <- lucode::setScenario(cfg,"coupling")
+    cfg <- gms::setScenario(cfg,"coupling")
   }
 
   # update all parameters which contain the levels and marginals
   # of all variables and equations
-  lucode::update_fulldataOutput()
+  gms::update_fulldataOutput()
   # Update module paths in GAMS code
-  lucode::update_modules_embedding()
+  gms::update_modules_embedding()
 
   apply_cfg <- function(cfg) {
     if(is.null(cfg$model)) cfg$model <- "main.gms"
     # configure main model gms file (cfg$model) based on settings of cfg file
-    lucode::manipulateConfig(cfg$model, cfg$gms)
+    lucode2::manipulateConfig(cfg$model, cfg$gms)
 
     # configure input.gms in all modules based on settings of cfg file
-    l1 <- lucode::path("modules", list.dirs("modules/", full.names = FALSE,
+    l1 <- lucode2::path("modules", list.dirs("modules/", full.names = FALSE,
                                             recursive = FALSE))
     for(l in l1) {
-      l2 <- lucode::path(l, list.dirs(l, full.names = FALSE, recursive = FALSE))
+      l2 <- lucode2::path(l, list.dirs(l, full.names = FALSE, recursive = FALSE))
       for(ll in l2) {
-        if(file.exists(lucode::path(ll, "input.gms"))) {
-          lucode::manipulateConfig(lucode::path(ll, "input.gms"), cfg$gms)
+        if(file.exists(lucode2::path(ll, "input.gms"))) {
+          lucode2::manipulateConfig(lucode2::path(ll, "input.gms"), cfg$gms)
         }
       }
     }
@@ -245,7 +300,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   apply_cfg(cfg)
 
   #check all setglobal settings for consistency
-  lucode::settingsCheck()
+  gms::settingsCheck()
 
   ################################################################################
   ############# PROCESSING INPUT DATA ###################### START ###############
@@ -289,9 +344,9 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
                 "", "### Modifications ###",
                 try(system("git status", intern=TRUE), silent=TRUE))
   if(codeCheck) {
-    codeCheck <- lucode::codeCheck(core_files=c("core/*.gms",cfg$model),
-                                   test_switches=(cfg$model=="main.gms"),
-                                   strict=!cfg$developer_mode)
+    codeCheck <- gms::codeCheck(core_files=c("core/*.gms",cfg$model),
+                                test_switches=(cfg$model=="main.gms"),
+                                strict=!cfg$developer_mode)
   } else codeCheck <- NULL
 
   # Create the workspace for validation
@@ -303,17 +358,17 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
                       modules = codeCheck,
                       input_data = list(),
                       yield_calib = list(),
-                      setup_info = list(start_functions = lucode::setup_info()),
+                      setup_info = list(start_functions = lucode2::setup_info()),
                       last.warning = attr(codeCheck,"last.warning")))
   save(validation, file= cfg$val_workspace, compress="xz")
 
-  lucode::runstatistics(file = paste0(cfg$results_folder,"/runstatistics.rda"),
-                        user = Sys.info()[["user"]],
-                        date = rundate,
-                        version_management = "git",
-                        revision = try(system("git rev-parse HEAD", intern=TRUE), silent=TRUE),
-                        revision_date = try(as.POSIXct(system("git show -s --format=%ci", intern=TRUE), silent=TRUE)),
-                        status = try(system("git status", intern=TRUE), silent=TRUE))
+  lucode2::runstatistics(file = paste0(cfg$results_folder,"/runstatistics.rda"),
+                         user = Sys.info()[["user"]],
+                         date = rundate,
+                         version_management = "git",
+                         revision = try(system("git rev-parse HEAD", intern=TRUE), silent=TRUE),
+                         revision_date = try(as.POSIXct(system("git show -s --format=%ci", intern=TRUE), silent=TRUE)),
+                         status = try(system("git status", intern=TRUE), silent=TRUE))
 
 
   ##############################################################################
@@ -365,11 +420,11 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
 
   cfg$magpie_folder <- getwd()
 
-  save(cfg, file=lucode::path(cfg$results_folder, "config.Rdata"))
+  save(cfg, file=lucode2::path(cfg$results_folder, "config.Rdata"))
 
-  lucode::singleGAMSfile(mainfile=cfg$model, output=lucode::path(cfg$results_folder, "full.gms"))
+  gms::singleGAMSfile(mainfile=cfg$model, output=lucode2::path(cfg$results_folder, "full.gms"))
   if(lock_model) {
-    lucode::model_unlock(lock_id)
+    gms::model_unlock(lock_id)
     on.exit(setwd(maindir))
   }
 
@@ -378,12 +433,12 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   # Save run statistics to local file
   cat("Saving timePrepareStart and timePrepareEnd to runstatistics.rda\n")
   timePrepareEnd <- Sys.time()
-  lucode::runstatistics(file             = paste0("runstatistics.rda"),
-                        timePrepareStart = timePrepareStart,
-                        timePrepareEnd   = timePrepareEnd)
+  lucode2::runstatistics(file             = paste0("runstatistics.rda"),
+                         timePrepareStart = timePrepareStart,
+                         timePrepareEnd   = timePrepareEnd)
 
   #Is SLURM available?
-  slurm <- lucode::SystemCommandAvailable("srun")
+  slurm <- lucode2::SystemCommandAvailable("srun")
 
   if(is.na(cfg$sequential)) cfg$sequential <- !slurm
 
@@ -391,7 +446,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
     if(is.null(cfg$qos)) {
       # try to select best QOS based on available resources
       # and available information
-      load <- lucode::getClusterLoad()
+      load <- lucode2::getClusterLoad()
       if(is.null(load)) {
         cfg$qos <- "standby"
       } else if(all(load > 80)) {
@@ -478,8 +533,8 @@ start_reportrun <- function (cfg, path_report, inmodel=NULL, sceninreport=NULL, 
     stop("Package \"magclass\" needed for this function to work. Please install it.",
          call. = FALSE)
   }
-  if (!requireNamespace("lucode", quietly = TRUE)) {
-    stop("Package \"lucode\" needed for this function to work. Please install it.",
+  if (!requireNamespace("gms", quietly = TRUE)) {
+    stop("Package \"gms\" needed for this function to work. Please install it.",
          call. = FALSE)
   }
   rep <- magclass::convert.report(path_report,inmodel=inmodel,outmodel="MAgPIE")
@@ -492,7 +547,7 @@ start_reportrun <- function (cfg, path_report, inmodel=NULL, sceninreport=NULL, 
   for(scen in sceninreport) {
 	cfg$title <- scen
   # extract scenario from scenarioname and apply it
-	cfg       <- lucode::setScenario(cfg,substring(scen,first=1,last=4))
+	cfg       <- gms::setScenario(cfg,substring(scen,first=1,last=4))
 	start_run(cfg, report=rep, sceninreport=scen, codeCheck=codeCheck)
   }
 }

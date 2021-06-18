@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -20,5 +20,4 @@
 $Ifi "%phase%" == "declarations" $include "./modules/12_interest_rate/select_apr20/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/12_interest_rate/select_apr20/input.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/12_interest_rate/select_apr20/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/12_interest_rate/select_apr20/presolve.gms"
 *######################## R SECTION END (PHASES) ###############################

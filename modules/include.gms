@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -21,6 +21,7 @@ $include "./modules/17_production/module.gms"
 $include "./modules/18_residues/module.gms"
 $include "./modules/20_processing/module.gms"
 $include "./modules/21_trade/module.gms"
+$include "./modules/29_ageclass/module.gms"
 $include "./modules/30_crop/module.gms"
 $include "./modules/31_past/module.gms"
 $include "./modules/32_forestry/module.gms"
@@ -32,6 +33,7 @@ $include "./modules/40_transport/module.gms"
 $include "./modules/41_area_equipped_for_irrigation/module.gms"
 $include "./modules/42_water_demand/module.gms"
 $include "./modules/43_water_availability/module.gms"
+$include "./modules/44_biodiversity/module.gms"
 $include "./modules/45_climate/module.gms"
 $include "./modules/50_nr_soil_budget/module.gms"
 $include "./modules/51_nitrogen/module.gms"
@@ -47,6 +49,7 @@ $include "./modules/60_bioenergy/module.gms"
 $include "./modules/62_material/module.gms"
 $include "./modules/70_livestock/module.gms"
 $include "./modules/71_disagg_lvst/module.gms"
+$include "./modules/73_timber/module.gms"
 $include "./modules/80_optimization/module.gms"
 *######################## R SECTION END (MODULES) ##############################
 $offrecurse
