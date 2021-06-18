@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -16,7 +16,8 @@
 
 sets
 
-   i all economic regions /CAZ,CHA,EUR,IND,JPN,LAM,MEA,NEU,OAS,REF,SSA,USA/
+   i all economic regions /
+       CAZ,CHA,EUR,IND,JPN,LAM,MEA,NEU,OAS,REF,SSA,USA /
 
    iso list of iso countries /
        ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
@@ -57,10 +58,9 @@ sets
        OAS_151*OAS_172,
        REF_173*REF_179,
        SSA_180*SSA_190,
-       USA_191*USA_200/
+       USA_191*USA_200 /
 
-   cell(i,j) number of LPJ cells per region i
-      /
+   cell(i,j) number of LPJ cells per region i /
        CAZ . CAZ_1*CAZ_28
        CHA . CHA_29*CHA_52
        EUR . EUR_53*EUR_62
@@ -72,11 +72,9 @@ sets
        OAS . OAS_151*OAS_172
        REF . REF_173*REF_179
        SSA . SSA_180*SSA_190
-       USA . USA_191*USA_200
-      /
+       USA . USA_191*USA_200 /
 
-   i_to_iso(i,iso) mapping regions to iso countries
-      /
+   i_to_iso(i,iso) mapping regions to iso countries /
        CAZ . (AUS,CAN,HMD,NZL,SPM)
        CHA . (CHN,HKG,MAC,TWN)
        EUR . (ALA,AUT,BEL,BGR,CYP,CZE,DEU,DNK,ESP,EST)
@@ -109,8 +107,8 @@ sets
        SSA . (MYT,NAM,NER,NGA,REU,RWA,SEN,SHN,SLE,SOM)
        SSA . (SSD,STP,SWZ,SYC,TCD,TGO,TZA,UGA,ZAF,ZMB)
        SSA . (ZWE)
-       USA . (USA)
-      /
+       USA . (USA) /
+
 ;
 *######################### R SECTION END (SETS) ################################
 *###############################################################################
@@ -165,7 +163,9 @@ sets time_annual Annual extended time steps
      y1980, y1985, y1990,
      y1995, y2000, y2005, y2010, y2015
     /
+
 ;
+
 
 set t_past(t_all) Timesteps with observed data
 $If "%c_past%"== "till_2010" /y1965, y1970, y1975, y1980, y1985, y1990,y1995, y2000, y2005, y2010/;
@@ -182,7 +182,9 @@ $If "%c_timesteps%"== "TS_benni" /y1995,y2000,y2005,y2010,y2020,y2030,y2040,y205
 $If "%c_timesteps%"== "TS_WB" /y1995,y2000,y2005,y2010,y2020,y2030,y2040,y2050,y2060,y2070,y2080/;
 $If "%c_timesteps%"== "5year" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2065,y2070,y2075,y2080,y2085,y2090,y2095,y2100/;
 $If "%c_timesteps%"== "5year2050" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050/;
+$If "%c_timesteps%"== "5year2070" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2065,y2070/;
 $If "%c_timesteps%"== "quicktest" /y1995,y2010,y2025/;
+$If "%c_timesteps%"== "quicktest2" /y1995,y2020,y2050,y2100/;
 $If "%c_timesteps%"== "1" /y1995/;
 $If "%c_timesteps%"== "2" /y1995,y2000/;
 $If "%c_timesteps%"== "3" /y1995,y2000,y2010/;
@@ -203,6 +205,7 @@ $If "%c_timesteps%"=="17" /y1995,y2000,y2010,y2020,y2030,y2040,y2050,y2060,y2070
 $If "%c_timesteps%"=="past" /y1965,y1970,y1975,y1980,y1985,y1990,y1995,y2000,y2005,y2010/;
 $If "%c_timesteps%"=="pastandfuture" /y1965,y1970,y1975,y1980,y1985,y1990,y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2065,y2070,y2075,y2080,y2085,y2090,y2095,y2100/;
 set ct(t) Current time period;
+set ct_all(t_all) Current time period for loops over t_all;
 
 alias(t,t2);
 
@@ -251,16 +254,14 @@ sets
         / si0, nsi0 /
 
 ***Forestry**
-   ac Age classes  / ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
+  ac Age classes  / ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
                     ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,ac95,ac100,
-                    ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,acx /
+                    ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,
+                    ac150,ac155,acx /
 
-  ac_sub(ac) age classes
-  / ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
-  ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,ac95,ac100,
-  ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,acx /
+  ac_est(ac) Dynamic subset of age classes for establishment
 
-   when Temporal location relative to optimization / before, after /
+  ac_sub(ac) Dynamic subset of age classes excluding establishment
 
    chap_par Chapman-richards parameters / k,m /
 
@@ -357,5 +358,9 @@ secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, 
    /
 
 ;
+
+alias(ac,ac2);
+alias(ac_sub,ac_sub2);
+alias(ac_est,ac_est2);
 
 *** EOF sets.gms ***

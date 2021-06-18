@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -78,7 +78,7 @@ $title magpie
 *' of fertilizer spreaders) (@popp_land-use_2014, @stevanovic_mitigation_2017). In addition,
 *' the model covers land-based carbon removal technologies such as bioenergy with carbon capture
 *' and sequestration (CCS) and afforestation (@humpenoder_investigating_2014,
-*' @humpenoder_large-scale_2017, @kreidenweis_afforestation_2016).
+*' @humpenoeder_bioenergy_2018, @kreidenweis_afforestation_2016).
 *'
 *' In response to all involved demand for agricultural commodities, costs of production,
 *' biophysical constraints and land-related policies, MAgPIE simulates major dynamics of
@@ -146,23 +146,23 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: rev4.47_h12_magpie.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
-* Used data set: rev4.47_h12_validation.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
-* Used data set: calibration_H12_c200_26Feb20.tgz
+* Used data set: rev4.58_h12_magpie.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev3.85.tgz
+* Used data set: rev4.58_h12_validation.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* 
+* Used data set: calibration_H12_c200_23Feb21.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* 
+* Used data set: additional_data_rev4.04.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
@@ -177,19 +177,19 @@ $title magpie
 * 
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * 
-* Regions data revision: 4.47
+* Regions data revision: 4.58
 * 
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
-* * Additional input folder: /p/projects/landuse/data/input/other/rev44
-* * Revision: 44
+* * Additional input folder: /p/projects/landuse/data/input/other/rev52
+* * Revision: 52
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
 * 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
-* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_c200_690d3718e151be1b450b394c1064b1c5.tgz
 * * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
@@ -197,7 +197,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Thu Jun 18 18:28:38 2020
+* Last modification (input data): Fri Jun  4 12:51:59 2021
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -226,7 +226,7 @@ $setglobal c_past  till_2010
 $setglobal c_title  default
 
 scalars
-  s_use_gdx   use of gdx files                                       / 2 /
+s_use_gdx   use of gdx files                                       / 2 /
 ;
 ********************************************************************************
 
@@ -248,13 +248,15 @@ $setglobal processing  substitution_dec18
 
 $setglobal trade  selfsuff_reduced
 
+$setglobal ageclass  feb21
+
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
 
-$setglobal forestry  dynamic_may20
+$setglobal forestry  dynamic_feb21
 
 $setglobal urban  static
-$setglobal natveg  dynamic_may20
+$setglobal natveg  dynamic_feb21
 
 $setglobal factor_costs  mixed_feb17
 $setglobal landconversion  global_static_aug18
@@ -263,6 +265,7 @@ $setglobal transport  gtap_nov12
 $setglobal area_equipped_for_irrigation  endo_apr13
 $setglobal water_demand  agr_sector_aug13
 $setglobal water_availability  total_water_aug13
+$setglobal biodiversity  bv_btc_mar21
 $setglobal climate  static
 
 $setglobal nr_soil_budget  exoeff_aug16
@@ -282,7 +285,7 @@ $setglobal livestock  fbask_jan16
 
 $setglobal disagg_lvst  foragebased_aug18
 
-$setglobal timber  biomass_mar20
+$setglobal timber  default
 
 $setglobal optimization  nlp_apr17
 

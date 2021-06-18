@@ -1,4 +1,4 @@
-# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -31,6 +31,37 @@ timeOutputStart <- Sys.time()
 
 if(!file.exists("fulldata.gdx")) stop("MAgPIE model run did not finish properly (fulldata.gdx is missing). Please check full.lst for further information!")
 cat("\nMAgPIE run finished!\n")
+
+gams_modelstats <- c("1" ="Optimal solution achieved.",
+                     "2" ="Local optimal solution achieved.",
+                     "3" ="Unbounded model found.",
+                     "4" ="Infeasible model found.",
+                     "5" ="Locally infeasible model found.",
+                     "6" ="Solver terminated early and model was still infeasible. ",
+                     "7" ="Solver terminated early and model was feasible but not yet optimal.",
+                     "8" ="Integer solution found.",
+                     "9" ="Solver terminated early with a non integer solution found.",
+                     "10"="No feasible integer solution could be found.",
+                     "11"="Licensing problem. Check if you correctly applied solver licence for MAgPIE in GAMS.",
+                     "12"="Error - No cause known.",
+                     "13"="Error - No solution attained.",
+                     "14"="No solution returned.",
+                     "15"="Unique solution in a CNS models.",
+                     "16"="Feasible solution in a CNS models.",
+                     "17"="Singular in a CNS models.",
+                     "18"="Unbounded - no solution.",
+                     "19"="Infeasible - no solution.")
+
+ms_all <- as.numeric(magpie4::modelstat("fulldata.gdx"))
+ms <- unique(ms_all[ms_all!=0])
+
+if(length(ms)== 1) message("Model finished with modelstat ",ms,":",gams_modelstats[as.numeric(names(gams_modelstats)) %in% ms])
+if(length(ms) > 1){
+  message("Following modelstats were observed during simulation:")
+  for(i in 1:length(ms)){
+    message(ms[i],":",gams_modelstats[as.numeric(names(gams_modelstats)) %in% ms[i]])
+  }
+}
 
 lucode2::runstatistics(file       = "runstatistics.rda",
                        modelstat  = magpie4::modelstat("fulldata.gdx"),
@@ -80,7 +111,7 @@ rm(gams_runtime,input_data,module_setup,validation)
 comp <- FALSE
 submit <- "direct"
 output <- cfg$output
-outputdirs <- runfolder
+outputdir <- runfolder
 sys.source("output.R",envir=new.env())
 
 # get runtime for output

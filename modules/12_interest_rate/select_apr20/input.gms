@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -8,14 +8,14 @@
 $setglobal c12_interest_rate  gdp_dependent
 
 scalars
-  s12_interest_lic                  Interest rate in high income countries (1)  / 0.1 /
-  s12_interest_hic                   Interest rate in low income countries (1)   / 0.04 /
-  s12_hist_interest_lic             Historic interest rate in high income countries (1) / 0.1 /
-  s12_hist_interest_hic              Historic interest rate in low income countries (1)  / 0.04 /
-  s12_interest_lic_noselect                 Interest rate in high income countries for nonselected countries only active when regional switch activated (1) / 0.1 /
-  s12_interest_hic_noselect                  Interest rate in low income countries for nonselected countries only active when regional switch activated (1)  / 0.04 /
-  s12_hist_interest_lic_noselect            Historic interest rate in high income countries for nonselected countries only active when regional switch activated (1) / 0.1 /
-  s12_hist_interest_hic_noselect             Historic interest rate in low income countries for nonselected countries only active when regional switch activated (1)  / 0.04 /
+  s12_interest_lic                  Interest rate in low income countries (1)  / 0.1 /
+  s12_interest_hic                   Interest rate in high income countries (1)   / 0.04 /
+  s12_hist_interest_lic             Historic interest rate in low income countries (1) / 0.1 /
+  s12_hist_interest_hic              Historic interest rate in high income countries (1)  / 0.04 /
+  s12_interest_lic_noselect                 Interest rate in low income countries for nonselected countries only active when regional switch activated (1) / 0.1 /
+  s12_interest_hic_noselect                  Interest rate in high income countries for nonselected countries only active when regional switch activated (1)  / 0.04 /
+  s12_hist_interest_lic_noselect            Historic interest rate in low income countries for nonselected countries only active when regional switch activated (1) / 0.1 /
+  s12_hist_interest_hic_noselect             Historic interest rate in high income countries for nonselected countries only active when regional switch activated (1)  / 0.04 /
 ;
 
 sets
@@ -44,6 +44,14 @@ sets
                           TKL,TKM,TLS,TON,TTO,TUN,TUR,TUV,TWN,TZA,
                           UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
                           VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
+;
+
+parameter f12_interest_fader(t_all) Protection scenario fader (1)
+/
+$ondelim
+$include "./modules/12_interest_rate/input/f12_interest_fader.csv"
+$offdelim
+/
 ;
 
 $if "%c12_interest_rate%" == "coupling" parameter f12_interest_coupling(t_all) Interest rate (% per yr)

@@ -1,4 +1,4 @@
-# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -64,7 +64,8 @@ get_yieldcalib <- function(gdx_file) {
     return(superAggregate(y,level="reg",aggr_type="mean", na.rm=TRUE))
   }
 
-  y_ini <- prep(readGDX(gdx_file,"i14_yields"))
+  y_ini <- prep(readGDX(gdx_file, "i14_yields","i14_yields_calib", 
+                        format = "first_found", react = "silent"))
   y     <- prep(readGDX(gdx_file,"vm_yld")[,,"l"])
 
   out <- y/y_ini
@@ -73,7 +74,7 @@ get_yieldcalib <- function(gdx_file) {
 }
 
 # Calculate the correction factor and save it
-update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,calibrate_cropland=TRUE,damping_factor=0.8, calib_file, crop_max=1, calibration_step=""){
+update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,calibrate_cropland=TRUE,damping_factor=0.8, calib_file, crop_max=2, calibration_step="",n_maxcalib=20, best_calib = FALSE){
   require(magclass)
   require(magpie4)
   if(!(modelstat(gdx_file)[1,1,1]%in%c(1,2,7))) stop("Calibration run infeasible")
@@ -83,9 +84,12 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,cali
   calib_correction <- area_factor * tc_factor
   calib_divergence <- abs(calib_correction-1)
 
+###-> in case it is the first step, it forces the initial factors to be equal to 1
   old_calib        <- magpiesort(read.magpie(calib_file))
-  calib_factor     <- old_calib * (damping_factor*(calib_correction-1) + 1)
+  #initial guess equal to 1
+  if(calibration_step==1) old_calib[,,] <- 1
 
+  calib_factor     <- old_calib * (damping_factor*(calib_correction-1) + 1)
   if(!is.null(crop_max)) {
     above_limit <- (calib_factor[,,"crop"] > crop_max)
     calib_factor[,,"crop"][above_limit]  <- crop_max
@@ -110,21 +114,55 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,cali
   write_log(calib_divergence, "calib_divergence.cs3" , calibration_step)
   write_log(area_factor,      "calib_area_factor.cs3", calibration_step)
   write_log(tc_factor,        "calib_tc_factor.cs3"  , calibration_step)
+  write_log(calib_factor,     "calib_factor.cs3"     , calibration_step)
 
   # in case of sufficient convergence, stop here (no additional update of
   # calibration factors!)
-  if(all(calib_divergence < calib_accuracy)) return(TRUE)
+  if(all(calib_divergence < calib_accuracy) |  calibration_step==n_maxcalib) {
 
+    ### Depending on the selected calibration selection type (best_calib FALSE or TRUE)
+    # the reported and used regional calibration factors can be either the ones of the last iteration,
+    # or the "best" based on the iteration value with the lower divergence.
+    if (best_calib == TRUE){
+    ###-Select best calibration factor for each region and from the all the calibration steps
+    calib_best<-new.magpie(cells_and_regions = getCells(calib_divergence),years = getYears(calib_divergence),names = c("crop","past"))
+
+    divergence_data<-read.csv("calib_divergence.cs3")
+    factors_data<-read.csv("calib_factor.cs3")
+
+    for (i in getCells(calib_best)){
+      factors_data_sub<-subset(factors_data,dummy==i)
+      divergence_data_sub<-subset(divergence_data,dummy==i)
+
+      calib_best[i,NULL,"crop"]<-factors_data_sub[which.min(divergence_data_sub$crop),"crop"]
+      calib_best[i,NULL,"past"]<-factors_data_sub[which.min(divergence_data_sub$past),"past"]
+    }
+
+
+    comment <- c(" description: Regional yield calibration file",
+                 " unit: -",
+                 paste0(" note: Best calibration factor from the run"),
+                 " origin: scripts/calibration/calc_calib.R (path relative to model main directory)",
+                 paste0(" creation date: ",date()))
+    write.magpie(round(setYears(calib_best,NULL),2), calib_file, comment = comment)
+
+    write_log(calib_best,     "calib_factor.cs3"     , "best")
+####
+  return(TRUE)
+}else{
+  return(TRUE)
+}
+}else{
   comment <- c(" description: Regional yield calibration file",
                " unit: -",
                paste0(" note: Calibration step ",calibration_step),
                " origin: scripts/calibration/calc_calib.R (path relative to model main directory)",
                paste0(" creation date: ",date()))
   write.magpie(round(setYears(calib_factor,NULL),2), calib_file, comment = comment)
-
-  write_log(calib_factor,     "calib_factor.cs3"     , calibration_step)
-
   return(FALSE)
+}
+
+
 }
 
 
@@ -132,13 +170,15 @@ calibrate_magpie <- function(n_maxcalib = 1,
                              calib_accuracy = 0.1,
                              calibrate_pasture = FALSE,
                              calibrate_cropland = TRUE,
+                             crop_max =2,
                              calib_magpie_name = "magpie_calib",
                              damping_factor = 0.6,
                              calib_file = "modules/14_yields/input/f14_yld_calib.csv",
                              putfolder = "calib_run",
                              data_workspace = NULL,
                              logoption = 3,
-                             debug = FALSE) {
+                             debug = FALSE,
+                             best_calib = FALSE) {
 
   require(magclass)
 
@@ -146,7 +186,7 @@ calibrate_magpie <- function(n_maxcalib = 1,
     cat(paste("\nStarting calibration iteration",i,"\n"))
     calibration_run(putfolder=putfolder, calib_magpie_name=calib_magpie_name, logoption=logoption)
     if(debug) file.copy(paste0(putfolder,"/fulldata.gdx"),paste0("fulldata_calib",i,".gdx"))
-    done <- update_calib(gdx_file=paste0(putfolder,"/fulldata.gdx"),calib_accuracy=calib_accuracy, calibrate_pasture=calibrate_pasture,calibrate_cropland=calibrate_cropland,damping_factor=damping_factor, calib_file=calib_file, calibration_step=i)
+    done <- update_calib(gdx_file=paste0(putfolder,"/fulldata.gdx"),calib_accuracy=calib_accuracy, calibrate_pasture=calibrate_pasture,calibrate_cropland=calibrate_cropland,crop_max=crop_max,damping_factor=damping_factor, calib_file=calib_file, calibration_step=i,n_maxcalib=n_maxcalib,best_calib = best_calib)
     if(done){
       break
     }

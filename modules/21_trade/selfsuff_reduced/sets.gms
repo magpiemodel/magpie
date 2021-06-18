@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -21,7 +21,7 @@ sets
    potato,cassav_sp,sugr_cane,sugr_beet,others,cottn_pro,
    oils,oilcakes,sugar,molasses,alcohol,ethanol,distillers_grain,brans,scp,fibres,
    livst_rum, livst_pig,livst_chick, livst_egg, livst_milk, fish, wood, woodfuel /
-
+   
 * We limit trade of secondary products as this allows for extreme specialisation
 * in the implementation. Exception is sugar, where we allow the secondary product
 * trade but not the primary as primaries are hardly traded in reality

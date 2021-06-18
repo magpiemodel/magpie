@@ -1,4 +1,4 @@
-# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: simulate dynamic forest and timber production
+# description: Forestry paper simulations
 # ----------------------------------------------------------
 
 ######################################
@@ -20,96 +20,54 @@ library(gms)
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
-#start MAgPIE run
-source("config/default.cfg")
-
-#cfg$force_download <- TRUE
-
-###########################################################################
-##################### Forestry specific settings ##########################
-###########################################################################
-
-### TIME
-#cfg$gms$c_timesteps <- "5year"
-
-### Other settings
-#cfg$gms$land <- "feb15"
-#cfg$gms$c60_bioenergy_subsidy <- 0
-
-## Bioenergy demand 0=GLO
-cfg$gms$c60_biodem_level <- 0
-
-### OPTIMIZATION
-# * 1: using optfile for specified solver settings
-# * 0: default settings (optfile will be ignored)
-cfg$gms$s80_optfile <- 1
-## Solver maxiter
-cfg$gms$s80_maxiter <- 2
-
-###########################################################################
-
-cfg$results_folder <- "output/:title:"
-
-cfg$recalc_npi_ndc <- "ifneeded"
-
-log_folder <- "run_details"
+log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag <- "PR18707"
+identifier_flag = "APR01"
+cat(paste0("Forestry on-off runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
-cat(paste0("Last for edits"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+xx <- c()
 
-#xx = c()
+#scen_vector <- c("ForestryOff","ForestryEndo","ForestryExo")
+scen_vector <- c("ForestryEndo","ForestryOff")
 
-for (co2_price_path in c("NPI","2deg")) {
+for(s80_maxiter in c(5)){
+  for(scen in scen_vector){
 
-  for(s32_initial_distribution in c(1)){
+      for(ssp in c("SSP2")){
+        source("config/default.cfg")
 
-    cfg$gms$s32_initial_distribution = s32_initial_distribution
-    cfg$gms$s73_demand_switch = s32_initial_distribution
+        cfg$gms$s80_maxiter = s80_maxiter
 
-    if(s32_initial_distribution == 1) timber_flag = "timberON"
-    if(s32_initial_distribution == 0) timber_flag = "timberOFF"
+        cfg = setScenario(cfg,c(ssp,"NPI",scen))
 
-    for(emis_policy in c("redd+_nosoil","ssp_nosoil")){
+          #cfg$gms$c_timesteps <- "5year"
 
-      for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
-        if(emis_policy == "redd+_nosoil") cfg$gms$s32_plant_carbon_foresight = 1
-        if(emis_policy == "ssp_nosoil")   cfg$gms$s32_plant_carbon_foresight = 0
+          cfg$gms$s15_elastic_demand <- 0
 
-        if (co2_price_path == "NPI" && emis_policy == "redd+_nosoil") {
-          cfg <- setScenario(cfg,c(ssp,"NPI"))
-          cfg$gms$c56_emis_policy <- emis_policy
-          cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi" #update to most recent coupled runs asap
-          cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
-          pol_flag = "REDD+"
-          co2_price_path_flag = "BAU"
-        } else if (co2_price_path == "2deg"){
-          cfg <- setScenario(cfg,c(ssp,"NDC"))
-          cfg$gms$c56_emis_policy <- emis_policy
-          cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
-          cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
-          if(emis_policy == "ssp_nosoil") pol_flag = ""
-          if(emis_policy == "redd+_nosoil") pol_flag = "REDD+"
-          co2_price_path_flag = "POL"
-        } else if (ssp != "SSP2" && emis_policy!="redd+_nosoil"){
-          break
-        }
+          if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
+          if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
 
-        #          cfg$gms$c56_pollutant_prices <- "coupling"
-        #          cfg$gms$c60_2ndgen_biodem <- "coupling"
+#          cfg$gms$c57_macc_version = "PBL_2019"
 
-        #          file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
-        #          file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
+          if(scen=="ForestryOff")           scen_flag="Default"
+          if(scen=="ForestryEndo")          scen_flag="Forestry"
+          if(scen=="ForestryExo")           scen_flag="ForestryExo"
 
-        #cfg$title <- paste0(identifier_flag,"_",ssp,"_",pol_flag,"_",co2_price_path_flag,"_",timber_flag)
-        cfg$title <- paste0(identifier_flag,"_",ssp,"_",pol_flag,"_",co2_price_path_flag)
+          cfg$title   = paste0(identifier_flag,"_",scen_flag)
+          cfg$output  = c("extra/timestep_duration")
 
-        cfg$output <- c("rds_report")
+           xx = c(xx,cfg$title)
+           cfg$gms$s80_optfile <- 1
+           cfg$results_folder = "output/:title:"
+           start_run(cfg,codeCheck=FALSE)
 
-#        xx <- c(xx,cfg$title)
-        start_run(cfg,codeCheck=FALSE)
       }
-    }
-  }
+   }
 }
+
+#          cfg$gms$c56_pollutant_prices = "coupling"
+#          cfg$gms$c60_2ndgen_biodem = "coupling"
+
+#          file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
+#          file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)

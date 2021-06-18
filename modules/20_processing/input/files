@@ -3,3 +3,6 @@ f20_processing_shares.cs3
 f20_processing_conversion_factors.cs3
 f20_processing_balanceflow.cs3
 f20_processing_unitcosts.cs3
+f20_scp_processing_shares.csv
+f20_scp_type_shr.csv
+f20_scp_unitcosts.csv

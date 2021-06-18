@@ -29,3 +29,6 @@ magpie_calib.*
 *.out
 /scripts/npi_ndc/npi_ndc_overview.txt
 Rplots.pdf
+
+#ignore GAMS license
+gamslice.txt

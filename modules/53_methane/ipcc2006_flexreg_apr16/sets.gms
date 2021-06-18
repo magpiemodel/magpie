@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -21,7 +21,6 @@ k_ruminants53(kli) ruminant subset
 
 emis_source_nomethane53(emis_source) emission sources
    / inorg_fert, man_crop, resid, man_past, som,
-     resid_burn,
      crop_vegc, crop_litc, crop_soilc,
      past_vegc, past_litc, past_soilc,
      forestry_vegc, forestry_litc, forestry_soilc,

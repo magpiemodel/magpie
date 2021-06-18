@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -8,7 +8,7 @@
 *' @equations
 *'
 *' We calculate methane emissions before technical mitigation(btm) in each regions (reg) (`vm_btm_reg`)
-*' from the aforementioned three sources of emissions step-by-step in the following three equations.
+*' from the aforementioned four sources of emissions step-by-step in the following four equations.
 *'
 *' The first equation describes how CH4 emission from enteric fermentation is calculated.
 *' The equation shows that total methane from enteric fermentation depends on
@@ -29,20 +29,20 @@
 
 *' As such, methane from enteric fermentation depends on the feed quality and the purpose of livestock farming.
 *' The feed quality (measured by energy content of the feed type) can be `k_conc53`
-*'  ( with high energy contents, for example, temperate and tropical cereals, maize,pulses) or `k_noconc53`
+*' (with high energy contents, for example, temperate and tropical cereals, maize,pulses) or `k_noconc53`
 *' (for example, pasture, fodder,crop residues). The purpose of livestock raising `k_ruminants53`
 *' can be either for meat (`livst_rum`) or for milk (`livst_milk`). The parameter `fm_attributes`
 *' in MAgPIE captures a content of some thing (e.g. gross energy-ge, dry matter-dm, reactive nitrogen-nr)
 *' in a given commodity.
-*' These attributes or coefficients are then used in content conversions in may modules of the model.
+*' These attributes or coefficients are then used in content conversions in many modules of the model.
 *'
 *' The second equation of this realization is meant to calculate CH4 emission from
 *' animal waste management (AWM). In general, AWM depends on the amount of manure
-*' excreted in confinements (such as stables or barns) (see [55_awms])and its
+*' excreted in confinements (such as stables or barns) (see [55_awms]) and its
 *' subsequent storage.
 *' We calculate the CH4 emission per unit of nitrogen in manure based on @ipcc_2006_2006
-*' and Manure Management Emissions from @FAOSTAT .
-*' See the  module for more on calculation of methane from animal waste(or manure) .
+*' and Manure Management Emissions from @FAOSTAT.
+*' See the module for more on calculation of methane from animal waste(or manure).
 
  q53_emissionbal_ch4_awms(i2) ..
   vm_btm_reg(i2,"awms","ch4") =e=
@@ -58,3 +58,12 @@
    vm_btm_reg(i2,"rice","ch4") =e=
           sum((cell(i2,j2),w), vm_area(j2,"rice_pro",w)
               * sum(ct,f53_ef_ch4_rice(ct,i2)));
+
+
+*' The fourth equation calculates emissions from burning crop residues for CH4. 
+*' This calculation follows the 2019 Refinement to the 2006 IPPC Guidelines for 
+*' National Greenhouse Gas Inventories, Eq. 2.27.
+
+ q53_emissions_resid_burn(i2) ..
+    vm_btm_reg(i2,"resid_burn","ch4") =e=
+      sum(kcr, vm_res_ag_burn(i2,kcr,"dm")) * s53_ef_ch4_res_ag_burn;

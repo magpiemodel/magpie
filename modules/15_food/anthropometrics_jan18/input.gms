@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -22,12 +22,14 @@ $setglobal c15_rum_share  mixed
 *   options:   constant,
 *              lin_zero_10_50, lin_zero_20_50, lin_zero_20_30, lin_50pc_20_50, lin_50pc_20_50_extend65, lin_50pc_20_50_extend80,
 *              lin_50pc_10_50_extend90, lin_75pc_10_50_extend90, lin_80pc_20_50, lin_80pc_20_50_extend95, lin_90pc_20_50_extend95,
-*              lin_99-98-90pc_20_50-60-100
+*              lin_99-98-90pc_20_50-60-100, sigmoid_20pc_20_50, sigmoid_50pc_20_50, sigmoid_80pc_20_50
 $setglobal c15_rumscen  constant
 $setglobal c15_fishscen  constant
 $setglobal c15_alcscen  constant
 $setglobal c15_livescen  constant
 $setglobal c15_rumdairyscen  constant
+$setglobal c15_rumdairy_scp_scen  constant
+$setglobal c15_livescen_target  constant
 
 
 $setglobal c15_exo_scen_targetyear  y2050
@@ -70,8 +72,11 @@ sets
                           VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 ;
 
+$onMultiR
+set    kfo_rd(kfo) Ruminant meat and dairy food products / livst_rum,livst_milk /;
+$offMulti
 
-scalar s15_elastic_demand  Elastic demand switch (1=elastic 0=exogenous) (1) / 1 /;
+scalar s15_elastic_demand  Elastic demand switch (1=elastic 0=exogenous) (1) / 0 /;
 
 scalar s15_calibrate Calibration switch (1=calibrated 0=pure regression outcomes) (1) / 1 /;
 * only for per-capita calories, not for e.g. calibration of transformation parameters between per-capita calories in dm
@@ -79,6 +84,7 @@ scalar s15_calibrate Calibration switch (1=calibrated 0=pure regression outcomes
 scalar s15_maxiter Scalar defining maximum number of iterations (1) / 5 /;
 
 scalar s15_convergence Convergence criterion (1) / 0.005 /;
+* maximum relative per-capita gdp difference within a region between two iteratios
 
 scalar s15_exo_waste Switch for transition towards exogenous food waste scenario (1)  / 0 /;
 
@@ -86,10 +92,15 @@ scalar s15_waste_scen Scenario target for the ratio between food demand and inta
 
 scalar s15_exo_diet Switch for transition towards exogenous diet scenario (1)  / 0 /;
 
+scalar s15_alc_scen Scenario target for the inclusion of alcohol in the EAT-Lancet diet (1)  / 0.014 /;
+
 scalar s15_rum_share_fadeout_india_strong 	switch for stronger ruminant fadeout in India (binary) / 1 /;
 
 scalar s15_milk_share_fadeout_india 		switch for milk fadeout in India (binary) / 1 /;
 
+scalar s15_kcal_pc_livestock_intake_target target for livestock intake (kcal per cap per day) / 430 /;
+
+scalar s15_livescen_target_subst fade-out of livestock products (0) or substitution of livestock products with plant-based products (1) / 1 /;
 
 table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of heterogeneous products and processes (mio. tDM)
 $ondelim

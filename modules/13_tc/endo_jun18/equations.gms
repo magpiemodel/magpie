@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -36,12 +36,6 @@ q13_cost_tc(i2) ..
 *' time horizon by multiplication with the interest rate `pm_interest(i)`
 *' (annuity with infinite time horizon):
 
-q13_tech_cost_annuity(i2) ..
- v13_tech_cost_annuity(i2) =e= (vm_tau(i2)/pc13_tau(i2)-1) * v13_cost_tc(i2)
-                               * sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
-
-*' Additionally, the technological change costs coming from past investment
-*' decisions are added to the technological change costs of the current period:
-
 q13_tech_cost(i2) ..
-  vm_tech_cost(i2) =e= v13_tech_cost_annuity(i2) + pc13_tech_cost_past(i2);
+ vm_tech_cost(i2)=e= (vm_tau(i2)/pcm_tau(i2)-1) * v13_cost_tc(i2)
+                               * sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)));

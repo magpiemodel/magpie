@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -41,4 +41,11 @@ sets
 
    bioen_type_30(kbe30) dynamic set bioen type
    bioen_water_30(w) dynamic set bioen water
+
+   crop_ann30(kcr) annual crops
+    / tece, maiz, trce, rice_pro, rapeseed, sunflower, potato, cassav_sp, sugr_beet, others, cottn_pro, foddr, soybean, groundnut, puls_pro /
+
+   crop_per30(kcr) perennial crops
+    / oilpalm, begr, sugr_cane, betr /
+
 ;
