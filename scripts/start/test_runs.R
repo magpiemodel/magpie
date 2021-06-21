@@ -34,7 +34,7 @@ cfg$title <- .title("default")
 start_run(cfg, codeCheck = TRUE)
 
 # create a set of runs based on default.cfg
-for(ssp in c("SSP1","SSP2")) { # Add SSP* here for testing other SSPs.
+for(ssp in c("SSP2")) {        # Add SSP* here for testing other SSPs.
                                # Basic test should be for at least two SSPs to
                                #check if results until 2020 are identical
 
