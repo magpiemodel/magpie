@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **39_landconversion** lower costs for expansion of forestry land
 - **58_peatland** Peatland area is initialized in 1995 based on levels for the year 2015, and hold fixed depending on `s58_fix_peatland`. This provides a better proxy for peatland area and associated GHG emissions for the historic period, which where assumed zero in previous versions.
 - **script** New standard for cluster to region mapping (rds-files) is used in all scripts. If old spam files are provided by input data, rds-mapping file is created.
+- **script** updated test run script
 - **inputs** Changed file format from cs2 to cs2b for cellular input files with a single data column
 
 ### added
