@@ -39,15 +39,22 @@ for(ssp in c("SSP1","SSP2")) { # Add SSP* here for testing other SSPs.
                                #check if results until 2020 are identical
 
   cfg$title <- .title("ref", ssp)
+  # Set NPI scenario
   cfg <- setScenario(cfg,c(ssp,"NPI"))
+  # Set reference pricing 
   cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
   cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-NPi"
-  start_run(cfg, codeCheck = FALSE)
+  # Start reference run
+  start_run(cfg, codeCheck = TRUE)
 
-  cfg$title <- .title("1p5deg", ssp)
+  # Create correct naming for mitigation scenario (co2 pricing)
+  cfg$title <- .title("1p5deg", ssp) 
+  # Set NDC scenario (NPIs only in reference case)
   cfg <- setScenario(cfg,c(ssp,"NDC"))
+  # Set CO2 pricing 
   cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
   cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg600"
-  start_run(cfg, codeCheck = FALSE)
+  # Start policy run
+  start_run(cfg, codeCheck = TRUE)
 
 }
