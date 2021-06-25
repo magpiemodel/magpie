@@ -23,15 +23,15 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "MAR01"
+identifier_flag = "PL01"
 cat(paste0("Forestry on-off runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
 #scen_vector <- c("ForestryOff","ForestryEndo","ForestryExo")
-scen_vector <- c("ForestryEndo")
+scen_vector <- c("ForestryEndo","ForestryOff")
 
-for(c73_wood_scen in c("default","construction")){
+for(c73_wood_scen in c("default")){
 
   for(s80_maxiter in c(5)){
     for(scen in scen_vector){
@@ -58,7 +58,7 @@ for(c73_wood_scen in c("default","construction")){
 
             cfg$gms$c73_wood_scen = c73_wood_scen
 
-            cfg$title   = paste0(identifier_flag,"_",scen_flag,"Endo_",c73_wood_scen)
+            cfg$title   = paste0(identifier_flag,"_",scen_flag)
             cfg$output  = c("extra/timestep_duration")
 
              xx = c(xx,cfg$title)
