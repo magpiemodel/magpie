@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "PL03"
+identifier_flag = "PL04"
 cat(paste0("Forestry on-off runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
@@ -41,7 +41,7 @@ for(c73_wood_scen in c("default")){
 
           cfg$gms$s80_maxiter = s80_maxiter
 
-          cfg = setScenario(cfg,c(ssp,"NPI",scen))
+          cfg = setScenario(cfg,c(ssp,"BASE",scen))
 
             #cfg$gms$c_timesteps <- "5year"
 
