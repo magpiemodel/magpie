@@ -29,7 +29,7 @@ cat(paste0("Rotation based on increment maximization. GS target hardcodedd for R
 xx <- c()
 
 #scen_vector <- c("ForestryOff","ForestryEndo","ForestryExo")
-scen_vector <- c("ForestryEndo","ForestryOff")
+scen_vector <- c("ForestryEndo")
 
 for(c73_wood_scen in c("default")){
 

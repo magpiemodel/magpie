@@ -108,6 +108,8 @@ $include "./modules/32_forestry/input/f32_plantedforest.cs4"
 $offdelim
 /;
 f32_plantedforest("EUR") = f32_plantedforest("EUR")*3;
+* Without this, JPN will throw div by 0 error
+f32_plantedforest("JPN") = 0.001;
 
 parameter f32_estb_calib(i) Calibration factor for plantation forest establishment (1)
 /
