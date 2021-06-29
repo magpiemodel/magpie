@@ -200,7 +200,13 @@ elseif s32_initial_distribution = 4,
     );
 
 );
-
+** Redistribute to youngest age class in case the distribution to plantations and
+** ndcs does not match fully with LUH initialized data
+loop(j,
+  if(pm_land_start(j,"forestry") > sum((type32,ac),p32_land_start_ac(j,type32,ac)),
+    p32_land_start_ac(j,"ndc","ac0") = p32_land_start_ac(j,"ndc","ac0") + (pm_land_start(j,"forestry") - sum((type32,ac),p32_land_start_ac(j,type32,ac)));
+    );
+);
 ** Initialization of land
 *p32_land_start_ac(j,type32,ac) = p32_land("y1995",j,type32,ac);
 
