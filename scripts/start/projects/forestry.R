@@ -41,7 +41,7 @@ for(c73_wood_scen in c("default")){
 
           cfg$gms$s80_maxiter = s80_maxiter
 
-          cfg = setScenario(cfg,c(ssp,"BASE",scen))
+          cfg = setScenario(cfg,c(ssp,"NPI",scen))
 
             #cfg$gms$c_timesteps <- "5year"
 
