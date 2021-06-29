@@ -27,12 +27,23 @@ p32_IGR(t_all,j,ac) =   (p32_carbon_density_ac_marg(t_all,j,ac)/p32_carbon_densi
 ** As long as the prevailing interest rate becomes higher than IGR, it is assumed that the forest owner would rather
 ** keep his/her investment in bank rather than in keeping the forest standing.
 ** The easiest way to do this calculation is to count a value of 1 for IGR>interest rate and a value of 0 for IGR<interest rate.
+$ifthen "%c32_rot_calc_type%" == "max_npv"
 $ifthen "%c32_interest_rate%" == "regional"
   p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest("y1995",i)) >  0)
                           + 0$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest("y1995",i)) <= 0);
 $elseif "%c32_interest_rate%" == "global"
   p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - s32_forestry_int_rate  >  0)
                           + 0$(p32_IGR(t_all,j,ac) - s32_forestry_int_rate <= 0);
+$endif
+display "Rotation lengths are calculated based on maximizing NPV in this run.";
+$endif
+
+$ifthen "%c32_rot_calc_type%" == "max_increment"
+  p32_rot_flg(t_all,j,ac) = 1$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_carbon_density_ac_marg(t_all,j,ac-1) >  0)
+                          + 0$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_carbon_density_ac_marg(t_all,j,ac-1) <= 0);
+
+  display "Rotation lengths are calculated based on maximizing increment in this run.";
+
 $endif
 
 ** From the above calculation, now it is easier to count how many age-classes can be sustained before IGR falls below interest rate.
@@ -118,6 +129,8 @@ loop(j,
 loop(t_all,
   p32_rotation_cellular_harvesting(t_all+1,j)$(abs(p32_rotation_cellular_harvesting(t_all+1,j) - p32_rotation_cellular_harvesting(t_all,j))>2 AND ord(t_all)<card(t_all)) = p32_rotation_cellular_harvesting(t_all,j);
   );
+
+display p32_rotation_cellular_harvesting;
 
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
