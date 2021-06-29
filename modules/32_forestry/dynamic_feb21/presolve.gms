@@ -163,4 +163,5 @@ pc32_yield_forestry_future_reg(i)$(pc32_yield_forestry_future_reg(i) = 0) =  sma
 p32_updated_gs_reg(t,i) = 1;
 p32_updated_gs_reg(t,i)$(sum((cell(i,j),ac_sub),p32_land(t,j,"plant",ac_sub))>0) = (sum((cell(i,j),ac_sub),(pm_timber_yield(t,j,ac_sub,"forestry") / sm_wood_density) * p32_land(t,j,"plant",ac_sub))/ sum((cell(i,j),ac_sub),p32_land(t,j,"plant",ac_sub)));
 
+display v32_land.l;
 *** EOF presolve.gms ***
