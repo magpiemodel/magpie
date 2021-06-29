@@ -93,7 +93,6 @@ $include "./modules/32_forestry/input/f32_gs_relativetarget.cs4"
 $offdelim
 /;
 f32_gs_relativetarget("REF") = f32_gs_relativetarget("USA");
-f32_gs_relativetarget("JPN") = f32_gs_relativetarget("CHA");
 
 table f32_plantation_contribution(t_ext,i,inter32,scen32) Share of roundwood production coming from timber plantations (percent)
 $ondelim

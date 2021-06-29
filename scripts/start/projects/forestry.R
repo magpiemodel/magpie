@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "PL06a"
+identifier_flag = "PL06b"
 cat(paste0("Rotation based on increment maximization. GS target hardcodedd for REF and JPN"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
