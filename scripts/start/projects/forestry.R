@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "PL06d"
+identifier_flag = "PL06e"
 cat(paste0("Test with natveg land clearning cost"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
