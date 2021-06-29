@@ -182,10 +182,10 @@ elseif s32_initial_distribution = 4,
 ** Calculate the weights, youngest age-class will have highest weight
     p32_ac_dist(j,ac) = (p32_ac_dist_flag(j,ac) / (sum(ac2,p32_ac_dist_flag(j,ac2)) + ord(ac)))$(ord(ac) <= p32_rotation_cellular_harvesting("y1995",j));
 ** there can be isntances where this distribution is not summing up to 1, in that case we take the excess and remove it evenly from all age-classes
-** In case the sum of distribution is > 1 : Remove the excess evenly
-    p32_ac_dist(j,ac)$(sum(ac2, p32_ac_dist(j,ac2))>1) = (p32_ac_dist(j,ac) - (sum(ac2, p32_ac_dist(j,ac2))-1)/p32_ac_dist_flag(j,"ac0"))$(ord(ac) <= p32_rotation_cellular_harvesting("y1995",j));
-** In case the sum of distribution is < 1 : Add the shortage evenly
-    p32_ac_dist(j,ac)$(sum(ac2, p32_ac_dist(j,ac2))<1) = (p32_ac_dist(j,ac) + (1-sum(ac2, p32_ac_dist(j,ac2)))/p32_ac_dist_flag(j,"ac0"))$(ord(ac) <= p32_rotation_cellular_harvesting("y1995",j));
+** In case the sum of distribution is > 1 : Remove the excess from ac0
+    p32_ac_dist(j,"ac0")$(sum(ac2, p32_ac_dist(j,ac2))>1) = p32_ac_dist(j,"ac0") - (sum(ac2, p32_ac_dist(j,ac2))-1);
+** In case the sum of distribution is < 1 : Add the shortage to ac0
+    p32_ac_dist(j,"ac0")$(sum(ac2, p32_ac_dist(j,ac2))<1) = p32_ac_dist(j,"ac0") + (1-sum(ac2, p32_ac_dist(j,ac2)));
     );
 ** Isolate plantations from planted forest (forestry)
     p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
