@@ -10,3 +10,6 @@ i39_cost_establish(land_establish39) = s39_cost_establish;
 
 i39_cost_clearing(land) = 0;
 i39_cost_clearing(land_clearing39) = s39_cost_clearing;
+
+i39_cost_clearing("primforest") = 5;
+i39_cost_clearing("secdforest") = 3;
