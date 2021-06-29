@@ -22,7 +22,7 @@ $setglobal c32_dev_scen  abare
 $setglobal c32_incr_rate  h5s2l1
 * options constant,h5s5l5,h5s2l2,h5s2l1,h5s1l1,h5s1l05,h2s1l05
 
-$setglobal c32_rot_calc_type max_increment
+$setglobal c32_rot_calc_type max_npv
 * options max_increment, max_npv
 
 scalars
@@ -92,8 +92,8 @@ $ondelim
 $include "./modules/32_forestry/input/f32_gs_relativetarget.cs4"
 $offdelim
 /;
-f32_gs_relativetarget("REF") = f32_gs_relativetarget("USA");
-f32_gs_relativetarget("JPN") = f32_gs_relativetarget("CHA");
+*f32_gs_relativetarget("REF") = f32_gs_relativetarget("USA");
+*f32_gs_relativetarget("JPN") = f32_gs_relativetarget("CHA");
 
 table f32_plantation_contribution(t_ext,i,inter32,scen32) Share of roundwood production coming from timber plantations (percent)
 $ondelim

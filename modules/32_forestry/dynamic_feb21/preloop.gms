@@ -27,11 +27,11 @@ p32_IGR(t_all,j,ac) =   (p32_carbon_density_ac_marg(t_all,j,ac)/p32_carbon_densi
 ** As long as the prevailing interest rate becomes higher than IGR, it is assumed that the forest owner would rather
 ** keep his/her investment in bank rather than in keeping the forest standing.
 ** The easiest way to do this calculation is to count a value of 1 for IGR>interest rate and a value of 0 for IGR<interest rate.
-$ifthen ("%c32_rot_calc_type%" == "max_npv" AND "%c32_interest_rate%" == "regional")
+$ifthen "%c32_interest_rate%" == "regional"
   p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest("y1995",i)) >  0)
                           + 0$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest("y1995",i)) <= 0);
   display "Rotation lengths are calculated based on maximizing NPV.";
-$elseif ("%c32_rot_calc_type%" == "max_npv" AND "%c32_interest_rate%" == "global")
+$elseif "%c32_interest_rate%" == "global"
   p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - s32_forestry_int_rate  >  0)
                           + 0$(p32_IGR(t_all,j,ac) - s32_forestry_int_rate <= 0);
   display "Rotation lengths are calculated based on maximizing NPV.";
@@ -252,13 +252,13 @@ p32_plantation_contribution(t_ext,i)$(f32_gs_relativetarget(i)>0) = f32_plantati
 p32_observed_gs_reg(i) = 0;
 ** Wherever FAO reports >0 growing stock, we calculate how much growing stock MAGPIE
 ** sees even before optimization starts
-p32_observed_gs_reg(i)$(f32_gs_relativetarget(i)>0 AND f32_plantedforest(i)>0)  = (sum((cell(i,j),ac),(pm_timber_yield_initial(j,ac,"forestry") / sm_wood_density) * p32_land_start_ac(j,"plant",ac))/ sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac)));
+p32_observed_gs_reg(i)$(f32_gs_relativetarget(i)>0)  = (sum((cell(i,j),ac),(pm_timber_yield_initial(j,ac,"forestry") / sm_wood_density) * p32_land_start_ac(j,"plant",ac))/ sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac)));
 display p32_observed_gs_reg, pm_timber_yield_initial, p32_land_start_ac;
 ** Initialze calibration factor for growing stocks as 1
 ** we dont set it to 0 as we don't want to modify carbon densities by multiplication with 0 later
 p32_gs_scaling_reg(i) = 1;
 ** Calculate the ratio between target growing stock (reported by FAO) and observed growing stock (value at initialization in MAgPIE)
-p32_gs_scaling_reg(i)$(f32_gs_relativetarget(i)>0 AND f32_plantedforest(i)>0) = f32_gs_relativetarget(i) / p32_observed_gs_reg(i);
+p32_gs_scaling_reg(i)$(f32_gs_relativetarget(i)>0) = f32_gs_relativetarget(i) / p32_observed_gs_reg(i);
 ** Calibration factors lower than 1 are set to 1
 p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) < 1) = 1;
 display p32_gs_scaling_reg;
