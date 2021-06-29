@@ -19,15 +19,23 @@ if(s35_forest_damage=1,
 	p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry;
 	);
 
+* shifting cultivation is faded out until 2030
 if(s35_forest_damage=2,
+	p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry*(1 - f35_protection_fader(t, "%c35_forest_damage_end%"));
+	p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry*(1 - f35_protection_fader(t, "%c35_forest_damage_end%"));
+	);
+
+if(s35_forest_damage=3,
 	p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum((cell(i,j),combined_loss),f35_forest_lost_share(i,combined_loss))*m_timestep_length_forestry;
 	p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum((cell(i,j),combined_loss),f35_forest_lost_share(i,combined_loss))*m_timestep_length_forestry;
 	);
+
 * Distribution of damages correctly
-	pc35_secdforest(j,ac_est) = pc35_secdforest(j,ac_est) + sum(ac_sub,p35_disturbance_loss_secdf(t,j,ac_sub))/card(ac_est) + p35_disturbance_loss_primf(t,j)/card(ac_est);
-  pc35_secdforest(j,ac_sub) = pc35_secdforest(j,ac_sub) - p35_disturbance_loss_secdf(t,j,ac_sub);
-  pcm_land(j,"primforest") = pcm_land(j,"primforest") - p35_disturbance_loss_primf(t,j);
-  vm_land.l(j,"primforest") = pcm_land(j,"primforest");
+pc35_secdforest(j,ac_est) = pc35_secdforest(j,ac_est) + sum(ac_sub,p35_disturbance_loss_secdf(t,j,ac_sub))/card(ac_est) + p35_disturbance_loss_primf(t,j)/card(ac_est);
+
+pc35_secdforest(j,ac_sub) = pc35_secdforest(j,ac_sub) - p35_disturbance_loss_secdf(t,j,ac_sub);
+pcm_land(j,"primforest") = pcm_land(j,"primforest") - p35_disturbance_loss_primf(t,j);
+vm_land.l(j,"primforest") = pcm_land(j,"primforest");
 
 * Regrowth of natural vegetation (natural succession) is modelled by shifting age-classes according to time step length.
 s35_shift = m_timestep_length_forestry/5;
@@ -64,53 +72,8 @@ v35_other.l(j,ac) = pc35_other(j,ac);
 vm_land.l(j,"other") = sum(ac, pc35_other(j,ac));
 pcm_land(j,"other") = sum(ac, pc35_other(j,ac));
 
-*** Forest protection (WDPA areas and different conservation priority areas)
-* calc protection share for primforest, secdforest and other land
-p35_protect_shr(t,j,prot_type)$(sum(land_natveg, pm_land_start(j,land_natveg)) > 0) = f35_protect_area(j,prot_type)/sum(land_natveg, pm_land_start(j,land_natveg));
-p35_protect_shr(t,j,prot_type)$(p35_protect_shr(t,j,prot_type) > 1) = 1;
-p35_protect_shr(t,j,prot_type)$(p35_protect_shr(t,j,prot_type) < 0) = 0;
-
-* protection scenarios
-$ifthen "%c35_protect_scenario%" == "none"
-  p35_save_primforest(t,j) = 0;
-  p35_save_secdforest(t,j) = 0;
-  p35_save_other(t,j) = 0;
-$elseif "%c35_protect_scenario%" == "full"
-  p35_save_primforest(t,j) = pcm_land(j,"primforest");
-  p35_save_secdforest(t,j) = pcm_land(j,"secdforest");
-  p35_save_other(t,j) = pcm_land(j,"other");
-$elseif "%c35_protect_scenario%" == "forest"
-	  p35_save_primforest(t,j) = pcm_land(j,"primforest");
-	  p35_save_secdforest(t,j) = pcm_land(j,"secdforest");
-	  p35_save_other(t,j) = 0;
-$elseif "%c35_protect_scenario%" == "WDPA"
-  p35_save_primforest(t,j) = p35_protect_shr(t,j,"WDPA")*pm_land_start(j,"primforest");
-  p35_save_secdforest(t,j) = p35_protect_shr(t,j,"WDPA")*pm_land_start(j,"secdforest");
-  p35_save_other(t,j) = p35_protect_shr(t,j,"WDPA")*pm_land_start(j,"other");
-$elseif "%c35_protect_scenario%" == "HalfEarth"
-* Correction of Half Earth protection share
-* Note: Half Earth already contains WDPA protection
-p35_protect_shr(t,j,"HalfEarth")$(p35_protect_shr(t,j,"HalfEarth") < p35_protect_shr(t,j,"WDPA")) = p35_protect_shr(t,j,"WDPA");
-
-* half earth scenario begins fading in after 2020:
-p35_save_primforest(t,j) = (p35_protect_shr(t,j,"WDPA")+f35_protection_fader(t)*(p35_protect_shr(t,j,"HalfEarth")-p35_protect_shr(t,j,"WDPA")))*pm_land_start(j,"primforest");
-p35_save_secdforest(t,j) = (p35_protect_shr(t,j,"WDPA")+f35_protection_fader(t)*(p35_protect_shr(t,j,"HalfEarth")-p35_protect_shr(t,j,"WDPA")))*pm_land_start(j,"secdforest");
-p35_save_other(t,j)      = (p35_protect_shr(t,j,"WDPA")+f35_protection_fader(t)*(p35_protect_shr(t,j,"HalfEarth")-p35_protect_shr(t,j,"WDPA")))*pm_land_start(j,"other");
-$else
-* conservation priority scenarios start in 2020, in addition to WDPA protection
-  if (m_year(t) <= sm_fix_SSP2,
-  p35_save_primforest(t,j) = p35_protect_shr(t,j,"WDPA")*pm_land_start(j,"primforest");
-  p35_save_secdforest(t,j) = p35_protect_shr(t,j,"WDPA")*pm_land_start(j,"secdforest");
-  p35_save_other(t,j) = p35_protect_shr(t,j,"WDPA")*pm_land_start(j,"other");
-  else
-  p35_save_primforest(t,j) = (p35_protect_shr(t,j,"WDPA")+p35_protect_shr(t,j,"%c35_protect_scenario%"))*pm_land_start(j,"primforest");
-  p35_save_secdforest(t,j) = (p35_protect_shr(t,j,"WDPA")+p35_protect_shr(t,j,"%c35_protect_scenario%"))*pm_land_start(j,"secdforest");
-  p35_save_other(t,j) = (p35_protect_shr(t,j,"WDPA")+p35_protect_shr(t,j,"%c35_protect_scenario%"))*pm_land_start(j,"other");
-  p35_save_primforest(t,j)$(p35_save_primforest(t,j) > pcm_land(j,"primforest")) = pcm_land(j,"primforest");
-  p35_save_secdforest(t,j)$(p35_save_secdforest(t,j) > pcm_land(j,"secdforest")) = pcm_land(j,"secdforest");
-  p35_save_other(t,j)$(p35_save_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");
-  );
-$endif
+** Land protection
+p35_save_natveg(t,j,land_natveg)$(p35_save_natveg(t,j,land_natveg) > pcm_land(j,land_natveg)) = pcm_land(j,land_natveg);
 
 * Within the optimization, primary and secondary forests can only decrease
 * (e.g. for cropland expansion).
@@ -120,9 +83,9 @@ $endif
 ** Setting bounds for only allowing s35_natveg_harvest_shr percentage of available primf to be harvested (highest age class)
 ** Allowing selective logging only after historical period
 if (sum(sameas(t_past,t),1) = 1,
-vm_land.lo(j,"primforest") = p35_save_primforest(t,j);
+vm_land.lo(j,"primforest") = p35_save_natveg(t,j,"primforest");
 else
-vm_land.lo(j,"primforest") = max((1-s35_natveg_harvest_shr) * pcm_land(j,"primforest"), p35_save_primforest(t,j));
+vm_land.lo(j,"primforest") = max((1-s35_natveg_harvest_shr) * pcm_land(j,"primforest"), p35_save_natveg(t,j,"primforest"));
 );
 vm_land.up(j,"primforest") = pcm_land(j,"primforest");
 m_boundfix(vm_land,(j,"primforest"),l,10e-5);
@@ -135,15 +98,15 @@ v35_secdforest.up(j,ac) = Inf;
 p35_save_dist(j,ac_sub) = (pc35_secdforest(j,ac_sub)/sum(ac_sub2,pc35_secdforest(j,ac_sub2)))$(sum(ac_sub2,pc35_secdforest(j,ac_sub2))>0);
 
 if (sum(sameas(t_past,t),1) = 1,
-v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=0)  = p35_save_secdforest(t,j);
-v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=1) = p35_save_secdforest(t,j)/card(ac_sub);
-v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=2) = p35_save_secdforest(t,j)*p35_save_dist(j,ac_sub);
-*v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=2) = p35_save_secdforest(t,j);
+v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=0)  = p35_save_natveg(t,j,"secdforest");
+v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=1) = p35_save_natveg(t,j,"secdforest")/card(ac_sub);
+v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=2) = p35_save_natveg(t,j,"secdforest")*p35_save_dist(j,ac_sub);
+*v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=2) = p35_save_natveg(t,j,"secdforest");
 else
-v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=0)  = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx") , p35_save_secdforest(t,j));
-v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=1) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub), p35_save_secdforest(t,j) / card(ac_sub));
-v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=2) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub), p35_save_secdforest(t,j) * p35_save_dist(j,ac_sub));
-*v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=2) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx"), p35_save_secdforest(t,j));
+v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=0)  = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx") , p35_save_natveg(t,j,"secdforest"));
+v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=1) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub), p35_save_natveg(t,j,"secdforest") / card(ac_sub));
+v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=2) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub), p35_save_natveg(t,j,"secdforest") * p35_save_dist(j,ac_sub));
+*v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=2) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx"), p35_save_natveg(t,j,"secdforest"));
 );
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
 m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
@@ -152,7 +115,7 @@ m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
 v35_other.lo(j,ac) = 0;
 v35_other.up(j,ac) = Inf;
 *set bounds
-v35_other.lo(j,"acx") = p35_save_other(t,j);
+v35_other.lo(j,"acx") = p35_save_natveg(t,j,"other");
 v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
 m_boundfix(v35_other,(j,ac_sub),l,10e-5);
 

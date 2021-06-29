@@ -8,7 +8,9 @@
 *' @description This module realization calculates methane from different
 *' agricultural sources based on the @ipcc_2006_2006.
 *' Methane emission sources considered in the module are enteric fermentation,
-*' animal waste management, and rice.
+*' animal waste management, and rice. Further, methane emissions from the burning
+*' of agricultural residues is incorporated, with emissions factors taken
+*' from the IPCC 2019 revision.
 
 *' @limitations CH4 emissions from animal waste management may be
 *' inconsistent with CH4 emissions from enteric fermentation.

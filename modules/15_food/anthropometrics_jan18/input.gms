@@ -72,6 +72,9 @@ sets
                           VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 ;
 
+$onMultiR
+set    kfo_rd(kfo) Ruminant meat and dairy food products / livst_rum,livst_milk /;
+$offMulti
 
 scalar s15_elastic_demand  Elastic demand switch (1=elastic 0=exogenous) (1) / 0 /;
 
