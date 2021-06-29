@@ -33,7 +33,7 @@ scen_vector <- c("ForestryEndo")
 
 for(c73_wood_scen in c("default")){
 
-  for(s80_maxiter in c(5)){
+  for(s80_maxiter in c(30)){
     for(scen in scen_vector){
 
         for(ssp in c("SSP2")){
@@ -62,7 +62,7 @@ for(c73_wood_scen in c("default")){
             cfg$output  = c("extra/timestep_duration")
 
              xx = c(xx,cfg$title)
-             cfg$gms$s80_optfile <- 1
+             cfg$gms$s80_optfile <- 0
              cfg$results_folder = "output/:title:"
              start_run(cfg,codeCheck=FALSE)
 

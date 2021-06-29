@@ -93,7 +93,7 @@ $include "./modules/32_forestry/input/f32_gs_relativetarget.cs4"
 $offdelim
 /;
 f32_gs_relativetarget("REF") = f32_gs_relativetarget("USA");
-f32_gs_relativetarget("JPN") = f32_gs_relativetarget("USA");
+f32_gs_relativetarget("JPN") = f32_gs_relativetarget("CHA");
 
 table f32_plantation_contribution(t_ext,i,inter32,scen32) Share of roundwood production coming from timber plantations (percent)
 $ondelim
@@ -108,8 +108,6 @@ $include "./modules/32_forestry/input/f32_plantedforest.cs4"
 $offdelim
 /;
 f32_plantedforest("EUR") = f32_plantedforest("EUR")*3;
-* Without this, JPN will throw div by 0 error
-f32_plantedforest("JPN") = 0.001;
 
 parameter f32_estb_calib(i) Calibration factor for plantation forest establishment (1)
 /
