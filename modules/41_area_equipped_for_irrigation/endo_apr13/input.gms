@@ -7,6 +7,11 @@
 
 $setglobal c41_initial_irrigation_area  Siebert
 
+scalars
+s41_AEI_depreciation Depreciation rate in capital value of irrigation infrastructure /0.05/
+;
+
+
 table f41_c_irrig(t_all,i) Irrigation investment costs (USD04MER per ha)
 $ondelim
 $include "./modules/41_area_equipped_for_irrigation/endo_apr13/input/f41_c_irrig.csv"
