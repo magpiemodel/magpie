@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **script** New standard for cluster to region mapping (rds-files) is used in all scripts. If old spam files are provided by input data, rds-mapping file is created.
 - **script** updated test run script
 - **inputs** Changed file format from cs2 to cs2b for cellular input files with a single data column
+- **scenario_config** added RCPs as columns for use with setSceanrio function. This required the addition of "gms$" in the 1st column.
+
 
 ### added
 - **13_tc** Added new interfaces for tau factor of the previous time step (`pcm_tau`)
