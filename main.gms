@@ -146,25 +146,25 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev50_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp4p5-co2_rev52_c200_1ffb3a6fd3ac74779d7fb03a215fbec6.tgz
+* md5sum: 1e303cb67ff6cd757fb4eecc8139b7b1
+* Repository: /p/projects/landuse/data/input/archive
 * 
-* Used data set: rev4.57_h12_magpie.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* Used data set: rev4.57bb4_1ffb3a6fd3ac74779d7fb03a215fbec6_magpie.tgz
+* md5sum: e3bc19cada8ff07ce728b13e2dd7644c
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.57_h12_validation.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* Used data set: rev4.57bb4_1ffb3a6fd3ac74779d7fb03a215fbec6_validation.tgz
+* md5sum: 408433182fd0ef2a845c63e49a42c8bd
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: calibration_H12_c200_26Feb20.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Used data set: calibration_INMS_v6_16Feb21.tgz
+* md5sum: 6fbe2067e93a47791c12b0f973018047
+* Repository: /p/projects/landuse/data/input/calibration
 * 
 * Used data set: additional_data_rev3.95.tgz
 * md5sum: 87ab0375e1114e5188ab45cbaa2e818e
-* Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/input_data/
+* Repository: /p/projects/landuse/data/input/archive
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -172,32 +172,36 @@ $title magpie
 * Total number of cells: 200
 * 
 * Number of cells per region:
-*   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*    28   24   10    7    3   53   17    8   22    7   11   10
+*   ANZ  CHN  EUR  FSU  IND  MEN  OAS  OSA  SEA  SSA  USA  XAS  XEA  XEE  XLV  XNA  XPR  XSA
+*    21   21   10    6    7   13   11   41   10   11    9    5    7    1    3    6   15    3
 * 
-* Regionscode: 690d3718e151be1b450b394c1064b1c5
+* Regionscode: 1ffb3a6fd3ac74779d7fb03a215fbec6
 * 
 * Regions data revision: 4.57
 * 
 * lpj2magpie settings:
-* * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
-* * Additional input folder: /p/projects/landuse/data/input/other/rev50
-* * Revision: 50
+* * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp4p5/co2
+* * Additional input folder: /p/projects/landuse/data/input/other/rev52
+* * Revision: 52
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
 * 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
-* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev50_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev50_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* * Regionscode: 690d3718e151be1b450b394c1064b1c5
+* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp4p5-co2_rev52_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp4p5-co2_rev52_c200_1ffb3a6fd3ac74779d7fb03a215fbec6.tgz
+* * Regionscode: 1ffb3a6fd3ac74779d7fb03a215fbec6
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = cfg$spamfile, debug = FALSE, seed = cfg$seed)
 * 
 * 
+* Warning message:
+* In download_unpack(input = files, targetdir = "input",  ... :
+*   Following files not found:
+*   calibration_inms_c200_08Jul2020.tgz
 * 
-* Last modification (input data): Wed Feb  3 11:30:50 2021
+* Last modification (input data): Sat Feb 20 14:23:58 2021
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -221,9 +225,9 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  coup2100
+$setglobal c_timesteps  12
 $setglobal c_past  till_2010
-$setglobal c_title  default
+$setglobal c_title  SSP2_RCP4p5_SensitivityAWSmoderate_v10
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
@@ -256,7 +260,7 @@ $setglobal forestry  dynamic_may20
 $setglobal urban  static
 $setglobal natveg  dynamic_may20
 
-$setglobal factor_costs  mixed_feb17
+$setglobal factor_costs  sticky_feb18
 $setglobal landconversion  global_static_aug18
 
 $setglobal transport  gtap_nov12
@@ -266,7 +270,7 @@ $setglobal water_availability  total_water_aug13
 $setglobal climate  static
 
 $setglobal nr_soil_budget  exoeff_aug16
-$setglobal nitrogen  ipcc2006_sep16
+$setglobal nitrogen  rescaled_jan21
 $setglobal carbon  normal_dec17
 $setglobal methane  ipcc2006_flexreg_apr16
 $setglobal phosphorus  off

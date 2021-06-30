@@ -51,9 +51,9 @@ scalars
   s56_peatland_policy 1=on 0=off (binary) / 0 /
 ;
 
-$setglobal c56_pollutant_prices  R2M41-SSP2-NPi
+$setglobal c56_pollutant_prices  SSPDB-SSP2-45-MESSAGE-GLOBIOM
 $setglobal c56_pollutant_prices_noselect  R2M41-SSP2-NPi
-$setglobal c56_emis_policy  redd+_nosoil
+$setglobal c56_emis_policy  maccs_excl_cropland_n2o
 
 table f56_pollutant_prices(t_all,i,pollutants,ghgscen56) GHG certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
 $ondelim

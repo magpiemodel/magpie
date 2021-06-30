@@ -6,10 +6,10 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-  s14_yld_past_switch  Spillover parameter for translating technological change in the crop sector into pasture yield increases  (1)     / 0.10 /
+  s14_yld_past_switch  Spillover parameter for translating technological change in the crop sector into pasture yield increases  (1)     / 0.1 /
 ;
 
-$setglobal c14_yields_scenario  nocc
+$setglobal c14_yields_scenario  cc
 *   options:   cc  (climate change)
 *             nocc (no climate change)
 
