@@ -23,13 +23,13 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "PL06e"
-cat(paste0("Test with natveg land clearning cost"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+identifier_flag = "PL07"
+cat(paste0("Higher rotation, more share from EUR."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 
 #scen_vector <- c("ForestryOff","ForestryEndo","ForestryExo")
-scen_vector <- c("ForestryEndo")
+scen_vector <- c("ForestryEndo","ForestryOff")
 
 for(c73_wood_scen in c("default")){
 
