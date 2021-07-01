@@ -12,7 +12,7 @@ q41_area_irrig(j2) ..
 
 
 *' Investment costs in the current time step for each region are calculated by multiplying the AEI expansion in each
-*' cluster of the region by the regional unit cost per hectare.
+*' cluster of the region by the regional unit cost per hectare and a depreciation rate.
 *' MAgPIE has a common planning horizon to which all one time investments are distributed using an annuity
 *' approach.
 
