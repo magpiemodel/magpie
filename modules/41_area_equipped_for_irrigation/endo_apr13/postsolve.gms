@@ -7,7 +7,7 @@
 
 
 **Annual depreciation of AEI
-pc41_AEI_start(j)=v41_AEI.l(j) * (1 - s41_AEI_depreciation);
+pc41_AEI_start(j)=v41_AEI.l(j) * (1 - s41_AEI_depreciation)**(m_timestep_length);
 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
