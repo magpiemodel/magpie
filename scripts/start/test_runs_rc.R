@@ -17,7 +17,7 @@ library(gms)
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
-prefix <- "RC03"
+prefix <- "RC04"
 
 for (version in c("old","new")) {
   if (version == "old") {
@@ -49,12 +49,15 @@ for (version in c("old","new")) {
     for (cost in c("mixed","sticky","fixed")) {
       if (cost == "mixed") {
         cfg$gms$factor_costs <- "mixed_feb17"
+        cfg$input['calibration'] = "calibration_H12_newlpjml_bestcalib_fc-mixed_crop-endoApr21_20May21.tgz"
       } else if (cost == "sticky") {
         cfg$gms$factor_costs <- "sticky_feb18"
         cfg$gms$c38_sticky_mode <- "dynamic"
+        cfg$input['calibration'] = "calibration_H12_newlpjml_bestcalib_fc-sticky-dynamic_crop-endoApr21-allM_20May21.tgz"
       } else if (cost == "fixed") {
         cfg$gms$factor_costs <- "sticky_feb18"
         cfg$gms$c38_sticky_mode <- "free"
+        cfg$input['calibration'] = "calibration_H12_newlpjml_bestcalib_fc-sticky-free_crop-endoApr21_20May21.tgz"
       }
       
       cfg$title <- paste(prefix,"SSP2-NPI",version,cost,sep="_")
