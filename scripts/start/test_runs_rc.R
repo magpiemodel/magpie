@@ -17,7 +17,7 @@ library(gms)
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
-prefix <- "RC04"
+prefix <- "RC05"
 
 for (version in c("old","new")) {
   if (version == "old") {
@@ -68,7 +68,7 @@ for (version in c("old","new")) {
       start_run(cfg,codeCheck=FALSE)
       
       cfg$title <- paste(prefix,"SSP2-1p5deg",version,cost,sep="_")
-      cfg <- setScenario(cfg,c("SSP2","NPI","rcp1p9"))
+      cfg <- setScenario(cfg,c("SSP2","NDC","rcp1p9"))
       cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
       cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg600"
       print(cfg$title)
