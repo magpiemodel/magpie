@@ -21,6 +21,9 @@ $setglobal c32_dev_scen  abare
 * options abare, brown
 $setglobal c32_incr_rate  h5s2l1
 * options constant,h5s5l5,h5s2l2,h5s2l1,h5s1l1,h5s1l05,h2s1l05
+$setglobal c32_rot_calc_type max_increment
+* option  max_increment, max_npv
+;
 
 scalars
   s32_hvarea 					  Flag for harvested area and establishemt (0=zero 1=exognous 2=endogneous)	/ 2 /
@@ -102,6 +105,7 @@ $ondelim
 $include "./modules/32_forestry/input/f32_plantedforest.cs4"
 $offdelim
 /;
+f32_plantedforest("EUR") = f32_plantedforest("EUR")*3;
 
 parameter f32_estb_calib(i) Calibration factor for plantation forest establishment (1)
 /
