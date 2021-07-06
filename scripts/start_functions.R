@@ -241,7 +241,10 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   }
 
   if(!is.null(scenario)) cfg <- gms::setScenario(cfg,scenario)
-  cfg <- gms::check_config(cfg)
+  cfg <- gms::check_config(cfg, extras = "info")
+
+  # save model version 
+  cfg$info$version <- citation::read_cff("CITATION.cff")$version
 
   # Make 'title' a setglobal in gams to include it in the gdx
   cfg$gms$c_title <- cfg$title

@@ -97,6 +97,7 @@ variable. After that you can run the following lines of code:
 ```
 pkgs <- c("gdxrrw",
           "ggplot2",
+          "citation",
           "curl",
           "gdx",
           "gms",
