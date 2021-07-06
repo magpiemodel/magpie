@@ -521,27 +521,3 @@ getReportData <- function(path_to_report,LU_pricing="y2010") {
   .emission_prices(mag)
 }
 
-
-start_reportrun <- function (cfg, path_report, inmodel=NULL, sceninreport=NULL, codeCheck=FALSE){
-  if (!requireNamespace("magclass", quietly = TRUE)) {
-    stop("Package \"magclass\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
-  if (!requireNamespace("gms", quietly = TRUE)) {
-    stop("Package \"gms\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
-  rep <- magclass::convert.report(path_report,inmodel=inmodel,outmodel="MAgPIE")
-  magclass::write.report(rep,"report.mif")
-  if (!is.null(sceninreport))
-      sceninreport <- intersect(sceninreport,names(rep))
-  else
-      sceninreport <- names(rep)
-
-  for(scen in sceninreport) {
-	cfg$title <- scen
-  # extract scenario from scenarioname and apply it
-	cfg       <- gms::setScenario(cfg,substring(scen,first=1,last=4))
-	start_run(cfg, report=rep, sceninreport=scen, codeCheck=codeCheck)
-  }
-}
