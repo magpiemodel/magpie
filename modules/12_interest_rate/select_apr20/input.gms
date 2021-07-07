@@ -16,7 +16,7 @@ scalars
   s12_interest_hic_noselect                  Interest rate in high income countries for nonselected countries only active when regional switch activated (1)  / 0.04 /
   s12_hist_interest_lic_noselect            Historic interest rate in low income countries for nonselected countries only active when regional switch activated (1) / 0.1 /
   s12_hist_interest_hic_noselect             Historic interest rate in high income countries for nonselected countries only active when regional switch activated (1)  / 0.04 /
-  s12_interest_calib             			Calibration factor applied on interest rates (1)  / 1 /
+*  s12_interest_calib             			Calibration factor applied on interest rates (1)  / 1 /
 ;
 
 sets
