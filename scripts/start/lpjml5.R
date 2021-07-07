@@ -24,8 +24,8 @@ cfg$input['calibration'] = "calibration_H12_newlpjml_bestcalib_fc-sticky-free_cr
 
 cfg$gms$maccs  <- "off_jul16"
 cfg$gms$s12_interest_calib <- 1
-
-cfg$title <- paste("RC10","SSP2-NPI","new","TAUhistFix",sep="_")
+cfg$gms$s13_ignore_tau_historical <- 0
+cfg$title <- paste("RC10","SSP2-NPI","new","TAUhistFix2",sep="_")
 start_run(cfg=cfg,codeCheck=FALSE)
 
 # cfg$title <- paste("RC10","SSP2-NPI","new",paste0("CalibInt",0.7),sep="_")
