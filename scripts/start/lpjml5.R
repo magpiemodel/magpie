@@ -13,9 +13,16 @@ library(gms)
 source("scripts/start_functions.R")
 source("config/default.cfg")
 source("scripts/start/extra/lpjml_addon.R")
+
+cfg$results_folder <- "output/:title:"
+cfg$output <- c("rds_report")
+cfg$gms$s80_optfile <- 1
+
 cfg$gms$factor_costs <- "sticky_feb18"
 cfg$gms$c38_sticky_mode <- "free"
 cfg$input['calibration'] = "calibration_H12_newlpjml_bestcalib_fc-sticky-free_crop-endoApr21_20May21.tgz"
+
+cfg$gms$maccs  <- "off_jul16"
 
 cfg$title <- paste("RC10","SSP2-NPI","new",paste0("CalibInt",1),sep="_")
 cfg$gms$s12_interest_calib <- 1
