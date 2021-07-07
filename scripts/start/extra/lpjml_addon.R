@@ -13,18 +13,21 @@ library(gms)
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
-cfg$input <- c(cellular = "rev4.61_h12_42b44dcd_cellularmagpie_c200_GFDL-ESM4-ssp370_lpjml-ab83aee4.tgz",
-               regional = "rev4.61_h12_magpie.tgz",
-               validation = "rev4.61_h12_validation.tgz",
+cfg$input <- c(cellular    = "rev4.62_h12_1b31a144_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-ab83aee4.tgz",
+               regional    = "rev4.62_h12_magpie.tgz",
+               validation  = "rev4.62_h12_validation.tgz",
                calibration = "calibration_H12_newlpjml_bestcalib_fc-sticky-free_crop-endoApr21-allM_20May21.tgz",
-               additional = cfg$input[grep("additional_data", cfg$input)])
+               additional  = cfg$input[grep("additional_data", cfg$input)])
 # see /p/projects/magpie/data/input/calibration for more available calibration factors
 
 cfg$title                            <- "default_lpjml5"
 
 # in case of recalibration, following settings should be applied
+### cfg$recalibrate    <- TRUE
+### cfg$force_download <- TRUE
 cfg$crop_calib_max                   <- 1.5
 cfg$best_calib                       <- TRUE
+
 
 # preliminary test settings for new default 
 # (including new yield, crop, factor cost realizations)
