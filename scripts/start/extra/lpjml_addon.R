@@ -16,7 +16,7 @@ source("config/default.cfg")
 cfg$input <- c(cellular = "rev4.61_h12_42b44dcd_cellularmagpie_c200_GFDL-ESM4-ssp370_lpjml-ab83aee4.tgz",
                regional = "rev4.61_h12_magpie.tgz",
                validation = "rev4.61_h12_validation.tgz",
-               calibration = "calibration_H12_newlpjml_bestcalib_fc-sticky-dynamic_crop-endoApr21-allM_20May21.tgz",
+               calibration = "calibration_H12_newlpjml_bestcalib_fc-sticky-free_crop-endoApr21-allM_20May21.tgz",
                additional = cfg$input[grep("additional_data", cfg$input)])
 # see /p/projects/magpie/data/input/calibration for more available calibration factors
 
@@ -33,6 +33,7 @@ cfg$gms$s14_yld_past_switch          <- 0.25
 cfg$gms$processing                   <- "substitution_may21"
 cfg$gms$crop                         <- "endo_apr21"
 cfg$gms$factor_costs                 <- "sticky_feb18"
+cfg$gms$c38_sticky_mode              <- "free" 
 cfg$gms$c41_initial_irrigation_area  <- "LUH2v2"
 cfg$gms$s80_optfile                  <- 1
 cfg                                  <- setScenario(cfg,"cc")
