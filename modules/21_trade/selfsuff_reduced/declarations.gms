@@ -14,35 +14,35 @@ parameters
 
 positive variables
  v21_excess_dem(k_trade)                 Global excess demand (mio. tDM per yr)
- v21_excess_prod(h,k_trade)              Regional excess production (mio. tDM per yr)
+ v21_excess_prod(h,k_trade)              Superregional excess production (mio. tDM per yr)
  vm_cost_trade(i)                        Regional  trade costs (mio. USD05MER per yr)
- v21_cost_trade_reg(h,k_trade)           Regional trade costs for each tradable commodity (mio. USD05MER per yr)
+ v21_cost_trade_reg(h,k_trade)           Superregional trade costs for each tradable commodity (mio. USD05MER per yr)
 ;
 
 equations
  q21_trade_glo(k_trade)                  Global production constraint (mio. tDM per yr)
- q21_notrade(h,k_notrade)                Regional production constraint of non-tradable commodities (mio. tDM per yr)
- q21_trade_reg(h,k_trade)                Regional trade balances i.e. minimum self-sufficiency ratio (1)
- q21_trade_reg_up(h,k_trade)             Regional trade balances i.e. maximum self-sufficiency ratio (1)
+ q21_notrade(h,k_notrade)                Superregional production constraint of non-tradable commodities (mio. tDM per yr)
+ q21_trade_reg(h,k_trade)                Superregional trade balances i.e. minimum self-sufficiency ratio (1)
+ q21_trade_reg_up(h,k_trade)             Superregional trade balances i.e. maximum self-sufficiency ratio (1)
  q21_excess_dem(k_trade)                 Global excess demand (mio. tDM per yr)
- q21_excess_supply(h,k_trade)            Regional excess production (mio. tDM per yr)
- q21_cost_trade(h)                       Regional  trade costs (mio. USD05MER per yr)
- q21_cost_trade_reg(h,k_trade)           Regional trade costs for each tradable commodity (mio. USD05MER per yr)
+ q21_excess_supply(h,k_trade)            Superregional excess production (mio. tDM per yr)
+ q21_cost_trade(h)                       Superregional  trade costs (mio. USD05MER per yr)
+ q21_cost_trade_reg(h,k_trade)           Superregional trade costs for each tradable commodity (mio. USD05MER per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov21_excess_dem(t,k_trade,type)       Global excess demand (mio. tDM per yr)
- ov21_excess_prod(t,h,k_trade,type)    Regional excess production (mio. tDM per yr)
+ ov21_excess_prod(t,h,k_trade,type)    Superregional excess production (mio. tDM per yr)
  ov_cost_trade(t,i,type)               Regional  trade costs (mio. USD05MER per yr)
- ov21_cost_trade_reg(t,h,k_trade,type) Regional trade costs for each tradable commodity (mio. USD05MER per yr)
+ ov21_cost_trade_reg(t,h,k_trade,type) Superregional trade costs for each tradable commodity (mio. USD05MER per yr)
  oq21_trade_glo(t,k_trade,type)        Global production constraint (mio. tDM per yr)
- oq21_notrade(t,h,k_notrade,type)      Regional production constraint of non-tradable commodities (mio. tDM per yr)
- oq21_trade_reg(t,h,k_trade,type)      Regional trade balances i.e. minimum self-sufficiency ratio (1)
- oq21_trade_reg_up(t,h,k_trade,type)   Regional trade balances i.e. maximum self-sufficiency ratio (1)
+ oq21_notrade(t,h,k_notrade,type)      Superregional production constraint of non-tradable commodities (mio. tDM per yr)
+ oq21_trade_reg(t,h,k_trade,type)      Superregional trade balances i.e. minimum self-sufficiency ratio (1)
+ oq21_trade_reg_up(t,h,k_trade,type)   Superregional trade balances i.e. maximum self-sufficiency ratio (1)
  oq21_excess_dem(t,k_trade,type)       Global excess demand (mio. tDM per yr)
- oq21_excess_supply(t,h,k_trade,type)  Regional excess production (mio. tDM per yr)
- oq21_cost_trade(t,h,type)             Regional  trade costs (mio. USD05MER per yr)
- oq21_cost_trade_reg(t,h,k_trade,type) Regional trade costs for each tradable commodity (mio. USD05MER per yr)
+ oq21_excess_supply(t,h,k_trade,type)  Superregional excess production (mio. tDM per yr)
+ oq21_cost_trade(t,h,type)             Superregional  trade costs (mio. USD05MER per yr)
+ oq21_cost_trade_reg(t,h,k_trade,type) Superregional trade costs for each tradable commodity (mio. USD05MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
