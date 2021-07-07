@@ -23,19 +23,19 @@ cfg$gms$c38_sticky_mode <- "free"
 cfg$input['calibration'] = "calibration_H12_newlpjml_bestcalib_fc-sticky-free_crop-endoApr21_20May21.tgz"
 
 cfg$gms$maccs  <- "off_jul16"
-
-cfg$title <- paste("RC10","SSP2-NPI","new",paste0("CalibInt",1),sep="_")
 cfg$gms$s12_interest_calib <- 1
+
+cfg$title <- paste("RC10","SSP2-NPI","new","TAUhistFix",sep="_")
 start_run(cfg=cfg,codeCheck=FALSE)
 
-cfg$title <- paste("RC10","SSP2-NPI","new",paste0("CalibInt",0.7),sep="_")
-cfg$gms$s12_interest_calib <- 0.7
-start_run(cfg=cfg,codeCheck=FALSE)
-
-cfg$title <- paste("RC10","SSP2-NPI","new",paste0("CalibInt",0.5),sep="_")
-cfg$gms$s12_interest_calib <- 0.5
-start_run(cfg=cfg,codeCheck=FALSE)
-
-cfg$title <- paste("RC10","SSP2-NPI","new",paste0("CalibInt",0.3),sep="_")
-cfg$gms$s12_interest_calib <- 0.3
-start_run(cfg=cfg,codeCheck=FALSE)
+# cfg$title <- paste("RC10","SSP2-NPI","new",paste0("CalibInt",0.7),sep="_")
+# cfg$gms$s12_interest_calib <- 0.7
+# start_run(cfg=cfg,codeCheck=FALSE)
+# 
+# cfg$title <- paste("RC10","SSP2-NPI","new",paste0("CalibInt",0.5),sep="_")
+# cfg$gms$s12_interest_calib <- 0.5
+# start_run(cfg=cfg,codeCheck=FALSE)
+# 
+# cfg$title <- paste("RC10","SSP2-NPI","new",paste0("CalibInt",0.3),sep="_")
+# cfg$gms$s12_interest_calib <- 0.3
+# start_run(cfg=cfg,codeCheck=FALSE)
