@@ -17,7 +17,7 @@ library(gms)
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
-prefix <- "RC05"
+prefix <- "RC08"
 
 for (version in c("old","new")) {
   if (version == "old") {
@@ -26,19 +26,19 @@ for (version in c("old","new")) {
     cfg$output <- c("rds_report")
     cfg$gms$s80_optfile <- 1
     
-    cfg$title <- paste(prefix,"SSP2-NPI",version,"mixed",sep="_")
+    cfg$title <- paste(prefix,"SSP2-NPI",version,sep="_")
     cfg <- setScenario(cfg,c("SSP2","NPI"))
     cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
     cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-NPi"
     print(cfg$title)
     start_run(cfg,codeCheck=FALSE)
     
-    cfg$title <- paste(prefix,"SSP2-1p5deg",version,"mixed",sep="_")
+    cfg$title <- paste(prefix,"SSP2-1p5deg",version,sep="_")
     cfg <- setScenario(cfg,c("SSP2","NDC"))
     cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
     cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg600"
     print(cfg$title)
-    start_run(cfg,codeCheck=FALSE)
+    #start_run(cfg,codeCheck=FALSE)
     
   } else if (version == "new") {
     source("config/default.cfg")
@@ -46,7 +46,8 @@ for (version in c("old","new")) {
     cfg$results_folder <- "output/:title:"
     cfg$output <- c("rds_report")
     cfg$gms$s80_optfile <- 1
-    for (cost in c("mixed","sticky","fixed")) {
+    #"mixed","sticky",
+    for (cost in c("fixed")) {
       if (cost == "mixed") {
         cfg$gms$factor_costs <- "mixed_feb17"
         cfg$input['calibration'] = "calibration_H12_newlpjml_bestcalib_fc-mixed_crop-endoApr21_20May21.tgz"
@@ -60,19 +61,22 @@ for (version in c("old","new")) {
         cfg$input['calibration'] = "calibration_H12_newlpjml_bestcalib_fc-sticky-free_crop-endoApr21_20May21.tgz"
       }
       
-      cfg$title <- paste(prefix,"SSP2-NPI",version,cost,sep="_")
-      cfg <- setScenario(cfg,c("SSP2","NPI","rcp7p0"))
-      cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
-      cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-NPi"
-      print(cfg$title)
-      start_run(cfg,codeCheck=FALSE)
+      for (calib_int in c(0.2,0.5,0.7,1)) {
+        cfg$title <- paste(prefix,"SSP2-NPI",version,paste0("CalibInt",calib_int),sep="_")
+        cfg <- setScenario(cfg,c("SSP2","NPI","rcp7p0"))
+        cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
+        cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-NPi"
+        cfg$gms$s12_interest_calib <- calib_int
+        print(cfg$title)
+        start_run(cfg,codeCheck=FALSE)
+      }
       
-      cfg$title <- paste(prefix,"SSP2-1p5deg",version,cost,sep="_")
+      cfg$title <- paste(prefix,"SSP2-1p5deg",version,paste0("CalibInt",calib_int),sep="_")
       cfg <- setScenario(cfg,c("SSP2","NDC","rcp1p9"))
       cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
       cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg600"
       print(cfg$title)
-      start_run(cfg,codeCheck=FALSE)
+      #start_run(cfg,codeCheck=FALSE)
       
     }
   }
