@@ -24,7 +24,7 @@ if(!exists("source_include")) {
 }
 
 load(paste0(outputdir, "/config.Rdata"))
-gdx	<- path(outputdir,"fulldata.gdx")
+gdx	<- file.path(outputdir,"fulldata.gdx")
 rds <- paste0(outputdir, "/report.rds")
 runstatistics <- paste0(outputdir,"/runstatistics.rda")
 resultsarchive <- "/p/projects/rd3mod/models/results/magpie"

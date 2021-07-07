@@ -13,7 +13,7 @@ performance_start <- function(cfg="default.cfg",modulepath="modules/",id="perfor
 
   if(!is.list(cfg)) {
     if(is.character(cfg)) {
-      source(path("config",cfg),local=TRUE)
+      source(file.path("config",cfg),local=TRUE)
       if(!is.list(cfg)) stop("Wrong input file format: config file does not contain a cfg list!")
     } else {
       stop("Wrong input format: cfg is neither a list nor a character!")
@@ -63,7 +63,7 @@ performance_collect <- function(id="performance",results_folder="output/",plot=T
   if(length(folders)==0) stop("No folders found which fit to the given id (",id,")")
 
   .modelstats <- function(f,colMeans=TRUE) {
-    logfile <- path(f,"full.log")
+    logfile <- file.path(f,"full.log")
     if(file.exists(logfile)) {
       tmp <- readLines(logfile)
       p1 <- "---   ([^ ]*) rows  ([^ ]*) columns  ([^ ]*) non-zeroes"
@@ -112,14 +112,14 @@ performance_collect <- function(id="performance",results_folder="output/",plot=T
   for(f in folders){
     tmp <- strsplit(f,"__")[[1]]
     ms <- .modelstats(f,colMeans=TRUE)
-    tmp2 <- data.frame(module=tmp[2],realization=tmp[3],default=FALSE,runtime=.gettime(path(f,f,ftype="RData")),infes=.infescheck(path(f,"fulldata.gdx")),
+    tmp2 <- data.frame(module=tmp[2],realization=tmp[3],default=FALSE,runtime=.gettime(file.path(f,paste0(f,".RData"))),infes=.infescheck(file.path(f,"fulldata.gdx")),
                        rows=ms["rows"],columns=ms["columns"],nonzeroes=ms["nonzeroes"],nlcode=ms["nlcode"],nlnonzeroes=ms["nlnonzeroes"])
     results <- rbind(results,tmp2)
   }
-  load(path(default,"config.Rdata"))
+  load(file.path(default,"config.Rdata"))
   for(n in unique(results$module)) {
     ms <- .modelstats(default,colMeans=TRUE)
-    tmp <- data.frame(module=n,realization=cfg$gms[[n]],default=TRUE,runtime=.gettime(path(default,default,ftype="RData")),infes=.infescheck(path(default,"fulldata.gdx")),
+    tmp <- data.frame(module=n,realization=cfg$gms[[n]],default=TRUE,runtime=.gettime(file.path(default,paste0(default,".RData"))),infes=.infescheck(file.path(default,"fulldata.gdx")),
                       rows=ms["rows"],columns=ms["columns"],nonzeroes=ms["nonzeroes"],nlcode=ms["nlcode"],nlnonzeroes=ms["nlnonzeroes"])
     results <- rbind(results,tmp)
   }
@@ -138,8 +138,8 @@ performance_collect <- function(id="performance",results_folder="output/",plot=T
   attr(results,"default_cfg") <- cfg
   attr(results,"id") <- id
 
-  if(file.exists(path(default,"git.rda"))) {
-    load(path(default,"git.rda"))
+  if(file.exists(file.path(default,"git.rda"))) {
+    load(file.path(default,"git.rda"))
     attr(results,"git") <- git
   }
 

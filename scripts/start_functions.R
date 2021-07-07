@@ -243,7 +243,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   if(!is.null(scenario)) cfg <- gms::setScenario(cfg,scenario)
   cfg <- gms::check_config(cfg, extras = "info")
 
-  # save model version 
+  # save model version
   cfg$info$version <- citation::read_cff("CITATION.cff")$version
 
   # Make 'title' a setglobal in gams to include it in the gdx
@@ -285,13 +285,13 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
     lucode2::manipulateConfig(cfg$model, cfg$gms)
 
     # configure input.gms in all modules based on settings of cfg file
-    l1 <- lucode2::path("modules", list.dirs("modules/", full.names = FALSE,
+    l1 <- file.path("modules", list.dirs("modules/", full.names = FALSE,
                                             recursive = FALSE))
     for(l in l1) {
-      l2 <- lucode2::path(l, list.dirs(l, full.names = FALSE, recursive = FALSE))
+      l2 <- file.path(l, list.dirs(l, full.names = FALSE, recursive = FALSE))
       for(ll in l2) {
-        if(file.exists(lucode2::path(ll, "input.gms"))) {
-          lucode2::manipulateConfig(lucode2::path(ll, "input.gms"), cfg$gms)
+        if(file.exists(file.path(ll, "input.gms"))) {
+          lucode2::manipulateConfig(file.path(ll, "input.gms"), cfg$gms)
         }
       }
     }
@@ -414,9 +414,9 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
 
   cfg$magpie_folder <- getwd()
 
-  save(cfg, file=lucode2::path(cfg$results_folder, "config.Rdata"))
+  save(cfg, file=file.path(cfg$results_folder, "config.Rdata"))
 
-  gms::singleGAMSfile(mainfile=cfg$model, output=lucode2::path(cfg$results_folder, "full.gms"))
+  gms::singleGAMSfile(mainfile=cfg$model, output=file.path(cfg$results_folder, "full.gms"))
   if(lock_model) {
     gms::model_unlock(lock_id)
     on.exit(setwd(maindir))
@@ -520,4 +520,3 @@ getReportData <- function(path_to_report,LU_pricing="y2010") {
   .bioenergy_demand(mag)
   .emission_prices(mag)
 }
-

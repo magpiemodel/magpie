@@ -6,32 +6,21 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: extract agmip-report in rds format from run 
+# description: check output for known problems
 # comparison script: FALSE
+# position: 1
 # ---------------------------------------------------------------
 
-library(magclass)
-library(magpie4)
-library(lucode2)
-library(quitte)
-options("magclass.verbosity" = 1)
+
+library(magpie4,  quietly = TRUE)
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdir <- "/p/projects/landuse/users/miodrag/projects/tests/flexreg/output/H12_setup1_2016-11-23_12.38.56/"
+  outputdir <- ""
   readArgs("outputdir")
 }
 
-load(paste0(outputdir, "/config.Rdata"))
 gdx	<- file.path(outputdir,"fulldata.gdx")
-mif <- paste0(outputdir, "/agmip_report.mif")
-rds <- paste0(outputdir, "/agmip_report.rds")
 ###############################################################################
 
-
-report <- getReportAgMIP(gdx,scenario = cfg$title)
-
-###regional aggregation
-
-write.report2(report, file=mif)
-saveRDS(as.quitte(report),file=rds)
+magpie4::outputCheck(gdx)
