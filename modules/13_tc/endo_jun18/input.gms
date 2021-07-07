@@ -7,7 +7,7 @@
 
 
 scalars
- s13_ignore_tau_historical	ignore historial tau (1) or use it as lower bound (0) (binary) / 1 /
+ s13_ignore_tau_historical	ignore historial tau (1) or use it as lower bound (0) (binary) / 0 /
 ;
 
 parameter fm_tau1995(i) Agricultural land use intensity tau in 1995 (1)
