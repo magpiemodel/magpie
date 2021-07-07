@@ -24,5 +24,5 @@ $elseif "%c12_interest_rate%" == "gdp_dependent"
                          +   (s12_hist_interest_lic - (s12_hist_interest_lic-s12_hist_interest_hic) * im_development_state(t_all,i)) * (1-f12_interest_fader(t_all)) ) * p12_reg_shr(t_all,i)
                          + ( (s12_interest_lic_noselect - (s12_interest_lic_noselect-s12_interest_hic_noselect) * im_development_state(t_all,i)) * f12_interest_fader(t_all)
                          +   (s12_hist_interest_lic_noselect - (s12_hist_interest_lic_noselect-s12_hist_interest_hic_noselect) * im_development_state(t_all,i) ) * (1-f12_interest_fader(t_all)) ) * (1-p12_reg_shr(t_all,i));
-*  pm_interest(t_all,i) = pm_interest(t_all,i) * s12_interest_calib;
+  pm_interest(t_all,i) = pm_interest(t_all,i) * s12_interest_calib;
 $endif
