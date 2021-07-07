@@ -61,7 +61,7 @@ for (version in c("old","new")) {
         cfg$input['calibration'] = "calibration_H12_newlpjml_bestcalib_fc-sticky-free_crop-endoApr21_20May21.tgz"
       }
       
-      for (calib_int in c(0.2,0.5,0.7,1)) {
+      for (calib_int in c(1,0.5)) {
         cfg$title <- paste(prefix,"SSP2-NPI",version,paste0("CalibInt",calib_int),sep="_")
         cfg <- setScenario(cfg,c("SSP2","NPI","rcp7p0"))
         cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
