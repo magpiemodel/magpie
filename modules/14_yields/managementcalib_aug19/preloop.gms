@@ -8,8 +8,8 @@
 i14_yields_calib(t,j,kve,w)   = f14_yields(t,j,kve,w);
 
 ***YIELD CORRECTION FOR 2ND GENERATION BIOENERGY CROPS*************************************
-i14_yields_calib(t,j,"begr",w) = f14_yields(t,j,"begr",w) * sum(cell(i,j),fm_tau1995(i))/smax(i,fm_tau1995(i));
-i14_yields_calib(t,j,"betr",w) = f14_yields(t,j,"betr",w) * sum(cell(i,j),fm_tau1995(i))/smax(i,fm_tau1995(i));
+i14_yields_calib(t,j,"begr",w) = i14_yields(t,j,"begr",w) * sum((supreg(h,i),cell(i,j)),fm_tau1995(h))/smax(h,fm_tau1995(h));
+i14_yields_calib(t,j,"betr",w) = i14_yields(t,j,"betr",w) * sum((supreg(h,i),cell(i,j)),fm_tau1995(h))/smax(h,fm_tau1995(h));
 
 ***YIELD CORRECTION FOR PASTURE ACCOUNTING FOR REGIONAL DIFFERENCES IN MANAGEMENT***
 p14_pyield_LPJ_reg(t,i) = (sum(cell(i,j),i14_yields_calib(t,j,"pasture","rainfed") * pm_land_start(j,"past")) /
@@ -34,7 +34,7 @@ i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w) * sum(cell
 *' calibration factor that depends only on the initial conditions of the starting year.
 *'
 *' However, when FAO yields are significantly higher than given by the cellular yield inputs
-*' (underestimated baseline), the relative calibration terms can lead to unrealistically large 
+*' (underestimated baseline), the relative calibration terms can lead to unrealistically large
 *' yields in the case of future yield increases within the cellular yield patterns.
 *'
 *' To address this issue, the factor 'i14_lambda_yields' determines the degree
