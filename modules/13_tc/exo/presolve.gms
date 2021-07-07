@@ -9,6 +9,9 @@ pc13_land(i) = sum(cell(i,j), pcm_land(j,"crop"));
 
 vm_tau.fx(h) = f13_tau_scenario(t,h);
 
+* The costs are shifted over 15 years (exponent 15) to reflect the average
+* time it takes investments in tc to pay off.
+
 p13_cost_tc(i) = pc13_land(i) * i13_tc_factor(t)
                      * sum(supreg(h,i), vm_tau.l(h))**i13_tc_exponent(t)
                      * (1+pm_interest(t,i))**15;

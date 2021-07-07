@@ -11,7 +11,7 @@ positive variables
 ;
 
 equations
- q21_notrade(h,kall)        Regional production constraint of non-tradable commodities (mio. tDM per yr)
+ q21_notrade(h,kall)   Superregional production constraint of non-tradable commodities (mio. tDM per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

@@ -7,13 +7,13 @@
 
 
 positive variables
- vm_cost_trade(i)                            Regional  trade costs (mio. USD05MER per yr)
- v21_manna_from_heaven(h,kall)                  Last resort resource for otherwise infeasble trade balance constraints (mio. tDM per yr)
+ vm_cost_trade(i)               Regional  trade costs (mio. USD05MER per yr)
+ v21_manna_from_heaven(h,kall)  Last resort resource for otherwise infeasible trade balance constraints (mio. tDM per yr)
 ;
 
 equations
  q21_notrade(h,kall)        Regional production constraint of non-tradable commodities (mio. tDM per yr)
- q21_cost_trade(h)                       Regional  trade costs (mio. USD05MER per yr)
+ q21_cost_trade(h)          Regional  trade costs (mio. USD05MER per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
