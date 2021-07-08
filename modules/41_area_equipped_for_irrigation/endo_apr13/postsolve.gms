@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-**Annual depreciation of AEI
+
 pc41_AEI_start(j)=v41_AEI.l(j) ;
 
 
