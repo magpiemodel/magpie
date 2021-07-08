@@ -8,4 +8,8 @@
 p41_AEI_start(t,j) = pc41_AEI_start(j);
 v41_AEI.lo(j) = pc41_AEI_start(j);
 
+*' Updating existing capital stocks to account for depreciation
+
+pc41_AEI_start(j) = pc41_AEI_start(j) ** (1- s41_depreciation_rate) ** timestep length
+
 pc41_unitcost_AEI(i) = f41_c_irrig(t,i);
