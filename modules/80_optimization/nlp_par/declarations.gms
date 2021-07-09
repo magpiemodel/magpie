@@ -6,8 +6,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
-	p80_num_nonopt(t)		numNOpt indicator (1)
-	p80_modelstat(t,i)      modelstat indicator (1)
-	p80_counter(i)          counter (1)
-	p80_handle(i)			parallel mode handle parameter (1)
+	p80_num_nonopt(t)   numNOpt indicator (1)
+	p80_modelstat(t,h)  modelstat indicator (1)
+	p80_counter(h)      counter (1)
+	p80_handle(h)       parallel mode handle parameter (1)
 ;

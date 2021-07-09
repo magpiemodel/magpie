@@ -8,7 +8,7 @@
 # --------------------------------------------------------------
 # description: extract report in rds format from run
 # comparison script: FALSE
-# position: 1
+# position: 2
 # ---------------------------------------------------------------
 
 
@@ -25,7 +25,7 @@ if(!exists("source_include")) {
 }
 
 load(paste0(outputdir, "/config.Rdata"))
-gdx	<- path(outputdir,"fulldata.gdx")
+gdx	<- file.path(outputdir,"fulldata.gdx")
 rds <- paste0(outputdir, "/report.rds")
 mif <- paste0(outputdir, "/report.mif")
 runstatistics <- paste0(outputdir,"/runstatistics.rda")
