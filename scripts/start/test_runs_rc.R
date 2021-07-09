@@ -17,9 +17,9 @@ library(gms)
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
-prefix <- "RC09"
+prefix <- "RC10"
 
-for (version in c("old","new")) {
+for (version in c("new")) {
   if (version == "old") {
     source("config/default.cfg")
     cfg$results_folder <- "output/:title:"
@@ -61,8 +61,8 @@ for (version in c("old","new")) {
         cfg$input['calibration'] = "calibration_H12_newlpjml_bestcalib_fc-sticky-free_crop-endoApr21_20May21.tgz"
       }
       
-      for (calib_int in c(1,0.5)) {
-        cfg$title <- paste(prefix,"SSP2-NPI",version,paste0("CalibInt",calib_int),sep="_")
+      for (calib_int in c(1)) {
+        cfg$title <- paste(prefix,"SSP2-NPI",version,"LConDev2",sep="_")
         cfg <- setScenario(cfg,c("SSP2","NPI","rcp7p0"))
         cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
         cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-NPi"
