@@ -13,6 +13,6 @@
 *' is multiplied with an annuity factor to distribute these costs over time.
 
 q39_cost_landcon(j2,land) .. vm_cost_landcon(j2,land) =e=
-	(vm_landexpansion(j2,land)*max(0.5*i39_cost_establish(land),i39_cost_establish(land)*sum((ct,cell(i2,j2)), im_governance_indicator(ct,i2)))
+	(vm_landexpansion(j2,land)*max(0*i39_cost_establish(land),i39_cost_establish(land)*sum((ct,cell(i2,j2)), im_governance_indicator(ct,i2)))
  	+ vm_carbon_stock_change(j2,land,"vegc")*i39_cost_clearing(land))
  	* sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));

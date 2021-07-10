@@ -62,12 +62,12 @@ for (version in c("new")) {
       }
       
       for (calib_int in c(1)) {
-        cfg$title <- paste(prefix,"SSP2-NPI",version,"LConGov8",sep="_")
+        cfg$title <- paste(prefix,"SSP2-NPI",version,"LConGov9",sep="_")
         cfg <- setScenario(cfg,c("SSP2","NPI","rcp7p0"))
         cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
         cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-NPi"
         cfg$gms$s12_interest_calib <- calib_int
-        cfg$gms$c12_interest_rate <- "gov_dependent"
+        #cfg$gms$c12_interest_rate <- "gov_dependent"
         print(cfg$title)
         start_run(cfg,codeCheck=FALSE)
       }
