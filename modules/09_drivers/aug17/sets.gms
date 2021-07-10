@@ -14,6 +14,9 @@ sets
        / SSP1, SSP2, SSP3, SSP4, SSP5, SDP,
        a1,a2,b1,b2 /
 
+   ssp_scen09  SSP scenario
+       / SSP1, SSP2, SSP3, SSP4, SSP5 /
+
    age Population age groups
        / 0--4, 5--9,   10--14, 15--19,
        20--24, 25--29, 30--34, 35--39,

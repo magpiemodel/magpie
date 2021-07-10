@@ -15,6 +15,8 @@ $setglobal c09_gdp_scenario  SSP2
 *              SDP: "SDP"
 *             SRES: "a1", "a2", "b1", "b2"
 
+$setglobal c09_governance_indicator_scenario  SSP2
+*   options:   "SSP1", "SSP2", "SSP3", "SSP4", "SSP5"
 
 table f09_gdp_ppp_iso(t_all,iso,gdp_scen09) Income in purchasing power parity (mio. USD05PPP per yr)
 $ondelim
@@ -34,6 +36,11 @@ $offdelim;
 table f09_development_state(t_all,i,gdp_scen09) Development state according to the World Bank definition where 0=low income country 1=high income country in high income level (1)
 $ondelim
 $include "./modules/09_drivers/input/f09_development_state.cs3"
+$offdelim;
+
+table f09_governance_indicator(t_all,i,ssp_scen09) Gov Indi (1)
+$ondelim
+$include "./modules/09_drivers/input/f09_governance_indicator.cs3"
 $offdelim;
 
 table f09_demography(t_all,iso,pop_scen09,sex,age) Population (mio. capita per yr)
