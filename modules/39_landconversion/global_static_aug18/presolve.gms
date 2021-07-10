@@ -7,3 +7,5 @@
 
 i39_cost_establish(t,i,"crop")$(im_governance_indicator(t,i) < 0.4) = 6000;
 i39_cost_establish(t,i,"crop")$(im_governance_indicator(t,i) >= 0.4) = s39_cost_establish_crop*im_governance_indicator(t,i);
+
+i39_cost_establish(t,i,"crop") = max(6000,s39_cost_establish_crop*im_development_state(t,i));
