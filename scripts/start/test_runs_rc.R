@@ -61,21 +61,23 @@ for (version in c("old","new")) {
         cfg$input['calibration'] = "calibration_H12_newlpjml_bestcalib_fc-sticky-free_crop-endoApr21_20May21.tgz"
       }
       
-      for (calib_int in c(1)) {
-        cfg$title <- paste(prefix,"SSP2-NPI",version,"devstate",sep="_")
+      for (lcon in c("global_static_aug18","devstate")) {
+        cfg$gms$landconversion <- lcon
+        cfg$title <- paste(prefix,"SSP2-NPI",version,lcon,sep="_")
         cfg <- setScenario(cfg,c("SSP2","NPI","rcp7p0"))
         cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
         cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-NPi"
         print(cfg$title)
         start_run(cfg,codeCheck=FALSE)
+        
+        cfg$title <- paste(prefix,"SSP2-1p5deg",version,lcon,sep="_")
+        cfg <- setScenario(cfg,c("SSP2","NDC","rcp1p9"))
+        cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
+        cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg600"
+        print(cfg$title)
+        start_run(cfg,codeCheck=FALSE)
       }
       
-      cfg$title <- paste(prefix,"SSP2-1p5deg",version,"devstate",sep="_")
-      cfg <- setScenario(cfg,c("SSP2","NDC","rcp1p9"))
-      cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
-      cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg600"
-      print(cfg$title)
-      start_run(cfg,codeCheck=FALSE)
       
     }
   }
