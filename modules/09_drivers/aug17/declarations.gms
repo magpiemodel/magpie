@@ -26,9 +26,10 @@ parameters
 
 * Development State
   im_development_state(t_all,i)                  Development state according to the World Bank definition where 0=low income country 1=high income country in high income level  (1)
-  im_governance_indicator(t_all,i)                  Development state according to the World Bank definition where 0=low income country 1=high income country in high income level  (1)
-  im_physical_inactivity(t_all,iso,sex,age)          Share of population which is physically inactive (1)
-  im_demography(t_all,iso,sex,age)                   Population by groups (mio. per yr)
+*  im_governance_indicator(t_all,i)               Governance indicator ranging from 0-1  (1)
+
+  im_physical_inactivity(t_all,iso,sex,age)      Share of population which is physically inactive (1)
+  im_demography(t_all,iso,sex,age)               Population by groups (mio. per yr)
 
 * Years where SSPs and nocc/cc scenarios diverge 
   sm_fix_SSP2			        	year until which all parameters are fixed to SSP2 values (year) / 2020 /

@@ -6,8 +6,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
- s39_cost_establish_crop   	   Cost for cropland land expansion (USD05MER per hectare)   / 8000 /
- s39_cost_establish_past   	   Cost for pasture land expansion (USD05MER per hectare)    / 8000 /
+ s39_cost_establish_crop_max   Maximum cost for cropland expansion (USD05MER per hectare) / 25000 /
+ s39_cost_establish_crop_min   Minimum cost for cropland expansion (USD05MER per hectare) / 6000 /
+ s39_cost_establish_past   	   Cost for pasture land expansion (USD05MER per hectare)    / 10000 /
  s39_cost_establish_forestry   Cost for foresty land expansion (USD05MER per hectare)    / 1000 /
- s39_cost_clearing    Clearing costs linked to removed biomass (USD05MER per ton C)  / 0 /
+ s39_cost_clearing    		   Clearing costs linked to removed biomass (USD05MER per ton C)  / 0 /
 ;

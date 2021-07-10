@@ -14,7 +14,7 @@ variables
 ;
 
 parameters
- i39_cost_establish(land)		Global land establishment costs (USD05MER per hectare)
+ i39_cost_establish(t,i,land)		Global land establishment costs (USD05MER per hectare)
  i39_cost_clearing(land)        Global land clearing costs (USD05MER per ton C)
 ;
 

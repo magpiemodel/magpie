@@ -5,10 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-i39_cost_establish(land) = 0;
-i39_cost_establish("crop") = s39_cost_establish_crop;
-i39_cost_establish("past") = s39_cost_establish_past;
-i39_cost_establish("forestry") = s39_cost_establish_forestry;
-
-i39_cost_clearing(land) = 0;
-i39_cost_clearing(land_clearing39) = s39_cost_clearing;
+*Global cost for cropland expansion are scaled with regional development state (0-1), with s39_cost_establish_crop_min as lower bound.
+i39_cost_establish(t,i,"crop") = max(s39_cost_establish_crop_min,s39_cost_establish_crop_max*im_development_state(t,i));
+i39_cost_establish(t,i,"past") = s39_cost_establish_past;
+i39_cost_establish(t,i,"forestry") = s39_cost_establish_forestry;

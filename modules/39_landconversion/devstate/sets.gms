@@ -5,10 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-i39_cost_establish(land) = 0;
-i39_cost_establish("crop") = s39_cost_establish_crop;
-i39_cost_establish("past") = s39_cost_establish_past;
-i39_cost_establish("forestry") = s39_cost_establish_forestry;
+sets
+   land_establish39(land) Managed land pools
+        / crop, past, forestry /
 
-i39_cost_clearing(land) = 0;
-i39_cost_clearing(land_clearing39) = s39_cost_clearing;
+   land_clearing39(land) Natural vegetation land pools
+        / primforest, secdforest, other /
+;

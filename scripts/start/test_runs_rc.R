@@ -17,9 +17,9 @@ library(gms)
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
-prefix <- "RC10"
+prefix <- "RC11"
 
-for (version in c("new")) {
+for (version in c("old","new")) {
   if (version == "old") {
     source("config/default.cfg")
     cfg$results_folder <- "output/:title:"
@@ -38,7 +38,7 @@ for (version in c("new")) {
     cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
     cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg600"
     print(cfg$title)
-    #start_run(cfg,codeCheck=FALSE)
+    start_run(cfg,codeCheck=FALSE)
     
   } else if (version == "new") {
     source("config/default.cfg")
@@ -62,22 +62,20 @@ for (version in c("new")) {
       }
       
       for (calib_int in c(1)) {
-        cfg$title <- paste(prefix,"SSP2-NPI",version,"LConGov14",sep="_")
+        cfg$title <- paste(prefix,"SSP2-NPI",version,"devstate",sep="_")
         cfg <- setScenario(cfg,c("SSP2","NPI","rcp7p0"))
         cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
         cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-NPi"
-        cfg$gms$s12_interest_calib <- calib_int
-        #cfg$gms$c12_interest_rate <- "gov_dependent"
         print(cfg$title)
         start_run(cfg,codeCheck=FALSE)
       }
       
-      cfg$title <- paste(prefix,"SSP2-1p5deg",version,paste0("CalibInt",calib_int),sep="_")
+      cfg$title <- paste(prefix,"SSP2-1p5deg",version,"devstate",sep="_")
       cfg <- setScenario(cfg,c("SSP2","NDC","rcp1p9"))
       cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
       cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg600"
       print(cfg$title)
-      #start_run(cfg,codeCheck=FALSE)
+      start_run(cfg,codeCheck=FALSE)
       
     }
   }
