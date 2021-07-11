@@ -38,13 +38,6 @@ $ondelim
 $include "./modules/09_drivers/input/f09_development_state.cs3"
 $offdelim;
 
-$ontext
-table f09_governance_indicator(t_all,i,ssp_scen09) Gov Indi (1)
-$ondelim
-$include "./modules/09_drivers/input/f09_governance_indicator.cs3"
-$offdelim;
-$offtext
-
 table f09_demography(t_all,iso,pop_scen09,sex,age) Population (mio. capita per yr)
 $ondelim
 $include "./modules/09_drivers/input/f09_demography.cs3"
