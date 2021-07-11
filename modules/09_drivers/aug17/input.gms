@@ -15,9 +15,6 @@ $setglobal c09_gdp_scenario  SSP2
 *              SDP: "SDP"
 *             SRES: "a1", "a2", "b1", "b2"
 
-$setglobal c09_governance_indicator_scenario  SSP2
-*   options:   "SSP1", "SSP2", "SSP3", "SSP4", "SSP5"
-
 table f09_gdp_ppp_iso(t_all,iso,gdp_scen09) Income in purchasing power parity (mio. USD05PPP per yr)
 $ondelim
 $include "./modules/09_drivers/input/f09_gdp_ppp_iso.csv"
