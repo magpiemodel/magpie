@@ -12,7 +12,7 @@
 *' Global cost for cropland expansion are scaled with regional development state (0-1), 
 *' which is used as a proxy for governance. By default, we assume 6000 USD/ha as minimum 
 *' cost for cropland expansion and 25000 USD/ha as maximum (high-income countries).
-*' For pasture (forestry) expansion we assume a global cost factor of 10000 (1000) USD/ha (static over time).
+*' For pasture (forestry) expansion we assume a global cost factor of 8000 (1000) USD/ha (static over time).
 *' By default, clearing of natural vegetation is not priced. Plausible values range 
 *' between 0-5 USD/tC (based on @kreidenweis_pasture_2018). 
 *'
