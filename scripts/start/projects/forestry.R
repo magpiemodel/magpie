@@ -29,7 +29,7 @@ cat(paste0("Higher rotation, more share from EUR."), file=paste0(log_folder,"/",
 xx <- c()
 
 #scen_vector <- c("ForestryOff","ForestryEndo","ForestryExo")
-scen_vector <- c("ForestryEndo","ForestryOff")
+scen_vector <- c("ForestryEndo")
 
 for(c73_wood_scen in c("default")){
 
@@ -45,27 +45,33 @@ for(c73_wood_scen in c("default")){
 
             #cfg$gms$c_timesteps <- "5year"
 
-            cfg$gms$s15_elastic_demand <- 0
+            for(c32_rot_calc_type in c("mean_annual_increment","current_annual_increment","instantaneous_growth_rate")){
+              cfg$gms$s15_elastic_demand <- 0
+              cfg$gms$c32_rot_calc_type <- c32_rot_calc_type
 
-            if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
-            if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
+              if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
+              if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
 
-  #          cfg$gms$c57_macc_version = "PBL_2019"
+    #          cfg$gms$c57_macc_version = "PBL_2019"
 
-            if(scen=="ForestryOff")           scen_flag="Default"
-            if(scen=="ForestryEndo")          scen_flag="Forestry"
-            if(scen=="ForestryExo")           scen_flag="ForestryExo"
+              if(scen=="ForestryOff")           scen_flag="Default"
+              if(scen=="ForestryEndo")          scen_flag="Forestry"
+              if(scen=="ForestryExo")           scen_flag="ForestryExo"
 
-            cfg$gms$c73_wood_scen = c73_wood_scen
+              if(c32_rot_calc_type=="mean_annual_increment")       rl_flag="MAI"
+              if(c32_rot_calc_type=="current_annual_increment")    rl_flag="CAI"
+              if(c32_rot_calc_type=="instantaneous_growth_rate")   rl_flag="IGR"
 
-            cfg$title   = paste0(identifier_flag,"_",scen_flag)
-            cfg$output  = c("extra/timestep_duration")
+              cfg$gms$c73_wood_scen = c73_wood_scen
 
-             xx = c(xx,cfg$title)
-             cfg$gms$s80_optfile <- 0
-             cfg$results_folder = "output/:title:"
-             start_run(cfg,codeCheck=FALSE)
+              cfg$title   = paste0(identifier_flag,"_",scen_flag,"_",rl_flag)
+              cfg$output  = c("extra/timestep_duration")
 
+               xx = c(xx,cfg$title)
+               cfg$gms$s80_optfile <- 0
+               cfg$results_folder = "output/:title:"
+               start_run(cfg,codeCheck=FALSE)
+            }
         }
      }
   }
