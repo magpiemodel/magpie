@@ -22,7 +22,7 @@ positive variables
 ;
 
 equations
- q44_bv_loss(j)                                 zotal biodiversity value loss constraint (Mha)
+ q44_bv_loss(j)                                 total biodiversity value loss constraint (Mha)
  q44_diff_bv_landcover(j,landcover44)			biodiversity value loss constraint per land class (Mha)
  q44_bv_weighted(j,landcover44)		            biodiversity value stock constraint (Mha)
  q44_cost_bv_loss(j)			                biodiversity value loss cost constraint (mio USD)
@@ -36,10 +36,10 @@ parameters
  ov_cost_bv_loss(t,j,type)                    biodiversity value loss cost (mio USD)
  ov_bv(t,j,landcover44,potnatveg,type)        biodiversity value for all land cover classes (unweighted) (Mha)
  ov44_bv_weighted(t,j,landcover44,type)       range rarity weighted biodiversity value (Mha)
- oq44_bv_loss(t,j,type)                       total biodiversity value loss constraint
- oq44_diff_bv_landcover(t,j,landcover44,type) biodiversity value loss constraint per land class
- oq44_bv_weighted(t,j,landcover44,type)       biodiversity value stock constraint
- oq44_cost_bv_loss(t,j,type)                  biodiversity value loss cost constraint
+ oq44_bv_loss(t,j,type)                       total biodiversity value loss constraint (Mha)
+ oq44_diff_bv_landcover(t,j,landcover44,type) biodiversity value loss constraint per land class (Mha)
+ oq44_bv_weighted(t,j,landcover44,type)       biodiversity value stock constraint (Mha)
+ oq44_cost_bv_loss(t,j,type)                  biodiversity value loss cost constraint (mio USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 
