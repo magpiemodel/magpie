@@ -9,8 +9,9 @@
 
 *' @description This module calculates methane emissions according
 *' to 2006 IPCC Guidelines of National Greenhouse Gas Inventories.
-*' See also @ipcc_2006_2006.
-
+*' See also @ipcc_2006_2006. Further, using the IPCC 2019 revision,
+*' this module calculations CH4 emissions from the burning of 
+*' agricultural residues.
 *' @authors Benjamin Leon Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################

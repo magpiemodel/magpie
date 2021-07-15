@@ -8,4 +8,12 @@
 sets
   t_ini10  Time periods with land initialization data
        / y1995, y2000, y2005, y2010, y2015 /
+
+  luh2_side_layers10 side layers from LUH2
+	/ manpast, rangeland, primveg, secdveg, forested, nonforested /
+
+  potnatveg(luh2_side_layers10) potentially forested biomes
+	/ forested, nonforested /
+
 ;
+

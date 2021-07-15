@@ -6,13 +6,12 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' Capital update from the last investment
-p38_capital_immobile(t+1,j,kcr)$(p38_capital_immobile(t,j,kcr) OR v38_investment_immobile.l(j,kcr)) =
-                  (p38_capital_immobile(t,j,kcr) + v38_investment_immobile.l(j,kcr))*
-                  (1-s38_depreciation_rate)**(m_year(t+1)-m_year(t));
+p38_capital_immobile_t(j,kcr) = p38_capital_immobile_t(j,kcr) + v38_investment_immobile.l(j,kcr);
+p38_capital_immobile(t+1,j,kcr) =p38_capital_immobile_t(j,kcr);
 
-p38_capital_mobile(t+1,j)$(p38_capital_mobile(t,j) OR v38_investment_mobile.l(j)) =
-                  (p38_capital_mobile(t,j) + v38_investment_mobile.l(j))*
-                  (1-s38_depreciation_rate)**(m_year(t+1)-m_year(t));
+p38_capital_mobile_t(j) = p38_capital_mobile_t(j) + v38_investment_mobile.l(j);
+p38_capital_mobile(t+1,j) =p38_capital_mobile_t(j);
+
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_cost_prod(t,i,kall,"marginal")            = vm_cost_prod.m(i,kall);

@@ -163,7 +163,9 @@ sets time_annual Annual extended time steps
      y1980, y1985, y1990,
      y1995, y2000, y2005, y2010, y2015
     /
+
 ;
+
 
 set t_past(t_all) Timesteps with observed data
 $If "%c_past%"== "till_2010" /y1965, y1970, y1975, y1980, y1985, y1990,y1995, y2000, y2005, y2010/;
@@ -252,7 +254,7 @@ sets
         / si0, nsi0 /
 
 ***Forestry**
-   ac Age classes  / ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
+  ac Age classes  / ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
                     ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,ac95,ac100,
                     ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,
                     ac150,ac155,acx /

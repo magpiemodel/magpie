@@ -31,6 +31,21 @@
            sum(ac, v35_other(j2,ac)
            *sum(ct, pm_carbon_density_ac(ct,j2,ac,ag_pools)));
 
+*' The biodiversity value (BV) of primary forest, secondary forest and other land is computed by multiplying their respective land area with bii coefficients, which depend on the age class and whether the potential natural vegetation forest or non-forest (luh2 side layers).
+
+ q35_bv_primforest(j2,potnatveg) .. vm_bv(j2,"primforest",potnatveg)
+ 					=e=
+ 					vm_land(j2,"primforest") * fm_bii_coeff("primary",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
+
+ q35_bv_secdforest(j2,potnatveg) .. vm_bv(j2,"secdforest",potnatveg)
+ 					=e=
+          sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v35_secdforest(j2,ac)) * 
+          fm_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);
+
+ q35_bv_other(j2,potnatveg) .. vm_bv(j2,"other",potnatveg)
+ 					=e=
+          sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v35_other(j2,ac)) * 
+          fm_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);
 
 *' NPI/NDC land protection policies are implemented as minium forest land and other land stock.
 

@@ -10,7 +10,6 @@ pm_land_start, input,not used
 v35_secdforest_reduction, variable, not used
 v35_primforest_reduction, variable, not used
 v35_other_reduction, variable, not used
-sm_fix_SSP2, input, not used
 im_plantedclass_ac, par, not used
 pm_timber_yield, par, not used
 pm_timber_yield_initial, par, not used
