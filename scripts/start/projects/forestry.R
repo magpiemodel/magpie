@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "JUL01"
+identifier_flag = "AUG01"
 cat(paste0("Forestry on-off runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
@@ -38,58 +38,69 @@ for(c73_wood_scen in c("default")){
     for(scen in scen_vector){
 
         for(ssp in c("SSP2")){
-          source("config/default.cfg")
 
-          cfg$gms$s80_maxiter = s80_maxiter
+          for(pol_scen in c("NPI","NDC")){
+              source("config/default.cfg")
 
-          cfg = setScenario(cfg,c(ssp,"NPI",scen))
+              cfg$gms$s80_maxiter = s80_maxiter
 
-          for(c21_trade_liberalization in c("l909090r808080")) {
+              cfg = setScenario(cfg,c(ssp,pol_scen,scen))
 
-            cfg$gms$c21_trade_liberalization <- c21_trade_liberalization
+              for(c21_trade_liberalization in c("l909090r808080")) {
 
-            if(cfg$gms$c21_trade_liberalization=="l909090r808080")    trade_flag="DefTrade"
-            if(cfg$gms$c21_trade_liberalization=="l908080r807070")    trade_flag="LibTrade"
+                cfg$gms$c21_trade_liberalization <- c21_trade_liberalization
 
-            for (c73_build_demand in c("BAU","10pc", "50pc", "90pc")) {
+                if(cfg$gms$c21_trade_liberalization=="l909090r808080")    trade_flag="DefTrade"
+                if(cfg$gms$c21_trade_liberalization=="l908080r807070")    trade_flag="LibTrade"
 
-              for(c35_protect_scenario in c("FF_BH")){
+                for (c73_build_demand in c("BAU","10pc", "50pc", "90pc")) {
 
-                for(s73_expansion in c(0)){
+                  for(c35_protect_scenario in c("WDPA")){
 
-                  cfg$gms$c35_protect_scenario <- c35_protect_scenario
+                    for(s73_expansion in c(0)){
 
-                  cfg$gms$s73_expansion <- s73_expansion
+                      cfg$gms$c35_protect_scenario <- c35_protect_scenario
+                      if (c73_build_demand != "BAU") cfg$gms$c35_protect_scenario <- "FF_BH"
 
-                  #cfg$gms$tc <- "exo"
+                      cfg$gms$s73_expansion <- s73_expansion
 
-                  cfg$gms$c73_build_demand <- c73_build_demand
-                  cfg$gms$s15_elastic_demand <- 0
+                      #cfg$gms$tc <- "exo"
 
-                  if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
-                  if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
+                      cfg$gms$c73_build_demand <- c73_build_demand
+                      cfg$gms$s15_elastic_demand <- 0
 
-                  cfg$force_download <- TRUE
-                  cfg$recalibrate <- "ifneeded"     # def = "ifneeded"
+                      if(cfg$gms$s73_foresight == 1) foresight_flag = "Forward"
+                      if(cfg$gms$s73_foresight != 1) foresight_flag = "Myopic"
 
-                  if(scen=="ForestryOff")           scen_flag="Default"
-                  if(scen=="ForestryEndo")          scen_flag="Forestry"
-                  if(scen=="ForestryExo")           scen_flag="ForestryExo"
+                      cfg$force_download <- TRUE
+                      cfg$recalibrate <- "ifneeded"     # def = "ifneeded"
 
-                  cfg$gms$c73_wood_scen = c73_wood_scen
+                      if(scen=="ForestryOff")           scen_flag="Default"
+                      if(scen=="ForestryEndo")          scen_flag="Forestry"
+                      if(scen=="ForestryExo")           scen_flag="ForestryExo"
 
-                  cfg$title   = paste0(identifier_flag,"_",trade_flag,"_",c73_build_demand,"_",c35_protect_scenario)
-                  cfg$output  = c("extra/timestep_duration")
+                      cfg$gms$c73_wood_scen = c73_wood_scen
 
-                  xx = c(xx,cfg$title)
-                  all_configs[[cfg$title]] <- cfg
-                  #cfg$gms$s80_optfile <- 1
-                  cfg$results_folder = "output/:title:"
-                  start_run(cfg,codeCheck=FALSE)
+                      pol_flg = "Baseline"
+
+                      if(pol_scen == "NDC"){
+                        cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
+                        cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg600"
+                        pol_flg = "Mitigation"
+                      }
+
+                      cfg$title   = paste0(identifier_flag,"_",c73_build_demand,"_",pol_flg)
+                      cfg$output  = c("extra/timestep_duration")
+
+                      xx = c(xx,cfg$title)
+                      all_configs[[cfg$title]] <- cfg
+                      #cfg$gms$s80_optfile <- 1
+                      cfg$results_folder = "output/:title:"
+                      start_run(cfg,codeCheck=FALSE)
+                    }
+                  }
                 }
               }
-            }
-
           }
         }
      }
