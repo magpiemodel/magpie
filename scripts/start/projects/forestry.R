@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "APR01"
+identifier_flag = "JUL01"
 cat(paste0("Forestry on-off runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
@@ -53,7 +53,7 @@ for(c73_wood_scen in c("default")){
 
             for (c73_build_demand in c("BAU","10pc", "50pc", "90pc")) {
 
-              for(c35_protect_scenario in c("WDPA")){
+              for(c35_protect_scenario in c("FF_BH")){
 
                 for(s73_expansion in c(0)){
 
