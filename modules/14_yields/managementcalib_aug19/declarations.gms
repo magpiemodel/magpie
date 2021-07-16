@@ -9,7 +9,7 @@ parameters
  i14_yields_calib(t,j,kve,w)                             Calibrated biophysical input yields (excluding technological change) (tDM per ha per yr)
  p14_pyield_LPJ_reg(t_all,i)                             Regional average input yields aggregated from clusters with initial pasture area as weights (tDM per ha per yr)
  p14_pyield_corr(t,i)                                    Regional pasture management correction for historical time steps (1)
- i14_croparea_total(t_all,j)                             Cellular croparea (mio. ha)
+ i14_croparea_total(t_all,w,j)                           Cellular croparea (mio. ha)
  i14_modeled_yields_hist(t_all,i,kcr)                    Biophysical input yields average over region and water supply type at the historical reference year (tDM per ha per yr)
  i14_fao_yields_hist(t,i,kcr)                            FAO yields per region at the historical referende year (tDM per ha per yr)
  i14_lambda_yields(t,i,kcr)                              Scaling factor for non-linear management calibration (1)

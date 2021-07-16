@@ -8,5 +8,5 @@
 *due to some rounding errors the input data currently may contain in some cases
 *very small, negative numbers. These numbers have to be set to 0 as area
 *cannot be smaller than 0!
-fm_croparea(t_past,j,w,kcr)$(fm_croparea(t_past,j,w,kcr)) = 0;
+fm_croparea(t_past,j,w,kcr)$(fm_croparea(t_past,j,w,kcr)<0) = 0;
 

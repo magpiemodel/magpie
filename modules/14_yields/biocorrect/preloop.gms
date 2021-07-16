@@ -8,8 +8,9 @@
 i14_yields(t,j,kve,w) = f14_yields(t,j,kve,w);
 
 ***YIELD CORRECTION FOR 2ND GENERATION BIOENERGY CROPS**************************
-i14_yields(t,j,"begr",w) = i14_yields(t,j,"begr",w)*sum(cell(i,j),fm_tau1995(i))/smax(i,fm_tau1995(i));
-i14_yields(t,j,"betr",w) = i14_yields(t,j,"betr",w)*sum(cell(i,j),fm_tau1995(i))/smax(i,fm_tau1995(i));
+i14_yields(t,j,"begr",w) = i14_yields(t,j,"begr",w)*sum((supreg(h,i),cell(i,j)),fm_tau1995(h))/smax(h,fm_tau1995(h));
+i14_yields(t,j,"betr",w) = i14_yields(t,j,"betr",w)*sum((supreg(h,i),cell(i,j)),fm_tau1995(h))/smax(h,fm_tau1995(h));
+
 
 ***YIELD CALIBRATION************************************************************
 i14_yields(t,j,kcr,w)       = i14_yields(t,j,kcr,w)      *sum(cell(i,j),f14_yld_calib(i,"crop"));
