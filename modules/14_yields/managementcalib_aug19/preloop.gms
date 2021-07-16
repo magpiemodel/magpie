@@ -8,8 +8,8 @@
 i14_yields_calib(t,j,kve,w)   = f14_yields(t,j,kve,w);
 
 ***YIELD CORRECTION FOR 2ND GENERATION BIOENERGY CROPS*************************************
-i14_yields_calib(t,j,"begr",w) = f14_yields(t,j,"begr",w) * sum(cell(i,j),fm_tau1995(i))/smax(i,fm_tau1995(i));
-i14_yields_calib(t,j,"betr",w) = f14_yields(t,j,"betr",w) * sum(cell(i,j),fm_tau1995(i))/smax(i,fm_tau1995(i));
+i14_yields_calib(t,j,"begr",w) = f14_yields(t,j,"begr",w) * sum((supreg(h,i),cell(i,j)),fm_tau1995(h))/smax(h,fm_tau1995(h));
+i14_yields_calib(t,j,"betr",w) = f14_yields(t,j,"betr",w) * sum((supreg(h,i),cell(i,j)),fm_tau1995(h))/smax(h,fm_tau1995(h));
 
 ***YIELD CORRECTION FOR PASTURE ACCOUNTING FOR REGIONAL DIFFERENCES IN MANAGEMENT***
 p14_pyield_LPJ_reg(t,i) = (sum(cell(i,j),i14_yields_calib(t,j,"pasture","rainfed") * pm_land_start(j,"past")) /
@@ -34,7 +34,7 @@ i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w) * sum(cell
 *' calibration factor that depends only on the initial conditions of the starting year.
 *'
 *' However, when FAO yields are significantly higher than given by the cellular yield inputs
-*' (underestimated baseline), the relative calibration terms can lead to unrealistically large 
+*' (underestimated baseline), the relative calibration terms can lead to unrealistically large
 *' yields in the case of future yield increases within the cellular yield patterns.
 *'
 *' To address this issue, the factor 'i14_lambda_yields' determines the degree
@@ -50,7 +50,7 @@ i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w) * sum(cell
 *' to an additive term in case of a strongly underestimated baseline. The scalar
 * 's14_limit_calib' can be used to switch limited calibration on (1) and off (0).
 
-i14_croparea_total(t_all,j) = sum((kcr,w), fm_croparea(t_all,j,w,kcr));
+i14_croparea_total(t_all,w,j) = sum(kcr, fm_croparea(t_all,j,w,kcr));
 
 *' Historic crop area patterns ('fm_croprea') are used to calculate regional yields
 *' ('i14_modeled_yields_hist') from the given cellular input pattern. In rare cases where
@@ -60,8 +60,8 @@ i14_croparea_total(t_all,j) = sum((kcr,w), fm_croparea(t_all,j,w,kcr));
 i14_modeled_yields_hist(t_past,i,knbe14)
    = (sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14) * f14_yields(t_past,j,knbe14,w)) /
       sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14)))$(sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14))>0)
-   + (sum((cell(i,j),w), i14_croparea_total(t_past,j) * f14_yields(t_past,j,knbe14,w)) /
-      sum(cell(i,j), i14_croparea_total(t_past,j)))$(sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14))=0);
+   + (sum((cell(i,j),w), i14_croparea_total(t_past,w,j) * f14_yields(t_past,j,knbe14,w)) /
+      sum((cell(i,j),w), i14_croparea_total(t_past,w,j)))$(sum((cell(i,j),w), fm_croparea(t_past,j,w,knbe14))=0);
 
 
 *' The factor 'i14_lambda_yields' is calculated for the initial time step depending

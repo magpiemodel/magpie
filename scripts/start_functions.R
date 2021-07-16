@@ -9,45 +9,14 @@
 # Define internal functions
 ################################################################################
 
-.set_formatting <- function(x,space='       ',prefix="", suffix1=",", suffix2=" /", collapse=",", n=10) {
-  content <- NULL
-  tmp <- lapply(split(x, ceiling(seq_along(x)/n)),paste,collapse=collapse)
-  end <- suffix1
-  for(i in 1:length(tmp)) {
-    if(i==length(tmp)) end <- suffix2
-    content <- c(content,paste0(space,prefix,tmp[[i]],end))
-  }
-  return(content)
-}
-
-.write_sets <- function(name,desc,items,n,suffix,file) {
-
-  if ((length(name)+length(desc)+length(items)+length(n)+length(suffix))/5 != length(name)) stop("Same number of entries for name, desc, items, n and suffix is required")
-
-  subject <- 'SETS'
-  header <- c(
-    '*THIS CODE IS CREATED AUTOMATICALLY, DO NOT MODIFY THESE LINES DIRECTLY',
-    '*ANY DIRECT MODIFICATION WILL BE LOST AFTER NEXT INPUT DOWNLOAD',
-    '*CHANGES CAN BE DONE USING THE INPUT DOWNLOADER UNDER SCRIPTS/DOWNLOAD',
-    '*THERE YOU CAN ALSO FIND ADDITIONAL INFORMATION')
-
-  content <- c(header,'','sets','')
-
-
-  for (i in 1:length(name)) {
-    content <- c(content,paste0('   ',name[[i]],' ',desc[[i]],' /'))
-    content <- c(content, .set_formatting(items[[i]], suffix1=suffix[[i]], suffix2=" /",n = n[[i]]))
-    content <- c(content,'')
-  }
-  content <- c(content,';')
-
-  gms::replace_in_file(file,content,subject)
-}
-
 .update_sets_core <- function(cpr,map) {
   require(gms)
 
-  reg1 <- unique(map$RegionCode)
+  if (!("region" %in% names(map)))      map$region <- map$RegionCode
+  if (!("country" %in% names(map)))     map$country <- map$CountryCode
+  if (!("superregion" %in% names(map))) map$superregion <- map$region
+
+  reg1 <- unique(as.character(map$region))
   reg2 <- names(cpr)
   if(!all(union(reg1,reg2) %in% intersect(reg1,reg2))) {
     stop("Inconsistent region information!",
@@ -57,31 +26,43 @@
 
 
   j <- 0; cells <- NULL
-  for(i in 1:length(cpr)) {
-    cells <- c(cells,paste(names(cpr)[i],"_",j+1,"*",names(cpr)[i],"_",j+cpr[i],sep=""))
-    j <- j+cpr[i]
+  for (i in 1:length(cpr)) {
+    if (cpr[i] == 1) {
+      cells <- c(cells, paste0(names(cpr)[i], "_", j + 1))
+    } else {
+      cells <- c(cells, paste0(names(cpr)[i], "_", j + 1, "*",
+                               names(cpr)[i], "_", j + cpr[i]))
+    }
+    j <- j + cpr[i]
   }
+  ij <- data.frame(i = names(cpr), j = cells)
 
-  map_i_to_j <- NULL
-  for(i in 1:length(cpr)) {
-    map_i_to_j <- c(map_i_to_j,paste('',names(cpr)[i],' . ',cells[i],sep=''))
-  }
-  #map_i_to_j <- paste(names(cpr),cells,sep=" . ")
+  hi <- unique(map[c("superregion", "region")])
+  hi <- hi[order(hi$superregion),]
 
-  map$RegionCode <- as.factor(map$RegionCode)
-  map_i_to_iso <- NULL
-  for(i in levels(map$RegionCode)) {
-    map_i_to_iso <- c(map_i_to_iso, .set_formatting(map$CountryCode[map$RegionCode==i],space = '', prefix=paste0(i," . ("), suffix1=")", suffix2=")"))
-  }
+  sets <- list(list(name = "h",
+                    desc = "all superregional economic regions",
+                    items = sort(unique(as.character(map$superregion)))),
+               list(name = "i",
+                    desc = "all economic regions",
+                    items = names(cpr)),
+               list(name = "supreg(h,i)",
+                    desc = "mapping of superregions to its regions",
+                    items = hi),
+               list(name = "iso",
+                    desc = "list of iso countries",
+                    items = as.character(map$country)),
+               list(name = "j",
+                    desc = "number of LPJ cells",
+                    items = cells),
+               list(name = "cell(i,j)",
+                    desc = "number of LPJ cells per region i",
+                    items = ij),
+               list(name = "i_to_iso(i,iso)",
+                    desc = "mapping regions to iso countries",
+                    items = map[c("region","country")][order(map$region),]))
 
-  name <- list("i","iso","j","cell(i,j)","i_to_iso(i,iso)")
-  desc <- list("all economic regions","list of iso countries","number of LPJ cells","number of LPJ cells per region i","mapping regions to iso countries")
-  items <- list(names(cpr),map$CountryCode,cells,map_i_to_j,map_i_to_iso)
-  n <- c(12,10,1,1,1)
-  suffix <- c(",",",",",","","")
-  file <- "core/sets.gms"
-
-  .write_sets(name,desc,items,n,suffix,file)
+  gms::writeSets(sets, "core/sets.gms")
 }
 
 .update_sets_modules <- function() {
@@ -94,27 +75,24 @@
   scen56 <- magclass::read.magpie("modules/56_ghg_policy/input/f56_emis_policy.csv",file_type = "cs3")
   scen56 <- magclass::getNames(scen56,dim=1)
 
-  name <- list("ghgscen56","scen56")
-  desc <- list("ghg price scenarios","emission policy scenarios")
-  items <- list(ghgscen56,scen56)
-  n <- c(1,1)
-  suffix <- c(",",",")
-  file <- "modules/56_ghg_policy/price_jan20/sets.gms"
+  sets <- list(list(name = "ghgscen56",
+                    desc = "ghg price scenarios",
+                    items = ghgscen56),
+               list(name = "scen56",
+                   desc = "emission policy scenarios",
+                   items = scen56))
 
-  .write_sets(name,desc,items,n,suffix,file)
+  gms::writeSets(sets, "modules/56_ghg_policy/price_jan20/sets.gms")
 
   ### 60_bioenergy
   scen2nd60 <- magclass::read.magpie("modules/60_bioenergy/input/f60_bioenergy_dem.cs3")
   scen2nd60 <- magclass::getNames(scen2nd60,dim=1)
 
-  name <- list("scen2nd60")
-  desc <- list("second generation bioenergy scenarios")
-  items <- list(scen2nd60)
-  n <- c(1)
-  suffix <- c(",")
-  file <- "modules/60_bioenergy/1stgen_priced_dec18/sets.gms"
+  sets <- list(list(name = "scen2nd60",
+                    desc = "second generation bioenergy scenarios",
+                    items = scen2nd60))
 
-  .write_sets(name,desc,items,n,suffix,file)
+  gms::writeSets(sets , "modules/60_bioenergy/1stgen_priced_dec18/sets.gms")
 }
 
 # Function to extract information from info.txt
@@ -265,7 +243,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   if(!is.null(scenario)) cfg <- gms::setScenario(cfg,scenario)
   cfg <- gms::check_config(cfg, extras = "info")
 
-  # save model version 
+  # save model version
   cfg$info$version <- citation::read_cff("CITATION.cff")$version
 
   # Make 'title' a setglobal in gams to include it in the gdx
@@ -307,13 +285,13 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
     lucode2::manipulateConfig(cfg$model, cfg$gms)
 
     # configure input.gms in all modules based on settings of cfg file
-    l1 <- lucode2::path("modules", list.dirs("modules/", full.names = FALSE,
+    l1 <- file.path("modules", list.dirs("modules/", full.names = FALSE,
                                             recursive = FALSE))
     for(l in l1) {
-      l2 <- lucode2::path(l, list.dirs(l, full.names = FALSE, recursive = FALSE))
+      l2 <- file.path(l, list.dirs(l, full.names = FALSE, recursive = FALSE))
       for(ll in l2) {
-        if(file.exists(lucode2::path(ll, "input.gms"))) {
-          lucode2::manipulateConfig(lucode2::path(ll, "input.gms"), cfg$gms)
+        if(file.exists(file.path(ll, "input.gms"))) {
+          lucode2::manipulateConfig(file.path(ll, "input.gms"), cfg$gms)
         }
       }
     }
@@ -436,9 +414,9 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
 
   cfg$magpie_folder <- getwd()
 
-  save(cfg, file=lucode2::path(cfg$results_folder, "config.Rdata"))
+  save(cfg, file=file.path(cfg$results_folder, "config.Rdata"))
 
-  gms::singleGAMSfile(mainfile=cfg$model, output=lucode2::path(cfg$results_folder, "full.gms"))
+  gms::singleGAMSfile(mainfile=cfg$model, output=file.path(cfg$results_folder, "full.gms"))
   if(lock_model) {
     gms::model_unlock(lock_id)
     on.exit(setwd(maindir))
@@ -541,29 +519,4 @@ getReportData <- function(path_to_report,LU_pricing="y2010") {
 
   .bioenergy_demand(mag)
   .emission_prices(mag)
-}
-
-
-start_reportrun <- function (cfg, path_report, inmodel=NULL, sceninreport=NULL, codeCheck=FALSE){
-  if (!requireNamespace("magclass", quietly = TRUE)) {
-    stop("Package \"magclass\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
-  if (!requireNamespace("gms", quietly = TRUE)) {
-    stop("Package \"gms\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
-  rep <- magclass::convert.report(path_report,inmodel=inmodel,outmodel="MAgPIE")
-  magclass::write.report(rep,"report.mif")
-  if (!is.null(sceninreport))
-      sceninreport <- intersect(sceninreport,names(rep))
-  else
-      sceninreport <- names(rep)
-
-  for(scen in sceninreport) {
-	cfg$title <- scen
-  # extract scenario from scenarioname and apply it
-	cfg       <- gms::setScenario(cfg,substring(scen,first=1,last=4))
-	start_run(cfg, report=rep, sceninreport=scen, codeCheck=codeCheck)
-  }
 }

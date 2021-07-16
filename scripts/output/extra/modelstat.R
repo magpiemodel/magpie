@@ -22,7 +22,7 @@ options(error=function()traceback(2))
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdir <- lucode2::path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
+  outputdir <- file.path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
   #Define arguments that can be read from command line
   lucode2::readArgs("outputdir")
 }
@@ -35,7 +35,7 @@ missing <- NULL
 for (i in 1:length(outputdir)) {
   print(paste("Processing",outputdir[i]))
   #gdx file
-  gdx<-path(outputdir[i],"fulldata.gdx")
+  gdx<-file.path(outputdir[i],"fulldata.gdx")
   if(file.exists(gdx)) {
     tmp <- modelstat(gdx)
     dimnames(tmp)[[3]] <- paste(outputdir[i],dimnames(tmp)[[3]],sep=".")
