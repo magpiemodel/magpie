@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **35_natveg** Added new option `"FF+BH"` for protected areas.
 - **35_natveg** Added new option `policy_countries35` for country specific land protection
 - **38_factor_costs** Added scaling factors for improving model run time
+- **39_landconversion** new realization `devstate` in which global land conversion costs are scaled with regional development state (0-1)
 - **41_area_equipped_for_irrigation** Added switch for using different input data including new LUH2v2 consistent initialisation pattern.
 - **58_peatland** Added option for one-time and recurring costs of peatland degradation (USD05MER per ha)
 - **calibration run** has two new features: 1. Upper bound to cropland factor can be added (`crop_calib_max`). 2. Best calibration factor (factor with the lowest divergence) can be picked individually for each regions based on all calibration factors calculated during the calibration run iteration (`best_calib`).

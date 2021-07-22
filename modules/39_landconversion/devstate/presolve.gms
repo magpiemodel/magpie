@@ -5,9 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-scalars
- s39_cost_establish_crop   	   Cost for cropland land expansion (USD05MER per hectare)   / 8000 /
- s39_cost_establish_past   	   Cost for pasture land expansion (USD05MER per hectare)    / 8000 /
- s39_cost_establish_forestry   Cost for foresty land expansion (USD05MER per hectare)    / 1000 /
- s39_cost_clearing    Clearing costs linked to removed biomass (USD05MER per ton C)  / 0 /
-;
+*Global cost for cropland expansion are scaled with regional development state (0-1), with s39_cost_establish_crop_min as lower bound.
+i39_cost_establish(t,i,"crop") = max(s39_cost_establish_crop_min,s39_cost_establish_crop_max*im_development_state(t,i));
+i39_cost_establish(t,i,"past") = s39_cost_establish_past;
+i39_cost_establish(t,i,"forestry") = s39_cost_establish_forestry;

@@ -5,9 +5,4 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-scalars
- s39_cost_establish_crop   	   Cost for cropland land expansion (USD05MER per hectare)   / 8000 /
- s39_cost_establish_past   	   Cost for pasture land expansion (USD05MER per hectare)    / 8000 /
- s39_cost_establish_forestry   Cost for foresty land expansion (USD05MER per hectare)    / 1000 /
- s39_cost_clearing    Clearing costs linked to removed biomass (USD05MER per ton C)  / 0 /
-;
+vm_cost_landcon.scale(j,land) = 10e3;
