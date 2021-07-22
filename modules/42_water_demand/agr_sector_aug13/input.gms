@@ -8,7 +8,7 @@
 scalars
 
 s42_reserved_fraction       Fraction of available water that is reserved for industry electricity and domestic use (1) / 0.5 /
-s42_reg_reserved_fraction   Fraction of available water that is reserved for industry electricity and domestic use in selected regions (1) / 0.2 /
+s42_reg_reserved_fraction   Fraction of available water that is reserved for industry electricity and domestic use in selected regions (1) / 0.5 /
 
 s42_irrig_eff_scenario     Scenario for irrigation efficiency     (1)       / 2 /
 *                                      1: global static value
@@ -70,7 +70,7 @@ sets
                           VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 
 
-select_regions42(i)      regions for which separate value for reserved fraction is chosen /IND/
+select_regions42(i)      regions for which separate value for reserved fraction is chosen / IND /
 ;
 
 table f42_wat_req_kve(t_all,j,kve) LPJmL annual water demand for irrigation per ha (m^3 per yr)
@@ -102,8 +102,8 @@ $if "%c42_watdem_scenario%" == "nocc" f42_env_flows(t_all,j) = f42_env_flows("y1
 $if "%c42_watdem_scenario%" == "nocc_hist" f42_env_flows(t_all,j)$(m_year(t_all) > sm_fix_cc) = f42_env_flows(t_all,j)$(m_year(t_all) = sm_fix_cc);
 m_fillmissingyears(f42_env_flows,"j");
 
-$setglobal c42_env_flow_policy        off
-$setglobal c42_reg_reserved_fraction  off
+$setglobal c42_env_flow_policy  off
+$setglobal c42_reg_reserved_fraction  on
 
 table f42_env_flow_policy(t_all,scen42) EFP policies (1)
 $ondelim

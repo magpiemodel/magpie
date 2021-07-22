@@ -34,7 +34,7 @@ ic42_env_flow_policy(i) = i42_env_flow_policy(t,i);
 p42_reserved_fraction(i) = s42_reserved_fraction;
 
 
-* Assigning a different value of reserved fraction for countries selected ini select_countries42
+* If c42_reg_reserved_fraction switch turned on, then separate regional values are assigned for the selected region
 $ifthen "%c42_reg_reserved_fraction%" == "on"
   p42_reserved_fraction(select_regions42) = s42_reg_reserved_fraction;
 $endif
