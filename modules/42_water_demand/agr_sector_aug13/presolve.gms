@@ -34,10 +34,10 @@ ic42_env_flow_policy(i) = i42_env_flow_policy(t,i);
 p42_reserved_fraction(i) = s42_reserved_fraction;
 
 
-* Setting default value for India to 0.2 if india_water_switch = 0
-if ((select_countries42 <> "all_iso_countries"),
-  p42_reserved_fraction(select_countries42) = s42_reg_reserved_fraction;
-);
+* Assigning a different value of reserved fraction for countries selected ini select_countries42
+$ifthen "%c42_reg_reserved_fraction%" == "on"
+  p42_reserved_fraction(select_regions42) = s42_reg_reserved_fraction;
+$endif
 
 * water consumption in industry, sanitation, ecosystem
 * (assign s42_reserved_fraction to industry for simplicity)
