@@ -97,14 +97,15 @@ variable. After that you can run the following lines of code:
 ```
 pkgs <- c("gdxrrw",
           "ggplot2",
+          "citation",
           "curl",
           "gdx",
-          "gms",
+          "gms",         # (>= 0.10)
           "magclass",
           "madrat",
           "mip",
           "lucode2",
-          "magpie4",
+          "magpie4",     # (>= 1.104)
           "magpiesets",
           "lusweave",
           "luscale",

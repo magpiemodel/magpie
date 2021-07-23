@@ -8,7 +8,7 @@
 *due to some rounding errors the input data currently may contain in some cases
 *very small, negative numbers. These numbers have to be set to 0 as area
 *cannot be smaller than 0!
-fm_croparea(t_past,j,w,kcr)$(fm_croparea(t_past,j,w,kcr)) = 0;
+fm_croparea(t_past,j,w,kcr)$(fm_croparea(t_past,j,w,kcr)<0) = 0;
 
 ****** Regional share of Set aside cropland policy in selective countries:
 * Country switch to determine countries for which a set aside cropland policy shall be applied.

@@ -20,7 +20,7 @@ options(error=function()traceback(2))
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdir <- path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
+  outputdir <- file.path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
   #Define arguments that can be read from command line
   readArgs("outputdir")
 }
@@ -34,10 +34,10 @@ if(file.exists("output/agmip_report_full.csv")) file.rename("output/agmip_report
 for (i in 1:length(outputdir)) {
   print(paste("Processing",outputdir[i]))
   #gdx file
-  rep<-path(outputdir[i],"agmip_report.mif")
+  rep<-file.path(outputdir[i],"agmip_report.mif")
   if(file.exists(rep)) {
     #get scenario name
-    load(path(outputdir[i],"config.Rdata"))
+    load(file.path(outputdir[i],"config.Rdata"))
     scen <- cfg$title
     #Remove prefix starting with "V", like "V2"
     scen_parts <- unlist(strsplit(scen,"_"))
