@@ -33,8 +33,10 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     if("try-error" %in% class(tmp) | length(tmp)==0) {
       tmp <- base::list.dirs("./output/",recursive=TRUE)
       dirs <- NULL
-      for (i in 1:length(tmp)) {
-        if (file.exists(path(tmp[i],"full.gms"))) dirs <- c(dirs,sub("./output/","",tmp[i]))
+      for (i in seq_along(tmp)) {
+        if (file.exists(file.path(tmp[i],"full.gms"))){
+           dirs <- c(dirs,sub("./output/","",tmp[i]))
+        }
       }
     } else {
       dirs <- sub("full.gms","",sub("./output/","",tmp, fixed=TRUE), fixed=TRUE)
@@ -42,13 +44,13 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     dirs <- sort(dirs)
     dirs <- c("all",dirs)
     cat("\n",title,":\n", sep="")
-    cat(paste(1:length(dirs), dirs, sep=": " ),sep="\n")
+    cat(paste(seq_along(dirs), dirs, sep=": " ),sep="\n")
     cat(paste(length(dirs)+1, "Search by the pattern.\n", sep=": "))
     cat("Number: ")
     identifier <- get_line()
     identifier <- strsplit(identifier,",")[[1]]
     tmp <- NULL
-    for (i in 1:length(identifier)) {
+    for (i in seq_along(identifier)) {
       if (length(strsplit(identifier,":")[[i]]) > 1) tmp <- c(tmp,as.numeric(strsplit(identifier,":")[[i]])[1]:as.numeric(strsplit(identifier,":")[[i]])[2])
       else tmp <- c(tmp,as.numeric(identifier[i]))
     }
@@ -60,7 +62,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
       id <- grep(pattern=pattern, dirs[-1], perl=TRUE)
       # lists all directories matching the pattern and ask for confirmation
       cat("\n\nYou have chosen the following directories:\n")
-      cat(paste(1:length(id), dirs[id+1], sep=": "), sep="\n")
+      cat(paste(seq_along(id), dirs[id+1], sep=": "), sep="\n")
       cat("\nAre you sure these are the right directories?(y/n): ")
       answer <- get_line()
       if(answer=="y"){
@@ -87,7 +89,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
      modes <- modes[-1:-2]
     }
     cat("\n",title,":\n",sep="")
-    cat(paste(1:length(modes), modes, sep=": " ),sep="\n")
+    cat(paste(seq_along(modes), modes, sep=": " ),sep="\n")
     cat("Number: ")
     identifier <- get_line()
     identifier <- as.numeric(strsplit(identifier,",")[[1]])
