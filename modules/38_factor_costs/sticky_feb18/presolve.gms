@@ -16,6 +16,7 @@ $ifthen "%c38_sticky_mode%" == "dynamic" p38_capital_cost_share(i) = f38_reg_par
 $endif
 );
 
+i38_variable_costs(i2,kcr) = f38_fac_req(kcr)  * (1-p38_capital_cost_share(i2)) * (1-s38_mi_start);
 i38_capital_need(i,kcr,"mobile") = f38_fac_req(kcr) * p38_capital_cost_share(i) / (pm_interest(t,i)+s38_depreciation_rate) * (1-s38_immobile);
 i38_capital_need(i,kcr,"immobile") = f38_fac_req(kcr)  * p38_capital_cost_share(i) / (pm_interest(t,i)+s38_depreciation_rate) * s38_immobile;
 
@@ -23,7 +24,6 @@ p38_croparea_start(j,kcr) = sum(w, fm_croparea("y1995",j,w,kcr));
 
 if (ord(t) = 1,
 
- i38_variable_costs(i2,kcr) = f38_fac_req(kcr)  * (1-p38_capital_cost_share(i2)) * (1-s38_mi_start);
 
 *' Estimate capital stock based on capital remuneration
   p38_capital_immobile_t(j,kcr)   = sum(cell(i,j), i38_capital_need(i,kcr,"immobile")*p38_croparea_start(j,kcr)*f38_region_yield(i,kcr)* sum(supreg(h,i),fm_tau1995(h)));
