@@ -36,6 +36,7 @@ cfg$recalibrate <- TRUE
 for(cc in c("cc")){
   for (sm in mode){
 
+    cfg$force_download <- TRUE
     # Set cc
     cfg<-gms::setScenario(cfg,cc)
 
