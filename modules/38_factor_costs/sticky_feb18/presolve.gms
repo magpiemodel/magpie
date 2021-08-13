@@ -16,9 +16,9 @@ $ifthen "%c38_sticky_mode%" == "dynamic" p38_capital_cost_share(i) = f38_reg_par
 $endif
 );
 
-p38_variable_costs(i2,kcr) = f38_fac_req(kcr)  * (1-p38_capital_cost_share(i2)) ;
-p38_capital_need(i,kcr,"mobile") = f38_fac_req(kcr) * p38_capital_cost_share(i) / (pm_interest(t,i)+s38_depreciation_rate) * (1-s38_immobile);
-p38_capital_need(i,kcr,"immobile") = f38_fac_req(kcr)  * p38_capital_cost_share(i) / (pm_interest(t,i)+s38_depreciation_rate) * s38_immobile;
+p38_variable_costs(i2,t,kcr) = f38_fac_req(kcr)  * (1-p38_capital_cost_share(i2)) ;
+p38_capital_need(i,t,kcr,"mobile") = f38_fac_req(kcr) * p38_capital_cost_share(i) / (pm_interest(t,i)+s38_depreciation_rate) * (1-s38_immobile);
+p38_capital_need(i,t,kcr,"immobile") = f38_fac_req(kcr)  * p38_capital_cost_share(i) / (pm_interest(t,i)+s38_depreciation_rate) * s38_immobile;
 
 p38_croparea_start(j,kcr) = sum(w, fm_croparea("y1995",j,w,kcr));
 

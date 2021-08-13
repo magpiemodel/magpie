@@ -11,7 +11,7 @@
 * considering capital costs.
 
 q38_cost_prod_crop(i2,kcr).. vm_cost_prod(i2,kcr)
-                              =e= vm_prod_reg(i2,kcr) * p38_variable_costs(i2,kcr)
+                              =e= vm_prod_reg(i2,kcr) * sum(ct,p38_variable_costs(i2,ct,kcr))
                                 ;
 
 *' Investment costs: Investment are the summation of investment in mobile and immobile capital. The costs are annuitized,
@@ -32,7 +32,7 @@ q38_cost_prod_inv(i2).. vm_cost_inv(i2)=e=(sum((cell(i2,j2),kcr),v38_investment_
 
 q38_investment_immobile(j2,kcr).. v38_investment_immobile(j2,kcr)
                                   =g=
-                                 vm_prod(j2,kcr)*sum(cell(i2,j2),p38_capital_need(i2,kcr,"immobile"))-
+                                 vm_prod(j2,kcr)*sum(cell(i2,j2),sum(ct,p38_capital_need(i2,ct,kcr,"immobile")))-
                                  p38_capital_immobile_t(j2,kcr);
 *
 
@@ -40,6 +40,6 @@ q38_investment_immobile(j2,kcr).. v38_investment_immobile(j2,kcr)
 
 q38_investment_mobile(j2).. v38_investment_mobile(j2)
                              =g=
-                             sum((cell(i2,j2),kcr),vm_prod(j2,kcr)*p38_capital_need(i2,kcr,"mobile"))-
+                             sum((cell(i2,j2),kcr),vm_prod(j2,kcr)*sum(ct,p38_capital_need(i2,ct,kcr,"mobile")))-
                              p38_capital_mobile_t(j2);
 *
