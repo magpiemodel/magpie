@@ -26,7 +26,7 @@ if (ord(t) = 1,
 
 *' Estimate capital stock based on capital remuneration
   p38_capital_immobile(t,j,kcr)    = sum(cell(i,j), p38_capital_need(i,t,kcr,"immobile")*p38_croparea_start(j,kcr)*f38_region_yield(i,kcr)* sum(supreg(h,i),fm_tau1995(h)));
-  p38_capital_immobile(t,j,kcr)          = sum((cell(i,j),kcr), p38_capital_need(i,t,kcr,"mobile")*p38_croparea_start(j,kcr)*f38_region_yield(i,kcr)* sum(supreg(h,i),fm_tau1995(h)));
+  p38_capital_mobile(t,j)    = sum((cell(i,j),kcr), p38_capital_need(i,t,kcr,"mobile")*p38_croparea_start(j,kcr)*f38_region_yield(i,kcr)* sum(supreg(h,i),fm_tau1995(h)));
 
   vm_prod.l(j,kcr)=sum(cell(i,j),p38_croparea_start(j,kcr)*f38_region_yield(i,kcr)* sum(supreg(h,i),fm_tau1995(h)));
 
@@ -34,7 +34,7 @@ else
 
 *' Update of existing stocks
 
-    p38_capital_immobile(t,j,kcr)=p38_capital_immobile_t(j,kcr)*(1-s38_depreciation_rate)**(m_timestep_length);
-    p38_capital_mobile(t,j)=p38_capital_mobile_t(j)*(1-s38_depreciation_rate)**(m_timestep_length);
+    p38_capital_immobile(t,j,kcr)=p38_capital_immobile(t,j,kcr)*(1-s38_depreciation_rate)**(m_timestep_length);
+    p38_capital_mobile(t,j)=p38_capital_mobile(t,j)*(1-s38_depreciation_rate)**(m_timestep_length);
 
     );
