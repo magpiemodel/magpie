@@ -33,7 +33,7 @@ q38_cost_prod_inv(i2).. vm_cost_inv(i2)=e=(sum((cell(i2,j2),kcr),v38_investment_
 q38_investment_immobile(j2,kcr).. v38_investment_immobile(j2,kcr)
                                   =g=
                                  vm_prod(j2,kcr)*sum(cell(i2,j2),sum(ct,p38_capital_need(i2,ct,kcr,"immobile")))-
-                                 p38_capital_immobile_t(j2,kcr);
+                                 sum(ct,p38_capital_immobile(ct,j2,kcr));
 *
 
 *'On the other hand, the mobile capital is needed by all crop activities in each location, so it is defined over each j2 cell.
@@ -41,5 +41,5 @@ q38_investment_immobile(j2,kcr).. v38_investment_immobile(j2,kcr)
 q38_investment_mobile(j2).. v38_investment_mobile(j2)
                              =g=
                              sum((cell(i2,j2),kcr),vm_prod(j2,kcr)*sum(ct,p38_capital_need(i2,ct,kcr,"mobile")))-
-                             p38_capital_mobile_t(j2);
+                             sum(ct,p38_capital_mobile(ct,j2));
 *
