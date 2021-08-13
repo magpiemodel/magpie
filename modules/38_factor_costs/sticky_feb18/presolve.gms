@@ -16,7 +16,7 @@ $ifthen "%c38_sticky_mode%" == "dynamic" p38_capital_cost_share(i,t) = f38_reg_p
 $endif
 );
 
-p38_variable_costs(i2,t,kcr) = f38_fac_req(kcr)  * (1-p38_capital_cost_share(i2,t)) ;
+p38_variable_costs(i,t,kcr) = f38_fac_req(kcr)  * (1-p38_capital_cost_share(i,t)) ;
 p38_capital_need(i,t,kcr,"mobile") = f38_fac_req(kcr) * p38_capital_cost_share(i,t) / (pm_interest(t,i)+s38_depreciation_rate) * (1-s38_immobile);
 p38_capital_need(i,t,kcr,"immobile") = f38_fac_req(kcr)  * p38_capital_cost_share(i,t) / (pm_interest(t,i)+s38_depreciation_rate) * s38_immobile;
 
