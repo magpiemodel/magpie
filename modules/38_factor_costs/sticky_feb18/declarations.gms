@@ -20,12 +20,12 @@ positive variables
 ;
 
 parameters
- p38_variable_costs(i,t,kcr)           Variable input costs (mio USD05ppp per input unit)
- p38_capital_need(i,t,kcr,mobil38)     Capital requirements for farming with tau equal 1 (mio USD05ppp)
+ p38_variable_costs(t,i,kcr)           Variable input costs (mio USD05ppp per input unit)
+ p38_capital_need(t,i,kcr,mobil38)     Capital requirements for farming with tau equal 1 (mio USD05ppp)
  p38_capital_immobile(t,j,kcr)         Preexisting immobile capital stocks before investment (mio USD05ppp)
  p38_capital_mobile(t,j)               Preexisting mobile capital stocks before investment (mio USD05ppp)
 
- p38_capital_cost_share(i,t)           Capital share for dynamic calculation (1)
+ p38_capital_cost_share(t,i)           Capital share for dynamic calculation (1)
  p38_share_calibration(i)              Summation factor used to calibrate calculated capital shares with historical values (1)
 
  p38_croparea_start(j,kcr)             Agricultural land initialization area (mio. ha)
