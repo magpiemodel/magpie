@@ -22,8 +22,8 @@ $setglobal c32_dev_scen  abare
 $setglobal c32_incr_rate  h5s2l1
 * options constant,h5s5l5,h5s2l2,h5s2l1,h5s1l1,h5s1l05,h2s1l05
 
-$setglobal c32_rot_calc_type mean_annual_increment
-* options mean_annual_increment (Benni), current_annual_increment (Abhi), instantaneous_growth_rate
+$setglobal c32_rot_calc_type max_marginal_increment
+* options max_marginal_increment, current_annual_increment, instantaneous_growth_rate
 
 scalars
   s32_hvarea 					  Flag for harvested area and establishemt (0=zero 1=exognous 2=endogneous)	/ 0 /

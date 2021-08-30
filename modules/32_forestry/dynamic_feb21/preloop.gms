@@ -40,13 +40,14 @@ $endif
 $ifthen "%c32_rot_calc_type%" == "current_annual_increment"
   p32_rot_flg(t_all,j,ac) = 1$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_carbon_density_ac_marg(t_all,j,ac-1) >  0)
                           + 0$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_carbon_density_ac_marg(t_all,j,ac-1) <= 0);
-  display "Rotation lengths are calculated based on maximizing increment in this run.";
+  display "Rotation lengths are calculated based on maximizing CAI in this run.";
 $endif
 
-$ifthen "%c32_rot_calc_type%" == "mean_annual_increment"
+$ifthen "%c32_rot_calc_type%" == "max_marginal_increment"
 p32_avg_increment(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") / (ord(ac)*5);
 p32_rot_flg(t_all,j,ac) = 1$(p32_avg_increment(t_all,j,ac) - p32_avg_increment(t_all,j,ac-1) >  0)
                         + 0$(p32_avg_increment(t_all,j,ac) - p32_avg_increment(t_all,j,ac-1) <= 0);
+  display "Rotation lengths are calculated based on maximizing increment in this run.";
 $endif
 
 ** From the above calculation, now it is easier to count how many age-classes can be sustained before IGR falls below interest rate.
