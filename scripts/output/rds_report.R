@@ -8,7 +8,7 @@
 # --------------------------------------------------------------
 # description: extract report in rds format from run
 # comparison script: FALSE
-# position: 1
+# position: 2
 # ---------------------------------------------------------------
 
 
@@ -25,7 +25,7 @@ if(!exists("source_include")) {
 }
 
 load(paste0(outputdir, "/config.Rdata"))
-gdx	<- path(outputdir,"fulldata.gdx")
+gdx	<- file.path(outputdir,"fulldata.gdx")
 rds <- paste0(outputdir, "/report.rds")
 mif <- paste0(outputdir, "/report.mif")
 runstatistics <- paste0(outputdir,"/runstatistics.rda")
@@ -38,7 +38,7 @@ write.report2(report, file=mif)
 q <- as.quitte(report)
 if(all(is.na(q$value))) stop("No values in reporting!")
 
-saveRDS(q,file=rds)
+saveRDS(q,file=rds, version = 2)
 
 if(file.exists(runstatistics) & dir.exists(resultsarchive)) {
   stats <- list()
@@ -55,7 +55,7 @@ if(file.exists(runstatistics) & dir.exists(resultsarchive)) {
   }
 
   # Save report to results archive
-  saveRDS(q,file=paste0(resultsarchive,"/",stats$id,".rds"))
+  saveRDS(q,file=paste0(resultsarchive,"/",stats$id,".rds"), version = 2)
   cwd <- getwd()
   setwd(resultsarchive)
   system("ls 1*.rds > files")

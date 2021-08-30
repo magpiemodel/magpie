@@ -5,4 +5,13 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
-name,type,reason
+# -------------------------------------------------------------
+# description: default run with new yield realization and data
+# ------------------------------------------------------------
+
+library(gms)
+source("scripts/start_functions.R")
+source("config/default.cfg")
+source("scripts/start/extra/lpjml_addon.R")
+start_run(cfg=cfg)
+

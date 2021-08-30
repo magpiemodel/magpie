@@ -1,5 +1,7 @@
 #!/usr/bin/env Rscript
 
+if(!requireNamespace("gms", quietly = TRUE)) install.packages("gms", repos = c("https://rse.pik-potsdam.de/r/packages/", "https://cloud.r-project.org"))
+
 # run codeCheck
 null <- gms::codeCheck(strict=TRUE)
 message("")
@@ -19,5 +21,3 @@ maxfilesize <- function(max=512) {
 }
 
 maxfilesize(250)
-
-

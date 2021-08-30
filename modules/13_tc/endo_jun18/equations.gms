@@ -18,8 +18,8 @@
 *' rate `pm_interest`:
 
 q13_cost_tc(i2) ..
-  v13_cost_tc(i2) =e= sum(ct, pc13_land(i2) * i13_tc_factor(ct,i2)
-                     * vm_tau(i2)**i13_tc_exponent(ct,i2)
+  v13_cost_tc(i2) =e= sum(ct, pc13_land(i2) * i13_tc_factor(ct)
+                     * sum(supreg(h2,i2),vm_tau(h2))**i13_tc_exponent(ct)
                      * (1+pm_interest(ct,i2))**15);
 
 *' The shifting is performed because investments into technological change
@@ -37,5 +37,5 @@ q13_cost_tc(i2) ..
 *' (annuity with infinite time horizon):
 
 q13_tech_cost(i2) ..
- vm_tech_cost(i2)=e= (vm_tau(i2)/pc13_tau(i2)-1) * v13_cost_tc(i2)
+ vm_tech_cost(i2) =e= sum(supreg(h2,i2), vm_tau(h2)/pcm_tau(h2)-1) * v13_cost_tc(i2)
                                * sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)));

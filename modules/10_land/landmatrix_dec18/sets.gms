@@ -15,4 +15,9 @@ sets
    land_to10(land) Land pools
         / crop, past, forestry, primforest, secdforest, urban, other /
 
+   luh2_side_layers10 side layers from LUH2
+	/ manpast, rangeland, primveg, secdveg, forested, nonforested /
+
+    potnatveg(luh2_side_layers10) potentially forested biomes
+	/ forested, nonforested /
 ;

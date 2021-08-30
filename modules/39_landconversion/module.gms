@@ -18,5 +18,6 @@
 *' @authors Florian Humpenöder, Jan Philipp Dietrich, Ulrich Kreidenweis
 
 *###################### R SECTION START (MODULETYPES) ##########################
+$Ifi "%landconversion%" == "devstate" $include "./modules/39_landconversion/devstate/realization.gms"
 $Ifi "%landconversion%" == "global_static_aug18" $include "./modules/39_landconversion/global_static_aug18/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

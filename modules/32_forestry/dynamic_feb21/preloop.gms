@@ -136,14 +136,14 @@ loop(t_all,
 display p32_rotation_cellular_harvesting;
 
 ** Afforestation policies NPI and NDCs
-p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
+p32_aff_pol(t,j) = round(f32_aff_pol(t,j,"%c32_aff_policy%"),6);
 
 * Calculate the remaining exogenous afforestation with respect to the maximum exogenous target over time.
 * `p32_aff_togo` is used to adjust `s32_max_aff_area` in the constraint `q32_max_aff`.
-p32_aff_togo(t) = sum(j, smax(t2, p32_aff_pol(t2,j)) - p32_aff_pol(t,j));
+p32_aff_togo(t) = smax(t2, sum(j, p32_aff_pol(t2,j))) - sum(j, p32_aff_pol(t,j));
 
 * Adjust the afforestation limit `s32_max_aff_area` upwards, if it is below the exogenous policy target.
-s32_max_aff_area = max(s32_max_aff_area, sum(j, smax(t2, p32_aff_pol(t2,j))) );
+s32_max_aff_area = max(s32_max_aff_area, smax(t2, sum(j, p32_aff_pol(t2,j))) );
 
 p32_cdr_ac(t,j,ac) = 0;
 
@@ -198,7 +198,10 @@ elseif s32_initial_distribution = 4,
 ** Calculate the weights, youngest age-class will have highest weight
     p32_ac_dist(j,ac) = (p32_ac_dist_flag(j,ac) / (sum(ac2,p32_ac_dist_flag(j,ac2)) + ord(ac)))$(ord(ac) <= p32_rotation_cellular_harvesting("y1995",j));
 ** there can be isntances where this distribution is not summing up to 1, in that case we take the excess and remove it evenly from all age-classes
-    p32_ac_dist(j,ac)$(sum(ac2, p32_ac_dist(j,ac2))>1) = (p32_ac_dist(j,ac) - (sum(ac2, p32_ac_dist(j,ac2))-1)/p32_ac_dist_flag(j,"ac0"))$(ord(ac) <= p32_rotation_cellular_harvesting("y1995",j));
+** In case the sum of distribution is > 1 : Remove the excess from ac0
+    p32_ac_dist(j,"ac0")$(sum(ac2, p32_ac_dist(j,ac2))>1) = p32_ac_dist(j,"ac0") - (sum(ac2, p32_ac_dist(j,ac2))-1);
+** In case the sum of distribution is < 1 : Add the shortage to ac0
+    p32_ac_dist(j,"ac0")$(sum(ac2, p32_ac_dist(j,ac2))<1) = p32_ac_dist(j,"ac0") + (1-sum(ac2, p32_ac_dist(j,ac2)));
     );
 ** Isolate plantations from planted forest (forestry)
     p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
@@ -216,15 +219,13 @@ elseif s32_initial_distribution = 4,
     );
 
 );
-display p32_ac_dist,pm_land_start;
-** Redistribute to youngest age class in case the distribution to plantations and ndcs does not match fully
-** with LUH initialized data
+** Redistribute to youngest age class in case the distribution to plantations and
+** ndcs does not match fully with LUH initialized data
 loop(j,
   if(pm_land_start(j,"forestry") > sum((type32,ac),p32_land_start_ac(j,type32,ac)),
     p32_land_start_ac(j,"ndc","ac0") = p32_land_start_ac(j,"ndc","ac0") + (pm_land_start(j,"forestry") - sum((type32,ac),p32_land_start_ac(j,type32,ac)));
     );
 );
-
 ** Initialization of land
 *p32_land_start_ac(j,type32,ac) = p32_land("y1995",j,type32,ac);
 
@@ -270,5 +271,19 @@ p32_gs_scaling_reg(i)$(f32_gs_relativetarget(i)>0 AND f32_plantedforest(i)>0) = 
 p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) < 1) = 1;
 display p32_gs_scaling_reg;
 
-** Update c-densitiy based on calibration factor for growing stocks
+** Save pm_carbon_density_ac_forestry in a parameter before upscaling to FAO growing stocks.
+** This allows to use plantation growth curves for CO2 price driven afforestation.
+p32_c_density_ac_fast_forestry(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc");
+
+** Update c-density for timber plantations based on calibration factor to match FAO growing stocks
 pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * sum(cell(i,j),p32_gs_scaling_reg(i));
+
+** set bii coefficients
+p32_bii_coeff(type32,bii_class_secd,potnatveg) = 0;
+if(s32_aff_bii_coeff = 0,
+ p32_bii_coeff("aff",bii_class_secd,potnatveg) = fm_bii_coeff(bii_class_secd,potnatveg)
+elseif s32_aff_bii_coeff = 1,
+ p32_bii_coeff("aff",bii_class_secd,potnatveg) = fm_bii_coeff("timber",potnatveg)
+);
+p32_bii_coeff("ndc",bii_class_secd,potnatveg) = fm_bii_coeff(bii_class_secd,potnatveg);
+p32_bii_coeff("plant",bii_class_secd,potnatveg) = fm_bii_coeff("timber",potnatveg);
