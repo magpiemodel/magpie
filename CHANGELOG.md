@@ -11,13 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### changed
 - **13_tc** added switch to ignore historic tau patterns in historic time steps (new default)
 - **16_demand** Moved most of cropping related set definitions (k, kve, kcr) from **16_demand** to **14_yield**
-- **38_factor_costs** Realization `sticky_feb18` extended to differentiate capital requirements between regions and their specific development status (GDP) in each time step of the magpie run. The changes in the `sticky` realization also include an additional switch so it can be operated as `dynamic` (change of each region capital share at each time step) or `free` (capital shares equal to zero and equivalent to the `fixed_per_ton_mar18` realization).
+- **38_factor_costs** Realization `sticky_feb18` extended to differentiate capital requirements between regions and their specific development status (GDP) in each time step of the magpie run. The changes in the `sticky` realization also include an additional switch so it can be operated as `dynamic` (change of each region capital share at each time step) or `free` (capital shares equal to zero and equivalent to the `fixed_per_ton_mar18` realization). Bugfix in the yearly update of the variable input requirements. Addition of the time dimension and clean up of names of parameters used in the realization. Removal of the management factor (this factor was not being used, it was being cancelled out in previous calculations). Correction of the costs, they are given in 05USDppp.
 - **35_natveg** Calculation of land protection policies revised and moved from presolve.gms to preloop.gms
 - **39_landconversion** lower costs for expansion of forestry land
 - **58_peatland** Peatland area is initialized in 1995 based on levels for the year 2015, and hold fixed depending on `s58_fix_peatland`. This provides a better proxy for peatland area and associated GHG emissions for the historic period, which where assumed zero in previous versions.
 - **80_optimization** **nlp_par** parallelizes now on superregional level `h` instead of regional level `i` as before.
 - **script** New standard for cluster to region mapping (rds-files) is used in all scripts. If old spam files are provided by input data, rds-mapping file is created.
-- **script** updated test run script
+- **script** updated test run script. Update of the sticky run script.
 - **start scripts** improved function for GAMS set creation from R and outsourced it to package `gms`
 - **inputs** Changed file format from cs2 to cs2b for cellular input files with a single data column
 - **scenario_config** added RCPs as columns for use with setSceanrio function. This required the addition of "gms$" in the 1st column.
@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **38_factor_costs** Added scaling factors for improving model run time
 - **39_landconversion** new realization `devstate` in which global land conversion costs are scaled with regional development state (0-1)
 - **41_area_equipped_for_irrigation** Added switch for using different input data including new LUH2v2 consistent initialisation pattern.
+- **41_area_equipped_for_irrigation** Added scalar for depreciation rate that depreciates certain area in every timestep, defined by switch in config.
 - **58_peatland** Added option for one-time and recurring costs of peatland degradation (USD05MER per ha)
 - **calibration run** has two new features: 1. Upper bound to cropland factor can be added (`crop_calib_max`). 2. Best calibration factor (factor with the lowest divergence) can be picked individually for each regions based on all calibration factors calculated during the calibration run iteration (`best_calib`).
 - **disaggregation** Added new disaggregation script that is in line with new crop realisation and can account for cropland availabilty on grid level during disaggregation (see `interpolateAvlCroplandWeighted()` in package `luscale` for further details).
