@@ -8,7 +8,7 @@
 $setglobal c41_initial_irrigation_area  Siebert
 
 scalars
-s41_AEI_depreciation Depreciation rate in capital value of irrigation infrastructure / 0.05 /
+s41_AEI_depreciation Depreciation rate in capital value of irrigation infrastructure / 0 /
 ;
 
 

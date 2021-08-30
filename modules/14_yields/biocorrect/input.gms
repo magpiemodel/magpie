@@ -11,7 +11,7 @@ $setglobal c14_yields_scenario  nocc
 *             nocc_hist (no climate change after year defined by sm_fix_cc)
 
 scalars
-  s14_yld_past_switch  Spillover parameter for translating technological change in the crop sector into pasture yield increases  (1)     / 0.1 /
+  s14_yld_past_switch  Spillover parameter for translating technological change in the crop sector into pasture yield increases  (1)     / 0.25 /
 ;
 
 ******* Calibration factor

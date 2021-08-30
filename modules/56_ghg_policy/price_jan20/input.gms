@@ -51,7 +51,7 @@ scalars
   s56_peatland_policy 1=on 0=off (binary) / 0 /
 ;
 
-$setglobal c56_pollutant_prices  SSPDB-SSP2-45-MESSAGE-GLOBIOM
+$setglobal c56_pollutant_prices  R2M41-SSP2-NPi
 $setglobal c56_pollutant_prices_noselect  R2M41-SSP2-NPi
 $setglobal c56_emis_policy  redd+natveg_nosoil
 
