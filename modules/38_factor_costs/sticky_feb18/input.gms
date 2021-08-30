@@ -12,11 +12,9 @@ scalars
 s38_depreciation_rate depreciation rate (share of costs)  / 0.05 /
 *' Share of immobile capital.
 s38_immobile  immobile capital (share) / 1 /
-*' Initial management intensity
-s38_mi_start global management intensity in 1995 /0.47/
 ;
 
-parameter f38_fac_req(kcr) Factor requirement costs in 2005 (USD05MER per tDM)
+parameter f38_fac_req(kcr) Factor requirement costs in 2005 (USD05ppp per tDM)
 /
 $ondelim
 $include "./modules/38_factor_costs/sticky_feb18/input/f38_fac_req_fao.csv"

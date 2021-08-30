@@ -145,50 +145,50 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
+*
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
-* Used data set: rev4.58Buildings_h12_magpie.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
-* Used data set: rev4.58Buildings_h12_validation.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
+* md5sum: b115c870fd204b86d32b5ed664c2d00f
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+*
+* Used data set: rev4.58_h12_magpie.tgz
+* md5sum: b724f1cb10bedf71ac07f41e0735bf63
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+*
+* Used data set: rev4.58_h12_validation.tgz
+* md5sum: c47c243394e9430bba92aebce37ed652
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+*
 * Used data set: calibration_H12_c200_23Feb21.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
+* md5sum: 8c013375008a959aaa0023030f53c2c2
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+*
 * Used data set: additional_data_rev4.04.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
+* md5sum: 13ae67d3b398f4bef001e24fb878b7f3
+* Repository: /p/projects/landuse/data/input/archive
+*
 * Used data set: patch_land_iso.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
+* md5sum: 2f1e74178a8a5f6d2c54b5d19abfd590
+* Repository: /p/projects/landuse/data/input/archive
+*
 * Low resolution: c200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *    28   24   10    7    3   53   17    8   22    7   11   10
-* 
+*
 * Regionscode: 690d3718e151be1b450b394c1064b1c5
-* 
+*
 * Regions data revision: 4.58
-* 
+*
 * lpj2magpie settings:
 * * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
 * * Additional input folder: /p/projects/landuse/data/input/other/rev52
 * * Revision: 52
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-* 
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
@@ -198,11 +198,160 @@ $title magpie
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = cfg$spamfile, debug = FALSE, seed = cfg$seed)
-* 
-* 
-* 
-* Last modification (input data): Fri Jul 16 12:19:41 2021
-* 
+*
+*
+* Warning messages:
+* 1: Settings are unknown in provided cfg (cfg$qos)!
+* 2: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 3: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 4: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 5: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 6: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 7: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 8: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 9: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 10: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 11: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 12: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 13: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 14: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 15: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 16: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 17: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 18: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 19: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 20: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 21: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 22: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 23: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 24: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 25: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 26: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 27: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 28: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 29: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 30: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 31: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 32: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 33: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 34: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 35: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 36: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 37: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 38: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 39: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 40: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 41: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 42: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 43: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 44: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 45: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 46: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 47: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 48: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 49: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 50: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+*
+* Last modification (input data): Thu Jul  1 12:32:05 2021
+*
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
@@ -227,7 +376,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  MAR05a_Forestry_BAU
+$setglobal c_title  default
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
