@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: Forestry paper simulations
+# description: gmd-2021-76 forestrz paper
 # ----------------------------------------------------------
 
 ######################################
