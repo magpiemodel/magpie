@@ -25,6 +25,9 @@ $setglobal c32_rot_calc_type max_increment
 * option  max_increment, max_npv
 ;
 
+$setglobal c32_rot_calc_type max_marginal_increment
+* options max_marginal_increment, current_annual_increment, instantaneous_growth_rate
+
 scalars
   s32_hvarea 					  Flag for harvested area and establishemt (0=zero 1=exognous 2=endogneous)	/ 2 /
   s32_reESTBcost                  Re establishment cost (USD per ha) / 2000 /
@@ -92,6 +95,7 @@ $ondelim
 $include "./modules/32_forestry/input/f32_gs_relativetarget.cs4"
 $offdelim
 /;
+f32_gs_relativetarget("REF") = f32_gs_relativetarget("USA");
 
 table f32_plantation_contribution(t_ext,i,inter32,scen32) Share of roundwood production coming from timber plantations (percent)
 $ondelim

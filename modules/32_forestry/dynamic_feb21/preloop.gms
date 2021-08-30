@@ -37,9 +37,16 @@ $elseif "%c32_interest_rate%" == "global"
   display "Rotation lengths are calculated based on maximizing NPV.";
 $endif
 
-$ifthen "%c32_rot_calc_type%" == "max_increment"
+$ifthen "%c32_rot_calc_type%" == "current_annual_increment"
   p32_rot_flg(t_all,j,ac) = 1$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_carbon_density_ac_marg(t_all,j,ac-1) >  0)
                           + 0$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_carbon_density_ac_marg(t_all,j,ac-1) <= 0);
+  display "Rotation lengths are calculated based on maximizing CAI in this run.";
+$endif
+
+$ifthen "%c32_rot_calc_type%" == "max_marginal_increment"
+p32_avg_increment(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") / (ord(ac)*5);
+p32_rot_flg(t_all,j,ac) = 1$(p32_avg_increment(t_all,j,ac) - p32_avg_increment(t_all,j,ac-1) >  0)
+                        + 0$(p32_avg_increment(t_all,j,ac) - p32_avg_increment(t_all,j,ac-1) <= 0);
   display "Rotation lengths are calculated based on maximizing increment in this run.";
 $endif
 
@@ -126,6 +133,8 @@ loop(j,
 loop(t_all,
   p32_rotation_cellular_harvesting(t_all+1,j)$(abs(p32_rotation_cellular_harvesting(t_all+1,j) - p32_rotation_cellular_harvesting(t_all,j))>2 AND ord(t_all)<card(t_all)) = p32_rotation_cellular_harvesting(t_all,j);
   );
+
+display p32_rotation_cellular_harvesting;
 
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = round(f32_aff_pol(t,j,"%c32_aff_policy%"),6);
