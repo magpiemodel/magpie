@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "AUG03"
+identifier_flag = "SEP01"
 cat(paste0("LPJaddon runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
@@ -93,6 +93,8 @@ for(c73_wood_scen in c("default")){
                         pol_flg = "Mitigation"
                       }
 
+                      cfg$gms$s14_yld_past_switch <- 0
+
                       cfg$title   = paste0(identifier_flag,"_",c73_build_demand,"_",gsub(pattern="_",replacement="",x=c35_protect_scenario))
                       cfg$output  = c("extra/timestep_duration")
 
@@ -100,7 +102,7 @@ for(c73_wood_scen in c("default")){
                       all_configs[[cfg$title]] <- cfg
                       #cfg$gms$s80_optfile <- 1
                       cfg$results_folder = "output/:title:"
-                      start_run(cfg,codeCheck=FALSE)
+                      #start_run(cfg,codeCheck=FALSE)
                     }
                   }
                 }
