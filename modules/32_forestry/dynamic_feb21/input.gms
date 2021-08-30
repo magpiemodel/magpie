@@ -25,7 +25,7 @@ $setglobal c32_rot_calc_type max_increment
 * option  max_increment, max_npv
 ;
 
-$setglobal c32_rot_calc_type max_marginal_increment
+$setglobal c32_rot_calc_type current_annual_increment
 * options max_marginal_increment, current_annual_increment, instantaneous_growth_rate
 
 scalars
