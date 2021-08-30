@@ -1,4 +1,4 @@
-# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -21,10 +21,10 @@ print("Start inms reporting reg runscript")
 ############################# BASIC CONFIGURATION #######################################
 
 if(!exists("source_include")) {
-  
+
   title       <- "inms_SSP2_RCP4p5_PolicyLow_v4"
   outputdir       <- "output/inms_SSP2_RCP4p5_PolicyLow_v4_2020-07-13_15.37.07"
-  
+
   ###Define arguments that can be read from command line
   readArgs("outputdir","title")
 }
@@ -53,4 +53,4 @@ print("starting cellular output generation using getReportMAgPIE2LPJmL")
 
 a <- getReportMAgPIE2LPJmL(gdx = gdx,
                            folder=outputpath,
-                           spamfiledirectory = outputdir)
+                           dir = outputdir)

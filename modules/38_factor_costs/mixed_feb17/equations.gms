@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -11,7 +11,7 @@
 
  q38_cost_prod_crop(i2,kcr) ..
   vm_cost_prod(i2,kcr) =e= sum((cell(i2,j2), w), vm_area(j2,kcr,w)*f38_region_yield(i2,kcr)
-                            *vm_tau(i2)/fm_tau1995(i2)*f38_fac_req(kcr,w));
+                            *sum(supreg(h2,i2), vm_tau(h2)/fm_tau1995(h2))*f38_fac_req(kcr,w));
 
 
 *' The equation above shows that factor requirement costs `vm_cost_prod` mainly

@@ -1,4 +1,4 @@
-# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -34,7 +34,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
       tmp <- base::list.dirs("./output/",recursive=TRUE)
       dirs <- NULL
       for (i in 1:length(tmp)) {
-        if (file.exists(path(tmp[i],"full.gms"))) dirs <- c(dirs,sub("./output/","",tmp[i]))
+        if (file.exists(file.path(tmp[i],"full.gms"))) dirs <- c(dirs,sub("./output/","",tmp[i]))
       }
     } else {
       dirs <- sub("full.gms","",sub("./output/","",tmp, fixed=TRUE), fixed=TRUE)
@@ -125,17 +125,12 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
       header <- read_yaml_header(script)
       comp <- (!is.null(header[["comparison script"]]) && isTRUE(header[["comparison script"]]))
       if(comp) {
-		print("script executed as comparison script")
         loop <- list(alloutputdirs)
       } else {
-		if(length(alloutputdirs)>1) {print("script executed multiple times in parallel")} else {print("script executed as single output script")}
-		loop <- alloutputdirs
-		print(loop)
-		print(str(loop))
-      }
+	     	loop <- alloutputdirs
+		  }
       for(outputdir in loop) {
-        message(" -> ",name)
-		print(paste0("starting script for outputdir",outputdir))
+        message("\n# ",name, " -> ", outputdir)
         r_command <- paste0("Rscript output.R outputdir=",paste(outputdir,collapse=","),"  output=",rout," submit=direct")
         sbatch_command <- paste0("sbatch --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --time=200 --mem-per-cpu=8000 --wrap=\"",r_command,"\"")
         if(submit=="direct") {
@@ -172,6 +167,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     return(invisible(NULL))
   }
   runsubmit(output, alloutputdirs = outputdir, submit, "scripts/output/")
+  message("")
 }
 
 if(!exists("source_include")) {

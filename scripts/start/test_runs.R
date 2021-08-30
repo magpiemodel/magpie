@@ -1,4 +1,4 @@
-# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -6,13 +6,9 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: test routine to run for new pull requests
+# description: Test rountine for standardized test runs
 # position: 5
 # ----------------------------------------------------------
-
-
-##### Version log (YYYYMMDD - Description - Author(s))
-## 20200527 - Default SSP2 Baseline and Policy runs - FH,AM,EMJB,JPD
 
 ## Load lucode2 and gms to use setScenario later
 library(lucode2)
@@ -24,39 +20,41 @@ source("scripts/start_functions.R")
 # Source default cfg. This loads the object "cfg" in R environment
 source("config/default.cfg")
 
-# choose a meaningful Pull Request (PR) flag
-pr_flag <- "PR_MACC"
+# create additional information to describe the runs
+cfg$info$flag <- "TEST" # choose a meaningful flag.
+cfg$info$user <- Sys.info()[["user"]] # Grab user name
 
-# Grab user name
-user <- Sys.info()[["user"]]
+cfg$output <- c("rds_report") # Only run rds_report after model run
 
-cfg$results_folder <- "output/:title:"
+# support function to create standardized title
+.title <- function(...) return(paste(...,cfg$info$flag, sep="_"))
 
-## Create a set of runs based on default.cfg
+# start a run with default settings
+cfg$title <- .title("default")
+start_run(cfg, codeCheck = TRUE)
 
-for(ssp in c("SSP2")) { ## Add SSP* here for testing other SSPs. Basic test should be for SSP2
-  for(macc in c("PBL_2007","PBL_2019")) {
-    for (co2_price_path in c("BAU","POL")) {
+# create a set of runs based on default.cfg
+for(ssp in c("SSP2")) {        # Add SSP* here for testing other SSPs.
+                               # Basic test should be for at least two SSPs to
+                               #check if results until 2020 are identical
 
-      cfg$gms$c57_macc_version <- macc
+  cfg$title <- .title("ref", ssp)
+  # Set NPI scenario
+  cfg <- setScenario(cfg,c(ssp,"NPI"))
+  # Set reference pricing 
+  cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
+  cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-NPi"
+  # Start reference run
+  start_run(cfg, codeCheck = TRUE)
 
-      if (co2_price_path == "BAU") {
-        cfg <- setScenario(cfg,c(ssp,"NPI"))
-        cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi" #update to most recent coupled runs asap
-        cfg$gms$c60_2ndgen_biodem <- "R2M41-SSP2-NPi" ##update to most recent coupled runs asap
+  # Create correct naming for mitigation scenario (co2 pricing)
+  cfg$title <- .title("1p5deg", ssp) 
+  # Set NDC scenario (NPIs only in reference case)
+  cfg <- setScenario(cfg,c(ssp,"NDC"))
+  # Set CO2 pricing 
+  cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
+  cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg600"
+  # Start policy run
+  start_run(cfg, codeCheck = TRUE)
 
-      } else if (co2_price_path == "POL"){
-        cfg <- setScenario(cfg,c(ssp,"NDC"))
-        cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE" #update to most recent coupled runs asap
-        cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE" ##update to most recent coupled runs asap
-      }
-
-      cfg$title <- paste0(pr_flag,"_",user,"_",ssp,"-",co2_price_path,"_",macc) #Create easily distinguishable run title
-
-      cfg$output <- c("rds_report") # Only run rds_report after model run
-
-      start_run(cfg,codeCheck=TRUE) # Start MAgPIE run
-      #cat(cfg$title)
-    }
-  }
 }

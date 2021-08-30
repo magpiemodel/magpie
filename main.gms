@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -145,64 +145,213 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
-* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp4p5-co2_rev52_c200_1ffb3a6fd3ac74779d7fb03a215fbec6.tgz
-* md5sum: 1e303cb67ff6cd757fb4eecc8139b7b1
+*
+* Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* md5sum: b115c870fd204b86d32b5ed664c2d00f
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+*
+* Used data set: rev4.58_h12_magpie.tgz
+* md5sum: b724f1cb10bedf71ac07f41e0735bf63
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+*
+* Used data set: rev4.58_h12_validation.tgz
+* md5sum: c47c243394e9430bba92aebce37ed652
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+*
+* Used data set: calibration_H12_c200_23Feb21.tgz
+* md5sum: 8c013375008a959aaa0023030f53c2c2
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+*
+* Used data set: additional_data_rev4.04.tgz
+* md5sum: 13ae67d3b398f4bef001e24fb878b7f3
 * Repository: /p/projects/landuse/data/input/archive
-* 
-* Used data set: rev4.57bb4_1ffb3a6fd3ac74779d7fb03a215fbec6_magpie.tgz
-* md5sum: e3bc19cada8ff07ce728b13e2dd7644c
-* Repository: /p/projects/rd3mod/inputdata/output
-* 
-* Used data set: rev4.57bb4_1ffb3a6fd3ac74779d7fb03a215fbec6_validation.tgz
-* md5sum: 408433182fd0ef2a845c63e49a42c8bd
-* Repository: /p/projects/rd3mod/inputdata/output
-* 
-* Used data set: calibration_INMS_v6_16Feb21.tgz
-* md5sum: 6fbe2067e93a47791c12b0f973018047
-* Repository: /p/projects/landuse/data/input/calibration
-* 
-* Used data set: additional_data_rev3.95.tgz
-* md5sum: 87ab0375e1114e5188ab45cbaa2e818e
+*
+* Used data set: patch_land_iso.tgz
+* md5sum: 2f1e74178a8a5f6d2c54b5d19abfd590
 * Repository: /p/projects/landuse/data/input/archive
-* 
+*
 * Low resolution: c200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   ANZ  CHN  EUR  FSU  IND  MEN  OAS  OSA  SEA  SSA  USA  XAS  XEA  XEE  XLV  XNA  XPR  XSA
 *    21   21   10    6    7   13   11   41   10   11    9    5    7    1    3    6   15    3
-* 
+*
 * Regionscode: 1ffb3a6fd3ac74779d7fb03a215fbec6
-* 
-* Regions data revision: 4.57
-* 
+*
+* Regions data revision: 4.58
+*
 * lpj2magpie settings:
-* * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp4p5/co2
+* * LPJmL data folder: /p/projects/landuse/data/input/lpj_input/isimip_rcp/IPSL_CM5A_LR/rcp2p6/co2
 * * Additional input folder: /p/projects/landuse/data/input/other/rev52
 * * Revision: 52
 * * Call: lpj2magpie(input_folder = path(cfg$lpj_input_folder, gsub("-",     "/", cfg$input)), input2_folder = path(cfg$additional_input_folder,     paste("rev", floor(cfg$revision), sep = "")), output_file = lpj2magpie_file,     rev = cfg$revision)
-* 
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
-* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp4p5-co2_rev52_0.5.tgz
-* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp4p5-co2_rev52_c200_1ffb3a6fd3ac74779d7fb03a215fbec6.tgz
-* * Regionscode: 1ffb3a6fd3ac74779d7fb03a215fbec6
+* * Input file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_0.5.tgz
+* * Output file: /p/projects/landuse/data/input/archive/isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_c200_690d3718e151be1b450b394c1064b1c5.tgz
+* * Regionscode: 690d3718e151be1b450b394c1064b1c5
 * * (clustering) n-repeat: 5
 * * (clustering) n-redistribute: 0
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = cfg$spamfile, debug = FALSE, seed = cfg$seed)
-* 
-* 
-* Warning message:
-* In download_unpack(input = files, targetdir = "input",  ... :
-*   Following files not found:
-*   calibration_inms_c200_08Jul2020.tgz
-* 
-* Last modification (input data): Sat Feb 20 14:23:58 2021
-* 
+*
+*
+* Warning messages:
+* 1: Settings are unknown in provided cfg (cfg$qos)!
+* 2: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 3: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 4: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 5: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 6: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 7: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 8: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 9: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 10: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 11: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 12: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 13: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 14: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 15: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 16: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 17: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 18: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 19: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 20: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 21: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 22: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 23: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 24: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 25: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 26: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 27: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 28: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 29: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 30: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 31: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 32: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 33: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 34: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 35: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 36: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 37: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 38: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 39: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 40: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 41: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 42: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 43: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 44: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 45: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 46: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 47: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 48: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 49: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+* 50: 'lucode2::path' is deprecated.
+* Use 'file.path' instead.
+* See help("Deprecated")
+*
+* Last modification (input data): Thu Jul  1 12:32:05 2021
+*
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
@@ -227,7 +376,7 @@ $offlisting
 
 $setglobal c_timesteps  12
 $setglobal c_past  till_2010
-$setglobal c_title  SSP2_RCP4p5_SensitivityAWSmoderate_v10
+$setglobal c_title  develop_dep05
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
@@ -252,13 +401,15 @@ $setglobal processing  substitution_dec18
 
 $setglobal trade  selfsuff_reduced
 
+$setglobal ageclass  feb21
+
 $setglobal crop  endo_jun13
 $setglobal past  endo_jun13
 
-$setglobal forestry  dynamic_may20
+$setglobal forestry  dynamic_feb21
 
 $setglobal urban  static
-$setglobal natveg  dynamic_may20
+$setglobal natveg  dynamic_feb21
 
 $setglobal factor_costs  sticky_feb18
 $setglobal landconversion  global_static_aug18
@@ -267,6 +418,7 @@ $setglobal transport  gtap_nov12
 $setglobal area_equipped_for_irrigation  endo_apr13
 $setglobal water_demand  agr_sector_aug13
 $setglobal water_availability  total_water_aug13
+$setglobal biodiversity  bv_btc_mar21
 $setglobal climate  static
 
 $setglobal nr_soil_budget  exoeff_aug16
@@ -286,7 +438,7 @@ $setglobal livestock  fbask_jan16
 
 $setglobal disagg_lvst  foragebased_aug18
 
-$setglobal timber  biomass_mar20
+$setglobal timber  default
 
 $setglobal optimization  nlp_apr17
 

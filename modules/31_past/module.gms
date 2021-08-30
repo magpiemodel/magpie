@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -12,7 +12,7 @@
 *' of pasture biomass and the carbon content of pasture land. Therefore, the
 *' module requires cellular information about the carbon density related to the
 *' different pasture carbon pools. Furthermore, it delivers regional production
-*' costs associated with pastures.
+*' costs associated with pastures and biodiversity values for pasture and rangeland.
 *'
 *' @authors Isabelle Weindl, Jan Philipp Dietrich
 

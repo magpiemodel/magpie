@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -53,7 +53,7 @@ scalars
 
 $setglobal c56_pollutant_prices  SSPDB-SSP2-45-MESSAGE-GLOBIOM
 $setglobal c56_pollutant_prices_noselect  R2M41-SSP2-NPi
-$setglobal c56_emis_policy  maccs_excl_cropland_n2o
+$setglobal c56_emis_policy  redd+natveg_nosoil
 
 table f56_pollutant_prices(t_all,i,pollutants,ghgscen56) GHG certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
 $ondelim

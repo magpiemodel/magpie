@@ -1,4 +1,4 @@
-# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -87,9 +87,9 @@ for (file in cfg$files2export$end) {
 #update validation.RData
 #### Collect technical information for validation ##############################
 # info on the used dataset
-input_data<-readLines(path(cfg$results_folder,"info.txt"))
+input_data<-readLines(file.path(cfg$results_folder,"info.txt"))
 # extract module info from full.gms
-tmp<-readLines(path(cfg$results_folder,"full.gms"),warn=FALSE,encoding="ASCII")
+tmp<-readLines(file.path(cfg$results_folder,"full.gms"),warn=FALSE,encoding="ASCII")
 lines<-grep(".*MODULE SETUP.*",tmp)[1]:grep(".*MODULE SETUP.*",tmp)[2]
 module_setup<-c("","","### MODULE SETUP ###",grep("\\$",tmp[lines],value=TRUE))
 

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -7,10 +7,13 @@
 
 sets
  
-  man58 Peatland status managed
+  man58 State of managed peatland
     / degrad, unused, rewet /
+
+  degrad58(man58) State of degraded peatland
+    / degrad, unused /
   
-  ef58(man58) Peatland ef categories
+  ef58(man58) Peatland emissions factors
     / degrad, rewet /
 
   land58(land) Managed land types
@@ -28,7 +31,8 @@ sets
     rewet_crop, rewet_past, rewet_forestry /
 
   stat_degrad58(stat58) Peatland status degrad
-    / degrad_crop, degrad_past, degrad_forestry /
+    / degrad_crop, degrad_past, degrad_forestry,
+      unused_crop, unused_past, unused_forestry /
 
   stat_rewet58(stat58) Peatland status rewet
     / rewet_crop, rewet_past, rewet_forestry /

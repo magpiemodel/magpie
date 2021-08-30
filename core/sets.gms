@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -9,130 +9,118 @@
 
 *###############################################################################
 *######################## R SECTION START (SETS) ###############################
-*THIS CODE IS CREATED AUTOMATICALLY, DO NOT MODIFY THESE LINES DIRECTLY
-*ANY DIRECT MODIFICATION WILL BE LOST AFTER NEXT INPUT DOWNLOAD
-*CHANGES CAN BE DONE USING THE INPUT DOWNLOADER UNDER SCRIPTS/DOWNLOAD
-*THERE YOU CAN ALSO FIND ADDITIONAL INFORMATION
+* THIS CODE IS CREATED AUTOMATICALLY, DO NOT MODIFY THESE LINES DIRECTLY
+* ANY DIRECT MODIFICATION WILL BE LOST AFTER NEXT AUTOMATIC UPDATE!
 
 sets
 
-   i all economic regions /ANZ,CHN,EUR,FSU,IND,MEN,OAS,OSA,SEA,SSA,USA,XAS,XEA,XEE,XLV,XNA,XPR,XSA/
+  h all superregional economic regions
+    / CAZ, CHA, EUR, IND, JPN, LAM, MEA, NEU, OAS, REF, SSA, USA /
 
-   iso list of iso countries /
-       ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
-       ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
-       BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
-       BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,
-       CCK,CHE,CHL,CHN,CIV,CMR,COD,COG,COK,COL,
-       COM,CPV,CRI,CUB,CUW,CXR,CYM,CYP,CZE,DEU,
-       DJI,DMA,DNK,DOM,DZA,ECU,EGY,ERI,ESH,ESP,
-       EST,ETH,FIN,FJI,FLK,FRA,FRO,FSM,GAB,GBR,
-       GEO,GGY,GHA,GIB,GIN,GLP,GMB,GNB,GNQ,GRC,
-       GRD,GRL,GTM,GUF,GUM,GUY,HKG,HMD,HND,HRV,
-       HTI,HUN,IDN,IMN,IND,IOT,IRL,IRN,IRQ,ISL,
-       ISR,ITA,JAM,JEY,JOR,JPN,KAZ,KEN,KGZ,KHM,
-       KIR,KNA,KOR,KWT,LAO,LBN,LBR,LBY,LCA,LIE,
-       LKA,LSO,LTU,LUX,LVA,MAC,MAF,MAR,MCO,MDA,
-       MDG,MDV,MEX,MHL,MKD,MLI,MLT,MMR,MNE,MNG,
-       MNP,MOZ,MRT,MSR,MTQ,MUS,MWI,MYS,MYT,NAM,
-       NCL,NER,NFK,NGA,NIC,NIU,NLD,NOR,NPL,NRU,
-       NZL,OMN,PAK,PAN,PCN,PER,PHL,PLW,PNG,POL,
-       PRI,PRK,PRT,PRY,PSE,PYF,QAT,REU,ROU,RUS,
-       RWA,SAU,SDN,SEN,SGP,SGS,SHN,SJM,SLB,SLE,
-       SLV,SMR,SOM,SPM,SRB,SSD,STP,SUR,SVK,SVN,
-       SWE,SWZ,SXM,SYC,SYR,TCA,TCD,TGO,THA,TJK,
-       TKL,TKM,TLS,TON,TTO,TUN,TUR,TUV,TWN,TZA,
-       UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
-       VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
+  i all economic regions
+    / CAZ, CHA, EUR, IND, JPN, LAM, MEA, NEU, OAS, REF, SSA, USA /
 
-   j number of LPJ cells /
-       ANZ_1*ANZ_21,
-       CHN_22*CHN_42,
-       EUR_43*EUR_52,
-       FSU_53*FSU_58,
-       IND_59*IND_65,
-       MEN_66*MEN_78,
-       OAS_79*OAS_89,
-       OSA_90*OSA_130,
-       SEA_131*SEA_140,
-       SSA_141*SSA_151,
-       USA_152*USA_160,
-       XAS_161*XAS_165,
-       XEA_166*XEA_172,
-       XEE_173*XEE_173,
-       XLV_174*XLV_176,
-       XNA_177*XNA_182,
-       XPR_183*XPR_197,
-       XSA_198*XSA_200/
+  supreg(h,i) mapping of superregions to its regions
+    / CAZ . (CAZ)
+      CHA . (CHA)
+      EUR . (EUR)
+      IND . (IND)
+      JPN . (JPN)
+      LAM . (LAM)
+      MEA . (MEA)
+      NEU . (NEU)
+      OAS . (OAS)
+      REF . (REF)
+      SSA . (SSA)
+      USA . (USA) /
 
-   cell(i,j) number of LPJ cells per region i
-      /
-       ANZ . ANZ_1*ANZ_21
-       CHN . CHN_22*CHN_42
-       EUR . EUR_43*EUR_52
-       FSU . FSU_53*FSU_58
-       IND . IND_59*IND_65
-       MEN . MEN_66*MEN_78
-       OAS . OAS_79*OAS_89
-       OSA . OSA_90*OSA_130
-       SEA . SEA_131*SEA_140
-       SSA . SSA_141*SSA_151
-       USA . USA_152*USA_160
-       XAS . XAS_161*XAS_165
-       XEA . XEA_166*XEA_172
-       XEE . XEE_173*XEE_173
-       XLV . XLV_174*XLV_176
-       XNA . XNA_177*XNA_182
-       XPR . XPR_183*XPR_197
-       XSA . XSA_198*XSA_200
-      /
+  iso list of iso countries
+    / ABW, AFG, AGO, AIA, ALA, ALB, AND, ARE, ARG, ARM, ASM, ATA, ATF, ATG,
+      AUS, AUT, AZE, BDI, BEL, BEN, BES, BFA, BGD, BGR, BHR, BHS, BIH, BLM,
+      BLR, BLZ, BMU, BOL, BRA, BRB, BRN, BTN, BVT, BWA, CAF, CAN, CCK, CHN,
+      CHE, CHL, CIV, CMR, COD, COG, COK, COL, COM, CPV, CRI, CUB, CUW, CXR,
+      CYM, CYP, CZE, DEU, DJI, DMA, DNK, DOM, DZA, ECU, EGY, ERI, ESH, ESP,
+      EST, ETH, FIN, FJI, FLK, FRA, FRO, FSM, GAB, GBR, GEO, GGY, GHA, GIB,
+      GIN, GLP, GMB, GNB, GNQ, GRC, GRD, GRL, GTM, GUF, GUM, GUY, HKG, HMD,
+      HND, HRV, HTI, HUN, IDN, IMN, IND, IOT, IRL, IRN, IRQ, ISL, ISR, ITA,
+      JAM, JEY, JOR, JPN, KAZ, KEN, KGZ, KHM, KIR, KNA, KOR, KWT, LAO, LBN,
+      LBR, LBY, LCA, LIE, LKA, LSO, LTU, LUX, LVA, MAC, MAF, MAR, MCO, MDA,
+      MDG, MDV, MEX, MHL, MKD, MLI, MLT, MMR, MNE, MNG, MNP, MOZ, MRT, MSR,
+      MTQ, MUS, MWI, MYS, MYT, NAM, NCL, NER, NFK, NGA, NIC, NIU, NLD, NOR,
+      NPL, NRU, NZL, OMN, PAK, PAN, PCN, PER, PHL, PLW, PNG, POL, PRI, PRK,
+      PRT, PRY, PSE, PYF, QAT, REU, ROU, RUS, RWA, SAU, SDN, SEN, SGP, SGS,
+      SHN, SJM, SLB, SLE, SLV, SMR, SOM, SPM, SRB, SSD, STP, SUR, SVK, SVN,
+      SWE, SWZ, SXM, SYC, SYR, TCA, TCD, TGO, THA, TJK, TKL, TKM, TLS, TON,
+      TTO, TUN, TUR, TUV, TWN, TZA, UGA, UKR, UMI, URY, USA, UZB, VAT, VCT,
+      VEN, VGB, VIR, VNM, VUT, WLF, WSM, YEM, ZAF, ZMB, ZWE /
 
-   i_to_iso(i,iso) mapping regions to iso countries
-      /
-       ANZ . (ASM,AUS,NFK,NZL)
-       CHN . (CHN,HKG,MAC)
-       EUR . (ALA,ALB,AND,AUT,BEL,BGR,BIH,CHE,CYP,CZE)
-       EUR . (DEU,DNK,EST,FIN,FRO,GBR,GGY,GIB,GRC,GRL)
-       EUR . (HRV,HUN,IMN,IRL,ISL,ITA,JEY,LIE,LTU,LUX)
-       EUR . (LVA,MCO,MKD,MLT,MNE,NLD,NOR,POL,ROU,SJM)
-       EUR . (SMR,SPM,SRB,SVK,SVN,SWE,UMI,VAT)
-       FSU . (ARM,AZE,BLR,GEO,KAZ,KGZ,RUS,TJK,TKM,UZB)
-       IND . (IND)
-       MEN . (ARE,BHR,DZA,EGY,ESH,IRN,IRQ,ISR,JOR,KWT)
-       MEN . (LBN,LBY,MAR,OMN,PSE,QAT,SAU,SYR,TUN,TUR)
-       MEN . (YEM)
-       OAS . (AFG,BTN,COK,FJI,FSM,IOT,KIR,MDV,MHL,MNG)
-       OAS . (NCL,NIU,NRU,PAK,PLW,PNG,PYF,SLB,TKL,TON)
-       OAS . (TUV,VUT,WLF,WSM)
-       OSA . (ABW,AIA,ATA,ATG,BES,BHS,BLM,BLZ,BMU,BRB)
-       OSA . (CHL,COL,CRI,CUB,CUW,CYM,DMA,DOM,ECU,FLK)
-       OSA . (GLP,GRD,GTM,GUF,GUY,HND,HTI,JAM,KNA,LCA)
-       OSA . (MAF,MEX,MSR,MTQ,NIC,PAN,PER,PRI,SGS,SLV)
-       OSA . (SUR,SXM,TCA,TTO,VCT,VEN,VGB,VIR)
-       SEA . (BRN,CCK,CXR,GUM,IDN,KHM,LAO,MMR,MNP,MYS)
-       SEA . (PCN,PRK,SGP,THA,TLS,VNM)
-       SSA . (AGO,ATF,BEN,BFA,BVT,BWA,CAF,CIV,CMR,COD)
-       SSA . (COG,COM,CPV,DJI,ERI,ETH,GAB,GHA,GIN,GMB)
-       SSA . (GNB,GNQ,HMD,LBR,LSO,MDG,MLI,MOZ,MRT,MUS)
-       SSA . (MWI,MYT,NAM,NER,NGA,REU,SDN,SEN,SHN,SLE)
-       SSA . (SOM,SSD,STP,SWZ,SYC,TCD,TGO,ZAF,ZMB,ZWE)
-       USA . (USA)
-       XAS . (ESP,FRA,PRT)
-       XEA . (JPN,KOR,PHL,TWN)
-       XEE . (MDA,UKR)
-       XLV . (BDI,KEN,RWA,TZA,UGA)
-       XNA . (CAN)
-       XPR . (ARG,BOL,BRA,PRY,URY)
-       XSA . (BGD,LKA,NPL)
-      /
+  j number of LPJ cells
+    / CAZ_1*CAZ_28,
+      CHA_29*CHA_52,
+      EUR_53*EUR_62,
+      IND_63*IND_69,
+      JPN_70*JPN_72,
+      LAM_73*LAM_125,
+      MEA_126*MEA_142,
+      NEU_143*NEU_150,
+      OAS_151*OAS_172,
+      REF_173*REF_179,
+      SSA_180*SSA_190,
+      USA_191*USA_200 /
+
+  cell(i,j) number of LPJ cells per region i
+    / CAZ . (CAZ_1*CAZ_28)
+      CHA . (CHA_29*CHA_52)
+      EUR . (EUR_53*EUR_62)
+      IND . (IND_63*IND_69)
+      JPN . (JPN_70*JPN_72)
+      LAM . (LAM_73*LAM_125)
+      MEA . (MEA_126*MEA_142)
+      NEU . (NEU_143*NEU_150)
+      OAS . (OAS_151*OAS_172)
+      REF . (REF_173*REF_179)
+      SSA . (SSA_180*SSA_190)
+      USA . (USA_191*USA_200) /
+
+  i_to_iso(i,iso) mapping regions to iso countries
+    / CAZ . (AUS, CAN, HMD, NZL, SPM)
+      CHA . (CHN, HKG, MAC, TWN)
+      EUR . (ALA, AUT, BEL, BGR, CYP, CZE, DEU, DNK, ESP, EST, FIN, FRA, FRO)
+      EUR . (GBR, GGY, GIB, GRC, HRV, HUN, IMN, IRL, ITA, JEY, LTU, LUX, LVA)
+      EUR . (MLT, NLD, POL, PRT, ROU, SVK, SVN, SWE)
+      IND . (IND)
+      JPN . (JPN)
+      LAM . (ABW, AIA, ARG, ATA, ATG, BES, BHS, BLM, BLZ, BMU, BOL, BRA, BRB)
+      LAM . (BVT, CHL, COL, CRI, CUB, CUW, CYM, DMA, DOM, ECU, FLK, GLP, GRD)
+      LAM . (GTM, GUF, GUY, HND, HTI, JAM, KNA, LCA, MAF, MEX, MSR, MTQ, NIC)
+      LAM . (PAN, PER, PRI, PRY, SGS, SLV, SUR, SXM, TCA, TTO, URY, VCT, VEN)
+      LAM . (VGB, VIR)
+      MEA . (ARE, BHR, DZA, EGY, ESH, IRN, IRQ, ISR, JOR, KWT, LBN, LBY, MAR)
+      MEA . (OMN, PSE, QAT, SAU, SDN, SYR, TUN, YEM)
+      NEU . (ALB, AND, BIH, CHE, GRL, ISL, LIE, MCO, MKD, MNE, NOR, SJM, SMR)
+      NEU . (SRB, TUR, VAT)
+      OAS . (AFG, ASM, ATF, BGD, BRN, BTN, CCK, COK, CXR, FJI, FSM, GUM, IDN)
+      OAS . (IOT, KHM, KIR, KOR, LAO, LKA, MDV, MHL, MMR, MNG, MNP, MYS, NCL)
+      OAS . (NFK, NIU, NPL, NRU, PAK, PCN, PHL, PLW, PNG, PRK, PYF, SGP, SLB)
+      OAS . (THA, TKL, TLS, TON, TUV, UMI, VNM, VUT, WLF, WSM)
+      REF . (ARM, AZE, BLR, GEO, KAZ, KGZ, MDA, RUS, TJK, TKM, UKR, UZB)
+      SSA . (AGO, BDI, BEN, BFA, BWA, CAF, CIV, CMR, COD, COG, COM, CPV, DJI)
+      SSA . (ERI, ETH, GAB, GHA, GIN, GMB, GNB, GNQ, KEN, LBR, LSO, MDG, MLI)
+      SSA . (MOZ, MRT, MUS, MWI, MYT, NAM, NER, NGA, REU, RWA, SEN, SHN, SLE)
+      SSA . (SOM, SSD, STP, SWZ, SYC, TCD, TGO, TZA, UGA, ZAF, ZMB, ZWE)
+      USA . (USA) /
+
 ;
 *######################### R SECTION END (SETS) ################################
 *###############################################################################
 
 sets
+        h2(h) Superregional (dynamic set)
         i2(i) World regions (dynamic set)
         j2(j) Spatial Clusters (dynamic set)
 ;
+
+h2(h) = yes;
 i2(i) = yes;
 j2(j) = yes;
 
@@ -179,7 +167,9 @@ sets time_annual Annual extended time steps
      y1980, y1985, y1990,
      y1995, y2000, y2005, y2010, y2015
     /
+
 ;
+
 
 set t_past(t_all) Timesteps with observed data
 $If "%c_past%"== "till_2010" /y1965, y1970, y1975, y1980, y1985, y1990,y1995, y2000, y2005, y2010/;
@@ -268,7 +258,7 @@ sets
         / si0, nsi0 /
 
 ***Forestry**
-   ac Age classes  / ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
+  ac Age classes  / ac0,ac5,ac10,ac15,ac20,ac25,ac30,ac35,ac40,ac45,ac50,
                     ac55,ac60,ac65,ac70,ac75,ac80,ac85,ac90,ac95,ac100,
                     ac105,ac110,ac115,ac120,ac125,ac130,ac135,ac140,ac145,
                     ac150,ac155,acx /

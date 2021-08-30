@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -24,5 +24,3 @@ $else
   i60_bioenergy_dem(t,i) = f60_bioenergy_dem(t,i,"%c60_2ndgen_biodem%") * p60_region_BE_shr(t,i)
                          + f60_bioenergy_dem(t,i,"%c60_2ndgen_biodem_noselect%") * (1-p60_region_BE_shr(t,i));
 $endif
-* Add minimal bioenergy demand in case of zero demand to avoid zero prices
-i60_bioenergy_dem(t,i)$(i60_bioenergy_dem(t,i) = 0) = 0.01;

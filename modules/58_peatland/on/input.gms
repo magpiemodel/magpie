@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -6,9 +6,12 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-  s58_rewetting_switch Peatland rewetting on (Inf) or off (0) / 0 /
-  s58_rewet_cost_onetime One-time costs for peatland rewetting (USD05MER per ha) / 7000 /
-  s58_rewet_cost_recur Recurring costs for peatland rewetting (USD05MER per ha) / 200 /
+  s58_cost_rewet_recur Recurring costs for rewetted peatland (USD05MER per ha) / 200 /
+  s58_cost_rewet_onetime One-time costs for peatland restoration (USD05MER per ha) / 7000 /
+  s58_cost_degrad_recur Recurring costs for degraded peatland (USD05MER per ha) / 0 /
+  s58_cost_degrad_onetime One-time costs for peatland degradation (USD05MER per ha) / 0 /
+  s58_rewetting_switch Peatland rewetting on (Inf) or off (0) / Inf /
+  s58_fix_peatland Year indicating until when peatland area should be fixed to 2015 levels (year) / 2015 /
 ;
 
 parameters

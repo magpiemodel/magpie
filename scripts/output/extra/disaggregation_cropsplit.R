@@ -1,4 +1,4 @@
-# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -69,10 +69,10 @@ print(sum_spam_file)
 
 
 # Load input data
-gdx          <- path(outputdir,"fulldata.gdx")
+gdx          <- file.path(outputdir,"fulldata.gdx")
 land_ini_lr  <- readGDX(gdx,"f10_land","f_land", format="first_found")[,"y1995",]
 land_lr      <- land(gdx,sum=FALSE,level="cell")
-land_ini_hr  <- read.magpie(path(in_folder,land_hr_file))[,"y1995",]
+land_ini_hr  <- read.magpie(file.path(in_folder,land_hr_file))[,"y1995",]
 land_ini_hr  <- land_ini_hr[,,getNames(land_lr)]
 if(any(land_ini_hr < 0)) {
   warning(paste0("Negative values in inital high resolution dataset detected and set to 0. Check the file ",land_hr_file))
@@ -84,14 +84,14 @@ print("Interpolation")
 land_hr <- interpolate( x          = land_lr,
                         x_ini_lr   = land_ini_lr,
                         x_ini_hr   = land_ini_hr,
-                        spam       = path(outputdir,sum_spam_file),
+                        spam       = file.path(outputdir,sum_spam_file),
                         prev_year  = prev_year)
 
 
 # Write outputs
 
 # Write spam files (crop weighted for each time step)
-for(y in getYears(land_hr)) create_spam(land_hr[,y,"crop"],read.spam(path(outputdir,sum_spam_file)),fname=path(outputdir,sub("sum",paste("crop_weighted_mean",y,sep="_"),sum_spam_file)))
+for(y in getYears(land_hr)) create_spam(land_hr[,y,"crop"],read.spam(file.path(outputdir,sum_spam_file)),fname=file.path(outputdir,sub("sum",paste("crop_weighted_mean",y,sep="_"),sum_spam_file)))
 
 # Disaggregate other cellular files
 reshape_folder(outputdir)
@@ -114,7 +114,7 @@ area_shr[is.nan(area_shr)]      <- 0
 area_shr[is.infinite(area_shr)] <- 0
 
 # disaggregate share of crop types in terms of croparea to 0.5 resolution
-area_shr_hr <- speed_aggregate(area_shr,t(read.spam(path(outputdir,sum_spam_file))))
+area_shr_hr <- speed_aggregate(area_shr,t(read.spam(file.path(outputdir,sum_spam_file))))
 
 # calculate crop tpye specific croparea in 0.5 resolution
 area_hr     <- area_shr_hr*setNames(land_hr[,,"crop"],NULL)
@@ -133,12 +133,12 @@ land_hr <- land_hr[,,"crop",invert=TRUE]
 #combine land_hr with crop_hr.
 land_hr <- mbind(crop_hr,land_hr)
 #write landpool
-write.magpie(land_hr,path(outputdir,paste(land_hr_out_file,sep="_")),comment="unit: Mha per grid-cell")
-write.magpie(land_hr,path(outputdir,paste(sub(".mz",".nc",land_hr_out_file),sep="_")),comment="unit: Mha per grid-cell", verbose=FALSE)
+write.magpie(land_hr,file.path(outputdir,paste(land_hr_out_file,sep="_")),comment="unit: Mha per grid-cell")
+write.magpie(land_hr,file.path(outputdir,paste(sub(".mz",".nc",land_hr_out_file),sep="_")),comment="unit: Mha per grid-cell", verbose=FALSE)
 
 print("Write netCDF outputs #2")
 #calculate share of land pools in terms of tatal cell size
 land_shr_hr <- land_hr/dimSums(land_hr,dim=3.1)
 #write landpool shares
-write.magpie(land_shr_hr,path(outputdir,paste(land_hr_share_out_file,sep="_")),comment="unit: grid-cell land area fraction")
-write.magpie(land_shr_hr,path(outputdir,paste(sub(".mz",".nc",land_hr_share_out_file),sep="_")),comment="unit: grid-cell land area fraction", verbose=FALSE)
+write.magpie(land_shr_hr,file.path(outputdir,paste(land_hr_share_out_file,sep="_")),comment="unit: grid-cell land area fraction")
+write.magpie(land_shr_hr,file.path(outputdir,paste(sub(".mz",".nc",land_hr_share_out_file),sep="_")),comment="unit: grid-cell land area fraction", verbose=FALSE)

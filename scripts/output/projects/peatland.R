@@ -1,7 +1,8 @@
-# |  (C) 2008-2018 Potsdam Institute for Climate Impact Research (PIK),
-# |  authors, and contributors see AUTHORS file
-# |  This file is part of MAgPIE and licensed under GNU AGPL Version 3
-# |  or later. See LICENSE file or go to http://www.gnu.org/licenses/
+# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  authors, and contributors see CITATION.cff file. This file is part
+# |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+# |  AGPL-3.0, you are granted additional permissions described in the
+# |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
@@ -30,7 +31,7 @@ options(error=function()traceback(2))
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdir <- path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
+  outputdir <- file.path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
   #Define arguments that can be read from command line
   readArgs("outputdir")
 }
@@ -58,10 +59,10 @@ missing <- NULL
 
 for (i in 1:length(outputdir)) {
   print(paste("Processing",outputdir[i]))
-  gdx<-path(outputdir[i],"fulldata.gdx")
-  rep<-path(outputdir[i],"report.rds")
+  gdx<-file.path(outputdir[i],"fulldata.gdx")
+  rep<-file.path(outputdir[i],"report.rds")
   if(file.exists(gdx)) {
-    load(path(outputdir[i],"config.Rdata"))
+    load(file.path(outputdir[i],"config.Rdata"))
     scen <- cfg$title
     prefix <- substring(scen, 1, 4)
 

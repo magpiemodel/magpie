@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -28,4 +28,8 @@ parameters
   im_development_state(t_all,i)                  Development state according to the World Bank definition where 0=low income country 1=high income country in high income level  (1)
   im_physical_inactivity(t_all,iso,sex,age)          Share of population which is physically inactive (1)
   im_demography(t_all,iso,sex,age)                   Population by groups (mio. per yr)
+
+* Years where SSPs and nocc/cc scenarios diverge 
+  sm_fix_SSP2			        	year until which all parameters are fixed to SSP2 values (year) / 2020 /
+  sm_fix_cc				          year until which all parameters affected by cc are fixed to historical values (year) / 2020 /
 ;

@@ -1,4 +1,4 @@
-# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -8,10 +8,15 @@
 ################################################################################
 # Define internal functions
 ################################################################################
-.update_sets <- function(cpr,map) {
+
+.update_sets_core <- function(cpr,map) {
   require(gms)
 
-  reg1 <- unique(map$RegionCode)
+  if (!("region" %in% names(map)))      map$region <- map$RegionCode
+  if (!("country" %in% names(map)))     map$country <- map$CountryCode
+  if (!("superregion" %in% names(map))) map$superregion <- map$region
+
+  reg1 <- unique(as.character(map$region))
   reg2 <- names(cpr)
   if(!all(union(reg1,reg2) %in% intersect(reg1,reg2))) {
     stop("Inconsistent region information!",
@@ -21,52 +26,73 @@
 
 
   j <- 0; cells <- NULL
-  for(i in 1:length(cpr)) {
-    cells <- c(cells,paste(names(cpr)[i],"_",j+1,"*",names(cpr)[i],"_",j+cpr[i],sep=""))
-    j <- j+cpr[i]
-  }
-
-  .tmp <- function(x,prefix="", suffix1="", suffix2=" /", collapse=",", n=10) {
-    content <- NULL
-    tmp <- lapply(split(x, ceiling(seq_along(x)/n)),paste,collapse=collapse)
-    end <- suffix1
-    for(i in 1:length(tmp)) {
-      if(i==length(tmp)) end <- suffix2
-      content <- c(content,paste0('       ',prefix,tmp[[i]],end))
+  for (i in 1:length(cpr)) {
+    if (cpr[i] == 1) {
+      cells <- c(cells, paste0(names(cpr)[i], "_", j + 1))
+    } else {
+      cells <- c(cells, paste0(names(cpr)[i], "_", j + 1, "*",
+                               names(cpr)[i], "_", j + cpr[i]))
     }
-    return(content)
+    j <- j + cpr[i]
   }
+  ij <- data.frame(i = names(cpr), j = cells)
 
-  subject <- 'SETS'
-  modification_warning <- c(
-    '*THIS CODE IS CREATED AUTOMATICALLY, DO NOT MODIFY THESE LINES DIRECTLY',
-    '*ANY DIRECT MODIFICATION WILL BE LOST AFTER NEXT INPUT DOWNLOAD',
-    '*CHANGES CAN BE DONE USING THE INPUT DOWNLOADER UNDER SCRIPTS/DOWNLOAD',
-    '*THERE YOU CAN ALSO FIND ADDITIONAL INFORMATION')
-  content <- c(modification_warning,'','sets','')
+  hi <- unique(map[c("superregion", "region")])
+  hi <- hi[order(hi$superregion),]
 
-  content <- c(content,paste('   i all economic regions /',paste(names(cpr),collapse=','),'/',sep=''),'')
+  sets <- list(list(name = "h",
+                    desc = "all superregional economic regions",
+                    items = sort(unique(as.character(map$superregion)))),
+               list(name = "i",
+                    desc = "all economic regions",
+                    items = names(cpr)),
+               list(name = "supreg(h,i)",
+                    desc = "mapping of superregions to its regions",
+                    items = hi),
+               list(name = "iso",
+                    desc = "list of iso countries",
+                    items = as.character(map$country)),
+               list(name = "j",
+                    desc = "number of LPJ cells",
+                    items = cells),
+               list(name = "cell(i,j)",
+                    desc = "number of LPJ cells per region i",
+                    items = ij),
+               list(name = "i_to_iso(i,iso)",
+                    desc = "mapping regions to iso countries",
+                    items = map[c("region","country")][order(map$region),]))
 
-  # write iso set with nice formatting (10 countries per line)
-  tmp <- lapply(split(map$CountryCode, ceiling(seq_along(map$CountryCode)/10)),paste,collapse=",")
-  content <- c(content,'   iso list of iso countries /')
-  content <- c(content, .tmp(map$CountryCode, suffix1=",", suffix2=" /"))
+  gms::writeSets(sets, "core/sets.gms")
+}
 
-  content <- c(content,  '', paste('   j number of LPJ cells /\n       ',paste(cells,collapse=',\n       '),'/',sep=''),'',
-               '   cell(i,j) number of LPJ cells per region i','      /')
-  for(i in 1:length(cpr)) {
-    content <- c(content,paste('       ',names(cpr)[i],' . ',cells[i],sep=''))
-  }
-  content <- c(content,'      /','')
+.update_sets_modules <- function() {
+  require(gms)
 
-  content <- c(content,'   i_to_iso(i,iso) mapping regions to iso countries','      /')
-  map$RegionCode <- as.factor(map$RegionCode)
-  for(i in levels(map$RegionCode)) {
-    content <- c(content, .tmp(map$CountryCode[map$RegionCode==i], prefix=paste0(i," . ("), suffix1=")", suffix2=")"))
+  ### 56_ghg_policy
+  ghgscen56 <- magclass::read.magpie("modules/56_ghg_policy/input/f56_pollutant_prices.cs3")
+  ghgscen56 <- magclass::getNames(ghgscen56,dim=2)
 
-  }
-  content <- c(content,'      /',';')
-  gms::replace_in_file("core/sets.gms",content,subject)
+  scen56 <- magclass::read.magpie("modules/56_ghg_policy/input/f56_emis_policy.csv",file_type = "cs3")
+  scen56 <- magclass::getNames(scen56,dim=1)
+
+  sets <- list(list(name = "ghgscen56",
+                    desc = "ghg price scenarios",
+                    items = ghgscen56),
+               list(name = "scen56",
+                   desc = "emission policy scenarios",
+                   items = scen56))
+
+  gms::writeSets(sets, "modules/56_ghg_policy/price_jan20/sets.gms")
+
+  ### 60_bioenergy
+  scen2nd60 <- magclass::read.magpie("modules/60_bioenergy/input/f60_bioenergy_dem.cs3")
+  scen2nd60 <- magclass::getNames(scen2nd60,dim=1)
+
+  sets <- list(list(name = "scen2nd60",
+                    desc = "second generation bioenergy scenarios",
+                    items = scen2nd60))
+
+  gms::writeSets(sets , "modules/60_bioenergy/1stgen_priced_dec18/sets.gms")
 }
 
 # Function to extract information from info.txt
@@ -133,6 +159,20 @@
 }
 
 
+.spam2rds <- function(spatial_header, cells_tmp,
+                      outfile  = "clustermap_rev0_dummy.rds",
+                      spamfile = Sys.glob("input/0.5-to-*_sum.spam")) {
+
+  sp  <- luscale::read.spam(spamfile)
+  a   <- apply(sp, 2, function(x) return(which(x == 1)))
+  out <- data.frame(cell = cells_tmp, region = sub("\\..*$","",spatial_header),
+                    country = sub("\\..*$","",cells_tmp), global = "GLO")
+  out$cluster <- paste0(out$region,".",a)
+  out <- out[,c("cell", "cluster","region","country","global")]
+  saveRDS(out, paste0("input/",outfile), version = 2)
+}
+
+
 ################################################################################
 ######################### MAIN FUNCTIONS #######################################
 ################################################################################
@@ -156,12 +196,17 @@ download_and_update <- function(cfg) {
   # updating the general information in magpie.gms and input/info.txt
   # and .update_sets, which is updating the resolution- and region-depending
   # sets in core/sets.gms
-  tmp <- magclass::read.magpie("modules/10_land/input/avl_land_t.cs3")
-  cpr <- magclass::getCPR(tmp)
+  tmp  <- magclass::read.magpie("modules/10_land/input/avl_land_t.cs3")
+  cpr  <- magclass::getCPR(tmp)
+  tmp2 <- magclass::read.magpie("modules/10_land/input/avl_land_t_0.5.mz")
+  cel  <- magclass::getItems(tmp2,1)
   # read spatial_header, map, reg_revision and regionscode
   load("input/spatial_header.rda")
+  rds <- any(grepl(pattern = "clustermap_rev.*.rds", x=list.files("input")))
+  if(!rds) .spam2rds(spatial_header, cel, "clustermap_rev0_dummy.rds")
   .update_info(filemap,cpr,regionscode,reg_revision, warnings)
-  .update_sets(cpr,map)
+  .update_sets_core(cpr,map)
+  .update_sets_modules()
 }
 
 
@@ -196,7 +241,10 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   }
 
   if(!is.null(scenario)) cfg <- gms::setScenario(cfg,scenario)
-  cfg <- gms::check_config(cfg)
+  cfg <- gms::check_config(cfg, extras = "info")
+
+  # save model version
+  cfg$info$version <- citation::read_cff("CITATION.cff")$version
 
   # Make 'title' a setglobal in gams to include it in the gdx
   cfg$gms$c_title <- cfg$title
@@ -237,13 +285,13 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
     lucode2::manipulateConfig(cfg$model, cfg$gms)
 
     # configure input.gms in all modules based on settings of cfg file
-    l1 <- lucode2::path("modules", list.dirs("modules/", full.names = FALSE,
+    l1 <- file.path("modules", list.dirs("modules/", full.names = FALSE,
                                             recursive = FALSE))
     for(l in l1) {
-      l2 <- lucode2::path(l, list.dirs(l, full.names = FALSE, recursive = FALSE))
+      l2 <- file.path(l, list.dirs(l, full.names = FALSE, recursive = FALSE))
       for(ll in l2) {
-        if(file.exists(lucode2::path(ll, "input.gms"))) {
-          lucode2::manipulateConfig(lucode2::path(ll, "input.gms"), cfg$gms)
+        if(file.exists(file.path(ll, "input.gms"))) {
+          lucode2::manipulateConfig(file.path(ll, "input.gms"), cfg$gms)
         }
       }
     }
@@ -349,10 +397,12 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
                      calibrate_pasture = (cfg$gms$past!="static"),
                      calibrate_cropland = (cfg$calib_cropland),
                      damping_factor = cfg$damping_factor,
+                     crop_max = cfg$crop_calib_max,
                      calib_file = calib_file,
                      data_workspace = cfg$val_workspace,
                      logoption = 3,
-                     debug = cfg$debug)
+                     debug = cfg$debug,
+                     best_calib = cfg$best_calib)
     file.copy("calibration_results.pdf", cfg$results_folder, overwrite=TRUE)
     cat("Calibration factor calculated!\n")
   }
@@ -362,18 +412,11 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
     try(file.copy(Sys.glob(file), cfg$results_folder, overwrite=TRUE))
   }
 
-  # copy spam files to output folder
-  cfg$files2export$spam <- list.files(path="input/cellular", pattern = "*.spam",
-                                      full.names=TRUE)
-  for(file in cfg$files2export$spam) {
-    file.copy(file, cfg$results_folder, overwrite=TRUE)
-  }
-
   cfg$magpie_folder <- getwd()
 
-  save(cfg, file=lucode2::path(cfg$results_folder, "config.Rdata"))
+  save(cfg, file=file.path(cfg$results_folder, "config.Rdata"))
 
-  gms::singleGAMSfile(mainfile=cfg$model, output=lucode2::path(cfg$results_folder, "full.gms"))
+  gms::singleGAMSfile(mainfile=cfg$model, output=file.path(cfg$results_folder, "full.gms"))
   if(lock_model) {
     gms::model_unlock(lock_id)
     on.exit(setwd(maindir))
@@ -476,29 +519,4 @@ getReportData <- function(path_to_report,LU_pricing="y2010") {
 
   .bioenergy_demand(mag)
   .emission_prices(mag)
-}
-
-
-start_reportrun <- function (cfg, path_report, inmodel=NULL, sceninreport=NULL, codeCheck=FALSE){
-  if (!requireNamespace("magclass", quietly = TRUE)) {
-    stop("Package \"magclass\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
-  if (!requireNamespace("gms", quietly = TRUE)) {
-    stop("Package \"gms\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
-  rep <- magclass::convert.report(path_report,inmodel=inmodel,outmodel="MAgPIE")
-  magclass::write.report(rep,"report.mif")
-  if (!is.null(sceninreport))
-      sceninreport <- intersect(sceninreport,names(rep))
-  else
-      sceninreport <- names(rep)
-
-  for(scen in sceninreport) {
-	cfg$title <- scen
-  # extract scenario from scenarioname and apply it
-	cfg       <- gms::setScenario(cfg,substring(scen,first=1,last=4))
-	start_run(cfg, report=rep, sceninreport=scen, codeCheck=codeCheck)
-  }
 }

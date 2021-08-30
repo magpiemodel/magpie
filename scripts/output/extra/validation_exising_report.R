@@ -1,4 +1,4 @@
-# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -22,7 +22,7 @@ file    <- paste0("comparison_validation_",format(Sys.time(), "%Y%H%M%S"),".pdf"
 
 x <- NULL; i <- 1
 for(outputdir in outputdirs) {
-  config <- path(outputdir,"config.Rdata")
+  config <- file.path(outputdir,"config.Rdata")
   if(file.exists(config)) {
     load(config)
     title <- cfg$title

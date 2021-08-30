@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -38,9 +38,10 @@ s42_env_flow_base_fraction         Fraction of available water that is reserved 
 s42_env_flow_fraction              Fraction of available water that is reserved for under protection policies (1) / 0.2 /
 ;
 
-$setglobal c42_watdem_scenario  cc
-*   options:   cc  (climate change)
-*             nocc (no climate change)
+$setglobal c42_watdem_scenario  nocc
+*   options:  cc        (climate change)
+*             nocc      (no climate change)
+*             nocc_hist (no climate change after year defined by sm_fix_cc)
 
 * Set-switch for countries affected by EFP
 * Default: all iso countries selected
@@ -78,6 +79,7 @@ $include "./modules/42_water_demand/input/lpj_airrig.cs2"
 $offdelim
 ;
 $if "%c42_watdem_scenario%" == "nocc" f42_wat_req_kve(t_all,j,kve) = f42_wat_req_kve("y1995",j,kve);
+$if "%c42_watdem_scenario%" == "nocc_hist" f42_wat_req_kve(t_all,j,kve)$(m_year(t_all) > sm_fix_cc) = f42_wat_req_kve(t_all,j,kve)$(m_year(t_all) = sm_fix_cc);
 m_fillmissingyears(f42_wat_req_kve,"j,kve");
 
 parameter f42_wat_req_kli(kli) Average water requirements of livestock commodities per region per tDM per year (m^3 per yr)
@@ -103,6 +105,7 @@ $offdelim
 /
 ;
 $if "%c42_watdem_scenario%" == "nocc" f42_env_flows(t_all,j) = f42_env_flows("y1995",j);
+$if "%c42_watdem_scenario%" == "nocc_hist" f42_env_flows(t_all,j)$(m_year(t_all) > sm_fix_cc) = f42_env_flows(t_all,j)$(m_year(t_all) = sm_fix_cc);
 m_fillmissingyears(f42_env_flows,"j");
 
 $setglobal c42_env_flow_policy  off

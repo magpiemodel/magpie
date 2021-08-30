@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -6,13 +6,10 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' Capital update from the last investment
-p38_capital_immobile(t+1,j,kcr)$(p38_capital_immobile(t,j,kcr) OR v38_investment_immobile.l(j,kcr)) =
-                  (p38_capital_immobile(t,j,kcr) + v38_investment_immobile.l(j,kcr))*
-                  (1-s38_depreciation_rate)**(m_year(t+1)-m_year(t));
+p38_capital_immobile(t+1,j,kcr) = p38_capital_immobile(t,j,kcr) + v38_investment_immobile.l(j,kcr);
 
-p38_capital_mobile(t+1,j)$(p38_capital_mobile(t,j) OR v38_investment_mobile.l(j)) =
-                  (p38_capital_mobile(t,j) + v38_investment_mobile.l(j))*
-                  (1-s38_depreciation_rate)**(m_year(t+1)-m_year(t));
+p38_capital_mobile(t+1,j) = p38_capital_mobile(t,j) + v38_investment_mobile.l(j);
+
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_cost_prod(t,i,kall,"marginal")            = vm_cost_prod.m(i,kall);

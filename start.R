@@ -1,4 +1,4 @@
-# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -113,6 +113,8 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
   runsubmit(runscripts, submit)
 }
 
+
+system("git config core.hooksPath .githooks")
 
 runscripts <- submit <- NULL
 lucode2::readArgs("runscripts","submit", .silent=TRUE)

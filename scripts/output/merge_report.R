@@ -1,4 +1,4 @@
-# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -8,7 +8,7 @@
 # --------------------------------------------------------------
 # description: Merges report.mif files from several runs into a single mif file
 # comparison script: TRUE
-# position: 2
+# position: 3
 # ---------------------------------------------------------------
 
 # Version 1.0, Florian Humpenoeder
@@ -21,7 +21,7 @@ options(error=function()traceback(2))
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdir <- lucode2::path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
+  outputdir <- file.path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
   #Define arguments that can be read from command line
   lucode2::readArgs("outputdir")
 }
@@ -35,10 +35,10 @@ if(file.exists("output/report_all.mif")) file.rename("output/report_all.mif","ou
 for (i in 1:length(outputdir)) {
   print(paste("Processing",outputdir[i]))
   #gdx file
-  rep<-path(outputdir[i],"report.mif")
+  rep<-file.path(outputdir[i],"report.mif")
   if(file.exists(rep)) {
     #get scenario name
-    load(path(outputdir[i],"config.Rdata"))
+    load(file.path(outputdir[i],"config.Rdata"))
     scen <- cfg$title
     #read-in reporting file
     a <- read.report(rep,as.list = FALSE)

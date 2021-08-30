@@ -1,4 +1,4 @@
-# |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -22,7 +22,7 @@ options(error=function()traceback(2))
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdirs <- path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
+  outputdirs <- file.path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
   #Define arguments that can be read from command line
   lucode2::readArgs("outputdirs")
 }
@@ -35,10 +35,10 @@ missing <- NULL
 for (i in 1:length(outputdirs)) {
   print(paste("Processing",outputdirs[i]))
   #gdx file
-  gdx<-path(outputdirs[i],"fulldata.gdx")
+  gdx<-file.path(outputdirs[i],"fulldata.gdx")
   if(file.exists(gdx)) {
     #get scenario name
-    load(path(outputdirs[i],"config.Rdata"))
+    load(file.path(outputdirs[i],"config.Rdata"))
     scen <- cfg$title
     #read-in reporting file
     x <- collapseNames(land(gdx,level="glo")[,,"forestry"])

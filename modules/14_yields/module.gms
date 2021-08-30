@@ -1,4 +1,4 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -21,11 +21,12 @@
 *' The module returns yields for all crops and for pasture, which is then used
 *' by the modules [30_crop] and [31_past].
 *'
-*' @authors Jan Philipp Dietrich, Isabelle Weindl, Florian Humpenöder, Anne Biewald
-
+*' @authors Jan Philipp Dietrich, Isabelle Weindl, Florian Humpenöder,
+*' Anne Biewald, Kristine Karstens
 
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%yields%" == "biocorrect" $include "./modules/14_yields/biocorrect/realization.gms"
 $Ifi "%yields%" == "dynamic_aug18" $include "./modules/14_yields/dynamic_aug18/realization.gms"
+$Ifi "%yields%" == "managementcalib_aug19" $include "./modules/14_yields/managementcalib_aug19/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

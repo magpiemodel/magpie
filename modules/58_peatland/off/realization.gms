@@ -1,13 +1,14 @@
-*** |  (C) 2008-2020 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In this realization GHG emissions from degrading peatlands are assumed zero.
+*' @description In this realization, peatlands do not exist. Therefore, 
+*' GHG emissions from degrading peatlands are assumed zero.
 
-*' @limitations GHG emissions from degrading peatlands are assumed zero
+*' @limitations Peatland area and associated GHG emissions are fixed to zero.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "declarations" $include "./modules/58_peatland/off/declarations.gms"
