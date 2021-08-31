@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "gmd-2021-76_02"
+identifier_flag = "gmd-2021-76_03"
 cat(paste0("Higher rotation, more share from EUR."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()

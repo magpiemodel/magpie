@@ -64,9 +64,6 @@ p73_demand_modifier(t_all)$(m_year(t_all)>2100) = p73_demand_modifier("y2100");
 display p73_fraction;
 display p73_demand_modifier;
 
-** Set BAU demand to 0 for construction wood
-f73_construction_wood_demand(t_all,i,pop_scen09,"BAU") = 0;
-
 if(s73_expansion = 0,
   p73_demand_constr_wood(t_all,i) = f73_construction_wood_demand(t_all,i,"%c09_pop_scenario%","%c73_build_demand%");
   p73_demand_constr_wood(t_all,i)$(m_year(t_all)<=2020) = f73_construction_wood_demand("y2025",i,"%c09_pop_scenario%","BAU");

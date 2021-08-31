@@ -134,8 +134,6 @@ loop(t_all,
   p32_rotation_cellular_harvesting(t_all+1,j)$(abs(p32_rotation_cellular_harvesting(t_all+1,j) - p32_rotation_cellular_harvesting(t_all,j))>2 AND ord(t_all)<card(t_all)) = p32_rotation_cellular_harvesting(t_all,j);
   );
 
-display p32_rotation_cellular_harvesting;
-
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = round(f32_aff_pol(t,j,"%c32_aff_policy%"),6);
 
@@ -251,7 +249,6 @@ else
 p32_plantation_contribution(t_ext,i) = 0.001;
 ** Fill parameter with input file based on scenario settings
 p32_plantation_contribution(t_ext,i)$(f32_gs_relativetarget(i)>0) = f32_plantation_contribution(t_ext,i,"%c32_dev_scen%","%c32_incr_rate%");
-p32_plantation_contribution(t_ext,"EUR") = p32_plantation_contribution(t_ext,"EUR") * 3;
 
 **************************************************************************
 *******************************************************************************
