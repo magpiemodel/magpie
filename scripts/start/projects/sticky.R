@@ -24,9 +24,6 @@ source("scripts/start_functions.R")
 # Sources the default configuration file
 source("config/default.cfg")
 
-#lpjml_addon. Sticky is only compatible with this version o magpie.
-source("scripts/start/extra/lpjml_addon.R")
-
 # Sticky mode
 mode <- c("dynamic","free")
 #recalibrate
