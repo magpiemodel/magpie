@@ -267,7 +267,6 @@ p32_gs_scaling_reg(i) = 1;
 p32_gs_scaling_reg(i)$(f32_gs_relativetarget(i)>0 AND f32_plantedforest(i)>0) = f32_gs_relativetarget(i) / p32_observed_gs_reg(i);
 ** Calibration factors lower than 1 are set to 1
 p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) < 1) = 1;
-display p32_gs_scaling_reg;
 
 ** Save pm_carbon_density_ac_forestry in a parameter before upscaling to FAO growing stocks.
 ** This allows to use plantation growth curves for CO2 price driven afforestation.

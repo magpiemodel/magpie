@@ -13,7 +13,7 @@ $setglobal c35_aolc_policy  npi
 $setglobal c35_forest_damage_end  by2050
 
 scalars
-s35_hvarea Flag for harvested area (0=zero 1=exognous 2=endogneous)	/ 2 /
+s35_hvarea Flag for harvested area (0=zero 1=exognous 2=endogneous)	/ 0 /
 s35_hvarea_secdforest annual secdforest harvest rate for s35_hvarea equals 1 (percent per year) / 0.005 /
 s35_hvarea_primforest annual primforest harvest rate for s35_hvarea equals 1 (percent per year) / 0.0001 /
 s35_hvarea_other annual other land harvest rate for s35_hvarea equals 1 (percent per year) / 0 /
