@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: gmd-2021-76 forestrz paper
+# description: gmd-2021-76 forestry paper
 # ----------------------------------------------------------
 
 ######################################
@@ -27,6 +27,9 @@ identifier_flag = "gmd-2021-76_03"
 cat(paste0("Higher rotation, more share from EUR."), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
+
+# Should input data be downloaded from source even if cfg$input did not change?
+cfg$force_download <- TRUE
 
 #scen_vector <- c("ForestryOff","ForestryEndo","ForestryExo")
 scen_vector <- c("ForestryOff","ForestryEndo")
