@@ -22,7 +22,7 @@ scalars
   s73_foresight                        Boolean switch for establishment demand assumption 1=forward looking 0=myopic (1) / 0 /
   s73_increase_ceiling                 Limiter for not allowing a demand jump between time steps beyond a certain limit (1) /1.025/
   s73_residue_ratio                    Proportion of overall industrial roundwood production which ends up as residue during harvest (1) / 0.15/
-  sm_wood_density                      Representative wood density based on IPCC in (tDM per m3) /0.6/
+  sm_wood_density                      Representative wood density based on IPCC (tDM per m3) /0.6/
   s73_reisdue_removal_cost             Cost of removing residues left after industrial roundwood harvest (USD per tDM) / 2 /
   s73_expansion                        Construction wood demand expansion factor by end of century (1=100 percent increase or doubling) / 0 /
 ;
