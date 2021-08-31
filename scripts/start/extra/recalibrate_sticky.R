@@ -15,7 +15,6 @@ library(magclass)
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 source("config/default.cfg")
-source("scripts/start/extra/lpjml_addon.R")
 
 realization<- c("sticky_feb18","sticky_feb18","fixed_per_ton_mar18","mixed_feb17")
 mode<-c("free","dynamic","","")
