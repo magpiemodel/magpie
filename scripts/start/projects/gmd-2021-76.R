@@ -28,9 +28,6 @@ cat(paste0("Higher rotation, more share from EUR."), file=paste0(log_folder,"/",
 
 xx <- c()
 
-# Should input data be downloaded from source even if cfg$input did not change?
-cfg$force_download <- TRUE
-
 #scen_vector <- c("ForestryOff","ForestryEndo","ForestryExo")
 scen_vector <- c("ForestryOff","ForestryEndo")
 
@@ -45,6 +42,9 @@ for(c73_wood_scen in c("default")){
           cfg$gms$s80_maxiter = s80_maxiter
 
           cfg = setScenario(cfg,c(ssp,"NPI",scen))
+
+          # Should input data be downloaded from source even if cfg$input did not change?
+          cfg$force_download <- TRUE
 
             #cfg$gms$c_timesteps <- "5year"
 
@@ -73,7 +73,7 @@ for(c73_wood_scen in c("default")){
                xx = c(xx,cfg$title)
                cfg$gms$s80_optfile <- 0
                cfg$results_folder = "output/:title:"
-               start_run(cfg,codeCheck=FALSE)
+               #start_run(cfg,codeCheck=FALSE)
             }
         }
      }
