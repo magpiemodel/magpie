@@ -259,7 +259,7 @@ p32_observed_gs_reg(i) = 1;
 ** Wherever FAO reports >0 growing stock, we calculate how much growing stock MAGPIE
 ** sees even before optimization starts
 p32_observed_gs_reg(i)$(f32_gs_relativetarget(i)>0 AND f32_plantedforest(i)>0)  = (sum((cell(i,j),ac),(pm_timber_yield_initial(j,ac,"forestry") / sm_wood_density) * p32_land_start_ac(j,"plant",ac))/ sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac)));
-display p32_observed_gs_reg, pm_timber_yield_initial, p32_land_start_ac;
+
 ** Initialze calibration factor for growing stocks as 1
 ** we dont set it to 0 as we don't want to modify carbon densities by multiplication with 0 later
 p32_gs_scaling_reg(i) = 1;

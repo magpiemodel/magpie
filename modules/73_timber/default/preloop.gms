@@ -47,7 +47,7 @@ $endif
 ** p73_timber_demand_gdp_pop is in mio m^3
 ** pm_demand_ext in mio ton DM
 ** Hold constraint beyond 2150 - First every time step gets 2150 values
-**** Extend for Galina et al demand scenarios
+**** Extend for Churkina et al 2020 demand scenarios
 pm_demand_ext(t_ext,i,kforestry) = round(p73_timber_demand_gdp_pop("y2150",i,kforestry) * f73_volumetric_conversion(kforestry),3);
 ** overwrite timesteps below 2150 with actual values
 pm_demand_ext(t_all,i,kforestry) = round(p73_timber_demand_gdp_pop(t_all,i,kforestry) * f73_volumetric_conversion(kforestry),3);
