@@ -27,7 +27,8 @@ for (r in realization){
   cfg$input <- c(cellular    = "rev4.63_h12_a3fb0fc7_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-066f36d1.tgz",
                  regional    = "rev4.63_h12_magpie.tgz",
                  validation  = "rev4.63_h12_validation.tgz",
-                 additional  = cfg$input[grep("additional_data", cfg$input)])
+                 additional  = cfg$input[grep("additional_data", cfg$input)],
+                 patch = "patch_land_iso.tgz")
 
       cfg$results_folder <- "output/:title:"
       cfg$recalibrate <- TRUE
