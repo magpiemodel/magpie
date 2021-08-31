@@ -14,9 +14,9 @@ $include "./modules/51_nitrogen/input/f51_ipcc_ef.csv"
 $offdelim
 ;
 
-table f51_ef_n_soil(n_pollutants_direct,emis_source_n_cropsoils51) ipcc emission factors for various emission types X (tX-N per tN)
+table f51_ef_n_soil(t_all,i,n_pollutants_direct,emis_source_n_cropsoils51) ipcc emission factors for various emission types X (tX-N per tN)
 $ondelim
-$include "./modules/51_nitrogen/rescaled_jan21/input/f51_ef_n_soil.cs3"
+$include "./modules/51_nitrogen/input/f51_ef_n_soil_reg.cs3"
 $offdelim
 ;
 
