@@ -17,7 +17,7 @@ equations
 ;
 
 parameters
-  i51_ef_n_soil(t,i,n_pollutants_direct,emis_source_n_cropsoils51) emission factors for nitrogen emissions from cropland soils
+  i51_ef_n_soil(t,i,n_pollutants_direct,emis_source_n_cropsoils51) emission factors for nitrogen emissions from cropland soils (tX-N per tN)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
