@@ -16,8 +16,8 @@ library(magclass)
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
-realization<- c("sticky_feb18","sticky_feb18","fixed_per_ton_mar18","mixed_feb17")
-mode<-c("free","dynamic","","")
+realization<- c("sticky_feb18","fixed_per_ton_mar18","mixed_feb17")
+mode<-c("dynamic","","")
 
 #start MAgPIE run
 
