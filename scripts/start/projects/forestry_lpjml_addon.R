@@ -112,15 +112,3 @@ for(c73_wood_scen in c("default")){
      }
   }
 }
-
-#for(i in names(all_configs)){
-#  message(i)
-#  print(all_configs[[i]]$gms$c73_build_demand)
-#}
-
-
-#          cfg$gms$c56_pollutant_prices = "coupling"
-#          cfg$gms$c60_2ndgen_biodem = "coupling"
-
-#          file.copy(from = paste0("input/input_bioen_dem_",co2_price_path,".csv"), to = "modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv",overwrite = TRUE)
-#          file.copy(from = paste0("input/input_ghg_price_",co2_price_path,".cs3"), to = "modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3",overwrite = TRUE)
