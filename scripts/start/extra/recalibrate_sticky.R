@@ -16,7 +16,7 @@ library(magclass)
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
-realization<- c("fixed_per_ton_mar18")
+realization<- c("mixed_feb17")
 mode<-c("")
 
 #start MAgPIE run
