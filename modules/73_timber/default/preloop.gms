@@ -84,7 +84,7 @@ if(s73_expansion > 0,
   p73_demand_constr_wood(t_all,i) = pm_demand_ext(t_all,i,"wood") * p73_fraction(t_all);
   );
 
-** Adkust industrial roundwood demand (construction wood demand is added on top)
+** Adjust industrial roundwood demand (construction wood demand is added on top)
 pm_demand_ext(t_all,i,"wood") = pm_demand_ext(t_all,i,"wood") + p73_demand_constr_wood(t_all,i);
 ** Keep demand after 2100 constant
 pm_demand_ext(t_all,i,kforestry)$(m_year(t_all)>2100) = pm_demand_ext("y2100",i,kforestry);
