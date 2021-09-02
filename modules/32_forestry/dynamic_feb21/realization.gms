@@ -20,10 +20,10 @@
 *' handles the production of two timber products i.e., wood and woodfuel from
 *' plantation forests while still accounting for afforestation policies. New plantations
 *' are also established in the simulation step to account for future timber demand.
-*' This module also calculates the rotation lengths before the solve loop by equating
+*' This module also calculates the rotation lengths before the solve loop by
 *' maximizing current annual increment (CAI) based on @amacher2009economics. This rotation
 *' length calculation decision can also be changed to maximization of mean annual increment (MAI)
-*' of equating instantaneous growth rate (IGR) with interest rate in economy. Rotation lengths
+*' or equating instantaneous growth rate (IGR) with interest rate. Rotation lengths
 *' calculated by maximization of CAI are empirically closer to economically optimal Faustmann
 *' rotation lengths (see @amacher2009economics).
 *' For harvesting decisions we assume that land owners stick to their establishment decision,
