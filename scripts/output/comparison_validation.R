@@ -23,7 +23,7 @@ file    <- paste0("comparison_validation_",format(Sys.time(), "%Y%H%M%S"),".pdf"
 
 x <- NULL; i <- 1
 for(outputdir in outputdirs) {
-  config <- path(outputdir,"config.Rdata")
+  config <- file.path(outputdir,"config.Rdata")
   if(file.exists(config)) {
     load(config)
     title <- cfg$title

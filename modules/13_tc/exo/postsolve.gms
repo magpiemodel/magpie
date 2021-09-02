@@ -5,16 +5,15 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-p13_tech_cost_past(t2,i) = p13_tech_cost_past(t2,i) + p13_tech_cost_annuity(i);
-pc13_tau(i) = vm_tau.l(i);
+pcm_tau(h) = vm_tau.l(h);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
- ov_tau(t,i,"marginal")       = vm_tau.m(i);
+ ov_tau(t,h,"marginal")       = vm_tau.m(h);
  ov_tech_cost(t,i,"marginal") = vm_tech_cost.m(i);
- ov_tau(t,i,"level")          = vm_tau.l(i);
+ ov_tau(t,h,"level")          = vm_tau.l(h);
  ov_tech_cost(t,i,"level")    = vm_tech_cost.l(i);
- ov_tau(t,i,"upper")          = vm_tau.up(i);
+ ov_tau(t,h,"upper")          = vm_tau.up(h);
  ov_tech_cost(t,i,"upper")    = vm_tech_cost.up(i);
- ov_tau(t,i,"lower")          = vm_tau.lo(i);
+ ov_tau(t,h,"lower")          = vm_tau.lo(h);
  ov_tech_cost(t,i,"lower")    = vm_tech_cost.lo(i);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################

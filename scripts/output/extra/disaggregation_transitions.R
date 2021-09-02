@@ -61,10 +61,10 @@ print(sum_spam_file)
 ### Land Stock
 
 # Load input data
-gdx          <- path(outputdir,"fulldata.gdx")
+gdx          <- file.path(outputdir,"fulldata.gdx")
 land_ini_lr  <- readGDX(gdx,"f10_land","f_land", format="first_found")[,"y1995",]
 land_lr      <- land(gdx,sum=FALSE,level="cell")
-land_ini_hr  <- read.magpie(path(in_folder,land_hr_file))[,"y1995",]
+land_ini_hr  <- read.magpie(file.path(in_folder,land_hr_file))[,"y1995",]
 land_ini_hr  <- land_ini_hr[,,getNames(land_lr)]
 if(any(land_ini_hr < 0)) {
   warning(paste0("Negative values in inital high resolution dataset detected and set to 0. Check the file ",land_hr_file))
@@ -76,7 +76,7 @@ print("Disaggregation Land Stock")
 land_hr <- interpolate( x          = land_lr,
                         x_ini_lr   = land_ini_lr,
                         x_ini_hr   = land_ini_hr,
-                        spam       = path(outputdir,sum_spam_file),
+                        spam       = file.path(outputdir,sum_spam_file),
                         prev_year  = prev_year)
 land_hr  <- land_hr[,-1,]
 
@@ -87,12 +87,12 @@ CountryToCell   <- toolGetMapping("CountryToCellMapping.csv", type = "cell")
 land_lr <- readGDX(gdx,"ov10_lu_transitions",select = list(type="level"),react = "silent")
 if(is.null(land_lr)) stop("No land transitions available in GDX file")
 land_ini_hr <- new.magpie(CountryToCell$cell,NULL,getNames(land_lr),fill = 0)
-x  <- read.magpie(path(in_folder,land_hr_file))[,"y1995",]
+x  <- read.magpie(file.path(in_folder,land_hr_file))[,"y1995",]
 x  <- x[,,getNames(land_lr,dim=1)]
 for (i in getNames(land_lr,dim=1)) {
   land_ini_hr[,,paste(i,i,sep=".")] <- x[,,i]  
 }
-land_ini_lr <- speed_aggregate(land_ini_hr,path(outputdir,sum_spam_file))
+land_ini_lr <- speed_aggregate(land_ini_hr,file.path(outputdir,sum_spam_file))
 getCells(land_ini_lr) <- getCells(land_lr)
 
 # Interpolate Transitions
@@ -100,7 +100,7 @@ print("Disaggregation Land Transitions")
 land_trans_hr <- interpolate( x          = land_lr,
                         x_ini_lr   = land_ini_lr,
                         x_ini_hr   = land_ini_hr,
-                        spam       = path(outputdir,sum_spam_file),
+                        spam       = file.path(outputdir,sum_spam_file),
                         prev_year  = prev_year)
 land_trans_hr  <- land_trans_hr[,-1,]
 
@@ -114,12 +114,12 @@ if(max(test)>0.1||min(test)< -0.1) warning("Sum over land transitions and land s
 
 print("Write outputs cell.land")
 # write landpool
-write.magpie(land_trans_hr,path(outputdir,paste(land_hr_out_file,sep="_")),comment="unit: Mha per grid-cell")
-write.magpie(land_trans_hr,path(outputdir,paste(sub(".mz",".nc",land_hr_out_file),sep="_")),comment="unit: Mha per grid-cell", verbose=FALSE)
+write.magpie(land_trans_hr,file.path(outputdir,paste(land_hr_out_file,sep="_")),comment="unit: Mha per grid-cell")
+write.magpie(land_trans_hr,file.path(outputdir,paste(sub(".mz",".nc",land_hr_out_file),sep="_")),comment="unit: Mha per grid-cell", verbose=FALSE)
 
 print("Write outputs cell.land_share")
 # calculate share of land pools in terms of tatal cell size
 land_trans_hr_shr <- land_trans_hr/dimSums(land_trans_hr,dim=3)
 # write landpool shares
-write.magpie(land_trans_hr_shr,path(outputdir,paste(land_hr_share_out_file,sep="_")),comment="unit: grid-cell land area fraction")
-write.magpie(land_trans_hr_shr,path(outputdir,paste(sub(".mz",".nc",land_hr_share_out_file),sep="_")),comment="unit: grid-cell land area fraction", verbose=FALSE)
+write.magpie(land_trans_hr_shr,file.path(outputdir,paste(land_hr_share_out_file,sep="_")),comment="unit: grid-cell land area fraction")
+write.magpie(land_trans_hr_shr,file.path(outputdir,paste(sub(".mz",".nc",land_hr_share_out_file),sep="_")),comment="unit: grid-cell land area fraction", verbose=FALSE)

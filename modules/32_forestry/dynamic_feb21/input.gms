@@ -21,9 +21,13 @@ $setglobal c32_dev_scen  abare
 * options abare, brown
 $setglobal c32_incr_rate  h5s2l1
 * options constant,h5s5l5,h5s2l2,h5s2l1,h5s1l1,h5s1l05,h2s1l05
+$setglobal c32_rot_calc_type max_increment
+* option  max_increment, max_npv
+$setglobal c32_rot_calc_type current_annual_increment
+* options mean_annual_increment, current_annual_increment, instantaneous_growth_rate
 
 scalars
-  s32_hvarea 					  Flag for harvested area and establishemt (0=zero 1=exognous 2=endogneous)	/ 0 /
+  s32_hvarea                      Flag for harvested area and establishemt (0=zero 1=exognous 2=endogneous)	/ 0 /
   s32_reESTBcost                  Re establishment cost (USD per ha) / 2000 /
   s32_recurring_cost              Recurring costs (USD per ha) / 500 /
   s32_harvesting_cost             Harvesting cost (USD per ha) / 1000 /
@@ -35,10 +39,10 @@ scalars
   s32_free_land_cost              Very high cost for using non existing land for plantation establishment (USD per ha) /1000000/
   s32_max_aff_area                Maximum total global afforestation (mio. ha)    / Inf /
   s32_aff_plantation              Switch for using growth curves for afforestation 0=natveg 1=plantations (1) / 0 /
-  s32_timber_plantation           Switch for using growth curves for timber plantations 0=natveg 1=plantations (1) / 1 /
   s32_tcre_local                  Switch for local (1) or global (0) TRCE factors (1) / 1 /
   s32_forestry_int_rate           Global interest rate for plantations (percent) / 0.05 /
   s32_max_self_suff               Upper ceiling for the self sufficiency used in calculation for establishment decision (1) / 0.8 /
+  s32_aff_bii_coeff               BII coefficent to be used for CO2 price driven afforestation 0=natural vegetation 1=plantation (1) / 0 /
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)

@@ -162,7 +162,15 @@ $title magpie
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev4.00.tgz
+* Used data set: additional_data_rev4.04.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* 
+* Used data set: patch_land_iso.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* 
+* Used data set: gmd-2021-76_patch.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
@@ -197,7 +205,7 @@ $title magpie
 * 
 * 
 * 
-* Last modification (input data): Fri Apr 30 11:03:40 2021
+* Last modification (input data): Wed Sep 01 22:27:51 2021
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
