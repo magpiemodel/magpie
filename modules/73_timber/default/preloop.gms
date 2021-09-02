@@ -70,9 +70,6 @@ p73_fraction(t_all)$(p73_fraction(t_all)<0) = 0;
 ** Set values after 2100 to values from 2100
 p73_fraction(t_all)$(m_year(t_all)>2100) = p73_fraction("y2100");
 
-display p73_fraction;
-abort "x";
-
 ** In case using demand from Churkina et al. 2020
 if(s73_expansion = 0,
   p73_demand_constr_wood(t_all,i) = f73_construction_wood_demand(t_all,i,"%c09_pop_scenario%","%c73_build_demand%");
