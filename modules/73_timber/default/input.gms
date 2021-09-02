@@ -24,7 +24,7 @@ scalars
   s73_residue_ratio                    Proportion of overall industrial roundwood production which ends up as residue during harvest (1) / 0.15/
   sm_wood_density                      Representative wood density based on IPCC (tDM per m3) /0.6/
   s73_reisdue_removal_cost             Cost of removing residues left after industrial roundwood harvest (USD per tDM) / 2 /
-  s73_expansion                        Construction wood demand expansion factor by end of century (1=100 percent increase or doubling) / 0 /
+  s73_expansion                        Construction wood demand expansion factor by end of century based on industrial roundwood demand as base (1=100 percent increase) / 0 /
 ;
 
 ** Residue numbers from

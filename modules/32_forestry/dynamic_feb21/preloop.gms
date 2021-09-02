@@ -30,24 +30,24 @@ p32_IGR(t_all,j,ac) =   (p32_carbon_density_ac_marg(t_all,j,ac)/p32_carbon_densi
 $ifthen "%c32_interest_rate%" == "regional"
   p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest("y1995",i)) >  0)
                           + 0$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest("y1995",i)) <= 0);
-  display "Rotation lengths are calculated based on maximizing NPV.";
+  display "Rotation lengths are calculated based on equating instantaneous growth rate to regional interest rate.";
 $elseif "%c32_interest_rate%" == "global"
   p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - s32_forestry_int_rate  >  0)
                           + 0$(p32_IGR(t_all,j,ac) - s32_forestry_int_rate <= 0);
-  display "Rotation lengths are calculated based on maximizing NPV.";
+  display "Rotation lengths are calculated based on equating instantaneous growth rate to global interest rate.";
 $endif
 
 $ifthen "%c32_rot_calc_type%" == "current_annual_increment"
   p32_rot_flg(t_all,j,ac) = 1$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_carbon_density_ac_marg(t_all,j,ac-1) >  0)
                           + 0$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_carbon_density_ac_marg(t_all,j,ac-1) <= 0);
-  display "Rotation lengths are calculated based on maximizing CAI in this run.";
+  display "Rotation lengths are calculated based on maximizing current annual increment in this run.";
 $endif
 
-$ifthen "%c32_rot_calc_type%" == "max_marginal_increment"
+$ifthen "%c32_rot_calc_type%" == "mean_annual_increment"
   p32_avg_increment(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") / ((ord(ac)+1)*5);
   p32_rot_flg(t_all,j,ac) = 1$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_avg_increment(t_all,j,ac) >  0)
                           + 0$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_avg_increment(t_all,j,ac) <= 0);
-  display "Rotation lengths are calculated based on maximizing increment in this run.";
+  display "Rotation lengths are calculated based on maximizing mean annual increment in this run.";
 $endif
 
 ** From the above calculation, now it is easier to count how many age-classes can be sustained before IGR falls below interest rate.

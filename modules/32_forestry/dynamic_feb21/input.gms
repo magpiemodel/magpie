@@ -24,7 +24,7 @@ $setglobal c32_incr_rate  h5s2l1
 $setglobal c32_rot_calc_type max_increment
 * option  max_increment, max_npv
 $setglobal c32_rot_calc_type current_annual_increment
-* options max_marginal_increment, current_annual_increment, instantaneous_growth_rate
+* options mean_annual_increment, current_annual_increment, instantaneous_growth_rate
 
 scalars
   s32_hvarea                      Flag for harvested area and establishemt (0=zero 1=exognous 2=endogneous)	/ 0 /

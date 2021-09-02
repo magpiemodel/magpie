@@ -15,6 +15,7 @@ p73_glo_wood(t_all,kforestry)                                               Glob
 p73_demand_modifier(t_all)                                                  Simple demand modifier for construction wood (mio. tDM per yr)
 p73_fraction(t_all)                                                         Fraction over which construction wood demand is spread out (1)
 p73_demand_constr_wood(t_all,i)                                             Demand for construction wood (mio. tDM per yr)
+p73_fraction_sm_fix                                                         Modifier fraction at sm_fix_SSP2 time step (1)
 ;
 
 positive variables
