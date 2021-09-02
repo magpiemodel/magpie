@@ -147,28 +147,32 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
 * Used data set: isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev52_c200_690d3718e151be1b450b394c1064b1c5.tgz
-* md5sum: b115c870fd204b86d32b5ed664c2d00f
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.58_h12_magpie.tgz
-* md5sum: b724f1cb10bedf71ac07f41e0735bf63
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.58_h12_validation.tgz
-* md5sum: c47c243394e9430bba92aebce37ed652
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: calibration_H12_c200_23Feb21.tgz
-* md5sum: 8c013375008a959aaa0023030f53c2c2
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: additional_data_rev4.04.tgz
-* md5sum: 13ae67d3b398f4bef001e24fb878b7f3
-* Repository: /p/projects/landuse/data/input/archive
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: patch_land_iso.tgz
-* md5sum: 2f1e74178a8a5f6d2c54b5d19abfd590
-* Repository: /p/projects/landuse/data/input/archive
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* 
+* Used data set: gmd-2021-76_patch.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -200,157 +204,8 @@ $title magpie
 * * Call: aggregation(input_file = lpj2magpie_file, regionmapping = paste0("../",     cfg$regionmapping), output_file = aggregation_file, rev = cfg$revision,     res_high = cfg$high_res, res_low = cfg$low_res, hcells = cfg$highres_cells,     weight = cfg$cluster_weight, nrepeat = cfg$nrepeat, nredistribute = cfg$nredistribute,     sum_spam_file = cfg$spamfile, debug = FALSE, seed = cfg$seed)
 * 
 * 
-* Warning messages:
-* 1: Settings are unknown in provided cfg (cfg$qos)!
-* 2: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 3: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 4: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 5: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 6: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 7: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 8: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 9: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 10: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 11: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 12: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 13: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 14: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 15: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 16: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 17: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 18: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 19: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 20: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 21: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 22: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 23: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 24: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 25: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 26: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 27: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 28: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 29: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 30: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 31: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 32: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 33: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 34: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 35: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 36: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 37: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 38: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 39: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 40: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 41: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 42: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 43: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 44: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 45: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 46: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 47: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 48: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 49: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
-* 50: 'lucode2::path' is deprecated.
-* Use 'file.path' instead.
-* See help("Deprecated")
 * 
-* Last modification (input data): Thu Jul  1 12:32:05 2021
+* Last modification (input data): Wed Sep 01 22:27:51 2021
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -376,7 +231,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  develop_dep05
+$setglobal c_title  default
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
