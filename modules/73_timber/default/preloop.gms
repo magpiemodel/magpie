@@ -47,6 +47,43 @@ $endif
 ** p73_timber_demand_gdp_pop is in mio m^3
 ** pm_demand_ext in mio ton DM
 ** Hold constraint beyond 2150 - First every time step gets 2150 values
+**** Extend for Churkina et al 2020 demand scenarios
 pm_demand_ext(t_ext,i,kforestry) = round(p73_timber_demand_gdp_pop("y2150",i,kforestry) * f73_volumetric_conversion(kforestry),3);
 ** overwrite timesteps below 2150 with actual values
 pm_demand_ext(t_all,i,kforestry) = round(p73_timber_demand_gdp_pop(t_all,i,kforestry) * f73_volumetric_conversion(kforestry),3);
+
+** Initialize fraction
+p73_fraction(t_all)    = s73_expansion/(m_year("y2100") - sm_fix_SSP2);
+
+** Populate the fraction for each time step
+loop(t_all$(m_year(t_all)>=sm_fix_SSP2),
+  p73_fraction(t_all)  = s73_expansion/(m_year("y2100") - sm_fix_SSP2) * m_yeardiff(t_all) + p73_fraction(t_all-1);
+  );
+
+** Remove equally the values from sm_fix_SSP2 (we want the construction wood demand to only start after sm_fix_SSP2)
+loop(t_all$(m_year(t_all)=sm_fix_SSP2),
+  p73_fraction_sm_fix = p73_fraction(t_all);
+  );
+p73_fraction(t_all) = p73_fraction(t_all) - p73_fraction_sm_fix;
+** Set negative values to 0
+p73_fraction(t_all)$(p73_fraction(t_all)<0) = 0;
+** Set values after 2100 to values from 2100
+p73_fraction(t_all)$(m_year(t_all)>2100) = p73_fraction("y2100");
+
+** In case using demand from Churkina et al. 2020
+if(s73_expansion = 0,
+  p73_demand_constr_wood(t_all,i) = f73_construction_wood_demand(t_all,i,"%c09_pop_scenario%","%c73_build_demand%");
+  p73_demand_constr_wood(t_all,i)$(m_year(t_all)<=sm_fix_SSP2) = f73_construction_wood_demand("y2025",i,"%c09_pop_scenario%","BAU");
+  );
+
+** In case using simple assumption for construction wood demand (based on industrial_roundwood demand)
+if(s73_expansion > 0,
+  p73_demand_constr_wood(t_all,i) = pm_demand_ext(t_all,i,"wood") * p73_fraction(t_all);
+  );
+
+** Adjust industrial roundwood demand (construction wood demand is added on top)
+pm_demand_ext(t_all,i,"wood") = pm_demand_ext(t_all,i,"wood") + p73_demand_constr_wood(t_all,i);
+** Keep demand after 2100 constant
+pm_demand_ext(t_all,i,kforestry)$(m_year(t_all)>2100) = pm_demand_ext("y2100",i,kforestry);
+** Calculate global demand
+p73_glo_wood(t_all,kforestry) = sum(i,pm_demand_ext(t_all,i,kforestry));
