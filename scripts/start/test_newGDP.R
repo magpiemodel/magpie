@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # -------------------------------------------------------------
-# description: default run with new yield realization and data
+# description: test new gdp
 # ------------------------------------------------------------
 
 library(gms)
@@ -16,6 +16,7 @@ source("config/default.cfg")
 cfg$title   = paste0("GDPupdate_old")
 
 start_run(cfg=cfg)
+
 cfg$force_download <- TRUE
 cfg$input <- c(cellular = "rev333_h12_80bd3d6f_cellularmagpie_c200_IPSL-CM6A-LR-ssp126_lpjml-066f36d1.tgz",
          regional = "rev333_h12_magpie_debug.tgz",
@@ -29,4 +30,3 @@ cfg$input <- c(cellular = "rev333_h12_80bd3d6f_cellularmagpie_c200_IPSL-CM6A-LR-
 cfg$title   = paste0("GDPupdate_new")
 
 start_run(cfg=cfg)
-
