@@ -9,21 +9,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+
+### added
+
+### removed
+
+### fixed
+
+## [4.3.5] - 2021-09-02
+
+### changed
 - **13_tc** added switch to ignore historic tau patterns in historic time steps (new default)
 - **16_demand** Moved most of cropping related set definitions (k, kve, kcr) from **16_demand** to **14_yield**
-- **38_factor_costs** Realization `sticky_feb18` extended to differentiate capital requirements between regions and their specific development status (GDP) in each time step of the magpie run. The changes in the `sticky` realization also include an additional switch so it can be operated as `dynamic` (change of each region capital share at each time step) or `free` (capital shares equal to zero and equivalent to the `fixed_per_ton_mar18` realization).
+- **32_foresty** Added option to choose a rotation length calculation criteria
 - **35_natveg** Calculation of land protection policies revised and moved from presolve.gms to preloop.gms
+- **38_factor_costs** Realization `sticky_feb18` extended to differentiate capital requirements between regions and their specific development status (GDP) in each time step of the magpie run. The changes in the `sticky` realization also include an additional switch so it can be operated as `dynamic` (change of each region capital share at each time step) or `free` (capital shares equal to zero and equivalent to the `fixed_per_ton_mar18` realization). Bugfix in the yearly update of the variable input requirements. Addition of the time dimension and clean up of names of parameters used in the realization. Removal of the management factor (this factor was not being used, it was being cancelled out in previous calculations). Correction of the costs, they are given in 05USDppp.
 - **39_landconversion** lower costs for expansion of forestry land
 - **58_peatland** Peatland area is initialized in 1995 based on levels for the year 2015, and hold fixed depending on `s58_fix_peatland`. This provides a better proxy for peatland area and associated GHG emissions for the historic period, which where assumed zero in previous versions.
 - **80_optimization** **nlp_par** parallelizes now on superregional level `h` instead of regional level `i` as before.
+- **script** Added forestry run script which used LPJmL addon
 - **script** New standard for cluster to region mapping (rds-files) is used in all scripts. If old spam files are provided by input data, rds-mapping file is created.
-- **script** updated test run script
+- **script** updated test run script. Update of the sticky run script.
 - **start scripts** improved function for GAMS set creation from R and outsourced it to package `gms`
 - **inputs** Changed file format from cs2 to cs2b for cellular input files with a single data column
 - **scenario_config** added RCPs as columns for use with setSceanrio function. This required the addition of "gms$" in the 1st column.
 
 
 ### added
+- **73_timber** Added construction wood demand scenarios based on Churkina et al. 2020
+- **script(s)** Added scripts to replicate runs for Mishra et al. 2021 (in review : https://doi.org/10.5194/gmd-2021-76)
 - **13_tc** Added new interfaces for tau factor of the previous time step (`pcm_tau`)
 - **14_yield** Added new realization `managementcalib_aug19` that is able to calibrate yield data coming from uncalibrated crop models (e.g. LPJmL yields for unlimited N supply). The yield calibration is either a purely multipicative factor or is limited to additive change in case of a underestimated FAO yield by the initial crop model yields (based on the switch `s14_limit_calib`). For pastures spillover of crop yield increases due to technological change from the previous time step are allowed and can be scaled using `s14_yld_past_switch`.
 - **20_processing** Added new almost identical realization that excludes a calibration of the oil crop demand for oils (Note: old realization can be removed, when old yield realizations are deleted).
@@ -35,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **38_factor_costs** Added scaling factors for improving model run time
 - **39_landconversion** new realization `devstate` in which global land conversion costs are scaled with regional development state (0-1)
 - **41_area_equipped_for_irrigation** Added switch for using different input data including new LUH2v2 consistent initialisation pattern.
+- **41_area_equipped_for_irrigation** Added scalar for depreciation rate that depreciates certain area in every timestep, defined by switch in config.
 - **58_peatland** Added option for one-time and recurring costs of peatland degradation (USD05MER per ha)
 - **calibration run** has two new features: 1. Upper bound to cropland factor can be added (`crop_calib_max`). 2. Best calibration factor (factor with the lowest divergence) can be picked individually for each regions based on all calibration factors calculated during the calibration run iteration (`best_calib`).
 - **disaggregation** Added new disaggregation script that is in line with new crop realisation and can account for cropland availabilty on grid level during disaggregation (see `interpolateAvlCroplandWeighted()` in package `luscale` for further details).
@@ -275,7 +290,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.3.4...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.3.5...develop
+[4.3.5]: https://github.com/magpiemodel/magpie/compare/v4.3.4...v4.3.5
 [4.3.4]: https://github.com/magpiemodel/magpie/compare/v4.3.3...v4.3.4
 [4.3.3]: https://github.com/magpiemodel/magpie/compare/v4.3.2...v4.3.3
 [4.3.2]: https://github.com/magpiemodel/magpie/compare/v4.3.1...v4.3.2

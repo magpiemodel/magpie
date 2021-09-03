@@ -38,6 +38,7 @@ cfg$gms$crop                         <- "endo_apr21"
 cfg$gms$factor_costs                 <- "sticky_feb18"
 cfg$gms$c38_sticky_mode              <- "free" 
 cfg$gms$landconversion               <- "devstate"
+cfg$gms$s39_cost_establish_crop_max  <- "15000"
 cfg$gms$c41_initial_irrigation_area  <- "LUH2v2"
 cfg$gms$s80_optfile                  <- 1
 cfg                                  <- setScenario(cfg,"cc")
