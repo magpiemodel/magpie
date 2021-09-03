@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: Forestry simulations
+# description: Forestry + LPJmL addon
 # ----------------------------------------------------------
 
 ######################################
@@ -23,8 +23,8 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "AUG04"
-cat(paste0("FFBH and WDPA runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+identifier_flag = "SEP01"
+cat(paste0("LPJaddon runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 all_configs <- list()
@@ -42,7 +42,7 @@ for(c73_wood_scen in c("default")){
           for(pol_scen in c("NPI")){
               source("config/default.cfg")
 
-              #source("scripts/start/extra/lpjml_addon.R")
+              source("scripts/start/extra/lpjml_addon.R")
 
               cfg$gms$c52_carbon_scenario  <- "nocc"
               cfg$gms$c59_som_scenario  <- "nocc"
@@ -58,9 +58,9 @@ for(c73_wood_scen in c("default")){
                 if(cfg$gms$c21_trade_liberalization=="l909090r808080")    trade_flag="DefTrade"
                 if(cfg$gms$c21_trade_liberalization=="l908080r807070")    trade_flag="LibTrade"
 
-                for (c73_build_demand in c("BAU","10pc","50pc","90pc")) {
+                for (c73_build_demand in c("BAU")) {
 
-                  for(c35_protect_scenario in c("FF_BH","WDPA")){
+                  for(c35_protect_scenario in c("WDPA")){
 
                     for(s73_expansion in c(0)){
 
@@ -93,6 +93,8 @@ for(c73_wood_scen in c("default")){
                         pol_flg = "Mitigation"
                       }
 
+                      cfg$gms$s14_yld_past_switch <- 0
+
                       cfg$title   = paste0(identifier_flag,"_",c73_build_demand,"_",gsub(pattern="_",replacement="",x=c35_protect_scenario))
                       cfg$output  = c("extra/timestep_duration")
 
@@ -100,7 +102,7 @@ for(c73_wood_scen in c("default")){
                       all_configs[[cfg$title]] <- cfg
                       #cfg$gms$s80_optfile <- 1
                       cfg$results_folder = "output/:title:"
-                      start_run(cfg,codeCheck=FALSE)
+                      #start_run(cfg,codeCheck=FALSE)
                     }
                   }
                 }

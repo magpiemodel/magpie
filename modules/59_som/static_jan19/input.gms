@@ -14,6 +14,11 @@ $setglobal c59_som_scenario  nocc
 *             nocc      (no climate change)
 *             nocc_hist (no climate change after year defined by sm_fix_cc)
 
+* Exogenous nr release through som loss (only in static realization)
+$setglobal c59_exo_scen  constant
+*   options:   constant  (constant from 2020)
+*              fadeout_2050  (fading out till 2050)
+
 parameters f59_topsoilc_density(t_all,j) LPJ topsoil carbon density for natural vegetation (tC per ha)
 /
 $ondelim
@@ -31,4 +36,10 @@ $ondelim
 $include "./modules/59_som/static_jan19/input/cshare_released.cs2b"
 $offdelim
 /
+;
+
+table f59_som_exogenous(t_all,i,exo_scen59) Nr released through changing soil organic matter
+$ondelim
+$include "./modules/59_som/static_jan19/input/f59_som_exogenous.cs3"
+$offdelim
 ;

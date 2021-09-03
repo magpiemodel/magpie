@@ -20,18 +20,16 @@
 *' handles the production of two timber products i.e., wood and woodfuel from
 *' plantation forests while still accounting for afforestation policies. New plantations
 *' are also established in the simulation step to account for future timber demand.
-*' This module also calculates the rotation lengths before the solve loop by equating
-*' Instantaneous Growth Rates (IGR) and interest rate `pm_interest` based on
-*' @amacher2009economics. We have to make assumptions regarding the rotation lengths
-*' to be used for establishment and harvesting decisions. For establishment we just
-*' use the calculated rotations either based on a Single Rotation-Period Model or
-*' based on Faustamnn rotations according to the switch `s32_faustmann_rotation`.
-*' For harvesting we assume that land owners stick to their establishment decision,
+*' This module also calculates the rotation lengths before the solve loop by
+*' maximizing current annual increment (CAI) based on @amacher2009economics. This rotation
+*' length calculation decision can also be changed to maximization of mean annual increment (MAI)
+*' or equating instantaneous growth rate (IGR) with interest rate. Rotation lengths
+*' calculated by maximization of CAI are empirically closer to economically optimal Faustmann
+*' rotation lengths (see @amacher2009economics).
+*' For harvesting decisions we assume that land owners stick to their establishment decision,
 *' e.g. if a plantation has been established with a rotation length of 30 years
 *' it will be harvested after 30 years, even so the rotation length in the prevailing
 *' time step, used for establishment, is shorter or longer.
-*'   
-*' ![Calculation of rotation lengths using interest rate and vegetation Carbon growth functions based on single rotation model](rotation_length.png){ width=100% }
 
 *' @limitations Rotation lengths for timber plantations are not endogenous.
 
