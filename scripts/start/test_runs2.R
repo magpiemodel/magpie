@@ -21,28 +21,28 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "PEAT" # choose a meaningful flag.
+cfg$info$flag <- "FLAG" # choose a meaningful flag.
 cfg$info$user <- Sys.info()[["user"]] # Grab user name
 
 cfg$output <- c("rds_report") # Only run rds_report after model run
+cfg$results_folder <- "output/:title:"
 
 # support function to create standardized title
 .title <- function(...) return(paste(cfg$info$flag, ..., sep="_"))
 
-# start a run with default settings
+# start a run with old default settings
 cfg$title <- .title("NPI_Old")
-cfg$gms$peatland  <- "off"
-cfg$gms$s56_peatland_policy <- 0
+#example: cfg$gms$peatland  <- "off"
 start_run(cfg, codeCheck = FALSE)
 
+# start a run with new default settings
 cfg$title <- .title("NPI_New")
-cfg$gms$peatland  <- "on"
-cfg$gms$s56_peatland_policy <- 1
+#example: cfg$gms$peatland  <- "on"
 start_run(cfg, codeCheck = FALSE)
 
+# start a run with new default settings + Bioenerg/GHG prices
 cfg$title <- .title("POL_New")
-cfg$gms$peatland  <- "on"
-cfg$gms$s56_peatland_policy <- 1
+#example: cfg$gms$peatland  <- "on"
 cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
 cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg600"
 start_run(cfg, codeCheck = FALSE)
