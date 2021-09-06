@@ -16,6 +16,10 @@ equations
  q51_emissions_indirect_n2o(i,emis_source_n51)     estimates various emission types X from volatilisation and leaching  (Mt X-N)
 ;
 
+parameters
+  i51_ef_n_soil(t,i,n_pollutants_direct,emis_source_n_cropsoils51) emission factors for nitrogen emissions from cropland soils
+;
+
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  oq51_emissions_inorg_fert(t,i,n_pollutants_direct,type) estimates various emission types X from inorganic fertilizer before technical mitigation (Mt X-N)
