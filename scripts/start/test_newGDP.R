@@ -13,20 +13,19 @@ library(gms)
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
-cfg$title   = paste0("GDPupdate_old")
+cfg$title   = paste0("GDPupdate3_old")
 
 start_run(cfg=cfg)
 
 cfg$force_download <- TRUE
 cfg$input <- c(cellular = "rev333_h12_80bd3d6f_cellularmagpie_c200_IPSL-CM6A-LR-ssp126_lpjml-066f36d1.tgz",
          regional = "rev333_h12_magpie_debug.tgz",
-         validation = "rev4.58_h12_validation.tgz",
-         calibration = "calibration_H12_c200_23Feb21.tgz",
-         additional = "additional_data_rev4.04.tgz",
-         patch = "patch_land_iso.tgz",
-         patch2 = "gmd-2021-76_patch.tgz")
+         validation  = "rev4.63_h12_validation.tgz",
+         additional  = "additional_data_rev4.04.tgz",
+         calibration = "calibration_H12_sticky_feb18_free_31Aug21.tgz")
 
 
-cfg$title   = paste0("GDPupdate_new")
+cfg$recalibrate = TRUE
+cfg$title   = paste0("GDPupdate3_new")
 
 start_run(cfg=cfg)
