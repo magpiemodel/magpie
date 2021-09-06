@@ -24,7 +24,6 @@ source("scripts/start_functions.R")
 
 #start MAgPIE run
 source("config/default.cfg")
-source("scripts/start/extra/lpjml_addon.R")
 
 #cfg$force_download <- TRUE
 
