@@ -50,6 +50,7 @@ if (cfg$gms$crop=="endo_apr21"){
     land_ini_hr[which(land_ini_hr < 0,arr.ind = T)] <- 0
   }
   
+  # account for country-specific set-aside shares in post-processing
   iso <- readGDX(gdx, "iso")
   set_aside_iso <- readGDX(gdx,"policy_countries30")
   set_aside_select <- readGDX(gdx, "s30_set_aside_shr")
