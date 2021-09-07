@@ -49,6 +49,14 @@ if (cfg$gms$crop=="endo_apr21"){
     warning(paste0("Negative values in inital high resolution dataset detected and set to 0. Check the file ",land_hr_file))
     land_ini_hr[which(land_ini_hr < 0,arr.ind = T)] <- 0
   }
+  
+  iso <- readGDX(gdx, "iso")
+  set_aside_iso <- readGDX(gdx,"policy_countries30")
+  set_aside_select <- readGDX(gdx, "s30_set_aside_shr")
+  set_aside_noselect <- readGDX(gdx, "s30_set_aside_shr_noselect")
+  set_aside_shr <- new.magpie(iso, fill = set_aside_noselect)
+  set_aside_shr[set_aside_iso,,] <- set_aside_select
+  
   avl_cropland_hr <- file.path(outputdir, "avl_cropland_0.5.mz")       # available cropland (at high resolution)
   marginal_land <- cfg$gms$c30_marginal_land                      # marginal land scenario
   set_aside_shr <- cfg$gms$s30_set_aside_shr                      # set aside share (default: 0)
