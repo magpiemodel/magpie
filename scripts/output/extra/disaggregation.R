@@ -59,7 +59,6 @@ if (cfg$gms$crop=="endo_apr21"){
   
   avl_cropland_hr <- file.path(outputdir, "avl_cropland_0.5.mz")       # available cropland (at high resolution)
   marginal_land <- cfg$gms$c30_marginal_land                      # marginal land scenario
-  set_aside_shr <- cfg$gms$s30_set_aside_shr                      # set aside share (default: 0)
   target_year <- cfg$gms$c30_set_aside_target                     # target year of set aside policy (default: "none")
   set_aside_fader  <- readGDX(gdx,"f30_set_aside_fader", format="first_found")[,,target_year]
 
