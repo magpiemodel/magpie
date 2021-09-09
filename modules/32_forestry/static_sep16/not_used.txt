@@ -16,5 +16,4 @@ pm_demand_forestry_future, par, not used
 pm_timber_yield_initial, par, not used
 im_plantedclass_ac, par, not used
 sm_wood_density, scalar, not used
-vm_prod_forestry, var, not used
 p32_plantation_contribution, par, not used

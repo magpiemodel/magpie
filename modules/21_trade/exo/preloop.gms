@@ -5,12 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-table f21_trade_balance(t_all,i,kall) trade balance of positive exports and negative imports (mio. tDM per yr)
-$ondelim
-$include "./modules/21_trade/input/f21_trade_balance.cs3"
-$offdelim;
-
-table f21_self_suff(t_all,h,kall) Superregional self-sufficiency rates (1)
-$ondelim
-$include "./modules/21_trade/input/f21_trade_self_suff.cs3"
-$offdelim;
+** Save self sufficiency values as a interface parameter needed in forestry module
+pm_selfsuff_ext(t_ext,h,kforestry) = f21_self_suff("y2150",h,kforestry);
+pm_selfsuff_ext(t_all,h,kforestry) = f21_self_suff(t_all,h,kforestry);
