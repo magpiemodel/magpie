@@ -15,7 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** output/extra/disaggregation.R updated to account for country-specific set-aside shares in post-processing
 
 ### added
-
+- **21_trade** Missing interface parameter for failing exo realization runs
+- **32_foresty** Missing interface variable declaration for static realization runs
+- **35_natveg** Missing interface variable declaration for static realization runs
 - **59_som** exogenous pathway for vm_nr_som via f59_som_exogenous
 
 ### removed
