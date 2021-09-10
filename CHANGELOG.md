@@ -16,12 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### added
 - **21_trade** Missing interface parameter for failing exo realization runs
-- **32_foresty** Missing interface variable declaration for static realization runs
-- **35_natveg** Missing interface variable declaration for static realization runs
 - **59_som** exogenous pathway for vm_nr_som via f59_som_exogenous
 
 ### removed
-
+- **32_foresty** Removed static realization
+- **35_natveg** Removed static realization
 - **scripts** lpjml_addon script is removed and all calls within dependend starting scripts
 
 ### fixed
