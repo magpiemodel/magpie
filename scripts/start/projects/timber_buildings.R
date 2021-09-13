@@ -23,7 +23,7 @@ source("scripts/start_functions.R")
 log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
-identifier_flag = "NS01"
+identifier_flag = "NS02"
 cat(paste0("FFBH and WDPA runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
@@ -51,7 +51,7 @@ for(c73_wood_scen in c("default")){
 
               cfg = setScenario(cfg,c(ssp,pol_scen,scen))
 
-              for(c21_trade_liberalization in c("l909090r808080")) {
+              for(c21_trade_liberalization in c("globalized")) {
 
                 cfg$gms$c21_trade_liberalization <- c21_trade_liberalization
 
