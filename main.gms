@@ -145,53 +145,53 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
+*
 * Used data set: rev4.63_h12_a3fb0fc7_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-066f36d1.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
+* md5sum: 1a7eea74b8c08c00b4cf5f39dffa3c33
+* Repository: /p/projects/rd3mod/inputdata/output
+*
 * Used data set: rev4.63_h12_magpie.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
+* md5sum: a5ba6fe0882b4ebffca17c62b2bb1003
+* Repository: /p/projects/rd3mod/inputdata/output
+*
 * Used data set: rev4.63_h12_validation.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
+* md5sum: 6201d53e19e25120ca331f7f25737a9f
+* Repository: /p/projects/rd3mod/inputdata/output
+*
 * Used data set: additional_data_rev4.04.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
+*
 * Used data set: calibration_H12_sticky_feb18_free_31Aug21.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/calibration
-* 
+* md5sum: 34756a91caac9be3fea4f61cee5feff4
+* Repository: /p/projects/landuse/data/input/calibration
+*
 * Low resolution: c200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *     7   23    9    6    1   41   25    6   13   12   37   20
-* 
+*
 * Regionscode: 62eff8f7
-* 
+*
 * Regions data revision: 4.63
-* 
+*
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
 * * Revision: 4.63
-* 
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
 * * Regionscode: 62eff8f7
 * * Call: do.call(functiononly, args)
-* 
-* 
-* Last modification (input data): Thu Sep 09 11:14:02 2021
-* 
+*
+*
+* Last modification (input data): Fri Sep  3 12:39:06 2021
+*
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
