@@ -27,6 +27,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** lpjml_addon script is removed and all calls within dependend starting scripts
 
 ### fixed
+- **80_optimization** fixed compilation error in "nlp_par" realization
+
+
 
 ## [4.3.5] - 2021-09-02
 
