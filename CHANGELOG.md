@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** output/extra/disaggregation.R updated to account for country-specific set-aside shares in post-processing
 - **09_drivers** Update sets in drivers to include new SDP and Ariadne GDP and Pop scenarios
 - **38_factor_costs** Units corrected from USD05ppp to USD05MER
-- **21_trade** In the exo realization, equations corrected to be consistent with the mapping between superg h and regions i.
+- **21_trade** In the exo realization, equations corrected to be consistent with the mapping between supreg h and regions i.
 
 
 ### added
