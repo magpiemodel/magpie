@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **config** Update default configuration to new input data (especially cellular inputs) including all module realization updates (14_yield, 22_processing, 30_crop, 38_factor_costs, 39_landconversion). Moreover, climate impatcs (cc options for biophysical inputs) are activiated as default. New best_calib calibration routine is activated as default.
 - **scripts** output/extra/disaggregation.R updated to account for country-specific set-aside shares in post-processing
 - **09_drivers** Update sets in drivers to include new SDP and Ariadne GDP and Pop scenarios
+- **38_factor_costs** Units corrected from USD05ppp to USD05MER
+- **21_trade** In the exo realization, equations corrected to be consistent with the mapping between superg h and regions i.
 
 
 ### added
