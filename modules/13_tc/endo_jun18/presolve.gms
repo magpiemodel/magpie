@@ -8,15 +8,15 @@
 
 pc13_land(i) = sum(cell(i,j),pcm_land(j,"crop"));
 
-if (sum(sameas(t_past,t),1) = 1,
-	vm_tau.lo(i) =    f13_tau_historical(t,i);
+if (sum(sameas(t_past,t),1) = 1 AND s13_ignore_tau_historical = 0,
+	vm_tau.lo(h) =    f13_tau_historical(t,h);
 else
-	vm_tau.lo(i) =    pc13_tau(i);
+	vm_tau.lo(h) =    pcm_tau(h);
 );
 
-	vm_tau.up(i) =  2*pc13_tau(i);
+	vm_tau.up(h) =  2*pcm_tau(h);
 
 * educated guess for vm_tau.l:
-	vm_tau.l(i) = pc13_tau(i)*(1+pc13_tcguess(i))**m_yeardiff(t);
+	vm_tau.l(h) = pcm_tau(h)*(1+pc13_tcguess(h))**m_yeardiff(t);
 
 	vm_tech_cost.up(i) = 10e9;

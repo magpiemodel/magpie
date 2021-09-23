@@ -13,6 +13,7 @@
 *'
 
 *####################### R SECTION START (PHASES) ##############################
+$Ifi "%phase%" == "sets" $include "./modules/41_area_equipped_for_irrigation/static/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/41_area_equipped_for_irrigation/static/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/41_area_equipped_for_irrigation/static/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/41_area_equipped_for_irrigation/static/equations.gms"

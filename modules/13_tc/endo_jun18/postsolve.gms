@@ -8,29 +8,29 @@
 * Overall TC cost for the current timestep
 
 if((ord(t)>1),
- pc13_tcguess(i) = (vm_tau.l(i)/pc13_tau(i))**(1/m_yeardiff(t)) - 1;
+ pc13_tcguess(h) = (vm_tau.l(h)/pcm_tau(h))**(1/m_yeardiff(t)) - 1;
 );
 
-pc13_tau(i) = vm_tau.l(i);
+pcm_tau(h) = vm_tau.l(h);
 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
- ov_tau(t,i,"marginal")         = vm_tau.m(i);
+ ov_tau(t,h,"marginal")         = vm_tau.m(h);
  ov_tech_cost(t,i,"marginal")   = vm_tech_cost.m(i);
  ov13_cost_tc(t,i,"marginal")   = v13_cost_tc.m(i);
  oq13_tech_cost(t,i,"marginal") = q13_tech_cost.m(i);
  oq13_cost_tc(t,i,"marginal")   = q13_cost_tc.m(i);
- ov_tau(t,i,"level")            = vm_tau.l(i);
+ ov_tau(t,h,"level")            = vm_tau.l(h);
  ov_tech_cost(t,i,"level")      = vm_tech_cost.l(i);
  ov13_cost_tc(t,i,"level")      = v13_cost_tc.l(i);
  oq13_tech_cost(t,i,"level")    = q13_tech_cost.l(i);
  oq13_cost_tc(t,i,"level")      = q13_cost_tc.l(i);
- ov_tau(t,i,"upper")            = vm_tau.up(i);
+ ov_tau(t,h,"upper")            = vm_tau.up(h);
  ov_tech_cost(t,i,"upper")      = vm_tech_cost.up(i);
  ov13_cost_tc(t,i,"upper")      = v13_cost_tc.up(i);
  oq13_tech_cost(t,i,"upper")    = q13_tech_cost.up(i);
  oq13_cost_tc(t,i,"upper")      = q13_cost_tc.up(i);
- ov_tau(t,i,"lower")            = vm_tau.lo(i);
+ ov_tau(t,h,"lower")            = vm_tau.lo(h);
  ov_tech_cost(t,i,"lower")      = vm_tech_cost.lo(i);
  ov13_cost_tc(t,i,"lower")      = v13_cost_tc.lo(i);
  oq13_tech_cost(t,i,"lower")    = q13_tech_cost.lo(i);
