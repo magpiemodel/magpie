@@ -14,8 +14,8 @@ $else
   abort "c80_nlp_solver setting not supported in nlp_apr17 realization!";
 $endif
 
-p80_counter(i) = 0;
-p80_modelstat(t,i) = 1;
+p80_counter(h) = 0;
+p80_modelstat(t,h) = 1;
 
 *** solver settings
 
@@ -44,7 +44,7 @@ j2(j) = no;
 loop(h,
   h2(h) = yes;
 	i2(i) = yes$supreg(h,i);
-	j2(j) = yes$cell(i2,j);
+  loop(i2, j2(j) = yes$cell(i2,j));
 	solve magpie USING nlp MINIMIZING vm_cost_glo ;
 *	display j2;
 *	display i2;
@@ -64,7 +64,7 @@ repeat
 		  p80_modelstat(t,h) = magpie.modelstat;
       h2(h) = yes;
       i2(i) = yes$supreg(h,i);
-      j2(j) = yes$cell(i2,j);
+      loop(i2, j2(j) = yes$cell(i2,j));
       display h2;
       display magpie.modelstat;
 		  display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
@@ -95,10 +95,10 @@ repeat
     );
   );
   display$readyCollect(p80_handle) 'Problem waiting for next instance to complete';
-  until card(p80_handle) = 0 OR smax(i, p80_counter(h)) >= s80_maxiter;
+  until card(p80_handle) = 0 OR smax(h, p80_counter(h)) >= s80_maxiter;
   execerror = 0;
 
-  if (smax(i,p80_modelstat(t,h)) > 2 and smax(i,p80_modelstat(t,h)) ne 7,
+  if (smax(h,p80_modelstat(t,h)) > 2 and smax(h,p80_modelstat(t,h)) ne 7,
     Execute_Unload "fulldata.gdx";
     abort "no feasible solution found!";
   );

@@ -5,11 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-sets
-   type32 plantation type
-   / aff, ndc, plant /
-   
-	aff_effect biochemical and local biophysical effect of afforestation on climate
-   / bgc, bph /
-;
-*** EOF sets.gms ***
+** Save self sufficiency values as a interface parameter needed in forestry module
+pm_selfsuff_ext(t_ext,h,kforestry) = f21_self_suff("y2150",h,kforestry);
+pm_selfsuff_ext(t_all,h,kforestry) = f21_self_suff(t_all,h,kforestry);
