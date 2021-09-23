@@ -21,7 +21,7 @@ options(error=function()traceback(2))
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdir <- lucode2::path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
+  outputdir <- file.path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
   #Define arguments that can be read from command line
   lucode2::readArgs("outputdir")
 }
@@ -37,10 +37,10 @@ if(file.exists(combined)) file.rename(combined,"output/inms.bak")
 for (i in 1:length(outputdir)) {
   print(paste("Processing",outputdir[i]))
   #gdx file
-  rep<-path(outputdir[i],"report_inms.mif")
+  rep<-file.path(outputdir[i],"report_inms.mif")
   if(file.exists(rep)) {
     #get scenario name
-    load(path(outputdir[i],"config.Rdata"))
+    load(file.path(outputdir[i],"config.Rdata"))
     scen <- cfg$title
     #read-in reporting file
     a <- read.report(rep,as.list = FALSE)

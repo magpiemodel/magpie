@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description
-*' In the global_static_aug18 realization, per hectare land conversion costs are separated into 
+*' In this realization, per hectare land conversion costs are separated into 
 *' costs for expansion of cropland, pasture and forestry (establishment costs) and 
 *' costs for clearing of primary forest, secondary forest and other natural land (clearing costs).
 *' By default, we assume a global cost factor of 8000 USD/ha (static over time) 

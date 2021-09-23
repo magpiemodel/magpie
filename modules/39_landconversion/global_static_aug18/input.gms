@@ -6,8 +6,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
- s39_cost_establish_crop   Cost for establishing new land use (USD05MER per hectare)    /8000/
- s39_cost_establish_past   Cost for establishing new land use (USD05MER per hectare)    /8000/
- s39_cost_establish_forestry   Cost for establishing new land use (USD05MER per hectare)    /1000/
- s39_cost_clearing    Clearing costs linked to removed biomass (USD05MER per ton C)  /0/
+ s39_cost_establish_crop   	   Cost for cropland land expansion (USD05MER per hectare)   / 8000 /
+ s39_cost_establish_past   	   Cost for pasture land expansion (USD05MER per hectare)    / 8000 /
+ s39_cost_establish_forestry   Cost for foresty land expansion (USD05MER per hectare)    / 1000 /
+ s39_cost_clearing    Clearing costs linked to removed biomass (USD05MER per ton C)  / 0 /
 ;

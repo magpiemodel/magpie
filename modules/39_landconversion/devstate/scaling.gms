@@ -5,11 +5,4 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-sets
-   type32 plantation type
-   / aff, ndc, plant /
-   
-	aff_effect biochemical and local biophysical effect of afforestation on climate
-   / bgc, bph /
-;
-*** EOF sets.gms ***
+vm_cost_landcon.scale(j,land) = 10e3;

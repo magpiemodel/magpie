@@ -6,11 +6,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' Capital update from the last investment
-p38_capital_immobile_t(j,kcr) = p38_capital_immobile_t(j,kcr) + v38_investment_immobile.l(j,kcr);
-p38_capital_immobile(t+1,j,kcr) =p38_capital_immobile_t(j,kcr);
+p38_capital_immobile(t+1,j,kcr) = p38_capital_immobile(t,j,kcr) + v38_investment_immobile.l(j,kcr);
 
-p38_capital_mobile_t(j) = p38_capital_mobile_t(j) + v38_investment_mobile.l(j);
-p38_capital_mobile(t+1,j) =p38_capital_mobile_t(j);
+p38_capital_mobile(t+1,j) = p38_capital_mobile(t,j) + v38_investment_mobile.l(j);
 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
