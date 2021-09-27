@@ -12,8 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **51_nitrogen** parameter change in rescaled_jan21, now including regionalized climate-dependent leaching factors
 - **config** Update default configuration to new input data (especially cellular inputs) including all module realization updates (14_yield, 22_processing, 30_crop, 38_factor_costs, 39_landconversion). Moreover, climate impatcs (cc options for biophysical inputs) are activiated as default. New best_calib calibration routine is activated as default.
+- **config** peatland module on by default (cfg$gms$peatland <- "on")
 - **scripts** output/extra/disaggregation.R updated to account for country-specific set-aside shares in post-processing
 - **09_drivers** Update sets in drivers to include new SDP and Ariadne GDP and Pop scenarios
+- **21_trade** In the exo and off realization, equations corrected to be consistent with the mapping between supreg h and regions i.
 
 
 ### added
@@ -26,6 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** lpjml_addon script is removed and all calls within dependend starting scripts
 
 ### fixed
+- **80_optimization** fixed compilation error in "nlp_par" realization
+
+
 
 ## [4.3.5] - 2021-09-02
 
