@@ -7,10 +7,19 @@
 
 *' @equations
 
-*' Land transition matrix for peatland area
-
+*' Land transition matrix for peatland area. 
+*' The sum of current peatland area defined in `v58_lu_transitions` has to equal the sum of 
+*' peatland area in the previous time step (`pc58_peatland_man` + `pc58_peatland_intact`).
+*' The two balancing variables `v58_balance_positive` and `v58_balance_negative` are needed 
+*' to avoid technical infeasibilities due to small differences in accuracy between 
+*' variables and parameters in GAMS. The use of `v58_balance_positive` and 
+*' `v58_balance_negative` is minimized by putting a high cost factor on these variables 
+*' (`q58_peatland_cost_full`). In practice, `v58_balance_positive` and 
+*' `v58_balance_negative`should deviate from zero only in exceptional cases. 
+ 
  q58_transition_matrix(j2) ..
-	sum((from58,to58), v58_lu_transitions(j2,from58,to58)) =e=
+	sum((from58,to58), v58_lu_transitions(j2,from58,to58)) 
+	+ v58_balance_positive(j2) - v58_balance_negative(j2) =e=
 	sum((man58,land58), pc58_peatland_man(j2,man58,land58)) + pc58_peatland_intact(j2);
 
  q58_transition_to(j2,to58) ..
@@ -75,8 +84,11 @@
 
 *' Costs for peatland degradation and rewetting
 
+ q58_peatland_cost_full(j2) ..
+	vm_peatland_cost(j2) =e= v58_peatland_cost(j2) + (v58_balance_positive(j2) + v58_balance_negative(j2)) * s58_cost_balance;
+
  q58_peatland_cost(j2) ..
-	vm_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2) 
+	v58_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2) 
 							+ sum(land58, v58_peatland_man(j2,"rewet",land58)) * sum(ct, i58_cost_rewet_recur(ct))
 							+ sum((degrad58,land58), v58_peatland_man(j2,degrad58,land58)) * sum(ct, i58_cost_degrad_recur(ct));
 							

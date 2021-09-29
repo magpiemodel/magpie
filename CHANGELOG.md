@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### fixed
 - **80_optimization** fixed compilation error in "nlp_par" realization
+- **58_peatland** fixed rare infeasibility in "on" realization
 
 
 
