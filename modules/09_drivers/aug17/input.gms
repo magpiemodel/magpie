@@ -6,12 +6,12 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 $setglobal c09_pop_scenario  SSP2
-*   options:   SSP: "SSP1", "SSP2", "SP3", "SSP4", "SSP5", "SSP2Ariadne"
+*   options:   SSP: "SSP1", "SSP2", "SP3", "SSP4", "SSP5", "SSP2EU"
 *              SDP: "SDP" "SDP", "SDP_EI",	"SDP_MC",	"SDP_RC"
 *             SRES: "a1", "a2", "b1", "b2"
 
 $setglobal c09_gdp_scenario  SSP2
-*   options:   SSP: "SSP1", "SSP2", "SSP3", "SSP4", "SSP5",  "SSP2Ariadne"
+*   options:   SSP: "SSP1", "SSP2", "SSP3", "SSP4", "SSP5",  "SSP2EU"
 *              SDP: "SDP" "SDP", "SDP_EI",	"SDP_MC",	"SDP_RC"
 *             SRES: "a1", "a2", "b1", "b2"
 

@@ -8,12 +8,12 @@ sets
 
    pop_scen09  Population scenario
        / SSP1, SSP2, SSP3, SSP4, SSP5,
-         SDP, SDP_EI,	SDP_MC,	SDP_RC,	SSP2Ariadne,
+         SDP, SDP_EI,	SDP_MC,	SDP_RC,	SSP2EU,
          a1, a2, b1, b2 /
 
    gdp_scen09  GDP scenario
        / SSP1, SSP2, SSP3, SSP4, SSP5,
-         SDP, SDP_EI,	SDP_MC,	SDP_RC,	SSP2Ariadne,
+         SDP, SDP_EI,	SDP_MC,	SDP_RC,	SSP2EU,
          a1,a2,b1,b2 /
 
    age Population age groups
