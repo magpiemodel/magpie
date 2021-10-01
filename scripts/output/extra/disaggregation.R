@@ -127,8 +127,8 @@ area_shr_hr <- .dissagcrop(gdx, land_hr, map=map_file)
           message="Write outputs cell.cropara_share")
 
 
-.cropsplit <- function(area_shr_hr, land_hr, land_hr_split_file,
-                       land_hr_shr_split_file) {
+.split <- function(area_shr_hr, land_hr, land_hr_split_file,
+                       land_hr_shr_split_file,map) {
   land_hr <- land_hr[,getYears(area_shr_hr),]
   area_hr <- area_shr_hr*dimSums(land_hr, dim=3)
 
@@ -149,6 +149,28 @@ area_shr_hr <- .dissagcrop(gdx, land_hr, map=map_file)
   land_hr <- land_hr[,,"crop",invert=TRUE]
   #combine land_hr with crop_hr.
   land_hr <- mbind(crop_hr,land_hr)
+  
+  # split "forestry" into timber plantations, pre-scribed afforestation (NPi/NDC) and endogenous afforestation (CO2 price driven)
+  message("Disaggregation Forestry")
+  farea     <- dimSums(landForestry(gdx, level="cell"),dim="ac")
+  farea_shr <- farea/(dimSums(farea,dim=3) + 10^-10)
+  # calculate forestry area as share of total cell area
+  farea_hr <- madrat::toolAggregate(farea_shr, map, to="cell") * setNames(land_hr[,,"forestry"],NULL)
+  #check
+  if (abs(sum(dimSums(farea_hr,dim=3)-setNames(land_hr[,,"forestry"],NULL),na.rm=T)) > 0.1) warning("large Difference in crop disaggregation detected!")
+  #rename
+  df <- data.frame(matrix(nrow=3,ncol=2))
+  names(df) <- c("internal","output")
+  df[1,] <- c("aff","PlantedForest_Afforestation")
+  df[2,] <- c("ndc","PlantedForest_NPiNDC")
+  df[3,] <- c("plant","PlantedForest_Timber")
+  farea_hr <- madrat::toolAggregate(farea_hr, df, from="internal", to="output",dim = 3.1)
+  
+  #drop forestry
+  land_hr <- land_hr[,,"forestry",invert=TRUE]
+  #combine land_hr with farea_hr
+  land_hr <- mbind(land_hr,farea_hr)
+  
   #write landpool
   .tmpwrite(land_hr, land_hr_split_file,
             comment="unit: Mha per grid-cell",
@@ -159,4 +181,4 @@ area_shr_hr <- .dissagcrop(gdx, land_hr, map=map_file)
             message="Write cropsplit land area share")
 }
 
-.cropsplit(area_shr_hr, land_hr, land_hr_split_file,land_hr_shr_split_file)
+.split(area_shr_hr, land_hr, land_hr_split_file,land_hr_shr_split_file,map=map_file)
