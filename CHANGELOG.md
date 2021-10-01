@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **config** Update default configuration to new input data (especially cellular inputs) including all module realization updates (14_yield, 22_processing, 30_crop, 38_factor_costs, 39_landconversion). Moreover, climate impatcs (cc options for biophysical inputs) are activiated as default. New best_calib calibration routine is activated as default.
 - **config** peatland module on by default (cfg$gms$peatland <- "on")
 - **scripts** output/extra/disaggregation.R updated to account for country-specific set-aside shares in post-processing
+- **scripts** output/extra/disaggregation.R updated to account for sub-categories of "forestry"
+- **scripts** output/extra/disaggregation_transitions_.R moved to deprecated folder
+- **scripts** output/extra/disaggregation_cropsplit.R moved to deprecated folder
 - **09_drivers** Update sets in drivers to include new SDP and Ariadne GDP and Pop scenarios
 - **21_trade** In the exo and off realization, equations corrected to be consistent with the mapping between supreg h and regions i.
 
