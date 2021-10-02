@@ -11,7 +11,8 @@
 *' The first equation defines the total amount of land to be constant over time.
 
  q10_transition_matrix(j2) ..
-	sum((land_from10,land_to10), v10_lu_transitions(j2,land_from10,land_to10)) =e=
+	sum((land_from10,land_to10), v10_lu_transitions(j2,land_from10,land_to10))
+	+ v10_balance_positive(j2) - v10_balance_negative(j2) =e=
 	sum(land, pcm_land(j2,land));
 
  q10_transition_to(j2,land_to10) ..
@@ -50,7 +51,8 @@ q10_croplandexpansion(j2,land_from10) ..
 
  q10_cost(j2) ..
         vm_cost_land_transition(j2) =e=
-        sum(land, vm_landexpansion(j2,land) + v10_landreduction(j2,land)) * 1;
+        sum(land, vm_landexpansion(j2,land) + v10_landreduction(j2,land)) * 1
+        + (v10_balance_positive(j2) + v10_balance_negative(j2)) * s10_cost_balance;
 
 *' The gross changes in land are calculated based on land expansion, land
 *' contraction and land changes from within the modules [35_natveg]
