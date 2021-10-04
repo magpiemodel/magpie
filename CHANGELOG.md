@@ -16,8 +16,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **config** update default setting for 2nd generation bioenergy demand and GHG prices
 - **scripts** output/extra/disaggregation.R updated to account for country-specific set-aside shares in post-processing
 - **scripts** output/extra/disaggregation.R updated to account for sub-categories of "forestry"
-- **scripts** output/extra/disaggregation_transitions_.R moved to deprecated folder
-- **scripts** output/extra/disaggregation_cropsplit.R moved to deprecated folder
 - **09_drivers** Update sets in drivers to include new SDP and Ariadne GDP and Pop scenarios
 - **21_trade** In the exo and off realization, equations corrected to be consistent with the mapping between supreg h and regions i.
 
@@ -31,6 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **32_foresty** Removed static realization
 - **35_natveg** Removed static realization
 - **scripts** lpjml_addon script is removed and all calls within dependend starting scripts
+- **scripts** output/extra/disaggregation_transitions_.R moved to deprecated folder
+- **scripts** output/extra/disaggregation_cropsplit.R moved to deprecated folder
 
 ### fixed
 - **80_optimization** fixed compilation error in "nlp_par" realization
