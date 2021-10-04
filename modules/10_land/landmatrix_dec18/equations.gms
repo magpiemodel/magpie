@@ -9,6 +9,12 @@
 
 *' The following three equations describe the general structure of the land transition matrix.
 *' The first equation defines the total amount of land to be constant over time.
+*' The two balancing variables `v10_balance_positive` and `v10_balance_negative` are needed 
+*' to avoid technical infeasibilities due to small differences in accuracy between 
+*' variables and parameters in GAMS. The use of `v10_balance_positive` and 
+*' `v10_balance_negative` is minimized by putting a high cost factor on these variables 
+*' (`q10_cost`). In practice, `v10_balance_positive` and 
+*' `v10_balance_negative`should deviate from zero only in exceptional cases. 
 
  q10_transition_matrix(j2) ..
 	sum((land_from10,land_to10), v10_lu_transitions(j2,land_from10,land_to10))
