@@ -34,5 +34,4 @@ $Ifi "%phase%" == "sets" $include "./modules/37_labor_prod/exo/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/37_labor_prod/exo/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/37_labor_prod/exo/input.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/37_labor_prod/exo/preloop.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/37_labor_prod/exo/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

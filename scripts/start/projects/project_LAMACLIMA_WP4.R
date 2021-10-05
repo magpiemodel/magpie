@@ -28,7 +28,7 @@ cfg$input["calibration"] <- "calibration_H12_sticky_feb18_dynamic_01Sep21.tgz"
 #https://www.oecd-ilibrary.org/docserver/9789264243439-8-en.pdf?expires=1620650049&id=id&accname=guest&checksum=7D894DDBF0C64FCC776D3AE6014FA9F0
 oecd_countries <- "AUS,AUT,BEL,CAN,CZE,DNK,EST,FIN,FRA,DEU,GRC,HUN,ISL,IRL,ITA,JPN,LUX,NLD,NOR,POL,PRT,SVK,ESP,SWE,CHE,TUR,GBR,USA"
 
-cfg$gms$labor_prod <- "on"
+cfg$gms$labor_prod <- "exo"
 cfg$gms$c37_labour_rcp <- "rcp119"
 cfg$gms$c37_labour_metric <- "ISO"
 cfg$gms$c37_labour_intensity <- "400W"
@@ -52,7 +52,6 @@ cfg$qos <- "priority"
 #Scenario 1, based on SDP
 cfg$title <- paste(prefix,"Sustainability",sep="_")
 cfg <- setScenario(cfg,c("SDP","NDC","ForestryEndo"))
-cfg$gms$c37_labour_switch <- "cc"
 cfg$gms$c35_protect_scenario <- "FF_BH"
 cfg$gms$c35_protect_scenario_noselect <- "FF_BH"
 cfg$gms$policy_countries35  <- all_iso_countries
@@ -103,7 +102,6 @@ start_run(cfg,codeCheck=FALSE)
 #Scenario 2, based on SSP4
 cfg$title <- paste(prefix,"Inequality",sep="_")
 cfg <- setScenario(cfg,c("SSP4","NDC","ForestryEndo"))
-cfg$gms$c37_labour_switch <- "cc"
 cfg$gms$c35_protect_scenario <- "FF_BH"
 cfg$gms$c35_protect_scenario_noselect <- "WDPA"
 cfg$gms$policy_countries35  <- oecd_countries

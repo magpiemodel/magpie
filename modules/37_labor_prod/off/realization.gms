@@ -15,5 +15,4 @@
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "declarations" $include "./modules/37_labor_prod/off/declarations.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/37_labor_prod/off/preloop.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/37_labor_prod/off/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
