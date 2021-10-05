@@ -13,32 +13,46 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-#https://www.oecd-ilibrary.org/docserver/9789264243439-8-en.pdf?expires=1620650049&id=id&accname=guest&checksum=7D894DDBF0C64FCC776D3AE6014FA9F0
-oecd_countries <- "AUS,AUT,BEL,CAN,CHL,CZE,DNK,EST,FIN,FRA,DEU,GRC,HUN,ISL,IRL,ISR,ITA,JPN,KOR,LUX,MEX,NLD,NOR,POL,PRT,SVK,ESP,SWE,CHE,TUR,GBR,USA"
 
 library(gms)
 library(magclass)
+library(gdx)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
 #start MAgPIE run
 source("config/default.cfg")
+cfg$input["calibration"] <- "calibration_H12_sticky_feb18_dynamic_01Sep21.tgz"
 
-#cfg$force_download <- TRUE
+#https://www.oecd-ilibrary.org/docserver/9789264243439-8-en.pdf?expires=1620650049&id=id&accname=guest&checksum=7D894DDBF0C64FCC776D3AE6014FA9F0
+oecd_countries <- "AUS,AUT,BEL,CAN,CZE,DNK,EST,FIN,FRA,DEU,GRC,HUN,ISL,IRL,ITA,JPN,LUX,NLD,NOR,POL,PRT,SVK,ESP,SWE,CHE,TUR,GBR,USA"
+
+cfg$gms$labor_prod <- "on"
+cfg$gms$c37_labour_rcp <- "rcp119"
+cfg$gms$c37_labour_metric <- "ISO"
+cfg$gms$c37_labour_intensity <- "400W"
+cfg$gms$c37_labour_uncertainty <- "ensmean"
+cfg$gms$factor_costs <- "sticky_labour_aug21"
+cfg$gms$c38_sticky_mode <- "dynamic"
 
 cfg$results_folder <- "output/:title:"
-cfg$output <- c("rds_report","extra/disaggregation","extra/disaggregation_transitions")
+cfg$output <- c("rds_report","extra/disaggregation_LUH2")
+cfg$files2export$start <- c(cfg$files2export$start,"input/avl_land_full_t_0.5.mz")
 
-prefix <- "LAMA20"
-# cfg$gms$s80_optfile <- 1
-# cfg$gms$s80_maxiter <- 30
+prefix <- "LAMA64"
+cfg$force_replace <- TRUE
 
-#https://miro.com/app/board/o9J_lVys8js=/
+cfg$gms$s80_optfile <- 1
+cfg$gms$s80_maxiter <- 30
+cfg$gms$s35_forest_damage <- 2
+
+cfg$qos <- "priority"
 
 #Scenario 1, based on SDP
-cfg$title <- paste(prefix,"SSP1-1p5deg",sep="_")
+cfg$title <- paste(prefix,"Sustainability",sep="_")
 cfg <- setScenario(cfg,c("SDP","NDC","ForestryEndo"))
+cfg$gms$c37_labour_switch <- "cc"
 cfg$gms$c35_protect_scenario <- "FF_BH"
 cfg$gms$c35_protect_scenario_noselect <- "FF_BH"
 cfg$gms$policy_countries35  <- all_iso_countries
@@ -50,7 +64,7 @@ cfg$gms$c35_forest_damage_end <- "by2030"
 #cfg$gms$s35_secdf_distribution <- 0
 #1.5 degree policy
 cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"
-cfg$gms$c56_pollutant_prices_noselect <- "R2M41-SSP2-NPi"
+cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-NPi"
 cfg$gms$policy_countries56  <- all_iso_countries
 cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"
 #default food scenario
@@ -67,16 +81,29 @@ cfg$gms$scen_countries15  <- all_iso_countries
 #AFF
 cfg$gms$s32_planing_horizon <- 50
 cfg$gms$s32_aff_plantation <- 0
+cfg$gms$s32_aff_bii_coeff <- 0
 cfg$gms$s32_max_aff_area <- 500
 cfg$gms$c32_aff_mask <- "noboreal"
 #EFP
 cfg$gms$c42_env_flow_policy <- "on"
 cfg$gms$EFP_countries  <- all_iso_countries
+#AWM
+cfg$gms$c50_scen_neff <- "neff75_80_starty2010"
+cfg$gms$c50_scen_neff_noselect <- "neff75_80_starty2010"
+cfg$gms$cropneff_countries  <- all_iso_countries
+#Fert
+cfg$gms$c55_scen_conf <- "ssp1"
+cfg$gms$c55_scen_conf_noselect <- "ssp1"
+cfg$gms$scen_countries55  <- all_iso_countries
+#irrig
+cfg$gms$s42_irrig_eff_scenario <- 3
+cfg$gms$c60_biodem_level <- 0 #global demand
 start_run(cfg,codeCheck=FALSE)
 
 #Scenario 2, based on SSP4
-cfg$title <- paste(prefix,"SSP4-1p5deg",sep="_")
+cfg$title <- paste(prefix,"Inequality",sep="_")
 cfg <- setScenario(cfg,c("SSP4","NDC","ForestryEndo"))
+cfg$gms$c37_labour_switch <- "cc"
 cfg$gms$c35_protect_scenario <- "FF_BH"
 cfg$gms$c35_protect_scenario_noselect <- "WDPA"
 cfg$gms$policy_countries35  <- oecd_countries
@@ -95,20 +122,36 @@ cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"
 cfg$gms$c15_food_scenario <- "SSP4"
 cfg$gms$c15_food_scenario_noselect <- "SSP4"
 #exo diet and waste
-cfg$gms$c15_exo_scen_targetyear <- "y2050"
-cfg$gms$s15_exo_diet <- 1
-cfg$gms$c15_EAT_scen <- "FLX"
-cfg$gms$c15_kcal_scen <- "healthy_BMI"
-cfg$gms$s15_exo_waste <- 1
-cfg$gms$s15_waste_scen <- 1.2
-cfg$gms$scen_countries15  <- oecd_countries
+# cfg$gms$c15_exo_scen_targetyear <- "y2050"
+# cfg$gms$s15_exo_diet <- 1
+# cfg$gms$c15_EAT_scen <- "FLX"
+# cfg$gms$c15_kcal_scen <- "healthy_BMI"
+# cfg$gms$s15_exo_waste <- 1
+# cfg$gms$s15_waste_scen <- 1.2
+# cfg$gms$scen_countries15  <- oecd_countries
+cfg$gms$s15_exo_diet <- 0
+cfg$gms$s15_exo_waste <- 0
+cfg$gms$scen_countries15 <- all_iso_countries
 #AFF
 cfg$gms$s32_planing_horizon <- 50
-cfg$gms$s32_aff_plantation <- 1
+cfg$gms$s32_aff_plantation <- 0
+cfg$gms$s32_aff_bii_coeff <- 0
 cfg$gms$s32_max_aff_area <- Inf
 cfg$gms$c32_aff_mask <- "noboreal"
 #EFP
 cfg$gms$c42_env_flow_policy <- "on"
 cfg$gms$EFP_countries  <- oecd_countries
+#AWM
+cfg$gms$c50_scen_neff <- "neff75_80_starty2010"
+cfg$gms$c50_scen_neff_noselect <- "neff65_70_starty2010"
+cfg$gms$cropneff_countries  <- oecd_countries
+#Fert
+cfg$gms$c55_scen_conf <- "ssp1"
+cfg$gms$c55_scen_conf_noselect <- "ssp4"
+cfg$gms$scen_countries55  <- oecd_countries
+#irrig
+cfg$gms$s42_irrig_eff_scenario <- 3
+cfg$gms$c60_biodem_level <- 0 #global demand
 start_run(cfg,codeCheck=FALSE)
+
 

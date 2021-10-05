@@ -7,3 +7,4 @@
 name,type,reason
 vm_tau,input,questionnaire
 vm_area,input,questionnaire
+pm_labor_prod,input,not used

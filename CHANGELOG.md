@@ -25,6 +25,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **21_trade** Missing interface parameter for failing exo realization runs
 - **59_som** exogenous pathway for vm_nr_som via f59_som_exogenous
 - **config** Addition of a new scenario column (Tland) in scenario_config.csv
+- **37_labor_prod** Module for labour productivity with two realizations: off (default) and exo (exogenous climate change impacts on labour productivity)
+- **38_factor_costs_** Added realization sticky_labour_aug21, which is similar to sticky_aug18 but accounts for changes in labour productivity provided by 37_labor_prod
 
 ### removed
 - **32_foresty** Removed static realization
