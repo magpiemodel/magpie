@@ -5,5 +5,5 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-pm_labor_prod(t,j) = f37_labor_prod_cc(t,j,"%c37_labour_rcp%","%c37_labour_metric%","%c37_labour_intensity%","%c37_labour_uncertainty%");
+pm_labor_prod(t,j) = f37_labor_prod(t,j,"%c37_labour_rcp%","%c37_labour_metric%","%c37_labour_intensity%","%c37_labour_uncertainty%");
 *pm_labor_prod(t,j)$(pm_labor_prod_cc(t,j) = 0) = 1;
