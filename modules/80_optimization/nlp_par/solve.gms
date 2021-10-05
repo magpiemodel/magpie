@@ -57,12 +57,9 @@ loop(h,
 *collection loop
 repeat
   loop(h$p80_handle(h),
-    if(handleStatus(p80_handle(h)) = 2,
-      magpie.handle = p80_handle(h);
-      execute_loadhandle magpie;
+  if(handlecollect(p80_handle(h)),
 		  magpie.modelstat$(magpie.modelstat=NA) = 13;
-		  p80_modelstat(t,h) = magpie.modelstat;
-      h2(h) = yes;
+		  h2(h) = yes;
       i2(i) = yes$supreg(h,i);
       loop(i2, j2(j) = yes$cell(i2,j));
       display h2;
@@ -70,6 +67,7 @@ repeat
 		  display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
       if (magpie.modelstat <= 2,
 		    p80_handle(h) = 0;
+        p80_modelstat(t,h) = magpie.modelstat;
 		  else
 		    if(magpie.modelstat = 13,
           display "WARNING: Modelstat 13 | retry without Conopt4 pre-processing";
@@ -78,10 +76,12 @@ repeat
 	        magpie.optfile = s80_optfile ;
 		      p80_handle(h)  = magpie.handle;
 		      p80_counter(h) = p80_counter(h) + 1;
+          p80_modelstat(t,h) = magpie.modelstat;
 		    else
 		      solve magpie USING nlp MINIMIZING vm_cost_glo ;
 		      p80_handle(h)  = magpie.handle;
 		      p80_counter(h) = p80_counter(h) + 1;
+          p80_modelstat(t,h) = magpie.modelstat;
 		    );
       );
 		  execerror = 0;

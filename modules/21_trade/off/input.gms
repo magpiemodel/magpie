@@ -5,12 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-scalars
-    s80_maxiter  maximal solve iterations if modelstat is > 2 (1)         / 100 /
-		s80_optfile  switch to use specfied solver settings (1)                / 1 /
-		s80_num_nonopt_allowed 	number of allowed non-optimal variables (1)  / Inf /
-;
+table f21_trade_balance(t_all,h,kall) trade balance of positive exports and negative imports (mio. tDM per yr)
+$ondelim
+$include "./modules/21_trade/input/f21_trade_balance.cs3"
+$offdelim;
 
-$setglobal c80_nlp_solver  conopt4
-*   options:   (conopt3):         conopt3
-*              (conopt4):         conopt4
+table f21_self_suff(t_all,h,kall) Superregional self-sufficiency rates (1)
+$ondelim
+$include "./modules/21_trade/input/f21_trade_self_suff.cs3"
+$offdelim;
