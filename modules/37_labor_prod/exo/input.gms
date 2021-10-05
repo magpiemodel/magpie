@@ -15,4 +15,4 @@ $ondelim
 $include "./modules/37_labor_prod/exo/input/f37_labourprodimpact.cs3"
 $offdelim
 ;
-m_fillmissingyears(f37_labor_prod_cc,"j,rcp37,metric37,intensity37,uncertainty37");
+m_fillmissingyears(f37_labor_prod,"j,rcp37,metric37,intensity37,uncertainty37");

@@ -8,16 +8,3 @@
 parameters
  pm_labor_prod(t,j) Percentage of total labour productivity remaining after accouting for climate change impacts (1)
 ;
-
-*#################### R SECTION START (OUTPUT DECLARATIONS) ####################
-parameters
- ov_labor_prod(t,j,type)   Labor prod (index)
- ov37_adapt_irr(t,j,type)  blub
- ov37_adapt_fore(t,j,type) blub
- ov37_adapt_harv(t,j,type) blub
- oq37_labor_prod(t,j,type) blub
- oq37_adapt_irr(t,j,type)  blub
- oq37_adapt_fore(t,j,type) blub
- oq37_adapt_harv(t,j,type) blub
-;
-*##################### R SECTION END (OUTPUT DECLARATIONS) #####################
