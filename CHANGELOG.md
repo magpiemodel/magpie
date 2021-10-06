@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** output/extra/disaggregation.R updated to account for country-specific set-aside shares in post-processing
 - **09_drivers** Update sets in drivers to include new SDP and Ariadne GDP and Pop scenarios
 - **21_trade** In the exo and off realization, equations corrected to be consistent with the mapping between supreg h and regions i.
+- **inputs** Update of GDP and population scenarios based upon recent historic data from WDI (complemented with growth rates given by the James2019 dataset), short term projections until 2025 from IMF (for GDPpc) and WB (for pop) and reconverge to the original SSP GDPpc levels by 2100.
 
 
 ### added
@@ -27,6 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **32_foresty** Removed static realization
 - **35_natveg** Removed static realization
 - **scripts** lpjml_addon script is removed and all calls within dependend starting scripts
+- **14_yield** Removed `biocorrect` and `dynamic_aug18` realizations
+- **20_processing** Removed `substitution_dec18` realization
+- **30_crop** Removed `endo_jun13` realization
 
 ### fixed
 - **80_optimization** fixed compilation error in "nlp_par" realization
