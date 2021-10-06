@@ -18,7 +18,7 @@
  q38_ces_prodfun(j2,kcr) ..
   i38_scale(j2,kcr) * 
   (i38_sh(j2,kcr)*sum((ct,cell(i2,j2),mobil38),p38_capital_need(ct,i2,kcr,mobil38))**(-s38_ep) + 
-  (1 - i38_sh(j2,kcr))*(pm_labor_prod(j2) * v38_labour_need(j2,kcr))**(-s38_ep))**(-1/s38_ep)
+  (1 - i38_sh(j2,kcr))*(sum(ct, pm_labor_prod(ct,j2)) * v38_labour_need(j2,kcr))**(-s38_ep))**(-1/s38_ep)
   =e= 1 ;
 
 *' Variable labour costs (without capital): The labour costs are calculated based on the 
