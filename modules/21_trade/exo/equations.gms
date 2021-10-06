@@ -7,7 +7,7 @@
 
 q21_notrade(h2,kall)..
  sum(supreg(h2,i2),vm_prod_reg(i2,kall)) =g= sum(supreg(h2,i2), vm_supply(i2,kall))
- + sum(ct,f21_trade_balance(ct,h2,kall))) - v21_manna_from_heaven(h2,kall);
+ + sum(ct,f21_trade_balance(ct,h2,kall)) - v21_manna_from_heaven(h2,kall);
 
 
 *' The regional production must be bigger than the regional demand plus exports

@@ -5,18 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-scalars
-  s10_cost_balance Artificial cost for balance variable (USD05MER per ha) / 1000000 /
-;
-
-table f10_land(t_ini10,j,land) Different land type areas (mio. ha)
+table f21_trade_balance(t_all,h,kall) trade balance of positive exports and negative imports (mio. tDM per yr)
 $ondelim
-$include "./modules/10_land/input/avl_land_t.cs3"
-$offdelim
-;
+$include "./modules/21_trade/input/f21_trade_balance.cs3"
+$offdelim;
 
-table fm_luh2_side_layers(j,luh2_side_layers10) luh2 side layers (grid cell share)
+table f21_self_suff(t_all,h,kall) Superregional self-sufficiency rates (1)
 $ondelim
-$include "./modules/10_land/input/luh2_side_layers.cs3"
-$offdelim
-;
+$include "./modules/21_trade/input/f21_trade_self_suff.cs3"
+$offdelim;
