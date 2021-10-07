@@ -10,7 +10,7 @@ $setglobal c37_labour_metric  ISO
 $setglobal c37_labour_intensity  400W
 $setglobal c37_labour_uncertainty  ensmean
 
-table f37_labor_prod(t_all,j,rcp37,metric37,intensity37,uncertainty37) Percentage of total labour productivity remaining after accouting for climate change impacts (1)
+table f37_labor_prod(t_all,j,rcp37,metric37,intensity37,uncertainty37) labour productivity factor (1)
 $ondelim
 $include "./modules/37_labor_prod/exo/input/f37_labourprodimpact.cs3"
 $offdelim

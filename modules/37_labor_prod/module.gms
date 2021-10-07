@@ -8,10 +8,8 @@
 
 *' @title Labour productivity
 
-*' @description This module provides a labour productivity factor (0-1), 
+*' @description This module provides a labour productivity factor, 
 *' which reflects the efficiency of labour under changing environmental conditions (1 = no change).
-*' The labour productivity factor is currently only considered in the sticky_labour_aug21 
-*' realizations of the [38_factor_costs] module.
 
 *' @authors Florian Humpenöder, Michael Windisch
 

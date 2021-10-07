@@ -6,11 +6,5 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- pm_labor_prod(t,j) Percentage of total labour productivity remaining after accouting for climate change impacts (1)
+ pm_labor_prod(t,j) labour productivity factor (1)
 ;
-
-*#################### R SECTION START (OUTPUT DECLARATIONS) ####################
-parameters
- ov_labor_prod(t,j,type) Labor prod (index)
-;
-*##################### R SECTION END (OUTPUT DECLARATIONS) #####################
