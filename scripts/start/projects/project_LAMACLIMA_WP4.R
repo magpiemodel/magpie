@@ -30,7 +30,10 @@ cfg$force_replace <- TRUE
 cfg$input["calibration"] <- "calibration_H12_sticky_feb18_dynamic_01Sep21.tgz"
 
 #https://www.oecd-ilibrary.org/docserver/9789264243439-8-en.pdf?expires=1620650049&id=id&accname=guest&checksum=7D894DDBF0C64FCC776D3AE6014FA9F0
-oecd90andEU <- "AUS,AUT,BEL,CAN,CZE,DNK,EST,FIN,FRA,DEU,GRC,HUN,ISL,IRL,ITA,JPN,LUX,NLD,NOR,POL,PRT,SVK,ESP,SWE,CHE,TUR,GBR,USA"
+oecd90andEU <- "ALB,AUS,AUT,BEL,BIH,BGR,CAN,CYP,CZE,DNK,EST,FIN,FRA,
+				DEU,GRC,HUN,HRV,ISL,IRL,ITA,JPN,LUX,LVA,LTU,MLT,MNE,
+				NLD,NOR,NZL,POL,PRT,ROU,SRB,SVK,SVN,ESP,SWE,CHE,MKD,TUR,
+				GBR,USA"
 
 cfg$gms$labor_prod <- "exo"
 cfg$gms$c37_labor_rcp <- "rcp119"
