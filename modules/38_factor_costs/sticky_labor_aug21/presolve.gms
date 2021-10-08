@@ -22,18 +22,18 @@ p38_capital_need(t,i,kcr,"immobile") = f38_fac_req(kcr)  * p38_capital_cost_shar
 
 p38_croparea_start(j,kcr) = sum(w, fm_croparea("y1995",j,w,kcr));
 
-*** Variable labour costs BEGIN
+*** Variable labor costs BEGIN
 
-* set bounds for labour requirements
-v38_labour_need.lo(j,kcr) = sum(cell(i,j),p38_variable_costs(t,i,kcr));
-v38_labour_need.l(j,kcr) = sum(cell(i,j),p38_variable_costs(t,i,kcr));
-v38_labour_need.up(j,kcr) = 10 * sum(cell(i,j),p38_variable_costs(t,i,kcr));
+* set bounds for labor requirements
+v38_labor_need.lo(j,kcr) = sum(cell(i,j),p38_variable_costs(t,i,kcr));
+v38_labor_need.l(j,kcr) = sum(cell(i,j),p38_variable_costs(t,i,kcr));
+v38_labor_need.up(j,kcr) = 10 * sum(cell(i,j),p38_variable_costs(t,i,kcr));
 
 * update CES parameters
-i38_sh(j,kcr) = sum(cell(i,j), (pm_interest(t,i) * sum(mobil38, p38_capital_need(t,i,kcr,mobil38))**(1 + s38_ep)) / (pm_interest(t,i) * sum(mobil38, p38_capital_need(t,i,kcr,mobil38))**(1 + s38_ep)  + s38_wage * v38_labour_need.l(j,kcr)**(1 + s38_ep)));
-i38_scale(j,kcr) = sum(cell(i,j), 1/([i38_sh(j,kcr) * sum(mobil38, p38_capital_need(t,i,kcr,mobil38))**(-s38_ep) + (1 - i38_sh(j,kcr)) * v38_labour_need.l(j,kcr)**(-s38_ep)]**(-1/s38_ep)));
+i38_sh(j,kcr) = sum(cell(i,j), (pm_interest(t,i) * sum(mobil38, p38_capital_need(t,i,kcr,mobil38))**(1 + s38_ep)) / (pm_interest(t,i) * sum(mobil38, p38_capital_need(t,i,kcr,mobil38))**(1 + s38_ep)  + s38_wage * v38_labor_need.l(j,kcr)**(1 + s38_ep)));
+i38_scale(j,kcr) = sum(cell(i,j), 1/([i38_sh(j,kcr) * sum(mobil38, p38_capital_need(t,i,kcr,mobil38))**(-s38_ep) + (1 - i38_sh(j,kcr)) * v38_labor_need.l(j,kcr)**(-s38_ep)]**(-1/s38_ep)));
 
-*** Variable labour costs END
+*** Variable labor costs END
 
 if (ord(t) = 1,
 

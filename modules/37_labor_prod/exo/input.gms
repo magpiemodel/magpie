@@ -5,12 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c37_labour_rcp  rcp119
-$setglobal c37_labour_metric  ISO
-$setglobal c37_labour_intensity  400W
-$setglobal c37_labour_uncertainty  ensmean
+$setglobal c37_labor_rcp  rcp119
+$setglobal c37_labor_metric  ISO
+$setglobal c37_labor_intensity  400W
+$setglobal c37_labor_uncertainty  ensmean
 
-table f37_labor_prod(t_all,j,rcp37,metric37,intensity37,uncertainty37) labour productivity factor (1)
+table f37_labor_prod(t_all,j,rcp37,metric37,intensity37,uncertainty37) labor productivity factor (1)
 $ondelim
 $include "./modules/37_labor_prod/exo/input/f37_labourprodimpact.cs3"
 $offdelim

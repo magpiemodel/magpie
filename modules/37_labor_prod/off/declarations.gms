@@ -6,5 +6,5 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- pm_labor_prod(t,j) labour productivity factor (1)
+ pm_labor_prod(t,j) labor productivity factor (1)
 ;

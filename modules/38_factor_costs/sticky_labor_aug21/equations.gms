@@ -9,23 +9,23 @@
 *' @equations
 
 *' Constant elasticity of substitution (CES) production function for one unit of output.
-*' The CES function accounts for capital `p38_capital_need` and labour `v38_labour_need` requirements.
-*' The efficiency of labour is affected by the labour productivity factor `vm_labor_prod`, which is 
-*' provided by the labour productivity module [37_labor_prod].
-*' The calculation of total capital and labour costs is covered by the equations `q38_cost_prod_crop` and `q38_cost_prod_inv`.
-*' The conceptual and analytical details of the CES function including the labour productivity factor are documented in @orlov_ces_2021.
+*' The CES function accounts for capital `p38_capital_need` and labor `v38_labor_need` requirements.
+*' The efficiency of labor is affected by the labor productivity factor `vm_labor_prod`, which is 
+*' provided by the labor productivity module [37_labor_prod].
+*' The calculation of total capital and labor costs is covered by the equations `q38_cost_prod_crop` and `q38_cost_prod_inv`.
+*' The conceptual and analytical details of the CES function including the labor productivity factor are documented in @orlov_ces_2021.
 
  q38_ces_prodfun(j2,kcr) ..
   i38_scale(j2,kcr) * 
   (i38_sh(j2,kcr)*sum((ct,cell(i2,j2),mobil38),p38_capital_need(ct,i2,kcr,mobil38))**(-s38_ep) + 
-  (1 - i38_sh(j2,kcr))*(sum(ct, pm_labor_prod(ct,j2)) * v38_labour_need(j2,kcr))**(-s38_ep))**(-1/s38_ep)
+  (1 - i38_sh(j2,kcr))*(sum(ct, pm_labor_prod(ct,j2)) * v38_labor_need(j2,kcr))**(-s38_ep))**(-1/s38_ep)
   =e= 1 ;
 
-*' Variable labour costs (without capital): The labour costs are calculated based on the 
+*' Variable labor costs (without capital): The labor costs are calculated based on the 
 *' requirements of the cellular production without considering capital costs.
 
 q38_cost_prod_crop(i2,kcr).. vm_cost_prod(i2,kcr)
-                              =e= sum(cell(i2,j2), vm_prod(j2,kcr) * v38_labour_need(j2,kcr) * s38_wage)
+                              =e= sum(cell(i2,j2), vm_prod(j2,kcr) * v38_labor_need(j2,kcr) * s38_wage)
                                 ;
 
 *' Investment costs: Investment are the summation of investment in mobile and immobile capital. The costs are annuitized,

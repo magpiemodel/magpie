@@ -7,10 +7,10 @@
 
 *' @description This realization is based on sticky_feb18, but in addition includes a 
 *' CES production function, which 
-*' accounts for climate change impacts on labour productivity provided by [37_labor_prod]. 
+*' accounts for climate change impacts on labor productivity provided by [37_labor_prod]. 
 *' The main goal of this realization is to improve crop patterns at different spatial
 *' scales. Specifically, the goal is reached by reducing capital relocation flexibility between
-*' crop types. In the "sticky" realization, the factor costs are separated into variable labour cost and
+*' crop types. In the "sticky" realization, the factor costs are separated into variable labor cost and
 *' capital investment cost. Then, capital is further divided into immobile and mobile, where
 *' mobility is defined between crops. In this way, changes in cropland are favored in locations
 *' with existing capital stocks. 
@@ -22,12 +22,12 @@
 
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/38_factor_costs/sticky_labour_aug21/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/38_factor_costs/sticky_labour_aug21/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/38_factor_costs/sticky_labour_aug21/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/38_factor_costs/sticky_labour_aug21/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/38_factor_costs/sticky_labour_aug21/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/38_factor_costs/sticky_labour_aug21/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/38_factor_costs/sticky_labour_aug21/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/38_factor_costs/sticky_labour_aug21/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/38_factor_costs/sticky_labor_aug21/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/38_factor_costs/sticky_labor_aug21/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/38_factor_costs/sticky_labor_aug21/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/38_factor_costs/sticky_labor_aug21/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/38_factor_costs/sticky_labor_aug21/scaling.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/38_factor_costs/sticky_labor_aug21/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/38_factor_costs/sticky_labor_aug21/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/38_factor_costs/sticky_labor_aug21/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

@@ -5,10 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In this realization labour productivity is fixed to a value of 1, 
+*' @description In this realization labor productivity is fixed to a value of 1, 
 *' which implies no change over time. 
 *'
-*' @limitations The impacts of changing environmental conditions on labour productivity 
+*' @limitations The impacts of changing environmental conditions on labor productivity 
 *' are not accounted for.
 
 

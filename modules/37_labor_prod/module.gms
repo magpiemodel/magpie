@@ -6,10 +6,10 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-*' @title Labour productivity
+*' @title Labor Productivity
 
-*' @description This module provides a labour productivity factor, 
-*' which reflects the efficiency of labour under changing environmental conditions (1 = no change).
+*' @description This module provides a labor productivity factor, 
+*' which reflects the efficiency of labor under changing environmental conditions (1 = no change).
 
 *' @authors Florian Humpenöder, Michael Windisch
 

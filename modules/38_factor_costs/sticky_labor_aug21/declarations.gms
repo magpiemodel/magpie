@@ -18,7 +18,7 @@ positive variables
  vm_cost_inv(i)                        Investment capital costs (mio USD05ppp  per yr)
  v38_investment_immobile(j,kcr)        Investment costs in immobile farm capital (mio USD05ppp per yr)
  v38_investment_mobile(j)              Investment costs in mobile farm capital (mio USD05ppp per yr)
- v38_labour_need(j,kcr)				   Labour required for one unit of output (hours per ton DM)
+ v38_labor_need(j,kcr)				   labor required for one unit of output (hours per ton DM)
 ;
 
 parameters
@@ -46,7 +46,7 @@ parameters
  ov_cost_inv(t,i,type)                  Investment capital costs (mio USD05ppp  per yr)
  ov38_investment_immobile(t,j,kcr,type) Investment costs in immobile farm capital (mio USD05ppp per yr)
  ov38_investment_mobile(t,j,type)       Investment costs in mobile farm capital (mio USD05ppp per yr)
- ov38_labour_need(t,j,kcr,type)         Labour required for one unit of output (hours per ton DM)
+ ov38_labor_need(t,j,kcr,type)          labor required for one unit of output (hours per ton DM)
  oq38_cost_prod_crop(t,i,kcr,type)      Regional factor input costs for plant production (mio USD05ppp)
  oq38_cost_prod_inv(t,i,type)           Regional investment costs in capital (mio USD05ppp)
  oq38_investment_immobile(t,j,kcr,type) Cellular immobile investments into farm capital   (mio USD05ppp)

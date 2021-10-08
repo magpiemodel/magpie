@@ -9,7 +9,7 @@ sets
  rcp37 climate change impact sceanrios
  		/ rcp119, rcp585 /
 
- metric37 labour productivity impact metric
+ metric37 labor productivity impact metric
  		/ ISO, HOTHAPS /
 
  intensity37 work intensity level

@@ -6,11 +6,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description This realization accounts for climate change impacts on 
-*' labour productivity, based on ESM experiments from the LAMACLIMA project 
+*' labor productivity, based on ESM experiments from the LAMACLIMA project 
 *' <https://climateanalytics.org/projects/lamaclima/>. 
-*' Heat‐induced impacts on labour productivity have been calculated using the 
-*' methodology described in @orlov_labour_2021.
-*' Heat-induced impacts on labour productivity are available for two different metrics 
+*' Heat‐induced impacts on labor productivity have been calculated using the 
+*' methodology described in @orlov_labor_2021.
+*' Heat-induced impacts on labor productivity are available for two different metrics 
 *' (HOTHAPS and ISO) and work intensity levels (300W and 400W).
 *' The Hothaps function describes the relationship between workability and the 
 *' wet bulb globe temperature (WBGT).
@@ -21,12 +21,12 @@
 *' Work intensity: 300W and 400W stand for the level of work intensity measured in 
 *' Watts (W), at which the impacts are estimated. The higher work intensity, 
 *' the stronger is the heat exposure. For instance, the impacts of heatstress 
-*' on labour productivity under 300W are less than under 400W. 
+*' on labor productivity under 300W are less than under 400W. 
 *' In previous studies, the level of work intensity in agriculture is assumed to be 400W. 
 *' However, work intensity differs by region due to different levels of mechanization. 
-*' While 400W is plausible for manual work, mechanized work is less labour intensity. 
+*' While 400W is plausible for manual work, mechanized work is less labor intensity. 
 *'
-*' @limitations Climate change impacts on labour productivity are currently only 
+*' @limitations Climate change impacts on labor productivity are currently only 
 *'				available for RCP1.9 and RCP8.5.
 
 *####################### R SECTION START (PHASES) ##############################
