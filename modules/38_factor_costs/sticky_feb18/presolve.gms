@@ -28,9 +28,9 @@ if (ord(t) = 1,
   p38_capital_immobile(t,j,kcr)    = sum(cell(i,j), p38_capital_need(t,i,kcr,"immobile")*sum(w,p38_croparea_start(j,w,kcr)*pm_yields_hist("y1995",j,kcr,w)) * sum(supreg(h,i),fm_tau1995(h)))*(1-s38_depreciation_rate);
   p38_capital_mobile(t,j)    = sum((cell(i,j),kcr), p38_capital_need(t,i,kcr,"mobile")*sum(w,p38_croparea_start(j,w,kcr)*pm_yields_hist("y1995",j,kcr,w)) * sum(supreg(h,i),fm_tau1995(h)))*(1-s38_depreciation_rate);
 
-  $ifthen "%c38_prod_init%" == "ON"
-  vm_prod.l(j,kcr)=sum(cell(i,j),sum(w,p38_croparea_start(j,w,kcr)*pm_yields_hist("y1995",j,kcr,w))* sum(supreg(h,i),fm_tau1995(h)));
-  $endif
+$ifthen "%c38_prod_init%" == "ON"
+vm_prod.l(j,kcr)=sum(cell(i,j),sum(w,p38_croparea_start(j,w,kcr)*pm_yields_hist("y1995",j,kcr,w))* sum(supreg(h,i),fm_tau1995(h)));
+$endif
 
 else
 
