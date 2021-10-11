@@ -19,9 +19,11 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$recalibrate <- TRUE
+cfg$input<- cfg$input[names(cfg$input)!="calibration"]
 cfg$title <- "calib_run"
 cfg$gms$c_timesteps <- 1
 cfg$output <- c("rds_report")
 cfg$sequential <- TRUE
+cfg$force_download <- TRUE
 start_run(cfg,codeCheck=FALSE)
 magpie4::submitCalibration("H12")
