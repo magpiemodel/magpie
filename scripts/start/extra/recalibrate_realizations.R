@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------
-# description: calculate and store new calibration factors
+# description: calculate and store new calib factors for realizations of factor costs 
 # --------------------------------------------------------
 
 library(magpie4)
