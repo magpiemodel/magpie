@@ -39,6 +39,7 @@ for(r in realizations){
 
       cfg$gms$factor_costs     <-   r
       cfg$gms$c38_sticky_mode  <-   t
+      cfg$gms$c38_prod_init    <- if(t == "free") "ON" else "OFF"
 
 
       start_run(cfg)

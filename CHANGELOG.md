@@ -16,9 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **config** update default setting for 2nd generation bioenergy demand and GHG prices
 - **scripts** output/extra/disaggregation.R updated to account for country-specific set-aside shares in post-processing
 - **scripts** output/extra/disaggregation.R updated to account for sub-categories of "forestry"
+- **scripts** Default recalibration file changed to not include default calibration file in the inputs.
+- **scripts** Added new vm_prod-initialization switch to the sticky start script.
 - **09_drivers** Update sets in drivers to include new SDP and Ariadne GDP and Pop scenarios
 - **21_trade** In the exo and off realization, equations corrected to be consistent with the mapping between supreg h and regions i. Bugfixes in trade exo and off realizations.
-- **38_factor_costs** Correction in initial capital stocks, use of cellula historical yields instead of regional, switch added to decide if initialization of vm_prod.l is needed, and 05USDppp units changed to 05USDMER
+- **38_factor_costs** Correction in initial capital stocks, use of cellular historical yields instead of regional, switch added to decide if initialization of vm_prod.l is needed, and 05USDppp units changed to 05USDMER
 - **80_optimization** Bug fixes in the nlp_par (parallel optimization) and an increase in maximum number of iterations.
 - **inputs** Update of GDP and population scenarios based upon recent historic data from WDI (complemented with growth rates given by the James2019 dataset), short term projections until 2025 from IMF (for GDPpc) and WB (for pop) and reconverge to the original SSP GDPpc levels by 2100.
 - **inputs** Update of all input data that are based on FAO, using the most up-to-date version of FAOSTAT datasets available at the date of input calculations via automated download.
@@ -28,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **59_som** exogenous pathway for vm_nr_som via f59_som_exogenous
 - **config** Addition of a new scenario column (Tland) in scenario_config.csv
 - **14_yield** parameter created to safe historical cellular yields and to be used in the sticky realization of 38_factor_costs
+- **scripts** Added calibration script to generate default calibration for different factor costs realization.
 
 ### removed
 - **32_foresty** Removed static realization
