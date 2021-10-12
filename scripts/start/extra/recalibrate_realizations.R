@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------
-# description: calculate and store new calib factors for realizations of factor costs 
+# description: calculate and store new calib factors for realizations of factor costs
 # --------------------------------------------------------
 
 library(magpie4)
@@ -39,8 +39,6 @@ for(r in realizations){
 
       cfg$gms$factor_costs     <-   r
       cfg$gms$c38_sticky_mode  <-   t
-      cfg$gms$c38_prod_init    <- if(t == "free") "ON" else "OFF"
-
 
       start_run(cfg)
       magpie4::submitCalibration(paste("H12",r,t,sep="_"))

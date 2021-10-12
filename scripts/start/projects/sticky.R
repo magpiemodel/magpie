@@ -40,7 +40,6 @@ for(cc in c("cc")){
     # Set factor costs
     cfg$gms$factor_costs     <-   "sticky_feb18"
     cfg$gms$c38_sticky_mode  <-   sm
-    cfg$gms$c38_prod_init    <- if(t == "free") "ON" else "OFF"
 
 
     #Change the results folder name
