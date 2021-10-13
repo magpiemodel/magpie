@@ -18,6 +18,7 @@ parameters
  pm_timber_yield(t,j,ac,forest_land)                     Forest growing stock (tDM per ha per yr)
  p14_growing_stock_initial(j,ac,forest_land,forest_type) Initial Forest growing stock (tDM per ha per yr)
  pm_timber_yield_initial(j,ac,forest_land)               Initial Forest yield (tDM per ha per yr)
+ pm_yields_hist(t,j,kve,w)                               Historical cellular yields calibrated to FAO regional levels (tDM per ha per yr)
  ;
 
 positive variables
