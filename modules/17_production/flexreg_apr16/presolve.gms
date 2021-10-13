@@ -8,7 +8,7 @@
 if (ord(t) = 1,
 
 $ifthen "%c17_prod_init%" == "ON"
-vm_prod.l(j,kcr)=sum(cell(i,j),sum(w,p38_croparea_start(j,w,kcr)*pm_yields_hist("y1995",j,kcr,w))* sum(supreg(h,i),fm_tau1995(h)));
+vm_prod.l(j,kcr)=sum(cell(i,j),sum(w,fm_croparea("y1995",j,w,kcr)*pm_yields_hist("y1995",j,kcr,w))* sum(supreg(h,i),fm_tau1995(h)));
 $endif
 
     );
