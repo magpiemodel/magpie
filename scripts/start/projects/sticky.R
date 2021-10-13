@@ -41,6 +41,10 @@ for(cc in c("cc")){
     cfg$gms$factor_costs     <-   "sticky_feb18"
     cfg$gms$c38_sticky_mode  <-   sm
 
+    if (sm == "dynamic"){
+    cfg$gms$c17_prod_init <- "OFF"
+    }
+
 
     #Change the results folder name
     cfg$title<-paste0("Sticky_",sm,"_",cc)

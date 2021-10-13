@@ -40,6 +40,11 @@ for(r in realizations){
       cfg$gms$factor_costs     <-   r
       cfg$gms$c38_sticky_mode  <-   t
 
+      if (t=="dynamic"){
+      cfg$gms$c17_prod_init <- "OFF"
+      }
+
+
       start_run(cfg)
       magpie4::submitCalibration(paste("H12",r,t,sep="_"))
     }
