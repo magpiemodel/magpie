@@ -11,6 +11,7 @@ $setglobal c35_protect_fadein  by2030
 $setglobal c35_ad_policy  npi
 $setglobal c35_aolc_policy  npi
 $setglobal c35_forest_damage_end  by2050
+$setglobal c35_year_of_shock 2050
 
 scalars
 s35_hvarea Flag for harvested area (0=zero 1=exognous 2=endogneous)	/ 0 /
@@ -22,7 +23,8 @@ s35_timber_harvest_cost_other        Cost for harvesting from other land (USD pe
 s35_timber_harvest_cost_primforest   Cost for harvesting from primary forest (USD per ha) / 3000/
 s35_natveg_harvest_shr Constrains the allowed wood harvest from natural vegetation (1=unconstrained) (1) /1/
 s35_secdf_distribution Flag for secdf initialization (0=all secondary forest in highest age class 1=Equal distribution among all age classes 2=Poulter distribution from MODIS satellite data) (1) / 0 /
-s35_forest_damage Damage simulation in forests (0=none 1=shifting agriculture 2= Damage from shifting agriculture is faded out by c35_forest_damage_end) / 2 /
+s35_forest_damage Damage simulation in forests (0=none 1=shifting agriculture 2= Damage from shifting agriculture is faded out by c35_forest_damage_end) / 0 /
+s35_share_lost share of forest lost in artificial year of shock (0=all forest lost 1=all forest conserved) / 0.5 /
 ;
 
 * Set-switch for countries affected by regional land protection policy

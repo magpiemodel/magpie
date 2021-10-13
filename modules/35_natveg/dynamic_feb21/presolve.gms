@@ -30,6 +30,12 @@ if(s35_forest_damage=3,
 	p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum((cell(i,j),combined_loss),f35_forest_lost_share(i,combined_loss))*m_timestep_length_forestry;
 	);
 
+if(s35_forest_damage=4,
+	if(m_year(t)=%c35_year_of_shock%,
+		p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * s35_share_lost;
+		);
+	);
+
 * Distribution of damages correctly
 pc35_secdforest(j,ac_est) = pc35_secdforest(j,ac_est) + sum(ac_sub,p35_disturbance_loss_secdf(t,j,ac_sub))/card(ac_est) + p35_disturbance_loss_primf(t,j)/card(ac_est);
 
