@@ -18,7 +18,7 @@ s38_wage Wage for labor in CES function (USD05MER per hour) / 1 /
 s38_es Elasticity of substitution in CES function (1) / 0.3 /
 ;
 
-parameter f38_fac_req(kcr) Factor requirement costs in 2005 (USD05ppp per tDM)
+parameter f38_fac_req(kcr) Factor requirement costs in 2005 (USD05MER per tDM)
 /
 $ondelim
 $include "./modules/38_factor_costs/sticky_labor_aug21/input/f38_fac_req_fao.csv"
