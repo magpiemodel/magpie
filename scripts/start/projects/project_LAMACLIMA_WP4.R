@@ -24,10 +24,18 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-prefix <- "LAMA65"
+prefix <- "LAMA66"
 cfg$force_replace <- TRUE
 
-cfg$input["calibration"] <- "calibration_H12_sticky_feb18_dynamic_01Sep21.tgz"
+cfg$gms$factor_costs <- "sticky_labor_aug21"
+cfg$gms$c38_sticky_mode <- "dynamic"
+cfg$input["calibration"] <- "calibration_H12_sticky_feb18_dynamic_13Oct21.tgz"
+
+cfg$gms$labor_prod <- "exo"
+cfg$gms$c37_labor_rcp <- "rcp119"
+cfg$gms$c37_labor_metric <- "ISO"
+cfg$gms$c37_labor_intensity <- "400W"
+cfg$gms$c37_labor_uncertainty <- "ensmean"
 
 #https://www.oecd-ilibrary.org/docserver/9789264243439-8-en.pdf?expires=1620650049&id=id&accname=guest&checksum=7D894DDBF0C64FCC776D3AE6014FA9F0
 oecd90andEU <- "ALB,AUS,AUT,BEL,BIH,BGR,CAN,CYP,CZE,DNK,EST,FIN,FRA,
@@ -35,25 +43,13 @@ oecd90andEU <- "ALB,AUS,AUT,BEL,BIH,BGR,CAN,CYP,CZE,DNK,EST,FIN,FRA,
 				NLD,NOR,NZL,POL,PRT,ROU,SRB,SVK,SVN,ESP,SWE,CHE,MKD,TUR,
 				GBR,USA"
 
-cfg$gms$labor_prod <- "exo"
-cfg$gms$c37_labor_rcp <- "rcp119"
-cfg$gms$c37_labor_metric <- "ISO"
-cfg$gms$c37_labor_intensity <- "400W"
-cfg$gms$c37_labor_uncertainty <- "ensmean"
-cfg$gms$factor_costs <- "sticky_labor_aug21"
-cfg$gms$c38_sticky_mode <- "dynamic"
-
 cfg$results_folder <- "output/:title:"
-cfg$output <- c("rds_report","extra/disaggregation_LUH2")
-cfg$files2export$start <- c(cfg$files2export$start,"input/avl_land_full_t_0.5.mz")
-
-cfg$gms$s80_optfile <- 1
-cfg$gms$s80_maxiter <- 30
-cfg$gms$s35_forest_damage <- 2
+cfg$output <- c("rds_report","extra/disaggregation","extra/disaggregation_LUH2")
+#cfg$files2export$start <- c(cfg$files2export$start,"input/avl_land_full_t_0.5.mz")
 
 cfg$qos <- "priority"
 
-#Scenario 1, based on SDP
+#Global Sustainability, based on SDP
 cfg$title <- paste(prefix,"Sustainability",sep="_")
 cfg <- setScenario(cfg,c("SDP","NDC","ForestryEndo"))
 cfg$gms$c35_protect_scenario <- "FF_BH"
@@ -103,7 +99,7 @@ cfg$gms$s42_irrig_eff_scenario <- 3
 cfg$gms$c60_biodem_level <- 0 #global demand
 start_run(cfg,codeCheck=FALSE)
 
-#Scenario 2, based on SSP4
+#Global Inequality, based on SSP4
 cfg$title <- paste(prefix,"Inequality",sep="_")
 cfg <- setScenario(cfg,c("SSP4","NDC","ForestryEndo"))
 cfg$gms$c35_protect_scenario <- "FF_BH"
@@ -124,13 +120,6 @@ cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"
 cfg$gms$c15_food_scenario <- "SSP4"
 cfg$gms$c15_food_scenario_noselect <- "SSP4"
 #exo diet and waste
-# cfg$gms$c15_exo_scen_targetyear <- "y2050"
-# cfg$gms$s15_exo_diet <- 1
-# cfg$gms$c15_EAT_scen <- "FLX"
-# cfg$gms$c15_kcal_scen <- "healthy_BMI"
-# cfg$gms$s15_exo_waste <- 1
-# cfg$gms$s15_waste_scen <- 1.2
-# cfg$gms$scen_countries15  <- oecd90andEU
 cfg$gms$s15_exo_diet <- 0
 cfg$gms$s15_exo_waste <- 0
 cfg$gms$scen_countries15 <- all_iso_countries
@@ -155,5 +144,3 @@ cfg$gms$scen_countries55  <- oecd90andEU
 cfg$gms$s42_irrig_eff_scenario <- 3
 cfg$gms$c60_biodem_level <- 0 #global demand
 start_run(cfg,codeCheck=FALSE)
-
-
