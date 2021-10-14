@@ -24,7 +24,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-prefix <- "LAMA66"
+prefix <- "LAMA67"
 cfg$force_replace <- TRUE
 
 cfg$gms$factor_costs <- "sticky_labor_aug21"
@@ -96,7 +96,7 @@ cfg$gms$c55_scen_conf_noselect <- "ssp1"
 cfg$gms$scen_countries55  <- all_iso_countries
 #irrig
 cfg$gms$s42_irrig_eff_scenario <- 3
-cfg$gms$c60_biodem_level <- 0 #global demand
+cfg$gms$c60_biodem_level <- 1
 start_run(cfg,codeCheck=FALSE)
 
 #Global Inequality, based on SSP4
@@ -113,7 +113,7 @@ cfg$gms$c35_forest_damage_end <- "by2030"
 #cfg$gms$s35_secdf_distribution <- 0
 #1.5 degree policy
 cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"
-cfg$gms$c56_pollutant_prices_noselect <- "R2M41-SSP2-NPi"
+cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-NPi"
 cfg$gms$policy_countries56  <- oecd90andEU
 cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"
 #default food scenario
@@ -142,5 +142,5 @@ cfg$gms$c55_scen_conf_noselect <- "ssp4"
 cfg$gms$scen_countries55  <- oecd90andEU
 #irrig
 cfg$gms$s42_irrig_eff_scenario <- 3
-cfg$gms$c60_biodem_level <- 0 #global demand
+cfg$gms$c60_biodem_level <- 1
 start_run(cfg,codeCheck=FALSE)
