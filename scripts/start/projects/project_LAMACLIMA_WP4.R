@@ -30,6 +30,7 @@ cfg$force_replace <- TRUE
 cfg$gms$factor_costs <- "sticky_labor"
 cfg$gms$c38_sticky_mode <- "dynamic"
 cfg$input["calibration"] <- "calibration_H12_sticky_feb18_dynamic_13Oct21.tgz"
+cfg$gms$c17_prod_init <- "off"
 
 cfg$gms$labor_prod <- "exo"
 cfg$gms$c37_labor_rcp <- "rcp119"
