@@ -18,13 +18,13 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-realizations<-c("sticky_feb18","mixed_feb17","fixed_per_ton_mar18","sticky_labor_aug21")
+realizations<-c("sticky_feb18","mixed_feb17","fixed_per_ton_mar18","sticky_labor")
 type<-NULL
 
 
 for(r in realizations){
 
-    type<-if (r=="sticky_feb18" | r=="sticky_labor_aug21") c("free","dynamic") else "_"
+    type<-if (r=="sticky_feb18" | r=="sticky_labor") c("free","dynamic") else "_"
 
     for(t in type){
 
