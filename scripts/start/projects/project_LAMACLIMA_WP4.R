@@ -24,12 +24,21 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-prefix <- "LAMA68"
+prefix <- "LAMA68_oldinput"
 cfg$force_replace <- TRUE
+
+
+cfg$input <- c(cellular    = "rev4.63_h12_a3fb0fc7_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-066f36d1.tgz",
+               regional    = "rev4.63_h12_magpie.tgz",
+               validation  = "rev4.63_h12_validation.tgz",
+               additional  = "additional_data_rev4.04.tgz",
+               calibration = "calibration_H12_sticky_feb18_free_31Aug21.tgz",
+               patch = "patch_labour_prod.tgz")
+
 
 cfg$gms$factor_costs <- "sticky_labor"
 cfg$gms$c38_sticky_mode <- "dynamic"
-cfg$input["calibration"] <- "calibration_H12_sticky_feb18_dynamic_13Oct21.tgz"
+#cfg$input["calibration"] <- "calibration_H12_sticky_feb18_dynamic_13Oct21.tgz"
 cfg$gms$c17_prod_init <- "off"
 
 cfg$gms$labor_prod <- "exo"
