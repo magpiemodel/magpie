@@ -16,6 +16,7 @@ $endif
 
 p80_counter(h) = 0;
 p80_modelstat(t,h) = 1;
+p80_resolve(h) = no;
 
 *** solver settings
 
@@ -64,10 +65,12 @@ repeat
       loop(i2, j2(j) = yes$cell(i2,j));
       display h2;
       display magpie.modelstat;
-      if(magpie.modelStat > 2 and magpie.modelStat ne 7 and p80_counter(h)>= s80_maxiter+1,
+      if(magpie.modelStat > 2 and magpie.modelStat ne 7 and p80_resolve(h),
       option AsyncSolLst=1;
       display$handlecollect(p80_handle(h)) 're-collect';
       option AsyncSolLst=0;
+      p80_resolve(h) = no;
+      p80_counter(h) = p80_counter(h) + 1;
       );
       display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
       if (magpie.modelstat <= 2,
@@ -90,6 +93,9 @@ repeat
 		      p80_counter(h) = p80_counter(h) + 1;
           p80_modelstat(t,h) = magpie.modelstat;
 		    );
+        if(magpie.modelStat > 2 and magpie.modelStat ne 7 and p80_counter(h) = s80_maxiter+1,
+          p80_resolve(h) = yes;
+          );
         );
 
       h2(h) = no;
@@ -100,7 +106,7 @@ repeat
     );
   );
   display$readyCollect(p80_handle) 'Problem waiting for next instance to complete';
-  until card(p80_handle) = 0 OR smax(h, p80_counter(h)) >= s80_maxiter+1;
+  until card(p80_handle) = 0 OR smax(h, p80_counter(h)) > s80_maxiter+1;
   execerror = 0;
 
   if (smax(h,p80_modelstat(t,h)) > 2 and smax(h,p80_modelstat(t,h)) ne 7,
