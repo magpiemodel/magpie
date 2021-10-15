@@ -11,6 +11,5 @@ fm_tau1995,input,questionnaire
 vm_area,input,questionnaire
 pm_interest,input,questionnaire
 vm_prod,input,questionnaire
-fm_croparea,input,questionnaire
 im_gdp_pc_ppp_iso,input,questionnaire
-pm_yields_hist,par,questionnaire
+pm_prod_init,par,questionnaire

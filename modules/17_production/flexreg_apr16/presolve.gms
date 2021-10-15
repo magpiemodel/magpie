@@ -5,10 +5,14 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+
+
+pm_prod_init(j,kcr)=sum(w,fm_croparea("y1995",j,w,kcr)*pm_yields_semi_calib(j,kcr,w));
+
 if (ord(t) = 1,
 
-$ifthen "%c17_prod_init%" == "ON"
-vm_prod.l(j,kcr)=sum(cell(i,j),sum(w,fm_croparea("y1995",j,w,kcr)*pm_yields_hist("y1995",j,kcr,w))* sum(supreg(h,i),fm_tau1995(h)));
+$ifthen "%c17_prod_init%" == "on"
+vm_prod.l(j,kcr) = pm_prod_init(j,kcr);
 $endif
 
     );

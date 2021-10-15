@@ -42,7 +42,7 @@ for(cc in c("cc")){
     cfg$gms$c38_sticky_mode  <-   sm
 
     if (sm == "dynamic"){
-    cfg$gms$c17_prod_init <- "OFF"
+    cfg$gms$c17_prod_init <- "off"
     }
 
 
