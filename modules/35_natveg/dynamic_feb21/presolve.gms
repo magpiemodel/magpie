@@ -73,6 +73,15 @@ vm_land.l(j,"other") = sum(ac, pc35_other(j,ac));
 pcm_land(j,"other") = sum(ac, pc35_other(j,ac));
 
 ** Land protection
+if(m_year(t) <= sm_fix_SSP2,
+ p35_save_natveg(t,j,land_natveg) = 
+	pm_land_start(j,land_natveg) * p35_protect_shr(t,j,"WDPA",land_natveg);
+else
+ p35_save_natveg(t,j,land_natveg) = 
+	pm_land_start(j,land_natveg) * sum(cell(i,j), 
+	p35_protect_shr(t,j,"%c35_protect_scenario%",land_natveg) * p35_region_prot_shr(i)
+	+ p35_protect_shr(t,j,"%c35_protect_scenario_noselect%",land_natveg) * (1-p35_region_prot_shr(i)));
+);
 p35_save_natveg(t,j,land_natveg)$(p35_save_natveg(t,j,land_natveg) > pcm_land(j,land_natveg)) = pcm_land(j,land_natveg);
 
 * Within the optimization, primary and secondary forests can only decrease

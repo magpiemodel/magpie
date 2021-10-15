@@ -24,7 +24,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-prefix <- "LAMA67"
+prefix <- "LAMA68"
 cfg$force_replace <- TRUE
 
 cfg$gms$factor_costs <- "sticky_labor_aug21"
