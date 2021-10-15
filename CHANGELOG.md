@@ -48,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **80_optimization** fixed compilation error in "nlp_par" realization
 - **58_peatland** fixed rare infeasibility in "on" realization
 - **10_land** fixed rare infeasibility in "landmatrix_dec18" realization
+- **35_natveg** fixed land protection to SSP2 default (WDPA) for historic period
 
 
 
