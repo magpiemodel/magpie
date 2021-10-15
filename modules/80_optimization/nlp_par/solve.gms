@@ -92,14 +92,10 @@ repeat
 		    );
         );
 
-
       h2(h) = no;
 		  i2(i) = no;
 		  j2(j) = no;
-* write extended run information in list file in the case that the final solution is infeasible
-*  	  if((p80_counter(h) >= (s80_maxiter-1) and p80_modelstat(t,h) > 2 and p80_modelstat(t,h) ne 7),
 
-*      );
       execerror = 0;
     );
   );
