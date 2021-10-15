@@ -58,7 +58,7 @@ cfg$force_replace <- TRUE
 
 cfg$output <- c("rds_report")
 
-prefix <- "FT1"
+prefix <- "FT2"
 
 cfg <- setScenario(cfg,c("SSP2","NDC"))
 cfg$gms$s15_elastic_demand <- 1
