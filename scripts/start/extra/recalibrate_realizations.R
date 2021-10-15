@@ -41,7 +41,7 @@ for(r in realizations){
       cfg$gms$c38_sticky_mode  <-   t
 
       if (t=="dynamic"){
-      cfg$gms$c17_prod_init <- "OFF"
+      cfg$gms$c17_prod_init <- "off"
       }
 
 

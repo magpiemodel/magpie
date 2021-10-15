@@ -7,7 +7,7 @@
 
 if (ord(t) = 1,
 
-$ifthen "%c17_prod_init%" == "ON"
+$ifthen "%c17_prod_init%" == "on"
 vm_prod.l(j,kcr)=sum(cell(i,j),sum(w,fm_croparea("y1995",j,w,kcr)*pm_yields_hist("y1995",j,kcr,w))* sum(supreg(h,i),fm_tau1995(h)));
 $endif
 
