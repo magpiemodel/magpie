@@ -105,7 +105,7 @@ i14_managementcalib(t,j,knbe14,w) =
 
 
 i14_yields_calib(t,j,knbe14,w)    = i14_managementcalib(t,j,knbe14,w) * f14_yields(t,j,knbe14,w);
-pm_yields_hist(t,j,knbe14,w)      = i14_yields_calib(t,j,knbe14,w);
+pm_yields_semi_calib(j,kve,w)     = i14_yields_calib("y1995",j,knbe14,w);
 
 *' Note that the calculation is split into two parts for better readability.
 *' @stop
