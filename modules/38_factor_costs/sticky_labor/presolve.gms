@@ -20,8 +20,6 @@ p38_variable_costs(t,i,kcr) = f38_fac_req(kcr)  * (1-p38_capital_cost_share(t,i)
 p38_capital_need(t,i,kcr,"mobile") = f38_fac_req(kcr) * p38_capital_cost_share(t,i) / (pm_interest(t,i)+s38_depreciation_rate) * (1-s38_immobile);
 p38_capital_need(t,i,kcr,"immobile") = f38_fac_req(kcr)  * p38_capital_cost_share(t,i) / (pm_interest(t,i)+s38_depreciation_rate) * s38_immobile;
 
-p38_croparea_start(j,w,kcr) =  fm_croparea("y1995",j,w,kcr);
-
 *** Variable labor costs BEGIN
 
 * set bounds for labor requirements
@@ -38,8 +36,8 @@ i38_scale(j,kcr) = sum(cell(i,j), 1/([i38_sh(j,kcr) * sum(mobil38, p38_capital_n
 if (ord(t) = 1,
 
 *' Estimate capital stock based on capital remuneration. We assume that in 1994 and 1995 production is the same and the stocks gets depreciated from 1994.
-  p38_capital_immobile(t,j,kcr)    = sum(cell(i,j), p38_capital_need(t,i,kcr,"immobile")*sum(w,p38_croparea_start(j,w,kcr)*pm_yields_hist("y1995",j,kcr,w)) * sum(supreg(h,i),fm_tau1995(h)))*(1-s38_depreciation_rate);
-  p38_capital_mobile(t,j)    = sum((cell(i,j),kcr), p38_capital_need(t,i,kcr,"mobile")*sum(w,p38_croparea_start(j,w,kcr)*pm_yields_hist("y1995",j,kcr,w)) * sum(supreg(h,i),fm_tau1995(h)))*(1-s38_depreciation_rate);
+  p38_capital_immobile(t,j,kcr)    = sum(cell(i,j), p38_capital_need(t,i,kcr,"immobile")*pm_prod_init(j,kcr))*(1-s38_depreciation_rate);
+  p38_capital_mobile(t,j)    = sum((cell(i,j),kcr), p38_capital_need(t,i,kcr,"mobile")*pm_prod_init(j,kcr))*(1-s38_depreciation_rate);
 
 else
 

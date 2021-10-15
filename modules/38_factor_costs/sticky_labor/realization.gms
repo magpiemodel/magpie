@@ -22,12 +22,12 @@
 
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/38_factor_costs/sticky_labor_aug21/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/38_factor_costs/sticky_labor_aug21/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/38_factor_costs/sticky_labor_aug21/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/38_factor_costs/sticky_labor_aug21/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/38_factor_costs/sticky_labor_aug21/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/38_factor_costs/sticky_labor_aug21/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/38_factor_costs/sticky_labor_aug21/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/38_factor_costs/sticky_labor_aug21/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/38_factor_costs/sticky_labor/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/38_factor_costs/sticky_labor/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/38_factor_costs/sticky_labor/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/38_factor_costs/sticky_labor/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/38_factor_costs/sticky_labor/scaling.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/38_factor_costs/sticky_labor/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/38_factor_costs/sticky_labor/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/38_factor_costs/sticky_labor/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
