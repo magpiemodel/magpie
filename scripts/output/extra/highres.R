@@ -44,18 +44,11 @@ cfg$output <- c("rds_report")
 #set high resolution
 hr <- "c1000"
 
-#update input files. The following files are needed:
-#isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c200_690d3718e151be1b450b394c1064b1c5.tgz
-#isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c1000_690d3718e151be1b450b394c1064b1c5.tgz
-#The calibration file must exist for c200 and c1000 with the same date
-#calibration_H12_c200_26Feb20
-#calibration_H12_c1000_26Feb20
-cfg$input <- gsub("c200",hr,cfg$input)
+#update cellular input files
+cfg$input["cellular"] <- gsub("c200",hr,cfg$input["cellular"])
 
 #max resources for parallel runs
 cfg$qos <- "short_maxMem"
-#magpie4::submitCalibration("H12_c1000")
-#c1000 with endoTC
 
 input_old <- .get_info("input/info.txt", "^Used data set:", ": ")
 
