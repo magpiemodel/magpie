@@ -24,14 +24,14 @@ source("scripts/start_functions.R")
 #start MAgPIE runs
 source("config/default.cfg")
 
-pollutant_prices <- function(price_ref=0, CH4_factor=1) {
+pollutant_prices <- function(price_ref=180, CH4_factor=1) {
   
-  GWP100_CH4 <- 25
+  GWP100_CH4 <- 28
   GWP100_N2O <- 265
   CO2_C <- 44/12
   N2O_N <- 44/28
   growth_rate <- 0.05
-  year_start <- 2015
+  year_start <- 2020
   year_end <- 2100
   year_ref <- 2070
   #  price_ref <- 150
@@ -41,6 +41,7 @@ pollutant_prices <- function(price_ref=0, CH4_factor=1) {
   
   for (y in seq(year_start,2150,by=5)) {
     if (y <= year_end) {
+      a[,y,"co2_c"] <- price_ref*(1+growth_rate)^-(year_ref-y)*CO2_C
       a[,y,"ch4"] <- price_ref*(1+growth_rate)^-(year_ref-y)*GWP100_CH4*CH4_factor
       a[,y,c("n2o_n_direct","n2o_n_indirect")] <- price_ref*(1+growth_rate)^-(year_ref-y)*N2O_N*GWP100_N2O
     } else {
@@ -58,13 +59,14 @@ cfg$force_replace <- TRUE
 
 cfg$output <- c("rds_report")
 
-prefix <- "FT2"
+prefix <- "FT3"
 
 cfg <- setScenario(cfg,c("SSP2","NDC"))
 cfg$gms$s15_elastic_demand <- 1
 #cfg$gms$c57_macc_version  <- "PBL_2019"   # def = PBL_2007
 
-cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"
+#cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"
+cfg$gms$c56_pollutant_prices <- "coupling"
 cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"
 
 cfg$title <- paste(prefix,"SSP2-PkBudg900_CH4N2Olim1000",sep = "_")
