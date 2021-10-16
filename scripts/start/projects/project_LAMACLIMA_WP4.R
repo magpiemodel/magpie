@@ -24,7 +24,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-prefix <- "LAMA69"
+prefix <- "LAMA70"
 cfg$force_replace <- TRUE
 
 cfg$gms$factor_costs <- "sticky_labor"
@@ -46,7 +46,7 @@ oecd90andEU <- "ALB,AUS,AUT,BEL,BIH,BGR,CAN,CYP,CZE,DNK,EST,FIN,FRA,
 				GBR,USA"
 
 cfg$results_folder <- "output/:title:"
-cfg$output <- c("rds_report","extra/disaggregation","extra/disaggregation_LUH2")
+cfg$output <- c("rds_report","extra/disaggregation","extra/disaggregation_LUH2","extra/highres")
 #cfg$files2export$start <- c(cfg$files2export$start,"input/avl_land_full_t_0.5.mz")
 
 cfg$qos <- "priority"

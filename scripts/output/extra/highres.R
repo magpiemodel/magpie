@@ -38,9 +38,7 @@ highres <- function(cfg) {
   lock_id <- gms::model_lock(timeout1=1,check_interval=runif(1, 10, 30))
   on.exit(gms::model_unlock(lock_id), add=TRUE)
   
-  #cfg$results_folder <- "output/:title:"
-  
-  cfg$output <- cfg$output[cfg$output!="highres"]
+  cfg$output <- cfg$output[cfg$output!="extra/highres"]
   
   #set high resolution
   hr <- "c1000"
@@ -49,7 +47,7 @@ highres <- function(cfg) {
   cfg$input["cellular"] <- "rev4.64_h12_9c7a3dce_cellularmagpie_c1000_MRI-ESM2-0-ssp370_lpjml-4b917a03.tgz"
   
   #max resources for parallel runs
-  cfg$qos <- "short_maxMem"
+  cfg$qos <- "priority"
   
   download_and_update(cfg)
   
