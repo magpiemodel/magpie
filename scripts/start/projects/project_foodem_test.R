@@ -51,7 +51,7 @@ pollutant_prices <- function(price_ref=180, CH4_factor=1) {
   }
   write.magpie(a,"modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3")
 }
-
+pollutant_prices()
 cfg$force_download <- FALSE
 
 cfg$results_folder <- "output/:title:"
