@@ -33,7 +33,7 @@ pollutant_prices <- function(price_ref=200, CH4_factor=1) {
   growth_rate <- 0.05
   year_start <- 2020
   year_end <- 2100
-  year_ref <- 2030
+  year_ref <- 2050
   #  price_ref <- 150
   
   a<-read.magpie("modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3")
@@ -59,7 +59,7 @@ cfg$force_replace <- TRUE
 
 cfg$output <- c("rds_report")
 
-prefix <- "FT4"
+prefix <- "FT5"
 
 cfg <- setScenario(cfg,c("SSP2","NDC"))
 cfg$gms$s15_elastic_demand <- 1

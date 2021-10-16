@@ -19,7 +19,7 @@ options("magclass.verbosity" = 1)
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdir <- "/p/projects/landuse/users/miodrag/projects/tests/flexreg/output/H12_setup1_2016-11-23_12.38.56/"
+  outputdir <- "output/LAMA65_Sustainability/"
   readArgs("outputdir")
 }
 
@@ -37,9 +37,9 @@ source("scripts/start_functions.R")
 lock_id <- gms::model_lock(timeout1=1)
 on.exit(gms::model_unlock(lock_id))
 
-cfg$results_folder <- "output/:title:"
+#cfg$results_folder <- "output/:title:"
 
-cfg$output <- c("rds_report")
+cfg$output <- cfg$output[cfg$output!="highres"]
 
 #set high resolution
 hr <- "c1000"
@@ -50,12 +50,14 @@ cfg$input["cellular"] <- "rev4.64_h12_9c7a3dce_cellularmagpie_c1000_MRI-ESM2-0-s
 #max resources for parallel runs
 cfg$qos <- "short_maxMem"
 
-input_old <- .get_info("input/info.txt", "^Used data set:", ": ")
+download_and_update(cfg)
 
-if(!setequal(cfg$input, input_old)) {
-  # download data and update code
-  download_and_update(cfg)
-}
+# input_old <- .get_info("input/info.txt", "^Used data set:", ": ")
+# 
+# if(!setequal(cfg$input, input_old)) {
+#   # download data and update code
+#   download_and_update(cfg)
+# }
 
 #set title
 cfg$title <- paste0("hr_",cfg$title)
