@@ -34,7 +34,7 @@ resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 source("scripts/start_functions.R")
 
 #lock the model folder
-lock_id <- gms::model_lock(timeout1=runif(1, 10, 30))
+lock_id <- gms::model_lock(check_interval=runif(1, 10, 30))
 on.exit(gms::model_unlock(lock_id))
 
 #cfg$results_folder <- "output/:title:"
