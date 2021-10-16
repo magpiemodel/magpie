@@ -36,7 +36,7 @@ pollutant_prices <- function(price_ref=180, CH4_factor=1) {
   year_ref <- 2070
   #  price_ref <- 150
   
-  a<-read.magpie("modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3")
+  a<-read.magpie("modules/56_ghg_policy/input/f56_pollutant_prices.cs3")
   a[,,] <- 0
   
   for (y in seq(year_start,2150,by=5)) {
