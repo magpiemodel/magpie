@@ -45,7 +45,7 @@ cfg$output <- c("rds_report")
 hr <- "c1000"
 
 #update cellular input files
-cfg$input["cellular"] <- gsub("c200",hr,cfg$input["cellular"])
+cfg$input["cellular"] <- "rev4.64_h12_9c7a3dce_cellularmagpie_c1000_MRI-ESM2-0-ssp370_lpjml-4b917a03.tgz"
 
 #max resources for parallel runs
 cfg$qos <- "short_maxMem"
