@@ -33,50 +33,56 @@ resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
-#lock the model folder
-lock_id <- gms::model_lock(timeout1=1,check_interval=runif(1, 10, 30))
-on.exit(gms::model_unlock(lock_id), add=TRUE)
+highres <- function(cfg) {
+  #lock the model folder
+  lock_id <- gms::model_lock(timeout1=1,check_interval=runif(1, 10, 30))
+  on.exit(gms::model_unlock(lock_id), add=TRUE)
+  
+  #cfg$results_folder <- "output/:title:"
+  
+  cfg$output <- cfg$output[cfg$output!="highres"]
+  
+  #set high resolution
+  hr <- "c1000"
+  
+  #update cellular input files
+  cfg$input["cellular"] <- "rev4.64_h12_9c7a3dce_cellularmagpie_c1000_MRI-ESM2-0-ssp370_lpjml-4b917a03.tgz"
+  
+  #max resources for parallel runs
+  cfg$qos <- "short_maxMem"
+  
+  download_and_update(cfg)
+  
+  # input_old <- .get_info("input/info.txt", "^Used data set:", ": ")
+  # 
+  # if(!setequal(cfg$input, input_old)) {
+  #   # download data and update code
+  #   download_and_update(cfg)
+  # }
+  
+  #set title
+  cfg$title <- paste0("hr_",cfg$title)
+  cfg$results_folder <- "output/:title:"
+  cfg$force_replace <- FALSE
+  
+  #get trade pattern from low resolution run with c200
+  ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
+  ov_supply <- readGDX(gdx,"ov_supply",select=list(type="level"))
+  f21_trade_balance <- ov_prod_reg - ov_supply
+  write.magpie(round(f21_trade_balance,6),paste0("modules/21_trade/input/f21_trade_balance.cs3"))
+  
+  #get tau from low resolution run with c200, currently not used.
+  tau(gdx,file = "modules/13_tc/input/f13_tau_scenario.csv",digits = 4)
+  
+  #use exo trade and parallel optimization
+  cfg$gms$trade <- "exo"
+  cfg$gms$optimization <- "nlp_par"
+  #cfg$gms$s15_elastic_demand <- 0
+  #cfg$gms$tc <- "exo"
+  
+  #cfg$gms$c60_bioenergy_subsidy <- 0
+  
+  start_run(cfg,codeCheck=FALSE,lock_model=FALSE)
+}
+highres(cfg)
 
-#cfg$results_folder <- "output/:title:"
-
-cfg$output <- cfg$output[cfg$output!="highres"]
-
-#set high resolution
-hr <- "c1000"
-
-#update cellular input files
-cfg$input["cellular"] <- "rev4.64_h12_9c7a3dce_cellularmagpie_c1000_MRI-ESM2-0-ssp370_lpjml-4b917a03.tgz"
-
-#max resources for parallel runs
-cfg$qos <- "short_maxMem"
-
-download_and_update(cfg)
-
-# input_old <- .get_info("input/info.txt", "^Used data set:", ": ")
-# 
-# if(!setequal(cfg$input, input_old)) {
-#   # download data and update code
-#   download_and_update(cfg)
-# }
-
-#set title
-cfg$title <- paste0("hr_",cfg$title)
-
-#get trade pattern from low resolution run with c200
-ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
-ov_supply <- readGDX(gdx,"ov_supply",select=list(type="level"))
-f21_trade_balance <- ov_prod_reg - ov_supply
-write.magpie(round(f21_trade_balance,6),paste0("modules/21_trade/input/f21_trade_balance.cs3"))
-
-#get tau from low resolution run with c200, currently not used.
-tau(gdx,file = "modules/13_tc/input/f13_tau_scenario.csv",digits = 4)
-
-#use exo trade and parallel optimization
-cfg$gms$trade <- "exo"
-cfg$gms$optimization <- "nlp_par"
-#cfg$gms$s15_elastic_demand <- 0
-#cfg$gms$tc <- "exo"
-
-#cfg$gms$c60_bioenergy_subsidy <- 0
-
-start_run(cfg,codeCheck=FALSE,lock_model=FALSE)
