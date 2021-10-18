@@ -18,12 +18,13 @@ positive variables
  vm_cost_inv(i)                        Investment capital costs (mio USD05MER  per yr)
  v38_investment_immobile(j,kcr)        Investment costs in immobile farm capital (mio USD05MER per yr)
  v38_investment_mobile(j)              Investment costs in mobile farm capital (mio USD05MER per yr)
- v38_labor_need(j,kcr)				   labor required for one unit of output (hours per ton DM)
+ v38_labor_need(j,kcr)				   Labor required per unit of output (hours per ton DM)
+ v38_capital_need(j,kcr,mobil38)	   Captial required per unit of output (USD05MER per ton DM)
 ;
 
 parameters
- p38_variable_costs(t,i,kcr)           Variable input costs (mio USD05MER per input unit)
- p38_capital_need(t,i,kcr,mobil38)     Capital requirements for farming with tau equal 1 (mio USD05MER)
+ p38_variable_costs(t,i,kcr)           Variable input costs per unit of output (USD05MER per ton DM)
+ p38_capital_need(t,i,kcr,mobil38)     Capital requirements per unit of output (USD05MER per ton DM)
  p38_capital_immobile(t,j,kcr)         Preexisting immobile capital stocks before investment (mio USD05MER)
  p38_capital_mobile(t,j)               Preexisting mobile capital stocks before investment (mio USD05MER)
 
@@ -42,15 +43,16 @@ scalars
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_prod(t,i,kall,type)            Factor costs  (mio USD05MER  per yr)
- ov_cost_inv(t,i,type)                  Investment capital costs (mio USD05MER  per yr)
- ov38_investment_immobile(t,j,kcr,type) Investment costs in immobile farm capital (mio USD05MER per yr)
- ov38_investment_mobile(t,j,type)       Investment costs in mobile farm capital (mio USD05MER per yr)
- ov38_labor_need(t,j,kcr,type)          labor required for one unit of output (hours per ton DM)
- oq38_cost_prod_crop(t,i,kcr,type)      Regional factor input costs for plant production (mio USD05MER)
- oq38_cost_prod_inv(t,i,type)           Regional investment costs in capital (mio USD05MER)
- oq38_investment_immobile(t,j,kcr,type) Cellular immobile investments into farm capital   (mio USD05MER)
- oq38_investment_mobile(t,j,type)       Cellular mobile investments into farm capital   (mio USD05MER)
- oq38_ces_prodfun(t,j,kcr,type)         CES production function for one unit of output (1)
+ ov_cost_prod(t,i,kall,type)             Factor costs  (mio USD05MER  per yr)
+ ov_cost_inv(t,i,type)                   Investment capital costs (mio USD05MER  per yr)
+ ov38_investment_immobile(t,j,kcr,type)  Investment costs in immobile farm capital (mio USD05MER per yr)
+ ov38_investment_mobile(t,j,type)        Investment costs in mobile farm capital (mio USD05MER per yr)
+ ov38_labor_need(t,j,kcr,type)           Labor required for one unit of output (hours per ton DM)
+ ov38_capital_need(t,j,kcr,mobil38,type) Captial required for one unit of output (USD05MER per ton DM)
+ oq38_cost_prod_crop(t,i,kcr,type)       Regional factor input costs for plant production (mio USD05MER)
+ oq38_cost_prod_inv(t,i,type)            Regional investment costs in capital (mio USD05MER)
+ oq38_investment_immobile(t,j,kcr,type)  Cellular immobile investments into farm capital   (mio USD05MER)
+ oq38_investment_mobile(t,j,type)        Cellular mobile investments into farm capital   (mio USD05MER)
+ oq38_ces_prodfun(t,j,kcr,type)          CES production function for one unit of output (1)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

@@ -23,9 +23,14 @@ p38_capital_need(t,i,kcr,"immobile") = f38_fac_req(kcr)  * p38_capital_cost_shar
 *** Variable labor costs BEGIN
 
 * set bounds for labor requirements
-v38_labor_need.lo(j,kcr) = sum(cell(i,j),p38_variable_costs(t,i,kcr));
+v38_labor_need.lo(j,kcr) = 0.1*sum(cell(i,j),p38_variable_costs(t,i,kcr));
 v38_labor_need.l(j,kcr) = sum(cell(i,j),p38_variable_costs(t,i,kcr));
 v38_labor_need.up(j,kcr) = 10 * sum(cell(i,j),p38_variable_costs(t,i,kcr));
+
+* set bounds for captial requirements
+v38_capital_need.lo(j,kcr,mobil38) = 0.1*sum(cell(i,j),p38_capital_need(t,i,kcr,mobil38));
+v38_capital_need.l(j,kcr,mobil38) = sum(cell(i,j),p38_capital_need(t,i,kcr,mobil38));
+v38_capital_need.up(j,kcr,mobil38) = 10 * sum(cell(i,j),p38_capital_need(t,i,kcr,mobil38));
 
 * update CES parameters
 i38_sh(j,kcr) = sum(cell(i,j), (pm_interest(t,i) * sum(mobil38, p38_capital_need(t,i,kcr,mobil38))**(1 + s38_ep)) / (pm_interest(t,i) * sum(mobil38, p38_capital_need(t,i,kcr,mobil38))**(1 + s38_ep)  + s38_wage * v38_labor_need.l(j,kcr)**(1 + s38_ep)));

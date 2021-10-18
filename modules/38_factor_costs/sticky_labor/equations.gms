@@ -9,7 +9,7 @@
 *' @equations
 
 *' Constant elasticity of substitution (CES) production function for one unit of output.
-*' The CES function accounts for capital `p38_capital_need` and labor `v38_labor_need` requirements.
+*' The CES function accounts for capital `v38_capital_need` and labor `v38_labor_need` requirements.
 *' The efficiency of labor is affected by the labor productivity factor `vm_labor_prod`, which is 
 *' provided by the labor productivity module [37_labor_prod].
 *' The calculation of total capital and labor costs is covered by the equations `q38_cost_prod_crop` and `q38_cost_prod_inv`.
@@ -17,7 +17,7 @@
 
  q38_ces_prodfun(j2,kcr) ..
   i38_scale(j2,kcr) * 
-  (i38_sh(j2,kcr)*sum((ct,cell(i2,j2),mobil38),p38_capital_need(ct,i2,kcr,mobil38))**(-s38_ep) + 
+  (i38_sh(j2,kcr)*sum(mobil38, v38_capital_need(j2,kcr,mobil38))**(-s38_ep) + 
   (1 - i38_sh(j2,kcr))*(sum(ct, pm_labor_prod(ct,j2)) * v38_labor_need(j2,kcr))**(-s38_ep))**(-1/s38_ep)
   =e= 1 ;
 
@@ -47,7 +47,7 @@ q38_cost_prod_inv(i2).. vm_cost_inv(i2)=e=(sum((cell(i2,j2),kcr),v38_investment_
 
 q38_investment_immobile(j2,kcr).. v38_investment_immobile(j2,kcr)
                                   =g=
-                                 vm_prod(j2,kcr)*sum(cell(i2,j2),sum(ct,p38_capital_need(ct,i2,kcr,"immobile")))-
+                                 vm_prod(j2,kcr)*sum(cell(i2,j2),v38_capital_need(j2,kcr,"immobile"))-
                                  sum(ct,p38_capital_immobile(ct,j2,kcr));
 *
 
@@ -55,6 +55,6 @@ q38_investment_immobile(j2,kcr).. v38_investment_immobile(j2,kcr)
 
 q38_investment_mobile(j2).. v38_investment_mobile(j2)
                              =g=
-                             sum((cell(i2,j2),kcr),vm_prod(j2,kcr)*sum(ct,p38_capital_need(ct,i2,kcr,"mobile")))-
+                             sum((cell(i2,j2),kcr),vm_prod(j2,kcr)*v38_capital_need(j2,kcr,"mobile"))-
                              sum(ct,p38_capital_mobile(ct,j2));
 *
