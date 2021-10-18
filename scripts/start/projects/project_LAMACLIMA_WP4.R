@@ -24,12 +24,12 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-prefix <- "LAMA70"
+prefix <- "LAMA71"
 cfg$force_replace <- TRUE
 
 cfg$gms$factor_costs <- "sticky_labor"
 cfg$gms$c38_sticky_mode <- "dynamic"
-cfg$input["calibration"] <- "calibration_H12_sticky_feb18_dynamic_13Oct21.tgz"
+cfg$input["calibration"] <- "calibration_H12_sticky_feb18_dynamic_15Oct21.tgz"
 cfg$input["patch"] <- "patch_timber.tgz"
 cfg$gms$c17_prod_init <- "off"
 
