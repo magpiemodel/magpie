@@ -24,21 +24,22 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-prefix <- "LAMA71"
+prefix <- "LAMA73"
 cfg$force_replace <- TRUE
 
 cfg$gms$factor_costs <- "sticky_labor"
 cfg$gms$c38_sticky_mode <- "dynamic"
+cfg$input["cellular"] <- "rev4.64_h12_184c2e25_cellularmagpie_c600_MRI-ESM2-0-ssp370_lpjml-4b917a03.tgz"
 cfg$input["calibration"] <- "calibration_H12_sticky_feb18_dynamic_15Oct21.tgz"
 cfg$input["patch"] <- "patch_timber.tgz"
 cfg$gms$c17_prod_init <- "off"
 
-download_and_update(cfg)
-
-a <- read.magpie("modules/60_bioenergy/input/f60_bioenergy_dem.cs3")
-a <- collapseNames(a[,,"R21M42-SSP2-PkBudg900"])
-a["JPN",,] <- 0
-write.magpie(a,"modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
+# download_and_update(cfg)
+# 
+# a <- read.magpie("modules/60_bioenergy/input/f60_bioenergy_dem.cs3")
+# a <- collapseNames(a[,,"R21M42-SSP2-PkBudg900"])
+# a["JPN",,] <- 0
+# write.magpie(a,"modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
 
 cfg$gms$labor_prod <- "exo"
 cfg$gms$c37_labor_rcp <- "rcp119"
@@ -69,11 +70,6 @@ cfg$gms$s30_set_aside_shr_noselect <- 0.2
 cfg$gms$c30_set_aside_target <- "by2030"
 cfg$gms$policy_countries30 <- all_iso_countries
 cfg$gms$c35_forest_damage_end <- "by2030"
-#1.5 degree policy
-cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"
-cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-NPi"
-cfg$gms$policy_countries56  <- all_iso_countries
-cfg$gms$c60_2ndgen_biodem <- "coupling"
 #default food scenario
 cfg$gms$c15_food_scenario <- "SSP1"
 cfg$gms$c15_food_scenario_noselect <- "SSP1"
@@ -105,6 +101,20 @@ cfg$gms$scen_countries55  <- all_iso_countries
 #irrig
 cfg$gms$s42_irrig_eff_scenario <- 3
 cfg$gms$c60_biodem_level <- 1
+#1.5 degree policy
+cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"
+cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-NPi"
+cfg$gms$policy_countries56  <- all_iso_countries
+cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"
+start_run(cfg,codeCheck=FALSE)
+
+#NPI
+cfg$title <- paste(prefix,"Sustainability-NPI",sep="_")
+cfg <- setScenario(cfg,c("NPI"))
+cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-NPi"
+cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-NPi"
+cfg$gms$policy_countries56  <- all_iso_countries
+cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-NPi"
 start_run(cfg,codeCheck=FALSE)
 
 #Global Inequality, based on SSP4
@@ -118,11 +128,6 @@ cfg$gms$s30_set_aside_shr_noselect <- 0
 cfg$gms$c30_set_aside_target <- "by2030"
 cfg$gms$policy_countries30 <- oecd90andEU
 cfg$gms$c35_forest_damage_end <- "by2030"
-#1.5 degree policy
-cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"
-cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-NPi"
-cfg$gms$policy_countries56  <- oecd90andEU
-cfg$gms$c60_2ndgen_biodem <- "coupling"
 #default food scenario
 cfg$gms$c15_food_scenario <- "SSP4"
 cfg$gms$c15_food_scenario_noselect <- "SSP4"
@@ -150,4 +155,18 @@ cfg$gms$scen_countries55  <- oecd90andEU
 #irrig
 cfg$gms$s42_irrig_eff_scenario <- 3
 cfg$gms$c60_biodem_level <- 1
+#1.5 degree policy
+cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"
+cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-NPi"
+cfg$gms$policy_countries56  <- oecd90andEU
+cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"
+start_run(cfg,codeCheck=FALSE)
+
+#NPI
+cfg$title <- paste(prefix,"Inequality-NPI",sep="_")
+cfg <- setScenario(cfg,c("NPI"))
+cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-NPi"
+cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-NPi"
+cfg$gms$policy_countries56  <- oecd90andEU
+cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-NPi"
 start_run(cfg,codeCheck=FALSE)
