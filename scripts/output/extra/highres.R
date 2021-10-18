@@ -33,6 +33,9 @@ resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
+# wait some seconds (random between 5-30 sec) to avoid conflicts with locking the model folder (.lock file)
+Sys.sleep(runif(1, 5, 30))
+
 highres <- function(cfg) {
   #lock the model folder
   lock_id <- gms::model_lock(timeout1=1,check_interval=runif(1, 10, 30))
@@ -67,7 +70,6 @@ highres <- function(cfg) {
   #use exo trade and parallel optimization
   cfg$gms$trade <- "exo"
   cfg$gms$optimization <- "nlp_par"
-  cfg$gms$s80_maxiter <- 100
   cfg$gms$s15_elastic_demand <- 0
   
   #cfg$gms$c60_bioenergy_subsidy <- 0
