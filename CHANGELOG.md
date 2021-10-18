@@ -32,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **17_production** switch added to decide if initialization of cellular crop production is needed or not. Also, a parameter to calculate initial production based on input cellular crop patterns and semicalibrated yields (potential yields calibrated to FAO values).
 - **scripts** Added calibration script to generate default calibration for different factor costs realization
 - **37_labor_prod** Module for labour productivity with two realizations: off (default) and exo (exogenous climate change impacts on labour productivity)
-- **38_factor_costs_** Added realization sticky_labour_aug21, which is similar to sticky_aug18 but accounts for changes in labour productivity provided by 37_labor_prod
+- **38_factor_costs_** Added realization sticky_labour, which is similar to sticky_aug18 but accounts for changes in labour productivity provided by 37_labor_prod
 
 ### removed
 - **32_foresty** Removed static realization
@@ -49,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **58_peatland** fixed rare infeasibility in "on" realization
 - **10_land** fixed rare infeasibility in "landmatrix_dec18" realization
 - **35_natveg** fixed land protection to SSP2 default (WDPA) for historic period
+- **15_food** New iteration needs to be started before setting food prices for curr_iter15
 
 
 
