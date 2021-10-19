@@ -92,19 +92,19 @@ cfg$gms$scen_countries55  <- all_iso_countries
 cfg$gms$s42_irrig_eff_scenario <- 3
 cfg$gms$c60_biodem_level <- 1
 #1.5 degree policy
-cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"
-cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-NPi"
+cfg$gms$c56_pollutant_prices <- "R21M42-SDP-PkBudg1000"
+cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SDP-NPi"
 cfg$gms$policy_countries56  <- all_iso_countries
-cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"
+cfg$gms$c60_2ndgen_biodem <- "R21M42-SDP-PkBudg1000"
 #start run
 start_run(cfg,codeCheck=FALSE)
 #start 2nd run without land-based mitigation (NPI)
 cfg$title <- paste(prefix,"Sustainability-NPI",sep="_")
 cfg <- setScenario(cfg,c("NPI"))
-cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-NPi"
-cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-NPi"
+cfg$gms$c56_pollutant_prices <- "R21M42-SDP-NPi"
+cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SDP-NPi"
 cfg$gms$policy_countries56  <- all_iso_countries
-cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-NPi"
+cfg$gms$c60_2ndgen_biodem <- "R21M42-SDP-NPi"
 start_run(cfg,codeCheck=FALSE)
 
 ### Global Inequality, based on SSP4
@@ -147,17 +147,17 @@ cfg$gms$scen_countries55  <- oecd90andEU
 cfg$gms$s42_irrig_eff_scenario <- 3
 cfg$gms$c60_biodem_level <- 1
 #1.5 degree policy
-cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"
-cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-NPi"
+cfg$gms$c56_pollutant_prices <- "R21M42-SDP-PkBudg1000"
+cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SDP-NPi"
 cfg$gms$policy_countries56  <- oecd90andEU
-cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"
+cfg$gms$c60_2ndgen_biodem <- "R21M42-SDP-PkBudg1000"
 #start run
 start_run(cfg,codeCheck=FALSE)
 #start 2nd run without land-based mitigation (NPI)
 cfg$title <- paste(prefix,"Inequality-NPI",sep="_")
 cfg <- setScenario(cfg,c("NPI"))
-cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-NPi"
-cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-NPi"
+cfg$gms$c56_pollutant_prices <- "R21M42-SDP-NPi"
+cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SDP-NPi"
 cfg$gms$policy_countries56  <- oecd90andEU
-cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-NPi"
+cfg$gms$c60_2ndgen_biodem <- "R21M42-SDP-NPi"
 start_run(cfg,codeCheck=FALSE)
