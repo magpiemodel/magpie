@@ -24,21 +24,13 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-prefix <- "LAMA73"
+prefix <- "LAMA74"
 cfg$force_replace <- TRUE
 
 cfg$gms$factor_costs <- "sticky_labor"
 cfg$gms$c38_sticky_mode <- "dynamic"
 cfg$input["calibration"] <- "calibration_H12_sticky_feb18_dynamic_15Oct21.tgz"
-cfg$input["patch"] <- "patch_timber.tgz"
 cfg$gms$c17_prod_init <- "off"
-
-# download_and_update(cfg)
-# 
-# a <- read.magpie("modules/60_bioenergy/input/f60_bioenergy_dem.cs3")
-# a <- collapseNames(a[,,"R21M42-SSP2-PkBudg900"])
-# a["JPN",,] <- 0
-# write.magpie(a,"modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
 
 cfg$gms$labor_prod <- "exo"
 cfg$gms$c37_labor_rcp <- "rcp119"
@@ -54,13 +46,12 @@ oecd90andEU <- "ALB,AUS,AUT,BEL,BIH,BGR,CAN,CYP,CZE,DNK,EST,FIN,FRA,
 
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation","extra/disaggregation_LUH2","extra/highres")
-#cfg$files2export$start <- c(cfg$files2export$start,"input/avl_land_full_t_0.5.mz")
-
 cfg$qos <- "priority"
 
-#Global Sustainability, based on SDP
+### Global Sustainability, based on SDP
 cfg$title <- paste(prefix,"Sustainability",sep="_")
 cfg <- setScenario(cfg,c("SDP","NDC","ForestryEndo"))
+cfg$gms$c35_aolc_policy <- "npi"
 cfg$gms$c35_protect_scenario <- "FF_BH"
 cfg$gms$c35_protect_scenario_noselect <- "FF_BH"
 cfg$gms$policy_countries35  <- all_iso_countries
@@ -105,9 +96,9 @@ cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"
 cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-NPi"
 cfg$gms$policy_countries56  <- all_iso_countries
 cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"
+#start run
 start_run(cfg,codeCheck=FALSE)
-
-#NPI
+#start 2nd run without land-based mitigation (NPI)
 cfg$title <- paste(prefix,"Sustainability-NPI",sep="_")
 cfg <- setScenario(cfg,c("NPI"))
 cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-NPi"
@@ -116,9 +107,10 @@ cfg$gms$policy_countries56  <- all_iso_countries
 cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-NPi"
 start_run(cfg,codeCheck=FALSE)
 
-#Global Inequality, based on SSP4
+### Global Inequality, based on SSP4
 cfg$title <- paste(prefix,"Inequality",sep="_")
 cfg <- setScenario(cfg,c("SSP4","NDC","ForestryEndo"))
+cfg$gms$c35_aolc_policy <- "npi"
 cfg$gms$c35_protect_scenario <- "FF_BH"
 cfg$gms$c35_protect_scenario_noselect <- "WDPA"
 cfg$gms$policy_countries35  <- oecd90andEU
@@ -159,9 +151,9 @@ cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"
 cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-NPi"
 cfg$gms$policy_countries56  <- oecd90andEU
 cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"
+#start run
 start_run(cfg,codeCheck=FALSE)
-
-#NPI
+#start 2nd run without land-based mitigation (NPI)
 cfg$title <- paste(prefix,"Inequality-NPI",sep="_")
 cfg <- setScenario(cfg,c("NPI"))
 cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-NPi"

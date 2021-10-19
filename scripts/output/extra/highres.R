@@ -53,7 +53,7 @@ highres <- function(cfg) {
   download_and_update(cfg)
   
   #set title
-  cfg$title <- paste0("hr_",cfg$title)
+  cfg$title <- paste0("HR_",cfg$title)
   cfg$results_folder <- "output/:title:"
   cfg$force_replace <- TRUE
   
@@ -65,7 +65,7 @@ highres <- function(cfg) {
   
   #get tau from low resolution run with c200, currently not used.
   tau(gdx,file = "modules/13_tc/input/f13_tau_scenario.csv")
-  #cfg$gms$tc <- "exo"
+  cfg$gms$tc <- "exo"
   
   #use exo trade and parallel optimization
   cfg$gms$trade <- "exo"
