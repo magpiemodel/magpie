@@ -56,6 +56,7 @@ highres <- function(cfg) {
   cfg$title <- paste0("HR_",cfg$title)
   cfg$results_folder <- "output/:title:"
   cfg$force_replace <- TRUE
+  cfg$recalc_npi_ndc <- TRUE
   
   #get trade pattern from low resolution run with c200
   ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
