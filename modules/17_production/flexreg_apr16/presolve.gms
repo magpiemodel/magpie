@@ -5,8 +5,14 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*due to some rounding errors the input data currently may contain in some cases
-*very small, negative numbers. These numbers have to be set to 0 as area
-*cannot be smaller than 0!
-fm_croparea(t_past,j,w,kcr)$(fm_croparea(t_past,j,w,kcr)<0) = 0;
 
+
+pm_prod_init(j,kcr)=sum(w,fm_croparea("y1995",j,w,kcr)*pm_yields_semi_calib(j,kcr,w));
+
+if (ord(t) = 1,
+
+$ifthen "%c17_prod_init%" == "on"
+vm_prod.l(j,kcr) = pm_prod_init(j,kcr);
+$endif
+
+    );
