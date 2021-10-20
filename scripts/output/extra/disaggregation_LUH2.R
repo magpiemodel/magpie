@@ -22,8 +22,7 @@ if(!exists("source_include")) {
 }
 map_file                   <- Sys.glob(file.path(outputdir, "clustermap_*.rds"))
 gdx                        <- file.path(outputdir,"fulldata.gdx")
-land_hr_file               <- file.path(outputdir,"avl_land_t_0.5.mz")
-land_full_hr_file          <- file.path(outputdir,"avl_land_full_t_0.5.mz")
+land_hr_file               <- file.path(outputdir,"avl_land_full_t_0.5.mz")
 
 load(paste0(outputdir, "/config.Rdata"))
 ################################################################################
@@ -40,60 +39,52 @@ if(length(map_file)>1) {
 
 mapping <- readRDS(map_file)
 
-if (cfg$gms$crop=="endo_apr21"){
 
-  # Load input data
-  land_ini_lr  <- readGDX(gdx,"f10_land","f_land", format="first_found")[,"y1995",]
-  land_lr      <- land(gdx,sum=FALSE,level="cell")
-  land_ini_hr  <- read.magpie(land_hr_file)[,"y1995",]
-  land_ini_hr  <- land_ini_hr[,,getNames(land_lr)]
-  if(any(land_ini_hr < 0)) {
-    warning(paste0("Negative values in inital high resolution dataset detected and set to 0. Check the file ",land_hr_file))
-    land_ini_hr[which(land_ini_hr < 0,arr.ind = T)] <- 0
-  }
-  
-  # account for country-specific set-aside shares in post-processing
-  iso <- readGDX(gdx, "iso")
-  set_aside_iso <- readGDX(gdx,"policy_countries30")
-  set_aside_select <- readGDX(gdx, "s30_set_aside_shr")
-  set_aside_noselect <- readGDX(gdx, "s30_set_aside_shr_noselect")
-  set_aside_shr <- new.magpie(iso, fill = set_aside_noselect)
-  set_aside_shr[set_aside_iso,,] <- set_aside_select
-  
-  avl_cropland_hr <- file.path(outputdir, "avl_cropland_0.5.mz")       # available cropland (at high resolution)
-  marginal_land <- cfg$gms$c30_marginal_land                      # marginal land scenario
-  target_year <- cfg$gms$c30_set_aside_target                     # target year of set aside policy (default: "none")
-  set_aside_fader  <- readGDX(gdx,"f30_set_aside_fader", format="first_found")[,,target_year]
-
-  # Start interpolation (use interpolateAvlCroplandWeighted from luscale)
-  message("Disaggregation Land use types")
-  land_hr <- interpolateAvlCroplandWeighted(x          = land_lr,
-                                            x_ini_lr   = land_ini_lr,
-                                            x_ini_hr   = land_ini_hr,
-                                            avl_cropland_hr = avl_cropland_hr,
-                                            map        = map_file,
-                                            marginal_land = marginal_land,
-                                            set_aside_shr = set_aside_shr,
-                                            set_aside_fader = set_aside_fader)
-
-}else if (cfg$gms$crop=="endo_jun13") {
-
-  # Load input data
-  land_lr   <- land(gdx,sum=FALSE,level="cell")
-  land_ini  <- setYears(read.magpie(land_hr_file)[,"y1995",],NULL)
-  land_ini  <- land_ini[,,getNames(land_lr)]
-  if(any(land_ini < 0)) {
-    warning(paste0("Negative values in inital high resolution dataset ",
-                   "detected and set to 0. Check the file ",land_hr_file))
-    land_ini[which(land_ini < 0,arr.ind = T)] <- 0
-  }
-
-  # Start interpolation (use interpolate from luscale)
-  message("Disaggregation Land use types")
-  land_hr <- luscale::interpolate2(x     = land_lr,
-                                   x_ini = land_ini,
-                                   map   = map_file)
+# Load input data
+land_ini_lr  <- readGDX(gdx,"f10_land","f_land", format="first_found")[,"y1995",]
+land_lr      <- land(gdx,sum=FALSE,level="cell")
+land_ini_hr  <- read.magpie(land_hr_file)[,"y1995",]
+magpie2luh2 <- data.frame(matrix(nrow=4,ncol=2))
+names(magpie2luh2) <- c("MAgPIE","LUH2")
+magpie2luh2[1,] <- c("crop","crop")
+magpie2luh2[2,] <- c("past","past")
+magpie2luh2[3,] <- c("past","range")
+magpie2luh2[4,] <- c("urban","urban")
+magpie2luh2[5,] <- c("primforest","primforest")
+magpie2luh2[6,] <- c("secdforest","secdforest")
+magpie2luh2[7,] <- c("forestry","forestry")
+magpie2luh2[8,] <- c("other","primother")
+magpie2luh2[9,] <- c("other","secdother")
+land_ini_hr <- madrat::toolAggregate(land_ini_hr, magpie2luh2, from="LUH2", to="MAgPIE",dim = 3.1)
+land_ini_hr  <- land_ini_hr[,,getNames(land_lr)]
+if(any(land_ini_hr < 0)) {
+  warning(paste0("Negative values in inital high resolution dataset detected and set to 0. Check the file ",land_hr_file))
+  land_ini_hr[which(land_ini_hr < 0,arr.ind = T)] <- 0
 }
+
+# account for country-specific set-aside shares in post-processing
+iso <- readGDX(gdx, "iso")
+set_aside_iso <- readGDX(gdx,"policy_countries30")
+set_aside_select <- readGDX(gdx, "s30_set_aside_shr")
+set_aside_noselect <- readGDX(gdx, "s30_set_aside_shr_noselect")
+set_aside_shr <- new.magpie(iso, fill = set_aside_noselect)
+set_aside_shr[set_aside_iso,,] <- set_aside_select
+
+avl_cropland_hr <- file.path(outputdir, "avl_cropland_0.5.mz")       # available cropland (at high resolution)
+marginal_land <- cfg$gms$c30_marginal_land                      # marginal land scenario
+target_year <- cfg$gms$c30_set_aside_target                     # target year of set aside policy (default: "none")
+set_aside_fader  <- readGDX(gdx,"f30_set_aside_fader", format="first_found")[,,target_year]
+
+# Start interpolation (use interpolateAvlCroplandWeighted from luscale)
+message("Disaggregation Land use types")
+land_hr <- interpolateAvlCroplandWeighted(x          = land_lr,
+                                          x_ini_lr   = land_ini_lr,
+                                          x_ini_hr   = land_ini_hr,
+                                          avl_cropland_hr = avl_cropland_hr,
+                                          map        = map_file,
+                                          marginal_land = marginal_land,
+                                          set_aside_shr = set_aside_shr,
+                                          set_aside_fader = set_aside_fader)
 
 land_hr <- land_hr[,-1,]
 
@@ -181,7 +172,7 @@ forestry_hr_shr <- land_hr_shr[,,"forestry"]
 }
 forestry_hr_shr <- .dissagForestry(gdx, forestry_hr_shr, map=map_file)
 
-avl_land_full <- setYears(read.magpie(land_full_hr_file)[,1995,],NULL)
+avl_land_full <- setYears(read.magpie(land_hr_file)[,1995,],NULL)
 
 ### Split pasture into pasture and rangeland
 past_range <- c("past","range")
