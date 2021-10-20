@@ -46,7 +46,8 @@ highres <- function(cfg) {
   cfg$output <- cfg$output[cfg$output!="extra/highres"]
   
   #update cellular input files
-  cfg$input["cellular"] <- "rev4.64_h12_184c2e25_cellularmagpie_c600_MRI-ESM2-0-ssp370_lpjml-4b917a03.tgz"
+#  cfg$input["cellular"] <- "rev4.64_h12_184c2e25_cellularmagpie_c600_MRI-ESM2-0-ssp370_lpjml-4b917a03.tgz"
+  cfg$input["cellular"] <- "rev4.64_h12_9c7a3dce_cellularmagpie_c1000_MRI-ESM2-0-ssp370_lpjml-4b917a03.tgz"
   
   #max resources for parallel runs
   cfg$qos <- "priority_maxMem"
