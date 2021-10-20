@@ -33,12 +33,12 @@ parameters
 
  p38_croparea_start(j,w,kcr)           Agricultural land initialization area (mio. ha)
 
- i38_sh(j,kcr)						Share parameter for CES function (1)
- i38_scale(j,kcr)					Scaling factor for total factor productivity (1)
+ i38_ces_shr(j,kcr)						Share parameter for CES function (1)
+ i38_ces_scale(j,kcr)					Scaling factor for total factor productivity (1)
 ;
 
 scalars
- s38_ep								Elasticity parameter for CES function (1)
+ s38_ces_elast_par								Elasticity parameter for CES function (1)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

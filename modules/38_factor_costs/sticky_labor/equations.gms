@@ -16,9 +16,9 @@
 *' The conceptual and analytical details of the CES function including the labor productivity factor are documented in @orlov_ces_2021.
 
  q38_ces_prodfun(j2,kcr) ..
-  i38_scale(j2,kcr) * 
-  (i38_sh(j2,kcr)*sum(mobil38, v38_capital_need(j2,kcr,mobil38))**(-s38_ep) + 
-  (1 - i38_sh(j2,kcr))*(sum(ct, pm_labor_prod(ct,j2)) * v38_labor_need(j2,kcr))**(-s38_ep))**(-1/s38_ep)
+  i38_ces_scale(j2,kcr) * 
+  (i38_ces_shr(j2,kcr)*sum(mobil38, v38_capital_need(j2,kcr,mobil38))**(-s38_ces_elast_par) + 
+  (1 - i38_ces_shr(j2,kcr))*(sum(ct, pm_labor_prod(ct,j2)) * v38_labor_need(j2,kcr))**(-s38_ces_elast_par))**(-1/s38_ces_elast_par)
   =e= 1 ;
 
 *' Variable labor costs (without capital): The labor costs are calculated based on the 

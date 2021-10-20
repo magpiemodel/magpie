@@ -15,7 +15,7 @@ s38_immobile  immobile capital (share) / 1 /
 * Note: Wage for labor is needed for the CES function. 
 * The actual value does not matter because it cancels out.
 s38_wage Wage for labor in CES function (USD05MER per hour) / 1 /
-s38_es Elasticity of substitution in CES function (1) / 0.3 /
+s38_ces_elast_subst Elasticity of substitution in CES function (1) / 0.3 /
 ;
 
 parameter f38_fac_req(kcr) Factor requirement costs in 2005 (USD05MER per tDM)

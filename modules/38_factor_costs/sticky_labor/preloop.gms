@@ -6,4 +6,4 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 * 	Calibrate the CES function:
-s38_ep = (1/s38_es) - 1 ;
+s38_ces_elast_par = (1/s38_ces_elast_subst) - 1 ;
