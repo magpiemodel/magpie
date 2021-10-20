@@ -41,6 +41,8 @@ highres <- function(cfg) {
   lock_id <- gms::model_lock(timeout1=1,check_interval=runif(1, 10, 30))
   on.exit(gms::model_unlock(lock_id), add=TRUE)
   
+  if(any(!(modelstat(gdx) %in% c(2,7)))) stop("Modelstat different from 2 or 7 detected")
+  
   cfg$output <- cfg$output[cfg$output!="extra/highres"]
   
   #update cellular input files
