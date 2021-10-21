@@ -41,8 +41,6 @@ repeat(
 *' @code
   solve magpie USING nlp MINIMIZING vm_cost_glo;
 *' @stop
-   
-   execerror = 0;
 
 * if solve stopped with an error, try it again without pre-processing
     if((magpie.modelstat = 13),
