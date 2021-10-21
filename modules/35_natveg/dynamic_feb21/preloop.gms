@@ -56,17 +56,13 @@ p35_protect_shr(t,j,"HalfEarth",land_natveg) = p35_protect_shr_ini(j,"WDPA") * (
 p35_protect_shr(t,j,prot_type_all,land_natveg)$(p35_protect_shr(t,j,prot_type_all,land_natveg) > 1) = 1;
 p35_protect_shr(t,j,prot_type_all,land_natveg)$(p35_protect_shr(t,j,prot_type_all,land_natveg) < 0) = 0;
 
-* calculate protected areas
-p35_save_natveg(t,j,land_natveg) = 
-	pm_land_start(j,land_natveg) * sum(cell(i,j), 
-	p35_protect_shr(t,j,"%c35_protect_scenario%",land_natveg) * p35_region_prot_shr(i)
-	+ p35_protect_shr(t,j,"%c35_protect_scenario_noselect%",land_natveg) * (1-p35_region_prot_shr(i)));
+** Land protection scenarios END
 
-
+** initialize other land
 i35_other(j,ac) = 0;
 i35_other(j,"acx") = pcm_land(j,"other");
 
-* initialize secdforest area depending on switch.
+** initialize secdforest area depending on switch.
 if(s35_secdf_distribution = 0,
   i35_secdforest(j,"acx") = pcm_land(j,"secdforest");
 elseif s35_secdf_distribution = 1,

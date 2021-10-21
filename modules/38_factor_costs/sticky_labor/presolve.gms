@@ -5,10 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-if (smax(j, pm_labor_prod(t,j)) <> 1 OR smin(j, pm_labor_prod(t,j)) <> 1,
-	abort "This factor cost realization cannot handle labor productivities != 1"
-);
-
 p38_capital_cost_share(t,i) = 0;
 p38_share_calibration(i) = f38_historical_share("y2010",i)-(f38_reg_parameters("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso("y2010",iso)))+f38_reg_parameters("intercept"));
 
@@ -23,6 +19,24 @@ $endif
 p38_variable_costs(t,i,kcr) = f38_fac_req(kcr)  * (1-p38_capital_cost_share(t,i)) ;
 p38_capital_need(t,i,kcr,"mobile") = f38_fac_req(kcr) * p38_capital_cost_share(t,i) / (pm_interest(t,i)+s38_depreciation_rate) * (1-s38_immobile);
 p38_capital_need(t,i,kcr,"immobile") = f38_fac_req(kcr)  * p38_capital_cost_share(t,i) / (pm_interest(t,i)+s38_depreciation_rate) * s38_immobile;
+
+*** Variable labor costs BEGIN
+
+* set bounds for labor requirements
+v38_labor_need.lo(j,kcr) = 0.1*sum(cell(i,j),p38_variable_costs(t,i,kcr));
+v38_labor_need.l(j,kcr) = sum(cell(i,j),p38_variable_costs(t,i,kcr));
+v38_labor_need.up(j,kcr) = 10 * sum(cell(i,j),p38_variable_costs(t,i,kcr));
+
+* set bounds for captial requirements
+v38_capital_need.lo(j,kcr,mobil38) = 0.1*sum(cell(i,j),p38_capital_need(t,i,kcr,mobil38));
+v38_capital_need.l(j,kcr,mobil38) = sum(cell(i,j),p38_capital_need(t,i,kcr,mobil38));
+v38_capital_need.up(j,kcr,mobil38) = 10 * sum(cell(i,j),p38_capital_need(t,i,kcr,mobil38));
+
+* update CES parameters
+i38_ces_shr(j,kcr) = sum(cell(i,j), (pm_interest(t,i) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(1 + s38_ces_elast_par)) / (pm_interest(t,i) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(1 + s38_ces_elast_par)  + s38_wage * v38_labor_need.l(j,kcr)**(1 + s38_ces_elast_par)));
+i38_ces_scale(j,kcr) = sum(cell(i,j), 1/([i38_ces_shr(j,kcr) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(-s38_ces_elast_par) + (1 - i38_ces_shr(j,kcr)) * v38_labor_need.l(j,kcr)**(-s38_ces_elast_par)]**(-1/s38_ces_elast_par)));
+
+*** Variable labor costs END
 
 if (ord(t) = 1,
 

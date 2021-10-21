@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **21_trade** In the exo and off realization, equations corrected to be consistent with the mapping between supreg h and regions i. Bugfixes in trade exo and off realizations.
 - **inputs** Update of GDP and population scenarios based upon recent historic data from WDI (complemented with growth rates given by the James2019 dataset), short term projections until 2025 from IMF (for GDPpc) and WB (for pop) and reconverge to the original SSP GDPpc levels by 2100.
 - **inputs** Update of all input data that are based on FAO, using the most up-to-date version of FAOSTAT datasets available at the date of input calculations via automated download.
+- **scripts** scripts/start/projects/project_LAMACLIMA.R -> scripts/start/projects/project_LAMACLIMA_WP4.R
 
 ### added
 - **21_trade** Missing interface parameter for failing exo realization runs
@@ -29,6 +30,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **14_yield** parameter created to save historical cellular yields and to be used in the sticky realization of 38_factor_costs and in the 17_production module
 - **17_production** switch added to decide if initialization of cellular crop production is needed or not. Also, a parameter to calculate initial production based on input cellular crop patterns and semicalibrated yields (potential yields calibrated to FAO values).
 - **scripts** Added calibration script to generate default calibration for different factor costs realization
+- **scripts** scripts/output/extra/disaggregation_LUH2.R script for exporting spatial output in LUH2 format (NetCDF)
+- **37_labor_prod** labor productivity module with two realizations: off and exo
+- **38_factor_costs** new realization "sticky_labor", based on "sticky_feb18" but accounting for changes in labor productivity
 
 ### removed
 - **32_foresty** Removed static realization
@@ -39,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **14_yield** Removed `biocorrect` and `dynamic_aug18` realizations
 - **20_processing** Removed `substitution_dec18` realization
 - **30_crop** Removed `endo_jun13` realization
+- **scripts** scripts/start/extra/highres.R
 
 ### fixed
 - **80_optimization** fixed compilation error in "nlp_par" realization
@@ -46,6 +51,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **10_land** fixed rare infeasibility in "landmatrix_dec18" realization
 - **38_factor_costs** For the sticky_feb18 realization correction in initial capital stocks, use of production initial values, and 05USDppp units changed to 05USDMER for sticky so it matches the units of the other realizations
 - **80_optimization** Bug fixes in the nlp_par (parallel optimization) and improved code to collect failing handles.
+- **35_natveg** fixed land protection to SSP2 default (WDPA) for historic period
+- **15_food** New iteration needs to be started before setting food prices for curr_iter15
+- **scripts** scripts/output/extra/highres.R bugfixes
+- **38_factor_costs** units in sticky_feb18
 
 ## [4.3.5] - 2021-09-02
 
