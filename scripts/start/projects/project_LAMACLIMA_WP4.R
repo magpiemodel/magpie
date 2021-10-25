@@ -24,7 +24,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-prefix <- "LAMA77"
+prefix <- "LAMA76TEST"
 cfg$force_replace <- TRUE
 
 cfg$gms$factor_costs <- "sticky_labor"
@@ -48,9 +48,11 @@ cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation","extra/disaggregation_LUH2","extra/highres")
 cfg$qos <- "priority"
 
+cfg$gms$c60_bioenergy_subsidy <- 0
+
 ### Global Sustainability, based on SDP
 cfg$title <- paste(prefix,"Sustainability",sep="_")
-cfg <- setScenario(cfg,c("SDP","NPI","ForestryEndo"))
+cfg <- setScenario(cfg,c("SDP","NDC","ForestryEndo"))
 cfg$gms$c35_protect_scenario <- "FF_BH"
 cfg$gms$c35_protect_scenario_noselect <- "FF_BH"
 cfg$gms$policy_countries35  <- all_iso_countries
@@ -108,7 +110,7 @@ start_run(cfg,codeCheck=FALSE)
 
 ### Global Inequality, based on SSP4
 cfg$title <- paste(prefix,"Inequality",sep="_")
-cfg <- setScenario(cfg,c("SSP4","NPI","ForestryEndo"))
+cfg <- setScenario(cfg,c("SSP4","NDC","ForestryEndo"))
 cfg$gms$c35_protect_scenario <- "FF_BH"
 cfg$gms$c35_protect_scenario_noselect <- "WDPA"
 cfg$gms$policy_countries35  <- oecd90andEU
