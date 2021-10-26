@@ -5,4 +5,5 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-v71_feed_balanceflow.scale(j,kli_rum,kforage) = 10e3;
+vm_cost_trade.scale(i) = 10e4;
+v21_cost_trade_reg.scale(h,k_trade) = 10e2;
