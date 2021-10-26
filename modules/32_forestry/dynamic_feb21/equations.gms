@@ -169,9 +169,8 @@ q32_establishment_dynamic(i2)$s32_establishment_dynamic ..
 
 q32_establishment_dynamic_yield(i2)$s32_establishment_dynamic ..
 			sum(cell(i2,j2), (sum(ac_est, v32_land(j2,"plant",ac_est))+v32_land_missing(j2)) * pc32_yield_forestry_future(j2))
-			/ (sum(cell(i2,j2), sum(ac_est, v32_land(j2,"plant",ac_est))+v32_land_missing(j2)))
 			=e=
-			pc32_yield_forestry_future_reg(i2);
+			pc32_yield_forestry_future_reg(i2) * (sum(cell(i2,j2), sum(ac_est, v32_land(j2,"plant",ac_est))+v32_land_missing(j2)));
 
 *' If plantations have to be static (defined by `s32_establishment_static`) then
 *' the model simply establishes the amount of plantations which are harvested.
