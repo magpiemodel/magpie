@@ -236,12 +236,39 @@ display "starting demand model for initialisation run....";
 v15_income_pc_real_ppp_iso.lo(iso)=10;
 v15_income_pc_real_ppp_iso.fx(iso)=im_gdp_pc_ppp_iso(t,iso);
 
-solve m15_food_demand USING nlp MAXIMIZING v15_objective ;
-p15_modelstat(t) = m15_food_demand.modelstat;
+s15_counter = 0;
+p15_modelstat_initial(t) = 1;
+
+repeat(
+   s15_counter = s15_counter + 1 ;
+
+*' @code
+	solve m15_food_demand USING nlp MAXIMIZING v15_objective;
+*' @stop
+
+* if solve stopped again with an error, try it again with conopt3
+    if((m15_food_demand.modelstat = 13),
+      display "WARNING: Modelstat 13 | retry with CONOPT3!";
+      option nlp = conopt;
+      solve m15_food_demand USING nlp MAXIMIZING v15_objective;
+      option nlp = conopt4;
+    );
+
+  p15_modelstat_initial(t) = m15_food_demand.modelstat;
+
+* write extended run information in list file in the case that the final solution is infeasible
+  if((s15_counter >= (s15_maxiter-1) and p15_modelstat_initial(t) > 2 and p15_modelstat_initial(t) ne 7),
+    m15_food_demand.solprint = 1
+  );
+
+  display s15_counter;
+
+  until (p15_modelstat_initial(t) = 2 or s15_counter >= s15_maxiter)
+);
 
 display "Food Demand Model Initialisation run finished with modelstat ";
-display p15_modelstat;
-if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
+display p15_modelstat_initial;
+if(( p15_modelstat_initial(t)) > 2 and (p15_modelstat_initial(t) ne 7 ),
   m15_food_demand.solprint = 1
   Execute_Unload "fulldata.gdx";
   abort "Food Demand Model became infeasible already during initialisation run. Stop run.";

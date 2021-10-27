@@ -67,6 +67,7 @@ scalars
 parameters
 * technical
  p15_modelstat(t)                       Model solver status (1)
+ p15_modelstat_initial(t)               Model solver status for inital solve (1)
  p15_iteration_counter(t)               Number of iterations required for reaching an equilibrium between food demand model and magpie (1)
  p15_convergence_measure(t,iter15)      Convergence measure to decide for continuation or stop of food_demand - magpie iteration (1)
  i15_dem_intercept(iso,regr15)          Food regression parameters intercept in kcal or as share (X)
@@ -173,6 +174,7 @@ parameters
 
 scalars
  s15_year                    Current year as integer value (yr)  /2000/
+ s15_counter                 counter (1)
 ;
 
 *' @code
