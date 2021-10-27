@@ -70,8 +70,9 @@ repeat(
   );
 
   display s80_counter;
+  display magpie.modelstat;
 
-  until ((p80_modelstat(t) = 2 and p80_num_nonopt(t) <= s80_num_nonopt_allowed) or s80_counter >= s80_maxiter)
+  until ((p80_modelstat(t) <= 2 and p80_num_nonopt(t) <= s80_num_nonopt_allowed) or s80_counter >= s80_maxiter)
 );
 
 *' @stop

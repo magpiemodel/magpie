@@ -64,6 +64,7 @@ repeat
       i2(i) = yes$supreg(h,i);
       loop(i2, j2(j) = yes$cell(i2,j));
       display h2;
+      display p80_counter;
       display magpie.modelstat;
       if(magpie.modelStat > 2 and magpie.modelStat ne 7 and p80_resolve(h),
       option AsyncSolLst=1;
@@ -73,7 +74,7 @@ repeat
       p80_counter(h) = p80_counter(h) + 1;
       );
       display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
-      if (magpie.modelstat = 2,
+      if (magpie.modelstat <= 2,
 		    p80_handle(h) = 0;
         p80_modelstat(t,h) = magpie.modelstat;
 		    );

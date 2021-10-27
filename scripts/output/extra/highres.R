@@ -15,6 +15,7 @@ library(gdx)
 library(magpie4)
 library(lucode2)
 library(gms)
+library(madrat)
 options("magclass.verbosity" = 1)
 
 ############################# BASIC CONFIGURATION #############################
@@ -65,12 +66,13 @@ highres <- function(cfg) {
   #get trade pattern from low resolution run with c200
   ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
   ov_supply <- readGDX(gdx,"ov_supply",select=list(type="level"))
-  f21_trade_balance <- ov_prod_reg - ov_supply
+  supreg <- readGDX(gdx, "supreg")
+  f21_trade_balance <- toolAggregate(ov_prod_reg - ov_supply, supreg)
   write.magpie(f21_trade_balance,paste0("modules/21_trade/input/f21_trade_balance.cs3"))
   
   #get tau from low resolution run with c200, currently not used.
   tau(gdx,file = "modules/13_tc/input/f13_tau_scenario.csv")
-  cfg$gms$tc <- "exo"
+  #cfg$gms$tc <- "exo"
   
   #use exo trade and parallel optimization
   cfg$gms$trade <- "exo"

@@ -385,7 +385,7 @@ if(s15_exo_diet = 1,
 
 
 
-        if (p15_modelstat(t) = 2,
+        if (p15_modelstat(t) <= 2,
            put_utility 'shell' / 'mv -f m15_food_demand_p.gdx m15_food_demand_' t.tl:0'.gdx';
         );
 
