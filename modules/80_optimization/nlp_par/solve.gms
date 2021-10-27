@@ -73,7 +73,7 @@ repeat
       p80_counter(h) = p80_counter(h) + 1;
       );
       display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
-      if (magpie.modelstat <= 2,
+      if (magpie.modelstat = 2,
 		    p80_handle(h) = 0;
         p80_modelstat(t,h) = magpie.modelstat;
 		    );
