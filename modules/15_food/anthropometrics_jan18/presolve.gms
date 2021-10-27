@@ -263,7 +263,7 @@ repeat(
 
   display s15_counter;
 
-  until (p15_modelstat_initial(t) = 2 or s15_counter >= s15_maxiter)
+  until (p15_modelstat_initial(t) <= 2 or s15_counter >= s15_maxiter)
 );
 
 display "Food Demand Model Initialisation run finished with modelstat ";
