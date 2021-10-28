@@ -57,8 +57,7 @@ loop(h,
 
 *collection loop
 repeat
-  loop(h$p80_handle(h),
-  if(handlecollect(p80_handle(h)),
+  loop(h$handlecollect(p80_handle(h)),
 		  magpie.modelstat$(magpie.modelstat=NA) = 13;
 		  h2(h) = yes;
       i2(i) = yes$supreg(h,i);
@@ -105,7 +104,6 @@ repeat
 
       execerror = 0;
     );
-  );
   display$readyCollect(p80_handle) 'Problem waiting for next instance to complete';
   until card(p80_handle) = 0 OR smax(h, p80_counter(h)) > s80_maxiter+1;
   execerror = 0;
