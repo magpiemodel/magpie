@@ -84,12 +84,12 @@ repeat
 		      magpie.optfile = 2
 	        solve magpie USING nlp MINIMIZING vm_cost_glo;
 	        magpie.optfile = s80_optfile ;
-		      p80_handle(h)  = magpie.handle;
+		      magpie.handle = p80_handle(h);
 		      p80_counter(h) = p80_counter(h) + 1;
           p80_modelstat(t,h) = magpie.modelstat;
 		    else
+		      magpie.handle = p80_handle(h);
 		      solve magpie USING nlp MINIMIZING vm_cost_glo ;
-		      p80_handle(h)  = magpie.handle;
 		      p80_counter(h) = p80_counter(h) + 1;
           p80_modelstat(t,h) = magpie.modelstat;
 		    );
