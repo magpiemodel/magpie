@@ -68,19 +68,19 @@ repeat
       	display p80_counter;
       	display magpie.modelstat;
 		p80_modelstat(t,h) = magpie.modelstat;
+	    display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
 		if(magpie.modelstat <= 2,
-	        display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
 			p80_handle(h) = 0;
 	   	elseif magpie.modelStat > 2 and magpie.modelStat ne 13,
             display "Modelstat != 2. Restarting solve";
-			display$handleSubmit(p80_handle(h)) 'trouble resubmitting handles' ;
-*		    solve magpie USING nlp MINIMIZING vm_cost_glo ;
-*		    p80_handle(h) = magpie.handle;
+*			display$handleSubmit(p80_handle(h)) 'trouble resubmitting handles' ;
+		    solve magpie USING nlp MINIMIZING vm_cost_glo ;
+		    p80_handle(h) = magpie.handle;
 		    p80_counter(h) = p80_counter(h) + 1;
-*        	p80_modelstat(t,h) = magpie.modelstat;
+        	p80_modelstat(t,h) = magpie.modelstat;
 	   	elseif magpie.modelstat = 13,
             display "WARNING: Modelstat 13 | retry without Conopt4 pre-processing";
-	        display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
+*	        display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
 		    magpie.optfile = 2;
 	        solve magpie USING nlp MINIMIZING vm_cost_glo;
 		    p80_handle(h) = magpie.handle;
