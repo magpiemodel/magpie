@@ -66,14 +66,14 @@ repeat
       display p80_counter;
       display magpie.modelstat;
       if(magpie.modelStat > 2 and magpie.modelStat ne 7 and p80_resolve(h),
-      option AsyncSolLst=1;
-      display$handlecollect(p80_handle(h)) 're-collect';
-      option AsyncSolLst=0;
-      p80_resolve(h) = no;
-      p80_counter(h) = p80_counter(h) + 1;
+      	option AsyncSolLst=1;
+      	display$handlecollect(p80_handle(h)) 're-collect';
+      	option AsyncSolLst=0;
+      	p80_resolve(h) = no;
+      	p80_counter(h) = p80_counter(h) + 1;
       );
-      display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
       if(magpie.modelstat <= 2,
+	        display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
 		    p80_handle(h) = 0;
         	p80_modelstat(t,h) = magpie.modelstat;
 		);
