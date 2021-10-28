@@ -92,13 +92,12 @@ repeat
       		display$handlecollect(p80_handle(h)) 're-collect';
       		option AsyncSolLst=0;
       		);		    
-		);
      	h2(h) = no;
 		i2(i) = no;
 		j2(j) = no;
 *	  	execerror = 0;
+		);
 	);
-  );
   display$readyCollect(p80_handle) 'Problem waiting for next instance to complete';
 until card(p80_handle) = 0 OR smax(h, p80_counter(h)) = s80_maxiter;
 
