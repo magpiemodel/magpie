@@ -91,8 +91,8 @@ repeat
 		    else
 		    	magpie.handle = p80_handle(h);
         		execute_loadhandle magpie;
-*				display$handleSubmit(p80_handle(h)) 'trouble resubmitting handles' ;
-		    	solve magpie USING nlp MINIMIZING vm_cost_glo ;
+				display$handleSubmit(p80_handle(h)) 'trouble resubmitting handles' ;
+*		    	solve magpie USING nlp MINIMIZING vm_cost_glo ;
 		    	p80_counter(h) = p80_counter(h) + 1;
         		p80_modelstat(t,h) = magpie.modelstat;
 		    );
