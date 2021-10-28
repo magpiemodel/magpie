@@ -81,7 +81,7 @@ repeat
         if(p80_counter(h)<= s80_maxiter and magpie.modelstat ne 2,
 		    if(magpie.modelstat = 13,
             	display "WARNING: Modelstat 13 | retry without Conopt4 pre-processing";
-		    	magpie.optfile = 2
+		    	magpie.optfile = 2;
 		    	magpie.handle = p80_handle(h);
          	 	execute_loadhandle magpie;
 	        	solve magpie USING nlp MINIMIZING vm_cost_glo;
@@ -91,6 +91,7 @@ repeat
 		    else
 		    	magpie.handle = p80_handle(h);
         		execute_loadhandle magpie;
+*				display$handleSubmit(p80_handle(h)) 'trouble resubmitting handles' ;
 		    	solve magpie USING nlp MINIMIZING vm_cost_glo ;
 		    	p80_counter(h) = p80_counter(h) + 1;
         		p80_modelstat(t,h) = magpie.modelstat;
