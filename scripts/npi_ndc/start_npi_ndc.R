@@ -31,7 +31,7 @@ calc_NPI_NDC <- function(policyregions = "iso",
 
   #read in cellular land cover (stock) from landuse initialization
   land_stock <- read.magpie(land_stock_file)
-  getRegions(land_stock) <- paste(pol_mapping,1:59199,sep=".")
+  getItems(land_stock, dim = 1, raw = TRUE) <- paste(pol_mapping,1:59199,sep=".")
 
   forest_stock <- dimSums(land_stock[,,c("primforest","secdforest","forestry")], dim=3)
   getNames(forest_stock) <- "forest"

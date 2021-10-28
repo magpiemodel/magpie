@@ -7,6 +7,16 @@
 
 option nlp = conopt4;
 
+* A new iteration is started
+p15_iteration_counter(t) = p15_iteration_counter(t) + 1;
+* The set current iter includes only one element with the set element
+* of the current iteration, e.g. "iter2"
+curr_iter15(iter15) = no;
+curr_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)) = yes;
+* Now we also define a set for the previous iteration
+prev_iter15(iter15) = no;
+prev_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)-1) = yes;
+
 * retrieving interfaces from MAgPIE
 * calculate prices for providing 1 kcal per day of one commodity
 
@@ -23,16 +33,6 @@ else
     display "Coupling: Reading out marginal costs from MAgPIE as shock to demand model";
     p15_prices_kcal(t,iso,kfo,curr_iter15)=sum(i_to_iso(i,iso), q15_food_demand.m(i,kfo));
 );
-
-* A new iteration is started
-p15_iteration_counter(t) = p15_iteration_counter(t) + 1;
-* The set current iter includes only one element with the set element
-* of the current iteration, e.g. "iter2"
-curr_iter15(iter15) = no;
-curr_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)) = yes;
-* Now we also define a set for the previous iteration
-prev_iter15(iter15) = no;
-prev_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)-1) = yes;
 
 display "starting iteration number ", p15_iteration_counter;
 display "starting m15_food_demand model....";

@@ -8,6 +8,7 @@
 parameters
         i59_topsoilc_density(t_all,j)      Topsoil carbon density of a hectare of cropland (tC per ha)
         i59_subsoilc_density(t_all,j)      Subsoil carbon density of a hectare of land (tC per ha)
+        i59_nr_som_exogenous_per_ha(t_all,i)      Exogenous nr release due to som release per ha (tN per ha)
 ;
 
 variables

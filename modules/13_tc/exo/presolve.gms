@@ -7,6 +7,10 @@
 
 pc13_land(i) = sum(cell(i,j), pcm_land(j,"crop"));
 
+if (smin(h, f13_tau_scenario(t,h)) <= 0,
+	abort "tau value of 0 detected in at least one region!"
+);
+
 vm_tau.fx(h) = f13_tau_scenario(t,h);
 
 * The costs are shifted over 15 years (exponent 15) to reflect the average

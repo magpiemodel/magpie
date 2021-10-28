@@ -45,5 +45,10 @@ scen_73 Forestry future scenario
 nopaper, construction
 /
 
+build_scen Building wood scenario
+/
+BAU, 10pc, 50pc, 90pc
+/
+
 ;
 *** EOF sets.gms ***

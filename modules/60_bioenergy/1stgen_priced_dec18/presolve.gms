@@ -24,7 +24,7 @@ else
 );
 
 if(m_year(t) <= sm_fix_SSP2,
-i60_bioenergy_dem(t,i) = f60_bioenergy_dem(t,i,"R2M41-SSP2-NPi");
+i60_bioenergy_dem(t,i) = f60_bioenergy_dem(t,i,"R21M42-SSP2-NPi");
 );
 
 * Add minimal bioenergy demand in case of zero demand or very small demand to avoid zero prices

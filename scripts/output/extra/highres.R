@@ -19,7 +19,7 @@ options("magclass.verbosity" = 1)
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdir <- "/p/projects/landuse/users/miodrag/projects/tests/flexreg/output/H12_setup1_2016-11-23_12.38.56/"
+  outputdir <- "output/LAMA65_Sustainability/"
   readArgs("outputdir")
 }
 
@@ -33,55 +33,52 @@ resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
-#lock the model folder
-lock_id <- gms::model_lock(timeout1=1)
-on.exit(gms::model_unlock(lock_id))
+# wait some seconds (random between 5-30 sec) to avoid conflicts with locking the model folder (.lock file)
+Sys.sleep(runif(1, 5, 30))
 
-cfg$results_folder <- "output/:title:"
-
-cfg$output <- c("rds_report")
-
-#set high resolution
-hr <- "c1000"
-
-#update input files. The following files are needed:
-#isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c200_690d3718e151be1b450b394c1064b1c5.tgz
-#isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev42_c1000_690d3718e151be1b450b394c1064b1c5.tgz
-#The calibration file must exist for c200 and c1000 with the same date
-#calibration_H12_c200_26Feb20
-#calibration_H12_c1000_26Feb20
-cfg$input <- gsub("c200",hr,cfg$input)
-
-#max resources for parallel runs
-cfg$qos <- "short_maxMem"
-#magpie4::submitCalibration("H12_c1000")
-#c1000 with endoTC
-
-input_old <- .get_info("input/info.txt", "^Used data set:", ": ")
-
-if(!setequal(cfg$input, input_old)) {
-  # download data and update code
+highres <- function(cfg) {
+  #lock the model folder
+  lock_id <- gms::model_lock(timeout1=1,check_interval=runif(1, 10, 30))
+  on.exit(gms::model_unlock(lock_id), add=TRUE)
+  
+  if(any(!(modelstat(gdx) %in% c(2,7)))) stop("Modelstat different from 2 or 7 detected")
+  
+  cfg$output <- cfg$output[cfg$output!="extra/highres"]
+  
+  #update cellular input files
+#  cfg$input["cellular"] <- "rev4.64_h12_184c2e25_cellularmagpie_c600_MRI-ESM2-0-ssp370_lpjml-4b917a03.tgz"
+  cfg$input["cellular"] <- "rev4.64_h12_9c7a3dce_cellularmagpie_c1000_MRI-ESM2-0-ssp370_lpjml-4b917a03.tgz"
+  
+  #max resources for parallel runs
+  cfg$qos <- "priority_maxMem"
+  
+  #download input files with high resolution
   download_and_update(cfg)
+  
+  #set title
+  cfg$title <- paste0("HR_",cfg$title)
+  cfg$results_folder <- "output/:title:"
+  cfg$force_replace <- TRUE
+  cfg$recalc_npi_ndc <- TRUE
+  
+  #get trade pattern from low resolution run with c200
+  ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
+  ov_supply <- readGDX(gdx,"ov_supply",select=list(type="level"))
+  f21_trade_balance <- ov_prod_reg - ov_supply
+  write.magpie(f21_trade_balance,paste0("modules/21_trade/input/f21_trade_balance.cs3"))
+  
+  #get tau from low resolution run with c200, currently not used.
+  tau(gdx,file = "modules/13_tc/input/f13_tau_scenario.csv")
+  cfg$gms$tc <- "exo"
+  
+  #use exo trade and parallel optimization
+  cfg$gms$trade <- "exo"
+  cfg$gms$optimization <- "nlp_par"
+  cfg$gms$s15_elastic_demand <- 0
+  
+  #cfg$gms$c60_bioenergy_subsidy <- 0
+  
+  start_run(cfg,codeCheck=FALSE,lock_model=FALSE)
 }
+highres(cfg)
 
-#set title
-cfg$title <- paste0("hr_",cfg$title)
-
-#get trade pattern from low resolution run with c200
-ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
-ov_supply <- readGDX(gdx,"ov_supply",select=list(type="level"))
-f21_trade_balance <- ov_prod_reg - ov_supply
-write.magpie(round(f21_trade_balance,6),paste0("modules/21_trade/input/f21_trade_balance.cs3"))
-
-#get tau from low resolution run with c200, currently not used.
-tau(gdx,file = "modules/13_tc/input/f13_tau_scenario.csv",digits = 4)
-
-#use exo trade and parallel optimization
-cfg$gms$trade <- "exo"
-cfg$gms$optimization <- "nlp_par"
-#cfg$gms$s15_elastic_demand <- 0
-#cfg$gms$tc <- "exo"
-
-#cfg$gms$c60_bioenergy_subsidy <- 0
-
-start_run(cfg,codeCheck=FALSE,lock_model=FALSE)

@@ -9,5 +9,5 @@ name,type,reason
 vm_prod_reg,input,questionnaire
 pm_interest,input,questionnaire
 vm_prod,input,questionnaire
-fm_croparea,input,questionnaire
 im_gdp_pc_ppp_iso,input,questionnaire
+pm_prod_init,par,questionnaire
