@@ -36,7 +36,7 @@ $onecho > conopt4.op2
 Flg_Prep = FALSE
 $offecho
 
-magpie.solvelink = 3;
+magpie.solvelink = 6;
 h2(h) = no;
 i2(i) = no;
 j2(j) = no;
