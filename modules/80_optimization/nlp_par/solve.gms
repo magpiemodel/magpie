@@ -59,6 +59,7 @@ loop(h,
 repeat
   loop(h$p80_handle(h),
     if(handleStatus(p80_handle(h)) = 2,
+	    p80_counter(h) = p80_counter(h) + 1;
 		magpie.handle = p80_handle(h);
 		execute_loadhandle magpie;
 		h2(h) = yes;
@@ -69,10 +70,10 @@ repeat
       	display magpie.modelstat;
 		p80_modelstat(t,h) = magpie.modelstat;
 	    display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
-	    p80_handle(h) = 0;
-	    p80_counter(h) = p80_counter(h) + 1;
 	    
-		if(magpie.modelStat > 2 and magpie.modelStat ne 13,
+		if(magpie.modelStat <= 2,
+		    p80_handle(h) = 0;	
+		elseif magpie.modelStat > 2 and magpie.modelStat ne 13,
             display "Modelstat != 2. Restarting solve";
 *			display$handleSubmit(p80_handle(h)) 'trouble resubmitting handles' ;
 		    solve magpie USING nlp MINIMIZING vm_cost_glo ;
@@ -88,7 +89,7 @@ repeat
          	p80_modelstat(t,h) = magpie.modelstat;
          	);
 * write extended run information in list file in the case that the final solution is infeasible
-  		if((p80_counter(h) >= (s80_maxiter-1) and magpie.modelStat > 2 and magpie.modelStat ne 7),
+  		if((p80_counter(h) >= (s80_maxiter) and magpie.modelStat > 2 and magpie.modelStat ne 7),
       		option AsyncSolLst=1;
       		display$handlecollect(p80_handle(h)) 're-collect';
       		option AsyncSolLst=0;
