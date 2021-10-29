@@ -16,10 +16,10 @@ $endif
 
 s80_counter = 0;
 p80_modelstat(t) = 14;
-s80_modelstat_previter = 14
+s80_modelstat_previter = 14;
 *** solver settings
 
-magpie.optfile   = s80_optfile ;
+magpie.optfile   = s80_optfile;
 magpie.scaleopt  = 1 ;
 magpie.solprint  = 0 ;
 magpie.holdfixed = 1 ;
