@@ -15,7 +15,7 @@ $else
 $endif
 
 p80_counter(h) = 0;
-p80_modelstat(t,h) = 4;
+p80_modelstat(t,h) = 14;
 p80_resolve(h) = no;
 
 *** solver settings
@@ -60,15 +60,19 @@ repeat
   loop(h$p80_handle(h),
     if(handleStatus(p80_handle(h)) = 2,
 	    p80_counter(h) = p80_counter(h) + 1;
+
 		magpie.handle = p80_handle(h);
 		execute_loadhandle magpie;
+		
+		s80_modelstat_before = p80_modelstat(t,h);
 		p80_modelstat(t,h) = magpie.modelstat;
 		
 		h2(h) = yes;
       	i2(i) = yes$supreg(h,i);
       	loop(i2, j2(j) = yes$cell(i2,j));
       	display h2;
-      	display p80_counter;
+      	s80_counter = sum(h2,p80_counter(h2));
+      	display s80_counter;
       	display magpie.modelstat;
   		
   		if((p80_counter(h) >= (s80_maxiter) and magpie.modelStat > 2 and magpie.modelStat ne 7),
@@ -81,12 +85,12 @@ repeat
 	    
 		if(magpie.modelStat <= 2,
 		    p80_handle(h) = 0;	
-		elseif magpie.modelStat > 2 and magpie.modelStat ne 13,
+		elseif magpie.modelstat > 2 AND magpie.modelstat ne s80_modelstat_before,
             display "Modelstat != 2. Restarting solve";
 		    solve magpie USING nlp MINIMIZING vm_cost_glo ;
 		    p80_handle(h) = magpie.handle;
-	   	 elseif magpie.modelstat = 13,
-            display "WARNING: Modelstat 13 | retry without Conopt4 pre-processing";
+	   	 elseif magpie.modelstat > 2 AND magpie.modelstat = s80_modelstat_before,
+            display "Modelstat != 2. retry without Conopt4 pre-processing";
 		    magpie.optfile = 2;
 	        solve magpie USING nlp MINIMIZING vm_cost_glo;
 	        magpie.optfile = s80_optfile ;

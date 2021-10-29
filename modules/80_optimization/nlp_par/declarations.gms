@@ -12,3 +12,8 @@ parameters
 	p80_handle(h)       parallel mode handle parameter (1)
 	p80_resolve(h)      parameter needed to collect information of failing hadles
 ;
+
+scalars
+  s80_counter       counter (1)
+  s80_modelstat_before last modelstat (1)
+;
