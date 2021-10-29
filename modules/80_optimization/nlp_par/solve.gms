@@ -87,10 +87,11 @@ repeat
 	        magpie.optfile = s80_optfile ;
 		    p80_counter(h) = p80_counter(h) + 1;
          	p80_modelstat(t,h) = magpie.modelstat;
-	   	elseif magpie.modelStat > 2 and magpie.modelStat ne 7 and p80_counter(h) = s80_maxiter,
+	   	elseif magpie.modelStat > 2 and magpie.modelStat ne 7 and p80_counter(h) >= (s80_maxiter-1),
       		option AsyncSolLst=1;
       		display$handlecollect(p80_handle(h)) 're-collect';
       		option AsyncSolLst=0;
+		    p80_counter(h) = p80_counter(h) + 1;
       		);		    
      	h2(h) = no;
 		i2(i) = no;
@@ -99,7 +100,7 @@ repeat
 		);
 	);
   display$readyCollect(p80_handle) 'Problem waiting for next instance to complete';
-until card(p80_handle) = 0 OR smax(h, p80_counter(h)) = s80_maxiter;
+until card(p80_handle) = 0 OR smax(h, p80_counter(h)) >= s80_maxiter;
 
 if (smax(h,p80_modelstat(t,h)) > 2 and smax(h,p80_modelstat(t,h)) ne 7,
     Execute_Unload "fulldata.gdx";
