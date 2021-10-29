@@ -41,69 +41,53 @@ h2(h) = no;
 i2(i) = no;
 j2(j) = no;
 
+repeat
+	p80_counter(h) = p80_counter(h) + 1;
+
 *submission loop
 loop(h,
   h2(h) = yes;
-	i2(i) = yes$supreg(h,i);
+  i2(i) = yes$supreg(h,i);
   loop(i2, j2(j) = yes$cell(i2,j));
-	solve magpie USING nlp MINIMIZING vm_cost_glo ;
-*	display j2;
-*	display i2;
-  h2(h) = no;
-	i2(i) = no;
-	j2(j) = no;
-	p80_handle(h) = magpie.handle;
-);
-
-*collection loop
-repeat
-  loop(h$p80_handle(h),
-    if(handleStatus(p80_handle(h)) = 2,
-	    p80_counter(h) = p80_counter(h) + 1;
-		magpie.handle = p80_handle(h);
-		execute_loadhandle magpie;
-		p80_modelstat(t,h) = magpie.modelstat;
-		
-		h2(h) = yes;
-      	i2(i) = yes$supreg(h,i);
-      	loop(i2, j2(j) = yes$cell(i2,j));
-      	display h2;
-      	display p80_counter;
-      	display magpie.modelstat;
-  		
-  		if((p80_counter(h) >= (s80_maxiter) and magpie.modelStat > 2 and magpie.modelStat ne 7),
-      		option AsyncSolLst=1;
-      		display$handlecollect(p80_handle(h)) 're-collect';
-      		option AsyncSolLst=0;
-			);
-	    
-	    display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
-	    
-		if(magpie.modelStat <= 2,
-		    p80_handle(h) = 0;	
-		elseif magpie.modelStat > 2 and magpie.modelStat ne 13,
+  		if(p80_modelstat(t,h) <= 2,
+            display "Modelstat <= 2";
+		elseif p80_modelstat(t,h) > 2 and p80_modelstat(t,h) ne 13,
             display "Modelstat != 2. Restarting solve";
 		    solve magpie USING nlp MINIMIZING vm_cost_glo ;
 		    p80_handle(h) = magpie.handle;
-	   	 elseif magpie.modelstat = 13,
+	   	 elseif p80_modelstat(t,h) = 13,
             display "WARNING: Modelstat 13 | retry without Conopt4 pre-processing";
 		    magpie.optfile = 2;
 	        solve magpie USING nlp MINIMIZING vm_cost_glo;
 	        magpie.optfile = s80_optfile ;
 		    p80_handle(h) = magpie.handle;
          	);
-     	h2(h) = no;
-		i2(i) = no;
-		j2(j) = no;
-*	  	execerror = 0;
+  	h2(h) = no;
+	i2(i) = no;
+	j2(j) = no;
+);
+
+*collection loop
+repeat
+  loop(h$p80_handle(h),
+    if(handleStatus(p80_handle(h)) = 2,
+		magpie.handle = p80_handle(h);
+		execute_loadhandle magpie;
+	    p80_handle(h) = 0;	
+		p80_modelstat(t,h) = magpie.modelstat;
+		  		
+  		if((p80_counter(h) >= (s80_maxiter) and magpie.modelStat > 2 and magpie.modelStat ne 7),
+      		option AsyncSolLst=1;
+      		display$handlecollect(p80_handle(h)) 're-collect';
+      		option AsyncSolLst=0;
+			);
+	    display$handledelete(p80_handle(h)) 'trouble deleting handles' ;	    
 		);
 	);
   display$readyCollect(p80_handle) 'Problem waiting for next instance to complete';
-until card(p80_handle) = 0 OR smax(h, p80_counter(h)) >= s80_maxiter;
+until card(p80_handle) = 0;
 
-if ((smax(h,p80_modelstat(t,h)) <= 2),
-  put_utility 'shell' / 'mv -f magpie_p.gdx magpie_' t.tl:0'.gdx';
-);
+until smax(h, p80_counter(h)) >= s80_maxiter;
 
 if (smax(h,p80_modelstat(t,h)) > 2 and smax(h,p80_modelstat(t,h)) ne 7,
     Execute_Unload "fulldata.gdx";
