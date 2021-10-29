@@ -11,5 +11,6 @@ parameters
 ;
 
 scalars
-  s80_counter       counter (1)
+  s80_counter       		counter (1)
+  s80_modelstat_previter 	modelstat of previous iteration (1)
 ;

@@ -64,7 +64,7 @@ repeat
 		magpie.handle = p80_handle(h);
 		execute_loadhandle magpie;
 		
-		s80_modelstat_before = p80_modelstat(t,h);
+		s80_modelstat_previter = p80_modelstat(t,h);
 		p80_modelstat(t,h) = magpie.modelstat;
 		
 		h2(h) = yes;
@@ -90,11 +90,11 @@ repeat
 	    p80_handle(h) = 0;
 	    
 		  if(s80_resolve = 1,
-			if(magpie.modelstat ne s80_modelstat_before,
+			if(magpie.modelstat ne s80_modelstat_previter,
 	            display "Modelstat > 2. Restarting solve";
 			    solve magpie USING nlp MINIMIZING vm_cost_glo ;
 			    p80_handle(h) = magpie.handle;
-	   	 	elseif magpie.modelstat = s80_modelstat_before,
+	   	 	elseif magpie.modelstat = s80_modelstat_previter,
             	display "Modelstat > 2. Retry without Conopt4 pre-processing";
 		    	magpie.optfile = 2;
 	        	solve magpie USING nlp MINIMIZING vm_cost_glo;

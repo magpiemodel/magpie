@@ -15,8 +15,8 @@ $else
 $endif
 
 s80_counter = 0;
-p80_modelstat(t) = 1;
-
+p80_modelstat(t) = 14;
+s80_modelstat_previter = 14
 *** solver settings
 
 magpie.optfile   = s80_optfile ;
@@ -42,21 +42,20 @@ repeat(
   solve magpie USING nlp MINIMIZING vm_cost_glo;
 *' @stop
 
-* if solve stopped with an error, try it again without pre-processing
-    if((magpie.modelstat = 13),
-      display "WARNING: Modelstat 13 | retry without Conopt4 pre-processing";
+if(magpie.modelstat > 2 AND magpie.modelstat = s80_modelstat_previter,
+      display "Modelstat > 2 | retry without Conopt4 pre-processing";
 	  magpie.optfile = 2
       solve magpie USING nlp MINIMIZING vm_cost_glo;
       magpie.optfile   = s80_optfile ;
-    );
-
-* if solve stopped again with an error, try it again with conopt3
-    if((magpie.modelstat = 13),
-      display "WARNING: Modelstat 13 | retry with CONOPT3!";
+    if(magpie.modelstat > 2 AND magpie.modelstat ne 7,
+      display "Modelstat > 2 | retry with CONOPT3!";
       option nlp = conopt;
       solve magpie USING nlp MINIMIZING vm_cost_glo;
       option nlp = conopt4;
-    );
+      );
+ );
+
+  s80_modelstat_previter = magpie.modelstat;
 
   p80_modelstat(t) = magpie.modelstat;
   p80_num_nonopt(t) = magpie.numNOpt;
