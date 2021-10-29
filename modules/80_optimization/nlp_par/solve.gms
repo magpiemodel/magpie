@@ -70,32 +70,29 @@ repeat
 		p80_modelstat(t,h) = magpie.modelstat;
 	    display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
 	    p80_handle(h) = 0;
+	    p80_counter(h) = p80_counter(h) + 1;
 	    
-		if(p80_counter(h) < s80_maxiter,
-		  if(magpie.modelStat > 2 and magpie.modelStat ne 13,
+		if(magpie.modelStat > 2 and magpie.modelStat ne 13,
             display "Modelstat != 2. Restarting solve";
 *			display$handleSubmit(p80_handle(h)) 'trouble resubmitting handles' ;
 		    solve magpie USING nlp MINIMIZING vm_cost_glo ;
 		    p80_handle(h) = magpie.handle;
-		    p80_counter(h) = p80_counter(h) + 1;
         	p80_modelstat(t,h) = magpie.modelstat;
-	   	  elseif magpie.modelstat = 13,
+	   	 elseif magpie.modelstat = 13,
             display "WARNING: Modelstat 13 | retry without Conopt4 pre-processing";
 *	        display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
 		    magpie.optfile = 2;
 	        solve magpie USING nlp MINIMIZING vm_cost_glo;
 		    p80_handle(h) = magpie.handle;
 	        magpie.optfile = s80_optfile ;
-		    p80_counter(h) = p80_counter(h) + 1;
          	p80_modelstat(t,h) = magpie.modelstat;
          	);
-	   	else
-      	  if(magpie.modelStat > 2 and magpie.modelStat ne 7,
+* write extended run information in list file in the case that the final solution is infeasible
+  		if((p80_counter(h) >= (s80_maxiter-1) and magpie.modelStat > 2 and magpie.modelStat ne 7),
       		option AsyncSolLst=1;
       		display$handlecollect(p80_handle(h)) 're-collect';
       		option AsyncSolLst=0;
-      		);
-      	  );		    
+			);
      	h2(h) = no;
 		i2(i) = no;
 		j2(j) = no;
