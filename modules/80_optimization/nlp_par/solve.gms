@@ -24,7 +24,7 @@ magpie.optfile   = s80_optfile ;
 magpie.scaleopt  = 1 ;
 magpie.solprint  = 0 ;
 magpie.holdfixed = 1 ;
-option holdFixedAsync = 1;
+option holdFixedAsync = on;
 
 $onecho > conopt4.opt
 Tol_Obj_Change = 3.0e-6
