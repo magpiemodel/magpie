@@ -3,7 +3,7 @@
 if(!requireNamespace("gms", quietly = TRUE)) install.packages("gms", repos = c("https://rse.pik-potsdam.de/r/packages/", "https://cloud.r-project.org"))
 
 # run codeCheck
-#null <- gms::codeCheck(strict=TRUE)
+null <- gms::codeCheck(strict=TRUE)
 message("")
 
 # make sure that files are not too big

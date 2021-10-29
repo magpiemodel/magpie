@@ -6,3 +6,4 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 vm_costs_additional_mon.scale(i) = 10e4;
+v71_feed_balanceflow.scale(j,kli_rum,kforage) = 10e3;

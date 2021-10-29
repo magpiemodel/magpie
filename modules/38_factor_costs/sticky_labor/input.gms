@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c38_sticky_mode  dynamic
+$setglobal c38_sticky_mode  free
 
 scalars
 *' Depreciation rate assuming roughly 20 years linear depreciation for invesment goods

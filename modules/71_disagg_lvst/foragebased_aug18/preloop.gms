@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 i71_urban_area_share(j) =
-       pm_land_start(j,"urban")/sum(cell(i,j),sum(cell2(i,j3),pm_land_start(j3,"urban")))
+       pcm_land(j,"urban")/sum(cell(i,j),sum(cell2(i,j3),pcm_land(j3,"urban")))
 	   ;
 
 s71_lp_fix = 0;
