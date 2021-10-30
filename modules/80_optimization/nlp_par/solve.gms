@@ -101,11 +101,10 @@ repeat
       			option nlp = conopt;
       			solve magpie USING nlp MINIMIZING vm_cost_glo;
       			option nlp = conopt4;
+		    	p80_handle(h) = magpie.handle;
             	);
               );
          	);
-		  );
-
      	h2(h) = no;
 		i2(i) = no;
 		j2(j) = no;
