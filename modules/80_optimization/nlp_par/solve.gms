@@ -71,7 +71,7 @@ repeat
       	display s80_counter;
       	display magpie.modelstat;
   		
-		if(magpie.modelStat <= 2,
+		if(magpie.modelStat <= 2 AND magpie.numNOpt <= s80_num_nonopt_allowed,
 		    s80_resolve = 0;
 			);
   		

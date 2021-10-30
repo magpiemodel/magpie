@@ -36,31 +36,35 @@ $onecho > conopt4.op2
 Flg_Prep = FALSE
 $offecho
 
-repeat(
-   s80_counter = s80_counter + 1 ;
-
 *' @code
-  solve magpie USING nlp MINIMIZING vm_cost_glo;
+solve magpie USING nlp MINIMIZING vm_cost_glo;
 *' @stop
 
-		  if(magpie.modelstat > 2,
-			if(magpie.modelstat ne s80_modelstat_previter,
-	            display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
-			    solve magpie USING nlp MINIMIZING vm_cost_glo ;
-	   	 	elseif magpie.modelstat = s80_modelstat_previter,
-              if(magpie.optfile = s80_optfile_previter,
-            	display "Modelstat > 2 | Retry solve without CONOPT4 pre-processing";
-		    	magpie.optfile = 2;
-	        	solve magpie USING nlp MINIMIZING vm_cost_glo;
-	        	magpie.optfile   = s80_optfile;
-		      else	
-		        display "Modelstat > 2 | Retry solve with CONOPT3";
-      			option nlp = conopt;
-      			solve magpie USING nlp MINIMIZING vm_cost_glo;
-      			option nlp = conopt4;
-            	);
-              );
-         	);
+display "vm_cost_glo.l";
+display vm_cost_glo.l;
+display magpie.modelstat;
+
+* in case of problems try different solvers and optfile settings
+if(magpie.modelstat > 2 OR magpie.numNOpt > s80_num_nonopt_allowed,
+  repeat(
+   	s80_counter = s80_counter + 1 ;
+
+	if(magpie.modelstat ne s80_modelstat_previter,
+		display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
+		solve magpie USING nlp MINIMIZING vm_cost_glo ;
+	elseif magpie.modelstat = s80_modelstat_previter,
+    	if(magpie.optfile = s80_optfile_previter,
+           	display "Modelstat > 2 | Retry solve without CONOPT4 pre-processing";
+		   	magpie.optfile = 2;
+	       	solve magpie USING nlp MINIMIZING vm_cost_glo;
+	       	magpie.optfile   = s80_optfile;
+		else	
+			display "Modelstat > 2 | Retry solve with CONOPT3";
+			option nlp = conopt;
+			solve magpie USING nlp MINIMIZING vm_cost_glo;
+			option nlp = conopt4;
+			);
+		);
 
   s80_modelstat_previter = magpie.modelstat;
   s80_optfile_previter = magpie.optfile;
@@ -80,11 +84,11 @@ repeat(
   display magpie.modelstat;
 
   until ((p80_modelstat(t) <= 2 and p80_num_nonopt(t) <= s80_num_nonopt_allowed) or s80_counter >= s80_maxiter)
+  );
 );
-
 *' @stop
 
-if ((p80_modelstat(t) < 3),
+if ((p80_modelstat(t) <= 2),
   put_utility 'shell' / 'mv -f magpie_p.gdx magpie_' t.tl:0'.gdx';
 );
 
