@@ -24,7 +24,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-prefix <- "LAMA79"
+prefix <- "LAMA80"
 cfg$force_replace <- TRUE
 
 cfg$gms$factor_costs <- "sticky_labor"
@@ -107,6 +107,16 @@ cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SDP-NPi"
 cfg$gms$policy_countries56  <- all_iso_countries
 cfg$gms$c60_2ndgen_biodem <- "R21M42-SDP-NPi"
 start_run(cfg,codeCheck=FALSE)
+
+#start 3rd run without land-based mitigation (NDC)
+cfg$title <- paste(prefix,"Sustainability-NDC",sep="_")
+cfg <- setScenario(cfg,c("NDC"))
+cfg$gms$c56_pollutant_prices <- "R21M42-SDP-NDC"
+cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SDP-NDC"
+cfg$gms$policy_countries56  <- all_iso_countries
+cfg$gms$c60_2ndgen_biodem <- "R21M42-SDP-NDC"
+start_run(cfg,codeCheck=FALSE)
+
 
 ### Global Inequality, based on SSP4
 cfg$title <- paste(prefix,"Inequality",sep="_")
