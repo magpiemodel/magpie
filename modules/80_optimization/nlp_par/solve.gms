@@ -91,7 +91,7 @@ repeat
 			    solve magpie USING nlp MINIMIZING vm_cost_glo ;
 			    p80_handle(h) = magpie.handle;
 	   	 	elseif magpie.modelstat = s80_modelstat_previter,
-              if(magpie.optfile = s80_optfile_previter
+              if(magpie.optfile = s80_optfile_previter,
             	display "Modelstat > 2 | Retry solve without CONOPT4 pre-processing";
 		    	magpie.optfile = 2;
 	        	solve magpie USING nlp MINIMIZING vm_cost_glo;
