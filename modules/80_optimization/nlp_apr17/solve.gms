@@ -86,7 +86,6 @@ if(magpie.modelstat > 2 OR magpie.numNOpt > s80_num_nonopt_allowed,
   until ((p80_modelstat(t) <= 2 and p80_num_nonopt(t) <= s80_num_nonopt_allowed) or s80_counter >= s80_maxiter)
   );
 );
-*' @stop
 
 if ((p80_modelstat(t) <= 2),
   put_utility 'shell' / 'mv -f magpie_p.gdx magpie_' t.tl:0'.gdx';
