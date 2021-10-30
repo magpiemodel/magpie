@@ -111,10 +111,10 @@ start_run(cfg,codeCheck=FALSE)
 #start 3rd run without land-based mitigation (NDC)
 cfg$title <- paste(prefix,"Sustainability-NDC",sep="_")
 cfg <- setScenario(cfg,c("NDC"))
-cfg$gms$c56_pollutant_prices <- "R21M42-SDP-NDC"
-cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SDP-NDC"
+cfg$gms$c56_pollutant_prices <- "R21M42-SDP-NPi"
+cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SDP-NPi"
 cfg$gms$policy_countries56  <- all_iso_countries
-cfg$gms$c60_2ndgen_biodem <- "R21M42-SDP-NDC"
+cfg$gms$c60_2ndgen_biodem <- "R21M42-SDP-NPi"
 start_run(cfg,codeCheck=FALSE)
 
 
