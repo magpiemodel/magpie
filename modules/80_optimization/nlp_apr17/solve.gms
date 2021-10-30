@@ -42,20 +42,27 @@ repeat(
   solve magpie USING nlp MINIMIZING vm_cost_glo;
 *' @stop
 
-if(magpie.modelstat > 2 AND magpie.modelstat = s80_modelstat_previter,
-      display "Modelstat > 2 | Retry without Conopt4 pre-processing";
-	  magpie.optfile = 2;
-      solve magpie USING nlp MINIMIZING vm_cost_glo;
-      magpie.optfile   = s80_optfile;
-    if(magpie.modelstat > 2 AND magpie.modelstat ne 7,
-      display "Modelstat > 2 | Retry with CONOPT3!";
-      option nlp = conopt;
-      solve magpie USING nlp MINIMIZING vm_cost_glo;
-      option nlp = conopt4;
-      );
- );
+		  if(magpie.modelstat > 2,
+			if(magpie.modelstat ne s80_modelstat_previter,
+	            display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
+			    solve magpie USING nlp MINIMIZING vm_cost_glo ;
+	   	 	elseif magpie.modelstat = s80_modelstat_previter,
+              if(magpie.optfile = s80_optfile_previter,
+            	display "Modelstat > 2 | Retry solve without CONOPT4 pre-processing";
+		    	magpie.optfile = 2;
+	        	solve magpie USING nlp MINIMIZING vm_cost_glo;
+	        	magpie.optfile   = s80_optfile;
+		      else	
+		        display "Modelstat > 2 | Retry solve with CONOPT3";
+      			option nlp = conopt;
+      			solve magpie USING nlp MINIMIZING vm_cost_glo;
+      			option nlp = conopt4;
+            	);
+              );
+         	);
 
   s80_modelstat_previter = magpie.modelstat;
+  s80_optfile_previter = magpie.optfile;
 
   p80_modelstat(t) = magpie.modelstat;
   p80_num_nonopt(t) = magpie.numNOpt;
