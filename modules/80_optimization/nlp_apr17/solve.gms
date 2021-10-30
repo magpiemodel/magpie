@@ -43,12 +43,12 @@ repeat(
 *' @stop
 
 if(magpie.modelstat > 2 AND magpie.modelstat = s80_modelstat_previter,
-      display "Modelstat > 2 | retry without Conopt4 pre-processing";
+      display "Modelstat > 2 | Retry without Conopt4 pre-processing";
 	  magpie.optfile = 2;
       solve magpie USING nlp MINIMIZING vm_cost_glo;
       magpie.optfile   = s80_optfile;
     if(magpie.modelstat > 2 AND magpie.modelstat ne 7,
-      display "Modelstat > 2 | retry with CONOPT3!";
+      display "Modelstat > 2 | Retry with CONOPT3!";
       option nlp = conopt;
       solve magpie USING nlp MINIMIZING vm_cost_glo;
       option nlp = conopt4;

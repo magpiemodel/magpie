@@ -6,19 +6,14 @@
 *** |  Contact: magpie@pik-potsdam.de
 **************start solve loop**************
 
-$ifthen "%c80_nlp_solver%" == "conopt3"
-  option nlp        = conopt ;
-$elseif "%c80_nlp_solver%" == "conopt4"
-  option nlp        = conopt4;
-$else
-  abort "c80_nlp_solver setting not supported in nlp_apr17 realization!";
-$endif
 
 p80_counter(h) = 0;
 p80_modelstat(t,h) = 14;
 
 *** solver settings
 
+option nlp = conopt4;
+magpie.solvelink = 3;
 magpie.optfile   = s80_optfile ;
 magpie.scaleopt  = 1 ;
 magpie.solprint  = 0 ;
@@ -35,7 +30,6 @@ $onecho > conopt4.op2
 Flg_Prep = FALSE
 $offecho
 
-magpie.solvelink = 3;
 h2(h) = no;
 i2(i) = no;
 j2(j) = no;
@@ -66,6 +60,8 @@ repeat
 		
 		s80_modelstat_previter = p80_modelstat(t,h);
 		p80_modelstat(t,h) = magpie.modelstat;
+		s80_optfile_previter = magpie.optfile;
+       	magpie.optfile = s80_optfile;
 		
 		h2(h) = yes;
       	i2(i) = yes$supreg(h,i);
@@ -88,20 +84,28 @@ repeat
 	    
 	    display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
 	    p80_handle(h) = 0;
-	    
+
 		  if(s80_resolve = 1,
 			if(magpie.modelstat ne s80_modelstat_previter,
-	            display "Modelstat > 2. Restarting solve";
+	            display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
 			    solve magpie USING nlp MINIMIZING vm_cost_glo ;
 			    p80_handle(h) = magpie.handle;
 	   	 	elseif magpie.modelstat = s80_modelstat_previter,
-            	display "Modelstat > 2. Retry without Conopt4 pre-processing";
+              if(magpie.optfile = s80_optfile_previter
+            	display "Modelstat > 2 | Retry solve without CONOPT4 pre-processing";
 		    	magpie.optfile = 2;
 	        	solve magpie USING nlp MINIMIZING vm_cost_glo;
-	        	magpie.optfile = s80_optfile ;
 		    	p80_handle(h) = magpie.handle;
+		      else	
+		        display "Modelstat > 2 | Retry solve with CONOPT3";
+      			option nlp = conopt;
+      			solve magpie USING nlp MINIMIZING vm_cost_glo;
+      			option nlp = conopt4;
+            	);
+              );
          	);
 		  );
+
      	h2(h) = no;
 		i2(i) = no;
 		j2(j) = no;
@@ -110,10 +114,6 @@ repeat
 	);
   display$readyCollect(p80_handle) 'Problem waiting for next instance to complete';
 until card(p80_handle) = 0 OR smax(h, p80_counter(h)) >= s80_maxiter;
-
-*if ((smax(h,p80_modelstat(t,h)) <= 2),
-*  put_utility 'shell' / 'mv -f magpie_p.gdx magpie_' t.tl:0'.gdx';
-*);
 
 if (smax(h,p80_modelstat(t,h)) > 2 and smax(h,p80_modelstat(t,h)) ne 7,
     Execute_Unload "fulldata.gdx";
