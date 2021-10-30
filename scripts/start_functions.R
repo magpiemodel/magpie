@@ -211,7 +211,7 @@ download_and_update <- function(cfg) {
 
 
 start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
-                      path_to_report=NULL,LU_pricing="y2010", lock_model=TRUE) {
+                      path_to_report=NULL,LU_pricing="y2010", lock_model=TRUE, path_magpie_ghgprice_report=NA) {
 
   timePrepareStart <- Sys.time()
 
@@ -269,7 +269,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   # will be converted to MAgPIE input, saved to the respective input folders
   # and used as input by the model
   if (!is.null(path_to_report)) {
-    getReportData(path_to_report, LU_pricing)
+    getReportData(path_to_report, LU_pricing, path_magpie_ghgprice_report=path_magpie_ghgprice_report)
     cfg <- gms::setScenario(cfg,"coupling")
   }
 
@@ -462,7 +462,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   return(cfg$results_folder)
 }
 
-getReportData <- function(path_to_report,LU_pricing="y2010") {
+getReportData <- function(path_to_report,LU_pricing="y2010",path_magpie_ghgprice_report=NA) {
 
   if (!requireNamespace("magclass", quietly = TRUE)) {
     stop("Package \"magclass\" needed for this function to work. Please install it.",
@@ -518,5 +518,14 @@ getReportData <- function(path_to_report,LU_pricing="y2010") {
   for(f in files) suppressWarnings(unlink(f))
 
   .bioenergy_demand(mag)
-  .emission_prices(mag)
+
+  # write emission files, if path_magpie_ghgprice_report was specified use that insted the regular report
+  if (is.na(path_magpie_ghgprice_report)) {
+    .emission_prices(mag)
+  } else {
+    ghgrep <- read.report(path_magpie_ghgprice_report, as.list = FALSE)
+    ghgrep <- collapseNames(ghgrep)
+    ghgmag <- deletePlus(rep) #delete "+" and "++" from variable names
+    .emission_prices(ghgmag)
+  }
 }
