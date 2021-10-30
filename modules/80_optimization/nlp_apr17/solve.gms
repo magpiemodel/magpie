@@ -69,23 +69,22 @@ if(magpie.modelstat > 2 OR magpie.numNOpt > s80_num_nonopt_allowed,
   s80_modelstat_previter = magpie.modelstat;
   s80_optfile_previter = magpie.optfile;
 
-  p80_modelstat(t) = magpie.modelstat;
-  p80_num_nonopt(t) = magpie.numNOpt;
-
   display "vm_cost_glo.l";
   display vm_cost_glo.l;
 
 * write extended run information in list file in the case that the final solution is infeasible
-  if((s80_counter >= (s80_maxiter-1) and p80_modelstat(t) > 2 and p80_modelstat(t) ne 7),
+  if((s80_counter >= (s80_maxiter-1) and magpie.modelstat > 2 and magpie.modelstat ne 7),
     magpie.solprint = 1
   );
 
   display s80_counter;
   display magpie.modelstat;
 
-  until ((p80_modelstat(t) <= 2 and p80_num_nonopt(t) <= s80_num_nonopt_allowed) or s80_counter >= s80_maxiter)
+  until ((magpie.modelstat <= 2 and magpie.numNOpt <= s80_num_nonopt_allowed) or s80_counter >= s80_maxiter)
   );
 );
+
+p80_modelstat(t) = magpie.modelstat;
 
 if ((p80_modelstat(t) <= 2),
   put_utility 'shell' / 'mv -f magpie_p.gdx magpie_' t.tl:0'.gdx';
