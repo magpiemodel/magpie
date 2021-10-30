@@ -6,4 +6,5 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 vm_costs_additional_mon.scale(i) = 10e4;
+*Don't scale this variable. Model is very sensitive to scaling this variable and might become infeasible.
 *v71_feed_balanceflow.scale(j,kli_rum,kforage) = 10e3;

@@ -85,6 +85,7 @@ if(magpie.modelstat > 2 OR magpie.numNOpt > s80_num_nonopt_allowed,
 );
 
 p80_modelstat(t) = magpie.modelstat;
+p80_num_nonopt(t) = magpie.numNOpt;
 
 if ((p80_modelstat(t) <= 2),
   put_utility 'shell' / 'mv -f magpie_p.gdx magpie_' t.tl:0'.gdx';
