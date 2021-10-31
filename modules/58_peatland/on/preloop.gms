@@ -18,14 +18,12 @@ p58_ipcc_wetland_ef(clcl58,land58,emis58,"unused") = f58_ipcc_wetland_ef(clcl58,
 * (p58_scaling_factor, see equations for details), degraded peatland is reduced accordingly. 
 * The residual is added to an "unused" category, which represents degraded but unused peatland.
 
-p58_peatland_area(j) = f58_peatland_degrad(j) + f58_peatland_intact(j);
-p58_land_area(j) = sum(land, pcm_land(j,land));
-p58_man_land_area(j) = sum(land58, pcm_land(j,land58));
-p58_scaling_factor(j) = p58_peatland_area(j)/p58_land_area(j);
-*p58_scaling_factor(j) = round(p58_scaling_factor(j),6);
+p58_scaling_factor(j) = (f58_peatland_degrad(j) + f58_peatland_intact(j)) / sum(land, pcm_land(j,land));
+p58_scaling_factor_ini(j) = p58_scaling_factor(j);
 
 pc58_peatland_intact(j) = f58_peatland_intact(j);
 
+p58_man_land_area(j) = sum(land58, pcm_land(j,land58));
 p58_peatland_degrad_weight(j,land58) = 1/card(land58);
 p58_peatland_degrad_weight(j,land58)$(p58_man_land_area(j) > 0) = pcm_land(j,land58) / p58_man_land_area(j);
 p58_peatland_degrad_weight(j,land58) = round(p58_peatland_degrad_weight(j,land58),6);
