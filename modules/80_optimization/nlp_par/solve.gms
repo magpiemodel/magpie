@@ -57,10 +57,10 @@ repeat
 		
 		magpie.handle = p80_handle(h);
 		execute_loadhandle magpie;
-		magpie.modelstat$(magpie.modelstat=NA) = 13;
+		magpie.modelStat$(magpie.modelStat=NA) = 13;
 
 		s80_modelstat_previter = p80_modelstat(t,h);
-		p80_modelstat(t,h) = magpie.modelstat;
+		p80_modelstat(t,h) = magpie.modelStat;
 		s80_optfile_previter = magpie.optfile;
        	magpie.optfile = s80_optfile;
 		
@@ -70,9 +70,10 @@ repeat
       	display h2;
       	s80_counter = sum(h2,p80_counter(h2));
       	display s80_counter;
-      	display magpie.modelstat;
+      	display magpie.modelStat;
   		
-  		if((p80_counter(h) >= (s80_maxiter) and magpie.modelStat > 2 and magpie.modelStat ne 7),
+  		if((p80_counter(h) >= s80_maxiter AND magpie.modelStat > 2 AND magpie.modelStat ne 7),
+      		display "No feasible solution found. Writing LST file."
       		option AsyncSolLst=1;
       		display$handlecollect(p80_handle(h)) 're-collect';
       		option AsyncSolLst=0;
@@ -82,16 +83,19 @@ repeat
 	    display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
 
 		if(magpie.modelStat <= 2 AND magpie.numNOpt <= s80_num_nonopt_allowed,
+		    display "Model status <= 2. Handle cleared."
 		    s80_resolve = 0;
 		    p80_handle(h) = 0;
 			);
-  			    
+			
+		display s80_resolve;
+
 		if(s80_resolve = 1,
 			display "Resolve"
-			if(magpie.modelstat ne s80_modelstat_previter,
+			if(magpie.modelStat ne s80_modelstat_previter,
 	            display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
 			    solve magpie USING nlp MINIMIZING vm_cost_glo ;
-	   	 	elseif magpie.modelstat = s80_modelstat_previter,
+	   	 	elseif magpie.modelStat = s80_modelstat_previter,
               if(magpie.optfile = s80_optfile_previter,
             	display "Modelstat > 2 | Retry solve without CONOPT4 pre-processing";
 		    	magpie.optfile = 2;
@@ -110,6 +114,7 @@ repeat
 		  		);
 		  	p80_handle(h) = magpie.handle;
          	);
+     	display p80_handle;
      	h2(h) = no;
 		i2(i) = no;
 		j2(j) = no;
@@ -120,7 +125,7 @@ until card(p80_handle) = 0 OR smax(h, p80_counter(h)) >= s80_maxiter;
 
 if (smax(h,p80_modelstat(t,h)) > 2 and smax(h,p80_modelstat(t,h)) ne 7,
     Execute_Unload "fulldata.gdx";
-    abort "no feasible solution found!";
+    abort "No feasible solution found!";
 );
 
 * handleSubmit does not work as expected. Does not restart from saved state.
