@@ -110,7 +110,6 @@ repeat
 		j2(j) = no;
 		);
 	);
-	display$sleep()        'sleep some time';
 	display$readyCollect(p80_handle,INF) 'Problem waiting for next instance to complete';
 until card(p80_handle) = 0 OR smax(h, p80_counter(h)) >= s80_maxiter;
 
