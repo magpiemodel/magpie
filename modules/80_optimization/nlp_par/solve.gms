@@ -57,7 +57,8 @@ repeat
 		
 		magpie.handle = p80_handle(h);
 		execute_loadhandle magpie;
-		
+		magpie.modelstat$(magpie.modelstat=NA) = 13;
+
 		s80_modelstat_previter = p80_modelstat(t,h);
 		p80_modelstat(t,h) = magpie.modelstat;
 		s80_optfile_previter = magpie.optfile;
@@ -71,47 +72,46 @@ repeat
       	display s80_counter;
       	display magpie.modelstat;
   		
-		if(magpie.modelStat <= 2 AND magpie.numNOpt <= s80_num_nonopt_allowed,
-		    s80_resolve = 0;
-			);
-  		
   		if((p80_counter(h) >= (s80_maxiter) and magpie.modelStat > 2 and magpie.modelStat ne 7),
       		option AsyncSolLst=1;
       		display$handlecollect(p80_handle(h)) 're-collect';
       		option AsyncSolLst=0;
       		s80_resolve = 0;
 			);
-	    
-	    display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
-	    p80_handle(h) = 0;
 
-		  if(s80_resolve = 1,
+	    display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
+
+		if(magpie.modelStat <= 2 AND magpie.numNOpt <= s80_num_nonopt_allowed,
+		    s80_resolve = 0;
+		    p80_handle(h) = 0;
+			);
+  			    
+		if(s80_resolve = 1,
 			if(magpie.modelstat ne s80_modelstat_previter,
 	            display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
 			    solve magpie USING nlp MINIMIZING vm_cost_glo ;
-			    p80_handle(h) = magpie.handle;
 	   	 	elseif magpie.modelstat = s80_modelstat_previter,
               if(magpie.optfile = s80_optfile_previter,
             	display "Modelstat > 2 | Retry solve without CONOPT4 pre-processing";
 		    	magpie.optfile = 2;
 	        	solve magpie USING nlp MINIMIZING vm_cost_glo;
-		    	p80_handle(h) = magpie.handle;
 		      else	
 		        display "Modelstat > 2 | Retry solve with CONOPT3";
       			option nlp = conopt;
       			solve magpie USING nlp MINIMIZING vm_cost_glo;
       			option nlp = conopt4;
-		    	p80_handle(h) = magpie.handle;
             	);
               );
+		  	execerror = 0;         	
+		  	p80_handle(h) = magpie.handle;
          	);
      	h2(h) = no;
 		i2(i) = no;
 		j2(j) = no;
-	  	execerror = 0;
 		);
 	);
-  display$readyCollect(p80_handle) 'Problem waiting for next instance to complete';
+	display$sleep()        'sleep some time';
+	display$readyCollect(p80_handle,INF) 'Problem waiting for next instance to complete';
 until card(p80_handle) = 0 OR smax(h, p80_counter(h)) >= s80_maxiter;
 
 if (smax(h,p80_modelstat(t,h)) > 2 and smax(h,p80_modelstat(t,h)) ne 7,
