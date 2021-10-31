@@ -105,7 +105,7 @@ repeat
               );
 		  	execerror = 0;         	
 		  	if(magpie.handle = 0,
-		  		display "Problem. Handle is zero despite resolve. Setting handle to 1 for continuation."
+		  		display "Problem. Handle is zero despite resolve. Setting handle to 1 for continuation.";
 		  		magpie.handle = 1;
 		  		);
 		  	p80_handle(h) = magpie.handle;
