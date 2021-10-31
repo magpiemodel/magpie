@@ -73,7 +73,7 @@ repeat
       	display magpie.modelStat;
   		
   		if((p80_counter(h) >= s80_maxiter AND magpie.modelStat > 2 AND magpie.modelStat ne 7),
-      		display "No feasible solution found. Writing LST file."
+      		display "No feasible solution found. Writing LST file.";
       		option AsyncSolLst=1;
       		display$handlecollect(p80_handle(h)) 're-collect';
       		option AsyncSolLst=0;
@@ -83,7 +83,7 @@ repeat
 	    display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
 
 		if(magpie.modelStat <= 2 AND magpie.numNOpt <= s80_num_nonopt_allowed,
-		    display "Model status <= 2. Handle cleared."
+		    display "Model status <= 2. Handle cleared.";
 		    s80_resolve = 0;
 		    p80_handle(h) = 0;
 			);
