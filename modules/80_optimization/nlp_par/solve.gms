@@ -87,6 +87,7 @@ repeat
 			);
   			    
 		if(s80_resolve = 1,
+			display "Resolve"
 			if(magpie.modelstat ne s80_modelstat_previter,
 	            display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
 			    solve magpie USING nlp MINIMIZING vm_cost_glo ;
@@ -103,6 +104,10 @@ repeat
             	);
               );
 		  	execerror = 0;         	
+		  	if(magpie.handle = 0,
+		  		display "Problem. Handle is zero despite resolve. Setting handle to 1 for continuation."
+		  		magpie.handle = 1;
+		  		);
 		  	p80_handle(h) = magpie.handle;
          	);
      	h2(h) = no;
