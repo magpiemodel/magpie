@@ -108,7 +108,7 @@ repeat
      	h2(h) = no;
 		i2(i) = no;
 		j2(j) = no;
-*	  	execerror = 0;
+	  	execerror = 0;
 		);
 	);
   display$readyCollect(p80_handle) 'Problem waiting for next instance to complete';
