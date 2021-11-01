@@ -24,7 +24,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-prefix <- "LAMA80"
+prefix <- "LAMA90"
 cfg$force_replace <- TRUE
 
 cfg$gms$factor_costs <- "sticky_labor"
@@ -52,7 +52,7 @@ cfg$qos <- "priority"
 
 ### Global Sustainability, based on SDP
 cfg$title <- paste(prefix,"Sustainability",sep="_")
-cfg <- setScenario(cfg,c("SDP","NPI","ForestryEndo"))
+cfg <- setScenario(cfg,c("SDP","NDC","ForestryEndo"))
 cfg$gms$c35_protect_scenario <- "FF_BH"
 cfg$gms$c35_protect_scenario_noselect <- "FF_BH"
 cfg$gms$policy_countries35  <- all_iso_countries
@@ -100,7 +100,7 @@ cfg$gms$c60_2ndgen_biodem <- "R21M42-SDP-PkBudg1000"
 #start run
 start_run(cfg,codeCheck=FALSE)
 #start 2nd run without land-based mitigation (NPI)
-cfg$title <- paste(prefix,"Sustainability-NPI",sep="_")
+cfg$title <- paste(prefix,"Sustainability-Ref",sep="_")
 cfg <- setScenario(cfg,c("NPI"))
 cfg$gms$c56_pollutant_prices <- "R21M42-SDP-NPi"
 cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SDP-NPi"
@@ -108,19 +108,9 @@ cfg$gms$policy_countries56  <- all_iso_countries
 cfg$gms$c60_2ndgen_biodem <- "R21M42-SDP-NPi"
 start_run(cfg,codeCheck=FALSE)
 
-#start 3rd run without land-based mitigation (NDC)
-cfg$title <- paste(prefix,"Sustainability-NDC",sep="_")
-cfg <- setScenario(cfg,c("NDC"))
-cfg$gms$c56_pollutant_prices <- "R21M42-SDP-NPi"
-cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SDP-NPi"
-cfg$gms$policy_countries56  <- all_iso_countries
-cfg$gms$c60_2ndgen_biodem <- "R21M42-SDP-NPi"
-start_run(cfg,codeCheck=FALSE)
-
-
 ### Global Inequality, based on SSP4
 cfg$title <- paste(prefix,"Inequality",sep="_")
-cfg <- setScenario(cfg,c("SSP4","NPI","ForestryEndo"))
+cfg <- setScenario(cfg,c("SSP4","NDC","ForestryEndo"))
 cfg$gms$c35_protect_scenario <- "FF_BH"
 cfg$gms$c35_protect_scenario_noselect <- "WDPA"
 cfg$gms$policy_countries35  <- oecd90andEU
@@ -164,7 +154,7 @@ cfg$gms$c60_2ndgen_biodem <- "R21M42-SDP-PkBudg1000"
 #start run
 start_run(cfg,codeCheck=FALSE)
 #start 2nd run without land-based mitigation (NPI)
-cfg$title <- paste(prefix,"Inequality-NPI",sep="_")
+cfg$title <- paste(prefix,"Inequality-Ref",sep="_")
 cfg <- setScenario(cfg,c("NPI"))
 cfg$gms$c56_pollutant_prices <- "R21M42-SDP-NPi"
 cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SDP-NPi"

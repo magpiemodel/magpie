@@ -74,8 +74,9 @@ highres <- function(cfg) {
   f21_trade_balance <- toolAggregate(ov_prod_reg - ov_supply, supreg)
   write.magpie(f21_trade_balance,paste0("modules/21_trade/input/f21_trade_balance.cs3"))
   
-  #get tau from low resolution run with c200, currently not used.
-  tau(gdx,file = "modules/13_tc/input/f13_tau_scenario.csv")
+  #get tau from low resolution run with c200
+  ov_tau <- readGDX(gdx, "ov_tau",select=list(type="level"))
+  write.magpie(ov_tau,"modules/13_tc/input/f13_tau_scenario.csv")
   cfg$gms$tc <- "exo"
   
   #use exo trade and parallel optimization
