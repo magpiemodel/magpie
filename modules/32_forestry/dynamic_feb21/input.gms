@@ -55,14 +55,16 @@ $Ifi "%c32_aff_mask%" == "onlytropical" $include "./modules/32_forestry/input/af
 $offdelim
 /;
 
-table f32_max_aff_area(t,i) Maximum regional afforestation area (mio. ha)
+parameter f32_max_aff_area(t,i) Maximum regional afforestation area (mio. ha)
+/
 $ondelim
 $Ifthen.one "%c32_max_aff_area%" == "regional"
 $Ifthen.two exist "./modules/32_forestry/input/f32_max_aff_area.csv" $include "./modules/32_forestry/input/f32_max_aff_area.csv"
 $else.two abort "File ./modules/32_forestry/input/f32_max_aff_area.csv does not exist";
 $endif.two
 $endif.one
-$ondelim
+$offdelim
+/
 ;
 
 table f32_aff_pol(t_all,j,pol32) npi+ndc afforestation policy (Mha new forest wrt to 2010)
