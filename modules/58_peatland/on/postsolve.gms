@@ -8,8 +8,8 @@
 * Update of degraded peatland based on current managed land in the last time steps of fixed peatland area.  
 if (m_year(t) = s58_fix_peatland,
 	p58_scaling_factor(j) = (sum((man58,land58), v58_peatland_man.l(j,man58,land58)) + v58_peatland_intact.l(j)) / sum(land, vm_land.l(j,land));
-	pc58_peatland_man(j,"degrad",land58) = min(v58_land.l(j,land58)*p58_scaling_factor(j),f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58));
-	pc58_peatland_man(j,"unused",land58) = f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58) - pc58_peatland_man(j,"degrad",land58);
+	pc58_peatland_man(j,"degrad",land58) = min(v58_land.l(j,land58)*p58_scaling_factor(j),sum((man58,land58),v58_peatland_man.l(j,man58,land58)) * p58_peatland_degrad_weight(j,land58));
+	pc58_peatland_man(j,"unused",land58) = sum((man58,land58),v58_peatland_man.l(j,man58,land58)) * p58_peatland_degrad_weight(j,land58) - pc58_peatland_man(j,"degrad",land58);
 else
 	pc58_peatland_man(j,man58,land58) = v58_peatland_man.l(j,man58,land58);
 );
