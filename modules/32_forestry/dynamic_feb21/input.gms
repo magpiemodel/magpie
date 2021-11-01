@@ -57,13 +57,13 @@ $offdelim
 
 $onEmpty
 table f32_max_aff_area(t,i) Maximum regional afforestation area (mio. ha)
+$if.one "%c32_max_aff_area%" == "regional"
 $ondelim
-$Ifthen.one "%c32_max_aff_area%" == "regional"
-$Ifthen.two exist "./modules/32_forestry/input/f32_max_aff_area.csv" $include "./modules/32_forestry/input/f32_max_aff_area.csv"
+$ifthen.two exist "./modules/32_forestry/input/f32_max_aff_area.csv" $include "./modules/32_forestry/input/f32_max_aff_area.csv"
+$offdelim
 $else.two abort "File ./modules/32_forestry/input/f32_max_aff_area.csv does not exist";
 $endif.two
 $endif.one
-$offdelim
 ;
 $offEmpty
 
