@@ -55,6 +55,7 @@ $Ifi "%c32_aff_mask%" == "onlytropical" $include "./modules/32_forestry/input/af
 $offdelim
 /;
 
+$onEmpty
 parameter f32_max_aff_area(t,i) Maximum regional afforestation area (mio. ha)
 /
 $ondelim
@@ -66,6 +67,7 @@ $endif.one
 $offdelim
 /
 ;
+$offEmpty
 
 table f32_aff_pol(t_all,j,pol32) npi+ndc afforestation policy (Mha new forest wrt to 2010)
 $ondelim
