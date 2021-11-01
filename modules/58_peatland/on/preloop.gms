@@ -19,7 +19,6 @@ p58_ipcc_wetland_ef(clcl58,land58,emis58,"unused") = f58_ipcc_wetland_ef(clcl58,
 * The residual is added to an "unused" category, which represents degraded but unused peatland.
 
 p58_scaling_factor(j) = (f58_peatland_degrad(j) + f58_peatland_intact(j)) / sum(land, pcm_land(j,land));
-p58_scaling_factor_ini(j) = p58_scaling_factor(j);
 
 pc58_peatland_intact(j) = f58_peatland_intact(j);
 
