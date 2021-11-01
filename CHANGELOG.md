@@ -60,6 +60,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **15_food** New iteration needs to be started before setting food prices for curr_iter15
 - **scripts** scripts/output/extra/highres.R bugfixes
 - **38_factor_costs** units in sticky_feb18
+- **32_foresty** Global afforestation limit s32_max_aff_area was not effective in case of parallel optimization
 
 ## [4.3.5] - 2021-09-02
 

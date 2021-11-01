@@ -65,14 +65,23 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
  sum(ac_est, v32_land(j2,"ndc",ac_est)) =e= sum(ct, p32_aff_pol_timestep(ct,j2));
 
 *' The constraint `q32_max_aff` accounts for the allowed maximum global
-*' afforestation defined in `p32_max_aff_area`. Note that NPI/NDC afforestation
-*' policies are counted towards the maximum defined in `p32_max_aff_area`.
+*' afforestation defined in `p32_max_aff_area_glo`. 
+*' The constraint `q32_max_aff_reg` accounts for the allowed maximum regional
+*' afforestation defined in `p32_max_aff_area_reg`. 
+*' Only one of the two constraints is active, depending on `c32_max_aff_area_glo`.
+*' Note that NPI/NDC afforestation policies are counted towards the maximum
+*' defined in `p32_max_aff_area_glo` and `p32_max_aff_area_reg`, respectively.
 *' Therefore, the right-hand side of the constraint is tightened by the value of
 *' the exogenously prescribed afforestation that has to be realized in later
 *' time steps (`p32_aff_togo`).
 
- q32_max_aff .. sum((j2,type32,ac)$(not sameas(type32,"plant")), v32_land(j2,type32,ac))
-                =l= p32_max_aff_area - sum(ct, p32_aff_togo(ct));
+ q32_max_aff$(c32_max_aff_area_glo=1) .. 
+ 	sum((j2,type32,ac)$(not sameas(type32,"plant")), v32_land(j2,type32,ac))
+    	=l= p32_max_aff_area_glo - sum((ct,i2), p32_aff_togo(ct,i2));
+
+ q32_max_aff_reg(i2)$(c32_max_aff_area_glo=0) .. 
+ 	sum((cell(i2,j2),type32,ac)$(not sameas(type32,"plant")), v32_land(j2,type32,ac))
+        =l= p32_max_aff_area_reg(i2) - sum(ct, p32_aff_togo(ct,i2));
 
 *-----------------------------------------------
 ************** Carbon stock ********************

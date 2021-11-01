@@ -139,10 +139,11 @@ p32_aff_pol(t,j) = round(f32_aff_pol(t,j,"%c32_aff_policy%"),6);
 
 * Calculate the remaining exogenous afforestation with respect to the maximum exogenous target over time.
 * `p32_aff_togo` is used to adjust `s32_max_aff_area` in the constraint `q32_max_aff`.
-p32_aff_togo(t) = smax(t2, sum(j, p32_aff_pol(t2,j))) - sum(j, p32_aff_pol(t,j));
+p32_aff_togo(t,i) = smax(t2, sum(cell(i,j), p32_aff_pol(t2,j))) - sum(cell(i,j), p32_aff_pol(t,j));
 
-* Adjust the afforestation limit `s32_max_aff_area` upwards, if it is below the exogenous policy target.
-s32_max_aff_area = max(s32_max_aff_area, smax(t2, sum(j, p32_aff_pol(t2,j))) );
+* Adjust the global and regional afforestation limits `s32_max_aff_area` and `f32_max_aff_area` upwards, if it is below the exogenous policy target.
+i32_max_aff_area_glo = max(s32_max_aff_area, smax(t2, sum(j, p32_aff_pol(t2,j))) );
+i32_max_aff_area_reg(i) = max(smax(t2,f32_max_aff_area(t2,i)), smax(t2, sum(cell(i,j), p32_aff_pol(t2,j))));
 
 p32_cdr_ac(t,j,ac) = 0;
 

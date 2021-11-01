@@ -26,10 +26,20 @@ v32_land_reduction.fx(j,type32,ac_est) = 0;
    p32_aff_pol_timestep(t,j)$(p32_aff_pol_timestep(t,j) > p32_aff_pot(t,j)) = p32_aff_pot(t,j);
 ** END ndc **
 
+$ifthen "%c32_max_aff_area%" == "global"
+	c32_max_aff_area_glo = 1;
+$elseif "%c32_max_aff_area%" == "regional"
+	c32_max_aff_area_glo = 0;
+$else 
+	abort "Provided value for c32_max_aff_area is not defined";
+$endif
+
 if(m_year(t) <= sm_fix_SSP2,
- p32_max_aff_area = Inf;
+ p32_max_aff_area_glo = Inf;
+ p32_max_aff_area_reg(i) = Inf
 else
- p32_max_aff_area = s32_max_aff_area;
+ p32_max_aff_area_glo = i32_max_aff_area_glo;
+ p32_max_aff_area_reg(i) = i32_max_aff_area_reg(i);
 );
 
 *' @code

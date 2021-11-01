@@ -84,6 +84,11 @@ highres <- function(cfg) {
   cfg$gms$optimization <- "nlp_par"
   cfg$gms$s15_elastic_demand <- 0
   
+  #get regional afforestation patterns from low resolution run with c200
+  aff <- dimSums(landForestry(gdx)[,,c("aff","ndc")],dim=3)
+  write.magpie(aff,"modules/32_forestry/input/f32_max_aff_area.csv")
+  cfg$gms$c32_max_aff_area <- "regional"
+  
   start_run(cfg,codeCheck=FALSE,lock_model=FALSE)
 }
 highres(cfg)
