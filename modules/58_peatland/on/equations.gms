@@ -63,7 +63,7 @@
 
 *' Future peatland degradation (`v58_peatland_man`) depends on changes of managed land,
 *' scaled with the ratio of total peatland area and total land area (`p58_scaling_factor`).
-*' By multiplying changes in managed land with this scaling factor we implicitly assume
+*' By multiplying changes in managed land (`v58_land`) with this scaling factor we implicitly assume
 *' that intact peatlands are distributed equally within a grid cell.
 *' The following example illustrates the mechanism used for projecting peatland dynamics:
 *' In a given grid cell, the total land area is 50 Mha and the total peatland area is 10 Mha.

@@ -84,8 +84,6 @@ highres <- function(cfg) {
   cfg$gms$optimization <- "nlp_par"
   cfg$gms$s15_elastic_demand <- 0
   
-  #cfg$gms$c60_bioenergy_subsidy <- 0
-  
   start_run(cfg,codeCheck=FALSE,lock_model=FALSE)
 }
 highres(cfg)
