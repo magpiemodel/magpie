@@ -16,7 +16,7 @@ sets
   ef58(man58) Peatland emissions factors
     / degrad, rewet /
 
-  land58(land) Managed land types
+  land58 Managed land types
     / crop, past, forestry /
 
   stat58 Peatland status

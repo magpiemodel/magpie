@@ -112,7 +112,6 @@ repeat
 		  		);
 		  	p80_handle(h) = magpie.handle;
          	);
-     	display p80_handle;
      	h2(h) = no;
 		i2(i) = no;
 		j2(j) = no;

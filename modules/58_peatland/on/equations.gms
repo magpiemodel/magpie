@@ -74,7 +74,13 @@
  q58_peatland_degrad(j2,land58) ..
 	v58_peatland_man(j2,"degrad",land58) =e=
     pc58_peatland_man(j2,"degrad",land58)
-	+ ((vm_land(j2,land58)-pcm_land(j2,land58))*p58_scaling_factor(j2))$(sum(ct, m_year(ct))>s58_fix_peatland);
+	+ ((v58_land(j2,land58)-v58_land.l(j2,land58))*p58_scaling_factor(j2))$(sum(ct, m_year(ct))>s58_fix_peatland);
+
+ q58_land(j2,land58) ..
+	v58_land(j2,land58) =e= 
+		vm_land(j2,"crop")$sameas(land58,"crop")
+		+ vm_land(j2,"past")$sameas(land58,"past")
+		+ vm_land_timber(j2)$sameas(land58,"forestry");
 
 *' This constraint avoids the conversion of intact peatland into rewetted peatland.
 
