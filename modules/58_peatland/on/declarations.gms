@@ -7,7 +7,9 @@
 
 parameters
  p58_scaling_factor(j)								Scaling factor for managed peatland (1)
+ p58_calib_factor(j,land58)							Calibration factor for managed peatland (1)
  p58_intact_ratio(t,j)								Ratio of intact and total peatland (1)
+ p58_peatland_degrad(j)								Intermediate calculation in peatland initialization (mio. ha)
  p58_peatland_degrad_used(j)						Intermediate calculation in peatland initialization (mio. ha)
  p58_peatland_degrad_unused(j)						Intermediate calculation in peatland initialization (mio. ha)
  p58_peatland_degrad_unused_weight(j,land58)		Weight for intermediate calculation in peatland initialization (1)

@@ -32,5 +32,11 @@ p58_peatland_degrad_weight(j,land58) = 1/card(land58);
 p58_peatland_degrad_weight(j,land58)$(p58_man_land_area(j) > 0) = v58_land.l(j,land58) / p58_man_land_area(j);
 
 pc58_peatland_man(j,man58,land58) = 0;
-pc58_peatland_man(j,"degrad",land58) = min(v58_land.l(j,land58)*p58_scaling_factor(j),f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58));
+*pc58_peatland_man(j,"degrad",land58) = min(v58_land.l(j,land58)*p58_scaling_factor(j),f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58));
+p58_calib_factor(j,land58) = 1;
+p58_calib_factor(j,land58)$(v58_land.l(j,land58) * p58_scaling_factor(j) > 0) = (f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58)) / (v58_land.l(j,land58)*p58_scaling_factor(j));
+p58_calib_factor(j,land58)$(p58_calib_factor(j,land58) > 1) = 1;
+pc58_peatland_man(j,"degrad",land58) = v58_land.l(j,land58) * p58_scaling_factor(j) * p58_calib_factor(j,land58);
 pc58_peatland_man(j,"unused",land58) = f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58) - pc58_peatland_man(j,"degrad",land58);
+pc58_peatland_man(j,"unused",land58)$(pc58_peatland_man(j,"unused",land58) < 0) = 0;
+p58_peatland_degrad(j) = sum((man58,land58), pc58_peatland_man(j,man58,land58));
