@@ -242,8 +242,6 @@ loop(j,
 ** Initialization of land
 *p32_land_start_ac(j,type32,ac) = p32_land("y1995",j,type32,ac);
 
-vm_land_timber.l(j) = sum(ac, p32_land_start_ac(j,"plant",ac));
-
 *fix bph effect to zero for all age classes except the ac that is chosen for the bph effect to occur after planting (e.g. canopy closure)
 *fade-in from ac10 to ac30. First effect in ac10 (ord 3), last effect in ac30 (ord 7).
 ac_bph(ac) = no;
