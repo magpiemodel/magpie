@@ -62,7 +62,7 @@ $Ifthen.two exist "./modules/32_forestry/input/f32_max_aff_area.csv" $include ".
 $else.two abort "File ./modules/32_forestry/input/f32_max_aff_area.csv does not exist";
 $endif.two
 $endif.one
-$offdelim
+$ondelim
 ;
 
 table f32_aff_pol(t_all,j,pol32) npi+ndc afforestation policy (Mha new forest wrt to 2010)
