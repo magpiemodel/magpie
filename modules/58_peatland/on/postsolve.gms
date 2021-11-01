@@ -10,6 +10,7 @@ if (m_year(t) = s58_fix_peatland,
 	p58_scaling_factor(j) = (sum((man58,land58), v58_peatland_man.l(j,man58,land58)) + v58_peatland_intact.l(j)) / sum(land, vm_land.l(j,land));
 	p58_calib_factor(j,land58) = 1;
 	p58_calib_factor(j,land58)$(v58_land.l(j,land58) * p58_scaling_factor(j) > 0) = (f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58)) / (v58_land.l(j,land58)*p58_scaling_factor(j));
+	p58_calib_factor(j,land58)$(p58_calib_factor(j,land58) > 1) = 1;
 	pc58_peatland_man(j,"degrad",land58) = v58_land.l(j,land58) * p58_scaling_factor(j) * p58_calib_factor(j,land58);
 	pc58_peatland_man(j,"unused",land58) = p58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58) - pc58_peatland_man(j,"degrad",land58);
 else
