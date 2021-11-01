@@ -141,9 +141,22 @@ p32_aff_pol(t,j) = round(f32_aff_pol(t,j,"%c32_aff_policy%"),6);
 * `p32_aff_togo` is used to adjust `s32_max_aff_area` in the constraint `q32_max_aff`.
 p32_aff_togo(t,i) = smax(t2, sum(cell(i,j), p32_aff_pol(t2,j))) - sum(cell(i,j), p32_aff_pol(t,j));
 
+$ifthen "%c32_max_aff_area%" == "global"
+	c32_max_aff_area_glo = 1;
+$elseif "%c32_max_aff_area%" == "regional"
+	c32_max_aff_area_glo = 0;
+$else 
+	abort "Provided value for c32_max_aff_area is not defined";
+$endif
+
 * Adjust the global and regional afforestation limits `s32_max_aff_area` and `f32_max_aff_area` upwards, if it is below the exogenous policy target.
-i32_max_aff_area_glo = max(s32_max_aff_area, smax(t2, sum(j, p32_aff_pol(t2,j))) );
-i32_max_aff_area_reg(i) = max(smax(t2,f32_max_aff_area(t2,i)), smax(t2, sum(cell(i,j), p32_aff_pol(t2,j))));
+if(c32_max_aff_area_glo = 1,
+	i32_max_aff_area_glo = max(s32_max_aff_area, smax(t2, sum(j, p32_aff_pol(t2,j))));
+	i32_max_aff_area_reg(i) = 0;
+elseif c32_max_aff_area_glo = 0,
+	i32_max_aff_area_glo = 0;
+	i32_max_aff_area_reg(i) = max(smax(t2,f32_max_aff_area(t2,i)), smax(t2, sum(cell(i,j), p32_aff_pol(t2,j))));
+);
 
 p32_cdr_ac(t,j,ac) = 0;
 
