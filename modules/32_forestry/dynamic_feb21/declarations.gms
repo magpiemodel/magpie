@@ -75,7 +75,6 @@ positive variables
  v32_cost_establishment(i)                          Cost of establishment calculated at the current time step (mio. USD)
  v32_hvarea_forestry(j,ac)                          Harvested area from timber plantations (mio. ha)
  vm_prod_forestry(j,kforestry)                      Production of woody biomass from commercial plantations (mio. tDM per yr)
- vm_land_timber(j)									Timber plantation area (mio. ha)
  ;
 
 variables
@@ -107,7 +106,6 @@ equations
  q32_bv_aff(j,potnatveg)                           Biodiversity value for aff forestry land (Mha)
  q32_bv_ndc(j,potnatveg)                           Biodiversity value for ndc forestry land (Mha)
  q32_bv_plant(j,potnatveg)                         Biodiversity value for plantations (Mha)
- q32_land_timber(j)									Timber plantation area (mio. ha)
 ;
 
 
@@ -124,7 +122,6 @@ parameters
  ov32_cost_establishment(t,i,type)          Cost of establishment calculated at the current time step (mio. USD)
  ov32_hvarea_forestry(t,j,ac,type)          Harvested area from timber plantations (mio. ha)
  ov_prod_forestry(t,j,kforestry,type)       Production of woody biomass from commercial plantations (mio. tDM per yr)
- ov_land_timber(t,j,type)                   Timber plantation area (mio. ha)
  ov_cdr_aff(t,j,ac,aff_effect,type)         Expected bgc (CDR) and local bph effects of afforestation depending on planning horizon (mio. tC)
  oq32_cost_total(t,i,type)                  Total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                        Land constraint (mio. ha)
@@ -150,6 +147,5 @@ parameters
  oq32_bv_aff(t,j,potnatveg,type)            Biodiversity value for aff forestry land (Mha)
  oq32_bv_ndc(t,j,potnatveg,type)            Biodiversity value for ndc forestry land (Mha)
  oq32_bv_plant(t,j,potnatveg,type)          Biodiversity value for plantations (Mha)
- oq32_land_timber(t,j,type)                 Timber plantation area (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

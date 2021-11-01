@@ -40,8 +40,7 @@ equations
  q58_peatland_cost_annuity(j)					Annuity costs of peatland conversion in the current timestep (mio. USD05MER per yr)
  q58_peatland_emis_detail(j,emis58)				Detailed GHG emissions from managed peatland (t CO2eq per year)
  q58_peatland_emis(j)							GHG emissions from managed peatland (t CO2eq per year)
- q58_land(j,land58)								Managed land (mio. ha)
- ;
+;
 
 variables
  vm_peatland_cost(j)						One-time and recurring cost of managed peatland including artifical balance cost (mio. USD05MER per yr)
@@ -59,7 +58,6 @@ positive variables
  v58_peatland_intact(j)						Intact peatland (mio. ha)
  v58_balance_positive(j)					Balance variable for peatland transitions (mio. ha)
  v58_balance_negative(j)					Balance variable for peatland transitions (mio. ha)
- v58_land(j,land58)							Managed land (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -76,7 +74,6 @@ parameters
  ov58_peatland_intact(t,j,type)             Intact peatland (mio. ha)
  ov58_balance_positive(t,j,type)            Balance variable for peatland transitions (mio. ha)
  ov58_balance_negative(t,j,type)            Balance variable for peatland transitions (mio. ha)
- ov58_land(t,j,land58,type)                 Managed land (mio. ha)
  oq58_transition_matrix(t,j,type)           Peatland transitions (mio. ha)
  oq58_transition_to(t,j,to58,type)          Peatland transitions to (mio. ha)
  oq58_transition_from(t,j,from58,type)      Peatland transitions from (mio. ha)
@@ -89,6 +86,5 @@ parameters
  oq58_peatland_cost_annuity(t,j,type)       Annuity costs of peatland conversion in the current timestep (mio. USD05MER per yr)
  oq58_peatland_emis_detail(t,j,emis58,type) Detailed GHG emissions from managed peatland (t CO2eq per year)
  oq58_peatland_emis(t,j,type)               GHG emissions from managed peatland (t CO2eq per year)
- oq58_land(t,j,land58,type)                 Managed land (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

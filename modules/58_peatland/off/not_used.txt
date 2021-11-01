@@ -10,4 +10,3 @@ vm_land, input, not used
 pcm_land, input, not used
 pm_interest, input, not used
 pm_climate_class, input, not used
-vm_land_timber, input, not used
