@@ -59,7 +59,7 @@ $onEmpty
 table f32_max_aff_area(t,i) Maximum regional afforestation area (mio. ha)
 $ifthen "%c32_max_aff_area%" == "regional" 
 $ondelim
-$include "./modules/32_forestry/input/f32_max_aff_area.csv"
+$if exist "./modules/32_forestry/input/f32_max_aff_area.csv" $include "./modules/32_forestry/input/f32_max_aff_area.csv"
 $offdelim
 $endif
 ;
