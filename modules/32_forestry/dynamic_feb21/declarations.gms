@@ -129,7 +129,7 @@ parameters
  oq32_carbon(t,j,ag_pools,type)             Forestry carbon stock calculation (mio. tC)
  oq32_land_diff(t,type)                     Aggregated difference in forestry land compared to previous timestep (mio. ha)
  oq32_max_aff(t,type)                       Maximum total global afforestation (mio. ha)
- oq32_max_aff_reg(t,i,type)                 Maximum total global afforestation (mio. ha)
+ oq32_max_aff_reg(t,i,type)                 Maximum total regional afforestation (mio. ha)
  oq32_aff_pol(t,j,type)                     Afforestation policy constraint (mio. ha)
  oq32_aff_est(t,j,type)                     Afforestation constraint for establishment age classes (mio. ha)
  oq32_hvarea_forestry(t,j,ac,type)          Plantations area harvest (mio. ha)

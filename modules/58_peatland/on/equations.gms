@@ -18,8 +18,8 @@
 *' `v58_balance_negative`should deviate from zero only in exceptional cases. 
  
  q58_transition_matrix(j2) ..
-	sum((from58,to58), v58_lu_transitions(j2,from58,to58)) 
-	+ v58_balance_positive(j2) - v58_balance_negative(j2) =e=
+	sum((from58,to58), v58_lu_transitions(j2,from58,to58) 
+	+ v58_balance_positive(j2,from58,to58) - v58_balance_negative(j2,from58,to58)) =e=
 	sum((man58,land58), pc58_peatland_man(j2,man58,land58)) + pc58_peatland_intact(j2);
 
  q58_transition_to(j2,to58) ..
@@ -86,7 +86,7 @@
 *' Costs for peatland degradation and rewetting
 
  q58_peatland_cost_full(j2) ..
-	vm_peatland_cost(j2) =e= v58_peatland_cost(j2) + (v58_balance_positive(j2) + v58_balance_negative(j2)) * s58_cost_balance;
+	vm_peatland_cost(j2) =e= v58_peatland_cost(j2) + sum((from58,to58),v58_balance_positive(j2,from58,to58) + v58_balance_negative(j2,from58,to58)) * s58_cost_balance;
 
  q58_peatland_cost(j2) ..
 	v58_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2) 
