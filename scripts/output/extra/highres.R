@@ -101,6 +101,8 @@ highres <- function(cfg) {
     if(indicator > 1e-06) warning(paste("Global and regional afforestation limit differ by",indicator,"Mha"))
   }
   
+  Sys.sleep(runif(1, 5, 10))
+  
   start_run(cfg,codeCheck=FALSE,lock_model=FALSE)
 }
 highres(cfg)
