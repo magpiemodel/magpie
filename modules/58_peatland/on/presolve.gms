@@ -40,7 +40,6 @@
 
 if (m_year(t) <= s58_fix_peatland,
 	v58_peatland_man.fx(j,man58,land58) = pc58_peatland_man(j,man58,land58);
-*	v58_peatland_man.fx(j,"rewet",land58) = 0;
 	v58_peatland_intact.fx(j) = pc58_peatland_intact(j);
 	i58_cost_rewet_recur(t) = 0;
 	i58_cost_rewet_onetime(t) = 0;
