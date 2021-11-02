@@ -92,7 +92,6 @@ highres <- function(cfg) {
   cfg$gms$c32_max_aff_area <- "regional"
   #check
   if(cfg$gms$s32_max_aff_area < Inf) {
-    aff <- read.magpie("f32_max_aff_area.csv")
     aff_max <- setYears(aff[,1,],NULL)
     for (r in getRegions(aff)) {
       aff_max[r,,] <- max(aff[r,,])
@@ -101,7 +100,7 @@ highres <- function(cfg) {
     if(indicator > 1e-06) warning(paste("Global and regional afforestation limit differ by",indicator,"Mha"))
   }
   
-  Sys.sleep(runif(1, 5, 10))
+  Sys.sleep(2)
   
   start_run(cfg,codeCheck=FALSE,lock_model=FALSE)
 }
