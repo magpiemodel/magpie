@@ -88,7 +88,7 @@ equations
  q32_carbon(j,ag_pools)                             Forestry carbon stock calculation (mio. tC)
  q32_land_diff                                      Aggregated difference in forestry land compared to previous timestep (mio. ha)
  q32_max_aff                                    	Maximum total global afforestation (mio. ha)
- q32_max_aff_reg(i)                                 Maximum total global afforestation (mio. ha)
+ q32_max_aff_reg(i)                                 Maximum total regional afforestation (mio. ha)
  q32_aff_pol(j)                                     Afforestation policy constraint (mio. ha)
  q32_aff_est(j)                                     Afforestation constraint for establishment age classes (mio. ha)
  q32_hvarea_forestry(j,ac)                          Plantations area harvest (mio. ha)

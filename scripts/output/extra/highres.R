@@ -86,6 +86,7 @@ highres <- function(cfg) {
   
   #get regional afforestation patterns from low resolution run with c200
   aff <- dimSums(landForestry(gdx)[,,c("aff","ndc")],dim=3)
+  aff <- aff-setYears(aff[,1,],NULL)
   write.magpie(aff,"modules/32_forestry/input/f32_max_aff_area.csv")
   cfg$gms$c32_max_aff_area <- "regional"
   
