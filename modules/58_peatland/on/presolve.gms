@@ -23,7 +23,13 @@
 	v58_lu_transitions.up(j,"degrad_past","rewet_past") = Inf;
 	v58_lu_transitions.up(j,"degrad_forestry","rewet_forestry") = Inf;
 	v58_lu_transitions.up(j,"unused_crop","degrad_crop") = Inf;
+	v58_lu_transitions.up(j,"unused_crop","degrad_past") = Inf;
+	v58_lu_transitions.up(j,"unused_crop","degrad_forestry") = Inf;
+	v58_lu_transitions.up(j,"unused_past","degrad_crop") = Inf;
 	v58_lu_transitions.up(j,"unused_past","degrad_past") = Inf;
+	v58_lu_transitions.up(j,"unused_past","degrad_forestry") = Inf;
+	v58_lu_transitions.up(j,"unused_forestry","degrad_crop") = Inf;
+	v58_lu_transitions.up(j,"unused_forestry","degrad_past") = Inf;
 	v58_lu_transitions.up(j,"unused_forestry","degrad_forestry") = Inf;
 	v58_lu_transitions.up(j,"unused_crop","rewet_crop") = Inf;
 	v58_lu_transitions.up(j,"unused_past","rewet_past") = Inf;
