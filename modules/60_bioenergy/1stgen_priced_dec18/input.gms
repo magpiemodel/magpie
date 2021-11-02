@@ -38,8 +38,8 @@ scalars
   c60_bioenergy_subsidy first generation bioenergy subsidy (USD05MER per ton) / 300 /
 ;
 
-$setglobal c60_2ndgen_biodem  R2M41-SSP2-NPi
-$setglobal c60_2ndgen_biodem_noselect  R2M41-SSP2-NPi
+$setglobal c60_2ndgen_biodem  R21M42-SSP2-NPi
+$setglobal c60_2ndgen_biodem_noselect  R21M42-SSP2-NPi
 
 
 $if "%c60_2ndgen_biodem%" == "coupling" table f60_bioenergy_dem_coupling(t_all,i) Bioenergy demand (regional) (mio. GJ per yr)

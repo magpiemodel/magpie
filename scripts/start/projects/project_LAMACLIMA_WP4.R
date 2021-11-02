@@ -24,7 +24,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-prefix <- "LAMA77"
+prefix <- "LAMA90"
 cfg$force_replace <- TRUE
 
 cfg$gms$factor_costs <- "sticky_labor"
@@ -38,19 +38,13 @@ cfg$gms$c37_labor_metric <- "ISO"
 cfg$gms$c37_labor_intensity <- "400W"
 cfg$gms$c37_labor_uncertainty <- "ensmean"
 
-#https://www.oecd-ilibrary.org/docserver/9789264243439-8-en.pdf?expires=1620650049&id=id&accname=guest&checksum=7D894DDBF0C64FCC776D3AE6014FA9F0
-oecd90andEU <- "ALB,AUS,AUT,BEL,BIH,BGR,CAN,CYP,CZE,DNK,EST,FIN,FRA,
-				DEU,GRC,HUN,HRV,ISL,IRL,ITA,JPN,LUX,LVA,LTU,MLT,MNE,
-				NLD,NOR,NZL,POL,PRT,ROU,SRB,SVK,SVN,ESP,SWE,CHE,MKD,TUR,
-				GBR,USA"
-
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation","extra/disaggregation_LUH2","extra/highres")
 cfg$qos <- "priority"
 
 ### Global Sustainability, based on SDP
 cfg$title <- paste(prefix,"Sustainability",sep="_")
-cfg <- setScenario(cfg,c("SDP","NPI","ForestryEndo"))
+cfg <- setScenario(cfg,c("SDP","NDC","ForestryEndo"))
 cfg$gms$c35_protect_scenario <- "FF_BH"
 cfg$gms$c35_protect_scenario_noselect <- "FF_BH"
 cfg$gms$policy_countries35  <- all_iso_countries
@@ -98,7 +92,7 @@ cfg$gms$c60_2ndgen_biodem <- "R21M42-SDP-PkBudg1000"
 #start run
 start_run(cfg,codeCheck=FALSE)
 #start 2nd run without land-based mitigation (NPI)
-cfg$title <- paste(prefix,"Sustainability-NPI",sep="_")
+cfg$title <- paste(prefix,"Sustainability-Ref",sep="_")
 cfg <- setScenario(cfg,c("NPI"))
 cfg$gms$c56_pollutant_prices <- "R21M42-SDP-NPi"
 cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SDP-NPi"
@@ -108,7 +102,7 @@ start_run(cfg,codeCheck=FALSE)
 
 ### Global Inequality, based on SSP4
 cfg$title <- paste(prefix,"Inequality",sep="_")
-cfg <- setScenario(cfg,c("SSP4","NPI","ForestryEndo"))
+cfg <- setScenario(cfg,c("SSP4","NDC","ForestryEndo"))
 cfg$gms$c35_protect_scenario <- "FF_BH"
 cfg$gms$c35_protect_scenario_noselect <- "WDPA"
 cfg$gms$policy_countries35  <- oecd90andEU
@@ -152,7 +146,7 @@ cfg$gms$c60_2ndgen_biodem <- "R21M42-SDP-PkBudg1000"
 #start run
 start_run(cfg,codeCheck=FALSE)
 #start 2nd run without land-based mitigation (NPI)
-cfg$title <- paste(prefix,"Inequality-NPI",sep="_")
+cfg$title <- paste(prefix,"Inequality-Ref",sep="_")
 cfg <- setScenario(cfg,c("NPI"))
 cfg$gms$c56_pollutant_prices <- "R21M42-SDP-NPi"
 cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SDP-NPi"
