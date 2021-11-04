@@ -88,14 +88,16 @@ highres <- function(cfg) {
   aff <- dimSums(landForestry(gdx)[,,c("aff","ndc")],dim=3)
   #Take away initial NDC area for consistency with global afforestation limit
   aff <- aff-setYears(aff[,1,],NULL)
-  write.magpie(aff,"modules/32_forestry/input/f32_max_aff_area.csv")
+  #calculate maximum regional afforestation over time
+  aff_max <- setYears(aff[,1,],NULL)
+  for (r in getRegions(aff)) {
+    aff_max[r,,] <- max(aff[r,,])
+  }
+  aff_max[aff_max<0] <- 0
+  write.magpie(aff_max,"modules/32_forestry/input/f32_max_aff_area.cs4")
   cfg$gms$c32_max_aff_area <- "regional"
   #check
   if(cfg$gms$s32_max_aff_area < Inf) {
-    aff_max <- setYears(aff[,1,],NULL)
-    for (r in getRegions(aff)) {
-      aff_max[r,,] <- max(aff[r,,])
-    }
     indicator <- abs(sum(aff_max)-cfg$gms$s32_max_aff_area)
     if(indicator > 1e-06) warning(paste("Global and regional afforestation limit differ by",indicator,"Mha"))
   }
