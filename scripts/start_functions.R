@@ -526,6 +526,13 @@ getReportData <- function(path_to_report,LU_pricing="y2010",path_magpie_ghgprice
     ghgrep <- read.report(path_magpie_ghgprice_report, as.list = FALSE)
     ghgrep <- collapseNames(ghgrep)
     ghgmag <- deletePlus(rep) #delete "+" and "++" from variable names
+    if(!("y1995" %in% getYears(ghgmag))){
+      empty95<-ghgmag[,1,];empty95[,,]<-0;dimnames(empty95)[[2]] <- "y1995"
+      ghgmag <- mbind(empty95,ghgmag)
+    }
+    years <- 1990+5*(1:32)
+    ghgmag <- time_interpolate(ghgmag,years)
+    
     .emission_prices(ghgmag)
   }
 }
