@@ -240,7 +240,7 @@ if(c32_max_aff_area_glo = 1,
 	i32_max_aff_area_reg(i) = 0;
 elseif c32_max_aff_area_glo = 0,
 	i32_max_aff_area_glo = 0;
-	i32_max_aff_area_reg(i) = max(smax(t2,f32_max_aff_area(t2,i)), smax(t2, sum(cell(i,j), p32_aff_pol(t2,j)))) + sum((cell(i,j),ac), p32_land_start_ac(j,"ndc",ac));
+	i32_max_aff_area_reg(i) = max(f32_max_aff_area(i), smax(t2, sum(cell(i,j), p32_aff_pol(t2,j)))) + sum((cell(i,j),ac), p32_land_start_ac(j,"ndc",ac));
 );
 
 *** NPI/NDC policies END
