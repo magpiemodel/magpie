@@ -24,6 +24,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** scripts/start/projects/project_LAMACLIMA.R -> scripts/start/projects/project_LAMACLIMA_WP4.R
 - **58_peatland** "On" realization: Degraded peatland is estimated differently, based on an additional calibration factor.
 - **43_water_availability** changed scaling factor
+- **10_land** Converted "v10_landreduction" to interface "vm_landreduction"
+- **39_landconversion_cost** added calibration factor to realization "devstate", added interface "vm_landreduction"
+
 
 ### added
 - **21_trade** Missing interface parameter for failing exo realization runs
@@ -37,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **37_labor_prod** labor productivity module with two realizations: off and exo
 - **38_factor_costs** new realization "sticky_labor", based on "sticky_feb18" but accounting for changes in labor productivity
 - **15_food** Added additional solve with CONOPT3 in case of modelstat 7
+- **scripts** Added script for land conversion cost calibration
 
 ### removed
 - **32_foresty** Removed static realization
@@ -48,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **20_processing** Removed `substitution_dec18` realization
 - **30_crop** Removed `endo_jun13` realization
 - **scripts** scripts/start/extra/highres.R
+- **39_landconversion_cost** removed realization "global_static_aug18"
 
 ### fixed
 - **80_optimization** Improved solve logic in "nlp_apr17" and "nlp_par" realization, multiple bugfixes and switch to solvelink=3 in "nlp_par"

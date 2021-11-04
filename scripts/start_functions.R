@@ -406,7 +406,28 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
     file.copy("calibration_results.pdf", cfg$results_folder, overwrite=TRUE)
     cat("Calibration factor calculated!\n")
   }
-
+  
+  land_calib_file <- "modules/39_landconversion/input/f39_calib.cs4"
+  if(cfg$recalibrate_landconversion_cost=="ifneeded") {
+    # recalibrate if file does not exist
+    if(!file.exists(land_calib_file)) cfg$recalibrate_landconversion_cost <- TRUE else cfg$recalibrate_landconversion_cost <- FALSE
+  }
+  if(cfg$recalibrate_landconversion_cost){
+    if(cfg$gms$landconversion!="devstate") stop("Land conversion cost calibration works only with realization devstate")
+    cat("Starting calibration factor calculation!\n")
+    source("scripts/calibration/landconversion_cost.R")
+    calibrate_magpie(n_maxcalib = cfg$calib_maxiter,
+                     calib_accuracy = cfg$calib_accuracy,
+                     damping_factor = cfg$damping_factor,
+                     crop_max = 2,
+                     calib_file = land_calib_file,
+                     data_workspace = cfg$val_workspace,
+                     logoption = 3,
+                     debug = cfg$debug,
+                     best_calib = TRUE)
+    cat("Calibration factor calculated!\n")
+  }
+  
   # copy important files into output_folder (before MAgPIE execution)
   for(file in cfg$files2export$start) {
     try(file.copy(Sys.glob(file), cfg$results_folder, overwrite=TRUE))

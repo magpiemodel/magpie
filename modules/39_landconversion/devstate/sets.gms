@@ -7,7 +7,7 @@
 
 sets
    land_establish39(land) Managed land pools
-        / crop, past, forestry /
+        / crop, past, forestry, urban /
 
    land_clearing39(land) Natural vegetation land pools
         / primforest, secdforest, other /

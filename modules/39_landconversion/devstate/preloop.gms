@@ -6,6 +6,16 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 i39_cost_establish(t,i,land) = 0;
+i39_reward_reduction(t,i,land) = 0;
 
 i39_cost_clearing(land) = 0;
 i39_cost_clearing(land_clearing39) = s39_cost_clearing;
+
+i39_calib_cost(i) = f39_calib(i);
+i39_calib_cost(i)$(i39_calib_cost(i) = 0) = 1;
+i39_calib_cost(i)$(s39_ignore_calib = 1) = 1;
+i39_calib_reward(i) = i39_calib_cost(i) - 1;
+i39_calib_reward(i)$(i39_calib_reward(i) < 0) = 0;
+
+display i39_calib_cost;
+display i39_calib_reward;
