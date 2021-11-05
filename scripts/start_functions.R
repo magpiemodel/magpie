@@ -210,8 +210,7 @@ download_and_update <- function(cfg) {
 }
 
 
-start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
-                      path_to_report=NULL,LU_pricing="y2010", lock_model=TRUE) {
+start_run <- function(cfg, codeCheck=TRUE, lock_model=TRUE) {
 
   timePrepareStart <- Sys.time()
 
@@ -240,9 +239,6 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
     on.exit(gms::model_unlock(lock_id), add=TRUE)
   }
 
-  if(!is.null(scenario)) cfg <- gms::setScenario(cfg,scenario)
-  cfg <- gms::check_config(cfg, extras = "info")
-
   # save model version
   cfg$info$version <- citation::read_cff("CITATION.cff")$version
 
@@ -268,8 +264,8 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   # If report and scenname are available the data of this scenario in the report
   # will be converted to MAgPIE input, saved to the respective input folders
   # and used as input by the model
-  if (!is.null(path_to_report)) {
-    getReportData(path_to_report, LU_pricing)
+  if (!is.na(cfg$path_to_report)) {
+    getReportData(cfg$path_to_report, cfg$mute_ghgprices_until, cfg$path_to_report_ghgprices)
     cfg <- gms::setScenario(cfg,"coupling")
   }
 
@@ -462,7 +458,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   return(cfg$results_folder)
 }
 
-getReportData <- function(path_to_report,LU_pricing="y2010") {
+getReportData <- function(path_to_report, mute_ghgprices_until = "y2010", path_to_report_ghgprices = NA) {
 
   if (!requireNamespace("magclass", quietly = TRUE)) {
     stop("Package \"magclass\" needed for this function to work. Please install it.",
@@ -491,8 +487,8 @@ getReportData <- function(path_to_report,LU_pricing="y2010") {
 
     out <- mbind(out_n2o_direct,out_n2o_indirect,out_ch4,out_c)
 
-    # Set prices to zero before and in the year given in LU_pricing
-    y_zeroprices <- getYears(mag)<=LU_pricing
+    # Set prices to zero before and in the year given in mute_ghgprices_until
+    y_zeroprices <- getYears(mag) <= mute_ghgprices_until
     out[,y_zeroprices,]<-0
 
     # Remove GLO region
@@ -518,5 +514,22 @@ getReportData <- function(path_to_report,LU_pricing="y2010") {
   for(f in files) suppressWarnings(unlink(f))
 
   .bioenergy_demand(mag)
-  .emission_prices(mag)
+  
+  # write emission files, if specified use path_to_report_ghgprices instead of the regular report
+  if (is.na(path_to_report_ghgprices)) {
+    .emission_prices(mag)
+  } else {
+    cat("Reading ghg prices from",path_to_report_ghgprices,"\n")
+    ghgrep <- read.report(path_to_report_ghgprices, as.list = FALSE)
+    ghgrep <- collapseNames(ghgrep)
+    ghgmag <- deletePlus(rep) #delete "+" and "++" from variable names
+    if(!("y1995" %in% getYears(ghgmag))){
+      empty95<-ghgmag[,1,];empty95[,,]<-0;dimnames(empty95)[[2]] <- "y1995"
+      ghgmag <- mbind(empty95,ghgmag)
+    }
+    years <- 1990+5*(1:32)
+    ghgmag <- time_interpolate(ghgmag,years)
+
+    .emission_prices(ghgmag)
+  }
 }
