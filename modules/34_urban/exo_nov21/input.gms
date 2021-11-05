@@ -7,6 +7,6 @@
 
 table f34_UrbanLand(t_all, j, gdp_scen09)     Urban land
 $ondelim
-$include "./modules/34_urban/exo21/input/f34_UrbanLand.cs3"
+$include "./modules/34_urban/exo_nov21/input/f34_UrbanLand.cs3"
 $offdelim
 ;

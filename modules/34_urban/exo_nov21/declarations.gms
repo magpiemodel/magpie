@@ -11,15 +11,15 @@ parameters
 
 positive variables
  vm_cost_urban(j)			Technical adjustment costs
- v34_cost1(j)			Technical adjustment costs
- v34_cost2(j)			Technical adjustment costs
+ v34_cost1(j)		    	Technical adjustment costs
+ v34_cost2(j)		     	Technical adjustment costs
 ;
 
 equations
  q34_urban_cell(j)           Constraint for urban land
  q34_urban_land(i)           Prescribe total regional urban land
- q34_urban_cost1(j)
- q34_urban_cost2(j)
+ q34_urban_cost1(j)         Technical punishment equation
+ q34_urban_cost2(j)         Technical punishment equation
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
