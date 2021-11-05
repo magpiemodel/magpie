@@ -85,7 +85,6 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, damping_factor=0.8, calib_f
   ###-> in case it is the first step, it forces the initial factors to be equal to 1
   if(file.exists(calib_file)) {
     old_calib        <- magpiesort(read.magpie(calib_file))
-    getNames(old_calib) <- NULL
   } else {
     old_calib<-new.magpie(cells_and_regions = getCells(calib_divergence),names = c("cost","reward"),fill = 1)
   }
