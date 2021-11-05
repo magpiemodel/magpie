@@ -6,9 +6,14 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *Global cost for cropland expansion are scaled with regional development state (0-1), with s39_cost_establish_crop_min as lower bound.
-i39_cost_establish(t,i,"crop") = max(s39_cost_establish_crop_min,s39_cost_establish_crop_max*im_development_state(t,i)) * i39_calib_cost(i);
+if(ord(t) = 1,
+	i39_cost_establish(t,i,"crop") = max(s39_cost_establish_crop_min,s39_cost_establish_crop_max*im_development_state(t,i));
+	i39_reward_reduction(t,i,"crop") = 0;
+else
+	i39_cost_establish(t,i,"crop") = max(s39_cost_establish_crop_min,s39_cost_establish_crop_max*im_development_state(t,i)) * i39_calib(i,"cost");
+	i39_reward_reduction(t,i,"crop") = s39_reward_crop_reduction * i39_calib(i,"reward");
+);
 i39_cost_establish(t,i,"past") = s39_cost_establish_past;
 i39_cost_establish(t,i,"forestry") = s39_cost_establish_forestry;
 i39_cost_establish(t,i,"urban") = s39_cost_establish_urban;
 
-i39_reward_reduction(t,i,"crop")$(ord(t) > 1) = s39_reward_crop_reduction * i39_calib_reward(i);

@@ -407,7 +407,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
     cat("Calibration factor calculated!\n")
   }
   
-  land_calib_file <- "modules/39_landconversion/input/f39_calib.cs4"
+  land_calib_file <- "modules/39_landconversion/input/f39_calib.csv"
   if(cfg$recalibrate_landconversion_cost=="ifneeded") {
     # recalibrate if file does not exist
     if(!file.exists(land_calib_file)) cfg$recalibrate_landconversion_cost <- TRUE else cfg$recalibrate_landconversion_cost <- FALSE

@@ -35,6 +35,7 @@ calibration_run<-function(putfolder,calib_magpie_name,logoption=3){
 }
 
 # get ratio between modelled area and reference area
+
 get_areacalib <- function(gdx_file) {
   require(magclass)
   require(magpie4)
@@ -49,6 +50,24 @@ get_areacalib <- function(gdx_file) {
   out[out==0] <- 1
   getYears(out) <- NULL
   getNames(out) <- NULL
+  return(magpiesort(out))
+}
+
+get_rewardcalib <- function(gdx_file,calib_factor) {
+  require(magclass)
+  require(magpie4)
+  require(gdx)
+  require(luscale)
+  data <- superAggregate(readGDX(gdx_file,"f10_land"),level="reg",aggr_type = "sum")[,,"crop"]
+  hist <- setYears(data[,2015,],NULL) - setYears(data[,1995,],NULL)
+  getYears(hist) <- NULL
+  getNames(hist) <- NULL
+  
+  out <- calib_factor
+  out[,,] <- 0
+  sel <- which(calib_factor > 1.1 & hist < 0)
+  out[sel,,]   <- calib_factor[sel,,] - 1
+  
   return(magpiesort(out))
 }
 
@@ -68,19 +87,23 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, damping_factor=0.8, calib_f
     old_calib        <- magpiesort(read.magpie(calib_file))
     getNames(old_calib) <- NULL
   } else {
-    old_calib<-new.magpie(cells_and_regions = getCells(calib_divergence),fill = 1)
+    old_calib<-new.magpie(cells_and_regions = getCells(calib_divergence),names = c("cost","reward"),fill = 1)
   }
 
 #initial guess equal to 1
-  if(calibration_step==1) old_calib[,,] <- 1
+  if(calibration_step==1) {
+    old_calib[,,"cost"] <- 1
+    old_calib[,,"reward"] <- 0
+  }
 
-  calib_factor     <- old_calib * (damping_factor*(calib_correction-1) + 1)
+  calib_factor     <- setNames(old_calib[,,"cost"],NULL) * (damping_factor*(calib_correction-1) + 1)
+  
   if(!is.null(crop_max)) {
     above_limit <- (calib_factor > crop_max)
     calib_factor[above_limit]  <- crop_max
     calib_divergence[getRegions(calib_factor),,][above_limit] <- 0
   }
-
+  
   ### write down current calib factors (and area_factors) for tracking
   write_log <- function(x,file,calibration_step) {
     x <- add_dimension(x, dim=3.1, add="iteration", nm=paste0("iter",calibration_step))
@@ -116,12 +139,14 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, damping_factor=0.8, calib_f
 
     getNames(calib_best) <- NULL
     getYears(calib_best) <- NULL
+    calib_reward <- get_rewardcalib(gdx_file,calib_best)
+    calib_best_full <- mbind(setNames(calib_best,"cost"),setNames(calib_reward,"reward"))
     comment <- c(" description: Regional land conversion cost calibration file",
                  " unit: -",
                  paste0(" note: Best calibration factor from the run"),
                  " origin: scripts/calibration/landconversion_cost.R (path relative to model main directory)",
                  paste0(" creation date: ",date()))
-    write.magpie(round(setYears(calib_best,NULL),2), calib_file, comment = comment)
+    write.magpie(round(setYears(calib_best_full,NULL),2), calib_file, comment = comment)
 
     write_log(calib_best,     "land_conversion_cost_calib_factor.cs3"     , "best")
 ####
@@ -131,13 +156,15 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, damping_factor=0.8, calib_f
 }
 }else{
   print("nobest")
+  calib_reward <- get_rewardcalib(gdx_file,calib_factor)
+  calib_full <- mbind(setNames(calib_factor,"cost"),setNames(calib_reward,"reward"))
   comment <- c(" description: Regional land conversion cost calibration file",
                " unit: -",
                paste0(" note: Calibration step ",calibration_step),
                " origin: scripts/calibration/landconversion_cost.R (path relative to model main directory)",
                paste0(" creation date: ",date()))
   
-  write.magpie(round(setYears(calib_factor,NULL),2), calib_file, comment = comment)
+  write.magpie(round(setYears(calib_full,NULL),2), calib_file, comment = comment)
   return(FALSE)
 }
 
@@ -150,7 +177,7 @@ calibrate_magpie <- function(n_maxcalib = 20,
                              crop_max = Inf,
                              calib_magpie_name = "magpie_calib",
                              damping_factor = 0.98,
-                             calib_file = "modules/39_landconversion/input/f39_calib.cs4",
+                             calib_file = "modules/39_landconversion/input/f39_calib.csv",
                              putfolder = "land_conversion_cost_calib_run",
                              data_workspace = NULL,
                              logoption = 3,
@@ -162,7 +189,7 @@ calibrate_magpie <- function(n_maxcalib = 20,
   if(file.exists(calib_file)) file.remove(calib_file)
   for(i in 1:n_maxcalib){
     cat(paste("\nStarting calibration iteration",i,"\n"))
-    calibration_run(putfolder=putfolder, calib_magpie_name=calib_magpie_name, logoption=logoption)
+    #calibration_run(putfolder=putfolder, calib_magpie_name=calib_magpie_name, logoption=logoption)
     if(debug) file.copy(paste0(putfolder,"/fulldata.gdx"),paste0("fulldata_calib",i,".gdx"))
     done <- update_calib(gdx_file=paste0(putfolder,"/fulldata.gdx"),calib_accuracy=calib_accuracy,crop_max=crop_max,damping_factor=damping_factor, calib_file=calib_file, calibration_step=i,n_maxcalib=n_maxcalib,best_calib = best_calib)
     if(done){
@@ -171,8 +198,8 @@ calibrate_magpie <- function(n_maxcalib = 20,
   }
 
   # delete calib_magpie_gms in the main folder
-  unlink(paste0(calib_magpie_name,".*"))
-  unlink("fulldata.gdx")
+  #unlink(paste0(calib_magpie_name,".*"))
+  #unlink("fulldata.gdx")
 
   cat("\ncalibration finished\n")
 }

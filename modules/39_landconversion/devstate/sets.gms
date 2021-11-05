@@ -11,4 +11,7 @@ sets
 
    land_clearing39(land) Natural vegetation land pools
         / primforest, secdforest, other /
+
+	type39 Cost type
+		/ cost, reward /
 ;
