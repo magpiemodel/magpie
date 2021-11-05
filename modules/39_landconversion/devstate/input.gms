@@ -11,7 +11,7 @@ scalars
  s39_cost_establish_past   	   Cost for pasture land expansion (USD05MER per hectare)    / 8000 /
  s39_cost_establish_forestry   Cost for foresty land expansion (USD05MER per hectare)    / 1000 /
  s39_cost_establish_urban  	   Cost for urban land expansion (USD05MER per hectare)    / 10000 /
- s39_reward_crop_reduction     Reward for cropland reduction (USD05MER per hectare)    / 40000 /
+ s39_reward_crop_reduction     Reward for cropland reduction (USD05MER per hectare)    / 10000 /
  s39_cost_clearing    		   Clearing costs linked to removed biomass (USD05MER per ton C)  / 0 /
  s39_ignore_calib			   Switch for ignoring calibration factors (1) / 0 /
 ;
