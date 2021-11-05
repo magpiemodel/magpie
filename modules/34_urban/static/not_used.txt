@@ -7,4 +7,3 @@
 
 name,type,reason
 sm_fix_SSP2, input, not needed
-vm_cost_urban, input, not needed
