@@ -17,10 +17,9 @@ scalars
 ;
 
 $onEmpty
-parameter f39_calib(i,type39) Calibration factor for costs of cropland expansion (1)
-/
+table f39_calib(i,type39) Calibration factor for costs of cropland expansion (1)
 $ondelim
-$if exist "./modules/39_landconversion/input/f39_calib.cs4" $include "./modules/39_landconversion/input/f39_calib.cs4"
+$if exist "./modules/39_landconversion/input/f39_calib.csv" $include "./modules/39_landconversion/input/f39_calib.csv"
 $offdelim
-/;
+;
 $offEmpty
