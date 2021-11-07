@@ -106,7 +106,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, damping_factor=0.8, calib_f
   ### write down current calib factors (and area_factors) for tracking
   write_log <- function(x,file,calibration_step) {
     x <- add_dimension(x, dim=3.1, add="iteration", nm=paste0("iter",calibration_step))
-    try(write.magpie(round(setYears(x,NULL),2), file, append = (calibration_step!=1)))
+    try(write.magpie(round(setYears(x,NULL),3), file, append = (calibration_step!=1)))
   }
   
   write_log(calib_correction, "land_conversion_cost_calib_correction.cs3" , calibration_step)
@@ -145,7 +145,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, damping_factor=0.8, calib_f
                  paste0(" note: Best calibration factor from the run"),
                  " origin: scripts/calibration/landconversion_cost.R (path relative to model main directory)",
                  paste0(" creation date: ",date()))
-    write.magpie(round(setYears(calib_best_full,NULL),2), calib_file, comment = comment)
+    write.magpie(round(setYears(calib_best_full,NULL),3), calib_file, comment = comment)
 
     write_log(calib_best,     "land_conversion_cost_calib_factor.cs3"     , "best")
 ####
@@ -163,7 +163,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, damping_factor=0.8, calib_f
                " origin: scripts/calibration/landconversion_cost.R (path relative to model main directory)",
                paste0(" creation date: ",date()))
   
-  write.magpie(round(setYears(calib_full,NULL),2), calib_file, comment = comment)
+  write.magpie(round(setYears(calib_full,NULL),3), calib_file, comment = comment)
   return(FALSE)
 }
 
