@@ -65,7 +65,7 @@ get_rewardcalib <- function(gdx_file,calib_factor) {
   
   out <- calib_factor
   out[,,] <- 0
-  sel <- which(calib_factor > 1.1 & hist < 0)
+  sel <- which(calib_factor > 1.05 & hist < 0)
   out[sel,,]   <- calib_factor[sel,,] - 1
   
   return(magpiesort(out))
