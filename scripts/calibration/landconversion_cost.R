@@ -26,7 +26,7 @@ calibration_run<-function(putfolder,calib_magpie_name,logoption=3){
     stop(paste("Unable to create",paste(calib_magpie_name,".gms",sep="")))
   }
   lucode2::manipulateConfig(paste(calib_magpie_name,".gms",sep=""),c_timesteps="calib")
-  lucode2::manipulateConfig(paste(calib_magpie_name,".gms",sep=""),s_use_gdx=2)
+  lucode2::manipulateConfig(paste(calib_magpie_name,".gms",sep=""),s_use_gdx=0)
   file.copy(paste(calib_magpie_name,".gms",sep=""),putfolder)
 
   # execute calibration run
@@ -65,8 +65,8 @@ get_rewardcalib <- function(gdx_file,calib_factor) {
   
   out <- calib_factor
   out[,,] <- 0
-  sel <- which(calib_factor > 1.05 & hist < 0)
-  out[sel,,]   <- calib_factor[sel,,] - 1
+  sel <- which(calib_factor > 1 & hist < 0)
+  out[sel,,]   <- (calib_factor[sel,,] - 1)^2
   
   return(magpiesort(out))
 }
