@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- **34_urban** New exo_nov21 exogenous realization of urban land expansion 
+
 ### changed
 
 - **51_nitrogen** parameter change in rescaled_jan21, now including regionalized climate-dependent leaching factors
