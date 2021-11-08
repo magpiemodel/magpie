@@ -29,7 +29,7 @@ parameters
  ov34_cost2(t,j,type)       Technical adjustment costs
  oq34_urban_cell(t,j,type)  Constraint for urban land
  oq34_urban_land(t,i,type)  Prescribe total regional urban land
- oq34_urban_cost1(t,j,type)
- oq34_urban_cost2(t,j,type)
+ oq34_urban_cost1(t,j,type) Technical punishment equation
+ oq34_urban_cost2(t,j,type) Technical punishment equation
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

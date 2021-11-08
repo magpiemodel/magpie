@@ -14,5 +14,6 @@
 *' @authors Jan Philipp Dietrich, Florian Humpenöder, David Chen
 
 *###################### R SECTION START (MODULETYPES) ##########################
+$Ifi "%urban%" == "exo_nov21" $include "./modules/34_urban/exo_nov21/realization.gms"
 $Ifi "%urban%" == "static" $include "./modules/34_urban/static/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

@@ -9,3 +9,10 @@
 positive variables
  vm_cost_urban(j)			Technical adjustment cost
 ;
+
+*#################### R SECTION START (OUTPUT DECLARATIONS) ####################
+parameters
+ ov_cost_urban(t,j,type) Technical adjustment cost
+;
+*##################### R SECTION END (OUTPUT DECLARATIONS) #####################
+

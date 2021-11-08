@@ -12,10 +12,10 @@
 *' @limitations Urban land is exogenously prescribed and does not interact with other model dynamics.
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "declarations" $include "./modules/34_urban/exo21/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/34_urban/exo21/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/34_urban/exo21/equations.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/34_urban/exo21/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/34_urban/exo21/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/34_urban/exo21/postsolve.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/34_urban/exo_nov21/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/34_urban/exo_nov21/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/34_urban/exo_nov21/equations.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/34_urban/exo_nov21/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/34_urban/exo_nov21/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/34_urban/exo_nov21/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
