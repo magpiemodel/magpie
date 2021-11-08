@@ -71,6 +71,29 @@ get_rewardcalib <- function(gdx_file,calib_factor) {
   return(magpiesort(out))
 }
 
+get_yieldcalib <- function(gdx_file) {
+  require(magclass)
+  require(magpie4)
+  require(gdx)
+  require(luscale)
+  if(file.exists("input/validation.rds")) {
+    data <- readRDS("input/validation.rds")
+  } else {
+    data <- read.report("input/validation.mif",as.list = F)
+    saveRDS(data,"input/validation.rds")
+  }
+  magpie <- setNames(reportYields(gdx_file,detail=FALSE)[,2010,"Productivity|Yield|+|Crops (t DM/ha)"]["GLO",,invert=TRUE],NULL)
+  data <- setNames(data[getRegions(magpie),2010,"historical.FAO.Productivity|Yield|Crops (t DM/ha)"],NULL)
+  if(nregions(magpie)!=nregions(data) | !all(getRegions(magpie) %in% getRegions(data))) {
+    stop("Regions in MAgPIE do not agree with regions in reference calibration area data set!")
+  }
+  out <- data/magpie
+  out[out==0] <- 1
+  getYears(out) <- NULL
+  getNames(out) <- NULL
+  return(magpiesort(out))
+}
+
 # Calculate the correction factor and save it
 update_calib<-function(gdx_file, calib_accuracy=0.1, damping_factor=0.8, calib_file, crop_max=2, calibration_step="",n_maxcalib=20, best_calib = FALSE){
   print("ENTER update")
@@ -79,7 +102,8 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, damping_factor=0.8, calib_f
   if(!(modelstat(gdx_file)[1,1,1]%in%c(1,2,7))) stop("Calibration run infeasible")
 
   area_factor  <- get_areacalib(gdx_file)
-  calib_correction <- area_factor
+  yield_factor  <- get_yieldcalib(gdx_file)
+  calib_correction <- area_factor*yield_factor
   calib_divergence <- abs(calib_correction-1)
 
   ###-> in case it is the first step, it forces the initial factors to be equal to 1
