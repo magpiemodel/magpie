@@ -76,14 +76,10 @@ get_yieldcalib <- function(gdx_file) {
   require(magpie4)
   require(gdx)
   require(luscale)
-  if(file.exists("input/validation.rds")) {
-    data <- readRDS("input/validation.rds")
-  } else {
-    data <- read.report("input/validation.mif",as.list = F)
-    saveRDS(data,"input/validation.rds")
-  }
-  magpie <- setNames(reportYields(gdx_file,detail=FALSE)[,2010,"Productivity|Yield|+|Crops (t DM/ha)"]["GLO",,invert=TRUE],NULL)
-  data <- setNames(data[getRegions(magpie),2010,"historical.FAO.Productivity|Yield|Crops (t DM/ha)"],NULL)
+  kcr <- readGDX(gdx_file,"kcr")
+  #kcr <- kcr[1:(length(kcr)-3)]
+  data <- dimSums(croparea(gdx_file,products="kcr",product_aggr = FALSE)[,2010,]*readGDX(gdx_file,"f14_fao_yields_hist")[,2010,kcr],dim=3)/dimSums(croparea(gdx_file,products="kcr",product_aggr = FALSE)[,2010,],dim=3)
+  magpie <- yields(gdx_file,products = "kcr",product_aggr = TRUE)[,2010,]
   if(nregions(magpie)!=nregions(data) | !all(getRegions(magpie) %in% getRegions(data))) {
     stop("Regions in MAgPIE do not agree with regions in reference calibration area data set!")
   }
@@ -124,9 +120,9 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, damping_factor=0.8, calib_f
   if(!(modelstat(gdx_file)[1,1,1]%in%c(1,2,7))) stop("Calibration run infeasible")
 
   area_factor  <- get_areacalib(gdx_file)
-#  yield_factor  <- get_yieldcalib(gdx_file)
-  tau_factor  <- get_taucalib(gdx_file)
-  calib_correction <- area_factor*tau_factor
+  yield_factor  <- get_yieldcalib(gdx_file)
+#  tau_factor  <- get_taucalib(gdx_file)
+  calib_correction <- area_factor*yield_factor
   calib_divergence <- abs(calib_correction-1)
 
   ###-> in case it is the first step, it forces the initial factors to be equal to 1
