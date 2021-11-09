@@ -104,8 +104,12 @@ get_taucalib <- function(gdx_file) {
   if(nregions(magpie)!=nregions(data) | !all(getRegions(magpie) %in% getRegions(data))) {
     stop("Regions in MAgPIE do not agree with regions in reference calibration area data set!")
   }
+  # Increase land conversion costs to get more TAU (out > 1)
+  # Decrease land conversion costs to get less TAU (out < 1)
   out <- data/magpie
   out[out==0] <- 1
+  out[out<=1] <- 1 # historical TAU as lower bound. Higher values are OK.
+  out[out>=1.1] <- 1.1 # upper bound for increase set to 10%
   getYears(out) <- NULL
   getNames(out) <- NULL
   return(magpiesort(out))
