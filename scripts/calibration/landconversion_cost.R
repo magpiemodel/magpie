@@ -48,6 +48,8 @@ get_areacalib <- function(gdx_file) {
   }
   out <- magpie/data
   out[out==0] <- 1
+  out[out<=0.8] <- 0.8
+  out[out>=1.2] <- 1.2
   getYears(out) <- NULL
   getNames(out) <- NULL
   return(magpiesort(out))
@@ -85,6 +87,8 @@ get_yieldcalib <- function(gdx_file) {
   }
   out <- data/magpie
   out[out==0] <- 1
+  out[out<=0.8] <- 0.8
+  out[out>=1.2] <- 1.2
   getYears(out) <- NULL
   getNames(out) <- NULL
   return(magpiesort(out))
