@@ -41,8 +41,8 @@ get_areacalib <- function(gdx_file) {
   require(magpie4)
   require(gdx)
   require(luscale)
-  data <- superAggregate(readGDX(gdx_file,"f10_land"),level="reg",aggr_type = "sum")[,2015,"crop"]
-  magpie <- land(gdx_file)[,,c("crop")][,2015,]
+  data <- superAggregate(readGDX(gdx_file,"f10_land"),level="reg",aggr_type = "sum")[,2010,"crop"]
+  magpie <- land(gdx_file)[,,c("crop")][,2010,]
   if(nregions(magpie)!=nregions(data) | !all(getRegions(magpie) %in% getRegions(data))) {
     stop("Regions in MAgPIE do not agree with regions in reference calibration area data set!")
   }
@@ -59,7 +59,7 @@ get_rewardcalib <- function(gdx_file,calib_factor) {
   require(gdx)
   require(luscale)
   data <- superAggregate(readGDX(gdx_file,"f10_land"),level="reg",aggr_type = "sum")[,,"crop"]
-  hist <- setYears(data[,2015,],NULL) - setYears(data[,1995,],NULL)
+  hist <- setYears(data[,2010,],NULL) - setYears(data[,1995,],NULL)
   getYears(hist) <- NULL
   getNames(hist) <- NULL
   
@@ -94,6 +94,24 @@ get_yieldcalib <- function(gdx_file) {
   return(magpiesort(out))
 }
 
+get_taucalib <- function(gdx_file) {
+  require(magclass)
+  require(magpie4)
+  require(gdx)
+  require(luscale)
+  data <- superAggregate(readGDX(gdx_file,"f13_tau_historical"),level="reg",aggr_type = "sum")[,2010,]
+  magpie <- tau(gdx_file)[,2010,]
+  if(nregions(magpie)!=nregions(data) | !all(getRegions(magpie) %in% getRegions(data))) {
+    stop("Regions in MAgPIE do not agree with regions in reference calibration area data set!")
+  }
+  out <- data/magpie
+  out[out==0] <- 1
+  getYears(out) <- NULL
+  getNames(out) <- NULL
+  return(magpiesort(out))
+}
+
+
 # Calculate the correction factor and save it
 update_calib<-function(gdx_file, calib_accuracy=0.1, damping_factor=0.8, calib_file, crop_max=2, calibration_step="",n_maxcalib=20, best_calib = FALSE){
   print("ENTER update")
@@ -102,8 +120,9 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, damping_factor=0.8, calib_f
   if(!(modelstat(gdx_file)[1,1,1]%in%c(1,2,7))) stop("Calibration run infeasible")
 
   area_factor  <- get_areacalib(gdx_file)
-  yield_factor  <- get_yieldcalib(gdx_file)
-  calib_correction <- area_factor*yield_factor
+#  yield_factor  <- get_yieldcalib(gdx_file)
+  tau_factor  <- get_taucalib(gdx_file)
+  calib_correction <- area_factor*tau_factor
   calib_divergence <- abs(calib_correction-1)
 
   ###-> in case it is the first step, it forces the initial factors to be equal to 1
