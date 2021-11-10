@@ -390,7 +390,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
     cfg$recalibrate <- all(magclass::read.magpie(calib_file)==1)
   }
   if(cfg$recalibrate){
-    cat("Starting calibration factor calculation!\n")
+    cat("Starting yield calibration factor calculation!\n")
     source("scripts/calibration/calc_calib.R")
     calibrate_magpie(n_maxcalib = cfg$calib_maxiter,
                      calib_accuracy = cfg$calib_accuracy,
@@ -404,7 +404,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
                      debug = cfg$debug,
                      best_calib = cfg$best_calib)
     file.copy("calibration_results.pdf", cfg$results_folder, overwrite=TRUE)
-    cat("Calibration factor calculated!\n")
+    cat("Yield calibration factor calculated!\n")
   }
   
   land_calib_file <- "modules/39_landconversion/input/f39_calib.csv"
@@ -414,7 +414,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
   }
   if(cfg$recalibrate_landconversion_cost){
     if(cfg$gms$landconversion!="devstate") stop("Land conversion cost calibration works only with realization devstate")
-    cat("Starting calibration factor calculation!\n")
+    cat("Starting land conversion cost calibration factor calculation!\n")
     source("scripts/calibration/landconversion_cost.R")
     calibrate_magpie(n_maxcalib = cfg$calib_maxiter_landconversion_cost,
                      calib_accuracy = cfg$calib_accuracy_landconversion_cost,
@@ -426,7 +426,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
                      logoption = 3,
                      debug = cfg$debug,
                      best_calib = cfg$best_calib_landconversion_cost)
-    cat("Calibration factor calculated!\n")
+    cat("Land conversion cost calibration factor calculated!\n")
   }
   
   # copy important files into output_folder (before MAgPIE execution)

@@ -6,10 +6,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @equations
-*' Land establishment costs apply on expansion of cropland, pasture and forestry.
+*' Land establishment costs apply on expansion of cropland, pasture, forestry and urban land.
+*' Reward for land reduction is only used for cropland, and only for those regions with a decline of cropland between 1995 and 2015 in historic data.
 *' Land clearing costs apply on reduction of carbon stock in primary forest, secondary forest
 *' and other natural land.
-*' The sum of land establishment and land clearing costs in the current time step
+*' The sum of land establishment cost, reward for land reduction and land clearing costs in the current time step
 *' is multiplied with an annuity factor to distribute these costs over time.
 
 q39_cost_landcon(j2,land) .. vm_cost_landcon(j2,land) =e=

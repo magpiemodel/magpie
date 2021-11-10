@@ -196,5 +196,5 @@ calibrate_magpie <- function(n_maxcalib = 1,
   unlink(paste0(calib_magpie_name,".*"))
   unlink("fulldata.gdx")
 
-  cat("\ncalibration finished\n")
+  cat("\nYield calibration finished\n")
 }
