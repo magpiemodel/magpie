@@ -26,5 +26,6 @@ cfg$title <- "calib_run"
 cfg$output <- c("rds_report","validation_short")
 cfg$sequential <- TRUE
 cfg$force_download <- TRUE
+cfg$force_replace <- TRUE
 start_run(cfg,codeCheck=FALSE)
 magpie4::submitCalibration("H12")

@@ -37,7 +37,8 @@ for(r in realizations){
       cfg$output <- c("rds_report","validation_short")
       cfg$sequential <- TRUE
       cfg$force_download <- TRUE
-
+      cfg$force_replace <- TRUE
+      
       cfg$gms$factor_costs     <-   r
       cfg$gms$c38_sticky_mode  <-   t
 
