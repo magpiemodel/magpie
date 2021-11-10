@@ -71,49 +71,6 @@ get_rewardcalib <- function(gdx_file,calib_factor) {
   return(magpiesort(out))
 }
 
-get_yieldcalib <- function(gdx_file) {
-  require(magclass)
-  require(magpie4)
-  require(gdx)
-  require(luscale)
-  kcr <- readGDX(gdx_file,"kcr")
-  #kcr <- kcr[1:(length(kcr)-3)]
-  data <- dimSums(croparea(gdx_file,products="kcr",product_aggr = FALSE)[,2010,]*readGDX(gdx_file,"f14_fao_yields_hist")[,2010,kcr],dim=3)/dimSums(croparea(gdx_file,products="kcr",product_aggr = FALSE)[,2010,],dim=3)
-  magpie <- yields(gdx_file,products = "kcr",product_aggr = TRUE)[,2010,]
-  if(nregions(magpie)!=nregions(data) | !all(getRegions(magpie) %in% getRegions(data))) {
-    stop("Regions in MAgPIE do not agree with regions in reference calibration area data set!")
-  }
-  out <- data/magpie
-  out[out==0] <- 1
-  out[out<=0.8] <- 0.8
-  out[out>=1.2] <- 1.2
-  getYears(out) <- NULL
-  getNames(out) <- NULL
-  return(magpiesort(out))
-}
-
-get_taucalib <- function(gdx_file) {
-  require(magclass)
-  require(magpie4)
-  require(gdx)
-  require(luscale)
-  data <- superAggregate(readGDX(gdx_file,"f13_tau_historical"),level="reg",aggr_type = "sum")[,2010,]
-  magpie <- tau(gdx_file)[,2010,]
-  if(nregions(magpie)!=nregions(data) | !all(getRegions(magpie) %in% getRegions(data))) {
-    stop("Regions in MAgPIE do not agree with regions in reference calibration area data set!")
-  }
-  # Increase land conversion costs to get more TAU (out > 1)
-  # Decrease land conversion costs to get less TAU (out < 1)
-  out <- data/magpie
-  out[out==0] <- 1
-  out[out<=1] <- 1 # historical TAU as lower bound. Higher values are OK.
-  out[out>=1.1] <- 1.1 # upper bound for increase set to 10%
-  getYears(out) <- NULL
-  getNames(out) <- NULL
-  return(magpiesort(out))
-}
-
-
 # Calculate the correction factor and save it
 update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib_file, crop_max=2.5, crop_min=0.8, calibration_step="",n_maxcalib=20, best_calib = TRUE){
   print("ENTER update")
@@ -171,22 +128,15 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
     
     ### Depending on the selected calibration selection type (best_calib FALSE or TRUE)
     # the reported and used regional calibration factors can be either the ones of the last iteration,
-    # or the "best" based on the iteration value with the lower divergence.
+    # or the "best" based on the iteration value with the lowest global divergence.
     if (best_calib == TRUE){
-    ###-Select best calibration factor for each region and from the all the calibration steps
-    calib_best<-new.magpie(cells_and_regions = getCells(calib_divergence),years = getYears(calib_divergence))
-    print("best")
+    ###Select best calibration factor from all calibration steps. Definition of best: lowest global divergence.
+
+    divergence_data<-read.magpie("land_conversion_cost_calib_divergence.cs3")
+    factors_data<-read.magpie("land_conversion_cost_calib_factor.cs3")
+
+    calib_best <- factors_data[,,which.min(dimSums(divergence_data,dim=1))]
     
-    divergence_data<-read.csv("land_conversion_cost_calib_divergence.cs3")
-    factors_data<-read.csv("land_conversion_cost_calib_factor.cs3")
-
-    for (i in getCells(calib_best)){
-      factors_data_sub<-subset(factors_data,dummy==i)
-      divergence_data_sub<-subset(divergence_data,dummy==i)
-
-      calib_best[i,NULL,]<-as.numeric(factors_data_sub[which.min(divergence_data_sub)])
-    }
-
     getNames(calib_best) <- NULL
     getYears(calib_best) <- NULL
     calib_reward <- get_rewardcalib(gdx_file,calib_best)
