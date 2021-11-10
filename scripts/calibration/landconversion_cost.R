@@ -41,15 +41,13 @@ get_areacalib <- function(gdx_file) {
   require(magpie4)
   require(gdx)
   require(luscale)
-  data <- superAggregate(readGDX(gdx_file,"f10_land"),level="reg",aggr_type = "sum")[,2010,"crop"]
-  magpie <- land(gdx_file)[,,c("crop")][,2010,]
+  data <- superAggregate(readGDX(gdx_file,"f10_land"),level="reg",aggr_type = "sum")[,2015,"crop"]
+  magpie <- land(gdx_file)[,,c("crop")][,2015,]
   if(nregions(magpie)!=nregions(data) | !all(getRegions(magpie) %in% getRegions(data))) {
     stop("Regions in MAgPIE do not agree with regions in reference calibration area data set!")
   }
   out <- magpie/data
   out[out==0] <- 1
-  out[out<=0.8] <- 0.8
-  out[out>=1.2] <- 1.2
   getYears(out) <- NULL
   getNames(out) <- NULL
   return(magpiesort(out))
@@ -124,9 +122,9 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, damping_factor=0.8, calib_f
   if(!(modelstat(gdx_file)[1,1,1]%in%c(1,2,7))) stop("Calibration run infeasible")
 
   area_factor  <- get_areacalib(gdx_file)
-  yield_factor  <- get_yieldcalib(gdx_file)
+#  yield_factor  <- get_yieldcalib(gdx_file)
 #  tau_factor  <- get_taucalib(gdx_file)
-  calib_correction <- area_factor*yield_factor
+  calib_correction <- area_factor
   calib_divergence <- abs(calib_correction-1)
 
   ###-> in case it is the first step, it forces the initial factors to be equal to 1
@@ -148,6 +146,12 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, damping_factor=0.8, calib_f
     above_limit <- (calib_factor > crop_max)
     calib_factor[above_limit]  <- crop_max
     calib_divergence[getRegions(calib_factor),,][above_limit] <- 0
+  }
+
+  if(!is.null(crop_min)) {
+    below_limit <- (calib_factor < crop_min)
+    calib_factor[below_limit]  <- crop_min
+    calib_divergence[getRegions(calib_factor),,][below_limit] <- 0
   }
   
   ### write down current calib factors (and area_factors) for tracking
