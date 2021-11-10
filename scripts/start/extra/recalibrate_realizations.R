@@ -38,6 +38,7 @@ for(r in realizations){
       cfg$sequential <- TRUE
       cfg$force_download <- TRUE
       cfg$force_replace <- TRUE
+      cfg$qos <- "medium"
       
       cfg$gms$factor_costs     <-   r
       cfg$gms$c38_sticky_mode  <-   t
