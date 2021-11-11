@@ -187,7 +187,7 @@ calibrate_magpie <- function(n_maxcalib = 20,
 
   if(file.exists(calib_file)) file.remove(calib_file)
   for(i in 1:n_maxcalib){
-    cat(paste("\nStarting calibration iteration",i,"\n"))
+    cat(paste("\nStarting land conversion cost calibration iteration",i,"\n"))
     calibration_run(putfolder=putfolder, calib_magpie_name=calib_magpie_name, logoption=logoption)
     if(debug) file.copy(paste0(putfolder,"/fulldata.gdx"),paste0("fulldata_calib",i,".gdx"))
     done <- update_calib(gdx_file=paste0(putfolder,"/fulldata.gdx"),calib_accuracy=calib_accuracy,crop_max=crop_max,crop_min=crop_min,damping_factor=damping_factor, calib_file=calib_file, calibration_step=i,n_maxcalib=n_maxcalib,best_calib = best_calib)
