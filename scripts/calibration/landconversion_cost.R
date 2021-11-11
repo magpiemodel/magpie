@@ -124,23 +124,21 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
   # in case of sufficient convergence, stop here (no additional update of
   # calibration factors!)
   
-  if(all(calib_divergence < calib_accuracy) |  calibration_step==n_maxcalib) {
+  if(all(calib_divergence <= calib_accuracy) |  calibration_step==n_maxcalib) {
     
     ### Depending on the selected calibration selection type (best_calib FALSE or TRUE)
     # the reported and used regional calibration factors can be either the ones of the last iteration,
-    # or the "best" based on the iteration value with the lowest global divergence.
-    if (best_calib == TRUE){
-    ###Select best calibration factor from all calibration steps. Definition of best: lowest global divergence.
-
-    divergence_data<-read.magpie("land_conversion_cost_calib_divergence.cs3")
-    factors_data<-read.magpie("land_conversion_cost_calib_factor.cs3")
-
-    calib_best <- factors_data[,,which.min(dimSums(divergence_data,dim=1))]
+    # or the "best" based on the iteration value with the lowest standard deviation of regional divergence.
+    if (best_calib == TRUE) {
     
-    getNames(calib_best) <- NULL
-    getYears(calib_best) <- NULL
-    calib_reward <- get_rewardcalib(gdx_file,calib_best)
-    calib_best_full <- mbind(setNames(calib_best,"cost"),setNames(calib_reward,"reward"))
+      divergence_data<-read.magpie("land_conversion_cost_calib_divergence.cs3")
+      factors_data<-read.magpie("land_conversion_cost_calib_factor.cs3")
+      calib_best <- factors_data[,,which.min(apply(as.array(divergence_data),c(3),sd))]
+      getNames(calib_best) <- NULL
+      getYears(calib_best) <- NULL
+      calib_reward <- get_rewardcalib(gdx_file,calib_best)
+      calib_best_full <- mbind(setNames(calib_best,"cost"),setNames(calib_reward,"reward"))
+      
     comment <- c(" description: Regional land conversion cost calibration file",
                  " unit: -",
                  paste0(" note: Best calibration factor from the run"),

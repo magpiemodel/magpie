@@ -24,7 +24,7 @@ cfg$input<- cfg$input[names(cfg$input)!="calibration"]
 cfg$title <- "calib_run"
 #cfg$gms$c_timesteps <- 1
 cfg$output <- c("rds_report","validation_short")
-cfg$sequential <- TRUE
+#cfg$sequential <- TRUE
 cfg$force_download <- TRUE
 cfg$force_replace <- TRUE
 start_run(cfg,codeCheck=FALSE)

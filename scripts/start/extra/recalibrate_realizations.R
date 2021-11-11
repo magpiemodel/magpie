@@ -35,7 +35,7 @@ for(r in realizations){
       cfg$title <- paste("calib_run",r,t,sep="_")
 #      cfg$gms$c_timesteps <- 1
       cfg$output <- c("rds_report","validation_short")
-      cfg$sequential <- TRUE
+#      cfg$sequential <- TRUE
       cfg$force_download <- TRUE
       cfg$force_replace <- TRUE
 

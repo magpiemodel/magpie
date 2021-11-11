@@ -118,27 +118,19 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,cali
 
   # in case of sufficient convergence, stop here (no additional update of
   # calibration factors!)
-  if(all(calib_divergence < calib_accuracy) |  calibration_step==n_maxcalib) {
+  if(all(calib_divergence <= calib_accuracy) |  calibration_step==n_maxcalib) {
 
     ### Depending on the selected calibration selection type (best_calib FALSE or TRUE)
     # the reported and used regional calibration factors can be either the ones of the last iteration,
-    # or the "best" based on the iteration value with the lower divergence.
-    if (best_calib == TRUE){
-    ###-Select best calibration factor for each region and from the all the calibration steps
-    calib_best<-new.magpie(cells_and_regions = getCells(calib_divergence),years = getYears(calib_divergence),names = c("crop","past"))
-
-    divergence_data<-read.csv("calib_divergence.cs3")
-    factors_data<-read.csv("calib_factor.cs3")
-
-    for (i in getCells(calib_best)){
-      factors_data_sub<-subset(factors_data,dummy==i)
-      divergence_data_sub<-subset(divergence_data,dummy==i)
-
-      calib_best[i,NULL,"crop"]<-factors_data_sub[which.min(divergence_data_sub$crop),"crop"]
-      calib_best[i,NULL,"past"]<-factors_data_sub[which.min(divergence_data_sub$past),"past"]
-    }
-
-
+    # or the "best" based on the iteration value with the lowest standard deviation of regional divergence.
+    if (best_calib == TRUE) {
+    
+      calib_best<-new.magpie(cells_and_regions = getCells(calib_divergence),years = getYears(calib_divergence),names = c("crop","past"))
+      divergence_data<-read.magpie("calib_divergence.cs3")
+      factors_data<-read.magpie("calib_factor.cs3")
+      calib_best[,,"crop"] <- collapseNames(factors_data[,,"crop"][,,which.min(apply(as.array(divergence_data[,,"crop"]),c(3),sd))])
+      calib_best[,,"past"] <- collapseNames(factors_data[,,"past"][,,which.min(apply(as.array(divergence_data[,,"past"]),c(3),sd))])
+      
     comment <- c(" description: Regional yield calibration file",
                  " unit: -",
                  paste0(" note: Best calibration factor from the run"),
