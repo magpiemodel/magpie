@@ -22,7 +22,7 @@ q34_urban_cost2(j2) ..
 *' Sum up cost terms with high punishment
 
 q34_urban_cell(j2) ..
-            vm_cost_urban(j2) =e= (v34_cost1(j2) + v34_cost2(j2)) * 1000000;
+            vm_cost_urban(j2) =e= (v34_cost1(j2) + v34_cost2(j2)) *  s34_urban_deviation_cost;
 
 *' Regional level urban land must match
 
