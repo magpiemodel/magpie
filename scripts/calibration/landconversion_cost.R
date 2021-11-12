@@ -52,15 +52,20 @@ get_areacalib <- function(gdx_file) {
   out[out==0] <- 1
   getYears(out) <- NULL
   getNames(out) <- NULL
-  out2 <- mbind(new.magpie(getRegions(out),years = seq(1995,2015,by=5),fill=1),new.magpie(getRegions(out),years = seq(2050,2150,by=5),fill=1))
-  out2[,seq(2000,2015,by=5),] <- out
-  out2050 <- out
+
+  return(magpiesort(out))
+}
+
+time_series <- function(calib_factor) {
+  calib_factor
+  out2 <- mbind(new.magpie(getRegions(calib_factor),years = seq(1995,2015,by=5),fill=1),new.magpie(getRegions(calib_factor),years = seq(2050,2150,by=5),fill=1))
+  out2[,seq(2000,2015,by=5),] <- calib_factor
+  out2050 <- calib_factor
   out2050[out2050<1] <- 1
   out2[,seq(2050,2150,by=5),] <- out2050
   # out2[,y,] <- rep(apply(as.array(out),c(1,3),median),length(y))
   out2 <- time_interpolate(out2,seq(2020,2050,by=5),integrate_interpolated_years = T)
-
-  return(magpiesort(out2))
+  return(out2)
 }
 
 get_rewardcalib <- function(gdx_file,calib_factor) {
@@ -81,6 +86,8 @@ get_rewardcalib <- function(gdx_file,calib_factor) {
   return(magpiesort(out))
 }
 
+
+
 # Calculate the correction factor and save it
 update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib_file, crop_max=2.5, crop_min=0.8, calibration_step="",n_maxcalib=20, best_calib = TRUE){
   print("ENTER update")
@@ -98,7 +105,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
   if(file.exists(calib_file)) {
     old_calib        <- magpiesort(read.magpie(calib_file))
   } else {
-    old_calib<-new.magpie(cells_and_regions = getCells(calib_divergence),years = seq(1995,2150,by=5),names = c("cost","reward"),fill = 1)
+    old_calib<-new.magpie(cells_and_regions = getCells(calib_divergence),names = c("cost","reward"),fill = 1)
   }
 
 #initial guess equal to 1
@@ -155,9 +162,10 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
       factors_data<-read.magpie("land_conversion_cost_calib_factor.cs3")
       calib_best <- factors_data[,,which.min(apply(as.array(divergence_data),c(3),sd))]
       getNames(calib_best) <- NULL
-#      getYears(calib_best) <- NULL
-      calib_reward <- get_rewardcalib(gdx_file,calib_best)
-      calib_best_full <- mbind(setNames(calib_best,"cost"),setNames(calib_reward,"reward"))
+      getYears(calib_best) <- NULL
+      calib_factor <- time_series(calib_best)
+      calib_reward <- get_rewardcalib(gdx_file,calib_factor)
+      calib_best_full <- mbind(setNames(calib_factor,"cost"),setNames(calib_reward,"reward"))
       
     comment <- c(" description: Regional land conversion cost calibration file",
                  " unit: -",
@@ -175,6 +183,8 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
 }
 }else{
   print("nobest")
+  
+  calib_factor <- time_series(calib_factor)
   calib_reward <- get_rewardcalib(gdx_file,calib_factor)
   calib_full <- mbind(setNames(calib_factor,"cost"),setNames(calib_reward,"reward"))
   comment <- c(" description: Regional land conversion cost calibration file",
