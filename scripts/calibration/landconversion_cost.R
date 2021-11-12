@@ -92,7 +92,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
   if(file.exists(calib_file)) {
     old_calib        <- magpiesort(read.magpie(calib_file))
   } else {
-    old_calib<-new.magpie(cells_and_regions = getCells(calib_divergence),years = c(1995,2150,by=5),names = c("cost","reward"),fill = 1)
+    old_calib<-new.magpie(cells_and_regions = getCells(calib_divergence),years = seq(1995,2150,by=5),names = c("cost","reward"),fill = 1)
   }
 
 #initial guess equal to 1
