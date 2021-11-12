@@ -50,11 +50,11 @@ get_areacalib <- function(gdx_file) {
   out <- magpie/data
   out[out==0] <- 1
   getNames(out) <- NULL
-  out <- mbind(new.magpie(getRegions(out),years = 1995,fill=1),out,new.magpie(getRegions(out),years = seq(2050,2150,by=5),fill=1))
-  out <- time_interpolate(out,seq(2020,2050,by=5),integrate_interpolated_years = T)
-#  out*10000
+  out2 <- mbind(new.magpie(getRegions(out),years = seq(1995,2015,by=5),fill=1),new.magpie(getRegions(out),years = seq(2050,2150,by=5),fill=1))
+  out2[,y,] <- rep(apply(as.array(out),c(1,3),median),length(y))
+  out2 <- time_interpolate(out2,seq(2020,2050,by=5),integrate_interpolated_years = T)
 
-  return(magpiesort(out))
+  return(magpiesort(out2))
 }
 
 get_rewardcalib <- function(gdx_file,calib_factor) {
