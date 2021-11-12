@@ -127,6 +127,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
     calib_factor[below_limit]  <- crop_min
     calib_divergence[getRegions(calib_factor),,][below_limit] <- 0
   }
+  print("ENTER update2")
   
   # Special rule for LAM and SSA
   # Only executed if LAM and SSA exist in the regions
@@ -136,6 +137,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
     calib_factor[sub,,][below_limit]  <- 0.5
     calib_divergence[sub,,][below_limit] <- 0
   }
+  print("ENTER update3")
   
   ### write down current calib factors (and area_factors) for tracking
   write_log <- function(x,file,calibration_step) {
@@ -147,7 +149,8 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
   write_log(calib_correction, "land_conversion_cost_calib_correction.cs3" , calibration_step)
   write_log(calib_divergence, "land_conversion_cost_calib_divergence.cs3" , calibration_step)
   write_log(calib_factor,     "land_conversion_cost_calib_factor.cs3"     , calibration_step)
-
+  print("ENTER update4")
+  
   # in case of sufficient convergence, stop here (no additional update of
   # calibration factors!)
   
