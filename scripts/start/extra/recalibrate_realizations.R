@@ -18,7 +18,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-realizations<-c("sticky_feb18","mixed_feb17","fixed_per_ton_mar18","sticky_labor")
+realizations<-c("sticky_feb18","mixed_feb17","fixed_per_ton_mar18") #"sticky_labor" is very similar to sticky_feb18. No extra calibration needed.
 type<-NULL
 
 
@@ -28,7 +28,7 @@ for(r in realizations){
 
     for(t in type){
 
-      cfg$input<- cfg$input[names(cfg$input)!="calibration"]
+#      cfg$input<- cfg$input[names(cfg$input)!="calibration"]
       cfg$results_folder <- "output/:title:"
       cfg$recalibrate <- TRUE
       cfg$recalibrate_landconversion_cost <- TRUE
@@ -49,5 +49,7 @@ for(r in realizations){
 
       start_run(cfg)
       magpie4::submitCalibration(paste("H12",r,t,sep="_"))
+      #land conversion cost calibration is only executed once.
+      cfg$recalibrate_landconversion_cost <- FALSE
     }
 }

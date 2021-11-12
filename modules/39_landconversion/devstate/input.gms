@@ -8,6 +8,7 @@
 scalars
  s39_cost_establish_crop_max   Maximum cost for cropland expansion before calibration (USD05MER per hectare) / 15000 /
  s39_cost_establish_crop_min   Minimum cost for cropland expansion before calibration (USD05MER per hectare) / 6000 /
+ s39_cost_establish_crop   	   Cost for cropland expansion before calibration (USD05MER per hectare) / 10000 /
  s39_cost_establish_past   	   Cost for pasture land expansion (USD05MER per hectare)    / 8000 /
  s39_cost_establish_forestry   Cost for foresty land expansion (USD05MER per hectare)    / 1000 /
  s39_cost_establish_urban  	   Cost for urban land expansion (USD05MER per hectare)    / 10000 /
@@ -17,7 +18,7 @@ scalars
 ;
 
 $onEmpty
-table f39_calib(i,type39) Calibration factor for costs of cropland expansion (1)
+table f39_calib(t,i,type39) Calibration factor for costs of cropland expansion (1)
 $ondelim
 $if exist "./modules/39_landconversion/input/f39_calib.csv" $include "./modules/39_landconversion/input/f39_calib.csv"
 $offdelim

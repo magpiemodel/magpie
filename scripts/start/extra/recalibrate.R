@@ -20,7 +20,7 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$recalibrate <- TRUE
 cfg$recalibrate_landconversion_cost <- TRUE
-cfg$input<- cfg$input[names(cfg$input)!="calibration"]
+#cfg$input<- cfg$input[names(cfg$input)!="calibration"]
 cfg$title <- "calib_run"
 #cfg$gms$c_timesteps <- 1
 cfg$output <- c("rds_report","validation_short")

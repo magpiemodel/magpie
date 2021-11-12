@@ -9,13 +9,10 @@
 * For a better match of regional cropland dynamics a calibration factor (i39_calib) is applied on the scaled land conversion costs.
 * The calibration factor has been derived with the goal of matching regional cropland in 2015 with observed values
 * In addition, regions with a calibration factor > 1 and with a decline of cropland between 1995 and 2015 in historic data see a reward for cropland reduction.
-if(ord(t) = 1,
-	i39_cost_establish(t,i,"crop") = max(s39_cost_establish_crop_min,s39_cost_establish_crop_max*im_development_state(t,i));
-	i39_reward_reduction(t,i,"crop") = 0;
-else
-	i39_cost_establish(t,i,"crop") = max(s39_cost_establish_crop_min,s39_cost_establish_crop_max*im_development_state(t,i)) * i39_calib(i,"cost");
-	i39_reward_reduction(t,i,"crop") = s39_reward_crop_reduction * i39_calib(i,"reward");
-);
+
+i39_cost_establish(t,i,"crop") = s39_cost_establish_crop * i39_calib(t,i,"cost");
+i39_reward_reduction(t,i,"crop") = s39_reward_crop_reduction * i39_calib(t,i,"reward");
+
 i39_cost_establish(t,i,"past") = s39_cost_establish_past;
 i39_cost_establish(t,i,"forestry") = s39_cost_establish_forestry;
 i39_cost_establish(t,i,"urban") = s39_cost_establish_urban;
