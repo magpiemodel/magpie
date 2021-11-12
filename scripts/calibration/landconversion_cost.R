@@ -41,7 +41,8 @@ get_areacalib <- function(gdx_file) {
   require(magpie4)
   require(gdx)
   require(luscale)
-  y <- seq(2000,2015,by=5)
+  #y <- seq(2000,2015,by=5)
+  y <- 2015
   data <- superAggregate(readGDX(gdx_file,"f10_land"),level="reg",aggr_type = "sum")[,y,"crop"]
   magpie <- land(gdx_file)[,,c("crop")][,y,]
   if(nregions(magpie)!=nregions(data) | !all(getRegions(magpie) %in% getRegions(data))) {
@@ -49,9 +50,14 @@ get_areacalib <- function(gdx_file) {
   }
   out <- magpie/data
   out[out==0] <- 1
+  getYears(out) <- NULL
   getNames(out) <- NULL
   out2 <- mbind(new.magpie(getRegions(out),years = seq(1995,2015,by=5),fill=1),new.magpie(getRegions(out),years = seq(2050,2150,by=5),fill=1))
-  out2[,y,] <- rep(apply(as.array(out),c(1,3),median),length(y))
+  out2[,seq(2000,2015,by=5),] <- out
+  out2050 <- out
+  out2050[out2050<1] <- 1
+  out2[,seq(2050,2150,by=5),] <- out2050
+  # out2[,y,] <- rep(apply(as.array(out),c(1,3),median),length(y))
   out2 <- time_interpolate(out2,seq(2020,2050,by=5),integrate_interpolated_years = T)
 
   return(magpiesort(out2))
