@@ -120,9 +120,14 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
   calib_factor     <- setNames(old_calib[,,"cost"],NULL) * (damping_factor*(calib_correction-1) + 1)
   print("ENTER update5")
   
+  print(crop_max)
   if(!is.null(crop_max)) {
+    print("ENTER problem1")
     above_limit <- (calib_factor > crop_max)
+    print(str(above_limit))
+    print("ENTER problem1")
     calib_factor[above_limit]  <- crop_max
+    print("ENTER problem1")
     calib_divergence[getRegions(calib_factor),,][above_limit] <- 0
   }
   print("ENTER problem1")
