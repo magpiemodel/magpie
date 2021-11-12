@@ -5,11 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description Urban Land based on LUH2v2 (Hurtt 2020) cellular (0.5 degree) dataset, varying with SSP. 
-*' Cellular level is "flexibly" prescribed in that there is a very high punishment term for deviating from original input values.
-*' Regional sums of urban land must add be equal for both model and input.
+*' @description Urban Land based on LUH2v2 (Hurtt 2020) cellular (0.5 degree) input dataset, varying with SSP. 
+*' Cellular level is prescribed via a very high punishment term for deviating from original input values.
+*' Regional sums of urban land must add be equal for both model and input data.
 
-*' @limitations Urban land is exogenously prescribed and does not interact with other model dynamics.
+*' @limitations Urban land is exogenous and does not interact with other model dynamics, except for reducing available non-urban land pool.
+*'  Cellular urban land may not exactly match input data due to other land needs in the same cell.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "declarations" $include "./modules/34_urban/exo_nov21/declarations.gms"

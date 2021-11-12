@@ -8,9 +8,9 @@
 * get the scenario GDP & Populaiton data for iso countries
 loop(t_all,
  if(m_year(t_all) <= sm_fix_SSP2,
-  i34_urban_area(t_all, j) = f34_UrbanLand(t_all, j,"SSP2");
+  i34_urban_area(t_all, j) = f34_urbanland(t_all, j,"SSP2");
 else
-i34_urban_area(t_all, j) = f34_UrbanLand(t_all, j,"%c09_gdp_scenario%");
+i34_urban_area(t_all, j) = f34_urbanland(t_all, j,"%c09_gdp_scenario%");
  );
 );
 
