@@ -100,21 +100,25 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
 #  tau_factor  <- get_taucalib(gdx_file)
   calib_correction <- area_factor
   calib_divergence <- abs(calib_correction-1)
-
+  print("ENTER update2")
+  
   ###-> in case it is the first step, it forces the initial factors to be equal to 1
   if(file.exists(calib_file)) {
     old_calib        <- magpiesort(read.magpie(calib_file))
   } else {
     old_calib<-new.magpie(cells_and_regions = getCells(calib_divergence),names = c("cost","reward"),fill = 1)
   }
-
+  print("ENTER update3")
+  
 #initial guess equal to 1
   if(calibration_step==1) {
     old_calib[,,"cost"] <- 1
     old_calib[,,"reward"] <- 0
   }
-
+  print("ENTER update4")
+  
   calib_factor     <- setNames(old_calib[,,"cost"],NULL) * (damping_factor*(calib_correction-1) + 1)
+  print("ENTER update5")
   
   if(!is.null(crop_max)) {
     above_limit <- (calib_factor > crop_max)
