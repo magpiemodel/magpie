@@ -384,10 +384,9 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
 
   # Yield calibration
   calib_file <- "modules/14_yields/input/f14_yld_calib.csv"
-  if(!file.exists(calib_file)) stop("Yield calibration file missing!")
   if(cfg$recalibrate=="ifneeded") {
-    # recalibrate if all calibration factors are 1, otherwise don't
-    cfg$recalibrate <- all(magclass::read.magpie(calib_file)==1)
+    # recalibrate if file does not exist
+    if(!file.exists(calib_file)) cfg$recalibrate <- TRUE else cfg$recalibrate <- FALSE
   }
   if(cfg$recalibrate){
     cat("Starting yield calibration factor calculation!\n")
@@ -413,7 +412,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
     if(!file.exists(land_calib_file)) cfg$recalibrate_landconversion_cost <- TRUE else cfg$recalibrate_landconversion_cost <- FALSE
   }
   if(cfg$recalibrate_landconversion_cost){
-    if(cfg$gms$landconversion!="devstate") stop("Land conversion cost calibration works only with realization devstate")
+    #if(cfg$gms$landconversion!="devstate") stop("Land conversion cost calibration works only with realization devstate")
     cat("Starting land conversion cost calibration factor calculation!\n")
     source("scripts/calibration/landconversion_cost.R")
     calibrate_magpie(n_maxcalib = cfg$calib_maxiter_landconversion_cost,
