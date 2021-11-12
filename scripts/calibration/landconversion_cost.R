@@ -100,46 +100,34 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
 #  tau_factor  <- get_taucalib(gdx_file)
   calib_correction <- area_factor
   calib_divergence <- abs(calib_correction-1)
-  print("ENTER update2")
-  
+
   ###-> in case it is the first step, it forces the initial factors to be equal to 1
   if(file.exists(calib_file)) {
     old_calib        <- setYears(magpiesort(read.magpie(calib_file))[,2015,],NULL)
   } else {
     old_calib<-new.magpie(cells_and_regions = getCells(calib_divergence),names = c("cost","reward"),fill = 1)
   }
-  print("ENTER update3")
-  
+
 #initial guess equal to 1
   if(calibration_step==1) {
     old_calib[,,"cost"] <- 1
     old_calib[,,"reward"] <- 0
   }
-  print("ENTER update4")
-  
+
   calib_factor     <- setNames(old_calib[,,"cost"],NULL) * (damping_factor*(calib_correction-1) + 1)
-  print("ENTER update5")
-  
-  print(str(calib_factor))
-  print(crop_max)
+
   if(!is.null(crop_max)) {
-    print("ENTER problem1")
     above_limit <- (calib_factor > crop_max)
-    print(str(above_limit))
-    print("ENTER problem1")
     calib_factor[above_limit]  <- crop_max
-    print("ENTER problem1")
     calib_divergence[getRegions(calib_factor),,][above_limit] <- 0
   }
-  print("ENTER problem1")
-  
+
   if(!is.null(crop_min)) {
     below_limit <- (calib_factor < crop_min)
     calib_factor[below_limit]  <- crop_min
     calib_divergence[getRegions(calib_factor),,][below_limit] <- 0
   }
-  print("ENTER update2")
-  
+
   # Special rule for LAM and SSA
   # Only executed if LAM and SSA exist in the regions
   sub <- c("LAM","SSA")
@@ -148,8 +136,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
     calib_factor[sub,,][below_limit]  <- 0.5
     calib_divergence[sub,,][below_limit] <- 0
   }
-  print("ENTER update3")
-  
+
   ### write down current calib factors (and area_factors) for tracking
   write_log <- function(x,file,calibration_step) {
     x <- add_dimension(x, dim=3.1, add="iteration", nm=paste0("iter",calibration_step))
@@ -160,8 +147,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
   write_log(calib_correction, "land_conversion_cost_calib_correction.cs3" , calibration_step)
   write_log(calib_divergence, "land_conversion_cost_calib_divergence.cs3" , calibration_step)
   write_log(calib_factor,     "land_conversion_cost_calib_factor.cs3"     , calibration_step)
-  print("ENTER update4")
-  
+
   # in case of sufficient convergence, stop here (no additional update of
   # calibration factors!)
   
@@ -233,7 +219,7 @@ calibrate_magpie <- function(n_maxcalib = 20,
   if(file.exists(calib_file)) file.remove(calib_file)
   for(i in 1:n_maxcalib){
     cat(paste("\nStarting land conversion cost calibration iteration",i,"\n"))
-    #calibration_run(putfolder=putfolder, calib_magpie_name=calib_magpie_name, logoption=logoption)
+    calibration_run(putfolder=putfolder, calib_magpie_name=calib_magpie_name, logoption=logoption)
     if(debug) file.copy(paste0(putfolder,"/fulldata.gdx"),paste0("fulldata_calib",i,".gdx"))
     done <- update_calib(gdx_file=paste0(putfolder,"/fulldata.gdx"),calib_accuracy=calib_accuracy,crop_max=crop_max,crop_min=crop_min,damping_factor=damping_factor, calib_file=calib_file, calibration_step=i,n_maxcalib=n_maxcalib,best_calib = best_calib)
     if(done){
@@ -242,8 +228,8 @@ calibrate_magpie <- function(n_maxcalib = 20,
   }
 
   # delete calib_magpie_gms in the main folder
-  #unlink(paste0(calib_magpie_name,".*"))
-  #unlink("fulldata.gdx")
+  unlink(paste0(calib_magpie_name,".*"))
+  unlink("fulldata.gdx")
 
   cat("\nLand conversion cost calibration finished\n")
 }
