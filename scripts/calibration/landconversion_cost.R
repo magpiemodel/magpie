@@ -125,7 +125,8 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
     calib_factor[above_limit]  <- crop_max
     calib_divergence[getRegions(calib_factor),,][above_limit] <- 0
   }
-
+  print("ENTER problem1")
+  
   if(!is.null(crop_min)) {
     below_limit <- (calib_factor < crop_min)
     calib_factor[below_limit]  <- crop_min
