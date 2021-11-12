@@ -174,6 +174,7 @@ calibrate_magpie <- function(n_maxcalib = 1,
 
   require(magclass)
 
+  if(file.exists(calib_file)) file.remove(calib_file)
   for(i in 1:n_maxcalib){
     cat(paste("\nStarting yield calibration iteration",i,"\n"))
     calibration_run(putfolder=putfolder, calib_magpie_name=calib_magpie_name, logoption=logoption)
