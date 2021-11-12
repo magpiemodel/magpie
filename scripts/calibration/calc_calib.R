@@ -85,7 +85,12 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,cali
   calib_divergence <- abs(calib_correction-1)
 
 ###-> in case it is the first step, it forces the initial factors to be equal to 1
-  old_calib        <- magpiesort(read.magpie(calib_file))
+  if(file.exists(calib_file)) {
+    old_calib        <- magpiesort(read.magpie(calib_file))
+  } else {
+    old_calib<-new.magpie(cells_and_regions = getCells(calib_divergence),names = getNames(calib_divergence),fill = 1)
+  }
+  
   #initial guess equal to 1
   if(calibration_step==1) old_calib[,,] <- 1
 
