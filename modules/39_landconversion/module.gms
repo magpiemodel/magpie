@@ -18,5 +18,5 @@
 *' @authors Florian Humpenöder, Jan Philipp Dietrich, Ulrich Kreidenweis
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%landconversion%" == "devstate" $include "./modules/39_landconversion/devstate/realization.gms"
+$Ifi "%landconversion%" == "calib" $include "./modules/39_landconversion/calib/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

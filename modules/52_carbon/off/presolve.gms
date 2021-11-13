@@ -6,5 +6,5 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 vm_carbon_stock.fx(j,land,c_pools) = 0;
-vm_carbon_stock_change.fx(j,land,c_pools) = 0;
+v52_carbon_stock_change.fx(j,land,c_pools) = 0;
 vm_btm_cell.fx(j,emis_co2,"co2_c") = 0;
