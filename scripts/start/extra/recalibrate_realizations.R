@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------
-# description: calculate and store new calib factors for realizations of factor costs -> use SLURM medium
+# description: calculate and store new yield calib factors for realizations of factor costs (land conversion cost calibration factors are only calculated if needed)
 # --------------------------------------------------------
 
 library(magpie4)
@@ -28,15 +28,11 @@ for(r in realizations){
 
     for(t in type){
 
-#      cfg$input<- cfg$input[names(cfg$input)!="calibration"]
       cfg$results_folder <- "output/:title:"
       cfg$recalibrate <- TRUE
-      cfg$recalibrate_landconversion_cost <- TRUE
+      cfg$recalibrate_landconversion_cost <- "ifneeded"
       cfg$title <- paste("calib_run",r,t,sep="_")
-#      cfg$gms$c_timesteps <- 1
       cfg$output <- c("rds_report","validation_short")
-#      cfg$sequential <- TRUE
-      cfg$force_download <- TRUE
       cfg$force_replace <- TRUE
 
       cfg$gms$factor_costs     <-   r
@@ -49,7 +45,5 @@ for(r in realizations){
 
       start_run(cfg)
       magpie4::submitCalibration(paste("H12",r,t,sep="_"))
-      #land conversion cost calibration is only executed once.
-      cfg$recalibrate_landconversion_cost <- FALSE
     }
 }
