@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------
-# description: calculate and store new calibration factors for yields AND land conversion costs
+# description: calculate and store new calibration factors for yields AND land conversion costs (time consuming; up to 40 model runs with 1 or 5 time steps)
 # --------------------------------------------------------
 
 library(magpie4)
