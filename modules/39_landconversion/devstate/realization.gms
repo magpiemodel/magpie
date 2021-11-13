@@ -7,17 +7,13 @@
 
 *' @description
 *' This realization accounts for costs of land expansion 
-*' (cropland, pasture, forestry and urban land), a reward for cropland reduction and 
-*' costs for clearing of primary forest, secondary forest and other natural land (clearing costs).
-*' Global cost for cropland expansion are scaled with regional development state (0-1), 
-*' which is used as a proxy for governance. By default, we assume 6000 USD/ha as minimum 
-*' cost for cropland expansion and 15000 USD/ha as maximum (high-income countries).
-*' For a better match of regional cropland in 2015 with historic data, a calibration factor is applied
-*' on the scaled land conversion costs for cropland expansion. In addition, a reward on cropland reduction 
+*' (cropland, pasture and forestry) and a reward for cropland reduction.
+*' Global cost for cropland expansion (10000 USD/ha as default) are scaled with a regional and time-dependent calibration factor  
+*' for a better match of regional cropland in 2015 with historic data. In addition, a reward on cropland reduction 
 *' is applied in selected regions for matching reductions in cropland between 1995 and 2015.
-*' For pasture (forestry) expansion we assume a global cost factor of 8000 (1000) USD/ha (static over time).
-*' By default, clearing of natural vegetation is not priced. Plausible values range 
-*' between 0-5 USD/tC (based on @kreidenweis_pasture_2018). 
+*' The calibration factor is faded out until 2050.
+*' Default land conversion costs for expansion of pasture and forestry are 
+*' 8000 and 1000 USD/ha (global and static over time), respectively. 
 *'
 *' @limitations Data availability for land conversion costs is very limited.
 

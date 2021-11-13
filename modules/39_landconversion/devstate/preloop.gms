@@ -17,7 +17,3 @@ if(sum((t,i,type39),i39_calib(t,i,type39)) = 0 OR s39_ignore_calib = 1,
 	i39_calib(t,i,"cost") = 1;
 	i39_calib(t,i,"reward") = 0;
 );
-
-s39_reward_crop_reduction = s39_cost_establish_crop * 0.66;
-
-display i39_calib;

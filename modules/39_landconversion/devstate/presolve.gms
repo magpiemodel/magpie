@@ -5,15 +5,11 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* Global cost for cropland expansion are scaled with regional development state (0-1), with s39_cost_establish_crop_min as lower bound.
-* For a better match of regional cropland dynamics a calibration factor (i39_calib) is applied on the scaled land conversion costs.
-* The calibration factor has been derived with the goal of matching regional cropland in 2015 with observed values
+* Global cost for cropland expansion are scaled with a calibration factor (i39_calib).
+* The calibration factor has been derived with the goal of matching regional cropland in 2015 with historic data.
 * In addition, regions with a calibration factor > 1 and with a decline of cropland between 1995 and 2015 in historic data see a reward for cropland reduction.
 
 i39_cost_establish(t,i,"crop") = s39_cost_establish_crop * i39_calib(t,i,"cost");
-i39_reward_reduction(t,i,"crop") = s39_reward_crop_reduction * i39_calib(t,i,"reward");
-
+i39_reward_reduction(t,i,"crop") = s39_cost_establish_crop * s39_reward_shr * i39_calib(t,i,"reward");
 i39_cost_establish(t,i,"past") = s39_cost_establish_past;
 i39_cost_establish(t,i,"forestry") = s39_cost_establish_forestry;
-i39_cost_establish(t,i,"urban") = s39_cost_establish_urban;
-
