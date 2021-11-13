@@ -16,7 +16,6 @@ variables
 parameters
  i39_cost_establish(t,i,land)	Land expansion costs (USD05MER per hectare)
  i39_reward_reduction(t,i,land)	Reward for land reduction (USD05MER per hectare)
- i39_cost_clearing(land)        Global land clearing costs (USD05MER per ton C)
  i39_calib(t,i,type39)					Calibration factor for costs of cropland expansion (1)
 ;
 

@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **58_peatland** "On" realization: Degraded peatland is estimated differently, based on an additional calibration factor.
 - **43_water_availability** changed scaling factor
 - **10_land** Converted "v10_landreduction" to interface "vm_landreduction"
-- **39_landconversion_cost** added calibration factor to realization "devstate", added interface "vm_landreduction"
+- **52_carbon** Removed interface "vm_carbon_stock_change"
 - **scripts** recalibrate_realizations.R and recalibrate.R adjusted for land conversion cost calibration + default time steps for convenient validation of results
 - **scripts** start_functions adjustments for land conversion cost calibration
 - **scripts** start.R added SLURM medium as choice
@@ -42,7 +42,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **37_labor_prod** labor productivity module with two realizations: off and exo
 - **38_factor_costs** new realization "sticky_labor", based on "sticky_feb18" but accounting for changes in labor productivity
 - **15_food** Added additional solve with CONOPT3 in case of modelstat 7
-- **scripts** Added script for land conversion cost calibration
+- **scripts** Added scripts for land conversion cost calibration in scripts/calibration and scripts/start/extra
+- **39_landconversion_cost** added new realization "calib", which uses a calibration factor for matching historic cropland in 2015
 - **scripts** added script validation_short.R with aggregated crop types (cutting the PDF size in half) -> replaces validation.R in default.cfg
 
 ### removed
@@ -55,7 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **20_processing** Removed `substitution_dec18` realization
 - **30_crop** Removed `endo_jun13` realization
 - **scripts** scripts/start/extra/highres.R
-- **39_landconversion_cost** removed realization "global_static_aug18"
+- **39_landconversion_cost** removed realizations "global_static_aug18" and "devstate"
 
 ### fixed
 - **80_optimization** Improved solve logic in "nlp_apr17" and "nlp_par" realization, multiple bugfixes and switch to solvelink=3 in "nlp_par"

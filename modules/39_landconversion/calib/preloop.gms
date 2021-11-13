@@ -8,9 +8,6 @@
 i39_cost_establish(t,i,land) = 0;
 i39_reward_reduction(t,i,land) = 0;
 
-i39_cost_clearing(land) = 0;
-i39_cost_clearing(land_clearing39) = s39_cost_clearing;
-
 i39_calib(t,i,type39) = f39_calib(t,i,type39);
 * set default values in case of missing input file or s39_ignore_calib = 1
 if(sum((t,i,type39),i39_calib(t,i,type39)) = 0 OR s39_ignore_calib = 1,
