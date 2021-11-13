@@ -41,8 +41,8 @@ get_areacalib <- function(gdx_file) {
   require(magpie4)
   require(gdx)
   require(luscale)
-  y <- seq(2000,2015,by=5)
-  #y <- 2015
+  #y <- seq(2000,2015,by=5)
+  y <- 2015
   data <- superAggregate(readGDX(gdx_file,"f10_land"),level="reg",aggr_type = "sum")[,y,"crop"]
   magpie <- land(gdx_file)[,,c("crop")][,y,]
   if(nregions(magpie)!=nregions(data) | !all(getRegions(magpie) %in% getRegions(data))) {
@@ -51,16 +51,17 @@ get_areacalib <- function(gdx_file) {
   out <- magpie/data
   out[out==0] <- 1
   getNames(out) <- NULL
-  out <- as.magpie(apply(as.array(out),c(1,3),median))
+  #out <- as.magpie(apply(as.array(out),c(1,3),median))
   getYears(out) <- NULL
 
   return(magpiesort(out))
 }
 
 time_series <- function(calib_factor) {
-  calib_factor
-  out2 <- mbind(new.magpie(getRegions(calib_factor),years = seq(1995,2015,by=5),fill=1),new.magpie(getRegions(calib_factor),years = seq(2050,2150,by=5),fill=1))
-  out2[,seq(2000,2015,by=5),] <- calib_factor
+  out2 <- mbind(new.magpie(getRegions(calib_factor),years = c(1995,2015),fill=1),new.magpie(getRegions(calib_factor),years = seq(2050,2150,by=5),fill=1))
+  #out2[,seq(2000,2015,by=5),] <- calib_factor
+  out2[,2015,] <- calib_factor
+  out2 <- time_interpolate(out2,seq(2000,2015,by=5),integrate_interpolated_years = T)
   out2050 <- calib_factor
   out2050[out2050<1] <- 1
   out2[,seq(2050,2150,by=5),] <- out2050
@@ -107,13 +108,15 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
     old_calib        <- setYears(magpiesort(read.magpie(calib_file))[,2015,],NULL)
   } else {
     old_calib<-new.magpie(cells_and_regions = getCells(calib_divergence),names = c("cost","reward"),fill = 1)
-  }
-
-#initial guess equal to 1
-  if(calibration_step==1) {
     old_calib[,,"cost"] <- 1
     old_calib[,,"reward"] <- 0
   }
+
+# #initial guess equal to 1
+#   if(calibration_step==1) {
+#     old_calib[,,"cost"] <- 1
+#     old_calib[,,"reward"] <- 0
+#   }
 
   calib_factor     <- setNames(old_calib[,,"cost"],NULL) * (damping_factor*(calib_correction-1) + 1)
 
@@ -218,7 +221,12 @@ calibrate_magpie <- function(n_maxcalib = 20,
 
   require(magclass)
 
-  if(!restart & file.exists(calib_file)) file.remove(calib_file)
+  if(!restart) {
+    cat(paste0("\nStarting land conversion cost calibration from default values\n"))
+    if (file.exists(calib_file)) file.remove(calib_file)
+  } else {
+    if (file.exists(calib_file)) cat(paste0("\nStarting land conversion cost calibration from existing values\n")) else cat(paste0("\nStarting land conversion cost calibration from default values\n"))
+  }
   for(i in 1:n_maxcalib){
     cat(paste("\nStarting land conversion cost calibration iteration",i,"\n"))
     calibration_run(putfolder=putfolder, calib_magpie_name=calib_magpie_name, logoption=logoption)
