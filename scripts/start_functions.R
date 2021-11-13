@@ -416,6 +416,7 @@ start_run <- function(cfg,scenario=NULL,codeCheck=TRUE,
     cat("Starting land conversion cost calibration factor calculation!\n")
     source("scripts/calibration/landconversion_cost.R")
     calibrate_magpie(n_maxcalib = cfg$calib_maxiter_landconversion_cost,
+                     restart = cfg$restart_landconversion_cost,
                      calib_accuracy = cfg$calib_accuracy_landconversion_cost,
                      damping_factor = cfg$damping_factor_landconversion_cost,
                      crop_max = cfg$crop_calib_max_landconversion_cost,

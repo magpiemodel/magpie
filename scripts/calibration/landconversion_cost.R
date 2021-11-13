@@ -41,8 +41,8 @@ get_areacalib <- function(gdx_file) {
   require(magpie4)
   require(gdx)
   require(luscale)
-  #y <- seq(2000,2015,by=5)
-  y <- 2015
+  y <- seq(2000,2015,by=5)
+  #y <- 2015
   data <- superAggregate(readGDX(gdx_file,"f10_land"),level="reg",aggr_type = "sum")[,y,"crop"]
   magpie <- land(gdx_file)[,,c("crop")][,y,]
   if(nregions(magpie)!=nregions(data) | !all(getRegions(magpie) %in% getRegions(data))) {
@@ -50,8 +50,9 @@ get_areacalib <- function(gdx_file) {
   }
   out <- magpie/data
   out[out==0] <- 1
-  getYears(out) <- NULL
   getNames(out) <- NULL
+  out <- as.magpie(apply(as.array(out),c(1,3),median))
+  getYears(out) <- NULL
 
   return(magpiesort(out))
 }
@@ -130,7 +131,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
 
   # Special rule for LAM and SSA
   # Only executed if LAM and SSA exist in the regions
-  sub <- c("LAM","SSA")
+  sub <- c("SSA")
   if (all(sub %in% getRegions(calib_factor))) {
     below_limit <- (calib_factor[sub,,] < 0.5)
     calib_factor[sub,,][below_limit]  <- 0.5
@@ -202,6 +203,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
 
 
 calibrate_magpie <- function(n_maxcalib = 20,
+                             restart = TRUE,
                              calib_accuracy = 0.01,
                              crop_max = 2.5,
                              crop_min = 0.8,
@@ -216,7 +218,7 @@ calibrate_magpie <- function(n_maxcalib = 20,
 
   require(magclass)
 
-  if(file.exists(calib_file)) file.remove(calib_file)
+  if(!restart & file.exists(calib_file)) file.remove(calib_file)
   for(i in 1:n_maxcalib){
     cat(paste("\nStarting land conversion cost calibration iteration",i,"\n"))
     calibration_run(putfolder=putfolder, calib_magpie_name=calib_magpie_name, logoption=logoption)
