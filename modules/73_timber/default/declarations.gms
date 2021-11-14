@@ -16,7 +16,6 @@ p73_demand_modifier(t_all)                                                  Simp
 p73_fraction(t_all)                                                         Fraction over which construction wood demand is spread out (1)
 p73_demand_constr_wood(t_all,i)                                             Demand for construction wood (mio. tDM per yr)
 p73_fraction_sm_fix                                                         Modifier fraction at sm_fix_SSP2 time step (1)
-i73_free_prod_costs(t)														Costs for balance variable (USD per tDM)
 ;
 
 positive variables
