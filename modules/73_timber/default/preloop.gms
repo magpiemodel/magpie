@@ -5,11 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-** set costs of balance variable depending on s73_timber_demand_switch
 i73_free_prod_costs(t) = s73_free_prod_cost;
-if(sum(sameas(t_past,t),1) = 1 AND s73_timber_demand_switch = 0,
-	i73_free_prod_costs(t) = 0;
-);
 	
 ** Set historical values to FAO values
 p73_forestry_demand_prod_specific(t_past_forestry,iso,total_wood_products) = f73_prod_specific_timber(t_past_forestry,iso,total_wood_products);
