@@ -22,7 +22,7 @@ if(ord(t) = 1,
 	vm_tech_cost.fx(i) = 0;
 else
 * educated guess for vm_tau.l:
-	vm_tau.l(h)$(ord(t) > 1) = pcm_tau(h)*(1+pc13_tcguess(h))**m_yeardiff(t);
+	vm_tau.l(h) = pcm_tau(h)*(1+pc13_tcguess(h))**m_yeardiff(t);
 	vm_tech_cost.lo(i) = 0;
 	vm_tech_cost.up(i) = 10e9;
 );
