@@ -31,7 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** start.R added SLURM medium as choice
 - **scripts** yield calibration, "best" setting uses factors from iteration with lowest standard deviation 
 - **14_yield** read-in file f14_yld_calib.csv if exists. Set default calibration factors to 1 in case f14_yld_calib.csv does not exist
-- **13_tc** vm_tau fixed to historic values in first time step for faster solve of first time step
+- **13_tc** different educated guess for vm_tau in 1995
+- **scaling** Update of scaling factors. removed duplicates
 
 ### added
 - **21_trade** Missing interface parameter for failing exo realization runs
@@ -74,7 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** scripts/output/extra/highres.R bugfixes
 - **38_factor_costs** units in sticky_feb18
 - **32_foresty** Global afforestation limit s32_max_aff_area was not effective in case of parallel optimization -> added option c32_max_aff_area, which allows to provide a file with regional limits for afforestation; 
-- **73_timber** zero cost for balance variable in historic time steps in case of s73_timber_demand_switch = 0
+- **73_timber** plausible cost for balance variable in case of s73_timber_demand_switch = 0 to avoid cost distortion
 
 ## [4.3.5] - 2021-09-02
 

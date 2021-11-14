@@ -20,7 +20,7 @@ q73_cost_timber(i2)..
                       sum(cell(i2,j2), vm_prod(j2,"wood"))      * s73_timber_prod_cost_wood
                     + sum(cell(i2,j2), vm_prod(j2,"woodfuel"))  * s73_timber_prod_cost_woodfuel
                     + sum(cell(i2,j2), v73_prod_residues(j2))   * s73_reisdue_removal_cost
-                    + sum((cell(i2,j2),kforestry), v73_prod_heaven_timber(j2,kforestry) * sum(ct, i73_free_prod_costs(ct)))
+                    + sum((cell(i2,j2),kforestry), v73_prod_heaven_timber(j2,kforestry) * s73_free_prod_cost)
                     ;
 
 *' The following equations describes cellular level production (in dry matter) of
