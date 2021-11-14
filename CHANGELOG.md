@@ -30,6 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** start_functions adjustments for land conversion cost calibration
 - **scripts** start.R added SLURM medium as choice
 - **scripts** yield calibration, "best" setting uses factors from iteration with lowest standard deviation 
+- **14_yield** read-in file f14_yld_calib.csv if exists. Set default calibration factors to 1 in case f14_yld_calib.csv does not exist
+- **13_tc** vm_tau fixed to historic values in first time step for faster solve of first time step
 
 ### added
 - **21_trade** Missing interface parameter for failing exo realization runs
