@@ -41,7 +41,6 @@ get_areacalib <- function(gdx_file) {
   require(magpie4)
   require(gdx)
   require(luscale)
-  #y <- seq(2000,2015,by=5)
   y <- 2015
   data <- superAggregate(readGDX(gdx_file,"f10_land"),level="reg",aggr_type = "sum")[,y,"crop"]
   magpie <- land(gdx_file)[,,c("crop")][,y,]
@@ -51,7 +50,6 @@ get_areacalib <- function(gdx_file) {
   out <- magpie/data
   out[out==0] <- 1
   getNames(out) <- NULL
-  #out <- as.magpie(apply(as.array(out),c(1,3),median))
   getYears(out) <- NULL
 
   return(magpiesort(out))
@@ -59,13 +57,11 @@ get_areacalib <- function(gdx_file) {
 
 time_series <- function(calib_factor) {
   out2 <- mbind(new.magpie(getRegions(calib_factor),years = c(1995,2015),fill=1),new.magpie(getRegions(calib_factor),years = seq(2050,2150,by=5),fill=1))
-  #out2[,seq(2000,2015,by=5),] <- calib_factor
   out2[,2015,] <- calib_factor
   out2 <- time_interpolate(out2,seq(2000,2015,by=5),integrate_interpolated_years = T)
   out2050 <- calib_factor
   out2050[out2050<1] <- 1
   out2[,seq(2050,2150,by=5),] <- out2050
-  # out2[,y,] <- rep(apply(as.array(out),c(1,3),median),length(y))
   out2 <- time_interpolate(out2,seq(2020,2050,by=5),integrate_interpolated_years = T)
   return(out2)
 }
@@ -89,17 +85,13 @@ get_rewardcalib <- function(gdx_file,calib_factor) {
 }
 
 
-
 # Calculate the correction factor and save it
 update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib_file, crop_max=2.5, crop_min=0.8, calibration_step="",n_maxcalib=20, best_calib = TRUE){
-  print("ENTER update")
   require(magclass)
   require(magpie4)
   if(!(modelstat(gdx_file)[1,1,1]%in%c(1,2,7))) stop("Calibration run infeasible")
 
   area_factor  <- get_areacalib(gdx_file)
-#  yield_factor  <- get_yieldcalib(gdx_file)
-#  tau_factor  <- get_taucalib(gdx_file)
   calib_correction <- area_factor
   calib_divergence <- abs(calib_correction-1)
 
@@ -111,12 +103,6 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
     old_calib[,,"cost"] <- 1
     old_calib[,,"reward"] <- 0
   }
-
-# #initial guess equal to 1
-#   if(calibration_step==1) {
-#     old_calib[,,"cost"] <- 1
-#     old_calib[,,"reward"] <- 0
-#   }
 
   calib_factor     <- setNames(old_calib[,,"cost"],NULL) * (damping_factor*(calib_correction-1) + 1)
 
@@ -132,8 +118,8 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
     calib_divergence[getRegions(calib_factor),,][below_limit] <- 0
   }
 
-  # Special rule for LAM and SSA
-  # Only executed if LAM and SSA exist in the regions
+  # Special rule for SSA for better balance of land expansion and TC
+  # Only executed if SSA exists in the regions
   sub <- c("SSA")
   if (all(sub %in% getRegions(calib_factor))) {
     below_limit <- (calib_factor[sub,,] < 0.5)
@@ -145,7 +131,6 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
   write_log <- function(x,file,calibration_step) {
     x <- add_dimension(x, dim=3.1, add="iteration", nm=paste0("iter",calibration_step))
     try(write.magpie(round(setYears(x,NULL),3), file, append = (calibration_step!=1)))
-#    try(write.magpie(round(x,3), file, append = (calibration_step!=1)))
   }
   
   write_log(calib_correction, "land_conversion_cost_calib_correction.cs3" , calibration_step)
@@ -186,8 +171,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
   return(TRUE)
 }
 }else{
-  print("nobest")
-  
+
   calib_factor_time <- time_series(calib_factor)
   calib_reward <- get_rewardcalib(gdx_file,calib_factor_time)
   calib_full <- mbind(setNames(calib_factor_time,"cost"),setNames(calib_reward,"reward"))
@@ -207,9 +191,9 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
 
 calibrate_magpie <- function(n_maxcalib = 20,
                              restart = TRUE,
-                             calib_accuracy = 0.01,
-                             crop_max = 2.5,
-                             crop_min = 0.8,
+                             calib_accuracy = 0.05,
+                             crop_max = 4,
+                             crop_min = 0.2,
                              calib_magpie_name = "magpie_calib",
                              damping_factor = 0.98,
                              calib_file = "modules/39_landconversion/input/f39_calib.csv",
