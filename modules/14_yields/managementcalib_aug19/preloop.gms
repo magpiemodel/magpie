@@ -128,9 +128,6 @@ if(sum((i,ltype14),f14_yld_calib(i,ltype14)) = 0,
 i14_yields_calib(t,j,kcr,w)       = i14_yields_calib(t,j,kcr,w)      *sum(cell(i,j),f14_yld_calib(i,"crop"));
 i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w)*sum(cell(i,j),f14_yld_calib(i,"past"));
 
-* Initialize yield
-*vm_yld.l(j,kve,w) = i14_yields_calib("y1995",j,kve,w);
-
 *' @stop
 
 ****
