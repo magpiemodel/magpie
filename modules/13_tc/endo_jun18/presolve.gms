@@ -14,15 +14,16 @@ else
 	vm_tau.lo(h) =    pcm_tau(h);
 );
 
-	vm_tau.up(h) =  2*pcm_tau(h);
 
 * fix tau in 1st time step for faster solving of 1st time step
 if(ord(t) = 1,
-	vm_tau.fx(h) = pcm_tau(h);
-*	vm_tech_cost.fx(i) = 0;
+	vm_tau.lo(h) = 0.9*pcm_tau(h);
+	vm_tau.l(h) = pcm_tau(h);
+	vm_tau.up(h) = 1.1*pcm_tau(h);
 else
 * educated guess for vm_tau.l:
 	vm_tau.l(h) = pcm_tau(h)*(1+pc13_tcguess(h))**m_yeardiff(t);
-	vm_tech_cost.lo(i) = 0;
-	vm_tech_cost.up(i) = 10e9;
+	vm_tau.up(h) = 2*pcm_tau(h);
 );
+	
+vm_tech_cost.up(i) = 10e9;
