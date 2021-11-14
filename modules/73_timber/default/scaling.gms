@@ -5,6 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*vm_cost_timber.scale(i) = 10e4;
-vm_cost_timber.scale(i)$(s73_timber_demand_switch = 1) = 10e4;
+vm_cost_timber.scale(i) = 10e4;
+*vm_cost_timber.scale(i)$(s73_timber_demand_switch = 1) = 10e4;
 *v73_prod_heaven_timber.scale(j,kforestry) = 10e-3;
