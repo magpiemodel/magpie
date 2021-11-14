@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 ** low cost for balance variable in case of s73_timber_demand_switch = 0
-i73_free_prod_costs(t)$(s73_timber_demand_switch = 0) = 1;
+i73_free_prod_costs(t)$(s73_timber_demand_switch = 0) = 100;
 
 ** Current demand for establishment until 2020, after 2020 depending on s73_foresight
 ** s73_foresight=1 forward looking (establishment based on future demand),
