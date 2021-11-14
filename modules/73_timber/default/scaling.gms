@@ -7,4 +7,4 @@
 
 
 vm_cost_timber.scale(i)$(s73_timber_demand_switch = 1) = 10e4;
-*v73_prod_heaven_timber.scale(j,kforestry) = 10e-3;
+v73_prod_heaven_timber.scale(j,kforestry) = 10e-3;
