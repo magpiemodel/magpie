@@ -17,6 +17,7 @@ else
 	vm_tau.up(h) =  2*pcm_tau(h);
 
 * educated guess for vm_tau.l:
-	vm_tau.l(h) = pcm_tau(h)*(1+pc13_tcguess(h))**m_yeardiff(t);
+	vm_tau.fx(h)$(ord(t) = 1) = pcm_tau(h);
+	vm_tau.l(h)$(ord(t) > 1) = pcm_tau(h)*(1+pc13_tcguess(h))**m_yeardiff(t);
 
 	vm_tech_cost.up(i) = 10e9;

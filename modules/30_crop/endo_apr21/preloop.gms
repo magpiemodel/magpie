@@ -10,6 +10,9 @@
 *cannot be smaller than 0!
 fm_croparea(t_past,j,w,kcr)$(fm_croparea(t_past,j,w,kcr)<0) = 0;
 
+*initialize croparea
+vm_area.l(j,kcr,w) = fm_croparea("y1995",j,w,kcr);
+
 ****** Regional share of Set aside cropland policy in selective countries:
 * Country switch to determine countries for which a set aside cropland policy shall be applied.
 * In the default case, the set aside cropland policy affects all countries when activated.
