@@ -56,7 +56,7 @@ get_areacalib <- function(gdx_file) {
 }
 
 time_series <- function(calib_factor) {
-  out2 <- mbind(new.magpie(getRegions(calib_factor),years = c(1995,2015),fill=1),new.magpie(getRegions(calib_factor),years = seq(2050,2150,by=5),fill=1))
+  out2 <- new.magpie(getRegions(calib_factor), years = c(1995, 2015, seq(2050, 2150, by=5)), fill = 1) 
   out2[,2015,] <- calib_factor
   out2 <- time_interpolate(out2,seq(2000,2015,by=5),integrate_interpolated_years = T)
   out2050 <- calib_factor
