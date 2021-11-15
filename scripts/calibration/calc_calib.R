@@ -39,9 +39,8 @@ get_areacalib <- function(gdx_file) {
   require(magclass)
   require(magpie4)
   require(gdx)
-  require(luscale)
   data <- readGDX(gdx_file,"pm_land_start")[,,c("crop","past")]
-  data <- superAggregate(data,"sum",level="reg")
+  data <- dimSums(data,dim = 1.2)
   magpie <- land(gdx_file)[,,c("crop","past")]
   if(nregions(magpie)!=nregions(data) | !all(getRegions(magpie) %in% getRegions(data))) {
     stop("Regions in MAgPIE do not agree with regions in reference calibration area data set!")
