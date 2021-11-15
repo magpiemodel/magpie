@@ -14,5 +14,7 @@
 *' corresponding carbon stocks are assumed zero
 
 *####################### R SECTION START (PHASES) ##############################
+$Ifi "%phase%" == "declarations" $include "./modules/34_urban/static/declarations.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/34_urban/static/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/34_urban/static/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **43_water_availability** changed scaling factor
 
 ### added
+- **34_urban** New exo_nov21 exogenous realization of urban land expansion 
 - **21_trade** Missing interface parameter for failing exo realization runs
 - **59_som** exogenous pathway for vm_nr_som via f59_som_exogenous
 - **config** Addition of a new scenario column (Tland) in scenario_config.csv
