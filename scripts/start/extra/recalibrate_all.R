@@ -19,7 +19,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$recalibrate <- TRUE
-cfg$recalibrate_landconversion_cost <- "ifneeded"
+cfg$recalibrate_landconversion_cost <- TRUE
 cfg$title <- "calib_run"
 cfg$output <- c("rds_report","validation_short")
 cfg$force_replace <- TRUE
