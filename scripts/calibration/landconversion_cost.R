@@ -40,7 +40,6 @@ get_areacalib <- function(gdx_file) {
   require(magclass)
   require(magpie4)
   require(gdx)
-  require(luscale)
   y <- 2015
   data <- dimSums(readGDX(gdx_file, "f10_land")[, y, "crop"], dim = 1.2)
   magpie <- land(gdx_file)[, y, "crop"]
