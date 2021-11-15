@@ -70,7 +70,6 @@ get_rewardcalib <- function(gdx_file,calib_factor) {
   require(magclass)
   require(magpie4)
   require(gdx)
-  require(luscale)
     data <- dimSums(readGDX(gdx_file, "f10_land")[, , "crop"], dim = 1.2)
   hist <- setYears(data[,2015,],NULL) - setYears(data[,1995,],NULL)
   getYears(hist) <- NULL
