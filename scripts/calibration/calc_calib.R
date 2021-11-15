@@ -88,7 +88,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.1, calibrate_pasture=TRUE,cali
   if(file.exists(calib_file)) {
     old_calib        <- magpiesort(read.magpie(calib_file))
   } else {
-    old_calib<-new.magpie(cells_and_regions = getCells(calib_divergence),names = getNames(calib_divergence),fill = 1)
+    old_calib <- new.magpie(cells_and_regions = getCells(calib_divergence), names = getNames(calib_divergence), fill = 1)
   }
   
   #initial guess equal to 1
