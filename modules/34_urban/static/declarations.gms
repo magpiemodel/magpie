@@ -6,9 +6,13 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-vm_land.fx(j,"urban") = pcm_land(j,"urban");
-vm_carbon_stock.fx(j,"urban",c_pools) = 0;
-*' Biodiveristy value (BV)
-vm_bv.fx(j,"urban", potnatveg) = pcm_land(j,"urban") * fm_bii_coeff("urban",potnatveg) * fm_luh2_side_layers(j,potnatveg);
+positive variables
+ vm_cost_urban(j)			Technical adjustment cost
+;
 
-vm_cost_urban.fx(j) = 0;
+*#################### R SECTION START (OUTPUT DECLARATIONS) ####################
+parameters
+ ov_cost_urban(t,j,type) Technical adjustment cost
+;
+*##################### R SECTION END (OUTPUT DECLARATIONS) #####################
+

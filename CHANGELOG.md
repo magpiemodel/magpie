@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [Unreleased]
+## [4.4.0] - 2021-xx-xx
 
 ### changed
 
@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scaling** Update of scaling factors. removed duplicates
 
 ### added
+- **34_urban** New exo_nov21 exogenous realization of urban land expansion 
 - **21_trade** Missing interface parameter for failing exo realization runs
 - **59_som** exogenous pathway for vm_nr_som via f59_som_exogenous
 - **config** Addition of a new scenario column (Tland) in scenario_config.csv
@@ -351,7 +352,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.3.5...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.4.0...develop
+[4.4.0]: https://github.com/magpiemodel/magpie/compare/v4.3.5...v4.4.0
 [4.3.5]: https://github.com/magpiemodel/magpie/compare/v4.3.4...v4.3.5
 [4.3.4]: https://github.com/magpiemodel/magpie/compare/v4.3.3...v4.3.4
 [4.3.3]: https://github.com/magpiemodel/magpie/compare/v4.3.2...v4.3.3
