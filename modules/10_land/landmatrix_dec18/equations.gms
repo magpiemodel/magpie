@@ -38,7 +38,7 @@
         v10_lu_transitions(j2,land_from10,land_to10));
 
  q10_landreduction(j2,land_from10) ..
-        v10_landreduction(j2,land_from10) =e=
+        vm_landreduction(j2,land_from10) =e=
         sum(land_to10$(not sameas(land_from10,land_to10)),
         v10_lu_transitions(j2,land_from10,land_to10));
 
@@ -57,7 +57,7 @@ q10_croplandexpansion(j2,land_from10) ..
 
  q10_cost(j2) ..
         vm_cost_land_transition(j2) =e=
-        sum(land, vm_landexpansion(j2,land) + v10_landreduction(j2,land)) * 1
+        sum(land, vm_landexpansion(j2,land) + vm_landreduction(j2,land)) * 1
         + (v10_balance_positive(j2) + v10_balance_negative(j2)) * s10_cost_balance;
 
 *' The gross changes in land are calculated based on land expansion, land
@@ -66,6 +66,6 @@ q10_croplandexpansion(j2,land_from10) ..
 
  q10_landdiff ..
 		vm_landdiff =e= sum((j2,land), vm_landexpansion(j2,land)
-                                 + v10_landreduction(j2,land))
+                                 + vm_landreduction(j2,land))
                                  + vm_landdiff_natveg
                                  + vm_landdiff_forestry;

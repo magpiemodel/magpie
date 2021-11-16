@@ -26,6 +26,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** scripts/start/projects/project_LAMACLIMA.R -> scripts/start/projects/project_LAMACLIMA_WP4.R
 - **58_peatland** "On" realization: Degraded peatland is estimated differently, based on an additional calibration factor.
 - **43_water_availability** changed scaling factor
+- **10_land** Converted "v10_landreduction" to interface "vm_landreduction", used in "modules/39_landconversion/calib"
+- **52_carbon** Removed interface "vm_carbon_stock_change", no longer needed
+- **scripts** recalibrate_realizations.R and recalibrate.R adjusted for land conversion cost calibration + default time steps for convenient validation of results
+- **scripts** start_functions adjustments for land conversion cost calibration
+- **scripts** start.R added SLURM medium as choice
+- **scripts** yield calibration, "best" setting uses factors from iteration with lowest standard deviation 
+- **14_yield** read-in file f14_yld_calib.csv if exists. Set default calibration factors to 1 in case f14_yld_calib.csv does not exist
+- **13_tc** different educated guess for vm_tau in 1995
+- **scaling** Update of scaling factors. removed duplicates
 
 ### added
 - **34_urban** New exo_nov21 exogenous realization of urban land expansion 
@@ -40,6 +49,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **37_labor_prod** labor productivity module with two realizations: off and exo
 - **38_factor_costs** new realization "sticky_labor", based on "sticky_feb18" but accounting for changes in labor productivity
 - **15_food** Added additional solve with CONOPT3 in case of modelstat 7
+- **scripts** Added script "landconversion_cost.R" for land conversion cost calibration in scripts/calibration, for matching historic cropland in 2015
+- **39_landconversion_cost** added new realization "calib", which uses the calibration factors derived by "landconversion_cost.R"
+- **scripts** Added start script for yield and land conversion cost calibration "recalibrate_all.R"
+- **scripts** added script validation_short.R with aggregated crop types (cutting the PDF size in half) -> replaces validation.R in default.cfg
 
 ### removed
 - **32_foresty** Removed static realization
@@ -51,6 +64,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **20_processing** Removed `substitution_dec18` realization
 - **30_crop** Removed `endo_jun13` realization
 - **scripts** scripts/start/extra/highres.R
+- **39_landconversion_cost** removed realizations "global_static_aug18" and "devstate"
 
 ### fixed
 - **80_optimization** Improved solve logic in "nlp_apr17" and "nlp_par" realization, multiple bugfixes and switch to solvelink=3 in "nlp_par"
@@ -64,6 +78,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** scripts/output/extra/highres.R bugfixes
 - **38_factor_costs** units in sticky_feb18
 - **32_foresty** Global afforestation limit s32_max_aff_area was not effective in case of parallel optimization -> added option c32_max_aff_area, which allows to provide a file with regional limits for afforestation; 
+- **73_timber** plausible cost for balance variable in case of s73_timber_demand_switch = 0 to avoid cost distortion
 
 ## [4.3.5] - 2021-09-02
 
