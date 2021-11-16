@@ -13,3 +13,4 @@ i39_cost_establish(t,i,"crop") = s39_cost_establish_crop * i39_calib(t,i,"cost")
 i39_reward_reduction(t,i,"crop") = s39_cost_establish_crop * s39_reward_shr * i39_calib(t,i,"reward");
 i39_cost_establish(t,i,"past") = s39_cost_establish_past;
 i39_cost_establish(t,i,"forestry") = s39_cost_establish_forestry;
+i39_cost_establish(t,i,"urban") = s39_cost_establish_urban;
