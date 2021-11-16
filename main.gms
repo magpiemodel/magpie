@@ -147,20 +147,24 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
 * Used data set: rev4.64_h12_magpie.tgz
-* md5sum: 3ed5be74dfdc27430bb4a110255da434
+* md5sum: 162a5ea5c362a56deb2a869c8ed99f6b
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Used data set: rev4.64_h12_477f2095_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-4b917a03.tgz
-* md5sum: 658af69c46d34c5b1025b9a87fd49452
+* md5sum: b05b59484528709b41fbfe92c0217ccb
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Used data set: rev4.64_h12_validation.tgz
-* md5sum: 15e19a3152098bc41e9e351e01291ec3
+* md5sum: 6210cc30c7ec8bddbad9d8902a7da114
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev4.04.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Used data set: additional_data_rev4.07.tgz
+* md5sum: accf653e73cbfd02354158d3b99b046f
+* Repository: /p/projects/landuse/data/input/archive
+* 
+* Used data set: calibration_H12_sticky_feb18_free_15Oct21.tgz
+* md5sum: 3eaa1633ee019f44c122a24bac6f2368
+* Repository: /p/projects/landuse/data/input/calibration
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -186,7 +190,7 @@ $title magpie
 * * Call: do.call(functiononly, args)
 * 
 * 
-* Last modification (input data): Mon Oct  4 15:18:12 2021
+* Last modification (input data): Thu Nov 11 21:24:40 2021
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -253,7 +257,7 @@ $setglobal landconversion  calib
 
 $setglobal transport  gtap_nov12
 $setglobal area_equipped_for_irrigation  endo_apr13
-$setglobal water_demand  agr_sector_aug13
+$setglobal water_demand  all_sectors_aug13
 $setglobal water_availability  total_water_aug13
 $setglobal biodiversity  bv_btc_mar21
 $setglobal climate  static

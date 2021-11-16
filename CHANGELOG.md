@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **config** Update default configuration to new input data (especially cellular inputs) including all module realization updates (14_yield, 22_processing, 30_crop, 38_factor_costs, 39_landconversion). Moreover, climate impatcs (cc options for biophysical inputs) are activiated as default. New best_calib calibration routine is activated as default.
 - **config** peatland module on by default (cfg$gms$peatland <- "on")
 - **config** update default setting for 2nd generation bioenergy demand and GHG prices
+- **config** update default setting for the 42_water_demand module (to all_sectors_aug13)
 - **scripts** output/extra/disaggregation.R updated to account for country-specific set-aside shares in post-processing
 - **scripts** output/extra/disaggregation.R updated to account for sub-categories of "forestry"
 - **scripts** Default recalibration routine does not read in previous calibration factors anymore
@@ -21,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **21_trade** In the exo and off realization, equations corrected to be consistent with the mapping between supreg h and regions i. Bugfixes in trade exo and off realizations. Added scaling factor for exo realization.
 - **inputs** Update of GDP and population scenarios based upon recent historic data from WDI (complemented with growth rates given by the James2019 dataset), short term projections until 2025 from IMF (for GDPpc) and WB (for pop) and reconverge to the original SSP GDPpc levels by 2100.
 - **inputs** Update of all input data that are based on FAO, using the most up-to-date version of FAOSTAT datasets available at the date of input calculations via automated download.
+- **inputs** Update of additional data to rev4.07
 - **scripts** scripts/start/projects/project_LAMACLIMA.R -> scripts/start/projects/project_LAMACLIMA_WP4.R
 - **58_peatland** "On" realization: Degraded peatland is estimated differently, based on an additional calibration factor.
 - **43_water_availability** changed scaling factor
