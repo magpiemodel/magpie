@@ -23,10 +23,13 @@ scalars
 
 
 ******* Calibration factor
+$onEmpty
 table f14_yld_calib(i,ltype14) Calibration factor for the LPJmL yields (1)
 $ondelim
-$include "./modules/14_yields/input/f14_yld_calib.csv"
-$offdelim;
+$if exist "./modules/14_yields/input/f14_yld_calib.csv" $include "./modules/14_yields/input/f14_yld_calib.csv"
+$offdelim
+;
+$offEmpty
 
 table f14_yields(t_all,j,kve,w) LPJmL potential yields per cell (rainfed and irrigated) (tDM per ha per yr)
 $ondelim

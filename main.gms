@@ -249,7 +249,7 @@ $setglobal natveg  dynamic_feb21
 
 $setglobal labor_prod  off
 $setglobal factor_costs  sticky_feb18
-$setglobal landconversion  devstate
+$setglobal landconversion  calib
 
 $setglobal transport  gtap_nov12
 $setglobal area_equipped_for_irrigation  endo_apr13

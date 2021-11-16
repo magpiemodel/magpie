@@ -6,9 +6,9 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: creates a validation pdf file for a run (long version - single crop types)
+# description: creates a validation pdf file for a run (short version - aggregated crop types)
 # comparison script: FALSE
-# position: 4
+# position: 5
 # ---------------------------------------------------------------
 
 
@@ -42,7 +42,6 @@ if(length(runinfo)>1) {
   runinfo <- NULL
 }
 
-getReport <- NULL
-if(file.exists(reportrds)) getReport <- readRDS(reportrds)
+getReport <- getReport(gdx,scenario = cfg$title,detail=FALSE)
 
 validation(gdx=gdx, hist=h, file = file, runinfo=runinfo, scenario=cfg$title, getReport=getReport)

@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------
-# description: calculate and store new calibration factors for yields (land conversion cost calibration factors are only calculated if needed)
+# description: calculate and store new calibration factors for yields AND land conversion costs (time consuming; up to 40 model runs with 1 or 5 time steps)
 # --------------------------------------------------------
 
 library(magpie4)
@@ -19,7 +19,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$recalibrate <- TRUE
-cfg$recalibrate_landconversion_cost <- "ifneeded"
+cfg$recalibrate_landconversion_cost <- TRUE
 cfg$title <- "calib_run"
 cfg$output <- c("rds_report","validation_short")
 cfg$force_replace <- TRUE
