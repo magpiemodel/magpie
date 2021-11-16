@@ -12,5 +12,7 @@ vm_bv.fx(j,"urban", potnatveg) = pcm_land(j,"urban") * fm_bii_coeff("urban",potn
 if(ord(t) = 1,
 	vm_land.fx(j,"urban") = i34_urban_area(t,j);
 else
+	vm_land.lo(j,"urban") = 0;
 	vm_land.l(j,"urban") = i34_urban_area(t,j);
+	vm_land.up(j,"urban") = Inf;
 );
