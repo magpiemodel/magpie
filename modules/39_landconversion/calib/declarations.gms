@@ -21,7 +21,7 @@ parameters
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_landcon(t,j,land,type)   Land conversion costs (mio. USD05MER per yr)
+ ov_cost_landcon(t,j,land,type)   Costs for land expansion and reduction (mio. USD05MER per yr)
  oq39_cost_landcon(t,j,land,type) Calculation of cellular landconversion costs (mio. USD05MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
