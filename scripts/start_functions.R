@@ -380,13 +380,12 @@ start_run <- function(cfg, codeCheck=TRUE, lock_model=TRUE) {
 
   # Yield calibration
   calib_file <- "modules/14_yields/input/f14_yld_calib.csv"
-  if(!file.exists(calib_file)) stop("Yield calibration file missing!")
   if(cfg$recalibrate=="ifneeded") {
-    # recalibrate if all calibration factors are 1, otherwise don't
-    cfg$recalibrate <- all(magclass::read.magpie(calib_file)==1)
+    # recalibrate if file does not exist
+    if(!file.exists(calib_file)) cfg$recalibrate <- TRUE else cfg$recalibrate <- FALSE
   }
   if(cfg$recalibrate){
-    cat("Starting calibration factor calculation!\n")
+    cat("Starting yield calibration factor calculation!\n")
     source("scripts/calibration/calc_calib.R")
     calibrate_magpie(n_maxcalib = cfg$calib_maxiter,
                      calib_accuracy = cfg$calib_accuracy,
@@ -400,9 +399,32 @@ start_run <- function(cfg, codeCheck=TRUE, lock_model=TRUE) {
                      debug = cfg$debug,
                      best_calib = cfg$best_calib)
     file.copy("calibration_results.pdf", cfg$results_folder, overwrite=TRUE)
-    cat("Calibration factor calculated!\n")
+    cat("Yield calibration factor calculated!\n")
   }
-
+  
+  land_calib_file <- "modules/39_landconversion/input/f39_calib.csv"
+  if(cfg$recalibrate_landconversion_cost=="ifneeded") {
+    # recalibrate if file does not exist
+    if(!file.exists(land_calib_file)) cfg$recalibrate_landconversion_cost <- TRUE else cfg$recalibrate_landconversion_cost <- FALSE
+  }
+  if(cfg$recalibrate_landconversion_cost){
+    #if(cfg$gms$landconversion!="devstate") stop("Land conversion cost calibration works only with realization devstate")
+    cat("Starting land conversion cost calibration factor calculation!\n")
+    source("scripts/calibration/landconversion_cost.R")
+    calibrate_magpie(n_maxcalib = cfg$calib_maxiter_landconversion_cost,
+                     restart = cfg$restart_landconversion_cost,
+                     calib_accuracy = cfg$calib_accuracy_landconversion_cost,
+                     damping_factor = cfg$damping_factor_landconversion_cost,
+                     crop_max = cfg$crop_calib_max_landconversion_cost,
+                     crop_min = cfg$crop_calib_min_landconversion_cost,
+                     calib_file = land_calib_file,
+                     data_workspace = cfg$val_workspace,
+                     logoption = 3,
+                     debug = cfg$debug,
+                     best_calib = cfg$best_calib_landconversion_cost)
+    cat("Land conversion cost calibration factor calculated!\n")
+  }
+  
   # copy important files into output_folder (before MAgPIE execution)
   for(file in cfg$files2export$start) {
     try(file.copy(Sys.glob(file), cfg$results_folder, overwrite=TRUE))

@@ -10,17 +10,18 @@ equations
 ;
 
 variables
- vm_cost_landcon(j,land)          Land conversion costs (mio. USD05MER per yr)
+ vm_cost_landcon(j,land)          	Costs for land expansion and reduction (mio. USD05MER per yr)
 ;
 
 parameters
- i39_cost_establish(land)		Global land establishment costs (USD05MER per hectare)
- i39_cost_clearing(land)        Global land clearing costs (USD05MER per ton C)
+ i39_cost_establish(t,i,land)		Land expansion costs (USD05MER per hectare)
+ i39_reward_reduction(t,i,land)		Reward for land reduction (USD05MER per hectare)
+ i39_calib(t,i,type39)				Calibration factor for costs of cropland expansion and rewards for cropland reduction (1)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_landcon(t,j,land,type)   Land conversion costs (mio. USD05MER per yr)
+ ov_cost_landcon(t,j,land,type)   Costs for land expansion and reduction (mio. USD05MER per yr)
  oq39_cost_landcon(t,j,land,type) Calculation of cellular landconversion costs (mio. USD05MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

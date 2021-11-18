@@ -5,4 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_cost_landcon.scale(j,land) = 10e3;
+sets
+	type39 Cost type
+		/ cost, reward /
+;

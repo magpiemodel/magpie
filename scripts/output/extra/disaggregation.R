@@ -23,7 +23,7 @@ if(!exists("source_include")) {
 map_file                   <- Sys.glob(file.path(outputdir, "clustermap_*.rds"))
 gdx                        <- file.path(outputdir,"fulldata.gdx")
 land_hr_file               <- file.path(outputdir,"avl_land_full_t_0.5.mz")
-urban_land_hr_file         <- file.path(outputdir, "f34_UrbanLand_0.5.mz")
+urban_land_hr_file         <- file.path(outputdir,"f34_urbanland_0.5.mz")
 land_hr_out_file           <- file.path(outputdir,"cell.land_0.5.mz")
 land_hr_share_out_file     <- file.path(outputdir,"cell.land_0.5_share.mz")
 croparea_hr_share_out_file <- file.path(outputdir,"cell.croparea_0.5_share.mz")
@@ -63,7 +63,7 @@ if(any(land_ini_hr < 0)) {
 }
 
 #read in hr urban land
-if (cfg$gms$urban == "exo21" ) {
+if (cfg$gms$urban == "exo_nov21" ) {
 urban_land_hr  <- read.magpie(urban_land_hr_file)
 ssp <- cfg$gms$c09_gdp_scenario
 urban_land_hr <- urban_land_hr[,,ssp]
