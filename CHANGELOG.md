@@ -54,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **39_landconversion_cost** added new realization "calib", which uses the calibration factors derived by "landconversion_cost.R"
 - **scripts** Added start script for yield and land conversion cost calibration "recalibrate_all.R"
 - **scripts** added script validation_short.R with aggregated crop types (cutting the PDF size in half) -> replaces validation.R in default.cfg
+- **scripts** added start script "scripts/start/Rprofile.R" for adding a R snapshot to the ".Rprofile" file
 
 ### removed
 - **32_foresty** Removed static realization
