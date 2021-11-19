@@ -47,9 +47,8 @@ highres <- function(cfg) {
   cfg$output <- cfg$output[cfg$output!="extra/highres"]
   
   #update cellular input files
-#  cfg$input["cellular"] <- "rev4.64_h12_184c2e25_cellularmagpie_c600_MRI-ESM2-0-ssp370_lpjml-4b917a03.tgz"
-#  cfg$input["cellular"] <- "rev4.64_h12_9c7a3dce_cellularmagpie_c1000_MRI-ESM2-0-ssp370_lpjml-4b917a03.tgz"
-  cfg$input["cellular"] <- "rev4.64_h12_59d165b7_cellularmagpie_c2000_MRI-ESM2-0-ssp370_lpjml-4b917a03.tgz"
+#  cfg$input["cellular"] <- "rev4.65_h12_a2626201_cellularmagpie_c1000_MRI-ESM2-0-ssp370_lpjml-3eb70376.tgz"
+  cfg$input["cellular"] <- "rev4.65_h12_026f93b5_cellularmagpie_c2000_MRI-ESM2-0-ssp370_lpjml-3eb70376.tgz"
   
   #copy gdx files from low resolution run for better starting points
   cfg$files2export$start <- c(cfg$files2export$start,
