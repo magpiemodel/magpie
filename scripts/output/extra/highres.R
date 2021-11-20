@@ -55,6 +55,7 @@ highres <- function(cfg) {
   x[3] <- "*"
   x[5] <- res
   file <- paste0(x,collapse = "_")
+  message(paste0("Searching for ",file," in repositories"))
   repositories <- cfg$repositories
   found <- NULL
   debug <- FALSE
@@ -72,7 +73,7 @@ highres <- function(cfg) {
       next
     }
     if (grepl("https://|http://", repo)) {
-      h <- try(curl::new_handle(verbose = debug, .list = repositories[[repo]]), silent = !debug)
+      #read html file and extract file names
       con <- curl::curl(paste0(repo,"/"), handle = h)
       dat <- try(readLines(con), silent = TRUE)
       close(con)
@@ -81,11 +82,15 @@ highres <- function(cfg) {
       x <- gsub(" <a href=\"","",x,fixed=TRUE)
       found <- c(found,grep(glob2rx(file),x,value = T))
     } else if (grepl("scp://", repo)) {
+      #list files with ssh command
       x <- sub("scp://","",repo)
       x <- unlist(strsplit(x,"/"))
       server <- x[1]
       path <- paste0("/",paste(x[-1],collapse = "/"))
       dat <- system(paste0("ssh ",repositories[[repo]][["username"]],"@",server," ls ",path,""),intern = TRUE)
+      found <- c(found,grep(glob2rx(file),dat,value = T))
+    } else if (dir.exists(repo)) {
+      dat <- list.files(repo)
       found <- c(found,grep(glob2rx(file),dat,value = T))
     }
   }  
