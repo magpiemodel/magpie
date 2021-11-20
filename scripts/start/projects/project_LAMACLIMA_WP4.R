@@ -33,7 +33,6 @@ cfg$input["calibration"] <- "calibration_H12_sticky_feb18_dynamic_13Nov21.tgz"
 cfg$gms$c17_prod_init <- "off"
 
 cfg$gms$labor_prod <- "exo"
-cfg$gms$c37_labor_rcp <- "rcp119"
 cfg$gms$c37_labor_metric <- "ISO"
 cfg$gms$c37_labor_intensity <- "400W"
 cfg$gms$c37_labor_uncertainty <- "ensmean"
@@ -44,7 +43,8 @@ cfg$qos <- "priority"
 
 ### Global Sustainability, based on SDP
 cfg$title <- paste(prefix,"Sustainability",sep="_")
-cfg <- setScenario(cfg,c("SDP","NDC","ForestryEndo"))
+cfg <- setScenario(cfg,c("SDP","NDC","ForestryEndo","rcp1p9"))
+cfg$gms$c37_labor_rcp <- "rcp119"
 cfg$gms$c35_protect_scenario <- "FF_BH"
 cfg$gms$c35_protect_scenario_noselect <- "FF_BH"
 cfg$gms$policy_countries35  <- all_iso_countries
@@ -93,16 +93,19 @@ cfg$gms$c60_2ndgen_biodem <- "R21M42-SDP-PkBudg1000"
 start_run(cfg,codeCheck=FALSE)
 #start 2nd run without land-based mitigation (NPI)
 cfg$title <- paste(prefix,"Sustainability-Ref",sep="_")
-cfg <- setScenario(cfg,c("NPI"))
+cfg <- setScenario(cfg,c("NPI","rcp7p0"))
+cfg$gms$c37_labor_rcp <- "rcp585"
 cfg$gms$c56_pollutant_prices <- "R21M42-SDP-NPi"
 cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SDP-NPi"
 cfg$gms$policy_countries56  <- all_iso_countries
 cfg$gms$c60_2ndgen_biodem <- "R21M42-SDP-NPi"
 start_run(cfg,codeCheck=FALSE)
 
+
 ### Global Inequality, based on SSP4
 cfg$title <- paste(prefix,"Inequality",sep="_")
-cfg <- setScenario(cfg,c("SSP4","NDC","ForestryEndo"))
+cfg <- setScenario(cfg,c("SSP4","NDC","ForestryEndo","rcp1p9"))
+cfg$gms$c37_labor_rcp <- "rcp119"
 cfg$gms$c35_protect_scenario <- "FF_BH"
 cfg$gms$c35_protect_scenario_noselect <- "WDPA"
 cfg$gms$policy_countries35  <- oecd90andEU
@@ -145,9 +148,15 @@ cfg$gms$policy_countries56  <- oecd90andEU
 cfg$gms$c60_2ndgen_biodem <- "R21M42-SDP-PkBudg1000"
 #start run
 start_run(cfg,codeCheck=FALSE)
-#start 2nd run without land-based mitigation (NPI)
+#start 2nd run with stronger climate impacts for Inequality
+cfg$title <- paste(prefix,"Inequality-rcp7p0",sep="_")
+cfg <- setScenario(cfg,c("rcp7p0"))
+cfg$gms$c37_labor_rcp <- "rcp585"
+start_run(cfg,codeCheck=FALSE)
+#start 3rd run without land-based mitigation (NPI)
 cfg$title <- paste(prefix,"Inequality-Ref",sep="_")
-cfg <- setScenario(cfg,c("NPI"))
+cfg <- setScenario(cfg,c("NPI","rcp7p0"))
+cfg$gms$c37_labor_rcp <- "rcp585"
 cfg$gms$c56_pollutant_prices <- "R21M42-SDP-NPi"
 cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SDP-NPi"
 cfg$gms$policy_countries56  <- oecd90andEU

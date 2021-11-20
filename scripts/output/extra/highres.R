@@ -46,9 +46,62 @@ highres <- function(cfg) {
   
   cfg$output <- cfg$output[cfg$output!="extra/highres"]
   
+  # set high resolution, available options are c1000 and c2000
+  highres <- "c2000"
+  
+  # search for matching high resolution file in repositories
+  # pattern: "rev4.65_h12_*_cellularmagpie_c2000_MRI-ESM2-0-ssp370_lpjml-3eb70376.tgz"
+  x <- unlist(strsplit(cfg$input["cellular"],"_"))
+  x[3] <- "*"
+  x[5] <- highres
+  file <- paste0(x,collapse = "_")
+  repositories <- cfg$repositories
+  found <- NULL
+  debug <- FALSE
+  for (repo in names(repositories)) {
+    message("  try ", repo)
+    if (grepl("://", repo)) {
+      h <- try(curl::new_handle(verbose = debug, .list = repositories[[repo]]), silent = !debug)
+      tmp <- try(curl::curl_fetch_memory(repo, handle = h)$status_code, silent = !debug)
+      if (tmp != 200 &  !grepl("scp://", repo)) {
+        message("    repository access failed .. skip repository!")
+        next
+      }
+    } else if (!file.exists(repo)) {
+      message("    repository access failed .. skip repository!")
+      next
+    }
+    if (grepl("https://|http://", repo)) {
+      h <- try(curl::new_handle(verbose = debug, .list = repositories[[repo]]), silent = !debug)
+      con <- curl::curl(paste0(repo,"/"), handle = h)
+      dat <- try(readLines(con), silent = TRUE)
+      close(con)
+      x <- grep("href",dat,value = T)
+      x <- unlist(lapply(strsplit(x, "\\]\\] <a href\\=\\\"|\\\">"),function(x) x[2]))
+      x <- gsub(" <a href=\"","",x,fixed=TRUE)
+      found <- c(found,grep(glob2rx(file),x,value = T))
+    } else if (grepl("scp://", repo)) {
+      x <- sub("scp://","",repo)
+      x <- unlist(strsplit(x,"/"))
+      server <- x[1]
+      path <- paste0("/",paste(x[-1],collapse = "/"))
+      dat <- system(paste0("ssh ",repositories[[repo]][["username"]],"@",server," ls ",path,""),intern = TRUE)
+      found <- c(found,grep(glob2rx(file),dat,value = T))
+    }
+  }  
+  
+  if(length(found) == 0) {
+    stop("No matching file found")
+  } else {
+    if (length(unique(found)) > 1) {
+      found <- found[1]  
+      warning("More than one file found that matches the pattern. Only the first one will be used.")
+    } else found <- found[1]
+    message(paste0("Matching file with ",highres," resolution found: ",found))
+  }
+
   #update cellular input files
-#  cfg$input["cellular"] <- "rev4.65_h12_a2626201_cellularmagpie_c1000_MRI-ESM2-0-ssp370_lpjml-3eb70376.tgz"
-  cfg$input["cellular"] <- "rev4.65_h12_026f93b5_cellularmagpie_c2000_MRI-ESM2-0-ssp370_lpjml-3eb70376.tgz"
+  cfg$input["cellular"] <- found
   
   #copy gdx files from low resolution run for better starting points
   cfg$files2export$start <- c(cfg$files2export$start,
