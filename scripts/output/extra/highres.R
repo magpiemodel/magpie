@@ -47,13 +47,13 @@ highres <- function(cfg) {
   cfg$output <- cfg$output[cfg$output!="extra/highres"]
   
   # set high resolution, available options are c1000 and c2000
-  highres <- "c2000"
+  res <- "c2000"
   
   # search for matching high resolution file in repositories
   # pattern: "rev4.65_h12_*_cellularmagpie_c2000_MRI-ESM2-0-ssp370_lpjml-3eb70376.tgz"
   x <- unlist(strsplit(cfg$input["cellular"],"_"))
   x[3] <- "*"
-  x[5] <- highres
+  x[5] <- res
   file <- paste0(x,collapse = "_")
   repositories <- cfg$repositories
   found <- NULL
@@ -97,7 +97,7 @@ highres <- function(cfg) {
       found <- found[1]  
       warning("More than one file found that matches the pattern. Only the first one will be used.")
     } else found <- found[1]
-    message(paste0("Matching file with ",highres," resolution found: ",found))
+    message(paste0("Matching file with ",res," resolution found: ",found))
   }
 
   #update cellular input files
