@@ -10,6 +10,8 @@
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
+# Author: Florian Humpenoeder
+
 library(magclass)
 library(gdx)
 library(magpie4)
