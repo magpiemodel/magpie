@@ -20,7 +20,7 @@ options("magclass.verbosity" = 1)
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdir <- "output/LAMA60_Sustainability"
+  outputdir <- "output/LAMA86_Sustainability"
   readArgs("outputdir")
 }
 
@@ -60,34 +60,23 @@ highres <- function(cfg) {
   found <- NULL
   debug <- FALSE
   for (repo in names(repositories)) {
-    message("  try ", repo)
-    if (grepl("://", repo)) {
-      h <- try(curl::new_handle(verbose = debug, .list = repositories[[repo]]), silent = !debug)
-      tmp <- try(curl::curl_fetch_memory(repo, handle = h)$status_code, silent = !debug)
-      if (tmp != 200 &  !grepl("scp://", repo)) {
-        message("    repository access failed .. skip repository!")
-        next
-      }
-    } else if (!file.exists(repo)) {
-      message("    repository access failed .. skip repository!")
-      next
-    }
     if (grepl("https://|http://", repo)) {
-      #read html file and extract file names
+      #read html index file and extract file names
+      h <- try(curl::new_handle(verbose = debug, .list = repositories[[repo]]), silent = !debug)
       con <- curl::curl(paste0(repo,"/"), handle = h)
       dat <- try(readLines(con), silent = TRUE)
       close(con)
-      x <- grep("href",dat,value = T)
-      x <- unlist(lapply(strsplit(x, "\\]\\] <a href\\=\\\"|\\\">"),function(x) x[2]))
-      x <- gsub(" <a href=\"","",x,fixed=TRUE)
-      found <- c(found,grep(glob2rx(file),x,value = T))
+      dat <- grep("href",dat,value = T)
+      dat <- unlist(lapply(strsplit(dat, "\\]\\] <a href\\=\\\"|\\\">"),function(x) x[2]))
+      dat <- gsub(" <a href=\"","",dat,fixed=TRUE)
+      found <- c(found,grep(glob2rx(file),dat,value = T))
     } else if (grepl("scp://", repo)) {
-      #list files with ssh command
-      x <- sub("scp://","",repo)
-      x <- unlist(strsplit(x,"/"))
-      server <- x[1]
-      path <- paste0("/",paste(x[-1],collapse = "/"))
-      dat <- system(paste0("ssh ",repositories[[repo]][["username"]],"@",server," ls ",path,""),intern = TRUE)
+      #list files with sftp command
+      path <- paste0(sub("scp://","sftp://",repo),"/")
+      h <- try(curl::new_handle(verbose = debug, .list = repositories[[repo]], ftp_use_epsv = TRUE, dirlistonly = TRUE), silent = TRUE)
+      con <- curl::curl(url = path, "r", handle = h)
+      dat <- try(readLines(con), silent = TRUE)
+      close(con)
       found <- c(found,grep(glob2rx(file),dat,value = T))
     } else if (dir.exists(repo)) {
       dat <- list.files(repo)
