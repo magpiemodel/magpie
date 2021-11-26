@@ -78,7 +78,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
 
   choose_submit <- function(title="Please choose run submission type") {
     slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
-    modes <- c("SLURM (default)", "SLURM priority","Direct execution", "Background execution", "Debug mode")
+    modes <- c("SLURM standby", "SLURM standby maxMem", "SLURM priority", "SLURM priority maxMem","Direct execution", "Background execution", "Debug mode")
     if(slurm) {
       cat("\nCurrent cluster utilization:\n")
       system("sclass")
