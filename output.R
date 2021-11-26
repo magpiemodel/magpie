@@ -94,11 +94,13 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     if(slurm) {
       system("sclass")
       comp <- switch(identifier,
-                     "1" = "slurm default",
-                     "2" = "slurm priority",
-                     "3" = "direct",
-                     "4" = "background",
-                     "5" = "debug")
+                     "1" = "slurm standby",
+                     "2" = "slurm standby maxMem",
+                     "3" = "slurm priority",
+                     "4" = "slurm priority maxMem",
+                     "5" = "direct",
+                     "6" = "background",
+                     "7" = "debug")
 
     } else {
       comp <- switch(identifier,
@@ -140,10 +142,14 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
           rm(tmp.env)
         } else if(submit=="background") {
           system(paste0(r_command," &> ",format(Sys.time(), "blog_out-%Y-%H-%M-%S-%OS3.log")," &"))
-        } else if(submit=="slurm default") {
+        } else if(submit=="slurm standby") {
           system(paste(sbatch_command, "--qos=standby"))
+        } else if(submit=="slurm standby maxMem") {
+          system(paste(sbatch_command, "--qos=standby --mem-per-cpu=0 --cpus-per-task=16"))
         } else if(submit=="slurm priority") {
           system(paste(sbatch_command, "--qos=priority"))
+        } else if(submit=="slurm priority maxMem") {
+          system(paste(sbatch_command, "--qos=priority --mem-per-cpu=0 --cpus-per-task=16"))
         } else if(submit=="debug") {
           tmp.env <- new.env()
           sys.source(script,envir=tmp.env)
