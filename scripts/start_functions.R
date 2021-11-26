@@ -544,7 +544,7 @@ getReportData <- function(path_to_report, mute_ghgprices_until = "y2010", path_t
     cat("Reading ghg prices from",path_to_report_ghgprices,"\n")
     ghgrep <- read.report(path_to_report_ghgprices, as.list = FALSE)
     ghgrep <- collapseNames(ghgrep)
-    ghgmag <- deletePlus(rep) #delete "+" and "++" from variable names
+    ghgmag <- deletePlus(ghgrep) #delete "+" and "++" from variable names
     if(!("y1995" %in% getYears(ghgmag))){
       empty95<-ghgmag[,1,];empty95[,,]<-0;dimnames(empty95)[[2]] <- "y1995"
       ghgmag <- mbind(empty95,ghgmag)
