@@ -111,37 +111,40 @@ land_hr <- land_hr*frac
 land_hr_shr <- land_hr/dimSums(land_hr, dim=3)
 land_hr_shr[is.na(land_hr_shr)] <- 0
 
+map_crops <- data.frame(matrix(nrow=19,ncol=2))
+names(map_crops) <- c("LUH2","MAgPIE")
+map_crops[1,] <- c("c3ann","tece")
+map_crops[2,] <- c("c3ann","rice_pro")
+map_crops[3,] <- c("c3ann","rapeseed")
+map_crops[4,] <- c("c3ann","sunflower")
+map_crops[5,] <- c("c3ann","potato")
+map_crops[6,] <- c("c3ann","cassav_sp")
+map_crops[7,] <- c("c3ann","sugr_beet")
+map_crops[8,] <- c("c3ann","others")
+map_crops[9,] <- c("c3ann","cottn_pro")
+map_crops[10,] <- c("c3ann","foddr")
+map_crops[11,] <- c("c4ann","maiz")
+map_crops[12,] <- c("c4ann","trce")
+map_crops[13,] <- c("c3per","oilpalm")
+map_crops[14,] <- c("c3per","betr")
+map_crops[15,] <- c("c4per","sugr_cane")
+map_crops[16,] <- c("c4per","begr")
+map_crops[17,] <- c("c3nfx","soybean")
+map_crops[18,] <- c("c3nfx","groundnut")
+map_crops[19,] <- c("c3nfx","puls_pro")
+
+
 ### Disaggregation crop types
 crop_hr_shr <- land_hr_shr[,,"crop"]
-.dissagCrop <- function(gdx, crop_hr_shr, map, water_aggr=TRUE,rename=TRUE) {
+.dissagCrop <- function(gdx, crop_hr_shr, map, water_aggr=TRUE,map_crops=map_crops) {
   message("Disaggregation crop types")
   area     <- croparea(gdx, level="cell", products="kcr",
                        product_aggr=FALSE,water_aggr = water_aggr)
   area_shr <- area/(dimSums(area,dim=3) + 10^-10)
 
-  luh2 <- data.frame(matrix(nrow=19,ncol=2))
-  names(luh2) <- c("LUH2","MAgPIE")
-  luh2[1,] <- c("c3ann","tece")
-  luh2[2,] <- c("c3ann","rice_pro")
-  luh2[3,] <- c("c3ann","rapeseed")
-  luh2[4,] <- c("c3ann","sunflower")
-  luh2[5,] <- c("c3ann","potato")
-  luh2[6,] <- c("c3ann","cassav_sp")
-  luh2[7,] <- c("c3ann","sugr_beet")
-  luh2[8,] <- c("c3ann","others")
-  luh2[9,] <- c("c3ann","cottn_pro")
-  luh2[10,] <- c("c3ann","foddr")
-  luh2[11,] <- c("c4ann","maiz")
-  luh2[12,] <- c("c4ann","trce")
-  luh2[13,] <- c("c3per","oilpalm")
-  luh2[14,] <- c("c3per","betr")
-  luh2[15,] <- c("c4per","sugr_cane")
-  luh2[16,] <- c("c4per","begr")
-  luh2[17,] <- c("c3nfx","soybean")
-  luh2[18,] <- c("c3nfx","groundnut")
-  luh2[19,] <- c("c3nfx","puls_pro")
+  #Rename and aggregate crop types from MAgPIE to LUH2
+  if (!is.null(map_crops)) area_shr <- madrat::toolAggregate(area_shr, map_crops, from="MAgPIE", to="LUH2",dim = 3.1)
   
-  if (rename) area_shr <- madrat::toolAggregate(area_shr, luh2, from="MAgPIE", to="LUH2",dim = 3.1)
   # calculate crop area as share of total cell area
   crop_hr_shr <- crop_hr_shr[,getYears(area_shr),]
   area_shr_hr <- madrat::toolAggregate(area_shr, map, to="cell") * setNames(crop_hr_shr,NULL)
@@ -152,6 +155,8 @@ crop_hr_shr <- land_hr_shr[,,"crop"]
   return(area_shr_hr)
 }
 crop_hr_shr <- .dissagCrop(gdx, crop_hr_shr, map=map_file)
+#Croparea with LUH2 crop types in mio ha
+crop_hr <- collapseNames(land_hr[,,"crop"],collapsedim = 3) * crop_hr_shr
 
 
 ### Disaggregation Forestry 
@@ -269,8 +274,38 @@ d <- dimSums(bio_hr_shr*dimSums(land_hr,dim=3),dim=c(1,3))-croparea(gdx,level="g
 if (any(abs(d) > 0.1 & !Inf)) message(paste0("Difference between cluster and grid cell production > 0.1 detected!"))
 write.magpie(bio_hr_shr,file.path(outputdir,"LUH2_bioenergy.nc"),comment = "unit: fraction of grid-cell area")
 
+### Nitrogen fertilizer
+#read-in NR budget in mio t N
+a <- NitrogenBudget(gdx,level="grid",dir = outputdir)
+a <- a[,,c("fertilizer","manure","surplus")]
+#read-in crop specific weight
+weight <-   NitrogenBudgetWithdrawals(gdx,kcr="kcr",level="grid",net=TRUE,dir=outputdir)
+#Rename and aggregate crop types from MAgPIE to LUH2
+weight <- madrat::toolAggregate(weight, map_crops, from="MAgPIE", to="LUH2",dim = 3.1)
+#make it crop specific
+a <- ((a * weight) / dimSums(weight,dim=3))# / croparea(gdx,level="grid",products = "kcr")
+#divide by croparea -> tN/ha; convert from tN/ha to kgN/ha: tN/ha*1000kg/t = 1000 kgN/ha
+a <- (a/crop_hr)*1000
+getNames(a) <- gsub("\\.","_",getNames(a))
+a <- clean_magpie(a)
+write.magpie(a,file.path(outputdir,"LUH2_Nitrogen.nc"),comment = "unit: kgN-per-ha")
 
-# ## Nitrogen Fertilizer
-# a <- NitrogenBudget(gdx,level="grid",dir = outputdir)
-# a[,,"fertilizer"]
-# 
+### Yields DM
+#read-in production in mio tDM
+a <- production(gdx,level="grid",dir = outputdir,products = "kcr",product_aggr = FALSE,water_aggr = TRUE,attributes = "dm")
+#Rename and aggregate crop types from MAgPIE to LUH2
+a <- madrat::toolAggregate(a, map_crops, from="MAgPIE", to="LUH2",dim = 3.1)
+#divide by croparea -> tDM/ha
+a <- (a/crop_hr)
+write.magpie(a,file.path(outputdir,"LUH2_Yield_DM.nc"),comment = "unit: tDM-per-ha")
+
+
+### Yields Nr
+#read-in production in mio tN
+a <- collapseNames(production(gdx,level="grid",dir = outputdir,products = "kcr",product_aggr = FALSE,water_aggr = TRUE,attributes = "nr"),collapsedim = 3.2)
+#Rename and aggregate crop types from MAgPIE to LUH2
+a <- madrat::toolAggregate(a, map_crops, from="MAgPIE", to="LUH2",dim = 3.1)
+#divide by croparea -> tN/ha; convert from tN/ha to kgN/ha: tN/ha*1000kg/t = 1000 kgN/ha
+a <- (a/crop_hr)*1000
+write.magpie(a,file.path(outputdir,"LUH2_Yield_Nr.nc"),comment = "unit: kgN-per-ha")
+
