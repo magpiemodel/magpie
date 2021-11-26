@@ -136,7 +136,7 @@ map_crops[19,] <- c("c3nfx","puls_pro")
 
 ### Disaggregation crop types
 crop_hr_shr <- land_hr_shr[,,"crop"]
-.dissagCrop <- function(gdx, crop_hr_shr, map, water_aggr=TRUE,map_crops=map_crops) {
+.dissagCrop <- function(gdx, crop_hr_shr, map, water_aggr=TRUE,map_crops) {
   message("Disaggregation crop types")
   area     <- croparea(gdx, level="cell", products="kcr",
                        product_aggr=FALSE,water_aggr = water_aggr)
@@ -154,7 +154,7 @@ crop_hr_shr <- land_hr_shr[,,"crop"]
 
   return(area_shr_hr)
 }
-crop_hr_shr <- .dissagCrop(gdx, crop_hr_shr, map=map_file)
+crop_hr_shr <- .dissagCrop(gdx, crop_hr_shr, map=map_file, map_crops=map_crops)
 #Croparea with LUH2 crop types in mio ha
 crop_hr <- collapseNames(land_hr[,,"crop"],collapsedim = 3) * crop_hr_shr
 
