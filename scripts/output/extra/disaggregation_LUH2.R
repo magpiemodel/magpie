@@ -204,7 +204,8 @@ states <- mbind(crop_hr_shr,
 )
 
 write.magpie(states,file.path(outputdir,"LUH2_states.nc"),comment = "unit: fraction of grid-cell area")
-
+rm(avl_land_full,states,past_range_hr_shr,forestry_hr_shr,other_hr_shr)
+gc()
 
 ### Wood: Harvested Biomass
 a <- TimberProductionVolumetric(gdx,level = "cell",sumSource = FALSE,sumProduct = TRUE)
@@ -219,6 +220,8 @@ luh2[3,] <- c("secdf_bioh","secdforest")
 luh2[4,] <- c("primn_secdn_bioh","other")
 b <- madrat::toolAggregate(b, luh2, from="MAgPIE", to="LUH2",dim = 3)
 write.magpie(b,file.path(outputdir,"LUH2_wood_harvest_biomass.nc"),comment = "unit: mio. m3 per year")
+rm(a,b,d)
+gc()
 
 
 ### Wood: Harvested Biomass Product Split
@@ -230,6 +233,8 @@ b <- dimSums(b,dim=3.1)
 b <- b/dimSums(b,dim=3)
 getNames(b) <- c("rndwd","fulwd")
 write.magpie(b,file.path(outputdir,"LUH2_wood_harvest_biomass_split.nc"),comment = "unit: fraction of wood harvest biomass")
+rm(a,b,d)
+gc()
 
 
 ### Wood: Harvested Area
@@ -246,6 +251,8 @@ luh2[3,] <- c("secdf_harv","secdforest")
 luh2[4,] <- c("primn_secdn_harv","other")
 b <- madrat::toolAggregate(b, luh2, from="MAgPIE", to="LUH2",dim = 3)
 write.magpie(b,file.path(outputdir,"LUH2_wood_harvest_area.nc"),comment = "unit: fraction of grid-cell area per year")
+rm(a,b,d)
+gc()
 
 
 ### Irrigation
@@ -255,6 +262,8 @@ getNames(irrig_hr_shr) <- paste("irrig",getNames(irrig_hr_shr),sep="_")
 d <- dimSums(irrig_hr_shr*dimSums(land_hr,dim=3),dim=c(1,3))-croparea(gdx,level="glo",product_aggr = T,water_aggr = FALSE)[,,"irrigated"]
 if (any(abs(d) > 0.1 & !Inf)) message(paste0("Difference between cluster and grid cell production > 0.1 detected!"))
 write.magpie(irrig_hr_shr,file.path(outputdir,"LUH2_irrigation.nc"),comment = "unit: fraction of grid-cell area")
+rm(irrig_hr_shr,d)
+gc()
 
 
 ### Flood
@@ -263,8 +272,9 @@ flooded <- flooded[,,"rice_pro"]
 getNames(flooded) <- "flood"
 d <- dimSums(flooded*dimSums(land_hr,dim=3),dim=c(1,3))-croparea(gdx,level="glo",product_aggr = F,water_aggr = T)[,,"rice_pro"]
 if (any(abs(d) > 0.1 & !Inf)) message(paste0("Difference between cluster and grid cell production > 0.1 detected!"))
-write.magpie(irrig_hr_shr,file.path(outputdir,"LUH2_flood.nc"),comment = "unit: fraction of grid-cell area")
-
+write.magpie(flooded,file.path(outputdir,"LUH2_flood.nc"),comment = "unit: fraction of grid-cell area")
+rm(flooded,d)
+gc()
 
 ### Bioenergy
 bio_hr_shr <- .dissagCrop(gdx, land_hr_shr[,,"crop"], map=map_file, water_aggr = TRUE, map2crops=NULL)
@@ -273,6 +283,8 @@ getNames(bio_hr_shr) <- c("crpbf_c4per","crpbf_c3per")
 d <- dimSums(bio_hr_shr*dimSums(land_hr,dim=3),dim=c(1,3))-croparea(gdx,level="glo",products = c("begr","betr"),product_aggr = T)
 if (any(abs(d) > 0.1 & !Inf)) message(paste0("Difference between cluster and grid cell production > 0.1 detected!"))
 write.magpie(bio_hr_shr,file.path(outputdir,"LUH2_bioenergy.nc"),comment = "unit: fraction of grid-cell area")
+rm(bio_hr_shr,d)
+gc()
 
 ### Nitrogen fertilizer
 #read-in NR budget in mio t N
@@ -289,6 +301,8 @@ a <- (a/crop_hr)*1000
 getNames(a) <- gsub("\\.","_",getNames(a))
 a <- clean_magpie(a)
 write.magpie(a,file.path(outputdir,"LUH2_Nitrogen.nc"),comment = "unit: kgN-per-ha")
+rm(a,weight)
+gc()
 
 ### Yields DM
 #read-in production in mio tDM
@@ -298,7 +312,8 @@ a <- madrat::toolAggregate(a, map_crops, from="MAgPIE", to="LUH2",dim = 3.1)
 #divide by croparea -> tDM/ha
 a <- (a/crop_hr)
 write.magpie(a,file.path(outputdir,"LUH2_Yield_DM.nc"),comment = "unit: tDM-per-ha")
-
+rm(a)
+gc()
 
 ### Yields Nr
 #read-in production in mio tN
@@ -308,4 +323,5 @@ a <- madrat::toolAggregate(a, map_crops, from="MAgPIE", to="LUH2",dim = 3.1)
 #divide by croparea -> tN/ha; convert from tN/ha to kgN/ha: tN/ha*1000kg/t = 1000 kgN/ha
 a <- (a/crop_hr)*1000
 write.magpie(a,file.path(outputdir,"LUH2_Yield_Nr.nc"),comment = "unit: kgN-per-ha")
-
+rm(a)
+gc()
