@@ -136,14 +136,14 @@ map_crops[19,] <- c("c3nfx","puls_pro")
 
 ### Disaggregation crop types
 crop_hr_shr <- land_hr_shr[,,"crop"]
-.dissagCrop <- function(gdx, crop_hr_shr, map, water_aggr=TRUE,map_crops) {
+.dissagCrop <- function(gdx, crop_hr_shr, map, water_aggr=TRUE,map2crops=map_crops) {
   message("Disaggregation crop types")
   area     <- croparea(gdx, level="cell", products="kcr",
                        product_aggr=FALSE,water_aggr = water_aggr)
   area_shr <- area/(dimSums(area,dim=3) + 10^-10)
 
   #Rename and aggregate crop types from MAgPIE to LUH2
-  if (!is.null(map_crops)) area_shr <- madrat::toolAggregate(area_shr, map_crops, from="MAgPIE", to="LUH2",dim = 3.1)
+  if (!is.null(map2crops)) area_shr <- madrat::toolAggregate(area_shr, map2crops, from="MAgPIE", to="LUH2",dim = 3.1)
   
   # calculate crop area as share of total cell area
   crop_hr_shr <- crop_hr_shr[,getYears(area_shr),]
@@ -154,7 +154,7 @@ crop_hr_shr <- land_hr_shr[,,"crop"]
 
   return(area_shr_hr)
 }
-crop_hr_shr <- .dissagCrop(gdx, crop_hr_shr, map=map_file, map_crops=map_crops)
+crop_hr_shr <- .dissagCrop(gdx, crop_hr_shr, map=map_file)
 #Croparea with LUH2 crop types in mio ha
 crop_hr <- collapseNames(land_hr[,,"crop"],collapsedim = 3) * crop_hr_shr
 
@@ -258,7 +258,7 @@ write.magpie(irrig_hr_shr,file.path(outputdir,"LUH2_irrigation.nc"),comment = "u
 
 
 ### Flood
-flooded <- .dissagCrop(gdx, land_hr_shr[,,"crop"], map=map_file, water_aggr = TRUE,rename = FALSE)
+flooded <- .dissagCrop(gdx, land_hr_shr[,,"crop"], map=map_file, water_aggr = TRUE, map2crops = NULL)
 flooded <- flooded[,,"rice_pro"]
 getNames(flooded) <- "flood"
 d <- dimSums(flooded*dimSums(land_hr,dim=3),dim=c(1,3))-croparea(gdx,level="glo",product_aggr = F,water_aggr = T)[,,"rice_pro"]
@@ -267,7 +267,7 @@ write.magpie(irrig_hr_shr,file.path(outputdir,"LUH2_flood.nc"),comment = "unit: 
 
 
 ### Bioenergy
-bio_hr_shr <- .dissagCrop(gdx, land_hr_shr[,,"crop"], map=map_file, water_aggr = TRUE,rename=FALSE)
+bio_hr_shr <- .dissagCrop(gdx, land_hr_shr[,,"crop"], map=map_file, water_aggr = TRUE, map2crops=NULL)
 bio_hr_shr <- bio_hr_shr[,,c("begr","betr")]
 getNames(bio_hr_shr) <- c("crpbf_c4per","crpbf_c3per")
 d <- dimSums(bio_hr_shr*dimSums(land_hr,dim=3),dim=c(1,3))-croparea(gdx,level="glo",products = c("begr","betr"),product_aggr = T)
