@@ -17,7 +17,7 @@ library(madrat)
 
 ############################# BASIC CONFIGURATION ##############################
 if(!exists("source_include")) {
-  outputdir <- "output/LAMA65_Sustainability"
+  outputdir <- "output/LAMA86_Sustainability"
   readArgs("outputdir")
 }
 map_file                   <- Sys.glob(file.path(outputdir, "clustermap_*.rds"))
@@ -141,7 +141,7 @@ crop_hr_shr <- land_hr_shr[,,"crop"]
   area     <- croparea(gdx, level="cell", products="kcr",
                        product_aggr=FALSE,water_aggr = water_aggr)
   area_shr <- area/(dimSums(area,dim=3) + 10^-10)
-
+  
   #Rename and aggregate crop types from MAgPIE to LUH2
   if (!is.null(map2crops)) area_shr <- madrat::toolAggregate(area_shr, map2crops, from="MAgPIE", to="LUH2",dim = 3.1)
   
@@ -151,12 +151,10 @@ crop_hr_shr <- land_hr_shr[,,"crop"]
   
   #check
   if (abs(sum(dimSums(area_shr_hr,dim=3)-crop_hr_shr,na.rm=T)) > 0.1) warning("large Difference in crop disaggregation detected!")
-
+  
   return(area_shr_hr)
 }
 crop_hr_shr <- .dissagCrop(gdx, crop_hr_shr, map=map_file)
-#Croparea with LUH2 crop types in mio ha
-crop_hr <- collapseNames(land_hr[,,"crop"],collapsedim = 3) * crop_hr_shr
 
 
 ### Disaggregation Forestry 
@@ -193,14 +191,14 @@ other_hr_shr <- other_hr_shr * setNames(land_hr_shr[,,"other"],NULL)
 
 
 states <- mbind(crop_hr_shr,
-      setNames(past_range_hr_shr[,,"past"],"pastr"),
-      setNames(past_range_hr_shr[,,"range"],"range"),
-      setNames(land_hr_shr[,,"primforest"],"primf"),
-      setNames(forestry_hr_shr[,,"plant"],"timber"),
-      setNames(land_hr_shr[,,"secdforest"]+forestry_hr_shr[,,"ndc"]+forestry_hr_shr[,,"aff"],"secdf"),
-      setNames(other_hr_shr[,,"primother"],"primn"),
-      setNames(other_hr_shr[,,"secdother"],"secdn"),
-      setNames(land_hr_shr[,,"urban"],"urban")
+                setNames(past_range_hr_shr[,,"past"],"pastr"),
+                setNames(past_range_hr_shr[,,"range"],"range"),
+                setNames(land_hr_shr[,,"primforest"],"primf"),
+                setNames(forestry_hr_shr[,,"plant"],"timber"),
+                setNames(land_hr_shr[,,"secdforest"]+forestry_hr_shr[,,"ndc"]+forestry_hr_shr[,,"aff"],"secdf"),
+                setNames(other_hr_shr[,,"primother"],"primn"),
+                setNames(other_hr_shr[,,"secdother"],"secdn"),
+                setNames(land_hr_shr[,,"urban"],"urban")
 )
 
 write.magpie(states,file.path(outputdir,"LUH2_states.nc"),comment = "unit: fraction of grid-cell area")
@@ -286,6 +284,10 @@ write.magpie(bio_hr_shr,file.path(outputdir,"LUH2_bioenergy.nc"),comment = "unit
 rm(bio_hr_shr,d)
 gc()
 
+#Croparea
+crop_hr <- croparea(gdx,level="grid",dir = outputdir,products = "kcr",product_aggr = FALSE,water_aggr = TRUE)
+crop_hr <- madrat::toolAggregate(crop_hr, map_crops, from="MAgPIE", to="LUH2",dim = 3.1)
+
 ### Nitrogen fertilizer
 #read-in NR budget in mio t N
 a <- NitrogenBudget(gdx,level="grid",dir = outputdir)
@@ -298,9 +300,9 @@ weight <- madrat::toolAggregate(weight, map_crops, from="MAgPIE", to="LUH2",dim 
 a <- ((a * weight) / dimSums(weight,dim=3))# / croparea(gdx,level="grid",products = "kcr")
 #divide by croparea -> tN/ha; convert from tN/ha to kgN/ha: tN/ha*1000kg/t = 1000 kgN/ha
 a <- (a/crop_hr)*1000
-getNames(a) <- gsub("\\.","_",getNames(a))
-a <- clean_magpie(a)
-write.magpie(a,file.path(outputdir,"LUH2_Nitrogen.nc"),comment = "unit: kgN-per-ha")
+write.magpie(clean_magpie(collapseNames(a[,,"fertilizer"],collapsedim = 3.1)),file.path(outputdir,"LUH2_Nitrogen_fertilizer.nc"),comment = "unit: kgN-per-ha")
+write.magpie(clean_magpie(collapseNames(a[,,"manure"],collapsedim = 3.1)),file.path(outputdir,"LUH2_Nitrogen_manure.nc"),comment = "unit: kgN-per-ha")
+write.magpie(clean_magpie(collapseNames(a[,,"surplus"],collapsedim = 3.1)),file.path(outputdir,"LUH2_Nitrogen_surplus.nc"),comment = "unit: kgN-per-ha")
 rm(a,weight)
 gc()
 
