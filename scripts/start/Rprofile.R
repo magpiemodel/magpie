@@ -29,7 +29,7 @@ setSnapshot <- function(snapshotdir=NULL) {
       dirs <- base::list.dirs("/p/projects/rd3mod/R/libraries/snapshots/",recursive=F,full.names=F)
       dirs <- sort(dirs)
       cat("\n",title,":\n", sep="")
-      cat("0: No snapshot")
+      cat("0: No snapshot\n")
       cat(paste(1:length(dirs), dirs, sep=": " ),sep="\n")
       cat("Number: ")
       identifier <- as.numeric(get_line())
