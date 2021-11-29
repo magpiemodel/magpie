@@ -33,7 +33,7 @@ setSnapshot <- function(snapshotdir=NULL) {
       cat(paste(1:length(dirs), dirs, sep=": " ),sep="\n")
       cat("Number: ")
       identifier <- as.numeric(get_line())
-      if(identifier > 0) {
+      if(identifier > 0 & identifier <= length(dirs)) {
         return(paste0("/p/projects/rd3mod/R/libraries/snapshots/",dirs[identifier]))
       } else return(invisible(NULL))
     } else stop("R snapshot folder is only available on PIK cluster")
