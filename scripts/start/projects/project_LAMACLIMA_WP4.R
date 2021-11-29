@@ -47,11 +47,23 @@ cfg$qos <- "priority"
 ### Global Sustainability, largely based on SDP
 cfg$title <- paste(prefix,"Sustainability",sep="_")
 cfg <- setScenario(cfg,c("LAMA_Sustainability","rcp1p9"))
+cfg$gms$policy_countries30 <- all_iso_countries
+cfg$gms$policy_countries35 <- all_iso_countries
+cfg$gms$EFP_countries <- all_iso_countries
+cfg$gms$cropneff_countries <- all_iso_countries
+cfg$gms$scen_countries55 <- all_iso_countries
+cfg$gms$policy_countries56 <- all_iso_countries
 start_run(cfg,codeCheck=FALSE)
 
 ### Global Inequality, largely based on SSP4
 cfg$title <- paste(prefix,"Inequality",sep="_")
 cfg <- setScenario(cfg,c("LAMA_Inequal","rcp1p9"))
+cfg$gms$policy_countries30 <- oecd90andEU
+cfg$gms$policy_countries35 <- oecd90andEU
+cfg$gms$EFP_countries <- oecd90andEU
+cfg$gms$cropneff_countries <- oecd90andEU
+cfg$gms$scen_countries55 <- oecd90andEU
+cfg$gms$policy_countries56 <- oecd90andEU
 start_run(cfg,codeCheck=FALSE)
 
 #### Sensitivity scenarios
@@ -59,20 +71,44 @@ start_run(cfg,codeCheck=FALSE)
 ### LAMA_Inequal-SustDemand
 cfg$title <- paste(prefix,"Inequality-SustDemand",sep="_")
 cfg <- setScenario(cfg,c("LAMA_Inequal-SustDemand","rcp1p9"))
+cfg$gms$policy_countries30 <- oecd90andEU
+cfg$gms$policy_countries35 <- oecd90andEU
+cfg$gms$EFP_countries <- oecd90andEU
+cfg$gms$cropneff_countries <- oecd90andEU
+cfg$gms$scen_countries55 <- oecd90andEU
+cfg$gms$policy_countries56 <- oecd90andEU
 start_run(cfg,codeCheck=FALSE)
 
 ### LAMA_Inequal-EnvirProt
 cfg$title <- paste(prefix,"Inequality-EnvirProt",sep="_")
 cfg <- setScenario(cfg,c("LAMA_Inequal-EnvirProt","rcp1p9"))
+cfg$gms$policy_countries30 <- all_iso_countries
+cfg$gms$policy_countries35 <- all_iso_countries
+cfg$gms$EFP_countries <- all_iso_countries
+cfg$gms$cropneff_countries <- all_iso_countries
+cfg$gms$scen_countries55 <- all_iso_countries
+cfg$gms$policy_countries56 <- oecd90andEU
 start_run(cfg,codeCheck=FALSE)
 
 ### LAMA_Inequal-GHGPrice
 cfg$title <- paste(prefix,"Inequality-GHGPrice",sep="_")
 cfg <- setScenario(cfg,c("LAMA_Inequal-GHGPrice","rcp1p9"))
+cfg$gms$policy_countries30 <- oecd90andEU
+cfg$gms$policy_countries35 <- oecd90andEU
+cfg$gms$EFP_countries <- oecd90andEU
+cfg$gms$cropneff_countries <- oecd90andEU
+cfg$gms$scen_countries55 <- oecd90andEU
+cfg$gms$policy_countries56 <- all_iso_countries
 start_run(cfg,codeCheck=FALSE)
 
 ### Global Inequality with higher climate impacts
 cfg$title <- paste(prefix,"Inequality-rcp7p0",sep="_")
 cfg <- setScenario(cfg,c("LAMA_Inequal","rcp7p0"))
+cfg$gms$policy_countries30 <- oecd90andEU
+cfg$gms$policy_countries35 <- oecd90andEU
+cfg$gms$EFP_countries <- oecd90andEU
+cfg$gms$cropneff_countries <- oecd90andEU
+cfg$gms$scen_countries55 <- oecd90andEU
+cfg$gms$policy_countries56 <- oecd90andEU
 cfg$gms$c37_labor_rcp <- "rcp585"
 start_run(cfg,codeCheck=FALSE)
