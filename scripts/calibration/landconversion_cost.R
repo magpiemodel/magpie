@@ -55,9 +55,9 @@ get_areacalib <- function(gdx_file) {
 }
 
 time_series <- function(calib_factor) {
-  out2 <- new.magpie(getRegions(calib_factor), years = c(1995, 2015, seq(2050, 2150, by=5)), fill = 1) 
-  out2[,2015,] <- calib_factor
-  out2 <- time_interpolate(out2,seq(2000,2015,by=5),integrate_interpolated_years = T)
+  out2 <- new.magpie(getRegions(calib_factor), years = c(seq(1995, 2015, by=5), seq(2050, 2150, by=5)), fill = 1) 
+  out2[,seq(2000, 2015, by=5),] <- calib_factor
+  #out2 <- time_interpolate(out2,seq(2000,2015,by=5),integrate_interpolated_years = T)
   out2050 <- calib_factor
   out2050[out2050<1] <- 1
   out2[,seq(2050,2150,by=5),] <- out2050
@@ -124,12 +124,11 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
     calib_factor[sub,,][below_limit]  <- 0.5
     calib_divergence[sub,,][below_limit] <- 0
   }
-  # Special rule for IND for better balance of land expansion and TC
-  # Only executed if IND exists in the regions
+  # Special rule for IND to avoid very strong cropland increase; Only executed if IND exists in the regions
   sub <- c("IND")
   if (all(sub %in% getRegions(calib_factor))) {
-    below_limit <- (calib_factor[sub,,] < 2)
-    calib_factor[sub,,][below_limit]  <- 2
+    below_limit <- (calib_factor[sub,,] < 3)
+    calib_factor[sub,,][below_limit]  <- 3
     calib_divergence[sub,,][below_limit] <- 0
   }
   
