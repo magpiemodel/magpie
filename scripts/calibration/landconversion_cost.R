@@ -124,7 +124,15 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
     calib_factor[sub,,][below_limit]  <- 0.5
     calib_divergence[sub,,][below_limit] <- 0
   }
-
+  # Special rule for IND for better balance of land expansion and TC
+  # Only executed if IND exists in the regions
+  sub <- c("IND")
+  if (all(sub %in% getRegions(calib_factor))) {
+    below_limit <- (calib_factor[sub,,] < 2)
+    calib_factor[sub,,][below_limit]  <- 2
+    calib_divergence[sub,,][below_limit] <- 0
+  }
+  
   ### write down current calib factors (and area_factors) for tracking
   write_log <- function(x,file,calibration_step) {
     x <- add_dimension(x, dim=3.1, add="iteration", nm=paste0("iter",calibration_step))
