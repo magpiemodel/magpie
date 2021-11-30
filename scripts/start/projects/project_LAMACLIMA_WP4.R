@@ -26,6 +26,7 @@ source("config/default.cfg")
 
 prefix <- "LAMA90"
 cfg$force_replace <- TRUE
+cfg$qos <- "priority_maxMem"
 
 cfg$gms$factor_costs <- "sticky_labor"
 cfg$gms$c38_sticky_mode <- "dynamic"
