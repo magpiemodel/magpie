@@ -36,6 +36,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **14_yield** read-in file f14_yld_calib.csv if exists. Set default calibration factors to 1 in case f14_yld_calib.csv does not exist
 - **13_tc** different educated guess for vm_tau in 1995
 - **scaling** Update of scaling factors. removed duplicates
+- **config** Remove elements from the parameter list of start_run(), instead include them as regular settings in the default.cfg.
+- **scripts** Add option to take ghg prices from different file than the regular reporting file (used in the REMIND coupling)
 
 ### added
 - **34_urban** New exo_nov21 exogenous realization of urban land expansion 
