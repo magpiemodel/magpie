@@ -17,7 +17,7 @@ library(madrat)
 
 ############################# BASIC CONFIGURATION ##############################
 if(!exists("source_include")) {
-  outputdir <- "output/LAMA86_Sustainability"
+  outputdir <- "output/HR_LAMA86_Sustainability"
   readArgs("outputdir")
 }
 map_file                   <- Sys.glob(file.path(outputdir, "clustermap_*.rds"))
@@ -285,19 +285,31 @@ rm(bio_hr_shr,d)
 gc()
 
 #Croparea
+crop_threshold <- 0.0001
 crop_hr <- croparea(gdx,level="grid",dir = outputdir,products = "kcr",product_aggr = FALSE,water_aggr = TRUE)
 crop_hr <- madrat::toolAggregate(crop_hr, map_crops, from="MAgPIE", to="LUH2",dim = 3.1)
 
 ### Nitrogen fertilizer
-#read-in NR budget in mio t N
-a <- NitrogenBudget(gdx,level="grid",dir = outputdir)
-a <- a[,,c("fertilizer","manure","surplus")]
-#read-in crop specific weight
-weight <-   NitrogenBudgetWithdrawals(gdx,kcr="kcr",level="grid",net=TRUE,dir=outputdir)
-#Rename and aggregate crop types from MAgPIE to LUH2
+if(file.exists(file.path(outputdir,"NitrogenBudget.rds")) & file.exists(file.path(outputdir,"NitrogenBudgetWeight.rds"))) {
+  a <- readRDS(file.path(outputdir,"NitrogenBudget.rds"))
+  weight <- readRDS(file.path(outputdir,"NitrogenBudgetWeight.rds"))
+} else {
+  #read-in NR budget in mio t N
+  a <- NitrogenBudget(gdx,level="grid",dir = outputdir)
+  saveRDS(a,file.path(outputdir,"NitrogenBudget.rds"))
+  #read-in crop specific weight
+  weight <- NitrogenBudgetWithdrawals(gdx,kcr="kcr",level="grid",net=TRUE,dir=outputdir)
+  saveRDS(weight,file.path(outputdir,"NitrogenBudgetWeight.rds"))
+}
+#Rename and aggregate crop types in weight from MAgPIE to LUH2
 weight <- madrat::toolAggregate(weight, map_crops, from="MAgPIE", to="LUH2",dim = 3.1)
+#subset
+a <- a[,,c("fertilizer","manure","surplus")]
+a[a<0] <- 0
 #make it crop specific
-a <- ((a * weight) / dimSums(weight,dim=3))# / croparea(gdx,level="grid",products = "kcr")
+a <- ((a * weight) / dimSums(weight,dim=3,na.rm = TRUE))
+#filter
+a[crop_hr_shr<crop_threshold] <- NA
 #divide by croparea -> tN/ha; convert from tN/ha to kgN/ha: tN/ha*1000kg/t = 1000 kgN/ha
 a <- (a/crop_hr)*1000
 write.magpie(clean_magpie(collapseNames(a[,,"fertilizer"],collapsedim = 3.1)),file.path(outputdir,"LUH2_Nitrogen_fertilizer.nc"),comment = "unit: kgN-per-ha")
@@ -311,6 +323,8 @@ gc()
 a <- production(gdx,level="grid",dir = outputdir,products = "kcr",product_aggr = FALSE,water_aggr = TRUE,attributes = "dm")
 #Rename and aggregate crop types from MAgPIE to LUH2
 a <- madrat::toolAggregate(a, map_crops, from="MAgPIE", to="LUH2",dim = 3.1)
+#filter
+a[crop_hr_shr<crop_threshold] <- NA
 #divide by croparea -> tDM/ha
 a <- (a/crop_hr)
 write.magpie(a,file.path(outputdir,"LUH2_Yield_DM.nc"),comment = "unit: tDM-per-ha")
@@ -322,6 +336,8 @@ gc()
 a <- collapseNames(production(gdx,level="grid",dir = outputdir,products = "kcr",product_aggr = FALSE,water_aggr = TRUE,attributes = "nr"),collapsedim = 3.2)
 #Rename and aggregate crop types from MAgPIE to LUH2
 a <- madrat::toolAggregate(a, map_crops, from="MAgPIE", to="LUH2",dim = 3.1)
+#filter
+a[crop_hr_shr<crop_threshold] <- NA
 #divide by croparea -> tN/ha; convert from tN/ha to kgN/ha: tN/ha*1000kg/t = 1000 kgN/ha
 a <- (a/crop_hr)*1000
 write.magpie(a,file.path(outputdir,"LUH2_Yield_Nr.nc"),comment = "unit: kgN-per-ha")
