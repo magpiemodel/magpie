@@ -288,6 +288,7 @@ gc()
 crop_threshold <- 0.0001
 crop_hr <- croparea(gdx,level="grid",dir = outputdir,products = "kcr",product_aggr = FALSE,water_aggr = TRUE)
 crop_hr <- madrat::toolAggregate(crop_hr, map_crops, from="MAgPIE", to="LUH2",dim = 3.1)
+crop_hr_shr <- crop_hr / dimSums(land_hr,dim=3)
 
 ### Nitrogen fertilizer
 if(file.exists(file.path(outputdir,"NitrogenBudget.rds")) & file.exists(file.path(outputdir,"NitrogenBudgetWeight.rds"))) {
