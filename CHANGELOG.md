@@ -39,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **32_foresty** Avoid division by zero (observed under higher regional resolutions)
 - **35_natveg** Avoid division by zero (observed under higher regional resolutions)
 - **70_livestock** Avoid division by zero (observed under higher regional resolutions)
+- **60_bioenergy** Minimum dedicated 2nd generation bioenergy demand assumed in each region raised from 0.01 to 1 mio. GJ per yr, and added as option in the config file (s60_2ndgen_bioenergy_dem_min)
 
 ### added
 - **34_urban** New exo_nov21 exogenous realization of urban land expansion 
