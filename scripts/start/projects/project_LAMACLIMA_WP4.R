@@ -26,7 +26,6 @@ source("config/default.cfg")
 
 prefix <- "LAMA90"
 cfg$force_replace <- TRUE
-cfg$qos <- "priority_maxMem"
 
 cfg$gms$factor_costs <- "sticky_labor"
 cfg$gms$c38_sticky_mode <- "dynamic"
@@ -41,7 +40,7 @@ cfg$gms$c37_labor_uncertainty <- "ensmean"
 
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation","extra/disaggregation_LUH2","extra/highres")
-cfg$qos <- "priority"
+cfg$qos <- "priority_maxMem"
 
 #### Main scenarios
 
