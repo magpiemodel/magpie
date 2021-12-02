@@ -36,6 +36,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **14_yield** read-in file f14_yld_calib.csv if exists. Set default calibration factors to 1 in case f14_yld_calib.csv does not exist
 - **13_tc** different educated guess for vm_tau in 1995
 - **scaling** Update of scaling factors. removed duplicates
+- **32_foresty** Avoid division by zero (observed under higher regional resolutions)
+- **35_natveg** Avoid division by zero (observed under higher regional resolutions)
+- **70_livestock** Avoid division by zero (observed under higher regional resolutions)
 
 ### added
 - **34_urban** New exo_nov21 exogenous realization of urban land expansion 
@@ -56,6 +59,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** added script validation_short.R with aggregated crop types (cutting the PDF size in half) -> replaces validation.R in default.cfg
 - **scripts** added start script "scripts/start/Rprofile.R" for adding a R snapshot to the ".Rprofile" file
 - **config** file "land_carbon_sink_adjust_grassi.mz" added to cfg$files2export$start
+- **config** Inclusion of LAMACLIMA scenarios in scenario_config.csv
+- **output.R** added SLURM standby maxMem and SLURM priority maxMem; needed for some output scripts (e.g. disaggregation_LUH2.R)
 
 ### removed
 - **32_foresty** Removed static realization
