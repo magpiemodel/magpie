@@ -29,27 +29,31 @@ setSnapshot <- function(snapshotdir=NULL) {
       dirs <- base::list.dirs("/p/projects/rd3mod/R/libraries/snapshots/",recursive=F,full.names=F)
       dirs <- sort(dirs)
       cat("\n",title,":\n", sep="")
+      cat("0: No snapshot\n")
       cat(paste(1:length(dirs), dirs, sep=": " ),sep="\n")
       cat("Number: ")
       identifier <- as.numeric(get_line())
-      return(paste0("/p/projects/rd3mod/R/libraries/snapshots/",dirs[identifier]))
+      if(identifier > 0 & identifier <= length(dirs)) {
+        return(paste0("/p/projects/rd3mod/R/libraries/snapshots/",dirs[identifier]))
+      } else return(invisible(NULL))
     } else stop("R snapshot folder is only available on PIK cluster")
   }
   
   if(is.null(snapshotdir)) snapshotdir <- choose_snapshot("Please choose a R snapshot")
   
   if(is.null(snapshotdir)) {
-    message("No output folder selected! Stop here.")
-    return(invisible(NULL))
+    fc <- file(".Rprofile")
+    on.exit(close(fc))
+    writeLines(c('if(file.exists("~/.Rprofile")) source("~/.Rprofile")'),
+               fc)
+  } else {
+    fc <- file(".Rprofile")
+    on.exit(close(fc))
+    writeLines(c('if(file.exists("~/.Rprofile")) source("~/.Rprofile")',
+                 paste0('.libPaths(',deparse(snapshotdir),')'),
+                 paste0('print("Setting libPaths to ',snapshotdir,'")')),
+               fc)
   }
-  
-  fc <- file(".Rprofile")
-  on.exit(close(fc))
-  writeLines(c('if(file.exists("~/.Rprofile")) source("~/.Rprofile")',
-               paste0('.libPaths(',deparse(snapshotdir),')'),
-               paste0('print("Setting libPaths to ',snapshotdir,'")')),
-             fc)
-  
   message(".Rprofile written")
 }
 if(!exists("source_include")) {
