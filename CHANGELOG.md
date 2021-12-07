@@ -90,6 +90,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **38_factor_costs** units in sticky_feb18
 - **32_foresty** Global afforestation limit s32_max_aff_area was not effective in case of parallel optimization -> added option c32_max_aff_area, which allows to provide a file with regional limits for afforestation; 
 - **73_timber** plausible cost for balance variable in case of s73_timber_demand_switch = 0 to avoid cost distortion
+- **56_ghg_policy** choose the correct scenario for fixing the GHG prices until sm_fix_SSP2 
 
 ## [4.3.5] - 2021-09-02
 

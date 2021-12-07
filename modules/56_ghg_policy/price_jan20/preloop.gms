@@ -34,8 +34,8 @@ $endif
 
 ** Harmonize till 2020
 loop(t_all$(m_year(t_all) <= sm_fix_SSP2),
-im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices(t_all,i,pollutants,"R2M41-SSP2-NPi") * p56_region_price_shr(t_all,i)
-                                        + f56_pollutant_prices(t_all,i,pollutants,"R2M41-SSP2-NPi") * (1-p56_region_price_shr(t_all,i));
+im_pollutant_prices(t_all,i,pollutants) = f56_pollutant_prices(t_all,i,pollutants,"R21M42-SSP2-NPi") * p56_region_price_shr(t_all,i)
+                                        + f56_pollutant_prices(t_all,i,pollutants,"R21M42-SSP2-NPi") * (1-p56_region_price_shr(t_all,i));
 );
 
 ***save im_pollutant_prices to parameter
