@@ -264,11 +264,11 @@ start_run <- function(cfg, codeCheck=TRUE, lock_model=TRUE) {
     stop(paste0("Results folder ",cfg$results_folder,
                 " could not be created because is already exists."))
   }
-  # If report and scenname are available the data of this scenario in the report
-  # will be converted to MAgPIE input, saved to the respective input folders
-  # and used as input by the model
-  if (!is.na(cfg$path_to_report)) {
-    getReportData(cfg$path_to_report, cfg$mute_ghgprices_until, cfg$path_to_report_ghgprices)
+  
+  # If reports for both bioenergy and GHG prices are available convert them 
+  # to MAgPIE input, save to the respective input folders, and use it as input
+  if (!is.na(cfg$path_to_report_bioenergy) & !is.na(cfg$path_to_report_ghgprices)) {
+    getReportData(cfg$path_to_report_bioenergy, cfg$mute_ghgprices_until, cfg$path_to_report_ghgprices)
     cfg <- gms::setScenario(cfg,"coupling")
   }
 
@@ -483,7 +483,7 @@ start_run <- function(cfg, codeCheck=TRUE, lock_model=TRUE) {
   return(cfg$results_folder)
 }
 
-getReportData <- function(path_to_report, mute_ghgprices_until = "y2010", path_to_report_ghgprices = NA) {
+getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y2010", path_to_report_ghgprices = NA) {
 
   if (!requireNamespace("magclass", quietly = TRUE)) {
     stop("Package \"magclass\" needed for this function to work. Please install it.",
@@ -494,7 +494,10 @@ getReportData <- function(path_to_report, mute_ghgprices_until = "y2010", path_t
     notGLO <- getRegions(mag)[!(getRegions(mag)=="GLO")]
     out <- mag[,,"Primary Energy Production|Biomass|Energy Crops (EJ/yr)"]*10^3
     dimnames(out)[[3]] <- NULL
-    write.magpie(out[notGLO,,],"./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
+    # delete old input file before updating it
+    f <- "./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv"
+    suppressWarnings(unlink(f))
+    write.magpie(out[notGLO,,],f)
   }
 
   .emission_prices <- function(mag){
@@ -518,11 +521,14 @@ getReportData <- function(path_to_report, mute_ghgprices_until = "y2010", path_t
 
     # Remove GLO region
     notGLO <- getRegions(mag)[!(getRegions(mag)=="GLO")]
-    write.magpie(out[notGLO,,],"./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3")
+    # delete old input file before updating it
+    f <- "./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3"
+    suppressWarnings(unlink(f))
+    write.magpie(out[notGLO,,],f)
   }
 
   # read REMIND report
-  rep <- read.report(path_to_report, as.list = FALSE)
+  rep <- read.report(path_to_report_bioenergy, as.list = FALSE)
   if (length(getNames(rep,dim="scenario"))!=1) stop("getReportData: REMIND report contains more or less than 1 scenario.")
   rep <- collapseNames(rep) # get rid of scenrio and model dimension if they exist
   mag <- deletePlus(rep) #delete "+" and "++" from variable names
@@ -534,13 +540,9 @@ getReportData <- function(path_to_report, mute_ghgprices_until = "y2010", path_t
   years <- 1990+5*(1:32)
   mag <- time_interpolate(mag,years)
 
-  # delete old input files before updating them
-  files <- c("./modules/56_ghg_policy/input/f56_pollutant_prices_coupling.cs3","./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv")
-  for(f in files) suppressWarnings(unlink(f))
-
   .bioenergy_demand(mag)
   
-  # write emission files, if specified use path_to_report_ghgprices instead of the regular report
+  # write emission files, if specified use path_to_report_ghgprices instead of the bioenergy report
   if (is.na(path_to_report_ghgprices)) {
     .emission_prices(mag)
   } else {
