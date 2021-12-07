@@ -238,7 +238,10 @@ start_run <- function(cfg, codeCheck=TRUE, lock_model=TRUE) {
     lock_id <- gms::model_lock(timeout1=1)
     on.exit(gms::model_unlock(lock_id), add=TRUE)
   }
-
+  
+  # Check configuration file for consistency
+  cfg <- gms::check_config(cfg, extras = "info")
+  
   # save model version
   cfg$info$version <- citation::read_cff("CITATION.cff")$version
 
