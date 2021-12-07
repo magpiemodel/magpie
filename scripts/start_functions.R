@@ -210,7 +210,7 @@ download_and_update <- function(cfg) {
 }
 
 
-start_run <- function(cfg, codeCheck=TRUE, lock_model=TRUE) {
+start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE) {
 
   timePrepareStart <- Sys.time()
 
@@ -239,7 +239,8 @@ start_run <- function(cfg, codeCheck=TRUE, lock_model=TRUE) {
     on.exit(gms::model_unlock(lock_id), add=TRUE)
   }
   
-  # Check configuration file for consistency
+  # Apply scenario settings ans check configuration file for consistency
+  if(!is.null(scenario)) cfg <- gms::setScenario(cfg,scenario)
   cfg <- gms::check_config(cfg, extras = "info")
   
   # save model version
