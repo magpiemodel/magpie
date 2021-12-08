@@ -552,7 +552,9 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
     ghgrep <- collapseNames(ghgrep)
     ghgmag <- deletePlus(ghgrep) #delete "+" and "++" from variable names
     if(!("y1995" %in% getYears(ghgmag))){
-      empty95<-ghgmag[,1,];empty95[,,]<-0;dimnames(empty95)[[2]] <- "y1995"
+      empty95 <- ghgmag[,1,]
+      empty95[,,] <- 0
+      dimnames(empty95)[[2]] <- "y1995"
       ghgmag <- mbind(empty95,ghgmag)
     }
     years <- 1990+5*(1:32)
