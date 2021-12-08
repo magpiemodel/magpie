@@ -20,14 +20,15 @@ source("scripts/start_functions.R")
 # Source default cfg. This loads the object "cfg" in R environment
 source("config/default.cfg")
 
+#download default input data
+download_and_update(cfg)
+
 # create additional information to describe the runs
 cfg$info$flag <- "WT" # Weekly Test (WT)
 
 cfg$output <- c("rds_report") # Only run rds_report after model run
 cfg$results_folder <- "output/:title:"
-cfg$force_download <- TRUE
 cfg$force_replace <- TRUE
-cfg$recalc_npi_ndc <- TRUE
 
 # support function to create standardized title
 .title <- function(...) return(paste(cfg$info$flag, sep="_",...))
