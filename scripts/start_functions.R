@@ -529,6 +529,7 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
   }
 
   # read REMIND report
+  message("Reading bioenergy_demand from ",path_to_report_bioenergy)
   rep <- read.report(path_to_report_bioenergy, as.list = FALSE)
   if (length(getNames(rep,dim="scenario"))!=1) stop("getReportData: REMIND report contains more or less than 1 scenario.")
   rep <- collapseNames(rep) # get rid of scenrio and model dimension if they exist
@@ -545,6 +546,7 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
   
   # write emission files, if specified use path_to_report_ghgprices instead of the bioenergy report
   if (is.na(path_to_report_ghgprices)) {
+    message("Reading ghg prices from ",path_to_report_bioenergy)
     .emission_prices(mag, mute_ghgprices_until)
   } else {
     message("Reading ghg prices from ",path_to_report_ghgprices)
