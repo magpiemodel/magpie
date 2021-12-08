@@ -42,6 +42,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **60_bioenergy** Minimum dedicated 2nd generation bioenergy demand assumed in each region raised from 0.01 to 1 mio. GJ per yr, and added as option in the config file (s60_2ndgen_bioenergy_dem_min)
 - **config** Remove elements from the parameter list of start_run(), instead include them as regular settings in the default.cfg.
 - **scripts** Add option to take ghg prices from different file than the regular reporting file (used in the REMIND coupling)
+- **60_bioenergy** Switch off fixing the bioenergy demand to SSP2 until 2020 if MAgPIE runs coupled (to REMIND) or for emulator runs (to derive biomass supply crurves).
+- **56_ghg_policy** Switch off fixing the GHG prices to SSP2 until 2020 if MAgPIE runs coupled (to REMIND) or for emulator runs (to derive biomass supply crurves).
+
+
 
 ### added
 - **34_urban** New exo_nov21 exogenous realization of urban land expansion 
