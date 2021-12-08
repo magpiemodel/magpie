@@ -547,7 +547,7 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
   if (is.na(path_to_report_ghgprices)) {
     .emission_prices(mag)
   } else {
-    cat("Reading ghg prices from",path_to_report_ghgprices,"\n")
+    message("Reading ghg prices from ",path_to_report_ghgprices)
     ghgrep <- read.report(path_to_report_ghgprices, as.list = FALSE)
     ghgrep <- collapseNames(ghgrep)
     ghgmag <- deletePlus(ghgrep) #delete "+" and "++" from variable names
