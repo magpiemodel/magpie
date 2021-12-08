@@ -40,6 +40,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **35_natveg** Avoid division by zero (observed under higher regional resolutions)
 - **70_livestock** Avoid division by zero (observed under higher regional resolutions)
 - **60_bioenergy** Minimum dedicated 2nd generation bioenergy demand assumed in each region raised from 0.01 to 1 mio. GJ per yr, and added as option in the config file (s60_2ndgen_bioenergy_dem_min)
+- **config** Remove elements from the parameter list of start_run(), instead include them as regular settings in the default.cfg.
+- **scripts** Add option to take ghg prices from different file than the regular reporting file (used in the REMIND coupling)
+- **60_bioenergy** Switch off fixing the bioenergy demand to SSP2 until 2020 if MAgPIE runs coupled (to REMIND) or for emulator runs (to derive biomass supply crurves).
+- **56_ghg_policy** Switch off fixing the GHG prices to SSP2 until 2020 if MAgPIE runs coupled (to REMIND) or for emulator runs (to derive biomass supply crurves).
+
+
 
 ### added
 - **34_urban** New exo_nov21 exogenous realization of urban land expansion 
@@ -88,6 +94,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **38_factor_costs** units in sticky_feb18
 - **32_foresty** Global afforestation limit s32_max_aff_area was not effective in case of parallel optimization -> added option c32_max_aff_area, which allows to provide a file with regional limits for afforestation; 
 - **73_timber** plausible cost for balance variable in case of s73_timber_demand_switch = 0 to avoid cost distortion
+- **56_ghg_policy** choose the correct scenario for fixing the GHG prices until sm_fix_SSP2 
 
 ## [4.3.5] - 2021-09-02
 
