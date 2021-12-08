@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: Test rountine for standardized test runs
+# description: Test routine for standardized test runs
 # position: 5
 # ----------------------------------------------------------
 
@@ -21,40 +21,30 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # create additional information to describe the runs
-cfg$info$flag <- "TEST" # choose a meaningful flag.
-cfg$info$user <- Sys.info()[["user"]] # Grab user name
+cfg$info$flag <- "WT" # Weekly Test (WT)
 
 cfg$output <- c("rds_report") # Only run rds_report after model run
+cfg$results_folder <- "output/:title:"
+cfg$force_download <- TRUE
+cfg$force_replace <- TRUE
+cfg$recalc_npi_ndc <- TRUE
 
 # support function to create standardized title
-.title <- function(...) return(paste(...,cfg$info$flag, sep="_"))
+.title <- function(...) return(paste(cfg$info$flag, sep="_",...))
 
-# start a run with default settings
-cfg$title <- .title("default")
-start_run(cfg, codeCheck = TRUE)
-
-# create a set of runs based on default.cfg
-for(ssp in c("SSP2")) {        # Add SSP* here for testing other SSPs.
-                               # Basic test should be for at least two SSPs to
-                               #check if results until 2020 are identical
-
-  cfg$title <- .title("ref", ssp)
-  # Set NPI scenario
-  cfg <- setScenario(cfg,c(ssp,"NPI"))
-  # Set reference pricing 
-  cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-NPi"
-  cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-NPi"
-  # Start reference run
+#Reference and Policy run for SSP1, SSP2 and SSP5
+for(ssp in c("SSP1","SSP2","SSP5")) {
+  
+  cfg$title <- .title(paste(ssp,"Ref",sep="-"))
+  cfg <- setScenario(cfg,c(ssp,"NPI","rcp7p0"))
+  cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-NPi")
+  cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-NPi")
   start_run(cfg, codeCheck = TRUE)
 
-  # Create correct naming for mitigation scenario (co2 pricing)
-  cfg$title <- .title("1p5deg", ssp) 
-  # Set NDC scenario (NPIs only in reference case)
-  cfg <- setScenario(cfg,c(ssp,"NDC"))
-  # Set CO2 pricing 
-  cfg$gms$c56_pollutant_prices <- "R2M41-SSP2-Budg600"
-  cfg$gms$c60_2ndgen_biodem    <- "R2M41-SSP2-Budg600"
-  # Start policy run
+  cfg$title <- .title(paste(ssp,"PkBudg900",sep="-"))
+  cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
+  cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-PkBudg900")
+  cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-PkBudg900")
   start_run(cfg, codeCheck = TRUE)
-
+  
 }
