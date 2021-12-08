@@ -501,7 +501,7 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
     write.magpie(out[notGLO,,],f)
   }
 
-  .emission_prices <- function(mag){
+  .emission_prices <- function(mag, mute_ghgprices_until){
     out_c <- mag[,,"Price|Carbon (US$2005/t CO2)"]*44/12 # US$2005/tCO2 -> US$2005/tC
     dimnames(out_c)[[3]] <- "co2_c"
 
@@ -545,7 +545,7 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
   
   # write emission files, if specified use path_to_report_ghgprices instead of the bioenergy report
   if (is.na(path_to_report_ghgprices)) {
-    .emission_prices(mag)
+    .emission_prices(mag, mute_ghgprices_until)
   } else {
     message("Reading ghg prices from ",path_to_report_ghgprices)
     ghgrep <- read.report(path_to_report_ghgprices, as.list = FALSE)
@@ -560,6 +560,6 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
     years <- 1990+5*(1:32)
     ghgmag <- time_interpolate(ghgmag,years)
 
-    .emission_prices(ghgmag)
+    .emission_prices(ghgmag, mute_ghgprices_until)
   }
 }
