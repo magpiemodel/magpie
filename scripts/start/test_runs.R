@@ -24,7 +24,7 @@ source("config/default.cfg")
 download_and_update(cfg)
 
 # create additional information to describe the runs
-cfg$info$flag <- "WT" # Weekly Test (WT)
+cfg$info$flag <- "weeklyTests" 
 
 cfg$output <- c("rds_report") # Only run rds_report after model run
 cfg$results_folder <- "output/:title:"
