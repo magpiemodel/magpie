@@ -100,7 +100,7 @@ bioen_type <- "all"
 bioen_water <- "all"
 tau_scen <- paste(rcp,biodem,ghgprice,paste0("Type",toupper(bioen_type)),paste0("Water",toupper(bioen_water)),sep="-")
 
-### start Reference runs with endogenous TAU
+### start model runs with endogenous TAU
 for (ssp in ssps) {
   cfg$title <- paste("TAU",ssp,tau_scen,sep="-")
   cfg <- setScenario(cfg,c(ssp,"NPI",rcp))
@@ -113,24 +113,32 @@ for (ssp in ssps) {
   x <- try(modelstat(file.path("output",cfg$title,"fulldata.gdx")),silent = TRUE)
   if(any(!x %in% c(2,7))) {
     start_run(cfg,codeCheck=FALSE)
+    message(paste0("TAU run started: ",cfg$title))
   }
 }
 
-### wait until Reference runs with endogenous TAU are finished, check is performed every 10 minutes
+### wait until model runs with endogenous TAU are finished, check is performed every 10 minutes
 success <- FALSE
 while (!success) {
   z <- NULL
   for (ssp in ssps) {
     x <- try(modelstat(file.path("output",paste("TAU",ssp,tau_scen,sep="-"),"fulldata.gdx")),silent = TRUE)
-    if (is(x, "try-error")) x <- NULL
+    if (is(x, "try-error")) x <- NULL else if (is.magpie(x)) x <- add_dimension(collapseNames(x),dim = 3.1,add = "scen",nm = ssp)
     z <- mbind(z,x)
   }
-  if (length(z) == length(ssps)) {
-    if (all(modelstat(z %in% c(2,7)))) success <- TRUE else stop("Modelstat different from 2 or 7 detected")
-  }  else Sys.sleep(60*10)
+  if (is.null(z)) {
+    message("Not any model run with endogenous TAU finished. Sleeping for 10 minutes.")
+    Sys.sleep(60*10)
+  } else if (dim(z)[3] < length(ssps)) {
+    message("At least on model run with endogenous TAU not yet finished. Sleeping for 10 minutes.")
+    Sys.sleep(60*10)
+  } else if (dim(z)[3] == length(ssps)) {
+    if (all(z %in% c(2,7))) success <- TRUE else stop("Modelstat different from 2 or 7 detected")
+  }
 }
 
 ### start model runs with exogenous TAU
+message("Starting model runs with exogenous TAU")
 for (ssp in ssps) {
   for (rcp in c("rcp2p6","rcp6p0")) {
     for (biodem in c("B0","B50","B100")) {
