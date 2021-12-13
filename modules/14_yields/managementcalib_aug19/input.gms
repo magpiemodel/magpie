@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c14_yields_scenario  nocc
+$setglobal c14_yields_scenario  cc
 *   options:  cc        (climate change)
 *             nocc      (no climate change)
 *             nocc_hist (no climate change after year defined by sm_fix_cc)
@@ -23,10 +23,13 @@ scalars
 
 
 ******* Calibration factor
+$onEmpty
 table f14_yld_calib(i,ltype14) Calibration factor for the LPJmL yields (1)
 $ondelim
-$include "./modules/14_yields/input/f14_yld_calib.csv"
-$offdelim;
+$if exist "./modules/14_yields/input/f14_yld_calib.csv" $include "./modules/14_yields/input/f14_yld_calib.csv"
+$offdelim
+;
+$offEmpty
 
 table f14_yields(t_all,j,kve,w) LPJmL potential yields per cell (rainfed and irrigated) (tDM per ha per yr)
 $ondelim

@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: creates a validation pdf file for a run
+# description: creates a validation pdf file for a run (long version - single crop types)
 # comparison script: FALSE
 # position: 4
 # ---------------------------------------------------------------

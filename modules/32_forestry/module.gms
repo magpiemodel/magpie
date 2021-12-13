@@ -17,5 +17,4 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%forestry%" == "dynamic_feb21" $include "./modules/32_forestry/dynamic_feb21/realization.gms"
-$Ifi "%forestry%" == "static_sep16" $include "./modules/32_forestry/static_sep16/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

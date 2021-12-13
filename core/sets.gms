@@ -55,32 +55,32 @@ sets
       VEN, VGB, VIR, VNM, VUT, WLF, WSM, YEM, ZAF, ZMB, ZWE /
 
   j number of LPJ cells
-    / CAZ_1*CAZ_28,
-      CHA_29*CHA_52,
-      EUR_53*EUR_62,
-      IND_63*IND_69,
-      JPN_70*JPN_72,
-      LAM_73*LAM_125,
-      MEA_126*MEA_142,
-      NEU_143*NEU_150,
-      OAS_151*OAS_172,
-      REF_173*REF_179,
-      SSA_180*SSA_190,
-      USA_191*USA_200 /
+    / CAZ_1*CAZ_6,
+      CHA_7*CHA_29,
+      EUR_30*EUR_36,
+      IND_37*IND_42,
+      JPN_43,
+      LAM_44*LAM_86,
+      MEA_87*MEA_113,
+      NEU_114*NEU_120,
+      OAS_121*OAS_131,
+      REF_132*REF_143,
+      SSA_144*SSA_180,
+      USA_181*USA_200 /
 
   cell(i,j) number of LPJ cells per region i
-    / CAZ . (CAZ_1*CAZ_28)
-      CHA . (CHA_29*CHA_52)
-      EUR . (EUR_53*EUR_62)
-      IND . (IND_63*IND_69)
-      JPN . (JPN_70*JPN_72)
-      LAM . (LAM_73*LAM_125)
-      MEA . (MEA_126*MEA_142)
-      NEU . (NEU_143*NEU_150)
-      OAS . (OAS_151*OAS_172)
-      REF . (REF_173*REF_179)
-      SSA . (SSA_180*SSA_190)
-      USA . (USA_191*USA_200) /
+    / CAZ . (CAZ_1*CAZ_6)
+      CHA . (CHA_7*CHA_29)
+      EUR . (EUR_30*EUR_36)
+      IND . (IND_37*IND_42)
+      JPN . (JPN_43)
+      LAM . (LAM_44*LAM_86)
+      MEA . (MEA_87*MEA_113)
+      NEU . (NEU_114*NEU_120)
+      OAS . (OAS_121*OAS_131)
+      REF . (REF_132*REF_143)
+      SSA . (SSA_144*SSA_180)
+      USA . (USA_181*USA_200) /
 
   i_to_iso(i,iso) mapping regions to iso countries
     / CAZ . (AUS, CAN, HMD, NZL, SPM)
@@ -189,6 +189,7 @@ $If "%c_timesteps%"== "5year2050" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y20
 $If "%c_timesteps%"== "5year2070" /y1995,y2000,y2005,y2010,y2015,y2020,y2025,y2030,y2035,y2040,y2045,y2050,y2055,y2060,y2065,y2070/;
 $If "%c_timesteps%"== "quicktest" /y1995,y2010,y2025/;
 $If "%c_timesteps%"== "quicktest2" /y1995,y2020,y2050,y2100/;
+$If "%c_timesteps%"== "calib" /y1995,y2000,y2005,y2010,y2015/;
 $If "%c_timesteps%"== "1" /y1995/;
 $If "%c_timesteps%"== "2" /y1995,y2000/;
 $If "%c_timesteps%"== "3" /y1995,y2000,y2010/;

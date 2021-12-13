@@ -17,12 +17,13 @@ library(madrat)
 
 ############################# BASIC CONFIGURATION ##############################
 if(!exists("source_include")) {
-  outputdir <- "output/SSP2_Ref_c200"
+  outputdir <- "output/LAMA65_Sustainability/"
   readArgs("outputdir")
 }
 map_file                   <- Sys.glob(file.path(outputdir, "clustermap_*.rds"))
 gdx                        <- file.path(outputdir,"fulldata.gdx")
-land_hr_file               <- file.path(outputdir,"avl_land_t_0.5.mz")
+land_hr_file               <- file.path(outputdir,"avl_land_full_t_0.5.mz")
+urban_land_hr_file         <- file.path(outputdir,"f34_urbanland_0.5.mz")
 land_hr_out_file           <- file.path(outputdir,"cell.land_0.5.mz")
 land_hr_share_out_file     <- file.path(outputdir,"cell.land_0.5_share.mz")
 croparea_hr_share_out_file <- file.path(outputdir,"cell.croparea_0.5_share.mz")
@@ -38,52 +39,63 @@ if(length(map_file)>1) {
   map_file <- map_file[1]
 }
 
-if (cfg$gms$crop=="endo_apr21"){
 
-  # Load input data
-  land_ini_lr  <- readGDX(gdx,"f10_land","f_land", format="first_found")[,"y1995",]
-  land_lr      <- land(gdx,sum=FALSE,level="cell")
-  land_ini_hr  <- read.magpie(land_hr_file)[,"y1995",]
-  land_ini_hr  <- land_ini_hr[,,getNames(land_lr)]
-  if(any(land_ini_hr < 0)) {
-    warning(paste0("Negative values in inital high resolution dataset detected and set to 0. Check the file ",land_hr_file))
-    land_ini_hr[which(land_ini_hr < 0,arr.ind = T)] <- 0
-  }
-  avl_cropland_hr <- file.path(outputdir, "avl_cropland_0.5.mz")       # available cropland (at high resolution)
-  marginal_land <- cfg$gms$c30_marginal_land                      # marginal land scenario
-  set_aside_shr <- cfg$gms$s30_set_aside_shr                      # set aside share (default: 0)
-  target_year <- cfg$gms$c30_set_aside_target                     # target year of set aside policy (default: "none")
-  set_aside_fader  <- readGDX(gdx,"f30_set_aside_fader", format="first_found")[,,target_year]
-
-  # Start interpolation (use interpolateAvlCroplandWeighted from luscale)
-  print("Disaggregation")
-  land_hr <- interpolateAvlCroplandWeighted(x          = land_lr,
-                                            x_ini_lr   = land_ini_lr,
-                                            x_ini_hr   = land_ini_hr,
-                                            avl_cropland_hr = avl_cropland_hr,
-                                            map        = map_file,
-                                            marginal_land = marginal_land,
-                                            set_aside_shr = set_aside_shr,
-                                            set_aside_fader = set_aside_fader)
-
-}else if (cfg$gms$crop=="endo_jun13") {
-
-  # Load input data
-  land_lr   <- land(gdx,sum=FALSE,level="cell")
-  land_ini  <- setYears(read.magpie(land_hr_file)[,"y1995",],NULL)
-  land_ini  <- land_ini[,,getNames(land_lr)]
-  if(any(land_ini < 0)) {
-    warning(paste0("Negative values in inital high resolution dataset ",
-                   "detected and set to 0. Check the file ",land_hr_file))
-    land_ini[which(land_ini < 0,arr.ind = T)] <- 0
-  }
-
-  # Start interpolation (use interpolate from luscale)
-  message("Disaggregation")
-  land_hr <- luscale::interpolate2(x     = land_lr,
-                                   x_ini = land_ini,
-                                   map   = map_file)
+# Load input data
+land_ini_lr  <- readGDX(gdx,"f10_land","f_land", format="first_found")[,"y1995",]
+land_lr      <- land(gdx,sum=FALSE,level="cell")
+land_ini_hr  <- read.magpie(land_hr_file)[,"y1995",]
+magpie2luh2 <- data.frame(matrix(nrow=4,ncol=2))
+names(magpie2luh2) <- c("MAgPIE","LUH2")
+magpie2luh2[1,] <- c("crop","crop")
+magpie2luh2[2,] <- c("past","past")
+magpie2luh2[3,] <- c("past","range")
+magpie2luh2[4,] <- c("urban","urban")
+magpie2luh2[5,] <- c("primforest","primforest")
+magpie2luh2[6,] <- c("secdforest","secdforest")
+magpie2luh2[7,] <- c("forestry","forestry")
+magpie2luh2[8,] <- c("other","primother")
+magpie2luh2[9,] <- c("other","secdother")
+land_ini_hr <- madrat::toolAggregate(land_ini_hr, magpie2luh2, from="LUH2", to="MAgPIE",dim = 3.1)
+land_ini_hr  <- land_ini_hr[,,getNames(land_lr)]
+if(any(land_ini_hr < 0)) {
+  warning(paste0("Negative values in inital high resolution dataset detected and set to 0. Check the file ",land_hr_file))
+  land_ini_hr[which(land_ini_hr < 0,arr.ind = T)] <- 0
 }
+
+#read in hr urban land
+if (cfg$gms$urban == "exo_nov21" ) {
+urban_land_hr  <- read.magpie(urban_land_hr_file)
+ssp <- cfg$gms$c09_gdp_scenario
+urban_land_hr <- urban_land_hr[,,ssp]
+getNames(urban_land_hr) <- "urban"
+} else if (cfg$gms$urban == "static"){
+  urban_land_hr <- "static"
+}
+
+# account for country-specific set-aside shares in post-processing
+iso <- readGDX(gdx, "iso")
+set_aside_iso <- readGDX(gdx,"policy_countries30")
+set_aside_select <- readGDX(gdx, "s30_set_aside_shr")
+set_aside_noselect <- readGDX(gdx, "s30_set_aside_shr_noselect")
+set_aside_shr <- new.magpie(iso, fill = set_aside_noselect)
+set_aside_shr[set_aside_iso,,] <- set_aside_select
+
+avl_cropland_hr <- file.path(outputdir, "avl_cropland_0.5.mz")       # available cropland (at high resolution)
+marginal_land <- cfg$gms$c30_marginal_land                      # marginal land scenario
+target_year <- cfg$gms$c30_set_aside_target                     # target year of set aside policy (default: "none")
+set_aside_fader  <- readGDX(gdx,"f30_set_aside_fader", format="first_found")[,,target_year]
+
+# Start interpolation (use interpolateAvlCroplandWeighted from luscale)
+print("Disaggregation")
+land_hr <- interpolateAvlCroplandWeighted(x          = land_lr,
+                                          x_ini_lr   = land_ini_lr,
+                                          x_ini_hr   = land_ini_hr,
+                                          avl_cropland_hr = avl_cropland_hr,
+                                          map        = map_file,
+                                          marginal_land = marginal_land,
+                                          set_aside_shr = set_aside_shr,
+                                          set_aside_fader = set_aside_fader,
+                                          urban_land_hr = urban_land_hr)
 
 # Write outputs
 
@@ -119,8 +131,8 @@ area_shr_hr <- .dissagcrop(gdx, land_hr, map=map_file)
           message="Write outputs cell.cropara_share")
 
 
-.cropsplit <- function(area_shr_hr, land_hr, land_hr_split_file,
-                       land_hr_shr_split_file) {
+.split <- function(area_shr_hr, land_hr, land_hr_split_file,
+                       land_hr_shr_split_file,map) {
   land_hr <- land_hr[,getYears(area_shr_hr),]
   area_hr <- area_shr_hr*dimSums(land_hr, dim=3)
 
@@ -141,6 +153,28 @@ area_shr_hr <- .dissagcrop(gdx, land_hr, map=map_file)
   land_hr <- land_hr[,,"crop",invert=TRUE]
   #combine land_hr with crop_hr.
   land_hr <- mbind(crop_hr,land_hr)
+
+  # split "forestry" into timber plantations, pre-scribed afforestation (NPi/NDC) and endogenous afforestation (CO2 price driven)
+  message("Disaggregation Forestry")
+  farea     <- dimSums(landForestry(gdx, level="cell"),dim="ac")
+  farea_shr <- farea/(dimSums(farea,dim=3) + 10^-10)
+  # calculate forestry area as share of total cell area
+  farea_hr <- madrat::toolAggregate(farea_shr, map, to="cell") * setNames(land_hr[,,"forestry"],NULL)
+  #check
+  if (abs(sum(dimSums(farea_hr,dim=3)-setNames(land_hr[,,"forestry"],NULL),na.rm=T)) > 0.1) warning("large Difference in crop disaggregation detected!")
+  #rename
+  df <- data.frame(matrix(nrow=3,ncol=2))
+  names(df) <- c("internal","output")
+  df[1,] <- c("aff","PlantedForest_Afforestation")
+  df[2,] <- c("ndc","PlantedForest_NPiNDC")
+  df[3,] <- c("plant","PlantedForest_Timber")
+  farea_hr <- madrat::toolAggregate(farea_hr, df, from="internal", to="output",dim = 3.1)
+
+  #drop forestry
+  land_hr <- land_hr[,,"forestry",invert=TRUE]
+  #combine land_hr with farea_hr
+  land_hr <- mbind(land_hr,farea_hr)
+
   #write landpool
   .tmpwrite(land_hr, land_hr_split_file,
             comment="unit: Mha per grid-cell",
@@ -151,4 +185,4 @@ area_shr_hr <- .dissagcrop(gdx, land_hr, map=map_file)
             message="Write cropsplit land area share")
 }
 
-.cropsplit(area_shr_hr, land_hr, land_hr_split_file,land_hr_shr_split_file)
+.split(area_shr_hr, land_hr, land_hr_split_file,land_hr_shr_split_file,map=map_file)

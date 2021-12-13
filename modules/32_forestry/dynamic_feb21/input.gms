@@ -10,7 +10,8 @@ $setglobal c32_aff_mask  noboreal
 * options: unrestricted, noboreal, onlytropical
 $setglobal c32_aff_policy  npi
 * options: none, npi, ndc
-
+$setglobal c32_max_aff_area  global
+* options: global, regional
 $setglobal c32_aff_bgp  nobgp
 * options: ann,nobgp
 $setglobal c32_tcre_ctrl  ann_TCREmean
@@ -21,9 +22,9 @@ $setglobal c32_dev_scen  abare
 * options abare, brown
 $setglobal c32_incr_rate  h5s2l1
 * options constant,h5s5l5,h5s2l2,h5s2l1,h5s1l1,h5s1l05,h2s1l05
-$setglobal c32_rot_calc_type max_increment
+$setglobal c32_rot_calc_type  current_annual_increment
 * option  max_increment, max_npv
-$setglobal c32_rot_calc_type current_annual_increment
+$setglobal c32_rot_calc_type  current_annual_increment
 * options mean_annual_increment, current_annual_increment, instantaneous_growth_rate
 
 scalars
@@ -53,6 +54,15 @@ $Ifi "%c32_aff_mask%" == "noboreal" $include "./modules/32_forestry/input/aff_no
 $Ifi "%c32_aff_mask%" == "onlytropical" $include "./modules/32_forestry/input/aff_onlytropical.cs2"
 $offdelim
 /;
+
+$onEmpty
+parameter f32_max_aff_area(i) Maximum regional afforestation area (mio. ha)
+/
+$ondelim
+$if exist "./modules/32_forestry/input/f32_max_aff_area.cs4" $include "./modules/32_forestry/input/f32_max_aff_area.cs4"
+$offdelim
+/;
+$offEmpty
 
 table f32_aff_pol(t_all,j,pol32) npi+ndc afforestation policy (Mha new forest wrt to 2010)
 $ondelim

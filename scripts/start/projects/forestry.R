@@ -42,8 +42,6 @@ for(c73_wood_scen in c("default")){
           for(pol_scen in c("NPI")){
               source("config/default.cfg")
 
-              #source("scripts/start/extra/lpjml_addon.R")
-
               cfg$gms$c52_carbon_scenario  <- "nocc"
               cfg$gms$c59_som_scenario  <- "nocc"
 

@@ -15,7 +15,7 @@ library(magpie4)
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdirs    <-"."
+  outputdir    <-"."
 }
 hist    <- "input/validation.mif"
 file    <- paste0("comparison_validation_",format(Sys.time(), "%Y%H%M%S"),".pdf")
@@ -30,7 +30,7 @@ for(outputdir in outputdirs) {
   } else {
     title <- paste0("run",i)
   }
-  gdx <- paste0(outputdir, "/fulldata.gdx")
+  gdx <- paste0(outputdir_x, "/fulldata.gdx")
   if(!is.null(x)) {
     scenarios <- getNames(x,dim=2)
     if(title %in% scenarios) {

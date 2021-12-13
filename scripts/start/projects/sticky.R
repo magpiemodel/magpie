@@ -24,9 +24,6 @@ source("scripts/start_functions.R")
 # Sources the default configuration file
 source("config/default.cfg")
 
-#lpjml_addon. Sticky is only compatible with this version o magpie.
-source("scripts/start/extra/lpjml_addon.R")
-
 # Sticky mode
 mode <- c("dynamic","free")
 #recalibrate
@@ -43,6 +40,10 @@ for(cc in c("cc")){
     # Set factor costs
     cfg$gms$factor_costs     <-   "sticky_feb18"
     cfg$gms$c38_sticky_mode  <-   sm
+
+    if (sm == "dynamic"){
+    cfg$gms$c17_prod_init <- "off"
+    }
 
 
     #Change the results folder name
