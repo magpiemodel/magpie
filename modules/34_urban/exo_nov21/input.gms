@@ -5,10 +5,13 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-i39_cost_establish(land) = 0;
-i39_cost_establish("crop") = s39_cost_establish_crop;
-i39_cost_establish("past") = s39_cost_establish_past;
-i39_cost_establish("forestry") = s39_cost_establish_forestry;
 
-i39_cost_clearing(land) = 0;
-i39_cost_clearing(land_clearing39) = s39_cost_clearing;
+scalars
+  s34_urban_deviation_cost Artificial cost for urban deviation variables (USD05MER per ha) / 1e+06 /
+;
+
+table f34_urbanland(t_all, j, gdp_scen09)     Urban land
+$ondelim
+$include "./modules/34_urban/exo_nov21/input/f34_urbanland.cs3"
+$offdelim
+;

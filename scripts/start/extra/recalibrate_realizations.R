@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------
-# description: calculate and store new calib factors for realizations of factor costs
+# description: calculate and store new yield calib factors for realizations of factor costs (land conversion cost calibration factors are only calculated if needed)
 # --------------------------------------------------------
 
 library(magpie4)
@@ -18,7 +18,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-realizations<-c("sticky_feb18","mixed_feb17","fixed_per_ton_mar18","sticky_labor")
+realizations<-c("sticky_feb18","mixed_feb17","fixed_per_ton_mar18") #"sticky_labor" is very similar to sticky_feb18. No extra calibration needed.
 type<-NULL
 
 
@@ -28,14 +28,12 @@ for(r in realizations){
 
     for(t in type){
 
-      cfg$input<- cfg$input[names(cfg$input)!="calibration"]
       cfg$results_folder <- "output/:title:"
       cfg$recalibrate <- TRUE
+      cfg$recalibrate_landconversion_cost <- "ifneeded"
       cfg$title <- paste("calib_run",r,t,sep="_")
-      cfg$gms$c_timesteps <- 1
-      cfg$output <- c("rds_report")
-      cfg$sequential <- TRUE
-      cfg$force_download <- TRUE
+      cfg$output <- c("rds_report","validation_short")
+      cfg$force_replace <- TRUE
 
       cfg$gms$factor_costs     <-   r
       cfg$gms$c38_sticky_mode  <-   t

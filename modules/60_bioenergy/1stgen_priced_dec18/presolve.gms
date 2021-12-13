@@ -23,9 +23,5 @@ else
              f60_res_2ndgenBE_dem(t,i,"%c60_res_2ndgenBE_dem%");
 );
 
-if(m_year(t) <= sm_fix_SSP2,
-i60_bioenergy_dem(t,i) = f60_bioenergy_dem(t,i,"R21M42-SSP2-NPi");
-);
-
 * Add minimal bioenergy demand in case of zero demand or very small demand to avoid zero prices
-i60_bioenergy_dem(t,i)$(i60_bioenergy_dem(t,i) < 0.01) = 0.01;
+i60_bioenergy_dem(t,i)$(i60_bioenergy_dem(t,i) < s60_2ndgen_bioenergy_dem_min) = s60_2ndgen_bioenergy_dem_min;

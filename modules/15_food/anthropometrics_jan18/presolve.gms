@@ -236,12 +236,22 @@ display "starting demand model for initialisation run....";
 v15_income_pc_real_ppp_iso.lo(iso)=10;
 v15_income_pc_real_ppp_iso.fx(iso)=im_gdp_pc_ppp_iso(t,iso);
 
-solve m15_food_demand USING nlp MAXIMIZING v15_objective ;
+solve m15_food_demand USING nlp MAXIMIZING v15_objective;
+
+* in case of problems try CONOPT3
+if(m15_food_demand.modelstat > 2,
+	display "Modelstat > 2 | Retry solve with CONOPT3";
+	option nlp = conopt;
+	solve m15_food_demand USING nlp MAXIMIZING v15_objective;
+	option nlp = conopt4;
+);
+
 p15_modelstat(t) = m15_food_demand.modelstat;
 
 display "Food Demand Model Initialisation run finished with modelstat ";
 display p15_modelstat;
-if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
+
+if(p15_modelstat(t) > 2 AND p15_modelstat(t) ne 7,
   m15_food_demand.solprint = 1
   Execute_Unload "fulldata.gdx";
   abort "Food Demand Model became infeasible already during initialisation run. Stop run.";

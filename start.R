@@ -31,6 +31,7 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
     slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
     modes <- c("SLURM priority",
                "SLURM standby",
+               "SLURM medium",
                "Direct execution",
                "Background execution",
                "Debug mode")
@@ -50,9 +51,10 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
       comp <- switch(identifier,
                      "1" = "slurmpriority",
                      "2" = "slurmstandby",
-                     "3" = "direct",
-                     "4" = "background",
-                     "5" = "debug")
+                     "3" = "slurmmedium",
+                     "4" = "direct",
+                     "5" = "background",
+                     "6" = "debug")
     } else {
       comp <- switch(identifier,
                      "1" = "direct",
@@ -91,6 +93,9 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
         Sys.sleep(1)
       } else if(submit=="slurmstandby") {
         system(paste(sbatch_command,"--qos=standby"))
+        Sys.sleep(1)
+      } else if(submit=="slurmmedium") {
+        system(paste(sbatch_command,"--qos=medium"))
         Sys.sleep(1)
       } else if(submit=="debug") {
         tmp.env <- new.env()

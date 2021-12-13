@@ -5,4 +5,13 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_cost_landcon.scale(j,land) = 10e3;
+* get the scenario GDP & Populaiton data for iso countries
+loop(t_all,
+ if(m_year(t_all) <= sm_fix_SSP2,
+  i34_urban_area(t_all, j) = f34_urbanland(t_all, j,"SSP2");
+else
+i34_urban_area(t_all, j) = f34_urbanland(t_all, j,"%c09_gdp_scenario%");
+ );
+);
+
+pcm_land(j,"urban") = i34_urban_area("y1995",j);

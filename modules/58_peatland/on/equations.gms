@@ -61,9 +61,10 @@
         sum(to58$(not sameas(from58,to58)),
         v58_lu_transitions(j2,from58,to58));
 
-*' Future peatland degradation (`v58_peatland_man`) depends on changes of managed land,
-*' scaled with the ratio of total peatland area and total land area (`p58_scaling_factor`).
-*' By multiplying changes in managed land with this scaling factor we implicitly assume
+*' Future peatland degradation (`v58_peatland_man`) depends on managed land (`vm_land`),
+*' scaled with the ratio of total peatland area and total land area (`p58_scaling_factor`) 
+*' and a calibration factor (`p58_calib_factor`) for alignment with historic levels of degraded peatland.
+*' By multiplying changes in managed land (`vm_land`) with the scaling factor we implicitly assume
 *' that intact peatlands are distributed equally within a grid cell.
 *' The following example illustrates the mechanism used for projecting peatland dynamics:
 *' In a given grid cell, the total land area is 50 Mha and the total peatland area is 10 Mha.
@@ -71,10 +72,9 @@
 *' If cropland expands by 5 Mha, 1 Mha of intact peatland is converted to degraded peatland (5 Mha*0.2).
 *' If the total cell would become cropland, degraded peatland would equal to the total peatland area (50 Mha * 0.2 = 10 Mha).
 
- q58_peatland_degrad(j2,land58) ..
+ q58_peatland_degrad(j2,land58)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
 	v58_peatland_man(j2,"degrad",land58) =e=
-    pc58_peatland_man(j2,"degrad",land58)
-	+ ((vm_land(j2,land58)-pcm_land(j2,land58))*p58_scaling_factor(j2))$(sum(ct, m_year(ct))>s58_fix_peatland);
+	 vm_land(j2,land58)*p58_scaling_factor(j2)*p58_calib_factor(j2,land58);
 
 *' This constraint avoids the conversion of intact peatland into rewetted peatland.
 

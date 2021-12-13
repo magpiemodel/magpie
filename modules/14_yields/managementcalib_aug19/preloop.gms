@@ -119,6 +119,12 @@ pm_yields_semi_calib(j,knbe14,w)  = i14_yields_calib("y1995",j,knbe14,w);
 *' yields are outlier corrected, historical production and croparea can only be reproduced
 *' with this additional step of correction:
 
+* set default values in case of missing input file
+if(sum((i,ltype14),f14_yld_calib(i,ltype14)) = 0,
+	f14_yld_calib(i,ltype14) = 1;
+);
+
+
 i14_yields_calib(t,j,kcr,w)       = i14_yields_calib(t,j,kcr,w)      *sum(cell(i,j),f14_yld_calib(i,"crop"));
 i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w)*sum(cell(i,j),f14_yld_calib(i,"past"));
 

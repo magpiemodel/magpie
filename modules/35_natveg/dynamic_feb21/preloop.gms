@@ -113,13 +113,14 @@ p35_land_start_ac(j,ac,"secdforest") = i35_secdforest(j,ac);
 ** Wherever FAO reports >0 growing stock, we calculate how much growing stock MAGPIE
 ** sees even before optimization starts
 p35_observed_gs_reg(i) = 0;
-p35_observed_gs_reg(i)$(f35_gs_relativetarget(i)>0)  = (sum((cell(i,j),ac,land_natveg),(pm_timber_yield_initial(j,ac,land_natveg)$(not sameas(ac,"ac0")) / sm_wood_density) * p35_land_start_ac(j,ac,land_natveg)$(not sameas(ac,"ac0")))/ sum((cell(i,j),ac,land_natveg),p35_land_start_ac(j,ac,land_natveg)$(not sameas(ac,"ac0"))));
+p35_observed_gs_reg(i)$(f35_gs_relativetarget(i)>0 AND sum((cell(i,j),ac,land_natveg),p35_land_start_ac(j,ac,land_natveg)$(not sameas(ac,"ac0")))>0)  = 
+	(sum((cell(i,j),ac,land_natveg),(pm_timber_yield_initial(j,ac,land_natveg)$(not sameas(ac,"ac0")) / sm_wood_density) * p35_land_start_ac(j,ac,land_natveg)$(not sameas(ac,"ac0")))/ sum((cell(i,j),ac,land_natveg),p35_land_start_ac(j,ac,land_natveg)$(not sameas(ac,"ac0"))));
 
 ** Initialze calibration factor for growing stocks as 1
 ** we dont set it to 0 as we don't want to modify carbon densities by multiplication with 0 later
 p35_gs_scaling_reg(i) = 1;
 ** Calculate the ratio between target growing stock (reported by FAO) and observed growing stock (value at initialization in MAgPIE)
-p35_gs_scaling_reg(i)$(f35_gs_relativetarget(i)>0) = f35_gs_relativetarget(i) / p35_observed_gs_reg(i);
+p35_gs_scaling_reg(i)$(f35_gs_relativetarget(i)>0 AND p35_observed_gs_reg(i)>0) = f35_gs_relativetarget(i) / p35_observed_gs_reg(i);
 
 ** Update c-densitiy based on calibration factor for growing stocks
 pm_carbon_density_ac(t_all,j,ac,"vegc") = pm_carbon_density_ac(t_all,j,ac,"vegc") * sum(cell(i,j),p35_gs_scaling_reg(i));
