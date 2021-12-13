@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 variables
- vm_carbon_stock_change(j,land,c_pools)	Change in carbon stocks compared to previous time step (mio. tC per time step)
+ v52_carbon_stock_change(j,land,c_pools)	Change in carbon stocks compared to previous time step (mio. tC per time step)
 ;
 
 positive variables
@@ -27,7 +27,7 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_carbon_stock_change(t,j,land,c_pools,type)   Change in carbon stocks compared to previous time step (mio. tC per time step)
+ ov52_carbon_stock_change(t,j,land,c_pools,type) Change in carbon stocks compared to previous time step (mio. tC per time step)
  ov_carbon_stock(t,j,land,c_pools,type)          Carbon stock in vegetation soil and litter for different land types (mio. tC)
  oq52_carbon_stock_change(t,j,land,c_pools,type) Calculation carbon stock reduction (mio. tC per time step)
  oq52_co2c_emis(t,j,emis_co2,type)               Calculation of annual CO2 emissions (mio. tC per yr)

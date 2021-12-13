@@ -5,15 +5,14 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c38_sticky_mode  dynamic
+$setglobal c38_sticky_mode  free
+* options: dynamic, free
 
 scalars
 *' Depreciation rate assuming roughly 20 years linear depreciation for invesment goods
 s38_depreciation_rate depreciation rate (share of costs)  / 0.05 /
 *' Share of immobile capital.
 s38_immobile  immobile capital (share) / 1 /
-*' Initial management intensity
-s38_mi_start global management intensity in 1995 /0.47/
 ;
 
 parameter f38_fac_req(kcr) Factor requirement costs in 2005 (USD05MER per tDM)

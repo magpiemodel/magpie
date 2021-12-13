@@ -16,5 +16,4 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%crop%" == "endo_apr21" $include "./modules/30_crop/endo_apr21/realization.gms"
-$Ifi "%crop%" == "endo_jun13" $include "./modules/30_crop/endo_jun13/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

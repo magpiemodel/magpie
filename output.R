@@ -34,7 +34,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
       tmp <- base::list.dirs("./output/",recursive=TRUE)
       dirs <- NULL
       for (i in 1:length(tmp)) {
-        if (file.exists(path(tmp[i],"full.gms"))) dirs <- c(dirs,sub("./output/","",tmp[i]))
+        if (file.exists(file.path(tmp[i],"full.gms"))) dirs <- c(dirs,sub("./output/","",tmp[i]))
       }
     } else {
       dirs <- sub("full.gms","",sub("./output/","",tmp, fixed=TRUE), fixed=TRUE)
@@ -78,7 +78,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
 
   choose_submit <- function(title="Please choose run submission type") {
     slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
-    modes <- c("SLURM (default)", "SLURM priority","Direct execution", "Background execution", "Debug mode")
+    modes <- c("SLURM standby", "SLURM standby maxMem", "SLURM priority", "SLURM priority maxMem","Direct execution", "Background execution", "Debug mode")
     if(slurm) {
       cat("\nCurrent cluster utilization:\n")
       system("sclass")
@@ -94,11 +94,13 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     if(slurm) {
       system("sclass")
       comp <- switch(identifier,
-                     "1" = "slurm default",
-                     "2" = "slurm priority",
-                     "3" = "direct",
-                     "4" = "background",
-                     "5" = "debug")
+                     "1" = "slurm standby",
+                     "2" = "slurm standby maxMem",
+                     "3" = "slurm priority",
+                     "4" = "slurm priority maxMem",
+                     "5" = "direct",
+                     "6" = "background",
+                     "7" = "debug")
 
     } else {
       comp <- switch(identifier,
@@ -125,17 +127,12 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
       header <- read_yaml_header(script)
       comp <- (!is.null(header[["comparison script"]]) && isTRUE(header[["comparison script"]]))
       if(comp) {
-		print("script executed as comparison script")
         loop <- list(alloutputdirs)
       } else {
-		if(length(alloutputdirs)>1) {print("script executed multiple times in parallel")} else {print("script executed as single output script")}
-		loop <- alloutputdirs
-		print(loop)
-		print(str(loop))
-      }
+	     	loop <- alloutputdirs
+		  }
       for(outputdir in loop) {
-        message(" -> ",name)
-		print(paste0("starting script for outputdir",outputdir))
+        message("\n# ",name, " -> ", outputdir)
         r_command <- paste0("Rscript output.R outputdir=",paste(outputdir,collapse=","),"  output=",rout," submit=direct")
         sbatch_command <- paste0("sbatch --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --time=200 --mem-per-cpu=8000 --wrap=\"",r_command,"\"")
         if(submit=="direct") {
@@ -145,10 +142,14 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
           rm(tmp.env)
         } else if(submit=="background") {
           system(paste0(r_command," &> ",format(Sys.time(), "blog_out-%Y-%H-%M-%S-%OS3.log")," &"))
-        } else if(submit=="slurm default") {
+        } else if(submit=="slurm standby") {
           system(paste(sbatch_command, "--qos=standby"))
+        } else if(submit=="slurm standby maxMem") {
+          system(paste(sbatch_command, "--qos=standby --mem-per-cpu=0 --cpus-per-task=16"))
         } else if(submit=="slurm priority") {
           system(paste(sbatch_command, "--qos=priority"))
+        } else if(submit=="slurm priority maxMem") {
+          system(paste(sbatch_command, "--qos=priority --mem-per-cpu=0 --cpus-per-task=16"))
         } else if(submit=="debug") {
           tmp.env <- new.env()
           sys.source(script,envir=tmp.env)
@@ -172,6 +173,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     return(invisible(NULL))
   }
   runsubmit(output, alloutputdirs = outputdir, submit, "scripts/output/")
+  message("")
 }
 
 if(!exists("source_include")) {

@@ -5,6 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+scalars
+  s10_cost_balance Artificial cost for balance variable (USD05MER per ha) / 1e+06 /
+;
+
 table f10_land(t_ini10,j,land) Different land type areas (mio. ha)
 $ondelim
 $include "./modules/10_land/input/avl_land_t.cs3"

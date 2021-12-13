@@ -82,6 +82,11 @@ authors:
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: dklein@pik-potsdam.de
 
+  - family-names: Singh
+    given-names: Vartika
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: vasingh@pik-potsdam.de
+
   - family-names: Ambrósio
     given-names: Geanderson
     affiliation: "Potsdam Institute for Climate Impact Research"
@@ -109,8 +114,8 @@ authors:
     email: popp@pik-potsdam.de
 
 title: MAgPIE - An Open Source land-use modeling framework
-version: 4.3.4dev
-date-released: 2021-04-30
+version: 4.4.0dev
+date-released: 2021-12-13
 repository-code: https://github.com/magpiemodel/magpie
 keywords:
   - landuse

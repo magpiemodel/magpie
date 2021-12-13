@@ -15,11 +15,12 @@ $else
 $endif
 
 s80_counter = 0;
-p80_modelstat(t) = 1;
+p80_modelstat(t) = 14;
+s80_modelstat_previter = 14;
+s80_optfile_previter = s80_optfile;
 
 *** solver settings
-
-magpie.optfile   = s80_optfile ;
+magpie.optfile   = s80_optfile;
 magpie.scaleopt  = 1 ;
 magpie.solprint  = 0 ;
 magpie.holdfixed = 1 ;
@@ -35,48 +36,58 @@ $onecho > conopt4.op2
 Flg_Prep = FALSE
 $offecho
 
-repeat(
-   s80_counter = s80_counter + 1 ;
-
 *' @code
-  solve magpie USING nlp MINIMIZING vm_cost_glo;
+solve magpie USING nlp MINIMIZING vm_cost_glo;
 *' @stop
 
-* if solve stopped with an error, try it again without pre-processing
-    if((magpie.modelstat = 13),
-      display "WARNING: Modelstat 13 | retry without Conopt4 pre-processing";
-	  magpie.optfile = 2
-      solve magpie USING nlp MINIMIZING vm_cost_glo;
-      magpie.optfile   = s80_optfile ;
-    );
+display "vm_cost_glo.l";
+display vm_cost_glo.l;
+display magpie.modelstat;
 
-* if solve stopped again with an error, try it again with conopt3
-    if((magpie.modelstat = 13),
-      display "WARNING: Modelstat 13 | retry with CONOPT3!";
-      option nlp = conopt;
-      solve magpie USING nlp MINIMIZING vm_cost_glo;
-      option nlp = conopt4;
-    );
+* in case of problems try different solvers and optfile settings
+if(magpie.modelstat > 2 OR magpie.numNOpt > s80_num_nonopt_allowed,
+  repeat(
+   	s80_counter = s80_counter + 1 ;
 
-  p80_modelstat(t) = magpie.modelstat;
-  p80_num_nonopt(t) = magpie.numNOpt;
+	if(magpie.modelstat ne s80_modelstat_previter,
+		display "Modelstat > 2 | Retry solve with CONOPT4 default setting";
+		solve magpie USING nlp MINIMIZING vm_cost_glo ;
+	elseif magpie.modelstat = s80_modelstat_previter,
+    	if(magpie.optfile = s80_optfile_previter,
+           	display "Modelstat > 2 | Retry solve without CONOPT4 pre-processing";
+		   	magpie.optfile = 2;
+	       	solve magpie USING nlp MINIMIZING vm_cost_glo;
+	       	magpie.optfile   = s80_optfile;
+		else	
+			display "Modelstat > 2 | Retry solve with CONOPT3";
+			option nlp = conopt;
+			solve magpie USING nlp MINIMIZING vm_cost_glo;
+			option nlp = conopt4;
+			);
+		);
+
+  s80_modelstat_previter = magpie.modelstat;
+  s80_optfile_previter = magpie.optfile;
 
   display "vm_cost_glo.l";
   display vm_cost_glo.l;
 
 * write extended run information in list file in the case that the final solution is infeasible
-  if((s80_counter >= (s80_maxiter-1) and p80_modelstat(t) > 2 and p80_modelstat(t) ne 7),
+  if((s80_counter >= (s80_maxiter-1) and magpie.modelstat > 2 and magpie.modelstat ne 7),
     magpie.solprint = 1
   );
 
   display s80_counter;
+  display magpie.modelstat;
 
-  until ((p80_modelstat(t) <= 2 and p80_num_nonopt(t) <= s80_num_nonopt_allowed) or s80_counter >= s80_maxiter)
+  until ((magpie.modelstat <= 2 and magpie.numNOpt <= s80_num_nonopt_allowed) or s80_counter >= s80_maxiter)
+  );
 );
 
-*' @stop
+p80_modelstat(t) = magpie.modelstat;
+p80_num_nonopt(t) = magpie.numNOpt;
 
-if ((p80_modelstat(t) < 3),
+if ((p80_modelstat(t) <= 2),
   put_utility 'shell' / 'mv -f magpie_p.gdx magpie_' t.tl:0'.gdx';
 );
 

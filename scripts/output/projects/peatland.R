@@ -31,7 +31,7 @@ options(error=function()traceback(2))
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdir <- path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
+  outputdir <- file.path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
   #Define arguments that can be read from command line
   readArgs("outputdir")
 }
@@ -59,10 +59,10 @@ missing <- NULL
 
 for (i in 1:length(outputdir)) {
   print(paste("Processing",outputdir[i]))
-  gdx<-path(outputdir[i],"fulldata.gdx")
-  rep<-path(outputdir[i],"report.rds")
+  gdx<-file.path(outputdir[i],"fulldata.gdx")
+  rep<-file.path(outputdir[i],"report.rds")
   if(file.exists(gdx)) {
-    load(path(outputdir[i],"config.Rdata"))
+    load(file.path(outputdir[i],"config.Rdata"))
     scen <- cfg$title
     prefix <- substring(scen, 1, 4)
 
