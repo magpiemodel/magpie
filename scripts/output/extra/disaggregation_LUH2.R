@@ -23,6 +23,7 @@ if(!exists("source_include")) {
 map_file                   <- Sys.glob(file.path(outputdir, "clustermap_*.rds"))
 gdx                        <- file.path(outputdir,"fulldata.gdx")
 land_hr_file               <- file.path(outputdir,"avl_land_full_t_0.5.mz")
+urban_land_hr_file         <- file.path(outputdir,"f34_urbanland_0.5.mz")
 
 load(paste0(outputdir, "/config.Rdata"))
 ################################################################################
@@ -62,6 +63,16 @@ if(any(land_ini_hr < 0)) {
   land_ini_hr[which(land_ini_hr < 0,arr.ind = T)] <- 0
 }
 
+#read in hr urban land
+if (cfg$gms$urban == "exo_nov21" ) {
+  urban_land_hr  <- read.magpie(urban_land_hr_file)
+  ssp <- cfg$gms$c09_gdp_scenario
+  urban_land_hr <- urban_land_hr[,,ssp]
+  getNames(urban_land_hr) <- "urban"
+} else if (cfg$gms$urban == "static"){
+  urban_land_hr <- "static"
+}
+
 # account for country-specific set-aside shares in post-processing
 iso <- readGDX(gdx, "iso")
 set_aside_iso <- readGDX(gdx,"policy_countries30")
@@ -84,7 +95,8 @@ land_hr <- interpolateAvlCroplandWeighted(x          = land_lr,
                                           map        = map_file,
                                           marginal_land = marginal_land,
                                           set_aside_shr = set_aside_shr,
-                                          set_aside_fader = set_aside_fader)
+                                          set_aside_fader = set_aside_fader,
+                                          urban_land_hr = urban_land_hr)
 
 land_hr <- land_hr[,-1,]
 
@@ -290,6 +302,14 @@ crop_hr <- croparea(gdx,level="grid",dir = outputdir,products = "kcr",product_ag
 crop_hr <- madrat::toolAggregate(crop_hr, map_crops, from="MAgPIE", to="LUH2",dim = 3.1)
 crop_hr_shr <- crop_hr / dimSums(land_hr,dim=3)
 
+crop_hr_rf <- collapseNames(croparea(gdx,level="grid",dir = outputdir,products = "kcr",product_aggr = FALSE,water_aggr = FALSE)[,,"rainfed"],collapsedim = 3.2)
+crop_hr_rf <- madrat::toolAggregate(crop_hr_rf, map_crops, from="MAgPIE", to="LUH2",dim = 3.1)
+crop_hr_rf_shr <- crop_hr_rf / dimSums(land_hr,dim=3)
+
+crop_hr_ir <- collapseNames(croparea(gdx,level="grid",dir = outputdir,products = "kcr",product_aggr = FALSE,water_aggr = FALSE)[,,"irrigated"],collapsedim = 3.2)
+crop_hr_ir <- madrat::toolAggregate(crop_hr_ir, map_crops, from="MAgPIE", to="LUH2",dim = 3.1)
+crop_hr_ir_shr <- crop_hr_ir / dimSums(land_hr,dim=3)
+
 ### Nitrogen fertilizer
 if(file.exists(file.path(outputdir,"NitrogenBudget.rds")) & file.exists(file.path(outputdir,"NitrogenBudgetWeight.rds"))) {
   a <- readRDS(file.path(outputdir,"NitrogenBudget.rds"))
@@ -329,6 +349,32 @@ a[crop_hr_shr<crop_threshold] <- NA
 #divide by croparea -> tDM/ha
 a <- (a/crop_hr)
 write.magpie(a,file.path(outputdir,"LUH2_Yield_DM.nc"),comment = "unit: tDM-per-ha")
+rm(a)
+gc()
+
+### Yields DM rainfed
+#read-in production in mio tDM
+a <- collapseNames(production(gdx,level="grid",dir = outputdir,products = "kcr",product_aggr = FALSE,water_aggr = FALSE,attributes = "dm")[,,"rainfed"],collapsedim = 3.2)
+#Rename and aggregate crop types from MAgPIE to LUH2
+a <- madrat::toolAggregate(a, map_crops, from="MAgPIE", to="LUH2",dim = 3.1)
+#filter
+a[crop_hr_rf_shr<crop_threshold] <- NA
+#divide by croparea -> tDM/ha
+a <- (a/crop_hr_rf)
+write.magpie(a,file.path(outputdir,"LUH2_Yield_DM_rainfed.nc"),comment = "unit: tDM-per-ha")
+rm(a)
+gc()
+
+### Yields DM irrigated
+#read-in production in mio tDM
+a <- collapseNames(production(gdx,level="grid",dir = outputdir,products = "kcr",product_aggr = FALSE,water_aggr = FALSE,attributes = "dm")[,,"irrigated"],collapsedim = 3.2)
+#Rename and aggregate crop types from MAgPIE to LUH2
+a <- madrat::toolAggregate(a, map_crops, from="MAgPIE", to="LUH2",dim = 3.1)
+#filter
+a[crop_hr_ir_shr<crop_threshold] <- NA
+#divide by croparea -> tDM/ha
+a <- (a/crop_hr_ir)
+write.magpie(a,file.path(outputdir,"LUH2_Yield_DM_irrigated.nc"),comment = "unit: tDM-per-ha")
 rm(a)
 gc()
 
