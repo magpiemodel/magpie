@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: SIM4NEXUS simulations (water-land-climate-energy)
+# description: FSEC diet simulations
 # ----------------------------------------------------------
 library(gms)
 source("scripts/start_functions.R")
