@@ -37,13 +37,22 @@ else
 display "starting iteration number ", p15_iteration_counter;
 display "starting m15_food_demand model....";
 
-solve m15_food_demand USING nlp MAXIMIZING v15_objective ;
+solve m15_food_demand USING nlp MAXIMIZING v15_objective;
+
+* in case of problems try CONOPT3
+if(m15_food_demand.modelstat > 2,
+	display "Modelstat > 2 | Retry solve with CONOPT3";
+	option nlp = conopt;
+	solve m15_food_demand USING nlp MAXIMIZING v15_objective;
+	option nlp = conopt4;
+);
+
 p15_modelstat(t) = m15_food_demand.modelstat;
 
 display "Food Demand Model finished with modelstat ";
 display p15_modelstat;
 
-if(( p15_modelstat(t)) > 2 and (p15_modelstat(t) ne 7 ),
+if(p15_modelstat(t) > 2 AND p15_modelstat(t) ne 7,
   m15_food_demand.solprint = 1
   Execute_Unload "fulldata.gdx";
   abort "Food Demand Model became infeasible. Should not be possible.";
@@ -385,7 +394,7 @@ if(s15_exo_diet = 1,
 
 
 
-        if (p15_modelstat(t) < 3,
+        if (p15_modelstat(t) <= 2,
            put_utility 'shell' / 'mv -f m15_food_demand_p.gdx m15_food_demand_' t.tl:0'.gdx';
         );
 

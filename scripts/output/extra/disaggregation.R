@@ -23,6 +23,7 @@ if(!exists("source_include")) {
 map_file                   <- Sys.glob(file.path(outputdir, "clustermap_*.rds"))
 gdx                        <- file.path(outputdir,"fulldata.gdx")
 land_hr_file               <- file.path(outputdir,"avl_land_full_t_0.5.mz")
+urban_land_hr_file         <- file.path(outputdir,"f34_urbanland_0.5.mz")
 land_hr_out_file           <- file.path(outputdir,"cell.land_0.5.mz")
 land_hr_share_out_file     <- file.path(outputdir,"cell.land_0.5_share.mz")
 croparea_hr_share_out_file <- file.path(outputdir,"cell.croparea_0.5_share.mz")
@@ -61,6 +62,16 @@ if(any(land_ini_hr < 0)) {
   land_ini_hr[which(land_ini_hr < 0,arr.ind = T)] <- 0
 }
 
+#read in hr urban land
+if (cfg$gms$urban == "exo_nov21" ) {
+urban_land_hr  <- read.magpie(urban_land_hr_file)
+ssp <- cfg$gms$c09_gdp_scenario
+urban_land_hr <- urban_land_hr[,,ssp]
+getNames(urban_land_hr) <- "urban"
+} else if (cfg$gms$urban == "static"){
+  urban_land_hr <- "static"
+}
+
 # account for country-specific set-aside shares in post-processing
 iso <- readGDX(gdx, "iso")
 set_aside_iso <- readGDX(gdx,"policy_countries30")
@@ -83,7 +94,8 @@ land_hr <- interpolateAvlCroplandWeighted(x          = land_lr,
                                           map        = map_file,
                                           marginal_land = marginal_land,
                                           set_aside_shr = set_aside_shr,
-                                          set_aside_fader = set_aside_fader)
+                                          set_aside_fader = set_aside_fader,
+                                          urban_land_hr = urban_land_hr)
 
 # Write outputs
 
@@ -141,7 +153,7 @@ area_shr_hr <- .dissagcrop(gdx, land_hr, map=map_file)
   land_hr <- land_hr[,,"crop",invert=TRUE]
   #combine land_hr with crop_hr.
   land_hr <- mbind(crop_hr,land_hr)
-  
+
   # split "forestry" into timber plantations, pre-scribed afforestation (NPi/NDC) and endogenous afforestation (CO2 price driven)
   message("Disaggregation Forestry")
   farea     <- dimSums(landForestry(gdx, level="cell"),dim="ac")
@@ -157,12 +169,12 @@ area_shr_hr <- .dissagcrop(gdx, land_hr, map=map_file)
   df[2,] <- c("ndc","PlantedForest_NPiNDC")
   df[3,] <- c("plant","PlantedForest_Timber")
   farea_hr <- madrat::toolAggregate(farea_hr, df, from="internal", to="output",dim = 3.1)
-  
+
   #drop forestry
   land_hr <- land_hr[,,"forestry",invert=TRUE]
   #combine land_hr with farea_hr
   land_hr <- mbind(land_hr,farea_hr)
-  
+
   #write landpool
   .tmpwrite(land_hr, land_hr_split_file,
             comment="unit: Mha per grid-cell",
