@@ -18,4 +18,6 @@ else
  s62_historical=0;
 );
 
+p62_dem_food_lh(i)$(p62_dem_food_lh(i) = 0) = 1;
+
 *' @stop
