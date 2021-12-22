@@ -122,9 +122,9 @@ highres <- function(cfg) {
   #get trade pattern from low resolution run with c200
   ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
   ov_supply <- readGDX(gdx,"ov_supply",select=list(type="level"))
-  #supreg <- readGDX(gdx, "supreg")
-  #f21_trade_balance <- toolAggregate(ov_prod_reg - ov_supply, supreg)
-  f21_trade_balance <- ov_prod_reg - ov_supply
+  supreg <- readGDX(gdx, "supreg")
+  f21_trade_balance <- toolAggregate(ov_prod_reg - ov_supply, supreg)
+#  f21_trade_balance <- ov_prod_reg - ov_supply
   write.magpie(f21_trade_balance,paste0("modules/21_trade/input/f21_trade_balance.cs3"))
   
   #get tau from low resolution run with c200
@@ -134,7 +134,7 @@ highres <- function(cfg) {
   
   #use exo trade and parallel optimization
   cfg$gms$trade <- "exo"
-  cfg$gms$optimization <- "nlp_par_reg"
+  cfg$gms$optimization <- "nlp_par"
   cfg$gms$s15_elastic_demand <- 0
   
   # #get regional afforestation patterns from low resolution run with c200
