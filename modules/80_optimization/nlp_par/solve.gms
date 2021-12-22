@@ -69,8 +69,10 @@ repeat
 		
 		h2(h) = yes;
       	i2(i) = yes$supreg(h,i);
-      	loop(i2, j2(j) = yes$cell(i2,j));
-      	display h2;
+	  	j2(j) = yes$cell(i2,j);
+	display i2;
+	display h2;
+	display j2;  
       	s80_counter = sum(h2,p80_counter(h2));
       	display s80_counter;
       	display magpie.modelStat;
