@@ -38,7 +38,7 @@ j2(j) = no;
 loop(h,
   h2(h) = yes;
 	i2(i) = yes$supreg(h,i);
-  	j2(j) = yes$cell(supreg(h,i),j);
+  	j2(j) = yes$(cell(i,j) AND supreg(h,i));
 	display i2;
 	display h2;
 	display j2;  
