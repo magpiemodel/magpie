@@ -37,7 +37,7 @@ j2(j) = no;
 *submission loop
 loop(h,
   h2(h) = yes;
-	i2(i) = yes$supreg(h,i);
+	i2(i)$supreg(h,i) = yes;
     loop(i2, j2(j)$cell(i2,j) = yes);
 	display i2;
 	display h2;
@@ -68,8 +68,8 @@ repeat
        	magpie.optfile = s80_optfile;
 		
 		h2(h) = yes;
-      	i2(i) = yes$supreg(h,i);
-      	loop(i2, j2(j) = yes$cell(i2,j));
+		i2(i)$supreg(h,i) = yes;
+    	loop(i2, j2(j)$cell(i2,j) = yes);
       	display h2;
       	s80_counter = sum(h2,p80_counter(h2));
       	display s80_counter;
