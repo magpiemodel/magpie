@@ -5,12 +5,15 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-table f21_trade_balance(t_all,i,kall) trade balance of positive exports and negative imports (mio. tDM per yr)
-$ondelim
-$include "./modules/21_trade/input/f21_trade_balance.cs3"
-$offdelim;
+parameters
+	p80_modelstat(t,i)  modelstat indicator (1)
+	p80_counter(i)      counter (1)
+	p80_handle(i)       parallel mode handle parameter (1)
+;
 
-table f21_self_suff(t_all,h,kall) Superregional self-sufficiency rates (1)
-$ondelim
-$include "./modules/21_trade/input/f21_trade_self_suff.cs3"
-$offdelim;
+scalars
+  s80_counter       		counter (1)
+  s80_modelstat_previter 	modelstat of previous iteration (1)
+  s80_optfile_previter 		optfile used in previous iteration (1)
+  s80_resolve      			indicator for restarting solve (1)
+;
