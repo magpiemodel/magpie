@@ -39,6 +39,9 @@ loop(h,
   h2(h) = yes;
 	i2(i) = yes$supreg(h,i);
   loop(i2, j2(j) = yes$cell(i2,j));
+	display i2;
+	display h2;
+	display j2;  
 	solve magpie USING nlp MINIMIZING vm_cost_glo ;
 *	display j2;
 *	display i2;
