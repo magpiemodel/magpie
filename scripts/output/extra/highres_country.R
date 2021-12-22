@@ -130,7 +130,7 @@ highres <- function(cfg) {
   #get tau from low resolution run with c200
   ov_tau <- readGDX(gdx, "ov_tau",select=list(type="level"))
   write.magpie(ov_tau,"modules/13_tc/input/f13_tau_scenario.csv")
-  cfg$gms$tc <- "exo"
+  #cfg$gms$tc <- "exo"
   
   #use exo trade and parallel optimization
   cfg$gms$trade <- "exo"
