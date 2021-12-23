@@ -97,9 +97,9 @@ highres <- function(cfg) {
   }
 
   #update cellular input files
-  cfg$input["cellular"] <- "rev4.65_bbfa7f41_2d2da22a_cellularmagpie_c1000_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
-  cfg$input["validation"] <- "rev4.65_bbfa7f41_validation.tgz"
-  cfg$input["regional"] <- "rev4.65_bbfa7f41_magpie.tgz"
+  cfg$input["cellular"] <- "rev4.65_76adaf1c_2d2da22a_cellularmagpie_c1000_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
+  cfg$input["validation"] <- "rev4.65_76adaf1c_validation.tgz"
+  cfg$input["regional"] <- "rev4.65_76adaf1c_magpie.tgz"
   cfg$input["calibration"] <- "calibration_H40_23Dec21.tgz"
   cfg$recalibrate_landconversion_cost <- FALSE
   cfg$recalibrate <- FALSE
