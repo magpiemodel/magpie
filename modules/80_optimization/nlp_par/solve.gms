@@ -83,7 +83,10 @@ repeat
 
 	    display$handledelete(p80_handle(h)) 'trouble deleting handles' ;
 
+      	display magpie.modelStat;
+      	display p80_modelstat;
 		if(magpie.modelStat <= 2 AND magpie.numNOpt <= s80_num_nonopt_allowed,
+			display magpie.modelStat;
 		    display "Model status <= 2. Handle cleared.";
 		    s80_resolve = 0;
 		    p80_handle(h) = 0;
