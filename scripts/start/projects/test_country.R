@@ -44,14 +44,14 @@ for(ssp in c("SSP2")) {
           cfg$gms$residues <- "off"
 #          cfg$gms$nr_soil_budget <- nr_soil_budget
           cfg$gms$disagg_lvst <- "off"
-          cfg$input["cellular"] <- "rev4.65_bbfa7f41_1998ea10_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
-          cfg$input["validation"] <- "rev4.65_bbfa7f41_validation.tgz"
-          cfg$input["regional"] <- "rev4.65_bbfa7f41_magpie.tgz"
-          cfg$input["calibration"] <- "calibration_H40_23Dec21.tgz"
+          cfg$input["cellular"] <- "rev4.65_76adaf1c_1998ea10_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
+          cfg$input["validation"] <- "rev4.65_76adaf1c_validation.tgz"
+          cfg$input["regional"] <- "rev4.65_76adaf1c_magpie.tgz"
+          cfg$input["calibration"] <- ""
           
           
-          # cfg$recalibrate_landconversion_cost <- TRUE
-          # cfg$recalibrate <- TRUE
+          cfg$recalibrate_landconversion_cost <- TRUE
+          cfg$recalibrate <- TRUE
           
           start_run(cfg, codeCheck = FALSE)
           
