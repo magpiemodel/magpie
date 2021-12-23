@@ -100,6 +100,10 @@ highres <- function(cfg) {
   cfg$input["cellular"] <- "rev4.65_1780578c_8899123d_cellularmagpie_c1000_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1_clusterweight-6e97e2a0.tgz"
   cfg$input["validation"] <- "rev4.65_1780578c_validation.tgz"
   cfg$input["regional"] <- "rev4.65_1780578c_magpie.tgz"
+  cfg$input["calibration"] <- ""
+  cfg$recalibrate_landconversion_cost <- FALSE
+  cfg$recalibrate <- FALSE
+  
   
   #copy gdx file for 1st time step from low resolution run for better starting point
   #note: using gdx files for more than the 1st time step sometimes pushes the model into corner solutions, which might result in infeasibilites.
