@@ -51,50 +51,50 @@ highres <- function(cfg) {
   # set high resolution, available options are c1000 and c2000
   res <- "c2000"
   
-  # search for matching high resolution file in repositories
-  # pattern: "rev4.65_h12_*_cellularmagpie_c2000_MRI-ESM2-0-ssp370_lpjml-3eb70376.tgz"
-  x <- unlist(strsplit(cfg$input["cellular"],"_"))
-  x[3] <- "*"
-  x[5] <- res
-  file <- paste0(x,collapse = "_")
-  message(paste0("Searching for ",file," in repositories"))
-  repositories <- cfg$repositories
-  found <- NULL
-  debug <- FALSE
-  for (repo in names(repositories)) {
-    if (grepl("https://|http://", repo)) {
-      #read html index file and extract file names
-      h <- try(curl::new_handle(verbose = debug, .list = repositories[[repo]]), silent = !debug)
-      con <- curl::curl(paste0(repo,"/"), handle = h)
-      dat <- try(readLines(con), silent = TRUE)
-      close(con)
-      dat <- grep("href",dat,value = T)
-      dat <- unlist(lapply(strsplit(dat, "\\]\\] <a href\\=\\\"|\\\">"),function(x) x[2]))
-      dat <- gsub(" <a href=\"","",dat,fixed=TRUE)
-      found <- c(found,grep(glob2rx(file),dat,value = T))
-    } else if (grepl("scp://", repo)) {
-      #list files with sftp command
-      path <- paste0(sub("scp://","sftp://",repo),"/")
-      h <- try(curl::new_handle(verbose = debug, .list = repositories[[repo]], ftp_use_epsv = TRUE, dirlistonly = TRUE), silent = TRUE)
-      con <- curl::curl(url = path, "r", handle = h)
-      dat <- try(readLines(con), silent = TRUE)
-      close(con)
-      found <- c(found,grep(glob2rx(file),dat,value = T))
-    } else if (dir.exists(repo)) {
-      dat <- list.files(repo)
-      found <- c(found,grep(glob2rx(file),dat,value = T))
-    }
-  }  
-  
-  if(length(found) == 0) {
-    stop("No matching file found")
-  } else {
-    if (length(unique(found)) > 1) {
-      found <- found[1]  
-      warning("More than one file found that matches the pattern. Only the first one will be used.")
-    } else found <- found[1]
-    message(paste0("Matching file with ",res," resolution found: ",found))
-  }
+  # # search for matching high resolution file in repositories
+  # # pattern: "rev4.65_h12_*_cellularmagpie_c2000_MRI-ESM2-0-ssp370_lpjml-3eb70376.tgz"
+  # x <- unlist(strsplit(cfg$input["cellular"],"_"))
+  # x[3] <- "*"
+  # x[5] <- res
+  # file <- paste0(x,collapse = "_")
+  # message(paste0("Searching for ",file," in repositories"))
+  # repositories <- cfg$repositories
+  # found <- NULL
+  # debug <- FALSE
+  # for (repo in names(repositories)) {
+  #   if (grepl("https://|http://", repo)) {
+  #     #read html index file and extract file names
+  #     h <- try(curl::new_handle(verbose = debug, .list = repositories[[repo]]), silent = !debug)
+  #     con <- curl::curl(paste0(repo,"/"), handle = h)
+  #     dat <- try(readLines(con), silent = TRUE)
+  #     close(con)
+  #     dat <- grep("href",dat,value = T)
+  #     dat <- unlist(lapply(strsplit(dat, "\\]\\] <a href\\=\\\"|\\\">"),function(x) x[2]))
+  #     dat <- gsub(" <a href=\"","",dat,fixed=TRUE)
+  #     found <- c(found,grep(glob2rx(file),dat,value = T))
+  #   } else if (grepl("scp://", repo)) {
+  #     #list files with sftp command
+  #     path <- paste0(sub("scp://","sftp://",repo),"/")
+  #     h <- try(curl::new_handle(verbose = debug, .list = repositories[[repo]], ftp_use_epsv = TRUE, dirlistonly = TRUE), silent = TRUE)
+  #     con <- curl::curl(url = path, "r", handle = h)
+  #     dat <- try(readLines(con), silent = TRUE)
+  #     close(con)
+  #     found <- c(found,grep(glob2rx(file),dat,value = T))
+  #   } else if (dir.exists(repo)) {
+  #     dat <- list.files(repo)
+  #     found <- c(found,grep(glob2rx(file),dat,value = T))
+  #   }
+  # }  
+  # 
+  # if(length(found) == 0) {
+  #   stop("No matching file found")
+  # } else {
+  #   if (length(unique(found)) > 1) {
+  #     found <- found[1]  
+  #     warning("More than one file found that matches the pattern. Only the first one will be used.")
+  #   } else found <- found[1]
+  #   message(paste0("Matching file with ",res," resolution found: ",found))
+  # }
 
   #update cellular input files
   cfg$input["cellular"] <- "rev4.65_76adaf1c_2d2da22a_cellularmagpie_c1000_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
