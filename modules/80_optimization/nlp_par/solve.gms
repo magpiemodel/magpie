@@ -85,7 +85,9 @@ repeat
 
       	display magpie.modelStat;
       	display p80_modelstat;
-		if(magpie.modelStat <= 2 AND magpie.numNOpt <= s80_num_nonopt_allowed,
+      	display magpie.numNOpt;
+      	display s80_num_nonopt_allowed;
+		if(p80_modelstat(t,h) <= 2 AND magpie.numNOpt <= s80_num_nonopt_allowed,
 			display magpie.modelStat;
 		    display "Model status <= 2. Handle cleared.";
 		    s80_resolve = 0;
