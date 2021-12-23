@@ -9,6 +9,8 @@ positive variables
 
  vm_nr_inorg_fert_reg(i,land_ag)  inorganic fertilizer application (Tg N per yr)
  vm_nr_inorg_fert_costs(i)        cost of inorganic fertiliuers (mio. USD05MER per yr)
+ vm_nr_eff(i)                    Cropland nutrient uptake efficiency (Tg N per yr)
+ vm_nr_eff_pasture(i)            Pasture nutrient uptake efficiency (Tg N per yr)
 
 ;
 
