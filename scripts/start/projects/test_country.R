@@ -50,8 +50,8 @@ for(ssp in c("SSP2")) {
           cfg$input["calibration"] <- ""
           
           
-          # cfg$recalibrate_landconversion_cost <- TRUE
-          # cfg$recalibrate <- FALSE
+          cfg$recalibrate_landconversion_cost <- TRUE
+          cfg$recalibrate <- TRUE
           
           start_run(cfg, codeCheck = FALSE)
           
