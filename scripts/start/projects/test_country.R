@@ -24,9 +24,9 @@ source("config/default.cfg")
 download_and_update(cfg)
 
 # create additional information to describe the runs
-cfg$info$flag <- "h12i40" 
+cfg$info$flag <- "SIM" 
 
-cfg$output <- c("rds_report","extra/highres_country") # Only run rds_report after model run
+cfg$output <- c("rds_report") # "extra/highres_country"
 cfg$results_folder <- "output/:title:"
 cfg$force_replace <- TRUE
 
@@ -35,12 +35,27 @@ cfg$force_replace <- TRUE
 
 #Reference and Policy run for SSP1, SSP2 and SSP5
 for(ssp in c("SSP2")) {
+  for (processing in c("substitution_may21","off")) {
+    for (residues in c("flexreg_apr16","off")) {
+      for (nr_soil_budget in c("exoeff_aug16","off")) {
+        for (disagg_lvst in c("foragebased_aug18","off")) {
+          cfg$title <- .title(paste(ssp,"Ref",paste0("21PROC",if(processing!="off") "On" else "Off"),paste0("18RESID",if(residues!="off") "On" else "Off"),paste0("50SOIL",if(nr_soil_budget!="off") "On" else "Off"),paste0("71LIVST",if(disagg_lvst!="off") "On" else "Off"),sep="-"))
+          cfg <- setScenario(cfg,c(ssp,"NPI","rcp7p0"))
+          cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-NPi")
+          cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-NPi")
+          
+          cfg$gms$processing <- processing
+          cfg$gms$residues <- residues
+          cfg$gms$nr_soil_budget <- nr_soil_budget
+          cfg$gms$disagg_lvst <- disagg_lvst
+          
+          start_run(cfg, codeCheck = FALSE)
+          
+        }
+      }
+    }
+  }
   
-  cfg$title <- .title(paste(ssp,"Ref",sep="-"))
-  cfg <- setScenario(cfg,c(ssp,"NPI","rcp7p0"))
-  cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-NPi")
-  cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-NPi")
-  start_run(cfg, codeCheck = TRUE)
 
   # cfg$title <- .title(paste(ssp,"PkBudg900",sep="-"))
   # cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
