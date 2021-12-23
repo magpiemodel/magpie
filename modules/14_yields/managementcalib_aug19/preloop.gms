@@ -120,13 +120,13 @@ pm_yields_semi_calib(j,knbe14,w)  = i14_yields_calib("y1995",j,knbe14,w);
 *' with this additional step of correction:
 
 * set default values in case of missing input file
-if(sum((h,ltype14),f14_yld_calib(h,ltype14)) = 0,
-	f14_yld_calib(h,ltype14) = 1;
+if(sum((i,ltype14),f14_yld_calib(i,ltype14)) = 0,
+	f14_yld_calib(i,ltype14) = 1;
 );
 
 
-i14_yields_calib(t,j,kcr,w)       = i14_yields_calib(t,j,kcr,w)      *sum((cell(i,j),supreg(h,i)), f14_yld_calib(h,"crop"));
-i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w)*sum((cell(i,j),supreg(h,i)), f14_yld_calib(h,"past"));
+i14_yields_calib(t,j,kcr,w)       = i14_yields_calib(t,j,kcr,w)      *sum(cell(i,j),f14_yld_calib(i,"crop"));
+i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w)*sum(cell(i,j),f14_yld_calib(i,"past"));
 
 *' @stop
 

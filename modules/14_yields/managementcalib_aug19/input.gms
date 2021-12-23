@@ -24,7 +24,7 @@ scalars
 
 ******* Calibration factor
 $onEmpty
-table f14_yld_calib(h,ltype14) Calibration factor for the LPJmL yields (1)
+table f14_yld_calib(i,ltype14) Calibration factor for the LPJmL yields (1)
 $ondelim
 $if exist "./modules/14_yields/input/f14_yld_calib.csv" $include "./modules/14_yields/input/f14_yld_calib.csv"
 $offdelim
