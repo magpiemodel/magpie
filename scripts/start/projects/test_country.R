@@ -54,6 +54,10 @@ for(ssp in c("SSP2")) {
           cfg$input["validation"] <- "rev4.65_f2b10c40_validation.tgz"
           cfg$input["regional"] <- "rev4.65_f2b10c40_magpie.tgz"
           cfg$input["calibration"] <- ""
+          
+          download_and_update(cfg)
+          if (file.exists("modules/14_yields/input/f14_yld_calib.csv")) file.remove("modules/14_yields/input/f14_yld_calib.csv")
+          
           cfg$recalibrate_landconversion_cost <- TRUE
           cfg$recalibrate <- TRUE
           
