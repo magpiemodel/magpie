@@ -48,6 +48,7 @@ get_areacalib <- function(gdx_file) {
   }
   out <- magpie/data
   out[out==0] <- 1
+  out[is.na(out)] <- 1
   getNames(out) <- NULL
   getYears(out) <- NULL
 
