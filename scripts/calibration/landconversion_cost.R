@@ -160,6 +160,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
       calib_factor_time <- time_series(calib_best)
       calib_reward <- get_rewardcalib(gdx_file,calib_factor_time)
       calib_best_full <- mbind(setNames(calib_factor_time,"cost"),setNames(calib_reward,"reward"))
+      calib_best_full[is.na(calib_best_full)] <- 1
       
     comment <- c(" description: Regional land conversion cost calibration file",
                  " unit: -",
@@ -180,6 +181,7 @@ update_calib<-function(gdx_file, calib_accuracy=0.01, damping_factor=0.98, calib
   calib_factor_time <- time_series(calib_factor)
   calib_reward <- get_rewardcalib(gdx_file,calib_factor_time)
   calib_full <- mbind(setNames(calib_factor_time,"cost"),setNames(calib_reward,"reward"))
+  calib_full[is.na(calib_full)] <- 1
   comment <- c(" description: Regional land conversion cost calibration file",
                " unit: -",
                paste0(" note: Calibration step ",calibration_step),

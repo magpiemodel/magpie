@@ -21,7 +21,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 #download default input data
-download_and_update(cfg)
+#download_and_update(cfg)
 
 # create additional information to describe the runs
 cfg$info$flag <- "H100" 
@@ -61,6 +61,7 @@ for(ssp in c("SSP2")) {
           cfg$recalibrate <- TRUE
           Sys.sleep(3)
           if (file.exists("modules/14_yields/input/f14_yld_calib.csv")) file.remove("modules/14_yields/input/f14_yld_calib.csv")
+          Sys.sleep(2)
           
           
           
