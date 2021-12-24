@@ -44,9 +44,15 @@ for(ssp in c("SSP2")) {
           cfg$gms$residues <- "off"
 #          cfg$gms$nr_soil_budget <- nr_soil_budget
           cfg$gms$disagg_lvst <- "off"
-          cfg$input["cellular"] <- "rev4.65_76adaf1c_1998ea10_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
-          cfg$input["validation"] <- "rev4.65_76adaf1c_validation.tgz"
-          cfg$input["regional"] <- "rev4.65_76adaf1c_magpie.tgz"
+          # H40
+          # cfg$input["cellular"] <- "rev4.65_76adaf1c_1998ea10_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
+          # cfg$input["validation"] <- "rev4.65_76adaf1c_validation.tgz"
+          # cfg$input["regional"] <- "rev4.65_76adaf1c_magpie.tgz"
+          # cfg$input["calibration"] <- ""
+          #H100
+          cfg$input["cellular"] <- "rev4.65_f2b10c40_1998ea10_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
+          cfg$input["validation"] <- "rev4.65_f2b10c40_validation.tgz"
+          cfg$input["regional"] <- "rev4.65_f2b10c40_magpie.tgz"
           cfg$input["calibration"] <- ""
           
           
