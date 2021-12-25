@@ -50,15 +50,17 @@ for(ssp in c("SSP2")) {
           # cfg$input["regional"] <- "rev4.65_76adaf1c_magpie.tgz"
           # cfg$input["calibration"] <- "calibration_H40_23Dec21.tgz"
           #H100
-          cfg$input["cellular"] <- "rev4.65_1ee093bb_d4868716_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
-          cfg$input["validation"] <- "rev4.65_1ee093bb_validation.tgz"
-          cfg$input["regional"] <- "rev4.65_1ee093bb_magpie.tgz"
+          cfg$input["cellular"] <- "rev4.65_6755efa7_d4868716_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
+          cfg$input["validation"] <- "rev4.65_6755efa7_validation.tgz"
+          cfg$input["regional"] <- "rev4.65_6755efa7_magpie"
           cfg$input["calibration"] <- ""
           
           download_and_update(cfg)
           
           cfg$recalibrate_landconversion_cost <- TRUE
           cfg$recalibrate <- TRUE
+          cfg$calib_maxiter <- 5
+          cfg$calib_maxiter_landconversion_cost <- 5
           Sys.sleep(3)
           if (file.exists("modules/14_yields/input/f14_yld_calib.csv")) file.remove("modules/14_yields/input/f14_yld_calib.csv")
           Sys.sleep(2)
