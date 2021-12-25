@@ -50,7 +50,7 @@ for(ssp in c("SSP2")) {
           # cfg$input["regional"] <- "rev4.65_76adaf1c_magpie.tgz"
           # cfg$input["calibration"] <- "calibration_H40_23Dec21.tgz"
           #H100
-          cfg$input["cellular"] <- "rev4.65_6755efa7_d4868716_cellularmagpie_c400_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
+          cfg$input["cellular"] <- "rev4.65_6755efa7_1998ea10_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
           cfg$input["validation"] <- "rev4.65_6755efa7_validation.tgz"
           cfg$input["regional"] <- "rev4.65_6755efa7_magpie.tgz"
           cfg$input["calibration"] <- ""
