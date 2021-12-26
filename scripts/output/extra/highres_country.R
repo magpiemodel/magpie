@@ -106,7 +106,7 @@ highres <- function(cfg) {
   cfg$input["cellular"] <- "rev4.65_6755efa7_fe1aa758_cellularmagpie_c2000_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
   cfg$input["validation"] <- "rev4.65_6755efa7_validation.tgz"
   cfg$input["regional"] <- "rev4.65_6755efa7_magpie.tgz"
-  cfg$input["calibration"] <- "calibration_H100_25Dec21.tgz"
+  cfg$input["calibration"] <- "calibration_H100_26Dec21.tgz"
   cfg$recalibrate_landconversion_cost <- FALSE
   cfg$recalibrate <- FALSE
   

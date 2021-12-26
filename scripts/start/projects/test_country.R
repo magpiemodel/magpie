@@ -53,7 +53,7 @@ for(ssp in c("SSP2")) {
           cfg$input["cellular"] <- "rev4.65_6755efa7_1998ea10_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
           cfg$input["validation"] <- "rev4.65_6755efa7_validation.tgz"
           cfg$input["regional"] <- "rev4.65_6755efa7_magpie.tgz"
-          cfg$input["calibration"] <- ""
+          cfg$input["calibration"] <- "calibration_H100_26Dec21.tgz"
           
           download_and_update(cfg)
           
