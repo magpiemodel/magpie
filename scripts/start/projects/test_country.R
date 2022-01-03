@@ -55,26 +55,15 @@ for(ssp in c("SSP2")) {
           cfg$input["regional"] <- "rev4.65_6755efa7_magpie.tgz"
           cfg$input["calibration"] <- "calibration_H100_26Dec21.tgz"
           
-          download_and_update(cfg)
-          
           cfg$recalibrate_landconversion_cost <- TRUE
           cfg$recalibrate <- TRUE
-          cfg$calib_maxiter <- 5
-          cfg$calib_maxiter_landconversion_cost <- 5
+          # cfg$calib_maxiter <- 5
+          # cfg$calib_maxiter_landconversion_cost <- 5
+          
+          download_and_update(cfg)
           Sys.sleep(3)
           if (file.exists("modules/14_yields/input/f14_yld_calib.csv")) file.remove("modules/14_yields/input/f14_yld_calib.csv")
           Sys.sleep(2)
           
-          
-          
           start_run(cfg, codeCheck = FALSE)
-          
-
-
-  # cfg$title <- .title(paste(ssp,"PkBudg900",sep="-"))
-  # cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
-  # cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-PkBudg900")
-  # cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-PkBudg900")
-  # start_run(cfg, codeCheck = TRUE)
-  
 }
