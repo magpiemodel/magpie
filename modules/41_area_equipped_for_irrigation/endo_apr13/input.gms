@@ -5,10 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c41_initial_irrigation_area  Siebert
+$setglobal c41_initial_irrigation_area  LUH2v2
 
 scalars
-s41_AEI_depreciation Depreciation rate in capital value of irrigation infrastructure / 0.05 /
+s41_AEI_depreciation Depreciation rate in capital value of irrigation infrastructure (USD05PPP per USD05PPP) / 0 /
 ;
 
 

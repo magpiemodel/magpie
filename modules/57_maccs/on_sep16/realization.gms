@@ -17,6 +17,7 @@ $Ifi "%phase%" == "sets" $include "./modules/57_maccs/on_sep16/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/57_maccs/on_sep16/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/57_maccs/on_sep16/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/57_maccs/on_sep16/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/57_maccs/on_sep16/scaling.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/57_maccs/on_sep16/preloop.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/57_maccs/on_sep16/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

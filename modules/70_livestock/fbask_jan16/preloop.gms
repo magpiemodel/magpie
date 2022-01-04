@@ -16,6 +16,8 @@ loop(t_all,
  );
 );
 
+* set default livestock productivity to avoid division of zero in presolve.gms
+i70_livestock_productivity(t_all,i,sys)$(i70_livestock_productivity(t_all,i,sys)=0) = 0.02;
 
 * Switch to determine countries for which feed substitution scenarios shall be applied.
 * In the default case, the food scenario affects all countries when activated.

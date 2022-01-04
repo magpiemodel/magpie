@@ -45,7 +45,7 @@ $if "%c59_irrigation_scenario%" == "off" f59_cratio_irrigation(climate59,w,kcr) 
 * $offdelim
 * ;
 
-$setglobal c59_som_scenario  nocc
+$setglobal c59_som_scenario  cc
 *   options:  cc        (climate change)
 *             nocc      (no climate change)
 *             nocc_hist (no climate change after year defined by sm_fix_cc)
