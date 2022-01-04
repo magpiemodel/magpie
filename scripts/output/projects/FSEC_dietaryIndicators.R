@@ -30,7 +30,7 @@ if(!exists("source_include")) {
 }
 #########################################################################################
 
-print(paste0("Script started for output directory: ", outputdir))
+message("Script started for output directory: ", outputdir)
 
 old_wd <- getwd()
 on.exit(setwd(old_wd))
