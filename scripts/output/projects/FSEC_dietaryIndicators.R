@@ -16,7 +16,7 @@
 library(lucode2)
 library(magpie4)
 
-print("Start FSEC dietary indicators output runscript")
+message("Start FSEC dietary indicators output runscript")
 
 ############################# BASIC CONFIGURATION #######################################
 
