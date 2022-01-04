@@ -15,7 +15,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### removed
 
 ### fixed
-
+- **18_residues** off realization; missing variable declarations
+- **50_nr_soil_budget** off realization; missing variable declarations
+- **59_som** static realization; avoid division by zero
+- **62_material** exo_flexreg_apr16 realization; avoid division by zero
+- **80_optimization** nlp_par realization; bugfix i2 in submission loop
+- **scripts** calibration; set NA values to 1
 
 ## [4.4.0] - 2021-12-13
 
