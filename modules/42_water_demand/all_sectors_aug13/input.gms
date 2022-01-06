@@ -8,9 +8,9 @@
 scalars
 
 s42_watdem_nonagr_scenario         Scenario for non agricultural water demand from WATERGAP     (1)             / 1 /
-*                                                                                1: SSP 2
-*                                                                                2: A2
-*                                                                                3: B1
+*                                                                                1: SSP1
+*                                                                                2: SSP2
+*                                                                                3: SSP3
 
 s42_irrig_eff_scenario     Scenario for irrigation efficiency      (1)      / 2 /
 *                                      1: global static value
@@ -89,7 +89,7 @@ $include "./modules/42_water_demand/input/f42_wat_req_fao.csv"
 $offdelim
 /;
 
-table f42_watdem_ineldo(t_all,j,scen_watdem_nonagr,watdem_ineldo) Industry electricity and domestic water demand under our socioeconomic scenarios (mio. m^3)
+table f42_watdem_ineldo(t_all,j,scen_watdem_nonagr,watdem_ineldo) Manufacturing electricity and domestic water demand under different socioeconomic scenarios (mio. m^3)
 $ondelim
 $include "./modules/42_water_demand/input/watdem_nonagr_grper.cs3"
 $offdelim

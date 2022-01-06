@@ -13,7 +13,7 @@ sets
    / industry, electricity, domestic /
 
    scen_watdem_nonagr Scenarios for non agricultural water demand
-   / A2 , B1 , SSP2 /
+   / ssp1, ssp2, ssp3 /
 
 	scen42 Environmental Flow Policy (EFP)
   		/ off, on /

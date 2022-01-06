@@ -29,7 +29,7 @@ $endif
 ic42_wat_req_k(j,k) = i42_wat_req_k(t,j,k);
 ic42_env_flow_policy(i) = i42_env_flow_policy(t,i);
 
-* water consumption in industry, sanitation, ecosystem
+* water withdrawals in industry, sanitation, ecosystem
 * (assign s42_reserved_fraction to industry for simplicity)
 vm_watdem.fx("industry",j) = sum(wat_src, im_wat_avail(t,wat_src,j)) * s42_reserved_fraction;
 vm_watdem.fx("electricity",j) = 0;
@@ -52,7 +52,7 @@ vm_watdem.fx("ecosystem",j) = sum(cell(i,j), i42_env_flows_base(t,j) * (1-ic42_e
 * irrigation efficiency
 if(m_year(t) <= sm_fix_SSP2,
  v42_irrig_eff.fx(j) = 1/(1+2.718282**((-22160-sum(cell(i,j),im_gdp_pc_mer("y1995",i)))/37767));
-else 
+else
  if((s42_irrig_eff_scenario = 1),
  	v42_irrig_eff.fx(j) = s42_irrigation_efficiency;
  Elseif (s42_irrig_eff_scenario=2),
