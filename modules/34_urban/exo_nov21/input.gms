@@ -5,6 +5,9 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+$setglobal c34_urban_scenario  SSP2
+*   options:   SSP: "SSP1", "SSP2", "SSP3", "SSP4", "SSP5"
+
 
 scalars
   s34_urban_deviation_cost Artificial cost for urban deviation variables (USD05MER per ha) / 1e+06 /
