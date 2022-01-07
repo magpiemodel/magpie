@@ -237,7 +237,7 @@ sets
    wat_src Type of water source / surface, ground, technical, ren_ground /
 
 ***WATER DEMAND sectors***
-   wat_dem Water demand sectors / agriculture, manufacturing, electricity, domestic, ecosystem /
+   wat_dem Water demand sectors / agriculture, domestic, manufacturing, electricity, ecosystem /
 
 ***LAND POOLS***
    land Land pools
