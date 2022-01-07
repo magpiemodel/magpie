@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### removed
 
 ### fixed
+- **inputs** included data for Sudan
 - **18_residues** off realization; missing variable declarations
 - **50_nr_soil_budget** off realization; missing variable declarations
 - **59_som** static realization; avoid division by zero
