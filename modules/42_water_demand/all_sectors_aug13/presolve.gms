@@ -29,7 +29,7 @@ $endif
 ic42_wat_req_k(j,k) = i42_wat_req_k(t,j,k);
 ic42_env_flow_policy(i) = i42_env_flow_policy(t,i);
 
-* water withdrawals in industry, sanitation, ecosystem
+* water withdrawals in manufacturing, electricity, domestic, ecosystem
 * depends on the socioeconomic scenario
 if((s42_watdem_nonagr_scenario = 1),
  vm_watdem.fx(watdem_ineldo,j) = f42_watdem_ineldo(t,j,"ssp1",watdem_ineldo);
