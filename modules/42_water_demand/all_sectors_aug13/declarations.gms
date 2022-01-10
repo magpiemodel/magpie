@@ -18,7 +18,7 @@ parameters
 ;
 
 equations
- q42_water_demand(wat_dem,j)         Water consumption in different sectors (mio. m^3 per yr)
+ q42_water_demand(wat_dem,j)         Water withdrawals of different sectors (mio. m^3 per yr)
 ;
 
 positive variables
