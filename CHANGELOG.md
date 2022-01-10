@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### changed
  - **inputs** updated non-agricultural water use scenarios (watdem_nonagr_grper.cs3)
+ - **35_natveg** corrected naming of Frontier Forests (FF) to Intact Forest Landscapes (IFL) and changed input data for BH_IFL implementation.
 ### added
 
 ### removed
