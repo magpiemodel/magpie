@@ -33,7 +33,7 @@ model source code via the R package goxygen
 package and run the main function (goxygen) in the main folder of the model.
 The resulting documentation can be found in the folder "doc".
 
-Please find a set of tutorials here https://github.com/magpiemodel/tutorials.
+Please find a set of tutorials here https://magpiemodel.github.io/tutorials/.
 This guide will give you a brief technical introduction in how to install, run and use the model
 and how to analyse the model output.
 

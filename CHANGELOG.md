@@ -9,23 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
-
+ - **inputs** updated non-agricultural water use scenarios (watdem_nonagr_grper.cs3)
+ - **35_natveg** corrected naming of Frontier Forests (FF) to Intact Forest Landscapes (IFL) and changed input data for BH_IFL implementation.
 ### added
 
 ### removed
 
 ### fixed
+- **inputs** included data for Sudan
 - **18_residues** off realization; missing variable declarations
 - **50_nr_soil_budget** off realization; missing variable declarations
 - **59_som** static realization; avoid division by zero
 - **62_material** exo_flexreg_apr16 realization; avoid division by zero
 - **80_optimization** nlp_par realization; bugfix i2 in submission loop
 - **scripts** calibration; set NA values to 1
+- **scripts** fixed misleading warning in check_config
 
 ## [4.4.0] - 2021-12-13
 
 ### changed
-- **inputs** new default LPJmL version with growing season adaptation (gsadapt) on 
+- **inputs** new default LPJmL version with growing season adaptation (gsadapt) on
 - **51_nitrogen** parameter change in rescaled_jan21, now including regionalized climate-dependent leaching factors
 - **config** Update default configuration to new input data (especially cellular inputs) including all module realization updates (14_yield, 22_processing, 30_crop, 38_factor_costs, 39_landconversion). Moreover, climate impatcs (cc options for biophysical inputs) are activiated as default. New best_calib calibration routine is activated as default.
 - **config** peatland module on by default (cfg$gms$peatland <- "on")
@@ -47,7 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** recalibrate_realizations.R and recalibrate.R adjusted for land conversion cost calibration + default time steps for convenient validation of results
 - **scripts** start_functions adjustments for land conversion cost calibration
 - **scripts** start.R added SLURM medium as choice
-- **scripts** yield calibration, "best" setting uses factors from iteration with lowest standard deviation 
+- **scripts** yield calibration, "best" setting uses factors from iteration with lowest standard deviation
 - **14_yield** read-in file f14_yld_calib.csv if exists. Set default calibration factors to 1 in case f14_yld_calib.csv does not exist
 - **13_tc** different educated guess for vm_tau in 1995
 - **scaling** Update of scaling factors. removed duplicates
@@ -62,7 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** start/test_runs.R added SSP1, SSP2 and SSP5 as default test runs
 
 ### added
-- **34_urban** New exo_nov21 exogenous realization of urban land expansion 
+- **34_urban** New exo_nov21 exogenous realization of urban land expansion
 - **21_trade** Missing interface parameter for failing exo realization runs
 - **59_som** exogenous pathway for vm_nr_som via f59_som_exogenous
 - **config** Addition of a new scenario column (Tland) in scenario_config.csv
@@ -106,9 +109,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **15_food** New iteration needs to be started before setting food prices for curr_iter15
 - **scripts** scripts/output/extra/highres.R bugfixes
 - **38_factor_costs** units in sticky_feb18
-- **32_foresty** Global afforestation limit s32_max_aff_area was not effective in case of parallel optimization -> added option c32_max_aff_area, which allows to provide a file with regional limits for afforestation; 
+- **32_foresty** Global afforestation limit s32_max_aff_area was not effective in case of parallel optimization -> added option c32_max_aff_area, which allows to provide a file with regional limits for afforestation;
 - **73_timber** plausible cost for balance variable in case of s73_timber_demand_switch = 0 to avoid cost distortion
-- **56_ghg_policy** choose the correct scenario for fixing the GHG prices until sm_fix_SSP2 
+- **56_ghg_policy** choose the correct scenario for fixing the GHG prices until sm_fix_SSP2
 
 ## [4.3.5] - 2021-09-02
 
