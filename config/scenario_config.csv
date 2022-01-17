@@ -28,6 +28,7 @@ gms$c35_aolc_policy;;;;;;;;;;;;;none;npi;ndc;;;;;;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;
 gms$c35_protect_scenario;;;;WDPA;WDPA;WDPA;WDPA;WDPA;BH;WDPA;BH_IFL;BH;;;;;;;BH;;WDPA;WDPA;WDPA;WDPA;WDPA;BH_IFL;BH_IFL;BH_IFL;BH_IFL;BH_IFL;;;;;;;;;
 gms$c35_protect_scenario_noselect;;;;;;;;;;;;;;;;;;;;;;;;;;WDPA;WDPA;BH_IFL;WDPA;BH_IFL;;;;;;;;;
 gms$c35_forest_damage_end;;;;by2030;by2050;by2050;by2050;by2030;by2030;by2030;by2030;by2030;;;;;;;by2030;;by2030;by2050;by2050;by2050;by2030;by2030;by2030;by2030;by2030;by2030;;;;;;;;;
+gms$s42_watdem_nonagr_scenario;;;;1;2;3;2;1;1;1;3;1;;;;;;;;;;;;;;2;1;2;2;1;;;;;;;;;
 gms$s42_irrig_eff_scenario;;;;2;2;2;2;2;3;3;3;3;;;;;;;3;;1;1;1;1;1;3;3;3;3;3;;;;;;;;;
 gms$c42_env_flow_policy;;;;on;off;off;mixed;on;on;on;mixed;on;;;;;;;on;;on;off;off;mixed;on;on;on;on;on;on;;;;;;;;;
 gms$c44_price_bv_loss;;;;p0;p0;p0;p0;p0;p0;p10_p100;p0;p0;;;;;;;p0;;;;;;;;;;;;;;;;;;;;
