@@ -20,7 +20,7 @@ equations
  q34_urban_land(i)           Prescribe total regional urban land
  q34_urban_cost1(j)         Technical punishment equation
  q34_urban_cost2(j)         Technical punishment equation
- q34_bv_urban(j2,potnatveg)    Biodiversity value for urban land (Mha)
+ q34_bv_urban(j,potnatveg)    Biodiversity value for urban land (Mha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
