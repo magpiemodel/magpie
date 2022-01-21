@@ -13,13 +13,14 @@
 
 
 library(magpie4)
+library(yaml)
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
   outputdir    <-"."
 }
 
-load(paste0(outputdir, "/config.Rdata"))
+cfg <- yaml::read_yaml(file.path(outputdir, "config.yml"))
 hist       <- c(paste0(outputdir, "/validation.mif"), "input/validation.mif")
 file       <- paste0(outputdir, "/", cfg$title, "_validation.pdf")
 reportrds  <- paste0(outputdir, "/report.rds")

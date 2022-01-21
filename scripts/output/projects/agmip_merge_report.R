@@ -15,6 +15,7 @@ library(magclass)
 library(quitte)
 library(madrat)
 library(iamc)
+library(yaml)
 
 options(error=function()traceback(2))
 
@@ -37,7 +38,7 @@ for (i in 1:length(outputdir)) {
   rep<-file.path(outputdir[i],"agmip_report.mif")
   if(file.exists(rep)) {
     #get scenario name
-    load(file.path(outputdir[i],"config.Rdata"))
+    cfg <- yaml::read_yaml(file.path(outputdir[i], "config.yml"))
     scen <- cfg$title
     #Remove prefix starting with "V", like "V2"
     scen_parts <- unlist(strsplit(scen,"_"))
@@ -61,4 +62,3 @@ if(file.exists("output/agmip_report_full.csv")) {
   write.reportProject(mif="output/agmip_report_full.csv",mapping = system.file("extdata",mapping="variablemappingAgMIP.csv",package = "magpie4"), file = "output/agmip_report_subset.csv",format="AgMIP")
   #write.reportProject(mif="output/agmip_report_full.csv",mapping = "mapping_magpie_agmip.csv", file = "agmip_report_subset.csv",format="AgMIP")
 }
-

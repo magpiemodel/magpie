@@ -25,6 +25,7 @@
 library(lucode2)
 library(magpie4)
 library(luscale)
+library(yaml)
 
 ############################# BASIC CONFIGURATION #######################################
 land_lr_file     <- "avl_land_t.cs3"
@@ -45,7 +46,7 @@ if(!exists("source_include")) {
 }
 #########################################################################################
 
-load(paste0(outputdir, "/config.Rdata"))
+cfg <- yaml::read_yaml(file.path(outputdir, "config.yml"))
 title <- cfg$title
 print(title)
 

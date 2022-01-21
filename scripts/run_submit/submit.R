@@ -8,15 +8,13 @@
 library(magclass)
 library(lucode2)
 library(magpie4)
+library(yaml)
 
 #options(error=function()traceback(2))
 
-load("config.Rdata")
+cfg <- yaml::read_yaml("config.yml")
 
 maindir <- cfg$magpie_folder
-
-# write the config file in the output_folder: config.log
-write(capture.output(cfg), file="config.log")
 
 # Capture start time
 timeGAMSStart <- Sys.time()

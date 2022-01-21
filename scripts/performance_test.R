@@ -10,6 +10,7 @@ source("scripts/start_functions.R")
 
 performance_start <- function(cfg="default.cfg",modulepath="modules/",id="performance",sequential=NA) {
   require(lucode2)
+  require(yaml)
 
   if(!is.list(cfg)) {
     if(is.character(cfg)) {
@@ -116,7 +117,7 @@ performance_collect <- function(id="performance",results_folder="output/",plot=T
                        rows=ms["rows"],columns=ms["columns"],nonzeroes=ms["nonzeroes"],nlcode=ms["nlcode"],nlnonzeroes=ms["nlnonzeroes"])
     results <- rbind(results,tmp2)
   }
-  load(file.path(default,"config.Rdata"))
+  cfg <- yaml::read_yaml(file.path(default, "config.yml"))
   for(n in unique(results$module)) {
     ms <- .modelstats(default,colMeans=TRUE)
     tmp <- data.frame(module=n,realization=cfg$gms[[n]],default=TRUE,runtime=.gettime(file.path(default,paste0(default,".RData"))),infes=.infescheck(file.path(default,"fulldata.gdx")),

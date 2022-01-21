@@ -214,21 +214,16 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
 
   timePrepareStart <- Sys.time()
 
-  if (!requireNamespace("gms", quietly = TRUE)) {
-    stop("Package \"gms\" needed for this function to work. Please install it.",
-         call. = FALSE)
+  checkNamespace <- function(...) {
+    for(package in c(...)) {
+      if (!requireNamespace(package, quietly = TRUE)) {
+        stop("Package \"",package,"\" needed for this function to work. Please install it.",
+             call. = FALSE)
+      }
+    }
   }
 
-  if (!requireNamespace("lucode2", quietly = TRUE)) {
-    stop("Package \"lucode2\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
-
-  if (!requireNamespace("magclass", quietly = TRUE)) {
-    stop("Package \"magclass\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
-
+  checkNamespace("gms", "lucode2", "magclass", "yaml")
 
   Sys.setlocale(locale="C")
   maindir <- getwd()
@@ -435,8 +430,10 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   }
 
   cfg$magpie_folder <- getwd()
-
-  save(cfg, file=file.path(cfg$results_folder, "config.Rdata"))
+  # only store repository paths, not their credentials
+  cfg$repositories <- sapply(names(cfg$repositories,function(x) NULL)
+  # store config in human and machine readable form
+  yaml::write_yaml(cfg, file.path(cfg$results_folder, "config.yml"))
 
   gms::singleGAMSfile(mainfile=cfg$model, output=file.path(cfg$results_folder, "full.gms"))
   if(lock_model) {
@@ -449,7 +446,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   # Save run statistics to local file
   cat("Saving timePrepareStart and timePrepareEnd to runstatistics.rda\n")
   timePrepareEnd <- Sys.time()
-  lucode2::runstatistics(file             = paste0("runstatistics.rda"),
+  lucode2::runstatistics(file             = "runstatistics.rda",
                          timePrepareStart = timePrepareStart,
                          timePrepareEnd   = timePrepareEnd)
 

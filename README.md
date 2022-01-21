@@ -110,7 +110,8 @@ pkgs <- c("gdxrrw",
           "lusweave",
           "luscale",
           "goxygen",
-          "luplot")
+          "luplot",
+          "yaml")
 install.packages(pkgs)
 ```
 For post-processing model outputs *Latex* is required

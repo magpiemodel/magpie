@@ -26,6 +26,7 @@ library(data.table)
 library(ggrepel)
 library(patchwork)
 library(quitte)
+library(yaml)
 
 options(error=function()traceback(2))
 
@@ -62,7 +63,7 @@ for (i in 1:length(outputdir)) {
   gdx<-file.path(outputdir[i],"fulldata.gdx")
   rep<-file.path(outputdir[i],"report.rds")
   if(file.exists(gdx)) {
-    load(file.path(outputdir[i],"config.Rdata"))
+    cfg <- yaml::read_yaml(file.path(outputdir[i], "config.yml"))
     scen <- cfg$title
     prefix <- substring(scen, 1, 4)
 

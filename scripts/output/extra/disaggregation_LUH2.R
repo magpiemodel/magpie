@@ -14,6 +14,7 @@ library(lucode2)
 library(magpie4)
 library(luscale)
 library(madrat)
+library(yaml)
 
 ############################# BASIC CONFIGURATION ##############################
 if(!exists("source_include")) {
@@ -25,7 +26,7 @@ gdx                        <- file.path(outputdir,"fulldata.gdx")
 land_hr_file               <- file.path(outputdir,"avl_land_full_t_0.5.mz")
 urban_land_hr_file         <- file.path(outputdir,"f34_urbanland_0.5.mz")
 
-load(paste0(outputdir, "/config.Rdata"))
+cfg <- yaml::read_yaml(file.path(outputdir, "config.yml"))
 ################################################################################
 
 sizelimit <- getOption("magclass_sizeLimit")
@@ -153,36 +154,36 @@ crop_hr_shr <- land_hr_shr[,,"crop"]
   area     <- croparea(gdx, level="cell", products="kcr",
                        product_aggr=FALSE,water_aggr = water_aggr)
   area_shr <- area/(dimSums(area,dim=3) + 10^-10)
-  
+
   #Rename and aggregate crop types from MAgPIE to LUH2
   if (!is.null(map2crops)) area_shr <- madrat::toolAggregate(area_shr, map2crops, from="MAgPIE", to="LUH2",dim = 3.1)
-  
+
   # calculate crop area as share of total cell area
   crop_hr_shr <- crop_hr_shr[,getYears(area_shr),]
   area_shr_hr <- madrat::toolAggregate(area_shr, map, to="cell") * setNames(crop_hr_shr,NULL)
-  
+
   #check
   if (abs(sum(dimSums(area_shr_hr,dim=3)-crop_hr_shr,na.rm=T)) > 0.1) warning("large Difference in crop disaggregation detected!")
-  
+
   return(area_shr_hr)
 }
 crop_hr_shr <- .dissagCrop(gdx, crop_hr_shr, map=map_file)
 
 
-### Disaggregation Forestry 
+### Disaggregation Forestry
 forestry_hr_shr <- land_hr_shr[,,"forestry"]
 .dissagForestry <- function(gdx, forestry_hr_shr, map) {
   message("Disaggregation Forestry")
   area     <- dimSums(landForestry(gdx, level="cell"),dim="ac")
   area_shr <- area/(dimSums(area,dim=3) + 10^-10)
-  
+
   # calculate forestry area as share of total cell area
   forestry_hr_shr <- forestry_hr_shr[,getYears(area_shr),]
   area_shr_hr <- madrat::toolAggregate(area_shr, map, to="cell") * setNames(forestry_hr_shr,NULL)
-  
+
   #check
   if (abs(sum(dimSums(area_shr_hr,dim=3)-forestry_hr_shr,na.rm=T)) > 0.1) warning("large Difference in crop disaggregation detected!")
-  
+
   return(area_shr_hr)
 }
 forestry_hr_shr <- .dissagForestry(gdx, forestry_hr_shr, map=map_file)
