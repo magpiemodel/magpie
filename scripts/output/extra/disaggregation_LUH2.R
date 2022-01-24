@@ -14,7 +14,7 @@ library(lucode2)
 library(magpie4)
 library(luscale)
 library(madrat)
-library(yaml)
+library(gms)
 
 ############################# BASIC CONFIGURATION ##############################
 if(!exists("source_include")) {
@@ -26,7 +26,7 @@ gdx                        <- file.path(outputdir,"fulldata.gdx")
 land_hr_file               <- file.path(outputdir,"avl_land_full_t_0.5.mz")
 urban_land_hr_file         <- file.path(outputdir,"f34_urbanland_0.5.mz")
 
-cfg <- yaml::read_yaml(file.path(outputdir, "config.yml"))
+cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 ################################################################################
 
 sizelimit <- getOption("magclass_sizeLimit")

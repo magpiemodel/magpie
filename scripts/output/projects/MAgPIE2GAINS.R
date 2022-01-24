@@ -16,7 +16,7 @@
 library(lucode2)
 library(magpie4)
 library(MagpieNCGains)
-library(yaml)
+library(gms)
 
 print("Start GAINS reporting reg runscript")
 
@@ -34,7 +34,7 @@ if(!exists("source_include")) {
 
 print(paste0("script started for output directory ",outputdir))
 
-cfg <- yaml::read_yaml(file.path(outputdir, "config.yml"))
+cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 title <- cfg$title
 print("generating GAINS outputs for the run: ")
 print(title)

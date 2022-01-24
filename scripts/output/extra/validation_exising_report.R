@@ -12,7 +12,7 @@
 
 library(mip)
 library(magpie4)
-library(yaml)
+library(gms)
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
@@ -25,7 +25,7 @@ x <- NULL; i <- 1
 for(outputdir in outputdirs) {
   config <- file.path(outputdir,"config.yml")
   if(file.exists(config)) {
-    cfg <- yaml::read_yaml(config)
+    cfg <- gms::loadConfig(config)
     title <- cfg$title
   } else {
     title <- paste0("run",i)

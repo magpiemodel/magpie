@@ -16,7 +16,7 @@ library(lucode2)
 library(magpie4)
 library(luscale)
 library(madrat)
-library(yaml)
+library(gms)
 
 ############################# BASIC CONFIGURATION #######################################
 land_lr_file     <- "avl_land_t.cs3"
@@ -37,7 +37,7 @@ if(!exists("source_include")) {
 }
 #########################################################################################
 
-cfg <- yaml::read_yaml(file.path(outputdir, "config.yml"))
+cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 title <- cfg$title
 print(title)
 

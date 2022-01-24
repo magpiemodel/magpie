@@ -223,7 +223,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
     }
   }
 
-  checkNamespace("gms", "lucode2", "magclass", "yaml")
+  checkNamespace("gms", "lucode2", "magclass")
 
   Sys.setlocale(locale="C")
   maindir <- getwd()
@@ -236,7 +236,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
 
   # Apply scenario settings ans check configuration file for consistency
   if(!is.null(scenario)) cfg <- gms::setScenario(cfg,scenario)
-  cfg <- gms::check_config(cfg, extras = c("info", "repositories"))
+  cfg <- gms::check_config(cfg, extras = c("info", "repositories"), saveCheck = TRUE)
 
   # save model version
   cfg$info$version <- citation::read_cff("CITATION.cff")$version
@@ -431,9 +431,9 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
 
   cfg$magpie_folder <- getwd()
   # only store repository paths, not their credentials
-  cfg$repositories <- sapply(names(cfg$repositories,function(x) NULL)
+  cfg$repositories <- sapply(names(cfg$repositories),function(x) NULL)
   # store config in human and machine readable form
-  yaml::write_yaml(cfg, file.path(cfg$results_folder, "config.yml"))
+  gms::saveConfig(cfg, file.path(cfg$results_folder, "config.yml"))
 
   gms::singleGAMSfile(mainfile=cfg$model, output=file.path(cfg$results_folder, "full.gms"))
   if(lock_model) {

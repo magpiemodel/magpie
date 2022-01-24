@@ -17,7 +17,7 @@ library(magclass)
 library(luplot)
 library(magpie4)
 library(ggplot2)
-library(yaml)
+library(gms)
 
 options(error=function()traceback(2))
 
@@ -39,7 +39,7 @@ for (i in 1:length(outputdirs)) {
   gdx<-file.path(outputdirs[i],"fulldata.gdx")
   if(file.exists(gdx)) {
     #get scenario name
-    cfg <- yaml::read_yaml(file.path(outputdirs[i], "config.yml"))
+    cfg <- gms::loadConfig(file.path(outputdirs[i], "config.yml"))
     scen <- cfg$title
     #read-in reporting file
     x <- collapseNames(land(gdx,level="glo")[,,"forestry"])

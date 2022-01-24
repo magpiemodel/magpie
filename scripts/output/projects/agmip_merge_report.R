@@ -15,7 +15,7 @@ library(magclass)
 library(quitte)
 library(madrat)
 library(iamc)
-library(yaml)
+library(gms)
 
 options(error=function()traceback(2))
 
@@ -38,7 +38,7 @@ for (i in 1:length(outputdir)) {
   rep<-file.path(outputdir[i],"agmip_report.mif")
   if(file.exists(rep)) {
     #get scenario name
-    cfg <- yaml::read_yaml(file.path(outputdir[i], "config.yml"))
+    cfg <- gms::loadConfig(file.path(outputdir[i], "config.yml"))
     scen <- cfg$title
     #Remove prefix starting with "V", like "V2"
     scen_parts <- unlist(strsplit(scen,"_"))

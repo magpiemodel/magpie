@@ -100,7 +100,7 @@ pkgs <- c("gdxrrw",
           "citation",
           "curl",
           "gdx",
-          "gms",         # (>= 0.10)
+          "gms",         # (>= 0.11)
           "magclass",
           "madrat",
           "mip",
@@ -111,7 +111,7 @@ pkgs <- c("gdxrrw",
           "luscale",
           "goxygen",
           "luplot",
-          "yaml")
+          "yaml")        
 install.packages(pkgs)
 ```
 For post-processing model outputs *Latex* is required

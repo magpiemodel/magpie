@@ -18,7 +18,7 @@ library(magpie4)
 library(lucode2)
 library(gms)
 library(madrat)
-library(yaml)
+library(gms)
 options("magclass.verbosity" = 1)
 
 ############################# BASIC CONFIGURATION #############################
@@ -27,7 +27,7 @@ if(!exists("source_include")) {
   readArgs("outputdir")
 }
 
-cfg <- yaml::read_yaml(file.path(outputdir, "config.yml"))
+cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 gdx	<- file.path(outputdir,"fulldata.gdx")
 rds <- paste0(outputdir, "/report.rds")
 runstatistics <- paste0(outputdir,"/runstatistics.rda")

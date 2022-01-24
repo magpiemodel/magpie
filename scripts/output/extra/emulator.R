@@ -18,7 +18,7 @@ library(magpie)
 library(luplot)
 library(ggplot2)
 library(remulator)
-library(yaml)
+library(gms)
 
 ########################################################################################################
 ######################################## Define function ###############################################
@@ -26,7 +26,7 @@ library(yaml)
 
 collect_data_and_make_emulator <- function(outputdir,name_of_fit="linear") {
   require(gms)
-  cfg <- yaml::read_yaml(file.path(outputdir, "config.yml"))
+  cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 
   #setwd("~/Documents/0_GIT/magpie")
   #cfg<-list(title="SSP2-26-1")

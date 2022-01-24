@@ -8,11 +8,11 @@
 library(magclass)
 library(lucode2)
 library(magpie4)
-library(yaml)
+library(gms)
 
 #options(error=function()traceback(2))
 
-cfg <- yaml::read_yaml("config.yml")
+cfg <- gms::loadConfig("config.yml")
 
 maindir <- cfg$magpie_folder
 

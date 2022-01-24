@@ -15,7 +15,7 @@
 ## Load necessary libraries
 library(lucode2)
 library(magpie4)
-library(yaml)
+library(gms)
 
 ## Check outputdir
 if(!exists("source_include")) {
@@ -28,7 +28,7 @@ runstatistics <- paste0(outputdir,"/runstatistics.rda")
 gdx <- paste0(outputdir,"/fulldata.gdx")
 
 ## Load run config
-cfg <- yaml::read_yaml(file.path(outputdir, "config.yml"))
+cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 
 ## Load runstatistics
 load(runstatistics)
