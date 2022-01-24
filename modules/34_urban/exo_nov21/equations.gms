@@ -9,7 +9,7 @@
 *' Cellular level land is prescribed via a very strong incentive not to deviate
 *' from cellular input data. v34_cost1 and v34_cost2 are the cost variables that
 *' implement this, for when vm_land(j2,"urban") is less than and greater than the input data
-*'  i.e. when reducing or establishing more urban land than in input.This safeguards against infeasible outcomes,
+*'  i.e. when reducing or establishing more urban land than in input. This safeguards against infeasible outcomes,
 *'  where urban land should expand but can not due to NPI or other protected land constraints. In this case it incurs the cost and shifts the land elsewhere in the region.
 
 
