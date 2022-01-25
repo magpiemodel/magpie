@@ -14,6 +14,7 @@ library(lucode2)
 library(magpie4)
 library(luscale)
 library(madrat)
+library(gms)
 
 ############################# BASIC CONFIGURATION ##############################
 if(!exists("source_include")) {
@@ -30,7 +31,7 @@ croparea_hr_share_out_file <- file.path(outputdir,"cell.croparea_0.5_share.mz")
 land_hr_split_file         <- file.path(outputdir,"cell.land_split_0.5.mz")
 land_hr_shr_split_file     <- file.path(outputdir,"cell.land_split_0.5_share.mz")
 
-load(paste0(outputdir, "/config.Rdata"))
+cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 ################################################################################
 
 if(length(map_file)==0) stop("Could not find map file!")
