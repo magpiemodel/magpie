@@ -10,7 +10,6 @@ source("scripts/start_functions.R")
 
 performance_start <- function(cfg="default.cfg",modulepath="modules/",id="performance",sequential=NA) {
   require(lucode2)
-  require(yaml)
 
   if(!is.list(cfg)) {
     if(is.character(cfg)) {
