@@ -6,8 +6,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 vm_carbon_stock.fx(j,"urban",c_pools) = 0;
-*' Biodiversity value (BV)
-vm_bv.fx(j,"urban", potnatveg) = pcm_land(j,"urban") * fm_bii_coeff("urban",potnatveg) * fm_luh2_side_layers(j,potnatveg);
 
 if(ord(t) = 1,
 	vm_land.fx(j,"urban") = i34_urban_area(t,j);
