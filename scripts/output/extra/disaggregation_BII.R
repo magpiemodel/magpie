@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2022 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -54,7 +54,7 @@ side_layers_hr  <- toolCell2isoCell(read.magpie(side_layers))
 landarea        <- dimSums(land_ini_hr, dim = 3)
 side_layers_lr  <- toolAggregate(x = side_layers_hr, rel = mapping, weight = landarea, from = "cell", to = "cluster")
 
-# Aggregated otherland
+# Aggregate other land
 land_ini_hr  <- mbind(land_ini_hr[, , c("primother", "secdother"), invert = TRUE],
                       setNames(dimSums(land_ini_hr[, , c("primother", "secdother")], dim = 3),
                                nm = "other"))
