@@ -31,4 +31,5 @@ q34_urban_land(i2) ..
             sum(cell(i2,j2), vm_land(j2,"urban")) =e= sum((ct,cell(i2,j2)), i34_urban_area(ct,j2));
 
 *' Biodiversity value (BV)
- q34_bv_urban(j2,potnatveg).. vm_bv(j2,"urban", potnatveg) = vm_land(j2,"urban") * fm_bii_coeff("urban",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
+ q34_bv_urban(j2,potnatveg) .. 
+ vm_bv(j2,"urban", potnatveg) =e= vm_land(j2,"urban") * fm_bii_coeff("urban",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
