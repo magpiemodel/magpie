@@ -27,7 +27,7 @@ land_hr_file       <- file.path(outputdir,"avl_land_full_t_0.5.mz")
 urban_land_hr_file <- file.path(outputdir,"f34_urbanland_0.5.mz")
 side_layers        <- file.path(outputdir, "luh2_side_layers_0.5.mz")
 
-load(paste0(outputdir, "/config.Rdata"))
+cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 ################################################################################
 
 sizelimit <- getOption("magclass_sizeLimit")
