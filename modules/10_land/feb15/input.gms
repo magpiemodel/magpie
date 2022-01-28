@@ -16,3 +16,9 @@ $ondelim
 $include "./modules/10_land/input/luh2_side_layers.cs3"
 $offdelim
 ;
+
+table f10_LUH2v2(t_all,j,f10_luh) Different land type areas (mio. ha)
+$ondelim
+$include "./modules/10_land/input/fm_LUH2v2.cs3"
+$offdelim
+;

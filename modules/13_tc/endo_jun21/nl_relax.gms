@@ -7,4 +7,4 @@
 
 * ### nl_relax ###
 
-vm_tau.l(h) = vm_tau.l(h) + 0.1;
+vm_tau.l(h,tautype) = vm_tau.l(h,tautype) + 0.1;

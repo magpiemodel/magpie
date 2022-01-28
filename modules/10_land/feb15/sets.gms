@@ -7,7 +7,7 @@
 
 sets
   t_ini10  Time periods with land initialization data
-       / y1995, y2000, y2005, y2010, y2015 /
+  / y1995, y2000, y2005, y2010, y2015 /
 
   luh2_side_layers10 side layers from LUH2
 	/ manpast, rangeland, primveg, secdveg, forested, nonforested /
@@ -15,5 +15,10 @@ sets
   potnatveg(luh2_side_layers10) potentially forested biomes
 	/ forested, nonforested /
 
-;
+  f10_luh LHUv2 land cover types
+  / primf, primn, secdf, secdn, urban, c3ann, c4ann, c3per, c4per, c3nfx, pastr, range /
 
+  grassland(f10_luh) Grassland cover types (pastr = managed pastures and range = rangelands)
+  / pastr, range /
+
+;

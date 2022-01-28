@@ -14,4 +14,5 @@ pm_land_start(j,land)$(pm_land_start(j,land)<0) = 0;
 pcm_land(j,land) = pm_land_start(j,land);
 vm_land.l(j,land) = pcm_land(j,land);
 
+pcm_grass(j,grassland) = f10_LUH2v2("y1995",j,grassland);
 *** EOF pre.gms ***

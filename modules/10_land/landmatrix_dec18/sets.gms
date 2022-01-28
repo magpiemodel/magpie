@@ -20,4 +20,11 @@ sets
 
     potnatveg(luh2_side_layers10) potentially forested biomes
 	/ forested, nonforested /
+  
+  f10_luh LHUv2 land cover types
+  / primf, primn, secdf, secdn, urban, c3ann, c4ann, c3per, c4per, c3nfx, pastr, range /
+
+  grassland(f10_luh) Grassland cover types (pastr = managed pastures and range = rangelands)
+  / pastr, range /
+
 ;

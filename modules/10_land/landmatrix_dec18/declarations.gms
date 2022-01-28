@@ -8,6 +8,7 @@
 parameters
  pm_land_start(j,land)         Land initialization area (mio. ha)
  pcm_land(j,land)              Land area in previous time step (mio. ha)
+ pcm_grass(j,grassland)           Grassland areas in previous time step (mio. ha)
 ;
 
 variables
