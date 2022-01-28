@@ -7,7 +7,7 @@
 
 scalars
 
-s42_watdem_nonagr_scenario         Scenario for non agricultural water demand from WATERGAP     (1)             / 1 /
+s42_watdem_nonagr_scenario         Scenario for non agricultural water demand from WATERGAP     (1)             / 2 /
 *                                                                                1: SSP1
 *                                                                                2: SSP2
 *                                                                                3: SSP3
