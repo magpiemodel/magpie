@@ -1,0 +1,6 @@
+title;start;mag_scen;co2tax_name;co2tax_2025
+2;1;SSP2,NPI;Base;C_SSP2-Base-rem-5
+3;0;SSP2,NDC;NDC;C_SSP2-NDC-rem-5
+4;0;SSP2,NDC;PkBudg1300;C_SSP2-PkBudg1300-rem-5
+5;0;SSP2,NDC;PkBudg1100;C_SSP2-PkBudg1100-rem-5
+5;0;SSP2,NDC;PkBudg900;C_SSP2-PkBudg900-rem-5

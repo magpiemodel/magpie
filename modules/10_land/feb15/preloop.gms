@@ -1,15 +1,12 @@
-*** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
-*** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3
-*** or later. See LICENSE file or go to http://www.gnu.org/licenses/
-*** Contact: magpie@pik-potsdam.de
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
+*** |  Contact: magpie@pik-potsdam.de
 
-*maybe move this part to preprocessing?
-*calculate forest and other land based on carbon density threshold; forest if carbon density > 20 tC/ha, other land if carbon density <= 20 tC/ha
-pm_land_start(j,land,si) = f10_land(j,land,si);
 
-*due to some rounding errors the input data currently may contain in some cases
-*very small, negative numbers. These numbers have to be set to 0 as area
-*cannot be smaller than 0!
-pm_land_start(j,land,si)$(pm_land_start(j,land,si)<0) = 0;
-pcm_land(j,land,si) = pm_land_start(j,land,si);
+vm_cost_land_transition.fx(j) = 0;
+
+vm_croplandexpansion.fx(j,land) = 0;
+vm_croplandreduction.fx(j,land) = 0;

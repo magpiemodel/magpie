@@ -1,23 +1,27 @@
-*** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
-*** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
-*** or later. See LICENSE file or go to http://www.gnu.org/licenses/
-*** Contact: magpie@pik-potsdam.de
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
+*** |  Contact: magpie@pik-potsdam.de
 
 positive variables
- vm_prod(j,k)                    production in each cell (mio. ton DM)
- vm_prod_reg(i,kall)                regional aggregated production (mio. ton DM)
+ vm_prod(j,k)                    Production in each cell (mio. tDM per yr)
+ vm_prod_reg(i,kall)             Regional aggregated production (mio. tDM per yr)
 ;
 
 equations
- q17_prod_reg(i,k)               regional production
+ q17_prod_reg(i,k)               Regional production (mio. tDM per yr)
+;
+
+parameters
+pm_prod_init(j,kcr)               Production initialization for year 1995 (tDM per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_prod(t,j,k,type)        production in each cell (mio. ton DM)
- ov_prod_reg(t,i,kall,type) regional aggregated production (mio. ton DM)
- oq17_prod_reg(t,i,k,type)  regional production
+ ov_prod(t,j,k,type)        Production in each cell (mio. tDM per yr)
+ ov_prod_reg(t,i,kall,type) Regional aggregated production (mio. tDM per yr)
+ oq17_prod_reg(t,i,k,type)  Regional production (mio. tDM per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
-

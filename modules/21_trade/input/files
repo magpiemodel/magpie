@@ -1,4 +1,10 @@
 * list of files that are required here
-f21_trade_bal_red_annual_fragmented.csv
-f21_trade_bal_red_annual_globalized.csv
-f21_trade_bal_red_annual_regionalized.csv
+f21_trade_self_suff.cs3
+f21_trade_export_share.cs3
+f21_trade_balanceflow.cs3
+f21_trade_margin.cs3
+f21_trade_tariff.cs3
+f21_trade_tariff_export.cs3
+f21_trade_tariff_import.cs3       
+f21_trade_bal_reduction.cs3
+f21_trade_balance.cs3

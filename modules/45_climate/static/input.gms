@@ -1,12 +1,13 @@
-*** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
-*** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
-*** or later. See LICENSE file or go to http://www.gnu.org/licenses/
-*** Contact: magpie@pik-potsdam.de
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
+*** |  Contact: magpie@pik-potsdam.de
 
 
 
-table f45_koeppengeiger(j,clcl) Koeppen-Geiger climate classification data as shares of cell (-)
+table pm_climate_class(j,clcl) Koeppen-Geiger climate classification on the simulation cluster level (1)
 $ondelim
 $include "./modules/45_climate/static/input/koeppen_geiger.cs3"
 $offdelim;

@@ -1,0 +1,34 @@
+
+#ignore files created for a magpie calibration run
+/calib_run/
+magpie_calib.*
+
+#ignore input files
+*.cs*
+*.mz
+*.rds
+/input/
+
+#ignore outputs
+*.gdx
+*.rda
+*.opt
+*.op2
+*.lst
+/output/
+
+#ignore R support files
+.Rhistory
+
+#ignore documentation folder
+/doc/
+
+#ignore run specific files and folders
+/225*/
+/run_details/
+*.out
+/scripts/npi_ndc/npi_ndc_overview.txt
+Rplots.pdf
+
+#ignore GAMS license
+gamslice.txt
