@@ -7,13 +7,18 @@
 
 loop(t,
  if(m_year(t) <= sm_fix_SSP2,
-  i13_tc_factor(t) = f13_tc_factor(t,"medium");
-  i13_tc_exponent(t) = f13_tc_exponent(t,"medium");
+  i13_tc_factor(t, tautype) = f13_tc_factor(t,"medium");
+  i13_tc_exponent(t,tautype) = f13_tc_exponent(t,"medium");
  else
-  i13_tc_factor(t) = f13_tc_factor(t,"%c13_tccost%");
-  i13_tc_exponent(t) = f13_tc_exponent(t,"%c13_tccost%");
+*Managed pastures
+  i13_tc_factor(t, "pastr") = f13_tc_factor(t,"%c13_tccost_mpastr%");
+  i13_tc_exponent(t,"pastr") = f13_tc_exponent(t,"%c13_tccost_mpastr%");
+*Croplands
+  i13_tc_factor(t,"crop") = f13_tc_factor(t,"%c13_tccost%");
+  i13_tc_exponent(t,"crop") = f13_tc_exponent(t,"%c13_tccost%");
  );
 );
 
-pcm_tau(h)      = fm_tau1995(h);
-pc13_tcguess(h)  = f13_tcguess(h);
+pcm_tau(h,"crop")      = fm_tau1995(h);
+pcm_tau(h,"pastr")      = f13_pastr_tau_hist("y1995",h);
+pc13_tcguess(h,tautype)  = f13_tcguess(h);

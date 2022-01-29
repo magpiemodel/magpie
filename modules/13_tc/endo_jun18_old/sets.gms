@@ -5,6 +5,11 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* ### nl_relax ###
+sets
 
-vm_tau.l(h,tautype) = vm_tau.l(h,tautype) + 0.1;
+	scen13 tc cost scenario
+  	  /low, medium, high/
+
+;
+
+*** EOF sets.gms ***

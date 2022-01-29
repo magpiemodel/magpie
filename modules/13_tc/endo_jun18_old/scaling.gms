@@ -5,6 +5,5 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* ### nl_fix ###
-
-vm_tau.fx(h,tautype) = max(vm_tau.lo(h,tautype), min(vm_tau.up(h,tautype), vm_tau.l(h,tautype)));
+v13_cost_tc.scale(i) = 10e6;
+vm_tech_cost.scale(i) = 10e3;

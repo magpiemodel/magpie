@@ -25,6 +25,7 @@ $offdelim
 /;
 
 $setglobal c13_tccost  medium
+$setglobal c13_tccost_mpastr  medium
 
 table f13_tc_factor(t_all,scen13) Regression factor (USD05PPP per ha)
 $ondelim
@@ -41,5 +42,11 @@ $offdelim
 table f13_tau_historical(t_all,h) historical tau scenario (1)
 $ondelim
 $include "./modules/13_tc/input/f13_tau_historical.csv"
+$offdelim
+;
+
+table f13_pastr_tau_hist(t_all,h) historical managed pasture tau scenario marcos_develop (1)
+$ondelim
+$include "./modules/13_tc/input/f13_pastr_tau_hist.csv"
 $offdelim
 ;

@@ -41,15 +41,15 @@
 
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/13_tc/endo_jun21/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/13_tc/endo_jun21/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/13_tc/endo_jun21/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/13_tc/endo_jun21/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/13_tc/endo_jun21/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/13_tc/endo_jun21/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/13_tc/endo_jun21/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/13_tc/endo_jun21/postsolve.gms"
-$Ifi "%phase%" == "nl_fix" $include "./modules/13_tc/endo_jun21/nl_fix.gms"
-$Ifi "%phase%" == "nl_release" $include "./modules/13_tc/endo_jun21/nl_release.gms"
-$Ifi "%phase%" == "nl_relax" $include "./modules/13_tc/endo_jun21/nl_relax.gms"
+$Ifi "%phase%" == "sets" $include "./modules/13_tc/endo_jun18_old/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/13_tc/endo_jun18_old/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/13_tc/endo_jun18_old/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/13_tc/endo_jun18_old/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/13_tc/endo_jun18_old/scaling.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/13_tc/endo_jun18_old/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/13_tc/endo_jun18_old/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/13_tc/endo_jun18_old/postsolve.gms"
+$Ifi "%phase%" == "nl_fix" $include "./modules/13_tc/endo_jun18_old/nl_fix.gms"
+$Ifi "%phase%" == "nl_release" $include "./modules/13_tc/endo_jun18_old/nl_release.gms"
+$Ifi "%phase%" == "nl_relax" $include "./modules/13_tc/endo_jun18_old/nl_relax.gms"
 *######################## R SECTION END (PHASES) ###############################

@@ -158,13 +158,13 @@ $title magpie
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev4.07.tgz
-* md5sum: accf653e73cbfd02354158d3b99b046f
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Used data set: additional_data_rev4.08.tgz
+* md5sum: d5ef6b0e76748e9347361f5d87a4cba6
+* Repository: C:/magpie_inputdata/output
 * 
-* Used data set: calibration_H12_sticky_feb18_free_30Nov21.tgz
-* md5sum: f9ee7b8955713d8bd860cb65374d1958
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Used data set: calibration_H12_sticky_feb18_free_18Jan22.tgz
+* md5sum: 32def190ea1b517a1ff160b6c5c55bd4
+* Repository: C:/magpie_inputdata/output
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -190,7 +190,7 @@ $title magpie
 * * Call: do.call(functiononly, args)
 * 
 * 
-* Last modification (input data): Fri Jan 21 11:08:10 2022
+* Last modification (input data): Fri Jan 28 15:48:10 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -214,7 +214,7 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  2
+$setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
 $setglobal c_title  default
 
