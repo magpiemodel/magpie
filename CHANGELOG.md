@@ -13,8 +13,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **inputs** updated non-agricultural water use scenarios (watdem_nonagr_grper.cs3)
  - **35_natveg** corrected naming of Frontier Forests (FF) to Intact Forest Landscapes (IFL) and changed input data for BH_IFL implementation.
  - **scripts** replaced redundant files config.log and config.Rdata with a config.yml
+ - **costs** change vm_tech_cost to sum over tau types ('tautype' set)
+ - **yield** add new set to vm_tau variable.
+
 
 ### added
+ - **tc** added new set 'tautype' spliting tau between croplands and managed pastures; New input file f13_pastr_tau_hist.csv
+ - **land** added new input file fm_LUH2v2.cs3; Added pcm_grass parameter; Added new sets 'f10_luh' and 'grassland'.
 
 ### removed
 
