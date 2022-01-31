@@ -145,53 +145,53 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
+*
 * Used data set: rev4.67_h12_magpie.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
+*
 * Used data set: rev4.67_h12_1998ea10_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
+*
 * Used data set: rev4.67_h12_validation.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
+*
 * Used data set: additional_data_rev4.08.tgz
 * md5sum: d5ef6b0e76748e9347361f5d87a4cba6
-* Repository: C:/magpie_inputdata/output
-* 
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+*
 * Used data set: calibration_H12_sticky_feb18_free_18Jan22.tgz
 * md5sum: 32def190ea1b517a1ff160b6c5c55bd4
 * Repository: C:/magpie_inputdata/output
-* 
+*
 * Low resolution: c200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *     6   23    7    6    1   43   27    7   11   12   37   20
-* 
+*
 * Regionscode: 62eff8f7
-* 
+*
 * Regions data revision: 4.67
-* 
+*
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
 * * Revision: 4.67
-* 
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
 * * Regionscode: 62eff8f7
 * * Call: do.call(functiononly, args)
-* 
-* 
+*
+*
 * Last modification (input data): Fri Jan 28 15:48:10 2022
-* 
+*
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
