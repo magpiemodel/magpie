@@ -14,12 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **35_natveg** corrected naming of Frontier Forests (FF) to Intact Forest Landscapes (IFL) and changed input data for BH_IFL implementation.
  - **scripts** replaced redundant files config.log and config.Rdata with a config.yml
  - **costs** change vm_tech_cost to sum over tau types ('tautype' set)
- - **yield** add new set to vm_tau variable.
+ - **yield** add the new tau set  ('tautype' set) to the vm_tau variable.
 
 
 ### added
- - **tc** added new set 'tautype' spliting tau between croplands and managed pastures; New input file f13_pastr_tau_hist.csv
- - **land** added new input file fm_LUH2v2.cs3; Added pcm_grass parameter; Added new sets 'f10_luh' and 'grassland'.
+ - **tc** added new set 'tautype' splitting tau between croplands and managed pastures; Added New input file f13_pastr_tau_hist.csv with historical managed pastures tau.
+ - **land** added new a new input file fm_LUH2v2.cs3 for historical separation between managed pastures and rangelands;  Added two new sets 'f10_luh' to store fm_LUH2v2 land use cover types and 'grassland' for grassland cover types. Added pcm_grass parameter to store grassland areas in previous time steps (t-1) used for tc cost calculations
 
 ### removed
 

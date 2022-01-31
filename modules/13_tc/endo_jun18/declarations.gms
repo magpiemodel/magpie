@@ -17,11 +17,11 @@ equations
 ;
 
 parameters
- pc13_land(i, tautype)                Crop land area per region (mio ha)
+ pc13_land(i, tautype)                Crop and grass land area per region (mio ha)
  pcm_tau(h, tautype)                  Tau factor of the previous time step (1)
  pc13_tcguess(h, tautype)             Guess for annual tc rates in the next time step (1)
  i13_tc_factor(t, tautype)            Regression factor (USD05PPP per ha)
- i13_tc_exponent(t,tautype)          Regression exponent (1)
+ i13_tc_exponent(t,tautype)           Regression exponent (1)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
