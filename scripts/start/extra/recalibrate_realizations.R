@@ -31,7 +31,9 @@ for(r in realizations){
       cfg$results_folder <- "output/:title:"
       cfg$recalibrate <- TRUE
       cfg$recalibrate_landconversion_cost <- "ifneeded"
-      cfg$title <- paste("calib_run",r,t,sep="_")
+
+      cfg$title <- if(r == "sticky_feb18") paste("calib_run",r,t,sep="_")  else paste("calib_run",r,sep="_") 
+
       cfg$output <- c("rds_report","validation_short")
       cfg$force_replace <- TRUE
 
