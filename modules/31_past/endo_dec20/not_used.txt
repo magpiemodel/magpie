@@ -6,10 +6,6 @@
 # |  Contact: magpie@pik-potsdam.de
 
 name,type,reason
-vm_prod, input, not needed
-vm_yld, input, not needed
-vm_prod_reg,input,questionnaire
-vm_landexpansion,input,questionnaire
-vm_landreduction,input,questionnaire
-vm_tau,input,questionnaire
-fm_pastr_tau_hist,input,questionnaire
+pcm_land, input, not needed
+vm_prod_reg, variable, not needed
+vm_yld,  variable, not needed

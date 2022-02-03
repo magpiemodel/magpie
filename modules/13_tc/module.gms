@@ -22,6 +22,7 @@
 *' @authors Jan Philipp Dietrich, Christoph Schmitz, Benjamin Bodirsky, Florian Humpenoeder
 
 *###################### R SECTION START (MODULETYPES) ##########################
+$Ifi "%tc%" == "endo_jan22" $include "./modules/13_tc/endo_jan22/realization.gms"
 $Ifi "%tc%" == "endo_jun18" $include "./modules/13_tc/endo_jun18/realization.gms"
 $Ifi "%tc%" == "exo" $include "./modules/13_tc/exo/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
