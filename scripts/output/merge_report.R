@@ -16,6 +16,7 @@
 library(lucode2)
 library(magclass)
 library(quitte)
+library(gms)
 
 options(error=function()traceback(2))
 
@@ -38,7 +39,7 @@ for (i in 1:length(outputdir)) {
   rep<-file.path(outputdir[i],"report.mif")
   if(file.exists(rep)) {
     #get scenario name
-    load(file.path(outputdir[i],"config.Rdata"))
+    cfg <- gms::loadConfig(file.path(outputdir[i], "config.yml"))
     scen <- cfg$title
     #read-in reporting file
     a <- read.report(rep,as.list = FALSE)

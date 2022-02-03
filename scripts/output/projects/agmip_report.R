@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: extract agmip-report in rds format from run 
+# description: extract agmip-report in rds format from run
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
@@ -14,6 +14,7 @@ library(magclass)
 library(magpie4)
 library(lucode2)
 library(quitte)
+library(gms)
 options("magclass.verbosity" = 1)
 
 ############################# BASIC CONFIGURATION #############################
@@ -22,7 +23,7 @@ if(!exists("source_include")) {
   readArgs("outputdir")
 }
 
-load(paste0(outputdir, "/config.Rdata"))
+cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 gdx	<- file.path(outputdir,"fulldata.gdx")
 mif <- paste0(outputdir, "/agmip_report.mif")
 rds <- paste0(outputdir, "/agmip_report.rds")
