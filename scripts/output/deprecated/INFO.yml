@@ -1,0 +1,4 @@
+type: output script
+description: Deprecated scripts
+note: Scripts in this selection are deprecated and will soon be removed.
+position: 10.0

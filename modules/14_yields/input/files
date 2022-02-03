@@ -1,3 +1,7 @@
 * list of files that are required here
 lpj_yields.cs3
 f14_yld_calib.csv
+lpj_yields_0.5.mz
+f14_pasture_yields_hist.csv
+f14_ipcc_bce.cs3
+f14_aboveground_fraction.csv

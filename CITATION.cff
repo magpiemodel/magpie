@@ -1,0 +1,127 @@
+cff-version: 1.0.3
+message: If you use this model, please cite it as below.
+authors:
+  - family-names: Dietrich
+    given-names: Jan Philipp
+    orcid: https://orcid.org/0000-0002-4309-6431
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: dietrich@pik-potsdam.de
+
+  - family-names: Bodirsky
+    given-names: Benjamin Leon
+    orcid: https://orcid.org/0000-0002-8242-6712
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: bodirsky@pik-potsdam.de
+
+  - family-names: Weindl
+    given-names: Isabelle
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: weindl@pik-potsdam.de
+
+  - family-names: Humpenöder
+    given-names: Florian
+    orcid: https://orcid.org/0000-0003-2927-9407
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: humpenoeder@pik-potsdam.de
+
+  - family-names: Stevanovic
+    given-names: Miodrag
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: stevanovic@pik-potsdam.de
+
+  - family-names: Kreidenweis
+    given-names: Ulrich
+    affiliation: "Potsdam Institute for Climate Impact Research"
+
+  - family-names: Wang
+    given-names: Xiaoxi
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: wang@pik-potsdam.de
+
+  - family-names: Karstens
+    given-names: Kristine
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: karstens@pik-potsdam.de
+
+  - family-names: Mishra
+    given-names: Abhijeet
+    orcid: https://orcid.org/0000-0002-8287-9922
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: mishra@pik-potsdam.de
+
+  - family-names: Beier
+    given-names: Felicitas Dorothea
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: beier@pik-potsdam.de
+
+  - family-names: Molina Bacca
+    given-names: Edna Johanna
+    orcid: https://orcid.org/0000-0001-6530-1849
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: mbacca@pik-potsdam.de
+
+  - family-names: von Jeetze
+    given-names: Patrick
+    orcid: https://orcid.org/0000-0002-1197-4412
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: vjeetze@pik-potsdam.de
+
+  - family-names: Windisch
+    given-names: Michael
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: windisch@pik-potsdam.de
+
+  - family-names: Crawford
+    given-names: Michael Scott
+    orcid: https://orcid.org/0000-0003-1282-400X
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: crawford@pik-potsdam.de
+
+  - family-names: Klein
+    given-names: David
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: dklein@pik-potsdam.de
+
+  - family-names: Singh
+    given-names: Vartika
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: vasingh@pik-potsdam.de
+
+  - family-names: Ambrósio
+    given-names: Geanderson
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: ambrosio@pik-potsdam.de
+
+  - family-names: Araujo
+    given-names: Ewerton
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: araujo@pik-potsdam.de
+
+  - family-names: Biewald
+    given-names: Anne
+    affiliation: "Potsdam Institute for Climate Impact Research"
+
+  - family-names: Lotze-Campen
+    given-names: Hermann
+    orcid: https://orcid.org/0000-0002-0003-5508
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: lotze-campen@pik-potsdam.de
+
+  - family-names: Popp
+    given-names: Alexander
+    orcid: https://orcid.org/0000-0001-9500-1986
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: popp@pik-potsdam.de
+
+title: MAgPIE - An Open Source land-use modeling framework
+version: 4.4.0dev
+date-released: 2021-12-13
+repository-code: https://github.com/magpiemodel/magpie
+keywords:
+  - landuse
+  - modeling
+  - nlp
+  - partial equilibrium
+doi: 10.5281/zenodo.1418752
+license: AGPL-3.0-or-later
+url: https://github.com/magpiemodel/magpie

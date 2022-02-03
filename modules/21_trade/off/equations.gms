@@ -1,11 +1,13 @@
-*** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
-*** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
-*** or later. See LICENSE file or go to http://www.gnu.org/licenses/
-*** Contact: magpie@pik-potsdam.de
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
+*** |  Contact: magpie@pik-potsdam.de
 
+*' @equations
+*' For all commodites, the regional supply should be larger or equal to the
+*' regional demand.
 
-*****************************REGIONAL CONSTRAINTS*******************************
- q21_notrade(i2,k)..    vm_prod_reg(i2,k)
-                               =g=
-                               vm_supply(i2,k);
+q21_notrade(h2,kall)..
+  sum(supreg(h2,i2),vm_prod_reg(i2,kall)) =g= sum(supreg(h2,i2), vm_supply(i2,kall));

@@ -1,39 +1,34 @@
-*** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
-*** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
-*** or later. See LICENSE file or go to http://www.gnu.org/licenses/
-*** Contact: magpie@pik-potsdam.de
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
+*** |  Contact: magpie@pik-potsdam.de
 
 parameters
- p41_cost_AEI_past(t,i)            costs for AEI expansion from the past (million US$)
- pc41_cost_AEI_past(i)             current costs for AEI expansion from the past (million US$)
- p41_AEI_start(t,j)            Area equipped for irrigation at the beginning of each timestep (mio ha)
- pc41_AEI_start(j)             Area equipped for irrigation at the beginning of current timestep (mio ha)
- pc41_unitcost_AEI(i)          unitcost of AEI expansion (US$ per ha)
+ p41_AEI_start(t,j)              Area equipped for irrigation at the beginning of each time step (mio. ha)
+ pc41_AEI_start(j)               Area equipped for irrigation at the beginning of current time step (mio. ha)
+ pc41_unitcost_AEI(i)            Unit cost of AEI expansion (USD04MER per ha)
 ;
 
 variables
- vm_cost_AEI(i)                irrigation expansion costs (mio. US$)
- v41_cost_AEI_annuity(i)       annuity costs of AEI expansion in the current timestep (mio. US$)
+ vm_cost_AEI(i)                  Annuitized irrigation expansion costs (mio. USD04MER per yr)
 ;
 
 positive variables
- v41_AEI(j)                    area equipped for irrigation in each gridcell (mio ha.)
+ v41_AEI(j)                      Area equipped for irrigation in each grid cell (mio. ha)
 ;
 
 equations
- q41_area_irrig(j)               irrigation area constraint
- q41_cost_AEI_annuity(i)                         Calculation of annuity costs of AEI expansion
- q41_cost_AEI(i)                     Calculation of costs of irrigation area expansion
+ q41_area_irrig(j)               Irrigation area constraint (mio. ha)
+ q41_cost_AEI(i)                 Calculation of costs of irrigation area expansion (mio. USD04MER)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_AEI(t,i,type)           irrigation expansion costs (mio. US$)
- ov41_cost_AEI_annuity(t,i,type) annuity costs of AEI expansion in the current timestep (mio. US$)
- ov41_AEI(t,j,type)              area equipped for irrigation in each gridcell (mio ha.)
- oq41_area_irrig(t,j,type)       irrigation area constraint
- oq41_cost_AEI_annuity(t,i,type) Calculation of annuity costs of AEI expansion
- oq41_cost_AEI(t,i,type)         Calculation of costs of irrigation area expansion
+ ov_cost_AEI(t,i,type)     Annuitized irrigation expansion costs (mio. USD04MER per yr)
+ ov41_AEI(t,j,type)        Area equipped for irrigation in each grid cell (mio. ha)
+ oq41_area_irrig(t,j,type) Irrigation area constraint (mio. ha)
+ oq41_cost_AEI(t,i,type)   Calculation of costs of irrigation area expansion (mio. USD04MER)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

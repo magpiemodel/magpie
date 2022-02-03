@@ -1,43 +1,48 @@
-*** (C) 2008-2016 Potsdam Institute for Climate Impact Research (PIK),
-*** authors, and contributors see AUTHORS file
-*** This file is part of MAgPIE and licensed under GNU AGPL Version 3 
-*** or later. See LICENSE file or go to http://www.gnu.org/licenses/
-*** Contact: magpie@pik-potsdam.de
+*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  authors, and contributors see CITATION.cff file. This file is part
+*** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+*** |  AGPL-3.0, you are granted additional permissions described in the
+*** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
+*** |  Contact: magpie@pik-potsdam.de
 
 
 parameters
- pm_land_start(j,land,si)         areas of different land pools and types (si0 and nsi0) from initialization [mio. ha]
- pcm_land(j,land,si)              area of different land types in the previous timestep (mio. ha)
+ pm_land_start(j,land)            Land initialization area (mio. ha)
+ pcm_land(j,land)                 Land area in previous time step (mio. ha)
 ;
 
 variables
- vm_landdiff    aggregated difference in land between current and previous timestep (mio. ha)
+ vm_landdiff                      Aggregated difference in land between current and previous time step (mio. ha)
 ;
 
 positive variables
- vm_land(j,land,si)                   areas of the different land types (mio.ha)
- vm_landexpansion(j,land,si)         land expansion (mio. ha)
- vm_landreduction(j,land,si)         land reduction (mio. ha)
+ vm_land(j,land)                  Land area of the different land types (mio. ha)
+ vm_landexpansion(j,land)         Land expansion (mio. ha)
+ vm_landreduction(j,land)        Land reduction (mio. ha)
+ vm_croplandexpansion(j,land)     Sources of cropland expansion (mio. ha)
+ vm_croplandreduction(j,land)     Targets of cropland reduction (mio. ha)
+ vm_cost_land_transition(j)		    Costs for lu transitions (mio. USD05MER per yr)
 ;
 
 equations
- q10_land(j,si)                    land conversion constraint
- q10_lu_miti(j)                    land constraint for land-based mitigation
- q10_landexpansion(j,land,si)      land expansion constraint
- q10_landreduction(j,land,si)      land reduction constraint
- q10_landdiff                      land difference constraint
+ q10_land(j)                    Land conversion constraint (mio. ha)
+ q10_landexpansion(j,land)      Land expansion constraint (mio. ha)
+ q10_landreduction(j,land)      Land reduction constraint (mio. ha)
+ q10_landdiff                   Land difference constraint (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_landdiff(t,type)                  aggregated difference in land between current and previous timestep (mio. ha)
- ov_land(t,j,land,si,type)            areas of the different land types (mio.ha)
- ov_landexpansion(t,j,land,si,type)   land expansion (mio. ha)
- ov_landreduction(t,j,land,si,type)   land reduction (mio. ha)
- oq10_land(t,j,si,type)               land conversion constraint
- oq10_lu_miti(t,j,type)               land constraint for land-based mitigation
- oq10_landexpansion(t,j,land,si,type) land expansion constraint
- oq10_landreduction(t,j,land,si,type) land reduction constraint
- oq10_landdiff(t,type)                land difference constraint
+ ov_landdiff(t,type)                 Aggregated difference in land between current and previous time step (mio. ha)
+ ov_land(t,j,land,type)              Land area of the different land types (mio. ha)
+ ov_landexpansion(t,j,land,type)     Land expansion (mio. ha)
+ ov_landreduction(t,j,land,type)     Land reduction (mio. ha)
+ ov_croplandexpansion(t,j,land,type) Sources of cropland expansion (mio. ha)
+ ov_croplandreduction(t,j,land,type) Targets of cropland reduction (mio. ha)
+ ov_cost_land_transition(t,j,type)   Costs for lu transitions (mio. USD05MER per yr)
+ oq10_land(t,j,type)                 Land conversion constraint (mio. ha)
+ oq10_landexpansion(t,j,land,type)   Land expansion constraint (mio. ha)
+ oq10_landreduction(t,j,land,type)   Land reduction constraint (mio. ha)
+ oq10_landdiff(t,type)               Land difference constraint (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

@@ -1,0 +1,4 @@
+type: output script
+description: Main selection of MAgPIE output scripts
+note: Scripts in this selection are actively managed and work out of the box. Please provide a yml header to your script specifying "description" and "comparison script", otherwise it may not be processed correctly.
+position: 1.0
