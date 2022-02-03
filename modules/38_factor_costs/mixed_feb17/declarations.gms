@@ -10,8 +10,8 @@ equations
 ;
 
 positive variables
-v38_cost_prod(i,kall)             Factor costs (mio. USD05MER per yr)
-vm_cost_inv(i,kcr)                  Capital investment costs (mio USD05MER  per yr)
+vm_cost_prod(i,kall)             Factor costs (mio. USD05MER per yr)
+v38_cost_inv(i,kcr)                  Capital investment costs (mio USD05MER  per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

@@ -8,16 +8,16 @@
 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
- ov_cost_prod(t,i,kall,"marginal")       = v38_cost_prod.m(i,kall);
- ov_cost_inv(t,i,"marginal")             = vm_cost_inv.m(i);
+ ov_cost_prod(t,i,kall,"marginal")       = vm_cost_prod.m(i,kall);
+ ov_cost_inv(t,i,"marginal")             = v38_cost_inv.m(i);
  oq38_cost_prod_crop(t,i,kcr,"marginal") = q38_cost_prod_crop.m(i,kcr);
- ov_cost_prod(t,i,kall,"level")          = v38_cost_prod.l(i,kall);
- ov_cost_inv(t,i,"level")                = vm_cost_inv.l(i);
+ ov_cost_prod(t,i,kall,"level")          = vm_cost_prod.l(i,kall);
+ ov_cost_inv(t,i,"level")                = v38_cost_inv.l(i);
  oq38_cost_prod_crop(t,i,kcr,"level")    = q38_cost_prod_crop.l(i,kcr);
- ov_cost_prod(t,i,kall,"upper")          = v38_cost_prod.up(i,kall);
- ov_cost_inv(t,i,"upper")                = vm_cost_inv.up(i);
+ ov_cost_prod(t,i,kall,"upper")          = vm_cost_prod.up(i,kall);
+ ov_cost_inv(t,i,"upper")                = v38_cost_inv.up(i);
  oq38_cost_prod_crop(t,i,kcr,"upper")    = q38_cost_prod_crop.up(i,kcr);
- ov_cost_prod(t,i,kall,"lower")          = v38_cost_prod.lo(i,kall);
- ov_cost_inv(t,i,"lower")                = vm_cost_inv.lo(i);
+ ov_cost_prod(t,i,kall,"lower")          = vm_cost_prod.lo(i,kall);
+ ov_cost_inv(t,i,"lower")                = v38_cost_inv.lo(i);
  oq38_cost_prod_crop(t,i,kcr,"lower")    = q38_cost_prod_crop.lo(i,kcr);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################

@@ -24,14 +24,14 @@
 *' Variable labor costs (without capital): The labor costs are calculated based on the
 *' requirements of the cellular production without considering capital costs.
 
-q38_cost_prod_crop(i2,kcr).. v38_cost_prod(i2,kcr)
-                              =e= sum(cell(i2,j2), vm_prod(j2,kcr) * v38_labor_need(j2,kcr) * s38_wage)+vm_cost_inv(i2,kcr)
+q38_cost_prod_crop(i2,kcr).. vm_cost_prod(i2,kcr)
+                              =e= sum(cell(i2,j2), vm_prod(j2,kcr) * v38_labor_need(j2,kcr) * s38_wage)+v38_cost_inv(i2,kcr)
                                 ;
 
 *' Investment costs: Investment are the summation of investment in mobile and immobile capital. The costs are annuitized,
 *' and corrected to make sure that the annual depreciation of the current time-step is accounted for.
 
-q38_cost_prod_inv(i2,kcr).. vm_cost_inv(i2,kcr)=e=(sum((cell(i2,j2)),v38_investment_immobile(j2,kcr))
+q38_cost_prod_inv(i2,kcr).. v38_cost_inv(i2,kcr)=e=(sum((cell(i2,j2)),v38_investment_immobile(j2,kcr))
                                     +sum((cell(i2,j2)),v38_investment_mobile(j2)))
                                     *((1-s38_depreciation_rate)*
                                     sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
