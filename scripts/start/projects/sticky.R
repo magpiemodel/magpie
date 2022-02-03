@@ -27,7 +27,7 @@ source("config/default.cfg")
 # Sticky mode
 mode <- c("dynamic","free")
 #recalibrate
-cfg$recalibrate <- TRUE
+#cfg$recalibrate <- TRUE
 
 
 for(cc in c("cc")){
