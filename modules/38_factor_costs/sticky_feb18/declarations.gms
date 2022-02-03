@@ -13,7 +13,7 @@ equations
 ;
 
 positive variables
- vm_cost_prod(i,kall)                  Factor costs  (mio USD05MER  per yr)
+ v38_cost_prod(i,kall)                  Factor costs  (mio USD05MER  per yr)
  vm_cost_inv(i,kcr)                        Investment capital costs (mio USD05MER  per yr)
  v38_investment_immobile(j,kcr)        Investment costs in immobile farm capital (mio USD05MER per yr)
  v38_investment_mobile(j)              Investment costs in mobile farm capital (mio USD05MER per yr)

@@ -24,7 +24,7 @@
 *' Variable labor costs (without capital): The labor costs are calculated based on the
 *' requirements of the cellular production without considering capital costs.
 
-q38_cost_prod_crop(i2,kcr).. vm_cost_prod(i2,kcr)
+q38_cost_prod_crop(i2,kcr).. v38_cost_prod(i2,kcr)
                               =e= sum(cell(i2,j2), vm_prod(j2,kcr) * v38_labor_need(j2,kcr) * s38_wage)+vm_cost_inv(i2,kcr)
                                 ;
 

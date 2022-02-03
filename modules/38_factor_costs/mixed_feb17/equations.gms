@@ -10,11 +10,11 @@
 
 
  q38_cost_prod_crop(i2,kcr) ..
-  vm_cost_prod(i2,kcr) =e= sum((cell(i2,j2), w), vm_area(j2,kcr,w)*f38_region_yield(i2,kcr)
+  v38_cost_prod(i2,kcr) =e= sum((cell(i2,j2), w), vm_area(j2,kcr,w)*f38_region_yield(i2,kcr)
                             *sum(supreg(h2,i2), vm_tau(h2)/fm_tau1995(h2))*f38_fac_req(kcr,w));
 
 
-*' The equation above shows that factor requirement costs `vm_cost_prod` mainly
+*' The equation above shows that factor requirement costs `v38_cost_prod` mainly
 *' depend on area harvested `vm_area` and average regional land-use intensity
 *' levels `vm_tau`. Multiplying the land-use intensity increase increases
 *' since 1995 with average regional yields `f38_region_yield` gives the

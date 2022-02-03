@@ -29,7 +29,7 @@ q31_carbon(j2,ag_pools) ..
 *' avoid overproduction of pasture in the model:
 
 q31_cost_prod_past(i2) ..
- vm_cost_prod(i2,"pasture") =e= vm_prod_reg(i2,"pasture")
+ v38_cost_prod(i2,"pasture") =e= vm_prod_reg(i2,"pasture")
  								* s31_fac_req_past;
 
 *' For all following time steps, factor requriements `s31_fac_req_past` are set

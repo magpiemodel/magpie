@@ -9,10 +9,10 @@
 
 
  q38_cost_prod_crop(i2,kcr) ..
-  vm_cost_prod(i2,kcr) =e= vm_prod_reg(i2,kcr) * f38_fac_req_per_ton(kcr);
+  v38_cost_prod(i2,kcr) =e= vm_prod_reg(i2,kcr) * f38_fac_req_per_ton(kcr);
 
 
-*' The factor requirement costs `vm_cost_prod` are  calculated as product of
+*' The factor requirement costs `v38_cost_prod` are  calculated as product of
 *' production quantity `vm_prod_reg` and crop-specific world average
 *' factor costs of production per volume `f38_fac_req_per_ton`.
 *' The volume depending factor costs, which remains fixed overtime, are obtained
