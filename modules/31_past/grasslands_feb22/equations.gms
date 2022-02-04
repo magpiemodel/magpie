@@ -44,7 +44,7 @@ q31_cost_prod_past(i2) ..
                             i31_grassland_mng_costs(grassland)) +
                             sum(cell(i2,j2),v31_cost_grass_transition(j2));
 
-q31_transitions_cost(j2) ..
+q31_expansion_cost(j2) ..
                           v31_cost_grass_transition(j2) =g=
                           sum(grassland, v31_grass_area(j2, grassland, "rainfed") - pc31_grass(j2,grassland));
 

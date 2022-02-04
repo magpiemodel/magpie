@@ -35,7 +35,7 @@ equations
 q31_pasture_areas(j)             Total grassland calculation (mio. ha)
 q31_manpast_suitability(i)       Constraint on areas suitable for managed pastures (mio. ha)
 q31_prod_pm(j)                   Cellular grass production constraint (mio. tDM per yr)
-q31_transitions_cost(j)          Grassland transition cost constraint
+q31_expansion_cost(j)          Grassland transition cost constraint
 q31_yield_grassl_range(j,grassland,w) marcos_develop
 q31_yield_grassl_pastr(j,grassland,w) marcos_develop
 ;
@@ -59,7 +59,7 @@ parameters
  oq31_pasture_areas(t,j,type)                  Total grassland calculation (mio. ha)
  oq31_manpast_suitability(t,i,type)            Constraint on areas suitable for managed pastures (mio. ha)
  oq31_prod_pm(t,j,type)                        Cellular grass production constraint (mio. tDM per yr)
- oq31_transitions_cost(t,j,type)               Grassland transition cost constraint
+ oq31_expansion_cost(t,j,type)               Grassland transition cost constraint
  oq31_yield_grassl_range(t,j,grassland,w,type) marcos_develop
  oq31_yield_grassl_pastr(t,j,grassland,w,type) marcos_develop
 ;
