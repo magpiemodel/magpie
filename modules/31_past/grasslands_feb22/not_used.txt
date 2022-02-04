@@ -9,6 +9,3 @@ name,type,reason
 pcm_land, input, not needed
 vm_prod_reg, variable, not needed
 vm_yld,  variable, not needed
-vm_landexpansion,input,questionnaire
-vm_landreduction,input,questionnaire
-fm_tau1995,input,questionnaire
