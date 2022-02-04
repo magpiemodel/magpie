@@ -7,8 +7,5 @@
 
 name,type,reason
 pcm_land, input, not needed
-vm_landexpansion,input,questionnaire
-vm_landreduction,input,questionnaire
 vm_tau,input,questionnaire
 fm_pastr_tau_hist,input,questionnaire
-fm_tau1995,input,questionnaire
