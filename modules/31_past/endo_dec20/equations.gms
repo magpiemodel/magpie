@@ -16,20 +16,21 @@
 *#################################### YIELD ####################################
 
 q31_yield_grassl_range(j2,grassland,w)..
- v31_past_yld(j2,"range",w) =l=
+ v31_grass_yld(j2,"range",w) =l=
  sum(ct,i31_grass_yields(ct,j2,"range",w));
 
 q31_yield_grassl_pastr(j2,grassland,w)..
-  v31_past_yld(j2,"pastr",w) =e=
+  v31_grass_yld(j2,"pastr",w) =e=
   sum(ct,i31_grass_yields(ct,j2,"pastr",w))
-  * sum((cell(i2,j2), supreg(h2,i2)), vm_tau(h2, "pastr") / fm_pastr_tau_hist("y1995",h2));
+*  * sum((cell(i2,j2), supreg(h2,i2)), vm_tau(h2, "pastr") / fm_pastr_tau_hist("y1995",h2));
+   * sum((cell(i2,j2), supreg(h2,i2)), vm_tau(h2) / fm_tau1995(h2)) * fm_pastr_tau_hist("y1995",h2)/fm_pastr_tau_hist("y1995",h2);
 
 *#################################### YIELD ####################################
 
 
 q31_prod_pm(j2) ..
   vm_prod(j2,"pasture") =e= sum(grassland, v31_grass_area(j2,grassland,"rainfed")
-                            * v31_past_yld(j2,grassland,"rainfed"));
+                            * v31_grass_yld(j2,grassland,"rainfed"));
 
 q31_pasture_areas(j2)..
   vm_land(j2,"past") =e= sum(grassland, v31_grass_area(j2,grassland,"rainfed"));
@@ -40,7 +41,7 @@ q31_manpast_suitability(i2)..
 q31_cost_prod_past(i2) ..
   vm_cost_prod(i2,"pasture") =e= sum((cell(i2,j2), grassland),
                             v31_grass_area(j2, grassland, "rainfed") *
-                            v31_past_yld(j2, grassland, "rainfed") *
+                            v31_grass_yld(j2, grassland, "rainfed") *
                             i31_grassland_mng_costs(grassland)) +
                             sum(cell(i2,j2),v31_cost_grass_transition(j2));
 
