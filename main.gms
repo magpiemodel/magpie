@@ -216,7 +216,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  default
+$setglobal c_title  default_5
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
@@ -244,7 +244,7 @@ $setglobal trade  selfsuff_reduced
 $setglobal ageclass  feb21
 
 $setglobal crop  endo_apr21
-$setglobal past  endo_dec20
+$setglobal past  test_dec20
 
 $setglobal forestry  dynamic_feb21
 

@@ -64,7 +64,7 @@ parameters
  ov31_grass_area(t,j,grassland,w,type)                    Grass production area (mio. ha)
  ov31_pos_balance(t,j,grassland,type)                     Balance variable for grassland transitions (mio. ha)
  ov31_neg_balance(t,j,grassland,type)                     Balance variable for grassland transitions (mio. ha)
- ov31_grass_yld(t,j,grassland,w,type)                      marcos_develop
+ ov31_grass_yld(t,j,grassland,w,type)                     marcos_develop
  ov31_grass_transitions(t,j,grass_from31,grass_to31,type) Land transitions between time steps (mio. ha)
  ov31_cost_grass_transition(t,j,type)                     Costs for grassland transitions (mio. USD05MER per yr)
  ov31_grass_expansion(t,j,grassland,type)                 Targets of grassland expansion (mio. ha)
