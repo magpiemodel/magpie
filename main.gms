@@ -146,25 +146,25 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.68MPPA__h12_magpie_debug.tgz
-* md5sum: de2b528af02916a042f8e1dc306944e5
-* Repository: C:/magpie_inputdata/output
+* Used data set: rev4.67_h12_magpie.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: rev4.68MPPA__h12_1998ea10_cellularmagpie_debug_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: 492cc81720905be517fe3b3924e2d8a8
-* Repository: C:/magpie_inputdata/output
+* Used data set: rev4.67_h12_1998ea10_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: rev4.68MPPA__h12_validation_debug.tgz
-* md5sum: fd059370dd112130a434ab2ef66550af
-* Repository: C:/magpie_inputdata/output
+* Used data set: rev4.67_h12_validation.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev4.08.tgz
-* md5sum: d5ef6b0e76748e9347361f5d87a4cba6
-* Repository: C:/magpie_inputdata/output
+* Used data set: additional_data_rev4.07.tgz
+* md5sum: accf653e73cbfd02354158d3b99b046f
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_sticky_feb18_free_18Jan22.tgz
-* md5sum: 32def190ea1b517a1ff160b6c5c55bd4
-* Repository: C:/magpie_inputdata/output
+* Used data set: calibration_H12_sticky_feb18_free_30Nov21.tgz
+* md5sum: f9ee7b8955713d8bd860cb65374d1958
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -177,11 +177,11 @@ $title magpie
 * 
 * Regionscode: 62eff8f7
 * 
-* Regions data revision: 4.68
+* Regions data revision: 4.67
 * 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.68
+* * Revision: 4.67
 * 
 * aggregation settings:
 * * Input resolution: 0.5
@@ -190,7 +190,7 @@ $title magpie
 * * Call: do.call(functiononly, args)
 * 
 * 
-* Last modification (input data): Thu Feb 03 16:25:25 2022
+* Last modification (input data): Fri Jan 21 11:08:10 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -214,9 +214,9 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  coup2100
+$setglobal c_timesteps  2
 $setglobal c_past  till_2010
-$setglobal c_title  default_7
+$setglobal c_title  default
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
@@ -229,7 +229,7 @@ $setglobal drivers  aug17
 $setglobal land  landmatrix_dec18
 $setglobal costs  default
 $setglobal interest_rate  select_apr20
-$setglobal tc  endo_jan22
+$setglobal tc  endo_jun18
 $setglobal yields  managementcalib_aug19
 
 $setglobal food  anthropometrics_jan18
@@ -244,7 +244,7 @@ $setglobal trade  selfsuff_reduced
 $setglobal ageclass  feb21
 
 $setglobal crop  endo_apr21
-$setglobal past  grasslands_feb22
+$setglobal past  endo_jun13
 
 $setglobal forestry  dynamic_feb21
 
