@@ -7,13 +7,11 @@
 
 *' @equations
 
-*' Production of pasture biomass is restricted to pasture area which is
-*' delivered as module output together with the resulting geographically
-*' explicit production of pasture biomass. Cellular production is calculated by
-*' multiplying pasture area `vm_land` with cellular rainfed pasture yields
-*' `vm_yld` which are delivered by the module [14_yields]:
 
-*#################################### YIELD ####################################
+
+*' Technological change can increase the initial calibrated
+*' yields of manged pastures, whereas rangeland yields are kept unaltered
+*' after calibration.
 
 q31_yield_grassl_range(j2,grassland,w)..
  v31_grass_yld(j2,"range",w) =l=
@@ -24,8 +22,9 @@ q31_yield_grassl_pastr(j2,grassland,w)..
   sum(ct,i31_grass_yields(ct,j2,"pastr",w))
   * sum((cell(i2,j2), supreg(h2,i2)), vm_tau(h2, "crop") / fm_pastr_tau_hist("y1995",h2));
 
-*#################################### YIELD ####################################
-
+*' Production of grass biomass is calculated by multiplying grassland areas
+*' `v31_grass_area` with cellular rainfed rangelands and managed pasture yields
+*' `v31_grass_yld`:
 
 q31_prod_pm(j2) ..
   vm_prod(j2,"pasture") =e= sum(grassland, v31_grass_area(j2,grassland,"rainfed")
@@ -34,19 +33,25 @@ q31_prod_pm(j2) ..
 q31_pasture_areas(j2)..
   vm_land(j2,"past") =e= sum(grassland, v31_grass_area(j2,grassland,"rainfed"));
 
+*' Socio economic and environmental conditions constraints the areas available for
+*' pasture management
+
 q31_manpast_suitability(i2)..
   sum(cell(i2,j2), v31_grass_area(j2,"pastr","rainfed")) =l= sum((cell(i2,j2),ct),i31_manpast_suit(ct,j2));
+
+*' To avoid unrealistic conversions between rangelands and managed pastures areas,
+*' a cost is associated with the expansion of rangelands and managed pastures stored in
+*' v31_cost_grass_expansion
+
+q31_expansion_cost(j2) ..
+  v31_cost_grass_expansion(j2) =g=
+                            sum(grassland, v31_grass_area(j2, grassland, "rainfed") - pc31_grass(j2,grassland));
 
 q31_cost_prod_past(i2) ..
   vm_cost_prod(i2,"pasture") =e= sum((cell(i2,j2), grassland),
                             v31_grass_area(j2, grassland, "rainfed") *
                             v31_grass_yld(j2, grassland, "rainfed") *
-                            i31_grassland_mng_costs(grassland)) +
-                            sum(cell(i2,j2),v31_cost_grass_transition(j2));
-
-q31_expansion_cost(j2) ..
-                          v31_cost_grass_transition(j2) =g=
-                          sum(grassland, v31_grass_area(j2, grassland, "rainfed") - pc31_grass(j2,grassland));
+                            v31_cost_grass_expansion(j2));
 
 *' On the basis of the required pasture area, cellular above ground carbon stocks are calculated:
 

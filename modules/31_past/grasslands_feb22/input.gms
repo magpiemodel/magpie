@@ -19,17 +19,12 @@ $include "./modules/31_past/input/f31_pastr_suitability.cs3"
 $offdelim
 ;
 
-Parameter
-i31_grassland_mng_costs(grassland) "past costs" / pastr 1, range 1/;
-
-
 table f31_LUH2v2(t_all,j,f31_luh) Different land type areas (mio. ha)
 $ondelim
 $include "./modules/31_past/input/f31_LUH2v2.cs3"
 $offdelim
 ;
 
-*#################################YIELDS########################################
 scalar s31_limit_calib   Relative managament calibration switch (1=limited 0=pure relative) / 1 /;
 
 table f31_grassl_yld(t_all,j,grassland,w) LPJmL potential yields per cell (rainfed and irrigated) (tDM per ha per yr)
@@ -38,15 +33,7 @@ $include "./modules/31_past/input/f31_grassl_yld.cs3"
 $offdelim
 ;
 
-table f31_grassl_yld_hist(t_all,i, grassland) Modelled regional pasture yields in the past celullar (tDM per ha per yr)
-$ondelim
-$include "./modules/31_past/input/f31_grassl_yld_hist.cs3"
-$offdelim;
-
-
 table f31_grass_bio(t_all,i, grassland) Modelled regional pasture yields in the past celullar (tDM per ha per yr)
 $ondelim
 $include "./modules/31_past/input/f31_grass_bio_hist.cs3"
 $offdelim;
-
-*#################################YIELDS########################################

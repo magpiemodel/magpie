@@ -45,7 +45,7 @@ $include "./modules/13_tc/input/f13_tau_historical.csv"
 $offdelim
 ;
 
-table fm_pastr_tau_hist(t_all,h) historical managed pasture tau scenario marcos_develop (1)
+table fm_pastr_tau_hist(t_all,h) Historical managed pasture tau (1)
 $ondelim
 $include "./modules/13_tc/input/f13_pastr_tau_hist.csv"
 $offdelim

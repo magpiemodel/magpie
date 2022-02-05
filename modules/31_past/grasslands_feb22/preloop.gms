@@ -17,7 +17,7 @@ pc31_grass(j,grassland) = f31_LUH2v2("y1995",j,grassland);
 
 i31_grass_yields(t,j,grassland,w) = f31_grassl_yld(t,j,grassland,w);
 i31_grassland_total(t_all,j) =  sum(grassland, f31_LUH2v2(t_all,j,grassland));
-f31_grassl_yld_hist(t_past,i,grassland) = (f31_grass_bio(t_past,i, grassland) /
+i31_grass_FAO_yld(t_past,i,grassland) = (f31_grass_bio(t_past,i, grassland) /
                 sum(cell(i,j),f31_LUH2v2(t_past,j,grassland)))$(sum(cell(i,j), f31_LUH2v2(t_past,j,grassland))>0);
 
 i31_grass_yields_hist(t_past,i,grassland)
@@ -35,12 +35,12 @@ loop(t,
 
           Elseif (s31_limit_calib =1 ),
                i31_lambda_grass(t,i,grassland) =
-                    1$(f31_grassl_yld_hist(t,i,grassland) <= i31_grass_yields_hist(t,i,grassland))
-                    + sqrt(i31_grass_yields_hist(t,i,grassland)/f31_grassl_yld_hist(t,i,grassland))$
-                    (f31_grassl_yld_hist(t,i,grassland) > i31_grass_yields_hist(t,i,grassland));
+                    1$(i31_grass_FAO_yld(t,i,grassland) <= i31_grass_yields_hist(t,i,grassland))
+                    + sqrt(i31_grass_yields_hist(t,i,grassland)/i31_grass_FAO_yld(t,i,grassland))$
+                    (i31_grass_FAO_yld(t,i,grassland) > i31_grass_yields_hist(t,i,grassland));
           );
 
-          i31_grassl_yld_hist_reg(t,i,grassland) = f31_grassl_yld_hist(t,i,grassland);
+          i31_grassl_yld_hist_reg(t,i,grassland) = i31_grass_FAO_yld(t,i,grassland);
 
      Else
           i31_grass_yields_hist(t,i,grassland) = i31_grass_yields_hist(t-1,i,grassland);
