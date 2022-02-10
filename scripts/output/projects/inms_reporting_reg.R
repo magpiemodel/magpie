@@ -17,6 +17,7 @@ library(lucode2)
 library(magpie4)
 library(magpiesets)
 library(iamc)
+library(gms)
 print("Start inms reporting reg runscript")
 
 ############################# BASIC CONFIGURATION #######################################
@@ -37,7 +38,7 @@ wdbefore=getwd()
 on.exit(setwd(wdbefore))
 setwd(outputdir)
 
-load( "config.Rdata")
+cfg <- gms::loadConfig("config.yml")
 title <- cfg$title
 print("generating INMS output for the run: ")
 print(title)

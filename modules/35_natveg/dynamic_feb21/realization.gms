@@ -22,7 +22,7 @@
 *' equally across all sub-land-types (primary forest, secondary forest and other natural land).
 *' On top of the IUCN catI+II land protection, there are options to protect different
 *' conservation priority areas such as biodiversity hotspots (BH), centers of plant
-*' diversity (CBD), frontier forests (FF) and last of the wild (LW).
+*' diversity (CBD), Intact Forest Landscapes (IFL) and last of the wild (LW).
 *' NPI/NDC land protection polices are be applied on forest and other land, depending
 *' on individual country reports. Additionally, this module provides the ability to
 *' harvest natural vegetation for timber. Both wood and woodfuel can be produceed
@@ -38,6 +38,10 @@
 *' Inclusion of this data in MAgPIE remains work in progess and is not available for release yet.
 *' Additionally, in this module realizatuion, harvested secondary forest stays
 *' secondary forest and harvested primary forest is reclassified as secondary forest.
+*' Moreover, this realisation does not include land protection for areas in categories III-VI of the
+*' IUCN Protected Area Categories System and ‘Other effective area-based conservation measures’ (OECMs),
+*' which, in reality, make up the bulk of current land protection, but largely cover (sustainably)
+*' managed land area.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/35_natveg/dynamic_feb21/sets.gms"

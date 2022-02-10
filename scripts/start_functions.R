@@ -214,21 +214,16 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
 
   timePrepareStart <- Sys.time()
 
-  if (!requireNamespace("gms", quietly = TRUE)) {
-    stop("Package \"gms\" needed for this function to work. Please install it.",
-         call. = FALSE)
+  checkNamespace <- function(...) {
+    for(package in c(...)) {
+      if (!requireNamespace(package, quietly = TRUE)) {
+        stop("Package \"",package,"\" needed for this function to work. Please install it.",
+             call. = FALSE)
+      }
+    }
   }
 
-  if (!requireNamespace("lucode2", quietly = TRUE)) {
-    stop("Package \"lucode2\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
-
-  if (!requireNamespace("magclass", quietly = TRUE)) {
-    stop("Package \"magclass\" needed for this function to work. Please install it.",
-         call. = FALSE)
-  }
-
+  checkNamespace("gms", "lucode2", "magclass")
 
   Sys.setlocale(locale="C")
   maindir <- getwd()
@@ -238,11 +233,11 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
     lock_id <- gms::model_lock(timeout1=1)
     on.exit(gms::model_unlock(lock_id), add=TRUE)
   }
-  
+
   # Apply scenario settings ans check configuration file for consistency
   if(!is.null(scenario)) cfg <- gms::setScenario(cfg,scenario)
-  cfg <- gms::check_config(cfg, extras = "info")
-  
+  cfg <- gms::check_config(cfg, extras = c("info", "repositories"), saveCheck = TRUE)
+
   # save model version
   cfg$info$version <- citation::read_cff("CITATION.cff")$version
 
@@ -265,8 +260,8 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
     stop(paste0("Results folder ",cfg$results_folder,
                 " could not be created because is already exists."))
   }
-  
-  # If reports for both bioenergy and GHG prices are available convert them 
+
+  # If reports for both bioenergy and GHG prices are available convert them
   # to MAgPIE input, save to the respective input folders, and use it as input
   if (!is.na(cfg$path_to_report_bioenergy) & !is.na(cfg$path_to_report_ghgprices)) {
     getReportData(cfg$path_to_report_bioenergy, cfg$mute_ghgprices_until, cfg$path_to_report_ghgprices)
@@ -405,7 +400,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
     file.copy("calibration_results.pdf", cfg$results_folder, overwrite=TRUE)
     cat("Yield calibration factor calculated!\n")
   }
-  
+
   land_calib_file <- "modules/39_landconversion/input/f39_calib.csv"
   if(cfg$recalibrate_landconversion_cost=="ifneeded") {
     # recalibrate if file does not exist
@@ -428,15 +423,17 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
                      best_calib = cfg$best_calib_landconversion_cost)
     cat("Land conversion cost calibration factor calculated!\n")
   }
-  
+
   # copy important files into output_folder (before MAgPIE execution)
   for(file in cfg$files2export$start) {
     try(file.copy(Sys.glob(file), cfg$results_folder, overwrite=TRUE))
   }
 
   cfg$magpie_folder <- getwd()
-
-  save(cfg, file=file.path(cfg$results_folder, "config.Rdata"))
+  # only store repository paths, not their credentials
+  cfg$repositories <- sapply(names(cfg$repositories),function(x) NULL)
+  # store config in human and machine readable form
+  gms::saveConfig(cfg, file.path(cfg$results_folder, "config.yml"))
 
   gms::singleGAMSfile(mainfile=cfg$model, output=file.path(cfg$results_folder, "full.gms"))
   if(lock_model) {
@@ -449,7 +446,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   # Save run statistics to local file
   cat("Saving timePrepareStart and timePrepareEnd to runstatistics.rda\n")
   timePrepareEnd <- Sys.time()
-  lucode2::runstatistics(file             = paste0("runstatistics.rda"),
+  lucode2::runstatistics(file             = "runstatistics.rda",
                          timePrepareStart = timePrepareStart,
                          timePrepareEnd   = timePrepareEnd)
 
@@ -543,7 +540,7 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
   mag <- time_interpolate(mag,years)
 
   .bioenergy_demand(mag)
-  
+
   # write emission files, if specified use path_to_report_ghgprices instead of the bioenergy report
   if (is.na(path_to_report_ghgprices)) {
     message("Reading ghg prices from ",path_to_report_bioenergy)
