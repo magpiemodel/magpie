@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **scripts** replaced redundant files config.log and config.Rdata with a config.yml
 
 ### added
+- **scripts** output/projects/FSEC_dietaryIndicators.R to create output datasets for the FSEC project
 
 ### removed
 
