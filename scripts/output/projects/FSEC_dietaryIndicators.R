@@ -16,36 +16,35 @@
 library(lucode2)
 library(magpie4)
 
-message("Start FSEC dietary indicators output runscript")
+message("Starting FSEC_DietaryIndicators output runscript")
 
 ############################# BASIC CONFIGURATION #######################################
-
-if(!exists("source_include")) {
-
+if (!exists("source_include")) {
+    
     title       <- NULL
     outputdir   <- NULL
 
     # Define arguments that can be read from command line
     readArgs("outputdir", "title")
+    
 }
 #########################################################################################
 
+baseDir <- getwd()
 message("Script started for output directory: ", outputdir)
-
-old_wd <- getwd()
-on.exit(setwd(old_wd))
-setwd(outputdir)
-
-load("config.Rdata")
+load(file.path(outputdir, "config.Rdata"))
 title <- cfg$title
-print(paste0("Generating DeitaryIndicators output for the run: ", title))
 
-gdx <- paste0("fulldata.gdx")
-output <- getReportDietaryIndicators(gdx, scenario = title)
+message("Generating DietaryIndicators output for the run: ", title)
+gdx <- file.path(outputdir, "fulldata.gdx")
+report <- getReportDietaryIndicators(gdx, scenario = title)
 
-dir.create(paste0(old_wd, "/output/DietaryIndicators"))
+dietaryIndicatorsOutputDir <- file.path(baseDir, "output", "DietaryIndicators")
+if (!dir.exists(dietaryIndicatorsOutputDir)) {
+    dir.create(dietaryIndicatorsOutputDir)    
+}
 
-Map(f = function(x, i) write.csv(x, file = paste0(old_wd, "/output/DietaryIndicators/", title, "_", i, ".csv"),
+Map(f = function(x, i) write.csv(x, file = file.path(dietaryIndicatorsOutputDir, paste0(title, "_", i, ".csv")),
                                  row.names = FALSE, quote = TRUE),
-    output,
-    names(output))
+    x = report,
+    i = names(report))
