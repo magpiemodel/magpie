@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **34_urban** added set urban_scen34 and the switch c34_urban_scenario
  - **35_natveg** corrected naming of Frontier Forests (FF) to Intact Forest Landscapes (IFL) and changed input data for BH_IFL implementation.
  - **scripts** replaced redundant files config.log and config.Rdata with a config.yml
+ - **scripts** removed test script "irrig_dep_test" from "start" folder to "extra" folder
 
 ### added
 - **scripts** output/projects/FSEC_dietaryIndicators.R to create output datasets for the FSEC project
