@@ -7,7 +7,6 @@
 
 # ------------------------------------------------
 # description: Test irrigation depreciation settings
-#
 # ------------------------------------------------
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
