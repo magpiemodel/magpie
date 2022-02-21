@@ -6,6 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 $setglobal c38_sticky_mode  free
+* options: dynamic, free
 
 scalars
 *' Depreciation rate assuming roughly 20 years linear depreciation for invesment goods
@@ -14,7 +15,7 @@ s38_depreciation_rate depreciation rate (share of costs)  / 0.05 /
 s38_immobile  immobile capital (share) / 1 /
 ;
 
-parameter f38_fac_req(kcr) Factor requirement costs in 2005 (USD05ppp per tDM)
+parameter f38_fac_req(kcr) Factor requirement costs in 2005 (USD05MER per tDM)
 /
 $ondelim
 $include "./modules/38_factor_costs/sticky_feb18/input/f38_fac_req_fao.csv"

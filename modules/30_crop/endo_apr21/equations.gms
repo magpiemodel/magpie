@@ -20,7 +20,7 @@
 *' can be reduced by setting aside cropland for other land cover types.
 
  q30_avl_cropland(j2)  ..
-   vm_land(j2,"crop") =l= p30_avl_cropland(j2);
+   vm_land(j2,"crop") =l= sum(ct, p30_avl_cropland(ct,j2));
 
 *' As additional constraints minimum and maximum rotational constraints limit
 *' the placing of crops. On the one hand, these rotational constraints reflect
