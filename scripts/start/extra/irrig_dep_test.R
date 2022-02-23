@@ -5,11 +5,9 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
-
-######################################
-#### Script to start a MAgPIE run ####
-######################################
-
+# ------------------------------------------------
+# description: Test irrigation depreciation settings
+# ------------------------------------------------
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
