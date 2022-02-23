@@ -8,6 +8,7 @@
 *' @equations
 
 
+*' Grassland yileds are calculated separetely for rangelands and managed pastures.
 *' Technological change can increase the initial calibrated
 *' yields of manged pastures, whereas rangeland yields are kept unaltered
 *' after calibration.
@@ -28,6 +29,9 @@ q31_yield_grassl_pastr(j2,grassland,w)..
 q31_prod_pm(j2) ..
   vm_prod(j2,"pasture") =e= sum(grassland, v31_grass_area(j2,grassland,"rainfed")
                             * v31_grass_yld(j2,grassland,"rainfed"));
+
+*' the sum of all managed pastures and rangelands equals the areas of the parent
+*' land class "pastures".
 
 q31_pasture_areas(j2)..
   vm_land(j2,"past") =e= sum(grassland, v31_grass_area(j2,grassland,"rainfed"));
