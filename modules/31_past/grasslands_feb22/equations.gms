@@ -8,7 +8,6 @@
 *' @equations
 
 
-
 *' Technological change can increase the initial calibrated
 *' yields of manged pastures, whereas rangeland yields are kept unaltered
 *' after calibration.
@@ -20,7 +19,7 @@ q31_yield_grassl_range(j2,grassland,w)..
 q31_yield_grassl_pastr(j2,grassland,w)..
   v31_grass_yld(j2,"pastr",w) =e=
   sum(ct,i31_grass_yields(ct,j2,"pastr",w))
-  * sum((cell(i2,j2), supreg(h2,i2)), vm_tau(h2, "crop") / fm_pastr_tau_hist("y1995",h2));
+  * sum((cell(i2,j2), supreg(h2,i2)), vm_tau(h2, "pastr") / fm_pastr_tau_hist("y1995",h2));
 
 *' Production of grass biomass is calculated by multiplying grassland areas
 *' `v31_grass_area` with cellular rainfed rangelands and managed pasture yields

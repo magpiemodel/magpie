@@ -145,53 +145,53 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
+*
 * Used data set: rev4.67_h12_magpie.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
+*
 * Used data set: rev4.67_h12_1998ea10_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
+*
 * Used data set: rev4.67_h12_validation.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
+*
 * Used data set: additional_data_rev4.07.tgz
 * md5sum: accf653e73cbfd02354158d3b99b046f
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
+*
 * Used data set: calibration_H12_sticky_feb18_free_30Nov21.tgz
 * md5sum: f9ee7b8955713d8bd860cb65374d1958
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
+*
 * Low resolution: c200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *     6   23    7    6    1   43   27    7   11   12   37   20
-* 
+*
 * Regionscode: 62eff8f7
-* 
+*
 * Regions data revision: 4.67
-* 
+*
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
 * * Revision: 4.67
-* 
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
 * * Regionscode: 62eff8f7
 * * Call: do.call(functiononly, args)
-* 
-* 
+*
+*
 * Last modification (input data): Fri Jan 21 11:08:10 2022
-* 
+*
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
@@ -214,7 +214,7 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  2
+$setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
 $setglobal c_title  default
 
@@ -229,7 +229,7 @@ $setglobal drivers  aug17
 $setglobal land  landmatrix_dec18
 $setglobal costs  default
 $setglobal interest_rate  select_apr20
-$setglobal tc  endo_jun18
+$setglobal tc  endo_jan22
 $setglobal yields  managementcalib_aug19
 
 $setglobal food  anthropometrics_jan18
@@ -244,7 +244,7 @@ $setglobal trade  selfsuff_reduced
 $setglobal ageclass  feb21
 
 $setglobal crop  endo_apr21
-$setglobal past  endo_jun13
+$setglobal past  grasslands_feb22
 
 $setglobal forestry  dynamic_feb21
 

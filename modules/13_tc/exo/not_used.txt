@@ -1,2 +1,0 @@
-name,type,reason
-fm_pastr_tau_hist,input,questionnaire
