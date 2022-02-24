@@ -24,7 +24,7 @@ log_folder = "run_details"
 dir.create(log_folder,showWarnings = FALSE)
 
 identifier_flag = "AUG04"
-cat(paste0("FFBH and WDPA runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
+cat(paste0("BH_IFL and WDPA runs"), file=paste0(log_folder,"/",identifier_flag,".txt"),append=F)
 
 xx <- c()
 all_configs <- list()
@@ -58,7 +58,7 @@ for(c73_wood_scen in c("default")){
 
                 for (c73_build_demand in c("BAU","10pc","50pc","90pc")) {
 
-                  for(c35_protect_scenario in c("FF_BH","WDPA")){
+                  for(c35_protect_scenario in c("BH_IFL","WDPA")){
 
                     for(s73_expansion in c(0)){
 

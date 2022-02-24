@@ -15,6 +15,7 @@
 
 library(lucode2)
 library(magpie4)
+library(gms)
 
 print("Start inms reporting reg runscript")
 
@@ -32,7 +33,7 @@ if(!exists("source_include")) {
 
 print(paste0("script started for output directory ",outputdir))
 
-load(paste0(outputdir, "/config.Rdata"))
+cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 title <- cfg$title
 print("generating INMS output for the run: ")
 print(title)

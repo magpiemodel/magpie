@@ -7,5 +7,5 @@
 
 vm_nr_inorg_fert_reg.fx(i,land_ag) = 0;
 vm_nr_inorg_fert_costs.fx(i) = 0;
-vm_nr_eff.fx(i) =0.6;
+vm_nr_eff.fx(i) = 0.6;
 vm_nr_eff_pasture.fx(i) = 0.66;

@@ -47,6 +47,7 @@ get_areacalib <- function(gdx_file) {
   }
   out <- magpie/data
   out[out==0] <- 1
+  out[is.na(out)] <- 1
   return(magpiesort(out))
 }
 
@@ -69,6 +70,7 @@ get_yieldcalib <- function(gdx_file) {
 
   out <- y/y_ini
   out[out==0] <- 1
+  out[is.na(out)] <- 1
   return(magpiesort(out))
 }
 
