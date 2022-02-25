@@ -53,7 +53,7 @@ q31_expansion_cost(j2) ..
 q31_cost_prod_past(i2) ..
   vm_cost_prod(i2,"pasture") =e= sum((cell(i2,j2), grassland),
                             v31_grass_area(j2, grassland, "rainfed") *
-                            v31_grass_yld(j2, grassland, "rainfed") *
+                            v31_grass_yld(j2, grassland, "rainfed") +
                             v31_cost_grass_expansion(j2));
 
 *' On the basis of the required pasture area, cellular above ground carbon stocks are calculated:
