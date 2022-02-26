@@ -63,19 +63,28 @@ v31_neg_balance(j,grassland) marcos
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov31_grass_area(t,j,grassland,w,type)         Grass production area (mio. ha)
- ov31_grass_yld(t,j,grassland,w,type)          Grassland Yields (tDM per ha per yr)
- ov31_cost_grass_expansion(t,j,type)           Costs for grassland transitions (mio. USD05MER per yr)
- oq31_carbon(t,j,ag_pools,type)                Above ground carbon content calculation for pasture (mio tC)
- oq31_cost_prod_past(t,i,type)                 Costs for putting animals on pastures (mio. USD05MER per yr)
- oq31_bv_manpast(t,j,potnatveg,type)           Biodiversity value for managed pastures (Mha)
- oq31_bv_rangeland(t,j,potnatveg,type)         Biodiversity value for rangeland (Mha)
- oq31_pasture_areas(t,j,type)                  Total grassland calculation (mio. ha)
- oq31_manpast_suitability(t,i,type)            Constraint on areas suitable for managed pastures (mio. ha)
- oq31_prod_pm(t,j,type)                        Cellular grass production constraint (mio. tDM per yr)
- oq31_expansion_cost(t,j,type)                 Grassland transition cost constraint
- oq31_yield_grassl_range(t,j,grassland,w,type) Rangelands yield calculation (tDM per ha per yr)
- oq31_yield_grassl_pastr(t,j,grassland,w,type) Managed pastures yield calculation (tDM per ha per yr)
+ ov31_grass_area(t,j,grassland,w,type)                    Grass production area (mio. ha)
+ ov31_grass_yld(t,j,grassland,w,type)                     Grassland Yields (tDM per ha per yr)
+ ov31_cost_grass_expansion(t,j,type)                      Costs for grassland transitions (mio. USD05MER per yr)
+ ov31_grass_expansion(t,j,grassland,type)                 marcos
+ ov31_grass_reduction(t,j,grassland,type)                 marcos
+ ov31_grass_transitions(t,j,grass_from31,grass_to31,type) marcos
+ ov31_pos_balance(t,j,grassland,type)                     marcos
+ ov31_neg_balance(t,j,grassland,type)                     marcos
+ oq31_carbon(t,j,ag_pools,type)                           Above ground carbon content calculation for pasture (mio tC)
+ oq31_cost_prod_past(t,i,type)                            Costs for putting animals on pastures (mio. USD05MER per yr)
+ oq31_bv_manpast(t,j,potnatveg,type)                      Biodiversity value for managed pastures (Mha)
+ oq31_bv_rangeland(t,j,potnatveg,type)                    Biodiversity value for rangeland (Mha)
+ oq31_pasture_areas(t,j,type)                             Total grassland calculation (mio. ha)
+ oq31_manpast_suitability(t,i,type)                       Constraint on areas suitable for managed pastures (mio. ha)
+ oq31_prod_pm(t,j,type)                                   Cellular grass production constraint (mio. tDM per yr)
+ oq31_yield_grassl_range(t,j,grassland,w,type)            Rangelands yield calculation (tDM per ha per yr)
+ oq31_yield_grassl_pastr(t,j,grassland,w,type)            Managed pastures yield calculation (tDM per ha per yr)
+ oq31_grass_expansion(t,j,type)                           marcos
+ oq31_grass_reduction(t,j,type)                           marcos
+ oq31_transition_to(t,j,grass_to31,type)                  marcos
+ oq31_transition_from(t,j,grass_from31,type)              marcos
+ oq31_cost_transition(t,j,type)                           marcos
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

@@ -80,7 +80,7 @@ q31_cost_prod_past(i2) ..
                             v31_cost_grass_expansion(j2));
 
 *' On the basis of the required pasture area, cellular above ground carbon stocks are calculated:
-asdasd
+
 q31_carbon(j2,ag_pools) ..
  vm_carbon_stock(j2,"past",ag_pools) =e=
          sum(ct, vm_land(j2,"past")*fm_carbon_density(ct,j2,"past",ag_pools));
