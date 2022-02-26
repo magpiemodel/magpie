@@ -46,9 +46,32 @@ q31_manpast_suitability(i2)..
 *' a cost is associated with the expansion of rangelands and managed pastures stored in
 *' v31_cost_grass_expansion
 
-q31_expansion_cost(j2) ..
-  v31_cost_grass_expansion(j2) =g=
-                            sum(grassland, v31_grass_area(j2, grassland, "rainfed") - pc31_grass(j2,grassland));
+*#######################
+q31_grass_expansion(j2) ..
+                          sum(grass_to31, v31_grass_expansion(j2,grass_to31)) =e=
+                          vm_landexpansion(j2,"past");
+
+q31_grass_reduction(j2) ..
+                          sum(grass_from31, v31_grass_reduction(j2,grass_from31)) =e=
+                          vm_landreduction(j2,"past");
+
+q31_transition_to(j2,grass_to31) ..
+                          sum(grass_from31, v31_grass_transitions(j2,grass_from31,grass_to31)) =e=
+                          v31_grass_area(j2,grass_to31, "rainfed");
+
+q31_transition_from(j2,grass_from31) ..
+                          sum(grass_to31, v31_grass_transitions(j2,grass_from31,grass_to31)) =e=
+                          pc31_grass(j2,grass_from31) + v31_grass_expansion(j2,grass_from31) - v31_grass_reduction(j2,grass_from31) + v31_pos_balance(j2,grass_from31) - v31_neg_balance(j2,grass_from31);
+
+
+q31_cost_transition(j2) ..
+              v31_cost_grass_expansion(j2) =e=
+              v31_grass_transitions(j2,"range", "pastr") +
+              v31_grass_transitions(j2,"pastr", "range") * 0.1 +
+              sum(grassland, v31_pos_balance(j2,grassland) +
+              v31_neg_balance(j2,grassland)) * 10e6;
+
+*##############
 
 q31_cost_prod_past(i2) ..
   vm_cost_prod(i2,"pasture") =e= sum((cell(i2,j2), grassland),
@@ -57,7 +80,7 @@ q31_cost_prod_past(i2) ..
                             v31_cost_grass_expansion(j2));
 
 *' On the basis of the required pasture area, cellular above ground carbon stocks are calculated:
-
+asdasd
 q31_carbon(j2,ag_pools) ..
  vm_carbon_stock(j2,"past",ag_pools) =e=
          sum(ct, vm_land(j2,"past")*fm_carbon_density(ct,j2,"past",ag_pools));
