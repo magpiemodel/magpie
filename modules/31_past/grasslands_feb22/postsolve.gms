@@ -11,7 +11,7 @@
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov31_grass_area(t,j,grassland,w,"marginal")                    = v31_grass_area.m(j,grassland,w);
  ov31_grass_yld(t,j,grassland,w,"marginal")                     = v31_grass_yld.m(j,grassland,w);
- ov31_cost_grass_expansion(t,j,"marginal")                      = v31_cost_grass_expansion.m(j);
+ ov31_cost_grass_conversion(t,j,"marginal")                      = v31_cost_grass_conversion.m(j);
  ov31_grass_expansion(t,j,grassland,"marginal")                 = v31_grass_expansion.m(j,grassland);
  ov31_grass_reduction(t,j,grassland,"marginal")                 = v31_grass_reduction.m(j,grassland);
  ov31_grass_transitions(t,j,grass_from31,grass_to31,"marginal") = v31_grass_transitions.m(j,grass_from31,grass_to31);
@@ -33,7 +33,7 @@
  oq31_cost_transition(t,j,"marginal")                           = q31_cost_transition.m(j);
  ov31_grass_area(t,j,grassland,w,"level")                       = v31_grass_area.l(j,grassland,w);
  ov31_grass_yld(t,j,grassland,w,"level")                        = v31_grass_yld.l(j,grassland,w);
- ov31_cost_grass_expansion(t,j,"level")                         = v31_cost_grass_expansion.l(j);
+ ov31_cost_grass_conversion(t,j,"level")                         = v31_cost_grass_conversion.l(j);
  ov31_grass_expansion(t,j,grassland,"level")                    = v31_grass_expansion.l(j,grassland);
  ov31_grass_reduction(t,j,grassland,"level")                    = v31_grass_reduction.l(j,grassland);
  ov31_grass_transitions(t,j,grass_from31,grass_to31,"level")    = v31_grass_transitions.l(j,grass_from31,grass_to31);
@@ -55,7 +55,7 @@
  oq31_cost_transition(t,j,"level")                              = q31_cost_transition.l(j);
  ov31_grass_area(t,j,grassland,w,"upper")                       = v31_grass_area.up(j,grassland,w);
  ov31_grass_yld(t,j,grassland,w,"upper")                        = v31_grass_yld.up(j,grassland,w);
- ov31_cost_grass_expansion(t,j,"upper")                         = v31_cost_grass_expansion.up(j);
+ ov31_cost_grass_conversion(t,j,"upper")                         = v31_cost_grass_conversion.up(j);
  ov31_grass_expansion(t,j,grassland,"upper")                    = v31_grass_expansion.up(j,grassland);
  ov31_grass_reduction(t,j,grassland,"upper")                    = v31_grass_reduction.up(j,grassland);
  ov31_grass_transitions(t,j,grass_from31,grass_to31,"upper")    = v31_grass_transitions.up(j,grass_from31,grass_to31);
@@ -77,7 +77,7 @@
  oq31_cost_transition(t,j,"upper")                              = q31_cost_transition.up(j);
  ov31_grass_area(t,j,grassland,w,"lower")                       = v31_grass_area.lo(j,grassland,w);
  ov31_grass_yld(t,j,grassland,w,"lower")                        = v31_grass_yld.lo(j,grassland,w);
- ov31_cost_grass_expansion(t,j,"lower")                         = v31_cost_grass_expansion.lo(j);
+ ov31_cost_grass_conversion(t,j,"lower")                         = v31_cost_grass_conversion.lo(j);
  ov31_grass_expansion(t,j,grassland,"lower")                    = v31_grass_expansion.lo(j,grassland);
  ov31_grass_reduction(t,j,grassland,"lower")                    = v31_grass_reduction.lo(j,grassland);
  ov31_grass_transitions(t,j,grass_from31,grass_to31,"lower")    = v31_grass_transitions.lo(j,grass_from31,grass_to31);

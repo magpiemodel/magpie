@@ -11,12 +11,22 @@ equations
  q31_cost_prod_past(i)                                  Costs for putting animals on pastures (mio. USD05MER per yr)
  q31_bv_manpast(j,potnatveg)                            Biodiversity value for managed pastures (Mha)
  q31_bv_rangeland(j,potnatveg)                          Biodiversity value for rangeland (Mha)
+ q31_grass_expansion(j)                                 Grassland expansion constraint (mio. ha)
+ q31_grass_reduction(j)                                 Grassland reduction constraint (mio. ha)
+ q31_transition_to(j,grass_to31)                        Grassland transition constraint to (mio. ha)
+ q31_transition_from(j,grass_from31)                    Grassland transition constraint from (mio. ha)
+ q31_cost_transition(j)                                 Costs for grassland transitions constraint (mio. USD05MER per yr)
 ;
 
 
 positive variables
 v31_grass_area(j,grassland,w)                           Grass production area (mio. ha)
 v31_grass_yld(j,grassland,w)                            Grassland Yields (tDM per ha per yr)
+v31_grass_expansion(j,grassland)                        Grassland expansion (mio. ha)
+v31_grass_reduction(j,grassland)                        Grassland reduction (mio. ha)
+v31_grass_transitions(j,grass_from31,grass_to31)        Grassland transitions between time steps (mio. ha)
+v31_pos_balance(j,grassland)                            Balance variable for Grassland transitions (mio. ha)
+v31_neg_balance(j,grassland)                            Balance variable for Grassland transitions (mio. ha)
 ;
 
 parameters
@@ -25,47 +35,29 @@ pc31_grass(j,grassland)                                 Grassland areas in previ
 i31_grass_calib(t_all,j,grassland)                      Regional grassland calibration factor correcting for FAO yield levels (1)
 i31_grass_modeled_yld(t_all,i,grassland)                Biophysical input yields average over region and grassland cover type at the historical reference year (tDM per ha per yr)
 i31_grass_yields(t_all,j,grassland,w)                   Cellular biophysical input yields (tDM per ha per yr)
-i31_grassl_areas(t_all,j)                            Celullar grassland areas (mio. ha)
+i31_grassl_areas(t_all,j)                               Celullar grassland areas (mio. ha)
 i31_lambda_grass(t,i,grassland)                         Grassland Scaling factor for non-linear management calibration (1)
 i31_grassl_yld_hist_reg(t,i,grassland)                  Grassland FAO yields per region at the historical referende year (tDM per ha per yr)
-i31_grass_hist_yld(t_all,i, grassland)                   FAO gassland yields (tDM per ha per yr)
+i31_grass_hist_yld(t_all,i, grassland)                  FAO gassland yields (tDM per ha per yr)
 ;
 
 equations
-q31_pasture_areas(j)                                     Total grassland calculation (mio. ha)
-q31_manpast_suitability(i)                               Constraint on areas suitable for managed pastures (mio. ha)
-q31_prod_pm(j)                                           Cellular grass production constraint (mio. tDM per yr)
-q31_yield_grassl_range(j,grassland,w)                    Rangelands yield calculation (tDM per ha per yr)
-q31_yield_grassl_pastr(j,grassland,w)                    Managed pastures yield calculation (tDM per ha per yr)
+q31_pasture_areas(j)                                    Total grassland calculation (mio. ha)
+q31_manpast_suitability(i)                              Constraint on areas suitable for managed pastures (mio. ha)
+q31_prod_pm(j)                                          Cellular grass production constraint (mio. tDM per yr)
+q31_yield_grassl_range(j,grassland,w)                   Rangelands yield calculation (tDM per ha per yr)
+q31_yield_grassl_pastr(j,grassland,w)                   Managed pastures yield calculation (tDM per ha per yr)
 ;
 
 positive variables
-v31_cost_grass_expansion(j)                              Costs for grassland transitions (mio. USD05MER per yr)
+v31_cost_grass_conversion(j)                            Costs for grassland transitions (mio. USD05MER per yr)
 ;
-
-*#############
-equations
-q31_grass_expansion(j) marcos
-q31_grass_reduction(j) marcos
-q31_transition_to(j,grass_to31) marcos
-q31_transition_from(j,grass_from31) marcos
-q31_cost_transition(j) marcos
-;
-
-positive variables
-v31_grass_expansion(j,grassland) marcos
-v31_grass_reduction(j,grassland) marcos
-v31_grass_transitions(j,grass_from31,grass_to31) marcos
-v31_pos_balance(j,grassland) marcos
-v31_neg_balance(j,grassland) marcos
-;
-*#############
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov31_grass_area(t,j,grassland,w,type)                    Grass production area (mio. ha)
  ov31_grass_yld(t,j,grassland,w,type)                     Grassland Yields (tDM per ha per yr)
- ov31_cost_grass_expansion(t,j,type)                      Costs for grassland transitions (mio. USD05MER per yr)
+ ov31_cost_grass_conversion(t,j,type)                     Costs for grassland transitions (mio. USD05MER per yr)
  ov31_grass_expansion(t,j,grassland,type)                 marcos
  ov31_grass_reduction(t,j,grassland,type)                 marcos
  ov31_grass_transitions(t,j,grass_from31,grass_to31,type) marcos

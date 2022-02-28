@@ -8,10 +8,11 @@
 *' @equations
 
 
-*' Grassland yileds are calculated separetely for rangelands and managed pastures.
+*' Grassland yileds are estimated separetely for rangelands and managed pastures
+*' in equations 'q31_yield_grassl_range' and 'q31_yield_grassl_pastr'.
 *' Technological change can increase the initial calibrated
-*' yields of manged pastures, whereas rangeland yields are kept unaltered
-*' after calibration.
+*' yields of manged pastures through 'vm_tau', whereas rangeland yields are kept
+*' unaltered after the preloop calibration of 'i31_grass_yields'.
 
 q31_yield_grassl_range(j2,grassland,w)..
  v31_grass_yld(j2,"range",w) =l=
@@ -30,23 +31,27 @@ q31_prod_pm(j2) ..
   vm_prod(j2,"pasture") =e= sum(grassland, v31_grass_area(j2,grassland,"rainfed")
                             * v31_grass_yld(j2,grassland,"rainfed"));
 
-*' the sum of all managed pastures and rangelands equals the areas of the parent
-*' land class "pastures".
+*' The sum of managed pastures and rangelands areas equal the parent
+*' land class pastures areas in 'vm_land'.
 
 q31_pasture_areas(j2)..
   vm_land(j2,"past") =e= sum(grassland, v31_grass_area(j2,grassland,"rainfed"));
 
-*' Socio economic and environmental conditions constraints the areas available for
-*' pasture management
+*' Socioeconomic and environmental conditions determine the potential managed pastures
+*' areas ('i31_manpast_suit'). 'i31_manpast_suit' is estimated by determining areas
+*' with more than five inhabitants per km2 and with aridity greater than 0.5 following
+*' the methodology established by @KleinGoldewijk.2017
 
 q31_manpast_suitability(i2)..
   sum(cell(i2,j2), v31_grass_area(j2,"pastr","rainfed")) =l= sum((cell(i2,j2),ct),i31_manpast_suit(ct,j2));
 
-*' To avoid unrealistic conversions between rangelands and managed pastures areas,
-*' a cost is associated with the expansion of rangelands and managed pastures stored in
-*' v31_cost_grass_expansion
 
-*#######################
+*' To disaggregate the expansion and reduction of total grassland areas ('vm_land')
+*' into managed pastures and rangelands, an extension of the land matrix implemented
+*' in module '10_land' realization 'landmatrix_dec18' is reproduced in the next
+*' following equations. 'v31_grass_transitions' stores the all the conversion between
+*' rangelands and managed pastures in a cluster level.
+
 q31_grass_expansion(j2) ..
                           sum(grass_to31, v31_grass_expansion(j2,grass_to31)) =e=
                           vm_landexpansion(j2,"past");
@@ -63,21 +68,22 @@ q31_transition_from(j2,grass_from31) ..
                           sum(grass_to31, v31_grass_transitions(j2,grass_from31,grass_to31)) =e=
                           pc31_grass(j2,grass_from31) + v31_grass_expansion(j2,grass_from31) - v31_grass_reduction(j2,grass_from31) + v31_pos_balance(j2,grass_from31) - v31_neg_balance(j2,grass_from31);
 
+*' To avoid unrealistic conversions between rangelands and managed pastures, a small
+*' cost is associated with the interconversion between rangelands and managed pastures
+*' ('v31_cost_grass_conversion') and added to the overall pasture production costs ('vm_cost_prod').
 
 q31_cost_transition(j2) ..
-              v31_cost_grass_expansion(j2) =e=
+              v31_cost_grass_conversion(j2) =e=
               v31_grass_transitions(j2,"range", "pastr") +
               v31_grass_transitions(j2,"pastr", "range") * 0.1 +
               sum(grassland, v31_pos_balance(j2,grassland) +
               v31_neg_balance(j2,grassland)) * 10e6;
 
-*##############
-
 q31_cost_prod_past(i2) ..
   vm_cost_prod(i2,"pasture") =e= sum((cell(i2,j2), grassland),
                             v31_grass_area(j2, grassland, "rainfed") *
                             v31_grass_yld(j2, grassland, "rainfed") +
-                            v31_cost_grass_expansion(j2));
+                            v31_cost_grass_conversion(j2));
 
 *' On the basis of the required pasture area, cellular above ground carbon stocks are calculated:
 
