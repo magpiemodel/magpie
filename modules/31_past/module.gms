@@ -14,7 +14,7 @@
 *' different pasture carbon pools. Furthermore, it delivers regional production
 *' costs associated with pastures and biodiversity values for pasture and rangeland.
 *'
-*' @authors Isabelle Weindl, Jan Philipp Dietrich
+*' @authors Isabelle Weindl, Jan Philipp Dietrich, Marcos Alves
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%past%" == "endo_jun13" $include "./modules/31_past/endo_jun13/realization.gms"
