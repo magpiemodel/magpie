@@ -29,6 +29,9 @@ general_settings <- function(title) {
   cfg$input <- input
   cfg <- lucode::setScenario(cfg, "nocc")
   cfg$recalibrate <- FALSE
+  cfg$output <- c(cfg$output,
+                  "extra/disaggregation_BII", "projects/FSEC_dietaryIndicators", "projects/FSEC_environmentalPollution_grid")
+
   return(cfg)
 }
 
@@ -48,10 +51,3 @@ cfg <- general_settings(title = "FSEC_SSP1")
 cfg <- lucode::setScenario(cfg, "SSP1")
 
 start_run(cfg = cfg, codeCheck = codeCheck)
-
-
-# -----------------------------------------------------------------------------------------------------------------
-# Output generation
-
-cfg$output <- c(cfg$output,
-                "extra/disaggregation_BII", "projects/FSEC_dietaryIndicators", "projects/FSEC_environmentalPollution_grid")
