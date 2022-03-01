@@ -53,4 +53,5 @@ start_run(cfg = cfg, codeCheck = codeCheck)
 # -----------------------------------------------------------------------------------------------------------------
 # Output generation
 
-cfg$output <- c(cfg$output, "disaggregation_BII", "FSEC_dietaryIndicators", "FSEC_environmentalPollution_grid")
+cfg$output <- c(cfg$output,
+                "extra/disaggregation_BII", "projects/FSEC_dietaryIndicators", "projects/FSEC_environmentalPollution_grid")
