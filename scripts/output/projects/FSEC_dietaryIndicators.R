@@ -13,26 +13,26 @@
 # Version 1.00 - Michael Crawford
 # 1.00: first working version
 
-library(lucode2)
+library(gms)
 library(magpie4)
 
 message("Starting FSEC_DietaryIndicators output runscript")
 
 ############################# BASIC CONFIGURATION #######################################
 if (!exists("source_include")) {
-    
+
     title       <- NULL
     outputdir   <- NULL
 
     # Define arguments that can be read from command line
     readArgs("outputdir", "title")
-    
+
 }
 #########################################################################################
 
 baseDir <- getwd()
 message("Script started for output directory: ", outputdir)
-load(file.path(outputdir, "config.Rdata"))
+cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 title <- cfg$title
 
 message("Generating DietaryIndicators output for the run: ", title)
@@ -41,7 +41,7 @@ report <- getReportDietaryIndicators(gdx, scenario = title)
 
 dietaryIndicatorsOutputDir <- file.path(baseDir, "output", "DietaryIndicators")
 if (!dir.exists(dietaryIndicatorsOutputDir)) {
-    dir.create(dietaryIndicatorsOutputDir)    
+    dir.create(dietaryIndicatorsOutputDir)
 }
 
 Map(f = function(x, i) write.csv(x, file = file.path(dietaryIndicatorsOutputDir, paste0(title, "_", i, ".csv")),

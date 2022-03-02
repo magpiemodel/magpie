@@ -13,7 +13,7 @@
 # Version 1.00 - Michael Crawford
 # 1.00: first working version
 
-library(lucode2)
+library(gms)
 library(magpie4)
 
 message("Starting FSEC environmental pollutants output runscript")
@@ -31,7 +31,7 @@ if (!exists("source_include")) {
 #########################################################################################
 
 message("Script started for output directory: ", outputdir)
-load(file.path(outputdir, "config.Rdata"))
+cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 title <- cfg$title
 
 message("Generating environmental pollutants output for the run: ", title)
