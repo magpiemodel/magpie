@@ -15,7 +15,7 @@ source("scripts/performance_test.R")
 source("config/default.cfg")
 
 # Set defaults
-codeCheck <- TRUE
+codeCheck <- FALSE
 
 input <- c(regional    = "rev4.67_h12_magpie.tgz",
            cellular    = "rev4.67_h12_1998ea10_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
@@ -27,11 +27,10 @@ input <- c(regional    = "rev4.67_h12_magpie.tgz",
 general_settings <- function(title) {
   source("config/default.cfg")
   cfg$input <- input
-  cfg <- lucode::setScenario(cfg, "nocc")
+  cfg <- gms::setScenario(cfg, "nocc")
   cfg$recalibrate <- FALSE
   cfg$output <- c(cfg$output,
                   "extra/disaggregation_BII", "projects/FSEC_dietaryIndicators", "projects/FSEC_environmentalPollution_grid")
-
   return(cfg)
 }
 
@@ -41,13 +40,13 @@ general_settings <- function(title) {
 
 ### Business-as-usual
 cfg <- general_settings(title = "FSEC_SSP2")
-cfg <- lucode::setScenario(cfg, "SSP2")
+cfg <- gms::setScenario(cfg, "SSP2")
 
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 
 ### SSP1
 cfg <- general_settings(title = "FSEC_SSP1")
-cfg <- lucode::setScenario(cfg, "SSP1")
+cfg <- gms::setScenario(cfg, "SSP1")
 
 start_run(cfg = cfg, codeCheck = codeCheck)
