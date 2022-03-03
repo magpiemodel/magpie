@@ -26,10 +26,11 @@ input <- c(regional    = "rev4.67_h12_magpie.tgz",
 # General settings
 general_settings <- function(title) {
   source("config/default.cfg")
-  cfg$input <- input
-  cfg <- gms::setScenario(cfg, "nocc")
+  cfg$input       <- input
+  cfg             <- gms::setScenario(cfg, "nocc")
+  cfg$title       <- title
   cfg$recalibrate <- FALSE
-  cfg$output <- c(cfg$output,
+  cfg$output      <- c(cfg$output,
                   "extra/disaggregation_BII", "projects/FSEC_dietaryIndicators", "projects/FSEC_environmentalPollution_grid")
   return(cfg)
 }
