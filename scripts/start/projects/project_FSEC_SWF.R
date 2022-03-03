@@ -30,6 +30,7 @@ general_settings <- function(title) {
   cfg             <- gms::setScenario(cfg, "nocc")
   cfg$title       <- title
   cfg$recalibrate <- FALSE
+  cfg$qos         <- "priority_maxMem"
   cfg$output      <- c(cfg$output,
                   "extra/disaggregation_BII", "projects/FSEC_dietaryIndicators", "projects/FSEC_environmentalPollution_grid")
   return(cfg)
