@@ -74,7 +74,7 @@ q31_transition_from(j2,grass_from31) ..
 
 q31_cost_transition(j2) ..
               v31_cost_grass_conversion(j2) =e=
-              v31_grass_transitions(j2,"range", "pastr") +
+              v31_grass_transitions(j2,"range", "pastr") * 0.1 +
               v31_grass_transitions(j2,"pastr", "range") * 0.1 +
               sum(grassland, v31_pos_balance(j2,grassland) +
               v31_neg_balance(j2,grassland)) * 10e6;
