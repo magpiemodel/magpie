@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### added
 - **scripts** output/projects/FSEC_dietaryIndicators.R to create output datasets for the FSEC project
+- **scripts** output/projects/FSEC_environmentalPollutants.R to create output datasets of pollutants for the FSEC project
+- **scripts** start/projects/project_FSEC_SWF.R runs simulations which will be the basis for the FSEC Social Welfare Function calculation.
 
 ### removed
 
@@ -33,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **80_optimization** nlp_par realization; bugfix i2 in submission loop
 - **scripts** calibration; set NA values to 1
 - **scripts** fixed misleading warning in check_config
+- **scripts** fixed configuration error in FSEC output scripts, FSEC_dietaryIndicators.R and FSEC_environmentalPollutants.R
 
 ## [4.4.0] - 2021-12-13
 
