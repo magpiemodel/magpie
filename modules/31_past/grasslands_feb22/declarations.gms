@@ -39,6 +39,7 @@ i31_grassl_areas(t_all,j)                               Celullar grassland areas
 i31_lambda_grass(t,i,grassland)                         Grassland Scaling factor for non-linear management calibration (1)
 i31_grassl_yld_hist_reg(t,i,grassland)                  Grassland FAO yields per region at the historical referende year (tDM per ha per yr)
 i31_grass_hist_yld(t_all,i, grassland)                  FAO gassland yields (tDM per ha per yr)
+i31_cost_grass_trans(grass_from31,grass_to31)           Grassland transitions costs (USD05MER per tDM)
 ;
 
 equations

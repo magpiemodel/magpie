@@ -15,7 +15,7 @@
 *' unaltered after the preloop calibration of 'i31_grass_yields'.
 
 q31_yield_grassl_range(j2,grassland,w)..
- v31_grass_yld(j2,"range",w) =l=
+ v31_grass_yld(j2,"range",w) =e=
  sum(ct,i31_grass_yields(ct,j2,"range",w));
 
 q31_yield_grassl_pastr(j2,grassland,w)..
@@ -74,8 +74,7 @@ q31_transition_from(j2,grass_from31) ..
 
 q31_cost_transition(j2) ..
               v31_cost_grass_conversion(j2) =e=
-              v31_grass_transitions(j2,"range", "pastr") * 0.1 +
-              v31_grass_transitions(j2,"pastr", "range") * 0.1 +
+              v31_grass_transitions(j2,grass_from31, grass_to31) * i31_cost_grass_trans(grass_from31, grass_to31) +
               sum(grassland, v31_pos_balance(j2,grassland) +
               v31_neg_balance(j2,grassland)) * 10e6;
 

@@ -8,6 +8,8 @@
 
 scalars
   s31_test_scalar  Factor requirements (USD05MER per tDM)          / 1 /
+  s31_cost_range_pastr  Cost for converting rangeland to managed pastures (USD05MER per tDM)   / 0.1 /
+  s31_cost_pastr_range  Cost for converting rangeland to managed pastures (USD05MER per tDM)   / 0.1 /
 ;
 
 $setglobal c31_past_suit_scen  ssp126
