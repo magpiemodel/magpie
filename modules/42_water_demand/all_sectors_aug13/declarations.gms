@@ -18,7 +18,7 @@ parameters
 ;
 
 equations
- q42_water_demand(wat_dem,j)         Water consumption in different sectors (mio. m^3 per yr)
+ q42_water_demand(wat_dem,j)         Water withdrawals of different sectors (mio. m^3 per yr)
 ;
 
 positive variables
@@ -30,6 +30,6 @@ positive variables
 parameters
  ov_watdem(t,wat_dem,j,type)         Amount of water needed in different sectors (mio. m^3 per yr)
  ov42_irrig_eff(t,j,type)            Irrigation efficiency (1)
- oq42_water_demand(t,wat_dem,j,type) Water consumption in different sectors (mio. m^3 per yr)
+ oq42_water_demand(t,wat_dem,j,type) Water withdrawals of different sectors (mio. m^3 per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

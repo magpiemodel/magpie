@@ -39,13 +39,18 @@ p35_protect_shr(t,j,"Forest_Other","secdforest") = p35_protect_shr_ini(j,"WDPA")
 p35_protect_shr(t,j,"Forest_Other","other") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + 1*f35_protection_fader(t,"%c35_protect_fadein%");
 
 p35_protect_shr(t,j,"BH",land_natveg) = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + p35_protect_shr_ini(j,"BH"))*f35_protection_fader(t,"%c35_protect_fadein%");
-p35_protect_shr(t,j,"FF",land_natveg) = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + p35_protect_shr_ini(j,"FF"))*f35_protection_fader(t,"%c35_protect_fadein%");
+p35_protect_shr(t,j,"IFL",land_natveg) = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + p35_protect_shr_ini(j,"IFL"))*f35_protection_fader(t,"%c35_protect_fadein%");
 p35_protect_shr(t,j,"CPD",land_natveg) = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + p35_protect_shr_ini(j,"CPD"))*f35_protection_fader(t,"%c35_protect_fadein%");
 p35_protect_shr(t,j,"LW",land_natveg) = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + p35_protect_shr_ini(j,"LW"))*f35_protection_fader(t,"%c35_protect_fadein%");
 
-p35_protect_shr(t,j,"FF_BH","primforest") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + 1*f35_protection_fader(t,"%c35_protect_fadein%");
-p35_protect_shr(t,j,"FF_BH","secdforest") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + max(p35_protect_shr_ini(j,"FF"),p35_protect_shr_ini(j,"BH")))*f35_protection_fader(t,"%c35_protect_fadein%");
-p35_protect_shr(t,j,"FF_BH","other") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + p35_protect_shr_ini(j,"BH"))*f35_protection_fader(t,"%c35_protect_fadein%");
+* Biodiversity Hotspots + Intact Forest Landscapes implementation
+* Primary forests are fully conserved, while secondary forests are conserved
+* according to the Intact Forest Landscape (IFL) data set
+* BH_IFL protection mask should only be applied to forest land types. Otherwise area shares
+* for other land are overestimated, since IFL only relates to forest protection.
+p35_protect_shr(t,j,"BH_IFL","primforest") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + 1*f35_protection_fader(t,"%c35_protect_fadein%");
+p35_protect_shr(t,j,"BH_IFL","secdforest") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + p35_protect_shr_ini(j,"BH_IFL"))*f35_protection_fader(t,"%c35_protect_fadein%");
+p35_protect_shr(t,j,"BH_IFL","other") = p35_protect_shr_ini(j,"WDPA") * (1-f35_protection_fader(t,"%c35_protect_fadein%")) + (p35_protect_shr_ini(j,"WDPA") + p35_protect_shr_ini(j,"BH"))*f35_protection_fader(t,"%c35_protect_fadein%");
 
 * Correction of Half Earth protection share
 * Note: Half Earth already contains WDPA protection
@@ -113,7 +118,7 @@ p35_land_start_ac(j,ac,"secdforest") = i35_secdforest(j,ac);
 ** Wherever FAO reports >0 growing stock, we calculate how much growing stock MAGPIE
 ** sees even before optimization starts
 p35_observed_gs_reg(i) = 0;
-p35_observed_gs_reg(i)$(f35_gs_relativetarget(i)>0 AND sum((cell(i,j),ac,land_natveg),p35_land_start_ac(j,ac,land_natveg)$(not sameas(ac,"ac0")))>0)  = 
+p35_observed_gs_reg(i)$(f35_gs_relativetarget(i)>0 AND sum((cell(i,j),ac,land_natveg),p35_land_start_ac(j,ac,land_natveg)$(not sameas(ac,"ac0")))>0)  =
 	(sum((cell(i,j),ac,land_natveg),(pm_timber_yield_initial(j,ac,land_natveg)$(not sameas(ac,"ac0")) / sm_wood_density) * p35_land_start_ac(j,ac,land_natveg)$(not sameas(ac,"ac0")))/ sum((cell(i,j),ac,land_natveg),p35_land_start_ac(j,ac,land_natveg)$(not sameas(ac,"ac0"))));
 
 ** Initialze calibration factor for growing stocks as 1
