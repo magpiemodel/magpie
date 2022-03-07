@@ -430,12 +430,12 @@ p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
 
 *** Substitution of ruminant meat and dairy products (kfo_rd) with single-cell protein (SCP) based on protein/cap/day
 i15_protein_to_kcal_ratio(t,kfo) =  f15_nutrition_attributes(t,kfo,"protein")/f15_nutrition_attributes(t,kfo,"kcal");
-* Before the substitution, kfo_rd is converted from kcal/cap/day to g protein/cap/day 
+* Before the substitution, kfo_rd is converted from kcal/cap/day to g protein/cap/day
 * using i15_protein_to_kcal_ratio(t,kfo_rd).
 * After the substitution of kfo_rd with SCP (1-i15_rumdairy_scp_fadeout), SCP is converted
 * back to kcal/cap/day using i15_protein_to_kcal_ratio(t,"scp").
 p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp") +
-	sum(kfo_rd, p15_kcal_pc_calibrated(t,i,kfo_rd) * (1-i15_rumdairy_scp_fadeout(t,i)) * 
+	sum(kfo_rd, p15_kcal_pc_calibrated(t,i,kfo_rd) * (1-i15_rumdairy_scp_fadeout(t,i)) *
 	i15_protein_to_kcal_ratio(t,kfo_rd)) / i15_protein_to_kcal_ratio(t,"scp");
 p15_kcal_pc_calibrated(t,i,kfo_rd) = p15_kcal_pc_calibrated(t,i,kfo_rd) * i15_rumdairy_scp_fadeout(t,i);
 
@@ -555,6 +555,17 @@ p15_foodwaste_growth(t,i) = ( 1$(p15_demand2intake_ratio_ref(i) = 0)
 if(s15_exo_diet = 1,
 
 
+* Select from the data set of EAT Lancet scenarios the target years that are
+* consistent with the target year of the fader:
+
+$ifthen "%c15_exo_foodscen%" == "lin_zero_20_30"
+  i15_intake_EATLancet_all(i,kcal_scen15,EAT_scen15,kfo) = f15_intake_EATLancet("y2030",i,kcal_scen15,EAT_scen15,kfo);
+$else
+  i15_intake_EATLancet_all(i,kcal_scen15,EAT_scen15,kfo) = f15_intake_EATLancet("y2050",i,kcal_scen15,EAT_scen15,kfo);
+$endif
+
+
+
 *' 1.) In a first step, the exogenous scenario diets are defined by selecting a
 *' scenario target for total daily per capita food intake and by choosing
 *' food-specific dietary patterns:
@@ -567,11 +578,11 @@ $ifthen "%c15_kcal_scen%" == "healthy_BMI"
              sum((sex,age), im_demography(t,iso,sex,age))
          );
   i15_intake_EATLancet(i,kfo) =
-        f15_intake_EATLancet("%c15_exo_scen_targetyear%",i,"2100kcal","%c15_EAT_scen%",kfo);
+        i15_intake_EATLancet_all(i,"2100kcal","%c15_EAT_scen%",kfo);
 $else
   i15_intake_EATLancet(i,kfo) =
-      f15_intake_EATLancet("%c15_exo_scen_targetyear%",i,"%c15_kcal_scen%","%c15_EAT_scen%",kfo);
-      i15_intake_scen_target(t,i) = sum(kfo,i15_intake_EATLancet(i,kfo));
+        i15_intake_EATLancet_all(i,"%c15_kcal_scen%","%c15_EAT_scen%",kfo);
+        i15_intake_scen_target(t,i) = sum(kfo,i15_intake_EATLancet(i,kfo));
 $endif
 
 
