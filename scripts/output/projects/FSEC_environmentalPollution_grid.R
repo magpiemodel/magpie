@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2022 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: Extract population-level dietary information and consumption data from a MAgPIE run
+# description: Create FSEC environmental pollutants output dataset
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
@@ -16,7 +16,7 @@
 library(gms)
 library(magpie4)
 
-message("Starting FSEC_DietaryIndicators output runscript")
+message("Starting FSEC environmental pollutants output runscript")
 
 ############################# BASIC CONFIGURATION #######################################
 if (!exists("source_include")) {
@@ -30,21 +30,17 @@ if (!exists("source_include")) {
 }
 #########################################################################################
 
-baseDir <- getwd()
 message("Script started for output directory: ", outputdir)
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 title <- cfg$title
 
-message("Generating DietaryIndicators output for the run: ", title)
+message("Generating environmental pollutants output for the run: ", title)
 gdx <- file.path(outputdir, "fulldata.gdx")
-report <- getReportDietaryIndicators(gdx, scenario = title)
 
-dietaryIndicatorsOutputDir <- file.path(baseDir, "output", "DietaryIndicators")
-if (!dir.exists(dietaryIndicatorsOutputDir)) {
-    dir.create(dietaryIndicatorsOutputDir)
+baseDir <- getwd()
+pollutantsOutputDir <- file.path(baseDir, "output", "pollutants")
+if (!dir.exists(pollutantsOutputDir)) {
+    dir.create(pollutantsOutputDir)
 }
 
-Map(f = function(x, i) write.csv(x, file = file.path(dietaryIndicatorsOutputDir, paste0(title, "_", i, ".csv")),
-                                 row.names = FALSE, quote = TRUE),
-    x = report,
-    i = names(report))
+out <- getReportGridPollutants(gdx = gdx, reportOutputDir = pollutantsOutputDir, magpieOutputDir = outputdir, scenario = title)
