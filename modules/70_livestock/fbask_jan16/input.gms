@@ -7,7 +7,9 @@
 
 
 $setglobal c70_feed_scen  ssp2
-*   options:    ssp1,ssp2,ssp3,ssp4,ssp5,constant
+*   options:    SSP: ssp1, ssp2, ssp3, ssp4, ssp5
+*               SDP: SDP, SDP_EI, SDP_MC, SDP_RC
+*               other: constant
 
 * Feed substitution scenarios including functional forms, targets and transition periods
 *   options:   constant,
