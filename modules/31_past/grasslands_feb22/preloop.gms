@@ -10,31 +10,34 @@ pc31_grass(j,grassland) = f31_LUH2v2("y1995",j,grassland);
 
 ***YIELD CORRECTION FOR MOWING ACCOUNTING FOR REGIONAL DIFFERENCES IN MANAGEMENT***
 
+*' @code
+
 *' Grassland yields for rangelands and managed pastures are calibrated to match estimated
 *' historical pasture productivity.
 
-*' @code
-
-*' The following equations calibrate the cellular yield patterns ('f31_grassl_yld') to match
-*' estimated historical grassland yields ('i31_grass_hist_yld') by calculating a calibration term called
-*' 'i31_grass_calib'. For most cases, 'i31_grass_calib' is the ratio of the estimated historical
-*' yields ('i31_grass_hist_yld') and modeled yields ('i31_grass_modeled_yld')
-*' given historic grassland area patterns ('i31_grassl_areas') and cellular yields coming from crop models
-*' like LPJmL ('f31_grassl_yld'). In these cases, 'i31_grass_calib' represents a purely relative
-*' calibration factor that depends only on the initial conditions of the starting year.
+*' The following equations calibrate the grassland cellular yield patterns ('f31_grassl_yld') to match
+*' 'estimated historical yields' ('i31_grass_hist_yld') by calculating a calibration term called
+*' 'i31_grass_calib'. For most cases, 'i31_grass_calib' is the ratio of the 'i31_grass_hist_yld'
+*' and modeled yields ('i31_grass_modeled_yld') given historic grassland area patterns
+*' ('i31_grassl_areas') and cellular yields coming from crop models like LPJmL 'f31_grassl_yld'.
+*' In these cases, 'i31_grass_calib' represents a purely relative calibration factor that depends
+*'only on the initial conditions of the starting year.
 *'
-*' However, when estimated yields are significantly higher than given by the cellular yield inputs
-*' (underestimated baseline), the relative calibration terms can lead to unrealistically large
-*' yields in the case of future yield increases within the cellular yield patterns.
+*' However, when estimated yields 'i31_grass_hist_yld' are significantly higher than
+*' given by the cellular yield inputs 'f31_grassl_yld' we refer to this as an underestimated
+*' baseline. In this situation the relative calibration terms can lead to unrealistically
+*' large yields in the case of future yield increases within the cellular yield patterns.
 *'
-*' To address this issue, the factor 'i31_lambda_grass' determines the degree
-*' to which the baseline (estimated yields) is under- or overestimated and therefore controls
-*' whether the calibration factor is applied as an absolute or relative change.
-*' For overestimated yields, 'i31_lambda_grass' is 1, which is equivalent
-*' to an entirely relative calibration. For underestimated yields, 'i31_lambda_grass'
-*' is calculated as the squared root of the ratio between LPJmL yields and estimated historical
-*' yields, and as 'i31_lambda_grass'  approaches 0, it reduces the applied relative change
-*' resulting in a mean change increasingly similar to an additive term (@Heinke.2013).
+*' To address this issue, we introduce the factor 'i31_lambda_grass' that determines the degree
+*' to which the baseline 'i31_grass_hist_yld' is under- or overestimated by the modeled yields
+*' 'i31_grass_modeled_yld'. This factor us used to control whether the calibration factor is
+*' applied as an absolute or relative change. For 'i31_grass_hist_yld' smaller than
+*' 'i31_grass_modeled_yld' (overestimated baseline) 'i31_lambda_grass' is 1, which is
+*' equivalent to an entirely relative calibration. For underestimated yields, 'i31_lambda_grass'
+*' is calculated as the squared root of the ratio between modeled yields 'i31_grass_modeled_yld'
+*' and the historical estimates 'i31_grass_hist_yld'. For underestimated yields, as 'i31_lambda_grass'
+*' approaches 0, it reduces the applied relative change resulting in a mean change increasingly
+*' similar to an additive term (@Heinke.2013).
 
 *' This concept is referred to as limited calibration, as it limits the calibration
 *' to an additive term in case of a strongly underestimated baseline. The scalar
@@ -87,5 +90,5 @@ i31_grass_calib(t,j,grassland) =
 i31_grass_yields(t,j,"range","rainfed") = i31_grass_yields(t,j,"range","rainfed") * i31_grass_calib(t,j,"range");
 i31_grass_yields(t,j,"pastr","rainfed") = i31_grass_yields(t,j,"pastr","rainfed") * i31_grass_calib(t,j,"pastr");
 
-*' Note that the calculation is split into two parts for better readability.
+
 *' @stop

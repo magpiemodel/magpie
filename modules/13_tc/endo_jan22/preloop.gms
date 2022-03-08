@@ -10,12 +10,8 @@ loop(t,
   i13_tc_factor(t, tautype) = f13_tc_factor(t,"medium");
   i13_tc_exponent(t,tautype) = f13_tc_exponent(t,"medium");
  else
-*Managed pastures
-  i13_tc_factor(t, "pastr") = f13_tc_factor(t,"%c13_tccost_mpastr%");
-  i13_tc_exponent(t,"pastr") = f13_tc_exponent(t,"%c13_tccost_mpastr%");
-*Croplands
-  i13_tc_factor(t,"crop") = f13_tc_factor(t,"%c13_tccost%");
-  i13_tc_exponent(t,"crop") = f13_tc_exponent(t,"%c13_tccost%");
+  i13_tc_factor(t, tautype) = f13_tc_factor(t,"%c13_tccost%");
+  i13_tc_exponent(t,tautype) = f13_tc_exponent(t,"%c13_tccost%");
  );
 );
 

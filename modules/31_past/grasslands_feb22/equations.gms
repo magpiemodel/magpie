@@ -14,13 +14,13 @@
 *' yields of manged pastures through 'vm_tau', whereas rangeland yields are kept
 *' unaltered after the preloop calibration of 'i31_grass_yields'.
 
-q31_yield_grassl_range(j2,grassland,w)..
- v31_grass_yld(j2,"range",w) =e=
- sum(ct,i31_grass_yields(ct,j2,"range",w));
+q31_yield_grassl_range(j2)..
+ v31_grass_yld(j2,"range","rainfed") =e=
+ sum(ct,i31_grass_yields(ct,j2,"range","rainfed"));
 
-q31_yield_grassl_pastr(j2,grassland,w)..
-  v31_grass_yld(j2,"pastr",w) =e=
-  sum(ct,i31_grass_yields(ct,j2,"pastr",w))
+q31_yield_grassl_pastr(j2)..
+  v31_grass_yld(j2,"pastr","rainfed") =e=
+  sum(ct,i31_grass_yields(ct,j2,"pastr","rainfed"))
   * sum((cell(i2,j2), supreg(h2,i2)), vm_tau(h2, "pastr") / fm_pastr_tau_hist("y1995",h2));
 
 *' Production of grass biomass is calculated by multiplying grassland areas
@@ -44,7 +44,6 @@ q31_pasture_areas(j2)..
 
 q31_manpast_suitability(i2)..
   sum(cell(i2,j2), v31_grass_area(j2,"pastr","rainfed")) =l= sum((cell(i2,j2),ct),i31_manpast_suit(ct,j2));
-
 
 *' To disaggregate the expansion and reduction of total grassland areas ('vm_land')
 *' into managed pastures and rangelands, an extension of the land matrix implemented
@@ -74,7 +73,7 @@ q31_transition_from(j2,grass_from31) ..
 
 q31_cost_transition(j2) ..
               v31_cost_grass_conversion(j2) =e=
-              v31_grass_transitions(j2,grass_from31, grass_to31) * i31_cost_grass_trans(grass_from31, grass_to31) +
+              sum((grass_from31,grass_to31), v31_grass_transitions(j2,grass_from31, grass_to31) * i31_cost_grass_trans(grass_from31, grass_to31)) +
               sum(grassland, v31_pos_balance(j2,grassland) +
               v31_neg_balance(j2,grassland)) * 10e6;
 
@@ -98,14 +97,5 @@ q31_carbon(j2,ag_pools) ..
   q31_bv_rangeland(j2,potnatveg) .. vm_bv(j2,"rangeland",potnatveg)
   					=e=
 					vm_land(j2,"past") * fm_luh2_side_layers(j2,"rangeland") * fm_bii_coeff("rangeland",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
-
-
-*' In the initial calibration time step, where the pasture calibration factor
-*' is calculated that brings pasture biomass demand and pasture area in balance,
-*' small costs are attributed to the production of pasture biomass in order to
-*' avoid overproduction of pasture in the model:
-
-*' For all following time steps, factor requriements `s31_test_scalar` are set
-*' to zero.
 
 *** EOF constraints.gms ***

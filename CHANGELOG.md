@@ -20,9 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **config** included SHAPE SDP scenarios in scenario_config.csv
  - **config** Update default tau realization from endo_jan18 to endo_jan22
  - **config** Added new SSP scenario switch for pasture suitability cfg$gms$c31_past_suit_scen
- - **config** Added new switch to limiting relative to relative or absolute calibration of managed pastures yields in cfg$gms$s31_limit_calib.
- - **literature** Added new .bib reference for KleinGoldewijk.2017
- - **13_tc** Replace endo_jan18 realization by endo_jan22. The new realization adds a new dimension to vm_tau separating crop from managed pastures tau.
+ - **config** Added new switch to limiting calibration to relative or absolute managed pastures yields: cfg$gms$s31_limit_calib.
+  - **13_tc** Replace endo_jan18 realization by endo_jan22. The new realization adds a new dimension to vm_tau separating crop from managed pastures tau.
  - **31_past** added new realization implementing the separation of rangelands and managed pastures for the production of grass biomass.
  - **34_urban** added set urban_scen34 and the switch c34_urban_scenario
  - **35_natveg** corrected naming of Frontier Forests (FF) to Intact Forest Landscapes (IFL) and changed input data for BH_IFL implementation.
