@@ -7,5 +7,4 @@
 
 name,type,reason
 pcm_land, input, not needed
-vm_prod_reg, variable, not needed
 vm_yld,variable, not needed
