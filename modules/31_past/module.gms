@@ -19,5 +19,6 @@
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%past%" == "endo_jun13" $include "./modules/31_past/endo_jun13/realization.gms"
 $Ifi "%past%" == "grasslands_feb22" $include "./modules/31_past/grasslands_feb22/realization.gms"
+$Ifi "%past%" == "grasslands_mar22" $include "./modules/31_past/grasslands_mar22/realization.gms"
 $Ifi "%past%" == "static" $include "./modules/31_past/static/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
