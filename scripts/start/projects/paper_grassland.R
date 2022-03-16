@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ------------------------------------------------
-# description:
+# description: Runs for Pasture mangagement paper
 # ------------------------------------------------
 library(gms)
 # Load start_run(cfg) function which is needed to start MAgPIE runs
@@ -14,18 +14,19 @@ source("scripts/start_functions.R")
 
 #start MAgPIE run
 
+scenarios <- list(c("SSP1","rcp2p6"), c("SSP2","rcp4p5"), c("SSP3","rcp7p0"), c("SSP4","rcp6p0"), c("SSP5", "rcp8p5"))
 
-  for(ssp_setting in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
-    cfg="default.cfg"
-    cfg <- setScenario(cfg,ssp_setting)
-    if(ssp_setting == "SSP1") {
-      cfg$recalibrate <- TRUE
-      cfg$recalibrate_landconversion_cost <- TRUE
-    } else {
-      cfg$recalibrate <- FALSE
-      cfg$recalibrate_landconversion_cost <- FALSE
-    }
-    cfg$gms$past <- "grasslands_mar22"
-    cfg$title <- paste0("PR-",ssp_setting,"_", substr(Sys.time(), 6,10),"-",gsub(":", "_", substr(Sys.time(), 12,16)))
-    start_run(cfg)
+for (ssp_setting in scenarios) {
+  cfg="default.cfg"
+  cfg <- setScenario(cfg,ssp_setting)
+  if("SSP1" %in% ssp_setting) {
+    cfg$recalibrate <- TRUE
+    cfg$recalibrate_landconversion_cost <- TRUE
+  } else {
+    cfg$recalibrate <- FALSE
+    cfg$recalibrate_landconversion_cost <- FALSE
   }
+  cfg$gms$past <- "grasslands_mar22"
+  cfg$title <- paste0("PR-",ssp_setting,"_", substr(Sys.time(), 6,10),"-",gsub(":", "_", substr(Sys.time(), 12,16)))
+  start_run(cfg)
+}
