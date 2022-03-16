@@ -10,7 +10,7 @@
 
 sets
  ssp_past SSP scenarios for pasture suitability areas
- / ssp126, ssp370, ssp585 /
+ / ssp126, ssp245, ssp370, ssp460, ssp585 /
 ;
 *######################### R SECTION END (SETS) ################################
 

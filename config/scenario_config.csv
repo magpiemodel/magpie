@@ -17,6 +17,7 @@ gms$c30_bioen_water;;;;rainfed;rainfed;rainfed;rainfed;rainfed;rainfed;all;rainf
 gms$s30_set_aside_shr;;;;0;0;0;0;0;0;0;0;0.2;;;;;;;0;;;;;;;0.2;0.2;0.2;0.2;0.2;;;;;;;;;
 gms$s30_set_aside_shr_noselect;;;;;;;;;;;;;;;;;;;;;;;;;;0;0;0.2;0;0.2;;;;;;;;;
 gms$c30_set_aside_target;;;;none;none;none;none;none;none;none;none;by2030;;;;;;;none;;;;;;;by2030;by2030;by2030;by2030;by2030;;;;;;;;;
+gms$c31_past_suit_scen;;;;ssp126;ssp245;ssp370;ssp460;ssp585;;;;;;;;;;;;;;;;;;;;;;;;;;ssp126;ssp126;ssp245;ssp370;ssp460;ssp585
 gms$s32_aff_plantation;;;;0;0;0;0;0;0;1;0;0;;;;;;;0;;;;;;;;;;;;;;;;;;;;
 gms$s32_aff_bii_coeff;;;;0;0;0;0;0;0;1;0;0;;;;;;;0;;;;;;;;;;;;;;;;;;;;
 gms$s32_max_aff_area;;;;Inf;Inf;Inf;Inf;Inf;500;500;0;500;;;;;;;500;;Inf;Inf;Inf;Inf;Inf;Inf;Inf;Inf;500;500;;;;;;;;;

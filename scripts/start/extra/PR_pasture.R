@@ -15,7 +15,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 #start MAgPIE run
 tc13 <- c("endo_jan22", "exo")
-past31 <- c("grasslands_feb22", "endo_jun13", "static")
+past31 <- c("grasslands_mar22", "endo_jun13", "static")
 for (i in tc13) {
   cfg$gms$tc <- i
   for (j in past31) {

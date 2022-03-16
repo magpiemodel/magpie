@@ -10,5 +10,3 @@ vm_prod, input, not needed
 vm_yld, input, not needed
 vm_tau,input,questionnaire
 fm_pastr_tau_hist,input,questionnaire
-vm_landexpansion,input,questionnaire
-vm_landreduction,input,questionnaire
