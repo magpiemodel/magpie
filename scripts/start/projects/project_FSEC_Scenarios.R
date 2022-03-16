@@ -233,7 +233,7 @@ carbon_transformation <- function() {
   cfg$gms$c60_res_2ndgenBE_dem <-	"sdp"
 
   # Afforestation
-  cfg$gms$c32_aff_policy <- "ndp"
+  cfg$gms$c32_aff_policy <- "ndc"
   cfg$gms$c32_aff_mask   <- "onlytropical"
   # The following switches are set in the scenario config as well (do we need to activate them?)
   #gms$s32_max_aff_area <-	500 # def = Inf ### Ask Florian, Isabelle or Benni
