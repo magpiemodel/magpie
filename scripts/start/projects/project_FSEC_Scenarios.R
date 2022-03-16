@@ -143,7 +143,7 @@ livestock_transformation <- function() {
   # Higher manure recycling rates
   cfg$gms$c55_scen_conf <- "SSP1"
   # Higher feed efficiency (capped scenario)
-  cfg$gms$c70_feed_scen	"ssp1"
+  cfg$gms$c70_feed_scen <- "ssp1"
   # Animal welfare
   # (cannot be implemented)
 
@@ -161,7 +161,7 @@ livestock_transformation <- function() {
 ### (9) Diversity on land transformation ###
 biodiversity_transformation <- function() {
   #BII by price OR land sparing
-  cfg$gms$c44_price_bv_loss <-	"p1_p10"
+  cfg$gms$c44_price_bv_loss <- "p1_p10"
   # set-aside land
   cfg$gms$s30_set_aside_shr	<- "0.2"
   #gms$c30_set_aside_target	none
