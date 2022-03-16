@@ -12,7 +12,7 @@ scalars
 
 $setglobal c31_past_suit_scen  ssp126
 
-table f31_pastr_suitability(t_all,j,ssp_past) LPJmL potential yields per cell (rainfed and irrigated) (tDM per ha per yr)
+table f31_pastr_suitability(t_all,j,ssp_past) Areas suitable for pasture management (mio. ha)
 $ondelim
 $include "./modules/31_past/input/f31_pastr_suitability.cs3"
 
@@ -33,7 +33,7 @@ $include "./modules/31_past/input/f31_grassl_yld.cs3"
 $offdelim
 ;
 
-table f31_grass_bio(t_all,i, grassland) Modelled regional pasture yields in the past celullar (tDM per ha per yr)
+table f31_grass_bio(t_all,i, grassland) Modelled regional pasture yields in the past (tDM)
 $ondelim
 $include "./modules/31_past/input/f31_grass_bio_hist.cs3"
 $offdelim;

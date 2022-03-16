@@ -25,23 +25,23 @@ pc31_grass(j,grassland)                                 Grassland areas in previ
 i31_grass_calib(t_all,j,grassland)                      Regional grassland calibration factor correcting for FAO yield levels (1)
 i31_grass_modeled_yld(t_all,i,grassland)                Biophysical input yields average over region and grassland cover type at the historical reference year (tDM per ha per yr)
 i31_grass_yields(t_all,j,grassland,w)                   Cellular biophysical input yields (tDM per ha per yr)
-i31_grassl_areas(t_all,j)                            Celullar grassland areas (mio. ha)
+i31_grassl_areas(t_all,j)                               Celullar grassland areas (mio. ha)
 i31_lambda_grass(t,i,grassland)                         Grassland Scaling factor for non-linear management calibration (1)
 i31_grassl_yld_hist_reg(t,i,grassland)                  Grassland FAO yields per region at the historical referende year (tDM per ha per yr)
-i31_grass_hist_yld(t_all,i, grassland)                   FAO gassland yields (tDM per ha per yr)
+i31_grass_hist_yld(t_all,i, grassland)                  FAO gassland yields (tDM per ha per yr)
 ;
 
 equations
-q31_pasture_areas(j)                                     Total grassland calculation (mio. ha)
-q31_manpast_suitability(i)                               Constraint on areas suitable for managed pastures (mio. ha)
-q31_prod_pm(j)                                           Cellular grass production constraint (mio. tDM per yr)
-q31_expansion_cost(j)                                    Grassland transition cost constraint
-q31_yield_grassl_range(j)                    Rangelands yield calculation (tDM per ha per yr)
-q31_yield_grassl_pastr(j)                    Managed pastures yield calculation (tDM per ha per yr)
+q31_pasture_areas(j)                                    Total grassland calculation (mio. ha)
+q31_manpast_suitability(i)                              Constraint on areas suitable for managed pastures (mio. ha)
+q31_prod_pm(j)                                          Cellular grass production constraint (mio. tDM per yr)
+q31_expansion_cost(j)                                   Grassland transition cost constraint
+q31_yield_grassl_range(j)                               Rangelands yield calculation (tDM per ha per yr)
+q31_yield_grassl_pastr(j)                               Managed pastures yield calculation (tDM per ha per yr)
 ;
 
 positive variables
-v31_cost_grass_expansion(j)                              Costs for grassland transitions (mio. USD05MER per yr)
+v31_cost_grass_expansion(j)                             Costs for grassland transitions (mio. USD05MER per yr)
 ;
 
 

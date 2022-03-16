@@ -5,17 +5,26 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In the endo_jun13 realization, pasture area and related carbon
-*' stocks are modelled endogenously. The initial spatially explicit patterns of
-*' pasture are defined in the module [10_land] by the land use input data set.
-*' For future time steps, pasture area depends on the demand for biomass from
-*' pastures to feed livestock as calculated in the module [70_livestock] and
-*' from the intensity of pasture utilization ("pasture yield") as determined in
-*' the module [14_yields].
+*' @description In the grasslands_mar22 realization, grassland areas and related
+*' carbon stocks are modelled endogenously. The initial spatially explicit patterns
+*' of grasslands ("past") are defined in the module [10_land] by the land use input
+*' data set. These areas are further divided into rangelands and managed pastures
+*' under different management assumptions. For future time steps, grasslands spatial
+*' distribution depend on the demand of grass biomass to feed livestock as calculated
+*' in the module [70_livestock] and from the intensity of grassland utilization
+*' ("grassland yields"). Grassland yields are defined separately for rangelands
+*' and managed pasture based on historical estimates or areas and biomass production
+*' for these two systems. Managed pastures yields can be increased endogenously
+*' by investments in technology as calculated in [13_tc]. Rising yields alter the
+*' nitrogen budged on grasslands triggering costs for N inorganic fertilization as
+*' calculated in [50_nr_soil_budget] and control the balance between intensive and
+*' extensive grass biomass production.
 
-*' @limitations No consideration of generic differences between extensive and
-*' intensive grazing systems, of explicit pasture management options and of
-*' related degradation of pastures.
+*' @limitations There is no accounting for specific differences within intensive
+*' pasture management systems and related degradation of grasslands for both
+*' rangelands or managed pastures.
+
+
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/31_past/grasslands_mar22/sets.gms"
