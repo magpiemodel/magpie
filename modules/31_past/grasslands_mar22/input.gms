@@ -27,13 +27,13 @@ $offdelim
 
 scalar s31_limit_calib   Relative managament calibration switch (1=limited 0=pure relative) / 1 /;
 
-table f31_grassl_yld(t_all,j,grassland,w) LPJmL potential yields per cell (rainfed and irrigated) (tDM per ha per yr)
+table f31_grassl_yld(t_all,j,grassland,w) LPJmL potential yields per cell (rainfed only) (tDM per ha)
 $ondelim
 $include "./modules/31_past/input/f31_grassl_yld.cs3"
 $offdelim
 ;
 
-table f31_grass_bio(t_all,i, grassland) Modelled regional pasture yields in the past (tDM)
+table f31_grass_bio(t_all,i, grassland) Estimated regional grass biomass consumption in the past (tDM)
 $ondelim
 $include "./modules/31_past/input/f31_grass_bio_hist.cs3"
 $offdelim;
