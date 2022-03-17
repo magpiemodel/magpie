@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+ - **scripts** added FSEC modeling start script (global runs)
  - **scripts** added new disaggregation script to provide grid cell level BII
  - **inputs** updated non-agricultural water use scenarios (watdem_nonagr_grper.cs3)
  - **config** included switch for non-agricultural water demand (s42_watdem_nonagr_scenario) in scenario_config.csv
