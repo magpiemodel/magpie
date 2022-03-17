@@ -238,7 +238,7 @@ carbon_transformation <- function() {
   # (see also Fuss et al. 2018)
   cfg$gms$c32_aff_policy   <- "ndc"
   cfg$gms$c32_aff_mask     <- "onlytropical"
-  cfg$gms$s32_max_aff_area <-	500
+  cfg$gms$s32_max_aff_area <-	"500"
 
   return(cfg)
 }
