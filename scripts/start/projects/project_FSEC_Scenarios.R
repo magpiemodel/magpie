@@ -210,17 +210,17 @@ fairTrade_transformation <- function() {
   # (not available yet)
   #increase transportation costs
   # (not available yet)
-  #increase trade openness
-  cfg$gms$c21_trade_liberalization <-	"l908080r807070"	# same as SDP scenario
+  # Increased trade openness
+  cfg$gms$c21_trade_liberalization <-	"l908080r807070"
 
   return(cfg)
 }
 
 ### (12) Bioeconomy transformation ###
 bioeconomy_transformation <- function() {
-  # timber demand: higher demand for buildings from wood
+  # Timber demand: higher demand for buildings from wood
   cfg$gms$c73_build_demand <- "50pc"
-  # biomaterial demand increases (therefore no phaseout of 1stgen bioenergy, but rather constant)
+  # Biomaterial demand increases (therefore no phaseout of 1stgen bioenergy, but rather constant)
   cfg$gms$c60_1stgen_biodem	<- "const2030"
 
   return(cfg)
@@ -228,26 +228,28 @@ bioeconomy_transformation <- function() {
 
 ### (13) Carbon management transformation ###
 carbon_transformation <- function() {
-  # Bioenergy
-  cfg$gms$c60_2ndgen_biodem	<- "SSPDB-SSP1-20-REMIND-MAGPIE"
+  # 2nd gen. bioenergy demand following SSP1 and 2 degree pathway
+  cfg$gms$c60_2ndgen_biodem	   <- "SSPDB-SSP1-20-REMIND-MAGPIE"
+  # 2nd gen. bioenergy residues following sustainable development pathway
   cfg$gms$c60_res_2ndgenBE_dem <-	"sdp"
 
-  # Afforestation
-  cfg$gms$c32_aff_policy <- "ndc"
-  cfg$gms$c32_aff_mask   <- "onlytropical"
-  # The following switches are set in the scenario config as well (do we need to activate them?)
-  #gms$s32_max_aff_area <-	500 # def = Inf ### Ask Florian, Isabelle or Benni
+  # Afforestation policy following Nationally determined contributions
+  # and limited to tropical regions and 500 Mha because of the albedo effect
+  # (see also Fuss et al. 2018)
+  cfg$gms$c32_aff_policy   <- "ndc"
+  cfg$gms$c32_aff_mask     <- "onlytropical"
+  cfg$gms$s32_max_aff_area <-	500
 
   return(cfg)
 }
 
 ### (14) Land and water sparing transformation ###
 protectLandWater_transformation <- function() {
-  # land protection
+  # land protection following strict protection scenario (half or land's surface)
   cfg$gms$c35_protect_scenario <-	"HalfEarth"
-  # water protection
-  cfg$gms$c42_env_flow_policy	<- "on"	      # same as SDP scenario
-  cfg$gms$c30_bioen_water	    <- "rainfed"  # same as SDP scenario (and also default anyways)
+  # Water protection through environmental flow protection
+  cfg$gms$c42_env_flow_policy	<- "on"
+  cfg$gms$c30_bioen_water	    <- "rainfed"  # (already default anyways)
   # MACC curve including Above ground CO2 emis from all LUC; all CH4 emissions and animal-sourced N2O
   cfg$gms$c56_emis_policy <- "maccs_excl_cropland_n2o"
 
