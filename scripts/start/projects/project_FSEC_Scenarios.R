@@ -229,7 +229,7 @@ bioeconomy_transformation <- function() {
 ### (13) Carbon management transformation ###
 carbon_transformation <- function() {
   # 2nd gen. bioenergy demand following SSP1 and 2 degree pathway
-  cfg$gms$c60_2ndgen_biodem	   <- "SSPDB-SSP1-20-REMIND-MAGPIE"
+  cfg$gms$c60_2ndgen_biodem	   <- "SSPDB-SSP2-26-REMIND-MAGPIE"
   # 2nd gen. bioenergy residues following sustainable development pathway
   cfg$gms$c60_res_2ndgenBE_dem <-	"sdp"
 
