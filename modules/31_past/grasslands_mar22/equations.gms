@@ -13,21 +13,24 @@
 *' 'vm_tau', whereas rangeland yields are kept unaltered after the preloop calibration
 *' of 'i31_grass_yields'.
 
-q31_yield_grassl_range(j2)..
- v31_grass_yld(j2,"range","rainfed") =e=
- sum(ct,i31_grass_yields(ct,j2,"range","rainfed"));
+* q31_yield_grassl_range(j2)..
+* v31_grass_yld(j2,"range") =e=
+* sum(ct,i31_grass_yields(ct,j2,"range","rainfed"));
 
-q31_yield_grassl_pastr(j2)..
-  v31_grass_yld(j2,"pastr","rainfed") =e=
-  sum(ct,i31_grass_yields(ct,j2,"pastr","rainfed"))
-  * sum((cell(i2,j2), supreg(h2,i2)), vm_tau(h2, "pastr") / fm_pastr_tau_hist("y1995",h2));
+* q31_yield_grassl_pastr(j2)..
+*  v31_grass_yld(j2,"pastr") =e=
+*  sum(ct,i31_grass_yields(ct,j2,"pastr","rainfed"))
+*  * sum((cell(i2,j2), supreg(h2,i2)), vm_tau(h2, "pastr") / fm_pastr_tau_hist("y1995",h2));
 
+  vm_prod(j2,"pasture") =e= v31_grass_area(j2,"range")*sum(ct,i31_grass_yields(ct,j2,"range"))
+          + v31_grass_area(j2,"pastr")*sum(ct,i31_grass_yields(ct,j2,"pastr"))*
+          sum((cell(i2,j2), supreg(h2,i2)), vm_tau(h2, "pastr") / fm_pastr_tau_hist("y1995",h2));
 
 *' Production of grass biomass is calculated by multiplying grassland areas `v31_grass_area`
 *' with cellular rainfed rangelands and managed pasture yields `v31_grass_yld`:
 
 q31_prod_pm(j2) ..
-  vm_prod(j2,"pasture") =e= sum(grassland, v31_grass_area(j2,grassland,"rainfed")
+  vm_prod(j2,"pasture") =e= sum(grassland, v31_grass_area(j2,grassland)
                             * v31_grass_yld(j2,grassland,"rainfed"));
 
 *' The sum of managed pastures and rangelands areas equal the parent
@@ -41,8 +44,8 @@ q31_pasture_areas(j2)..
 *' with more than five inhabitants per km2 and with aridity greater than 0.5 following
 *' the methodology established by @KleinGoldewijk.2017
 
-q31_manpast_suitability(i2)..
-  sum(cell(i2,j2), v31_grass_area(j2,"pastr","rainfed")) =l= sum((cell(i2,j2),ct),i31_manpast_suit(ct,j2));
+* q31_manpast_suitability(i2)..
+*  sum(cell(i2,j2), v31_grass_area(j2,"pastr")) =l= sum((cell(i2,j2),ct),i31_manpast_suit(ct,j2));
 
 *' To avoid unrealistic conversions between rangelands and managed pastures areas,
 *' a cost is associated with the expansion of rangelands and managed pastures 'v31_cost_grass_expansion'
@@ -50,12 +53,12 @@ q31_manpast_suitability(i2)..
 
 q31_expansion_cost(j2) ..
   v31_cost_grass_expansion(j2) =g=
-                            sum(grassland, v31_grass_area(j2, grassland, "rainfed") - pc31_grass(j2,grassland));
+                            sum(grassland, v31_grass_area(j2, grassland) - pc31_grass(j2,grassland));
 
 q31_cost_prod_past(i2) ..
   vm_cost_prod(i2,"pasture") =e= sum((cell(i2,j2), grassland),
-                            v31_grass_area(j2, grassland, "rainfed") *
-                            v31_grass_yld(j2, grassland, "rainfed") +
+                            v31_grass_area(j2, grassland) *
+                            v31_grass_yld(j2, grassland) +
                             v31_cost_grass_expansion(j2));
 
 *' On the basis of the required pasture area, cellular above ground carbon stocks are calculated:

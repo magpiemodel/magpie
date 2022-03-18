@@ -19,8 +19,8 @@
 
 q13_cost_tc(i2, tautype) ..
   v13_cost_tc(i2, tautype) =e= sum(ct, pc13_land(i2, tautype) *
-                     i13_tc_factor(ct, tautype) * sum(supreg(h2,i2),vm_tau(h2,tautype))**
-                     i13_tc_exponent(ct,tautype) * (1+pm_interest(ct,i2))**15);
+                     i13_tc_factor(ct) * sum(supreg(h2,i2),vm_tau(h2,tautype))**
+                     i13_tc_exponent(ct) * (1+pm_interest(ct,i2))**15);
 
 
 *' The shifting is performed because investments into technological change

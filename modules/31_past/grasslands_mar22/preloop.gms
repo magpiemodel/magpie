@@ -40,15 +40,15 @@ pc31_grass(j,grassland) = f31_LUH2v2("y1995",j,grassland);
 *' to an additive term in case of a strongly underestimated baseline. The scalar
 * 's31_limit_calib' can be used to switch limited calibration on (1) and off (0).
 
-i31_grass_yields(t,j,grassland,w) = f31_grassl_yld(t,j,grassland,w);
+i31_grass_yields(t,j,grassland) = f31_grassl_yld(t,j,grassland,"rainfed");
 i31_grassl_areas(t_all,j) =  sum(grassland, f31_LUH2v2(t_all,j,grassland));
 i31_grass_hist_yld(t_past,i,grassland) = (f31_grass_bio(t_past,i, grassland) /
                 sum(cell(i,j),f31_LUH2v2(t_past,j,grassland)))$(sum(cell(i,j), f31_LUH2v2(t_past,j,grassland))>0);
 
 i31_grass_modeled_yld(t_past,i,grassland)
-   = (sum(cell(i,j),i31_grass_yields(t_past,j,grassland,"rainfed") * f31_LUH2v2(t_past,j,grassland)) /
+   = (sum(cell(i,j),i31_grass_yields(t_past,j,grassland) * f31_LUH2v2(t_past,j,grassland)) /
       sum(cell(i,j),f31_LUH2v2(t_past,j,grassland)))$(sum(cell(i,j), f31_LUH2v2(t_past,j,grassland))>0)
-   + (sum(cell(i,j),i31_grassl_areas(t_past,j) * i31_grass_yields(t_past,j,grassland,"rainfed")) /
+   + (sum(cell(i,j),i31_grassl_areas(t_past,j) * i31_grass_yields(t_past,j,grassland)) /
       sum(cell(i,j),i31_grassl_areas(t_past,j)))$(sum(cell(i,j), f31_LUH2v2(t_past,j,grassland))=0);
 
 loop(t,
@@ -84,8 +84,8 @@ i31_grass_calib(t,j,grassland) =
       (f31_grassl_yld(t,j,grassland,"rainfed") / (sum(cell(i,j),i31_grass_modeled_yld(t,i,grassland))+10**(-8))) **
                              sum(cell(i,j),i31_lambda_grass(t,i,grassland)))$(f31_grassl_yld(t,j,grassland,"rainfed")>0);
 
-i31_grass_yields(t,j,"range","rainfed") = i31_grass_yields(t,j,"range","rainfed") * i31_grass_calib(t,j,"range");
-i31_grass_yields(t,j,"pastr","rainfed") = i31_grass_yields(t,j,"pastr","rainfed") * i31_grass_calib(t,j,"pastr");
+i31_grass_yields(t,j,"range") = i31_grass_yields(t,j,"range") * i31_grass_calib(t,j,"range");
+i31_grass_yields(t,j,"pastr") = i31_grass_yields(t,j,"pastr") * i31_grass_calib(t,j,"pastr");
 
 *' Note that the calculation is split into two parts for better readability.
 *' @stop
