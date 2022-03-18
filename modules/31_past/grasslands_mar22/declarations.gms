@@ -23,7 +23,7 @@ i31_manpast_suit(t_all,j)                               Areas suitable for manag
 pc31_grass(j,grassland)                                 Grassland areas in previous time step (mio. ha)
 i31_grass_calib(t_all,j,grassland)                      Regional grassland calibration factor correcting for FAO yield levels (1)
 i31_grass_modeled_yld(t_all,i,grassland)                Biophysical input yields average over region and grassland cover type at the historical reference year (tDM per ha)
-i31_grass_yields(t_all,j,grassland,w)                   Cellular biophysical input yields (tDM per ha)
+i31_grass_yields(t_all,j,grassland)                   Cellular biophysical input yields (tDM per ha)
 i31_grassl_areas(t_all,j)                               Celullar grassland areas (mio. ha)
 i31_lambda_grass(t,i,grassland)                         Grassland Scaling factor for non-linear management calibration (1)
 i31_grassl_yld_hist_reg(t,i,grassland)                  Grassland FAO yields per region at the historical referende year (tDM per ha)

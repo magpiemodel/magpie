@@ -22,6 +22,7 @@
 *  sum(ct,i31_grass_yields(ct,j2,"pastr","rainfed"))
 *  * sum((cell(i2,j2), supreg(h2,i2)), vm_tau(h2, "pastr") / fm_pastr_tau_hist("y1995",h2));
 
+q31_prod_pm(j2) ..
   vm_prod(j2,"pasture") =e= v31_grass_area(j2,"range")*sum(ct,i31_grass_yields(ct,j2,"range"))
           + v31_grass_area(j2,"pastr")*sum(ct,i31_grass_yields(ct,j2,"pastr"))*
           sum((cell(i2,j2), supreg(h2,i2)), vm_tau(h2, "pastr") / fm_pastr_tau_hist("y1995",h2));
@@ -29,9 +30,9 @@
 *' Production of grass biomass is calculated by multiplying grassland areas `v31_grass_area`
 *' with cellular rainfed rangelands and managed pasture yields `v31_grass_yld`:
 
-q31_prod_pm(j2) ..
-  vm_prod(j2,"pasture") =e= sum(grassland, v31_grass_area(j2,grassland)
-                            * v31_grass_yld(j2,grassland,"rainfed"));
+*q31_prod_pm(j2) ..
+*  vm_prod(j2,"pasture") =e= sum(grassland, v31_grass_area(j2,grassland)
+*                            * v31_grass_yld(j2,grassland,"rainfed"));
 
 *' The sum of managed pastures and rangelands areas equal the parent
 *' land class pastures areas in 'vm_land'.

@@ -11,6 +11,6 @@
 *' with more than five inhabitants per km2 and with aridity greater than 0.5 following
 *' the methodology established by @KleinGoldewijk.2017
 
-v31_grass_area.up(j2,"pastr")) = i31_manpast_suit(t,j2));
+v31_grass_area.up(j2,"pastr") = i31_manpast_suit(t,j2);
 
 *' @stop
