@@ -11,21 +11,20 @@
 
 library(gms)
 source("scripts/start_functions.R")
-source("scripts/performance_test.R")
 source("config/default.cfg")
 
 # Set defaults
 codeCheck <- FALSE
 
-input <- c(regional    = "rev4.67_h12_magpie.tgz",
-           cellular    = "rev4.67_h12_1998ea10_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-           validation  = "rev4.67_h12_validation.tgz",
+input <- c(regional    = "rev4.67FSECmodeling_e2bdb6cd_magpie.tgz",
+           cellular    = "rev4.67FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+           validation  = "rev4.67FSECmodeling_e2bdb6cd_validation.tgz",
            additional  = "additional_data_rev4.08.tgz",
-           calibration = "calibration_H12_sticky_feb18_free_18Jan22.tgz")
+           calibration = "calibration_FSEC_18Mar22.tgz")
 
 # -----------------------------------------------------------------------------------------------------------------
 # General settings:
-general_settings <- function(title, cfg) {
+general_settings <- function(title) {
   source("config/default.cfg")
   cfg$input       <- input
   cfg$title       <- title
@@ -295,14 +294,15 @@ employment_transformation <- function(cfg) {
 ##         Business-as-usual Scenario          ##
 #################################################
 ### Business-as-usual
-cfg <- general_settings(title = "FSEC_BAU", cfg = cfg)
+cfg <- general_settings(title = "FSEC_BAU")
 cfg <- gms::setScenario(cfg, "SSP2")
+
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 #################################################
 ##          Total SDP Scenario                 ##
 #################################################
-cfg <- general_settings(title = "FSEC_SDP", cfg = cfg)
+cfg <- general_settings(title = "FSEC_SDP")
 ### (1) Population and Health ###
 cfg <- population_transformation(cfg = cfg)
 ### (2) Reduced inequality and Education Transformation ###
@@ -343,86 +343,86 @@ start_run(cfg = cfg, codeCheck = codeCheck)
 ##          Disaggregated runs                 ##
 #################################################
 ### (1) Population and Health ###
-cfg <- general_settings(title = "FSEC_population", cfg = cfg)
+cfg <- general_settings(title = "FSEC_population")
 cfg <- population_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (2) Reduced inequality and Education Transformation ###
-cfg <- general_settings(title = "FSEC_educationANDinequality", cfg = cfg)
+cfg <- general_settings(title = "FSEC_educationANDinequality")
 cfg <- inequalityANDeducation_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (3) Improved institutions ###
-cfg <- general_settings(title = "FSEC_institutions", cfg = cfg)
+cfg <- general_settings(title = "FSEC_institutions")
 cfg <- institution_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (4) Energy and transfport transformation ###
-cfg <- general_settings(title = "FSEC_energy", cfg = cfg)
+cfg <- general_settings(title = "FSEC_energy")
 cfg <- energy_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (5) Diet health transformation ###
-cfg <- general_settings(title = "FSEC_dietHealth", cfg = cfg)
+cfg <- general_settings(title = "FSEC_dietHealth")
 cfg <- diet_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (6) Diet waste transformation ###
-cfg <- general_settings(title = "FSEC_dietWaste", cfg = cfg)
+cfg <- general_settings(title = "FSEC_dietWaste")
 cfg <- waste_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (7) Diet inclustion transformation ###
-cfg <- general_settings(title = "FSEC_dietInclusion", cfg = cfg)
+cfg <- general_settings(title = "FSEC_dietInclusion")
 cfg <- dietInclusion_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (8) Livestock management transformation ###
-cfg <- general_settings(title = "FSEC_livestock", cfg = cfg)
+cfg <- general_settings(title = "FSEC_livestock")
 cfg <- livestock_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (9) Diversity on land transformation ###
-cfg <- general_settings(title = "FSEC_biodiversity", cfg = cfg)
+cfg <- general_settings(title = "FSEC_biodiversity")
 cfg <- biodiversity_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (10) Supply chain transformation ###
-cfg <- general_settings(title = "FSEC_supplyChain", cfg = cfg)
+cfg <- general_settings(title = "FSEC_supplyChain")
 cfg <- supplyChain_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (11) Fair trade transformation ###
-cfg <- general_settings(title = "FSEC_fairTrade", cfg = cfg)
+cfg <- general_settings(title = "FSEC_fairTrade")
 cfg <- fairTrade_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (12) Bioeconomy transformation ###
-cfg <- general_settings(title = "FSEC_bioeconomy", cfg = cfg)
+cfg <- general_settings(title = "FSEC_bioeconomy")
 cfg <- bioeconomy_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (13) Carbon management transformation ###
-cfg <- general_settings(title = "FSEC_carbon", cfg = cfg)
+cfg <- general_settings(title = "FSEC_carbon")
 cfg <- carbon_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (14) Land and water sparing transformation ###
-cfg <- general_settings(title = "FSEC_landANDwater", cfg = cfg)
+cfg <- general_settings(title = "FSEC_landANDwater")
 cfg <- protectLandWater_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (15) Peatland transformation ###
-cfg <- general_settings(title = "FSEC_peatland", cfg = cfg)
+cfg <- general_settings(title = "FSEC_peatland")
 cfg <- peatland_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (16) Air pollution intervention transformation ###
-cfg <- general_settings(title = "FSEC_airpollution", cfg = cfg)
+cfg <- general_settings(title = "FSEC_airpollution")
 cfg <- airPollution_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (17) Agricultural employment transformation ###
-cfg <- general_settings(title = "FSEC_employment", cfg = cfg)
+cfg <- general_settings(title = "FSEC_employment")
 cfg <- employment_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
