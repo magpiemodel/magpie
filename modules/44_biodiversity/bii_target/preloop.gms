@@ -5,8 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-v44_bv_glo.lo = 0;
-v44_bv_glo.up = 1;
+*v44_bv_glo.lo = 0;
+*v44_bv_glo.up = 1;
 
 
 *** EOF pre.gms ***

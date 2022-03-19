@@ -8,9 +8,9 @@
 *v44_bv_slack.fx(j) = 0;
 
 if (m_year(t) <= s44_start_year,
+	v44_bv_slack.fx = 0;
 *	v44_bv_glo.lo = 0;
 else
 *	v44_bv_glo.lo = v44_bv_glo.l + 0.0005 * m_timestep_length;
 *	v44_bv_glo.lo$(v44_bv_glo.lo > 1) = 1;
-	v44_bv_slack.fx = 0;
 );

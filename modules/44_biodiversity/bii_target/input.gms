@@ -8,7 +8,7 @@
 scalars
  s44_price_slack		blub (USD per ha of bv loss) / 1000000 /
  s44_start_year			/ 2020 /
- s44_target				/ -Inf /
+ s44_target				/ -1 /
 ;
 
 $setglobal c44_price_bv_loss  p0

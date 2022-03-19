@@ -14,6 +14,7 @@
 q44_bv_glo2 .. v44_bv_glo$(sum(ct, m_year(ct)) > s44_start_year)
 			  =g= 
 			  v44_bv_glo.l + (s44_target - v44_bv_slack) * m_timestep_length;
+*			  v44_bv_glo.l + (s44_target - v44_bv_slack) * m_timestep_length;
 
 q44_bv_glo .. v44_bv_glo
 			  =e= 
