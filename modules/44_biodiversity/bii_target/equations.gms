@@ -11,7 +11,7 @@
  					=e=
  					v44_bv_slack * s44_price_slack;
 
-q44_bv_glo2 .. v44_bv_glo$(sum(ct, m_year(ct)) > s44_start_year)
+q44_bv_glo2$(sum(ct, m_year(ct)) > s44_start_year) .. v44_bv_glo
 			  =g= 
 			  v44_bv_glo.l + (s44_target - v44_bv_slack) * m_timestep_length;
 *			  v44_bv_glo.l + (s44_target - v44_bv_slack) * m_timestep_length;
