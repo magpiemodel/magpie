@@ -8,5 +8,6 @@
 *v44_bv_glo.lo = 0;
 *v44_bv_glo.up = 1;
 
+v44_bv_glo.l = 0;
 
 *** EOF pre.gms ***
