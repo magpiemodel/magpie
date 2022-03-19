@@ -38,7 +38,7 @@ q31_prod_pm(j2) ..
 *' land class pastures areas in 'vm_land'.
 
 q31_pasture_areas(j2)..
-  vm_land(j2,"past") =e= sum(grassland, v31_grass_area(j2,grassland,"rainfed"));
+  vm_land(j2,"past") =e= sum(grassland, v31_grass_area(j2,grassland));
 
 *' Socioeconomic and environmental conditions determine the potential managed pastures
 *' areas ('i31_manpast_suit'). 'i31_manpast_suit' is estimated by determining areas
