@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *** Land Patterns are transferred to next timestep
- pc31_grass(j,grassland) = v31_grass_area.l(j,grassland, "rainfed");
+ pc31_grass(j,grassland) = v31_grass_area.l(j,grassland);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov31_grass_area(t,j,grassland,"marginal")   = v31_grass_area.m(j,grassland);
@@ -19,8 +19,6 @@
  oq31_pasture_areas(t,j,"marginal")          = q31_pasture_areas.m(j);
  oq31_prod_pm(t,j,"marginal")                = q31_prod_pm.m(j);
  oq31_expansion_cost(t,j,"marginal")         = q31_expansion_cost.m(j);
- oq31_yield_grassl_range(t,j,"marginal")     = q31_yield_grassl_range.m(j);
- oq31_yield_grassl_pastr(t,j,"marginal")     = q31_yield_grassl_pastr.m(j);
  ov31_grass_area(t,j,grassland,"level")      = v31_grass_area.l(j,grassland);
  ov31_grass_yld(t,j,grassland,"level")       = v31_grass_yld.l(j,grassland);
  ov31_cost_grass_expansion(t,j,"level")      = v31_cost_grass_expansion.l(j);
@@ -31,8 +29,6 @@
  oq31_pasture_areas(t,j,"level")             = q31_pasture_areas.l(j);
  oq31_prod_pm(t,j,"level")                   = q31_prod_pm.l(j);
  oq31_expansion_cost(t,j,"level")            = q31_expansion_cost.l(j);
- oq31_yield_grassl_range(t,j,"level")        = q31_yield_grassl_range.l(j);
- oq31_yield_grassl_pastr(t,j,"level")        = q31_yield_grassl_pastr.l(j);
  ov31_grass_area(t,j,grassland,"upper")      = v31_grass_area.up(j,grassland);
  ov31_grass_yld(t,j,grassland,"upper")       = v31_grass_yld.up(j,grassland);
  ov31_cost_grass_expansion(t,j,"upper")      = v31_cost_grass_expansion.up(j);
@@ -43,8 +39,6 @@
  oq31_pasture_areas(t,j,"upper")             = q31_pasture_areas.up(j);
  oq31_prod_pm(t,j,"upper")                   = q31_prod_pm.up(j);
  oq31_expansion_cost(t,j,"upper")            = q31_expansion_cost.up(j);
- oq31_yield_grassl_range(t,j,"upper")        = q31_yield_grassl_range.up(j);
- oq31_yield_grassl_pastr(t,j,"upper")        = q31_yield_grassl_pastr.up(j);
  ov31_grass_area(t,j,grassland,"lower")      = v31_grass_area.lo(j,grassland);
  ov31_grass_yld(t,j,grassland,"lower")       = v31_grass_yld.lo(j,grassland);
  ov31_cost_grass_expansion(t,j,"lower")      = v31_cost_grass_expansion.lo(j);
@@ -55,8 +49,6 @@
  oq31_pasture_areas(t,j,"lower")             = q31_pasture_areas.lo(j);
  oq31_prod_pm(t,j,"lower")                   = q31_prod_pm.lo(j);
  oq31_expansion_cost(t,j,"lower")            = q31_expansion_cost.lo(j);
- oq31_yield_grassl_range(t,j,"lower")        = q31_yield_grassl_range.lo(j);
- oq31_yield_grassl_pastr(t,j,"lower")        = q31_yield_grassl_pastr.lo(j);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
 
 *** EOF postsolve.gms ***

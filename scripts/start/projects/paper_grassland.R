@@ -17,7 +17,7 @@ source("scripts/start_functions.R")
 scenarios <- list(c("SSP1","rcp2p6"), c("SSP2","rcp4p5"), c("SSP3","rcp7p0"), c("SSP4","rcp6p0"), c("SSP5", "rcp8p5"))
 
 for (ssp_setting in scenarios) {
-  name = "FSEC_G"
+  name = "FSEC_G2"
   cfg="default.cfg"
   cfg <- setScenario(cfg,ssp_setting)
   if("SSP1" %in% ssp_setting) {

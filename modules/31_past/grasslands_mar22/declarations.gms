@@ -35,8 +35,8 @@ q31_pasture_areas(j)                                    Total grassland calculat
 * q31_manpast_suitability(i)                              Constraint on areas suitable for managed pastures (mio. ha)
 q31_prod_pm(j)                                          Cellular grass production constraint (mio. tDM per yr)
 q31_expansion_cost(j)                                   Grassland transition cost constraint
-q31_yield_grassl_range(j)                               Rangelands yield calculation (tDM per ha per yr)
-q31_yield_grassl_pastr(j)                               Managed pastures yield calculation (tDM per ha per yr)
+*q31_yield_grassl_range(j)                               Rangelands yield calculation (tDM per ha per yr)
+*q31_yield_grassl_pastr(j)                               Managed pastures yield calculation (tDM per ha per yr)
 ;
 
 positive variables
@@ -58,8 +58,6 @@ parameters
  oq31_pasture_areas(t,j,type)          Total grassland calculation (mio. ha)
  oq31_prod_pm(t,j,type)                Cellular grass production constraint (mio. tDM per yr)
  oq31_expansion_cost(t,j,type)         Grassland transition cost constraint
- oq31_yield_grassl_range(t,j,type)     Rangelands yield calculation (tDM per ha per yr)
- oq31_yield_grassl_pastr(t,j,type)     Managed pastures yield calculation (tDM per ha per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 
