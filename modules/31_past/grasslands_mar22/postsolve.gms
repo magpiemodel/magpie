@@ -17,6 +17,7 @@
  oq31_bv_manpast(t,j,potnatveg,"marginal")   = q31_bv_manpast.m(j,potnatveg);
  oq31_bv_rangeland(t,j,potnatveg,"marginal") = q31_bv_rangeland.m(j,potnatveg);
  oq31_pasture_areas(t,j,"marginal")          = q31_pasture_areas.m(j);
+ oq31_manpast_suitability(t,i,"marginal")    = q31_manpast_suitability.m(i);
  oq31_prod_pm(t,j,"marginal")                = q31_prod_pm.m(j);
  oq31_expansion_cost(t,j,"marginal")         = q31_expansion_cost.m(j);
  ov31_grass_area(t,j,grassland,"level")      = v31_grass_area.l(j,grassland);
@@ -27,6 +28,7 @@
  oq31_bv_manpast(t,j,potnatveg,"level")      = q31_bv_manpast.l(j,potnatveg);
  oq31_bv_rangeland(t,j,potnatveg,"level")    = q31_bv_rangeland.l(j,potnatveg);
  oq31_pasture_areas(t,j,"level")             = q31_pasture_areas.l(j);
+ oq31_manpast_suitability(t,i,"level")       = q31_manpast_suitability.l(i);
  oq31_prod_pm(t,j,"level")                   = q31_prod_pm.l(j);
  oq31_expansion_cost(t,j,"level")            = q31_expansion_cost.l(j);
  ov31_grass_area(t,j,grassland,"upper")      = v31_grass_area.up(j,grassland);
@@ -37,6 +39,7 @@
  oq31_bv_manpast(t,j,potnatveg,"upper")      = q31_bv_manpast.up(j,potnatveg);
  oq31_bv_rangeland(t,j,potnatveg,"upper")    = q31_bv_rangeland.up(j,potnatveg);
  oq31_pasture_areas(t,j,"upper")             = q31_pasture_areas.up(j);
+ oq31_manpast_suitability(t,i,"upper")       = q31_manpast_suitability.up(i);
  oq31_prod_pm(t,j,"upper")                   = q31_prod_pm.up(j);
  oq31_expansion_cost(t,j,"upper")            = q31_expansion_cost.up(j);
  ov31_grass_area(t,j,grassland,"lower")      = v31_grass_area.lo(j,grassland);
@@ -47,6 +50,7 @@
  oq31_bv_manpast(t,j,potnatveg,"lower")      = q31_bv_manpast.lo(j,potnatveg);
  oq31_bv_rangeland(t,j,potnatveg,"lower")    = q31_bv_rangeland.lo(j,potnatveg);
  oq31_pasture_areas(t,j,"lower")             = q31_pasture_areas.lo(j);
+ oq31_manpast_suitability(t,i,"lower")       = q31_manpast_suitability.lo(i);
  oq31_prod_pm(t,j,"lower")                   = q31_prod_pm.lo(j);
  oq31_expansion_cost(t,j,"lower")            = q31_expansion_cost.lo(j);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################

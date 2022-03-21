@@ -7,10 +7,11 @@
 
 
 scalars
-  s31_test_scalar  Factor requirements (USD05MER per tDM)          / 1 /
+  s31_cost_expansion   Grassland expansion costs (USD05MER per hectare)          / 1 /
+  s31_cost_grass_prod  Grassland factor costs (USD05MER per tDM)                 / 1 /
 ;
 
-$setglobal c31_past_suit_scen  ssp126
+$setglobal c31_past_suit_scen  ssp370
 
 table f31_pastr_suitability(t_all,j,ssp_past) Areas suitable for pasture management (mio. ha)
 $ondelim
