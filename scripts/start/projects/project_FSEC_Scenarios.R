@@ -35,7 +35,7 @@ general_settings <- function(title) {
                   "projects/FSEC_environmentalPollution_grid")
 
   # Climate change impacts activated, SSP2 default settings, NDC activated, endogenous forestry activated
-  cfg <- gms::setScenario(cfg, "cc", "SSP2", "NDC", "ForestryEndo")
+  cfg <- gms::setScenario(cfg, c("cc", "SSP2", "NDC", "ForestryEndo"))
 
   # Nitrogen module with IPCC emissions factors rescaled with efficiency
   cfg$gms$nitrogen            <- "rescaled_jan21"
