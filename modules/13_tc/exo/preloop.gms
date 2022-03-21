@@ -7,11 +7,11 @@
 
 loop(t,
  if(m_year(t) <= sm_fix_SSP2,
-  i13_tc_factor(t,tautype) = f13_tc_factor(t,"medium");
-  i13_tc_exponent(t,tautype) = f13_tc_exponent(t,"medium");
+  i13_tc_factor(t) = f13_tc_factor(t,"medium");
+  i13_tc_exponent(t) = f13_tc_exponent(t,"medium");
  else
-  i13_tc_factor(t,tautype) = f13_tc_factor(t,"%c13_tccost%");
-  i13_tc_exponent(t,tautype) = f13_tc_exponent(t,"%c13_tccost%");
+  i13_tc_factor(t) = f13_tc_factor(t,"%c13_tccost%");
+  i13_tc_exponent(t) = f13_tc_exponent(t,"%c13_tccost%");
  );
 );
 

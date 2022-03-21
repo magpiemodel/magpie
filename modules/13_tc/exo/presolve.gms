@@ -17,8 +17,8 @@ vm_tau.fx(h,tautype) = f13_tau_scenario(t,h,tautype);
 * The costs are shifted over 15 years (exponent 15) to reflect the average
 * time it takes investments in tc to pay off.
 
-p13_cost_tc(i,tautype) = pc13_land(i,tautype) * i13_tc_factor(t,tautype)
-                     * sum(supreg(h,i), vm_tau.l(h,tautype))**i13_tc_exponent(t,tautype)
+p13_cost_tc(i,tautype) = pc13_land(i,tautype) * i13_tc_factor(t)
+                     * sum(supreg(h,i), vm_tau.l(h,tautype))**i13_tc_exponent(t)
                      * (1+pm_interest(t,i))**15;
 
 p13_tech_cost(i,tautype) = (sum(supreg(h,i),vm_tau.l(h,tautype)/pcm_tau(h,tautype))-1) * p13_cost_tc(i,tautype)

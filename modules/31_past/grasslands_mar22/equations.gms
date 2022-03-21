@@ -24,7 +24,7 @@ q31_pasture_areas(j2)..
   vm_land(j2,"past") =e= sum(grassland, v31_grass_area(j2,grassland));
 
 *' Socioeconomic and environmental conditions determine the potential managed pastures
-*' areas ('i31_manpast_suit'). 'i31_manpast_suit' is estimated by determining areas
+*' areas ('i31_manpast_suit'). 'i31_manpast_suit' is estimated by summing areas
 *' with more than five inhabitants per km2 and with aridity greater than 0.5 following
 *' the methodology established by @KleinGoldewijk.2017
 

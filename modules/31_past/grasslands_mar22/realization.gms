@@ -20,7 +20,7 @@
 *' calculated in [50_nr_soil_budget] and control the balance between intensive and
 *' extensive grass biomass production.
 
-*' @limitations There is no accounting for specific differences within intensive
+*' @limitations We currently do not accout for specific differences within intensive
 *' pasture management systems and related degradation of grasslands for both
 *' rangelands or managed pastures.
 
