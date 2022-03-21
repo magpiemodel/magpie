@@ -34,8 +34,9 @@ general_settings <- function(title) {
                   "extra/disaggregation_BII", "projects/FSEC_dietaryIndicators",
                   "projects/FSEC_environmentalPollution_grid")
 
-  # Climate change impacts activated
-  cfg                         <- gms::setScenario(cfg, "cc")
+  # Climate change impacts activated, SSP2 default settings, NDC activated, endogenous forestry activated
+  cfg <- gms::setScenario(cfg, "cc", "SSP2", "NDC", "ForestryEndo")
+
   # Nitrogen module with IPCC emissions factors rescaled with efficiency
   cfg$gms$nitrogen            <- "rescaled_jan21"
   # emission policy not including any GHG sources
@@ -227,8 +228,8 @@ bioeconomy_transformation <- function(cfg) {
 
 ### (13) Carbon management transformation ###
 carbon_transformation <- function(cfg) {
-  # 2nd gen. bioenergy demand following SSP1 and 2 degree pathway
-  cfg$gms$c60_2ndgen_biodem	   <- "SSPDB-SSP2-26-REMIND-MAGPIE"
+  # 2nd gen. bioenergy demand following "well-below 1.5" pathway
+  cfg$gms$c60_2ndgen_biodem	   <- "R21M42-SDP-PkBudg1000"
   # 2nd gen. bioenergy residues following sustainable development pathway
   cfg$gms$c60_res_2ndgenBE_dem <-	"sdp"
 
@@ -295,8 +296,6 @@ employment_transformation <- function(cfg) {
 #################################################
 ### Business-as-usual
 cfg <- general_settings(title = "FSEC_BAU")
-cfg <- gms::setScenario(cfg, "SSP2")
-
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 #################################################
