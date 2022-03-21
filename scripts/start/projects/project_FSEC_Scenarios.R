@@ -20,7 +20,7 @@ input <- c(regional    = "rev4.67FSECmodeling_e2bdb6cd_magpie.tgz",
            cellular    = "rev4.67FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
            validation  = "rev4.67FSECmodeling_e2bdb6cd_validation.tgz",
            additional  = "additional_data_rev4.08.tgz",
-           calibration = "calibration_FSEC_18Mar22.tgz")
+           calibration = "calibration_FSEC_20Mar22.tgz")
 
 # -----------------------------------------------------------------------------------------------------------------
 # General settings:
@@ -79,7 +79,7 @@ institution_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (4) Energy and transfport transformation ###
+### (4) Energy and transport transformation ###
 energy_transformation <- function(cfg) {
   # Air pollution reduction and other health risks
   # (cannot be covered)
