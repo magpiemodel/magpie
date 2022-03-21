@@ -148,7 +148,7 @@ $title magpie
 * 
 * Used data set: rev4.68_h12_magpie.tgz
 * md5sum: 58572b01837e5365551a9a0c7a7a3cc1
-* Repository: C:/magpie_inputdata/output
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.68_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
 * md5sum: 02748bdd8b4be12d42b9ae2320471a52
