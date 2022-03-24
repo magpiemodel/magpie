@@ -14,7 +14,7 @@
 *' diff BII weighted
  q44_bii_weighted_loss(j2) .. v44_bii_weighted_ratio(j2)
  					=e=
- 					(v44_bii_weighted.l(j2) / v44_bii_weighted(j2)) - 1;
+ 					v44_bii_weighted.l(j2) - v44_bii_weighted(j2);
 
 *' range-rarity weighted BII (`f44_rr_layer`)
  q44_bii_weighted(j2) .. v44_bii_weighted(j2)

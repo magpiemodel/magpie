@@ -7,6 +7,5 @@
 
 pc44_bii_weighted(j) = 0;
 v44_bii_weighted.l(j) = 0.3;
-v44_bii_weighted.lo(j) = 0.001;
 p44_price_bv_loss(t) = f44_price_bv_loss(t,"%c44_price_bv_loss%");
 *** EOF pre.gms ***
