@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-if (m_year(t) <= s44_start_year,
+if (m_year(t) < s44_start_year,
 	vm_cost_bv_loss.fx(j) = 0;
 else
 	vm_cost_bv_loss.lo(j) = -Inf;
