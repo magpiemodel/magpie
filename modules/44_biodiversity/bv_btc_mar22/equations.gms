@@ -9,7 +9,7 @@
 
  q44_cost_bv_loss(j2)$(sum(ct, m_year(ct)) >= s44_start_year) .. vm_cost_bv_loss(j2)
  					=e=
- 					v44_bii_weighted_ratio(j2) * 100 * s44_price_bii_weighted_loss;
+ 					v44_bii_weighted_ratio(j2) * 100 * s44_price_bii_weighted_loss * sum((ct,cell(i2,j2)), im_development_state(ct,i));
 
 *' diff BII weighted
  q44_bii_weighted_loss(j2) .. v44_bii_weighted_ratio(j2)

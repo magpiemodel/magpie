@@ -37,7 +37,7 @@ cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 #CN17: 3000
 #CN16: 2000 + default coeff
 
-prefix <- "BII01"
+prefix <- "BII02"
 #cfg$gms$past <- "manpast_rangeland"
 #cfg$gms$s31_fac_req_past  <- 100
 
@@ -55,7 +55,7 @@ cfg$qos <- "priority"
 cfg$gms$biodiversity <- "bv_btc_mar22"
 
 #ref
-for (price in c(10,100,1000,10000,100000)) {
+for (price in c(100,1000,5000,10000,100000)) {
   for (ssp in c("SSP2")) {
       cfg <- setScenario(cfg,c(ssp,"NDC","rcp7p0"))
       cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-NPi"#"PIK_NPI"
