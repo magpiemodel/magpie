@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+ - **scripts** bugfix in disaggregation.R, disaggregation_BII.R, disaggregation_LUH2.R with respect to urban scenario
  - **scripts** added FSEC modeling start script (global runs)
  - **scripts** added new disaggregation script to provide grid cell level BII
  - **inputs** updated non-agricultural water use scenarios (watdem_nonagr_grper.cs3)
