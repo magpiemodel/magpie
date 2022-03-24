@@ -7,7 +7,10 @@
 
 $setglobal c44_price_bv_loss  p0
 
-scalar s44_price_bii_weighted_loss / 10000 / 
+scalars 
+ s44_price_bii_weighted_loss Dollar per percentage point loss of Range-Rarity weighted BII / 100 / 
+ s44_start_year			/ 2025 /
+;
 
 table fm_bii_coeff(bii_class44,potnatveg) bii coeff (unitless)
 $ondelim

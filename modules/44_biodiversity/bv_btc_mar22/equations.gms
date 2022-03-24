@@ -7,7 +7,7 @@
 
 *' @equations
 
- q44_cost_bv_loss(j2) .. vm_cost_bv_loss(j2)
+ q44_cost_bv_loss(j2)$(sum(ct, m_year(ct)) >= s44_start_year) .. vm_cost_bv_loss(j2)
  					=e=
  					v44_bii_weighted_ratio(j2) * 100 * s44_price_bii_weighted_loss;
 
@@ -26,5 +26,3 @@
  					=e=
  					sum((landcover44,potnatveg), vm_bv(j2,landcover44,potnatveg)) / sum(land, vm_land(j2,land));
 
-
-*** EOF constraints.gms ***

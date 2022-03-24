@@ -17,5 +17,6 @@ $Ifi "%phase%" == "declarations" $include "./modules/44_biodiversity/bv_btc_mar2
 $Ifi "%phase%" == "input" $include "./modules/44_biodiversity/bv_btc_mar22/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/44_biodiversity/bv_btc_mar22/equations.gms"
 $Ifi "%phase%" == "preloop" $include "./modules/44_biodiversity/bv_btc_mar22/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/44_biodiversity/bv_btc_mar22/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/44_biodiversity/bv_btc_mar22/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
