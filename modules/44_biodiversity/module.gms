@@ -18,4 +18,5 @@
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%biodiversity%" == "bii_target" $include "./modules/44_biodiversity/bii_target/realization.gms"
 $Ifi "%biodiversity%" == "bv_btc_mar21" $include "./modules/44_biodiversity/bv_btc_mar21/realization.gms"
+$Ifi "%biodiversity%" == "bv_btc_mar22" $include "./modules/44_biodiversity/bv_btc_mar22/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
