@@ -27,4 +27,7 @@ sets
 	price_biodiv44	price paths biodiv loss
 		/ p0,p1,p1_p10,p10,p10_p100,p1_p1000,p10_p10000 /
 
+  price_target44 Target year for price on BII loss
+   / none, by2030, by2050 /
+
 ;
