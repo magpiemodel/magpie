@@ -36,6 +36,7 @@ s42_env_flow_base_fraction         Fraction of available water that is reserved 
 *                                                                    (determined in the file
 *                                                                   EFR_protection_policy.csv)
 s42_env_flow_fraction              Fraction of available water that is reserved for under protection policies (1) / 0.2 /
+s42_shock_year                     Year in which policy shock can be implemented (1) / 1995 /
 ;
 
 $setglobal c42_watdem_scenario  cc
