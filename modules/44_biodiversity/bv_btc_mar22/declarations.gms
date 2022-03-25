@@ -9,6 +9,7 @@ parameters
  pc44_bii_weighted(j)		        Current range rarity weighted bii (Mha)
  p44_price_bv_loss(t)			                biodiversity value loss price factor (USD per ha of bv loss)
  pc44_price_bv_loss			                    biodiversity value loss price factor (USD per ha of bv loss)
+ i44_fader(t_all)
 ;
 
 variables

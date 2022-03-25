@@ -72,3 +72,16 @@ $macro m_fillmissingyears(input,sets) loop(t_all, \
           ); \
           ct_all(t_all) = no;    \
        );
+
+$macro m_linear_interpol(input,start_year,end_year,start_value,target_value) loop(t_all, \
+          ct_all(t_all) = yes;     \
+          if(m_year(t_all) < start_year,	\
+          	input(t_all) = start_value;	\
+          elseif m_year(t_all) >= start_year AND m_year(t_all) <= end_year,	\
+			input(t_all) = start_value + ((m_year(t_all)-start_year) / (end_year-start_year)) * (target_value-start_value);	\
+          else	\
+          	input(t_all) = target_value;	\
+          ); \
+          ct_all(t_all) = no;    \
+       );
+

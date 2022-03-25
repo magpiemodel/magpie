@@ -6,8 +6,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 if (m_year(t) < s44_start_year,
-	vm_cost_bv_loss.fx(j) = 0;
+*	vm_cost_bv_loss.fx(j) = 0;
 else
-	vm_cost_bv_loss.lo(j) = -Inf;
-	vm_cost_bv_loss.up(j) = Inf;
+*	vm_cost_bv_loss.lo(j) = -Inf;
+*	vm_cost_bv_loss.up(j) = Inf;
 );
