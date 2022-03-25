@@ -10,35 +10,33 @@ parameters
 ;
 
 variables
- v44_bii_weighted_diff(j)	 		Change of area- and range-rarity weighted biodiversity intactness index (1)
+ v44_bii_weighted_diff		 		Change of area- and range-rarity weighted biodiversity intactness index (1)
  vm_cost_bv_loss(j)					Biodiversity cost (mio USD)
 ;
 
 positive variables
  vm_bv(j,landcover44,potnatveg)		Biodiversity intactness coefficents multiplied with land area (Mha)
- v44_bii(j) 			    		Area-weighted biodiversity intactness index (1)
- v44_bii_weighted(j) 			    Area- and range-rarity weighted biodiversity intactness index (1)
+* v44_bii(j) 			    		Area-weighted biodiversity intactness index (1)
+ v44_bii_weighted 			    	Area- and range-rarity weighted biodiversity intactness index (1)
 ;
 
 equations
- q44_bii(j)		            Area-weighted biodiversity intactness index (1)
- q44_bii_weighted(j)		Area- and range-rarity weighted biodiversity intactness index (1)
- q44_bii_weighted_diff(j)   Change of area- and range-rarity weighted biodiversity intactness index (1)
- q44_cost_bv_loss(j)		Biodiversity cost (mio USD)
+* q44_bii(j)		            Area-weighted biodiversity intactness index (1)
+ q44_bii_weighted			Area- and range-rarity weighted biodiversity intactness index (1)
+ q44_bii_weighted_diff	  	Change of area- and range-rarity weighted biodiversity intactness index (1)
+ q44_cost_bv_loss			Biodiversity cost (mio USD)
 ;
 
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov44_bii_weighted_diff(t,j,type)      Change of area- and range-rarity weighted biodiversity intactness index (1)
+ ov44_bii_weighted_diff(t,type)        Change of area- and range-rarity weighted biodiversity intactness index (1)
  ov_cost_bv_loss(t,j,type)             Biodiversity cost (mio USD)
  ov_bv(t,j,landcover44,potnatveg,type) Biodiversity intactness coefficents multiplied with land area (Mha)
- ov44_bii(t,j,type)                    Area-weighted biodiversity intactness index (1)
- ov44_bii_weighted(t,j,type)           Area- and range-rarity weighted biodiversity intactness index (1)
- oq44_bii(t,j,type)                    Area-weighted biodiversity intactness index (1)
- oq44_bii_weighted(t,j,type)           Area- and range-rarity weighted biodiversity intactness index (1)
- oq44_bii_weighted_diff(t,j,type)      Change of area- and range-rarity weighted biodiversity intactness index (1)
- oq44_cost_bv_loss(t,j,type)           Biodiversity cost (mio USD)
+ ov44_bii_weighted(t,type)             Area- and range-rarity weighted biodiversity intactness index (1)
+ oq44_bii_weighted(t,type)             Area- and range-rarity weighted biodiversity intactness index (1)
+ oq44_bii_weighted_diff(t,type)        Change of area- and range-rarity weighted biodiversity intactness index (1)
+ oq44_cost_bv_loss(t,type)             Biodiversity cost (mio USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

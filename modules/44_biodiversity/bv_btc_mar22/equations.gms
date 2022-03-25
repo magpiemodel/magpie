@@ -9,22 +9,17 @@
 
 *' Cost for biodiversity loss are obtained by multiplication of 
 *' change in index points with price for biodiversity loss.
- q44_cost_bv_loss(j2) .. vm_cost_bv_loss(j2)
+ q44_cost_bv_loss .. sum(j2, vm_cost_bv_loss(j2))
  					=e=
- 					v44_bii_weighted_diff(j2) * s44_price_bii_loss * sum(ct, i44_fader(ct));
+ 					v44_bii_weighted_diff * s44_price_bii_loss * sum(ct, i44_fader(ct));
 
 *' Difference in area- and range-rarity weighted biodiversity intactness index, converted to a range of [-100;100]
- q44_bii_weighted_diff(j2) .. v44_bii_weighted_diff(j2)
+ q44_bii_weighted_diff .. v44_bii_weighted_diff
  					=e=
- 					(v44_bii_weighted.l(j2) - v44_bii_weighted(j2)) * s44_index_conversion;
+ 					(v44_bii_weighted.l - v44_bii_weighted) * s44_index_conversion;
 
 *' Area- and range-rarity weighted biodiversity intactness index [0-1]
- q44_bii_weighted(j2) .. v44_bii_weighted(j2)
+ q44_bii_weighted .. v44_bii_weighted
  					=e=
- 					f44_rr_layer(j2) * v44_bii(j2);
-
-*' Area-weighted biodiversity intactness index [0-1]
- q44_bii(j2) .. v44_bii(j2)
- 					=e=
- 					sum((landcover44,potnatveg), vm_bv(j2,landcover44,potnatveg)) / sum(land, vm_land(j2,land));
+ 					sum((j2,landcover44,potnatveg), vm_bv(j2,landcover44,potnatveg) * f44_rr_layer(j2)) / sum((j2,land), vm_land(j2,land));
 

@@ -5,6 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-v44_bii_weighted.l(j) = 0.3;
+v44_bii_weighted.l = 0.3;
 m_linear_interpol(i44_fader,s44_start_year,s44_end_year,s44_start_value,s44_target_value);
 display i44_fader;
