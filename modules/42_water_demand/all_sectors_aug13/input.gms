@@ -118,6 +118,6 @@ $offdelim
 
 parameter f42_cost_pumping(i) Cost of pumping irrigation water (1)
 $ondelim
-$include "./modules/42_water_demand/input/f42_cost_pumping.cs3"
+$include "./modules/42_water_demand/input/f42_cost_pumping.csv"
 $offdelim
 ;
