@@ -19,6 +19,7 @@ parameters
 
 equations
  q42_water_demand(wat_dem,j)         Water withdrawals of different sectors (mio. m^3 per yr)
+ q42_vm_water_cost(j)                Total cost of pumping irrigation water (USD)
 ;
 
 positive variables

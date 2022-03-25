@@ -8,3 +8,6 @@
 $ifthen "%c41_initial_irrigation_area%" == "Siebert" pc41_AEI_start(j) = f41_irrig(j);
 $elseif "%c41_initial_irrigation_area%" == "LUH2v2"  pc41_AEI_start(j) = f41_irrig_luh("y1995",j);
 $endif
+
+*Area equipped for irrigation in exogenous scenarios for water availability (mio. m^3 per yr)
+vm_exo_aei(t,j) = sum(j, (f41_irrig_luh(t_ini41,j)*ic42_wat_req_k(j,kcr)));

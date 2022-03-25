@@ -13,6 +13,7 @@ parameters
 
 variables
  vm_cost_AEI(i)                  Annuitized irrigation expansion costs (mio. USD04MER per yr)
+ vm_exo_aei(t,j)                 Area equipped for irrigation in exogenous scenarios for water availability (mio. m^3 per yr)
 ;
 
 positive variables
