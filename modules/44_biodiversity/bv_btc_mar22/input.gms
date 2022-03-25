@@ -5,29 +5,18 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c44_price_bv_loss  p0
-$setglobal c35_price_fadein  by2050
-
 scalars 
- s44_price_bii_weighted_loss Dollar per percentage point loss of Range-Rarity weighted BII / 5000 / 
- s44_start_year			/ 2025 /
+ s44_price_bii_loss		Price for biodiversity loss (USD per index point)  / 2000 / 
+ s44_index_conversion 	Conversion factor / 100 /
+ s44_start_year			Start year for linear interpolation (1) 	/ 2025 /
+ s44_end_year			End year for linear interpolation (1)		/ 2050 /
+ s44_start_value		Start value for linear interpolation (1) 	/ 0 /
+ s44_target_value		Target value for linear interpolation (1) 	/ 1 /
 ;
 
 table fm_bii_coeff(bii_class44,potnatveg) bii coeff (unitless)
 $ondelim
 $include "./modules/44_biodiversity/bv_btc_mar22/input/f44_bii_coeff.cs3"
-$offdelim
-;
-
-table f44_price_bv_loss(t_all,price_biodiv44) price biodiv loss (USD per ha of biodiversity value loss)
-$ondelim
-$include "./modules/44_biodiversity/bv_btc_mar22/input/f44_price_biodiv_loss.csv"
-$offdelim
-;
-
-table f44_price_fader(t_all, prot_target35) price fader (1)
-$ondelim
-$include "./modules/44_biodiversity/bv_btc_mar22/input/f35_protection_fader.csv"
 $offdelim
 ;
 

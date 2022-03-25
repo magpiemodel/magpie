@@ -22,6 +22,6 @@ else
 	vm_tau.l(h) = pcm_tau(h)*(1+pc13_tcguess(h))**m_yeardiff(t);
 );
 
-vm_tau.up(h) = pcm_tau(h) * (1 + 0.01 * m_yeardiff(t));
-*vm_tau.up(h) = 2*pcm_tau(h);
+*vm_tau.up(h) = pcm_tau(h) * (1 + 0.01 * m_yeardiff(t));
+vm_tau.up(h) = 2*pcm_tau(h);
 vm_tech_cost.up(i) = 10e9;

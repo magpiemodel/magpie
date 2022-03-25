@@ -37,7 +37,7 @@ cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 #CN17: 3000
 #CN16: 2000 + default coeff
 
-prefix <- "CN30"
+prefix <- "CN31"
 #cfg$gms$past <- "manpast_rangeland"
 #cfg$gms$s31_fac_req_past  <- 100
 
@@ -64,7 +64,7 @@ for (pol in c("Ref","Climate","Nature","Climate+Nature","Climate+Nature+Food")) 
       cfg$gms$c60_biodem_level <- 1
       cfg$gms$s32_aff_plantation <- 0
       cfg$gms$s32_aff_bii_coeff <- 0
-      cfg$gms$s44_price_bii_weighted_loss <- 0
+      cfg$gms$s44_price_bii_loss <- 0
       cfg$gms$c35_protect_scenario <- "WDPA"
       cfg$gms$c30_set_aside_target <- "none"
       cfg$gms$s30_set_aside_shr <- 0
@@ -75,7 +75,7 @@ for (pol in c("Ref","Climate","Nature","Climate+Nature","Climate+Nature+Food")) 
       cfg$gms$c60_biodem_level <- 1
       cfg$gms$s32_aff_plantation <- 1
       cfg$gms$s32_aff_bii_coeff <- 1
-      cfg$gms$s44_price_bii_weighted_loss <- 0
+      cfg$gms$s44_price_bii_loss <- 0
       cfg$gms$c35_protect_scenario <- "WDPA"
       cfg$gms$c30_set_aside_target <- "none"
       cfg$gms$s30_set_aside_shr <- 0
@@ -86,7 +86,7 @@ for (pol in c("Ref","Climate","Nature","Climate+Nature","Climate+Nature+Food")) 
       cfg$gms$c60_biodem_level <- 1
       cfg$gms$s32_aff_plantation <- 0
       cfg$gms$s32_aff_bii_coeff <- 0
-      cfg$gms$s44_price_bii_weighted_loss <- 1000
+      cfg$gms$s44_price_bii_loss <- 2000
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_set_aside_target <- "by2030"
       cfg$gms$s30_set_aside_shr <- 0.2
@@ -97,7 +97,7 @@ for (pol in c("Ref","Climate","Nature","Climate+Nature","Climate+Nature+Food")) 
       cfg$gms$c60_biodem_level <- 1
       cfg$gms$s32_aff_plantation <- 0
       cfg$gms$s32_aff_bii_coeff <- 0
-      cfg$gms$s44_price_bii_weighted_loss <- 1000
+      cfg$gms$s44_price_bii_loss <- 2000
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_set_aside_target <- "by2030"
       cfg$gms$s30_set_aside_shr <- 0.2
@@ -110,7 +110,7 @@ for (pol in c("Ref","Climate","Nature","Climate+Nature","Climate+Nature+Food")) 
       cfg$gms$c60_biodem_level <- 1
       cfg$gms$s32_aff_plantation <- 0
       cfg$gms$s32_aff_bii_coeff <- 0
-      cfg$gms$s44_price_bii_weighted_loss <- 1000
+      cfg$gms$s44_price_bii_loss <- 2000
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_set_aside_target <- "by2030"
       cfg$gms$s30_set_aside_shr <- 0.2

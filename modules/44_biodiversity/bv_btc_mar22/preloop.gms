@@ -5,11 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-pc44_bii_weighted(j) = 0;
 v44_bii_weighted.l(j) = 0.3;
-p44_price_bv_loss(t) = f44_price_bv_loss(t,"%c44_price_bv_loss%");
-
-m_linear_interpol(i44_fader,2020,2050,0,1)
+m_linear_interpol(i44_fader,s44_start_year,s44_end_year,s44_start_value,s44_target_value);
 display i44_fader;
-
-*** EOF pre.gms ***

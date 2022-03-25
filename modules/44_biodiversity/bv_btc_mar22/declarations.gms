@@ -6,42 +6,39 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- pc44_bii_weighted(j)		        Current range rarity weighted bii (Mha)
- p44_price_bv_loss(t)			                biodiversity value loss price factor (USD per ha of bv loss)
- pc44_price_bv_loss			                    biodiversity value loss price factor (USD per ha of bv loss)
- i44_fader(t_all)
+ i44_fader(t_all)		Price fader for biodiversity loss price (1)
 ;
 
 variables
- v44_bii_weighted_ratio(j)	 		difference of biodiversity value per land class (Mha per time step)
- vm_cost_bv_loss(j)					            biodiversity value loss cost (mio USD)
+ v44_bii_weighted_diff(j)	 		Change of area- and range-rarity weighted biodiversity intactness index (1)
+ vm_cost_bv_loss(j)					Biodiversity cost (mio USD)
 ;
 
 positive variables
- vm_bv(j,landcover44,potnatveg)		            bii coefficent times land area (Mha)
- v44_bii(j) 			    					area-weighted bii (1)
- v44_bii_weighted(j) 			    			area- and range-rarity weighted bii (1)
+ vm_bv(j,landcover44,potnatveg)		Biodiversity intactness coefficents multiplied with land area (Mha)
+ v44_bii(j) 			    		Area-weighted biodiversity intactness index (1)
+ v44_bii_weighted(j) 			    Area- and range-rarity weighted biodiversity intactness index (1)
 ;
 
 equations
- q44_bii_weighted_loss(j)                                 total biodiversity value loss constraint (Mha)
- q44_bii_weighted(j)			biodiversity value loss constraint per land class (Mha)
- q44_bii(j)		            biodiversity value stock constraint (Mha)
- q44_cost_bv_loss(j)			                biodiversity value loss cost constraint (mio USD)
+ q44_bii(j)		            Area-weighted biodiversity intactness index (1)
+ q44_bii_weighted(j)		Area- and range-rarity weighted biodiversity intactness index (1)
+ q44_bii_weighted_diff(j)   Change of area- and range-rarity weighted biodiversity intactness index (1)
+ q44_cost_bv_loss(j)		Biodiversity cost (mio USD)
 ;
 
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov44_bii_weighted_ratio(t,j,type)     difference of biodiversity value per land class (Mha per time step)
- ov_cost_bv_loss(t,j,type)             biodiversity value loss cost (mio USD)
- ov_bv(t,j,landcover44,potnatveg,type) bii coefficent times land area (Mha)
- ov44_bii(t,j,type)                    area-weighted bii (1)
- ov44_bii_weighted(t,j,type)           area- and range-rarity weighted bii (1)
- oq44_bii_weighted_loss(t,j,type)      total biodiversity value loss constraint (Mha)
- oq44_bii_weighted(t,j,type)           biodiversity value loss constraint per land class (Mha)
- oq44_bii(t,j,type)                    biodiversity value stock constraint (Mha)
- oq44_cost_bv_loss(t,j,type)           biodiversity value loss cost constraint (mio USD)
+ ov44_bii_weighted_diff(t,j,type)      Change of area- and range-rarity weighted biodiversity intactness index (1)
+ ov_cost_bv_loss(t,j,type)             Biodiversity cost (mio USD)
+ ov_bv(t,j,landcover44,potnatveg,type) Biodiversity intactness coefficents multiplied with land area (Mha)
+ ov44_bii(t,j,type)                    Area-weighted biodiversity intactness index (1)
+ ov44_bii_weighted(t,j,type)           Area- and range-rarity weighted biodiversity intactness index (1)
+ oq44_bii(t,j,type)                    Area-weighted biodiversity intactness index (1)
+ oq44_bii_weighted(t,j,type)           Area- and range-rarity weighted biodiversity intactness index (1)
+ oq44_bii_weighted_diff(t,j,type)      Change of area- and range-rarity weighted biodiversity intactness index (1)
+ oq44_cost_bv_loss(t,j,type)           Biodiversity cost (mio USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 
