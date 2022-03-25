@@ -37,7 +37,7 @@ cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 #CN17: 3000
 #CN16: 2000 + default coeff
 
-prefix <- "BII04"
+prefix <- "BII05"
 #cfg$gms$past <- "manpast_rangeland"
 #cfg$gms$s31_fac_req_past  <- 100
 
