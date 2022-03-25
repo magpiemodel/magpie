@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** output/projects/FSEC_dietaryIndicators.R to create output datasets for the FSEC project
 - **scripts** output/projects/FSEC_environmentalPollutants.R to create output datasets of pollutants for the FSEC project
 - **scripts** start/projects/project_FSEC_SWF.R runs simulations which will be the basis for the FSEC Social Welfare Function calculation.
+- **52_carbon** added land carbon sink adjustment factors, needed in R post-processing
 
 ### removed
 
