@@ -10,7 +10,8 @@ sets
     /cost_regr_a,cost_regr_b/
 
    feed_scen70  scenarios
-       / ssp1,ssp2,ssp3,ssp4,ssp5,constant /
+       / ssp1, ssp2, ssp3, ssp4, ssp5, constant,
+         SDP, SDP_EI, SDP_MC, SDP_RC /
 
    sys Livestock production systems
      /sys_pig, sys_beef, sys_chicken, sys_hen, sys_dairy/

@@ -18,7 +18,8 @@ $setglobal c15_calibscen  constant
 $setglobal c15_rum_share  mixed
 *   options:   constant, halving2050, mixed
 
-* Food substitution scenarios including functional forms, targets and transition periods
+* Fader for food substitution scenarios and exogenous food intake and waste
+* scenarios including functional forms, targets and transition periods
 *   options:   constant,
 *              lin_zero_10_50, lin_zero_20_50, lin_zero_20_30, lin_50pc_20_50, lin_50pc_20_50_extend65, lin_50pc_20_50_extend80,
 *              lin_50pc_10_50_extend90, lin_75pc_10_50_extend90, lin_80pc_20_50, lin_80pc_20_50_extend95, lin_90pc_20_50_extend95,
@@ -30,10 +31,7 @@ $setglobal c15_livescen  constant
 $setglobal c15_rumdairyscen  constant
 $setglobal c15_rumdairy_scp_scen  constant
 $setglobal c15_livescen_target  constant
-
-
-$setglobal c15_exo_scen_targetyear  y2050
-*   options:   y2030, y2050
+$setglobal c15_exo_foodscen  lin_zero_20_50
 
 $setglobal c15_kcal_scen  healthy_BMI
 *   options:   healthy_BMI, 2100kcal, 2500kcal
@@ -239,11 +237,5 @@ $ondelim
 $include "./modules/15_food/input/f15_calib_factor_FAOfsupply.cs4"
 $offdelim
 /;
-
-table f15_exo_foodscen_fader(t_all,t_scen15) Fader that converges per capita food consumption to an exogenous diet scenario until the target year (1)
-$ondelim
-$include "./modules/15_food/input/f15_exo_foodscen_fader.csv"
-$offdelim
-;
 
 *** EOF input.gms ***
