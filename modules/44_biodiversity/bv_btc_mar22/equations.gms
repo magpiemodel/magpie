@@ -8,8 +8,7 @@
 *' @equations
 
 *' Cost for biodiversity loss are obtained by multiplication of 
-*' change in index points with the price for biodiversity loss.
-multiplied with the  on range-rarity weighted BII 
+*' change in index points with price for biodiversity loss.
  q44_cost_bv_loss(j2) .. vm_cost_bv_loss(j2)
  					=e=
  					v44_bii_weighted_diff(j2) * s44_price_bii_loss * sum(ct, i44_fader(ct));
