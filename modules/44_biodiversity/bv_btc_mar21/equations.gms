@@ -13,19 +13,14 @@
  					=e=
  					v44_bv_loss(j2) * sum(ct, p44_price_bv_loss(ct));
 
-*' Sum over land cover types
+*' Change in biodiversity stock compared to previous time step
  q44_bv_loss(j2) .. v44_bv_loss(j2)
-					=e=
-					sum(landcover44, v44_diff_bv_landcover(j2,landcover44));
-
-*' Change in biodiversity stock for each land cover type compared to previous time step
- q44_diff_bv_landcover(j2,landcover44) .. v44_diff_bv_landcover(j2,landcover44)
  					=e=
- 					pc44_bv_weighted(j2,landcover44) - v44_bv_weighted(j2,landcover44);
+ 					v44_bv_weighted.l(j2) - v44_bv_weighted(j2);
 
-*' Biodiversity stock of each land cover type weighted by range-rarity restoration layer (`f44_rr_layer`)
- q44_bv_weighted(j2,landcover44) .. v44_bv_weighted(j2,landcover44)
+*' Biodiversity stock weighted by range-rarity restoration prioritization layer (`f44_rr_layer`)
+ q44_bv_weighted(j2) .. v44_bv_weighted(j2)
  					=e=
- 					f44_rr_layer(j2) * sum(potnatveg, vm_bv(j2,landcover44,potnatveg));
+ 					f44_rr_layer(j2) * sum((potnatveg,landcover44), vm_bv(j2,landcover44,potnatveg));
 
 *** EOF constraints.gms ***

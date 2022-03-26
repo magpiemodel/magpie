@@ -18,12 +18,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **35_natveg** corrected naming of Frontier Forests (FF) to Intact Forest Landscapes (IFL) and changed input data for BH_IFL implementation.
  - **scripts** replaced redundant files config.log and config.Rdata with a config.yml
  - **scripts** removed test script "irrig_dep_test" from "start" folder to "extra" folder
+ - **44_biodiversity** Improved documentation, simplification of equations and flexible options for price on biodiversity loss
 
 ### added
 - **scripts** output/projects/FSEC_dietaryIndicators.R to create output datasets for the FSEC project
 - **scripts** output/projects/FSEC_environmentalPollutants.R to create output datasets of pollutants for the FSEC project
 - **scripts** start/projects/project_FSEC_SWF.R runs simulations which will be the basis for the FSEC Social Welfare Function calculation.
 - **52_carbon** added land carbon sink adjustment factors, needed in R post-processing
+- **core** macros for linear and sigmoidal time interpolation
 
 ### removed
 

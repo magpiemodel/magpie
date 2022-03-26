@@ -5,11 +5,15 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In this realisation biodiversity values are computed for each
-*' land cover type. The calculations are based on the Biodiversity Intactness Index (BII).
-*' BII values for each land cover type are multiplied by the respective land area and
-*' are weighted by cluster-specific range-rarity. This realisation also allows to introduce costs
-*' on the loss of the total biodiversity value.
+*' @description In this realisation, biodiversity stocks are computed for each land cover type by 
+*' multiplication with Biodiversity Intactness Index (BII) coefficients from the PREDICTS database. 
+*' The BII is relative indicator, wich measures the intactness of local species composition (abundance) compared to pristine conditions.
+*' In addition, a range-rarity restoration prioritization layer is used in the optimization. 
+*' This layer is a spatially explicit indicator of the regional relative range-rarity weighted species richness. 
+*' It indicates the places holding more species and/or species of smaller range than other places in the same biome and continent. 
+*' The net biodiversity stock loss (resp. gain) of any land-use change decision, weighted by the range-rarity layer, 
+*' is taxed (resp. subsidized) within the optimization.
+*' The implementation uses the methodology described in @leclere_biodiv_2018 and @leclere_bending_2020.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/44_biodiversity/bv_btc_mar21/sets.gms"
