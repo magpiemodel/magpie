@@ -73,15 +73,18 @@ $macro m_fillmissingyears(input,sets) loop(t_all, \
           ct_all(t_all) = no;    \
        );
 
-$macro m_linear_interpol(input,start_year,end_year,start_value,target_value) loop(t_all, \
-          ct_all(t_all) = yes;     \
-          if(m_year(t_all) < start_year,	\
-          	input(t_all) = start_value;	\
-          elseif m_year(t_all) >= start_year AND m_year(t_all) <= end_year,	\
-			input(t_all) = start_value + ((m_year(t_all)-start_year) / (end_year-start_year)) * (target_value-start_value);	\
-          else	\
-          	input(t_all) = target_value;	\
-          ); \
-          ct_all(t_all) = no;    \
-       );
+* macro for linear interpolation
+$macro m_linear_interpol(input,start_year,target_year,start_value,target_value) \
+	input(t_all)$(m_year(t_all) >= start_year AND m_year(t_all) <= target_year) = ((m_year(t_all)-start_year) / (target_year-start_year));	\
+	input(t_all) = start_value + input(t_all) * (target_value-start_value);	\
+    input(t_all)$(m_year(t_all) <= start_year) = start_value; \
+    input(t_all)$(m_year(t_all) >= target_year) = target_value;
+
+* macro for sigmoid interpolation (S-shaped curve)
+$macro m_sigmoid_interpol(input,start_year,target_year,start_value,target_value) \
+	input(t_all)$(m_year(t_all) >= start_year AND m_year(t_all) <= target_year) = ((m_year(t_all)-start_year) / (target_year-start_year));	\
+	input(t_all) = 1 / (1 + exp(-10*(input(t_all)-0.5)));	\
+	input(t_all) = start_value + input(t_all) * (target_value-start_value);	\
+    input(t_all)$(m_year(t_all) <= start_year) = start_value; \
+    input(t_all)$(m_year(t_all) >= target_year) = target_value;
 

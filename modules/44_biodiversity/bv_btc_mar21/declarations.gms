@@ -7,8 +7,7 @@
 
 parameters
  pc44_bv_weighted(j,landcover44)		        Current range rarity weighted bii (Mha)
- p44_price_bv_loss(t)			                biodiversity value loss price factor (USD per ha of bv loss)
- pc44_price_bv_loss			                    biodiversity value loss price factor (USD per ha of bv loss)
+ p44_price_bv_loss(t_all)			            Price for biodiversity stock loss (USD per ha)
 ;
 
 variables
