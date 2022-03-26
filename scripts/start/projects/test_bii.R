@@ -37,7 +37,7 @@ cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 #CN17: 3000
 #CN16: 2000 + default coeff
 
-prefix <- "BII05"
+prefix <- "BII06"
 #cfg$gms$past <- "manpast_rangeland"
 #cfg$gms$s31_fac_req_past  <- 100
 
@@ -52,10 +52,10 @@ cfg$qos <- "priority"
 #cfg$gms$s56_ghgprice_phase_in <- 1
 
 #cfg$recalibrate <- TRUE
-cfg$gms$biodiversity <- "bv_btc_mar22"
+cfg$gms$biodiversity <- "bv_btc_mar21"
 
 #ref
-for (price in c(500,1000,2000,3000,4000)) {
+for (price in c(1000,2000,3000,4000,5000)) {
   for (ssp in c("SSP2")) {
       cfg <- setScenario(cfg,c(ssp,"NDC","rcp7p0"))
       cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-NPi"#"PIK_NPI"
@@ -63,7 +63,7 @@ for (price in c(500,1000,2000,3000,4000)) {
       cfg$gms$c60_biodem_level <- 1
       cfg$gms$s32_aff_plantation <- 0
       cfg$gms$s32_aff_bii_coeff <- 0
-      cfg$gms$s44_price_bii_weighted_loss <- price
+      cfg$gms$s44_target_price <- price
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_set_aside_target <- "by2030"
       cfg$gms$s30_set_aside_shr <- 0.2
