@@ -23,58 +23,32 @@ source("scripts/start_functions.R")
 
 #start MAgPIE run
 source("config/default.cfg")
-#cfg$gms$c52_carbon_scenario  <- "nocc"
-#cfg$gms$c59_som_scenario  <- "nocc"
-
-#cfg$force_download <- TRUE
 
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 
-#CN14: 5000
-#CN15: 4000
-#CN16: 2000
-#CN17: 3000
-#CN16: 2000 + default coeff
-
-prefix <- "BII06"
-#cfg$gms$past <- "manpast_rangeland"
-#cfg$gms$s31_fac_req_past  <- 100
+prefix <- "BII07"
 
 cfg$qos <- "priority"
 
-# cfg$gms$s80_optfile <- 1
-# cfg$gms$s80_maxiter <- 30
+ssp <- "SSP2"  
 
-# cfg$gms$s32_planing_horizon <- 50
-
-#cfg$gms$c56_emis_policy <- "redd+_nosoil"
-#cfg$gms$s56_ghgprice_phase_in <- 1
-
-#cfg$recalibrate <- TRUE
-cfg$gms$biodiversity <- "bv_btc_mar21"
-
-#ref
-for (price in c(1000,2000,3000,4000,5000)) {
-  for (ssp in c("SSP2")) {
+for (price in c(0,100,1000,2000,3000)) {
+  for (pol in c("Ref","Nature")) {
+    if (pol == "Ref") {
       cfg <- setScenario(cfg,c(ssp,"NDC","rcp7p0"))
-      cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-NPi"#"PIK_NPI"
-      cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-NPi"#"PIK_NPI"
-      cfg$gms$c60_biodem_level <- 1
-      cfg$gms$s32_aff_plantation <- 0
-      cfg$gms$s32_aff_bii_coeff <- 0
+      cfg$gms$s44_target_price <- price
+      cfg$gms$c35_protect_scenario <- "WDPA"
+      cfg$gms$c30_set_aside_target <- "by2030"
+      cfg$gms$s30_set_aside_shr <- 0
+    } else if (pol == "Nature") {
+      cfg <- setScenario(cfg,c(ssp,"NDC","rcp7p0"))
       cfg$gms$s44_target_price <- price
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_set_aside_target <- "by2030"
       cfg$gms$s30_set_aside_shr <- 0.2
-     
-    cfg$title <- paste(prefix,paste0(ssp,"-",price),sep="_")
-    # download_and_update(cfg)
-    # a<-read.magpie("modules/44_biodiversity/bv_btc_mar21/input/f44_price_biodiv_loss.csv")
-    # a[,getYears(a,as.integer = TRUE) <= 2020,] <- 0
-    # a[,getYears(a,as.integer = TRUE) > 2020,"p10"] <- 1000
-    # write.magpie(a,"modules/44_biodiversity/bv_btc_mar21/input/f44_price_biodiv_loss.csv")
+    }
+    cfg$title <- paste(prefix,paste0(pol,"-BV",price),sep="_")
     start_run(cfg,codeCheck=FALSE)
-    #    cfg$recalibrate <- FALSE
   }
 }
