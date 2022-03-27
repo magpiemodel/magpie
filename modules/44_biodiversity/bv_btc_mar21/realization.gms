@@ -11,6 +11,8 @@
 *' In addition, a range-rarity restoration prioritization layer is used in the optimization. 
 *' This layer is a spatially explicit indicator of the regional relative range-rarity weighted species richness. 
 *' It indicates the places holding more species and/or species of smaller range than other places in the same biome and continent. 
+*' Conceptually, the range-rarity weighted biodiversity stock is the product of 
+*' land cover area (Mha), corresponding BII coefficient [0-1] (unitless) and range-rarity layer [0-1] (unitless).
 *' The net biodiversity stock loss (resp. gain) of any land-use change decision, weighted by the range-rarity layer, 
 *' is taxed (resp. subsidized) within the optimization.
 *' The implementation uses the methodology described in @leclere_biodiv_2018 and @leclere_bending_2020.
