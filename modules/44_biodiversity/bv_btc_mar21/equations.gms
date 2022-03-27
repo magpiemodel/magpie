@@ -7,8 +7,7 @@
 
 *' @equations
 
-*' The net biodiversity stock loss (resp. gain) of any land-use change decision in any cluster 
-*' is taxed (resp. subsidized) within the optimization.
+*' The net biodiversity stock change is priced.
  q44_cost_bv_loss(j2) .. vm_cost_bv_loss(j2)
  					=e=
  					v44_bv_loss(j2) * sum(ct, p44_price_bv_loss(ct));
