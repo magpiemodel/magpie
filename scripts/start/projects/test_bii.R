@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: Paper Climate vs. Nature
+# description: Test Biodiversity Prices
 # ----------------------------------------------------------
 
 
