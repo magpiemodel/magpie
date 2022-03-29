@@ -14,6 +14,7 @@ library(lucode2)
 library(magpie4)
 library(luscale)
 library(madrat)
+library(dplyr)
 library(gms)
 
 ############################# BASIC CONFIGURATION ##############################
@@ -30,6 +31,11 @@ land_hr_share_out_file     <- file.path(outputdir,"cell.land_0.5_share.mz")
 croparea_hr_share_out_file <- file.path(outputdir,"cell.croparea_0.5_share.mz")
 land_hr_split_file         <- file.path(outputdir,"cell.land_split_0.5.mz")
 land_hr_shr_split_file     <- file.path(outputdir,"cell.land_split_0.5_share.mz")
+lsu_ha_file                <- file.path(outputdir,"lsu_ha.mz")
+lsus_file                  <- file.path(outputdir,"lsus.mz")
+production_grass_file      <- file.path(outputdir,"Production_grass.mz")
+shares_pastr_file          <- file.path(outputdir,"shares_pastr.mz")
+pastr_prod_diff_file       <- file.path(outputdir, "pastr_prod_diff.mz")
 
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 ################################################################################
@@ -40,6 +46,37 @@ if(length(map_file)>1) {
   map_file <- map_file[1]
 }
 
+extend2luhv2 <- function(x, land = deparse(substitute(x))) {
+
+  if (land == "land_lr") {
+    grassland_areas <- readGDX(gdx, "ov31_grass_area")[, , "level"]
+    grassland_areas <- collapseNames(grassland_areas)
+    grassland_areas <- setNames(grassland_areas, getNames(grassland_areas) %<>% gsub("range", "range", .) %>% gsub("pastr", "pastr", .))
+    land_lr <- mbind(x, grassland_areas)
+    drop_past <- !grepl("past$", getNames(land_lr))
+    land_lr <- land_lr[, , drop_past]
+    return(land_lr)
+  }
+
+  if (land == "land_ini_hr") {
+    land_ini_LUH2v2 <- read.magpie("./modules/31_past/input/fm_LUH2v2.mz")[, 1995, c("pastr", "range")]
+    land_ini_hr <- mbind(x, land_ini_LUH2v2)
+    drop_past <- !grepl("past$", getNames(land_ini_hr))
+    land_ini_hr <- land_ini_hr[, , drop_past]
+    getYears(land_ini_hr) <- NULL
+    return(land_ini_hr)
+  }
+
+  if (land == "land_ini_lr") {
+    grassland_areas <- readGDX(gdx, "ov31_grass_area")[, "y1995", "level"]
+    grassland_areas <- collapseNames(grassland_areas)
+    # grassland_areas <- setNames(grassland_areas, getNames(grassland_areas) %<>% gsub("range", "range", .) %>% gsub("pastr", "pastr", .))
+    land_ini_lr <- mbind(x, grassland_areas)
+    drop_past <- !grepl("past$", getNames(land_ini_lr))
+    land_ini_lr <- land_ini_lr[, , drop_past]
+    return(land_ini_lr)
+  }
+}
 
 # Load input data
 land_ini_lr  <- readGDX(gdx,"f10_land","f_land", format="first_found")[,"y1995",]
@@ -48,14 +85,23 @@ land_ini_hr  <- read.magpie(land_hr_file)[,"y1995",]
 magpie2luh2 <- data.frame(matrix(nrow=4,ncol=2))
 names(magpie2luh2) <- c("MAgPIE","LUH2")
 magpie2luh2[1,] <- c("crop","crop")
-magpie2luh2[2,] <- c("past","past")
-magpie2luh2[3,] <- c("past","range")
 magpie2luh2[4,] <- c("urban","urban")
 magpie2luh2[5,] <- c("primforest","primforest")
 magpie2luh2[6,] <- c("secdforest","secdforest")
 magpie2luh2[7,] <- c("forestry","forestry")
 magpie2luh2[8,] <- c("other","primother")
 magpie2luh2[9,] <- c("other","secdother")
+
+if (grepl("grass", cfg$gms$past)) {
+  land_lr <- extend2luhv2(land_lr)
+  land_ini_lr <-  extend2luhv2(land_ini_lr)
+  magpie2luh2[3,] <- c("range","range")
+  magpie2luh2[2,] <- c("pastr","past")
+} else {
+  magpie2luh2[3,] <- c("past","range")
+  magpie2luh2[2,] <- c("past","past")
+}
+
 land_ini_hr <- madrat::toolAggregate(land_ini_hr, magpie2luh2, from="LUH2", to="MAgPIE",dim = 3.1)
 land_ini_hr  <- land_ini_hr[,,getNames(land_lr)]
 if(any(land_ini_hr < 0)) {
