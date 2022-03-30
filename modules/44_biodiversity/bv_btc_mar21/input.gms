@@ -12,7 +12,7 @@ scalars
  s44_target_price		Price for biodiversity stock loss in target year (USD per ha) 	/ 3000 /
 ;
 
-table fm_bii_coeff(bii_class44,potnatveg) Biodiversity Intactness Index coefficents (unitless)
+table fm_bii_coeff(bii_class44,potnatveg) Biodiversity Intactness Index coefficients (unitless)
 $ondelim
 $include "./modules/44_biodiversity/bv_btc_mar21/input/f44_bii_coeff.cs3"
 $offdelim

@@ -28,7 +28,7 @@
 *' interchangeable across biomes or other spatial units with different biophysical conditions.
 *' Scenario design and results based on this realisation should be handled with special caution, in particular
 *' when applied in policy contexts. It is strongly advised to complement a positive price on biodiversity loss
-*' (resp. gain) in this realization with targeted protection measures (35_natveg).
+*' (resp. gain) in this realization with targeted protection measures ([35_natveg]).
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/44_biodiversity/bv_btc_mar21/sets.gms"
