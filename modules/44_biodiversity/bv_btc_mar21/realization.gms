@@ -24,7 +24,7 @@
 *' by an aggegrated conservation priority (range-rarity) layer with no clear linkage to ecosystem functioning
 *' outside the priority areas (including areas that stabilise the earth system such as the Amazonas basin or the
 *' boreal forest). 'Biodiversity stocks' in this realisation are estimated at cluster level, but optimised at the
-*' global scale without spatial reference (besides the range-rarity weight). They are therfore theoretically
+*' global scale without spatial reference (besides the range-rarity weight). They are therefore theoretically
 *' interchangeable across biomes or other spatial units with different biophysical conditions.
 *' Scenario design and results based on this realisation should be handled with special caution, in particular
 *' when applied in policy contexts.
