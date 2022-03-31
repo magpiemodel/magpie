@@ -10,4 +10,4 @@ $elseif "%c41_initial_irrigation_area%" == "LUH2v2"  pc41_AEI_start(j) = f41_irr
 $endif
 
 *Area equipped for irrigation in exogenous scenarios for water availability (mio. m^3 per yr)
-pm_exo_aei(t,j) = sum(kcr), fm_croparea(t_all,j,"irrigated",kcr)*pm42_wat_req_k(t,j,kcr));
+pm_exo_aei(t,j) = sum((kcr), fm_croparea(t_all,j,"irrigated",kcr)*pm_wat_req_k(t,j,kcr));

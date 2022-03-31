@@ -6,3 +6,6 @@
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
 pm_interest, input, not needed
+pm_exo_aei, parameter, used to calculate water availability in module 43
+fm_croparea, input file, pulled from module 30 to calculate pm_exo_aei to be used in module 43
+pm_wat_req_k, parameter, used to calculate water availability in module 43
