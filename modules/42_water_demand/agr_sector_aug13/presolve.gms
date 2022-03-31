@@ -26,7 +26,7 @@ $endif
 
 
 * Agricultural water demand
-ic42_wat_req_k(j,k) = i42_wat_req_k(t,j,k);
+ic42_wat_req_k(j,k) = pm42_wat_req_k(t,j,k);
 ic42_env_flow_policy(i) = i42_env_flow_policy(t,i);
 
 * water withdrawals in other sectors (manufacturing, electricity, domestic, ecosystem)

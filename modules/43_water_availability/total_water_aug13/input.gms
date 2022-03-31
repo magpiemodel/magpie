@@ -5,6 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+scalars
+s43_shock_year                     Year in which policy shock can be implemented (1) / 1995 /
+;
+
 $setglobal c43_watavail_scenario  cc
 *   options:   cc       (climate change)
 *             nocc      (no climate change)
@@ -21,5 +25,5 @@ $offdelim
 ;
 $if "%c43_watavail_scenario%" == "nocc" f43_wat_avail(t_all,j) = f43_wat_avail("y1995",j);
 $if "%c43_watavail_scenario%" == "nocc_hist" f43_wat_avail(t_all,j)$(m_year(t_all) > sm_fix_cc) = f43_wat_avail(t_all,j)$(m_year(t_all) = sm_fix_cc);
-$if "%c43_watavail_scenario%" == "exo" f43_wat_avail(t_all,j)$(m_year(t_all) > s42_shock_year) = min(f43_wat_avail(t_all,j), sum(j, (vm_exo_aei(t,j))));
+$if "%c43_watavail_scenario%" == "exo" f43_wat_avail(t_all,j)$(m_year(t_all) > s43_shock_year) = min(f43_wat_avail(t_all,j), pm_exo_aei(t,j));
 m_fillmissingyears(f43_wat_avail,"j");
