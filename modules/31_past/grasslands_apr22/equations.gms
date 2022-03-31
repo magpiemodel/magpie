@@ -31,6 +31,9 @@ q31_expansion_cost(j2,grassland) ..
   v31_cost_grass_expansion(j2, grassland) =g=
                           (v31_grass_area(j2, grassland) - pc31_grass(j2,grassland)) * s31_cost_expansion;
 
+*' Cost of production account for the cost of moving animals to grassland areas plus the costs of 
+*' expanding aras of production.
+
 q31_cost_prod_past(i2) ..
   vm_cost_prod(i2,"pasture") =e= sum(cell(i2,j2), vm_prod(j2,"pasture")) * s31_cost_grass_prod +
                                  sum((cell(i2,j2), grassland), v31_cost_grass_expansion(j2,grassland));

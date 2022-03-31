@@ -9,5 +9,8 @@ sets
 
 ag_pools(c_pools) Above ground carbon pools
          /vegc,litc/
+
+ rcp52 climate change impact sceanrios
+ 		/ RCP19, RCP26, RCP34, RCP45, RCP60, RCPBU /
          
 ;

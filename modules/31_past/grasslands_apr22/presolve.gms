@@ -6,6 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @code
+
 *' Socioeconomic and environmental conditions determine the potential managed pastures
 *' areas ('i31_manpast_suit'). 'i31_manpast_suit' is estimated by determining areas
 *' with more than five inhabitants per km2 and with aridity greater than 0.5 following

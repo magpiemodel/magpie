@@ -22,7 +22,8 @@
 
 *' @limitations We currently do not accout for specific differences within intensive
 *' pasture management systems and related degradation of grasslands for both
-*' rangelands or managed pastures.
+*' rangelands or managed pastures. Grass production costs and conversion costs between 
+*' grassland types are set 1 USD05MER per unit due to lack of data.
 
 
 

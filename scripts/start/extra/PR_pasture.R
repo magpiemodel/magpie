@@ -14,13 +14,18 @@
 source("scripts/start_functions.R")
 source("config/default.cfg")
 #start MAgPIE run
-tc13 <- c("endo_jan22", "exo")
-past31 <- c("grasslands_mar22", "endo_jun13", "static")
+tc13 <- c("endo_jan22")
+past31 <- c("grasslands_apr22", "endo_jun13", "static")
 for (i in tc13) {
   cfg$gms$tc <- i
   for (j in past31) {
+    if(j == "grasslands_apr22") {
+      cfg$input["calibration"] <- "calibration_H12_grassland_mar22.tgz"
+    } else {
+      cfg$input["calibration"] <- "calibration_H12_sticky_feb18_free_18Jan22.tgz"
+    }
     cfg$gms$past <- j
-    cfg$title <- paste0(i,"_",j)
+    cfg$title <- paste0("PR1_I_",i,"_I_",j)
     start_run(cfg=cfg)
   }
 }
