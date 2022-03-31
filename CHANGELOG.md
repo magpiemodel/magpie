@@ -23,19 +23,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **config** Added new switch to limiting calibration to relative or absolute managed pastures yields: cfg$gms$s31_limit_calib.
   - **13_tc** Replace endo_jan18 realization by endo_jan22. The new realization adds a new dimension to vm_tau separating crop from managed pastures tau.
  - **31_past** added new realization implementing the separation of rangelands and managed pastures for the production of grass biomass.
+ - **15_food** added more options to define convergence towards exogenous food intake and waste scenarios accounting for different transition periods
  - **34_urban** added set urban_scen34 and the switch c34_urban_scenario
  - **35_natveg** corrected naming of Frontier Forests (FF) to Intact Forest Landscapes (IFL) and changed input data for BH_IFL implementation.
  - **scripts** replaced redundant files config.log and config.Rdata with a config.yml
  - **scripts** removed test script "irrig_dep_test" from "start" folder to "extra" folder
  - **scripts** Added script to folder projects paper_grassland.R
+ - **44_biodiversity** Improved documentation, simplification of equations and flexible options for price on biodiversity loss
 
 ### added
 - **scripts** output/projects/FSEC_dietaryIndicators.R to create output datasets for the FSEC project
+- **scripts** output/projects/FSEC_environmentalPollutants.R to create output datasets of pollutants for the FSEC project
+- **scripts** start/projects/project_FSEC_SWF.R runs simulations which will be the basis for the FSEC Social Welfare Function calculation.
+- **52_carbon** added land carbon sink adjustment factors, needed in R post-processing
+- **core** macros for linear and sigmoidal time interpolation
 
 ### removed
 
 ### fixed
 - **inputs** included data for Sudan
+- **09_drivers** bugfix concerning the use of the switch c09_gdp_scenario for defining population assumptions
+- **09_drivers**  introduced new sets for PAL and demography scenarios to account for only partial coverage of available socio-economic gdp and population scenarios
 - **18_residues** off realization; missing variable declarations
 - **34_urban** exo_nov21 realization; bugfix in calculation of biodiversity value
 - **50_nr_soil_budget** off realization; missing variable declarations
@@ -44,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **80_optimization** nlp_par realization; bugfix i2 in submission loop
 - **scripts** calibration; set NA values to 1
 - **scripts** fixed misleading warning in check_config
+- **scripts** fixed configuration error in FSEC output scripts, FSEC_dietaryIndicators.R and FSEC_environmentalPollutants.R
 
 ## [4.4.0] - 2021-12-13
 
