@@ -17,22 +17,28 @@ source("scripts/start_functions.R")
 scenarios <- list(c("SSP1","rcp2p6"), c("SSP2","rcp4p5"), c("SSP3","rcp7p0"), c("SSP4","rcp6p0"), c("SSP5", "rcp8p5"))
 
 for (ssp_setting in scenarios) {
-  name = "FSEC_G2"
+  name = "FSEC_G10"
   cfg="default.cfg"
   cfg <- setScenario(cfg,ssp_setting)
-  if("SSP1" %in% ssp_setting) {
-    cfg$recalibrate <- TRUE
-    cfg$recalibrate_landconversion_cost <- TRUE
+  if(grepl("FSEC", name)) {
+    cfg$input["calibration"]  <- "calibration_H12_grassland_mar22.tgz"
+    if(SSP1 %in% ssp_setting){
+       cfg$input["cellular"]  <- "rev4.68_e2bdb6cd_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz"
+    } else if (SSP2 %in% ssp_setting) {
+       cfg$input["cellular"]  <- "rev4.68_e2bdb6cd_1b5c3817_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1.tgz"
+    } else if (SSP3 %in% ssp_setting) {
+       cfg$input["cellular"]  <- "rev4.68_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
+    } else if (SSP4 %in% ssp_setting) {
+       cfg$input["cellular"]  <- "rev4.68_e2bdb6cd_3c888fa5_cellularmagpie_c200_MRI-ESM2-0-ssp460_lpjml-8e6c5eb1.tgz"
+    } else if (SSP5 %in% ssp_setting) {
+       cfg$input["cellular"]  <- "rev4.68_e2bdb6cd_09a63995_cellularmagpie_c200_MRI-ESM2-0-ssp585_lpjml-8e6c5eb1.tgz"
+    } else {
+       stop("Select a correct SSP scenario!")
+    }
   } else {
-    fname <- format(file.mtime("modules/14_yields/input/f14_yld_calib.csv"), paste0("calibration_", name, "_%d%b%y.tgz"))
-    cfg$input["calibration"] = fname
-    cfg$recalibrate <- FALSE
-    cfg$recalibrate_landconversion_cost <- FALSE
+    cfg$input["calibration"]  <- "calibration_H12_sticky_feb18_free_18Jan22.tgz"
   }
   cfg$gms$past <- "grasslands_mar22"
-  cfg$title <- paste0(name,"_",ssp_setting[1],"_",ssp_setting[2],"_", substr(Sys.time(), 6,10),"-",gsub(":", "_", substr(Sys.time(), 12,16)))
+  cfg$title <- paste0(name,"_",ssp_setting[1],"_",ssp_setting[2],"_", substr(Sys.time(), 6,10),"-",gsub(":", "_I_", substr(Sys.time(), 12,16)))
   start_run(cfg)
-  if("SSP1" %in% ssp_setting) {
-    magpie4::submitCalibration(name)
-  }
 }
