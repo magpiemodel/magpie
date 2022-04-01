@@ -66,7 +66,6 @@ sets
        puls_pro   . (puls_pro)
        potato   . (potato)
        cassav_sp   . (cassav_sp)
-       cassav_sp   . (cassav_sp)
        sugr_beet   . (sugr_beet)
        others   . (others)
        cottn_pro   . (cottn_pro)
