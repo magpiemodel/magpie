@@ -9,7 +9,7 @@ i31_manpast_suit(t_all,j) = f31_pastr_suitability(t_all,j,"%c31_past_suit_scen%"
 pc31_grass(j,grassland) = f31_LUH2v2("y1995",j,grassland);
 
 
-***YIELD CORRECTION FOR MOWING ACCOUNTING FOR REGIONAL DIFFERENCES IN MANAGEMENT***
+***YIELD CORRECTION ACCOUNTING FOR REGIONAL DIFFERENCES IN MANAGEMENT***
 
 *' @code
 
@@ -22,7 +22,7 @@ pc31_grass(j,grassland) = f31_LUH2v2("y1995",j,grassland);
 *' and modeled yields ('i31_grass_modeled_yld') given historic grassland area patterns
 *' ('i31_grassl_areas') and cellular yields coming from crop models like LPJmL 'f31_grassl_yld'.
 *' In these cases, 'i31_grass_calib' represents a purely relative calibration factor that depends
-*'only on the initial conditions of the starting year.
+*' only on the initial conditions of the starting year.
 *'
 *' However, when estimated yields 'i31_grass_hist_yld' are significantly higher than
 *' given by the cellular yield inputs 'f31_grassl_yld' we refer to this as an underestimated

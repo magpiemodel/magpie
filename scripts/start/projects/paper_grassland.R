@@ -17,11 +17,11 @@ source("scripts/start_functions.R")
 scenarios <- list(c("SSP1","rcp2p6"), c("SSP2","rcp4p5"), c("SSP3","rcp7p0"), c("SSP4","rcp6p0"), c("SSP5", "rcp8p5"))
 
 for (ssp_setting in scenarios) {
-  name = "FSEC_G10"
+  name = "H12_G11"
   cfg="default.cfg"
   cfg <- setScenario(cfg,ssp_setting)
   if(grepl("FSEC", name)) {
-    cfg$input["calibration"]  <- "calibration_H12_grassland_mar22.tgz"
+    cfg$input["calibration"]  <- "calibration_FSEC_G3_22Mar22.tgz"
     if(SSP1 %in% ssp_setting){
        cfg$input["cellular"]  <- "rev4.68_e2bdb6cd_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz"
     } else if (SSP2 %in% ssp_setting) {
@@ -36,9 +36,9 @@ for (ssp_setting in scenarios) {
        stop("Select a correct SSP scenario!")
     }
   } else {
-    cfg$input["calibration"]  <- "calibration_H12_sticky_feb18_free_18Jan22.tgz"
+    cfg$input["calibration"]  <- "calibration_H12_grassland_mar22.tgz"
   }
-  cfg$gms$past <- "grasslands_mar22"
+  cfg$gms$past <- "grasslands_apr22"
   cfg$title <- paste0(name,"_",ssp_setting[1],"_",ssp_setting[2],"_", substr(Sys.time(), 6,10),"-",gsub(":", "_I_", substr(Sys.time(), 12,16)))
   start_run(cfg)
 }

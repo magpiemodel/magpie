@@ -13,7 +13,7 @@ q31_bv_manpast(j,potnatveg)                             Biodiversity value for m
 q31_bv_rangeland(j,potnatveg)                           Biodiversity value for rangeland (Mha)
 q31_pasture_areas(j)                                    Total grassland calculation (mio. ha)
 q31_prod_pm(j)                                          Cellular grass production constraint (mio. tDM per yr)
-q31_expansion_cost(j, grassland)                        Grassland transition cost constraint (mio. USD05MER)
+q31_expansion_cost(j, grassland)                        Grassland expansion cost constraint (mio. USD05MER)
 ;
 
 positive variables
