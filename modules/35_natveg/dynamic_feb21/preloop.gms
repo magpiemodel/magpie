@@ -57,8 +57,8 @@ p35_protect_shr(t,j,prot_type_all,land_natveg)$(p35_protect_shr(t,j,prot_type_al
 p35_protect_shr(t,j,prot_type_all,land_natveg)$(p35_protect_shr(t,j,prot_type_all,land_natveg) < 0) = 0;
 
 * calculate protected areas
-p35_save_natveg(t,j,land_natveg) = 
-	pm_land_start(j,land_natveg) * sum(cell(i,j), 
+p35_save_natveg(t,j,land_natveg) =
+	pm_land_start(j,land_natveg) * sum(cell(i,j),
 	p35_protect_shr(t,j,"%c35_protect_scenario%",land_natveg) * p35_region_prot_shr(i)
 	+ p35_protect_shr(t,j,"%c35_protect_scenario_noselect%",land_natveg) * (1-p35_region_prot_shr(i)));
 

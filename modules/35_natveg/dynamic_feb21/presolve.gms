@@ -31,9 +31,7 @@ if(s35_forest_damage=3,
 	);
 
 if(s35_forest_damage=4,
-	if(m_year(t)=%c35_year_of_shock%,
-		p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * s35_share_lost;
-		);
+	p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * f35_forest_shock(t,"%c35_shock_scenario%");
 	);
 
 * Distribution of damages correctly
