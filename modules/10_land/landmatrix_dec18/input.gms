@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-  s10_cost_balance Artificial cost for balance variable (USD05MER per ha) / 1000000 /
+  s10_cost_balance Artificial cost for balance variable (USD05MER per ha) / 1e+06 /
 ;
 
 table f10_land(t_ini10,j,land) Different land type areas (mio. ha)

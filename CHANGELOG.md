@@ -6,25 +6,66 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [Unreleased]
+## [4.4.0] - 2021-12-13
 
 ### changed
-
+- **inputs** new default LPJmL version with growing season adaptation (gsadapt) on 
 - **51_nitrogen** parameter change in rescaled_jan21, now including regionalized climate-dependent leaching factors
 - **config** Update default configuration to new input data (especially cellular inputs) including all module realization updates (14_yield, 22_processing, 30_crop, 38_factor_costs, 39_landconversion). Moreover, climate impatcs (cc options for biophysical inputs) are activiated as default. New best_calib calibration routine is activated as default.
 - **config** peatland module on by default (cfg$gms$peatland <- "on")
 - **config** update default setting for 2nd generation bioenergy demand and GHG prices
+- **config** update default setting for the 42_water_demand module (to all_sectors_aug13)
 - **scripts** output/extra/disaggregation.R updated to account for country-specific set-aside shares in post-processing
 - **scripts** output/extra/disaggregation.R updated to account for sub-categories of "forestry"
+- **scripts** Default recalibration routine does not read in previous calibration factors anymore
 - **09_drivers** Update sets in drivers to include new SDP and Ariadne GDP and Pop scenarios
-- **21_trade** In the exo and off realization, equations corrected to be consistent with the mapping between supreg h and regions i. Bugfixes in trade exo and off realizations.
-- **80_optimization** Bug fixes in the nlp_par (parallel optimization) and an increase in maximum number of iterations.
-
+- **21_trade** In the exo and off realization, equations corrected to be consistent with the mapping between supreg h and regions i. Bugfixes in trade exo and off realizations. Added scaling factor for exo realization.
+- **inputs** Update of GDP and population scenarios based upon recent historic data from WDI (complemented with growth rates given by the James2019 dataset), short term projections until 2025 from IMF (for GDPpc) and WB (for pop) and reconverge to the original SSP GDPpc levels by 2100.
+- **inputs** Update of all input data that are based on FAO, using the most up-to-date version of FAOSTAT datasets available at the date of input calculations via automated download.
+- **inputs** Update of additional data to rev4.07
+- **scripts** scripts/start/projects/project_LAMACLIMA.R -> scripts/start/projects/project_LAMACLIMA_WP4.R
+- **58_peatland** "On" realization: Degraded peatland is estimated differently, based on an additional calibration factor.
+- **43_water_availability** changed scaling factor
+- **10_land** Converted "v10_landreduction" to interface "vm_landreduction", used in "modules/39_landconversion/calib"
+- **52_carbon** Removed interface "vm_carbon_stock_change", no longer needed
+- **scripts** recalibrate_realizations.R and recalibrate.R adjusted for land conversion cost calibration + default time steps for convenient validation of results
+- **scripts** start_functions adjustments for land conversion cost calibration
+- **scripts** start.R added SLURM medium as choice
+- **scripts** yield calibration, "best" setting uses factors from iteration with lowest standard deviation 
+- **14_yield** read-in file f14_yld_calib.csv if exists. Set default calibration factors to 1 in case f14_yld_calib.csv does not exist
+- **13_tc** different educated guess for vm_tau in 1995
+- **scaling** Update of scaling factors. removed duplicates
+- **32_foresty** Avoid division by zero (observed under higher regional resolutions)
+- **35_natveg** Avoid division by zero (observed under higher regional resolutions)
+- **70_livestock** Avoid division by zero (observed under higher regional resolutions)
+- **60_bioenergy** Minimum dedicated 2nd generation bioenergy demand assumed in each region raised from 0.01 to 1 mio. GJ per yr, and added as option in the config file (s60_2ndgen_bioenergy_dem_min)
+- **config** Remove elements from the parameter list of start_run(), instead include them as regular settings in the default.cfg.
+- **scripts** Add option to take ghg prices from different file than the regular reporting file (used in the REMIND coupling)
+- **60_bioenergy** Switch off fixing the bioenergy demand to SSP2 until 2020 if MAgPIE runs coupled (to REMIND) or for emulator runs (to derive biomass supply crurves).
+- **56_ghg_policy** Switch off fixing the GHG prices to SSP2 until 2020 if MAgPIE runs coupled (to REMIND) or for emulator runs (to derive biomass supply crurves).
+- **scripts** start/test_runs.R added SSP1, SSP2 and SSP5 as default test runs
 
 ### added
+- **34_urban** New exo_nov21 exogenous realization of urban land expansion 
 - **21_trade** Missing interface parameter for failing exo realization runs
 - **59_som** exogenous pathway for vm_nr_som via f59_som_exogenous
 - **config** Addition of a new scenario column (Tland) in scenario_config.csv
+- **config** Added option c32_max_aff_area, which allows to provide a file with regional limits for afforestation
+- **14_yield** parameter created to save historical cellular yields and to be used in the sticky realization of 38_factor_costs and in the 17_production module
+- **17_production** switch added to decide if initialization of cellular crop production is needed or not. Also, a parameter to calculate initial production based on input cellular crop patterns and semicalibrated yields (potential yields calibrated to FAO values).
+- **scripts** Added calibration script to generate default calibration for different factor costs realization
+- **scripts** scripts/output/extra/disaggregation_LUH2.R script for exporting spatial output in LUH2 format (NetCDF)
+- **37_labor_prod** labor productivity module with two realizations: off and exo
+- **38_factor_costs** new realization "sticky_labor", based on "sticky_feb18" but accounting for changes in labor productivity
+- **15_food** Added additional solve with CONOPT3 in case of modelstat 7
+- **scripts** Added script "landconversion_cost.R" for land conversion cost calibration in scripts/calibration, for matching historic cropland in 2015
+- **39_landconversion_cost** added new realization "calib", which uses the calibration factors derived by "landconversion_cost.R"
+- **scripts** Added start script for yield and land conversion cost calibration "recalibrate_all.R"
+- **scripts** added script validation_short.R with aggregated crop types (cutting the PDF size in half) -> replaces validation.R in default.cfg
+- **scripts** added start script "scripts/start/Rprofile.R" for adding a R snapshot to the ".Rprofile" file
+- **config** file "land_carbon_sink_adjust_grassi.mz" added to cfg$files2export$start
+- **config** Inclusion of LAMACLIMA scenarios in scenario_config.csv
+- **output.R** added SLURM standby maxMem and SLURM priority maxMem; needed for some output scripts (e.g. disaggregation_LUH2.R)
 
 ### removed
 - **32_foresty** Removed static realization
@@ -32,13 +73,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** lpjml_addon script is removed and all calls within dependend starting scripts
 - **scripts** output/extra/disaggregation_transitions_.R moved to deprecated folder
 - **scripts** output/extra/disaggregation_cropsplit.R moved to deprecated folder
+- **14_yield** Removed `biocorrect` and `dynamic_aug18` realizations
+- **20_processing** Removed `substitution_dec18` realization
+- **30_crop** Removed `endo_jun13` realization
+- **scripts** scripts/start/extra/highres.R
+- **39_landconversion_cost** removed realizations "global_static_aug18" and "devstate"
 
 ### fixed
-- **80_optimization** fixed compilation error in "nlp_par" realization
+- **80_optimization** Improved solve logic in "nlp_apr17" and "nlp_par" realization, multiple bugfixes and switch to solvelink=3 in "nlp_par"
 - **58_peatland** fixed rare infeasibility in "on" realization
 - **10_land** fixed rare infeasibility in "landmatrix_dec18" realization
-
-
+- **38_factor_costs** For the sticky_feb18 realization correction in initial capital stocks, use of production initial values, and 05USDppp units changed to 05USDMER for sticky so it matches the units of the other realizations
+- **80_optimization** Bug fixes in the nlp_par (parallel optimization) and improved code to collect failing handles.
+- **32_foresty** Avoid division by zero in q32_establishment_dynamic_yield
+- **35_natveg** fixed land protection to SSP2 default (WDPA) for historic period
+- **15_food** New iteration needs to be started before setting food prices for curr_iter15
+- **scripts** scripts/output/extra/highres.R bugfixes
+- **38_factor_costs** units in sticky_feb18
+- **32_foresty** Global afforestation limit s32_max_aff_area was not effective in case of parallel optimization -> added option c32_max_aff_area, which allows to provide a file with regional limits for afforestation; 
+- **73_timber** plausible cost for balance variable in case of s73_timber_demand_switch = 0 to avoid cost distortion
+- **56_ghg_policy** choose the correct scenario for fixing the GHG prices until sm_fix_SSP2 
 
 ## [4.3.5] - 2021-09-02
 
@@ -314,7 +368,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.3.5...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.4.0...develop
+[4.4.0]: https://github.com/magpiemodel/magpie/compare/v4.3.5...v4.4.0
 [4.3.5]: https://github.com/magpiemodel/magpie/compare/v4.3.4...v4.3.5
 [4.3.4]: https://github.com/magpiemodel/magpie/compare/v4.3.3...v4.3.4
 [4.3.3]: https://github.com/magpiemodel/magpie/compare/v4.3.2...v4.3.3

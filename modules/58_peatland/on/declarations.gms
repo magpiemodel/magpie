@@ -7,17 +7,11 @@
 
 parameters
  p58_scaling_factor(j)								Scaling factor for managed peatland (1)
- p58_intact_ratio(t,j)								Ratio of intact and total peatland (1)
- p58_peatland_degrad_used(j)						Intermediate calculation in peatland initialization (mio. ha)
- p58_peatland_degrad_unused(j)						Intermediate calculation in peatland initialization (mio. ha)
- p58_peatland_degrad_unused_weight(j,land58)		Weight for intermediate calculation in peatland initialization (1)
- p58_land_area(j)									Total land area (mio. ha)
- p58_peatland_area(j)								Total peatland area (mio. ha)
+ p58_calib_factor(j,land58)							Calibration factor for managed peatland (1)
+ p58_peatland_degrad(j)								Intermediate calculation in peatland initialization (mio. ha)
  p58_ipcc_wetland_ef(clcl58,land58,emis58,man58) Wetland GWP100 emission factors (t CO2eq per ha)
  p58_man_land_area(j)								Total managed land (mio. ha)
- pc58_man_land_shr(j,land58)						Share of total managed land (1)
  pc58_peatland_man(j,man58,land58)					Managed peatland (mio. ha)
- pc58_peatland_man_inital(j,man58,land58)			Managed peatland at initialization (mio. ha)
  pc58_peatland_intact(j)							Intact peatland (mio. ha)
  p58_mapping_cell_climate(j,clcl58)					Mapping between cells and climate regions (binary)
  p58_peatland_degrad_weight(j,land58)				Weight for peatland distribution to land58 (1)
@@ -40,7 +34,7 @@ equations
  q58_peatland_cost_annuity(j)					Annuity costs of peatland conversion in the current timestep (mio. USD05MER per yr)
  q58_peatland_emis_detail(j,emis58)				Detailed GHG emissions from managed peatland (t CO2eq per year)
  q58_peatland_emis(j)							GHG emissions from managed peatland (t CO2eq per year)
- ;
+;
 
 variables
  vm_peatland_cost(j)						One-time and recurring cost of managed peatland including artifical balance cost (mio. USD05MER per yr)

@@ -13,7 +13,7 @@ parameters
 ;
 
 variable
- vm_carbon_stock_change(j,land,c_pools)	Change in carbon stocks compared to previous time step (mio. tC per time step)
+ v52_carbon_stock_change(j,land,c_pools)	Change in carbon stocks compared to previous time step (mio. tC per time step)
 ;
 
 positive variables
@@ -22,7 +22,7 @@ positive variables
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_carbon_stock_change(t,j,land,c_pools,type) Change in carbon stocks compared to previous time step (mio. tC per time step)
- ov_carbon_stock(t,j,land,c_pools,type)        Carbon in vegetation soil and litter for different land types (mio tC)
+ ov52_carbon_stock_change(t,j,land,c_pools,type) Change in carbon stocks compared to previous time step (mio. tC per time step)
+ ov_carbon_stock(t,j,land,c_pools,type)          Carbon in vegetation soil and litter for different land types (mio tC)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
