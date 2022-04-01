@@ -158,12 +158,12 @@ $title magpie
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev4.07.tgz
-* md5sum: accf653e73cbfd02354158d3b99b046f
+* Used data set: additional_data_rev4.08.tgz
+* md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_sticky_feb18_free_30Nov21.tgz
-* md5sum: f9ee7b8955713d8bd860cb65374d1958
+* Used data set: calibration_H12_sticky_feb18_free_18Jan22.tgz
+* md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
@@ -190,7 +190,7 @@ $title magpie
 * * Call: do.call(functiononly, args)
 * 
 * 
-* Last modification (input data): Fri Jan 21 11:08:10 2022
+* Last modification (input data): Thu Mar 24 16:19:54 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 

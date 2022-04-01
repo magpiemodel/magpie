@@ -19,6 +19,20 @@ q70_feed(i2,kap,kall) ..
      *sum(ct,im_feed_baskets(ct,i2,kap,kall))
      +sum(ct,fm_feed_balanceflow(ct,i2,kap,kall));
 
+* Certain feed basket items - namely residues - lead to high demand and very high prices,
+* forcing unnecessary crop production in order to produce residues. Following 2 equations allow
+* for substituting fodder for residues
+q70_feed_subs(i2,kall,ksub70) ..
+    sum(ct, sum(kall_ksub70(kall,ksub70), i70_feed_basket_substitutes(ct,i2,kap,kall))) =e=
+    sum(ct, sum(kall_ksub70(kall,ksub70), im_feed_baskets(ct, i2,kap,kall)))
+    ;
+
+*q70_feed_sub_ratio(i2,kap,kall) ..
+*        sum(ct, im_feed_basket_substitutes(ct, i2,kap,ksub70)) =g=
+*        sum(ct, im_feed_baskets(ct, i2,kap,kall)*sum(ct,i70_sub_ratio(ct, kall))
+*    ;
+
+
 *' Factor requirement costs (e.g. labour, capital, but without costs for feed)
 *' of livestock production depend on the amount of production and the per-unit
 *' costs. For ruminant products (milk and meet), we use a regression of per-unit
