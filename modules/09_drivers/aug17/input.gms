@@ -7,13 +7,16 @@
 
 $setglobal c09_pop_scenario  SSP2
 *   options:   SSP: "SSP1", "SSP2", "SP3", "SSP4", "SSP5", "SSP2EU"
-*              SDP: "SDP" "SDP", "SDP_EI",	"SDP_MC",	"SDP_RC"
+*              SDP: "SDP", SDP_EI",	"SDP_MC",	"SDP_RC"
 *             SRES: "a1", "a2", "b1", "b2"
 
 $setglobal c09_gdp_scenario  SSP2
 *   options:   SSP: "SSP1", "SSP2", "SSP3", "SSP4", "SSP5",  "SSP2EU"
-*              SDP: "SDP" "SDP", "SDP_EI",	"SDP_MC",	"SDP_RC"
+*              SDP: "SDP", "SDP_EI",	"SDP_MC",	"SDP_RC"
 *             SRES: "a1", "a2", "b1", "b2"
+
+$setglobal c09_pal_scenario  SSP2
+*   options:   SSP: "SSP1", "SSP2", "SSP3", "SSP4", "SSP5",  "SSP2EU"
 
 
 table f09_gdp_ppp_iso(t_all,iso,gdp_scen09) Income in purchasing power parity (mio. USD05PPP per yr)
@@ -36,12 +39,12 @@ $ondelim
 $include "./modules/09_drivers/input/f09_development_state.cs3"
 $offdelim;
 
-table f09_demography(t_all,iso,pop_scen09,sex,age) Population (mio. capita per yr)
+table f09_demography(t_all,iso,demography_scen09,sex,age) Population (mio. capita per yr)
 $ondelim
 $include "./modules/09_drivers/input/f09_demography.cs3"
 $offdelim;
 
-table f09_physical_inactivity(t_all,iso,gdp_scen09,sex,age) Share of population which is physically inactive (1)
+table f09_physical_inactivity(t_all,iso,pal_scen09,sex,age) Share of population which is physically inactive (1)
 $ondelim
 $include "./modules/09_drivers/input/f09_physical_inactivity.cs3"
 $offdelim;

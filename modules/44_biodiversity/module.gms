@@ -7,10 +7,8 @@
 
 *' @title Biodiversity
 *'
-*' @description The biodiversity module estimates how the changes in land pools
-*' affect terrestrial biodiversity. It requires information about the land
-*' area of the different land pools provided by all land modules ([30_crop], [31_past], [32_forestry],
-*' [34_urban] and [35_natveg]), as well as module [10_land] about the potential natural vegetation.
+*' @description The biodiversity module estimates terrestrial biodiversity stocks for 
+*' all land types in MAgPIE, based on Biodiversity Intactness Index (BII) coefficients.
 *'
 *'
 *' @authors Patrick v. Jeetze, Florian Humpenöder
