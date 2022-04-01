@@ -14,7 +14,7 @@ equations
  q70_feed(i,kap,kall)             Regional feed demand
  q70_cost_prod_liv(i,kall)        Regional factor input costs for livestock production
  q70_cost_prod_fish(i)            Regional factor input costs for fish production
- q70_feed_subs(i,kap,kll)     Allow for substituting feeds based on mapping
+ q70_feed_subs(i,kap,kall)     Allow for substituting feeds based on mapping
 *' q70_feed_sub_ratio(i,kap,kall)   Amount of substitution allowed
 
 ;
