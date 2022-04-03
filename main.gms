@@ -214,7 +214,7 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  2
+$setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
 $setglobal c_title  default
 

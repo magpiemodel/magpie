@@ -16,7 +16,7 @@
 
 q70_feed(i2,kap,kall) ..
  vm_dem_feed(i2,kap,kall) =g= vm_prod_reg(i2,kap)
-     *sum(ct,im_feed_baskets(ct,i2,kap,kall))
+     *sum(ct,i70_feed_basket_substitutes(ct,i2,kap,kall))
      +sum(ct,fm_feed_balanceflow(ct,i2,kap,kall));
 
 * Certain feed basket items - namely residues - lead to high demand and very high prices,
