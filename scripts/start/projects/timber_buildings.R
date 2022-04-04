@@ -37,7 +37,7 @@ for(c73_wood_scen in c("default")){
   for(s80_maxiter in c(30)){
     for(scen in scen_vector){
 
-        for(ssp in c("SSP2")){
+        for(ssp in c("SSP1","SSP2","SSP3")){
 
           for(pol_scen in c("NPI")){
               source("config/default.cfg")
@@ -93,7 +93,7 @@ for(c73_wood_scen in c("default")){
                         pol_flg = "Mitigation"
                       }
 
-                      cfg$title   = paste0(identifier_flag,"_",c73_build_demand,"_",gsub(pattern="_",replacement="",x=c35_protect_scenario))
+                      cfg$title   = paste0(identifier_flag,"_",ssp,"_",c73_build_demand,"_",gsub(pattern="_",replacement="",x=c35_protect_scenario))
                       cfg$output  = c("extra/timestep_duration")
 
                       xx = c(xx,cfg$title)
