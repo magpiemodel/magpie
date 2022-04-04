@@ -31,11 +31,6 @@ land_hr_share_out_file     <- file.path(outputdir,"cell.land_0.5_share.mz")
 croparea_hr_share_out_file <- file.path(outputdir,"cell.croparea_0.5_share.mz")
 land_hr_split_file         <- file.path(outputdir,"cell.land_split_0.5.mz")
 land_hr_shr_split_file     <- file.path(outputdir,"cell.land_split_0.5_share.mz")
-lsu_ha_file                <- file.path(outputdir,"lsu_ha.mz")
-lsus_file                  <- file.path(outputdir,"lsus.mz")
-production_grass_file      <- file.path(outputdir,"Production_grass.mz")
-shares_pastr_file          <- file.path(outputdir,"shares_pastr.mz")
-pastr_prod_diff_file       <- file.path(outputdir, "pastr_prod_diff.mz")
 
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 ################################################################################
@@ -57,7 +52,8 @@ extend2luhv2 <- function(x, land = deparse(substitute(x))) {
     land_lr <- land_lr[, , drop_past]
     return(land_lr)
   }
-
+  
+  # Used only when land_hr_file do not have pastr and range separation.
   if (land == "land_ini_hr") {
     land_ini_LUH2v2 <- read.magpie("./modules/31_past/input/fm_LUH2v2.mz")[, 1995, c("pastr", "range")]
     land_ini_hr <- mbind(x, land_ini_LUH2v2)
@@ -70,7 +66,6 @@ extend2luhv2 <- function(x, land = deparse(substitute(x))) {
   if (land == "land_ini_lr") {
     grassland_areas <- readGDX(gdx, "ov31_grass_area")[, "y1995", "level"]
     grassland_areas <- collapseNames(grassland_areas)
-    # grassland_areas <- setNames(grassland_areas, getNames(grassland_areas) %<>% gsub("range", "range", .) %>% gsub("pastr", "pastr", .))
     land_ini_lr <- mbind(x, grassland_areas)
     drop_past <- !grepl("past$", getNames(land_ini_lr))
     land_ini_lr <- land_ini_lr[, , drop_past]

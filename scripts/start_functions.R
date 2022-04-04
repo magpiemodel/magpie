@@ -388,7 +388,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
     source("scripts/calibration/calc_calib.R")
     calibrate_magpie(n_maxcalib = cfg$calib_maxiter,
                      calib_accuracy = cfg$calib_accuracy,
-                     calibrate_pasture = (cfg$gms$past!="static" & cfg$gms$past!="grasslands_mar22"),
+                     calibrate_pasture = (cfg$gms$past!="static" & cfg$gms$past!="grasslands_apr22"),
                      calibrate_cropland = (cfg$calib_cropland),
                      damping_factor = cfg$damping_factor,
                      crop_max = cfg$crop_calib_max,
