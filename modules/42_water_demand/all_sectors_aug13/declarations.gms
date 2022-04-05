@@ -32,6 +32,8 @@ positive variables
 parameters
  ov_watdem(t,wat_dem,j,type)         Amount of water needed in different sectors (mio. m^3 per yr)
  ov42_irrig_eff(t,j,type)            Irrigation efficiency (1)
+ ov_water_cost(t,i,type)             Cost of irrigation water (USD per m^3 per yr)
  oq42_water_demand(t,wat_dem,j,type) Water withdrawals of different sectors (mio. m^3 per yr)
+ oq42_vm_water_cost(t,j,type)        Total cost of pumping irrigation water (USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

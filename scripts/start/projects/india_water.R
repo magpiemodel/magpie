@@ -22,9 +22,9 @@ source("config/default.cfg")
 #cfg$title <- "0203_newinputdata01"
 
 #New input data as of 8th October used
-cfg$input <- c(cellular = "rev4.67_0203_indiaYields01__h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-         regional = "rev4.67_0203_indiaYields01__h12_magpie.tgz",
-         validation = "rev4.67_0203_indiaYields01__h12_validation.tgz",
+cfg$input <- c(cellular = "rev4.67_0405_indiaYields01__h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+         regional = "rev4.67_0405_indiaYields01__h12_magpie.tgz",
+         validation = "rev4.67_0405_indiaYields01__h12_validation.tgz",
          calibration = "calibration_H12_mixed_feb17_18Jan22.tgz",
          additional = "additional_data_rev4.08.tgz")
 
@@ -35,16 +35,16 @@ cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=
   cfg$force_download <- TRUE
 
   #Using mixed regional scenario for factor costs
-  cfg$gms$factor_costs <- "mixed_reg_feb17"
+#  cfg$gms$factor_costs <- "mixed_reg_feb17"
 
 
 #Iterations of factor costs in ssp2 food demand setting
-for(i in seq(1, 2, by = 0.5)) {
-  cfg$gms$s38_factor <- i
-  cfg$title <- paste0("0603","_","factor","_",i,"_","indiaYields01")
-  cfg$results_folder = "output/:title:"
+#for(i in seq(1, 2, by = 0.5)) {
+#  cfg$gms$s38_factor <- i
+#  cfg$title <- paste0("0603","_","factor","_",i,"_","indiaYields01")
+#  cfg$results_folder = "output/:title:"
   start_run(cfg)
-}
+#}
 
 ####Test run with new input data 30% yield setting
 #
