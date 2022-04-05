@@ -43,7 +43,7 @@ parameters
  oq31_bv_rangeland(t,j,potnatveg,type)         Biodiversity value for rangeland (Mha)
  oq31_pasture_areas(t,j,type)                  Total grassland calculation (mio. ha)
  oq31_prod_pm(t,j,type)                        Cellular grass production constraint (mio. tDM per yr)
- oq31_expansion_cost(t,j,grassland,type)       Grassland transition cost constraint (mio. USD05MER)
+ oq31_expansion_cost(t,j,grassland,type)       Grassland expansion cost constraint (mio. USD05MER)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

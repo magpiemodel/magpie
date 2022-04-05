@@ -11,11 +11,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### changed
  - **scripts** added new disaggregation script to provide grid cell level BII
  - **inputs** updated non-agricultural water use scenarios (watdem_nonagr_grper.cs3)
- - **inputs** New input files added:
-    f13_pastr_tau_hist.csv -> historical tau for managed pastures. f31_pastr_suitability.cs3 -> Managed pasture suitability
-    f31_LUH2v2.cs3 -> LUH2v2 land classes separating rangelands from managed pastures
-    f31_grassl_yld.cs3 -> Rangelands and managed pastures grass yields
-    f31_grass_bio_hist.cs3 -> Historical grass biomas demand
  - **config** included switch for non-agricultural water demand (s42_watdem_nonagr_scenario) in scenario_config.csv
  - **config** included SHAPE SDP scenarios in scenario_config.csv
  - **config** Update default tau realization from endo_jan18 to endo_jan22
@@ -35,8 +30,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** output/projects/FSEC_dietaryIndicators.R to create output datasets for the FSEC project
 - **scripts** output/projects/FSEC_environmentalPollutants.R to create output datasets of pollutants for the FSEC project
 - **scripts** start/projects/project_FSEC_SWF.R runs simulations which will be the basis for the FSEC Social Welfare Function calculation.
+- **scripts** Added script to folder projects paper_grassland.R
+- **scripts** Extended dissagregation.R script to replace single "past" land class by LHU range and pastr classes when grassland_apr22 realization is used.
 - **52_carbon** added land carbon sink adjustment factors, needed in R post-processing
 - **core** macros for linear and sigmoidal time interpolation
+- **inputs** New input files added:
+    f13_pastr_tau_hist.csv -> historical tau for managed pastures. 
+    f31_pastr_suitability.cs3 -> Managed pasture suitability
+    f31_LUH2v2.cs3 -> LUH2v2 land classes separating rangelands from managed pastures
+    f31_grassl_yld.cs3 -> Rangelands and managed pastures grass yields
+    f31_grass_bio_hist.cs3 -> Historical grass biomass demand
 
 ### removed
 
