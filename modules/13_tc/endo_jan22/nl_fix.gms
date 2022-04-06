@@ -5,11 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-sets
+* ### nl_fix ###
 
-	scen13 tc cost scenario
-  	  /low, medium, high/
-
-;
-
-*** EOF sets.gms ***
+vm_tau.fx(h,tautype) = max(vm_tau.lo(h,tautype), min(vm_tau.up(h,tautype), vm_tau.l(h,tautype)));
