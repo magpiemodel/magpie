@@ -5,6 +5,13 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* ### nl_fix ###
+*' @code
 
-vm_tau.fx(h) = max(vm_tau.lo(h), min(vm_tau.up(h), vm_tau.l(h)));
+*' Socioeconomic and environmental conditions determine the potential managed pastures
+*' areas ('i31_manpast_suit'). 'i31_manpast_suit' is estimated by determining areas
+*' with more than five inhabitants per km2 and with aridity greater than 0.5 following
+*' the methodology established by @KleinGoldewijk.2017
+
+v31_grass_area.up(j,"pastr") = i31_manpast_suit(t,j);
+
+*' @stop

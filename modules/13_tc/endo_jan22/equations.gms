@@ -17,10 +17,11 @@
 *' 15 years into the future using the region specific interest
 *' rate `pm_interest`:
 
-q13_cost_tc(i2) ..
-  v13_cost_tc(i2) =e= sum(ct, pc13_land(i2) * i13_tc_factor(ct)
-                     * sum(supreg(h2,i2),vm_tau(h2))**i13_tc_exponent(ct)
-                     * (1+pm_interest(ct,i2))**15);
+q13_cost_tc(i2, tautype) ..
+  v13_cost_tc(i2, tautype) =e= sum(ct, pc13_land(i2, tautype) *
+                     i13_tc_factor(ct) * sum(supreg(h2,i2),vm_tau(h2,tautype))**
+                     i13_tc_exponent(ct) * (1+pm_interest(ct,i2))**15);
+
 
 *' The shifting is performed because investments into technological change
 *' require on average 15 years of research before a yield increase is achieved,
@@ -36,6 +37,9 @@ q13_cost_tc(i2) ..
 *' time horizon by multiplication with the interest rate `pm_interest(i)`
 *' (annuity with infinite time horizon):
 
-q13_tech_cost(i2) ..
- vm_tech_cost(i2) =e= sum(supreg(h2,i2), vm_tau(h2)/pcm_tau(h2)-1) * v13_cost_tc(i2)
+q13_tech_cost(i2, tautype) ..
+ v13_tech_cost(i2, tautype) =e= sum(supreg(h2,i2), vm_tau(h2,tautype)/pcm_tau(h2,tautype)-1) * v13_cost_tc(i2,tautype)
                                * sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
+
+q13_tech_cost_sum(i2) ..
+ vm_tech_cost(i2) =e= sum(tautype, v13_tech_cost(i2, tautype));
