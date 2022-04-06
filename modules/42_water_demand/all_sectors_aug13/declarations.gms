@@ -15,6 +15,7 @@ parameters
 * country-specific scenario switch
  p42_country_dummy(iso)             Dummy parameter indicating whether country is affected by EFP (1)
  p42_EFP_region_shr(t_all,i)        Weighted share of region with regards to EFP (1)
+ i42_pumping_cost(t_all,i)          Parameter to capture values for pumping costs (USD per m^3 per yr)
 ;
 
 equations
