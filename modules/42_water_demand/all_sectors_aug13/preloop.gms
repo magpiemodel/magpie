@@ -10,4 +10,4 @@ i42_env_flows(t,j) = f42_env_flows(t,j);
 
 pm_wat_req_k(t,j,kli) = f42_wat_req_kli(kli);
 
-i42_pumping_cost(t_all,i) = f42_pumping_cost(t_all,i);
+i42_pumping_cost(t,i) = f42_pumping_cost(t_all,i);
