@@ -19,4 +19,4 @@ v43_watavail.fx("ground",j) = v43_watavail.up("ground",j)
 ic43_crop_area(j,w,kcr) = fm_croparea(t_all,j,w,kcr);
 
 *Water requirement for every crop at the time of initialization (mio. m^3 per yr)
-p43_exo_wat_req(t,j) = sum((kcr),i43_crop_area(j,w,kcr)*pm_wat_req_k(t,j,kcr));
+p43_exo_wat_req(t,j) = sum((kcr),ic43_crop_area(j,w,kcr)*pm_wat_req_k(t,j,kcr));
