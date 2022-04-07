@@ -118,7 +118,9 @@ $offdelim
 
 *Costs of pumping are taken from Cornish et.al. 2014 which are average global costs in USD
 parameter f42_pumping_cost(t_all,i) Cost of pumping irrigation water (1)
+/
 $ondelim
 $include "./modules/42_water_demand/input/f42_pumping_cost.csv"
 $offdelim
+/
 ;
