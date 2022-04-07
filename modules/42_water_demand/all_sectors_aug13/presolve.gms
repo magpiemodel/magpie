@@ -66,5 +66,5 @@ else
  );
 );
 
-
-i42_pumping_cost(i) = f42_pumping_cost(t,i);
+*Pumping cost in the current time step
+ic42_pumping_cost(i) = f42_pumping_cost(t,i);

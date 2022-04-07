@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- pm_wat_req_k(t,j,kcr)               LPJmL annual water demand for irrigation per ha per yr and livestock demand per ton per yr (m^3)
+ pm_wat_req_k(t,j,k)               LPJmL annual water demand for irrigation per ha per yr and livestock demand per ton per yr (m^3)
  ic42_wat_req_k(j,k)                LPJmL annual water demand for irrigation per ha per yr and livestock demand per ton per yr (m^3)
  i42_env_flows(t,j)                 Environmental flow requirements in case of policy (mio m^3)
  i42_env_flows_base(t,j)            Environmental flow requirements in case of no policy (mio m^3)
@@ -15,7 +15,7 @@ parameters
 * country-specific scenario switch
  p42_country_dummy(iso)             Dummy parameter indicating whether country is affected by EFP (1)
  p42_EFP_region_shr(t_all,i)        Weighted share of region with regards to EFP (1)
- i42_pumping_cost(t_all,i)          Parameter to capture values for pumping costs (USD per m^3 per yr)
+ ic42_pumping_cost(i)          Parameter to capture values for pumping costs in a particular time step (USD per m^3 per yr)
 ;
 
 equations
