@@ -14,3 +14,9 @@ v43_watavail.fx("ren_ground",j) = im_wat_avail(t,"ren_ground",j);
 v43_watavail.fx("ground",j) = v43_watavail.up("ground",j)
                              + (((sum(watdem_exo, vm_watdem.lo(watdem_exo,j))-sum(wat_src,v43_watavail.up(wat_src,j)))*1.01))
                              $(sum(watdem_exo, vm_watdem.lo(watdem_exo,j))-sum(wat_src,v43_watavail.up(wat_src,j))>0);
+
+
+ic43_crop_area(j,w,kcr) = fm_croparea(t_all,j,w,kcr);
+
+*Water requirement for every crop at the time of initialization (mio. m^3 per yr)
+p43_exo_wat_req(t,j) = sum((kcr),i43_crop_area(j,w,kcr)*pm_wat_req_k(t,j,kcr));

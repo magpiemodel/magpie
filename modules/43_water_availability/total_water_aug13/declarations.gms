@@ -7,9 +7,11 @@
 
 parameters
  im_wat_avail(t,wat_src,j)        Water availability (mio. m^3 per yr)
+ p43_exo_wat_req(t,j)              Water demand at the time of initialization (mio. m^3 per yr)
+ i43_crop_area(j,w,kcr)           Input parameter to capture crop area at the time of initialization
 ;
 
-variables 
+variables
   v43_watavail(wat_src,j)         Water available from different sources (mio. m^3 per yr)
 ;
 
@@ -23,4 +25,3 @@ parameters
  oq43_water(t,j,type)            Local seasonal water constraints (mio. m^3 per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
-
