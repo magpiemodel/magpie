@@ -29,9 +29,10 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 
-prefix <- "CN36"
+prefix <- "CN37"
 
 cfg$qos <- "priority"
+
 
 for (pol in c("Ref","Climate","Nature","Climate+Nature","Climate+Nature+Food")) {
   for (ssp in c("SSP2")) {
@@ -46,6 +47,7 @@ for (pol in c("Ref","Climate","Nature","Climate+Nature","Climate+Nature+Food")) 
       cfg$gms$c35_protect_scenario <- "WDPA"
       cfg$gms$c30_set_aside_target <- "none"
       cfg$gms$s30_set_aside_shr <- 0
+      cfg$gms$c56_emis_policy <- "redd_nosoil"
     } else if (pol == "Climate") {
       cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
       cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"#"PIK_LIN"
@@ -58,6 +60,7 @@ for (pol in c("Ref","Climate","Nature","Climate+Nature","Climate+Nature+Food")) 
       cfg$gms$c35_protect_scenario <- "WDPA"
       cfg$gms$c30_set_aside_target <- "none"
       cfg$gms$s30_set_aside_shr <- 0
+      cfg$gms$c56_emis_policy <- "redd_nosoil"
     } else if (pol == "Nature") {
       cfg <- setScenario(cfg,c(ssp,"NDC","rcp7p0"))
       cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-NPi"#"PIK_NPI"
@@ -70,6 +73,7 @@ for (pol in c("Ref","Climate","Nature","Climate+Nature","Climate+Nature+Food")) 
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_set_aside_target <- "by2030"
       cfg$gms$s30_set_aside_shr <- 0.2
+      cfg$gms$c56_emis_policy <- "redd_nosoil"
     } else if (pol == "Climate+Nature") {
       cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
       cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"#"PIK_LIN"
@@ -82,6 +86,7 @@ for (pol in c("Ref","Climate","Nature","Climate+Nature","Climate+Nature+Food")) 
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_set_aside_target <- "by2030"
       cfg$gms$s30_set_aside_shr <- 0.2
+      cfg$gms$c56_emis_policy <- "redd+natveg_nosoil"
     } else if (pol == "Climate+Nature+Food") {
       cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
       cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"#"PIK_LIN"
@@ -96,6 +101,7 @@ for (pol in c("Ref","Climate","Nature","Climate+Nature","Climate+Nature+Food")) 
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_set_aside_target <- "by2030"
       cfg$gms$s30_set_aside_shr <- 0.2
+      cfg$gms$c56_emis_policy <- "redd+natveg_nosoil"
     } 
     cfg$title <- paste(prefix,paste0(ssp,"-",pol),sep="_")
     start_run(cfg,codeCheck=FALSE)
