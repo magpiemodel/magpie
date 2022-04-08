@@ -7,8 +7,8 @@
 
 parameters
  im_wat_avail(t,wat_src,j)        Water availability (mio. m^3 per yr)
- p43_exo_wat_req(t,j)              Water demand at the time of initialization (mio. m^3 per yr)
- ic43_crop_area(j,w,kcr)           Input parameter to capture crop area at the time of initialization (mio. ha)
+ p43_exo_wat_req(t_all,j)              Water demand at the time of initialization (mio. m^3 per yr)
+ ic43_crop_area(t_all,j,w,kcr)           Input parameter to capture crop area at the time of initialization (mio. ha)
 ;
 
 variables

@@ -146,16 +146,16 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.67_0405_indiaYields01__h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: c98c685c07c2f2150a2759887ed9d122
+* Used data set: rev4.67_0704_indiaYields_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* md5sum: 9104d9808d860109c9c5c1a91af8da21
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.67_0405_indiaYields01__h12_magpie.tgz
-* md5sum: 810909f2c4285bd4ed925b1b9431413d
+* Used data set: rev4.67_0704_indiaYields_h12_magpie.tgz
+* md5sum: 1582978df00e6cd706da5d2b1d6454e5
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.67_0405_indiaYields01__h12_validation.tgz
-* md5sum: 4263ae0daced19398d2740b6db998c21
+* Used data set: rev4.67_0704_indiaYields_h12_validation.tgz
+* md5sum: 005076d2c0ec75f2fc281aaf46813cb5
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Used data set: calibration_H12_mixed_feb17_18Jan22.tgz
@@ -190,7 +190,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Tue Apr  5 13:26:06 2022
+* Last modification (input data): Fri Apr  8 10:34:40 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -216,7 +216,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  default
+$setglobal c_title  0804_testruns
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /

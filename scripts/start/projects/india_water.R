@@ -19,12 +19,12 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # short description of the actual run
-#cfg$title <- "0203_newinputdata01"
+cfg$title <- "0804_testruns"
 
 #New input data as of 8th October used
-cfg$input <- c(cellular = "rev4.67_0405_indiaYields01__h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-         regional = "rev4.67_0405_indiaYields01__h12_magpie.tgz",
-         validation = "rev4.67_0405_indiaYields01__h12_validation.tgz",
+cfg$input <- c(cellular = "rev4.67_0704_indiaYields_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+         regional = "rev4.67_0704_indiaYields_h12_magpie.tgz",
+         validation = "rev4.67_0704_indiaYields_h12_validation.tgz",
          calibration = "calibration_H12_mixed_feb17_18Jan22.tgz",
          additional = "additional_data_rev4.08.tgz")
 
@@ -32,7 +32,7 @@ cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=
                                     getOption("magpie_repos"))
 
 # Should input data be downloaded from source even if cfg$input did not change?
-  cfg$force_download <- TRUE
+#  cfg$force_download <- TRUE
 
   #Using mixed regional scenario for factor costs
 #  cfg$gms$factor_costs <- "mixed_reg_feb17"

@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- pm_wat_req_k(t,j,k)               LPJmL annual water demand for irrigation per ha per yr and livestock demand per ton per yr (m^3)
+ pm_wat_req_k(t_all,j,k)               LPJmL annual water demand for irrigation per ha per yr and livestock demand per ton per yr (m^3)
  ic42_wat_req_k(j,k)                LPJmL annual water demand for irrigation per ha per yr and livestock demand per ton per yr (m^3)
  i42_env_flows(t,j)                 Environmental flow requirements in case of policy (mio m^3)
  i42_env_flows_base(t,j)            Environmental flow requirements in case of no policy (mio m^3)
@@ -35,6 +35,6 @@ parameters
  ov42_irrig_eff(t,j,type)            Irrigation efficiency (1)
  ov_water_cost(t,i,type)             Cost of irrigation water (USD per m^3 per yr)
  oq42_water_demand(t,wat_dem,j,type) Water withdrawals of different sectors (mio. m^3 per yr)
- oq42_vm_water_cost(t,j,type)        Total cost of pumping irrigation water (USD)
+ oq42_water_cost(t,i,type)           Total cost of pumping irrigation water (USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
