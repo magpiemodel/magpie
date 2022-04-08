@@ -29,10 +29,11 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 
-prefix <- "CN37"
+prefix <- "CN38"
 
 cfg$qos <- "priority"
 
+cfg$gms$s56_reward_neg_emis <- -Inf
 
 for (pol in c("Ref","Climate","Nature","Climate+Nature","Climate+Nature+Food")) {
   for (ssp in c("SSP2")) {
