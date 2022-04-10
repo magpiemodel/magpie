@@ -11,6 +11,11 @@
 # position: 2
 # ---------------------------------------------------------------
 
+snapshot <- "/p/projects/rd3mod/R/libraries/snapshots/2021_09_16"
+if(file.exists(snapshot)) {
+  cat("Set libPaths to",snapshot,"\n")
+  .libPaths(snapshot)
+}
 
 library(magclass)
 library(magpie4)
