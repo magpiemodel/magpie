@@ -13,21 +13,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **inputs** updated non-agricultural water use scenarios (watdem_nonagr_grper.cs3)
  - **config** included switch for non-agricultural water demand (s42_watdem_nonagr_scenario) in scenario_config.csv
  - **config** included SHAPE SDP scenarios in scenario_config.csv
+ - **config** Update default tau realization from endo_jan18 to endo_jan22
+ - **config** Added new SSP scenario switch for pasture suitability cfg$gms$c31_past_suit_scen
+ - **config** Added new switch to limiting calibration to relative or absolute managed pastures yields: cfg$gms$s31_limit_calib.
+  - **13_tc** Replace endo_jan18 realization by endo_jan22. The new realization adds a new dimension to vm_tau separating crop from managed pastures tau.
+ - **31_past** added new realization implementing the separation of rangelands and managed pastures for the production of grass biomass.
  - **15_food** added more options to define convergence towards exogenous food intake and waste scenarios accounting for different transition periods
  - **34_urban** added set urban_scen34 and the switch c34_urban_scenario
  - **35_natveg** corrected naming of Frontier Forests (FF) to Intact Forest Landscapes (IFL) and changed input data for BH_IFL implementation.
  - **scripts** replaced redundant files config.log and config.Rdata with a config.yml
  - **scripts** removed test script "irrig_dep_test" from "start" folder to "extra" folder
+ - **scripts** Added script to folder projects paper_grassland.R
  - **44_biodiversity** Improved documentation, simplification of equations and flexible options for price on biodiversity loss
  - **35_natveg** implementation of land protection moved to new module `22_land_protection`
+ - **config** changed default setting for s56_reward_neg_emis from 0 to -Inf
 
 ### added
 - **scripts** output/projects/FSEC_dietaryIndicators.R to create output datasets for the FSEC project
 - **scripts** output/projects/FSEC_environmentalPollutants.R to create output datasets of pollutants for the FSEC project
 - **scripts** start/projects/project_FSEC_SWF.R runs simulations which will be the basis for the FSEC Social Welfare Function calculation.
+- **scripts** Added script to folder projects paper_grassland.R
+- **scripts** Extended dissagregation.R script to replace single "past" land class by LHU range and pastr classes when grassland_apr22 realization is used.
 - **52_carbon** added land carbon sink adjustment factors, needed in R post-processing
 - **core** macros for linear and sigmoidal time interpolation
 - **22_land_protection** added new module and realisation for land protection. The realisation also includes a new WDPA initialisation data set (from 1995 to 2020) for protected areas under legal protection and meeting IUCN and CBD protected area definitions (including IUCN categories Ia, Ib, III, IV, V, VI and 'not assigned' but legally designated).
+- **inputs** New input files added:
+    f13_pastr_tau_hist.csv -> historical tau for managed pastures.
+    f31_pastr_suitability.cs3 -> Managed pasture suitability
+    f31_LUH2v2.cs3 -> LUH2v2 land classes separating rangelands from managed pastures
+    f31_grassl_yld.cs3 -> Rangelands and managed pastures grass yields
+    f31_grass_bio_hist.cs3 -> Historical grass biomass demand
 
 ### removed
 

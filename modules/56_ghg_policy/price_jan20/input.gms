@@ -36,7 +36,7 @@ sets
 ;
 
 scalars
-  s56_reward_neg_emis reward CDR from all sources (-Inf) or only from afforestation (0) (1) / 0 /
+  s56_reward_neg_emis reward CDR from all sources (-Inf) or only from afforestation (0) (1) / -Inf /
   s56_limit_ch4_n2o_price upper limit for CH4 and N2O GHG prices (USD05MER per tC) / 1000 /
   s56_cprice_red_factor reduction factor for CO2 price (-) / 1 /
   s56_ghgprice_start start year for ghg price phase-in (year) / 2025 /

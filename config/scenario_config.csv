@@ -18,6 +18,7 @@ gms$c30_bioen_water;;;;rainfed;rainfed;rainfed;rainfed;rainfed;rainfed;all;rainf
 gms$s30_set_aside_shr;;;;0;0;0;0;0;0;0;0;0.2;;;;;;;0;;;;;;;0.2;0.2;0.2;0.2;0.2;;;;;;;;;
 gms$s30_set_aside_shr_noselect;;;;;;;;;;;;;;;;;;;;;;;;;;0;0;0.2;0;0.2;;;;;;;;;
 gms$c30_set_aside_target;;;;none;none;none;none;none;none;none;none;by2030;;;;;;;none;;;;;;;by2030;by2030;by2030;by2030;by2030;;;;;;;;;
+gms$c31_past_suit_scen;;;;ssp126;ssp245;ssp370;ssp460;ssp585;;;;;;;;;;;;;;;;;;;;;;;;;;ssp126;ssp126;ssp245;ssp460;ssp370;ssp585
 gms$s32_aff_plantation;;;;0;0;0;0;0;0;1;0;0;;;;;;;0;;;;;;;;;;;;;;;;;;;;
 gms$s32_aff_bii_coeff;;;;0;0;0;0;0;0;1;0;0;;;;;;;0;;;;;;;;;;;;;;;;;;;;
 gms$s32_max_aff_area;;;;Inf;Inf;Inf;Inf;Inf;500;500;0;700;;;;;;;500;;Inf;Inf;Inf;Inf;Inf;Inf;Inf;Inf;500;500;;;;;;;;;
@@ -60,5 +61,5 @@ gms$s32_hvarea;;;;;;;;;;;;;;;;;;;;;;;;;;2;2;2;2;2;2;1;0;;;;;;
 gms$s35_secdf_distribution;;;;;;;;;;;;;;;;;;;;;;;;;;2;2;2;2;2;2;2;0;;;;;;
 gms$s35_hvarea;;;;;;;;;;;;;;;;;;;;;;;;;;2;2;2;2;2;2;2;0;;;;;;
 gms$s73_timber_demand_switch;;;;;;;;;;;;;;;;;;;;;;;;;;1;1;1;1;1;1;1;0;;;;;;
-input['cellular'];;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;rev4.67_h12_cfb1bcd5_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1.tgz;rev4.67_h12_c1e79a57_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz;rev4.67_h12_e0600a44_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1.tgz;rev4.67_h12_7a518db9_cellularmagpie_c200_MRI-ESM2-0-ssp460_lpjml-8e6c5eb1.tgz;rev4.67_h12_1998ea10_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz;rev4.67_h12_4e514e15_cellularmagpie_c200_MRI-ESM2-0-ssp585_lpjml-8e6c5eb1.tgz
+input['cellular'];;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;rev4.68_h12_0bd54110_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1.tgz;rev4.68_h12_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz;rev4.68_h12_1b5c3817_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1.tgz;rev4.68_h12_3c888fa5_cellularmagpie_c200_MRI-ESM2-0-ssp460_lpjml-8e6c5eb1.tgz;rev4.68_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz;rev4.68_h12_09a63995_cellularmagpie_c200_MRI-ESM2-0-ssp585_lpjml-8e6c5eb1.tgz
 gms$c52_land_carbon_sink_rcp;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;RCP19;RCP26;RCP45;RCP60;RCPBU;RCPBU
