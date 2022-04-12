@@ -25,52 +25,56 @@ p22_country_weight(i) = sum(i_to_iso(i,iso), p22_country_dummy(iso) * i22_land_i
 p22_protect_shr_ini(j,prot_type_all) = 0;
 p22_protect_shr_ini(j,prot_type)$(sum(land_natveg, pm_land_start(j,land_natveg)) > 0) = f22_protect_area(j,prot_type)/sum(land_natveg, pm_land_start(j,land_natveg));
 
+** Trajectory for implementation of land protection
+* sigmoidal interpolation between 2020 and target year
+m_sigmoid_interpol(p22_protection_fader,2020,s22_protection_target,0,1);
+
 *** WDPA
 * No protected area expansion during future time steps
 p22_protect_shr(t,j,"WDPA",land_natveg) = 0;
 
 *** Full (1) primary forest protection
 p22_protect_shr(t,j,"PrimForest",land_natveg) = 0;
-p22_protect_shr(t,j,"PrimForest","primforest") = 1 * f22_protection_fader(t,"%c22_protect_fadein%");
+p22_protect_shr(t,j,"PrimForest","primforest") = 1 * p22_protection_fader(t);
 
 *** Full (1) Secondary forest protection
 p22_protect_shr(t,j,"SecdForest",land_natveg) = 0;
-p22_protect_shr(t,j,"SecdForest","secdforest") = 1 * f22_protection_fader(t,"%c22_protect_fadein%");
+p22_protect_shr(t,j,"SecdForest","secdforest") = 1 * p22_protection_fader(t);
 
 *** Full (1) forest protection
 p22_protect_shr(t,j,"Forest",land_natveg) = 0;
-p22_protect_shr(t,j,"Forest","primforest") =  1 * f22_protection_fader(t,"%c22_protect_fadein%");
-p22_protect_shr(t,j,"Forest","secdforest") = 1 * f22_protection_fader(t,"%c22_protect_fadein%");
+p22_protect_shr(t,j,"Forest","primforest") =  1 * p22_protection_fader(t);
+p22_protect_shr(t,j,"Forest","secdforest") = 1 * p22_protection_fader(t);
 
 *** Full (1) forest and other land protection
-p22_protect_shr(t,j,"Forest_Other","primforest") = 1 * f22_protection_fader(t,"%c22_protect_fadein%");
-p22_protect_shr(t,j,"Forest_Other","secdforest") = 1 * f22_protection_fader(t,"%c22_protect_fadein%");
-p22_protect_shr(t,j,"Forest_Other","other") = 1 * f22_protection_fader(t,"%c22_protect_fadein%");
+p22_protect_shr(t,j,"Forest_Other","primforest") = 1 * p22_protection_fader(t);
+p22_protect_shr(t,j,"Forest_Other","secdforest") = 1 * p22_protection_fader(t);
+p22_protect_shr(t,j,"Forest_Other","other") = 1 * p22_protection_fader(t);
 
 *** Biodiversity hotspots (BH)
-p22_protect_shr(t,j,"BH",land_natveg) = p22_protect_shr_ini(j,"BH")*f22_protection_fader(t,"%c22_protect_fadein%");
+p22_protect_shr(t,j,"BH",land_natveg) = p22_protect_shr_ini(j,"BH")*p22_protection_fader(t);
 
 *** Intact forest landscapes (IFL)
-p22_protect_shr(t,j,"IFL",land_natveg) = p22_protect_shr_ini(j,"IFL")*f22_protection_fader(t,"%c22_protect_fadein%");
+p22_protect_shr(t,j,"IFL",land_natveg) = p22_protect_shr_ini(j,"IFL")*p22_protection_fader(t);
 
 *** Centers of plant diversity (CPD)
-p22_protect_shr(t,j,"CPD",land_natveg) = p22_protect_shr_ini(j,"CPD")*f22_protection_fader(t,"%c22_protect_fadein%");
+p22_protect_shr(t,j,"CPD",land_natveg) = p22_protect_shr_ini(j,"CPD")*p22_protection_fader(t);
 
 *** Last of the wild (LW)
-p22_protect_shr(t,j,"LW",land_natveg) = p22_protect_shr_ini(j,"LW")*f22_protection_fader(t,"%c22_protect_fadein%");
+p22_protect_shr(t,j,"LW",land_natveg) = p22_protect_shr_ini(j,"LW")*p22_protection_fader(t);
 
 *** Biodiversity Hotspots + Intact Forest Landscapes implementation (BH_IFL)
 * Primary forests are fully conserved, while secondary forests are conserved
 * according to the Intact Forest Landscape (IFL) data set
 * BH_IFL protection mask should only be applied to forest land types. Otherwise area shares
 * for other land are overestimated, since IFL only relates to forest protection.
-p22_protect_shr(t,j,"BH_IFL","primforest") = 1 * f22_protection_fader(t,"%c22_protect_fadein%");
-p22_protect_shr(t,j,"BH_IFL","secdforest") = p22_protect_shr_ini(j,"BH_IFL")*f22_protection_fader(t,"%c22_protect_fadein%");
-p22_protect_shr(t,j,"BH_IFL","other") = p22_protect_shr_ini(j,"BH")*f22_protection_fader(t,"%c22_protect_fadein%");
+p22_protect_shr(t,j,"BH_IFL","primforest") = 1 * p22_protection_fader(t);
+p22_protect_shr(t,j,"BH_IFL","secdforest") = p22_protect_shr_ini(j,"BH_IFL")*p22_protection_fader(t);
+p22_protect_shr(t,j,"BH_IFL","other") = p22_protect_shr_ini(j,"BH")*p22_protection_fader(t);
 
 *** HalfEarth
 * Note: Half Earth already contains WDPA protection
-p22_protect_shr(t,j,"HalfEarth",land_natveg) = p22_protect_shr_ini(j,"HalfEarth")*f22_protection_fader(t,"%c22_protect_fadein%");
+p22_protect_shr(t,j,"HalfEarth",land_natveg) = p22_protect_shr_ini(j,"HalfEarth")*p22_protection_fader(t);
 
 * Remove implausible values
 p22_protect_shr(t,j,prot_type_all,land_natveg)$(p22_protect_shr(t,j,prot_type_all,land_natveg) > 1) = 1;

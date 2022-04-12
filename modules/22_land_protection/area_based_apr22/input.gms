@@ -7,10 +7,12 @@
 
 $setglobal c22_protect_scenario  WDPA
 $setglobal c22_protect_scenario_noselect  WDPA
-$setglobal c22_protect_fadein  by2030
 $setglobal c22_ad_policy  npi
 $setglobal c22_aolc_policy  npi
 
+scalars
+s22_protection_target		Land protection target year				/ 2030 /
+;
 
 * Set-switch for countries affected by regional land protection policy
 * Default: all iso countries selected
@@ -41,13 +43,6 @@ sets
                           TKL,TKM,TLS,TON,TTO,TUN,TUR,TUV,TWN,TZA,
                           UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
                           VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
-;
-
-
-table f22_protection_fader(t_all,prot_target22) Protection scenario fader (1)
-$ondelim
-$include "./modules/22_land_protection/input/f22_protection_fader.csv"
-$offdelim
 ;
 
 table f22_wdpa_baseline(t_all,j,land) Initial protected area as derived from WDPA until 2020 (mio. ha)

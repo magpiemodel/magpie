@@ -43,10 +43,11 @@ p35_secdforest(t,j,ac) = 0;
 p35_disturbance_loss_secdf(t,j,ac) = 0;
 p35_disturbance_loss_primf(t,j) = 0;
 
-**************************************************************************
-*******************************************************************************
-** Calibrate Natural vegetation yields
-*******************************************************************************
+
+* ----------------------------------------
+* Calibrate Natural vegetation yields
+* ----------------------------------------
+
 ** Initialize with 0 cvalues
 p35_land_start_ac(j,ac,land_natveg) = 0;
 ** Capture natural forest values (primary forest + secondary forest)
@@ -67,3 +68,8 @@ p35_gs_scaling_reg(i)$(f35_gs_relativetarget(i)>0 AND p35_observed_gs_reg(i)>0) 
 
 ** Update c-densitiy based on calibration factor for growing stocks
 pm_carbon_density_ac(t_all,j,ac,"vegc") = pm_carbon_density_ac(t_all,j,ac,"vegc") * sum(cell(i,j),p35_gs_scaling_reg(i));
+
+* -----------------------------
+* Set forest damage trajectory
+* -----------------------------
+m_sigmoid_interpol(p35_damage_fader,2020,s35_forest_damage_end,0,1);

@@ -16,6 +16,7 @@ parameters
  p35_other(t,j,ac)   	  	                        Other land per age class (mio. ha)
  pc35_secdforest(j,ac)    	                      Secdforest per age class in current time step (mio. ha)
  pc35_other(j,ac)   	  	                        Other land per age class in current time step (mio. ha)
+ p35_damage_fader(t_all)			                    Fader for forest damage (1)
  p35_recovered_forest(t,j,ac) 	                  Recovered forest (mio. ha)
  p35_carbon_density_secdforest(t,j,ac,ag_pools)   Carbon density secdforest (tC per ha)
  p35_carbon_density_other(t,j,ac,ag_pools) 	      Carbon density other land (tC per ha)

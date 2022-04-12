@@ -11,6 +11,7 @@ scalars
 
 parameters
  pm_land_protection(t,j,land)				              Land protection for all land types (mio. ha)
+ p22_protection_fader(t_all)			                  Land protection fader (1)
  p22_protect_shr_ini(j,prot_type_all)   		          Land protection share for primforest, secdforest and other land (1)
  p22_protect_shr(t,j,prot_type_all,land_natveg)           Land protection share for primforest, secdforest and other land (1)
  p22_country_weight(i)	                  		          Land protection country weight per region (1)
