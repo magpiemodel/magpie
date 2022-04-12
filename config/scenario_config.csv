@@ -26,7 +26,7 @@ gms$c32_aff_mask;;;;noboreal;noboreal;noboreal;noboreal;noboreal;onlytropical;on
 gms$c34_urban_scenario;;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;SSP1;SSP2;SSP1;;;;;;;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;
 gms$c32_aff_policy;;;;;;;;;;;;;none;npi;ndc;;;;;;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;;;;
 gms$c22_ad_policy;;;;;;;;;;;;;none;npi;ndc;;;;;;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;;;;
-gms$c35_aolc_policy;;;;;;;;;;;;;none;npi;ndc;;;;;;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;;;;
+gms$c22_aolc_policy;;;;;;;;;;;;;none;npi;ndc;;;;;;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;;;;
 gms$c35_protect_scenario;;;;WDPA;WDPA;WDPA;WDPA;WDPA;BH;WDPA;BH_IFL;BH;;;;;;;BH;;WDPA;WDPA;WDPA;WDPA;WDPA;BH_IFL;BH_IFL;BH_IFL;BH_IFL;BH_IFL;;;;;;;;;
 gms$c35_protect_scenario_noselect;;;;;;;;;;;;;;;;;;;;;;;;;;WDPA;WDPA;BH_IFL;WDPA;BH_IFL;;;;;;;;;
 gms$c35_forest_damage_end;;;;by2030;by2050;by2050;by2050;by2030;by2030;by2030;by2030;by2030;;;;;;;by2030;;by2030;by2050;by2050;by2050;by2030;by2030;by2030;by2030;by2030;by2030;;;;;;;;;
