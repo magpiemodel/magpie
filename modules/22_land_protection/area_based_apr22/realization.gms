@@ -5,29 +5,26 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description In the dynamic_may18 realization, land and carbon stock dynamics
-*' of natural vegetation are modeled endogenously.
-*' The initial spatial distribution of the sub-land-types primary forest,
-*' secondary forest and other natural land is based on the
-*' LUH2 data set [@hurtt2018luh2].
-*' The realization includes 2 different kinds of land protection.
-*' a) Land protection based on the World Database on Protected Areas (WDPA)
+*' @description The realization initialises 2 different kinds of land protection.
+*' a) Area-based protection as derived from the World Database on Protected Areas (WDPA)
 *' maintained by the International Union for Conservation of Nature (IUCN) and
 *' b) land protection based on national policies implemented (NPI) and nationally
 *' determined contributions to the Paris agreement (NDC) taken from individual country reports.
-*' Land protection based on WDPA is static over time, while the NPI/NDC polices
-*' ramp up until 2030 and are assumed constant thereafter. For WDPA the level of
-*' land protection is based on IUCN catI+II, which reflect areas currently under
-*' protection (e.g. strict nature reserves and national parks), and distributed
-*' equally across all sub-land-types (primary forest, secondary forest and other natural land).
-*' On top of the IUCN catI+II land protection, there are options to protect different
-*' conservation priority areas such as biodiversity hotspots (BH), centers of plant
-*' diversity (CBD), Intact Forest Landscapes (IFL) and last of the wild (LW).
+*' Area-based protection as derived from WDPA is based on observed land protection trends.
+*' In 1995, the total area under land protection (across all land types) in the input data set
+*' is 871.5 Mha and increases to 1672.8 Mha in 2020, by 5-year time steps. After 2020
+*' land protection is held constant at 2020 values. The protected area based on WDPA includes
+*' all areas under legal protection meeting the IUCN and CBD protected area definitions
+*' (including IUCN categories Ia, Ib, III, IV, V, VI and 'not assigned' but legally designated
+*' areas). Natural vegetation (natveg) and grassland ('past') within protected areas cannot be
+*' converted to other land types. On top of the WDPA baseline protection, there are future options
+*' to protect different conservation priority areas such as biodiversity hotspots (BH),
+*' centers of plant diversity (CBD), Intact Forest Landscapes (IFL) and last of the wild (LW).
+*' Future land protection is distributed proportionally across natural vegetation types
+*' (primary forest, secondary forest and other natural land).
+*' The NPI/NDC polices ramp up until 2030 and are assumed constant thereafter.
 *' NPI/NDC land protection polices are be applied on forest and other land, depending
-*' on individual country reports. Additionally, this module provides the ability to
-*' harvest natural vegetation for timber. Both wood and woodfuel can be produceed
-*' from primary and secondary forest but other land is only allowed to be harvested
-*' for woodfuel.
+*' on individual country reports.
 *' @stop
 
 *'

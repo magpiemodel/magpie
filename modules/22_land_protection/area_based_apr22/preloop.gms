@@ -13,7 +13,7 @@
 * Country switch to determine countries for which land protection shall be applied.
 * In the default case, the land protection affects all countries when activated.
 p22_country_dummy(iso) = 0;
-p22_country_dummy(policy_countries36) = 1;
+p22_country_dummy(policy_countries22) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by total land area.

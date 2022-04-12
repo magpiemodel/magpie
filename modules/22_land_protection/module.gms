@@ -7,13 +7,11 @@
 
 *' @title Land Protection
 *'
-*' @description The natural vegetation (natveg) land module is one of the land modules in MAgPIE
-*' (see also the other land modules: [30_crop], [31_past], [32_forestry], [34_urban]).
-*' It calculates land and carbon stocks, as well as the biodiversity value, of natural vegetation,
-*' which consists of primary forest, secondary forest and other natural land.
-*' The module determines the availability of natural vegetation for land conversion.
+*' @description The land protection (land_protection) module initialises
+*' land under legal protection for all land types, and provides future
+*' options for land protection based on conservation priority areas.
 *'
-*' @authors Florian Humpenöder, Abhijeet Mishra
+*' @authors Patrick v. Jeetze
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%land_protection%" == "area_based_apr22" $include "./modules/22_land_protection/area_based_apr22/realization.gms"

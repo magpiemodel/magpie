@@ -15,7 +15,7 @@ $setglobal c22_aolc_policy  npi
 * Set-switch for countries affected by regional land protection policy
 * Default: all iso countries selected
 sets
-  policy_countries36(iso) countries to be affected by land protection policy
+  policy_countries22(iso) countries to be affected by land protection policy
                         / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
                           ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
                           BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,

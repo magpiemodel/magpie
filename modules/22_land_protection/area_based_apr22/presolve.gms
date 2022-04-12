@@ -5,15 +5,20 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-
-** Land protection
+* ------------------
+* Land protection
+* -----------------
 
 if(m_year(t) <= sm_fix_SSP2,
+* from 1995 to 2020 land protection is based on
+* observed trends as derived from WDPA
  pm_land_protection(t,j,land) = f22_wdpa_baseline(t,j,land);
 
 else
 
 $ifthen "%c22_protect_scenario%" == "HalfEarth"
+* WDPA data is alread included in the HalfEarth data set
+* therefore the implementatiov slightly deviates
 pm_land_protection(t,j,land_natveg) =
 	pm_land_start(j,land_natveg) * sum(cell(i,j),
 	p22_protect_shr(t,j,"HalfEarth",land_natveg) * p22_country_weight(i)
@@ -21,6 +26,7 @@ pm_land_protection(t,j,land_natveg) =
 * make sure that area covered by WDPA data is included in areas where the HalfEarth data reports less
 	pm_land_protection(t,j,land_natveg)$(pm_land_protection(t,j,land_natveg) < f22_wdpa_baseline(t,j,land_natveg)) = f22_wdpa_baseline(t,j,land_natveg);
 $else
+* future options for land protection are added to the WDPA baseline
  pm_land_protection(t,j,land_natveg) = f22_wdpa_baseline(t,j,land_natveg) +
 	pm_land_start(j,land_natveg) * sum(cell(i,j),
 	p22_protect_shr(t,j,"%c22_protect_scenario%",land_natveg) * p22_country_weight(i)
@@ -29,8 +35,12 @@ $endif
 
 );
 
+** Where land area under protection is reported higher than in the
+** land initialisation data (based on LUH2v2) set area to remaining land area
+
+* WDPA baseline
 pm_land_protection(t,j,land_natveg)$(pm_land_protection(t,j,land_natveg) > pcm_land(j,land_natveg)) = pcm_land(j,land_natveg);
 
-
+* NPI/NDC
 p22_min_forest(t,j)$(p22_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j,"secdforest")) = pcm_land(j,"primforest") + pcm_land(j,"secdforest");
 p22_min_other(t,j)$(p22_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");

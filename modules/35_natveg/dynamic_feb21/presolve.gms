@@ -13,7 +13,11 @@ else
  	pc35_other(j,ac) = p35_other(t-1,j,ac);
 );
 
-* Shift ageclasses due to shifting agriculture fires, first calculate damages
+* ----------------------------------------------------
+* Shift ageclasses due to shifting agriculture fires
+* ----------------------------------------------------
+
+* first calculate damages
 if(s35_forest_damage=1,
 	p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry;
 	p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry;
@@ -52,6 +56,10 @@ s35_shift = m_timestep_length_forestry/5;
     p35_secdforest(t,j,"acx") = p35_secdforest(t,j,"acx")
                   + sum(ac$(ord(ac) > card(ac)-s35_shift), pc35_secdforest(j,ac));
 
+* --------------------------------------
+* Carbon threshold for secondary forest
+* --------------------------------------
+
 *' @code
 *' If the vegetation carbon density in a simulation unit due to regrowth
 *' exceeds a threshold of 20 tC/ha the respective area is shifted from other natural land to secondary forest.
@@ -72,12 +80,14 @@ v35_other.l(j,ac) = pc35_other(j,ac);
 vm_land.l(j,"other") = sum(ac, pc35_other(j,ac));
 pcm_land(j,"other") = sum(ac, pc35_other(j,ac));
 
+* -----------------------------------
+* Set bounds based on land protection
+* -----------------------------------
+
 * Within the optimization, primary and secondary forests can only decrease
 * (e.g. for cropland expansion).
 * In contrast, other natural land can decrease and increase within the optimization.
 * For instance, other natural land increases if agricultural land is abandoned.
-
-*** Set bounds based on land protection
 
 ** Setting bounds for only allowing s35_natveg_harvest_shr percentage of available primf to be harvested (highest age class)
 ** Allowing selective logging only after historical period
@@ -118,9 +128,11 @@ v35_other.lo(j,"acx") = pm_land_protection(t,j,"other");
 v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
 m_boundfix(v35_other,(j,ac_sub),l,10e-5);
 
-* calculate carbon density
-* highest carbon density 1st time step to account for reshuffling
+* ------------------------------
+* Calculate carbon density
+* ------------------------------
 
+* highest carbon density 1st time step to account for reshuffling
 p35_carbon_density_secdforest(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
 p35_carbon_density_other(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
 
