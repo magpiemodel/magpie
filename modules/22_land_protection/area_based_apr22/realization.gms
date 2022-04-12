@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2022 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -38,14 +38,17 @@
 *' Inclusion of this data in MAgPIE remains work in progess and is not available for release yet.
 *' Additionally, in this module realizatuion, harvested secondary forest stays
 *' secondary forest and harvested primary forest is reclassified as secondary forest.
+*' Moreover, this realisation does not include land protection for areas in categories III-VI of the
+*' IUCN Protected Area Categories System and ‘Other effective area-based conservation measures’ (OECMs),
+*' which, in reality, make up the bulk of current land protection, but largely cover (sustainably)
+*' managed land area.
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/35_natveg/dynamic_feb21/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/35_natveg/dynamic_feb21/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/35_natveg/dynamic_feb21/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/35_natveg/dynamic_feb21/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/35_natveg/dynamic_feb21/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/35_natveg/dynamic_feb21/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/35_natveg/dynamic_feb21/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/35_natveg/dynamic_feb21/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/22_land_protection/area_based_apr22/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/22_land_protection/area_based_apr22/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/22_land_protection/area_based_apr22/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/22_land_protection/area_based_apr22/equations.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/22_land_protection/area_based_apr22/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/22_land_protection/area_based_apr22/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/22_land_protection/area_based_apr22/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

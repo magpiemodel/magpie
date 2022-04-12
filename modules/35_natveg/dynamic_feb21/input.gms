@@ -5,11 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c35_protect_scenario  WDPA
-$setglobal c35_protect_scenario_noselect  WDPA
-$setglobal c35_protect_fadein  by2030
-$setglobal c35_ad_policy  npi
-$setglobal c35_aolc_policy  npi
 $setglobal c35_forest_damage_end  by2050
 
 scalars
@@ -25,52 +20,9 @@ s35_secdf_distribution Flag for secdf initialization (0=all secondary forest in 
 s35_forest_damage Damage simulation in forests (0=none 1=shifting agriculture 2= Damage from shifting agriculture is faded out by c35_forest_damage_end) / 2 /
 ;
 
-* Set-switch for countries affected by regional land protection policy
-* Default: all iso countries selected
-sets
-  policy_countries35(iso) countries to be affected by land protection policy / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
-                          ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
-                          BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
-                          BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,
-                          CCK,CHN,CHE,CHL,CIV,CMR,COD,COG,COK,COL,
-                          COM,CPV,CRI,CUB,CUW,CXR,CYM,CYP,CZE,DEU,
-                          DJI,DMA,DNK,DOM,DZA,ECU,EGY,ERI,ESH,ESP,
-                          EST,ETH,FIN,FJI,FLK,FRA,FRO,FSM,GAB,GBR,
-                          GEO,GGY,GHA,GIB,GIN,GLP,GMB,GNB,GNQ,GRC,
-                          GRD,GRL,GTM,GUF,GUM,GUY,HKG,HMD,HND,HRV,
-                          HTI,HUN,IDN,IMN,IND,IOT,IRL,IRN,IRQ,ISL,
-                          ISR,ITA,JAM,JEY,JOR,JPN,KAZ,KEN,KGZ,KHM,
-                          KIR,KNA,KOR,KWT,LAO,LBN,LBR,LBY,LCA,LIE,
-                          LKA,LSO,LTU,LUX,LVA,MAC,MAF,MAR,MCO,MDA,
-                          MDG,MDV,MEX,MHL,MKD,MLI,MLT,MMR,MNE,MNG,
-                          MNP,MOZ,MRT,MSR,MTQ,MUS,MWI,MYS,MYT,NAM,
-                          NCL,NER,NFK,NGA,NIC,NIU,NLD,NOR,NPL,NRU,
-                          NZL,OMN,PAK,PAN,PCN,PER,PHL,PLW,PNG,POL,
-                          PRI,PRK,PRT,PRY,PSE,PYF,QAT,REU,ROU,RUS,
-                          RWA,SAU,SDN,SEN,SGP,SGS,SHN,SJM,SLB,SLE,
-                          SLV,SMR,SOM,SPM,SRB,SSD,STP,SUR,SVK,SVN,
-                          SWE,SWZ,SXM,SYC,SYR,TCA,TCD,TGO,THA,TJK,
-                          TKL,TKM,TLS,TON,TTO,TUN,TUR,TUV,TWN,TZA,
-                          UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
-                          VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
-;
-
-
-table f35_protection_fader(t_all, prot_target35) Protection scenario fader (1)
+table f35_protection_fader(t_all, prot_target22) Protection scenario fader (1)
 $ondelim
 $include "./modules/35_natveg/input/f35_protection_fader.csv"
-$offdelim
-;
-
-table f35_protect_area(j,prot_type) Conservation priority areas (mio. ha)
-$ondelim
-$include "./modules/35_natveg/input/protect_area.cs3"
-$offdelim
-;
-
-table f35_min_land_stock(t_all,j,pol35,pol_stock35) Land protection policies [minimum land stock] (Mha)
-$ondelim
-$include "./modules/35_natveg/input/npi_ndc_ad_aolc_pol.cs3"
 $offdelim
 ;
 
@@ -79,11 +31,6 @@ $ondelim
 $include "./modules/35_natveg/input/f35_forest_lost_share.cs3"
 $offdelim
 ;
-
-table f35_land_iso(t_ini10,iso,land) Land area for different land pools at ISO level (mio. ha)
-$ondelim
-$include "./modules/35_natveg/input/avl_land_t_iso.cs3"
-$offdelim;
 
 parameter f35_forest_disturbance_share(i) Share of area damanged by forest disturbances (1)
 /

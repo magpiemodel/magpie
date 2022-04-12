@@ -72,29 +72,19 @@ v35_other.l(j,ac) = pc35_other(j,ac);
 vm_land.l(j,"other") = sum(ac, pc35_other(j,ac));
 pcm_land(j,"other") = sum(ac, pc35_other(j,ac));
 
-** Land protection
-if(m_year(t) <= sm_fix_SSP2,
- p35_save_natveg(t,j,land_natveg) = 
-	pm_land_start(j,land_natveg) * p35_protect_shr(t,j,"WDPA",land_natveg);
-else
- p35_save_natveg(t,j,land_natveg) = 
-	pm_land_start(j,land_natveg) * sum(cell(i,j), 
-	p35_protect_shr(t,j,"%c35_protect_scenario%",land_natveg) * p35_region_prot_shr(i)
-	+ p35_protect_shr(t,j,"%c35_protect_scenario_noselect%",land_natveg) * (1-p35_region_prot_shr(i)));
-);
-p35_save_natveg(t,j,land_natveg)$(p35_save_natveg(t,j,land_natveg) > pcm_land(j,land_natveg)) = pcm_land(j,land_natveg);
-
 * Within the optimization, primary and secondary forests can only decrease
 * (e.g. for cropland expansion).
 * In contrast, other natural land can decrease and increase within the optimization.
 * For instance, other natural land increases if agricultural land is abandoned.
 
+*** Set bounds based on land protection
+
 ** Setting bounds for only allowing s35_natveg_harvest_shr percentage of available primf to be harvested (highest age class)
 ** Allowing selective logging only after historical period
 if (sum(sameas(t_past,t),1) = 1,
-vm_land.lo(j,"primforest") = p35_save_natveg(t,j,"primforest");
+vm_land.lo(j,"primforest") = pm_land_protection(t,j,"primforest");
 else
-vm_land.lo(j,"primforest") = max((1-s35_natveg_harvest_shr) * pcm_land(j,"primforest"), p35_save_natveg(t,j,"primforest"));
+vm_land.lo(j,"primforest") = max((1-s35_natveg_harvest_shr) * pcm_land(j,"primforest"), pm_land_protection(t,j,"primforest"));
 );
 vm_land.up(j,"primforest") = pcm_land(j,"primforest");
 m_boundfix(vm_land,(j,"primforest"),l,10e-5);
@@ -107,15 +97,15 @@ v35_secdforest.up(j,ac) = Inf;
 p35_save_dist(j,ac_sub) = (pc35_secdforest(j,ac_sub)/sum(ac_sub2,pc35_secdforest(j,ac_sub2)))$(sum(ac_sub2,pc35_secdforest(j,ac_sub2))>0);
 
 if (sum(sameas(t_past,t),1) = 1,
-v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=0)  = p35_save_natveg(t,j,"secdforest");
-v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=1) = p35_save_natveg(t,j,"secdforest")/card(ac_sub);
-v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=2) = p35_save_natveg(t,j,"secdforest")*p35_save_dist(j,ac_sub);
-*v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=2) = p35_save_natveg(t,j,"secdforest");
+v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=0)  = pm_land_protection(t,j,"secdforest");
+v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=1) = pm_land_protection(t,j,"secdforest")/card(ac_sub);
+v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=2) = pm_land_protection(t,j,"secdforest")*p35_save_dist(j,ac_sub);
+*v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=2) = pm_land_protection(t,j,"secdforest");
 else
-v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=0)  = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx") , p35_save_natveg(t,j,"secdforest"));
-v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=1) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub), p35_save_natveg(t,j,"secdforest") / card(ac_sub));
-v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=2) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub), p35_save_natveg(t,j,"secdforest") * p35_save_dist(j,ac_sub));
-*v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=2) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx"), p35_save_natveg(t,j,"secdforest"));
+v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=0)  = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx") , pm_land_protection(t,j,"secdforest"));
+v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=1) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub), pm_land_protection(t,j,"secdforest") / card(ac_sub));
+v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=2) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub), pm_land_protection(t,j,"secdforest") * p35_save_dist(j,ac_sub));
+*v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=2) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx"), pm_land_protection(t,j,"secdforest"));
 );
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
 m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
@@ -124,7 +114,7 @@ m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
 v35_other.lo(j,ac) = 0;
 v35_other.up(j,ac) = Inf;
 *set bounds
-v35_other.lo(j,"acx") = p35_save_natveg(t,j,"other");
+v35_other.lo(j,"acx") = pm_land_protection(t,j,"other");
 v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
 m_boundfix(v35_other,(j,ac_sub),l,10e-5);
 
@@ -133,9 +123,6 @@ m_boundfix(v35_other,(j,ac_sub),l,10e-5);
 
 p35_carbon_density_secdforest(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
 p35_carbon_density_other(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
-
-p35_min_forest(t,j)$(p35_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j,"secdforest")) = pcm_land(j,"primforest") + pcm_land(j,"secdforest");
-p35_min_other(t,j)$(p35_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");
 
 ** Display
 p35_land(t,j,land_natveg,ac) = 0;

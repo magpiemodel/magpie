@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **scripts** replaced redundant files config.log and config.Rdata with a config.yml
  - **scripts** removed test script "irrig_dep_test" from "start" folder to "extra" folder
  - **44_biodiversity** Improved documentation, simplification of equations and flexible options for price on biodiversity loss
+ - **35_natveg** implementation of land protection moved to new module `22_land_protection`
 
 ### added
 - **scripts** output/projects/FSEC_dietaryIndicators.R to create output datasets for the FSEC project
@@ -26,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** start/projects/project_FSEC_SWF.R runs simulations which will be the basis for the FSEC Social Welfare Function calculation.
 - **52_carbon** added land carbon sink adjustment factors, needed in R post-processing
 - **core** macros for linear and sigmoidal time interpolation
+- **22_land_protection** added new module and realisation for land protection. The realisation also includes a new WDPA initialisation data set (from 1995 to 2020) for protected areas under legal protection and meeting IUCN and CBD protected area definitions (including IUCN categories Ia, Ib, III, IV, V, VI and 'not assigned' but legally designated).
 
 ### removed
 
