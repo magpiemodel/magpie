@@ -321,7 +321,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
     ad_pol     <- ad_aolc_pol[,,"forest"]
     aolc_pol    <- ad_aolc_pol[,,"other"]
     if((all(aff_pol == 0)   & (cfg$gms$c32_aff_policy != "none")) |
-       (all(ad_pol == 0)    & (cfg$gms$c35_ad_policy != "none"))  |
+       (all(ad_pol == 0)    & (cfg$gms$c22_ad_policy != "none"))  |
        (all(aolc_pol == 0) & (cfg$gms$c35_aolc_policy != "none")))
     {
       cfg$recalc_npi_ndc <- TRUE
