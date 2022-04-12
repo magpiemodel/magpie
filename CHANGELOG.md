@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **scripts** removed test script "irrig_dep_test" from "start" folder to "extra" folder
  - **scripts** Added script to folder projects paper_grassland.R
  - **44_biodiversity** Improved documentation, simplification of equations and flexible options for price on biodiversity loss
+ - **config** changed default setting for s56_reward_neg_emis from 0 to -Inf
 
 ### added
 - **scripts** output/projects/FSEC_dietaryIndicators.R to create output datasets for the FSEC project
