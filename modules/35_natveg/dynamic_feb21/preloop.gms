@@ -65,7 +65,6 @@ p35_save_natveg(t,j,land_natveg) =
 
 
 ** Land protection scenarios END
->>>>>>> 15198b637306d18db7c045c5a199d5230d9e9390
 
 ** initialize other land
 i35_other(j,ac) = 0;

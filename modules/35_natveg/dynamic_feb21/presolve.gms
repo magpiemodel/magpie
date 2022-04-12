@@ -32,6 +32,7 @@ if(s35_forest_damage=3,
 
 if(s35_forest_damage=4,
 	p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * f35_forest_shock(t,"%c35_shock_scenario%");
+	p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * f35_forest_shock(t,"%c35_shock_scenario%");
 	);
 
 * Distribution of damages correctly
@@ -78,11 +79,11 @@ pcm_land(j,"other") = sum(ac, pc35_other(j,ac));
 
 ** Land protection
 if(m_year(t) <= sm_fix_SSP2,
- p35_save_natveg(t,j,land_natveg) = 
+ p35_save_natveg(t,j,land_natveg) =
 	pm_land_start(j,land_natveg) * p35_protect_shr(t,j,"WDPA",land_natveg);
 else
- p35_save_natveg(t,j,land_natveg) = 
-	pm_land_start(j,land_natveg) * sum(cell(i,j), 
+ p35_save_natveg(t,j,land_natveg) =
+	pm_land_start(j,land_natveg) * sum(cell(i,j),
 	p35_protect_shr(t,j,"%c35_protect_scenario%",land_natveg) * p35_region_prot_shr(i)
 	+ p35_protect_shr(t,j,"%c35_protect_scenario_noselect%",land_natveg) * (1-p35_region_prot_shr(i)));
 );
