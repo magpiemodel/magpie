@@ -45,6 +45,7 @@ else
   im_demography(t_all,iso,sex,age) = f09_demography(t_all,iso,"%c09_pop_scenario%",sex,age) + 0.000001;
   im_pop_iso(t_all,iso) = f09_pop_iso(t_all,iso,"%c09_pop_scenario%");
   im_pop(t_all,i) = i09_pop_raw(t_all,i,"%c09_pop_scenario%");
+* GDP calculated from p.c. GDP and population of respective scenarios
   i09_gdp_mer_iso(t_all,iso) = i09_gdp_pc_mer_iso_raw(t_all,iso,"c09_gdp_scenario") * f09_pop_iso(t_all,iso,"c09_pop_scenario");
   i09_gdp_ppp_iso(t_all,iso) = i09_gdp_pc_ppp_iso_raw(t_all,iso,"c09_gdp_scenario") * f09_pop_iso(t_all,iso,"c09_pop_scenario");
   im_gdp_pc_mer(t_all,i) = i09_gdp_pc_mer_raw(t_all,i,"%c09_gdp_scenario%");
