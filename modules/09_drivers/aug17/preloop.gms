@@ -19,14 +19,18 @@ i09_gdp_pc_ppp_raw(t_all,i,pop_gdp_scen09)$(i09_pop_raw(t_all,i,pop_gdp_scen09) 
                            i09_gdp_ppp_raw(t_all,i,pop_gdp_scen09) / i09_pop_raw(t_all,i,pop_gdp_scen09)
 ;
 
-* GDP per capita for ISO countries
+*' GDP per capita for ISO countries
 i09_gdp_pc_ppp_iso_raw(t_all,iso,pop_gdp_scen09) = 0;
 i09_gdp_pc_ppp_iso_raw(t_all,iso,pop_gdp_scen09)$(f09_gdp_ppp_iso(t_all,iso,pop_gdp_scen09) * f09_pop_iso(t_all,iso,pop_gdp_scen09) > 0) = f09_gdp_ppp_iso(t_all,iso,pop_gdp_scen09) / f09_pop_iso(t_all,iso,pop_gdp_scen09);
-i09_gdp_pc_ppp_iso_raw(t_all,iso,pop_gdp_scen09)$(i09_gdp_pc_ppp_iso_raw(t_all,iso,pop_gdp_scen09) = 0) = sum(i_to_iso(i,iso), i09_gdp_pc_ppp_raw(t_all,i,pop_gdp_scen09));
+* Countries with no p.c. GDP information receive SSP2 average p.c. GDP
+* SSP2 GDP was selected because diverging GDP and population information leads to diverging regional values
+i09_gdp_pc_ppp_iso_raw(t_all,iso,pop_gdp_scen09)$(i09_gdp_pc_ppp_iso_raw(t_all,iso,pop_gdp_scen09) = 0) = sum(i_to_iso(i,iso), i09_gdp_pc_ppp_raw(t_all,i,"SSP2"));
 
 i09_gdp_pc_mer_iso_raw(t_all,iso,pop_gdp_scen09) = 0;
 i09_gdp_pc_mer_iso_raw(t_all,iso,pop_gdp_scen09)$(f09_gdp_mer_iso(t_all,iso,pop_gdp_scen09) * f09_pop_iso(t_all,iso,pop_gdp_scen09) > 0) = f09_gdp_mer_iso(t_all,iso,pop_gdp_scen09) / f09_pop_iso(t_all,iso,pop_gdp_scen09);
-i09_gdp_pc_mer_iso_raw(t_all,iso,pop_gdp_scen09)$(i09_gdp_pc_mer_iso_raw(t_all,iso,pop_gdp_scen09) = 0) = sum(i_to_iso(i,iso), i09_gdp_pc_mer_raw(t_all,i,pop_gdp_scen09));
+* Countries with no p.c. GDP information receive SSP2 average p.c. GDP
+* SSP2 GDP was selected because diverging GDP and population information leads to diverging regional values
+i09_gdp_pc_mer_iso_raw(t_all,iso,pop_gdp_scen09)$(i09_gdp_pc_mer_iso_raw(t_all,iso,pop_gdp_scen09) = 0) = sum(i_to_iso(i,iso), i09_gdp_pc_mer_raw(t_all,i,"SSP2"));
 
 * select scenario for GDP, population, demography and physical inactivity
 loop(t_all,
