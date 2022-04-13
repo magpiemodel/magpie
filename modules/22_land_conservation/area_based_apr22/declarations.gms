@@ -10,15 +10,15 @@ scalars
 ;
 
 parameters
- pm_land_protection(t,j,land)				              Land protection for all land types (mio. ha)
- p22_protection_fader(t_all)			                  Land protection fader (1)
- p22_protect_shr_ini(j,prot_type_all)   		          Land protection share for primforest, secdforest and other land (1)
- p22_protect_shr(t,j,prot_type_all,land_natveg)           Land protection share for primforest, secdforest and other land (1)
- p22_country_weight(i)	                  		          Land protection country weight per region (1)
- p22_country_dummy(iso)		                              Dummy parameter indicating whether country is affected by selected land protection policy (1)
+ pm_land_conservation(t,j,land,consv_type)				  Land conservation for all land types (mio. ha)
+ p22_conservation_fader(t_all)			                  Land conservation fader (1)
+ p22_consv_shr_ini(j,consv22_all)   		              Land conservation share for primforest, secdforest and other land (1)
+ p22_consv_shr(t,j,consv22_all,land_natveg)               Land conservation share for primforest, secdforest and other land (1)
+ p22_country_weight(i)	                  		          Land conservation country weight per region (1)
+ p22_country_dummy(iso)		                              Dummy parameter indicating whether country is affected by selected land conservation policy (1)
  i22_land_iso(iso)								                Total land area at ISO level (mio. ha)
- p22_min_forest(t,j) 			                          Minimum forest stock [land protection for climate mitigation] (Mha)
- p22_min_other(t,j)      		                          Minimum other land stock [land protection for climate mitigation] (Mha)
+ p22_min_forest(t,j) 			                          Minimum forest stock [land conservation for climate mitigation] (Mha)
+ p22_min_other(t,j)      		                          Minimum other land stock [land conservation for climate mitigation] (Mha)
 ;
 
 equations

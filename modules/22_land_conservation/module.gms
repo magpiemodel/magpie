@@ -5,14 +5,14 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @title Land Protection
+*' @title Land conservation
 *'
-*' @description The land protection (land_protection) module initialises
+*' @description The land conservation (land_conservation) module initialises
 *' land under legal protection for all land types, and provides future
-*' options for land protection based on conservation priority areas.
+*' options for land conservation based on conservation priority areas.
 *'
 *' @authors Patrick v. Jeetze
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%land_protection%" == "area_based_apr22" $include "./modules/22_land_protection/area_based_apr22/realization.gms"
+$Ifi "%land_conservation%" == "area_based_apr22" $include "./modules/22_land_conservation/area_based_apr22/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

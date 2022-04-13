@@ -5,4 +5,4 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_land.lo(j,"past") = pm_land_protection(t,j,"past");
+vm_land.lo(j,"past") = pm_land_conservation(t,j,"past","protect");

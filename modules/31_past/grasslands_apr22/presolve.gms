@@ -15,6 +15,6 @@
 v31_grass_area.up(j,"pastr") = i31_manpast_suit(t,j);
 
 *' Total grassland area cannot be smaller than legally protected grassland area
-vm_land.lo(j,"past") = pm_land_protection(t,j,"past");
+vm_land.lo(j,"past") = pm_land_conservation(t,j,"past","protect");
 
 *' @stop

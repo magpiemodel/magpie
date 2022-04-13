@@ -11,13 +11,14 @@ $setglobal c22_ad_policy  npi
 $setglobal c22_aolc_policy  npi
 
 scalars
-s22_protection_target		Land protection target year				/ 2030 /
+s22_restore_land  If land restoration is allowed (0=no 1=yes) / 1 /
+s22_conservation_target		Land conservation target year				/ 2030 /
 ;
 
-* Set-switch for countries affected by regional land protection policy
+* Set-switch for countries affected by regional land conservation policy
 * Default: all iso countries selected
 sets
-  policy_countries22(iso) countries to be affected by land protection policy
+  policy_countries22(iso) countries to be affected by land conservation policy
                         / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
                           ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
                           BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
@@ -47,26 +48,26 @@ sets
 
 table f22_wdpa_baseline(t_all,j,land) Initial protected area as derived from WDPA until 2020 (mio. ha)
 $ondelim
-$include "./modules/22_land_protection/input/wdpa_baseline.cs3"
+$include "./modules/22_land_conservation/input/wdpa_baseline.cs3"
 $offdelim
 ;
 * fix to 2020 values for years after 2020
 m_fillmissingyears(f22_wdpa_baseline,"j,land");
 
-table f22_protect_area(j,prot_type) Conservation priority areas (mio. ha)
+table f22_protect_area(j,consv22) Conservation priority areas (mio. ha)
 $ondelim
-$include "./modules/22_land_protection/input/protect_area.cs3"
+$include "./modules/22_land_conservation/input/protect_area.cs3"
 $offdelim
 ;
 
-table f22_min_land_stock(t_all,j,pol22,pol_stock22) Land protection policies [minimum land stock] (Mha)
+table f22_min_land_stock(t_all,j,pol22,pol_stock22) land conservation policies [minimum land stock] (Mha)
 $ondelim
-$include "./modules/22_land_protection/input/npi_ndc_ad_aolc_pol.cs3"
+$include "./modules/22_land_conservation/input/npi_ndc_ad_aolc_pol.cs3"
 $offdelim
 ;
 
 table f22_land_iso(t_ini10,iso,land) Land area for different land pools at ISO level (mio. ha)
 $ondelim
-$include "./modules/22_land_protection/input/avl_land_t_iso.cs3"
+$include "./modules/22_land_conservation/input/avl_land_t_iso.cs3"
 $offdelim;
 

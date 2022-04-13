@@ -178,3 +178,7 @@ v35_secdforest(j2,ac_est) =e= sum(ac_est2, v35_secdforest(j2,ac_est2))/card(ac_e
 
 q35_other_est(j2,ac_est) ..
 v35_other(j2,ac_est) =e= sum(ac_est2, v35_other(j2,ac_est2))/card(ac_est2);
+
+q35_restoration_other(j2)..
+sum(ac, v35_other(j2,ac)) =g= sum(ct, pm_land_conservation(ct,j2,"other","protect") + pm_land_conservation(ct,j2,"other","restore") + pm_land_conservation(ct,j2,"secdforest","restore"));
+

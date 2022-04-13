@@ -30,8 +30,8 @@ parameters
  p35_land_start_ac(j,ac,land_natveg)              Initial Natural vegetation area (mio. ha)
  p35_observed_gs_reg(i)                           Observed growing stock in natural forests before calibration (m3 per ha)
  p35_gs_scaling_reg(i)                            Regional calibration factors for natural vegetation yields (1)
- p35_region_prot_shr(i)	                  		    Land protection share of the region (1)
- p35_country_dummy(iso)		                        Dummy parameter indicating whether country is affected by selected land protection policy (1)
+ p35_region_prot_shr(i)	                  		    land conservation share of the region (1)
+ p35_country_dummy(iso)		                        Dummy parameter indicating whether country is affected by selected land conservation policy (1)
  i35_land_iso(iso)								                Total land area at ISO level (mio. ha)
 ;
 
@@ -61,6 +61,7 @@ equations
  q35_bv_primforest(j,potnatveg)                Biodiversity value of primary forest (Mha)
  q35_bv_secdforest(j,potnatveg)                Biodiversity value of secondary forest (Mha)
  q35_bv_other(j,potnatveg)                     Biodiversity value of other land (Mha)
+ q35_restoration_other(j)                    Land restoration (establishment of other land) (Mha)
 
 ;
 
@@ -121,5 +122,6 @@ parameters
  oq35_bv_primforest(t,j,potnatveg,type)         Biodiversity value of primary forest (Mha)
  oq35_bv_secdforest(t,j,potnatveg,type)         Biodiversity value of secondary forest (Mha)
  oq35_bv_other(t,j,potnatveg,type)              Biodiversity value of other land (Mha)
+ oq35_restoration_other(t,j,type)               Land restoration (establishment of other land) (Mha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **scripts** removed test script "irrig_dep_test" from "start" folder to "extra" folder
  - **scripts** Added script to folder projects paper_grassland.R
  - **44_biodiversity** Improved documentation, simplification of equations and flexible options for price on biodiversity loss
- - **35_natveg** implementation of land protection moved to new module `22_land_protection`
+ - **35_natveg** implementation of land protection moved to new module `22_land_conservation`
  - **config** changed default setting for s56_reward_neg_emis from 0 to -Inf
 
 ### added
@@ -36,7 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** Extended dissagregation.R script to replace single "past" land class by LHU range and pastr classes when grassland_apr22 realization is used.
 - **52_carbon** added land carbon sink adjustment factors, needed in R post-processing
 - **core** macros for linear and sigmoidal time interpolation
-- **22_land_protection** added new module and realisation for land protection. The realisation also includes a new WDPA initialisation data set (from 1995 to 2020) for protected areas under legal protection and meeting IUCN and CBD protected area definitions (including IUCN categories Ia, Ib, III, IV, V, VI and 'not assigned' but legally designated).
+- **22_land_conservation** added new module and realisation for land protection. The realisation also includes a new WDPA initialisation data set (from 1995 to 2020) for protected areas under legal protection and meeting IUCN and CBD protected area definitions (including IUCN categories Ia, Ib, III, IV, V, VI and 'not assigned' but legally designated).
 - **inputs** New input files added:
     f13_pastr_tau_hist.csv -> historical tau for managed pastures.
     f31_pastr_suitability.cs3 -> Managed pasture suitability
