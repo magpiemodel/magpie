@@ -23,18 +23,23 @@ pm_land_protection(t,j,land) = f22_wdpa_baseline(t,j,land);
 * WDPA data is already included in the HalfEarth data set
 * therefore the approach slightly deviates
 pm_land_protection(t,j,land_natveg) =
-	pm_land_start(j,land_natveg) * sum(cell(i,j),
-	p22_protect_shr(t,j,"HalfEarth",land_natveg) * p22_country_weight(i)
-	+ p22_protect_shr(t,j,"%c22_protect_scenario_noselect%",land_natveg) * (1-p22_country_weight(i)));
+		pm_land_start(j,land_natveg)
+	  		* sum(cell(i,j),
+			  p22_protect_shr(t,j,"HalfEarth",land_natveg) * p22_country_weight(i)
+	  		+ p22_protect_shr(t,j,"%c22_protect_scenario_noselect%",land_natveg) * (1-p22_country_weight(i))
+	  		  );
 * make sure that area covered by WDPA data is included in areas where the HalfEarth data reports less
-	pm_land_protection(t,j,land_natveg)$(pm_land_protection(t,j,land_natveg) < f22_wdpa_baseline(t,j,land_natveg)) = f22_wdpa_baseline(t,j,land_natveg);
+pm_land_protection(t,j,land_natveg)$(pm_land_protection(t,j,land_natveg) < f22_wdpa_baseline(t,j,land_natveg)) = f22_wdpa_baseline(t,j,land_natveg);
 $else
 pm_land_protection(t,j,land) = f22_wdpa_baseline(t,j,land);
 * future options for land protection are added to the WDPA baseline
- pm_land_protection(t,j,land_natveg) = f22_wdpa_baseline(t,j,land_natveg) +
-	pm_land_start(j,land_natveg) * sum(cell(i,j),
-	p22_protect_shr(t,j,"%c22_protect_scenario%",land_natveg) * p22_country_weight(i)
-	+ p22_protect_shr(t,j,"%c22_protect_scenario_noselect%",land_natveg) * (1-p22_country_weight(i)));
+pm_land_protection(t,j,land_natveg) =
+		f22_wdpa_baseline(t,j,land_natveg)
+	  + pm_land_start(j,land_natveg)
+	  		* sum(cell(i,j),
+			  p22_protect_shr(t,j,"%c22_protect_scenario%",land_natveg) * p22_country_weight(i)
+			+ p22_protect_shr(t,j,"%c22_protect_scenario_noselect%",land_natveg) * (1-p22_country_weight(i))
+			  );
 $endif
 
 );
