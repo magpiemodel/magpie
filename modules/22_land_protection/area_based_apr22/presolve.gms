@@ -17,8 +17,8 @@ if(m_year(t) <= sm_fix_SSP2,
 else
 
 $ifthen "%c22_protect_scenario%" == "HalfEarth"
-* WDPA data is alread included in the HalfEarth data set
-* therefore the implementatiov slightly deviates
+* WDPA data is already included in the HalfEarth data set
+* therefore the approach slightly deviates
 pm_land_protection(t,j,land_natveg) =
 	pm_land_start(j,land_natveg) * sum(cell(i,j),
 	p22_protect_shr(t,j,"HalfEarth",land_natveg) * p22_country_weight(i)
