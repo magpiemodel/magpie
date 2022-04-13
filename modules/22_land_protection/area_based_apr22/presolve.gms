@@ -16,7 +16,10 @@ if(m_year(t) <= sm_fix_SSP2,
 
 else
 
+** future land protection only pertains to natural vegetation classes (land_natveg)
+
 $ifthen "%c22_protect_scenario%" == "HalfEarth"
+pm_land_protection(t,j,land) = f22_wdpa_baseline(t,j,land);
 * WDPA data is already included in the HalfEarth data set
 * therefore the approach slightly deviates
 pm_land_protection(t,j,land_natveg) =
@@ -26,6 +29,7 @@ pm_land_protection(t,j,land_natveg) =
 * make sure that area covered by WDPA data is included in areas where the HalfEarth data reports less
 	pm_land_protection(t,j,land_natveg)$(pm_land_protection(t,j,land_natveg) < f22_wdpa_baseline(t,j,land_natveg)) = f22_wdpa_baseline(t,j,land_natveg);
 $else
+pm_land_protection(t,j,land) = f22_wdpa_baseline(t,j,land);
 * future options for land protection are added to the WDPA baseline
  pm_land_protection(t,j,land_natveg) = f22_wdpa_baseline(t,j,land_natveg) +
 	pm_land_start(j,land_natveg) * sum(cell(i,j),
