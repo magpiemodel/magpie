@@ -39,7 +39,7 @@ $endif
 ** land initialisation data (based on LUH2v2) set area to remaining land area
 
 * WDPA baseline
-pm_land_protection(t,j,land_natveg)$(pm_land_protection(t,j,land_natveg) > pcm_land(j,land_natveg)) = pcm_land(j,land_natveg);
+pm_land_protection(t,j,land)$(pm_land_protection(t,j,land) > pcm_land(j,land)) = pcm_land(j,land);
 
 * NPI/NDC
 p22_min_forest(t,j)$(p22_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j,"secdforest")) = pcm_land(j,"primforest") + pcm_land(j,"secdforest");
