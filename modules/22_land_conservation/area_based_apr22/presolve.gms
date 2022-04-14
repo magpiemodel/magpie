@@ -51,7 +51,7 @@ pm_land_conservation(t,j,land,"restore") = 0;
 if(s22_restore_land=1,
 
 pm_land_conservation(t,j,"secdforest","restore") =
-			+ pm_land_conservation(t,j,"secdforest","protect")$(pm_land_conservation(t,j,"secdforest","protect") > pcm_land(j,"secdforest"))
+			  pm_land_conservation(t,j,"secdforest","protect")$(pm_land_conservation(t,j,"secdforest","protect") > pcm_land(j,"secdforest"))
 			- pcm_land(j,"secdforest")$(pm_land_conservation(t,j,"secdforest","protect") > pcm_land(j,"secdforest"));
 
 pm_land_conservation(t,j,"other","restore") =
