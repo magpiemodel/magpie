@@ -160,7 +160,7 @@ q35_secdforest_conversion(j2)..
                           =e=
                           sum(ac_sub,v35_hvarea_secdforest(j2,ac_sub))
                         + v35_hvarea_primforest(j2)
-                        + sum(ct,pm_land_conservation(ct,j2,"secdforest","restore"))
+*                        + sum(ct,pm_land_conservation(ct,j2,"secdforest","restore"))
                           ;
 
 *' Harvested other land is still considered other land
@@ -169,7 +169,7 @@ q35_other_conversion(j2)..
                           sum(ac_est, v35_other(j2,ac_est))
                           =g=
                           sum(ac_sub,v35_hvarea_other(j2,ac_sub))
-                        + sum(ct,pm_land_conservation(ct,j2,"other","restore"))
+*                        + sum(ct,pm_land_conservation(ct,j2,"other","restore"))
                           ;
 
 *' The following two constraints distribute additions to secdforest and other land

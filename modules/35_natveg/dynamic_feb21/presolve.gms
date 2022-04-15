@@ -89,7 +89,9 @@ pcm_land(j,"other") = sum(ac, pc35_other(j,ac));
 * In contrast, other natural land can decrease and increase within the optimization.
 * For instance, other natural land increases if agricultural land is abandoned.
 
-** Setting bounds for only allowing s35_natveg_harvest_shr percentage of available primf to be harvested (highest age class)
+** Primary forest
+
+* Setting bounds for only allowing s35_natveg_harvest_shr percentage of available primf to be harvested (highest age class)
 ** Allowing selective logging only after historical period
 if (sum(sameas(t_past,t),1) = 1,
 vm_land.lo(j,"primforest") = pm_land_conservation(t,j,"primforest","protect");
@@ -98,6 +100,8 @@ vm_land.lo(j,"primforest") = max((1-s35_natveg_harvest_shr) * pcm_land(j,"primfo
 );
 vm_land.up(j,"primforest") = pcm_land(j,"primforest");
 m_boundfix(vm_land,(j,"primforest"),l,10e-5);
+
+** Secondary forest
 
 *reset bounds
 v35_secdforest.lo(j,ac) = 0;
@@ -120,11 +124,15 @@ v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=2) = max((1-s35_natveg_harve
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
 m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
 
+** Other land
+
 *reset bounds
 v35_other.lo(j,ac) = 0;
 v35_other.up(j,ac) = Inf;
 *set bounds
-v35_other.lo(j,"acx") = pm_land_conservation(t,j,"other","protect");
+v35_other.lo(j,ac_sub) = pm_land_conservation(t,j,"other","protect");
+v35_other.lo(j,ac_est) = pm_land_conservation(t,j,"other","restore")
+					   + pm_land_conservation(t,j,"secdforest","restore")$(sum(consv_type, pm_land_conservation(t,j,"secdforest",consv_type)) > (pcm_land(j,"secdforest") + pcm_land(j,"other")));
 v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
 m_boundfix(v35_other,(j,ac_sub),l,10e-5);
 
