@@ -155,17 +155,17 @@ q35_hvarea_other(j2,ac_sub)..
 *' to be secondary forest i.e., harvested primary forest gets reclassified as
 *' secondary forest and ends up in the youngest age-class (and follows regrowth)
 
-q35_secdforest_conversion(j2)..
+q35_secdforest_regeneration(j2)..
                           sum(ac_est, v35_secdforest(j2,ac_est))
                           =e=
                           sum(ac_sub,v35_hvarea_secdforest(j2,ac_sub))
                         + v35_hvarea_primforest(j2)
-*                        + sum(ct,pm_land_conservation(ct,j2,"secdforest","restore"))
+                        + sum(ct,pm_land_conservation(ct,j2,"secdforest","restore"))
                           ;
 
 *' Harvested other land is still considered other land
 
-q35_other_conversion(j2)..
+q35_other_regeneration(j2)..
                           sum(ac_est, v35_other(j2,ac_est))
                           =g=
                           sum(ac_sub,v35_hvarea_other(j2,ac_sub))
