@@ -131,7 +131,7 @@ v35_other.lo(j,ac) = 0;
 v35_other.up(j,ac) = Inf;
 *set bounds
 v35_other.lo(j,ac_sub) = pm_land_conservation(t,j,"other","protect");
-v35_other.lo(j,ac_est) = pm_land_conservation(t,j,"other","restore");
+* v35_other.lo(j,ac_est) = pm_land_conservation(t,j,"other","restore");
 *					   + pm_land_conservation(t,j,"secdforest","restore")$(sum(consv_type, pm_land_conservation(t,j,"secdforest",consv_type)) > (pcm_land(j,"secdforest") + pcm_land(j,"other")));
 v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
 m_boundfix(v35_other,(j,ac_sub),l,10e-5);
