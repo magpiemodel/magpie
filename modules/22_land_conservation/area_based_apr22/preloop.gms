@@ -27,7 +27,7 @@ p22_consv_shr_ini(j,consv22)$(sum(land_natveg, pm_land_start(j,land_natveg)) > 0
 
 ** Trajectory for implementation of land conservation
 * sigmoidal interpolation between 2020 and target year
-m_sigmoid_interpol(p22_conservation_fader,2020,s22_conservation_target,0,1);
+m_sigmoid_interpol(p22_conservation_fader,s22_conservation_start,s22_conservation_target,0,1);
 
 *** WDPA
 * No protected area expansion during future time steps

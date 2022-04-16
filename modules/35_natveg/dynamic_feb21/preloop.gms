@@ -72,4 +72,4 @@ pm_carbon_density_ac(t_all,j,ac,"vegc") = pm_carbon_density_ac(t_all,j,ac,"vegc"
 * -----------------------------
 * Set forest damage trajectory
 * -----------------------------
-m_sigmoid_interpol(p35_damage_fader,2020,s35_forest_damage_end,0,1);
+m_sigmoid_interpol(p35_damage_fader,sm_fix_SSP2,s35_forest_damage_end,0,1);

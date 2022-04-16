@@ -12,6 +12,7 @@ $setglobal c22_aolc_policy  npi
 
 scalars
 s22_restore_land  If land restoration is allowed (0=no 1=yes) / 1 /
+s22_conservation_start		Land conservation target year				/ 2020 /
 s22_conservation_target		Land conservation target year				/ 2030 /
 ;
 
