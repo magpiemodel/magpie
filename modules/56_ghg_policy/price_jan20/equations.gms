@@ -13,25 +13,38 @@
 *** Emissions
 
 *' Total **regional GHG emissions** `vm_emissions_reg` are the sum of emissions from different regional and cellular sources less
-*' the fraction `im_maccs_mitigation` that can be abated by technicial mitigation measures (see  module [57_maccs]). The emisssions before technical mitigation
-*' are calculated in the respective modules ([51_nitrogen], [52_carbon], [53_methane]) and delivered to this module through the
-*' interface variables `vm_btm_reg` and `vm_btm_cell`.
+*' the fraction `im_maccs_mitigation` that can be abated by technicial mitigation measures (see  module [57_maccs]). 
+*' The regional emisssions before technical mitigation are calculated in the respective modules 
+*' ([51_nitrogen], [53_methane]) and delivered to this module through the interface variable `vm_btm_reg`.
+*' Cellular CO2 emissions are calculated based on changes in carbons stocks `vm_carbon_stock`.
 
-q56_technical_mitigation_reg(i2,pollutants,emis_source) ..
- vm_emissions_reg(i2,emis_source,pollutants) =e=
+ q56_technical_mitigation_reg(i2,pollutants,emis_source) ..
+	vm_emissions_reg(i2,emis_source,pollutants) =e=
                  vm_btm_reg(i2,emis_source,pollutants)
                  * (1 - sum(ct, im_maccs_mitigation(ct,i2,emis_source,pollutants)))
                  ;
 
-q56_technical_mitigation_cell(j2,pollutants,emis_source)  ..
- v56_emis_cell(j2,emis_source,pollutants) =e=
-                sum(cell(i2,j2),
-                  vm_btm_cell(j2,emis_source,pollutants)
+ q56_technical_mitigation_cell(i2,pollutants,emis_source) ..
+	vm_emissions_reg(i2,emis_source,pollutants) =e=
+                sum(cell(i2,j2), v56_btm_cell(j2,emis_source,pollutants)
                   * (1 - sum(ct, im_maccs_mitigation(ct,i2,emis_source,pollutants))));
 
-q56_cell_to_reg(i2,pollutants,emis_source) ..
- vm_emissions_reg(i2,emis_source,pollutants) =e=
-                sum(cell(i2,j2),v56_emis_cell(j2,emis_source,pollutants));
+ q56_co2c_emis(j2,emis_co2) ..
+	v56_btm_cell(j2,emis_co2,"co2_c") =e=
+                 sum(emis_land(emis_co2,land,c_pools),
+                 (vm_carbon_stock.l(j2,land,c_pools,"actual") - vm_carbon_stock(j2,land,c_pools,"actual"))/m_timestep_length);
+
+ q56_co2c_emis_pricing(j2,emis_co2) ..
+	v56_btm_cell_pricing(j2,emis_co2,"co2_c") =e=
+                 sum(emis_land(emis_co2,land,c_pools),
+                 (vm_carbon_stock.l(j2,land,c_pools,"actual") - vm_carbon_stock(j2,land,c_pools,"%c56_carbon_stock_pricing%"))/m_timestep_length);
+
+ q56_co2c_emis_pricing2(j2,pollutants,emis_source)  ..
+	v56_emis_cell_pricing(j2,emis_source,pollutants) =e=
+                sum(cell(i2,j2),
+                  v56_btm_cell_pricing(j2,emis_source,pollutants)
+                  * (1 - sum(ct, im_maccs_mitigation(ct,i2,emis_source,pollutants))));
+
 
 
 *** Emission costs
@@ -50,7 +63,7 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
  q56_emission_costs_cell_yearly(j2,emis_cell_yr56) ..
                  v56_emission_costs_cell_yearly(j2,emis_cell_yr56) =e=
                  sum(pollutants,
-                     v56_emis_cell(j2,emis_cell_yr56,pollutants) *
+                     v56_emis_cell_pricing(j2,emis_cell_yr56,pollutants) *
                      sum((ct,cell(i2,j2)), p56_emis_policy(ct,i2,pollutants,emis_cell_yr56) *
                      im_pollutant_prices(ct,i2,pollutants)));
 
@@ -78,7 +91,7 @@ q56_cell_to_reg(i2,pollutants,emis_source) ..
  q56_emission_costs_cell_oneoff(j2,emis_cell_one56) ..
                  v56_emission_costs_cell_oneoff(j2,emis_cell_one56) =g=
                  sum(pollutants,
-                     v56_emis_cell(j2,emis_cell_one56,pollutants)
+                     v56_emis_cell_pricing(j2,emis_cell_one56,pollutants)
                      * m_timestep_length
                      * sum((ct,cell(i2,j2)),
                     	p56_emis_policy(ct,i2,pollutants,emis_cell_one56)

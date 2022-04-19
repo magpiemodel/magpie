@@ -143,6 +143,12 @@ sets
    rice, ent_ferm,  beccs/
 
    ac_exp(ac) age-class corresponding to planning horizon
+   
+   ag_pools(c_pools) Above ground carbon pools
+         / vegc, litc /
+
+   stockType Carbon stock type
+         / actual, previousLandPattern, previousCarbonDensity /
 ;
 
 $onempty

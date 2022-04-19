@@ -55,6 +55,9 @@ $setglobal c56_pollutant_prices  R21M42-SSP2-NPi
 $setglobal c56_pollutant_prices_noselect  R21M42-SSP2-NPi
 $setglobal c56_emis_policy  redd+natveg_nosoil
 
+$setglobal c56_carbon_stock_pricing  previousCarbonDensity
+*   options:  actual, previousLandPattern, previousCarbonDensity
+
 table f56_pollutant_prices(t_all,i,pollutants,ghgscen56) GHG certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
 $ondelim
 $include "./modules/56_ghg_policy/input/f56_pollutant_prices.cs3"

@@ -5,12 +5,19 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+* starting value of above ground carbon stocks 1995 is only an estimate.
+* ATTENTION: emissions in 1995 are not meaningful
+vm_carbon_stock.l(j,land,ag_pools,stockType) = fm_carbon_density("y1995",j,land,ag_pools)*pcm_land(j,land);
+
 ***fix vm_btm_cell to zero for non-CO2 emissions from land-use change
-vm_btm_cell.fx(j,emis_source_cell,pollutants)$(not sameas(pollutants,"co2_c")) = 0;
+v56_btm_cell.fx(j,emis_source_cell,pollutants)$(not sameas(pollutants,"co2_c")) = 0;
+v56_btm_cell_pricing.fx(j,emis_source_cell,pollutants)$(not sameas(pollutants,"co2_c")) = 0;
 ***fix vm_btm_cell to zero for CO2 emissions from ag. production (non land-use change)
-vm_btm_cell.fx(j,emis_source_reg,"co2_c") = 0;
+v56_btm_cell.fx(j,emis_source_reg,"co2_c") = 0;
+v56_btm_cell_pricing.fx(j,emis_source_reg,"co2_c") = 0;
 ***fix vm_btm_cell to zero for CO2 emissions from beccs (not used)
-vm_btm_cell.fx(j,"beccs",pollutants) = 0;
+v56_btm_cell.fx(j,"beccs",pollutants) = 0;
+v56_btm_cell_pricing.fx(j,"beccs",pollutants) = 0;
 
 ****** Region price share for ghg policy of selective countries:
 * Country switch to determine countries for which ghg policy shall be applied.

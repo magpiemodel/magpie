@@ -17,21 +17,23 @@ parameters
 
 equations
  q56_technical_mitigation_reg(i,pollutants,emis_source)   Application of maccs on emissions (Tg per yr)
- q56_technical_mitigation_cell(j,pollutants,emis_source)  Application of maccs on emissions (Tg per yr)
- q56_cell_to_reg(i,pollutants,emis_source)                Aggregation to regional emissions (Tg per yr)
+ q56_technical_mitigation_cell(i,pollutants,emis_source)  Application of maccs on emissions (Tg per yr)
  q56_emission_costs(i)                                    Calculation of total emission costs (mio. USD05MER per yr)
  q56_emission_costs_reg_yearly(i,emis_reg_yr56)       	  Calculation of regional costs for annual emissions (mio. USD05MER per yr)
  q56_emission_costs_reg_oneoff(i,emis_reg_one56)       	  Calculation of regional costs for emissions occuring only once in time (mio. USD05MER per yr)
  q56_emission_costs_cell_yearly(j,emis_cell_yr56)     	  Calculation of cellular costs for annual emissions (mio. USD05MER per yr)
  q56_emission_costs_cell_oneoff(j,emis_cell_one56)     	  Calculation of cellular costs for emissions occuring only once in time (mio. USD05MER per yr)
  q56_reward_cdr_aff_reg(i)                                Regional revenues for carbon captured by afforestation (mio. USD05MER per yr)
- q56_reward_cdr_aff(j)			                       	      Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
+ q56_reward_cdr_aff(j)			                       	  Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
  q56_peatland_emis_cost_reg(i)                            Regional peatland GHG emissions costs (mio. USD05MER per yr)
  q56_peatland_emis_cost(j)                            	  Cellular peatland GHG emissions costs (mio. USD05MER per yr)
+ q56_co2c_emis(j,emis_co2)             		 			  Calculation of annual CO2 emissions (mio. tC per yr)
+ q56_co2c_emis_pricing(j,emis_co2)						  Calculation of annual CO2 emissions (mio. tC per yr)
+ q56_co2c_emis_pricing2(j,pollutants,emis_source)						  Calculation of annual CO2 emissions (mio. tC per yr)
 ;
 
-
 positive variables
+ vm_carbon_stock(j,land,c_pools,stockType)     Carbon stock in vegetation soil and litter for different land types (mio. tC)
  vm_peatland_emis_cost(i)            Regional peatland GHG emissions costs (mio. USD05MER per yr)
  v56_peatland_emis_cost(j)           Cellular peatland GHG emissions costs (mio. USD05MER per yr)
 ;
@@ -39,27 +41,30 @@ positive variables
 
 variables
  vm_btm_reg(i,emis_source,pollutants)                    Regional emissions before technical mitigation (Tg per yr)
- vm_btm_cell(j,emis_source,pollutants)                   Cellular emissions before technical mitigation (Tg per yr)
+ v56_btm_cell(j,emis_source,pollutants)                  Cellular emissions before technical mitigation (Tg per yr)
+ v56_btm_cell_pricing(j,emis_source,pollutants)          Cellular emissions before technical mitigation (Tg per yr)
  vm_emission_costs(i)                                    Costs for emission rights for pollutants and greenhouse gases (mio. USD05MER per yr)
  vm_emissions_reg(i,emis_source,pollutants)              Regional emissions by source and gas after technical mitigation N CH4 C (Tg per yr)
- v56_emis_cell(j,emis_source,pollutants)                 Cellular emissions by source and gas after technical mitigation N CH4 C (Tg per yr)
+ v56_emis_cell_pricing(j,emis_source,pollutants)                 Cellular emissions by source and gas after technical mitigation N CH4 C (Tg per yr)
  v56_emission_costs_reg_yearly(i,emis_reg_yr56)          Costs for emissions occuring yearly (mio. USD05MER per yr)
  v56_emission_costs_reg_oneoff(i,emis_reg_one56)         Costs for emissions occuring only once in time (mio. USD05MER per yr)
  v56_emission_costs_cell_yearly(j,emis_cell_yr56)        Costs for emissions occuring yearly (mio. USD05MER per yr)
  v56_emission_costs_cell_oneoff(j,emis_cell_one56)       Costs for emissions occuring only once in time (mio. USD05MER per yr)
  vm_reward_cdr_aff(i)                                    Regional average annual expected revenue from afforestation (mio. USD05MER per yr)
- v56_reward_cdr_aff(j)				                           Cellular average annual expected revenue from afforestation (mio. USD05MER per yr)
+ v56_reward_cdr_aff(j)				                     Cellular average annual expected revenue from afforestation (mio. USD05MER per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
+ ov_carbon_stock(t,j,land,c_pools,stockType,type)                Carbon stock in vegetation soil and litter for different land types (mio. tC)
  ov_peatland_emis_cost(t,i,type)                                 Regional peatland GHG emissions costs (mio. USD05MER per yr)
  ov56_peatland_emis_cost(t,j,type)                               Cellular peatland GHG emissions costs (mio. USD05MER per yr)
  ov_btm_reg(t,i,emis_source,pollutants,type)                     Regional emissions before technical mitigation (Tg per yr)
- ov_btm_cell(t,j,emis_source,pollutants,type)                    Cellular emissions before technical mitigation (Tg per yr)
+ ov56_btm_cell(t,j,emis_source,pollutants,type)                  Cellular emissions before technical mitigation (Tg per yr)
+ ov56_btm_cell_pricing(t,j,emis_source,pollutants,type)          Cellular emissions before technical mitigation (Tg per yr)
  ov_emission_costs(t,i,type)                                     Costs for emission rights for pollutants and greenhouse gases (mio. USD05MER per yr)
  ov_emissions_reg(t,i,emis_source,pollutants,type)               Regional emissions by source and gas after technical mitigation N CH4 C (Tg per yr)
- ov56_emis_cell(t,j,emis_source,pollutants,type)                 Cellular emissions by source and gas after technical mitigation N CH4 C (Tg per yr)
+ ov56_emis_cell_pricing(t,j,emis_source,pollutants,type)         Cellular emissions by source and gas after technical mitigation N CH4 C (Tg per yr)
  ov56_emission_costs_reg_yearly(t,i,emis_reg_yr56,type)          Costs for emissions occuring yearly (mio. USD05MER per yr)
  ov56_emission_costs_reg_oneoff(t,i,emis_reg_one56,type)         Costs for emissions occuring only once in time (mio. USD05MER per yr)
  ov56_emission_costs_cell_yearly(t,j,emis_cell_yr56,type)        Costs for emissions occuring yearly (mio. USD05MER per yr)
@@ -67,8 +72,7 @@ parameters
  ov_reward_cdr_aff(t,i,type)                                     Regional average annual expected revenue from afforestation (mio. USD05MER per yr)
  ov56_reward_cdr_aff(t,j,type)                                   Cellular average annual expected revenue from afforestation (mio. USD05MER per yr)
  oq56_technical_mitigation_reg(t,i,pollutants,emis_source,type)  Application of maccs on emissions (Tg per yr)
- oq56_technical_mitigation_cell(t,j,pollutants,emis_source,type) Application of maccs on emissions (Tg per yr)
- oq56_cell_to_reg(t,i,pollutants,emis_source,type)               Aggregation to regional emissions (Tg per yr)
+ oq56_technical_mitigation_cell(t,i,pollutants,emis_source,type) Application of maccs on emissions (Tg per yr)
  oq56_emission_costs(t,i,type)                                   Calculation of total emission costs (mio. USD05MER per yr)
  oq56_emission_costs_reg_yearly(t,i,emis_reg_yr56,type)          Calculation of regional costs for annual emissions (mio. USD05MER per yr)
  oq56_emission_costs_reg_oneoff(t,i,emis_reg_one56,type)         Calculation of regional costs for emissions occuring only once in time (mio. USD05MER per yr)
@@ -78,5 +82,8 @@ parameters
  oq56_reward_cdr_aff(t,j,type)                                   Cellular revenues for carbon captured by afforestation (mio. USD05MER per yr)
  oq56_peatland_emis_cost_reg(t,i,type)                           Regional peatland GHG emissions costs (mio. USD05MER per yr)
  oq56_peatland_emis_cost(t,j,type)                               Cellular peatland GHG emissions costs (mio. USD05MER per yr)
+ oq56_co2c_emis(t,j,emis_co2,type)                               Calculation of annual CO2 emissions (mio. tC per yr)
+ oq56_co2c_emis_pricing(t,j,emis_co2,type)                       Calculation of annual CO2 emissions (mio. tC per yr)
+ oq56_co2c_emis_pricing2(t,j,pollutants,emis_source,type)        Calculation of annual CO2 emissions (mio. tC per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
