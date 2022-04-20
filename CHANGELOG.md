@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+ - **56_ghg_policy** additional scenarios for c56_emis_policy
+ - **09_drivers** separation of GDP and population scenarios
  - **scripts** added new disaggregation script to provide grid cell level BII
  - **inputs** updated non-agricultural water use scenarios (watdem_nonagr_grper.cs3)
  - **config** included switch for non-agricultural water demand (s42_watdem_nonagr_scenario) in scenario_config.csv
@@ -36,7 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **52_carbon** added land carbon sink adjustment factors, needed in R post-processing
 - **core** macros for linear and sigmoidal time interpolation
 - **inputs** New input files added:
-    f13_pastr_tau_hist.csv -> historical tau for managed pastures. 
+    f13_pastr_tau_hist.csv -> historical tau for managed pastures.
     f31_pastr_suitability.cs3 -> Managed pasture suitability
     f31_LUH2v2.cs3 -> LUH2v2 land classes separating rangelands from managed pastures
     f31_grassl_yld.cs3 -> Rangelands and managed pastures grass yields
