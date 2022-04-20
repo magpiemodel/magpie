@@ -17,6 +17,7 @@ library(madrat)
 library(raster)
 library(mrcommons)
 
+############################# BASIC CONFIGURATION ##############################
 if(!exists("source_include")) {
   outputdir <- "/p/projects/magpie/data/ISIMIP/ISIMIP_150322/magpie/output/c1000_150322_Calib/ISIMIP_150322_med_ssp585_IPSL-CM6A-LR_cc_c1000/"
 
@@ -30,11 +31,13 @@ urban_land_hr_file         <- file.path(outputdir,"f34_urbanland_0.5.mz")
 land_hr_out_file           <- file.path(outputdir,"cell.land_0.5.mz")
 croparea_hr_share_out_file <- file.path(outputdir,"cell.croparea_0.5_share.mz")
 
-load(paste0(outputdir, "/config.Rdata"))
+cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 if (!file.exists(file.path(outputdir,"cell.land_0.5.mz"))) stop('No disaggrated land use patterns found. Run "disaggregation.R" first!')
+################################################################################
+
 
 #### Folder for saving results
-out_dir<-paste0(outputdir,"/LUH2_ISIMIP3b")
+out_dir<-paste0(outputdir,"/disaggregation_LUH2")
     if(!dir.exists(out_dir)) dir.create(out_dir)
 
 
