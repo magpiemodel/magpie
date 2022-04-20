@@ -58,7 +58,7 @@ $offdelim
 /
 ;
 
-parameter f55_manure_fuel_shr(t_all,i,kli,gdp_scen09) share of Nr in confinement recycled (tNr per tNr)
+parameter f55_manure_fuel_shr(t_all,i,kli,pop_gdp_scen09) share of Nr in confinement recycled (tNr per tNr)
 /
 $ondelim
 $include "./modules/55_awms/ipcc2006_aug16/input/f55_manure_fuel_shr.cs4"
