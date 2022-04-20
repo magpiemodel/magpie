@@ -297,7 +297,7 @@ peatland_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (NA) Air pollution intervention transformation ###
+### (16) Air pollution intervention transformation ###
 airPollution_transformation <- function(cfg) {
   # crop residue burning is phasing out rather than at constant levels as in default
   cfg$gms$c18_burn_scen         <- "phaseout"
@@ -377,8 +377,8 @@ cfg <- REDD_transformation(cfg = cfg)
 cfg <- landsparing_transformation(cfg = cfg)
 ### (16) Land and water sparing transformation ###
 cfg <- peatland_transformation(cfg = cfg)
-### (NA) Air pollution intervention transformation ###
-#cfg <- airPollution_transformation(cfg = cfg)
+### (17) Air pollution intervention transformation ###
+cfg <- airPollution_transformation(cfg = cfg)
 ### (NA) Agricultural employment transformation ###
 #cfg <- employment_transformation(cfg = cfg)
 ### (19) Soil pricing transformation ##
@@ -481,10 +481,10 @@ cfg <- general_settings(title = "FSEC_peatland")
 cfg <- peatland_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (NA) Air pollution intervention transformation ###
-#cfg <- general_settings(title = "FSEC_airpollution")
-#cfg <- airPollution_transformation(cfg = cfg)
-#start_run(cfg = cfg, codeCheck = codeCheck)
+### (17) Air pollution intervention transformation ###
+cfg <- general_settings(title = "FSEC_airpollution")
+cfg <- airPollution_transformation(cfg = cfg)
+start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (NA) Agricultural employment transformation ###
 #cfg <- general_settings(title = "FSEC_employment")
