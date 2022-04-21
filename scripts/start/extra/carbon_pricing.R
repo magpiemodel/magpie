@@ -80,7 +80,7 @@ for(t in c("coup2100","quicktest2")) {
 }
 
 #option 2: medium change
-c56_carbon_stock_pricing <- "actualWithAcEst"
+c56_carbon_stock_pricing <- "actualNoAcEst"
 c56_emis_policy <- "redd+natveg_nosoil"
 s56_reward_neg_emis <- -Inf
 for(t in c("coup2100","quicktest2")) {
@@ -97,7 +97,7 @@ for(t in c("coup2100","quicktest2")) {
 }
 
 #option 3: larger change
-c56_carbon_stock_pricing <- "actualWithAcEst"
+c56_carbon_stock_pricing <- "actualNoAcEst"
 c56_emis_policy <- "all_nosoil"
 s56_reward_neg_emis <- -Inf
 for(t in c("coup2100","quicktest2")) {
@@ -114,7 +114,7 @@ for(t in c("coup2100","quicktest2")) {
 }
 
 #option 4: larger change2
-c56_carbon_stock_pricing <- "actualWithAcEst"
+c56_carbon_stock_pricing <- "actualNoAcEst"
 c56_emis_policy <- "all_vegc"
 s56_reward_neg_emis <- -Inf
 for(t in c("coup2100","quicktest2")) {

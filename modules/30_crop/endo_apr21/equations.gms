@@ -56,7 +56,7 @@
    vm_land(j2,"crop") * sum(ct, fm_carbon_density(ct,j2,"crop",ag_pools));
 
  q30_carbon2(j2,ag_pools) ..
- vm_carbon_stock(j2,"crop",ag_pools,"actualWithAcEst") =e=
+ vm_carbon_stock(j2,"crop",ag_pools,"actualNoAcEst") =e=
    vm_land(j2,"crop") * sum(ct, fm_carbon_density(ct,j2,"crop",ag_pools));
 
  q30_carbon3(j2,ag_pools) ..

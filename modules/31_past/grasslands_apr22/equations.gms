@@ -45,7 +45,7 @@ q31_carbon1(j2,ag_pools) ..
          sum(ct, vm_land(j2,"past")*fm_carbon_density(ct,j2,"past",ag_pools));
 
 q31_carbon2(j2,ag_pools) ..
- vm_carbon_stock(j2,"past",ag_pools,"actualWithAcEst") =e=
+ vm_carbon_stock(j2,"past",ag_pools,"actualNoAcEst") =e=
          sum(ct, vm_land(j2,"past")*fm_carbon_density(ct,j2,"past",ag_pools));
 
 q31_carbon3(j2,ag_pools) ..

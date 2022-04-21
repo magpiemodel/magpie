@@ -90,7 +90,7 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
                          sum((type32,ac), v32_land(j2,type32,ac)*
                          sum(ct, p32_carbon_density_ac(ct,j2,type32,ac,ag_pools)));
 
- q32_carbon2(j2,ag_pools)  .. vm_carbon_stock(j2,"forestry",ag_pools,"actualWithAcEst") =e=
+ q32_carbon2(j2,ag_pools)  .. vm_carbon_stock(j2,"forestry",ag_pools,"actualNoAcEst") =e=
                          sum((type32,ac_sub), v32_land(j2,type32,ac_sub)*
                          sum(ct, p32_carbon_density_ac(ct,j2,type32,ac_sub,ag_pools)));
 

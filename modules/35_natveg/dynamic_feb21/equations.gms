@@ -23,7 +23,7 @@
            vm_land(j2,"primforest")
            *sum(ct, fm_carbon_density(ct,j2,"primforest",ag_pools));
 
- q35_carbon_primforest2(j2,ag_pools) .. vm_carbon_stock(j2,"primforest",ag_pools,"actualWithAcEst") =e=
+ q35_carbon_primforest2(j2,ag_pools) .. vm_carbon_stock(j2,"primforest",ag_pools,"actualNoAcEst") =e=
            vm_land(j2,"primforest")
            *sum(ct, fm_carbon_density(ct,j2,"primforest",ag_pools));
 
@@ -39,7 +39,7 @@
            sum(ac, v35_secdforest(j2,ac)
            *sum(ct, pm_carbon_density_ac(ct,j2,ac,ag_pools)));
 
- q35_carbon_secdforest2(j2,ag_pools) .. vm_carbon_stock(j2,"secdforest",ag_pools,"actualWithAcEst") =e=
+ q35_carbon_secdforest2(j2,ag_pools) .. vm_carbon_stock(j2,"secdforest",ag_pools,"actualNoAcEst") =e=
            sum(ac_sub, v35_secdforest(j2,ac_sub)
            *sum(ct, pm_carbon_density_ac(ct,j2,ac_sub,ag_pools)));
 
@@ -55,7 +55,7 @@
            sum(ac, v35_other(j2,ac)
            *sum(ct, pm_carbon_density_ac(ct,j2,ac,ag_pools)));
 
- q35_carbon_other2(j2,ag_pools)  .. vm_carbon_stock(j2,"other",ag_pools,"actualWithAcEst") =e=
+ q35_carbon_other2(j2,ag_pools)  .. vm_carbon_stock(j2,"other",ag_pools,"actualNoAcEst") =e=
            sum(ac_sub, v35_other(j2,ac_sub)
            *sum(ct, pm_carbon_density_ac(ct,j2,ac_sub,ag_pools)));
 
