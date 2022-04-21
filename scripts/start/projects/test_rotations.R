@@ -28,7 +28,7 @@ cfg$results_folder <- "output/:title:"
 #cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 
 prefix <- "rotationtests01uncalib"
-cfg$qos <- "priority"
+#cfg$qos <- "priority"
 
 cfg$title <- paste(prefix,"olddefault",sep="_")
 start_run(cfg,codeCheck=FALSE)
@@ -45,5 +45,5 @@ for (scenario in c("setaside","legumes","sixfoldrotation","agroecology")){
 	  cfg$title <- paste(prefix,scenario,byyear,sep="_")
 	  start_run(cfg,codeCheck=FALSE)
   }
-  
+
 }

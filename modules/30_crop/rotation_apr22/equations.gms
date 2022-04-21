@@ -27,14 +27,14 @@
 *' crop rotations limiting the share a specific crop can cover of the total area
 *' of a cluster:
 
- q30_rotation_max(j2,rotamax30) ..
-   sum((rotamax_kcr30(rotamax30,kcr),w), vm_area(j2,kcr,w)) =l=
-     vm_land(j2,"crop") * sum(ct,i30_rotation_max_shr(ct,rotamax30));
+ q30_rotation_max(j2,rotamax_red30) ..
+   sum((rotamax_kcr30(rotamax_red30,kcr),w), vm_area(j2,kcr,w)) =l=
+     vm_land(j2,"crop") * sum(ct,i30_rotation_max_shr(ct,rotamax_red30));
 
 
- q30_rotation_min(j2,rotamin30) ..
-    sum((rotamin_kcr30(rotamin30,kcr),w), vm_area(j2,kcr,w)) =g=
-    vm_land(j2,"crop") * sum(ct,i30_rotation_min_shr(ct,rotamin30));
+ q30_rotation_min(j2,rotamin_red30) ..
+    sum((rotamin_kcr30(rotamin_red30,kcr),w), vm_area(j2,kcr,w)) =g=
+    vm_land(j2,"crop") * sum(ct,i30_rotation_min_shr(ct,rotamin_red30));
 
 * we also include the max constraint irrigated systems so that they cannot
 * be too specialized. The minimum constraint can however also just

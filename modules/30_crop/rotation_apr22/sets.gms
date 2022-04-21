@@ -7,7 +7,7 @@
 
 sets
   rotascen30 rotation constraint scenarios
-  /current,setaside,legumes,sixfoldrotation,agroecology/
+  /current,setaside,legumes,agroforestry,sixfoldrotation,agroecology/
 
   rotamax30 Maximum crop rotation categories
   / all_max, cereals_max, stalk_max,
@@ -24,6 +24,9 @@ sets
     all_min, stalk_min, biomass_min,
     legume_min, others_min
   /
+
+  rotamax_red30(rotamax30) Maximum crop rotation reduced set
+  rotamin_red30(rotamin30) Minimum crop rotation reduced set
 
 * crop rotation groups:
 * cereals or grasses are very favourable to loosen soils, therefore minimum constraint

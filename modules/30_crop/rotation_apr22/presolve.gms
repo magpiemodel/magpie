@@ -29,3 +29,7 @@ p30_avl_cropland(t,j) = f30_avl_cropland(j,"%c30_marginal_land%") *
 	(s30_set_aside_shr * sum(cell(i,j), p30_region_setaside_shr(i))
 	+ s30_set_aside_shr_noselect * sum(cell(i,j), 1-p30_region_setaside_shr(i))));
 *' @stop
+
+* only activate constraints which are binding
+rotamax_red30(rotamax30) = yes$(i30_rotation_max_shr(t,rotamax30) < 1);
+rotamin_red30(rotamin30) = yes$(i30_rotation_min_shr(t,rotamin30) > 0);
