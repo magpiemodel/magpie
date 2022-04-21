@@ -19,39 +19,51 @@
 *' In case of abandoned agricultural land (increase of other natural land),
 *' natural succession, represented by age-class growth, results in increasing carbon stocks.
 
- q35_carbon_primforest(j2,ag_pools) .. vm_carbon_stock(j2,"primforest",ag_pools,"actual") =e=
+ q35_carbon_primforest1(j2,ag_pools) .. vm_carbon_stock(j2,"primforest",ag_pools,"actual") =e=
            vm_land(j2,"primforest")
            *sum(ct, fm_carbon_density(ct,j2,"primforest",ag_pools));
 
- q35_carbon_primforest2(j2,ag_pools) .. vm_carbon_stock(j2,"primforest",ag_pools,"previousLandPattern") =e=
+ q35_carbon_primforest2(j2,ag_pools) .. vm_carbon_stock(j2,"primforest",ag_pools,"actualWithAcEst") =e=
+           vm_land(j2,"primforest")
+           *sum(ct, fm_carbon_density(ct,j2,"primforest",ag_pools));
+
+ q35_carbon_primforest3(j2,ag_pools) .. vm_carbon_stock(j2,"primforest",ag_pools,"previousLandPattern") =e=
            pcm_land(j2,"primforest")
            *sum(ct, fm_carbon_density(ct,j2,"primforest",ag_pools));
 
- q35_carbon_primforest3(j2,ag_pools) .. vm_carbon_stock(j2,"primforest",ag_pools,"previousCarbonDensity") =e=
+ q35_carbon_primforest4(j2,ag_pools) .. vm_carbon_stock(j2,"primforest",ag_pools,"previousCarbonDensity") =e=
            vm_land(j2,"primforest")
            *sum(pt, fm_carbon_density(pt,j2,"primforest",ag_pools));
 
- q35_carbon_secdforest(j2,ag_pools) .. vm_carbon_stock(j2,"secdforest",ag_pools,"actual") =e=
+ q35_carbon_secdforest1(j2,ag_pools) .. vm_carbon_stock(j2,"secdforest",ag_pools,"actual") =e=
            sum(ac, v35_secdforest(j2,ac)
            *sum(ct, pm_carbon_density_ac(ct,j2,ac,ag_pools)));
 
- q35_carbon_secdforest2(j2,ag_pools) .. vm_carbon_stock(j2,"secdforest",ag_pools,"previousLandPattern") =e=
+ q35_carbon_secdforest2(j2,ag_pools) .. vm_carbon_stock(j2,"secdforest",ag_pools,"actualWithAcEst") =e=
+           sum(ac_sub, v35_secdforest(j2,ac_sub)
+           *sum(ct, pm_carbon_density_ac(ct,j2,ac_sub,ag_pools)));
+
+ q35_carbon_secdforest3(j2,ag_pools) .. vm_carbon_stock(j2,"secdforest",ag_pools,"previousLandPattern") =e=
            sum(ac, pc35_secdforest(j2,ac)
            *sum(ct, pm_carbon_density_ac(ct,j2,ac,ag_pools)));
 
- q35_carbon_secdforest3(j2,ag_pools) .. vm_carbon_stock(j2,"secdforest",ag_pools,"previousCarbonDensity") =e=
+ q35_carbon_secdforest4(j2,ag_pools) .. vm_carbon_stock(j2,"secdforest",ag_pools,"previousCarbonDensity") =e=
            sum(ac, v35_secdforest(j2,ac)
            *sum(pt, pm_carbon_density_ac(pt,j2,ac,ag_pools)));
 
- q35_carbon_other(j2,ag_pools)  .. vm_carbon_stock(j2,"other",ag_pools,"actual") =e=
+ q35_carbon_other1(j2,ag_pools)  .. vm_carbon_stock(j2,"other",ag_pools,"actual") =e=
            sum(ac, v35_other(j2,ac)
            *sum(ct, pm_carbon_density_ac(ct,j2,ac,ag_pools)));
 
- q35_carbon_other2(j2,ag_pools)  .. vm_carbon_stock(j2,"other",ag_pools,"previousLandPattern") =e=
+ q35_carbon_other2(j2,ag_pools)  .. vm_carbon_stock(j2,"other",ag_pools,"actualWithAcEst") =e=
+           sum(ac_sub, v35_other(j2,ac_sub)
+           *sum(ct, pm_carbon_density_ac(ct,j2,ac_sub,ag_pools)));
+
+ q35_carbon_other3(j2,ag_pools)  .. vm_carbon_stock(j2,"other",ag_pools,"previousLandPattern") =e=
            sum(ac, pc35_other(j2,ac)
            *sum(ct, pm_carbon_density_ac(ct,j2,ac,ag_pools)));
 
- q35_carbon_other3(j2,ag_pools)  .. vm_carbon_stock(j2,"other",ag_pools,"previousCarbonDensity") =e=
+ q35_carbon_other4(j2,ag_pools)  .. vm_carbon_stock(j2,"other",ag_pools,"previousCarbonDensity") =e=
            sum(ac, v35_other(j2,ac)
            *sum(pt, pm_carbon_density_ac(pt,j2,ac,ag_pools)));
 

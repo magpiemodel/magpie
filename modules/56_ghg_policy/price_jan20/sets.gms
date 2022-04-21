@@ -156,8 +156,8 @@ sets
    ag_pools(c_pools) Above ground carbon pools
          / vegc, litc /
 
-   stockType Carbon stock type
-         / actual, previousLandPattern, previousCarbonDensity /
+   stockType Carbon stock types
+         / actual, actualWithAcEst, previousLandPattern, previousCarbonDensity /
 ;
 
 $onempty
