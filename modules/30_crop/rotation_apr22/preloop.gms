@@ -7,13 +7,13 @@
 
 * create crop rotation scenario
 
-i30_rotation_max_shr(tall,rotamax30)=
-  f30_rotation_max_shr(rotamax30,"current") * (1-f30_scenario_fader(tall,"%c30_rotation_scenario_speed%"))+
-  f30_rotation_max_shr(rotamax30,"%c30_rotation_scenario%") * (f30_scenario_fader(tall,"%c30_rotation_scenario_speed%"));
+i30_rotation_max_shr(t_all,rotamax30)=
+  f30_rotation_max_shr(rotamax30,"current") * (1-f30_scenario_fader(t_all,"%c30_rotation_scenario_speed%"))+
+  f30_rotation_max_shr(rotamax30,"%c30_rotation_scenario%") * (f30_scenario_fader(t_all,"%c30_rotation_scenario_speed%"));
 
-i30_rotation_min_shr(tall,rotamin30)=
-  f30_rotation_min_shr(rotamin30,"current") * (1-f30_scenario_fader(tall,"%c30_rotation_scenario_speed%"))+
-  f30_rotation_min_shr(rotamin30,"%c30_rotation_scenario%") * (f30_scenario_fader(tall,"%c30_rotation_scenario_speed%"));
+i30_rotation_min_shr(t_all,rotamin30)=
+  f30_rotation_min_shr(rotamin30,"current") * (1-f30_scenario_fader(t_all,"%c30_rotation_scenario_speed%"))+
+  f30_rotation_min_shr(rotamin30,"%c30_rotation_scenario%") * (f30_scenario_fader(t_all,"%c30_rotation_scenario_speed%"));
 
 
 *due to some rounding errors the input data currently may contain in some cases

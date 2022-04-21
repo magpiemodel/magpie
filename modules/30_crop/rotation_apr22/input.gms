@@ -20,10 +20,10 @@ $setglobal c30_set_aside_target  none
 $setglobal c30_rotation_constraints  on
 *options: on, off
 
-$setglobal c30_rotation_scenario current
+$setglobal c30_rotation_scenario  current
 *options: current,setaside,legumes,agroforestry,sixfoldrotation,agroecology
 
-$setglobal c30_rotation_scenario_speed by2030
+$setglobal c30_rotation_scenario_speed  by2050
 * options: none, by2030, by2020
 
 * Set-switch for countries affected by regional set-aside policy

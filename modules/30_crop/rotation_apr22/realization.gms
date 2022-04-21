@@ -24,11 +24,11 @@
 *' @limitations There are currently no known limitations of this realization.
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/30_crop/endo_apr21/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/30_crop/endo_apr21/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/30_crop/endo_apr21/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/30_crop/endo_apr21/equations.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/30_crop/endo_apr21/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/30_crop/endo_apr21/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/30_crop/endo_apr21/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/30_crop/rotation_apr22/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/30_crop/rotation_apr22/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/30_crop/rotation_apr22/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/30_crop/rotation_apr22/equations.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/30_crop/rotation_apr22/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/30_crop/rotation_apr22/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/30_crop/rotation_apr22/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
