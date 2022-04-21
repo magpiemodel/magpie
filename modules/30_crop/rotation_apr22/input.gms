@@ -69,7 +69,7 @@ m_fillmissingyears(fm_croparea,"j,w,kcr");
 
 table f30_rotation_max_shr(crp30,rotascen30) Maximum allowed area shares for each crop type (1)
 $ondelim
-$include "./modules/30_crop/rotation_apr22/input/f30_rotation_max.csv"
+$include "./modules/30_crop/rotation_apr22/input/f30_rotation_max_scen.csv"
 $offdelim
 ;
 $if "%c30_rotation_constraints%" == "off" f30_rotation_max_shr(crp30) = 1;
@@ -78,7 +78,7 @@ $if "%c30_rotation_constraints%" == "off" f30_rotation_max_shr(crp30) = 1;
 parameter f30_rotation_min_shr(crp30) Minimum allowed area shares for each crop type (1)
 /
 $ondelim
-$include "./modules/30_crop/rotation_apr22/input/f30_rotation_min.csv"
+$include "./modules/30_crop/rotation_apr22/input/f30_rotation_min_scen.csv"
 $offdelim
 /;
 $if "%c30_rotation_constraints%" == "off" f30_rotation_min_shr(crp30) = 0;
