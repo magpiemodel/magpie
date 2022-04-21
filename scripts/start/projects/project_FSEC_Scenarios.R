@@ -20,7 +20,7 @@ input <- c(regional    = "rev4.67FSECmodeling_e2bdb6cd_magpie.tgz",
            cellular    = "rev4.67FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
            validation  = "rev4.67FSECmodeling_e2bdb6cd_validation.tgz",
            additional  = "additional_data_rev4.09.tgz",
-           calibration = "calibration_FSEC_21Mar22.tgz")
+           calibration = "calibration_FSEC_20Apr22.tgz")
 
 # -----------------------------------------------------------------------------------------------------------------
 # General settings:
