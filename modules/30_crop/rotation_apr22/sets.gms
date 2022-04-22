@@ -7,11 +7,11 @@
 
 sets
   rotascen30 rotation constraint scenarios
-  /current,setaside,legumes,agroforestry,sixfoldrotation,agroecology/
+  /min,min_20div,good,good_20div,setaside,legumes,agroforestry,sixfoldrotation,agroecology/
 
   rotamax30 Maximum crop rotation categories
-  / all_max, cereals_max, stalk_max,
-    biomass_max, roots_max, legume_max,
+  / all_max, cereals_excl_rice_max, stalk_max,
+    biomass_max, roots_max, legume_max, rape_sugr_max,
     tece_max, maiz_max, trce_max, rice_max,
     rapeseed_max, soybean_max, sunflower_max, groundnut_max,
     oilpalm_max, puls_max, potato_max, cassava_max,
@@ -45,17 +45,18 @@ sets
        / all_max       . (tece, maiz, trce, rice_pro, soybean, rapeseed, groundnut, sunflower,
          oilpalm, puls_pro, potato, cassav_sp, sugr_cane, sugr_beet, others,
          foddr, cottn_pro, begr, betr)
-         cereals_max   . (tece, maiz, trce)
-         stalk_max     . (tece, maiz, trce, rice_pro, sugr_cane, foddr)
-         biomass_max   . (sugr_cane, oilpalm, begr, betr)
+         cereals_excl_rice_max   . (tece, maiz, trce)
+         stalk_max     . (tece, maiz, trce, rice_pro, sugr_cane, begr, foddr)
          roots_max     . (potato, cassav_sp, sugr_beet)
          legume_max    . (soybean, groundnut, puls_pro, foddr)
+         biomass_max   . (sugr_cane, oilpalm, begr, betr)
+         rape_sugr_max . (rapeseed, sugr_beet)
 
          tece_max      . (tece)
          maiz_max      . (maiz)
          trce_max      . (trce)
          rice_max      . (rice_pro)
-         rapeseed_max  . (rapeseed, sugr_beet)
+         rapeseed_max  . (rapeseed)
          soybean_max   . (soybean)
          sunflower_max . (sunflower)
          groundnut_max . (groundnut)
