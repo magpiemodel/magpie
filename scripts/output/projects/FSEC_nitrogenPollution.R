@@ -16,7 +16,7 @@
 library(gms)
 library(magpie4)
 
-message("Starting FSEC environmental pollutants output runscript")
+message("Starting FSEC nitrogen pollution output runscript")
 
 ############################# BASIC CONFIGURATION #######################################
 if (!exists("source_include")) {
@@ -34,13 +34,17 @@ message("Script started for output directory: ", outputdir)
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 title <- cfg$title
 
-message("Generating environmental pollutants output for the run: ", title)
+message("Generating nitrogen pollution output for the run: ", title)
 gdx <- file.path(outputdir, "fulldata.gdx")
 
 baseDir <- getwd()
-pollutantsOutputDir <- file.path(baseDir, "output", "pollutants")
+pollutantsOutputDir <- file.path(baseDir, "output", "nitrogen")
 if (!dir.exists(pollutantsOutputDir)) {
     dir.create(pollutantsOutputDir)
 }
 
-out <- getReportGridPollutants(gdx = gdx, reportOutputDir = pollutantsOutputDir, magpieOutputDir = outputdir, scenario = title)
+# Grid-level nitrogen pollution
+out <- getReportFSECPollution(gdx = gdx,
+                              reportOutputDir = pollutantsOutputDir,
+                              magpieOutputDir = outputdir,
+                              scenario = title)
