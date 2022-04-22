@@ -152,6 +152,8 @@ livestock_transformation <- function(cfg) {
   cfg$gms$c70_feed_scen <- "ssp1"
   # Animal welfare
   # (cannot be implemented)
+  # CH4 price for livestock
+  cfg$gms$c56_emis_policy <- "sdp_livestock"
 
   return(cfg)
 }
