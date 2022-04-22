@@ -10,3 +10,9 @@ im_wat_avail(t,"surface",j) = f43_wat_avail(t,j);
 im_wat_avail(t,"ground",j) = 0;
 im_wat_avail(t,"ren_ground",j) = 0;
 im_wat_avail(t,"technical",j) = 0;
+
+
+i43_crop_area("y1995",j,w,kcr) = fm_croparea("y1995",j,w,kcr);
+
+*Water requirement for every crop at the time of initialization (mio. m^3 per yr)
+p43_exo_wat_req("y1995",j) = sum((kcr),i43_crop_area("y1995",j,"irrigated",kcr)*pm_wat_req_k("y1995",j,kcr));
