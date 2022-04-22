@@ -38,7 +38,7 @@ for(ssp in c("SSP2")) {
   cfg <- setScenario(cfg,c(ssp,"NPI","rcp7p0"))
   cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-NPi")
   cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-NPi")
-  #start_run(cfg, codeCheck = TRUE)
+  start_run(cfg, codeCheck = TRUE)
   
   #option 0: no change. Version with problems.
   c56_carbon_stock_pricing <- "actual"
@@ -54,7 +54,7 @@ for(ssp in c("SSP2")) {
     cfg$gms$c56_emis_policy <- c56_emis_policy
     cfg$gms$s56_reward_neg_emis <- s56_reward_neg_emis
     cfg$gms$c56_carbon_stock_pricing <- c56_carbon_stock_pricing
-    #start_run(cfg, codeCheck = TRUE)
+    start_run(cfg, codeCheck = TRUE)
   }
   
   #option 00: -Inf. Introduced with PR386. Solves the primary forest issue but result in strong conversion of cropland/pasture to other land.
@@ -88,7 +88,7 @@ for(ssp in c("SSP2")) {
     cfg$gms$c56_emis_policy <- c56_emis_policy
     cfg$gms$s56_reward_neg_emis <- s56_reward_neg_emis
     cfg$gms$c56_carbon_stock_pricing <- c56_carbon_stock_pricing
-    #start_run(cfg, codeCheck = TRUE)
+    start_run(cfg, codeCheck = TRUE)
   }
   
   #option 2: medium change
@@ -105,7 +105,7 @@ for(ssp in c("SSP2")) {
     cfg$gms$c56_emis_policy <- c56_emis_policy
     cfg$gms$s56_reward_neg_emis <- s56_reward_neg_emis
     cfg$gms$c56_carbon_stock_pricing <- c56_carbon_stock_pricing
-    #start_run(cfg, codeCheck = TRUE)
+    start_run(cfg, codeCheck = TRUE)
   }
   
   #option 3: larger change
@@ -122,7 +122,7 @@ for(ssp in c("SSP2")) {
     cfg$gms$c56_emis_policy <- c56_emis_policy
     cfg$gms$s56_reward_neg_emis <- s56_reward_neg_emis
     cfg$gms$c56_carbon_stock_pricing <- c56_carbon_stock_pricing
-    #start_run(cfg, codeCheck = TRUE)
+    start_run(cfg, codeCheck = TRUE)
   }
   
   #option 4: larger change2
@@ -139,6 +139,6 @@ for(ssp in c("SSP2")) {
     cfg$gms$c56_emis_policy <- c56_emis_policy
     cfg$gms$s56_reward_neg_emis <- s56_reward_neg_emis
     cfg$gms$c56_carbon_stock_pricing <- c56_carbon_stock_pricing
-    #start_run(cfg, codeCheck = TRUE)
+    start_run(cfg, codeCheck = TRUE)
   }
 }
