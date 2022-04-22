@@ -45,12 +45,9 @@
  q30_prod(j2,kcr) ..
   vm_prod(j2,kcr) =e= sum(w, vm_area(j2,kcr,w) * vm_yld(j2,kcr,w));
 
-*' Due to the high uncertainty in 2nd generation bioenergy production, irrigated
-*' production of bioenergy is deactivated (see presolve statements of crop
-*' realization).
-
 *' The carbon content of the above ground carbon pools are calculated as a total
 *' for all cropland :
+
  q30_carbon(j2,ag_pools,stockType) ..
  vm_carbon_stock(j2,"crop",ag_pools,stockType) =e= 
    m_carbon_stock(vm_land,fm_carbon_density,"crop");
