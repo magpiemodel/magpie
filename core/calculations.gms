@@ -43,6 +43,7 @@ loop (t,
 	  
       display "Year";
       display ct;
+      display "Previous Year";
       display pt;
 
 $batinclude "./modules/include.gms" presolve

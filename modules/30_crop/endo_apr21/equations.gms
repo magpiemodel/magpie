@@ -51,21 +51,9 @@
 
 *' The carbon content of the above ground carbon pools are calculated as a total
 *' for all cropland :
- q30_carbon1(j2,ag_pools) ..
- vm_carbon_stock(j2,"crop",ag_pools,"actual") =e=
-   vm_land(j2,"crop") * sum(ct, fm_carbon_density(ct,j2,"crop",ag_pools));
-
- q30_carbon2(j2,ag_pools) ..
- vm_carbon_stock(j2,"crop",ag_pools,"actualNoAcEst") =e=
-   vm_land(j2,"crop") * sum(ct, fm_carbon_density(ct,j2,"crop",ag_pools));
-
- q30_carbon3(j2,ag_pools) ..
- vm_carbon_stock(j2,"crop",ag_pools,"previousLandPattern") =e=
-   pcm_land(j2,"crop") * sum(ct, fm_carbon_density(ct,j2,"crop",ag_pools));
-
- q30_carbon4(j2,ag_pools) ..
- vm_carbon_stock(j2,"crop",ag_pools,"previousCarbonDensity") =e=
-   vm_land(j2,"crop") * sum(pt, fm_carbon_density(pt,j2,"crop",ag_pools));
+ q30_carbon(j2,ag_pools,stockType) ..
+ vm_carbon_stock(j2,"crop",ag_pools,stockType) =e= 
+   m_carbon_stock(vm_land,fm_carbon_density,"crop");
 
 *' The biodiversity value for cropland is calculated separately for annual and perennial crops:
  q30_bv_ann(j2,potnatveg) .. vm_bv(j2,"crop_ann",potnatveg)
