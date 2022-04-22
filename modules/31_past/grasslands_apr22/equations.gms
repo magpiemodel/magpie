@@ -40,21 +40,9 @@ q31_cost_prod_past(i2) ..
 
 *' On the basis of the required pasture area, cellular above ground carbon stocks are calculated:
 
-q31_carbon1(j2,ag_pools) ..
- vm_carbon_stock(j2,"past",ag_pools,"actual") =e=
-         sum(ct, vm_land(j2,"past")*fm_carbon_density(ct,j2,"past",ag_pools));
-
-q31_carbon2(j2,ag_pools) ..
- vm_carbon_stock(j2,"past",ag_pools,"actualNoAcEst") =e=
-         sum(ct, vm_land(j2,"past")*fm_carbon_density(ct,j2,"past",ag_pools));
-
-q31_carbon3(j2,ag_pools) ..
- vm_carbon_stock(j2,"past",ag_pools,"previousLandPattern") =e=
-         sum(ct, pcm_land(j2,"past")*fm_carbon_density(ct,j2,"past",ag_pools));
-
-q31_carbon4(j2,ag_pools) ..
- vm_carbon_stock(j2,"past",ag_pools,"previousCarbonDensity") =e=
-         sum(pt, vm_land(j2,"past")*fm_carbon_density(pt,j2,"past",ag_pools));
+q31_carbon(j2,ag_pools,stockType) ..
+ vm_carbon_stock(j2,"past",ag_pools,stockType) =e= 
+   m_carbon_stock(vm_land,fm_carbon_density,"past");
 
 *' By estimating the different area of managed pasture and rangeland via the luh2 side layers, the biodiversity value for pastures and rangeland is calculated in following:
   q31_bv_manpast(j2,potnatveg) .. vm_bv(j2,"manpast",potnatveg)

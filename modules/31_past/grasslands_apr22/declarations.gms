@@ -7,10 +7,7 @@
 
 
 equations
-q31_carbon1(j,ag_pools)  Above ground carbon content calculation for pasture (mio tC)
-q31_carbon2(j,ag_pools)  Above ground carbon content calculation for pasture (mio tC)
-q31_carbon3(j,ag_pools)  Above ground carbon content calculation for pasture (mio tC)
-q31_carbon4(j,ag_pools)  Above ground carbon content calculation for pasture (mio tC)
+q31_carbon(j,ag_pools,stockType)  						Above ground carbon content calculation for pasture (mio tC)
 q31_cost_prod_past(i)                                   Costs for putting animals on grasslands and expanding grassland areas (mio. USD05MER per yr)
 q31_bv_manpast(j,potnatveg)                             Biodiversity value for managed pastures (Mha)
 q31_bv_rangeland(j,potnatveg)                           Biodiversity value for rangeland (Mha)
