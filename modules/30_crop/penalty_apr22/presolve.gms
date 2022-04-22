@@ -33,5 +33,3 @@ p30_avl_cropland(t,j) = f30_avl_cropland(j,"%c30_marginal_land%") *
 * only activate constraints which are binding
 rotamax_red30(rotamax30) = yes$(i30_rotation_max_shr(t,rotamax30) < 1);
 rotamin_red30(rotamin30) = yes$(i30_rotation_min_shr(t,rotamin30) > 0);
-
-vm_rotation_penalty.fx(i)=0;

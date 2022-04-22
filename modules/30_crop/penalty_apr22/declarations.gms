@@ -17,11 +17,15 @@ parameters
 positive variables
  vm_area(j,kcr,w)                Agricultural production area (mio. ha)
  vm_rotation_penalty(i)                  Penalty for violating rotational constraints (USD05MER)
+ v30_penalty_max_irrig(j,rotamax30) Penalty for violating max rotational constraints (USD05MER)
+ v30_penalty_min(j,rotamin30) Penalty for violating min rotational constraints (USD05MER)
+ v30_penalty_max(j,rotamax30) Penalty for violating rotational constraints on irrigated areas (USD05MER)
 ;
 
 equations
  q30_cropland(j)                 Total cropland calculation (mio. ha)
  q30_avl_cropland(j)             Available cropland constraint (mio. ha)
+ q30_rotation_penalty(i)        Total penalty for rotational constraint violations (USD05MER)
  q30_rotation_max(j,rotamax30)     Local maximum rotational constraints (mio. ha)
  q30_rotation_min(j,rotamin30)     Local minimum rotational constraints (mio. ha)
  q30_rotation_max_irrig(j,rotamax30)     Local maximum rotational constraints (mio. ha)

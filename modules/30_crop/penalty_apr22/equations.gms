@@ -22,18 +22,34 @@
  q30_avl_cropland(j2)  ..
    vm_land(j2,"crop") =l= sum(ct, p30_avl_cropland(ct,j2));
 
+*' Rotational constraints prevent overoptimization. In this module realization,
+*' they are implemented via a penalty paymnet if the constraints are violated.
+
+q30_rotation_penalty(i2) ..
+  vm_rotation_penalty(i2)
+  =g=
+  sum(cell(i2,j2),
+    sum(rotamax_red30, v30_penalty_max(j2,rotamax_red30) * 100
+      +v30_penalty_max(j2,rotamax_red30) * 100)
+    + sum(rotamin_red30, v30_penalty_min(j2,rotamin_red30) * 100)
+  );
+
 *' As additional constraints minimum and maximum rotational constraints limit
 *' the placing of crops. On the one hand, these rotational constraints reflect
 *' crop rotations limiting the share a specific crop can cover of the total area
 *' of a cluster:
 
  q30_rotation_max(j2,rotamax_red30) ..
-   sum((rotamax_kcr30(rotamax_red30,kcr),w), vm_area(j2,kcr,w)) =l=
-     vm_land(j2,"crop") * sum(ct,i30_rotation_max_shr(ct,rotamax_red30));
+   v30_penalty_max(j2,rotamax_red30)
+   =g=
+   sum((rotamax_kcr30(rotamax_red30,kcr),w), vm_area(j2,kcr,w)) -
+   vm_land(j2,"crop") * sum(ct,i30_rotation_max_shr(ct,rotamax_red30));
 
 
  q30_rotation_min(j2,rotamin_red30) ..
-    sum((rotamin_kcr30(rotamin_red30,kcr),w), vm_area(j2,kcr,w)) =g=
+    v30_penalty_min(j2,rotamin_red30)
+    =g=
+    sum((rotamin_kcr30(rotamin_red30,kcr),w), vm_area(j2,kcr,w)) -
     vm_land(j2,"crop") * sum(ct,i30_rotation_min_shr(ct,rotamin_red30));
 
 * we also include the max constraint irrigated systems so that they cannot
@@ -41,8 +57,10 @@
 * happen on rainfed areas.
 
  q30_rotation_max_irrig(j2,rotamax_red30) ..
-   sum((rotamax_kcr30(rotamax_red30,kcr)), vm_area(j2,kcr,"irrigated")) =l=
-      vm_AEI(j2) * sum(ct,i30_rotation_max_shr(ct,rotamax_red30));
+   v30_penalty_max_irrig(j2,rotamax_red30)
+   =g=
+   sum((rotamax_kcr30(rotamax_red30,kcr)), vm_area(j2,kcr,"irrigated")) -
+   vm_AEI(j2) * sum(ct,i30_rotation_max_shr(ct,rotamax_red30));
 
 
 *' Agricultural production is calculated by multiplying the area under
