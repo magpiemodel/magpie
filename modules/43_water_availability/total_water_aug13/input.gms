@@ -6,10 +6,10 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-s43_shock_year                     Year in which policy shock can be implemented (1) / 1995 /
+s43_shock_year                     Year in which policy shock can be implemented (1)  / 1995 /
 ;
 
-$setglobal c43_watavail_scenario  cc
+$setglobal c43_watavail_scenario  exo
 *   options:   cc       (climate change)
 *             nocc      (no climate change)
 *             nocc_hist (no climate change after year defined by sm_fix_cc)

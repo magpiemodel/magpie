@@ -36,6 +36,7 @@ s42_env_flow_base_fraction         Fraction of available water that is reserved 
 *                                                                    (determined in the file
 *                                                                   EFR_protection_policy.csv)
 s42_env_flow_fraction              Fraction of available water that is reserved for under protection policies (1) / 0.2 /
+s42_multiplier                      Multiplier value for pumping cost scenarios (1) / 1 /
 ;
 
 $setglobal c42_watdem_scenario  cc
@@ -117,10 +118,11 @@ $offdelim
 ;
 
 *Costs of pumping are taken from Cornish et.al. 2014 which are average global costs in USD
-parameter f42_pumping_cost(t_all,i) Cost of pumping irrigation water (1)
+parameter
+f42_pumping_cost(t_all,i) Cost of pumping irrigation water (1)
 /
 $ondelim
-$include "./modules/42_water_demand/input/f42_pumping_costs.cs4"
+$include "./modules/42_water_demand/input/f42_pumping_cost.cs4"
 $offdelim
 /
 ;

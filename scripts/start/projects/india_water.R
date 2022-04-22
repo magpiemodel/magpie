@@ -14,22 +14,49 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-##Runs with new india input data and 3 scenarios for factor costs
+##Runs with physical water restrictions
+
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # short description of the actual run
-cfg$title <- "0804_testruns"
+cfg$title <- "2204_lesswater"
 
-#New input data as of 8th October used
-cfg$input <- c(cellular = "rev4.67_0704_indiaYields_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-         regional = "rev4.67_0704_indiaYields_h12_magpie.tgz",
-         validation = "rev4.67_0704_indiaYields_h12_validation.tgz",
-         calibration = "calibration_H12_mixed_feb17_18Jan22.tgz",
-         additional = "additional_data_rev4.08.tgz")
+#recalibrate yields
+cfg$recalibrate <- TRUE     # def = "ifneeded"
+
+#Water demand scenario in module 43 will be set to exogenous to apply new settings
+cfg$gms$c43_watavail_scenario <- "exo"
+
+#Setting shock year from which physical restrictions in water will be used
+s43_shock_year <- 2020
+
+
+cfg$input <- c(cellular = "rev4.67_2204_indiaYields_05_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+        regional = "rev4.67_2204_indiaYields_05_h12_magpie.tgz",
+        validation = "rev4.67_2204_indiaYields_05_h12_validation.tgz",
+        calibration = "calibration_H12_mixed_feb17_18Jan22.tgz",
+        additional = "additional_data_rev4.08.tgz")
 
 cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL),
-                                    getOption("magpie_repos"))
+                                           getOption("magpie_repos"))
+
+
+cfg$force_download <- TRUE
+
+start_run(cfg, codeCheck=FALSE)
+
+
+
+
+
+##Runs with new india input data and 3 scenarios for factor costs
+#source("scripts/start_functions.R")
+#
+# short description of the actual run
+#cfg$title <- "2004_yieldgap50_cost1cent"
+
+#New input data as of 8th October used
 
 # Should input data be downloaded from source even if cfg$input did not change?
 #  cfg$force_download <- TRUE
@@ -43,7 +70,7 @@ cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=
 #  cfg$gms$s38_factor <- i
 #  cfg$title <- paste0("0603","_","factor","_",i,"_","indiaYields01")
 #  cfg$results_folder = "output/:title:"
-  start_run(cfg)
+  #start_run(cfg, codeCheck=FALSE)
 #}
 
 ####Test run with new input data 30% yield setting

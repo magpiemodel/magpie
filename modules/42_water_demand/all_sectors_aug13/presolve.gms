@@ -67,4 +67,4 @@ else
 );
 
 *Pumping cost in the current time step
-ic42_pumping_cost(i) = f42_pumping_cost(t,i);
+ic42_pumping_cost(i) = f42_pumping_cost(t,i)*s42_multiplier;
