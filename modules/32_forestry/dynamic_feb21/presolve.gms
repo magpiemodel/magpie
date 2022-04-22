@@ -24,6 +24,8 @@ v32_land_reduction.fx(j,type32,ac_est) = 0;
    p32_aff_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop")) + (vm_land.l(j,"past") - vm_land.lo(j,"past"));
 * Limit prescribed NPI/NDC afforestation in `p32_aff_pol_timestep` if not enough suitable area (`p32_aff_pot`) for afforestation is available
    p32_aff_pol_timestep(t,j)$(p32_aff_pol_timestep(t,j) > p32_aff_pot(t,j)) = p32_aff_pot(t,j);
+* suitable area `p32_aff_pot` can be negative, if pasture restoration is switched on (level smaller than lower bound), therefore set negative values to 0
+   p32_aff_pol_timestep(t,j)$(p32_aff_pol_timestep(t,j) < 0) = 0;
 ** END ndc **
 
 if(m_year(t) <= sm_fix_SSP2,
