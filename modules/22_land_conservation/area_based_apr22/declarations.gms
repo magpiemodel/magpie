@@ -10,10 +10,12 @@ scalars
 ;
 
 parameters
- pm_land_conservation(t,j,land,consv_type)				  Land conservation for all land types (mio. ha)
+ p22_conservation_area(t,j,land)                          Total land conservation area for all land types (mio. ha)
+ pm_land_conservation(t,j,land,consv_type)				  Land protection and restoration for all land types (mio. ha)
  p22_conservation_fader(t_all)			                  Land conservation fader (1)
  p22_consv_shr_ini(j,consv22_all)   		              Land conservation share for primforest, secdforest and other land (1)
  p22_consv_shr(t,j,consv22_all,land_natveg)               Land conservation share for primforest, secdforest and other land (1)
+ p22_other_restore_pot(t,j)                               Potential other land restoration area (mio. ha)
  p22_country_weight(i)	                  		          Land conservation country weight per region (1)
  p22_country_dummy(iso)		                              Dummy parameter indicating whether country is affected by selected land conservation policy (1)
  i22_land_iso(iso)								                Total land area at ISO level (mio. ha)
