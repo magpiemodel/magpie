@@ -29,7 +29,7 @@
 
  q35_carbon_other(j2,ag_pools,stockType) .. 
  		vm_carbon_stock(j2,"other",ag_pools,stockType) =e=
-			m_carbon_stock_ac(v35_secdforest,pm_carbon_density_ac,"ac","ac_sub");
+			m_carbon_stock_ac(v35_other,pm_carbon_density_ac,"ac","ac_sub");
 
 *' The biodiversity value (BV) of primary forest, secondary forest and other land is computed by multiplying their respective land area with bii coefficients, which depend on the age class and whether the potential natural vegetation forest or non-forest (luh2 side layers).
 
