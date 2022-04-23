@@ -57,6 +57,3 @@ im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")
              fm_attributes("nr","foddr")) / fm_attributes("nr","scp");
 im_feed_baskets(t_all,i,kap,"foddr") =
                im_feed_baskets(t_all,i,kap,"foddr") * i70_foddr_scp_fadeout(t_all,i);
-               
-pm_past_mngmnt_factor(t,i) = 1;
-               
