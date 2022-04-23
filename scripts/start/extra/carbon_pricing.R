@@ -24,7 +24,7 @@ source("config/default.cfg")
 #download_and_update(cfg)
 
 # create additional information to describe the runs
-cfg$info$flag <- "PR_CO2_after2" 
+cfg$info$flag <- "PR_CO2_after3" 
 
 cfg$output <- c("rds_report") # Only run rds_report after model run
 cfg$results_folder <- "output/:title:"
@@ -46,105 +46,105 @@ for(ssp in c("SSP2")) {
   cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-PkBudg900")
   start_run(cfg, codeCheck = TRUE)
   
-  #option 0: no change. Version with problems.
-  c56_carbon_stock_pricing <- "actual"
-  c56_emis_policy <- "redd+natveg_nosoil"
-  s56_reward_neg_emis <- 0
-  for(t in c("coup2100","quicktest2")) {
-    #  cfg$title <- .title(paste(ssp,"Pk900",t,c56_emis_policy,"RewNeg",s56_reward_neg_emis,substr(c56_carbon_stock_pricing,1,8),sep="-"))
-    cfg$title <- .title(paste(ssp,"Pk900","Option0",t,sep="-"))
-    cfg$gms$c_timesteps <- t
-    cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
-    cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-PkBudg900")
-    cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-PkBudg900")
-    cfg$gms$c56_emis_policy <- c56_emis_policy
-    cfg$gms$s56_reward_neg_emis <- s56_reward_neg_emis
-    cfg$gms$c56_carbon_stock_pricing <- c56_carbon_stock_pricing
-    start_run(cfg, codeCheck = TRUE)
-  }
-  
-  #option 00: -Inf. Introduced with PR386. Solves the primary forest issue but result in strong conversion of cropland/pasture to other land.
-  c56_carbon_stock_pricing <- "actual"
-  c56_emis_policy <- "redd+natveg_nosoil"
-  s56_reward_neg_emis <- -Inf
-  for(t in c("coup2100","quicktest2")) {
-    #  cfg$title <- .title(paste(ssp,"Pk900",t,c56_emis_policy,"RewNeg",s56_reward_neg_emis,substr(c56_carbon_stock_pricing,1,8),sep="-"))
-    cfg$title <- .title(paste(ssp,"Pk900","Option00",t,sep="-"))
-    cfg$gms$c_timesteps <- t
-    cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
-    cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-PkBudg900")
-    cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-PkBudg900")
-    cfg$gms$c56_emis_policy <- c56_emis_policy
-    cfg$gms$s56_reward_neg_emis <- s56_reward_neg_emis
-    cfg$gms$c56_carbon_stock_pricing <- c56_carbon_stock_pricing
-    start_run(cfg, codeCheck = TRUE)
-  }
-  
-  #option 1: minimal change
-  c56_carbon_stock_pricing <- "previousCarbonDensity"
-  c56_emis_policy <- "redd+natveg_nosoil"
-  s56_reward_neg_emis <- 0
-  for(t in c("coup2100","quicktest2")) {
-    #  cfg$title <- .title(paste(ssp,"Pk900",t,c56_emis_policy,"RewNeg",s56_reward_neg_emis,substr(c56_carbon_stock_pricing,1,8),sep="-"))
-    cfg$title <- .title(paste(ssp,"Pk900","Option1",t,sep="-"))
-    cfg$gms$c_timesteps <- t
-    cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
-    cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-PkBudg900")
-    cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-PkBudg900")
-    cfg$gms$c56_emis_policy <- c56_emis_policy
-    cfg$gms$s56_reward_neg_emis <- s56_reward_neg_emis
-    cfg$gms$c56_carbon_stock_pricing <- c56_carbon_stock_pricing
-    start_run(cfg, codeCheck = TRUE)
-  }
-  
-  #option 2: medium change
-  c56_carbon_stock_pricing <- "actualNoAcEst"
-  c56_emis_policy <- "redd+natveg_nosoil"
-  s56_reward_neg_emis <- -Inf
-  for(t in c("coup2100","quicktest2")) {
-    #  cfg$title <- .title(paste(ssp,"Pk900",t,c56_emis_policy,"RewNeg",s56_reward_neg_emis,substr(c56_carbon_stock_pricing,1,8),sep="-"))
-    cfg$title <- .title(paste(ssp,"Pk900","Option2",t,sep="-"))
-    cfg$gms$c_timesteps <- t
-    cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
-    cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-PkBudg900")
-    cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-PkBudg900")
-    cfg$gms$c56_emis_policy <- c56_emis_policy
-    cfg$gms$s56_reward_neg_emis <- s56_reward_neg_emis
-    cfg$gms$c56_carbon_stock_pricing <- c56_carbon_stock_pricing
-    start_run(cfg, codeCheck = TRUE)
-  }
-  
-  #option 3: larger change
-  c56_carbon_stock_pricing <- "actualNoAcEst"
-  c56_emis_policy <- "all_nosoil"
-  s56_reward_neg_emis <- -Inf
-  for(t in c("coup2100","quicktest2")) {
-    #  cfg$title <- .title(paste(ssp,"Pk900",t,c56_emis_policy,"RewNeg",s56_reward_neg_emis,substr(c56_carbon_stock_pricing,1,8),sep="-"))
-    cfg$title <- .title(paste(ssp,"Pk900","Option3",t,sep="-"))
-    cfg$gms$c_timesteps <- t
-    cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
-    cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-PkBudg900")
-    cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-PkBudg900")
-    cfg$gms$c56_emis_policy <- c56_emis_policy
-    cfg$gms$s56_reward_neg_emis <- s56_reward_neg_emis
-    cfg$gms$c56_carbon_stock_pricing <- c56_carbon_stock_pricing
-    start_run(cfg, codeCheck = TRUE)
-  }
-  
-  #option 4: larger change2
-  c56_carbon_stock_pricing <- "actualNoAcEst"
-  c56_emis_policy <- "all_vegc"
-  s56_reward_neg_emis <- -Inf
-  for(t in c("coup2100","quicktest2")) {
-    #  cfg$title <- .title(paste(ssp,"Pk900",t,c56_emis_policy,"RewNeg",s56_reward_neg_emis,substr(c56_carbon_stock_pricing,1,8),sep="-"))
-    cfg$title <- .title(paste(ssp,"Pk900","Option4",t,sep="-"))
-    cfg$gms$c_timesteps <- t
-    cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
-    cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-PkBudg900")
-    cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-PkBudg900")
-    cfg$gms$c56_emis_policy <- c56_emis_policy
-    cfg$gms$s56_reward_neg_emis <- s56_reward_neg_emis
-    cfg$gms$c56_carbon_stock_pricing <- c56_carbon_stock_pricing
-    start_run(cfg, codeCheck = TRUE)
-  }
+  # #option 0: no change. Version with problems.
+  # c56_carbon_stock_pricing <- "actual"
+  # c56_emis_policy <- "redd+natveg_nosoil"
+  # s56_reward_neg_emis <- 0
+  # for(t in c("coup2100","quicktest2")) {
+  #   #  cfg$title <- .title(paste(ssp,"Pk900",t,c56_emis_policy,"RewNeg",s56_reward_neg_emis,substr(c56_carbon_stock_pricing,1,8),sep="-"))
+  #   cfg$title <- .title(paste(ssp,"Pk900","Option0",t,sep="-"))
+  #   cfg$gms$c_timesteps <- t
+  #   cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
+  #   cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-PkBudg900")
+  #   cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-PkBudg900")
+  #   cfg$gms$c56_emis_policy <- c56_emis_policy
+  #   cfg$gms$s56_reward_neg_emis <- s56_reward_neg_emis
+  #   cfg$gms$c56_carbon_stock_pricing <- c56_carbon_stock_pricing
+  #   start_run(cfg, codeCheck = TRUE)
+  # }
+  # 
+  # #option 00: -Inf. Introduced with PR386. Solves the primary forest issue but result in strong conversion of cropland/pasture to other land.
+  # c56_carbon_stock_pricing <- "actual"
+  # c56_emis_policy <- "redd+natveg_nosoil"
+  # s56_reward_neg_emis <- -Inf
+  # for(t in c("coup2100","quicktest2")) {
+  #   #  cfg$title <- .title(paste(ssp,"Pk900",t,c56_emis_policy,"RewNeg",s56_reward_neg_emis,substr(c56_carbon_stock_pricing,1,8),sep="-"))
+  #   cfg$title <- .title(paste(ssp,"Pk900","Option00",t,sep="-"))
+  #   cfg$gms$c_timesteps <- t
+  #   cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
+  #   cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-PkBudg900")
+  #   cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-PkBudg900")
+  #   cfg$gms$c56_emis_policy <- c56_emis_policy
+  #   cfg$gms$s56_reward_neg_emis <- s56_reward_neg_emis
+  #   cfg$gms$c56_carbon_stock_pricing <- c56_carbon_stock_pricing
+  #   start_run(cfg, codeCheck = TRUE)
+  # }
+  # 
+  # #option 1: minimal change
+  # c56_carbon_stock_pricing <- "previousCarbonDensity"
+  # c56_emis_policy <- "redd+natveg_nosoil"
+  # s56_reward_neg_emis <- 0
+  # for(t in c("coup2100","quicktest2")) {
+  #   #  cfg$title <- .title(paste(ssp,"Pk900",t,c56_emis_policy,"RewNeg",s56_reward_neg_emis,substr(c56_carbon_stock_pricing,1,8),sep="-"))
+  #   cfg$title <- .title(paste(ssp,"Pk900","Option1",t,sep="-"))
+  #   cfg$gms$c_timesteps <- t
+  #   cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
+  #   cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-PkBudg900")
+  #   cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-PkBudg900")
+  #   cfg$gms$c56_emis_policy <- c56_emis_policy
+  #   cfg$gms$s56_reward_neg_emis <- s56_reward_neg_emis
+  #   cfg$gms$c56_carbon_stock_pricing <- c56_carbon_stock_pricing
+  #   start_run(cfg, codeCheck = TRUE)
+  # }
+  # 
+  # #option 2: medium change
+  # c56_carbon_stock_pricing <- "actualNoAcEst"
+  # c56_emis_policy <- "redd+natveg_nosoil"
+  # s56_reward_neg_emis <- -Inf
+  # for(t in c("coup2100","quicktest2")) {
+  #   #  cfg$title <- .title(paste(ssp,"Pk900",t,c56_emis_policy,"RewNeg",s56_reward_neg_emis,substr(c56_carbon_stock_pricing,1,8),sep="-"))
+  #   cfg$title <- .title(paste(ssp,"Pk900","Option2",t,sep="-"))
+  #   cfg$gms$c_timesteps <- t
+  #   cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
+  #   cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-PkBudg900")
+  #   cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-PkBudg900")
+  #   cfg$gms$c56_emis_policy <- c56_emis_policy
+  #   cfg$gms$s56_reward_neg_emis <- s56_reward_neg_emis
+  #   cfg$gms$c56_carbon_stock_pricing <- c56_carbon_stock_pricing
+  #   start_run(cfg, codeCheck = TRUE)
+  # }
+  # 
+  # #option 3: larger change
+  # c56_carbon_stock_pricing <- "actualNoAcEst"
+  # c56_emis_policy <- "all_nosoil"
+  # s56_reward_neg_emis <- -Inf
+  # for(t in c("coup2100","quicktest2")) {
+  #   #  cfg$title <- .title(paste(ssp,"Pk900",t,c56_emis_policy,"RewNeg",s56_reward_neg_emis,substr(c56_carbon_stock_pricing,1,8),sep="-"))
+  #   cfg$title <- .title(paste(ssp,"Pk900","Option3",t,sep="-"))
+  #   cfg$gms$c_timesteps <- t
+  #   cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
+  #   cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-PkBudg900")
+  #   cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-PkBudg900")
+  #   cfg$gms$c56_emis_policy <- c56_emis_policy
+  #   cfg$gms$s56_reward_neg_emis <- s56_reward_neg_emis
+  #   cfg$gms$c56_carbon_stock_pricing <- c56_carbon_stock_pricing
+  #   start_run(cfg, codeCheck = TRUE)
+  # }
+  # 
+  # #option 4: larger change2
+  # c56_carbon_stock_pricing <- "actualNoAcEst"
+  # c56_emis_policy <- "all_vegc"
+  # s56_reward_neg_emis <- -Inf
+  # for(t in c("coup2100","quicktest2")) {
+  #   #  cfg$title <- .title(paste(ssp,"Pk900",t,c56_emis_policy,"RewNeg",s56_reward_neg_emis,substr(c56_carbon_stock_pricing,1,8),sep="-"))
+  #   cfg$title <- .title(paste(ssp,"Pk900","Option4",t,sep="-"))
+  #   cfg$gms$c_timesteps <- t
+  #   cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
+  #   cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-PkBudg900")
+  #   cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-PkBudg900")
+  #   cfg$gms$c56_emis_policy <- c56_emis_policy
+  #   cfg$gms$s56_reward_neg_emis <- s56_reward_neg_emis
+  #   cfg$gms$c56_carbon_stock_pricing <- c56_carbon_stock_pricing
+  #   start_run(cfg, codeCheck = TRUE)
+  # }
 }
