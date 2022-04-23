@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     f31_grass_bio_hist.cs3 -> Historical grass biomass demand
  - **modules** New dimension in `vm_carbon_stock` for different carbon stock types (actual, previousLandPattern, previousCarbonDensity)
  - **config** added option for CO2 emission pricing `cfg$gms$c56_carbon_stock_pricing`
+ - **config** added cfg$gms$s70_past_mngmnt_factor_fix
 
 ### removed
 
