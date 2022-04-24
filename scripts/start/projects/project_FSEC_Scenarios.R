@@ -40,7 +40,9 @@ general_settings <- function(title) {
   # Nitrogen module with IPCC emissions factors rescaled with efficiency
   cfg$gms$nitrogen                <- "rescaled_jan21"
   # emission policy not including any GHG sources
-  cfg$gms$c56_emis_policy         <-	"none"
+  cfg$gms$c56_emis_policy         <- "none"
+  # ghg price setting (only relevant when activated by c56_emis_policy)
+  cfg$gms$c56_pollutant_prices    <- "R21M42-SDP-PkBudg1000"
   # no peatland GHG emission pricing
   cfg$gms$s56_peatland_policy     <- "0"
   # residue on field burning is set to "constant"
