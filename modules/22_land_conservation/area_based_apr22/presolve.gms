@@ -45,6 +45,7 @@ $endif
 );
 
 ** Protect remaining land
+
 * Note: protected area reported in the WDPA baseline data can be higher
 * than what is reported in the LUH2v2 data.
 pm_land_conservation(t,j,land,"protect") = p22_conservation_area(t,j,land);
@@ -69,7 +70,7 @@ pm_land_conservation(t,j,"other","restore") =
 			  p22_conservation_area(t,j,"other")$(p22_conservation_area(t,j,"other") > pcm_land(j,"other"))
 			- pcm_land(j,"other")$(p22_conservation_area(t,j,"other") > pcm_land(j,"other"));
 * Primary and secondary forest cannot be converted to other land. Therefore
-* other land restoration is contrained by the the remaining agricultural land:
+* other land restoration is contrained by the remaining agricultural land:
 p22_other_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop")) + (vm_land.l(j,"past") - p22_conservation_area(t,j,"past"));
 p22_other_restore_pot(t,j)$(p22_other_restore_pot(t,j) < 0) = 0;
 * other land restoration is limited by other land restoration potential

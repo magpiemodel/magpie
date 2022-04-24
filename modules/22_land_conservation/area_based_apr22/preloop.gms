@@ -56,6 +56,7 @@ p22_consv_shr(t,j,"BH",land_natveg) = p22_consv_shr_ini(j,"BH")*p22_conservation
 
 *** Intact forest landscapes (IFL)
 p22_consv_shr(t,j,"IFL",land_natveg) = p22_consv_shr_ini(j,"IFL")*p22_conservation_fader(t);
+p22_consv_shr(t,j,"IFL","primforest") = 1 * p22_conservation_fader(t);
 
 *** Centers of plant diversity (CPD)
 p22_consv_shr(t,j,"CPD",land_natveg) = p22_consv_shr_ini(j,"CPD")*p22_conservation_fader(t);
