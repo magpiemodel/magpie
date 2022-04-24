@@ -78,7 +78,6 @@ p22_consv_shr(t,j,"BH_IFL","other") = p22_consv_shr_ini(j,"BH")*p22_conservation
 p22_consv_shr(t,j,"HalfEarth",land_natveg) = p22_consv_shr_ini(j,"HalfEarth")*p22_conservation_fader(t);
 
 * Remove implausible values
-p22_consv_shr(t,j,consv22_all,land_natveg)$(p22_consv_shr(t,j,consv22_all,land_natveg) > 1) = 1;
 p22_consv_shr(t,j,consv22_all,land_natveg)$(p22_consv_shr(t,j,consv22_all,land_natveg) < 0) = 0;
 
 * -----------------------------------------
