@@ -16,7 +16,6 @@
 *' the fraction `im_maccs_mitigation` that can be abated by technicial mitigation measures (see  module [57_maccs]). 
 *' The regional emisssions before technical mitigation are calculated in the respective modules 
 *' ([51_nitrogen], [53_methane]) and delivered to this module through the interface variable `vm_btm_reg`.
-*' Cellular CO2 emissions are calculated based on changes in carbons stocks `vm_carbon_stock`.
 
  q56_technical_mitigation_reg(i2,pollutants,emis_source) ..
 	vm_emissions_reg(i2,emis_source,pollutants) =e=
@@ -29,10 +28,14 @@
                 sum(cell(i2,j2), v56_btm_cell(j2,emis_source,pollutants)
                   * (1 - sum(ct, im_maccs_mitigation(ct,i2,emis_source,pollutants))));
 
+*' Actual cellular CO2 emissions are calculated based on changes in carbon stocks between timesteps in the interface `vm_carbon_stock`.
+
  q56_co2c_emis(j2,emis_co2) ..
 	v56_btm_cell(j2,emis_co2,"co2_c") =e=
                  sum(emis_land(emis_co2,land,c_pools),
                  (vm_carbon_stock.l(j2,land,c_pools,"actual") - vm_carbon_stock(j2,land,c_pools,"actual"))/m_timestep_length);
+
+*' Cellular CO2 emission subject to emission pricing are calculated based on changes in carbon stocks between timesteps in the interface `vm_carbon_stock`, depending on `c56_carbon_stock_pricing`.
 
  q56_co2c_emis_pricing(j2,emis_co2) ..
 	v56_btm_cell_pricing(j2,emis_co2,"co2_c") =e=
@@ -45,12 +48,10 @@
                   v56_btm_cell_pricing(j2,emis_source,pollutants)
                   * (1 - sum(ct, im_maccs_mitigation(ct,i2,emis_source,pollutants))));
 
-
-
 *** Emission costs
 
-*' **Emission costs** are calculated by multiplying regional and cellular emissions by the emission price `im_pollutant_prices`
-*' taking into account the price policy that was defined above in `f56_emis_policy`.
+*' **Emission costs** are calculated by multiplying regional and cellular emissions with the emission price `im_pollutant_prices`, 
+*' taking into account the price policy that was defined above in `c56_emis_policy`.
 
  q56_emission_costs_reg_yearly(i2,emis_reg_yr56) ..
                  v56_emission_costs_reg_yearly(i2,emis_reg_yr56) =e=
@@ -72,10 +73,10 @@
 *' where the forest has been cut down the cropland can be continuously cultivated without further deforestation emissions) versus
 *' emissions that occur continously (such as fertilization emissions, that will re-occur every year for continuously management).
 *' We therefore distinguish one-off and yearly emissions, and discount one-off emissions assuming an infinite time-horizon to
-*' level them with yearly emissions. Since one-off emissions are delivered by the [52_carbon] module as annual emissions they are
-*' multiplied here by the timestep length `m_timestep_length` to obtain emissions for the entire timestep and are then
-*' transformed back into annual costs by multiplying by the emission price and a discount factor `p56_ghg_price_growth_rate`
-*' that is equal to the growth rate of the emissions price.
+*' level them with yearly emissions. Since one-off emissions in `vm_emissions_reg` and `v56_emis_cell_pricing` are expressed as annual emissions 
+*' they are converted back into emissions of the entire timestep by multiplication with `m_timestep_length`, and are then
+*' transformed into annual costs by multiplication with the emission price (`im_pollutant_prices`) 
+*' and an annuity (annuity due with infinite time horizon) factor that depends on `pm_interest`.
 
  q56_emission_costs_reg_oneoff(i2,emis_reg_one56) ..
                  v56_emission_costs_reg_oneoff(i2,emis_reg_one56) =g=
@@ -99,7 +100,8 @@
                          * pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
                  );
 
-*' **Total regional emission costs** consist of costs from yearly and one-off emissions occuring in this region and its cells.
+*' **Total regional emission costs** consist of costs from yearly and one-off emissions.
+
  q56_emission_costs(i2) ..
                  vm_emission_costs(i2) =e=
                  sum(emis_reg_yr56, v56_emission_costs_reg_yearly(i2,emis_reg_yr56))
@@ -110,9 +112,9 @@
 
 *' The value of CDR from C-price induced afforestation enters the objective function as negative costs.
 *' The reward, which serves as incentive for afforestation, is calculated in 3 steps:
-*' First, the sum of the expected CDR for each 5-year age-class and the carbon equivalent of local biophysical effects
-*' are multiplied by the corresponding future C price.
-*' Second, these future cash flows are discounted to present value.
+*' First, the sum of the expected CDR for each 5-year age-class and the carbon equivalent of local biophysical effects (`vm_cdr_aff`) 
+*' are multiplied by the corresponding future C price (`p56_c_price_aff`).
+*' Second, these future cash flows are discounted to present value, depending on `pm_interest`.
 *' Third, an annuity factor (annuity due with infinite time horizon) is used to obtain average annual rewards
 
  q56_reward_cdr_aff_reg(i2) ..
@@ -130,7 +132,7 @@
                  *sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
 
 
-*' Peatland emission costs depending on s56_peatland_policy
+*' Peatland emission costs depend on `s56_peatland_policy`
 
  q56_peatland_emis_cost_reg(i2) ..
                  vm_peatland_emis_cost(i2) =e=

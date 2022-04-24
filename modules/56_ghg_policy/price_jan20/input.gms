@@ -76,7 +76,7 @@ $if "%c56_pollutant_prices%" == "emulator" $include "./modules/56_ghg_policy/inp
 $if "%c56_pollutant_prices%" == "emulator" $offdelim
 $if "%c56_pollutant_prices%" == "emulator" ;
 
-*' `f56_emis_policy` contains scenarios determining for each gas and source whether it is priced or not.
+* f56_emis_policy contains scenarios determining for each gas and source whether it is priced or not
 
 table f56_emis_policy(scen56,pollutants_all,emis_source) GHG emission policy scenarios (1)
 $ondelim
