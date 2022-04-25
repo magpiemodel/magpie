@@ -49,6 +49,8 @@ general_settings <- function(title) {
   cfg$gms$c18_burn_scen           <- "constant"
   # C price driven afforestation is off by default
   cfg$gms$s56_c_price_induced_aff <- "0"
+  # Soil organic carbon dynamics deactivated
+  cfg$gms$som <- "cellpool_aug16" 
 
   return(cfg)
 }
