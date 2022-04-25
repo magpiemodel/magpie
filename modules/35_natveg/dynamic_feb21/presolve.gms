@@ -96,7 +96,8 @@ pcm_land(j,"other") = sum(ac, pc35_other(j,ac));
 if (sum(sameas(t_past,t),1) = 1,
 vm_land.lo(j,"primforest") = pm_land_conservation(t,j,"primforest","protect");
 else
-vm_land.lo(j,"primforest") = max((1-s35_natveg_harvest_shr) * pcm_land(j,"primforest"), pm_land_conservation(t,j,"primforest","protect"));
+vm_land.lo(j,"primforest") = (1-s35_natveg_harvest_shr) * pcm_land(j,"primforest");
+vm_land.lo(j,"primforest")$(vm_land.lo(j,"primforest") < pm_land_conservation(t,j,"primforest","protect")) = pm_land_conservation(t,j,"primforest","protect");
 );
 vm_land.up(j,"primforest") = pcm_land(j,"primforest");
 m_boundfix(vm_land,(j,"primforest"),l,10e-5);
@@ -106,6 +107,8 @@ m_boundfix(vm_land,(j,"primforest"),l,10e-5);
 *reset bounds
 v35_secdforest.lo(j,ac) = 0;
 v35_secdforest.up(j,ac) = Inf;
+v35_secdforest.lo(j,ac_sub) = pm_land_conservation(t,j,"secdforest","protect");
+v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
 ** Setting bounds for only allowing s35_natveg_harvest_shr percentage of available primf to be harvested (highest age class)
 
 p35_save_dist(j,ac_sub) = (pc35_secdforest(j,ac_sub)/sum(ac_sub2,pc35_secdforest(j,ac_sub2)))$(sum(ac_sub2,pc35_secdforest(j,ac_sub2))>0);
@@ -115,13 +118,19 @@ v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=0)  = pm_land_conservation(t,
 v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=1) = pm_land_conservation(t,j,"secdforest","protect")/card(ac_sub);
 v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=2) = pm_land_conservation(t,j,"secdforest","protect")*p35_save_dist(j,ac_sub);
 *v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=2) = pm_land_conservation(t,j,"secdforest","protect");
+
 else
-v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=0)  = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx") , pm_land_conservation(t,j,"secdforest","protect"));
-v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=1) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub), pm_land_conservation(t,j,"secdforest","protect") / card(ac_sub));
-v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=2) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub), pm_land_conservation(t,j,"secdforest","protect") * p35_save_dist(j,ac_sub));
-*v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=2) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx"), pm_land_conservation(t,j,"secdforest","protect"));
+
+v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=0)  = (1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx");
+
+v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=1) = (1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub);
+v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=1 AND v35_secdforest.lo(j,ac_sub) < pm_land_conservation(t,j,"secdforest","protect")) = pm_land_conservation(t,j,"secdforest","protect") / card(ac_sub);
+
+v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=2) = (1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub);
+v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=2 AND v35_secdforest.lo(j,ac_sub) < pm_land_conservation(t,j,"secdforest","protect")) = pm_land_conservation(t,j,"secdforest","protect") * p35_save_dist(j,ac_sub);
+
+* v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=2)  = (1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx");
 );
-v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
 m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
 
 ** Other land
@@ -131,8 +140,6 @@ v35_other.lo(j,ac) = 0;
 v35_other.up(j,ac) = Inf;
 *set bounds
 v35_other.lo(j,ac_sub) = pm_land_conservation(t,j,"other","protect");
-* v35_other.lo(j,ac_est) = pm_land_conservation(t,j,"other","restore");
-*					   + pm_land_conservation(t,j,"secdforest","restore")$(sum(consv_type, pm_land_conservation(t,j,"secdforest",consv_type)) > (pcm_land(j,"secdforest") + pcm_land(j,"other")));
 v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
 m_boundfix(v35_other,(j,ac_sub),l,10e-5);
 
