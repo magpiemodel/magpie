@@ -364,6 +364,7 @@ secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, 
 
 ;
 
+alias(land,land2);
 alias(ac,ac2);
 alias(ac_sub,ac_sub2);
 alias(ac_est,ac_est2);

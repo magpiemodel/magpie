@@ -164,5 +164,5 @@ p32_updated_gs_reg(t,i)$(sum((cell(i,j),ac_sub),p32_land(t,j,"plant",ac_sub))>0)
 ** Avoid conflict between afforestation for carbon uptake on land and secdforest restoration
 pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") > sum(ac, p32_land(t,j,"ndc",ac) + p32_land(t,j,"aff",ac))) = pm_land_conservation(t,j,"secdforest","restore") - sum(ac, p32_land(t,j,"ndc",ac) + p32_land(t,j,"aff",ac));
 pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") <= sum(ac, p32_land(t,j,"ndc",ac) + p32_land(t,j,"aff",ac))) = 0;
-
+pm_land_conservation(t,j,land,"restore")$((sum(land2, pm_land_conservation(t,j,land2,"protect")) + sum(ac, p32_land(t,j,"ndc",ac) + p32_land(t,j,"aff",ac)) + pcm_land(j,"urban")) >= sum(land2, pcm_land(j,land2))) = 0;
 *** EOF presolve.gms ***
