@@ -26,4 +26,9 @@ else
 );
 
 vm_tau.up(h,tautype) = 2*pcm_tau(h,tautype);
-vm_tech_cost.up(i) = 10e9;
+
+* constrain tech cost either to 10e9 mio. USD05PPP per yr per region or to a
+* share of regional GDP
+vm_tech_cost.up(i) =
+  (1 - c13_tech_cost_GDP) * 10e9 +
+  c13_tech_cost_GDP * sum((i_to_iso(i,iso),ct), im_gdp_pc_ppp_iso(ct,iso) * im_pop_iso(ct,iso)) * s13_tech_cost_gdp_share;

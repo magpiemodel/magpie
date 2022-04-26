@@ -7,7 +7,9 @@
 
 
 scalars
- s13_ignore_tau_historical	ignore historial tau (1) or use it as lower bound (0) (binary) / 1 /
+ s13_ignore_tau_historical	ignore historical tau (1) or use it as lower bound (0) (binary) / 1 /
+ c13_tech_cost_GDP Use fixed upper bound (0) or GDP-relative upper bound  (1) for regional tech cost per year / 0 /
+ s13_tech_cost_gdp_share Maximum tech cost as share of regional GDP / 0.002 /
 ;
 
 parameter fm_tau1995(h) Agricultural land use intensity tau in 1995 (1)
