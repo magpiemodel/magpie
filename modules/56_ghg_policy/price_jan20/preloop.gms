@@ -13,7 +13,8 @@ vm_carbon_stock.l(j,land,ag_pools,stockType) = fm_carbon_density("y1995",j,land,
 vm_btm_cell.fx(j,emis_source_cell,pollutants) = 0;
 vm_btm_cell.lo(j,emis_co2,"co2_c") = -Inf;
 vm_btm_cell.up(j,emis_co2,"co2_c") = Inf;
-
+***fix to zero be default here. Bounds are released in the respective modules.
+vm_btm_reg.fx(i,emis_source_reg,pollutants) = 0;
 
 ****** Region price share for ghg policy of selective countries:
 * Country switch to determine countries for which ghg policy shall be applied.
