@@ -145,58 +145,60 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
-* Used data set: rev4.67_2204_indiaYields_05_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: 9edc2bc1e9648beca76318ca68a3af3a
-* Repository: /p/projects/rd3mod/inputdata/output
-* 
-* Used data set: rev4.67_2204_indiaYields_05_h12_magpie.tgz
-* md5sum: e7bd75c53e7acf6fbba1247b440e66cc
-* Repository: /p/projects/rd3mod/inputdata/output
-* 
-* Used data set: rev4.67_2204_indiaYields_05_h12_validation.tgz
-* md5sum: 5635b157b430e4f567a358996c3a227b
-* Repository: /p/projects/rd3mod/inputdata/output
-* 
-* Used data set: calibration_H12_mixed_feb17_18Jan22.tgz
-* md5sum: 8b2d32a6d452db5c98791d3c63a4685c
-* Repository: /p/projects/landuse/data/input/calibration
-* 
+* Used data set: rev4.68_h12_magpie.tgz
+* md5sum: 58572b01837e5365551a9a0c7a7a3cc1
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+*
+* Used data set: rev4.68_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* md5sum: 02748bdd8b4be12d42b9ae2320471a52
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+*
+* Used data set: rev4.68_h12_validation.tgz
+* md5sum: 5e011b00267ff48b506af4bdffe3b8dc
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+*
 * Used data set: additional_data_rev4.08.tgz
-* md5sum: d5ef6b0e76748e9347361f5d87a4cba6
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
-* 
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+*
+* Used data set: calibration_H12_sticky_feb18_free_18Jan22.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+
+*
 * Low resolution: c200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *     6   23    7    6    1   43   27    7   11   12   37   20
-* 
+*
 * Regionscode: 62eff8f7
-* 
-* Regions data revision: 4.67
-* 
+*
+* Regions data revision: 4.68
+*
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.67
-* 
+* * Revision: 4.68
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
 * * Regionscode: 62eff8f7
-* * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
-* 
+* * Call: force(code)
+*
 * Warning messages:
 * 1: In copy_input(x = file2destination, sourcepath = "input",  ... :
 *   File land_carbon_sink_adjust_grassi.cs3 seems to be missing!
 * 2: In file.copy("calibration_results.pdf", cfg$results_folder,  ... :
 *   problem copying ./calibration_results.pdf to output/2504_default_2022-04-25_05.52.25/calibration_results.pdf: No such file or directory
-* 
-* Last modification (input data): Mon Apr 25 06:28:02 2022
-* 
+*
+
+* Last modification (input data): Tue Mar 08 10:39:53 2022
+
+*
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
@@ -234,7 +236,7 @@ $setglobal drivers  aug17
 $setglobal land  landmatrix_dec18
 $setglobal costs  default
 $setglobal interest_rate  select_apr20
-$setglobal tc  endo_jun18
+$setglobal tc  endo_jan22
 $setglobal yields  managementcalib_aug19
 
 $setglobal food  anthropometrics_jan18
