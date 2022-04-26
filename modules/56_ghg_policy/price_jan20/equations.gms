@@ -93,7 +93,7 @@
                  );
 
  q56_emission_costs_cell_oneoff(j2,emis_cell_one56) ..
-                 v56_emission_costs_cell_oneoff(j2,emis_cell_one56) =e=
+                 v56_emission_costs_cell_oneoff(j2,emis_cell_one56) =g=
                  sum(pollutants,
                      v56_emis_cell_pricing(j2,emis_cell_one56,pollutants)
                      * m_timestep_length
