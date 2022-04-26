@@ -5,6 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+vm_btm_cell.lo(j,"peatland","co2_c") = -Inf;
+vm_btm_cell.up(j,"peatland","co2_c") = Inf;
+vm_btm_cell.lo(j,"peatland","ch4") = -Inf;
+vm_btm_cell.up(j,"peatland","ch4") = Inf;
+vm_btm_cell.lo(j,"peatland","n2o_n_direct") = -Inf;
+vm_btm_cell.up(j,"peatland","n2o_n_direct") = Inf;
 
 p58_mapping_cell_climate(j,clcl58) = sum(clcl_mapping(clcl,clcl58),pm_climate_class(j,clcl));
 

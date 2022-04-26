@@ -17,8 +17,8 @@ In this realization, the IPCC AR4 global warming potential factor for N2O (298) 
 PBL used these parameters to convert USD per ton N2O and USD per ton CH4 into USD per ton C eq. 
 $offtext
 
-i57_mac_step_n2o(t,i) = min(201, ceil(im_pollutant_prices(t,i,"n2o_n_direct")/298*28/44*44/12 / s57_step_length) + 1);
-i57_mac_step_ch4(t,i) = min(201, ceil(im_pollutant_prices(t,i,"ch4")/25*44/12 / s57_step_length) + 1);
+i57_mac_step_n2o(t,i,emis_source) = min(201, ceil(im_pollutant_prices(t,i,"n2o_n_direct",emis_source)/298*28/44*44/12 / s57_step_length) + 1);
+i57_mac_step_ch4(t,i,emis_source) = min(201, ceil(im_pollutant_prices(t,i,"ch4",emis_source)/25*44/12 / s57_step_length) + 1);
 
 *Calculate technical mitigation depending on i57_mac_step_n2o and i57_mac_step_ch4.
 *At zero GHG prices i57_mac_step_n2o and i57_mac_step_ch4 are set to 1.
@@ -28,23 +28,23 @@ i57_mac_step_ch4(t,i) = min(201, ceil(im_pollutant_prices(t,i,"ch4")/25*44/12 / 
 im_maccs_mitigation(t,i,emis_source,pollutants) = 0;
 
 im_maccs_mitigation(t,i,emis_source_inorg_fert_n2o,"n2o_n_direct") =
-        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step_n2o(t,i) AND ord(maccs_steps) > 1),
+        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step_n2o(t,i,emis_source_inorg_fert_n2o) AND ord(maccs_steps) > 1),
               f57_maccs_n2o(t,i,"inorg_fert_n2o",maccs_steps));
 
 im_maccs_mitigation(t,i,emis_source_awms_manure_n2o,"n2o_n_direct") =
-        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step_n2o(t,i) AND ord(maccs_steps) > 1),
+        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step_n2o(t,i,emis_source_awms_manure_n2o) AND ord(maccs_steps) > 1),
               f57_maccs_n2o(t,i,"awms_manure_n2o",maccs_steps));
 
 im_maccs_mitigation(t,i,emis_source_rice_ch4,"ch4") =
-        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step_ch4(t,i) AND ord(maccs_steps) > 1),
+        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step_ch4(t,i,emis_source_rice_ch4) AND ord(maccs_steps) > 1),
               f57_maccs_ch4(t,i,"rice_ch4",maccs_steps));
 
 im_maccs_mitigation(t,i,emis_source_ent_ferm_ch4,"ch4") =
-        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step_ch4(t,i) AND ord(maccs_steps) > 1),
+        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step_ch4(t,i,emis_source_ent_ferm_ch4) AND ord(maccs_steps) > 1),
               f57_maccs_ch4(t,i,"ent_ferm_ch4",maccs_steps));
 
 im_maccs_mitigation(t,i,emis_source_awms_ch4,"ch4") =
-        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step_ch4(t,i) AND ord(maccs_steps) > 1),
+        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step_ch4(t,i,emis_source_awms_ch4) AND ord(maccs_steps) > 1),
               f57_maccs_ch4(t,i,"awms_ch4",maccs_steps));
 
 $ontext
@@ -66,23 +66,23 @@ $offtext
 p57_maccs_costs_integral(t,i,emis_source,pollutants) = 0;
 
 loop(maccs_steps$(ord(maccs_steps) > 1),
-    p57_maccs_costs_integral(t,i,emis_source_inorg_fert_n2o,"n2o_n_direct")$(ord(maccs_steps) <= i57_mac_step_n2o(t,i)) =
+    p57_maccs_costs_integral(t,i,emis_source_inorg_fert_n2o,"n2o_n_direct")$(ord(maccs_steps) <= i57_mac_step_n2o(t,i,emis_source_inorg_fert_n2o)) =
     p57_maccs_costs_integral(t,i,emis_source_inorg_fert_n2o,"n2o_n_direct") +
     (f57_maccs_n2o(t,i,"inorg_fert_n2o",maccs_steps) - f57_maccs_n2o(t,i,"inorg_fert_n2o",maccs_steps-1))*(ord(maccs_steps)-1)*s57_step_length;
 
-    p57_maccs_costs_integral(t,i,emis_source_awms_manure_n2o,"n2o_n_direct")$(ord(maccs_steps) <= i57_mac_step_n2o(t,i)) =
+    p57_maccs_costs_integral(t,i,emis_source_awms_manure_n2o,"n2o_n_direct")$(ord(maccs_steps) <= i57_mac_step_n2o(t,i,emis_source_awms_manure_n2o)) =
     p57_maccs_costs_integral(t,i,emis_source_awms_manure_n2o,"n2o_n_direct") +
     (f57_maccs_n2o(t,i,"awms_manure_n2o",maccs_steps) - f57_maccs_n2o(t,i,"awms_manure_n2o",maccs_steps-1))*(ord(maccs_steps)-1)*s57_step_length;
 
-    p57_maccs_costs_integral(t,i,emis_source_rice_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step_ch4(t,i)) =
+    p57_maccs_costs_integral(t,i,emis_source_rice_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step_ch4(t,i,emis_source_rice_ch4)) =
     p57_maccs_costs_integral(t,i,emis_source_rice_ch4,"ch4") +
     (f57_maccs_ch4(t,i,"rice_ch4",maccs_steps) - f57_maccs_ch4(t,i,"rice_ch4",maccs_steps-1))*(ord(maccs_steps)-1)*s57_step_length;
 
-    p57_maccs_costs_integral(t,i,emis_source_ent_ferm_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step_ch4(t,i)) =
+    p57_maccs_costs_integral(t,i,emis_source_ent_ferm_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step_ch4(t,i,emis_source_ent_ferm_ch4)) =
     p57_maccs_costs_integral(t,i,emis_source_ent_ferm_ch4,"ch4") +
     (f57_maccs_ch4(t,i,"ent_ferm_ch4",maccs_steps) - f57_maccs_ch4(t,i,"ent_ferm_ch4",maccs_steps-1))*(ord(maccs_steps)-1)*s57_step_length;
 
-    p57_maccs_costs_integral(t,i,emis_source_awms_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step_ch4(t,i)) =
+    p57_maccs_costs_integral(t,i,emis_source_awms_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step_ch4(t,i,emis_source_awms_ch4)) =
     p57_maccs_costs_integral(t,i,emis_source_awms_ch4,"ch4") +
     (f57_maccs_ch4(t,i,"awms_ch4",maccs_steps) - f57_maccs_ch4(t,i,"awms_ch4",maccs_steps-1))*(ord(maccs_steps)-1)*s57_step_length;
 );

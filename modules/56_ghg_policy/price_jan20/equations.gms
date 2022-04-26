@@ -17,36 +17,42 @@
 *' The regional emisssions before technical mitigation are calculated in the respective modules 
 *' ([51_nitrogen], [53_methane]) and delivered to this module through the interface variable `vm_btm_reg`.
 
- q56_technical_mitigation_reg(i2,pollutants,emis_source) ..
-	vm_emissions_reg(i2,emis_source,pollutants) =e=
-                 vm_btm_reg(i2,emis_source,pollutants)
-                 * (1 - sum(ct, im_maccs_mitigation(ct,i2,emis_source,pollutants)))
+ q56_technical_mitigation_reg(i2,pollutants,emis_source_reg) ..
+	vm_emissions_reg(i2,emis_source_reg,pollutants) =e=
+                 vm_btm_reg(i2,emis_source_reg,pollutants)
+                 * (1 - sum(ct, im_maccs_mitigation(ct,i2,emis_source_reg,pollutants)))
                  ;
 
- q56_technical_mitigation_cell(i2,pollutants,emis_source) ..
-	vm_emissions_reg(i2,emis_source,pollutants) =e=
-                sum(cell(i2,j2), v56_btm_cell(j2,emis_source,pollutants)
-                  * (1 - sum(ct, im_maccs_mitigation(ct,i2,emis_source,pollutants))));
+ q56_technical_mitigation_cell(i2,pollutants,emis_source_cell) ..
+	vm_emissions_reg(i2,emis_source_cell,pollutants) =e=
+                sum(cell(i2,j2), vm_btm_cell(j2,emis_source_cell,pollutants)
+                  * (1 - sum(ct, im_maccs_mitigation(ct,i2,emis_source_cell,pollutants))));
 
 *' Actual cellular CO2 emissions are calculated based on changes in carbon stocks between timesteps in the interface `vm_carbon_stock`.
 
- q56_co2c_emis(j2,emis_co2) ..
-	v56_btm_cell(j2,emis_co2,"co2_c") =e=
+ q56_emis_co2(j2,emis_co2) ..
+	vm_btm_cell(j2,emis_co2,"co2_c") =e=
                  sum(emis_land(emis_co2,land,c_pools),
                  (vm_carbon_stock.l(j2,land,c_pools,"actual") - vm_carbon_stock(j2,land,c_pools,"actual"))/m_timestep_length);
 
 *' Cellular CO2 emission subject to emission pricing are calculated based on changes in carbon stocks between timesteps in the interface `vm_carbon_stock`, depending on `c56_carbon_stock_pricing`.
 
- q56_co2c_emis_pricing(j2,emis_co2) ..
+ q56_pricing_emis_co2(j2,emis_co2) ..
 	v56_btm_cell_pricing(j2,emis_co2,"co2_c") =e=
                  sum(emis_land(emis_co2,land,c_pools),
                  (vm_carbon_stock.l(j2,land,c_pools,"actual") - vm_carbon_stock(j2,land,c_pools,"%c56_carbon_stock_pricing%"))/m_timestep_length);
 
- q56_co2c_emis_pricing2(j2,pollutants,emis_source)  ..
-	v56_emis_cell_pricing(j2,emis_source,pollutants) =e=
+ q56_pricing_emis_cell_yr(j2,pollutants,emis_cell_yr56) ..
+	v56_emis_cell_pricing(j2,emis_cell_yr56,pollutants) =e= 
+	                sum(cell(i2,j2), vm_btm_cell(j2,emis_cell_yr56,pollutants)
+                  * (1 - sum(ct, im_maccs_mitigation(ct,i2,emis_cell_yr56,pollutants))));
+
+ q56_pricing_emis_cell_one(j2,pollutants,emis_cell_one56)  ..
+	v56_emis_cell_pricing(j2,emis_cell_one56,pollutants) =e=
                 sum(cell(i2,j2),
-                  v56_btm_cell_pricing(j2,emis_source,pollutants)
-                  * (1 - sum(ct, im_maccs_mitigation(ct,i2,emis_source,pollutants))));
+                  v56_btm_cell_pricing(j2,emis_cell_one56,pollutants)
+                  * (1 - sum(ct, im_maccs_mitigation(ct,i2,emis_cell_one56,pollutants))));
+
 
 *** Emission costs
 
@@ -57,16 +63,14 @@
                  v56_emission_costs_reg_yearly(i2,emis_reg_yr56) =e=
                  sum(pollutants,
                      vm_emissions_reg(i2,emis_reg_yr56,pollutants) *
-                     sum(ct, p56_emis_policy(ct,i2,pollutants,emis_reg_yr56) *
-                     im_pollutant_prices(ct,i2,pollutants)));
+                     sum(ct, im_pollutant_prices(ct,i2,pollutants,emis_reg_yr56)));
 
 
  q56_emission_costs_cell_yearly(j2,emis_cell_yr56) ..
                  v56_emission_costs_cell_yearly(j2,emis_cell_yr56) =e=
                  sum(pollutants,
                      v56_emis_cell_pricing(j2,emis_cell_yr56,pollutants) *
-                     sum((ct,cell(i2,j2)), p56_emis_policy(ct,i2,pollutants,emis_cell_yr56) *
-                     im_pollutant_prices(ct,i2,pollutants)));
+                     sum((ct,cell(i2,j2)), im_pollutant_prices(ct,i2,pollutants,emis_cell_yr56)));
 
 *' As MAgPIE is a recursive dynamic model, within the optimization of the current time step it does not account for benefits or costs in future time steps.
 *' This can be problematic for the treatment of emissions that occur only once under continuous management (such as deforestation,
@@ -84,8 +88,7 @@
                      vm_emissions_reg(i2,emis_reg_one56,pollutants)
                      * m_timestep_length
                      * sum(ct,
-                      p56_emis_policy(ct,i2,pollutants,emis_reg_one56)
-                      * im_pollutant_prices(ct,i2,pollutants)
+                       im_pollutant_prices(ct,i2,pollutants,emis_reg_one56)
                       * pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
                  );
 
@@ -95,8 +98,7 @@
                      v56_emis_cell_pricing(j2,emis_cell_one56,pollutants)
                      * m_timestep_length
                      * sum((ct,cell(i2,j2)),
-                    	p56_emis_policy(ct,i2,pollutants,emis_cell_one56)
-                         * im_pollutant_prices(ct,i2,pollutants)
+                          im_pollutant_prices(ct,i2,pollutants,emis_cell_one56)
                          * pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
                  );
 
@@ -130,20 +132,3 @@
             	 (sum(aff_effect,(1-s56_buffer_aff)*vm_cdr_aff(j2,ac,aff_effect)) * sum((cell(i2,j2),ct), p56_c_price_aff(ct,i2,ac)))
             	 / ((1+sum((cell(i2,j2),ct),pm_interest(ct,i2)))**(ac.off*5)))
                  *sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
-
-
-*' Peatland emission costs depend on `s56_peatland_policy`
-
- q56_peatland_emis_cost_reg(i2) ..
-                 vm_peatland_emis_cost(i2) =e=
-                 sum(cell(i2,j2),
-                 v56_peatland_emis_cost(j2)
-                 );
-
- q56_peatland_emis_cost(j2) ..
-                 v56_peatland_emis_cost(j2) =e=
-                 vm_peatland_emis(j2) *
-                 s56_peatland_policy *
-                 sum((ct,cell(i2,j2)),
-                 im_pollutant_prices(ct,i2,"co2_c")*12/44
-                 );

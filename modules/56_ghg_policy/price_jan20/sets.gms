@@ -149,7 +149,10 @@ sets
 
    emis_reg_yr56(emis_source_reg) regional yearly emission sources
    /inorg_fert, man_crop, awms, resid, man_past, som,
-   rice, ent_ferm,  beccs/
+   rice, ent_ferm /
+
+   emis_cell_yr56(emis_source_cell) cellular yearly emission sources
+   / peatland /
 
    ac_exp(ac) age-class corresponding to planning horizon
    
@@ -162,9 +165,6 @@ sets
 
 $onempty
 sets
-   emis_cell_yr56(emis_source_cell) cellular yearly emission sources
-   / /
-
    emis_reg_one56(emis_source_reg) regional oneoff emission sources
    / /
  ;

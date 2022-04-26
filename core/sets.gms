@@ -300,11 +300,11 @@ sets
      primforest_vegc, primforest_litc, primforest_soilc,
 secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, urban_soilc,
      other_vegc, other_litc, other_soilc,
-     beccs/
+     peatland/
 
    emis_source_reg(emis_source) Regional emission sources
    / inorg_fert, man_crop, awms, resid, man_past, som,
-     rice, ent_ferm, beccs /
+     rice, ent_ferm, resid_burn /
 
    emis_source_cell(emis_source) Cellular emission sources
    / crop_vegc, crop_litc, crop_soilc,
@@ -312,7 +312,7 @@ secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, 
      forestry_vegc, forestry_litc, forestry_soilc,
      primforest_vegc, primforest_litc, primforest_soilc,
 secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, urban_soilc,
-     other_vegc, other_litc, other_soilc /
+     other_vegc, other_litc, other_soilc, peatland /
 
    emis_co2(emis_source_cell) Land pool CO2 emission sources
    / crop_vegc, crop_litc, crop_soilc,
