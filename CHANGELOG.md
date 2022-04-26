@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **scripts** Added script to folder projects paper_grassland.R
  - **44_biodiversity** Improved documentation, simplification of equations and flexible options for price on biodiversity loss
  - **config** changed default setting for s56_reward_neg_emis from 0 to -Inf
+ - **scripts** scripts/output/extra/emulator.R Remove dependency on deprecated R package "magpie"
 
 ### added
 - **scripts** output/projects/FSEC_dietaryIndicators.R to create output datasets for the FSEC project
@@ -60,6 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** calibration; set NA values to 1
 - **scripts** fixed misleading warning in check_config
 - **scripts** fixed configuration error in FSEC output scripts, FSEC_dietaryIndicators.R and FSEC_environmentalPollutants.R
+- **scripts** scripts/start/extra/emulator.R  Throw an error if no file can be found to take the GHG prices from
 
 ## [4.4.0] - 2021-12-13
 
