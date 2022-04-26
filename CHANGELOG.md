@@ -63,6 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** calibration; set NA values to 1
 - **scripts** fixed misleading warning in check_config
 - **scripts** fixed configuration error in FSEC output scripts, FSEC_dietaryIndicators.R and FSEC_environmentalPollutants.R
+- **56_ghg_policy** Deactivated GHG emission policies were not accounted for in the MACCs module. This has been corrected by an extension of the interface `im_pollutant_prices`, which now has an additional dimension for emission sources `emis_source`. In this context some equations in `56_ghg_policy` have been simplified (sets: `emis_source_reg`, `emis_source_cell`). Also, GHG emissions from peatlands have been fully integrated into `56_ghg_policy`.
 
 ## [4.4.0] - 2021-12-13
 
