@@ -189,8 +189,13 @@ $title magpie
 * * Regionscode: 62eff8f7
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
+* Warning messages:
+* 1: In copy_input(x = file2destination, sourcepath = "input",  ... :
+*   File land_carbon_sink_adjust_grassi.cs3 seems to be missing!
+* 2: In file.copy("calibration_results.pdf", cfg$results_folder,  ... :
+*   problem copying ./calibration_results.pdf to output/2504_default_2022-04-25_05.52.25/calibration_results.pdf: No such file or directory
 * 
-* Last modification (input data): Fri Apr 22 12:53:42 2022
+* Last modification (input data): Mon Apr 25 06:28:02 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -216,7 +221,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  2204_yield50_lesswater
+$setglobal c_title  2504_yield50_default_cost005cent
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /

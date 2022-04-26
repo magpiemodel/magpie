@@ -14,38 +14,6 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-##Runs with physical water restrictions
-
-source("scripts/start_functions.R")
-source("config/default.cfg")
-
-# short description of the actual run
-cfg$title <- "2204_yield50_lesswater"
-
-#recalibrate yields
-cfg$recalibrate <- TRUE     # def = "ifneeded"
-
-#Water demand scenario in module 43 will be set to exogenous to apply new settings
-cfg$gms$c43_watavail_scenario <- "exo"
-
-#Setting shock year from which physical restrictions in water will be used
-s43_shock_year <- 2020
-
-
-cfg$input <- c(cellular = "rev4.67_2204_indiaYields_05_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-        regional = "rev4.67_2204_indiaYields_05_h12_magpie.tgz",
-        validation = "rev4.67_2204_indiaYields_05_h12_validation.tgz",
-        calibration = "calibration_H12_mixed_feb17_18Jan22.tgz",
-        additional = "additional_data_rev4.08.tgz")
-
-cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL),
-                                           getOption("magpie_repos"))
-
-
-cfg$force_download <- TRUE
-
-start_run(cfg, codeCheck=FALSE)
-
 
 ####################################################################333
 ##Default run with default pumping costs
@@ -54,7 +22,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # short description of the actual run
-cfg$title <- "2204_yield50_default"
+cfg$title <- "2504_yield50_default_cost005cent"
 
 #recalibrate yields
 cfg$recalibrate <- TRUE     # def = "ifneeded"
@@ -78,7 +46,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # short description of the actual run
-cfg$title <- "2204_yield50_cost1cent"
+cfg$title <- "2504_yield50_cost1cent"
 
 #recalibrate yields
 cfg$recalibrate <- TRUE     # def = "ifneeded"
@@ -94,6 +62,31 @@ cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=
 
 ##Increasing pumping costs to 1 cent
 cfg$gms$s42_multiplier <- 2
+
+start_run(cfg, codeCheck=FALSE)
+
+
+##increased pumping costs
+source("scripts/start_functions.R")
+source("config/default.cfg")
+
+# short description of the actual run
+cfg$title <- "2504_yield50_cost2cent"
+
+#recalibrate yields
+cfg$recalibrate <- TRUE     # def = "ifneeded"
+
+cfg$input <- c(cellular = "rev4.67_2204_indiaYields_05_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+        regional = "rev4.67_2204_indiaYields_05_h12_magpie.tgz",
+        validation = "rev4.67_2204_indiaYields_05_h12_validation.tgz",
+        calibration = "calibration_H12_mixed_feb17_18Jan22.tgz",
+        additional = "additional_data_rev4.08.tgz")
+
+cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL),
+                                           getOption("magpie_repos"))
+
+##Increasing pumping costs to 1 cent
+cfg$gms$s42_multiplier <- 4
 
 start_run(cfg, codeCheck=FALSE)
 
