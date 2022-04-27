@@ -6,9 +6,6 @@
 # |  Contact: magpie@pik-potsdam.de
 
 name,type,reason
-vm_tau,input,questionnaire
-fm_tau1995,input,questionnaire
-vm_area,input,questionnaire
 pm_interest,input,questionnaire
 vm_prod,input,questionnaire
 im_gdp_pc_ppp_iso,input,questionnaire

@@ -6,16 +6,15 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 equations
- q38_cost_prod_crop(i,kcr)         Regional factor input costs for plant production (mio USD05MER)
- q38_cost_prod_inv(i)              Regional investment costs in capital (mio USD05MER)
+ q38_cost_prod_labor(i)            Regional labor input costs for plant production (mio USD05MER)
+ q38_cost_prod_capital(i)          Regional capital input costs for plant production (mio USD05MER)
  q38_investment_immobile(j,kcr)    Cellular immobile investments into farm capital   (mio USD05MER)
  q38_investment_mobile(j)          Cellular mobile investments into farm capital   (mio USD05MER)
  q38_ces_prodfun(j,kcr)			   CES production function for one unit of output (1)
 ;
 
 positive variables
- vm_cost_prod(i,kall)                  Factor costs  (mio USD05MER  per yr)
- vm_cost_inv(i)                        Investment capital costs (mio USD05MER  per yr)
+ vm_cost_prod_crop(i,req)                  Factor costs  (mio USD05MER  per yr)
  v38_investment_immobile(j,kcr)        Investment costs in immobile farm capital (mio USD05MER per yr)
  v38_investment_mobile(j)              Investment costs in mobile farm capital (mio USD05MER per yr)
  v38_labor_need(j,kcr)				   Labor required per unit of output (hours per ton DM)

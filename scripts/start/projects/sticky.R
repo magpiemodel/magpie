@@ -25,13 +25,10 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # Sticky mode
-mode <- c("dynamic","free")
-#recalibrate
 cfg$recalibrate <- TRUE
 
 
 for(cc in c("cc")){
-  for (sm in mode){
 
     cfg$force_download <- TRUE
     # Set cc
@@ -39,12 +36,6 @@ for(cc in c("cc")){
 
     # Set factor costs
     cfg$gms$factor_costs     <-   "sticky_feb18"
-    cfg$gms$c38_sticky_mode  <-   sm
-
-    if (sm == "dynamic"){
-    cfg$gms$c17_prod_init <- "off"
-    }
-
 
     #Change the results folder name
     cfg$title<-paste0("Sticky_",sm,"_",cc)

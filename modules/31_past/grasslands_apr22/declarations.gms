@@ -19,6 +19,7 @@ q31_expansion_cost(j, grassland)                        Grassland expansion cost
 positive variables
 v31_grass_area(j,grassland)                             Grassland areas (mio. ha)
 v31_cost_grass_expansion(j, grassland)                  Costs of grassland expansion (mio. USD05MER)
+vm_cost_prod_past(i)                                    Factor costs for pasture (mio. USD05MER per yr)
 ;
 
 parameters

@@ -14,7 +14,9 @@ equations
  q31_bv_rangeland(j,potnatveg)    Biodiversity value for rangeland (Mha)
 ;
 
-
+positive variables
+ vm_cost_prod_past(i)                  Factor costs for pasture (mio. USD05MER per yr)
+;
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  oq31_prod(t,j,type)                   Cellular pasture production constraint (mio. tDM per yr)

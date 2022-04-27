@@ -13,6 +13,7 @@ positive variables
  v18_res_ag_recycling(i,kcr,attributes)     Recylcing of crop residues to soils in respective attribute units DM GJ Nr P K WM C (mio. tX)
  vm_res_ag_burn(i,kcr,attributes)           Residues burned on fields in respective attribute units DM GJ Nr P K WM C (mio. tX)
  vm_res_recycling(i,npk)                    Residues recycled to croplands in respective nutrients Nr P K units (mio. tX)
+ vm_cost_prod_kres(i,kres)                  Factor costs for residues (mio. USD05MER per yr)
 ;
 
 equations

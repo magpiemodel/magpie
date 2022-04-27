@@ -8,6 +8,7 @@
 
 positive variables
  vm_dem_feed(i,kap,kall)          Regional feed demand including byproducts (mio. tDM per yr)
+ vm_cost_prod_livestock(i2,kall)   Livestock and fish factor costs (mio. USD05MER per yr)      
 ;
 
 equations
