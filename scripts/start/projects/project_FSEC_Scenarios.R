@@ -27,7 +27,7 @@ input <- c(regional    = "rev4.68FSECmodeling_e2bdb6cd_magpie.tgz",
 general_settings <- function(title) {
   source("config/default.cfg")
   cfg$input       <- input
-  cfg$title       <- paste0("v2_", title)
+  cfg$title       <- paste0("v3_", title)
   cfg$recalibrate <- FALSE
   cfg$qos         <- "priority_maxMem"
   cfg$output      <- c(cfg$output,
