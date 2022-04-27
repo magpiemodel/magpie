@@ -37,10 +37,10 @@ for(cc in c("cc")){
                    calibration = "calibration_H12_sticky_feb18_dynamic_18Jan22.tgz")
 
     # Set factor costs
-    cfg$gms$factor_costs     <-   "sticky_feb18"
+    cfg$gms$factor_costs     <-   "sticky_labor"
 
     #Change the results folder name
-    cfg$title<-paste0("Sticky_","_",cc)
+    cfg$title<-paste0("sticky_labor","_",cc)
 
     # Start run
     start_run(cfg=cfg)
