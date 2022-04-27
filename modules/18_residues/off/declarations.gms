@@ -11,6 +11,7 @@ positive variables
  vm_res_biomass_bg(i,kcr,dm_nr)                   production of belowground residues in each region (mio. tDM)
  vm_res_recycling(i,npk)                residues recycled to croplands (mio tons nutrients)
  vm_res_ag_burn(i,kcr,attributes)           Residues burned on fields in respective attribute units DM GJ Nr P K WM C (mio. tX)
+vm_cost_prod_kres(i,kres)                  Factor costs for residues (mio. USD05MER per yr)
 ;
 
 
