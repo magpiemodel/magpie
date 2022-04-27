@@ -44,9 +44,8 @@ for(cc in c("cc")){
     cfg$gms$factor_costs     <-   "sticky_feb18"
 
     #Change the results folder name
-    cfg$title<-paste0("Sticky_",sm,"_",cc)
+    cfg$title<-paste0("Sticky_","_",cc)
 
     # Start run
     start_run(cfg=cfg)
-}
 }
