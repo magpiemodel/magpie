@@ -14,7 +14,7 @@ vm_cost_prod_crop(i,req)        Crop factor costs (mio. USD05MER per yr)
 ;
 
 parameter
-p38_cost_share(t,i,req)       Capital nad labor shares  (1)
+p38_cost_share(t,i,req)       Capital anad labor shares  (1)
 p38_share_calibration(i)      Summation factor used to calibrate calculated capital shares with historical values (1)
 ;
 

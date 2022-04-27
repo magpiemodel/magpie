@@ -12,10 +12,10 @@ if (smax(j, pm_labor_prod(t,j)) <> 1 OR smin(j, pm_labor_prod(t,j)) <> 1,
 p38_share_calibration(i) = f38_historical_share("y2010",i)-(f38_reg_parameters("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso("y2010",iso)))+f38_reg_parameters("intercept"));
 
 if (m_year(t)<2010,
- p38_capital_cost_share(t,i,"capital") = f38_historical_share(t,i);
- p38_capital_cost_share(t,i,"labor")   = 1 - f38_historical_share(t,i);
+ p38_cost_share(t,i,"capital") = f38_historical_share(t,i);
+ p38_cost_share(t,i,"labor")   = 1 - f38_historical_share(t,i);
 
 elseif (m_year(t)>=2010),
-p38_capital_cost_share(t,i,"capital") = f38_reg_parameters("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso(t,iso)))+f38_reg_parameters("intercept")+p38_share_calibration(i);
-p38_capital_cost_share(t,i,"labor")   = 1 - p38_capital_cost_share(t,i,"capital");
+p38_cost_share(t,i,"capital") = f38_reg_parameters("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso(t,iso)))+f38_reg_parameters("intercept")+p38_share_calibration(i);
+p38_cost_share(t,i,"labor")   = 1 - p38_capital_cost_share(t,i,"capital");
 );
