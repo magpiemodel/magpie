@@ -24,10 +24,6 @@ source("scripts/start_functions.R")
 # Sources the default configuration file
 source("config/default.cfg")
 
-# Sticky mode
-cfg$recalibrate <- TRUE
-
-
 for(cc in c("cc")){
 
     cfg$force_download <- TRUE
