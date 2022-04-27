@@ -54,17 +54,14 @@ pm_land_conservation(t,j,land,"protect")$(pm_land_conservation(t,j,land,"protect
 
 ** Land restoration
 
-pm_land_conservation(t,j,"past","restore") =
-			  p22_conservation_area(t,j,"past")$(p22_conservation_area(t,j,"past") > pcm_land(j,"past"))
-			- pcm_land(j,"past")$(p22_conservation_area(t,j,"past") > pcm_land(j,"past"));
+pm_land_conservation(t,j,"past","restore")$(p22_conservation_area(t,j,"past") > pcm_land(j,"past")) =
+			  p22_conservation_area(t,j,"past") - pcm_land(j,"past");
 
-pm_land_conservation(t,j,"secdforest","restore") =
-			  p22_conservation_area(t,j,"secdforest")$(p22_conservation_area(t,j,"secdforest") > pcm_land(j,"secdforest"))
-			- pcm_land(j,"secdforest")$(p22_conservation_area(t,j,"secdforest") > pcm_land(j,"secdforest"));
+pm_land_conservation(t,j,"secdforest","restore")$(p22_conservation_area(t,j,"secdforest") > pcm_land(j,"secdforest")) =
+			  p22_conservation_area(t,j,"secdforest") - pcm_land(j,"secdforest");
 
-pm_land_conservation(t,j,"other","restore") =
-			  p22_conservation_area(t,j,"other")$(p22_conservation_area(t,j,"other") > pcm_land(j,"other"))
-			- pcm_land(j,"other")$(p22_conservation_area(t,j,"other") > pcm_land(j,"other"));
+pm_land_conservation(t,j,"other","restore")$(p22_conservation_area(t,j,"other") > pcm_land(j,"other")) =
+			  p22_conservation_area(t,j,"other") - pcm_land(j,"other");
 * Primary and secondary forest cannot be converted to other land. Therefore
 * other land restoration is contrained by the remaining agricultural land:
 p22_other_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop")) + (vm_land.l(j,"past") - p22_conservation_area(t,j,"past"));
@@ -73,8 +70,8 @@ p22_other_restore_pot(t,j)$(p22_other_restore_pot(t,j) < 0) = 0;
 pm_land_conservation(t,j,"other","restore")$(pm_land_conservation(t,j,"other","restore") > p22_other_restore_pot(t,j)) = p22_other_restore_pot(t,j);
 
 * Switch for land restoration during future time steps
-if(s22_restore_land = 0 AND m_year(t) > sm_fix_SSP2,
-pm_land_conservation(t,j,land,"restore") = 0;
+if(s22_restore_land = 0,
+pm_land_conservation(t,j,land,"restore")$(m_year(t) > sm_fix_SSP2) = 0;
 );
 
 * NPI/NDC
