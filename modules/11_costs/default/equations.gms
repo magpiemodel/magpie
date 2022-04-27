@@ -13,8 +13,8 @@
 *' production costs of different production activities.
 
  q11_cost_reg(i2) .. v11_cost_reg(i2) =e= sum(req,vm_cost_prod_crop(i2,req))
-                   + sum(kres,vm_cost_prod_kres)
-                   + vm_cost_prod_past
+                   + sum(kres,vm_cost_prod_kres(i2,kred))
+                   + vm_cost_prod_past(i2)
                    + sum(kall,vm_cost_prod_livestock(i2,kall))
                    + sum((cell(i2,j2),land), vm_cost_landcon(j2,land))
                    + sum((cell(i2,j2),k), vm_cost_transp(j2,k))

@@ -9,7 +9,7 @@
 
 
  q38_cost_prod_crop(i2,req) ..
-  vm_cost_prod_crop(i2,req) =e= vm_prod_reg(i2,kcr) * f38_fac_req * sum(ct,p38_cost_share(ct,i,req));
+  vm_cost_prod_crop(i2,req) =e= sum(kcr, vm_prod_reg(i2,kcr) * f38_fac_req )* sum(ct,p38_cost_share(ct,i,req));
 
 
 *' The factor requirement costs for crops `vm_cost_prod_crop` are  calculated as product of
