@@ -90,7 +90,8 @@ sets
       sdp_livestock,
       sdp_redd,
       sdp_soil,
-      sdp_redd_soil /
+      sdp_redd_soil
+       /
 
 ;
 *######################### R SECTION END (SETS) ################################

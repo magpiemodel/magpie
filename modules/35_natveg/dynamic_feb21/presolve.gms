@@ -23,7 +23,7 @@ if(s35_forest_damage=1,
 	p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry;
 	);
 
-* shifting cultivation is faded out until 2030
+* shifting cultivation is faded out
 if(s35_forest_damage=2,
 	p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry*(1 - p35_damage_fader(t));
 	p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry*(1 - p35_damage_fader(t));
@@ -40,6 +40,9 @@ pc35_secdforest(j,ac_est) = pc35_secdforest(j,ac_est) + sum(ac_sub,p35_disturban
 pc35_secdforest(j,ac_sub) = pc35_secdforest(j,ac_sub) - p35_disturbance_loss_secdf(t,j,ac_sub);
 pcm_land(j,"primforest") = pcm_land(j,"primforest") - p35_disturbance_loss_primf(t,j);
 vm_land.l(j,"primforest") = pcm_land(j,"primforest");
+
+* account for forest damage in primforest conservation
+pm_land_conservation(t,j,"primforest","protect")$(pm_land_conservation(t,j,"primforest","protect") > pcm_land(j,"primforest")) = pcm_land(j,"primforest");
 
 * Regrowth of natural vegetation (natural succession) is modelled by shifting age-classes according to time step length.
 s35_shift = m_timestep_length_forestry/5;
@@ -66,8 +69,13 @@ s35_shift = m_timestep_length_forestry/5;
 p35_recovered_forest(t,j,ac)$(not sameas(ac,"acx")) =
 			p35_other(t,j,ac)$(pm_carbon_density_ac(t,j,ac,"vegc") > 20);
 *' Recovered forest is adjusted so that protected other land remains other land
-p35_recovered_forest(t,j,ac)$(sum(ac2, p35_other(t,j,ac2)) - sum(ac2, p35_recovered_forest(t,j,ac2)) < pm_land_conservation(t,j,"other","protect")) =
-			p35_recovered_forest(t,j,ac) * (1 - (pm_land_conservation(t,j,"other","protect") - sum(ac2, p35_other(t,j,ac2)) + sum(ac2,p35_recovered_forest(t,j,ac2)))/sum(ac2,p35_recovered_forest(t,j,ac2)+10e-5));
+p35_recovered_forest(t,j,ac)$(sum(ac2, p35_other(t,j,ac2) - p35_recovered_forest(t,j,ac2)) < pm_land_conservation(t,j,"other","protect"))
+			= p35_recovered_forest(t,j,ac)
+			* (1 - (pm_land_conservation(t,j,"other","protect") -
+			   		sum(ac2, p35_other(t,j,ac2)) +
+			   		sum(ac2,p35_recovered_forest(t,j,ac2))
+					) / sum(ac2,p35_recovered_forest(t,j,ac2)+10e-5)
+			   );
 *' Shift adjusted recovered forest to secondary forest
 p35_other(t,j,ac) = p35_other(t,j,ac) - p35_recovered_forest(t,j,ac);
 p35_secdforest(t,j,ac) = p35_secdforest(t,j,ac) + p35_recovered_forest(t,j,ac);
@@ -83,9 +91,9 @@ v35_other.l(j,ac) = pc35_other(j,ac);
 vm_land.l(j,"other") = sum(ac, pc35_other(j,ac));
 pcm_land(j,"other") = sum(ac, pc35_other(j,ac));
 
-* -----------------------------------
+* -------------------------------------
 * Set bounds based on land conservation
-* -----------------------------------
+* -------------------------------------
 
 * Within the optimization, primary and secondary forests can only decrease
 * (e.g. for cropland expansion).
@@ -163,7 +171,6 @@ v35_hvarea_secdforest.fx(j,ac_est) = 0;
 v35_hvarea_other.fx(j,ac_est) = 0;
 v35_secdforest_reduction.fx(j,ac_est) = 0;
 v35_other_reduction.fx(j,ac_est) = 0;
-
 
 vm_prod_natveg.fx(j,"other","wood") = 0;
 
