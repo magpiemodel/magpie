@@ -6,12 +6,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 vm_btm_cell.fx(j,"peatland",pollutants) = 0;
-vm_btm_cell.lo(j,"peatland","co2_c") = -Inf;
-vm_btm_cell.up(j,"peatland","co2_c") = Inf;
-vm_btm_cell.lo(j,"peatland","ch4") = -Inf;
-vm_btm_cell.up(j,"peatland","ch4") = Inf;
-vm_btm_cell.lo(j,"peatland","n2o_n_direct") = -Inf;
-vm_btm_cell.up(j,"peatland","n2o_n_direct") = Inf;
+vm_btm_cell.lo(j,"peatland",poll58) = -Inf;
+vm_btm_cell.up(j,"peatland",poll58) = Inf;
 
 * GHG emission conversion factors from GWP100 to element unit.
 p58_conversion_factor("co2") = 12/44;
