@@ -14,7 +14,7 @@
 library(magclass)
 library(lucode2)
 library(lusweave)
-library(magpie)
+library(magpie4)
 library(luplot)
 library(ggplot2)
 library(remulator)
