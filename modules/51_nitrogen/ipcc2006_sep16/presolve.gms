@@ -6,7 +6,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 vm_btm_reg.lo(i,emis_source_n51,n_pollutants) = -Inf;
-*vm_btm_reg.lo(i,"som",n_pollutants) = -Inf;
 vm_btm_reg.up(i,emis_source_n51,n_pollutants) = Inf; 
 
 * leaching emissions are dynamic with climate for the history;
