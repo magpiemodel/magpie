@@ -5,7 +5,5 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @code
-*' Methane emission from agricultural sources equals to zero.
-
-vm_btm_reg.fx(i,emis_source_reg,"ch4") = 0;
+vm_btm_reg.fx(i,emis_source_reg,n_pollutants) = 0;
+vm_btm_cell.fx(j,emis_co2,n_pollutants) = 0;

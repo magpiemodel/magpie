@@ -19,6 +19,7 @@ parameters
  i58_cost_rewet_onetime(t) 							One-time costs for peatland restoration (USD05MER per ha)
  i58_cost_degrad_recur(t)							Recurring costs for degraded peatland (USD05MER per ha)
  i58_cost_degrad_onetime(t)							One-time costs for peatland degradation (USD05MER per ha)
+ p58_conversion_factor(emisSub58)					Conversion factor from GWP100 GHG emissions to element (1)
 ;
 
 equations
@@ -33,9 +34,7 @@ equations
  q58_peatland_cost(j)							One-time and recurring cost of peatland conversion and management (mio. USD05MER per yr)
  q58_peatland_cost_annuity(j)					Annuity costs of peatland conversion in the current timestep (mio. USD05MER per yr)
  q58_peatland_emis_detail(j,emis58)				Detailed GHG emissions from managed peatland (t CO2eq per year)
- q58_peatland_emis_co2(j)						CO2 emissions from managed peatland (t co2_c per year)
- q58_peatland_emis_ch4(j)						CH4 emissions from managed peatland (t ch4 per year)
- q58_peatland_emis_n2o(j)						N2O emissions from managed peatland (t n2o_n per year)
+ q58_peatland_emis(j,poll58)					GHG emissions from managed peatland (Tg per yr)
 ;
 
 variables
@@ -79,8 +78,6 @@ parameters
  oq58_peatland_cost(t,j,type)               One-time and recurring cost of peatland conversion and management (mio. USD05MER per yr)
  oq58_peatland_cost_annuity(t,j,type)       Annuity costs of peatland conversion in the current timestep (mio. USD05MER per yr)
  oq58_peatland_emis_detail(t,j,emis58,type) Detailed GHG emissions from managed peatland (t CO2eq per year)
- oq58_peatland_emis_co2(t,j,type)           CO2 emissions from managed peatland (t co2_c per year)
- oq58_peatland_emis_ch4(t,j,type)           CH4 emissions from managed peatland (t ch4 per year)
- oq58_peatland_emis_n2o(t,j,type)           N2O emissions from managed peatland (t n2o_n per year)
+ oq58_peatland_emis(t,j,poll58,type)        GHG emissions from managed peatland (Tg per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

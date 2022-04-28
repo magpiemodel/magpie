@@ -6,3 +6,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 vm_btm_reg.fx(i,emis_source_reg,n_pollutants) = 0;
+vm_btm_reg.lo(i,emis_source_n51,n_pollutants) = -Inf;
+vm_btm_reg.up(i,emis_source_n51,n_pollutants) = Inf; 
+vm_btm_cell.fx(j,emis_co2,n_pollutants) = 0;
