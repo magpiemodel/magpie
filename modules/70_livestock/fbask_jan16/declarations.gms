@@ -8,12 +8,13 @@
 
 positive variables
  vm_dem_feed(i,kap,kall)          Regional feed demand including byproducts (mio. tDM per yr)
- vm_cost_prod_livestock(i,kall)   Livestock and fish factor costs (mio. USD05MER per yr)      
+ vm_cost_prod_livst(i,req)        Livestock factor costs (mio. USD05MER per yr)    
+ vm_cost_prod_fish(i)             Fish factor costs (mio. USD05MER per yr)        
 ;
 
 equations
  q70_feed(i,kap,kall)             Regional feed demand
- q70_cost_prod_liv(i,kall)        Regional factor input costs for livestock production
+ q70_cost_prod_liv(i,req)         Regional factor input costs for livestock production
  q70_cost_prod_fish(i)            Regional factor input costs for fish production
 ;
 
@@ -28,6 +29,8 @@ parameters
  i70_foddr_scp_fadeout(t_all,i)                	  Fooder fadeout (share 0-1) to be replaced by SCP (1)
  p70_country_dummy(iso)                           Dummy parameter indicating whether country is affected by feed scenarios (1)
  p70_feedscen_region_shr(t_all,i)                 Weighted share of region with regards to feed scenario of countries (1)
+ p70_cost_share_livst(t,i,req)                    Capital anad labor shares  (1)
+ p70_cost_share_calibration(i)                    Summation factor used to calibrate calculated capital shares with historical values (1)
 ;
 
 

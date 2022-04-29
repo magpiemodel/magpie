@@ -7,8 +7,7 @@
 
 
 *' @equations
-*' Variable costs (without capital): The factor costs are calculated based on the requirements  of the regional aggregated production without
-* considering capital costs.
+*' Labor costs: The labor costs are calculated by multiplying regional aggregated production with labor requirments per output.
 
 q38_cost_prod_labor(i2).. vm_cost_prod_crop(i2,"labor")
                               =e= sum(kcr,vm_prod_reg(i2,kcr) * sum(ct,p38_variable_costs(ct,i2,kcr)))
@@ -36,7 +35,7 @@ q38_investment_immobile(j2,kcr).. v38_investment_immobile(j2,kcr)
                                  sum(ct,p38_capital_immobile(ct,j2,kcr));
 *
 
-*'On the other hand, the mobile capital is needed by all crop activities in each location, so it is defined over each j2 cell.
+*' On the other hand, the mobile capital is needed by all crop activities in each location, so it is defined over each j2 cell.
 
 q38_investment_mobile(j2).. v38_investment_mobile(j2)
                              =g=

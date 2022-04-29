@@ -59,6 +59,20 @@ $include "./modules/70_livestock/fbask_jan16/input/f70_pyld_slope_reg.cs4"
 $offdelim
 /;
 
+parameter f70_cap_share_reg(share_regr) Parameters for regression
+/
+$ondelim
+$include "./modules/70_livestock/fbask_jan16/input/f70_cap_share_reg.csv"
+$offdelim
+/
+;
+
+table f70_hist_cap_share(t_all,i) Historical capital share
+$ondelim
+$include "./modules/70_livestock/fbask_jan16/input/f70_hist_cap_share.csv"
+$offdelim
+;
+
 * Set-switch for countries affected by country-specific exogenous diet scenario
 * Default: all iso countries selected
 sets

@@ -12,13 +12,14 @@
   vm_cost_prod_crop(i2,req) =e= sum(kcr, vm_prod_reg(i2,kcr) * f38_fac_req(kcr))* sum(ct,p38_cost_share(ct,i2,req));
 
 
-*' The factor requirement costs for crops `vm_cost_prod_crop` are  calculated as product of
+*' The factor costs for crops `vm_cost_prod_crop` are  calculated as product of
 *' production quantity `vm_prod_reg` and crop-specific world average
-*' factor costs of production per volume `f38_fac_req_per_ton`.
-*' The volume depending factor costs, which remains fixed overtime, are obtained
-*' from value-added costs which correspond to the factor of production included
-*' in this module from GTAP7 (@narayanan_gtap7_2008).
-*' It worth to mention again that the factor costs in this module
+*' factor requirements per volume of production `f38_fac_req`.
+*' The volume depending factor requirements, which remain fixed overtime, are obtained
+*' from FAO Value of Production, to which the USDA factor cost share out of total 
+*' costs was applied. Labor and capital costs are split by applying the corresponding
+*' share out of total factor costs.
+*' It is worth to mention again that the factor costs in this module
 *' do not include land rents (as MAgPIE calculates land rents endogenously),
 *' chemical fertilizer costs (as they are calculated in [50_nr_soil_budget]
 *' module), and costs of agricultural intermediate inputs such as seeds

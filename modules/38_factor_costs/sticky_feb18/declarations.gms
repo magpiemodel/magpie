@@ -13,7 +13,7 @@ equations
 ;
 
 positive variables
- vm_cost_prod_crop(i,req)                  Factor costs  (mio USD05MER  per yr)
+ vm_cost_prod_crop(i,req)              Factor costs  (mio USD05MER  per yr)
  v38_investment_immobile(j,kcr)        Investment costs in immobile farm capital (mio USD05MER per yr)
  v38_investment_mobile(j)              Investment costs in mobile farm capital (mio USD05MER per yr)
 ;
@@ -24,10 +24,10 @@ parameters
  p38_capital_immobile(t,j,kcr)         Preexisting immobile capital stocks before investment (mio USD05MER)
  p38_capital_mobile(t,j)               Preexisting mobile capital stocks before investment (mio USD05MER)
 
- p38_capital_cost_share(t,i)           Capital share  (1)
+ p38_cost_share(t,i,req)               Capital anad labor shares  (1)
  p38_share_calibration(i)              Summation factor used to calibrate calculated capital shares with historical values (1)
 
- p38_croparea_start(j,w,kcr)             Agricultural land initialization area (mio. ha)
+ p38_croparea_start(j,w,kcr)           Agricultural land initialization area (mio. ha)
 ;
 
 

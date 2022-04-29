@@ -21,8 +21,7 @@
   (1 - i38_ces_shr(j2,kcr))*(sum(ct, pm_labor_prod(ct,j2)) * v38_labor_need(j2,kcr))**(-s38_ces_elast_par))**(-1/s38_ces_elast_par)
   =e= 1 ;
 
-*' Variable labor costs (without capital): The labor costs are calculated based on the
-*' requirements of the cellular production without considering capital costs.
+*' Labor costs: The labor costs are calculated by multiplying regional aggregated production with labor requirments per output.
 
 q38_cost_prod_labor(i2).. vm_cost_prod_crop(i2,"labor")
                               =e= sum(kcr,sum(cell(i2,j2), vm_prod(j2,kcr) * v38_labor_need(j2,kcr) * s38_wage))
