@@ -30,14 +30,14 @@ general_settings <- function(title) {
   cfg$title       <- paste0("v3_", title)
   cfg$recalibrate <- FALSE
   cfg$qos         <- "priority_maxMem"
-  cfg$output      <- c(cfg$output,
+  cfg$output      <- c(cfg$output #,
     ### @MIKE: Please add back into the script when ready
                        # "extra/disaggregation_BII", "projects/FSEC_dietaryIndicators",
                        # "projects/FSEC_environmentalPollution_grid"
                       )
 
   # Climate change impacts activated, SSP2 default settings, NDC activated, endogenous forestry activated
-  cfg <- gms::setScenario(cfg, c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"))
+  cfg <- gms::setScenario(cfg, c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"))  
   cfg$input['cellular'] <- "rev4.68FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
 
   # Nitrogen module with IPCC emissions factors rescaled with efficiency
