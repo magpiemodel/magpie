@@ -37,7 +37,7 @@ general_settings <- function(title) {
                       )
 
   # Climate change impacts activated, SSP2 default settings, NDC activated, endogenous forestry activated
-  cfg <- gms::setScenario(cfg, c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"))  
+  cfg <- gms::setScenario(cfg, c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"))
   cfg$input['cellular'] <- "rev4.68FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
 
   # Nitrogen module with IPCC emissions factors rescaled with efficiency
@@ -335,6 +335,19 @@ soil_transformation <- function(cfg) {
 
   return(cfg)
 }
+
+# -----------------------------------------------------------------------------------------------------------------
+# Calibration run
+cfg <- general_settings()
+cfg$input                           <- input
+cfg$results_folder                  <- "output/:title:"
+cfg$recalibrate                     <- TRUE
+cfg$recalibrate_landconversion_cost <- TRUE
+cfg$title                           <- "calibration_FSEC_sticky_feb18_free"
+cfg$output                          <- c("rds_report", "validation_short")
+cfg$force_replace                   <- TRUE
+start_run(cfg, codeCheck = FALSE)
+magpie4::submitCalibration("FSEC")
 
 # -----------------------------------------------------------------------------------------------------------------
 # Scenario runs
