@@ -7,7 +7,7 @@
 
 p38_share_calibration(i) = f38_historical_share("y2010",i)-(f38_reg_parameters("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso("y2010",iso)))+f38_reg_parameters("intercept"));
 
-f (m_year(t)<2010,
+if (m_year(t)<2010,
 p38_cost_share(t,i,"capital") = f38_historical_share(t,i);
 p38_cost_share(t,i,"labor")   = 1 - f38_historical_share(t,i);
 
