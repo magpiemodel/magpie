@@ -78,6 +78,15 @@ p32_land(t,j,type32,"acx") = p32_land(t,j,type32,"acx") + sum(ac$(ord(ac) > card
 p32_land(t,j,type32,ac_est) = 0;
 *' @stop
 
+pm_forestry_to_consv(t,j,"ndc",ac)$(sum(ac2, p32_land(t,j,"ndc",ac2)) > 0) = (p32_land(t,j,"ndc",ac) / sum((pol_type32,ac2), p32_land(t,j,pol_type32,ac2))) * pm_land_conservation(t,j,"secdforest","restore");
+pm_forestry_to_consv(t,j,"ndc",ac)$(pm_forestry_to_consv(t,j,"ndc",ac) > p32_land(t,j,"ndc",ac)) = p32_land(t,j,"ndc",ac);
+
+pm_forestry_to_consv(t,j,"aff",ac)$(sum(ac2, p32_land(t,j,"aff",ac2)) > 0) = (p32_land(t,j,"aff",ac) / sum((pol_type32,ac2), p32_land(t,j,pol_type32,ac2))) * pm_land_conservation(t,j,"secdforest","restore");
+pm_forestry_to_consv(t,j,"ndc",ac)$(pm_forestry_to_consv(t,j,"aff",ac) > p32_land(t,j,"aff",ac)) = p32_land(t,j,"aff",ac);
+
+p32_land(t,j,"ndc",ac)$(sum(ac2, p32_land(t,j,"ndc",ac2)) > 0) = p32_land(t,j,"ndc",ac) - pm_forestry_to_consv(t,j,"ndc",ac);
+p32_land(t,j,"aff",ac)$(sum(ac2, p32_land(t,j,"aff",ac2)) > 0) = p32_land(t,j,"aff",ac) - pm_forestry_to_consv(t,j,"aff",ac);
+
 ** Calculate v32_land.l
 v32_land.l(j,type32,ac) = p32_land(t,j,type32,ac);
 pc32_land(j,type32,ac) = v32_land.l(j,type32,ac);
@@ -165,14 +174,5 @@ p32_updated_gs_reg(t,i)$(sum((cell(i,j),ac_sub),p32_land(t,j,"plant",ac_sub))>0)
 * pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") > sum(ac, p32_land(t,j,"ndc",ac) + p32_land(t,j,"aff",ac)))
 *         = pm_land_conservation(t,j,"secdforest","restore") - sum(ac, p32_land(t,j,"ndc",ac) + p32_land(t,j,"aff",ac));
 * pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") <= sum(ac, p32_land(t,j,"ndc",ac) + p32_land(t,j,"aff",ac))) = 0;
-
-pm_forestry_to_consv(t,j,"ndc",ac)$(sum(ac2, p32_land(t,j,"ndc",ac2)) > 0) = (p32_land(t,j,"ndc",ac) / sum((pol_type32,ac2), p32_land(t,j,pol_type32,ac2))) * pm_land_conservation(t,j,"secdforest","restore");
-pm_forestry_to_consv(t,j,"ndc",ac)$(pm_forestry_to_consv(t,j,"ndc",ac) > p32_land(t,j,"ndc",ac)) = p32_land(t,j,"ndc",ac);
-
-pm_forestry_to_consv(t,j,"aff",ac)$(sum(ac2, p32_land(t,j,"aff",ac2)) > 0) = (p32_land(t,j,"aff",ac) / sum((pol_type32,ac2), p32_land(t,j,pol_type32,ac2))) * pm_land_conservation(t,j,"secdforest","restore");
-pm_forestry_to_consv(t,j,"ndc",ac)$(pm_forestry_to_consv(t,j,"aff",ac) > p32_land(t,j,"aff",ac)) = p32_land(t,j,"aff",ac);
-
-p32_land(t,j,"ndc",ac)$(sum(ac2, p32_land(t,j,"ndc",ac2)) > 0) = p32_land(t,j,"ndc",ac) - pm_forestry_to_consv(t,j,"ndc",ac);
-p32_land(t,j,"aff",ac)$(sum(ac2, p32_land(t,j,"aff",ac2)) > 0) = p32_land(t,j,"aff",ac) - pm_forestry_to_consv(t,j,"aff",ac);
 
 *** EOF presolve.gms ***
