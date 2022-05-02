@@ -338,7 +338,7 @@ soil_transformation <- function(cfg) {
 
 # -----------------------------------------------------------------------------------------------------------------
 # Calibration run
-cfg <- general_settings()
+cfg <- general_settings("calibration_FSEC_sticky_feb18_free")
 cfg$input                           <- input
 cfg$results_folder                  <- "output/:title:"
 cfg$recalibrate                     <- TRUE
