@@ -36,9 +36,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **scripts** scripts/output/extra/emulator.R Remove dependency on deprecated R package "magpie"
 
 ### added
+- **scripts** output/projects/FSEC_StevenLord.R to create output for Steven Lord in the FSEC context
+- **scripts** output/projects/FSEC_costs.R to create costs ouput for the FSEC project
 - **scripts** output/projects/FSEC_dietaryIndicators.R to create output datasets for the FSEC project
-- **scripts** output/projects/FSEC_environmentalPollutants.R to create output datasets of pollutants for the FSEC project
-- **scripts** start/projects/project_FSEC_SWF.R runs simulations which will be the basis for the FSEC Social Welfare Function calculation.
+- **scripts** output/projects/FSEC_nitrogenPollution.R to create output datasets of nitrogen pollutants for the FSEC project
 - **scripts** Added script to folder projects paper_grassland.R
 - **scripts** Extended dissagregation.R script to replace single "past" land class by LHU range and pastr classes when grassland_apr22 realization is used.
 - **52_carbon** added land carbon sink adjustment factors, needed in R post-processing
