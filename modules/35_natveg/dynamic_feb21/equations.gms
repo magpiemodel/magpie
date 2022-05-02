@@ -160,8 +160,8 @@ q35_secdforest_regeneration(j2)..
                           =e=
                           sum(ac_sub,v35_hvarea_secdforest(j2,ac_sub))
                         + v35_hvarea_primforest(j2)
-                        + sum(ct,pm_land_conservation(ct,j2,"secdforest","restore")
-                        - sum(pol_type32, pm_forestry_to_consv(t,j,pol_type32,ac)))
+                        + sum(ct,pm_land_conservation(ct,j2,"secdforest","restore"))
+                        - sum((ct,pol_type32,ac_sub), pm_forestry_to_consv(ct,j2,pol_type32,ac_sub))
                           ;
 
 *' Harvested other land is still considered other land
