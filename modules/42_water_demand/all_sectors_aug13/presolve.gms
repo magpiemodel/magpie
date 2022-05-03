@@ -67,4 +67,6 @@ else
 );
 
 *Pumping cost in the current time step
+if(m_year(t) > s42_shockyear,
 ic42_pumping_cost(i) = f42_pumping_cost(t,i)*s42_multiplier;
+);
