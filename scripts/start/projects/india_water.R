@@ -21,32 +21,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # short description of the actual run
-cfg$title <- "2504_default"
-
-cfg$force_download <- TRUE
-
-#recalibrate yields
-cfg$recalibrate <- TRUE     # def = "ifneeded"
-
-start_run(cfg, codeCheck=FALSE)
-
-
-##Runs with physical water restrictions
-
-source("scripts/start_functions.R")
-source("config/default.cfg")
-
-# short description of the actual run
-cfg$title <- "2504_yield50_lesswater"
-
-#recalibrate yields
-cfg$recalibrate <- TRUE     # def = "ifneeded"
-
-#Water demand scenario in module 43 will be set to exogenous to apply new settings
-cfg$gms$c43_watavail_scenario <- "exo"
-
-#Setting shock year from which physical restrictions in water will be used
-s43_shock_year <- 1995
+cfg$title <- "0305_default"
 
 cfg$input <- c(cellular = "rev4.67_2204_indiaYields_05_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
         regional = "rev4.67_2204_indiaYields_05_h12_magpie.tgz",
@@ -56,24 +31,19 @@ cfg$input <- c(cellular = "rev4.67_2204_indiaYields_05_h12_fd712c0b_cellularmagp
 
 cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL),
                                            getOption("magpie_repos"))
-
 
 cfg$force_download <- TRUE
 
 start_run(cfg, codeCheck=FALSE)
 
-
 ####################################################################333
-##Default run with default pumping costs
+##High pumping costs 1
 
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # short description of the actual run
-cfg$title <- "2504_yield50_default_cost005cent"
-
-#recalibrate yields
-cfg$recalibrate <- TRUE     # def = "ifneeded"
+cfg$title <- "0305_cost1cent"
 
 cfg$input <- c(cellular = "rev4.67_2204_indiaYields_05_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
         regional = "rev4.67_2204_indiaYields_05_h12_magpie.tgz",
@@ -84,29 +54,8 @@ cfg$input <- c(cellular = "rev4.67_2204_indiaYields_05_h12_fd712c0b_cellularmagp
 cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL),
                                            getOption("magpie_repos"))
 
-start_run(cfg, codeCheck=FALSE)
-
-
-####################################################################333
-##Default run with increased pumping costs
-
-source("scripts/start_functions.R")
-source("config/default.cfg")
-
-# short description of the actual run
-cfg$title <- "2504_yield50_cost1cent"
-
-#recalibrate yields
-cfg$recalibrate <- TRUE     # def = "ifneeded"
-
-cfg$input <- c(cellular = "rev4.67_2204_indiaYields_05_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-        regional = "rev4.67_2204_indiaYields_05_h12_magpie.tgz",
-        validation = "rev4.67_2204_indiaYields_05_h12_validation.tgz",
-        calibration = "calibration_H12_mixed_feb17_18Jan22.tgz",
-        additional = "additional_data_rev4.08.tgz")
-
-cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL),
-                                           getOption("magpie_repos"))
+#Setting shock years from when policy shocks will be implemented
+cfg$gms$s42_shockyear <- 2020
 
 ##Increasing pumping costs to 1 cent
 cfg$gms$s42_multiplier <- 2
@@ -114,15 +63,12 @@ cfg$gms$s42_multiplier <- 2
 start_run(cfg, codeCheck=FALSE)
 
 
-##increased pumping costs
+##increased pumping costs 2
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # short description of the actual run
-cfg$title <- "2504_yield50_cost2cent"
-
-#recalibrate yields
-cfg$recalibrate <- TRUE     # def = "ifneeded"
+cfg$title <- "0305_cost2cent"
 
 cfg$input <- c(cellular = "rev4.67_2204_indiaYields_05_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
         regional = "rev4.67_2204_indiaYields_05_h12_magpie.tgz",
@@ -133,10 +79,135 @@ cfg$input <- c(cellular = "rev4.67_2204_indiaYields_05_h12_fd712c0b_cellularmagp
 cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL),
                                            getOption("magpie_repos"))
 
+
+
+#Setting shock years from when policy shocks will be implemented
+cfg$gms$s42_shockyear <- 2020
+
 ##Increasing pumping costs to 1 cent
 cfg$gms$s42_multiplier <- 4
 
 start_run(cfg, codeCheck=FALSE)
+
+
+
+####################################################################333
+##EFP 30%
+
+source("scripts/start_functions.R")
+source("config/default.cfg")
+
+# short description of the actual run
+cfg$title <- "0305_efp_30percent"
+
+#Setting shock years from when policy shocks will be implemented
+cfg$gms$s42_shockyear <- 2020
+
+cfg$gms$c42_env_flow_policy <- "mixed"             # def = "off"
+cfg$gms$EFP_countries <- "IND" # def = all_iso_countries
+cfg$gms$s42_env_flow_scenario <- 1            # def = 2
+cfg$gms$s42_env_flow_fraction <- 0.3           # def = 0.2
+
+
+cfg$input <- c(cellular = "rev4.67_2204_indiaYields_05_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+        regional = "rev4.67_2204_indiaYields_05_h12_magpie.tgz",
+        validation = "rev4.67_2204_indiaYields_05_h12_validation.tgz",
+        calibration = "calibration_H12_mixed_feb17_18Jan22.tgz",
+        additional = "additional_data_rev4.08.tgz")
+
+cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL),
+                                           getOption("magpie_repos"))
+
+start_run(cfg, codeCheck=FALSE)
+
+####################################################################333
+##EFP 40%
+
+source("scripts/start_functions.R")
+source("config/default.cfg")
+
+# short description of the actual run
+cfg$title <- "0305_efp_40percent"
+
+#Setting shock years from when policy shocks will be implemented
+cfg$gms$s42_shockyear <- 2020
+
+cfg$gms$c42_env_flow_policy <- "mixed"             # def = "off"
+cfg$gms$EFP_countries <- "IND" # def = all_iso_countries
+cfg$gms$s42_env_flow_scenario <- 1            # def = 2
+cfg$gms$s42_env_flow_fraction <- 0.4           # def = 0.2
+
+
+cfg$input <- c(cellular = "rev4.67_2204_indiaYields_05_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+        regional = "rev4.67_2204_indiaYields_05_h12_magpie.tgz",
+        validation = "rev4.67_2204_indiaYields_05_h12_validation.tgz",
+        calibration = "calibration_H12_mixed_feb17_18Jan22.tgz",
+        additional = "additional_data_rev4.08.tgz")
+
+cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL),
+                                           getOption("magpie_repos"))
+
+start_run(cfg, codeCheck=FALSE)
+
+####################################################################333
+##EFP 50%
+
+source("scripts/start_functions.R")
+source("config/default.cfg")
+
+# short description of the actual run
+cfg$title <- "0305_efp_50percent"
+
+#Setting shock years from when policy shocks will be implemented
+cfg$gms$s42_shockyear <- 2020
+
+cfg$gms$c42_env_flow_policy <- "mixed"             # def = "off"
+cfg$gms$EFP_countries <- "IND" # def = all_iso_countries
+cfg$gms$s42_env_flow_scenario <- 1            # def = 2
+cfg$gms$s42_env_flow_fraction <- 0.5           # def = 0.2
+
+
+cfg$input <- c(cellular = "rev4.67_2204_indiaYields_05_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+        regional = "rev4.67_2204_indiaYields_05_h12_magpie.tgz",
+        validation = "rev4.67_2204_indiaYields_05_h12_validation.tgz",
+        calibration = "calibration_H12_mixed_feb17_18Jan22.tgz",
+        additional = "additional_data_rev4.08.tgz")
+
+cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL),
+                                           getOption("magpie_repos"))
+
+start_run(cfg, codeCheck=FALSE)
+
+####################################################################333
+##EFP 60%
+
+source("scripts/start_functions.R")
+source("config/default.cfg")
+
+# short description of the actual run
+cfg$title <- "0305_efp_60percent"
+
+#Setting shock years from when policy shocks will be implemented
+cfg$gms$s42_shockyear <- 2020
+
+cfg$gms$c42_env_flow_policy <- "mixed"             # def = "off"
+cfg$gms$EFP_countries <- "IND" # def = all_iso_countries
+cfg$gms$s42_env_flow_scenario <- 1            # def = 2
+cfg$gms$s42_env_flow_fraction <- 0.6           # def = 0.2
+
+
+cfg$input <- c(cellular = "rev4.67_2204_indiaYields_05_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+        regional = "rev4.67_2204_indiaYields_05_h12_magpie.tgz",
+        validation = "rev4.67_2204_indiaYields_05_h12_validation.tgz",
+        calibration = "calibration_H12_mixed_feb17_18Jan22.tgz",
+        additional = "additional_data_rev4.08.tgz")
+
+cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=NULL),
+                                           getOption("magpie_repos"))
+
+start_run(cfg, codeCheck=FALSE)
+
+
 
 #Iterations of factor costs in ssp2 food demand setting
 #for(i in seq(1, 2, by = 0.5)) {
