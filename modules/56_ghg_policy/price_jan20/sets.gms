@@ -85,7 +85,13 @@ sets
       redd_nosoil,
       redd+_nosoil,
       redd+natveg_nosoil,
-      maccs_excl_cropland_n2o /
+      maccs_excl_cropland_n2o,
+      sdp_cropeff,
+      sdp_livestock,
+      sdp_redd,
+      sdp_soil,
+      sdp_redd_soil
+       /
 
 ;
 *######################### R SECTION END (SETS) ################################

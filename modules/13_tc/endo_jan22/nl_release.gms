@@ -5,6 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* ### nl_relax ###
+* ### nl_release ###
 
-vm_tau.l(h) = vm_tau.l(h) + 0.1;
+vm_tau.lo(h,tautype) =    pcm_tau(h,tautype);
+vm_tau.up(h,tautype) =  2*pcm_tau(h,tautype);

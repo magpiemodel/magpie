@@ -5,22 +5,16 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-
-pc13_land(i) = sum(cell(i,j),pcm_land(j,"crop"));
-
-if (sum(sameas(t_past,t),1) = 1 AND s13_ignore_tau_historical = 0,
-	vm_tau.lo(h) =    f13_tau_historical(t,h);
-else
-	vm_tau.lo(h) =    pcm_tau(h);
+loop(t,
+ if(m_year(t) <= sm_fix_SSP2,
+  i13_tc_factor(t) = f13_tc_factor(t,"medium");
+  i13_tc_exponent(t) = f13_tc_exponent(t,"medium");
+ else
+  i13_tc_factor(t) = f13_tc_factor(t,"%c13_tccost%");
+  i13_tc_exponent(t) = f13_tc_exponent(t,"%c13_tccost%");
+ );
 );
 
-
-* educated guess for vm_tau.l:
-if(ord(t) = 1,
-	vm_tau.l(h) = pcm_tau(h);
-else
-	vm_tau.l(h) = pcm_tau(h)*(1+pc13_tcguess(h))**m_yeardiff(t);
-);
-
-vm_tau.up(h) = 2*pcm_tau(h);
-vm_tech_cost.up(i) = 10e9;
+pcm_tau(h,"crop")        = fm_tau1995(h);
+pcm_tau(h,"pastr")       = fm_pastr_tau_hist("y1995",h);
+pc13_tcguess(h,tautype)  = f13_tcguess(h);

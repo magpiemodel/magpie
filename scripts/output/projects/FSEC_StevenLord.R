@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: Create FSEC environmental pollutants output dataset
+# description: Create FSEC output dataset for Steven Lord
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
@@ -16,7 +16,7 @@
 library(gms)
 library(magpie4)
 
-message("Starting FSEC environmental pollutants output runscript")
+message("Starting FSEC_StevenLord output runscript")
 
 ############################# BASIC CONFIGURATION #######################################
 if (!exists("source_include")) {
@@ -34,13 +34,17 @@ message("Script started for output directory: ", outputdir)
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 title <- cfg$title
 
-message("Generating environmental pollutants output for the run: ", title)
+message("Generating StevenLord output for the run: ", title)
 gdx <- file.path(outputdir, "fulldata.gdx")
 
 baseDir <- getwd()
-pollutantsOutputDir <- file.path(baseDir, "output", "pollutants")
-if (!dir.exists(pollutantsOutputDir)) {
-    dir.create(pollutantsOutputDir)
+stevenLordOutputDir <- file.path(baseDir, "output", "StevenLord")
+if (!dir.exists(stevenLordOutputDir)) {
+    dir.create(stevenLordOutputDir)
 }
 
-out <- getReportGridPollutants(gdx = gdx, reportOutputDir = pollutantsOutputDir, magpieOutputDir = outputdir, scenario = title)
+# Grid-level nitrogen pollution
+out <- getReportFSECStevenLord(gdx = gdx,
+                               reportOutputDir = stevenLordOutputDir,
+                               magpieOutputDir = outputdir,
+                               scenario = title)

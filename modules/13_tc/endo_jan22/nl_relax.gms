@@ -5,15 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-loop(t,
- if(m_year(t) <= sm_fix_SSP2,
-  i13_tc_factor(t) = f13_tc_factor(t,"medium");
-  i13_tc_exponent(t) = f13_tc_exponent(t,"medium");
- else
-  i13_tc_factor(t) = f13_tc_factor(t,"%c13_tccost%");
-  i13_tc_exponent(t) = f13_tc_exponent(t,"%c13_tccost%");
- );
-);
+* ### nl_relax ###
 
-pcm_tau(h)      = fm_tau1995(h);
-pc13_tcguess(h)  = f13_tcguess(h);
+vm_tau.l(h,tautype) = vm_tau.l(h,tautype) + 0.1;
