@@ -89,9 +89,9 @@ sets
        livst_egg   .  (livst_egg)
        livst_milk   .  (livst_milk)
        fish   . (fish)
-       res_cereals   . (res_cereals,  foddr)
-       res_fibrous   . (res_fibrous,  foddr)
-       res_nonfibrous   . (res_nonfibrous, foddr)
+       res_cereals   . (foddr)
+       res_fibrous   . (foddr)
+       res_nonfibrous   . (foddr)
        wood   . (wood)
        woodfuel   . (woodfuel)
        /
