@@ -46,6 +46,9 @@ if((s42_env_flow_scenario=0),
  i42_env_flows_base(t,j) = 0;
  i42_env_flows(t,j) = 0;
 Elseif(s42_env_flow_scenario=1),
+  if(m_year(t) > s42_shockyear,
+  i42_env_flows(t,j) = s42_env_flow_fraction * sum(wat_src, im_wat_avail(t,wat_src,j));
+  );
   i42_env_flows(t,j) = s42_env_flow_fraction * sum(wat_src, im_wat_avail(t,wat_src,j));
 );
 
