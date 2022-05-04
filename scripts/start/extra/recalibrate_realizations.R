@@ -40,23 +40,23 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-realizations<-c("sticky_feb18") #"perTonFAO","sticky_labor" is very similar to sticky_feb18. No extra calibration needed.
+realizations<-c("sticky_feb18","perTonFAO") #"perTonFAO","sticky_labor" is very similar to sticky_feb18. No extra calibration needed.
 type<-NULL
 
 for(r in realizations){
 
       cfg$results_folder <- "output/:title:"
       cfg$recalibrate <- TRUE
-      cfg$recalibrate_landconversion_cost <- "ifneeded"
+      cfg$recalibrate_landconversion_cost <- TRUE
 
-      cfg$title <-  paste("calib_runB",r,sep="_")
+      cfg$title <-  paste("calib_run",r,sep="_")
 
       cfg$output <- c("rds_report","validation_short")
-      cfg$force_replace <- TRUE
+      cfg$force_download <- TRUE
 
       cfg$gms$factor_costs     <-   r
 
 
       start_run(cfg)
-      magpie4::submitCalibration(paste("H12B",r,sep="_"))
+      magpie4::submitCalibration(paste("H12",r,sep="_"))
     }
