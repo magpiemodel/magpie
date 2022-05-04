@@ -43,11 +43,6 @@ source("config/default.cfg")
 realizations<-c("sticky_feb18","perTonFAO") #"sticky_labor" is very similar to sticky_feb18. No extra calibration needed.
 type<-NULL
 
-cfg$input <- c(regional    = "rev4.69_h12_magpie.tgz",
-               cellular    = "rev4.69_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-               validation  = "rev4.69_h12_validation.tgz",
-               additional  = "additional_data_rev4.10.tgz")
-
 for(r in realizations){
 
       cfg$results_folder <- "output/:title:"
