@@ -40,7 +40,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-realizations<-c("perTonFAO") #"sticky_feb18","sticky_labor" is very similar to sticky_feb18. No extra calibration needed.
+realizations<-c("sticky_feb18") #"perTonFAO","sticky_labor" is very similar to sticky_feb18. No extra calibration needed.
 type<-NULL
 
 for(r in realizations){
@@ -58,5 +58,5 @@ for(r in realizations){
 
 
       start_run(cfg)
-      magpie4::submitCalibration(paste("H12",r,sep="_"))
+      magpie4::submitCalibration(paste("H12B",r,sep="_"))
     }
