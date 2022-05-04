@@ -49,7 +49,7 @@ for(r in realizations){
       cfg$recalibrate <- TRUE
       cfg$recalibrate_landconversion_cost <- "ifneeded"
 
-      cfg$title <-  paste("calib_run",r,sep="_")
+      cfg$title <-  paste("calib_runB",r,sep="_")
 
       cfg$output <- c("rds_report","validation_short")
       cfg$force_replace <- TRUE
