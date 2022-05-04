@@ -7,7 +7,8 @@
 
 
 scalars
- s13_ignore_tau_historical	ignore historial tau (1) or use it as lower bound (0) (binary) / 1 /
+ s13_ignore_tau_historical	ignore historical tau (1) or use it as lower bound (0) (binary) / 1 /
+ s13_max_gdp_shr Maximum tech cost as share of regional GDP / 1 /
 ;
 
 parameter fm_tau1995(h) Agricultural land use intensity tau in 1995 (1)

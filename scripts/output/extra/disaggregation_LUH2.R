@@ -81,8 +81,6 @@ countries<-intersect(getCells(mapping),unique(mapping_spatial$country))
 mapping_spatial<-subset(mapping_spatial,country %in% countries)
 map_LUHMAg_grid<-setYears(speed_aggregate(mapping[countries,,],rel=mapping_spatial,weight=NULL,from="country",to="cell",dim=1),NULL)
 
-
-
 #### calculates grid cell area of the earths sphere
 land_hr <- read.magpie(land_hr_out_file)
 land_hr <- land_hr[,-1,]
