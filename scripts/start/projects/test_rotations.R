@@ -27,7 +27,7 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 #cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 
-prefix <- "rotationtests05uncalib"
+prefix <- "rotationpenalty06uncalib"
 #cfg$qos <- "priority"
 
 cfg$title <- paste(prefix,"olddefault",sep="_")
@@ -38,7 +38,7 @@ cfg$gms$crop    <- "rotation_apr22"
 cfg$gms$c30_rotation_scenario = "min_20div"
 start_run(cfg,codeCheck=FALSE)
 
-for (scenario in c("min","good","good_20div","setaside","legumes","agroforestry","sixfoldrotation","agroecology")){
+for (scenario in c("none","default","fallow","legumes","agroforestry","agroecology")){
   for (byyear in c("by2030","by2050")){
 	  cfg$gms$c30_rotation_scenario = scenario
 	  cfg$gms$c30_rotation_scenario_speed = byyear
