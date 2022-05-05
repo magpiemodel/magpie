@@ -21,3 +21,17 @@ table f38_region_yield(i,kcr) Regional crop yields (tDM per ha)
 $ondelim
 $include "./modules/38_factor_costs/mixed_reg_feb17/input/f38_region_yield.csv"
 $offdelim;
+
+parameter f38_reg_parameters(reg) Parameters for regression
+/
+$ondelim
+$include "./modules/38_factor_costs/input/f38_regression_cap_share.csv"
+$offdelim
+/
+;
+
+table f38_historical_share(t_all,i) Historical capital share
+$ondelim
+$include "./modules/38_factor_costs/input/f38_historical_share.csv"
+$offdelim
+;
