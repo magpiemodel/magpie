@@ -22,7 +22,7 @@ $ondelim
 $include "./modules/38_factor_costs/mixed_reg_feb17/input/f38_region_yield.csv"
 $offdelim;
 
-parameter f38_reg_parameters(reg) Parameters for regression
+parameter f38_reg_parameters(reg) Parameters for capital share regression
 /
 $ondelim
 $include "./modules/38_factor_costs/input/f38_regression_cap_share.csv"

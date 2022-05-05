@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **config** Update of regional and grid inputs from 4.68 to rev4.69, and additional files to 4.17. Removed free/dynamic sticky switch, and added scalars used in mixed_regional factor costs realization.
+- **11_costs** Split of production costs per sector, addded new separated costs to the costs function.
+- **18_residues**  The variable that include production costs vm_cost_prod for residues changed to a new independent variable called vm_cost_prod_kres
+(specific to residues).
+- **31_past**  The variable that include production costs vm_cost_prod for pasture changed to a new independent variable called vm_cost_prod_past
+(specific to past).
+- **38_factor_costs** Sticky free/dynamic switch was removed and the realization was split into two realizations: the new perTonFAO (free) and sticky_feb18 (dynamic). vm_cost_prod(i,kall) is now vm_cost_prod_crop(i,req) for crops factor costs. The results are now given differentiating between capital and labor for all realizations (new set req).
+- **70_livestock** vm_cost_prod(i,kall) is now vm_cost_prod_livst(i,req) for livestock factor costs (req indicates differentiation between capital and labor) and vm_cost_prod_fish(i) for fish.
+- **scripts** clean up of the recalibrate_realizations.R script, project_LAMACLIMA_WP4.R, and sticky.R to remove sticky dynamic/free switch.
 - **scripts** bugfix in disaggregation.R, disaggregation_BII.R with respect to urban scenario
 - **scripts** added FSEC modeling start script (global runs)
  - **config** added s13_max_gdp_shr setting for tech cost upper bound as share of GDP PPP
@@ -50,8 +59,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     f31_LUH2v2.cs3 -> LUH2v2 land classes separating rangelands from managed pastures
     f31_grassl_yld.cs3 -> Rangelands and managed pastures grass yields
     f31_grass_bio_hist.cs3 -> Historical grass biomass demand
+- **38_factor_costs** mixed_reg_feb17 realization added. This realization includes differences in productions costs between irrigated and rainfed crops, with the option of regional differentiation as well. perTonFAO realization added. This realization corresponds to the old sticky_feb18 free.
 
 ### removed
+- **38_factor_costs** mixed_feb17 and fixed_per_ton_mar18 realzations removed because they are not bein used at the moment.
 
 ### fixed
 - **inputs** included data for Sudan
