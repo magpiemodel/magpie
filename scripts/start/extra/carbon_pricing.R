@@ -24,7 +24,7 @@ source("config/default.cfg")
 #download_and_update(cfg)
 
 # create additional information to describe the runs
-cfg$info$flag <- "PR_CO2_after18" 
+cfg$info$flag <- "PR_CO2_after19" 
 
 #cfg$gms$s13_max_gdp_shr <- 1
 
