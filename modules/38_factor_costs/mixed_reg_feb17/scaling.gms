@@ -4,5 +4,3 @@
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
-
-vm_cost_prod_crop.scale(i,kall) = 10e4;
