@@ -68,9 +68,6 @@ im_pollutant_prices(t_all,i,pollutants,emis_source)$(s56_ghgprice_devstate_scali
 ***GHG emission policy
 im_pollutant_prices(t_all,i,pollutants,emis_source) = im_pollutant_prices(t_all,i,pollutants,emis_source) * f56_emis_policy("%c56_emis_policy%",pollutants,emis_source);
 
-*reward neg emissions depending on s56_reward_neg_emis
-v56_emission_cost.lo(i,emis_oneoff) = s56_reward_neg_emis;
-
 ***construct age-class dependent C price for afforestation incentive
 ***this is needed because time steps (t) and age-classes (ac) can differ. ac and t_all are always in 5-year time steps.
 *For missing years in t_all use C price of previous time step. This step makes sure that C prices for every 5-year time step are available.
