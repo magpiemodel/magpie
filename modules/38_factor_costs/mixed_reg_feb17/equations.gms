@@ -10,8 +10,8 @@
 
 
 q38_cost_prod_crop(i2,req) ..
-    vm_cost_prod_crop(i2,req)  =e= (sum((cell(i2,j2), w, kcr), vm_area(j2,kcr,w)*f38_region_yield(i2,kcr)
-                            * vm_tau(i2)/fm_tau1995(i2)*p38_fac_req(i2,kcr,w))) * sum(ct,p38_cost_share(ct,i2,req));
+    vm_cost_prod_crop(i2,req)  =e= (sum((cell(i2,j2), supreg(h2,i2), w, kcr), vm_area(j2,kcr,w)*f38_region_yield(i2,kcr)
+                            * vm_tau(h2,"crop")/fm_tau1995(i2)*p38_fac_req(i2,kcr,w))) * sum(ct,p38_cost_share(ct,i2,req));
 
 
 *' The equation above shows that factor requirement costs `vm_cost_prod_costs` mainly
