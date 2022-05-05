@@ -22,7 +22,9 @@ vm_area.fx(j,kbe30,w)=0;
 vm_area.up(j,bioen_type_30,bioen_water_30)=Inf;
 *' @stop
 
+*' No penalties or fallows exist in this realization
 vm_rotation_penalty.fx(i)=0;
+vm_fallow.fx(j)=0;
 
 crpmax30(crp30) = yes$(f30_rotation_max_shr(crp30) < 1);
 crpmin30(crp30) = yes$(f30_rotation_min_shr(crp30) > 0);

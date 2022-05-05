@@ -10,16 +10,15 @@ parameters
  p30_region_setaside_shr(i)			Set-aside share of the region (1)
  p30_country_dummy(iso)		        Dummy parameter indicating whether country is affected by selected set-aside policy (1)
  i30_avl_cropland_iso(iso)			Available land area for cropland at ISO level (mio. ha)
- i30_rotation_max_shr(t_all,rotamax30) Maximum share of a certain crop group on cropland (ha per ha)
- i30_rotation_min_shr(t_all,rotamin30) Minimum share of a certain crop group on cropland (ha per ha)
+ i30_rotation_incentives(t_all,rota30) penalty for violating constraints (USD05MER per ha)
 ;
 
 positive variables
+ vm_fallow(j)                   Fallow land (mio. ha)
  vm_area(j,kcr,w)                Agricultural production area (mio. ha)
  vm_rotation_penalty(i)                  Penalty for violating rotational constraints (USD05MER)
- v30_penalty_max_irrig(j,rotamax30) Penalty for violating max rotational constraints (USD05MER)
- v30_penalty_min(j,rotamin30) Penalty for violating min rotational constraints (USD05MER)
- v30_penalty_max(j,rotamax30) Penalty for violating rotational constraints on irrigated areas (USD05MER)
+ v30_penalty_max_irrig(j,rotamax30) Penalty for violating max rotational constraints on irrigated land (USD05MER)
+ v30_penalty(j,rota30) Penalty for violating rotational constraints (USD05MER)
 ;
 
 equations

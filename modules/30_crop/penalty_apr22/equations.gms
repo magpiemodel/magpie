@@ -7,10 +7,13 @@
 
 *' @equations
 *' The total land requirements for cropland are calculated as
-*' the sum of crop and water supply type specific land requirements:
+*' the sum of crop and water supply type specific land requirements.
+*' Fallow is no explicit landuse type, but the difference between
+*' land and harvested vm_area
 
  q30_cropland(j2)  ..
-   sum((kcr,w), vm_area(j2,kcr,w)) =l= vm_land(j2,"crop");
+   sum((kcr,w), vm_area(j2,kcr,w)) =e= vm_land(j2,"crop")+vm_fallow(j2);
+
 
 *' We assume that crop production can only take place on suitable cropland area.
 *' We use a suitability index (SI) map from @zabel_global_2014 to exclude areas
@@ -29,28 +32,30 @@ q30_rotation_penalty(i2) ..
   vm_rotation_penalty(i2)
   =g=
   sum(cell(i2,j2),
-    sum(rotamax_red30, v30_penalty_max(j2,rotamax_red30) * 100
-      +v30_penalty_max(j2,rotamax_red30) * 100)
-    + sum(rotamin_red30, v30_penalty_min(j2,rotamin_red30) * 100)
+    sum(rota30, v30_penalty(j2,rota30) * sum(ct, i30_rotation_incentives(ct,rota30)))
+    + sum(rotamax_red30, v30_penalty_max_irrig(j2,rotamax_red30) * sum(ct, i30_rotation_incentives(ct,rotamax_red30)))
   );
 
-*' As additional constraints minimum and maximum rotational constraints limit
-*' the placing of crops. On the one hand, these rotational constraints reflect
-*' crop rotations limiting the share a specific crop can cover of the total area
-*' of a cluster:
+*' The penalty applies to the areas which exceed a certain maximum
+*' share of the land. Below this share, negative benefits are
+*' avoided by defining the penalty positive
 
  q30_rotation_max(j2,rotamax_red30) ..
-   v30_penalty_max(j2,rotamax_red30)
+   v30_penalty(j2,rotamax_red30)
    =g=
-   sum((rotamax_kcr30(rotamax_red30,kcr),w), vm_area(j2,kcr,w)) -
-   vm_land(j2,"crop") * sum(ct,i30_rotation_max_shr(ct,rotamax_red30));
+   sum((rota_kcr30(rotamax_red30,kcr),w),
+    vm_area(j2,kcr,w) -
+    vm_land(j2,"crop") * f30_rotation_rules(rotamax_red30)
+   );
 
-
+*' Minimum constraints imply that penalties applies when a certain mimimum
+*' share of a group is not achieved. This is used to guarantee a minimum
+*' diversity withing cells.
  q30_rotation_min(j2,rotamin_red30) ..
-    v30_penalty_min(j2,rotamin_red30)
+    v30_penalty(j2,rotamin_red30)
     =g=
-    sum((rotamin_kcr30(rotamin_red30,kcr),w), vm_area(j2,kcr,w)) -
-    vm_land(j2,"crop") * sum(ct,i30_rotation_min_shr(ct,rotamin_red30));
+    vm_land(j2,"crop") * f30_rotation_rules(rotamin_red30)
+    - sum((rota_kcr30(rotamin_red30,kcr),w), vm_area(j2,kcr,w));
 
 * we also include the max constraint irrigated systems so that they cannot
 * be too specialized. The minimum constraint can however also just
@@ -59,8 +64,8 @@ q30_rotation_penalty(i2) ..
  q30_rotation_max_irrig(j2,rotamax_red30) ..
    v30_penalty_max_irrig(j2,rotamax_red30)
    =g=
-   sum((rotamax_kcr30(rotamax_red30,kcr)), vm_area(j2,kcr,"irrigated")) -
-   vm_AEI(j2) * sum(ct,i30_rotation_max_shr(ct,rotamax_red30));
+   sum((rota_kcr30(rotamax_red30,kcr)), vm_area(j2,kcr,"irrigated"))
+   - vm_AEI(j2) * f30_rotation_rules(rotamax_red30);
 
 
 *' Agricultural production is calculated by multiplying the area under

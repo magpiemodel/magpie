@@ -7,13 +7,9 @@
 
 * create crop rotation scenario
 
-i30_rotation_max_shr(t_all,rotamax30)=
-  f30_rotation_max_shr(rotamax30,"min_20div") * (1-f30_scenario_fader(t_all,"%c30_rotation_scenario_speed%"))+
-  f30_rotation_max_shr(rotamax30,"%c30_rotation_scenario%") * (f30_scenario_fader(t_all,"%c30_rotation_scenario_speed%"));
-
-i30_rotation_min_shr(t_all,rotamin30)=
-  f30_rotation_min_shr(rotamin30,"min_20div") * (1-f30_scenario_fader(t_all,"%c30_rotation_scenario_speed%"))+
-  f30_rotation_min_shr(rotamin30,"%c30_rotation_scenario%") * (f30_scenario_fader(t_all,"%c30_rotation_scenario_speed%"));
+i30_rotation_incentives(t_all,rota30)=
+  f30_rotation_incentives(rota30,"default") * (1-f30_scenario_fader(t_all,"%c30_rotation_scenario_speed%"))+
+  f30_rotation_incentives(rota30,"%c30_rotation_scenario%") * (f30_scenario_fader(t_all,"%c30_rotation_scenario_speed%"));
 
 
 *due to some rounding errors the input data currently may contain in some cases

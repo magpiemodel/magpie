@@ -20,7 +20,7 @@ $setglobal c30_set_aside_target  none
 $setglobal c30_rotation_constraints  on
 *options: on, off
 
-$setglobal c30_rotation_scenario  min_20div
+$setglobal c30_rotation_scenario  default
 *options: min,min_20div,good,good_20div,setaside,legumes,agroforestry,sixfoldrotation,agroecology
 
 $setglobal c30_rotation_scenario_speed  by2050
@@ -67,20 +67,19 @@ m_fillmissingyears(fm_croparea,"j,w,kcr");
 
 ********* CROP-ROTATIONAL CONSTRAINT *******************************************
 
-table f30_rotation_max_shr(rotamax30,rotascen30) Maximum allowed area shares for each crop type (1)
+table f30_rotation_incentives(rota30,rotascen30) penalties for violating rotation rules (USD05MER)
 $ondelim
-$include "./modules/30_crop/penalty_apr22/input/f30_rotation_max_scen.csv"
+$include "./modules/30_crop/penalty_apr22/input/f30_rotation_incentives.csv"
 $offdelim
 ;
-$if "%c30_rotation_constraints%" == "off" f30_rotation_max_shr(crp30) = 1;
 
-
-table f30_rotation_min_shr(rotamin30,rotascen30) Minimum allowed area shares for each crop type (1)
+parameter f30_rotation_rules(rota30) Rotation min or max shares (1)
+/
 $ondelim
-$include "./modules/30_crop/penalty_apr22/input/f30_rotation_min_scen.csv"
+$include "./modules/30_crop/penalty_apr22/input/f30_rotation_rules.csv"
 $offdelim
+/
 ;
-$if "%c30_rotation_constraints%" == "off" f30_rotation_min_shr(crp30) = 0;
 
 
 ********* AVAILABLE CROPLAND *******************************************

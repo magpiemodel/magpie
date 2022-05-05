@@ -10,7 +10,7 @@
 *' the sum of crop and water supply type specific land requirements:
 
  q30_cropland(j2)  ..
-   sum((kcr,w), vm_area(j2,kcr,w)) =l= vm_land(j2,"crop");
+   sum((kcr,w), vm_area(j2,kcr,w)) =e= vm_land(j2,"crop")+  vm_fallow(j2);
 
 *' We assume that crop production can only take place on suitable cropland area.
 *' We use a suitability index (SI) map from @zabel_global_2014 to exclude areas

@@ -16,6 +16,11 @@
 *' [41_area_equipped_for_irrigation], [42_water_demand], [50_nr_soil_budget],
 *' [53_methane] and [59_som].
 
+*' This module realization allows for different scenarios of rotational
+*' constraints which are implemented via penalty payments if constraints are
+*' exceeded. Rotational constraints are defined for total land as well as
+*' for irrigated areas only to avoid overspecialization on irrigated land.
+
 *' This realisation also includes the option to set aside a given share of
 *' the total available cropland for other land cover classes (by a given target
 *' year), in order to provide species habitats and to benefit from ecosystem

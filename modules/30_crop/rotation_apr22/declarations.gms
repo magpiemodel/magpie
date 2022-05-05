@@ -15,6 +15,7 @@ parameters
 ;
 
 positive variables
+ vm_fallow(j)                   Fallow land (mio. ha)
  vm_area(j,kcr,w)                Agricultural production area (mio. ha)
  vm_rotation_penalty(i)                  Penalty for violating rotational constraints (USD05MER)
 ;

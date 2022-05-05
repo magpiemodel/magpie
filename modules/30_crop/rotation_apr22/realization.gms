@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description The endo_apr21 realization calculates the crop specific
+*' @description The rotation_apr21 realization calculates the crop specific
 *' agricultural land use endogenously based on yield data coming from the
 *' module [14_yields] and the rotational as well as suitability constraints
 *' stated in the input data of the module.
@@ -15,6 +15,11 @@
 *' are also used in [18_residues], [38_factor_costs],
 *' [41_area_equipped_for_irrigation], [42_water_demand], [50_nr_soil_budget],
 *' [53_methane] and [59_som].
+
+*' This module realization allows for different scenarios of rotational 
+*' constraints which are implemented as fixed limits. Rotational constraints
+*' are defined for total land as well as for irrigated areas only to avoid
+*' overspecialization on irrigated land.
 
 *' This realisation also includes the option to set aside a given share of
 *' the total available cropland for other land cover classes (by a given target
