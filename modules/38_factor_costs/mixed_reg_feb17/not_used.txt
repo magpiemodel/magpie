@@ -9,3 +9,5 @@ name,type,reason
 vm_prod_reg,input,questionnaire
 pm_interest,input,questionnaire
 pm_prod_init,input,questionnaire
+vm_prod,input,questionnaire
+pm_labor_prod,input,questionnaire
