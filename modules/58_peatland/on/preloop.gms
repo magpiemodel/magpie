@@ -5,9 +5,9 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_btm_cell.fx(j,"peatland",pollutants) = 0;
-vm_btm_cell.lo(j,"peatland",poll58) = -Inf;
-vm_btm_cell.up(j,"peatland",poll58) = Inf;
+vm_btm_reg.fx(i,"peatland",pollutants) = 0;
+vm_btm_reg.lo(i,"peatland",poll58) = -Inf;
+vm_btm_reg.up(i,"peatland",poll58) = Inf;
 
 * GHG emission conversion factors from GWP100 to element unit.
 p58_conversion_factor("co2") = 12/44;

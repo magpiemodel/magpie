@@ -9,9 +9,8 @@
 * ATTENTION: emissions in 1995 are not meaningful
 vm_carbon_stock.l(j,land,ag_pools,stockType) = fm_carbon_density("y1995",j,land,ag_pools)*pcm_land(j,land);
 
-vm_btm_cell.lo(j,emis_co2,"co2_c") = -Inf;
-vm_btm_cell.up(j,emis_co2,"co2_c") = Inf;
-vm_btm_reg.fx(i,emis_source_reg,"co2_c") = 0;
+*vm_btm_reg.fx(i,emis_oneoff,pollutants)$(not sameas(pollutants,"co2_c")) = 0;
+v56_emis_pricing.fx(i,emis_oneoff,pollutants)$(not sameas(pollutants,"co2_c")) = 0;
 
 ****** Region price share for ghg policy of selective countries:
 * Country switch to determine countries for which ghg policy shall be applied.
@@ -70,7 +69,7 @@ im_pollutant_prices(t_all,i,pollutants,emis_source)$(s56_ghgprice_devstate_scali
 im_pollutant_prices(t_all,i,pollutants,emis_source) = im_pollutant_prices(t_all,i,pollutants,emis_source) * f56_emis_policy("%c56_emis_policy%",pollutants,emis_source);
 
 *reward neg emissions depending on s56_reward_neg_emis
-v56_emission_costs_cell_oneoff.lo(j2,emis_cell_one56) = s56_reward_neg_emis;
+v56_emission_cost.lo(i,emis_oneoff) = s56_reward_neg_emis;
 
 ***construct age-class dependent C price for afforestation incentive
 ***this is needed because time steps (t) and age-classes (ac) can differ. ac and t_all are always in 5-year time steps.

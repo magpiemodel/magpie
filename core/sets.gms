@@ -302,28 +302,15 @@ secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, 
      other_vegc, other_litc, other_soilc,
      peatland/
 
-   emis_source_reg(emis_source) Regional emission sources
+   emis_oneoff(emis_source) oneoff emission sources
+   / crop_vegc, crop_litc, crop_soilc, past_vegc, past_litc, past_soilc, forestry_vegc,
+   forestry_litc, forestry_soilc, primforest_vegc, primforest_litc, primforest_soilc,
+   secdforest_vegc, secdforest_litc, secdforest_soilc,
+   urban_vegc, urban_litc, urban_soilc, other_vegc, other_litc, other_soilc /
+
+   emis_annual(emis_source) annual emission sources
    / inorg_fert, man_crop, awms, resid, man_past, som,
-     rice, ent_ferm, resid_burn /
-
-   emis_source_cell(emis_source) Cellular emission sources
-   / crop_vegc, crop_litc, crop_soilc,
-     past_vegc, past_litc, past_soilc,
-     forestry_vegc, forestry_litc, forestry_soilc,
-     primforest_vegc, primforest_litc, primforest_soilc,
-secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, urban_soilc,
-     other_vegc, other_litc, other_soilc, peatland /
-
-   emis_co2(emis_source_cell) Land pool CO2 emission sources
-   / crop_vegc, crop_litc, crop_soilc,
-     past_vegc, past_litc, past_soilc,
-     forestry_vegc, forestry_litc, forestry_soilc,
-     primforest_vegc, primforest_litc, primforest_soilc,
-secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, urban_soilc,
-     other_vegc, other_litc, other_soilc /
-
-   co2_forestry(emis_source_cell) Sources of forestry land CO2 emissions
-   /forestry_vegc, forestry_litc, forestry_soilc/
+   rice, ent_ferm, resid_burn, peatland /
 
    c_pools Carbon pools
    /vegc,litc,soilc/
@@ -333,7 +320,7 @@ secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, 
 
 ***RELATIONSHIPS BETWEEN DIFFERENT SETS***
 
-  emis_land(emis_co2,land,c_pools) Mapping between land and carbon pools
+  emis_land(emis_oneoff,land,c_pools) Mapping between land and carbon pools
   /crop_vegc        . (crop) . (vegc)
    crop_litc        . (crop) . (litc)
    crop_soilc       . (crop) . (soilc)
@@ -355,12 +342,6 @@ secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, 
    other_vegc       . (other) . (vegc)
    other_litc       . (other) . (litc)
    other_soilc      . (other) . (soilc)
-   /
-
-   emis_co2_to_forestry(co2_forestry,c_pools) Mapping between forestry land and carbon pools
-  /forestry_vegc    . (vegc)
-   forestry_litc    . (litc)
-   forestry_soilc   . (soilc)
    /
 
 ;

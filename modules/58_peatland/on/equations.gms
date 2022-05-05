@@ -107,8 +107,8 @@
 
 *' Conversion from CO2 equivalent to element unit for interface `vm_btm_cell` using GWP100 conversion factors from AR5 (same as in @wilson_2016).
 
- q58_peatland_emis(j2,poll58) ..
-	vm_btm_cell(j2,"peatland",poll58) =e= 
-	sum(emisSub58_to_poll58(emisSub58,poll58),
+ q58_peatland_emis(i2,poll58) ..
+	vm_btm_reg(i2,"peatland",poll58) =e= 
+	sum((cell(i2,j2),emisSub58_to_poll58(emisSub58,poll58)),
 		v58_peatland_emis(j2,emisSub58) * p58_conversion_factor(emisSub58));
 	
