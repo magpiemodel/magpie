@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **modules** Moved interface `vm_carbon_stock` from 52_carbon to 56_ghg_policy
  - **config** changed default setting for s56_reward_neg_emis from 0 to -Inf
  - **scripts** scripts/output/extra/emulator.R Remove dependency on deprecated R package "magpie"
+- **56_ghg_policy** Deactivated GHG emission policies were not accounted for in the MACCs module. This has been corrected by an extension of the interface `im_pollutant_prices`, which now has an additional dimension for emission sources `emis_source`. In this context some equations in `56_ghg_policy` have been simplified (sets: `emis_source_reg`, `emis_source_cell`). Also, GHG emissions from peatlands have been fully integrated into `56_ghg_policy`.
 
 ### added
 - **scripts** output/projects/FSEC_StevenLord.R to create output for Steven Lord in the FSEC context
@@ -70,7 +71,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** calibration; set NA values to 1
 - **scripts** fixed misleading warning in check_config
 - **scripts** fixed configuration error in FSEC output scripts, FSEC_dietaryIndicators.R and FSEC_environmentalPollutants.R
-- **56_ghg_policy** Deactivated GHG emission policies were not accounted for in the MACCs module. This has been corrected by an extension of the interface `im_pollutant_prices`, which now has an additional dimension for emission sources `emis_source`. In this context some equations in `56_ghg_policy` have been simplified (sets: `emis_source_reg`, `emis_source_cell`). Also, GHG emissions from peatlands have been fully integrated into `56_ghg_policy`.
+- **56_ghg_policy** Some equations in `56_ghg_policy` have been simplified. Also, GHG emissions from peatlands have been fully integrated into `56_ghg_policy`.
 - **scripts** scripts/start/extra/emulator.R  Throw an error if no file can be found to take the GHG prices from
 
 ## [4.4.0] - 2021-12-13
