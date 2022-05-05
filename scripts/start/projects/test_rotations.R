@@ -27,7 +27,7 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 #cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 
-prefix <- "rotationtests03uncalib"
+prefix <- "rotationtests05uncalib"
 #cfg$qos <- "priority"
 
 cfg$title <- paste(prefix,"olddefault",sep="_")

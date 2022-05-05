@@ -14,6 +14,7 @@ parameters
 
 positive variables
  vm_area(j,kcr,w)                Agricultural production area (mio. ha)
+ vm_rotation_penalty(i)                  Penalty for violating rotational constraints (USD05MER)
 ;
 
 equations
