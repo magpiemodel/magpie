@@ -12,19 +12,17 @@
 
 *** Emissions
 
-*' Actual cellular CO2 emissions are calculated based on changes in carbon stocks between timesteps in the interface `vm_carbon_stock`.
+*' Actual CO2 emissions are calculated based on changes in carbon stocks between timesteps in the interface `vm_carbon_stock`.
 
  q56_emis_co2_actual(i2,emis_oneoff) ..
 	vm_btm_reg(i2,emis_oneoff,"co2_c") =e=
                  sum((cell(i2,j2),emis_land(emis_oneoff,land,c_pools)),
                  (vm_carbon_stock.l(j2,land,c_pools,"actual") - vm_carbon_stock(j2,land,c_pools,"actual"))/m_timestep_length);
 
-*' Total **regional GHG emissions** `vm_emissions_reg` are the sum of emissions from different regional and cellular sources less
+*' Total **regional GHG emissions** `vm_emissions_reg` are the sum of emissions from different sources less
 *' the fraction `im_maccs_mitigation` that can be abated by technicial mitigation measures (see  module [57_maccs]). 
 *' The regional emisssions before technical mitigation are calculated in the respective modules 
 *' ([51_nitrogen], [53_methane]) and delivered to this module through the interface variable `vm_btm_reg`.
-
-*' Actual GHG emissions
 
  q56_technical_mitigation(i2,pollutants,emis_source) ..
 	vm_emissions_reg(i2,emis_source,pollutants) =e=
@@ -32,7 +30,7 @@
                  * (1 - sum(ct, im_maccs_mitigation(ct,i2,emis_source,pollutants)));
 
 *' GHG emissions for pricing can differ for CO2 emissions from land-use change depending on `c56_carbon_stock_pricing`.
-*' Cellular CO2 emission subject to emission pricing are calculated based on changes in carbon stocks between timesteps in the interface `vm_carbon_stock`, depending on `c56_carbon_stock_pricing`.
+*' CO2 emission subject to emission pricing are calculated based on changes in carbon stocks between timesteps in the interface `vm_carbon_stock`, depending on `c56_carbon_stock_pricing`.
 
  q56_emis_pricing(i2,pollutants,emis_annual) ..
 	v56_emis_pricing(i2,emis_annual,pollutants) =e= 

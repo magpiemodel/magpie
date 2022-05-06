@@ -9,7 +9,6 @@
 * ATTENTION: emissions in 1995 are not meaningful
 vm_carbon_stock.l(j,land,ag_pools,stockType) = fm_carbon_density("y1995",j,land,ag_pools)*pcm_land(j,land);
 
-*vm_btm_reg.fx(i,emis_oneoff,pollutants)$(not sameas(pollutants,"co2_c")) = 0;
 v56_emis_pricing.fx(i,emis_oneoff,pollutants)$(not sameas(pollutants,"co2_c")) = 0;
 
 ****** Region price share for ghg policy of selective countries:
