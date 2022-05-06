@@ -86,9 +86,8 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
 *' Forestry above ground carbon stocks are calculated as the product of forestry land (`v32_land`) and the area
 *' weighted mean of carbon density for carbon pools (`p32_carbon_density_ac`).
 
- q32_carbon(j2,ag_pools)  .. vm_carbon_stock(j2,"forestry",ag_pools) =e=
-                         sum((type32,ac), v32_land(j2,type32,ac)*
-                         sum(ct, p32_carbon_density_ac(ct,j2,type32,ac,ag_pools)));
+ q32_carbon(j2,ag_pools,stockType) .. vm_carbon_stock(j2,"forestry",ag_pools,stockType) =e=
+ 						m_carbon_stock_ac(v32_land,p32_carbon_density_ac,"type32,ac","type32,ac_sub");
 
 *' Forestry land expansion and reduction is calculated as follows:
 

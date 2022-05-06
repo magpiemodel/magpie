@@ -32,8 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **scripts** removed test script "irrig_dep_test" from "start" folder to "extra" folder
  - **scripts** Added script to folder projects paper_grassland.R
  - **44_biodiversity** Improved documentation, simplification of equations and flexible options for price on biodiversity loss
- - **config** changed default setting for s56_reward_neg_emis from 0 to -Inf
+ - **modules** Moved interface `vm_carbon_stock` from 52_carbon to 56_ghg_policy
  - **scripts** scripts/output/extra/emulator.R Remove dependency on deprecated R package "magpie"
+- **56_ghg_policy** Deactivated GHG emission policies were not accounted for in the MACCs module. This has been corrected by an extension of the interface `im_pollutant_prices`, which now has an additional dimension for emission sources `emis_source`. In this context some equations in `56_ghg_policy` have been simplified (sets: `emis_source_reg`, `emis_source_cell`). Also, GHG emissions from peatlands have been fully integrated into `56_ghg_policy`.
 
 ### added
 - **scripts** output/projects/FSEC_StevenLord.R to create output for Steven Lord in the FSEC context
@@ -50,6 +51,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     f31_LUH2v2.cs3 -> LUH2v2 land classes separating rangelands from managed pastures
     f31_grassl_yld.cs3 -> Rangelands and managed pastures grass yields
     f31_grass_bio_hist.cs3 -> Historical grass biomass demand
+ - **modules** New dimension in `vm_carbon_stock` for different carbon stock types (actual, previousLandPattern, previousCarbonDensity)
+ - **config** added option for CO2 emission pricing `cfg$gms$c56_carbon_stock_pricing`
+ - **config** added cfg$gms$s70_past_mngmnt_factor_fix with default 2005 (previous default was 2010). The previous setting caused a strong spike in CO2 emissions from pasture expansion in SSA. With 2005, this can be avoided.
 
 ### removed
 
@@ -66,7 +70,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** calibration; set NA values to 1
 - **scripts** fixed misleading warning in check_config
 - **scripts** fixed configuration error in FSEC output scripts, FSEC_dietaryIndicators.R and FSEC_environmentalPollutants.R
+- **56_ghg_policy** Some equations in `56_ghg_policy` have been simplified. Also, GHG emissions from peatlands have been fully integrated into `56_ghg_policy`.
 - **scripts** scripts/start/extra/emulator.R  Throw an error if no file can be found to take the GHG prices from
+ - **56_ghg_policy and config** removed switch `s56_reward_neg_emis`
 
 ## [4.4.0] - 2021-12-13
 

@@ -19,6 +19,7 @@ parameters
  i58_cost_rewet_onetime(t) 							One-time costs for peatland restoration (USD05MER per ha)
  i58_cost_degrad_recur(t)							Recurring costs for degraded peatland (USD05MER per ha)
  i58_cost_degrad_onetime(t)							One-time costs for peatland degradation (USD05MER per ha)
+ p58_conversion_factor(emisSub58)					Conversion factor from GWP100 GHG emissions to element (1)
 ;
 
 equations
@@ -33,7 +34,7 @@ equations
  q58_peatland_cost(j)							One-time and recurring cost of peatland conversion and management (mio. USD05MER per yr)
  q58_peatland_cost_annuity(j)					Annuity costs of peatland conversion in the current timestep (mio. USD05MER per yr)
  q58_peatland_emis_detail(j,emis58)				Detailed GHG emissions from managed peatland (t CO2eq per year)
- q58_peatland_emis(j)							GHG emissions from managed peatland (t CO2eq per year)
+ q58_peatland_emis(i,poll58)					GHG emissions from managed peatland (Tg per yr)
 ;
 
 variables
@@ -47,7 +48,6 @@ positive variables
  v58_lu_transitions(j,from58,to58)			Peatland transitions (mio. ha)
  v58_expansion(j,stat58)					Peatland expansion (mio. ha)
  v58_reduction(j,stat58)					Peatland reduction (mio. ha)
- vm_peatland_emis(j) 						GHG emissions from managed peatland (t CO2eq per year)
  v58_peatland_man(j,man58,land58)			Managed peatland (mio. ha)
  v58_peatland_intact(j)						Intact peatland (mio. ha)
  v58_balance_positive(j)					Balance variable for peatland transitions (mio. ha)
@@ -63,7 +63,6 @@ parameters
  ov58_lu_transitions(t,j,from58,to58,type)  Peatland transitions (mio. ha)
  ov58_expansion(t,j,stat58,type)            Peatland expansion (mio. ha)
  ov58_reduction(t,j,stat58,type)            Peatland reduction (mio. ha)
- ov_peatland_emis(t,j,type)                 GHG emissions from managed peatland (t CO2eq per year)
  ov58_peatland_man(t,j,man58,land58,type)   Managed peatland (mio. ha)
  ov58_peatland_intact(t,j,type)             Intact peatland (mio. ha)
  ov58_balance_positive(t,j,type)            Balance variable for peatland transitions (mio. ha)
@@ -79,6 +78,6 @@ parameters
  oq58_peatland_cost(t,j,type)               One-time and recurring cost of peatland conversion and management (mio. USD05MER per yr)
  oq58_peatland_cost_annuity(t,j,type)       Annuity costs of peatland conversion in the current timestep (mio. USD05MER per yr)
  oq58_peatland_emis_detail(t,j,emis58,type) Detailed GHG emissions from managed peatland (t CO2eq per year)
- oq58_peatland_emis(t,j,type)               GHG emissions from managed peatland (t CO2eq per year)
+ oq58_peatland_emis(t,i,poll58,type)        GHG emissions from managed peatland (Tg per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

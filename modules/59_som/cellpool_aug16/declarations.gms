@@ -25,6 +25,8 @@ equations
          q59_nr_som_fertilizer(j)                         Bound of nitrogen fertilizer of soil organic matter loss (Mt N per yr)
          q59_nr_som_fertilizer2(j)                        Fraction of soil organic matter loss take is taken up by plants (Mt N per yr)
          q59_carbon_soil(j,pools59)                       Soil carbon content calculation (mio. tC)
+         q59_carbon_soil2(j,pools59)                       Soil carbon content calculation (mio. tC)
+         q59_carbon_soil3(j,pools59)                       Soil carbon content calculation (mio. tC)
 ;
 
 positive variables
@@ -54,5 +56,7 @@ parameters
  oq59_nr_som_fertilizer(t,j,type)                      Bound of nitrogen fertilizer of soil organic matter loss (Mt N per yr)
  oq59_nr_som_fertilizer2(t,j,type)                     Fraction of soil organic matter loss take is taken up by plants (Mt N per yr)
  oq59_carbon_soil(t,j,pools59,type)                    Soil carbon content calculation (mio. tC)
+ oq59_carbon_soil2(t,j,pools59,type)                   Soil carbon content calculation (mio. tC)
+ oq59_carbon_soil3(t,j,pools59,type)                   Soil carbon content calculation (mio. tC)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
