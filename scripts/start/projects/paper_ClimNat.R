@@ -29,7 +29,7 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 
-prefix <- "CN44"
+prefix <- "CN45"
 
 cfg$qos <- "priority"
 
