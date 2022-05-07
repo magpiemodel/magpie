@@ -35,7 +35,12 @@ prefix <- "CN49"
 download_and_update(cfg)
 
 cfg$gms$tc <- "exo"
-tau("output/CN48_SSP2-Ref/fulldata.gdx","modules/13_tc/input/f13_tau_scenario.csv")
+a <- tau("output/CN48_SSP2-Ref/fulldata.gdx",type = "crop")
+getNames(a) <- "crop"
+b <- tau("output/CN48_SSP2-Ref/fulldata.gdx",type = "pastr")
+getNames(b) <- "pastr"
+all <- mbind(a,b)
+write.magpie(all,"modules/13_tc/input/f13_tau_scenario.csv")
 Sys.sleep(5)
 
 cfg$qos <- "priority"
