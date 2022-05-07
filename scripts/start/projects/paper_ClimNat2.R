@@ -29,11 +29,17 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 
-prefix <- "CN48"
+prefix <- "CN49"
+
+download_and_update(cfg)
+
+cfg$gms$tc <- "exo"
+tau("output/CN48_SSP2-Ref/fulldata.gdx","modules/13_tc/input/f13_tau_scenario.csv")
+Sys.sleep(5)
 
 cfg$qos <- "priority"
 
-for (pol in c("Ref","Carbon","Biodiversity","Food","Integrated")) {
+for (pol in c("Ref","Carbon","Biodiversity","Integrated")) {
   for (ssp in c("SSP2")) {
     if (pol == "Ref") {
       cfg <- setScenario(cfg,c(ssp,"NPI","rcp7p0"))
@@ -60,7 +66,7 @@ for (pol in c("Ref","Carbon","Biodiversity","Food","Integrated")) {
       cfg$gms$c60_biodem_level <- 1
       cfg$gms$s32_aff_plantation <- 0
       cfg$gms$s32_aff_bii_coeff <- 0
-      cfg$gms$s32_max_aff_area <- 500
+      cfg$gms$s32_max_aff_area <- Inf
       cfg$gms$c35_forest_damage_end <- "by2030"
       cfg$gms$s44_target_price <- 0
       cfg$gms$c35_protect_scenario <- "WDPA"
@@ -105,12 +111,12 @@ for (pol in c("Ref","Carbon","Biodiversity","Food","Integrated")) {
       cfg <- setScenario(cfg,c(ssp,"NPI","rcp7p0"))
       cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"#"PIK_LIN"
       cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-NPi"#"PIK_NPI"
-      cfg$gms$s15_exo_diet <- 1
-      cfg$gms$s15_exo_waste <- 1
+      cfg$gms$s15_exo_diet <- 0
+      cfg$gms$s15_exo_waste <- 0
       cfg$gms$c60_biodem_level <- 1
       cfg$gms$s32_aff_plantation <- 0
       cfg$gms$s32_aff_bii_coeff <- 0
-      cfg$gms$s32_max_aff_area <- 500
+      cfg$gms$s32_max_aff_area <- Inf
       cfg$gms$c35_forest_damage_end <- "by2030"
       cfg$gms$s44_target_price <- 2000
       cfg$gms$c35_protect_scenario <- "BH_IFL"
