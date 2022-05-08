@@ -30,7 +30,7 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 
-prefix <- "CN54"
+prefix <- "CN55"
 
 download_and_update(cfg)
 
@@ -44,6 +44,8 @@ download_and_update(cfg)
 # Sys.sleep(5)
 
 cfg$qos <- "priority"
+
+cfg$gms$c_timesteps <- "5year"
 
 for (pol in c("Ref","Carbon","Biodiversity","Integrated")) {
   for (ssp in c("SSP2")) {
@@ -91,10 +93,8 @@ for (pol in c("Ref","Carbon","Biodiversity","Integrated")) {
       cfg$gms$s32_aff_bii_coeff <- 0
       cfg$gms$s32_max_aff_area <- Inf
       cfg$gms$c35_forest_damage_end <- "by2030"
-      cfg$gms$s44_start_year <- 2025
       cfg$gms$s44_target_year <- 2050
-      cfg$gms$s44_start_price <- 500
-      cfg$gms$s44_target_price <- 500
+      cfg$gms$s44_target_price <- 1500
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_set_aside_target <- "by2030"
       cfg$gms$s30_set_aside_shr <- 0.2
@@ -127,10 +127,8 @@ for (pol in c("Ref","Carbon","Biodiversity","Integrated")) {
       cfg$gms$s32_aff_bii_coeff <- 0
       cfg$gms$s32_max_aff_area <- Inf
       cfg$gms$c35_forest_damage_end <- "by2030"
-      cfg$gms$s44_start_year <- 2025
       cfg$gms$s44_target_year <- 2050
-      cfg$gms$s44_start_price <- 500
-      cfg$gms$s44_target_price <- 500
+      cfg$gms$s44_target_price <- 1500
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_set_aside_target <- "by2030"
       cfg$gms$s30_set_aside_shr <- 0.2
