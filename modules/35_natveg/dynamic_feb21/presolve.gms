@@ -136,7 +136,9 @@ v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
 m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
 
 * Secondary forest conservation
-pm_land_conservation(t,j,"secdforest","protect")$(pm_land_conservation(t,j,"secdforest","protect") > sum(ac_sub, pc35_secdforest(j,ac_sub))) = sum(ac_sub, pc35_secdforest(j,ac_sub));
+* protection bound fix
+pm_land_conservation(t,j,"secdforest","protect")$(abs(pm_land_conservation(t,j,"secdforest","protect") - sum(ac_sub, pc35_secdforest(j,ac_sub))) < 10e-5) = sum(ac_sub, pc35_secdforest(j,ac_sub));
+* set conservation bound
 vm_land.lo(j,"secdforest") = sum(consv_type, pm_land_conservation(t,j,"secdforest",consv_type));
 
 ** Other land
@@ -148,6 +150,9 @@ v35_other.up(j,ac) = Inf;
 v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
 
 * Other land conservation
+* protection bound fix
+pm_land_conservation(t,j,"other","protect")$(abs(pm_land_conservation(t,j,"other","protect") - sum(ac_sub, pc35_other(j,ac_sub))) < 10e-5) = sum(ac_sub, pc35_other(j,ac_sub));
+* set conservation bound
 vm_land.lo(j,"other") = sum(consv_type, pm_land_conservation(t,j,"other",consv_type));
 
 * ------------------------------
