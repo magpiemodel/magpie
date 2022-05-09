@@ -34,7 +34,7 @@ cfg$title <- paste(prefix,"olddefault",sep="_")
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- paste(prefix,"newdefault",sep="_")
-cfg$gms$crop    <- "rotation_apr22"
+cfg$gms$crop    <- "penalty_apr22"
 cfg$gms$c30_rotation_scenario = "min_20div"
 start_run(cfg,codeCheck=FALSE)
 
