@@ -13,15 +13,9 @@ sets
    /frac_gasf,frac_gasm,frac_leach,frac_leach_h,ef_1,ef_1fr,ef_2,ef_4,ef_5/
 
    emis_source_n51(emis_source) Emission sources from agriculture
-   / inorg_fert, man_crop, awms, resid, man_past, som, rice /
+   / inorg_fert, man_crop, awms, resid, resid_burn, man_past, som /
 
-   emis_source_nonitrogen51(emis_source) Emission sources
-   / rice, ent_ferm,
-     crop_vegc, crop_litc, crop_soilc,
-     past_vegc, past_litc, past_soilc,
-     forestry_vegc, forestry_litc, forestry_soilc,
-     primforest_vegc, primforest_litc, primforest_soilc,
-secdforest_vegc, secdforest_litc, secdforest_soilc,     urban_vegc, urban_litc, urban_soilc,
-     other_vegc, other_litc, other_soilc,
-     beccs/
+   emis_source_n_cropsoils51(emis_source) activities that lead to emissions
+   / inorg_fert, man_crop, resid, som, rice /
+
 ;
