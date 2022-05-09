@@ -17,17 +17,20 @@ library(madrat)
 library(mrcommons)
 
 ############################# BASIC CONFIGURATION ##############################
-if (!exists("source_include")) {
-  outputdir <- "output/FSEC_EnvironmentalWelfareIndicators"
-  readArgs("outputdir")
+if(!exists("source_include")) {
+  outputdir <- file.path("output/", list.dirs("output/", full.names = FALSE, recursive = FALSE))
+  # Define arguments that can be read from command line
+  lucode2::readArgs("outputdir")
 }
+
 map_file           <- Sys.glob(file.path(outputdir, "clustermap_*.rds"))
-gdx                <- file.path(outputdir,"fulldata.gdx")
-land_hr_file       <- file.path(outputdir,"avl_land_full_t_0.5.mz")
-urban_land_hr_file <- file.path(outputdir,"f34_urbanland_0.5.mz")
+gdx                <- file.path(outputdir, "fulldata.gdx")
+land_hr_file       <- file.path(outputdir, "avl_land_full_t_0.5.mz")
+urban_land_hr_file <- file.path(outputdir, "f34_urbanland_0.5.mz")
 side_layers        <- file.path(outputdir, "luh2_side_layers_0.5.mz")
 
-cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
+cfg   <- gms::loadConfig(file.path(outputdir, "config.yml"))
+title <- cfg$title
 ################################################################################
 
 sizelimit <- getOption("magclass_sizeLimit")
@@ -82,7 +85,7 @@ if(any(land_ini_hr < 0)) {
 # read in hr urban land
 if (cfg$gms$urban == "exo_nov21" ) {
   urban_land_hr <- read.magpie(urban_land_hr_file)
-  ssp           <- cfg$gms$c09_gdp_scenario
+  ssp           <- cfg$gms$c34_urban_scenario
   urban_land_hr <- urban_land_hr[,,ssp]
   getNames(urban_land_hr) <- "urban"
 } else if (cfg$gms$urban == "static"){
@@ -125,8 +128,15 @@ land_hr <- land_hr * side_layers_hr[, , c("forested", "nonforested")]
 # Sum over land classes
 bii_hr <- dimSums(land_hr * bii_hr, dim = 3, na.rm = TRUE)
 
-write.magpie(bii_hr, file.path(outputdir, "cell.bii_0.5.nc"), comment = "unitless")
-write.magpie(bii_hr, file.path(outputdir, "cell.bii_0.5.mz"), comment = "unitless")
+# Create new output folder for BII
+baseDir      <- getwd()
+biiOutputDir <- file.path(baseDir, "output", "BII")
+if (!dir.exists(biiOutputDir)) {
+    dir.create(biiOutputDir)
+}
+
+write.magpie(bii_hr, file.path(biiOutputDir, paste0(title, "_cell.bii_0.5.nc")), comment = "unitless")
+write.magpie(bii_hr, file.path(biiOutputDir, paste0(title, "_cell.bii_0.5.mz")), comment = "unitless")
 
 # Clean up
 rm(bii_hr)

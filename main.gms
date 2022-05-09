@@ -158,9 +158,9 @@ $title magpie
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev4.10.tgz
+* Used data set: additional_data_rev4.14.tgz
 * md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Used data set: calibration_H12_sticky_feb18_free_18Jan22.tgz
 * md5sum: NA
@@ -190,7 +190,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Wed Apr 27 12:40:07 2022
+* Last modification (input data): Mon May 09 22:55:22 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 

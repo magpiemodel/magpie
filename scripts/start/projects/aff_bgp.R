@@ -10,7 +10,7 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-library(lucode)
+library(lucode2)
 library(magclass)
 
 # Switch between control and experiment, "exp", "ctr"

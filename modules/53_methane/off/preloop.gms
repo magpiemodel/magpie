@@ -5,4 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_carbon_stock.l(j,land,ag_pools) = pcm_carbon_stock(j,land,ag_pools);
+*' @code
+*' Methane emission from agricultural sources equals to zero.
+
+vm_btm_reg.fx(i,emis_source,"ch4") = 0;
