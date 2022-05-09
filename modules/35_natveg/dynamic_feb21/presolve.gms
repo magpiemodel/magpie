@@ -81,12 +81,6 @@ p35_other(t,j,ac) = p35_other(t,j,ac) - p35_recovered_forest(t,j,ac);
 p35_secdforest(t,j,ac) = p35_secdforest(t,j,ac) + p35_recovered_forest(t,j,ac);
 *' @stop
 
-* Shift forestry land used for land conservation to secondary forest land
-p35_secdforest(t,j,ac) = p35_secdforest(t,j,ac) + sum(pol_type32, pm_forestry_to_consv(t,j,pol_type32,ac));
-* Adjust land restoration for forestry shift
-pm_land_conservation(t,j,"secdforest","restore") = pm_land_conservation(t,j,"secdforest","restore")
-                        - sum((pol_type32,ac_sub), pm_forestry_to_consv(t,j,pol_type32,ac_sub));
-
 pc35_secdforest(j,ac) = p35_secdforest(t,j,ac);
 v35_secdforest.l(j,ac) = pc35_secdforest(j,ac);
 vm_land.l(j,"secdforest") = sum(ac, pc35_secdforest(j,ac));

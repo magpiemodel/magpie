@@ -61,7 +61,6 @@ parameters
  p32_avg_increment(t_all,j,ac)                      Mean annual increment (tC per ha per year)
  p32_bii_coeff(type32,bii_class_secd,potnatveg)	    bii coeff (1)
  p32_c_density_ac_fast_forestry(t_all,j,ac)         Carbon densities in plantations based on Braakhekke et al (tC per ha)
- pm_forestry_to_consv(t,j,pol_type32,ac)            Price-induced afforestation and ndc afforestation used for land conservation (mio. ha)
 ;
 
 positive variables
