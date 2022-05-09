@@ -63,7 +63,7 @@ p32_cdr_ac(t,j,ac)$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planing_horizon/5)
 s32_shift = m_yeardiff_forestry(t)/5;
 *' @stop
 
-*' Shifting of age-calsses in land.
+*' Shifting of age-classes in land.
 *` @code
 if((ord(t)=1),
 p32_land(t,j,type32,ac)$(ord(ac) > s32_shift) = p32_land_start_ac(j,type32,ac-s32_shift);
@@ -78,12 +78,15 @@ p32_land(t,j,type32,"acx") = p32_land(t,j,type32,"acx") + sum(ac$(ord(ac) > card
 p32_land(t,j,type32,ac_est) = 0;
 *' @stop
 
+* Determin forestry land used for forest conservation
+* ndc
 pm_forestry_to_consv(t,j,"ndc",ac)$(sum(ac2, p32_land(t,j,"ndc",ac2)) > 0) = (p32_land(t,j,"ndc",ac) / sum((pol_type32,ac2), p32_land(t,j,pol_type32,ac2))) * pm_land_conservation(t,j,"secdforest","restore");
 pm_forestry_to_consv(t,j,"ndc",ac)$(pm_forestry_to_consv(t,j,"ndc",ac) > p32_land(t,j,"ndc",ac)) = p32_land(t,j,"ndc",ac);
-
+* aff
 pm_forestry_to_consv(t,j,"aff",ac)$(sum(ac2, p32_land(t,j,"aff",ac2)) > 0) = (p32_land(t,j,"aff",ac) / sum((pol_type32,ac2), p32_land(t,j,pol_type32,ac2))) * pm_land_conservation(t,j,"secdforest","restore");
 pm_forestry_to_consv(t,j,"aff",ac)$(pm_forestry_to_consv(t,j,"aff",ac) > p32_land(t,j,"aff",ac)) = p32_land(t,j,"aff",ac);
 
+* substract land used for conservation from forestry land (added to secdforest in 35_natveg)
 p32_land(t,j,"ndc",ac)$(sum(ac2, p32_land(t,j,"ndc",ac2)) > 0) = p32_land(t,j,"ndc",ac) - pm_forestry_to_consv(t,j,"ndc",ac);
 p32_land(t,j,"aff",ac)$(sum(ac2, p32_land(t,j,"aff",ac2)) > 0) = p32_land(t,j,"aff",ac) - pm_forestry_to_consv(t,j,"aff",ac);
 
