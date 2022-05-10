@@ -7,7 +7,7 @@
 
 sets
   rotascen30 rotation constraint scenarios
-  /min,min_20div,good,good_20div,setaside,legumes,agroforestry,sixfoldrotation,agroecology/
+  /min,default,good,good_20div,setaside,legumes,agroforestry,sixfoldrotation,agroecology/
 
   rotamax30 Maximum crop rotation categories
   / all_max, cereals_excl_rice_max, stalk_max,

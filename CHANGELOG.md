@@ -51,9 +51,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     f31_LUH2v2.cs3 -> LUH2v2 land classes separating rangelands from managed pastures
     f31_grassl_yld.cs3 -> Rangelands and managed pastures grass yields
     f31_grass_bio_hist.cs3 -> Historical grass biomass demand
- - **modules** New dimension in `vm_carbon_stock` for different carbon stock types (actual, previousLandPattern, previousCarbonDensity)
- - **config** added option for CO2 emission pricing `cfg$gms$c56_carbon_stock_pricing`
- - **config** added cfg$gms$s70_past_mngmnt_factor_fix with default 2005 (previous default was 2010). The previous setting caused a strong spike in CO2 emissions from pasture expansion in SSA. With 2005, this can be avoided.
+- **modules** New dimension in `vm_carbon_stock` for different carbon stock types (actual, previousLandPattern, previousCarbonDensity)
+- **config** added option for CO2 emission pricing `cfg$gms$c56_carbon_stock_pricing`
+- **config** added cfg$gms$s70_past_mngmnt_factor_fix with default 2005 (previous default was 2010). The previous setting caused a strong spike in CO2 emissions from pasture expansion in SSA. With 2005, this can be avoided.
+- **module realization** new module realization for 30_crop including crop rotation scenarios by strict constraints (rotation_apr22) and by penalties (penalty_apr22)
+- **scripts** start/test_rotations.R testscript for different rotation scenario settings
 
 ### removed
 
