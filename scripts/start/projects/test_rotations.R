@@ -27,16 +27,20 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 #cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 
-prefix <- "rotationpenalty07uncalib"
-#cfg$qos <- "priority"
-
 cfg$title <- paste(prefix,"olddefault",sep="_")
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- paste(prefix,"newdefault",sep="_")
 cfg$gms$crop    <- "penalty_apr22"
 cfg$gms$c30_rotation_scenario = "min_20div"
+
+prefix <- "rotationpenalty07calib"
+#cfg$qos <- "priority"
+cfg$recalibrate <- TRUE
+cfg$recalibrate_landconversion_cost <- "ifneeded"
 start_run(cfg,codeCheck=FALSE)
+magpie4::submitCalibration("H12_rotation")
+cfg$recalibrate <- FALSE
 
 for (scenario in c("none","default","fallow","legumes","agroforestry","agroecology")){
   for (byyear in c("by2030","by2050")){
