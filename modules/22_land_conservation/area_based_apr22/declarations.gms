@@ -15,6 +15,8 @@ parameters
  p22_conservation_fader(t_all)			                  Land conservation fader (1)
  p22_consv_shr_ini(j,consv22_all)   		              Land conservation share for primforest, secdforest and other land (1)
  p22_consv_shr(t,j,consv22_all,land_natveg)               Land conservation share for primforest, secdforest and other land (1)
+ p22_past_restore_pot(t,j)                                Potential pasture restoration area (mio. ha)
+ p22_secdf_restore_pot(t,j)
  p22_other_restore_pot(t,j)                               Potential other land restoration area (mio. ha)
  p22_country_weight(i)	                  		          Land conservation country weight per region (1)
  p22_country_dummy(iso)		                              Dummy parameter indicating whether country is affected by selected land conservation policy (1)

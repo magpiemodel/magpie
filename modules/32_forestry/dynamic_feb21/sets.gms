@@ -16,9 +16,6 @@ sets
  type32 plantation type
  / aff, ndc, plant /
 
- pol_type32(type32) price-induced afforestation and ndc afforestation only
- / aff, ndc /
-
  pol32 afforestation policy type
  / none, npi, ndc /
 
