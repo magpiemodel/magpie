@@ -59,7 +59,7 @@ pm_land_conservation(t,j,"past","restore")$(p22_conservation_area(t,j,"past") > 
 			  p22_conservation_area(t,j,"past") - pcm_land(j,"past");
 * Primary and secondary forest cannot be converted to grassland. Therefore
 * grassland restoration is contrained by the remaining agricultural & other land:
-p22_past_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop")) + (vm_land.l(j,"other") - p22_conservation_area(t,j,"other"));
+p22_past_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop")) + (vm_land.l(j,"other") - pm_land_conservation(t,j,"other","protect"));
 p22_past_restore_pot(t,j)$(p22_past_restore_pot(t,j) < 0) = 0;
 * grassland restoration is limited by grassland restoration potential
 pm_land_conservation(t,j,"past","restore")$(pm_land_conservation(t,j,"past","restore") > p22_past_restore_pot(t,j)) = p22_past_restore_pot(t,j);
@@ -68,7 +68,7 @@ pm_land_conservation(t,j,"past","restore")$(pm_land_conservation(t,j,"past","res
 pm_land_conservation(t,j,"secdforest","restore")$(p22_conservation_area(t,j,"secdforest") > pcm_land(j,"secdforest")) =
 			  p22_conservation_area(t,j,"secdforest") - pcm_land(j,"secdforest");
 * Secondary forest restoration is contrained by managed land exluding settlements:
-p22_secdf_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop")) + (vm_land.l(j,"past") - p22_conservation_area(t,j,"past")) + (vm_land.l(j,"forestry") - vm_land.lo(j,"forestry")) + (vm_land.l(j,"other") - p22_conservation_area(t,j,"other"));
+p22_secdf_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop")) + (vm_land.l(j,"past") - p22_conservation_area(t,j,"past")) + (vm_land.l(j,"forestry") - vm_land.lo(j,"forestry")) + (vm_land.l(j,"other") - pm_land_conservation(t,j,"other","protect"));
 p22_secdf_restore_pot(t,j)$(p22_secdf_restore_pot(t,j) < 0) = 0;
 * Secondary forest restoration is limited by secondary forest restoration potential
 pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") > p22_secdf_restore_pot(t,j)) = p22_secdf_restore_pot(t,j);
