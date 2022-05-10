@@ -21,7 +21,7 @@ $setglobal c30_rotation_constraints  on
 *options: on, off
 
 $setglobal c30_rotation_scenario  current
-*options: min,min_20div,good,good_20div,setaside,legumes,agroforestry,sixfoldrotation,agroecology
+*options: min,default,good,good_20div,setaside,legumes,agroforestry,sixfoldrotation,agroecology
 
 $setglobal c30_rotation_scenario_speed  by2050
 * options: none, by2030, by2020
