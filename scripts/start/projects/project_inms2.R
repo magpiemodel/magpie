@@ -46,7 +46,7 @@ buildInputVector <- function(regionmapping   = "agmip",
 ### General settings ###
 general_settings<-function(title) {
   source("config/default.cfg")
-  cfg<-lucode::setScenario(cfg,"cc")
+  cfg<-setScenario(cfg,"cc")
   cfg$force_download <- TRUE
   cfg$gms$c_timesteps <- 12
   cfg$gms$som <- "cellpool_aug16"
@@ -65,8 +65,8 @@ general_settings<-function(title) {
 ###############################################################################
 ########## Calibration run  ##########
 cfg<-general_settings(title="SSP2_RCP4p5_Calib")
-cfg<-lucode::setScenario(cfg,"SSP2")
-cfg<-lucode::setScenario(cfg,"cc")
+cfg<-setScenario(cfg,"SSP2")
+cfg<-setScenario(cfg,"cc")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms",calibration="calibration_inms_c200_08Jul2020.tgz")
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem    <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
@@ -86,7 +86,7 @@ cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp8p5",regionmapping=
 # Development: fossil-fuel driven (SSP5)
 # Land Use: medium regulation, high productivity
 # Diet: meat and dairy-rich
-cfg<-lucode::setScenario(cfg,"SSP5")
+cfg<-setScenario(cfg,"SSP5")
 # Climate: no mitigation (RCP8.5)
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP5-Ref-REMIND-MAGPIE"
 cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP5-Ref-REMIND-MAGPIE"
@@ -103,7 +103,7 @@ cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping=
 # Development: historical trends (SSP2)
 # Land Use: medium regulation, medium productivity
 # Diet: medium meat and dairy
-cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-setScenario(cfg,"SSP2")
 # Climate: moderate mitigation (RCP4.5)
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
@@ -120,7 +120,7 @@ cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping=
 # Development: historical trends (SSP2)
 # Land Use: medium regulation, medium productivity
 # Diet: medium meat and dairy
-cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-setScenario(cfg,"SSP2")
 # Climate: moderate mitigation (RCP4.5)
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
@@ -137,7 +137,7 @@ cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping=
 # Development: historical trends (SSP2)
 # Land Use: medium regulation, medium productivity
 # Diet: medium meat and dairy
-cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-setScenario(cfg,"SSP2")
 # Climate: moderate mitigation (RCP4.5)
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
@@ -154,7 +154,7 @@ cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping=
 # Development: sustainable development (SSP1)
 # Land Use: strong regulation, high productivity (SSP1)
 # Diet: low meat and dairy
-cfg<-lucode::setScenario(cfg,"SSP1")
+cfg<-setScenario(cfg,"SSP1")
 # Climate: moderate mitigation (RCP4.5)
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP1-26-IMAGE"
 cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP1-26-IMAGE"
@@ -170,7 +170,7 @@ cfg<-general_settings(cfg$title <- "SSP1_RCP4p5_PolicyHighDiet")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms",calibration=calib)
 # Development: sustainable development (SSP1)
 # Land Use: strong regulation, high productivity (SSP1)
-cfg<-lucode::setScenario(cfg,"SSP1")
+cfg<-setScenario(cfg,"SSP1")
 # Climate: moderate mitigation (RCP4.5)
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP1-26-IMAGE"
 cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP1-26-IMAGE"
@@ -194,7 +194,7 @@ cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp2p6",regionmapping=
 # Development: sustainable development (SSP1)
 # Land Use: strong regulation, high productivity (SSP1)
 # Diet: low meat and dairy
-cfg<-lucode::setScenario(cfg,"SSP1")
+cfg<-setScenario(cfg,"SSP1")
 # Climate: high mitigation (RCP2.6)
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP1-26-IMAGE"
 cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP1-26-IMAGE"
@@ -213,7 +213,7 @@ cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping=
 # Development: historical trends (SSP2)
 # Land Use: medium regulation, medium productivity (SSP2)
 # Diet: medium meat and dairy
-cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-setScenario(cfg,"SSP2")
 # Climate: moderate mitigation (RCP4.5)
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
@@ -228,7 +228,7 @@ cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping=
 # Development: historical trends (SSP2)
 # Land Use: medium regulation, medium productivity (SSP2)
 # Diet: medium meat and dairy
-cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-setScenario(cfg,"SSP2")
 # Climate: moderate mitigation (RCP4.5)
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
@@ -242,7 +242,7 @@ cfg<-general_settings(cfg$title <- "SSP2_RCP4p5_SensitivityAWShigh")
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms",calibration=calib)
 # Development: historical trends (SSP2)
 # Land Use: medium regulation, medium productivity (SSP2)
-cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-setScenario(cfg,"SSP2")
 # Climate: moderate mitigation (RCP4.5)
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
@@ -256,7 +256,7 @@ cfg<-general_settings(cfg$title <- "SSP2_RCP4p5_SensitivityAWSmoderate") ###
 cfg$input <- buildInputVector(co2="co2",climatescen_name="rcp4p5",regionmapping="inms",calibration=calib)
 # Development: historical trends (SSP2)
 # Land Use: medium regulation, medium productivity (SSP2)
-cfg<-lucode::setScenario(cfg,"SSP2")
+cfg<-setScenario(cfg,"SSP2")
 # Climate: moderate mitigation (RCP4.5)
 cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"
 cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-45-MESSAGE-GLOBIOM"

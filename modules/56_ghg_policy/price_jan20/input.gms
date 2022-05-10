@@ -36,7 +36,6 @@ sets
 ;
 
 scalars
-  s56_reward_neg_emis reward CDR from all sources (-Inf) or only from afforestation (0) (1) / -Inf /
   s56_limit_ch4_n2o_price upper limit for CH4 and N2O GHG prices (USD05MER per tC) / 1000 /
   s56_cprice_red_factor reduction factor for CO2 price (-) / 1 /
   s56_ghgprice_start start year for ghg price phase-in (year) / 2025 /
@@ -48,12 +47,14 @@ scalars
   s56_counter counter for C price interpolation (1) / 0 /
   s56_timesteps number of time steps for C price interpolation (1) / 0 /
   s56_offset helper for C price interpolation (1) / 0 /
-  s56_peatland_policy 1=on 0=off (binary) / 1 /
 ;
 
 $setglobal c56_pollutant_prices  R21M42-SSP2-NPi
 $setglobal c56_pollutant_prices_noselect  R21M42-SSP2-NPi
 $setglobal c56_emis_policy  redd+natveg_nosoil
+
+$setglobal c56_carbon_stock_pricing  actualNoAcEst
+*   options:  actual, actualNoAcEst, previousLandPattern, previousCarbonDensity
 
 table f56_pollutant_prices(t_all,i,pollutants,ghgscen56) GHG certificate prices for N2O-N CH4 CO2-C (USD05MER per t)
 $ondelim
@@ -73,7 +74,7 @@ $if "%c56_pollutant_prices%" == "emulator" $include "./modules/56_ghg_policy/inp
 $if "%c56_pollutant_prices%" == "emulator" $offdelim
 $if "%c56_pollutant_prices%" == "emulator" ;
 
-*' `f56_emis_policy` contains scenarios determining for each gas and source whether it is priced or not.
+* f56_emis_policy contains scenarios determining for each gas and source whether it is priced or not
 
 table f56_emis_policy(scen56,pollutants_all,emis_source) GHG emission policy scenarios (1)
 $ondelim
