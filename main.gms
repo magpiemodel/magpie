@@ -243,7 +243,7 @@ $setglobal trade  selfsuff_reduced
 
 $setglobal ageclass  feb21
 
-$setglobal crop  penalty_apr22
+$setglobal crop  endo_apr21
 $setglobal past  endo_jun13
 
 $setglobal forestry  dynamic_feb21

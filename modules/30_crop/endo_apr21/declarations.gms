@@ -31,7 +31,9 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
+ ov_fallow(t,j,type)                      Fallow land (mio. ha)
  ov_area(t,j,kcr,w,type)                  Agricultural production area (mio. ha)
+ ov_rotation_penalty(t,i,type)            Penalty for violating rotational constraints (USD05MER)
  oq30_cropland(t,j,type)                  Total cropland calculation (mio. ha)
  oq30_avl_cropland(t,j,type)              Available cropland constraint (mio. ha)
  oq30_rotation_max(t,j,crp30,w,type)      Local maximum rotational constraints (mio. ha)

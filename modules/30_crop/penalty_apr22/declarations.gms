@@ -22,30 +22,35 @@ positive variables
 ;
 
 equations
- q30_cropland(j)                 Total cropland calculation (mio. ha)
- q30_avl_cropland(j)             Available cropland constraint (mio. ha)
- q30_rotation_penalty(i)        Total penalty for rotational constraint violations (USD05MER)
- q30_rotation_max(j,rotamax30)     Local maximum rotational constraints (mio. ha)
- q30_rotation_min(j,rotamin30)     Local minimum rotational constraints (mio. ha)
- q30_rotation_max_irrig(j,rotamax30)     Local maximum rotational constraints (mio. ha)
- q30_prod(j,kcr)                 Production of cropped products (mio. tDM)
- q30_carbon(j,ag_pools)          Cropland above ground carbon content calculation (mio. tC)
- q30_bv_ann(j,potnatveg)         Biodiversity value of annual cropland (Mha)
- q30_bv_per(j,potnatveg)         Biodiversity value of perennial cropland (Mha)
+ q30_cropland(j)                      Total cropland calculation (mio. ha)
+ q30_avl_cropland(j)                  Available cropland constraint (mio. ha)
+ q30_rotation_penalty(i)              Total penalty for rotational constraint violations (USD05MER)
+ q30_rotation_max(j,rotamax30)        Local maximum rotational constraints (mio. ha)
+ q30_rotation_min(j,rotamin30)        Local minimum rotational constraints (mio. ha)
+ q30_rotation_max_irrig(j,rotamax30)  Local maximum rotational constraints (mio. ha)
+ q30_prod(j,kcr)                      Production of cropped products (mio. tDM)
+ q30_carbon(j,ag_pools,stockType)     Cropland above ground carbon content calculation (mio. tC)
+ q30_bv_ann(j,potnatveg)              Biodiversity value of annual cropland (Mha)
+ q30_bv_per(j,potnatveg)              Biodiversity value of perennial cropland (Mha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_area(t,j,kcr,w,type)                 Agricultural production area (mio. ha)
- oq30_cropland(t,j,type)                 Total cropland calculation (mio. ha)
- oq30_avl_cropland(t,j,type)             Available cropland constraint (mio. ha)
+ ov_fallow(t,j,type)                         Fallow land (mio. ha)
+ ov_area(t,j,kcr,w,type)                     Agricultural production area (mio. ha)
+ ov_rotation_penalty(t,i,type)               Penalty for violating rotational constraints (USD05MER)
+ ov30_penalty_max_irrig(t,j,rotamax30,type)  Penalty for violating max rotational constraints on irrigated land (USD05MER)
+ ov30_penalty(t,j,rota30,type)               Penalty for violating rotational constraints (USD05MER)
+ oq30_cropland(t,j,type)                     Total cropland calculation (mio. ha)
+ oq30_avl_cropland(t,j,type)                 Available cropland constraint (mio. ha)
+ oq30_rotation_penalty(t,i,type)             Total penalty for rotational constraint violations (USD05MER)
  oq30_rotation_max(t,j,rotamax30,type)       Local maximum rotational constraints (mio. ha)
  oq30_rotation_min(t,j,rotamin30,type)       Local minimum rotational constraints (mio. ha)
  oq30_rotation_max_irrig(t,j,rotamax30,type) Local maximum rotational constraints (mio. ha)
- oq30_prod(t,j,kcr,type)                 Production of cropped products (mio. tDM)
- oq30_carbon(t,j,ag_pools,type)          Cropland above ground carbon content calculation (mio. tC)
- oq30_bv_ann(t,j,potnatveg,type)         Biodiversity value of annual cropland (Mha)
- oq30_bv_per(t,j,potnatveg,type)         Biodiversity value of perennial cropland (Mha)
+ oq30_prod(t,j,kcr,type)                     Production of cropped products (mio. tDM)
+ oq30_carbon(t,j,ag_pools,stockType,type)    Cropland above ground carbon content calculation (mio. tC)
+ oq30_bv_ann(t,j,potnatveg,type)             Biodiversity value of annual cropland (Mha)
+ oq30_bv_per(t,j,potnatveg,type)             Biodiversity value of perennial cropland (Mha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 
