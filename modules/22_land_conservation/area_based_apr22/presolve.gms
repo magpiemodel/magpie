@@ -6,9 +6,14 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 * ------------------
-* Land conservation
-* -----------------
+* NPI/NDC policy
+* ------------------
+p22_min_forest(t,j)$(p22_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j,"secdforest")) = pcm_land(j,"primforest") + pcm_land(j,"secdforest");
+p22_min_other(t,j)$(p22_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");
 
+* ------------------
+* Land conservation
+* ------------------
 if(m_year(t) <= sm_fix_SSP2,
 * from 1995 to 2020 land conservation is based on
 * observed trends as derived from WDPA
@@ -54,40 +59,50 @@ pm_land_conservation(t,j,land,"protect")$(pm_land_conservation(t,j,land,"protect
 
 ** Land restoration
 
+if(s22_restore_land = 1 OR m_year(t) <= sm_fix_SSP2,
+
 * Grassland
 pm_land_conservation(t,j,"past","restore")$(p22_conservation_area(t,j,"past") > pcm_land(j,"past")) =
 			  p22_conservation_area(t,j,"past") - pcm_land(j,"past");
+* Secondary forest
+pm_land_conservation(t,j,"secdforest","restore")$(p22_conservation_area(t,j,"secdforest") > pcm_land(j,"secdforest")) =
+			  p22_conservation_area(t,j,"secdforest") - pcm_land(j,"secdforest");
+* Other land
+pm_land_conservation(t,j,"other","restore")$(p22_conservation_area(t,j,"other") > pcm_land(j,"other")) =
+			  p22_conservation_area(t,j,"other") - pcm_land(j,"other");
+
+* Adjust restoration depending on given land available for restoration (restoration potential)
+
 * Primary and secondary forest cannot be converted to grassland. Therefore
 * grassland restoration is contrained by the remaining agricultural & other land:
-p22_past_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop")) + (vm_land.l(j,"other") - pm_land_conservation(t,j,"other","protect"));
+p22_past_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop"))
+						  + (vm_land.l(j,"other") - max(pm_land_conservation(t,j,"other","protect"), p22_min_other(t,j)));
 p22_past_restore_pot(t,j)$(p22_past_restore_pot(t,j) < 0) = 0;
 * grassland restoration is limited by grassland restoration potential
 pm_land_conservation(t,j,"past","restore")$(pm_land_conservation(t,j,"past","restore") > p22_past_restore_pot(t,j)) = p22_past_restore_pot(t,j);
 
-* Secondary forest
-pm_land_conservation(t,j,"secdforest","restore")$(p22_conservation_area(t,j,"secdforest") > pcm_land(j,"secdforest")) =
-			  p22_conservation_area(t,j,"secdforest") - pcm_land(j,"secdforest");
-* Secondary forest restoration is contrained by managed land exluding settlements:
-p22_secdf_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop")) + (vm_land.l(j,"past")$(vm_land.l(j,"past") >= p22_conservation_area(t,j,"past")) - p22_conservation_area(t,j,"past")$(vm_land.l(j,"past") >= p22_conservation_area(t,j,"past"))) + (vm_land.l(j,"forestry") - vm_land.lo(j,"forestry"));
+* Secondary forest restoration is contrained by managed land exluding settlements (crop, past, forestry):
+p22_secdf_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop"))
+						   + (vm_land.l(j,"past") - p22_conservation_area(t,j,"past"));
 p22_secdf_restore_pot(t,j)$(p22_secdf_restore_pot(t,j) < 0) = 0;
+p22_secdf_restore_pot(t,j)$(vm_land.l(j,"forestry") >= vm_land.lo(j,"forestry")) = p22_secdf_restore_pot(t,j) + (vm_land.l(j,"forestry") - vm_land.lo(j,"forestry"));
 * Secondary forest restoration is limited by secondary forest restoration potential
 pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") > p22_secdf_restore_pot(t,j)) = p22_secdf_restore_pot(t,j);
 
-* Other land
-pm_land_conservation(t,j,"other","restore")$(p22_conservation_area(t,j,"other") > pcm_land(j,"other")) =
-			  p22_conservation_area(t,j,"other") - pcm_land(j,"other");
 * Primary and secondary forest cannot be converted to other land. Therefore
-* other land restoration is contrained by the remaining agricultural land:
-p22_other_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop")) + (vm_land.l(j,"past") - p22_conservation_area(t,j,"past"));
+* other land restoration is contrained by the remaining agricultural land minus the area needed for secdforest restoration:
+p22_other_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop"))
+						   + (vm_land.l(j,"past") - p22_conservation_area(t,j,"past"));
+p22_other_restore_pot(t,j)$(pm_land_conservation(t,j,"secdforest","restore") > (vm_land.l(j,"forestry") - vm_land.lo(j,"forestry"))) =						   p22_other_restore_pot(t,j) - (pm_land_conservation(t,j,"secdforest","restore") - (vm_land.l(j,"forestry") - vm_land.lo(j,"forestry")));
 p22_other_restore_pot(t,j)$(p22_other_restore_pot(t,j) < 0) = 0;
 * other land restoration is limited by other land restoration potential
 pm_land_conservation(t,j,"other","restore")$(pm_land_conservation(t,j,"other","restore") > p22_other_restore_pot(t,j)) = p22_other_restore_pot(t,j);
 
-* Switch for land restoration during future time steps
-if(s22_restore_land = 0,
-pm_land_conservation(t,j,land,"restore")$(m_year(t) > sm_fix_SSP2) = 0;
+else
+
+* set restoration to zero
+pm_land_conservation(t,j,land,"restore") = 0;
+
 );
 
-* NPI/NDC
-p22_min_forest(t,j)$(p22_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j,"secdforest")) = pcm_land(j,"primforest") + pcm_land(j,"secdforest");
-p22_min_other(t,j)$(p22_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");
+
