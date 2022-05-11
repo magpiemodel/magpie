@@ -19,8 +19,8 @@ codeCheck <- FALSE
 input <- c(regional    = "rev4.68FSECmodeling_e2bdb6cd_magpie.tgz",
            cellular    = "rev4.68FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
            validation  = "rev4.68FSECmodeling_e2bdb6cd_validation.tgz",
-           additional  = "additional_data_rev4.13.tgz",
-           calibration = "calibration_FSEC_20Apr22.tgz")
+           additional  = "additional_data_rev4.14.tgz",
+           calibration = "calibration_FSEC_29Apr22.tgz")
 
 # -----------------------------------------------------------------------------------------------------------------
 # General settings:
@@ -128,7 +128,15 @@ diet_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (6) Diet waste transformation ###
+### (6) Diet meat transformation ###
+meat_transformation <- function(cfg) {
+  # Food transition towards reduced meat consumption
+  cfg$gms$c15_livescen_target <- "lin_zero_20_50"
+
+  return(cfg)
+}
+
+### (7) Diet waste transformation ###
 waste_transformation <- function(cfg) {
   # Lower food waste
   cfg$gms$s15_exo_waste	          <- "1"
@@ -151,7 +159,7 @@ dietInclusion_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (7) Livestock management transformation ###
+### (8) Livestock management transformation ###
 livestock_transformation <- function(cfg) {
   # Higher manure recycling rates
   cfg$gms$c55_scen_conf <- "SSP1"
@@ -165,7 +173,7 @@ livestock_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (8) Crop efficiency transformation ###
+### (9) Crop efficiency transformation ###
 cropefficiency_transformation <- function(cfg) {
   # high NUE
   cfg$gms$c50_scen_neff	<- "neff75_80_starty2010"
@@ -191,7 +199,7 @@ nitrogen_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (9) Diversity on land transformation ###
+### (10) Diversity on land transformation ###
 landsharing_transformation <- function(cfg) {
   #BII by price OR land sparing
   cfg$gms$c44_price_bv_loss <- "p10_p100"
@@ -213,7 +221,7 @@ landsharing_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (10) Supply chain transformation ###
+### (NA) Supply chain transformation ###
 supplyChain_transformation <- function(cfg) {
   # reduce value-added in processing
   # (cannot be implemented)
@@ -338,16 +346,16 @@ soil_transformation <- function(cfg) {
 
 # -----------------------------------------------------------------------------------------------------------------
 # Calibration run
-cfg <- general_settings("calibration_FSEC_sticky_feb18_free")
-cfg$input                           <- input
-cfg$results_folder                  <- "output/:title:"
-cfg$recalibrate                     <- TRUE
-cfg$recalibrate_landconversion_cost <- TRUE
-cfg$title                           <- "calibration_FSEC_sticky_feb18_free"
-cfg$output                          <- c("rds_report", "validation_short")
-cfg$force_replace                   <- TRUE
-start_run(cfg, codeCheck = FALSE)
-magpie4::submitCalibration("FSEC")
+#cfg <- general_settings("calibration_FSEC_sticky_feb18_free")
+#cfg$input                           <- input
+#cfg$results_folder                  <- "output/:title:"
+#cfg$recalibrate                     <- TRUE
+#cfg$recalibrate_landconversion_cost <- TRUE
+#cfg$title                           <- "calibration_FSEC_sticky_feb18_free"
+#cfg$output                          <- c("rds_report", "validation_short")
+#cfg$force_replace                   <- TRUE
+#start_run(cfg, codeCheck = FALSE)
+#magpie4::submitCalibration("FSEC")
 
 # -----------------------------------------------------------------------------------------------------------------
 # Scenario runs
@@ -375,17 +383,19 @@ cfg <- institution_transformation(cfg = cfg)
 cfg <- energy_transformation(cfg = cfg)
 ### (5) Diet health transformation ###
 cfg <- diet_transformation(cfg = cfg)
-### (6) Diet waste transformation ###
+### (6) Diet meat transformation ###
+cfg <- meat_transformation(cfg = cfg)
+### (7) Diet waste transformation ###
 cfg <- waste_transformation(cfg = cfg)
 ### (NA) Diet inclustion transformation ###
 #cfg <- dietInclusion_transformation(cfg = cfg)
-### (7) Livestock management transformation ###
+### (8) Livestock management transformation ###
 cfg <- livestock_transformation(cfg = cfg)
-### (8) Crop efficiency transformation ###
+### (9) Crop efficiency transformation ###
 cfg <- cropefficiency_transformation(cfg = cfg)
 ### (NA) Nitrogen transformation ###
 #cfg <- nitrogen_transformation(cfg = cfg)
-### (9) Diversity on land transformation ###
+### (10) Diversity on land transformation ###
 cfg <- landsharing_transformation(cfg = cfg)
 ### (NA) Supply chain transformation ###
 #cfg <- supplyChain_transformation(cfg = cfg)
@@ -440,12 +450,17 @@ cfg <- general_settings(title = "FSEC_dietHealth")
 cfg <- diet_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (6) Diet waste transformation ###
+### (6) Diet meat transformation ###
+cfg <- general_settings(title = "FSEC_dietLvst")
+cfg <- meat_transformation(cfg = cfg)
+start_run(cfg = cfg, codeCheck = codeCheck)
+
+### (7) Diet waste transformation ###
 cfg <- general_settings(title = "FSEC_dietWaste")
 cfg <- waste_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (7) Diet inclustion transformation ###
+### (NA) Diet inclustion transformation ###
 #cfg <- general_settings(title = "FSEC_dietInclusion")
 #cfg <- dietInclusion_transformation(cfg = cfg)
 #start_run(cfg = cfg, codeCheck = codeCheck)
@@ -455,17 +470,17 @@ cfg <- general_settings(title = "FSEC_livestock")
 cfg <- livestock_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (8) Crop efficiency transformation ###
+### (9) Crop efficiency transformation ###
 cfg <- general_settings(title = "FSEC_cropeff")
 cfg <- cropefficiency_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (8) Nitrogen transformation ###
+### (NA) Nitrogen transformation ###
 #cfg <- general_settings(title = "FSEC_nitrogen")
 #cfg <- nitrogen_transformation(cfg = cfg)
 #start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (9) Diversity on land transformation ###
+### (10) Diversity on land transformation ###
 cfg <- general_settings(title = "FSEC_landSharing")
 cfg <- landsharing_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
