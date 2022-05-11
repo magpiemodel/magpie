@@ -30,7 +30,7 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 
-prefix <- "CN61"
+prefix <- "CN62"
 
 # download_and_update(cfg)
 # cfg$gms$tc <- "exo"
@@ -95,7 +95,7 @@ for (pol in c("CurPol","Carbon","Biodiversity","BiodiversityStopLoss","Integrate
       cfg$gms$s44_start_year <- 2025
       cfg$gms$s44_start_price <- 3000
       cfg$gms$s44_target_year <- 2100
-      cfg$gms$s44_target_price <- 10000
+      cfg$gms$s44_target_price <- 12000
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_set_aside_target <- "by2030"
       cfg$gms$s30_set_aside_shr <- 0.2
@@ -113,9 +113,9 @@ for (pol in c("CurPol","Carbon","Biodiversity","BiodiversityStopLoss","Integrate
       cfg$gms$s32_max_aff_area <- Inf
       cfg$gms$c35_forest_damage_end <- "by2030"
       cfg$gms$s44_start_year <- 2025
-      cfg$gms$s44_start_price <- 1000
+      cfg$gms$s44_start_price <- 2000
       cfg$gms$s44_target_year <- 2100
-      cfg$gms$s44_target_price <- 1000
+      cfg$gms$s44_target_price <- 2000
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_set_aside_target <- "by2030"
       cfg$gms$s30_set_aside_shr <- 0.2
@@ -151,7 +151,7 @@ for (pol in c("CurPol","Carbon","Biodiversity","BiodiversityStopLoss","Integrate
       cfg$gms$s44_start_year <- 2025
       cfg$gms$s44_start_price <- 3000
       cfg$gms$s44_target_year <- 2100
-      cfg$gms$s44_target_price <- 10000
+      cfg$gms$s44_target_price <- 12000
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_set_aside_target <- "by2030"
       cfg$gms$s30_set_aside_shr <- 0.2
