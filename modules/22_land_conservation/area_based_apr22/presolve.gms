@@ -68,7 +68,7 @@ pm_land_conservation(t,j,"past","restore")$(pm_land_conservation(t,j,"past","res
 pm_land_conservation(t,j,"secdforest","restore")$(p22_conservation_area(t,j,"secdforest") > pcm_land(j,"secdforest")) =
 			  p22_conservation_area(t,j,"secdforest") - pcm_land(j,"secdforest");
 * Secondary forest restoration is contrained by managed land exluding settlements:
-p22_secdf_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop")) + (vm_land.l(j,"past") - p22_conservation_area(t,j,"past")) + (vm_land.l(j,"forestry") - vm_land.lo(j,"forestry"));
+p22_secdf_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop")) + (vm_land.l(j,"past")$(vm_land.l(j,"past") >= p22_conservation_area(t,j,"past")) - p22_conservation_area(t,j,"past")$(vm_land.l(j,"past") >= p22_conservation_area(t,j,"past"))) + (vm_land.l(j,"forestry") - vm_land.lo(j,"forestry"));
 p22_secdf_restore_pot(t,j)$(p22_secdf_restore_pot(t,j) < 0) = 0;
 * Secondary forest restoration is limited by secondary forest restoration potential
 pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") > p22_secdf_restore_pot(t,j)) = p22_secdf_restore_pot(t,j);
