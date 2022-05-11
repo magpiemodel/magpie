@@ -30,7 +30,7 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 
-prefix <- "CN56"
+prefix <- "CN57"
 
 download_and_update(cfg)
 
@@ -68,7 +68,7 @@ for (pol in c("Ref","Carbon","Biodiversity","Integrated")) {
     } else if (pol == "Carbon") {
       cfg <- setScenario(cfg,c(ssp,"NPI","rcp7p0"))
       cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"#"PIK_LIN"
-      cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-NPi"#"PIK_NPI"
+      cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"#"PIK_NPI"
       cfg$gms$s15_exo_diet <- 0
       cfg$gms$s15_exo_waste <- 0
       cfg$gms$c60_biodem_level <- 1
@@ -119,7 +119,7 @@ for (pol in c("Ref","Carbon","Biodiversity","Integrated")) {
     } else if (pol == "Integrated") {
       cfg <- setScenario(cfg,c(ssp,"NPI","rcp7p0"))
       cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"#"PIK_LIN"
-      cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-NPi"#"PIK_NPI"
+      cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-PkBudg900"#"PIK_NPI"
       cfg$gms$s15_exo_diet <- 0
       cfg$gms$s15_exo_waste <- 0
       cfg$gms$c60_biodem_level <- 1
