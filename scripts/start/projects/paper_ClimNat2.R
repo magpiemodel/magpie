@@ -30,7 +30,7 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 
-prefix <- "CN59"
+prefix <- "CN60"
 
 download_and_update(cfg)
 
@@ -94,7 +94,7 @@ for (pol in c("Ref","Carbon","Biodiversity","Integrated")) {
       cfg$gms$s32_max_aff_area <- Inf
       cfg$gms$c35_forest_damage_end <- "by2030"
       cfg$gms$s44_start_year <- 2025
-      cfg$gms$s44_start_price <- 2000
+      cfg$gms$s44_start_price <- 5000
       cfg$gms$s44_target_year <- 2050
       cfg$gms$s44_target_price <- 5000
       cfg$gms$c35_protect_scenario <- "BH_IFL"
@@ -130,7 +130,7 @@ for (pol in c("Ref","Carbon","Biodiversity","Integrated")) {
       cfg$gms$s32_max_aff_area <- Inf
       cfg$gms$c35_forest_damage_end <- "by2030"
       cfg$gms$s44_start_year <- 2025
-      cfg$gms$s44_start_price <- 2000
+      cfg$gms$s44_start_price <- 5000
       cfg$gms$s44_target_year <- 2050
       cfg$gms$s44_target_price <- 5000
       cfg$gms$c35_protect_scenario <- "BH_IFL"
