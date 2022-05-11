@@ -30,10 +30,9 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 
-prefix <- "CN60"
+prefix <- "CN61"
 
-download_and_update(cfg)
-
+# download_and_update(cfg)
 # cfg$gms$tc <- "exo"
 # a <- tau("output/CN48_SSP2-Ref/fulldata.gdx",type = "crop")
 # getNames(a) <- "crop"
