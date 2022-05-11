@@ -45,14 +45,14 @@ cfg$input <- c(regional    = "rev4.68_h12_magpie.tgz",
 
 cfg$gms$c38_sticky_mode <- "dynamic" 
 cfg$gms$crop    <- "penalty_apr22"
-cfg$gms$c30_rotation_scenario = "min_20div"
+cfg$gms$c30_rotation_scenario = "default"
 
 
 #cfg$qos <- "priority"
 cfg$recalibrate <- TRUE
 cfg$recalibrate_landconversion_cost <- "ifneeded"
 start_run(cfg,codeCheck=FALSE)
-magpie4::submitCalibration("H12_rotation")
+magpie4::submitCalibration("H12_sticky_feb18_dynamic_rotation")
 cfg$recalibrate <- FALSE
 
 for (scenario in c("none","default","fallow","legumes","agroforestry","agroecology")){
