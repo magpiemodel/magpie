@@ -26,11 +26,14 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 #cfg$force_download <- TRUE
+cfg$force_replace <- TRUE
 
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 
 prefix <- "CN66"
+
+cfg$gms$s13_max_gdp_shr <- 1
 
 # download_and_update(cfg)
 # cfg$gms$tc <- "exo"
