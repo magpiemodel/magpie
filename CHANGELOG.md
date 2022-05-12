@@ -67,7 +67,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### removed
-- **38_factor_costs** mixed_feb17 and fixed_per_ton_mar18 realzations removed because they are not bein used at the moment.
+- **38_factor_costs** mixed_feb17 and fixed_per_ton_mar18 realizations removed because they are not being used at the moment.
 
 ### fixed
 - **inputs** included data for Sudan
