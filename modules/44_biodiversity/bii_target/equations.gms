@@ -9,5 +9,5 @@
 
  q44_bii_glo .. v44_bii_glo
  					=e=
- 					sum((j2,potnatveg,landcover44), vm_bv(j2,landcover44,potnatveg)) / sum((j2,land), vm_land(j2,land));
+ 					sum((j2,potnatveg,landcover44), vm_bv(j2,landcover44,potnatveg)) / sum((j2,land), pcm_land(j2,land));
 
