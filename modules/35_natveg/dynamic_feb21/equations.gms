@@ -12,6 +12,15 @@
 
  q35_land_other(j2) .. vm_land(j2,"other") =e= sum(ac, v35_other(j2,ac));
 
+*' Forest conservation
+*' Total forest cannot be smaller than total forest conservation target
+
+ q35_forest_conservation(j2) ..
+      vm_land(j2,"primforest") + vm_land(j2,"secdforest")
+      =g=
+      sum(ct, pm_land_conservation(ct,j2,"primforest","protect")
+            + sum(consv_type, pm_land_conservation(ct,j2,"secdforest",consv_type)));
+
 *' Carbon stocks for primary forest, secondary forest or other natural land are calculated
 *' as the product of respective area and carbon density.
 *' Carbon stocks decline if the area decreases
@@ -19,15 +28,15 @@
 *' In case of abandoned agricultural land (increase of other natural land),
 *' natural succession, represented by age-class growth, results in increasing carbon stocks.
 
- q35_carbon_primforest(j2,ag_pools,stockType) .. 
+ q35_carbon_primforest(j2,ag_pools,stockType) ..
  		vm_carbon_stock(j2,"primforest",ag_pools,stockType) =e=
 			m_carbon_stock(vm_land,fm_carbon_density,"primforest");
 
- q35_carbon_secdforest(j2,ag_pools,stockType) .. 
+ q35_carbon_secdforest(j2,ag_pools,stockType) ..
  		vm_carbon_stock(j2,"secdforest",ag_pools,stockType) =e=
 			m_carbon_stock_ac(v35_secdforest,pm_carbon_density_ac,"ac","ac_sub");
 
- q35_carbon_other(j2,ag_pools,stockType) .. 
+ q35_carbon_other(j2,ag_pools,stockType) ..
  		vm_carbon_stock(j2,"other",ag_pools,stockType) =e=
 			m_carbon_stock_ac(v35_other,pm_carbon_density_ac,"ac","ac_sub");
 
@@ -179,7 +188,4 @@ v35_secdforest(j2,ac_est) =e= sum(ac_est2, v35_secdforest(j2,ac_est2))/card(ac_e
 
 q35_other_est(j2,ac_est) ..
 v35_other(j2,ac_est) =e= sum(ac_est2, v35_other(j2,ac_est2))/card(ac_est2);
-
-* q35_restoration_other(j2)..
-* sum(ac, v35_other(j2,ac)) =g= sum(ct, pm_land_conservation(ct,j2,"other","protect") + pm_land_conservation(ct,j2,"other","restore") + pm_land_conservation(ct,j2,"secdforest","restore"));
 
