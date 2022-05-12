@@ -61,12 +61,13 @@ pm_land_conservation(t,j,land,"protect")$(pm_land_conservation(t,j,land,"protect
 
 if(s22_restore_land = 1 OR m_year(t) <= sm_fix_SSP2,
 
+* Secondary forest
+* Only restore secdforest where there is less forest than the sum of primary and secondary forest
+pm_land_conservation(t,j,"secdforest","restore")$(p22_conservation_area(t,j,"primforest") + p22_conservation_area(t,j,"secdforest") > pcm_land(j,"primforest") + pcm_land(j,"secdforest")) =
+			  (p22_conservation_area(t,j,"primforest") + p22_conservation_area(t,j,"secdforest")) - (pcm_land(j,"primforest") + pcm_land(j,"secdforest"));
 * Grassland
 pm_land_conservation(t,j,"past","restore")$(p22_conservation_area(t,j,"past") > pcm_land(j,"past")) =
 			  p22_conservation_area(t,j,"past") - pcm_land(j,"past");
-* Secondary forest
-pm_land_conservation(t,j,"secdforest","restore")$(p22_conservation_area(t,j,"secdforest") > pcm_land(j,"secdforest")) =
-			  p22_conservation_area(t,j,"secdforest") - pcm_land(j,"secdforest");
 * Other land
 pm_land_conservation(t,j,"other","restore")$(p22_conservation_area(t,j,"other") > pcm_land(j,"other")) =
 			  p22_conservation_area(t,j,"other") - pcm_land(j,"other");
