@@ -30,7 +30,7 @@ source("config/default.cfg")
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 
-prefix <- "CN64"
+prefix <- "CN65"
 
 # download_and_update(cfg)
 # cfg$gms$tc <- "exo"
@@ -45,8 +45,9 @@ prefix <- "CN64"
 cfg$qos <- "priority"
 
 cfg$gms$c_timesteps <- "5year"
+cfg$gms$biodiversity <- "bii_target"
 
-for (pol in c("CurPol","Forest","Biodiversity","BiodiversityStopLoss","Integrated")) {
+for (pol in c("CurPol","Carbon","Biodiversity","BiodiversityStopLoss","Integrated")) {
   for (ssp in c("SSP2")) {
     if (pol == "CurPol") {
       cfg <- setScenario(cfg,c(ssp,"NPI","rcp4p5"))
@@ -59,12 +60,13 @@ for (pol in c("CurPol","Forest","Biodiversity","BiodiversityStopLoss","Integrate
       cfg$gms$s32_aff_bii_coeff <- 0
       cfg$gms$s32_max_aff_area <- Inf
       cfg$gms$s44_target_price <- 0
+      cfg$gms$s44_bii_change_annual <- -Inf
       cfg$gms$c35_protect_scenario <- "WDPA"
       cfg$gms$c30_set_aside_target <- "none"
       cfg$gms$s30_set_aside_shr <- 0
-      cfg$gms$c56_emis_policy <- "redd+_nosoil"
+      #cfg$gms$c56_emis_policy <- "redd+_nosoil"
       cfg$gms$s56_c_price_induced_aff <- 0
-    } else if (pol == "Forest") {
+    } else if (pol == "Carbon") {
       cfg <- setScenario(cfg,c(ssp,"NPI","rcp1p9"))
       cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"#"PIK_LIN"
       cfg$gms$c60_2ndgen_biodem <- "R21M42-SSP2-NPi"#"PIK_NPI"
@@ -76,10 +78,11 @@ for (pol in c("CurPol","Forest","Biodiversity","BiodiversityStopLoss","Integrate
       cfg$gms$s32_max_aff_area <- Inf
       cfg$gms$c35_forest_damage_end <- "by2030"
       cfg$gms$s44_target_price <- 0
+      cfg$gms$s44_bii_change_annual <- -Inf
       cfg$gms$c35_protect_scenario <- "WDPA"
       cfg$gms$c30_set_aside_target <- "none"
       cfg$gms$s30_set_aside_shr <- 0
-      cfg$gms$c56_emis_policy <- "redd+_nosoil"
+      #cfg$gms$c56_emis_policy <- "redd+_nosoil"
       cfg$gms$s56_c_price_induced_aff <- 1
     } else if (pol == "Biodiversity") {
       cfg <- setScenario(cfg,c(ssp,"NPI","rcp4p5"))
@@ -96,10 +99,11 @@ for (pol in c("CurPol","Forest","Biodiversity","BiodiversityStopLoss","Integrate
       cfg$gms$s44_start_price <- 3000
       cfg$gms$s44_target_year <- 2100
       cfg$gms$s44_target_price <- 13000
+      cfg$gms$s44_bii_change_annual <- 0.0002
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_set_aside_target <- "by2030"
       cfg$gms$s30_set_aside_shr <- 0.2
-      cfg$gms$c56_emis_policy <- "redd+_nosoil"
+      #cfg$gms$c56_emis_policy <- "redd+_nosoil"
       cfg$gms$s56_c_price_induced_aff <- 0
     } else if (pol == "BiodiversityStopLoss") {
       cfg <- setScenario(cfg,c(ssp,"NPI","rcp4p5"))
@@ -116,10 +120,11 @@ for (pol in c("CurPol","Forest","Biodiversity","BiodiversityStopLoss","Integrate
       cfg$gms$s44_start_price <- 3000
       cfg$gms$s44_target_year <- 2100
       cfg$gms$s44_target_price <- 3000
+      cfg$gms$s44_bii_change_annual <- 0
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_set_aside_target <- "by2030"
       cfg$gms$s30_set_aside_shr <- 0.2
-      cfg$gms$c56_emis_policy <- "redd+_nosoil"
+      #cfg$gms$c56_emis_policy <- "redd+_nosoil"
       cfg$gms$s56_c_price_induced_aff <- 0
     } else if (pol == "Food") {
       cfg <- setScenario(cfg,c(ssp,"NDC","rcp4p5"))
@@ -135,7 +140,7 @@ for (pol in c("CurPol","Forest","Biodiversity","BiodiversityStopLoss","Integrate
       cfg$gms$c35_protect_scenario <- "WDPA"
       cfg$gms$c30_set_aside_target <- "none"
       cfg$gms$s30_set_aside_shr <- 0
-      cfg$gms$c56_emis_policy <- "redd+_nosoil"
+      #cfg$gms$c56_emis_policy <- "redd+_nosoil"
       cfg$gms$s56_c_price_induced_aff <- 0
     } else if (pol == "Integrated") {
       cfg <- setScenario(cfg,c(ssp,"NPI","rcp1p9"))
@@ -152,10 +157,11 @@ for (pol in c("CurPol","Forest","Biodiversity","BiodiversityStopLoss","Integrate
       cfg$gms$s44_start_price <- 3000
       cfg$gms$s44_target_year <- 2100
       cfg$gms$s44_target_price <- 13000
+      cfg$gms$s44_bii_change_annual <- 0.0002
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_set_aside_target <- "by2030"
       cfg$gms$s30_set_aside_shr <- 0.2
-      cfg$gms$c56_emis_policy <- "redd+_nosoil"
+      #cfg$gms$c56_emis_policy <- "redd+_nosoil"
       cfg$gms$s56_c_price_induced_aff <- 1
     } 
     cfg$title <- paste(prefix,paste0(ssp,"-",pol),sep="_")
