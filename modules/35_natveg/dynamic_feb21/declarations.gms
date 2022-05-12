@@ -60,7 +60,7 @@ equations
  q35_bv_primforest(j,potnatveg)                Biodiversity value of primary forest (mio. ha)
  q35_bv_secdforest(j,potnatveg)                Biodiversity value of secondary forest (mio. ha)
  q35_bv_other(j,potnatveg)                     Biodiversity value of other land (mio. ha)
- q35_forest_conservation(j)                    Total forest conservation constraint (mio. ha)
+ q35_natveg_conservation(j)                    Total forest conservation constraint (mio. ha)
 ;
 
 positive variables
