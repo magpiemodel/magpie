@@ -12,8 +12,8 @@
 
  q35_land_other(j2) .. vm_land(j2,"other") =e= sum(ac, v35_other(j2,ac));
 
-*' Forest conservation
-*' Total forest cannot be smaller than total forest conservation target
+*' Natural land conservation
+*' Total natural land cannot be smaller than total natural land conservation target
 
  q35_natveg_conservation(j2) ..
       vm_land(j2,"primforest") + vm_land(j2,"secdforest") + vm_land(j2,"other")
