@@ -73,29 +73,31 @@ pm_land_conservation(t,j,"other","restore")$(p22_conservation_area(t,j,"other") 
 
 * Adjust restoration depending on given land available for restoration (restoration potential)
 
-* Primary and secondary forest cannot be converted to grassland. Therefore
-* grassland restoration is contrained by the remaining agricultural & other land:
-p22_past_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop"))
-						  + (vm_land.l(j,"other") - max(pm_land_conservation(t,j,"other","protect"), p22_min_other(t,j)));
-p22_past_restore_pot(t,j)$(p22_past_restore_pot(t,j) < 0) = 0;
-* grassland restoration is limited by grassland restoration potential
-pm_land_conservation(t,j,"past","restore")$(pm_land_conservation(t,j,"past","restore") > p22_past_restore_pot(t,j)) = p22_past_restore_pot(t,j);
-
-* Secondary forest restoration is contrained by managed land exluding settlements (crop, past, forestry):
+* Secondary forest restoration is contrained by managed land (crop, pasture, forestry):
 p22_secdf_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop"))
-						   + (vm_land.l(j,"past") - p22_conservation_area(t,j,"past"));
+						   + (vm_land.l(j,"past") - pm_land_conservation(t,j,"past","protect"));
 p22_secdf_restore_pot(t,j)$(p22_secdf_restore_pot(t,j) < 0) = 0;
 p22_secdf_restore_pot(t,j)$(vm_land.l(j,"forestry") >= vm_land.lo(j,"forestry")) = p22_secdf_restore_pot(t,j) + (vm_land.l(j,"forestry") - vm_land.lo(j,"forestry"));
 * Secondary forest restoration is limited by secondary forest restoration potential
 pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") > p22_secdf_restore_pot(t,j)) = p22_secdf_restore_pot(t,j);
 
+* Primary and secondary forest cannot be converted to grassland. Therefore
+* grassland restoration is contrained by the remaining agricultural & other land:
+p22_past_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop"));
+p22_other_restore_pot(t,j)$(pm_land_conservation(t,j,"secdforest","restore") > (vm_land.l(j,"forestry") - vm_land.lo(j,"forestry"))) = p22_past_restore_pot(t,j) - (pm_land_conservation(t,j,"secdforest","restore") - (vm_land.l(j,"forestry") - vm_land.lo(j,"forestry")));
+p22_past_restore_pot(t,j) = p22_past_restore_pot(t,j) + (vm_land.l(j,"other") - max(pm_land_conservation(t,j,"other","protect"), p22_min_other(t,j)));
+p22_past_restore_pot(t,j)$(p22_past_restore_pot(t,j) < 0) = 0;
+* grassland restoration is limited by grassland restoration potential
+pm_land_conservation(t,j,"past","restore")$(pm_land_conservation(t,j,"past","restore") > p22_past_restore_pot(t,j)) = p22_past_restore_pot(t,j);
+
 * Primary and secondary forest cannot be converted to other land. Therefore
-* other land restoration is contrained by the remaining agricultural land minus the area needed for secdforest restoration:
+* other land restoration is contrained by the remaining agricultural land minus
+* the agricultural area rquired for secdforest restoration:
 p22_other_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop"))
-						   + (vm_land.l(j,"past") - p22_conservation_area(t,j,"past"));
-p22_other_restore_pot(t,j)$(pm_land_conservation(t,j,"secdforest","restore") > (vm_land.l(j,"forestry") - vm_land.lo(j,"forestry"))) =						   p22_other_restore_pot(t,j) - (pm_land_conservation(t,j,"secdforest","restore") - (vm_land.l(j,"forestry") - vm_land.lo(j,"forestry")));
+						   + (vm_land.l(j,"past") - sum(consv_type, pm_land_conservation(t,j,"past", consv_type)));
+p22_other_restore_pot(t,j)$(pm_land_conservation(t,j,"secdforest","restore") > (vm_land.l(j,"forestry") - vm_land.lo(j,"forestry"))) =	p22_other_restore_pot(t,j) - (pm_land_conservation(t,j,"secdforest","restore") - (vm_land.l(j,"forestry") - vm_land.lo(j,"forestry")));
 p22_other_restore_pot(t,j)$(p22_other_restore_pot(t,j) < 0) = 0;
-* other land restoration is limited by other land restoration potential
+* Other land restoration is limited by other land restoration potential
 pm_land_conservation(t,j,"other","restore")$(pm_land_conservation(t,j,"other","restore") > p22_other_restore_pot(t,j)) = p22_other_restore_pot(t,j);
 
 else
