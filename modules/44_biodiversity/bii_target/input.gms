@@ -7,7 +7,9 @@
 
 scalars 
  s44_bii_start_year				blub (1) 							/ 2025 /
- s44_bii_change_annual			blub (1) 							/ 0.0002 /
+ s44_bii_change_annual			blub (1) 							/ 0.00015 /
+ s44_bii_max_lower_bound		blub (1) 							/ 0.9 /
+ s44_bii_mode					blub (1)							/ 1 /
 ;
 
 

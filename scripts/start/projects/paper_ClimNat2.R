@@ -31,9 +31,9 @@ cfg$force_replace <- TRUE
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 
-prefix <- "CN66"
+prefix <- "CN67"
 
-cfg$gms$s13_max_gdp_shr <- 1
+cfg$gms$s13_max_gdp_shr <- 0.0025
 
 # download_and_update(cfg)
 # cfg$gms$tc <- "exo"
@@ -49,6 +49,7 @@ cfg$qos <- "priority"
 
 cfg$gms$c_timesteps <- "5year"
 cfg$gms$biodiversity <- "bii_target"
+cfg$gms$s44_bii_mode <- 1
 
 for (pol in c("CurPol","Carbon","Biodiversity","BiodiversityStopLoss","Integrated")) {
   for (ssp in c("SSP2")) {

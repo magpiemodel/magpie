@@ -11,3 +11,11 @@
  					=e=
  					sum((j2,potnatveg,landcover44), vm_bv(j2,landcover44,potnatveg)) / sum((j2,land), pcm_land(j2,land));
 
+ q44_bii_reg(i2) .. v44_bii_reg(i2)
+ 					=e=
+ 					sum((cell(i2,j2),potnatveg,landcover44), vm_bv(j2,landcover44,potnatveg)) / sum((cell(i2,j2),land), pcm_land(j2,land));
+
+ q44_bii_cell(j2) .. v44_bii_cell(j2)
+ 					=e=
+ 					sum((potnatveg,landcover44), vm_bv(j2,landcover44,potnatveg)) / sum(land, pcm_land(j2,land));
+

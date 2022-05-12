@@ -5,14 +5,18 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_cost_bv_loss.fx(j) = 0;
-
-if((m_year(t) >= s44_bii_start_year),
-	if((s44_bii_change_annual = -Inf),
-		v44_bii_glo.lo = 0;
-	else
-		v44_bii_glo.lo = v44_bii_glo.l * (1 + s44_bii_change_annual * m_timestep_length);
+if(m_year(t) >= s44_bii_start_year,
+	if(s44_bii_mode = 0 AND s44_bii_change_annual <> -Inf,
+		v44_bii_glo.lo = min(v44_bii_glo.l * (1 + s44_bii_change_annual * m_timestep_length),s44_bii_max_lower_bound);
+	elseif s44_bii_mode = 1 AND s44_bii_change_annual <> -Inf,
+		v44_bii_reg.lo(i) = min(v44_bii_reg.l(i) * (1 + s44_bii_change_annual * m_timestep_length),s44_bii_max_lower_bound);
+	elseif s44_bii_mode = 2 AND s44_bii_change_annual <> -Inf,
+		v44_bii_cell.lo(j) = min(v44_bii_cell.l(j) * (1 + s44_bii_change_annual * m_timestep_length),s44_bii_max_lower_bound);
 	);
 );
 
+
+
 display v44_bii_glo.lo;
+display v44_bii_reg.lo;
+display v44_bii_cell.lo;

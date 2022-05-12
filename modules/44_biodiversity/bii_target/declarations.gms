@@ -12,10 +12,14 @@ variables
 positive variables
  vm_bv(j,landcover44,potnatveg)		            Biodiversity stock for all land cover classes (unweighted) (Mha)
  v44_bii_glo                                 BII (1)
+ v44_bii_reg(i)                                 BII (1)
+ v44_bii_cell(j)                                 BII (1)
 ;
 
 equations
  q44_bii_glo                                 BII (1)
+ q44_bii_reg(i)                                 BII (1)
+ q44_bii_cell(j)                                 BII (1)
 ;
 
 
@@ -24,7 +28,11 @@ parameters
  ov_cost_bv_loss(t,j,type)             Cost of biodiversity loss (mio USD)
  ov_bv(t,j,landcover44,potnatveg,type) Biodiversity stock for all land cover classes (unweighted) (Mha)
  ov44_bii_glo(t,type)                  BII (1)
+ ov44_bii_reg(t,i,type)                BII (1)
+ ov44_bii_cell(t,j,type)               BII (1)
  oq44_bii_glo(t,type)                  BII (1)
+ oq44_bii_reg(t,i,type)                BII (1)
+ oq44_bii_cell(t,j,type)               BII (1)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 
