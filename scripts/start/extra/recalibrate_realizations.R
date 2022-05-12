@@ -18,7 +18,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-realizations<-c("mixed_reg_feb17","perTonFAO","sticky_feb18",) #"sticky_labor" is very similar to sticky_feb18. No extra calibration needed.
+realizations<-c("mixed_reg_feb17","per_ton_fao_may22","sticky_feb18",) #"sticky_labor" is very similar to sticky_feb18. No extra calibration needed.
 type<-NULL
 
 for(r in realizations){
