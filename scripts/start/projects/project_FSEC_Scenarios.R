@@ -53,7 +53,10 @@ general_settings <- function(title) {
   # C price driven afforestation is off by default
   cfg$gms$s56_c_price_induced_aff <- "0"
   # Soil organic carbon dynamics activated
-  cfg$gms$som <- "cellpool_aug16"
+  cfg$gms$som                     <- "cellpool_aug16"
+  # Cost module: sticky - dynamic mode
+  cfg$gms$factor_costs            <- "sticky_feb18"
+  cfg$gms$c38_sticky_mode         <- "dynamic"
 
   return(cfg)
 }
@@ -70,8 +73,8 @@ population_transformation <- function(cfg) {
 
 ### (2) Reduced inequality transformation ###
 inequalityANDeducation_transformation <- function(cfg) {
-  # Changed GDP path (Managing the global commons)
-  cfg$gms$c09_gdp_scenario <- "SDP_MC"
+  # GDP following SSP1 path
+  cfg$gms$c09_gdp_scenario <- "SSP1"
   # Only cap top incomes
   # (not available yet)
 
@@ -356,6 +359,15 @@ soil_transformation <- function(cfg) {
 #cfg$force_replace                   <- TRUE
 #start_run(cfg, codeCheck = FALSE)
 #magpie4::submitCalibration("FSEC")
+
+### repeat input vector
+#input <- c(regional    = "rev4.68FSECmodeling_e2bdb6cd_magpie.tgz",
+#           cellular    = "rev4.68FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+#           validation  = "rev4.68FSECmodeling_e2bdb6cd_validation.tgz",
+#           additional  = "additional_data_rev4.14.tgz",
+#           calibration = "calibration_FSEC_29Apr22.tgz")
+
+
 
 # -----------------------------------------------------------------------------------------------------------------
 # Scenario runs
