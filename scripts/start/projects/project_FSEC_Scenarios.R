@@ -16,24 +16,24 @@ source("config/default.cfg")
 # Set defaults
 codeCheck <- FALSE
 
-input <- c(regional    = "rev4.68FSECmodeling_e2bdb6cd_magpie.tgz",
-           cellular    = "rev4.68FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-           validation  = "rev4.68FSECmodeling_e2bdb6cd_validation.tgz",
-           additional  = "additional_data_rev4.14.tgz",
-           calibration = "calibration_FSEC_29Apr22.tgz")
-
 # -----------------------------------------------------------------------------------------------------------------
 # General settings:
 general_settings <- function(title) {
+
   source("config/default.cfg")
-  cfg$input       <- input
+
+  cfg$input       <- c(regional    = "rev4.68FSECmodeling_e2bdb6cd_magpie.tgz",
+                       cellular    = "rev4.68FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+                       validation  = "rev4.68FSECmodeling_e2bdb6cd_validation.tgz",
+                       additional  = "additional_data_rev4.14.tgz",
+                       calibration = "calibration_FSEC_29Apr22.tgz")
+
   cfg$title       <- paste0("v3_", title)
   cfg$recalibrate <- FALSE
   cfg$qos         <- "priority_maxMem"
-  cfg$output      <- c(cfg$output #,
-    ### @MIKE: Please add back into the script when ready
-                       # "extra/disaggregation_BII", "projects/FSEC_dietaryIndicators",
-                       # "projects/FSEC_environmentalPollution_grid"
+  cfg$output      <- c(cfg$output ,
+                       "extra/disaggregation_BII", "projects/FSEC_dietaryIndicators",
+                       "projects/FSEC_environmentalPollution_grid"
                       )
 
   # Climate change impacts activated, SSP2 default settings, NDC activated, endogenous forestry activated
@@ -57,6 +57,8 @@ general_settings <- function(title) {
   # Cost module: sticky - dynamic mode
   cfg$gms$factor_costs            <- "sticky_feb18"
   cfg$gms$c38_sticky_mode         <- "dynamic"
+  # Necessary to be feasible
+  cfg$gms$s13_max_gdp_shr <- 1
 
   return(cfg)
 }
@@ -346,27 +348,6 @@ soil_transformation <- function(cfg) {
 
   return(cfg)
 }
-
-# -----------------------------------------------------------------------------------------------------------------
-# Calibration run
-#cfg <- general_settings("calibration_FSEC_sticky_feb18_free")
-#cfg$input                           <- input
-#cfg$results_folder                  <- "output/:title:"
-#cfg$recalibrate                     <- TRUE
-#cfg$recalibrate_landconversion_cost <- TRUE
-#cfg$title                           <- "calibration_FSEC_sticky_feb18_free"
-#cfg$output                          <- c("rds_report", "validation_short")
-#cfg$force_replace                   <- TRUE
-#start_run(cfg, codeCheck = FALSE)
-#magpie4::submitCalibration("FSEC")
-
-### repeat input vector
-#input <- c(regional    = "rev4.68FSECmodeling_e2bdb6cd_magpie.tgz",
-#           cellular    = "rev4.68FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-#           validation  = "rev4.68FSECmodeling_e2bdb6cd_validation.tgz",
-#           additional  = "additional_data_rev4.14.tgz",
-#           calibration = "calibration_FSEC_29Apr22.tgz")
-
 
 
 # -----------------------------------------------------------------------------------------------------------------
