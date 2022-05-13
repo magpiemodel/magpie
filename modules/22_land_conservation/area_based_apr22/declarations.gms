@@ -11,6 +11,7 @@ scalars
 
 parameters
  p22_conservation_area(t,j,land)                          Total land conservation area for all land types (mio. ha)
+ pc22_restoration_area(j,land)                            Restoration area for all land types in current time step (mio. ha)
  pm_land_conservation(t,j,land,consv_type)				  Land protection and restoration for all land types (mio. ha)
  p22_conservation_fader(t_all)			                  Land conservation fader (1)
  p22_consv_shr_ini(j,consv22_all)   		              Land conservation share for primforest, secdforest and other land (1)
@@ -25,7 +26,7 @@ parameters
 ;
 
 equations
-
+ q22_natveg_conservation(j)                     Total natural vegetation conservation constraint (mio. ha)
  q22_min_forest(j)					            Minimum forest land constraint (mio. ha)
  q22_min_other(j)                               Minimum other land constraint (mio. ha)
 ;

@@ -12,16 +12,6 @@
 
  q35_land_other(j2) .. vm_land(j2,"other") =e= sum(ac, v35_other(j2,ac));
 
-*' Natural land conservation
-*' Total natural land cannot be smaller than total natural land conservation target
-
- q35_natveg_conservation(j2) ..
-      vm_land(j2,"primforest") + vm_land(j2,"secdforest") + vm_land(j2,"other")
-      =g=
-      sum(ct, pm_land_conservation(ct,j2,"primforest","protect")
-            + sum(consv_type, pm_land_conservation(ct,j2,"secdforest",consv_type))
-            + sum(consv_type, pm_land_conservation(ct,j2,"other",consv_type)));
-
 *' Carbon stocks for primary forest, secondary forest or other natural land are calculated
 *' as the product of respective area and carbon density.
 *' Carbon stocks decline if the area decreases
