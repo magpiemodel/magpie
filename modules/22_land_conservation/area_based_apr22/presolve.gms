@@ -5,15 +5,15 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* ------------------
+* ==================
 * NPI/NDC policy
-* ------------------
+* ==================
 p22_min_forest(t,j)$(p22_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j,"secdforest")) = pcm_land(j,"primforest") + pcm_land(j,"secdforest");
 p22_min_other(t,j)$(p22_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");
 
-* ------------------
+* ==================
 * Land conservation
-* ------------------
+* ==================
 if(m_year(t) <= sm_fix_SSP2,
 * from 1995 to 2020 land conservation is based on
 * observed trends as derived from WDPA
@@ -49,7 +49,9 @@ $endif
 
 );
 
-** Protect remaining land
+* -----------------------
+* Protect remaining land
+* -----------------------
 
 * Note: protected area reported in the WDPA baseline data can be higher
 * than what is reported in the LUH2v2 data.
@@ -57,10 +59,13 @@ pm_land_conservation(t,j,land,"protect") = p22_conservation_area(t,j,land);
 pm_land_conservation(t,j,land,"protect")$(pm_land_conservation(t,j,land,"protect") > pcm_land(j,land)) = pcm_land(j,land);
 
 
-** Land restoration
+* -------------------
+* Land restoration
+* -------------------
 
 if(s22_restore_land = 1 OR m_year(t) <= sm_fix_SSP2,
 
+** Calculate restoration targets
 * Grassland
 p22_restoration_target(t,j,"past")$(p22_conservation_area(t,j,"past") > pcm_land(j,"past")) =
 			  p22_conservation_area(t,j,"past") - pcm_land(j,"past");
@@ -79,8 +84,9 @@ p22_restoration_target(t,j,"secdforest") =
 		p22_restoration_target(t,j,"secdforest") + p22_restoration_target(t,j,"primforest");
 p22_restoration_target(t,j,"primforest") = 0;
 
-* Actual restoration area
+** Actual restoration area
 pm_land_conservation(t,j,land,"restore") = p22_restoration_target(t,j,land);
+
 * Do not restore additional land in areas where total natural
 * land area meets the total natural land conservation target
 pm_land_conservation(t,j,"secdforest","restore")$(sum(land_natveg, p22_conservation_area(t,j,land_natveg)) <= sum(land_natveg, pcm_land(j,land_natveg))) = 0;
@@ -90,7 +96,10 @@ pm_land_conservation(t,j,"other","restore")$(sum(land_natveg, p22_conservation_a
 
 * Natural vegetation cannot be converted to grassland for restoration.
 * Therefore grassland restoration can only occur on cropland:
-p22_past_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop"));
+p22_past_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop"))
+					+ sum(land_natveg, vm_land.l(j,land_natveg))
+					- max(sum(land_natveg, p22_conservation_area(t,j,land_natveg)),
+					      (p22_min_forest(t,j) + p22_min_other(t,j)));
 p22_past_restore_pot(t,j)$(p22_past_restore_pot(t,j) < 0) = 0;
 * grassland restoration is limited by grassland restoration potential
 pm_land_conservation(t,j,"past","restore")$(pm_land_conservation(t,j,"past","restore") > p22_past_restore_pot(t,j)) = p22_past_restore_pot(t,j);
