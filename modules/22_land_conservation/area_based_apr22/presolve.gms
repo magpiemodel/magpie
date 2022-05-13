@@ -62,26 +62,27 @@ pm_land_conservation(t,j,land,"protect")$(pm_land_conservation(t,j,land,"protect
 if(s22_restore_land = 1 OR m_year(t) <= sm_fix_SSP2,
 
 * Grassland
-pm_land_conservation(t,j,"past","restore")$(p22_conservation_area(t,j,"past") > pcm_land(j,"past")) =
+p22_restoration_target(t,j,"past")$(p22_conservation_area(t,j,"past") > pcm_land(j,"past")) =
 			  p22_conservation_area(t,j,"past") - pcm_land(j,"past");
 * Primary forest
-pm_land_conservation(t,j,"primforest","restore")$(p22_conservation_area(t,j,"primforest") > pcm_land(j,"primforest")) =
+p22_restoration_target(t,j,"primforest")$(p22_conservation_area(t,j,"primforest") > pcm_land(j,"primforest")) =
 			  p22_conservation_area(t,j,"primforest") - pcm_land(j,"primforest");
 * Secondary forest
-pm_land_conservation(t,j,"secdforest","restore")$(p22_conservation_area(t,j,"secdforest") > pcm_land(j,"secdforest")) =
+p22_restoration_target(t,j,"secdforest")$(p22_conservation_area(t,j,"secdforest") > pcm_land(j,"secdforest")) =
 			  p22_conservation_area(t,j,"secdforest") - pcm_land(j,"secdforest");
 * Other land
-pm_land_conservation(t,j,"other","restore")$(p22_conservation_area(t,j,"other") > pcm_land(j,"other")) =
+p22_restoration_target(t,j,"other")$(p22_conservation_area(t,j,"other") > pcm_land(j,"other")) =
 			  p22_conservation_area(t,j,"other") - pcm_land(j,"other");
 
 * Primary forest cannot be restored, therefore shift restoration target to secdforest
-pm_land_conservation(t,j,"secdforest","restore") =
-		pm_land_conservation(t,j,"secdforest","restore") + pm_land_conservation(t,j,"primforest","restore");
-pm_land_conservation(t,j,"primforest","restore") = 0;
+p22_restoration_target(t,j,"secdforest") =
+		p22_restoration_target(t,j,"secdforest") + p22_restoration_target(t,j,"primforest");
+p22_restoration_target(t,j,"primforest") = 0;
 
-pc22_restoration_area(j,land) = pm_land_conservation(t,j,land,"restore");
-
-* Do not restore additional land in areas where total natural land area meets the total natural land conservation target
+* Actual restoration area
+pm_land_conservation(t,j,land,"restore") = p22_restoration_target(t,j,land);
+* Do not restore additional land in areas where total natural
+* land area meets the total natural land conservation target
 pm_land_conservation(t,j,"secdforest","restore")$(sum(land_natveg, p22_conservation_area(t,j,land_natveg)) <= sum(land_natveg, pcm_land(j,land_natveg))) = 0;
 pm_land_conservation(t,j,"other","restore")$(sum(land_natveg, p22_conservation_area(t,j,land_natveg)) <= sum(land_natveg, pcm_land(j,land_natveg))) = 0;
 
@@ -105,8 +106,8 @@ pm_land_conservation(t,j,"other","restore")$(pm_land_conservation(t,j,"other","r
 else
 
 * set restoration to zero
-pm_land_conservation(t,j,land,"restore") = 0;
-pc22_restoration_area(j,land) = pm_land_conservation(t,j,land,"restore");
+p22_restoration_target(t,j,land) = 0;
+pm_land_conservation(t,j,land,"restore") = p22_restoration_target(t,j,land);
 
 );
 
