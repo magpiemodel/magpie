@@ -11,6 +11,7 @@
 
 library(magpie4)
 library(magclass)
+library(gms)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
@@ -23,7 +24,9 @@ input <- c(regional    = "rev4.68FSECmodeling_e2bdb6cd_magpie.tgz",
 
 # General settings of FSEC global runs:
 general_settings <- function(title) {
+
   source("config/default.cfg")
+
   cfg$input       <- input
   cfg$title       <- paste0("v3_", title)
   cfg$recalibrate <- FALSE
