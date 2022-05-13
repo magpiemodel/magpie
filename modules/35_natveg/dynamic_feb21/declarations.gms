@@ -29,9 +29,7 @@ parameters
  p35_land_start_ac(j,ac,land_natveg)              Initial Natural vegetation area (mio. ha)
  p35_observed_gs_reg(i)                           Observed growing stock in natural forests before calibration (m3 per ha)
  p35_gs_scaling_reg(i)                            Regional calibration factors for natural vegetation yields (1)
- p35_region_prot_shr(i)	                  		    land conservation share of the region (1)
- p35_country_dummy(iso)		                        Dummy parameter indicating whether country is affected by selected land conservation policy (1)
- i35_land_iso(iso)								                Total land area at ISO level (mio. ha)
+ p35_land_restoration(j,land_natveg)              Actual secondary forest and other land restoration area (mio. ha)
 ;
 
 equations

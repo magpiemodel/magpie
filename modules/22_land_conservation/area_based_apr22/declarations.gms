@@ -11,7 +11,6 @@ scalars
 
 parameters
  p22_conservation_area(t,j,land)                          Total land conservation area for all land types (mio. ha)
- p22_restoration_target(t,j,land)                         Hypothetical restoration target area for all land types (mio. ha)
  pm_land_conservation(t,j,land,consv_type)				  Land protection and restoration for all land types (mio. ha)
  p22_conservation_fader(t_all)			                  Land conservation fader (1)
  p22_consv_shr_ini(j,consv22_all)   		              Land conservation share for primforest, secdforest and other land (1)

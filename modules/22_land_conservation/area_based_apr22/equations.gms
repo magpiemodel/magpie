@@ -11,10 +11,9 @@
 *' Total natural land cannot be smaller than total natural land conservation target
 
  q22_natveg_conservation(j2) ..
-                sum(land_natveg, vm_land(j2,land_natveg))
-                =g=
-                sum((ct,land_natveg), pm_land_conservation(ct,j2,land_natveg,"protect")
-                                    + p22_restoration_target(ct,j2,land_natveg));
+            sum(land_natveg, vm_land(j2,land_natveg))
+            =g=
+            sum((ct,land_natveg,consv_type), pm_land_conservation(ct,j2,land_natveg,consv_type));
 
 *' NPI/NDC land protection policies are implemented as minium forest land and other land stock.
 

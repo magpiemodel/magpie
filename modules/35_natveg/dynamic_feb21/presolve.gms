@@ -41,9 +41,6 @@ pc35_secdforest(j,ac_sub) = pc35_secdforest(j,ac_sub) - p35_disturbance_loss_sec
 pcm_land(j,"primforest") = pcm_land(j,"primforest") - p35_disturbance_loss_primf(t,j);
 vm_land.l(j,"primforest") = pcm_land(j,"primforest");
 
-* account for forest damage in primforest conservation
-pm_land_conservation(t,j,"primforest","protect")$(pm_land_conservation(t,j,"primforest","protect") > pcm_land(j,"primforest")) = pcm_land(j,"primforest");
-
 * Regrowth of natural vegetation (natural succession) is modelled by shifting age-classes according to time step length.
 s35_shift = m_timestep_length_forestry/5;
 * example: ac10 in t = ac5 (ac10-1) in t-1 for a 5 yr time step (s35_shift = 1)
@@ -91,6 +88,9 @@ v35_other.l(j,ac) = pc35_other(j,ac);
 vm_land.l(j,"other") = sum(ac, pc35_other(j,ac));
 pcm_land(j,"other") = sum(ac, pc35_other(j,ac));
 
+* Correct land conservation for damage
+pm_land_conservation(t,j,land_natveg,"protect")$(pm_land_conservation(t,j,land_natveg,"protect") > pcm_land(j,land_natveg)) = pcm_land(j,land_natveg);
+
 * -------------------------------------
 * Set bounds based on land conservation
 * -------------------------------------
@@ -135,8 +135,13 @@ m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
 * Secondary forest conservation
 * protection bound fix
 pm_land_conservation(t,j,"secdforest","protect")$(abs(pm_land_conservation(t,j,"secdforest","protect") - sum(ac_sub, pc35_secdforest(j,ac_sub))) < 10e-5) = sum(ac_sub, pc35_secdforest(j,ac_sub));
+* set restoration target
+p35_land_restoration(j,"secdforest") = pm_land_conservation(t,j,"secdforest","restore");
+* Do not restore secdforest in areas where total natural
+* land area meets the total natural land conservation target
+p35_land_restoration(j,"secdforest")$(sum(land_natveg, pcm_land(j,land_natveg)) >= sum((land_natveg, consv_type), pm_land_conservation(t,j,land_natveg,consv_type))) = 0;
 * set conservation bound
-vm_land.lo(j,"secdforest") = sum(consv_type, pm_land_conservation(t,j,"secdforest",consv_type));
+vm_land.lo(j,"secdforest") = pm_land_conservation(t,j,"secdforest","protect") + p35_land_restoration(j,"secdforest");
 
 ** Other land
 
@@ -149,8 +154,13 @@ v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
 * Other land conservation
 * protection bound fix
 pm_land_conservation(t,j,"other","protect")$(abs(pm_land_conservation(t,j,"other","protect") - sum(ac_sub, pc35_other(j,ac_sub))) < 10e-5) = sum(ac_sub, pc35_other(j,ac_sub));
+* set restoration target
+p35_land_restoration(j,"other") = pm_land_conservation(t,j,"other","restore");
+* Do not restore other land in areas where total natural
+* land area meets the total natural land conservation target
+p35_land_restoration(j,"other")$(sum(land_natveg, pcm_land(j,land_natveg)) >= sum((land_natveg, consv_type), pm_land_conservation(t,j,land_natveg,consv_type))) = 0;
 * set conservation bound
-vm_land.lo(j,"other") = sum(consv_type, pm_land_conservation(t,j,"other",consv_type));
+vm_land.lo(j,"other") = pm_land_conservation(t,j,"other","protect") + p35_land_restoration(j,"other");
 
 * ------------------------------
 * Calculate carbon density

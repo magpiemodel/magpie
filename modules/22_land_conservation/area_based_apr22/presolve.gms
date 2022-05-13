@@ -67,26 +67,18 @@ if(s22_restore_land = 1 OR m_year(t) <= sm_fix_SSP2,
 
 ** Calculate restoration targets
 * Grassland
-p22_restoration_target(t,j,"past")$(p22_conservation_area(t,j,"past") > pcm_land(j,"past")) =
+pm_land_conservation(t,j,"past","restore")$(p22_conservation_area(t,j,"past") > pcm_land(j,"past")) =
 			  p22_conservation_area(t,j,"past") - pcm_land(j,"past");
 * Forest land
 * Total forest restoration requirements are attributed to
 * secdforest, as primforest cannot be restored by definition
-p22_restoration_target(t,j,"secdforest") =
+pm_land_conservation(t,j,"secdforest","restore") =
 				(p22_conservation_area(t,j,"primforest") + p22_conservation_area(t,j,"secdforest"))
 			  -	(pcm_land(j,"primforest") + pcm_land(j,"secdforest"));
-p22_restoration_target(t,j,"secdforest")$(p22_restoration_target(t,j,"secdforest") < 0) = 0;
+pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") < 0) = 0;
 * Other land
-p22_restoration_target(t,j,"other")$(p22_conservation_area(t,j,"other") > pcm_land(j,"other")) =
+pm_land_conservation(t,j,"other","restore")$(p22_conservation_area(t,j,"other") > pcm_land(j,"other")) =
 			  p22_conservation_area(t,j,"other") - pcm_land(j,"other");
-
-** Actual restoration area
-pm_land_conservation(t,j,land,"restore") = p22_restoration_target(t,j,land);
-
-* Do not restore additional land in areas where total natural
-* land area meets the total natural land conservation target
-pm_land_conservation(t,j,"secdforest","restore")$(sum(land_natveg, pcm_land(j,land_natveg)) >= sum(land_natveg, p22_conservation_area(t,j,land_natveg))) = 0;
-pm_land_conservation(t,j,"other","restore")$(sum(land_natveg, pcm_land(j,land_natveg)) >= sum(land_natveg, p22_conservation_area(t,j,land_natveg))) = 0;
 
 * Adjust pasture and other land restoration depending on given land available for restoration (restoration potential)
 
@@ -108,8 +100,7 @@ pm_land_conservation(t,j,"other","restore")$(pm_land_conservation(t,j,"other","r
 else
 
 * set restoration to zero
-p22_restoration_target(t,j,land) = 0;
-pm_land_conservation(t,j,land,"restore") = p22_restoration_target(t,j,land);
+pm_land_conservation(t,j,land,"restore") = 0;
 
 );
 
