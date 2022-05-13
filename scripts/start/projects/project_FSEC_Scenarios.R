@@ -65,7 +65,7 @@ general_settings <- function(title) {
   cfg$gms$factor_costs            <- "sticky_feb18"
   cfg$gms$c38_sticky_mode         <- "dynamic"
   # Necessary to be feasible
-  cfg$gms$s13_max_gdp_shr <- 1
+  cfg$gms$s13_max_gdp_shr         <- 1
 
   return(cfg)
 }
