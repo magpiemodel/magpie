@@ -15,6 +15,7 @@ library(gms)
 
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
+source("config/default.cfg")
 
 input <- c(regional    = "rev4.68FSECmodeling_e2bdb6cd_magpie.tgz",
            cellular    = "rev4.68FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
@@ -65,7 +66,7 @@ general_settings <- function(title) {
 
 # -----------------------------------------------------------------------------------------------------------------
 # Calibration run
-cfg <- general_settings(title = "calibration_FSEC_sticky_feb18_free")
+cfg <- general_settings("calibration_FSEC_sticky_feb18_free")
 cfg$results_folder                  <- "output/:title:"
 cfg$recalibrate                     <- TRUE
 cfg$recalibrate_landconversion_cost <- TRUE
