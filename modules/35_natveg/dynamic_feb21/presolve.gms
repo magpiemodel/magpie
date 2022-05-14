@@ -150,6 +150,7 @@ v35_other.lo(j,ac) = 0;
 v35_other.up(j,ac) = Inf;
 *set upper bound
 v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
+m_boundfix(v35_other,(j,ac_sub),l,10e-5);
 
 * Other land conservation
 * protection bound fix
