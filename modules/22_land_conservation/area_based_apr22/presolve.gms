@@ -82,19 +82,30 @@ pm_land_conservation(t,j,"other","restore")$(p22_conservation_area(t,j,"other") 
 
 * Adjust pasture and other land restoration depending on given land available for restoration (restoration potential)
 
-* Natural vegetation cannot be converted to grassland for restoration.
-* Therefore grassland restoration can only occur on cropland:
-p22_past_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop"));
+* Secondary forest restoration is limited by secondary forest restoration potential
+p22_secdforest_restore_pot(t,j) = sum(land, pcm_land(j, land))
+								- pcm_land(j, "urban")
+								- sum(land_natveg, pcm_land(j, land_natveg))
+								- pm_land_conservation(t,j,"past","protect");
+p22_secdforest_restore_pot(t,j)$(p22_secdforest_restore_pot(t,j) < 0) = 0;
+pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") > p22_secdforest_restore_pot(t,j)) = p22_secdforest_restore_pot(t,j);
+
+* Grassland restoration is limited by grassland restoration potential
+p22_past_restore_pot(t,j) = sum(land, pcm_land(j, land))
+						  - pcm_land(j, "urban")
+						  - sum(forest_land, pcm_land(j, forest_land))
+						  - pm_land_conservation(t,j,"past","protect")
+						  - pm_land_conservation(t,j,"secdforest","restore");
 p22_past_restore_pot(t,j)$(p22_past_restore_pot(t,j) < 0) = 0;
-* grassland restoration is limited by grassland restoration potential
 pm_land_conservation(t,j,"past","restore")$(pm_land_conservation(t,j,"past","restore") > p22_past_restore_pot(t,j)) = p22_past_restore_pot(t,j);
 
-* Primary and secondary forest cannot be converted to other land. Therefore
-* other land restoration is contrained by the remaining agricultural land:
-p22_other_restore_pot(t,j) = (vm_land.l(j,"crop") - vm_land.lo(j,"crop"))
-						   + (vm_land.l(j,"past") - sum(consv_type, pm_land_conservation(t,j,"past", consv_type)));
-p22_other_restore_pot(t,j)$(p22_other_restore_pot(t,j) < 0) = 0;
 * Other land restoration is limited by other land restoration potential
+p22_other_restore_pot(t,j) = sum(land, pcm_land(j, land))
+						   - pcm_land(j, "urban")
+						   - sum(forest_land, pcm_land(j, forest_land))
+						   - sum(consv_type, pm_land_conservation(t,j,"past",consv_type))
+						   - pm_land_conservation(t,j,"secdforest","restore");
+p22_other_restore_pot(t,j)$(p22_other_restore_pot(t,j) < 0) = 0;
 pm_land_conservation(t,j,"other","restore")$(pm_land_conservation(t,j,"other","restore") > p22_other_restore_pot(t,j)) = p22_other_restore_pot(t,j);
 
 else
