@@ -31,16 +31,9 @@ general_settings <- function(title) {
   cfg$title       <- paste0("v3_", title)
   cfg$recalibrate <- FALSE
   cfg$qos         <- "priority_maxMem"
-  cfg$output      <- c(cfg$output ,
-                       "extra/disaggregation_BII", "projects/FSEC_dietaryIndicators",
-                       "projects/FSEC_environmentalPollution_grid"
-
-  cfg$title       <- paste0("v3_", title)
-  cfg$recalibrate <- FALSE
-  cfg$qos         <- "priority_maxMem"
-  cfg$output      <- c(cfg$output ,
-                       "extra/disaggregation_BII", "projects/FSEC_dietaryIndicators",
-                       "projects/FSEC_environmentalPollution_grid"
+  cfg$output      <- c(cfg$output #,
+                       #"extra/disaggregation_BII", "projects/FSEC_dietaryIndicators",
+                       #"projects/FSEC_environmentalPollution_grid"
                       )
 
   # Climate change impacts activated, SSP2 default settings, NDC activated, endogenous forestry activated
