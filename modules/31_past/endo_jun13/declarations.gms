@@ -15,7 +15,7 @@ equations
 ;
 
 positive variables
- vm_cost_prod_past(i)                  Factor costs for pasture (mio. USD05MER per yr)
+ vm_cost_prod_past(i)                  Costs for putting animals on pastures (mio. USD05MER per yr)
 ;
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters

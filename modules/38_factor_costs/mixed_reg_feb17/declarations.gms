@@ -6,18 +6,18 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 equations
-q38_cost_prod_crop(i,req)      Regional factor input costs for plant production (mio. USD05MER per yr)
+q38_cost_prod_crop(i,req)      Regional factor costs of capital and labor for plant production (mio. USD05MER per yr)
 ;
 
 
 positive variables
-vm_cost_prod_crop(i,req)       Crop factor costs (mio. USD05MER per yr)
+vm_cost_prod_crop(i,req)       Regional factor costs of capital and labor for plant production (mio. USD05MER per yr)
 ;
 
 parameters
 p38_fac_req(i,kcr,w)           Regional factor requirement costs differentiated by irrigation type (USD05MER per tDM)
-p38_cost_share(t,i,req)       Capital anad labor shares  (1)
-p38_share_calibration(i)      Summation factor used to calibrate calculated capital shares with historical values (1)
+p38_cost_share(t,i,req)        Capital and labor shares of the regional factor costs for plant production   (1)
+p38_share_calibration(i)       Summation factor used to calibrate calculated capital shares with historical values (1)
 
 ;
 
