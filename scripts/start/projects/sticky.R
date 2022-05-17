@@ -30,17 +30,17 @@ for(cc in c("cc")){
     # Set cc
     cfg<-gms::setScenario(cfg,cc)
 
-    cfg$input <- c(regional    = "rev4.68_h12_magpie.tgz",
-                   cellular    = "rev4.68_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-                   validation  = "rev4.68_h12_validation.tgz",
-                   additional  = "additional_data_rev4.10.tgz",
-                   calibration = "calibration_H12_sticky_feb18_dynamic_18Jan22.tgz")
+    cfg$input <- c(regional    = "rev4.69_h12_magpie.tgz",
+                   cellular    = "rev4.69_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+                   validation  = "rev4.69_h12_validation.tgz",
+                   additional  = "additional_data_rev4.17.tgz",
+                   calibration = "calibration_H12_sticky_feb18_08May22.tgz")
 
     # Set factor costs
-    cfg$gms$factor_costs     <-   "sticky_labor"
+    cfg$gms$factor_costs     <-   "sticky_feb18"
 
     #Change the results folder name
-    cfg$title<-paste0("sticky_labor","_",cc)
+    cfg$title<-paste0("sticky_",cc)
 
     # Start run
     start_run(cfg=cfg)
