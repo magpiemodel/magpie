@@ -39,6 +39,7 @@ general_settings <- function(title) {
   # Climate change impacts activated, SSP2 default settings, NDC activated, endogenous forestry activated
   cfg <- gms::setScenario(cfg, c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"))
   cfg$input['cellular'] <- "rev4.68FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
+  cfg$force_download    <- TRUE
 
   # Nitrogen module with IPCC emissions factors rescaled with efficiency
   cfg$gms$nitrogen                <- "rescaled_jan21"
