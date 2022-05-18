@@ -21,6 +21,7 @@
 
 
 *####################### R SECTION START (PHASES) ##############################
+$Ifi "%phase%" == "sets" $include "./modules/38_factor_costs/mixed_reg_feb17/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/38_factor_costs/mixed_reg_feb17/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/38_factor_costs/mixed_reg_feb17/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/38_factor_costs/mixed_reg_feb17/equations.gms"

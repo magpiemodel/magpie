@@ -23,8 +23,7 @@ p38_share_calibration(i)       Summation factor used to calibrate calculated cap
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_prod(t,i,kall,type)       Factor costs (mio. USD05MER per yr)
- ov_cost_inv(t,i,type)             Capital investment costs (mio USD05MER  per yr)
- oq38_cost_prod_crop(t,i,kcr,type) Regional factor input costs for plant production (mio. USD05MER per yr)
+ ov_cost_prod_crop(t,i,req,type)   Regional factor costs of capital and labor for plant production (mio. USD05MER per yr)
+ oq38_cost_prod_crop(t,i,req,type) Regional factor costs of capital and labor for plant production (mio. USD05MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

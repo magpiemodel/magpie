@@ -19,6 +19,7 @@ positive variables
 ;
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
+ ov_cost_prod_past(t,i,type)              Costs for putting animals on pastures (mio. USD05MER per yr)
  oq31_prod(t,j,type)                      Cellular pasture production constraint (mio. tDM per yr)
  oq31_carbon(t,j,ag_pools,stockType,type) Above ground carbon content calculation for pasture (mio tC)
  oq31_cost_prod_past(t,i,type)            Costs for putting animals on pastures (mio. USD05MER per yr)

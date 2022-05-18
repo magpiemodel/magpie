@@ -6,16 +6,12 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
- ov_cost_prod(t,i,kall,"marginal")       = vm_cost_prod.m(i,kall);
- ov_cost_inv(t,i,"marginal")             = vm_cost_inv.m(i);
- oq38_cost_prod_crop(t,i,kcr,"marginal") = q38_cost_prod_crop.m(i,kcr);
- ov_cost_prod(t,i,kall,"level")          = vm_cost_prod.l(i,kall);
- ov_cost_inv(t,i,"level")                = vm_cost_inv.l(i);
- oq38_cost_prod_crop(t,i,kcr,"level")    = q38_cost_prod_crop.l(i,kcr);
- ov_cost_prod(t,i,kall,"upper")          = vm_cost_prod.up(i,kall);
- ov_cost_inv(t,i,"upper")                = vm_cost_inv.up(i);
- oq38_cost_prod_crop(t,i,kcr,"upper")    = q38_cost_prod_crop.up(i,kcr);
- ov_cost_prod(t,i,kall,"lower")          = vm_cost_prod.lo(i,kall);
- ov_cost_inv(t,i,"lower")                = vm_cost_inv.lo(i);
- oq38_cost_prod_crop(t,i,kcr,"lower")    = q38_cost_prod_crop.lo(i,kcr);
+ ov_cost_prod_crop(t,i,req,"marginal")   = vm_cost_prod_crop.m(i,req);
+ oq38_cost_prod_crop(t,i,req,"marginal") = q38_cost_prod_crop.m(i,req);
+ ov_cost_prod_crop(t,i,req,"level")      = vm_cost_prod_crop.l(i,req);
+ oq38_cost_prod_crop(t,i,req,"level")    = q38_cost_prod_crop.l(i,req);
+ ov_cost_prod_crop(t,i,req,"upper")      = vm_cost_prod_crop.up(i,req);
+ oq38_cost_prod_crop(t,i,req,"upper")    = q38_cost_prod_crop.up(i,req);
+ ov_cost_prod_crop(t,i,req,"lower")      = vm_cost_prod_crop.lo(i,req);
+ oq38_cost_prod_crop(t,i,req,"lower")    = q38_cost_prod_crop.lo(i,req);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
