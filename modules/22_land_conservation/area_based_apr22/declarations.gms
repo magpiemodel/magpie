@@ -20,9 +20,9 @@ parameters
  p22_other_restore_pot(t,j)                               Potential other land restoration area (mio. ha)
  p22_country_weight(i)	                  		          Land conservation country weight per region (1)
  p22_country_dummy(iso)		                              Dummy parameter indicating whether country is affected by selected land conservation policy (1)
- i22_land_iso(iso)								                Total land area at ISO level (mio. ha)
- p22_min_forest(t,j) 			                          Minimum forest stock [land conservation for climate mitigation] (Mha)
- p22_min_other(t,j)      		                          Minimum other land stock [land conservation for climate mitigation] (Mha)
+ i22_land_iso(iso)								          Total land area at ISO level (mio. ha)
+ p22_min_forest(t,j) 			                          Minimum forest stock [land conservation for climate change mitigation] (Mha)
+ p22_min_other(t,j)      		                          Minimum other land stock [land conservation for climate change mitigation] (Mha)
 ;
 
 equations

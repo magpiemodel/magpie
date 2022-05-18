@@ -12,7 +12,7 @@
 *' determined contributions to the Paris agreement (NDC) taken from individual country
 *' reports. Area-based conservation as derived from WDPA is based on observed land conservation
 *' trends. In 1995, the total area under land conservation (across all land types) in the
-*' input data set is 871.5 Mha and, by 5-year time steps, increases to 1672.8 Mha in 2020
+*' input data set is 864.31 Mha and, by 5-year time steps, increases to 1662.02 Mha in 2020
 *' (13.06 % of the total land area, excluding inland water bodies under protection). After
 *' 2020 land conservation is held constant at 2020 values. The protected area based on WDPA
 *' includes all areas under legal protection meeting the IUCN and CBD protected area definitions
@@ -20,7 +20,8 @@
 *' areas). Natural vegetation (natveg) and grassland ('past') within protected areas cannot
 *' be converted to other land types. On top of the WDPA baseline protection, there are future
 *' options to protect different conservation priority areas such as biodiversity hotspots (BH),
-*' centers of plant diversity (CBD), Intact Forest Landscapes (IFL) and last of the wild (LW).
+*' centers of plant diversity (CBD), Intact Forest Landscapes (IFL) and last of the wild (LW),
+*' taken from @brooks_global_2006.
 *' Future land conservation is distributed proportionally across natural vegetation types
 *' (primary forest, secondary forest and other natural land).
 *' The NPI/NDC polices ramp up until 2030 and are assumed constant thereafter.

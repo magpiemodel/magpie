@@ -46,7 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** Extended dissagregation.R script to replace single "past" land class by LHU range and pastr classes when grassland_apr22 realization is used.
 - **52_carbon** added land carbon sink adjustment factors, needed in R post-processing
 - **core** macros for linear and sigmoidal time interpolation
-- **22_land_conservation** added new module and realisation for land protection. The realisation also includes a new WDPA initialisation data set (from 1995 to 2020) for protected areas under legal protection and meeting IUCN and CBD protected area definitions (including IUCN categories Ia, Ib, III, IV, V, VI and 'not assigned' but legally designated).
+- **22_land_conservation** added new module and realisation for land conservation. The realisation also includes a new WDPA initialisation data set (from 1995 to 2020) for protected areas under legal protection, meeting IUCN and CBD protected area definitions. The module also adds the interface `pm_land_conservation`.
 - **inputs** New input files added:
     f13_pastr_tau_hist.csv -> historical tau for managed pastures.
     f31_pastr_suitability.cs3 -> Managed pasture suitability

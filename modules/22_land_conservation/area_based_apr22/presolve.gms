@@ -16,7 +16,7 @@ p22_min_other(t,j)$(p22_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"othe
 * ==================
 if(m_year(t) <= sm_fix_SSP2,
 * from 1995 to 2020 land conservation is based on
-* observed trends as derived from WDPA
+* historic trends as derived from WDPA
  p22_conservation_area(t,j,land) = f22_wdpa_baseline(t,j,land);
 
 else

@@ -10,7 +10,11 @@
 *' @description The land conservation (land_conservation) module initialises
 *' land under legal protection for all land types, and provides future
 *' options for land conservation based on conservation priority areas.
-*'
+*' Based on the land area of the different land-use types (`pcm_land`)
+*' from the previous time step, this module also calculates restoration
+*' requirements to fulfil land conservation targets. Both the information on
+*' the protection of remaining land areas as well as information on restoration
+*' is transferred to the other land modules via the interface `pm_land_conservation`.
 *' @authors Patrick v. Jeetze
 
 *###################### R SECTION START (MODULETYPES) ##########################

@@ -7,15 +7,19 @@
 
 *' @equations
 
-*' Natural land conservation
-*' Total natural land cannot be smaller than total natural land conservation target
+*' The total natural land area cannot be smaller than the total natural land conservation target.
+*' Area requirements for natural land conservation are derived from WDPA and formulated based on
+*' conservation priority areas during future time steps.
 
  q22_natveg_conservation(j2) ..
             sum(land_natveg, vm_land(j2,land_natveg))
             =g=
             sum((ct,land_natveg,consv_type), pm_land_conservation(ct,j2,land_natveg,consv_type));
 
-*' NPI/NDC land protection policies are implemented as minium forest land and other land stock.
+*' NPI/NDC land protection policies based on country reports are implemented as
+*' minium forest and other land stocks. They are not interchangeable (as compared to
+*' the natural land conservation constraint) and specifically formulated for forest and
+*' other land stocks.
 
  q22_min_forest(j2) .. vm_land(j2,"primforest") + vm_land(j2,"secdforest")
                        =g=
