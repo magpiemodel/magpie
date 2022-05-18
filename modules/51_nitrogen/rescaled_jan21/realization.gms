@@ -22,6 +22,7 @@ $Ifi "%phase%" == "sets" $include "./modules/51_nitrogen/rescaled_jan21/sets.gms
 $Ifi "%phase%" == "declarations" $include "./modules/51_nitrogen/rescaled_jan21/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/51_nitrogen/rescaled_jan21/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/51_nitrogen/rescaled_jan21/equations.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/51_nitrogen/rescaled_jan21/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/51_nitrogen/rescaled_jan21/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/51_nitrogen/rescaled_jan21/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
