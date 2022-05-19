@@ -26,15 +26,10 @@ source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
 #cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
-prefix <- "rota_penalty07"
+prefix <- "rota_penalty10"
 
 cfg$title <- paste(prefix,"olddefault",sep="_")
 start_run(cfg,codeCheck=FALSE)
-
-
-cfg$title <- paste(prefix,"olddefault_stickydynamic",sep="_")
-start_run(cfg,codeCheck=FALSE)
-
 
 cfg$title <- paste(prefix,"newdefault",sep="_")
 cfg$input <- c(regional    = "rev4.68_h12_magpie.tgz",
@@ -43,7 +38,10 @@ cfg$input <- c(regional    = "rev4.68_h12_magpie.tgz",
                additional  = "additional_data_rev4.18.tgz",
                calibration = "calibration_H12_sticky_feb18_dynamic_18Jan22.tgz")
 
-cfg$gms$c38_sticky_mode <- "dynamic" 
+cfg$gms$c38_sticky_mode <- "dynamic"
+cfg$title <- paste(prefix,"olddefault_stickydynamic",sep="_")
+start_run(cfg,codeCheck=FALSE)
+
 cfg$gms$crop    <- "penalty_apr22"
 cfg$gms$c30_rotation_scenario = "default"
 

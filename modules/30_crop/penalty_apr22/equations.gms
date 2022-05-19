@@ -12,7 +12,7 @@
 *' land and harvested vm_area
 
  q30_cropland(j2)  ..
-   sum((kcr,w), vm_area(j2,kcr,w)) =e= vm_land(j2,"crop")+vm_fallow(j2);
+   sum((kcr,w), vm_area(j2,kcr,w)) + vm_fallow(j2) =e= vm_land(j2,"crop");
 
 
 *' We assume that crop production can only take place on suitable cropland area.
