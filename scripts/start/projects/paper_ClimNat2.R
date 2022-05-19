@@ -31,7 +31,7 @@ cfg$force_replace <- TRUE
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 
-prefix <- "CN68"
+prefix <- "CN69"
 
 cfg$gms$s13_max_gdp_shr <- 0.0025
 
@@ -103,7 +103,7 @@ for (pol in c("CurPol","Carbon","Biodiversity","BiodiversityStopLoss","Integrate
       cfg$gms$s44_start_price <- 3000
       cfg$gms$s44_target_year <- 2100
       cfg$gms$s44_target_price <- 13000
-      cfg$gms$s44_bii_change_annual <- 0.0003
+      cfg$gms$s44_bii_change_annual <- 0.0002
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_set_aside_target <- "by2030"
       cfg$gms$s30_set_aside_shr <- 0.2
@@ -161,7 +161,7 @@ for (pol in c("CurPol","Carbon","Biodiversity","BiodiversityStopLoss","Integrate
       cfg$gms$s44_start_price <- 3000
       cfg$gms$s44_target_year <- 2100
       cfg$gms$s44_target_price <- 13000
-      cfg$gms$s44_bii_change_annual <- 0.0003
+      cfg$gms$s44_bii_change_annual <- 0.0002
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_set_aside_target <- "by2030"
       cfg$gms$s30_set_aside_shr <- 0.2
