@@ -31,7 +31,7 @@ cfg$force_replace <- TRUE
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
 
-prefix <- "CN69"
+prefix <- "CN70"
 
 cfg$gms$s13_max_gdp_shr <- 0.0025
 

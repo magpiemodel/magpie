@@ -14,8 +14,11 @@ if(m_year(t) >= s44_bii_start_year,
 		v44_bii_cell.lo(j) = min(v44_bii_cell.l(j) * (1 + s44_bii_change_annual * m_timestep_length),s44_bii_max_lower_bound);
 	elseif s44_bii_mode = 3 AND s44_bii_change_annual <> -Inf,
 		p44_bii_realm_target(t,realm)$(sum(j, f44_realm(j,realm)) > 0) = min(v44_bii_realm.l(realm) * (1 + s44_bii_change_annual * m_timestep_length),s44_bii_max_lower_bound);
-		p44_bii_realm_target(t_all,"PA11") = 0;
-		p44_bii_realm_target(t_all,"NA99") = 0;
+* avoid reduction of bii in combination with v44_bii_realm_missing
+		v44_bii_realm.lo(realm)$(s44_bii_change_annual >= 0) = v44_bii_realm.l(realm);
+
+*		p44_bii_realm_target(t_all,"PA11") = 0;
+*		p44_bii_realm_target(t_all,"NA99") = 0;
 
 	);
 );
