@@ -31,7 +31,7 @@ prefix <- "rota_penalty10"
 cfg$title <- paste(prefix,"olddefault",sep="_")
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"newdefault",sep="_")
+cfg$title <- paste(prefix,"olddefault_stickydynamic",sep="_")
 cfg$input <- c(regional    = "rev4.68_h12_magpie.tgz",
                cellular    = "rev4.68_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
                validation  = "rev4.68_h12_validation.tgz",
@@ -39,9 +39,9 @@ cfg$input <- c(regional    = "rev4.68_h12_magpie.tgz",
                calibration = "calibration_H12_sticky_feb18_dynamic_18Jan22.tgz")
 
 cfg$gms$c38_sticky_mode <- "dynamic"
-cfg$title <- paste(prefix,"olddefault_stickydynamic",sep="_")
 start_run(cfg,codeCheck=FALSE)
 
+cfg$title <- paste(prefix,"newdefault",sep="_")
 cfg$gms$crop    <- "penalty_apr22"
 cfg$gms$c30_rotation_scenario = "default"
 
