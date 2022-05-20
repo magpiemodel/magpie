@@ -5,6 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-if (smax(j, pm_labor_prod(t,j)) <> 1 OR smin(j, pm_labor_prod(t,j)) <> 1,
-	abort "This factor cost realization cannot handle labor productivities != 1"
-);
+sets
+req input requirements
+/ labor, capital /
+
+ reg regression parameters for capital calculation
+ /slope, intercept/
+ ;
+
+*** EOF sets.gms ***

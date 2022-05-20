@@ -5,23 +5,24 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-scalars
-*' Depreciation rate assuming roughly 20 years linear depreciation for invesment goods
-s38_depreciation_rate depreciation rate (share of costs)  / 0.05 /
-*' Share of immobile capital.
-s38_immobile  immobile capital (share) / 1 /
+scalar
+s38_factor_irrigation      Factor to increase irrigation costs / 1 /
+s38_shock_year  Year from which policy shock will be implemented / 1995 /
 ;
 
-parameter f38_fac_req(kcr) Factor requirement costs in 2005 (USD05MER per tDM)
-/
+
+table f38_fac_req(i,kcr,w) Factor requirement costs (USD05MER per tDM)
 $ondelim
-$include "./modules/38_factor_costs/input/f38_fac_req_fao.csv"
-$offdelim
-/
-;
+$include "./modules/38_factor_costs/mixed_reg_feb17/input/f38_fac_req_reg.csv"
+$offdelim;
 
 
-parameter f38_reg_parameters(reg) Parameters for dynamic regression
+table f38_region_yield(i,kcr) Regional crop yields (tDM per ha)
+$ondelim
+$include "./modules/38_factor_costs/mixed_reg_feb17/input/f38_region_yield.csv"
+$offdelim;
+
+parameter f38_reg_parameters(reg) Parameters for capital share regression
 /
 $ondelim
 $include "./modules/38_factor_costs/input/f38_regression_cap_share.csv"

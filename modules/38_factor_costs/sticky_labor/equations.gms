@@ -10,28 +10,27 @@
 
 *' Constant elasticity of substitution (CES) production function for one unit of output.
 *' The CES function accounts for capital `v38_capital_need` and labor `v38_labor_need` requirements.
-*' The efficiency of labor is affected by the labor productivity factor `vm_labor_prod`, which is 
+*' The efficiency of labor is affected by the labor productivity factor `vm_labor_prod`, which is
 *' provided by the labor productivity module [37_labor_prod].
 *' The calculation of total capital and labor costs is covered by the equations `q38_cost_prod_crop` and `q38_cost_prod_inv`.
 *' The conceptual and analytical details of the CES function including the labor productivity factor are documented in @orlov_ces_2021.
 
  q38_ces_prodfun(j2,kcr) ..
-  i38_ces_scale(j2,kcr) * 
-  (i38_ces_shr(j2,kcr)*sum(mobil38, v38_capital_need(j2,kcr,mobil38))**(-s38_ces_elast_par) + 
+  i38_ces_scale(j2,kcr) *
+  (i38_ces_shr(j2,kcr)*sum(mobil38, v38_capital_need(j2,kcr,mobil38))**(-s38_ces_elast_par) +
   (1 - i38_ces_shr(j2,kcr))*(sum(ct, pm_labor_prod(ct,j2)) * v38_labor_need(j2,kcr))**(-s38_ces_elast_par))**(-1/s38_ces_elast_par)
   =e= 1 ;
 
-*' Variable labor costs (without capital): The labor costs are calculated based on the 
-*' requirements of the cellular production without considering capital costs.
+*' Labor costs: The labor costs are calculated by multiplying regional aggregated production with labor requirments per output.
 
-q38_cost_prod_crop(i2,kcr).. vm_cost_prod(i2,kcr)
-                              =e= sum(cell(i2,j2), vm_prod(j2,kcr) * v38_labor_need(j2,kcr) * s38_wage)
+q38_cost_prod_labor(i2).. vm_cost_prod_crop(i2,"labor")
+                              =e= sum(kcr,sum(cell(i2,j2), vm_prod(j2,kcr) * v38_labor_need(j2,kcr) * s38_wage))
                                 ;
 
 *' Investment costs: Investment are the summation of investment in mobile and immobile capital. The costs are annuitized,
 *' and corrected to make sure that the annual depreciation of the current time-step is accounted for.
 
-q38_cost_prod_inv(i2).. vm_cost_inv(i2)=e=(sum((cell(i2,j2),kcr),v38_investment_immobile(j2,kcr))
+q38_cost_prod_capital(i2).. vm_cost_prod_crop(i2,"capital")=e=(sum((cell(i2,j2),kcr),v38_investment_immobile(j2,kcr))
                                     +sum((cell(i2,j2)),v38_investment_mobile(j2)))
                                     *((1-s38_depreciation_rate)*
                                     sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)))

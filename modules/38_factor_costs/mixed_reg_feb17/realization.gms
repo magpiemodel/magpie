@@ -21,11 +21,12 @@
 
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "declarations" $include "./modules/38_factor_costs/mixed_feb17/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/38_factor_costs/mixed_feb17/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/38_factor_costs/mixed_feb17/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/38_factor_costs/mixed_feb17/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/38_factor_costs/mixed_feb17/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/38_factor_costs/mixed_feb17/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/38_factor_costs/mixed_feb17/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/38_factor_costs/mixed_reg_feb17/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/38_factor_costs/mixed_reg_feb17/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/38_factor_costs/mixed_reg_feb17/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/38_factor_costs/mixed_reg_feb17/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/38_factor_costs/mixed_reg_feb17/scaling.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/38_factor_costs/mixed_reg_feb17/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/38_factor_costs/mixed_reg_feb17/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/38_factor_costs/mixed_reg_feb17/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

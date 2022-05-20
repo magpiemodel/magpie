@@ -9,19 +9,20 @@
 *' @equations
 
 
- q38_cost_prod_crop(i2,kcr) ..
-  vm_cost_prod(i2,kcr) =e= sum((cell(i2,j2), w), vm_area(j2,kcr,w)*f38_region_yield(i2,kcr)
-                            *sum(supreg(h2,i2), vm_tau(h2)/fm_tau1995(h2))*f38_fac_req(kcr,w));
+q38_cost_prod_crop(i2,req) ..
+    vm_cost_prod_crop(i2,req)  =e= (sum((cell(i2,j2), supreg(h2,i2), w, kcr), vm_area(j2,kcr,w)*f38_region_yield(i2,kcr)
+                            * vm_tau(h2,"crop")/fm_tau1995(h2)*p38_fac_req(i2,kcr,w))) * sum(ct,p38_cost_share(ct,i2,req));
 
 
-*' The equation above shows that factor requirement costs `vm_cost_prod` mainly
+*' The equation above shows that factor requirement costs `vm_cost_prod_costs` mainly
 *' depend on area harvested `vm_area` and average regional land-use intensity
 *' levels `vm_tau`. Multiplying the land-use intensity increase increases
 *' since 1995 with average regional yields `f38_region_yield` gives the
 *' average regional yield. Multiplied with the area under production it gives
 *' the production of this location assuming an average yield. Multiplied with
-*' estimated factor requirement costs per volume `f38_fac_req` returns the
-*' total factor costs.
+*' estimated factor requirement costs per volume `p38_fac_req` returns the
+*' total factor costs, which multiplied by p38_cost_share gives us a results costs differentiated
+*' by factor (capital or labor)'.
 *'
 *' The crop-and-water specific factor costs per volume of crop production
 *' `f38_fac_req` are obtained from @narayanan_gtap7_2008. Splitting factors
