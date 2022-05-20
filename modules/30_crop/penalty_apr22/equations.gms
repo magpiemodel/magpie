@@ -43,10 +43,8 @@ q30_rotation_penalty(i2) ..
  q30_rotation_max(j2,rotamax_red30) ..
    v30_penalty(j2,rotamax_red30)
    =g=
-   sum((rota_kcr30(rotamax_red30,kcr),w),
-    vm_area(j2,kcr,w) -
-    vm_land(j2,"crop") * f30_rotation_rules(rotamax_red30)
-   );
+   sum((rota_kcr30(rotamax_red30,kcr),w),vm_area(j2,kcr,w)) 
+   - vm_land(j2,"crop") * f30_rotation_rules(rotamax_red30);
 
 *' Minimum constraints imply that penalties applies when a certain mimimum
 *' share of a group is not achieved. This is used to guarantee a minimum
