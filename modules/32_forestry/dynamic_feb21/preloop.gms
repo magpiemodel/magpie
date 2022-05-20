@@ -30,9 +30,24 @@ p32_IGR(t_all,j,ac) =   (p32_carbon_density_ac_marg(t_all,j,ac)/p32_carbon_densi
 $ifthen "%c32_interest_rate%" == "regional"
   p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest("y1995",i)) >  0)
                           + 0$(p32_IGR(t_all,j,ac) - sum(cell(i,j),pm_interest("y1995",i)) <= 0);
+  display "Rotation lengths are calculated based on equating instantaneous growth rate to regional interest rate.";
 $elseif "%c32_interest_rate%" == "global"
   p32_rot_flg(t_all,j,ac) = 1$(p32_IGR(t_all,j,ac) - s32_forestry_int_rate  >  0)
                           + 0$(p32_IGR(t_all,j,ac) - s32_forestry_int_rate <= 0);
+  display "Rotation lengths are calculated based on equating instantaneous growth rate to global interest rate.";
+$endif
+
+$ifthen "%c32_rot_calc_type%" == "current_annual_increment"
+  p32_rot_flg(t_all,j,ac) = 1$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_carbon_density_ac_marg(t_all,j,ac-1) >  0)
+                          + 0$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_carbon_density_ac_marg(t_all,j,ac-1) <= 0);
+  display "Rotation lengths are calculated based on maximizing current annual increment in this run.";
+$endif
+
+$ifthen "%c32_rot_calc_type%" == "mean_annual_increment"
+  p32_avg_increment(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") / ((ord(ac)+1)*5);
+  p32_rot_flg(t_all,j,ac) = 1$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_avg_increment(t_all,j,ac) >  0)
+                          + 0$(p32_carbon_density_ac_marg(t_all,j,ac) - p32_avg_increment(t_all,j,ac) <= 0);
+  display "Rotation lengths are calculated based on maximizing mean annual increment in this run.";
 $endif
 
 ** From the above calculation, now it is easier to count how many age-classes can be sustained before IGR falls below interest rate.
@@ -119,16 +134,6 @@ loop(t_all,
   p32_rotation_cellular_harvesting(t_all+1,j)$(abs(p32_rotation_cellular_harvesting(t_all+1,j) - p32_rotation_cellular_harvesting(t_all,j))>2 AND ord(t_all)<card(t_all)) = p32_rotation_cellular_harvesting(t_all,j);
   );
 
-** Afforestation policies NPI and NDCs
-p32_aff_pol(t,j) = f32_aff_pol(t,j,"%c32_aff_policy%");
-
-* Calculate the remaining exogenous afforestation with respect to the maximum exogenous target over time.
-* `p32_aff_togo` is used to adjust `s32_max_aff_area` in the constraint `q32_max_aff`.
-p32_aff_togo(t) = sum(j, smax(t2, p32_aff_pol(t2,j)) - p32_aff_pol(t,j));
-
-* Adjust the afforestation limit `s32_max_aff_area` upwards, if it is below the exogenous policy target.
-s32_max_aff_area = max(s32_max_aff_area, sum(j, smax(t2, p32_aff_pol(t2,j))) );
-
 p32_cdr_ac(t,j,ac) = 0;
 
 ** Define ini32 set. ac0 is included here. Therefore, initial shifting in presolve.
@@ -182,7 +187,10 @@ elseif s32_initial_distribution = 4,
 ** Calculate the weights, youngest age-class will have highest weight
     p32_ac_dist(j,ac) = (p32_ac_dist_flag(j,ac) / (sum(ac2,p32_ac_dist_flag(j,ac2)) + ord(ac)))$(ord(ac) <= p32_rotation_cellular_harvesting("y1995",j));
 ** there can be isntances where this distribution is not summing up to 1, in that case we take the excess and remove it evenly from all age-classes
-    p32_ac_dist(j,ac)$(sum(ac2, p32_ac_dist(j,ac2))>1) = (p32_ac_dist(j,ac) - (sum(ac2, p32_ac_dist(j,ac2))-1)/p32_ac_dist_flag(j,"ac0"))$(ord(ac) <= p32_rotation_cellular_harvesting("y1995",j));
+** In case the sum of distribution is > 1 : Remove the excess from ac0
+    p32_ac_dist(j,"ac0")$(sum(ac2, p32_ac_dist(j,ac2))>1) = p32_ac_dist(j,"ac0") - (sum(ac2, p32_ac_dist(j,ac2))-1);
+** In case the sum of distribution is < 1 : Add the shortage to ac0
+    p32_ac_dist(j,"ac0")$(sum(ac2, p32_ac_dist(j,ac2))<1) = p32_ac_dist(j,"ac0") + (1-sum(ac2, p32_ac_dist(j,ac2)));
     );
 ** Isolate plantations from planted forest (forestry)
     p32_plant_ini_ac(j) = pm_land_start(j,"forestry") * sum(cell(i,j),f32_plantedforest(i));
@@ -200,9 +208,42 @@ elseif s32_initial_distribution = 4,
     );
 
 );
-
+** Redistribute to youngest age class in case the distribution to plantations and
+** ndcs does not match fully with LUH initialized data
+loop(j,
+  if(pm_land_start(j,"forestry") > sum((type32,ac),p32_land_start_ac(j,type32,ac)),
+    p32_land_start_ac(j,"ndc","ac0") = p32_land_start_ac(j,"ndc","ac0") + (pm_land_start(j,"forestry") - sum((type32,ac),p32_land_start_ac(j,type32,ac)));
+    );
+);
 ** Initialization of land
 *p32_land_start_ac(j,type32,ac) = p32_land("y1995",j,type32,ac);
+
+*** NPI/NDC policies BEGIN
+** Afforestation policies NPI and NDCs
+p32_aff_pol(t,j) = round(f32_aff_pol(t,j,"%c32_aff_policy%"),6);
+
+* Calculate the remaining exogenous afforestation with respect to the maximum exogenous target over time.
+* `p32_aff_togo` is used to adjust `s32_max_aff_area` in the constraint `q32_max_aff`.
+p32_aff_togo(t,i) = smax(t2, sum(cell(i,j), p32_aff_pol(t2,j))) - sum(cell(i,j), p32_aff_pol(t,j));
+
+$ifthen "%c32_max_aff_area%" == "global"
+	c32_max_aff_area_glo = 1;
+$elseif "%c32_max_aff_area%" == "regional"
+	c32_max_aff_area_glo = 0;
+$else 
+	abort "Provided value for c32_max_aff_area is not defined";
+$endif
+
+* Adjust the global and regional afforestation limits `s32_max_aff_area` and `f32_max_aff_area` upwards, if it is below the exogenous policy target.
+if(c32_max_aff_area_glo = 1,
+	i32_max_aff_area_glo = max(s32_max_aff_area, smax(t2, sum(j, p32_aff_pol(t2,j)))) + sum((j,ac), p32_land_start_ac(j,"ndc",ac));
+	i32_max_aff_area_reg(i) = 0;
+elseif c32_max_aff_area_glo = 0,
+	i32_max_aff_area_glo = 0;
+	i32_max_aff_area_reg(i) = max(f32_max_aff_area(i), smax(t2, sum(cell(i,j), p32_aff_pol(t2,j)))) + sum((cell(i,j),ac), p32_land_start_ac(j,"ndc",ac));
+);
+
+*** NPI/NDC policies END
 
 *fix bph effect to zero for all age classes except the ac that is chosen for the bph effect to occur after planting (e.g. canopy closure)
 *fade-in from ac10 to ac30. First effect in ac10 (ord 3), last effect in ac30 (ord 7).
@@ -230,18 +271,33 @@ p32_plantation_contribution(t_ext,i)$(f32_gs_relativetarget(i)>0) = f32_plantati
 *******************************************************************************
 ** Calibrate plantations yields
 *******************************************************************************
-** Initialize with 0 cvalues
-p32_observed_gs_reg(i) = 0;
+** Initialize with 1 tDM/ha - to avoid dvision by 0
+p32_observed_gs_reg(i) = 1;
 ** Wherever FAO reports >0 growing stock, we calculate how much growing stock MAGPIE
 ** sees even before optimization starts
-p32_observed_gs_reg(i)$(f32_gs_relativetarget(i)>0)  = (sum((cell(i,j),ac),(pm_timber_yield_initial(j,ac,"forestry") / sm_wood_density) * p32_land_start_ac(j,"plant",ac))/ sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac)));
+p32_observed_gs_reg(i)$(f32_gs_relativetarget(i)>0 AND sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac))>0)  = (sum((cell(i,j),ac),(pm_timber_yield_initial(j,ac,"forestry") / sm_wood_density) * p32_land_start_ac(j,"plant",ac))/ sum((cell(i,j),ac),p32_land_start_ac(j,"plant",ac)));
+
 ** Initialze calibration factor for growing stocks as 1
 ** we dont set it to 0 as we don't want to modify carbon densities by multiplication with 0 later
 p32_gs_scaling_reg(i) = 1;
 ** Calculate the ratio between target growing stock (reported by FAO) and observed growing stock (value at initialization in MAgPIE)
-p32_gs_scaling_reg(i)$(f32_gs_relativetarget(i)>0) = f32_gs_relativetarget(i) / p32_observed_gs_reg(i);
+p32_gs_scaling_reg(i)$(f32_gs_relativetarget(i)>0 AND f32_plantedforest(i)>0) = f32_gs_relativetarget(i) / p32_observed_gs_reg(i);
 ** Calibration factors lower than 1 are set to 1
 p32_gs_scaling_reg(i)$(p32_gs_scaling_reg(i) < 1) = 1;
 
-** Update c-densitiy based on calibration factor for growing stocks
+** Save pm_carbon_density_ac_forestry in a parameter before upscaling to FAO growing stocks.
+** This allows to use plantation growth curves for CO2 price driven afforestation.
+p32_c_density_ac_fast_forestry(t_all,j,ac) = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc");
+
+** Update c-density for timber plantations based on calibration factor to match FAO growing stocks
 pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") = pm_carbon_density_ac_forestry(t_all,j,ac,"vegc") * sum(cell(i,j),p32_gs_scaling_reg(i));
+
+** set bii coefficients
+p32_bii_coeff(type32,bii_class_secd,potnatveg) = 0;
+if(s32_aff_bii_coeff = 0,
+ p32_bii_coeff("aff",bii_class_secd,potnatveg) = fm_bii_coeff(bii_class_secd,potnatveg)
+elseif s32_aff_bii_coeff = 1,
+ p32_bii_coeff("aff",bii_class_secd,potnatveg) = fm_bii_coeff("timber",potnatveg)
+);
+p32_bii_coeff("ndc",bii_class_secd,potnatveg) = fm_bii_coeff(bii_class_secd,potnatveg);
+p32_bii_coeff("plant",bii_class_secd,potnatveg) = fm_bii_coeff("timber",potnatveg);

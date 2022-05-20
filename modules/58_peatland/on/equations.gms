@@ -7,9 +7,20 @@
 
 *' @equations
 
+*' Land transition matrix for peatland area. 
+*' The sum of current peatland area defined in `v58_lu_transitions` has to equal the sum of 
+*' peatland area in the previous time step (`pc58_peatland_man` + `pc58_peatland_intact`).
+*' The two balancing variables `v58_balance_positive` and `v58_balance_negative` are needed 
+*' to avoid technical infeasibilities due to small differences in accuracy between 
+*' variables and parameters in GAMS. The use of `v58_balance_positive` and 
+*' `v58_balance_negative` is minimized by putting a high cost factor on these variables 
+*' (`q58_peatland_cost_full`). In practice, `v58_balance_positive` and 
+*' `v58_balance_negative`should deviate from zero only in exceptional cases. 
+ 
  q58_transition_matrix(j2) ..
-	sum((from58,to58), v58_lu_transitions(j2,from58,to58)) =e=
-	p58_peatland_area(j2);
+	sum((from58,to58), v58_lu_transitions(j2,from58,to58)) 
+	+ v58_balance_positive(j2) - v58_balance_negative(j2) =e=
+	sum((man58,land58), pc58_peatland_man(j2,man58,land58)) + pc58_peatland_intact(j2);
 
  q58_transition_to(j2,to58) ..
 	sum(from58, v58_lu_transitions(j2,from58,to58)) =e=
@@ -50,9 +61,10 @@
         sum(to58$(not sameas(from58,to58)),
         v58_lu_transitions(j2,from58,to58));
 
-*' Future peatland degradation (v58_peatland_man) depends on changes of managed land,
-*' scaled with  the ratio of total peatland area and total land area (p58_scaling_factor).
-*' By multiplying changes in managed land with this scaling factor we implicitly assume
+*' Future peatland degradation (`v58_peatland_man`) depends on managed land (`vm_land`),
+*' scaled with the ratio of total peatland area and total land area (`p58_scaling_factor`) 
+*' and a calibration factor (`p58_calib_factor`) for alignment with historic levels of degraded peatland.
+*' By multiplying changes in managed land (`vm_land`) with the scaling factor we implicitly assume
 *' that intact peatlands are distributed equally within a grid cell.
 *' The following example illustrates the mechanism used for projecting peatland dynamics:
 *' In a given grid cell, the total land area is 50 Mha and the total peatland area is 10 Mha.
@@ -60,28 +72,33 @@
 *' If cropland expands by 5 Mha, 1 Mha of intact peatland is converted to degraded peatland (5 Mha*0.2).
 *' If the total cell would become cropland, degraded peatland would equal to the total peatland area (50 Mha * 0.2 = 10 Mha).
 
- q58_peatland_degrad(j2,land58) ..
+ q58_peatland_degrad(j2,land58)$(sum(ct, m_year(ct)) > s58_fix_peatland) ..
 	v58_peatland_man(j2,"degrad",land58) =e=
-    pc58_peatland_man(j2,"degrad",land58)
-	+ ((vm_land(j2,land58)-pcm_land(j2,land58))*p58_scaling_factor(j2))$(sum(ct, m_year(ct))>2015);
+	 vm_land(j2,land58)*p58_scaling_factor(j2)*p58_calib_factor(j2,land58);
 
-*' Either conversion of intact to degraded peatland OR conversion of degraded to rewetted peatland.
-*' This constraint avoid the conversion of intact peatland into rewetted peatland.
+*' This constraint avoids the conversion of intact peatland into rewetted peatland.
 
- q58_peatland_intact(j2) ..
-	sum(stat_degrad58, v58_lu_transitions(j2,"intact",stat_degrad58)) *
-	sum((stat_degrad58,stat_rewet58), v58_lu_transitions(j2,stat_degrad58,stat_rewet58))
-	=e=
-	0;
+ q58_peatland_rewet(j2) ..
+ sum(stat_rewet58, v58_expansion(j2,stat_rewet58)) =l= 
+ 	sum(stat_degrad58, v58_reduction(j2,stat_degrad58) + v58_expansion(j2,stat_degrad58)) - v58_reduction(j2,"intact");
+
+*' Costs for peatland degradation and rewetting
+
+ q58_peatland_cost_full(j2) ..
+	vm_peatland_cost(j2) =e= v58_peatland_cost(j2) + (v58_balance_positive(j2) + v58_balance_negative(j2)) * s58_cost_balance;
 
  q58_peatland_cost(j2) ..
-	vm_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2) 
-							+ sum(land58, v58_peatland_man(j2,"rewet",land58) * s58_rewet_cost_recur);
-
+	v58_peatland_cost(j2) =e= v58_peatland_cost_annuity(j2) 
+							+ sum(land58, v58_peatland_man(j2,"rewet",land58)) * sum(ct, i58_cost_rewet_recur(ct))
+							+ sum((degrad58,land58), v58_peatland_man(j2,degrad58,land58)) * sum(ct, i58_cost_degrad_recur(ct));
+							
  q58_peatland_cost_annuity(j2) ..
 	v58_peatland_cost_annuity(j2) =e=
-    sum((from58,stat_rewet58), v58_lu_transitions(j2,from58,stat_rewet58) * s58_rewet_cost_onetime)
+    (sum(stat_rewet58, v58_expansion(j2,stat_rewet58)) * sum(ct, i58_cost_rewet_onetime(ct))
+    + (v58_reduction(j2,"intact") + sum(stat_rewet58, v58_reduction(j2,stat_rewet58))) * sum(ct, i58_cost_degrad_onetime(ct)))
 	* sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
+
+*' GHG emissions from managed peatlands (degraded and rewetted)
 
  q58_peatland_emis_detail(j2,emis58) ..
 	v58_peatland_emis(j2,emis58) =e=

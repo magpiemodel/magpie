@@ -6,16 +6,20 @@
 *** |  Contact: magpie@pik-potsdam.de
 scalars
  s32_shift                                          Number of 5-year age-classes corresponding to current time step length (1)
- p32_max_aff_area                                   Maximum global afforestation area that is greater or equal the exogenous policy target (mio. ha)
  s32_establishment_dynamic                          If plantations should be dynamic (including establishment and harvest decsions)
  s32_establishment_static                           Static plantations with no establishmnet no harvest no regrowth
+ c32_max_aff_area_glo								Switch for global or regional afforestation constraint (1)
 ;
 
 parameters
+ i32_max_aff_area_glo                               Maximum global afforestation area that is greater or equal the exogenous policy target (mio. ha)
+ p32_max_aff_area_glo                               Maximum global afforestation area that is greater or equal the exogenous policy target (mio. ha)
+ i32_max_aff_area_reg(i)                            Maximum regional afforestation area that is greater or equal the exogenous policy target (mio. ha)
+ p32_max_aff_area_reg(i)                            Maximum regional afforestation area that is greater or equal the exogenous policy target (mio. ha)
  p32_aff_pol(t,j)                                   NDC forest stock (mio. ha)
  p32_aff_pol_timestep(t,j)                          NDC afforestation per time step (mio. ha)
  p32_aff_pot(t,j)                                   Potential afforestation area (mio. ha)
- p32_aff_togo(t)                                    Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
+ p32_aff_togo(t,i)                                  Remaining exogenous afforestation wrt to the maximum exogenous target over time (mio. ha)
  p32_carbon_density_ac(t,j,type32,ac,ag_pools)      Carbon density for ac and ag_pools (tC per ha)
  p32_carbon_density_ac_forestry(t_all,j,ac)         Above ground carbon density for age classes and carbon pools (tC per ha)
  p32_carbon_density_ac_marg(t_all,j,ac)             Marginal above ground carbon density for age classes and carbon pools (tC per ha)
@@ -54,7 +58,10 @@ parameters
  p32_plantation_contribution(t_ext,i)               Share of roundwood production coming from timber plantations (percent)
  p32_ac_dist_flag(j,ac)                             Distribution flag with inverse weights according to age-classes (1)
  p32_ac_dist(j,ac)                                  Actual share of age-class distribution (1)
- ;
+ p32_avg_increment(t_all,j,ac)                      Mean annual increment (tC per ha per year)
+ p32_bii_coeff(type32,bii_class_secd,potnatveg)	    bii coeff (1)
+ p32_c_density_ac_fast_forestry(t_all,j,ac)         Carbon densities in plantations based on Braakhekke et al (tC per ha)
+;
 
 positive variables
  vm_cost_fore(i)                                    Forestry costs (Mio USD)
@@ -80,7 +87,8 @@ equations
  q32_cdr_aff(j,ac)                                  Calculation of CDR from afforestation (mio. tC)
  q32_carbon(j,ag_pools)                             Forestry carbon stock calculation (mio. tC)
  q32_land_diff                                      Aggregated difference in forestry land compared to previous timestep (mio. ha)
- q32_max_aff                                        Maximum total global afforestation (mio. ha)
+ q32_max_aff                                    	Maximum total global afforestation (mio. ha)
+ q32_max_aff_reg(i)                                 Maximum total regional afforestation (mio. ha)
  q32_aff_pol(j)                                     Afforestation policy constraint (mio. ha)
  q32_aff_est(j)                                     Afforestation constraint for establishment age classes (mio. ha)
  q32_hvarea_forestry(j,ac)                          Plantations area harvest (mio. ha)
@@ -121,6 +129,7 @@ parameters
  oq32_carbon(t,j,ag_pools,type)             Forestry carbon stock calculation (mio. tC)
  oq32_land_diff(t,type)                     Aggregated difference in forestry land compared to previous timestep (mio. ha)
  oq32_max_aff(t,type)                       Maximum total global afforestation (mio. ha)
+ oq32_max_aff_reg(t,i,type)                 Maximum total regional afforestation (mio. ha)
  oq32_aff_pol(t,j,type)                     Afforestation policy constraint (mio. ha)
  oq32_aff_est(t,j,type)                     Afforestation constraint for establishment age classes (mio. ha)
  oq32_hvarea_forestry(t,j,ac,type)          Plantations area harvest (mio. ha)

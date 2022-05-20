@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: extract inms-report in mif format from run 
+# description: extract inms-report in mif format from run
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
@@ -22,10 +22,10 @@ print("Start inms reporting reg runscript")
 ############################# BASIC CONFIGURATION #######################################
 
 if(!exists("source_include")) {
-  
+
   title       <- "inms_SSP2_RCP4p5_PolicyLow_v4"
   outputdir       <- "output/inms_SSP2_RCP4p5_PolicyLow_v4_2020-07-13_15.37.07"
-  
+
   ###Define arguments that can be read from command line
   readArgs("outputdir","title")
 }
@@ -33,14 +33,18 @@ if(!exists("source_include")) {
 
 print(paste0("script started for output directory",outputdir))
 
-load(paste0(outputdir, "/config.Rdata"))
+wdbefore=getwd()
+on.exit(setwd(wdbefore))
+setwd(outputdir)
+
+load( "config.Rdata")
 title <- cfg$title
 print("generating INMS output for the run: ")
 print(title)
 
-filename=paste0(outputdir,"report_",title,".mif")
-gdx=paste0(outputdir,"/fulldata.gdx")
-a=getReportINMS(gdx,file=filename,scenario = title)
+filename=paste0("report_",title,".mif")
+gdx=paste0("fulldata.gdx")
+a=getReportINMS(gdx,file=filename,scenario = title,dir=".")
 
 print(filename)
 mif=read.report(filename)
@@ -56,7 +60,6 @@ missingyears=function(x){
 #a=c(missingyears(ssp1),missingyears(ssp2))
 a=missingyears(mif)
 
-write.reportProject(a,mapping="mapping_inms.csv",file=paste0(outputdir,"report_inms.mif"))
+write.reportProject(a,mapping=paste0(wdbefore,"/mapping_inms.csv"),file="report_inms.mif")
 #write.report2(a,file="magpie_results_nov2019.mif")
-  
-
+warnings()

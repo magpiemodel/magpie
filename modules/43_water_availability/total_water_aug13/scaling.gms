@@ -5,4 +5,4 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-v43_watavail.scale(wat_src,j) = 10e5;
+v43_watavail.scale(wat_src,j) = 10e4;

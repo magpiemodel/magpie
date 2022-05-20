@@ -18,12 +18,12 @@ $ondelim
 $include "./modules/21_trade/input/f21_trade_bal_reduction.cs3"
 $offdelim;
 
-table f21_self_suff(t_all,i,kall) Regional self-sufficiency rates (1)
+table f21_self_suff(t_all,h,kall) Superregional self-sufficiency rates (1)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_self_suff.cs3"
 $offdelim;
 
-table f21_exp_shr(t_all,i,kall) Regional and crop-specific export share (1)
+table f21_exp_shr(t_all,h,kall) Superregional and crop-specific export share (1)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_export_share.cs3"
 $offdelim;
@@ -33,13 +33,13 @@ $ondelim
 $include "./modules/21_trade/input/f21_trade_balanceflow.cs3"
 $offdelim;
 
-table f21_trade_margin(i,kall) Costs of freight and insurance (USD05MER per tDM)
+table f21_trade_margin(h,kall) Costs of freight and insurance (USD05MER per tDM)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_margin.cs3"
 $offdelim
 ;
 
-table f21_trade_tariff(i,kall) Specific duty tariffs (USD05MER per tDM)
+table f21_trade_tariff(h,kall) Specific duty tariffs (USD05MER per tDM)
 $ondelim
 $include "./modules/21_trade/input/f21_trade_tariff.cs3"
 $offdelim

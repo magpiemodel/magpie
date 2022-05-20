@@ -9,7 +9,7 @@
 
 *' Nitrogeneous emissions stem from manure applied to croplands, inorganic fertilizers,
 *' crop residues decaying on fields, the burning of agricultural residues,
-*' soil organic matter loss, animal waste management, and manure excreted on pasture land. 
+*' soil organic matter loss, animal waste management, and manure excreted on pasture land.
 *' Additionally,  part of the NH3 and NOx emissions as well as leached NO3 later result
 *' in indirect emissions of N2O when they are redeposited, nitrified and dinitrified.
 *'
@@ -22,7 +22,7 @@
                  =e=
                  vm_manure_recycling(i2,"nr")
                  / (1-s51_snupe_base) * (1-vm_nr_eff(i2))
-                 * f51_ef_n_soil(n_pollutants_direct,"man_crop");
+                 * sum(ct, i51_ef_n_soil(ct,i2,n_pollutants_direct,"man_crop"));
 
 *' inorganic fertilizers:
  q51_emissions_inorg_fert(i2,n_pollutants_direct)..
@@ -30,17 +30,17 @@
                  =e=
                  vm_nr_inorg_fert_reg(i2,"crop")
                  / (1-s51_snupe_base) * (1-vm_nr_eff(i2))
-                 * f51_ef_n_soil(n_pollutants_direct,"inorg_fert")
+                 * sum(ct, i51_ef_n_soil(ct,i2,n_pollutants_direct,"inorg_fert"))
                  + vm_nr_inorg_fert_reg(i2,"past")
                  / (1-s51_nue_pasture_base) * (1-vm_nr_eff_pasture(i2))
-                 * f51_ef_n_soil(n_pollutants_direct,"inorg_fert")
+                 * sum(ct, i51_ef_n_soil(ct,i2,n_pollutants_direct,"inorg_fert"))
                 ;
 
 *' crop residues decaying on fields:
  q51_emissions_resid(i2,n_pollutants_direct)..
                  vm_btm_reg(i2,"resid",n_pollutants_direct)
                  =e=
-                 vm_res_recycling(i2,"nr") * f51_ef_n_soil(n_pollutants_direct,"resid")
+                 vm_res_recycling(i2,"nr") * sum(ct, i51_ef_n_soil(ct,i2,n_pollutants_direct,"resid"))
                  / (1-s51_snupe_base) * (1-vm_nr_eff(i2));
 
 *' emissions from burning crop residues, N2O and NOx
@@ -53,7 +53,7 @@
  q51_emissions_som(i2,n_pollutants_direct)..
                  vm_btm_reg(i2,"som",n_pollutants_direct)
                  =e=
-                 sum(cell(i2,j2),vm_nr_som(j2)) * f51_ef_n_soil(n_pollutants_direct,"som")
+                 sum(cell(i2,j2),vm_nr_som(j2)) * sum(ct, i51_ef_n_soil(ct,i2,n_pollutants_direct,"som"))
                  / (1-s51_snupe_base) * (1-vm_nr_eff(i2));
 
 *' animal waste management:

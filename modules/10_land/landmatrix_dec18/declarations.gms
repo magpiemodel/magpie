@@ -17,11 +17,13 @@ variables
 positive variables
  vm_land(j,land)                             Land area of the different land types (mio. ha)
  vm_landexpansion(j,land)                    Land expansion (mio. ha)
- v10_landreduction(j,land)                   Land reduction (mio. ha)
+ vm_landreduction(j,land)                   Land reduction (mio. ha)
  vm_croplandexpansion(j,land)                Sources of cropland expansion (mio. ha)
  vm_croplandreduction(j,land)                Targets of cropland reduction (mio. ha)
  vm_cost_land_transition(j)		               Costs for lu transitions (mio. USD05MER per yr)
  v10_lu_transitions(j,land_from10,land_to10) Land transitions between time steps (mio. ha)
+ v10_balance_positive(j)					Balance variable for land transitions (mio. ha)
+ v10_balance_negative(j)					Balance variable for land transitions (mio. ha)
 ;
 
 equations
@@ -41,11 +43,13 @@ parameters
  ov_landdiff(t,type)                                 Aggregated difference in land between current and previous time step (mio. ha)
  ov_land(t,j,land,type)                              Land area of the different land types (mio. ha)
  ov_landexpansion(t,j,land,type)                     Land expansion (mio. ha)
- ov10_landreduction(t,j,land,type)                   Land reduction (mio. ha)
+ ov_landreduction(t,j,land,type)                     Land reduction (mio. ha)
  ov_croplandexpansion(t,j,land,type)                 Sources of cropland expansion (mio. ha)
  ov_croplandreduction(t,j,land,type)                 Targets of cropland reduction (mio. ha)
  ov_cost_land_transition(t,j,type)                   Costs for lu transitions (mio. USD05MER per yr)
  ov10_lu_transitions(t,j,land_from10,land_to10,type) Land transitions between time steps (mio. ha)
+ ov10_balance_positive(t,j,type)                     Balance variable for land transitions (mio. ha)
+ ov10_balance_negative(t,j,type)                     Balance variable for land transitions (mio. ha)
  oq10_transition_matrix(t,j,type)                    Land transition constraint cell area (mio. ha)
  oq10_transition_to(t,j,land_to10,type)              Land transition constraint to (mio. ha)
  oq10_transition_from(t,j,land_from10,type)          Land transition constraint from (mio. ha)
