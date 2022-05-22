@@ -27,7 +27,7 @@ cfg$gms$s13_max_gdp_shr <- 0.01
 
 cfg$results_folder <- "output/:title:"
 #cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
-prefix <- "rota_penalty12"
+prefix <- "rota_penalty14"
 
 cfg$title <- paste(prefix,"olddefault",sep="_")
 start_run(cfg,codeCheck=FALSE)
@@ -49,7 +49,7 @@ cfg$gms$c30_rotation_scenario = "default"
 
 #cfg$qos <- "priority"
 cfg$recalibrate <- TRUE
-cfg$recalibrate_landconversion_cost <- "ifneeded"
+cfg$recalibrate_landconversion_cost <- TRUE
 start_run(cfg,codeCheck=FALSE)
 magpie4::submitCalibration("H12_sticky_feb18_dynamic_rotation")
 cfg$recalibrate <- FALSE
