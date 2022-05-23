@@ -43,6 +43,13 @@ p35_secdforest(t,j,ac) = 0;
 p35_disturbance_loss_secdf(t,j,ac) = 0;
 p35_disturbance_loss_primf(t,j) = 0;
 
+* -----------------------------------------
+* Land conservation for climate mitigation
+* -----------------------------------------
+
+p35_min_forest(t,j) = f35_min_land_stock(t,j,"%c35_ad_policy%","forest");
+p35_min_other(t,j) = f35_min_land_stock(t,j,"%c35_ad_policy%","other");
+
 
 * ----------------------------------------
 * Calibrate Natural vegetation yields

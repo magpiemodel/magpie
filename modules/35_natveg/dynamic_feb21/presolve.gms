@@ -111,13 +111,11 @@ vm_land.up(j,"primforest") = pcm_land(j,"primforest");
 v35_secdforest.lo(j,ac) = 0;
 v35_secdforest.up(j,ac) = Inf;
 
+p35_consv_dist(j,ac_sub) = (pc35_secdforest(j,ac_sub)/sum(ac_sub2,pc35_secdforest(j,ac_sub2)))$(sum(ac_sub2,pc35_secdforest(j,ac_sub2))>0);
 if (sum(sameas(t_past,t),1) = 1,
-v35_secdforest.lo(j,ac) = 0;
+v35_secdforest.lo(j,ac_sub) = pm_land_conservation(t,j,"secdforest","protect") * p35_consv_dist(j,ac_sub);
 else
-v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=0)  = (1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx");
-v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=1) = (1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub);
-v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=2) = (1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub);
-* v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=2)  = (1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx");
+v35_secdforest.lo(j,ac_sub) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub), pm_land_conservation(t,j,"secdforest","protect") * p35_consv_dist(j,ac_sub));
 );
 * upper bound
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
@@ -161,6 +159,13 @@ vm_land.lo(j,"other") = pm_land_conservation(t,j,"other","protect") + p35_land_r
 * highest carbon density 1st time step to account for reshuffling
 p35_carbon_density_secdforest(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
 p35_carbon_density_other(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
+
+* ------------------
+* NPI/NDC policy
+* ------------------
+
+p35_min_forest(t,j)$(p35_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j,"secdforest")) = pcm_land(j,"primforest") + pcm_land(j,"secdforest");
+p35_min_other(t,j)$(p35_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");
 
 ** Display
 p35_land(t,j,land_natveg,ac) = 0;

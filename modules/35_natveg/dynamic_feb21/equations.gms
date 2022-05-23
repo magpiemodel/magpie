@@ -12,6 +12,15 @@
 
  q35_land_other(j2) .. vm_land(j2,"other") =e= sum(ac, v35_other(j2,ac));
 
+*' The total natural land area cannot be smaller than the total natural land conservation target.
+*' Area requirements for natural land conservation are derived from WDPA and formulated based on
+*' conservation priority areas during future time steps.
+
+ q35_natveg_conservation(j2) ..
+            sum(land_natveg, vm_land(j2,land_natveg))
+            =g=
+            sum((ct,land_natveg,consv_type), pm_land_conservation(ct,j2,land_natveg,consv_type));
+
 *' Carbon stocks for primary forest, secondary forest or other natural land are calculated
 *' as the product of respective area and carbon density.
 *' Carbon stocks decline if the area decreases
@@ -46,6 +55,17 @@
  					=e=
           sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v35_other(j2,ac)) *
           fm_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);
+
+*' NPI/NDC land protection policies based on country reports are implemented as
+*' minium forest and other land stocks. They are not interchangeable (as compared to
+*' the natural land conservation constraint) and specifically formulated for forest and
+*' other land stocks.
+
+ q35_min_forest(j2) .. vm_land(j2,"primforest") + vm_land(j2,"secdforest")
+                       =g=
+                       sum(ct, p35_min_forest(ct,j2));
+
+ q35_min_other(j2) .. vm_land(j2,"other") =g= sum(ct, p35_min_other(ct,j2));
 
 *' The following technical calculations are needed for reducing differences in land-use patterns between time steps.
 *' The gross change in natural vegetation is calculated based on land expansion and

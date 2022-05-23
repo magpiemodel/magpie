@@ -21,21 +21,5 @@ parameters
  p22_country_weight(i)	                  		          Land conservation country weight per region (1)
  p22_country_dummy(iso)		                              Dummy parameter indicating whether country is affected by selected land conservation policy (1)
  i22_land_iso(iso)								          Total land area at ISO level (mio. ha)
- p22_min_forest(t,j) 			                          Minimum forest stock [land conservation for climate change mitigation] (Mha)
- p22_min_other(t,j)      		                          Minimum other land stock [land conservation for climate change mitigation] (Mha)
 ;
 
-equations
- q22_natveg_conservation(j)                     Total natural vegetation conservation constraint (mio. ha)
- q22_min_forest(j)					            Minimum forest land constraint (mio. ha)
- q22_min_other(j)                               Minimum other land constraint (mio. ha)
-;
-
-
-
-*#################### R SECTION START (OUTPUT DECLARATIONS) ####################
-parameters
- oq22_min_forest(t,j,type) Minimum forest land constraint (mio. ha)
- oq22_min_other(t,j,type)  Minimum other land constraint (mio. ha)
-;
-*##################### R SECTION END (OUTPUT DECLARATIONS) #####################

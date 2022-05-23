@@ -14,5 +14,11 @@ sets
   combined_loss(driver_source) Combined loss from fire plus agriculture
   / shifting_agriculture,wildfire /
 
+  pol35 Land protection policy
+  / none, npi, ndc /
+
+  pol_stock35 Land types for land protection policies
+  / forest, other /
+
 
 ;

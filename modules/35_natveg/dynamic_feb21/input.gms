@@ -5,6 +5,9 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+$setglobal c35_ad_policy  npi
+$setglobal c35_aolc_policy  npi
+
 scalars
 s35_hvarea Flag for harvested area (0=zero 1=exognous 2=endogneous)	/ 0 /
 s35_hvarea_secdforest annual secdforest harvest rate for s35_hvarea equals 1 (percent per year) / 0 /
@@ -22,6 +25,12 @@ s35_forest_damage_end		Year of forest damage end  (1)							/ 2050 /
 table f35_forest_lost_share(i,driver_source) Share of area damanged by forest fires (1)
 $ondelim
 $include "./modules/35_natveg/input/f35_forest_lost_share.cs3"
+$offdelim
+;
+
+table f35_min_land_stock(t_all,j,pol35,pol_stock35) land conservation policies [minimum land stock] (Mha)
+$ondelim
+$include "./modules/35_natveg/input/npi_ndc_ad_aolc_pol.cs3"
 $offdelim
 ;
 

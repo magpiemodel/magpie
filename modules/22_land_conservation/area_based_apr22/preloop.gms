@@ -79,10 +79,3 @@ p22_consv_shr(t,j,"HalfEarth",land_natveg) = p22_consv_shr_ini(j,"HalfEarth")*p2
 
 * Remove implausible values
 p22_consv_shr(t,j,consv22_all,land_natveg)$(p22_consv_shr(t,j,consv22_all,land_natveg) < 0) = 0;
-
-* -----------------------------------------
-* land conservation for climate mitigation
-* -----------------------------------------
-
-p22_min_forest(t,j) = f22_min_land_stock(t,j,"%c22_ad_policy%","forest");
-p22_min_other(t,j) = f22_min_land_stock(t,j,"%c22_ad_policy%","other");

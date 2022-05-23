@@ -7,9 +7,6 @@
 
 sets
 
-  pol22 Land protection policy
-  / none, npi, ndc /
-
   consv22_all Conservation priority areas
   / BH, CPD, IFL, LW, WDPA, HalfEarth, BH_IFL, Forest, Forest_Other, PrimForest, SecdForest /
 
@@ -18,9 +15,6 @@ sets
 
   consv_type Type of land conservation
   / protect, restore /
-
-  pol_stock22 Land types for land protection policies
-  / forest, other /
 
   prot_target22 Target year for nature protection
    / none, by2030, by2050 /

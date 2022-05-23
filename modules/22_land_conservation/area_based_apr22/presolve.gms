@@ -6,14 +6,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 * ==================
-* NPI/NDC policy
-* ==================
-p22_min_forest(t,j)$(p22_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j,"secdforest")) = pcm_land(j,"primforest") + pcm_land(j,"secdforest");
-p22_min_other(t,j)$(p22_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");
-
-* ==================
 * Land conservation
 * ==================
+
 if(m_year(t) <= sm_fix_SSP2,
 * from 1995 to 2020 land conservation is based on
 * historic trends as derived from WDPA

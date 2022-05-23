@@ -7,8 +7,6 @@
 
 $setglobal c22_protect_scenario  WDPA
 $setglobal c22_protect_scenario_noselect  WDPA
-$setglobal c22_ad_policy  npi
-$setglobal c22_aolc_policy  npi
 
 scalars
 s22_restore_land  If land restoration is allowed (0=no 1=yes) / 1 /
@@ -58,12 +56,6 @@ m_fillmissingyears(f22_wdpa_baseline,"j,land");
 table f22_protect_area(j,consv22) Conservation priority areas (mio. ha)
 $ondelim
 $include "./modules/22_land_conservation/input/protect_area.cs3"
-$offdelim
-;
-
-table f22_min_land_stock(t_all,j,pol22,pol_stock22) land conservation policies [minimum land stock] (Mha)
-$ondelim
-$include "./modules/22_land_conservation/input/npi_ndc_ad_aolc_pol.cs3"
 $offdelim
 ;
 

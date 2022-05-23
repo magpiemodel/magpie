@@ -14,8 +14,6 @@ gms$s15_exo_diet;;;;0;0;0;0;0;1;0;1;1;;;;;;;1;1;0;0;0;0;0;0;1;0;0;1;;;;;;;;;
 gms$c15_kcal_scen;;;;;;;;;healthy_BMI;healthy_BMI;healthy_BMI;healthy_BMI;;;;;;;healthy_BMI;healthy_BMI;;;;;;;healthy_BMI;;;healthy_BMI;;;;;;;;;
 gms$c15_EAT_scen;;;;;;;;;FLX;;FLX;FLX;;;;;;;FLX;FLX;;;;;;;FLX;;;FLX;;;;;;;;;
 gms$c21_trade_liberalization;;;;l908080r807070;l909090r808080;l909595r809090;l908080r807070;l908080r807070;l908080r807070;l908080r807070;l909595r809090;l908080r807070;;;;;;;;;l908080r807070;l909090r808080;l909595r809090;l908080r807070;l908080r807070;l908080r807070;l908080r807070;l908080r807070;l908080r807070;l908080r807070;;;;;;;;;
-gms$c22_ad_policy;;;;;;;;;;;;;none;npi;ndc;;;;;;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;;;;
-gms$c22_aolc_policy;;;;;;;;;;;;;none;npi;ndc;;;;;;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;;;;
 gms$c22_protect_scenario;;;;WDPA;WDPA;WDPA;WDPA;WDPA;BH;WDPA;BH_IFL;BH;;;;;;;BH;;WDPA;WDPA;WDPA;WDPA;WDPA;BH_IFL;BH_IFL;BH_IFL;BH_IFL;BH_IFL;;;;;;;;;
 gms$c22_protect_scenario_noselect;;;;;;;;;;;;;;;;;;;;;;;;;;WDPA;WDPA;BH_IFL;WDPA;BH_IFL;;;;;;;;;
 gms$c30_bioen_water;;;;rainfed;rainfed;rainfed;rainfed;rainfed;rainfed;all;rainfed;rainfed;;;;;;;rainfed;;;;;;;;;;;;;;;;;;;;
@@ -29,6 +27,8 @@ gms$s32_max_aff_area;;;;Inf;Inf;Inf;Inf;Inf;500;500;0;700;;;;;;;500;;Inf;Inf;Inf
 gms$c32_aff_mask;;;;noboreal;noboreal;noboreal;noboreal;noboreal;onlytropical;onlytropical;onlytropical;onlytropical;;;;;;;onlytropical;;noboreal;noboreal;noboreal;noboreal;noboreal;noboreal;noboreal;noboreal;noboreal;noboreal;;;;;;;;;
 gms$c34_urban_scenario;;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;SSP1;SSP2;SSP1;;;;;;;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;
 gms$c32_aff_policy;;;;;;;;;;;;;none;npi;ndc;;;;;;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;;;;
+gms$c35_ad_policy;;;;;;;;;;;;;none;npi;ndc;;;;;;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;;;;
+gms$c35_aolc_policy;;;;;;;;;;;;;none;npi;ndc;;;;;;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;;;;
 gms$s35_forest_damage_end;;;;2030;2050;2050;2050;2030;2030;2030;2030;2030;;;;;;;2030;;2030;2050;2050;2050;2030;2030;2030;2030;2030;2030;;;;;;;;;
 gms$s42_watdem_nonagr_scenario;;;;1;2;3;2;1;1;1;3;1;;;;;;;;;;;;;;2;1;2;2;1;;;;;;;;;
 gms$s42_irrig_eff_scenario;;;;2;2;2;2;2;3;3;3;3;;;;;;;3;;1;1;1;1;1;3;3;3;3;3;;;;;;;;;
