@@ -6,10 +6,4 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-
-parameter f38_fac_req_per_ton(kcr) Factor requirement costs (USD05MER per tDM)
-/
-$ondelim
-$include "./modules/38_factor_costs/input/f38_fac_req_per_ton.csv"
-$offdelim
-/;
+vm_cost_prod_crop.scale(i,req) = 10e5;
