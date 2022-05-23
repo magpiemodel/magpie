@@ -28,7 +28,7 @@ $include "./modules/35_natveg/input/f35_forest_lost_share.cs3"
 $offdelim
 ;
 
-table f35_min_land_stock(t_all,j,pol35,pol_stock35) land conservation policies [minimum land stock] (Mha)
+table f35_min_land_stock(t_all,j,pol35,pol_stock35) Avoided deforestation and land protection policies [minimum land stock] (Mha)
 $ondelim
 $include "./modules/35_natveg/input/npi_ndc_ad_aolc_pol.cs3"
 $offdelim
