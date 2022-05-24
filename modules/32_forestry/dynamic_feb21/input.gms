@@ -8,7 +8,7 @@ $setglobal c32_timber_plantations  plantations
 * option: natveg, plantations
 $setglobal c32_aff_mask  noboreal
 * options: unrestricted, noboreal, onlytropical
-$setglobal c32_aff_policy  npi
+$setglobal c32_aff_policy  NDC
 * options: none, npi, ndc
 $setglobal c32_max_aff_area  global
 * options: global, regional
@@ -26,6 +26,8 @@ $setglobal c32_rot_calc_type  current_annual_increment
 * option  max_increment, max_npv
 $setglobal c32_rot_calc_type  current_annual_increment
 * options mean_annual_increment, current_annual_increment, instantaneous_growth_rate
+$setglobal c32_shock_scenario  02lin2030
+
 
 scalars
   s32_hvarea                      Flag for harvested area and establishemt (0=zero 1=exognous 2=endogneous)	/ 0 /
@@ -123,3 +125,9 @@ $ondelim
 $include "./modules/32_forestry/input/f32_estb_calib.cs4"
 $offdelim
 /;
+
+table f32_forest_shock(t_all, shock_scen32) Forest carbon shock scenarios (1)
+$ondelim
+$include "./modules/32_forestry/input/f32_forest_shock.csv"
+$offdelim
+;

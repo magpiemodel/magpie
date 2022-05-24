@@ -16,6 +16,9 @@ sets
  type32 plantation type
  / aff, ndc, plant /
 
+ type_noplant(type32) subset removing plantations from type32
+ / aff, ndc /
+
  pol32 afforestation policy type
  / none, npi, ndc /
 
@@ -40,6 +43,11 @@ inter32 Interpolation of scenario from FAO study on proportion of roundwood prod
 
 scen32 Scenario for development of roundwood production share from plantations
 / constant,h5s5l5,h5s2l2,h5s2l1,h5s1l1,h5s1l05,h2s1l05 /
+
+ shock_scen32 Scenario name of forest carbon shock
+ / none,  20flt2030, 20flt2040, 20flt2050, 40lin2030, 40int2030,50one2050
+ 01lin2030,02lin2030,05lin2030,10lin2030,15lin2030,20lin2030
+  /
 
 ;
 

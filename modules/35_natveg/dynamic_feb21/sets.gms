@@ -29,6 +29,8 @@ sets
    / none, by2030, by2050 /
 
   shock_scen Scenario name of forest carbon shock
-  / none,  20flt2030, 20flt2040, 20flt2050, 40lin2030, 40int2030,50one2050 /
+  / none,  20flt2030, 20flt2040, 20flt2050, 40lin2030, 40int2030,50one2050,
+  01lin2030,02lin2030,05lin2030,10lin2030,15lin2030,20lin2030
+   /
 
 ;

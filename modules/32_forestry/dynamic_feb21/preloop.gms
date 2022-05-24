@@ -230,7 +230,7 @@ $ifthen "%c32_max_aff_area%" == "global"
 	c32_max_aff_area_glo = 1;
 $elseif "%c32_max_aff_area%" == "regional"
 	c32_max_aff_area_glo = 0;
-$else 
+$else
 	abort "Provided value for c32_max_aff_area is not defined";
 $endif
 
@@ -301,3 +301,9 @@ elseif s32_aff_bii_coeff = 1,
 );
 p32_bii_coeff("ndc",bii_class_secd,potnatveg) = fm_bii_coeff(bii_class_secd,potnatveg);
 p32_bii_coeff("plant",bii_class_secd,potnatveg) = fm_bii_coeff("timber",potnatveg);
+
+* initialize parameter
+p32_land(t,j,type32,ac) = 0;
+
+* initialize forest disturbance losses
+p32_disturbance_loss_ftype32(t,j,"aff",ac) = 0;
