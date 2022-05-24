@@ -16,9 +16,9 @@ p38_cost_share(t,i,"capital") = f38_reg_parameters("slope")*log10(sum(i_to_iso(i
 p38_cost_share(t,i,"labor")   = 1 - p38_cost_share(t,i,"capital");
 );
 
-p38_variable_costs(t,i,kcr) = f38_fac_req(kcr)  * p38_cost_share(t,i,"labor");
-p38_capital_need(t,i,kcr,"mobile") = f38_fac_req(kcr) * p38_cost_share(t,i,"capital") / (pm_interest(t,i)+s38_depreciation_rate) * (1-s38_immobile);
-p38_capital_need(t,i,kcr,"immobile") = f38_fac_req(kcr)  * p38_cost_share(t,i,"capital") / (pm_interest(t,i)+s38_depreciation_rate) * s38_immobile;
+p38_variable_costs(t,i,kcr) = i38_fac_req(i,kcr)  * p38_cost_share(t,i,"labor");
+p38_capital_need(t,i,kcr,"mobile") = i38_fac_req(i,kcr) * p38_cost_share(t,i,"capital") / (pm_interest(t,i)+s38_depreciation_rate) * (1-s38_immobile);
+p38_capital_need(t,i,kcr,"immobile") = i38_fac_req(i,kcr)  * p38_cost_share(t,i,"capital") / (pm_interest(t,i)+s38_depreciation_rate) * s38_immobile;
 
 *** Variable labor costs BEGIN
 
