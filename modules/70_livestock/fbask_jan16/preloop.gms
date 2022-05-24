@@ -60,5 +60,5 @@ im_feed_baskets(t_all,i,kap,"foddr") =
 
 
 *** choosing between reginal and global factor requirements
-if "%c70_fac_req_regr%" == "glo" i70_cost_regr(i,kap,cost_regr) = f70_cost_regr(kap,cost_regr);
-if "%c70_fac_req_regr%" == "reg" i70_cost_regr(i,kap,cost_regr) = f70_cost_regr_regional(i,kap,cost_regr);
+$if "%c70_fac_req_regr%" == "glo" i70_cost_regr(i,kap,cost_regr) = f70_cost_regr(kap,cost_regr);
+$if "%c70_fac_req_regr%" == "reg" i70_cost_regr(i,kap,cost_regr) = f70_cost_regr_regional(i,kap,cost_regr);
