@@ -57,3 +57,8 @@ im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")
              fm_attributes("nr","foddr")) / fm_attributes("nr","scp");
 im_feed_baskets(t_all,i,kap,"foddr") =
                im_feed_baskets(t_all,i,kap,"foddr") * i70_foddr_scp_fadeout(t_all,i);
+
+
+*** choosing between reginal and global factor requirements
+if "%c70_fac_req_regr%" == "glo" i70_cost_regr(i,kap,cost_regr) = f70_cost_regr(kap,cost_regr);
+if "%c70_fac_req_regr%" == "reg" i70_cost_regr(i,kap,cost_regr) = f70_cost_regr_regional(i,kap,cost_regr);
