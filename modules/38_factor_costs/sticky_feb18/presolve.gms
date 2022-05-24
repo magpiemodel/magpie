@@ -21,7 +21,7 @@ p38_cost_share(t,i,"labor")   = 1 - p38_cost_share(t,i,"capital");
 );
 
 * choosing between regional (+time dependent) or global (from 2005) factor requirements
-if "%c38_fac_req%" == "glo" i38_fac_req(t,i,kcr) = f38_fac_req(kcr);
+$if "%c38_fac_req%" == "glo" i38_fac_req(t,i,kcr) = f38_fac_req(kcr);
 if ("%c38_fac_req%" == "reg",
  if (m_year(t)<=1995,
     i38_fac_req(t,i,kcr) = f38_fac_req_fao_reg("y1995",i,kcr);
@@ -29,6 +29,7 @@ if ("%c38_fac_req%" == "reg",
     i38_fac_req(t,i,kcr) = f38_fac_req_fao_reg("y2010",i,kcr);
  else
     i38_fac_req(t,i,kcr) = f38_fac_req_fao_reg(t,i,kcr);
+ );
 );
 
 p38_variable_costs(t,i,kcr) = i38_fac_req(t,i,kcr)  * p38_cost_share(t,i,"labor");

@@ -9,8 +9,8 @@ if (smax(j, pm_labor_prod(t,j)) <> 1 OR smin(j, pm_labor_prod(t,j)) <> 1,
 	abort "This factor cost realization cannot handle labor productivities != 1"
 );
 
-* choosing between regional (+time dependent) or global factor requirements
-if "%c38_fac_req%" == "glo" i38_fac_req(t,i,kcr) = f38_fac_req(kcr);
+* choosing between regional (+time dependent) or global (from 2005) factor requirements
+$if "%c38_fac_req%" == "glo" i38_fac_req(t,i,kcr) = f38_fac_req(kcr);
 if ("%c38_fac_req%" == "reg",
  if (m_year(t)<=1995,
     i38_fac_req(t,i,kcr) = f38_fac_req_fao_reg("y1995",i,kcr);
@@ -18,6 +18,7 @@ if ("%c38_fac_req%" == "reg",
     i38_fac_req(t,i,kcr) = f38_fac_req_fao_reg("y2010",i,kcr);
  else
     i38_fac_req(t,i,kcr) = f38_fac_req_fao_reg(t,i,kcr);
+ );
 );
 
 
