@@ -252,6 +252,7 @@ $setglobal urban  exo_nov21
 $setglobal natveg  dynamic_feb21
 
 $setglobal labor_prod  off
+$setglobal employment  exo_may22
 $setglobal factor_costs  sticky_feb18
 $setglobal landconversion  calib
 
