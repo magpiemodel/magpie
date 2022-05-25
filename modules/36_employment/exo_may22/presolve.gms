@@ -14,7 +14,7 @@ else
 								 f36_regr_hourly_costs("threshold"));
 );
 
-p36_hourly_costs(t,i) = sum(i_to_iso(i,iso),p36_hourly_costs_iso(t,iso)*p36_total_hours_worked(iso))*(1/sum(i_to_iso(i,iso),p36_total_hours_worked(iso)))
+p36_hourly_costs(t,i) = sum(i_to_iso(i,iso),p36_hourly_costs_iso(t,iso)*p36_total_hours_worked(iso))*(1/sum(i_to_iso(i,iso),p36_total_hours_worked(iso)));
 
 
 * capital cost share to split non-magpie factor costs into labor and capital
@@ -27,4 +27,4 @@ elseif (m_year(t)>=2010),
 );
 
 * non-MAgPIE labor costs
-p36_nonmagpie_labor_costs(t,i) = (f36_unspecified_subsidies(t,i) + f36_nonmagpie_factor_costs(t,i)) * (1-p36_capital_cost_share(t,i))
+p36_nonmagpie_labor_costs(t,i) = (f36_unspecified_subsidies(t,i) + f36_nonmagpie_factor_costs(t,i)) * (1-p36_capital_cost_share(t,i));
