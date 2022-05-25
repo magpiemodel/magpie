@@ -27,4 +27,4 @@ elseif (m_year(t)>=2010),
 );
 
 * non-MAgPIE labor costs
-p36_nonmagpie_labor_costs(t,i) = (f36_unspecified_subsidies(t,i) + f36_nonmagpie_factor_costs(t,i)) * (1-p36_capital_cost_share(t,i));
+p36_nonmagpie_labor_costs(t,i) = (f36_unspecified_subsidies(t,i) + f36_nonmagpie_factor_costs(t,i)) * (1-p36_cost_share(t,i));
