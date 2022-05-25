@@ -10,6 +10,13 @@
 *' The initial spatial distribution of the sub-land-types primary forest,
 *' secondary forest and other natural land is based on the
 *' LUH2 data set [@hurtt2018luh2].
+*' This realization also includes national policies implemented (NPI) and nationally
+*' determined contributions to the Paris agreement (NDC) with regard to forest and other
+*' land protection. The NPI/NDC polices ramp up until 2030 and are assumed constant
+*' thereafter. NPI/NDC land conservation polices are applied on forest and other land,
+*' depending on individual country reports. The NPI/NDC policies are treated as minimum
+*' constraints and therefore are non-additive, if the land protection targets as provided by
+*' the module `22_land_conservation` and the interface `pm_land_conservation` are larger.
 *' Additionally, this module includes forest damage and provides the ability to
 *' harvest natural vegetation for timber. Both wood and woodfuel can be produceed
 *' from primary and secondary forest but other land is only allowed to be harvested
