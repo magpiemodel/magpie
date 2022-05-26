@@ -16,10 +16,10 @@ source("config/default.cfg")
 # Set defaults
 codeCheck <- FALSE
 
-input <- c(regional    = "rev4.68FSECmodeling_e2bdb6cd_magpie.tgz",
-           cellular    = "rev4.68FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-           validation  = "rev4.68FSECmodeling_e2bdb6cd_validation.tgz",
-           additional  = "additional_data_rev4.14.tgz",
+input <- c(regional    = "rev4.69FSECmodeling_e2bdb6cd_magpie.tgz",
+           cellular    = "rev4.69FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+           validation  = "WARNINGS2_rev4.69FSECmodeling_e2bdb6cd_validation.tgz",
+           additional  = "additional_data_rev4.21.tgz",
            calibration = "calibration_FSEC_29Apr22.tgz")
 
 # General settings:
@@ -38,7 +38,7 @@ general_settings <- function(title) {
 
   # Climate change impacts activated, SSP2 default settings, NDC activated, endogenous forestry activated
   cfg <- gms::setScenario(cfg, c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"))
-  cfg$input['cellular'] <- "rev4.68FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
+  cfg$input['cellular'] <- "rev4.69FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
   cfg$force_download    <- TRUE
 
   # Nitrogen module with IPCC emissions factors rescaled with efficiency
@@ -57,9 +57,9 @@ general_settings <- function(title) {
   cfg$gms$som                     <- "cellpool_aug16"
   # Cost module: sticky - dynamic mode
   cfg$gms$factor_costs            <- "sticky_feb18"
-  cfg$gms$c38_sticky_mode         <- "dynamic"
   # Necessary to be feasible
   cfg$gms$s13_max_gdp_shr         <- 1
+  cfg$gms$c35_aolc_policy         <- "base" # disable AOLC policy for China
 
   return(cfg)
 }
@@ -366,7 +366,7 @@ start_run(cfg = cfg, codeCheck = codeCheck)
 #################################################
 cfg <- general_settings(title = "FSEC_SDP")
 # Climate scenario: RCP 2.6
-cfg$input['cellular'] <- "rev4.68FSECmodeling_e2bdb6cd_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz"
+cfg$input['cellular'] <- "rev4.69FSECmodeling_e2bdb6cd_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz"
 ### (1) Population and Health ###
 cfg <- population_transformation(cfg = cfg)
 ### (2) Reduced inequality and Education Transformation ###
