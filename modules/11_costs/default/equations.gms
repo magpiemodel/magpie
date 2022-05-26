@@ -12,8 +12,11 @@
 *' The global costs of production are represented by the sum of regional
 *' production costs of different production activities.
 
- q11_cost_reg(i2) .. v11_cost_reg(i2) =e= sum(kall,vm_cost_prod(i2,kall))
-                   + vm_cost_inv(i2)
+ q11_cost_reg(i2) .. v11_cost_reg(i2) =e= sum(req,vm_cost_prod_crop(i2,req))
+                   + sum(kres,vm_cost_prod_kres(i2,kres))
+                   + vm_cost_prod_past(i2)
+                   + vm_cost_prod_fish(i2)
+                   + sum(req,vm_cost_prod_livst(i2,req))
                    + sum((cell(i2,j2),land), vm_cost_landcon(j2,land))
                    + sum((cell(i2,j2),k), vm_cost_transp(j2,k))
                    + vm_tech_cost(i2)
