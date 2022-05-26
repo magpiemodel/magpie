@@ -7,16 +7,15 @@
 
 
 *' @equations
-*' Variable costs (without capital): The factor costs are calculated based on the requirements  of the regional aggregated production without
-* considering capital costs.
+*' Labor costs: The labor costs are calculated by multiplying regional aggregated production with labor requirments per output.
 
-q38_cost_prod_crop(i2,kcr).. vm_cost_prod(i2,kcr)
-                              =e= vm_prod_reg(i2,kcr) * sum(ct,p38_variable_costs(ct,i2,kcr))
+q38_cost_prod_labor(i2).. vm_cost_prod_crop(i2,"labor")
+                              =e= sum(kcr,vm_prod_reg(i2,kcr) * sum(ct,p38_variable_costs(ct,i2,kcr)))
                                 ;
 
 *' Investment costs: Investment are the summation of investment in mobile and immobile capital. The costs are annuitized,
 *' and corrected to make sure that the annual depreciation of the current time-step is accounted for.
-q38_cost_prod_inv(i2).. vm_cost_inv(i2)=e=(sum((cell(i2,j2),kcr),v38_investment_immobile(j2,kcr))
+q38_cost_prod_capital(i2).. vm_cost_prod_crop(i2,"capital")=e=(sum((cell(i2,j2),kcr),v38_investment_immobile(j2,kcr))
                                     +sum((cell(i2,j2)),v38_investment_mobile(j2)))
                                     *((1-s38_depreciation_rate)*
                                     sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
@@ -36,7 +35,7 @@ q38_investment_immobile(j2,kcr).. v38_investment_immobile(j2,kcr)
                                  sum(ct,p38_capital_immobile(ct,j2,kcr));
 *
 
-*'On the other hand, the mobile capital is needed by all crop activities in each location, so it is defined over each j2 cell.
+*' On the other hand, the mobile capital is needed by all crop activities in each location, so it is defined over each j2 cell.
 
 q38_investment_mobile(j2).. v38_investment_mobile(j2)
                              =g=
