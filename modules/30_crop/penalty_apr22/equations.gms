@@ -43,7 +43,7 @@ q30_rotation_penalty(i2) ..
  q30_rotation_max(j2,rotamax_red30) ..
    v30_penalty(j2,rotamax_red30)
    =g=
-   sum((rota_kcr30(rotamax_red30,kcr),w),vm_area(j2,kcr,w)) 
+   sum((rota_kcr30(rotamax_red30,kcr),w),vm_area(j2,kcr,w))
    - vm_land(j2,"crop") * f30_rotation_rules(rotamax_red30);
 
 *' Minimum constraints imply that penalties applies when a certain mimimum
@@ -55,9 +55,9 @@ q30_rotation_penalty(i2) ..
     vm_land(j2,"crop") * f30_rotation_rules(rotamin_red30)
     - sum((rota_kcr30(rotamin_red30,kcr),w), vm_area(j2,kcr,w));
 
-* we also include the max constraint irrigated systems so that they cannot
-* be too specialized. The minimum constraint can however also just
-* happen on rainfed areas.
+* The following maximum constraint avoids over-specialization in irrigated systems.
+* No minimum constraint is included for irrigated areas for computational
+* reasons. Minimum constraints just need to be met on total areas.
 
  q30_rotation_max_irrig(j2,rotamax_red30) ..
    v30_penalty_max_irrig(j2,rotamax_red30)

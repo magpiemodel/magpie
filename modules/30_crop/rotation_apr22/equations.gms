@@ -36,9 +36,9 @@
     sum((rotamin_kcr30(rotamin_red30,kcr),w), vm_area(j2,kcr,w)) =g=
     vm_land(j2,"crop") * sum(ct,i30_rotation_min_shr(ct,rotamin_red30));
 
-* we also include the max constraint irrigated systems so that they cannot
-* be too specialized. The minimum constraint can however also just
-* happen on rainfed areas.
+* The following maximum constraint avoids over-specialization in irrigated systems.
+* No minimum constraint is included for irrigated areas for computational
+* reasons. Minimum constraints just need to be met on total areas.
 
  q30_rotation_max_irrig(j2,rotamax_red30) ..
    sum((rotamax_kcr30(rotamax_red30,kcr)), vm_area(j2,kcr,"irrigated")) =l=

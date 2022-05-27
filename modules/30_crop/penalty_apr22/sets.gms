@@ -37,7 +37,7 @@ sets
 
 * crop rotation groups:
 * cereals or grasses are very favourable to loosen soils, therefore minimum constraint
-* legumes need longer rotations, only soybean can and is cultivated all 2 years
+* legumes need longer rotations, only soybean can and is cultivated every 2 years
 * rapeseed and beets have same nematodes
 * root crops have similar diseases
 

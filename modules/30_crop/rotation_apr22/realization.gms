@@ -16,10 +16,11 @@
 *' [41_area_equipped_for_irrigation], [42_water_demand], [50_nr_soil_budget],
 *' [53_methane] and [59_som].
 
-*' This module realization allows for different scenarios of rotational 
-*' constraints which are implemented as fixed limits. Rotational constraints
-*' are defined for total land as well as for irrigated areas only to avoid
-*' overspecialization on irrigated land.
+*' This module realization allows for different scenarios of rotational
+*' constraints. These are implemented as hard constraints. Maximum rotational
+*' constraints are defined for total cropland as well as for irrigated areas
+*' only to avoid overspecialization on irrigated land. Minimum constraints are
+*' just valid for total cropland areas.
 
 *' This realisation also includes the option to set aside a given share of
 *' the total available cropland for other land cover classes (by a given target
