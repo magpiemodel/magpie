@@ -8,15 +8,15 @@
 sets
 
   consv22_all Conservation priority areas
-  / BH, CPD, IFL, LW, WDPA, HalfEarth, BH_IFL, Forest, Forest_Other, PrimForest, SecdForest /
+  / None, BH, CPD, IFL, LW, BH_IFL, HalfEarth, Forest, Forest_Other, PrimForest, SecdForest /
 
-  consv22(consv22_all) Conservation priority areas
-  / BH, CPD, IFL, BH_IFL, LW, WDPA, HalfEarth /
+  consv_prio22(consv22_all) Conservation priority areas
+  / None, BH, CPD, IFL, LW, BH_IFL, HalfEarth /
+
+  consv_natveg22(consv22_all) Conservation priority areas
+  / Forest, Forest_Other, PrimForest, SecdForest /
 
   consv_type Type of land conservation
   / protect, restore /
-
-  prot_target22 Target year for nature protection
-   / none, by2030, by2050 /
 
 ;

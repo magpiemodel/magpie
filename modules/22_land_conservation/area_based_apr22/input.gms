@@ -5,8 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c22_protect_scenario  WDPA
-$setglobal c22_protect_scenario_noselect  WDPA
+$setglobal c22_protect_scenario  None
+$setglobal c22_protect_scenario_noselect  None
 
 scalars
 s22_restore_land  If land restoration is allowed (0=no 1=yes) / 1 /
@@ -53,9 +53,9 @@ $offdelim
 * fix to 2020 values for years after 2020
 m_fillmissingyears(f22_wdpa_baseline,"j,land");
 
-table f22_protect_area(j,consv22) Conservation priority areas (mio. ha)
+table f22_consv_prio(j,consv22_all,land) Conservation priority areas (mio. ha)
 $ondelim
-$include "./modules/22_land_conservation/input/protect_area.cs3"
+$include "./modules/22_land_conservation/input/consv_prio_areas.cs3"
 $offdelim
 ;
 

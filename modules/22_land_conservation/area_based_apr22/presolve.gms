@@ -9,6 +9,22 @@
 * Land conservation
 * ==================
 
+* Set natural vegetation conservation area based on
+* remaining natural vegation in current time steps
+* Full remaining primary forest protection
+p22_add_consv(t,j,"PrimForest","primforest") = pcm_land(j,"primforest") * p22_conservation_fader(t);
+* Full remaining secondary forest protection
+p22_add_consv(t,j,"SecdForest","secdforest") = pcm_land(j,"secdforest") * p22_conservation_fader(t);
+* Full remaining forest protection
+p22_add_consv(t,j,"Forest","primforest") =  pcm_land(j,"primforest") * p22_conservation_fader(t);
+p22_add_consv(t,j,"Forest","secdforest") = pcm_land(j,"secdforest") * p22_conservation_fader(t);
+* Full remaining forest and other land conservation
+p22_add_consv(t,j,"Forest_Other",land_natveg) = pcm_land(j,land_natveg) * p22_conservation_fader(t);
+* Include remaining primary forest areas in IFL conservation target
+p22_add_consv(t,j,"IFL","primforest") = pcm_land(j,"primforest") * p22_conservation_fader(t);
+p22_add_consv(t,j,"BH_IFL","primforest") = pcm_land(j,"primforest") * p22_conservation_fader(t);
+
+
 if(m_year(t) <= sm_fix_SSP2,
 * from 1995 to 2020 land conservation is based on
 * historic trends as derived from WDPA
@@ -17,30 +33,15 @@ if(m_year(t) <= sm_fix_SSP2,
 else
 
 ** Future land conservation only pertains to natural vegetation classes (land_natveg)
-
-$ifthen "%c22_protect_scenario%" == "HalfEarth"
-p22_conservation_area(t,j,land) = f22_wdpa_baseline(t,j,land);
-* WDPA data is already included in the HalfEarth data set
-* therefore the approach slightly deviates
-p22_conservation_area(t,j,land_natveg) =
-		pm_land_start(j,land_natveg)
-	  		* sum(cell(i,j),
-			  p22_consv_shr(t,j,"HalfEarth",land_natveg) * p22_country_weight(i)
-	  		+ p22_consv_shr(t,j,"%c22_protect_scenario_noselect%",land_natveg) * (1-p22_country_weight(i))
-	  		  );
-* make sure that area covered by WDPA data is included in areas where the HalfEarth data reports less
-p22_conservation_area(t,j,land_natveg)$(p22_conservation_area(t,j,land_natveg) < f22_wdpa_baseline(t,j,land_natveg)) = f22_wdpa_baseline(t,j,land_natveg);
-$else
 p22_conservation_area(t,j,land) = f22_wdpa_baseline(t,j,land);
 * future options for land conservation are added to the WDPA baseline
 p22_conservation_area(t,j,land_natveg) =
 		f22_wdpa_baseline(t,j,land_natveg)
-	  + pm_land_start(j,land_natveg)
-	  		* sum(cell(i,j),
-			  p22_consv_shr(t,j,"%c22_protect_scenario%",land_natveg) * p22_country_weight(i)
-			+ p22_consv_shr(t,j,"%c22_protect_scenario_noselect%",land_natveg) * (1-p22_country_weight(i))
+	  + sum(cell(i,j),
+			  p22_add_consv(t,j,"%c22_protect_scenario%",land_natveg) * p22_country_weight(i)
+			+ p22_add_consv(t,j,"%c22_protect_scenario_noselect%",land_natveg) * (1-p22_country_weight(i))
 			  );
-$endif
+p22_conservation_area(t,j,land_natveg)$(p22_conservation_area(t,j,land_natveg) < f22_wdpa_baseline(t,j,land_natveg)) = f22_wdpa_baseline(t,j,land_natveg);
 
 );
 
