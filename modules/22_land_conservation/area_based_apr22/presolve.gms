@@ -41,8 +41,6 @@ p22_conservation_area(t,j,land_natveg) =
 			  p22_add_consv(t,j,"%c22_protect_scenario%",land_natveg) * p22_country_weight(i)
 			+ p22_add_consv(t,j,"%c22_protect_scenario_noselect%",land_natveg) * (1-p22_country_weight(i))
 			  );
-p22_conservation_area(t,j,land_natveg)$(p22_conservation_area(t,j,land_natveg) < f22_wdpa_baseline(t,j,land_natveg)) = f22_wdpa_baseline(t,j,land_natveg);
-
 );
 
 * -----------------------
