@@ -11,6 +11,7 @@
 
 * Set natural vegetation conservation area based on
 * remaining natural vegation in current time steps
+
 * Full remaining primary forest protection
 p22_add_consv(t,j,"PrimForest","primforest") = pcm_land(j,"primforest") * p22_conservation_fader(t);
 * Full remaining secondary forest protection

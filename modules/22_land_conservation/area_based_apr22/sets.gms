@@ -7,14 +7,11 @@
 
 sets
 
-  consv22_all Conservation priority areas
+  consv22_all All conservation options
   / None, BH, IFL, CPD, LW, BH_IFL, HalfEarth, Forest, Forest_Other, PrimForest, SecdForest /
 
   consv_prio22(consv22_all) Conservation priority areas
   / None, BH, IFL, CPD, LW, BH_IFL, HalfEarth /
-
-  consv_natveg22(consv22_all) Conservation priority areas
-  / Forest, Forest_Other, PrimForest, SecdForest /
 
   consv_type Type of land conservation
   / protect, restore /
