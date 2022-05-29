@@ -74,7 +74,7 @@ pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secd
 pm_land_conservation(t,j,"other","restore")$(p22_conservation_area(t,j,"other") > pcm_land(j,"other")) =
 			  p22_conservation_area(t,j,"other") - pcm_land(j,"other");
 
-* Adjust pasture and other land restoration depending on given land available for restoration (restoration potential)
+* Adjust forest, grassland and other land restoration depending on given land available for restoration (restoration potential)
 
 * Secondary forest restoration is limited by secondary forest restoration potential
 p22_secdforest_restore_pot(t,j) = sum(land, pcm_land(j, land))

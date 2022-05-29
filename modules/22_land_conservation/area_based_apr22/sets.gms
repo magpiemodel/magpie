@@ -8,10 +8,10 @@
 sets
 
   consv22_all Conservation priority areas
-  / None, BH, CPD, IFL, LW, BH_IFL, HalfEarth, Forest, Forest_Other, PrimForest, SecdForest /
+  / None, BH, IFL, CPD, LW, BH_IFL, HalfEarth, Forest, Forest_Other, PrimForest, SecdForest /
 
   consv_prio22(consv22_all) Conservation priority areas
-  / None, BH, CPD, IFL, LW, BH_IFL, HalfEarth /
+  / None, BH, IFL, CPD, LW, BH_IFL, HalfEarth /
 
   consv_natveg22(consv22_all) Conservation priority areas
   / Forest, Forest_Other, PrimForest, SecdForest /

@@ -53,7 +53,7 @@ $offdelim
 * fix to 2020 values for years after 2020
 m_fillmissingyears(f22_wdpa_baseline,"j,land");
 
-table f22_consv_prio(j,consv22_all,land) Conservation priority areas (mio. ha)
+table f22_consv_prio(j,consv_prio22,land) Conservation priority areas (mio. ha)
 $ondelim
 $include "./modules/22_land_conservation/input/consv_prio_areas.cs3"
 $offdelim
