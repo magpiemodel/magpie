@@ -31,16 +31,6 @@ m_sigmoid_interpol(p22_conservation_fader,s22_conservation_start,s22_conservatio
 ** Initialise additional conservation area
 p22_add_consv(t,j,consv22_all,land) = 0;
 
-*** Biodiversity hotspots (BH)
-p22_add_consv(t,j,"BH",land) = f22_consv_prio(j,"BH",land)*p22_conservation_fader(t);
-*** Intact forest landscapes (IFL)
-p22_add_consv(t,j,"IFL",land) = f22_consv_prio(j,"IFL",land)*p22_conservation_fader(t);
-*** Centers of plant diversity (CPD)
-p22_add_consv(t,j,"CPD",land) = f22_consv_prio(j,"CPD",land)*p22_conservation_fader(t);
-*** Last of the wild (LW)
-p22_add_consv(t,j,"LW",land) = f22_consv_prio(j,"LW",land)*p22_conservation_fader(t);
-*** Biodiversity Hotspots + Intact Forest Landscapes implementation (BH_IFL)
-p22_add_consv(t,j,"BH_IFL",land) = f22_consv_prio(j,"BH_IFL",land) * p22_conservation_fader(t);
-*** HalfEarth
-p22_add_consv(t,j,"HalfEarth",land) = f22_consv_prio(j,"HalfEarth",land)*p22_conservation_fader(t);
+* Get additional conservation area in conservation priority areas
+p22_add_consv(t,j,consv_prio22,land) = f22_consv_prio(j,consv_prio22,land)*p22_conservation_fader(t);
 
