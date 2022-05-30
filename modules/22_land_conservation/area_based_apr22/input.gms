@@ -5,8 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c22_protect_scenario  None
-$setglobal c22_protect_scenario_noselect  None
+$setglobal c22_protect_scenario  none
+$setglobal c22_protect_scenario_noselect  none
 
 scalars
 s22_restore_land  If land restoration is allowed (0=no 1=yes) / 1 /
