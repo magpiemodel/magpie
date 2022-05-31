@@ -20,7 +20,7 @@ $include "./modules/44_biodiversity/bii_target/input/f44_bii_coeff.cs3"
 $offdelim
 ;
 
-table f44_biome(j,biome44)
+table f44_biome(j,biome44) Share of biome type in each spatial unit (1)
 $ondelim
 $include "./modules/44_biodiversity/bii_target/input/biorealm_biome.cs3"
 $offdelim
