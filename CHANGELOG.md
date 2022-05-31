@@ -88,6 +88,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **56_ghg_policy** Some equations in `56_ghg_policy` have been simplified. Also, GHG emissions from peatlands have been fully integrated into `56_ghg_policy`.
 - **scripts** scripts/start/extra/emulator.R  Throw an error if no file can be found to take the GHG prices from
  - **56_ghg_policy and config** removed switch `s56_reward_neg_emis`
+ - **44_biodiversity** fixed accounting for time step length in realization `bv_btc_mar21`
 
 ## [4.4.0] - 2021-12-13
 
