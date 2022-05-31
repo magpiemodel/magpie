@@ -6,12 +6,10 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars 
- s44_bii_start_year				blub (1) 							/ 2025 /
- s44_bii_target_year				blub (1) 						/ 2050 /
- s44_bii_target_value				blub (1) 						/ 0.9 /
- s44_bii_change_annual			blub (1) 							/ 0.0002 /
- s44_bii_max_lower_bound		blub (1) 							/ 0.9 /
- s44_bii_mode					blub (1)							/ 3 /
+ s44_bii_start_year				start year for BII target (1)		/ 2025 /
+ s44_bii_target					targeted annual change in BII (1) 	/ 0.0002 /
+ s44_bii_max_lower_bound		maximum lower bound for BII (1)		/ 0.9 /
+ s44_cost_bii_missing			technical costs for missing BII increase (USD per unit of BII)	/ 1000000 /
 ;
 
 
@@ -22,16 +20,8 @@ $include "./modules/44_biodiversity/bii_target/input/f44_bii_coeff.cs3"
 $offdelim
 ;
 
-table f44_realm(j,realm)
+table f44_biome(j,biome44)
 $ondelim
-$include "./modules/44_biodiversity/bii_target/input/realm_mht.cs3"
+$include "./modules/44_biodiversity/bii_target/input/biorealm_biome.cs3"
 $offdelim
 ;
-
-parameters
-f44_rr_layer(j) Range-rarity restoration prioritization layer (unitless)
-/
-$ondelim
-$include "./modules/44_biodiversity/bii_target/input/rr_layer.cs2"
-$offdelim
-/

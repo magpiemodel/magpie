@@ -6,35 +6,12 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 if(m_year(t) >= s44_bii_start_year,
-	if(s44_bii_mode = 0 AND s44_bii_change_annual <> -Inf,
-		v44_bii_glo.lo = min(v44_bii_glo.l * (1 + s44_bii_change_annual * m_timestep_length),s44_bii_max_lower_bound);
-	elseif s44_bii_mode = 1 AND s44_bii_change_annual <> -Inf,
-		v44_bii_reg.lo(i) = min(v44_bii_reg.l(i) * (1 + s44_bii_change_annual * m_timestep_length),s44_bii_max_lower_bound);
-	elseif s44_bii_mode = 2 AND s44_bii_change_annual <> -Inf,
-		v44_bii_cell.lo(j) = min(v44_bii_cell.l(j) * (1 + s44_bii_change_annual * m_timestep_length),s44_bii_max_lower_bound);
-	elseif s44_bii_mode = 3 AND s44_bii_change_annual <> -Inf,
-		p44_bii_realm_target(t,realm)$(sum(j, f44_realm(j,realm)) > 0) = min(v44_bii_realm.l(realm) * (1 + s44_bii_change_annual * m_timestep_length),s44_bii_max_lower_bound);
-* avoid reduction of bii in combination with v44_bii_realm_missing
-		v44_bii_realm.lo(realm)$(s44_bii_change_annual >= 0) = v44_bii_realm.l(realm);
-
-*		p44_bii_realm_target(t_all,"PA11") = 0;
-*		p44_bii_realm_target(t_all,"NA99") = 0;
-
+	if(s44_bii_target <> -Inf,
+* The lower bound for `v44_bii` used in equation `q44_bii_target` depends on the current level multiplied with the annual growth rate in `s44_bii_target`.
+		p44_bii_target(t,biome44)$(sum(j, f44_biome(j,biome44)) > 0) = min(v44_bii.l(biome44) * (1 + s44_bii_target * m_timestep_length),s44_bii_max_lower_bound);
+* The lower bound of `v44_bii` is set to the current level in case of a positive annual growth rate to avoid a reduction of BII in combination with `v44_bii_missing`.
+		v44_bii.lo(biome44)$(s44_bii_target >= 0) = v44_bii.l(biome44);
 	);
 );
 
-$ontext
-if(m_year(t) = s44_bii_start_year,
-	p44_bii_realm_target(t_all,realm)$(m_year(t_all) < s44_bii_start_year) = 0;
-	p44_bii_realm_target(t_all,realm)$(m_year(t_all) >= s44_bii_start_year AND m_year(t_all) <= s44_bii_target_year AND s44_bii_target_value > v44_bii_realm.l(realm)) = 
-	v44_bii_realm.l(realm) + ((m_year(t_all)-s44_bii_start_year) / (s44_bii_target_year-s44_bii_start_year)) * (s44_bii_target_value-v44_bii_realm.l(realm));	
-	p44_bii_realm_target(t_all,realm)$(m_year(t_all) > s44_bii_target_year) = max(v44_bii_realm.l(realm),s44_bii_target_value);
-);
-$offtext
-
-
-
-display v44_bii_glo.lo;
-display v44_bii_reg.lo;
-display v44_bii_cell.lo;
-display p44_bii_realm_target;
+display p44_bii_target;

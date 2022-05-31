@@ -11,11 +11,11 @@ parameters
 
 variables
  v44_bv_loss(j)                                 Change in biodiversity stock (Mha per year)
- vm_cost_bv_loss(j)					            Cost of biodiversity loss (mio USD)
+ vm_cost_bv_loss(j)					            Biodiversity cost (mio USD)
 ;
 
 positive variables
- vm_bv(j,landcover44,potnatveg)		            Biodiversity stock for all land cover classes (unweighted) (Mha)
+ vm_bv(j,landcover44,potnatveg)		            Biodiversity stock for all land cover classes (Mha)
  v44_bv_weighted(j)				 			    Range-rarity weighted biodiversity stock (Mha)
 ;
 
