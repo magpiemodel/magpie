@@ -13,5 +13,3 @@ if(m_year(t) >= s44_bii_start_year,
 		v44_bii.lo(biome44)$(s44_bii_target >= 0) = v44_bii.l(biome44);
 	);
 );
-
-display p44_bii_target;
