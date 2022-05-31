@@ -52,7 +52,7 @@ extend2luhv2 <- function(x, land = deparse(substitute(x))) {
     land_lr <- land_lr[, , drop_past]
     return(land_lr)
   }
-  
+
   # Used only when land_hr_file do not have pastr and range separation.
   if (land == "land_ini_hr") {
     land_ini_LUH2v2 <- read.magpie("./modules/31_past/input/fm_LUH2v2.mz")[, 1995, c("pastr", "range")]
@@ -145,11 +145,13 @@ land_hr <- interpolateAvlCroplandWeighted(x          = land_lr,
   message("Disaggregation crop types")
   area     <- croparea(gdx, level="cell", products="kcr",
                        product_aggr=FALSE,water_aggr = FALSE)
-  area_shr <- area/(dimSums(area,dim=3) + 10^-10)
+  fallow <- Fallow(gdx, level="cell")
+  area_shr <- area/(dimSums(area,dim=3) + setNames(fallow,NULL) + 10^-10)
 
   # calculate share of crop land on total cell area
   crop_shr <- land_hr/dimSums(land_hr, dim=3)
   crop_shr <- setNames(crop_shr[,getYears(area_shr),"crop"],NULL)
+
   # calculate crop area as share of total cell area
   area_shr_hr <- madrat::toolAggregate(area_shr, map, to="cell") * crop_shr
   return(area_shr_hr)
@@ -169,7 +171,7 @@ land_hr <- interpolateAvlCroplandWeighted(x          = land_lr,
 area_shr_hr <- .dissagcrop(gdx, land_hr, map=map_file)
 
 .tmpwrite(area_shr_hr, croparea_hr_share_out_file,
-          comment="unit: grid-cell land area fraction",
+          comment="unit: croparea fractions of total grid-cell",
           message="Write outputs cell.cropara_share")
 
 
@@ -191,10 +193,12 @@ area_shr_hr <- .dissagcrop(gdx, land_hr, map=map_file)
   crop_kbe_ir <- setNames(dimSums(area_hr[,,kbe][,,"irrigated"],dim=3),
                           "crop_kbe_ir")
   crop_hr <- mbind(crop_kfo_rf,crop_kfo_ir,crop_kbe_rf,crop_kbe_ir)
+  # calculate Fallow
+  fallow = setNames(land_hr[,,"crop"]-dimSums(area_hr,dim=3),"fallow")
   #drop crop
   land_hr <- land_hr[,,"crop",invert=TRUE]
   #combine land_hr with crop_hr.
-  land_hr <- mbind(crop_hr,land_hr)
+  land_hr <- mbind(crop_hr,fallow,land_hr)
 
   # split "forestry" into timber plantations, pre-scribed afforestation (NPi/NDC) and endogenous afforestation (CO2 price driven)
   message("Disaggregation Forestry")
