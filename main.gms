@@ -159,8 +159,8 @@ $title magpie
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
 * Used data set: additional_data_rev4.17.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* md5sum: d2a77ad72e7b2b2f7366bebe548c88d2
+* Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/input_data/
 * 
 * Used data set: calibration_H12_per_ton_fao_may22_28May22.tgz
 * md5sum: NA
@@ -190,7 +190,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Mon May 30 22:22:17 2022
+* Last modification (input data): Tue May 31 10:24:54 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -260,7 +260,7 @@ $setglobal transport  gtap_nov12
 $setglobal area_equipped_for_irrigation  endo_apr13
 $setglobal water_demand  all_sectors_aug13
 $setglobal water_availability  total_water_aug13
-$setglobal biodiversity  bv_btc_mar21
+$setglobal biodiversity  bii_target
 $setglobal climate  static
 
 $setglobal nr_soil_budget  exoeff_aug16

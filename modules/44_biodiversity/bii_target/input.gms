@@ -7,7 +7,7 @@
 
 scalars 
  s44_bii_start_year				start year for BII target (1)		/ 2025 /
- s44_bii_target					targeted annual change in BII (1) 	/ 0.0002 /
+ s44_bii_target					targeted annual change in BII (1) 	/ -Inf /
  s44_bii_max_lower_bound		maximum lower bound for BII (1)		/ 0.9 /
  s44_cost_bii_missing			technical costs for missing BII increase (USD per unit of BII)	/ 1000000 /
 ;
