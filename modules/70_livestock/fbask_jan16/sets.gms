@@ -9,6 +9,9 @@ sets
    cost_regr Cost regression parameters
     /cost_regr_a,cost_regr_b/
 
+   share_regr regression parameters for capital share calculation
+   /slope, intercept/
+
    feed_scen70  scenarios
        / ssp1, ssp2, ssp3, ssp4, ssp5, constant,
          SDP, SDP_EI, SDP_MC, SDP_RC /

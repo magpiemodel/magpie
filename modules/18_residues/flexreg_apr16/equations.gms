@@ -110,7 +110,7 @@
 *' and `res_nonfibrous`.
 
  q18_cost_prod_res(i2,kres) ..
-                  vm_cost_prod(i2,kres)
+                  vm_cost_prod_kres(i2,kres)
                   =e=
                   vm_prod_reg(i2,kres)*f18_fac_req_kres(kres);
 
