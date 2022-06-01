@@ -26,13 +26,13 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_bv_loss(t,j,type)             Cost of biodiversity loss (mio USD)
- ov_bv(t,j,landcover44,potnatveg,type) Biodiversity stock for all land cover classes (unweighted) (Mha)
- ov44_bii(t,biome44,type)              BII (1)
- ov44_bii_missing(t,biome44,type)      BII (1)
- oq44_bii(t,biome44,type)              BII (1)
- oq44_bii_target(t,biome44,type)       BII (1)
- oq44_cost(t,type)                     cost (1)
+ ov_cost_bv_loss(t,j,type)             Biodiversity cost (mio USD)
+ ov_bv(t,j,landcover44,potnatveg,type) Biodiversity stock for all land cover classes (Mha)
+ ov44_bii(t,biome44,type)              Biodiversity Intactness Index BII (1)
+ ov44_bii_missing(t,biome44,type)      Missing BII increase for compliance with BII target (1)
+ oq44_bii(t,biome44,type)              Biodiversity Intactness Index BII (1)
+ oq44_bii_target(t,biome44,type)       Missing BII increase for compliance with BII target (1)
+ oq44_cost(t,type)                     Biodiversity cost (mio USD)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

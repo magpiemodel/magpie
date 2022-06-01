@@ -158,9 +158,9 @@ $title magpie
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev4.17.tgz
-* md5sum: d2a77ad72e7b2b2f7366bebe548c88d2
-* Repository: /Users/flo/OneDrive/Dokumente/PIK/Development/input_data/
+* Used data set: additional_data_rev4.21.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
 * 
 * Used data set: calibration_H12_per_ton_fao_may22_28May22.tgz
 * md5sum: NA
@@ -190,7 +190,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Tue May 31 10:24:54 2022
+* Last modification (input data): Wed Jun  1 12:09:49 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -253,7 +253,7 @@ $setglobal urban  exo_nov21
 $setglobal natveg  dynamic_feb21
 
 $setglobal labor_prod  off
-$setglobal factor_costs  sticky_feb18
+$setglobal factor_costs  per_ton_fao_may22
 $setglobal landconversion  calib
 
 $setglobal transport  gtap_nov12

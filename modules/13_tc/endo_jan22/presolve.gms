@@ -27,7 +27,7 @@ else
 
 vm_tau.up(h,tautype) = 2*pcm_tau(h,tautype);
 
-if(m_year(t) > sm_fix_SSP2,
+if(m_year(t) > sm_fix_SSP2 AND s13_max_gdp_shr <> Inf,
 
 * We constrain tech cost to a defined share of regional GDP to avoid unrealistically
 * high endogenous tech investments
