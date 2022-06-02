@@ -15,7 +15,6 @@ positive variables
 ;
 
 parameters
- p36_weekly_hours(t,i)             Average weekly hours worked per person in agriculture (hours per week)
  p36_hourly_costs_iso(t,iso)	   Hourly labor costs in agriculture on iso level (USDMER05 per hour)
  p36_hourly_costs(t,i)             Hourly labor costs in agriculture on regional level (USDMER05 per hour)
  p36_total_hours_worked(iso)       Total hours worked by all employed people (mio hours per year)
