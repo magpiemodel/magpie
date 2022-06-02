@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description In this realisation, the Biodiversity Intactness Index (BII) is 
-*' calculated at the level of 71 biomes. 
+*' calculated separately for each biome type of each biogeographic realm, which results in 71 different spatial units (@olson_biome_2001).
 *' The BII is a relative indicator, wich measures the intactness of local species assemblages (species richness)
 *' compared to a reference state (space-for-time approach) (@purvis_chapter_2018).
 *' The implementation uses the BII coefficients described in @leclere_biodiv_2018 and @leclere_bending_2020.
