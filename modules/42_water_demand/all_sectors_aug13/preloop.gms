@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-pm_wat_req_k(t,j,kve) = f42_wat_req_kve(t,j,kve);
+i42_wat_req_k(t,j,kve) = f42_wat_req_kve(t,j,kve);
 i42_env_flows(t,j) = f42_env_flows(t,j);
 
-pm_wat_req_k(t,j,kli) = f42_wat_req_kli(kli);
+i42_wat_req_k(t,j,kli) = f42_wat_req_kli(kli);

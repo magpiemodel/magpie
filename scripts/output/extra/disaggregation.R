@@ -107,7 +107,7 @@ if(any(land_ini_hr < 0)) {
 #read in hr urban land
 if (cfg$gms$urban == "exo_nov21" ) {
 urban_land_hr  <- read.magpie(urban_land_hr_file)
-ssp <- cfg$gms$c09_gdp_scenario
+ssp <- cfg$gms$c34_urban_scenario
 urban_land_hr <- urban_land_hr[,,ssp]
 getNames(urban_land_hr) <- "urban"
 } else if (cfg$gms$urban == "static"){

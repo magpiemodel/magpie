@@ -9,7 +9,7 @@ scalars
  s44_start_year			Start year of biodiversity price (1) 							/ 2020 /
  s44_target_year		Target year of biodiversity price  (1)							/ 2050 /
  s44_start_price		Price for biodiversity stock loss in start year (USD per ha) 	/ 0 /
- s44_target_price		Price for biodiversity stock loss in target year (USD per ha) 	/ 3000 /
+ s44_target_price		Price for biodiversity stock loss in target year (USD per ha) 	/ 0 /
 ;
 
 table fm_bii_coeff(bii_class44,potnatveg) Biodiversity Intactness Index coefficients (unitless)

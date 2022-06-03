@@ -19,17 +19,17 @@
 *' In case of abandoned agricultural land (increase of other natural land),
 *' natural succession, represented by age-class growth, results in increasing carbon stocks.
 
- q35_carbon_primforest(j2,ag_pools) .. vm_carbon_stock(j2,"primforest",ag_pools) =e=
-           vm_land(j2,"primforest")
-           *sum(ct, fm_carbon_density(ct,j2,"primforest",ag_pools));
+ q35_carbon_primforest(j2,ag_pools,stockType) .. 
+ 		vm_carbon_stock(j2,"primforest",ag_pools,stockType) =e=
+			m_carbon_stock(vm_land,fm_carbon_density,"primforest");
 
- q35_carbon_secdforest(j2,ag_pools) .. vm_carbon_stock(j2,"secdforest",ag_pools) =e=
-           sum(ac, v35_secdforest(j2,ac)
-           *sum(ct, pm_carbon_density_ac(ct,j2,ac,ag_pools)));
+ q35_carbon_secdforest(j2,ag_pools,stockType) .. 
+ 		vm_carbon_stock(j2,"secdforest",ag_pools,stockType) =e=
+			m_carbon_stock_ac(v35_secdforest,pm_carbon_density_ac,"ac","ac_sub");
 
- q35_carbon_other(j2,ag_pools)  .. vm_carbon_stock(j2,"other",ag_pools) =e=
-           sum(ac, v35_other(j2,ac)
-           *sum(ct, pm_carbon_density_ac(ct,j2,ac,ag_pools)));
+ q35_carbon_other(j2,ag_pools,stockType) .. 
+ 		vm_carbon_stock(j2,"other",ag_pools,stockType) =e=
+			m_carbon_stock_ac(v35_other,pm_carbon_density_ac,"ac","ac_sub");
 
 *' The biodiversity value (BV) of primary forest, secondary forest and other land is computed by multiplying their respective land area with bii coefficients, which depend on the age class and whether the potential natural vegetation forest or non-forest (luh2 side layers).
 

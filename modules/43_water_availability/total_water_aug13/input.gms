@@ -5,15 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-scalars
-s43_shock_year                     Year in which policy shock can be implemented (1)  / 1995 /
-;
 
 $setglobal c43_watavail_scenario  cc
 *   options:   cc       (climate change)
 *             nocc      (no climate change)
 *             nocc_hist (no climate change after year defined by sm_fix_cc)
-*             exo       (exogenous restrictions on water availability)
+
 
 parameters
 f43_wat_avail(t_all,j) Surface water available for irrigation per cell from LPJmL (mio. m^3 per yr)

@@ -9,7 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
- - **scripts**The disaggregation_LUH2.R was extended to include the changes used to generate ISIMIP3b maps for LUH harmonization. The largest changes are: 1) The convertLUH function now breaks the grid level magpie objects by groups of years, then creates the raster for the groups and aggregates them to create the final map at a quarter of a degree resolution (this speeds up the process). 2) The mapping between LUH and MAgPIE is now defined by country and magpie-LUH types (not 1 to 1 anymore). 3) The split of MAgPIE's pasture land type between pasture and rangeland changed. Rangeland is assumed to stay constant after 2015, and changes in MAgPIE's pasture are due to pasture. 4) IFs were added so if a certain map already exists in the output folder, it will not generate it once again. 5) Flooded land now corresponds to a share of rice cropland, based on historical values. 6) To speed calculations, yields are read at the cell level, the crops are aggregated based on the new MAgPIE-LUH mapping, and then disaggregated to grid level.
+- **scripts** bugfix in disaggregation.R, disaggregation_BII.R with respect to urban scenario
+- **scripts** added FSEC modeling start script (global runs)
+ - **config** added s13_max_gdp_shr setting for tech cost upper bound as share of GDP PPP
+ - **13_tc** changed vm_tech_cost upper bound to share of regional GDP PPP (s13_max_gdp_shr)
+ - **scripts** The disaggregation_LUH2.R was extended to include the changes used to generate ISIMIP3b maps for LUH harmonization. The largest changes are: 1) The convertLUH function now breaks the grid level magpie objects by groups of years, then creates the raster for the groups and aggregates them to create the final map at a quarter of a degree resolution (this speeds up the process). 2) The mapping between LUH and MAgPIE is now defined by country and magpie-LUH types (not 1 to 1 anymore). 3) The split of MAgPIE's pasture land type between pasture and rangeland changed. Rangeland is assumed to stay constant after 2015, and changes in MAgPIE's pasture are due to pasture. 4) IFs were added so if a certain map already exists in the output folder, it will not generate it once again. 5) Flooded land now corresponds to a share of rice cropland, based on historical values. 6) To speed calculations, yields are read at the cell level, the crops are aggregated based on the new MAgPIE-LUH mapping, and then disaggregated to grid level.
  - **56_ghg_policy** additional scenarios for c56_emis_policy
  - **09_drivers** separation of GDP and population scenarios
  - **scripts** added new disaggregation script to provide grid cell level BII
@@ -28,12 +32,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **scripts** removed test script "irrig_dep_test" from "start" folder to "extra" folder
  - **scripts** Added script to folder projects paper_grassland.R
  - **44_biodiversity** Improved documentation, simplification of equations and flexible options for price on biodiversity loss
- - **config** changed default setting for s56_reward_neg_emis from 0 to -Inf
+ - **modules** Moved interface `vm_carbon_stock` from 52_carbon to 56_ghg_policy
+ - **scripts** scripts/output/extra/emulator.R Remove dependency on deprecated R package "magpie"
+- **56_ghg_policy** Deactivated GHG emission policies were not accounted for in the MACCs module. This has been corrected by an extension of the interface `im_pollutant_prices`, which now has an additional dimension for emission sources `emis_source`. In this context some equations in `56_ghg_policy` have been simplified (sets: `emis_source_reg`, `emis_source_cell`). Also, GHG emissions from peatlands have been fully integrated into `56_ghg_policy`.
 
 ### added
+- **scripts** output/projects/FSEC_StevenLord.R to create output for Steven Lord in the FSEC context
+- **scripts** output/projects/FSEC_costs.R to create costs ouput for the FSEC project
 - **scripts** output/projects/FSEC_dietaryIndicators.R to create output datasets for the FSEC project
-- **scripts** output/projects/FSEC_environmentalPollutants.R to create output datasets of pollutants for the FSEC project
-- **scripts** start/projects/project_FSEC_SWF.R runs simulations which will be the basis for the FSEC Social Welfare Function calculation.
+- **scripts** output/projects/FSEC_nitrogenPollution.R to create output datasets of nitrogen pollutants for the FSEC project
 - **scripts** Added script to folder projects paper_grassland.R
 - **scripts** Extended dissagregation.R script to replace single "past" land class by LHU range and pastr classes when grassland_apr22 realization is used.
 - **52_carbon** added land carbon sink adjustment factors, needed in R post-processing
@@ -44,6 +51,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     f31_LUH2v2.cs3 -> LUH2v2 land classes separating rangelands from managed pastures
     f31_grassl_yld.cs3 -> Rangelands and managed pastures grass yields
     f31_grass_bio_hist.cs3 -> Historical grass biomass demand
+ - **modules** New dimension in `vm_carbon_stock` for different carbon stock types (actual, previousLandPattern, previousCarbonDensity)
+ - **config** added option for CO2 emission pricing `cfg$gms$c56_carbon_stock_pricing`
+ - **config** added cfg$gms$s70_past_mngmnt_factor_fix with default 2005 (previous default was 2010). The previous setting caused a strong spike in CO2 emissions from pasture expansion in SSA. With 2005, this can be avoided.
 
 ### removed
 
@@ -60,6 +70,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** calibration; set NA values to 1
 - **scripts** fixed misleading warning in check_config
 - **scripts** fixed configuration error in FSEC output scripts, FSEC_dietaryIndicators.R and FSEC_environmentalPollutants.R
+- **56_ghg_policy** Some equations in `56_ghg_policy` have been simplified. Also, GHG emissions from peatlands have been fully integrated into `56_ghg_policy`.
+- **scripts** scripts/start/extra/emulator.R  Throw an error if no file can be found to take the GHG prices from
+ - **56_ghg_policy and config** removed switch `s56_reward_neg_emis`
 
 ## [4.4.0] - 2021-12-13
 

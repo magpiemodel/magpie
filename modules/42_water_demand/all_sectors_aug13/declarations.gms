@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- pm_wat_req_k(t_all,j,k)               LPJmL annual water demand for irrigation per ha per yr and livestock demand per ton per yr (m^3)
+ i42_wat_req_k(t_all,j,k)               LPJmL annual water demand for irrigation per ha per yr and livestock demand per ton per yr (m^3)
  ic42_wat_req_k(j,k)                LPJmL annual water demand for irrigation per ha per yr and livestock demand per ton per yr (m^3)
  i42_env_flows(t,j)                 Environmental flow requirements in case of policy (mio m^3)
  i42_env_flows_base(t,j)            Environmental flow requirements in case of no policy (mio m^3)
