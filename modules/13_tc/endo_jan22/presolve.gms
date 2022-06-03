@@ -27,12 +27,16 @@ else
 
 vm_tau.up(h,tautype) = 2*pcm_tau(h,tautype);
 
+if(m_year(t) > sm_fix_SSP2 AND s13_max_gdp_shr <> Inf,
+
 * We constrain tech cost to a defined share of regional GDP to avoid unrealistically
 * high endogenous tech investments
-vm_tech_cost.up(i) =
-	sum((i_to_iso(i,iso),ct), im_gdp_pc_ppp_iso(ct,iso) * im_pop_iso(ct,iso)) * s13_max_gdp_shr;
+	vm_tech_cost.up(i) =
+		sum((i_to_iso(i,iso),ct), im_gdp_pc_ppp_iso(ct,iso) * im_pop_iso(ct,iso)) * s13_max_gdp_shr;
 
 * We set the initial solving basis for the tech cost to its upper bound to support the solver in finding
 * a proper solution. Without such initial values, the model leave tech cost at 0 and as such ignore tau
 * as an efficient part of the optimal solution.
-vm_tech_cost.l(i) = vm_tech_cost.up(i);
+	vm_tech_cost.l(i) = vm_tech_cost.up(i);
+
+);
