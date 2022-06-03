@@ -8,8 +8,13 @@
 if(m_year(t) = s44_start_year AND s44_bii_target > 0,
 * The start value for the linear interpolation is the BII at biome level in the start year.
 	p44_start_value(biome44) = v44_bii.l(biome44);
-* The target value is the start value scaled with the ratio of the global BII target `s44_bii_target` and global BII level in the start year
-	p44_target_value(biome44) = (s44_bii_target / (sum((j,potnatveg,landcover44), vm_bv.l(j,landcover44,potnatveg)) / sum((j,land), pcm_land(j,land)))) * v44_bii.l(biome44);
+* In the global case (s44_bii_target_mode = 0), the target value is the start value scaled with the ratio of the global BII target `s44_bii_target` and global BII level in the start year
+	if(s44_bii_target_mode = 0,
+		p44_target_value(biome44) = (s44_bii_target / (sum((j,potnatveg,landcover44), vm_bv.l(j,landcover44,potnatveg)) / sum((j,land), pcm_land(j,land)))) * v44_bii.l(biome44);
+	elseif s44_bii_target_mode = 1,
+		p44_target_value(biome44) = s44_bii_target
+	);
+	
 * Linear increase of BII target values at biome level from start year to target year, and constant values thereafter.
 	p44_bii_target(t2,biome44) = p44_start_value(biome44) + ((m_year(t2)-s44_start_year) / (s44_target_year-s44_start_year)) * (p44_target_value(biome44)-p44_start_value(biome44));
 	p44_bii_target(t2,biome44)$(m_year(t2) > s44_target_year) = p44_target_value(biome44);
