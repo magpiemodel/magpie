@@ -18,6 +18,6 @@ if(m_year(t) = s44_start_year AND s44_bii_target > 0,
 	p44_bii_target(t2,biome44)$(sum(j, f44_biome(j,biome44)) = 0) = 0;
 * The lower bound of `v44_bii` is set to the current level if the current level of a biome is above the target to avoid a reduction of BII in combination with `v44_bii_missing`.
 	v44_bii.lo(biome44)$(v44_bii.l(biome44) >= p44_target_value(biome44)) = v44_bii.l(biome44);
+	display p44_bii_target;
 );
 
-display p44_bii_target;
