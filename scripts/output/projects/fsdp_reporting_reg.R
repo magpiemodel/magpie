@@ -34,7 +34,7 @@ if(!exists("source_include")) {
 
 print(paste0("script started for output directory",outputdir))
 
-wdbefore=getwd()
+wdbefore <- getwd()
 on.exit(setwd(wdbefore))
 setwd(outputdir)
 
@@ -43,23 +43,23 @@ title <- cfg$title
 print("generating FSDP output for the run: ")
 print(title)
 
-filename=paste0("report_",title,".mif")
-gdx=paste0("fulldata.gdx")
-a=getReportINMS(gdx,file=filename,scenario = title,dir=".")
+filename <- paste0("report_",title,".mif")
+gdx <- paste0("fulldata.gdx")
+a <- getReportINMS(gdx,file=filename,scenario = title,dir=".")
 
 print(filename)
-mif=read.report(filename)
+mif <- read.report(filename)
 
 
-missingyears=function(x){
+missingyears <- function(x){
   history=paste0("y",1965+((0:5)*5))
   x[[1]][[1]] <- time_interpolate(x[[1]][[1]],interpolated_year = c(history,paste0("y",2005+((0:9)*10))),integrate_interpolated_years = TRUE)
   x[[1]][[1]][,history,] = 0
   return(x)
 }
 
-#a=c(missingyears(ssp1),missingyears(ssp2))
-a=missingyears(mif)
+#a <- c(missingyears(ssp1),missingyears(ssp2))
+a <- missingyears(mif)
 
 #write.reportProject(a,mapping=paste0(wdbefore,"/mapping_fsdp.csv"),file="report_fsdp.mif")
 write.report(a,file="report_fsdp.mif")

@@ -145,7 +145,7 @@ land_hr <- interpolateAvlCroplandWeighted(x          = land_lr,
   message("Disaggregation crop types")
   area     <- croparea(gdx, level="cell", products="kcr",
                        product_aggr=FALSE,water_aggr = FALSE)
-  fallow <- Fallow(gdx, level="cell")
+  fallow <- fallow(gdx, level="cell")
   area_shr <- area/(dimSums(area,dim=3) + setNames(fallow,NULL) + 10^-10)
 
   # calculate share of crop land on total cell area
@@ -194,7 +194,7 @@ area_shr_hr <- .dissagcrop(gdx, land_hr, map=map_file)
                           "crop_kbe_ir")
   crop_hr <- mbind(crop_kfo_rf,crop_kfo_ir,crop_kbe_rf,crop_kbe_ir)
   # calculate Fallow
-  fallow = setNames(land_hr[,,"crop"]-dimSums(area_hr,dim=3),"fallow")
+  fallow <- setNames(land_hr[,,"crop"]-dimSums(area_hr,dim=3),"fallow")
   #drop crop
   land_hr <- land_hr[,,"crop",invert=TRUE]
   #combine land_hr with crop_hr.

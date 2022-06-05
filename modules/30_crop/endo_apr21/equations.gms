@@ -49,7 +49,7 @@
 *' for all cropland :
 
  q30_carbon(j2,ag_pools,stockType) ..
- vm_carbon_stock(j2,"crop",ag_pools,stockType) =e= 
+ vm_carbon_stock(j2,"crop",ag_pools,stockType) =e=
    m_carbon_stock(vm_land,fm_carbon_density,"crop");
 
 *' The biodiversity value for cropland is calculated separately for annual and perennial crops:
@@ -59,4 +59,5 @@
 
  q30_bv_per(j2,potnatveg) .. vm_bv(j2,"crop_per",potnatveg)
  					=e=
- 					sum((crop_per30,w), vm_area(j2,crop_per30,w)) * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
+          (vm_land(j2,"crop") - sum((crop_ann30,w), vm_area(j2,crop_ann30,w)))
+          * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
