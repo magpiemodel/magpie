@@ -10,7 +10,7 @@ parameters
  p30_region_setaside_shr(i)			Set-aside share of the region (1)
  p30_country_dummy(iso)		        Dummy parameter indicating whether country is affected by selected set-aside policy (1)
  i30_avl_cropland_iso(iso)			Available land area for cropland at ISO level (mio. ha)
- i30_rotation_incentives(t_all,rota30) penalty for violating constraints (USD05MER per ha)
+ i30_rotation_incentives(t_all,rota30)   Penalty for violating rotational constraints (USD05MER per ha)
 ;
 
 positive variables
