@@ -6,5 +6,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 v44_bv_weighted.l(j) = 0.3;
-m_sigmoid_interpol(p44_price_bv_loss,s44_start_year,s44_target_year,s44_start_price,s44_target_price);
+m_linear_interpol(p44_price_bv_loss,s44_start_year,s44_target_year,s44_start_price,s44_target_price);
+p44_price_bv_loss(t_all)$(m_year(t_all) < s44_start_year) = 0;
 display p44_price_bv_loss;
