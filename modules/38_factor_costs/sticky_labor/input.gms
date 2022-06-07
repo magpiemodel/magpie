@@ -27,7 +27,7 @@ $offdelim
 /
 ;
 
-parameter f38_fac_req_fao_reg(t,i,kcr) Factor requirement costs (USD05MER per tDM)
+parameter f38_fac_req_fao_reg(t_all,i,kcr) Factor requirement costs (USD05MER per tDM)
 /
 $ondelim
 $include "./modules/38_factor_costs/input/f38_fac_req_fao_regional.cs4"
