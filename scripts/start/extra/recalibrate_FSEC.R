@@ -55,12 +55,12 @@ general_settings <- function(title) {
   # C price driven afforestation is off by default
   cfg$gms$s56_c_price_induced_aff <- "0"
   # Soil organic carbon dynamics activated
-  cfg$gms$som                     <- "static_jan19" # "cellpool_aug16"
+  cfg$gms$som                     <- "cellpool_aug16" # "cellpool_aug16"
   # Cost module: sticky - dynamic mode
   cfg$gms$factor_costs            <- "sticky_feb18"
   # Necessary to be feasible
-  cfg$gms$s13_max_gdp_shr         <- 0.2
-  cfg$gms$c35_aolc_policy         <- "base" # disable AOLC policy for China
+  #cfg$gms$s13_max_gdp_shr         <- 0.02
+  #cfg$gms$c35_aolc_policy         <- "base" # disable AOLC policy for China
 
   return(cfg)
 }

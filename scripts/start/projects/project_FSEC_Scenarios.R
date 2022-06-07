@@ -58,8 +58,8 @@ general_settings <- function(title) {
   # Cost module: sticky - dynamic mode
   cfg$gms$factor_costs            <- "sticky_feb18"
   # Necessary to be feasible
-  cfg$gms$s13_max_gdp_shr         <- 1
-  cfg$gms$c35_aolc_policy         <- "base" # disable AOLC policy for China
+  #cfg$gms$s13_max_gdp_shr         <- 0.02
+  #cfg$gms$c35_aolc_policy         <- "base" # disable AOLC policy for China
 
   return(cfg)
 }
