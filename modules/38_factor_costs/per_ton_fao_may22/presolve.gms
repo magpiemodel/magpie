@@ -21,10 +21,6 @@ else
  i38_fac_req(t,i,kcr) = i38_fac_req(t,i,kcr);
 );
 
-$if ("%c38_fac_req%" == "reg" and m_year(t)<=1995) i38_fac_req(t,i,kcr) = f38_fac_req_fao_reg("y1995",i,kcr);
-$if ("%c38_fac_req%" == "reg" and m_year(t)>1995 and m_year(t)<2010) i38_fac_req(t,i,kcr) = f38_fac_req_fao_reg(t,i,kcr);
-$if ("%c38_fac_req%" == "reg" and m_year(t)>=2010) i38_fac_req(t,i,kcr) = f38_fac_req_fao_reg("y2010",i,kcr);
-
 p38_share_calibration(i) = f38_historical_share("y2010",i)-(f38_reg_parameters("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso("y2010",iso)))+f38_reg_parameters("intercept"));
 
 if (m_year(t)<2010,
