@@ -14,6 +14,8 @@ gms$s15_exo_diet;;;;0;0;0;0;0;1;0;1;1;;;;;;;1;1;0;0;0;0;0;0;1;0;0;1;;;;;;;;;
 gms$c15_kcal_scen;;;;;;;;;healthy_BMI;healthy_BMI;healthy_BMI;healthy_BMI;;;;;;;healthy_BMI;healthy_BMI;;;;;;;healthy_BMI;;;healthy_BMI;;;;;;;;;
 gms$c15_EAT_scen;;;;;;;;;FLX;;FLX;FLX;;;;;;;FLX;FLX;;;;;;;FLX;;;FLX;;;;;;;;;
 gms$c21_trade_liberalization;;;;l908080r807070;l909090r808080;l909595r809090;l908080r807070;l908080r807070;l908080r807070;l908080r807070;l909595r809090;l908080r807070;;;;;;;;;l908080r807070;l909090r808080;l909595r809090;l908080r807070;l908080r807070;l908080r807070;l908080r807070;l908080r807070;l908080r807070;l908080r807070;;;;;;;;;
+gms$c22_protect_scenario;;;;none;none;none;none;none;BH;none;BH_IFL;BH;;;;;;;BH;;none;none;none;none;none;BH_IFL;BH_IFL;BH_IFL;BH_IFL;BH_IFL;;;;;;;;;
+gms$c22_protect_scenario_noselect;;;;;;;;;;;;;;;;;;;;;;;;;;none;none;BH_IFL;none;BH_IFL;;;;;;;;;
 gms$c30_bioen_water;;;;rainfed;rainfed;rainfed;rainfed;rainfed;rainfed;all;rainfed;rainfed;;;;;;;rainfed;;;;;;;;;;;;;;;;;;;;
 gms$s30_set_aside_shr;;;;0;0;0;0;0;0;0;0;0.2;;;;;;;0;;;;;;;0.2;0.2;0.2;0.2;0.2;;;;;;;;;
 gms$s30_set_aside_shr_noselect;;;;;;;;;;;;;;;;;;;;;;;;;;0;0;0.2;0;0.2;;;;;;;;;
@@ -27,9 +29,7 @@ gms$c34_urban_scenario;;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;SSP1;SSP2;SSP1;;;;;;;;;S
 gms$c32_aff_policy;;;;;;;;;;;;;none;npi;ndc;;;;;;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;;;;
 gms$c35_ad_policy;;;;;;;;;;;;;none;npi;ndc;;;;;;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;;;;
 gms$c35_aolc_policy;;;;;;;;;;;;;none;npi;ndc;;;;;;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;;;;
-gms$c35_protect_scenario;;;;WDPA;WDPA;WDPA;WDPA;WDPA;BH;WDPA;BH_IFL;BH;;;;;;;BH;;WDPA;WDPA;WDPA;WDPA;WDPA;BH_IFL;BH_IFL;BH_IFL;BH_IFL;BH_IFL;;;;;;;;;
-gms$c35_protect_scenario_noselect;;;;;;;;;;;;;;;;;;;;;;;;;;WDPA;WDPA;BH_IFL;WDPA;BH_IFL;;;;;;;;;
-gms$c35_forest_damage_end;;;;by2030;by2050;by2050;by2050;by2030;by2030;by2030;by2030;by2030;;;;;;;by2030;;by2030;by2050;by2050;by2050;by2030;by2030;by2030;by2030;by2030;by2030;;;;;;;;;
+gms$s35_forest_damage_end;;;;2030;2050;2050;2050;2030;2030;2030;2030;2030;;;;;;;2030;;2030;2050;2050;2050;2030;2030;2030;2030;2030;2030;;;;;;;;;
 gms$s42_watdem_nonagr_scenario;;;;1;2;3;2;1;1;1;3;1;;;;;;;;;;;;;;2;1;2;2;1;;;;;;;;;
 gms$s42_irrig_eff_scenario;;;;2;2;2;2;2;3;3;3;3;;;;;;;3;;1;1;1;1;1;3;3;3;3;3;;;;;;;;;
 gms$c42_env_flow_policy;;;;on;off;off;mixed;on;on;on;mixed;on;;;;;;;on;;on;off;off;mixed;on;on;on;on;on;on;;;;;;;;;
@@ -61,5 +61,5 @@ gms$s32_hvarea;;;;;;;;;;;;;;;;;;;;;;;;;;2;2;2;2;2;2;1;0;;;;;;
 gms$s35_secdf_distribution;;;;;;;;;;;;;;;;;;;;;;;;;;2;2;2;2;2;2;2;0;;;;;;
 gms$s35_hvarea;;;;;;;;;;;;;;;;;;;;;;;;;;2;2;2;2;2;2;2;0;;;;;;
 gms$s73_timber_demand_switch;;;;;;;;;;;;;;;;;;;;;;;;;;1;1;1;1;1;1;1;0;;;;;;
-input['cellular'];;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;rev4.68_h12_0bd54110_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1.tgz;rev4.68_h12_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz;rev4.68_h12_1b5c3817_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1.tgz;rev4.68_h12_3c888fa5_cellularmagpie_c200_MRI-ESM2-0-ssp460_lpjml-8e6c5eb1.tgz;rev4.68_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz;rev4.68_h12_09a63995_cellularmagpie_c200_MRI-ESM2-0-ssp585_lpjml-8e6c5eb1.tgz
+input['cellular'];;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;rev4.72_h12_0bd54110_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1.tgz;rev4.72_h12_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz;rev4.72_h12_1b5c3817_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1.tgz;rev4.72_h12_3c888fa5_cellularmagpie_c200_MRI-ESM2-0-ssp460_lpjml-8e6c5eb1.tgz;rev4.72_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz;rev4.72_h12_09a63995_cellularmagpie_c200_MRI-ESM2-0-ssp585_lpjml-8e6c5eb1.tgz
 gms$c52_land_carbon_sink_rcp;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;RCP19;RCP26;RCP45;RCP60;RCPBU;RCPBU
