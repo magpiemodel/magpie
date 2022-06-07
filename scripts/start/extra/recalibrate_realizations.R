@@ -21,21 +21,24 @@ source("config/default.cfg")
 realizations<-c("mixed_reg_feb17","per_ton_fao_may22","sticky_feb18") #"sticky_labor" is very similar to sticky_feb18. No extra calibration needed.
 type<-NULL
 
+cfg$results_folder <- "output/:title:"
+cfg$recalibrate <- TRUE
+cfg$recalibrate_landconversion_cost <- TRUE
+
+cfg$output <- c("rds_report","validation_short")
+cfg$force_download <- TRUE
+
+cfg$gms$c_timesteps <- "calib" 
+#cfg$qos <- "priority"
+
 for(r in realizations){
+  cfg$gms$factor_costs     <- r
+  for (fac_req in c("reg", "glo")) {
+    cfg$gms$c38_fac_req      <- fac_req
+    cfg$gms$c70_fac_req_regr <- fac_req
+    cfg$title <-  paste("calib_run",r,fac_req,sep="_")
+    start_run(cfg)
+    magpie4::submitCalibration(paste("H12",r,fac_req,sep="_"))
+  }
+}
 
-      cfg$results_folder <- "output/:title:"
-      cfg$recalibrate <- TRUE
-      cfg$recalibrate_landconversion_cost <- TRUE
-
-      cfg$title <-  paste("calib_run",r,sep="_")
-
-      cfg$output <- c("rds_report","validation_short")
-      cfg$force_download <- TRUE
-
-      cfg$gms$factor_costs     <-   r
-
-
-
-      start_run(cfg)
-      magpie4::submitCalibration(paste("H12",r,sep="_"))
-    }
