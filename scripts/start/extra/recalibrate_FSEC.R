@@ -17,9 +17,9 @@ library(gms)
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
-input <- c(regional    = "rev4.69FSECmodeling_e2bdb6cd_magpie.tgz",
-           cellular    = "rev4.69FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-           validation  = "WARNINGS2_rev4.69FSECmodeling_e2bdb6cd_validation.tgz",
+input <- c(regional    = "rev4.72FSECmodeling_e2bdb6cd_magpie.tgz",
+           cellular    = "rev4.72FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+           validation  = "WARNINGS1_rev4.72FSECmodeling_e2bdb6cd_validation.tgz",
            additional  = "additional_data_rev4.21.tgz",
            calibration = "calibration_FSEC_26May22.tgz")
 
@@ -39,7 +39,7 @@ general_settings <- function(title) {
 
   # Climate change impacts activated, SSP2 default settings, NDC activated, endogenous forestry activated
   cfg <- gms::setScenario(cfg, c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"))
-  cfg$input['cellular'] <- "rev4.69FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
+  cfg$input['cellular'] <- "rev4.72FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
   cfg$force_download    <- TRUE
 
   # Nitrogen module with IPCC emissions factors rescaled with efficiency
