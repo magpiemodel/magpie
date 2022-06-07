@@ -5,20 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-sets
+v44_bii.l(biome44) = 0.75;
 
-  driver_source Source of deforestation drivers
-  / overall, deforestation, shifting_agriculture,
-  forestry, wildfire, urbanization /
+v44_bii.fx(biome44)$(sum(j, f44_biome(j,biome44)) = 0) = 0;
+v44_bii_missing.fx(biome44)$(sum(j, f44_biome(j,biome44)) = 0) = 0;
+p44_bii_target(t,biome44) = 0;
 
-  combined_loss(driver_source) Combined loss from fire plus agriculture
-  / shifting_agriculture,wildfire /
-
-  pol35 Land protection policy
-  / none, npi, ndc /
-
-  pol_stock35 Land types for land protection policies
-  / forest, other /
-
-
-;
+vm_bv.l(j,landcover44,potnatveg) = 0;

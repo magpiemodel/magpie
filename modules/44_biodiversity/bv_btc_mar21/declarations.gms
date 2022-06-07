@@ -10,17 +10,17 @@ parameters
 ;
 
 variables
- v44_bv_loss(j)                                 Change in biodiversity stock compared to previous time step (Mha per time step)
- vm_cost_bv_loss(j)					            Cost of biodiversity loss (mio USD)
+ v44_bv_loss(j)                                 Change in biodiversity stock (Mha per year)
+ vm_cost_bv_loss(j)					            Biodiversity cost (mio USD)
 ;
 
 positive variables
- vm_bv(j,landcover44,potnatveg)		            Biodiversity stock for all land cover classes (unweighted) (Mha)
+ vm_bv(j,landcover44,potnatveg)		            Biodiversity stock for all land cover classes (Mha)
  v44_bv_weighted(j)				 			    Range-rarity weighted biodiversity stock (Mha)
 ;
 
 equations
- q44_bv_loss(j)                                 Change in biodiversity stock compared to previous time step (Mha per time step)
+ q44_bv_loss(j)                                 Change in biodiversity stock (Mha per year)
  q44_bv_weighted(j)		            			Range-rarity weighted biodiversity stock (Mha)
  q44_cost_bv_loss(j)			                Cost of biodiversity loss (mio USD)
 ;
@@ -28,11 +28,11 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov44_bv_loss(t,j,type)                Change in biodiversity stock compared to previous time step (Mha per time step)
- ov_cost_bv_loss(t,j,type)             Cost of biodiversity loss (mio USD)
- ov_bv(t,j,landcover44,potnatveg,type) Biodiversity stock for all land cover classes (unweighted) (Mha)
+ ov44_bv_loss(t,j,type)                Change in biodiversity stock (Mha per year)
+ ov_cost_bv_loss(t,j,type)             Biodiversity cost (mio USD)
+ ov_bv(t,j,landcover44,potnatveg,type) Biodiversity stock for all land cover classes (Mha)
  ov44_bv_weighted(t,j,type)            Range-rarity weighted biodiversity stock (Mha)
- oq44_bv_loss(t,j,type)                Change in biodiversity stock compared to previous time step (Mha per time step)
+ oq44_bv_loss(t,j,type)                Change in biodiversity stock (Mha per year)
  oq44_bv_weighted(t,j,type)            Range-rarity weighted biodiversity stock (Mha)
  oq44_cost_bv_loss(t,j,type)           Cost of biodiversity loss (mio USD)
 ;
