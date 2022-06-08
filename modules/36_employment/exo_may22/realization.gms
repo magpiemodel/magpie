@@ -6,8 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description This realization calculates agricultural employment based
-*' on it's relation to total labor costs (using projections of hourly 
-*' labor costs and hours workd per employed person). It therefore depends 
+*' on it's relation to total labor costs. It therefore depends 
 *' on the labor costs calculated in the modules [38_factor_costs] and 
 *' [70_livestock], but does not affect resulting total costs or production 
 *' patterns.

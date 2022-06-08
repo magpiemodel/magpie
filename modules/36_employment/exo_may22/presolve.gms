@@ -5,6 +5,20 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+*' @equations
+
+*' Non-MAgPIE labor costs consist of the labor cost share of subsidies and from livestock
+*' categories not covered by MAgPIE (i.e. wool, beeswax, honey, silk-worms), which 
+*' are both kept constant for future years. 
+
+p36_nonmagpie_labor_costs(t,i) = (f36_unspecified_subsidies(t,i) + f36_nonmagpie_factor_costs(t,i)) * (1-p36_cost_share(t,i));
+
+*' @stop
+
+*' Hourly labor costs are projected into the future by using a linear regression with
+*' GDPpcMER, which is calibrated such that historic values of agricultural employment 
+*' are met.
+
 * historic hourly labor costs for t_past, calibrated regression values based on GDPpcMER for future years
 if (sum(sameas(t_past,t),1) = 1,
 	p36_hourly_costs_iso(t,iso) = f36_hist_hourly_costs(t,iso)
@@ -13,6 +27,7 @@ else
 							 	 f36_regr_hourly_costs("intercept")+p36_calibration_hourly_costs(iso)), 
 								 f36_regr_hourly_costs("threshold"));
 );
+
 
 p36_hourly_costs(t,i) = sum(i_to_iso(i,iso),p36_hourly_costs_iso(t,iso)*p36_total_hours_worked(iso))*(1/sum(i_to_iso(i,iso),p36_total_hours_worked(iso)));
 
@@ -25,6 +40,3 @@ if (m_year(t)<2010,
 elseif (m_year(t)>=2010),
  p36_cost_share(t,i) = f36_regr_cap_share("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso(t,iso)))+f36_regr_cap_share("intercept")+p36_share_calibration(i);
 );
-
-* non-MAgPIE labor costs
-p36_nonmagpie_labor_costs(t,i) = (f36_unspecified_subsidies(t,i) + f36_nonmagpie_factor_costs(t,i)) * (1-p36_cost_share(t,i));
