@@ -20,8 +20,3 @@ q36_employment(i2) .. v36_employment(i2)
 *' labor costs from crop production (see [38_factor_costs]) and livestock production 
 *' (see [70_livestock]), and some labor costs for crop and livestock production 
 *' which are not covered by MAgPIE.
-
-
-as well as the labor cost share of subsidies and from livestock
-*' categories not covered by MAgPIE (i.e. wool, beeswax, honey, silk-worms), which 
-*' are both kept constant for future years. 
