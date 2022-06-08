@@ -8,7 +8,7 @@
 
 *' @title Employment
 
-*' @description This module is used to calculate agricultural employment in 
+*' @description This module calculates agricultural employment in 
 *' crop and livestock production. 
 
 *' @authors Debbora Leip

@@ -6,17 +6,19 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description This realization calculates agricultural employment based
-*' on it's relation to labor costs. It therefore depends on the labor costs
-*' calculated in the modules [38_factor_costs] and [70_livestock], but does 
-*' not affect resulting total costs or production patterns.
+*' on it's relation to total labor costs (using projections of hourly 
+*' labor costs and hours workd per employed person). It therefore depends 
+*' on the labor costs calculated in the modules [38_factor_costs] and 
+*' [70_livestock], but does not affect resulting total costs or production 
+*' patterns.
 
 *' @limitations Labor availability is not seen as a limiting factor for
-*' agricultural production, the number of people employed is solely based
-*' on labor costs which scale with the amount of production. Furthermore, 
-*' hourly labor costs are projected into the future following current trends,
-*' while factor requirements for crops (i.e. labor + capital costs per production 
-*' unit) are kept constant. This means, that any increase in wages is assumed to 
-*' be matched by a corresponding increase in labor productivity. 
+*' agricultural production, as the number of people employed is directly linked
+*' to labor costs which scale with the amount of production. Furthermore, 
+*' hourly labor costs are projected into the future based on a regression with 
+*' GDP pc, while factor requirements for crops (i.e. labor + capital costs per 
+*' production unit) are kept constant. This means, that any increase in wages 
+*' is assumed to be matched by a corresponding increase in labor productivity. 
 
 
 *####################### R SECTION START (PHASES) ##############################

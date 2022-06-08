@@ -9,7 +9,11 @@
 *' @equations
 
 *' Employment is calculated as total labor costs devided by hourly labor costs and 
-*' average hours worked per employed person per year
+*' average hours worked per employed person per year. Total labor costs include
+*' labor costs from crop production (see [38_factor_costs]) and livestock production 
+*' (see [70_livestock]), as well as the labor cost share of subsidies and from livestock
+*' categories not covered by MAgPIE (i.e. wool, beeswax, honey, silk-worms), which 
+*' are both kept constant over time. 
 * excluding labor costs for crop residues (as this is not include in ILO empl. data)
 * and fish (as we cannot calibrate labor costs for fish to employment data)
 

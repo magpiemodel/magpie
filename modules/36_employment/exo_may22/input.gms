@@ -6,25 +6,25 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 
-table f36_weekly_hours(t_all,i) Historical values of average weekly hours worked per person in agriculture
+table f36_weekly_hours(t_all,i) Historical values of average weekly hours worked per person in agriculture (h per week)
 $ondelim
 $include "./modules/36_employment/exo_may22/input/f36_weekly_hours.csv"
 $offdelim
 ;
 
-table f36_weekly_hours_iso(t_all,iso) Historical values of average weekly hours worked per person in agriculture on iso level
+table f36_weekly_hours_iso(t_all,iso) Historical values of average weekly hours worked per person in agriculture on iso level (h per week)
 $ondelim
 $include "./modules/36_employment/exo_may22/input/f36_weekly_hours_iso.csv"
 $offdelim
 ;
 
-table f36_hist_hourly_costs(t_all,iso) Parameters for regression of hourly labor costs with GDPpcMER
+table f36_hist_hourly_costs(t_all,iso) Historical values of hourly labor costs in agriculture (USD05MER per h)
 $ondelim
 $include "./modules/36_employment/exo_may22/input/f36_historic_hourly_labor_costs.csv"
 $offdelim
 ;
 
-parameter f36_regr_hourly_costs(reg36) Parameters for regression of hourly labor costs with GDPpcMER
+parameter f36_regr_hourly_costs(reg36) Parameters for regression of hourly labor costs with GDPpcMER 
 /
 $ondelim
 $include "./modules/36_employment/exo_may22/input/f36_regression_hourly_labor_costs.csv"
@@ -32,19 +32,19 @@ $offdelim
 /
 ;
 
-table f36_historic_ag_empl(t_all,iso) Historical values of mio. people employed in agruculture
+table f36_historic_ag_empl(t_all,iso) Historical values of people employed in agruculture (mio. people)
 $ondelim
 $include "./modules/36_employment/exo_may22/input/f36_historic_ag_employment.csv"
 $offdelim
 ;
 
-table f36_unspecified_subsidies(t_all,i) Factor cost share of unspecified subsidies not included in MAgPIE labor costs
+table f36_unspecified_subsidies(t_all,i) Factor cost share of unspecified subsidies not included in MAgPIE labor costs (mio. USD05MER)
 $ondelim
 $include "./modules/36_employment/exo_may22/input/f36_unspecified_subsidies.csv"
 $offdelim
 ;
 
-table f36_nonmagpie_factor_costs(t_all,i) Factor cost share of VoP from ag commodities not mapped to MAgPIE
+table f36_nonmagpie_factor_costs(t_all,i) Factor cost share of VoP from ag commodities not mapped to MAgPIE (mio. USD05MER)
 $ondelim
 $include "./modules/36_employment/exo_may22/input/f36_nonmagpie_factor_costs.csv"
 $offdelim
