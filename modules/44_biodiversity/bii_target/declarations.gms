@@ -14,9 +14,9 @@ positive variables
 ;
 
 parameters
- p44_bii_target(t,biome44)				Interpolated target values for BII over time (1)
- p44_start_value(biome44)				Start value for BII (1)
- p44_target_value(biome44)				Target value for BII (1)
+ p44_bii_lower_bound(t,biome44)			Interpolated lower bound for BII over time (1)
+ p44_start_value(biome44)				Start value for BII lower bound (1)
+ p44_target_value(biome44)				Target value for BII lower bound (1)
 ;
 
 equations
