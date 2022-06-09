@@ -5,6 +5,9 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+scalars
+s36_weeks_in_year number of weeks in a year  / 52.1429 /
+;
 
 table f36_weekly_hours(t_all,i) Historical values of average weekly hours worked per person in agriculture (h per week)
 $ondelim

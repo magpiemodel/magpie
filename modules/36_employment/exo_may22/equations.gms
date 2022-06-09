@@ -13,7 +13,7 @@
 
 q36_employment(i2) .. v36_employment(i2)
                               =e= (vm_cost_prod_crop(i2,"labor") + vm_cost_prod_livst(i2,"labor") + sum(ct,p36_nonmagpie_labor_costs(ct,i2))) *
-                                        (1 / sum(ct,f36_weekly_hours(ct,i2)*52.1429*p36_hourly_costs(ct,i2)));
+                                        (1 / sum(ct,f36_weekly_hours(ct,i2)*s36_weeks_in_year*p36_hourly_costs(ct,i2)));
 
 *' Employment is calculated as total labor costs devided by hourly labor costs and 
 *' average hours worked per employed person per year. Total labor costs include
