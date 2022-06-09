@@ -14,9 +14,9 @@ if(m_year(t) = s44_start_year AND s44_bii_lower_bound > 0,
 * Linear increase of BII target values at biome level from start year to target year, and constant values thereafter.
 	p44_bii_lower_bound(t2,biome44) = p44_start_value(biome44) + ((m_year(t2) - s44_start_year) / (s44_target_year - s44_start_year)) * (p44_target_value(biome44) - p44_start_value(biome44));
 	p44_bii_lower_bound(t2,biome44)$(m_year(t2) > s44_target_year) = p44_target_value(biome44);
-	if(c44_bii_nodecrease = 1,
+	if(c44_bii_decrease = 0,
 		p44_bii_lower_bound(t2,biome44)$(v44_bii.l(biome44) >= p44_target_value(biome44)) = v44_bii.l(biome44);		
-	elseif c44_bii_nodecrease = 0,
+	elseif c44_bii_decrease = 1,
 		p44_bii_lower_bound(t2,biome44)$(v44_bii.l(biome44) >= p44_target_value(biome44)) = p44_target_value(biome44);
 	);
 	p44_bii_lower_bound(t2,biome44)$(p44_bii_lower_bound(t2,biome44) >= 1) = 1;
