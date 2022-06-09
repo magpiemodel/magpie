@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-if(m_year(t) = s44_start_year AND s44_bii_lower_bound > 0,
+if(m_year(t) = s44_start_year,
 * The start value for the linear interpolation is the BII at biome level in the start year.
 	p44_start_value(biome44) = v44_bii.l(biome44);
 * The target value for the linear interpolation is the lower bound defined in `s44_bii_lower_bound`.
