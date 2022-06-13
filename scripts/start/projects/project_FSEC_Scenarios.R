@@ -314,7 +314,7 @@ landsparing_transformation <- function(cfg) {
 ### (15) Peatland transformation ###
 peatland_transformation <- function(cfg) {
   # peatland protection via pricing
-  # cfg$gms$c56_emis_policy <- "sdp_peatland"
+  cfg$gms$c56_emis_policy <- "sdp_peatland"
   # peatland restoration
   cfg$gms$s58_rewetting_switch <- "Inf"
 
