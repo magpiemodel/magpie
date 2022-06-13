@@ -47,8 +47,6 @@ general_settings <- function(title) {
   cfg$gms$c56_emis_policy         <- "none"
   # ghg price setting (only relevant when activated by c56_emis_policy)
   cfg$gms$c56_pollutant_prices    <- "R21M42-SDP-PkBudg1000"
-  # no peatland GHG emission pricing
-  cfg$gms$s56_peatland_policy     <- "0"
   # residue on field burning is set to "constant"
   cfg$gms$c18_burn_scen           <- "constant"
   # C price driven afforestation is off by default
