@@ -17,9 +17,9 @@ gms$c21_trade_liberalization;;;;l908080r807070;l909090r808080;l909595r809090;l90
 gms$c22_protect_scenario;;;;none;none;none;none;none;BH;none;BH_IFL;BH;;;;;;;BH;;none;none;none;none;none;BH_IFL;BH_IFL;BH_IFL;BH_IFL;BH_IFL;;;;;;;;;
 gms$c22_protect_scenario_noselect;;;;;;;;;;;;;;;;;;;;;;;;;;none;none;BH_IFL;none;BH_IFL;;;;;;;;;
 gms$c30_bioen_water;;;;rainfed;rainfed;rainfed;rainfed;rainfed;rainfed;all;rainfed;rainfed;;;;;;;rainfed;;;;;;;;;;;;;;;;;;;;
-gms$s30_set_aside_shr;;;;0;0;0;0;0;0;0;0;0.2;;;;;;;0;;;;;;;0.2;0.2;0.2;0.2;0.2;;;;;;;;;
-gms$s30_set_aside_shr_noselect;;;;;;;;;;;;;;;;;;;;;;;;;;0;0;0.2;0;0.2;;;;;;;;;
-gms$c30_set_aside_target;;;;none;none;none;none;none;none;none;none;by2030;;;;;;;none;;;;;;;by2030;by2030;by2030;by2030;by2030;;;;;;;;;
+gms$s30_snv_shr;;;;0;0;0;0;0;0;0;0;0.2;;;;;;;0;;;;;;;0.2;0.2;0.2;0.2;0.2;;;;;;;;;
+gms$s30_snv_shr_noselect;;;;;;;;;;;;;;;;;;;;;;;;;;0;0;0.2;0;0.2;;;;;;;;;
+gms$c30_snv_target;;;;none;none;none;none;none;none;none;none;by2030;;;;;;;none;;;;;;;by2030;by2030;by2030;by2030;by2030;;;;;;;;;
 gms$c31_past_suit_scen;;;;ssp126;ssp245;ssp370;ssp460;ssp585;;;;;;;;;;;;;;;;;;;;;;;;;;ssp126;ssp126;ssp245;ssp460;ssp370;ssp585
 gms$s32_aff_plantation;;;;0;0;0;0;0;0;1;0;0;;;;;;;0;;;;;;;;;;;;;;;;;;;;
 gms$s32_aff_bii_coeff;;;;0;0;0;0;0;0;1;0;0;;;;;;;0;;;;;;;;;;;;;;;;;;;;
