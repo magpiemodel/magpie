@@ -311,11 +311,12 @@ landsparing_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (15) Land and water sparing transformation ###
+### (15) Peatland transformation ###
 peatland_transformation <- function(cfg) {
-  # peatland protection
-  cfg$gms$s56_peatland_policy	 <- "1"
-  cfg$gms$s58_rewetting_switch <- "Inf" # discuss with Florian
+  # peatland protection via pricing
+  # cfg$gms$c56_emis_policy <- "sdp_peatland"
+  # peatland restoration
+  cfg$gms$s58_rewetting_switch <- "Inf"
 
   return(cfg)
 }
