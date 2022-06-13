@@ -47,12 +47,6 @@ $include "./modules/70_livestock/fbask_jan16/input/f70_capit_liv_regr.csv"
 $offdelim
 ;
 
-table f70_cost_regr_regional(i,kap,cost_regr) Factor requirements livestock (USD04 per tDM (A) and USD (B))
-$ondelim
-$include "./modules/70_livestock/fbask_jan16/input/f70_capit_liv_regr_regional.cs3"
-$offdelim
-;
-
 parameter f70_slaughter_feed_share(t_all,i,kap,attributes,feed_scen70) Share of feed that is incorprated in animal biomass (1)
 /
 $ondelim
@@ -79,6 +73,18 @@ $offdelim
 table f70_hist_cap_share(t_all,i) Historical capital share
 $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_hist_cap_share.csv"
+$offdelim
+;
+
+table f70_hist_factor_costs_livst(i,kli) Historical factor costs in livestock production (mio. USD05MER)
+$ondelim
+$include "./modules/70_livestock/fbask_jan16/input/f70_hist_factor_costs_livst.cs3"
+$offdelim
+;
+
+table f70_hist_prod_livst(i,kli,attributes) Historical production quantity of livestock products (mio. t)
+$ondelim
+$include "./modules/70_livestock/fbask_jan16/input/f70_hist_prod_livst.csv"
 $offdelim
 ;
 
