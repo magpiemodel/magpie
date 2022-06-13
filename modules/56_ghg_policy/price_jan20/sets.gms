@@ -94,7 +94,8 @@ sets
       all_vegc,
       redd_vegc,
       redd+_vegc,
-      redd+natveg_vegc /
+      redd+natveg_vegc,
+      sdp_peatland /
 
 ;
 *######################### R SECTION END (SETS) ################################

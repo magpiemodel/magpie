@@ -23,8 +23,9 @@
 
 *' This realisation also includes the option to reserve a minimum semi-natural
 *' vegetation share within the total available cropland for other land cover
-*' classes (by a given target year), in order to provide species habitats and
-*' to benefit from ecosystem ervices in agricultural landscapes.
+*' classes, including grassland, forest, and other land (by a given target year),
+*' in order to provide species habitats and to benefit from ecosystem ervices in
+*' agricultural landscapes.
 
 *' @limitations There are currently no known limitations of this realization.
 

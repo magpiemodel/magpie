@@ -23,11 +23,11 @@ vm_area.up(j,bioen_type_30,bioen_water_30)=Inf;
 *' @stop
 
 *' @code
-*' Set aside cropland policy is fading in after 2020
+*' Minimum semi-natural vegetation (SNV) share is fading in after 2020
 p30_avl_cropland(t,j) = f30_avl_cropland(j,"%c30_marginal_land%") *
-	(1 - f30_scenario_fader(t,"%c30_set_aside_target%") *
-	(s30_set_aside_shr * sum(cell(i,j), p30_region_setaside_shr(i))
-	+ s30_set_aside_shr_noselect * sum(cell(i,j), 1-p30_region_setaside_shr(i))));
+	(1 - f30_scenario_fader(t,"%c30_snv_target%") *
+	(s30_snv_shr * sum(cell(i,j), p30_region_snv_shr(i))
+	+ s30_snv_shr_noselect * sum(cell(i,j), 1-p30_region_snv_shr(i))));
 *' @stop
 
 * only activate constraints which are binding
