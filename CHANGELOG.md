@@ -45,6 +45,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **modules** Moved interface `vm_carbon_stock` from 52_carbon to 56_ghg_policy
  - **scripts** scripts/output/extra/emulator.R Remove dependency on deprecated R package "magpie"
 - **56_ghg_policy** Deactivated GHG emission policies were not accounted for in the MACCs module. This has been corrected by an extension of the interface `im_pollutant_prices`, which now has an additional dimension for emission sources `emis_source`. In this context some equations in `56_ghg_policy` have been simplified (sets: `emis_source_reg`, `emis_source_cell`). Also, GHG emissions from peatlands have been fully integrated into `56_ghg_policy`.
+- **42_water_demand** Added new input data on pumping costs for India, equation to calculate water costs and scalars for policy shocks
+- **config.cfg** Added paths to input files for India country analysis 
 
 ### added
 - **scripts** output/projects/FSEC_StevenLord.R to create output for Steven Lord in the FSEC context
