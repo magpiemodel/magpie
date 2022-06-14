@@ -145,52 +145,52 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-*
+* 
 * Used data set: rev4.72_h12_magpie.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-*
+* md5sum: e83036d8f33e54a3077cf7fc7d8838cc
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* 
 * Used data set: rev4.72_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-*
+* md5sum: 3d997a627618164d393e7a93495ee7cc
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* 
 * Used data set: rev4.72_h12_validation.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-*
+* md5sum: b03a100d043b3dc2c198cf115fe4b696
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* 
 * Used data set: additional_data_rev4.21.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-*
+* md5sum: f26b5f707f82f04b5dd3c87ff1a47509
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* 
 * Used data set: calibration_H12_per_ton_fao_may22_28May22.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/calibration
-*
+* md5sum: f6bf26be99c5dbd29e13a38af38c0d31
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* 
 * Low resolution: c200
 * High resolution: 0.5
-*
+* 
 * Total number of cells: 200
-*
+* 
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *     6   23    7    6    1   43   27    7   11   12   37   20
-*
+* 
 * Regionscode: 62eff8f7
-*
+* 
 * Regions data revision: 4.72
-*
+* 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
 * * Revision: 4.72
-*
+* 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
 * * Regionscode: 62eff8f7
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
-*
-*
-* Last modification (input data): Wed Jun  1 12:09:49 2022
+* 
+* 
+* Last modification (input data): Tue Jun 14 12:17:56 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
