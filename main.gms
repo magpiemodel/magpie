@@ -146,25 +146,25 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.72_h12_magpie.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Used data set: rev4.72_0306_indiaYields_05_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* md5sum: c735fdc2f65969e462227eb9f9c7ea75
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.72_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Used data set: rev4.72_0306_indiaYields_05_h12_magpie.tgz
+* md5sum: cf947af6f5e6693df5391328a2fff82d
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.72_h12_validation.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Used data set: rev4.72_0306_indiaYields_05_h12_validation.tgz
+* md5sum: 62408cea2b4575bf139ff82fba158000
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev4.14.tgz
-* md5sum: 38265f213ccad9c977e5161d1ea4acdf
-* Repository: /p/projects/landuse/data/input/archive
+* Used data set: calibration_H12_mixed_feb17_18Jan22.tgz
+* md5sum: 8b2d32a6d452db5c98791d3c63a4685c
+* Repository: /p/projects/landuse/data/input/calibration
 * 
-* Used data set: calibration_H12_sticky_feb18_free_18Jan22.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Used data set: additional_data_rev4.08.tgz
+* md5sum: d5ef6b0e76748e9347361f5d87a4cba6
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -190,7 +190,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Fri Jun  3 09:51:19 2022
+* Last modification (input data): Fri Jun  3 10:51:38 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -216,7 +216,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  2504_yield50_default_cost005cent
+$setglobal c_title  0306_doublepc_indiaYields
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /

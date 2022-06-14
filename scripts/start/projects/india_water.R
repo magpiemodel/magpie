@@ -15,44 +15,13 @@
 ######################################
 
 
-##Default with no pumping cost settings
-source("scripts/start_functions.R")
-source("config/default.cfg")
-
-# short description of the actual run
-cfg$title <- "0306_default"
-
-#Changing values of all pumping costs to 0
-##Increasing pumping costs to 1 cent
-cfg$gms$s42_multiplier <- 0
-
-#Download input data
-cfg$force_download <- TRUE
-
-start_run(cfg, codeCheck=FALSE)
-
-####################################################################333
-##Default run with no India yield but pumping cost
-
-source("scripts/start_functions.R")
-source("config/default.cfg")
-
-# short description of the actual run
-cfg$title <- "0306_default_pc"
-##Default input data
-
-cfg$force_download <- TRUE
-
-start_run(cfg, codeCheck=FALSE)
-
-####################################################################333
 ##Default India data run
 
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # short description of the actual run
-cfg$title <- "_0306_pc_indiaYields"
+cfg$title <- "0306_pc_indiaYields"
 
 cfg$input <- c(cellular = "rev4.72_0306_indiaYields_05_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
         regional = "rev4.72_0306_indiaYields_05_h12_magpie.tgz",
@@ -75,7 +44,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 # short description of the actual run
-cfg$title <- "_0306_doublepc_indiaYields"
+cfg$title <- "0306_doublepc_indiaYields"
 
 cfg$input <- c(cellular = "rev4.72_0306_indiaYields_05_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
         regional = "rev4.72_0306_indiaYields_05_h12_magpie.tgz",
