@@ -30,6 +30,7 @@ p36_nonmagpie_labor_costs(t,i) = (f36_unspecified_subsidies(t,i) + f36_nonmagpie
 *' @stop
 
 * historic hourly labor costs for t_past, calibrated regression values based on GDPpcMER for future years
+* A threshold of 0.1$/h is used in the regression to avoid too low or negative hourly labor costs.
 if (sum(sameas(t_past,t),1) = 1,
 	p36_hourly_costs_iso(t,iso) = f36_hist_hourly_costs(t,iso)
 else

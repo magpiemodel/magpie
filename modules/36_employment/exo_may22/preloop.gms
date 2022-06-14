@@ -8,4 +8,4 @@
 * get calibration factors and aggregation weight
 p36_calibration_hourly_costs(iso) = sum(t_past$(ord(t_past) eq card(t_past)), f36_hist_hourly_costs(t_past,iso)-(im_gdp_pc_mer_iso(t_past,iso)
 																				*f36_regr_hourly_costs("slope")+f36_regr_hourly_costs("intercept")));
-p36_total_hours_worked(iso) = sum(t_past$(ord(t_past) eq card(t_past)), f36_historic_ag_empl(t_past,iso)*f36_weekly_hours_iso(t_past,iso)*52.1429); 
+p36_total_hours_worked(iso) = sum(t_past$(ord(t_past) eq card(t_past)), f36_historic_ag_empl(t_past,iso)*f36_weekly_hours_iso(t_past,iso)*s36_weeks_in_year); 

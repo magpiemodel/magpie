@@ -29,7 +29,7 @@ parameters
 
  p38_croparea_start(j,w,kcr)           Agricultural land initialization area (mio. ha)
 
- i38_fac_req(t_all,i,kcr)              Regional or gloal factor requirements (USD05MER per tDM)
+ i38_fac_req(t_all,i,kcr)              Regional or global factor requirements (USD05MER per tDM)
 ;
 
 
