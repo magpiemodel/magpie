@@ -9,6 +9,6 @@ v44_bii.l(biome44) = 0.75;
 
 v44_bii.fx(biome44)$(sum(j, f44_biome(j,biome44)) = 0) = 0;
 v44_bii_missing.fx(biome44)$(sum(j, f44_biome(j,biome44)) = 0) = 0;
-p44_bii_target(t,biome44) = 0;
+p44_bii_lower_bound(t,biome44) = 0;
 
 vm_bv.l(j,landcover44,potnatveg) = 0;
