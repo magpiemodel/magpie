@@ -59,6 +59,10 @@ general_settings <- function(title) {
   #cfg$gms$s13_max_gdp_shr         <- 0.02
   #cfg$gms$c35_aolc_policy         <- "base" # disable AOLC policy for China
 
+  # Regional factor requirement costs (crop and livestock)
+  #cfg$gms$c38_fac_req <- "reg"
+  #cfg$gms$c70_fac_req_regr <- "reg"
+
   return(cfg)
 }
 
