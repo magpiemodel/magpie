@@ -117,14 +117,15 @@ getNames(urban_land_hr) <- "urban"
 # account for country-specific SNV shares in post-processing
 iso <- readGDX(gdx, "iso")
 snv_pol_iso <- readGDX(gdx,"policy_countries30")
-snv_pol_select <- readGDX(gdx, "s30_snv_shr")
-snv_pol_noselect <- readGDX(gdx, "s30_snv_shr_noselect")
+snv_pol_select <- readGDX(gdx, "s30_snv_shr", "s30_set_aside_shr")
+snv_pol_noselect <- readGDX(gdx, "s30_snv_shr_noselect", "s30_set_aside_shr_noselect")
 snv_pol_shr <- new.magpie(iso, fill = snv_pol_noselect)
 snv_pol_shr[snv_pol_iso,,] <- snv_pol_select
 
 avl_cropland_hr <- file.path(outputdir, "avl_cropland_0.5.mz")       # available cropland (at high resolution)
 marginal_land <- cfg$gms$c30_marginal_land                      # marginal land scenario
 target_year <- cfg$gms$c30_snv_target                     # target year of SNV policy (default: "none")
+if(is.null(target_year)){target_year <- cfg$gms$c30_set_aside_target}
 snv_pol_fader  <- readGDX(gdx,"f30_policy_fader", format="first_found")[,,target_year]
 
 # Start interpolation (use interpolateAvlCroplandWeighted from luscale)
