@@ -1,8 +1,6 @@
 * list of files that are required here
-protect_area.cs3
 npi_ndc_ad_aolc_pol.cs3
 f35_forest_disturbance_share.cs4
 f35_forest_lost_share.cs3
-f35_protection_fader.csv
 f35_gs_relativetarget.cs4
-avl_land_t_iso.cs3
+

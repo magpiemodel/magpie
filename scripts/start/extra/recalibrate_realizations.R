@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2022 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -18,34 +18,24 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-realizations<-c("sticky_feb18","mixed_feb17","fixed_per_ton_mar18") #"sticky_labor" is very similar to sticky_feb18. No extra calibration needed.
+realizations<-c("mixed_reg_feb17","per_ton_fao_may22","sticky_feb18") #"sticky_labor" is very similar to sticky_feb18. No extra calibration needed.
 type<-NULL
-
 
 for(r in realizations){
 
-    type<-if (r=="sticky_feb18" | r=="sticky_labor") c("free","dynamic") else "_"
-
-    for(t in type){
-
       cfg$results_folder <- "output/:title:"
       cfg$recalibrate <- TRUE
-      cfg$recalibrate_landconversion_cost <- "ifneeded"
+      cfg$recalibrate_landconversion_cost <- TRUE
 
-      cfg$title <- if(r == "sticky_feb18") paste("calib_run",r,t,sep="_")  else paste("calib_run",r,sep="_") 
+      cfg$title <-  paste("calib_run",r,sep="_")
 
       cfg$output <- c("rds_report","validation_short")
-      cfg$force_replace <- TRUE
+      cfg$force_download <- TRUE
 
       cfg$gms$factor_costs     <-   r
-      cfg$gms$c38_sticky_mode  <-   t
 
-      if (t=="dynamic"){
-      cfg$gms$c17_prod_init <- "off"
-      }
 
 
       start_run(cfg)
-      magpie4::submitCalibration(paste("H12",r,t,sep="_"))
+      magpie4::submitCalibration(paste("H12",r,sep="_"))
     }
-}
