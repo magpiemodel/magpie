@@ -104,6 +104,6 @@ $offdelim
 
 table f30_scenario_fader(t_all,policy_target30) Fader for scenario implementation speed (unitless)
 $ondelim
-$include "./modules/30_crop/rotation_apr22/input/f30_policy_fader.csv"
+$include "./modules/30_crop/rotation_apr22/input/f30_scenario_fader.csv"
 $offdelim
 ;

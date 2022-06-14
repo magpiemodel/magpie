@@ -98,8 +98,8 @@ $include "./modules/30_crop/endo_apr21/input/avl_cropland_iso.cs3"
 $offdelim
 ;
 
-table f30_policy_fader(t_all,policy_target30) Fader for cropland policies (unitless)
+table f30_scenario_fader(t_all,policy_target30) Fader for cropland policies (unitless)
 $ondelim
-$include "./modules/30_crop/endo_apr21/input/f30_policy_fader.csv"
+$include "./modules/30_crop/endo_apr21/input/f30_scenario_fader.csv"
 $offdelim
 ;
