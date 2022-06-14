@@ -6,6 +6,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 vm_emission_costs.scale(i) = 10e7;
-v56_emission_cost.scale(i,emis_source) = 10e4;
+v56_emission_cost.scale(i,emis_source) = 10e7;
 vm_carbon_stock.scale(j,land,c_pools,stockType) = 10e3;
 v56_emis_pricing.scale(i,emis_source,pollutants) = 10e8;
