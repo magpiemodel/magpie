@@ -37,7 +37,7 @@ start_run(cfg,codeCheck=FALSE)
 #               cellular    = "rev4.68_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
 #               validation  = "rev4.68_h12_validation.tgz",
 #               additional  = "additional_data_rev4.18.tgz",
-#               calibration = "calibration_H12_sticky_feb18_dynamic_18Jan22.tgz")
+#               calibration = "calibration_H12_sticky_feb18_dynamic_rotation_14Jun22.tgz")
 
 #cfg$gms$c38_sticky_mode <- "dynamic"
 #start_run(cfg,codeCheck=FALSE)
@@ -50,9 +50,12 @@ cfg$gms$c30_rotation_scenario = "default"
 #cfg$qos <- "priority"
 cfg$recalibrate <- TRUE
 cfg$recalibrate_landconversion_cost <- TRUE
+cfg$recalibrate <- FALSE
+cfg$recalibrate_landconversion_cost <- FALSE
 start_run(cfg,codeCheck=FALSE)
 magpie4::submitCalibration("H12_sticky_feb18_dynamic_rotation")
 cfg$recalibrate <- FALSE
+cfg$recalibrate_landconversion_cost <- FALSE
 
 for (scenario in c("none","default","fallow","legumes","agroforestry","agroecology")){
   for (byyear in c("by2030","by2050")){
