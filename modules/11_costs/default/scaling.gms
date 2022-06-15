@@ -5,6 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_cost_glo.scale = 10e8;
-v11_cost_reg.scale(i) = 10e6;
+vm_cost_glo.scale = 10e9;
+v11_cost_reg.scale(i) = 10e7;
 vm_cost_transp.scale(j,k) = 10e3;
