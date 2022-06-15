@@ -28,6 +28,8 @@ parameters
  p38_share_calibration(i)              Summation factor used to calibrate calculated capital shares with historical values (1)
 
  p38_croparea_start(j,w,kcr)           Agricultural land initialization area (mio. ha)
+
+ i38_fac_req(t_all,i,kcr)              Factor requirements (USD05MER per tDM)
 ;
 
 

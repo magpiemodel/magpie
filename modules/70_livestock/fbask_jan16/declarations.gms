@@ -31,6 +31,7 @@ parameters
  p70_feedscen_region_shr(t_all,i)                 Weighted share of region with regards to feed scenario of countries (1)
  p70_cost_share_livst(t,i,req)                    Capital and labor shares of the regional factor costs for plant production for livestock  (1)
  p70_cost_share_calibration(i)                    Summation factor used to calibrate calculated capital shares with historical values (1)
+ i70_cost_regr(i,kap,cost_regr)                   Regression coefficients for livestock factor requirements (1)
 ;
 
 

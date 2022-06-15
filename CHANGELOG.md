@@ -45,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **modules** Moved interface `vm_carbon_stock` from 52_carbon to 56_ghg_policy
  - **scripts** scripts/output/extra/emulator.R Remove dependency on deprecated R package "magpie"
 - **56_ghg_policy** Deactivated GHG emission policies were not accounted for in the MACCs module. This has been corrected by an extension of the interface `im_pollutant_prices`, which now has an additional dimension for emission sources `emis_source`. In this context some equations in `56_ghg_policy` have been simplified (sets: `emis_source_reg`, `emis_source_cell`). Also, GHG emissions from peatlands have been fully integrated into `56_ghg_policy`.
+- **09_drivers** changed `i09_gdp_pc_mer_iso` to `im_gdp_pc_mer_iso`
 
 ### added
 - **scripts** output/projects/FSEC_StevenLord.R to create output for Steven Lord in the FSEC context
@@ -67,6 +68,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **config** added cfg$gms$s70_past_mngmnt_factor_fix with default 2005 (previous default was 2010). The previous setting caused a strong spike in CO2 emissions from pasture expansion in SSA. With 2005, this can be avoided.
 - **38_factor_costs** mixed_reg_feb17 realization added. This realization includes differences in productions costs between irrigated and rainfed crops, with the option of regional differentiation as well. per_ton_fao_may22 realization added. This realization corresponds to the old sticky_feb18 free.
  - **44_biodiversity** added new realization `bii_target`, which calculates the BII at the level of 71 biomes and allows to set targets for BII (e.g. no decrease in the future)
+ - **36_employment** added new module to calculate agricultural employment. Includes one realization (`exo_may22`) in which employment is calculated based on the total labor costs (for crop and livestock production)
+ - **config and 38_factor_costs** added switch `c38_fac_req` to choose between global and regional crop factor requirements. The default is "glo" (which corresponds to the previous implementation)
+ - **config and 70_livestock** added switch `c70_fac_req_regr` to choose between global and regionally calibrated regression to calculate livestock factor requirements. The default is "glo" (which corresponds to the previous implementation)
 
 
 ### removed
