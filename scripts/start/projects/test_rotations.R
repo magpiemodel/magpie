@@ -27,7 +27,7 @@ cfg$gms$s13_max_gdp_shr <- 0.01
 
 cfg$results_folder <- "output/:title:"
 #cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
-prefix <- "rota_penalty14"
+prefix <- "rota_penalty17"
 
 cfg$title <- paste(prefix,"olddefault",sep="_")
 start_run(cfg,codeCheck=FALSE)
