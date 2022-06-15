@@ -19,7 +19,7 @@ codeCheck <- FALSE
 input <- c(regional    = "rev4.72FSECmodeling_e2bdb6cd_magpie.tgz",
            cellular    = "rev4.72FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
            validation  = "WARNINGS1_rev4.72FSECmodeling_e2bdb6cd_validation.tgz",
-           additional  = "additional_data_rev4.23.tgz",
+           additional  = "additional_data_rev4.26.tgz",
            calibration = "calibration_FSEC_07Jun22.tgz")
 
 # General settings:
@@ -28,7 +28,7 @@ general_settings <- function(title) {
   source("config/default.cfg")
 
   cfg$input       <- input
-  cfg$title       <- paste0("v4_", title)
+  cfg$title       <- paste0("v5_", title)
   cfg$recalibrate <- FALSE
   cfg$qos         <- "priority_maxMem"
   cfg$output      <- c(cfg$output #,
@@ -416,7 +416,7 @@ cfg <- airPollution_transformation(cfg = cfg)
 cfg <- soil_transformation(cfg = cfg)
 ### Emission policy must be set separately in full-SDP scenario
 # (because it would be overwritten in the different transformations)
-cfg$gms$c56_emis_policy <- "sdp_redd_soil"
+cfg$gms$c56_emis_policy <- "sdp_allnosoil" # To Do: change to sdp_all once soil runs feasible
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 #################################################
