@@ -8,8 +8,8 @@
 
 *' @equations
 
-* excluding labor costs for crop residues (as this is not include in ILO 
-* data on agricultural employment)
+* excluding labor costs for crop residues (as this is not include in the 
+* data on agricultural employment by the International Labour Organization)
 * and fish (as we cannot calibrate labor costs for fish to employment data)
 
 q36_employment(i2) .. v36_employment(i2)
