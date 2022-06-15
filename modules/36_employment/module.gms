@@ -8,8 +8,11 @@
 
 *' @title Employment
 
-*' @description This module calculates agricultural employment in 
-*' crop and livestock production. 
+*' @description This module is used to calculate hourly labor costs in agriculutre
+*' and the number of people employed in crop and livestock production. 
+*' The calculation is based on labor costs in crop and livestock production
+*' coming from [38_factor_costs] and [70_livestock], as well as GDP pc from
+*' [09_drivers]. 
 
 *' @authors Debbora Leip
 

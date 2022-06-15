@@ -35,7 +35,7 @@ parameters
  i38_ces_shr(j,kcr)						Share parameter for CES function (1)
  i38_ces_scale(j,kcr)					Scaling factor for total factor productivity (1)
  
- i38_fac_req(t_all,i,kcr)               Regional or global factor requirements (USD05MER per tDM)
+ i38_fac_req(t_all,i,kcr)               Factor requirements (USD05MER per tDM)
 ;
 
 scalars
