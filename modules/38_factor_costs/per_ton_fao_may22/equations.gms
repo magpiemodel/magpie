@@ -9,12 +9,12 @@
 
 
  q38_cost_prod_crop(i2,req) ..
-  vm_cost_prod_crop(i2,req) =e= sum(kcr, vm_prod_reg(i2,kcr) * f38_fac_req(kcr))* sum(ct,p38_cost_share(ct,i2,req));
+  vm_cost_prod_crop(i2,req) =e= sum(kcr, vm_prod_reg(i2,kcr) * sum(ct,i38_fac_req(ct,i2,kcr)))* sum(ct,p38_cost_share(ct,i2,req));
 
 
-*' The factor costs for crops `vm_cost_prod_crop` are  calculated as product of
-*' production quantity `vm_prod_reg` and crop-specific world average
-*' factor requirements per volume of production `f38_fac_req`.
+*' The factor costs for crops `vm_cost_prod_crop` are calculated as product of
+*' production quantity `vm_prod_reg` and crop-specific factor requirements
+*' (either global or regional averages) per volume of production `i38_fac_req`.
 *' The volume depending factor requirements, which remain fixed overtime, are obtained
 *' from FAO Value of Production, to which the USDA factor cost share out of total 
 *' costs was applied. Labor and capital costs are split by applying the corresponding

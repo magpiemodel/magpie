@@ -13,7 +13,7 @@ parameters
 
 * GDP in MER
   i09_gdp_mer_iso(t_all,iso)                   Income in market exchange rates (mio. USD05MER per yr)
-  i09_gdp_pc_mer_iso(t_all,iso)                Income in market exchange rates (mio. USD05MER per yr)
+  im_gdp_pc_mer_iso(t_all,iso)                 Income in market exchange rates (mio. USD05MER per yr)
   i09_gdp_mer_raw(t_all,i,pop_gdp_scen09)      Income in market exchange rates (mio. USD05MER per yr)
 
   i09_gdp_pc_mer_raw(t_all,i,pop_gdp_scen09)       Per capita income in market exchange rates (USD05MER per cap per yr)
