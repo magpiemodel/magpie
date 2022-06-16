@@ -28,7 +28,7 @@ general_settings <- function(title) {
   source("config/default.cfg")
 
   cfg$input       <- input
-  cfg$title       <- paste0("v5_", title)
+  cfg$title       <- paste0("v6_", title)
   cfg$recalibrate <- FALSE
   cfg$qos         <- "priority_maxMem"
   cfg$output      <- c(cfg$output #,
@@ -416,7 +416,7 @@ cfg <- airPollution_transformation(cfg = cfg)
 cfg <- soil_transformation(cfg = cfg)
 ### Emission policy must be set separately in full-SDP scenario
 # (because it would be overwritten in the different transformations)
-cfg$gms$c56_emis_policy <- "sdp_allnosoil" # To Do: change to sdp_all once soil runs feasible
+cfg$gms$c56_emis_policy <- "sdp_all" # To Do: change to sdp_all once soil runs feasible
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 #################################################

@@ -11,7 +11,7 @@ vm_carbon_stock.l(j,land,ag_pools,stockType) = fm_carbon_density("y1995",j,land,
 
 v56_emis_pricing.fx(i,emis_oneoff,pollutants)$(not sameas(pollutants,"co2_c")) = 0;
 *Test setting lower limit for emis_pricing to achieve feasibility
-*v56_emis_pricing.lo(i,emis_source,"co2_c") = -1e6;
+v56_emis_pricing.lo(i,emis_source,"co2_c") = -1e6;
 
 ****** Region price share for ghg policy of selective countries:
 * Country switch to determine countries for which ghg policy shall be applied.
