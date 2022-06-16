@@ -7,7 +7,7 @@
 
 * For calculation of waste trajectories for exogenous diets:
 if ((sameas(t,"y2010")),
-    p15_demand2intake_ratio_ref(i) = p15_demand2intake_ratio(t,i);
+    p15_demand2intake_ratio_ref(iso) = p15_demand2intake_ratio(t,iso);
 );
 
 *' The calibration parameter is added to the regression value.

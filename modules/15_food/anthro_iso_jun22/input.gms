@@ -221,20 +221,20 @@ $offdelim;
 
 *** Exogenous food demand scenarios
 
-table f15_intake_EATLancet(t_scen15,i,kcal_scen15,EAT_scen15,kfo)   EAT Lancet scenarios for food-specific intake (kcal per capita per day)
+table f15_intake_EATLancet(t_scen15,iso,kcal_scen15,EAT_scen15,kfo)   EAT Lancet scenarios for food-specific intake (kcal per capita per day)
 $ondelim
-$include "./modules/15_food/input/f15_intake_EATLancet.cs3"
+$include "./modules/15_food/input/f15_intake_EATLancet_iso.cs3"
 $offdelim;
 
-table f15_overcons_FAOwaste(i,kfo)   Ratio between food calorie supply and food intake based on FAO food waste shares (1)
+table f15_overcons_FAOwaste(iso,kfo)   Ratio between food calorie supply and food intake based on FAO food waste shares (1)
 $ondelim
-$include "./modules/15_food/input/f15_supply2intake_ratio_bottomup.cs3"
+$include "./modules/15_food/input/f15_supply2intake_ratio_bottomup_iso.cs3"
 $offdelim;
 
-parameter f15_calib_fsupply(i) Factor calibrating food supply as estimated from intake and FAO waste assumptions to FAO food supply (1)
+parameter f15_calib_fsupply(iso) Factor calibrating food supply as estimated from intake and FAO waste assumptions to FAO food supply (1)
 /
 $ondelim
-$include "./modules/15_food/input/f15_calib_factor_FAOfsupply.cs4"
+$include "./modules/15_food/input/f15_calib_factor_FAOfsupply_iso.cs4"
 $offdelim
 /;
 
