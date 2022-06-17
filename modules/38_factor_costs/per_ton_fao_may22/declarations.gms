@@ -16,6 +16,7 @@ vm_cost_prod_crop(i,req)        Regional factor costs of capital and labor for p
 parameter
 p38_cost_share(t,i,req)       Capital and labor shares of the regional factor costs for plant production   (1)
 p38_share_calibration(i)      Summation factor used to calibrate calculated capital shares with historical values (1)
+i38_fac_req(t_all,i,kcr)      Factor requirements (USD05MER per tDM)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

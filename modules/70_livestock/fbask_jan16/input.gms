@@ -5,7 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-
 $setglobal c70_feed_scen  ssp2
 *   options:    SSP: ssp1, ssp2, ssp3, ssp4, ssp5
 *               SDP: SDP, SDP_EI, SDP_MC, SDP_RC
@@ -18,6 +17,9 @@ $setglobal c70_feed_scen  ssp2
 *              lin_99-98-90pc_20_50-60-100, sigmoid_20pc_20_50, sigmoid_50pc_20_50, sigmoid_80pc_20_50
 $setglobal c70_cereal_scp_scen  constant
 $setglobal c70_foddr_scp_scen  constant
+
+$setglobal c70_fac_req_regr  glo
+* options: glo, reg
 
 scalars
   s70_pyld_intercept     Intercept of linear relationship determining pasture intensification (1)        / 0.24 /
@@ -71,6 +73,18 @@ $offdelim
 table f70_hist_cap_share(t_all,i) Historical capital share
 $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_hist_cap_share.csv"
+$offdelim
+;
+
+table f70_hist_factor_costs_livst(i,kli) Historical factor costs in livestock production (mio. USD05MER)
+$ondelim
+$include "./modules/70_livestock/fbask_jan16/input/f70_hist_factor_costs_livst.csv"
+$offdelim
+;
+
+table f70_hist_prod_livst(i,kli,attributes) Historical production quantity of livestock products (mio. t)
+$ondelim
+$include "./modules/70_livestock/fbask_jan16/input/f70_hist_prod_livst.cs3"
 $offdelim
 ;
 
