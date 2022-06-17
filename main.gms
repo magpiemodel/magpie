@@ -252,6 +252,7 @@ $setglobal forestry  dynamic_feb21
 $setglobal urban  exo_nov21
 $setglobal natveg  dynamic_feb21
 
+$setglobal employment  exo_may22
 $setglobal labor_prod  off
 $setglobal factor_costs  per_ton_fao_may22
 $setglobal landconversion  calib
