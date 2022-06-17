@@ -91,13 +91,9 @@ $macro m_sigmoid_interpol(input,start_year,target_year,start_value,target_value)
 * macro for simple carbon stocks
 $macro m_carbon_stock(land,carbon_density,item) \
             (land(j2,item) * sum(ct,carbon_density(ct,j2,item,ag_pools)))$(sameas(stockType,"actual")) + \
-            (land(j2,item) * sum(ct,carbon_density(ct,j2,item,ag_pools)))$(sameas(stockType,"actualNoAcEst")) + \
-            (land.l(j2,item) * sum(ct,carbon_density(ct,j2,item,ag_pools)))$(sameas(stockType,"previousLandPattern")) + \
-            (land(j2,item) * sum(pt,carbon_density(pt,j2,item,ag_pools)))$(sameas(stockType,"previousCarbonDensity"));
+            (land(j2,item) * sum(ct,carbon_density(ct,j2,item,ag_pools)))$(sameas(stockType,"actualNoAcEst"));
 
 * macro for carbon stocks with age classes
 $macro m_carbon_stock_ac(land,carbon_density,sets,sets_sub) \
             sum((&&sets), land(j2,&&sets) * sum(ct, carbon_density(ct,j2,&&sets,ag_pools)))$(sameas(stockType,"actual")) + \
-            sum((&&sets_sub), land(j2,&&sets_sub) * sum(ct, carbon_density(ct,j2,&&sets_sub,ag_pools)))$(sameas(stockType,"actualNoAcEst")) + \
-            sum((&&sets), land.l(j2,&&sets) * sum(ct, carbon_density(ct,j2,&&sets,ag_pools)))$(sameas(stockType,"previousLandPattern")) + \
-            sum((&&sets), land(j2,&&sets) * sum(pt, carbon_density(pt,j2,&&sets,ag_pools)))$(sameas(stockType,"previousCarbonDensity"));
+            sum((&&sets_sub), land(j2,&&sets_sub) * sum(ct, carbon_density(ct,j2,&&sets_sub,ag_pools)))$(sameas(stockType,"actualNoAcEst"));

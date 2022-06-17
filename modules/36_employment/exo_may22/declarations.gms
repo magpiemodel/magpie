@@ -26,10 +26,8 @@ parameters
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov36_labor_costs(t,i,kall,type) Labor costs (mio USDMER05  per yr)
- ov36_employment(t,i,type)       Number of people employed in agriculture (mio people)
- oq36_employment(t,i,type)       Regional agricultural emplyoment (mio people)
- oq36_labor_costs(t,i,kall,type) Regional agricultural labor costs per commodity (mio USDMER05)   
+ ov36_employment(t,i,type) Number of people employed in agriculture (mio. people)
+ oq36_employment(t,i,type) Regional agricultural emplyoment (mio. people)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

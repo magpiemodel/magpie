@@ -57,17 +57,9 @@ q59_som_pool_noncropland(j2, noncropland59) ..
 *' The soil carbon content is calculated as sum of actual topsoil pool
 *' and the reference soil carbon pool of the subsoil
 
-q59_carbon_soil(j2,pools59) ..
-                vm_carbon_stock(j2, pools59, "soilc","actual") =e=
+q59_carbon_soil(j2,pools59,stockType) ..
+                vm_carbon_stock(j2, pools59,"soilc",stockType) =e=
                     v59_som_pool(j2, pools59) + vm_land(j2, pools59) * sum(ct,i59_subsoilc_density(ct,j2));
-
-q59_carbon_soil2(j2,pools59) ..
-                vm_carbon_stock(j2, pools59, "soilc","previousLandPattern") =e=
-                    v59_som_pool(j2, pools59) + pcm_land(j2, pools59) * sum(ct,i59_subsoilc_density(ct,j2));
-
-q59_carbon_soil3(j2,pools59) ..
-                vm_carbon_stock(j2, pools59, "soilc","previousCarbonDensity") =e=
-                    v59_som_pool(j2, pools59) + vm_land(j2, pools59) * sum(pt,i59_subsoilc_density(pt,j2));
 
 *' The annual nitrogen release (or sink) for cropland soils is than calculated by the loss of soil organic carbon given by
 
