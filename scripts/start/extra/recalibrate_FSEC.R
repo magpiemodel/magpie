@@ -20,16 +20,16 @@ source("config/default.cfg")
 input <- c(regional    = "rev4.72FSECmodeling_e2bdb6cd_magpie.tgz",
            cellular    = "rev4.72FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
            validation  = "WARNINGS1_rev4.72FSECmodeling_e2bdb6cd_validation.tgz",
-           additional  = "additional_data_rev4.26.tgz",
-           calibration = "calibration_FSEC_07Jun22.tgz")
+           additional  = "additional_data_rev4.26_FSEC.tgz",
+           calibration = "calibration_FSEC_17Jun22.tgz")
 
-# General settings of FSEC global runs:
+# General settings:
 general_settings <- function(title) {
 
   source("config/default.cfg")
 
   cfg$input       <- input
-  cfg$title       <- paste0("v3_", title)
+  cfg$title       <- paste0("v7_", title)
   cfg$recalibrate <- FALSE
   cfg$qos         <- "priority_maxMem"
   cfg$output      <- c(cfg$output #,
@@ -53,19 +53,20 @@ general_settings <- function(title) {
   # C price driven afforestation is off by default
   cfg$gms$s56_c_price_induced_aff <- "0"
   # Soil organic carbon dynamics activated
-  cfg$gms$som                     <- "cellpool_aug16" # "cellpool_aug16"
+  cfg$gms$som                     <- "cellpool_aug16"
   # Cost module: sticky - dynamic mode
   cfg$gms$factor_costs            <- "sticky_feb18"
-  # Necessary to be feasible
-  #cfg$gms$s13_max_gdp_shr         <- 0.02
-  #cfg$gms$c35_aolc_policy         <- "base" # disable AOLC policy for China
+
+  # Regional factor requirement costs (crop and livestock)
+  cfg$gms$c38_fac_req             <- "reg"
+  cfg$gms$c70_fac_req_regr        <- "reg"
 
   return(cfg)
 }
 
 # -----------------------------------------------------------------------------------------------------------------
 # Calibration run
-cfg <- general_settings("calibration_FSEC_sticky_feb18_dynamic")
+cfg <- general_settings("calibration_FSEC_17Jun22")
 cfg$results_folder                  <- "output/:title:"
 cfg$recalibrate                     <- TRUE
 cfg$recalibrate_landconversion_cost <- TRUE
