@@ -6,10 +6,10 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars 
- s44_bii_target					Target value for global BII (1)									/ 0 /
- c44_bii_target_mode			BII target mode (binary)										/ 1 /
- s44_target_year				Year in which the BII target value is reached  (1)				/ 2100 /
- s44_start_year					Start year for interpolation towards BII target value (1) 		/ 2025 /
+ s44_bii_lower_bound			Lower bound for BII (1)											/ 0 /
+ c44_bii_decrease				Implementation of lower bound for BII (binary)					/ 1 /
+ s44_target_year				Year in which the BII lower bound is reached  (1)				/ 2100 /
+ s44_start_year					Start year for interpolation towards BII lower bound (1) 		/ 2025 /
  s44_cost_bii_missing			Technical costs for missing BII increase (USD per unit of BII)	/ 1000000 /
 ;
 
