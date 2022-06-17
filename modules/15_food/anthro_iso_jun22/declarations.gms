@@ -62,6 +62,7 @@ variables
 scalars
   s15_yeardiff                       Number of 5-year time intervalls between time steps (1)
   s15_count                          Loop counter for interpolating body height estimates between longer timesteps (1)
+  s15_run_diet_postprocessing        run diet postprocessing (1)
 ;
 
 parameters

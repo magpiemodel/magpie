@@ -5,14 +5,19 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+*' as include statements are not allowed within the if statements, we execute
+*' the if statement before, put the result in s15_run_diet_postprocessing,
+*' and then execute the if statement again within the included file:
+if (s15_run_diet_postprocessing = 1,
+
 *' This macro is executed twice, one after the presolve and once in the
 *' intersolve. It calibrates the values, includes exogenous diet modifications
 *' in the postprocessing and aggregates to regional level.
 
 * saving regression outcome for per capita food demand for different foods
-p15_kcal_regr(t, iso, kfo) = v15_kcal_regr.l(iso, kfo);
+  p15_kcal_regr(t, iso, kfo) = v15_kcal_regr.l(iso, kfo);
 * saving regression outcome for BMI shares
-p15_bmi_shr_regr(t,iso,sex,age,bmi_group15) = v15_bmi_shr_regr.l(iso,sex,age,bmi_group15);
+  p15_bmi_shr_regr(t,iso,sex,age,bmi_group15) = v15_bmi_shr_regr.l(iso,sex,age,bmi_group15);
 
 *' The calibration factor is added to the regression value.
    p15_kcal_pc_iso(t,iso,kfo) =
@@ -25,104 +30,104 @@ p15_bmi_shr_regr(t,iso,sex,age,bmi_group15) = v15_bmi_shr_regr.l(iso,sex,age,bmi
 
 
 * Substitution of ruminant beef with poultry:
-p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
-p15_kcal_pc_iso(t,iso,"livst_rum") =
-               p15_kcal_pc_iso_orig(t,iso,"livst_rum") * i15_ruminant_fadeout(t,iso);
-p15_kcal_pc_iso(t,iso,"livst_chick") = p15_kcal_pc_iso_orig(t,iso,"livst_chick")
-             + p15_kcal_pc_iso_orig(t,iso,"livst_rum") * (1- i15_ruminant_fadeout(t,iso));
+  p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
+  p15_kcal_pc_iso(t,iso,"livst_rum") =
+                 p15_kcal_pc_iso_orig(t,iso,"livst_rum") * i15_ruminant_fadeout(t,iso);
+  p15_kcal_pc_iso(t,iso,"livst_chick") = p15_kcal_pc_iso_orig(t,iso,"livst_chick")
+               + p15_kcal_pc_iso_orig(t,iso,"livst_rum") * (1- i15_ruminant_fadeout(t,iso));
 
 
 * Substitution of fish with poultry:
-p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
-p15_kcal_pc_iso(t,iso,"fish") =
-               p15_kcal_pc_iso_orig(t,iso,"fish") * i15_fish_fadeout(t,iso);
-p15_kcal_pc_iso(t,iso,"livst_chick") = p15_kcal_pc_iso_orig(t,iso,"livst_chick")
-             + p15_kcal_pc_iso_orig(t,iso,"fish") * (1-i15_fish_fadeout(t,iso));
+  p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
+  p15_kcal_pc_iso(t,iso,"fish") =
+                 p15_kcal_pc_iso_orig(t,iso,"fish") * i15_fish_fadeout(t,iso);
+  p15_kcal_pc_iso(t,iso,"livst_chick") = p15_kcal_pc_iso_orig(t,iso,"livst_chick")
+               + p15_kcal_pc_iso_orig(t,iso,"fish") * (1-i15_fish_fadeout(t,iso));
 
 
 * Fade-out of alcohol consumption without substitution:
 * (leads to inconsistencies with BMI estimates)
-p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
-p15_kcal_pc_iso(t,iso,"alcohol") =
-               p15_kcal_pc_iso_orig(t,iso,"alcohol") * i15_alcohol_fadeout(t,iso);
+  p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
+  p15_kcal_pc_iso(t,iso,"alcohol") =
+                 p15_kcal_pc_iso_orig(t,iso,"alcohol") * i15_alcohol_fadeout(t,iso);
 
 
 * Substitution of livestock products (without fish) with plant-based food commodities:
-p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
-p15_kcal_pc_iso_livestock_orig(t,iso) = sum(kfo_lp,p15_kcal_pc_iso(t,iso,kfo_lp));
-p15_kcal_pc_iso_plant_orig(t,iso) = sum(kfo_pp,p15_kcal_pc_iso(t,iso,kfo_pp));
+  p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
+  p15_kcal_pc_iso_livestock_orig(t,iso) = sum(kfo_lp,p15_kcal_pc_iso(t,iso,kfo_lp));
+  p15_kcal_pc_iso_plant_orig(t,iso) = sum(kfo_pp,p15_kcal_pc_iso(t,iso,kfo_pp));
 
-p15_livestock_kcal_structure_orig(t,iso,kfo_lp)$(p15_kcal_pc_iso_livestock_orig(t,iso)>0) =
-                               p15_kcal_pc_iso(t,iso,kfo_lp)
-                               /p15_kcal_pc_iso_livestock_orig(t,iso);
+  p15_livestock_kcal_structure_orig(t,iso,kfo_lp)$(p15_kcal_pc_iso_livestock_orig(t,iso)>0) =
+                                 p15_kcal_pc_iso(t,iso,kfo_lp)
+                                 /p15_kcal_pc_iso_livestock_orig(t,iso);
 
-p15_plant_kcal_structure_orig(t,iso,kfo_pp)$(p15_kcal_pc_iso_plant_orig(t,iso)>0) =
-                               p15_kcal_pc_iso(t,iso,kfo_pp)
-                               /p15_kcal_pc_iso_plant_orig(t,iso);
+  p15_plant_kcal_structure_orig(t,iso,kfo_pp)$(p15_kcal_pc_iso_plant_orig(t,iso)>0) =
+                                 p15_kcal_pc_iso(t,iso,kfo_pp)
+                                 /p15_kcal_pc_iso_plant_orig(t,iso);
 
-p15_kcal_pc_iso(t,iso,kfo_lp) = p15_livestock_kcal_structure_orig(t,iso,kfo_lp)
-               *p15_kcal_pc_iso_livestock_orig(t,iso)*i15_livestock_fadeout(t,iso);
-p15_kcal_pc_iso(t,iso,kfo_pp) = p15_plant_kcal_structure_orig(t,iso,kfo_pp)
-               *(p15_kcal_pc_iso_plant_orig(t,iso)
-               + p15_kcal_pc_iso_livestock_orig(t,iso) * (1-i15_livestock_fadeout(t,iso)));
+  p15_kcal_pc_iso(t,iso,kfo_lp) = p15_livestock_kcal_structure_orig(t,iso,kfo_lp)
+                 *p15_kcal_pc_iso_livestock_orig(t,iso)*i15_livestock_fadeout(t,iso);
+  p15_kcal_pc_iso(t,iso,kfo_pp) = p15_plant_kcal_structure_orig(t,iso,kfo_pp)
+                 *(p15_kcal_pc_iso_plant_orig(t,iso)
+                 + p15_kcal_pc_iso_livestock_orig(t,iso) * (1-i15_livestock_fadeout(t,iso)));
 
 
 * Substitution of ruminant meat and dairy products with plant-based food commodities:
-p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
-p15_kcal_pc_iso_rumdairy_orig(t,iso) = sum(kfo_rd,p15_kcal_pc_iso(t,iso,kfo_rd));
-p15_kcal_pc_iso_plant_orig(t,iso) = sum(kfo_pp,p15_kcal_pc_iso(t,iso,kfo_pp));
+  p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
+  p15_kcal_pc_iso_rumdairy_orig(t,iso) = sum(kfo_rd,p15_kcal_pc_iso(t,iso,kfo_rd));
+  p15_kcal_pc_iso_plant_orig(t,iso) = sum(kfo_pp,p15_kcal_pc_iso(t,iso,kfo_pp));
 
-p15_rumdairy_kcal_structure_orig(t,iso,kfo_rd)$(p15_kcal_pc_iso_rumdairy_orig(t,iso)>0) =
-                               p15_kcal_pc_iso(t,iso,kfo_rd)
-                               /p15_kcal_pc_iso_rumdairy_orig(t,iso);
+  p15_rumdairy_kcal_structure_orig(t,iso,kfo_rd)$(p15_kcal_pc_iso_rumdairy_orig(t,iso)>0) =
+                                 p15_kcal_pc_iso(t,iso,kfo_rd)
+                                 /p15_kcal_pc_iso_rumdairy_orig(t,iso);
 
-p15_plant_kcal_structure_orig(t,iso,kfo_pp)$(p15_kcal_pc_iso_plant_orig(t,iso)>0) =
-                               p15_kcal_pc_iso(t,iso,kfo_pp)
-                               /p15_kcal_pc_iso_plant_orig(t,iso);
+  p15_plant_kcal_structure_orig(t,iso,kfo_pp)$(p15_kcal_pc_iso_plant_orig(t,iso)>0) =
+                                 p15_kcal_pc_iso(t,iso,kfo_pp)
+                                 /p15_kcal_pc_iso_plant_orig(t,iso);
 
-p15_kcal_pc_iso(t,iso,kfo_rd) = p15_rumdairy_kcal_structure_orig(t,iso,kfo_rd)
-               *p15_kcal_pc_iso_rumdairy_orig(t,iso)*i15_rumdairy_fadeout(t,iso);
-p15_kcal_pc_iso(t,iso,kfo_pp) = p15_plant_kcal_structure_orig(t,iso,kfo_pp)
-               *(p15_kcal_pc_iso_plant_orig(t,iso)
-               + p15_kcal_pc_iso_rumdairy_orig(t,iso) * (1- i15_rumdairy_fadeout(t,iso)));
+  p15_kcal_pc_iso(t,iso,kfo_rd) = p15_rumdairy_kcal_structure_orig(t,iso,kfo_rd)
+                 *p15_kcal_pc_iso_rumdairy_orig(t,iso)*i15_rumdairy_fadeout(t,iso);
+  p15_kcal_pc_iso(t,iso,kfo_pp) = p15_plant_kcal_structure_orig(t,iso,kfo_pp)
+                 *(p15_kcal_pc_iso_plant_orig(t,iso)
+                 + p15_kcal_pc_iso_rumdairy_orig(t,iso) * (1- i15_rumdairy_fadeout(t,iso)));
 
 *** Substitution of ruminant meat and dairy products (kfo_rd) with single-cell protein (SCP) based on protein/cap/day
-i15_protein_to_kcal_ratio(t,kfo) =  f15_nutrition_attributes(t,kfo,"protein")/f15_nutrition_attributes(t,kfo,"kcal");
+  i15_protein_to_kcal_ratio(t,kfo) =  f15_nutrition_attributes(t,kfo,"protein")/f15_nutrition_attributes(t,kfo,"kcal");
 * Before the substitution, kfo_rd is converted from kcal/cap/day to g protein/cap/day
 * using i15_protein_to_kcal_ratio(t,kfo_rd).
 * After the substitution of kfo_rd with SCP (1-i15_rumdairy_scp_fadeout), SCP is converted
 * back to kcal/cap/day using i15_protein_to_kcal_ratio(t,"scp").
-p15_kcal_pc_iso(t,iso,"scp") = p15_kcal_pc_iso(t,iso,"scp") +
-	sum(kfo_rd, p15_kcal_pc_iso(t,iso,kfo_rd) * (1-i15_rumdairy_scp_fadeout(t,iso)) *
-	i15_protein_to_kcal_ratio(t,kfo_rd)) / i15_protein_to_kcal_ratio(t,"scp");
-p15_kcal_pc_iso(t,iso,kfo_rd) = p15_kcal_pc_iso(t,iso,kfo_rd) * i15_rumdairy_scp_fadeout(t,iso);
+  p15_kcal_pc_iso(t,iso,"scp") = p15_kcal_pc_iso(t,iso,"scp") +
+  	sum(kfo_rd, p15_kcal_pc_iso(t,iso,kfo_rd) * (1-i15_rumdairy_scp_fadeout(t,iso)) *
+  	i15_protein_to_kcal_ratio(t,kfo_rd)) / i15_protein_to_kcal_ratio(t,"scp");
+  p15_kcal_pc_iso(t,iso,kfo_rd) = p15_kcal_pc_iso(t,iso,kfo_rd) * i15_rumdairy_scp_fadeout(t,iso);
 
 
 * Conditional reduction of livestock products (without fish) depending on s15_kcal_pc_livestock_intake_target.
 * Optional substitution with plant-based products depending on s15_livescen_target_subst.
-p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
-p15_kcal_pc_iso_livestock_orig(t,iso) = sum(kfo_lp,p15_kcal_pc_iso(t,iso,kfo_lp));
-p15_kcal_pc_iso_plant_orig(t,iso) = sum(kfo_pp,p15_kcal_pc_iso(t,iso,kfo_pp));
+  p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
+  p15_kcal_pc_iso_livestock_orig(t,iso) = sum(kfo_lp,p15_kcal_pc_iso(t,iso,kfo_lp));
+  p15_kcal_pc_iso_plant_orig(t,iso) = sum(kfo_pp,p15_kcal_pc_iso(t,iso,kfo_pp));
 
-p15_livestock_kcal_structure_orig(t,iso,kfo_lp)$(p15_kcal_pc_iso_livestock_orig(t,iso)>0) =
-                               p15_kcal_pc_iso(t,iso,kfo_lp)
-                               /p15_kcal_pc_iso_livestock_orig(t,iso);
+  p15_livestock_kcal_structure_orig(t,iso,kfo_lp)$(p15_kcal_pc_iso_livestock_orig(t,iso)>0) =
+                                 p15_kcal_pc_iso(t,iso,kfo_lp)
+                                 /p15_kcal_pc_iso_livestock_orig(t,iso);
 
-p15_plant_kcal_structure_orig(t,iso,kfo_pp)$(p15_kcal_pc_iso_plant_orig(t,iso)>0) =
-                               p15_kcal_pc_iso(t,iso,kfo_pp)
-                               /p15_kcal_pc_iso_plant_orig(t,iso);
+  p15_plant_kcal_structure_orig(t,iso,kfo_pp)$(p15_kcal_pc_iso_plant_orig(t,iso)>0) =
+                                 p15_kcal_pc_iso(t,iso,kfo_pp)
+                                 /p15_kcal_pc_iso_plant_orig(t,iso);
 
-p15_kcal_pc_livestock_supply_target(iso) = s15_kcal_pc_livestock_intake_target * f15_overcons_FAOwaste(iso,"livst_rum");
+  p15_kcal_pc_livestock_supply_target(iso) = s15_kcal_pc_livestock_intake_target * f15_overcons_FAOwaste(iso,"livst_rum");
 
-loop(iso$(p15_kcal_pc_iso_livestock_orig(t,iso) > p15_kcal_pc_livestock_supply_target(iso)),
-p15_kcal_pc_iso(t,iso,kfo_lp) = p15_livestock_kcal_structure_orig(t,iso,kfo_lp)
-               * (p15_kcal_pc_livestock_supply_target(iso)*(1-i15_livestock_fadeout_threshold(t,iso))
-               + p15_kcal_pc_iso_livestock_orig(t,iso)*i15_livestock_fadeout_threshold(t,iso));
-p15_kcal_pc_iso(t,iso,kfo_pp) = p15_plant_kcal_structure_orig(t,iso,kfo_pp)
-				* (p15_kcal_pc_iso_plant_orig(t,iso)
-			    + (p15_kcal_pc_iso_livestock_orig(t,iso) -
-			    sum(kfo_lp, p15_kcal_pc_iso(t,iso,kfo_lp))) * s15_livescen_target_subst);
-);
+  loop(iso$(p15_kcal_pc_iso_livestock_orig(t,iso) > p15_kcal_pc_livestock_supply_target(iso)),
+  p15_kcal_pc_iso(t,iso,kfo_lp) = p15_livestock_kcal_structure_orig(t,iso,kfo_lp)
+                 * (p15_kcal_pc_livestock_supply_target(iso)*(1-i15_livestock_fadeout_threshold(t,iso))
+                 + p15_kcal_pc_iso_livestock_orig(t,iso)*i15_livestock_fadeout_threshold(t,iso));
+  p15_kcal_pc_iso(t,iso,kfo_pp) = p15_plant_kcal_structure_orig(t,iso,kfo_pp)
+  				* (p15_kcal_pc_iso_plant_orig(t,iso)
+  			    + (p15_kcal_pc_iso_livestock_orig(t,iso) -
+  			    sum(kfo_lp, p15_kcal_pc_iso(t,iso,kfo_lp))) * s15_livescen_target_subst);
+  );
 
 
 
@@ -140,51 +145,51 @@ p15_kcal_pc_iso(t,iso,kfo_pp) = p15_plant_kcal_structure_orig(t,iso,kfo_pp)
 * For the calculation of the ratio between food demand and intake, total food
 * calorie intake based on CALIBRATED parameters needs to be calculated:
 
-p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15) =
+  p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15) =
            p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)+
            i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
 
 * The BMI shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
-p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)$(p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)<0) = 0;
-p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)$(p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)>1) = 1;
+  p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)$(p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)<0) = 0;
+  p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)$(p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)>1) = 1;
 * The mismatch is balanced by moving the exceeding quantities into the middle BMI group.
-p15_bmi_shr_calibrated(t,iso,sex,age,"medium")=
-      1 - (sum(bmi_group15, p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15))
-      - p15_bmi_shr_calibrated(t,iso,sex,age,"medium"));
+  p15_bmi_shr_calibrated(t,iso,sex,age,"medium")=
+        1 - (sum(bmi_group15, p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15))
+        - p15_bmi_shr_calibrated(t,iso,sex,age,"medium"));
 
-p15_intake_total_iso_calibrated(t,iso) =
-       sum((sex, age, bmi_group15), p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)*
-       im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
-       + i15_kcal_pregnancy(t,iso);
+  p15_intake_total_iso_calibrated(t,iso) =
+         sum((sex, age, bmi_group15), p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)*
+         im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
+         + i15_kcal_pregnancy(t,iso);
 
-p15_demand2intake_ratio(t,iso)$(p15_intake_total_iso_calibrated(t,iso) >0 ) =
-        sum(kfo, p15_kcal_pc_iso(t,iso,kfo)) /
-        p15_intake_total_iso_calibrated(t,iso);
+  p15_demand2intake_ratio(t,iso)$(p15_intake_total_iso_calibrated(t,iso) >0 ) =
+          sum(kfo, p15_kcal_pc_iso(t,iso,kfo)) /
+          p15_intake_total_iso_calibrated(t,iso);
 
 
 * In case, no exogenous waste scenario is selceted, the original regression-
 * based estimates for food calorie oversupply are used as waste scenario.
 * This information is needed in case that an exogenous diet scenario should be
 * constructed from food calorie intake.
-p15_demand2intake_ratio_scen(t,iso) =p15_demand2intake_ratio(t,iso);
+  p15_demand2intake_ratio_scen(t,iso) =p15_demand2intake_ratio(t,iso);
 
 
 * ###### Exogenous food waste scenario
 
-if(s15_exo_waste = 1,
+  if(s15_exo_waste = 1,
 
 * "Downwards convergence" of regional calorie oversupply due to food waste to the
 * waste reduction target, i.e. only for values that are higher than the target:
 
-  p15_demand2intake_ratio_scen(t,iso)$(p15_demand2intake_ratio(t,iso) > s15_waste_scen )
-                    = p15_demand2intake_ratio(t,iso)*(1-i15_exo_foodscen_fader(t,iso))
-                      + s15_waste_scen*i15_exo_foodscen_fader(t,iso);
+    p15_demand2intake_ratio_scen(t,iso)$(p15_demand2intake_ratio(t,iso) > s15_waste_scen )
+                      = p15_demand2intake_ratio(t,iso)*(1-i15_exo_foodscen_fader(t,iso))
+                        + s15_waste_scen*i15_exo_foodscen_fader(t,iso);
 
-  p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
-  p15_kcal_pc_iso(t,iso,kfo)$(p15_demand2intake_ratio(t,iso) >0 ) = p15_kcal_pc_iso_orig(t,iso,kfo)*(
-                      p15_demand2intake_ratio_scen(t,iso)/p15_demand2intake_ratio(t,iso) );
+    p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
+    p15_kcal_pc_iso(t,iso,kfo)$(p15_demand2intake_ratio(t,iso) >0 ) = p15_kcal_pc_iso_orig(t,iso,kfo)*(
+                        p15_demand2intake_ratio_scen(t,iso)/p15_demand2intake_ratio(t,iso) );
 
-);
+  );
 
 
 * Now, a second waste parameter can be calculated, which is needed for the construction
@@ -192,7 +197,7 @@ if(s15_exo_waste = 1,
 * the development of food waste over time and reflects either the exogenous food waste
 * scenario or the original regression-based estimates for food calorie oversupply:
 
-p15_foodwaste_growth(t,iso) = ( 1$(p15_demand2intake_ratio_ref(iso) = 0)
+  p15_foodwaste_growth(t,iso) = ( 1$(p15_demand2intake_ratio_ref(iso) = 0)
             + (p15_demand2intake_ratio_scen(t,iso)/p15_demand2intake_ratio_ref(iso))$(
               p15_demand2intake_ratio_ref(iso) > 0)
               );
@@ -208,7 +213,7 @@ p15_foodwaste_growth(t,iso) = ( 1$(p15_demand2intake_ratio_ref(iso) = 0)
 *' to 1.
 
 
-if(s15_exo_diet = 1,
+  if(s15_exo_diet = 1,
 
 
 * Select from the data set of EAT Lancet scenarios the target years that are
@@ -248,23 +253,23 @@ $endif
 
 * Food-specific calorie intake of the model-internal diet projections is
 * estimated from daily per capita food calorie demand:
-p15_intake_detailed_regr(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo)
+  p15_intake_detailed_regr(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo)
 	 	/(f15_calib_fsupply(iso)*f15_overcons_FAOwaste(iso,kfo)*p15_foodwaste_growth(t,iso));
 
 
-i15_intake_detailed_scen_target(t,iso,EAT_nonstaples) = i15_intake_EATLancet(iso,EAT_nonstaples);
+    i15_intake_detailed_scen_target(t,iso,EAT_nonstaples) = i15_intake_EATLancet(iso,EAT_nonstaples);
 
 * The EAT-Lancet diet only allows for added sugars, but does not include processed food or
 * alcohol. Via 's15_alc_scen' a maximum target for alcohol consumption can be defined.
-if(s15_alc_scen>0,
-i15_intake_detailed_scen_target(t,iso,"alcohol") = p15_intake_detailed_regr(t,iso,"alcohol");
-i15_intake_detailed_scen_target(t,iso,"alcohol")$(i15_intake_detailed_scen_target(t,iso,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,iso))
-	= s15_alc_scen*i15_intake_scen_target(t,iso);
-);
+  if(s15_alc_scen>0,
+  i15_intake_detailed_scen_target(t,iso,"alcohol") = p15_intake_detailed_regr(t,iso,"alcohol");
+  i15_intake_detailed_scen_target(t,iso,"alcohol")$(i15_intake_detailed_scen_target(t,iso,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,iso))
+  	= s15_alc_scen*i15_intake_scen_target(t,iso);
+  );
 
-i15_intake_detailed_scen_target(t,iso,EAT_staples) = (
-          i15_intake_scen_target(t,iso) - sum(EAT_nonstaples,i15_intake_EATLancet(iso,EAT_nonstaples)) )*(
-          i15_intake_EATLancet(iso,EAT_staples)/sum(EAT_staples2,i15_intake_EATLancet(iso,EAT_staples2)) );
+  i15_intake_detailed_scen_target(t,iso,EAT_staples) = (
+            i15_intake_scen_target(t,iso) - sum(EAT_nonstaples,i15_intake_EATLancet(iso,EAT_nonstaples)) )*(
+            i15_intake_EATLancet(iso,EAT_staples)/sum(EAT_staples2,i15_intake_EATLancet(iso,EAT_staples2)) );
 
 
 *' 3.) The third step estimates the calorie supply at household level by multiplying
@@ -278,7 +283,7 @@ i15_intake_detailed_scen_target(t,iso,EAT_staples) = (
 *' increases in food waste over time relative to the only historical time slice
 *' of the EAT Lancet diet scenarios, according to the regression-based approach.
 
-i15_kcal_pc_scen_target(t,iso,kfo) = (f15_calib_fsupply(iso)*f15_overcons_FAOwaste(iso,kfo)
+  i15_kcal_pc_scen_target(t,iso,kfo) = (f15_calib_fsupply(iso)*f15_overcons_FAOwaste(iso,kfo)
                                     *i15_intake_detailed_scen_target(t,iso,kfo))
                                     *p15_foodwaste_growth(t,iso);
 
@@ -287,12 +292,11 @@ i15_kcal_pc_scen_target(t,iso,kfo) = (f15_calib_fsupply(iso)*f15_overcons_FAOwas
 *' convergence (note that fading should start after the historical time slice of
 *' the EAT Lancet diet scenarios (y2010) as defined in `i15_exo_foodscen_fader(t,iso)`):
 
-p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
-p15_kcal_pc_iso(t,iso,kfo) = p15_kcal_pc_iso_orig(t,iso,kfo) * (1-i15_exo_foodscen_fader(t,iso))
+    p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
+    p15_kcal_pc_iso(t,iso,kfo) = p15_kcal_pc_iso_orig(t,iso,kfo) * (1-i15_exo_foodscen_fader(t,iso))
                         + i15_kcal_pc_scen_target(t,iso,kfo) * i15_exo_foodscen_fader(t,iso);
 
-
-);
+  );
 
 
 
@@ -307,32 +311,34 @@ p15_kcal_pc_iso(t,iso,kfo) = p15_kcal_pc_iso_orig(t,iso,kfo) * (1-i15_exo_foodsc
 *' @stop
 
 * aggregate to regions
- p15_kcal_pc(t,i,kfo)$(
-    sum(i_to_iso(i,iso),
-       im_pop_iso(t,iso)
-    ) >0 ) =
-             sum(i_to_iso(i,iso),
-               p15_kcal_pc_iso(t,iso,kfo)
-               * im_pop_iso(t,iso)
-             ) / sum(i_to_iso(i,iso),
-                 im_pop_iso(t,iso)
-             );
+   p15_kcal_pc(t,i,kfo)$(
+      sum(i_to_iso(i,iso),
+         im_pop_iso(t,iso)
+      ) >0 ) =
+               sum(i_to_iso(i,iso),
+                 p15_kcal_pc_iso(t,iso,kfo)
+                 * im_pop_iso(t,iso)
+               ) / sum(i_to_iso(i,iso),
+                   im_pop_iso(t,iso)
+               );
 
- p15_balanceflow_kcal(t,i,kfo)$(
-    sum(i_to_iso(i,iso),
-       im_pop_iso(t,iso)
-    ) >0 ) =
-             sum(i_to_iso(i,iso),
-               p15_balanceflow_kcal_iso(t,iso,kfo)
-               * im_pop_iso(t,iso)
-             ) / sum(i_to_iso(i,iso),
-                 im_pop_iso(t,iso)
-             );
+   p15_balanceflow_kcal(t,i,kfo)$(
+      sum(i_to_iso(i,iso),
+         im_pop_iso(t,iso)
+      ) >0 ) =
+               sum(i_to_iso(i,iso),
+                 p15_balanceflow_kcal_iso(t,iso,kfo)
+                 * im_pop_iso(t,iso)
+               ) / sum(i_to_iso(i,iso),
+                   im_pop_iso(t,iso)
+               );
 
 
 * Finally, we calibrate countries with zero food demand according to FAOSTAT
 * down to zero to match FAO world totals.
 * Values are rounded to avoid path dependencies of MAgPIE solver.
- p15_kcal_pc_calibrated(t,i,kfo)=p15_kcal_pc(t,i,kfo)+p15_balanceflow_kcal(t,i,kfo);
- p15_kcal_pc_calibrated(t,i,kfo)=round(p15_kcal_pc_calibrated(t,i,kfo),2);
- p15_kcal_pc_calibrated(t,i,kfo)$(p15_kcal_pc_calibrated(t,i,kfo)<0)=0;
+   p15_kcal_pc_calibrated(t,i,kfo)=p15_kcal_pc(t,i,kfo)+p15_balanceflow_kcal(t,i,kfo);
+   p15_kcal_pc_calibrated(t,i,kfo)=round(p15_kcal_pc_calibrated(t,i,kfo),2);
+   p15_kcal_pc_calibrated(t,i,kfo)$(p15_kcal_pc_calibrated(t,i,kfo)<0)=0;
+
+ );

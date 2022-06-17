@@ -310,7 +310,8 @@ else
 
 *###############################################################################
 * ###### Food substitution scenarios, same as in intersolve
-$include "./modules/15_food/anthro_iso_jun22/exodietmacro.gms"
+s15_run_diet_postprocessing = 1;
+$include "./modules/15_food/anthro_iso_jun22/exodietmacro.gms";
 
 
 * some calculations for postprocessing and other modules
