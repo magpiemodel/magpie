@@ -120,7 +120,7 @@ $offdelim
 
 *Costs of pumping are taken observed values in India and a conversion factor is applied to change them into USD values per cubic meter
 parameter
-f42_pumping_cost(t_all,i) Cost of pumping irrigation water (1)
+f42_pumping_cost(t_all,i) Cost of pumping irrigation water (USD per mio. m^3)
 /
 $ondelim
 $include "./modules/42_water_demand/input/f42_pumping_cost.cs4"
