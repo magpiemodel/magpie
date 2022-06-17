@@ -144,5 +144,5 @@ sets
          / vegc, litc /
 
    stockType Carbon stock types
-         / actual, actualNoAcEst, previousLandPattern, previousCarbonDensity /
+         / actual, actualNoAcEst /
 ;
