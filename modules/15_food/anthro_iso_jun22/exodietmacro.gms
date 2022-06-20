@@ -215,12 +215,12 @@ if (s15_run_diet_postprocessing = 1,
 *' food-specific dietary patterns:
 
 $ifthen "%c15_kcal_scen%" == "healthy_BMI"
-  i15_intake_scen_target(t,iso) = (
+  i15_intake_scen_target(t,iso)$(sum((sex,age), im_demography(t,iso,sex,age))>0) = (
         sum((sex, age), im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,"medium") )
          + i15_kcal_pregnancy(t,iso)
          ) / sum((sex,age), im_demography(t,iso,sex,age));
 $elseif "%c15_kcal_scen%" == "endo"
-  i15_intake_scen_target(t,iso) = (
+  i15_intake_scen_target(t,iso)$(sum((sex,age), im_demography(t,iso,sex,age))>0) = (
     sum((sex, age, bmi_group15), im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
      + i15_kcal_pregnancy(t,iso)
      ) / sum((sex,age), im_demography(t,iso,sex,age));
@@ -261,14 +261,15 @@ $endif
     i15_intake_detailed_scen_target(t,iso,"scp") = i15_intake_EATLancet(iso,"scp"));
   if (s15_exo_alcohol=1,
 * calculating intake back from demand using FAO product specific food waste ratios
-    i15_intake_detailed_scen_target(t,iso,"alcohol") = p15_kcal_pc_iso(t,iso,"alcohol")
+    i15_intake_detailed_scen_target(t,iso,"alcohol")$(f15_calib_fsupply(iso)*f15_overcons_FAOwaste(iso,"alcohol")*p15_foodwaste_growth(t,iso)>0) =
+          p15_kcal_pc_iso(t,iso,"alcohol")
           /(f15_calib_fsupply(iso)*f15_overcons_FAOwaste(iso,"alcohol")*p15_foodwaste_growth(t,iso));
     i15_intake_detailed_scen_target(t,iso,"alcohol")$(i15_intake_detailed_scen_target(t,iso,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,iso))
       = s15_alc_scen*i15_intake_scen_target(t,iso);
     i15_intake_detailed_scen_target(t,iso,"alcohol") = i15_intake_EATLancet(iso,"alcohol");
   );
 
-  i15_intake_detailed_scen_target(t,iso,EAT_staples) = (
+  i15_intake_detailed_scen_target(t,iso,EAT_staples)$(sum(EAT_staples2,i15_intake_EATLancet(iso,EAT_staples2))>0) = (
             i15_intake_scen_target(t,iso) - sum(EAT_nonstaples,i15_intake_EATLancet(iso,EAT_nonstaples)) )*(
             i15_intake_EATLancet(iso,EAT_staples)/sum(EAT_staples2,i15_intake_EATLancet(iso,EAT_staples2)) );
 
