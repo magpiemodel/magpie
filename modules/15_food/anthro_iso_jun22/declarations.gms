@@ -156,7 +156,6 @@ parameters
  i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo)       Food-specific per capita calorie intake according to various EAT Lancet diet scenarios (kcal per capita per day)
  i15_intake_EATLancet(iso,kfo)                  Food-specific per capita calorie intake according to EAT Lancet diet scenario (kcal per capita per day)
  i15_intake_detailed_scen_target(t,iso,kfo)     Target for food-specific per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
- p15_intake_detailed_regr(t,iso,kfo)            Food-specific per capita calorie intake according to regression-based projections (kcal per capita per day)
 
  p15_demand2intake_ratio_ref(iso)               Ratio between food calorie demand and intake for the historical time step of EAT Lancet diets (1)
  p15_foodwaste_growth(t,iso)                    Increase in food waste over time relative to the historical time step of EAT Lancet diets (1)

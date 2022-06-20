@@ -8,7 +8,7 @@
 sets
 
    iter15 iterations between food demand model and magpie
-   /iter1*iter10/   
+   /iter1*iter10/
    curr_iter15(iter15)  currently active iteration
    prev_iter15(iter15)     last active iteration
 
@@ -163,9 +163,19 @@ sets
   EAT_scen15  Scenario of daily per capita calorie intake
        / BMK, FLX, PSC, VEG, VGN, FLX_hmilk, FLX_hredmeat /
 
+   EAT_monogastrics15(kfo) monogastic products
+      / livst_pig, livst_egg, livst_chick /
+   EAT_ruminants15(kfo) ruminant products
+      / livst_milk, livst_rum /
+   EAT_fruitvegnutseed15(kfo) vegetables fruits nuts seeds
+       /rapeseed,sunflower,others/
+   EAT_pulses15(kfo) pulses
+         /soybean,puls_pro,groundnut/
+   EAT_sugar15(kfo) sugar
+         /sugr_cane,sugr_beet,sugar,molasses/
+
    EAT_staples(kfo) All staple food products according to EAT Lancet definition
        / tece,maiz,trce,rice_pro,potato,cassav_sp /
-
    EAT_nonstaples(kfo) All non-staple food products according to EAT Lancet definition
        / soybean,rapeseed,groundnut,sunflower,puls_pro,
          sugr_cane,sugr_beet,

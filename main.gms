@@ -145,53 +145,53 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
+*
 * Used data set: rev4.72_h12_magpie.tgz
 * md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+*
 * Used data set: rev4.72_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
 * md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+*
 * Used data set: rev4.72_h12_validation.tgz
 * md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-* 
-* Used data set: additional_data_rev4.17.tgz
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+*
+* Used data set: additional_data_rev4.20.tgz
 * md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
-* 
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+*
 * Used data set: calibration_H12_per_ton_fao_may22_28May22.tgz
 * md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/calibration
-* 
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+*
 * Low resolution: c200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *     6   23    7    6    1   43   27    7   11   12   37   20
-* 
+*
 * Regionscode: 62eff8f7
-* 
+*
 * Regions data revision: 4.72
-* 
+*
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
 * * Revision: 4.72
-* 
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
 * * Regionscode: 62eff8f7
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
-* 
-* 
-* Last modification (input data): Mon May 30 22:22:17 2022
-* 
+*
+*
+* Last modification (input data): Thu Jun 16 12:42:17 2022
+*
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper
@@ -232,7 +232,7 @@ $setglobal interest_rate  select_apr20
 $setglobal tc  endo_jan22
 $setglobal yields  managementcalib_aug19
 
-$setglobal food  anthropometrics_jan18
+$setglobal food  anthro_iso_jun22
 $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 
@@ -253,7 +253,7 @@ $setglobal urban  exo_nov21
 $setglobal natveg  dynamic_feb21
 
 $setglobal labor_prod  off
-$setglobal factor_costs  sticky_feb18
+$setglobal factor_costs  per_ton_fao_may22
 $setglobal landconversion  calib
 
 $setglobal transport  gtap_nov12

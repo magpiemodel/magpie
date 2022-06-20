@@ -130,12 +130,6 @@ if (s15_run_diet_postprocessing = 1,
   );
 
 
-
-* Conditional increase of fruits, vegetables and nuts (others) based on s15_kcal_pc_fruitveg_target.
-* Optional substitution of all other products depending on s15_livescen_target_subst.
-
-
-
 *###############################################################################
 * ######  WASTE CALCULATIONS (required for exogenous food waste or diet scenarios)
 
@@ -216,17 +210,6 @@ if (s15_run_diet_postprocessing = 1,
   if(s15_exo_diet = 1,
 
 
-* Select from the data set of EAT Lancet scenarios the target years that are
-* consistent with the target year of the fader:
-
-$ifthen "%c15_exo_foodscen%" == "lin_zero_20_30"
-  i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_EATLancet("y2030",iso,kcal_scen15,EAT_scen15,kfo);
-$else
-  i15_intake_EATLancet_all(iso,kcal_scen15,EAT_scen15,kfo) = f15_intake_EATLancet("y2050",iso,kcal_scen15,EAT_scen15,kfo);
-$endif
-
-
-
 *' 1.) In a first step, the exogenous scenario diets are defined by selecting a
 *' scenario target for total daily per capita food intake and by choosing
 *' food-specific dietary patterns:
@@ -236,15 +219,14 @@ $ifthen "%c15_kcal_scen%" == "healthy_BMI"
         sum((sex, age), im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,"medium") )
          + i15_kcal_pregnancy(t,iso)
          ) / sum((sex,age), im_demography(t,iso,sex,age));
-
-  i15_intake_EATLancet(iso,kfo) =
-        i15_intake_EATLancet_all(iso,"2100kcal","%c15_EAT_scen%",kfo);
+$elseif "%c15_kcal_scen%" == "endo"
+  i15_intake_scen_target(t,iso) = (
+    sum((sex, age, bmi_group15), im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
+     + i15_kcal_pregnancy(t,iso)
+     ) / sum((sex,age), im_demography(t,iso,sex,age));
 $else
-  i15_intake_EATLancet(iso,kfo) =
-        i15_intake_EATLancet_all(iso,"%c15_kcal_scen%","%c15_EAT_scen%",kfo);
-  i15_intake_scen_target(t,iso) = sum(kfo,i15_intake_EATLancet(iso,kfo));
+  i15_intake_scen_target(t,iso) = sum(kfo,i15_intake_EATLancet_all(iso,"%c15_kcal_scen%","%c15_EAT_scen%",kfo));
 $endif
-
 
 *' 2.) The second step defines the daily per capita intake of different food
 *' commodities by filling up the scenario target for total daily per capita food
@@ -253,18 +235,37 @@ $endif
 
 * Food-specific calorie intake of the model-internal diet projections is
 * estimated from daily per capita food calorie demand:
-  p15_intake_detailed_regr(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo)
-	 	/(f15_calib_fsupply(iso)*f15_overcons_FAOwaste(iso,kfo)*p15_foodwaste_growth(t,iso));
 
+* The EAT lancet target values are the same for non-staples irrespective of the calorie target
+* Only non-staples differ
+  i15_intake_EATLancet(iso,kfo) =
+        i15_intake_EATLancet_all(iso,"2100kcal","%c15_EAT_scen%",kfo);
 
-    i15_intake_detailed_scen_target(t,iso,EAT_nonstaples) = i15_intake_EATLancet(iso,EAT_nonstaples);
-
-* The EAT-Lancet diet only allows for added sugars, but does not include processed food or
-* alcohol. Via 's15_alc_scen' a maximum target for alcohol consumption can be defined.
-  if(s15_alc_scen>0,
-  i15_intake_detailed_scen_target(t,iso,"alcohol") = p15_intake_detailed_regr(t,iso,"alcohol");
-  i15_intake_detailed_scen_target(t,iso,"alcohol")$(i15_intake_detailed_scen_target(t,iso,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,iso))
-  	= s15_alc_scen*i15_intake_scen_target(t,iso);
+  if (s15_exo_monogastric=1,
+    i15_intake_detailed_scen_target(t,iso,EAT_monogastrics15) = i15_intake_EATLancet(iso,EAT_monogastrics15));
+  if (s15_exo_ruminant=1,
+      i15_intake_detailed_scen_target(t,iso,EAT_ruminants15) = i15_intake_EATLancet(iso,EAT_ruminants15));
+  if (s15_exo_fish=1,
+      i15_intake_detailed_scen_target(t,iso,"fish") = i15_intake_EATLancet(iso,"fish"));
+  if (s15_exo_fruitvegnut=1,
+    i15_intake_detailed_scen_target(t,iso,EAT_fruitvegnutseed15) = i15_intake_EATLancet(iso,EAT_fruitvegnutseed15));
+  if (s15_exo_pulses=1,
+    i15_intake_detailed_scen_target(t,iso,EAT_pulses15) = i15_intake_EATLancet(iso,EAT_pulses15));
+  if (s15_exo_sugar=1,
+    i15_intake_detailed_scen_target(t,iso,EAT_sugar15) = i15_intake_EATLancet(iso,EAT_sugar15));
+  if (s15_exo_oils=1,
+    i15_intake_detailed_scen_target(t,iso,"oils") = i15_intake_EATLancet(iso,"oils"));
+  if (s15_exo_brans=1,
+    i15_intake_detailed_scen_target(t,iso,"brans") = i15_intake_EATLancet(iso,"brans"));
+  if (s15_exo_scp=1,
+    i15_intake_detailed_scen_target(t,iso,"scp") = i15_intake_EATLancet(iso,"scp"));
+  if (s15_exo_alcohol=1,
+* calculating intake back from demand using FAO product specific food waste ratios
+    i15_intake_detailed_scen_target(t,iso,"alcohol") = p15_kcal_pc_iso(t,iso,"alcohol")
+          /(f15_calib_fsupply(iso)*f15_overcons_FAOwaste(iso,"alcohol")*p15_foodwaste_growth(t,iso));
+    i15_intake_detailed_scen_target(t,iso,"alcohol")$(i15_intake_detailed_scen_target(t,iso,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,iso))
+      = s15_alc_scen*i15_intake_scen_target(t,iso);
+    i15_intake_detailed_scen_target(t,iso,"alcohol") = i15_intake_EATLancet(iso,"alcohol");
   );
 
   i15_intake_detailed_scen_target(t,iso,EAT_staples) = (
@@ -297,8 +298,7 @@ $endif
                         + i15_kcal_pc_scen_target(t,iso,kfo) * i15_exo_foodscen_fader(t,iso);
 
   );
-
-
+*' End of special postprocessing food demand scenarios.
 
 
 *' Negative values that can possibly occur due to calibration are set to zero.
