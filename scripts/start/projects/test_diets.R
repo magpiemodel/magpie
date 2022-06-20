@@ -25,13 +25,12 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
-prefix <- "diet_change_v1"
+prefix <- "diet_change_v2"
 
 cfg$title <- paste(prefix,"olddefault",sep="_")
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- paste(prefix,"olddefaultEATlancet",sep="_")
-start_run(cfg,codeCheck=FALSE)
 cfg$gms$s15_exo_waste <- 1
 cfg$gms$s15_exo_diet <- 1
 cfg$gms$c15_kcal_scen <- "healthy_BMI"
@@ -47,13 +46,13 @@ cfg$gms$s15_exo_brans       <- 1
 cfg$gms$s15_exo_scp         <- 1
 start_run(cfg,codeCheck=FALSE)
 
+source("config/default.cfg")
 cfg$title <- paste(prefix,"newdefault",sep="_")
-source("config/default.cfg")
 cfg$gms$food    <- "anthro_iso_jun22"
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"EATlancet",sep="_")
 source("config/default.cfg")
+cfg$title <- paste(prefix,"EATlancet",sep="_")
 cfg$gms$food    <- "anthro_iso_jun22"
 cfg$gms$s15_exo_waste <- 1
 cfg$gms$s15_exo_diet <- 1
@@ -70,8 +69,9 @@ cfg$gms$s15_exo_brans       <- 1
 cfg$gms$s15_exo_scp         <- 1
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"healthyBMI",sep="_")
+
 source("config/default.cfg")
+cfg$title <- paste(prefix,"healthyBMI",sep="_")
 cfg$gms$food    <- "anthro_iso_jun22"
 cfg$gms$s15_exo_waste <- 0
 cfg$gms$s15_exo_diet <- 1
@@ -88,8 +88,9 @@ cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"waste",sep="_")
+
 source("config/default.cfg")
+cfg$title <- paste(prefix,"waste",sep="_")
 cfg$gms$food    <- "anthro_iso_jun22"
 cfg$gms$s15_exo_waste <- 1
 cfg$gms$s15_exo_diet <- 0
@@ -106,8 +107,9 @@ cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"waste2",sep="_")
+
 source("config/default.cfg")
+cfg$title <- paste(prefix,"waste2",sep="_")
 cfg$gms$food    <- "anthro_iso_jun22"
 cfg$gms$s15_exo_waste <- 0
 cfg$gms$s15_exo_diet <- 1
@@ -124,8 +126,9 @@ cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"monogastric",sep="_")
+
 source("config/default.cfg")
+cfg$title <- paste(prefix,"monogastric",sep="_")
 cfg$gms$food    <- "anthro_iso_jun22"
 cfg$gms$s15_exo_waste <- 0
 cfg$gms$s15_exo_diet <- 1
@@ -142,8 +145,9 @@ cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"ruminant",sep="_")
+
 source("config/default.cfg")
+cfg$title <- paste(prefix,"ruminant",sep="_")
 cfg$gms$food    <- "anthro_iso_jun22"
 cfg$gms$s15_exo_waste <- 0
 cfg$gms$s15_exo_diet <- 1
@@ -160,8 +164,9 @@ cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"fish",sep="_")
+
 source("config/default.cfg")
+cfg$title <- paste(prefix,"fish",sep="_")
 cfg$gms$food    <- "anthro_iso_jun22"
 cfg$gms$s15_exo_waste <- 0
 cfg$gms$s15_exo_diet <- 1
@@ -178,8 +183,9 @@ cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"fruitvegnutseed",sep="_")
+
 source("config/default.cfg")
+cfg$title <- paste(prefix,"fruitvegnutseed",sep="_")
 cfg$gms$food    <- "anthro_iso_jun22"
 cfg$gms$s15_exo_waste <- 0
 cfg$gms$s15_exo_diet <- 1
@@ -196,8 +202,9 @@ cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"pulses",sep="_")
+
 source("config/default.cfg")
+cfg$title <- paste(prefix,"pulses",sep="_")
 cfg$gms$food    <- "anthro_iso_jun22"
 cfg$gms$s15_exo_waste <- 0
 cfg$gms$s15_exo_diet <- 1
@@ -214,8 +221,9 @@ cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"sugar",sep="_")
+
 source("config/default.cfg")
+cfg$title <- paste(prefix,"sugar",sep="_")
 cfg$gms$food    <- "anthro_iso_jun22"
 cfg$gms$s15_exo_waste <- 0
 cfg$gms$s15_exo_diet <- 1
@@ -232,8 +240,9 @@ cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"oils",sep="_")
+
 source("config/default.cfg")
+cfg$title <- paste(prefix,"oils",sep="_")
 cfg$gms$food    <- "anthro_iso_jun22"
 cfg$gms$s15_exo_waste <- 0
 cfg$gms$s15_exo_diet <- 1
@@ -250,17 +259,19 @@ cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"elastic",sep="_")
+
 source("config/default.cfg")
+cfg$title <- paste(prefix,"elastic",sep="_")
 cfg$gms$food    <- "anthro_iso_jun22"
 cfg$gms$s15_exo_waste <- 0
 cfg$gms$s15_exo_diet <- 0
 cfg$gms$s15_elastic_demand <- 1
 start_run(cfg,codeCheck=FALSE)
 
-cfg$title <- paste(prefix,"elasticEAT",sep="_")
+
 # should show no change
 source("config/default.cfg")
+cfg$title <- paste(prefix,"elasticEAT",sep="_")
 cfg$gms$food    <- "anthro_iso_jun22"
 cfg$gms$s15_exo_waste <- 1
 cfg$gms$s15_exo_diet <- 1
