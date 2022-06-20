@@ -4,6 +4,10 @@
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
+
+$setglobal c38_fac_req  glo
+* options: glo, reg
+
 scalars
 *' Depreciation rate assuming roughly 20 years linear depreciation for invesment goods
 s38_depreciation_rate depreciation rate (share of costs)  / 0.05 /
@@ -19,6 +23,14 @@ parameter f38_fac_req(kcr) Factor requirement costs in 2005 (USD05MER per tDM)
 /
 $ondelim
 $include "./modules/38_factor_costs/input/f38_fac_req_fao.csv"
+$offdelim
+/
+;
+
+parameter f38_fac_req_fao_reg(t_all,i,kcr) Factor requirement costs (USD05MER per tDM)
+/
+$ondelim
+$include "./modules/38_factor_costs/input/f38_fac_req_fao_regional.cs4"
 $offdelim
 /
 ;

@@ -252,6 +252,7 @@ $setglobal forestry  dynamic_feb21
 $setglobal urban  exo_nov21
 $setglobal natveg  dynamic_feb21
 
+$setglobal employment  exo_may22
 $setglobal labor_prod  off
 $setglobal factor_costs  per_ton_fao_may22
 $setglobal landconversion  calib
@@ -260,7 +261,7 @@ $setglobal transport  gtap_nov12
 $setglobal area_equipped_for_irrigation  endo_apr13
 $setglobal water_demand  all_sectors_aug13
 $setglobal water_availability  total_water_aug13
-$setglobal biodiversity  bv_btc_mar21
+$setglobal biodiversity  bii_target
 $setglobal climate  static
 
 $setglobal nr_soil_budget  exoeff_aug16
