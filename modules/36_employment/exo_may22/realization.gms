@@ -25,6 +25,7 @@ $Ifi "%phase%" == "sets" $include "./modules/36_employment/exo_may22/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/36_employment/exo_may22/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/36_employment/exo_may22/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/36_employment/exo_may22/equations.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/36_employment/exo_may22/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/36_employment/exo_may22/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/36_employment/exo_may22/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
