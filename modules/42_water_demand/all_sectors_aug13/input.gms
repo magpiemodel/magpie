@@ -36,8 +36,8 @@ s42_env_flow_base_fraction         Fraction of available water that is reserved 
 *                                                                    (determined in the file
 *                                                                   EFR_protection_policy.csv)
 s42_env_flow_fraction              Fraction of available water that is reserved for under protection policies (1) / 0.2 /
-s42_pumping_startyear              Year from which pumping costs will be implemented (1) / 1995 /
-s42_multiplier                     Scalar to change pumping costs for sensitivity analysis, takes numeric values (1) / 1 /
+s42_multiplier_startyear            Year from which pumping costs multiplier will be implemented (1) / 1995 /
+s42_multiplier                     multiplier to change pumping costs for sensitivity analysis, takes numeric values (1)  / 1 /
 ;
 
 $setglobal c42_watdem_scenario  cc
@@ -120,7 +120,7 @@ $offdelim
 
 *Costs of pumping are taken observed values in India and a conversion factor is applied to change them into USD values per cubic meter
 parameter
-f42_pumping_cost(t_all,i) Cost of pumping irrigation water (USD per mio. m^3)
+f42_pumping_cost(t_all,i) Cost of pumping irrigation water (USD per m^3)
 /
 $ondelim
 $include "./modules/42_water_demand/input/f42_pumping_cost.cs4"

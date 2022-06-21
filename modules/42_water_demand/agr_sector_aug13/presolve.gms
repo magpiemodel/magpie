@@ -62,7 +62,11 @@ else
  );
 );
 
+
 *Pumping cost in the current time step
-if(m_year(t) > s42_pumping_startyear,
+ic42_pumping_cost(i) = f42_pumping_cost(t,i);
+
+*Pumping cost sensitivity test implmentation
+if(m_year(t) > s42_multiplier_startyear,
 ic42_pumping_cost(i) = f42_pumping_cost(t,i)*s42_multiplier;
 );
