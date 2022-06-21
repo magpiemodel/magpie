@@ -195,10 +195,10 @@ nitrogen_transformation <- function(cfg) {
 landsharing_transformation <- function(cfg) {
   #BII by price OR land sparing
   cfg$gms$c44_price_bv_loss <- "p10_p100"
-  # set-aside land
-  cfg$gms$s30_set_aside_shr	<- "0.2"
-  #gms$c30_set_aside_target	none
-  #@BENNI (or ask Patrick): need to set set_aside_target also?
+  # SNV land
+  cfg$gms$s30_snv_shr	<- "0.2"
+  #gms$c30_snv_target	none
+  #@BENNI (or ask Patrick): need to set snv_target also?
   # strict crop rotations
   # (not available yet)
   # agroforestry (2nd gen be with crop rotation)

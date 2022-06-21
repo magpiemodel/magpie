@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **13_tc** Replace endo_jan18 realization by endo_jan22. The new realization adds a new dimension to vm_tau separating crop from managed pastures tau.
  - **31_past** added new realization implementing the separation of rangelands and managed pastures for the production of grass biomass.
  - **15_food** added more options to define convergence towards exogenous food intake and waste scenarios accounting for different transition periods
+ - **30_crop** renamed switch `s30_set_aside_shr`, `s30_set_aside_shr_noselect` and `c30_set_aside_target` to `s30_snv_shr`, `s30_snv_shr_noselect` and `c30_snv_target`.
  - **34_urban** added set urban_scen34 and the switch c34_urban_scenario
  - **35_natveg** corrected naming of Frontier Forests (FF) to Intact Forest Landscapes (IFL) and changed input data for BH_IFL implementation.
  - **scripts** replaced redundant files config.log and config.Rdata with a config.yml
@@ -44,7 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **35_natveg** implementation of land protection moved to new module `22_land_conservation`
  - **modules** Moved interface `vm_carbon_stock` from 52_carbon to 56_ghg_policy
  - **scripts** scripts/output/extra/emulator.R Remove dependency on deprecated R package "magpie"
-- **56_ghg_policy** Deactivated GHG emission policies were not accounted for in the MACCs module. This has been corrected by an extension of the interface `im_pollutant_prices`, which now has an additional dimension for emission sources `emis_source`. In this context some equations in `56_ghg_policy` have been simplified (sets: `emis_source_reg`, `emis_source_cell`). Also, GHG emissions from peatlands have been fully integrated into `56_ghg_policy`.
+ - **56_ghg_policy** Deactivated GHG emission policies were not accounted for in the MACCs module. This has been corrected by an extension of the interface `im_pollutant_prices`, which now has an additional dimension for emission sources `emis_source`. In this context some equations in `56_ghg_policy` have been simplified (sets: `emis_source_reg`, `emis_source_cell`). Also, GHG emissions from peatlands have been fully integrated into `56_ghg_policy`.
 - **09_drivers** changed `i09_gdp_pc_mer_iso` to `im_gdp_pc_mer_iso`
 
 ### added
@@ -63,9 +64,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     f31_LUH2v2.cs3 -> LUH2v2 land classes separating rangelands from managed pastures
     f31_grassl_yld.cs3 -> Rangelands and managed pastures grass yields
     f31_grass_bio_hist.cs3 -> Historical grass biomass demand
- - **modules** New dimension in `vm_carbon_stock` for different carbon stock types (actual, previousLandPattern, previousCarbonDensity)
- - **config** added option for CO2 emission pricing `cfg$gms$c56_carbon_stock_pricing`
- - **config** added cfg$gms$s70_past_mngmnt_factor_fix with default 2005 (previous default was 2010). The previous setting caused a strong spike in CO2 emissions from pasture expansion in SSA. With 2005, this can be avoided.
+- **modules** New dimension in `vm_carbon_stock` for different carbon stock types (actual, previousLandPattern, previousCarbonDensity)
+- **config** added option for CO2 emission pricing `cfg$gms$c56_carbon_stock_pricing`
+- **config** added cfg$gms$s70_past_mngmnt_factor_fix with default 2005 (previous default was 2010). The previous setting caused a strong spike in CO2 emissions from pasture expansion in SSA. With 2005, this can be avoided.
+- **30_crop** new module realizations including crop rotation scenarios by strict constraints (`rotation_apr22`) and by penalties (`penalty_apr22`)
+- **scripts** `start/projects/test_rotations.R` testscript for different rotation scenario settings
 - **38_factor_costs** mixed_reg_feb17 realization added. This realization includes differences in productions costs between irrigated and rainfed crops, with the option of regional differentiation as well. per_ton_fao_may22 realization added. This realization corresponds to the old sticky_feb18 free.
  - **44_biodiversity** added new realization `bii_target`, which calculates the BII at the level of 71 biomes and allows to set targets for BII (e.g. no decrease in the future)
  - **36_employment** added new module to calculate agricultural employment. Includes one realization (`exo_may22`) in which employment is calculated based on the total labor costs (for crop and livestock production)
@@ -98,6 +101,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.4.0] - 2021-12-13
 
 ### changed
+- **additional_data** NDCs for Chinas afforestation now start earlier (1995) in line with observed afforestation.
+- **config** comments added for correct use of nitrogen switches
 - **inputs** new default LPJmL version with growing season adaptation (gsadapt) on
 - **51_nitrogen** parameter change in rescaled_jan21, now including regionalized climate-dependent leaching factors
 - **config** Update default configuration to new input data (especially cellular inputs) including all module realization updates (14_yield, 22_processing, 30_crop, 38_factor_costs, 39_landconversion). Moreover, climate impatcs (cc options for biophysical inputs) are activiated as default. New best_calib calibration routine is activated as default.

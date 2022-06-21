@@ -20,6 +20,12 @@ $setglobal c30_snv_target  none
 $setglobal c30_rotation_constraints  on
 *options: on, off
 
+$setglobal c30_rotation_scenario  current
+*options: none,	default,	fallow,	legumes,	agroforestry,	agroecology
+
+$setglobal c30_rotation_scenario_speed  by2050
+* options: none, by2030, by2020
+
 * Set-switch for countries affected by regional SNV policy
 * Default: all iso countries selected
 sets
@@ -54,29 +60,26 @@ sets
 
 table fm_croparea(t_all,j,w,kcr) Different croparea type areas (mio. ha)
 $ondelim
-$include "./modules/30_crop/endo_apr21/input/f30_croparea_w_initialisation.cs3"
+$include "./modules/30_crop/penalty_apr22/input/f30_croparea_w_initialisation.cs3"
 $offdelim
 ;
 m_fillmissingyears(fm_croparea,"j,w,kcr");
 
 ********* CROP-ROTATIONAL CONSTRAINT *******************************************
 
-parameter f30_rotation_max_shr(crp30) Maximum allowed area shares for each crop type (1)
+table f30_rotation_incentives(rota30,rotascen30) penalties for violating rotation rules (USD05MER)
+$ondelim
+$include "./modules/30_crop/penalty_apr22/input/f30_rotation_incentives.csv"
+$offdelim
+;
+
+parameter f30_rotation_rules(rota30) Rotation min or max shares (1)
 /
 $ondelim
-$include "./modules/30_crop/endo_apr21/input/f30_rotation_max.csv"
+$include "./modules/30_crop/penalty_apr22/input/f30_rotation_rules.csv"
 $offdelim
-/;
-$if "%c30_rotation_constraints%" == "off" f30_rotation_max_shr(crp30) = 1;
-
-
-parameter f30_rotation_min_shr(crp30) Minimum allowed area shares for each crop type (1)
 /
-$ondelim
-$include "./modules/30_crop/endo_apr21/input/f30_rotation_min.csv"
-$offdelim
-/;
-$if "%c30_rotation_constraints%" == "off" f30_rotation_min_shr(crp30) = 0;
+;
 
 
 ********* AVAILABLE CROPLAND *******************************************
@@ -88,18 +91,18 @@ s30_snv_shr_noselect 	Share of available cropland that is witheld for other land
 
 table f30_avl_cropland(j,marginal_land30) Available land area for cropland (mio. ha)
 $ondelim
-$include "./modules/30_crop/endo_apr21/input/avl_cropland.cs3"
+$include "./modules/30_crop/penalty_apr22/input/avl_cropland.cs3"
 $offdelim
 ;
 
 table f30_avl_cropland_iso(iso,marginal_land30) Available land area for cropland at ISO level (mio. ha)
 $ondelim
-$include "./modules/30_crop/endo_apr21/input/avl_cropland_iso.cs3"
+$include "./modules/30_crop/penalty_apr22/input/avl_cropland_iso.cs3"
 $offdelim
 ;
 
-table f30_scenario_fader(t_all,policy_target30) Fader for cropland policies (unitless)
+table f30_scenario_fader(t_all,policy_target30) Fader for scenario implementation speed (unitless)
 $ondelim
-$include "./modules/30_crop/endo_apr21/input/f30_scenario_fader.csv"
+$include "./modules/30_crop/penalty_apr22/input/f30_scenario_fader.csv"
 $offdelim
 ;

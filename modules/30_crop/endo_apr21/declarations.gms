@@ -7,13 +7,16 @@
 
 parameters
  p30_avl_cropland(t,j)             	Total available land for crop cultivation (mio. ha)
- p30_region_setaside_shr(i)			Set-aside share of the region (1)
- p30_country_dummy(iso)		        Dummy parameter indicating whether country is affected by selected set-aside policy (1)
+ p30_region_snv_shr(i)			    SNV share of the region (1)
+ p30_country_dummy(iso)		        Dummy parameter indicating whether country is affected by selected SNV policy (1)
  i30_avl_cropland_iso(iso)			Available land area for cropland at ISO level (mio. ha)
 ;
 
 positive variables
+* Fallow land is cropland which is temporarily fallow. Croparea+fallow=cropland
+ vm_fallow(j)                   Fallow land (mio. ha)
  vm_area(j,kcr,w)                Agricultural production area (mio. ha)
+ vm_rotation_penalty(i)                  Penalty for violating rotational constraints (USD05MER)
 ;
 
 equations
@@ -29,7 +32,9 @@ equations
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
+ ov_fallow(t,j,type)                      Fallow land (mio. ha)
  ov_area(t,j,kcr,w,type)                  Agricultural production area (mio. ha)
+ ov_rotation_penalty(t,i,type)            Penalty for violating rotational constraints (USD05MER)
  oq30_cropland(t,j,type)                  Total cropland calculation (mio. ha)
  oq30_avl_cropland(t,j,type)              Available cropland constraint (mio. ha)
  oq30_rotation_max(t,j,crp30,w,type)      Local maximum rotational constraints (mio. ha)

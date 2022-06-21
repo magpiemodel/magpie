@@ -5,6 +5,13 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+* create crop rotation scenario
+
+i30_rotation_incentives(t_all,rota30)=
+  f30_rotation_incentives(rota30,"default") * (1-f30_scenario_fader(t_all,"%c30_rotation_scenario_speed%"))+
+  f30_rotation_incentives(rota30,"%c30_rotation_scenario%") * (f30_scenario_fader(t_all,"%c30_rotation_scenario_speed%"));
+
+
 *due to some rounding errors the input data currently may contain in some cases
 *very small, negative numbers. These numbers have to be set to 0 as area
 *cannot be smaller than 0!
