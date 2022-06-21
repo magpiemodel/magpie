@@ -11,8 +11,6 @@ im_wat_avail(t,"ground",j) = 0;
 im_wat_avail(t,"ren_ground",j) = 0;
 im_wat_avail(t,"technical",j) = 0;
 
-i43_crop_area("y1995",j,w,kcr) = fm_croparea("y1995",j,w,kcr);
-
 
 $ifthen "%c43_watavail_scenario%" == "nocc" f43_wat_avail(t_all,j) = f43_wat_avail("y1995",j);
 $elseif "%c43_watavail_scenario%" == "nocc_hist" f43_wat_avail(t_all,j)$(m_year(t_all) > sm_fix_cc) = f43_wat_avail(t_all,j)$(m_year(t_all) = sm_fix_cc);
