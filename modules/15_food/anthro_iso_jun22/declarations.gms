@@ -145,11 +145,14 @@ parameters
  p15_kcal_pc_livestock_supply_target(iso)		 	 Target of per capita livestock consumption (kcal per capita per day)
 
  p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)     Calibrated estimates of BMI share for population groups  (1)
- p15_intake_total_iso_calibrated(t,iso)                Total food intake in a country (kcal per capita per day)
+ p15_intake_total(t,iso)                Total food intake in a country (kcal per capita per day)
 
 *food waste
  p15_demand2intake_ratio(t,iso)                 Ratio between food calorie demand and intake (1)
- p15_demand2intake_ratio_scen(t,iso)            Ratio between food calorie demand and intake according to exogenous food waste scenario (1)
+ p15_waste_fao(t,iso,kfo)                       Intermediate estimate of household waste using FAO household waste ratios (kcal per capita per day)
+ p15_waste_pc(t,iso,kfo)                        Household waste by food group (kcal per capita per day)
+ p15_intake_detail(t,iso,kfo)                   Intake by food group (kcal per capita per day)
+ p15_demand2intake_ratio_detail(t,iso,kfo)      Food waste ratio by food group (kcal per capita per day)
 
 * transition to exogenous scenario diets
  i15_intake_scen_target(t,iso)                  Target for total per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)

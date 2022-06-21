@@ -151,50 +151,32 @@ if (s15_run_diet_postprocessing = 1,
         1 - (sum(bmi_group15, p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15))
         - p15_bmi_shr_calibrated(t,iso,sex,age,"medium"));
 
-  p15_intake_total_iso_calibrated(t,iso) =
-         sum((sex, age, bmi_group15), p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)*
-         im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
-         + i15_kcal_pregnancy(t,iso);
+  p15_intake_total(t,iso)$(sum((sex,age), im_demography(t,iso,sex,age)) >0 ) =
+       (sum((sex, age, bmi_group15), p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)*
+       im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
+       + i15_kcal_pregnancy(t,iso))
+       / sum((sex,age), im_demography(t,iso,sex,age));
 
-  p15_demand2intake_ratio(t,iso)$(p15_intake_total_iso_calibrated(t,iso) >0 ) =
-          sum(kfo, p15_kcal_pc_iso(t,iso,kfo)) /
-          p15_intake_total_iso_calibrated(t,iso);
+  p15_demand2intake_ratio(t,iso) = 1$(p15_intake_total(t,iso) = 0) +
+         (sum(kfo,p15_kcal_pc_iso(t,iso,kfo)) / p15_intake_total(t,iso))$(
+           p15_intake_total(t,iso) <> 0);
 
+* Next, we derive a product-specific waste share, which uses product specific
+* waste shares from FAO and calibrates them proportionally to meet total
+* food waste ratio.
 
-* In case, no exogenous waste scenario is selceted, the original regression-
-* based estimates for food calorie oversupply are used as waste scenario.
-* This information is needed in case that an exogenous diet scenario should be
-* constructed from food calorie intake.
-  p15_demand2intake_ratio_scen(t,iso) =p15_demand2intake_ratio(t,iso);
+   p15_waste_fao(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo)-p15_kcal_pc_iso(t,iso,kfo)/f15_overcons_FAOwaste(iso,kfo);
 
+   p15_waste_pc(t,iso,kfo)$(sum(kfo2, p15_waste_fao(t,iso,kfo2))<>0) = p15_waste_fao(t,iso,kfo) / sum(kfo2, p15_waste_fao(t,iso,kfo2))*
+                               (p15_intake_total(t,iso)*p15_demand2intake_ratio(t,iso)-p15_intake_total(t,iso));
 
-* ###### Exogenous food waste scenario
+   p15_intake_detail(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo) - p15_waste_pc(t,iso,kfo);
 
-  if(s15_exo_waste = 1,
-
-* "Downwards convergence" of regional calorie oversupply due to food waste to the
-* waste reduction target, i.e. only for values that are higher than the target:
-
-    p15_demand2intake_ratio_scen(t,iso)$(p15_demand2intake_ratio(t,iso) > s15_waste_scen )
-                      = p15_demand2intake_ratio(t,iso)*(1-i15_exo_foodscen_fader(t,iso))
-                        + s15_waste_scen*i15_exo_foodscen_fader(t,iso);
-
-    p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
-    p15_kcal_pc_iso(t,iso,kfo)$(p15_demand2intake_ratio(t,iso) >0 ) = p15_kcal_pc_iso_orig(t,iso,kfo)*(
-                        p15_demand2intake_ratio_scen(t,iso)/p15_demand2intake_ratio(t,iso) );
-
-  );
+   p15_demand2intake_ratio_detail(t,iso,kfo)=1$(p15_intake_detail(t,iso,kfo) > 0) +
+            (p15_kcal_pc_iso(t,iso,kfo) / p15_intake_detail(t,iso,kfo))$(p15_intake_detail(t,iso,kfo) > 0);
 
 
-* Now, a second waste parameter can be calculated, which is needed for the construction
-* of exogenous diet scenarios on the basis of calorie intake. This parameter describes
-* the development of food waste over time and reflects either the exogenous food waste
-* scenario or the original regression-based estimates for food calorie oversupply:
 
-  p15_foodwaste_growth(t,iso) = ( 1$(p15_demand2intake_ratio_ref(iso) = 0)
-            + (p15_demand2intake_ratio_scen(t,iso)/p15_demand2intake_ratio_ref(iso))$(
-              p15_demand2intake_ratio_ref(iso) > 0)
-              );
 
 * ###### Exogenous EAT Lancet diet scenario
 
@@ -209,7 +191,6 @@ if (s15_run_diet_postprocessing = 1,
 
   if(s15_exo_diet = 1,
 
-
 *' 1.) In a first step, the exogenous scenario diets are defined by selecting a
 *' scenario target for total daily per capita food intake and by choosing
 *' food-specific dietary patterns:
@@ -220,13 +201,14 @@ $ifthen "%c15_kcal_scen%" == "healthy_BMI"
          + i15_kcal_pregnancy(t,iso)
          ) / sum((sex,age), im_demography(t,iso,sex,age));
 $elseif "%c15_kcal_scen%" == "endo"
-  i15_intake_scen_target(t,iso)$(sum((sex,age), im_demography(t,iso,sex,age))>0) = (
-    sum((sex, age, bmi_group15), im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
-     + i15_kcal_pregnancy(t,iso)
-     ) / sum((sex,age), im_demography(t,iso,sex,age));
+  i15_intake_scen_target(t,iso) = p15_intake_total(t,iso);
 $else
   i15_intake_scen_target(t,iso) = sum(kfo,i15_intake_EATLancet_all(iso,"%c15_kcal_scen%","%c15_EAT_scen%",kfo));
 $endif
+
+* Intake target is adjusted to meet the calorie target
+i15_intake_detailed_scen_target(t,iso,kfo)$(p15_intake_total(t,iso)>0) =
+    p15_intake_detail(t,iso,kfo) / p15_intake_total(t,iso) * i15_intake_scen_target(t,iso);
 
 *' 2.) The second step defines the daily per capita intake of different food
 *' commodities by filling up the scenario target for total daily per capita food
@@ -238,6 +220,7 @@ $endif
 
 * The EAT lancet target values are the same for non-staples irrespective of the calorie target
 * Only non-staples differ
+
   i15_intake_EATLancet(iso,kfo) =
         i15_intake_EATLancet_all(iso,"2100kcal","%c15_EAT_scen%",kfo);
 
@@ -260,46 +243,72 @@ $endif
   if (s15_exo_scp=1,
     i15_intake_detailed_scen_target(t,iso,"scp") = i15_intake_EATLancet(iso,"scp"));
   if (s15_exo_alcohol=1,
-* calculating intake back from demand using FAO product specific food waste ratios
-    i15_intake_detailed_scen_target(t,iso,"alcohol")$(f15_calib_fsupply(iso)*f15_overcons_FAOwaste(iso,"alcohol")*p15_foodwaste_growth(t,iso)>0) =
-          p15_kcal_pc_iso(t,iso,"alcohol")
-          /(f15_calib_fsupply(iso)*f15_overcons_FAOwaste(iso,"alcohol")*p15_foodwaste_growth(t,iso));
+* alcohol target is not part of EAT Lancet recommendation. Upper boundary is therefore included as specific swtich s15_alc_scen
     i15_intake_detailed_scen_target(t,iso,"alcohol")$(i15_intake_detailed_scen_target(t,iso,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,iso))
       = s15_alc_scen*i15_intake_scen_target(t,iso);
-    i15_intake_detailed_scen_target(t,iso,"alcohol") = i15_intake_EATLancet(iso,"alcohol");
   );
 
   i15_intake_detailed_scen_target(t,iso,EAT_staples)$(sum(EAT_staples2,i15_intake_EATLancet(iso,EAT_staples2))>0) = (
-            i15_intake_scen_target(t,iso) - sum(EAT_nonstaples,i15_intake_EATLancet(iso,EAT_nonstaples)) )*(
+            i15_intake_scen_target(t,iso) - sum(EAT_nonstaples,i15_intake_detailed_scen_target(t,iso,EAT_nonstaples)) )*(
             i15_intake_EATLancet(iso,EAT_staples)/sum(EAT_staples2,i15_intake_EATLancet(iso,EAT_staples2)) );
 
-
-*' 3.) The third step estimates the calorie supply at household level by multiplying
-*' daily per capita calorie intake with a ratio  of supply to intake
-*' (`f15_overcons_FAOwaste(iso,kfo)`), based on FAO estimates on historical food waste
-*' at consumption level and food conversion factors, and with a calibration
-*' factor `f15_calib_fsupply(i)`. This factor ensures that the estimated food
-*' supply (based on MAgPIE calorie intake, FAO waste shares and food converion
-*' factors) is calibrated to FAO food supply for the only historical time slice
-*' of the EAT Lancet diet scenarios (y2010). A multiplicative factor accounts for
-*' increases in food waste over time relative to the only historical time slice
-*' of the EAT Lancet diet scenarios, according to the regression-based approach.
-
-  i15_kcal_pc_scen_target(t,iso,kfo) = (f15_calib_fsupply(iso)*f15_overcons_FAOwaste(iso,kfo)
-                                    *i15_intake_detailed_scen_target(t,iso,kfo))
-                                    *p15_foodwaste_growth(t,iso);
-
-*' 4.) In the last step, the regression-based calculation of daily per capita food demand
-*' is faded into the exogenous diet scenario according to a predefined speed of
+*  3.) In the third step, the regression-based calculation of intake
+*' is faded into the exogenous intake scenario according to a predefined speed of
 *' convergence (note that fading should start after the historical time slice of
 *' the EAT Lancet diet scenarios (y2010) as defined in `i15_exo_foodscen_fader(t,iso)`):
+  p15_intake_detail(t,iso,kfo) = p15_intake_detail(t,iso,kfo) * (1-i15_exo_foodscen_fader(t,iso))
+                      + i15_intake_detailed_scen_target(t,iso,kfo) * i15_exo_foodscen_fader(t,iso);
 
-    p15_kcal_pc_iso_orig(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo);
-    p15_kcal_pc_iso(t,iso,kfo) = p15_kcal_pc_iso_orig(t,iso,kfo) * (1-i15_exo_foodscen_fader(t,iso))
-                        + i15_kcal_pc_scen_target(t,iso,kfo) * i15_exo_foodscen_fader(t,iso);
+*' 4.) The fourth step estimates the calorie supply at household level by multiplying
+*' daily per capita calorie intake with the demand2intake ratio that was estimated
+*' previously. It assures that if commodities with higher food waste ratio are
+*' increasingly consumed, food waste increases.
+  p15_kcal_pc_iso(t,iso,kfo) = p15_intake_detail(t,iso,kfo)
+                                  *p15_demand2intake_ratio_detail(t,iso,kfo);
+
+*' Total waste share and total intake are adapted to new calculations.
+*' Total demand2intake ratio can now be different due to increases
+*' of products with higher waste share.
+
+  p15_intake_total(t,iso) = sum(kfo, p15_intake_detail(t,iso,kfo));
+
+  p15_demand2intake_ratio_detail(t,iso,kfo)=1$(p15_intake_detail(t,iso,kfo) > 0) +
+  (p15_kcal_pc_iso(t,iso,kfo) / p15_intake_detail(t,iso,kfo))$(p15_intake_detail(t,iso,kfo) > 0);
+
+);
+*' End of special postprocessing food demand scenarios.
+
+
+
+
+* ###### Exogenous food waste scenario
+
+  if(s15_exo_waste = 1,
+
+* "Downwards convergence" of regional calorie oversupply due to food waste to the
+* waste reduction target, i.e. only for values that are higher than the target:
+
+    p15_demand2intake_ratio(t,iso)$(p15_demand2intake_ratio(t,iso) > s15_waste_scen )
+                      = p15_demand2intake_ratio(t,iso)*(1-i15_exo_foodscen_fader(t,iso))
+                        + s15_waste_scen*i15_exo_foodscen_fader(t,iso);
+
+* waste calculation by crop type
+    p15_waste_fao(t,iso,kfo) = p15_intake_detail(t,iso,kfo) * f15_overcons_FAOwaste(iso,kfo);
+
+    p15_waste_pc(t,iso,kfo)$(sum(kfo2, p15_waste_fao(t,iso,kfo2))<>0) = p15_waste_fao(t,iso,kfo) / sum(kfo2, p15_waste_fao(t,iso,kfo2))*
+                  (p15_intake_total(t,iso)*p15_demand2intake_ratio(t,iso)-p15_intake_total(t,iso));
+
+    p15_demand2intake_ratio_detail(t,iso,kfo)=1$(p15_intake_detail(t,iso,kfo) > 0) +
+                  (p15_kcal_pc_iso(t,iso,kfo) / p15_intake_detail(t,iso,kfo))$(p15_intake_detail(t,iso,kfo) > 0);
+
+* Waste ratio is applied
+    p15_kcal_pc_iso(t,iso,kfo) = p15_intake_detail(t,iso,kfo) * p15_demand2intake_ratio_detail(t,iso,kfo);
 
   );
-*' End of special postprocessing food demand scenarios.
+
+
+
+
 
 
 *' Negative values that can possibly occur due to calibration are set to zero.
