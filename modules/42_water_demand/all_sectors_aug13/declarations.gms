@@ -26,7 +26,7 @@ equations
 positive variables
   vm_watdem(wat_dem,j)               Amount of water needed in different sectors (mio. m^3 per yr)
   v42_irrig_eff(j)                   Irrigation efficiency (1)
-  vm_water_cost(i)                   Cost of irrigation water (USD per m^3 per yr)
+  vm_water_cost(i)                   Cost of irrigation water (USD per m^3)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

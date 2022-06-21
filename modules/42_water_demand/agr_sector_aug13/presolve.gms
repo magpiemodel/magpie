@@ -61,3 +61,8 @@ else
 	v42_irrig_eff.fx(j) = 1/(1+2.718282**((-22160-sum(cell(i,j),im_gdp_pc_mer(t,i)))/37767));
  );
 );
+
+*Pumping cost in the current time step
+if(m_year(t) > s42_pumping_startyear,
+ic42_pumping_cost(i) = f42_pumping_cost(t,i)*s42_multiplier;
+);

@@ -6,4 +6,3 @@
 # |  Contact: magpie@pik-potsdam.de
 
 name,type,reason
-vm_water_cost, variable, calculates cost of water pumping to be used in the costs module directly 

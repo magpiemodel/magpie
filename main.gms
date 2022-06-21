@@ -66,7 +66,7 @@ $title magpie
 *' from land-use change dynamics, i.e. from conversion of different biomes into agricultural land
 *' and consequent loss of terrestrial carbon stocks (@popp_land-use_2014), also including the
 *' depletion of organic matter in soils ([59_som]). The land also serves as a sink for atmospheric
-*' carbon when agricultural land is set aside from production and the associated regrowth of natural
+*' carbon when agricultural land is taken out of production and the associated regrowth of natural
 *' vegetation generates negative emissions from land-use change.
 *' Nitrogen emissions ([51_nitrogen]) are estimated based on nitrogen budgets for croplands,
 *' pastures ([50_nr_budgets]) and the livestock sector ([55_awms]) (@bodirsky_reactive_2014).
@@ -147,24 +147,24 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
 * Used data set: rev4.72_h12_magpie.tgz
-* md5sum: e83036d8f33e54a3077cf7fc7d8838cc
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.72_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: 3d997a627618164d393e7a93495ee7cc
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.72_h12_validation.tgz
-* md5sum: b03a100d043b3dc2c198cf115fe4b696
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev4.21.tgz
-* md5sum: f26b5f707f82f04b5dd3c87ff1a47509
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: additional_data_rev4.24.tgz
+* md5sum: b490a7c91c5d31881295efe8a7f3c5fb
+* Repository: /p/projects/landuse/data/input/archive
 * 
 * Used data set: calibration_H12_per_ton_fao_may22_28May22.tgz
-* md5sum: f6bf26be99c5dbd29e13a38af38c0d31
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -190,7 +190,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Tue Jun 14 12:17:56 2022
+* Last modification (input data): Mon Jun 13 17:36:51 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -216,7 +216,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  0306_doublepc_indiaYields
+$setglobal c_title  default
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
