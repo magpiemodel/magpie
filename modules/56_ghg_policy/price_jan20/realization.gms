@@ -6,7 +6,12 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description This realization applies pollutant prices to different
-*' emission types depending on the emission pricing policy defined in `f56_emis_policy`.
+*' emission types in Agriculture, Forestry and Other Land Use (AFOLU), 
+*' depending on the GHG emission pricing policy defined in `c56_emis_policy`.
+*' CO2 emissions from Land Use, Land-Use Change and Forestry (LULUCF) are calculated 
+*' based on carbon stock changes between timesteps in the interface `vm_carbon_stock`. 
+*' Note that the CO2 emissions subject to pricing can differ from the actual CO2 emissions, 
+*' depending on the choice of `c56_carbon_stock_pricing`. 
 *' In addition, the average annual reward for carbon dioxide removal (CDR)
 *' and the reward or penalty of local biophysical effects
 *' from afforestation [32_forestry] is calculated as the present value (PV) of all

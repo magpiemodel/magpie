@@ -31,18 +31,18 @@ q31_expansion_cost(j2,grassland) ..
   v31_cost_grass_expansion(j2, grassland) =g=
                           (v31_grass_area(j2, grassland) - pc31_grass(j2,grassland)) * s31_cost_expansion;
 
-*' Cost of production account for the cost of moving animals to grassland areas plus the costs of 
+*' Cost of production account for the cost of moving animals to grassland areas plus the costs of
 *' expanding aras of production.
 
 q31_cost_prod_past(i2) ..
-  vm_cost_prod(i2,"pasture") =e= sum(cell(i2,j2), vm_prod(j2,"pasture")) * s31_cost_grass_prod +
+  vm_cost_prod_past(i2) =e= sum(cell(i2,j2), vm_prod(j2,"pasture")) * s31_cost_grass_prod +
                                  sum((cell(i2,j2), grassland), v31_cost_grass_expansion(j2,grassland));
 
 *' On the basis of the required pasture area, cellular above ground carbon stocks are calculated:
 
-q31_carbon(j2,ag_pools) ..
- vm_carbon_stock(j2,"past",ag_pools) =e=
-         sum(ct, vm_land(j2,"past")*fm_carbon_density(ct,j2,"past",ag_pools));
+q31_carbon(j2,ag_pools,stockType) ..
+ vm_carbon_stock(j2,"past",ag_pools,stockType) =e= 
+   m_carbon_stock(vm_land,fm_carbon_density,"past");
 
 *' By estimating the different area of managed pasture and rangeland via the luh2 side layers, the biodiversity value for pastures and rangeland is calculated in following:
   q31_bv_manpast(j2,potnatveg) .. vm_bv(j2,"manpast",potnatveg)

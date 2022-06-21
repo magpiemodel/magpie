@@ -40,7 +40,7 @@ loop(t_all,
   im_pop_iso(t_all,iso) = f09_pop_iso(t_all,iso,"SSP2");
   im_pop(t_all,i) = i09_pop_raw(t_all,i,"SSP2");
   im_gdp_pc_mer(t_all,i) = i09_gdp_pc_mer_raw(t_all,i,"SSP2");
-  i09_gdp_pc_mer_iso(t_all,iso) = i09_gdp_pc_mer_iso_raw(t_all,iso,"SSP2");
+  im_gdp_pc_mer_iso(t_all,iso) = i09_gdp_pc_mer_iso_raw(t_all,iso,"SSP2");
   im_gdp_pc_ppp_iso(t_all,iso) = i09_gdp_pc_ppp_iso_raw(t_all,iso,"SSP2");
   im_development_state(t_all,i) = f09_development_state(t_all,i,"SSP2");
 else
@@ -49,12 +49,12 @@ else
   im_pop_iso(t_all,iso) = f09_pop_iso(t_all,iso,"%c09_pop_scenario%");
   im_pop(t_all,i) = i09_pop_raw(t_all,i,"%c09_pop_scenario%");
   im_gdp_pc_mer(t_all,i) = i09_gdp_pc_mer_raw(t_all,i,"%c09_gdp_scenario%");
-  i09_gdp_pc_mer_iso(t_all,iso) = i09_gdp_pc_mer_iso_raw(t_all,iso,"%c09_gdp_scenario%");
+  im_gdp_pc_mer_iso(t_all,iso) = i09_gdp_pc_mer_iso_raw(t_all,iso,"%c09_gdp_scenario%");
   im_gdp_pc_ppp_iso(t_all,iso) = i09_gdp_pc_ppp_iso_raw(t_all,iso,"%c09_gdp_scenario%");
   im_development_state(t_all,i) = f09_development_state(t_all,i,"%c09_gdp_scenario%");
  );
 );
 
 * Calculate GDP from p.c. GDP and population of previously selected scenarios
-i09_gdp_mer_iso(t_all,iso) = i09_gdp_pc_mer_iso(t_all,iso) * im_pop_iso(t_all,iso);
+i09_gdp_mer_iso(t_all,iso) = im_gdp_pc_mer_iso(t_all,iso) * im_pop_iso(t_all,iso);
 i09_gdp_ppp_iso(t_all,iso) = im_gdp_pc_ppp_iso(t_all,iso) * im_pop_iso(t_all,iso);
