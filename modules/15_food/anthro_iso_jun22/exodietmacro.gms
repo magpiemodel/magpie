@@ -327,13 +327,13 @@ i15_intake_detailed_scen_target(t,iso,kfo)$(p15_intake_total(t,iso)>0) =
     p15_waste_pc(t,iso,kfo)$(sum(kfo2, p15_waste_pc(t,iso,kfo2))<>0) = p15_waste_pc(t,iso,kfo) / sum(kfo2, p15_waste_pc(t,iso,kfo2))*
                   (p15_intake_total(t,iso)*p15_demand2intake_ratio(t,iso)-p15_intake_total(t,iso));
 
+* Waste ratio is applied
+    p15_kcal_pc_iso(t,iso,kfo) = p15_intake_detail(t,iso,kfo) + p15_kcal_pc_iso(t,iso,kfo);
+
     p15_demand2intake_ratio_detail(t,iso,kfo)=1$(p15_intake_detail(t,iso,kfo) = 0) +
                   (p15_kcal_pc_iso(t,iso,kfo) / p15_intake_detail(t,iso,kfo))$(p15_intake_detail(t,iso,kfo) > 0);
 
-* Waste ratio is applied
-    p15_kcal_pc_iso(t,iso,kfo) = p15_intake_detail(t,iso,kfo) * p15_demand2intake_ratio_detail(t,iso,kfo);
-
-  );
+);
 
 
 
