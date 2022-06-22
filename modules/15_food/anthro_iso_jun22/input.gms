@@ -243,7 +243,7 @@ $offdelim;
 
 table f15_overcons_FAOwaste(iso,kfo)   Ratio between food calorie supply and food intake based on FAO food waste shares (1)
 $ondelim
-$include "./modules/15_food/input/f15_supply2intake_ratio_bottomup_iso.cs3"
+$include "./modules/15_food/input/f15_supply2intake_ratio_FAO_iso.cs3"
 $offdelim;
 
 parameter f15_calib_fsupply(iso) Factor calibrating food supply as estimated from intake and FAO waste assumptions to FAO food supply (1)

@@ -162,16 +162,45 @@ if (s15_run_diet_postprocessing = 1,
            p15_intake_total(t,iso) <> 0);
 
 * Next, we derive a product-specific waste share, which uses product specific
-* waste shares from FAO and calibrates them proportionally to meet total
+* waste shares from FAO and calibrates them to meet total
 * food waste ratio.
+* To achieve maximum consistency, this calibration involves three steps.
 
-   p15_waste_fao(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo)-p15_kcal_pc_iso(t,iso,kfo)/f15_overcons_FAOwaste(iso,kfo);
+* first apply FAO waste factors, than rescale intake proportionally to meet total intake
+* This distributes the differences in waste estimates rather equally over different products
 
-   p15_waste_pc(t,iso,kfo)$(sum(kfo2, p15_waste_fao(t,iso,kfo2))<>0) = p15_waste_fao(t,iso,kfo) / sum(kfo2, p15_waste_fao(t,iso,kfo2))*
-                               (p15_intake_total(t,iso)*p15_demand2intake_ratio(t,iso)-p15_intake_total(t,iso));
+  p15_intake_detail(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo)/f15_overcons_FAOwaste(iso,kfo);
+
+  p15_intake_detail(t,iso,kfo)$(sum(kfo2, p15_intake_detail(t,iso,kfo2))<>0) =
+                    p15_intake_detail(t,iso,kfo) / sum(kfo2, p15_intake_detail(t,iso,kfo2))*
+                    p15_intake_total(t,iso);
+* to avoid negative waste, we reduce intake where it exceed food availabiltiy
+
+  p15_intake_detail(t,iso,kfo)$(p15_intake_detail(t,iso,kfo)>p15_kcal_pc_iso(t,iso,kfo)) =
+                  p15_kcal_pc_iso(t,iso,kfo);
+
+* in a second round of calibration, we rescale food waste to meet total food waste.
+* Now, waste is increasing only where there is already waste.
+
+   p15_waste_pc(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo) - p15_intake_detail(t,iso,kfo);
+
+   p15_waste_pc(t,iso,kfo) = 0$(sum(kfo2, p15_waste_pc(t,iso,kfo2))=0) + (
+                    p15_waste_pc(t,iso,kfo) / sum(kfo2, p15_waste_pc(t,iso,kfo2))*
+                    (p15_intake_total(t,iso)*p15_demand2intake_ratio(t,iso)-p15_intake_total(t,iso))
+                    )$(sum(kfo2, p15_waste_pc(t,iso,kfo2))<>0);
 
    p15_intake_detail(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo) - p15_waste_pc(t,iso,kfo);
 
+
+* the third calibration is only needed for those countries where total intake exceeds calory availabtility
+* here we want to have the inconsistency in the waste, not in the intake.
+
+   p15_intake_detail(t,iso,kfo)$(sum(kfo2, p15_intake_detail(t,iso,kfo2))<>0) =
+                     p15_intake_detail(t,iso,kfo) / sum(kfo2, p15_intake_detail(t,iso,kfo2))*
+                     p15_intake_total(t,iso);
+   p15_waste_pc(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo) - p15_intake_detail(t,iso,kfo);
+
+* we calculate a product specific demand2intake ratio
    p15_demand2intake_ratio_detail(t,iso,kfo)=1$(p15_intake_detail(t,iso,kfo) = 0) +
             (p15_kcal_pc_iso(t,iso,kfo) / p15_intake_detail(t,iso,kfo))$(p15_intake_detail(t,iso,kfo) > 0);
 
@@ -271,6 +300,7 @@ i15_intake_detailed_scen_target(t,iso,kfo)$(p15_intake_total(t,iso)>0) =
 *' of products with higher waste share.
 
   p15_intake_total(t,iso) = sum(kfo, p15_intake_detail(t,iso,kfo));
+  p15_waste_pc(t,iso,kfo) = p15_kcal_pc_iso(t,iso,kfo) - p15_intake_detail(t,iso,kfo);
 
   p15_demand2intake_ratio_detail(t,iso,kfo)=1$(p15_intake_detail(t,iso,kfo) = 0) +
   (p15_kcal_pc_iso(t,iso,kfo) / p15_intake_detail(t,iso,kfo))$(p15_intake_detail(t,iso,kfo) > 0);
@@ -293,9 +323,8 @@ i15_intake_detailed_scen_target(t,iso,kfo)$(p15_intake_total(t,iso)>0) =
                         + s15_waste_scen*i15_exo_foodscen_fader(t,iso);
 
 * waste calculation by crop type
-    p15_waste_fao(t,iso,kfo) = p15_intake_detail(t,iso,kfo) * f15_overcons_FAOwaste(iso,kfo);
 
-    p15_waste_pc(t,iso,kfo)$(sum(kfo2, p15_waste_fao(t,iso,kfo2))<>0) = p15_waste_fao(t,iso,kfo) / sum(kfo2, p15_waste_fao(t,iso,kfo2))*
+    p15_waste_pc(t,iso,kfo)$(sum(kfo2, p15_waste_pc(t,iso,kfo2))<>0) = p15_waste_pc(t,iso,kfo) / sum(kfo2, p15_waste_pc(t,iso,kfo2))*
                   (p15_intake_total(t,iso)*p15_demand2intake_ratio(t,iso)-p15_intake_total(t,iso));
 
     p15_demand2intake_ratio_detail(t,iso,kfo)=1$(p15_intake_detail(t,iso,kfo) = 0) +

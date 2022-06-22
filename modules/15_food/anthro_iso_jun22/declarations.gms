@@ -149,7 +149,6 @@ parameters
 
 *food waste
  p15_demand2intake_ratio(t,iso)                 Ratio between food calorie demand and intake (1)
- p15_waste_fao(t,iso,kfo)                       Intermediate estimate of household waste using FAO household waste ratios (kcal per capita per day)
  p15_waste_pc(t,iso,kfo)                        Household waste by food group (kcal per capita per day)
  p15_intake_detail(t,iso,kfo)                   Intake by food group (kcal per capita per day)
  p15_demand2intake_ratio_detail(t,iso,kfo)      Food waste ratio by food group (kcal per capita per day)
