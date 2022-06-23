@@ -21,7 +21,7 @@ source("config/default.cfg")
 cfg$input <- c(cellular = "rev4.72_0306_indiaYields_05_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
         regional = "rev4.72_0306_indiaYields_05_h12_magpie.tgz",
         validation = "rev4.72_0306_indiaYields_05_h12_validation.tgz",
-        calibration = "calibration_H12_per_ton_fao_may22_28May22..tgz",
+        calibration = "calibration_H12_per_ton_fao_may22_28May22.tgz",
         additional = "additional_data_rev4.25.tgz")
 
 ##Please always use the updated `calibration` and `additional` files from the main default.cfg file
@@ -32,7 +32,12 @@ cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=
 #Download input data
 cfg$force_download <- TRUE
 
-#Specifying the value of pumping costs switch as 1 for India default analysis 
+#Specifying the value of pumping costs switch as 1 for India default analysis
 cfg$gms$s42_multiplier <- 1
 
 start_run(cfg)
+
+#Check date of calib file in the archive
+magpie4::submitCalibration(name = "IndiaCalibration", file="fulldata.gdx")
+
+#submitCalibration("IndiaCalibration",file="fulldata.gdx")
