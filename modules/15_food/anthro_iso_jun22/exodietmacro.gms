@@ -208,7 +208,7 @@ if (s15_run_diet_postprocessing = 1,
 * ###### Exogenous EAT Lancet diet scenario
 
 *' @code
-*' Transition to exogenous EAT Lancet diet scenarios:
+*' Transition to exogenous Planetary Health diet scenarios [@willett_food_2019]:
 *' It is possible to define exogenous diet scenarios that replace the regression-based
 *' calculation of food intake and demand according to a predefined speed of
 *' convergence from `p15_kcal_pc_calibrated(t,iso,kfo)` to the scenario-dependent target

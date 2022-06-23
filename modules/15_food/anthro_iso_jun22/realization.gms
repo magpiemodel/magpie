@@ -40,5 +40,8 @@ $Ifi "%phase%" == "postsolve" $include "./modules/15_food/anthro_iso_jun22/posts
 *' the file `standalone/demand_model.gms`.
 *' The model is described in [@bodirsky_starved_nodate]
 *' (food_demand_coupling.svg){ width=60% }
+*' The model also includes a number of switches that allow for exogenous
+*' diet scenarios, most importantly the shift to the Planetary Health diet
+*' [@willett_food_2019].
 *'
-*' @authors Benjamin Leon Bodirsky, Jan Philipp Dietrich
+*' @authors Benjamin Leon Bodirsky, Isabelle Weindl, Jan Philipp Dietrich

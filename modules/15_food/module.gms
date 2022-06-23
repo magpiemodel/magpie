@@ -9,7 +9,7 @@
 *'
 *' @description The main function of the food demand module is to forecast
 *' the food demand from agricultural products, which is used in the module [16_demand].
-*' @authors Benjamin Leon Bodirsky, Jan Philipp Dietrich
+*' @authors Benjamin Leon Bodirsky, Isabelle Weindl, Jan Philipp Dietrich
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%food%" == "anthro_iso_jun22" $include "./modules/15_food/anthro_iso_jun22/realization.gms"
