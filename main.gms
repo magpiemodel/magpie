@@ -66,7 +66,7 @@ $title magpie
 *' from land-use change dynamics, i.e. from conversion of different biomes into agricultural land
 *' and consequent loss of terrestrial carbon stocks (@popp_land-use_2014), also including the
 *' depletion of organic matter in soils ([59_som]). The land also serves as a sink for atmospheric
-*' carbon when agricultural land is set aside from production and the associated regrowth of natural
+*' carbon when agricultural land is taken out of production and the associated regrowth of natural
 *' vegetation generates negative emissions from land-use change.
 *' Nitrogen emissions ([51_nitrogen]) are estimated based on nitrogen budgets for croplands,
 *' pastures ([50_nr_budgets]) and the livestock sector ([55_awms]) (@bodirsky_reactive_2014).
@@ -148,24 +148,24 @@ $title magpie
 *
 * Used data set: rev4.73_h12_magpie.tgz
 * md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 *
 * Used data set: rev4.73_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
 * md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 *
 * Used data set: rev4.73_h12_validation.tgz
 * md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
-*
-* Used data set: additional_data_rev4.22.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* 
+* Used data set: additional_data_rev4.24.tgz
+* md5sum: b490a7c91c5d31881295efe8a7f3c5fb
+* Repository: /p/projects/landuse/data/input/archive
 *
 * Used data set: calibration_H12_per_ton_fao_may22_28May22.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
-*
+* 
 * Low resolution: c200
 * High resolution: 0.5
 *
@@ -188,10 +188,10 @@ $title magpie
 * * Output resolution: c200
 * * Regionscode: 62eff8f7
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
-*
-*
-* Last modification (input data): Tue Jun 21 15:36:13 2022
-*
+* 
+* 
+* Last modification (input data): Mon Jun 13 17:36:51 2022
+* 
 *###################### R SECTION END (VERSION INFO) ###########################
 
 $offupper

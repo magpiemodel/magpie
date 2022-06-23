@@ -20,13 +20,14 @@
 *' from cropland production that have a low suitability, e.g. due to steep slopes,
 *' to estimate the available cropland area. The cultivated area therefore has
 *' to be smaller than the available cropland area. Moreover, the available cropland
-*' can be reduced by setting aside cropland for other land cover types.
+*' can be reduced by constraining the cropland area in favour of other land types,
+*' in order to increase compositional heterogeneity of land types at the cell level.
 
  q30_avl_cropland(j2)  ..
    vm_land(j2,"crop") =l= sum(ct, p30_avl_cropland(ct,j2));
 
-*' Rotational constraints prevent overoptimization. In this module realization,
-*' they are implemented via a penalty paymnet if the constraints are violated.
+*' Rotational constraints prevent over-specialization. In this module realization,
+*' they are implemented via a penalty payment if the constraints are violated.
 
 q30_rotation_penalty(i2) ..
   vm_rotation_penalty(i2)
@@ -38,7 +39,7 @@ q30_rotation_penalty(i2) ..
 
 *' The penalty applies to the areas which exceed a certain maximum
 *' share of the land. Below this share, negative benefits are
-*' avoided by defining the penalty positive
+*' avoided by defining the penalty to be positive.
 
  q30_rotation_max(j2,rotamax_red30) ..
    v30_penalty(j2,rotamax_red30)
@@ -46,18 +47,19 @@ q30_rotation_penalty(i2) ..
    sum((rota_kcr30(rotamax_red30,kcr),w),vm_area(j2,kcr,w))
    - vm_land(j2,"crop") * f30_rotation_rules(rotamax_red30);
 
-*' Minimum constraints imply that penalties applies when a certain mimimum
+*' Minimum constraints apply penalties when a certain mimimum
 *' share of a group is not achieved. This is used to guarantee a minimum
-*' diversity withing cells.
+*' crop group diversity withing cells.
+
  q30_rotation_min(j2,rotamin_red30) ..
     v30_penalty(j2,rotamin_red30)
     =g=
     vm_land(j2,"crop") * f30_rotation_rules(rotamin_red30)
     - sum((rota_kcr30(rotamin_red30,kcr),w), vm_area(j2,kcr,w));
 
-* The following maximum constraint avoids over-specialization in irrigated systems.
-* No minimum constraint is included for irrigated areas for computational
-* reasons. Minimum constraints just need to be met on total areas.
+*' The following maximum constraint avoids over-specialization in irrigated systems.
+*' No minimum constraint is included for irrigated areas for computational
+*' reasons. Minimum constraints just need to be met on total areas.
 
  q30_rotation_max_irrig(j2,rotamax_red30) ..
    v30_penalty_max_irrig(j2,rotamax_red30)
@@ -86,10 +88,9 @@ q30_rotation_penalty(i2) ..
  					=e=
  					sum((crop_ann30,w), vm_area(j2,crop_ann30,w)) * fm_bii_coeff("crop_ann",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
 
-* perennial crops are calculated as difference, as they shall also include set-aside land
+*' perennial crops are calculated as difference, as they shall also include fallow land
  q30_bv_per(j2,potnatveg) ..
-          vm_bv(j2,"crop_per",potnatveg)
- 					=e=
- 					(vm_land(j2,"crop") * fm_bii_coeff("crop_per",potnatveg)
-          - sum((crop_ann30,w), vm_area(j2,crop_ann30,w)) * fm_bii_coeff("crop_ann",potnatveg))
-          * fm_luh2_side_layers(j2,potnatveg);
+        vm_bv(j2,"crop_per",potnatveg)
+ 				=e=
+ 				(vm_land(j2,"crop") - sum((crop_ann30,w), vm_area(j2,crop_ann30,w)))
+        * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j2,potnatveg);

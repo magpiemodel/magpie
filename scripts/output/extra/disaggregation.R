@@ -114,18 +114,19 @@ getNames(urban_land_hr) <- "urban"
   urban_land_hr <- "static"
 }
 
-# account for country-specific set-aside shares in post-processing
+# account for country-specific SNV shares in post-processing
 iso <- readGDX(gdx, "iso")
-set_aside_iso <- readGDX(gdx,"policy_countries30")
-set_aside_select <- readGDX(gdx, "s30_set_aside_shr")
-set_aside_noselect <- readGDX(gdx, "s30_set_aside_shr_noselect")
-set_aside_shr <- new.magpie(iso, fill = set_aside_noselect)
-set_aside_shr[set_aside_iso,,] <- set_aside_select
+snv_pol_iso <- readGDX(gdx,"policy_countries30")
+snv_pol_select <- readGDX(gdx, "s30_snv_shr", "s30_set_aside_shr")
+snv_pol_noselect <- readGDX(gdx, "s30_snv_shr_noselect", "s30_set_aside_shr_noselect")
+snv_pol_shr <- new.magpie(iso, fill = snv_pol_noselect)
+snv_pol_shr[snv_pol_iso,,] <- snv_pol_select
 
 avl_cropland_hr <- file.path(outputdir, "avl_cropland_0.5.mz")       # available cropland (at high resolution)
 marginal_land <- cfg$gms$c30_marginal_land                      # marginal land scenario
-target_year <- cfg$gms$c30_set_aside_target                     # target year of set aside policy (default: "none")
-set_aside_fader  <- readGDX(gdx,"f30_set_aside_fader", format="first_found")[,,target_year]
+target_year <- cfg$gms$c30_snv_target                     # target year of SNV policy (default: "none")
+if(is.null(target_year)){target_year <- cfg$gms$c30_set_aside_target}
+snv_pol_fader  <- readGDX(gdx,"f30_scenario_fader","f30_set_aside_fader", format="first_found")[,,target_year]
 
 # Start interpolation (use interpolateAvlCroplandWeighted from luscale)
 print("Disaggregation")
@@ -135,8 +136,8 @@ land_hr <- interpolateAvlCroplandWeighted(x          = land_lr,
                                           avl_cropland_hr = avl_cropland_hr,
                                           map        = map_file,
                                           marginal_land = marginal_land,
-                                          set_aside_shr = set_aside_shr,
-                                          set_aside_fader = set_aside_fader,
+                                          snv_pol_shr = snv_pol_shr,
+                                          snv_pol_fader = snv_pol_fader,
                                           urban_land_hr = urban_land_hr)
 
 # Write outputs
@@ -145,7 +146,7 @@ land_hr <- interpolateAvlCroplandWeighted(x          = land_lr,
   message("Disaggregation crop types")
   area     <- croparea(gdx, level="cell", products="kcr",
                        product_aggr=FALSE,water_aggr = FALSE)
-  fallow <- Fallow(gdx, level="cell")
+  fallow <- fallow(gdx, level="cell")
   area_shr <- area/(dimSums(area,dim=3) + setNames(fallow,NULL) + 10^-10)
 
   # calculate share of crop land on total cell area
@@ -194,7 +195,7 @@ area_shr_hr <- .dissagcrop(gdx, land_hr, map=map_file)
                           "crop_kbe_ir")
   crop_hr <- mbind(crop_kfo_rf,crop_kfo_ir,crop_kbe_rf,crop_kbe_ir)
   # calculate Fallow
-  fallow = setNames(land_hr[,,"crop"]-dimSums(area_hr,dim=3),"fallow")
+  fallow <- setNames(land_hr[,,"crop"]-dimSums(area_hr,dim=3),"fallow")
   #drop crop
   land_hr <- land_hr[,,"crop",invert=TRUE]
   #combine land_hr with crop_hr.

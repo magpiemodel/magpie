@@ -31,7 +31,7 @@ cat("\nStarting output generation\n")
 
 missing <- NULL
 
-combined="output/inms.csv"
+combined <- "output/inms.csv"
 
 if(file.exists(combined)) file.rename(combined,"output/inms.bak")
 

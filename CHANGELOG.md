@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **13_tc** Replace endo_jan18 realization by endo_jan22. The new realization adds a new dimension to vm_tau separating crop from managed pastures tau.
  - **31_past** added new realization implementing the separation of rangelands and managed pastures for the production of grass biomass.
  - **15_food** added more options to define convergence towards exogenous food intake and waste scenarios accounting for different transition periods
+ - **30_crop** renamed switch `s30_set_aside_shr`, `s30_set_aside_shr_noselect` and `c30_set_aside_target` to `s30_snv_shr`, `s30_snv_shr_noselect` and `c30_snv_target`.
  - **34_urban** added set urban_scen34 and the switch c34_urban_scenario
  - **35_natveg** corrected naming of Frontier Forests (FF) to Intact Forest Landscapes (IFL) and changed input data for BH_IFL implementation.
  - **scripts** replaced redundant files config.log and config.Rdata with a config.yml
@@ -69,8 +70,8 @@ The code was simplified by moving a part into a exodietmacro, which was a major 
 - **modules** New dimension in `vm_carbon_stock` for different carbon stock types (actual, previousLandPattern, previousCarbonDensity)
 - **config** added option for CO2 emission pricing `cfg$gms$c56_carbon_stock_pricing`
 - **config** added cfg$gms$s70_past_mngmnt_factor_fix with default 2005 (previous default was 2010). The previous setting caused a strong spike in CO2 emissions from pasture expansion in SSA. With 2005, this can be avoided.
-- **module realization** new module realizations for 30_crop including crop rotation scenarios by strict constraints (rotation_apr22) and by penalties (penalty_apr22)
-- **scripts** start/test_rotations.R testscript for different rotation scenario settings
+- **30_crop** new module realizations including crop rotation scenarios by strict constraints (`rotation_apr22`) and by penalties (`penalty_apr22`)
+- **scripts** `start/projects/test_rotations.R` testscript for different rotation scenario settings
 - **38_factor_costs** mixed_reg_feb17 realization added. This realization includes differences in productions costs between irrigated and rainfed crops, with the option of regional differentiation as well. per_ton_fao_may22 realization added. This realization corresponds to the old sticky_feb18 free.
  - **44_biodiversity** added new realization `bii_target`, which calculates the BII at the level of 71 biomes and allows to set targets for BII (e.g. no decrease in the future)
  - **36_employment** added new module to calculate agricultural employment. Includes one realization (`exo_may22`) in which employment is calculated based on the total labor costs (for crop and livestock production)

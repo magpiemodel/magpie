@@ -7,8 +7,8 @@
 
 *' @description The endo_apr21 realization calculates the crop specific
 *' agricultural land use endogenously based on yield data coming from the
-*' module [14_yields] and the rotational as well as suitability constraints
-*' stated in the input data of the module.
+*' module [14_yields] and the rotational incentives as well as suitability
+*' constraints stated in the input data of the module.
 *'
 *' Cropland areas are linked to the crop specific production and the carbon
 *' content of the different land carbon pools. The crop specific land use areas
@@ -21,10 +21,11 @@
 *' exceeded. Rotational constraints are defined for total land as well as
 *' for irrigated areas only to avoid overspecialization on irrigated land.
 
-*' This realisation also includes the option to set aside a given share of
-*' the total available cropland for other land cover classes (by a given target
-*' year), in order to provide species habitats and to benefit from ecosystem
-*' services in agricultural landscapes.
+*' This realisation also includes the option to reserve a minimum semi-natural
+*' vegetation share within the total available cropland for other land cover
+*' classes, including grassland, forest, and other land (by a given target year),
+*' in order to provide species habitats and to benefit from ecosystem ervices in
+*' agricultural landscapes.
 
 *' @limitations There are currently no known limitations of this realization.
 

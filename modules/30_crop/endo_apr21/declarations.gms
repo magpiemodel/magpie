@@ -7,12 +7,13 @@
 
 parameters
  p30_avl_cropland(t,j)             	Total available land for crop cultivation (mio. ha)
- p30_region_setaside_shr(i)			Set-aside share of the region (1)
- p30_country_dummy(iso)		        Dummy parameter indicating whether country is affected by selected set-aside policy (1)
+ p30_region_snv_shr(i)			    SNV share of the region (1)
+ p30_country_dummy(iso)		        Dummy parameter indicating whether country is affected by selected SNV policy (1)
  i30_avl_cropland_iso(iso)			Available land area for cropland at ISO level (mio. ha)
 ;
 
 positive variables
+* Fallow land is cropland which is temporarily fallow. Croparea+fallow=cropland
  vm_fallow(j)                   Fallow land (mio. ha)
  vm_area(j,kcr,w)                Agricultural production area (mio. ha)
  vm_rotation_penalty(i)                  Penalty for violating rotational constraints (USD05MER)
