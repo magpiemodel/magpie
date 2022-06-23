@@ -25,7 +25,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
-prefix <- "diet_change_v4"
+prefix <- "diet_change_v5"
 
 cfg$title <- paste(prefix,"olddefault",sep="_")
 start_run(cfg,codeCheck=FALSE)
@@ -106,26 +106,6 @@ cfg$gms$s15_exo_oils        <- 0
 cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
 start_run(cfg,codeCheck=FALSE)
-
-
-source("config/default.cfg")
-cfg$title <- paste(prefix,"waste2",sep="_")
-cfg$gms$food    <- "anthro_iso_jun22"
-cfg$gms$s15_exo_waste <- 0
-cfg$gms$s15_exo_diet <- 1
-cfg$gms$c15_kcal_scen <- "endo"
-cfg$gms$c15_EAT_scen <- "FLX"
-cfg$gms$s15_exo_monogastric <- 0
-cfg$gms$s15_exo_ruminant    <- 0
-cfg$gms$s15_exo_fish        <- 0
-cfg$gms$s15_exo_fruitvegnut <- 0
-cfg$gms$s15_exo_pulses      <- 0
-cfg$gms$s15_exo_sugar       <- 0
-cfg$gms$s15_exo_oils        <- 0
-cfg$gms$s15_exo_brans       <- 0
-cfg$gms$s15_exo_scp         <- 0
-start_run(cfg,codeCheck=FALSE)
-
 
 source("config/default.cfg")
 cfg$title <- paste(prefix,"monogastric",sep="_")
