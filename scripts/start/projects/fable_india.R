@@ -32,4 +32,7 @@ cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public"=
 #Download input data
 cfg$force_download <- TRUE
 
+#Specifying the value of pumping costs switch as 1 for India default analysis 
+cfg$gms$s42_multiplier <- 1
+
 start_run(cfg)
