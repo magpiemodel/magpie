@@ -16,7 +16,7 @@ variables
 ;
 
 positive variables
- v41_AEI(j)                      Area equipped for irrigation in each grid cell (mio. ha)
+ vm_AEI(j)                      Area equipped for irrigation in each grid cell (mio. ha)
 ;
 
 equations
@@ -27,7 +27,7 @@ equations
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_cost_AEI(t,i,type)     Annuitized irrigation expansion costs (mio. USD04MER per yr)
- ov41_AEI(t,j,type)        Area equipped for irrigation in each grid cell (mio. ha)
+ ov_AEI(t,j,type)          Area equipped for irrigation in each grid cell (mio. ha)
  oq41_area_irrig(t,j,type) Irrigation area constraint (mio. ha)
  oq41_cost_AEI(t,i,type)   Calculation of costs of irrigation area expansion (mio. USD04MER)
 ;
