@@ -29,9 +29,11 @@ if(!exists("source_include")) {
 ###############################################################################
 cat("\nStarting output generation\n")
 
+file_name <- "output/BEST_V11.csv"
+
 missing <- NULL
 
-#if(file.exists("output/BEST_V7.csv")) file.rename("output/BEST_V7.csv","output/BEST_V7.bak")
+if(file.exists(file_name)) file.rename(file_name,(sub(".csv",".bak",file_name)))
 
 for (i in 1:length(outputdir)) {
   print(paste("Processing",outputdir[i]))
@@ -41,8 +43,8 @@ for (i in 1:length(outputdir)) {
     #read-in reporting file
     a <- read.report(rep,as.list = FALSE)
     #add to reporting csv file
-#    write.reportProject(a,mapping="/p/projects/rd3mod/inputdata/mappings/reportingVariables/mapping_magpie_BEST.csv",file="output/BEST_V7.csv",append=TRUE,ndigit = 4,skipempty = FALSE)
-    write.reportProject(a,mapping="BEST_mapping.csv",file="output/BEST_V11.csv",append=TRUE,ndigit = 4,skipempty = FALSE)
+    mapfile <- system.file("extdata", "variablemappingBEST.csv", package="magpie4")
+    write.reportProject(a,mapping=mapfile,file=file_name,append=TRUE,ndigit = 4,skipempty = FALSE)
   } else missing <- c(missing,outputdir[i])
 }
 if (!is.null(missing)) {
