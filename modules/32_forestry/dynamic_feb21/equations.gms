@@ -73,12 +73,12 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
 *' time steps (`p32_aff_togo`).
 
  q32_max_aff$(c32_max_aff_area_glo=1) .. 
- 	sum((j2,type32,ac)$(not sameas(type32,"plant")), v32_land(j2,type32,ac))
-    	=l= p32_max_aff_area_glo - sum((ct,i2), p32_aff_togo(ct,i2));
+ 	sum((j2,ac), v32_land(j2,"aff",ac))
+    	=l= i32_max_aff_area_glo;
 
  q32_max_aff_reg(i2)$(c32_max_aff_area_glo=0) .. 
  	sum((cell(i2,j2),type32,ac)$(not sameas(type32,"plant")), v32_land(j2,type32,ac))
-        =l= p32_max_aff_area_reg(i2) - sum(ct, p32_aff_togo(ct,i2));
+        =l= i32_max_aff_area_reg(i2);
 
 *-----------------------------------------------
 ************** Carbon stock ********************
