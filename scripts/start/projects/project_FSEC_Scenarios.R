@@ -19,7 +19,7 @@ codeCheck <- FALSE
 input <- c(regional    = "rev4.73FSECmodeling_e2bdb6cd_magpie.tgz",
            cellular    = "rev4.73FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
            validation  = "WARNINGS42_rev4.73FSECmodeling_e2bdb6cd_validation.tgz",
-           additional  = "additional_data_rev4.26_FSEC.tgz",
+           additional  = "additional_data_rev4.26.tgz",
            calibration = "calibration_FSEC_18Jun22.tgz")
 
 # General settings:
@@ -28,7 +28,7 @@ general_settings <- function(title) {
   source("config/default.cfg")
 
   cfg$input       <- input
-  cfg$title       <- paste0("v7_", title)
+  cfg$title       <- paste0("v8_", title)
   cfg$recalibrate <- FALSE
   cfg$qos         <- "priority_maxMem"
   cfg$output      <- c(cfg$output #,
@@ -361,12 +361,32 @@ soil_transformation <- function(cfg) {
 cfg <- general_settings(title = "FSEC_BAU")
 start_run(cfg = cfg, codeCheck = codeCheck)
 
+### SSP3 + mitigation (RCP 7.0)
+cfg <- general_settings(title = "FSEC_SSP370")
+cfg <- gms::setScenario(cfg, c("cc", "rcp7p0", "SSP3", "NDC", "ForestryEndo"))
+cfg$input['cellular'] <- "rev4.73FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz"
+start_run(cfg = cfg, codeCheck = codeCheck)
+
+### SSP4 + mitigation (RCP 6.0)
+cfg <- general_settings(title = "FSEC_SSP460")
+cfg <- gms::setScenario(cfg, c("cc", "rcp6p0", "SSP4", "NDC", "ForestryEndo"))
+cfg$input['cellular'] <- "rev4.73FSECmodeling_e2bdb6cd_3c888fa5_cellularmagpie_c200_MRI-ESM2-0-ssp460_lpjml-8e6c5eb1.tgz"
+start_run(cfg = cfg, codeCheck = codeCheck)
+
+### SSP5 without mitigation (RCP 8.5)
+cfg <- general_settings(title = "FSEC_SSP585")
+cfg <- gms::setScenario(cfg, c("cc", "rcp8p5", "SSP5", "NDC", "ForestryEndo"))
+cfg$input['cellular'] <- "rev4.73FSECmodeling_e2bdb6cd_09a63995_cellularmagpie_c200_MRI-ESM2-0-ssp585_lpjml-8e6c5eb1.tgz"
+start_run(cfg = cfg, codeCheck = codeCheck)
+
+
 #################################################
 ##          Total SDP Scenario                 ##
 #################################################
 cfg <- general_settings(title = "FSEC_SDP")
 # Climate scenario: RCP 2.6
 cfg$input['cellular'] <- "rev4.73FSECmodeling_e2bdb6cd_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz"
+cfg <- gms::setScenario(cfg, c("cc", "rcp2p6", "SSP1", "NDC", "ForestryEndo"))
 ### (1) Population and Health ###
 cfg <- population_transformation(cfg = cfg)
 ### (2) Reduced inequality and Education Transformation ###
