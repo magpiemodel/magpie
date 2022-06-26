@@ -92,18 +92,18 @@ if (cfg$gms$urban == "exo_nov21" ) {
   urban_land_hr <- "static"
 }
 
-# account for country-specific set-aside shares in post-processing
+# account for country-specific SNV shares in post-processing
 iso                <- readGDX(gdx, "iso")
-set_aside_iso      <- readGDX(gdx, "policy_countries30")
-set_aside_select   <- readGDX(gdx, "s30_set_aside_shr")
-set_aside_noselect <- readGDX(gdx, "s30_set_aside_shr_noselect")
-set_aside_shr      <- new.magpie(iso, fill = set_aside_noselect)
-set_aside_shr[set_aside_iso,,] <- set_aside_select
+snv_pol_iso      <- readGDX(gdx, "policy_countries30")
+snv_pol_select   <- readGDX(gdx, "s30_snv_shr")
+snv_pol_noselect <- readGDX(gdx, "s30_snv_shr_noselect")
+snv_pol_shr      <- new.magpie(iso, fill = snv_pol_noselect)
+snv_pol_shr[snv_pol_iso,,] <- snv_pol_select
 
 avl_cropland_hr <- file.path(outputdir, "avl_cropland_0.5.mz")    # available cropland (at high resolution)
 marginal_land   <- cfg$gms$c30_marginal_land                      # marginal land scenario
-target_year     <- cfg$gms$c30_set_aside_target                   # target year of set aside policy (default: "none")
-set_aside_fader <- readGDX(gdx, "f30_set_aside_fader", format = "first_found")[, , target_year]
+target_year     <- cfg$gms$c30_snv_target                   # target year of SNV policy (default: "none")
+snv_pol_fader <- readGDX(gdx, "f30_scenario_fader", format = "first_found")[, , target_year]
 
 # Sort and rename
 land_ini_hr <- land_ini_hr[,,getNames(land_ini_lr)]
@@ -117,8 +117,8 @@ land_hr <- interpolateAvlCroplandWeighted(x               = land_lr,
                                           avl_cropland_hr = avl_cropland_hr,
                                           map             = map_file,
                                           marginal_land   = marginal_land,
-                                          set_aside_shr   = set_aside_shr,
-                                          set_aside_fader = set_aside_fader,
+                                          snv_pol_shr   = snv_pol_shr,
+                                          snv_pol_fader = snv_pol_fader,
                                           urban_land_hr   = urban_land_hr,
                                           unit            = "share")
 

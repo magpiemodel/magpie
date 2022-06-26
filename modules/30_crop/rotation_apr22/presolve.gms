@@ -22,13 +22,6 @@ vm_area.fx(j,kbe30,w)=0;
 vm_area.up(j,bioen_type_30,bioen_water_30)=Inf;
 *' @stop
 
-*' No penalties or fallows exist in this realization
-vm_rotation_penalty.fx(i)=0;
-vm_fallow.fx(j)=0;
-
-crpmax30(crp30) = yes$(f30_rotation_max_shr(crp30) < 1);
-crpmin30(crp30) = yes$(f30_rotation_min_shr(crp30) > 0);
-
 *' @code
 *' Minimum semi-natural vegetation (SNV) share is fading in after 2020
 p30_avl_cropland(t,j) = f30_avl_cropland(j,"%c30_marginal_land%") *
@@ -36,3 +29,9 @@ p30_avl_cropland(t,j) = f30_avl_cropland(j,"%c30_marginal_land%") *
 	(s30_snv_shr * sum(cell(i,j), p30_region_snv_shr(i))
 	+ s30_snv_shr_noselect * sum(cell(i,j), 1-p30_region_snv_shr(i))));
 *' @stop
+
+* only activate constraints which are binding
+rotamax_red30(rotamax30) = yes$(i30_rotation_max_shr(t,rotamax30) < 1);
+rotamin_red30(rotamin30) = yes$(i30_rotation_min_shr(t,rotamin30) > 0);
+
+vm_rotation_penalty.fx(i)=0;

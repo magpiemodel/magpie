@@ -10,7 +10,7 @@
 *' the sum of crop and water supply type specific land requirements:
 
  q30_cropland(j2)  ..
-   sum((kcr,w), vm_area(j2,kcr,w)) =e= vm_land(j2,"crop");
+   sum((kcr,w), vm_area(j2,kcr,w)) =e= vm_land(j2,"crop") + vm_fallow(j2);
 
 *' We assume that crop production can only take place on suitable cropland area.
 *' We use a suitability index (SI) map from @zabel_global_2014 to exclude areas
@@ -28,16 +28,23 @@
 *' crop rotations limiting the share a specific crop can cover of the total area
 *' of a cluster:
 
- q30_rotation_max(j2,crpmax30,w) ..
-   sum((crp_kcr30(crpmax30,kcr)), vm_area(j2,kcr,w)) =l=
-     sum(kcr, vm_area(j2,kcr,w)) * f30_rotation_max_shr(crpmax30);
+ q30_rotation_max(j2,rotamax_red30) ..
+   sum((rotamax_kcr30(rotamax_red30,kcr),w), vm_area(j2,kcr,w)) =l=
+     vm_land(j2,"crop") * sum(ct,i30_rotation_max_shr(ct,rotamax_red30));
 
-*' On the other hand, it reflects boundary conditions such as minimum self
-*' sufficiency constraints:
 
- q30_rotation_min(j2,crpmin30,w) ..
-   sum((crp_kcr30(crpmin30,kcr)), vm_area(j2,kcr,w)) =g=
-     sum(kcr, vm_area(j2,kcr,w)) * f30_rotation_min_shr(crpmin30);
+ q30_rotation_min(j2,rotamin_red30) ..
+    sum((rotamin_kcr30(rotamin_red30,kcr),w), vm_area(j2,kcr,w)) =g=
+    vm_land(j2,"crop") * sum(ct,i30_rotation_min_shr(ct,rotamin_red30));
+
+* The following maximum constraint avoids over-specialization in irrigated systems.
+* No minimum constraint is included for irrigated areas for computational
+* reasons. Minimum constraints just need to be met on total areas.
+
+ q30_rotation_max_irrig(j2,rotamax_red30) ..
+   sum((rotamax_kcr30(rotamax_red30,kcr)), vm_area(j2,kcr,"irrigated")) =l=
+      vm_AEI(j2) * sum(ct,i30_rotation_max_shr(ct,rotamax_red30));
+
 
 *' Agricultural production is calculated by multiplying the area under
 *' production with corresponding yields. Production from rainfed and irrigated
@@ -50,15 +57,18 @@
 *' for all cropland :
 
  q30_carbon(j2,ag_pools,stockType) ..
- vm_carbon_stock(j2,"crop",ag_pools,stockType) =e=
-   m_carbon_stock(vm_land,fm_carbon_density,"crop");
+   vm_carbon_stock(j2,"crop",ag_pools,stockType) =e=
+     m_carbon_stock(vm_land,fm_carbon_density,"crop");
 
 *' The biodiversity value for cropland is calculated separately for annual and perennial crops:
- q30_bv_ann(j2,potnatveg) .. vm_bv(j2,"crop_ann",potnatveg)
+ q30_bv_ann(j2,potnatveg) ..
+          vm_bv(j2,"crop_ann",potnatveg)
  					=e=
  					sum((crop_ann30,w), vm_area(j2,crop_ann30,w)) * fm_bii_coeff("crop_ann",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
 
- q30_bv_per(j2,potnatveg) .. vm_bv(j2,"crop_per",potnatveg)
+* perennial crops are calculated as difference, as they shall also include fallow land
+ q30_bv_per(j2,potnatveg) ..
+          vm_bv(j2,"crop_per",potnatveg)
  					=e=
           (vm_land(j2,"crop") - sum((crop_ann30,w), vm_area(j2,crop_ann30,w)))
           * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j2,potnatveg);

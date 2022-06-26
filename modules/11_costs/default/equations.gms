@@ -20,6 +20,7 @@
                    + sum((cell(i2,j2),land), vm_cost_landcon(j2,land))
                    + sum((cell(i2,j2),k), vm_cost_transp(j2,k))
                    + vm_tech_cost(i2)
+                   + vm_rotation_penalty(i2)
                    + vm_nr_inorg_fert_costs(i2)
                    + vm_p_fert_costs(i2)
                    + vm_emission_costs(i2)
