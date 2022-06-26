@@ -123,7 +123,7 @@ diet_transformation <- function(cfg) {
   cfg$gms$c15_food_scenario	      <- "SSP1"
   cfg$gms$s15_elastic_demand      <-	"0"
   cfg$gms$c15_rumdairy_scp_scen	  <- "constant"
-  cfg$gms$c15_exo_scen_targetyear <- "y2050"
+  cfg$gms$c15_exo_scen_targetyear <- "y2050" # need to be updated, switch changed
   cfg$gms$s15_exo_diet	          <- "1"
   cfg$gms$c15_kcal_scen	          <- "healthy_BMI"
   cfg$gms$c15_EAT_scen	          <- "FLX"
@@ -207,7 +207,7 @@ nitrogen_transformation <- function(cfg) {
 ### (10) Diversity on land transformation ###
 landsharing_transformation <- function(cfg) {
   #BII by price OR land sparing
-  cfg$gms$c44_price_bv_loss <- "p10_p100"
+  cfg$gms$c44_price_bv_loss <- "p10_p100" # need to be updated, switch changed
   # SNV land
   cfg$gms$s30_snv_shr	<- "0.2"
   #gms$c30_snv_target	none
@@ -302,7 +302,7 @@ REDD_transformation <- function(cfg) {
 ### (14) Land and water sparing transformation ###
 landsparing_transformation <- function(cfg) {
   # land protection following strict protection scenario (half or land's surface)
-  cfg$gms$c35_protect_scenario <-	"HalfEarth"
+  cfg$gms$c35_protect_scenario <-	"HalfEarth" # need to be updated, switch changed
   # Water protection through environmental flow protection
   cfg$gms$c42_env_flow_policy	 <- "on"
   cfg$gms$c30_bioen_water	     <- "rainfed"  # (already default anyways)
@@ -327,7 +327,7 @@ airPollution_transformation <- function(cfg) {
   # savanna burning
   # (not available yet)
   # deforestation with timber harvest rather than burning
-  cfg$gms$c35_forest_damage_end <- "by2030"
+  cfg$gms$c35_forest_damage_end <- "by2030" # need to be updated, switch changed
 
   return(cfg)
 }
