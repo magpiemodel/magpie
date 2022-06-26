@@ -385,8 +385,8 @@ start_run(cfg = cfg, codeCheck = codeCheck)
 #################################################
 cfg <- general_settings(title = "FSEC_SDP")
 # Climate scenario: RCP 2.6
-cfg$input['cellular'] <- "rev4.73FSECmodeling_e2bdb6cd_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz"
 cfg <- gms::setScenario(cfg, c("cc", "rcp2p6", "SSP1", "NDC", "ForestryEndo"))
+cfg$input['cellular'] <- "rev4.73FSECmodeling_e2bdb6cd_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz"
 ### (1) Population and Health ###
 cfg <- population_transformation(cfg = cfg)
 ### (2) Reduced inequality and Education Transformation ###
