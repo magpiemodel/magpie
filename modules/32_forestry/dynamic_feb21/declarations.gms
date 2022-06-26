@@ -8,7 +8,7 @@ scalars
  s32_shift                                          Number of 5-year age-classes corresponding to current time step length (1)
  s32_establishment_dynamic                          If plantations should be dynamic (including establishment and harvest decsions)
  s32_establishment_static                           Static plantations with no establishmnet no harvest no regrowth
- c32_max_aff_area_glo								Switch for global or regional afforestation constraint (1)
+* c32_max_aff_area_glo								Switch for global or regional afforestation constraint (1)
 ;
 
 parameters

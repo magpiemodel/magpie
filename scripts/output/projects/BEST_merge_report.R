@@ -7,7 +7,7 @@
 
 
 # --------------------------------------------------------------
-# description: Merges report.mif files from several runs into a single mif file
+# description: Merges single report files into one file
 # comparison script: TRUE
 # position: 3
 # ---------------------------------------------------------------
@@ -29,7 +29,7 @@ if(!exists("source_include")) {
 ###############################################################################
 cat("\nStarting output generation\n")
 
-file_name <- "output/BEST_V11.csv"
+file_name <- "output/BEST_V13.csv"
 
 missing <- NULL
 

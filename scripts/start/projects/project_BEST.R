@@ -13,7 +13,7 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-version <- "V12"
+version <- "V13"
 
 library(lucode2)
 library(magclass)
@@ -90,7 +90,7 @@ cfg$results_folder <- "output/:title:"
 cfg$gms$c60_biodem_level <- 0.01
 cfg$gms$c60_2ndgen_biodem <- "emulator"
 cfg$gms$c56_pollutant_prices <- "emulator"
-cfg$gms$s32_max_aff_area <- 0
+
 
 # define ssp scenarios
 rcps <- c("rcp2p6","rcp6p0")
@@ -108,6 +108,8 @@ for (rcp in rcps) {
   for (ssp in ssps) {
     cfg$title <- paste("TAU",ssp,rcp,tau_scen,sep="-")
     cfg <- setScenario(cfg,c(ssp,"NPI",rcp))
+    cfg$gms$s32_max_aff_area <- 0
+    cfg$gms$s56_c_price_induced_aff <- 0
     cfg$gms$c30_bioen_type <- bioen_type
     cfg$gms$c30_bioen_water <- bioen_water
     cfg$gms$tc <- "endo_jan22"
@@ -157,6 +159,8 @@ for (rcp in rcps) {
           for (bioen_water in c("all","rainfed")) {
             cfg <- setScenario(cfg,c(ssp,"NPI",rcp))
             cfg$title <- paste(version,ssp,rcp,biodem,ghgprice,paste0("Type",toupper(bioen_type)),paste0("Water",toupper(bioen_water)),sep="-")
+            cfg$gms$s32_max_aff_area <- 0
+            cfg$gms$s56_c_price_induced_aff <- 0
             cfg$gms$tc <- "exo"
             cfg$gms$c30_bioen_type <- bioen_type
             cfg$gms$c30_bioen_water <- bioen_water
