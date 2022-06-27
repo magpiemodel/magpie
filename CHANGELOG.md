@@ -47,6 +47,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **scripts** scripts/output/extra/emulator.R Remove dependency on deprecated R package "magpie"
  - **56_ghg_policy** Deactivated GHG emission policies were not accounted for in the MACCs module. This has been corrected by an extension of the interface `im_pollutant_prices`, which now has an additional dimension for emission sources `emis_source`. In this context some equations in `56_ghg_policy` have been simplified (sets: `emis_source_reg`, `emis_source_cell`). Also, GHG emissions from peatlands have been fully integrated into `56_ghg_policy`.
 - **09_drivers** changed `i09_gdp_pc_mer_iso` to `im_gdp_pc_mer_iso`
+- **32_forestry** simplification and bugfix of afforestation limit. `c32_max_aff_area_glo` renamed to `s32_max_aff_area_glo` in default.cfg.
+
 
 ### added
 - **scripts** output/projects/FSEC_StevenLord.R to create output for Steven Lord in the FSEC context
