@@ -28,7 +28,7 @@ general_settings <- function(title) {
   source("config/default.cfg")
 
   cfg$input       <- input
-  cfg$title       <- paste0("v9_", title)
+  cfg$title       <- paste0("v9a_", title)
   cfg$recalibrate <- FALSE
   cfg$qos         <- "priority_maxMem"
   cfg$output      <- c(cfg$output #,
@@ -59,6 +59,11 @@ general_settings <- function(title) {
   # Regional factor requirement costs (crop and livestock)
   cfg$gms$c38_fac_req             <- "reg"
   cfg$gms$c70_fac_req_regr        <- "reg"
+
+  # Agroecology general settings
+  cfg$gms$crop                        <- "penalty_apr22"
+  cfg$gms$c30_rotation_scenario       <- "default"
+  cfg$gms$c30_rotation_scenario_speed <- "by2050"
 
   return(cfg)
 }
@@ -123,7 +128,7 @@ diet_transformation <- function(cfg) {
   cfg$gms$c15_food_scenario	      <- "SSP1"
   cfg$gms$s15_elastic_demand      <-	"0"
   cfg$gms$c15_rumdairy_scp_scen	  <- "constant"
-  # cfg$gms$c15_exo_scen_targetyear <- "y2050" # need to be updated, switch changed
+  #cfg$gms$c15_exo_scen_targetyear <- "y2050" # need to be updated, switch changed
   cfg$gms$s15_exo_diet	          <- "1"
   cfg$gms$c15_kcal_scen	          <- "healthy_BMI"
   cfg$gms$c15_EAT_scen	          <- "FLX"
@@ -211,6 +216,17 @@ biodiversity_transformation <- function(cfg) {
 
 }
 
+### (11) Diversity on land transformation ###
+landsharing_transformation <- function(cfg) {
+  # stricter crop rotations and agroforestry (2nd gen be with crop rotation)
+  cfg$gms$c30_rotation_scenario       <- "agroecology"
+
+  # increase labor costs based on value-difference between organic and conventional
+  # (not available yet)
+
+  return(cfg)
+}
+
 ### (NA) Supply chain transformation ###
 supplyChain_transformation <- function(cfg) {
   # reduce value-added in processing
@@ -233,7 +249,7 @@ supplyChain_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (11) Fair trade transformation ###
+### (12) Fair trade transformation ###
 fairTrade_transformation <- function(cfg) {
   #reduce subsidies
   # (cannot be implemented)
@@ -247,7 +263,7 @@ fairTrade_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (12) Bioeconomy transformation ###
+### (13) Bioeconomy transformation ###
 bioeconomy_transformation <- function(cfg) {
   # Timber demand: higher demand for buildings from wood
   cfg$gms$c73_build_demand  <- "50pc"
@@ -257,7 +273,7 @@ bioeconomy_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (13) Afforestation (REDDaff) transformation ###
+### (14) Afforestation (REDDaff) transformation ###
 REDDaff_transformation <- function(cfg) {
   # Afforestation policy following Nationally determined contributions
   # and limited to tropical regions and 500 Mha because of the albedo effect
@@ -274,7 +290,7 @@ REDDaff_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (13) Reducing emissions from deforestation (REDD) transformation ###
+### (15) Reducing emissions from deforestation (REDD) transformation ###
 REDD_transformation <- function(cfg) {
 
   # all carbon pools
@@ -284,19 +300,18 @@ REDD_transformation <- function(cfg) {
 }
 
 
-### (14) Land and water sparing transformation ###
+### (16) Land and water sparing transformation ###
 landsparing_transformation <- function(cfg) {
   # land protection following strict protection scenario (half or land's surface)
   cfg$gms$c22_protect_scenario <- "HalfEarth"
-
-  # water protection through environmental flow protection
+  # Water protection through environmental flow protection
   cfg$gms$c42_env_flow_policy	 <- "on"
   cfg$gms$c30_bioen_water	     <- "rainfed"  # (already default anyways)
 
   return(cfg)
 }
 
-### (15) Peatland transformation ###
+### (17) Peatland transformation ###
 peatland_transformation <- function(cfg) {
   # peatland protection via pricing
   cfg$gms$c56_emis_policy <- "sdp_peatland"
@@ -306,7 +321,7 @@ peatland_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (16) Air pollution intervention transformation ###
+### (18) Air pollution intervention transformation ###
 airPollution_transformation <- function(cfg) {
   # crop residue burning is phasing out rather than at constant levels as in default
   cfg$gms$c18_burn_scen         <- "phaseout"
@@ -328,7 +343,7 @@ employment_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (18) Soil pricing transformation ###
+### (19) Soil pricing transformation ###
 soil_transformation <- function(cfg) {
   # soil pricing
   cfg$gms$c56_emis_policy <- "sdp_soil"
@@ -395,23 +410,25 @@ cfg <- livestock_transformation(cfg = cfg)
 cfg <- cropefficiency_transformation(cfg = cfg)
 ### (NA) Nitrogen transformation ###
 #cfg <- nitrogen_transformation(cfg = cfg)
-### (10) Biodiverstiy transformation ###
+### (10) Biodiversity transformation ###
 cfg <- biodiversity_transformation(cfg = cfg)
+### (11) Diversity on land transformation ###
+cfg <- landsharing_transformation(cfg = cfg)
 ### (NA) Supply chain transformation ###
 #cfg <- supplyChain_transformation(cfg = cfg)
-### (11) Fair trade transformation ###
+### (12) Fair trade transformation ###
 cfg <- fairTrade_transformation(cfg = cfg)
-### (12) Bioeconomy transformation ###
+### (13) Bioeconomy transformation ###
 cfg <- bioeconomy_transformation(cfg = cfg)
-### (13) REDDaff transformation ###
+### (14) REDDaff transformation ###
 cfg <- REDDaff_transformation(cfg = cfg)
-### (14) REDD Transformation
+### (15) REDD Transformation
 cfg <- REDD_transformation(cfg = cfg)
-### (15) Land and water sparing transformation ###
-cfg <- landsparing_transformation(cfg = cfg)
 ### (16) Land and water sparing transformation ###
+cfg <- landsparing_transformation(cfg = cfg)
+### (17) Land and water sparing transformation ###
 cfg <- peatland_transformation(cfg = cfg)
-### (17) Air pollution intervention transformation ###
+### (18) Air pollution intervention transformation ###
 cfg <- airPollution_transformation(cfg = cfg)
 ### (NA) Agricultural employment transformation ###
 #cfg <- employment_transformation(cfg = cfg)
@@ -419,7 +436,7 @@ cfg <- airPollution_transformation(cfg = cfg)
 cfg <- soil_transformation(cfg = cfg)
 ### Emission policy must be set separately in full-SDP scenario
 # (because it would be overwritten in the different transformations)
-cfg$gms$c56_emis_policy <- "sdp_all" # To Do: change to sdp_all once soil runs feasible
+cfg$gms$c56_emis_policy <- "sdp_all"
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 #################################################
@@ -485,42 +502,47 @@ cfg <- general_settings(title = "FSEC_biodiv")
 cfg <- biodiversity_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
+### (11) Diversity on land transformation ###
+cfg <- general_settings(title = "FSEC_landSharing")
+cfg <- landsharing_transformation(cfg = cfg)
+start_run(cfg = cfg, codeCheck = codeCheck)
+
 ### (NA) Supply chain transformation ###
 #cfg <- general_settings(title = "FSEC_supplyChain")
 #cfg <- supplyChain_transformation(cfg = cfg)
 #start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (11) Fair trade transformation ###
+### (12) Fair trade transformation ###
 cfg <- general_settings(title = "FSEC_fairTrade")
 cfg <- fairTrade_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (12) Bioeconomy transformation ###
+### (13) Bioeconomy transformation ###
 cfg <- general_settings(title = "FSEC_bioeconomy")
 cfg <- bioeconomy_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (13) Afforestation transformation ###
+### (14) Afforestation transformation ###
 cfg <- general_settings(title = "FSEC_REDDaff")
 cfg <- REDDaff_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (14) REDD Transformation
+### (15) REDD Transformation
 cfg <- general_settings(title = "FSEC_REDD")
 cfg <- REDD_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (14) Land and water sparing transformation ###
+### (16) Land and water sparing transformation ###
 cfg <- general_settings(title = "FSEC_landSparing")
 cfg <- landsparing_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (15) Peatland transformation ###
+### (17) Peatland transformation ###
 cfg <- general_settings(title = "FSEC_peatland")
 cfg <- peatland_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (17) Air pollution intervention transformation ###
+### (18) Air pollution intervention transformation ###
 cfg <- general_settings(title = "FSEC_airpollution")
 cfg <- airPollution_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
@@ -530,7 +552,7 @@ start_run(cfg = cfg, codeCheck = codeCheck)
 #cfg <- employment_transformation(cfg = cfg)
 #start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (18) Soil pricing transformation ##
+### (19) Soil pricing transformation ##
 cfg <- general_settings(title = "FSEC_soil")
 cfg <- soil_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
