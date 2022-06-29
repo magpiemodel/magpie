@@ -49,7 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **09_drivers** changed `i09_gdp_pc_mer_iso` to `im_gdp_pc_mer_iso`
 
 ### added
-- **module realization** new module realizations for 15_food called anthro_iso_jun22. Exogenous target diets are now implemented on country level.
+- **15_food** new module realizations called anthro_iso_jun22. Exogenous target diets are now implemented on country level.
 The possibility was added to specify a subselection of porduct category targets, to test sensitivity of diet change to particular components.
 The code was simplified by moving a part into a exodietmacro, which was a major duplication in the model code.
 - **scripts** output/projects/FSEC_StevenLord.R to create output for Steven Lord in the FSEC context
