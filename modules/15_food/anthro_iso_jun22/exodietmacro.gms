@@ -223,18 +223,56 @@ if (s15_run_diet_postprocessing = 1,
 *' food-specific dietary patterns:
 
 $ifthen "%c15_kcal_scen%" == "healthy_BMI"
-  i15_intake_scen_target(t,iso)$(sum((sex,age), im_demography(t,iso,sex,age))>0) = (
-        sum((sex, age), im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,"medium") )
-         + i15_kcal_pregnancy(t,iso)
-         ) / sum((sex,age), im_demography(t,iso,sex,age));
+
+  p15_bmi_shr_target(t,iso,sex,age,bmi_group15)=0;
+  p15_bmi_shr_target(t,iso,sex,age,"medium")=1;
+
+  i15_intake_scen_target(t,iso)$(sum((sex,age), im_demography(t,iso,sex,age)) >0 ) =
+     (sum((sex, age, bmi_group15), p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)*
+     im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
+     + i15_kcal_pregnancy(t,iso))
+     / sum((sex,age), im_demography(t,iso,sex,age));
+
+$elseif "%c15_kcal_scen%" == "no_underweight"
+
+  p15_bmi_shr_target(t,iso,sex,age,bmi_group15)=p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15);
+  p15_bmi_shr_target(t,iso,sex,age,"medium")=
+            p15_bmi_shr_calibrated(t,iso,sex,age,"verylow")
+            + p15_bmi_shr_calibrated(t,iso,sex,age,"low")
+            + p15_bmi_shr_calibrated(t,iso,sex,age,"medium");
+  p15_bmi_shr_calibrated(t,iso,sex,age,"verylow")=0;
+  p15_bmi_shr_calibrated(t,iso,sex,age,"low")=0;
+
+  i15_intake_scen_target(t,iso)$(sum((sex,age), im_demography(t,iso,sex,age)) >0 ) =
+     (sum((sex, age, bmi_group15), p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)*
+     im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
+     + i15_kcal_pregnancy(t,iso))
+     / sum((sex,age), im_demography(t,iso,sex,age));
+
+$elseif "%c15_kcal_scen%" == "no_overweight"
+
+  p15_bmi_shr_target(t,iso,sex,age,"medium")=
+            p15_bmi_shr_calibrated(t,iso,sex,age,"mediumhigh")
+            + p15_bmi_shr_calibrated(t,iso,sex,age,"high")
+            + p15_bmi_shr_calibrated(t,iso,sex,age,"veryhigh")
+            + p15_bmi_shr_calibrated(t,iso,sex,age,"medium");
+  p15_bmi_shr_calibrated(t,iso,sex,age,"mediumhigh")=0;
+  p15_bmi_shr_calibrated(t,iso,sex,age,"high")=0;
+  p15_bmi_shr_calibrated(t,iso,sex,age,"veryhigh")=0;
+  i15_intake_scen_target(t,iso)$(sum((sex,age), im_demography(t,iso,sex,age)) >0 ) =
+     (sum((sex, age, bmi_group15), p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)*
+     im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
+     + i15_kcal_pregnancy(t,iso))
+     / sum((sex,age), im_demography(t,iso,sex,age));
 $elseif "%c15_kcal_scen%" == "endo"
   i15_intake_scen_target(t,iso) = p15_intake_total(t,iso);
 $else
   i15_intake_scen_target(t,iso) = sum(kfo,i15_intake_EATLancet_all(iso,"%c15_kcal_scen%","%c15_EAT_scen%",kfo));
 $endif
 
+
 * Intake target is adjusted to meet the calorie target
-i15_intake_detailed_scen_target(t,iso,kfo)$(p15_intake_total(t,iso)>0) =
+  i15_intake_detailed_scen_target(t,iso,kfo)$(p15_intake_total(t,iso)>0) =
     p15_intake_detail(t,iso,kfo) / p15_intake_total(t,iso) * i15_intake_scen_target(t,iso);
 
 *' 2.) The second step defines the daily per capita intake of different food
@@ -248,36 +286,36 @@ i15_intake_detailed_scen_target(t,iso,kfo)$(p15_intake_total(t,iso)>0) =
 * The EAT lancet target values are the same for non-staples irrespective of the calorie target
 * Only non-staples differ
 
-  i15_intake_EATLancet(iso,kfo) =
-        i15_intake_EATLancet_all(iso,"2100kcal","%c15_EAT_scen%",kfo);
+    i15_intake_EATLancet(iso,kfo) =
+          i15_intake_EATLancet_all(iso,"2100kcal","%c15_EAT_scen%",kfo);
 
-  if (s15_exo_monogastric=1,
-    i15_intake_detailed_scen_target(t,iso,EAT_monogastrics15) = i15_intake_EATLancet(iso,EAT_monogastrics15));
-  if (s15_exo_ruminant=1,
-      i15_intake_detailed_scen_target(t,iso,EAT_ruminants15) = i15_intake_EATLancet(iso,EAT_ruminants15));
-  if (s15_exo_fish=1,
-      i15_intake_detailed_scen_target(t,iso,"fish") = i15_intake_EATLancet(iso,"fish"));
-  if (s15_exo_fruitvegnut=1,
-    i15_intake_detailed_scen_target(t,iso,EAT_fruitvegnutseed15) = i15_intake_EATLancet(iso,EAT_fruitvegnutseed15));
-  if (s15_exo_pulses=1,
-    i15_intake_detailed_scen_target(t,iso,EAT_pulses15) = i15_intake_EATLancet(iso,EAT_pulses15));
-  if (s15_exo_sugar=1,
-    i15_intake_detailed_scen_target(t,iso,EAT_sugar15) = i15_intake_EATLancet(iso,EAT_sugar15));
-  if (s15_exo_oils=1,
-    i15_intake_detailed_scen_target(t,iso,"oils") = i15_intake_EATLancet(iso,"oils"));
-  if (s15_exo_brans=1,
-    i15_intake_detailed_scen_target(t,iso,"brans") = i15_intake_EATLancet(iso,"brans"));
-  if (s15_exo_scp=1,
-    i15_intake_detailed_scen_target(t,iso,"scp") = i15_intake_EATLancet(iso,"scp"));
-  if (s15_exo_alcohol=1,
+    if (s15_exo_monogastric=1,
+      i15_intake_detailed_scen_target(t,iso,EAT_monogastrics15) = i15_intake_EATLancet(iso,EAT_monogastrics15));
+    if (s15_exo_ruminant=1,
+        i15_intake_detailed_scen_target(t,iso,EAT_ruminants15) = i15_intake_EATLancet(iso,EAT_ruminants15));
+    if (s15_exo_fish=1,
+        i15_intake_detailed_scen_target(t,iso,"fish") = i15_intake_EATLancet(iso,"fish"));
+    if (s15_exo_fruitvegnut=1,
+      i15_intake_detailed_scen_target(t,iso,EAT_fruitvegnutseed15) = i15_intake_EATLancet(iso,EAT_fruitvegnutseed15));
+    if (s15_exo_pulses=1,
+      i15_intake_detailed_scen_target(t,iso,EAT_pulses15) = i15_intake_EATLancet(iso,EAT_pulses15));
+    if (s15_exo_sugar=1,
+      i15_intake_detailed_scen_target(t,iso,EAT_sugar15) = i15_intake_EATLancet(iso,EAT_sugar15));
+    if (s15_exo_oils=1,
+      i15_intake_detailed_scen_target(t,iso,"oils") = i15_intake_EATLancet(iso,"oils"));
+    if (s15_exo_brans=1,
+      i15_intake_detailed_scen_target(t,iso,"brans") = i15_intake_EATLancet(iso,"brans"));
+    if (s15_exo_scp=1,
+      i15_intake_detailed_scen_target(t,iso,"scp") = i15_intake_EATLancet(iso,"scp"));
+    if (s15_exo_alcohol=1,
 * alcohol target is not part of EAT Lancet recommendation. Upper boundary is therefore included as specific swtich s15_alc_scen
-    i15_intake_detailed_scen_target(t,iso,"alcohol")$(i15_intake_detailed_scen_target(t,iso,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,iso))
-      = s15_alc_scen*i15_intake_scen_target(t,iso);
-  );
+      i15_intake_detailed_scen_target(t,iso,"alcohol")$(i15_intake_detailed_scen_target(t,iso,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,iso))
+        = s15_alc_scen*i15_intake_scen_target(t,iso);
+    );
 
-  i15_intake_detailed_scen_target(t,iso,EAT_staples)$(sum(EAT_staples2,i15_intake_EATLancet(iso,EAT_staples2))>0) = (
-            i15_intake_scen_target(t,iso) - sum(EAT_nonstaples,i15_intake_detailed_scen_target(t,iso,EAT_nonstaples)) )*(
-            i15_intake_EATLancet(iso,EAT_staples)/sum(EAT_staples2,i15_intake_EATLancet(iso,EAT_staples2)) );
+    i15_intake_detailed_scen_target(t,iso,EAT_staples)$(sum(EAT_staples2,i15_intake_EATLancet(iso,EAT_staples2))>0) = (
+              i15_intake_scen_target(t,iso) - sum(EAT_nonstaples,i15_intake_detailed_scen_target(t,iso,EAT_nonstaples)) )*(
+              i15_intake_EATLancet(iso,EAT_staples)/sum(EAT_staples2,i15_intake_EATLancet(iso,EAT_staples2)) );
 
 *  3.) In the third step, the regression-based calculation of intake
 *' is faded into the exogenous intake scenario according to a predefined speed of
@@ -285,6 +323,9 @@ i15_intake_detailed_scen_target(t,iso,kfo)$(p15_intake_total(t,iso)>0) =
 *' the EAT Lancet diet scenarios (y2010) as defined in `i15_exo_foodscen_fader(t,iso)`):
   p15_intake_detail(t,iso,kfo) = p15_intake_detail(t,iso,kfo) * (1-i15_exo_foodscen_fader(t,iso))
                       + i15_intake_detailed_scen_target(t,iso,kfo) * i15_exo_foodscen_fader(t,iso);
+
+  p15_bmi_shr_calibrated(t,iso,kfo) = p15_bmi_shr_calibrated(t,iso,kfo) * (1-i15_exo_foodscen_fader(t,iso))
+                      + p15_bmi_shr_target(t,iso,kfo) * i15_exo_foodscen_fader(t,iso);
 
 *' 4.) The fourth step estimates the calorie supply at household level by multiplying
 *' daily per capita calorie intake with the demand2intake ratio that was estimated
