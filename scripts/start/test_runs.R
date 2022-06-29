@@ -61,6 +61,8 @@ input <- c(regional    = "rev4.73FSECmodeling_e2bdb6cd_magpie.tgz",
            additional  = "additional_data_rev4.26.tgz",
            calibration = "calibration_FSEC_18Jun22.tgz")
 
+codeCheck <- FALSE
+
 # General settings:
 general_settings <- function(title) {
 
