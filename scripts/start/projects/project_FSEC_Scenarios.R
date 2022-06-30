@@ -209,6 +209,8 @@ biodiversity_transformation <- function(cfg) {
   # BII target
   cfg$gms$s44_bii_lower_bound <- 0.81
 
+  return(cfg)
+
 }
 
 ### (NA) Supply chain transformation ###
