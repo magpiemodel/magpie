@@ -29,7 +29,7 @@ general_settings <- function(title) {
   source("config/default.cfg")
 
   cfg$input       <- input
-  cfg$title       <- paste0("v7_", title)
+  cfg$title       <- paste0("v9a_", title)
   cfg$recalibrate <- FALSE
   cfg$qos         <- "priority_maxMem"
   cfg$output      <- c(cfg$output #,

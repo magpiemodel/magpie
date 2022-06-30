@@ -53,15 +53,13 @@ for(ssp in c("SSP1","SSP2","SSP5")) {
 ##############################################
 ### FSEC Test run (FSDP) with FSEC regions ###
 ##############################################
+codeCheck <- FALSE
 
-# Preprocessing with FSEC regions
 input <- c(regional    = "rev4.73FSECmodeling_e2bdb6cd_magpie.tgz",
            cellular    = "rev4.73FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
            validation  = "rev4.73FSECmodeling_e2bdb6cd_validation.tgz",
            additional  = "additional_data_rev4.26.tgz",
            calibration = "calibration_FSEC_18Jun22.tgz")
-
-codeCheck <- FALSE
 
 # General settings:
 general_settings <- function(title) {
@@ -69,7 +67,7 @@ general_settings <- function(title) {
   source("config/default.cfg")
 
   cfg$input       <- input
-  cfg$title       <- paste0("v8_", title)
+  cfg$title       <- paste0("v9_", title)
   cfg$recalibrate <- FALSE
   cfg$qos         <- "priority_maxMem"
   cfg$output      <- c(cfg$output #,
@@ -164,7 +162,7 @@ diet_transformation <- function(cfg) {
   cfg$gms$c15_food_scenario	      <- "SSP1"
   cfg$gms$s15_elastic_demand      <-	"0"
   cfg$gms$c15_rumdairy_scp_scen	  <- "constant"
-  cfg$gms$c15_exo_scen_targetyear <- "y2050" # need to be updated, switch changed
+  # cfg$gms$c15_exo_scen_targetyear <- "y2050" # need to be updated, switch changed
   cfg$gms$s15_exo_diet	          <- "1"
   cfg$gms$c15_kcal_scen	          <- "healthy_BMI"
   cfg$gms$c15_EAT_scen	          <- "FLX"
@@ -245,26 +243,11 @@ nitrogen_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (10) Diversity on land transformation ###
-landsharing_transformation <- function(cfg) {
-  #BII by price OR land sparing
-  cfg$gms$c44_price_bv_loss <- "p10_p100" # need to be updated, switch changed
-  # SNV land
-  cfg$gms$s30_snv_shr	<- "0.2"
-  #gms$c30_snv_target	none
-  #@BENNI (or ask Patrick): need to set snv_target also?
-  # strict crop rotations
-  # (not available yet)
-  # agroforestry (2nd gen be with crop rotation)
-  # (not available yet)
-  # livestock distribution
-  # (cannot be implemented)
-  # cover crops
-  # (cannot be implemented)
-  # increase labor costs based on value-difference between organic and conventional
-  # (not available yet)
+### (10) Biodiversity transformation ###
+biodiversity_transformation <- function(cfg) {
+  # BII target
+  cfg$gms$s44_bii_lower_bound <- 0.81
 
-  return(cfg)
 }
 
 ### (NA) Supply chain transformation ###
@@ -339,11 +322,13 @@ REDD_transformation <- function(cfg) {
   return(cfg)
 }
 
+
 ### (14) Land and water sparing transformation ###
 landsparing_transformation <- function(cfg) {
   # land protection following strict protection scenario (half or land's surface)
-  cfg$gms$c35_protect_scenario <-	"HalfEarth" # need to be updated, switch changed
-  # Water protection through environmental flow protection
+  cfg$gms$c22_protect_scenario <- "HalfEarth"
+
+  # water protection through environmental flow protection
   cfg$gms$c42_env_flow_policy	 <- "on"
   cfg$gms$c30_bioen_water	     <- "rainfed"  # (already default anyways)
 
@@ -367,7 +352,7 @@ airPollution_transformation <- function(cfg) {
   # savanna burning
   # (not available yet)
   # deforestation with timber harvest rather than burning
-  cfg$gms$c35_forest_damage_end <- "by2030" # need to be updated, switch changed
+  cfg$gms$c35_forest_damage_end <- 2030
 
   return(cfg)
 }
@@ -393,7 +378,7 @@ soil_transformation <- function(cfg) {
 #################################################
 ##          Total SDP Scenario                 ##
 #################################################
-cfg <- general_settings(title = "FSEC_SDP")
+cfg <- general_settings(title = "FSEC_FSDP")
 # Climate scenario: RCP 2.6
 cfg <- gms::setScenario(cfg, c("cc", "rcp2p6", "SSP1", "NDC", "ForestryEndo"))
 cfg$input['cellular'] <- "rev4.73FSECmodeling_e2bdb6cd_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz"
@@ -419,8 +404,8 @@ cfg <- livestock_transformation(cfg = cfg)
 cfg <- cropefficiency_transformation(cfg = cfg)
 ### (NA) Nitrogen transformation ###
 #cfg <- nitrogen_transformation(cfg = cfg)
-### (10) Diversity on land transformation ###
-cfg <- landsharing_transformation(cfg = cfg)
+### (10) Biodiverstiy transformation ###
+cfg <- biodiversity_transformation(cfg = cfg)
 ### (NA) Supply chain transformation ###
 #cfg <- supplyChain_transformation(cfg = cfg)
 ### (11) Fair trade transformation ###
@@ -443,5 +428,5 @@ cfg <- airPollution_transformation(cfg = cfg)
 cfg <- soil_transformation(cfg = cfg)
 ### Emission policy must be set separately in full-SDP scenario
 # (because it would be overwritten in the different transformations)
-cfg$gms$c56_emis_policy <- "sdp_all"
+cfg$gms$c56_emis_policy <- "sdp_all" # To Do: change to sdp_all once soil runs feasible
 start_run(cfg = cfg, codeCheck = codeCheck)

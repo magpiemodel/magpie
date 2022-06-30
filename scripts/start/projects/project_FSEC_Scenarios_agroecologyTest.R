@@ -212,7 +212,7 @@ nitrogen_transformation <- function(cfg) {
 ### (10) Biodiversity transformation ###
 biodiversity_transformation <- function(cfg) {
   # BII target
-  cfg$gms$s44_bii_target <- 0.81
+  cfg$gms$s44_bii_lower_bound <- 0.81
 
 }
 
