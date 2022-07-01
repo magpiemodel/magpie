@@ -7,8 +7,15 @@
 
 *' @title Food demand
 *'
-*' @description The main function of the food demand module is to forecast
-*' the food demand from agricultural products, which is used in the module [16_demand].
+*' @description The food demand module forecasts the food demand for various
+*' agricultural products, which is used in the module [16_demand].
+*' Drivers of food demand are population, income, and demographic structure from
+*' module [09_drivers], as well as module-specific scenario assumptions.
+*' In the case of elastic demand, the model uses the shadow price of
+*' agricultural commodities to change food demand and iterates with MAgPIE
+*' until a common solution is found. Outputs include next to food demand
+*' also projections of anthropometric parameters such as body height and
+*' weight distribution, as well as phyiscal activity levels.
 *' @authors Benjamin Leon Bodirsky, Isabelle Weindl, Jan Philipp Dietrich
 
 *###################### R SECTION START (MODULETYPES) ##########################

@@ -324,8 +324,8 @@ $endif
   p15_intake_detail(t,iso,kfo) = p15_intake_detail(t,iso,kfo) * (1-i15_exo_foodscen_fader(t,iso))
                       + i15_intake_detailed_scen_target(t,iso,kfo) * i15_exo_foodscen_fader(t,iso);
 
-  p15_bmi_shr_calibrated(t,iso,kfo) = p15_bmi_shr_calibrated(t,iso,kfo) * (1-i15_exo_foodscen_fader(t,iso))
-                      + p15_bmi_shr_target(t,iso,kfo) * i15_exo_foodscen_fader(t,iso);
+  p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15) = p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15) * (1-i15_exo_foodscen_fader(t,iso))
+                      + p15_bmi_shr_target(t,iso,sex,age,bmi_group15) * i15_exo_foodscen_fader(t,iso);
 
 *' 4.) The fourth step estimates the calorie supply at household level by multiplying
 *' daily per capita calorie intake with the demand2intake ratio that was estimated

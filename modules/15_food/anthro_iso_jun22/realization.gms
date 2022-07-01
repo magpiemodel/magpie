@@ -18,7 +18,7 @@ $Ifi "%phase%" == "postsolve" $include "./modules/15_food/anthro_iso_jun22/posts
 *######################## R SECTION END (PHASES) ###############################
 
 *' @description
-*' The realization anthropometrics_jan18
+*' The realization anthro_iso_jun22
 *' uses per capita income and the demography of the
 *' world population (including sex and age classes at the country level,
 *' which are provided from module [09_drivers]) as drivers.
