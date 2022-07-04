@@ -52,12 +52,6 @@ Elseif s15_milk_share_fadeout_india = 1,
 	i15_milk_share_fadeout_india(t) = f15_milk_share_fadeout_india(t);
 );
 
-display i15_milk_share_fadeout_india;
-
-
-
-
-
 
 * ###### Exogenous food waste and diet scenarios as well as food substitution scenarios
 

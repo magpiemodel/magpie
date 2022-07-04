@@ -18,8 +18,7 @@ $Ifi "%phase%" == "postsolve" $include "./modules/15_food/anthro_iso_jun22/posts
 *######################## R SECTION END (PHASES) ###############################
 
 *' @description
-*' The realization anthro_iso_jun22
-*' uses per capita income and the demography of the
+*' This realization uses per capita income and the demography of the
 *' world population (including sex and age classes at the country level,
 *' which are provided from module [09_drivers]) as drivers.
 *' The module estimates food demand on iso-country level taking
@@ -39,7 +38,7 @@ $Ifi "%phase%" == "postsolve" $include "./modules/15_food/anthro_iso_jun22/posts
 *' The food demand model can be run in standalone mode by running the
 *' the file `standalone/demand_model.gms`.
 *' The model is described in [@bodirsky_starved_nodate]
-*' (food_demand_coupling.svg){ width=60% }
+*' (food_demand_coupling.png){ width=60% }
 *' The model also includes a number of switches that allow for exogenous
 *' diet scenarios, most importantly the shift to the Planetary Health diet
 *' [@willett_food_2019].
