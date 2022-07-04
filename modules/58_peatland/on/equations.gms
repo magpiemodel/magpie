@@ -105,6 +105,10 @@
 	sum((man58,land58,clcl58), v58_peatland_man(j2,man58,land58) *
 	p58_mapping_cell_climate(j2,clcl58) * p58_ipcc_wetland_ef(clcl58,land58,emis58,man58));
 
- q58_peatland_emis(j2) ..
-	vm_peatland_emis(j2) =e=
-	sum(emis58, v58_peatland_emis(j2,emis58));
+*' Conversion from CO2 equivalent to element unit for interface `vm_btm_cell` using GWP100 conversion factors from AR5 (same as in @wilson_2016).
+
+ q58_peatland_emis(i2,poll58) ..
+	vm_btm_reg(i2,"peatland",poll58) =e= 
+	sum((cell(i2,j2),emisSub58_to_poll58(emisSub58,poll58)),
+		v58_peatland_emis(j2,emisSub58) * p58_conversion_factor(emisSub58));
+	

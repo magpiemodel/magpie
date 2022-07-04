@@ -17,7 +17,8 @@
 *' from cropland production that have a low suitability, e.g. due to steep slopes,
 *' to estimate the available cropland area. The cultivated area therefore has
 *' to be smaller than the available cropland area. Moreover, the available cropland
-*' can be reduced by setting aside cropland for other land cover types.
+*' can be reduced by constraining the cropland area in favour of other land types,
+*' in order to increase compositional heterogeneity of land types at the cell level.
 
  q30_avl_cropland(j2)  ..
    vm_land(j2,"crop") =l= sum(ct, p30_avl_cropland(ct,j2));
@@ -45,16 +46,12 @@
  q30_prod(j2,kcr) ..
   vm_prod(j2,kcr) =e= sum(w, vm_area(j2,kcr,w) * vm_yld(j2,kcr,w));
 
-*' Due to the high uncertainty in 2nd generation bioenergy production, irrigated
-*' production of bioenergy is deactivated (see presolve statements of crop
-*' realization).
-
 *' The carbon content of the above ground carbon pools are calculated as a total
 *' for all cropland :
- q30_carbon(j2,ag_pools) ..
- vm_carbon_stock(j2,"crop",ag_pools) =e=
-   vm_land(j2,"crop") * sum(ct,fm_carbon_density(ct,j2,"crop",ag_pools));
 
+ q30_carbon(j2,ag_pools,stockType) ..
+ vm_carbon_stock(j2,"crop",ag_pools,stockType) =e=
+   m_carbon_stock(vm_land,fm_carbon_density,"crop");
 
 *' The biodiversity value for cropland is calculated separately for annual and perennial crops:
  q30_bv_ann(j2,potnatveg) .. vm_bv(j2,"crop_ann",potnatveg)
@@ -63,4 +60,5 @@
 
  q30_bv_per(j2,potnatveg) .. vm_bv(j2,"crop_per",potnatveg)
  					=e=
- 					sum((crop_per30,w), vm_area(j2,crop_per30,w)) * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
+          (vm_land(j2,"crop") - sum((crop_ann30,w), vm_area(j2,crop_ann30,w)))
+          * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j2,potnatveg);

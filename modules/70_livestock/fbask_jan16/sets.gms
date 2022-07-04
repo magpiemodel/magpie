@@ -10,6 +10,9 @@ sets
    cost_regr Cost regression parameters
     /cost_regr_a,cost_regr_b/
 
+   share_regr regression parameters for capital share calculation
+   /slope, intercept/
+
    feed_scen70  scenarios
        / ssp1, ssp2, ssp3, ssp4, ssp5, constant,
          SDP, SDP_EI, SDP_MC, SDP_RC /
@@ -40,59 +43,4 @@ sets
          lin_zero_10_50, lin_zero_20_50, lin_zero_20_30, lin_zero_20_70, lin_50pc_20_50, lin_50pc_20_50_extend65, lin_50pc_20_50_extend80,
          lin_50pc_10_50_extend90, lin_75pc_10_50_extend90, lin_80pc_20_50, lin_80pc_20_50_extend95, lin_90pc_20_50_extend95,
 	 lin_99-98-90pc_20_50-60-100, sigmoid_20pc_20_50, sigmoid_50pc_20_50, sigmoid_80pc_20_50 /
-
-   ksub70 Set covering kall to allow for substitutions between feed components
-   /
-   tece,maiz,trce,rice_pro,soybean,rapeseed,groundnut,sunflower,oilpalm,puls_pro,
-   potato,cassav_sp,sugr_cane,sugr_beet,others,cottn_pro,foddr, pasture, begr, betr,
-   oils,oilcakes,sugar,molasses,alcohol,ethanol,distillers_grain,brans,scp,fibres,
-   livst_rum, livst_pig,livst_chick, livst_egg, livst_milk, fish,
-   res_cereals, res_fibrous, res_nonfibrous, wood, woodfuel
-   /
-
-
-
-   kall_ksub70(kall,ksub70) Mapping between feed components and possible replacements (currently only residues and fodder replaceable)
-       /
-       tece   . (tece)
-       maiz   . (maiz)
-       trce   . (trce)
-       rice_pro   . (rice_pro)
-       soybean   . (soybean)
-       rapeseed   . (rapeseed)
-       groundnut   . (groundnut)
-       sunflower   . (sunflower)
-       oilpalm   . (oilpalm)
-       puls_pro   . (puls_pro)
-       potato   . (potato)
-       cassav_sp   . (cassav_sp)
-       sugr_beet   . (sugr_beet)
-       others   . (others)
-       cottn_pro   . (cottn_pro)
-       foddr   . (foddr)
-       pasture   . (pasture)
-       begr   . (begr)
-       betr   . (betr)
-       oils   . (oils)
-       oilcakes   . (oilcakes)
-       sugar   . (sugar)
-       molasses   . (molasses)
-       alcohol   . (alcohol)
-       ethanol   . (ethanol)
-       distillers_grain   . (distillers_grain)
-       brans   . (brans)
-       scp   . (scp)
-       fibres   . (fibres)
-       livst_rum   . (livst_rum)
-       livst_pig   .  (livst_pig)
-       livst_chick   .  (livst_chick)
-       livst_egg   .  (livst_egg)
-       livst_milk   .  (livst_milk)
-       fish   . (fish)
-       res_cereals   . (foddr)
-       res_fibrous   . (foddr)
-       res_nonfibrous   . (foddr)
-       wood   . (wood)
-       woodfuel   . (woodfuel)
-       /
 ;

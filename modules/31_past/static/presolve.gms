@@ -25,6 +25,6 @@ vm_bv.fx(j,"rangeland",potnatveg) =
 
 *' Regional costs associated with pasture management are set to zero.
 
-vm_cost_prod.fx(i,"pasture") = 0;
+vm_cost_prod_past.fx(i) = 0;
 
 *' @stop

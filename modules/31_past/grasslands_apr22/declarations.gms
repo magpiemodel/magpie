@@ -7,8 +7,8 @@
 
 
 equations
-q31_carbon(j,ag_pools)                                  Above ground carbon content calculation for pasture (mio tC)
-q31_cost_prod_past(i)                                   Costs for putting animals on grasslands and expanding grassland areas (mio. USD05MER per yr)
+q31_carbon(j,ag_pools,stockType)  						Above ground carbon content calculation for pasture (mio tC)
+q31_cost_prod_past(i)                                   Costs for putting animals on grasslands and shifting between grassland types (mio. USD05MER per yr)
 q31_bv_manpast(j,potnatveg)                             Biodiversity value for managed pastures (Mha)
 q31_bv_rangeland(j,potnatveg)                           Biodiversity value for rangeland (Mha)
 q31_pasture_areas(j)                                    Total grassland calculation (mio. ha)
@@ -19,6 +19,7 @@ q31_expansion_cost(j, grassland)                        Grassland expansion cost
 positive variables
 v31_grass_area(j,grassland)                             Grassland areas (mio. ha)
 v31_cost_grass_expansion(j, grassland)                  Costs of grassland expansion (mio. USD05MER)
+vm_cost_prod_past(i)                                    Costs for putting animals on grasslands and shifting between grassland types (mio. USD05MER per yr)
 ;
 
 parameters
@@ -37,8 +38,9 @@ i31_grass_hist_yld(t_all,i, grassland)                  FAO gassland yields (tDM
 parameters
  ov31_grass_area(t,j,grassland,type)           Grassland areas (mio. ha)
  ov31_cost_grass_expansion(t,j,grassland,type) Costs of grassland expansion (mio. USD05MER)
- oq31_carbon(t,j,ag_pools,type)                Above ground carbon content calculation for pasture (mio tC)
- oq31_cost_prod_past(t,i,type)                 Costs for putting animals on grasslands and expanding grassland areas (mio. USD05MER per yr)
+ ov_cost_prod_past(t,i,type)                   Costs for putting animals on grasslands and shifting between grassland types (mio. USD05MER per yr)
+ oq31_carbon(t,j,ag_pools,stockType,type)      Above ground carbon content calculation for pasture (mio tC)
+ oq31_cost_prod_past(t,i,type)                 Costs for putting animals on grasslands and shifting between grassland types (mio. USD05MER per yr)
  oq31_bv_manpast(t,j,potnatveg,type)           Biodiversity value for managed pastures (Mha)
  oq31_bv_rangeland(t,j,potnatveg,type)         Biodiversity value for rangeland (Mha)
  oq31_pasture_areas(t,j,type)                  Total grassland calculation (mio. ha)

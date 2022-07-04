@@ -16,22 +16,8 @@
 
 q70_feed(i2,kap,kall) ..
  vm_dem_feed(i2,kap,kall) =g= vm_prod_reg(i2,kap)
-     *sum(ct,i70_feed_basket_substitutes(ct,i2,kap,kall))
+     *sum(ct,im_feed_baskets(ct,i2,kap,kall))
      +sum(ct,fm_feed_balanceflow(ct,i2,kap,kall));
-
-* Certain feed basket items - namely residues - lead to high demand and very high prices,
-* forcing unnecessary crop production in order to produce residues. Following 2 equations allow
-* for substituting fodder for residues
-q70_feed_subs(i2,kap,ksub70) ..
-    sum(ct, sum(kall_ksub70(kall,ksub70), i70_feed_basket_substitutes(ct,i2,kap,kall))) =e=
-    sum(ct, sum(kall_ksub70(kall,ksub70), im_feed_baskets(ct, i2,kap,kall)))
-    ;
-
-*  q70_feed_sub_ratio(i2,kap,kall) ..
-*        sum(ct, im_feed_basket_substitutes(ct, i2,kap,kall)) =g=
-*       sum(ct, im_feed_baskets(ct, i2,kap,kall)*sum(ct,i70_sub_ratio(ct, kall))
-*    ;
-
 
 *' Factor requirement costs (e.g. labour, capital, but without costs for feed)
 *' of livestock production depend on the amount of production and the per-unit
@@ -40,14 +26,15 @@ q70_feed_subs(i2,kap,ksub70) ..
 *' productivity. Here, factor costs rise with intensification. The per-unit
 *' costs for non-ruminants and fish are assumed to be independent from
 *' productivity trajectories for simplification. Therefore,
-*' `f70_cost_regr(kli,"cost_regr_b")` is set to zero in the case of livestock
+*' `i70_cost_regr(i,kli,"cost_regr_b")` is set to zero in the case of livestock
 *' products generated in monogastric systems.
 
-q70_cost_prod_liv(i2,kli) ..
- vm_cost_prod(i2,kli) =e= vm_prod_reg(i2,kli)
-     *(f70_cost_regr(kli,"cost_regr_a") + f70_cost_regr(kli,"cost_regr_b")
-     *sum((ct, sys_to_kli(sys,kli)),i70_livestock_productivity(ct,i2,sys)));
+q70_cost_prod_liv(i2,req) ..
+ vm_cost_prod_livst(i2,req) =e= sum(kli, vm_prod_reg(i2,kli)
+     *(i70_cost_regr(i2,kli,"cost_regr_a") + i70_cost_regr(i2,kli,"cost_regr_b")
+     *sum((ct, sys_to_kli(sys,kli)),i70_livestock_productivity(ct,i2,sys)))) 
+     *sum(ct, p70_cost_share_livst(ct,i2,req));
 
 q70_cost_prod_fish(i2) ..
- vm_cost_prod(i2,"fish") =e=
-     vm_prod_reg(i2,"fish")*f70_cost_regr("fish","cost_regr_a");
+ vm_cost_prod_fish(i2) =e=
+     vm_prod_reg(i2,"fish")*i70_cost_regr(i2,"fish","cost_regr_a");

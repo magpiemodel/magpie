@@ -5,20 +5,32 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-p38_capital_cost_share(t,i) = 0;
 p38_share_calibration(i) = f38_historical_share("y2010",i)-(f38_reg_parameters("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso("y2010",iso)))+f38_reg_parameters("intercept"));
 
 if (m_year(t)<2010,
-$ifthen "%c38_sticky_mode%" == "dynamic" p38_capital_cost_share(t,i) = f38_historical_share(t,i);
-$endif
+p38_cost_share(t,i,"capital") = f38_historical_share(t,i);
+p38_cost_share(t,i,"labor")   = 1 - f38_historical_share(t,i);
+
 elseif (m_year(t)>=2010),
-$ifthen "%c38_sticky_mode%" == "dynamic" p38_capital_cost_share(t,i) = f38_reg_parameters("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso(t,iso)))+f38_reg_parameters("intercept")+p38_share_calibration(i);
-$endif
+p38_cost_share(t,i,"capital") = f38_reg_parameters("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso(t,iso)))+f38_reg_parameters("intercept")+p38_share_calibration(i);
+p38_cost_share(t,i,"labor")   = 1 - p38_cost_share(t,i,"capital");
 );
 
-p38_variable_costs(t,i,kcr) = f38_fac_req(kcr)  * (1-p38_capital_cost_share(t,i)) ;
-p38_capital_need(t,i,kcr,"mobile") = f38_fac_req(kcr) * p38_capital_cost_share(t,i) / (pm_interest(t,i)+s38_depreciation_rate) * (1-s38_immobile);
-p38_capital_need(t,i,kcr,"immobile") = f38_fac_req(kcr)  * p38_capital_cost_share(t,i) / (pm_interest(t,i)+s38_depreciation_rate) * s38_immobile;
+* choosing between regional (+time dependent) or global (from 2005) factor requirements
+$if "%c38_fac_req%" == "glo" i38_fac_req(t,i,kcr) = f38_fac_req(kcr);
+$if "%c38_fac_req%" == "reg" i38_fac_req(t,i,kcr) = f38_fac_req_fao_reg(t,i,kcr);
+
+if (m_year(t)<=1995,
+ i38_fac_req(t,i,kcr) = i38_fac_req("y1995",i,kcr);
+elseif m_year(t)>=2010,
+ i38_fac_req(t,i,kcr) = i38_fac_req("y2010",i,kcr);
+else
+ i38_fac_req(t,i,kcr) = i38_fac_req(t,i,kcr);
+);
+
+p38_variable_costs(t,i,kcr) = i38_fac_req(t,i,kcr)  * p38_cost_share(t,i,"labor");
+p38_capital_need(t,i,kcr,"mobile") = i38_fac_req(t,i,kcr) * p38_cost_share(t,i,"capital") / (pm_interest(t,i)+s38_depreciation_rate) * (1-s38_immobile);
+p38_capital_need(t,i,kcr,"immobile") = i38_fac_req(t,i,kcr)  * p38_cost_share(t,i,"capital") / (pm_interest(t,i)+s38_depreciation_rate) * s38_immobile;
 
 *** Variable labor costs BEGIN
 

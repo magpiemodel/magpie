@@ -8,22 +8,20 @@
 
 positive variables
  vm_dem_feed(i,kap,kall)          Regional feed demand including byproducts (mio. tDM per yr)
+ vm_cost_prod_livst(i,req)        Livestock factor costs (mio. USD05MER per yr)
+ vm_cost_prod_fish(i)             Fish factor costs (mio. USD05MER per yr)
 ;
 
 equations
  q70_feed(i,kap,kall)             Regional feed demand
- q70_cost_prod_liv(i,kall)        Regional factor input costs for livestock production
+ q70_cost_prod_liv(i,req)         Regional factor input costs for livestock production
  q70_cost_prod_fish(i)            Regional factor input costs for fish production
- q70_feed_subs(i,kap,kall)     Allow for substituting feeds based on mapping
-*' q70_feed_sub_ratio(i,kap,kall)   Amount of substitution allowed
-
 ;
 
 parameters
  im_slaughter_feed_share(t_all,i,kap,attributes)  Share of feed that is incorporated in animal biomass (1)
  i70_livestock_productivity(t_all,i,sys)          Productivity indicator for livestock production (t FM per animal per yr)
  im_feed_baskets(t_all,i,kap,kall)                Feed baskets in tDM per tDM livestock product (1)
- i70_feed_basket_substitutes(t_all,i,kap,kall)  Feed basket parameter allowing for substitution in tDM per tDM livestock product (1)
  p70_cattle_stock_proxy(t,i)                      Proxy for cattle stocks needed to fullfil domestic food demand (mio. animals per yr)
  p70_incr_cattle(t,i)                             Change in estimated cattle stocks attributed to food demand projections (1)
  pm_past_mngmnt_factor(t,i)                       Regional pasture management intensification factor (1)
@@ -31,15 +29,19 @@ parameters
  i70_foddr_scp_fadeout(t_all,i)                	  Fooder fadeout (share 0-1) to be replaced by SCP (1)
  p70_country_dummy(iso)                           Dummy parameter indicating whether country is affected by feed scenarios (1)
  p70_feedscen_region_shr(t_all,i)                 Weighted share of region with regards to feed scenario of countries (1)
+ p70_cost_share_livst(t,i,req)                    Capital and labor shares of the regional factor costs for plant production for livestock  (1)
+ p70_cost_share_calibration(i)                    Summation factor used to calibrate calculated capital shares with historical values (1)
+ i70_cost_regr(i,kap,cost_regr)                   Regression coefficients for livestock factor requirements (1)
 ;
 
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_dem_feed(t,i,kap,kall,type)    Regional feed demand including byproducts (mio. tDM per yr)
- oq70_feed(t,i,kap,kall,type)      Regional feed demand
- oq70_cost_prod_liv(t,i,kall,type) Regional factor input costs for livestock production
- oq70_cost_prod_fish(t,i,type)     Regional factor input costs for fish production
- oq70_feed_subs(t,i,kap,kall,type) Allow for substituting feeds based on mapping
+ ov_dem_feed(t,i,kap,kall,type)   Regional feed demand including byproducts (mio. tDM per yr)
+ ov_cost_prod_livst(t,i,req,type) Livestock factor costs (mio. USD05MER per yr)
+ ov_cost_prod_fish(t,i,type)      Fish factor costs (mio. USD05MER per yr)
+ oq70_feed(t,i,kap,kall,type)     Regional feed demand
+ oq70_cost_prod_liv(t,i,req,type) Regional factor input costs for livestock production
+ oq70_cost_prod_fish(t,i,type)    Regional factor input costs for fish production
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

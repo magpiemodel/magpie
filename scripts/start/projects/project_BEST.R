@@ -15,7 +15,7 @@
 
 version <- "V9"
 
-library(lucode)
+library(lucode2)
 library(magclass)
 library(gdx)
 library(magpie4)

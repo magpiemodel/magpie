@@ -15,5 +15,5 @@
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/53_methane/off/sets.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/53_methane/off/presolve.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/53_methane/off/preloop.gms"
 *######################## R SECTION END (PHASES) ###############################

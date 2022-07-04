@@ -1,0 +1,10 @@
+* list of files that are required here
+f36_weekly_hours.csv
+f36_weekly_hours_iso.csv
+f36_historic_hourly_labor_costs.csv
+f36_regression_hourly_labor_costs.csv
+f36_historic_ag_employment.csv
+f36_unspecified_subsidies.csv
+f36_nonmagpie_factor_costs.csv
+f36_regression_cap_share.csv
+f36_historical_share.csv
