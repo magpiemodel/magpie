@@ -226,21 +226,18 @@ p32_aff_pol(t,j) = round(f32_aff_pol(t,j,"%c32_aff_policy%"),6);
 * `p32_aff_togo` is used to adjust `s32_max_aff_area` in the constraint `q32_max_aff`.
 p32_aff_togo(t,i) = smax(t2, sum(cell(i,j), p32_aff_pol(t2,j))) - sum(cell(i,j), p32_aff_pol(t,j));
 
-$ifthen "%c32_max_aff_area%" == "global"
-	c32_max_aff_area_glo = 1;
-$elseif "%c32_max_aff_area%" == "regional"
-	c32_max_aff_area_glo = 0;
-$else 
-	abort "Provided value for c32_max_aff_area is not defined";
-$endif
-
-* Adjust the global and regional afforestation limits `s32_max_aff_area` and `f32_max_aff_area` upwards, if it is below the exogenous policy target.
-if(c32_max_aff_area_glo = 1,
-	i32_max_aff_area_glo = max(s32_max_aff_area, smax(t2, sum(j, p32_aff_pol(t2,j)))) + sum((j,ac), p32_land_start_ac(j,"ndc",ac));
-	i32_max_aff_area_reg(i) = 0;
-elseif c32_max_aff_area_glo = 0,
-	i32_max_aff_area_glo = 0;
-	i32_max_aff_area_reg(i) = max(f32_max_aff_area(i), smax(t2, sum(cell(i,j), p32_aff_pol(t2,j)))) + sum((cell(i,j),ac), p32_land_start_ac(j,"ndc",ac));
+* Calculate the limit for endogenous afforestation
+* The global (`s32_max_aff_area`) and regional limit (`f32_max_aff_area`) for total afforestation (sum of endogenous and exogenous) is reduced by exogenous NPI/NDC afforestation (`p32_aff_pol`).
+if(s32_max_aff_area_glo = 1,
+	i32_max_aff_area_glo(t) = s32_max_aff_area - smax(t2, sum(j, p32_aff_pol(t2,j)));
+	i32_max_aff_area_glo(t)$(i32_max_aff_area_glo(t) < 0) = 0;
+	i32_max_aff_area_glo(t)$(m_year(t) <= sm_fix_SSP2) = Inf;
+	i32_max_aff_area_reg(t,i) = 0;
+elseif s32_max_aff_area_glo = 0,
+	i32_max_aff_area_reg(t,i) = f32_max_aff_area(i) - smax(t2, sum(cell(i,j), p32_aff_pol(t2,j)));
+	i32_max_aff_area_reg(t,i)$(i32_max_aff_area_reg(t,i) < 0) = 0;
+	i32_max_aff_area_reg(t,i)$(m_year(t) <= sm_fix_SSP2) = Inf;
+	i32_max_aff_area_glo(t) = 0;
 );
 
 *** NPI/NDC policies END

@@ -146,7 +146,7 @@ highres <- function(cfg) {
   }
   aff_max[aff_max<0] <- 0
   write.magpie(aff_max,"modules/32_forestry/input/f32_max_aff_area.cs4")
-  cfg$gms$c32_max_aff_area <- "regional"
+  cfg$gms$s32_max_aff_area_glo <- 0
   #check
   if(cfg$gms$s32_max_aff_area < Inf) {
     indicator <- abs(sum(aff_max)-cfg$gms$s32_max_aff_area)
