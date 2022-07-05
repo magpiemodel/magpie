@@ -158,9 +158,9 @@ $title magpie
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev4.25.tgz
+* Used data set: additional_data_rev4.26.tgz
 * md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: calibration_H12_per_ton_fao_may22_28May22.tgz
 * md5sum: NA
@@ -189,8 +189,10 @@ $title magpie
 * * Regionscode: 62eff8f7
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
+* Warning message:
+* package 'lucode2' was built under R version 4.2.1
 * 
-* Last modification (input data): Sun Jun 26 09:01:02 2022
+* Last modification (input data): Tue Jul  5 14:20:37 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
