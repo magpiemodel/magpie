@@ -11,10 +11,10 @@ scalars
 ;
 
 parameters
- i32_max_aff_area_glo                               Maximum global endogenous afforestation area (mio. ha)
- p32_max_aff_area_glo                               Maximum global endogenous afforestation area (mio. ha)
- i32_max_aff_area_reg(i)                            Maximum regional endogenous afforestation area (mio. ha)
- p32_max_aff_area_reg(i)                            Maximum regional endogenous afforestation area (mio. ha)
+ i32_max_aff_area_glo                               Maximum global endogenous afforestation area calcualted in preloop (mio. ha)
+ i32_max_aff_area_reg(i)                            Maximum regional endogenous afforestation area calcualted in preloop (mio. ha)
+ p32_max_aff_area_glo                               Maximum global endogenous afforestation area used in equations (mio. ha)
+ p32_max_aff_area_reg(i)                            Maximum regional endogenous afforestation area used in equations (mio. ha)
  p32_aff_pol(t,j)                                   NDC forest stock (mio. ha)
  p32_aff_pol_timestep(t,j)                          NDC afforestation per time step (mio. ha)
  p32_aff_pot(t,j)                                   Potential afforestation area (mio. ha)
