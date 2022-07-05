@@ -80,7 +80,6 @@ parameters
  i15_prices_initial_kcal(iso,kfo)                  Initial prices that capture the approximate level of prices in 1961-2010 (USD05PPP per kcal)
 
 * anthropometrics
-  o15_bmi_shr(t,iso,sex,age,bmi_group15)           Calibrated estimates BMI share for population groups  (1)
   p15_bodyheight(t,iso,sex,age,estimates15)        Body height (cm per cap)
   p15_bodyweight(t,iso,sex,age,bmi_group15)        Body weight (kg per cap)
   p15_bodyheight_calib(t,iso,sex,age_new_estimated15)         Calibration factor for regional height differences (cm)
@@ -96,7 +95,6 @@ parameters
   i15_bmi_shr_calib_lastcalibyear(iso,sex,age,bmi_group15) Calibration parameters of the last year with historical observations (1)
 
 * diet structure
-  o15_kcal_intake_total(t,iso)                     Total food intake in a country (kcal per capita per day)
   p15_intake(t,iso,sex,age,bmi_group15)            Mean food intake by population group (kcal per capita per day)
   i15_kcal_pregnancy(t,iso)                        Additional calorie requirements  for pregnancy and lactation (kcal)
   p15_kcal_regr(t, iso, kfo)                       Uncalibrated regression estimates of calorie demand (kcal per cap per day)
@@ -145,14 +143,15 @@ parameters
  p15_kcal_pc_livestock_supply_target(iso)		 	 Target of per capita livestock consumption (kcal per capita per day)
 
  p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)     Calibrated estimates of BMI share for population groups  (1)
- p15_bmi_shr_target(t,iso,sex,age,bmi_group15)         Target for BMI shares under exogenous scenarios (1) 
+ p15_bmi_shr_target(t,iso,sex,age,bmi_group15)         Target for BMI shares under exogenous scenarios (1)
  p15_intake_total(t,iso)                Total food intake in a country (kcal per capita per day)
 
 *food waste
- p15_demand2intake_ratio(t,iso)                 Ratio between food calorie demand and intake (1)
+ p15_demand2intake_ratio(t,iso)                 Ratio between food calorie demand and intake (kcal per kcal)
  p15_waste_pc(t,iso,kfo)                        Household waste by food group (kcal per capita per day)
  p15_intake_detail(t,iso,kfo)                   Intake by food group (kcal per capita per day)
- p15_demand2intake_ratio_detail(t,iso,kfo)      Food waste ratio by food group (kcal per capita per day)
+ p15_demand2intake_ratio_detail(t,iso,kfo)      Food waste ratio by food group (kcal per kcal)
+ p15_demand2intake_ratio_detail_preexo(t,iso,kfo) Food waste as outcome of regression (kcal per kcal)
 
 * transition to exogenous scenario diets
  i15_intake_scen_target(t,iso)                  Target for total per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
@@ -160,7 +159,6 @@ parameters
  i15_intake_EATLancet(iso,kfo)                  Food-specific per capita calorie intake according to EAT Lancet diet scenario (kcal per capita per day)
  i15_intake_detailed_scen_target(t,iso,kfo)     Target for food-specific per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
 
- p15_demand2intake_ratio_ref(iso)               Ratio between food calorie demand and intake for the historical time step of EAT Lancet diets (1)
  p15_foodwaste_growth(t,iso)                    Increase in food waste over time relative to the historical time step of EAT Lancet diets (1)
  i15_kcal_pc_scen_target(t,iso,kfo)             Target for per capita food consumption according to an exogenous diet scenario (kcal per capita per day)
  i15_exo_foodscen_fader(t,iso)                  Fader that converges per capita food consumption to an exogenous diet scenario (1)

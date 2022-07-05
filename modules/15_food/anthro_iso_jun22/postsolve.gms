@@ -5,39 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* For calculation of waste trajectories for exogenous diets:
-if ((sameas(t,"y2010")),
-    p15_demand2intake_ratio_ref(iso) = p15_demand2intake_ratio(t,iso);
-);
-
-*' The calibration parameter is added to the regression value.
-
-   o15_bmi_shr(t,iso,sex,age,bmi_group15) =
-           p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)+
-           i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
-
-*' The BMI shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
-   o15_bmi_shr(t,iso,sex,age,bmi_group15)$(o15_bmi_shr(t,iso,sex,age,bmi_group15)<=0) = 0.000001;
-   o15_bmi_shr(t,iso,sex,age,bmi_group15)$(o15_bmi_shr(t,iso,sex,age,bmi_group15)>1) = 1;
-*' In case that the bmi groups, due to calibration, exceed 1, we rescale to 1.
-   o15_bmi_shr(t,iso,sex,age,bmi_group15)$(sum(bmi_group15_2, o15_bmi_shr(t,iso,sex,age,bmi_group15_2))>1) =
-      o15_bmi_shr(t,iso,sex,age,bmi_group15)/sum(bmi_group15_2, o15_bmi_shr(t,iso,sex,age,bmi_group15_2));
-*' The mismatch below one is balanced by moving the exceeding quantities into the middle BMI group.
-   o15_bmi_shr(t,iso,sex,age,"medium")=
-      1 - (sum(bmi_group15, o15_bmi_shr(t,iso,sex,age,bmi_group15)) - o15_bmi_shr(t,iso,sex,age,"medium"));
-
-
-*' We recalculate the intake with the new values.
-   o15_kcal_intake_total(t,iso) =
-         (
-           sum((sex, age, bmi_group15),
-               o15_bmi_shr(t,iso,sex,age,bmi_group15)*
-               im_demography(t,iso,sex,age) *
-               p15_intake(t,iso,sex,age,bmi_group15)
-           ) + i15_kcal_pregnancy(t,iso)
-         )/sum((sex,age), im_demography(t,iso,sex,age));
-
-
 
 if(ord(t)>1,
 * start from bodyheight structure of last period
@@ -61,8 +28,12 @@ For (s15_count = 1 to s15_yeardiff,
 * consumption is calculated as linear interpolation between timesteps
    p15_kcal_growth_food(t,iso,"0--4") =
             sum(growth_food15,
-                p15_kcal_pc_iso(t,iso,growth_food15) * (s15_count / (m_yeardiff(t)/5))
-                + p15_kcal_pc_iso(t-1,iso,growth_food15) * (1 - s15_count / (m_yeardiff(t)/5))
+                p15_intake_detail(t,iso,growth_food15)
+                * p15_demand2intake_ratio_detail_preexo(t,iso,growth_food15)
+                * (s15_count / (m_yeardiff(t)/5))
+                + p15_intake_detail(t-1,iso,growth_food15)
+                * p15_demand2intake_ratio_detail_preexo(t-1,iso,growth_food15)
+                * (1 - s15_count / (m_yeardiff(t)/5))
             );
 
 *' @code

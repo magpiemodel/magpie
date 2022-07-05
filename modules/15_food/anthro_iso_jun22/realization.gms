@@ -37,8 +37,10 @@ $Ifi "%phase%" == "postsolve" $include "./modules/15_food/anthro_iso_jun22/posts
 *' as staple calories.
 *' The food demand model can be run in standalone mode by running the
 *' the file `standalone/demand_model.gms`.
-*' The model is described in [@bodirsky_starved_nodate]
+*' The model is described in [@bodirsky_starved_nodate].
+*'
 *' ![Execution order](food_demand_coupling.png){ width=60% }
+*'
 *' The model also includes a number of switches that allow for exogenous
 *' diet scenarios, most importantly the shift to the Planetary Health diet
 *' [@willett_food_2019].

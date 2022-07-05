@@ -16,12 +16,25 @@ if (s15_run_diet_postprocessing = 1,
 
 * saving regression outcome for per capita food demand for different foods
   p15_kcal_regr(t, iso, kfo) = v15_kcal_regr.l(iso, kfo);
-* saving regression outcome for BMI shares
-  p15_bmi_shr_regr(t,iso,sex,age,bmi_group15) = v15_bmi_shr_regr.l(iso,sex,age,bmi_group15);
 
 *' The calibration factor is added to the regression value.
    p15_kcal_pc_iso(t,iso,kfo) =
           v15_kcal_regr.l(iso,kfo) + p15_kcal_calib(t,iso,kfo) * s15_calibrate;
+
+* saving regression outcome for BMI shares
+  p15_bmi_shr_regr(t,iso,sex,age,bmi_group15) = v15_bmi_shr_regr.l(iso,sex,age,bmi_group15);
+
+  p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15) =
+         p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)+
+         i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
+
+* The BMI shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
+  p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)$(p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)<0) = 0;
+  p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)$(p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)>1) = 1;
+* The mismatch is balanced by moving the exceeding quantities into the middle BMI group.
+  p15_bmi_shr_calibrated(t,iso,sex,age,"medium")=
+      1 - (sum(bmi_group15, p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15))
+      - p15_bmi_shr_calibrated(t,iso,sex,age,"medium"));
 
 
 
@@ -139,18 +152,6 @@ if (s15_run_diet_postprocessing = 1,
 * For the calculation of the ratio between food demand and intake, total food
 * calorie intake based on CALIBRATED parameters needs to be calculated:
 
-  p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15) =
-           p15_bmi_shr_regr(t,iso,sex,age,bmi_group15)+
-           i15_bmi_shr_calib(t,iso,sex,age,bmi_group15);
-
-* The BMI shares are not allowed to exceed the bounds 0 and 1. Values are corrected to the bounds.
-  p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)$(p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)<0) = 0;
-  p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)$(p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)>1) = 1;
-* The mismatch is balanced by moving the exceeding quantities into the middle BMI group.
-  p15_bmi_shr_calibrated(t,iso,sex,age,"medium")=
-        1 - (sum(bmi_group15, p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15))
-        - p15_bmi_shr_calibrated(t,iso,sex,age,"medium"));
-
   p15_intake_total(t,iso)$(sum((sex,age), im_demography(t,iso,sex,age)) >0 ) =
        (sum((sex, age, bmi_group15), p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)*
        im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
@@ -160,6 +161,7 @@ if (s15_run_diet_postprocessing = 1,
   p15_demand2intake_ratio(t,iso) = 1$(p15_intake_total(t,iso) = 0) +
          (sum(kfo,p15_kcal_pc_iso(t,iso,kfo)) / p15_intake_total(t,iso))$(
            p15_intake_total(t,iso) <> 0);
+
 
 * Next, we derive a product-specific waste share, which uses product specific
 * waste shares from FAO and calibrates them to meet total
@@ -204,6 +206,10 @@ if (s15_run_diet_postprocessing = 1,
    p15_demand2intake_ratio_detail(t,iso,kfo)=1$(p15_intake_detail(t,iso,kfo) = 0) +
             (p15_kcal_pc_iso(t,iso,kfo) / p15_intake_detail(t,iso,kfo))$(p15_intake_detail(t,iso,kfo) > 0);
 
+* Bodyheight is estimated based on a calorie availabiltiy regression, including
+* waste. As food waste scenarios should not affect bodyheight, we apply the
+* normal food waste ratios for the growth estimates
+  p15_demand2intake_ratio_detail_preexo(t,iso,kfo)=p15_demand2intake_ratio_detail(t,iso,kfo);
 
 * ###### Exogenous EAT Lancet diet scenario
 

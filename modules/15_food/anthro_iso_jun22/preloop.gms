@@ -56,15 +56,9 @@ Elseif s15_milk_share_fadeout_india = 1,
 * ###### Exogenous food waste and diet scenarios as well as food substitution scenarios
 
 
-* Initialisation of the ratio between food calorie demand and food intake for the
-* historical reference period:
-p15_demand2intake_ratio_ref(iso) = 0;
-
-
-
 * Switch to determine countries for which  exogenous food scenarios (EAT Lancet diet and
 * food waste scenarios), and food substitution scenarios shall be applied.
-* In the default case, the food scenario affects all countries when activated.
+* In the default case, the exogenous food scenarios affect all countries.
 p15_country_dummy(iso) = 0;
 p15_country_dummy(scen_countries15) = 1;
 
