@@ -27,8 +27,10 @@ general_settings <- function(title) {
 
   source("config/default.cfg")
 
+  cfg$info$flag <- "v9a"
   cfg$input       <- input
-  cfg$title       <- paste0("v9a_", title)
+  cfg$title       <- paste(cfg$info$flag,title,sep="_")
+  cfg$results_folder <- "output/:title:"
   cfg$recalibrate <- FALSE
   cfg$qos         <- "priority_maxMem"
   cfg$output      <- c(cfg$output,
@@ -452,7 +454,7 @@ cfg <- population_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (2) Reduced inequality and Education Transformation ###
-cfg <- general_settings(title = "FSEC_gdp_educ_inequ")
+cfg <- general_settings(title = "FSEC_gdpEducInequ")
 cfg <- inequalityANDeducation_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
