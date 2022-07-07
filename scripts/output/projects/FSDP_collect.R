@@ -17,7 +17,7 @@ library(magclass)
 library(gms)
 library(magpiesets)
 library(data.table)
-
+library(gdx)
 options(error=function()traceback(2))
 
 ############################# BASIC CONFIGURATION #############################
@@ -33,6 +33,15 @@ reg <- NULL
 iso <- NULL
 grid <- NULL
 missing <- NULL
+
+saveRDS(outputdir,"outputdir.rds")
+#get revision
+x <- unlist(lapply(strsplit(basename(outputdir),"_"),function(x) x[1]))
+if (length(unique(x)) == 1) rev <- unique(x) else stop("version prefix is not identical. Check your selection of runs")
+
+#filter out calibration run
+x <- unlist(lapply(strsplit(basename(outputdir),"_"),function(x) x[2]))
+outputdir <- outputdir[which(x=="FSEC")]
 
 for (i in 1:length(outputdir)) {
   print(paste("Processing",outputdir[i]))
@@ -52,43 +61,53 @@ for (i in 1:length(outputdir)) {
   } else missing <- c(missing,outputdir[i])
 
   ### Grid level outputs
-  y <- NULL
-  years <- c(2020,2050)
+  ## only for BAU and SDP to save time and storage
+  #title <- "FSEC_BAU"
+  scen <- c("BAU","SDP")
+  if(unlist(strsplit(title,"_"))[3] %in% scen) {
+    y <- NULL
+    years <- c(2020,2050)
 
-  ## BII
-  nc_file <- file.path(outputdir[i], "cell.bii_0.5.mz")
-  if(file.exists(nc_file)) {
-    a <- read.magpie(nc_file)[,years,]
-    a <- add_dimension(a, dim = 3.1, add = "variable", nm = "BII (index)")
-    y <- mbind(y,a)
-  } else missing <- c(missing,outputdir[i])
+    ## BII
+    nc_file <- file.path(outputdir[i], "cell.bii_0.5.mz")
+    if(file.exists(nc_file)) {
+      a <- read.magpie(nc_file)[,years,]
+      a <- add_dimension(a, dim = 3.1, add = "variable", nm = "BII (index)")
+      y <- mbind(y,a)
+    } else missing <- c(missing,outputdir[i])
 
-  ## land patterns Mha
-  nc_file <- file.path(outputdir[i], "cell.land_0.5.mz")
-  if(file.exists(nc_file)) {
-    a <- read.magpie(nc_file)[,years,]
-    getNames(a) <- paste0(getNames(a)," (Mha)")
-    getSets(a,fulldim = F)[3] <- "variable"
-    y <- mbind(y,a)
-  } else missing <- c(missing,outputdir[i])
+    ## land patterns Mha
+    nc_file <- file.path(outputdir[i], "cell.land_0.5.mz")
+    if(file.exists(nc_file)) {
+      a <- read.magpie(nc_file)[,years,]
+      getNames(a) <- paste0(getNames(a)," (Mha)")
+      getSets(a,fulldim = F)[3] <- "variable"
+      y <- mbind(y,a)
+    } else missing <- c(missing,outputdir[i])
 
-  ## land patterns share
-  nc_file <- file.path(outputdir[i], "cell.land_0.5_share.mz")
-  if(file.exists(nc_file)) {
-    a <- read.magpie(nc_file)[,years,]
-    getNames(a) <- paste0(getNames(a)," (area share)")
-    getSets(a,fulldim = F)[3] <- "variable"
-    y <- mbind(y,a)
-  } else missing <- c(missing,outputdir[i])
+    ## land patterns share
+    nc_file <- file.path(outputdir[i], "cell.land_0.5_share.mz")
+    if(file.exists(nc_file)) {
+      a <- read.magpie(nc_file)[,years,]
+      getNames(a) <- paste0(getNames(a)," (area share)")
+      getSets(a,fulldim = F)[3] <- "variable"
+      y <- mbind(y,a)
+    } else missing <- c(missing,outputdir[i])
 
-  #add dimensions
-  y <- add_dimension(y, dim = 3.1, add = "scenario", nm = gsub(".", "_", title, fixed = TRUE))
-  y <- add_dimension(y, dim = 3.1, add = "model", nm = "MAgPIE")
-  getSets(y,fulldim = F)[2] <- "period"
+    #add dimensions
+    y <- add_dimension(y, dim = 3.1, add = "scenario", nm = gsub(".", "_", title, fixed = TRUE))
+    y <- add_dimension(y, dim = 3.1, add = "model", nm = "MAgPIE")
+    getSets(y,fulldim = F)[2] <- "period"
 
-  #bind together
-  grid <- mbind(grid,y)
+    #add coordinates
+    y <- addLocation(y)
+    #save as data.frame with xy coordinates
+    y <- as.data.table(as.data.frame(y,rev=3))
 
+    #bind together
+    grid <- rbind(grid,y)
+
+  }
 }
 
 if (!is.null(missing)) {
@@ -96,14 +115,20 @@ if (!is.null(missing)) {
   print(missing)
 }
 
-saveRDS(reg,file = "output/FSDP_reg.rds", version = 2,compress = "xz")
-saveRDS(iso,file = "output/FSDP_iso.rds", version = 2,compress = "xz")
+message("Saving rds files ...")
 
-#add coordinates
-grid <- addLocation(grid)
+saveRDS(reg,file = file.path("output",paste(rev,"FSDP_reg.rds",sep="_")), version = 2,compress = "xz")
+saveRDS(iso,file = file.path("output",paste(rev,"FSDP_iso.rds",sep="_")), version = 2,compress = "xz")
+saveRDS(grid,file = file.path("output",paste(rev,"FSDP_grid.rds",sep="_")), version = 2,compress = "xz")
 
-message("Processing and saving...")
+#save i_to_iso mapping
+gdx <- file.path(outputdir[1], "fulldata.gdx")
+reg2iso <- readGDX(gdx,"i_to_iso")
+names(reg2iso) <- c("region","iso_a3")
+write.csv(reg2iso,"output/reg2iso.csv")
 
-#save as data.frame with xy coordinates
-grid <- as.data.table(as.data.frame(grid,rev=3))
-saveRDS(grid,file = "output/FSDP_grid.rds", version = 2,compress = "xz")
+message("Plotting figures ...")
+library(m4fsdp)
+heatmapFSDP(reg,file=file.path("output",paste(rev,"FSDP_heatmap.jpg",sep="_")))
+spatialMapsFSDP(reg,iso,grid,reg2iso,file = file.path("output",paste(rev,"FSDP_spatialMaps.jpg",sep="_")))
+
