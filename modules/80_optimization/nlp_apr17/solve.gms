@@ -27,7 +27,7 @@ magpie.holdfixed = 1 ;
 
 $onecho > conopt4.opt
 Tol_Obj_Change = 3.0e-6
-Tol_Feas_Min = 4.0e-7
+Tol_Feas_Min = 4.0e-10
 Tol_Feas_Max = 4.0e-6
 Tol_Feas_Tria = 4.0e-6
 $offecho
@@ -58,7 +58,7 @@ if(magpie.modelstat > 2 OR magpie.numNOpt > s80_num_nonopt_allowed,
 		   	magpie.optfile = 2;
 	       	solve magpie USING nlp MINIMIZING vm_cost_glo;
 	       	magpie.optfile   = s80_optfile;
-		else	
+		else
 			display "Modelstat > 2 | Retry solve with CONOPT3";
 			option nlp = conopt;
 			solve magpie USING nlp MINIMIZING vm_cost_glo;
