@@ -128,13 +128,6 @@ land_hr <- land_hr * side_layers_hr[, , c("forested", "nonforested")]
 # Sum over land classes
 bii_hr <- dimSums(land_hr * bii_hr, dim = 3, na.rm = TRUE)
 
-# # Create new output folder for BII
-# baseDir      <- getwd()
-# biiOutputDir <- file.path(baseDir, "output", "BII")
-# if (!dir.exists(biiOutputDir)) {
-#     dir.create(biiOutputDir)
-# }
-
 write.magpie(bii_hr, file.path(outputdir, "cell.bii_0.5.nc"), comment = "unitless")
 write.magpie(bii_hr, file.path(outputdir, "cell.bii_0.5.mz"), comment = "unitless")
 
