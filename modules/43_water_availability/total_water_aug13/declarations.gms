@@ -9,7 +9,7 @@ parameters
  im_wat_avail(t,wat_src,j)        Water availability (mio. m^3 per yr)
 ;
 
-variables 
+variables
   v43_watavail(wat_src,j)         Water available from different sources (mio. m^3 per yr)
 ;
 
@@ -23,4 +23,3 @@ parameters
  oq43_water(t,j,type)            Local seasonal water constraints (mio. m^3 per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
-
