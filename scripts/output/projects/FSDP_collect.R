@@ -46,7 +46,6 @@ outputdir <- outputdir[which(x=="FSEC")]
 for (i in 1:length(outputdir)) {
   print(paste("Processing",outputdir[i]))
   cfg <- gms::loadConfig(file.path(outputdir[i], "config.yml"))
-  title <- cfg$title
 
   ### regional level outputs
   rep<-file.path(outputdir[i],"report.rds")
@@ -62,45 +61,56 @@ for (i in 1:length(outputdir)) {
 
   ### Grid level outputs
   ## only for BAU and SDP to save time and storage
-  #title <- "FSEC_BAU"
   scen <- c("BAU","SDP")
-  if(unlist(strsplit(title,"_"))[3] %in% scen) {
+  if(unlist(strsplit(cfg$title,"_"))[3] %in% scen) {
     y <- NULL
     years <- c(2020,2050)
 
     ## BII
-    nc_file <- file.path(outputdir[i], "cell.bii_0.5.mz")
+    nc_file <- file.path(outputdir[i], "cell.bii_0.5.nc")
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
-      a <- add_dimension(a, dim = 3.1, add = "variable", nm = "BII (index)")
+      getNames(a) <- "BII (index)"
+      getSets(a,fulldim = F)[3] <- "variable"
+      a <- addLocation(a)
       y <- mbind(y,a)
     } else missing <- c(missing,outputdir[i])
 
     ## land patterns Mha
-    nc_file <- file.path(outputdir[i], "cell.land_0.5.mz")
+    nc_file <- file.path(outputdir[i], "cell.land_0.5.nc")
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- paste0(getNames(a)," (Mha)")
       getSets(a,fulldim = F)[3] <- "variable"
+      a <- addLocation(a)
       y <- mbind(y,a)
     } else missing <- c(missing,outputdir[i])
 
     ## land patterns share
-    nc_file <- file.path(outputdir[i], "cell.land_0.5_share.mz")
+    nc_file <- file.path(outputdir[i], "cell.land_0.5_share.nc")
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- paste0(getNames(a)," (area share)")
       getSets(a,fulldim = F)[3] <- "variable"
+      a <- addLocation(a)
+      y <- mbind(y,a)
+    } else missing <- c(missing,outputdir[i])
+
+    ## Nitrogen
+    nc_file <- file.path(outputdir[i], paste(cfg$title,"nutrientSurplus_anthropogenic_unaggregated.nc",sep="-"))
+    if(file.exists(nc_file)) {
+      a <- read.magpie(nc_file)[,years,]
+      getNames(a) <- "nutrientSurplus (kg N per ha)"
+      getSets(a,fulldim = F)[3] <- "variable"
+      a <- addLocation(a)
       y <- mbind(y,a)
     } else missing <- c(missing,outputdir[i])
 
     #add dimensions
-    y <- add_dimension(y, dim = 3.1, add = "scenario", nm = gsub(".", "_", title, fixed = TRUE))
+    y <- add_dimension(y, dim = 3.1, add = "scenario", nm = gsub(".", "_", cfg$title, fixed = TRUE))
     y <- add_dimension(y, dim = 3.1, add = "model", nm = "MAgPIE")
     getSets(y,fulldim = F)[2] <- "period"
 
-    #add coordinates
-    y <- addLocation(y)
     #save as data.frame with xy coordinates
     y <- as.data.table(as.data.frame(y,rev=3))
 
