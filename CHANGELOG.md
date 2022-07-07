@@ -78,6 +78,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **36_employment** added new module to calculate agricultural employment. Includes one realization (`exo_may22`) in which employment is calculated based on the total labor costs (for crop and livestock production)
  - **config and 38_factor_costs** added switch `c38_fac_req` to choose between global and regional crop factor requirements. The default is "glo" (which corresponds to the previous implementation)
  - **config and 70_livestock** added switch `c70_fac_req_regr` to choose between global and regionally calibrated regression to calculate livestock factor requirements. The default is "glo" (which corresponds to the previous implementation)
+ - **scripts** added output scripts for FSDP runs
 
 
 ### removed
