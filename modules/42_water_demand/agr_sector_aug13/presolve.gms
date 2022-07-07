@@ -64,9 +64,12 @@ else
 
 
 *Pumping cost in the current time step
-ic42_pumping_cost(i) = f42_pumping_cost(t,i);
+  ic42_pumping_cost(i) = f42_pumping_cost(t,i);
 
+*Pumping cost settings will be only executed when s42_pumping is set to 1
+if ((s42_pumping = 1),
 *Pumping cost sensitivity test implmentation
-if(m_year(t) > s42_multiplier_startyear,
-ic42_pumping_cost(i) = f42_pumping_cost(t,i)*s42_multiplier;
+  if(m_year(t) > s42_multiplier_startyear,
+  ic42_pumping_cost(i) = f42_pumping_cost(t,i)*s42_multiplier;
+  );
 );
