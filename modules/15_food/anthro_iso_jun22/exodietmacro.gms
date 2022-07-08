@@ -272,8 +272,11 @@ $elseif "%c15_kcal_scen%" == "no_overweight"
      / sum((sex,age), im_demography(t,iso,sex,age));
 $elseif "%c15_kcal_scen%" == "endo"
   i15_intake_scen_target(t,iso) = p15_intake_total(t,iso);
+  p15_bmi_shr_target(t,iso,sex,age,bmi_group15) = p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15);
 $else
   i15_intake_scen_target(t,iso) = sum(kfo,i15_intake_EATLancet_all(iso,"%c15_kcal_scen%","%c15_EAT_scen%",kfo));
+  p15_bmi_shr_target(t,iso,sex,age,bmi_group15)=0;
+  p15_bmi_shr_target(t,iso,sex,age,"medium")=1;
 $endif
 
 
