@@ -6,8 +6,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-   watdem_exo(wat_dem) Exogenous water demands 
-   / industry, electricity, domestic, ecosystem /
+   watdem_exo(wat_dem) Exogenous water demands
+   / manufacturing, electricity, domestic, ecosystem /
 
    scen42 Environmental Flow Policy (EFP)
    / off, on /

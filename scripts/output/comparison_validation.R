@@ -12,6 +12,7 @@
 
 library(mip)
 library(magpie4)
+library(gms)
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
@@ -23,9 +24,9 @@ file    <- paste0("comparison_validation_",format(Sys.time(), "%Y%H%M%S"),".pdf"
 
 x <- NULL; i <- 1
 for(outputdir in outputdirs) {
-  config <- file.path(outputdir,"config.Rdata")
+  config <- file.path(outputdir,"config.yml")
   if(file.exists(config)) {
-    load(config)
+    cfg <- gms::loadConfig(config)
     title <- cfg$title
   } else {
     title <- paste0("run",i)

@@ -5,8 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$ifthen "%c41_initial_irrigation_area%" == "Siebert" v41_AEI.fx(j)    = f41_irrig(j);
-$elseif "%c41_initial_irrigation_area%" == "LUH2v2"  v41_AEI.fx(j)    = f41_irrig_luh(t,j);
+$ifthen "%c41_initial_irrigation_area%" == "Siebert" vm_AEI.fx(j)    = f41_irrig(j);
+$elseif "%c41_initial_irrigation_area%" == "LUH2v2"  vm_AEI.fx(j)    = f41_irrig_luh("y1995",j);
 $endif
 
 vm_cost_AEI.fx(i) = 0;

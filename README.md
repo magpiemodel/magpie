@@ -24,8 +24,8 @@ https://www.pik-potsdam.de/research/projects/activities/land-use-modelling/magpi
 A framework description paper has been published in
 Geoscientific Model Development (GMD): https://doi.org/10.5194/gmd-12-1299-2019
 
-The model documentation for version 4.4.0 can be found at
-https://rse.pik-potsdam.de/doc/magpie/4.4.0/
+The model documentation for version 4.5.0 can be found at
+https://rse.pik-potsdam.de/doc/magpie/4.5.0/
 
 A most recent version of the documentation can also be extracted from the
 model source code via the R package goxygen
@@ -33,7 +33,7 @@ model source code via the R package goxygen
 package and run the main function (goxygen) in the main folder of the model.
 The resulting documentation can be found in the folder "doc".
 
-Please find a set of tutorials here https://github.com/magpiemodel/tutorials.
+Please find a set of tutorials here https://magpiemodel.github.io/tutorials/.
 This guide will give you a brief technical introduction in how to install, run and use the model
 and how to analyse the model output.
 
@@ -100,7 +100,7 @@ pkgs <- c("gdxrrw",
           "citation",
           "curl",
           "gdx",
-          "gms",         # (>= 0.10)
+          "gms",         # (>= 0.11)
           "magclass",
           "madrat",
           "mip",
@@ -110,7 +110,8 @@ pkgs <- c("gdxrrw",
           "lusweave",
           "luscale",
           "goxygen",
-          "luplot")
+          "luplot",
+          "yaml")        
 install.packages(pkgs)
 ```
 For post-processing model outputs *Latex* is required
@@ -214,7 +215,7 @@ magpie@pik-potsdam.de
 Please contact magpie@pik-potsdam.de
 
 ## CITATION
-See file CITATION.cff or the [How-to-Cite section](https://rse.pik-potsdam.de/doc/magpie/4.4.0/#how-to-cite) in the model documentation for information how to cite the model.
+See file CITATION.cff or the [How-to-Cite section](https://rse.pik-potsdam.de/doc/magpie/4.5.0/#how-to-cite) in the model documentation for information how to cite the model.
 
 ## AUTHORS
 See list of authors in CITATION.cff

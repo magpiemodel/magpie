@@ -5,20 +5,23 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-pc13_land(i) = sum(cell(i,j), pcm_land(j,"crop"));
+pc13_land(i,"pastr") = sum(cell(i,j),pcm_land(j,"past"));
+pc13_land(i,"crop") = sum(cell(i,j),pcm_land(j,"crop"));
 
-if (smin(h, f13_tau_scenario(t,h)) <= 0,
+if (smin((h,tautype), f13_tau_scenario(t,h,tautype)) <= 0,
 	abort "tau value of 0 detected in at least one region!";
 );
 
-vm_tau.fx(h) = f13_tau_scenario(t,h);
+vm_tau.fx(h,tautype) = f13_tau_scenario(t,h,tautype);
 
 * The costs are shifted over 15 years (exponent 15) to reflect the average
 * time it takes investments in tc to pay off.
 
-p13_cost_tc(i) = pc13_land(i) * i13_tc_factor(t)
-                     * sum(supreg(h,i), vm_tau.l(h))**i13_tc_exponent(t)
+p13_cost_tc(i,tautype) = pc13_land(i,tautype) * i13_tc_factor(t)
+                     * sum(supreg(h,i), vm_tau.l(h,tautype))**i13_tc_exponent(t)
                      * (1+pm_interest(t,i))**15;
 
-vm_tech_cost.fx(i) = (sum(supreg(h,i),vm_tau.l(h)/pcm_tau(h))-1) * p13_cost_tc(i)
+p13_tech_cost(i,tautype) = (sum(supreg(h,i),vm_tau.l(h,tautype)/pcm_tau(h,tautype))-1) * p13_cost_tc(i,tautype)
                                * pm_interest(t,i)/(1+pm_interest(t,i));
+
+vm_tech_cost.fx(i) = sum(tautype, p13_tech_cost(i,tautype));

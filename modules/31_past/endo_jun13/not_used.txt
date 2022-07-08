@@ -7,3 +7,5 @@
 
 name,type,reason
 pcm_land, input, not needed
+vm_tau,input,questionnaire
+fm_pastr_tau_hist,input,questionnaire

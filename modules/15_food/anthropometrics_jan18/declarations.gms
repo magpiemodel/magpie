@@ -136,7 +136,7 @@ parameters
  p15_kcal_pc_calibrated(t,i,kfo)                 Calibrated per capita consumption in food demand model after price shock (kcal per capita per day)
  p15_kcal_pc_calibrated_orig(t,i,kfo)            Auxiliary parameter for per capita food consumption - basis for convergence into waste and diet scenarios (kcal per capita per day)
  p15_kcal_pc_calibrated_livestock_orig(t,i)      Auxiliary parameter for per capita livestock consumption - basis for scenarios of livestock food substitution (kcal per capita per day)
- p15_kcal_pc_calibrated_rumdairy_orig(t,i)	 Auxiliary parameter for per capita ruminant and dairy consumption - basis for scenarios of ruminant-based food substitution (kcal per capita per day)
+ p15_kcal_pc_calibrated_rumdairy_orig(t,i)	     Auxiliary parameter for per capita ruminant and dairy consumption - basis for scenarios of ruminant-based food substitution (kcal per capita per day)
  p15_kcal_pc_calibrated_plant_orig(t,i)          Auxiliary parameter for per capita plant-based food consumption - basis for scenarios of livestock food substitution (kcal per capita per day)
  p15_livestock_kcal_structure_orig(t,i,kfo_lp)   Auxiliary parameter for livestock kcal structure - basis for scenarios of livestock food substitution (1)
  p15_rumdairy_kcal_structure_orig(t,i,kfo_rd)    Auxiliary parameter for ruminant and dairy kcal structure - basis for scenarios of ruminant-based food substitution (1)
@@ -153,9 +153,10 @@ parameters
 
 * transition to exogenous scenario diets
  i15_intake_scen_target(t,i)                  Target for total per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
+ i15_intake_EATLancet_all(i,kcal_scen15,EAT_scen15,kfo)       Food-specific per capita calorie intake according to various EAT Lancet diet scenarios (kcal per capita per day)
  i15_intake_EATLancet(i,kfo)                  Food-specific per capita calorie intake according to EAT Lancet diet scenario (kcal per capita per day)
  i15_intake_detailed_scen_target(t,i,kfo)     Target for food-specific per capita calorie intake according to an exogenous diet scenario (kcal per capita per day)
- p15_intake_detailed_regr(t,i,kfo)                     Food-specific per capita calorie intake according to regression-based projections (kcal per capita per day)
+ p15_intake_detailed_regr(t,i,kfo)            Food-specific per capita calorie intake according to regression-based projections (kcal per capita per day)
 
  p15_demand2intake_ratio_ref(i)               Ratio between food calorie demand and intake for the historical time step of EAT Lancet diets (1)
  p15_foodwaste_growth(t,i)                    Increase in food waste over time relative to the historical time step of EAT Lancet diets (1)

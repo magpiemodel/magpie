@@ -14,16 +14,16 @@ $setglobal c30_bioen_water  rainfed
 $setglobal c30_marginal_land  all_marginal
 * options: all_marginal, q33_marginal, no_marginal
 
-$setglobal c30_set_aside_target  none
+$setglobal c30_snv_target  none
 * options: none, by2030, by2020
 
 $setglobal c30_rotation_constraints  on
 *options: on, off
 
-* Set-switch for countries affected by regional set-aside policy
+* Set-switch for countries affected by regional SNV policy
 * Default: all iso countries selected
 sets
-  policy_countries30(iso) countries to be affected by set-aside policy / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
+  policy_countries30(iso) countries to be affected by SNV policy / ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
                           ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
                           BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
                           BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,
@@ -82,8 +82,8 @@ $if "%c30_rotation_constraints%" == "off" f30_rotation_min_shr(crp30) = 0;
 ********* AVAILABLE CROPLAND *******************************************
 
 scalar
-s30_set_aside_shr   		Share of available cropland that is witheld for other land cover types (1) / 0 /
-s30_set_aside_shr_noselect 	Share of available cropland that is witheld for other land cover types (1) / 0 /
+s30_snv_shr   		Share of available cropland that is witheld for other land cover types (1) / 0 /
+s30_snv_shr_noselect 	Share of available cropland that is witheld for other land cover types (1) / 0 /
 ;
 
 table f30_avl_cropland(j,marginal_land30) Available land area for cropland (mio. ha)
@@ -98,8 +98,8 @@ $include "./modules/30_crop/endo_apr21/input/avl_cropland_iso.cs3"
 $offdelim
 ;
 
-table f30_set_aside_fader(t_all,set_aside_target30) Fader for share of set aside cropland (unitless)
+table f30_scenario_fader(t_all,policy_target30) Fader for cropland policies (unitless)
 $ondelim
-$include "./modules/30_crop/endo_apr21/input/f30_set_aside_fader.csv"
+$include "./modules/30_crop/endo_apr21/input/f30_scenario_fader.csv"
 $offdelim
 ;

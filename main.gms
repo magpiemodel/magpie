@@ -66,7 +66,7 @@ $title magpie
 *' from land-use change dynamics, i.e. from conversion of different biomes into agricultural land
 *' and consequent loss of terrestrial carbon stocks (@popp_land-use_2014), also including the
 *' depletion of organic matter in soils ([59_som]). The land also serves as a sink for atmospheric
-*' carbon when agricultural land is set aside from production and the associated regrowth of natural
+*' carbon when agricultural land is taken out of production and the associated regrowth of natural
 *' vegetation generates negative emissions from land-use change.
 *' Nitrogen emissions ([51_nitrogen]) are estimated based on nitrogen budgets for croplands,
 *' pastures ([50_nr_budgets]) and the livestock sector ([55_awms]) (@bodirsky_reactive_2014).
@@ -145,26 +145,24 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
-* Used data set: rev4.65_h12_magpie.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
-* Used data set: rev4.65_h12_1998ea10_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.65_h12_validation.tgz
+* Used data set: rev4.73_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* 
+* Used data set: rev4.73_h12_validation.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* 
+* Used data set: additional_data_rev4.26.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev4.07.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
-* 
-* Used data set: calibration_H12_sticky_feb18_free_12Nov21.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Used data set: calibration_H12_per_ton_fao_may22_28May22.tgz
+* md5sum: f6bf26be99c5dbd29e13a38af38c0d31
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -177,20 +175,22 @@ $title magpie
 * 
 * Regionscode: 62eff8f7
 * 
-* Regions data revision: 4.65
+* Regions data revision: 4.73
 * 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.65
+* * Revision: 4.73
 * 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
 * * Regionscode: 62eff8f7
-* * Call: do.call(functiononly, args)
+* * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
+* Warning message:
+* package 'lucode2' was built under R version 4.2.1
 * 
-* Last modification (input data): Mon Nov 29 20:49:27 2021
+* Last modification (input data): Tue Jul  5 14:20:37 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -229,7 +229,7 @@ $setglobal drivers  aug17
 $setglobal land  landmatrix_dec18
 $setglobal costs  default
 $setglobal interest_rate  select_apr20
-$setglobal tc  endo_jun18
+$setglobal tc  endo_jan22
 $setglobal yields  managementcalib_aug19
 
 $setglobal food  anthropometrics_jan18
@@ -240,6 +240,7 @@ $setglobal residues  flexreg_apr16
 $setglobal processing  substitution_may21
 
 $setglobal trade  selfsuff_reduced
+$setglobal land_conservation  area_based_apr22
 
 $setglobal ageclass  feb21
 
@@ -251,15 +252,16 @@ $setglobal forestry  dynamic_feb21
 $setglobal urban  exo_nov21
 $setglobal natveg  dynamic_feb21
 
+$setglobal employment  exo_may22
 $setglobal labor_prod  off
-$setglobal factor_costs  sticky_feb18
+$setglobal factor_costs  per_ton_fao_may22
 $setglobal landconversion  calib
 
 $setglobal transport  gtap_nov12
 $setglobal area_equipped_for_irrigation  endo_apr13
 $setglobal water_demand  all_sectors_aug13
 $setglobal water_availability  total_water_aug13
-$setglobal biodiversity  bv_btc_mar21
+$setglobal biodiversity  bii_target
 $setglobal climate  static
 
 $setglobal nr_soil_budget  exoeff_aug16

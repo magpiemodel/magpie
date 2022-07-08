@@ -10,6 +10,9 @@ $setglobal c52_carbon_scenario  cc
 *             nocc      (no climate change)
 *             nocc_hist (no climate change after year defined by sm_fix_cc)
 
+$setglobal c52_land_carbon_sink_rcp  RCPBU
+*   options:  RCP19, RCP26, RCP34, RCP45, RCP60, RCPBU
+
 table fm_carbon_density(t_all,j,land,c_pools) LPJmL carbon density for land and carbon pools (tC per ha)
 $ondelim
 $include "./modules/52_carbon/input/lpj_carbon_stocks.cs3"
@@ -27,3 +30,18 @@ $include "./modules/52_carbon/input/f52_growth_par.csv"
 $offdelim
 /
 ;
+
+* Note: Land carbon sink adjustment factors from Grassie et al 2021 (DOI 10.1038/s41558-021-01033-6)
+* are needed in the post-processing in https://github.com/pik-piam/magpie4/blob/master/R/reportEmissions.R
+* To facilitate the choice of the corresponding RCP, the adjustment factors are read-in here and 
+* stored in i52_land_carbon_sink for use in the R post-processing.
+* Land carbon sink adjustment factors are NOT used within MAgPIE.
+$onEmpty
+table f52_land_carbon_sink(t_all,i,rcp52) Land carbon sink adjustment factors from Grassi et al 2021 (GtCO2 per year)
+$ondelim
+$if exist "./modules/52_carbon/input/f52_land_carbon_sink_adjust_grassi.cs3" $include "./modules/52_carbon/input/f52_land_carbon_sink_adjust_grassi.cs3"
+$offdelim
+;
+$offEmpty
+
+i52_land_carbon_sink(t_all,i) = f52_land_carbon_sink(t_all,i,"%c52_land_carbon_sink_rcp%");

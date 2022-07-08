@@ -18,4 +18,7 @@ else
  s62_historical=0;
 );
 
+p62_scaling_factor(i) = 1;
+p62_scaling_factor(i)$(p62_dem_food_lh(i) > 0) = sum(kfo, vm_dem_food.l(i,kfo)) / p62_dem_food_lh(i);
+
 *' @stop

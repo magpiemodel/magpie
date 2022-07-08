@@ -27,8 +27,15 @@ $include "./modules/13_tc/input/f13_tc_exponent.cs3"
 $offdelim
 ;
 
-table f13_tau_scenario(t_all,h) tau scenario (1)
+
+table f13_tau_scenario(t_all,h,tautype) tau scenario (1)
 $ondelim
 $include "./modules/13_tc/input/f13_tau_scenario.csv"
+$offdelim
+;
+
+table fm_pastr_tau_hist(t_all,h) Historical managed pasture tau (1)
+$ondelim
+$include "./modules/13_tc/input/f13_pastr_tau_hist.csv"
 $offdelim
 ;
