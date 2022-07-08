@@ -86,7 +86,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** output/projects/FSEC_costs.R to create costs ouput for the FSEC project
 - **scripts** output/projects/FSEC_dietaryIndicators.R to create output datasets for the FSEC project
 - **scripts** output/projects/FSEC_nitrogenPollution.R to create output datasets of nitrogen pollutants for the FSEC project
-- **scripts** Added script to folder projects paper_grassland.R
 - **scripts** Extended dissagregation.R script to replace single "past" land class by LHU range and pastr classes when grassland_apr22 realization is used.
 - **scripts** `start/projects/test_rotations.R` testscript for different rotation scenario settings
 
