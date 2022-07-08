@@ -44,6 +44,7 @@ cfg$gms$s15_exo_sugar       <- 1
 cfg$gms$s15_exo_oils        <- 1
 cfg$gms$s15_exo_brans       <- 1
 cfg$gms$s15_exo_scp         <- 1
+cfg$gms$s15_exo_alcohol     <- 1
 start_run(cfg,codeCheck=FALSE)
 
 source("config/default.cfg")
@@ -67,6 +68,7 @@ cfg$gms$s15_exo_sugar       <- 1
 cfg$gms$s15_exo_oils        <- 1
 cfg$gms$s15_exo_brans       <- 1
 cfg$gms$s15_exo_scp         <- 1
+cfg$gms$s15_exo_alcohol     <- 1
 start_run(cfg,codeCheck=FALSE)
 
 
@@ -86,6 +88,45 @@ cfg$gms$s15_exo_sugar       <- 0
 cfg$gms$s15_exo_oils        <- 0
 cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
+cfg$gms$s15_exo_alcohol     <- 0
+start_run(cfg,codeCheck=FALSE)
+
+source("config/default.cfg")
+cfg$title <- paste(prefix,"noUnderweight",sep="_")
+cfg$gms$food    <- "anthro_iso_jun22"
+cfg$gms$s15_exo_waste <- 0
+cfg$gms$s15_exo_diet <- 1
+cfg$gms$c15_kcal_scen <- "no_underweight"
+cfg$gms$c15_EAT_scen <- "FLX"
+cfg$gms$s15_exo_monogastric <- 0
+cfg$gms$s15_exo_ruminant    <- 0
+cfg$gms$s15_exo_fish        <- 0
+cfg$gms$s15_exo_fruitvegnut <- 0
+cfg$gms$s15_exo_pulses      <- 0
+cfg$gms$s15_exo_sugar       <- 0
+cfg$gms$s15_exo_oils        <- 0
+cfg$gms$s15_exo_brans       <- 0
+cfg$gms$s15_exo_scp         <- 0
+cfg$gms$s15_exo_alcohol     <- 0
+start_run(cfg,codeCheck=FALSE)
+
+source("config/default.cfg")
+cfg$title <- paste(prefix,"noOverweight",sep="_")
+cfg$gms$food    <- "anthro_iso_jun22"
+cfg$gms$s15_exo_waste <- 0
+cfg$gms$s15_exo_diet <- 1
+cfg$gms$c15_kcal_scen <- "no_overweight"
+cfg$gms$c15_EAT_scen <- "FLX"
+cfg$gms$s15_exo_monogastric <- 0
+cfg$gms$s15_exo_ruminant    <- 0
+cfg$gms$s15_exo_fish        <- 0
+cfg$gms$s15_exo_fruitvegnut <- 0
+cfg$gms$s15_exo_pulses      <- 0
+cfg$gms$s15_exo_sugar       <- 0
+cfg$gms$s15_exo_oils        <- 0
+cfg$gms$s15_exo_brans       <- 0
+cfg$gms$s15_exo_scp         <- 0
+cfg$gms$s15_exo_alcohol     <- 0
 start_run(cfg,codeCheck=FALSE)
 
 
@@ -105,6 +146,7 @@ cfg$gms$s15_exo_sugar       <- 0
 cfg$gms$s15_exo_oils        <- 0
 cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
+cfg$gms$s15_exo_alcohol     <- 0
 start_run(cfg,codeCheck=FALSE)
 
 source("config/default.cfg")
@@ -123,6 +165,7 @@ cfg$gms$s15_exo_sugar       <- 0
 cfg$gms$s15_exo_oils        <- 0
 cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
+cfg$gms$s15_exo_alcohol     <- 0
 start_run(cfg,codeCheck=FALSE)
 
 
@@ -142,6 +185,7 @@ cfg$gms$s15_exo_sugar       <- 0
 cfg$gms$s15_exo_oils        <- 0
 cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
+cfg$gms$s15_exo_alcohol     <- 0
 start_run(cfg,codeCheck=FALSE)
 
 
@@ -161,6 +205,7 @@ cfg$gms$s15_exo_sugar       <- 0
 cfg$gms$s15_exo_oils        <- 0
 cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
+cfg$gms$s15_exo_alcohol     <- 0
 start_run(cfg,codeCheck=FALSE)
 
 
@@ -180,6 +225,7 @@ cfg$gms$s15_exo_sugar       <- 0
 cfg$gms$s15_exo_oils        <- 0
 cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
+cfg$gms$s15_exo_alcohol     <- 0
 start_run(cfg,codeCheck=FALSE)
 
 
@@ -199,6 +245,7 @@ cfg$gms$s15_exo_sugar       <- 0
 cfg$gms$s15_exo_oils        <- 0
 cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
+cfg$gms$s15_exo_alcohol     <- 0
 start_run(cfg,codeCheck=FALSE)
 
 
@@ -218,6 +265,7 @@ cfg$gms$s15_exo_sugar       <- 1
 cfg$gms$s15_exo_oils        <- 0
 cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
+cfg$gms$s15_exo_alcohol     <- 0
 start_run(cfg,codeCheck=FALSE)
 
 
@@ -237,8 +285,46 @@ cfg$gms$s15_exo_sugar       <- 0
 cfg$gms$s15_exo_oils        <- 1
 cfg$gms$s15_exo_brans       <- 0
 cfg$gms$s15_exo_scp         <- 0
+cfg$gms$s15_exo_alcohol     <- 0
 start_run(cfg,codeCheck=FALSE)
 
+source("config/default.cfg")
+cfg$title <- paste(prefix,"alcohol",sep="_")
+cfg$gms$food    <- "anthro_iso_jun22"
+cfg$gms$s15_exo_waste <- 0
+cfg$gms$s15_exo_diet <- 1
+cfg$gms$c15_kcal_scen <- "endo"
+cfg$gms$c15_EAT_scen <- "FLX"
+cfg$gms$s15_exo_monogastric <- 0
+cfg$gms$s15_exo_ruminant    <- 0
+cfg$gms$s15_exo_fish        <- 0
+cfg$gms$s15_exo_fruitvegnut <- 0
+cfg$gms$s15_exo_pulses      <- 0
+cfg$gms$s15_exo_sugar       <- 0
+cfg$gms$s15_exo_oils        <- 0
+cfg$gms$s15_exo_brans       <- 0
+cfg$gms$s15_exo_scp         <- 0
+cfg$gms$s15_exo_alcohol     <- 1
+start_run(cfg,codeCheck=FALSE)
+
+source("config/default.cfg")
+cfg$title <- paste(prefix,"processed",sep="_")
+cfg$gms$food    <- "anthro_iso_jun22"
+cfg$gms$s15_exo_waste <- 0
+cfg$gms$s15_exo_diet <- 1
+cfg$gms$c15_kcal_scen <- "endo"
+cfg$gms$c15_EAT_scen <- "FLX"
+cfg$gms$s15_exo_monogastric <- 0
+cfg$gms$s15_exo_ruminant    <- 0
+cfg$gms$s15_exo_fish        <- 0
+cfg$gms$s15_exo_fruitvegnut <- 0
+cfg$gms$s15_exo_pulses      <- 0
+cfg$gms$s15_exo_sugar       <- 1
+cfg$gms$s15_exo_oils        <- 1
+cfg$gms$s15_exo_brans       <- 1
+cfg$gms$s15_exo_scp         <- 1
+cfg$gms$s15_exo_alcohol     <- 1
+start_run(cfg,codeCheck=FALSE)
 
 source("config/default.cfg")
 cfg$title <- paste(prefix,"elastic",sep="_")
