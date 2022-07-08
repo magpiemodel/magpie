@@ -18,7 +18,6 @@ library(gms)
 library(magpiesets)
 library(data.table)
 library(gdx)
-options(error=function()traceback(2))
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
