@@ -128,8 +128,9 @@ land_hr <- land_hr * side_layers_hr[, , c("forested", "nonforested")]
 # Sum over land classes
 bii_hr <- dimSums(land_hr * bii_hr, dim = 3, na.rm = TRUE)
 
-# Save BII data as .nc file
-write.magpie(bii_hr, file.path(outputdir, paste0(title, "_cell.bii_0.5.nc")), comment = "unitless")
+# Save BII data as .nc and .mz file, the first for better transferabiltiy, the second one for faster processing
+write.magpie(bii_hr, file.path(outputdir, paste0("cell.bii_0.5.mz")), comment = "unitless")
+write.magpie(bii_hr, file.path(outputdir, paste0("cell.bii_0.5.nc")), comment = "unitless")
 
 # Clean up
 rm(bii_hr)
