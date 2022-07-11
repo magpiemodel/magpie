@@ -37,14 +37,8 @@ title <- cfg$title
 message("Generating nitrogen pollution output for the run: ", title)
 gdx <- file.path(outputdir, "fulldata.gdx")
 
-baseDir <- getwd()
-pollutantsOutputDir <- file.path(baseDir, "output", "nitrogen")
-if (!dir.exists(pollutantsOutputDir)) {
-    dir.create(pollutantsOutputDir)
-}
-
 # Grid-level nitrogen pollution
 out <- getReportFSECPollution(gdx = gdx,
-                              reportOutputDir = pollutantsOutputDir,
+                              reportOutputDir = outputdir,
                               magpieOutputDir = outputdir,
                               scenario = title)

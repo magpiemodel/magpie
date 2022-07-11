@@ -10,8 +10,6 @@ $setglobal c32_aff_mask  noboreal
 * options: unrestricted, noboreal, onlytropical
 $setglobal c32_aff_policy  npi
 * options: none, npi, ndc
-$setglobal c32_max_aff_area  global
-* options: global, regional
 $setglobal c32_aff_bgp  nobgp
 * options: ann,nobgp
 $setglobal c32_tcre_ctrl  ann_TCREmean
@@ -44,6 +42,7 @@ scalars
   s32_forestry_int_rate           Global interest rate for plantations (percent) / 0.05 /
   s32_max_self_suff               Upper ceiling for the self sufficiency used in calculation for establishment decision (1) / 0.8 /
   s32_aff_bii_coeff               BII coefficent to be used for CO2 price driven afforestation 0=natural vegetation 1=plantation (1) / 0 /
+  s32_max_aff_area_glo			  Switch for global or regional afforestation constraint (1) / 1 /
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)

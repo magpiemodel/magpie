@@ -9,56 +9,73 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
-- **config** Update of regional and grid inputs from 4.68 to rev4.69, and additional files to 4.17. Removed free/dynamic sticky switch, and added scalars used in mixed_regional factor costs realization.
+
+### added
+- **scripts* added output scripts for FSEC FSDP runs
+
+### removed
+
+### fixed
+
+
+## [4.5.0] - 2022-07-07
+
+### changed
+- **09_drivers** separation of GDP and population scenarios
+- **09_drivers** changed `i09_gdp_pc_mer_iso` to `im_gdp_pc_mer_iso`
 - **11_costs** Split of production costs per sector, addded new separated costs to the costs function.
+- **13_tc** changed vm_tech_cost upper bound to share of regional GDP PPP (s13_max_gdp_shr)
+- **13_tc** Replace endo_jan18 realization by endo_jan22. The new realization adds a new dimension to vm_tau separating crop from managed pastures tau.
+- **15_food** added more options to define convergence towards exogenous food intake and waste scenarios accounting for different transition periods
 - **18_residues**  The variable that include production costs vm_cost_prod for residues changed to a new independent variable called vm_cost_prod_kres
 (specific to residues).
+- **30_crop** renamed switch `s30_set_aside_shr`, `s30_set_aside_shr_noselect` and `c30_set_aside_target` to `s30_snv_shr`, `s30_snv_shr_noselect` and `c30_snv_target`.
 - **31_past**  The variable that include production costs vm_cost_prod for pasture changed to a new independent variable called vm_cost_prod_past
 (specific to past).
+- **31_past** added new realization implementing the separation of rangelands and managed pastures for the production of grass biomass.
+- **32_forestry** simplification and bugfix of afforestation limit. `c32_max_aff_area_glo` renamed to `s32_max_aff_area_glo` in default.cfg.
+- **34_urban** added set urban_scen34 and the switch c34_urban_scenario
+- **35_natveg** corrected naming of Frontier Forests (FF) to Intact Forest Landscapes (IFL) and changed input data for BH_IFL implementation.
+- **35_natveg** implementation of land protection moved to new module `22_land_conservation`
 - **38_factor_costs** Sticky free/dynamic switch was removed and the realization was split into two realizations: the new per_ton_fao_may22 (free) and sticky_feb18 (dynamic). vm_cost_prod(i,kall) is now vm_cost_prod_crop(i,req) for crops factor costs. The results are now given differentiating between capital and labor for all realizations (new set req).
+- **42_water_demand** Added new input data on pumping costs for India, equation to calculate water costs and scalars for policy shocks
+- **44_biodiversity** Improved documentation, simplification of equations and flexible options for price on biodiversity loss
+- **56_ghg_policy** additional scenarios for c56_emis_policy
+- **56_ghg_policy** Deactivated GHG emission policies were not accounted for in the MACCs module. This has been corrected by an extension of the interface `im_pollutant_prices`, which now has an additional dimension for emission sources `emis_source`. In this context some equations in `56_ghg_policy` have been simplified (sets: `emis_source_reg`, `emis_source_cell`). Also, GHG emissions from peatlands have been fully integrated into `56_ghg_policy`.
 - **70_livestock** vm_cost_prod(i,kall) is now vm_cost_prod_livst(i,req) for livestock factor costs (req indicates differentiation between capital and labor) and vm_cost_prod_fish(i) for fish.
+- **80_optimization** Updated solver settings
+- **config** Update of regional and grid inputs from 4.68 to rev4.69, and additional files to 4.17. Removed free/dynamic sticky switch, and added scalars used in mixed_regional factor costs realization.
+- **config** added s13_max_gdp_shr setting for tech cost upper bound as share of GDP PPP
+- **config** included switch for non-agricultural water demand (s42_watdem_nonagr_scenario) in scenario_config.csv
+- **config** included SHAPE SDP scenarios in scenario_config.csv
+- **config** Update default tau realization from endo_jan18 to endo_jan22
+- **config** Added new SSP scenario switch for pasture suitability cfg$gms$c31_past_suit_scen
+- **config** Added new switch to limiting calibration to relative or absolute managed pastures yields: cfg$gms$s31_limit_calib.
+- **inputs** updated non-agricultural water use scenarios (watdem_nonagr_grper.cs3)
+- **modules** Moved interface `vm_carbon_stock` from 52_carbon to 56_ghg_policy
+- **scripts** replaced redundant files config.log and config.Rdata with a config.yml
+- **scripts** updated FSEC modeling start script and added FSEC calibration scripts
 - **scripts** clean up of the recalibrate_realizations.R script, project_LAMACLIMA_WP4.R, and sticky.R to remove sticky dynamic/free switch.
 - **scripts** bugfix in disaggregation.R, disaggregation_BII.R with respect to urban scenario
 - **scripts** added FSEC modeling start script (global runs)
- - **config** added s13_max_gdp_shr setting for tech cost upper bound as share of GDP PPP
- - **13_tc** changed vm_tech_cost upper bound to share of regional GDP PPP (s13_max_gdp_shr)
- - **scripts** The disaggregation_LUH2.R was extended to include the changes used to generate ISIMIP3b maps for LUH harmonization. The largest changes are: 1) The convertLUH function now breaks the grid level magpie objects by groups of years, then creates the raster for the groups and aggregates them to create the final map at a quarter of a degree resolution (this speeds up the process). 2) The mapping between LUH and MAgPIE is now defined by country and magpie-LUH types (not 1 to 1 anymore). 3) The split of MAgPIE's pasture land type between pasture and rangeland changed. Rangeland is assumed to stay constant after 2015, and changes in MAgPIE's pasture are due to pasture. 4) IFs were added so if a certain map already exists in the output folder, it will not generate it once again. 5) Flooded land now corresponds to a share of rice cropland, based on historical values. 6) To speed calculations, yields are read at the cell level, the crops are aggregated based on the new MAgPIE-LUH mapping, and then disaggregated to grid level.
- - **56_ghg_policy** additional scenarios for c56_emis_policy
- - **09_drivers** separation of GDP and population scenarios
- - **scripts** added new disaggregation script to provide grid cell level BII
- - **inputs** updated non-agricultural water use scenarios (watdem_nonagr_grper.cs3)
- - **config** included switch for non-agricultural water demand (s42_watdem_nonagr_scenario) in scenario_config.csv
- - **config** included SHAPE SDP scenarios in scenario_config.csv
- - **config** Update default tau realization from endo_jan18 to endo_jan22
- - **config** Added new SSP scenario switch for pasture suitability cfg$gms$c31_past_suit_scen
- - **config** Added new switch to limiting calibration to relative or absolute managed pastures yields: cfg$gms$s31_limit_calib.
-  - **13_tc** Replace endo_jan18 realization by endo_jan22. The new realization adds a new dimension to vm_tau separating crop from managed pastures tau.
- - **31_past** added new realization implementing the separation of rangelands and managed pastures for the production of grass biomass.
- - **15_food** added more options to define convergence towards exogenous food intake and waste scenarios accounting for different transition periods
- - **30_crop** renamed switch `s30_set_aside_shr`, `s30_set_aside_shr_noselect` and `c30_set_aside_target` to `s30_snv_shr`, `s30_snv_shr_noselect` and `c30_snv_target`.
- - **34_urban** added set urban_scen34 and the switch c34_urban_scenario
- - **35_natveg** corrected naming of Frontier Forests (FF) to Intact Forest Landscapes (IFL) and changed input data for BH_IFL implementation.
- - **scripts** replaced redundant files config.log and config.Rdata with a config.yml
- - **scripts** removed test script "irrig_dep_test" from "start" folder to "extra" folder
- - **scripts** Added script to folder projects paper_grassland.R
- - **44_biodiversity** Improved documentation, simplification of equations and flexible options for price on biodiversity loss
- - **35_natveg** implementation of land protection moved to new module `22_land_conservation`
- - **modules** Moved interface `vm_carbon_stock` from 52_carbon to 56_ghg_policy
- - **scripts** scripts/output/extra/emulator.R Remove dependency on deprecated R package "magpie"
- - **56_ghg_policy** Deactivated GHG emission policies were not accounted for in the MACCs module. This has been corrected by an extension of the interface `im_pollutant_prices`, which now has an additional dimension for emission sources `emis_source`. In this context some equations in `56_ghg_policy` have been simplified (sets: `emis_source_reg`, `emis_source_cell`). Also, GHG emissions from peatlands have been fully integrated into `56_ghg_policy`.
-- **09_drivers** changed `i09_gdp_pc_mer_iso` to `im_gdp_pc_mer_iso`
+- **scripts** The disaggregation_LUH2.R was extended to include the changes used to generate ISIMIP3b maps for LUH harmonization. The largest changes are: 1) The convertLUH function now breaks the grid level magpie objects by groups of years, then creates the raster for the groups and aggregates them to create the final map at a quarter of a degree resolution (this speeds up the process). 2) The mapping between LUH and MAgPIE is now defined by country and magpie-LUH types (not 1 to 1 anymore). 3) The split of MAgPIE's pasture land type between pasture and rangeland changed. Rangeland is assumed to stay constant after 2015, and changes in MAgPIE's pasture are due to managed pasture. 4) IFs were added so if a certain map already exists in the output folder, it will not generate it once again. 5) Flooded land now corresponds to a share of rice cropland, based on historical values. 6) To speed calculations, yields are read at the cell level, the crops are aggregated based on the new MAgPIE-LUH mapping, and then disaggregated to grid level.
+- **scripts** added new disaggregation script to provide grid cell level BII
+- **scripts** removed test script "irrig_dep_test" from "start" folder to "extra" folder
+- **scripts** Added script projects/paper_grassland.R
+- **scripts** scripts/output/extra/emulator.R Remove dependency on deprecated R package "magpie"
 
 ### added
-- **15_food** new module realizations "anthro_iso_jun22" with demand on country level and more diet scenarios. Code was shortened.
-- **scripts** output/projects/FSEC_StevenLord.R to create output for Steven Lord in the FSEC context
-- **scripts** output/projects/FSEC_costs.R to create costs ouput for the FSEC project
-- **scripts** output/projects/FSEC_dietaryIndicators.R to create output datasets for the FSEC project
-- **scripts** output/projects/FSEC_nitrogenPollution.R to create output datasets of nitrogen pollutants for the FSEC project
-- **scripts** Added script to folder projects paper_grassland.R
-- **scripts** Extended dissagregation.R script to replace single "past" land class by LHU range and pastr classes when grassland_apr22 realization is used.
-- **52_carbon** added land carbon sink adjustment factors, needed in R post-processing
 - **core** macros for linear and sigmoidal time interpolation
 - **22_land_conservation** added new module and realisation for land conservation. The realisation also includes a new WDPA initialisation data set (from 1995 to 2020) for protected areas under legal protection, meeting IUCN and CBD protected area definitions. The module also adds the interface `pm_land_conservation`.
+- **30_crop** new module realizations including crop rotation scenarios by strict constraints (`rotation_apr22`) and by penalties (`penalty_apr22`)
+- **36_employment** added new module to calculate agricultural employment. Includes one realization (`exo_may22`) in which employment is calculated based on the total labor costs (for crop and livestock production)
+- **38_factor_costs** mixed_reg_feb17 realization added. This realization includes differences in productions costs between irrigated and rainfed crops, with the option of regional differentiation as well. per_ton_fao_may22 realization added. This realization corresponds to the old sticky_feb18 free.
+- **38_factor_costs** added switch `c38_fac_req` to choose between global and regional crop factor requirements. The default is "glo" (which corresponds to the previous implementation)
+- **44_biodiversity** added new realization `bii_target`, which calculates the BII at the level of 71 biomes and allows to set targets for BII (e.g. no decrease in the future)
+- **52_carbon** added land carbon sink adjustment factors, needed in R post-processing
+- **70_livestock** added switch `c70_fac_req_regr` to choose between global and regionally calibrated regression to calculate livestock factor requirements. The default is "glo" (which corresponds to the previous implementation)
+- **config** added option for CO2 emission pricing `cfg$gms$c56_carbon_stock_pricing`
+- **config** added cfg$gms$s70_past_mngmnt_factor_fix with default 2005 (previous default was 2010). The previous setting caused a strong spike in CO2 emissions from pasture expansion in SSA. With 2005, this can be avoided.
 - **inputs** New input files added:
     f13_pastr_tau_hist.csv -> historical tau for managed pastures.
     f31_pastr_suitability.cs3 -> Managed pasture suitability
@@ -66,38 +83,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     f31_grassl_yld.cs3 -> Rangelands and managed pastures grass yields
     f31_grass_bio_hist.cs3 -> Historical grass biomass demand
 - **modules** New dimension in `vm_carbon_stock` for different carbon stock types (actual, previousLandPattern, previousCarbonDensity)
-- **config** added option for CO2 emission pricing `cfg$gms$c56_carbon_stock_pricing`
-- **config** added cfg$gms$s70_past_mngmnt_factor_fix with default 2005 (previous default was 2010). The previous setting caused a strong spike in CO2 emissions from pasture expansion in SSA. With 2005, this can be avoided.
-- **30_crop** new module realizations including crop rotation scenarios by strict constraints (`rotation_apr22`) and by penalties (`penalty_apr22`)
+- **scripts** output/projects/FSEC_StevenLord.R to create output for Steven Lord in the FSEC context
+- **scripts** output/projects/FSEC_costs.R to create costs ouput for the FSEC project
+- **scripts** output/projects/FSEC_dietaryIndicators.R to create output datasets for the FSEC project
+- **scripts** output/projects/FSEC_nitrogenPollution.R to create output datasets of nitrogen pollutants for the FSEC project
+- **scripts** Extended dissagregation.R script to replace single "past" land class by LHU range and pastr classes when grassland_apr22 realization is used.
 - **scripts** `start/projects/test_rotations.R` testscript for different rotation scenario settings
-- **38_factor_costs** mixed_reg_feb17 realization added. This realization includes differences in productions costs between irrigated and rainfed crops, with the option of regional differentiation as well. per_ton_fao_may22 realization added. This realization corresponds to the old sticky_feb18 free.
- - **44_biodiversity** added new realization `bii_target`, which calculates the BII at the level of 71 biomes and allows to set targets for BII (e.g. no decrease in the future)
- - **36_employment** added new module to calculate agricultural employment. Includes one realization (`exo_may22`) in which employment is calculated based on the total labor costs (for crop and livestock production)
- - **config and 38_factor_costs** added switch `c38_fac_req` to choose between global and regional crop factor requirements. The default is "glo" (which corresponds to the previous implementation)
- - **config and 70_livestock** added switch `c70_fac_req_regr` to choose between global and regionally calibrated regression to calculate livestock factor requirements. The default is "glo" (which corresponds to the previous implementation)
-
 
 ### removed
 - **38_factor_costs** mixed_feb17 and fixed_per_ton_mar18 realizations removed because they are not being used at the moment.
 
 ### fixed
-- **inputs** included data for Sudan
 - **09_drivers** bugfix concerning the use of the switch c09_gdp_scenario for defining population assumptions
 - **09_drivers**  introduced new sets for PAL and demography scenarios to account for only partial coverage of available socio-economic gdp and population scenarios
 - **18_residues** off realization; missing variable declarations
 - **34_urban** exo_nov21 realization; bugfix in calculation of biodiversity value
+- **41_area_equipped_for_irrigation** static realization. bugfix in presolve.gms: f41_irrig_luh("y1995",j)
+- **44_biodiversity** fixed accounting for time step length in realization `bv_btc_mar21`
 - **50_nr_soil_budget** off realization; missing variable declarations
+- **56_ghg_policy** Some equations in `56_ghg_policy` have been simplified. Also, GHG emissions from peatlands have been fully integrated into `56_ghg_policy`.
+- **56_ghg_policy and config** removed switch `s56_reward_neg_emis`
 - **59_som** static realization; avoid division by zero
 - **62_material** exo_flexreg_apr16 realization; avoid division by zero
 - **80_optimization** nlp_par realization; bugfix i2 in submission loop
+- **inputs** included data for Sudan
 - **scripts** calibration; set NA values to 1
 - **scripts** fixed misleading warning in check_config
 - **scripts** fixed configuration error in FSEC output scripts, FSEC_dietaryIndicators.R and FSEC_environmentalPollutants.R
-- **56_ghg_policy** Some equations in `56_ghg_policy` have been simplified. Also, GHG emissions from peatlands have been fully integrated into `56_ghg_policy`.
 - **scripts** scripts/start/extra/emulator.R  Throw an error if no file can be found to take the GHG prices from
- - **56_ghg_policy and config** removed switch `s56_reward_neg_emis`
- - **44_biodiversity** fixed accounting for time step length in realization `bv_btc_mar21`
- - **41_area_equipped_for_irrigation** static realization. bugfix in presolve.gms: f41_irrig_luh("y1995",j)
 
 ## [4.4.0] - 2021-12-13
 
@@ -463,7 +476,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.4.0...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.5.0...develop
+[4.5.0]: https://github.com/magpiemodel/magpie/compare/v4.4.0...v4.5.0
 [4.4.0]: https://github.com/magpiemodel/magpie/compare/v4.3.5...v4.4.0
 [4.3.5]: https://github.com/magpiemodel/magpie/compare/v4.3.4...v4.3.5
 [4.3.4]: https://github.com/magpiemodel/magpie/compare/v4.3.3...v4.3.4

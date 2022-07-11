@@ -9,7 +9,7 @@ parameters
  p41_AEI_start(t,j)              Area equipped for irrigation at the beginning of each time step (mio. ha)
  pc41_AEI_start(j)               Area equipped for irrigation at the beginning of current time step (mio. ha)
  pc41_unitcost_AEI(i)            Unit cost of AEI expansion (USD04MER per ha)
-;
+ ;
 
 variables
  vm_cost_AEI(i)                  Annuitized irrigation expansion costs (mio. USD04MER per yr)
