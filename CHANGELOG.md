@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### changed
 
 ### added
+- **scripts** output/extra/disaggregation_BII_adjusted.R for adjusted primary and secondary other land BII results
 - **scripts* added output scripts for FSEC FSDP runs
 
 ### removed
