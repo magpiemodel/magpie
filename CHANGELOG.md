@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
-- **config** Update of regional and grid inputs from 4.68 to rev4.69, and additional files to 4.17. Removed free/dynamic sticky switch, and added scalars used in mixed_regional factor costs realization.- **59_som** Now calculates soil C for fallow
+- **config** Update of regional and grid inputs from 4.68 to rev4.69, and additional files to 4.17. Removed free/dynamic sticky switch, and added scalars used in mixed_regional factor costs realization.
+- **59_som** Now calculates soil C for fallow
 ### added
 - **scripts* added output scripts for FSEC FSDP runs
 
