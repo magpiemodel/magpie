@@ -63,7 +63,6 @@ p15_country_dummy(iso) = 0;
 p15_country_dummy(scen_countries15) = 1;
 
 * Food substitution scenarios including functional forms, targets and transition periods
-* Note: p15_foodscen_region_shr(t,i) is 1 in the default case)
 i15_ruminant_fadeout(t,iso) = 1 - p15_country_dummy(iso)*(1-f15_food_substitution_fader(t,"%c15_rumscen%"));
 i15_fish_fadeout(t,iso) = 1 - p15_country_dummy(iso)*(1-f15_food_substitution_fader(t,"%c15_fishscen%"));
 i15_alcohol_fadeout(t,iso) = 1 - p15_country_dummy(iso)*(1-f15_food_substitution_fader(t,"%c15_alcscen%"));

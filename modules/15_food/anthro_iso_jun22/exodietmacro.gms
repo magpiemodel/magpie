@@ -10,7 +10,7 @@
 *' and then execute the if statement again within the included file:
 if (s15_run_diet_postprocessing = 1,
 
-*' This macro is executed twice, one after the presolve and once in the
+*' This macro is executed twice, once after the presolve and once in the
 *' intersolve. It calibrates the values, includes exogenous diet modifications
 *' in the postprocessing and aggregates to regional level.
 
@@ -20,6 +20,9 @@ if (s15_run_diet_postprocessing = 1,
 *' The calibration factor is added to the regression value.
    p15_kcal_pc_iso(t,iso,kfo) =
           v15_kcal_regr.l(iso,kfo) + p15_kcal_calib(t,iso,kfo) * s15_calibrate;
+
+*' Negative values that can possibly occur due to calibration are set to zero.
+   p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
 
 * saving regression outcome for BMI shares
   p15_bmi_shr_regr(t,iso,sex,age,bmi_group15) = v15_bmi_shr_regr.l(iso,sex,age,bmi_group15);
@@ -225,8 +228,7 @@ if (s15_run_diet_postprocessing = 1,
   if(s15_exo_diet = 1,
 
 *' 1.) In a first step, the exogenous scenario diets are defined by selecting a
-*' scenario target for total daily per capita food intake and by choosing
-*' food-specific dietary patterns:
+*' scenario target for total daily per capita food intake
 
 $ifthen "%c15_kcal_scen%" == "healthy_BMI"
 
@@ -280,7 +282,7 @@ $else
 $endif
 
 
-* Intake target is adjusted to meet the calorie target
+*' Intake target is adjusted to meet the calorie target
   i15_intake_detailed_scen_target(t,iso,kfo)$(p15_intake_total(t,iso)>0) =
     p15_intake_detail(t,iso,kfo) / p15_intake_total(t,iso) * i15_intake_scen_target(t,iso);
 
@@ -289,11 +291,8 @@ $endif
 *' intake according to different scenario assumptions on dietary patterns. Calories
 *' for staple crops can be modified in order to meet the total calorie target.
 
-* Food-specific calorie intake of the model-internal diet projections is
-* estimated from daily per capita food calorie demand:
-
-* The EAT lancet target values are the same for non-staples irrespective of the calorie target
-* Only non-staples differ
+*' The EAT lancet target values are the same for non-staples irrespective of the calorie target
+*' Only non-staples differ
 
     i15_intake_EATLancet(iso,kfo) =
           i15_intake_EATLancet_all(iso,"2100kcal","%c15_EAT_scen%",kfo);
@@ -326,7 +325,7 @@ $endif
               i15_intake_scen_target(t,iso) - sum(EAT_nonstaples,i15_intake_detailed_scen_target(t,iso,EAT_nonstaples)) )*(
               i15_intake_EATLancet(iso,EAT_staples)/sum(EAT_staples2,i15_intake_EATLancet(iso,EAT_staples2)) );
 
-*  3.) In the third step, the regression-based calculation of intake
+*'  3.) In the third step, the regression-based calculation of intake
 *' is faded into the exogenous intake scenario according to a predefined speed of
 *' convergence (note that fading should start after the historical time slice of
 *' the EAT Lancet diet scenarios (y2010) as defined in `i15_exo_foodscen_fader(t,iso)`):
@@ -365,19 +364,19 @@ $endif
 
   if(s15_exo_waste = 1,
 
-* "Downwards convergence" of regional calorie oversupply due to food waste to the
-* waste reduction target, i.e. only for values that are higher than the target:
+*' "Downwards convergence" of regional calorie oversupply due to food waste to the
+*' waste reduction target, i.e. only for values that are higher than the target:
 
     p15_demand2intake_ratio(t,iso)$(p15_demand2intake_ratio(t,iso) > s15_waste_scen )
                       = p15_demand2intake_ratio(t,iso)*(1-i15_exo_foodscen_fader(t,iso))
                         + s15_waste_scen*i15_exo_foodscen_fader(t,iso);
 
-* waste calculation by crop type
+*' waste calculation by crop type
 
     p15_waste_pc(t,iso,kfo)$(sum(kfo2, p15_waste_pc(t,iso,kfo2))<>0) = p15_waste_pc(t,iso,kfo) / sum(kfo2, p15_waste_pc(t,iso,kfo2))*
                   (p15_intake_total(t,iso)*p15_demand2intake_ratio(t,iso)-p15_intake_total(t,iso));
 
-* Waste ratio is applied
+*' Waste ratio is applied
     p15_kcal_pc_iso(t,iso,kfo) = p15_intake_detail(t,iso,kfo) + p15_waste_pc(t,iso,kfo);
 
     p15_demand2intake_ratio_detail(t,iso,kfo)=1$(p15_intake_detail(t,iso,kfo) = 0) +
@@ -389,18 +388,12 @@ $endif
 
 
 
-
-
-*' Negative values that can possibly occur due to calibration are set to zero.
-   p15_kcal_pc_iso(t,iso,kfo)$(p15_kcal_pc_iso(t,iso,kfo)<0) = 0;
-
 *' The country-level parameter p15_kcal_pc_iso is aggregated to the
 *' regional level. After removing estimates from countries that are not included
 *' in FAOSTAT, the resulting parameter p15_kcal_pc_calibrated is provided to
 *' constraint q15_food_demand in the MAgPIE model, which defines the demand for food.
-*' @stop
 
-* aggregate to regions
+*' Results are aggregated to regions
    p15_kcal_pc(t,i,kfo)$(
       sum(i_to_iso(i,iso),
          im_pop_iso(t,iso)
@@ -424,11 +417,12 @@ $endif
                );
 
 
-* Finally, we calibrate countries with zero food demand according to FAOSTAT
-* down to zero to match FAO world totals.
-* Values are rounded to avoid path dependencies of MAgPIE solver.
+*' Finally, we calibrate countries with zero food demand according to FAOSTAT
+*' down to zero to match FAO world totals.
+*' Values are rounded to avoid path dependencies of MAgPIE solver.
    p15_kcal_pc_calibrated(t,i,kfo)=p15_kcal_pc(t,i,kfo)+p15_balanceflow_kcal(t,i,kfo);
    p15_kcal_pc_calibrated(t,i,kfo)=round(p15_kcal_pc_calibrated(t,i,kfo),2);
    p15_kcal_pc_calibrated(t,i,kfo)$(p15_kcal_pc_calibrated(t,i,kfo)<0)=0;
 
+*' @stop
  );

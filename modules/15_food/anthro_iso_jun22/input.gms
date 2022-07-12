@@ -89,9 +89,10 @@ scalar s15_exo_waste Switch for transition towards exogenous food waste scenario
 scalar s15_waste_scen Scenario target for the ratio between food demand and intake (1)  / 1.2 /;
 
 scalar s15_exo_diet Switch for transition towards exogenous diet scenario (1)  / 0 /;
-* The following switches only becomes active when s15_exo_diet is active
+* The following switches only become active when s15_exo_diet is active
 * They define which components of the diet should become active
-* If <>1,the endogenous estimate is used.
+* If the switch is set to 1,the exogenous diets are activated.
+* For all other settings (!=1), the endogenous estimate is used.
 * When activating a target, total calories are always preserved via scaling of staples
 scalar s15_exo_monogastric Exogenous EAT Lancet animal product target on  (1) / 1 /;
 scalar s15_exo_ruminant Exogenous EAT Lancet animal product target on  (1) / 1 /;
