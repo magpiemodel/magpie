@@ -95,7 +95,9 @@ sets
       redd_vegc,
       redd+_vegc,
       redd+natveg_vegc,
-      sdp_peatland /
+      sdp_peatland,
+      sdp_all,
+      sdp_allnosoil /
 
 ;
 *######################### R SECTION END (SETS) ################################
@@ -140,7 +142,7 @@ sets
    / nh3_n, no2_n /
 
    ac_exp(ac) age-class corresponding to planning horizon
-   
+
    ag_pools(c_pools) Above ground carbon pools
          / vegc, litc /
 
