@@ -13,6 +13,7 @@
 *'  Cellular urban land may not exactly match input data due to other land needs in the same cell.
 
 *####################### R SECTION START (PHASES) ##############################
+$Ifi "%phase%" == "sets" $include "./modules/34_urban/exo_nov21/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/34_urban/exo_nov21/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/34_urban/exo_nov21/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/34_urban/exo_nov21/equations.gms"

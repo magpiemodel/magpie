@@ -24,32 +24,24 @@ source("scripts/start_functions.R")
 # Sources the default configuration file
 source("config/default.cfg")
 
-# Sticky mode
-mode <- c("dynamic","free")
-#recalibrate
-cfg$recalibrate <- TRUE
-
-
 for(cc in c("cc")){
-  for (sm in mode){
 
     cfg$force_download <- TRUE
     # Set cc
     cfg<-gms::setScenario(cfg,cc)
 
+    cfg$input <- c(regional    = "rev4.69_h12_magpie.tgz",
+                   cellular    = "rev4.69_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+                   validation  = "rev4.69_h12_validation.tgz",
+                   additional  = "additional_data_rev4.17.tgz",
+                   calibration = "calibration_H12_sticky_feb18_08May22.tgz")
+
     # Set factor costs
     cfg$gms$factor_costs     <-   "sticky_feb18"
-    cfg$gms$c38_sticky_mode  <-   sm
-
-    if (sm == "dynamic"){
-    cfg$gms$c17_prod_init <- "off"
-    }
-
 
     #Change the results folder name
-    cfg$title<-paste0("Sticky_",sm,"_",cc)
+    cfg$title<-paste0("sticky_",cc)
 
     # Start run
     start_run(cfg=cfg)
-}
 }

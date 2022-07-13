@@ -85,7 +85,19 @@ sets
       redd_nosoil,
       redd+_nosoil,
       redd+natveg_nosoil,
-      maccs_excl_cropland_n2o /
+      maccs_excl_cropland_n2o,
+      sdp_cropeff,
+      sdp_livestock,
+      sdp_redd,
+      sdp_soil,
+      sdp_redd_soil,
+      all_vegc,
+      redd_vegc,
+      redd+_vegc,
+      redd+natveg_vegc,
+      sdp_peatland,
+      sdp_all,
+      sdp_allnosoil /
 
 ;
 *######################### R SECTION END (SETS) ################################
@@ -129,28 +141,11 @@ sets
    pollutant_nh3no2_51(n_pollutants_direct) nitrogen emissions relevant for deposition
    / nh3_n, no2_n /
 
-   emis_source_n_cropsoils51(emis_source) activities that lead to emissions
-   / inorg_fert, man_crop, resid, som, rice /
-
-   emis_cell_one56(emis_source_cell) cellular oneoff emission sources
-   /crop_vegc, crop_litc, crop_soilc, past_vegc, past_litc, past_soilc, forestry_vegc,
-   forestry_litc, forestry_soilc, primforest_vegc, primforest_litc, primforest_soilc,
-   secdforest_vegc, secdforest_litc, secdforest_soilc,
-   urban_vegc, urban_litc, urban_soilc, other_vegc, other_litc, other_soilc/
-
-   emis_reg_yr56(emis_source_reg) regional yearly emission sources
-   /inorg_fert, man_crop, awms, resid, man_past, som,
-   rice, ent_ferm,  beccs/
-
    ac_exp(ac) age-class corresponding to planning horizon
+
+   ag_pools(c_pools) Above ground carbon pools
+         / vegc, litc /
+
+   stockType Carbon stock types
+         / actual, actualNoAcEst /
 ;
-
-$onempty
-sets
-   emis_cell_yr56(emis_source_cell) cellular yearly emission sources
-   / /
-
-   emis_reg_one56(emis_source_reg) regional oneoff emission sources
-   / /
- ;
-$offempty

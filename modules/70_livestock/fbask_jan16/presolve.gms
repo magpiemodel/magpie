@@ -32,7 +32,7 @@ p70_incr_cattle(t,i)  =  1$(ord(t)=1)
 *' The pasture management factor is calculated by applying a linear relationship 
 *' that links changes in pasture management with changes in cattle stocks:
 
-if (sum(sameas(t_past,t),1) = 1,
+if (m_year(t) <= s70_past_mngmnt_factor_fix,
    pm_past_mngmnt_factor(t,i) = 1;
 else               
    pm_past_mngmnt_factor(t,i) =   ( (s70_pyld_intercept + f70_pyld_slope_reg(i)*p70_incr_cattle(t,i)**(5/(m_year(t)-m_year(t-1))) 
@@ -41,6 +41,16 @@ else
 
 *' @stop
 
+p70_cost_share_calibration(i) = f70_hist_cap_share("y2010",i)-(f70_cap_share_reg("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso("y2010",iso)))+f70_cap_share_reg("intercept"));
+
+if (m_year(t)<2010,
+ p70_cost_share_livst(t,i,"capital") = f70_hist_cap_share(t,i);
+ p70_cost_share_livst(t,i,"labor")   = 1 - f70_hist_cap_share(t,i);
+
+elseif (m_year(t)>=2010),
+ p70_cost_share_livst(t,i,"capital") = f70_cap_share_reg("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso(t,iso)))+f70_cap_share_reg("intercept")+p70_cost_share_calibration(i);
+ p70_cost_share_livst(t,i,"labor")   = 1 - p70_cost_share_livst(t,i,"capital");
+);
 
 
 

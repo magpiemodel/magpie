@@ -11,6 +11,9 @@ sets
 
  reg regression parameters for dynamic sticky
  /slope, intercept/
+
+ req input requirements
+ / labor, capital /
  ;
 
 *** EOF sets.gms ***

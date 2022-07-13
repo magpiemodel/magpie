@@ -6,21 +6,18 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description The managementcalib_aug19 realization reads in the LPJmL data and
-*' performs several corrections. First, a bioenergy yield correction is performed.
-*' As there is currently no robust information on bioenergy yields available
-*' in [@FAOSTAT], it is assumed that the LPJmL yields for bioenergy correspond
-*' to the yields achieved under the highest currently observed value of the $\tau$
-*' factor representing agricultural land-use intensity. Pasture yields are
-*' calculated based on pasture demand to account for in- and extensification of
-*' managed grasslands. Technological change spillover from crop yield increases
-*' of the time step before is included additionally. Second, yields for all other
-*' crops are corrected on the regional level by applying a calibration factor
-*' that does not differentiate between crops. Pasture yields have their own
-*' regional calibration factors. Applied calibration factors are derived via 
-*' comparing cropland and pasture areas in the initial time step with values
-*' reported by FAO [@FAOSTAT]. This realization also calculates the growing
-*' stocks in commercial plantations and natural vegetation using LPJmL Carbon stocks.
-*'
+*' performs a number of calibrations. First, a bioenergy yield correction is performed.
+*' As there is currently no robust information on bioenergy yields available in
+*' [@FAOSTAT], it is assumed that the LPJmL yields for bioenergy correspond to the
+*' yields achieved under the highest currently observed value of the $\tau$ factor
+*' representing agricultural land-use intensity. Secondly, pasture yields are calculated
+*' based on pasture demand to account for in- and extensification of managed grasslands.
+*' Finally, crop yields are calibrated to FAO [@FAOSTAT] regional yield levels of the
+*' initial time step. An additional feature of this realization is to allow crop yields
+*' technological change from the precedent times step to spillover to pasture areas. This
+*' realization also calculates the growth stocks in commercial plantations and natural
+*' vegetation using LPJmL Carbon stocks.
+
 *' @limitations The exogenous implementation of pasture intensification cannot
 *' capture feedbacks between land scarcity and efforts to improve pasture
 *' management. And, the magnitude of spillover effects from technological change

@@ -5,9 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-
 $setglobal c70_feed_scen  ssp2
-*   options:    ssp1,ssp2,ssp3,ssp4,ssp5,constant
+*   options:    SSP: ssp1, ssp2, ssp3, ssp4, ssp5
+*               SDP: SDP, SDP_EI, SDP_MC, SDP_RC
+*               other: constant
 
 * Feed substitution scenarios including functional forms, targets and transition periods
 *   options:   constant,
@@ -17,8 +18,12 @@ $setglobal c70_feed_scen  ssp2
 $setglobal c70_cereal_scp_scen  constant
 $setglobal c70_foddr_scp_scen  constant
 
+$setglobal c70_fac_req_regr  glo
+* options: glo, reg
+
 scalars
   s70_pyld_intercept     Intercept of linear relationship determining pasture intensification (1)        / 0.24 /
+  s70_past_mngmnt_factor_fix	Year until the pasture management factor is fixed to 1		/ 2005 /	
 ;
 
 table f70_feed_baskets(t_all,i,kap,kall,feed_scen70) Feed baskets in tDM per tDM livestock product (1)
@@ -56,6 +61,32 @@ $ondelim
 $include "./modules/70_livestock/fbask_jan16/input/f70_pyld_slope_reg.cs4"
 $offdelim
 /;
+
+parameter f70_cap_share_reg(share_regr) Parameters for regression
+/
+$ondelim
+$include "./modules/70_livestock/fbask_jan16/input/f70_cap_share_reg.csv"
+$offdelim
+/
+;
+
+table f70_hist_cap_share(t_all,i) Historical capital share
+$ondelim
+$include "./modules/70_livestock/fbask_jan16/input/f70_hist_cap_share.csv"
+$offdelim
+;
+
+table f70_hist_factor_costs_livst(i,kli) Historical factor costs in livestock production (mio. USD05MER)
+$ondelim
+$include "./modules/70_livestock/fbask_jan16/input/f70_hist_factor_costs_livst.csv"
+$offdelim
+;
+
+table f70_hist_prod_livst(i,kli,attributes) Historical production quantity of livestock products (mio. t)
+$ondelim
+$include "./modules/70_livestock/fbask_jan16/input/f70_hist_prod_livst.cs3"
+$offdelim
+;
 
 * Set-switch for countries affected by country-specific exogenous diet scenario
 * Default: all iso countries selected

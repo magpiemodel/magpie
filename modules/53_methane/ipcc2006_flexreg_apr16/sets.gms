@@ -19,15 +19,7 @@ k_noconc53(kall) non-concentrates
 k_ruminants53(kli) ruminant subset
    / livst_rum, livst_milk /
 
-emis_source_nomethane53(emis_source) emission sources
-   / inorg_fert, man_crop, resid, man_past, som,
-     crop_vegc, crop_litc, crop_soilc,
-     past_vegc, past_litc, past_soilc,
-     forestry_vegc, forestry_litc, forestry_soilc,
-     primforest_vegc, primforest_litc, primforest_soilc,
-	 secdforest_vegc, secdforest_litc, secdforest_soilc, 
-	 urban_vegc, urban_litc, urban_soilc,
-     other_vegc, other_litc, other_soilc,
-     beccs /
+emis_source_methane53(emis_source) emission sources
+   / awms, rice, ent_ferm, resid_burn /
 
 ;
