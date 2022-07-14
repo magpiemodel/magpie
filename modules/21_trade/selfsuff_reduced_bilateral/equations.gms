@@ -14,8 +14,9 @@
   sum(i2, vm_supply(i2,k_trade)) + sum(ct,f21_trade_balanceflow(ct,k_trade));
 
 *' amount produced regionally must be equal to supply + net trade
+q21_trade_bilat(h2,k_trade)..
  sum(supreg(h2, i2), vm_prod_reg(i2, k_trade)) =g= sum(supreg(h2,i2), vm_supply(i2, k_trade)) + 
-                              sum(h_ex, v21_trade(h_ex, h_im, k_trade))  - sum(h_im, v21_trade(h_ex, h_im, k_trade)
+                              sum(h_ex, v21_trade(h_ex, h2, k_trade))  - sum(h_im, v21_trade(h2, h_im, k_trade));
 
 *' For non-tradable commodites, the regional supply should be larger or equal to the regional demand.
  q21_notrade(h2,k_notrade)..
@@ -71,12 +72,11 @@
  (i21_trade_tariff(h2,k_trade))
  *sum(supreg(h2,i2), vm_prod_reg(i2,k_trade)-vm_supply(i2,k_trade));
 
-q21_trade_bilateral..
+q21_costs_bilateral(h2,k_trade)..
  v21_cost_transport_reg(h2,k_trade) =g=
- (i21_trade_margin(h1, h2,k_trade))
- *(sum(supreg(h1,r1), supreg(h2,r2), v21_trade(i1, i2,k_trade));
+ sum(h_im, i21_trade_margin(h2,h_im,k_trade))* sum(h_im, v21_trade(h2,h_im,k_trade));
 
 * Regional trade costs are the costs for each region aggregated over all the tradable commodities.
  q21_cost_trade(h2)..
  sum(supreg(h2,i2),vm_cost_trade(i2)) =e= sum(k_trade, v21_cost_tariff_reg(h2,k_trade) +
-                                              v21_cost_transport_reg(i2, k_trade));
+                                              v21_cost_transport_reg(h2, k_trade));

@@ -53,4 +53,5 @@ sets
 ;
 
 alias(h,h3);
-alias(h, h_ex, h_im);
+alias(h,h_ex);
+alias(h,h_im);
