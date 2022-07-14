@@ -55,6 +55,8 @@ for(ssp in c("SSP1","SSP2","SSP5")) {
 ##############################################
 codeCheck <- FALSE
 
+#### ADJUST TO NEW FORMAT!
+
 input <- c(regional    = "rev4.73FSECmodeling_e2bdb6cd_magpie.tgz",
            cellular    = "rev4.73FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
            validation  = "rev4.73FSECmodeling_e2bdb6cd_validation.tgz",

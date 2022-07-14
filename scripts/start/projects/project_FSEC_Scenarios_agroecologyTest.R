@@ -34,11 +34,13 @@ general_settings <- function(title) {
   cfg$recalibrate <- FALSE
   cfg$qos         <- "priority_maxMem"
   cfg$output      <- c(cfg$output,
-                       "rds_report_iso",
-                       "extra/disaggregation_BII"
-                       #"extra/disaggregation_BII", "projects/FSEC_dietaryIndicators",
-                       #"projects/FSEC_environmentalPollution_grid"
-                      )
+                         "rds_report_iso",
+                         "extra/disaggregation_BII",
+                         #"projects/FSEC_dietaryIndicators",
+                         #"projects/FSEC_costs.R",
+                         #"projects/FSEC_nitrogenPollution.R",
+                         #"projects/FSEC_StevenLord.R"
+                       )
 
   # Climate change impacts activated, SSP2 default settings, NDC activated, endogenous forestry activated
   cfg <- gms::setScenario(cfg, c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"))
@@ -59,11 +61,11 @@ general_settings <- function(title) {
   cfg$gms$som                     <- "cellpool_aug16"
   # Cost module: sticky - dynamic mode
   cfg$gms$factor_costs            <- "sticky_feb18"
-
+  # cropland suitability setting
+  cfg$gms$c30_marginal_land       <- "q33_marginal"
   # Regional factor requirement costs (crop and livestock)
   cfg$gms$c38_fac_req             <- "reg"
   cfg$gms$c70_fac_req_regr        <- "reg"
-
   # Agroecology general settings
   cfg$gms$crop                        <- "penalty_apr22"
   cfg$gms$c30_rotation_scenario       <- "default"
@@ -82,18 +84,13 @@ population_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (2) Reduced inequality transformation ###
-inequalityANDeducation_transformation <- function(cfg) {
+### (2) Improved institutions, reduced inequality transformation ###
+institution_transformation <- function(cfg) {
   # GDP following SSP1 path
   cfg$gms$c09_gdp_scenario <- "SSP1"
   # Only cap top incomes
   # (not available yet)
 
-  return(cfg)
-}
-
-### (3) Improved institutions ###
-institution_transformation <- function(cfg) {
   # Improved institutions: lower interest rates
   # Interest rates are still regionally specific (dependent on GDP), but
   # set to lower levels for low income countries
@@ -103,7 +100,7 @@ institution_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (4) Energy and transport transformation ###
+### (3) Energy and transport transformation ###
 energy_transformation <- function(cfg) {
   # Air pollution reduction and other health risks
   # (cannot be covered)
@@ -126,13 +123,13 @@ energy_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (5) Diet health transformation ###
+### (4) Diet health transformation ###
 diet_transformation <- function(cfg) {
   # Food transition towards healthy & sustainable diets
   cfg$gms$c15_food_scenario	      <- "SSP1"
   cfg$gms$s15_elastic_demand      <-	"0"
   cfg$gms$c15_rumdairy_scp_scen	  <- "constant"
-  #cfg$gms$c15_exo_scen_targetyear <- "y2050" # need to be updated, switch changed
+  cfg$gms$c15_exo_foodscen        <- "lin_zero_20_50"
   cfg$gms$s15_exo_diet	          <- "1"
   cfg$gms$c15_kcal_scen	          <- "healthy_BMI"
   cfg$gms$c15_EAT_scen	          <- "FLX"
@@ -142,7 +139,7 @@ diet_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (6) Diet meat transformation ###
+### (5) Diet meat transformation ###
 meat_transformation <- function(cfg) {
   # Food transition towards reduced meat consumption
   cfg$gms$c15_livescen_target <- "lin_zero_20_50"
@@ -150,7 +147,7 @@ meat_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (7) Diet waste transformation ###
+### (6) Diet waste transformation ###
 waste_transformation <- function(cfg) {
   # Lower food waste
   cfg$gms$s15_exo_waste	          <- "1"
@@ -173,10 +170,16 @@ dietInclusion_transformation <- function(cfg) {
   return(cfg)
 }
 
+### (7) Animal waste management ###
+awms_transformation <- function(cfg) {
+  # scenario for animal waste management.
+  cfg$gms$c55_scen_conf <- "GoodPractice"
+
+  return(cfg)
+}
+
 ### (8) Livestock management transformation ###
 livestock_transformation <- function(cfg) {
-  # Higher manure recycling rates
-  cfg$gms$c55_scen_conf <- "SSP1"
   # Higher feed efficiency (capped scenario)
   cfg$gms$c70_feed_scen <- "ssp1"
   # Animal welfare
@@ -217,6 +220,7 @@ nitrogen_transformation <- function(cfg) {
 biodiversity_transformation <- function(cfg) {
   # BII target
   cfg$gms$s44_bii_lower_bound <- 0.81
+  cfg$gms$s44_target_year     <- 2050
 
   return(cfg)
 
@@ -226,6 +230,7 @@ biodiversity_transformation <- function(cfg) {
 landsharing_transformation <- function(cfg) {
   # stricter crop rotations and agroforestry (2nd gen be with crop rotation)
   cfg$gms$c30_rotation_scenario       <- "agroecology"
+  cfg$gms$c30_rotation_scenario_speed <- "by2050"
 
   # increase labor costs based on value-difference between organic and conventional
   # (not available yet)
@@ -269,15 +274,16 @@ fairTrade_transformation <- function(cfg) {
   return(cfg)
 }
 
-### (13) Bioeconomy transformation ###
-bioeconomy_transformation <- function(cfg) {
+### (13) Timber Cities transformation ###
+timberCities_transformation <- function(cfg) {
   # Timber demand: higher demand for buildings from wood
   cfg$gms$c73_build_demand  <- "50pc"
-  # Biomaterial demand increases (therefore no phaseout of 1stgen bioenergy, but rather constant)
-  cfg$gms$c60_1stgen_biodem	<- "const2030"
 
   return(cfg)
 }
+
+### (NA) Bioeconomy transformation
+# To be included
 
 ### (14) Afforestation (REDDaff) transformation ###
 REDDaff_transformation <- function(cfg) {
@@ -306,11 +312,17 @@ REDD_transformation <- function(cfg) {
 }
 
 
-### (16) Land and water sparing transformation ###
+### (16) Land sparing transformation ###
 landsparing_transformation <- function(cfg) {
   # land protection following strict protection scenario (half or land's surface)
   cfg$gms$c22_protect_scenario <- "HalfEarth"
-  # Water protection through environmental flow protection
+
+  return(cfg)
+}
+
+### (17) Water sparing transformation ###
+water_transformation <- function(cfg) {
+  # water protection through environmental flow protection
   cfg$gms$c42_env_flow_policy	 <- "on"
   cfg$gms$c30_bioen_water	     <- "rainfed"  # (already default anyways)
 
@@ -368,6 +380,12 @@ soil_transformation <- function(cfg) {
 cfg <- general_settings(title = "FSEC_BAU")
 start_run(cfg = cfg, codeCheck = codeCheck)
 
+### SSP1 + mitigation (RCP 1.9)
+cfg <- general_settings(title = "FSEC_SSP119")
+cfg <- gms::setScenario(cfg, c("cc", "rcp1p9", "SSP1", "NDC", "ForestryEndo"))
+cfg$input['cellular'] <- "rev4.73FSECmodeling_e2bdb6cd_0bd54110_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1.tgz"
+start_run(cfg = cfg, codeCheck = codeCheck)
+
 ### SSP3 + mitigation (RCP 7.0)
 cfg <- general_settings(title = "FSEC_SSP370")
 cfg <- gms::setScenario(cfg, c("cc", "rcp7p0", "SSP3", "NDC", "ForestryEndo"))
@@ -396,20 +414,20 @@ cfg <- gms::setScenario(cfg, c("cc", "rcp2p6", "SSP1", "NDC", "ForestryEndo"))
 cfg$input['cellular'] <- "rev4.73FSECmodeling_e2bdb6cd_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz"
 ### (1) Population and Health ###
 cfg <- population_transformation(cfg = cfg)
-### (2) Reduced inequality and Education Transformation ###
-cfg <- inequalityANDeducation_transformation(cfg = cfg)
-### (3) Improved institutions ###
+### (2) Reduced inequality, education and improved institutions ###
 cfg <- institution_transformation(cfg = cfg)
-### (4) Energy and transfport transformation ###
+### (3) Energy and transfport transformation ###
 cfg <- energy_transformation(cfg = cfg)
-### (5) Diet health transformation ###
+### (4) Diet health transformation ###
 cfg <- diet_transformation(cfg = cfg)
-### (6) Diet meat transformation ###
+### (5) Diet meat transformation ###
 cfg <- meat_transformation(cfg = cfg)
-### (7) Diet waste transformation ###
+### (6) Diet waste transformation ###
 cfg <- waste_transformation(cfg = cfg)
 ### (NA) Diet inclustion transformation ###
 #cfg <- dietInclusion_transformation(cfg = cfg)
+### (7) Animal waste management transformation
+cfg <- awms_transformation(cfg = cfg)
 ### (8) Livestock management transformation ###
 cfg <- livestock_transformation(cfg = cfg)
 ### (9) Crop efficiency transformation ###
@@ -424,21 +442,24 @@ cfg <- landsharing_transformation(cfg = cfg)
 #cfg <- supplyChain_transformation(cfg = cfg)
 ### (12) Fair trade transformation ###
 cfg <- fairTrade_transformation(cfg = cfg)
-### (13) Bioeconomy transformation ###
-cfg <- bioeconomy_transformation(cfg = cfg)
+### (13) Timber cities transformation ###
+cfg <- timberCities_transformation(cfg = cfg)
+### (NA) Bioeconomy transformation
 ### (14) REDDaff transformation ###
 cfg <- REDDaff_transformation(cfg = cfg)
 ### (15) REDD Transformation
 cfg <- REDD_transformation(cfg = cfg)
-### (16) Land and water sparing transformation ###
+### (16) Land sparing transformation ###
 cfg <- landsparing_transformation(cfg = cfg)
-### (17) Land and water sparing transformation ###
+### (17) Water sparing transformation ###
+cfg <- water_transformation(cfg = cfg)
+### (18) Land and water sparing transformation ###
 cfg <- peatland_transformation(cfg = cfg)
-### (18) Air pollution intervention transformation ###
+### (19) Air pollution intervention transformation ###
 cfg <- airPollution_transformation(cfg = cfg)
 ### (NA) Agricultural employment transformation ###
 #cfg <- employment_transformation(cfg = cfg)
-### (19) Soil pricing transformation ##
+### (20) Soil pricing transformation ##
 cfg <- soil_transformation(cfg = cfg)
 ### Emission policy must be set separately in full-SDP scenario
 # (because it would be overwritten in the different transformations)
@@ -453,32 +474,27 @@ cfg <- general_settings(title = "FSEC_population")
 cfg <- population_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (2) Reduced inequality and Education Transformation ###
-cfg <- general_settings(title = "FSEC_gdpEducInequ")
-cfg <- inequalityANDeducation_transformation(cfg = cfg)
-start_run(cfg = cfg, codeCheck = codeCheck)
-
-### (3) Improved institutions ###
-cfg <- general_settings(title = "FSEC_inst")
+### (3) Reduced inequality, Education, Improved institutions ###
+cfg <- general_settings(title = "FSEC_gdpInst")
 cfg <- institution_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (4) Energy and transfport transformation ###
+### (3) Energy and transfport transformation ###
 cfg <- general_settings(title = "FSEC_energy")
 cfg <- energy_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (5) Diet health transformation ###
+### (4) Diet health transformation ###
 cfg <- general_settings(title = "FSEC_dietHealth")
 cfg <- diet_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (6) Diet meat transformation ###
+### (5) Diet meat transformation ###
 cfg <- general_settings(title = "FSEC_dietLvst")
 cfg <- meat_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (7) Diet waste transformation ###
+### (6) Diet waste transformation ###
 cfg <- general_settings(title = "FSEC_dietWaste")
 cfg <- waste_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
@@ -487,6 +503,11 @@ start_run(cfg = cfg, codeCheck = codeCheck)
 #cfg <- general_settings(title = "FSEC_dietInclusion")
 #cfg <- dietInclusion_transformation(cfg = cfg)
 #start_run(cfg = cfg, codeCheck = codeCheck)
+
+### (7) Animal waste management transformation ###
+cfg <- general_settings(title = "FSEC_awms")
+cfg <- awms_transformation(cfg = cfg)
+start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (8) Livestock management transformation ###
 cfg <- general_settings(title = "FSEC_livestock")
@@ -523,10 +544,12 @@ cfg <- general_settings(title = "FSEC_fairTrade")
 cfg <- fairTrade_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (13) Bioeconomy transformation ###
-cfg <- general_settings(title = "FSEC_bioeconomy")
-cfg <- bioeconomy_transformation(cfg = cfg)
+### (13) Timber Cities transformation ###
+cfg <- general_settings(title = "FSEC_timberCities")
+cfg <- timberCities_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
+
+### (NA) Bioeconomy transformation ###
 
 ### (14) Afforestation transformation ###
 cfg <- general_settings(title = "FSEC_REDDaff")
@@ -538,9 +561,14 @@ cfg <- general_settings(title = "FSEC_REDD")
 cfg <- REDD_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
-### (16) Land and water sparing transformation ###
+### (16) Land sparing transformation ###
 cfg <- general_settings(title = "FSEC_landSparing")
 cfg <- landsparing_transformation(cfg = cfg)
+start_run(cfg = cfg, codeCheck = codeCheck)
+
+### (16) Water sparing transformation ###
+cfg <- general_settings(title = "FSEC_waterSparing")
+cfg <- water_transformation(cfg = cfg)
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### (17) Peatland transformation ###
