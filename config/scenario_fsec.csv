@@ -20,7 +20,6 @@ gms$c22_protect_scenario;;;;;;;;;;;;;;;;HalfEarth;;;;
 gms$c30_marginal_land;q33_marginal;;;;;;;;;;;;;;;;;;;
 gms$c30_bioen_water;;;;;;;;;;;;;;;;;rainfed;;;
 gms$c34_urban_scenario;;;;SSP1;;;;;;;;;;;;;;;;
-gms$c35_forest_damage_end;;;;;;;;;;;;;;;;;;;2030;
 gms$s42_watdem_nonagr_scenario;;;;1;;;;;;;;;;;;;;;;
 gms$c42_env_flow_policy;;;;;;;;;;;;;;;;;on;;;
 gms$c32_aff_policy;;;;;;;;;;;;;;ndc;;;;;;
