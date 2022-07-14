@@ -94,7 +94,7 @@ fsecScenario <- function(scenario) {
   cfg$qos         <- "priority_maxMem"
   cfg$output      <- c(cfg$output,
                          "rds_report_iso",
-                         "extra/disaggregation_BII",
+                         "extra/disaggregation_BII"#,
                          #"projects/FSEC_dietaryIndicators",
                          #"projects/FSEC_costs.R",
                          #"projects/FSEC_nitrogenPollution.R",
