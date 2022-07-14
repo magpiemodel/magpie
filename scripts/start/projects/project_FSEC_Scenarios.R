@@ -35,10 +35,11 @@ general_settings <- function(title) {
   cfg$qos         <- "priority_maxMem"
   cfg$output      <- c(cfg$output,
                        "rds_report_iso",
-                       "extra/disaggregation_BII"
-                       #"extra/disaggregation_BII", "projects/FSEC_dietaryIndicators",
-                       #"projects/FSEC_environmentalPollution_grid"
-                      )
+                       "extra/disaggregation_BII",
+                       "projects/FSEC_dietaryIndicators",
+                       "projects/FSEC_costs.R",
+                       "projects/FSEC_nitrogenPollution.R",
+                       "projects/FSEC_StevenLord.R")
 
   # Climate change impacts activated, SSP2 default settings, NDC activated, endogenous forestry activated
   cfg <- gms::setScenario(cfg, c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"))
