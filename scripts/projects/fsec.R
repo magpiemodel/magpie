@@ -80,7 +80,7 @@ fsecScenario <- function(scenario) {
             )
   # Assign selected scenario to cfg
   cfg <- setScenario(cfg, x[[scenario]]$standard)
-  cfg <- setScenario(cfg, x[[scenario]]$fsec, scenario_config = "config/scenario_FSEC.csv")
+  cfg <- setScenario(cfg, x[[scenario]]$fsec, scenario_config = "config/scenario_fsec.csv")
 
   # overwrite cellular input (was overwritten by RCP from standard scenario_config)
   cfg$input['cellular'] <- input['cellular']
