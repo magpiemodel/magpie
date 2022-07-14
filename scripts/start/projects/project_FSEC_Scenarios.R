@@ -344,6 +344,12 @@ soil_transformation <- function(cfg) {
 
 
 # -----------------------------------------------------------------------------------------------------------------
+# Download population data
+
+gms::download_unpack(input = "FSEC_populationScenarios_v1_12-07-22.tgz", targetdir = "./input", repositories = cfg$repositories)
+
+
+# -----------------------------------------------------------------------------------------------------------------
 # Scenario runs
 
 #################################################
