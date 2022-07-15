@@ -236,7 +236,7 @@ $ifthen "%c15_kcal_scen%" == "healthy_BMI"
   p15_bmi_shr_target(t,iso,sex,age,"medium")=1;
 
   i15_intake_scen_target(t,iso)$(sum((sex,age), im_demography(t,iso,sex,age)) >0 ) =
-     (sum((sex, age, bmi_group15), p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)*
+     (sum((sex, age, bmi_group15), p15_bmi_shr_target(t,iso,sex,age,bmi_group15)*
      im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
      + i15_kcal_pregnancy(t,iso))
      / sum((sex,age), im_demography(t,iso,sex,age));
