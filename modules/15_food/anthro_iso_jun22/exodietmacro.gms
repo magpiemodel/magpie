@@ -248,27 +248,28 @@ $elseif "%c15_kcal_scen%" == "no_underweight"
             p15_bmi_shr_calibrated(t,iso,sex,age,"verylow")
             + p15_bmi_shr_calibrated(t,iso,sex,age,"low")
             + p15_bmi_shr_calibrated(t,iso,sex,age,"medium");
-  p15_bmi_shr_calibrated(t,iso,sex,age,"verylow")=0;
-  p15_bmi_shr_calibrated(t,iso,sex,age,"low")=0;
+  p15_bmi_shr_target(t,iso,sex,age,"verylow")=0;
+  p15_bmi_shr_target(t,iso,sex,age,"low")=0;
 
   i15_intake_scen_target(t,iso)$(sum((sex,age), im_demography(t,iso,sex,age)) >0 ) =
-     (sum((sex, age, bmi_group15), p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)*
+     (sum((sex, age, bmi_group15), p15_bmi_shr_target(t,iso,sex,age,bmi_group15)*
      im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
      + i15_kcal_pregnancy(t,iso))
      / sum((sex,age), im_demography(t,iso,sex,age));
 
 $elseif "%c15_kcal_scen%" == "no_overweight"
 
+  p15_bmi_shr_target(t,iso,sex,age,bmi_group15)=p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15);
   p15_bmi_shr_target(t,iso,sex,age,"medium")=
             p15_bmi_shr_calibrated(t,iso,sex,age,"mediumhigh")
             + p15_bmi_shr_calibrated(t,iso,sex,age,"high")
             + p15_bmi_shr_calibrated(t,iso,sex,age,"veryhigh")
             + p15_bmi_shr_calibrated(t,iso,sex,age,"medium");
-  p15_bmi_shr_calibrated(t,iso,sex,age,"mediumhigh")=0;
-  p15_bmi_shr_calibrated(t,iso,sex,age,"high")=0;
-  p15_bmi_shr_calibrated(t,iso,sex,age,"veryhigh")=0;
+  p15_bmi_shr_target(t,iso,sex,age,"mediumhigh")=0;
+  p15_bmi_shr_target(t,iso,sex,age,"high")=0;
+  p15_bmi_shr_target(t,iso,sex,age,"veryhigh")=0;
   i15_intake_scen_target(t,iso)$(sum((sex,age), im_demography(t,iso,sex,age)) >0 ) =
-     (sum((sex, age, bmi_group15), p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15)*
+     (sum((sex, age, bmi_group15), p15_bmi_shr_target(t,iso,sex,age,bmi_group15)*
      im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
      + i15_kcal_pregnancy(t,iso))
      / sum((sex,age), im_demography(t,iso,sex,age));
@@ -402,9 +403,9 @@ $endif
       ) >0 ) =
                sum(i_to_iso(i,iso),
                  (p15_kcal_pc_iso(t,iso,kfo)
-                 * im_pop_iso(t,iso))$(p15_balanceflow_kcal_iso(t,iso,kfo)==0)
+                 * im_pop_iso(t,iso))$(p15_balanceflow_kcal_iso(t,iso,kfo)=0)
                ) / sum(i_to_iso(i,iso),
-                   (im_pop_iso(t,iso))$(p15_balanceflow_kcal_iso(t,iso,kfo)==0)
+                   (im_pop_iso(t,iso))$(p15_balanceflow_kcal_iso(t,iso,kfo)=0)
                );
 
    p15_balanceflow_kcal(t,i,kfo)$(
