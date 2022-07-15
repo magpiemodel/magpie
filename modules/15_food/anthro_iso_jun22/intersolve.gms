@@ -5,6 +5,23 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+* retrieving interfaces from MAgPIE
+* calculate prices for providing 1 kcal per day of one commodity
+
+  if (magpie.modelstat = NA,
+    display "Coupling: Reading exogenous prices as MAgPIE has not (yet) been run";
+    q15_food_demand.m(i,kfo)=0;
+    p15_prices_kcal(t,iso,kfo,curr_iter15)=i15_prices_initial_kcal(iso,kfo)*f15_price_index(t);
+  else
+*' @code
+*' After one time step of MAgPIE is executed, the shadow prices of the food demand
+*' constraint are fed back into the food demand module, and the food demand
+*' module is executed once again.
+    display "Coupling: Reading out marginal costs from MAgPIE";
+    p15_prices_kcal(t,iso,kfo,curr_iter15)=sum(i_to_iso(i,iso), q15_food_demand.m(i,kfo));
+*' @stop
+  );
+
 *' If `s15_elastic_demand` is 0, MAgPIE is not executed again for this time step.
 if (s15_elastic_demand = 1 AND m_year(t) > sm_fix_SSP2,
   display "elastic demand model is activated";
@@ -21,28 +38,11 @@ if (s15_elastic_demand = 1 AND m_year(t) > sm_fix_SSP2,
   prev_iter15(iter15) = no;
   prev_iter15(iter15)$(ord(iter15)=p15_iteration_counter(t)-1) = yes;
 
-* retrieving interfaces from MAgPIE
-* calculate prices for providing 1 kcal per day of one commodity
-
-  if (magpie.modelstat = NA,
-    q15_food_demand.m(i,kfo)=0;
-    p15_prices_kcal(t,iso,kfo,curr_iter15)=i15_prices_initial_kcal(iso,kfo)*f15_price_index(t);
-  else
 *' @code
-*' After one time step of MAgPIE is executed, the shadow prices of the food demand
-*' constraint are fed back into the food demand module, and the food demand
-*' module is executed once again.
-    display "Coupling: Reading out marginal costs from MAgPIE as shock to demand model";
-    p15_prices_kcal(t,iso,kfo,curr_iter15)=sum(i_to_iso(i,iso), q15_food_demand.m(i,kfo));
-*' @stop
-  );
-
-*' @code
-  display "starting iteration number ", p15_iteration_counter;
-  display "starting m15_food_demand model....";
+  display "starting m15_food_demand in iteration number ", p15_iteration_counter;
 
   solve m15_food_demand USING nlp MAXIMIZING v15_objective;
-*' @stop
+*' @stop in
 
 * in case of problems try CONOPT3
   if(m15_food_demand.modelstat > 2,
