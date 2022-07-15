@@ -25,7 +25,7 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 cfg$results_folder <- "output/:title:"
-prefix <- "diet_change_v9"
+prefix <- "diet_change_v10"
 
 cfg$title <- paste(prefix,"olddefault",sep="_")
 start_run(cfg,codeCheck=FALSE)

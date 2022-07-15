@@ -140,7 +140,7 @@ else
 );
 
 * Postprocessing of diets: calibration, exogenous scenario modifications and
-* aggregatio to regional level.
+* aggregation to regional level.
 * As this occurs twice (in presolve and intersolve), it is here included as
 * macro. As include comments are not allowed within if statements, we pass the
 * information whether postprocessing shall be executed to the macro within

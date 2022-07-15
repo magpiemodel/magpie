@@ -73,7 +73,6 @@ i15_livestock_fadeout_threshold(t,iso) = 1 - p15_country_dummy(iso)*(1-f15_food_
 
 
 * Exogenous food intake and waste scenarios including functional forms, targets and transition periods
-* Note: p15_foodscen_region_shr(t,i) is 1 in the default case)
 i15_exo_foodscen_fader(t,iso) = (1-f15_food_substitution_fader(t,"%c15_exo_foodscen%")) * p15_country_dummy(iso);
 
 * Select from the data set of EAT Lancet scenarios the target years that are

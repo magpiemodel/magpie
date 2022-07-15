@@ -394,15 +394,17 @@ $endif
 *' constraint q15_food_demand in the MAgPIE model, which defines the demand for food.
 
 *' Results are aggregated to regions
+*' Only countries are considered which have FAO data, and therefore where
+*' p15_balanceflow_kcal_iso is zero.
    p15_kcal_pc(t,i,kfo)$(
       sum(i_to_iso(i,iso),
          im_pop_iso(t,iso)
       ) >0 ) =
                sum(i_to_iso(i,iso),
-                 p15_kcal_pc_iso(t,iso,kfo)
-                 * im_pop_iso(t,iso)
+                 (p15_kcal_pc_iso(t,iso,kfo)
+                 * im_pop_iso(t,iso))$(p15_balanceflow_kcal_iso(t,iso,kfo)==0)
                ) / sum(i_to_iso(i,iso),
-                   im_pop_iso(t,iso)
+                   (im_pop_iso(t,iso))$(p15_balanceflow_kcal_iso(t,iso,kfo)==0)
                );
 
    p15_balanceflow_kcal(t,i,kfo)$(
