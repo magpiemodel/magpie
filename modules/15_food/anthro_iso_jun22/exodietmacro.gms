@@ -402,10 +402,10 @@ $endif
          im_pop_iso(t,iso)
       ) >0 ) =
                sum(i_to_iso(i,iso),
-                 (p15_kcal_pc_iso(t,iso,kfo)
-                 * im_pop_iso(t,iso))$(p15_balanceflow_kcal_iso(t,iso,kfo)=0)
+                 p15_kcal_pc_iso(t,iso,kfo)
+                 * im_pop_iso(t,iso)
                ) / sum(i_to_iso(i,iso),
-                   (im_pop_iso(t,iso))$(p15_balanceflow_kcal_iso(t,iso,kfo)=0)
+                   im_pop_iso(t,iso)
                );
 
    p15_balanceflow_kcal(t,i,kfo)$(
