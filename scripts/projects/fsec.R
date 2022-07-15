@@ -89,7 +89,7 @@ fsecScenario <- function(scenario) {
   cfg$info$flag   <- v
   cfg$input       <- input
   cfg$title       <- paste(cfg$info$flag, scenario, sep = "_")
-  cfg$results_folder <- "output/:title:"
+  #cfg$results_folder <- "output/:title:"
   cfg$recalibrate <- FALSE
   cfg$qos         <- "priority_maxMem"
   cfg$output      <- c(cfg$output,
