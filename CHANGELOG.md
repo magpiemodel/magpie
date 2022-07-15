@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
-- **59_som** Now calculates soil C for fallow
+- **59_som** Now calculates soil C for fallow for cellpool realization (the other realization only considers total cropland anyhow)
+
 ### added
 - **scripts* added output scripts for FSEC FSDP runs
 
