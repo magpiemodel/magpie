@@ -4,7 +4,7 @@ gms$c09_gdp_scenario;;;SSP1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c09_pal_scenario;;;;SSP1;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s12_interest_lic;;;0.06;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s12_interest_hic;;;0.04;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-gms$food;"anthro_iso_jun22";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+gms$food;anthro_iso_jun22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s15_exo_waste;;;;;0;0;0;0;0;0;0;0;1;;;;;;;;;;;;;;;;;;;
 gms$s15_exo_diet;;;;;1;1;1;1;1;1;1;1;0;;;;;;;;;;;;;;;;;;;
 gms$c15_kcal_scen;;;;;no_underweight;no_overweight;endo;endo;endo;endo;endo;endo;healthy_BMI;;;;;;;;;;;;;;;;;;;
