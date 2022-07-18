@@ -13,6 +13,9 @@ fsecScenario <- function(scenario) {
 
   source("config/default.cfg")
 
+  # version number
+  v <- "v10"
+
   x <- list(bau            = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = "FSEC"),
             ssp1           = list(standard = c("cc", "rcp1p9", "SSP1", "NDC", "ForestryEndo"),
@@ -114,12 +117,8 @@ fsecScenario <- function(scenario) {
   cfg <- setScenario(cfg, x[[scenario]]$standard)
   cfg <- setScenario(cfg, x[[scenario]]$fsec, scenario_config = "config/scenario_fsec.csv")
 
-  # overwrite cellular input (was overwritten by RCP from standard scenario_config)
-  #cfg$input['cellular'] <- input['cellular']
-
   # general
-  #cfg$info$flag   <- v
-  cfg$title       <- paste(cfg$info$flag, scenario, sep = "_")
+  cfg$title       <- paste(v, scenario, sep = "_")
   #cfg$results_folder <- "output/:title:"
   cfg$recalibrate <- FALSE
   cfg$qos         <- "priority_maxMem"
