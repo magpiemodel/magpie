@@ -80,7 +80,7 @@ fsecScenario <- function(scenario) {
             fsdp = list(standard = c("cc", "rcp7p0", "SSP1", "NDC", "ForestryEndo"),
                         fsec = c("FSEC", "population", "institutions", "energy", "diet", "meat", "waste", "awms", "livestock", "cropefficiency", "biodiversity", "fairTrade", "timberCities", "REDDaff", "REDD", "landSparing", "waterSparing", "peatland", "allEmisPrice",
                         #"airPollution", ## ready yet?
-                        "soil"))
+                        "soil")),
             # Scenarios (combinations of transformation clusters)
             externalPressures   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "population", "institutions", "energy")),
@@ -108,7 +108,7 @@ fsecScenario <- function(scenario) {
             Sufficiency   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "noOverweight", "noUnderweight", "fruitsNutsVegSeeds", "monogastrics", "ruminants", "pulses", "processed", "fish", "waste")),
             Protection   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
-                                  fsec = c("FSEC", "waterSparing", "landSparing", "peatland")),
+                                  fsec = c("FSEC", "waterSparing", "landSparing", "peatland"))
             )
   # Assign selected scenario to cfg
   cfg <- setScenario(cfg, x[[scenario]]$standard)
