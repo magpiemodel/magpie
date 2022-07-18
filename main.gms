@@ -177,7 +177,7 @@ $title magpie
 *
 * Regionscode: 62eff8f7
 *
-* Regions data revision: 4.73
+* Regions data revision: 4.75
 *
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
