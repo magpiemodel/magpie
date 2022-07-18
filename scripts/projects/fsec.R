@@ -13,25 +13,16 @@ fsecScenario <- function(scenario) {
 
   source("config/default.cfg")
 
-  # FSEC input data
-  input <- c(regional    = "rev4.73FSECmodeling_e2bdb6cd_magpie.tgz",
-             cellular    = "rev4.73FSECmodeling_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-             validation  = "rev4.73FSECmodeling_e2bdb6cd_validation.tgz",
-             additional  = "additional_data_rev4.26.tgz",
-             calibration = "calibration_FSEC_18Jun22.tgz")
-  # version number
-  v <- "vTEST"
-
   x <- list(bau            = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = "FSEC"),
             ssp1           = list(standard = c("cc", "rcp1p9", "SSP1", "NDC", "ForestryEndo"),
-                                  fsec = "FSEC"),
+                                  fsec = "FSEC", "SSP1"),
             ssp3           = list(standard = c("cc", "rcp7p0", "SSP3", "NDC", "ForestryEndo"),
-                                  fsec = "FSEC"),
+                                  fsec = "FSEC", "SSP3"),
             ssp4           = list(standard = c("cc", "rcp6p0", "SSP4", "NDC", "ForestryEndo"),
-                                  fsec = "FSEC"),
+                                  fsec = "FSEC", "SSP4"),
             ssp5           = list(standard = c("cc", "rcp8p5", "SSP5", "NDC", "ForestryEndo"),
-                                  fsec = "FSEC"),
+                                  fsec = "FSEC", "SSP5"),
             # Individual transformation clusters:
             population     = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "population")),
@@ -39,11 +30,23 @@ fsecScenario <- function(scenario) {
                                   fsec = c("FSEC", "institutions")),
             energy         = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "energy")),
-            diet           = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
-                                  fsec = c("FSEC", "diet")),
-            meat           = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
-                                  fsec = c("FSEC", "meat")),
-            waste          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            noUnderweight  = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "noUnderweight")),
+            noOverweight  = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "noOverweight")),
+            fruitsNutsVegSeeds  = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "fruitsNutsVegSeeds")),
+            monogastrics  = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "monogastrics")),
+            ruminants     = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "ruminants")),
+            pulses        = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "pulses")),
+            processed     = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "processed")),
+            fish          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "fish")),
+            waste         = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "waste")),
             awms           = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "awms")),
@@ -61,48 +64,61 @@ fsecScenario <- function(scenario) {
                                   fsec = c("FSEC", "REDDaff")),
             REDD          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "REDD")),
+            landSharing   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "landSharing")),
             landSparing   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "landSparing")),
-            waterSparing   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            waterSparing  = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "waterSparing")),
-            peatland       = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            peatland      = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "peatland")),
-            airPollution   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            airPollution  = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "airPollution")),
             soil   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "soil")),
             # FSDP (all transformations active)
             fsdp = list(standard = c("cc", "rcp7p0", "SSP1", "NDC", "ForestryEndo"),
-                        fsec = c("FSEC", "population", "institutions", "energy", "diet", "meat", "waste", "awms", "livestock", "cropefficiency", "biodiversity", "fairTrade", "timberCities", "REDDaff", "REDD", "landSparing", "waterSparing", "peatland",
+                        fsec = c("FSEC", "population", "institutions", "energy", "diet", "meat", "waste", "awms", "livestock", "cropefficiency", "biodiversity", "fairTrade", "timberCities", "REDDaff", "REDD", "landSparing", "waterSparing", "peatland", "allEmisPrice"
                         #"airPollution", ## ready yet?
                         "soil"))
             # Scenarios (combinations of transformation clusters)
-            #Water + Soil
             externalPressures   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "population", "institutions", "energy")),
-            #Low ruminants + afforestation
-            #Diet_change + crop_rotations
-            #Soil + livst_monogastric
-            #All climate + nitrogen
-            #Biodiv+crop rotations
-            #All environment
-            #All health (Planetary Health diets; all diet switches without waste)
-            #All inclusion (pop, gdp+inst, timber, fair trade)
-            #Bioeconomy + energy + timber
-            #Efficiency (NUE, livestock, awms, waste, fairtrade)
-            #Sufficiency (diet)
-            #Protection (water, land sparing, peatland)
+            waterSoil   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "waterSparing", "soil")),
+            meatForest   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "ruminants", "REDDaff")),
+            dietRotations   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "noOverweight", "noUnderweight", "fruitsNutsVegSeeds", "monogastrics", "ruminants", "pulses", "processed", "fish", "landSharing")),
+            soilMonogastrics = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "monogastics", "soil")),
+            allClimate   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "cropefficiency", "awms", "allEmisPrice")),
+            fullBiodiv   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                fsec = c("FSEC", "biodiversity", "landSharing")),
+            allEnvironment   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "biodiversity", "REDDaff", "landSparing", "waterSparing", "peatland", "soil")), #airPollution?
+            allHealth      = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "noOverweight", "noUnderweight", "fruitsNutsVegSeeds", "monogastrics", "ruminants", "pulses", "processed", "fish")),
+            allInclusion   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "population", "institutions", "timber", "fairTrade")),
+            #Bioeconomy + energy + timber # we do not have bioeconomy yet
+            Efficiency   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "cropefficiency", "awms", "waste", "fairTrade")),
+            Sufficiency   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "noOverweight", "noUnderweight", "fruitsNutsVegSeeds", "monogastrics", "ruminants", "pulses", "processed", "fish", "waste")),
+            Protection   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "waterSparing", "landSparing", "peatland")),
             )
   # Assign selected scenario to cfg
   cfg <- setScenario(cfg, x[[scenario]]$standard)
   cfg <- setScenario(cfg, x[[scenario]]$fsec, scenario_config = "config/scenario_fsec.csv")
 
   # overwrite cellular input (was overwritten by RCP from standard scenario_config)
-  cfg$input['cellular'] <- input['cellular']
+  #cfg$input['cellular'] <- input['cellular']
 
   # general
-  cfg$info$flag   <- v
-  cfg$input       <- input
+  #cfg$info$flag   <- v
   cfg$title       <- paste(cfg$info$flag, scenario, sep = "_")
   #cfg$results_folder <- "output/:title:"
   cfg$recalibrate <- FALSE
