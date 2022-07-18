@@ -145,6 +145,8 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
+*
+* Used data set: rev4.74_h12_magpie.tgz
 * md5sum: NA
 * Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 *
@@ -232,7 +234,7 @@ $setglobal interest_rate  select_apr20
 $setglobal tc  endo_jan22
 $setglobal yields  managementcalib_aug19
 
-$setglobal food  anthropometrics_jan18
+$setglobal food  anthro_iso_jun22
 $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 
