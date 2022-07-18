@@ -54,4 +54,4 @@ input['cellular'];rev4.75FSEC_e2bdb6cd_1b5c3817_cellularmagpie_c200_MRI-ESM2-0-s
 input['regional'];rev4.75FSEC_e2bdb6cd_magpie.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 input['validation'];rev4.75FSEC_e2bdb6cd_validation.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 input['additional'];additional_data_rev4.26.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-input['calibration'];calibration_FSEC_18Jun22.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+input['calibration'];calibration_FSEC_18Jul22.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
