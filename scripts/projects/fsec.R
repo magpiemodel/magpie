@@ -77,6 +77,21 @@ fsecScenario <- function(scenario) {
                         #"airPollution", ## ready yet?
                         "soil"))
             # Scenarios (combinations of transformation clusters)
+            #Water + Soil
+            externalPressures   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "population", "institutions", "energy")),
+            #Low ruminants + afforestation
+            #Diet_change + crop_rotations
+            #Soil + livst_monogastric
+            #All climate + nitrogen
+            #Biodiv+crop rotations
+            #All environment
+            #All health (Planetary Health diets; all diet switches without waste)
+            #All inclusion (pop, gdp+inst, timber, fair trade)
+            #Bioeconomy + energy + timber
+            #Efficiency (NUE, livestock, awms, waste, fairtrade)
+            #Sufficiency (diet)
+            #Protection (water, land sparing, peatland)
             )
   # Assign selected scenario to cfg
   cfg <- setScenario(cfg, x[[scenario]]$standard)
