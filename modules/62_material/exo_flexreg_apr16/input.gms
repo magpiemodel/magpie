@@ -10,3 +10,10 @@ table f62_dem_material(t_all,i,kall)  Historical material demand (mio. tDM)
 $ondelim
 $include "./modules/62_material/input/f62_dem_material.cs3"
 $offdelim;
+
+table f62_dem_bioplastics(t_all,i,kall)  Material demand for bioplastic production (mio. tDM)
+$ondelim
+$include "./modules/62_material/input/f62_dem_bioplastics.cs3"
+$offdelim;
+
+scalar s62_bioplastics switch to include material demand for bioplastics (binary) / 0 /;

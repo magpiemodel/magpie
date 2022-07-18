@@ -22,7 +22,7 @@
                       sum(ct,f62_dem_material(ct,i2,kall))*s62_historical
                       +
                       (p62_dem_material_lh(i2,kall) * p62_scaling_factor(i2))
-                      *(1-s62_historical)
+                      *(1-s62_historical) + sum(ct,f62_dem_bioplastics(ct,i2,kall)) * s62_bioplastics
                       ;
 
 *' Results are stored in the interface `vm_dem_material` and this interface
