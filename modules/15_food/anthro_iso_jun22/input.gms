@@ -237,7 +237,7 @@ $offdelim;
 
 *** Exogenous food demand scenarios
 
-table f15_intake_EATLancet(t_scen15,iso,kcal_scen15,EAT_scen15,kfo)   EAT Lancet scenarios for food-specific intake (kcal per capita per day)
+table f15_intake_EATLancet(t_scen15,iso,kcal_scen15,EAT_scen15,kfo)   EAT Lancet scenarios for food specific intake (kcal per capita per day)
 $ondelim
 $include "./modules/15_food/input/f15_intake_EATLancet_iso.cs3"
 $offdelim;
