@@ -17,7 +17,7 @@ fsecScenario <- function(scenario) {
   v <- "v10"
 
   x <- list(bau            = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
-                                  fsec = "SSP1"),
+                                  fsec = "FSEC"),
             ssp1           = list(standard = c("cc", "rcp1p9", "SSP1", "NDC", "ForestryEndo"),
                                   fsec = "FSEC", "SSP1"),
             ssp3           = list(standard = c("cc", "rcp7p0", "SSP3", "NDC", "ForestryEndo"),

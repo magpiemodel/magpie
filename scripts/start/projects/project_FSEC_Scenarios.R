@@ -12,7 +12,6 @@
 library(gms)
 source("scripts/start_functions.R")
 source("scripts/projects/fsec.R")
-source("config/default.cfg")
 
 codeCheck <- FALSE
 
