@@ -78,7 +78,7 @@ fsecScenario <- function(scenario) {
                                   fsec = c("FSEC", "soil")),
             # FSDP (all transformations active)
             fsdp = list(standard = c("cc", "rcp7p0", "SSP1", "NDC", "ForestryEndo"),
-                        fsec = c("FSEC", "population", "institutions", "energy", "diet", "meat", "waste", "awms", "livestock", "cropefficiency", "biodiversity", "fairTrade", "timberCities", "REDDaff", "REDD", "landSparing", "waterSparing", "peatland", "allEmisPrice"
+                        fsec = c("FSEC", "population", "institutions", "energy", "diet", "meat", "waste", "awms", "livestock", "cropefficiency", "biodiversity", "fairTrade", "timberCities", "REDDaff", "REDD", "landSparing", "waterSparing", "peatland", "allEmisPrice",
                         #"airPollution", ## ready yet?
                         "soil"))
             # Scenarios (combinations of transformation clusters)
