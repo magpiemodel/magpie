@@ -18,7 +18,7 @@ codeCheck <- FALSE
 for (scenarioName in c(
   # Single transformation runs
   "population", "instituions", "energy",
-  "noUnderweight", "noOverweight", "fruitsNutsVegSeeds", "pulses", "monogastics", "ruminants", "processed", "fish", "waste",
+  "noUnderweight", "noOverweight", "fruitsNutsVegSeeds", "pulses", "monogastrics", "ruminants", "processed", "fish", "waste",
   "awms", "livestock", "cropefficiency", "biodiversity",
   # still missing: Bioeconomy
   "fairTrade", "timberCities", "REDDaff", "REDD",
