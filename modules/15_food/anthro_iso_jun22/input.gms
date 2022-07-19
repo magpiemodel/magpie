@@ -247,11 +247,5 @@ $ondelim
 $include "./modules/15_food/input/f15_supply2intake_ratio_FAO_iso.cs3"
 $offdelim;
 
-parameter f15_calib_fsupply(iso) Factor calibrating food supply as estimated from intake and FAO waste assumptions to FAO food supply (1)
-/
-$ondelim
-$include "./modules/15_food/input/f15_calib_factor_FAOfsupply_iso.cs4"
-$offdelim
-/;
 
 *** EOF input.gms ***
