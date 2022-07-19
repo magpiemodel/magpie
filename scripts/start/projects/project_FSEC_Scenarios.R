@@ -21,7 +21,7 @@ for (scenarioName in c(
   "noUnderweight", "noOverweight", "fruitsNutsVegSeeds", "pulses", "monogastics", "ruminants", "processed", "fish", "waste",
   "awms", "livestock", "cropefficiency", "biodiversity",
   # still missing: Bioeconomy
-  "fairTrade", "timberCities", "REDDaff", "REDD"
+  "fairTrade", "timberCities", "REDDaff", "REDD",
   "landSparing", "waterSparing", "peatland", "airPollution", "soil",
   # Scenario combination runs
   "bau", "ssp1", "ssp3", "ssp4", "ssp5", "fsdp",
