@@ -94,7 +94,7 @@ fsecScenario <- function(scenario) {
             dietRotations       = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "noOverweight", "noUnderweight", "fruitsNutsVegSeeds", "monogastrics", "ruminants", "pulses", "processed", "fish", "landSharing")),
             soilMonogastrics    = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
-                                  fsec = c("FSEC", "monogastics", "soil")),
+                                  fsec = c("FSEC", "monogastrics", "soil")),
             allClimate          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "cropefficiency", "awms", "allEmisPrice")),
             fullBiodiv          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
