@@ -9,14 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
-- **59_som** Now calculates soil C for fallow for cellpool realization (the other realization only considers total cropland anyhow)
+- **59_som** Now calculates soil C for fallow
+- **inputs** updated non-food initial prices, MACCs curves, and removed suitability threshold of 0.1 in all_marginal setting  
+- **documentation** added literature
 
 ### added
 - **scripts* added output scripts for FSEC FSDP runs
+- **15_food** added new realization with country level exogenous diets, product-specific intake estimates, new scenarios for exogenous BMI and decomposition switches for EAT Lancet diets. Simplified code and improved iteration procedure.
 
 ### removed
-
-### fixed
+- **15_food** removed read-in of non-needed input file "f15_calib_factor_FAOfsupply_iso"
 
 
 ## [4.5.0] - 2022-07-07
