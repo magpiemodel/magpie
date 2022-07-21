@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: extract report in rds format from run
+# description: extract report in rds and mif format from run
 # comparison script: FALSE
 # position: 2
 # ---------------------------------------------------------------
