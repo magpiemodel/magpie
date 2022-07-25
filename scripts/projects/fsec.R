@@ -14,7 +14,7 @@ fsecScenario <- function(scenario) {
   source("config/default.cfg")
 
   # version number
-  v <- "v10_FSEC"
+  v <- "v11_FSEC"
 
   x <- list(c_BAU            = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = "FSEC"),
@@ -104,7 +104,7 @@ fsecScenario <- function(scenario) {
             b_FullBiodiv         = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                 fsec = c("FSEC", "biodiversity", "landSharing")),
             b_AllEnvironment     = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
-                                  fsec = c("FSEC", "biodiversity", "REDDaff", "landSparing", "waterSparing", "peatland", "soil", "airPollution")), 
+                                  fsec = c("FSEC", "biodiversity", "REDDaff", "landSparing", "waterSparing", "peatland", "soil", "airPollution")),
             b_AllHealth          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "noOverweight", "noUnderweight", "fruitsNutsVegSeeds", "monogastrics", "ruminants", "pulses", "processed", "fish")),
             b_AllInclusion       = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
