@@ -20,7 +20,7 @@ codeCheck <- FALSE
 
 # -----------------------------------------------------------------------------------------------------------------
 # Calibration run
-cfg       <- fsecScenario(scenario = "bau")
+cfg       <- fsecScenario(scenario = "c_BAU")
 cfg$title <- "calibration_FSEC_25Jul22"
 cfg$results_folder                  <- "output/:title:"
 cfg$recalibrate                     <- TRUE
