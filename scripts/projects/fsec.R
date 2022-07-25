@@ -18,13 +18,13 @@ fsecScenario <- function(scenario) {
 
   x <- list(c_BAU            = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = "FSEC"),
-            c_ssp1           = list(standard = c("cc", "rcp1p9", "SSP1", "NDC", "ForestryEndo"),
+            d_ssp1           = list(standard = c("cc", "rcp1p9", "SSP1", "NDC", "ForestryEndo"),
                                   fsec = "FSEC", "SSP1"),
-            c_ssp3           = list(standard = c("cc", "rcp7p0", "SSP3", "NDC", "ForestryEndo"),
+            d_ssp3           = list(standard = c("cc", "rcp7p0", "SSP3", "NDC", "ForestryEndo"),
                                   fsec = "FSEC", "SSP3"),
-            c_ssp4           = list(standard = c("cc", "rcp6p0", "SSP4", "NDC", "ForestryEndo"),
+            d_ssp4           = list(standard = c("cc", "rcp6p0", "SSP4", "NDC", "ForestryEndo"),
                                   fsec = "FSEC", "SSP4"),
-            c_ssp5           = list(standard = c("cc", "rcp8p5", "SSP5", "NDC", "ForestryEndo"),
+            d_ssp5           = list(standard = c("cc", "rcp8p5", "SSP5", "NDC", "ForestryEndo"),
                                   fsec = "FSEC", "SSP5"),
             # Individual transformation clusters:
             a_Population         = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
