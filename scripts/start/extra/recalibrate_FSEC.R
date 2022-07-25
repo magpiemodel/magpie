@@ -21,7 +21,7 @@ codeCheck <- FALSE
 # -----------------------------------------------------------------------------------------------------------------
 # Calibration run
 cfg       <- fsecScenario(scenario = "bau")
-cfg$title <- "calibration_FSEC_19Jul22"
+cfg$title <- "calibration_FSEC_25Jul22"
 cfg$results_folder                  <- "output/:title:"
 cfg$recalibrate                     <- TRUE
 cfg$recalibrate_landconversion_cost <- TRUE
