@@ -17,18 +17,20 @@ codeCheck <- FALSE
 
 for (scenarioName in c(
   # Single transformation runs
-  "population", "instituions", "energy",
-  "noUnderweight", "noOverweight", "fruitsNutsVegSeeds", "pulses", "monogastrics", "ruminants", "processed", "fish", "waste",
-  "awms", "livestock", "cropefficiency", "biodiversity",
+  "a_Population", "a_SocioEconDevelop", "a_EnergyTrans",
+  "a_NoUnderweight", "a_NoOverweight", "a_DietVegFruitsNutsSeeds", "a_DietLegumes", "a_DietMonogastrics", "a_DietRuminants", "a_DietEmptyCals", "a_DietFish", "a_LessFoodWaste",
+  "a_AnimalWasteMngmt", "a_LivestockMngmt", "a_NitrogenUptakeEff", "a_LandUseDiversity",
   # still missing: Bioeconomy
-  "fairTrade", "timberCities", "REDDaff", "REDD",
-  "landSparing", "waterSparing", "peatland", "airPollution", "soil",
+  "a_FairTrade", "a_TimberCities", "a_REDDaff", "a_REDD", "a_CropRotations",
+  "a_LandSparing", "a_WaterSparing", "a_PeatlandSparing", "a_AirPollution", "a_SoilCarbon",
   # Scenario combination runs
-  "bau", "ssp1", "ssp3", "ssp4", "ssp5", "fsdp",
-  "externalPressures", "waterSoil", "meatForest", "dietRotations", "soilMonogastrics",
-  "allClimate", "fullBiodiv", "allEnvironment", "allHealth", "allInclusion",
+  "c_BAU", "c_ssp1", "c_ssp3", "c_ssp4", "c_ssp5",
+  "b_FSDP",
+  "b_ExternalPressures", "b_WaterSoil", "b_REDDaffDietRuminants", "b_DietRotations",
+  "b_SoilMonogastric", "b_SoilRotations",
+  "b_AllClimate", "b_FullBiodiv", "b_AllEnvironment", "b_AllHealth", "b_AllInclusion",
   # still missing: Bioeconomy + energy + timber
-  "Efficiency", "Sufficiency", "Protection")) {
+  "b_Efficiency", "b_Sufficiency", "b_Protection")) {
 
     # Start runs
     cfg <- fsecScenario(scenario = scenarioName)
