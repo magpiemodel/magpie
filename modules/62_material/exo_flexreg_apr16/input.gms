@@ -11,9 +11,14 @@ $ondelim
 $include "./modules/62_material/input/f62_dem_material.cs3"
 $offdelim;
 
-table f62_dem_bioplastics(t_all,i,kall)  Material demand for bioplastic production (mio. tDM)
+table f62_bioplastic2biomass(kall)  Biomass demand for one unit of bioplastics (mio. tDM)
 $ondelim
-$include "./modules/62_material/input/f62_dem_bioplastics.cs3"
+$include "./modules/62_material/input/f62_bioplastic2biomass.cs3"
 $offdelim;
 
-scalar s62_bioplastics switch to include material demand for bioplastics (binary) / 0 /;
+table f62_hist_bioplastic_demand(t_all)  Historic demand for bioplastics (mio. t)
+$ondelim
+$include "./modules/62_material/input/f62_hist_bioplastic_demand.cs3"
+$offdelim;
+
+scalar s62_max_demand_bioplastics maximum demand for bioplastics / 0 /;

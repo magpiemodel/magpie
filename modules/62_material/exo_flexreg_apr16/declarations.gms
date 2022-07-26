@@ -8,12 +8,15 @@
 
 scalar
   s62_historical                 Switch for turning off historical material demand (1) / 1 /
+  s62_growth_rate_bioplastic     Growth rate of bioplastic demand (1) /1/;
 ;
 
 parameters
-  p62_dem_material_lh(i,kall)    Material demand in last historical timestep (mio. tDM per yr)
-  p62_dem_food_lh(i)             Food demand in last historical timestep (mio. tDM per yr)
-  p62_scaling_factor(i)			 Scaling factor for material demand (1)
+  p62_dem_material_lh(i,kall)            Material demand in last historical timestep (mio. tDM per yr)
+  p62_dem_food_lh(i)                     Food demand in last historical timestep (mio. tDM per yr)
+  p62_scaling_factor(i)			             Scaling factor for material demand (1)
+  p62_bioplastic_demand(t_all)           Demand for bioplastic (mio. t)
+  p62_biomass4bioplastic(t_all, i, kall) Regional biomass demand for bioplastic production (mio. tDM)
 ;
 
 positive variables

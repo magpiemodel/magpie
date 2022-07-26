@@ -22,9 +22,10 @@
                       sum(ct,f62_dem_material(ct,i2,kall))*s62_historical
                       +
                       (p62_dem_material_lh(i2,kall) * p62_scaling_factor(i2))
-                      *(1-s62_historical) + sum(ct,f62_dem_bioplastics(ct,i2,kall)) * s62_bioplastics
+                      *(1-s62_historical) + sum(ct, p62_biomass4bioplastic(ct, i2, kall)) 
                       ;
 
 *' Results are stored in the interface `vm_dem_material` and this interface
 *' is then used in demand([16_demand]) module as a part of global supply-demand
 *' balance for crop, livestock, secondary products and residues.
+
