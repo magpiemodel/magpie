@@ -36,7 +36,7 @@ general_settings <- function(title) {
   cfg$output      <- c(cfg$output,
                        "rds_report_iso",
                        "extra/disaggregation_BII"
-                       #"projects/FSEC_dietaryIndicators",
+                       "projects/FSEC_dietaryIndicators",
                        #"projects/FSEC_environmentalPollution_grid"
                       )
 
