@@ -9,9 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **scripts** output/extra/disaggregation_BII.R adjusted BII output for primary and secondary other land
 - **59_som** Now calculates soil C for fallow
 - **inputs** updated non-food initial prices, MACCs curves, and removed suitability threshold of 0.1 in all_marginal setting  
 - **documentation** added literature
+
 
 ### added
 - **scripts* added output scripts for FSEC FSDP runs
