@@ -15,6 +15,11 @@ source("scripts/projects/fsec.R")
 
 codeCheck <- FALSE
 
+# population scenarios for post-processing
+gms::download_unpack(input = "FSEC_populationScenarios_v1_12-07-22.tgz",
+                     targetdir = "./input",
+                     repositories = cfg$repositories)
+
 for (scenarioName in c(
   # Single transformation runs
   "a_Population", "a_SocioEconDevelop", "a_EnergyTrans",
