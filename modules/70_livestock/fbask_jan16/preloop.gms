@@ -53,7 +53,7 @@ im_feed_baskets(t_all,i,kap,kcer70) =
 * After the substitution of foddr with SCP (1-i70_foddr_scp_fadeout), SCP is converted
 * back DM fm_attributes("nr","scp").
 im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")
-             + (im_feed_baskets(t_all,i,kap,"foddr") * (1-i70_foddr_scp_fadeout(t_all,i)) * 
+             + (im_feed_baskets(t_all,i,kap,"foddr") * (1-i70_foddr_scp_fadeout(t_all,i)) *
              fm_attributes("nr","foddr")) / fm_attributes("nr","scp");
 im_feed_baskets(t_all,i,kap,"foddr") =
                im_feed_baskets(t_all,i,kap,"foddr") * i70_foddr_scp_fadeout(t_all,i);
