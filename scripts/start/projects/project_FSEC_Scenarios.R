@@ -16,6 +16,7 @@ source("scripts/projects/fsec.R")
 codeCheck <- FALSE
 
 # population scenarios for post-processing
+source("config/default.cfg")
 gms::download_unpack(input = "FSEC_populationScenarios_v1_12-07-22.tgz",
                      targetdir = "./input",
                      repositories = cfg$repositories)
