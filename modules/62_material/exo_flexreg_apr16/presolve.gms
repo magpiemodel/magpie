@@ -23,10 +23,11 @@ p62_scaling_factor(i)$(p62_dem_food_lh(i) > 0) = sum(kfo, vm_dem_food.l(i,kfo)) 
 
 *' @stop
 
-* in t_past, biomass demand for bioplastic is already included in the general material demand, which is 
+* In t_past, biomass demand for bioplastic is already included in the general material demand, which is 
 * scaled for future years. Therefore we set bioplastic demand for t_past to zero, and subtract scaled 
 * bioplastic demand from the last year of t_past from all future bioplastic demand
 if (sum(sameas(t_past,t),1) = 1,
+  p62_dem_bioplastic_lh(i) = p62_dem_bioplastic(t,i);
   p62_dem_bioplastic(t,i) = 0;
 else
   p62_dem_bioplastic(t,i) = p62_dem_bioplastic(t,i) - p62_dem_bioplastic_lh(i) * p62_scaling_factor(i));

@@ -14,7 +14,10 @@
 *' as the scaled version of material demand in last historical timestep
 *' depending on a scaling factor. This scaling factor is calculated as the
 *' ratio beween the food demand from last timestep and the food demand from
-*' the last historical time step.
+*' the last historical time step. For future years, additional biomass demand for 
+*' the production of bioplastics is included according to the scenario choice
+*' (for historic years it is assumed that this demand is already part of the 
+*' general material demand).
 
  q62_dem_material(i2,kall) ..
                       vm_dem_material(i2,kall)
