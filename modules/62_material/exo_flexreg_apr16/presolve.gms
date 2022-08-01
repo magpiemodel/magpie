@@ -23,21 +23,19 @@ p62_scaling_factor(i)$(p62_dem_food_lh(i) > 0) = sum(kfo, vm_dem_food.l(i,kfo)) 
 
 *' @stop
 
-# calculate bioplastic demand according to logistic curve for future years
-if (m_year(t)>2020,
- p62_bioplastic_demand(t) = s62_max_demand_bioplastics / (1 + exp(-s62_growth_rate_bioplastic*(m_year(t)-2050)))
-);
-
-* subtract bioplastic demand in 2010 from all years, as this is already included in biomass demand
-if (m_year(t)>=2010,
- p62_bioplastic_demand(t) = p62_bioplastic_demand(t) - p62_bioplastic_demand("y2010")
+* in t_past, biomass demand for bioplastic is already included in the general material demand, which is 
+* scaled for future years. Therefore we set bioplastic demand for t_past to zero, and subtract scaled 
+* bioplastic demand from the last year of t_past from all future bioplastic demand
+if (sum(sameas(t_past,t),1) = 1,
+  p62_dem_bioplastic(t,i) = 0;
+else
+  p62_dem_bioplastic(t,i) = p62_dem_bioplastic(t,i) - p62_dem_bioplastic_lh(i) * p62_scaling_factor(i));
 );
 
 * if max. bioplastic demand is set to zero, overwrite calculations with zero
-if (s62_max_demand_bioplastics == 0,
- p62_bioplastic_demand(t) = 0
+if (s62_max_dem_bioplastic = 0,
+ p62_dem_bioplastic(t,i) = 0
 );
 
 * translate bioplastic demand to biomass demand using conversion factors between bioplastic and the different biomass sources
-* and population for spatial disaggregation
-p62_biomass4bioplastic(t, i, kall) = p62_bioplastic_demand(t) * f62_bioplastic2biomass(kall) * (im_pop(t, i) / sum(i2, im_pop(t, i2)));
+p62_biomass4bioplastic(t,i,kall) = p62_dem_bioplastic(t,i) * f62_bioplastic2biomass(kall);

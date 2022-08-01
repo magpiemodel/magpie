@@ -12,11 +12,12 @@ scalar
 ;
 
 parameters
-  p62_dem_material_lh(i,kall)            Material demand in last historical timestep (mio. tDM per yr)
-  p62_dem_food_lh(i)                     Food demand in last historical timestep (mio. tDM per yr)
-  p62_scaling_factor(i)			             Scaling factor for material demand (1)
-  p62_bioplastic_demand(t_all)           Demand for bioplastic (mio. t)
-  p62_biomass4bioplastic(t_all, i, kall) Regional biomass demand for bioplastic production (mio. tDM)
+  p62_dem_material_lh(i,kall)          Material demand in last historical timestep (mio. tDM per yr)
+  p62_dem_food_lh(i)                   Food demand in last historical timestep (mio. tDM per yr)
+  p62_dem_bioplastic_lh(i)             Demand for bioplastics in last historical timestep (mio. t)
+  p62_scaling_factor(i)			           Scaling factor for material demand (1)
+  p62_dem_bioplastic(t,i)              Demand for bioplastic (mio. t)
+  p62_biomass4bioplastic(t, i, kall)   Regional biomass demand for bioplastic production (mio. tDM)
 ;
 
 positive variables

@@ -11,14 +11,21 @@ $ondelim
 $include "./modules/62_material/input/f62_dem_material.cs3"
 $offdelim;
 
-table f62_bioplastic2biomass(kall)  Biomass demand for one unit of bioplastics (mio. tDM)
+parameter f62_bioplastic2biomass(kall)  Biomass demand for one unit of bioplastics (mio. tDM)
+/
 $ondelim
-$include "./modules/62_material/input/f62_bioplastic2biomass.cs3"
-$offdelim;
+$include "./modules/62_material/input/f62_bioplastic2biomass.csv"
+$offdelim
+/
+;
 
-table f62_hist_bioplastic_demand(t_all)  Historic demand for bioplastics (mio. t)
+parameter f62_hist_dem_bioplastic(t_all)  Historic demand for bioplastics (mio. t)
+/
 $ondelim
-$include "./modules/62_material/input/f62_hist_bioplastic_demand.cs3"
-$offdelim;
+$include "./modules/62_material/input/f62_hist_dem_bioplastic.csv"
+$offdelim
+/
+;
 
-scalar s62_max_demand_bioplastics maximum demand for bioplastics / 0 /;
+scalar s62_max_dem_bioplastic maximum demand for bioplastics / 0 /;
+scalar s62_midpoint_dem_bioplastic midpoint of logistic function for bioplastic demand / 2050 /;
