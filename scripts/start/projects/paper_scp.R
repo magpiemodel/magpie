@@ -18,10 +18,8 @@ library(gms)
 library(lucode2)
 library(magclass)
 
-# source functions needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
-# source default config file
 source("config/default.cfg")
 
 # prefix, added in front of title
@@ -48,7 +46,15 @@ cfg$gms$kfo_rd <- "livst_rum"
 # Start MAgPIE runs with varying substitution targets of ruminant meat with MP by 2050, based on protein/cap/day basis
 for (MP in c(0,20,50,80)) {
   cfg$title <- paste(prefix,paste0("SSP2-Ref-MP",MP),sep="_")
-  if (MP == 0) scp_scen <- "constant" else if (MP == 20) scp_scen <- "sigmoid_80pc_20_50" else if (MP == 50) scp_scen <- "sigmoid_50pc_20_50" else if (MP == 80) scp_scen <- "sigmoid_20pc_20_50"
+  if (MP == 0) {
+    scp_scen <- "constant" 
+  } else if (MP == 20) {
+    scp_scen <- "sigmoid_80pc_20_50" 
+  } else if (MP == 50) {
+    scp_scen <- "sigmoid_50pc_20_50" 
+  }else if (MP == 80) {
+    scp_scen <- "sigmoid_20pc_20_50"
+  }
   cfg$gms$c15_rumdairy_scp_scen <- scp_scen
   start_run(cfg,codeCheck=FALSE)
 }

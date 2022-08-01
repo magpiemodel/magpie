@@ -18,10 +18,8 @@ library(gms)
 library(lucode2)
 library(magclass)
 
-# Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
-#start MAgPIE run
 source("config/default.cfg")
 
 #cfg$force_download <- TRUE
@@ -55,7 +53,6 @@ for (pol in c("CurPol","Carbon","Biodiversity","Integrated")) {
       cfg$gms$c35_protect_scenario <- "WDPA"
       cfg$gms$c30_snv_target <- "none"
       cfg$gms$s30_snv_shr <- 0
-      #cfg$gms$c56_emis_policy <- "redd+_nosoil"
       cfg$gms$s56_c_price_induced_aff <- 0
     } else if (pol == "Carbon") {
       cfg <- setScenario(cfg,c(ssp,"NPI","rcp1p9"))
@@ -73,7 +70,6 @@ for (pol in c("CurPol","Carbon","Biodiversity","Integrated")) {
       cfg$gms$c35_protect_scenario <- "WDPA"
       cfg$gms$c30_snv_target <- "none"
       cfg$gms$s30_snv_shr <- 0
-      #cfg$gms$c56_emis_policy <- "redd+_nosoil"
       cfg$gms$s56_c_price_induced_aff <- 1
     } else if (pol == "Biodiversity") {
       cfg <- setScenario(cfg,c(ssp,"NPI","rcp4p5"))
@@ -90,7 +86,6 @@ for (pol in c("CurPol","Carbon","Biodiversity","Integrated")) {
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_snv_target <- "by2030"
       cfg$gms$s30_snv_shr <- 0.2
-      #cfg$gms$c56_emis_policy <- "redd+_nosoil"
       cfg$gms$s56_c_price_induced_aff <- 0
     } else if (pol == "Integrated") {
       cfg <- setScenario(cfg,c(ssp,"NPI","rcp1p9"))
@@ -107,11 +102,9 @@ for (pol in c("CurPol","Carbon","Biodiversity","Integrated")) {
       cfg$gms$c35_protect_scenario <- "BH_IFL"
       cfg$gms$c30_snv_target <- "by2030"
       cfg$gms$s30_snv_shr <- 0.2
-      #cfg$gms$c56_emis_policy <- "redd+_nosoil"
       cfg$gms$s56_c_price_induced_aff <- 1
     }
     cfg$title <- paste(prefix,paste0(ssp,"-",pol),sep="_")
     start_run(cfg,codeCheck=FALSE)
-    #    cfg$recalibrate <- FALSE
   }
 }
