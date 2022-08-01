@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **config** added `s62_max_dem_bioplastic` and `s62_midpoint_dem_bioplastic` to define bioplastic scenario
+- **62_material** added biomass demand for bioplastic production
 - **scripts** output/extra/disaggregation_BII.R adjusted BII output for primary and secondary other land
 - **59_som** Now calculates soil C for fallow
 - **inputs** updated non-food initial prices, MACCs curves, and removed suitability threshold of 0.1 in all_marginal setting  
@@ -16,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### added
-- **scripts* added output scripts for FSEC FSDP runs
+- **scripts** added output scripts for FSEC FSDP runs
 - **15_food** added new realization with country level exogenous diets, product-specific intake estimates, new scenarios for exogenous BMI and decomposition switches for EAT Lancet diets. Simplified code and improved iteration procedure.
 
 ### removed

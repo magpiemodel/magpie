@@ -17,7 +17,7 @@ parameters
   p62_dem_bioplastic_lh(i)             Demand for bioplastics in last historical timestep (mio. t)
   p62_scaling_factor(i)			           Scaling factor for material demand (1)
   p62_dem_bioplastic(t,i)              Demand for bioplastic (mio. t)
-  p62_biomass4bioplastic(t, i, kall)   Regional biomass demand for bioplastic production (mio. tDM)
+  p62_biomass4bioplastic(t,i,kall)     Regional biomass demand for bioplastic production (mio. tDM)
 ;
 
 positive variables

@@ -30,7 +30,7 @@ if (sum(sameas(t_past,t),1) = 1,
   p62_dem_bioplastic_lh(i) = p62_dem_bioplastic(t,i);
   p62_dem_bioplastic(t,i) = 0;
 else
-  p62_dem_bioplastic(t,i) = p62_dem_bioplastic(t,i) - p62_dem_bioplastic_lh(i) * p62_scaling_factor(i));
+  p62_dem_bioplastic(t,i) = p62_dem_bioplastic(t,i) - p62_dem_bioplastic_lh(i) * p62_scaling_factor(i);
 );
 
 * if max. bioplastic demand is set to zero, overwrite calculations with zero
