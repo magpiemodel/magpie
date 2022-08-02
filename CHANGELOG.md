@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **59_som** Now calculates soil C for fallow
 - **inputs** updated non-food initial prices, MACCs curves, and removed suitability threshold of 0.1 in all_marginal setting  
 - **documentation** added literature
-
+- **scripts/start** cleanup of old start scripts
 
 ### added
 - **scripts* added output scripts for FSEC FSDP runs
@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### fixed
+- **43_water_availability** added missing years after 2100 in "f43_wat_avail" to avoid infeasibilities in coupled runs with less_ts timesteps
 
 
 
