@@ -81,8 +81,7 @@ fsecScenario <- function(scenario) {
                                         fsec = c("FSEC", "soil")),
             # FSDP (all transformations active)
             b_FSDP = list(standard = c("cc", "rcp7p0", "SSP1", "NDC", "ForestryEndo"),
-                        fsec = c("FSEC", "population", "institutions", "energy", "noOverweight", "noUnderweight",
-                        "fruitsNutsVegSeeds", "monogastrics", "ruminants", "pulses", "processed", "fish", "waste",
+                        fsec = c("FSEC", "population", "institutions", "energy", "allDietAndWaste",
                         "awms", "livestock", "cropefficiency", "biodiversity", "fairTrade", "timberCities",
                         "REDDaff", "REDD", "landSharing", "landSparing", "waterSparing", "peatland", "allEmisPrice",
                         "airPollution", "soil")),
@@ -94,7 +93,7 @@ fsecScenario <- function(scenario) {
             b_REDDaffDietRuminants = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "ruminants", "REDDaff")),
             b_DietRotations      = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
-                                  fsec = c("FSEC", "noOverweight", "noUnderweight", "fruitsNutsVegSeeds", "monogastrics", "ruminants", "pulses", "processed", "fish", "landSharing")),
+                                  fsec = c("FSEC", "allDiet", "landSharing")),
             b_SoilMonogastric    = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "monogastrics", "soil")),
             b_SoilRotations      = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
@@ -106,14 +105,14 @@ fsecScenario <- function(scenario) {
             b_AllEnvironment     = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "biodiversity", "REDDaff", "landSparing", "waterSparing", "peatland", "soil", "airPollution")),
             b_AllHealth          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
-                                  fsec = c("FSEC", "noOverweight", "noUnderweight", "fruitsNutsVegSeeds", "monogastrics", "ruminants", "pulses", "processed", "fish")),
+                                  fsec = c("FSEC", "allDiet")),
             b_AllInclusion       = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "population", "institutions", "timberCities", "fairTrade")),
             #Bioeconomy + energy + timber # we do not have bioeconomy yet
             b_Efficiency          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "cropefficiency", "awms", "waste", "fairTrade")),
             b_Sufficiency         = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
-                                  fsec = c("FSEC", "noOverweight", "noUnderweight", "fruitsNutsVegSeeds", "monogastrics", "ruminants", "pulses", "processed", "fish", "waste")),
+                                  fsec = c("FSEC", "allDietAndWaste")),
             b_Protection          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "waterSparing", "landSparing", "peatland"))
             )
