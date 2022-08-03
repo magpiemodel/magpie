@@ -18,13 +18,13 @@ fsecScenario <- function(scenario) {
 
   x <- list(c_BAU            = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = "FSEC"),
-            d_ssp1           = list(standard = c("cc", "rcp1p9", "SSP1", "NDC", "ForestryEndo"),
+            d_SSP1           = list(standard = c("cc", "rcp1p9", "SSP1", "NDC", "ForestryEndo"),
                                   fsec = "FSEC", "SSP1"),
-            d_ssp3           = list(standard = c("cc", "rcp7p0", "SSP3", "NDC", "ForestryEndo"),
+            d_SSP3           = list(standard = c("cc", "rcp7p0", "SSP3", "NDC", "ForestryEndo"),
                                   fsec = "FSEC", "SSP3"),
-            d_ssp4           = list(standard = c("cc", "rcp6p0", "SSP4", "NDC", "ForestryEndo"),
+            d_SSP4           = list(standard = c("cc", "rcp6p0", "SSP4", "NDC", "ForestryEndo"),
                                   fsec = "FSEC", "SSP4"),
-            d_ssp5           = list(standard = c("cc", "rcp8p5", "SSP5", "NDC", "ForestryEndo"),
+            d_SSP5           = list(standard = c("cc", "rcp8p5", "SSP5", "NDC", "ForestryEndo"),
                                   fsec = "FSEC", "SSP5"),
             # Individual transformation clusters:
             a_Population         = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
@@ -80,7 +80,7 @@ fsecScenario <- function(scenario) {
             a_SoilCarbon         = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                         fsec = c("FSEC", "soil")),
             # FSDP (all transformations active)
-            b_FSDP = list(standard = c("cc", "rcp7p0", "SSP1", "NDC", "ForestryEndo"),
+            e_FSDP = list(standard = c("cc", "rcp7p0", "SSP1", "NDC", "ForestryEndo"),
                         fsec = c("FSEC", "population", "institutions", "energy", "allDietAndWaste",
                         "awms", "livestock", "cropefficiency", "biodiversity", "fairTrade", "timberCities",
                         "REDDaff", "REDD", "landSharing", "landSparing", "waterSparing", "peatland", "allEmisPrice",
