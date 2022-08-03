@@ -6,4 +6,4 @@
 # |  Contact: magpie@pik-potsdam.de
 
 name,type,reason
-vm_emissions_reg,input,not needed
+vm_btm_reg,input,not needed
