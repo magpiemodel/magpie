@@ -31,4 +31,7 @@ sets
   maccs_steps maccs tax level steps
    / 1*201 /
 
+  scen57 scenarios
+   / Default, Optimistic, Pessimistic /
+
 ;
