@@ -11,3 +11,4 @@ pm_interest,input,questionnaire
 pm_prod_init,input,questionnaire
 vm_prod,input,questionnaire
 pm_labor_prod,input,questionnaire
+fm_wage_scaling,par,questionaire
