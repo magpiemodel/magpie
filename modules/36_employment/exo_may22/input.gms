@@ -66,3 +66,10 @@ $ondelim
 $include "./modules/36_employment/exo_may22/input/f36_historical_share.csv"
 $offdelim
 ;
+
+table fm_wage_scaling(t_all,i) Historical capital share
+$ondelim
+$include "./modules/36_employment/exo_may22/input/fm_wage_scaling.csv"
+$offdelim
+;
+

@@ -18,13 +18,13 @@
  q38_ces_prodfun(j2,kcr) ..
   i38_ces_scale(j2,kcr) *
   (i38_ces_shr(j2,kcr)*sum(mobil38, v38_capital_need(j2,kcr,mobil38))**(-s38_ces_elast_par) +
-  (1 - i38_ces_shr(j2,kcr))*(sum(ct, pm_labor_prod(ct,j2)) * v38_labor_need(j2,kcr))**(-s38_ces_elast_par))**(-1/s38_ces_elast_par)
+  (1 - i38_ces_shr(j2,kcr))*(sum(ct, pm_labor_prod(ct,j2)) * v38_labor_need(j2,kcr) * sum(cell(i2,j2), fm_wage_scaling(ct, i2)))**(-s38_ces_elast_par))**(-1/s38_ces_elast_par)
   =e= 1 ;
 
 *' Labor costs: The labor costs are calculated by multiplying regional aggregated production with labor requirments per output.
 
 q38_cost_prod_labor(i2).. vm_cost_prod_crop(i2,"labor")
-                              =e= sum(kcr,sum(cell(i2,j2), vm_prod(j2,kcr) * v38_labor_need(j2,kcr) * s38_wage))
+                              =e= sum(kcr,sum(cell(i2,j2), vm_prod(j2,kcr) * v38_labor_need(j2,kcr) * s38_wage * sum(ct, fm_wage_scaling(ct,i2))))
                                 ;
 
 *' Investment costs: Investment are the summation of investment in mobile and immobile capital. The costs are annuitized,
