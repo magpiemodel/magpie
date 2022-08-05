@@ -68,7 +68,7 @@
                  sum((kli,awms_conf),
                     vm_manure_confinement(i2,kli,awms_conf,"nr")
                     * f51_ef3_confinement(i2,kli,awms_conf,n_pollutants_direct))
-                    * sum(ct, im_maccs_mitigation(ct,i2,"awms","n2o_n_direct"));
+                    * (1-sum(ct, im_maccs_mitigation(ct,i2,"awms","n2o_n_direct")));
 
 *' and manure excreted on pasture land:
  q51_emissionbal_man_past(i2,n_pollutants_direct) ..

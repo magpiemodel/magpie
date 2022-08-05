@@ -26,7 +26,7 @@
                 *fm_attributes("ge",k_conc53)*0.065)
                 + sum((k_noconc53,k_ruminants53),vm_dem_feed(i2,k_ruminants53,k_noconc53)
                  *fm_attributes("ge",k_noconc53)*0.065)
-  ) * sum(ct, im_maccs_mitigation(ct,i2,"ent_ferm","ch4"));
+  ) * (1-sum(ct, im_maccs_mitigation(ct,i2,"ent_ferm","ch4")));
 
 *' As such, methane from enteric fermentation depends on the feed quality and the purpose of livestock farming.
 *' The feed quality (measured by energy content of the feed type) can be `k_conc53`
@@ -49,7 +49,7 @@
   vm_emissions_reg(i2,"awms","ch4") =e=
             sum(kli, vm_manure(i2, kli, "confinement", "nr")
                 * sum(ct, f53_ef_ch4_awms(ct,i2,kli)))
-                * sum(ct, im_maccs_mitigation(ct,i2,"awms","ch4"));
+                * (1-sum(ct, im_maccs_mitigation(ct,i2,"awms","ch4")));
 
 *' The third equation of this realization calculates methane emissions from rice cultivation.
 *' As presented below CH4 from rice is a function of harvested area of rice
@@ -60,7 +60,7 @@
    vm_emissions_reg(i2,"rice","ch4") =e=
           sum((cell(i2,j2),w), vm_area(j2,"rice_pro",w)
               * sum(ct,f53_ef_ch4_rice(ct,i2)))
-              * sum(ct, im_maccs_mitigation(ct,i2,"rice","ch4"));
+              * (1-sum(ct, im_maccs_mitigation(ct,i2,"rice","ch4")));
 
 
 *' The fourth equation calculates emissions from burning crop residues for CH4.

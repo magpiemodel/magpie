@@ -8,6 +8,12 @@
 * option: PBL_2007,PBL_2019
 $setglobal c57_macc_version  PBL_2007
 
+scalars
+  upper limit for CH4 and N2O GHG prices (USD05MER per tC) / 1000 /
+  s57_maxmac_n2o    activate full N mitigation independent of pollutant price (1 is active) / 0 /
+  s57_maxmac_ch4    activate full CH4 mitigation independent of pollutant price (1 is active) / 0 /
+;
+
 table f57_maccs_n2o(t_all,i,maccs_n2o,maccs_steps)  N2O MACC from Image model (percent)
 $ondelim
 $if "%c57_macc_version%" == "PBL_2007" $include "./modules/57_maccs/input/f57_maccs_n2o.cs3"
