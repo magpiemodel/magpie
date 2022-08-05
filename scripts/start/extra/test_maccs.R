@@ -24,10 +24,11 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-prefix <- "maccs_test_v2"
+prefix <- "maccs_test_v3"
 
 source("config/default.cfg")
 cfg$title <- paste(prefix,"newsetup_baseline",sep="_")
+cfg$gms$peatland  <- "on_aug22"
 cfg$gms$nr_soil_budget  <- "macceff_aug22"
 cfg$gms$nitrogen <- "rescaled_aug22"
 cfg$gms$carbon <- "normal_aug22"
@@ -37,6 +38,7 @@ start_run(cfg,codeCheck=FALSE)
 
 source("config/default.cfg")
 cfg$title <- paste(prefix,"newsetup_mitigation",sep="_")
+cfg$gms$peatland  <- "on_aug22"
 cfg$gms$nr_soil_budget  <- "macceff_aug22"
 cfg$gms$nitrogen <- "rescaled_aug22"
 cfg$gms$carbon <- "normal_aug22"
@@ -48,6 +50,7 @@ start_run(cfg,codeCheck=FALSE)
 
 source("config/default.cfg")
 cfg$title <- paste(prefix,"newsetup_maxmaccs",sep="_")
+cfg$gms$peatland  <- "on_aug22"
 cfg$gms$nr_soil_budget  <- "macceff_aug22"
 cfg$gms$nitrogen <- "rescaled_aug22"
 cfg$gms$carbon <- "normal_aug22"
