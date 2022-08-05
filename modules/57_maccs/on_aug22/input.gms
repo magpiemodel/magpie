@@ -9,7 +9,6 @@
 $setglobal c57_macc_version  PBL_2007
 
 scalars
-  upper limit for CH4 and N2O GHG prices (USD05MER per tC) / 1000 /
   s57_maxmac_n2o    activate full N mitigation independent of pollutant price (1 is active) / 0 /
   s57_maxmac_ch4    activate full CH4 mitigation independent of pollutant price (1 is active) / 0 /
 ;
