@@ -12,5 +12,9 @@ parameters
  i52_land_carbon_sink(t_all,i)				Land carbon sink adjustment factors from Grassi et al 2021 (GtCO2 per year)
 ;
 
+equations
+  q52_emis_co2_actual(i,emis_oneoff)             		 	Calculation of annual CO2 emissions (Tg per yr)
+;
+
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

@@ -28,11 +28,11 @@ cfg$results_folder <- "output/:title:"
 prefix <- "maccs_test_v1"
 
 cfg$title <- paste(prefix,"newsetup_baseline",sep="_")
-cfg$gms$50_nr_soil_budget  <- "macceff_aug22"
-cfg$gms$51_nitrogen <- "rescaled_aug22"
-cfg$gms$52_carbon <- "normal_aug22"
-cfg$gms$53_methane <- "ipcc2006_aug22"
-cfg$gms$56_ghg_policy <- "price_aug22"
+cfg$gms$nr_soil_budget  <- "macceff_aug22"
+cfg$gms$nitrogen <- "rescaled_aug22"
+cfg$gms$carbon <- "normal_aug22"
+cfg$gms$methane <- "ipcc2006_aug22"
+cfg$gms$ghg_policy <- "price_aug22"
 start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- paste(prefix,"newsetup_mitigation",sep="_")

@@ -45,7 +45,7 @@ else
 * of soil N2O emissions. Most of these measures also reduce general Nr surpluses.
 * We therefor apply it here to Nr soil efficiency more generally.
 
- vm_nr_eff.fx(i2) = 1 - (1-i50_nr_eff_bau) * (1 - im_maccs_mitigation(t,i2,"inorg_fert","n2o_direct");
- vm_nr_eff_pasture.fx = 1 - (1-i50_nr_eff_pasture_bau) * (1 - im_maccs_mitigation(t,i2,"inorg_fert","n2o_direct")
+ vm_nr_eff.fx(i) = 1 - (1-i50_nr_eff_bau(t,i)) * (1 - im_maccs_mitigation(t,i,"inorg_fert","n2o_n_direct"));
+ vm_nr_eff_pasture.fx(i)= 1 - (1-i50_nr_eff_pasture_bau(t,i)) * (1 - im_maccs_mitigation(t,i,"inorg_fert","n2o_n_direct"));
 
 i50_atmospheric_deposition_rates(t,j,land)=f50_atmospheric_deposition_rates(t,j,land,"%c50_dep_scen%");
