@@ -1,0 +1,50 @@
+# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  authors, and contributors see CITATION.cff file. This file is part
+# |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
+# |  AGPL-3.0, you are granted additional permissions described in the
+# |  MAgPIE License Exception, version 1.0 (see LICENSE file).
+# |  Contact: magpie@pik-potsdam.de
+
+# ----------------------------------------------------------
+# description: Test diet scenarios
+# ----------------------------------------------------------
+
+
+######################################
+#### Script to start a MAgPIE run ####
+######################################
+
+library(gms)
+library(lucode2)
+library(magclass)
+
+# Load start_run(cfg) function which is needed to start MAgPIE runs
+source("scripts/start_functions.R")
+
+#start MAgPIE run
+source("config/default.cfg")
+
+cfg$results_folder <- "output/:title:"
+prefix <- "maccs_test_v1"
+
+cfg$title <- paste(prefix,"newsetup_baseline",sep="_")
+cfg$gms$50_nr_soil_budget  <- "macceff_aug22"
+cfg$gms$51_nitrogen <- "rescaled_aug22"
+cfg$gms$52_carbon <- "normal_aug22"
+cfg$gms$53_methane <- "ipcc2006_aug22"
+cfg$gms$56_ghg_policy <- "price_aug22"
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- paste(prefix,"newsetup_mitigation",sep="_")
+cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"     # def = R21M42-SSP2-NPi
+cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-PkBudg900"     # def = R21M42-SSP2-NPi
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- paste(prefix,"olddefault",sep="_")
+source("config/default.cfg")
+start_run(cfg,codeCheck=FALSE)
+
+cfg$title <- paste(prefix,"olddefault_mitigation",sep="_")
+cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"     # def = R21M42-SSP2-NPi
+cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-PkBudg900"     # def = R21M42-SSP2-NPi
+start_run(cfg,codeCheck=FALSE)

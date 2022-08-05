@@ -5,6 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_emissions_reg.fx(i,emis_source,n_pollutants) = 0;
-vm_emissions_reg.lo(i,emis_source_n51,n_pollutants) = -Inf;
-vm_emissions_reg.up(i,emis_source_n51,n_pollutants) = Inf; 
+vm_emission_costs.scale(i) = 10e5;
+v56_emission_cost.scale(i,emis_source) = 10e4;
+vm_carbon_stock.scale(j,land,c_pools,stockType) = 10e3;
