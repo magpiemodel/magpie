@@ -17,7 +17,7 @@ codeCheck <- FALSE
 
 # population scenarios for post-processing
 source("config/default.cfg")
-gms::download_unpack(input = "FSEC_populationScenarios_v1_12-07-22.tgz",
+gms::download_unpack(input = "gridPopulation",
                      targetdir = "./input",
                      repositories = cfg$repositories)
 
