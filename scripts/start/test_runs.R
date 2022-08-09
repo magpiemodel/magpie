@@ -59,9 +59,9 @@ source("scripts/projects/fsec.R")
 codeCheck <- FALSE
 
 ### Business-as-usual
-cfg <- fsecScenario(scenario = "bau")
+cfg <- fsecScenario(scenario = "c_BAU")
 start_run(cfg = cfg, codeCheck = codeCheck)
 
 ### FSDP Scenario
-cfg <- fsecScenario(scenario = "fsdp")
+cfg <- fsecScenario(scenario = "e_FSDP")
 start_run(cfg = cfg, codeCheck = codeCheck)
