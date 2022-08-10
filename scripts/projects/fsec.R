@@ -14,7 +14,7 @@ fsecScenario <- function(scenario) {
   source("config/default.cfg")
 
   # version number
-  v <- "v15_FSEC"
+  v <- "v16_FSEC"
 
   x <- list(c_BAU            = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = "FSEC"),
@@ -81,10 +81,10 @@ fsecScenario <- function(scenario) {
                                         fsec = c("FSEC", "soil")),
             # FSDP (all transformations active)
             e_FSDP = list(standard = c("cc", "rcp7p0", "SSP1", "NDC", "ForestryEndo"),
-                        fsec = c("FSEC", "population", "institutions", "energy", "allDietAndWaste",
+                        fsec = c("FSEC", "population", "institutions", "energy",
                         "awms", "livestock", "cropefficiency", "biodiversity", "fairTrade", "timberCities",
-                        "REDDaff", "REDD", "landSharing", "landSparing", "waterSparing", "peatland", "allEmisPrice",
-                        "airPollution", "soil")),
+                        "REDDaff", "REDD", "landSharing", "landSparing", "waterSparing", "peatland",
+                        "airPollution", "soil", "allDietAndWaste", "allEmisPrice")),
             # Scenarios (combinations of transformation clusters)
             b_ExternalPressures  = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "population", "institutions", "energy")),
@@ -93,7 +93,7 @@ fsecScenario <- function(scenario) {
             b_REDDaffDietRuminants = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "ruminants", "REDDaff")),
             b_DietRotations      = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
-                                  fsec = c("FSEC", "allDiet", "landSharing")),
+                                  fsec = c("FSEC", "landSharing", "allDiet")),
             b_SoilMonogastric    = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "monogastrics", "soil")),
             b_SoilRotations      = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
