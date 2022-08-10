@@ -62,5 +62,5 @@ missingyears=function(x){
 a=missingyears(mif)
 
 write.reportProject(a,mapping=paste0(wdbefore,"/mapping_inms.csv"),file="report_inms.mif")
-#write.report2(a,file="magpie_results_nov2019.mif")
+#write.report(a,file="magpie_results_nov2019.mif")
 warnings()
