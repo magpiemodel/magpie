@@ -127,7 +127,6 @@ fsecScenario <- function(scenario) {
 
   # general
   cfg$title       <- paste(v, scenario, sep = "")
-  #cfg$results_folder <- "output/:title:"
   cfg$recalibrate <- FALSE
   cfg$qos         <- "priority_maxMem"
   cfg$output      <- c(cfg$output,
