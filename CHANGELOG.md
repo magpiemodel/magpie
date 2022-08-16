@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts/start** cleanup of old start scripts
 
 ### added
-- **scripts* added output script for gridded crop diversity indices runs
+- **scripts** added output script for gridded crop diversity indices runs
 - **scripts** added output scripts for FSEC FSDP runs
 - **15_food** added new realization with country level exogenous diets, product-specific intake estimates, new scenarios for exogenous BMI and decomposition switches for EAT Lancet diets. Simplified code and improved iteration procedure.
 - **57_maccs** added new Marginal Abatement Cost Curve (MACCs) data set from PBL (PBL2022)
