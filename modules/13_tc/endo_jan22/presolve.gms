@@ -16,7 +16,7 @@ else
 	vm_tau.lo(h, tautype) =    pcm_tau(h, tautype);
 );
 
-	vm_tau.up(h,tautype) =  2*pcm_tau(h,tautype);
+	vm_tau.up(h,tautype) =  3 * pcm_tau(h,tautype);
 
 * educated guess for vm_tau.l:
 if(ord(t) = 1,
@@ -25,7 +25,7 @@ else
 	vm_tau.l(h,tautype) = pcm_tau(h,tautype)*(1+pc13_tcguess(h,tautype))**m_yeardiff(t);
 );
 
-vm_tau.up(h,tautype) = 2*pcm_tau(h,tautype);
+vm_tau.up(h,tautype) = 3 * pcm_tau(h,tautype);
 
 if(m_year(t) > sm_fix_SSP2 AND s13_max_gdp_shr <> Inf,
 
