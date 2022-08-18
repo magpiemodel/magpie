@@ -30,7 +30,6 @@ positive variables
 
 
 variables
- vm_btm_reg(i,emis_source,pollutants)                    Regional emissions before technical mitigation (Tg per yr)
  vm_emission_costs(i)                                    Costs for emission rights for pollutants and greenhouse gases (mio. USD05MER per yr)
  vm_emissions_reg(i,emis_source,pollutants)              Regional emissions by source and gas after technical mitigation N CH4 C (Tg per yr)
  v56_emis_pricing(i,emis_source,pollutants)              Regional emissions by source and gas after technical mitigation N CH4 C (Tg per yr)

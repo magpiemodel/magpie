@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: Test diet scenarios
+# description: Test marginal abatement costs
 # ----------------------------------------------------------
 
 
@@ -24,7 +24,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-prefix <- "maccs_test_v3"
+prefix <- "maccs_test_v4"
 
 source("config/default.cfg")
 cfg$title <- paste(prefix,"newsetup_baseline",sep="_")
@@ -34,6 +34,8 @@ cfg$gms$nitrogen <- "rescaled_aug22"
 cfg$gms$carbon <- "normal_aug22"
 cfg$gms$methane <- "ipcc2006_aug22"
 cfg$gms$ghg_policy <- "price_aug22"
+cfg$gms$maccs <- "on_aug22"
+cfg$gms$peatland <-"on_aug22"
 start_run(cfg,codeCheck=FALSE)
 
 source("config/default.cfg")
@@ -44,6 +46,8 @@ cfg$gms$nitrogen <- "rescaled_aug22"
 cfg$gms$carbon <- "normal_aug22"
 cfg$gms$methane <- "ipcc2006_aug22"
 cfg$gms$ghg_policy <- "price_aug22"
+cfg$gms$maccs <- "on_aug22"
+cfg$gms$peatland <-"on_aug22"
 cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"     # def = R21M42-SSP2-NPi
 cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-PkBudg900"     # def = R21M42-SSP2-NPi
 start_run(cfg,codeCheck=FALSE)
