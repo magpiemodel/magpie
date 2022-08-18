@@ -21,3 +21,5 @@ sm_fix_SSP2, input, not used
 im_pop_iso, input, not used
 vm_fallow,input,questionnaire
 im_maccs_mitigation,input,questionnaire
+sm_snupe_base,input,questionnaire
+sm_nue_pasture_base,input,questionnaire

@@ -5,8 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-Scalar s51_snupe_base assumption on implicit SNuPE in ipcc guidelines (1) / 0.5 /;
-Scalar s51_nue_pasture_base assumption on implicit SNuPE in ipcc guidelines (1) / 0.5 /;
+Scalar sm_snupe_base assumption on implicit SNuPE in ipcc guidelines (1) / 0.5 /;
+Scalar sm_nue_pasture_base assumption on implicit SNuPE in ipcc guidelines (1) / 0.5 /;
 
 table f51_ipcc_ef(ipcc_ef51,emis_uncertainty51) ipcc emission factors for various emission types X (tX-N per tN)
 $ondelim

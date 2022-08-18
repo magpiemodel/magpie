@@ -23,7 +23,7 @@
                  vm_emissions_reg(i2,"man_crop",n_pollutants_direct)
                  =e=
                  vm_manure_recycling(i2,"nr")
-                 / (1-s51_snupe_base) * (1-vm_nr_eff(i2))
+                 / (1-sm_snupe_base) * (1-vm_nr_eff(i2))
                  * sum(ct, i51_ef_n_soil(ct,i2,n_pollutants_direct,"man_crop"));
 
 *' inorganic fertilizers:
@@ -31,10 +31,10 @@
                  vm_emissions_reg(i2,"inorg_fert",n_pollutants_direct)
                  =e=
                  vm_nr_inorg_fert_reg(i2,"crop")
-                 / (1-s51_snupe_base) * (1-vm_nr_eff(i2))
+                 / (1-sm_snupe_base) * (1-vm_nr_eff(i2))
                  * sum(ct, i51_ef_n_soil(ct,i2,n_pollutants_direct,"inorg_fert"))
                  + vm_nr_inorg_fert_reg(i2,"past")
-                 / (1-s51_nue_pasture_base) * (1-vm_nr_eff_pasture(i2))
+                 / (1-sm_nue_pasture_base) * (1-vm_nr_eff_pasture(i2))
                  * sum(ct, i51_ef_n_soil(ct,i2,n_pollutants_direct,"inorg_fert"))
                 ;
 
@@ -43,7 +43,7 @@
                  vm_emissions_reg(i2,"resid",n_pollutants_direct)
                  =e=
                  vm_res_recycling(i2,"nr") * sum(ct, i51_ef_n_soil(ct,i2,n_pollutants_direct,"resid"))
-                 / (1-s51_snupe_base) * (1-vm_nr_eff(i2));
+                 / (1-sm_snupe_base) * (1-vm_nr_eff(i2));
 
 *' emissions from burning crop residues, N2O and NOx
  q51_emissions_resid_burn(i2,n_pollutants_direct)..
@@ -56,7 +56,7 @@
                  vm_emissions_reg(i2,"som",n_pollutants_direct)
                  =e=
                  sum(cell(i2,j2),vm_nr_som(j2)) * sum(ct, i51_ef_n_soil(ct,i2,n_pollutants_direct,"som"))
-                 / (1-s51_snupe_base) * (1-vm_nr_eff(i2));
+                 / (1-sm_snupe_base) * (1-vm_nr_eff(i2));
 
 *' animal waste management
 *' Here we apply the marginal abatement cost curves to the emissions of all
@@ -77,7 +77,7 @@
                  sum((awms_prp,kli),
                      vm_manure(i2, kli, awms_prp, "nr")
                      * f51_ef3_prp(i2,n_pollutants_direct,kli))
-                 / (1-s51_nue_pasture_base) * (1-vm_nr_eff_pasture(i2));
+                 / (1-sm_nue_pasture_base) * (1-vm_nr_eff_pasture(i2));
 
 *' Indirect emissions from NH3, NOx and NO3:
  q51_emissions_indirect_n2o(i2,emis_source_n51) ..

@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts/start** cleanup of old start scripts
 
 ### added
+- **50_nr_soil_budget** a new module realization "maceff_aug22" that makes NUE and SNUpE dependent on MACC curves
+- **51_nitrogen** new module realization "rescaled_aug22" in line with new MACC curves
+- **53_methane** new realization "ipcc2006_aug22" that moves maccs from ghg_policy module here
+- **56_ghg_policy** new realization "price_aug22" that takes MACCs out of ghg module and into individual emission modules
 - **scripts* added output scripts for FSEC FSDP runs
 - **15_food** added new realization with country level exogenous diets, product-specific intake estimates, new scenarios for exogenous BMI and decomposition switches for EAT Lancet diets. Simplified code and improved iteration procedure.
 - **57_maccs** added new Marginal Abatement Cost Curve (MACCs) data set from PBL (PBL2022)
