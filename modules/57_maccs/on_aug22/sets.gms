@@ -22,7 +22,7 @@ sets
   emis_source_awms_ch4(emis_source) subset awms emissions
   /awms/
 
-  pollutants_maccs57 pollutants via which MAC costs are calculated
+  pollutants_maccs57(pollutants) pollutants via which MAC costs are calculated
   / ch4, n2o_n_direct /
 
   maccs_ch4 ch4 mitigation categories with MACCS

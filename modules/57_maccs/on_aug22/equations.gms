@@ -23,5 +23,5 @@
 q57_total_costs(i2) ..
   vm_maccs_costs(i2) =e=
   sum((ct,emis_source,pollutants_maccs57), p57_maccs_costs_integral(ct,i2,emis_source,pollutants_maccs57)
-		* vm_emissions_reg(i2,emis_source,pollutants_maccs57) / (1 - sum(ct, im_maccs_mitigation(ct,i2,emis_source,pollutants)))
+		* vm_emissions_reg(i2,emis_source,pollutants_maccs57) / (1 - im_maccs_mitigation(ct,i2,emis_source,pollutants_maccs57))
 		);
