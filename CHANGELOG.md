@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **13_tc** relaxed vm_tau upper limit
+- **scripts** updated FSEC start and output scripts
+- **scripts** update of rds_report to allow gridded intermediate outputs
+- **config** non-food system emission MAGICC switch
 - **scripts** output/extra/disaggregation_BII.R adjusted BII output for primary and secondary other land
 - **59_som** Now calculates soil C for fallow
 - **inputs** updated non-food initial prices, MACCs curves, and removed suitability threshold of 0.1 in all_marginal setting

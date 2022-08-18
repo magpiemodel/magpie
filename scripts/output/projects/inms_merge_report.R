@@ -31,14 +31,14 @@ cat("\nStarting output generation\n")
 
 missing <- NULL
 
-combined="output/inms.csv"
+combined <- "output/inms.csv"
 
 if(file.exists(combined)) file.rename(combined,"output/inms.bak")
 
 for (i in 1:length(outputdir)) {
   print(paste("Processing",outputdir[i]))
   #gdx file
-  rep<-file.path(outputdir[i],"report_inms.mif")
+  rep <- file.path(outputdir[i], "report_inms.mif")
   if(file.exists(rep)) {
     #get scenario name
     cfg <- gms::loadConfig(file.path(outputdir[i], "config.yml"))
@@ -47,8 +47,10 @@ for (i in 1:length(outputdir)) {
     a <- read.report(rep,as.list = FALSE)
     getNames(a,dim=1) <- scen
     #add to reporting csv file
-    write.report2(a,file=combined,append=TRUE,ndigit = 4,skipempty = FALSE)
-  } else missing <- c(missing,outputdir[i])
+    write.report(a, file = combined, append = TRUE, ndigit = 4, skipempty = FALSE)
+  } else {
+    missing <- c(missing,outputdir[i])
+  }
 }
 if (!is.null(missing)) {
   cat("\nList of folders with missing report.mif\n")
