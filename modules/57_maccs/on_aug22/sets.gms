@@ -11,7 +11,7 @@ sets
   /inorg_fert, resid, som, rice, man_crop, man_past/
 
   emis_source_awms_n2o(emis_source) subset awms_manure_n2o
-  /awms/
+  /man_crop,man_past,awms/
 
   emis_source_rice_ch4(emis_source) subset rice emissions
   /rice/
@@ -33,5 +33,8 @@ sets
 
   maccs_steps maccs tax level steps
    / 1*201 /
+
+  scen57 scenarios
+   / Default, Optimistic, Pessimistic /
 
 ;

@@ -36,7 +36,7 @@ im_maccs_mitigation(t,i,emis_source_inorg_fert_n2o,"n2o_n_direct") =
               f57_maccs_n2o(t,i,"inorg_fert_n2o",maccs_steps));
 
 im_maccs_mitigation(t,i,emis_source_awms_n2o,"n2o_n_direct") =
-        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step_n2o(t,i,emis_source_awms_manure_n2o) AND ord(maccs_steps) > 1),
+        sum(maccs_steps$(ord(maccs_steps) eq i57_mac_step_n2o(t,i,emis_source_awms_n2o) AND ord(maccs_steps) > 1),
               f57_maccs_n2o(t,i,"awms_manure_n2o",maccs_steps));
 
 im_maccs_mitigation(t,i,emis_source_rice_ch4,"ch4") =
@@ -54,8 +54,8 @@ im_maccs_mitigation(t,i,emis_source_awms_ch4,"ch4") =
 $ontext
 The costs associated with technical abatement of GHG emissions are reflected by the area under the mac curve, i.e. the integral.
 Abatement options at zero cost are in the first step. Therefore an offset of -1 is used.
-Note that vm_btm_reg, which needs to be part of the integral calculation but is not available in preloop,
-is multiplied with p57_maccs_costs_integral during optimization (see equations).
+Note that the emissions before mtigation, which need to be part of the integral calculation but is not available in preloop,
+are multiplied with p57_maccs_costs_integral during optimization (see equations).
 
 Illustrative example for CH4: Abatement is 0.14 percent at 0$/tC, 0.15 percent at 5 and 10 $/tC, and 0.16 percent at 15 $/tC.
 Emissions before technical mitigation are assumed 1 t CH4.
@@ -74,8 +74,8 @@ loop(maccs_steps$(ord(maccs_steps) > 1),
     p57_maccs_costs_integral(t,i,emis_source_inorg_fert_n2o,"n2o_n_direct") +
     (f57_maccs_n2o(t,i,"inorg_fert_n2o",maccs_steps) - f57_maccs_n2o(t,i,"inorg_fert_n2o",maccs_steps-1))*(ord(maccs_steps)-1)*s57_step_length;
 
-    p57_maccs_costs_integral(t,i,emis_source_awms_manure_n2o,"n2o_n_direct")$(ord(maccs_steps) <= i57_mac_step_n2o(t,i,emis_source_awms_manure_n2o)) =
-    p57_maccs_costs_integral(t,i,emis_source_awms_manure_n2o,"n2o_n_direct") +
+    p57_maccs_costs_integral(t,i,emis_source_awms_n2o,"n2o_n_direct")$(ord(maccs_steps) <= i57_mac_step_n2o(t,i,emis_source_awms_n2o)) =
+    p57_maccs_costs_integral(t,i,emis_source_awms_n2o,"n2o_n_direct") +
     (f57_maccs_n2o(t,i,"awms_manure_n2o",maccs_steps) - f57_maccs_n2o(t,i,"awms_manure_n2o",maccs_steps-1))*(ord(maccs_steps)-1)*s57_step_length;
 
     p57_maccs_costs_integral(t,i,emis_source_rice_ch4,"ch4")$(ord(maccs_steps) <= i57_mac_step_ch4(t,i,emis_source_rice_ch4)) =
