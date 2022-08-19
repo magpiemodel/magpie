@@ -87,8 +87,7 @@ loop(t,
     until s56_counter = s56_timesteps-1);
   );
 );
-display p56_pollutant_prices_input;
-display im_pollutant_prices;
+
 *initialize age-class dependent C price with same C price for all age-classes
 p56_c_price_aff(t_all,i,ac) = im_pollutant_prices(t_all,i,"co2_c","forestry_vegc");
 *Shift C prices in age-classes for reflecting foresight.
