@@ -94,11 +94,3 @@ loop(maccs_steps$(ord(maccs_steps) > 1),
 *Conversion from USD per ton C to USD per ton N and USD per ton CH4, using the old IPCC AR4 GWP factors.
 p57_maccs_costs_integral(t,i,emis_source,"n2o_n_direct") = p57_maccs_costs_integral(t,i,emis_source,"n2o_n_direct")*12/44*298*44/28;
 p57_maccs_costs_integral(t,i,emis_source,"ch4") = p57_maccs_costs_integral(t,i,emis_source,"ch4")*12/44*25;
-
-
-display
-i57_mac_step_n2o
-i57_mac_step_ch4
-im_maccs_mitigation
-p57_maccs_costs_integral
-;

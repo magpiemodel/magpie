@@ -54,7 +54,7 @@ Abatement options at zero cost are in the first step. Therefore an offset of -1 
 Note that the emissions before mtigation, which need to be part of the integral calculation but is not available in preloop,
 are multiplied with p57_maccs_costs_integral during optimization (see equations).
 
-Illustrative example for CH4: Abatement is 0.14 percent at 0$/tC, 0.15 percent at 5 and 10 $/tC, and 0.16 percent at 15 $/tC. 
+Illustrative example for CH4: Abatement is 0.14 percent at 0$/tC, 0.15 percent at 5 and 10 $/tC, and 0.16 percent at 15 $/tC.
 Emissions before technical mitigation are assumed 1 t CH4.
 
 step 1											0 mio $		0 mio $
@@ -91,11 +91,3 @@ loop(maccs_steps$(ord(maccs_steps) > 1),
 *Conversion from USD per ton C to USD per ton N and USD per ton CH4, using the old IPCC AR4 GWP factors.
 p57_maccs_costs_integral(t,i,emis_source,"n2o_n_direct") = p57_maccs_costs_integral(t,i,emis_source,"n2o_n_direct")*12/44*298*44/28;
 p57_maccs_costs_integral(t,i,emis_source,"ch4") = p57_maccs_costs_integral(t,i,emis_source,"ch4")*12/44*25;
-
-
-display
-i57_mac_step_n2o
-i57_mac_step_ch4
-im_maccs_mitigation
-p57_maccs_costs_integral
-;
