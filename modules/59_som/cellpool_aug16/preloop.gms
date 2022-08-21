@@ -68,6 +68,16 @@ i59_cratio(j,kcr,w) = sum((cell(i,j),tillage59,inputs59,climate59),
                  * i59_input_share(i,inputs59)
                  * f59_cratio_inputs(climate59,inputs59)
                  * f59_cratio_irrigation(climate59,w,kcr));
+
+*' For fallow we assume annual crops with bare fallow - therefor low input -
+*' and reduced tillage. Assumed to have no irrigation, so irrigation multiplier
+*' is 1.
+
+i59_cratio_fallow(j) = sum(climate59,
+                sum(clcl_climate59(clcl,climate59),pm_climate_class(j,clcl))
+                * f59_cratio_landuse(climate59,"maiz")
+                * f59_cratio_tillage(climate59,"reduced_tillage")
+                * f59_cratio_inputs(climate59,"low_input"));
 *' @stop
 
 p59_carbon_density(t,j,pools59)=0;

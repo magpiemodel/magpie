@@ -6,9 +6,11 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: extract agmip-report in rds format from run
+# description: extract report in rds format from run
 # comparison script: FALSE
+# position: 3
 # ---------------------------------------------------------------
+
 
 library(magclass)
 library(magpie4)
@@ -18,21 +20,20 @@ library(gms)
 options("magclass.verbosity" = 1)
 
 ############################# BASIC CONFIGURATION #############################
-if(!exists("source_include")) {
-  outputdir <- "/p/projects/landuse/users/miodrag/projects/tests/flexreg/output/H12_setup1_2016-11-23_12.38.56/"
+if (!exists("source_include")) {
+  outputdir <- NULL
   readArgs("outputdir")
 }
 
-cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
-gdx	<- file.path(outputdir, "fulldata.gdx")
-mif <- paste0(outputdir, "/agmip_report.mif")
-rds <- paste0(outputdir, "/agmip_report.rds")
+cfg     <- gms::loadConfig(file.path(outputdir, "config.yml"))
+gdx	    <- file.path(outputdir,"fulldata.gdx")
+rds_iso <- paste0(outputdir, "/report_iso.rds")
 ###############################################################################
 
+report <- getReportIso(gdx, scenario = cfg$title, dir = outputdir)
+q <- as.quitte(report)
+if (all(is.na(q$value))) {
+  stop("No values in reporting!")
+}
 
-report <- getReportAgMIP(gdx, scenario = cfg$title)
-
-###regional aggregation
-
-write.report(report, file = mif)
-saveRDS(as.quitte(report), file = rds)
+saveRDS(q, file = rds_iso, version = 2, compress = "xz")
