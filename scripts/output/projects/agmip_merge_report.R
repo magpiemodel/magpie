@@ -48,7 +48,7 @@ for (i in 1:length(outputdir)) {
     a <- read.report(rep,as.list = FALSE)
     getNames(a,dim=1) <- scen
     #add to reporting csv file
-    write.report2(a,file="output/agmip_report_full.csv",append=TRUE,ndigit = 4,skipempty = FALSE)
+    write.report(a,file="output/agmip_report_full.csv",append=TRUE,ndigit = 4,skipempty = FALSE)
   } else missing <- c(missing,outputdir[i])
 }
 if (!is.null(missing)) {

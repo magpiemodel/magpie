@@ -24,15 +24,15 @@ if(!exists("source_include")) {
 }
 
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
-gdx	<- file.path(outputdir,"fulldata.gdx")
+gdx	<- file.path(outputdir, "fulldata.gdx")
 mif <- paste0(outputdir, "/agmip_report.mif")
 rds <- paste0(outputdir, "/agmip_report.rds")
 ###############################################################################
 
 
-report <- getReportAgMIP(gdx,scenario = cfg$title)
+report <- getReportAgMIP(gdx, scenario = cfg$title)
 
 ###regional aggregation
 
-write.report2(report, file=mif)
-saveRDS(as.quitte(report),file=rds)
+write.report(report, file = mif)
+saveRDS(as.quitte(report), file = rds)
