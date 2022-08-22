@@ -24,7 +24,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-prefix <- "maccs_test_v4"
+prefix <- "maccs_test_v5"
 
 source("config/default.cfg")
 cfg$title <- paste(prefix,"newsetup_baseline",sep="_")

@@ -8,5 +8,3 @@ name,type,reason
 vm_nr_eff,input,not needed
 vm_nr_eff_pasture,input,not needed
 im_maccs_mitigation,input,questionnaire
-sm_snupe_base,input,new maccs structure
-sm_nue_pasture_base,new maccs structure 

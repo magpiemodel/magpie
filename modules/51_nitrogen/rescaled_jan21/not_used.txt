@@ -1,4 +1,2 @@
 name,type,reason
 im_maccs_mitigation,input,questionnaire
-sm_snupe_base,input,questionnaire
-sm_nue_pasture_base,input,questionnaire
