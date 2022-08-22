@@ -24,7 +24,7 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-prefix <- "maccs_test_v5"
+prefix <- "maccs_test_v6"
 
 source("config/default.cfg")
 cfg$title <- paste(prefix,"newsetup_baseline",sep="_")
@@ -60,6 +60,8 @@ cfg$gms$nitrogen <- "rescaled_aug22"
 cfg$gms$carbon <- "normal_aug22"
 cfg$gms$methane <- "ipcc2006_aug22"
 cfg$gms$ghg_policy <- "price_aug22"
+cfg$gms$maccs <- "on_aug22"
+cfg$gms$peatland <-"on_aug22"
 cfg$gms$s57_maxmac_n2o <- 1   # def = 0
 cfg$gms$s57_maxmac_ch4 <- 1   # def = 0
 start_run(cfg,codeCheck=FALSE)
