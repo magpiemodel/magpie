@@ -34,13 +34,15 @@ grid <- NULL
 missing <- NULL
 
 saveRDS(outputdir,"outputdir.rds")
+
+#filter out calibration run
+x <- unlist(lapply(strsplit(basename(outputdir),"_"),function(x) x[2]))
+outputdir <- outputdir[which(x %in% c("FSECa", "FSECb", "FSECc", "FSECd", "FSECe"))]
+
 #get revision
 x <- unlist(lapply(strsplit(basename(outputdir),"_"),function(x) x[1]))
 if (length(unique(x)) == 1) rev <- unique(x) else stop("version prefix is not identical. Check your selection of runs")
 
-#filter out calibration run
-x <- unlist(lapply(strsplit(basename(outputdir),"_"),function(x) x[2]))
-outputdir <- outputdir[which(x=="FSEC")]
 
 for (i in 1:length(outputdir)) {
   print(paste("Processing",outputdir[i]))
@@ -60,13 +62,13 @@ for (i in 1:length(outputdir)) {
 
   ### Grid level outputs
   ## only for BAU and SDP to save time and storage
-  scen <- c("BAU","SDP")
+  scen <- c("BAU","FSDP")
   if(unlist(strsplit(cfg$title,"_"))[3] %in% scen) {
     y <- NULL
     years <- c(2020,2050)
 
     ## BII
-    nc_file <- file.path(outputdir[i], "cell.bii_0.5.nc")
+    nc_file <- file.path(outputdir[i], paste(cfg$title,"cell.bii_0.5.mz",sep="_"))#Note the "_" instead of "-"
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- "BII (index)"
@@ -75,8 +77,18 @@ for (i in 1:length(outputdir)) {
       y <- mbind(y,a)
     } else missing <- c(missing,outputdir[i])
 
+    ## Crop diversity
+    nc_file <- file.path(outputdir[i], paste0(scen,"-CropDiversityGridded.nc"))
+    if(file.exists(nc_file)) {
+      a <- read.magpie(nc_file)[,years, "ShannonCropDiversity"]
+      getNames(a) <- "Shannon crop diversity (index)"
+      getSets(a,fulldim = F)[3] <- "variable"
+      a <- addLocation(a)
+      y <- mbind(y,a)
+    } else missing <- c(missing,outputdir[i])
+
     ## land patterns Mha
-    nc_file <- file.path(outputdir[i], "cell.land_0.5.nc")
+    nc_file <- file.path(outputdir[i], "cell.land_0.5.mz")
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- paste0(getNames(a)," (Mha)")
@@ -86,7 +98,7 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing,outputdir[i])
 
     ## land patterns share
-    nc_file <- file.path(outputdir[i], "cell.land_0.5_share.nc")
+    nc_file <- file.path(outputdir[i], "cell.land_0.5_share.mz")
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- paste0(getNames(a)," (area share)")
@@ -96,7 +108,7 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing,outputdir[i])
 
     ## Nitrogen
-    nc_file <- file.path(outputdir[i], paste(cfg$title,"nutrientSurplus_anthropogenic_unaggregated.nc",sep="-"))
+    nc_file <- file.path(outputdir[i], paste(cfg$title,"nutrientSurplus_anthropogenic_unaggregated.mz",sep="-"))
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- "nutrientSurplus (kg N per ha)"
@@ -135,9 +147,10 @@ gdx <- file.path(outputdir[1], "fulldata.gdx")
 reg2iso <- readGDX(gdx,"i_to_iso")
 names(reg2iso) <- c("region","iso_a3")
 write.csv(reg2iso,"output/reg2iso.csv")
+saveRDS(reg2iso,file = file.path("output","reg2iso.rds"), version = 2,compress = "xz")
 
 message("Plotting figures ...")
 library(m4fsdp)
-heatmapFSDP(reg,file=file.path("output",paste(rev,"FSDP_heatmap.jpg",sep="_")))
+heatmapFSDP(reg,tableType=1,file=file.path("output",paste(rev,"FSDP_heatmap1.jpg",sep="_")))
+heatmapFSDP(reg,tableType=2,file=file.path("output",paste(rev,"FSDP_heatmap2.jpg",sep="_")))
 spatialMapsFSDP(reg,iso,grid,reg2iso,file = file.path("output",paste(rev,"FSDP_spatialMaps.jpg",sep="_")))
-
