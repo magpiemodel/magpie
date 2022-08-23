@@ -8,4 +8,3 @@ name,type,reason
 vm_tau,par,questionnaire
 fm_tau1995,par,questionnaire
 vm_area,par,questionnaire
-fm_wage_scaling,par,questionaire

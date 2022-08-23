@@ -7,6 +7,8 @@
 
 scalars
 s36_weeks_in_year number of weeks in a year  / 52.1429 /
+s36_minimum_wage global minimum wage / 3 /
+s36_scale_labor_costs whether total labor costs should be scaled according to wage increase / 0 /
 ;
 
 table f36_weekly_hours(t_all,i) Historical values of average weekly hours worked per person in agriculture (h per week)
@@ -67,9 +69,4 @@ $include "./modules/36_employment/exo_may22/input/f36_historical_share.csv"
 $offdelim
 ;
 
-table fm_wage_scaling(t_all,i) Historical capital share
-$ondelim
-$include "./modules/36_employment/exo_may22/input/fm_wage_scaling.csv"
-$offdelim
-;
 

@@ -29,11 +29,20 @@ q70_feed(i2,kap,kall) ..
 *' `i70_cost_regr(i,kli,"cost_regr_b")` is set to zero in the case of livestock
 *' products generated in monogastric systems.
 
-q70_cost_prod_liv(i2,req) ..
- vm_cost_prod_livst(i2,req) =e= sum(kli, vm_prod_reg(i2,kli)
+*' To account for increased hourly labor costs in case of an external minimum wage, 
+*' the total labor costs are scaled by the corresponding factor from [36_employment].
+
+q70_cost_prod_liv_labor(i2) ..
+ vm_cost_prod_livst(i2,"labor") =e= sum(kli, vm_prod_reg(i2,kli)
      *(i70_cost_regr(i2,kli,"cost_regr_a") + i70_cost_regr(i2,kli,"cost_regr_b")
      *sum((ct, sys_to_kli(sys,kli)),i70_livestock_productivity(ct,i2,sys)))) 
-     *sum(ct, p70_cost_share_livst(ct,i2,req));
+     *sum(ct, p70_cost_share_livst(ct,i2,"labor")) * sum(ct, pm_labor_cost_scaling(ct,i2));
+
+q70_cost_prod_liv_capital(i2) ..
+ vm_cost_prod_livst(i2,"capital") =e= sum(kli, vm_prod_reg(i2,kli)
+     *(i70_cost_regr(i2,kli,"cost_regr_a") + i70_cost_regr(i2,kli,"cost_regr_b")
+     *sum((ct, sys_to_kli(sys,kli)),i70_livestock_productivity(ct,i2,sys)))) 
+     *sum(ct, p70_cost_share_livst(ct,i2,"capital"));
 
 q70_cost_prod_fish(i2) ..
  vm_cost_prod_fish(i2) =e=

@@ -22,9 +22,11 @@
   =e= 1 ;
 
 *' Labor costs: The labor costs are calculated by multiplying regional aggregated production with labor requirments per output.
+*' To account for increased hourly labor costs in case of an external minimum wage, 
+*' the total labor costs are scaled by the corresponding factor from [36_employment].
 
 q38_cost_prod_labor(i2).. vm_cost_prod_crop(i2,"labor")
-                              =e= sum(kcr,sum(cell(i2,j2), vm_prod(j2,kcr) * v38_labor_need(j2,kcr) * s38_wage * sum(ct, fm_wage_scaling(ct,i2))))
+                              =e= sum(kcr,sum(cell(i2,j2), vm_prod(j2,kcr) * v38_labor_need(j2,kcr) * s38_wage * sum(ct, pm_labor_cost_scaling(ct,i2))))
                                 ;
 
 *' Investment costs: Investment are the summation of investment in mobile and immobile capital. The costs are annuitized,
