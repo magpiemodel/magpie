@@ -8,8 +8,9 @@
 *' @description This realization calculates agricultural employment based
 *' on it's relation to total labor costs. It therefore depends 
 *' on the labor costs calculated in the modules [38_factor_costs] and 
-*' [70_livestock], but does not affect resulting total costs or production 
-*' patterns.
+*' [70_livestock]. Resulting total costs or production patterns can be affected
+*' if an external minimum wage is set, which increases labor costs for
+*' crop and livestock production in [38_factor_costs] and [70_livestock].
 
 *' @limitations Labor availability is not seen as a limiting factor for
 *' agricultural production, as the number of people employed is directly linked
