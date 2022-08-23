@@ -20,6 +20,6 @@ elseif (m_year(t)>=2010),
 *' categories not covered by MAgPIE (i.e. wool, beeswax, honey, silk-worms), which 
 *' are both kept constant for future years. 
 
-p36_nonmagpie_labor_costs(t,i) = (f36_unspecified_subsidies(t,i) + f36_nonmagpie_factor_costs(t,i)) * (1-p36_cost_share(t,i)) * pm_labor_cost_scaling(ct,i2);
+p36_nonmagpie_labor_costs(t,i) = (f36_unspecified_subsidies(t,i) + f36_nonmagpie_factor_costs(t,i)) * (1-p36_cost_share(t,i)) * pm_labor_cost_scaling(t,i);
 
 *' @stop
