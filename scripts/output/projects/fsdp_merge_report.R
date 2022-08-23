@@ -37,9 +37,9 @@ if(file.exists(combined)) file.rename(combined,"output/inms.bak")
 
 for (i in 1:length(outputdir)) {
   print(paste("Processing",outputdir[i]))
-  #gdx file
-  rep<-file.path(outputdir[i],"report_fsdp.mif")
-  if(file.exists(rep)) {
+  # gdx file
+  rep <- file.path(outputdir[i],"report_fsdp.mif")
+  if (file.exists(rep)) {
     #get scenario name
     cfg <- gms::loadConfig(file.path(outputdir[i], "config.yml"))
     scen <- cfg$title
@@ -47,7 +47,7 @@ for (i in 1:length(outputdir)) {
     a <- read.report(rep,as.list = FALSE)
     getNames(a,dim=1) <- scen
     #add to reporting csv file
-    write.report2(a,file=combined,append=TRUE,ndigit = 4,skipempty = FALSE)
+    write.report(a, file = combined, append = TRUE, ndigit = 4, skipempty = FALSE)
   } else missing <- c(missing,outputdir[i])
 }
 if (!is.null(missing)) {
@@ -55,4 +55,4 @@ if (!is.null(missing)) {
   print(missing)
 }
 
-if(file.exists(combined)) saveRDS(read.quitte(combined),file = "output/inms.rds")
+if(file.exists(combined)) saveRDS(read.quitte(combined), file = "output/inms.rds")
