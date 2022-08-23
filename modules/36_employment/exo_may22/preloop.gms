@@ -16,47 +16,42 @@ p36_total_hours_worked(iso) = sum(t_past$(ord(t_past) eq card(t_past)), f36_hist
 *' GDPpcMER, which is calibrated such that historic values of agricultural employment 
 *' are met. A threshold of 0.1$/h is used in the regression to avoid too low or 
 *' negative hourly labor costs.
-p36_hourly_costs_iso(t,iso) = max((im_gdp_pc_mer_iso(t,iso)*f36_regr_hourly_costs("slope")+
-							 	 f36_regr_hourly_costs("intercept")+p36_calibration_hourly_costs(iso)), 
-								 f36_regr_hourly_costs("threshold"));
+p36_hourly_costs_iso_baseline(t,iso) = max((im_gdp_pc_mer_iso(t,iso)*f36_regr_hourly_costs("slope") + f36_regr_hourly_costs("intercept") + p36_calibration_hourly_costs(iso)), f36_regr_hourly_costs("threshold"));
 
 *' @stop
 
-p36_hourly_costs_iso(t,iso)$(sum(sameas(t_past,t),1) = 1) = f36_hist_hourly_costs(t,iso);
+p36_hourly_costs_iso_baseline(t,iso)$(sum(sameas(t_past,t),1) = 1) = f36_hist_hourly_costs(t,iso);
 
-
-*' In case of a scenario with an external global minimum wage we add a linear term to the original 
-*' labor costs, which starts from 0 in 2020, reaches the difference etween the minimum wage and
-*' original hourly labor costs in 2050 (`p36_hourly_costs_increase`), and then decreases back to 0 in 2100. 
-*' If the hourly labor costs would decrease again below he minimum wage after 2050, we keep them at minimum wage.
-*' If original labor costs are already high enough to meet the minimum wage, they are not changed.
 
 * necessary increase in hourly labor costs in target year (2050) to match minimum wage
-p36_hourly_costs_increase(iso) = s36_minimum_wage-p36_hourly_costs_iso("y2050",iso);
+p36_hourly_costs_increase(iso) = s36_minimum_wage-p36_hourly_costs_iso_baseline("y2050",iso);
 
-p36_hourly_costs_iso_min_wage(t,iso) = p36_hourly_costs_iso(t,iso);	
+p36_hourly_costs_iso(t,iso) = p36_hourly_costs_iso_baseline(t,iso);	
 
 *' @code
-p36_hourly_costs_iso_min_wage(t,iso) $ ((m_year(t) gt 2020) and (m_year(t) le 2050)) = p36_hourly_costs_iso(t,iso) +
-							 max(0, ((m_year(t)-2020)/(2050-2020))*p36_hourly_costs_increase(iso));
+*' In case of a scenario with an external global minimum wage we add a linear term to the baseline 
+*' hourly labor costs, which starts from 0 in 2020, reaches the difference etween the minimum wage and
+*' baseline hourly labor costs in 2050 (`p36_hourly_costs_increase`), and then decreases back to 0 in 2100. 
+*' If the hourly labor costs would decrease again below he minimum wage after 2050, we keep them at minimum wage.
+*' If baseline labor costs are already high enough to meet the minimum wage, they are not changed.
 
-p36_hourly_costs_iso_min_wage(t,iso) $ ((m_year(t) gt 2050) and (m_year(t) le 2100)) = max(s36_minimum_wage,
-					p36_hourly_costs_iso(t,iso) + max(0, p36_hourly_costs_increase(iso)-((m_year(t)-2050)/(2100-2050))*p36_hourly_costs_increase(iso)));
+p36_hourly_costs_iso(t,iso)$((m_year(t) gt 2020) and (m_year(t) le 2050)) = p36_hourly_costs_iso_baseline(t,iso) + max(0, ((m_year(t)-2020)/(2050-2020))*p36_hourly_costs_increase(iso));
 
+p36_hourly_costs_iso(t,iso)$((m_year(t) gt 2050) and (m_year(t) le 2100)) = max(s36_minimum_wage, p36_hourly_costs_iso_baseline(t,iso) + max(0, p36_hourly_costs_increase(iso)-((m_year(t)-2050)/(2100-2050))*p36_hourly_costs_increase(iso)));
 *' @stop
 
 *' Hourly labor costs are then aggregated to regional level using the total hours worked in the last
 *' year of `t_past` as weight.
-p36_hourly_costs(t,i) = sum(i_to_iso(i,iso), p36_hourly_costs_iso(t,iso)*p36_total_hours_worked(iso)) * (1/sum(i_to_iso(i,iso),p36_total_hours_worked(iso)));
-p36_hourly_costs_min_wage(t,i) = sum(i_to_iso(i,iso), p36_hourly_costs_iso_min_wage(t,iso)*p36_total_hours_worked(iso))*(1/sum(i_to_iso(i,iso),p36_total_hours_worked(iso)));
+p36_hourly_costs_baseline(t,i) = sum(i_to_iso(i,iso), p36_hourly_costs_iso_baseline(t,iso)*p36_total_hours_worked(iso)) * (1/sum(i_to_iso(i,iso),p36_total_hours_worked(iso)));
+p36_hourly_costs(t,i) = sum(i_to_iso(i,iso), p36_hourly_costs_iso(t,iso)*p36_total_hours_worked(iso))*(1/sum(i_to_iso(i,iso),p36_total_hours_worked(iso)));
 
 *' If productivity is assumed to increase proportional to hourly labor costs also with external minimum wage,
-*' total labor costs should not be scaled. Otherwise, the scaling factor between original and new hourly labor costs will
+*' total labor costs should not be scaled. Otherwise, the scaling factor between baseline and increased hourly labor costs will
 *' be applied to labor costs for crop production ([38_factor_costs]), livestock production ([70_livestock]), and the
 *' non-MAgPIE labor costs.
 if (s36_scale_labor_costs eq 0,
   pm_labor_cost_scaling(t,i) = 1;
 elseif (s36_scale_labor_costs eq 1),
-  pm_labor_cost_scaling(t,i) = p36_hourly_costs_min_wage(t,i) / p36_hourly_costs(t,i);
+  pm_labor_cost_scaling(t,i) = p36_hourly_costs(t,i) / p36_hourly_costs_baseline(t,i);
 );
 
