@@ -118,7 +118,7 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing,outputdir[i])
 
     ## Water
-    nc_file <- file.path(outputdir[i], paste(cfg$title, "efvVolume.mz", sep = "-"))
+    nc_file <- file.path(outputdir[i], paste("efvVolume.mz", sep = "-"))
     if (file.exists(nc_file)) {
       a <- read.magpie(nc_file)[, years, ]
       getNames(a) <- "environmental flow violations (km3)"
@@ -127,7 +127,7 @@ for (i in 1:length(outputdir)) {
       y <- mbind(y, a)
     } else missing <- c(missing, outputdir[i])
 
-    nc_file <- file.path(outputdir[i], paste(cfg$title, "watStress.mz", sep = "-"))
+    nc_file <- file.path(outputdir[i], paste("watStress.mz", sep = "-"))
     if (file.exists(nc_file)) {
       a <- read.magpie(nc_file)[, years, ]
       getNames(a) <- "water withdrawal to availability ratio (ratio)"
