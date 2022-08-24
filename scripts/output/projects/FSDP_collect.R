@@ -63,8 +63,8 @@ for (i in 1:length(outputdir)) {
   ### Grid level outputs
   ## only for BAU and SDP to save time and storage
   scen <- c("BAU","FSDP")
-  if(unlist(strsplit(cfg$title,"_"))[3] %in% scen) {
-    y <- NULL
+  if (unlist(strsplit(cfg$title,"_"))[3] %in% scen) {
+    y     <- NULL
     years <- c(2020,2050)
 
     ## BII
@@ -117,6 +117,25 @@ for (i in 1:length(outputdir)) {
       y <- mbind(y,a)
     } else missing <- c(missing,outputdir[i])
 
+    ## Water
+    nc_file <- file.path(outputdir[i], paste(cfg$title, "efvVolume.mz",sep="-"))
+    if (file.exists(nc_file)) {
+      a <- read.magpie(nc_file)[,years,]
+      getNames(a) <- "environmental flow violations (km3)"
+      getSets(a,  fulldim = FALSE)[3] <- "variable"
+      a <- addLocation(a)
+      y <- mbind(y, a)
+    } else missing <- c(missing,outputdir[i])
+
+    nc_file <- file.path(outputdir[i], paste(cfg$title, "watStress.mz",sep="-"))
+    if (file.exists(nc_file)) {
+      a <- read.magpie(nc_file)[,years,]
+      getNames(a) <- "water withdrawal to availability ratio (ratio)"
+      getSets(a,  fulldim = FALSE)[3] <- "variable"
+      a <- addLocation(a)
+      y <- mbind(y, a)
+    } else missing <- c(missing,outputdir[i])
+
     #add dimensions
     y <- add_dimension(y, dim = 3.1, add = "scenario", nm = gsub(".", "_", cfg$title, fixed = TRUE))
     y <- add_dimension(y, dim = 3.1, add = "model", nm = "MAgPIE")
@@ -138,9 +157,9 @@ if (!is.null(missing)) {
 
 message("Saving rds files ...")
 
-saveRDS(reg,file = file.path("output",paste(rev,"FSDP_reg.rds",sep="_")), version = 2,compress = "xz")
-saveRDS(iso,file = file.path("output",paste(rev,"FSDP_iso.rds",sep="_")), version = 2,compress = "xz")
-saveRDS(grid,file = file.path("output",paste(rev,"FSDP_grid.rds",sep="_")), version = 2,compress = "xz")
+saveRDS(reg, file = file.path("output", paste(rev,"FSDP_reg.rds",sep="_")), version = 2,compress = "xz")
+saveRDS(iso, file = file.path("output", paste(rev,"FSDP_iso.rds",sep="_")), version = 2,compress = "xz")
+saveRDS(grid, file = file.path("output", paste(rev,"FSDP_grid.rds",sep="_")), version = 2,compress = "xz")
 
 #save i_to_iso mapping
 gdx <- file.path(outputdir[1], "fulldata.gdx")
