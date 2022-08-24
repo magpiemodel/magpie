@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts/start** cleanup of old start scripts
 
 ### added
+- **scripts** added water output script for FSEC model runs 
 - **scripts** added output script running MAGICC7 on a MAgPIE scenario
 - **scripts** added output script for gridded crop diversity indices
 - **scripts** added output scripts for FSEC FSDP runs
