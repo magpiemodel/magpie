@@ -135,6 +135,7 @@ fsecScenario <- function(scenario) {
                        "projects/FSEC_dietaryIndicators",
                        "projects/FSEC_costs.R",
                        "projects/FSEC_nitrogenPollution.R",
+                       "projects/FSEC_water.R",
                        "projects/FSEC_StevenLord.R",
                        "runBlackmagicc.R"
                        )

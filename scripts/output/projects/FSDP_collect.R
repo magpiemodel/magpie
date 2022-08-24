@@ -118,18 +118,18 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing,outputdir[i])
 
     ## Water
-    nc_file <- file.path(outputdir[i], paste(cfg$title, "efvVolume.mz",sep="-"))
+    nc_file <- file.path(outputdir[i], paste(cfg$title, "efvVolume.mz", sep = "-"))
     if (file.exists(nc_file)) {
-      a <- read.magpie(nc_file)[,years,]
+      a <- read.magpie(nc_file)[, years, ]
       getNames(a) <- "environmental flow violations (km3)"
       getSets(a,  fulldim = FALSE)[3] <- "variable"
       a <- addLocation(a)
       y <- mbind(y, a)
     } else missing <- c(missing,outputdir[i])
 
-    nc_file <- file.path(outputdir[i], paste(cfg$title, "watStress.mz",sep="-"))
+    nc_file <- file.path(outputdir[i], paste(cfg$title, "watStress.mz", sep = "-"))
     if (file.exists(nc_file)) {
-      a <- read.magpie(nc_file)[,years,]
+      a <- read.magpie(nc_file)[, years, ]
       getNames(a) <- "water withdrawal to availability ratio (ratio)"
       getSets(a,  fulldim = FALSE)[3] <- "variable"
       a <- addLocation(a)
@@ -139,13 +139,13 @@ for (i in 1:length(outputdir)) {
     #add dimensions
     y <- add_dimension(y, dim = 3.1, add = "scenario", nm = gsub(".", "_", cfg$title, fixed = TRUE))
     y <- add_dimension(y, dim = 3.1, add = "model", nm = "MAgPIE")
-    getSets(y,fulldim = F)[2] <- "period"
+    getSets(y, fulldim = FALSE)[2] <- "period"
 
     #save as data.frame with xy coordinates
-    y <- as.data.table(as.data.frame(y,rev=3))
+    y <- as.data.table(as.data.frame(y, rev = 3))
 
     #bind together
-    grid <- rbind(grid,y)
+    grid <- rbind(grid, y)
 
   }
 }
@@ -162,14 +162,14 @@ saveRDS(iso, file = file.path("output", paste(rev,"FSDP_iso.rds",sep="_")), vers
 saveRDS(grid, file = file.path("output", paste(rev,"FSDP_grid.rds",sep="_")), version = 2,compress = "xz")
 
 #save i_to_iso mapping
-gdx <- file.path(outputdir[1], "fulldata.gdx")
-reg2iso <- readGDX(gdx,"i_to_iso")
-names(reg2iso) <- c("region","iso_a3")
-write.csv(reg2iso,"output/reg2iso.csv")
-saveRDS(reg2iso,file = file.path("output","reg2iso.rds"), version = 2,compress = "xz")
+gdx     <- file.path(outputdir[1], "fulldata.gdx")
+reg2iso <- readGDX(gdx, "i_to_iso")
+names(reg2iso) <- c("region", "iso_a3")
+write.csv(reg2iso, "output/reg2iso.csv")
+saveRDS(reg2iso, file = file.path("output", "reg2iso.rds"), version = 2, compress = "xz")
 
 message("Plotting figures ...")
 library(m4fsdp)
-heatmapFSDP(reg,tableType=1,file=file.path("output",paste(rev,"FSDP_heatmap1.jpg",sep="_")))
-heatmapFSDP(reg,tableType=2,file=file.path("output",paste(rev,"FSDP_heatmap2.jpg",sep="_")))
-spatialMapsFSDP(reg,iso,grid,reg2iso,file = file.path("output",paste(rev,"FSDP_spatialMaps.jpg",sep="_")))
+heatmapFSDP(reg, tableType = 1, file = file.path("output", paste(rev, "FSDP_heatmap1.jpg", sep = "_")))
+heatmapFSDP(reg, tableType = 2, file = file.path("output", paste(rev, "FSDP_heatmap2.jpg", sep = "_")))
+spatialMapsFSDP(reg, iso, grid, reg2iso, file = file.path("output", paste(rev, "FSDP_spatialMaps.jpg", sep = "_")))
