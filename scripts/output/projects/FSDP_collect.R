@@ -77,6 +77,16 @@ for (i in 1:length(outputdir)) {
       y <- mbind(y,a)
     } else missing <- c(missing,outputdir[i])
 
+    ## Crop diversity
+    nc_file <- file.path(outputdir[i], paste0(scen,"-CropDiversityGridded.nc"))
+    if(file.exists(nc_file)) {
+      a <- read.magpie(nc_file)[,years, "ShannonCropDiversity"]
+      getNames(a) <- "Shannon crop diversity (index)"
+      getSets(a,fulldim = F)[3] <- "variable"
+      a <- addLocation(a)
+      y <- mbind(y,a)
+    } else missing <- c(missing,outputdir[i])
+
     ## land patterns Mha
     nc_file <- file.path(outputdir[i], "cell.land_0.5.mz")
     if(file.exists(nc_file)) {
