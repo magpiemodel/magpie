@@ -36,7 +36,7 @@ missing <- NULL
 saveRDS(outputdir, "outputdir.rds")
 
 #filter out calibration run
-x <- unlist(lapply(strsplit(basename(outputdir),"_"),function(x) x[2]))
+x         <- unlist(lapply(strsplit(basename(outputdir), "_"), function(x) x[2]))
 outputdir <- outputdir[which(x %in% c("FSECa", "FSECb", "FSECc", "FSECd", "FSECe"))]
 
 #get revision
@@ -62,10 +62,10 @@ for (i in 1:length(outputdir)) {
 
   ### Grid level outputs
   ## only for BAU and SDP to save time and storage
-  scen <- c("BAU","FSDP")
-  if (unlist(strsplit(cfg$title,"_"))[3] %in% scen) {
+  scen <- c("BAU", "FSDP")
+  if (unlist(strsplit(cfg$title, "_"))[3] %in% scen) {
     y     <- NULL
-    years <- c(2020,2050)
+    years <- c(2020, 2050)
 
     ## BII
     nc_file <- file.path(outputdir[i], paste(cfg$title,"cell.bii_0.5.mz",sep="_"))#Note the "_" instead of "-"
@@ -157,9 +157,9 @@ if (!is.null(missing)) {
 
 message("Saving rds files ...")
 
-saveRDS(reg, file = file.path("output", paste(rev,"FSDP_reg.rds",sep="_")), version = 2,compress = "xz")
-saveRDS(iso, file = file.path("output", paste(rev,"FSDP_iso.rds",sep="_")), version = 2,compress = "xz")
-saveRDS(grid, file = file.path("output", paste(rev,"FSDP_grid.rds",sep="_")), version = 2,compress = "xz")
+saveRDS(reg, file = file.path("output", paste(rev, "FSDP_reg.rds", sep = "_")), version = 2, compress = "xz")
+saveRDS(iso, file = file.path("output", paste(rev, "FSDP_iso.rds", sep = "_")), version = 2, compress = "xz")
+saveRDS(grid, file = file.path("output", paste(rev, "FSDP_grid.rds", sep = "_")), version = 2, compress = "xz")
 
 #save i_to_iso mapping
 gdx     <- file.path(outputdir[1], "fulldata.gdx")
