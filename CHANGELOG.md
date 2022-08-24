@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **inputs** updated non-food initial prices, MACCs curves, and removed suitability threshold of 0.1 in all_marginal setting
 - **documentation** added literature
 - **scripts/start** cleanup of old start scripts
+- **scripts** log files are now written in a subfolder "logs"
 
 ### added
 - **scripts** added output script running MAGICC7 on a MAgPIE scenario
@@ -31,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### fixed
 - **43_water_availability** added missing years after 2100 in "f43_wat_avail" to avoid infeasibilities in coupled runs with less_ts timesteps
+- **scripts** fixed some bugs related to background execution of start/output scripts
 
 
 ## [4.5.0] - 2022-07-07
