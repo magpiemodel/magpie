@@ -21,19 +21,19 @@ library(gdx)
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
-  outputdir <- file.path("output/",list.dirs("output/", full.names = FALSE, recursive = FALSE))
+  outputdir <- file.path("output/", list.dirs("output/", full.names = FALSE, recursive = FALSE))
   #Define arguments that can be read from command line
   lucode2::readArgs("outputdir")
 }
 ###############################################################################
 cat("\nStarting output generation\n")
 
-reg <- NULL
-iso <- NULL
-grid <- NULL
+reg     <- NULL
+iso     <- NULL
+grid    <- NULL
 missing <- NULL
 
-saveRDS(outputdir,"outputdir.rds")
+saveRDS(outputdir, "outputdir.rds")
 
 #filter out calibration run
 x <- unlist(lapply(strsplit(basename(outputdir),"_"),function(x) x[2]))
@@ -125,7 +125,7 @@ for (i in 1:length(outputdir)) {
       getSets(a,  fulldim = FALSE)[3] <- "variable"
       a <- addLocation(a)
       y <- mbind(y, a)
-    } else missing <- c(missing,outputdir[i])
+    } else missing <- c(missing, outputdir[i])
 
     nc_file <- file.path(outputdir[i], paste(cfg$title, "watStress.mz", sep = "-"))
     if (file.exists(nc_file)) {
@@ -134,7 +134,7 @@ for (i in 1:length(outputdir)) {
       getSets(a,  fulldim = FALSE)[3] <- "variable"
       a <- addLocation(a)
       y <- mbind(y, a)
-    } else missing <- c(missing,outputdir[i])
+    } else missing <- c(missing, outputdir[i])
 
     #add dimensions
     y <- add_dimension(y, dim = 3.1, add = "scenario", nm = gsub(".", "_", cfg$title, fixed = TRUE))
