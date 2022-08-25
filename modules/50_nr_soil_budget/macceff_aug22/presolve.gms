@@ -35,14 +35,23 @@
 *' The year of NUE_base2 should be fixed to the baseyear efficiency, as
 *' alternative "baseline" improvements would otherwise not reduce the
 *' mitigation potential of the MACCs.
+*' If the MACCs relate to a global emission factor NUEb should be the global
+*' NUE, otherwise the regional NUE.
 *' The name of the MACC category "inorg_fert_n2o" actually includes all types
 *' of soil N2O emissions. Most of these measures also reduce general Nr surpluses.
 *' We therefor apply it here to Nr soil efficiency more generally.
 
-i50_maccs_mitigation_transf(t,i) =
-  im_maccs_mitigation(t,i,"inorg_fert","n2o_n_direct")*i50_nr_eff_bau("y2010",i) / (1 + im_maccs_mitigation(t,i,"inorg_fert","n2o_n_direct") * (i50_nr_eff_bau("y2010",i) - 1));
-i50_maccs_mitigation_pasture_transf(t,i) =
-  im_maccs_mitigation(t,i,"inorg_fert","n2o_n_direct")*i50_nr_eff_pasture_bau("y2010",i) / (1 + im_maccs_mitigation(t,i,"inorg_fert","n2o_n_direct") * (i50_nr_eff_pasture_bau("y2010",i) - 1));
+if(s50_maccs_global_ef = 1,
+  i50_maccs_mitigation_transf(t,i) =
+    im_maccs_mitigation(t,i,"inorg_fert","n2o_n_direct")*s50_maccs_implicit_nue_glo / (1 + im_maccs_mitigation(t,i,"inorg_fert","n2o_n_direct") * (s50_maccs_implicit_nue_glo - 1));
+  i50_maccs_mitigation_pasture_transf(t,i) =
+    im_maccs_mitigation(t,i,"inorg_fert","n2o_n_direct")*s50_maccs_implicit_nue_glo / (1 + im_maccs_mitigation(t,i,"inorg_fert","n2o_n_direct") * (s50_maccs_implicit_nue_glo - 1));
+else
+  i50_maccs_mitigation_transf(t,i) =
+    im_maccs_mitigation(t,i,"inorg_fert","n2o_n_direct")*i50_nr_eff_bau("y2010",i) / (1 + im_maccs_mitigation(t,i,"inorg_fert","n2o_n_direct") * (i50_nr_eff_bau("y2010",i) - 1));
+  i50_maccs_mitigation_pasture_transf(t,i) =
+    im_maccs_mitigation(t,i,"inorg_fert","n2o_n_direct")*i50_nr_eff_pasture_bau("y2010",i) / (1 + im_maccs_mitigation(t,i,"inorg_fert","n2o_n_direct") * (i50_nr_eff_pasture_bau("y2010",i) - 1));
+);
 
 *' After transformation of the MACCs, we can calculate NUE_2 (vm_nr_eff) as the
 *' result of a baseline NUE improvement and an MACC-driven further increase of NUE.

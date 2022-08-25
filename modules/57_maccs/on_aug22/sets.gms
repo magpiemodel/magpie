@@ -11,7 +11,7 @@ sets
   /inorg_fert, resid, som, rice, man_crop, man_past/
 
   emis_source_awms_n2o(emis_source) subset awms_manure_n2o
-  /man_crop,man_past,awms/
+  /awms/
 
   emis_source_rice_ch4(emis_source) subset rice emissions
   /rice/

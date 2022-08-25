@@ -11,8 +11,11 @@ $setglobal c57_macc_version  PBL_2007
 $setglobal c57_macc_scenario  Default
 
 scalars
-  s57_maxmac_n2o    activate full N mitigation independent of pollutant price (1 is active) / 0 /
-  s57_maxmac_ch4    activate full CH4 mitigation independent of pollutant price (1 is active) / 0 /
+  s57_maxmac_n_soil    activate full soil N mitigation independent of pollutant price (1 is active) / 0 /
+  s57_maxmac_n_awms    activate full awms N mitigation independent of pollutant price (1 is active) / 0 /
+  s57_maxmac_ch4_rice    activate full rice CH4 mitigation independent of pollutant price (1 is active) / 0 /
+  s57_maxmac_ch4_entferm activate full enteric fermentation CH4 mitigation independent of pollutant price (1 is active) / 0 /
+  s57_maxmac_ch4_awms  activate full awms CH4 mitigation independent of pollutant price (1 is active) / 0 /
 ;
 table f57_maccs_n2o(t_all,i,maccs_n2o,maccs_steps)  N2O MACC from Image model (percent)
 $ondelim
