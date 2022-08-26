@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** log files are now written in a subfolder "logs"
 
 ### added
+- **scripts** added output script creating a merged .csv for dietaryIndicators and caloricSupply outputs
+- **scripts** added output script distributing Marco Springmann's health impacts into the respective output scenario report.mif, report.rds, and report_iso.rds
 - **scripts** added output script running MAGICC7 on a MAgPIE scenario
 - **scripts** added output script for gridded crop diversity indices
 - **scripts** added output scripts for FSEC FSDP runs
