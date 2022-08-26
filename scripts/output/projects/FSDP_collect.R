@@ -137,6 +137,15 @@ for (i in 1:length(outputdir)) {
       y <- mbind(y, a)
     } else missing <- c(missing, outputdir[i])
 
+    nc_file <- file.path(outputdir[i], paste("watStressViolations.mz", sep = "-"))
+    if (file.exists(nc_file)) {
+      a <- read.magpie(nc_file)[, years, ]
+      getNames(a) <- "water stress and violations"
+      getSets(a,  fulldim = FALSE)[3] <- "variable"
+      a <- addLocation(a)
+      y <- mbind(y, a)
+    } else missing <- c(missing, outputdir[i])
+
     #add dimensions
     y <- add_dimension(y, dim = 3.1, add = "scenario", nm = gsub(".", "_", cfg$title, fixed = TRUE))
     y <- add_dimension(y, dim = 3.1, add = "model", nm = "MAgPIE")

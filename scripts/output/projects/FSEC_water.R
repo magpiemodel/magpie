@@ -42,6 +42,9 @@ mapping <- readRDS(paste0(outputdir, "clustermap_rev4.75FSEC_c200_e2bdb6cd.rds")
 efvViolation <- waterEFViolation(gdx, level = "grid", dir = outputdir)
 efvViolation[efvViolation > 0] <- 1
 watStress <- waterStressRatio(gdx, level = "grid", dir = outputdir)
+watStressViolations <- watStress
+watStressViolations[efvViolation == 1] <- 100
 
 write.magpie(efvViolation, paste0(outputdir, "efvViolation.mz"))
 write.magpie(watStress, paste0(outputdir, "watStress.mz"))
+write.magpie(watStressViolations, paste0(outputdir, "watStressViolations.mz"))
