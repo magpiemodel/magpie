@@ -7,3 +7,4 @@
 
 name,type,reason
 vm_emissions_reg,input,not needed
+sm_fix_SSP2,input,questionnaire

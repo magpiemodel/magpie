@@ -21,11 +21,19 @@ $offtext
 i57_mac_step_n2o(t,i,emis_source) = min(201, ceil(im_pollutant_prices(t,i,"n2o_n_direct",emis_source)/298*28/44*44/12 / s57_step_length) + 1);
 i57_mac_step_ch4(t,i,emis_source) = min(201, ceil(im_pollutant_prices(t,i,"ch4",emis_source)/25*44/12 / s57_step_length) + 1);
 
-if (s57_maxmac_n_soil = 1, i57_mac_step_n2o(t,i,emis_source_inorg_fert_n2o) = 201);
-if (s57_maxmac_n_awms = 1, i57_mac_step_n2o(t,i,emis_source_awms_n2o) = 201);
-if (s57_maxmac_ch4_rice = 1, i57_mac_step_ch4(t,i,emis_source_rice_ch4) = 201);
-if (s57_maxmac_ch4_entferm = 1, i57_mac_step_ch4(t,i,emis_source_ent_ferm_ch4) = 201);
-if (s57_maxmac_ch4_awms = 1, i57_mac_step_ch4(t,i,emis_source_awms_ch4) = 201);
+
+loop(t,
+
+  if(m_year(t) > sm_fix_SSP2,
+
+    if (s57_maxmac_n_soil = 1, i57_mac_step_n2o(t,i,emis_source_inorg_fert_n2o) = 201);
+    if (s57_maxmac_n_awms = 1, i57_mac_step_n2o(t,i,emis_source_awms_n2o) = 201);
+    if (s57_maxmac_ch4_rice = 1, i57_mac_step_ch4(t,i,emis_source_rice_ch4) = 201);
+    if (s57_maxmac_ch4_entferm = 1, i57_mac_step_ch4(t,i,emis_source_ent_ferm_ch4) = 201);
+    if (s57_maxmac_ch4_awms = 1, i57_mac_step_ch4(t,i,emis_source_awms_ch4) = 201);
+
+  );
+);
 
 *Calculate technical mitigation depending on i57_mac_step_n2o and i57_mac_step_ch4.
 *At zero GHG prices i57_mac_step_n2o and i57_mac_step_ch4 are set to 1.
