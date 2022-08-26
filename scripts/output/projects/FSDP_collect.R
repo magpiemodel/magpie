@@ -119,10 +119,10 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing,outputdir[i])
 
     ## Water
-    nc_file <- file.path(outputdir[i], paste("efvVolume.mz", sep = "-"))
+    nc_file <- file.path(outputdir[i], paste("efvViolation.mz", sep = "-"))
     if (file.exists(nc_file)) {
       a <- read.magpie(nc_file)[, years, ]
-      getNames(a) <- "environmental flow violations (km3)"
+      getNames(a) <- "environmental flow violations"
       getSets(a,  fulldim = FALSE)[3] <- "variable"
       a <- addLocation(a)
       y <- mbind(y, a)
@@ -172,7 +172,7 @@ saveRDS(reg2iso, file = file.path("output", "reg2iso.rds"), version = 2, compres
 #save validation file
 val <- file.path(outputdir[1], "validation.mif")
 val <- as.data.table(read.quitte(val))
-saveRDS(val,file = file.path("output",paste(rev,"FSDP_validation.rds",sep="_")), version = 2,compress = "xz")
+saveRDS(val, file = file.path("output", paste(rev, "FSDP_validation.rds", sep = "_")), version = 2, compress = "xz")
 
 message("Plotting figures ...")
 library(m4fsdp)
