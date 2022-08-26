@@ -39,8 +39,9 @@ gdx     <- file.path(outputdir, "fulldata.gdx")
 mapping <- readRDS(paste0(outputdir, "clustermap_rev4.75FSEC_c200_e2bdb6cd.rds"))
 
 # Grid-level water intdicators
-efvVolume <- waterEFViolation(gdx, level = "grid", dir = outputdir)
+efvViolation <- waterEFViolation(gdx, level = "grid", dir = outputdir)
+efvViolation[efvViolation > 1] <- 1
 watStress <- waterStressRatio(gdx, level = "grid", dir = outputdir)
 
-write.magpie(efvVolume, paste0(outputdir, "efvVolume.mz"))
+write.magpie(efvViolation, paste0(outputdir, "efvVolume.mz"))
 write.magpie(watStress, paste0(outputdir, "watStress.mz"))
