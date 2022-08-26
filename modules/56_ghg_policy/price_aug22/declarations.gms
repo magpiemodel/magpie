@@ -41,14 +41,12 @@ variables
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_carbon_stock(t,j,land,c_pools,stockType,type)   Carbon stock in vegetation soil and litter for different land types (mio. tC)
- ov_btm_reg(t,i,emis_source,pollutants,type)        Regional emissions before technical mitigation (Tg per yr)
  ov_emission_costs(t,i,type)                        Costs for emission rights for pollutants and greenhouse gases (mio. USD05MER per yr)
  ov_emissions_reg(t,i,emis_source,pollutants,type)  Regional emissions by source and gas after technical mitigation N CH4 C (Tg per yr)
  ov56_emis_pricing(t,i,emis_source,pollutants,type) Regional emissions by source and gas after technical mitigation N CH4 C (Tg per yr)
  ov56_emission_cost(t,i,emis_source,type)           GHG emissions cost (mio. USD05MER per yr)
  ov_reward_cdr_aff(t,i,type)                        Regional average annual expected revenue from afforestation (mio. USD05MER per yr)
  ov56_reward_cdr_aff(t,j,type)                      Cellular average annual expected revenue from afforestation (mio. USD05MER per yr)
- oq56_emis_co2_actual(t,i,emis_oneoff,type)         Calculation of annual CO2 emissions (Tg per yr)
  oq56_emission_costs(t,i,type)                      Calculation of total emission costs (mio. USD05MER per yr)
  oq56_emission_cost_annual(t,i,emis_annual,type)    Calculation of regional costs for annual emissions (mio. USD05MER per yr)
  oq56_emission_cost_oneoff(t,i,emis_oneoff,type)    Calculation of regional costs for emissions occuring only once in time (mio. USD05MER per yr)

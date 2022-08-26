@@ -35,7 +35,6 @@ cfg$gms$carbon <- "normal_aug22"
 cfg$gms$methane <- "ipcc2006_aug22"
 cfg$gms$ghg_policy <- "price_aug22"
 cfg$gms$maccs <- "on_aug22"
-cfg$gms$peatland <-"on_aug22"
 start_run(cfg,codeCheck=FALSE)
 
 source("config/default.cfg")
@@ -47,7 +46,6 @@ cfg$gms$carbon <- "normal_aug22"
 cfg$gms$methane <- "ipcc2006_aug22"
 cfg$gms$ghg_policy <- "price_aug22"
 cfg$gms$maccs <- "on_aug22"
-cfg$gms$peatland <-"on_aug22"
 cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"     # def = R21M42-SSP2-NPi
 cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-PkBudg900"     # def = R21M42-SSP2-NPi
 start_run(cfg,codeCheck=FALSE)

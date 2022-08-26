@@ -17,4 +17,7 @@ equations
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
+parameters
+ oq52_emis_co2_actual(t,i,emis_oneoff,type) Calculation of annual CO2 emissions (Tg per yr)
+;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################

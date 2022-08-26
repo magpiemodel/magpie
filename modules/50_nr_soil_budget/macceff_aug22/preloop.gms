@@ -25,17 +25,17 @@ loop(t,
 
   if(m_year(t) <= sm_fix_SSP2,
 
-     i50_nr_eff_bau(t,i) = f50_snupe(t,i,"neff60_60_starty2010") * p50_cropneff_region_shr(t,i)
-                      + f50_snupe(t,i,"neff60_60_starty2010") * (1-p50_cropneff_region_shr(t,i));
-     i50_nr_eff_pasture_bau(t,i) = f50_nue_pasture(t,i,"constant") * p50_pastneff_region_shr(t,i)
-                              + f50_nue_pasture(t,i,"constant") * (1-p50_pastneff_region_shr(t,i));
+     i50_nr_eff_bau(t,i) = f50_snupe_base(t,i,"baseeff_add_5_10_starty2020_max65") * p50_cropneff_region_shr(t,i)
+                      + f50_snupe_base(t,i,"baseeff_add_5_10_starty2020_max65") * (1-p50_cropneff_region_shr(t,i));
+     i50_nr_eff_pasture_bau(t,i) = f50_nue_base_pasture(t,i,"constant") * p50_pastneff_region_shr(t,i)
+                              + f50_nue_base_pasture(t,i,"constant") * (1-p50_pastneff_region_shr(t,i));
 
   else
 
-     i50_nr_eff_bau(t,i) = f50_snupe(t,i,"%c50_scen_neff%") * p50_cropneff_region_shr(t,i)
-                      + f50_snupe(t,i,"%c50_scen_neff_noselect%") * (1-p50_cropneff_region_shr(t,i));
-     i50_nr_eff_pasture_bau(t,i) = f50_nue_pasture(t,i,"%c50_scen_neff_pasture%") * p50_pastneff_region_shr(t,i)
-                              + f50_nue_pasture(t,i,"%c50_scen_neff_pasture_noselect%") * (1-p50_pastneff_region_shr(t,i));
+     i50_nr_eff_bau(t,i) = f50_snupe_base(t,i,"%c50_scen_neff%") * p50_cropneff_region_shr(t,i)
+                      + f50_snupe_base(t,i,"%c50_scen_neff_noselect%") * (1-p50_cropneff_region_shr(t,i));
+     i50_nr_eff_pasture_bau(t,i) = f50_nue_base_pasture(t,i,"%c50_scen_neff_pasture%") * p50_pastneff_region_shr(t,i)
+                              + f50_nue_base_pasture(t,i,"%c50_scen_neff_pasture_noselect%") * (1-p50_pastneff_region_shr(t,i));
 
   );
 );

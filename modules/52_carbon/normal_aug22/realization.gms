@@ -21,4 +21,5 @@ $Ifi "%phase%" == "declarations" $include "./modules/52_carbon/normal_aug22/decl
 $Ifi "%phase%" == "input" $include "./modules/52_carbon/normal_aug22/input.gms"
 $Ifi "%phase%" == "equations" $include "./modules/52_carbon/normal_aug22/equations.gms"
 $Ifi "%phase%" == "start" $include "./modules/52_carbon/normal_aug22/start.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/52_carbon/normal_aug22/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

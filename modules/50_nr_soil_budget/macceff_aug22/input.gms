@@ -90,17 +90,17 @@ sets
                           VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 ;
 
-parameter f50_snupe(t_all,i,scen_neff50)  selected scenario values for soil nitrogen uptake efficiency (1)
+parameter f50_snupe_base(t_all,i,scen_neff50)  selected scenario values for soil nitrogen uptake efficiency (1)
 /
 $ondelim
-$include "./modules/50_nr_soil_budget/input/f50_snupe.cs4"
+$include "./modules/50_nr_soil_budget/input/f50_snupe_base.cs4"
 $offdelim
 /;
 
-parameter f50_nue_pasture(t_all,i,scen_neff50)  selected scenario values for soil nitrogen uptake efficiency (1)
+parameter f50_nue_base_pasture(t_all,i,scen_neff50)  selected scenario values for soil nitrogen uptake efficiency (1)
 /
 $ondelim
-$include "./modules/50_nr_soil_budget/input/f50_nue_pasture.cs4"
+$include "./modules/50_nr_soil_budget/input/f50_nue_base_pasture.cs4"
 $offdelim
 /;
 
