@@ -30,19 +30,18 @@ for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
     source("config/default.cfg")
     cfg=setScenario(cfg=cfg,scenario=ssp)
     cfg$title <- paste(prefix,"newdefault",ssp,sep="_")
-    defsetScenario()
     start_run(cfg,codeCheck=FALSE)
 
     source("config/default.cfg")
     cfg=setScenario(cfg=cfg,scenario=ssp)
-    cfg$title <- paste(prefix,"newdefault_mitigation",sep="_")
+    cfg$title <- paste(prefix,"newdefault_mitigation",ssp,sep="_")
     cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"     # def = R21M42-SSP2-NPi
     cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-PkBudg900"     # def = R21M42-SSP2-NPi
     start_run(cfg,codeCheck=FALSE)
 
     source("config/default.cfg")
     cfg=setScenario(cfg=cfg,scenario=ssp)
-    cfg$title <- paste(prefix,"newsetup_maxmaccs",sep="_")
+    cfg$title <- paste(prefix,"newsetup_maxmaccs",ssp,sep="_")
     cfg$gms$peatland  <- "on_aug22"
     cfg$gms$nr_soil_budget  <- "macceff_aug22"
     cfg$gms$nitrogen <- "rescaled_aug22"
