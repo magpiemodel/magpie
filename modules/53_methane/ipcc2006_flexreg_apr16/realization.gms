@@ -16,10 +16,10 @@
 *' inconsistent with CH4 emissions from enteric fermentation.
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/53_methane/ipcc2006_flexreg_apr16/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/53_methane/ipcc2006_flexreg_apr16/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/53_methane/ipcc2006_flexreg_apr16/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/53_methane/ipcc2006_flexreg_apr16/equations.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/53_methane/ipcc2006_flexreg_apr16/preloop.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/53_methane/ipcc2006_flexreg_apr16/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/53_methane/ipcc2006_aug22/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/53_methane/ipcc2006_aug22/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/53_methane/ipcc2006_aug22/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/53_methane/ipcc2006_aug22/equations.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/53_methane/ipcc2006_aug22/preloop.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/53_methane/ipcc2006_aug22/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

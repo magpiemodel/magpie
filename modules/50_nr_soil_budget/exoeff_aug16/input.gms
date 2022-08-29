@@ -8,27 +8,31 @@
 * Scenario for nr efficiency on croplands or pastures for selected (and
 * respectively non-selected) countries in cropneff_countries and pastneff_countries
 
-$setglobal c50_scen_neff  neff60_60_starty2010
-$setglobal c50_scen_neff_noselect  neff60_60_starty2010
-*   options: constant,
-*   neff55_55_starty1990,neff60_60_starty1990,neff65_70_starty1990,
-*   neff65_70_starty2010,neff60_60_starty2010,neff55_60_starty2010,
-*   neff70_75_starty2010,neff75_80_starty2010,neff80_85_starty2010
-*   neff75_85_starty2010,neff85_85_starty2010
+$setglobal c50_scen_neff  baseeff_add_5_10_starty2020_max65
+$setglobal c50_scen_neff_noselect  baseeff_add_5_10_starty2020_max65
+*   "constant"                           "maxeff_glob_75_85_starty2020"
+*   "maxeff_glob_75_80_starty2020"       "maxeff_glob_60_65_starty2020"
+*   "maxeff_glob_65_75_starty2020"       "baseeff_add_10_20_starty2020_max75"
+*   "baseeff_add_5_10_starty2020_max65"  "baseeff_add_0_0_starty2020_max55"
+*   "baseeff_add_5_10_starty2020_max75"  "baseeff_add_5_15_starty2020_max75"
+*   "maxeff_ZhangBy2030_start2020"       "maxeff_ZhangBy2050_start2020"
 
 $setglobal c50_scen_neff_pasture  constant
 $setglobal c50_scen_neff_pasture_noselect  constant
-*   options: constant,
-*   neff55_55_starty1990,neff60_60_starty1990,neff65_70_starty1990,
-*   neff65_70_starty2010,neff60_60_starty2010,neff55_60_starty2010,
-*   neff70_75_starty2010,neff75_80_starty2010,neff80_85_starty2010
-*   neff75_85_starty2010
+*   "constant"                           "maxeff_glob_75_85_starty2020"
+*   "maxeff_glob_75_80_starty2020"       "maxeff_glob_60_65_starty2020"
+*   "maxeff_glob_65_75_starty2020"       "baseeff_add_10_20_starty2020_max75"
+*   "baseeff_add_5_10_starty2020_max65"  "baseeff_add_0_0_starty2020_max55"
+*   "baseeff_add_5_10_starty2020_max75"  "baseeff_add_5_15_starty2020_max75"
+*   "maxeff_ZhangBy2030_start2020"       "maxeff_ZhangBy2050_start2020"
 
 $setglobal c50_dep_scen  history
 *   options:   history
 
 scalar
       s50_fertilizer_costs Costs of fertilizer (USD05MER per tN)            / 600 /
+      s50_maccs_global_ef Do maccs assume global emission factor (binary)    /1/
+      s50_maccs_implicit_nue_glo Global nitrogen use efficiency implicit to MACCs /0.5/
 ;
 
 * Set-switch for countries affected by country-specific neff scenarios
@@ -86,17 +90,17 @@ sets
                           VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
 ;
 
-parameter f50_snupe(t_all,i,scen_neff50)  selected scenario values for soil nitrogen uptake efficiency (1)
+parameter f50_snupe_base(t_all,i,scen_neff50)  selected scenario values for soil nitrogen uptake efficiency (1)
 /
 $ondelim
-$include "./modules/50_nr_soil_budget/input/f50_snupe.cs4"
+$include "./modules/50_nr_soil_budget/input/f50_snupe_base.cs4"
 $offdelim
 /;
 
-parameter f50_nue_pasture(t_all,i,scen_neff50)  selected scenario values for soil nitrogen uptake efficiency (1)
+parameter f50_nue_base_pasture(t_all,i,scen_neff50)  selected scenario values for soil nitrogen uptake efficiency (1)
 /
 $ondelim
-$include "./modules/50_nr_soil_budget/input/f50_nue_pasture.cs4"
+$include "./modules/50_nr_soil_budget/input/f50_nue_base_pasture.cs4"
 $offdelim
 /;
 

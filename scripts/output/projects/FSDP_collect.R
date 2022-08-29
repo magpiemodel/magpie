@@ -18,7 +18,6 @@ library(gms)
 library(magpiesets)
 library(data.table)
 library(gdx)
-library(quitte)
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
@@ -149,11 +148,6 @@ reg2iso <- readGDX(gdx,"i_to_iso")
 names(reg2iso) <- c("region","iso_a3")
 write.csv(reg2iso,"output/reg2iso.csv")
 saveRDS(reg2iso,file = file.path("output","reg2iso.rds"), version = 2,compress = "xz")
-
-#save validation file
-val <- file.path(outputdir[1], "validation.mif")
-val <- as.data.table(read.quitte(val))
-saveRDS(val,file = file.path("output",paste(rev,"FSDP_validation.rds",sep="_")), version = 2,compress = "xz")
 
 message("Plotting figures ...")
 library(m4fsdp)

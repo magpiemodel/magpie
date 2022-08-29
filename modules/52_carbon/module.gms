@@ -13,5 +13,6 @@
 *' @authors Benjamin Leon Bodirsky, Florian Humpenoeder, Abhijeet Mishra
 
 *###################### R SECTION START (MODULETYPES) ##########################
+$Ifi "%carbon%" == "normal_aug22" $include "./modules/52_carbon/normal_aug22/realization.gms"
 $Ifi "%carbon%" == "normal_dec17" $include "./modules/52_carbon/normal_dec17/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

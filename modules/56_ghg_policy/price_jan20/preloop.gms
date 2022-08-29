@@ -87,8 +87,7 @@ loop(t,
     until s56_counter = s56_timesteps-1);
   );
 );
-display p56_pollutant_prices_input;
-display im_pollutant_prices;
+
 *initialize age-class dependent C price with same C price for all age-classes
 p56_c_price_aff(t_all,i,ac) = im_pollutant_prices(t_all,i,"co2_c","forestry_vegc");
 *Shift C prices in age-classes for reflecting foresight.
@@ -99,5 +98,3 @@ ac_exp(ac)$(ac.off = s56_c_price_exp_aff/5) = yes;
 p56_c_price_aff(t_all,i,ac)$(ac.off >= s56_c_price_exp_aff/5) = sum(ac_exp, p56_c_price_aff(t_all,i,ac_exp));
 *zero C price before starting year
 p56_c_price_aff(t_all,i,ac)$(m_year(t_all)<s56_ghgprice_start) = 0;
-
-display p56_c_price_aff;

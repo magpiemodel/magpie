@@ -11,11 +11,12 @@ deposition_source51 Source of atmospheric deposition
 / agricultural_magpie, other_exogenous /
 
 scen_neff50 Scenario for uptake efficiency
-/ constant,neff_ZhangBy2030_start2010,neff_ZhangBy2050_start2010,
-neff55_55_starty1990,neff60_60_starty1990,neff65_70_starty1990,
-neff65_70_starty2010,neff60_60_starty2010,neff55_60_starty2010,
-neff70_75_starty2010,neff75_80_starty2010,neff80_85_starty2010,
-neff75_85_starty2010,neff85_85_starty2010 /
+/ constant,maxeff_glob_75_85_starty2020,
+maxeff_glob_75_80_starty2020,maxeff_glob_60_65_starty2020,
+maxeff_glob_65_75_starty2020,baseeff_add_10_20_starty2020_max75,
+baseeff_add_5_10_starty2020_max65,baseeff_add_0_0_starty2020_max55,
+baseeff_add_5_10_starty2020_max75,baseeff_add_5_15_starty2020_max75,
+maxeff_ZhangBy2030_start2020,maxeff_ZhangBy2050_start2020 /
 
 dep_scen50 Scenario for atmospheric deposition
 /history/
