@@ -24,11 +24,11 @@
 *' mitigation, total emission costs entering the objective function are zero.
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/56_ghg_policy/price_jan20/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/56_ghg_policy/price_jan20/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/56_ghg_policy/price_jan20/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/56_ghg_policy/price_jan20/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/56_ghg_policy/price_jan20/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/56_ghg_policy/price_jan20/preloop.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/56_ghg_policy/price_jan20/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/56_ghg_policy/price_aug22/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/56_ghg_policy/price_aug22/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/56_ghg_policy/price_aug22/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/56_ghg_policy/price_aug22/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/56_ghg_policy/price_aug22/scaling.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/56_ghg_policy/price_aug22/preloop.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/56_ghg_policy/price_aug22/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

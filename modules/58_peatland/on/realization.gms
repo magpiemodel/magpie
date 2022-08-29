@@ -18,12 +18,12 @@
 *' depending on `s58_fix_peatland`. Organic carbon stocks in peatlands are not accounted for. 
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/58_peatland/on_aug22/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/58_peatland/on_aug22/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/58_peatland/on_aug22/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/58_peatland/on_aug22/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/58_peatland/on_aug22/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/58_peatland/on_aug22/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/58_peatland/on_aug22/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/58_peatland/on_aug22/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/58_peatland/on/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/58_peatland/on/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/58_peatland/on/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/58_peatland/on/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/58_peatland/on/scaling.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/58_peatland/on/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/58_peatland/on/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/58_peatland/on/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

@@ -13,11 +13,11 @@
 *' @limitations The data set PBL_2007 is outdated and only kept for backward compatibility
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/57_maccs/on_sep16/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/57_maccs/on_sep16/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/57_maccs/on_sep16/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/57_maccs/on_sep16/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/57_maccs/on_sep16/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/57_maccs/on_sep16/preloop.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/57_maccs/on_sep16/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/57_maccs/on_aug22/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/57_maccs/on_aug22/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/57_maccs/on_aug22/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/57_maccs/on_aug22/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/57_maccs/on_aug22/scaling.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/57_maccs/on_aug22/preloop.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/57_maccs/on_aug22/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

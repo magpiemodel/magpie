@@ -202,7 +202,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Fri Aug 26 11:07:25 2022
+* Last modification (input data): Mon Aug 29 12:42:08 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -277,14 +277,14 @@ $setglobal biodiversity  bii_target
 $setglobal climate  static
 
 $setglobal nr_soil_budget  macceff_aug22
-$setglobal nitrogen  rescaled_aug22
-$setglobal carbon  normal_aug22
+$setglobal nitrogen  rescaled_jan21
+$setglobal carbon  normal_dec17
 $setglobal methane  ipcc2006_aug22
 $setglobal phosphorus  off
 $setglobal awms  ipcc2006_aug16
 $setglobal ghg_policy  price_aug22
 $setglobal maccs  on_aug22
-$setglobal peatland  on_aug22
+$setglobal peatland  on
 $setglobal som  static_jan19
 
 $setglobal bioenergy  1stgen_priced_dec18
