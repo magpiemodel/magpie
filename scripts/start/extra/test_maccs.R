@@ -24,55 +24,37 @@ source("scripts/start_functions.R")
 #start MAgPIE run
 source("config/default.cfg")
 
-prefix <- "maccs_test_v9"
+prefix <- "maccs_test_v10"
 
-source("config/default.cfg")
-cfg$title <- paste(prefix,"newsetup_baseline",sep="_")
-cfg$gms$peatland  <- "on"
-cfg$gms$nr_soil_budget  <- "macceff_aug22"
-cfg$gms$nitrogen <- "rescaled_jan21"
-cfg$gms$carbon <- "normal_dec17"
-cfg$gms$methane <- "ipcc2006_aug22"
-cfg$gms$ghg_policy <- "price_aug22"
-cfg$gms$maccs <- "on_aug22"
-start_run(cfg,codeCheck=FALSE)
+for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
+    source("config/default.cfg")
+    cfg=setScenario(cfg=cfg,scenario=ssp)
+    cfg$title <- paste(prefix,"newdefault",ssp,sep="_")
+    defsetScenario()
+    start_run(cfg,codeCheck=FALSE)
 
-source("config/default.cfg")
-cfg$title <- paste(prefix,"newsetup_mitigation",sep="_")
-cfg$gms$peatland  <- "on"
-cfg$gms$nr_soil_budget  <- "macceff_aug22"
-cfg$gms$nitrogen <- "rescaled_jan21"
-cfg$gms$carbon <- "normal_dec17"
-cfg$gms$methane <- "ipcc2006_aug22"
-cfg$gms$ghg_policy <- "price_aug22"
-cfg$gms$maccs <- "on_aug22"
-cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"     # def = R21M42-SSP2-NPi
-cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-PkBudg900"     # def = R21M42-SSP2-NPi
-start_run(cfg,codeCheck=FALSE)
+    source("config/default.cfg")
+    cfg=setScenario(cfg=cfg,scenario=ssp)
+    cfg$title <- paste(prefix,"newdefault_mitigation",sep="_")
+    cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"     # def = R21M42-SSP2-NPi
+    cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-PkBudg900"     # def = R21M42-SSP2-NPi
+    start_run(cfg,codeCheck=FALSE)
 
-source("config/default.cfg")
-cfg$title <- paste(prefix,"newsetup_maxmaccs",sep="_")
-cfg$gms$peatland  <- "on_aug22"
-cfg$gms$nr_soil_budget  <- "macceff_aug22"
-cfg$gms$nitrogen <- "rescaled_aug22"
-cfg$gms$carbon <- "normal_aug22"
-cfg$gms$methane <- "ipcc2006_aug22"
-cfg$gms$ghg_policy <- "price_aug22"
-cfg$gms$maccs <- "on_aug22"
-cfg$gms$peatland <-"on_aug22"
-cfg$gms$s57_maxmac_n_soil  <- 201   # def = -1
-cfg$gms$s57_maxmac_n_awms  <- 201   # def =  -1
-cfg$gms$s57_maxmac_ch4_rice   <- 201   # def =  -1
-cfg$gms$s57_maxmac_ch4_entferm <- 201   # def =  -1
-cfg$gms$s57_maxmac_ch4_awms  <- 201   # def =  -1
-start_run(cfg,codeCheck=FALSE)
-
-source("config/default.cfg")
-cfg$title <- paste(prefix,"olddefault",sep="_")
-start_run(cfg,codeCheck=FALSE)
-
-source("config/default.cfg")
-cfg$title <- paste(prefix,"olddefault_mitigation",sep="_")
-cfg$gms$c56_pollutant_prices <- "R21M42-SSP2-PkBudg900"     # def = R21M42-SSP2-NPi
-cfg$gms$c56_pollutant_prices_noselect <- "R21M42-SSP2-PkBudg900"     # def = R21M42-SSP2-NPi
-start_run(cfg,codeCheck=FALSE)
+    source("config/default.cfg")
+    cfg=setScenario(cfg=cfg,scenario=ssp)
+    cfg$title <- paste(prefix,"newsetup_maxmaccs",sep="_")
+    cfg$gms$peatland  <- "on_aug22"
+    cfg$gms$nr_soil_budget  <- "macceff_aug22"
+    cfg$gms$nitrogen <- "rescaled_aug22"
+    cfg$gms$carbon <- "normal_aug22"
+    cfg$gms$methane <- "ipcc2006_aug22"
+    cfg$gms$ghg_policy <- "price_aug22"
+    cfg$gms$maccs <- "on_aug22"
+    cfg$gms$peatland <-"on_aug22"
+    cfg$gms$s57_maxmac_n_soil  <- 201   # def = -1
+    cfg$gms$s57_maxmac_n_awms  <- 201   # def =  -1
+    cfg$gms$s57_maxmac_ch4_rice   <- 201   # def =  -1
+    cfg$gms$s57_maxmac_ch4_entferm <- 201   # def =  -1
+    cfg$gms$s57_maxmac_ch4_awms  <- 201   # def =  -1
+    start_run(cfg,codeCheck=FALSE)
+}
