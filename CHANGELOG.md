@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **inputs** updated non-food initial prices, MACCs curves, and removed suitability threshold of 0.1 in all_marginal setting
 - **documentation** added literature
 - **scripts/start** cleanup of old start scripts
+- **scripts** log files are now written in a subfolder "logs"
 
 ### added
 - **50_nr_soil_budget** a new module realization "maceff_aug22" that makes NUE and SNUpE dependent on MACC curves
@@ -25,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **53_methane** new realization "ipcc2006_aug22" that moves maccs from ghg_policy module here
 - **56_ghg_policy** new realization "price_aug22" that takes MACCs out of ghg module and into individual emission modules
 - **scripts* added output scripts for FSEC FSDP runs
+- **scripts** added output script running MAGICC7 on a MAgPIE scenario
 - **scripts** added output script for gridded crop diversity indices
 - **scripts** added output scripts for FSEC FSDP runs
 - **15_food** added new realization with country level exogenous diets, product-specific intake estimates, new scenarios for exogenous BMI and decomposition switches for EAT Lancet diets. Simplified code and improved iteration procedure.
@@ -33,10 +35,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### removed
 - **15_food** removed read-in of non-needed input file "f15_calib_factor_FAOfsupply_iso"
 
-
 ### fixed
 - **43_water_availability** added missing years after 2100 in "f43_wat_avail" to avoid infeasibilities in coupled runs with less_ts timesteps
-
+- **scripts** fixed some bugs related to background execution of start/output scripts
 
 
 ## [4.5.0] - 2022-07-07
