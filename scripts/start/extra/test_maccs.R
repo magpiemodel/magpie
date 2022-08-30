@@ -42,14 +42,6 @@ for(ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
     source("config/default.cfg")
     cfg=setScenario(cfg=cfg,scenario=ssp)
     cfg$title <- paste(prefix,"newsetup_maxmaccs",ssp,sep="_")
-    cfg$gms$peatland  <- "on_aug22"
-    cfg$gms$nr_soil_budget  <- "macceff_aug22"
-    cfg$gms$nitrogen <- "rescaled_aug22"
-    cfg$gms$carbon <- "normal_aug22"
-    cfg$gms$methane <- "ipcc2006_aug22"
-    cfg$gms$ghg_policy <- "price_aug22"
-    cfg$gms$maccs <- "on_aug22"
-    cfg$gms$peatland <-"on_aug22"
     cfg$gms$s57_maxmac_n_soil  <- 201   # def = -1
     cfg$gms$s57_maxmac_n_awms  <- 201   # def =  -1
     cfg$gms$s57_maxmac_ch4_rice   <- 201   # def =  -1
