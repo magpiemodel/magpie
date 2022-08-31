@@ -52,6 +52,6 @@ healthImpacts_versionToUse_path <- file.path(healthImpacts_datasets_path, health
 
 message("Using health impacts data located here: ", healthImpacts_versionToUse_path)
 
-integrateHealthImpacts(healthImpacts_path = healthImpacts_versionToUse_path,
-                       scenario = title,
-                       dir = outputdir)
+appendReportHealthImpacts(healthImpacts_path = healthImpacts_versionToUse_path,
+                          scenario = title,
+                          dir = outputdir)
