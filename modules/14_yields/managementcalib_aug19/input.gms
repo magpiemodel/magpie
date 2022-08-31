@@ -12,6 +12,8 @@ $setglobal c14_yields_scenario  cc
 
 scalar s14_limit_calib   Relative managament calibration switch (1=limited 0=pure relative) / 1 /;
 
+scalar s14_calib_ir2rf   Switch to calibrate rainfed to irrigated yield ratios (1=calib 0=not calib) / 1 /;
+
 scalars
   s14_yld_past_switch  Spillover parameter for translating technological change in the crop sector into pasture yield increases  (1)     / 0.25 /
 ;
@@ -53,6 +55,14 @@ $include "./modules/14_yields/managementcalib_aug19/input/f14_region_yields.cs3"
 $offdelim
 ;
 m_fillmissingyears(f14_fao_yields_hist,"i,kcr");
+
+parameter f14_ir2rf_ratio(i) AQUASTAT ratio of irrigated to rainfed yields per region (1)
+/
+$ondelim
+$include "./modules/14_yields/managementcalib_aug19/input/f14_ir2rf_ratio.cs4"
+$offdelim
+/
+;
 
 table f14_ipcc_bce(clcl,forest_type) IPCC Biomass Conversion and Expansion factors (1)
 $ondelim
