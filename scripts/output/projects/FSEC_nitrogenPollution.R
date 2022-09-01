@@ -40,3 +40,8 @@ message("Generating nitrogen pollution output for the run: ", title)
 out <- getReportFSECPollution(reportOutputDir = outputdir,
                               magpieOutputDir = outputdir,
                               scenario = title)
+
+# Append total nitrogen surplus to the report.rds and report.mif for m4sfdp heatmap
+appendReportNutrientSurplus(scenario = title,
+                            dir = outputdir)
+
