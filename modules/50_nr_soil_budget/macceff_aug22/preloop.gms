@@ -25,10 +25,10 @@ loop(t,
 
   if(m_year(t) <= sm_fix_SSP2,
 
-     i50_nr_eff_bau(t,i) = f50_snupe_base(t,i,"baseeff_add_5_10_starty2020_max65") * p50_cropneff_region_shr(t,i)
-                      + f50_snupe_base(t,i,"baseeff_add_5_10_starty2020_max65") * (1-p50_cropneff_region_shr(t,i));
-     i50_nr_eff_pasture_bau(t,i) = f50_nue_base_pasture(t,i,"constant") * p50_pastneff_region_shr(t,i)
-                              + f50_nue_base_pasture(t,i,"constant") * (1-p50_pastneff_region_shr(t,i));
+     i50_nr_eff_bau(t,i) = f50_snupe_base(t,i,"baseeff_add3_add5_add10_max65") * p50_cropneff_region_shr(t,i)
+                      + f50_snupe_base(t,i,"baseeff_add3_add5_add10_max65") * (1-p50_cropneff_region_shr(t,i));
+     i50_nr_eff_pasture_bau(t,i) = f50_nue_base_pasture(t,i,"constant_min55_min60_min65") * p50_pastneff_region_shr(t,i)
+                              + f50_nue_base_pasture(t,i,"constant_min55_min60_min65") * (1-p50_pastneff_region_shr(t,i));
 
   else
 
