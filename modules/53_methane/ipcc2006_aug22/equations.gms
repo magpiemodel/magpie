@@ -7,7 +7,7 @@
 
 *' @equations
 *'
-*' We calculate methane emissions in each regions (reg) (`vm_btm_reg`)
+*' We calculate methane emissions in each regions (reg) (`vm_emissions_reg`)
 *' from the aforementioned four sources of emissions step-by-step in the following four equations.
 *'
 *' The first equation describes how CH4 emission from enteric fermentation is calculated.
