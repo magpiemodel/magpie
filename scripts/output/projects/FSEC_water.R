@@ -45,6 +45,4 @@ watStress <- waterStressRatio(gdx, level = "grid", dir = outputdir)
 watStressViolations <- watStress
 watStressViolations[efvViolation == 1] <- 100
 
-write.magpie(efvViolation, paste0(outputdir, "efvViolation.mz"))
-write.magpie(watStress, paste0(outputdir, "watStress.mz"))
 write.magpie(watStressViolations, paste0(outputdir, "watStressViolations.mz"))
