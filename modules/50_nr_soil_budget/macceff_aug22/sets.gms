@@ -10,13 +10,17 @@ sets
 deposition_source51 Source of atmospheric deposition
 / agricultural_magpie, other_exogenous /
 
-scen_neff50 Scenario for uptake efficiency
-/ constant,maxeff_glob_75_85_starty2020,
-maxeff_glob_75_80_starty2020,maxeff_glob_60_65_starty2020,
-maxeff_glob_65_75_starty2020,baseeff_add_10_20_starty2020_max75,
-baseeff_add_5_10_starty2020_max65,baseeff_add_0_0_starty2020_max55,
-baseeff_add_5_10_starty2020_max75,baseeff_add_5_15_starty2020_max75,
-maxeff_ZhangBy2030_start2020,maxeff_ZhangBy2050_start2020 /
+scen_neff_cropland50 Scenario for SNUpE on croplands
+/ constant, baseeff_add3_add15_add25_max75,
+baseeff_add3_add15_add25_max65, baseeff_add3_add10_add20_max75,
+baseeff_add3_add5_add10_max65, baseeff_add3_add0_add0_max55,
+baseeff_add3_add10_add15_max75, baseeff_add3_add5_add15_max75,
+maxeff_add3_glo75_glo85, maxeff_add3_glo75_glo80,
+maxeff_add3_glo60_glo65, maxeff_add3_glo65_glo75,
+maxeff_ZhangBy2030, maxeff_ZhangBy2050 /
+
+scen_neff_pasture50 Scenario for NUE on pastures
+/constant, constant_min55_min60_min65/
 
 dep_scen50 Scenario for atmospheric deposition
 /history/
