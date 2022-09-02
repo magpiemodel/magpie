@@ -7,7 +7,7 @@
 
 # -------------------------------------------------------------------------------------------------
 # description: Merge caloricSupply and dietaryIndicators from all scenarios in an output folder
-# comparison script: FALSE
+# comparison script: TRUE
 # -------------------------------------------------------------------------------------------------
 
 # Version 1.00 - Michael Crawford
@@ -23,6 +23,7 @@ if (!exists("source_include")) {
 
     outputdir   <- NULL
     title       <- NULL
+
     # Define arguments that can be read from command line
     readArgs("outputdir", "title")
 
