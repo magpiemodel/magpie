@@ -31,7 +31,7 @@ gms$past;endo_jun13;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c31_past_suit_scen;ssp245;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;ssp126;ssp126;ssp370;ssp460;ssp585
 gms$c34_urban_scenario;;;;SSP1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s42_watdem_nonagr_scenario;;;;1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-gms$c42_env_flow_policy;;;;;;;;;;;;;;;;;;;;;;;;on;;;;;;;;;;;
+gms$c42_env_flow_policy;off;;;;;;;;;;;;;;;;;;;;;;;on;;;;;;;;;;;
 gms$c32_aff_policy;;;;;;;;;;;;;;;;;;;;ndc;;;;;;;;;;;;;;;
 gms$c32_aff_mask;;;;;;;;;;;;;;;;;;;;onlytropical;;;;;;;;;;;;;;;
 gms$s32_max_aff_area;;;;;;;;;;;;;;;;;;;;500;;;;;;;;;;;;;;;
