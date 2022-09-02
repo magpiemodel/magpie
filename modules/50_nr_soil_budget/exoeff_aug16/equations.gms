@@ -23,6 +23,7 @@ q50_nr_inputs(i2) ..
                 v50_nr_inputs(i2) =e=
                 vm_res_recycling(i2,"nr")
                   + sum((cell(i2,j2),kcr,w), vm_area(j2,kcr,w) * f50_nr_fix_area(kcr))
+                  + sum(cell(i2,j2),vm_fallow(j2) * f50_nr_fix_area("tece"))
                   + vm_manure_recycling(i2,"nr")
                   + sum(kli, vm_manure(i2, kli, "stubble_grazing","nr"))
                   + vm_nr_inorg_fert_reg(i2,"crop")

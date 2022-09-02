@@ -5,7 +5,7 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
-vm_tau,input,questionnaire
-vm_area,input,questionnaire
 vm_prod_reg,input,not used
-fm_tau1995,input,questionnaire
+vm_tau,par,questionnaire
+fm_tau1995,par,questionnaire
+vm_area,par,questionnaire

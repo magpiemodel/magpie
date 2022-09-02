@@ -5,6 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-pc44_bv_weighted(j,landcover44) = 0;
-p44_price_bv_loss(t) = f44_price_bv_loss(t,"%c44_price_bv_loss%");
-*** EOF pre.gms ***
+v44_bv_weighted.l(j) = 0.3;
+m_linear_interpol(p44_price_bv_loss,s44_start_year,s44_target_year,s44_start_price,s44_target_price);
+p44_price_bv_loss(t_all)$(m_year(t_all) < s44_start_year) = 0;
+display p44_price_bv_loss;

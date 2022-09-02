@@ -8,14 +8,11 @@ scalars
  s32_shift                                          Number of 5-year age-classes corresponding to current time step length (1)
  s32_establishment_dynamic                          If plantations should be dynamic (including establishment and harvest decsions)
  s32_establishment_static                           Static plantations with no establishmnet no harvest no regrowth
- c32_max_aff_area_glo								Switch for global or regional afforestation constraint (1)
 ;
 
 parameters
- i32_max_aff_area_glo                               Maximum global afforestation area that is greater or equal the exogenous policy target (mio. ha)
- p32_max_aff_area_glo                               Maximum global afforestation area that is greater or equal the exogenous policy target (mio. ha)
- i32_max_aff_area_reg(i)                            Maximum regional afforestation area that is greater or equal the exogenous policy target (mio. ha)
- p32_max_aff_area_reg(i)                            Maximum regional afforestation area that is greater or equal the exogenous policy target (mio. ha)
+ i32_max_aff_area_glo(t)                            Maximum global endogenous afforestation area (mio. ha)
+ i32_max_aff_area_reg(t,i)                          Maximum regional endogenous afforestation area (mio. ha)
  p32_aff_pol(t,j)                                   NDC forest stock (mio. ha)
  p32_aff_pol_timestep(t,j)                          NDC afforestation per time step (mio. ha)
  p32_aff_pot(t,j)                                   Potential afforestation area (mio. ha)
@@ -85,7 +82,7 @@ equations
  q32_cost_total(i)                                  Total forestry costs constraint (mio. USD)
  q32_land(j)                                        Land constraint (mio. ha)
  q32_cdr_aff(j,ac)                                  Calculation of CDR from afforestation (mio. tC)
- q32_carbon(j,ag_pools)                             Forestry carbon stock calculation (mio. tC)
+ q32_carbon(j,ag_pools,stockType)                   Forestry carbon stock calculation (mio. tC)
  q32_land_diff                                      Aggregated difference in forestry land compared to previous timestep (mio. ha)
  q32_max_aff                                    	Maximum total global afforestation (mio. ha)
  q32_max_aff_reg(i)                                 Maximum total regional afforestation (mio. ha)
@@ -95,7 +92,7 @@ equations
  q32_cost_recur(i)                                  Recurruing costs (mio. USD)
  q32_establishment_dynamic(i)                       Establishment in current time step for future demand (mio. ha)
  q32_establishment_dynamic_yield(i)					Regional timber yield (tDM per ha)
- q32_establishment_fixed(j)                       Establishment in current time step for future demand (mio. ha)
+ q32_establishment_fixed(j)                       	Establishment in current time step for future demand (mio. ha)
  q32_land_expansion(j,type32,ac)                    Land expansion (mio. ha)
  q32_land_reduction(j,type32,ac)                    Land contraction (mio. ha)
  q32_cost_establishment(i)                          Present value of cost of establishment (mio. USD)
@@ -126,7 +123,7 @@ parameters
  oq32_cost_total(t,i,type)                  Total forestry costs constraint (mio. USD)
  oq32_land(t,j,type)                        Land constraint (mio. ha)
  oq32_cdr_aff(t,j,ac,type)                  Calculation of CDR from afforestation (mio. tC)
- oq32_carbon(t,j,ag_pools,type)             Forestry carbon stock calculation (mio. tC)
+ oq32_carbon(t,j,ag_pools,stockType,type)   Forestry carbon stock calculation (mio. tC)
  oq32_land_diff(t,type)                     Aggregated difference in forestry land compared to previous timestep (mio. ha)
  oq32_max_aff(t,type)                       Maximum total global afforestation (mio. ha)
  oq32_max_aff_reg(t,i,type)                 Maximum total regional afforestation (mio. ha)

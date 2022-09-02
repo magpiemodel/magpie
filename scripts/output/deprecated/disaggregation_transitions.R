@@ -16,6 +16,7 @@ library(lucode2)
 library(magpie4)
 library(luscale)
 library(madrat)
+library(gms)
 
 ############################# BASIC CONFIGURATION #######################################
 land_lr_file     <- "avl_land_t.cs3"
@@ -36,7 +37,7 @@ if(!exists("source_include")) {
 }
 #########################################################################################
 
-load(paste0(outputdir, "/config.Rdata"))
+cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 title <- cfg$title
 print(title)
 
@@ -90,7 +91,7 @@ land_ini_hr <- new.magpie(CountryToCell$cell,NULL,getNames(land_lr),fill = 0)
 x  <- read.magpie(file.path(in_folder,land_hr_file))[,"y1995",]
 x  <- x[,,getNames(land_lr,dim=1)]
 for (i in getNames(land_lr,dim=1)) {
-  land_ini_hr[,,paste(i,i,sep=".")] <- x[,,i]  
+  land_ini_hr[,,paste(i,i,sep=".")] <- x[,,i]
 }
 land_ini_lr <- speed_aggregate(land_ini_hr,file.path(outputdir,sum_spam_file))
 getCells(land_ini_lr) <- getCells(land_lr)

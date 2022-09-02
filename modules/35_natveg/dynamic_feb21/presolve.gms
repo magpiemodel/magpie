@@ -13,16 +13,20 @@ else
  	pc35_other(j,ac) = p35_other(t-1,j,ac);
 );
 
-* Shift ageclasses due to shifting agriculture fires, first calculate damages
+* ----------------------------------------------------
+* Shift ageclasses due to shifting agriculture fires
+* ----------------------------------------------------
+
+* first calculate damages
 if(s35_forest_damage=1,
 	p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry;
 	p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry;
 	);
 
-* shifting cultivation is faded out until 2030
+* shifting cultivation is faded out
 if(s35_forest_damage=2,
-	p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry*(1 - f35_protection_fader(t, "%c35_forest_damage_end%"));
-	p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry*(1 - f35_protection_fader(t, "%c35_forest_damage_end%"));
+	p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry*(1 - p35_damage_fader(t));
+	p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry*(1 - p35_damage_fader(t));
 	);
 
 if(s35_forest_damage=3,
@@ -52,14 +56,17 @@ s35_shift = m_timestep_length_forestry/5;
     p35_secdforest(t,j,"acx") = p35_secdforest(t,j,"acx")
                   + sum(ac$(ord(ac) > card(ac)-s35_shift), pc35_secdforest(j,ac));
 
+* --------------------------------------
+* Carbon threshold for secondary forest
+* --------------------------------------
+
 *' @code
 *' If the vegetation carbon density in a simulation unit due to regrowth
 *' exceeds a threshold of 20 tC/ha the respective area is shifted from other natural land to secondary forest.
 p35_recovered_forest(t,j,ac)$(not sameas(ac,"acx")) =
 			p35_other(t,j,ac)$(pm_carbon_density_ac(t,j,ac,"vegc") > 20);
 p35_other(t,j,ac) = p35_other(t,j,ac) - p35_recovered_forest(t,j,ac);
-p35_secdforest(t,j,ac) =
-			p35_secdforest(t,j,ac) + p35_recovered_forest(t,j,ac);
+p35_secdforest(t,j,ac) = p35_secdforest(t,j,ac) + p35_recovered_forest(t,j,ac);
 *' @stop
 
 pc35_secdforest(j,ac) = p35_secdforest(t,j,ac);
@@ -72,67 +79,90 @@ v35_other.l(j,ac) = pc35_other(j,ac);
 vm_land.l(j,"other") = sum(ac, pc35_other(j,ac));
 pcm_land(j,"other") = sum(ac, pc35_other(j,ac));
 
-** Land protection
-if(m_year(t) <= sm_fix_SSP2,
- p35_save_natveg(t,j,land_natveg) = 
-	pm_land_start(j,land_natveg) * p35_protect_shr(t,j,"WDPA",land_natveg);
-else
- p35_save_natveg(t,j,land_natveg) = 
-	pm_land_start(j,land_natveg) * sum(cell(i,j), 
-	p35_protect_shr(t,j,"%c35_protect_scenario%",land_natveg) * p35_region_prot_shr(i)
-	+ p35_protect_shr(t,j,"%c35_protect_scenario_noselect%",land_natveg) * (1-p35_region_prot_shr(i)));
-);
-p35_save_natveg(t,j,land_natveg)$(p35_save_natveg(t,j,land_natveg) > pcm_land(j,land_natveg)) = pcm_land(j,land_natveg);
+* Correct land conservation for damage
+pm_land_conservation(t,j,land_natveg,"protect")$(pm_land_conservation(t,j,land_natveg,"protect") > pcm_land(j,land_natveg)) = pcm_land(j,land_natveg);
+
+* -------------------------------------
+* Set bounds based on land conservation
+* -------------------------------------
 
 * Within the optimization, primary and secondary forests can only decrease
 * (e.g. for cropland expansion).
 * In contrast, other natural land can decrease and increase within the optimization.
 * For instance, other natural land increases if agricultural land is abandoned.
 
-** Setting bounds for only allowing s35_natveg_harvest_shr percentage of available primf to be harvested (highest age class)
+** Setting bounds for only allowing s35_natveg_harvest_shr percentage of available forest to be harvested (highest age class)
+
+* Primary forest
+
 ** Allowing selective logging only after historical period
 if (sum(sameas(t_past,t),1) = 1,
-vm_land.lo(j,"primforest") = p35_save_natveg(t,j,"primforest");
+vm_land.lo(j,"primforest") = 0;
 else
-vm_land.lo(j,"primforest") = max((1-s35_natveg_harvest_shr) * pcm_land(j,"primforest"), p35_save_natveg(t,j,"primforest"));
+vm_land.lo(j,"primforest") = (1-s35_natveg_harvest_shr) * pcm_land(j,"primforest");
 );
+* Primary forest conservation
+vm_land.lo(j,"primforest")$(vm_land.lo(j,"primforest") < pm_land_conservation(t,j,"primforest","protect")) = pm_land_conservation(t,j,"primforest","protect");
 vm_land.up(j,"primforest") = pcm_land(j,"primforest");
-m_boundfix(vm_land,(j,"primforest"),l,10e-5);
 
-*reset bounds
+* Secondary forest
+
+*reset bound
 v35_secdforest.lo(j,ac) = 0;
 v35_secdforest.up(j,ac) = Inf;
-** Setting bounds for only allowing s35_natveg_harvest_shr percentage of available primf to be harvested (highest age class)
 
-p35_save_dist(j,ac_sub) = (pc35_secdforest(j,ac_sub)/sum(ac_sub2,pc35_secdforest(j,ac_sub2)))$(sum(ac_sub2,pc35_secdforest(j,ac_sub2))>0);
-
+p35_protection_dist(j,ac_sub) = (pc35_secdforest(j,ac_sub)/sum(ac_sub2,pc35_secdforest(j,ac_sub2)))$(sum(ac_sub2,pc35_secdforest(j,ac_sub2))>0);
 if (sum(sameas(t_past,t),1) = 1,
-v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=0)  = p35_save_natveg(t,j,"secdforest");
-v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=1) = p35_save_natveg(t,j,"secdforest")/card(ac_sub);
-v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=2) = p35_save_natveg(t,j,"secdforest")*p35_save_dist(j,ac_sub);
-*v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=2) = p35_save_natveg(t,j,"secdforest");
+v35_secdforest.lo(j,ac_sub) = pm_land_conservation(t,j,"secdforest","protect") * p35_protection_dist(j,ac_sub);
 else
-v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=0)  = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx") , p35_save_natveg(t,j,"secdforest"));
-v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=1) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub), p35_save_natveg(t,j,"secdforest") / card(ac_sub));
-v35_secdforest.lo(j,ac_sub)$(s35_secdf_distribution=2) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub), p35_save_natveg(t,j,"secdforest") * p35_save_dist(j,ac_sub));
-*v35_secdforest.lo(j,"acx")$(s35_secdf_distribution=2) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,"acx"), p35_save_natveg(t,j,"secdforest"));
+v35_secdforest.lo(j,ac_sub) = max((1-s35_natveg_harvest_shr) * pc35_secdforest(j,ac_sub), pm_land_conservation(t,j,"secdforest","protect") * p35_protection_dist(j,ac_sub));
 );
+* upper bound
 v35_secdforest.up(j,ac_sub) = pc35_secdforest(j,ac_sub);
 m_boundfix(v35_secdforest,(j,ac_sub),l,10e-5);
+
+* Secondary forest conservation
+* protection bound fix
+pm_land_conservation(t,j,"secdforest","protect")$(abs(pm_land_conservation(t,j,"secdforest","protect") - sum(ac_sub, pc35_secdforest(j,ac_sub))) < 10e-5) = sum(ac_sub, pc35_secdforest(j,ac_sub));
+* set restoration target
+p35_land_restoration(j,"secdforest") = pm_land_conservation(t,j,"secdforest","restore");
+* Do not restore secdforest in areas where total natural
+* land area meets the total natural land conservation target
+p35_land_restoration(j,"secdforest")$(sum(land_natveg, pcm_land(j,land_natveg)) >= sum((land_natveg, consv_type), pm_land_conservation(t,j,land_natveg,consv_type))) = 0;
+* set conservation bound
+vm_land.lo(j,"secdforest") = pm_land_conservation(t,j,"secdforest","protect") + p35_land_restoration(j,"secdforest");
+
+** Other land
 
 *reset bounds
 v35_other.lo(j,ac) = 0;
 v35_other.up(j,ac) = Inf;
-*set bounds
-v35_other.lo(j,"acx") = p35_save_natveg(t,j,"other");
+*set upper bound
 v35_other.up(j,ac_sub) = pc35_other(j,ac_sub);
 m_boundfix(v35_other,(j,ac_sub),l,10e-5);
 
-* calculate carbon density
-* highest carbon density 1st time step to account for reshuffling
+* Other land conservation
+* protection bound fix
+pm_land_conservation(t,j,"other","protect")$(abs(pm_land_conservation(t,j,"other","protect") - sum(ac_sub, pc35_other(j,ac_sub))) < 10e-5) = sum(ac_sub, pc35_other(j,ac_sub));
+* set restoration target
+p35_land_restoration(j,"other") = pm_land_conservation(t,j,"other","restore");
+* Do not restore other land in areas where total natural
+* land area meets the total natural land conservation target
+p35_land_restoration(j,"other")$(sum(land_natveg, pcm_land(j,land_natveg)) >= sum((land_natveg, consv_type), pm_land_conservation(t,j,land_natveg,consv_type))) = 0;
+* set conservation bound
+vm_land.lo(j,"other") = pm_land_conservation(t,j,"other","protect") + p35_land_restoration(j,"other");
 
+* ------------------------------
+* Calculate carbon density
+* ------------------------------
+
+* highest carbon density 1st time step to account for reshuffling
 p35_carbon_density_secdforest(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
 p35_carbon_density_other(t,j,ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_pools);
+
+* ------------------
+* NPI/NDC policy
+* ------------------
 
 p35_min_forest(t,j)$(p35_min_forest(t,j) > pcm_land(j,"primforest") + pcm_land(j,"secdforest")) = pcm_land(j,"primforest") + pcm_land(j,"secdforest");
 p35_min_other(t,j)$(p35_min_other(t,j) > pcm_land(j,"other")) = pcm_land(j,"other");
@@ -150,7 +180,6 @@ v35_hvarea_secdforest.fx(j,ac_est) = 0;
 v35_hvarea_other.fx(j,ac_est) = 0;
 v35_secdforest_reduction.fx(j,ac_est) = 0;
 v35_other_reduction.fx(j,ac_est) = 0;
-
 
 vm_prod_natveg.fx(j,"other","wood") = 0;
 
