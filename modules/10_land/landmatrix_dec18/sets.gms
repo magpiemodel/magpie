@@ -16,8 +16,14 @@ sets
         / crop, past, forestry, primforest, secdforest, urban, other /
 
    luh2_side_layers10 side layers from LUH2
-	/ manpast, rangeland, primveg, secdveg, forested, nonforested /
+/ manpast, rangeland, primveg, secdveg, forested, nonforested /
 
     potnatveg(luh2_side_layers10) potentially forested biomes
 	/ forested, nonforested /
+
+  land_to_nonnat(land_to10) Non natural forest pool for transition
+   /crop, past, other, urban/
+
+  land_from10_natfor(land_from10) Forest pool for transition
+  /primforest, secdforest, forestry /
 ;

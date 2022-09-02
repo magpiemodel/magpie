@@ -7,6 +7,7 @@
 
 scalars
   s10_cost_balance Artificial cost for balance variable (USD05MER per ha) / 1e+06 /
+  s10_cop26_deforestation Flag for disallowing agriculture driven deforestation (0=inactive 1=active) / 0 /
 ;
 
 table f10_land(t_ini10,j,land) Different land type areas (mio. ha)
