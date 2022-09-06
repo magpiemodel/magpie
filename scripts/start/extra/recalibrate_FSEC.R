@@ -16,8 +16,6 @@ library(gms)
 source("scripts/start_functions.R")
 source("scripts/projects/fsec.R")
 
-codeCheck <- FALSE
-
 # -----------------------------------------------------------------------------------------------------------------
 # Calibration run
 cfg       <- fsecScenario(scenario = "c_BAU")
@@ -27,5 +25,5 @@ cfg$recalibrate                     <- TRUE
 cfg$recalibrate_landconversion_cost <- TRUE
 cfg$output                          <- c("rds_report", "validation_short")
 cfg$force_replace                   <- TRUE
-start_run(cfg, codeCheck = codeCheck)
+start_run(cfg, codeCheck = FALSE)
 magpie4::submitCalibration("FSEC")
