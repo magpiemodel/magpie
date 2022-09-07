@@ -8,7 +8,7 @@
 parameters
  i21_trade_bal_reduction(t_all,k_trade)         Trade balance reduction (1)
  i21_trade_margin(h_ex,h_im,k_trade)            Trade margins (USD05MER per tDM)
- i21_trade_tariff(h,k_trade)                    Trade tariffs (USD05MER per tDM)
+ i21_trade_tariff(h_ex,h_im,k_trade)                    Trade tariffs (USD05MER per tDM)
  pm_selfsuff_ext(t_ext,h,kforestry)            Self sufficiency for timber products in extended time frame (1)
 ;
 
@@ -31,7 +31,8 @@ equations
  q21_cost_trade(h)                       Superregional  trade costs (mio. USD05MER per yr)
  q21_cost_trade_reg(h,k_trade)           Superregional trade costs for each tradable commodity (mio. USD05MER per yr)
  q21_trade_bilat(h, k_trade)             Superregional bilateral trade requirements
- q21_costs_bilateral(h,k_trade)          Superregional bilateral trade requirements
+ q21_costs_margins(h,k_trade)            Superregional bilateral trade requirements
+ 
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

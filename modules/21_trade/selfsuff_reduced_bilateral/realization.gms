@@ -19,7 +19,7 @@
 *' ![Implementation of trade.](trade_pools.png){ width=100% }
 
 *' @limitations This realization depends on predetermined self-sufficiency rates and export shares,
-*' which leads to a relative fixed trade pattern.
+*' which leads to a relative fixed trade pattern. Bilateral trade happens within the above.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/21_trade/selfsuff_reduced_bilateral/sets.gms"

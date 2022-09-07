@@ -216,7 +216,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  default
+$setglobal c_title  Bilateral_ON
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
