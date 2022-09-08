@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: Create FSEC environmental pollutants output dataset
+# description: Create FSEC outputs for use by Simon Dietz
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
@@ -16,7 +16,7 @@
 library(gms)
 library(magpie4)
 
-message("Starting FSEC nitrogen pollution output runscript")
+message("Starting FSEC_SimonDietz output runscript")
 
 ############################# BASIC CONFIGURATION #######################################
 if (!exists("source_include")) {
@@ -34,9 +34,20 @@ message("Script started for output directory: ", outputdir)
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 title <- cfg$title
 
-message("Generating nitrogen pollution output for the run: ", title)
+message("Creating an output directory for Simon Dietz's datasets")
+simonDietzDir <- file.path(".", "output", "SimonDietz")
+if (!dir.exists(simonDietzDir)) {
+    dir.create(simonDietzDir)
+}
 
-# Grid-level nitrogen pollution
-out <- getReportFSECPollution(reportOutputDir = outputdir,
-                              magpieOutputDir = outputdir,
-                              scenario = title)
+reportOutputDir <- file.path(simonDietzDir, title)
+if (dir.exists(reportOutputDir)) {
+    message("Warning in FSEC_SimonDietz: Output directory for " , title, " already exists. Results will be overwritten.")
+}
+suppressWarnings(dir.create(reportOutputDir))
+
+message("Generating Simon Dietz's output for the run: ", title)
+
+out <- getReportSimonDietz(magpieOutputDir = outputdir,
+                           reportOutputDir = reportOutputDir,
+                           scenario = title)

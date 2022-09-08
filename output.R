@@ -84,7 +84,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
       system("sclass")
       cat("\n")
     } else {
-     modes <- modes[-1:-2]
+     modes <- grep("^SLURM", modes, invert = TRUE, value = TRUE)
     }
     cat("\n",title,":\n",sep="")
     cat(paste(1:length(modes), modes, sep=": " ),sep="\n")
@@ -113,6 +113,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
   }
 
   runsubmit <- function(output, alloutputdirs, submit, script_path) {
+    if(!dir.exists("logs")) dir.create("logs")
     #Set value source_include so that loaded scripts know, that they are
     #included as source (instead of a load from command line)
     source_include <- TRUE
@@ -130,18 +131,27 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
         loop <- list(alloutputdirs)
       } else {
 	     	loop <- alloutputdirs
-		  }
+      }
+      rout_name <- sub("\\.R$","",sub("/","_",rout))
       for(outputdir in loop) {
         message("\n# ",name, " -> ", outputdir)
-        r_command <- paste0("Rscript output.R outputdir=",paste(outputdir,collapse=","),"  output=",rout," submit=direct")
-        sbatch_command <- paste0("sbatch --job-name=scripts-output --output=log_out-%j.out --error=log_out-%j.err --mail-type=END --time=200 --mem-per-cpu=8000 --wrap=\"",r_command,"\"")
+        r_command <- paste0("output.R outputdir=",paste(outputdir,collapse=","),"  output=",rout," submit=direct")
+        sbatch_command <- paste0("sbatch ",
+                                 "--job-name=scripts-output ",
+                                 "--output=logs/out-", rout_name, "-%j.out ",
+                                 "--error=logs/out-", rout_name, "-%j.err ",
+                                 "--mail-type=END ",
+                                 "--time=200 ",
+                                 "--mem-per-cpu=8000 ",
+                                 "--wrap=\"Rscript ", r_command, "\"")
         if(submit=="direct") {
           tmp.env <- new.env()
           tmp.error <- try(sys.source(script,envir=tmp.env))
           if(!is.null(tmp.error)) warning("Script ",name," was stopped by an error and not executed properly!")
           rm(tmp.env)
         } else if(submit=="background") {
-          system(paste0(r_command," &> ",format(Sys.time(), "blog_out-%Y-%H-%M-%S-%OS3.log")," &"))
+          log <- format(Sys.time(), paste0("logs/out-",rout_name,"-%Y-%H-%M-%S-%OS3.log"))
+          system2("Rscript", r_command, stderr = log, stdout = log, wait=FALSE)
         } else if(submit=="slurm standby") {
           system(paste(sbatch_command, "--qos=standby"))
         } else if(submit=="slurm standby maxMem") {
