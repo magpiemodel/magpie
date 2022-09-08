@@ -77,6 +77,19 @@ file.create(caloricSupply_mergePath, dietaryIndicators_mergePath)
 }
 
 message("Writing dietary datasets")
+
+# Only merge dietary indicators from selected, dietary-related, scenarios
+dietRelatedScenarios <- c("DietEmptyCals", "DietFish", "DietLegumes", "DietMonogastrics", "DietRuminants", "DietVegFruitsNutsSeeds",
+                          "SoilMonogastric",
+                          "LessFoodWaste",
+                          "NoOverweight", "NoUnderweight",
+                          "BAU",
+                          "FSDP",
+                          "SSP1", "SSP3", "SSP4", "SSP5")
+
+outputdir_diets <- lapply(X = dietRelatedScenarios, FUN = function(.x) grep(x = dir, pattern = .x, value = TRUE))
+outputdir_diets <- unlist(outputdir_diets)
+
 lapply(X = outputdir, FUN = .writeDietaryIndicators)
 
 
