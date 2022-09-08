@@ -11,7 +11,7 @@
 # ---------------------------------------------------------------
 
 # Version 1.0, Florian Humpenoeder
-#
+
 library(lucode2)
 library(magclass)
 library(gms)
@@ -19,6 +19,8 @@ library(magpiesets)
 library(data.table)
 library(gdx)
 library(quitte)
+library(m4fsdp)
+library(stringr)
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
@@ -27,6 +29,60 @@ if(!exists("source_include")) {
   lucode2::readArgs("outputdir")
 }
 ###############################################################################
+
+# append health impacts to scenario report.mif, report.rds, and report_iso.rds
+.appendHealthImpacts <- function(.dir) {
+    tryCatch(expr = {
+
+        cfg <- gms::loadConfig(file.path(.dir, "config.yml"))
+        title <- cfg$title
+
+        # Find the corresponding healthImpacts dataset
+        versionID <- strsplit(title, split = "_")[[1]][1]
+
+        hi_datasets_path <- "/p/projects/magpie/data/FSEC_healthImpactsDatasets_raw"
+        hi_datasets <- list.files(hi_datasets_path)
+        hi_versionToUse <- grep(versionID, hi_datasets, value = TRUE)
+
+        if (length(hi_versionToUse) == 0) {
+
+            message("In FSDP_collect.R: No corresponding version ID was found within the FSEC health impacts datasets.
+                    Using the highest current version.")
+
+            highestVersionNr <- max(as.numeric(str_extract(hi_datasets, "(?<=v)(.*?)(?=_)")))
+            hi_versionToUse <- grep(paste0("v", highestVersionNr), hi_datasets, value = TRUE)
+
+        } else if (length(hi_versionToUse) >= 2) {
+            stop("In FSDP_collect.R: More than one health impacts datasets with this scenario's version ID were found.
+                  Only one is expected.")
+        }
+
+        hi_versionToUse_path <- file.path(hi_datasets_path, hi_versionToUse)
+
+        message("Using health impacts data located here: ", hi_versionToUse_path)
+
+        appendReportHealthImpacts(healthImpacts_path = hi_versionToUse_path,
+                                  scenario = title,
+                                  dir = .dir)
+
+    }, error = function(e) {
+        message("In FSDP_collect.R: Unable to append health impacts!\n", e)
+    }
+    )
+}
+
+# append nutrient surplus to scenario report.mif, report.rds, and report_iso.rds
+.appendNutrientSurplus <- function(.dir) {
+  cfg <- gms::loadConfig(file.path(.dir, "config.yml"))
+  title <- cfg$title
+
+  appendReportNutrientSurplus(scenario = title, dir = .dir)
+}
+
+lapply(x = outputdir, FUN = .appendHealthImpacts)
+lapply(x = outputdir, FUN = .appendNutrientSurplus)
+
+# Generate output files
 cat("\nStarting output generation\n")
 
 reg <- NULL
@@ -156,7 +212,6 @@ val <- as.data.table(read.quitte(val))
 saveRDS(val,file = file.path("output",paste(rev,"FSDP_validation.rds",sep="_")), version = 2,compress = "xz")
 
 message("Plotting figures ...")
-library(m4fsdp)
 heatmapFSDP(reg,tableType=1,file=file.path("output",paste(rev,"FSDP_heatmap1.jpg",sep="_")))
 heatmapFSDP(reg,tableType=2,file=file.path("output",paste(rev,"FSDP_heatmap2.jpg",sep="_")))
 spatialMapsFSDP(reg,iso,grid,reg2iso,file = file.path("output",paste(rev,"FSDP_spatialMaps.jpg",sep="_")))
