@@ -7,6 +7,7 @@
 
 $if "%c57_macc_version%" == "PBL_2007" s57_step_length = 5;
 $if "%c57_macc_version%" == "PBL_2019" s57_step_length = 20;
+$if "%c57_macc_version%" == "PBL_2022" s57_step_length = 20;
 
 $ontext
 Determine level of GHG emission abatement depending on GHG prices.

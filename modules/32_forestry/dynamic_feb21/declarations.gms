@@ -8,14 +8,11 @@ scalars
  s32_shift                                          Number of 5-year age-classes corresponding to current time step length (1)
  s32_establishment_dynamic                          If plantations should be dynamic (including establishment and harvest decsions)
  s32_establishment_static                           Static plantations with no establishmnet no harvest no regrowth
- c32_max_aff_area_glo								Switch for global or regional afforestation constraint (1)
 ;
 
 parameters
- i32_max_aff_area_glo                               Maximum global afforestation area that is greater or equal the exogenous policy target (mio. ha)
- p32_max_aff_area_glo                               Maximum global afforestation area that is greater or equal the exogenous policy target (mio. ha)
- i32_max_aff_area_reg(i)                            Maximum regional afforestation area that is greater or equal the exogenous policy target (mio. ha)
- p32_max_aff_area_reg(i)                            Maximum regional afforestation area that is greater or equal the exogenous policy target (mio. ha)
+ i32_max_aff_area_glo(t)                            Maximum global endogenous afforestation area (mio. ha)
+ i32_max_aff_area_reg(t,i)                          Maximum regional endogenous afforestation area (mio. ha)
  p32_aff_pol(t,j)                                   NDC forest stock (mio. ha)
  p32_aff_pol_timestep(t,j)                          NDC afforestation per time step (mio. ha)
  p32_aff_pot(t,j)                                   Potential afforestation area (mio. ha)
