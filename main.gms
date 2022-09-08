@@ -146,13 +146,13 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.73_bilateralFake_h12_magpie.tgz
-* md5sum: ad4dda1a73f500b3d2d287e2db11a0ca
+* Used data set: rev4.76bilat_h12_magpie.tgz
+* md5sum: 2e1fd070d87f3153bd9154f9cb81fc9f
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.73_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: 3193bfc7df584513d2a71d8b0f1fdf92
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: rev4.76bilat_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* md5sum: 3fdb5aec53ed299984b09931247f94e7
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Used data set: rev4.73_h12_validation.tgz
 * md5sum: 0f7a0351766f511c01ebad26fb9d62e9
@@ -177,20 +177,23 @@ $title magpie
 * 
 * Regionscode: 62eff8f7
 * 
-* Regions data revision: 4.73
+* Regions data revision: 4.76
 * 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.73
+* * Revision: 4.76
 * 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
 * * Regionscode: 62eff8f7
+* * Number of clusters per region:
+*   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
+*     6   23    7    6    1   43   27    7   11   12   37   20
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Wed Jul 13 16:40:23 2022
+* Last modification (input data): Thu Sep  8 01:35:17 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -216,7 +219,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  Bilateral_ON
+$setglobal c_title  GTAPBilat_ON
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
