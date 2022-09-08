@@ -29,7 +29,7 @@ fsecScenario <- function(scenario) {
             # Individual transformation clusters:
             a_Population         = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                         fsec = c("FSEC", "population")),
-            a_SocioEconDevelop   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            a_EconDevelop        = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                         fsec = c("FSEC", "institutions")),
             a_EnergyTrans        = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                         fsec = c("FSEC", "energy")),
@@ -51,7 +51,7 @@ fsecScenario <- function(scenario) {
                                         fsec = c("FSEC", "fish")),
             a_LessFoodWaste      = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                         fsec = c("FSEC", "waste")),
-            a_AnimalWasteMngmt   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            a_ManureMngmt        = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                         fsec = c("FSEC", "awms")),
             a_LivestockMngmt     = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                         fsec = c("FSEC", "livestock")),

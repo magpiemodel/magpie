@@ -17,9 +17,9 @@ codeCheck <- FALSE
 
 for (scenarioName in c(
   # Single transformation runs
-  "a_Population", "a_SocioEconDevelop", "a_EnergyTrans",
+  "a_Population", "a_EconDevelop", "a_EnergyTrans",
   "a_NoUnderweight", "a_NoOverweight", "a_DietVegFruitsNutsSeeds", "a_DietLegumes", "a_DietMonogastrics", "a_DietRuminants", "a_DietEmptyCals", "a_DietFish", "a_LessFoodWaste",
-  "a_AnimalWasteMngmt", "a_LivestockMngmt", "a_NitrogenUptakeEff", "a_LandUseDiversity",
+  "a_ManureMngmt", "a_LivestockMngmt", "a_NitrogenUptakeEff", "a_LandUseDiversity",
   # still missing: Bioeconomy
   "a_FairTrade", "a_TimberCities", "a_REDDaff", "a_REDD", "a_CropRotations",
   "a_LandSparing", "a_WaterSparing", "a_PeatlandSparing", "a_AirPollution", "a_SoilCarbon",
