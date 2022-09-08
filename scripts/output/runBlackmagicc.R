@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: Create FSEC environmental pollutants output dataset
+# description: Append MAGICC7 warming pathways to a MAgPIE run's report.mif
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
@@ -14,9 +14,9 @@
 # 1.00: first working version
 
 library(gms)
-library(magpie4)
+library(blackmagicc)
 
-message("Starting FSEC nitrogen pollution output runscript")
+message("Starting Blackmagicc output script")
 
 ############################# BASIC CONFIGURATION #######################################
 if (!exists("source_include")) {
@@ -31,12 +31,5 @@ if (!exists("source_include")) {
 #########################################################################################
 
 message("Script started for output directory: ", outputdir)
-cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
-title <- cfg$title
 
-message("Generating nitrogen pollution output for the run: ", title)
-
-# Grid-level nitrogen pollution
-out <- getReportFSECPollution(reportOutputDir = outputdir,
-                              magpieOutputDir = outputdir,
-                              scenario = title)
+blackmagicc(dir = outputdir, append = TRUE)
