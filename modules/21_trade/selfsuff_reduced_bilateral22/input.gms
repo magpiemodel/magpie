@@ -33,14 +33,16 @@ $ondelim
 $include "./modules/21_trade/input/f21_trade_balanceflow.cs3"
 $offdelim;
 
-table f21_trade_margin(h,kall) Costs of freight and insurance (USD05MER per tDM)
+parameter f21_trade_margin(i_ex,i_im,kall) Costs of freight and insurance (USD05MER per tDM)
+/
 $ondelim
-$include "./modules/21_trade/input/f21_trade_margin.cs3"
+$include "./modules/21_trade/input/f21_trade_margin.cs5"
 $offdelim
-;
+/;
 
-table f21_trade_tariff(h,kall) Specific duty tariffs (USD05MER per tDM)
+parameter f21_trade_tariff(h_ex,h_im,kall) Specific duty tariffs (USD05MER per tDM)
+/
 $ondelim
-$include "./modules/21_trade/input/f21_trade_tariff.cs3"
+$include "./modules/21_trade/input/f21_trade_tariff.cs5"
 $offdelim
-;
+/;
