@@ -49,6 +49,14 @@ mapping <- readRDS(map_file)
 bii_lr <- BII(gdx, file = NULL, level = "cell", mode = "auto", landClass = "all",
            bii_coeff = NULL, side_layers = NULL)
 
+# add BII values for primary other land (BII = 1)
+bii_lr <- mbind(
+  bii_lr[,,"other", invert=TRUE],
+  setNames(bii_lr[,,"other"], c("primother.forested", "primother.nonforested")),
+  setNames(bii_lr[,,"other"], c("secdother.forested", "secdother.nonforested"))
+)
+bii_lr[,,c("primother.forested", "primother.nonforested")] <- 1
+
 # Load input data
 land_ini_lr     <- readGDX(gdx, "f10_land", "f_land", format = "first_found")[, "y1995", ]
 land_lr         <- land(gdx, sum = FALSE, level = "cell")
@@ -122,21 +130,18 @@ land_hr <- interpolateAvlCroplandWeighted(x               = land_lr,
                                           urban_land_hr   = urban_land_hr,
                                           unit            = "share")
 
-land_hr <- land_hr[, "y1985", invert = TRUE]
+# Add primary and secondaray other land
+land_hr <- PrimSecdOtherLand(land_hr, land_hr_file)
+
+# specify potential natural vegetation
 land_hr <- land_hr * side_layers_hr[, , c("forested", "nonforested")]
 
 # Sum over land classes
 bii_hr <- dimSums(land_hr * bii_hr, dim = 3, na.rm = TRUE)
 
-# Create new output folder for BII
-baseDir      <- getwd()
-biiOutputDir <- file.path(baseDir, "output", "BII")
-if (!dir.exists(biiOutputDir)) {
-    dir.create(biiOutputDir)
-}
-
-write.magpie(bii_hr, file.path(biiOutputDir, paste0(title, "_cell.bii_0.5.nc")), comment = "unitless")
-write.magpie(bii_hr, file.path(biiOutputDir, paste0(title, "_cell.bii_0.5.mz")), comment = "unitless")
+# Save BII data as .nc and .mz file, the first for better transferabiltiy, the second one for faster processing
+write.magpie(bii_hr, file.path(outputdir, paste0(title, "_cell.bii_0.5.nc")), comment = "unitless")
+write.magpie(bii_hr, file.path(outputdir, paste0(title, "_cell.bii_0.5.mz")), comment = "unitless")
 
 # Clean up
 rm(bii_hr)

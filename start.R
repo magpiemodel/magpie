@@ -66,6 +66,8 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
   }
 
   runsubmit <- function(runscripts, submit) {
+    if(!dir.exists("logs")) dir.create("logs")
+    
     for(rout in runscripts){
       name   <- paste0("./scripts/start/",rout)
       if(!file.exists(name)) {
@@ -79,14 +81,14 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 
       cat("Executing",name,"\n")
       rout_name <- sub("\\.R$","",sub("/","_",rout))
-      sbatch_command <- paste0("sbatch --job-name=",rout_name," --output=",rout_name,"-%j.out --mail-type=END --wrap=\"Rscript ",name,"\"")
+      sbatch_command <- paste0("sbatch --job-name=",rout_name," --output=logs/",rout_name,"-%j.out --mail-type=END --wrap=\"Rscript ",name,"\"")
       if(submit=="direct") {
         tmp.env <- new.env()
         tmp.error <- try(sys.source(name,envir=tmp.env))
         if(!is.null(tmp.error)) warning("Script ",name," was stopped by an error and not executed properly!")
         rm(tmp.env)
       } else if(submit=="background") {
-        log <- format(Sys.time(), paste0(rout_name,"-%Y-%H-%M-%S-%OS3.log"))
+        log <- format(Sys.time(), paste0("logs/", rout_name, "-%Y-%H-%M-%S-%OS3.log"))
         system2("Rscript",name, stderr = log, stdout = log, wait=FALSE)
       } else if(submit=="slurmpriority") {
         system(paste(sbatch_command,"--qos=priority"))

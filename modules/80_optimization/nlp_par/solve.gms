@@ -21,7 +21,7 @@ magpie.holdfixed = 1 ;
 
 $onecho > conopt4.opt
 Tol_Obj_Change = 3.0e-6
-Tol_Feas_Min = 4.0e-7
+Tol_Feas_Min = 4.0e-10
 Tol_Feas_Max = 4.0e-6
 Tol_Feas_Tria = 4.0e-6
 $offecho
@@ -52,7 +52,7 @@ repeat
     if(handleStatus(p80_handle(h)) = 2,
 	    p80_counter(h) = p80_counter(h) + 1;
       	s80_resolve = 1;
-		
+
 		magpie.handle = p80_handle(h);
 		execute_loadhandle magpie;
 		magpie.modelStat$(magpie.modelStat=NA) = 13;
@@ -61,7 +61,7 @@ repeat
 		p80_modelstat(t,h) = magpie.modelStat;
 		s80_optfile_previter = magpie.optfile;
        	magpie.optfile = s80_optfile;
-		
+
 		h2(h) = yes;
 		i2(i)$supreg(h,i) = yes;
     	loop(i2, j2(j)$cell(i2,j) = yes);
@@ -69,7 +69,7 @@ repeat
       	s80_counter = sum(h2,p80_counter(h2));
       	display s80_counter;
       	display magpie.modelStat;
-  		
+
   		if((p80_counter(h) >= s80_maxiter AND p80_modelstat(t,h) > 2 AND p80_modelstat(t,h) ne 7),
       		display "No feasible solution found. Writing LST file.";
       		option AsyncSolLst=1;
@@ -85,7 +85,7 @@ repeat
 		    s80_resolve = 0;
 		    p80_handle(h) = 0;
 			);
-			
+
 		if(s80_resolve = 1,
 			display "Resolve"
 			if(p80_modelstat(t,h) ne s80_modelstat_previter,
@@ -96,14 +96,14 @@ repeat
             	display "Modelstat > 2 | Retry solve without CONOPT4 pre-processing";
 		    	magpie.optfile = 2;
 	        	solve magpie USING nlp MINIMIZING vm_cost_glo;
-		      else	
+		      else
 		        display "Modelstat > 2 | Retry solve with CONOPT3";
       			option nlp = conopt;
       			solve magpie USING nlp MINIMIZING vm_cost_glo;
       			option nlp = conopt4;
             	);
               );
-		  	execerror = 0;         	
+		  	execerror = 0;
 		  	if(magpie.handle = 0,
 		  		display "Problem. Handle is zero despite resolve. Setting handle to 1 for continuation.";
 		  		magpie.handle = 1;

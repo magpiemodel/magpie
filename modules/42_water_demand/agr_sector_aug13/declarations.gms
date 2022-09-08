@@ -15,15 +15,18 @@ parameters
 * country-specific scenario switch
  p42_country_dummy(iso)             Dummy parameter indicating whether country is affected by EFP (1)
  p42_EFP_region_shr(t_all,i)        Weighted share of region with regards to EFP (1)
+ ic42_pumping_cost(i)               Parameter to capture values for pumping costs in a particular time step (USD05MER per m^3)
 ;
 
 equations
  q42_water_demand(wat_dem,j)         Water withdrawals of different sectors (mio. m^3 per yr)
+ q42_water_cost(i)                  Total cost of pumping irrigation water (USD05MER per yr)
 ;
 
 positive variables
   vm_watdem(wat_dem,j)               Water demand from different sectors (mio. m^3 per yr)
   v42_irrig_eff(j)                   Irrigation efficiency (1)
+  vm_water_cost(i)                   Cost of irrigation water (USD05MER per m^3)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

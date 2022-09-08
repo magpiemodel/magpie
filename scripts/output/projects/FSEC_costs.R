@@ -37,12 +37,6 @@ title <- cfg$title
 message("Generating costs output for the run: ", title)
 gdx <- file.path(outputdir, "fulldata.gdx")
 
-baseDir <- getwd()
-costsOutputDir <- file.path(baseDir, "output", "costs")
-if (!dir.exists(costsOutputDir)) {
-    dir.create(costsOutputDir)
-}
-
 out <- getReportFSECCosts(gdx = gdx,
-                          reportOutputDir = costsOutputDir,
+                          reportOutputDir = outputdir,
                           scenario = title)

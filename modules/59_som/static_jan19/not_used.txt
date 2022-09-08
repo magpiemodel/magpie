@@ -12,3 +12,4 @@ vm_landexpansion,input,questionnaire
 vm_croplandexpansion,input,questionnaire
 vm_croplandreduction,input,questionnaire
 pm_climate_class,input,questionnaire
+vm_fallow,input,questionnaire

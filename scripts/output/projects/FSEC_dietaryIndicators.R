@@ -39,12 +39,7 @@ message("Generating DietaryIndicators output for the run: ", title)
 gdx <- file.path(outputdir, "fulldata.gdx")
 report <- getReportDietaryIndicators(gdx, scenario = title)
 
-dietaryIndicatorsOutputDir <- file.path(baseDir, "output", "DietaryIndicators")
-if (!dir.exists(dietaryIndicatorsOutputDir)) {
-    dir.create(dietaryIndicatorsOutputDir)
-}
-
-Map(f = function(x, i) write.csv(x, file = file.path(dietaryIndicatorsOutputDir, paste0(title, "_", i, ".csv")),
+Map(f = function(x, i) write.csv(x, file = file.path(outputdir, paste0(title, "_", i, ".csv")),
                                  row.names = FALSE, quote = TRUE),
     x = report,
     i = names(report))
