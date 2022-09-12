@@ -146,24 +146,20 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.76bilat_h12_magpie.tgz
-* md5sum: 2e1fd070d87f3153bd9154f9cb81fc9f
+* Used data set: WARNINGS18_rev4.76bilat_1028489d_magpie.tgz
+* md5sum: eaac6f1a82cd4ecb83c2fa5c9ff592bc
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.76bilat_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: 3fdb5aec53ed299984b09931247f94e7
+* Used data set: WARNINGS161_rev4.76bilat_1028489d_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* md5sum: 360a93e4cdf73c13167efd2af6bda154
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.73_h12_validation.tgz
-* md5sum: 0f7a0351766f511c01ebad26fb9d62e9
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: WARNINGS1_rev4.76bilat_1028489d_validation.tgz
+* md5sum: 725a71aeeca93344490c319c3507e9a3
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Used data set: additional_data_rev4.25.tgz
 * md5sum: 48980b0ba9cba11f6feec64cbcdb3652
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
-* 
-* Used data set: calibration_H12_per_ton_fao_may22_28May22.tgz
-* md5sum: f6bf26be99c5dbd29e13a38af38c0d31
 * Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
@@ -172,10 +168,10 @@ $title magpie
 * Total number of cells: 200
 * 
 * Number of cells per region:
-*   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*     6   23    7    6    1   43   27    7   11   12   37   20
+*   CAZ  CHA  DEU  EUC  EUN  EUS  EUW  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
+*     6   23    1    1    1    6    3    6    1   40   27    7   10   12   36   20
 * 
-* Regionscode: 62eff8f7
+* Regionscode: 1028489d
 * 
 * Regions data revision: 4.76
 * 
@@ -186,14 +182,14 @@ $title magpie
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
-* * Regionscode: 62eff8f7
+* * Regionscode: 1028489d
 * * Number of clusters per region:
-*   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*     6   23    7    6    1   43   27    7   11   12   37   20
+*   CAZ  CHA  DEU  EUC  EUN  EUS  EUW  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
+*     6   23    1    1    1    6    3    6    1   40   27    7   10   12   36   20
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Thu Sep  8 01:35:17 2022
+* Last modification (input data): Fri Sep  9 18:00:23 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -219,7 +215,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  GTAPBilat_ON
+$setglobal c_title  GTAPBilat_EURsuper2
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
@@ -235,14 +231,14 @@ $setglobal interest_rate  select_apr20
 $setglobal tc  endo_jan22
 $setglobal yields  managementcalib_aug19
 
-$setglobal food  anthro_iso_jun22
+$setglobal food  anthropometrics_jan18
 $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 
 $setglobal residues  flexreg_apr16
 $setglobal processing  substitution_may21
 
-$setglobal trade  selfsuff_reduced_bilateral
+$setglobal trade  selfsuff_reduced_bilateral22
 $setglobal land_conservation  area_based_apr22
 
 $setglobal ageclass  feb21

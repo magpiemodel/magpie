@@ -15,8 +15,8 @@
 
 *' amount produced regionally must be equal to supply + net trade
 q21_trade_bilat(h2,k_trade)..
- sum(supreg(h2, i2), vm_prod_reg(i2, k_trade)) =g= sum(supreg(h2,i2), vm_supply(i2, k_trade)) -
-                              sum(h_ex, v21_trade(h_ex, h2, k_trade))  + sum(h_im, v21_trade(h2, h_im, k_trade));
+ sum(supreg(h2, i2), vm_prod_reg(i2, k_trade)) =g= sum(supreg(h2,i2), (vm_supply(i2, k_trade) -
+                              sum(i_ex, v21_trade(i_ex, i2, k_trade))  + sum(i_im, v21_trade(i2, i_im, k_trade))));
 
 *' For non-tradable commodites, the regional supply should be larger or equal to the regional demand.
  q21_notrade(h2,k_notrade)..
@@ -72,12 +72,12 @@ q21_trade_bilat(h2,k_trade)..
   sum(h_im, i21_trade_tariff(h2,h_im,k_trade))
  *sum(supreg(h2,i2), vm_prod_reg(i2,k_trade)-vm_supply(i2,k_trade));
 
-* assign costs to one side of the import-export relation, currently to exporting region. margins should be region level 
-q21_costs_margins(h2,k_trade)..
- v21_cost_transport_reg(h2,k_trade) =g=
- sum(supreg(h2,i2), sum(i_im, i21_trade_margin(i2,i_im,k_trade)))* sum(h_im, v21_trade(h2,h_im,k_trade));
+* Trade margins (tariffs) costs assigned currently to exporting region. Margins at region level 
+q21_costs_margins(i2,k_trade)..
+ v21_cost_transport_reg(i2,k_trade) =g=
+  sum(i_im, i21_trade_margin(i2,i_im,k_trade))* sum(i_im, v21_trade(i2,i_im,k_trade));
 
 * Regional trade costs are the costs for each region aggregated over all the tradable commodities.
- q21_cost_trade(h2)..
- sum(supreg(h2,i2),vm_cost_trade(i2)) =e= sum(k_trade, v21_cost_tariff_reg(h2,k_trade) +
-                                              v21_cost_transport_reg(h2, k_trade));
+ q21_cost_trade(i2)..
+ vm_cost_trade(i2) =e= sum(supreg(h2,i2), sum(k_trade, v21_cost_tariff_reg(h2,k_trade))) +
+                                              sum(k_trade, v21_cost_transport_reg(i2, k_trade));
