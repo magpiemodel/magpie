@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **scripts** FSDP_collect handles the health impacts data provided by Marco Springmann, distributed it into the scenario's various reports. It performs a similar operation for global nutrient surplus (which must be calculated on the grid-level and then aggregated).
 - **13_tc** relaxed vm_tau upper limit
 - **scripts** updated FSEC start and output scripts
 - **scripts** update of rds_report to allow gridded intermediate outputs
