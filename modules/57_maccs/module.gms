@@ -17,9 +17,9 @@
 *' Their direct consequences on biophysical values like yields or water requirements is ignored at the moment.
 *'
 *' Mitigation costs are estimated using marginal abatement cost curves (MACCs).
-*' The curves are applied on the original emissions before technical mitigation (btm),
+*' The curves are applied on the original emissions,
 *' and reduce them by a certain percentage in exchange for additional costs.
-*' The MACCs used in this module are based on the data from @LUCAS200785.  
+*' The MACCs used in this module are based on the data from @LUCAS200785.
 *'
 *' @authors Benjamin Leon Bodirsky, Florian Humpenoeder
 
