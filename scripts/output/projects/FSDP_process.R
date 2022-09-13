@@ -87,10 +87,10 @@ dietRelatedScenarios <- c("DietEmptyCals", "DietFish", "DietLegumes", "DietMonog
                           "FSDP",
                           "SSP1", "SSP3", "SSP4", "SSP5")
 
-outputdir_diets <- lapply(X = dietRelatedScenarios, FUN = function(.x) grep(x = dir, pattern = .x, value = TRUE))
+outputdir_diets <- lapply(X = dietRelatedScenarios, FUN = function(.x) grep(x = outputdir, pattern = .x, value = TRUE))
 outputdir_diets <- unlist(outputdir_diets)
 
-lapply(X = outputdir, FUN = .writeDietaryIndicators)
+lapply(X = outputdir_diets, FUN = .writeDietaryIndicators)
 
 
 # -----------------------------------------------------------------------------------------------------------------

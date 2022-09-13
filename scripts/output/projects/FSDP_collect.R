@@ -30,58 +30,71 @@ if(!exists("source_include")) {
 }
 ###############################################################################
 
-# append health impacts to scenario report.mif, report.rds, and report_iso.rds
-.appendHealthImpacts <- function(.dir) {
-    tryCatch(expr = {
+##########
+#filter out calibration run
+x <- unlist(lapply(strsplit(basename(outputdir),"_"),function(x) x[2]))
+outputdir <- outputdir[which(x %in% c("FSECa", "FSECb", "FSECc", "FSECd", "FSECe"))]
 
-        cfg <- gms::loadConfig(file.path(.dir, "config.yml"))
-        title <- cfg$title
+#get revision
+x <- unlist(lapply(strsplit(basename(outputdir),"_"),function(x) x[1]))
+if (length(unique(x)) == 1) rev <- unique(x) else stop("version prefix is not identical. Check your selection of runs")
 
-        # Find the corresponding healthImpacts dataset
-        versionID <- strsplit(title, split = "_")[[1]][1]
+##########
+# Append health impacts reports
+hi_datasets_path <- "/p/projects/magpie/data/FSEC_healthImpactsDatasets_raw"
+hi_datasets      <- list.files(hi_datasets_path)
+hi_versionToUse  <- grep(rev, hi_datasets, value = TRUE)
 
-        hi_datasets_path <- "/p/projects/magpie/data/FSEC_healthImpactsDatasets_raw"
-        hi_datasets <- list.files(hi_datasets_path)
-        hi_versionToUse <- grep(versionID, hi_datasets, value = TRUE)
+if (length(hi_versionToUse) == 0) {
 
-        if (length(hi_versionToUse) == 0) {
+    message("In FSDP_collect.R: No corresponding version ID was found within the FSEC health impacts datasets.
+            Using the highest current version.")
 
-            message("In FSDP_collect.R: No corresponding version ID was found within the FSEC health impacts datasets.
-                    Using the highest current version.")
+    highestVersionNr <- max(as.numeric(str_extract(hi_datasets, "(?<=v)(.*?)(?=_)")))
+    hi_versionToUse <- grep(paste0("v", highestVersionNr), hi_datasets, value = TRUE)
 
-            highestVersionNr <- max(as.numeric(str_extract(hi_datasets, "(?<=v)(.*?)(?=_)")))
-            hi_versionToUse <- grep(paste0("v", highestVersionNr), hi_datasets, value = TRUE)
+} else if (length(hi_versionToUse) >= 2) {
+    stop("In FSDP_collect.R: More than one health impacts datasets with this scenario's version ID were found.
+          Only one is expected.")
+}
 
-        } else if (length(hi_versionToUse) >= 2) {
-            stop("In FSDP_collect.R: More than one health impacts datasets with this scenario's version ID were found.
-                  Only one is expected.")
+hi_versionToUse_path <- file.path(hi_datasets_path, hi_versionToUse)
+hi_gdx <- suppressWarnings(readGDX(hi_versionToUse_path))
+
+.appendHealthImpacts <- function(.x) {
+    cfg <- gms::loadConfig(file.path(.x, "config.yml"))
+    title <- cfg$title
+
+    message("Appending health impact report: ", title)
+    tryCatch(
+        expr = {
+            appendReportHealthImpacts(healthImpacts_path = hi_gdx,
+                                      scenario = title,
+                                      dir = .x)
+        }, error = function(e) {
+            message("In FSDP_collect.R: Unable to append health impacts!\n", e)
         }
-
-        hi_versionToUse_path <- file.path(hi_datasets_path, hi_versionToUse)
-
-        message("Using health impacts data located here: ", hi_versionToUse_path)
-
-        appendReportHealthImpacts(healthImpacts_path = hi_versionToUse_path,
-                                  scenario = title,
-                                  dir = .dir)
-
-    }, error = function(e) {
-        message("In FSDP_collect.R: Unable to append health impacts!\n", e)
-    }
     )
 }
+lapply(X = outputdir, FUN = .appendHealthImpacts)
 
-# append nutrient surplus to scenario report.mif, report.rds, and report_iso.rds
-.appendNutrientSurplus <- function(.dir) {
-  cfg <- gms::loadConfig(file.path(.dir, "config.yml"))
-  title <- cfg$title
+##########
+# Append nutrient surplus reports
+.appendNutrientSurplus <- function(.x) {
+    cfg <- gms::loadConfig(file.path(.x, "config.yml"))
+    title <- cfg$title
 
-  appendReportNutrientSurplus(scenario = title, dir = .dir)
+    tryCatch(
+        expr = {
+            appendReportNutrientSurplus(scenario = title, dir = .x)
+        }, error = function(e) {
+            message("In FSDP_collect.R: Unable to append the nutrient surplus dataset!\n", e)
+        }
+    )
 }
+lapply(X = outputdir, FUN = .appendNutrientSurplus)
 
-lapply(x = outputdir, FUN = .appendHealthImpacts)
-lapply(x = outputdir, FUN = .appendNutrientSurplus)
-
+##########
 # Generate output files
 cat("\nStarting output generation\n")
 
@@ -91,15 +104,6 @@ grid <- NULL
 missing <- NULL
 
 saveRDS(outputdir,"outputdir.rds")
-
-#filter out calibration run
-x <- unlist(lapply(strsplit(basename(outputdir),"_"),function(x) x[2]))
-outputdir <- outputdir[which(x %in% c("FSECa", "FSECb", "FSECc", "FSECd", "FSECe"))]
-
-#get revision
-x <- unlist(lapply(strsplit(basename(outputdir),"_"),function(x) x[1]))
-if (length(unique(x)) == 1) rev <- unique(x) else stop("version prefix is not identical. Check your selection of runs")
-
 
 for (i in 1:length(outputdir)) {
   print(paste("Processing",outputdir[i]))
