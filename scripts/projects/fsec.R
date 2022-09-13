@@ -136,6 +136,7 @@ fsecScenario <- function(scenario) {
                        "projects/FSEC_costs",
                        "projects/FSEC_nitrogenPollution",
                        "projects/FSEC_StevenLord",
+                       "projects/FSEC_SimonDietz",
                        "runBlackmagicc",
                        "FSDP_process"
                        )
