@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **config** updated config to new module setup of MACCs
 - **51_nitrogen** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
 - **58_peatland** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
 - **52_carbon** change of interface from vm_btm_reg to vm_emissions_reg
