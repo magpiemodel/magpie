@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **51_nitrogen** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
+- **58_peatland** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
+- **52_carbon** change of interface from vm_btm_reg to vm_emissions_reg
 - **13_tc** relaxed vm_tau upper limit
 - **scripts** updated FSEC start and output scripts
 - **scripts** update of rds_report to allow gridded intermediate outputs
@@ -21,6 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** log files are now written in a subfolder "logs"
 
 ### added
+- **50_nr_soil_budget** new module realization for more consistent MACCs implementation. change of interface from vm_btm_reg to vm_emissions_reg
+- **53_methane** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
+- **56_ghg_policy** new module realization for more consistent MACCs implementation
+- **57_maccs** new more consistent maccs implementation. different mapping of emission sources to maccs.
 - **scripts** added output script creating a merged .csv for dietaryIndicators and caloricSupply outputs
 - **scripts** added output script creating a set of outputs for Simon Dietz in the FSEC context
 - **scripts** added output script distributing Marco Springmann's health impacts into the respective output scenario report.mif, report.rds, and report_iso.rds
@@ -31,6 +38,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **57_maccs** added new Marginal Abatement Cost Curve (MACCs) data set from PBL (PBL2022)
 
 ### removed
+- **50_nr_soil_budget** old inconsistent module realizations
+- **53_methane** old inconsistent module realizations
+- **56_ghg_policy** old inconsistent module realizations
+- **57_maccs** old inconsistent module realizations
 - **15_food** removed read-in of non-needed input file "f15_calib_factor_FAOfsupply_iso"
 
 ### fixed
