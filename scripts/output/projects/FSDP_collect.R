@@ -68,7 +68,7 @@ hi_gdx <- suppressWarnings(readGDX(hi_versionToUse_path))
     message("Appending health impact report: ", title)
     tryCatch(
         expr = {
-            appendReportHealthImpacts(healthImpacts_path = hi_gdx,
+            appendReportHealthImpacts(healthImpacts_gdx = hi_gdx,
                                       scenario = title,
                                       dir = .x)
         }, error = function(e) {
