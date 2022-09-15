@@ -37,7 +37,7 @@ message("Merging dietary outputs")
 caloricSupply_mergePath     <- file.path("output", "caloricSupply.csv")
 dietaryIndicators_mergePath <- file.path("output", "dietaryIndicators.csv")
 
-if (file.exists(caloricSupply_mergePath) | file.exists(dietaryIndicators_mergePath)) {
+if (file.exists(caloricSupply_mergePath) || file.exists(dietaryIndicators_mergePath)) {
     message("Merge files are already present for these runs. Removing these old files.")
     file.remove(caloricSupply_mergePath, dietaryIndicators_mergePath)
 }
