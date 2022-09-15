@@ -30,7 +30,7 @@ if (!exists("source_include")) {
 #########################################################################################
 
 # -----------------------------------------------------------------------------------------------------------------
-# Merge dietary outputs from FSEC scenarios into two .csv files
+# Merge dietary outputs from multiple FSEC scenarios into two .csv files
 
 message("Merging dietary outputs")
 
