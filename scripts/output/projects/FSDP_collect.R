@@ -42,41 +42,47 @@ if (length(unique(x)) == 1) rev <- unique(x) else stop("version prefix is not id
 ##########
 # Append health impacts reports
 hi_datasets_path <- "/p/projects/magpie/data/FSEC_healthImpactsDatasets_raw"
-hi_datasets      <- list.files(hi_datasets_path)
-hi_versionToUse  <- grep(rev, hi_datasets, value = TRUE)
+if (dir.exists(hi_datasets_path)) {
 
-if (length(hi_versionToUse) == 0) {
+    hi_datasets      <- list.files(hi_datasets_path)
+    hi_versionToUse  <- grep(rev, hi_datasets, value = TRUE)
 
-    message("In FSDP_collect.R: No corresponding version ID was found within the FSEC health impacts datasets.
-            Using the highest current version.")
+    if (length(hi_versionToUse) == 0) {
 
-    highestVersionNr <- max(as.numeric(str_extract(hi_datasets, "(?<=v)(.*?)(?=_)")))
-    hi_versionToUse <- grep(paste0("v", highestVersionNr), hi_datasets, value = TRUE)
+        message("In FSDP_collect.R: No corresponding version ID was found within the FSEC health impacts datasets.
+              Using the highest current version.")
 
-} else if (length(hi_versionToUse) >= 2) {
-    stop("In FSDP_collect.R: More than one health impacts datasets with this scenario's version ID were found.
-          Only one is expected.")
+        highestVersionNr <- max(as.numeric(str_extract(hi_datasets, "(?<=v)(.*?)(?=_)")))
+        hi_versionToUse <- grep(paste0("v", highestVersionNr), hi_datasets, value = TRUE)
+
+    } else if (length(hi_versionToUse) >= 2) {
+        stop("In FSDP_collect.R: More than one health impacts datasets with this scenario's version ID were found.
+            Only one is expected.")
+    }
+
+    hi_versionToUse_path <- file.path(hi_datasets_path, hi_versionToUse)
+    hi_gdx <- suppressWarnings(readGDX(hi_versionToUse_path))
+
+    .appendHealthImpacts <- function(.x) {
+        cfg <- gms::loadConfig(file.path(.x, "config.yml"))
+        title <- cfg$title
+
+        message("Appending health impact report: ", title)
+        tryCatch(
+            expr = {
+                appendReportHealthImpacts(healthImpacts_gdx = hi_gdx,
+                                          scenario = title,
+                                          dir = .x)
+            }, error = function(e) {
+                message("In FSDP_collect.R: Unable to append health impacts!\n", e)
+            }
+        )
+    }
+    lapply(X = outputdir, FUN = .appendHealthImpacts)
+
+} else {
+    message("In FSDP_collect.R: Directory storing health impacts datasets wasn't found. Skipping health impacts.")
 }
-
-hi_versionToUse_path <- file.path(hi_datasets_path, hi_versionToUse)
-hi_gdx <- suppressWarnings(readGDX(hi_versionToUse_path))
-
-.appendHealthImpacts <- function(.x) {
-    cfg <- gms::loadConfig(file.path(.x, "config.yml"))
-    title <- cfg$title
-
-    message("Appending health impact report: ", title)
-    tryCatch(
-        expr = {
-            appendReportHealthImpacts(healthImpacts_gdx = hi_gdx,
-                                      scenario = title,
-                                      dir = .x)
-        }, error = function(e) {
-            message("In FSDP_collect.R: Unable to append health impacts!\n", e)
-        }
-    )
-}
-lapply(X = outputdir, FUN = .appendHealthImpacts)
 
 ##########
 # Append nutrient surplus reports
