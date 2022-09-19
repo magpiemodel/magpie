@@ -6,7 +6,6 @@
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
 pm_land_start,input,questionnaire
-pcm_land_before,input,questionnaire
 fm_croparea,input,questionnaire
 vm_area,input,questionnaire
 vm_landexpansion,input,questionnaire

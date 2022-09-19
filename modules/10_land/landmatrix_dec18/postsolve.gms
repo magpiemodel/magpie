@@ -7,7 +7,6 @@
 
 *** Land Patterns are transferred to next timestep
 pcm_land(j,land)        = vm_land.l(j,land);
-pcm_land_before(j,land) = vm_land.l(j,land);
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov_landdiff(t,"marginal")                                 = vm_landdiff.m;
