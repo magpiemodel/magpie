@@ -11,7 +11,7 @@
 # ---------------------------------------------------------------
 
 # Version 1.0, Florian Humpenoeder
-#
+
 library(lucode2)
 library(magclass)
 library(gms)
@@ -19,6 +19,8 @@ library(magpiesets)
 library(data.table)
 library(gdx)
 library(quitte)
+library(m4fsdp)
+library(stringr)
 
 ############################# BASIC CONFIGURATION #############################
 if(!exists("source_include")) {
@@ -36,6 +38,7 @@ missing <- NULL
 
 saveRDS(outputdir, "outputdir.rds")
 
+##########
 #filter out calibration run
 x         <- unlist(lapply(strsplit(basename(outputdir), "_"), function(x) x[2]))
 outputdir <- outputdir[which(x %in% c("FSECa", "FSECb", "FSECc", "FSECd", "FSECe"))]
@@ -44,6 +47,77 @@ outputdir <- outputdir[which(x %in% c("FSECa", "FSECb", "FSECc", "FSECd", "FSECe
 x <- unlist(lapply(strsplit(basename(outputdir),"_"),function(x) x[1]))
 if (length(unique(x)) == 1) rev <- unique(x) else stop("version prefix is not identical. Check your selection of runs")
 
+##########
+# Append health impacts reports
+hi_datasets_path <- "/p/projects/magpie/data/FSEC_healthImpactsDatasets_raw"
+if (dir.exists(hi_datasets_path)) {
+
+    hi_datasets      <- list.files(hi_datasets_path)
+    hi_versionToUse  <- grep(rev, hi_datasets, value = TRUE)
+
+    if (length(hi_versionToUse) == 0) {
+
+        message("In FSDP_collect.R: No corresponding version ID was found within the FSEC health impacts datasets.
+              Using the highest current version.")
+
+        highestVersionNr <- max(as.numeric(str_extract(hi_datasets, "(?<=v)(.*?)(?=_)")))
+        hi_versionToUse <- grep(paste0("v", highestVersionNr), hi_datasets, value = TRUE)
+
+    } else if (length(hi_versionToUse) >= 2) {
+        stop("In FSDP_collect.R: More than one health impacts datasets with this scenario's version ID were found.
+            Only one is expected.")
+    }
+
+    hi_versionToUse_path <- file.path(hi_datasets_path, hi_versionToUse)
+    hi_gdx <- suppressWarnings(readGDX(hi_versionToUse_path))
+
+    .appendHealthImpacts <- function(.x) {
+        cfg <- gms::loadConfig(file.path(.x, "config.yml"))
+        title <- cfg$title
+
+        message("Appending health impact report: ", title)
+        tryCatch(
+            expr = {
+                appendReportHealthImpacts(healthImpacts_gdx = hi_gdx,
+                                          scenario = title,
+                                          dir = .x)
+            }, error = function(e) {
+                message("In FSDP_collect.R: Unable to append health impacts!\n", e)
+            }
+        )
+    }
+    lapply(X = outputdir, FUN = .appendHealthImpacts)
+
+} else {
+    message("In FSDP_collect.R: Directory storing health impacts datasets wasn't found. Skipping health impacts.")
+}
+
+##########
+# Append nutrient surplus reports
+.appendNutrientSurplus <- function(.x) {
+    cfg <- gms::loadConfig(file.path(.x, "config.yml"))
+    title <- cfg$title
+
+    tryCatch(
+        expr = {
+            appendReportNutrientSurplus(scenario = title, dir = .x)
+        }, error = function(e) {
+            message("In FSDP_collect.R: Unable to append the nutrient surplus dataset!\n", e)
+        }
+    )
+}
+lapply(X = outputdir, FUN = .appendNutrientSurplus)
+
+##########
+# Generate output files
+cat("\nStarting output generation\n")
+
+reg <- NULL
+iso <- NULL
+grid <- NULL
+missing <- NULL
+
+saveRDS(outputdir,"outputdir.rds")
 
 for (i in 1:length(outputdir)) {
   print(paste("Processing",outputdir[i]))
@@ -109,7 +183,7 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing,outputdir[i])
 
     ## Nitrogen
-    nc_file <- file.path(outputdir[i], paste(cfg$title,"nutrientSurplus_anthropogenic_unaggregated.mz",sep="-"))
+    nc_file <- file.path(outputdir[i], paste(cfg$title,"nutrientSurplus_intensity.mz",sep="-"))
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- "nutrientSurplus (kg N per ha)"
