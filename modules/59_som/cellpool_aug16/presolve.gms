@@ -9,17 +9,17 @@
 * Updating the som pools and densities after regrowth and disturbance loss accounting
 
 p59_som_pool(j,"secdforest") = p59_som_pool(j,"secdforest") +
-                               (pcm_land_before(j,"primforest") - pcm_land(j,"primforest")) *
+                               (p59_land_before(j,"primforest") - pcm_land(j,"primforest")) *
                                                 p59_carbon_density(t-1,j,"primforest") +
-                               (pcm_land_before(j,"other") - pcm_land(j,"other")) *
+                               (p59_land_before(j,"other") - pcm_land(j,"other")) *
                                                 p59_carbon_density(t-1,j,"other");
 
 p59_som_pool(j,"other") = p59_som_pool(j,"other") -
-                          (pcm_land_before(j,"other") - pcm_land(j,"other")) *
+                          (p59_land_before(j,"other") - pcm_land(j,"other")) *
                                              p59_carbon_density(t-1,j,"other");
 
 p59_som_pool(j,"primforest") = p59_som_pool(j,"primforest") -
-                               (pcm_land_before(j,"primforest") - pcm_land(j,"primforest")) *
+                               (p59_land_before(j,"primforest") - pcm_land(j,"primforest")) *
                                                 p59_carbon_density(t-1,j,"primforest");
 
 p59_carbon_density(t,j,noncropland59)$(pcm_land(j,noncropland59)>0) = p59_som_pool(j,noncropland59)/pcm_land(j,noncropland59);
