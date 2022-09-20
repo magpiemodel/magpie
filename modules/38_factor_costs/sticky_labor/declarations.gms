@@ -10,15 +10,15 @@ equations
  q38_cost_prod_capital(i)          Regional capital input costs for plant production (mio USD05MER)
  q38_investment_immobile(j,kcr)    Cellular immobile investments into farm capital   (mio USD05MER)
  q38_investment_mobile(j)          Cellular mobile investments into farm capital   (mio USD05MER)
- q38_ces_prodfun(j,kcr)			   CES production function for one unit of output (1)
+ q38_ces_prodfun(j,kcr)            CES production function for one unit of output (1)
 ;
 
 positive variables
  vm_cost_prod_crop(i,req)              Regional factor costs of capital and labor for plant production  (mio USD05MER  per yr)
  v38_investment_immobile(j,kcr)        Investment costs in immobile farm capital (mio USD05MER per yr)
  v38_investment_mobile(j)              Investment costs in mobile farm capital (mio USD05MER per yr)
- v38_labor_need(j,kcr)				   Labor required per unit of output (hours per ton DM)
- v38_capital_need(j,kcr,mobil38)	   Captial required per unit of output (USD05MER per ton DM)
+ v38_labor_need(j,kcr)                 Labor required per unit of output (hours per ton DM)
+ v38_capital_need(j,kcr,mobil38)       Captial required per unit of output (USD05MER per ton DM)
 ;
 
 parameters
@@ -32,14 +32,16 @@ parameters
 
  p38_croparea_start(j,w,kcr)           Agricultural land initialization area (mio. ha)
 
- i38_ces_shr(j,kcr)						Share parameter for CES function (1)
- i38_ces_scale(j,kcr)					Scaling factor for total factor productivity (1)
+ i38_ces_shr(j,kcr)                     Share parameter for CES function (1)
+ i38_ces_scale(j,kcr)                   Scaling factor for total factor productivity (1)
  
+ p38_intr_depr(t,i)                     Factor from interest and depreciation rate (1)
+
  i38_fac_req(t_all,i,kcr)               Factor requirements (USD05MER per tDM)
 ;
 
 scalars
- s38_ces_elast_par								Elasticity parameter for CES function (1)
+ s38_ces_elast_par                      Elasticity parameter for CES function (1)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

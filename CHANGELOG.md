@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **config** new switches `s36_minimum_wage`, `s36_scale_labor_costs`, and `s38_fix_capital_need`
+- **38_factor_costs** and **70_livestock** included labor cost scaling in case of minimum wage scenario
+- **36_employment** included calculations for of minimum wage scenario
 - **scripts** FSDP_collect handles the health impacts data provided by Marco Springmann, distributed it into the scenario's various reports. It performs a similar operation for global nutrient surplus (which must be calculated on the grid-level and then aggregated).
 - **13_tc** relaxed vm_tau upper limit
 - **scripts** updated FSEC start and output scripts
@@ -31,9 +34,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **57_maccs** added new Marginal Abatement Cost Curve (MACCs) data set from PBL (PBL2022)
 
 ### removed
+- **38_factor_costs** removed `mixed_reg_feb17` realization
 - **15_food** removed read-in of non-needed input file "f15_calib_factor_FAOfsupply_iso"
 
 ### fixed
+- **38_factor_costs** fixed calibration of share parameter in `sticky_labor` realization
 - **43_water_availability** added missing years after 2100 in "f43_wat_avail" to avoid infeasibilities in coupled runs with less_ts timesteps
 - **scripts** fixed some bugs related to background execution of start/output scripts
 
