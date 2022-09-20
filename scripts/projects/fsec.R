@@ -133,10 +133,12 @@ fsecScenario <- function(scenario) {
                        "rds_report_iso",
                        "extra/disaggregation_BII",
                        "projects/FSEC_dietaryIndicators",
-                       "projects/FSEC_costs.R",
-                       "projects/FSEC_nitrogenPollution.R",
-                       "projects/FSEC_StevenLord.R",
-                       "runBlackmagicc.R"
+                       "projects/FSEC_costs",
+                       "projects/FSEC_nitrogenPollution",
+                       "runBlackmagicc",
+                       "FSDP_process",
+                       "projects/FSEC_StevenLord",
+                       "projects/FSEC_SimonDietz"
                        )
   cfg$force_download    <- TRUE
 
