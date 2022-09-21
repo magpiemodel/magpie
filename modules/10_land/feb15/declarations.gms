@@ -8,7 +8,7 @@
 
 parameters
  pm_land_start(j,land)            Land initialization area (mio. ha)
- pcm_land(j,land)                 Land area in previous time step (mio. ha)
+ pcm_land(j,land)                 Land area in previous time step including possible changes after optimization (mio. ha)
 ;
 
 variables
