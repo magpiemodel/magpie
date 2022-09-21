@@ -14,8 +14,8 @@ p36_total_hours_worked(iso) = sum(t_past$(ord(t_past) eq card(t_past)), f36_hist
 
 *' Hourly labor costs are projected into the future by using a linear regression with
 *' GDPpcMER, which is calibrated such that historic values of agricultural employment 
-*' are met. A threshold of 0.1$/h is used in the regression to avoid too low or 
-*' negative hourly labor costs.
+*' are met. A threshold is used in the regression to avoid too low or negative hourly
+*' labor costs.
 p36_hourly_costs_iso_baseline(t,iso) = max((im_gdp_pc_mer_iso(t,iso)*f36_regr_hourly_costs("slope") + f36_regr_hourly_costs("intercept") + p36_calibration_hourly_costs(iso)), f36_regr_hourly_costs("threshold"));
 
 *' @stop
