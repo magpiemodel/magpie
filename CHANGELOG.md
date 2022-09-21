@@ -39,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### fixed
 - **38_factor_costs** fixed calibration of share parameter in `sticky_labor` realization
+- **59_som** corrected the som pool due to the carbon transfer from other and primary forest to secondary forest before optimization (presolve)  
 - **43_water_availability** added missing years after 2100 in "f43_wat_avail" to avoid infeasibilities in coupled runs with less_ts timesteps
 - **scripts** fixed some bugs related to background execution of start/output scripts
 
