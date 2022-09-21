@@ -232,7 +232,6 @@ val <- as.data.table(read.quitte(val))
 saveRDS(val, file = file.path("output", paste(rev, "FSDP_validation.rds", sep = "_")), version = 2, compress = "xz")
 
 message("Plotting figures ...")
-library(m4fsdp)
 heatmapFSDP(reg, tableType = 1, file = file.path("output", paste(rev, "FSDP_heatmap1.jpg", sep = "_")))
 heatmapFSDP(reg, tableType = 2, file = file.path("output", paste(rev, "FSDP_heatmap2.jpg", sep = "_")))
 spatialMapsFSDP(reg, iso, grid, reg2iso, file = file.path("output", paste(rev, "FSDP_spatialMaps.jpg", sep = "_")))
