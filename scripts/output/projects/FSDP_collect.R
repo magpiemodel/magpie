@@ -29,14 +29,6 @@ if(!exists("source_include")) {
   lucode2::readArgs("outputdir")
 }
 ###############################################################################
-cat("\nStarting output generation\n")
-
-reg     <- NULL
-iso     <- NULL
-grid    <- NULL
-missing <- NULL
-
-saveRDS(outputdir, "outputdir.rds")
 
 ##########
 #filter out calibration run
@@ -44,7 +36,7 @@ x         <- unlist(lapply(strsplit(basename(outputdir), "_"), function(x) x[2])
 outputdir <- outputdir[which(x %in% c("FSECa", "FSECb", "FSECc", "FSECd", "FSECe"))]
 
 #get revision
-x <- unlist(lapply(strsplit(basename(outputdir),"_"),function(x) x[1]))
+x <- unlist(lapply(strsplit(basename(outputdir),"_"), function(x) x[1]))
 if (length(unique(x)) == 1) rev <- unique(x) else stop("version prefix is not identical. Check your selection of runs")
 
 ##########
@@ -112,9 +104,9 @@ lapply(X = outputdir, FUN = .appendNutrientSurplus)
 # Generate output files
 cat("\nStarting output generation\n")
 
-reg <- NULL
-iso <- NULL
-grid <- NULL
+reg     <- NULL
+iso     <- NULL
+grid    <- NULL
 missing <- NULL
 
 saveRDS(outputdir,"outputdir.rds")
@@ -130,7 +122,7 @@ for (i in 1:length(outputdir)) {
   } else missing <- c(missing,outputdir[i])
 
   ### ISO level outputs
-  rep<-file.path(outputdir[i],"report_iso.rds")
+  rep <- file.path(outputdir[i],"report_iso.rds")
   if(file.exists(rep)) {
     iso <- rbind(iso,as.data.table(readRDS(rep)))
   } else missing <- c(missing,outputdir[i])
@@ -143,7 +135,7 @@ for (i in 1:length(outputdir)) {
     years <- c(2020, 2050)
 
     ## BII
-    nc_file <- file.path(outputdir[i], paste(cfg$title,"cell.bii_0.5.mz",sep="_"))#Note the "_" instead of "-"
+    nc_file <- file.path(outputdir[i], paste(cfg$title, "cell.bii_0.5.mz", sep = "_"))#Note the "_" instead of "-"
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- "BII (index)"
@@ -153,7 +145,7 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing,outputdir[i])
 
     ## Crop diversity
-    nc_file <- file.path(outputdir[i], paste0(scen,"-CropDiversityGridded.nc"))
+    nc_file <- file.path(outputdir[i], paste0(scen, "-CropDiversityGridded.nc"))
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years, "ShannonCropDiversity"]
       getNames(a) <- "Shannon crop diversity (index)"
@@ -183,7 +175,7 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing,outputdir[i])
 
     ## Nitrogen
-    nc_file <- file.path(outputdir[i], paste(cfg$title,"nutrientSurplus_intensity.mz",sep="-"))
+    nc_file <- file.path(outputdir[i], paste(cfg$title,"nutrientSurplus_intensity.mz", sep="-"))
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- "nutrientSurplus (kg N per ha)"
