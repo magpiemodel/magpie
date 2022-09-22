@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **inputs** update of NPi for China (additional data 4.30)
+- **inputs** updated f56_emis_policy (additional data 4.29)
 - **scripts** FSDP_collect handles the health impacts data provided by Marco Springmann, distributed it into the scenario's various reports. It performs a similar operation for global nutrient surplus (which must be calculated on the grid-level and then aggregated).
 - **13_tc** relaxed vm_tau upper limit
 - **scripts** updated FSEC start and output scripts
@@ -22,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** log files are now written in a subfolder "logs"
 
 ### added
+- **scripts** added water output script for FSEC model runs
 - **scripts** added output script, FSDP_process creating a merged .csv and .gdx for dietaryIndicators and caloricSupply outputs
 - **scripts** added output script creating a set of outputs for Simon Dietz in the FSEC context
 - **scripts** added output script running MAGICC7 on a MAgPIE scenario
