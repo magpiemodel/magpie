@@ -383,7 +383,6 @@ $endif
     p15_demand2intake_ratio_detail(t,iso,kfo)=1$(p15_intake_detail(t,iso,kfo) = 0) +
                   (p15_kcal_pc_iso(t,iso,kfo) / p15_intake_detail(t,iso,kfo))$(p15_intake_detail(t,iso,kfo) > 0);
 
-    display p15_kcal_pc_iso;
 );
 
 

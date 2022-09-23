@@ -5,5 +5,5 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_btm_reg.fx(i,"peatland",pollutants) = 0;
+vm_emissions_reg.fx(i,"peatland",pollutants) = 0;
 vm_peatland_cost.fx(j) = 0;
