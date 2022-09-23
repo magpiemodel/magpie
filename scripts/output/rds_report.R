@@ -34,7 +34,7 @@ resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 ###############################################################################
 
 
-report <- getReport(gdx, scenario = cfg$title, dir = outputdir)
+report <- getReport(gdx, scenario = cfg$title)
 write.report(report, file = mif)
 q <- as.quitte(report)
 if(all(is.na(q$value))) stop("No values in reporting!")
