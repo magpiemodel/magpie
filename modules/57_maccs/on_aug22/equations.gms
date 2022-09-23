@@ -34,6 +34,6 @@ q57_total_costs(i2) ..
 		* vm_emissions_reg(i2,emis_source,pollutants_maccs57) / (1 - im_maccs_mitigation(ct,i2,emis_source,pollutants_maccs57))
 		)
   + sum(emis_source_inorg_fert_n2o,
-    vm_emissions_reg(i2,emis_source_inorg_fert_n2o,"n2o_n_direct") / s57_implicit_emis_factor
-    im_maccs_mitigation(ct,i2,emis_source_inorg_fert_n2o,"n2o_n_direct") * s57_implicit_fert_cost
+    (vm_emissions_reg(i2,emis_source_inorg_fert_n2o,"n2o_n_direct") / s57_implicit_emis_factor) *
+    sum(ct,im_maccs_mitigation(ct,i2,emis_source_inorg_fert_n2o,"n2o_n_direct")) * s57_implicit_fert_cost
   );

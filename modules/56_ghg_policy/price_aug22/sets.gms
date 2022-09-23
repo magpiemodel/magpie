@@ -85,6 +85,7 @@ sets
       redd_nosoil,
       redd+_nosoil,
       redd+natveg_nosoil,
+      all_vegc,
       redd_vegc,
       redd+_vegc,
       redd+natveg_vegc,
@@ -96,7 +97,6 @@ sets
       sdp_redd_soil,
       sdp_redd_soil_peat,
       sdp_all,
-      all_vegc,
       gcs_lbs,
       gcs_res /
 
