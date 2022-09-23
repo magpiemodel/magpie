@@ -65,7 +65,7 @@ im_maccs_mitigation(t,i,emis_source_awms_ch4,"ch4") =
 $ontext
 The costs associated with technical abatement of GHG emissions are reflected by the area under the mac curve, i.e. the integral.
 Abatement options at zero cost are in the first step. Therefore an offset of -1 is used.
-Note that the emissions before mtigation, which need to be part of the integral calculation but is not available in preloop,
+Note that the emissions before mitigation, which need to be part of the integral calculation but are not available in preloop,
 are multiplied with p57_maccs_costs_integral during optimization (see equations).
 
 Illustrative example for CH4: Abatement is 0.14 percent at 0$/tC, 0.15 percent at 5 and 10 $/tC, and 0.16 percent at 15 $/tC.
