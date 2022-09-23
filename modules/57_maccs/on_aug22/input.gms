@@ -16,14 +16,18 @@ scalars
   s57_maxmac_ch4_rice    activate rice CH4 mitigation independent of pollutant price (step of MACC and -1 is inactive)/ -1 /
   s57_maxmac_ch4_entferm activate enteric fermentation CH4 mitigation independent of pollutant price (step of MACC and -1 is inactive) / -1 /
   s57_maxmac_ch4_awms  activate awms CH4 mitigation independent of pollutant price (step of MACC and -1 is inactive) / -1 /
+  s57_implicit_emis_factor emission factor for direct soil emissions implicit to MACC curves (tN2ON per tN) / 0.01 /
+  s57_implicit_fert_cost fertilizer costs implicit to MACC curves (USD05MER per ton N) / 600 /
 ;
+
+$onEmpty
 table f57_maccs_n2o(t_all,i,maccs_n2o,maccs_steps)  N2O MACC from Image model (percent)
 $ondelim
 $if "%c57_macc_version%" == "PBL_2007" $include "./modules/57_maccs/input/f57_maccs_n2o.cs3"
 $if "%c57_macc_version%" == "PBL_2019" $include "./modules/57_maccs/input/f57_maccs_n2o_2019.cs3"
 $offdelim
 ;
-
+$offEmpty
 
 table f57_maccs_n2o_2022(t_all,i,maccs_n2o,scen57,maccs_steps)  N2O MACC from Image model (percent)
 $ondelim
@@ -33,13 +37,14 @@ $offdelim
 $if "%c57_macc_version%" == "PBL_2022" f57_maccs_n2o(t_all,i,maccs_n2o,maccs_steps) = f57_maccs_n2o_2022(t_all,i,maccs_n2o,"%c57_macc_scenario%",maccs_steps)
 
 
-
+$onEmpty
 table f57_maccs_ch4(t_all,i,maccs_ch4,maccs_steps)  CH4 MACC from Image model (percent)
 $ondelim
 $if "%c57_macc_version%" == "PBL_2007" $include "./modules/57_maccs/input/f57_maccs_ch4.cs3"
 $if "%c57_macc_version%" == "PBL_2019" $include "./modules/57_maccs/input/f57_maccs_ch4_2019.cs3"
 $offdelim
 ;
+$offEmpty
 
 table f57_maccs_ch4_2022(t_all,i,maccs_ch4,scen57,maccs_steps)  N2O MACC from Image model (percent)
 $ondelim
