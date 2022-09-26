@@ -12,10 +12,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **config** new switches `s36_minimum_wage`, `s36_scale_labor_costs`, and `s38_fix_capital_need`
 - **38_factor_costs** and **70_livestock** included labor cost scaling in case of minimum wage scenario
 - **36_employment** included calculations for of minimum wage scenario
+- **config** updated config to new module setup of MACCs
+- **51_nitrogen** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
+- **58_peatland** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
+- **52_carbon** change of interface from vm_btm_reg to vm_emissions_reg
 - **inputs** update of NPi for China (additional data 4.30)
 - **inputs** updated f56_emis_policy (additional data 4.29)
-- **scripts** FSDP_collect handles the health impacts data provided by Marco Springmann, distributed it into the scenario's various reports. It performs a similar operation for global nutrient surplus (which must be calculated on the grid-level and then aggregated).
-- **13_tc** relaxed vm_tau upper limit
+- **scripts** FSDP_collect handles the health impacts data provided by Marco Springmann, distributed it into the scenario's various reports. It performs a similar operation for global nutrient surplus (which must be calculated on the grid-level and then aggregated).- **13_tc** relaxed vm_tau upper limit
 - **scripts** updated FSEC start and output scripts
 - **scripts** update of rds_report to allow gridded intermediate outputs
 - **config** non-food system emission MAGICC switch
@@ -27,8 +30,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** log files are now written in a subfolder "logs"
 
 ### added
+- **50_nr_soil_budget** new module realization for more consistent MACCs implementation. change of interface from vm_btm_reg to vm_emissions_reg
+- **53_methane** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
+- **56_ghg_policy** new module realization for more consistent MACCs implementation
+- **57_maccs** new more consistent maccs implementation. different mapping of emission sources to maccs.
+- **scripts** added output script creating a merged .csv for dietaryIndicators and caloricSupply outputs
 - **scripts** added water output script for FSEC model runs
 - **scripts** added output script, FSDP_process creating a merged .csv and .gdx for dietaryIndicators and caloricSupply outputs
+- **scripts** added output script creating a merged .csv for dietaryIndicators and caloricSupply outputs
 - **scripts** added output script creating a set of outputs for Simon Dietz in the FSEC context
 - **scripts** added output script running MAGICC7 on a MAgPIE scenario
 - **scripts** added output script for gridded crop diversity indices
@@ -38,6 +47,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### removed
 - **38_factor_costs** removed `mixed_reg_feb17` realization
+- **50_nr_soil_budget** old inconsistent module realizations
+- **53_methane** old inconsistent module realizations
+- **56_ghg_policy** old inconsistent module realizations
+- **57_maccs** old inconsistent module realizations
 - **15_food** removed read-in of non-needed input file "f15_calib_factor_FAOfsupply_iso"
 
 ### fixed
