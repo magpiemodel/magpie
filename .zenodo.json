@@ -1,6 +1,6 @@
 {
   "title": "MAgPIE - An Open Source land-use modeling framework",
-  "version": "4.4.0dev",
+  "version": "4.5.0dev",
   "creators": [
     {
       "name": "Dietrich, Jan Philipp",
@@ -100,5 +100,5 @@
   "license": {
     "id": "AGPL-3.0-or-later"
   },
-  "publication_date": "2021-12-13"
+  "publication_date": "2022-07-07"
 }

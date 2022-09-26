@@ -17,17 +17,20 @@ library(madrat)
 library(mrcommons)
 
 ############################# BASIC CONFIGURATION ##############################
-if (!exists("source_include")) {
-  outputdir <- "output/FSEC_EnvironmentalWelfareIndicators"
-  readArgs("outputdir")
+if(!exists("source_include")) {
+  outputdir <- file.path("output/", list.dirs("output/", full.names = FALSE, recursive = FALSE))
+  # Define arguments that can be read from command line
+  lucode2::readArgs("outputdir")
 }
+
 map_file           <- Sys.glob(file.path(outputdir, "clustermap_*.rds"))
-gdx                <- file.path(outputdir,"fulldata.gdx")
-land_hr_file       <- file.path(outputdir,"avl_land_full_t_0.5.mz")
-urban_land_hr_file <- file.path(outputdir,"f34_urbanland_0.5.mz")
+gdx                <- file.path(outputdir, "fulldata.gdx")
+land_hr_file       <- file.path(outputdir, "avl_land_full_t_0.5.mz")
+urban_land_hr_file <- file.path(outputdir, "f34_urbanland_0.5.mz")
 side_layers        <- file.path(outputdir, "luh2_side_layers_0.5.mz")
 
-cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
+cfg   <- gms::loadConfig(file.path(outputdir, "config.yml"))
+title <- cfg$title
 ################################################################################
 
 sizelimit <- getOption("magclass_sizeLimit")
@@ -45,6 +48,14 @@ mapping <- readRDS(map_file)
 # Biodiversity intactness indicator (BII) at cluster level
 bii_lr <- BII(gdx, file = NULL, level = "cell", mode = "auto", landClass = "all",
            bii_coeff = NULL, side_layers = NULL)
+
+# add BII values for primary other land (BII = 1)
+bii_lr <- mbind(
+  bii_lr[,,"other", invert=TRUE],
+  setNames(bii_lr[,,"other"], c("primother.forested", "primother.nonforested")),
+  setNames(bii_lr[,,"other"], c("secdother.forested", "secdother.nonforested"))
+)
+bii_lr[,,c("primother.forested", "primother.nonforested")] <- 1
 
 # Load input data
 land_ini_lr     <- readGDX(gdx, "f10_land", "f_land", format = "first_found")[, "y1995", ]
@@ -82,25 +93,25 @@ if(any(land_ini_hr < 0)) {
 # read in hr urban land
 if (cfg$gms$urban == "exo_nov21" ) {
   urban_land_hr <- read.magpie(urban_land_hr_file)
-  ssp           <- cfg$gms$c09_gdp_scenario
+  ssp           <- cfg$gms$c34_urban_scenario
   urban_land_hr <- urban_land_hr[,,ssp]
   getNames(urban_land_hr) <- "urban"
 } else if (cfg$gms$urban == "static"){
   urban_land_hr <- "static"
 }
 
-# account for country-specific set-aside shares in post-processing
+# account for country-specific SNV shares in post-processing
 iso                <- readGDX(gdx, "iso")
-set_aside_iso      <- readGDX(gdx, "policy_countries30")
-set_aside_select   <- readGDX(gdx, "s30_set_aside_shr")
-set_aside_noselect <- readGDX(gdx, "s30_set_aside_shr_noselect")
-set_aside_shr      <- new.magpie(iso, fill = set_aside_noselect)
-set_aside_shr[set_aside_iso,,] <- set_aside_select
+snv_pol_iso      <- readGDX(gdx, "policy_countries30")
+snv_pol_select   <- readGDX(gdx, "s30_snv_shr")
+snv_pol_noselect <- readGDX(gdx, "s30_snv_shr_noselect")
+snv_pol_shr      <- new.magpie(iso, fill = snv_pol_noselect)
+snv_pol_shr[snv_pol_iso,,] <- snv_pol_select
 
 avl_cropland_hr <- file.path(outputdir, "avl_cropland_0.5.mz")    # available cropland (at high resolution)
 marginal_land   <- cfg$gms$c30_marginal_land                      # marginal land scenario
-target_year     <- cfg$gms$c30_set_aside_target                   # target year of set aside policy (default: "none")
-set_aside_fader <- readGDX(gdx, "f30_set_aside_fader", format = "first_found")[, , target_year]
+target_year     <- cfg$gms$c30_snv_target                   # target year of SNV policy (default: "none")
+snv_pol_fader <- readGDX(gdx, "f30_scenario_fader", format = "first_found")[, , target_year]
 
 # Sort and rename
 land_ini_hr <- land_ini_hr[,,getNames(land_ini_lr)]
@@ -114,19 +125,23 @@ land_hr <- interpolateAvlCroplandWeighted(x               = land_lr,
                                           avl_cropland_hr = avl_cropland_hr,
                                           map             = map_file,
                                           marginal_land   = marginal_land,
-                                          set_aside_shr   = set_aside_shr,
-                                          set_aside_fader = set_aside_fader,
+                                          snv_pol_shr   = snv_pol_shr,
+                                          snv_pol_fader = snv_pol_fader,
                                           urban_land_hr   = urban_land_hr,
                                           unit            = "share")
 
-land_hr <- land_hr[, "y1985", invert = TRUE]
+# Add primary and secondaray other land
+land_hr <- PrimSecdOtherLand(land_hr, land_hr_file)
+
+# specify potential natural vegetation
 land_hr <- land_hr * side_layers_hr[, , c("forested", "nonforested")]
 
 # Sum over land classes
 bii_hr <- dimSums(land_hr * bii_hr, dim = 3, na.rm = TRUE)
 
-write.magpie(bii_hr, file.path(outputdir, "cell.bii_0.5.nc"), comment = "unitless")
-write.magpie(bii_hr, file.path(outputdir, "cell.bii_0.5.mz"), comment = "unitless")
+# Save BII data as .nc and .mz file, the first for better transferabiltiy, the second one for faster processing
+write.magpie(bii_hr, file.path(outputdir, paste0(title, "_cell.bii_0.5.nc")), comment = "unitless")
+write.magpie(bii_hr, file.path(outputdir, paste0(title, "_cell.bii_0.5.mz")), comment = "unitless")
 
 # Clean up
 rm(bii_hr)

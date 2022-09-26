@@ -13,6 +13,8 @@ q42_water_demand("agriculture",j2)..
  sum(kcr, vm_area(j2,kcr,"irrigated")*ic42_wat_req_k(j2,kcr))
  + sum(kli,vm_prod(j2,kli)*ic42_wat_req_k(j2,kli)*v42_irrig_eff(j2));
 
+q42_water_cost(i2)  ..
+  vm_water_cost(i2) =e= sum(cell(i2,j2),vm_watdem("agriculture",j2))*ic42_pumping_cost(i2);
 
 *' Agricultural water demand is composed by livestock water demand and
 *' demand for irrigation water withdrawals.

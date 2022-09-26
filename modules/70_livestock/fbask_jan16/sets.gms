@@ -6,8 +6,12 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
+
    cost_regr Cost regression parameters
     /cost_regr_a,cost_regr_b/
+
+   share_regr regression parameters for capital share calculation
+   /slope, intercept/
 
    feed_scen70  scenarios
        / ssp1, ssp2, ssp3, ssp4, ssp5, constant,
@@ -39,5 +43,4 @@ sets
          lin_zero_10_50, lin_zero_20_50, lin_zero_20_30, lin_zero_20_70, lin_50pc_20_50, lin_50pc_20_50_extend65, lin_50pc_20_50_extend80,
          lin_50pc_10_50_extend90, lin_75pc_10_50_extend90, lin_80pc_20_50, lin_80pc_20_50_extend95, lin_90pc_20_50_extend95,
 	 lin_99-98-90pc_20_50-60-100, sigmoid_20pc_20_50, sigmoid_50pc_20_50, sigmoid_80pc_20_50 /
-
 ;

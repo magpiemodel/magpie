@@ -72,3 +72,28 @@ $macro m_fillmissingyears(input,sets) loop(t_all, \
           ); \
           ct_all(t_all) = no;    \
        );
+
+* macro for linear interpolation
+$macro m_linear_interpol(input,start_year,target_year,start_value,target_value) \
+	input(t_all)$(m_year(t_all) >= start_year AND m_year(t_all) <= target_year) = ((m_year(t_all)-start_year) / (target_year-start_year));	\
+	input(t_all) = start_value + input(t_all) * (target_value-start_value);	\
+    input(t_all)$(m_year(t_all) <= start_year) = start_value; \
+    input(t_all)$(m_year(t_all) >= target_year) = target_value;
+
+* macro for sigmoid interpolation (S-shaped curve)
+$macro m_sigmoid_interpol(input,start_year,target_year,start_value,target_value) \
+	input(t_all)$(m_year(t_all) >= start_year AND m_year(t_all) <= target_year) = ((m_year(t_all)-start_year) / (target_year-start_year));	\
+	input(t_all) = 1 / (1 + exp(-10*(input(t_all)-0.5)));	\
+	input(t_all) = start_value + input(t_all) * (target_value-start_value);	\
+    input(t_all)$(m_year(t_all) <= start_year) = start_value; \
+    input(t_all)$(m_year(t_all) >= target_year) = target_value;
+
+* macro for simple carbon stocks
+$macro m_carbon_stock(land,carbon_density,item) \
+            (land(j2,item) * sum(ct,carbon_density(ct,j2,item,ag_pools)))$(sameas(stockType,"actual")) + \
+            (land(j2,item) * sum(ct,carbon_density(ct,j2,item,ag_pools)))$(sameas(stockType,"actualNoAcEst"));
+
+* macro for carbon stocks with age classes
+$macro m_carbon_stock_ac(land,carbon_density,sets,sets_sub) \
+            sum((&&sets), land(j2,&&sets) * sum(ct, carbon_density(ct,j2,&&sets,ag_pools)))$(sameas(stockType,"actual")) + \
+            sum((&&sets_sub), land(j2,&&sets_sub) * sum(ct, carbon_density(ct,j2,&&sets_sub,ag_pools)))$(sameas(stockType,"actualNoAcEst"));

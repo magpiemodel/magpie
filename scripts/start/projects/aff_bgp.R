@@ -10,7 +10,7 @@
 #### Script to start a MAgPIE run ####
 ######################################
 
-library(lucode)
+library(lucode2)
 library(magclass)
 
 # Switch between control and experiment, "exp", "ctr"
@@ -47,8 +47,8 @@ cfg$gms$c56_pollutant_prices <- "SSPDB-SSP2-26-REMIND-MAGPIE"
 cfg$gms$c60_2ndgen_biodem <- "SSPDB-SSP2-26-REMIND-MAGPIE"
 
 # Set relevant policies to NDC
-cfg$gms$c35_ad_policy <- "ndc"
-cfg$gms$c35_aolc_policy <- "ndc"
+cfg$gms$c22_ad_policy <- "ndc"
+cfg$gms$c22_aolc_policy <- "ndc"
 cfg$gms$c32_aff_policy <- "ndc"
 
 # Afforestation restrictions "unrestricted" "noboreal"

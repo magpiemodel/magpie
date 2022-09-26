@@ -82,7 +82,7 @@
                    desc = "emission policy scenarios",
                    items = scen56))
 
-  gms::writeSets(sets, "modules/56_ghg_policy/price_jan20/sets.gms")
+  gms::writeSets(sets, "modules/56_ghg_policy/price_aug22/sets.gms")
 
   ### 60_bioenergy
   scen2nd60 <- magclass::read.magpie("modules/60_bioenergy/input/f60_bioenergy_dem.cs3")
@@ -253,7 +253,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   if (!file.exists(cfg$results_folder)) {
     dir.create(cfg$results_folder, recursive=TRUE, showWarnings=FALSE)
 	} else if (cfg$force_replace) {
-    cat("Deleting results folder because it alreay exists:",cfg$results_folder,"\n")
+    cat("Deleting results folder because it already exists:",cfg$results_folder,"\n")
     unlink(cfg$results_folder, recursive = TRUE)
     dir.create(cfg$results_folder, recursive = TRUE, showWarnings = FALSE)
   } else {
@@ -388,7 +388,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
     source("scripts/calibration/calc_calib.R")
     calibrate_magpie(n_maxcalib = cfg$calib_maxiter,
                      calib_accuracy = cfg$calib_accuracy,
-                     calibrate_pasture = (cfg$gms$past!="static"),
+                     calibrate_pasture = (cfg$gms$past!="static" & cfg$gms$past!="grasslands_apr22"),
                      calibrate_cropland = (cfg$calib_cropland),
                      damping_factor = cfg$damping_factor,
                      crop_max = cfg$crop_calib_max,

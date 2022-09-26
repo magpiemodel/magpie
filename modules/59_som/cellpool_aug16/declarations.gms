@@ -11,8 +11,10 @@ parameters
           i59_tillage_share(i,tillage59)       Share of land under tillage class (1)
           i59_input_share(i,inputs59)          Share of land under input class (1)
           i59_cratio(j,kcr,w)                  Ratio of carbon density of land relative to natural vegetaion (1)
+          i59_cratio_fallow(j)                 Ratio of carbon density of fallow land relative to natural vegetation (1)
           p59_som_pool(j,pools59)              Actual C pool (mio. tC)
           i59_subsoilc_density(t_all,j)        Subsoil carbon density of a hectare of land (tC per ha)
+          p59_land_before(j,land)              Land area in previous time step (mio. ha)
 ;
 
 equations
@@ -24,7 +26,7 @@ equations
          q59_nr_som(j)                                    Soil organic matter loss (Mt N per yr)
          q59_nr_som_fertilizer(j)                         Bound of nitrogen fertilizer of soil organic matter loss (Mt N per yr)
          q59_nr_som_fertilizer2(j)                        Fraction of soil organic matter loss take is taken up by plants (Mt N per yr)
-         q59_carbon_soil(j,pools59)                       Soil carbon content calculation (mio. tC)
+         q59_carbon_soil(j,pools59,stockType)             Soil carbon content calculation (mio. tC)
 ;
 
 positive variables
@@ -53,6 +55,6 @@ parameters
  oq59_nr_som(t,j,type)                                 Soil organic matter loss (Mt N per yr)
  oq59_nr_som_fertilizer(t,j,type)                      Bound of nitrogen fertilizer of soil organic matter loss (Mt N per yr)
  oq59_nr_som_fertilizer2(t,j,type)                     Fraction of soil organic matter loss take is taken up by plants (Mt N per yr)
- oq59_carbon_soil(t,j,pools59,type)                    Soil carbon content calculation (mio. tC)
+ oq59_carbon_soil(t,j,pools59,stockType,type)          Soil carbon content calculation (mio. tC)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
