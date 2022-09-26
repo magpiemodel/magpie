@@ -11,3 +11,4 @@ vm_dem_feed,input,not needed
 fm_attributes,input,not needed
 vm_manure,input,questionnaire
 vm_res_ag_burn,input,not needed
+im_maccs_mitigation,input,questionnaire

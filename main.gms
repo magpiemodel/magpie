@@ -146,21 +146,25 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: WARNINGS18_rev4.76bilat_1028489d_magpie.tgz
-* md5sum: eaac6f1a82cd4ecb83c2fa5c9ff592bc
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: rev4.77_h12_magpie.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: WARNINGS161_rev4.76bilat_1028489d_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: 360a93e4cdf73c13167efd2af6bda154
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: rev4.77_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: WARNINGS1_rev4.76bilat_1028489d_validation.tgz
-* md5sum: 725a71aeeca93344490c319c3507e9a3
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: rev4.77_h12_validation.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev4.25.tgz
-* md5sum: 48980b0ba9cba11f6feec64cbcdb3652
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: additional_data_rev4.30.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* 
+* Used data set: calibration_H12_per_ton_fao_may22_28May22.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -173,11 +177,11 @@ $title magpie
 * 
 * Regionscode: 1028489d
 * 
-* Regions data revision: 4.76
+* Regions data revision: 4.77
 * 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.76
+* * Revision: 4.77
 * 
 * aggregation settings:
 * * Input resolution: 0.5
@@ -189,7 +193,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Fri Sep  9 18:00:23 2022
+* Last modification (input data): Fri Sep 23 12:55:58 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -263,14 +267,14 @@ $setglobal water_availability  total_water_aug13
 $setglobal biodiversity  bii_target
 $setglobal climate  static
 
-$setglobal nr_soil_budget  exoeff_aug16
-$setglobal nitrogen  ipcc2006_sep16
+$setglobal nr_soil_budget  macceff_aug22
+$setglobal nitrogen  rescaled_jan21
 $setglobal carbon  normal_dec17
-$setglobal methane  ipcc2006_flexreg_apr16
+$setglobal methane  ipcc2006_aug22
 $setglobal phosphorus  off
 $setglobal awms  ipcc2006_aug16
-$setglobal ghg_policy  price_jan20
-$setglobal maccs  on_sep16
+$setglobal ghg_policy  price_aug22
+$setglobal maccs  on_aug22
 $setglobal peatland  on
 $setglobal som  static_jan19
 
