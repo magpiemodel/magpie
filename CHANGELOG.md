@@ -11,24 +11,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### changed
 - **config** added `s62_max_dem_bioplastic` and `s62_midpoint_dem_bioplastic` to define bioplastic scenario
 - **62_material** added biomass demand for bioplastic production
+- **config** updated config to new module setup of MACCs
+- **51_nitrogen** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
+- **58_peatland** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
+- **52_carbon** change of interface from vm_btm_reg to vm_emissions_reg
+- **inputs** update of NPi for China (additional data 4.30)
+- **inputs** updated f56_emis_policy (additional data 4.29)
+- **scripts** FSDP_collect handles the health impacts data provided by Marco Springmann, distributed it into the scenario's various reports. It performs a similar operation for global nutrient surplus (which must be calculated on the grid-level and then aggregated).- **13_tc** relaxed vm_tau upper limit
+- **scripts** updated FSEC start and output scripts
+- **scripts** update of rds_report to allow gridded intermediate outputs
+- **config** non-food system emission MAGICC switch
 - **scripts** output/extra/disaggregation_BII.R adjusted BII output for primary and secondary other land
 - **59_som** Now calculates soil C for fallow
-- **inputs** updated non-food initial prices, MACCs curves, and removed suitability threshold of 0.1 in all_marginal setting  
+- **inputs** updated non-food initial prices, MACCs curves, and removed suitability threshold of 0.1 in all_marginal setting
 - **documentation** added literature
 - **scripts/start** cleanup of old start scripts
+- **scripts** log files are now written in a subfolder "logs"
 
 ### added
+- **50_nr_soil_budget** new module realization for more consistent MACCs implementation. change of interface from vm_btm_reg to vm_emissions_reg
+- **53_methane** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
+- **56_ghg_policy** new module realization for more consistent MACCs implementation
+- **57_maccs** new more consistent maccs implementation. different mapping of emission sources to maccs.
+- **scripts** added output script creating a merged .csv for dietaryIndicators and caloricSupply outputs
+- **scripts** added water output script for FSEC model runs
+- **scripts** added output script, FSDP_process creating a merged .csv and .gdx for dietaryIndicators and caloricSupply outputs
+- **scripts** added output script creating a merged .csv for dietaryIndicators and caloricSupply outputs
+- **scripts** added output script creating a set of outputs for Simon Dietz in the FSEC context
+- **scripts** added output script running MAGICC7 on a MAgPIE scenario
+- **scripts** added output script for gridded crop diversity indices
 - **scripts** added output scripts for FSEC FSDP runs
 - **15_food** added new realization with country level exogenous diets, product-specific intake estimates, new scenarios for exogenous BMI and decomposition switches for EAT Lancet diets. Simplified code and improved iteration procedure.
 - **57_maccs** added new Marginal Abatement Cost Curve (MACCs) data set from PBL (PBL2022)
 
 ### removed
+- **50_nr_soil_budget** old inconsistent module realizations
+- **53_methane** old inconsistent module realizations
+- **56_ghg_policy** old inconsistent module realizations
+- **57_maccs** old inconsistent module realizations
 - **15_food** removed read-in of non-needed input file "f15_calib_factor_FAOfsupply_iso"
 
-
 ### fixed
+- **59_som** corrected the som pool due to the carbon transfer from other and primary forest to secondary forest before optimization (presolve)  
 - **43_water_availability** added missing years after 2100 in "f43_wat_avail" to avoid infeasibilities in coupled runs with less_ts timesteps
-
+- **scripts** fixed some bugs related to background execution of start/output scripts
 
 
 ## [4.5.0] - 2022-07-07

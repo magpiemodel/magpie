@@ -109,6 +109,11 @@ highres <- function(cfg) {
   #max resources for parallel runs
   cfg$qos <- "priority_maxMem"
 
+  # set force download to FALSE
+  # otherwise data is download again when calling start_run(), which overwrites
+  # f21_trade_balance.cs3, f13_tau_scenario.csv, f32_max_aff_area.cs4 etc
+  cfg$force_download <- FALSE
+
   #download input files with high resolution
   download_and_update(cfg)
 

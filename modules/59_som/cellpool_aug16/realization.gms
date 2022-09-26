@@ -16,7 +16,9 @@
 *' management (e.g. irrigation) and input differences on cropland.
 
 *' @limitations It is assumed that pastures and rangelandes as well as managed forests
-*' do not change in soil carbon compared to the natural reference state.
+*' do not change in soil carbon compared to the natural reference state. Moreover only
+*' transitions from other land and primary forest to secondary forest between optimization
+*' steps (due to natural regrowth and disturbance loss) are accounted for.
 
 
 *' @authors Kristine Karstens, Benjamin Leon Bodirsky
