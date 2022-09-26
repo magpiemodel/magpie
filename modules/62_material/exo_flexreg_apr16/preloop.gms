@@ -5,12 +5,13 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
- p62_dem_material_lh(i,kall) =0;
- p62_dem_food_lh(i)=1;
+ p62_dem_material_lastcalibyear(i,kall) =0;
+ p62_dem_food_lastcalibyearh(i)=1;
 
 
 * Bioplastic demand is based on historic values up to 2020, and a logistic function with given
-* midpoint and maximum for future years.
+* midpoint and maximum for future years. Global bioplastic demand is distributed to regions
+* proportional to population due to lack of better data.
 
 p62_dem_bioplastic(t,i) = f62_hist_dem_bioplastic(t) * (im_pop(t,i) / sum(i2, im_pop(t,i2)));
 

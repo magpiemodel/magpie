@@ -18,7 +18,7 @@
 *' In addition, future material demand for bioplastic production can be included
 *' by setting a target bioplastic demand.
 
-*' @authors Benjamin Bodirsky
+*' @authors Benjamin Bodirsky, Debbora Leip
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%material%" == "exo_flexreg_apr16" $include "./modules/62_material/exo_flexreg_apr16/realization.gms"

@@ -19,24 +19,24 @@ else
 );
 
 p62_scaling_factor(i) = 1;
-p62_scaling_factor(i)$(p62_dem_food_lh(i) > 0) = sum(kfo, vm_dem_food.l(i,kfo)) / p62_dem_food_lh(i);
+p62_scaling_factor(i)$(p62_dem_food_lastcalibyearh(i) > 0) = sum(kfo, vm_dem_food.l(i,kfo)) / p62_dem_food_lastcalibyearh(i);
 
 *' @stop
 
-* In t_past, biomass demand for bioplastic is already included in the general material demand, which is 
-* scaled for future years. Therefore we set bioplastic demand for t_past to zero, and subtract scaled 
-* bioplastic demand from the last year of t_past from all future bioplastic demand
-if (sum(sameas(t_past,t),1) = 1,
-  p62_dem_bioplastic_lh(i) = p62_dem_bioplastic(t,i);
-  p62_dem_bioplastic(t,i) = 0;
-else
-  p62_dem_bioplastic(t,i) = p62_dem_bioplastic(t,i) - p62_dem_bioplastic_lh(i) * p62_scaling_factor(i);
-);
-
-* if max. bioplastic demand is set to zero, overwrite calculations with zero
+* if max. bioplastic demand is set to zero, overwrite bioplastic demand with zero
 if (s62_max_dem_bioplastic = 0,
  p62_dem_bioplastic(t,i) = 0
 );
 
 * translate bioplastic demand to biomass demand using conversion factors between bioplastic and the different biomass sources
-p62_biomass4bioplastic(t,i,kall) = p62_dem_bioplastic(t,i) * f62_bioplastic2biomass(kall);
+p62_bioplastic_substrate(t,i,kall) = p62_dem_bioplastic(t,i) * f62_biomass2bioplastic_conversion_ratio(kall);
+
+* In t_past, biomass demand for bioplastic is already included in the general material demand, which is 
+* scaled for future years. Therefore we calculate the amount of biomass that is counted twice, and subtract
+* it in the final biomass demand equation. 
+if (sum(sameas(t_past,t),1) = 1,
+  p62_bioplastic_substrate_double_counted(t,i,kall) = p62_bioplastic_substrate(t,i,kall);
+  p62_bioplastic_substrate_lastcalibyear(i,kall) = p62_bioplastic_substrate(t,i,kall);
+else
+  p62_bioplastic_substrate_double_counted(t,i,kall) = p62_bioplastic_substrate_lastcalibyear(i,kall) * p62_scaling_factor(i);
+);

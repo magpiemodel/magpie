@@ -23,8 +23,9 @@
                       =e=
                       sum(ct,f62_dem_material(ct,i2,kall))*s62_historical
                       +
-                      (p62_dem_material_lh(i2,kall) * p62_scaling_factor(i2))
-                      *(1-s62_historical) + sum(ct, p62_biomass4bioplastic(ct, i2, kall))
+                      (p62_dem_material_lastcalibyear(i2,kall) * p62_scaling_factor(i2))
+                      *(1-s62_historical) + sum(ct, p62_bioplastic_substrate(ct, i2, kall)) -
+                      sum(ct, p62_bioplastic_substrate_double_counted(ct,i2,kall))
                       ;
 
 *' Results are stored in the interface `vm_dem_material` and this interface
