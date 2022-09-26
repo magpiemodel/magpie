@@ -146,21 +146,25 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.75ir2rfRatio_h12_magpie.tgz
-* md5sum: db5b194497c0fbc74679dfd5e367d2fc
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: rev4.77_h12_magpie.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.75ir2rfRatio_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: 239685a170412254c07f01502a8e70cc
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: rev4.77_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.75ir2rfRatio_h12_validation.tgz
-* md5sum: 8949e11cef14da28b40cc62e6510feab
-* Repository: /p/projects/rd3mod/inputdata/output
+* Used data set: rev4.77_h12_validation.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
 * 
-* Used data set: additional_data_rev4.26.tgz
-* md5sum: f3c348b7428faae898b7e10ec9a89e41
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: additional_data_rev4.30.tgz
+* md5sum: NA
+* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* 
+* Used data set: calibration_H12_per_ton_fao_may22_28May22.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -173,32 +177,23 @@ $title magpie
 * 
 * Regionscode: 62eff8f7
 * 
-* Regions data revision: 4.75
+* Regions data revision: 4.77
 * 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.75
+* * Revision: 4.77
 * 
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
 * * Regionscode: 62eff8f7
-* * Cluster distribution: CAZ (6)
-* * Cluster distribution: CHA (23)
-* * Cluster distribution: EUR (7)
-* * Cluster distribution: IND (6)
-* * Cluster distribution: JPN (1)
-* * Cluster distribution: LAM (43)
-* * Cluster distribution: MEA (27)
-* * Cluster distribution: NEU (7)
-* * Cluster distribution: OAS (11)
-* * Cluster distribution: REF (12)
-* * Cluster distribution: SSA (37)
-* * Cluster distribution: USA (20)
+* * Number of clusters per region:
+*   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
+*     6   23    7    6    1   43   27    7   11   12   37   20
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Wed Aug 31 21:59:36 2022
+* Last modification (input data): Fri Sep 23 12:55:58 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -224,7 +219,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  default+NOir2rfCalib
+$setglobal c_title  default
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
@@ -272,14 +267,14 @@ $setglobal water_availability  total_water_aug13
 $setglobal biodiversity  bii_target
 $setglobal climate  static
 
-$setglobal nr_soil_budget  exoeff_aug16
-$setglobal nitrogen  ipcc2006_sep16
+$setglobal nr_soil_budget  macceff_aug22
+$setglobal nitrogen  rescaled_jan21
 $setglobal carbon  normal_dec17
-$setglobal methane  ipcc2006_flexreg_apr16
+$setglobal methane  ipcc2006_aug22
 $setglobal phosphorus  off
 $setglobal awms  ipcc2006_aug16
-$setglobal ghg_policy  price_jan20
-$setglobal maccs  on_sep16
+$setglobal ghg_policy  price_aug22
+$setglobal maccs  on_aug22
 $setglobal peatland  on
 $setglobal som  static_jan19
 
