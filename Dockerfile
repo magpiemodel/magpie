@@ -1,9 +1,10 @@
-FROM rocker/r-ver:3.6.2
+FROM rocker/r-ver:4.2.1
 
 RUN mkdir /home/magpie
 COPY . /home/magpie/
 
 RUN apt-get update \
+ && apt-get upgrade -y \
  && apt-get install -y libpng-dev \
  && apt-get install -y libjpeg-dev \
  && apt-get install -y zlib1g-dev \
@@ -16,17 +17,30 @@ RUN apt-get update \
  && apt-get install -y fonts-inconsolata \
  && apt-get install -y pandoc \
  && apt-get install -y pandoc-citeproc \
+ && apt-get install -y libfontconfig1-dev \
+ && apt-get install -y libharfbuzz-dev \
+ && apt-get install -y libfribidi-dev \
+ && apt-get install -y libfreetype6-dev \
+ && apt-get install -y libtiff5-dev \
+ && apt-get install -y r-cran-ncdf4 \
+ && apt-get install -y netcdf-bin \
+ && apt-get install -y libnetcdf-dev \
+ && apt-get install -y proj-bin \
+ && apt-get install -y libproj-dev \
+ && apt-get install -y gdal-bin \
+ && apt-get install -y libgdal-dev \
+ && apt-get install -y texlive-latex-extra \
+ && apt-get install -y git \
  && fc-cache -fv
-
-
-
 
 RUN R -e "options(repos = \
   list(CRAN = 'https://cran.rstudio.com/',pik='https://rse.pik-potsdam.de/r/packages')); \
   install.packages(c('gdxrrw', \
            'ggplot2', \
+           'citation', \
            'curl', \
            'gdx', \
+           'gms', \
            'magclass', \
            'madrat', \
            'mip', \
@@ -36,10 +50,15 @@ RUN R -e "options(repos = \
            'lusweave', \
            'luscale', \
            'goxygen', \
-           'luplot'))"
+           'luplot', \
+           'yaml'))"
+
+RUN R -e "install.packages(c('ncdf4', \
+                             'raster'))"
 
 # Set GAMS version
-ENV LATEST=30.3.0
+ENV LATEST=40.2.0
+ENV LATEST_SHORT=40.2
 ENV GAMS_VERSION=${LATEST}
 
 # Set GAMS bit architecture, either 'x64_64' or 'x86_32'
@@ -56,14 +75,15 @@ RUN cd /opt/gams &&\
     ./gams.exe &&\
     rm -rf gams.exe
 
-COPY gamslice.txt /opt/gams/gams30.3_linux_x64_64_sfx/gamslice.txt
+COPY gamslice.txt /opt/gams/gams${LATEST_SHORT}_linux_${GAMS_BIT_ARC}_sfx/gamslice.txt
 # Add GAMS path to user env path
 RUN GAMS_PATH=$(dirname $(find / -name gams -type f -executable -print)) &&\
     ln -s $GAMS_PATH /usr/local/bin &&\
     echo "export PATH=\$PATH:$GAMS_PATH" >> ~/.bashrc &&\
+    echo "export GAMS_PATH=$GAMS_PATH" >> ~/.bashrc &&\
     cd $GAMS_PATH &&\
     ./gamsinst -a
 
-COPY gamslice.txt /opt/gams/gams30.3_linux_x64_64_sfx/gamslice.txt
+COPY gamslice.txt /opt/gams/gams${LATEST_SHORT}_linux_${GAMS_BIT_ARC}_sfx/gamslice.txt
 
 CMD  cd /home/magpie && Rscript start.R
