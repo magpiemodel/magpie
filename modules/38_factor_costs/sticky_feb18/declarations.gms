@@ -19,7 +19,7 @@ positive variables
 ;
 
 parameters
- p38_variable_costs(t,i,kcr)           Variable input costs per unit of output (USD05MER per ton DM)
+ p38_labor_need(t,i,kcr)               Labor input costs per unit of output (USD05MER per ton DM)
  p38_capital_need(t,i,kcr,mobil38)     Capital requirements per unit of output (USD05MER per ton DM)
  p38_capital_immobile(t,j,kcr)         Preexisting immobile capital stocks before investment (mio USD05MER)
  p38_capital_mobile(t,j)               Preexisting mobile capital stocks before investment (mio USD05MER)

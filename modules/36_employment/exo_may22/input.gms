@@ -7,8 +7,8 @@
 
 scalars
 s36_weeks_in_year number of weeks in a year  / 52.1429 /
-s36_minimum_wage global minimum wage / 3 /
-s36_scale_labor_costs whether total labor costs should be scaled according to wage increase / 0 /
+s36_minimum_wage global minimum wage / 0 /
+s36_scale_labor_costs whether total labor costs should be scaled according to wage increase / 1 /
 ;
 
 table f36_weekly_hours(t_all,i) Historical values of average weekly hours worked per person in agriculture (h per week)

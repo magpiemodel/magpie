@@ -44,8 +44,8 @@ p36_hourly_costs_iso(t,iso)$((m_year(t) gt 2050) and (m_year(t) le 2100)) = max(
 
 * Hourly labor costs are then aggregated to regional level using the total hours worked in the last
 * year of `t_past` as weight.
-p36_hourly_costs_baseline(t,i) = sum(i_to_iso(i,iso), p36_hourly_costs_iso_baseline(t,iso)*p36_total_hours_worked(iso)) * (1/sum(i_to_iso(i,iso),p36_total_hours_worked(iso)));
-p36_hourly_costs(t,i) = sum(i_to_iso(i,iso), p36_hourly_costs_iso(t,iso)*p36_total_hours_worked(iso))*(1/sum(i_to_iso(i,iso),p36_total_hours_worked(iso)));
+pm_hourly_costs_baseline(t,i) = sum(i_to_iso(i,iso), p36_hourly_costs_iso_baseline(t,iso)*p36_total_hours_worked(iso)) * (1/sum(i_to_iso(i,iso),p36_total_hours_worked(iso)));
+pm_hourly_costs(t,i) = sum(i_to_iso(i,iso), p36_hourly_costs_iso(t,iso)*p36_total_hours_worked(iso))*(1/sum(i_to_iso(i,iso),p36_total_hours_worked(iso)));
 
 *' @code
 *' If productivity is assumed to increase proportional to hourly labor costs also with external minimum wage,
@@ -55,7 +55,7 @@ p36_hourly_costs(t,i) = sum(i_to_iso(i,iso), p36_hourly_costs_iso(t,iso)*p36_tot
 if (s36_scale_labor_costs eq 0,
   pm_labor_cost_scaling(t,i) = 1;
 elseif (s36_scale_labor_costs eq 1),
-  pm_labor_cost_scaling(t,i) = p36_hourly_costs(t,i) / p36_hourly_costs_baseline(t,i);
+  pm_labor_cost_scaling(t,i) = pm_hourly_costs(t,i) / pm_hourly_costs_baseline(t,i);
 );
 *' @stop
 

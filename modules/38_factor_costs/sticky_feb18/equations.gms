@@ -12,7 +12,7 @@
 *' the total labor costs are scaled by the corresponding factor from [36_employment].
 
 q38_cost_prod_labor(i2).. vm_cost_prod_crop(i2,"labor")
-                              =e= sum(kcr,vm_prod_reg(i2,kcr) * sum(ct,p38_variable_costs(ct,i2,kcr) * pm_labor_cost_scaling(ct,i2)))
+                              =e= sum(kcr,vm_prod_reg(i2,kcr) * sum(ct,p38_labor_need(ct,i2,kcr) * pm_labor_cost_scaling(ct,i2)))
                                 ;
 
 *' Investment costs: Investment are the summation of investment in mobile and immobile capital. The costs are annuitized,

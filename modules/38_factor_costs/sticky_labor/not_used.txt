@@ -6,3 +6,4 @@
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
 vm_prod_reg,input,not used
+pm_labor_cost_scaling,parameter,questionnaire

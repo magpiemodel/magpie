@@ -9,7 +9,7 @@
 *' @equations
 
 *' Constant elasticity of substitution (CES) production function for one unit of output.
-*' The CES function accounts for capital `v38_capital_need` and labor `v38_labor_need` requirements.
+*' The CES function accounts for capital `v38_capital_need` and labor `v38_laborhours_need` requirements.
 *' The efficiency of labor is affected by the labor productivity factor `vm_labor_prod`, which is
 *' provided by the labor productivity module [37_labor_prod].
 *' The calculation of total capital and labor costs is covered by the equations `q38_cost_prod_crop` and `q38_cost_prod_inv`.
@@ -18,7 +18,7 @@
  q38_ces_prodfun(j2,kcr) ..
   i38_ces_scale(j2,kcr) *
   (i38_ces_shr(j2,kcr)*sum(mobil38, v38_capital_need(j2,kcr,mobil38))**(-s38_ces_elast_par) +
-  (1 - i38_ces_shr(j2,kcr))*(sum(ct, pm_labor_prod(ct,j2)) * v38_labor_need(j2,kcr))**(-s38_ces_elast_par))**(-1/s38_ces_elast_par)
+  (1 - i38_ces_shr(j2,kcr))*(sum(ct, pm_labor_prod(ct,j2)) * v38_laborhours_need(j2,kcr))**(-s38_ces_elast_par))**(-1/s38_ces_elast_par)
   =e= 1 ;
 
 *' Labor costs: The labor costs are calculated by multiplying regional aggregated production with labor requirments per output.
@@ -26,7 +26,7 @@
 *' the total labor costs are scaled by the corresponding factor from [36_employment].
 
 q38_cost_prod_labor(i2).. vm_cost_prod_crop(i2,"labor")
-                              =e= sum(kcr,sum(cell(i2,j2), vm_prod(j2,kcr) * v38_labor_need(j2,kcr) * s38_wage * sum(ct, pm_labor_cost_scaling(ct,i2))))
+                              =e= sum(kcr,sum(cell(i2,j2), vm_prod(j2,kcr) * v38_laborhours_need(j2,kcr) * sum(ct, pm_hourly_costs(ct,i2))))
                                 ;
 
 *' Investment costs: Investment are the summation of investment in mobile and immobile capital. The costs are annuitized,
