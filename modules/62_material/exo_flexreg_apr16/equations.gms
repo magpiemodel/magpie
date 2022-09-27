@@ -14,9 +14,10 @@
 *' as the scaled version of material demand in last historical timestep
 *' depending on a scaling factor. This scaling factor is calculated as the
 *' ratio beween the food demand from last timestep and the food demand from
-*' the last historical time step. For future years, additional biomass demand for 
-*' the production of bioplastics is included (for historic years it is assumed 
-*' that this demand is already part of the general material demand).
+*' the last historical time step. If an exogenous target for bioplastic production
+*' is set, material demand (substrate) for bioplastic production is included. 
+*' For historic years it is assumed that this demand is already part of the
+*' general material demand, therefore the double-counted demand is subtracted.
 
  q62_dem_material(i2,kall) ..
                       vm_dem_material(i2,kall)
