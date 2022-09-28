@@ -18,7 +18,7 @@
  q38_ces_prodfun(j2,kcr) ..
   i38_ces_scale(j2,kcr) *
   (i38_ces_shr(j2,kcr)*sum(mobil38, v38_capital_need(j2,kcr,mobil38))**(-s38_ces_elast_par) +
-  (1 - i38_ces_shr(j2,kcr))*(sum(ct, pm_labor_prod(ct,j2)) * v38_laborhours_need(j2,kcr))**(-s38_ces_elast_par))**(-1/s38_ces_elast_par)
+  (1 - i38_ces_shr(j2,kcr))*(sum(ct, pm_labor_prod(ct,j2) * sum(cell(i2,j2), p38_labor_prod_wage(ct,i2))) * v38_laborhours_need(j2,kcr))**(-s38_ces_elast_par))**(-1/s38_ces_elast_par)
   =e= 1 ;
 
 *' Labor costs: The labor costs are calculated by multiplying regional aggregated production with labor requirements 

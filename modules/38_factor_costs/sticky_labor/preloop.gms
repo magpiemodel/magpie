@@ -9,3 +9,8 @@
 s38_ces_elast_par = (1/s38_ces_elast_subst) - 1 ;
 
 p38_intr_depr(t,i) = (1-s38_depreciation_rate) * pm_interest(t,i)/(1+pm_interest(t,i)) + s38_depreciation_rate;
+
+
+* labor productivity change due to higher wages (if higher wages don't lead to higher total labor costs)
+p38_labor_prod_wage(t,i)$(pm_labor_cost_scaling(t,i) = 1) = pm_hourly_costs(t,i) / pm_hourly_costs_baseline(t,i);
+p38_labor_prod_wage(t,i)$(pm_labor_cost_scaling(t,i) <> 1) = 1;
