@@ -21,9 +21,8 @@
   (1 - i38_ces_shr(j2,kcr))*(sum(ct, pm_labor_prod(ct,j2)) * v38_laborhours_need(j2,kcr))**(-s38_ces_elast_par))**(-1/s38_ces_elast_par)
   =e= 1 ;
 
-*' Labor costs: The labor costs are calculated by multiplying regional aggregated production with labor requirments per output.
-*' To account for increased hourly labor costs in case of an external minimum wage, 
-*' the total labor costs are scaled by the corresponding factor from [36_employment].
+*' Labor costs: The labor costs are calculated by multiplying regional aggregated production with labor requirements 
+*' (in hours) per output unit and wages from [36_employment].
 
 q38_cost_prod_labor(i2).. vm_cost_prod_crop(i2,"labor")
                               =e= sum(kcr,sum(cell(i2,j2), vm_prod(j2,kcr) * v38_laborhours_need(j2,kcr) * sum(ct, pm_hourly_costs(ct,i2))))
