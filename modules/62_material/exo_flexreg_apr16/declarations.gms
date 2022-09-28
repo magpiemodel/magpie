@@ -15,7 +15,7 @@ parameters
   p62_dem_material_lastcalibyear(i,kall)            Material demand in last historical timestep (mio. tDM per yr)
   p62_dem_food_lastcalibyearh(i)                    Food demand in last historical timestep (mio. tDM per yr)
   p62_scaling_factor(i)                             Scaling factor for material demand (1)
-  p62_dem_bioplastic(t,i)                           Demand for bioplastic (mio. tDM per yr)
+  p62_dem_bioplastic(t,i)                           Demand for bioplastic (mio. t per yr)
   p62_bioplastic_substrate(t,i,kall)                Regional biomass needed as substrate for bioplastic production (mio. tDM per yr)
   p62_bioplastic_substrate_lastcalibyear(i,kall)    Bioplastic substrate in last historical timestep (mio. tDM per yr) 
   p62_bioplastic_substrate_double_counted(t,i,kall) Bioplastic substrate counted both in general material demand and demand for bioplastic (mio. tDM per yr)
