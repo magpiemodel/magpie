@@ -19,5 +19,7 @@
 $Ifi "%phase%" == "sets" $include "./modules/52_carbon/normal_dec17/sets.gms"
 $Ifi "%phase%" == "declarations" $include "./modules/52_carbon/normal_dec17/declarations.gms"
 $Ifi "%phase%" == "input" $include "./modules/52_carbon/normal_dec17/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/52_carbon/normal_dec17/equations.gms"
 $Ifi "%phase%" == "start" $include "./modules/52_carbon/normal_dec17/start.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/52_carbon/normal_dec17/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
