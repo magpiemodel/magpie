@@ -48,13 +48,13 @@ pm_hourly_costs_baseline(t,i) = sum(i_to_iso(i,iso), p36_hourly_costs_iso_baseli
 pm_hourly_costs(t,i) = sum(i_to_iso(i,iso), p36_hourly_costs_iso(t,iso)*p36_total_hours_worked(iso))*(1/sum(i_to_iso(i,iso),p36_total_hours_worked(iso)));
 
 *' @code
-*' If productivity is assumed to increase proportional to hourly labor costs also with external minimum wage,
+*' If productivity is assumed to increase proportional to hourly labor costs also with external wage scenario,
 *' total labor costs should not be scaled. Otherwise, the scaling factor between baseline and increased hourly labor costs will
 *' be applied to labor costs for crop production ([38_factor_costs]), livestock production ([70_livestock]), and the
 *' non-MAgPIE labor costs.
-if (s36_scale_labor_costs eq 0,
+if (s36_scale_productivity_with_wage eq 1,
   pm_labor_cost_scaling(t,i) = 1;
-elseif (s36_scale_labor_costs eq 1),
+elseif (s36_scale_productivity_with_wage eq 0),
   pm_labor_cost_scaling(t,i) = pm_hourly_costs(t,i) / pm_hourly_costs_baseline(t,i);
 );
 *' @stop
