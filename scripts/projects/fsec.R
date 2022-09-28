@@ -91,8 +91,10 @@ fsecScenario <- function(scenario) {
                                         fsec = c("FSEC", "awms")),
             a_LivestockMngmt     = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                         fsec = c("FSEC", "livestock")),
-            a_NitrogenUptakeEff  = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
-                                        fsec = c("FSEC", "cropefficiency")),
+            a_CropeffTax  = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                           fsec = c("FSEC", "cropefficiency")), ### rename cropefficienyTax
+            a_Cropeff     = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                           fsec = c("FSEC", "nue")), ### rename cropefficiency
             a_LandUseDiversity   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                         fsec = c("FSEC", "biodiversity")),
             a_FairTrade          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),

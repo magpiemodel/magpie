@@ -42,7 +42,7 @@ gms$s44_target_year;;;;;;;;;;;;;;;;;2050;;;;;;;;;;;;;;;;;;;
 gms$nitrogen;rescaled_jan21;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c50_scen_neff;;;;;;;;;;;;;;;;neff75_80_starty2010;;;;;;;;;;;;;;;;;;;;
 gms$c55_scen_conf;;;;;;;;;;;;;;GoodPractice;;;;;;;;;;;;;;;;;;;;;;
-gms$c56_emis_policy;none;;;;;;;;;;;;;;sdp_livestock;sdp_cropeff;;;;sdp_redd;sdp_redd;;;;sdp_peatland;;sdp_soil;;;sdp_redd_soil_peat;sdp_all;;;;;
+gms$c56_emis_policy;none;;;;;;;;;;;;;;;sdp_cropeff;;;;sdp_redd;sdp_redd;;;;sdp_peatland;;sdp_soil;;;sdp_redd_soil_peat;sdp_all;;;;;
 gms$c56_pollutant_prices;SSPDB-SSP2-45-REMIND-MAGPIE;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s56_c_price_induced_aff;0;;;;;;;;;;;;;;;;;;;1;;;;;;;;;;;;;;;;
 gms$s58_rewetting_switch;;;;;;;;;;;;;;;;;;;;;;;;;Inf;;;;;;;;;;;
