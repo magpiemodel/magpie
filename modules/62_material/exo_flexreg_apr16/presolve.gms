@@ -19,17 +19,9 @@ else
 );
 
 p62_scaling_factor(i) = 1;
-p62_scaling_factor(i)$(p62_dem_food_lastcalibyearh(i) > 0) = sum(kfo, vm_dem_food.l(i,kfo)) / p62_dem_food_lastcalibyearh(i);
+p62_scaling_factor(i)$(p62_dem_food_lastcalibyear(i) > 0) = sum(kfo, vm_dem_food.l(i,kfo)) / p62_dem_food_lastcalibyear(i);
 
 *' @stop
-
-* if max. bioplastic demand is set to zero, overwrite bioplastic demand with zero
-if (s62_max_dem_bioplastic = 0,
- p62_dem_bioplastic(t,i) = 0
-);
-
-* translate bioplastic demand to biomass demand using conversion factors between bioplastic and the different biomass sources
-p62_bioplastic_substrate(t,i,kall) = p62_dem_bioplastic(t,i) * f62_biomass2bioplastic_conversion_ratio(kall);
 
 * In t_past, biomass demand for bioplastic is already included in the general material demand, which is 
 * scaled for future years. Therefore we calculate the amount of biomass that is counted twice, and subtract

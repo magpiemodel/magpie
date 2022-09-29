@@ -29,7 +29,4 @@
                       sum(ct, p62_bioplastic_substrate_double_counted(ct,i2,kall))
                       ;
 
-*' Results are stored in the interface `vm_dem_material` and this interface
-*' is then used in demand ([16_demand]) module as a part of global supply-demand
-*' balance for crop, livestock, secondary products and residues.
 
