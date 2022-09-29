@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **config** new switches `s36_minimum_wage`, `s36_scale_labor_costs`, and `s38_fix_capital_need`
 - **38_factor_costs** and **70_livestock** included labor cost scaling in case of minimum wage scenario
 - **36_employment** included calculations for of minimum wage scenario
+- **config** added `s62_max_dem_bioplastic` and `s62_midpoint_dem_bioplastic` to define bioplastic scenario
+- **62_material** added biomass demand for bioplastic production
 - **config** updated config to new module setup of MACCs
 - **51_nitrogen** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
 - **58_peatland** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
