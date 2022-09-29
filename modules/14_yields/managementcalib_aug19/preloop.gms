@@ -107,6 +107,31 @@ i14_managementcalib(t,j,knbe14,w) =
 i14_yields_calib(t,j,knbe14,w)    = i14_managementcalib(t,j,knbe14,w) * f14_yields(t,j,knbe14,w);
 pm_yields_semi_calib(j,knbe14,w)  = i14_yields_calib("y1995",j,knbe14,w);
 
+
+if (( s14_calib_ir2rf = 1),
+               
+  i14_calib_yields_hist(i,w)
+     = sum((cell(i,j), knbe14), fm_croparea("y1995",j,"irrigated",knbe14) * i14_yields_calib("y1995",j,knbe14,w)) /
+       sum((cell(i,j), knbe14), fm_croparea("y1995",j,"irrigated",knbe14));
+  
+  p14_calib_yields_ratio(i) = i14_calib_yields_hist(i,"irrigated") / i14_calib_yields_hist(i,"rainfed");
+  p14_target_ratio(i) = max(p14_calib_yields_ratio(i), f14_ir2rf_ratio(i));
+  i14_yields_calib(t,j,knbe14,"irrigated") = sum((cell(i,j)), p14_target_ratio(i) / p14_calib_yields_ratio(i)) * 
+                                               i14_yields_calib(t,j,knbe14,"irrigated"); 
+
+  i14_modeled_yields_hist2(i,knbe14)
+   = (sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14) * i14_yields_calib("y1995",j,knbe14,w)) /
+      sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14))>0)
+   + (sum((cell(i,j),w), i14_croparea_total("y1995",w,j) * f14_yields("y1995",j,knbe14,w)) /
+      sum((cell(i,j),w), i14_croparea_total("y1995",w,j)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14))=0);
+
+  i14_yields_calib(t,j,knbe14,w) = sum((cell(i,j)), i14_fao_yields_hist("y1995",i,knbe14) / 
+                                                      i14_modeled_yields_hist2(i,knbe14)) *
+                                   i14_yields_calib(t,j,knbe14,w);
+                                 
+  pm_yields_semi_calib(j,knbe14,w)  = i14_yields_calib("y1995",j,knbe14,w); 
+);
+
 *' Note that the calculation is split into two parts for better readability.
 *' @stop
 
