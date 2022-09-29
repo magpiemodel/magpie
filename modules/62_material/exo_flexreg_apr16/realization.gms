@@ -12,6 +12,9 @@
 *' material module based on historical data. The assumption that material demand
 *' grows proportional to food demand is a simplification that can be justified
 *' by the minor importance of non-bioenergy material usage of agricultural products.
+*' In addition, biomass demand for bioplastic production can be included, with 
+*' future bioplastic production following a logistic curve with exogenously defined 
+*' target production.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/62_material/exo_flexreg_apr16/sets.gms"
