@@ -8,7 +8,7 @@
 
 *' @equations
 
-*' Employment is calculated as total labor costs devided by hourly labor costs and 
+*' Employment is calculated as total labor costs divided by hourly labor costs and 
 *' average hours worked per employed person per year. Total labor costs include
 *' labor costs from crop production (see [38_factor_costs]) and livestock production 
 *' (see [70_livestock]), and some labor costs for crop and livestock production 

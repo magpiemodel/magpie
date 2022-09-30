@@ -25,7 +25,7 @@ parameters
  p36_calibration_hourly_costs(iso)      Additive calibration term for hourly labor costs (USDMER05 per hour)
  p36_cost_share(t,i)                    Capital share of factor costs (1)
  p36_share_calibration(i)               Additive calibration term for capital shares (1)
- p36_nonmagpie_labor_costs(t,i)         Labor costs from subsidies and VoP not covered by MAgPIE (mio. USDMER05)
+ p36_nonmagpie_labor_costs(t,i)         Labor costs from subsidies and Value of Production not covered by MAgPIE (mio. USDMER05)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
