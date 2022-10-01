@@ -15,12 +15,10 @@ positive variables
 ;
 
 parameters
- p36_hourly_costs_iso_baseline(t,iso)   Hourly labor costs in agriculture on iso level (USDMER05 per hour)
+ p36_hourly_costs_iso(t,iso, wage_scen) Hourly labor costs in agriculture on iso level before and after including wage scenario (USDMER05 per hour)
  p36_hourly_costs_increase(iso)         Difference between minimum hourly labor costs and actual hourly labor costs in 2050 (USDMER05 per hour)
- p36_hourly_costs_iso(t,iso)            Hourly labor costs in agriculture on iso level after including minimum wage (USDMER05 per hour)
- pm_hourly_costs_baseline(t,i)          Hourly labor costs in agriculture on regional level (USDMER05 per hour)
- pm_hourly_costs(t,i)                   Hourly labor costs in agriculture on regional level after including minimum wage (USDMER05 per hour)
- pm_labor_cost_scaling(t,i)             Multiplicative factor describing increase in hourly labor costs to match minimum wage (1)
+ pm_hourly_costs(t,i, wage_scen)        Hourly labor costs in agriculture on regional level before and after including wage scenario (USDMER05 per hour)
+ pm_productivity_gain_from_wages(t,i)   Multiplicative factor describing productivity gain related to higher wages (1)
  p36_total_hours_worked(iso)            Total hours worked by all employed people (mio. hours per year)
  p36_calibration_hourly_costs(iso)      Additive calibration term for hourly labor costs (USDMER05 per hour)
  p36_cost_share(t,i)                    Capital share of factor costs (1)

@@ -36,7 +36,6 @@ parameters
  i38_ces_scale(j,kcr)                   Scaling factor for total factor productivity (1)
  
  p38_intr_depr(t,i)                     Factor from interest and depreciation rate (1)
- p38_labor_prod_wage(t,i)               Change in labor productivity due to higher wages (1)
 
  i38_fac_req(t_all,i,kcr)               Factor requirements (USD05MER per tDM)
 ;

@@ -9,5 +9,3 @@ name,type,reason
 pm_interest,input,questionnaire
 vm_prod,input,questionnaire
 pm_prod_init,par,questionnaire
-pm_hourly_costs_baseline,par,questionnaire
-pm_hourly_costs,par,questionnaire

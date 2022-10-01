@@ -16,17 +16,17 @@ p36_total_hours_worked(iso) = sum(t_past$(ord(t_past) eq card(t_past)), f36_hist
 *' GDPpcMER, which is calibrated such that historic values of agricultural employment 
 *' are met. A threshold is used in the regression to avoid too low or negative hourly
 *' labor costs.
-p36_hourly_costs_iso_baseline(t,iso) = max((im_gdp_pc_mer_iso(t,iso)*f36_regr_hourly_costs("slope") + f36_regr_hourly_costs("intercept") + p36_calibration_hourly_costs(iso)), f36_regr_hourly_costs("threshold"));
+p36_hourly_costs_iso(t,iso,"baseline") = max((im_gdp_pc_mer_iso(t,iso)*f36_regr_hourly_costs("slope") + f36_regr_hourly_costs("intercept") + p36_calibration_hourly_costs(iso)), f36_regr_hourly_costs("threshold"));
 
 *' @stop
 
-p36_hourly_costs_iso_baseline(t,iso)$(sum(sameas(t_past,t),1) = 1) = f36_hist_hourly_costs(t,iso);
+p36_hourly_costs_iso(t,iso,"baseline")$(sum(sameas(t_past,t),1) = 1) = f36_hist_hourly_costs(t,iso);
 
 
 * necessary increase in hourly labor costs in target year (2050) to match minimum wage
-p36_hourly_costs_increase(iso) = s36_minimum_wage-p36_hourly_costs_iso_baseline("y2050",iso);
+p36_hourly_costs_increase(iso) = s36_minimum_wage-p36_hourly_costs_iso("y2050",iso,"baseline");
 
-p36_hourly_costs_iso(t,iso) = p36_hourly_costs_iso_baseline(t,iso); 
+p36_hourly_costs_iso(t,iso,"scenario") = p36_hourly_costs_iso(t,iso,"baseline"); 
 
 *' @code
 *' In case of a scenario with an external global minimum wage we add a linear term to the baseline 
@@ -38,24 +38,28 @@ p36_hourly_costs_iso(t,iso) = p36_hourly_costs_iso_baseline(t,iso);
 *' If baseline hourly labor costs are already high enough to meet the minimum wage in 2050, they are not changed.
 *' @stop
 
-p36_hourly_costs_iso(t,iso)$((m_year(t) gt 2020) and (m_year(t) le 2050)) = p36_hourly_costs_iso_baseline(t,iso) + max(0, ((m_year(t)-2020)/(2050-2020))*p36_hourly_costs_increase(iso));
+p36_hourly_costs_iso(t,iso,"scenario")$((m_year(t) gt 2020) and (m_year(t) le 2050)) = p36_hourly_costs_iso(t,iso,"baseline") + max(0, ((m_year(t)-2020)/(2050-2020))*p36_hourly_costs_increase(iso));
 
-p36_hourly_costs_iso(t,iso)$((m_year(t) gt 2050) and (m_year(t) le 2100)) = max(s36_minimum_wage, p36_hourly_costs_iso_baseline(t,iso) + max(0, p36_hourly_costs_increase(iso)-((m_year(t)-2050)/(2100-2050))*p36_hourly_costs_increase(iso)));
+p36_hourly_costs_iso(t,iso,"scenario")$((m_year(t) gt 2050) and (m_year(t) le 2100)) = max(s36_minimum_wage, p36_hourly_costs_iso(t,iso,"baseline") + max(0, p36_hourly_costs_increase(iso)-((m_year(t)-2050)/(2100-2050))*p36_hourly_costs_increase(iso)));
 
 * Hourly labor costs are then aggregated to regional level using the total hours worked in the last
 * year of `t_past` as weight.
-pm_hourly_costs_baseline(t,i) = sum(i_to_iso(i,iso), p36_hourly_costs_iso_baseline(t,iso)*p36_total_hours_worked(iso)) * (1/sum(i_to_iso(i,iso),p36_total_hours_worked(iso)));
-pm_hourly_costs(t,i) = sum(i_to_iso(i,iso), p36_hourly_costs_iso(t,iso)*p36_total_hours_worked(iso))*(1/sum(i_to_iso(i,iso),p36_total_hours_worked(iso)));
+pm_hourly_costs(t,i,"baseline") = sum(i_to_iso(i,iso), p36_hourly_costs_iso(t,iso,"baseline")*p36_total_hours_worked(iso)) * (1/sum(i_to_iso(i,iso),p36_total_hours_worked(iso)));
+pm_hourly_costs(t,i,"scenario") = sum(i_to_iso(i,iso), p36_hourly_costs_iso(t,iso,"scenario")*p36_total_hours_worked(iso)) * (1/sum(i_to_iso(i,iso),p36_total_hours_worked(iso)));
 
 *' @code
-*' If productivity is assumed to increase proportional to hourly labor costs also with external wage scenario,
-*' total labor costs should not be scaled. Otherwise, the scaling factor between baseline and increased hourly labor costs will
-*' be applied to labor costs for crop production ([38_factor_costs]), livestock production ([70_livestock]), and the
-*' non-MAgPIE labor costs.
-if (s36_scale_productivity_with_wage eq 1,
-  pm_labor_cost_scaling(t,i) = 1;
-elseif (s36_scale_productivity_with_wage eq 0),
-  pm_labor_cost_scaling(t,i) = pm_hourly_costs(t,i) / pm_hourly_costs_baseline(t,i);
-);
+*' A scenario that increases wages can either be fully related to productivity increase (leading to lower employment 
+*' for the same total labor costs), or keep productivity constant (leading to the same employment for higher total labor
+*' costs), or to a mixture between productivity increase an total labor cost increase.
+*' The scalar `s36_scale_productivity_with_wage` describes how high the labor productivity gain should be relative to 
+*' the increase in hourly labor costs and is used to calculate `pm_productivity_gain_from_wages`, which is applied to 
+*' labor costs for crop production ([38_factor_costs]), livestock production ([70_livestock]), and the non-MAgPIE
+*' labor costs. If `s36_scale_productivity_with_wage = 1` the productivity gain and wage increase cancel out,
+*' leading to the same total labor costs as without wage scenario. For `s36_scale_productivity_with_wage = 0` the total 
+*' labor costs scale proportional to the hourly labor costs. For other values, the total labor costs show a non-linear
+*' realtionship with `s36_scale_productivity_with_wage`.
+ 
+pm_productivity_gain_from_wages(t,i) = s36_scale_productivity_with_wage * (pm_hourly_costs(t,i,"scenario") / pm_hourly_costs(t,i,"baseline")) + (1 - s36_scale_productivity_with_wage);
+
 *' @stop
 

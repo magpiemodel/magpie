@@ -9,7 +9,7 @@
 *' on it's relation to total labor costs. It therefore depends 
 *' on the labor costs calculated in the modules [38_factor_costs] and 
 *' [70_livestock]. Resulting total costs and production patterns can be affected
-*' if an external minimum wage is set, which increases labor costs for
+*' if an external wage scenario is used, which increases labor costs for
 *' crop and livestock production in [38_factor_costs] and [70_livestock].
 
 *' @limitations Labor availability is not seen as a limiting factor for

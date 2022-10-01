@@ -8,7 +8,7 @@
 *' @equations
 
  q38_cost_prod_crop_labor(i2) ..
-  vm_cost_prod_crop(i2,"labor") =e= sum(kcr, vm_prod_reg(i2,kcr) * sum(ct,i38_fac_req(ct,i2,kcr))) * sum(ct,p38_cost_share(ct,i2,"labor") * pm_labor_cost_scaling(ct,i2));
+  vm_cost_prod_crop(i2,"labor") =e= sum(kcr, vm_prod_reg(i2,kcr) * sum(ct,i38_fac_req(ct,i2,kcr))) * sum(ct,p38_cost_share(ct,i2,"labor") * (1/pm_productivity_gain_from_wages(ct,i2)) * (pm_hourly_costs(ct,i2,"scenario") / pm_hourly_costs(ct,i2,"baseline")));
 
  q38_cost_prod_crop_capital(i2) ..
   vm_cost_prod_crop(i2,"capital") =e= sum(kcr, vm_prod_reg(i2,kcr) * sum(ct,i38_fac_req(ct,i2,kcr)))* sum(ct,p38_cost_share(ct,i2,"capital"));
@@ -20,8 +20,9 @@
 *' from FAO Value of Production, to which the USDA factor cost share out of total 
 *' costs was applied. Labor and capital costs are split by applying the corresponding
 *' share out of total factor costs.
-*' To account for increased hourly labor costs in case of an external minimum wage, 
-*' the total labor costs are scaled by the corresponding factor from [36_employment].
+*' To account for increased hourly labor costs and producitivity in case of an external 
+*' wage scenario, the total labor costs are scaled by the corresponding increase in hourly
+*' labor costs and the related productivity gain from [36_employment].
 *'
 *' It is worth to mention again that the factor costs in this module
 *' do not include land rents (as MAgPIE calculates land rents endogenously),

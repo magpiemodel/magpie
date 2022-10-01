@@ -6,9 +6,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-s36_weeks_in_year number of weeks in a year  / 52.1429 /
-s36_minimum_wage global minimum wage / 0 /
-s36_scale_productivity_with_wage whether labor productivity should be scaled according to wage increase / 0 /
+s36_weeks_in_year number of weeks in a year (weeks per yr) / 52.1429 /
+s36_minimum_wage global minimum wage (USDMER05 per hour) / 0 /
+s36_scale_productivity_with_wage how strong the wage increase should affect labor productivity (1) / 0 /
 ;
 
 table f36_weekly_hours(t_all,i) Historical values of average weekly hours worked per person in agriculture (h per week)
