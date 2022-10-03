@@ -19,6 +19,16 @@ else
 );
 
 p62_scaling_factor(i) = 1;
-p62_scaling_factor(i)$(p62_dem_food_lh(i) > 0) = sum(kfo, vm_dem_food.l(i,kfo)) / p62_dem_food_lh(i);
+p62_scaling_factor(i)$(p62_dem_food_lastcalibyear(i) > 0) = sum(kfo, vm_dem_food.l(i,kfo)) / p62_dem_food_lastcalibyear(i);
 
 *' @stop
+
+* In t_past, biomass demand for bioplastic is already included in the general material demand, which is 
+* scaled for future years. Therefore we calculate the amount of biomass that is counted twice, and subtract
+* it in the final biomass demand equation. 
+if (sum(sameas(t_past,t),1) = 1,
+  p62_bioplastic_substrate_double_counted(t,i,kall) = p62_bioplastic_substrate(t,i,kall);
+  p62_bioplastic_substrate_lastcalibyear(i,kall) = p62_bioplastic_substrate(t,i,kall);
+else
+  p62_bioplastic_substrate_double_counted(t,i,kall) = p62_bioplastic_substrate_lastcalibyear(i,kall) * p62_scaling_factor(i);
+);
