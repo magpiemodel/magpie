@@ -5,14 +5,14 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 *' @code
-*' The parameters `p62_dem_material_lh` and `p62_dem_food_lh` are overwritten
-*' based on each time step optimization, in order to be used in next step.
+*' The parameters `p62_dem_material_lastcalibyear` and `p62_dem_food_lastcalibyear` 
+*' are overwritten based on each time step optimization, in order to be used in next step.
 *' This is only carried out when the model is still running in the time period
 *' before (and including) y2010 with this model version.
 
 if (sum(sameas(t_past,t),1) = 1,
- p62_dem_material_lh(i,kall) = f62_dem_material(t,i,kall);
- p62_dem_food_lh(i)=  sum(kfo, vm_dem_food.l(i,kfo));
+ p62_dem_material_lastcalibyear(i,kall) = f62_dem_material(t,i,kall);
+ p62_dem_food_lastcalibyear(i) = sum(kfo, vm_dem_food.l(i,kfo));
 );
 
 *' @stop
