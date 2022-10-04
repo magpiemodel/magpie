@@ -11,9 +11,9 @@
 *' @description This module is used to calculate hourly labor costs in agriculutre
 *' and the number of people employed in crop and livestock production. 
 *' Hourly labor costs are calculated based on a regression with GDP pc from [09_drivers].
-*' They can be increased by an externally set global minimum wage, and the module
-*' provides a scaling factor for labor costs to [38_factor_costs] and [70_livestock], 
-*' to increase total labor costs according to the increase in hourly labor costs.
+*' They can be increased by an externally set global minimum wage. Wages as well as 
+*' productivity gain from higher wages are provided to [38_factor_costs] and [70_livestock], 
+*' to scale total labor costs accordingly.
 *' The calculation of employment then uses labor costs for crop and livestock production
 *' coming from [38_factor_costs] and [70_livestock].
 

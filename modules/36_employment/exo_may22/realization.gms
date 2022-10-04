@@ -17,8 +17,11 @@
 *' to labor costs which scale with the amount of production. Furthermore, 
 *' hourly labor costs are projected into the future based on a regression with 
 *' GDP pc, while factor requirements for crops (i.e. labor + capital costs per 
-*' production unit) are kept constant. This means, that any increase in wages 
-*' is assumed to be matched by a corresponding increase in labor productivity. 
+*' production unit) are kept constant. This means, that the increase in the 
+*' baseline wages over time is assumed to be matched by a corresponding increase
+*' in labor productivity. For external wage scenarios that lead to higher wages
+*' the additional wage increase can be either related to productivity increase
+*' or higher total labor costs.
 
 
 *####################### R SECTION START (PHASES) ##############################

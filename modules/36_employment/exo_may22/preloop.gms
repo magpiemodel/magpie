@@ -50,7 +50,7 @@ pm_hourly_costs(t,i,"scenario") = sum(i_to_iso(i,iso), p36_hourly_costs_iso(t,is
 *' @code
 *' A scenario that increases wages can either be fully related to productivity increase (leading to lower employment 
 *' for the same total labor costs), or keep productivity constant (leading to the same employment for higher total labor
-*' costs), or to a mixture between productivity increase an total labor cost increase.
+*' costs), or show a mixture between productivity increase and total labor cost increase.
 *' The scalar `s36_scale_productivity_with_wage` describes how high the labor productivity gain should be relative to 
 *' the increase in hourly labor costs and is used to calculate `pm_productivity_gain_from_wages`, which is applied to 
 *' labor costs for crop production ([38_factor_costs]), livestock production ([70_livestock]), and the non-MAgPIE
