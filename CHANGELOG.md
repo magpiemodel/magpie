@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **config** new switches `s36_minimum_wage`, `s36_scale_productivity_with_wage`, and `s38_fix_capital_need`
+- **38_factor_costs** included labor cost scaling in case of wage scenario
+- **70_livestock** included labor cost scaling in case of wage scenario
+- **36_employment** included calculations for minimum wage scenario
 - **config** added `s62_max_dem_bioplastic` and `s62_midpoint_dem_bioplastic` to define bioplastic scenario
 - **62_material** added biomass demand for bioplastic production
 - **config** updated config to new module setup of MACCs
@@ -46,6 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **14_yields** added input file containing AQUASTAT yield calibration factors and switch in default.cfg to activate this yield calibration
 
 ### removed
+- **38_factor_costs** removed `mixed_reg_feb17` realization
 - **50_nr_soil_budget** old inconsistent module realizations
 - **53_methane** old inconsistent module realizations
 - **56_ghg_policy** old inconsistent module realizations
@@ -53,6 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **15_food** removed read-in of non-needed input file "f15_calib_factor_FAOfsupply_iso"
 
 ### fixed
+- **38_factor_costs** fixed calibration of share parameter in `sticky_labor` realization
 - **59_som** corrected the som pool due to the carbon transfer from other and primary forest to secondary forest before optimization (presolve)  
 - **43_water_availability** added missing years after 2100 in "f43_wat_avail" to avoid infeasibilities in coupled runs with less_ts timesteps
 - **scripts** fixed some bugs related to background execution of start/output scripts
