@@ -16,7 +16,9 @@ p36_total_hours_worked(iso) = sum(t_past$(ord(t_past) eq card(t_past)), f36_hist
 *' GDPpcMER, which is calibrated such that historic values of agricultural employment 
 *' are met. A threshold is used in the regression to avoid too low or negative hourly
 *' labor costs.
-p36_hourly_costs_iso(t,iso,"baseline") = max((im_gdp_pc_mer_iso(t,iso)*f36_regr_hourly_costs("slope") + f36_regr_hourly_costs("intercept") + p36_calibration_hourly_costs(iso)), f36_regr_hourly_costs("threshold"));
+p36_hourly_costs_iso(t_all,iso,"baseline") = max((im_gdp_pc_mer_iso(t_all,iso) * f36_regr_hourly_costs("slope") + 
+                                                  f36_regr_hourly_costs("intercept") + p36_calibration_hourly_costs(iso)), 
+                                                 f36_regr_hourly_costs("threshold"));
 
 *' @stop
 
