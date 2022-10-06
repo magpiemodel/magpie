@@ -116,9 +116,9 @@ if ((s14_calib_ir2rf = 1),
        sum((cell(i,j), knbe14), fm_croparea("y1995",j,"irrigated",knbe14));
   
 * Use irrigated-rainfed ratio of Aquastat if larger than our calculated ratio
-  p14_calib_yields_ratio(i) = i14_calib_yields_hist(i,"irrigated") / i14_calib_yields_hist(i,"rainfed");
-  p14_target_ratio(i) = max(p14_calib_yields_ratio(i), f14_ir2rf_ratio(i));
-  i14_yields_calib(t,j,knbe14,"irrigated") = sum((cell(i,j)), p14_target_ratio(i) / p14_calib_yields_ratio(i)) * 
+  i14_calib_yields_ratio(i) = i14_calib_yields_hist(i,"irrigated") / i14_calib_yields_hist(i,"rainfed");
+  i14_target_ratio(i) = max(i14_calib_yields_ratio(i), f14_ir2rf_ratio(i));
+  i14_yields_calib(t,j,knbe14,"irrigated") = sum((cell(i,j)), i14_target_ratio(i) / i14_calib_yields_ratio(i)) * 
                                                i14_yields_calib(t,j,knbe14,"irrigated"); 
 
 * Calibrate newly calibrated yields to FAO yields
