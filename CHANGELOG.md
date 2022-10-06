@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
-- **scripts/start_functions** fix for case of ifneeded calibration
+- **scripts** fix in start_functions for the calibration setting `ifneeded`
 - **config** best_calib set to FALSE in default
 - **42_water_demand** account for multiple cropping in water requirements
 - **config** new switches `s36_minimum_wage`, `s36_scale_productivity_with_wage`, and `s38_fix_capital_need`
