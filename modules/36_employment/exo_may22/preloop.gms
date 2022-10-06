@@ -22,13 +22,13 @@ p36_hourly_costs_iso(t_all,iso,"baseline") = max((im_gdp_pc_mer_iso(t_all,iso) *
 
 *' @stop
 
-p36_hourly_costs_iso(t,iso,"baseline")$(sum(sameas(t_past,t),1) = 1) = f36_hist_hourly_costs(t,iso);
+p36_hourly_costs_iso(t_all,iso,"baseline")$(sum(sameas(t_past,t_all),1) = 1) = f36_hist_hourly_costs(t_all,iso);
 
 
 * necessary increase in hourly labor costs in target year (2050) to match minimum wage
-p36_hourly_costs_increase(iso) = s36_minimum_wage-p36_hourly_costs_iso("y2050",iso,"baseline");
+p36_hourly_costs_increase(iso) = s36_minimum_wage - p36_hourly_costs_iso("y2050",iso,"baseline");
 
-p36_hourly_costs_iso(t,iso,"scenario") = p36_hourly_costs_iso(t,iso,"baseline"); 
+p36_hourly_costs_iso(t_all,iso,"scenario") = p36_hourly_costs_iso(t_all,iso,"baseline"); 
 
 *' @code
 *' In case of a scenario with an external global minimum wage we add a linear term to the baseline 
@@ -40,14 +40,15 @@ p36_hourly_costs_iso(t,iso,"scenario") = p36_hourly_costs_iso(t,iso,"baseline");
 *' If baseline hourly labor costs are already high enough to meet the minimum wage in 2050, they are not changed.
 *' @stop
 
-p36_hourly_costs_iso(t,iso,"scenario")$((m_year(t) gt 2020) and (m_year(t) le 2050)) = p36_hourly_costs_iso(t,iso,"baseline") + max(0, ((m_year(t)-2020)/(2050-2020))*p36_hourly_costs_increase(iso));
+p36_hourly_costs_iso(t_all,iso,"scenario")$((m_year(t_all) gt 2020) and (m_year(t_all) le 2050)) = p36_hourly_costs_iso(t_all,iso,"baseline") + max(0, ((m_year(t_all)-2020)/(2050-2020))*p36_hourly_costs_increase(iso));
 
-p36_hourly_costs_iso(t,iso,"scenario")$((m_year(t) gt 2050) and (m_year(t) le 2100)) = max(s36_minimum_wage, p36_hourly_costs_iso(t,iso,"baseline") + max(0, p36_hourly_costs_increase(iso)-((m_year(t)-2050)/(2100-2050))*p36_hourly_costs_increase(iso)));
+p36_hourly_costs_iso(t_all,iso,"scenario")$((m_year(t_all) gt 2050) and (m_year(t_all) le 2100)) = max(s36_minimum_wage, p36_hourly_costs_iso(t_all,iso,"baseline") + max(0, p36_hourly_costs_increase(iso)-((m_year(t_all)-2050)/(2100-2050))*p36_hourly_costs_increase(iso)));
+
+p36_hourly_costs_iso(t_all,iso,"scenario")$(m_year(t_all) gt 2100) = max(s36_minimum_wage, p36_hourly_costs_iso(t_all,iso,"baseline"));
 
 * Hourly labor costs are then aggregated to regional level using the total hours worked in the last
 * year of `t_past` as weight.
-pm_hourly_costs(t,i,"baseline") = sum(i_to_iso(i,iso), p36_hourly_costs_iso(t,iso,"baseline")*p36_total_hours_worked(iso)) * (1/sum(i_to_iso(i,iso),p36_total_hours_worked(iso)));
-pm_hourly_costs(t,i,"scenario") = sum(i_to_iso(i,iso), p36_hourly_costs_iso(t,iso,"scenario")*p36_total_hours_worked(iso)) * (1/sum(i_to_iso(i,iso),p36_total_hours_worked(iso)));
+pm_hourly_costs(t,i,wage_scen) = sum(i_to_iso(i,iso), p36_hourly_costs_iso(t,iso,wage_scen)*p36_total_hours_worked(iso)) * (1/sum(i_to_iso(i,iso),p36_total_hours_worked(iso)));
 
 *' @code
 *' A scenario that increases wages can either be fully related to productivity increase (leading to lower employment 
