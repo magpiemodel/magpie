@@ -14,17 +14,19 @@
 *' as the scaled version of material demand in last historical timestep
 *' depending on a scaling factor. This scaling factor is calculated as the
 *' ratio beween the food demand from last timestep and the food demand from
-*' the last historical time step.
+*' the last historical time step. If an exogenous target for bioplastic production
+*' is set, material demand (substrate) for bioplastic production is included. 
+*' For historic years it is assumed that this demand is already part of the
+*' general material demand, therefore the double-counted demand is subtracted.
 
  q62_dem_material(i2,kall) ..
                       vm_dem_material(i2,kall)
                       =e=
                       sum(ct,f62_dem_material(ct,i2,kall))*s62_historical
                       +
-                      (p62_dem_material_lh(i2,kall) * p62_scaling_factor(i2))
-                      *(1-s62_historical)
+                      (p62_dem_material_lastcalibyear(i2,kall) * p62_scaling_factor(i2))
+                      *(1-s62_historical) + sum(ct, p62_bioplastic_substrate(ct, i2, kall)) -
+                      sum(ct, p62_bioplastic_substrate_double_counted(ct,i2,kall))
                       ;
 
-*' Results are stored in the interface `vm_dem_material` and this interface
-*' is then used in demand([16_demand]) module as a part of global supply-demand
-*' balance for crop, livestock, secondary products and residues.
+
