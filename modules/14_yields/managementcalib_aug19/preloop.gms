@@ -107,18 +107,21 @@ i14_managementcalib(t,j,knbe14,w) =
 i14_yields_calib(t,j,knbe14,w)    = i14_managementcalib(t,j,knbe14,w) * f14_yields(t,j,knbe14,w);
 pm_yields_semi_calib(j,knbe14,w)  = i14_yields_calib("y1995",j,knbe14,w);
 
-
-if (( s14_calib_ir2rf = 1),
+*' Calibration of yields to Aquastat irrigated-rainfed ratio
+if ((s14_calib_ir2rf = 1),
                
+* Weighted yields
   i14_calib_yields_hist(i,w)
      = sum((cell(i,j), knbe14), fm_croparea("y1995",j,"irrigated",knbe14) * i14_yields_calib("y1995",j,knbe14,w)) /
        sum((cell(i,j), knbe14), fm_croparea("y1995",j,"irrigated",knbe14));
   
+* Use irrigated-rainfed ratio of Aquastat if larger than our calculated ratio
   p14_calib_yields_ratio(i) = i14_calib_yields_hist(i,"irrigated") / i14_calib_yields_hist(i,"rainfed");
   p14_target_ratio(i) = max(p14_calib_yields_ratio(i), f14_ir2rf_ratio(i));
   i14_yields_calib(t,j,knbe14,"irrigated") = sum((cell(i,j)), p14_target_ratio(i) / p14_calib_yields_ratio(i)) * 
                                                i14_yields_calib(t,j,knbe14,"irrigated"); 
 
+* Calibrate newly calibrated yields to FAO yields
   i14_modeled_yields_hist2(i,knbe14)
    = (sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14) * i14_yields_calib("y1995",j,knbe14,w)) /
       sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14))>0)
