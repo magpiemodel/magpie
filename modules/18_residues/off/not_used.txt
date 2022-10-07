@@ -8,6 +8,5 @@
 name,type,reason
 im_development_state,input,questionnaire
 fm_attributes,input,questionnaire
-fm_multicropping,input,questionnaire
 vm_prod_reg,input,questionnaire
 vm_area,input,questionnaire

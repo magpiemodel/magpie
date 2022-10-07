@@ -92,7 +92,6 @@ loop(t,
      );
 );
 
-
 *' The calibrated cellular yield 'i14_yields_calib' is calculated for each time step depending
 *' on the constant values 'i14_modeled_yields_hist', 'i14_fao_yields_hist', 'i14_lambda_yields'
 *' and the uncalibrated, cellular yield 'f14_yields' following the idea of eq. (9) in @Heinke.2013:
@@ -107,19 +106,23 @@ i14_managementcalib(t,j,knbe14,w) =
 i14_yields_calib(t,j,knbe14,w)    = i14_managementcalib(t,j,knbe14,w) * f14_yields(t,j,knbe14,w);
 pm_yields_semi_calib(j,knbe14,w)  = i14_yields_calib("y1995",j,knbe14,w);
 
-*' Calibration of yields to Aquastat irrigated-rainfed ratio
+*' Note that the calculation is split into two parts for better readability.
+
+*' Irrigated yields can be optionally calibrated to meet the country-level
+*' ratio between irrigated and rainfed yields reported by Aquastat
+*' by activating the switch `s14_calib_ir2rf`.
 if ((s14_calib_ir2rf = 1),
-               
+
 * Weighted yields
   i14_calib_yields_hist(i,w)
      = sum((cell(i,j), knbe14), fm_croparea("y1995",j,"irrigated",knbe14) * i14_yields_calib("y1995",j,knbe14,w)) /
        sum((cell(i,j), knbe14), fm_croparea("y1995",j,"irrigated",knbe14));
-  
+
 * Use irrigated-rainfed ratio of Aquastat if larger than our calculated ratio
   i14_calib_yields_ratio(i) = i14_calib_yields_hist(i,"irrigated") / i14_calib_yields_hist(i,"rainfed");
   i14_target_ratio(i) = max(i14_calib_yields_ratio(i), f14_ir2rf_ratio(i));
-  i14_yields_calib(t,j,knbe14,"irrigated") = sum((cell(i,j)), i14_target_ratio(i) / i14_calib_yields_ratio(i)) * 
-                                               i14_yields_calib(t,j,knbe14,"irrigated"); 
+  i14_yields_calib(t,j,knbe14,"irrigated") = sum((cell(i,j)), i14_target_ratio(i) / i14_calib_yields_ratio(i)) *
+                                               i14_yields_calib(t,j,knbe14,"irrigated");
 
 * Calibrate newly calibrated yields to FAO yields
   i14_modeled_yields_hist2(i,knbe14)
@@ -128,14 +131,13 @@ if ((s14_calib_ir2rf = 1),
    + (sum((cell(i,j),w), i14_croparea_total("y1995",w,j) * f14_yields("y1995",j,knbe14,w)) /
       sum((cell(i,j),w), i14_croparea_total("y1995",w,j)))$(sum((cell(i,j),w), fm_croparea("y1995",j,w,knbe14))=0);
 
-  i14_yields_calib(t,j,knbe14,w) = sum((cell(i,j)), i14_fao_yields_hist("y1995",i,knbe14) / 
+  i14_yields_calib(t,j,knbe14,w) = sum((cell(i,j)), i14_fao_yields_hist("y1995",i,knbe14) /
                                                       i14_modeled_yields_hist2(i,knbe14)) *
                                    i14_yields_calib(t,j,knbe14,w);
-                                 
-  pm_yields_semi_calib(j,knbe14,w)  = i14_yields_calib("y1995",j,knbe14,w); 
+
+  pm_yields_semi_calib(j,knbe14,w)  = i14_yields_calib("y1995",j,knbe14,w);
 );
 
-*' Note that the calculation is split into two parts for better readability.
 *' @stop
 
 
