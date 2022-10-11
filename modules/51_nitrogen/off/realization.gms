@@ -12,6 +12,6 @@
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "declarations" $include "./modules/51_nitrogen/off/declarations.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/51_nitrogen/off/presolve.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/51_nitrogen/off/preloop.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/51_nitrogen/off/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

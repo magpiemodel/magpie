@@ -26,14 +26,26 @@ q70_feed(i2,kap,kall) ..
 *' productivity. Here, factor costs rise with intensification. The per-unit
 *' costs for non-ruminants and fish are assumed to be independent from
 *' productivity trajectories for simplification. Therefore,
-*' `f70_cost_regr(kli,"cost_regr_b")` is set to zero in the case of livestock
+*' `i70_cost_regr(i,kli,"cost_regr_b")` is set to zero in the case of livestock
 *' products generated in monogastric systems.
 
-q70_cost_prod_liv(i2,kli) ..
- vm_cost_prod(i2,kli) =e= vm_prod_reg(i2,kli)
-     *(f70_cost_regr(kli,"cost_regr_a") + f70_cost_regr(kli,"cost_regr_b")
-     *sum((ct, sys_to_kli(sys,kli)),i70_livestock_productivity(ct,i2,sys)));
+*' To account for increased hourly labor costs and producitivity in case of an external 
+*' wage scenario, the total labor costs are scaled by the corresponding increase in hourly
+*' labor costs and the related productivity gain from [36_employment].
+
+q70_cost_prod_liv_labor(i2) ..
+ vm_cost_prod_livst(i2,"labor") =e= sum(kli, vm_prod_reg(i2,kli)
+     *(i70_cost_regr(i2,kli,"cost_regr_a") + i70_cost_regr(i2,kli,"cost_regr_b")
+     *sum((ct, sys_to_kli(sys,kli)),i70_livestock_productivity(ct,i2,sys)))) 
+     *sum(ct, p70_cost_share_livst(ct,i2,"labor")) 
+     *sum(ct, (1/pm_productivity_gain_from_wages(ct,i2)) * (pm_hourly_costs(ct,i2,"scenario") / pm_hourly_costs(ct,i2,"baseline")));
+
+q70_cost_prod_liv_capital(i2) ..
+ vm_cost_prod_livst(i2,"capital") =e= sum(kli, vm_prod_reg(i2,kli)
+     *(i70_cost_regr(i2,kli,"cost_regr_a") + i70_cost_regr(i2,kli,"cost_regr_b")
+     *sum((ct, sys_to_kli(sys,kli)),i70_livestock_productivity(ct,i2,sys)))) 
+     *sum(ct, p70_cost_share_livst(ct,i2,"capital"));
 
 q70_cost_prod_fish(i2) ..
- vm_cost_prod(i2,"fish") =e=
-     vm_prod_reg(i2,"fish")*f70_cost_regr("fish","cost_regr_a");
+ vm_cost_prod_fish(i2) =e=
+     vm_prod_reg(i2,"fish")*i70_cost_regr(i2,"fish","cost_regr_a");

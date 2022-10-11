@@ -7,13 +7,13 @@
 
 sets
    watdem_exo(wat_dem) Exogenous water demand
-   / industry, electricity, domestic, ecosystem /
+   / domestic, manufacturing, electricity, ecosystem /
 
    watdem_ineldo(wat_dem) Exogenous water demand subset covering humanly induced demands
-   / industry, electricity, domestic /
+   / domestic, manufacturing, electricity /
 
    scen_watdem_nonagr Scenarios for non agricultural water demand
-   / A2 , B1 , SSP2 /
+   / ISIMIP, ssp1, ssp2, ssp3 /
 
 	scen42 Environmental Flow Policy (EFP)
   		/ off, on /

@@ -6,7 +6,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 p59_som_pool(j,pools59) = v59_som_pool.l(j,pools59);
-                 
+p59_land_before(j,land) = vm_land.l(j,land);
+p59_carbon_density(t,j,noncropland59)$(pcm_land(j,noncropland59)>0) = p59_som_pool(j,noncropland59)/pcm_land(j,noncropland59);
+p59_carbon_density(t,j,"crop")$(pcm_land(j,"crop")>0)=  p59_som_pool(j,"crop") / pcm_land(j,"crop");
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov59_som_target(t,j,pools59,"marginal")                     = v59_som_target.m(j,pools59);
@@ -22,7 +24,7 @@ p59_som_pool(j,pools59) = v59_som_pool.l(j,pools59);
  oq59_nr_som(t,j,"marginal")                                 = q59_nr_som.m(j);
  oq59_nr_som_fertilizer(t,j,"marginal")                      = q59_nr_som_fertilizer.m(j);
  oq59_nr_som_fertilizer2(t,j,"marginal")                     = q59_nr_som_fertilizer2.m(j);
- oq59_carbon_soil(t,j,pools59,"marginal")                    = q59_carbon_soil.m(j,pools59);
+ oq59_carbon_soil(t,j,pools59,stockType,"marginal")          = q59_carbon_soil.m(j,pools59,stockType);
  ov59_som_target(t,j,pools59,"level")                        = v59_som_target.l(j,pools59);
  ov59_som_pool(t,j,pools59,"level")                          = v59_som_pool.l(j,pools59);
  ov59_som_transfer_to_cropland(t,j,noncropland59,"level")    = v59_som_transfer_to_cropland.l(j,noncropland59);
@@ -36,7 +38,7 @@ p59_som_pool(j,pools59) = v59_som_pool.l(j,pools59);
  oq59_nr_som(t,j,"level")                                    = q59_nr_som.l(j);
  oq59_nr_som_fertilizer(t,j,"level")                         = q59_nr_som_fertilizer.l(j);
  oq59_nr_som_fertilizer2(t,j,"level")                        = q59_nr_som_fertilizer2.l(j);
- oq59_carbon_soil(t,j,pools59,"level")                       = q59_carbon_soil.l(j,pools59);
+ oq59_carbon_soil(t,j,pools59,stockType,"level")             = q59_carbon_soil.l(j,pools59,stockType);
  ov59_som_target(t,j,pools59,"upper")                        = v59_som_target.up(j,pools59);
  ov59_som_pool(t,j,pools59,"upper")                          = v59_som_pool.up(j,pools59);
  ov59_som_transfer_to_cropland(t,j,noncropland59,"upper")    = v59_som_transfer_to_cropland.up(j,noncropland59);
@@ -50,7 +52,7 @@ p59_som_pool(j,pools59) = v59_som_pool.l(j,pools59);
  oq59_nr_som(t,j,"upper")                                    = q59_nr_som.up(j);
  oq59_nr_som_fertilizer(t,j,"upper")                         = q59_nr_som_fertilizer.up(j);
  oq59_nr_som_fertilizer2(t,j,"upper")                        = q59_nr_som_fertilizer2.up(j);
- oq59_carbon_soil(t,j,pools59,"upper")                       = q59_carbon_soil.up(j,pools59);
+ oq59_carbon_soil(t,j,pools59,stockType,"upper")             = q59_carbon_soil.up(j,pools59,stockType);
  ov59_som_target(t,j,pools59,"lower")                        = v59_som_target.lo(j,pools59);
  ov59_som_pool(t,j,pools59,"lower")                          = v59_som_pool.lo(j,pools59);
  ov59_som_transfer_to_cropland(t,j,noncropland59,"lower")    = v59_som_transfer_to_cropland.lo(j,noncropland59);
@@ -64,6 +66,6 @@ p59_som_pool(j,pools59) = v59_som_pool.l(j,pools59);
  oq59_nr_som(t,j,"lower")                                    = q59_nr_som.lo(j);
  oq59_nr_som_fertilizer(t,j,"lower")                         = q59_nr_som_fertilizer.lo(j);
  oq59_nr_som_fertilizer2(t,j,"lower")                        = q59_nr_som_fertilizer2.lo(j);
- oq59_carbon_soil(t,j,pools59,"lower")                       = q59_carbon_soil.lo(j,pools59);
+ oq59_carbon_soil(t,j,pools59,stockType,"lower")             = q59_carbon_soil.lo(j,pools59,stockType);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
 

@@ -7,10 +7,10 @@
 
 scalars
 
-s42_watdem_nonagr_scenario         Scenario for non agricultural water demand from WATERGAP     (1)             / 1 /
-*                                                                                1: SSP 2
-*                                                                                2: A2
-*                                                                                3: B1
+s42_watdem_nonagr_scenario         Scenario for non agricultural water demand from WATERGAP     (1)             / 2 /
+*                                                                                1: SSP1
+*                                                                                2: SSP2
+*                                                                                3: SSP3
 
 s42_irrig_eff_scenario     Scenario for irrigation efficiency      (1)      / 2 /
 *                                      1: global static value
@@ -36,6 +36,9 @@ s42_env_flow_base_fraction         Fraction of available water that is reserved 
 *                                                                    (determined in the file
 *                                                                   EFR_protection_policy.csv)
 s42_env_flow_fraction              Fraction of available water that is reserved for under protection policies (1) / 0.2 /
+s42_pumping                        Switch to activate pumping cost settings (1) / 0 /
+s42_multiplier_startyear           Year from which pumping costs multiplier will be implemented (1) / 0 /
+s42_multiplier                     multiplier to change pumping costs for sensitivity analysis takes numeric values (1)  / 0 /
 ;
 
 $setglobal c42_watdem_scenario  cc
@@ -89,7 +92,7 @@ $include "./modules/42_water_demand/input/f42_wat_req_fao.csv"
 $offdelim
 /;
 
-table f42_watdem_ineldo(t_all,j,scen_watdem_nonagr,watdem_ineldo) Industry electricity and domestic water demand under our socioeconomic scenarios (mio. m^3)
+table f42_watdem_ineldo(t_all,j,scen_watdem_nonagr,watdem_ineldo) Manufacturing electricity and domestic water demand under different socioeconomic scenarios (mio. m^3)
 $ondelim
 $include "./modules/42_water_demand/input/watdem_nonagr_grper.cs3"
 $offdelim
@@ -114,4 +117,14 @@ table f42_env_flow_policy(t_all,scen42) EFP policies (1)
 $ondelim
 $include "./modules/42_water_demand/input/f42_env_flow_policy.cs3"
 $offdelim
+;
+
+*Costs of pumping are calculated for India as per methodology in forthcoming paper by Singh et.al.
+parameter
+f42_pumping_cost(t_all,i) Cost of pumping irrigation water (USD05MER per m^3)
+/
+$ondelim
+$include "./modules/42_water_demand/input/f42_pumping_cost.cs4"
+$offdelim
+/
 ;

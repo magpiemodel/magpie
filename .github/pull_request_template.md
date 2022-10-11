@@ -30,7 +30,9 @@
 - [ ] Made sure that documentation created with [`goxygen`](https://github.com/pik-piam/goxygen) is okay (use `goxygen::goxygen()` for testing).
 - [ ] Changes to [`magpie4`](https://github.com/pik-piam/magpie4) R library for post processing of model output (ideally backward compatible).
 - [ ] Self-review of my own code.
+- [ ] In case of updated cellular input tgz file in default.cfg: scenario_config.csv has been updated accordingly (rcp1p9, rcp2p6 etc)
 - [ ] For high risk runs: validation of major model indicators - Land-use, emissions, food prices, Tau.  %Delete this line in case it is not a high risk run%
+- [ ] In case of updated switches in default.cfg: made sure that all scenario definitions in scenario_config.csv are still available (or updated accordingly).
 
 ## :warning: Additional notes or warnings :warning:
 NA

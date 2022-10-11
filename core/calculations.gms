@@ -32,15 +32,19 @@ file dummy; dummy.pw=2000; put dummy;
 
 * clear ct set
 ct(t) = no;
-
+pt(t) = no;
 ***************************TIMESTEP LOOP START**********************************
 loop (t,
 
 * set ct to current time period
       ct(t) = yes;
-
+	  pt(t) = yes$(ord(t) = 1);
+	  pt(t-1) = yes$(ord(t) > 1);
+	  
       display "Year";
       display ct;
+      display "Previous Year";
+      display pt;
 
 $batinclude "./modules/include.gms" presolve
 
@@ -82,8 +86,10 @@ $batinclude "./modules/include.gms" postsolve
 **********************WRITE ALL DATA IN 1 GDX FILE******************************
   Execute_Unload "fulldata.gdx";
 
-* clear ct set
+* clear ct and pt set
   ct(t) = no;
+  pt(t) = no$(ord(t) = 1);
+  pt(t-1) = no$(ord(t) > 1);
 ********************************************************************************
 );
 ****************************TIMESTEP LOOP END***********************************

@@ -77,6 +77,11 @@ authors:
     affiliation: "Potsdam Institute for Climate Impact Research"
     email: crawford@pik-potsdam.de
 
+  - family-names: Leip
+    given-names: Debbora
+    affiliation: "Potsdam Institute for Climate Impact Research"
+    email: leip@pik-potsdam.de
+    
   - family-names: Klein
     given-names: David
     affiliation: "Potsdam Institute for Climate Impact Research"
@@ -114,8 +119,8 @@ authors:
     email: popp@pik-potsdam.de
 
 title: MAgPIE - An Open Source land-use modeling framework
-version: 4.4.0
-date-released: 2021-12-13
+version: 4.5.0dev
+date-released: 2022-07-07
 repository-code: https://github.com/magpiemodel/magpie
 keywords:
   - landuse
