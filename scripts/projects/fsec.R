@@ -207,7 +207,8 @@ fsecScenario <- function(scenario) {
                        "runBlackmagicc",
                        "FSDP_process",
                        "projects/FSEC_StevenLord",
-                       "projects/FSEC_SimonDietz"
+                       "projects/FSEC_SimonDietz",
+                       "projects/FSEC_AlessandroPassaro"
                        )
   cfg$force_download    <- TRUE
 
