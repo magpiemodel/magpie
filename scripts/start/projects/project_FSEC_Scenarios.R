@@ -43,7 +43,7 @@ for (scenarioName in c(
 
     # Start runs
     cfg <- fsecScenario(scenario = scenarioName)
-    print("Memory before start_run of ", scenarioName, " is: " mem_used())
+    print(paste0("Memory before start_run of ", scenarioName, " is: " mem_used()))
     start_run(cfg = cfg, codeCheck = codeCheck)
-    print("Memory after start_run of ", scenarioName, " is: " mem_used())
+    print(paste0("Memory  after start_run of ", scenarioName, " is: " mem_used()))
   }
