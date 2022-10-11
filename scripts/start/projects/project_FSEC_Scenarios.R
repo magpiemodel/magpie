@@ -9,6 +9,7 @@
 # description: Scenarios for FSEC
 # ----------------------------------------------------------
 
+library(pryr)
 library(gms)
 source("scripts/start_functions.R")
 source("scripts/projects/fsec.R")
@@ -42,6 +43,7 @@ for (scenarioName in c(
 
     # Start runs
     cfg <- fsecScenario(scenario = scenarioName)
+    print("Memory before start_run of ", scenarioName, " is: " mem_used())
     start_run(cfg = cfg, codeCheck = codeCheck)
-
+    print("Memory after start_run of ", scenarioName, " is: " mem_used())
   }
