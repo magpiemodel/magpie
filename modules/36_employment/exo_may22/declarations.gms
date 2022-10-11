@@ -15,7 +15,7 @@ positive variables
 ;
 
 parameters
- p36_hourly_costs_iso(t,iso, wage_scen) Hourly labor costs in agriculture on iso level before and after including wage scenario (USDMER05 per hour)
+ p36_hourly_costs_iso(t_all,iso, wage_scen) Hourly labor costs in agriculture on iso level before and after including wage scenario (USDMER05 per hour)
  p36_hourly_costs_increase(iso)         Difference between minimum hourly labor costs and actual hourly labor costs in 2050 (USDMER05 per hour)
  pm_hourly_costs(t,i, wage_scen)        Hourly labor costs in agriculture on regional level before and after including wage scenario (USDMER05 per hour)
  pm_productivity_gain_from_wages(t,i)   Multiplicative factor describing productivity gain related to higher wages (1)

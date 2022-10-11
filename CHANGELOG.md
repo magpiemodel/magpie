@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **42_water_demand** account for multiple cropping in water requirements
 - **config** new switches `s36_minimum_wage`, `s36_scale_productivity_with_wage`, and `s38_fix_capital_need`
 - **38_factor_costs** included labor cost scaling in case of wage scenario
 - **70_livestock** included labor cost scaling in case of wage scenario
