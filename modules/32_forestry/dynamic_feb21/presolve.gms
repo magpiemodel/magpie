@@ -78,7 +78,7 @@ else
 *****
 * Forest shock
 *****
-p32_disturbance_loss_ftype32(t,j,"aff",ac_sub) = pc32_land(j,"aff",ac_sub) * f32_forest_shock(t,"%c32_shock_scenario%");
+p32_disturbance_loss_ftype32(t,j,"aff",ac_sub) = pc32_land(j,"aff",ac_sub) * f32_forest_shock(t,"%c32_shock_scenario%") * m_timestep_length;
 pc32_land(j,"aff",ac_est) = pc32_land(j,"aff",ac_est) + sum(ac_sub,p32_disturbance_loss_ftype32(t,j,"aff",ac_sub))/card(ac_est);
 
 pc32_land(j,"aff",ac_sub) = pc32_land(j,"aff",ac_sub) - p32_disturbance_loss_ftype32(t,j,"aff",ac_sub);
