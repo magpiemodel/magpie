@@ -31,6 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **documentation** added literature
 - **scripts/start** cleanup of old start scripts
 - **scripts** log files are now written in a subfolder "logs"
+- **config** adjusted PR template
+- **scripts** added single time step run to test runs
 
 ### added
 - **scripts** added output script creating a set of outputs for Alessandro Passaro in the FSEC context
