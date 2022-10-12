@@ -6,6 +6,64 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [Unreleased]
+
+### changed
+- **config** new switches `s36_minimum_wage`, `s36_scale_productivity_with_wage`, and `s38_fix_capital_need`
+- **38_factor_costs** included labor cost scaling in case of wage scenario
+- **70_livestock** included labor cost scaling in case of wage scenario
+- **36_employment** included calculations for minimum wage scenario
+- **config** added `s62_max_dem_bioplastic` and `s62_midpoint_dem_bioplastic` to define bioplastic scenario
+- **62_material** added biomass demand for bioplastic production
+- **config** updated config to new module setup of MACCs
+- **51_nitrogen** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
+- **58_peatland** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
+- **52_carbon** change of interface from vm_btm_reg to vm_emissions_reg
+- **inputs** update of NPi for China (additional data 4.30)
+- **inputs** updated f56_emis_policy (additional data 4.29)
+- **scripts** FSDP_collect handles the health impacts data provided by Marco Springmann, distributed it into the scenario's various reports. It performs a similar operation for global nutrient surplus (which must be calculated on the grid-level and then aggregated).- **13_tc** relaxed vm_tau upper limit
+- **scripts** updated FSEC start and output scripts
+- **scripts** update of rds_report to allow gridded intermediate outputs
+- **config** non-food system emission MAGICC switch
+- **scripts** output/extra/disaggregation_BII.R adjusted BII output for primary and secondary other land
+- **59_som** Now calculates soil C for fallow
+- **inputs** updated non-food initial prices, MACCs curves, and removed suitability threshold of 0.1 in all_marginal setting
+- **documentation** added literature
+- **scripts/start** cleanup of old start scripts
+- **scripts** log files are now written in a subfolder "logs"
+
+### added
+- **scripts** added output script creating a set of outputs for Alessandro Passaro in the FSEC context
+- **50_nr_soil_budget** new module realization for more consistent MACCs implementation. change of interface from vm_btm_reg to vm_emissions_reg
+- **53_methane** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
+- **56_ghg_policy** new module realization for more consistent MACCs implementation
+- **57_maccs** new more consistent maccs implementation. different mapping of emission sources to maccs.
+- **scripts** added output script creating a merged .csv for dietaryIndicators and caloricSupply outputs
+- **scripts** added water output script for FSEC model runs
+- **scripts** added output script, FSDP_process creating a merged .csv and .gdx for dietaryIndicators and caloricSupply outputs
+- **scripts** added output script creating a merged .csv for dietaryIndicators and caloricSupply outputs
+- **scripts** added output script creating a set of outputs for Simon Dietz in the FSEC context
+- **scripts** added output script running MAGICC7 on a MAgPIE scenario
+- **scripts** added output script for gridded crop diversity indices
+- **scripts** added output scripts for FSEC FSDP runs
+- **15_food** added new realization with country level exogenous diets, product-specific intake estimates, new scenarios for exogenous BMI and decomposition switches for EAT Lancet diets. Simplified code and improved iteration procedure.
+- **57_maccs** added new Marginal Abatement Cost Curve (MACCs) data set from PBL (PBL2022)
+
+### removed
+- **38_factor_costs** removed `mixed_reg_feb17` realization
+- **50_nr_soil_budget** old inconsistent module realizations
+- **53_methane** old inconsistent module realizations
+- **56_ghg_policy** old inconsistent module realizations
+- **57_maccs** old inconsistent module realizations
+- **15_food** removed read-in of non-needed input file "f15_calib_factor_FAOfsupply_iso"
+
+### fixed
+- **38_factor_costs** fixed calibration of share parameter in `sticky_labor` realization
+- **59_som** corrected the som pool due to the carbon transfer from other and primary forest to secondary forest before optimization (presolve)  
+- **43_water_availability** added missing years after 2100 in "f43_wat_avail" to avoid infeasibilities in coupled runs with less_ts timesteps
+- **scripts** fixed some bugs related to background execution of start/output scripts
+
+
 ## [4.5.0] - 2022-07-07
 
 ### changed
@@ -46,10 +104,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** clean up of the recalibrate_realizations.R script, project_LAMACLIMA_WP4.R, and sticky.R to remove sticky dynamic/free switch.
 - **scripts** bugfix in disaggregation.R, disaggregation_BII.R with respect to urban scenario
 - **scripts** added FSEC modeling start script (global runs)
-- **scripts** The disaggregation_LUH2.R was extended to include the changes used to generate ISIMIP3b maps for LUH harmonization. The largest changes are: 1) The convertLUH function now breaks the grid level magpie objects by groups of years, then creates the raster for the groups and aggregates them to create the final map at a quarter of a degree resolution (this speeds up the process). 2) The mapping between LUH and MAgPIE is now defined by country and magpie-LUH types (not 1 to 1 anymore). 3) The split of MAgPIE's pasture land type between pasture and rangeland changed. Rangeland is assumed to stay constant after 2015, and changes in MAgPIE's pasture are due to pasture. 4) IFs were added so if a certain map already exists in the output folder, it will not generate it once again. 5) Flooded land now corresponds to a share of rice cropland, based on historical values. 6) To speed calculations, yields are read at the cell level, the crops are aggregated based on the new MAgPIE-LUH mapping, and then disaggregated to grid level.
+- **scripts** The disaggregation_LUH2.R was extended to include the changes used to generate ISIMIP3b maps for LUH harmonization. The largest changes are: 1) The convertLUH function now breaks the grid level magpie objects by groups of years, then creates the raster for the groups and aggregates them to create the final map at a quarter of a degree resolution (this speeds up the process). 2) The mapping between LUH and MAgPIE is now defined by country and magpie-LUH types (not 1 to 1 anymore). 3) The split of MAgPIE's pasture land type between pasture and rangeland changed. Rangeland is assumed to stay constant after 2015, and changes in MAgPIE's pasture are due to managed pasture. 4) IFs were added so if a certain map already exists in the output folder, it will not generate it once again. 5) Flooded land now corresponds to a share of rice cropland, based on historical values. 6) To speed calculations, yields are read at the cell level, the crops are aggregated based on the new MAgPIE-LUH mapping, and then disaggregated to grid level.
 - **scripts** added new disaggregation script to provide grid cell level BII
 - **scripts** removed test script "irrig_dep_test" from "start" folder to "extra" folder
-- **scripts** Added script to folder projects paper_grassland.R
+- **scripts** Added script projects/paper_grassland.R
 - **scripts** scripts/output/extra/emulator.R Remove dependency on deprecated R package "magpie"
 
 ### added
@@ -75,7 +133,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** output/projects/FSEC_costs.R to create costs ouput for the FSEC project
 - **scripts** output/projects/FSEC_dietaryIndicators.R to create output datasets for the FSEC project
 - **scripts** output/projects/FSEC_nitrogenPollution.R to create output datasets of nitrogen pollutants for the FSEC project
-- **scripts** Added script to folder projects paper_grassland.R
 - **scripts** Extended dissagregation.R script to replace single "past" land class by LHU range and pastr classes when grassland_apr22 realization is used.
 - **scripts** `start/projects/test_rotations.R` testscript for different rotation scenario settings
 

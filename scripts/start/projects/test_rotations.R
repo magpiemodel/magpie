@@ -27,7 +27,7 @@ cfg$gms$s13_max_gdp_shr <- 0.01
 
 cfg$results_folder <- "output/:title:"
 #cfg$output <- c("rds_report","extra/disaggregation")#"extra/highres"
-prefix <- "rota_penalty17"
+prefix <- "rota_penalty18"
 
 cfg$title <- paste(prefix,"olddefault",sep="_")
 start_run(cfg,codeCheck=FALSE)
@@ -44,16 +44,15 @@ start_run(cfg,codeCheck=FALSE)
 
 cfg$title <- paste(prefix,"newdefault",sep="_")
 cfg$gms$crop    <- "penalty_apr22"
+cfg$gms$som    <- "cellpool_aug16"
 cfg$gms$c30_rotation_scenario = "default"
 
 
 #cfg$qos <- "priority"
 cfg$recalibrate <- TRUE
 cfg$recalibrate_landconversion_cost <- TRUE
-cfg$recalibrate <- FALSE
-cfg$recalibrate_landconversion_cost <- FALSE
 start_run(cfg,codeCheck=FALSE)
-magpie4::submitCalibration("H12_sticky_feb18_dynamic_rotation")
+magpie4::submitCalibration("H12_sticky_feb18_dynamic_rotation2")
 cfg$recalibrate <- FALSE
 cfg$recalibrate_landconversion_cost <- FALSE
 

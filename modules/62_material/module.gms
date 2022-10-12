@@ -15,8 +15,10 @@
 *' category, the use for bioenergy (oils and ethanol) has been excluded
 *' and is accounted for in the demand for bioenergy. Material demand in this
 *' context can be considered as a subset of "other utils" category of FAO.
+*' In addition, future material demand for bioplastic production can be included
+*' by setting a target bioplastic demand.
 
-*' @authors Benjamin Bodirsky
+*' @authors Benjamin Bodirsky, Debbora Leip
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%material%" == "exo_flexreg_apr16" $include "./modules/62_material/exo_flexreg_apr16/realization.gms"

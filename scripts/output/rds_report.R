@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: extract report in rds format from run
+# description: extract report in rds and mif format from run
 # comparison script: FALSE
 # position: 2
 # ---------------------------------------------------------------
@@ -26,20 +26,20 @@ if(!exists("source_include")) {
 }
 
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
-gdx	<- file.path(outputdir,"fulldata.gdx")
+gdx	<- file.path(outputdir, "fulldata.gdx")
 rds <- paste0(outputdir, "/report.rds")
 mif <- paste0(outputdir, "/report.mif")
-runstatistics <- paste0(outputdir,"/runstatistics.rda")
+runstatistics  <- paste0(outputdir, "/runstatistics.rda")
 resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 ###############################################################################
 
 
-report <- getReport(gdx,scenario = cfg$title)
-write.report2(report, file=mif)
+report <- getReport(gdx, scenario = cfg$title)
+write.report(report, file = mif)
 q <- as.quitte(report)
 if(all(is.na(q$value))) stop("No values in reporting!")
 
-saveRDS(q,file=rds, version = 2)
+saveRDS(q, file = rds, version = 2)
 
 if(file.exists(runstatistics) & dir.exists(resultsarchive)) {
   stats <- list()
@@ -49,14 +49,14 @@ if(file.exists(runstatistics) & dir.exists(resultsarchive)) {
     # been saved to the archive before) and save statistics to the archive
     message("No id found in runstatistics.rda. Calling lucode2::runstatistics() to create one.")
     stats <- lucode2::runstatistics(file = runstatistics, submit = cfg$runstatistics)
-    message("Created the id ",stats$id)
+    message("Created the id ", stats$id)
     # save stats locally (including id) otherwise it would generate a new id (and
     # resubmit the results and the statistics) next time rds_report is executed
-    save(stats, file=runstatistics, compress="xz")
+    save(stats, file = runstatistics, compress = "xz")
   }
 
   # Save report to results archive
-  saveRDS(q,file=paste0(resultsarchive,"/",stats$id,".rds"), version = 2)
+  saveRDS(q, file = paste0(resultsarchive, "/", stats$id, ".rds"), version = 2)
   cwd <- getwd()
   setwd(resultsarchive)
   system("ls 1*.rds > files")
