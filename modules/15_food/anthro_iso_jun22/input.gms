@@ -38,6 +38,9 @@ $setglobal c15_kcal_scen  healthy_BMI
 
 $setglobal c15_EAT_scen  FLX
 *   options:   BMK, FLX, PSC, VEG, VGN, FLX_hmilk, FLX_hredmeat
+$setglobal c15_NIN_scen  FLX_hmilk
+* Only one option applicable for India 
+
 
 
 * Set-switch for countries affected by country-specific exogenous diet scenario
