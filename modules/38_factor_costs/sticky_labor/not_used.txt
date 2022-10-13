@@ -6,6 +6,3 @@
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
 vm_prod_reg,input,not used
-vm_tau,par,questionnaire
-fm_tau1995,par,questionnaire
-vm_area,par,questionnaire

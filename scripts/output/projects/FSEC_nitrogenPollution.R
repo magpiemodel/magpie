@@ -35,10 +35,8 @@ cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 title <- cfg$title
 
 message("Generating nitrogen pollution output for the run: ", title)
-gdx <- file.path(outputdir, "fulldata.gdx")
 
 # Grid-level nitrogen pollution
-out <- getReportFSECPollution(gdx = gdx,
-                              reportOutputDir = outputdir,
+out <- getReportFSECPollution(reportOutputDir = outputdir,
                               magpieOutputDir = outputdir,
                               scenario = title)
