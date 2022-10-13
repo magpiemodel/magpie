@@ -13,7 +13,9 @@
 *' representing agricultural land-use intensity. Secondly, pasture yields are calculated
 *' based on pasture demand to account for in- and extensification of managed grasslands.
 *' Thirdly, irrigated yields are scaled to meet the irrigated-to-rainfed yield
-*' ratio as provided by AQUASTAT [@fao_aquastat_2016].
+*' ratio as provided by AQUASTAT [@AQUASTAT Core Database.
+*' Food and Agriculture Organization of the United Nations. Database
+*' accessed on [2022/09/20]].
 *' Finally, crop yields are calibrated to FAO [@FAOSTAT] regional yield levels of the
 *' initial time step. An additional feature of this realization is to allow crop yields
 *' technological change from the precedent times step to spillover to pasture areas. This
