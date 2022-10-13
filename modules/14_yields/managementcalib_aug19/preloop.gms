@@ -108,9 +108,9 @@ pm_yields_semi_calib(j,knbe14,w)  = i14_yields_calib("y1995",j,knbe14,w);
 
 *' Note that the calculation is split into two parts for better readability.
 
-*' Irrigated yields can be optionally calibrated to meet the country-level
-*' ratio between irrigated and rainfed yields reported by Aquastat
-*' by activating the switch `s14_calib_ir2rf`.
+*' Irrigated yields are calibrated to meet the country-level
+*' ratio between irrigated and rainfed yields reported by Aquastat.
+*' This can be de-activated with the switch `s14_calib_ir2rf`.
 if ((s14_calib_ir2rf = 1),
 
 * Weighted yields
