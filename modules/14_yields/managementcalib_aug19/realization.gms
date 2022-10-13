@@ -22,7 +22,7 @@
 
 *' @limitations The exogenous implementation of pasture intensification cannot
 *' capture feedbacks between land scarcity and efforts to improve pasture
-*' management. And, the magnitude of spillover effects from technological change
+*' management. Moreover, the magnitude of spillover effects from technological change
 *' in  the crop sector towards improvements in pasture management is very uncertain.
 
 
