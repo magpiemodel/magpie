@@ -34,8 +34,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **documentation** added literature
 - **scripts/start** cleanup of old start scripts
 - **scripts** log files are now written in a subfolder "logs"
+- **config** adjusted PR template
+- **scripts** added single time step run to test runs
 
 ### added
+- **scripts** added output script creating a set of outputs for Alessandro Passaro in the FSEC context
 - **50_nr_soil_budget** new module realization for more consistent MACCs implementation. change of interface from vm_btm_reg to vm_emissions_reg
 - **53_methane** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
 - **56_ghg_policy** new module realization for more consistent MACCs implementation
