@@ -5,7 +5,6 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 name,type,reason
-vm_emissions_reg, input, no emission feedback on deposition
 vm_manure, input, new flexreg structure
 vm_manure_confinement, input, new flexreg structure
 vm_manure_recycling, input, new flexreg structure
@@ -15,3 +14,4 @@ vm_nr_inorg_fert_reg, input, not needed
 vm_nr_som, input, questionnaire
 vm_nr_eff, input, not needed
 vm_nr_eff_pasture, input, not needed
+im_maccs_mitigation,input,questionnaire

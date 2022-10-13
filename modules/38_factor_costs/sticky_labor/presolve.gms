@@ -28,25 +28,29 @@ else
  i38_fac_req(t,i,kcr) = i38_fac_req(t,i,kcr);
 );
 
-p38_variable_costs(t,i,kcr) = i38_fac_req(t,i,kcr)  * p38_cost_share(t,i,"labor");
+p38_labor_need(t,i,kcr) = i38_fac_req(t,i,kcr)  * p38_cost_share(t,i,"labor");
 p38_capital_need(t,i,kcr,"mobile") = i38_fac_req(t,i,kcr) * p38_cost_share(t,i,"capital") / (pm_interest(t,i)+s38_depreciation_rate) * (1-s38_immobile);
 p38_capital_need(t,i,kcr,"immobile") = i38_fac_req(t,i,kcr)  * p38_cost_share(t,i,"capital") / (pm_interest(t,i)+s38_depreciation_rate) * s38_immobile;
 
 *** Variable labor costs BEGIN
 
-* set bounds for labor requirements
-v38_labor_need.lo(j,kcr) = 0.1*sum(cell(i,j),p38_variable_costs(t,i,kcr));
-v38_labor_need.l(j,kcr) = sum(cell(i,j),p38_variable_costs(t,i,kcr));
-v38_labor_need.up(j,kcr) = 10 * sum(cell(i,j),p38_variable_costs(t,i,kcr));
+* set bounds for labor requirements (in terms of hours worked per output unit)
+v38_laborhours_need.lo(j,kcr) = 0.1 * (sum(cell(i,j),p38_labor_need(t,i,kcr)) / sum(cell(i,j), pm_hourly_costs(t,i,"baseline")));
+v38_laborhours_need.l(j,kcr) = sum(cell(i,j),p38_labor_need(t,i,kcr)) / sum(cell(i,j), pm_hourly_costs(t,i,"baseline"));
+v38_laborhours_need.up(j,kcr) = 10 * (sum(cell(i,j),p38_labor_need(t,i,kcr))  / sum(cell(i,j), pm_hourly_costs(t,i,"baseline")));
 
 * set bounds for captial requirements
-v38_capital_need.lo(j,kcr,mobil38) = 0.1*sum(cell(i,j),p38_capital_need(t,i,kcr,mobil38));
-v38_capital_need.l(j,kcr,mobil38) = sum(cell(i,j),p38_capital_need(t,i,kcr,mobil38));
-v38_capital_need.up(j,kcr,mobil38) = 10 * sum(cell(i,j),p38_capital_need(t,i,kcr,mobil38));
+if (m_year(t) <= s38_fix_capital_need,
+    v38_capital_need.fx(j,kcr,mobil38) = sum(cell(i,j),p38_capital_need(t,i,kcr,mobil38));
+else 
+    v38_capital_need.lo(j,kcr,mobil38) = 0.1*sum(cell(i,j),p38_capital_need(t,i,kcr,mobil38));
+    v38_capital_need.l(j,kcr,mobil38) = sum(cell(i,j),p38_capital_need(t,i,kcr,mobil38));
+    v38_capital_need.up(j,kcr,mobil38) = 10 * sum(cell(i,j),p38_capital_need(t,i,kcr,mobil38));
+);
 
 * update CES parameters
-i38_ces_shr(j,kcr) = sum(cell(i,j), (pm_interest(t,i) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(1 + s38_ces_elast_par)) / (pm_interest(t,i) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(1 + s38_ces_elast_par)  + s38_wage * v38_labor_need.l(j,kcr)**(1 + s38_ces_elast_par)));
-i38_ces_scale(j,kcr) = sum(cell(i,j), 1/([i38_ces_shr(j,kcr) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(-s38_ces_elast_par) + (1 - i38_ces_shr(j,kcr)) * v38_labor_need.l(j,kcr)**(-s38_ces_elast_par)]**(-1/s38_ces_elast_par)));
+i38_ces_shr(j,kcr) = sum(cell(i,j), (p38_intr_depr(t,i) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(1 + s38_ces_elast_par)) / (p38_intr_depr(t,i) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(1 + s38_ces_elast_par) + pm_hourly_costs(t,i,"baseline") * v38_laborhours_need.l(j,kcr)**(1 + s38_ces_elast_par)));
+i38_ces_scale(j,kcr) = sum(cell(i,j), 1/([i38_ces_shr(j,kcr) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(-s38_ces_elast_par) + (1 - i38_ces_shr(j,kcr)) * v38_laborhours_need.l(j,kcr)**(-s38_ces_elast_par)]**(-1/s38_ces_elast_par)));
 
 *** Variable labor costs END
 

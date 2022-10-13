@@ -9,6 +9,3 @@ name,type,reason
 pm_interest,input,questionnaire
 vm_prod,input,questionnaire
 pm_prod_init,par,questionnaire
-vm_tau,par,questionnaire
-fm_tau1995,par,questionnaire
-vm_area,par,questionnaire
