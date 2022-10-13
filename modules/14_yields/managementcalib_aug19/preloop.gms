@@ -48,7 +48,7 @@ i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w) * sum(cell
 
 *' This concept is referred to as limited calibration, as it limits the calibration
 *' to an additive term in case of a strongly underestimated baseline. The scalar
-* `s14_limit_calib` can be used to switch limited calibration on (1) and off (0).
+*' `s14_limit_calib` can be used to switch limited calibration on (1) and off (0).
 
 i14_croparea_total(t_all,w,j) = sum(kcr, fm_croparea(t_all,j,w,kcr));
 
