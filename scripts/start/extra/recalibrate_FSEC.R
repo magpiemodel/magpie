@@ -19,7 +19,7 @@ source("scripts/projects/fsec.R")
 # -----------------------------------------------------------------------------------------------------------------
 # Calibration run
 cfg       <- fsecScenario(scenario = "c_BAU")
-cfg$title <- "FSEC13Oct22"
+cfg$title <- "FSEC14Oct22"
 cfg$results_folder                  <- "output/:title:"
 cfg$recalibrate                     <- TRUE
 cfg$recalibrate_landconversion_cost <- TRUE
