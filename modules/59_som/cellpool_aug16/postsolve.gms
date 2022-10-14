@@ -7,8 +7,8 @@
 
 p59_som_pool(j,pools59) = v59_som_pool.l(j,pools59);
 p59_land_before(j,land) = vm_land.l(j,land);
-p59_carbon_density(t,j,noncropland59)$(pcm_land(j,noncropland59)>0) = p59_som_pool(j,noncropland59)/pcm_land(j,noncropland59);
-p59_carbon_density(t,j,"crop")$(pcm_land(j,"crop")>0)=  p59_som_pool(j,"crop") / pcm_land(j,"crop");
+p59_carbon_density(t,j,noncropland59)$(pcm_land(j,noncropland59)>0) = p59_som_pool(j,noncropland59) / pcm_land(j,noncropland59);
+p59_carbon_density(t,j,"crop")$(pcm_land(j,"crop")>0) = p59_som_pool(j,"crop") / pcm_land(j,"crop");
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
  ov59_som_target(t,j,pools59,"marginal")                     = v59_som_target.m(j,pools59);
@@ -68,4 +68,3 @@ p59_carbon_density(t,j,"crop")$(pcm_land(j,"crop")>0)=  p59_som_pool(j,"crop") /
  oq59_nr_som_fertilizer2(t,j,"lower")                        = q59_nr_som_fertilizer2.lo(j);
  oq59_carbon_soil(t,j,pools59,stockType,"lower")             = q59_carbon_soil.lo(j,pools59,stockType);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
-
