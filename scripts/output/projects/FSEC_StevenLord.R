@@ -34,17 +34,20 @@ message("Script started for output directory: ", outputdir)
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 title <- cfg$title
 
-message("Generating StevenLord output for the run: ", title)
-gdx <- file.path(outputdir, "fulldata.gdx")
-
-baseDir <- getwd()
-stevenLordOutputDir <- file.path(baseDir, "output", "StevenLord")
-if (!dir.exists(stevenLordOutputDir)) {
-    dir.create(stevenLordOutputDir)
+message("Creating an output directory for Steven Lord's datasets")
+stevenLordDir <- file.path(".", "output", "StevenLord")
+if (!dir.exists(stevenLordDir)) {
+    dir.create(stevenLordDir)
 }
 
-# Grid-level nitrogen pollution
-out <- getReportFSECStevenLord(gdx = gdx,
-                               reportOutputDir = stevenLordOutputDir,
-                               magpieOutputDir = outputdir,
+reportOutputDir <- file.path(stevenLordDir, title)
+if (dir.exists(reportOutputDir)) {
+    message("Warning in FSEC_StevenLord: Output directory for " , title, " already exists. Results will be overwritten.")
+}
+suppressWarnings(dir.create(reportOutputDir))
+
+message("Generating Steven Lord's output for the run: ", title)
+
+out <- getReportFSECStevenLord(magpieOutputDir = outputdir,
+                               reportOutputDir = reportOutputDir,
                                scenario = title)
