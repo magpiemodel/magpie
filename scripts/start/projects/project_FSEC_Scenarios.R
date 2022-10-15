@@ -20,8 +20,9 @@ for (scenarioName in c(
   "a_Population", "a_EconDevelop", "a_EnergyTrans",
   "a_NoUnderweight", "a_NoOverweight", "a_DietVegFruitsNutsSeeds", "a_DietLegumes",
   "a_DietMonogastrics", "a_DietRuminants", "a_DietEmptyCals", "a_DietFish", "a_LessFoodWaste",
-  "a_ManureMngmt", "a_LivestockMngmt", "a_NitrogenUptakeEff", "a_LandUseDiversity",
-  # still missing: Bioeconomy
+  "a_ManureMngmt", "a_LivestockMngmt", "a_LandUseDiversity",
+  "a_NitrogenEff", "a_RiceMit", "a_CropeffTax",
+  "a_MinWage", "a_Bioplastics",
   "a_FairTrade", "a_TimberCities", "a_REDDaff", "a_REDD", "a_CropRotations",
   "a_LandSparing", "a_WaterSparing", "a_PeatlandSparing", "a_AirPollution", "a_SoilCarbon",
   # Scenario combination runs
