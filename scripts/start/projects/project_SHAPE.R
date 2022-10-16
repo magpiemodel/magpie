@@ -28,7 +28,7 @@ source("config/default.cfg")
 
 ### General configurations
 
-prefix <- "R0_v3_SHAPE"
+prefix <- "R3_v1_SHAPE"
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report") # Only run rds_report after model run
 
