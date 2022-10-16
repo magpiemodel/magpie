@@ -33,7 +33,7 @@ gms$c30_snv_target;;;;none;none;none;none;none;none;none;none;by2030;;;;;;;none;
 gms$c31_past_suit_scen;;;;ssp126;ssp245;ssp370;ssp460;ssp585;;;;;;;;;;;;;;;;;;;;;ssp126;ssp126;ssp245;ssp460;ssp370;ssp585
 gms$s32_aff_plantation;;;;0;0;0;0;0;0;1;0;0;;;;;;;0;;;;;;;;;;;;;;;
 gms$s32_aff_bii_coeff;;;;0;0;0;0;0;0;1;0;0;;;;;;;0;;;;;;;;;;;;;;;
-gms$s32_max_aff_area;;;;Inf;Inf;Inf;Inf;Inf;500;300;0;700;;;;;;;500;;Inf;Inf;Inf;500;500;;;;;;;;;
+gms$s32_max_aff_area;;;;Inf;Inf;Inf;Inf;Inf;500;400;0;700;;;;;;;500;;Inf;Inf;Inf;500;500;;;;;;;;;
 gms$c32_aff_mask;;;;noboreal;noboreal;noboreal;noboreal;noboreal;onlytropical;onlytropical;onlytropical;onlytropical;;;;;;;onlytropical;;noboreal;noboreal;noboreal;noboreal;noboreal;;;;;;;;;
 gms$c34_urban_scenario;;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;SSP1;SSP2;SSP1;;;;;;;;;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;
 gms$c32_aff_policy;;;;;;;;;;;;;none;npi;ndc;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;;;;
