@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **scripts** fix in start_functions for the calibration setting `ifneeded`
+- **config** best_calib set to FALSE in default
+- **42_water_demand** account for multiple cropping in water requirements
 - **config** new switches `s36_minimum_wage`, `s36_scale_productivity_with_wage`, and `s38_fix_capital_need`
 - **38_factor_costs** included labor cost scaling in case of wage scenario
 - **70_livestock** included labor cost scaling in case of wage scenario
@@ -31,6 +34,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **documentation** added literature
 - **scripts/start** cleanup of old start scripts
 - **scripts** log files are now written in a subfolder "logs"
+- **config** adjusted PR template
+- **scripts** added single time step run to test runs
 
 ### added
 - **scripts** added output script creating a set of outputs for Alessandro Passaro in the FSEC context
@@ -48,6 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** added output scripts for FSEC FSDP runs
 - **15_food** added new realization with country level exogenous diets, product-specific intake estimates, new scenarios for exogenous BMI and decomposition switches for EAT Lancet diets. Simplified code and improved iteration procedure.
 - **57_maccs** added new Marginal Abatement Cost Curve (MACCs) data set from PBL (PBL2022)
+- **14_yields** added input file containing AQUASTAT yield calibration factors and switch `s14_calib_ir2rf` in default.cfg to activate this yield calibration
 
 ### removed
 - **38_factor_costs** removed `mixed_reg_feb17` realization

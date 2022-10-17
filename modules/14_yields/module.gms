@@ -17,6 +17,8 @@
 *' [@FAOSTAT]. For the simulation of the temporal development of agricultural
 *' yields, the module receives information about the agricultural land use
 *' intensity represented by the $\tau$ factor coming from the module [13_tc].
+*' Irrigated yields can optionally be calibrated to meet irrigated-rainfed
+*' country-level yield ratios as reported by Aquastat [@fao_aquastat_2016].
 *'
 *' The module returns yields for all crops and for pasture, which is then used
 *' by the modules [30_crop] and [31_past].
