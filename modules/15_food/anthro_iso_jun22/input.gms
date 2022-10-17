@@ -39,7 +39,7 @@ $setglobal c15_kcal_scen  healthy_BMI
 $setglobal c15_EAT_scen  FLX
 *   options:   BMK, FLX, PSC, VEG, VGN, FLX_hmilk, FLX_hredmeat
 $setglobal c15_NIN_scen  FLX_hmilk
-* Only one option applicable for India 
+* Only one option applicable for India
 
 
 
@@ -119,7 +119,7 @@ scalar s15_kcal_pc_livestock_intake_target target for livestock intake (kcal per
 
 scalar s15_livescen_target_subst fade-out of livestock products (0) or substitution of livestock products with plant-based products (1) / 1 /;
 
-scalar s15_exo_nin Switch for transition towards NIN diet scenario for India (1)  / 0 /;
+scalar s15_exo_nin Switch for transition towards NIN diet scenario for India (1)  / 1 /;
 
 
 table f15_household_balanceflow(t_all,i,kall,dm_ge_nr)   Balance flow to take account of heterogeneous products and processes (mio. tDM)
@@ -254,9 +254,9 @@ $include "./modules/15_food/input/f15_supply2intake_ratio_FAO_iso.cs3"
 $offdelim;
 
 **Dietary recommendations by NIN, only relevant for India
-table f15_intake_NIN(t_scen15,i,kcal_scen15,EAT_scen15,kfo)   NIN scenarios for food-specific intake (kcal per capita per day)
+table f15_intake_NIN(t_scen15,iso,kcal_scen15,EAT_scen15,kfo)   NIN scenarios for food-specific intake (kcal per capita per day)
 $ondelim
-$include "./modules/15_food/input/f15_intake_NIN.cs3"
+$include "./modules/15_food/input/f15_intake_NIN_iso.cs3"
 $offdelim;
 
 

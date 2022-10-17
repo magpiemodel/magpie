@@ -193,7 +193,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Fri Sep 23 12:55:58 2022
+* Last modification (input data): Thu Oct 13 13:47:22 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -235,7 +235,7 @@ $setglobal interest_rate  select_apr20
 $setglobal tc  endo_jan22
 $setglobal yields  managementcalib_aug19
 
-$setglobal food  anthropometrics_jan18
+$setglobal food  anthro_iso_jun22
 $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 

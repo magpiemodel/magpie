@@ -225,7 +225,7 @@ if (s15_run_diet_postprocessing = 1,
 *' to 1.
 
 
-  if((s15_exo_diet = 1 or s15_exo_nin = 1),
+  if(s15_exo_diet = 1,
 
 *' 1.) In a first step, the exogenous scenario diets are defined by selecting a
 *' scenario target for total daily per capita food intake
@@ -297,6 +297,7 @@ $endif
 
     i15_intake_EATLancet(iso,kfo) =
           i15_intake_EATLancet_all(iso,"2100kcal","%c15_EAT_scen%",kfo);
+
 
     if (s15_exo_monogastric=1,
       i15_intake_detailed_scen_target(t,iso,EAT_monogastrics15) = i15_intake_EATLancet(iso,EAT_monogastrics15));
