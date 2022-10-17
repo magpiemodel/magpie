@@ -147,24 +147,24 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
 * Used data set: rev4.77_h12_magpie.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* md5sum: f0fb0888f1f711442377a380887dbbfa
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Used data set: rev4.77_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* md5sum: fe9ad2782602695b706836e84f6b569f
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Used data set: rev4.77_h12_validation.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* md5sum: 7bb2104776a43e1f1293f50d08e20877
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Used data set: additional_data_rev4.30.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* md5sum: a38adda6311604d6922e51dddf6b02cd
+* Repository: /p/projects/landuse/data/input/archive
 * 
-* Used data set: calibration_H12_per_ton_fao_may22_28May22.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Used data set: calibration_H12+ir2rf_05Oct22.tgz
+* md5sum: 788b8e32ea1bd83c5c8f8987d9f05265
+* Repository: /p/projects/landuse/data/input/calibration
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -193,7 +193,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Thu Oct 13 13:47:22 2022
+* Last modification (input data): Mon Oct 17 07:30:30 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
