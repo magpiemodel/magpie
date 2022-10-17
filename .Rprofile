@@ -12,7 +12,8 @@ if(file.exists("~/.Rprofile")) source("~/.Rprofile")
 # to the model output folder. Otherwise, the run itself will again use the
 # default library set!
 
-
+# PLEASE NOTE: snapshots ending with '_R4' require R 4.1 (piam/1.24 and newer),
+# other snapshots require R 3.6 (piam/1.20)
 # snapshot <- "/p/projects/rd3mod/R/libraries/snapshots/2020_03_10"
 # if(file.exists(snapshot)) {
 #   cat("Setting libPaths to",snapshot,"\n")

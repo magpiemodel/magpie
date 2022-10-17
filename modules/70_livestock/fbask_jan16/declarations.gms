@@ -14,7 +14,8 @@ positive variables
 
 equations
  q70_feed(i,kap,kall)             Regional feed demand
- q70_cost_prod_liv(i,req)         Regional factor input costs for livestock production
+ q70_cost_prod_liv_labor(i)       Regional labor costs for livestock production
+ q70_cost_prod_liv_capital(i)     Regional capital costs for livestock production
  q70_cost_prod_fish(i)            Regional factor input costs for fish production
 ;
 
@@ -26,7 +27,7 @@ parameters
  p70_incr_cattle(t,i)                             Change in estimated cattle stocks attributed to food demand projections (1)
  pm_past_mngmnt_factor(t,i)                       Regional pasture management intensification factor (1)
  i70_cereal_scp_fadeout(t_all,i)                  Cereal feed fadeout (share 0-1) to be replaced by SCP (1)
- i70_foddr_scp_fadeout(t_all,i)                	  Fooder fadeout (share 0-1) to be replaced by SCP (1)
+ i70_foddr_scp_fadeout(t_all,i)                   Fodder fadeout (share 0-1) to be replaced by SCP (1)
  p70_country_dummy(iso)                           Dummy parameter indicating whether country is affected by feed scenarios (1)
  p70_feedscen_region_shr(t_all,i)                 Weighted share of region with regards to feed scenario of countries (1)
  p70_cost_share_livst(t,i,req)                    Capital and labor shares of the regional factor costs for plant production for livestock  (1)
@@ -37,11 +38,12 @@ parameters
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_dem_feed(t,i,kap,kall,type)   Regional feed demand including byproducts (mio. tDM per yr)
- ov_cost_prod_livst(t,i,req,type) Livestock factor costs (mio. USD05MER per yr)
- ov_cost_prod_fish(t,i,type)      Fish factor costs (mio. USD05MER per yr)
- oq70_feed(t,i,kap,kall,type)     Regional feed demand
- oq70_cost_prod_liv(t,i,req,type) Regional factor input costs for livestock production
- oq70_cost_prod_fish(t,i,type)    Regional factor input costs for fish production
+ ov_dem_feed(t,i,kap,kall,type)       Regional feed demand including byproducts (mio. tDM per yr)
+ ov_cost_prod_livst(t,i,req,type)     Livestock factor costs (mio. USD05MER per yr)
+ ov_cost_prod_fish(t,i,type)          Fish factor costs (mio. USD05MER per yr)
+ oq70_feed(t,i,kap,kall,type)         Regional feed demand
+ oq70_cost_prod_liv_labor(t,i,type)   Regional labor costs for livestock production
+ oq70_cost_prod_liv_capital(t,i,type) Regional capital costs for livestock production
+ oq70_cost_prod_fish(t,i,type)        Regional factor input costs for fish production
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
