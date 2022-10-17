@@ -124,3 +124,14 @@ lucode2::runstatistics(file           = paste0(cfg$results_folder, "/runstatisti
                       timeOutputEnd   = timeOutputEnd)
 
 print(warnings())
+
+# quit with gams status as exit code unless model completed locally optimal everywhere
+gamsCode <- Find(function(code) !code %in% c(2, 7), ms_all)
+if (is.null(gamsCode) && 7 %in% ms_all) {
+  gamsCode <- 7
+}
+if (!is.null(gamsCode)) {
+  exitCode <- gamsCode + 200 # low numbered exit codes are used by R, add 200 to avoid confusion
+  message("gams status was ", gamsCode, ", exiting with code ", exitCode)
+  quit(status = exitCode)
+}

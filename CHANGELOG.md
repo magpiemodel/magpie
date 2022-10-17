@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **scripts** quit with exit code = gams status at the end of submit.R
 - **scripts** fix in start_functions for the calibration setting `ifneeded`
 - **config** best_calib set to FALSE in default
 - **42_water_demand** account for multiple cropping in water requirements
