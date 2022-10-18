@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **config** Updated default realization of 15_food from anthropometrics_jan18 to anthro_iso_jun22
 - **scripts** quit with exit code = gams status at the end of submit.R
 - **scripts** fix in start_functions for the calibration setting `ifneeded`
 - **config** best_calib set to FALSE in default
