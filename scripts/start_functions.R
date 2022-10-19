@@ -380,9 +380,15 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   # Yield calibration
   calib_file <- "modules/14_yields/input/f14_yld_calib.csv"
   if(cfg$recalibrate=="ifneeded") {
-    # recalibrate if file does not exist
-    if(!file.exists(calib_file)) cfg$recalibrate <- TRUE else cfg$recalibrate <- FALSE
-  }
+    if(!file.exists(calib_file)) {
+      # recalibrate if file does not exist
+      cfg$recalibrate <- TRUE 
+    } else {
+      # recalibrate if all calibration factors are 1, otherwise don't
+      cfg$recalibrate <- all(magclass::read.magpie(calib_file)==1)
+    }
+  }  
+
   if(cfg$recalibrate){
     cat("Starting yield calibration factor calculation!\n")
     source("scripts/calibration/calc_calib.R")
