@@ -23,6 +23,10 @@ $if "%c52_carbon_scenario%" == "nocc" fm_carbon_density(t_all,j,land,c_pools) = 
 $if "%c52_carbon_scenario%" == "nocc_hist" fm_carbon_density(t_all,j,land,c_pools)$(m_year(t_all) > sm_fix_cc) = fm_carbon_density(t_all,j,land,c_pools)$(m_year(t_all) = sm_fix_cc);
 m_fillmissingyears(fm_carbon_density,"j,land,c_pools");
 
+* Fix urban area soilc to natural land soilc as long as preprocessed 
+* fm_carbon_density does not provide meaningful numbers for urban.
+fm_carbon_density(t_all,j,"urban","soilc") = fm_carbon_density(t_all,j,"other","soilc")
+
 parameter f52_growth_par(clcl,chap_par,forest_type) Parameters for chapman-richards equation (1)
 /
 $ondelim
