@@ -8,7 +8,7 @@ $setglobal c32_timber_plantations  plantations
 * option: natveg, plantations
 $setglobal c32_aff_mask  noboreal
 * options: unrestricted, noboreal, onlytropical
-$setglobal c32_aff_policy  NDC
+$setglobal c32_aff_policy  ndc
 * options: none, npi, ndc
 $setglobal c32_aff_bgp  nobgp
 * options: ann,nobgp
@@ -24,7 +24,8 @@ $setglobal c32_rot_calc_type  current_annual_increment
 * option  max_increment, max_npv
 $setglobal c32_rot_calc_type  current_annual_increment
 * options mean_annual_increment, current_annual_increment, instantaneous_growth_rate
-$setglobal c32_shock_scenario  02lin2030
+$setglobal c32_shock_scenario  none
+* options none 01lin2030 02lin2030 04lin2030 08lin2030
 
 
 scalars

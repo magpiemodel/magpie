@@ -49,39 +49,17 @@ p32_carbon_density_ac(t,j,"ndc",ac,ag_pools) = pm_carbon_density_ac(t,j,ac,ag_po
 p32_cdr_ac(t,j,ac)$(ord(ac) > 1 AND (ord(ac)-1) <= s32_planing_horizon/5)
 = p32_carbon_density_ac(t,j,"aff",ac,"vegc") - p32_carbon_density_ac(t,j,"aff",ac-1,"vegc");
 
-*****
-
-* Disturbance from unspecified sources to managed and natural forests
-* pc32_land(j,type32,ac) = p32_land(t-1,j,type32,ac);
-
-* p32_disturbance_loss_ftype32(t,j) = pcm_land(j,"forestry") * f32_forest_shock(t,"%c32_shock_scenario%");
-* pcm_land(j,"forestry") = pcm_land(j,"forestry") - p32_disturbance_loss_ftype32(t,j);
-* vm_land.l(j,"forestry") = pcm_land(j,"forestry");
-
-* p32_disturbance_loss_ftype32(t,j,"aff",ac_sub) = p32_land(t,j,"aff",ac_sub) * f32_forest_shock(t,"%c32_shock_scenario%");
-*p32_land(t,j,"aff",ac_est) = p32_land(t,j,"aff",ac_est) + sum(ac_sub,p32_disturbance_loss_ftype32(t,j,"aff",ac_sub))/card(ac_est);
-
-*p32_land(t,j,"aff",ac_sub) = p32_land(t,j,"aff",ac_sub) - p32_disturbance_loss_ftype32(t,j,"aff",ac_sub);
-
+* Disturbance from generic sources to managed and natural forests
 if((ord(t) = 1),
  pc32_land(j,type32,ac) = p32_land_start_ac(j,type32,ac);
 else
  pc32_land(j,type32,ac) = p32_land(t-1,j,type32,ac);
 );
 
-*****
-* Forest shock
-*****
 p32_disturbance_loss_ftype32(t,j,"aff",ac_sub) = pc32_land(j,"aff",ac_sub) * f32_forest_shock(t,"%c32_shock_scenario%") * m_timestep_length;
 pc32_land(j,"aff",ac_est) = pc32_land(j,"aff",ac_est) + sum(ac_sub,p32_disturbance_loss_ftype32(t,j,"aff",ac_sub))/card(ac_est);
 
 pc32_land(j,"aff",ac_sub) = pc32_land(j,"aff",ac_sub) - p32_disturbance_loss_ftype32(t,j,"aff",ac_sub);
-*****
-
-*****
-
-
-
 
 *' Regrowth of natural vegetation (natural succession) is modelled by shifting
 *' age-classes according to time step length. For first year of simulation, the
