@@ -12,7 +12,7 @@ $setglobal c14_yields_scenario  cc
 
 scalar s14_limit_calib   Relative managament calibration switch (1=limited 0=pure relative) / 1 /;
 
-scalar s14_calib_ir2rf   Switch to calibrate rainfed to irrigated yield ratios (1=calib 0=not calib) / 0 /;
+scalar s14_calib_ir2rf   Switch to calibrate rainfed to irrigated yield ratios (1=calib 0=not calib) / 1 /;
 
 scalars
   s14_yld_past_switch  Spillover parameter for translating technological change in the crop sector into pasture yield increases  (1)     / 0.25 /
