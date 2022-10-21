@@ -1,6 +1,6 @@
 
 # ------------------------------------------------
-# description: start run with default.cfg settings
+# description: Food scenarios for India
 # position: 1
 # ------------------------------------------------
 
@@ -21,7 +21,7 @@ general_settings <- function(title) {
 
   ##Downloading new input data
   cfg$force_download <- TRUE
-  cfg$info$flag <- "1910"
+  cfg$info$flag <- "2010"
   cfg$title       <- paste(cfg$info$flag,title,sep="_")
   cfg$results_folder <- "output/:title:"
   cfg$recalibrate <- FALSE
@@ -32,8 +32,6 @@ general_settings <- function(title) {
   cfg$gms$c15_exo_foodscen <- "lin_zero_20_30"                    # def = lin_zero_20_50
   #food specific diet scenario
   cfg$gms$c15_EAT_scen <- "FLX_hmilk"                # def = FLX
-  #Exogenous scenario applied only for India
-  cfg$gms$scen_countries15  <- "IND"
 
   #Setting pumping to 1
   cfg$gms$s42_pumping <- 1
@@ -58,7 +56,7 @@ general_settings2 <- function(title) {
 
   ##Downloading new input data
   cfg$force_download <- TRUE
-  cfg$info$flag <- "1910"
+  cfg$info$flag <- "2010"
   cfg$title       <- paste(cfg$info$flag,title,sep="_")
   cfg$results_folder <- "output/:title:"
   cfg$recalibrate <- FALSE
@@ -77,24 +75,51 @@ start_run(cfg, codeCheck=FALSE)
 ####################################################################333
 ##NIN
 
-cfg <- general_settings(title = "NIN")
+cfg <- general_settings(title = "NIN_India_EAT_others")
 #switch towards exogenous diet scenario
 cfg$gms$s15_exo_nin <- 1               # def = 0
+#Exogenous scenario applied only for India
+#cfg$gms$scen_countries15  <- "IND"
+
+start_run(cfg, codeCheck=FALSE)
+
+####################################################################333
+##NIN
+
+cfg <- general_settings(title = "NIN_India_endo_others")
+#switch towards exogenous diet scenario
+cfg$gms$s15_exo_nin <- 1               # def = 0
+#Exogenous scenario applied only for India
+cfg$gms$scen_countries15  <- "IND"
+
 start_run(cfg, codeCheck=FALSE)
 
 
 ####################################################################333
 ##EAT
 
-cfg <- general_settings(title = "EAT")
+cfg <- general_settings(title = "EAT_India_endo_others")
 #switch towards exogenous diet scenario
 cfg$gms$s15_exo_diet <- 1               # def = 0
+cfg$gms$scen_countries15  <- "IND"
+
 start_run(cfg, codeCheck=FALSE)
+
+
+####################################################################333
+##EAT
+
+cfg <- general_settings(title = "EAT_all")
+#switch towards exogenous diet scenario
+cfg$gms$s15_exo_diet <- 1               # def = 0
+
+start_run(cfg, codeCheck=FALSE)
+
 
 ####################################################################333
 ##NIN no_overweight
 
-cfg <- general_settings(title = "NIN_overweight")
+cfg <- general_settings(title = "NIN_no_overweight")
 #switch towards exogenous diet scenario
 cfg$gms$s15_exo_nin <- 1               # def = 0
 cfg$gms$c15_kcal_scen <- "no_overweight"
@@ -104,7 +129,7 @@ start_run(cfg, codeCheck=FALSE)
 ####################################################################333
 ## no_underweight scenario
 
-cfg <- general_settings(title = "NIN_underweight")
+cfg <- general_settings(title = "NIN_no_underweight")
 #switch towards exogenous diet scenario
 cfg$gms$s15_exo_nin <- 1               # def = 0
 cfg$gms$c15_kcal_scen <- "no_underweight"
@@ -114,7 +139,7 @@ start_run(cfg, codeCheck=FALSE)
 ####################################################################333
 ##NIN_nosugar/oil change scenario - when sugars and oils are allowed to be used as BAU and don't factor in transition
 
-cfg <- general_settings(title = "NIN_processed")
+cfg <- general_settings(title = "NIN_high_processed")
 #switch towards exogenous diet scenario
 cfg$gms$s15_exo_nin <- 1               # def = 0
 cfg$gms$s15_exo_sugar       <- 0   # def = 1, options: 0,1
@@ -124,7 +149,7 @@ start_run(cfg, codeCheck=FALSE)
 ####################################################################
 ##Only reduction in select commodities - processed food consumption
 
-cfg <- general_settings(title = "NIN_healthy")
+cfg <- general_settings(title = "NIN_no_processed")
 #switch towards exogenous diet scenario
 cfg$gms$s15_exo_nin <- 1               # def = 0
 cfg$gms$s15_exo_monogastric <- 0   # def = 1, options: 0,1
@@ -137,4 +162,14 @@ cfg$gms$s15_exo_oils        <- 1   # def = 1, options: 0,1
 cfg$gms$s15_exo_brans       <- 0   # def = 1, options: 0,1
 cfg$gms$s15_exo_scp         <- 0   # def = 1, options: 0,1
 
+start_run(cfg, codeCheck=FALSE)
+
+
+###################################################################
+# SSP3 diet scenario
+
+cfg <- general_settings(title = "SSP3")
+
+cfg$gms$c15_food_scenario <- "SSP3"                 # def = SSP2
+cfg$gms$c15_food_scenario_noselect <- "SSP3"        # def = SSP2
 start_run(cfg, codeCheck=FALSE)
