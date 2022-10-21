@@ -43,6 +43,5 @@ for (scenarioName in c(
 
     # Start runs
     cfg <- fsecScenario(scenario = scenarioName)
-    cfg$qos <- "standby"
     start_run(cfg = cfg, codeCheck = codeCheck)
 }
