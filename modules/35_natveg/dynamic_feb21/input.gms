@@ -35,7 +35,7 @@ $include "./modules/35_natveg/input/npi_ndc_ad_aolc_pol.cs3"
 $offdelim
 ;
 
-table f35_forest_shock(t_all, shock_scen) Forest carbon shock scenarios (1)
+table f35_forest_shock(t_all, shock_scen) Forest carbon shock scenarios (area share affected per year)
 $ondelim
 $include "./modules/35_natveg/input/f35_forest_shock.csv"
 $offdelim

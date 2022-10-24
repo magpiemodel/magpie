@@ -16,9 +16,6 @@ sets
  type32 plantation type
  / aff, ndc, plant /
 
- type_noplant(type32) subset removing plantations from type32
- / aff, ndc /
-
  pol32 afforestation policy type
  / none, npi, ndc /
 
@@ -45,7 +42,7 @@ scen32 Scenario for development of roundwood production share from plantations
 / constant,h5s5l5,h5s2l2,h5s2l1,h5s1l1,h5s1l05,h2s1l05 /
 
  shock_scen32 Scenario name of forest carbon shock
- / none, 01lin2030,02lin2030,04lin2030,08lin2030
+ / none, 002lin2030,004lin2030,008lin2030,016lin2030
   /
 
 ;

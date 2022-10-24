@@ -8,7 +8,7 @@ $setglobal c32_timber_plantations  plantations
 * option: natveg, plantations
 $setglobal c32_aff_mask  noboreal
 * options: unrestricted, noboreal, onlytropical
-$setglobal c32_aff_policy  ndc
+$setglobal c32_aff_policy  npi
 * options: none, npi, ndc
 $setglobal c32_aff_bgp  nobgp
 * options: ann,nobgp
@@ -126,7 +126,7 @@ $include "./modules/32_forestry/input/f32_estb_calib.cs4"
 $offdelim
 /;
 
-table f32_forest_shock(t_all, shock_scen32) Forest carbon shock scenarios (1)
+table f32_forest_shock(t_all, shock_scen32) Forest carbon shock scenarios (area share affected per year)
 $ondelim
 $include "./modules/32_forestry/input/f32_forest_shock.csv"
 $offdelim

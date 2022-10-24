@@ -87,7 +87,6 @@ p32_land(t,j,type32,ac_est) = 0;
 
 
 ** Calculate v32_land.l
-* .lo lower bound?
 v32_land.l(j,type32,ac) = p32_land(t,j,type32,ac);
 pc32_land(j,type32,ac) = v32_land.l(j,type32,ac);
 p32_land_before(t,j,type32,ac) = p32_land(t,j,type32,ac);
