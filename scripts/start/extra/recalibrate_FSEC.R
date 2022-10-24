@@ -23,7 +23,6 @@ cfg$title <- "FSEC14Oct22"
 cfg$results_folder                  <- "output/:title:"
 cfg$recalibrate                     <- TRUE
 cfg$recalibrate_landconversion_cost <- TRUE
-#cfg$best_calib                      <- TRUE # for sticky implementation (does not apply anymore)
 cfg$output                          <- c("rds_report", "validation_short")
 cfg$force_replace                   <- TRUE
 start_run(cfg, codeCheck = FALSE)
