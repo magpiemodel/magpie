@@ -25,7 +25,7 @@ $setglobal c32_rot_calc_type  current_annual_increment
 $setglobal c32_rot_calc_type  current_annual_increment
 * options mean_annual_increment, current_annual_increment, instantaneous_growth_rate
 $setglobal c32_shock_scenario  none
-* options none 01lin2030 02lin2030 04lin2030 08lin2030
+* options none 002lin2030 004lin2030 008lin2030 016lin2030
 
 
 scalars
