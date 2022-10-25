@@ -58,6 +58,7 @@ parameters
  p32_avg_increment(t_all,j,ac)                      Mean annual increment (tC per ha per year)
  p32_bii_coeff(type32,bii_class_secd,potnatveg)	    bii coeff (1)
  p32_c_density_ac_fast_forestry(t_all,j,ac)         Carbon densities in plantations based on Braakhekke et al (tC per ha)
+ p32_disturbance_loss_ftype32(t,j,type32,ac)        Loss due to disturbances in all plantation type forests (mio. ha)
 ;
 
 positive variables

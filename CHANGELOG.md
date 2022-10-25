@@ -57,6 +57,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **15_food** added new realization with country level exogenous diets, product-specific intake estimates, new scenarios for exogenous BMI and decomposition switches for EAT Lancet diets. Simplified code and improved iteration procedure.
 - **57_maccs** added new Marginal Abatement Cost Curve (MACCs) data set from PBL (PBL2022)
 - **14_yields** added input file containing AQUASTAT yield calibration factors and switch `s14_calib_ir2rf` in default.cfg to activate this yield calibration
+- **f32_forest** added the option to run generic disturbance scenarios of secondary forest types determined in `f32_forest_shock.csv`
+- **f35_natveg** added the option to run generic disturbance scenarios of primary forest determined in `f35_forest_shock.csv`
 
 ### removed
 - **38_factor_costs** removed `mixed_reg_feb17` realization
