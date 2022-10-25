@@ -9,7 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+
 - **config** Updated default realization of 15_food from anthropometrics_jan18 to anthro_iso_jun22
+- **scripts** FSEC start scripts and related config files to introduce new scenarios
 - **scripts** quit with exit code = gams status at the end of submit.R
 - **scripts** fix in start_functions for the calibration setting `ifneeded`
 - **config** best_calib set to FALSE in default
@@ -31,13 +33,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** update of rds_report to allow gridded intermediate outputs
 - **config** non-food system emission MAGICC switch
 - **scripts** output/extra/disaggregation_BII.R adjusted BII output for primary and secondary other land
-- **59_som** Now calculates soil C for fallow
+- **59_som** Now calculates soil C for fallow and urban areas
 - **inputs** updated non-food initial prices, MACCs curves, and removed suitability threshold of 0.1 in all_marginal setting
 - **documentation** added literature
 - **scripts/start** cleanup of old start scripts
 - **scripts** log files are now written in a subfolder "logs"
 - **config** adjusted PR template
 - **scripts** added single time step run to test runs
+- **52_carbon** Soil C of urban areas set to soil C of natural other land
 
 ### added
 - **scripts** added output script creating a set of outputs for Alessandro Passaro in the FSEC context
