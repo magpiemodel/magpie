@@ -112,7 +112,7 @@
  q18_cost_prod_res(i2,kres) ..
                   vm_cost_prod_kres(i2,kres)
                   =e=
-                  vm_prod_reg(i2,kres)*f18_fac_req_kres(kres);
+                  vm_prod_reg(i2,kres) * fm_attributes("wm",kres) *  f18_fac_req_kres(kres);
 
 *' Trade of AG residues is not considered, so that all produced AG residues have
 *' to be assigned to uses within the respective world region.
