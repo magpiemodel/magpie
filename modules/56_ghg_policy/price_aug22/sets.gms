@@ -98,7 +98,13 @@ sets
       sdp_redd_soil_peat,
       sdp_all,
       gcs_lbs,
-      gcs_res /
+      gcs_res,
+      ecoSysProtAll,
+      ecoSysProtForest,
+      ecoSysProtPrimForest,
+      ecoSysProtOff,
+      ecoSysProtAll_agMgmtExclN2O,
+      ecoSysProtAll_agMgmtExclCH4 /
 
 ;
 *######################### R SECTION END (SETS) ################################
