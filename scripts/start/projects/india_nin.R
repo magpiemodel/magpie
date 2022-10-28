@@ -21,7 +21,7 @@ general_settings <- function(title) {
 
   ##Downloading new input data
   cfg$force_download <- TRUE
-  cfg$info$flag <- "2010"
+  cfg$info$flag <- "2810"
   cfg$title       <- paste(cfg$info$flag,title,sep="_")
   cfg$results_folder <- "output/:title:"
   cfg$recalibrate <- FALSE
@@ -56,7 +56,7 @@ general_settings2 <- function(title) {
 
   ##Downloading new input data
   cfg$force_download <- TRUE
-  cfg$info$flag <- "2010"
+  cfg$info$flag <- "2810"
   cfg$title       <- paste(cfg$info$flag,title,sep="_")
   cfg$results_folder <- "output/:title:"
   cfg$recalibrate <- FALSE
@@ -144,6 +144,9 @@ cfg <- general_settings(title = "NIN_high_processed")
 cfg$gms$s15_exo_nin <- 1               # def = 0
 cfg$gms$s15_exo_sugar       <- 0   # def = 1, options: 0,1
 cfg$gms$s15_exo_oils        <- 0   # def = 1, options: 0,1
+cfg$gms$s15_exo_alcohol     <- 0 # default: 1
+  
+
 start_run(cfg, codeCheck=FALSE)
 
 ####################################################################
@@ -161,6 +164,8 @@ cfg$gms$s15_exo_sugar       <- 1   # def = 1, options: 0,1
 cfg$gms$s15_exo_oils        <- 1   # def = 1, options: 0,1
 cfg$gms$s15_exo_brans       <- 0   # def = 1, options: 0,1
 cfg$gms$s15_exo_scp         <- 0   # def = 1, options: 0,1
+cfg$gms$s15_exo_alcohol     <- 1 # default: 1
+
 
 start_run(cfg, codeCheck=FALSE)
 
