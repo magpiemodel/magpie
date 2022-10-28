@@ -32,7 +32,7 @@ if (!exists("source_include")) {
 # -----------------------------------------------------------------------------------------------------------------
 # Merge dietary outputs from multiple FSEC scenarios into two .csv files
 
-message("Merging dietary outputs")
+message("Merging dietary outputs into \"caloricSupply.csv\" and \"dietaryIndicators.csv\"")
 
 caloricSupply_mergePath     <- file.path("output", "caloricSupply.csv")
 dietaryIndicators_mergePath <- file.path("output", "dietaryIndicators.csv")
@@ -42,7 +42,6 @@ if (file.exists(caloricSupply_mergePath) || file.exists(dietaryIndicators_mergeP
     file.remove(caloricSupply_mergePath, dietaryIndicators_mergePath)
 }
 
-message("Creating merge files \"caloricSupply.csv\" and \"dietaryIndicators.csv\"")
 file.create(caloricSupply_mergePath, dietaryIndicators_mergePath)
 
 .writeDietaryIndicators <- function(.dir) {
@@ -76,12 +75,10 @@ file.create(caloricSupply_mergePath, dietaryIndicators_mergePath)
     }
 }
 
-message("Writing dietary datasets")
-
 # Only merge dietary indicators from selected, dietary-related, scenarios
 dietRelatedScenarios <- c("c_BAU",
-                          "d_SSP1bau", "d_SSP3bau", "d_SSP4bau", "d_SSP5bau",
-                          "d_SSP1fsdp", "d_SSP3fsdp", "d_SSP4fsdp", "d_SSP5fsdp",
+                          "d_SSP1bau", "d_SSP1PLUSbau", "d_SSP2bau", "d_SSP3bau", "d_SSP4bau", "d_SSP5bau",
+                          "d_SSP1fsdp", "d_SSP1PLUSfsdp", "d_SSP2fsdp", "d_SSP3fsdp", "d_SSP4fsdp", "d_SSP5fsdp",
                           "a_NoUnderweight", "a_NoOverweight",
                           "a_DietVegFruitsNutsSeeds", "a_DietMonogastrics", "a_DietRuminants",
                           "a_DietLegumes", "a_DietEmptyCals", "a_DietFish",
@@ -101,16 +98,14 @@ lapply(X = outputdir_diets, FUN = .writeDietaryIndicators)
 # -----------------------------------------------------------------------------------------------------------------
 # Produce .gdx files from two .csv files for Marco Springmann
 
-message("Saving dietaryIndicators.csv and caloricSupply.csv as .gdx files")
-
 with_dir(file.path("output"), {
     gamsScript <- "csv2gdx_dietaryIndicators.gms"
     gamsScriptLst <- "csv2gdx_dietaryIndicators.lst"
     file.create(gamsScript)
     cat("$call csv2gdx dietaryIndicators.csv output=dietaryIndicators.gdx id=dietaryIndicators index=1..6 values=7..11 useHeader=y\n",
-        file = gamsScript, append = T)
+        file = gamsScript, append = TRUE)
     cat("$call csv2gdx caloricSupply.csv output=caloricSupply.gdx id=caloricSupply index=1,2,3,4 values=5 useHeader=y",
-        file = gamsScript, append = T)
+        file = gamsScript, append = TRUE)
     gams(gamsScript)
     file.remove(gamsScript)
     file.remove(gamsScriptLst)
