@@ -80,6 +80,6 @@ i59_cratio_fallow(j) = sum(climate59,
                 * f59_cratio_inputs(climate59,"low_input"));
 *' @stop
 
-p59_carbon_density(t,j,pools59)=0;
+p59_carbon_density(t,j,pools59) = 0;
 
 p59_land_before(j,land) = pm_land_start(j,land);
