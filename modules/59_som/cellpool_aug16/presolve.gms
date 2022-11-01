@@ -26,5 +26,5 @@ p59_som_pool(j,"primforest") = p59_som_pool(j,"primforest") -
                                (p59_land_before(j,"primforest") - pcm_land(j,"primforest")) *
                                                 p59_carbon_density(t-1,j,"primforest");
 
-p59_carbon_density(t,j,noncropland59)$(pcm_land(j,noncropland59)>0.000001) = p59_som_pool(j,noncropland59)/pcm_land(j,noncropland59);
-p59_carbon_density(t,j,"crop")$(pcm_land(j,"crop")>0.000001) = p59_som_pool(j,"crop") / pcm_land(j,"crop");
+p59_carbon_density(t,j,noncropland59)$(pcm_land(j,noncropland59)>10e-20) = p59_som_pool(j,noncropland59) / pcm_land(j,noncropland59);
+p59_carbon_density(t,j,"crop")$(pcm_land(j,"crop")>10e-20) = p59_som_pool(j,"crop") / pcm_land(j,"crop");
