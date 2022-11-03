@@ -7,10 +7,10 @@
 
 
 * SOM pools and densities will be updated after natural regrowth and disturbance loss accounting.
-* The secondary forest pool will receive carbon from primary forest (due to natural disturbance) 
+* The secondary forest pool will receive carbon from primary forest (due to natural disturbance)
 * and from other land (due to regrowth).
-* Note: This will only account for transitions of primary forest to secondary forest and 
-* other land to secondary forest. See current version of 35_natveg to check consistency. 
+* Note: This will only account for transitions of primary forest to secondary forest and
+* other land to secondary forest. See current version of 35_natveg to check consistency.
 
 p59_som_pool(j,"secdforest") = p59_som_pool(j,"secdforest") +
                                (p59_land_before(j,"primforest") - pcm_land(j,"primforest")) *
@@ -26,5 +26,5 @@ p59_som_pool(j,"primforest") = p59_som_pool(j,"primforest") -
                                (p59_land_before(j,"primforest") - pcm_land(j,"primforest")) *
                                                 p59_carbon_density(t-1,j,"primforest");
 
-p59_carbon_density(t,j,noncropland59)$(pcm_land(j,noncropland59)>0) = p59_som_pool(j,noncropland59)/pcm_land(j,noncropland59);
-p59_carbon_density(t,j,"crop")$(pcm_land(j,"crop")>0)=  p59_som_pool(j,"crop") / pcm_land(j,"crop");
+p59_carbon_density(t,j,noncropland59)$(pcm_land(j,noncropland59)>0) = p59_som_pool(j,noncropland59) / pcm_land(j,noncropland59);
+p59_carbon_density(t,j,"crop")$(pcm_land(j,"crop")>0) = p59_som_pool(j,"crop") / pcm_land(j,"crop");

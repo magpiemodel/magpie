@@ -5,12 +5,9 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_carbon_stock.fx(j,"urban",ag_pools,stockType) = 0;
+table fm_multicropping(t_all,i) Multicropping indicator as ratio of area harvested by physical area (1)
+$ondelim
+$include "./modules/18_residues/input/f18_multicropping.csv"
+$offdelim;
 
-if(ord(t) = 1,
-	vm_land.fx(j,"urban") = i34_urban_area(t,j);
-else
-	vm_land.lo(j,"urban") = 0;
-	vm_land.l(j,"urban") = i34_urban_area(t,j);
-	vm_land.up(j,"urban") = Inf;
-);
+*** EOF input.gms ***
