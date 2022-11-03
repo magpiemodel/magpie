@@ -250,15 +250,59 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   cfg$results_folder <- gsub(":title:", cfg$title, cfg$results_folder, fixed=TRUE)
 
   # Create output folder
-  if (!file.exists(cfg$results_folder)) {
-    dir.create(cfg$results_folder, recursive=TRUE, showWarnings=FALSE)
-	} else if (cfg$force_replace) {
-    cat("Deleting results folder because it already exists:",cfg$results_folder,"\n")
-    unlink(cfg$results_folder, recursive = TRUE)
-    dir.create(cfg$results_folder, recursive = TRUE, showWarnings = FALSE)
+  if (file.exists(cfg$results_folder)) {
+    if (cfg$force_replace) {
+      message("Deleting results folder because it already exists:", cfg$results_folder)
+      unlink(cfg$results_folder, recursive = TRUE)
+    } else {
+      stop(paste0("Results folder ", cfg$results_folder,
+                  " could not be created because it already exists."))
+    }
+  }
+  dir.create(cfg$results_folder, recursive = TRUE)
+
+  # only use renv for runs if main renv is used (i.e. we are not in snapshot mode)
+  if (is.null(renv::project())) {
+    message("No active renv project found, not using renv.")
   } else {
-    stop(paste0("Results folder ",cfg$results_folder,
-                " could not be created because is already exists."))
+    if (!renv::status()$synchronized) {
+      message("The new run will use the package environment defined in renv.lock, ",
+              "but it is out of sync, probably because you installed packages/updates manually. ",
+              "Write current package environment into renv.lock first? (Y/n)", appendLF = FALSE)
+      if (tolower(gms::getLine()) %in% c("y", "yes", "")) {
+        renv::snapshot(prompt = FALSE)
+      }
+    }
+
+    if (getOption("autoRenvUpdates", FALSE)) {
+      source("scripts/utils/updateRenv.R")
+    } else {
+      # TODO create a lucode2 function for checking/installing updates to pik packages?
+      packagesUrl <- "https://pik-piam.r-universe.dev/src/contrib/PACKAGES"
+      pikPackages <- sub("^Package: ", "", grep("^Package: ", readLines(packagesUrl), value = TRUE))
+      installed <- utils::installed.packages()
+      outdatedPackages <- utils::old.packages(instPkgs = installed[installed[, "Package"] %in% pikPackages, ])
+      if (!is.null(outdatedPackages)) {
+        message("The following PIK packages can be updated:\n",
+                paste("-", outdatedPackages[, "Package"], ":",
+                      outdatedPackages[, "Installed"], "->", outdatedPackages[, "ReposVer"],
+                      collapse = "\n"),
+                "\nConsider updating with `Rscript scripts/utils/updateRenv.R`.")
+      }
+    }
+
+    createResultsfolderRenv <- function(resultsfolder, lockfile) {
+      # use same snapshot.type so renv::status()$synchronized always uses the same logic
+      renv::init(resultsfolder)
+
+      # restore same renv as main renv
+      file.copy(lockfile, resultsfolder, overwrite = TRUE)
+      renv::restore(lockfile = file.path(resultsfolder, basename(lockfile)), prompt = FALSE)
+    }
+    # init renv in a separate session so the libPaths of the current session remain unchanged
+    callr::r(createResultsfolderRenv,
+              list(normalizePath(cfg$results_folder), normalizePath(renv::paths$lockfile())),
+              show = TRUE)
   }
 
   # If reports for both bioenergy and GHG prices are available convert them
@@ -539,8 +583,8 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
   mag <- deletePlus(rep) #delete "+" and "++" from variable names
 
   if(!("y1995" %in% getYears(mag))){
-  	empty95<-mag[,1,];empty95[,,]<-0;dimnames(empty95)[[2]] <- "y1995"
-  	mag <- mbind(empty95,mag)
+    empty95<-mag[,1,];empty95[,,]<-0;dimnames(empty95)[[2]] <- "y1995"
+    mag <- mbind(empty95,mag)
   }
   years <- 1990+5*(1:32)
   mag <- time_interpolate(mag,years)
