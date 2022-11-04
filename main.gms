@@ -219,7 +219,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  GTAPBilat_ON
+$setglobal c_title  default
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
@@ -242,7 +242,7 @@ $setglobal production  flexreg_apr16
 $setglobal residues  flexreg_apr16
 $setglobal processing  substitution_may21
 
-$setglobal trade  selfsuff_reduced_bilateral
+$setglobal trade  selfsuff_reduced
 $setglobal land_conservation  area_based_apr22
 
 $setglobal ageclass  feb21
