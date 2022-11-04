@@ -195,16 +195,20 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing, outputdir[i])
 
     #add dimensions
-    y <- add_dimension(y, dim = 3.1, add = "scenario", nm = gsub(".", "_", cfg$title, fixed = TRUE))
-    y <- add_dimension(y, dim = 3.1, add = "model", nm = "MAgPIE")
-    getSets(y, fulldim = FALSE)[2] <- "period"
 
-    #save as data.frame with xy coordinates
-    y <- as.data.table(as.data.frame(y, rev = 3))
+    if (is.null(y)) {
+      message("Scenario: ", cfg$title, " contained none of the cellular output data.")
+    } else {
+      y <- add_dimension(y, dim = 3.1, add = "scenario", nm = gsub(".", "_", cfg$title, fixed = TRUE))
+      y <- add_dimension(y, dim = 3.1, add = "model", nm = "MAgPIE")
+      getSets(y, fulldim = FALSE)[2] <- "period"
 
-    #bind together
-    grid <- rbind(grid, y)
+      #save as data.frame with xy coordinates
+      y <- as.data.table(as.data.frame(y, rev = 3))
 
+      #bind together
+      grid <- rbind(grid, y)
+    }
   }
 }
 
