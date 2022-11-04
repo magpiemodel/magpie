@@ -236,3 +236,5 @@ heatmapFSDP(reg, tableType = 1,    file = file.path("output", paste(rev, "FSDP_h
 heatmapFSDP(reg, tableType = "2a", file = file.path("output", paste(rev, "FSDP_heatmap2a.jpg", sep = "")))
 heatmapFSDP(reg, tableType = 3,    file = file.path("output", paste(rev, "FSDP_heatmap3.jpg", sep = "_")))
 spatialMapsFSDP(reg, iso, grid, reg2iso, file = file.path("output", paste(rev, "FSDP_spatialMaps.jpg", sep = "_")))
+supplPlotsFSDP(reg, scenarioType = "all", file = file.path("output", paste(rev, "FSDP_supplPlots.jpg", sep = "_")))
+SupplPlotsCropShr(gdx = gdx, file = file.path("output", paste(rev, "FSDP_supplPlotCropShr.jpg", sep = "_")) )
