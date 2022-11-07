@@ -275,24 +275,12 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
     }
 
     if (getOption("autoRenvUpdates", FALSE)) {
-      source("scripts/utils/updateRenv.R")
-    } else {
-      # TODO create a lucode2 function for checking/installing updates to pik packages?
-      packagesUrl <- "https://pik-piam.r-universe.dev/src/contrib/PACKAGES"
-      pikPackages <- sub("^Package: ", "", grep("^Package: ", readLines(packagesUrl), value = TRUE))
-      installed <- utils::installed.packages()
-      outdatedPackages <- utils::old.packages(instPkgs = installed[installed[, "Package"] %in% pikPackages, ])
-      if (!is.null(outdatedPackages)) {
-        message("The following PIK packages can be updated:\n",
-                paste("-", outdatedPackages[, "Package"], ":",
-                      outdatedPackages[, "Installed"], "->", outdatedPackages[, "ReposVer"],
-                      collapse = "\n"),
-                "\nConsider updating with `Rscript scripts/utils/updateRenv.R`.")
-      }
+      source("scripts/renv_scripts/updateRenv.R")
+    } else if (!is.null(lucode2::showUpdates())) {
+      message("Consider updating with `Rscript scripts/renv_scripts/updateRenv.R`.")
     }
 
     createResultsfolderRenv <- function(resultsfolder, lockfile) {
-      # use same snapshot.type so renv::status()$synchronized always uses the same logic
       renv::init(resultsfolder)
 
       # restore same renv as main renv
@@ -301,8 +289,8 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
     }
     # init renv in a separate session so the libPaths of the current session remain unchanged
     callr::r(createResultsfolderRenv,
-              list(normalizePath(cfg$results_folder), normalizePath(renv::paths$lockfile())),
-              show = TRUE)
+             list(normalizePath(cfg$results_folder), normalizePath(renv::paths$lockfile())),
+             show = TRUE)
   }
 
   # If reports for both bioenergy and GHG prices are available convert them
