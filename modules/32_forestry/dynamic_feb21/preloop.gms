@@ -298,3 +298,9 @@ elseif s32_aff_bii_coeff = 1,
 );
 p32_bii_coeff("ndc",bii_class_secd,potnatveg) = fm_bii_coeff(bii_class_secd,potnatveg);
 p32_bii_coeff("plant",bii_class_secd,potnatveg) = fm_bii_coeff("timber",potnatveg);
+
+* initialize parameter
+p32_land(t,j,type32,ac) = 0;
+
+* initialize forest disturbance losses
+p32_disturbance_loss_ftype32(t,j,"aff",ac) = 0;

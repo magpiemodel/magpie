@@ -14,7 +14,7 @@ fsecScenario <- function(scenario) {
   source("config/default.cfg")
 
   # Version number
-  v <- "v24_FSEC"
+  v <- "v26_FSEC"
 
   x <- list(c_BAU            = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = "FSEC"),
@@ -31,14 +31,14 @@ fsecScenario <- function(scenario) {
                                   fsec = c("FSEC", "SSP4")),
             d_SSP5bau        = list(standard = c("cc", "rcp8p5", "SSP5", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP5")),
-            d_SSP1fsdp       = list(standard = c("cc", "rcp4p5", "SSP1", "NDC", "ForestryEndo"),
+            d_SSP1PLUSfsdp   = list(standard = c("cc", "rcp2p6", "SSP1", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP1",
+                                  "energy", "bioplastics", "population", "institutions", "timberCities",
                                   "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "minWage",
                                   "REDDaff", "REDD", "landSharing", "landSparing", "waterSparing", "peatland",
                                   "airPollution", "soil", "allDietAndWaste", "allEnvPrice")),
-            d_SSP1PLUSfsdp       = list(standard = c("cc", "rcp2p6", "SSP1", "NDC", "ForestryEndo"),
+            d_SSP1fsdp       = list(standard = c("cc", "rcp4p5", "SSP1", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP1",
-                                  "energy", "bioplastics", "population", "institutions", "timberCities",
                                   "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "minWage",
                                   "REDDaff", "REDD", "landSharing", "landSparing", "waterSparing", "peatland",
                                   "airPollution", "soil", "allDietAndWaste", "allEnvPrice")),
@@ -126,6 +126,7 @@ fsecScenario <- function(scenario) {
             # FSDP (all transformations active)
             e_FSDP = list(standard = c("cc", "rcp2p6", "SSP1", "NDC", "ForestryEndo"),
                         fsec = c("FSEC",
+                        "energy", "bioplastics", "population", "institutions", "timberCities",
                         "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "minWage",
                         "REDDaff", "REDD", "landSharing", "landSparing", "waterSparing", "peatland",
                         "airPollution", "soil", "allDietAndWaste", "allEnvPrice")),
@@ -205,12 +206,12 @@ fsecScenario <- function(scenario) {
                        "projects/FSEC_costs",
                        "projects/FSEC_nitrogenPollution",
                        "runBlackmagicc",
-                       "FSDP_process",
+                       "projects/FSDP_process",
                        "projects/FSEC_StevenLord",
                        "projects/FSEC_SimonDietz",
                        "projects/FSEC_AlessandroPassaro"
                        )
-  cfg$force_download    <- TRUE
+  cfg$force_download <- TRUE
 
   return(cfg)
 }
