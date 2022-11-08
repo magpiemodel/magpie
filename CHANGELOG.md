@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **config** updated default realization of 15_food from anthropometrics_jan18 to anthro_iso_jun22
+- **config** updated SHAPE SDP scenarios in scenario_config.csv
 - **18_residues** bugfix in `q18_cost_prod_res`
 - **scripts** updated FSEC start scripts and related config files to introduce new scenarios
 - **scripts** quit with exit code = gams status at the end of submit.R
