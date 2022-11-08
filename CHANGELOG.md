@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
-- **scripts** FSEC start scripts and related config files to introduce new scenarios
+- **18_residues** bugfix in `q18_cost_prod_res`
+- **scripts** updated FSEC start scripts and related config files to introduce new scenarios
 - **scripts** quit with exit code = gams status at the end of submit.R
 - **scripts** fix in start_functions for the calibration setting `ifneeded`
 - **config** best_calib set to FALSE in default
@@ -39,8 +40,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **config** adjusted PR template
 - **scripts** added single time step run to test runs
 - **52_carbon** Soil C of urban areas set to soil C of natural other land
+- **57_maccs** default changed from PBL2007 to PBL2022
 
 ### added
+- **56_ghg_policy** added new ecosystem protection scenarios
 - **scripts** added output script creating a set of outputs for Alessandro Passaro in the FSEC context
 - **50_nr_soil_budget** new module realization for more consistent MACCs implementation. change of interface from vm_btm_reg to vm_emissions_reg
 - **53_methane** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
