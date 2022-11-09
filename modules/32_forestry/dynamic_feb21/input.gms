@@ -24,6 +24,9 @@ $setglobal c32_rot_calc_type  current_annual_increment
 * option  max_increment, max_npv
 $setglobal c32_rot_calc_type  current_annual_increment
 * options mean_annual_increment, current_annual_increment, instantaneous_growth_rate
+$setglobal c32_shock_scenario  none
+* options none 002lin2030 004lin2030 008lin2030 016lin2030
+
 
 scalars
   s32_hvarea                      Flag for harvested area and establishemt (0=zero 1=exognous 2=endogneous)	/ 0 /
@@ -122,3 +125,9 @@ $ondelim
 $include "./modules/32_forestry/input/f32_estb_calib.cs4"
 $offdelim
 /;
+
+table f32_forest_shock(t_all, shock_scen32) Forest carbon shock scenarios (area share affected per year)
+$ondelim
+$include "./modules/32_forestry/input/f32_forest_shock.csv"
+$offdelim
+;

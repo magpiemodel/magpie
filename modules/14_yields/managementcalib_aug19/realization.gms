@@ -12,6 +12,8 @@
 *' yields achieved under the highest currently observed value of the $\tau$ factor
 *' representing agricultural land-use intensity. Secondly, pasture yields are calculated
 *' based on pasture demand to account for in- and extensification of managed grasslands.
+*' Thirdly, irrigated yields are scaled to meet the irrigated-to-rainfed yield
+*' ratio as provided by AQUASTAT [@fao_aquastat_2016].
 *' Finally, crop yields are calibrated to FAO [@FAOSTAT] regional yield levels of the
 *' initial time step. An additional feature of this realization is to allow crop yields
 *' technological change from the precedent times step to spillover to pasture areas. This
@@ -20,7 +22,7 @@
 
 *' @limitations The exogenous implementation of pasture intensification cannot
 *' capture feedbacks between land scarcity and efforts to improve pasture
-*' management. And, the magnitude of spillover effects from technological change
+*' management. Moreover, the magnitude of spillover effects from technological change
 *' in  the crop sector towards improvements in pasture management is very uncertain.
 
 

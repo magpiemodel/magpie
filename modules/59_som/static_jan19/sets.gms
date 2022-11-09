@@ -7,7 +7,7 @@
 
 sets
 noncropland59(land) Soil carbon conserving landuse types
-/past, forestry, primforest, secdforest, other/
+/past, forestry, primforest, secdforest, other, urban/
 
 exo_scen59 exogenous scenarios for soil organic matter loss
 /constant, fadeout_2050/

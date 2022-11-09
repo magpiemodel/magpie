@@ -82,7 +82,7 @@
                    desc = "emission policy scenarios",
                    items = scen56))
 
-  gms::writeSets(sets, "modules/56_ghg_policy/price_jan20/sets.gms")
+  gms::writeSets(sets, "modules/56_ghg_policy/price_aug22/sets.gms")
 
   ### 60_bioenergy
   scen2nd60 <- magclass::read.magpie("modules/60_bioenergy/input/f60_bioenergy_dem.cs3")
@@ -380,9 +380,15 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   # Yield calibration
   calib_file <- "modules/14_yields/input/f14_yld_calib.csv"
   if(cfg$recalibrate=="ifneeded") {
-    # recalibrate if file does not exist
-    if(!file.exists(calib_file)) cfg$recalibrate <- TRUE else cfg$recalibrate <- FALSE
-  }
+    if(!file.exists(calib_file)) {
+      # recalibrate if file does not exist
+      cfg$recalibrate <- TRUE 
+    } else {
+      # recalibrate if all calibration factors are 1, otherwise don't
+      cfg$recalibrate <- all(magclass::read.magpie(calib_file)==1)
+    }
+  }  
+
   if(cfg$recalibrate){
     cat("Starting yield calibration factor calculation!\n")
     source("scripts/calibration/calc_calib.R")
