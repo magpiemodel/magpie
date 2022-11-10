@@ -235,7 +235,7 @@ $setglobal interest_rate  select_apr20
 $setglobal tc  endo_jan22
 $setglobal yields  managementcalib_aug19
 
-$setglobal food  anthropometrics_jan18
+$setglobal food  anthro_iso_jun22
 $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 
