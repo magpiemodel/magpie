@@ -15,10 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -
 
 ### removed
--
+- **10_land** removed `feb15` realization
 
 ### fixed
--
+- **59_som** fixed land use change tracking for non-cropland pools in the `cellpool_aug16` realization
 
 
 ## [4.6.0] - 2022-11-09
