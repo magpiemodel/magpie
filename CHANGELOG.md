@@ -12,13 +12,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -
 
 ### added
--
+- **39_landconversion** scalar `s39_reward_crop_reduction` provides a crop reduction reward
 
 ### removed
 - **scripts** removed remind2::deletePlus in coupling interface of start_function
+- **39_landconversion** removed `s39_reward_shr`
 
 ### fixed
--
+- **scripts** rewrite of land conversion cost calibration script `landconversion_cost.R`
 
 
 ## [4.6.0] - 2022-11-09
