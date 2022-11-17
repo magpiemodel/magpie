@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*#################### R SECTION START (OUTPUT DEFINITIONS) #####################
+*#################### R SECTION START (OUTPUT DEFINITIONS) ####################
  ov21_excess_dem(t,k_trade,"marginal")           = v21_excess_dem.m(k_trade);
  ov21_excess_prod(t,h,k_trade,"marginal")        = v21_excess_prod.m(h,k_trade);
  ov_cost_trade(t,i,"marginal")                   = vm_cost_trade.m(i);

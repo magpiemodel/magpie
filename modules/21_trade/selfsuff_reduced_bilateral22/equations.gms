@@ -13,12 +13,12 @@
   sum(i2 ,vm_prod_reg(i2,k_trade)) =g=
   sum(i2, vm_supply(i2,k_trade)) + sum(ct,f21_trade_balanceflow(ct,k_trade));
 
-*' amount produced regionally must be equal to supply + net trade
+*' amount produced superregionally must be equal to supply + net trade
 q21_trade_bilat(h2,k_trade)..
  sum(supreg(h2, i2), vm_prod_reg(i2, k_trade)) =g= sum(supreg(h2,i2), (vm_supply(i2, k_trade) -
                               sum(i_ex, v21_trade(i_ex, i2, k_trade))  + sum(i_im, v21_trade(i2, i_im, k_trade))));
 
-*' For non-tradable commodites, the regional supply should be larger or equal to the regional demand.
+*' For non-tradable commodities, the regional supply should be larger or equal to the regional demand.
  q21_notrade(h2,k_notrade)..
   sum(supreg(h2,i2),vm_prod_reg(i2,k_notrade)) =g= sum(supreg(h2,i2), vm_supply(i2,k_notrade));
 

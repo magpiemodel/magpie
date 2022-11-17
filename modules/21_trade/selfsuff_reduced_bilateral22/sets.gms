@@ -10,7 +10,7 @@ sets
     / y1995, y2000, y2005, y2010 /
 
 *sets need to be adopted to new categories
-   k_notrade(kall) Production activities of non-tradable commodites
+   k_notrade(kall) Production activities of non-tradable commodities
        / oilpalm, foddr, pasture, res_cereals, res_fibrous, res_nonfibrous,begr,betr /
 * oilpalm not traded, only its oil and oilcake due to FAOSTAT complications, and as trade is little
 * foddr is not traded as too bulky
