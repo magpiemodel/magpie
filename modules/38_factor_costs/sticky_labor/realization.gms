@@ -6,8 +6,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description This realization is based on sticky_feb18, but in addition includes a 
-*' CES production function, which 
-*' accounts for climate change impacts on labor productivity provided by [37_labor_prod]. 
+*' CES production function, which accounts for climate change impacts on labor productivity
+*' provided by [37_labor_prod], and wage increase impact on labor productivity based on 
+*' wages in [36_employment]. 
 *' The main goal of this realization is to improve crop patterns at different spatial
 *' scales. Specifically, the goal is reached by reducing capital relocation flexibility between
 *' crop types. In the "sticky" realization, the factor costs are separated into variable labor cost and

@@ -48,6 +48,7 @@ suppressWarnings(dir.create(reportOutputDir))
 
 message("Generating Simon Dietz's output for the run: ", title)
 
-out <- getReportSimonDietz(magpieOutputDir = outputdir,
-                           reportOutputDir = reportOutputDir,
-                           scenario = title)
+out <- getReportFSECSimonDietz(magpieOutputDir = outputdir,
+                               reportOutputDir = reportOutputDir,
+                               scenario = title)
+

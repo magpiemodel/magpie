@@ -21,4 +21,8 @@ sets
   / forest, other /
 
 
+  shock_scen Scenario name of forest carbon shock
+  / none, 002lin2030,004lin2030,008lin2030,016lin2030
+   /
+
 ;

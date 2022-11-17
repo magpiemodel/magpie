@@ -8,4 +8,6 @@
 sets
   reg36 regression coefficients
   / slope, intercept, threshold /
+  wage_scen version of wages
+  / baseline, scenario /
 ;

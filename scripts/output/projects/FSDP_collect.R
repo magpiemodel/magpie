@@ -195,16 +195,20 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing, outputdir[i])
 
     #add dimensions
-    y <- add_dimension(y, dim = 3.1, add = "scenario", nm = gsub(".", "_", cfg$title, fixed = TRUE))
-    y <- add_dimension(y, dim = 3.1, add = "model", nm = "MAgPIE")
-    getSets(y, fulldim = FALSE)[2] <- "period"
 
-    #save as data.frame with xy coordinates
-    y <- as.data.table(as.data.frame(y, rev = 3))
+    if (is.null(y)) {
+      message("Scenario: ", cfg$title, " contained none of the cellular output data.")
+    } else {
+      y <- add_dimension(y, dim = 3.1, add = "scenario", nm = gsub(".", "_", cfg$title, fixed = TRUE))
+      y <- add_dimension(y, dim = 3.1, add = "model", nm = "MAgPIE")
+      getSets(y, fulldim = FALSE)[2] <- "period"
 
-    #bind together
-    grid <- rbind(grid, y)
+      #save as data.frame with xy coordinates
+      y <- as.data.table(as.data.frame(y, rev = 3))
 
+      #bind together
+      grid <- rbind(grid, y)
+    }
   }
 }
 
@@ -232,6 +236,9 @@ val <- as.data.table(read.quitte(val))
 saveRDS(val, file = file.path("output", paste(rev, "FSDP_validation.rds", sep = "_")), version = 2, compress = "xz")
 
 message("Plotting figures ...")
-heatmapFSDP(reg, tableType = 1, file = file.path("output", paste(rev, "FSDP_heatmap1.jpg", sep = "_")))
-heatmapFSDP(reg, tableType = 2, file = file.path("output", paste(rev, "FSDP_heatmap2.jpg", sep = "_")))
+heatmapFSDP(reg, tableType = 1,    file = file.path("output", paste(rev, "FSDP_heatmap1.jpg", sep = "")))
+heatmapFSDP(reg, tableType = "2a", file = file.path("output", paste(rev, "FSDP_heatmap2a.jpg", sep = "")))
+heatmapFSDP(reg, tableType = 3,    file = file.path("output", paste(rev, "FSDP_heatmap3.jpg", sep = "_")))
 spatialMapsFSDP(reg, iso, grid, reg2iso, file = file.path("output", paste(rev, "FSDP_spatialMaps.jpg", sep = "_")))
+supplPlotsFSDP(reg, scenarioType = "all", file = file.path("output", paste(rev, "FSDP_supplPlots.jpg", sep = "_")))
+SupplPlotsCropShr(gdx = gdx, file = file.path("output", paste(rev, "FSDP_supplPlotCropShr.jpg", sep = "_")) )

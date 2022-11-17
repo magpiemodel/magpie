@@ -20,13 +20,14 @@ for (scenarioName in c(
   "a_Population", "a_EconDevelop", "a_EnergyTrans",
   "a_NoUnderweight", "a_NoOverweight", "a_DietVegFruitsNutsSeeds", "a_DietLegumes",
   "a_DietMonogastrics", "a_DietRuminants", "a_DietEmptyCals", "a_DietFish", "a_LessFoodWaste",
-  "a_ManureMngmt", "a_LivestockMngmt", "a_NitrogenUptakeEff", "a_LandUseDiversity",
-  # still missing: Bioeconomy
+  "a_ManureMngmt", "a_LivestockMngmt", "a_LandUseDiversity",
+  "a_NitrogenEff", "a_RiceMit", "a_CropeffTax",
+  "a_MinWage", "a_Bioplastics",
   "a_FairTrade", "a_TimberCities", "a_REDDaff", "a_REDD", "a_CropRotations",
   "a_LandSparing", "a_WaterSparing", "a_PeatlandSparing", "a_AirPollution", "a_SoilCarbon",
   # Scenario combination runs
-  "c_BAU", "d_SSP1bau", "d_SSP3bau", "d_SSP4bau", "d_SSP5bau",
-  "d_SSP1fsdp", "d_SSP3fsdp", "d_SSP4fsdp", "d_SSP5fsdp",
+  "c_BAU", "d_SSP1bau", "d_SSP1PLUSbau", "d_SSP2bau", "d_SSP3bau", "d_SSP4bau", "d_SSP5bau",
+  "d_SSP1fsdp", "d_SSP1PLUSfsdp", "d_SSP2fsdp", "d_SSP3fsdp", "d_SSP4fsdp", "d_SSP5fsdp",
   "e_FSDP",
   "b_ExternalPressures", "b_WaterSoil", "b_REDDaffRuminants", "b_DietRotations",
   "b_MonogastricsRotations",
@@ -43,5 +44,4 @@ for (scenarioName in c(
     # Start runs
     cfg <- fsecScenario(scenario = scenarioName)
     start_run(cfg = cfg, codeCheck = codeCheck)
-
-  }
+}
