@@ -80,5 +80,7 @@ Imports:
     stringr,
     txtplot,
     withr
+Suggests:
+    goxygen
 Encoding: UTF-8
 RoxygenNote: 7.2.1
