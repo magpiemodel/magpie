@@ -1,7 +1,7 @@
 Package: magpiemodel
 Title: MAgPIE - An Open Source land-use modeling framework
-Version: 4.5.0
-Date: 2022-11-07
+Version: 4.6.0
+Date: 2022-11-17
 Authors@R: c(
     person("Florian", "Humpenöder", , "humpenoeder@pik-potsdam.de", role = c("cre", "aut")),
     person("Jan Philipp", "Dietrich", , "dietrich@pik-potsdam.de", role = "aut"),
