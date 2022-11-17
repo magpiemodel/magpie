@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -
 
 ### removed
--
+- **scripts** removed remind2::deletePlus in coupling interface of start_function
 
 ### fixed
 -
