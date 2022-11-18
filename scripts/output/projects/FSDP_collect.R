@@ -217,6 +217,16 @@ if (!is.null(missing)) {
   print(missing)
 }
 
+renameScenario <- function(rep) {
+  rep <- rep[!get("scenario") %like% "calibration_FSEC", ]
+  rep[, c("version", "scenset", "scenario") := tstrsplit(scenario, "_", fixed = TRUE)]
+  return(rep)
+}
+
+reg <- renameScenario(reg)
+iso <- renameScenario(iso)
+grid <- renameScenario(grid)
+
 message("Saving rds files ...")
 
 saveRDS(reg, file = file.path("output", paste(rev, "FSDP_reg.rds", sep = "_")), version = 2, compress = "xz")
@@ -236,9 +246,11 @@ val <- as.data.table(read.quitte(val))
 saveRDS(val, file = file.path("output", paste(rev, "FSDP_validation.rds", sep = "_")), version = 2, compress = "xz")
 
 message("Plotting figures ...")
-heatmapFSDP(reg, tableType = 1,    file = file.path("output", paste(rev, "FSDP_heatmap1.jpg", sep = "")))
-heatmapFSDP(reg, tableType = "2a", file = file.path("output", paste(rev, "FSDP_heatmap2a.jpg", sep = "")))
-heatmapFSDP(reg, tableType = 3,    file = file.path("output", paste(rev, "FSDP_heatmap3.jpg", sep = "_")))
-spatialMapsFSDP(reg, iso, grid, reg2iso, file = file.path("output", paste(rev, "FSDP_spatialMaps.jpg", sep = "_")))
-supplPlotsFSDP(reg, scenarioType = "all", file = file.path("output", paste(rev, "FSDP_supplPlots.jpg", sep = "_")))
-SupplPlotsCropShr(gdx = gdx, file = file.path("output", paste(rev, "FSDP_supplPlotCropShr.jpg", sep = "_")) )
+heatmapFSDP(reg, tableType = 1,    file = file.path("output", paste(rev, "FSDP_heatmap1.png", sep = "_")))
+heatmapFSDP(reg, tableType = "2a", file = file.path("output", paste(rev, "FSDP_heatmap2a.png", sep = "_")))
+heatmapFSDP(reg, tableType = 3,    file = file.path("output", paste(rev, "FSDP_heatmap3.png", sep = "_")))
+bundlesFSDP(reg, file = file.path("output", paste(rev, "FSDP_bundle.png", sep = "_")))
+spatialMapsFSDP(reg, iso, grid, reg2iso, file = file.path("output", paste(rev, "FSDP_spatialMaps.png", sep = "_")))
+supplPlotsFSDP(reg, scenarioType = "all", file = file.path("output", paste(rev, "FSDP_supplPlots.png", sep = "_")))
+SupplPlotsCropShr(gdx = gdx, file = file.path("output", paste(rev, "FSDP_supplPlotCropShr.png", sep = "_")) )
+validationFSDP(reg, val = val, folder = "output")
