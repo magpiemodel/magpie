@@ -54,7 +54,6 @@ getCalibFactor <- function(gdx_file, mode = "cost", calib_accuracy = 0.05) {
     getNames(out) <- NULL
     getYears(out) <- NULL
 
-    # out[which(shrLost <= -0.05,arr.ind = T)] <- 1
     out[which(out < 0, arr.ind = T)] <- 1
   } else if (mode == "reward") {
     out <- magpie / data
@@ -103,7 +102,7 @@ update_calib <- function(gdx_file, calib_accuracy = 0.01, damping_factor = 0.98,
   calib_correction_cost <- getCalibFactor(gdx_file, mode = "cost", calib_accuracy = calib_accuracy)
   calib_divergence_cost <- abs(calib_correction_cost - 1)
 
-  calib_correction_reward <- getCalibFactor(gdx_file, mode = "reward", , calib_accuracy = calib_accuracy)
+  calib_correction_reward <- getCalibFactor(gdx_file, mode = "reward", calib_accuracy = calib_accuracy)
   calib_divergence_reward <- calib_correction_reward
   calib_divergence_reward[calib_divergence_reward > 0] <- calib_divergence_reward[calib_divergence_reward > 0] - 1
   calib_divergence_reward <- abs(calib_divergence_reward)
@@ -144,8 +143,8 @@ update_calib <- function(gdx_file, calib_accuracy = 0.01, damping_factor = 0.98,
   # Special rule for IND to avoid very strong cropland increase; Only executed if IND exists in the regions
   sub <- c("IND")
   if (all(sub %in% getRegions(calib_factor_cost))) {
-    below_limit <- (calib_factor_cost[sub, , ] < 3)
-    calib_factor_cost[sub, , ][below_limit] <- 3
+    below_limit <- (calib_factor_cost[sub, , ] < crop_max)
+    calib_factor_cost[sub, , ][below_limit] <- crop_max
     calib_divergence_cost[sub, , ][below_limit] <- 0
   }
 
@@ -230,7 +229,7 @@ update_calib <- function(gdx_file, calib_accuracy = 0.01, damping_factor = 0.98,
 calibrate_magpie <- function(n_maxcalib = 20,
                              restart = TRUE,
                              calib_accuracy = 0.05,
-                             crop_max = 4,
+                             crop_max = 3,
                              crop_min = 0.2,
                              calib_magpie_name = "magpie_calib",
                              damping_factor = 0.98,
