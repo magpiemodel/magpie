@@ -9,24 +9,31 @@
 #### MAgPIE output generation ####
 ##########################################################
 
+ask <- function(question, emptyAnswer = "y") {
+  message(question, appendLF = FALSE)
+  answer <- gms::getLine()
+  if (answer == "") {
+    answer <- emptyAnswer
+  }
+  return(tolower(answer) %in% c("y", "yes"))
+}
+
+if (getOption("autoRenvUpdates", FALSE) ||
+      (!is.null(piamenv::showUpdates()) && ask("Update now? (Y/n): "))) {
+  updatedPackages <- piamenv::updateRenv()
+  if (any(vapply(names(updatedPackages), isNamespaceLoaded, logical(1)))) {
+    stop("Some updated packages were previously loaded. This can lead to random crashes. Please restart R.")
+  }
+}
+
+# TODO this will create renv.lock file if anything is installed
+# TODO packages updated here might already be loaded
+piamenv::checkDeps(action = "ask")
+
 library(lucode2)
 library(gms)
 
 runOutputs <- function(runscripts=NULL, submit=NULL) {
-
-  get_line <- function(){
-    # gets characters (line) from the terminal or from a connection
-    # and returns it
-    if(interactive()){
-      s <- readline()
-    } else {
-      con <- file("stdin")
-      s <- readLines(con, 1, warn=FALSE)
-      on.exit(close(con))
-    }
-    return(s);
-  }
-
   choose_submit <- function(title="Please choose run submission type") {
     slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
     modes <- c("SLURM priority",
@@ -45,7 +52,7 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
     cat("\n",title,":\n", sep="")
     cat(paste(1:length(modes), modes, sep=": " ),sep="\n")
     cat("Number: ")
-    identifier <- get_line()
+    identifier <- gms::getLine()
     identifier <- as.numeric(strsplit(identifier,",")[[1]])
     if(slurm) {
       comp <- switch(identifier,

@@ -264,20 +264,24 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   if (is.null(renv::project())) {
     message("No active renv project found, not using renv.")
   } else {
-    if (getOption("autoRenvUpdates", FALSE)) {
-      piamenv::updateRenv()
-    } else if (!is.null(lucode2::showUpdates())) {
-      message("Consider updating with `make update-renv` or `piamenv::updateRenv()`.")
-    }
+    # suppress output of renv::snapshot
+    utils::capture.output({
+      utils::capture.output({
+        # snapshot current main renv into run folder
+        renv::snapshot(lockfile = file.path(cfg$results_folder, "main_renv.lock"), prompt = FALSE)
+      }, type = "message")
+    })
+    message("lockfile written to ", file.path(cfg$results_folder, "renv.lock"))
 
-    renv::snapshot(lockfile = file.path(cfg$results_folder, "renv.lock"), prompt = FALSE)
-
-    createResultsfolderRenv <- function(resultsfolder) {
-      renv::init(resultsfolder)
-      # renv::restore(prompt = FALSE) # TODO needed?
+    createResultsfolderRenv <- function() {
+      renv::init() # will overwrite renv.lock if existing...
+      file.rename("main_renv.lock", "renv.lock") # so we need this rename
+      renv::restore(prompt = FALSE)
     }
     # init renv in a separate session so the libPaths of the current session remain unchanged
-    callr::r(createResultsfolderRenv, args = list(cfg$results_folder), show = TRUE)
+    callr::r(createResultsfolderRenv, wd = cfg$results_folder)
+    message("renv copied to ", cfg$results_folder)
+    # TODO when should this renv be active?
   }
 
   # If reports for both bioenergy and GHG prices are available convert them

@@ -13,20 +13,6 @@ library(lucode2)
 library(gms)
 
 runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
-
-  get_line <- function(){
-    # gets characters (line) from the terminal or from a connection
-    # and returns it
-    if(interactive()){
-      s <- readline()
-    } else {
-      con <- file("stdin")
-      s <- readLines(con, 1, warn=FALSE)
-      on.exit(close(con))
-    }
-    return(s);
-  }
-
   choose_folder <- function(title="Please choose a folder") {
     # try to use find because it is significantly quicker than list.dirs
     tmp <- try(system("find ./output -name 'full.gms'", intern=TRUE,  ignore.stderr = TRUE), silent=TRUE)
@@ -45,7 +31,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     cat(paste(1:length(dirs), dirs, sep=": " ),sep="\n")
     cat(paste(length(dirs)+1, "Search by the pattern.\n", sep=": "))
     cat("Number: ")
-    identifier <- get_line()
+    identifier <- gms::getLine()
     identifier <- strsplit(identifier,",")[[1]]
     tmp <- NULL
     for (i in 1:length(identifier)) {
@@ -56,13 +42,13 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     # PATTERN
     if(length(identifier==1) && identifier==(length(dirs)+1)){
       cat("\nInsert the search pattern or the regular expression: ")
-      pattern <- get_line()
+      pattern <- gms::getLine()
       id <- grep(pattern=pattern, dirs[-1], perl=TRUE)
       # lists all directories matching the pattern and ask for confirmation
       cat("\n\nYou have chosen the following directories:\n")
       cat(paste(1:length(id), dirs[id+1], sep=": "), sep="\n")
       cat("\nAre you sure these are the right directories?(y/n): ")
-      answer <- get_line()
+      answer <- gms::getLine()
       if(answer=="y"){
         return(paste0("./output/",dirs[id+1]))
       } else {
@@ -89,7 +75,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     cat("\n",title,":\n",sep="")
     cat(paste(1:length(modes), modes, sep=": " ),sep="\n")
     cat("Number: ")
-    identifier <- get_line()
+    identifier <- gms::getLine()
     identifier <- as.numeric(strsplit(identifier,",")[[1]])
     if(slurm) {
       system("sclass")
