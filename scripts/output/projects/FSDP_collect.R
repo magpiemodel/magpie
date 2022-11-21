@@ -246,7 +246,7 @@ val <- as.data.table(read.quitte(val))
 saveRDS(val, file = file.path("output", paste(rev, "FSDP_validation.rds", sep = "_")), version = 2, compress = "xz")
 
 message("Plotting figures ...")
-heatmapFSDP(reg, tableType = 1,    file = file.path("output", paste(rev, "FSDP_heatmap1.png", sep = "_")))
+heatmapFSDP(reg, tableType = 1,    file = file.path("output", paste0(rev, "_FSDP_heatmap1.png")))
 heatmapFSDP(reg, tableType = "2a", file = file.path("output", paste(rev, "FSDP_heatmap2a.png", sep = "_")))
 heatmapFSDP(reg, tableType = 3,    file = file.path("output", paste(rev, "FSDP_heatmap3.png", sep = "_")))
 bundlesFSDP(reg, file = file.path("output", paste(rev, "FSDP_bundle.png", sep = "_")))
