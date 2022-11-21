@@ -229,9 +229,9 @@ grid <- renameScenario(grid)
 
 message("Saving rds files ...")
 
-saveRDS(reg, file = file.path("output", paste(rev, "FSDP_reg.rds", sep = "_")), version = 2, compress = "xz")
-saveRDS(iso, file = file.path("output", paste(rev, "FSDP_iso.rds", sep = "_")), version = 2, compress = "xz")
-saveRDS(grid, file = file.path("output", paste(rev, "FSDP_grid.rds", sep = "_")), version = 2, compress = "xz")
+saveRDS(reg, file = file.path("output", paste0(rev, "_FSDP_reg.rds")), version = 2, compress = "xz")
+saveRDS(iso, file = file.path("output", paste0(rev, "_FSDP_iso.rds")), version = 2, compress = "xz")
+saveRDS(grid, file = file.path("output", paste0(rev, "_FSDP_grid.rds")), version = 2, compress = "xz")
 
 #save i_to_iso mapping
 gdx     <- file.path(outputdir[1], "fulldata.gdx")
@@ -243,14 +243,15 @@ saveRDS(reg2iso, file = file.path("output", "reg2iso.rds"), version = 2, compres
 #save validation file
 val <- file.path(outputdir[1], "validation.mif")
 val <- as.data.table(read.quitte(val))
-saveRDS(val, file = file.path("output", paste(rev, "FSDP_validation.rds", sep = "_")), version = 2, compress = "xz")
+saveRDS(val, file = file.path("output", paste0(rev, "_FSDP_validation.rds")), version = 2, compress = "xz")
 
 message("Plotting figures ...")
 heatmapFSDP(reg, tableType = 1,    file = file.path("output", paste0(rev, "_FSDP_heatmap1.png")))
-heatmapFSDP(reg, tableType = "2a", file = file.path("output", paste(rev, "FSDP_heatmap2a.png", sep = "_")))
-heatmapFSDP(reg, tableType = 3,    file = file.path("output", paste(rev, "FSDP_heatmap3.png", sep = "_")))
-bundlesFSDP(reg, file = file.path("output", paste(rev, "FSDP_bundle.png", sep = "_")))
-spatialMapsFSDP(reg, iso, grid, reg2iso, file = file.path("output", paste(rev, "FSDP_spatialMaps.png", sep = "_")))
-supplPlotsFSDP(reg, scenarioType = "all", file = file.path("output", paste(rev, "FSDP_supplPlots.png", sep = "_")))
-SupplPlotsCropShr(gdx = gdx, file = file.path("output", paste(rev, "FSDP_supplPlotCropShr.png", sep = "_")) )
+heatmapFSDP(reg, tableType = "2a", file = file.path("output", paste0(rev, "_FSDP_heatmap2a.png")))
+heatmapFSDP(reg, tableType = 3,    file = file.path("output", paste0(rev, "_FSDP_heatmap3.png")))
+bundlesFSDP(reg, file = file.path("output", paste0(rev, "_FSDP_bundle.png")))
+spatialMapsFSDP(reg, iso, grid, reg2iso, file = file.path("output", paste0(rev, "_FSDP_spatialMaps.png")))
+supplPlotsFSDP(reg, scenarioType = "all", file = file.path("output", paste0(rev, "_FSDP_supplPlots.png")))
+SupplPlotsCropShr(gdx = gdx, file = file.path("output", paste0(rev, "_FSDP_supplPlotCropShr.png")) )
 validationFSDP(reg, val = val, folder = "output")
+dashboardFSDP(repReg = reg, repIso = iso, repGrid = grid, outputDir = "output", file = paste0(rev, "_FSDP_dashboard.html"))
