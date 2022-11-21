@@ -261,36 +261,23 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   }
   dir.create(cfg$results_folder, recursive = TRUE)
 
-  # only use renv for runs if main renv is used (i.e. we are not in snapshot mode)
   if (is.null(renv::project())) {
     message("No active renv project found, not using renv.")
   } else {
-    if (!renv::status()$synchronized) {
-      message("The new run will use the package environment defined in renv.lock, ",
-              "but it is out of sync, probably because you installed packages/updates manually. ",
-              "Write current package environment into renv.lock first? (Y/n)", appendLF = FALSE)
-      if (tolower(gms::getLine()) %in% c("y", "yes", "")) {
-        renv::snapshot(prompt = FALSE)
-      }
-    }
-
     if (getOption("autoRenvUpdates", FALSE)) {
-      source("scripts/renv_scripts/updateRenv.R")
+      piamenv::updateRenv()
     } else if (!is.null(lucode2::showUpdates())) {
-      message("Consider updating with `Rscript scripts/renv_scripts/updateRenv.R`.")
+      message("Consider updating with `make update-renv` or `piamenv::updateRenv()`.")
     }
 
-    createResultsfolderRenv <- function(resultsfolder, lockfile) {
-      renv::init(resultsfolder)
+    renv::snapshot(lockfile = file.path(cfg$results_folder, "renv.lock"), prompt = FALSE)
 
-      # restore same renv as main renv
-      file.copy(lockfile, resultsfolder, overwrite = TRUE)
-      renv::restore(lockfile = file.path(resultsfolder, basename(lockfile)), prompt = FALSE)
+    createResultsfolderRenv <- function(resultsfolder) {
+      renv::init(resultsfolder)
+      # renv::restore(prompt = FALSE) # TODO needed?
     }
     # init renv in a separate session so the libPaths of the current session remain unchanged
-    callr::r(createResultsfolderRenv,
-             list(normalizePath(cfg$results_folder), normalizePath(renv::paths$lockfile())),
-             show = TRUE)
+    callr::r(createResultsfolderRenv, args = list(cfg$results_folder), show = TRUE)
   }
 
   # If reports for both bioenergy and GHG prices are available convert them
