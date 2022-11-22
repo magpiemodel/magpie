@@ -2,7 +2,7 @@
 gms$c09_pop_scenario;;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;SSP1;SSP1;SSP1;;;;;;;;;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;
 gms$c09_gdp_scenario;;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;SDP_EI;SDP_RC;SDP_MC;;;;;;;;;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;
 gms$c09_pal_scenario;;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;SSP1;SSP1;SSP1;;;;;;;;;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;
-gms$c15_food_scenario;;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;SSP2;SSP1;SSP1;;;;;;;;SSP1;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;
+gms$c15_food_scenario;;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;SSP1;SSP1;SSP1;;;;;;;;SSP1;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;
 gms$c15_food_scenario_noselect;;;;;;;;;;;;;;;;;;;;;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;
 gms$s15_elastic_demand;;;;0;0;0;0;0;0;0;0;0;;;;;;;0;0;0;0;0;0;0;;;;;;;;;
 gms$c15_rumdairy_scp_scen;;;;constant;constant;constant;constant;constant;constant;sigmoid_50pc_20_50;constant;constant;;;;;;;constant;;;;;;;;;;;;;;;
@@ -37,6 +37,7 @@ gms$s32_max_aff_area;;;;Inf;Inf;Inf;Inf;Inf;500;350;0;700;;;;;;;500;;Inf;Inf;Inf
 gms$c32_aff_mask;;;;noboreal;noboreal;noboreal;noboreal;noboreal;onlytropical;onlytropical;onlytropical;onlytropical;;;;;;;onlytropical;;noboreal;noboreal;noboreal;noboreal;noboreal;;;;;;;;;
 gms$c34_urban_scenario;;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;SSP1;SSP2;SSP1;;;;;;;;;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;
 gms$c32_aff_policy;;;;;;;;;;;;;none;npi;ndc;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;;;;
+gms$s32_planing_horizon;;;;50;50;50;50;50;50;30;50;50;;;;;;;50;;;;;;;;;;;;;;;
 gms$c35_ad_policy;;;;;;;;;;;;;none;npi;ndc;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;;;;
 gms$c35_aolc_policy;;;;;;;;;;;;;none;npi;ndc;;;;;;ndc;ndc;ndc;ndc;ndc;;;;;;;;;
 gms$s35_forest_damage_end;;;;2030;2050;2050;2050;2030;2030;2030;2030;2030;;;;;;;2030;;2030;2030;2030;2030;2030;;;;;;;;;
@@ -50,6 +51,7 @@ gms$c55_scen_conf;;;;ssp1;ssp2;ssp3;ssp4;ssp5;ssp1;ssp1;ssp1;ssp1;;;;;;;ssp1;;ss
 gms$c55_scen_conf_noselect;;;;ssp1;ssp2;ssp3;ssp4;ssp5;ssp1;ssp1;ssp1;ssp1;;;;;;;ssp1;;ssp4;ssp4;ssp1;ssp4;ssp1;;;;;;;;;
 gms$c56_pollutant_prices;;;;;;;;;;;;;;;;coupling;emulator;coupling;;;R21M42-SDP-PkBudg1000;R21M42-SDP-PkBudg1000;R21M42-SDP-PkBudg1000;R21M42-SDP-PkBudg1000;R21M42-SDP-PkBudg1000;;;;;;;;;
 gms$c56_pollutant_prices_noselect;;;;;;;;;;;;;;;;coupling;emulator;coupling;;;R21M42-SDP-NPi;R21M42-SDP-NPi;R21M42-SDP-NPi;R21M42-SDP-PkBudg1000;R21M42-SDP-PkBudg1000;;;;;;;;;
+gms$s56_c_price_exp_aff;;;;50;50;50;50;50;50;30;50;50;;;;;;;50;;;;;;;;;;;;;;;
 gms$s56_buffer_aff;;;;0.2;0.2;0.2;0.2;0.2;0.2;0.5;0.2;0.3;;;;;;;0.2;;;;;;;;;;;;;;;
 gms$c56_emis_policy;;;;redd+natveg_nosoil;redd+natveg_nosoil;redd+natveg_nosoil;redd+natveg_nosoil;redd+natveg_nosoil;redd+natveg_nosoil;redd+natveg_nosoil;redd+_nosoil;all_nosoil;;;;;;;redd+natveg_nosoil;;;;;;;;;;;;;;;
 gms$maccs;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
