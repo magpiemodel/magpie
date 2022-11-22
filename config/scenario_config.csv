@@ -2,14 +2,14 @@
 gms$c09_pop_scenario;;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;SSP1;SSP1;SSP1;;;;;;;;;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;
 gms$c09_gdp_scenario;;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;SDP_EI;SDP_RC;SDP_MC;;;;;;;;;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;
 gms$c09_pal_scenario;;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;SSP1;SSP1;SSP1;;;;;;;;;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;
-gms$c15_food_scenario;;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;SSP1;SSP1;SSP1;;;;;;;;SSP1;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;
+gms$c15_food_scenario;;;;SSP1;SSP2;SSP3;SSP4;SSP5;SSP1;SSP2;SSP1;SSP1;;;;;;;;SSP1;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;
 gms$c15_food_scenario_noselect;;;;;;;;;;;;;;;;;;;;;SSP4;SSP1;SSP4;SSP4;SSP1;;;;;;;;;
 gms$s15_elastic_demand;;;;0;0;0;0;0;0;0;0;0;;;;;;;0;0;0;0;0;0;0;;;;;;;;;
 gms$c15_rumdairy_scp_scen;;;;constant;constant;constant;constant;constant;constant;sigmoid_50pc_20_50;constant;constant;;;;;;;constant;;;;;;;;;;;;;;;
 gms$kfo_rd;;;;;;;;;;livst_rum;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c15_exo_foodscen;;;;;;;;;lin_zero_20_50;lin_zero_20_50;lin_zero_20_50;lin_zero_20_70;;;;;;;lin_zero_20_50;lin_zero_20_50;;lin_zero_20_50;;;lin_zero_20_50;;;;;;;;;
 gms$s15_exo_waste;;;;0;0;0;0;0;1;1;1;1;;;;;;;1;1;0;1;0;0;1;;;;;;;;;
-gms$s15_waste_scen;;;;;;;;;1.2;1.36;1.2;1.3;;;;;;;1.2;1.2;;1.2;;;1.2;;;;;;;;;
+gms$s15_waste_scen;;;;;;;;;1.2;1.3;1.2;1.25;;;;;;;1.2;1.2;;1.2;;;1.2;;;;;;;;;
 gms$s15_exo_diet;;;;0;0;0;0;0;1;1;1;1;;;;;;;1;1;0;1;0;0;1;;;;;;;;;
 gms$c15_kcal_scen;;;;;;;;;healthy_BMI;no_underweight;healthy_BMI;healthy_BMI;;;;;;;healthy_BMI;healthy_BMI;;healthy_BMI;;;healthy_BMI;;;;;;;;;
 gms$c15_EAT_scen;;;;;;;;;FLX;;FLX;FLX;;;;;;;FLX;FLX;;FLX;;;FLX;;;;;;;;;
