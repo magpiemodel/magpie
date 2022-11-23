@@ -18,17 +18,18 @@ ask <- function(question, emptyAnswer = "y") {
   return(tolower(answer) %in% c("y", "yes"))
 }
 
+message("Checking for updates... ", appendLF = FALSE)
 if (getOption("autoRenvUpdates", FALSE) ||
       (!is.null(piamenv::showUpdates()) && ask("Update now? (Y/n): "))) {
-  updatedPackages <- piamenv::updateRenv()
-  if (any(vapply(names(updatedPackages), isNamespaceLoaded, logical(1)))) {
-    stop("Some updated packages were previously loaded. This can lead to random crashes. Please restart R.")
-  }
+  updates <- piamenv::updateRenv()
+  piamenv::stopIfLoaded(names(updates))
 }
+message("Update check done.")
 
-# TODO this will create renv.lock file if anything is installed
-# TODO packages updated here might already be loaded
-piamenv::checkDeps(action = "ask")
+message("Checking package version requirements... ", appendLF = FALSE)
+updates <- piamenv::fixDeps(ask = TRUE)
+piamenv::stopIfLoaded(names(updates))
+message("Requirements check done.")
 
 library(lucode2)
 library(gms)
@@ -50,7 +51,7 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
       modes <- grep("SLURM",modes,invert=TRUE,value=TRUE)
     }
     cat("\n",title,":\n", sep="")
-    cat(paste(1:length(modes), modes, sep=": " ),sep="\n")
+    cat(paste(seq_along(modes), modes, sep=": " ),sep="\n")
     cat("Number: ")
     identifier <- gms::getLine()
     identifier <- as.numeric(strsplit(identifier,",")[[1]])

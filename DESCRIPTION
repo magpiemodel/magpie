@@ -72,7 +72,7 @@ Imports:
     mip,
     mrcommons,
     patchwork,
-    piamenv (>= 0.2.1),
+    piamenv (>= 0.3.0),
     quitte,
     raster,
     remulator,
