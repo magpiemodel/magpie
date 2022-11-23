@@ -197,8 +197,8 @@ update_calib <- function(gdx_file, calib_accuracy = 0.05, damping_factor = 0.96,
       calib_reward_best <- time_series_reward(calib_reward_best)
 
       calib_best_full <- mbind(
-        add_dimension(calib_factor_cost, dim = 3.1, nm = "cost"),
-        add_dimension(calib_factor_reward, dim = 3.1, nm = "reward")
+        add_dimension(calib_cost_best, dim = 3.1, nm = "cost"),
+        add_dimension(calib_reward_best, dim = 3.1, nm = "reward")
       )
       calib_best_full[is.na(calib_best_full)] <- 1
 
