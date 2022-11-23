@@ -69,7 +69,7 @@ $title magpie
 *' carbon when agricultural land is taken out of production and the associated regrowth of natural
 *' vegetation generates negative emissions from land-use change.
 *' Nitrogen emissions ([51_nitrogen]) are estimated based on nitrogen budgets for croplands,
-*' pastures ([50_nr_budgets]) and the livestock sector ([55_awms]) (@bodirsky_reactive_2014).
+*' pastures ([50_nr_soil_budget]) and the livestock sector ([55_awms]) (@bodirsky_reactive_2014).
 *' CH4 emissions are based on
 *' livestock feed and rice cultivation areas (@popp_food_2010). In the case of mitigation
 *' policies for the land sector, the model can reduce CO2 emissions by restraining land-use
