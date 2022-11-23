@@ -68,7 +68,6 @@ getCalibFactor <- function(gdx_file, mode = "cost", calib_accuracy = 0.05) {
   return(magpiesort(out))
 }
 
-
 time_series_cost <- function(calib_factor) {
   out2 <- new.magpie(getRegions(calib_factor), years = c(1995, 2015, seq(2050, 2150, by = 5)), fill = 1)
   out2[, 2015, ] <- calib_factor
@@ -142,7 +141,7 @@ update_calib <- function(gdx_file, calib_accuracy = 0.05, damping_factor = 0.96,
     reward_acc_reached <- calib_divergence_reward <= ifelse(calibration_step < 6, 0.01, calib_accuracy)
     calib_factor_reward[reward_acc_reached] <- setNames(old_calib[, , "reward"], NULL)[reward_acc_reached]
 
-    # make sure cost factor falls below 1 during iteration where there is a reward
+    # make sure cost factor does not fall below 1 during iteration where there is a reward
     reward_exists <- (calib_factor_reward > 0)
     set_to_one <- reward_exists & (calib_factor_cost < 1)
     calib_factor_cost[set_to_one] <- 1
@@ -252,7 +251,7 @@ calibrate_magpie <- function(n_maxcalib = 40,
                              cost_min = 0.05,
                              calib_magpie_name = "magpie_calib",
                              damping_factor = 0.96,
-                             calib_file = "modules/39_landconversion/input/f39_calib.cs3",
+                             calib_file = "modules/39_landconversion/input/f39_calib.csv",
                              putfolder = "land_conversion_cost_calib_run",
                              data_workspace = NULL,
                              logoption = 3,
