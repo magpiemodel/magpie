@@ -397,7 +397,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
                      calibrate_pasture = (cfg$gms$past!="static" & cfg$gms$past!="grasslands_apr22"),
                      calibrate_cropland = (cfg$calib_cropland),
                      damping_factor = cfg$damping_factor,
-                     cost_max = cfg$crop_calib_max,
+                     crop_max = cfg$crop_calib_max,
                      calib_file = calib_file,
                      data_workspace = cfg$val_workspace,
                      logoption = 3,
