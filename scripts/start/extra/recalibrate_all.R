@@ -44,9 +44,9 @@ cfg$calib_maxiter_landconversion_cost <- 40           # def = 40
 cfg$best_calib_landconversion_cost <- FALSE			# def = FALSE
 
 # set upper limit for cropland calibration factor
-cfg$crop_calib_max_landconversion_cost <- 3           # def= 3
+cfg$cost_calib_max_landconversion_cost <- 3           # def= 3
 # set lower limit for cropland calibration factor
-cfg$crop_calib_min_landconversion_cost <- 0.05           # def= 0.05
+cfg$cost_calib_min_landconversion_cost <- 0.05           # def= 0.05
 
 # factor determining how much the new calibration factor influences the result (0-1)
 cfg$damping_factor_landconversion_cost <- 0.96       # def= 0.96
