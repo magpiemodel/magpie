@@ -61,7 +61,7 @@ getCalibFactor <- function(gdx_file, mode = "cost", calib_accuracy = 0.05) {
     getNames(out) <- NULL
     getYears(out) <- NULL
 
-    # only reward only if share of cropland lost between 1995 and 2015 exceeds a certain threshold. Otherwise set to 0.
+    # only reward if share of cropland lost between 1995 and 2015 exceeds a certain threshold. Otherwise set to 0.
     out[which(shrLost > -calib_accuracy, arr.ind = T)] <- 0
     out[which(out < 0, arr.ind = T)] <- 0
   }
