@@ -11,24 +11,14 @@
 
 *' No planted forest on natveg areas
 vm_lu_transitions.fx(j,"primforest","forestry") = 0;
-*vm_lu_transitions.fx(j,"secdforest","forestry") = 0;
-*vm_lu_transitions.fx(j,"other","forestry") = 0;
 
 *' Conversions within natveg are not allowed
 vm_lu_transitions.fx(j,"primforest","other") = 0;
 vm_lu_transitions.fx(j,"secdforest","other") = 0;
 
-*' Forestry can only increase
-*vm_lu_transitions.fx(j,"forestry",land_to) = 0;
-*vm_lu_transitions.up(j,"forestry","forestry") = Inf;
-
 *' Primforest can only decrease
 vm_lu_transitions.fx(j,land_from,"primforest") = 0;
 vm_lu_transitions.up(j,"primforest","primforest") = Inf;
-
-*' Secdforest can only decrease (during optimization)
-*vm_lu_transitions.fx(j,land_from,"secdforest") = 0;
-*vm_lu_transitions.up(j,"secdforest","secdforest") = Inf;
 
 *' @stop
 
