@@ -12,10 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -
 
 ### added
--
+- **10_land** **landmatrix_dec18** added `vm_lu_transitions` as interface 
 
 ### removed
 - **10_land** removed `feb15` realization
+- **10_land** **landmatrix_dec18** removed the interfaces `vm_croplandexpansion` and `vm_croplandreduction`
 
 ### fixed
 - **59_som** fixed land use change tracking for non-cropland pools in the `cellpool_aug16` realization
