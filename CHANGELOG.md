@@ -12,12 +12,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -
 
 ### added
-- **10_land** **landmatrix_dec18** added `vm_lu_transitions` as interface 
+- **10_land** added `vm_lu_transitions` as interface 
 - **39_landconversion** scalar `s39_reward_crop_reduction` provides a cropland reduction reward
 
 ### removed
 - **10_land** removed `feb15` realization
-- **10_land** **landmatrix_dec18** removed the interfaces `vm_croplandexpansion` and `vm_croplandreduction`
+- **10_land** removed the interfaces `vm_croplandexpansion` and `vm_croplandreduction`
 - **39_landconversion** removed `s39_reward_shr`
 - **scripts** removed remind2::deletePlus in coupling interface of start_function
 
