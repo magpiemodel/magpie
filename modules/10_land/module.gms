@@ -10,7 +10,8 @@
 *' @description The land module coordinates and analyzes all land related activities
 *' by summing up all land types and calculating the gross changes in land use
 *' between two time steps of optimization given the recursive dynamic structure of
-*' MAgPIE model.
+*' MAgPIE model. The land module tracks land use transitions by directly counting 
+*' sources and targets of conversions.
 
 *' @authors Jan Philipp Dietrich, Florian Humpenoeder, Kristine Karstens
 
