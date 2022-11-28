@@ -209,7 +209,8 @@ fsecScenario <- function(scenario) {
                        "projects/FSDP_process",
                        "projects/FSEC_StevenLord",
                        "projects/FSEC_SimonDietz",
-                       "projects/FSEC_AlessandroPassaro"
+                       "projects/FSEC_AlessandroPassaro",
+                       "projects/FSEC_water"
                        )
   cfg$force_download <- TRUE
 

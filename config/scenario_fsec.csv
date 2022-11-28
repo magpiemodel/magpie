@@ -27,7 +27,7 @@ gms$c30_rotation_scenario_speed;by2050;;;;;;;;;;;;;;;;;;;;;;;;;by2050;;;;;;;;;;;
 gms$c30_marginal_land;q33_marginal;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c30_bioen_water;;;;;;;;;;;;;;;;;;;;;;;;;;;;rainfed;;;;;;;;;;;;
 gms$past;endo_jun13;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-gms$c31_past_suit_scen;ssp245;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;ssp126;ssp126;ssp245;ssp370;ssp460;ssp585
+gms$c31_past_suit_scen;ssp245;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;ssp126;ssp126;ssp126;ssp245;ssp370;ssp460;ssp585
 gms$c34_urban_scenario;;;;SSP1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s42_watdem_nonagr_scenario;;;;1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c42_env_flow_policy;off;;;;;;;;;;;;;;;;;;;;;;;;;;;on;;;;;;;;;;;;
@@ -56,9 +56,9 @@ gms$s62_max_dem_bioplastic;0;;;;400;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c70_fac_req_regr;reg;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c70_feed_scen;;;;;;;;;;;;;;;;;ssp1;;;;;;;;;;;;;;;;;;;;;;;
 gms$c73_build_demand;;;;;;;;;;;;;;;;;;;;;;;50pc;;;;;;;;;;;;;;;;;
-input['cellular'];rev4.77FSEC_e2bdb6cd_1b5c3817_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;rev4.77FSEC_e2bdb6cd_0bd54110_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1.tgz;rev4.77FSEC_e2bdb6cd_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz;rev4.77FSEC_e2bdb6cd_1b5c3817_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1.tgz;rev4.77FSEC_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz;rev4.77FSEC_e2bdb6cd_3c888fa5_cellularmagpie_c200_MRI-ESM2-0-ssp460_lpjml-8e6c5eb1.tgz;rev4.77FSEC_e2bdb6cd_09a63995_cellularmagpie_c200_MRI-ESM2-0-ssp585_lpjml-8e6c5eb1.tgz
+input['cellular'];rev4.77FSEC_e2bdb6cd_1b5c3817_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;rev4.77FSEC_e2bdb6cd_0bd54110_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1.tgz;rev4.77FSEC_e2bdb6cd_0bd54110_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1.tgz;rev4.77FSEC_e2bdb6cd_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz;rev4.77FSEC_e2bdb6cd_1b5c3817_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1.tgz;rev4.77FSEC_e2bdb6cd_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz;rev4.77FSEC_e2bdb6cd_3c888fa5_cellularmagpie_c200_MRI-ESM2-0-ssp460_lpjml-8e6c5eb1.tgz;rev4.77FSEC_e2bdb6cd_09a63995_cellularmagpie_c200_MRI-ESM2-0-ssp585_lpjml-8e6c5eb1.tgz
 input['regional'];rev4.77FSEC_e2bdb6cd_magpie.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 input['validation'];rev4.77FSEC_e2bdb6cd_validation.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 input['additional'];additional_data_rev4.32.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 input['calibration'];calibration_FSEC_13Oct22.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-magicc_emis_scen;bjoernAR6_C_SSP2-NDC.mif;;;bjoernAR6_C_SSP2-PkBudg900.mif;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;bjoernAR6_C_RemSDP-900-MagSSP1.mif;bjoernAR6_C_SSP1-NDC.mif;;;;
+magicc_emis_scen;bjoernAR6_C_SSP2-NDC.mif;;;bjoernAR6_C_SSP2-PkBudg900.mif;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;bjoernAR6_C_RemSDP-900-MagSSP1.mif;bjoernAR6_C_RemSDP-900-MagSSP1.mif;bjoernAR6_C_SSP1-NDC.mif;;;;
