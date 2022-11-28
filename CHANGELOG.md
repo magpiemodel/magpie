@@ -6,75 +6,97 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [Unreleased]
+## Unreleased
+
+### changed
+-
+
+### added
+- **10_land** added `vm_lu_transitions` as interface 
+- **39_landconversion** scalar `s39_reward_crop_reduction` provides a cropland reduction reward
+
+### removed
+- **10_land** removed `feb15` realization
+- **10_land** removed the interfaces `vm_croplandexpansion` and `vm_croplandreduction`
+- **39_landconversion** removed `s39_reward_shr`
+- **scripts** removed remind2::deletePlus in coupling interface of start_function
+
+### fixed
+- **59_som** fixed land use change tracking for non-cropland pools in the `cellpool_aug16` realization
+- **scripts** rewrite of land conversion cost calibration script `landconversion_cost.R`
+- **config** changed default value for s56_limit_ch4_n2o_price from 1000 to 4000 for consistency with c57_macc_version = "PBL_2022"
+
+## [4.6.0] - 2022-11-09
 
 ### changed
 - **18_residues** bugfix in `q18_cost_prod_res`
-- **scripts** updated FSEC start scripts and related config files to introduce new scenarios
-- **scripts** quit with exit code = gams status at the end of submit.R
-- **scripts** fix in start_functions for the calibration setting `ifneeded`
-- **config** best_calib set to FALSE in default
-- **42_water_demand** account for multiple cropping in water requirements
-- **config** new switches `s36_minimum_wage`, `s36_scale_productivity_with_wage`, and `s38_fix_capital_need`
-- **38_factor_costs** included labor cost scaling in case of wage scenario
-- **70_livestock** included labor cost scaling in case of wage scenario
 - **36_employment** included calculations for minimum wage scenario
-- **config** added `s62_max_dem_bioplastic` and `s62_midpoint_dem_bioplastic` to define bioplastic scenario
-- **62_material** added biomass demand for bioplastic production
-- **config** updated config to new module setup of MACCs
+- **38_factor_costs** included labor cost scaling in case of wage scenario
+- **42_water_demand** account for multiple cropping in water requirements
 - **51_nitrogen** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
-- **58_peatland** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
 - **52_carbon** change of interface from vm_btm_reg to vm_emissions_reg
-- **inputs** update of NPi for China (additional data 4.30)
-- **inputs** updated f56_emis_policy (additional data 4.29)
-- **scripts** FSDP_collect handles the health impacts data provided by Marco Springmann, distributed it into the scenario's various reports. It performs a similar operation for global nutrient surplus (which must be calculated on the grid-level and then aggregated).- **13_tc** relaxed vm_tau upper limit
-- **scripts** updated FSEC start and output scripts
-- **scripts** update of rds_report to allow gridded intermediate outputs
-- **config** non-food system emission MAGICC switch
-- **scripts** output/extra/disaggregation_BII.R adjusted BII output for primary and secondary other land
-- **59_som** Now calculates soil C for fallow and urban areas
-- **inputs** updated non-food initial prices, MACCs curves, and removed suitability threshold of 0.1 in all_marginal setting
-- **documentation** added literature
-- **scripts/start** cleanup of old start scripts
-- **scripts** log files are now written in a subfolder "logs"
-- **config** adjusted PR template
-- **scripts** added single time step run to test runs
 - **52_carbon** Soil C of urban areas set to soil C of natural other land
 - **57_maccs** default changed from PBL2007 to PBL2022
+- **58_peatland** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
+- **59_som** Now calculates soil C for fallow and urban areas
+- **62_material** added biomass demand for bioplastic production
+- **70_livestock** included labor cost scaling in case of wage scenario
+- **config** added `s62_max_dem_bioplastic` and `s62_midpoint_dem_bioplastic` to define bioplastic scenario
+- **config** adjusted PR template
+- **config** best_calib set to FALSE in default
+- **config** new switches `s36_minimum_wage`, `s36_scale_productivity_with_wage`, and `s38_fix_capital_need`
+- **config** non-food system emission MAGICC switch
+- **config** updated config to new module setup of MACCs
+- **config** updated default realization of 15_food from anthropometrics_jan18 to anthro_iso_jun22
+- **config** updated SHAPE SDP scenarios in scenario_config.csv
+- **documentation** added literature
+- **inputs** update of NPi for China (additional data 4.30)
+- **inputs** updated f56_emis_policy (additional data 4.29)
+- **inputs** updated non-food initial prices, MACCs curves, and removed suitability threshold of 0.1 in all_marginal setting
+- **scripts** added single time step run to test runs
+- **scripts** fix in start_functions for the calibration setting `ifneeded`
+- **scripts** FSDP_collect handles the health impacts data provided by Marco Springmann, distributed it into the scenario's various reports. It performs a similar operation for global nutrient surplus (which must be calculated on the grid-level and then aggregated).- **13_tc** relaxed vm_tau upper limit
+- **scripts** log files are now written in a subfolder "logs"
+- **scripts** output/extra/disaggregation_BII.R adjusted BII output for primary and secondary other land
+- **scripts** quit with exit code = gams status at the end of submit.R
+- **scripts** update of rds_report to allow gridded intermediate outputs
+- **scripts** updated FSEC start and output scripts
+- **scripts** updated FSEC start scripts and related config files to introduce new scenarios
+- **scripts/start** cleanup of old start scripts
 
 ### added
-- **56_ghg_policy** added new ecosystem protection scenarios
-- **scripts** added output script creating a set of outputs for Alessandro Passaro in the FSEC context
+- **14_yields** added input file containing AQUASTAT yield calibration factors and switch `s14_calib_ir2rf` in default.cfg to activate this yield calibration
+- **15_food** added new realization with country level exogenous diets, product-specific intake estimates, new scenarios for exogenous BMI and decomposition switches for EAT Lancet diets. Simplified code and improved iteration procedure.
 - **50_nr_soil_budget** new module realization for more consistent MACCs implementation. change of interface from vm_btm_reg to vm_emissions_reg
 - **53_methane** moved maccs into emission modules. change of interface from vm_btm_reg to vm_emissions_reg
+- **56_ghg_policy** added new ecosystem protection scenarios
 - **56_ghg_policy** new module realization for more consistent MACCs implementation
-- **57_maccs** new more consistent maccs implementation. different mapping of emission sources to maccs.
-- **scripts** added output script creating a merged .csv for dietaryIndicators and caloricSupply outputs
-- **scripts** added water output script for FSEC model runs
-- **scripts** added output script, FSDP_process creating a merged .csv and .gdx for dietaryIndicators and caloricSupply outputs
-- **scripts** added output script creating a merged .csv for dietaryIndicators and caloricSupply outputs
-- **scripts** added output script creating a set of outputs for Simon Dietz in the FSEC context
-- **scripts** added output script running MAGICC7 on a MAgPIE scenario
-- **scripts** added output script for gridded crop diversity indices
-- **scripts** added output scripts for FSEC FSDP runs
-- **15_food** added new realization with country level exogenous diets, product-specific intake estimates, new scenarios for exogenous BMI and decomposition switches for EAT Lancet diets. Simplified code and improved iteration procedure.
 - **57_maccs** added new Marginal Abatement Cost Curve (MACCs) data set from PBL (PBL2022)
-- **14_yields** added input file containing AQUASTAT yield calibration factors and switch `s14_calib_ir2rf` in default.cfg to activate this yield calibration
+- **57_maccs** new more consistent maccs implementation. different mapping of emission sources to maccs.
 - **f32_forest** added the option to run generic disturbance scenarios of secondary forest types determined in `f32_forest_shock.csv`
 - **f35_natveg** added the option to run generic disturbance scenarios of primary forest determined in `f35_forest_shock.csv`
+- **scripts** added output script creating a merged .csv for dietaryIndicators and caloricSupply outputs
+- **scripts** added output script creating a merged .csv for dietaryIndicators and caloricSupply outputs
+- **scripts** added output script creating a set of outputs for Alessandro Passaro in the FSEC context
+- **scripts** added output script creating a set of outputs for Simon Dietz in the FSEC context
+- **scripts** added output script for gridded crop diversity indices
+- **scripts** added output script running MAGICC7 on a MAgPIE scenario
+- **scripts** added output script, FSDP_process creating a merged .csv and .gdx for dietaryIndicators and caloricSupply outputs
+- **scripts** added output scripts for FSEC FSDP runs
+- **scripts** added water output script for FSEC model runs
 
 ### removed
+- **15_food** removed read-in of non-needed input file "f15_calib_factor_FAOfsupply_iso"
 - **38_factor_costs** removed `mixed_reg_feb17` realization
 - **50_nr_soil_budget** old inconsistent module realizations
 - **53_methane** old inconsistent module realizations
 - **56_ghg_policy** old inconsistent module realizations
 - **57_maccs** old inconsistent module realizations
-- **15_food** removed read-in of non-needed input file "f15_calib_factor_FAOfsupply_iso"
 
 ### fixed
 - **38_factor_costs** fixed calibration of share parameter in `sticky_labor` realization
-- **59_som** corrected the som pool due to the carbon transfer from other and primary forest to secondary forest before optimization (presolve)  
 - **43_water_availability** added missing years after 2100 in "f43_wat_avail" to avoid infeasibilities in coupled runs with less_ts timesteps
+- **59_som** corrected the som pool due to the carbon transfer from other and primary forest to secondary forest before optimization (presolve)
 - **scripts** fixed some bugs related to background execution of start/output scripts
 
 
@@ -536,7 +558,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.5.0...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.0...develop
+[4.6.0]: https://github.com/magpiemodel/magpie/compare/v4.5.0...v4.6.0
 [4.5.0]: https://github.com/magpiemodel/magpie/compare/v4.4.0...v4.5.0
 [4.4.0]: https://github.com/magpiemodel/magpie/compare/v4.3.5...v4.4.0
 [4.3.5]: https://github.com/magpiemodel/magpie/compare/v4.3.4...v4.3.5
