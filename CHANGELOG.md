@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### fixed
 - **scripts** rewrite of land conversion cost calibration script `landconversion_cost.R`
-
+- **config** changed default value for s56_limit_ch4_n2o_price from 1000 to 4000 for consistency with c57_macc_version = "PBL_2022"
 
 ## [4.6.0] - 2022-11-09
 
