@@ -20,10 +20,10 @@ for (scenarioName in c(
   "a_Population", "a_EconDevelop", "a_EnergyTrans",
   "a_NoUnderweight", "a_NoOverweight", "a_DietVegFruitsNutsSeeds", "a_DietLegumes",
   "a_DietMonogastrics", "a_DietRuminants", "a_DietEmptyCals", "a_DietFish", "a_LessFoodWaste",
-  "a_ManureMngmt", "a_LivestockMngmt", "a_LandUseDiversity",
+  "a_ManureMngmt", "a_LivestockMngmt", "a_BiodivSparing",
   "a_NitrogenEff", "a_RiceMit", "a_CropeffTax",
   "a_MinWage", "a_Bioplastics",
-  "a_FairTrade", "a_TimberCities", "a_REDDaff", "a_REDD", "a_CropRotations",
+  "a_LiberalizedTrade", "a_TimberCities", "a_REDDaff", "a_REDD", "a_CropRotations",
   "a_LandSparing", "a_WaterSparing", "a_PeatlandSparing", "a_AirPollution", "a_SoilCarbon",
   # Scenario combination runs
   "c_BAU", "d_SSP1bau", "d_SSP1PLUSbau", "d_SSP2bau", "d_SSP3bau", "d_SSP4bau", "d_SSP5bau",
@@ -38,6 +38,8 @@ for (scenarioName in c(
   "b_LivestockManureMngmt", "b_LivestockNUEMngmt",
   "b_AllNitrogen", "b_AllClimate", "b_FullBiodiv",
   "b_AllEnvironment", "b_AllHealth", "b_AllInclusion",
+  "b_Livelihoods", "b_LivelihoodsExt", "b_Bioeconomy",
+  "b_AgroMngmt", "b_NatureSparing",
   # still missing: Bioeconomy + energy + timber
   "b_Efficiency", "b_Sufficiency", "b_Protection")) {
 
