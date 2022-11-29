@@ -6,7 +6,7 @@ help: ## Show this help.
 		$(MAKEFILE_LIST) | column -ts '^'
 
 docs: ## Generate/update model HTML documentation in the doc/ folder.
-	Rscript -e 'goxygen::goxygen()'
+	Rscript -e 'goxygen::goxygen(); warnings()'
 	@echo -e '\nOpen\ndoc/html/index.htm\nin your browser to view the generated documentation.'
 
 update-renv: ## Upgrade all pik-piam packages in your renv to the respective

@@ -81,6 +81,7 @@ Imports:
     txtplot,
     withr
 Suggests:
-    goxygen
+    goxygen,
+    qgraph
 Encoding: UTF-8
 RoxygenNote: 7.2.1
