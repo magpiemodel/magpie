@@ -8,6 +8,27 @@
 ##########################################################
 #### MAgPIE output generation ####
 ##########################################################
+ask <- function(question, emptyAnswer = "y") {
+  message(question, appendLF = FALSE)
+  answer <- gms::getLine()
+  if (answer == "") {
+    answer <- emptyAnswer
+  }
+  return(tolower(answer) %in% c("y", "yes"))
+}
+
+message("Checking for updates... ", appendLF = FALSE)
+if (getOption("autoRenvUpdates", FALSE) ||
+      (!is.null(piamenv::showUpdates()) && ask("Update now? (Y/n): "))) {
+  updates <- piamenv::updateRenv()
+  piamenv::stopIfLoaded(names(updates))
+}
+message("Update check done.")
+
+message("Checking package version requirements... ", appendLF = FALSE)
+updates <- piamenv::fixDeps(ask = TRUE)
+piamenv::stopIfLoaded(names(updates))
+message("Requirements check done.")
 
 library(lucode2)
 library(gms)
@@ -16,10 +37,10 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
   choose_folder <- function(title="Please choose a folder") {
     # try to use find because it is significantly quicker than list.dirs
     tmp <- try(system("find ./output -name 'full.gms'", intern=TRUE,  ignore.stderr = TRUE), silent=TRUE)
-    if("try-error" %in% class(tmp) | length(tmp)==0) {
+    if("try-error" %in% class(tmp) || length(tmp)==0) {
       tmp <- base::list.dirs("./output/",recursive=TRUE)
       dirs <- NULL
-      for (i in 1:length(tmp)) {
+      for (i in seq_along(tmp)) {
         if (file.exists(file.path(tmp[i],"full.gms"))) dirs <- c(dirs,sub("./output/","",tmp[i]))
       }
     } else {
@@ -28,14 +49,16 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     dirs <- sort(dirs)
     dirs <- c("all",dirs)
     cat("\n",title,":\n", sep="")
-    cat(paste(1:length(dirs), dirs, sep=": " ),sep="\n")
+    cat(paste(seq_along(dirs), dirs, sep=": " ),sep="\n")
     cat(paste(length(dirs)+1, "Search by the pattern.\n", sep=": "))
     cat("Number: ")
     identifier <- gms::getLine()
     identifier <- strsplit(identifier,",")[[1]]
     tmp <- NULL
-    for (i in 1:length(identifier)) {
-      if (length(strsplit(identifier,":")[[i]]) > 1) tmp <- c(tmp,as.numeric(strsplit(identifier,":")[[i]])[1]:as.numeric(strsplit(identifier,":")[[i]])[2])
+    for (i in seq_along(identifier)) {
+      if (length(strsplit(identifier,":")[[i]]) > 1) {
+        tmp <- c(tmp,as.numeric(strsplit(identifier,":")[[i]])[1]:as.numeric(strsplit(identifier,":")[[i]])[2])
+      }
       else tmp <- c(tmp,as.numeric(identifier[i]))
     }
     identifier <- tmp
@@ -46,7 +69,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
       id <- grep(pattern=pattern, dirs[-1], perl=TRUE)
       # lists all directories matching the pattern and ask for confirmation
       cat("\n\nYou have chosen the following directories:\n")
-      cat(paste(1:length(id), dirs[id+1], sep=": "), sep="\n")
+      cat(paste(seq_along(id), dirs[id+1], sep=": "), sep="\n")
       cat("\nAre you sure these are the right directories?(y/n): ")
       answer <- gms::getLine()
       if(answer=="y"){
@@ -73,7 +96,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
      modes <- grep("^SLURM", modes, invert = TRUE, value = TRUE)
     }
     cat("\n",title,":\n",sep="")
-    cat(paste(1:length(modes), modes, sep=": " ),sep="\n")
+    cat(paste(seq_along(modes), modes, sep=": " ),sep="\n")
     cat("Number: ")
     identifier <- gms::getLine()
     identifier <- as.numeric(strsplit(identifier,",")[[1]])
@@ -102,7 +125,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     if(!dir.exists("logs")) dir.create("logs")
     #Set value source_include so that loaded scripts know, that they are
     #included as source (instead of a load from command line)
-    source_include <- TRUE
+    source_include <- TRUE # nolint
     # run output scripts over all choosen folders
     for(rout in output){
       name <- ifelse(file.exists(paste0(script_path,rout)), rout, paste0(rout,".R"))
@@ -116,7 +139,7 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
       if(comp) {
         loop <- list(alloutputdirs)
       } else {
-	     	loop <- alloutputdirs
+        loop <- alloutputdirs
       }
       rout_name <- sub("\\.R$","",sub("/","_",rout))
       for(outputdir in loop) {
@@ -168,6 +191,21 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     message("No output folder selected! Stop here.")
     return(invisible(NULL))
   }
+
+  # Write a separate lockfile called {datetime}_{outputscript}_renv.lock into outputdir
+  # unless the renv from outputdir itself was used to run output.R
+  if (!is.null(renv::project())) {
+    lockfile <- file.path(outputdir, "renv.lock")
+    datetime <- format(Sys.time(), "%Y-%m-%dT%H%M%S")
+    newLockfile <- file.path(outputdir, paste0(datetime, "_", output, "_renv.lock"))
+    renv::snapshot(lockfile = newLockfile, prompt = FALSE)
+    if (!file.exists(lockfile)) {
+      warning(normalizePath(lockfile), " does not exist.")
+    } else if (identical(readLines(lockfile), readLines(newLockfile))) {
+      file.remove(newLockfile)
+    }
+  }
+
   runsubmit(output, alloutputdirs = outputdir, submit, "scripts/output/")
   message("")
 }
