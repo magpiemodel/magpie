@@ -9,7 +9,6 @@ if (isTRUE(rownames(installed.packages(priority = "NA")) == "renv")) {
   message("R package dependencies are not installed in this renv, installing now...")
   renv::install("yaml", prompt = FALSE) # yaml is required to find dependencies in Rmd files
   renv::hydrate() # auto-detect and install all dependencies
-  renv::snapshot(prompt = FALSE) # create renv.lock
   message("Finished installing R package dependencies.")
 }
 

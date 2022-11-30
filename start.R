@@ -9,27 +9,29 @@
 #### MAgPIE output generation ####
 ##########################################################
 
-ask <- function(question, emptyAnswer = "y") {
-  message(question, appendLF = FALSE)
-  answer <- gms::getLine()
-  if (answer == "") {
-    answer <- emptyAnswer
+if (!is.null(renv::project())) {
+  ask <- function(question, emptyAnswer = "y") {
+    message(question, appendLF = FALSE)
+    answer <- gms::getLine()
+    if (answer == "") {
+      answer <- emptyAnswer
+    }
+    return(tolower(answer) %in% c("y", "yes"))
   }
-  return(tolower(answer) %in% c("y", "yes"))
-}
 
-message("Checking for updates... ", appendLF = FALSE)
-if (getOption("autoRenvUpdates", FALSE) ||
-      (!is.null(piamenv::showUpdates()) && ask("Update now? (Y/n): "))) {
-  updates <- piamenv::updateRenv()
+  message("Checking for updates... ", appendLF = FALSE)
+  if (getOption("autoRenvUpdates", FALSE) ||
+        (!is.null(piamenv::showUpdates()) && ask("Update now? (Y/n): "))) {
+    updates <- piamenv::updateRenv()
+    piamenv::stopIfLoaded(names(updates))
+  }
+  message("Update check done.")
+
+  message("Checking package version requirements... ", appendLF = FALSE)
+  updates <- piamenv::fixDeps(ask = TRUE)
   piamenv::stopIfLoaded(names(updates))
+  message("Requirements check done.")
 }
-message("Update check done.")
-
-message("Checking package version requirements... ", appendLF = FALSE)
-updates <- piamenv::fixDeps(ask = TRUE)
-piamenv::stopIfLoaded(names(updates))
-message("Requirements check done.")
 
 library(lucode2)
 library(gms)

@@ -8,27 +8,30 @@
 ##########################################################
 #### MAgPIE output generation ####
 ##########################################################
-ask <- function(question, emptyAnswer = "y") {
-  message(question, appendLF = FALSE)
-  answer <- gms::getLine()
-  if (answer == "") {
-    answer <- emptyAnswer
+
+if (!is.null(renv::project()) && !exists("source_include")) {
+  ask <- function(question, emptyAnswer = "y") {
+    message(question, appendLF = FALSE)
+    answer <- gms::getLine()
+    if (answer == "") {
+      answer <- emptyAnswer
+    }
+    return(tolower(answer) %in% c("y", "yes"))
   }
-  return(tolower(answer) %in% c("y", "yes"))
-}
 
-message("Checking for updates... ", appendLF = FALSE)
-if (getOption("autoRenvUpdates", FALSE) ||
-      (!is.null(piamenv::showUpdates()) && ask("Update now? (Y/n): "))) {
-  updates <- piamenv::updateRenv()
+  message("Checking for updates... ", appendLF = FALSE)
+  if (getOption("autoRenvUpdates", FALSE) ||
+        (!is.null(piamenv::showUpdates()) && ask("Update now? (Y/n): "))) {
+    updates <- piamenv::updateRenv()
+    piamenv::stopIfLoaded(names(updates))
+  }
+  message("Update check done.")
+
+  message("Checking package version requirements... ", appendLF = FALSE)
+  updates <- piamenv::fixDeps(ask = TRUE)
   piamenv::stopIfLoaded(names(updates))
+  message("Requirements check done.")
 }
-message("Update check done.")
-
-message("Checking package version requirements... ", appendLF = FALSE)
-updates <- piamenv::fixDeps(ask = TRUE)
-piamenv::stopIfLoaded(names(updates))
-message("Requirements check done.")
 
 library(lucode2)
 library(gms)
@@ -197,12 +200,22 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
   if (!is.null(renv::project())) {
     lockfile <- file.path(outputdir, "renv.lock")
     datetime <- format(Sys.time(), "%Y-%m-%dT%H%M%S")
-    newLockfile <- file.path(outputdir, paste0(datetime, "_", output, "_renv.lock"))
-    renv::snapshot(lockfile = newLockfile, prompt = FALSE)
+    newLockfile <- file.path(gsub("//", "/", outputdir),
+                             paste0(datetime, "__", sub("\\.R$", "", output), "__renv.lock"))
+
+    utils::capture.output({
+      utils::capture.output({
+        renv::snapshot(lockfile = newLockfile, prompt = FALSE)
+      }, type = "message")
+    })
+
     if (!file.exists(lockfile)) {
       warning(normalizePath(lockfile), " does not exist.")
+      message("Lockfile written to ", newLockfile)
     } else if (identical(readLines(lockfile), readLines(newLockfile))) {
       file.remove(newLockfile)
+    } else {
+      message("Lockfile written to ", newLockfile)
     }
   }
 
