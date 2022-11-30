@@ -10,13 +10,9 @@
 ##########################################################
 
 if (!is.null(renv::project())) {
-  ask <- function(question, emptyAnswer = "y") {
+  ask <- function(question) {
     message(question, appendLF = FALSE)
-    answer <- gms::getLine()
-    if (answer == "") {
-      answer <- emptyAnswer
-    }
-    return(tolower(answer) %in% c("y", "yes"))
+    return(tolower(gms::getLine()) %in% c("", "y", "yes"))
   }
 
   message("Checking for updates... ", appendLF = FALSE)
