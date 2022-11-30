@@ -36,7 +36,6 @@ title <- cfg$title
 
 message("Generating water indicators output for the run: ", title)
 gdx     <- file.path(outputdir, "fulldata.gdx")
-mapping <- readRDS(paste0(outputdir, "clustermap_rev4.75FSEC_c200_e2bdb6cd.rds"))
 
 # Grid-level water intdicators
 efvViolation <- waterEFViolation(gdx, level = "grid", dir = outputdir)
