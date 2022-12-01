@@ -47,8 +47,9 @@ parameters
  oq30_rotation_max_irrig(t,j,rotamax30,type) Local maximum rotational constraints (mio. ha)
  oq30_prod(t,j,kcr,type)                     Production of cropped products (mio. tDM)
  oq30_carbon(t,j,ag_pools,stockType,type)    Cropland above ground carbon content calculation (mio. tC)
- oq30_bv_ann(t,j,potnatveg,type)             Biodiversity value of annual cropland (Mha)
- oq30_bv_per(t,j,potnatveg,type)             Biodiversity value of perennial cropland (Mha)
+ oq30_bv_ann(t,j,potnatveg,type)             Biodiversity value of annual cropland (mio. ha)
+ oq30_bv_per(t,j,potnatveg,type)             Biodiversity value of perennial cropland (mio. ha)
+ oq30_natveg_snv(t,j,type)                   Natural vegetation cover in cropland areas (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 
