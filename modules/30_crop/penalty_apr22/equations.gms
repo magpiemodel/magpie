@@ -23,8 +23,16 @@
 *' can be reduced by constraining the cropland area in favour of other land types,
 *' in order to increase compositional heterogeneity of land types at the cell level.
 
- q30_avl_cropland(j2)  ..
+ q30_avl_cropland(j2) ..
    vm_land(j2,"crop") =l= sum(ct, p30_avl_cropland(ct,j2));
+
+*' Optionally, semi-natural vegetation in cropland areas can only include
+*' forest or other land (not grassland).
+ q30_natveg_snv(j2)$s30_snv_natveg_only ..
+            sum(land_natveg, vm_land(j2,land_natveg))
+            =g=
+            sum(ct, p30_snv_shr(ct,j2)) * vm_land(j2,"crop")
+          + sum((ct,land_natveg,consv_type), pm_land_conservation(ct,j2,land_natveg,consv_type));
 
 *' Rotational constraints prevent over-specialization. In this module realization,
 *' they are implemented via a penalty payment if the constraints are violated.

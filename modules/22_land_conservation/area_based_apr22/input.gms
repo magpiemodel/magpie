@@ -59,8 +59,3 @@ $include "./modules/22_land_conservation/input/consv_prio_areas.cs3"
 $offdelim
 ;
 
-table f22_land_iso(t_ini10,iso,land) Land area for different land pools at ISO level (mio. ha)
-$ondelim
-$include "./modules/22_land_conservation/input/avl_land_t_iso.cs3"
-$offdelim;
-

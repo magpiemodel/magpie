@@ -11,7 +11,7 @@ $setglobal c30_bioen_type  all
 $setglobal c30_bioen_water  rainfed
 * options: rainfed, irrigated, all
 
-$setglobal c30_marginal_land  all_marginal
+$setglobal c30_marginal_land  q33_marginal
 * options: all_marginal, q33_marginal, no_marginal
 
 $setglobal c30_snv_target  none
@@ -86,8 +86,9 @@ $if "%c30_rotation_constraints%" == "off" f30_rotation_min_shr(crp30) = 0;
 ********* AVAILABLE CROPLAND *******************************************
 
 scalar
-s30_snv_shr   		Share of available cropland that is witheld for other land cover types (1) / 0 /
+s30_snv_shr   		    Share of available cropland that is witheld for other land cover types (1) / 0 /
 s30_snv_shr_noselect 	Share of available cropland that is witheld for other land cover types (1) / 0 /
+s30_snv_natveg_only   Whether only forest and other land are allowed as semi-natural vegetation in cropland areas (1) / 0 /
 ;
 
 table f30_avl_cropland(j,marginal_land30) Available land area for cropland (mio. ha)

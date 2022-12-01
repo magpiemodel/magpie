@@ -7,7 +7,8 @@
 
 parameters
  p30_avl_cropland(t,j)             	Total available land for crop cultivation (mio. ha)
- p30_region_snv_shr(i)			    SNV share of the region (1)
+ p30_country_snv_weight(i)			SNV policy country weight per region (1)
+ p30_snv_shr(t,j)                   Share of semi-natural vegetation in cropland areas (1)
  p30_country_dummy(iso)		        Dummy parameter indicating whether country is affected by selected SNV policy (1)
  i30_avl_cropland_iso(iso)			Available land area for cropland at ISO level (mio. ha)
 ;
@@ -26,8 +27,9 @@ equations
  q30_rotation_min(j,crp30,w)     Local minimum rotational constraints (mio. ha)
  q30_prod(j,kcr)                 Production of cropped products (mio. tDM)
  q30_carbon(j,ag_pools,stockType) Cropland above ground carbon content calculation (mio. tC)
- q30_bv_ann(j,potnatveg)         Biodiversity value of annual cropland (Mha)
- q30_bv_per(j,potnatveg)         Biodiversity value of perennial cropland (Mha)
+ q30_bv_ann(j,potnatveg)         Biodiversity value of annual cropland (mio. ha)
+ q30_bv_per(j,potnatveg)         Biodiversity value of perennial cropland (mio. ha)
+ q30_natveg_snv(j)               Natural vegetation cover in cropland areas (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
@@ -41,8 +43,9 @@ parameters
  oq30_rotation_min(t,j,crp30,w,type)      Local minimum rotational constraints (mio. ha)
  oq30_prod(t,j,kcr,type)                  Production of cropped products (mio. tDM)
  oq30_carbon(t,j,ag_pools,stockType,type) Cropland above ground carbon content calculation (mio. tC)
- oq30_bv_ann(t,j,potnatveg,type)          Biodiversity value of annual cropland (Mha)
- oq30_bv_per(t,j,potnatveg,type)          Biodiversity value of perennial cropland (Mha)
+ oq30_bv_ann(t,j,potnatveg,type)          Biodiversity value of annual cropland (mio. ha)
+ oq30_bv_per(t,j,potnatveg,type)          Biodiversity value of perennial cropland (mio ha)
+ oq30_natveg_snv(t,j,type)                Natural vegetation cover in cropland areas (mio. ha)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 
