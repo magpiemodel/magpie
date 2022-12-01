@@ -196,8 +196,9 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
   if (!is.null(renv::project())) {
     lockfile <- file.path(outputdir, "renv.lock")
     datetime <- format(Sys.time(), "%Y-%m-%dT%H%M%S")
+    scriptName <- gsub("/", "-", sub("\\.R$", "", output))
     newLockfile <- file.path(gsub("//", "/", outputdir),
-                             paste0(datetime, "__", sub("\\.R$", "", output), "__renv.lock"))
+                             paste0(datetime, "__", scriptName, "__renv.lock"))
 
     utils::capture.output({
       utils::capture.output({
