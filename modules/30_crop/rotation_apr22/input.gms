@@ -26,6 +26,16 @@ $setglobal c30_rotation_scenario  default
 $setglobal c30_rotation_scenario_speed  by2050
 * options: none, by2030, by2020
 
+scalars
+s30_snv_shr   		    Share of available cropland that is witheld for other land cover types (1) / 0 /
+s30_snv_shr_noselect 	Share of available cropland that is witheld for other land cover types (1) / 0 /
+s30_snv_natveg_only   Whether only forest and other land are allowed as semi-natural vegetation in cropland areas (0=no 1=yes) / 0 /
+s30_snv_scenario_start		SNV scnenario start year			/ 2020 /
+s30_snv_scenario_target		SNV scnenario target year			/ 2030 /
+s30_rotation_scenario_start		SNV scnenario start year			/ 2020 /
+s30_rotation_scenario_target		SNV scnenario target year			/ 2050 /
+;
+
 * Set-switch for countries affected by regional SNV policy
 * Default: all iso countries selected
 sets
@@ -85,12 +95,6 @@ $if "%c30_rotation_constraints%" == "off" f30_rotation_min_shr(crp30) = 0;
 
 ********* AVAILABLE CROPLAND *******************************************
 
-scalar
-s30_snv_shr   		    Share of available cropland that is witheld for other land cover types (1) / 0 /
-s30_snv_shr_noselect 	Share of available cropland that is witheld for other land cover types (1) / 0 /
-s30_snv_natveg_only   Whether only forest and other land are allowed as semi-natural vegetation in cropland areas (1) / 0 /
-;
-
 table f30_avl_cropland(j,marginal_land30) Available land area for cropland (mio. ha)
 $ondelim
 $include "./modules/30_crop/rotation_apr22/input/avl_cropland.cs3"
@@ -103,8 +107,3 @@ $include "./modules/30_crop/rotation_apr22/input/avl_cropland_iso.cs3"
 $offdelim
 ;
 
-table f30_scenario_fader(t_all,policy_target30) Fader for scenario implementation speed (unitless)
-$ondelim
-$include "./modules/30_crop/rotation_apr22/input/f30_scenario_fader.csv"
-$offdelim
-;

@@ -5,11 +5,16 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* create crop rotation scenario
+** Trajectory for cropland scenarios
+* sigmoidal interpolation between start year and target year
+m_sigmoid_interpol(p30_snv_scenario_fader,s30_snv_scenario_start,s30_snv_scenario_target,0,1);
+m_sigmoid_interpol(p30_rotation_scenario_fader,s30_rotation_scenario_start,s30_rotation_scenario_target,0,1);
 
+
+** create crop rotation scenario
 i30_rotation_incentives(t_all,rota30)=
-  f30_rotation_incentives(rota30,"default") * (1-f30_scenario_fader(t_all,"%c30_rotation_scenario_speed%"))+
-  f30_rotation_incentives(rota30,"%c30_rotation_scenario%") * (f30_scenario_fader(t_all,"%c30_rotation_scenario_speed%"));
+  f30_rotation_incentives(rota30,"default") * (1-p30_rotation_scenario_fader(t_all)) +
+  f30_rotation_incentives(rota30,"%c30_rotation_scenario%") * (p30_rotation_scenario_fader(t_all));
 
 
 *due to some rounding errors the input data currently may contain in some cases

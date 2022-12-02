@@ -20,3 +20,8 @@ p30_country_dummy(policy_countries30) = 1;
 * Countries are weighted by available cropland area.
 i30_avl_cropland_iso(iso) = f30_avl_cropland_iso(iso,"%c30_marginal_land%");
 p30_country_snv_weight(i) = sum(i_to_iso(i,iso), p30_country_dummy(iso) * i30_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), i30_avl_cropland_iso(iso));
+
+** Trajectory for cropland scenarios
+* sigmoidal interpolation between start year and target year
+m_sigmoid_interpol(p30_snv_scenario_fader,s30_snv_scenario_start,s30_snv_scenario_target,0,1);
+m_sigmoid_interpol(p30_rotation_scenario_fader,s30_rotation_scenario_start,s30_rotation_scenario_target,0,1);

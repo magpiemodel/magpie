@@ -11,6 +11,8 @@ parameters
  p30_snv_shr(t,j)                   Share of semi-natural vegetation in cropland areas (1)
  p30_country_dummy(iso)		        Dummy parameter indicating whether country is affected by selected SNV policy (1)
  i30_avl_cropland_iso(iso)			Available land area for cropland at ISO level (mio. ha)
+ p30_snv_scenario_fader(t_all)      SNV scenario fader (1)
+ p30_rotation_scenario_fader(t_all) Crop rotation scenario fader (1)
 ;
 
 positive variables

@@ -24,7 +24,7 @@ vm_area.up(j,bioen_type_30,bioen_water_30)=Inf;
 
 *' @code
 *' Minimum semi-natural vegetation (SNV) share is fading in after 2020
-p30_snv_shr(t,j) = f30_scenario_fader(t,"%c30_snv_target%") *
+p30_snv_shr(t,j) = p30_snv_scenario_fader(t) *
 	(s30_snv_shr * sum(cell(i,j), p30_country_snv_weight(i))
 	+ s30_snv_shr_noselect * sum(cell(i,j), 1-p30_country_snv_weight(i)));
 
