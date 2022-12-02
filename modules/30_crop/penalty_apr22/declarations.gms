@@ -6,11 +6,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- p30_avl_cropland(t,j)             	    Total available land for crop cultivation (mio. ha)
- p30_country_snv_weight(i)			    SNV policy country weight per region (1)
+ p30_avl_cropland(t,j)                  Total available land for crop cultivation (mio. ha)
+ p30_country_snv_weight(i)              SNV policy country weight per region (1)
  p30_snv_shr(t,j)                       Share of semi-natural vegetation in cropland areas (1)
- p30_country_dummy(iso)		            Dummy parameter indicating whether country is affected by selected SNV policy (1)
- i30_avl_cropland_iso(iso)			    Available land area for cropland at ISO level (mio. ha)
+ p30_country_dummy(iso)                 Dummy parameter indicating whether country is affected by selected SNV policy (1)
+ i30_avl_cropland_iso(iso)              Available land area for cropland at ISO level (mio. ha)
  i30_rotation_incentives(t_all,rota30)  Penalty for violating rotational constraints (USD05MER per ha)
  p30_snv_scenario_fader(t_all)          SNV scenario fader (1)
  p30_rotation_scenario_fader(t_all)     Crop rotation scenario fader (1)
