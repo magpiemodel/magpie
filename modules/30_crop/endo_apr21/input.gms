@@ -24,10 +24,10 @@ scalars
 s30_snv_shr   		              Share of available cropland that is witheld for other land cover types (1) / 0 /
 s30_snv_shr_noselect 	          Share of available cropland that is witheld for other land cover types (1) / 0 /
 s30_snv_natveg_only             Whether only forest and other land are allowed as semi-natural vegetation in cropland areas (0=no 1=yes) / 0 /
-s30_snv_scenario_start		      SNV scnenario start year			/ 2020 /
-s30_snv_scenario_target		      SNV scnenario target year			/ 2030 /
-s30_rotation_scenario_start		  SNV scnenario start year			/ 2020 /
-s30_rotation_scenario_target		SNV scnenario target year			/ 2050 /
+s30_snv_scenario_start		      SNV scenario start year			/ 2020 /
+s30_snv_scenario_target		      SNV scenario target year			/ 2030 /
+s30_rotation_scenario_start		  Rotation scenario start year			/ 2020 /
+s30_rotation_scenario_target		Rotation scenario target year			/ 2050 /
 ;
 
 * Set-switch for countries affected by regional SNV policy

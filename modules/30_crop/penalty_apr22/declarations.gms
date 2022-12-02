@@ -18,10 +18,10 @@ parameters
 
 positive variables
 * Fallow land is cropland which is temporarily fallow. Croparea+fallow=cropland
- vm_fallow(j)                   Fallow land (mio. ha)
- vm_area(j,kcr,w)                Agricultural production area (mio. ha)
- vm_rotation_penalty(i)                  Penalty for violating rotational constraints (mio. USD05MER)
- v30_penalty_max_irrig(j,rotamax30) Penalty for violating max rotational constraints on irrigated land (mio. USD05MER)
+ vm_fallow(j)                         Fallow land (mio. ha)
+ vm_area(j,kcr,w)                     Agricultural production area (mio. ha)
+ vm_rotation_penalty(i)               Penalty for violating rotational constraints (mio. USD05MER)
+ v30_penalty_max_irrig(j,rotamax30)   Penalty for violating max rotational constraints on irrigated land (mio. USD05MER)
  v30_penalty(j,rota30) Penalty for violating rotational constraints (mio. USD05MER)
 ;
 
