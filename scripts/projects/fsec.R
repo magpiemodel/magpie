@@ -36,7 +36,7 @@ fsecScenario <- function(scenario) {
                                   "energy", "bioplastics", "population", "institutions", "timberCities",
                                   "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "minWage",
                                   "REDDaff", "REDD", "landSharing", "landSparing", "waterSparing", "peatland",
-                                  "airPollution", "soil", "allDietAndWaste", "allEnvPrice")),                        
+                                  "airPollution", "soil", "allDietAndWaste", "allEnvPrice")),
             d_SSP1fsdp       = list(standard = c("cc", "rcp4p5", "SSP1", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP1",
                                   "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "minWage",
@@ -221,7 +221,8 @@ fsecScenario <- function(scenario) {
                        "projects/FSEC_AlessandroPassaro",
                        "projects/FSEC_water"
                        )
-  cfg$force_download <- TRUE
+  cfg$force_download  <- TRUE
+  cfg$gms$s80_optfile <- 0
 
   return(cfg)
 }
