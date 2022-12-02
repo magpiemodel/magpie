@@ -40,7 +40,7 @@ parameters
  ov21_excess_dem(t,k_trade,type)           Global excess demand (mio. tDM per yr)
  ov21_excess_prod(t,h,k_trade,type)        Superregional excess production (mio. tDM per yr)
  ov_cost_trade(t,i,type)                   Regional  trade costs (mio. USD05MER per yr)
- ov21_cost_tariff_reg(t,h,k_trade,type)    Superregional trade tariffs for each tradable commodity (mio. USD05MER per yr)
+ ov21_cost_tariff_reg(t,i,k_trade,type)    Superregional trade tariffs for each tradable commodity (mio. USD05MER per yr)
  ov21_cost_transport_reg(t,i,k_trade,type) Superregional trade margins for each tradable commodity (mio. USD05MER per yr)
  ov21_trade(t,i_ex,i_im,k_trade,type)      Amounts traded bilaterally (mio. tDM per yr)
  oq21_trade_glo(t,k_trade,type)            Global production constraint (mio. tDM per yr)
@@ -49,9 +49,10 @@ parameters
  oq21_trade_reg_up(t,h,k_trade,type)       Superregional trade balances i.e. maximum self-sufficiency ratio (1)
  oq21_excess_dem(t,k_trade,type)           Global excess demand (mio. tDM per yr)
  oq21_excess_supply(t,h,k_trade,type)      Superregional excess production (mio. tDM per yr)
- oq21_cost_trade(t,i,type)                 Superregional  trade costs (mio. USD05MER per yr)
- oq21_cost_trade_reg(t,h,k_trade,type)     Superregional trade costs for each tradable commodity (mio. USD05MER per yr)
- oq21_trade_bilat(t,h,k_trade,type)        Superregional bilateral trade requirements
- oq21_costs_margins(t,i,k_trade,type)      Superregional bilateral trade requirements
+ oq21_trade_bilat(t,h,k_trade,type)        Superregional bilateral trade requirements (mio. tDM per yr)
+ oq21_costs_tariffs(t,i,k_trade,type)      Regional  trade tariff costs (mio. USD05MER per yr)
+ oq21_costs_margins(t,i,k_trade,type)      Regional bilateral trade requirements
+ oq21_cost_trade_reg(t,i,k_trade,type)     Regional trade costs for each tradable commodity (mio. USD05MER per yr)
+ oq21_cost_trade(t,i,type)                 Regional trade costs (mio. USD05MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
