@@ -194,25 +194,26 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
   # Write a separate lockfile called {datetime}_{outputscript}_renv.lock into outputdir
   # unless the renv from outputdir itself was used to run output.R
   if (!is.null(renv::project())) {
-    lockfile <- file.path(outputdir, "renv.lock")
     datetime <- format(Sys.time(), "%Y-%m-%dT%H%M%S")
-    scriptName <- gsub("/", "-", sub("\\.R$", "", output))
-    newLockfile <- file.path(gsub("//", "/", outputdir),
-                             paste0(datetime, "__", scriptName, "__renv.lock"))
+    scriptName <- gsub("/", "-", paste(sub("\\.R$", "", output), collapse = "--"))
+    for (runFolder in setdiff(normalizePath(outputdir), normalizePath(renv::project()))) {
+      lockfile <- file.path(runFolder, "renv.lock")
+      newLockfile <- gsub("//", "/", file.path(runFolder, paste0(datetime, "__", scriptName, "__renv.lock")))
 
-    utils::capture.output({
       utils::capture.output({
-        renv::snapshot(lockfile = newLockfile, prompt = FALSE)
-      }, type = "message")
-    })
+        utils::capture.output({
+          renv::snapshot(lockfile = newLockfile, prompt = FALSE)
+        }, type = "message")
+      })
 
-    if (!file.exists(lockfile)) {
-      warning(normalizePath(lockfile), " does not exist.")
-      message("Lockfile written to ", newLockfile)
-    } else if (identical(readLines(lockfile), readLines(newLockfile))) {
-      file.remove(newLockfile)
-    } else {
-      message("Lockfile written to ", newLockfile)
+      if (!file.exists(lockfile)) {
+        warning(normalizePath(lockfile), " does not exist.")
+        message("Lockfile written to ", newLockfile)
+      } else if (identical(readLines(lockfile), readLines(newLockfile))) {
+        file.remove(newLockfile)
+      } else {
+        message("Lockfile written to ", newLockfile)
+      }
     }
   }
 
