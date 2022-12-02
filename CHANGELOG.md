@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### added
 - **10_land** added `vm_lu_transitions` as interface
 - **39_landconversion** scalar `s39_reward_crop_reduction` provides a cropland reduction reward
-- **10_land** added interface `fm_land_iso` realization for consistency
+- **10_land** added interface `fm_land_iso` for consistency
 
 ### removed
 - **10_land** removed `feb15` realization
