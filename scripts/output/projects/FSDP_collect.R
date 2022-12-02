@@ -175,7 +175,7 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing,outputdir[i])
 
     ## Nitrogen
-    nc_file <- file.path(outputdir[i], paste(cfg$title,"nutrientSurplus_intensity.mz", sep="-"))
+    nc_file <- file.path(outputdir[i], paste(cfg$title, "nutrientSurplus_intensity.mz", sep = "-"))
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
       getNames(a) <- "nutrientSurplus (kg N per ha)"
@@ -185,7 +185,7 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing,outputdir[i])
 
     ## Water
-    nc_file <- file.path(outputdir[i], paste("watStressViolations.mz", sep = "-"))
+    nc_file <- file.path(outputdir[i], "watStressViolations.mz")
     if (file.exists(nc_file)) {
       a <- read.magpie(nc_file)[, years, ]
       getNames(a) <- "water stress and violations"

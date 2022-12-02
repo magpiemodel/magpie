@@ -16,7 +16,7 @@
 library(gms)
 library(magpie4)
 
-message("Starting FSEC nitrogen pollution output runscript")
+message("Starting FSEC water output runscript")
 
 ############################# BASIC CONFIGURATION #######################################
 if (!exists("source_include")) {
