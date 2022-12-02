@@ -67,17 +67,21 @@ q21_trade_bilat(h2,k_trade)..
  v21_excess_dem(k_trade)*sum(ct,f21_exp_shr(ct,h2,k_trade));
 
 * Trade tariffs are associated with exporting regions. They are dependent on net exports and tariff levels (GTAP).
- q21_cost_trade_reg(h2,k_trade)..
- v21_cost_tariff_reg(h2,k_trade) =g=
-  sum(h_im, i21_trade_tariff(h2,h_im,k_trade))
- *sum(supreg(h2,i2), vm_prod_reg(i2,k_trade)-vm_supply(i2,k_trade));
-
+ q21_costs_tariffs(i2,k_trade)..
+ v21_cost_tariff_reg(i2,k_trade) =g=
+  sum(i_im, i21_trade_tariff(i2,i_im,k_trade) * v21_trade(i2,i_im,k_trade));
+ 
 * Trade margins (tariffs) costs assigned currently to exporting region. Margins at region level 
 q21_costs_margins(i2,k_trade)..
- v21_cost_transport_reg(i2,k_trade) =g=
-  sum(i_im, i21_trade_margin(i2,i_im,k_trade))* sum(i_im, v21_trade(i2,i_im,k_trade));
+ v21_cost_margin_reg(i2,k_trade) =g=
+  sum(i_im, i21_trade_margin(i2,i_im,k_trade) * v21_trade(i2,i_im,k_trade));
+
+* regional trade values are the sum of transport margin and tariff costs
+q21_cost_trade_reg(i2,k_trade)..
+  v21_cost_trade_reg(i2,k_trade) =g=
+  v21_cost_tariff_reg(i2,k_trade) + v21_cost_margin_reg(i2,k_trade);
+
 
 * Regional trade costs are the costs for each region aggregated over all the tradable commodities.
  q21_cost_trade(i2)..
- vm_cost_trade(i2) =e= sum(supreg(h2,i2), sum(k_trade, v21_cost_tariff_reg(h2,k_trade))) +
-                                              sum(k_trade, v21_cost_transport_reg(i2, k_trade));
+ vm_cost_trade(i2) =e= sum(k_trade, v21_cost_trade_reg(i2,k_trade));

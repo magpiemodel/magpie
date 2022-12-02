@@ -8,7 +8,7 @@
 parameters
  i21_trade_bal_reduction(t_all,k_trade)         Trade balance reduction (1)
  i21_trade_margin(i_ex,i_im,k_trade)            Trade margins (USD05MER per tDM)
- i21_trade_tariff(h_ex,h_im,k_trade)            Trade tariffs (USD05MER per tDM)
+ i21_trade_tariff(i_ex,h_im,k_trade)            Trade tariffs (USD05MER per tDM)
  pm_selfsuff_ext(t_ext,h,kforestry)            Self sufficiency for timber products in extended time frame (1)
 ;
 
@@ -16,7 +16,7 @@ positive variables
  v21_excess_dem(k_trade)                 Global excess demand (mio. tDM per yr)
  v21_excess_prod(h,k_trade)              Superregional excess production (mio. tDM per yr)
  vm_cost_trade(i)                        Regional  trade costs (mio. USD05MER per yr)
- v21_cost_tariff_reg(h,k_trade)         Superregional trade tariffs for each tradable commodity (mio. USD05MER per yr)
+ v21_cost_tariff_reg(i,k_trade)         Superregional trade tariffs for each tradable commodity (mio. USD05MER per yr)
  v21_cost_transport_reg(i,k_trade)       Superregional trade margins for each tradable commodity (mio. USD05MER per yr)
  v21_trade(i_ex,i_im,k_trade)            Amounts traded bilaterally (mio. tDM per yr)
 ;
@@ -28,11 +28,11 @@ equations
  q21_trade_reg_up(h,k_trade)             Superregional trade balances i.e. maximum self-sufficiency ratio (1)
  q21_excess_dem(k_trade)                 Global excess demand (mio. tDM per yr)
  q21_excess_supply(h,k_trade)            Superregional excess production (mio. tDM per yr)
- q21_cost_trade(i)                       Superregional  trade costs (mio. USD05MER per yr)
- q21_cost_trade_reg(h,k_trade)           Superregional trade costs for each tradable commodity (mio. USD05MER per yr)
- q21_trade_bilat(h, k_trade)             Superregional bilateral trade requirements
- q21_costs_margins(i,k_trade)            Superregional bilateral trade requirements
- 
+ q21_trade_bilat(h, k_trade)             Superregional bilateral trade requirements (mio. tDM per yr)
+ q21_costs_tariffs(i, k_trade)                       Regional  trade tariff costs (mio. USD05MER per yr)
+ q21_costs_margins(i,k_trade)            Regional bilateral trade requirements
+ q21_cost_trade_reg(i,k_trade)           Regional trade costs for each tradable commodity (mio. USD05MER per yr)
+ q21_cost_trade(i)                       Regional trade costs (mio. USD05MER per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

@@ -147,24 +147,24 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
 * Used data set: rev4.77_h12_magpie.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* md5sum: f0fb0888f1f711442377a380887dbbfa
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.77_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* md5sum: fe9ad2782602695b706836e84f6b569f
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.77_h12_validation.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* md5sum: 7bb2104776a43e1f1293f50d08e20877
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev4.30.tgz
-* md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* Used data set: additional_data_rev4.32.tgz
+* md5sum: 721ffbc57edddfb5e9b76546c51906f2
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_per_ton_fao_may22_28May22.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Used data set: calibration_H12+ir2rf_05Oct22.tgz
+* md5sum: 788b8e32ea1bd83c5c8f8987d9f05265
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -172,10 +172,10 @@ $title magpie
 * Total number of cells: 200
 * 
 * Number of cells per region:
-*   CAZ  CHA  DEU  EUC  EUN  EUS  EUW  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*     6   23    1    1    1    6    3    6    1   40   27    7   10   12   36   20
+*   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
+*     6   23    7    6    1   43   27    7   11   12   37   20
 * 
-* Regionscode: 1028489d
+* Regionscode: 62eff8f7
 * 
 * Regions data revision: 4.77
 * 
@@ -186,14 +186,14 @@ $title magpie
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
-* * Regionscode: 1028489d
+* * Regionscode: 62eff8f7
 * * Number of clusters per region:
-*   CAZ  CHA  DEU  EUC  EUN  EUS  EUW  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
-*     6   23    1    1    1    6    3    6    1   40   27    7   10   12   36   20
+*   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
+*     6   23    7    6    1   43   27    7   11   12   37   20
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Fri Sep 23 12:55:58 2022
+* Last modification (input data): Thu Nov 17 15:40:14 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -219,7 +219,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  default
+$setglobal c_title  BilatPR2_OFF
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
@@ -235,7 +235,7 @@ $setglobal interest_rate  select_apr20
 $setglobal tc  endo_jan22
 $setglobal yields  managementcalib_aug19
 
-$setglobal food  anthropometrics_jan18
+$setglobal food  anthro_iso_jun22
 $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 
