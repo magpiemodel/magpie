@@ -15,6 +15,7 @@ s38_depreciation_rate depreciation rate (share of costs)  / 0.05 /
 s38_immobile  immobile capital (share) / 1 /
 s38_ces_elast_subst Elasticity of substitution in CES function (1) / 0.3 /
 s38_fix_capital_need Year until which capital requirements are fixed / 2020 /
+s38_min_labor_share Minimum labor share out of labor plus capital needed / 0.5 /
 ;
 
 parameter f38_fac_req(kcr) Factor requirement costs in 2005 (USD05MER per tDM)

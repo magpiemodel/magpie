@@ -30,7 +30,7 @@ else
 
 p38_labor_need(t,i,kcr) = i38_fac_req(t,i,kcr)  * p38_cost_share(t,i,"labor");
 p38_capital_need(t,i,kcr,"mobile") = i38_fac_req(t,i,kcr) * p38_cost_share(t,i,"capital") / (pm_interest(t,i)+s38_depreciation_rate) * (1-s38_immobile);
-p38_capital_need(t,i,kcr,"immobile") = i38_fac_req(t,i,kcr)  * p38_cost_share(t,i,"capital") / (pm_interest(t,i)+s38_depreciation_rate) * s38_immobile;
+p38_capital_need(t,i,kcr,"immobile") = i38_fac_req(t,i,kcr) * p38_cost_share(t,i,"capital") / (pm_interest(t,i)+s38_depreciation_rate) * s38_immobile;
 
 *** Variable labor costs BEGIN
 
@@ -51,6 +51,13 @@ else
 * update CES parameters
 i38_ces_shr(j,kcr) = sum(cell(i,j), (p38_intr_depr(t,i) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(1 + s38_ces_elast_par)) / (p38_intr_depr(t,i) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(1 + s38_ces_elast_par) + pm_hourly_costs(t,i,"baseline") * v38_laborhours_need.l(j,kcr)**(1 + s38_ces_elast_par)));
 i38_ces_scale(j,kcr) = sum(cell(i,j), 1/([i38_ces_shr(j,kcr) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(-s38_ces_elast_par) + (1 - i38_ces_shr(j,kcr)) * v38_laborhours_need.l(j,kcr)**(-s38_ces_elast_par)]**(-1/s38_ces_elast_par)));
+
+* minimum labor share
+if (m_year(t)<=2020,
+  p38_min_labor_share(t) = 0;
+else
+  p38_min_labor_share(t) = s38_min_labor_share;
+);
 
 *** Variable labor costs END
 
