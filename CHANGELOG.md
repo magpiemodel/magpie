@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -
 
 ### added
+- **renv** MAgPIE now runs in an isolated, stable, reproducible R package environment
+- **setup** required R packages are automatically installed
 - **10_land** added `vm_lu_transitions` as interface 
 - **39_landconversion** scalar `s39_reward_crop_reduction` provides a cropland reduction reward
 
