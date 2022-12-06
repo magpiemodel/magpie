@@ -27,7 +27,7 @@
    vm_land(j2,"crop") =l= sum(ct, p30_avl_cropland(ct,j2));
 
 *' Optionally, semi-natural vegetation in cropland areas can only include
-*' forest or other land (not grassland).
+*' forest or other land (not grassland or forestry).
  q30_natveg_snv(j2)$s30_snv_natveg_only ..
             sum(land_natveg, vm_land(j2,land_natveg))
             =g=
