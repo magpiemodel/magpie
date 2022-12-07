@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **10_land** added `vm_lu_transitions` as interface
 - **39_landconversion** scalar `s39_reward_crop_reduction` provides a cropland reduction reward
 - **10_land** added interface `fm_land_iso` for consistency
-- **30_crop/config** added switch `s30_snv_natveg_only`for including only natveg in semi-natural vegetation in cropland scenarios
+- **30_crop/config** added switch for set `land_snv`for defining which land cover types are allowed in the semi-natural vegetation policy in cropland scenarios
 - **30_crop/config** added switch `s30_rotation_scenario_start`
 - **30_crop/config** added switch `s30_snv_scenario_start`
 
