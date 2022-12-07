@@ -23,13 +23,14 @@
  q30_avl_cropland(j2) ..
    vm_land(j2,"crop") =l= sum(ct, p30_avl_cropland(ct,j2));
 
-*' Optionally, semi-natural vegetation in cropland areas can only include
-*' forest or other land (not grassland or forestry).
- q30_natveg_snv(j2)$s30_snv_natveg_only ..
-            sum(land_natveg, vm_land(j2,land_natveg))
+*' The semi-natural land constraint in cropland areas for sustaining critical regulating NCP
+*' for agricultural production is added on top of land conserved for other reasons
+*' (e.g. conservation of intact ecosystems or protection of biodiversity hotspots).
+ q30_land_snv(j2) ..
+            sum(land_snv, vm_land(j2,land_snv))
             =g=
             sum(ct, p30_snv_shr(ct,j2)) * vm_land(j2,"crop")
-          + sum((ct,land_natveg,consv_type), pm_land_conservation(ct,j2,land_natveg,consv_type));
+          + sum((ct,land_snv,consv_type), pm_land_conservation(ct,j2,land_snv,consv_type));
 
 *' As additional constraints minimum and maximum rotational constraints limit
 *' the placing of crops. On the one hand, these rotational constraints reflect

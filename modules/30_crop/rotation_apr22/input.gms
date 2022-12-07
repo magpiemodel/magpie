@@ -29,7 +29,6 @@ $setglobal c30_rotation_scenario_speed  by2050
 scalars
 s30_snv_shr                     Share of available cropland that is witheld for other land cover types (1) / 0 /
 s30_snv_shr_noselect            Share of available cropland that is witheld for other land cover types (1) / 0 /
-s30_snv_natveg_only             Whether only primary and secondary forest and other land are allowed as semi-natural vegetation in cropland areas (0=no 1=yes) / 0 /
 s30_snv_scenario_start          SNV scenario start year			/ 2020 /
 s30_snv_scenario_target         SNV scenario target year			/ 2030 /
 s30_rotation_scenario_start     Rotation scenario start year			/ 2020 /
@@ -64,6 +63,8 @@ sets
                           TKL,TKM,TLS,TON,TTO,TUN,TUR,TUV,TWN,TZA,
                           UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
                           VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
+
+land_snv(land) land types allowed in the SNV policy / secdforest, forestry, past, other /
 ;
 
 ********* CROPAREA INITIALISATION **********************************************
