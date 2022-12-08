@@ -1,9 +1,15 @@
 .PHONY: help docs update-renv update-all-renv check check-fix
 .DEFAULT_GOAL := help
 
-help: ## Show this help.
-	@sed -e '/##/ !d' -e '/sed/ d' -e 's/^\([^ ]*\) *##\(.*\)/\1^\2/' \
-		$(MAKEFILE_LIST) | column -ts '^'
+# extracts the help text and formats it nicely
+HELP_PARSING = 'm <- readLines("Makefile");\
+				m <- grep("\#\#", m, value=TRUE);\
+				command <- sub("^([^ ]*) *\#\#(.*)", "\\1", m);\
+				help <- sub("^([^ ]*) *\#\#(.*)", "\\2", m);\
+				cat(sprintf("%-8s%s", command, help), sep="\n")'
+
+help:           ## Show this help.
+	@Rscript -e $(HELP_PARSING)
 
 docs: ## Generate/update model HTML documentation in the doc/ folder.
 	Rscript -e 'goxygen::goxygen(); warnings()'
