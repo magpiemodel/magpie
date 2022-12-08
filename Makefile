@@ -8,7 +8,7 @@ HELP_PARSING = 'm <- readLines("Makefile");\
 				help <- sub("^([^ ]*) *\#\#(.*)", "\\2", m);\
 				cat(sprintf("%-8s%s", command, help), sep="\n")'
 
-help:           ## Show this help.
+help: ## Show this help.
 	@Rscript -e $(HELP_PARSING)
 
 docs: ## Generate/update model HTML documentation in the doc/ folder.
