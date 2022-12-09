@@ -111,7 +111,9 @@ snv_pol_shr[snv_pol_iso,,] <- snv_pol_select
 avl_cropland_hr <- file.path(outputdir, "avl_cropland_0.5.mz")    # available cropland (at high resolution)
 marginal_land   <- cfg$gms$c30_marginal_land                      # marginal land scenario
 target_year <- cfg$gms$c30_snv_target                     # target year of SNV policy (default: "none")
-if(is.null(target_year)){target_year <- cfg$gms$c30_set_aside_target}
+if (is.null(target_year)) {
+  target_year <- cfg$gms$c30_set_aside_target
+}
 snv_pol_fader  <- readGDX(gdx,"f30_scenario_fader","f30_set_aside_fader",
                           format="first_found", react = "silent")[,,target_year]
 if(is.null(snv_pol_fader)){
