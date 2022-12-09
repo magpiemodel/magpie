@@ -128,8 +128,8 @@ target_year <- cfg$gms$c30_snv_target                     # target year of SNV p
 if(is.null(target_year)){target_year <- cfg$gms$c30_set_aside_target}
 snv_pol_fader  <- readGDX(gdx,"f30_scenario_fader","f30_set_aside_fader",
                           format="first_found", react = "silent")[,,target_year]
-if(is.null(snv_pol_fader)){
-snv_pol_fader <- readGDX(gdx,"p30_snv_scenario_fader",format="first_found")
+if (is.null(snv_pol_fader)) {
+  snv_pol_fader <- readGDX(gdx, "p30_snv_scenario_fader", format = "first_found")
 }
 
 
