@@ -116,13 +116,13 @@ for (i in 1:length(outputdir)) {
   cfg <- gms::loadConfig(file.path(outputdir[i], "config.yml"))
 
   ### regional level outputs
-  rep<-file.path(outputdir[i],"report.rds")
+  rep <- file.path(outputdir[i], "report.rds")
   if(file.exists(rep)) {
-    reg <- rbind(reg,as.data.table(readRDS(rep)))
+    reg <- rbind(reg, as.data.table(readRDS(rep)))
   } else missing <- c(missing,outputdir[i])
 
   ### ISO level outputs
-  rep <- file.path(outputdir[i],"report_iso.rds")
+  rep <- file.path(outputdir[i], "report_iso.rds")
   if(file.exists(rep)) {
     iso <- rbind(iso,as.data.table(readRDS(rep)))
   } else missing <- c(missing,outputdir[i])
@@ -253,5 +253,7 @@ bundlesFSDP(reg, file = file.path("output", paste0(rev, "_FSDP_bundle.png")))
 spatialMapsFSDP(reg, iso, grid, reg2iso, file = file.path("output", paste0(rev, "_FSDP_spatialMaps.png")))
 supplPlotsFSDP(reg, scenarioType = "all", file = file.path("output", paste0(rev, "_FSDP_supplPlots.png")))
 SupplPlotsCropShr(gdx = gdx, file = file.path("output", paste0(rev, "_FSDP_supplPlotCropShr.png")) )
-validationFSDP(reg, val = val, folder = "output")
+validationFSDP(repReg = reg, val = val, folder = "output")
+validationFSDP(repReg = reg, val = val, regionSel = "aggregate", folder = "output", scens = "BAU_FSEC")
+validationFSDP(repReg = reg, val = val, regionSel = "GLO", folder = "output", scens = "central")
 dashboardFSDP(repReg = reg, repIso = iso, repGrid = grid, outputDir = "output", file = paste0(rev, "_FSDP_dashboard.html"))

@@ -5,7 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 **************start solve loop**************
-
+* Default GAMS seed
+Option Seed = 3141;
 
 p80_counter(h) = 0;
 p80_modelstat(t,h) = 14;
@@ -27,7 +28,7 @@ Tol_Feas_Tria = 4.0e-6
 $offecho
 
 $onecho > conopt4.op2
-Flg_Prep = FALSE
+Flg_Prep = TRUE
 $offecho
 
 h2(h) = no;

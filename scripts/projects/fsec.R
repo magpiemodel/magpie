@@ -20,7 +20,7 @@ fsecScenario <- function(scenario) {
                                   fsec = "FSEC"),
             d_SSP1bau        = list(standard = c("cc", "rcp4p5", "SSP1", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP1")),
-            d_SSP1PLUSbau        = list(standard = c("cc", "rcp2p6", "SSP1", "NDC", "ForestryEndo"),
+            d_SSP1PLUSbau    = list(standard = c("cc", "rcp2p6", "SSP1", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP1",
                                   "energy", "bioplastics", "population", "institutions", "timberCities")),
             d_SSP2bau        = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
