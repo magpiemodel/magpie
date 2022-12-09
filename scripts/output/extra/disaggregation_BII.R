@@ -116,8 +116,8 @@ if (is.null(target_year)) {
 }
 snv_pol_fader  <- readGDX(gdx,"f30_scenario_fader","f30_set_aside_fader",
                           format="first_found", react = "silent")[,,target_year]
-if(is.null(snv_pol_fader)){
-snv_pol_fader <- readGDX(gdx,"p30_snv_scenario_fader",format="first_found")
+if (is.null(snv_pol_fader)) {
+  snv_pol_fader <- readGDX(gdx, "p30_snv_scenario_fader", format = "first_found")
 }
 
 # Sort and rename
