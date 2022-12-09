@@ -7,7 +7,6 @@
 
 # ------------------------------------------------
 # description: download input and compile main.gms
-# position: 7
 # ------------------------------------------------
 
 source("scripts/start/download_data.R")

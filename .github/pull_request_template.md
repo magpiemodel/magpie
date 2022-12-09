@@ -23,7 +23,7 @@
 
 - [ ] Perform test runs
   - **Low risk**: 
-    - Run a compilation check via `gams main.gms action=c`
+    - Run a compilation check via `Rscript scripts/start/extra/compile_main_gms.R`
   - **Medium risk**: 
     - Run test runs via `Rscript start.R --> "test runs"`
     - Check logs for errors/warnings
