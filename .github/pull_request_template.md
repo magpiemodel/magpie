@@ -26,9 +26,11 @@
     - Run a compilation check via `gams main.gms action=c`
   - **Medium risk**: 
     - Run test runs via `Rscript start.R --> "test runs"`
+    - Check logs for errors/warnings
   - **High risk**:
     - Run test runs via `Rscript start.R --> "test runs"`
     - Default run based on the current version of the fork from which PR is made
+    - Check logs for errors/warnings
     - Provide relevant comparison plots (land-use, emissions, food prices, land-use intensity,...)
 
 ### :chart_with_downwards_trend: Performance changes :chart_with_upwards_trend:
@@ -47,3 +49,5 @@
   - `CHANGELOG` is updated correctly
   - Updates in interfaces have been properly addressed in the module documentations
   - In-code documentation looks appropriate
+- [ ] content review
+- [ ] RSE review
