@@ -126,7 +126,12 @@ avl_cropland_hr <- file.path(outputdir, "avl_cropland_0.5.mz")       # available
 marginal_land <- cfg$gms$c30_marginal_land                      # marginal land scenario
 target_year <- cfg$gms$c30_snv_target                     # target year of SNV policy (default: "none")
 if(is.null(target_year)){target_year <- cfg$gms$c30_set_aside_target}
-snv_pol_fader  <- readGDX(gdx,"f30_scenario_fader","f30_set_aside_fader", format="first_found")[,,target_year]
+snv_pol_fader  <- readGDX(gdx,"f30_scenario_fader","f30_set_aside_fader",
+                          format="first_found", react = "silent")[,,target_year]
+if (is.null(snv_pol_fader)) {
+  snv_pol_fader <- readGDX(gdx, "p30_snv_scenario_fader", format = "first_found")
+}
+
 
 # Start interpolation (use interpolateAvlCroplandWeighted from luscale)
 print("Disaggregation")

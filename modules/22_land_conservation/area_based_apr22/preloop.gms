@@ -17,7 +17,7 @@ p22_country_dummy(policy_countries22) = 1;
 * Because MAgPIE is not run at country-level, but at region level, a region
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by total land area.
-i22_land_iso(iso) = sum(land, f22_land_iso("y1995",iso,land));
+i22_land_iso(iso) = sum(land, fm_land_iso("y1995",iso,land));
 p22_country_weight(i) = sum(i_to_iso(i,iso), p22_country_dummy(iso) * i22_land_iso(iso)) / sum(i_to_iso(i,iso), i22_land_iso(iso));
 
 * ---------------------------------------------------------------------
