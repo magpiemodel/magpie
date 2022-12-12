@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **39_landconversion** removed `s39_reward_shr`
 - **scripts** removed remind2::deletePlus in coupling interface of start_function
 - **30_crop** removed `f30_scenario_fader.csv`input
+- **config** validation_short.R output script is no longer run by default after each run
 
 ### fixed
 - **59_som** fixed land use change tracking for non-cropland pools in the `cellpool_aug16` realization
