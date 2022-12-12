@@ -8,6 +8,32 @@
 * Agricultural water demand
 ic42_wat_req_k(j,k) = i42_wat_req_k(t,j,k);
 
+* Irrigation efficiency
+if (m_year(t) <= sm_fix_SSP2,
+ v42_irrig_eff.fx(j) = 1 / (1 + 2.718282**((-22160-sum(cell(i,j),im_gdp_pc_mer("y1995",i)))/37767));
+else
+ if ((s42_irrig_eff_scenario = 1),
+ 	v42_irrig_eff.fx(j) = s42_irrigation_efficiency;
+ Elseif (s42_irrig_eff_scenario = 2),
+ 	v42_irrig_eff.fx(j) = 1 / (1 + 2.718282**((-22160-sum(cell(i,j),im_gdp_pc_mer("y1995",i)))/37767));
+ Elseif (s42_irrig_eff_scenario = 3),
+	v42_irrig_eff.fx(j) = 1 / (1 + 2.718282**((-22160-sum(cell(i,j),im_gdp_pc_mer(t,i)))/37767));
+ );
+);
+
+
+* Pumping cost in the current time step
+ic42_pumping_cost(i) = 0;
+
+* Pumping cost settings will be only executed when s42_pumping is set to 1
+if ((s42_pumping = 1),
+ ic42_pumping_cost(i) = f42_pumping_cost(t,i);
+* Pumping cost sensitivity test implmentation
+  if(m_year(t) > s42_multiplier_startyear,
+   ic42_pumping_cost(i) = f42_pumping_cost(t,i) * s42_multiplier;
+  );
+);
+
 
 * Water withdrawals in manufacturing, electricity, domestic, ecosystem
 * depends on the socioeconomic scenario
@@ -50,31 +76,5 @@ $endif
 
 ic42_env_flow_policy(i) = i42_env_flow_policy(t,i);
 
-vm_watdem.fx("ecosystem",j) = sum(cell(i,j), i42_env_flows_base(t,j) * (1-ic42_env_flow_policy(i)) +
+vm_watdem.fx("ecosystem",j) = sum(cell(i,j), i42_env_flows_base(t,j) * (1 - ic42_env_flow_policy(i)) +
                                              i42_env_flows(t,j) * ic42_env_flow_policy(i));
-
-* Irrigation efficiency
-if (m_year(t) <= sm_fix_SSP2,
- v42_irrig_eff.fx(j) = 1 / (1 + 2.718282**((-22160-sum(cell(i,j),im_gdp_pc_mer("y1995",i)))/37767));
-else
- if ((s42_irrig_eff_scenario = 1),
- 	v42_irrig_eff.fx(j) = s42_irrigation_efficiency;
- Elseif (s42_irrig_eff_scenario = 2),
- 	v42_irrig_eff.fx(j) = 1 / (1 + 2.718282**((-22160-sum(cell(i,j),im_gdp_pc_mer("y1995",i)))/37767));
- Elseif (s42_irrig_eff_scenario = 3),
-	v42_irrig_eff.fx(j) = 1 / (1 + 2.718282**((-22160-sum(cell(i,j),im_gdp_pc_mer(t,i)))/37767));
- );
-);
-
-
-* Pumping cost in the current time step
-ic42_pumping_cost(i) = 0;
-
-* Pumping cost settings will be only executed when s42_pumping is set to 1
-if ((s42_pumping = 1),
- ic42_pumping_cost(i) = f42_pumping_cost(t,i);
-* Pumping cost sensitivity test implmentation
-  if(m_year(t) > s42_multiplier_startyear,
-   ic42_pumping_cost(i) = f42_pumping_cost(t,i) * s42_multiplier;
-  );
-);
