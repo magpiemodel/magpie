@@ -23,7 +23,7 @@
 
 - [ ] Perform test runs
   - **Low risk**: 
-    - Run a compilation check via `Rscript start.R --> "compile main gms"`
+    - Run a compilation check via `Rscript start.R --> "compilation check"`
   - **Medium risk**: 
     - Run test runs via `Rscript start.R --> "test runs"`
     - Check logs for errors/warnings
