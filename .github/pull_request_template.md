@@ -49,5 +49,5 @@
   - `CHANGELOG` is updated correctly
   - Updates in interfaces have been properly addressed in the module documentations
   - In-code documentation looks appropriate
-- [ ] approval from content reviewer
-- [ ] approval from RSE reviewer
+- [ ] content review
+- [ ] RSE review
