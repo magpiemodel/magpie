@@ -31,8 +31,10 @@ crpmin30(crp30) = yes$(f30_rotation_min_shr(crp30) > 0);
 
 *' @code
 *' Minimum semi-natural vegetation (SNV) share is fading in after 2020
-p30_avl_cropland(t,j) = f30_avl_cropland(j,"%c30_marginal_land%") *
-	(1 - f30_scenario_fader(t,"%c30_snv_target%") *
-	(s30_snv_shr * sum(cell(i,j), p30_region_snv_shr(i))
-	+ s30_snv_shr_noselect * sum(cell(i,j), 1-p30_region_snv_shr(i))));
+p30_snv_shr(t,j) = p30_snv_scenario_fader(t) *
+	(s30_snv_shr * sum(cell(i,j), p30_country_snv_weight(i))
+	+ s30_snv_shr_noselect * sum(cell(i,j), 1-p30_country_snv_weight(i)));
+
+*' Area potentially available for cropping
+p30_avl_cropland(t,j) = f30_avl_cropland(j,"%c30_marginal_land%") * (1 - p30_snv_shr(t,j));
 *' @stop
