@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -
 
 ### added
--
+- scripts added output script that generates a short mif containing only variables relevant for the REMIND coupling
 
 ### removed
 -
