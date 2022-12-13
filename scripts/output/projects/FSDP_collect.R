@@ -31,8 +31,30 @@ if(!exists("source_include")) {
 ###############################################################################
 
 ##########
+
+# outputdir <- c("v27_FSECa_BiodivSparing","v27_FSECb_BiodivSparing2")
+# outputdir <- c("HR_v27_FSECa_BiodivSparing","HR_v27_FSECb_BiodivSparing2")
+
+x  <- unlist(lapply(strsplit(basename(outputdir), "_"), function(x) x[1]))
+if (any(x == "HR")) {
+  if (all(x == "HR")) {
+    rev <- unique(unlist(lapply(strsplit(basename(outputdir),"_"), function(x) x[2])))
+    rev <- paste(unique(x),rev,sep = "_")
+    scensetPos <- 3
+  } else {
+    stop("version prefix is not identical. Check your selection of runs")
+  }
+} else {
+  if (length(unique(x)) == 1) {
+    rev <- unique(x)
+    scensetPos <- 2
+  } else {
+    stop("version prefix is not identical. Check your selection of runs")
+  }
+}
+
 #filter out calibration run
-x         <- unlist(lapply(strsplit(basename(outputdir), "_"), function(x) x[2]))
+x         <- unlist(lapply(strsplit(basename(outputdir), "_"), function(x) x[scensetPos]))
 outputdir <- outputdir[which(x %in% c("FSECa", "FSECb", "FSECc", "FSECd", "FSECe"))]
 
 #get revision
@@ -219,12 +241,14 @@ if (!is.null(missing)) {
 
 renameScenario <- function(rep) {
   rep <- rep[!get("scenario") %like% "calibration_FSEC", ]
+  levels(rep$scenario) <- sub("HR_","",levels(rep$scenario))
   rep[, c("version", "scenset", "scenario") := tstrsplit(scenario, "_", fixed = TRUE)]
+  levels(rep$version) <- rev
   return(rep)
 }
 
-reg <- renameScenario(reg)
-iso <- renameScenario(iso)
+reg  <- renameScenario(reg)
+iso  <- renameScenario(iso)
 grid <- renameScenario(grid)
 
 message("Saving rds files ...")
