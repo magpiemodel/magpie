@@ -126,7 +126,7 @@ authors:
 
 title: MAgPIE - An Open Source land-use modeling framework
 version: 4.6.1
-date-released: 2022-11-30
+date-released: 2022-12-13
 repository-code: https://github.com/magpiemodel/magpie
 keywords:
   - landuse
