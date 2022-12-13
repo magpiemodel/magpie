@@ -104,7 +104,8 @@ sets
       ecoSysProtPrimForest,
       ecoSysProtOff,
       ecoSysProtAll_agMgmtExclN2O,
-      ecoSysProtAll_agMgmtExclCH4 /
+      ecoSysProtAll_agMgmtExclCH4,
+      ecoSysProtAll_agMgmtOff /
 
 ;
 *######################### R SECTION END (SETS) ################################
