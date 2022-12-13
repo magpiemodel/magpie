@@ -20,3 +20,9 @@ $ondelim
 $include "./modules/10_land/input/luh2_side_layers.cs3"
 $offdelim
 ;
+
+table fm_land_iso(t_ini10,iso,land) Land area for different land pools at ISO level (mio. ha)
+$ondelim
+$include "./modules/10_land/input/avl_land_t_iso.cs3"
+$offdelim
+;
