@@ -57,10 +57,6 @@ if (any(x == "HR")) {
 x         <- unlist(lapply(strsplit(basename(outputdir), "_"), function(x) x[scensetPos]))
 outputdir <- outputdir[which(x %in% c("FSECa", "FSECb", "FSECc", "FSECd", "FSECe"))]
 
-#get revision
-x <- unlist(lapply(strsplit(basename(outputdir),"_"), function(x) x[1]))
-if (length(unique(x)) == 1) rev <- unique(x) else stop("version prefix is not identical. Check your selection of runs")
-
 ##########
 # Append health impacts reports
 hi_datasets_path <- "/p/projects/magpie/data/FSEC_healthImpactsDatasets_raw"
