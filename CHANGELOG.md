@@ -5,7 +5,6 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-
 ## [Unreleased]
 
 ### changed
@@ -21,16 +20,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -
 
 
-## [4.6.1] - 2022-11-30
+## [4.6.1] - 2022-12-13
+
+### changed
+- **30_crop** replaced `f30_scenario_fader` with macro
+- **30_crop/config** changed switch `c30_rotation_scenario_speed` to `s30_rotation_scenario_target`
+- **30_crop/config** changed switch `c30_snv_target` to `s30_snv_scenario_target`
+- **config** changed default value for `c30_marginal_land` from `'all_marginal'` to `'q33_marginal'` for better spatial cropland patterns
 
 ### added
-- **10_land** added `vm_lu_transitions` as interface 
+- **10_land** added `vm_lu_transitions` as interface
+- **10_land** added interface `fm_land_iso` for consistency
+- **30_crop/config** added switch `s30_rotation_scenario_start`
+- **30_crop/config** added switch `s30_snv_scenario_start`
+- **30_crop/config** added switch for set `land_snv`for defining which land cover types are allowed in the semi-natural vegetation policy in cropland scenarios
 - **39_landconversion** scalar `s39_reward_crop_reduction` provides a cropland reduction reward
 
 ### removed
 - **10_land** removed `feb15` realization
 - **10_land** removed the interfaces `vm_croplandexpansion` and `vm_croplandreduction`
+- **30_crop** removed `f30_scenario_fader.csv`input
 - **39_landconversion** removed `s39_reward_shr`
+- **config** validation_short.R output script is no longer run by default after each run
 - **scripts** removed remind2::deletePlus in coupling interface of start_function
 
 ### fixed
