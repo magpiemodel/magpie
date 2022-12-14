@@ -23,7 +23,7 @@ if(!exists("source_include")) {
 
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 gdx <- file.path(outputdir, "fulldata.gdx")
-mif <- paste0(outputdir, "/report.mif")
+mif <- file.path(outputdir, "report.mif")
 ###############################################################################
 
 report <- getReportMAgPIE2REMIND(gdx, scenario = cfg$title)
