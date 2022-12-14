@@ -8,7 +8,6 @@
 # --------------------------------------------------------------
 # description: Write only those variables into a report that are relevant for the REMIND coupling
 # comparison script: FALSE
-# position: 2
 # ---------------------------------------------------------------
 
 
