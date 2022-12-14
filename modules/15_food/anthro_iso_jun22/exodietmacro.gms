@@ -273,6 +273,40 @@ $elseif "%c15_kcal_scen%" == "no_overweight"
      im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
      + i15_kcal_pregnancy(t,iso))
      / sum((sex,age), im_demography(t,iso,sex,age));
+$elseif "%c15_kcal_scen%" == "half_overweight"
+          p15_bmi_shr_target(t,iso,sex,age,bmi_group15)=p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15);
+          p15_bmi_shr_target(t,iso,sex,age,"medium")=
+                    p15_bmi_shr_calibrated(t,iso,sex,age,"mediumhigh")/2
+                    + p15_bmi_shr_calibrated(t,iso,sex,age,"high")/2
+                    + p15_bmi_shr_calibrated(t,iso,sex,age,"veryhigh")/2
+                    + p15_bmi_shr_calibrated(t,iso,sex,age,"medium");
+          p15_bmi_shr_target(t,iso,sex,age,"mediumhigh")=p15_bmi_shr_calibrated(t,iso,sex,age,"mediumhigh")/2;
+          p15_bmi_shr_target(t,iso,sex,age,"high")=p15_bmi_shr_calibrated(t,iso,sex,age,"high")/2;
+          p15_bmi_shr_target(t,iso,sex,age,"veryhigh")=p15_bmi_shr_calibrated(t,iso,sex,age,"veryhigh")/2;
+          i15_intake_scen_target(t,iso)$(sum((sex,age), im_demography(t,iso,sex,age)) >0 ) =
+             (sum((sex, age, bmi_group15), p15_bmi_shr_target(t,iso,sex,age,bmi_group15)*
+             im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
+             + i15_kcal_pregnancy(t,iso))
+             / sum((sex,age), im_demography(t,iso,sex,age));
+$elseif "%c15_kcal_scen%" == "no_underweight_half_overweight"
+     p15_bmi_shr_target(t,iso,sex,age,bmi_group15)=p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15);
+     p15_bmi_shr_target(t,iso,sex,age,"medium") =
+              p15_bmi_shr_calibrated(t,iso,sex,age,"verylow")
+               + p15_bmi_shr_calibrated(t,iso,sex,age,"low")
+               + p15_bmi_shr_calibrated(t,iso,sex,age,"mediumhigh")/2
+               + p15_bmi_shr_calibrated(t,iso,sex,age,"high")/2
+               + p15_bmi_shr_calibrated(t,iso,sex,age,"veryhigh")/2
+               + p15_bmi_shr_calibrated(t,iso,sex,age,"medium");
+     p15_bmi_shr_target(t,iso,sex,age,"verylow")=0;
+     p15_bmi_shr_target(t,iso,sex,age,"low")=0;
+     p15_bmi_shr_target(t,iso,sex,age,"mediumhigh")=p15_bmi_shr_calibrated(t,iso,sex,age,"mediumhigh")/2;
+     p15_bmi_shr_target(t,iso,sex,age,"high")=p15_bmi_shr_calibrated(t,iso,sex,age,"high")/2;
+     p15_bmi_shr_target(t,iso,sex,age,"veryhigh")=p15_bmi_shr_calibrated(t,iso,sex,age,"veryhigh")/2;
+     i15_intake_scen_target(t,iso)$(sum((sex,age), im_demography(t,iso,sex,age)) >0 ) =
+        (sum((sex, age, bmi_group15), p15_bmi_shr_target(t,iso,sex,age,bmi_group15)*
+        im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
+        + i15_kcal_pregnancy(t,iso))
+        / sum((sex,age), im_demography(t,iso,sex,age));
 $elseif "%c15_kcal_scen%" == "endo"
   i15_intake_scen_target(t,iso) = p15_intake_total(t,iso);
   p15_bmi_shr_target(t,iso,sex,age,bmi_group15) = p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15);
