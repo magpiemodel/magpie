@@ -27,6 +27,6 @@ gdx <- file.path(outputdir, "fulldata.gdx")
 mif <- paste0(outputdir, "/report.mif")
 ###############################################################################
 
-report <- getReportShortForRemind(gdx, scenario = cfg$title)
+report <- getReportMAgPIE2REMIND(gdx, scenario = cfg$title)
 write.report(report, file = mif)
 
