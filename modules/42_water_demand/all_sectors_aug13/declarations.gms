@@ -12,14 +12,15 @@ parameters
  i42_env_flows_base(t,j)            Environmental flow requirements in case of no policy (mio m^3)
  ic42_env_flow_policy(i)            Determines whether environmental flow protection is enforced in the current time step (1)
  i42_env_flow_policy(t,i)           Determines whether environmental flow protection is enforced (1)
-* country-specific scenario switch
+ p42_efp(t_all,scen42)              Determines whether environmental flow protection is enforced and its fading in of environmental flow policy (1)
+ p42_efp_fader(t_all)               Determines the fading in of environmental flow policy (1)
  p42_country_dummy(iso)             Dummy parameter indicating whether country is affected by EFP (1)
  p42_EFP_region_shr(t_all,i)        Weighted share of region with regards to EFP (1)
  ic42_pumping_cost(i)               Parameter to capture values for pumping costs in a particular time step (USD05MER per m^3)
 ;
 
 equations
- q42_water_demand(wat_dem,j)         Water withdrawals of different sectors (mio. m^3 per yr)
+ q42_water_demand(wat_dem,j)        Water withdrawals of different sectors (mio. m^3 per yr)
  q42_water_cost(i)                  Total cost of pumping irrigation water (USD05MER per yr)
 ;
 

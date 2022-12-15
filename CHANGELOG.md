@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.6.1] - 2022-12-13
 
 ### changed
+- **42_water_demand** replaced `f42_env_flow_policy` with macro
 - **30_crop** replaced `f30_scenario_fader` with macro
 - **30_crop/config** changed switch `c30_rotation_scenario_speed` to `s30_rotation_scenario_target`
 - **30_crop/config** changed switch `c30_snv_target` to `s30_snv_scenario_target`
