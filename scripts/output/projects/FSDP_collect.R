@@ -30,32 +30,23 @@ if(!exists("source_include")) {
 }
 ###############################################################################
 
-##########
+# For case of sub-folder structure write to the respective folder
+subfolder <- unlist(lapply(strsplit(x = outputdir, split = "/"), FUN = "[", 2))
+title <- basename(outputdir)
 
-# outputdir <- c("v27_FSECa_BiodivSparing","v27_FSECb_BiodivSparing2")
-# outputdir <- c("HR_v27_FSECa_BiodivSparing","HR_v27_FSECb_BiodivSparing2")
-
-x  <- unlist(lapply(strsplit(basename(outputdir), "_"), function(x) x[1]))
-if (any(x == "HR")) {
-  if (all(x == "HR")) {
-    rev <- unique(unlist(lapply(strsplit(basename(outputdir),"_"), function(x) x[2])))
-    rev <- paste(unique(x),rev,sep = "_")
-    scensetPos <- 3
-  } else {
-    stop("version prefix is not identical. Check your selection of runs")
-  }
+if (all(subfolder == title)) {
+  subfolder <- ""
 } else {
-  if (length(unique(x)) == 1) {
-    rev <- unique(x)
-    scensetPos <- 2
-  } else {
-    stop("version prefix is not identical. Check your selection of runs")
-  }
+  subfolder <- subfolder[1]
 }
 
-#filter out calibration run
-x         <- unlist(lapply(strsplit(basename(outputdir), "_"), function(x) x[scensetPos]))
+# Select runs to be displayed
+x         <- unlist(lapply(strsplit(basename(outputdir), "_"), function(x) x[2]))
 outputdir <- outputdir[which(x %in% c("FSECa", "FSECb", "FSECc", "FSECd", "FSECe"))]
+
+# Get revision number
+x <- unlist(lapply(strsplit(basename(outputdir), "_"), function(x) x[1]))
+if (length(unique(x)) == 1) rev <- unique(x) else stop("version prefix is not identical. Check your selection of runs")
 
 ##########
 # Append health impacts reports
@@ -237,9 +228,7 @@ if (!is.null(missing)) {
 
 renameScenario <- function(rep) {
   rep <- rep[!get("scenario") %like% "calibration_FSEC", ]
-  levels(rep$scenario) <- sub("HR_","",levels(rep$scenario))
   rep[, c("version", "scenset", "scenario") := tstrsplit(scenario, "_", fixed = TRUE)]
-  levels(rep$version) <- rev
   return(rep)
 }
 
@@ -249,31 +238,31 @@ grid <- renameScenario(grid)
 
 message("Saving rds files ...")
 
-saveRDS(reg, file = file.path("output", paste0(rev, "_FSDP_reg.rds")), version = 2, compress = "xz")
-saveRDS(iso, file = file.path("output", paste0(rev, "_FSDP_iso.rds")), version = 2, compress = "xz")
-saveRDS(grid, file = file.path("output", paste0(rev, "_FSDP_grid.rds")), version = 2, compress = "xz")
+saveRDS(reg,  file = file.path("output", subfolder, paste0(rev, "_FSDP_reg.rds")), version = 2, compress = "xz")
+saveRDS(iso,  file = file.path("output", subfolder, paste0(rev, "_FSDP_iso.rds")), version = 2, compress = "xz")
+saveRDS(grid, file = file.path("output", subfolder, paste0(rev, "_FSDP_grid.rds")), version = 2, compress = "xz")
 
-#save i_to_iso mapping
+# save i_to_iso mapping
 gdx     <- file.path(outputdir[1], "fulldata.gdx")
 reg2iso <- readGDX(gdx, "i_to_iso")
 names(reg2iso) <- c("region", "iso_a3")
-write.csv(reg2iso, "output/reg2iso.csv")
-saveRDS(reg2iso, file = file.path("output", "reg2iso.rds"), version = 2, compress = "xz")
+write.csv(reg2iso, file.path("output", subfolder, "reg2iso.csv"))
+saveRDS(reg2iso, file = file.path("output", subfolder, "reg2iso.rds"), version = 2, compress = "xz")
 
-#save validation file
-val <- file.path(outputdir[1], "validation.mif")
+# save validation file
+val <- file.path(outputdir[1], subfolder, "validation.mif")
 val <- as.data.table(read.quitte(val))
-saveRDS(val, file = file.path("output", paste0(rev, "_FSDP_validation.rds")), version = 2, compress = "xz")
+saveRDS(val, file = file.path("output", subfolder, paste0(rev, "_FSDP_validation.rds")), version = 2, compress = "xz")
 
 message("Plotting figures ...")
-heatmapFSDP(reg, tableType = 1,    file = file.path("output", paste0(rev, "_FSDP_heatmap1.png")))
-heatmapFSDP(reg, tableType = "2a", file = file.path("output", paste0(rev, "_FSDP_heatmap2a.png")))
-heatmapFSDP(reg, tableType = 3,    file = file.path("output", paste0(rev, "_FSDP_heatmap3.png")))
-bundlesFSDP(reg, file = file.path("output", paste0(rev, "_FSDP_bundle.png")))
-spatialMapsFSDP(reg, iso, grid, reg2iso, file = file.path("output", paste0(rev, "_FSDP_spatialMaps.png")))
-supplPlotsFSDP(reg, scenarioType = "all", file = file.path("output", paste0(rev, "_FSDP_supplPlots.png")))
-SupplPlotsCropShr(gdx = gdx, file = file.path("output", paste0(rev, "_FSDP_supplPlotCropShr.png")) )
-validationFSDP(repReg = reg, val = val, folder = "output")
-validationFSDP(repReg = reg, val = val, regionSel = "aggregate", folder = "output", scens = "BAU_FSEC")
-validationFSDP(repReg = reg, val = val, regionSel = "GLO", folder = "output", scens = "central")
-dashboardFSDP(repReg = reg, repIso = iso, repGrid = grid, outputDir = "output", file = paste0(rev, "_FSDP_dashboard.html"))
+heatmapFSDP(reg, tableType = 1,    file = file.path("output", subfolder, paste0(rev, "_FSDP_heatmap1.png")))
+heatmapFSDP(reg, tableType = "2a", file = file.path("output", subfolder, paste0(rev, "_FSDP_heatmap2a.png")))
+heatmapFSDP(reg, tableType = 3,    file = file.path("output", subfolder, paste0(rev, "_FSDP_heatmap3.png")))
+bundlesFSDP(reg, file = file.path("output", subfolder, paste0(rev, "_FSDP_bundle.png")))
+spatialMapsFSDP(reg, iso, grid, reg2iso, file = file.path("output", subfolder, paste0(rev, "_FSDP_spatialMaps.png")))
+SupplPlotsFSDP(reg, scenarioType = "all", file = file.path("output", subfolder, paste0(rev, "_FSDP_supplPlots.png")))
+SupplPlotsCropShr(gdx = gdx, file = file.path("output", subfolder, paste0(rev, "_FSDP_supplPlotCropShr.png")) )
+validationFSDP(repReg = reg, val = val, folder = file.path("output" subfolder))
+validationFSDP(repReg = reg, val = val, regionSel = "aggregate", folder = file.path("output" subfolder), scens = "BAU_FSEC")
+validationFSDP(repReg = reg, val = val, regionSel = "GLO", folder = file.path("output" subfolder), scens = "central")
+dashboardFSDP(repReg = reg, repIso = iso, repGrid = grid, outputDir = folder = file.path("output" subfolder), file = paste0(rev, "_FSDP_dashboard.html"))
