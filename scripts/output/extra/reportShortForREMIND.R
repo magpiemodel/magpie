@@ -10,22 +10,21 @@
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
+local ({
+  withr::local_options("magclass.verbosity" = 1)
 
-library(magpie4)
-library(gms)
-options("magclass.verbosity" = 1)
+  ############################# BASIC CONFIGURATION #############################
+  if(!exists("source_include")) {
+    outputdir <- "/p/projects/remind/runs/REMIND-MAgPIE-2022-10-12/magpie/output/C_SDP-PkBudg1150-mag-4"
+    lucode2::readArgs("outputdir")
+  }
 
-############################# BASIC CONFIGURATION #############################
-if(!exists("source_include")) {
-  outputdir <- "/p/projects/remind/runs/REMIND-MAgPIE-2022-10-12/magpie/output/C_SDP-PkBudg1150-mag-4"
-  readArgs("outputdir")
-}
+  cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
+  gdx <- file.path(outputdir, "fulldata.gdx")
+  mif <- file.path(outputdir, "report.mif")
+  ###############################################################################
 
-cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
-gdx <- file.path(outputdir, "fulldata.gdx")
-mif <- file.path(outputdir, "report.mif")
-###############################################################################
+  report <- magpie4::getReportMAgPIE2REMIND(gdx, scenario = cfg$title)
+  magclass::write.report(report, file = mif)
 
-report <- getReportMAgPIE2REMIND(gdx, scenario = cfg$title)
-write.report(report, file = mif)
-
+})
