@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 **************start solve loop**************
 * Default GAMS seed
-Option Seed = 3141;
+* Option Seed = 3141;
 
 $ifthen "%c80_nlp_solver%" == "conopt3"
   option nlp        = conopt ;
@@ -35,7 +35,7 @@ Tol_Feas_Tria = 4.0e-6
 $offecho
 
 $onecho > conopt4.op2
-Flg_Prep = TRUE
+Flg_Prep = FALSE
 $offecho
 
 *' @code
