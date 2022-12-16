@@ -6,7 +6,7 @@ if (!"https://rse.pik-potsdam.de/r/packages" %in% getOption("repos")) {
 
 # bootstrapping, will only run once after this repo is freshly cloned
 if (isTRUE(rownames(installed.packages(priority = "NA")) == "renv")) {
-  if (file.exists("DESCRIPTION") && tools::md5sum("DEPENDENCIES") != tools::md5sum("DESCRIPTION")) {
+  if (file.exists("DESCRIPTION") && !identical(readLines("DESCRIPTION"), readLines("DEPENDENCIES"))) {
     warning("Unexpected DESCRIPTION file found, try removing it. Will not install dependencies.")
   } else {
     message("R package dependencies are not installed in this renv, installing now...")
