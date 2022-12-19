@@ -154,7 +154,7 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing,outputdir[i])
 
     ## Crop diversity
-    nc_file <- file.path(outputdir[i], paste0(scen, "-CropDiversityGridded.nc"))
+    nc_file <- file.path(outputdir[i], paste0(cfg$title, "-CropDiversityGridded.nc"))
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years, "ShannonCropDiversity"]
       getNames(a) <- "Shannon crop diversity (index)"
