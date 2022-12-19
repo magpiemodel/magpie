@@ -5,8 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 **************start solve loop**************
-* Default GAMS seed
-* Option Seed = 3141;
 
 s80_counter = 0;
 p80_modelstat(t) = 1;
