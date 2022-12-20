@@ -16,7 +16,7 @@ general_settings <- function(title) {
   cfg$input <- c(regional    = "WARNINGS1_rev4.771810__h12_magpie.tgz",
                  cellular    = "rev4.771810__h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
                  validation  = "rev4.771810__h12_validation.tgz",
-                 additional  = "additional_data_rev4.30.tgz",
+                 additional  = "additional_data_rev4.32.tgz",
                  calibration = "calibration_H12+ir2rf_05Oct22.tgz")
 
   ##Downloading new input data
@@ -51,7 +51,7 @@ general_settings2 <- function(title) {
   cfg$input <- c(regional    = "WARNINGS1_rev4.771810__h12_magpie.tgz",
                  cellular    = "rev4.771810__h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
                  validation  = "rev4.771810__h12_validation.tgz",
-                 additional  = "additional_data_rev4.30.tgz",
+                 additional  = "additional_data_rev4.32.tgz",
                  calibration = "calibration_H12+ir2rf_05Oct22.tgz")
 
   ##Downloading new input data
@@ -145,7 +145,7 @@ cfg$gms$s15_exo_nin <- 1               # def = 0
 cfg$gms$s15_exo_sugar       <- 0   # def = 1, options: 0,1
 cfg$gms$s15_exo_oils        <- 0   # def = 1, options: 0,1
 cfg$gms$s15_exo_alcohol     <- 0 # default: 1
-  
+
 
 start_run(cfg, codeCheck=FALSE)
 
