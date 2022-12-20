@@ -5,5 +5,5 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-v59_som_target.scale(j,pools59) = 10e3;
-v59_som_pool.scale(j,pools59)   = 10e3;
+v59_som_target.scale(j,land) = 10e3;
+v59_som_pool.scale(j,land)   = 10e3;

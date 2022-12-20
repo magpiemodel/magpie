@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 * option: PBL_2007, PBL_2019, PBL_2022
-$setglobal c57_macc_version  PBL_2007
+$setglobal c57_macc_version  PBL_2022
 * option: Default, Optimistic, Pessimistic; only applicable for PBL_2022
 $setglobal c57_macc_scenario  Default
 

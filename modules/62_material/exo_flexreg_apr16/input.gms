@@ -27,5 +27,5 @@ $offdelim
 /
 ;
 
-scalar s62_max_dem_bioplastic maximum demand for bioplastics (mio. tDM per yr) / 400 /;
+scalar s62_max_dem_bioplastic maximum demand for bioplastics (mio. tDM per yr) / 0 /;
 scalar s62_midpoint_dem_bioplastic midpoint of logistic function for bioplastic demand (yr) / 2050 /;

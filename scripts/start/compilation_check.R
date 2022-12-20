@@ -4,11 +4,15 @@
 # |  AGPL-3.0, you are granted additional permissions described in the
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
-name,type,reason
-pm_land_start,input,questionnaire
-fm_croparea,input,questionnaire
-vm_area,input,questionnaire
-vm_landexpansion,input,questionnaire
-vm_lu_transitions,input,questionnaire
-pm_climate_class,input,questionnaire
-vm_fallow,input,questionnaire
+
+# ------------------------------------------------
+# description: download input and compile main.gms
+# position: 7
+# ------------------------------------------------
+
+source("scripts/start_functions.R")
+source("config/default.cfg")
+download_and_update(cfg)
+
+# compile main.gms
+system("gams main.gms action=c")

@@ -69,7 +69,7 @@ $title magpie
 *' carbon when agricultural land is taken out of production and the associated regrowth of natural
 *' vegetation generates negative emissions from land-use change.
 *' Nitrogen emissions ([51_nitrogen]) are estimated based on nitrogen budgets for croplands,
-*' pastures ([50_nr_budgets]) and the livestock sector ([55_awms]) (@bodirsky_reactive_2014).
+*' pastures ([50_nr_soil_budget]) and the livestock sector ([55_awms]) (@bodirsky_reactive_2014).
 *' CH4 emissions are based on
 *' livestock feed and rice cultivation areas (@popp_food_2010). In the case of mitigation
 *' policies for the land sector, the model can reduce CO2 emissions by restraining land-use
@@ -145,44 +145,45 @@ $title magpie
 *'  * Always try to access model outputs through the corresponding magpie package instead of accessing them directly with readGDX. It cannot be guaranteed that your script will work in the future if you do otherwise (as only the corresponding magpie package will be continuously adapted to changes in the GAMS code).
 
 *##################### R SECTION START (VERSION INFO) ##########################
-* 
+*
 * Used data set: rev4.77_h12_magpie.tgz
 * md5sum: f0fb0888f1f711442377a380887dbbfa
-* Repository: /p/projects/rd3mod/inputdata/output
-* 
+
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+*
 * Used data set: rev4.77_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
 * md5sum: fe9ad2782602695b706836e84f6b569f
-* Repository: /p/projects/rd3mod/inputdata/output
-* 
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+*
 * Used data set: rev4.77_h12_validation.tgz
 * md5sum: 7bb2104776a43e1f1293f50d08e20877
-* Repository: /p/projects/rd3mod/inputdata/output
-* 
-* Used data set: additional_data_rev4.30.tgz
-* md5sum: a38adda6311604d6922e51dddf6b02cd
-* Repository: /p/projects/landuse/data/input/archive
-* 
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+*
+* Used data set: additional_data_rev4.32.tgz
+* md5sum: 721ffbc57edddfb5e9b76546c51906f2
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+*
 * Used data set: calibration_H12+ir2rf_05Oct22.tgz
 * md5sum: 788b8e32ea1bd83c5c8f8987d9f05265
-* Repository: /p/projects/landuse/data/input/calibration
-* 
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+*
 * Low resolution: c200
 * High resolution: 0.5
-* 
+*
 * Total number of cells: 200
-* 
+*
 * Number of cells per region:
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *     6   23    7    6    1   43   27    7   11   12   37   20
-* 
+*
 * Regionscode: 62eff8f7
-* 
+*
 * Regions data revision: 4.77
-* 
+*
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
 * * Revision: 4.77
-* 
+*
 * aggregation settings:
 * * Input resolution: 0.5
 * * Output resolution: c200
@@ -191,9 +192,10 @@ $title magpie
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *     6   23    7    6    1   43   27    7   11   12   37   20
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
-* 
-* 
-* Last modification (input data): Mon Oct 17 07:30:30 2022
+*
+*
+
+* Last modification (input data): Wed Nov 16 17:14:42 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
