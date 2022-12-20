@@ -9,7 +9,7 @@ $setglobal c21_trade_liberalization  l909090r808080
 *   options are "regionalized" and "globalized" and "fragmented"
 
 scalars
-  s21_trade_tariff Trade tariff switch (1=on 0=off)  (1)                   / 1 /
+  s21_trade_tariff Trade tariff switch (1=on 0=off)  (1)                   / 0 /
   s21_trade_bal_damper Fraction to ease self sufficiency pool trade for roundwood /0.75/
 ;
 

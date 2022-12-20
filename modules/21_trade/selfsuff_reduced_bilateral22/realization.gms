@@ -25,11 +25,11 @@
 *' as opposed to super-regions (which delimit free trade zones or similar large regions)
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/21_trade/selfsuff_reduced/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/21_trade/selfsuff_reduced/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/21_trade/selfsuff_reduced/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/21_trade/selfsuff_reduced/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/21_trade/selfsuff_reduced/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/21_trade/selfsuff_reduced/preloop.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/21_trade/selfsuff_reduced/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/21_trade/selfsuff_reduced_bilateral22/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/21_trade/selfsuff_reduced_bilateral22/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/21_trade/selfsuff_reduced_bilateral22/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/21_trade/selfsuff_reduced_bilateral22/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/21_trade/selfsuff_reduced_bilateral22/scaling.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/21_trade/selfsuff_reduced_bilateral22/preloop.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/21_trade/selfsuff_reduced_bilateral22/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
