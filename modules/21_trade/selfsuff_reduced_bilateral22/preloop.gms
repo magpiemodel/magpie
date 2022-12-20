@@ -23,5 +23,5 @@ elseif (s21_trade_tariff=0),
 
 pm_selfsuff_ext(t_ext,h,kforestry) = f21_self_suff("y2150",h,kforestry);
 pm_selfsuff_ext(t_all,h,kforestry) = f21_self_suff(t_all,h,kforestry);
-*Implausible jumps in selfsuff for wood in some regions
+*Implausible jumps in selfsuff for wood in some regions.
 pm_selfsuff_ext(tstart21,h,kforestry) = f21_self_suff("y2010",h,kforestry);

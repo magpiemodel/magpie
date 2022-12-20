@@ -6,9 +6,5 @@ f21_trade_margin.cs3
 f21_trade_tariff.cs3
 f21_trade_tariff_export.cs3
 f21_trade_tariff_import.cs3     
-f21_trade_margin_bilat.cs5
-f21_trade_tariff_bilat.cs5
-f21_trade_tariff_export_bilat.cs5
-f21_trade_tariff_import_bilat.cs5  
 f21_trade_balance.cs3
 f21_trade_bal_reduction.cs3

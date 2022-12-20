@@ -146,25 +146,25 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.77_h12_magpie.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Used data set: rev4.77BilatHMargin_h12_magpie.tgz
+* md5sum: 2024156801f2000544753cc4cb1da442
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Used data set: rev4.77_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* md5sum: fe9ad2782602695b706836e84f6b569f
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.77_h12_validation.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* md5sum: 7bb2104776a43e1f1293f50d08e20877
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev4.33.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Used data set: additional_data_rev4.36.tgz
+* md5sum: e24c46872f77dc15ad8603bdac1e6065
+* Repository: /p/projects/landuse/data/input/archive
 * 
-* Used data set: calibration_H12_per_ton_fao_may22_glo_23Nov22.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Used data set: calibration_H12_per_ton_fao_may22_glo_07Dec22.tgz
+* md5sum: b7fbbae49104c0989419a0c2aaf048a7
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -192,8 +192,13 @@ $title magpie
 *     6   23    7    6    1   43   27    7   11   12   37   20
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
+* Warning messages:
+* 1: In gms::update_modules_embedding() :
+*   ./modules/38_factor_costs/mixed_reg_feb17/realization.gms not found, this realization cannot be used!
+* 2: In gms::update_modules_embedding() :
+*   ./modules/51_nitrogen/ipcc2006_sep16/realization.gms not found, this realization cannot be used!
 * 
-* Last modification (input data): Thu Dec 08 10:40:17 2022
+* Last modification (input data): Tue Dec 20 16:37:24 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -219,7 +224,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  BilatPR4_OFF
+$setglobal c_title  BilatPR4_ON_T1
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /
@@ -242,7 +247,7 @@ $setglobal production  flexreg_apr16
 $setglobal residues  flexreg_apr16
 $setglobal processing  substitution_may21
 
-$setglobal trade  selfsuff_reduced
+$setglobal trade  selfsuff_reduced_bilateral22
 $setglobal land_conservation  area_based_apr22
 
 $setglobal ageclass  feb21
