@@ -7,7 +7,7 @@
 
 scalars
 s36_weeks_in_year number of weeks in a year (weeks per yr) / 52.1429 /
-s36_minimum_wage global minimum wage (USDMER05 per hour) / 0 /
+s36_minimum_wage global minimum wage (USDMER05 per hour) / 5 /
 s36_scale_productivity_with_wage how strong the wage increase should affect labor productivity (1) / 0 /
 ;
 

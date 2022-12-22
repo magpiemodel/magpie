@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c38_fac_req  glo
+$setglobal c38_fac_req  reg
 * options: glo, reg
 
 scalars

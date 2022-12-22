@@ -11,11 +11,11 @@ $setglobal c57_macc_version  PBL_2022
 $setglobal c57_macc_scenario  Default
 
 scalars
-  s57_maxmac_n_soil    activate soil N mitigation independent of pollutant price (step of MACC and -1 is inactive) / -1 /
+  s57_maxmac_n_soil    activate soil N mitigation independent of pollutant price (step of MACC and -1 is inactive) / 201 /
   s57_maxmac_n_awms    activate awms N mitigation independent of pollutant price (step of MACC and -1 is inactive) / -1 /
-  s57_maxmac_ch4_rice    activate rice CH4 mitigation independent of pollutant price (step of MACC and -1 is inactive)/ -1 /
-  s57_maxmac_ch4_entferm activate enteric fermentation CH4 mitigation independent of pollutant price (step of MACC and -1 is inactive) / -1 /
-  s57_maxmac_ch4_awms  activate awms CH4 mitigation independent of pollutant price (step of MACC and -1 is inactive) / -1 /
+  s57_maxmac_ch4_rice    activate rice CH4 mitigation independent of pollutant price (step of MACC and -1 is inactive)/ 201 /
+  s57_maxmac_ch4_entferm activate enteric fermentation CH4 mitigation independent of pollutant price (step of MACC and -1 is inactive) / 201 /
+  s57_maxmac_ch4_awms  activate awms CH4 mitigation independent of pollutant price (step of MACC and -1 is inactive) / 201 /
   s57_implicit_emis_factor emission factor for direct soil emissions implicit to MACC curves (tN2ON per tN) / 0.01 /
   s57_implicit_fert_cost fertilizer costs implicit to MACC curves (USD05MER per ton N) / 600 /
 ;
