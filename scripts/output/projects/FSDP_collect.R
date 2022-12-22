@@ -177,7 +177,22 @@ for (i in 1:length(outputdir)) {
     nc_file <- file.path(outputdir[i], "cell.land_0.5_share.mz")
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years,]
+      land_hr_shr <- a #needed for croparea shares
       getNames(a) <- paste0(getNames(a)," (area share)")
+      getSets(a,fulldim = F)[3] <- "variable"
+      a <- addLocation(a)
+      y <- mbind(y,a)
+    } else missing <- c(missing,outputdir[i])
+    
+    ## croparea shares
+    nc_file <- file.path(outputdir[i], "cell.croparea_0.5_share.mz")
+    if(file.exists(nc_file)) {
+      a <- read.magpie(nc_file)[,years,]
+      a <- dimSums(a,dim = "w")
+      getNames(a) <- reportingnames(getNames(a))
+      a <- mbind(a, setNames(collapseNames(land_hr_shr[,,"crop"]) - dimSums(a, dim = 3), "Fallow"))
+      a[a < 0] <- 0
+      getNames(a) <- paste0("Cropland|",getNames(a)," (area share)")
       getSets(a,fulldim = F)[3] <- "variable"
       a <- addLocation(a)
       y <- mbind(y,a)
@@ -261,8 +276,7 @@ heatmapFSDP(reg, tableType = 3,    file = file.path(unique("output", subfolder),
 bundlesFSDP(reg, file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_bundle.png")))
 spatialMapsFSDP(reg, iso, grid, reg2iso, file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_spatialMaps.png")))
 SupplPlotsFSDP(reg, scenarioType = "all", file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_supplPlots.png")))
-SupplPlotsCropShr(gdx = gdx, file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_supplPlotCropShr.png")))
-validationFSDP(repReg = reg, val = val, folder = file.path(unique("output", subfolder)))
+#SupplPlotsCropShr(gdx = gdx, file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_supplPlotCropShr.png")))
 validationFSDP(repReg = reg, val = val, regionSel = "aggregate", folder = file.path(unique("output", subfolder)), scens = "BAU_FSEC")
-validationFSDP(repReg = reg, val = val, regionSel = "GLO", folder = file.path(unique("output", subfolder)), scens = "central")
+validationFSDP(repReg = reg, val = val, regionSel = "GLO", folder = file.path(unique("output", subfolder)), scens = "bundles")
 dashboardFSDP(repReg = reg, repIso = iso, repGrid = grid, outputDir = file.path(unique("output", subfolder)), file = paste0(rev, "_FSDP_dashboard.html"))
