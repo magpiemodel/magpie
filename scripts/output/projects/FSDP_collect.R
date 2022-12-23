@@ -183,7 +183,7 @@ for (i in 1:length(outputdir)) {
       a <- addLocation(a)
       y <- mbind(y,a)
     } else missing <- c(missing,outputdir[i])
-    
+
     ## croparea shares
     nc_file <- file.path(outputdir[i], "cell.croparea_0.5_share.mz")
     if(file.exists(nc_file)) {
@@ -270,13 +270,11 @@ val <- as.data.table(read.quitte(val))
 saveRDS(val, file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_validation.rds")), version = 2, compress = "xz")
 
 message("Plotting figures ...")
-heatmapFSDP(reg, tableType = 1,    file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_heatmap1.png")))
-heatmapFSDP(reg, tableType = "2a", file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_heatmap2a.png")))
-heatmapFSDP(reg, tableType = 3,    file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_heatmap3.png")))
-bundlesFSDP(reg, file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_bundle.png")))
-spatialMapsFSDP(reg, iso, grid, reg2iso, file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_spatialMaps.png")))
-SupplPlotsFSDP(reg, scenarioType = "all", file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_supplPlots.png")))
-#SupplPlotsCropShr(gdx = gdx, file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_supplPlotCropShr.png")))
-validationFSDP(repReg = reg, val = val, regionSel = "aggregate", folder = file.path(unique("output", subfolder)), scens = "BAU_FSEC")
-validationFSDP(repReg = reg, val = val, regionSel = "GLO", folder = file.path(unique("output", subfolder)), scens = "bundles")
-dashboardFSDP(repReg = reg, repIso = iso, repGrid = grid, outputDir = file.path(unique("output", subfolder)), file = paste0(rev, "_FSDP_dashboard.html"))
+#Add new plots here:
+#https://github.com/pik-piam/m4fsdp/blob/master/R/plotFSDP.R
+plotFSDP(outputfolder = file.path("output",unique(subfolder)),
+         reg = reg,
+         iso = iso,
+         grid = grid,
+         val = val,
+         reg2iso = reg2iso)
