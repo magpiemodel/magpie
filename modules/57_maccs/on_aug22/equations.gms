@@ -29,7 +29,7 @@
 *' by the IPCC that is likely the basis for their estimates (E=F*EF, F= E/EF).
 
 *' Costs are assumed to be factor costs and split into a labor and a capital part.
-*' The labor share is scaled according to the changes in wages and corresponding  
+*' The labor share is scaled according to the changes in wages and corresponding 
 *' productivity change.
 
 q57_labor_costs(i2) ..

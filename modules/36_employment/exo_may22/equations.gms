@@ -13,8 +13,8 @@
 *' labor costs from crop production (see [38_factor_costs]) and livestock production 
 *' (see [70_livestock]), and some labor costs for crop and livestock production which 
 *' are not covered by MAgPIE. Employment from mitigation of GHG emissions is calculate
-*' the same way in a separate equation, using the labor cost share coming from the 
-*' marginal abatement cost curves (MACCs) [57_maccs].
+*' the same way in a separate equation, using the labor costs coming from the 
+*' marginal abatement cost curves (MACCs) (see [57_maccs]).
 
 * excluding labor costs for crop residues (as this is not include in the 
 * data on agricultural employment by the International Labour Organization)
