@@ -7,8 +7,8 @@
 
 
 equations
- q36_employment(i)            Regional emplyoment in agricultural production (mio. people)
- q36_employment_maccs(i)            Additional regional emplyoment for GHG mitigation in agriculture (mio. people)
+ q36_employment(i)            Regional employment in agricultural production (mio. people)
+ q36_employment_maccs(i)      Additional regional employment for GHG mitigation in agriculture (mio. people)
 ;
 
 positive variables
@@ -32,8 +32,8 @@ parameters
 parameters
  ov36_employment(t,i,type)       Number of people employed in agricultural production (mio. people)
  ov36_employment_maccs(t,i,type) Number of people employed in GHG mitigation in agriculture (mio. people)
- oq36_employment(t,i,type)       Regional emplyoment in agricultural production (mio. people)
- oq36_employment_maccs(t,i,type) Additional regional emplyoment for GHG mitigation in agriculture (mio. people)
+ oq36_employment(t,i,type)       Regional employment in agricultural production (mio. people)
+ oq36_employment_maccs(t,i,type) Additional regional employment for GHG mitigation in agriculture (mio. people)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
 

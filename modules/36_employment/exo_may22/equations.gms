@@ -8,13 +8,14 @@
 
 *' @equations
 
-*' Employment is calculated as total labor costs divided by hourly labor costs and 
-*' average hours worked per employed person per year. Total labor costs include
-*' labor costs from crop production (see [38_factor_costs]) and livestock production 
-*' (see [70_livestock]), and some labor costs for crop and livestock production which 
-*' are not covered by MAgPIE. Employment from mitigation of GHG emissions is calculate
-*' the same way in a separate equation, using the labor costs coming from the 
-*' marginal abatement cost curves (MACCs) (see [57_maccs]).
+*' Employment is calculated as total labor costs divided by hourly labor costs and average 
+*' hours worked per employed person per year. Employment for crop and livestock production
+*' and employment for mitigation of GHG emissions are calclated in separate equaations. 
+*' For the former, total labor costs include labor costs from crop production 
+*' (see [38_factor_costs]), livestock production (see [70_livestock]), and some labor costs 
+*' for crop and livestock production which are not covered by MAgPIE. For employment from
+*' mitigation of GHG emissions labor costs come from the marginal abatement cost curves (MACCs)
+*' (see [57_maccs]).
 
 * excluding labor costs for crop residues (as this is not include in the 
 * data on agricultural employment by the International Labour Organization)

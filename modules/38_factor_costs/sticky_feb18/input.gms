@@ -5,8 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-$setglobal c38_fac_req  reg
-* options: glo, reg
+$setglobal c38_fac_req  glo
+* spatial disaggregation of factor requirements (options: glo, reg)
 
 scalars
 * Depreciation rate assuming roughly 20 years linear depreciation for invesment goods
