@@ -448,4 +448,5 @@ plotFSDP(outputfolder = file.path("output",unique(subfolder)),
          iso = iso,
          grid = grid,
          val = val,
-         reg2iso = reg2iso)
+         reg2iso = reg2iso,
+         rev = rev)
