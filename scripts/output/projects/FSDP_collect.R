@@ -120,6 +120,169 @@ missing <- NULL
 
 saveRDS(outputdir,"outputdir.rds")
 
+indicators_main <- getVariables()
+names(indicators_main) <- NULL
+var_reg <- c(indicators_main,
+             ### Validation
+             "Population",
+             "Income",
+             "Nutrition|Calorie Supply|+|Crops",
+             "Nutrition|Calorie Supply|+|Livestock products",
+             "Demand|++|Crops",
+             "Demand|++|Livestock products",
+             "Resources|Land Cover|+|Cropland",
+             "Resources|Land Cover|+|Pastures and Rangelands",
+             "Resources|Land Cover|+|Forest",
+             "Resources|Land Cover|Forest|+|Managed Forest",
+             "Resources|Land Cover|Forest|Natural Forest|+|Primary Forest",
+             "Resources|Land Cover|Forest|Natural Forest|+|Secondary Forest",
+             "Resources|Land Cover|+|Other Land",
+             "Resources|Land Cover|+|Urban Area",
+             "Productivity|Landuse Intensity Indicator Tau",
+             "Resources|Nitrogen|Cropland Budget|Inputs|+|Fertilizer",
+             "Resources|Water|Withdrawal|Agriculture",
+             ### Maps
+             "Costs",
+             "Population",
+             "Share of working age population employed in agriculture|Crop and livestock products",
+             "Hourly labor costs",
+             ### Suppl plots
+             "Population",
+             "Nutrition|Calorie Intake",
+             "Nutrition|Calorie Intake|+|Crops",
+             "Nutrition|Calorie Intake|+|Fish",
+             "Nutrition|Calorie Intake|+|Livestock products",
+             "Nutrition|Calorie Intake|+|Secondary products",
+             "Nutrition|Calorie Intake|Crops|+|Cereals",
+             "Nutrition|Calorie Intake|Crops|+|Oil crops",
+             "Nutrition|Calorie Intake|Crops|+|Other crops",
+             "Nutrition|Calorie Intake|Crops|+|Sugar crops",
+             "Nutrition|Calorie Intake|Crops|Cereals|+|Maize",
+             "Nutrition|Calorie Intake|Crops|Cereals|+|Rice",
+             "Nutrition|Calorie Intake|Crops|Cereals|+|Temperate cereals",
+             "Nutrition|Calorie Intake|Crops|Cereals|+|Tropical cereals",
+             "Nutrition|Calorie Intake|Crops|Oil crops|+|Groundnuts",
+             "Nutrition|Calorie Intake|Crops|Oil crops|+|Other oil crops incl rapeseed",
+             "Nutrition|Calorie Intake|Crops|Oil crops|+|Soybean",
+             "Nutrition|Calorie Intake|Crops|Oil crops|+|Sunflower",
+             "Nutrition|Calorie Intake|Crops|Other crops|+|Fruits Vegetables Nuts",
+             "Nutrition|Calorie Intake|Crops|Other crops|+|Potatoes",
+             "Nutrition|Calorie Intake|Crops|Other crops|+|Pulses",
+             "Nutrition|Calorie Intake|Crops|Other crops|+|Tropical roots",
+             "Nutrition|Calorie Intake|Crops|Sugar crops|+|Sugar beet",
+             "Nutrition|Calorie Intake|Crops|Sugar crops|+|Sugar cane",
+             "Nutrition|Calorie Intake|Livestock products|+|Dairy",
+             "Nutrition|Calorie Intake|Livestock products|+|Eggs",
+             "Nutrition|Calorie Intake|Livestock products|+|Monogastric meat",
+             "Nutrition|Calorie Intake|Livestock products|+|Poultry meat",
+             "Nutrition|Calorie Intake|Livestock products|+|Ruminant meat",
+             "Nutrition|Calorie Intake|Secondary products|+|Alcoholic beverages",
+             "Nutrition|Calorie Intake|Secondary products|+|Brans",
+             "Nutrition|Calorie Intake|Secondary products|+|Molasses",
+             "Nutrition|Calorie Intake|Secondary products|+|Oils",
+             "Nutrition|Calorie Intake|Secondary products|+|Sugar",
+             "Nutrition|Calorie Supply",
+             "Nutrition|Calorie Supply|+|Crops",
+             "Nutrition|Calorie Supply|+|Fish",
+             "Nutrition|Calorie Supply|+|Livestock products",
+             "Nutrition|Calorie Supply|+|Secondary products",
+             "Nutrition|Calorie Supply|Crops|+|Cereals",
+             "Nutrition|Calorie Supply|Crops|+|Oil crops",
+             "Nutrition|Calorie Supply|Crops|+|Other crops",
+             "Nutrition|Calorie Supply|Crops|+|Sugar crops",
+             "Nutrition|Calorie Supply|Crops|Cereals|+|Maize",
+             "Nutrition|Calorie Supply|Crops|Cereals|+|Rice",
+             "Nutrition|Calorie Supply|Crops|Cereals|+|Temperate cereals",
+             "Nutrition|Calorie Supply|Crops|Cereals|+|Tropical cereals",
+             "Nutrition|Calorie Supply|Crops|Oil crops|+|Groundnuts",
+             "Nutrition|Calorie Supply|Crops|Oil crops|+|Other oil crops incl rapeseed",
+             "Nutrition|Calorie Supply|Crops|Oil crops|+|Soybean",
+             "Nutrition|Calorie Supply|Crops|Oil crops|+|Sunflower",
+             "Nutrition|Calorie Supply|Crops|Other crops|+|Fruits Vegetables Nuts",
+             "Nutrition|Calorie Supply|Crops|Other crops|+|Potatoes",
+             "Nutrition|Calorie Supply|Crops|Other crops|+|Pulses",
+             "Nutrition|Calorie Supply|Crops|Other crops|+|Tropical roots",
+             "Nutrition|Calorie Supply|Crops|Sugar crops|+|Sugar beet",
+             "Nutrition|Calorie Supply|Crops|Sugar crops|+|Sugar cane",
+             "Nutrition|Calorie Supply|Livestock products|+|Dairy",
+             "Nutrition|Calorie Supply|Livestock products|+|Eggs",
+             "Nutrition|Calorie Supply|Livestock products|+|Monogastric meat",
+             "Nutrition|Calorie Supply|Livestock products|+|Poultry meat",
+             "Nutrition|Calorie Supply|Livestock products|+|Ruminant meat",
+             "Nutrition|Calorie Supply|Secondary products|+|Alcoholic beverages",
+             "Nutrition|Calorie Supply|Secondary products|+|Brans",
+             "Nutrition|Calorie Supply|Secondary products|+|Molasses",
+             "Nutrition|Calorie Supply|Secondary products|+|Oils",
+             "Nutrition|Calorie Supply|Secondary products|+|Sugar",
+             "Demand|+|Agricultural Supply Chain Loss",
+             "Demand|+|Bioenergy",
+             "Demand|+|Feed",
+             "Demand|+|Food",
+             "Demand|+|Material",
+             "Demand|+|Processing",
+             "Demand|+|Seed",
+             "Demand|+|Roundwood",
+             "Demand|+|Domestic Balanceflow",
+             "Emissions|CO2|Land|+|Land-use Change",
+             "Emissions|CH4|Land|+|Agriculture",
+             "Emissions|N2O|Land|+|Agriculture",
+             "Resources|Land Cover|+|Cropland",
+             "Resources|Land Cover|+|Pastures and Rangelands",
+             "Resources|Land Cover|Forest|Natural Forest|+|Primary Forest",
+             "Resources|Land Cover|Forest|Natural Forest|+|Secondary Forest",
+             "Resources|Land Cover|Forest|Managed Forest|+|Plantations",
+             "Resources|Land Cover|Forest|Managed Forest|+|NPI/NDC",
+             "Resources|Land Cover|Forest|Managed Forest|+|Afforestation",
+             "Resources|Land Cover|Cropland|+|Bioenergy crops",
+             "Resources|Land Cover|+|Other Land",
+             "Resources|Land Cover|+|Urban Area",
+             "Resources|Land Cover|Cropland|Crops|Cereals|+|Maize",
+             "Resources|Land Cover|Cropland|Crops|Cereals|+|Rice",
+             "Resources|Land Cover|Cropland|Crops|Cereals|+|Temperate cereals",
+             "Resources|Land Cover|Cropland|Crops|Cereals|+|Tropical cereals",
+             "Resources|Land Cover|Cropland|Crops|Oil crops|+|Cotton seed",
+             "Resources|Land Cover|Cropland|Crops|Oil crops|+|Groundnuts",
+             "Resources|Land Cover|Cropland|Crops|Oil crops|+|Oilpalms",
+             "Resources|Land Cover|Cropland|Crops|Oil crops|+|Other oil crops incl rapeseed",
+             "Resources|Land Cover|Cropland|Crops|Oil crops|+|Soybean",
+             "Resources|Land Cover|Cropland|Crops|Oil crops|+|Sunflower",
+             "Resources|Land Cover|Cropland|Crops|Sugar crops|+|Sugar beet",
+             "Resources|Land Cover|Cropland|Crops|Sugar crops|+|Sugar cane",
+             "Resources|Land Cover|Cropland|Crops|Other crops|+|Fruits Vegetables Nuts",
+             "Resources|Land Cover|Cropland|Crops|Other crops|+|Potatoes",
+             "Resources|Land Cover|Cropland|Crops|Other crops|+|Pulses",
+             "Resources|Land Cover|Cropland|Crops|Other crops|+|Tropical roots",
+             "Resources|Land Cover|Cropland|+|Bioenergy crops",
+             "Resources|Land Cover|Cropland|+|Fallow Cropland",
+             "Resources|Nitrogen|Cropland Budget|Balance|+|Nutrient Surplus",
+             "Resources|Nitrogen|Pasture Budget|Balance|+|Nutrient Surplus",
+             "Resources|Water|Withdrawal|Agriculture",
+             "Nutrition|Anthropometrics|People normalweight",
+             "Nutrition|Anthropometrics|People obese",
+             "Nutrition|Anthropometrics|People overweight",
+             "Nutrition|Anthropometrics|People underweight",
+             "Agricultural employment|Crop and livestock products",
+             "Agricultural employment|+|Crop products",
+             "Agricultural employment|+|Livestock products",
+             "Hourly labor costs",
+             "Total Hours Worked|Crop and livestock products",
+             "Income|Gini Coefficient",
+             "Income|Average Income of Lower 40% of Population",
+             "Income|Fraction of Population below half of Median Income",
+             "Income|Number of People Below 1.90$/Day",
+             "Income|Number of People Below 3.20$/Day",
+             "Income|Number of People Below 5.50$/Day"
+             )
+var_reg <- unique(var_reg)
+
+var_iso <- c("Population",
+             "Agricultural employment|Crop and livestock products",
+             "Nutrition|Anthropometrics|People underweight",
+             "Nutrition|Anthropometrics|People obese",
+             "Household Expenditure|Food|Expenditure",
+             "Income|Number of People Below 3.20$/Day")
+var_iso <- unique(var_iso)
+
 for (i in 1:length(outputdir)) {
   print(paste("Processing",outputdir[i]))
   cfg <- gms::loadConfig(file.path(outputdir[i], "config.yml"))
@@ -127,21 +290,29 @@ for (i in 1:length(outputdir)) {
   ### regional level outputs
   rep <- file.path(outputdir[i], "report.rds")
   if(file.exists(rep)) {
-    reg <- rbind(reg, as.data.table(readRDS(rep)))
+    a <- as.data.table(readRDS(rep))
+    a[variable %in% var_reg,]
+    a <- droplevels(a)
+    reg <- rbind(reg, a)
   } else missing <- c(missing,outputdir[i])
 
-  ### ISO level outputs
-  rep <- file.path(outputdir[i], "report_iso.rds")
-  if(file.exists(rep)) {
-    iso <- rbind(iso,as.data.table(readRDS(rep)))
-  } else missing <- c(missing,outputdir[i])
-
-  ### Grid level outputs
-  ## only for BAU and SDP to save time and storage
+  ### ISO and Grid level outputs
+  ## only for BAU and SDP in 2020 and 2050 to save time and storage
   scen <- c("BAU", "FSDP")
+  years <- c(2020, 2050)
   if (unlist(strsplit(cfg$title, "_"))[3] %in% scen) {
+
+    ### ISO level outputs
+    rep <- file.path(outputdir[i], "report_iso.rds")
+    if(file.exists(rep)) {
+      a <- as.data.table(readRDS(rep))
+      a[variable %in% var_iso & period %in% years,]
+      a <- droplevels(a)
+      iso <- rbind(iso, a)
+    } else missing <- c(missing,outputdir[i])
+
+    ###Grid level outputs
     y     <- NULL
-    years <- c(2020, 2050)
 
     ## BII
     nc_file <- file.path(outputdir[i], paste(cfg$title, "cell.bii_0.5.mz", sep = "_"))#Note the "_" instead of "-"
