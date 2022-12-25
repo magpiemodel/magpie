@@ -291,10 +291,10 @@ for (i in 1:length(outputdir)) {
   rep <- file.path(outputdir[i], "report.rds")
   if(file.exists(rep)) {
     a <- as.data.table(readRDS(rep))
-    a[variable %in% var_reg,]
+    a <- a[variable %in% var_reg,]
     a <- droplevels(a)
     reg <- rbind(reg, a)
-  } else missing <- c(missing,outputdir[i])
+  } else missing <- c(missing,rep)
 
   ### ISO and Grid level outputs
   ## only for BAU and SDP in 2020 and 2050 to save time and storage
@@ -306,10 +306,10 @@ for (i in 1:length(outputdir)) {
     rep <- file.path(outputdir[i], "report_iso.rds")
     if(file.exists(rep)) {
       a <- as.data.table(readRDS(rep))
-      a[variable %in% var_iso & period %in% years,]
+      a <- a[variable %in% var_iso & period %in% years,]
       a <- droplevels(a)
       iso <- rbind(iso, a)
-    } else missing <- c(missing,outputdir[i])
+    } else missing <- c(missing,rep)
 
     ###Grid level outputs
     y     <- NULL
@@ -322,7 +322,7 @@ for (i in 1:length(outputdir)) {
       getSets(a,fulldim = F)[3] <- "variable"
       a <- addLocation(a)
       y <- mbind(y,a)
-    } else missing <- c(missing,outputdir[i])
+    } else missing <- c(missing,nc_file)
 
     ## Crop diversity
     nc_file <- file.path(outputdir[i], paste0(cfg$title, "-CropDiversityGridded.nc"))
@@ -332,7 +332,7 @@ for (i in 1:length(outputdir)) {
       getSets(a,fulldim = F)[3] <- "variable"
       a <- addLocation(a)
       y <- mbind(y,a)
-    } else missing <- c(missing,outputdir[i])
+    } else missing <- c(missing,nc_file)
 
     ## land patterns Mha
     nc_file <- file.path(outputdir[i], "cell.land_0.5.mz")
@@ -342,7 +342,7 @@ for (i in 1:length(outputdir)) {
       getSets(a,fulldim = F)[3] <- "variable"
       a <- addLocation(a)
       y <- mbind(y,a)
-    } else missing <- c(missing,outputdir[i])
+    } else missing <- c(missing,nc_file)
 
     ## land patterns share
     nc_file <- file.path(outputdir[i], "cell.land_0.5_share.mz")
@@ -353,7 +353,7 @@ for (i in 1:length(outputdir)) {
       getSets(a,fulldim = F)[3] <- "variable"
       a <- addLocation(a)
       y <- mbind(y,a)
-    } else missing <- c(missing,outputdir[i])
+    } else missing <- c(missing,nc_file)
 
     ## croparea shares
     nc_file <- file.path(outputdir[i], "cell.croparea_0.5_share.mz")
@@ -367,7 +367,7 @@ for (i in 1:length(outputdir)) {
       getSets(a,fulldim = F)[3] <- "variable"
       a <- addLocation(a)
       y <- mbind(y,a)
-    } else missing <- c(missing,outputdir[i])
+    } else missing <- c(missing,nc_file)
 
     ## Nitrogen
     nc_file <- file.path(outputdir[i], paste(cfg$title, "nutrientSurplus_intensity.mz", sep = "-"))
@@ -377,7 +377,7 @@ for (i in 1:length(outputdir)) {
       getSets(a,fulldim = F)[3] <- "variable"
       a <- addLocation(a)
       y <- mbind(y,a)
-    } else missing <- c(missing,outputdir[i])
+    } else missing <- c(missing,nc_file)
 
     ## Water
     nc_file <- file.path(outputdir[i], "watStressViolations.mz")
@@ -387,7 +387,7 @@ for (i in 1:length(outputdir)) {
       getSets(a,  fulldim = FALSE)[3] <- "variable"
       a <- addLocation(a)
       y <- mbind(y, a)
-    } else missing <- c(missing, outputdir[i])
+    } else missing <- c(missing,nc_file)
 
     #add dimensions
 
