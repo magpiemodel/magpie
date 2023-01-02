@@ -5,10 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### changed
+-
+
+### added
+- **scripts** added output script that generates a short mif containing only variables relevant for the REMIND coupling
+
+### removed
+-
+
+### fixed
+-
+
 
 ## [4.6.1] - 2022-12-13
 
 ### changed
+- **42_water_demand** replaced `f42_env_flow_policy` with macro
 - **30_crop** replaced `f30_scenario_fader` with macro
 - **30_crop/config** changed switch `c30_rotation_scenario_speed` to `s30_rotation_scenario_target`
 - **30_crop/config** changed switch `c30_snv_target` to `s30_snv_scenario_target`

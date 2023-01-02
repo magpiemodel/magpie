@@ -147,25 +147,25 @@ $title magpie
 *##################### R SECTION START (VERSION INFO) ##########################
 *
 * Used data set: rev4.77_h12_magpie.tgz
-* md5sum: f0fb0888f1f711442377a380887dbbfa
 
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 *
 * Used data set: rev4.77_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: fe9ad2782602695b706836e84f6b569f
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 *
 * Used data set: rev4.77_h12_validation.tgz
-* md5sum: 7bb2104776a43e1f1293f50d08e20877
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 *
-* Used data set: additional_data_rev4.32.tgz
-* md5sum: 721ffbc57edddfb5e9b76546c51906f2
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: additional_data_rev4.33.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 *
-* Used data set: calibration_H12+ir2rf_05Oct22.tgz
-* md5sum: 788b8e32ea1bd83c5c8f8987d9f05265
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: calibration_H12_per_ton_fao_may22_glo_23Nov22.tgz
+* md5sum: NA
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 *
 * Low resolution: c200
 * High resolution: 0.5
@@ -192,10 +192,9 @@ $title magpie
 *   CAZ  CHA  EUR  IND  JPN  LAM  MEA  NEU  OAS  REF  SSA  USA
 *     6   23    7    6    1   43   27    7   11   12   37   20
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
-*
-*
 
-* Last modification (input data): Wed Nov 16 17:14:42 2022
+*
+* Last modification (input data): Thu Dec 08 10:40:17 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
