@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
--
+- **config** scenario_fsec.csv update
+- **scripts** FSDP_collect FSDP_process fsec.R updates
 
 ### added
 - **scripts** added output script that generates a short mif containing only variables relevant for the REMIND coupling
