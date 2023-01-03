@@ -9,15 +9,12 @@ sets
   t_ini10  Time periods with land initialization data
        / y1995, y2000, y2005, y2010, y2015 /
 
-   land_from10(land) Land pools
-        / crop, past, forestry, primforest, secdforest, urban, other /
+  luh2_side_layers10 side layers from LUH2
+       / manpast, rangeland, primveg, secdveg, forested, nonforested /
 
-   land_to10(land) Land pools
-        / crop, past, forestry, primforest, secdforest, urban, other /
-
-   luh2_side_layers10 side layers from LUH2
-	/ manpast, rangeland, primveg, secdveg, forested, nonforested /
-
-    potnatveg(luh2_side_layers10) potentially forested biomes
-	/ forested, nonforested /
+  potnatveg(luh2_side_layers10) potentially forested biomes
+       / forested, nonforested /
 ;
+
+  alias(land,land_from);
+  alias(land,land_to);

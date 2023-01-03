@@ -41,6 +41,10 @@ inter32 Interpolation of scenario from FAO study on proportion of roundwood prod
 scen32 Scenario for development of roundwood production share from plantations
 / constant,h5s5l5,h5s2l2,h5s2l1,h5s1l1,h5s1l05,h2s1l05 /
 
+ shock_scen32 Scenario name of forest carbon shock
+ / none, 002lin2030,004lin2030,008lin2030,016lin2030
+  /
+
 ;
 
 *** EOF sets.gms ***

@@ -380,9 +380,15 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   # Yield calibration
   calib_file <- "modules/14_yields/input/f14_yld_calib.csv"
   if(cfg$recalibrate=="ifneeded") {
-    # recalibrate if file does not exist
-    if(!file.exists(calib_file)) cfg$recalibrate <- TRUE else cfg$recalibrate <- FALSE
+    if(!file.exists(calib_file)) {
+      # recalibrate if file does not exist
+      cfg$recalibrate <- TRUE
+    } else {
+      # recalibrate if all calibration factors are 1, otherwise don't
+      cfg$recalibrate <- all(magclass::read.magpie(calib_file)==1)
+    }
   }
+
   if(cfg$recalibrate){
     cat("Starting yield calibration factor calculation!\n")
     source("scripts/calibration/calc_calib.R")
@@ -414,8 +420,8 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
                      restart = cfg$restart_landconversion_cost,
                      calib_accuracy = cfg$calib_accuracy_landconversion_cost,
                      damping_factor = cfg$damping_factor_landconversion_cost,
-                     crop_max = cfg$crop_calib_max_landconversion_cost,
-                     crop_min = cfg$crop_calib_min_landconversion_cost,
+                     cost_max = cfg$cost_calib_max_landconversion_cost,
+                     cost_min = cfg$cost_calib_min_landconversion_cost,
                      calib_file = land_calib_file,
                      data_workspace = cfg$val_workspace,
                      logoption = 3,
@@ -488,7 +494,7 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
          call. = FALSE)
   }
 
-  .bioenergy_demand <- function(mag){
+  .bioenergyDemand <- function(mag){
     notGLO <- getRegions(mag)[!(getRegions(mag)=="GLO")]
     out <- mag[,,"Primary Energy Production|Biomass|Energy Crops (EJ/yr)"]*10^3
     dimnames(out)[[3]] <- NULL
@@ -498,7 +504,7 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
     write.magpie(out[notGLO,,],f)
   }
 
-  .emission_prices <- function(mag, mute_ghgprices_until){
+  .emissionPrices <- function(mag, mute_ghgprices_until){
     out_c <- mag[,,"Price|Carbon (US$2005/t CO2)"]*44/12 # US$2005/tCO2 -> US$2005/tC
     dimnames(out_c)[[3]] <- "co2_c"
 
@@ -525,40 +531,35 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
     write.magpie(out[notGLO,,],f)
   }
 
-  # read REMIND report
-  message("Reading bioenergy_demand from ",path_to_report_bioenergy)
-  rep <- read.report(path_to_report_bioenergy, as.list = FALSE)
-  if (length(getNames(rep,dim="scenario"))!=1) stop("getReportData: REMIND report contains more or less than 1 scenario.")
-  rep <- collapseNames(rep) # get rid of scenrio and model dimension if they exist
-  mag <- deletePlus(rep) #delete "+" and "++" from variable names
+  .readAndPrepare <- function(mifPath) {
+    rep <- read.report(mifPath, as.list = FALSE)
+    if (length(getNames(rep, dim = "scenario")) != 1) stop("getReportData: report contains more or less than 1 scenario.")
+    mag <- collapseNames(rep) # get rid of scenario and model dimension if they exist
 
-  if(!("y1995" %in% getYears(mag))){
-  	empty95<-mag[,1,];empty95[,,]<-0;dimnames(empty95)[[2]] <- "y1995"
-  	mag <- mbind(empty95,mag)
+    if(!("y1995" %in% getYears(mag))){
+      empty95 <- mag[, 1,]
+      empty95[,,] <- 0
+      dimnames(empty95)[[2]] <- "y1995"
+      mag <- mbind(empty95, mag)
+    }
+    years <- 1990 + 5 * seq_len(32)
+    mag <- time_interpolate(mag, years)
+    return(mag)
   }
-  years <- 1990+5*(1:32)
-  mag <- time_interpolate(mag,years)
 
-  .bioenergy_demand(mag)
+  # read REMIND report
+  message("Reading bioenergy_demand from ", path_to_report_bioenergy)
+  mag <- .readAndPrepare(path_to_report_bioenergy)
+
+  .bioenergyDemand(mag)
 
   # write emission files, if specified use path_to_report_ghgprices instead of the bioenergy report
   if (is.na(path_to_report_ghgprices)) {
-    message("Reading ghg prices from ",path_to_report_bioenergy)
-    .emission_prices(mag, mute_ghgprices_until)
+    message("Reading ghg prices from the same file (", path_to_report_bioenergy, ")")
+    .emissionPrices(mag, mute_ghgprices_until)
   } else {
-    message("Reading ghg prices from ",path_to_report_ghgprices)
-    ghgrep <- read.report(path_to_report_ghgprices, as.list = FALSE)
-    ghgrep <- collapseNames(ghgrep)
-    ghgmag <- deletePlus(ghgrep) #delete "+" and "++" from variable names
-    if(!("y1995" %in% getYears(ghgmag))){
-      empty95 <- ghgmag[,1,]
-      empty95[,,] <- 0
-      dimnames(empty95)[[2]] <- "y1995"
-      ghgmag <- mbind(empty95,ghgmag)
-    }
-    years <- 1990+5*(1:32)
-    ghgmag <- time_interpolate(ghgmag,years)
-
-    .emission_prices(ghgmag, mute_ghgprices_until)
+    message("Reading ghg prices from ", path_to_report_ghgprices)
+    ghgmag <- .readAndPrepare(path_to_report_ghgprices)
+    .emissionPrices(ghgmag, mute_ghgprices_until)
   }
 }
