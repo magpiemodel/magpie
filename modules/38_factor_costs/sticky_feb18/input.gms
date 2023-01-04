@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 $setglobal c38_fac_req  glo
-* options: glo, reg
+* spatial disaggregation of factor requirements (options: glo, reg)
 
 scalars
 * Depreciation rate assuming roughly 20 years linear depreciation for invesment goods

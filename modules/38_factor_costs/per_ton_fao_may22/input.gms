@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 $setglobal c38_fac_req  glo
-* options: glo, reg
+* spatial disaggregation of factor requirements (options: glo, reg)
 
 parameter f38_fac_req(kcr) Factor requirement costs in 2005 (USD05MER per tDM)
 /
