@@ -25,7 +25,7 @@
                    + vm_p_fert_costs(i2)
                    + vm_emission_costs(i2)
                    - vm_reward_cdr_aff(i2)
-                   + vm_maccs_costs(i2)
+                   + sum(req,vm_maccs_costs(i2,req))
                    + vm_cost_AEI(i2)
                    + vm_cost_trade(i2)
                    + vm_cost_fore(i2)
