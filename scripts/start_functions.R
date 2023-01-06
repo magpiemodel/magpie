@@ -281,7 +281,9 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
       renv::restore(prompt = FALSE)
     }
     # init renv in a separate session so the libPaths of the current session remain unchanged
-    callr::r(createResultsfolderRenv, wd = cfg$results_folder)
+    callr::r(createResultsfolderRenv,
+             wd = cfg$results_folder,
+             env = c(RENV_PATHS_LIBRARY = "renv/library"))
     message("done.")
   }
 
