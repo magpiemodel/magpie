@@ -1,3 +1,5 @@
+Sys.setenv(RENV_PATHS_LIBRARY = "renv/library")
+
 source("renv/activate.R")
 
 if (!"https://rse.pik-potsdam.de/r/packages" %in% getOption("repos")) {
