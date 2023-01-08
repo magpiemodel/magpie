@@ -15,4 +15,5 @@ loop(t,
  );
 );
 
-pcm_tau(h) = fm_tau1995(h);
+pcm_tau(h,"crop") = fm_tau1995(h);
+pcm_tau(h,"pastr") = fm_pastr_tau_hist("y1995",h);

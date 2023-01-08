@@ -29,14 +29,14 @@ $endif
 ic42_wat_req_k(j,k) = i42_wat_req_k(t,j,k);
 ic42_env_flow_policy(i) = i42_env_flow_policy(t,i);
 
-* water consumption in industry, sanitation, ecosystem
+* water withdrawals in manufacturing, electricity, domestic, ecosystem
 * depends on the socioeconomic scenario
 if((s42_watdem_nonagr_scenario = 1),
- vm_watdem.fx(watdem_ineldo,j) = f42_watdem_ineldo(t,j,"SSP2",watdem_ineldo);
+ vm_watdem.fx(watdem_ineldo,j) = f42_watdem_ineldo(t,j,"ssp1",watdem_ineldo);
 Elseif(s42_watdem_nonagr_scenario = 2),
- vm_watdem.fx(watdem_ineldo,j) = f42_watdem_ineldo(t,j,"A2",watdem_ineldo);
+ vm_watdem.fx(watdem_ineldo,j) = f42_watdem_ineldo(t,j,"ssp2",watdem_ineldo);
 Elseif(s42_watdem_nonagr_scenario = 3),
- vm_watdem.fx(watdem_ineldo,j) = f42_watdem_ineldo(t,j,"B1",watdem_ineldo);
+ vm_watdem.fx(watdem_ineldo,j) = f42_watdem_ineldo(t,j,"ssp3",watdem_ineldo);
 );
 
 *Environmental flow scenarios depending on the switch s42_env_flow_scenario
@@ -56,7 +56,7 @@ vm_watdem.fx("ecosystem",j) = sum(cell(i,j), i42_env_flows_base(t,j) * (1-ic42_e
 * irrigation efficiency
 if(m_year(t) <= sm_fix_SSP2,
  v42_irrig_eff.fx(j) = 1/(1+2.718282**((-22160-sum(cell(i,j),im_gdp_pc_mer("y1995",i)))/37767));
-else 
+else
  if((s42_irrig_eff_scenario = 1),
  	v42_irrig_eff.fx(j) = s42_irrigation_efficiency;
  Elseif (s42_irrig_eff_scenario=2),
@@ -64,4 +64,17 @@ else
  Elseif (s42_irrig_eff_scenario=3),
 	v42_irrig_eff.fx(j) = 1/(1+2.718282**((-22160-sum(cell(i,j),im_gdp_pc_mer(t,i)))/37767));
  );
+);
+
+
+*Pumping cost in the current time step
+  ic42_pumping_cost(i) = 0;
+
+*Pumping cost settings will be only executed when s42_pumping is set to 1
+if ((s42_pumping = 1),
+ic42_pumping_cost(i) = f42_pumping_cost(t,i);
+*Pumping cost sensitivity test implmentation
+  if(m_year(t) > s42_multiplier_startyear,
+  ic42_pumping_cost(i) = f42_pumping_cost(t,i)*s42_multiplier;
+  );
 );

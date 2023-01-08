@@ -14,10 +14,11 @@
 library(magclass)
 library(lucode2)
 library(lusweave)
-library(magpie)
+library(magpie4)
 library(luplot)
 library(ggplot2)
 library(remulator)
+library(gms)
 
 ########################################################################################################
 ######################################## Define function ###############################################
@@ -25,7 +26,7 @@ library(remulator)
 
 collect_data_and_make_emulator <- function(outputdir,name_of_fit="linear") {
   require(gms)
-  load(paste0(outputdir, "/config.Rdata"))
+  cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 
   #setwd("~/Documents/0_GIT/magpie")
   #cfg<-list(title="SSP2-26-1")

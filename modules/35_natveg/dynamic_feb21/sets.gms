@@ -6,17 +6,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-  pol35 Land protection policy
-  / none, npi, ndc /
-
-  prot_type_all Conservation priority areas
-  / BH, CPD, FF, LW, WDPA, HalfEarth, FF_BH, Forest, Forest_Other, PrimForest, SecdForest /
-
-  prot_type(prot_type_all) Conservation priority areas
-  / BH, CPD, FF, LW, WDPA, HalfEarth /
-
-  pol_stock35 Land types for land protection policies
-  / forest, other /
 
   driver_source Source of deforestation drivers
   / overall, deforestation, shifting_agriculture,
@@ -25,7 +14,15 @@ sets
   combined_loss(driver_source) Combined loss from fire plus agriculture
   / shifting_agriculture,wildfire /
 
-  prot_target35 Target year for nature protection
-   / none, by2030, by2050 /
+  pol35 Land protection policy
+  / none, npi, ndc /
+
+  pol_stock35 Land types for land protection policies
+  / forest, other /
+
+
+  shock_scen Scenario name of forest carbon shock
+  / none, 002lin2030,004lin2030,008lin2030,016lin2030
+   /
 
 ;

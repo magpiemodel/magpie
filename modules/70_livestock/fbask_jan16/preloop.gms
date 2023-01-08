@@ -53,7 +53,15 @@ im_feed_baskets(t_all,i,kap,kcer70) =
 * After the substitution of foddr with SCP (1-i70_foddr_scp_fadeout), SCP is converted
 * back DM fm_attributes("nr","scp").
 im_feed_baskets(t_all,i,kap,"scp") = im_feed_baskets(t_all,i,kap,"scp")
-             + (im_feed_baskets(t_all,i,kap,"foddr") * (1-i70_foddr_scp_fadeout(t_all,i)) * 
+             + (im_feed_baskets(t_all,i,kap,"foddr") * (1-i70_foddr_scp_fadeout(t_all,i)) *
              fm_attributes("nr","foddr")) / fm_attributes("nr","scp");
 im_feed_baskets(t_all,i,kap,"foddr") =
                im_feed_baskets(t_all,i,kap,"foddr") * i70_foddr_scp_fadeout(t_all,i);
+
+
+*** choosing between reginal and global factor requirements
+$if "%c70_fac_req_regr%" == "glo" i70_cost_regr(i,kli,"cost_regr_a") = f70_cost_regr(kli,"cost_regr_a");
+$if "%c70_fac_req_regr%" == "reg" i70_cost_regr(i,kli,"cost_regr_a") = (f70_hist_factor_costs_livst(i,kli)/f70_hist_prod_livst(i,kli,"dm"))-f70_cost_regr(kli,"cost_regr_b")*sum(sys_to_kli(sys,kli),i70_livestock_productivity("y2005",i,sys));
+
+i70_cost_regr(i,"fish",cost_regr) = f70_cost_regr("fish",cost_regr);
+i70_cost_regr(i,kap,"cost_regr_b") = f70_cost_regr(kap,"cost_regr_b");

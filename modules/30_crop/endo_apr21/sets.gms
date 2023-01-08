@@ -51,6 +51,6 @@ sets
    marginal_land30 Marginal land scenarios
     / all_marginal, q33_marginal, no_marginal  /
 
-   set_aside_target30 Target year for set aside policy
+   policy_target30 Target year for cropland policy
    / none, by2030, by2050 /
 ;
