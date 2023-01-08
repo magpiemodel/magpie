@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------------
-# description: Create FSEC outputs for use by Simon Dietz
+# description: Create FSEC outputs for use by Alessandro Passaro
 # comparison script: FALSE
 # ---------------------------------------------------------------
 
@@ -16,7 +16,7 @@
 library(gms)
 library(magpie4)
 
-message("Starting FSEC_SimonDietz output runscript")
+message("Starting FSEC_AlessandroPassaro output runscript")
 
 ############################# BASIC CONFIGURATION #######################################
 if (!exists("source_include")) {
@@ -34,21 +34,20 @@ message("Script started for output directory: ", outputdir)
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
 title <- cfg$title
 
-message("Creating an output directory for Simon Dietz's datasets")
-simonDietzDir <- file.path(".", "output", "SimonDietz")
-if (!dir.exists(simonDietzDir)) {
-    dir.create(simonDietzDir)
+message("Creating an output directory for Alessandro Passaro's datasets")
+alessandroPassaroDir <- file.path(".", "output", "AlessandroPassaro")
+if (!dir.exists(alessandroPassaroDir)) {
+    dir.create(alessandroPassaroDir)
 }
 
-reportOutputDir <- file.path(simonDietzDir, title)
+reportOutputDir <- file.path(alessandroPassaroDir, title)
 if (dir.exists(reportOutputDir)) {
-    message("Warning in FSEC_SimonDietz: Output directory for " , title, " already exists. Results will be overwritten.")
+    message("Warning in FSEC_AlessandroPassaro: Output directory for " , title, " already exists. Results will be overwritten.")
 }
 suppressWarnings(dir.create(reportOutputDir))
 
-message("Generating Simon Dietz's output for the run: ", title)
+message("Generating Alessandro Passaro's output for the run: ", title)
 
-out <- getReportFSECSimonDietz(magpieOutputDir = outputdir,
-                               reportOutputDir = reportOutputDir,
-                               scenario = title)
-
+out <- getReportFSECAlessandroPassaro(magpieOutputDir = outputdir,
+                                      reportOutputDir = reportOutputDir,
+                                      scenario        = title)

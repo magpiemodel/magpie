@@ -14,9 +14,9 @@
  q18_prod_res_ag_reg(i2,kcr,attributes) ..
                  vm_res_biomass_ag(i2,kcr,attributes)
                  =e=
-                 (sum((cell(i2,j2),w), vm_area(j2,kcr,w)) * sum(ct,f18_multicropping(ct,i2)) * f18_cgf("intercept",kcr)
-                 + vm_prod_reg(i2,kcr)*f18_cgf("slope",kcr))
-                 *  f18_attributes_residue_ag(attributes,kcr);
+                 (sum((cell(i2,j2),w), vm_area(j2,kcr,w)) * sum(ct,fm_multicropping(ct,i2)) * f18_cgf("intercept",kcr)
+                 + vm_prod_reg(i2,kcr) * f18_cgf("slope",kcr))
+                 * f18_attributes_residue_ag(attributes,kcr);
 
 *' The BG crop residue biomass `vm_res_biomass_bg` is calculated as a function of
 *' total aboveground biomass.
@@ -24,7 +24,7 @@
  q18_prod_res_bg_reg(i2,kcr,dm_nr) ..
                  vm_res_biomass_bg(i2,kcr,dm_nr)
                  =e=
-                 (vm_prod_reg(i2,kcr) + vm_res_biomass_ag(i2,kcr,"dm"))*f18_cgf("bg_to_ag",kcr)
+                 (vm_prod_reg(i2,kcr) + vm_res_biomass_ag(i2,kcr,"dm")) * f18_cgf("bg_to_ag",kcr)
                  * f18_attributes_residue_bg(dm_nr,kcr);
 
 *' In contrast to AG biomass, AG production `vm_res_biomass_ag(i,kcr,attributes)`
@@ -112,7 +112,7 @@
  q18_cost_prod_res(i2,kres) ..
                   vm_cost_prod_kres(i2,kres)
                   =e=
-                  vm_prod_reg(i2,kres)*f18_fac_req_kres(kres);
+                  vm_prod_reg(i2,kres) * fm_attributes("wm",kres) *  f18_fac_req_kres(kres);
 
 *' Trade of AG residues is not considered, so that all produced AG residues have
 *' to be assigned to uses within the respective world region.

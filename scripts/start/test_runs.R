@@ -31,29 +31,36 @@ cfg$results_folder <- "output/:title:"
 cfg$force_replace <- TRUE
 
 # support function to create standardized title
-.title <- function(...) return(paste(cfg$info$flag, sep="_",...))
+.title <- function(cfg, ...) return(paste(cfg$info$flag, sep="_",...))
+
+# Single time step run
+timeSteps <- cfg$gms$c_timesteps
+cfg$gms$c_timesteps <- 1
+cfg$title <- .title(cfg, "singleTimeStep")
+start_run(cfg, codeCheck = TRUE)
+cfg$gms$c_timesteps <- timeSteps
+
 
 # Reference and Policy run for SSP1, SSP2 and SSP5
 for(ssp in c("SSP1","SSP2","SSP5")) {
 
-  cfg$title <- .title(paste(ssp,"Ref",sep="-"))
+  cfg$title <- .title(cfg, paste(ssp,"Ref",sep="-"))
   cfg <- setScenario(cfg,c(ssp,"NPI","rcp7p0"))
   cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-NPi")
   cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-NPi")
-  start_run(cfg, codeCheck = TRUE)
+  start_run(cfg, codeCheck = FALSE)
 
-  cfg$title <- .title(paste(ssp,"PkBudg900",sep="-"))
+  cfg$title <- .title(cfg, paste(ssp,"PkBudg900",sep="-"))
   cfg <- setScenario(cfg,c(ssp,"NDC","rcp1p9"))
   cfg$gms$c56_pollutant_prices <- paste0("R21M42-",ssp,"-PkBudg900")
   cfg$gms$c60_2ndgen_biodem    <- paste0("R21M42-",ssp,"-PkBudg900")
-  start_run(cfg, codeCheck = TRUE)
+  start_run(cfg, codeCheck = FALSE)
 
 }
 
 #####################################################
 ### FSEC Test runs (BAU + FSDP) with FSEC regions ###
 #####################################################
-library(gms)
 source("scripts/projects/fsec.R")
 
 codeCheck <- FALSE
@@ -65,3 +72,4 @@ start_run(cfg = cfg, codeCheck = codeCheck)
 ### FSDP Scenario
 cfg <- fsecScenario(scenario = "e_FSDP")
 start_run(cfg = cfg, codeCheck = codeCheck)
+

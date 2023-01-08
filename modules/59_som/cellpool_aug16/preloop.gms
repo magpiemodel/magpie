@@ -31,11 +31,6 @@ vm_carbon_stock.l(j,"crop","soilc",stockType) =
   p59_som_pool(j,"crop") + i59_subsoilc_density("y1995",j) * pm_land_start(j,"crop");
 vm_carbon_stock.l(j,noncropland59,"soilc",stockType) =
   fm_carbon_density("y1995",j,noncropland59,"soilc") * pm_land_start(j,noncropland59);
-vm_carbon_stock.l(j,"urban","soilc",stockType) =
-    fm_carbon_density("y1995",j,"urban","soilc") * pm_land_start(j,"urban");
-
-*pcm_carbon_stock(j,land,"soilc") = vm_carbon_stock.l(j,land,"soilc");
-
 
 *****************************
 *** cshare calculation    ***
@@ -80,6 +75,6 @@ i59_cratio_fallow(j) = sum(climate59,
                 * f59_cratio_inputs(climate59,"low_input"));
 *' @stop
 
-p59_carbon_density(t,j,pools59)=0;
+p59_carbon_density(t,j,land) = 0;
 
 p59_land_before(j,land) = pm_land_start(j,land);

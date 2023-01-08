@@ -17,41 +17,30 @@
 *' `v10_balance_negative`should deviate from zero only in exceptional cases. 
 
  q10_transition_matrix(j2) ..
-	sum((land_from10,land_to10), v10_lu_transitions(j2,land_from10,land_to10))
+	sum((land_from,land_to), vm_lu_transitions(j2,land_from,land_to))
 	+ v10_balance_positive(j2) - v10_balance_negative(j2) =e=
 	sum(land, pcm_land(j2,land));
 
- q10_transition_to(j2,land_to10) ..
-	sum(land_from10, v10_lu_transitions(j2,land_from10,land_to10)) =e=
-	vm_land(j2,land_to10);
+ q10_transition_to(j2,land_to) ..
+	sum(land_from, vm_lu_transitions(j2,land_from,land_to)) =e=
+	vm_land(j2,land_to);
 
- q10_transition_from(j2,land_from10) ..
-	sum(land_to10, v10_lu_transitions(j2,land_from10,land_to10)) =e=
-	pcm_land(j2,land_from10);
+ q10_transition_from(j2,land_from) ..
+	sum(land_to, vm_lu_transitions(j2,land_from,land_to)) =e=
+	pcm_land(j2,land_from);
 
 *' The following two equations calculate land expansion and land contraction based
 *' on the above land transition matrix.
 
- q10_landexpansion(j2,land_to10) ..
-        vm_landexpansion(j2,land_to10) =e=
-        sum(land_from10$(not sameas(land_from10,land_to10)),
-        v10_lu_transitions(j2,land_from10,land_to10));
+ q10_landexpansion(j2,land_to) ..
+        vm_landexpansion(j2,land_to) =e=
+        sum(land_from$(not sameas(land_from,land_to)),
+        vm_lu_transitions(j2,land_from,land_to));
 
- q10_landreduction(j2,land_from10) ..
-        vm_landreduction(j2,land_from10) =e=
-        sum(land_to10$(not sameas(land_from10,land_to10)),
-        v10_lu_transitions(j2,land_from10,land_to10));
-
-*' Additionally the following two equations calculate the sources and targets
-*' of all cropland related conversions.
-
-q10_croplandreduction(j2,land_to10) ..
-               vm_croplandreduction(j2,land_to10) =e=
-               v10_lu_transitions(j2,"crop",land_to10);
-
-q10_croplandexpansion(j2,land_from10) ..
-               vm_croplandexpansion(j2,land_from10) =e=
-               v10_lu_transitions(j2,land_from10,"crop");
+ q10_landreduction(j2,land_from) ..
+        vm_landreduction(j2,land_from) =e=
+        sum(land_to$(not sameas(land_from,land_to)),
+        vm_lu_transitions(j2,land_from,land_to));
 
 *' Small costs of 1 $ per ha on gross land-use change avoid unrealistic patterns in the land transition matrix
 

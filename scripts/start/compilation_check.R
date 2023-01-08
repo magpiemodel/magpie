@@ -5,9 +5,14 @@
 # |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 # |  Contact: magpie@pik-potsdam.de
 
-name,type,reason
-vm_prod_reg,input,questionnaire
-pm_interest,input,questionnaire
-pm_prod_init,input,questionnaire
-vm_prod,input,questionnaire
-pm_labor_prod,input,questionnaire
+# ------------------------------------------------
+# description: download input and compile main.gms
+# position: 7
+# ------------------------------------------------
+
+source("scripts/start_functions.R")
+source("config/default.cfg")
+download_and_update(cfg)
+
+# compile main.gms
+system("gams main.gms action=c")

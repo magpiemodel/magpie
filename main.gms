@@ -69,7 +69,7 @@ $title magpie
 *' carbon when agricultural land is taken out of production and the associated regrowth of natural
 *' vegetation generates negative emissions from land-use change.
 *' Nitrogen emissions ([51_nitrogen]) are estimated based on nitrogen budgets for croplands,
-*' pastures ([50_nr_budgets]) and the livestock sector ([55_awms]) (@bodirsky_reactive_2014).
+*' pastures ([50_nr_soil_budget]) and the livestock sector ([55_awms]) (@bodirsky_reactive_2014).
 *' CH4 emissions are based on
 *' livestock feed and rice cultivation areas (@popp_food_2010). In the case of mitigation
 *' policies for the land sector, the model can reduce CO2 emissions by restraining land-use
@@ -148,21 +148,21 @@ $title magpie
 * 
 * Used data set: rev4.77_h12_magpie.tgz
 * md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.77_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
 * md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
 * Used data set: rev4.77_h12_validation.tgz
 * md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/rd3mod/inputdata/output
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev4.30.tgz
+* Used data set: additional_data_rev4.33.tgz
 * md5sum: NA
-* Repository: scp://cluster.pik-potsdam.de/p/projects/landuse/data/input/archive
+* Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_per_ton_fao_may22_28May22.tgz
+* Used data set: calibration_H12_per_ton_fao_may22_glo_23Nov22.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
@@ -193,7 +193,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Fri Sep 23 12:55:58 2022
+* Last modification (input data): Thu Dec 08 10:40:17 2022
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -235,7 +235,7 @@ $setglobal interest_rate  select_apr20
 $setglobal tc  endo_jan22
 $setglobal yields  managementcalib_aug19
 
-$setglobal food  anthropometrics_jan18
+$setglobal food  anthro_iso_jun22
 $setglobal demand  sector_may15
 $setglobal production  flexreg_apr16
 

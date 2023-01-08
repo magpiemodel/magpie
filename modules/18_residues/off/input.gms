@@ -5,14 +5,9 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-table f10_land(t_ini10,j,land) Different land type areas (mio. ha)
+table fm_multicropping(t_all,i) Multicropping indicator as ratio of area harvested by physical area (1)
 $ondelim
-$include "./modules/10_land/input/avl_land_t.cs3"
-$offdelim
-;
+$include "./modules/18_residues/input/f18_multicropping.csv"
+$offdelim;
 
-table fm_luh2_side_layers(j,luh2_side_layers10) luh2 side layers (grid cell share)
-$ondelim
-$include "./modules/10_land/input/luh2_side_layers.cs3"
-$offdelim
-;
+*** EOF input.gms ***
