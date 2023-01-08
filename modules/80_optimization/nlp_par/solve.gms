@@ -6,7 +6,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 **************start solve loop**************
 
-
 p80_counter(h) = 0;
 p80_modelstat(t,h) = 14;
 

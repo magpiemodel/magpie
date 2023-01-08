@@ -31,7 +31,7 @@ if (!exists("source_include")) {
 #########################################################################################
 
 message("Script started for output directory: ", outputdir)
-cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
+cfg   <- gms::loadConfig(file.path(outputdir, "config.yml"))
 title <- cfg$title
 
 message("Creating an output directory for Steven Lord's datasets")
