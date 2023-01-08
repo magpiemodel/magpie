@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **57_maccs** split costs into labor and capital
 - **38_factor_cots** renamed `p36_cost_shares` to `pm_cost_share_crops`
 - **config** scenario_fsec.csv update
+- **config** updated SHAPE SDP scenarios in scenario_config.csv
 - **scripts** FSDP_collect FSDP_process fsec.R updates
 
 ### added
