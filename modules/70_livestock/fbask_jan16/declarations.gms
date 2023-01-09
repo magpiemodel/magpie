@@ -39,7 +39,7 @@ parameters
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
  ov_dem_feed(t,i,kap,kall,type)       Regional feed demand including byproducts (mio. tDM per yr)
- ov_cost_prod_livst(t,i,req,type)     Livestock factor costs (mio. USD05MER per yr)
+ ov_cost_prod_livst(t,i,factors,type) Livestock factor costs (mio. USD05MER per yr)
  ov_cost_prod_fish(t,i,type)          Fish factor costs (mio. USD05MER per yr)
  oq70_feed(t,i,kap,kall,type)         Regional feed demand
  oq70_cost_prod_liv_labor(t,i,type)   Regional labor costs for livestock production

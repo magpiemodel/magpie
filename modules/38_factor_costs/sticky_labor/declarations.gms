@@ -48,7 +48,7 @@ scalars
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_prod_crop(t,i,req,type)         Regional factor costs of capital and labor for crop production  (mio USD05MER  per yr)
+ ov_cost_prod_crop(t,i,factors,type)     Regional factor costs of capital and labor for crop production  (mio USD05MER  per yr)
  ov38_investment_immobile(t,j,kcr,type)  Investment costs in immobile farm capital (mio USD05MER per yr)
  ov38_investment_mobile(t,j,type)        Investment costs in mobile farm capital (mio USD05MER per yr)
  ov38_laborhours_need(t,j,kcr,type)      Labor required per unit of output (hours per ton DM)

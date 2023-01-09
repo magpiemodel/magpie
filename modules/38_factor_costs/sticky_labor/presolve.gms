@@ -41,15 +41,15 @@ else
 i38_ces_shr(j,kcr) = sum(cell(i,j), (p38_intr_depr(t,i) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(1 + s38_ces_elast_par)) / (p38_intr_depr(t,i) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(1 + s38_ces_elast_par) + pm_hourly_costs(t,i,"baseline") * v38_laborhours_need.l(j,kcr)**(1 + s38_ces_elast_par)));
 i38_ces_scale(j,kcr) = sum(cell(i,j), 1/([i38_ces_shr(j,kcr) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(-s38_ces_elast_par) + (1 - i38_ces_shr(j,kcr)) * v38_laborhours_need.l(j,kcr)**(-s38_ces_elast_par)]**(-1/s38_ces_elast_par)));
 
-* minimum labor share
+* minimum labor share based on target and adjustment factor
 if (m_year(t) < 2020,
   p38_min_labor_share(t,i) = 0;
 elseif m_year(t) <= 2050,
-  p38_min_labor_share(t,i) = max(p38_cost_share(t,i,"labor"), p38_cost_share(t,i,"labor") + ((m_year(t)-2020)/(2050-2020) *
-                             (s38_target_labor_share_adjustment * (s38_target_labor_share - p38_cost_share("y2050",i,"labor")))));
+  p38_min_labor_share(t,i) = max(pm_cost_share_crops(t,i,"labor"), pm_cost_share_crops(t,i,"labor") + ((m_year(t)-2020)/(2050-2020) *
+                             (s38_target_labor_share_adjustment * (s38_target_labor_share - pm_cost_share_crops("y2050",i,"labor")))));
 else 
-  p38_min_labor_share(t,i)$(p38_cost_share("y2050",i,"labor") <= s38_target_labor_share) =  p38_min_labor_share("y2050",i);
-  p38_min_labor_share(t,i)$(p38_cost_share("y2050",i,"labor") > s38_target_labor_share)  =  max(p38_cost_share(t,i,"labor"), s38_target_labor_share);
+  p38_min_labor_share(t,i)$(pm_cost_share_crops("y2050",i,"labor") <= s38_target_labor_share) =  p38_min_labor_share("y2050",i);
+  p38_min_labor_share(t,i)$(pm_cost_share_crops("y2050",i,"labor") > s38_target_labor_share)  =  max(pm_cost_share_crops(t,i,"labor"), s38_target_labor_share);
 );
 
 * overwrite with 0 in case target labor share is 0 (i.e. off)

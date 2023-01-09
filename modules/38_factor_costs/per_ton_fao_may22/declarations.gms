@@ -22,7 +22,7 @@ i38_fac_req(t_all,i,kcr)          Factor requirements (USD05MER per tDM)
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_cost_prod_crop(t,i,req,type)       Regional factor costs of capital and labor for crop production (mio. USD05MER per yr)
+ ov_cost_prod_crop(t,i,factors,type)   Regional factor costs of capital and labor for crop production (mio. USD05MER per yr)
  oq38_cost_prod_crop_labor(t,i,type)   Regional labor costs for crop production (mio. USD05MER per yr)
  oq38_cost_prod_crop_capital(t,i,type) Regional capital costs for crop production (mio. USD05MER per yr)
 ;
