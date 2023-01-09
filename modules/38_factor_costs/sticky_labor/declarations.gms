@@ -28,7 +28,7 @@ parameters
  p38_capital_immobile(t,j,kcr)         Preexisting immobile capital stocks before investment (mio USD05MER)
  p38_capital_mobile(t,j)               Preexisting mobile capital stocks before investment (mio USD05MER)
 
- p38_cost_share(t,i,req)               Capital and labor shares of the regional factor costs for crop production   (1)
+ pm_cost_share_crops(t,i,req)          Capital and labor shares of the regional factor costs for crop production   (1)
  p38_share_calibration(i)              Summation factor used to calibrate calculated capital shares with historical values (1)
  p38_min_labor_share(t,i)              Minimum labor share out of labor plus capital needed (1)
 
