@@ -563,3 +563,13 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
     .emissionPrices(ghgmag, mute_ghgprices_until)
   }
 }
+
+# Will not actually solve the model: after compilation, this just copies the results
+# of a previous run, useful for testing compilation and input/output handling.
+# Used in scripts/start/extra/empty_model.R and tests for REMIND-MAgPIE coupling.
+configureEmptyModel <- function(cfg, inputGdxPath) {
+    message("Configuring to use empty MAgPIE model, reproduces prior run ", inputGdxPath)
+    cfg$model <- "standalone/empty_test_model.gms"
+    cfg$gms$c_input_gdx_path <- inputGdxPath
+    return(cfg)
+}

@@ -12,16 +12,14 @@
 source("scripts/start_functions.R")
 source("config/default.cfg")
 
-cfg$title <- "empty_model"
-cfg$model <- "standalone/empty_test_model.gms"
-
 # Find latest fulldata.gdx from automated model test (AMT) runs
 amtRunDirs <- list.files("/p/projects/landuse/tests/magpie/output",
-                         pattern = "default_\\d{4}-\\d{2}-\\d{2}_\\d{2}\\.\\d{2}.\\d{2}",
-                         full.names = TRUE)
+                        pattern = "default_\\d{4}-\\d{2}-\\d{2}_\\d{2}\\.\\d{2}.\\d{2}",
+                        full.names = TRUE)
 fullDataGdxs <- file.path(amtRunDirs, "fulldata.gdx")
 latestFullData <- sort(fullDataGdxs[file.exists(fullDataGdxs)], decreasing = TRUE)[[1]]
 
-cfg$gms$c_input_gdx_path <- latestFullData
+cfg <- configureEmptyModel(cfg, latestFullData)
+cfg$title <- "empty_model"
 
 start_run(cfg = cfg, codeCheck = FALSE)
