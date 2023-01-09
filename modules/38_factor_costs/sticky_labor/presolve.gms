@@ -5,17 +5,6 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-p38_share_calibration(i) = f38_historical_share("y2010",i)-(f38_reg_parameters("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso("y2010",iso)))+f38_reg_parameters("intercept"));
-
-if (m_year(t)<2010,
-p38_cost_share(t,i,"capital") = f38_historical_share(t,i);
-p38_cost_share(t,i,"labor")   = 1 - f38_historical_share(t,i);
-
-elseif (m_year(t)>=2010),
-p38_cost_share(t,i,"capital") = f38_reg_parameters("slope")*log10(sum(i_to_iso(i,iso),im_gdp_pc_ppp_iso(t,iso)))+f38_reg_parameters("intercept")+p38_share_calibration(i);
-p38_cost_share(t,i,"labor")   = 1 - p38_cost_share(t,i,"capital");
-);
-
 * choosing between regional (+time dependent) or global (from 2005) factor requirements
 $if "%c38_fac_req%" == "glo" i38_fac_req(t,i,kcr) = f38_fac_req(kcr);
 $if "%c38_fac_req%" == "reg" i38_fac_req(t,i,kcr) = f38_fac_req_fao_reg(t,i,kcr);
@@ -53,10 +42,19 @@ i38_ces_shr(j,kcr) = sum(cell(i,j), (p38_intr_depr(t,i) * sum(mobil38, v38_capit
 i38_ces_scale(j,kcr) = sum(cell(i,j), 1/([i38_ces_shr(j,kcr) * sum(mobil38, v38_capital_need.l(j,kcr,mobil38))**(-s38_ces_elast_par) + (1 - i38_ces_shr(j,kcr)) * v38_laborhours_need.l(j,kcr)**(-s38_ces_elast_par)]**(-1/s38_ces_elast_par)));
 
 * minimum labor share
-if (m_year(t)<=2020,
-  p38_min_labor_share(t) = 0;
-else
-  p38_min_labor_share(t) = s38_min_labor_share;
+if (m_year(t) < 2020,
+  p38_min_labor_share(t,i) = 0;
+elseif m_year(t) <= 2050,
+  p38_min_labor_share(t,i) = max(p38_cost_share(t,i,"labor"), p38_cost_share(t,i,"labor") + ((m_year(t)-2020)/(2050-2020) *
+                             (s38_target_labor_share_adjustment * (s38_target_labor_share - p38_cost_share("y2050",i,"labor")))));
+else 
+  p38_min_labor_share(t,i)$(p38_cost_share("y2050",i,"labor") <= s38_target_labor_share) =  p38_min_labor_share("y2050",i);
+  p38_min_labor_share(t,i)$(p38_cost_share("y2050",i,"labor") > s38_target_labor_share)  =  max(p38_cost_share(t,i,"labor"), s38_target_labor_share);
+);
+
+* overwrite with 0 in case target labor share is 0 (i.e. off)
+if (s38_target_labor_share = 0,
+  p38_min_labor_share(t,i) = 0;
 );
 
 *** Variable labor costs END

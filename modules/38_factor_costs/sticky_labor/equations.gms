@@ -25,7 +25,7 @@
 *' As low labor shares can lead to low agricultural employment, which is not necessrily a desired output, a 
 *' minimum share of labor need can be set.
 
-q38_labor_capital_ratio(i2) .. sum(ct, p38_min_labor_share(ct)) =l= vm_cost_prod_crop(i2,"labor") /
+q38_labor_capital_ratio(i2) .. sum(ct, p38_min_labor_share(ct,i2)) =l= vm_cost_prod_crop(i2,"labor") /
    (vm_cost_prod_crop(i2,"labor") + sum((mobil38, kcr, cell(i2,j2)), vm_prod(j2,kcr) * v38_capital_need(j2,kcr,mobil38)) * sum(ct, pm_interest(ct,i2)+s38_depreciation_rate));
 
 *' Labor costs: The labor costs are calculated by multiplying regional aggregated production with labor requirements 

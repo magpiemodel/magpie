@@ -30,7 +30,7 @@ parameters
 
  p38_cost_share(t,i,req)               Capital and labor shares of the regional factor costs for crop production   (1)
  p38_share_calibration(i)              Summation factor used to calibrate calculated capital shares with historical values (1)
- p38_min_labor_share(t)                Minimum labor share out of labor plus capital needed (1)
+ p38_min_labor_share(t,i)              Minimum labor share out of labor plus capital needed (1)
 
  p38_croparea_start(j,w,kcr)           Agricultural land initialization area (mio. ha)
 
