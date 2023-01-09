@@ -5,4 +5,4 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_maccs_costs.scale(i,req) = 10e4;
+vm_maccs_costs.scale(i,factors) = 10e4;

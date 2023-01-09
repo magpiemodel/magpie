@@ -5,5 +5,5 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-vm_cost_prod_crop.scale(i,req) = 10e5;
+vm_cost_prod_crop.scale(i,factors) = 10e5;
 v38_investment_immobile.scale(j,kcr) = 10e3;

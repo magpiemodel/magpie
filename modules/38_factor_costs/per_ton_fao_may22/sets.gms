@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-req input requirements
+factors factors included in factor requirements
 / labor, capital /
 
  reg regression parameters for capital calculation

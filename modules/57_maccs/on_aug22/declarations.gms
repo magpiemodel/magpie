@@ -22,7 +22,7 @@ equations
 ;
 
 positive variables
- vm_maccs_costs(i,req)   Costs of technical mitigation of GHG emissions (mio. USD95MER per yr)
+ vm_maccs_costs(i,factors)   Costs of technical mitigation of GHG emissions (mio. USD95MER per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

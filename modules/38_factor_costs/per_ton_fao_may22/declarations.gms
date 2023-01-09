@@ -11,13 +11,13 @@ q38_cost_prod_crop_capital(i)    Regional capital costs for crop production (mio
 ;
 
 positive variables
-vm_cost_prod_crop(i,req)        Regional factor costs of capital and labor for crop production (mio. USD05MER per yr)
+vm_cost_prod_crop(i,factors)      Regional factor costs of capital and labor for crop production (mio. USD05MER per yr)
 ;
 
 parameter
-pm_cost_share_crops(t,i,req)  Capital and labor shares of the regional factor costs for crop production   (1)
-p38_share_calibration(i)      Summation factor used to calibrate calculated capital shares with historical values (1)
-i38_fac_req(t_all,i,kcr)      Factor requirements (USD05MER per tDM)
+pm_cost_share_crops(t,i,factors)  Capital and labor shares of the regional factor costs for crop production   (1)
+p38_share_calibration(i)          Summation factor used to calibrate calculated capital shares with historical values (1)
+i38_fac_req(t_all,i,kcr)          Factor requirements (USD05MER per tDM)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
