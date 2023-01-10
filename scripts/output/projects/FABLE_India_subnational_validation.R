@@ -33,7 +33,6 @@ if(!exists("source_include")) {
   ###Define arguments that can be read from command line
   readArgs("outputdir")
 }
-# hist     <- "runs/validation.mif"
 file    <- file.path(outputdir,paste0("India_subnational_validation_",format(Sys.time(), "%Y%H%M%S"),".pdf"))
 #########################################################################################
 
