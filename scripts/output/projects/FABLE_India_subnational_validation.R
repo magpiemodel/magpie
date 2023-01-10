@@ -28,7 +28,7 @@ print("Start India state level validation output runscript")
 
 if(!exists("source_include")) {
   
-  outputdir <- "output//v4p77/h12_2022-12-15_22.09.46"
+  outputdir <- "output/v4p77/h12_2022-12-15_22.09.46"
   
   ###Define arguments that can be read from command line
   readArgs("outputdir")
