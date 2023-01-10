@@ -14,7 +14,7 @@ fsecScenario <- function(scenario) {
   source("config/default.cfg")
 
   # Version number
-  v <- "v28_FSEC"
+  v <- "v29_FSEC"
 
   x <- list(c_BAU            = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = "FSEC"),
@@ -36,39 +36,39 @@ fsecScenario <- function(scenario) {
                                   "energy", "bioplastics", "population", "institutions", "timberCities",
                                   "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "minWage",
                                   "REDDaff", "REDD", "landSharing", "landSparing", "waterSparing", "peatland",
-                                  "airPollution", "soil", "allDietAndWaste", "allEnvPrice")),
+                                  "airPollution", "soil", "allDietAndWaste", "allEnvPrice", "RCP19")),
             d_SSP1fsdp       = list(standard = c("cc", "rcp4p5", "SSP1", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP1",
                                   "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "minWage",
                                   "REDDaff", "REDD", "landSharing", "landSparing", "waterSparing", "peatland",
-                                  "airPollution", "soil", "allDietAndWaste", "allEnvPrice")),
+                                  "airPollution", "soil", "allDietAndWaste", "allEnvPrice", "RCP26")),
             d_SSP2fsdp       = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP2",
                                   "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "minWage",
                                   "REDDaff", "REDD", "landSharing", "landSparing", "waterSparing", "peatland",
-                                  "airPollution", "soil", "allDietAndWaste", "allEnvPrice")),
+                                  "airPollution", "soil", "allDietAndWaste", "allEnvPrice", "RCP26")),
             d_SSP3fsdp       = list(standard = c("cc", "rcp7p0", "SSP3", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP3",
                                   "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "minWage",
                                   "REDDaff", "REDD", "landSharing", "landSparing", "waterSparing", "peatland",
-                                  "airPollution", "soil", "allDietAndWaste", "allEnvPrice")),
+                                  "airPollution", "soil", "allDietAndWaste", "allEnvPrice", "RCP26")),
             d_SSP4fsdp       = list(standard = c("cc", "rcp6p0", "SSP4", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP4",
                                   "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "minWage",
                                   "REDDaff", "REDD", "landSharing", "landSparing", "waterSparing", "peatland",
-                                  "airPollution", "soil", "allDietAndWaste", "allEnvPrice")),
+                                  "airPollution", "soil", "allDietAndWaste", "allEnvPrice", "RCP26")),
             d_SSP5fsdp       = list(standard = c("cc", "rcp8p5", "SSP5", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP5",
                                   "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "minWage",
                                   "REDDaff", "REDD", "landSharing", "landSparing", "waterSparing", "peatland",
-                                  "airPollution", "soil", "allDietAndWaste", "allEnvPrice")),
+                                  "airPollution", "soil", "allDietAndWaste", "allEnvPrice", "RCP26")),
             # Individual transformation clusters:
             a_Population         = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                         fsec = c("FSEC", "population")),
             a_EconDevelop        = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                         fsec = c("FSEC", "institutions")),
             a_EnergyTrans        = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
-                                        fsec = c("FSEC", "energy")),
+                                        fsec = c("FSEC", "energy", "RCP26")),
             a_Bioplastics        = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                         fsec = c("FSEC", "bioplastics")),
             a_MinWage            = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
@@ -129,7 +129,7 @@ fsecScenario <- function(scenario) {
                         "energy", "bioplastics", "population", "institutions", "timberCities",
                         "awms", "livestock", "nueMAC", "riceMAC", "biodiversity", "fairTrade", "minWage",
                         "REDDaff", "REDD", "landSharing", "landSparing", "waterSparing", "peatland",
-                        "airPollution", "soil", "allDietAndWaste", "allEnvPrice")),
+                        "airPollution", "soil", "allDietAndWaste", "allEnvPrice", "RCP19")),
             # Scenarios (combinations of transformation clusters)
             b_ExternalPressures   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "population", "institutions", "energy", "bioplastics")),
@@ -214,10 +214,6 @@ fsecScenario <- function(scenario) {
                        "projects/FSEC_dietaryIndicators",
                        "projects/FSEC_costs",
                        "projects/FSEC_nitrogenPollution",
-                       "runBlackmagicc",
-                       "projects/FSEC_StevenLord",
-                       "projects/FSEC_SimonDietz",
-                       "projects/FSEC_AlessandroPassaro",
                        "projects/FSEC_water"
                        )
   cfg$force_download  <- TRUE
