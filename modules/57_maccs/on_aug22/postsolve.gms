@@ -8,12 +8,16 @@
 
 
 *#################### R SECTION START (OUTPUT DEFINITIONS) #####################
- ov_maccs_costs(t,i,"marginal")   = vm_maccs_costs.m(i);
- oq57_total_costs(t,i,"marginal") = q57_total_costs.m(i);
- ov_maccs_costs(t,i,"level")      = vm_maccs_costs.l(i);
- oq57_total_costs(t,i,"level")    = q57_total_costs.l(i);
- ov_maccs_costs(t,i,"upper")      = vm_maccs_costs.up(i);
- oq57_total_costs(t,i,"upper")    = q57_total_costs.up(i);
- ov_maccs_costs(t,i,"lower")      = vm_maccs_costs.lo(i);
- oq57_total_costs(t,i,"lower")    = q57_total_costs.lo(i);
+ ov_maccs_costs(t,i,req,"marginal") = vm_maccs_costs.m(i,req);
+ oq57_labor_costs(t,i,"marginal")   = q57_labor_costs.m(i);
+ oq57_capital_costs(t,i,"marginal") = q57_capital_costs.m(i);
+ ov_maccs_costs(t,i,req,"level")    = vm_maccs_costs.l(i,req);
+ oq57_labor_costs(t,i,"level")      = q57_labor_costs.l(i);
+ oq57_capital_costs(t,i,"level")    = q57_capital_costs.l(i);
+ ov_maccs_costs(t,i,req,"upper")    = vm_maccs_costs.up(i,req);
+ oq57_labor_costs(t,i,"upper")      = q57_labor_costs.up(i);
+ oq57_capital_costs(t,i,"upper")    = q57_capital_costs.up(i);
+ ov_maccs_costs(t,i,req,"lower")    = vm_maccs_costs.lo(i,req);
+ oq57_labor_costs(t,i,"lower")      = q57_labor_costs.lo(i);
+ oq57_capital_costs(t,i,"lower")    = q57_capital_costs.lo(i);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################
