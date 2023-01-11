@@ -61,7 +61,7 @@ setConfig(extramappings = "mappingIndiaAPY.csv")
 indApyMapping <- toolGetMapping(system.file("extdata", "regional/mappingIndiaAPY.csv", package = "mrfable"))
 h <- calcOutput("IndiaFoodcrop", subtype = "Area", aggregate = "Region")
 # Data cleaning:
-h <- h[ind_states$State_code,,]
+h <- h[indStates$State_code,,]
 h <- collapseNames(h)
 h <- collapseNames(h[,,"total"])
 h <- h/1000
