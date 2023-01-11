@@ -26,12 +26,12 @@
 
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/59_som/cellpool_aug16/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/59_som/cellpool_aug16/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/59_som/cellpool_aug16/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/59_som/cellpool_aug16/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/59_som/cellpool_aug16/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/59_som/cellpool_aug16/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/59_som/cellpool_aug16/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/59_som/cellpool_aug16/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/59_som/cellpool_jan23/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/59_som/cellpool_jan23/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/59_som/cellpool_jan23/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/59_som/cellpool_jan23/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/59_som/cellpool_jan23/scaling.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/59_som/cellpool_jan23/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/59_som/cellpool_jan23/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/59_som/cellpool_jan23/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################

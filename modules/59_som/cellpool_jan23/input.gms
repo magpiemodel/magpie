@@ -9,21 +9,21 @@ scalars
   s59_nitrogen_uptake  Maximum plant available nitrogen from soil organic matter loss (tN per ha)        / 0.2 /
 ;
 
-table f59_cratio_landuse(climate59,kcr) Ratio of soil carbon relative to potential natural vegetation soil carbon for different landuse (1)
+table f59_cratio_landuse(i,climate59_2019,kcr) Ratio of soil carbon relative to potential natural vegetation soil carbon for different landuse (1)
 $ondelim
-$include "./modules/59_som/cellpool_aug16/input/f59_ch5_F_LU.csv"
+$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_LU_2019reg.cs3"
 $offdelim
 ;
 
 table f59_cratio_tillage(climate59,tillage59) Ratio of soil carbon relative to potential natural vegetation soil carbon for different soil management (1)
 $ondelim
-$include "./modules/59_som/cellpool_aug16/input/f59_ch5_F_MG.csv"
+$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_MG.csv"
 $offdelim
 ;
 
 table f59_cratio_inputs(climate59,inputs59) Ratio of soil carbon relative to potential natural vegetation soil carbon for different input intensity  (1)
 $ondelim
-$include "./modules/59_som/cellpool_aug16/input/f59_ch5_F_I.csv"
+$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_I.csv"
 $offdelim
 ;
 
@@ -33,17 +33,10 @@ $setglobal c59_irrigation_scenario  on
 
 table f59_cratio_irrigation(climate59,w,kcr) Ratio of soil carbon relative to potential natural vegetation soil carbon for different irrigation schemes  (1)
 $ondelim
-$include "./modules/59_som/cellpool_aug16/input/f59_ch5_F_IRR.cs3"
+$include "./modules/59_som/cellpool_jan23/input/f59_ch5_F_IRR.cs3"
 $offdelim
 ;
 $if "%c59_irrigation_scenario%" == "off" f59_cratio_irrigation(climate59,w,kcr) = 1;
-
-
-* table f59_som_initialisation_pools(t_all,j,pools59) Initialisation pools for soil organic carbon (mio. tC)
-* $ondelim
-* $include "./modules/59_som/cellpool_aug16/input/f59_som_initialisation_pools.cs3"
-* $offdelim
-* ;
 
 $setglobal c59_som_scenario  cc
 *   options:  cc        (climate change)

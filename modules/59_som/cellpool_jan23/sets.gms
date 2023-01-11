@@ -16,8 +16,13 @@ tillage59 Tillage categories of IPCC
 inputs59 Input management categories of IPCC
 /low_input,medium_input,high_input_nomanure,high_input_manure/
 
-climate59 Climate classes of IPCC 2006
+climate59_2019 Climate classes of IPCC 2019
+/temperate_dry,temperate_moist,tropical_dry,tropical_moist,boreal_dry,boreal_moist/
+
+climate59(climate59_2019) Climate classes of IPCC 2006
 /temperate_dry,temperate_moist,tropical_dry,tropical_moist/
+
+*** Csa, Dwa should be dry (maybe others as well)
 
 clcl_climate59(clcl,climate59) Climate classification types
            /
@@ -32,9 +37,9 @@ clcl_climate59(clcl,climate59) Climate classification types
            Cfa .(temperate_moist) "warm temperate fully humid hot summer"
            Cfb .(temperate_moist) "warm temperate fully humid warm summer"
            Cfc .(temperate_moist) "warm temperate fully humid cool summer"
-           Csa .(temperate_moist) "warm temperate summer dry hot summer"
-           Csb .(temperate_moist) "warm temperate summer dry warm summer"
-           Csc .(temperate_moist) "warm temperate summer dry cool summer"
+           Csa .(temperate_moist) "warm temperate winter dry hot summer"
+           Csb .(temperate_moist) "warm temperate winter dry warm summer"
+           Csc .(temperate_moist) "warm temperate winter dry cool summer"
            Cwa .(temperate_moist) "warm temperate winter dry hot summer"
            Cwb .(temperate_moist) "warm temperate winter dry warm summer"
            Cwc .(temperate_moist) "warm temperate winter dry cool summer"
@@ -42,10 +47,10 @@ clcl_climate59(clcl,climate59) Climate classification types
            Dfb .(temperate_moist) "snow fully humid warm summer"
            Dfc .(temperate_moist) "snow fully humid cool summer"
            Dfd .(temperate_moist) "snow fully humid extremely continental"
-           Dsa .(temperate_moist) "snow summer dry hot summer"
-           Dsb .(temperate_moist) "snow summer dry warm summer"
-           Dsc .(temperate_moist) "snow summer dry cool summer"
-           Dsd .(temperate_dry) "snow summer dry extremely continental"
+           Dsa .(temperate_moist) "snow winter dry hot summer"
+           Dsb .(temperate_moist) "snow winter dry warm summer"
+           Dsc .(temperate_moist) "snow winter dry cool summer"
+           Dsd .(temperate_dry) "snow winder dry extremely continental"
            Dwa .(temperate_moist) "snow winter dry hot summer"
            Dwb .(temperate_moist) "snow winter dry warm summer"
            Dwc .(temperate_moist) "snow winter dry cool summer"

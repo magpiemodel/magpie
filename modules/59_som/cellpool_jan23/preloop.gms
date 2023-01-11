@@ -13,7 +13,7 @@ i59_subsoilc_density(t_all,j) = fm_carbon_density(t_all,j,"secdforest","soilc") 
 
 p59_som_pool(j,"crop") =
   sum((climate59,kcr),sum(clcl_climate59(clcl,climate59),
-      pm_climate_class(j,clcl)) * f59_cratio_landuse(climate59,kcr)
+      pm_climate_class(j,clcl)) * sum(cell(i,j), f59_cratio_landuse(i,climate59,kcr))
       * f59_topsoilc_density("y1995",j) * sum(w, fm_croparea("y1995",j,w,kcr)));
 
 p59_som_pool(j,noncropland59) =
@@ -57,7 +57,7 @@ i59_input_share(i,"medium_input")=1;
 
 i59_cratio(j,kcr,w) = sum((cell(i,j),tillage59,inputs59,climate59),
                  sum(clcl_climate59(clcl,climate59),pm_climate_class(j,clcl))
-                 * f59_cratio_landuse(climate59,kcr)
+                 * f59_cratio_landuse(i,climate59,kcr)
                  * i59_tillage_share(i,tillage59)
                  * f59_cratio_tillage(climate59,tillage59)
                  * i59_input_share(i,inputs59)
@@ -68,9 +68,9 @@ i59_cratio(j,kcr,w) = sum((cell(i,j),tillage59,inputs59,climate59),
 *' and reduced tillage. Assumed to have no irrigation, so irrigation multiplier
 *' is 1.
 
-i59_cratio_fallow(j) = sum(climate59,
+i59_cratio_fallow(j) = sum((cell(i,j),climate59),
                 sum(clcl_climate59(clcl,climate59),pm_climate_class(j,clcl))
-                * f59_cratio_landuse(climate59,"maiz")
+                * f59_cratio_landuse(i,climate59,"maiz")
                 * f59_cratio_tillage(climate59,"reduced_tillage")
                 * f59_cratio_inputs(climate59,"low_input"));
 *' @stop
