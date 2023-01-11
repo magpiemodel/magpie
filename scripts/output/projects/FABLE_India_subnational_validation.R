@@ -78,7 +78,7 @@ h <- add_dimension(h, dim=3.1, add="scenario", nm="historical")
 h <- add_dimension(h, dim=3.2, add="model", nm="APY")
 h <- setItems(h, dim=3.3, reportingnames(getItems(h,dim=3.3)))
 
-croparea_state <- croparea_state[,,unique(mappingCropsAPY[,"k"])]
+cropareaState <- cropareaState[,,unique(mappingCropsAPY[,"k"])]
 names(dimnames(croparea_state)) <- c("state","year","crop")
 cropareaState <- add_dimension(cropareaState, dim=3.1, add="scenario", nm="")
 cropareaState <- add_dimension(cropareaState, dim=3.2, add="model", nm="MAgPIE")
