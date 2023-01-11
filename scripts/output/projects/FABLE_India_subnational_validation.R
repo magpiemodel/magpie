@@ -82,7 +82,7 @@ croparea_state <- croparea_state[,,unique(mappingCropsAPY[,"k"])]
 names(dimnames(croparea_state)) <- c("state","year","crop")
 cropareaState <- add_dimension(cropareaState, dim=3.1, add="scenario", nm="")
 cropareaState <- add_dimension(cropareaState, dim=3.2, add="model", nm="MAgPIE")
-croparea_state <- setItems(croparea_state, dim=3.3, reportingnames(getItems(croparea_state,dim=3.3)))
+cropareaState <- setItems(cropareaState, dim=3.3, reportingnames(getItems(cropareaState,dim=3.3)))
 
 sw <- swopen(file)
 swlatex(sw,"\\huge")
