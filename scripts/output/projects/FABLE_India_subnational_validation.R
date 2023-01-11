@@ -53,7 +53,7 @@ cropareaHr <- cropareaHrShare[,,]*setItems(cell_hr[,1,], dim=2, NULL)
 cropareaHr <- dimSums(cropareaHr, dim=3.2)
 
 # aggregate land from grid to state level
-mapping_ind <- mapping[ind_cells,]
+mappingInd <- mapping[indCells,]
 croparea_state <- toolAggregate(croparea_hr, rel=mapping_ind, from="iso_mag", to="ind")
 
 # Observed data from mrfable
