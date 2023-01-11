@@ -42,7 +42,7 @@ print(paste0("Script started for output directory: ",outputdir))
 mapping <- toolGetMapping("scripts/npi_ndc/policies/country2cell.rds")
 mapping$iso_mag <- paste(mapping$iso,mapping$cell,sep=".")
 # load Indian states
-ind_states <- read.csv(system.file("extdata", "regional/india_state_code.csv", package = "mrfable"))
+indStates <- toolGetMapping(system.file("extdata", "regional/india_state_code.csv", package = "mrfable"))
 ind_cells <- which(mapping$ind %in% ind_states$State_code)
 
 # Subnational validation data of specific crops
