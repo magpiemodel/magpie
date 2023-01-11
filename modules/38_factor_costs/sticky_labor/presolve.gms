@@ -46,7 +46,7 @@ if (m_year(t) < s38_fix_capital_need,
   p38_min_labor_share(t,i) = 0;
 elseif m_year(t) <= 2050,
   p38_min_labor_share(t,i) = max(pm_cost_share_crops(t,i,"labor"), pm_cost_share_crops(t,i,"labor") + ((m_year(t)-s38_fix_capital_need)/(2050-s38_fix_capital_need) *
-                             (s38_target_labor_share_adjustment * (s38_target_labor_share - pm_cost_share_crops("y2050",i,"labor")))));
+                             (s38_target_fullfilment * (s38_target_labor_share - pm_cost_share_crops("y2050",i,"labor")))));
 else 
   p38_min_labor_share(t,i)$(pm_cost_share_crops("y2050",i,"labor") <= s38_target_labor_share) =  p38_min_labor_share("y2050",i);
   p38_min_labor_share(t,i)$(pm_cost_share_crops("y2050",i,"labor") > s38_target_labor_share)  =  max(pm_cost_share_crops(t,i,"labor"), s38_target_labor_share);
