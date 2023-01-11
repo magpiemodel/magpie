@@ -46,7 +46,7 @@ indStates <- toolGetMapping(system.file("extdata", "regional/india_state_code.cs
 indCells <- which(mapping$ind %in% indStates$State_code)
 
 # Subnational validation data of specific crops
-land_hr <- read.magpie(file.path(outputdir,"cell.land_0.5.mz"))[ind_cells,,]
+landHr <- read.magpie(file.path(outputdir,"cell.land_0.5.mz"))[indCells,,]
 croparea_hr_share <- read.magpie(file.path(outputdir,"cell.croparea_0.5_share.mz"))[ind_cells,,]
 cell_hr <- dimSums(land_hr, dim=3)
 croparea_hr <- croparea_hr_share[,,]*setItems(cell_hr[,1,], dim=2, NULL)
