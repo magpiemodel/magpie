@@ -50,7 +50,7 @@ landHr <- read.magpie(file.path(outputdir,"cell.land_0.5.mz"))[indCells,,]
 cropareaHrShare <- read.magpie(file.path(outputdir,"cell.croparea_0.5_share.mz"))[indCells,,]
 cellHr <- dimSums(landHr, dim=3)
 cropareaHr <- cropareaHrShare[,,]*setItems(cell_hr[,1,], dim=2, NULL)
-croparea_hr <- dimSums(croparea_hr, dim=3.2)
+cropareaHr <- dimSums(cropareaHr, dim=3.2)
 
 # aggregate land from grid to state level
 mapping_ind <- mapping[ind_cells,]
