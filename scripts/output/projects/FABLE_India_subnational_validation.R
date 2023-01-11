@@ -94,7 +94,7 @@ swlatex(sw,"\\tableofcontents")
 for(k in getItems(h, dim=3.3)){
   for(state in getItems(h, dim=1)){
     swlatex(sw,"\\newpage")
-    swlatex(sw,paste0("\\section{Croparea ",k," in ",ind_states[which(ind_states$State_code==state),"State_name"],"}"))
+    swlatex(sw,paste0("\\section{Croparea ",k," in ",indStates[which(indStates$State_code==state),"State_name"],"}"))
     swfigure(sw, print, mipLineHistorical(croparea_state[state,,k],h[state,,k],ylab="Mha"))
   }
 }
