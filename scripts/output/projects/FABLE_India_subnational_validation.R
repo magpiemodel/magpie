@@ -58,7 +58,7 @@ cropareaState <- toolAggregate(cropareaHr, rel=mappingInd, from="iso_mag", to="i
 
 # Observed data from mrfable
 setConfig(extramappings = "mappingIndiaAPY.csv")
-ind_apy_mapping <- read.csv(system.file("extdata", "regional/mappingIndiaAPY.csv", package = "mrfable"))
+indApyMapping <- toolGetMapping(system.file("extdata", "regional/mappingIndiaAPY.csv", package = "mrfable"))
 h <- calcOutput("IndiaFoodcrop", subtype = "Area", aggregate = "Region")
 # Data cleaning:
 h <- h[ind_states$State_code,,]
