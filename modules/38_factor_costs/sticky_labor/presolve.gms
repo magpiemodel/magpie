@@ -44,13 +44,13 @@ i38_ces_scale(j,kcr) = sum(cell(i,j), 1/([i38_ces_shr(j,kcr) * sum(mobil38, v38_
 * minimum labor share based on target and adjustment factor
 if (m_year(t) < s38_startyear_labor_substitution,
   p38_min_labor_share(t,i) = 0;
-elseif m_year(t) <= 2050,
+elseif m_year(t) <= m_year(s38_targetyear_labor_share),
   p38_min_labor_share(t,i) = max(pm_cost_share_crops(t,i,"labor"), pm_cost_share_crops(t,i,"labor") + 
-                            ((m_year(t)-s38_startyear_labor_substitution)/(2050-s38_startyear_labor_substitution) *
-                             (s38_target_fullfilment * (s38_target_labor_share - pm_cost_share_crops("y2050",i,"labor")))));
+                            ((m_year(t)-s38_startyear_labor_substitution)/(m_year(s38_targetyear_labor_share)-s38_startyear_labor_substitution) *
+                             (s38_target_fullfilment * (s38_target_labor_share - pm_cost_share_crops(s38_targetyear_labor_share,i,"labor")))));
 else 
-  p38_min_labor_share(t,i)$(pm_cost_share_crops("y2050",i,"labor") <= s38_target_labor_share) =  p38_min_labor_share("y2050",i);
-  p38_min_labor_share(t,i)$(pm_cost_share_crops("y2050",i,"labor") > s38_target_labor_share)  =  max(pm_cost_share_crops(t,i,"labor"), s38_target_labor_share);
+  p38_min_labor_share(t,i)$(pm_cost_share_crops(s38_targetyear_labor_share,i,"labor") <= s38_target_labor_share) =  p38_min_labor_share(s38_targetyear_labor_share,i);
+  p38_min_labor_share(t,i)$(pm_cost_share_crops(s38_targetyear_labor_share,i,"labor") > s38_target_labor_share)  =  max(pm_cost_share_crops(t,i,"labor"), s38_target_labor_share);
 );
 
 * overwrite with 0 in case target labor share is 0 (i.e. off)

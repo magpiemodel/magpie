@@ -16,6 +16,7 @@ s38_immobile  immobile capital (share) / 1 /
 s38_ces_elast_subst Elasticity of substitution in CES function (1) / 0.3 /
 s38_startyear_labor_substitution Year until which labor and capital requirements are fixed to historic values / 2020 /
 s38_target_labor_share Target labor share out of labor plus capital needed (1) / 0 /
+s38_targetyear_labor_share Year for which the target labor share should be set (1) / "y2050" /
 s38_target_fullfilment Share by which a region moves from its baseline labor share towards the target value (1) / 0.5 /
 ;
 
