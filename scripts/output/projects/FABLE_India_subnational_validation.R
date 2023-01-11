@@ -54,7 +54,7 @@ cropareaHr <- dimSums(cropareaHr, dim=3.2)
 
 # aggregate land from grid to state level
 mappingInd <- mapping[indCells,]
-croparea_state <- toolAggregate(croparea_hr, rel=mapping_ind, from="iso_mag", to="ind")
+cropareaState <- toolAggregate(cropareaHr, rel=mappingInd, from="iso_mag", to="ind")
 
 # Observed data from mrfable
 setConfig(extramappings = "mappingIndiaAPY.csv")
