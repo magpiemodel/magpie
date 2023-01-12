@@ -1,4 +1,4 @@
-# |  (C) 2008-2022 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -16,7 +16,7 @@
 library(gms)
 library(magpie4)
 
-message("Starting FSEC nitrogen pollution output runscript")
+message("Starting FSEC water output runscript")
 
 ############################# BASIC CONFIGURATION #######################################
 if (!exists("source_include")) {
@@ -36,7 +36,6 @@ title <- cfg$title
 
 message("Generating water indicators output for the run: ", title)
 gdx     <- file.path(outputdir, "fulldata.gdx")
-mapping <- readRDS(paste0(outputdir, "clustermap_rev4.75FSEC_c200_e2bdb6cd.rds"))
 
 # Grid-level water intdicators
 efvViolation <- waterEFViolation(gdx, level = "grid", dir = outputdir)
@@ -45,4 +44,4 @@ watStress <- waterStressRatio(gdx, level = "grid", dir = outputdir)
 watStressViolations <- watStress
 watStressViolations[efvViolation == 1] <- 100
 
-write.magpie(watStressViolations, paste0(outputdir, "watStressViolations.mz"))
+write.magpie(watStressViolations, file_name = file.path(outputdir, "watStressViolations.mz"))

@@ -82,38 +82,11 @@ In addition *R* (https://www.r-project.org/) is required for pre- and
 postprocessing and run management (needs to be added to the PATH variable
 as well).
 
-Some R packages are required to run MAgPIE. All are either distributed via
-the offical R CRAN or via a separate repository hosted at
-PIK (PIK-CRAN). Before proceeding PIK-CRAN should be added to the list of
-available repositories via:
-```
-options(repos = c(CRAN = "@CRAN@", pik = "https://rse.pik-potsdam.de/r/packages"))
-```
-
-Under Windows you need to install Rtools
-(https://cran.r-project.org/bin/windows/Rtools/) and to add it to the PATH
-variable. After that you can run the following lines of code:
-
-```
-pkgs <- c("gdxrrw",
-          "ggplot2",
-          "citation",
-          "curl",
-          "gdx",
-          "gms",         # (>= 0.11)
-          "magclass",
-          "madrat",
-          "mip",
-          "lucode2",
-          "magpie4",     # (>= 1.104)
-          "magpiesets",
-          "lusweave",
-          "luscale",
-          "goxygen",
-          "luplot",
-          "yaml")        
-install.packages(pkgs)
-```
+Several R packages are required to run MAgPIE. Under Windows you first need to install
+Rtools (https://cran.r-project.org/bin/windows/Rtools/) and to add it to the PATH
+variable. When running R from the MAgPIE folder for the first time all
+required packages are automatically installed into an isolated,
+project specific R package environment (renv).
 For post-processing model outputs *Latex* is required
 (https://www.latex-project.org/get/). To be seen by the model it also needs to
 added to the PATH variable of your system.

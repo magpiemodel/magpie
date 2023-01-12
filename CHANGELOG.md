@@ -8,10 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
--
+- **36_employment** include labor costs from MACCs in employment
+- **57_maccs** split costs into labor and capital
+- **38_factor_cots** renamed `p36_cost_shares` to `pm_cost_share_crops`
+- **config** scenario_fsec.csv update
+- **config** updated SHAPE SDP scenarios in scenario_config.csv
+- **scripts** FSDP_collect FSDP_process fsec.R updates
 
 ### added
+- **renv** MAgPIE now runs in an isolated, stable, reproducible R package environment
+- **setup** required R packages are automatically installed
 - **scripts** added output script that generates a short mif containing only variables relevant for the REMIND coupling
+- **scripts** added output script that generates subnational validation outputs for fable_India projects
 
 ### removed
 -

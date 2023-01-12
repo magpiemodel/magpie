@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -13,7 +13,7 @@
 *' labor costs and the related productivity gain from [36_employment].
 
 q38_cost_prod_labor(i2).. vm_cost_prod_crop(i2,"labor")
-                              =e= sum(kcr,vm_prod_reg(i2,kcr) * sum(ct,p38_labor_need(ct,i2,kcr)  * (1/pm_productivity_gain_from_wages(ct,i2)) * (pm_hourly_costs(ct,i2,"scenario") / pm_hourly_costs(ct,i2,"baseline"))))
+                              =e= sum(kcr,vm_prod_reg(i2,kcr) * sum(ct,p38_labor_need(ct,i2,kcr) * (1/pm_productivity_gain_from_wages(ct,i2)) * (pm_hourly_costs(ct,i2,"scenario") / pm_hourly_costs(ct,i2,"baseline"))))
                                 ;
 
 *' Investment costs: Investment are the summation of investment in mobile and immobile capital. The costs are annuitized,

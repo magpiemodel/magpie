@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -117,9 +117,8 @@ highres <- function(cfg) {
   #download input files with high resolution
   download_and_update(cfg)
 
-  #set title
-  cfg$title <- paste0("HR_",cfg$title)
-  cfg$results_folder <- "output/:title:"
+  # set title
+  cfg$results_folder <- "output/HR/:title:"
   cfg$force_replace <- TRUE
   cfg$recalc_npi_ndc <- TRUE
 
