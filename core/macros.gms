@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -75,10 +75,10 @@ $macro m_fillmissingyears(input,sets) loop(t_all, \
 
 * macro for linear interpolation
 $macro m_linear_interpol(input,start_year,target_year,start_value,target_value) \
-	input(t_all)$(m_year(t_all) >= start_year AND m_year(t_all) <= target_year) = ((m_year(t_all)-start_year) / (target_year-start_year));	\
+	input(t_all)$(m_year(t_all) > start_year AND m_year(t_all) < target_year) = ((m_year(t_all)-start_year) / (target_year-start_year));	\
 	input(t_all) = start_value + input(t_all) * (target_value-start_value);	\
-    input(t_all)$(m_year(t_all) <= start_year) = start_value; \
-    input(t_all)$(m_year(t_all) >= target_year) = target_value;
+  input(t_all)$(m_year(t_all) <= start_year) = start_value; \
+  input(t_all)$(m_year(t_all) >= target_year) = target_value;
 
 * macro for sigmoid interpolation (S-shaped curve)
 $macro m_sigmoid_interpol(input,start_year,target_year,start_value,target_value) \

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -15,7 +15,7 @@ vm_cost_prod_crop(i,req)        Regional factor costs of capital and labor for c
 ;
 
 parameter
-p38_cost_share(t,i,req)       Capital and labor shares of the regional factor costs for crop production   (1)
+pm_cost_share_crops(t,i,req)  Capital and labor shares of the regional factor costs for crop production   (1)
 p38_share_calibration(i)      Summation factor used to calibrate calculated capital shares with historical values (1)
 i38_fac_req(t_all,i,kcr)      Factor requirements (USD05MER per tDM)
 ;

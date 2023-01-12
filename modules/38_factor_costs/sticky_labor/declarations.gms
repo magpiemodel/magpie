@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -27,7 +27,7 @@ parameters
  p38_capital_immobile(t,j,kcr)         Preexisting immobile capital stocks before investment (mio USD05MER)
  p38_capital_mobile(t,j)               Preexisting mobile capital stocks before investment (mio USD05MER)
 
- p38_cost_share(t,i,req)               Capital and labor shares of the regional factor costs for crop production   (1)
+ pm_cost_share_crops(t,i,req)          Capital and labor shares of the regional factor costs for crop production   (1)
  p38_share_calibration(i)              Summation factor used to calibrate calculated capital shares with historical values (1)
 
  p38_croparea_start(j,w,kcr)           Agricultural land initialization area (mio. ha)
