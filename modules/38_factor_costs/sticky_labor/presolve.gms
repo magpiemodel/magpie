@@ -47,7 +47,7 @@ if (m_year(t) < s38_startyear_labor_substitution,
 elseif m_year(t) <= s38_targetyear_labor_share,
   p38_min_labor_share(t,i) = max(pm_cost_share_crops(t,i,"labor"), pm_cost_share_crops(t,i,"labor") + 
         ((m_year(t)-s38_startyear_labor_substitution)/(s38_targetyear_labor_share-s38_startyear_labor_substitution) *
-         (s38_target_fullfilment * (s38_target_labor_share - sum(t2$(m_year(t2) = s38_targetyear_labor_share), pm_cost_share_crops(t2,i,"labor"))))));
+         (s38_target_fulfillment * (s38_target_labor_share - sum(t2$(m_year(t2) = s38_targetyear_labor_share), pm_cost_share_crops(t2,i,"labor"))))));
 else 
   p38_min_labor_share(t,i)$(sum(t2$(m_year(t2) = s38_targetyear_labor_share), 
                             pm_cost_share_crops(t2,i,"labor")) <= s38_target_labor_share) =  sum(t2$(m_year(t2) = s38_targetyear_labor_share), p38_min_labor_share(t2,i));
