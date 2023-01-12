@@ -12,7 +12,7 @@ sets
  reg regression parameters for dynamic sticky
  /slope, intercept/
 
- req input requirements
+factors factors included in factor requirements
  / labor, capital /
  ;
 
