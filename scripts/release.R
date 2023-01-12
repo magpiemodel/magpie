@@ -12,7 +12,7 @@ release <- function(newVersion) {
   githubUrl <- "https://github.com/magpiemodel/magpie/compare/"
   readLines("CHANGELOG.md") |>
     sub(pattern = "## [Unreleased]", replacement = paste0("## [", newVersion, "] - ", releaseDate), fixed = TRUE) |>
-    sub(pattern = "\\[Unreleased\\]: ", githubUrl, "v([0-9]+\\.[0-9]+\\.[0-9]+)...develop",
+    sub(pattern = paste0("\\[Unreleased\\]: ", githubUrl, "v(.+)\\.\\.\\.develop"),
         replacement = paste0("[Unreleased]: ", githubUrl, "v", newVersion, "...develop\n",
                              "[", newVersion, "]: ", githubUrl, "v\\1...v", newVersion)) |>
     writeLines("CHANGELOG.md")
@@ -44,11 +44,8 @@ release <- function(newVersion) {
 
   gert::git_commit(paste("magpie release", newVersion))
   gert::git_push()
-  # system("gh pr create") # TODO onto magpiemodel/magpie master, then open in browser to add reviewer
-  system("gh pr view --web")
+  system(paste0("gh pr create --base master --title 'magpie release ", newVersion, "' --body '' --reviewer tscheypidi"))
 }
-
-# TODO github release via gh cli?
 
 arguments <- commandArgs(TRUE)
 if (length(arguments) != 1) {
