@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **setup** required R packages are automatically installed
 - **scripts** added output script that generates a short mif containing only variables relevant for the REMIND coupling
 - **scripts** added output script that generates subnational validation outputs for fable_India projects
+- **scripts** added start script which starts an empty model just regenerating a previous run
 
 ### removed
 -
