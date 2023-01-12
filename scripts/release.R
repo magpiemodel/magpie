@@ -40,7 +40,7 @@ release <- function(newVersion) {
           "- CHANGELOG.md: sort lines in each category: changed, added, removed, fixed; remove empty categories\n",
           "- git add -p\n",
           "Press enter when done to commit, push and create PR")
-  readline()
+  gms::getLine()
 
   gert::git_commit(paste("magpie release", newVersion))
   gert::git_push()
