@@ -36,7 +36,7 @@ postRelease <- function() {
 
   gert::git_commit("merge master into develop")
   gert::git_push()
-  system(paste0("gh pr create --base develop --title 'merge master into develop' --body '' --reviewer tscheypidi"))
+  system(paste0("gh pr create --base develop --title 'merge master into develop' --body ''"))
 }
 
 postRelease()
