@@ -22,13 +22,13 @@ equations
 ;
 
 positive variables
- vm_maccs_costs(i,req)   Costs of technical mitigation of GHG emissions (mio. USD95MER per yr)
+ vm_maccs_costs(i,factors)   Costs of technical mitigation of GHG emissions (mio. USD95MER per yr)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################
 parameters
- ov_maccs_costs(t,i,req,type) Costs of technical mitigation of GHG emissions (mio. USD95MER per yr)
- oq57_labor_costs(t,i,type)   Calculation of labor costs of technical mitigation (mio. USD95MER per yr)
- oq57_capital_costs(t,i,type) Calculation of capital costs of technical mitigation (mio. USD95MER per yr)
+ ov_maccs_costs(t,i,factors,type) Costs of technical mitigation of GHG emissions (mio. USD95MER per yr)
+ oq57_labor_costs(t,i,type)       Calculation of labor costs of technical mitigation (mio. USD95MER per yr)
+ oq57_capital_costs(t,i,type)     Calculation of capital costs of technical mitigation (mio. USD95MER per yr)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
