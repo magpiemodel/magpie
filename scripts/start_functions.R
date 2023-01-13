@@ -597,7 +597,7 @@ configureEmptyModel <- function(cfg, inputGdxPath) {
     message("Configuring to use empty MAgPIE model, reproduces prior run ", inputGdxPath)
     originalModel <- withr::local_connection(file(cfg$model, "r"))
     emptyModelFile <- "standalone/empty_test_model.gms"
-    emptyModel <- file(emptyModelFile, "w")
+    emptyModel <- withr::local_connection(file(emptyModelFile, "w"))
     while (TRUE) {
       originalLine <- readLines(originalModel, n = 1)
       if (length(originalLine) == 0) {
