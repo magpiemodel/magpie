@@ -589,3 +589,35 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
     .emissionPrices(ghgmag, mute_ghgprices_until)
   }
 }
+
+# Will not actually solve the model: after compilation, this just copies the results
+# of a previous run, useful for testing compilation and input/output handling.
+# Used in scripts/start/extra/empty_model.R and tests for REMIND-MAgPIE coupling.
+configureEmptyModel <- function(cfg, inputGdxPath) {
+    message("Configuring to use empty MAgPIE model, reproduces prior run ", inputGdxPath)
+    originalModel <- withr::local_connection(file(cfg$model, "r"))
+    emptyModelFile <- "standalone/empty_test_model.gms"
+    emptyModel <- withr::local_connection(file(emptyModelFile, "w"))
+    while (TRUE) {
+      originalLine <- readLines(originalModel, n = 1)
+      if (length(originalLine) == 0) {
+        break
+      }
+      writeLines(originalLine, emptyModel)
+      if (grepl("*END MODULE SETUP*", originalLine)) {
+        # add code for short-circuiting the model
+        writeLines(c(
+          "***********************TEST USING EMPTY MODEL***********************************",
+          "*** empty model just uses input gdx as the result",
+          "*** rest of the model is compiled, but not executed",
+          "$setglobal c_input_gdx_path  path",
+          "execute \"cp %c_input_gdx_path% fulldata.gdx\";",
+          "abort.noerror \"cp %c_input_gdx_path% fulldata.gdx\";",
+          "********************************************************************************"),
+          emptyModel)
+      }
+    }
+    cfg$model <- emptyModelFile
+    cfg$gms$c_input_gdx_path <- inputGdxPath
+    return(cfg)
+}
