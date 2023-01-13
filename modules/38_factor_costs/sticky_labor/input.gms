@@ -14,7 +14,10 @@ s38_depreciation_rate depreciation rate (share of costs)  / 0.05 /
 * Share of immobile capital.
 s38_immobile  immobile capital (share) / 1 /
 s38_ces_elast_subst Elasticity of substitution in CES function (1) / 0.3 /
-s38_fix_capital_need Year until which capital requirements are fixed / 2020 /
+s38_startyear_labor_substitution Year until which labor and capital requirements are fixed to historic values (year) / 2020 /
+s38_target_labor_share Target labor share out of labor plus capital needed (1) / 0.8 /
+s38_targetyear_labor_share Year for which the target labor share should be set (year) / 2050 /
+s38_target_fulfillment Share by which a region moves from its baseline labor share towards the target value (1) / 0.5 /
 ;
 
 parameter f38_fac_req(kcr) Factor requirement costs in 2005 (USD05MER per tDM)
