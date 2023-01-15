@@ -336,6 +336,11 @@ $endif
   p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15) = p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15) * (1-i15_exo_foodscen_fader(t,iso))
                       + p15_bmi_shr_target(t,iso,sex,age,bmi_group15) * i15_exo_foodscen_fader(t,iso);
 
+
+);
+*' End of special postprocessing food demand scenarios.
+
+
 *' 4.) The fourth step estimates the calorie supply at household level by multiplying
 *' daily per capita calorie intake with the demand2intake ratio that was estimated
 *' previously. It assures that if commodities with higher food waste ratio are
@@ -351,11 +356,6 @@ $endif
   p15_demand2intake_ratio(t,iso) = 1$(p15_intake_total(t,iso) = 0) +
          (sum(kfo,p15_kcal_pc_iso(t,iso,kfo)) / p15_intake_total(t,iso))$(
            p15_intake_total(t,iso) > 0);
-
-);
-*' End of special postprocessing food demand scenarios.
-
-
 
 
 * ###### Exogenous food waste scenario
