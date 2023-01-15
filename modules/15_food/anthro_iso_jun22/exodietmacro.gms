@@ -352,9 +352,6 @@ $endif
          (sum(kfo,p15_kcal_pc_iso(t,iso,kfo)) / p15_intake_total(t,iso))$(
            p15_intake_total(t,iso) > 0);
 
-  p15_demand2intake_ratio_detail(t,iso,kfo)=1$(p15_intake_detail(t,iso,kfo) = 0) +
-  (p15_kcal_pc_iso(t,iso,kfo) / p15_intake_detail(t,iso,kfo))$(p15_intake_detail(t,iso,kfo) > 0);
-
 );
 *' End of special postprocessing food demand scenarios.
 
@@ -372,6 +369,8 @@ $endif
                       = p15_demand2intake_ratio(t,iso)*(1-i15_exo_foodscen_fader(t,iso))
                         + s15_waste_scen*i15_exo_foodscen_fader(t,iso);
 
+);
+
 *' waste calculation by crop type
 
     p15_waste_pc(t,iso,kfo)$(sum(kfo2, p15_waste_pc(t,iso,kfo2))<>0) = p15_waste_pc(t,iso,kfo) / sum(kfo2, p15_waste_pc(t,iso,kfo2))*
@@ -380,12 +379,9 @@ $endif
 *' Waste ratio is applied
     p15_kcal_pc_iso(t,iso,kfo) = p15_intake_detail(t,iso,kfo) + p15_waste_pc(t,iso,kfo);
 
+*' Demand intake detail
     p15_demand2intake_ratio_detail(t,iso,kfo)=1$(p15_intake_detail(t,iso,kfo) = 0) +
                   (p15_kcal_pc_iso(t,iso,kfo) / p15_intake_detail(t,iso,kfo))$(p15_intake_detail(t,iso,kfo) > 0);
-
-);
-
-
 
 
 *' The country-level parameter p15_kcal_pc_iso is aggregated to the
