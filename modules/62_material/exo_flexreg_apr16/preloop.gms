@@ -15,7 +15,7 @@
 * Global bioplastic demand is distributed to regions proportional to population due to lack of better data.
 
 p62_dem_bioplastic(t,i) = f62_hist_dem_bioplastic(t) * (im_pop(t,i) / sum(i2, im_pop(t,i2)));
-p62_dem_bioplastic(t,i)$(m_year(t)>2020) = p62_dem_bioplastic("y2020",i);
+p62_dem_bioplastic(t,i)$(m_year(t)>2020) = f62_hist_dem_bioplastic("y2020") * (im_pop("y2020",i) / sum(i2, im_pop("y2020",i2)));
 
 if (s62_max_dem_bioplastic <> 0,
   s62_growth_rate_bioplastic = log((s62_max_dem_bioplastic/f62_hist_dem_bioplastic("y2020")) - 1)/(s62_midpoint_dem_bioplastic-2020);
