@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **config** added `s38_target_labor_share`, `s38_targetyear_labor_share` and `s38_target_fulfillment` to define labor share target scnarios
 - **38_factor_costs** changed name of set `req` to `factors` (also used in 11_costs, 57_maccs, 70_livestock)
 - **38_factos_costs** sticky_labor realization: included option to set a labor share target
+- **15_food** changed `anthro_iso_jun22` realisation such that results in case of `exo_diet = 1/0` and `exo_waste = 1/0` are identical until 2020
+- **62_material** Bioplastic demand identical in all scenarios until 2020
 
 ### added
 - **scripts** added start script which starts an empty model just regenerating a previous run
