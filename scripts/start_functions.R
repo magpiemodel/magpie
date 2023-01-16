@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -250,15 +250,41 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   cfg$results_folder <- gsub(":title:", cfg$title, cfg$results_folder, fixed=TRUE)
 
   # Create output folder
-  if (!file.exists(cfg$results_folder)) {
-    dir.create(cfg$results_folder, recursive=TRUE, showWarnings=FALSE)
-	} else if (cfg$force_replace) {
-    cat("Deleting results folder because it already exists:",cfg$results_folder,"\n")
-    unlink(cfg$results_folder, recursive = TRUE)
-    dir.create(cfg$results_folder, recursive = TRUE, showWarnings = FALSE)
+  if (file.exists(cfg$results_folder)) {
+    if (cfg$force_replace) {
+      message("Deleting results folder because it already exists:", cfg$results_folder)
+      unlink(cfg$results_folder, recursive = TRUE)
+    } else {
+      stop(paste0("Results folder ", cfg$results_folder,
+                  " could not be created because it already exists."))
+    }
+  }
+  dir.create(cfg$results_folder, recursive = TRUE)
+
+  if (is.null(renv::project())) {
+    message("No active renv project found, not using renv.")
   } else {
-    stop(paste0("Results folder ",cfg$results_folder,
-                " could not be created because is already exists."))
+    message("Generating lockfile '", file.path(cfg$results_folder, "renv.lock"), "'... ", appendLF = FALSE)
+    # suppress output of renv::snapshot
+    utils::capture.output({
+      utils::capture.output({
+        # snapshot current main renv into run folder
+        renv::snapshot(lockfile = file.path(cfg$results_folder, "main_renv.lock"), prompt = FALSE)
+      }, type = "message")
+    })
+    message("done.")
+
+    message("Creating renv in '", cfg$results_folder, "'... ", appendLF = FALSE)
+    createResultsfolderRenv <- function() {
+      renv::init() # will overwrite renv.lock if existing...
+      file.rename("main_renv.lock", "renv.lock") # so we need this rename
+      renv::restore(prompt = FALSE)
+    }
+    # init renv in a separate session so the libPaths of the current session remain unchanged
+    callr::r(createResultsfolderRenv,
+             wd = cfg$results_folder,
+             env = c(RENV_PATHS_LIBRARY = "renv/library"))
+    message("done.")
   }
 
   # If reports for both bioenergy and GHG prices are available convert them

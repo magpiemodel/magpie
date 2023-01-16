@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -20,14 +20,14 @@ for (scenarioName in c(
   "a_Population", "a_EconDevelop", "a_EnergyTrans",
   "a_NoUnderweight", "a_NoOverweight", "a_DietVegFruitsNutsSeeds", "a_DietLegumes",
   "a_DietMonogastrics", "a_DietRuminants", "a_DietEmptyCals", "a_DietFish", "a_LessFoodWaste",
-  "a_ManureMngmt", "a_LivestockMngmt", "a_LandUseDiversity",
+  "a_ManureMngmt", "a_LivestockMngmt", "a_BiodivSparing",
   "a_NitrogenEff", "a_RiceMit", "a_CropeffTax",
   "a_MinWage", "a_Bioplastics",
-  "a_FairTrade", "a_TimberCities", "a_REDDaff", "a_REDD", "a_CropRotations",
+  "a_LiberalizedTrade", "a_TimberCities", "a_REDDaff", "a_REDD", "a_CropRotations",
   "a_LandSparing", "a_WaterSparing", "a_PeatlandSparing", "a_AirPollution", "a_SoilCarbon",
   # Scenario combination runs
   "c_BAU", "d_SSP1bau", "d_SSP1PLUSbau", "d_SSP2bau", "d_SSP3bau", "d_SSP4bau", "d_SSP5bau",
-  "d_SSP1fsdp", "d_SSP1PLUSfsdp", "d_SSP2fsdp", "d_SSP3fsdp", "d_SSP4fsdp", "d_SSP5fsdp",
+  "d_SSP1fsdp", "d_SSP2fsdp", "d_SSP3fsdp", "d_SSP4fsdp", "d_SSP5fsdp",
   "e_FSDP",
   "b_ExternalPressures", "b_WaterSoil", "b_REDDaffRuminants", "b_DietRotations",
   "b_MonogastricsRotations",
@@ -38,6 +38,8 @@ for (scenarioName in c(
   "b_LivestockManureMngmt", "b_LivestockNUEMngmt",
   "b_AllNitrogen", "b_AllClimate", "b_FullBiodiv",
   "b_AllEnvironment", "b_AllHealth", "b_AllInclusion",
+  "b_Livelihoods", "b_LivelihoodsExt", "b_Bioeconomy",
+  "b_AgroMngmt", "b_NatureSparing",
   # still missing: Bioeconomy + energy + timber
   "b_Efficiency", "b_Sufficiency", "b_Protection")) {
 
