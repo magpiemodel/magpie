@@ -5,28 +5,44 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
 ## [Unreleased]
 
 ### changed
-- **36_employment** include labor costs from MACCs in employment
-- **57_maccs** split costs into labor and capital
-- **38_factor_cots** renamed `p36_cost_shares` to `pm_cost_share_crops`
-- **config** scenario_fsec.csv update
-- **config** update input data to rev4.79
-- **scripts** FSDP_collect FSDP_process fsec.R updates
-
+- **config** and **38_factor_costs** changed name of `s38_fix_capital_need` to `s38_startyear_labor_substitution`
+- **config** added `s38_target_labor_share`, `s38_targetyear_labor_share` and `s38_target_fulfillment` to define labor share target scnarios
+- **38_factor_costs** changed name of set `req` to `factors` (also used in 11_costs, 57_maccs, 70_livestock)
+- **38_factos_costs** sticky_labor realization: included option to set a labor share target
+- **15_food** changed `anthro_iso_jun22` realisation such that results in case of `exo_diet = 1/0` and `exo_waste = 1/0` are identical until 2020
+- **62_material** Bioplastic demand identical in all scenarios until 2020
 
 ### added
-- **scripts** added output script that generates a short mif containing only variables relevant for the REMIND coupling
+- **scripts** added start script which starts an empty model just regenerating a previous run
 - **31_past** added additional limitation (single climate scenario input) for **grasslands_apr22**
 - **59_som** added new **cellpool_jan23** realization with updated 2019 IPCC guidelines values
-
 
 ### removed
 -
 
 ### fixed
 -
+
+
+## [4.6.2] - 2023-01-12
+
+### changed
+- **36_employment** include labor costs from MACCs in employment
+- **38_factor_cots** renamed `p36_cost_shares` to `pm_cost_share_crops`
+- **57_maccs** split costs into labor and capital
+- **config** scenario_fsec.csv update
+- **config** updated SHAPE SDP scenarios in scenario_config.csv
+- **scripts** FSDP_collect FSDP_process fsec.R updates
+
+### added
+- **renv** MAgPIE now runs in an isolated, stable, reproducible R package environment
+- **scripts** added output script that generates a short mif containing only variables relevant for the REMIND coupling
+- **scripts** added output script that generates subnational validation outputs for fable_India projects
+- **setup** required R packages are automatically installed
 
 
 ## [4.6.1] - 2022-12-13
@@ -58,6 +74,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **59_som** fixed land use change tracking for non-cropland pools in the `cellpool_aug16` realization
 - **config** changed default value for s56_limit_ch4_n2o_price from 1000 to 4000 for consistency with c57_macc_version = "PBL_2022"
 - **scripts** rewrite of land conversion cost calibration script `landconversion_cost.R`
+
 
 ## [4.6.0] - 2022-11-09
 
@@ -227,6 +244,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** fixed configuration error in FSEC output scripts, FSEC_dietaryIndicators.R and FSEC_environmentalPollutants.R
 - **scripts** scripts/start/extra/emulator.R  Throw an error if no file can be found to take the GHG prices from
 
+
 ## [4.4.0] - 2021-12-13
 
 ### changed
@@ -317,6 +335,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **73_timber** plausible cost for balance variable in case of s73_timber_demand_switch = 0 to avoid cost distortion
 - **56_ghg_policy** choose the correct scenario for fixing the GHG prices until sm_fix_SSP2
 
+
 ## [4.3.5] - 2021-09-02
 
 ### changed
@@ -385,6 +404,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - - **15_food** single-cell protein substitution scenarios included in intersolve.gms.
 - **20_processing** The "mixed" scenario for single-cell protein production (c20_scp_type) was not working as expected. The corresponding code in 20_processing has been updated.
 
+
 ## [4.3.3] - 2021-03-30
 
 ### added
@@ -444,6 +464,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **32_forestry** Bugfixes for "ac_est" and carbon treshold afforestation; removed plantations from "vm_cdr_aff".
 - **core** bugfix m_fillmissingyears macro; was running over t before; now running over t_all_
 
+
 ## [4.3.1] - 2020-11-03
 
 ### added
@@ -482,6 +503,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - **35_natveg** Clearer calculations for harvested area for timber production.
  - **52_carbon** Fix to the Carbon densities received from LPJmL for timber plantations.
 
+
 ## [4.2.1] - 2020-05-15
 
 ### added
@@ -497,7 +519,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### fixed
  - **56_ghg_policy and 60_bioenergy** update of GHG prices and 2nd generation bioenergy demand from SSPDB to most recent snapshot
  - **NPI/NDC policy calculations** revision of calculation method
-
 
 
 ## [4.2.0] - 2020-04-15
@@ -580,6 +601,7 @@ This release version is focussed on consistency between the MAgPIE setup and the
  - **71_diagg_lvst** adjusted monogastric disaggregation for more flexiblity to avoid infeasibilities with EFPs (see 42_water_demand)
  - **15_food** correction regarding the convergence measure of the iterative execution of the food demand model and MAgPIE; correction accounting for unusual time step length in body height calculations; body height regression parameters updated
 
+
 ## [4.0.1] - 2018-10-05
 
 ### fixed
@@ -591,7 +613,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.1...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.2...develop
+[4.6.2]: https://github.com/magpiemodel/magpie/compare/v4.6.1...v4.6.2
 [4.6.1]: https://github.com/magpiemodel/magpie/compare/v4.6.0...v4.6.1
 [4.6.0]: https://github.com/magpiemodel/magpie/compare/v4.5.0...v4.6.0
 [4.5.0]: https://github.com/magpiemodel/magpie/compare/v4.4.0...v4.5.0

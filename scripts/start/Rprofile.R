@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -11,19 +11,6 @@
 # -------------------------------------------------
 
 setSnapshot <- function(snapshotdir=NULL) {
-  get_line <- function(){
-    # gets characters (line) from the terminal or from a connection
-    # and returns it
-    if(interactive()){
-      s <- readline()
-    } else {
-      con <- file("stdin")
-      s <- readLines(con, 1, warn=FALSE)
-      on.exit(close(con))
-    }
-    return(s);
-  }
-  
   choose_snapshot <- function(title="Please choose a R snapshot") {
     if(dir.exists("/p/projects/rd3mod/R/libraries/snapshots/")) {
       dirs <- base::list.dirs("/p/projects/rd3mod/R/libraries/snapshots/",recursive=F,full.names=F)
@@ -32,7 +19,7 @@ setSnapshot <- function(snapshotdir=NULL) {
       cat("0: No snapshot\n")
       cat(paste(1:length(dirs), dirs, sep=": " ),sep="\n")
       cat("Number: ")
-      identifier <- as.numeric(get_line())
+      identifier <- as.numeric(gms::getLine())
       if(identifier > 0 & identifier <= length(dirs)) {
         return(paste0("/p/projects/rd3mod/R/libraries/snapshots/",dirs[identifier]))
       } else return(invisible(NULL))

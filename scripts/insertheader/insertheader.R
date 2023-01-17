@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 insertheader <- function(maindir=".",
-                         header=c("(C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)",
+                         header=c("(C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)",
                                   "authors, and contributors see CITATION.cff file. This file is part",
                                   "of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of",
                                   "AGPL-3.0, you are granted additional permissions described in the",
@@ -16,7 +16,7 @@ insertheader <- function(maindir=".",
                                       ".spam",".xlsx",".sh","files",".md",".RData", ".jpg",
                                       ".png",".cff", ".rds", ".aux", ".log", ".out", ".pdf",
                                       ".tex", ".htm", ".css", ".bib", ".ref", ".mif", ".gdx",
-                                      ".lst", ".git-id", ".csv", ".Rdata"),
+                                      ".lst", ".git-id", ".csv", ".Rdata", ".txt"),
                          comments=c(".R"="#",".gms"="***",".cfg"="#",".csv"="*",".cs2"="*",
                                     ".cs3"="*",".cs4"="*",".sh"="#",".txt"="#"),
                          key = "| ",
