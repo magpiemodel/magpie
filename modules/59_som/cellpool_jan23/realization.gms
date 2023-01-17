@@ -6,8 +6,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description
-*' The cellpool_aug16 realization is built on the IPCC 2006 Guidelines for
-*' National Greenhouse Gas Inventories (@ipcc_2006_2006.). It calculates the loss of
+*' The cellpool_aug23 realization is built on revised IPCC 2019 Guidelines for
+*' National Greenhouse Gas Inventories (@calvo_buendia_ipcc_2019). It calculates the loss of
 *' soil carbon due to cropping activities and management based on stock change factors,
 *' compared to potential natural vegetation.
 *' This approach also accounts for the temporal dimension of soil organic carbon change,
