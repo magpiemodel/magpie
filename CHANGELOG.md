@@ -12,10 +12,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **57_maccs** split costs into labor and capital
 - **38_factor_cots** renamed `p36_cost_shares` to `pm_cost_share_crops`
 - **config** scenario_fsec.csv update
+- **config** update input data to rev4.79
 - **scripts** FSDP_collect FSDP_process fsec.R updates
+
 
 ### added
 - **scripts** added output script that generates a short mif containing only variables relevant for the REMIND coupling
+- **31_past** added additional limitation (single climate scenario input) for **grasslands_apr22**
+- **59_som** added new **cellpool_jan23** realization with updated 2019 IPCC guidelines values
+
 
 ### removed
 -
