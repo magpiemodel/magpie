@@ -159,12 +159,12 @@ $title magpie
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Used data set: additional_data_rev4.36.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* md5sum: e24c46872f77dc15ad8603bdac1e6065
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_per_ton_fao_may22_glo_07Dec22.tgz
-* md5sum: NA
-* Repository: https://rse.pik-potsdam.de/data/magpie/public
+* Used data set: calibration_H12_09Jan23.tgz
+* md5sum: 0fd18901ec047862918bf598ac126411
+* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -193,7 +193,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Tue Jan 17 10:07:07 2023
+* Last modification (input data): Tue Jan 17 11:25:32 2023
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
