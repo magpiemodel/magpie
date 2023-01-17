@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -144,8 +144,8 @@ var_reg <- c(indicators_main,
              ### Maps
              "Costs",
              "Population",
-             "Share of working age population employed in agriculture|Crop and livestock products",
-             "Hourly labor costs",
+             "Labor|Employment|Share of working age population employed in agriculture",
+             "Labor|Wages|Hourly labor costs",
              ### Suppl plots
              "Population",
              "Nutrition|Calorie Intake",
@@ -261,11 +261,12 @@ var_reg <- c(indicators_main,
              "Nutrition|Anthropometrics|People obese",
              "Nutrition|Anthropometrics|People overweight",
              "Nutrition|Anthropometrics|People underweight",
-             "Agricultural employment|Crop and livestock products",
-             "Agricultural employment|+|Crop products",
-             "Agricultural employment|+|Livestock products",
-             "Hourly labor costs",
-             "Total Hours Worked|Crop and livestock products",
+             "Labor|Employment|Agricultural employment",
+             "Labor|Employment|Agricultural employment|+|Crop products",
+             "Labor|Employment|Agricultural employment|+|Livestock products",
+             "Labor|Employment|Agricultural employment|+|MACCS",
+             "Labor|Wages|Hourly labor costs",
+             "Labor|Total Hours Worked",
              "Income|Gini Coefficient",
              "Income|Average Income of Lower 40% of Population",
              "Income|Fraction of Population below half of Median Income",
@@ -276,7 +277,7 @@ var_reg <- c(indicators_main,
 var_reg <- unique(var_reg)
 
 var_iso <- c("Population",
-             "Agricultural employment|Crop and livestock products",
+             "Labor|Employment|Agricultural employment",
              "Nutrition|Anthropometrics|People underweight",
              "Nutrition|Anthropometrics|People obese",
              "Household Expenditure|Food|Expenditure",
