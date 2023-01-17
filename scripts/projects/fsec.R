@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -14,13 +14,13 @@ fsecScenario <- function(scenario) {
   source("config/default.cfg")
 
   # Version number
-  v <- "v26_FSEC"
+  v <- "v28_FSEC"
 
   x <- list(c_BAU            = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = "FSEC"),
             d_SSP1bau        = list(standard = c("cc", "rcp4p5", "SSP1", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP1")),
-            d_SSP1PLUSbau        = list(standard = c("cc", "rcp2p6", "SSP1", "NDC", "ForestryEndo"),
+            d_SSP1PLUSbau    = list(standard = c("cc", "rcp2p6", "SSP1", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "SSP1",
                                   "energy", "bioplastics", "population", "institutions", "timberCities")),
             d_SSP2bau        = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
@@ -101,9 +101,9 @@ fsecScenario <- function(scenario) {
                                         fsec = c("FSEC", "nueMAC")),
             a_RiceMit            = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                         fsec = c("FSEC", "riceMAC")),
-            a_LandUseDiversity   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            a_BiodivSparing      = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                         fsec = c("FSEC", "biodiversity")),
-            a_FairTrade          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            a_LiberalizedTrade   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                         fsec = c("FSEC", "fairTrade")),
             a_TimberCities       = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                         fsec = c("FSEC", "timberCities")),
@@ -131,27 +131,27 @@ fsecScenario <- function(scenario) {
                         "REDDaff", "REDD", "landSharing", "landSparing", "waterSparing", "peatland",
                         "airPollution", "soil", "allDietAndWaste", "allEnvPrice")),
             # Scenarios (combinations of transformation clusters)
-            b_ExternalPressures  = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            b_ExternalPressures   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "population", "institutions", "energy", "bioplastics")),
-            b_WaterSoil          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            b_WaterSoil           = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "waterSparing", "soil")),
-            b_REDDaffRuminants = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            b_REDDaffRuminants    = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "ruminants", "REDDaff")),
-            b_DietRotations      = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            b_DietRotations       = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "landSharing", "allDiet")),
             b_MonogastricsRotations = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "landSharing", "monogastrics")),
-            b_TradeRotations     = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            b_TradeRotations      = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "landSharing", "fairTrade")),
-            b_TradeREDDaff       = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            b_TradeREDDaff        = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "fairTrade", "REDDaff")),
-            b_TradeSoil          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            b_TradeSoil           = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "fairTrade", "soil")),
-            b_TradeMonogastrics          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            b_TradeMonogastrics   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "fairTrade", "monogastrics")),
-            b_TradeRuminants          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            b_TradeRuminants      = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "fairTrade", "ruminants")),
-            b_TradeVeggies          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            b_TradeVeggies        = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "fairTrade", "fruitsNutsVegSeeds")),
             b_MonogastricsVeggies = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "monogastrics", "fruitsNutsVegSeeds")),
@@ -159,32 +159,41 @@ fsecScenario <- function(scenario) {
                                   fsec = c("FSEC", "monogastrics", "soil")),
             b_SoilMonogastricRuminants = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "monogastrics", "ruminants","soil")),
-            b_SoilRotations      = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            b_SoilRotations       = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "landSharing", "soil")),
             b_LivestockManureMngmt = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "livestock", "awms")),
-            b_LivestockNUEMngmt  = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            b_LivestockNUEMngmt   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "livestock", "nueMAC")),
-            b_AllNitrogen        = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            b_AllNitrogen         = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "awms", "nueMAC", "monogastrics", "ruminants", "waste")),
-            b_AllClimate         = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            b_AllClimate          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "nueMAC", "riceMAC", "awms", "allEnvPrice")),
-            b_FullBiodiv         = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
-                                fsec = c("FSEC", "biodiversity", "landSharing")),
-            b_AllEnvironment     = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            b_FullBiodiv          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "biodiversity", "landSharing")),
+            b_AllEnvironment      = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "airPollution", "biodiversity", "REDDaff",
                                           "landSparing", "waterSparing", "peatland", "soil", "allEnvPrice")),
-            b_AllHealth          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            b_AllHealth           = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "allDiet")),
-            b_AllInclusion       = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+            b_AllInclusion        = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "population", "institutions", "timberCities", "fairTrade", "minWage")),
-            #Bioeconomy + energy + timber # we do not have bioeconomy yet
+            b_Livelihoods         = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "fairTrade", "minWage")),
+            b_LivelihoodsExt      = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "fairTrade", "minWage", "bioplastics", "energy", "timberCities")), # or bioenergy?
+            b_Bioeconomy          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "bioplastics", "energy", "timberCities")), # or bioenergy?
+            b_AgroMngmt           = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "landSharing", "nueMAC", "riceMAC", "livestock", "awms", "soil")),
             b_Efficiency          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "awms", "waste", "fairTrade", "nueMAC")),
             b_Sufficiency         = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "allDietAndWaste")),
             b_Protection          = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
-                                  fsec = c("FSEC", "waterSparing", "landSparing", "peatland"))
+                                  fsec = c("FSEC", "waterSparing", "landSparing", "peatland")),
+            b_NatureSparing       = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
+                                  fsec = c("FSEC", "waterSparing", "landSparing", "peatland", "biodiversity", "REDDaff"))
             )
   # Assign selected scenario to cfg
   cfg <- setScenario(cfg, x[[scenario]]$standard)
@@ -206,12 +215,13 @@ fsecScenario <- function(scenario) {
                        "projects/FSEC_costs",
                        "projects/FSEC_nitrogenPollution",
                        "runBlackmagicc",
-                       "projects/FSDP_process",
                        "projects/FSEC_StevenLord",
                        "projects/FSEC_SimonDietz",
-                       "projects/FSEC_AlessandroPassaro"
+                       "projects/FSEC_AlessandroPassaro",
+                       "projects/FSEC_water"
                        )
-  cfg$force_download <- TRUE
+  cfg$force_download  <- TRUE
+  cfg$gms$s80_optfile <- 0
 
   return(cfg)
 }
