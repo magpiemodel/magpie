@@ -13,15 +13,9 @@ codeCheck <- FALSE
 general_settings <- function(title) {
   source("config/default.cfg")
 
-  cfg$input <- c(regional    = "WARNINGS1_rev4.771810__h12_magpie.tgz",
-                 cellular    = "rev4.771810__h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-                 validation  = "rev4.771810__h12_validation.tgz",
-                 additional  = "additional_data_rev4.32.tgz",
-                 calibration = "calibration_H12+ir2rf_05Oct22.tgz")
-
   ##Downloading new input data
   cfg$force_download <- TRUE
-  cfg$info$flag <- "2810"
+  cfg$info$flag <- "1701"
   cfg$title       <- paste(cfg$info$flag,title,sep="_")
   cfg$results_folder <- "output/:title:"
   cfg$recalibrate <- FALSE
@@ -36,7 +30,7 @@ general_settings <- function(title) {
   #Setting pumping to 1
   cfg$gms$s42_pumping <- 1
   #Setting start year as 1995 in default so that the values are set for India
-  cfg$gms$s42_start_multiplier <- 1995
+  cfg$gms$s42_multiplier_startyear <- 1995
   ##Pumping cost value to  0.005
   cfg$gms$s42_multiplier <- 1
 
@@ -48,28 +42,22 @@ return(cfg)
 general_settings2 <- function(title) {
   source("config/default.cfg")
 
-  cfg$input <- c(regional    = "WARNINGS1_rev4.771810__h12_magpie.tgz",
-                 cellular    = "rev4.771810__h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
-                 validation  = "rev4.771810__h12_validation.tgz",
-                 additional  = "additional_data_rev4.32.tgz",
-                 calibration = "calibration_H12+ir2rf_05Oct22.tgz")
-
   ##Downloading new input data
   cfg$force_download <- TRUE
-  cfg$info$flag <- "2810"
+  cfg$info$flag <- "1701"
   cfg$title       <- paste(cfg$info$flag,title,sep="_")
   cfg$results_folder <- "output/:title:"
   cfg$recalibrate <- FALSE
   return(cfg)
   }
 
-  cfg <- general_settings2(title = "BAU")
-  start_run(cfg, codeCheck=FALSE)
+#  cfg <- general_settings2(title = "BAU_old")
+#  start_run(cfg, codeCheck=FALSE)
 
 ####################################################################333
 ##BAU with special settings as per India requirements
 
-cfg <- general_settings(title = "BAU2")
+cfg <- general_settings(title = "BAU")
 start_run(cfg, codeCheck=FALSE)
 
 ####################################################################333
@@ -78,15 +66,15 @@ start_run(cfg, codeCheck=FALSE)
 cfg <- general_settings(title = "NIN_India_EAT_others")
 #switch towards exogenous diet scenario
 cfg$gms$s15_exo_nin <- 1               # def = 0
-#Exogenous scenario applied only for India
-#cfg$gms$scen_countries15  <- "IND"
+#ensuring EAT switch gets active for other regions
+cfg$gms$s15_exo_diet <- 1               # def = 0
 
 start_run(cfg, codeCheck=FALSE)
 
 ####################################################################333
 ##NIN
 
-cfg <- general_settings(title = "NIN_India_endo_others")
+cfg <- general_settings(title = "NIN_India_SSP2_others")
 #switch towards exogenous diet scenario
 cfg$gms$s15_exo_nin <- 1               # def = 0
 #Exogenous scenario applied only for India
@@ -95,18 +83,7 @@ cfg$gms$scen_countries15  <- "IND"
 start_run(cfg, codeCheck=FALSE)
 
 
-####################################################################333
-##EAT
-
-cfg <- general_settings(title = "EAT_India_endo_others")
-#switch towards exogenous diet scenario
-cfg$gms$s15_exo_diet <- 1               # def = 0
-cfg$gms$scen_countries15  <- "IND"
-
-start_run(cfg, codeCheck=FALSE)
-
-
-####################################################################333
+###################################################################333
 ##EAT
 
 cfg <- general_settings(title = "EAT_all")
@@ -115,26 +92,6 @@ cfg$gms$s15_exo_diet <- 1               # def = 0
 
 start_run(cfg, codeCheck=FALSE)
 
-
-####################################################################333
-##NIN no_overweight
-
-cfg <- general_settings(title = "NIN_no_overweight")
-#switch towards exogenous diet scenario
-cfg$gms$s15_exo_nin <- 1               # def = 0
-cfg$gms$c15_kcal_scen <- "no_overweight"
-
-start_run(cfg, codeCheck=FALSE)
-
-####################################################################333
-## no_underweight scenario
-
-cfg <- general_settings(title = "NIN_no_underweight")
-#switch towards exogenous diet scenario
-cfg$gms$s15_exo_nin <- 1               # def = 0
-cfg$gms$c15_kcal_scen <- "no_underweight"
-
-start_run(cfg, codeCheck=FALSE)
 
 ####################################################################333
 ##NIN_nosugar/oil change scenario - when sugars and oils are allowed to be used as BAU and don't factor in transition
@@ -152,7 +109,7 @@ start_run(cfg, codeCheck=FALSE)
 ####################################################################
 ##Only reduction in select commodities - processed food consumption
 
-cfg <- general_settings(title = "NIN_no_processed")
+cfg <- general_settings(title = "NIN_low_processed")
 #switch towards exogenous diet scenario
 cfg$gms$s15_exo_nin <- 1               # def = 0
 cfg$gms$s15_exo_monogastric <- 0   # def = 1, options: 0,1
@@ -177,4 +134,37 @@ cfg <- general_settings(title = "SSP3")
 
 cfg$gms$c15_food_scenario <- "SSP3"                 # def = SSP2
 cfg$gms$c15_food_scenario_noselect <- "SSP3"        # def = SSP2
+start_run(cfg, codeCheck=FALSE)
+
+
+###################################################################
+
+cfg <- general_settings(title = "High_lib_trade")
+
+cfg$gms$c21_trade_liberalization  <- "l908080r807070"     # def = l909090r808080
+start_run(cfg, codeCheck=FALSE)
+
+###################################################################
+
+cfg <- general_settings(title = "NIN_India_EAT_others_High_lib_trade")
+
+cfg$gms$c21_trade_liberalization  <- "l908080r807070"     # def = l909090r808080
+cfg$gms$s15_exo_nin <- 1               # def = 0
+#ensuring EAT switch gets active for other regions
+cfg$gms$s15_exo_diet <- 1               # def = 0
+
+start_run(cfg, codeCheck=FALSE)
+
+
+
+###################################################################
+
+cfg <- general_settings(title = "NIN_India_SSP2_others_High_lib_trade")
+
+cfg$gms$c21_trade_liberalization  <- "l908080r807070"     # def = l909090r808080
+
+cfg$gms$s15_exo_nin <- 1               # def = 0
+#ensuring EAT switch gets active for other regions
+cfg$gms$scen_countries15  <- "IND"
+
 start_run(cfg, codeCheck=FALSE)
