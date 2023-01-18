@@ -26,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -
 
 ### fixed
--
+- **scripts** make sure that `c_title` in the GAMS code is not containing dots which otherwise could lead to compilation errors
 
 
 ## [4.6.2] - 2023-01-12
