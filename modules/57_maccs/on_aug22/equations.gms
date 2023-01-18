@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -28,12 +28,25 @@
 *' calculating emissions back to fertilization using the default emission factor
 *' by the IPCC that is likely the basis for their estimates (E=F*EF, F= E/EF).
 
-q57_total_costs(i2) ..
-  vm_maccs_costs(i2) =e=
-  sum((ct,emis_source,pollutants_maccs57), p57_maccs_costs_integral(ct,i2,emis_source,pollutants_maccs57)
-		* vm_emissions_reg(i2,emis_source,pollutants_maccs57) / (1 - im_maccs_mitigation(ct,i2,emis_source,pollutants_maccs57))
-		)
-  + sum(emis_source_inorg_fert_n2o,
-    (vm_emissions_reg(i2,emis_source_inorg_fert_n2o,"n2o_n_direct") / s57_implicit_emis_factor) *
-    sum(ct,im_maccs_mitigation(ct,i2,emis_source_inorg_fert_n2o,"n2o_n_direct")) * s57_implicit_fert_cost
-  );
+*' Costs are assumed to be factor costs and split into a labor and a capital part.
+*' The labor share is scaled according to the changes in wages and corresponding 
+*' productivity change.
+
+q57_labor_costs(i2) ..
+  vm_maccs_costs(i2,"labor") =e=
+  (sum((ct,emis_source,pollutants_maccs57), p57_maccs_costs_integral(ct,i2,emis_source,pollutants_maccs57)
+		  * vm_emissions_reg(i2,emis_source,pollutants_maccs57) / (1 - im_maccs_mitigation(ct,i2,emis_source,pollutants_maccs57)))
+    + sum(emis_source_inorg_fert_n2o,
+      (vm_emissions_reg(i2,emis_source_inorg_fert_n2o,"n2o_n_direct") / s57_implicit_emis_factor) *
+      sum(ct,im_maccs_mitigation(ct,i2,emis_source_inorg_fert_n2o,"n2o_n_direct")) * s57_implicit_fert_cost))
+  * sum(ct, pm_cost_share_crops(ct ,i2,"labor") * (1/pm_productivity_gain_from_wages(ct,i2)) * 
+          (pm_hourly_costs(ct,i2,"scenario") / pm_hourly_costs(ct,i2,"baseline")));
+
+q57_capital_costs(i2) ..
+  vm_maccs_costs(i2,"capital") =e=
+  (sum((ct,emis_source,pollutants_maccs57), p57_maccs_costs_integral(ct,i2,emis_source,pollutants_maccs57)
+		  * vm_emissions_reg(i2,emis_source,pollutants_maccs57) / (1 - im_maccs_mitigation(ct,i2,emis_source,pollutants_maccs57)))
+    + sum(emis_source_inorg_fert_n2o,
+      (vm_emissions_reg(i2,emis_source_inorg_fert_n2o,"n2o_n_direct") / s57_implicit_emis_factor) *
+      sum(ct,im_maccs_mitigation(ct,i2,emis_source_inorg_fert_n2o,"n2o_n_direct")) * s57_implicit_fert_cost))
+  * sum(ct, pm_cost_share_crops(ct ,i2,"capital"));

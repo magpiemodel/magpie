@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -15,8 +15,8 @@
 *' category, the use for bioenergy (oils and ethanol) has been excluded
 *' and is accounted for in the demand for bioenergy. Material demand in this
 *' context can be considered as a subset of "other utils" category of FAO.
-*' In addition, future material demand for bioplastic production can be included
-*' by setting a target bioplastic demand.
+*' In addition, increasing material demand for bioplastic production can be
+*' included by setting a target bioplastic demand.
 
 *' @authors Benjamin Bodirsky, Debbora Leip
 

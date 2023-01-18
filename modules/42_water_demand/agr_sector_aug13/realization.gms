@@ -1,11 +1,11 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-*' @description  
+*' @description
 *'
 *' This realization models agricultural sector water demand endogenously, while other sectors are kept exogenous;
 *' Various settings for environmental water demand described below.
@@ -68,6 +68,8 @@
 *'
 *' Whether a potential EFP policy takes effect is determined by the parameter
 *' `f42_env_flow_policy`.
+*' The speed of transitioning to full environmental flow protection is determined
+*' by specifying the start (`s42_efp_startyear`) and target (`s42_efp_targetyear`) year.
 *'
 *' @limitations The module uses the "conveyance efficiency times management
 *' factor" for irrigation efficiency. Therefore, the management factor is

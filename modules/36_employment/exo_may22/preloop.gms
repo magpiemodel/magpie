@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -56,11 +56,11 @@ pm_hourly_costs(t,i,wage_scen) = sum(i_to_iso(i,iso), p36_hourly_costs_iso(t,iso
 *' costs), or show a mixture between productivity increase and total labor cost increase.
 *' The scalar `s36_scale_productivity_with_wage` describes how high the labor productivity gain should be relative to
 *' the increase in hourly labor costs and is used to calculate `pm_productivity_gain_from_wages`, which is applied to
-*' labor costs for crop production ([38_factor_costs]), livestock production ([70_livestock]), and the non-MAgPIE
-*' labor costs. If `s36_scale_productivity_with_wage = 1` the productivity gain and wage increase cancel out,
-*' leading to the same total labor costs as without wage scenario. For `s36_scale_productivity_with_wage = 0` the total
-*' labor costs scale proportional to the hourly labor costs. For other values, the total labor costs show a non-linear
-*' realtionship with `s36_scale_productivity_with_wage`.
+*' labor costs for crop production ([38_factor_costs]), livestock production ([70_livestock]), mitigation costs
+*' ([57_maccs]) and the non-MAgPIE labor costs. If `s36_scale_productivity_with_wage = 1` the productivity gain and 
+*' wage increase cancel out, leading to the same total labor costs as without wage scenario.
+*' For `s36_scale_productivity_with_wage = 0` the total labor costs scale proportional to the hourly labor costs. For 
+*' other values, the total labor costs show a non-linear realtionship with `s36_scale_productivity_with_wage`.
 
 pm_productivity_gain_from_wages(t,i) = s36_scale_productivity_with_wage * (pm_hourly_costs(t,i,"scenario") / pm_hourly_costs(t,i,"baseline")) + (1 - s36_scale_productivity_with_wage);
 

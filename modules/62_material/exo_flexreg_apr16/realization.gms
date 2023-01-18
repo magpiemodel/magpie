@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -12,9 +12,9 @@
 *' material module based on historical data. The assumption that material demand
 *' grows proportional to food demand is a simplification that can be justified
 *' by the minor importance of non-bioenergy material usage of agricultural products.
-*' In addition, biomass demand for bioplastic production can be included, with 
-*' future bioplastic production following a logistic curve with exogenously defined 
-*' target production.
+*' In addition, biomass demand for bioplastic production is included, with 
+*' future bioplastic production kept constant or following a logistic curve 
+*' if a bioplastic production target is exogenously set.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/62_material/exo_flexreg_apr16/sets.gms"
