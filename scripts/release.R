@@ -31,7 +31,7 @@ release <- function(newVersion) {
   message("creating documentation using goxygen...")
   goxygen::goxygen()
   message("uploading documentation to RSE server")
-  system(paste0("rsync -e ssh -avz doc/html rse:/webservice/doc/magpie/", newVersion))
+  system(paste0("rsync -e ssh -avz doc/html/* rse:/webservice/doc/magpie/", newVersion))
 
   message("uploading input data to RSE server")
   sys.source("scripts/start/extra/publish_data.R", envir = new.env()) # only works on cluster
