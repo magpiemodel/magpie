@@ -13,9 +13,15 @@ codeCheck <- FALSE
 general_settings <- function(title) {
   source("config/default.cfg")
 
+  cfg$input <- c(regional    = "WARNINGS1_rev4.771810__h12_magpie.tgz",
+                cellular    = "rev4.771810__h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+                validation  = "rev4.771810__h12_validation.tgz",
+                additional  = "additional_data_rev4.32.tgz",
+                calibration = "calibration_H12+ir2rf_05Oct22.tgz")
+
   ##Downloading new input data
   cfg$force_download <- TRUE
-  cfg$info$flag <- "1701"
+  cfg$info$flag <- "1801"
   cfg$title       <- paste(cfg$info$flag,title,sep="_")
   cfg$results_folder <- "output/:title:"
   cfg$recalibrate <- FALSE
@@ -42,9 +48,15 @@ return(cfg)
 general_settings2 <- function(title) {
   source("config/default.cfg")
 
+  cfg$input <- c(regional    = "WARNINGS1_rev4.771810__h12_magpie.tgz",
+                cellular    = "rev4.771810__h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz",
+                validation  = "rev4.771810__h12_validation.tgz",
+                additional  = "additional_data_rev4.32.tgz",
+                calibration = "calibration_H12+ir2rf_05Oct22.tgz")
+
   ##Downloading new input data
   cfg$force_download <- TRUE
-  cfg$info$flag <- "1701"
+  cfg$info$flag <- "1801"
   cfg$title       <- paste(cfg$info$flag,title,sep="_")
   cfg$results_folder <- "output/:title:"
   cfg$recalibrate <- FALSE
