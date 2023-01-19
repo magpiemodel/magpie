@@ -52,3 +52,5 @@ if (length(arguments) != 1) {
   stop("Please pass the new version number, e.g. `Rscript scripts/release.R 4.6.2`")
 }
 release(arguments)
+message("warnings:")
+print(warnings())
