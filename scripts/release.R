@@ -44,7 +44,7 @@ release <- function(newVersion) {
 
   gert::git_commit(paste("magpie release", newVersion))
   gert::git_push()
-  system(paste0("gh pr create --base master --title 'magpie release ", newVersion, "' --body '' --reviewer tscheypidi"))
+  system(paste0("gh pr create --base master --title 'magpie release ", newVersion, "' --body ''"))
 }
 
 arguments <- commandArgs(TRUE)

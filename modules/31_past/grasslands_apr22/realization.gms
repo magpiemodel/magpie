@@ -20,7 +20,9 @@
 *' calculated in [50_nr_soil_budget] and control the balance between intensive and
 *' extensive grass biomass production.
 
-*' @limitations We currently do not accout for specific differences within intensive
+*' @limitations At the moment this realization only runs with a single climate scenario
+*' (SPP1-RCP2p6 from MRI_ESM-0), which is used in all (except constant climate) settings.
+*' We currently do not accout for specific differences within intensive
 *' pasture management systems and related degradation of grasslands for both
 *' rangelands or managed pastures. Grass production costs and conversion costs between 
 *' grassland types are set 1 USD05MER per unit due to lack of data.

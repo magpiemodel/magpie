@@ -11,7 +11,7 @@ $setglobal c30_bioen_type  all
 $setglobal c30_bioen_water  rainfed
 * options: rainfed, irrigated, all
 
-$setglobal c30_marginal_land  all_marginal
+$setglobal c30_marginal_land  q33_marginal
 * options: all_marginal, q33_marginal, no_marginal
 
 $setglobal c30_snv_target  none
@@ -60,6 +60,14 @@ sets
 
 land_snv(land) land types allowed in the SNV policy / secdforest, forestry, past, other /
 ;
+
+$ifthen "%c30_bioen_type%" == "all" bioen_type_30(kbe30) = yes;
+$else bioen_type_30("%c30_bioen_type%") = yes;
+$endif
+
+$ifthen "%c30_bioen_water%" == "all" bioen_water_30(w) = yes;
+$else bioen_water_30("%c30_bioen_water%") = yes;
+$endif
 
 ********* CROPAREA INITIALISATION **********************************************
 
