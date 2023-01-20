@@ -242,7 +242,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   cfg$info$version <- citation::read_cff("CITATION.cff")$version
 
   # Make 'title' a setglobal in gams to include it in the gdx
-  cfg$gms$c_title <- cfg$title
+  cfg$gms$c_title <- sub(".", "p", cfg$title, fixed = TRUE)
 
   rundate <- Sys.time()
   date <- format(rundate, "_%Y-%m-%d_%H.%M.%S")

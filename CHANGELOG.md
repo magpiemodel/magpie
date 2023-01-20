@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **38_factos_costs** sticky_labor realization: included option to set a labor share target
 - **15_food** changed `anthro_iso_jun22` realisation such that results in case of `exo_diet = 1/0` and `exo_waste = 1/0` are identical until 2020
 - **62_material** Bioplastic demand identical in all scenarios until 2020
+- **30_crop** identical assumptions for bioenergy until 2020
 
 ### added
 - **scripts** added start script which starts an empty model just regenerating a previous run
@@ -26,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -
 
 ### fixed
--
+- **scripts** make sure that `c_title` in the GAMS code is not containing dots which otherwise could lead to compilation errors
 
 
 ## [4.6.2] - 2023-01-12
