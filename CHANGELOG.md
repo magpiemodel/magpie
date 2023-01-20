@@ -12,7 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -
 
 ### added
--
+- **config** added setting cfg$keep_restarts which controls whether restart files should be kept after a run finished
+- **scripts** added restart points after each time step from which the model can now be restarted if the simulation aborts at some point
+
 
 ### removed
 -
