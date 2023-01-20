@@ -33,11 +33,15 @@ file dummy; dummy.pw=2000; put dummy;
 * clear ct set
 ct(t) = no;
 pt(t) = no;
+
 ***************************TIMESTEP LOOP START**********************************
-loop (t,
+$label TimeLoop
+$if not set TIMESTEP $set TIMESTEP 0
+
+loop (t$(m_year(t) > %TIMESTEP%),
 
 * set ct to current time period
-      ct(t) = yes;
+    ct(t) = yes;
 	  pt(t) = yes$(ord(t) = 1);
 	  pt(t-1) = yes$(ord(t) > 1);
 	  
@@ -90,6 +94,8 @@ $batinclude "./modules/include.gms" postsolve
   ct(t) = no;
   pt(t) = no$(ord(t) = 1);
   pt(t-1) = no$(ord(t) > 1);
+
+   put_utility 'save' / 'restart';
 ********************************************************************************
 );
 ****************************TIMESTEP LOOP END***********************************
