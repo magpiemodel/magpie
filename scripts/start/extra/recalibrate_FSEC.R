@@ -19,7 +19,7 @@ source("scripts/projects/fsec.R")
 # -----------------------------------------------------------------------------------------------------------------
 # Calibration run
 cfg       <- fsecScenario(scenario = "c_BAU")
-cfg$title <- "FSEC17Jan23"
+cfg$title <- "FSEC19Jan23"
 cfg$results_folder                  <- "output/:title:"
 cfg$recalibrate                     <- TRUE
 cfg$best_calib                      <- TRUE
