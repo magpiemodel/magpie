@@ -34,7 +34,9 @@ $setglobal c15_livescen_target  constant
 $setglobal c15_exo_foodscen  lin_zero_20_50
 
 $setglobal c15_kcal_scen  healthy_BMI
-*   options:   healthy_BMI, 2100kcal, 2500kcal
+*   options:    healthy_BMI, 2100kcal, 2500kcal,
+*              endo, no_underweight, no_overweight
+*              half_overweight, no_underweight_half_overweight
 
 $setglobal c15_EAT_scen  FLX
 *   options:   BMK, FLX, PSC, VEG, VGN, FLX_hmilk, FLX_hredmeat
