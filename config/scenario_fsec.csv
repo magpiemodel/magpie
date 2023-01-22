@@ -7,7 +7,7 @@ gms$s12_interest_hic;;;0.04;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$food;anthro_iso_jun22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s15_exo_waste;;;;;;;;0;0;0;0;0;0;0;0;1;;;;;;;;;;;;;;;;;;0;1;;;;;;;;;
 gms$s15_exo_diet;;;;;;;;1;1;1;1;1;1;1;1;0;;;;;;;;;;;;;;;;;;1;1;;;;;;;;;
-gms$c15_kcal_scen;;;;;;;;no_underweight;half_overweight;endo;endo;endo;endo;endo;endo;healthy_BMI;;;;;;;;;;;;;;;;;;healthy_BMI;healthy_BMI;;;;;;;;;
+gms$c15_kcal_scen;;;;;;;;no_underweight;half_overweight;endo;endo;endo;endo;endo;endo;endo;;;;;;;;;;;;;;;;;;no_underweight_half_overweight;no_underweight_half_overweight;;;;;;;;;
 gms$c15_EAT_scen;;;;;;;;FLX;FLX;FLX;FLX;FLX;FLX;FLX;FLX;FLX;;;;;;;;;;;;;;;;;;FLX;FLX;;;;;;;;;
 gms$s15_exo_monogastric;;;;;;;;0;0;0;1;0;0;0;0;0;;;;;;;;;;;;;;;;;;1;1;;;;;;;;;
 gms$s15_exo_ruminant;;;;;;;;0;0;0;0;1;0;0;0;0;;;;;;;;;;;;;;;;;;1;1;;;;;;;;;
