@@ -9,23 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
--
-
-### added
--
-
-### removed
--
-
-### fixed
--
-
-
-## [4.6.3] - 2023-01-19
-
-### changed
-- **15_food** changed `anthro_iso_jun22` realisation such that results in case of `exo_diet = 1/0` and `exo_waste = 1/0` are identical until 2020
-- **30_crop** identical assumptions for bioenergy until 2020
+- **15_food** half_overweight scenario added
 - **38_factor_costs** changed name of set `req` to `factors` (also used in 11_costs, 57_maccs, 70_livestock)
 - **38_factos_costs** sticky_labor realization: included option to set a labor share target
 - **62_material** Bioplastic demand identical in all scenarios until 2020
