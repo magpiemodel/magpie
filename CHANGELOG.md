@@ -12,12 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -
 
 ### added
-- **31_past** added additional limitation (single climate scenario input) for **grasslands_apr22**
-- **59_som** added new **cellpool_jan23** realization with updated 2019 IPCC guidelines values
 - **config** added setting cfg$keep_restarts which controls whether restart files should be kept after a run finished
 - **config** changed default for `s_use_gdx` from 2 to 0
 - **scripts** added restart points after each time step from which the model can now be restarted if the simulation aborts at some point
-- **scripts** added start script which starts an empty model just regenerating a previous run
 - **scripts** added SLURM dayMax submission type for standby QOS
 
 
