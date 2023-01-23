@@ -222,7 +222,8 @@ fsecScenario <- function(scenario) {
                        "projects/FSEC_dietaryIndicators",
                        "projects/FSEC_costs",
                        "projects/FSEC_nitrogenPollution",
-                       "projects/FSEC_water"
+                       "projects/FSEC_water",
+                       "projects/FSEC_cropDiversityGrid"
                        )
   cfg$force_download  <- TRUE
   cfg$gms$s80_optfile <- 1
