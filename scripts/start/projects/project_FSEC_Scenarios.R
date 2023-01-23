@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -18,7 +18,7 @@ codeCheck <- FALSE
 for (scenarioName in c(
   # Single transformation runs
   "a_Population", "a_EconDevelop", "a_EnergyTrans",
-  "a_NoUnderweight", "a_NoOverweight", "a_DietVegFruitsNutsSeeds", "a_DietLegumes",
+  "a_NoUnderweight", "a_HalfOverweight", "a_DietVegFruitsNutsSeeds", "a_DietLegumes",
   "a_DietMonogastrics", "a_DietRuminants", "a_DietEmptyCals", "a_DietFish", "a_LessFoodWaste",
   "a_ManureMngmt", "a_LivestockMngmt", "a_BiodivSparing",
   "a_NitrogenEff", "a_RiceMit", "a_CropeffTax",

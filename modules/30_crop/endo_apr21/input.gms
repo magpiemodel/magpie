@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -60,6 +60,14 @@ sets
 
 land_snv(land) land types allowed in the SNV policy / secdforest, forestry, past, other /
 ;
+
+$ifthen "%c30_bioen_type%" == "all" bioen_type_30(kbe30) = yes;
+$else bioen_type_30("%c30_bioen_type%") = yes;
+$endif
+
+$ifthen "%c30_bioen_water%" == "all" bioen_water_30(w) = yes;
+$else bioen_water_30("%c30_bioen_water%") = yes;
+$endif
 
 ********* CROPAREA INITIALISATION **********************************************
 

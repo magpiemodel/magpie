@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -12,6 +12,19 @@ library(gms)
 
 #options(error=function()traceback(2))
 
+.getRestartFiles <- function() {
+  restartFiles <- dir(pattern="restart_.*\\.g00")
+  names(restartFiles) <- gsub("restart_y([0-9]*)\\.g00", "\\1", restartFiles)
+  return(restartFiles)
+}
+
+.getRestartCode <- function() {
+  restartFiles <- .getRestartFiles()
+  if (length(restartFiles) == 0) return("")
+  restartFiles <- tail(restartFiles, 1)
+  return(paste0(" --RESTARTPOINT=TimeLoop --TIMESTEP=", names(restartFiles), " r=", restartFiles))
+}
+
 cfg <- gms::loadConfig("config.yml")
 
 maindir <- cfg$magpie_folder
@@ -20,7 +33,9 @@ maindir <- cfg$magpie_folder
 timeGAMSStart <- Sys.time()
 
 cat("\nStarting MAgPIE...\n")
-system(paste("gams full.gms -errmsg=1 -lf=full.log -lo=",cfg$logoption,sep=""))
+system(paste0("gams full.gms -errmsg=1 -lf=full.log -lo=",cfg$logoption, .getRestartCode()))
+
+if (isFALSE(cfg$keep_restarts)) unlink(.getRestartFiles())
 
 # Capture runtimes
 timeGAMSEnd  <- Sys.time()

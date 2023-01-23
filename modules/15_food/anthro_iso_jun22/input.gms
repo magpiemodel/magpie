@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -34,7 +34,9 @@ $setglobal c15_livescen_target  constant
 $setglobal c15_exo_foodscen  lin_zero_20_50
 
 $setglobal c15_kcal_scen  healthy_BMI
-*   options:   healthy_BMI, 2100kcal, 2500kcal
+*   options:    healthy_BMI, 2100kcal, 2500kcal,
+*              endo, no_underweight, no_overweight
+*              half_overweight, no_underweight_half_overweight
 
 $setglobal c15_EAT_scen  FLX
 *   options:   BMK, FLX, PSC, VEG, VGN, FLX_hmilk, FLX_hredmeat
