@@ -95,7 +95,7 @@ $batinclude "./modules/include.gms" postsolve
   pt(t) = no$(ord(t) = 1);
   pt(t-1) = no$(ord(t) > 1);
 
-   put_utility 'save' / 'restart';
+   put_utility 'save' / 'restart_' t.tl:0;;
 ********************************************************************************
 );
 ****************************TIMESTEP LOOP END***********************************

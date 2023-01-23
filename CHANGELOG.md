@@ -9,24 +9,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
-- **config** update input data to rev4.79
-- **config** and **38_factor_costs** changed name of `s38_fix_capital_need` to `s38_startyear_labor_substitution`
-- **config** added `s38_target_labor_share`, `s38_targetyear_labor_share` and `s38_target_fulfillment` to define labor share target scnarios
-- **38_factor_costs** changed name of set `req` to `factors` (also used in 11_costs, 57_maccs, 70_livestock)
-- **38_factos_costs** sticky_labor realization: included option to set a labor share target
-- **15_food** changed `anthro_iso_jun22` realisation such that results in case of `exo_diet = 1/0` and `exo_waste = 1/0` are identical until 2020
-- **62_material** Bioplastic demand identical in all scenarios until 2020
-- **30_crop** identical assumptions for bioenergy until 2020
+-
 
 ### added
-- **scripts** added start script which starts an empty model just regenerating a previous run
-
-- **scripts** added SLURM dayMax submission types for standby and priority QOS
 - **31_past** added additional limitation (single climate scenario input) for **grasslands_apr22**
 - **59_som** added new **cellpool_jan23** realization with updated 2019 IPCC guidelines values
+- **config** added setting cfg$keep_restarts which controls whether restart files should be kept after a run finished
+- **scripts** added restart points after each time step from which the model can now be restarted if the simulation aborts at some point
+- **scripts** added start script which starts an empty model just regenerating a previous run
+- **scripts** added SLURM dayMax submission types for standby and priority QOS
 
 ### removed
 -
+
+### fixed
+-
+
+
+## [4.6.3] - 2023-01-19
+
+### changed
+- **15_food** changed `anthro_iso_jun22` realisation such that results in case of `exo_diet = 1/0` and `exo_waste = 1/0` are identical until 2020
+- **30_crop** identical assumptions for bioenergy until 2020
+- **38_factor_costs** changed name of set `req` to `factors` (also used in 11_costs, 57_maccs, 70_livestock)
+- **38_factos_costs** sticky_labor realization: included option to set a labor share target
+- **62_material** Bioplastic demand identical in all scenarios until 2020
+- **config** added `s38_target_labor_share`, `s38_targetyear_labor_share` and `s38_target_fulfillment` to define labor share target scnarios
+- **config** and **38_factor_costs** changed name of `s38_fix_capital_need` to `s38_startyear_labor_substitution`
+- **config** update input data to rev4.79
+
+### added
+- **31_past** added additional limitation (single climate scenario input) for **grasslands_apr22**
+- **59_som** added new **cellpool_jan23** realization with updated 2019 IPCC guidelines values
+- **scripts** added start script which starts an empty model just regenerating a previous run
 
 ### fixed
 - **scripts** make sure that `c_title` in the GAMS code is not containing dots which otherwise could lead to compilation errors
@@ -617,7 +632,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.2...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.3...develop
+[4.6.3]: https://github.com/magpiemodel/magpie/compare/v4.6.2...v4.6.3
 [4.6.2]: https://github.com/magpiemodel/magpie/compare/v4.6.1...v4.6.2
 [4.6.1]: https://github.com/magpiemodel/magpie/compare/v4.6.0...v4.6.1
 [4.6.0]: https://github.com/magpiemodel/magpie/compare/v4.5.0...v4.6.0
