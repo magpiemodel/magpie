@@ -11,7 +11,7 @@ $setglobal c30_bioen_type  all
 $setglobal c30_bioen_water  rainfed
 * options: rainfed, irrigated, all
 
-$setglobal c30_marginal_land  all_marginal
+$setglobal c30_marginal_land  q33_marginal
 * options: all_marginal, q33_marginal, no_marginal
 
 $setglobal c30_snv_target  none

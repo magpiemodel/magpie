@@ -48,7 +48,7 @@
 *' the sum over all the imports of importing regions.
 
  q21_excess_dem(k_trade)..
- v21_excess_dem(k_trade) =g=
+ v21_excess_dem(k_trade) =e=
  sum(h2, sum(supreg(h2,i2),vm_supply(i2,k_trade))*(1 - sum(ct,f21_self_suff(ct,h2,k_trade)))
  $(sum(ct,f21_self_suff(ct,h2,k_trade)) < 1))
  + sum(ct,f21_trade_balanceflow(ct,k_trade));
@@ -57,7 +57,7 @@
 *' Export shares are derived from FAO data (see @schmitz_trading_2012 for details). They are 0 for importing regions.
 
  q21_excess_supply(h2,k_trade)..
- v21_excess_prod(h2,k_trade) =e=
+ v21_excess_prod(h2,k_trade) =g=
  v21_excess_dem(k_trade)*sum(ct,f21_exp_shr(ct,h2,k_trade));
 
 * Trade costs are associated with exporting regions. They are dependent on net exports, trade margin, and tariffs.

@@ -192,15 +192,8 @@ $title magpie
 *     6   23    7    6    1   43   27    7   11   12   37   20
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
-* Warning messages:
-* 1: In gms::update_modules_embedding() :
-*   ./modules/38_factor_costs/mixed_reg_feb17/realization.gms not found, this realization cannot be used!
-* 2: In gms::update_modules_embedding() :
-*   ./modules/51_nitrogen/ipcc2006_sep16/realization.gms not found, this realization cannot be used!
-* 3: In file.copy("calibration_results.pdf", cfg$results_folder,  ... :
-*   problem copying ./calibration_results.pdf to output/BilatPR4_ON_T1_2022-12-20_16.36.47/calibration_results.pdf: No such file or directory
 * 
-* Last modification (input data): Tue Dec 20 18:51:33 2022
+* Last modification (input data): Mon Jan  9 15:04:41 2023
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -226,7 +219,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  BilatPR4_ON_T0
+$setglobal c_title  BilatPR10testE_ON_T1
 
 scalars
 s_use_gdx   use of gdx files                                       / 2 /

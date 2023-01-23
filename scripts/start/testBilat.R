@@ -16,30 +16,29 @@ source("scripts/start_functions.R")
 source("config/default.cfg")
 
 
-cfg$title   <- paste0("BilatPR4_OFF_T1")
+cfg$title   <- paste0("BilatPR_OFF_testq21ex_supp")
 cfg$gms$trade <- "selfsuff_reduced"             # def = selfsuff_reduced
 start_run(cfg=cfg)
 
-cfg$title   <- paste0("BilatPR4_OFF_T0")
-cfg$gms$s21_trade_tariff <-0             # def =1
-start_run(cfg=cfg)
+#cfg$title   <- paste0("BilatPR8_OFF_T0")
+#cfg$gms$s21_trade_tariff <-0             # def =1
+#start_run(cfg=cfg)
 
-cfg$title   <- paste0("BilatPR4_ON_T1")
+cfg$title   <- paste0("BilatPR_ON_testq21ex_supp")
 cfg$gms$trade <- "selfsuff_reduced_bilateral22"             # def = selfsuff_reduced
 cfg$gms$s21_trade_tariff <- 1               # def =1
 
-cfg$recalibrate = TRUE
-cfg$recalibrate_landconversion_cost <- TRUE  #def "ifneeded"
-cfg$force_download = TRUE
+#cfg$recalibrate = "ifneeded"
+#cfg$recalibrate_landconversion_cost <- "ifneeded"  #def "ifneeded"
+#cfg$force_download = TRUE
 
 start_run(cfg=cfg)
 
+#cfg$title   <- paste0("BilatPR8_ON_T0")
+#cfg$gms$trade <- "selfsuff_reduced_bilateral22"             # def = selfsuff_reduced
+#cfg$gms$s21_trade_tariff <- 0               # def =1
 
-cfg$title   <- paste0("BilatPR4_ON_T0")
-cfg$gms$trade <- "selfsuff_reduced_bilateral22"             # def = selfsuff_reduced
-cfg$gms$s21_trade_tariff <- 0               # def =1
-
-cfg$recalibrate = TRUE
-cfg$recalibrate_landconversion_cost <- TRUE  #def "ifneeded"
-cfg$force_download = TRUE
-start_run(cfg=cfg)
+#cfg$recalibrate = TRUE
+#cfg$recalibrate_landconversion_cost <- TRUE  #def "ifneeded"
+#cfg$force_download = TRUE
+#start_run(cfg=cfg)
