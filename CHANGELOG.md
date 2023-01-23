@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### added
 - **scripts** added start script which starts an empty model just regenerating a previous run
+
+- **scripts** added SLURM dayMax submission types for standby and priority QOS
 - **31_past** added additional limitation (single climate scenario input) for **grasslands_apr22**
 - **59_som** added new **cellpool_jan23** realization with updated 2019 IPCC guidelines values
 
