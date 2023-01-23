@@ -5,6 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+$if set RESTARTPOINT $goto %RESTARTPOINT%
+
 $title magpie
 
 *' @title MAgPIE - Modelling Framework
@@ -146,23 +148,23 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.77_h12_magpie.tgz
+* Used data set: rev4.79_h12_magpie.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: rev4.77_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* Used data set: rev4.79_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: rev4.77_h12_validation.tgz
+* Used data set: rev4.79_h12_validation.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: additional_data_rev4.33.tgz
+* Used data set: additional_data_rev4.36.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_per_ton_fao_may22_glo_23Nov22.tgz
+* Used data set: calibration_H12_09Jan23.tgz
 * md5sum: NA
 * Repository: https://rse.pik-potsdam.de/data/magpie/public
 * 
@@ -177,11 +179,11 @@ $title magpie
 * 
 * Regionscode: 62eff8f7
 * 
-* Regions data revision: 4.77
+* Regions data revision: 4.79
 * 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.77
+* * Revision: 4.79
 * 
 * aggregation settings:
 * * Input resolution: 0.5
@@ -193,7 +195,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Thu Dec 08 10:40:17 2022
+* Last modification (input data): Wed Jan 18 12:28:24 2023
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
