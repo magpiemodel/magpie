@@ -215,7 +215,7 @@ fsecScenario <- function(scenario) {
   # general
   cfg$title       <- paste(v, scenario, sep = "")
   cfg$recalibrate <- FALSE
-  cfg$qos         <- "standby_maxMem"
+  cfg$qos         <- "standby_dayMax"
   cfg$output      <- c(cfg$output,
                        "rds_report_iso",
                        "extra/disaggregation_BII",
