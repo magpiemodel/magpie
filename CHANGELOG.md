@@ -9,7 +9,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+-
+
+### added
 - **15_food** half_overweight scenario added
+- **config** added setting cfg$keep_restarts which controls whether restart files should be kept after a run finished
+- **config** changed default for `s_use_gdx` from 2 to 0
+- **scripts** added restart points after each time step from which the model can now be restarted if the simulation aborts at some point
+- **scripts** added SLURM dayMax submission type for standby QOS
+
+
+### removed
+-
+
+### fixed
+-
+
+
+## [4.6.3] - 2023-01-19
+
+### changed
+- **15_food** changed `anthro_iso_jun22` realisation such that results in case of `exo_diet = 1/0` and `exo_waste = 1/0` are identical until 2020
+- **30_crop** identical assumptions for bioenergy until 2020
 - **38_factor_costs** changed name of set `req` to `factors` (also used in 11_costs, 57_maccs, 70_livestock)
 - **38_factos_costs** sticky_labor realization: included option to set a labor share target
 - **62_material** Bioplastic demand identical in all scenarios until 2020
