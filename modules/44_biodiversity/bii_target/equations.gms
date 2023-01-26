@@ -8,6 +8,7 @@
 *' @equations
 
 *' The Biodiversity Intactness Index (BII) is calculated at the level of 71 biomes.
+*' The regional layer is needed for compatibility with the high resolution parallel optimization output script (scripts/output/extra/highres.R)
 
  q44_bii(i2,biome44)$(sum(cell(i2,j2), f44_biome(j2,biome44)) > 0) .. v44_bii(i2,biome44)
  					=e=
