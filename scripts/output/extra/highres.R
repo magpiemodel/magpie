@@ -161,5 +161,10 @@ highres <- function(cfg) {
   Sys.sleep(2)
 
   start_run(cfg,codeCheck=FALSE,lock_model=FALSE)
+  
+  Sys.sleep(1)
+  
+  if (file.exists("modules/32_forestry/input/f32_max_aff_area.cs4")) file.remove("modules/32_forestry/input/f32_max_aff_area.cs4")
+
 }
 highres(cfg)
