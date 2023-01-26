@@ -1,4 +1,4 @@
-.PHONY: help docs update-renv update-renv-all archive-renv restore-renv check check-fix start
+.PHONY: help docs update-renv update-renv-all archive-renv restore-renv check check-fix start output
 .DEFAULT_GOAL := help
 
 # extracts the help text and formats it nicely
@@ -41,3 +41,6 @@ check-fix: ## Check if the GAMS code follows the coding etiquette
 
 start: ## Start a MAgPIE run.
 	Rscript start.R
+
+output: ## Run an output script.
+	Rscript output.R
