@@ -9,7 +9,7 @@
 #### MAgPIE output generation ####
 ##########################################################
 
-if (!is.null(renv::project()) && !exists("source_include")) {
+if (!is.null(renv::project()) && !exists("source_include") && Sys.getenv("SLURM_JOB_ID") == "") {
   ask <- function(question) {
     message(question, appendLF = FALSE)
     return(tolower(gms::getLine()) %in% c("", "y", "yes"))
