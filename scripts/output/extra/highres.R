@@ -108,7 +108,7 @@ highres <- function(cfg) {
   cfg$gms$s80_optfile <- 1
   
   #max resources for parallel runs
-  cfg$qos <- "submit_standby_maxMem_dayMax"
+  cfg$qos <- "standby_maxMem_dayMax"
 
   # set force download to FALSE
   # otherwise data is download again when calling start_run(), which overwrites
