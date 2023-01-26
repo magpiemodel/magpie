@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 *' @description In this realisation, the Biodiversity Intactness Index (BII) is 
-*' calculated at cell level.
+*' calculated separately for each biome type of each biogeographic realm, which results in 71 different spatial units (@olson_biome_2001).
 *' The BII is a relative indicator, wich measures the intactness of local species assemblages (species richness)
 *' compared to a reference state (space-for-time approach) (@purvis_chapter_2018).
 *' The implementation uses the BII coefficients described in @leclere_biodiv_2018 and @leclere_bending_2020.
@@ -15,11 +15,11 @@
 *' @limitations 
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/44_biodiversity/bii_target_cell/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/44_biodiversity/bii_target_cell/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/44_biodiversity/bii_target_cell/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/44_biodiversity/bii_target_cell/equations.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/44_biodiversity/bii_target_cell/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/44_biodiversity/bii_target_cell/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/44_biodiversity/bii_target_cell/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/44_biodiversity/bii_target_reg/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/44_biodiversity/bii_target_reg/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/44_biodiversity/bii_target_reg/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/44_biodiversity/bii_target_reg/equations.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/44_biodiversity/bii_target_reg/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/44_biodiversity/bii_target_reg/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/44_biodiversity/bii_target_reg/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
