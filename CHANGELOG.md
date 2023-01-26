@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
--
+- **config** scenario_fsec.csv updated to new biodiversity scenario
+- **scripts** fsec.R and project_FSEC_Scenarios.R include capitalSubst and landscapeElements scenarios
 
 ### added
 - **15_food** half_overweight scenario added
@@ -23,7 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -
 
 ### fixed
--
+- **59_som** division by zero prevented by if condition
+- **14_yields** nl_fix updated to current equation
 
 
 ## [4.6.3] - 2023-01-19
