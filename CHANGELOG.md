@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **config** scenario_fsec.csv updated input data tgz
 - **config** scenario_fsec.csv updated to new biodiversity scenario
 - **scripts** fsec.R and project_FSEC_Scenarios.R include capitalSubst and landscapeElements scenarios
 - **scripts** highres.R changed default resolution to c1000
