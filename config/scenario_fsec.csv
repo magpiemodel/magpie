@@ -44,8 +44,8 @@ gms$s42_watdem_nonagr_scenario;;;;1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c42_env_flow_policy;off;;;;;;;;;;;;;;;;;;;;;;;;;;;;;on;;;;;;;;;;;;;;
 gms$s42_efp_startyear;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2020;;;;;;;;;;;;;;
 gms$s42_efp_targetyear;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2050;;;;;;;;;;;;;;
-gms$s44_bii_lower_bound;;;;;;;;;;;;;;;;;;;;;;0.76;;;;;;;;;;;;;;;;;;;;;;
-gms$s44_target_year;;;;;;;;;;;;;;;;;;;;;;2050;;;;;;;;;;;;;;;;;;;;;;
+gms$s44_bii_lower_bound;;;;;;;;;;;;;;;;;;;;;;0;;;;;;;;;;;;;;;;;;;;;;
+gms$c44_bii_decrease;;;;;;;;;;;;;;;;;;;;;;0;;;;;;;;;;;;;;;;;;;;;;
 gms$nitrogen;rescaled_jan21;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c50_scen_neff;;;baseeff_add3_add10_add20_max75;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c50_scen_neff_noselect;;;baseeff_add3_add10_add20_max75;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -65,9 +65,9 @@ gms$s62_max_dem_bioplastic;0;;;;400;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c70_fac_req_regr;reg;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c70_feed_scen;;;;;;;;;;;;;;;;;;ssp1;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c73_build_demand;;;;;;;;;;;;;;;;;;;;;;;;50pc;;;;;;;;;;;;;;;;;;;;
-input['cellular'];rev4.79FSEC_e2bdb6cd_1b5c3817_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;rev4.79FSEC_e2bdb6cd_0bd54110_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1.tgz;rev4.79FSEC_e2bdb6cd_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz
-input['regional'];rev4.79FSEC_e2bdb6cd_magpie.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-input['validation'];rev4.79FSEC_e2bdb6cd_validation.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+input['cellular'];rev4.79FSECwageIndex_e2bdb6cd_1b5c3817_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;rev4.79FSECwageIndex_e2bdb6cd_0bd54110_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1.tgz;rev4.79FSECwageIndex_e2bdb6cd_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz
+input['regional'];rev4.79FSECwageIndex_e2bdb6cd_magpie.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+input['validation'];rev4.79FSECwageIndex_e2bdb6cd_validation.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 input['additional'];additional_data_rev4.37.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 input['calibration'];calibration_FSEC_19Jan23.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 magicc_emis_scen;bjoernAR6_C_SSP2-NDC.mif;;;bjoernAR6_C_SSP2-PkBudg900.mif;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;bjoernAR6_C_SSP1-NDC.mif;;;;;;
