@@ -266,9 +266,9 @@ var_reg <- c(indicators_main,
              "Income|Gini Coefficient",
              "Income|Average Income of Lower 40% of Population",
              "Income|Fraction of Population below half of Median Income",
-             "Income|Number of People Below 1.90$/Day",
-             "Income|Number of People Below 3.20$/Day",
-             "Income|Number of People Below 5.50$/Day"
+             "Income|Number of People Below 1p90 USDppp11/day",
+             "Income|Number of People Below 3p20 USDppp11/day",
+             "Income|Number of People Below 5p50 USDppp11/day"
              )
 var_reg <- unique(var_reg)
 
@@ -278,7 +278,7 @@ var_iso <- c("Population",
              "Nutrition|Anthropometrics|People underweight",
              "Nutrition|Anthropometrics|People obese",
              "Household Expenditure|Food|Expenditure",
-             "Income|Number of People Below 3.20$/Day")
+             "Income|Number of People Below 3p20 USDppp11/day")
 var_iso <- unique(var_iso)
 
 for (i in 1:length(outputdir)) {
