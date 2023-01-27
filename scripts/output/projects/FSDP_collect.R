@@ -31,8 +31,8 @@ if(!exists("source_include")) {
 ###############################################################################
 
 # For case of sub-folder structure write to the respective folder
-subfolder <- unlist(lapply(strsplit(x = outputdir, split = "/"), FUN = "[", 2))
-title <- basename(outputdir)
+subfolder <- unlist(lapply(strsplit(x = outputdir, split = "/"), FUN = "[", 3))
+title     <- basename(outputdir)
 
 if (all(subfolder == title)) {
   subfolder <- ""
@@ -453,7 +453,7 @@ saveRDS(val, file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_va
 message("Plotting figures ...")
 #Add new plots here:
 #https://github.com/pik-piam/m4fsdp/blob/master/R/plotFSDP.R
-plotFSDP(outputfolder = file.path("output",unique(subfolder)),
+plotFSDP(outputfolder = file.path("output", unique(subfolder)),
          reg = reg,
          iso = iso,
          grid = grid,
