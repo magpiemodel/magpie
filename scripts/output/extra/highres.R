@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -50,7 +50,7 @@ highres <- function(cfg) {
   cfg$output <- cfg$output[cfg$output!="extra/highres"]
 
   # set high resolution, available options are c1000 and c2000
-  res <- "c2000"
+  res <- "c1000"
 
   # search for matching high resolution file in repositories
   # pattern: "rev4.65_h12_*_cellularmagpie_c2000_MRI-ESM2-0-ssp370_lpjml-3eb70376.tgz"
@@ -105,16 +105,21 @@ highres <- function(cfg) {
   cfg$files2export$start <- c(cfg$files2export$start,
                               paste0(cfg$results_folder,"/","magpie_y1995.gdx"))
   cfg$gms$s_use_gdx <- 1
-
+  cfg$gms$s80_optfile <- 1
+  
   #max resources for parallel runs
-  cfg$qos <- "priority_maxMem"
+  cfg$qos <- "standby_maxMem_dayMax"
+
+  # set force download to FALSE
+  # otherwise data is download again when calling start_run(), which overwrites
+  # f21_trade_balance.cs3, f13_tau_scenario.csv, f32_max_aff_area.cs4 etc
+  cfg$force_download <- FALSE
 
   #download input files with high resolution
   download_and_update(cfg)
 
-  #set title
-  cfg$title <- paste0("HR_",cfg$title)
-  cfg$results_folder <- "output/:title:"
+  # set title
+  cfg$results_folder <- "output/HR/:title:"
   cfg$force_replace <- TRUE
   cfg$recalc_npi_ndc <- TRUE
 
@@ -156,5 +161,10 @@ highres <- function(cfg) {
   Sys.sleep(2)
 
   start_run(cfg,codeCheck=FALSE,lock_model=FALSE)
+  
+  Sys.sleep(1)
+  
+  if (file.exists("modules/32_forestry/input/f32_max_aff_area.cs4")) file.remove("modules/32_forestry/input/f32_max_aff_area.cs4")
+
 }
 highres(cfg)

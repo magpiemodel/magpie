@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -17,6 +17,8 @@
 *' [@FAOSTAT]. For the simulation of the temporal development of agricultural
 *' yields, the module receives information about the agricultural land use
 *' intensity represented by the $\tau$ factor coming from the module [13_tc].
+*' Irrigated yields can optionally be calibrated to meet irrigated-rainfed
+*' country-level yield ratios as reported by Aquastat [@fao_aquastat_2016].
 *'
 *' The module returns yields for all crops and for pasture, which is then used
 *' by the modules [30_crop] and [31_past].

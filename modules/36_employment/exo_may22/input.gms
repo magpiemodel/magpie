@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -6,7 +6,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
-s36_weeks_in_year number of weeks in a year  / 52.1429 /
+s36_weeks_in_year number of weeks in a year (weeks per yr) / 52.1429 /
+s36_minimum_wage global minimum wage (USDMER05 per hour) / 0 /
+s36_scale_productivity_with_wage how strong the wage increase should affect labor productivity (1) / 0 /
 ;
 
 table f36_weekly_hours(t_all,i) Historical values of average weekly hours worked per person in agriculture (h per week)
@@ -66,3 +68,5 @@ $ondelim
 $include "./modules/36_employment/exo_may22/input/f36_historical_share.csv"
 $offdelim
 ;
+
+

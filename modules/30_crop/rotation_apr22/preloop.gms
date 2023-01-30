@@ -1,19 +1,25 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* create crop rotation scenario
 
+** Trajectory for cropland scenarios
+* sigmoidal interpolation between start year and target year
+m_sigmoid_interpol(p30_snv_scenario_fader,s30_snv_scenario_start,s30_snv_scenario_target,0,1);
+m_sigmoid_interpol(p30_rotation_scenario_fader,s30_rotation_scenario_start,s30_rotation_scenario_target,0,1);
+
+
+** create crop rotation scenario
 i30_rotation_max_shr(t_all,rotamax30)=
-  f30_rotation_max_shr(rotamax30,"default") * (1-f30_scenario_fader(t_all,"%c30_rotation_scenario_speed%"))+
-  f30_rotation_max_shr(rotamax30,"%c30_rotation_scenario%") * (f30_scenario_fader(t_all,"%c30_rotation_scenario_speed%"));
+  f30_rotation_max_shr(rotamax30,"default") * (1-p30_rotation_scenario_fader(t_all))+
+  f30_rotation_max_shr(rotamax30,"%c30_rotation_scenario%") * (p30_rotation_scenario_fader(t_all));
 
 i30_rotation_min_shr(t_all,rotamin30)=
-  f30_rotation_min_shr(rotamin30,"default") * (1-f30_scenario_fader(t_all,"%c30_rotation_scenario_speed%"))+
-  f30_rotation_min_shr(rotamin30,"%c30_rotation_scenario%") * (f30_scenario_fader(t_all,"%c30_rotation_scenario_speed%"));
+  f30_rotation_min_shr(rotamin30,"default") * (1-p30_rotation_scenario_fader(t_all))+
+  f30_rotation_min_shr(rotamin30,"%c30_rotation_scenario%") * (p30_rotation_scenario_fader(t_all));
 
 
 *due to some rounding errors the input data currently may contain in some cases
@@ -30,4 +36,5 @@ p30_country_dummy(policy_countries30) = 1;
 * share is calculated that translates the countries' influence to regional level.
 * Countries are weighted by available cropland area.
 i30_avl_cropland_iso(iso) = f30_avl_cropland_iso(iso,"%c30_marginal_land%");
-p30_region_snv_shr(i) = sum(i_to_iso(i,iso), p30_country_dummy(iso) * i30_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), i30_avl_cropland_iso(iso));
+p30_country_snv_weight(i) = sum(i_to_iso(i,iso), p30_country_dummy(iso) * i30_avl_cropland_iso(iso)) / sum(i_to_iso(i,iso), i30_avl_cropland_iso(iso));
+

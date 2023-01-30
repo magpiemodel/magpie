@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -13,6 +13,5 @@
 *' @authors Benjamin Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%nr_soil_budget%" == "exoeff_aug16" $include "./modules/50_nr_soil_budget/exoeff_aug16/realization.gms"
-$Ifi "%nr_soil_budget%" == "off" $include "./modules/50_nr_soil_budget/off/realization.gms"
+$Ifi "%nr_soil_budget%" == "macceff_aug22" $include "./modules/50_nr_soil_budget/macceff_aug22/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

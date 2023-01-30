@@ -1,4 +1,4 @@
-# |  (C) 2008-2022 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -31,20 +31,23 @@ if (!exists("source_include")) {
 #########################################################################################
 
 message("Script started for output directory: ", outputdir)
-cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
+cfg   <- gms::loadConfig(file.path(outputdir, "config.yml"))
 title <- cfg$title
 
-message("Generating StevenLord output for the run: ", title)
-gdx <- file.path(outputdir, "fulldata.gdx")
-
-baseDir <- getwd()
-stevenLordOutputDir <- file.path(baseDir, "output", "StevenLord")
-if (!dir.exists(stevenLordOutputDir)) {
-    dir.create(stevenLordOutputDir)
+message("Creating an output directory for Steven Lord's datasets")
+stevenLordDir <- file.path(".", "output", "StevenLord")
+if (!dir.exists(stevenLordDir)) {
+    dir.create(stevenLordDir)
 }
 
-# Grid-level nitrogen pollution
-out <- getReportFSECStevenLord(gdx = gdx,
-                               reportOutputDir = stevenLordOutputDir,
-                               magpieOutputDir = outputdir,
+reportOutputDir <- file.path(stevenLordDir, title)
+if (dir.exists(reportOutputDir)) {
+    message("Warning in FSEC_StevenLord: Output directory for " , title, " already exists. Results will be overwritten.")
+}
+suppressWarnings(dir.create(reportOutputDir))
+
+message("Generating Steven Lord's output for the run: ", title)
+
+out <- getReportFSECStevenLord(magpieOutputDir = outputdir,
+                               reportOutputDir = reportOutputDir,
                                scenario = title)

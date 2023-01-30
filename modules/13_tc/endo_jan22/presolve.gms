@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -16,7 +16,7 @@ else
 	vm_tau.lo(h, tautype) =    pcm_tau(h, tautype);
 );
 
-	vm_tau.up(h,tautype) =  3 * pcm_tau(h,tautype);
+	vm_tau.up(h,tautype) =  2 * pcm_tau(h,tautype);
 
 * educated guess for vm_tau.l:
 if(ord(t) = 1,
@@ -25,7 +25,7 @@ else
 	vm_tau.l(h,tautype) = pcm_tau(h,tautype)*(1+pc13_tcguess(h,tautype))**m_yeardiff(t);
 );
 
-vm_tau.up(h,tautype) = 3 * pcm_tau(h,tautype);
+vm_tau.up(h,tautype) = 2 * pcm_tau(h,tautype);
 
 if(m_year(t) > sm_fix_SSP2 AND s13_max_gdp_shr <> Inf,
 

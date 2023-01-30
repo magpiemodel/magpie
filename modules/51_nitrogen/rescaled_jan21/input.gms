@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -10,13 +10,13 @@ Scalar s51_nue_pasture_base assumption on implicit SNuPE in ipcc guidelines (1) 
 
 table f51_ipcc_ef(ipcc_ef51,emis_uncertainty51) ipcc emission factors for various emission types X (tX-N per tN)
 $ondelim
-$include "./modules/51_nitrogen/input/f51_ipcc_ef.csv"
+$include "./modules/51_nitrogen/rescaled_jan21/input/f51_ipcc_ef.csv"
 $offdelim
 ;
 
 table f51_ef_n_soil(t_all,i,n_pollutants_direct,emis_source_n_cropsoils51) ipcc emission factors for various emission types X (tX-N per tN)
 $ondelim
-$include "./modules/51_nitrogen/input/f51_ef_n_soil_reg.cs3"
+$include "./modules/51_nitrogen/rescaled_jan21/input/f51_ef_n_soil_reg.cs3"
 $offdelim
 ;
 

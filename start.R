@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -9,24 +9,30 @@
 #### MAgPIE output generation ####
 ##########################################################
 
+if (!is.null(renv::project())) {
+  ask <- function(question) {
+    message(question, appendLF = FALSE)
+    return(tolower(gms::getLine()) %in% c("", "y", "yes"))
+  }
+
+  message("Checking for updates... ", appendLF = FALSE)
+  if (getOption("autoRenvUpdates", FALSE) ||
+        (!is.null(piamenv::showUpdates()) && ask("Update now? (Y/n): "))) {
+    updates <- piamenv::updateRenv()
+    piamenv::stopIfLoaded(names(updates))
+  }
+  message("Update check done.")
+
+  message("Checking package version requirements... ", appendLF = FALSE)
+  updates <- piamenv::fixDeps(ask = TRUE)
+  piamenv::stopIfLoaded(names(updates))
+  message("Requirements check done.")
+}
+
 library(lucode2)
 library(gms)
 
 runOutputs <- function(runscripts=NULL, submit=NULL) {
-
-  get_line <- function(){
-    # gets characters (line) from the terminal or from a connection
-    # and returns it
-    if(interactive()){
-      s <- readline()
-    } else {
-      con <- file("stdin")
-      s <- readLines(con, 1, warn=FALSE)
-      on.exit(close(con))
-    }
-    return(s);
-  }
-
   choose_submit <- function(title="Please choose run submission type") {
     slurm <- suppressWarnings(ifelse(system2("srun",stdout=FALSE,stderr=FALSE) != 127, TRUE, FALSE))
     modes <- c("SLURM priority",
@@ -43,9 +49,9 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
       modes <- grep("SLURM",modes,invert=TRUE,value=TRUE)
     }
     cat("\n",title,":\n", sep="")
-    cat(paste(1:length(modes), modes, sep=": " ),sep="\n")
+    cat(paste(seq_along(modes), modes, sep=": " ),sep="\n")
     cat("Number: ")
-    identifier <- get_line()
+    identifier <- gms::getLine()
     identifier <- as.numeric(strsplit(identifier,",")[[1]])
     if(slurm) {
       comp <- switch(identifier,
@@ -66,6 +72,8 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
   }
 
   runsubmit <- function(runscripts, submit) {
+    if(!dir.exists("logs")) dir.create("logs")
+    
     for(rout in runscripts){
       name   <- paste0("./scripts/start/",rout)
       if(!file.exists(name)) {
@@ -79,14 +87,14 @@ runOutputs <- function(runscripts=NULL, submit=NULL) {
 
       cat("Executing",name,"\n")
       rout_name <- sub("\\.R$","",sub("/","_",rout))
-      sbatch_command <- paste0("sbatch --job-name=",rout_name," --output=",rout_name,"-%j.out --mail-type=END --wrap=\"Rscript ",name,"\"")
+      sbatch_command <- paste0("sbatch --job-name=",rout_name," --output=logs/",rout_name,"-%j.out --mail-type=END --wrap=\"Rscript ",name,"\"")
       if(submit=="direct") {
         tmp.env <- new.env()
         tmp.error <- try(sys.source(name,envir=tmp.env))
         if(!is.null(tmp.error)) warning("Script ",name," was stopped by an error and not executed properly!")
         rm(tmp.env)
       } else if(submit=="background") {
-        log <- format(Sys.time(), paste0(rout_name,"-%Y-%H-%M-%S-%OS3.log"))
+        log <- format(Sys.time(), paste0("logs/", rout_name, "-%Y-%H-%M-%S-%OS3.log"))
         system2("Rscript",name, stderr = log, stdout = log, wait=FALSE)
       } else if(submit=="slurmpriority") {
         system(paste(sbatch_command,"--qos=priority"))

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -40,6 +40,10 @@ inter32 Interpolation of scenario from FAO study on proportion of roundwood prod
 
 scen32 Scenario for development of roundwood production share from plantations
 / constant,h5s5l5,h5s2l2,h5s2l1,h5s1l1,h5s1l05,h2s1l05 /
+
+ shock_scen32 Scenario name of forest carbon shock
+ / none, 002lin2030,004lin2030,008lin2030,016lin2030
+  /
 
 ;
 

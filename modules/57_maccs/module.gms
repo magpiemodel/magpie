@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -17,13 +17,12 @@
 *' Their direct consequences on biophysical values like yields or water requirements is ignored at the moment.
 *'
 *' Mitigation costs are estimated using marginal abatement cost curves (MACCs).
-*' The curves are applied on the original emissions before technical mitigation (btm),
+*' The curves are applied on the original emissions,
 *' and reduce them by a certain percentage in exchange for additional costs.
-*' The MACCs used in this module are based on the data from @LUCAS200785.  
+*' The MACCs used in this module are based on the data from @LUCAS200785.
 *'
 *' @authors Benjamin Leon Bodirsky, Florian Humpenoeder
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%maccs%" == "off_jul16" $include "./modules/57_maccs/off_jul16/realization.gms"
-$Ifi "%maccs%" == "on_sep16" $include "./modules/57_maccs/on_sep16/realization.gms"
+$Ifi "%maccs%" == "on_aug22" $include "./modules/57_maccs/on_aug22/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################

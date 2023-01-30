@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -15,6 +15,6 @@
 *' @authors Benjamin Leon Bodirsky
 
 *###################### R SECTION START (MODULETYPES) ##########################
-$Ifi "%methane%" == "ipcc2006_flexreg_apr16" $include "./modules/53_methane/ipcc2006_flexreg_apr16/realization.gms"
+$Ifi "%methane%" == "ipcc2006_aug22" $include "./modules/53_methane/ipcc2006_aug22/realization.gms"
 $Ifi "%methane%" == "off" $include "./modules/53_methane/off/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
