@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -8,10 +8,13 @@
 *' @equations
 
  q38_cost_prod_crop_labor(i2) ..
-  vm_cost_prod_crop(i2,"labor") =e= sum(kcr, vm_prod_reg(i2,kcr) * sum(ct,i38_fac_req(ct,i2,kcr))) * sum(ct,p38_cost_share(ct,i2,"labor") * (1/pm_productivity_gain_from_wages(ct,i2)) * (pm_hourly_costs(ct,i2,"scenario") / pm_hourly_costs(ct,i2,"baseline")));
+  vm_cost_prod_crop(i2,"labor") =e= sum(kcr, vm_prod_reg(i2,kcr) * sum(ct,i38_fac_req(ct,i2,kcr))) * 
+                                    sum(ct,pm_cost_share_crops(ct,i2,"labor") * (1/pm_productivity_gain_from_wages(ct,i2)) * 
+                                    (pm_hourly_costs(ct,i2,"scenario") / pm_hourly_costs(ct,i2,"baseline")));
 
  q38_cost_prod_crop_capital(i2) ..
-  vm_cost_prod_crop(i2,"capital") =e= sum(kcr, vm_prod_reg(i2,kcr) * sum(ct,i38_fac_req(ct,i2,kcr)))* sum(ct,p38_cost_share(ct,i2,"capital"));
+  vm_cost_prod_crop(i2,"capital") =e= sum(kcr, vm_prod_reg(i2,kcr) * sum(ct,i38_fac_req(ct,i2,kcr))) *
+                                      sum(ct,pm_cost_share_crops(ct,i2,"capital"));
 
 *' The factor costs for crops `vm_cost_prod_crop` are calculated as product of
 *' production quantity `vm_prod_reg` and crop-specific factor requirements

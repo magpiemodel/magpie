@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -22,6 +22,7 @@
  oq30_carbon(t,j,ag_pools,stockType,"marginal")    = q30_carbon.m(j,ag_pools,stockType);
  oq30_bv_ann(t,j,potnatveg,"marginal")             = q30_bv_ann.m(j,potnatveg);
  oq30_bv_per(t,j,potnatveg,"marginal")             = q30_bv_per.m(j,potnatveg);
+ oq30_land_snv(t,j,"marginal")                     = q30_land_snv.m(j);
  ov_fallow(t,j,"level")                            = vm_fallow.l(j);
  ov_area(t,j,kcr,w,"level")                        = vm_area.l(j,kcr,w);
  ov_rotation_penalty(t,i,"level")                  = vm_rotation_penalty.l(i);
@@ -37,6 +38,7 @@
  oq30_carbon(t,j,ag_pools,stockType,"level")       = q30_carbon.l(j,ag_pools,stockType);
  oq30_bv_ann(t,j,potnatveg,"level")                = q30_bv_ann.l(j,potnatveg);
  oq30_bv_per(t,j,potnatveg,"level")                = q30_bv_per.l(j,potnatveg);
+ oq30_land_snv(t,j,"level")                        = q30_land_snv.l(j);
  ov_fallow(t,j,"upper")                            = vm_fallow.up(j);
  ov_area(t,j,kcr,w,"upper")                        = vm_area.up(j,kcr,w);
  ov_rotation_penalty(t,i,"upper")                  = vm_rotation_penalty.up(i);
@@ -52,6 +54,7 @@
  oq30_carbon(t,j,ag_pools,stockType,"upper")       = q30_carbon.up(j,ag_pools,stockType);
  oq30_bv_ann(t,j,potnatveg,"upper")                = q30_bv_ann.up(j,potnatveg);
  oq30_bv_per(t,j,potnatveg,"upper")                = q30_bv_per.up(j,potnatveg);
+ oq30_land_snv(t,j,"upper")                        = q30_land_snv.up(j);
  ov_fallow(t,j,"lower")                            = vm_fallow.lo(j);
  ov_area(t,j,kcr,w,"lower")                        = vm_area.lo(j,kcr,w);
  ov_rotation_penalty(t,i,"lower")                  = vm_rotation_penalty.lo(i);
@@ -67,4 +70,5 @@
  oq30_carbon(t,j,ag_pools,stockType,"lower")       = q30_carbon.lo(j,ag_pools,stockType);
  oq30_bv_ann(t,j,potnatveg,"lower")                = q30_bv_ann.lo(j,potnatveg);
  oq30_bv_per(t,j,potnatveg,"lower")                = q30_bv_per.lo(j,potnatveg);
+ oq30_land_snv(t,j,"lower")                        = q30_land_snv.lo(j);
 *##################### R SECTION END (OUTPUT DEFINITIONS) ######################

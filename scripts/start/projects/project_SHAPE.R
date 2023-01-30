@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -28,7 +28,7 @@ source("config/default.cfg")
 
 ### General configurations
 
-prefix <- "R0_v3_SHAPE"
+prefix <- "R5_SHAPE"
 cfg$results_folder <- "output/:title:"
 cfg$output <- c("rds_report") # Only run rds_report after model run
 
