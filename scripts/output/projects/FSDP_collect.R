@@ -278,7 +278,8 @@ var_iso <- c("Population",
              "Nutrition|Anthropometrics|People underweight",
              "Nutrition|Anthropometrics|People obese",
              "Household Expenditure|Food|Expenditure",
-             "Income|Number of People Below 3p20 USDppp11/day")
+             "Income|Number of People Below 3p20 USDppp11/day",
+             "Income|Gini Coefficient")
 var_iso <- unique(var_iso)
 
 for (i in 1:length(outputdir)) {
