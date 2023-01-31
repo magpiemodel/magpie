@@ -90,15 +90,16 @@ file.create(caloricSupply_mergePath, dietaryIndicators_mergePath)
 dietRelatedScenarios <- c("c_BAU",
                           "d_SSP1bau", "d_SSP1PLUSbau", "d_SSP2bau", "d_SSP3bau", "d_SSP4bau", "d_SSP5bau",
                           "d_SSP1fsdp", "d_SSP1PLUSfsdp", "d_SSP2fsdp", "d_SSP3fsdp", "d_SSP4fsdp", "d_SSP5fsdp",
-                           "a_NoUnderweight", "a_NoOverweight",
-                           "a_DietVegFruitsNutsSeeds", "a_DietMonogastrics", "a_DietRuminants",
-                           "a_DietLegumes", "a_DietEmptyCals", "a_DietFish",
-                           "a_LessFoodWaste",
-                           "e_FSDP",
-                           "b_REDDaffRuminants", "b_DietRotations", "b_MonogastricsRotations",
-                           "b_TradeMonogastrics", "b_TradeRuminants", "b_TradeVeggies",
-                           "b_MonogastricsVeggies", "b_SoilMonogastric_", "b_SoilMonogastricRuminants_",
-                           "b_AllNitrogen", "b_AllHealth", "b_Efficiency", "b_Sufficiency")
+                          "a_NoUnderweight", "a_HalfOverweight", "a_NoOverweight",
+                          "a_DietVegFruitsNutsSeeds", "a_DietMonogastrics", "a_DietRuminants",
+                          "a_DietLegumes", "a_DietEmptyCals", "a_DietFish",
+                          "a_LessFoodWaste",
+                          "a_Population", "a_EconDevelop",
+                          "e_FSDP",
+                          "b_REDDaffRuminants", "b_Diet", "b_DietRotations", "b_MonogastricsRotations",
+                          "b_ExternalPressures", "b_TradeMonogastrics", "b_TradeRuminants", "b_TradeVeggies",
+                          "b_MonogastricsVeggies", "b_SoilMonogastric_", "b_SoilMonogastricRuminants_",
+                          "b_AllNitrogen", "b_AllHealth", "b_Efficiency", "b_Sufficiency")
 
 outputdir_diets <- lapply(X = dietRelatedScenarios, FUN = function(.x) grep(x = outputdir, pattern = .x, value = TRUE))
 outputdir_diets <- unlist(outputdir_diets)
