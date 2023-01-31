@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** added SLURM dayMax submission type for standby QOS
 
 ### fixed
+- **scripts** fixed a bug where renvs for high resolution runs were missing some packages
 - **44_biodiversity** added regional layer `i` in `bii_target` realisation to make it compatible with the high-resolution parallel optimization output script
 
 ### removed
