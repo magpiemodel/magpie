@@ -285,6 +285,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
       renv::init() # will overwrite renv.lock if existing...
       file.rename("_renv.lock", "renv.lock") # so we need this rename
       renv::restore(prompt = FALSE)
+      message("renv creation done.")
     }
 
     renvLogPath <- file.path(cfg$results_folder, "log_renv.txt")
