@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **config** scenario_fsec.csv updated to new biodiversity scenario
 - **scripts** fsec.R and project_FSEC_Scenarios.R include capitalSubst and landscapeElements scenarios
 - **scripts** highres.R changed default resolution to c1000
+- **scripts** when manually running output scripts for multiple runs the lockfile is only created once
 
 ### added
 - **15_food** half_overweight scenario added
@@ -21,14 +22,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** added restart points after each time step from which the model can now be restarted if the simulation aborts at some point
 - **scripts** added SLURM dayMax submission type for standby QOS
 
-### fixed
-- **scripts** fixed a bug where renvs for high resolution runs were missing some packages
-- **44_biodiversity** added regional layer `i` in `bii_target` realisation to make it compatible with the high-resolution parallel optimization output script
-
 ### removed
 -
 
 ### fixed
+- **scripts** fixed a bug where renvs for high resolution runs were missing some packages
+- **44_biodiversity** added regional layer `i` in `bii_target` realisation to make it compatible with the high-resolution parallel optimization output script
 - **59_som** division by zero prevented by if condition
 - **14_yields** nl_fix updated to current equation
 
