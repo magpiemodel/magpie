@@ -120,6 +120,9 @@ indicators_main <- getVariables()
 names(indicators_main) <- NULL
 var_reg <- c(indicators_main,
              ### Validation
+             "Biodiversity|Agricultural landscape intactness",
+             "Biodiversity|Biodiversity hotspot intactness",
+             "Biodiversity|Biodiversity hotspot intactness (unitless)",
              "Population",
              "Income",
              "Nutrition|Calorie Supply|+|Crops",
@@ -336,7 +339,7 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing, nc_file)
 
     ## Crop diversity
-    nc_file <- file.path(outputdir[i], paste0(cfg$title, "-CropDiversityGridded.nc"))
+    nc_file <- file.path(outputdir[i], paste0(cfg$title, "-CropDiversityGridded.mz"))
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years, "ShannonCropDiversity"]
       getNames(a) <- "Shannon crop diversity (index)"
