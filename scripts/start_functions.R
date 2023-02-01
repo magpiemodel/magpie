@@ -264,26 +264,37 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   if (is.null(renv::project())) {
     message("No active renv project found, not using renv.")
   } else {
-    message("Generating lockfile '", file.path(cfg$results_folder, "renv.lock"), "'... ", appendLF = FALSE)
-    # suppress output of renv::snapshot
-    utils::capture.output({
+    # this script always runs in repo root, so we can check whether the main renv is loaded with:
+    if (normalizePath(renv::project()) == normalizePath(".")) {
+      message("Generating lockfile in '", cfg$results_folder, "'... ", appendLF = FALSE)
+      # suppress output of renv::snapshot
       utils::capture.output({
-        # snapshot current main renv into run folder
-        renv::snapshot(lockfile = file.path(cfg$results_folder, "main_renv.lock"), prompt = FALSE)
-      }, type = "message")
-    })
-    message("done.")
+        utils::capture.output({
+          # snapshot current main renv into run folder
+          renv::snapshot(lockfile = file.path(cfg$results_folder, "_renv.lock"), prompt = FALSE)
+        }, type = "message")
+      })
+      message("done.")
+    } else {
+      # a run renv is loaded, we are presumably starting a HR follow up run
+      message("Copying lockfile into '", cfg$results_folder, "'")
+      file.copy(renv::paths$lockfile(), file.path(cfg$results_folder, "_renv.lock"))
+    }
 
-    message("Creating renv in '", cfg$results_folder, "'... ", appendLF = FALSE)
     createResultsfolderRenv <- function() {
       renv::init() # will overwrite renv.lock if existing...
-      file.rename("main_renv.lock", "renv.lock") # so we need this rename
+      file.rename("_renv.lock", "renv.lock") # so we need this rename
       renv::restore(prompt = FALSE)
+      message("renv creation done.")
     }
+
+    renvLogPath <- file.path(cfg$results_folder, "log_renv.txt")
+    message("Initializing run renv, see '", renvLogPath, "'...", appendLF = FALSE)
     # init renv in a separate session so the libPaths of the current session remain unchanged
     callr::r(createResultsfolderRenv,
              wd = cfg$results_folder,
-             env = c(RENV_PATHS_LIBRARY = "renv/library"))
+             env = c(RENV_PATHS_LIBRARY = "renv/library"),
+             stdout = renvLogPath, stderr = "2>&1")
     message("done.")
   }
 
