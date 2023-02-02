@@ -1,7 +1,8 @@
 #!/usr/bin/env Rscript
 
-if (packageVersion("gms") < "0.24.0") {
-  stop("gms >= 0.24.0 is required to check files for tabs, please update with `install.packages('gms')`.")
+if (!requireNamespace("gms", quietly = TRUE) || packageVersion("gms") < "0.24.0") {
+  message("gms >= 0.24.0 is required, installing now...")
+  install.packages("gms")
 }
 
 message("Checking files for tabs... ", appendLF = FALSE)
