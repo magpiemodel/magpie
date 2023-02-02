@@ -1,4 +1,7 @@
 Package: magpiemodel
+Description: Refer to README.md for a description of the MAgPIE model.
+    This file only lists dependencies and is called DESCRIPTION for
+    technical reasons.
 Imports:
     callr,
     citation,
@@ -36,3 +39,4 @@ Imports:
 Suggests:
     goxygen,
     qgraph
+Encoding: UTF-8
