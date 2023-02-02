@@ -28,7 +28,7 @@ if(!exists("source_include")) {
 }
 
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
-gdx	<- file.path(outputdir,"fulldata.gdx")
+gdx <- file.path(outputdir,"fulldata.gdx")
 rds <- paste0(outputdir, "/report.rds")
 runstatistics <- paste0(outputdir,"/runstatistics.rda")
 resultsarchive <- "/p/projects/rd3mod/models/results/magpie"

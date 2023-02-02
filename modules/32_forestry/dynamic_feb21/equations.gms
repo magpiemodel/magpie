@@ -21,11 +21,11 @@
 *' in a parametrized form.
 
 q32_cost_total(i2) .. vm_cost_fore(i2) =e=
-								   v32_cost_recur(i2)
-								   + v32_cost_establishment(i2)
-								   + v32_cost_hvarea(i2)
-								   + sum(cell(i2,j2), v32_land_missing(j2)) * s32_free_land_cost
-								   ;
+                   v32_cost_recur(i2)
+                   + v32_cost_establishment(i2)
+                   + v32_cost_hvarea(i2)
+                   + sum(cell(i2,j2), v32_land_missing(j2)) * s32_free_land_cost
+                   ;
 
 *-----------------------------------------------
 ****** Carbon price induced afforestation ******
@@ -68,11 +68,11 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
 *' Only one of the two constraints is active, depending on `s32_max_aff_area_glo`.
 
  q32_max_aff$(s32_max_aff_area_glo=1) .. 
- 	sum((j2,ac), v32_land(j2,"aff",ac))
-    	=l= sum(ct, i32_max_aff_area_glo(ct));
+  sum((j2,ac), v32_land(j2,"aff",ac))
+      =l= sum(ct, i32_max_aff_area_glo(ct));
 
  q32_max_aff_reg(i2)$(s32_max_aff_area_glo=0) .. 
- 	sum((cell(i2,j2),ac), v32_land(j2,"aff",ac))
+  sum((cell(i2,j2),ac), v32_land(j2,"aff",ac))
         =l= sum(ct, i32_max_aff_area_reg(ct,i2));
 
 *-----------------------------------------------
@@ -82,36 +82,36 @@ sum(ac_est, v32_land(j2,"aff",ac_est)) =l= sum(ac, v32_land(j2,"aff",ac)) - sum(
 *' weighted mean of carbon density for carbon pools (`p32_carbon_density_ac`).
 
  q32_carbon(j2,ag_pools,stockType) .. vm_carbon_stock(j2,"forestry",ag_pools,stockType) =e=
- 						m_carbon_stock_ac(v32_land,p32_carbon_density_ac,"type32,ac","type32,ac_sub");
+            m_carbon_stock_ac(v32_land,p32_carbon_density_ac,"type32,ac","type32,ac_sub");
 
 *' Forestry land expansion and reduction is calculated as follows:
 
  q32_land_diff .. vm_landdiff_forestry =e= sum((j2,type32,ac),
- 					  v32_land_expansion(j2,type32,ac)
- 					+ v32_land_reduction(j2,type32,ac));
+            v32_land_expansion(j2,type32,ac)
+          + v32_land_reduction(j2,type32,ac));
 
  q32_land_expansion(j2,type32,ac_est) ..
-	 	v32_land_expansion(j2,type32,ac_est) =e= v32_land(j2,type32,ac_est) - pc32_land(j2,type32,ac_est);
+    v32_land_expansion(j2,type32,ac_est) =e= v32_land(j2,type32,ac_est) - pc32_land(j2,type32,ac_est);
 
  q32_land_reduction(j2,type32,ac_sub) ..
- 	v32_land_reduction(j2,type32,ac_sub) =e= pc32_land(j2,type32,ac_sub) - v32_land(j2,type32,ac_sub);
+  v32_land_reduction(j2,type32,ac_sub) =e= pc32_land(j2,type32,ac_sub) - v32_land(j2,type32,ac_sub);
 
 *------------------------------------------
 *********** Biodiversity value ************
 *------------------------------------------
 
 q32_bv_aff(j2,potnatveg) .. vm_bv(j2,"aff_co2p",potnatveg)
- 				  =e=
+          =e=
           sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v32_land(j2,"aff",ac)) * 
           p32_bii_coeff("aff",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);
 
 q32_bv_ndc(j2,potnatveg) .. vm_bv(j2,"aff_ndc",potnatveg)
- 					=e=
+          =e=
           sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v32_land(j2,"ndc",ac)) * 
           p32_bii_coeff("ndc",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);
 
 q32_bv_plant(j2,potnatveg) .. vm_bv(j2,"plant",potnatveg)
- 					=e=
+          =e=
           sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v32_land(j2,"plant",ac)) * 
           p32_bii_coeff("plant",bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);
 
@@ -131,8 +131,8 @@ q32_bv_plant(j2,potnatveg) .. vm_bv(j2,"plant",potnatveg)
 *' investment over time.
 
 q32_cost_establishment(i2)..
-						v32_cost_establishment(i2)
-						=e=
+            v32_cost_establishment(i2)
+            =e=
             (sum((cell(i2,j2),type32,ac_est), v32_land(j2,type32,ac_est) * s32_reESTBcost)
               )
             * sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)));
@@ -171,9 +171,9 @@ q32_establishment_dynamic(i2)$s32_establishment_dynamic ..
 *' Constraint to maintain the average regional timber yield at rotation age, accounting for the cellular timber yield (`pc32_yield_forestry_future`).
 
 q32_establishment_dynamic_yield(i2)$s32_establishment_dynamic ..
-			sum(cell(i2,j2), (sum(ac_est, v32_land(j2,"plant",ac_est))+v32_land_missing(j2)) * pc32_yield_forestry_future(j2))
-			=e=
-			pc32_yield_forestry_future_reg(i2) * (sum(cell(i2,j2), sum(ac_est, v32_land(j2,"plant",ac_est))+v32_land_missing(j2)));
+      sum(cell(i2,j2), (sum(ac_est, v32_land(j2,"plant",ac_est))+v32_land_missing(j2)) * pc32_yield_forestry_future(j2))
+      =e=
+      pc32_yield_forestry_future_reg(i2) * (sum(cell(i2,j2), sum(ac_est, v32_land(j2,"plant",ac_est))+v32_land_missing(j2)));
 
 *' If plantations have to be static (defined by `s32_establishment_static`) then
 *' the model simply establishes the amount of plantations which are harvested.
@@ -181,7 +181,7 @@ q32_establishment_dynamic_yield(i2)$s32_establishment_dynamic ..
 *' regrowth during every time step.
 
 q32_establishment_fixed(j2)$s32_establishment_static ..
-	sum(ac, v32_land(j2,"plant",ac)) =e= sum(ac, pc32_land(j2,"plant",ac));
+  sum(ac, v32_land(j2,"plant",ac)) =e= sum(ac, pc32_land(j2,"plant",ac));
 
 
 *' This constraint distributes additions to forestry land over ac_est,

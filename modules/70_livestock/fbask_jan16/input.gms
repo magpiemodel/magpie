@@ -23,7 +23,7 @@ $setglobal c70_fac_req_regr  glo
 
 scalars
   s70_pyld_intercept     Intercept of linear relationship determining pasture intensification (1)        / 0.24 /
-  s70_past_mngmnt_factor_fix	Year until the pasture management factor is fixed to 1		/ 2005 /	
+  s70_past_mngmnt_factor_fix  Year until the pasture management factor is fixed to 1    / 2005 /  
 ;
 
 table f70_feed_baskets(t_all,i,kap,kall,feed_scen70) Feed baskets in tDM per tDM livestock product (1)
@@ -92,7 +92,7 @@ $offdelim
 * Default: all iso countries selected
 sets
   scen_countries70(iso) countries to be affected by selected feed sceanrio / 
-  						  ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
+                ABW,AFG,AGO,AIA,ALA,ALB,AND,ARE,ARG,ARM,
                           ASM,ATA,ATF,ATG,AUS,AUT,AZE,BDI,BEL,BEN,
                           BES,BFA,BGD,BGR,BHR,BHS,BIH,BLM,BLR,BLZ,
                           BMU,BOL,BRA,BRB,BRN,BTN,BVT,BWA,CAF,CAN,
