@@ -109,17 +109,21 @@ consv_prio_hr <- NULL
 if (!all(c(cfg$gms$c22_protect_scenario, cfg$gms$c22_protect_scenario_noselect) %in% "none")){
   if (file.exists(file.path(outputdir, "consv_prio_areas_0.5.mz"))){
     consv_prio_all <- read.magpie(file.path(outputdir, "consv_prio_areas_0.5.mz"))
+    consv_prio_hr <- new.magpie(cells = getCells(consv_prio_all),
+                                names = getNames(consv_prio_all, dim = 2), fill = 0)
     iso <- readGDX(gdx, "iso")
-    consv_iso <- readGDX(gdx,"policy_countries22")
+    consv_iso <- readGDX(gdx, "policy_countries22")
     consv_iso <- consv_iso[consv_iso %in% getItems(consv_prio_all, dim = 1.1)]
     consv_select <- cfg$gms$c22_protect_scenario
     consv_noselect <- cfg$gms$c22_protect_scenario_noselect
 
-    if (consv_noselect!= "none"){
+    if (consv_noselect != "none"){
       consv_prio_hr <- collapseDim(consv_prio_all[ , , consv_noselect], dim = 3.1)
-      consv_prio_hr[consv_iso,,] <- collapseDim(consv_prio_all[consv_iso, , consv_select], dim = 3.1)
-    } else {
-    consv_prio_hr <- collapseDim(consv_prio_all[, , consv_select], dim = 3.1)
+    }
+    if (consv_select != "none"){
+      consv_prio_hr[consv_iso, , ] <- collapseDim(consv_prio_all[consv_iso, , consv_select], dim = 3.1)
+    } else if (consv_select == "none"){
+      consv_prio_hr[consv_iso, , ] <- 0
     }
   }
 }
