@@ -1,5 +1,9 @@
 #!/usr/bin/env Rscript
 
+if (packageVersion("gms") < "0.24.0") {
+  stop("gms >= 0.24.0 is required to check files for tabs, please update with `install.packages('gms')`.")
+}
+
 message("Checking files for tabs... ", appendLF = FALSE)
 gms::checkNoTabs(pattern = "\\.(R|Rprofile|gms|cfg|bib)$", exclude = "output/|renv/")
 message("done.")
