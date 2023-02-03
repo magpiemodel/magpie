@@ -6,8 +6,8 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
-	p80_modelstat(t)	modelstat indicator (1)
-	p80_num_nonopt(t)		numNOpt indicator (1)
+  p80_modelstat(t)  modelstat indicator (1)
+  p80_num_nonopt(t)   numNOpt indicator (1)
 ;
 
 scalars

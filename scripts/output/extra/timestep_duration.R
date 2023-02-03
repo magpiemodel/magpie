@@ -37,7 +37,7 @@ infor <- infor[order(infor$mtime),]
 infor$Tdiff <- 0
 
 for(i in 2:nrow(infor)){
-	infor$Tdiff[i] <- round(difftime(infor$mtime[i], infor$mtime[i-1], units='mins'),2)
+  infor$Tdiff[i] <- round(difftime(infor$mtime[i], infor$mtime[i-1], units='mins'),2)
 }
 
 infor <- infor[order(infor$mtime),]

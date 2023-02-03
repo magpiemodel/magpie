@@ -162,10 +162,10 @@ cfg<-general_settings(title="SSP2_IPSL-CM5A-LR_6p0_NoMit_biodiversity")
    # Land protection
     # land productivity increase (lower interest rate)
     # protection of biodiversity hotspots and WDPA
-	 # Increased fertilizer efficiency (70% NUE of croplands)
+   # Increased fertilizer efficiency (70% NUE of croplands)
    # Improved animal waste management
-	 # (LATER: Improved wastewater treatment)
-	 # RCP6.0
+   # (LATER: Improved wastewater treatment)
+   # RCP6.0
 cfg<-gms::setScenario(cfg,"SSP2")
 cfg<-gms::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib)
@@ -183,9 +183,9 @@ cfg<-general_settings(title="SSP2_IPSL-CM5A-LR_6p0_NoMit_diet")
 # Sustainable food production
   # Healthy and sufficient diet: Transformation towards a flexetarian healthy diet (similar to Lancet diet) with reduced meat consumption. Transformation pathway takes place until 2050
   # Waste: max waste of 15%
-  # Agricultural efficiency: Crop production	reduced interest risk premium for interest rate, increasing investments in yield-increasing technological change
-  # Livestock production	improved animal waste management systems (Bodirsky et al 2014)
-  # Fertilizer: 	70%NUE croplands
+  # Agricultural efficiency: Crop production  reduced interest risk premium for interest rate, increasing investments in yield-increasing technological change
+  # Livestock production  improved animal waste management systems (Bodirsky et al 2014)
+  # Fertilizer:   70%NUE croplands
 cfg<-gms::setScenario(cfg,"SSP2")
 cfg<-gms::setScenario(cfg,"cc")
 cfg$input <- buildInputVector(climatescen_name="rcp6p0",regionmapping = "coacch",calibration=calib)
