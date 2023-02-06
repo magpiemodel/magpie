@@ -17,8 +17,8 @@ variables
 ;
 
 equations
-         q59_soilcarbon_cropland(j,stockType)              	Cropland soil carbon content calculation (mio. tC)
-         q59_soilcarbon_noncropland(j,noncropland59,stockType)	Non-cropland soil carbon content calculation (mio. tC)
+         q59_soilcarbon_cropland(j,stockType)               Cropland soil carbon content calculation (mio. tC)
+         q59_soilcarbon_noncropland(j,noncropland59,stockType)  Non-cropland soil carbon content calculation (mio. tC)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

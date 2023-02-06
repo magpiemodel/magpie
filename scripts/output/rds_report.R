@@ -26,7 +26,7 @@ if(!exists("source_include")) {
 }
 
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
-gdx	<- file.path(outputdir, "fulldata.gdx")
+gdx <- file.path(outputdir, "fulldata.gdx")
 rds <- paste0(outputdir, "/report.rds")
 mif <- paste0(outputdir, "/report.mif")
 runstatistics  <- paste0(outputdir, "/runstatistics.rda")

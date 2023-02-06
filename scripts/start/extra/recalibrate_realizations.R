@@ -33,11 +33,8 @@ cfg$gms$c_timesteps <- "calib"
 for (r in realizations) {
   cfg$gms$factor_costs <- r
 
-  if (r == "sticky_feb18") {
-    cfg$best_calib <- TRUE
-  } else {
-    cfg$best_calib <- FALSE
-  }
+  cfg$best_calib <- TRUE
+
 
   for (fac_req in c("reg", "glo")) {
     cfg$gms$c38_fac_req <- fac_req

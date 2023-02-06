@@ -8,7 +8,7 @@
 *' @equations
 
 q41_area_irrig(j2) ..
-	sum(kcr, vm_area(j2,kcr,"irrigated")) =l= vm_AEI(j2);
+  sum(kcr, vm_area(j2,kcr,"irrigated")) =l= vm_AEI(j2);
 
 
 *' Investment costs in the current time step for each region are calculated by multiplying the AEI expansion in each
@@ -17,10 +17,10 @@ q41_area_irrig(j2) ..
 *' approach.
 
 q41_cost_AEI(i2)..
-	vm_cost_AEI(i2) =e=
+  vm_cost_AEI(i2) =e=
     sum(cell(i2,j2),(vm_AEI(j2)-pc41_AEI_start(j2)))
-	* pc41_unitcost_AEI(i2)
-	*((1-s41_AEI_depreciation)*
-	sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
-			+ s41_AEI_depreciation)
-			;
+  * pc41_unitcost_AEI(i2)
+  *((1-s41_AEI_depreciation)*
+  sum(ct,pm_interest(ct,i2)/(1+pm_interest(ct,i2)))
+      + s41_AEI_depreciation)
+      ;
