@@ -365,7 +365,7 @@ $endif
     if (s15_exo_scp=1,
       i15_intake_detailed_scen_target(t,iso,"scp") = i15_intake_EATLancet(iso,"scp"));
 *' upper bound for alcohol
-* alcohol target is not part of EAT Lancet recommendation. Upper boundary is therefore included as specific swtich s15_alc_scen
+* alcohol target is not part of EAT Lancet recommendation. Upper boundary is therefore included as specific switch s15_alc_scen
     if (s15_exo_alcohol=1,
       i15_intake_detailed_scen_target(t,iso,"alcohol")$(i15_intake_detailed_scen_target(t,iso,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,iso))
         = s15_alc_scen*i15_intake_scen_target(t,iso);
