@@ -343,7 +343,8 @@ $endif
     if (s15_exo_pulses=1,
       i15_intake_detailed_scen_target(t,iso,EAT_pulses15) = i15_intake_EATLancet(iso,EAT_pulses15));
     if (s15_exo_sugar=1,
-      i15_intake_detailed_scen_target(t,iso,EAT_sugar15) = i15_intake_EATLancet(iso,EAT_sugar15));
+      i15_intake_detailed_scen_target(t,iso,EAT_sugar15)$(sum(EAT_sugar15, i15_intake_detailed_scen_target(t,iso,EAT_sugar15)) > sum(EAT_sugar15, i15_intake_scen_target(t,iso)))
+        = i15_intake_EATLancet(iso,EAT_sugar15));
     if (s15_exo_oils=1,
       i15_intake_detailed_scen_target(t,iso,"oils") = i15_intake_EATLancet(iso,"oils"));
     if (s15_exo_brans=1,
