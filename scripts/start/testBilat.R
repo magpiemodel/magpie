@@ -14,19 +14,20 @@ library(lucode2)
 
 source("scripts/start_functions.R")
 source("config/default.cfg")
+ cfg$gms$crop  <- "penalty_apr22"
 
-
-cfg$title   <- paste0("BilatPR_OFF_testq21ex_supp")
+cfg$title   <- paste0("BilatPR_OFF_testq21ex_supp_bothG_noTariff_penRot")
 cfg$gms$trade <- "selfsuff_reduced"             # def = selfsuff_reduced
+cfg$gms$s21_trade_tariff <-0             # def =1
+
 start_run(cfg=cfg)
 
 #cfg$title   <- paste0("BilatPR8_OFF_T0")
-#cfg$gms$s21_trade_tariff <-0             # def =1
 #start_run(cfg=cfg)
 
-cfg$title   <- paste0("BilatPR_ON_testq21ex_supp")
+cfg$title   <- paste0("BilatPR_ON_testq21ex_supp_bothG_noTariff_penRot")
 cfg$gms$trade <- "selfsuff_reduced_bilateral22"             # def = selfsuff_reduced
-cfg$gms$s21_trade_tariff <- 1               # def =1
+cfg$gms$s21_trade_tariff <-0             # def =1
 
 #cfg$recalibrate = "ifneeded"
 #cfg$recalibrate_landconversion_cost <- "ifneeded"  #def "ifneeded"

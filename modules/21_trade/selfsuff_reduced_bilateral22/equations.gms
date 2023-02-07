@@ -15,8 +15,8 @@
 
 *' amount produced superregionally must be equal to supply + net trade
 q21_trade_bilat(h2,k_trade)..
- sum(supreg(h2, i2), vm_prod_reg(i2, k_trade)) =g= sum(supreg(h2,i2), (vm_supply(i2, k_trade) -
-                              sum(i_ex, v21_trade(i_ex, i2, k_trade))  + sum(i_im, v21_trade(i2, i_im, k_trade))));
+ sum(supreg(h2, i2), vm_prod_reg(i2, k_trade)) =g= sum(supreg(h2,i2), vm_supply(i2, k_trade) -
+                              sum(i_ex, v21_trade(i_ex, i2, k_trade))  + sum(i_im, v21_trade(i2, i_im, k_trade)));
 *'
 *' For non-tradable commodites, the regional supply should be larger or equal to the regional demand.
  q21_notrade(h2,k_notrade)..
@@ -53,7 +53,7 @@ q21_trade_bilat(h2,k_trade)..
 *' the sum over all the imports of importing regions.
 
  q21_excess_dem(k_trade)..
- v21_excess_dem(k_trade) =e=
+ v21_excess_dem(k_trade) =g=
  sum(h2, sum(supreg(h2,i2),vm_supply(i2,k_trade))*(1 - sum(ct,f21_self_suff(ct,h2,k_trade)))
  $(sum(ct,f21_self_suff(ct,h2,k_trade)) < 1))
  + sum(ct,f21_trade_balanceflow(ct,k_trade));
@@ -62,7 +62,7 @@ q21_trade_bilat(h2,k_trade)..
 *' Export shares are derived from FAO data (see @schmitz_trading_2012 for details). They are 0 for importing regions.
 
  q21_excess_supply(h2,k_trade)..
- v21_excess_prod(h2,k_trade) =g=
+ v21_excess_prod(h2,k_trade) =e=
  v21_excess_dem(k_trade)*sum(ct,f21_exp_shr(ct,h2,k_trade));
 
 * Trade tariffs are associated with exporting regions. They are dependent on net exports and tariff levels.
