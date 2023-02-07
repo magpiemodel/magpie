@@ -93,6 +93,7 @@
                     items = scen2nd60))
 
   gms::writeSets(sets , "modules/60_bioenergy/1stgen_priced_dec18/sets.gms")
+  gms::writeSets(sets , "modules/60_bioenergy/MMEmu_feb23/sets.gms")
 }
 
 # Function to extract information from info.txt
