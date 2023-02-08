@@ -12,19 +12,22 @@ v60_2ndgen_bioenergy_dem_residues.fx(i,kall) = 0;
 v60_2ndgen_bioenergy_dem_residues.up(i,kres) = Inf;
 
 if(m_year(t) <= sm_fix_SSP2,
- i60_1stgen_bioenergy_dem(t,i,kall) =
-             f60_1stgen_bioenergy_dem(t,i,"const2020",kall);
- i60_res_2ndgenBE_dem(t,i) =
-             f60_res_2ndgenBE_dem(t,i,"ssp2");
-i60_1stgen_bioenergy_subsidy(t) =
-             c60_bioenergy_subsidy_fix_SSP2;             
+  i60_1stgen_bioenergy_dem(t,i,kall) = 
+    f60_1stgen_bioenergy_dem(t,i,"const2020",kall);
+  i60_res_2ndgenBE_dem(t,i) =
+    f60_res_2ndgenBE_dem(t,i,"ssp2");
+  i60_1stgen_bioenergy_subsidy_tdm(t) =
+    c60_bioenergy_subsidy_fix_SSP2;
+  i60_1stgen_bioenergy_subsidy_gj(t) = 0;             
 else
- i60_1stgen_bioenergy_dem(t,i,kall) =
-             f60_1stgen_bioenergy_dem(t,i,"%c60_1stgen_biodem%",kall);
- i60_res_2ndgenBE_dem(t,i) =
-             f60_res_2ndgenBE_dem(t,i,"%c60_res_2ndgenBE_dem%");
-i60_1stgen_bioenergy_subsidy(t) =
-             c60_bioenergy_subsidy;
+  i60_1stgen_bioenergy_dem(t,i,kall) =
+    f60_1stgen_bioenergy_dem(t,i,"%c60_1stgen_biodem%",kall);
+  i60_res_2ndgenBE_dem(t,i) =
+    f60_res_2ndgenBE_dem(t,i,"%c60_res_2ndgenBE_dem%");
+  i60_1stgen_bioenergy_subsidy_tdm(t) =
+    c60_bioenergy_subsidy;
+  i60_1stgen_bioenergy_subsidy_gj(t) = 
+    s60_bioenergy_gj_price_1st;
 );
 
 * Add minimal bioenergy demand in case of zero demand or very small demand to avoid zero prices
