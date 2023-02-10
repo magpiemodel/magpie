@@ -195,7 +195,7 @@ $title magpie
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
 * 
-* Last modification (input data): Wed Jan 18 12:28:24 2023
+* Last modification (input data): Mon Feb 06 14:27:52 2023
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -224,7 +224,7 @@ $setglobal c_past  till_2010
 $setglobal c_title  default
 
 scalars
-s_use_gdx   use of gdx files                                       / 2 /
+s_use_gdx   use of gdx files                                       / 0 /
 ;
 ********************************************************************************
 

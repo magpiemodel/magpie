@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 scalars
- s57_step_length										Step length in MACC data (yr)
+ s57_step_length                    Step length in MACC data (yr)
 ;
 
 parameters

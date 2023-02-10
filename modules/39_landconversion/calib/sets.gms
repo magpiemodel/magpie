@@ -6,6 +6,6 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 sets
-	type39 Cost type
-		/ cost, reward /
+  type39 Cost type
+    / cost, reward /
 ;
