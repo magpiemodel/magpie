@@ -23,21 +23,25 @@ p38_capital_need(t,i,kcr,"immobile") = i38_fac_req(t,i,kcr)  * pm_cost_share_cro
 
 * minimum labor share based on target and adjustment factor
 if (m_year(t) < s38_startyear_labor_substitution,
-  p38_min_labor_share(t,i) = 0;
+  p38_min_labor_share(t,j) = 0;
 elseif m_year(t) <= s38_targetyear_labor_share,
-  p38_min_labor_share(t,i) = max(pm_cost_share_crops(t,i,"labor"), pm_cost_share_crops(t,i,"labor") + 
+  p38_min_labor_share(t,j) = sum(cell(i,j),
+        max(pm_cost_share_crops(t,i,"labor"), pm_cost_share_crops(t,i,"labor") + 
         ((m_year(t)-s38_startyear_labor_substitution)/(s38_targetyear_labor_share-s38_startyear_labor_substitution) *
-         (s38_target_fulfillment * (s38_target_labor_share - sum(t2$(m_year(t2) = s38_targetyear_labor_share), pm_cost_share_crops(t2,i,"labor"))))));
+        (s38_target_fulfillment * (s38_target_labor_share - sum(t2$(m_year(t2) = s38_targetyear_labor_share),
+                                                                pm_cost_share_crops(t2,i,"labor")))))));
 else 
-  p38_min_labor_share(t,i)$(sum(t2$(m_year(t2) = s38_targetyear_labor_share), 
-                            pm_cost_share_crops(t2,i,"labor")) <= s38_target_labor_share) =  sum(t2$(m_year(t2) = s38_targetyear_labor_share), p38_min_labor_share(t2,i));
-  p38_min_labor_share(t,i)$(sum(t2$(m_year(t2) = s38_targetyear_labor_share), 
-                            pm_cost_share_crops(t2,i,"labor")) > s38_target_labor_share)  =  max(pm_cost_share_crops(t,i,"labor"), s38_target_labor_share);
+  p38_min_labor_share(t,j)$(sum(t2$(m_year(t2) = s38_targetyear_labor_share), 
+                                sum(cell(i,j), pm_cost_share_crops(t2,i,"labor"))) <= s38_target_labor_share) 
+                    =  sum(t2$(m_year(t2) = s38_targetyear_labor_share), p38_min_labor_share(t2,j));
+  p38_min_labor_share(t,j)$(sum(t2$(m_year(t2) = s38_targetyear_labor_share),
+                                sum(cell(i,j), pm_cost_share_crops(t2,i,"labor"))) > s38_target_labor_share)  
+                    =  max(sum(cell(i,j), pm_cost_share_crops(t,i,"labor")), s38_target_labor_share);
 );
 
 * overwrite with 0 in case target labor share is 0 (i.e. off)
 if (s38_target_labor_share = 0,
-  p38_min_labor_share(t,i) = 0;
+  p38_min_labor_share(t,j) = 0;
 );
 
 
@@ -53,7 +57,7 @@ i38_ces_scale(j,kcr) = sum(cell(i,j), 1/([i38_ces_shr(j,kcr) * sum(mobil38, v38_
 
 * in case of labor share target: initialize level by assuming that the regional target shares would be enforced in each cell
 if ((m_year(t) > s38_startyear_labor_substitution) and (s38_target_labor_share <> 0),
-  v38_laborhours_need.l(j,kcr) =  sum(cell(i,j), (1/i38_ces_scale(j,kcr)) * (i38_ces_shr(j,kcr) * (((1-p38_min_labor_share(t,i))*pm_hourly_costs(t,i,"scenario"))/(p38_min_labor_share(t,i)*(pm_interest(t,i)+s38_depreciation_rate)))**(-s38_ces_elast_par) +
+  v38_laborhours_need.l(j,kcr) =  sum(cell(i,j), (1/i38_ces_scale(j,kcr)) * (i38_ces_shr(j,kcr) * (((1-p38_min_labor_share(t,j))*pm_hourly_costs(t,i,"scenario"))/(p38_min_labor_share(t,j)*(pm_interest(t,i)+s38_depreciation_rate)))**(-s38_ces_elast_par) +
                                                                             (1-i38_ces_shr(j,kcr)) * (pm_labor_prod(t,j) * pm_productivity_gain_from_wages(t,i))**(-s38_ces_elast_par))**(1/s38_ces_elast_par));
 );
 v38_laborhours_need.lo(j,kcr) = 0.1 * v38_laborhours_need.l(j,kcr);
@@ -66,7 +70,7 @@ else
 * in case of labor share target: initialize level by assuming that the regional target shares would be enforced in each cell
   if (s38_target_labor_share <> 0,
 *    v38_capital_need.l(j,kcr,"immobile") = sum(cell(i,j), (i38_ces_shr(j,kcr) / (i38_ces_scale(j,kcr)**s38_ces_elast_par - (1-i38_ces_shr(j,kcr))*(pm_labor_prod(t,j) * pm_productivity_gain_from_wages(t,i)*v38_laborhours_need.l(j,kcr)**(-s38_ces_elast_par))))**(1/s38_ces_elast_par)) * s38_immobile;
-    v38_capital_need.l(j,kcr,"immobile") = sum(cell(i,j), ((1-p38_min_labor_share(t,i))*v38_laborhours_need.l(j,kcr)*pm_hourly_costs(t,i,"scenario")) / (p38_min_labor_share(t,i)*(pm_interest(t,i)+s38_depreciation_rate))) * s38_immobile;
+    v38_capital_need.l(j,kcr,"immobile") = sum(cell(i,j), ((1-p38_min_labor_share(t,j))*v38_laborhours_need.l(j,kcr)*pm_hourly_costs(t,i,"scenario")) / (p38_min_labor_share(t,j)*(pm_interest(t,i)+s38_depreciation_rate))) * s38_immobile;
     v38_capital_need.l(j,kcr,"mobile") = v38_capital_need.l(j,kcr,"immobile") * (1-s38_immobile) / s38_immobile;
   );
   v38_capital_need.lo(j,kcr,mobil38) = 0.1 * v38_capital_need.l(j,kcr,mobil38);

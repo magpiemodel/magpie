@@ -11,7 +11,7 @@ equations
  q38_investment_immobile(j,kcr)    Cellular immobile investments into farm capital   (mio USD05MER)
  q38_investment_mobile(j)          Cellular mobile investments into farm capital   (mio USD05MER)
  q38_ces_prodfun(j,kcr)            CES production function for one unit of output (1)
- q38_labor_capital_ratio(i)        Ratio between labor and capital needed for one unit of output (1)
+ q38_labor_capital_ratio(j)        Ratio between labor and capital needed for one unit of output (1)
 ;
 
 positive variables
@@ -30,7 +30,7 @@ parameters
 
  pm_cost_share_crops(t,i,factors)      Capital and labor shares of the regional factor costs for crop production   (1)
  p38_share_calibration(i)              Summation factor used to calibrate calculated capital shares with historical values (1)
- p38_min_labor_share(t,i)              Minimum labor share out of labor plus capital needed (1)
+ p38_min_labor_share(t,j)              Minimum labor share out of labor plus capital needed (1)
 
  p38_croparea_start(j,w,kcr)           Agricultural land initialization area (mio. ha)
 
@@ -58,6 +58,6 @@ parameters
  oq38_investment_immobile(t,j,kcr,type)  Cellular immobile investments into farm capital   (mio USD05MER)
  oq38_investment_mobile(t,j,type)        Cellular mobile investments into farm capital   (mio USD05MER)
  oq38_ces_prodfun(t,j,kcr,type)          CES production function for one unit of output (1)
- oq38_labor_capital_ratio(t,i,type)      Ratio between labor and capital needed for one unit of output (1)
+ oq38_labor_capital_ratio(t,j,type)      Ratio between labor and capital needed for one unit of output (1)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
