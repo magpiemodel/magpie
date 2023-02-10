@@ -7,5 +7,5 @@
 
 * ### nl_fix ###
 
-v38_laborhours_need.fx(j,kcr) =  v38_laborhours_need.l(j,kcr)
-v38_capital_need.fx(j,kcr,mobil38) =  v38_capital_need.l(j,kcr,mobil38)
+v38_laborhours_need.fx(j,kcr) =  v38_laborhours_need.l(j,kcr);
+v38_capital_need.fx(j,kcr,mobil38) =  v38_capital_need.l(j,kcr,mobil38);
