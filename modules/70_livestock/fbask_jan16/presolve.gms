@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -16,7 +16,7 @@
 *' livestock products: 
 
 p70_cattle_stock_proxy(t,i) = im_pop(t,i)*pm_kcal_pc_initial(t,i,"livst_rum")
-		              /i70_livestock_productivity(t,i,"sys_beef");   
+                  /i70_livestock_productivity(t,i,"sys_beef");   
 
 *' The lower bound for `p70_cattle_stock_proxy` is set to 20% of initial cattle 
 *' stocks in 1995:
@@ -27,7 +27,7 @@ p70_cattle_stock_proxy(t,i)$(p70_cattle_stock_proxy(t,i) < 0.2*p70_cattle_stock_
 *' relative to the previous time step:
 
 p70_incr_cattle(t,i)  =  1$(ord(t)=1)
-			+ (p70_cattle_stock_proxy(t,i)/p70_cattle_stock_proxy(t-1,i))$(ord(t)>1);
+      + (p70_cattle_stock_proxy(t,i)/p70_cattle_stock_proxy(t-1,i))$(ord(t)>1);
 
 *' The pasture management factor is calculated by applying a linear relationship 
 *' that links changes in pasture management with changes in cattle stocks:
@@ -36,7 +36,7 @@ if (m_year(t) <= s70_past_mngmnt_factor_fix,
    pm_past_mngmnt_factor(t,i) = 1;
 else               
    pm_past_mngmnt_factor(t,i) =   ( (s70_pyld_intercept + f70_pyld_slope_reg(i)*p70_incr_cattle(t,i)**(5/(m_year(t)-m_year(t-1))) 
-	         )**((m_year(t)-m_year(t-1))/5) )*pm_past_mngmnt_factor(t-1,i);
+           )**((m_year(t)-m_year(t-1))/5) )*pm_past_mngmnt_factor(t-1,i);
  );
 
 *' @stop

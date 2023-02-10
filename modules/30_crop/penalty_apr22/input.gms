@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -11,7 +11,7 @@ $setglobal c30_bioen_type  all
 $setglobal c30_bioen_water  rainfed
 * options: rainfed, irrigated, all
 
-$setglobal c30_marginal_land  all_marginal
+$setglobal c30_marginal_land  q33_marginal
 * options: all_marginal, q33_marginal, no_marginal
 
 $setglobal c30_snv_target  none
@@ -21,10 +21,19 @@ $setglobal c30_rotation_constraints  on
 *options: on, off
 
 $setglobal c30_rotation_scenario  default
-*options: none,	default,	fallow,	legumes,	agroforestry,	agroecology
+*options: none, default,  fallow, legumes,  agroforestry, agroecology
 
 $setglobal c30_rotation_scenario_speed  by2050
 * options: none, by2030, by2020
+
+scalars
+s30_snv_shr                     Share of available cropland that is witheld for other land cover types (1) / 0 /
+s30_snv_shr_noselect            Share of available cropland that is witheld for other land cover types (1) / 0 /
+s30_snv_scenario_start          SNV scenario start year     / 2020 /
+s30_snv_scenario_target         SNV scenario target year      / 2030 /
+s30_rotation_scenario_start     Rotation scenario start year      / 2020 /
+s30_rotation_scenario_target    Rotation scenario target year     / 2050 /
+;
 
 * Set-switch for countries affected by regional SNV policy
 * Default: all iso countries selected
@@ -54,7 +63,17 @@ sets
                           TKL,TKM,TLS,TON,TTO,TUN,TUR,TUV,TWN,TZA,
                           UGA,UKR,UMI,URY,USA,UZB,VAT,VCT,VEN,VGB,
                           VIR,VNM,VUT,WLF,WSM,YEM,ZAF,ZMB,ZWE /
+
+land_snv(land) land types allowed in the SNV policy / secdforest, forestry, past, other /
 ;
+
+$ifthen "%c30_bioen_type%" == "all" bioen_type_30(kbe30) = yes;
+$else bioen_type_30("%c30_bioen_type%") = yes;
+$endif
+
+$ifthen "%c30_bioen_water%" == "all" bioen_water_30(w) = yes;
+$else bioen_water_30("%c30_bioen_water%") = yes;
+$endif
 
 ********* CROPAREA INITIALISATION **********************************************
 
@@ -84,11 +103,6 @@ $offdelim
 
 ********* AVAILABLE CROPLAND *******************************************
 
-scalar
-s30_snv_shr   		Share of available cropland that is witheld for other land cover types (1) / 0 /
-s30_snv_shr_noselect 	Share of available cropland that is witheld for other land cover types (1) / 0 /
-;
-
 table f30_avl_cropland(j,marginal_land30) Available land area for cropland (mio. ha)
 $ondelim
 $include "./modules/30_crop/penalty_apr22/input/avl_cropland.cs3"
@@ -101,8 +115,3 @@ $include "./modules/30_crop/penalty_apr22/input/avl_cropland_iso.cs3"
 $offdelim
 ;
 
-table f30_scenario_fader(t_all,policy_target30) Fader for scenario implementation speed (unitless)
-$ondelim
-$include "./modules/30_crop/penalty_apr22/input/f30_scenario_fader.csv"
-$offdelim
-;

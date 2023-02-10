@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -19,13 +19,13 @@ p73_fraction_sm_fix                                                         Modi
 ;
 
 positive variables
-vm_cost_timber(i)				                                                    Actual cost of harvesting timber from forests (mio. USD per yr)
+vm_cost_timber(i)                                                           Actual cost of harvesting timber from forests (mio. USD per yr)
 v73_prod_heaven_timber(j,kforestry)                                         Production of woody biomass from heaven (mio. tDM per yr)
 v73_prod_residues(j)                                                        Production of residues from industrial roundwood harvest (mio. tDM per yr)
 ;
 
 equations
-q73_cost_timber(i)												                                  Actual cost of harvesting timber from forests (mio. USD per yr)
+q73_cost_timber(i)                                                          Actual cost of harvesting timber from forests (mio. USD per yr)
 q73_prod_wood(j)                                                            Production of industrial roundwood (mio. tDM per yr)
 q73_prod_woodfuel(j)                                                        Production of wood fuel (mio. tDM per yr)
 q73_prod_residues(j)                                                        Production of residues from industrial roundwood harvest (mio. tDM per yr)

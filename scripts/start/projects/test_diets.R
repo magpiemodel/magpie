@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -33,7 +33,7 @@ start_run(cfg,codeCheck=FALSE)
 cfg$title <- paste(prefix,"olddefaultEATlancet",sep="_")
 cfg$gms$s15_exo_waste <- 1
 cfg$gms$s15_exo_diet <- 1
-cfg$gms$c15_kcal_scen <- "healthy_BMI"
+cfg$gms$c15_kcal_scen <- "no_underweight_half_overweight"
 cfg$gms$c15_EAT_scen <- "FLX"
 cfg$gms$s15_exo_monogastric <- 1
 cfg$gms$s15_exo_ruminant    <- 1
@@ -57,7 +57,7 @@ cfg$title <- paste(prefix,"EATlancet",sep="_")
 cfg$gms$food    <- "anthro_iso_jun22"
 cfg$gms$s15_exo_waste <- 1
 cfg$gms$s15_exo_diet <- 1
-cfg$gms$c15_kcal_scen <- "healthy_BMI"
+cfg$gms$c15_kcal_scen <- "no_underweight_half_overweight"
 cfg$gms$c15_EAT_scen <- "FLX"
 cfg$gms$s15_exo_monogastric <- 1
 cfg$gms$s15_exo_ruminant    <- 1
@@ -73,11 +73,11 @@ start_run(cfg,codeCheck=FALSE)
 
 
 source("config/default.cfg")
-cfg$title <- paste(prefix,"healthyBMI",sep="_")
+cfg$title <- paste(prefix,"NoUnderweightHalfOverweight",sep="_")
 cfg$gms$food    <- "anthro_iso_jun22"
 cfg$gms$s15_exo_waste <- 0
 cfg$gms$s15_exo_diet <- 1
-cfg$gms$c15_kcal_scen <- "healthy_BMI"
+cfg$gms$c15_kcal_scen <- "no_underweight_half_overweight"
 cfg$gms$c15_EAT_scen <- "FLX"
 cfg$gms$s15_exo_monogastric <- 0
 cfg$gms$s15_exo_ruminant    <- 0
@@ -111,11 +111,11 @@ cfg$gms$s15_exo_alcohol     <- 0
 start_run(cfg,codeCheck=FALSE)
 
 source("config/default.cfg")
-cfg$title <- paste(prefix,"noOverweight",sep="_")
+cfg$title <- paste(prefix,"HalfOverweight",sep="_")
 cfg$gms$food    <- "anthro_iso_jun22"
 cfg$gms$s15_exo_waste <- 0
 cfg$gms$s15_exo_diet <- 1
-cfg$gms$c15_kcal_scen <- "no_overweight"
+cfg$gms$c15_kcal_scen <- "half_overweight"
 cfg$gms$c15_EAT_scen <- "FLX"
 cfg$gms$s15_exo_monogastric <- 0
 cfg$gms$s15_exo_ruminant    <- 0
@@ -135,7 +135,7 @@ cfg$title <- paste(prefix,"waste",sep="_")
 cfg$gms$food    <- "anthro_iso_jun22"
 cfg$gms$s15_exo_waste <- 1
 cfg$gms$s15_exo_diet <- 0
-cfg$gms$c15_kcal_scen <- "healthy_BMI"
+cfg$gms$c15_kcal_scen <- "no_underweight_half_overweight"
 cfg$gms$c15_EAT_scen <- "FLX"
 cfg$gms$s15_exo_monogastric <- 0
 cfg$gms$s15_exo_ruminant    <- 0

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -10,8 +10,8 @@ parameters
  i55_manure_recycling_share(i,kli,awms_conf,npk)  Share of manure recycled (tNr per tNr)
  ic55_manure_fuel_shr(i,kli)                      Share of manure excreted on pastures used for fuel (tNr per tNr)
  ic55_awms_shr(i,kli,awms_conf)                   Share of manure Nr managed in each animal waste management systems (tNr per tNr)
- p55_region_shr(t_all,i)	                        AWM scenario share of the region (1)
- p55_country_dummy(iso)		                        Dummy parameter indicating whether country is affected by selected awm scenario (1)
+ p55_region_shr(t_all,i)                          AWM scenario share of the region (1)
+ p55_country_dummy(iso)                           Dummy parameter indicating whether country is affected by selected awm scenario (1)
 ;
 
 

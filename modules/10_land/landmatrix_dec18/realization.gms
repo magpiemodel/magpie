@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -8,7 +8,7 @@
 *' @description The landmatrix_dec18 realization tracks land use transitions by
 *' directly counting sources and targets of conversions.
 
-*' @limitations There are currently no known limitations of this realization.
+*' @limitations This realization only accounts for net land use transitions.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/10_land/landmatrix_dec18/sets.gms"

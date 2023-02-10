@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -31,7 +31,7 @@ cfg$input <- c("isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev46_0.5.tgz",
         "isimip_rcp-IPSL_CM5A_LR-rcp2p6-co2_rev44_c200_690d3718e151be1b450b394c1064b1c5.tgz",
          "rev4.47_h12_magpie.tgz",
          "rev4.47_h12_validation.tgz",
- 			   "calibration_H12_c200_26Feb20.tgz",
+         "calibration_H12_c200_26Feb20.tgz",
          "additional_data_rev3.85.tgz")
 
  # Should input data be downloaded from source even if cfg$input did not change?

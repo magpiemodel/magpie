@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -19,7 +19,7 @@ cfg$gms$nitrogen="ipcc2006_sep16"
 cfg$title="default_high_nue"
 cfg$gms$c50_scen_neff <- "neff85_85_starty2010"   # def = neff60_60_starty2010
 cfg$gms$c50_scen_neff_noselect <- "neff85_85_starty2010"   # def = neff60_60_starty2010
-cfg$gms$c50_scen_neff_pasture <- "neff80_85_starty2010"   	  # def = constant
+cfg$gms$c50_scen_neff_pasture <- "neff80_85_starty2010"       # def = constant
 cfg$gms$c50_scen_neff_pasture_noselect <- "neff80_85_starty2010" 
 start_run(cfg)
 
@@ -27,7 +27,7 @@ cfg$gms$nitrogen="rescaled_jan21"
 cfg$title="rescaled_high_nue"
 cfg$gms$c50_scen_neff <- "neff85_85_starty2010"   # def = neff60_60_starty2010
 cfg$gms$c50_scen_neff_noselect <- "neff85_85_starty2010"   # def = neff60_60_starty2010
-cfg$gms$c50_scen_neff_pasture <- "neff80_85_starty2010"   	  # def = constant
+cfg$gms$c50_scen_neff_pasture <- "neff80_85_starty2010"       # def = constant
 cfg$gms$c50_scen_neff_pasture_noselect <- "neff80_85_starty2010" 
 start_run(cfg)
 

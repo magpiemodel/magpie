@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -16,6 +16,6 @@ else
  if(s73_foresight=1,
     pm_demand_forestry_future(i,kforestry)    = sum(t_ext$(t_ext.pos =  t.pos + pm_representative_rotation(t,i)),pm_demand_ext(t_ext,i,kforestry));
  else
- 	pm_demand_forestry_future(i,kforestry)    = pm_demand_ext(t,i,kforestry);
+  pm_demand_forestry_future(i,kforestry)    = pm_demand_ext(t,i,kforestry);
  );
 );

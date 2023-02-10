@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -17,8 +17,8 @@ variables
 ;
 
 equations
-         q59_soilcarbon_cropland(j,stockType)              	Cropland soil carbon content calculation (mio. tC)
-         q59_soilcarbon_noncropland(j,noncropland59,stockType)	Non-cropland soil carbon content calculation (mio. tC)
+         q59_soilcarbon_cropland(j,stockType)               Cropland soil carbon content calculation (mio. tC)
+         q59_soilcarbon_noncropland(j,noncropland59,stockType)  Non-cropland soil carbon content calculation (mio. tC)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -95,17 +95,17 @@ if (sum(sameas(t_past,t),1) = 1,
                                  i15_livestock_kcal_structure_iso_raw(t,iso,"livst_rum") * i15_rum_share_fadeout(t,iso);
 
 * Substitute milk demand in India with chicken, egg and fish (equally distributed) because milk demand in India shows an implausible increase
-    	i15_livestock_kcal_structure_iso(t,"IND","livst_milk") =
+      i15_livestock_kcal_structure_iso(t,"IND","livst_milk") =
                                  i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * i15_milk_share_fadeout_india(t);
-    	i15_livestock_kcal_structure_iso(t,"IND","livst_chick") =
-     							i15_livestock_kcal_structure_iso(t,"IND","livst_chick")
-     							+ i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t)) * 1/3;
-    	i15_livestock_kcal_structure_iso(t,"IND","livst_egg") =
-     							i15_livestock_kcal_structure_iso(t,"IND","livst_egg")
-     							+ i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t)) * 1/3;
-    	i15_livestock_kcal_structure_iso(t,"IND","fish") =
-     							i15_livestock_kcal_structure_iso(t,"IND","fish")
-     							+ i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t)) * 1/3;
+      i15_livestock_kcal_structure_iso(t,"IND","livst_chick") =
+                  i15_livestock_kcal_structure_iso(t,"IND","livst_chick")
+                  + i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t)) * 1/3;
+      i15_livestock_kcal_structure_iso(t,"IND","livst_egg") =
+                  i15_livestock_kcal_structure_iso(t,"IND","livst_egg")
+                  + i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t)) * 1/3;
+      i15_livestock_kcal_structure_iso(t,"IND","fish") =
+                  i15_livestock_kcal_structure_iso(t,"IND","fish")
+                  + i15_livestock_kcal_structure_iso_raw(t,"IND","livst_milk") * (1-i15_milk_share_fadeout_india(t)) * 1/3;
  );
 
 
@@ -240,10 +240,10 @@ solve m15_food_demand USING nlp MAXIMIZING v15_objective;
 
 * in case of problems try CONOPT3
 if(m15_food_demand.modelstat > 2,
-	display "Modelstat > 2 | Retry solve with CONOPT3";
-	option nlp = conopt;
-	solve m15_food_demand USING nlp MAXIMIZING v15_objective;
-	option nlp = conopt4;
+  display "Modelstat > 2 | Retry solve with CONOPT3";
+  option nlp = conopt;
+  solve m15_food_demand USING nlp MAXIMIZING v15_objective;
+  option nlp = conopt4;
 );
 
 p15_modelstat(t) = m15_food_demand.modelstat;

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -24,9 +24,12 @@ $setglobal c32_rot_calc_type  current_annual_increment
 * option  max_increment, max_npv
 $setglobal c32_rot_calc_type  current_annual_increment
 * options mean_annual_increment, current_annual_increment, instantaneous_growth_rate
+$setglobal c32_shock_scenario  none
+* options none 002lin2030 004lin2030 008lin2030 016lin2030
+
 
 scalars
-  s32_hvarea                      Flag for harvested area and establishemt (0=zero 1=exognous 2=endogneous)	/ 0 /
+  s32_hvarea                      Flag for harvested area and establishemt (0=zero 1=exognous 2=endogneous) / 0 /
   s32_reESTBcost                  Re establishment cost (USD per ha) / 2000 /
   s32_recurring_cost              Recurring costs (USD per ha) / 500 /
   s32_harvesting_cost             Harvesting cost (USD per ha) / 1000 /
@@ -42,7 +45,7 @@ scalars
   s32_forestry_int_rate           Global interest rate for plantations (percent) / 0.05 /
   s32_max_self_suff               Upper ceiling for the self sufficiency used in calculation for establishment decision (1) / 0.8 /
   s32_aff_bii_coeff               BII coefficent to be used for CO2 price driven afforestation 0=natural vegetation 1=plantation (1) / 0 /
-  s32_max_aff_area_glo			  Switch for global or regional afforestation constraint (1) / 1 /
+  s32_max_aff_area_glo        Switch for global or regional afforestation constraint (1) / 1 /
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)
@@ -122,3 +125,9 @@ $ondelim
 $include "./modules/32_forestry/input/f32_estb_calib.cs4"
 $offdelim
 /;
+
+table f32_forest_shock(t_all, shock_scen32) Forest carbon shock scenarios (area share affected per year)
+$ondelim
+$include "./modules/32_forestry/input/f32_forest_shock.csv"
+$offdelim
+;

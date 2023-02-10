@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -29,7 +29,7 @@
          + sum(kap,vm_dem_feed(i2,kli,kap) * fm_attributes(npk,kap))
          + sum(ksd,vm_dem_feed(i2,kli,ksd) * fm_attributes(npk,ksd))
          + sum(kres,vm_dem_feed(i2,kli,kres) * fm_attributes(npk,kres)
-		 *(1-(1-sum(ct,im_development_state(ct,i2)))*0.25))
+     *(1-(1-sum(ct,im_development_state(ct,i2)))*0.25))
          ;
 
 *' b) grazing animals on pastures where the manure stays on pastures
@@ -59,7 +59,7 @@
 *' on the development state and has to be subtracted from the residues fed to confined animals. 
 *' We assume that in developing regions 25% of residues are grazed by animals on stubble fields, 
 *' whereas stubble grazing is assumed to not occur in developed regions.
-		 
+     
 *' The manure is estimated by subtracting from feed a certain share which is
 *' incorporated into animal biomass. This share depends on the productivity of
 *' the animal and is calculated in the preprocessing, also for computational

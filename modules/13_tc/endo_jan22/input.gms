@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -7,7 +7,7 @@
 
 
 scalars
- s13_ignore_tau_historical	ignore historical tau (1) or use it as lower bound (0) (binary) / 1 /
+ s13_ignore_tau_historical  ignore historical tau (1) or use it as lower bound (0) (binary) / 1 /
  s13_max_gdp_shr Maximum tech cost as share of regional GDP / Inf /
 ;
 

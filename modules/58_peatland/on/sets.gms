@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -38,21 +38,21 @@ sets
     / rewet_crop, rewet_past, rewet_forestry /
 
   emis58 Wetland emission types
-	/ co2, doc, ch4, n2o /
+  / co2, doc, ch4, n2o /
 
   emisSub58(emis58) Wetland emission types
-	/ co2, ch4, n2o /
+  / co2, ch4, n2o /
 
   poll58(pollutants) Wetland emissions that can be taxed
-	/ co2_c, ch4, n2o_n_direct /
+  / co2_c, ch4, n2o_n_direct /
   
   emisSub58_to_poll58(emisSub58,poll58) Mapping
-  		/ co2 .(co2_c)		
-  		  ch4 .(ch4)  		
-  		  n2o .(n2o_n_direct) /
+      / co2 .(co2_c)    
+        ch4 .(ch4)      
+        n2o .(n2o_n_direct) /
   
   clcl58 simple climate classes
-	/ tropical, temperate, boreal /
+  / tropical, temperate, boreal /
            
   clcl_mapping(clcl,clcl58) Mapping between detailed and simple climate classes
            /

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -7,7 +7,7 @@
 
 
 equations
-q31_carbon(j,ag_pools,stockType)  						Above ground carbon content calculation for pasture (mio tC)
+q31_carbon(j,ag_pools,stockType)              Above ground carbon content calculation for pasture (mio tC)
 q31_cost_prod_past(i)                                   Costs for putting animals on grasslands and shifting between grassland types (mio. USD05MER per yr)
 q31_bv_manpast(j,potnatveg)                             Biodiversity value for managed pastures (Mha)
 q31_bv_rangeland(j,potnatveg)                           Biodiversity value for rangeland (Mha)

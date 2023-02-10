@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -115,13 +115,13 @@ start_run(cfg,codeCheck=FALSE)
 cfg$title <- "SSP2_NoMt_NoCC_FlexA_DEV"
 #region: CAZ, EUR, NEU, USA
 cfg$gms$scen_countries15  <- "AUS,CAN,HMD,NZL,SPM,
-	ALA,AUT,BEL,BGR,CYP,CZE,DEU,DNK,ESP,EST,
-       	FIN,FRA,FRO,GBR,GGY,GIB,GRC,HRV,HUN,IMN,
-       	IRL,ITA,JEY,LTU,LUX,LVA,MLT,NLD,POL,PRT,
-       	ROU,SVK,SVN,SWE,
-	ALB,AND,BIH,CHE,GRL,ISL,LIE,MCO,MKD,MNE,
-       	NOR,SJM,SMR,SRB,TUR,VAT,
-	USA"
+  ALA,AUT,BEL,BGR,CYP,CZE,DEU,DNK,ESP,EST,
+        FIN,FRA,FRO,GBR,GGY,GIB,GRC,HRV,HUN,IMN,
+        IRL,ITA,JEY,LTU,LUX,LVA,MLT,NLD,POL,PRT,
+        ROU,SVK,SVN,SWE,
+  ALB,AND,BIH,CHE,GRL,ISL,LIE,MCO,MKD,MNE,
+        NOR,SJM,SMR,SRB,TUR,VAT,
+  USA"
 start_run(cfg,codeCheck=FALSE)
 
 
@@ -146,13 +146,13 @@ cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c15_livescen <- "lin_50pc_20_50"
 #region: CAZ, EUR, NEU, USA
 cfg$gms$scen_countries15  <- "AUS,CAN,HMD,NZL,SPM,
-	ALA,AUT,BEL,BGR,CYP,CZE,DEU,DNK,ESP,EST,
-       	FIN,FRA,FRO,GBR,GGY,GIB,GRC,HRV,HUN,IMN,
-       	IRL,ITA,JEY,LTU,LUX,LVA,MLT,NLD,POL,PRT,
-       	ROU,SVK,SVN,SWE,
-	ALB,AND,BIH,CHE,GRL,ISL,LIE,MCO,MKD,MNE,
-       	NOR,SJM,SMR,SRB,TUR,VAT,
-	USA"
+  ALA,AUT,BEL,BGR,CYP,CZE,DEU,DNK,ESP,EST,
+        FIN,FRA,FRO,GBR,GGY,GIB,GRC,HRV,HUN,IMN,
+        IRL,ITA,JEY,LTU,LUX,LVA,MLT,NLD,POL,PRT,
+        ROU,SVK,SVN,SWE,
+  ALB,AND,BIH,CHE,GRL,ISL,LIE,MCO,MKD,MNE,
+        NOR,SJM,SMR,SRB,TUR,VAT,
+  USA"
 start_run(cfg,codeCheck=FALSE)
 #reset:
 cfg$gms$c15_livescen <- "constant"
@@ -163,13 +163,13 @@ cfg <- setScenario(cfg,c("SSP2","NPI"))
 cfg$gms$c15_rumdairyscen <- "lin_50pc_20_50"
 #region: CAZ, EUR, NEU, USA
 cfg$gms$scen_countries15  <- "AUS,CAN,HMD,NZL,SPM,
-	ALA,AUT,BEL,BGR,CYP,CZE,DEU,DNK,ESP,EST,
-       	FIN,FRA,FRO,GBR,GGY,GIB,GRC,HRV,HUN,IMN,
-       	IRL,ITA,JEY,LTU,LUX,LVA,MLT,NLD,POL,PRT,
-       	ROU,SVK,SVN,SWE,
-	ALB,AND,BIH,CHE,GRL,ISL,LIE,MCO,MKD,MNE,
-       	NOR,SJM,SMR,SRB,TUR,VAT,
-	USA"
+  ALA,AUT,BEL,BGR,CYP,CZE,DEU,DNK,ESP,EST,
+        FIN,FRA,FRO,GBR,GGY,GIB,GRC,HRV,HUN,IMN,
+        IRL,ITA,JEY,LTU,LUX,LVA,MLT,NLD,POL,PRT,
+        ROU,SVK,SVN,SWE,
+  ALB,AND,BIH,CHE,GRL,ISL,LIE,MCO,MKD,MNE,
+        NOR,SJM,SMR,SRB,TUR,VAT,
+  USA"
 start_run(cfg,codeCheck=FALSE)
 #reset:
 cfg$gms$c15_rumdairyscen <- "constant"

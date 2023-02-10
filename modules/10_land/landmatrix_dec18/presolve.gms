@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -10,25 +10,15 @@
 *' @code Some of the land use transitions are restricted:
 
 *' No planted forest on natveg areas
-v10_lu_transitions.fx(j,"primforest","forestry") = 0;
-*v10_lu_transitions.fx(j,"secdforest","forestry") = 0;
-*v10_lu_transitions.fx(j,"other","forestry") = 0;
+vm_lu_transitions.fx(j,"primforest","forestry") = 0;
 
 *' Conversions within natveg are not allowed
-v10_lu_transitions.fx(j,"primforest","other") = 0;
-v10_lu_transitions.fx(j,"secdforest","other") = 0;
-
-*' Forestry can only increase
-*v10_lu_transitions.fx(j,"forestry",land_to10) = 0;
-*v10_lu_transitions.up(j,"forestry","forestry") = Inf;
+vm_lu_transitions.fx(j,"primforest","other") = 0;
+vm_lu_transitions.fx(j,"secdforest","other") = 0;
 
 *' Primforest can only decrease
-v10_lu_transitions.fx(j,land_from10,"primforest") = 0;
-v10_lu_transitions.up(j,"primforest","primforest") = Inf;
-
-*' Secdforest can only decrease (during optimization)
-*v10_lu_transitions.fx(j,land_from10,"secdforest") = 0;
-*v10_lu_transitions.up(j,"secdforest","secdforest") = Inf;
+vm_lu_transitions.fx(j,land_from,"primforest") = 0;
+vm_lu_transitions.up(j,"primforest","primforest") = Inf;
 
 *' @stop
 

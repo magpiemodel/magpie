@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -19,11 +19,12 @@ source("scripts/projects/fsec.R")
 # -----------------------------------------------------------------------------------------------------------------
 # Calibration run
 cfg       <- fsecScenario(scenario = "c_BAU")
-cfg$title <- "FSEC2Sep22"
+cfg$title <- "FSEC19Jan23"
 cfg$results_folder                  <- "output/:title:"
 cfg$recalibrate                     <- TRUE
+cfg$best_calib                      <- TRUE
 cfg$recalibrate_landconversion_cost <- TRUE
-cfg$best_calib                      <- TRUE # for sticky implementation
+cfg$best_calib_landconversion_cost  <- FALSE
 cfg$output                          <- c("rds_report", "validation_short")
 cfg$force_replace                   <- TRUE
 start_run(cfg, codeCheck = FALSE)

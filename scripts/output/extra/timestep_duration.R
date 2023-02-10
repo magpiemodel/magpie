@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -37,7 +37,7 @@ infor <- infor[order(infor$mtime),]
 infor$Tdiff <- 0
 
 for(i in 2:nrow(infor)){
-	infor$Tdiff[i] <- round(difftime(infor$mtime[i], infor$mtime[i-1], units='mins'),2)
+  infor$Tdiff[i] <- round(difftime(infor$mtime[i], infor$mtime[i-1], units='mins'),2)
 }
 
 infor <- infor[order(infor$mtime),]

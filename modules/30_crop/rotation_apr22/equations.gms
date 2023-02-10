@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -20,8 +20,17 @@
 *' can be reduced by constraining the cropland area in favour of other land types,
 *' in order to increase compositional heterogeneity of land types at the cell level.
 
- q30_avl_cropland(j2)  ..
+ q30_avl_cropland(j2) ..
    vm_land(j2,"crop") =l= sum(ct, p30_avl_cropland(ct,j2));
+
+*' The semi-natural land constraint in cropland areas for sustaining critical regulating NCP
+*' for agricultural production is added on top of land conserved for other reasons
+*' (e.g. conservation of intact ecosystems or protection of biodiversity hotspots).
+ q30_land_snv(j2) ..
+            sum(land_snv, vm_land(j2,land_snv))
+            =g=
+            sum(ct, p30_snv_shr(ct,j2)) * vm_land(j2,"crop")
+          + sum((ct,land_snv,consv_type), pm_land_conservation(ct,j2,land_snv,consv_type));
 
 *' As additional constraints minimum and maximum rotational constraints limit
 *' the placing of crops. On the one hand, these rotational constraints reflect
@@ -63,12 +72,12 @@
 *' The biodiversity value for cropland is calculated separately for annual and perennial crops:
  q30_bv_ann(j2,potnatveg) ..
           vm_bv(j2,"crop_ann",potnatveg)
- 					=e=
- 					sum((crop_ann30,w), vm_area(j2,crop_ann30,w)) * fm_bii_coeff("crop_ann",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
+          =e=
+          sum((crop_ann30,w), vm_area(j2,crop_ann30,w)) * fm_bii_coeff("crop_ann",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
 
 * perennial crops are calculated as difference, as they shall also include fallow land
  q30_bv_per(j2,potnatveg) ..
           vm_bv(j2,"crop_per",potnatveg)
- 					=e=
+          =e=
           (vm_land(j2,"crop") - sum((crop_ann30,w), vm_area(j2,crop_ann30,w)))
           * fm_bii_coeff("crop_per",potnatveg) * fm_luh2_side_layers(j2,potnatveg);

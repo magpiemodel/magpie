@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -242,7 +242,7 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   cfg$info$version <- citation::read_cff("CITATION.cff")$version
 
   # Make 'title' a setglobal in gams to include it in the gdx
-  cfg$gms$c_title <- cfg$title
+  cfg$gms$c_title <- sub(".", "p", cfg$title, fixed = TRUE)
 
   rundate <- Sys.time()
   date <- format(rundate, "_%Y-%m-%d_%H.%M.%S")
@@ -250,15 +250,52 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   cfg$results_folder <- gsub(":title:", cfg$title, cfg$results_folder, fixed=TRUE)
 
   # Create output folder
-  if (!file.exists(cfg$results_folder)) {
-    dir.create(cfg$results_folder, recursive=TRUE, showWarnings=FALSE)
-	} else if (cfg$force_replace) {
-    cat("Deleting results folder because it already exists:",cfg$results_folder,"\n")
-    unlink(cfg$results_folder, recursive = TRUE)
-    dir.create(cfg$results_folder, recursive = TRUE, showWarnings = FALSE)
+  if (file.exists(cfg$results_folder)) {
+    if (cfg$force_replace) {
+      message("Deleting results folder because it already exists:", cfg$results_folder)
+      unlink(cfg$results_folder, recursive = TRUE)
+    } else {
+      stop(paste0("Results folder ", cfg$results_folder,
+                  " could not be created because it already exists."))
+    }
+  }
+  dir.create(cfg$results_folder, recursive = TRUE)
+
+  if (is.null(renv::project())) {
+    message("No active renv project found, not using renv.")
   } else {
-    stop(paste0("Results folder ",cfg$results_folder,
-                " could not be created because is already exists."))
+    # this script always runs in repo root, so we can check whether the main renv is loaded with:
+    if (normalizePath(renv::project()) == normalizePath(".")) {
+      message("Generating lockfile in '", cfg$results_folder, "'... ", appendLF = FALSE)
+      # suppress output of renv::snapshot
+      utils::capture.output({
+        utils::capture.output({
+          # snapshot current main renv into run folder
+          renv::snapshot(lockfile = file.path(cfg$results_folder, "_renv.lock"), prompt = FALSE)
+        }, type = "message")
+      })
+      message("done.")
+    } else {
+      # a run renv is loaded, we are presumably starting a HR follow up run
+      message("Copying lockfile into '", cfg$results_folder, "'")
+      file.copy(renv::paths$lockfile(), file.path(cfg$results_folder, "_renv.lock"))
+    }
+
+    createResultsfolderRenv <- function() {
+      renv::init() # will overwrite renv.lock if existing...
+      file.rename("_renv.lock", "renv.lock") # so we need this rename
+      renv::restore(prompt = FALSE)
+      message("renv creation done.")
+    }
+
+    renvLogPath <- file.path(cfg$results_folder, "log_renv.txt")
+    message("Initializing run renv, see '", renvLogPath, "'...", appendLF = FALSE)
+    # init renv in a separate session so the libPaths of the current session remain unchanged
+    callr::r(createResultsfolderRenv,
+             wd = cfg$results_folder,
+             env = c(RENV_PATHS_LIBRARY = "renv/library"),
+             stdout = renvLogPath, stderr = "2>&1")
+    message("done.")
   }
 
   # If reports for both bioenergy and GHG prices are available convert them
@@ -382,12 +419,12 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
   if(cfg$recalibrate=="ifneeded") {
     if(!file.exists(calib_file)) {
       # recalibrate if file does not exist
-      cfg$recalibrate <- TRUE 
+      cfg$recalibrate <- TRUE
     } else {
       # recalibrate if all calibration factors are 1, otherwise don't
       cfg$recalibrate <- all(magclass::read.magpie(calib_file)==1)
     }
-  }  
+  }
 
   if(cfg$recalibrate){
     cat("Starting yield calibration factor calculation!\n")
@@ -420,8 +457,8 @@ start_run <- function(cfg, scenario = NULL, codeCheck = TRUE, lock_model = TRUE)
                      restart = cfg$restart_landconversion_cost,
                      calib_accuracy = cfg$calib_accuracy_landconversion_cost,
                      damping_factor = cfg$damping_factor_landconversion_cost,
-                     crop_max = cfg$crop_calib_max_landconversion_cost,
-                     crop_min = cfg$crop_calib_min_landconversion_cost,
+                     cost_max = cfg$cost_calib_max_landconversion_cost,
+                     cost_min = cfg$cost_calib_min_landconversion_cost,
                      calib_file = land_calib_file,
                      data_workspace = cfg$val_workspace,
                      logoption = 3,
@@ -494,7 +531,7 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
          call. = FALSE)
   }
 
-  .bioenergy_demand <- function(mag){
+  .bioenergyDemand <- function(mag){
     notGLO <- getRegions(mag)[!(getRegions(mag)=="GLO")]
     out <- mag[,,"Primary Energy Production|Biomass|Energy Crops (EJ/yr)"]*10^3
     dimnames(out)[[3]] <- NULL
@@ -504,7 +541,7 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
     write.magpie(out[notGLO,,],f)
   }
 
-  .emission_prices <- function(mag, mute_ghgprices_until){
+  .emissionPrices <- function(mag, mute_ghgprices_until){
     out_c <- mag[,,"Price|Carbon (US$2005/t CO2)"]*44/12 # US$2005/tCO2 -> US$2005/tC
     dimnames(out_c)[[3]] <- "co2_c"
 
@@ -531,40 +568,67 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
     write.magpie(out[notGLO,,],f)
   }
 
-  # read REMIND report
-  message("Reading bioenergy_demand from ",path_to_report_bioenergy)
-  rep <- read.report(path_to_report_bioenergy, as.list = FALSE)
-  if (length(getNames(rep,dim="scenario"))!=1) stop("getReportData: REMIND report contains more or less than 1 scenario.")
-  rep <- collapseNames(rep) # get rid of scenrio and model dimension if they exist
-  mag <- deletePlus(rep) #delete "+" and "++" from variable names
+  .readAndPrepare <- function(mifPath) {
+    rep <- read.report(mifPath, as.list = FALSE)
+    if (length(getNames(rep, dim = "scenario")) != 1) stop("getReportData: report contains more or less than 1 scenario.")
+    mag <- collapseNames(rep) # get rid of scenario and model dimension if they exist
 
-  if(!("y1995" %in% getYears(mag))){
-  	empty95<-mag[,1,];empty95[,,]<-0;dimnames(empty95)[[2]] <- "y1995"
-  	mag <- mbind(empty95,mag)
+    if(!("y1995" %in% getYears(mag))){
+      empty95 <- mag[, 1,]
+      empty95[,,] <- 0
+      dimnames(empty95)[[2]] <- "y1995"
+      mag <- mbind(empty95, mag)
+    }
+    years <- 1990 + 5 * seq_len(32)
+    mag <- time_interpolate(mag, years)
+    return(mag)
   }
-  years <- 1990+5*(1:32)
-  mag <- time_interpolate(mag,years)
 
-  .bioenergy_demand(mag)
+  # read REMIND report
+  message("Reading bioenergy_demand from ", path_to_report_bioenergy)
+  mag <- .readAndPrepare(path_to_report_bioenergy)
+
+  .bioenergyDemand(mag)
 
   # write emission files, if specified use path_to_report_ghgprices instead of the bioenergy report
   if (is.na(path_to_report_ghgprices)) {
-    message("Reading ghg prices from ",path_to_report_bioenergy)
-    .emission_prices(mag, mute_ghgprices_until)
+    message("Reading ghg prices from the same file (", path_to_report_bioenergy, ")")
+    .emissionPrices(mag, mute_ghgprices_until)
   } else {
-    message("Reading ghg prices from ",path_to_report_ghgprices)
-    ghgrep <- read.report(path_to_report_ghgprices, as.list = FALSE)
-    ghgrep <- collapseNames(ghgrep)
-    ghgmag <- deletePlus(ghgrep) #delete "+" and "++" from variable names
-    if(!("y1995" %in% getYears(ghgmag))){
-      empty95 <- ghgmag[,1,]
-      empty95[,,] <- 0
-      dimnames(empty95)[[2]] <- "y1995"
-      ghgmag <- mbind(empty95,ghgmag)
-    }
-    years <- 1990+5*(1:32)
-    ghgmag <- time_interpolate(ghgmag,years)
-
-    .emission_prices(ghgmag, mute_ghgprices_until)
+    message("Reading ghg prices from ", path_to_report_ghgprices)
+    ghgmag <- .readAndPrepare(path_to_report_ghgprices)
+    .emissionPrices(ghgmag, mute_ghgprices_until)
   }
+}
+
+# Will not actually solve the model: after compilation, this just copies the results
+# of a previous run, useful for testing compilation and input/output handling.
+# Used in scripts/start/extra/empty_model.R and tests for REMIND-MAgPIE coupling.
+configureEmptyModel <- function(cfg, inputGdxPath) {
+    message("Configuring to use empty MAgPIE model, reproduces prior run ", inputGdxPath)
+    originalModel <- withr::local_connection(file(cfg$model, "r"))
+    emptyModelFile <- "standalone/empty_test_model.gms"
+    emptyModel <- withr::local_connection(file(emptyModelFile, "w"))
+    while (TRUE) {
+      originalLine <- readLines(originalModel, n = 1)
+      if (length(originalLine) == 0) {
+        break
+      }
+      writeLines(originalLine, emptyModel)
+      if (grepl("*END MODULE SETUP*", originalLine)) {
+        # add code for short-circuiting the model
+        writeLines(c(
+          "***********************TEST USING EMPTY MODEL***********************************",
+          "*** empty model just uses input gdx as the result",
+          "*** rest of the model is compiled, but not executed",
+          "$setglobal c_input_gdx_path  path",
+          "execute \"cp %c_input_gdx_path% fulldata.gdx\";",
+          "abort.noerror \"cp %c_input_gdx_path% fulldata.gdx\";",
+          "********************************************************************************"),
+          emptyModel)
+      }
+    }
+    cfg$model <- emptyModelFile
+    cfg$gms$c_input_gdx_path <- inputGdxPath
+    return(cfg)
 }

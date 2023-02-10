@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -98,7 +98,14 @@ sets
       sdp_redd_soil_peat,
       sdp_all,
       gcs_lbs,
-      gcs_res /
+      gcs_res,
+      ecoSysProtAll,
+      ecoSysProtForest,
+      ecoSysProtPrimForest,
+      ecoSysProtOff,
+      ecoSysProtAll_agMgmtExclN2O,
+      ecoSysProtAll_agMgmtExclCH4,
+      ecoSysProtAll_agMgmtOff /
 
 ;
 *######################### R SECTION END (SETS) ################################

@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -34,6 +34,6 @@ parameters
   im_demography(t_all,iso,sex,age)             Population by groups (mio. per yr)
 
 * Years where SSPs and nocc/cc scenarios diverge
-  sm_fix_SSP2			        	year until which all parameters are fixed to SSP2 values (year) / 2020 /
-  sm_fix_cc				          year until which all parameters affected by cc are fixed to historical values (year) / 2020 /
+  sm_fix_SSP2               year until which all parameters are fixed to SSP2 values (year) / 2020 /
+  sm_fix_cc                 year until which all parameters affected by cc are fixed to historical values (year) / 2020 /
 ;

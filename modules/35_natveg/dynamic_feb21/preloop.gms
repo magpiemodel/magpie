@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -65,7 +65,7 @@ p35_land_start_ac(j,ac,"secdforest") = i35_secdforest(j,ac);
 ** sees even before optimization starts
 p35_observed_gs_reg(i) = 0;
 p35_observed_gs_reg(i)$(f35_gs_relativetarget(i)>0 AND sum((cell(i,j),ac,land_natveg),p35_land_start_ac(j,ac,land_natveg)$(not sameas(ac,"ac0")))>0)  =
-	(sum((cell(i,j),ac,land_natveg),(pm_timber_yield_initial(j,ac,land_natveg)$(not sameas(ac,"ac0")) / sm_wood_density) * p35_land_start_ac(j,ac,land_natveg)$(not sameas(ac,"ac0")))/ sum((cell(i,j),ac,land_natveg),p35_land_start_ac(j,ac,land_natveg)$(not sameas(ac,"ac0"))));
+  (sum((cell(i,j),ac,land_natveg),(pm_timber_yield_initial(j,ac,land_natveg)$(not sameas(ac,"ac0")) / sm_wood_density) * p35_land_start_ac(j,ac,land_natveg)$(not sameas(ac,"ac0")))/ sum((cell(i,j),ac,land_natveg),p35_land_start_ac(j,ac,land_natveg)$(not sameas(ac,"ac0"))));
 
 ** Initialze calibration factor for growing stocks as 1
 ** we dont set it to 0 as we don't want to modify carbon densities by multiplication with 0 later

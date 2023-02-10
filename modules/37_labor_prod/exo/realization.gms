@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -27,7 +27,7 @@
 *' While 400W is plausible for manual work, mechanized work is less labor intensity. 
 *'
 *' @limitations Climate change impacts on labor productivity are currently only 
-*'				available for RCP1.9 and RCP8.5.
+*'        available for RCP1.9 and RCP8.5.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/37_labor_prod/exo/sets.gms"

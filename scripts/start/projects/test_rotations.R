@@ -1,4 +1,4 @@
-# |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+# |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 # |  authors, and contributors see CITATION.cff file. This file is part
 # |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 # |  AGPL-3.0, you are granted additional permissions described in the
@@ -58,10 +58,10 @@ cfg$recalibrate_landconversion_cost <- FALSE
 
 for (scenario in c("none","default","fallow","legumes","agroforestry","agroecology")){
   for (byyear in c("by2030","by2050")){
-	  cfg$gms$c30_rotation_scenario = scenario
-	  cfg$gms$c30_rotation_scenario_speed = byyear
-	  cfg$title <- paste(prefix,scenario,byyear,sep="_")
-	  start_run(cfg,codeCheck=FALSE)
+    cfg$gms$c30_rotation_scenario = scenario
+    cfg$gms$c30_rotation_scenario_speed = byyear
+    cfg$title <- paste(prefix,scenario,byyear,sep="_")
+    start_run(cfg,codeCheck=FALSE)
   }
 
 }

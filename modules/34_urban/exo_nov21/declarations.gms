@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -10,9 +10,9 @@ parameters
 ;
 
 positive variables
- vm_cost_urban(j)			     Technical adjustment costs
- v34_cost1(j)		    	     Technical adjustment costs
- v34_cost2(j)		     	     Technical adjustment costs
+ vm_cost_urban(j)          Technical adjustment costs
+ v34_cost1(j)              Technical adjustment costs
+ v34_cost2(j)              Technical adjustment costs
 ;
 
 equations
