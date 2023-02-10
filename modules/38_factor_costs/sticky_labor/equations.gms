@@ -20,7 +20,7 @@
   i38_ces_scale(j2,kcr) *
   (i38_ces_shr(j2,kcr)*sum(mobil38, v38_capital_need(j2,kcr,mobil38))**(-s38_ces_elast_par) +
   (1 - i38_ces_shr(j2,kcr))*(sum(ct, pm_labor_prod(ct,j2) * sum(cell(i2,j2), pm_productivity_gain_from_wages(ct,i2))) * v38_laborhours_need(j2,kcr))**(-s38_ces_elast_par))**(-1/s38_ces_elast_par)
-  =e= 1 ;
+  =e= 1 + v38_relax_CES_lp(j2,kcr);
   
 *' As low labor shares can lead to low agricultural employment, which is not necessarily a desired output, a 
 *' minimum share of labor need can be set.

@@ -93,3 +93,6 @@ else
     p38_capital_mobile(t,j)=p38_capital_mobile(t,j)*(1-s38_depreciation_rate)**(m_timestep_length);
 
     );
+
+* fix v38_relax_CES_lp to zero for non-linear version of MAgPIE
+v38_relax_CES_lp.fx(j,kcr) = 0;

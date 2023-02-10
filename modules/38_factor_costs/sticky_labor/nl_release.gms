@@ -11,3 +11,6 @@ v38_laborhours_need.lo(j,kcr) = 0.1 * v38_laborhours_need.l(j,kcr);
 v38_laborhours_need.up(j,kcr) = 10 * v38_laborhours_need.l(j,kcr);
 v38_capital_need.lo(j,kcr,mobil38) = 0.1 * v38_capital_need.l(j,kcr,mobil38);
 v38_capital_need.up(j,kcr,mobil38) = 10 * v38_capital_need.l(j,kcr,mobil38);
+
+* fix v38_relax_CES_lp to zero for non-linear version of MAgPIE
+v38_relax_CES_lp.fx(j,kcr) = 0;
