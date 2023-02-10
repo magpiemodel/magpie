@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **config** scenario_fsec.csv updated to new biodiversity scenario
 - **scripts** fsec.R and project_FSEC_Scenarios.R include capitalSubst and landscapeElements scenarios
 - **scripts** highres.R changed default resolution to c1000
+- **scripts** recalibrate.R and recalibrate_realization were modified to always use best_calib for the yield calibration.
+- **scripts** when manually running output scripts for multiple runs the lockfile is only created once
 
 ### added
 - **15_food** half_overweight scenario added
@@ -21,8 +23,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** added restart points after each time step from which the model can now be restarted if the simulation aborts at some point
 - **scripts** added SLURM dayMax submission type for standby QOS
 
+### removed
+-
+
 ### fixed
+- **scripts** fixed a bug where renvs for high resolution runs were missing some packages
 - **44_biodiversity** added regional layer `i` in `bii_target` realisation to make it compatible with the high-resolution parallel optimization output script
+- **scripts** fixed in the calc_calib.R script the saving of calib_factors used in each iteration to ensure that they correspond to the divergence reported. Changed divergence from zero to NA for those iterations where calib_factors are above the limit. The best_calib selection criterion was changed from selecting the factors of the iteration with the lowest standard deviation to the selection, for each region, of the factor of the iteration with the lowest divergence. Also, factors from the first iteration are now not considered, and if two different factors had the same divergence for a region, the one of the latest iteration is picked.
 
 ### removed
 -

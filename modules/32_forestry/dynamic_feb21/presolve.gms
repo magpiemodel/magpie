@@ -147,10 +147,10 @@ v32_land.l(j,"aff",ac_est) = 0;
 ** Certain areas (e.g. the boreal zone) are excluded from endogenous afforestation.
 ** DON'T USE TYPE32 SET HERE
 if(m_year(t) <= sm_fix_SSP2,
-	v32_land.fx(j,"aff",ac_est) = 0;
+  v32_land.fx(j,"aff",ac_est) = 0;
 else
-	v32_land.lo(j,"aff",ac_est) = 0;
-	v32_land.up(j,"aff",ac_est) = f32_aff_mask(j) * sum(land, pcm_land(j,land));
+  v32_land.lo(j,"aff",ac_est) = 0;
+  v32_land.up(j,"aff",ac_est) = f32_aff_mask(j) * sum(land, pcm_land(j,land));
 );
 *' No afforestation is allowed if carbon density <= 20 tc/ha
 v32_land.fx(j,"aff",ac_est)$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;

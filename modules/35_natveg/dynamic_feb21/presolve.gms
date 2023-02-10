@@ -6,11 +6,11 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 if((ord(t) = 1),
-	pc35_secdforest(j,ac) = i35_secdforest(j,ac);
-	pc35_other(j,ac) = i35_other(j,ac);
+  pc35_secdforest(j,ac) = i35_secdforest(j,ac);
+  pc35_other(j,ac) = i35_other(j,ac);
 else
- 	pc35_secdforest(j,ac) = p35_secdforest(t-1,j,ac);
- 	pc35_other(j,ac) = p35_other(t-1,j,ac);
+  pc35_secdforest(j,ac) = p35_secdforest(t-1,j,ac);
+  pc35_other(j,ac) = p35_other(t-1,j,ac);
 );
 
 * ----------------------------------------------------
@@ -19,26 +19,26 @@ else
 
 * first calculate damages
 if(s35_forest_damage=1,
-	p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry;
-	p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry;
-	);
+  p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry;
+  p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry;
+  );
 
 * shifting cultivation is faded out
 if(s35_forest_damage=2,
-	p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry*(1 - p35_damage_fader(t));
-	p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry*(1 - p35_damage_fader(t));
-	);
+  p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry*(1 - p35_damage_fader(t));
+  p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum(cell(i,j),f35_forest_lost_share(i,"shifting_agriculture"))*m_timestep_length_forestry*(1 - p35_damage_fader(t));
+  );
 
 if(s35_forest_damage=3,
-	p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum((cell(i,j),combined_loss),f35_forest_lost_share(i,combined_loss))*m_timestep_length_forestry;
-	p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum((cell(i,j),combined_loss),f35_forest_lost_share(i,combined_loss))*m_timestep_length_forestry;
-	);
+  p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * sum((cell(i,j),combined_loss),f35_forest_lost_share(i,combined_loss))*m_timestep_length_forestry;
+  p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * sum((cell(i,j),combined_loss),f35_forest_lost_share(i,combined_loss))*m_timestep_length_forestry;
+  );
 
 * generic disturbance scenarios
 if(s35_forest_damage=4,
-	p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * f35_forest_shock(t,"%c35_shock_scenario%") * m_timestep_length;
-	p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * f35_forest_shock(t,"%c35_shock_scenario%") * m_timestep_length;
-	);
+  p35_disturbance_loss_secdf(t,j,ac_sub) = pc35_secdforest(j,ac_sub) * f35_forest_shock(t,"%c35_shock_scenario%") * m_timestep_length;
+  p35_disturbance_loss_primf(t,j) = pcm_land(j,"primforest") * f35_forest_shock(t,"%c35_shock_scenario%") * m_timestep_length;
+  );
 
 * Distribution of damages correctly
 pc35_secdforest(j,ac_est) = pc35_secdforest(j,ac_est) + sum(ac_sub,p35_disturbance_loss_secdf(t,j,ac_sub))/card(ac_est) + p35_disturbance_loss_primf(t,j)/card(ac_est);
@@ -70,7 +70,7 @@ s35_shift = m_timestep_length_forestry/5;
 *' If the vegetation carbon density in a simulation unit due to regrowth
 *' exceeds a threshold of 20 tC/ha the respective area is shifted from other natural land to secondary forest.
 p35_recovered_forest(t,j,ac)$(not sameas(ac,"acx")) =
-			p35_other(t,j,ac)$(pm_carbon_density_ac(t,j,ac,"vegc") > 20);
+      p35_other(t,j,ac)$(pm_carbon_density_ac(t,j,ac,"vegc") > 20);
 p35_other(t,j,ac) = p35_other(t,j,ac) - p35_recovered_forest(t,j,ac);
 p35_secdforest(t,j,ac) = p35_secdforest(t,j,ac) + p35_recovered_forest(t,j,ac);
 *' @stop

@@ -41,10 +41,10 @@ solve m15_food_demand USING nlp MAXIMIZING v15_objective;
 
 * in case of problems try CONOPT3
 if(m15_food_demand.modelstat > 2,
-	display "Modelstat > 2 | Retry solve with CONOPT3";
-	option nlp = conopt;
-	solve m15_food_demand USING nlp MAXIMIZING v15_objective;
-	option nlp = conopt4;
+  display "Modelstat > 2 | Retry solve with CONOPT3";
+  option nlp = conopt;
+  solve m15_food_demand USING nlp MAXIMIZING v15_objective;
+  option nlp = conopt4;
 );
 
 p15_modelstat(t) = m15_food_demand.modelstat;
@@ -76,7 +76,7 @@ if(p15_modelstat(t) > 2 AND p15_modelstat(t) ne 7,
 
 
  p15_delta_income(t,i,curr_iter15) = p15_income_pc_real_ppp(t,i) /
-						( sum(i_to_iso(i,iso),
+            ( sum(i_to_iso(i,iso),
                                im_gdp_pc_ppp_iso(t,iso)
                                * im_pop_iso(t,iso)
                              ) / sum(i_to_iso(i,iso),
@@ -228,8 +228,8 @@ i15_protein_to_kcal_ratio(t,kfo) =  f15_nutrition_attributes(t,kfo,"protein")/f1
 * After the substitution of kfo_rd with SCP (1-i15_rumdairy_scp_fadeout), SCP is converted
 * back to kcal/cap/day using i15_protein_to_kcal_ratio(t,"scp").
 p15_kcal_pc_calibrated(t,i,"scp") = p15_kcal_pc_calibrated(t,i,"scp") +
-	sum(kfo_rd, p15_kcal_pc_calibrated(t,i,kfo_rd) * (1-i15_rumdairy_scp_fadeout(t,i)) * 
-	i15_protein_to_kcal_ratio(t,kfo_rd)) / i15_protein_to_kcal_ratio(t,"scp");
+  sum(kfo_rd, p15_kcal_pc_calibrated(t,i,kfo_rd) * (1-i15_rumdairy_scp_fadeout(t,i)) * 
+  i15_protein_to_kcal_ratio(t,kfo_rd)) / i15_protein_to_kcal_ratio(t,"scp");
 p15_kcal_pc_calibrated(t,i,kfo_rd) = p15_kcal_pc_calibrated(t,i,kfo_rd) * i15_rumdairy_scp_fadeout(t,i);
 
 
@@ -254,9 +254,9 @@ p15_kcal_pc_calibrated(t,i,kfo_lp) = p15_livestock_kcal_structure_orig(t,i,kfo_l
                * (p15_kcal_pc_livestock_supply_target(i)*(1-i15_livestock_fadeout_threshold(t,i))
                + p15_kcal_pc_calibrated_livestock_orig(t,i)*i15_livestock_fadeout_threshold(t,i));
 p15_kcal_pc_calibrated(t,i,kfo_pp) = p15_plant_kcal_structure_orig(t,i,kfo_pp)
-				* (p15_kcal_pc_calibrated_plant_orig(t,i)
-			    + (p15_kcal_pc_calibrated_livestock_orig(t,i) -
-			    sum(kfo_lp, p15_kcal_pc_calibrated(t,i,kfo_lp))) * s15_livescen_target_subst);
+        * (p15_kcal_pc_calibrated_plant_orig(t,i)
+          + (p15_kcal_pc_calibrated_livestock_orig(t,i) -
+          sum(kfo_lp, p15_kcal_pc_calibrated(t,i,kfo_lp))) * s15_livescen_target_subst);
 );
 
 
@@ -347,14 +347,14 @@ if(s15_exo_diet = 1,
 * Food-specific calorie intake of the model-internal diet projections is
 * estimated from daily per capita food calorie demand:
   p15_intake_detailed_regr(t,i,kfo) = p15_kcal_pc_calibrated(t,i,kfo)
-	 	 /(f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)*p15_foodwaste_growth(t,i));
+     /(f15_calib_fsupply(i)*f15_overcons_FAOwaste(i,kfo)*p15_foodwaste_growth(t,i));
 
 
 * Via 's15_alc_scen' a maximum target for alcohol consumption is defined.
   if(s15_alc_scen>0,
     i15_intake_detailed_scen_target(t,i,"alcohol") = p15_intake_detailed_regr(t,i,"alcohol");
     i15_intake_detailed_scen_target(t,i,"alcohol")$(i15_intake_detailed_scen_target(t,i,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,i))
-	   = s15_alc_scen*i15_intake_scen_target(t,i);
+     = s15_alc_scen*i15_intake_scen_target(t,i);
      );
 
   i15_intake_detailed_scen_target(t,i,EAT_staples) = (

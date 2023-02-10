@@ -27,7 +27,7 @@
 *' While 400W is plausible for manual work, mechanized work is less labor intensity. 
 *'
 *' @limitations Climate change impacts on labor productivity are currently only 
-*'				available for RCP1.9 and RCP8.5.
+*'        available for RCP1.9 and RCP8.5.
 
 *####################### R SECTION START (PHASES) ##############################
 $Ifi "%phase%" == "sets" $include "./modules/37_labor_prod/exo/sets.gms"

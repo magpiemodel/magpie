@@ -42,9 +42,9 @@ loop (t$(m_year(t) > %TIMESTEP%),
 
 * set ct to current time period
     ct(t) = yes;
-	  pt(t) = yes$(ord(t) = 1);
-	  pt(t-1) = yes$(ord(t) > 1);
-	  
+    pt(t) = yes$(ord(t) = 1);
+    pt(t-1) = yes$(ord(t) > 1);
+    
       display "Year";
       display ct;
       display "Previous Year";

@@ -58,10 +58,10 @@ cfg$recalibrate_landconversion_cost <- FALSE
 
 for (scenario in c("none","default","fallow","legumes","agroforestry","agroecology")){
   for (byyear in c("by2030","by2050")){
-	  cfg$gms$c30_rotation_scenario = scenario
-	  cfg$gms$c30_rotation_scenario_speed = byyear
-	  cfg$title <- paste(prefix,scenario,byyear,sep="_")
-	  start_run(cfg,codeCheck=FALSE)
+    cfg$gms$c30_rotation_scenario = scenario
+    cfg$gms$c30_rotation_scenario_speed = byyear
+    cfg$title <- paste(prefix,scenario,byyear,sep="_")
+    start_run(cfg,codeCheck=FALSE)
   }
 
 }

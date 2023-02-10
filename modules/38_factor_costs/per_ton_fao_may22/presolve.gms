@@ -6,7 +6,7 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 if (smax(j, pm_labor_prod(t,j)) <> 1 OR smin(j, pm_labor_prod(t,j)) <> 1,
-	abort "This factor cost realization cannot handle labor productivities != 1"
+  abort "This factor cost realization cannot handle labor productivities != 1"
 );
 
 * choosing between regional (+time dependent) or global (from 2005) factor requirements
