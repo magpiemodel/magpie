@@ -6,7 +6,7 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # ----------------------------------------------------------
-# description: MESSAGE-MAgPIE Emulator Debug Setup
+# description: MESSAGE-MAgPIE Emulator Default varient for Tau readout
 # position: 1
 # ----------------------------------------------------------
 
@@ -24,6 +24,11 @@ source("scripts/start_functions.R") #nolinter
 # Source the default config and then over-write it before starting the run.
 source("config/default.cfg") #nolinter
 
+cfg$repositories <- append(list("https://rse.pik-potsdam.de/data/magpie/public" = NULL,
+                               "./patch_input" = NULL),
+                           getOption("magpie_repos"))
+cfg$input <- append(cfg$input, c(patch = "patch.tgz"))
+
 cfg$output <- c("output_check", "rds_report")
 cfg$force_replace <- TRUE
 
@@ -33,11 +38,23 @@ cfg <- setScenario(cfg, c(ssp)) #load config presets
 ### Identifier and folder
 ###############################################
 identifierFlag <- "Emulator_debug"
-cfg$title <- "4_yields_A_NOCC_hist"
+cfg$title <- "6_Cropland_A_Default_Inf"
 ###############################################
 cfg$info$flag <- identifierFlag
 cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
 
-cfg$gms$c14_yields_scenario <- "nocc_hist"
+### BE
+# non-default BE demands
 
+### Yield
+#cfg$gms$c14_yields_scenario <- "nocc_hist"
+
+### Biodiv
+#cfg$gms$c44_bii_decrease <- 0
+
+### Cropland
+cfg$gms$s30_annual_max_growth <- Inf
+
+
+##########################################################
 start_run(cfg, codeCheck = FALSE)

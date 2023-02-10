@@ -38,9 +38,27 @@ cfg <- setScenario(cfg, c(ssp)) #load config presets
 ### Identifier and folder
 ###############################################
 identifierFlag <- "Emulator_debug"
-cfg$title <- "1_default_preset"
+cfg$title <- "6_Cropland_A_BE10_Inf"
 ###############################################
 cfg$info$flag <- identifierFlag
 cfg$results_folder <- paste0("output/", identifierFlag, "/:title:")
+
+### BE 
+cfg$gms$bioenergy <- "MMEmu_feb23"
+
+cfg$gms$c60_bioenergy_subsidy_fix_SSP2 <- 300
+cfg$gms$c60_bioenergy_subsidy <- 0
+
+cfg$gms$s60_bioenergy_gj_price_1st <- 10
+cfg$gms$s60_bioenergy_price_2nd <- 10
+
+### Yield
+#cfg$gms$c14_yields_scenario <- "nocc_hist"
+
+### Biodiv
+#cfg$gms$c44_bii_decrease <- 0
+
+### Cropland
+cfg$gms$s30_annual_max_growth <- Inf
 
 start_run(cfg, codeCheck = FALSE)
