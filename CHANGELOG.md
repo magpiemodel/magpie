@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### changed
 - **42_water_demand** removed fm_multicropping factor because of fallow inconsistency
+- **15_food** Interpret EAT-Lancet guidelines not as target but as lower/upper limits
 - **config** scenario_fsec.csv updated input data tgz
 - **config** scenario_fsec.csv updated to new biodiversity scenario
 - **scripts** fsec.R and project_FSEC_Scenarios.R include capitalSubst and landscapeElements scenarios
