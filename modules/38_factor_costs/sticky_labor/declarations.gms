@@ -11,7 +11,7 @@ equations
  q38_investment_immobile(j,kcr)    Cellular immobile investments into farm capital   (mio USD05MER)
  q38_investment_mobile(j)          Cellular mobile investments into farm capital   (mio USD05MER)
  q38_ces_prodfun(j,kcr)            CES production function for one unit of output (1)
- q38_labor_capital_ratio(j)        Ratio between labor and capital needed for one unit of output (1)
+ q38_labor_share_target(j)         Enforces minimum labor cost share out of factor costs (1)
 ;
 
 positive variables

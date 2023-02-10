@@ -25,7 +25,7 @@
 *' As low labor shares can lead to low agricultural employment, which is not necessarily a desired output, a 
 *' minimum share of labor need can be set.
 
-q38_labor_capital_ratio(j2) .. 
+q38_labor_share_target(j2) .. 
   sum(kcr, vm_prod(j2,kcr) * v38_laborhours_need(j2,kcr) * sum((ct, cell(i2,j2)), pm_hourly_costs(ct,i2,"scenario"))) =g=
              sum(ct, p38_min_labor_share(ct,j2)) * 
               (sum(kcr, vm_prod(j2,kcr) * v38_laborhours_need(j2,kcr) * 

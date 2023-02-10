@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **sticky_labor** changed labor cost share constraint from regional to cellular level
+- **sticky_labor** renamed equation `q38_labor_capital_ratio` to `q38_labor_share_target`
 - **config** scenario_fsec.csv updated input data tgz
 - **config** scenario_fsec.csv updated to new biodiversity scenario
 - **scripts** fsec.R and project_FSEC_Scenarios.R include capitalSubst and landscapeElements scenarios
@@ -17,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** when manually running output scripts for multiple runs the lockfile is only created once
 
 ### added
+- **sticky_labor** `nl_fix`, `nl_relax` and `nl_release` added
 - **15_food** half_overweight scenario added
 - **config** added setting cfg$keep_restarts which controls whether restart files should be kept after a run finished
 - **config** changed default for `s_use_gdx` from 2 to 0
