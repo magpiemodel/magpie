@@ -15,7 +15,7 @@
 
 q31_prod(j2) ..
  vm_prod(j2,"pasture") =l= vm_land(j2,"past")
- 						   * vm_yld(j2,"pasture","rainfed");
+               * vm_yld(j2,"pasture","rainfed");
 
 *' On the basis of the required pasture area, cellular above ground carbon stocks are calculated:
 
@@ -36,12 +36,12 @@ q31_cost_prod_past(i2) ..
 
 *' By estimating the different area of managed pasture and rangeland via the luh2 side layers, the biodiversity value for pastures and rangeland is calculated in following:
  q31_bv_manpast(j2,potnatveg) .. vm_bv(j2,"manpast",potnatveg)
- 					=e=
- 					vm_land(j2,"past") * fm_luh2_side_layers(j2,"manpast") * fm_bii_coeff("manpast",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
+          =e=
+          vm_land(j2,"past") * fm_luh2_side_layers(j2,"manpast") * fm_bii_coeff("manpast",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
 
  q31_bv_rangeland(j2,potnatveg) .. vm_bv(j2,"rangeland",potnatveg)
- 					=e=
- 					vm_land(j2,"past") * fm_luh2_side_layers(j2,"rangeland") * fm_bii_coeff("rangeland",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
+          =e=
+          vm_land(j2,"past") * fm_luh2_side_layers(j2,"rangeland") * fm_bii_coeff("rangeland",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
 
 
 *** EOF constraints.gms ***

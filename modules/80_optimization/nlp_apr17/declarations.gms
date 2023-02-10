@@ -6,12 +6,12 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
-	p80_modelstat(t)	modelstat indicator (1)
-	p80_num_nonopt(t)	numNOpt indicator (1)
+  p80_modelstat(t)  modelstat indicator (1)
+  p80_num_nonopt(t) numNOpt indicator (1)
 ;
 
 scalars
-  s80_counter       		counter (1)
-  s80_modelstat_previter 	modelstat of previous iteration (1)
-  s80_optfile_previter 		optfile used in previous iteration (1)
+  s80_counter           counter (1)
+  s80_modelstat_previter  modelstat of previous iteration (1)
+  s80_optfile_previter    optfile used in previous iteration (1)
 ;

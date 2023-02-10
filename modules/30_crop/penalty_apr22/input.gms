@@ -21,7 +21,7 @@ $setglobal c30_rotation_constraints  on
 *options: on, off
 
 $setglobal c30_rotation_scenario  default
-*options: none,	default,	fallow,	legumes,	agroforestry,	agroecology
+*options: none, default,  fallow, legumes,  agroforestry, agroecology
 
 $setglobal c30_rotation_scenario_speed  by2050
 * options: none, by2030, by2020
@@ -29,10 +29,10 @@ $setglobal c30_rotation_scenario_speed  by2050
 scalars
 s30_snv_shr                     Share of available cropland that is witheld for other land cover types (1) / 0 /
 s30_snv_shr_noselect            Share of available cropland that is witheld for other land cover types (1) / 0 /
-s30_snv_scenario_start          SNV scenario start year			/ 2020 /
-s30_snv_scenario_target         SNV scenario target year			/ 2030 /
-s30_rotation_scenario_start     Rotation scenario start year			/ 2020 /
-s30_rotation_scenario_target    Rotation scenario target year			/ 2050 /
+s30_snv_scenario_start          SNV scenario start year     / 2020 /
+s30_snv_scenario_target         SNV scenario target year      / 2030 /
+s30_rotation_scenario_start     Rotation scenario start year      / 2020 /
+s30_rotation_scenario_target    Rotation scenario target year     / 2050 /
 ;
 
 * Set-switch for countries affected by regional SNV policy

@@ -6,9 +6,9 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- i20_processing_shares(t_all,i,ksd,kpr)			    Shares of secondary products coming from a primary product (1)
+ i20_processing_shares(t_all,i,ksd,kpr)         Shares of secondary products coming from a primary product (1)
  i20_processing_conversion_factors(t_all,processing20,ksd,kpr) Conversion factors of primary products into secondary products (1)
- i20_processing_unitcosts(ksd,kpr)   				Costs of transforming x units kpr into 1 unit ksd (USD05MER per tDM)
+ i20_processing_unitcosts(ksd,kpr)          Costs of transforming x units kpr into 1 unit ksd (USD05MER per tDM)
  ;
 
 
@@ -25,7 +25,7 @@ variables
 ;
 
 equations
-     q20_processing(i,kpr,ksd)                        	Processing equation (mio. tDM per yr)
+     q20_processing(i,kpr,ksd)                          Processing equation (mio. tDM per yr)
      q20_processing_aggregation_nocereals(i,kpr)        Connecting processing activity to processing flows (mio. tDM per yr)
      q20_processing_aggregation_cereals(i,kcereals20)   Connecting processing activity to food use for milling (mio. tDM per yr)
      q20_processing_aggregation_cotton(i)               Connecting processing activity to production for cotton ginning (mio. tDM per yr)

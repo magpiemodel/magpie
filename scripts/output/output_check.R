@@ -20,7 +20,7 @@ if(!exists("source_include")) {
   readArgs("outputdir")
 }
 
-gdx	<- file.path(outputdir,"fulldata.gdx")
+gdx <- file.path(outputdir,"fulldata.gdx")
 ###############################################################################
 
 magpie4::outputCheck(gdx)

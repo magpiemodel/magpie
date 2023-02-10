@@ -15,10 +15,10 @@ sets
    scen_watdem_nonagr Scenarios for non agricultural water demand
    / ISIMIP, ssp1, ssp2, ssp3 /
 
-	scen42 Environmental Flow Policy (EFP)
-  		/ off, on /
+  scen42 Environmental Flow Policy (EFP)
+      / off, on /
 
-	scen42_to_dev(scen42,dev) Mapping between EFP and economic development status
-      /	off		. (lic, mic)
-       	on		. (hic) /
+  scen42_to_dev(scen42,dev) Mapping between EFP and economic development status
+      / off   . (lic, mic)
+        on    . (hic) /
 ;

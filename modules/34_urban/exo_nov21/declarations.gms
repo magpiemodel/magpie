@@ -10,9 +10,9 @@ parameters
 ;
 
 positive variables
- vm_cost_urban(j)			     Technical adjustment costs
- v34_cost1(j)		    	     Technical adjustment costs
- v34_cost2(j)		     	     Technical adjustment costs
+ vm_cost_urban(j)          Technical adjustment costs
+ v34_cost1(j)              Technical adjustment costs
+ v34_cost2(j)              Technical adjustment costs
 ;
 
 equations
