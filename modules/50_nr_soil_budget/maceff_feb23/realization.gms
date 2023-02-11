@@ -9,12 +9,12 @@
 *' using exogenous uptake efficiencies. Several scenarios are available for the efficiency.
 
 *####################### R SECTION START (PHASES) ##############################
-$Ifi "%phase%" == "sets" $include "./modules/50_nr_soil_budget/fertpol_cha/sets.gms"
-$Ifi "%phase%" == "declarations" $include "./modules/50_nr_soil_budget/fertpol_cha/declarations.gms"
-$Ifi "%phase%" == "input" $include "./modules/50_nr_soil_budget/fertpol_cha/input.gms"
-$Ifi "%phase%" == "equations" $include "./modules/50_nr_soil_budget/fertpol_cha/equations.gms"
-$Ifi "%phase%" == "scaling" $include "./modules/50_nr_soil_budget/fertpol_cha/scaling.gms"
-$Ifi "%phase%" == "preloop" $include "./modules/50_nr_soil_budget/fertpol_cha/preloop.gms"
-$Ifi "%phase%" == "presolve" $include "./modules/50_nr_soil_budget/fertpol_cha/presolve.gms"
-$Ifi "%phase%" == "postsolve" $include "./modules/50_nr_soil_budget/fertpol_cha/postsolve.gms"
+$Ifi "%phase%" == "sets" $include "./modules/50_nr_soil_budget/maceff_feb23/sets.gms"
+$Ifi "%phase%" == "declarations" $include "./modules/50_nr_soil_budget/maceff_feb23/declarations.gms"
+$Ifi "%phase%" == "input" $include "./modules/50_nr_soil_budget/maceff_feb23/input.gms"
+$Ifi "%phase%" == "equations" $include "./modules/50_nr_soil_budget/maceff_feb23/equations.gms"
+$Ifi "%phase%" == "scaling" $include "./modules/50_nr_soil_budget/maceff_feb23/scaling.gms"
+$Ifi "%phase%" == "preloop" $include "./modules/50_nr_soil_budget/maceff_feb23/preloop.gms"
+$Ifi "%phase%" == "presolve" $include "./modules/50_nr_soil_budget/maceff_feb23/presolve.gms"
+$Ifi "%phase%" == "postsolve" $include "./modules/50_nr_soil_budget/maceff_feb23/postsolve.gms"
 *######################## R SECTION END (PHASES) ###############################
