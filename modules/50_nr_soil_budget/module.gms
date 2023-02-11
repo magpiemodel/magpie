@@ -14,4 +14,5 @@
 
 *###################### R SECTION START (MODULETYPES) ##########################
 $Ifi "%nr_soil_budget%" == "macceff_aug22" $include "./modules/50_nr_soil_budget/macceff_aug22/realization.gms"
+$Ifi "%nr_soil_budget%" == "maceff_feb23" $include "./modules/50_nr_soil_budget/maceff_feb23/realization.gms"
 *###################### R SECTION END (MODULETYPES) ############################
