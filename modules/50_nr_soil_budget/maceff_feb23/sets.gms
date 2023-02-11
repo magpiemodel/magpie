@@ -25,7 +25,7 @@ scen_neff_pasture50 Scenario for NUE on pastures
 dep_scen50 Scenario for atmospheric deposition
 /history/
 
-scen50_reg_fertilizer_costs
+scen50_reg_fertilizer_costs  Scenario for China fertilizer subsidiy removal
 /bas, rm120,rm150,rm180,rm210,rm240,rm270,rm300,rm330,rm360,rm390,rm415,rm420,rm450/
 
 ;
