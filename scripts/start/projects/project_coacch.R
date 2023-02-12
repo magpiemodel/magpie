@@ -39,15 +39,15 @@ buildInputVector <- function(regionmapping   = "H12",
                              archive_rev     = "38",
                              madrat_rev      = "4.18",
                              validation_rev  = "4.18",
-			                 calibration     = "calibration_coacch_08Oct19.tgz",
+                       calibration     = "calibration_coacch_08Oct19.tgz",
                              additional_data = "additional_data_rev3.68.tgz") {
   mappings <- c(H11="8a828c6ed5004e77d1ba2025e8ea2261",
                 H12="690d3718e151be1b450b394c1064b1c5",
-				coacch="c2a48c5eae535d4b8fe9c953d9986f1b",
+        coacch="c2a48c5eae535d4b8fe9c953d9986f1b",
                 mag="c30c1c580039c2b300d86cc46ff4036a",
-		        agmip="c77f075908c3bc29bdbe1976165eccaf",
-		        sim4nexus="25dd7264e8e145385b3bd0b89ec5f3fc",
-		        inms="44f1e181a3da765729f2f1bfc926425a",
+            agmip="c77f075908c3bc29bdbe1976165eccaf",
+            sim4nexus="25dd7264e8e145385b3bd0b89ec5f3fc",
+            inms="44f1e181a3da765729f2f1bfc926425a",
                 capri="e7e72fddc44cc3d546af7b038c651f51")
   archive_name=paste(project_name,climate_model,climatescen_name,co2,sep="-")
   archive <- paste0(archive_name, "_rev", archive_rev, "_", resolution, "_", mappings[regionmapping], ".tgz")
@@ -101,85 +101,85 @@ cfg$recalibrate <- "ifneeded"
 
 start_the_run<-function(ssp,mit,rcp,gcm,co2,cc){
   # select alias names for reporting
-	if(gcm=="IPSL_CM5A_LR"){gcm_alias="IPSL-CM5A-LR"}
-	if(gcm=="HadGEM2_ES"){gcm_alias="HadGEM2-ES"}
-	if(gcm=="GFDL_ESM2M"){gcm_alias="GFDL-ESM2M"}
-	if(gcm=="NorESM1_M"){gcm_alias="NNorESM1-M"}
-	if(rcp=="NoCC"){gcm_alias="NoCC"}
-	if(mit=="26"){mit_alias="2p6"}
-	if(mit=="45"){mit_alias="4p5"}
-	if(mit=="Ref"){mit_alias="NoMit"}
+  if(gcm=="IPSL_CM5A_LR"){gcm_alias="IPSL-CM5A-LR"}
+  if(gcm=="HadGEM2_ES"){gcm_alias="HadGEM2-ES"}
+  if(gcm=="GFDL_ESM2M"){gcm_alias="GFDL-ESM2M"}
+  if(gcm=="NorESM1_M"){gcm_alias="NNorESM1-M"}
+  if(rcp=="NoCC"){gcm_alias="NoCC"}
+  if(mit=="26"){mit_alias="2p6"}
+  if(mit=="45"){mit_alias="4p5"}
+  if(mit=="Ref"){mit_alias="NoMit"}
 
   # create runname
-	if(co2=="co2") {
-	  title=paste(ssp,gcm_alias,substring(rcp,4),mit_alias,sep="_")
-	} else {
-	   title=paste(ssp,gcm_alias,substring("rcp2p6",4),mit_alias,"NoCO2",sep="_")
-	}
-	cat(paste(title))
+  if(co2=="co2") {
+    title=paste(ssp,gcm_alias,substring(rcp,4),mit_alias,sep="_")
+  } else {
+     title=paste(ssp,gcm_alias,substring("rcp2p6",4),mit_alias,"NoCO2",sep="_")
+  }
+  cat(paste(title))
 
 
-	cfg<-general_settings(title=title)
-	cfg<-gms::setScenario(cfg,ssp)
-	cfg$input <- buildInputVector(climatescen_name=rcp,climate_model   = gcm, regionmapping = "coacch",calibration=calib)
-	mitigation=paste0("SSPDB-",ssp,"-",mit,"-",model)
-	cfg$gms$c56_pollutant_prices <- mitigation
-	cfg$gms$c60_2ndgen_biodem    <- mitigation
-	if(cc==FALSE){
-	  cfg<-gms::setScenario(cfg,"nocc")
-	} else {
-	  cfg<-gms::setScenario(cfg,"cc")
-	}
-	start_run(cfg=cfg,codeCheck=codeCheck)
+  cfg<-general_settings(title=title)
+  cfg<-gms::setScenario(cfg,ssp)
+  cfg$input <- buildInputVector(climatescen_name=rcp,climate_model   = gcm, regionmapping = "coacch",calibration=calib)
+  mitigation=paste0("SSPDB-",ssp,"-",mit,"-",model)
+  cfg$gms$c56_pollutant_prices <- mitigation
+  cfg$gms$c60_2ndgen_biodem    <- mitigation
+  if(cc==FALSE){
+    cfg<-gms::setScenario(cfg,"nocc")
+  } else {
+    cfg<-gms::setScenario(cfg,"cc")
+  }
+  start_run(cfg=cfg,codeCheck=codeCheck)
 }
 
 for (ssp in c("SSP1","SSP2","SSP3","SSP4","SSP5")){
-	if(ssp=="SSP1"){
-		model="IMAGE"
-		mitopt = c("Ref")
-		rcpopt = c("rcp2p6","rcp4p5","rcp6p0","NoCC")
-		gcmopt = c("HadGEM2_ES")
-		}
-	if(ssp=="SSP2"){
-		model="MESSAGE-GLOBIOM"
-		mitopt = c("26","45","Ref")
-		rcpopt = c("rcp2p6","rcp4p5","rcp6p0","NoCC")
-		gcmopt = c("IPSL_CM5A_LR","HadGEM2_ES","GFDL_ESM2M","NorESM1_M")
-		}
-	if(ssp=="SSP3"){
-		model="AIM-CGE"
-		mitopt = c("Ref")
-		rcpopt = c("rcp4p5","rcp6p0","NoCC")
-		gcmopt = c("HadGEM2_ES")
-		}
-	if(ssp=="SSP4"){
-		model="GCAM4"
-		mitopt = c("Ref")
-		rcpopt = c("rcp2p6","rcp4p5","rcp6p0","NoCC")
-		gcmopt = c("HadGEM2_ES")
-		}
-	if(ssp=="SSP5"){
-		model="REMIND-MAGPIE"
-		mitopt = c("Ref")
-		rcpopt = c("rcp2p6","rcp4p5","rcp6p0","rcp8p5","NoCC")
-		gcmopt = c("HadGEM2_ES")
-		}
-	for(mit in mitopt){
-		for (rcp in rcpopt) {
-			co2="co2"
-			if(rcp=="NoCC"){
-				gcm = c("HadGEM2_ES")
-				rcp=  c("rcp4p5")
-				start_the_run(ssp,mit,rcp,gcm,co2,cc=FALSE)
-			} else {
-				for(gcm in gcmopt){
-				  start_the_run(ssp,mit,rcp,gcm,co2,cc=TRUE)
-				}
-				if (rcp == "rcp8p5"){
-					co2="noco2"
-					start_the_run(ssp,mit,rcp,gcm,co2,cc=TRUE)
-				}
-			}
-		}
-	}
+  if(ssp=="SSP1"){
+    model="IMAGE"
+    mitopt = c("Ref")
+    rcpopt = c("rcp2p6","rcp4p5","rcp6p0","NoCC")
+    gcmopt = c("HadGEM2_ES")
+    }
+  if(ssp=="SSP2"){
+    model="MESSAGE-GLOBIOM"
+    mitopt = c("26","45","Ref")
+    rcpopt = c("rcp2p6","rcp4p5","rcp6p0","NoCC")
+    gcmopt = c("IPSL_CM5A_LR","HadGEM2_ES","GFDL_ESM2M","NorESM1_M")
+    }
+  if(ssp=="SSP3"){
+    model="AIM-CGE"
+    mitopt = c("Ref")
+    rcpopt = c("rcp4p5","rcp6p0","NoCC")
+    gcmopt = c("HadGEM2_ES")
+    }
+  if(ssp=="SSP4"){
+    model="GCAM4"
+    mitopt = c("Ref")
+    rcpopt = c("rcp2p6","rcp4p5","rcp6p0","NoCC")
+    gcmopt = c("HadGEM2_ES")
+    }
+  if(ssp=="SSP5"){
+    model="REMIND-MAGPIE"
+    mitopt = c("Ref")
+    rcpopt = c("rcp2p6","rcp4p5","rcp6p0","rcp8p5","NoCC")
+    gcmopt = c("HadGEM2_ES")
+    }
+  for(mit in mitopt){
+    for (rcp in rcpopt) {
+      co2="co2"
+      if(rcp=="NoCC"){
+        gcm = c("HadGEM2_ES")
+        rcp=  c("rcp4p5")
+        start_the_run(ssp,mit,rcp,gcm,co2,cc=FALSE)
+      } else {
+        for(gcm in gcmopt){
+          start_the_run(ssp,mit,rcp,gcm,co2,cc=TRUE)
+        }
+        if (rcp == "rcp8p5"){
+          co2="noco2"
+          start_the_run(ssp,mit,rcp,gcm,co2,cc=TRUE)
+        }
+      }
+    }
+  }
 }
