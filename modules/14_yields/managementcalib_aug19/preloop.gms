@@ -16,7 +16,7 @@ p14_pyield_LPJ_reg(t,i) = (sum(cell(i,j),i14_yields_calib(t,j,"pasture","rainfed
                             sum(cell(i,j),pm_land_start(j,"past")) );
 
 p14_pyield_corr(t,i) = (f14_pyld_hist(t,i)/p14_pyield_LPJ_reg(t,i))$(sum(sameas(t_past,t),1) = 1)
-			+ sum(t_past,(f14_pyld_hist(t_past,i)/(p14_pyield_LPJ_reg(t_past,i)+0.000001))$(ord(t_past)=card(t_past)))$(sum(sameas(t_past,t),1) <> 1);
+      + sum(t_past,(f14_pyld_hist(t_past,i)/(p14_pyield_LPJ_reg(t_past,i)+0.000001))$(ord(t_past)=card(t_past)))$(sum(sameas(t_past,t),1) <> 1);
 i14_yields_calib(t,j,"pasture",w) = i14_yields_calib(t,j,"pasture",w) * sum(cell(i,j),p14_pyield_corr(t,i));
 
 
@@ -151,7 +151,7 @@ if ((s14_calib_ir2rf = 1),
 
 * set default values in case of missing input file
 if(sum((i,ltype14),f14_yld_calib(i,ltype14)) = 0,
-	f14_yld_calib(i,ltype14) = 1;
+  f14_yld_calib(i,ltype14) = 1;
 );
 
 

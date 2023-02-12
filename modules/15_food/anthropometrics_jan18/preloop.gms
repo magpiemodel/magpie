@@ -42,14 +42,14 @@ $endif
 
 * Stronger ruminant fadeout for India
 if (s15_rum_share_fadeout_india_strong = 1,
-	i15_rum_share_fadeout(t,"IND") = f15_rum_share_fadeout_india(t);
+  i15_rum_share_fadeout(t,"IND") = f15_rum_share_fadeout_india(t);
 );
 
 * Milk fadeout for India
 if (s15_milk_share_fadeout_india = 0,
-	i15_milk_share_fadeout_india(t) = 1;
+  i15_milk_share_fadeout_india(t) = 1;
 Elseif s15_milk_share_fadeout_india = 1,
-	i15_milk_share_fadeout_india(t) = f15_milk_share_fadeout_india(t);
+  i15_milk_share_fadeout_india(t) = f15_milk_share_fadeout_india(t);
 );
 
 display i15_milk_share_fadeout_india;

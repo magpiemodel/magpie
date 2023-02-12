@@ -5,10 +5,10 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-v44_bii.l(biome44) = 0.75;
+v44_bii.l(i,biome44) = 0.75;
 
-v44_bii.fx(biome44)$(sum(j, f44_biome(j,biome44)) = 0) = 0;
-v44_bii_missing.fx(biome44)$(sum(j, f44_biome(j,biome44)) = 0) = 0;
-p44_bii_lower_bound(t,biome44) = 0;
+v44_bii.fx(i,biome44)$(sum(cell(i,j), f44_biome(j,biome44)) = 0) = 0;
+v44_bii_missing.fx(i,biome44)$(sum(cell(i,j), f44_biome(j,biome44)) = 0) = 0;
+p44_bii_lower_bound(t,i,biome44) = 0;
 
 vm_bv.l(j,landcover44,potnatveg) = 0;

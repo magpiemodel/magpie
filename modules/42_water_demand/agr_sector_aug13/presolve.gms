@@ -13,11 +13,11 @@ if (m_year(t) <= sm_fix_SSP2,
  v42_irrig_eff.fx(j) = 1 / (1+2.718282**((-22160-sum(cell(i,j), im_gdp_pc_mer("y1995",i))) / 37767));
 else
  if ((s42_irrig_eff_scenario = 1),
- 	v42_irrig_eff.fx(j) = s42_irrigation_efficiency;
+  v42_irrig_eff.fx(j) = s42_irrigation_efficiency;
  Elseif (s42_irrig_eff_scenario = 2),
- 	v42_irrig_eff.fx(j) = 1 / (1+2.718282**((-22160-sum(cell(i,j), im_gdp_pc_mer("y1995",i))) / 37767));
+  v42_irrig_eff.fx(j) = 1 / (1+2.718282**((-22160-sum(cell(i,j), im_gdp_pc_mer("y1995",i))) / 37767));
  Elseif (s42_irrig_eff_scenario=3),
-	v42_irrig_eff.fx(j) = 1 / (1+2.718282**((-22160-sum(cell(i,j), im_gdp_pc_mer(t,i))) / 37767));
+  v42_irrig_eff.fx(j) = 1 / (1+2.718282**((-22160-sum(cell(i,j), im_gdp_pc_mer(t,i))) / 37767));
  );
 );
 

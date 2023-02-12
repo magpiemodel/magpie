@@ -16,6 +16,6 @@ else
  if(s73_foresight=1,
     pm_demand_forestry_future(i,kforestry)    = sum(t_ext$(t_ext.pos =  t.pos + pm_representative_rotation(t,i)),pm_demand_ext(t_ext,i,kforestry));
  else
- 	pm_demand_forestry_future(i,kforestry)    = pm_demand_ext(t,i,kforestry);
+  pm_demand_forestry_future(i,kforestry)    = pm_demand_ext(t,i,kforestry);
  );
 );

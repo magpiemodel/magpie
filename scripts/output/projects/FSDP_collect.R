@@ -58,15 +58,13 @@ if (dir.exists(hi_datasets_path)) {
 
     if (length(hi_versionToUse) == 0) {
 
-        message("In FSDP_collect.R: No corresponding version ID was found within the FSEC health impacts datasets.
-              Using the highest current version.")
+        message("No corresponding version ID was found within the health impacts datasets. Using the latest available.")
 
         highestVersionNr <- max(as.numeric(str_extract(hi_datasets, "(?<=v)(.*?)(?=_)")))
         hi_versionToUse <- grep(paste0("v", highestVersionNr), hi_datasets, value = TRUE)
 
     } else if (length(hi_versionToUse) >= 2) {
-        stop("In FSDP_collect.R: More than one health impacts datasets with this scenario's version ID were found.
-            Only one is expected.")
+        stop("Duplicated version IDs were found in the health impacts datasets, only one is expected.")
     }
 
     hi_versionToUse_path <- file.path(hi_datasets_path, hi_versionToUse)
@@ -79,18 +77,16 @@ if (dir.exists(hi_datasets_path)) {
         message("Appending health impact report: ", title)
         tryCatch(
             expr = {
-                appendReportHealthImpacts(healthImpacts_gdx = hi_gdx,
-                                          scenario = title,
-                                          dir = .x)
+                appendReportHealthImpacts(healthImpacts_gdx = hi_gdx, scenario = title, dir = .x)
             }, error = function(e) {
-                message("In FSDP_collect.R: Unable to append health impacts!\n", e)
+                message("Unable to append health impacts for scenario: ", title, ". Likely it is non-dietary.")
             }
         )
     }
     lapply(X = outputdir, FUN = .appendHealthImpacts)
 
 } else {
-    message("In FSDP_collect.R: Directory storing health impacts datasets wasn't found. Skipping health impacts.")
+    message("The directory storing health impacts datasets wasn't found. Skipping health impacts.")
 }
 
 ##########
@@ -103,7 +99,7 @@ if (dir.exists(hi_datasets_path)) {
         expr = {
             appendReportNutrientSurplus(scenario = title, dir = .x)
         }, error = function(e) {
-            message("In FSDP_collect.R: Unable to append the nutrient surplus dataset!\n", e)
+            message("Unable to append the nutrient surplus dataset!\n", e)
         }
     )
 }
@@ -277,6 +273,7 @@ var_reg <- c(indicators_main,
 var_reg <- unique(var_reg)
 
 var_iso <- c("Population",
+             "Health|Years of life lost|Risk|Diet and anthropometrics",
              "Labor|Employment|Agricultural employment",
              "Nutrition|Anthropometrics|People underweight",
              "Nutrition|Anthropometrics|People obese",
@@ -299,9 +296,10 @@ for (i in 1:length(outputdir)) {
 
   ### ISO and Grid level outputs
   ## only for BAU and SDP in 2020 and 2050 to save time and storage
-  scen <- c("BAU", "FSDP")
   years <- c(2020, 2050)
-  if (unlist(strsplit(cfg$title, "_"))[3] %in% scen) {
+  scen <- c("BAU", "FSDP")
+  thisScen <- unlist(strsplit(cfg$title, "_"))[3]
+  if (thisScen %in% scen) {
 
     ### ISO level outputs
     rep <- file.path(outputdir[i], "report_iso.rds")
@@ -324,6 +322,17 @@ for (i in 1:length(outputdir)) {
       a <- addLocation(a)
       y <- mbind(y,a)
     } else missing <- c(missing,nc_file)
+
+    ## Gridded temperature data from ISIMIP archive for relevant SSP/RCP
+    rcp <- ifelse(thisScen == "BAU", "ssp245", "ssp119")
+    nc_file <- "./input/FSEC_GlobalSurfaceTempPerRCP_v2_16-01-23/FSEC_GlobalSurfaceTempPerRCP_v2_16-01-23.mz"
+    if (file.exists(nc_file)) {
+      a <- read.magpie(nc_file)[, years, rcp]
+      getNames(a) <- "Global Surface Temperature (C)"
+      getSets(a, fulldim = FALSE)[3] <- "variable"
+      a <- addLocation(a)
+      y <- mbind(y, a)
+    } else missing <- c(missing, nc_file)
 
     ## Crop diversity
     nc_file <- file.path(outputdir[i], paste0(cfg$title, "-CropDiversityGridded.nc"))
