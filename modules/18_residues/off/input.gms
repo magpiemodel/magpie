@@ -5,7 +5,7 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-table fm_multicropping(t_all,i) Multicropping indicator as ratio of area harvested by physical area (1)
+table f18_multicropping(t_all,i) Multicropping indicator as ratio of area harvested by physical area (1)
 $ondelim
 $include "./modules/18_residues/input/f18_multicropping.csv"
 $offdelim;

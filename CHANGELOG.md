@@ -28,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** added SLURM dayMax submission type for standby QOS
 
 ### removed
--
+- **42_water_demand** removed fm_multicropping factor because of fallow inconsistency
 
 ### fixed
 - **scripts** fixed a bug where renvs for high resolution runs were missing some packages
