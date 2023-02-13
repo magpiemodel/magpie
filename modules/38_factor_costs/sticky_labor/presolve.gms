@@ -69,7 +69,6 @@ if (m_year(t) <= s38_startyear_labor_substitution,
 else 
 * in case of labor share target: initialize level by assuming that the regional target shares would be enforced in each cell
   if (s38_target_labor_share <> 0,
-*    v38_capital_need.l(j,kcr,"immobile") = sum(cell(i,j), (i38_ces_shr(j,kcr) / (i38_ces_scale(j,kcr)**s38_ces_elast_par - (1-i38_ces_shr(j,kcr))*(pm_labor_prod(t,j) * pm_productivity_gain_from_wages(t,i)*v38_laborhours_need.l(j,kcr)**(-s38_ces_elast_par))))**(1/s38_ces_elast_par)) * s38_immobile;
     v38_capital_need.l(j,kcr,"immobile") = sum(cell(i,j), ((1-p38_min_labor_share(t,j))*v38_laborhours_need.l(j,kcr)*pm_hourly_costs(t,i,"scenario")) / (p38_min_labor_share(t,j)*(pm_interest(t,i)+s38_depreciation_rate))) * s38_immobile;
     v38_capital_need.l(j,kcr,"mobile") = v38_capital_need.l(j,kcr,"immobile") * (1-s38_immobile) / s38_immobile;
   );

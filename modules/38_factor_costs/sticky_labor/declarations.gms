@@ -60,6 +60,6 @@ parameters
  oq38_investment_immobile(t,j,kcr,type)  Cellular immobile investments into farm capital   (mio USD05MER)
  oq38_investment_mobile(t,j,type)        Cellular mobile investments into farm capital   (mio USD05MER)
  oq38_ces_prodfun(t,j,kcr,type)          CES production function for one unit of output (1)
- oq38_labor_capital_ratio(t,j,type)      Ratio between labor and capital needed for one unit of output (1)
+ oq38_labor_share_target(t,j,type)       Enforces minimum labor cost share out of factor costs (1)
 ;
 *##################### R SECTION END (OUTPUT DECLARATIONS) #####################
