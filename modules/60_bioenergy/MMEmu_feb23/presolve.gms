@@ -34,4 +34,8 @@ else
 );
 
 * Add minimal bioenergy demand in case of zero demand or very small demand to avoid zero prices
-i60_bioenergy_dem(t,i)$(i60_bioenergy_dem(t,i) < s60_2ndgen_bioenergy_dem_min) = s60_2ndgen_bioenergy_dem_min;
+if(m_year(t) <= sm_fix_SSP2,
+  i60_bioenergy_dem(t,i)$(i60_bioenergy_dem(t,i) < s60_2ndgen_bioenergy_dem_min) = s60_2ndgen_bioenergy_dem_min;
+else
+  i60_bioenergy_dem(t,i)$(i60_bioenergy_dem(t,i) < s60_2ndgen_bioenergy_dem_min_post_fix) = s60_2ndgen_bioenergy_dem_min_post_fix;
+);

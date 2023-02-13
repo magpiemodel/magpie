@@ -62,7 +62,8 @@ sets
       SSPDB-SSP5-34-REMIND-MAGPIE,
       SSPDB-SSP5-45-REMIND-MAGPIE,
       SSPDB-SSP5-60-REMIND-MAGPIE,
-      SSPDB-SSP5-Ref-REMIND-MAGPIE /
+      SSPDB-SSP5-Ref-REMIND-MAGPIE,
+      R21M42-SSP2-Npi-PhaseOut20 /
 
 ;
 *######################### R SECTION END (SETS) ################################
