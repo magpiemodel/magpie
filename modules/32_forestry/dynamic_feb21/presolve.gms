@@ -170,8 +170,8 @@ p32_updated_gs_reg(t,i) = 1;
 p32_updated_gs_reg(t,i)$(sum((cell(i,j),ac_sub),p32_land(t,j,"plant",ac_sub))>0) = (sum((cell(i,j),ac_sub),(pm_timber_yield(t,j,ac_sub,"forestry") / sm_wood_density) * p32_land(t,j,"plant",ac_sub))/ sum((cell(i,j),ac_sub),p32_land(t,j,"plant",ac_sub)));
 
 * Avoid conflict between afforestation for carbon uptake on land and secdforest restoration
-pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") > sum(ac, p32_land(t,j,"ndc",ac) + p32_aff_pol_timestep(t,j) + p32_land(t,j,"aff",ac)))
-        = pm_land_conservation(t,j,"secdforest","restore") - (sum(ac, p32_land(t,j,"ndc",ac) + p32_land(t,j,"aff",ac)) + p32_aff_pol_timestep(t,j));
-pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") <= sum(ac, p32_land(t,j,"ndc",ac) + p32_land(t,j,"aff",ac)) + p32_aff_pol_timestep(t,j)) = 0;
+pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") > sum(ac, p32_land(t,j,"ndc",ac) + v32_land.lo(j,"plant",ac) + p32_land(t,j,"aff",ac))+ p32_aff_pol_timestep(t,j))
+        = pm_land_conservation(t,j,"secdforest","restore") - (sum(ac, p32_land(t,j,"ndc",ac) + p32_land(t,j,"aff",ac) + v32_land.lo(j,"plant",ac)) + p32_aff_pol_timestep(t,j));
+pm_land_conservation(t,j,"secdforest","restore")$(pm_land_conservation(t,j,"secdforest","restore") <= sum(ac, p32_land(t,j,"ndc",ac) + p32_land(t,j,"aff",ac) + v32_land.lo(j,"plant",ac)) + p32_aff_pol_timestep(t,j)) = 0;
 
 *** EOF presolve.gms ***
