@@ -31,4 +31,7 @@ $Ifi "%phase%" == "scaling" $include "./modules/38_factor_costs/sticky_labor/sca
 $Ifi "%phase%" == "preloop" $include "./modules/38_factor_costs/sticky_labor/preloop.gms"
 $Ifi "%phase%" == "presolve" $include "./modules/38_factor_costs/sticky_labor/presolve.gms"
 $Ifi "%phase%" == "postsolve" $include "./modules/38_factor_costs/sticky_labor/postsolve.gms"
+$Ifi "%phase%" == "nl_fix" $include "./modules/38_factor_costs/sticky_labor/nl_fix.gms"
+$Ifi "%phase%" == "nl_release" $include "./modules/38_factor_costs/sticky_labor/nl_release.gms"
+$Ifi "%phase%" == "nl_relax" $include "./modules/38_factor_costs/sticky_labor/nl_relax.gms"
 *######################## R SECTION END (PHASES) ###############################
