@@ -39,7 +39,10 @@ scalars
   s56_limit_ch4_n2o_price upper limit for CH4 and N2O GHG prices (USD05MER per tC) / 4000 /
   s56_cprice_red_factor reduction factor for CO2 price (-) / 1 /
   s56_ghgprice_start start year for ghg price phase-in (year) / 2025 /
-  s56_ghgprice_phase_in  Switch for phasing-in GHG price over a 20 year period  (1=on 0=off) / 0 /
+  s56_ghgprice_end end year for ghg price phase-in (year) / 2100 /
+  c56_ghgprice_linexp Switch between linear (0) and exponential (1) GHG price trajectory / 1 /
+  s56_ghgprice_startprice CO2 price at start of phase-in (USD05MER per tCO2) / 0 /
+  s56_ghgprice_endprice CO2 price at end of phase-in (USD05MER per tCO2) / 0 / 
   s56_ghgprice_devstate_scaling Switch for scaling GHG price with development state (1=on 0=off) / 0 /
   s56_c_price_induced_aff Switch for C price driven afforestation (1=on 0=off) / 1 /
   s56_c_price_exp_aff c price expectation for afforestation (years) / 50 /

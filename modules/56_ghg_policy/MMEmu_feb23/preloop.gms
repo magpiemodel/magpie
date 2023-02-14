@@ -11,31 +11,30 @@ vm_carbon_stock.l(j,land,ag_pools,stockType) = fm_carbon_density("y1995",j,land,
 
 v56_emis_pricing.fx(i,emis_oneoff,pollutants)$(not sameas(pollutants,"co2_c")) = 0;
 
-****** Region price share for ghg policy of selective countries:
-* Country switch to determine countries for which ghg policy shall be applied.
-* In the default case, the ghg policy affects all countries when activated.
-p56_country_dummy(iso) = 0;
-p56_country_dummy(policy_countries56) = 1;
-* Because MAgPIE is not run at country-level, but at region level, a region
-* share is calculated that translates the countries' influence to regional level.
-* Countries are weighted by their population size.
-p56_region_price_shr(t_all,i) = sum(i_to_iso(i,iso), p56_country_dummy(iso) * im_pop_iso(t_all,iso)) / sum(i_to_iso(i,iso), im_pop_iso(t_all,iso));
+**** Exponentially or linearly implement globally uniform pollution prices
+* 44/12 conversion from USD per tCO2 to USD per tC
+* 28 and 265 Global Warming Potentials from AR5 WG1 CH08 Table 8.7, conversion from USD per tCO2 to USD per tCH4 and USD per tN2O
+* 44/28 conversion from USD per tN2O to USD per tN
 
-****select ghg prices
-$ifthen "%c56_pollutant_prices%" == "coupling"
- im_pollutant_prices(t_all,i,pollutants,emis_source) = f56_pollutant_prices_coupling(t_all,i,pollutants);
-$elseif "%c56_pollutant_prices%" == "emulator"
- im_pollutant_prices(t_all,i,pollutants,emis_source) = f56_pollutant_prices_emulator(t_all,i,pollutants);
-$else
- im_pollutant_prices(t_all,i,pollutants,emis_source) = f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices%") * p56_region_price_shr(t_all,i)
-                                         + f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices_noselect%") * (1-p56_region_price_shr(t_all,i));
-** Harmonize till 2020 if not coupled or emulator
-loop(t_all$(m_year(t_all) <= sm_fix_SSP2),
-im_pollutant_prices(t_all,i,pollutants,emis_source) = f56_pollutant_prices(t_all,i,pollutants,"R21M42-SSP2-NPi") * p56_region_price_shr(t_all,i)
-                                        + f56_pollutant_prices(t_all,i,pollutants,"R21M42-SSP2-NPi") * (1-p56_region_price_shr(t_all,i));
+loop(t_all,
+ if(m_year(t_all) <= s56_ghgprice_start,
+    p56_co2_price(t_all) = 0;
+elseif m_year(t_all) >= s56_ghgprice_end,
+    p56_co2_price(t_all) = s56_ghgprice_endprice;
+else
+    if(c56_ghgprice_linexp = 0,
+      p56_co2_price(t_all) = s56_ghgprice_startprice + ((s56_ghgprice_endprice - s56_ghgprice_startprice) / (s56_ghgprice_end - s56_ghgprice_start)) * (m_year(t_all) - s56_ghgprice_start);
+    elseif c56_ghgprice_linexp = 1,
+      p56_co2_price(t_all) = 0 + (s56_ghgprice_startprice * ((s56_ghgprice_endprice / s56_ghgprice_startprice) ** (1 / (s56_ghgprice_end - s56_ghgprice_start))) ** (m_year(t_all) - s56_ghgprice_start)) $ (s56_ghgprice_startprice <> 0);
+    );
+  );
 );
-$endif
 
+im_pollutant_prices(t_all,i,pollutants,emis_source) = 0;
+im_pollutant_prices(t_all,i,"co2_c",emis_source) = (44 / 12) * p56_co2_price(t_all);
+im_pollutant_prices(t_all,i,"ch4",emis_source) = 28 * p56_co2_price(t_all);
+im_pollutant_prices(t_all,i,"n2o_n_direct",emis_source) = 265 * (44 / 28) * p56_co2_price(t_all);
+im_pollutant_prices(t_all,i,"n2o_n_indirect",emis_source) = 265 * (44 / 28) * p56_co2_price(t_all);
 
 ***save im_pollutant_prices to parameter
 p56_pollutant_prices_input(t_all,i,pollutants,emis_source) = im_pollutant_prices(t_all,i,pollutants,emis_source);
@@ -52,15 +51,6 @@ im_pollutant_prices(t_all,i,"n2o_n_indirect",emis_source)$(im_pollutant_prices(t
 ***lowers the economic incentive for CO2 emission reduction (avoided deforestation) and afforestation
 im_pollutant_prices(t_all,i,"co2_c",emis_source) = im_pollutant_prices(t_all,i,"co2_c",emis_source)*s56_cprice_red_factor;
 
-***phase-in of GHG price over 20 year period; start depends on s56_ghgprice_start
-if (s56_ghgprice_phase_in = 1,
-im_pollutant_prices(t_all,i,pollutants,emis_source)$(m_year(t_all) < s56_ghgprice_start) = 0;
-im_pollutant_prices(t_all,i,pollutants,emis_source)$(m_year(t_all) = s56_ghgprice_start) = 0.1*im_pollutant_prices(t_all,i,pollutants,emis_source);
-im_pollutant_prices(t_all,i,pollutants,emis_source)$(m_year(t_all) = s56_ghgprice_start+5) = 0.2*im_pollutant_prices(t_all,i,pollutants,emis_source);
-im_pollutant_prices(t_all,i,pollutants,emis_source)$(m_year(t_all) = s56_ghgprice_start+10) = 0.4*im_pollutant_prices(t_all,i,pollutants,emis_source);
-im_pollutant_prices(t_all,i,pollutants,emis_source)$(m_year(t_all) = s56_ghgprice_start+15) = 0.8*im_pollutant_prices(t_all,i,pollutants,emis_source);
-im_pollutant_prices(t_all,i,pollutants,emis_source)$(m_year(t_all) >= s56_ghgprice_start+20) = im_pollutant_prices(t_all,i,pollutants,emis_source);
-);
 ***multiply GHG prices with development state to account for institutional requirements needed for implementing a GHG pricing scheme
 im_pollutant_prices(t_all,i,pollutants,emis_source)$(s56_ghgprice_devstate_scaling = 1) = im_pollutant_prices(t_all,i,pollutants,emis_source)*im_development_state(t_all,i);
 
