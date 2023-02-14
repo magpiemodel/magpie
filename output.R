@@ -179,10 +179,10 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     }
   }
 
-  if(is.null(outputdir)) outputdir <- choose_folder("Choose runs")
-  if(is.null(output))     output     <- gms::selectScript("./scripts/output")
-  if(is.null(submit))     submit     <- choose_submit("Choose submission type")
-  if(is.null(output)) {
+  if (is.null(outputdir)) outputdir <- choose_folder("Choose runs")
+  if (is.null(output))     output   <- gms::selectScript("./scripts/output")
+  if (is.null(submit))     submit   <- choose_submit("Choose submission type")
+  if (is.null(output)) {
     message("No output script selected! Stop here.")
     return(invisible(NULL))
   }
