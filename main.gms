@@ -148,17 +148,17 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.79_h12_magpie.tgz
-* md5sum: 4f3f5fd72716fe371d646c69c30e6fd3
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: rev4.81_h12_magpie.tgz
+* md5sum: 89bfe8e5c74dd8ba72c023a785d01989
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.79_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: a18af444eb4a3d24956f66e31e8634d8
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: rev4.81_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* md5sum: 93fa9d97ad83b0bcc4e9ec8e9b741566
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.79_h12_validation.tgz
-* md5sum: 0a617c2999127a50146ac106cd6ee4bf
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: rev4.81_h12_validation.tgz
+* md5sum: 07eb91a745b1a176ac35cf0d6536d68a
+* Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Used data set: additional_data_rev4.36.tgz
 * md5sum: e24c46872f77dc15ad8603bdac1e6065
@@ -179,11 +179,11 @@ $title magpie
 * 
 * Regionscode: 62eff8f7
 * 
-* Regions data revision: 4.79
+* Regions data revision: 4.81
 * 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.79
+* * Revision: 4.81
 * 
 * aggregation settings:
 * * Input resolution: 0.5
@@ -194,8 +194,13 @@ $title magpie
 *     6   23    7    6    1   43   27    7   11   12   37   20
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
+* Warning messages:
+* 1: In gms::update_modules_embedding() :
+*   ./modules/38_factor_costs/mixed_reg_feb17/realization.gms not found, this realization cannot be used!
+* 2: In gms::update_modules_embedding() :
+*   ./modules/51_nitrogen/ipcc2006_sep16/realization.gms not found, this realization cannot be used!
 * 
-* Last modification (input data): Mon Feb 06 14:27:52 2023
+* Last modification (input data): Mon Feb 13 15:16:42 2023
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -221,7 +226,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  BilatPR_ON_testq21ex_supp_bothG_noTariff_penRot
+$setglobal c_title  BilatPR2_ON_rev81_tariff
 
 scalars
 s_use_gdx   use of gdx files                                       / 0 /
