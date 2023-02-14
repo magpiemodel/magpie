@@ -14,7 +14,7 @@ fsecScenario <- function(scenario) {
   source("config/default.cfg")
 
   # Version number
-  v <- "v31_FSEC"
+  v <- "v33_FSEC"
 
   x <- list(c_BAU            = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = "FSEC"),
@@ -136,7 +136,7 @@ fsecScenario <- function(scenario) {
                         "airPollution", "soil", "allDietAndWaste", "allEnvPrice", "RCP19")),
             # Scenarios (combinations of transformation clusters)
             b_ExternalPressures   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
-                                  fsec = c("FSEC", "population", "institutions", "energy", "bioplastics")),
+                                  fsec = c("FSEC", "population", "institutions", "energy", "bioplastics", "timberCities")),
             b_WaterSoil           = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "waterSparing", "soil")),
             b_REDDaffRuminants    = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
@@ -217,7 +217,6 @@ fsecScenario <- function(scenario) {
   cfg$recalibrate <- FALSE
   cfg$qos         <- "standby_maxMem_dayMax"
   cfg$output      <- c(cfg$output,
-                       "extra/highres",
                        "rds_report_iso",
                        "extra/disaggregation_BII",
                        "projects/FSEC_dietaryIndicators",
