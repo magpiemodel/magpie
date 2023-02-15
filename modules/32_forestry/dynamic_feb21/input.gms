@@ -45,7 +45,8 @@ scalars
   s32_forestry_int_rate           Global interest rate for plantations (percent) / 0.05 /
   s32_max_self_suff               Upper ceiling for the self sufficiency used in calculation for establishment decision (1) / 0.8 /
   s32_aff_bii_coeff               BII coefficent to be used for CO2 price driven afforestation 0=natural vegetation 1=plantation (1) / 0 /
-  s32_max_aff_area_glo        Switch for global or regional afforestation constraint (1) / 1 /
+  s32_max_aff_area_glo            Switch for global or regional afforestation constraint (1) / 1 /
+  s32_aff_prot                    Switch for protection of afforested areas (0=until end of planning horizon 1=forever) / 0 /
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)
