@@ -216,15 +216,16 @@ fsecScenario <- function(scenario) {
   cfg$title       <- paste(v, scenario, sep = "")
   cfg$recalibrate <- FALSE
   cfg$qos         <- "standby_maxMem_dayMax"
-  cfg$output      <- c(cfg$output,
-                       "rds_report_iso",
+  cfg$output      <- c("extra/highres",
                        "extra/disaggregation_BII",
-                       "projects/FSEC_dietaryIndicators",
-                       "projects/FSEC_costs",
-                       "projects/FSEC_nitrogenPollution",
-                       "projects/FSEC_water",
-                       "projects/FSEC_cropDiversityGrid"
-                       )
+                        cfg$output,
+                        "rds_report_iso",
+                        "projects/FSEC_dietaryIndicators",
+                        "projects/FSEC_costs",
+                        "projects/FSEC_nitrogenPollution",
+                        "projects/FSEC_water",
+                        "projects/FSEC_cropDiversityGrid"
+                         )
   cfg$force_download  <- TRUE
   cfg$gms$s80_optfile <- 1
 
