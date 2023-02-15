@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
+- **sticky_labor** changed labor cost share constraint from regional to cellular level
+- **sticky_labor** renamed equation `q38_labor_capital_ratio` to `q38_labor_share_target`
 - **15_food** Interpret EAT-Lancet guidelines not as target but as lower/upper limits
 - **config** scenario_fsec.csv updated input data tgz
 - **config** scenario_fsec.csv updated to new biodiversity scenario
@@ -16,9 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** highres.R changed default resolution to c1000
 - **scripts** recalibrate.R and recalibrate_realization were modified to always use best_calib for the yield calibration.
 - **scripts** when manually running output scripts for multiple runs the lockfile is only created once
+- **config** input data revision to rev4.81 for trade margin bugfix
 
 ### added
 - **21_trade** New Bilateral trade realization selfsuff_reduced_bilat22 for bilateral trade within selffsuff constraints
+- **sticky_labor** `nl_fix`, `nl_relax` and `nl_release` added
 - **15_food** half_overweight scenario added
 - **config** added setting cfg$keep_restarts which controls whether restart files should be kept after a run finished
 - **config** changed default for `s_use_gdx` from 2 to 0
@@ -26,12 +30,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** added SLURM dayMax submission type for standby QOS
 
 ### removed
--
+- **42_water_demand** removed fm_multicropping factor because of fallow inconsistency
 
 ### fixed
 - **scripts** fixed a bug where renvs for high resolution runs were missing some packages
 - **44_biodiversity** added regional layer `i` in `bii_target` realisation to make it compatible with the high-resolution parallel optimization output script
 - **scripts** fixed in the calc_calib.R script the saving of calib_factors used in each iteration to ensure that they correspond to the divergence reported. Changed divergence from zero to NA for those iterations where calib_factors are above the limit. The best_calib selection criterion was changed from selecting the factors of the iteration with the lowest standard deviation to the selection, for each region, of the factor of the iteration with the lowest divergence. Also, factors from the first iteration are now not considered, and if two different factors had the same divergence for a region, the one of the latest iteration is picked.
+- **32_forestry** pm_land_conservation(t,j,"secdforest","restore") now accounts for the rotation length in timber plantations to avoid infeasibilities 
 
 ### removed
 -

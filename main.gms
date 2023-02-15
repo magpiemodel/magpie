@@ -224,7 +224,7 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  coup2100
+$setglobal c_timesteps  calib
 $setglobal c_past  till_2010
 $setglobal c_title  BilatPRFade_ON_Nofadeout
 
@@ -264,7 +264,7 @@ $setglobal natveg  dynamic_feb21
 
 $setglobal employment  exo_may22
 $setglobal labor_prod  off
-$setglobal factor_costs  per_ton_fao_may22
+$setglobal factor_costs  sticky_feb18
 $setglobal landconversion  calib
 
 $setglobal transport  gtap_nov12

@@ -14,7 +14,7 @@
  q18_prod_res_ag_reg(i2,kcr,attributes) ..
                  vm_res_biomass_ag(i2,kcr,attributes)
                  =e=
-                 (sum((cell(i2,j2),w), vm_area(j2,kcr,w)) * sum(ct,fm_multicropping(ct,i2)) * f18_cgf("intercept",kcr)
+                 (sum((cell(i2,j2),w), vm_area(j2,kcr,w)) * sum(ct,f18_multicropping(ct,i2)) * f18_cgf("intercept",kcr)
                  + vm_prod_reg(i2,kcr) * f18_cgf("slope",kcr))
                  * f18_attributes_residue_ag(attributes,kcr);
 
