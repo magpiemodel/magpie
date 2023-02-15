@@ -7,7 +7,7 @@
 
 sets
   rotascen30 rotation constraint scenarios
-  /none,	default,	fallow,	legumes,	agroforestry,	agroecology/
+  /none,  default,  fallow, legumes,  agroforestry, agroecology/
 
   rota30 rotational rules
   /all1_max, all2_max,

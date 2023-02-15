@@ -8,7 +8,7 @@
 $setglobal c18_burn_scen  phaseout
 *   options:    phaseout,constant
 
-table fm_multicropping(t_all,i) Multicropping indicator as ratio of area harvested by physical area (1)
+table f18_multicropping(t_all,i) Multicropping indicator as ratio of area harvested by physical area (1)
 $ondelim
 $include "./modules/18_residues/input/f18_multicropping.csv"
 $offdelim;

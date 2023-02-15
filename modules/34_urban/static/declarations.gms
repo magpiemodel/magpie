@@ -7,7 +7,7 @@
 
 
 positive variables
- vm_cost_urban(j)			Technical adjustment cost
+ vm_cost_urban(j)     Technical adjustment cost
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

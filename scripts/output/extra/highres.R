@@ -28,7 +28,7 @@ if(!exists("source_include")) {
 }
 
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
-gdx	<- file.path(outputdir,"fulldata.gdx")
+gdx <- file.path(outputdir,"fulldata.gdx")
 rds <- paste0(outputdir, "/report.rds")
 runstatistics <- paste0(outputdir,"/runstatistics.rda")
 resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
@@ -37,13 +37,10 @@ resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
-# wait some seconds (random between 5-30 sec) to avoid conflicts with locking the model folder (.lock file)
-Sys.sleep(runif(1, 5, 30))
-
 highres <- function(cfg) {
   #lock the model folder
-  lock_id <- gms::model_lock(timeout1=1,check_interval=runif(1, 10, 30))
-  on.exit(gms::model_unlock(lock_id), add=TRUE)
+  lockId <- gms::model_lock(timeout1 = 1)
+  withr::defer(gms::model_unlock(lockId))
 
   if(any(!(modelstat(gdx) %in% c(2,7)))) stop("Modelstat different from 2 or 7 detected")
 

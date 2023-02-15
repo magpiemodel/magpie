@@ -18,7 +18,7 @@ sets
    
    kforage(k) Forage feed categories
    /
-	pasture, foddr
+  pasture, foddr
    / 
 ; 
 

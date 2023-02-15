@@ -10,7 +10,6 @@
 q42_water_demand("agriculture",j2) ..
  vm_watdem("agriculture",j2) * v42_irrig_eff(j2) =e=
    sum(kcr, vm_area(j2,kcr,"irrigated") *
-   sum((cell(i2,j2),ct), fm_multicropping(ct,i2)) *
    ic42_wat_req_k(j2,kcr))
  + sum(kli, vm_prod(j2,kli) * ic42_wat_req_k(j2,kli) * v42_irrig_eff(j2));
 

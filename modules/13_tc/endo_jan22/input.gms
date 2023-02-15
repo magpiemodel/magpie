@@ -7,7 +7,7 @@
 
 
 scalars
- s13_ignore_tau_historical	ignore historical tau (1) or use it as lower bound (0) (binary) / 1 /
+ s13_ignore_tau_historical  ignore historical tau (1) or use it as lower bound (0) (binary) / 1 /
  s13_max_gdp_shr Maximum tech cost as share of regional GDP / Inf /
 ;
 

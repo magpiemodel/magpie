@@ -29,30 +29,30 @@
 *' natural succession, represented by age-class growth, results in increasing carbon stocks.
 
  q35_carbon_primforest(j2,ag_pools,stockType) ..
- 		vm_carbon_stock(j2,"primforest",ag_pools,stockType) =e=
-			m_carbon_stock(vm_land,fm_carbon_density,"primforest");
+    vm_carbon_stock(j2,"primforest",ag_pools,stockType) =e=
+      m_carbon_stock(vm_land,fm_carbon_density,"primforest");
 
  q35_carbon_secdforest(j2,ag_pools,stockType) ..
- 		vm_carbon_stock(j2,"secdforest",ag_pools,stockType) =e=
-			m_carbon_stock_ac(v35_secdforest,pm_carbon_density_ac,"ac","ac_sub");
+    vm_carbon_stock(j2,"secdforest",ag_pools,stockType) =e=
+      m_carbon_stock_ac(v35_secdforest,pm_carbon_density_ac,"ac","ac_sub");
 
  q35_carbon_other(j2,ag_pools,stockType) ..
- 		vm_carbon_stock(j2,"other",ag_pools,stockType) =e=
-			m_carbon_stock_ac(v35_other,pm_carbon_density_ac,"ac","ac_sub");
+    vm_carbon_stock(j2,"other",ag_pools,stockType) =e=
+      m_carbon_stock_ac(v35_other,pm_carbon_density_ac,"ac","ac_sub");
 
 *' The biodiversity value (BV) of primary forest, secondary forest and other land is computed by multiplying their respective land area with bii coefficients, which depend on the age class and whether the potential natural vegetation forest or non-forest (luh2 side layers).
 
  q35_bv_primforest(j2,potnatveg) .. vm_bv(j2,"primforest",potnatveg)
- 					=e=
- 					vm_land(j2,"primforest") * fm_bii_coeff("primary",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
+          =e=
+          vm_land(j2,"primforest") * fm_bii_coeff("primary",potnatveg) * fm_luh2_side_layers(j2,potnatveg);
 
  q35_bv_secdforest(j2,potnatveg) .. vm_bv(j2,"secdforest",potnatveg)
- 					=e=
+          =e=
           sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v35_secdforest(j2,ac)) *
           fm_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);
 
  q35_bv_other(j2,potnatveg) .. vm_bv(j2,"other",potnatveg)
- 					=e=
+          =e=
           sum(bii_class_secd, sum(ac_to_bii_class_secd(ac,bii_class_secd), v35_other(j2,ac)) *
           fm_bii_coeff(bii_class_secd,potnatveg)) * fm_luh2_side_layers(j2,potnatveg);
 
@@ -73,32 +73,32 @@
 *' This information is then passed to the land module ([10_land]):
 
  q35_landdiff .. vm_landdiff_natveg =e=
- 					sum((j2,ac),
- 							v35_other_expansion(j2,ac)
- 						  + v35_other_reduction(j2,ac)
- 						  + v35_secdforest_expansion(j2,ac)
- 						  + v35_secdforest_reduction(j2,ac)
- 						  + v35_primforest_reduction(j2));
+          sum((j2,ac),
+              v35_other_expansion(j2,ac)
+              + v35_other_reduction(j2,ac)
+              + v35_secdforest_expansion(j2,ac)
+              + v35_secdforest_reduction(j2,ac)
+              + v35_primforest_reduction(j2));
 
  q35_other_expansion(j2,ac_est) ..
- 	v35_other_expansion(j2,ac_est) =e=
- 		v35_other(j2,ac_est) - pc35_other(j2,ac_est);
+  v35_other_expansion(j2,ac_est) =e=
+    v35_other(j2,ac_est) - pc35_other(j2,ac_est);
 
  q35_other_reduction(j2,ac_sub) ..
- 	v35_other_reduction(j2,ac_sub) =e=
- 		pc35_other(j2,ac_sub) - v35_other(j2,ac_sub);
+  v35_other_reduction(j2,ac_sub) =e=
+    pc35_other(j2,ac_sub) - v35_other(j2,ac_sub);
 
  q35_secdforest_expansion(j2,ac_est) ..
- 	v35_secdforest_expansion(j2,ac_est) =e=
- 		v35_secdforest(j2,ac_est) - pc35_secdforest(j2,ac_est);
+  v35_secdforest_expansion(j2,ac_est) =e=
+    v35_secdforest(j2,ac_est) - pc35_secdforest(j2,ac_est);
 
  q35_secdforest_reduction(j2,ac_sub) ..
- 	v35_secdforest_reduction(j2,ac_sub) =e=
- 		pc35_secdforest(j2,ac_sub) - v35_secdforest(j2,ac_sub);
+  v35_secdforest_reduction(j2,ac_sub) =e=
+    pc35_secdforest(j2,ac_sub) - v35_secdforest(j2,ac_sub);
 
  q35_primforest_reduction(j2) ..
- 	v35_primforest_reduction(j2) =e=
- 		pcm_land(j2,"primforest") - vm_land(j2,"primforest");
+  v35_primforest_reduction(j2) =e=
+    pcm_land(j2,"primforest") - vm_land(j2,"primforest");
 
 *******************************************************************
 **** Timber production related equations in natural vegetation ****
@@ -126,7 +126,7 @@ q35_cost_hvarea(i2)..
 q35_prod_secdforest(j2)..
                            sum(kforestry, vm_prod_natveg(j2,"secdforest",kforestry))
                            =e=
-						   sum(ac_sub, v35_hvarea_secdforest(j2,ac_sub) * sum(ct,pm_timber_yield(ct,j2,ac_sub,"secdforest"))) / m_timestep_length_forestry;
+               sum(ac_sub, v35_hvarea_secdforest(j2,ac_sub) * sum(ct,pm_timber_yield(ct,j2,ac_sub,"secdforest"))) / m_timestep_length_forestry;
 
 ** Primary forest
 *' Woody biomass production from primary forests is calculated by multiplying the

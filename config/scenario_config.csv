@@ -77,7 +77,7 @@ gms$s73_timber_demand_switch;;;;;;;;;;;;;;;;;;;;;1;1;1;1;1;;;;;1;1;0;;;;;;;;;;;
 gms$s35_forest_damage;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;4;4;4;4;4;;;;;;
 gms$c32_shock_scenario;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;none;002lin2030;004lin2030;008lin2030;016lin2030;;;;;;
 gms$c35_shock_scenario;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;none;002lin2030;004lin2030;008lin2030;016lin2030;;;;;;
-input['cellular'];;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;rev4.79_h12_0bd54110_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1.tgz;rev4.79_h12_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz;rev4.79_h12_1b5c3817_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1.tgz;rev4.79_h12_3c888fa5_cellularmagpie_c200_MRI-ESM2-0-ssp460_lpjml-8e6c5eb1.tgz;rev4.79_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz;rev4.79_h12_09a63995_cellularmagpie_c200_MRI-ESM2-0-ssp585_lpjml-8e6c5eb1.tgz
+input['cellular'];;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;rev4.81_h12_0bd54110_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1.tgz;rev4.81_h12_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz;rev4.81_h12_1b5c3817_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1.tgz;rev4.81_h12_3c888fa5_cellularmagpie_c200_MRI-ESM2-0-ssp460_lpjml-8e6c5eb1.tgz;rev4.81_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz;rev4.81_h12_09a63995_cellularmagpie_c200_MRI-ESM2-0-ssp585_lpjml-8e6c5eb1.tgz
 gms$c52_land_carbon_sink_rcp;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;RCP19;RCP26;RCP45;RCP60;RCPBU;RCPBU
 gms$c57_macc_version;;;;;;;;;;;;;;;;;;;;;;;;;;PBL_2022;PBL_2022;PBL_2022;PBL_2022;;;;;;;;;;;;;;
 gms$c57_macc_scenario;;;;;;;;;;;;;;;;;;;;;;;;;;Default;Optimistic;Default;Optimistic;;;;;;;;;;;;;;
