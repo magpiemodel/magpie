@@ -17,7 +17,7 @@ v56_emis_pricing.fx(i,emis_oneoff,pollutants)$(not sameas(pollutants,"co2_c")) =
 * 44/28 conversion from USD per tN2O to USD per tN
 
 loop(t_all,
- if(m_year(t_all) <= s56_ghgprice_start,
+ if(m_year(t_all) < s56_ghgprice_start,
     p56_co2_price(t_all) = 0;
 elseif m_year(t_all) >= s56_ghgprice_end,
     p56_co2_price(t_all) = s56_ghgprice_endprice;
