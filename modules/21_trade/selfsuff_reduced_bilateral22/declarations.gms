@@ -8,7 +8,7 @@
 parameters
  i21_trade_bal_reduction(t_all,k_trade)         Trade balance reduction (1)
  i21_trade_margin(i_ex,i_im,k_trade)            Trade transport and admin costs (USD05MER per tDM)
- i21_trade_tariff(i_ex,i_im,k_trade)            Trade tariffs (USD05MER per tDM)
+ i21_trade_tariff(t_all, i_ex,i_im,k_trade)            Trade tariffs (USD05MER per tDM)
  pm_selfsuff_ext(t_ext,h,kforestry)             Self sufficiency for timber products in extended time frame (1)
 ;
 
@@ -23,7 +23,7 @@ positive variables
 ;
 
 equations
-q21_trade_glo(k_trade)                  Global production constraint (mio. tDM per yr)
+ q21_trade_glo(k_trade)                  Global production constraint (mio. tDM per yr)
  q21_notrade(h,k_notrade)                Superregional production constraint of non-tradable commodities (mio. tDM per yr)
  q21_trade_reg(h,k_trade)                Superregional trade balances i.e. minimum self-sufficiency ratio (1)
  q21_trade_reg_up(h,k_trade)             Superregional trade balances i.e. maximum self-sufficiency ratio (1)

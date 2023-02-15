@@ -16,9 +16,19 @@ i21_trade_bal_reduction(t_all,"woodfuel") = i21_trade_bal_reduction(t_all,"wood"
 i21_trade_margin(i_ex,i_im,k_trade) = f21_trade_margin(i_ex,i_im,k_trade);
 
 if ((s21_trade_tariff=1),
-    i21_trade_tariff(i_ex,i_im,k_trade) = f21_trade_tariff(i_ex,i_im,k_trade);
+    i21_trade_tariff(t_all, i_ex,i_im,k_trade) = f21_trade_tariff(i_ex,i_im,k_trade);
 elseif (s21_trade_tariff=0),
-    i21_trade_tariff(i_ex,i_im,k_trade) = 0;
+    i21_trade_tariff(t_all, i_ex,i_im,k_trade) = 0;
+);
+
+if ((s21_trade_tariff_fadeout=1),
+loop(t_all,
+   i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) > s21_trade_tariff_startyear AND m_year(t_all) < s21_trade_tariff_targetyear) = ((((m_year(t_all)-s21_trade_tariff_startyear) /
+                                                                                                                                           (s21_trade_tariff_targetyear-s21_trade_tariff_startyear))) * (0-1) + 1) * 
+                                                                                                                                           i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) > s21_trade_tariff_startyear AND m_year(t_all)< s21_trade_tariff_targetyear);
+i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) <= s21_trade_tariff_startyear) = 1 * i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) <= s21_trade_tariff_startyear); 
+i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) >= s21_trade_tariff_targetyear) = 0 * i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) >= s21_trade_tariff_targetyear); 
+);
 );
 
 pm_selfsuff_ext(t_ext,h,kforestry) = f21_self_suff("y2150",h,kforestry);

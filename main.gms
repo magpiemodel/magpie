@@ -164,9 +164,9 @@ $title magpie
 * md5sum: e24c46872f77dc15ad8603bdac1e6065
 * Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_09Jan23.tgz
-* md5sum: 0fd18901ec047862918bf598ac126411
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: calibration_H12_per_ton_fao_may22_glo_13Feb23.tgz
+* md5sum: e771e9b6f2202124db3f3bc296596b17
+* Repository: /p/projects/landuse/data/input/calibration
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -200,7 +200,7 @@ $title magpie
 * 2: In gms::update_modules_embedding() :
 *   ./modules/51_nitrogen/ipcc2006_sep16/realization.gms not found, this realization cannot be used!
 * 
-* Last modification (input data): Mon Feb 13 15:16:42 2023
+* Last modification (input data): Wed Feb 15 19:04:47 2023
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -226,7 +226,7 @@ $offlisting
 
 $setglobal c_timesteps  coup2100
 $setglobal c_past  till_2010
-$setglobal c_title  BilatPR2_ON_rev81_tariff
+$setglobal c_title  BilatPRFade_ON_Nofadeout
 
 scalars
 s_use_gdx   use of gdx files                                       / 0 /

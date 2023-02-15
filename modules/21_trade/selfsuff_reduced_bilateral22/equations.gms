@@ -68,7 +68,7 @@ q21_trade_bilat(h2,k_trade)..
 * Trade tariffs are associated with exporting regions. They are dependent on net exports and tariff levels.
  q21_costs_tariffs(i2,k_trade)..
  v21_cost_tariff_reg(i2,k_trade) =g=
-  sum(i_im, i21_trade_tariff(i2,i_im,k_trade) * v21_trade(i2,i_im,k_trade));
+  sum(i_im, sum(ct, i21_trade_tariff(ct, i2,i_im,k_trade)) * v21_trade(i2,i_im,k_trade));
  
 * Trade margins costs assigned currently to exporting region. Margins at region level 
 q21_costs_margins(i2,k_trade)..
