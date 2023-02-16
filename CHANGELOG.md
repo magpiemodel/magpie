@@ -29,7 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** added restart points after each time step from which the model can now be restarted if the simulation aborts at some point
 - **scripts** added SLURM dayMax submission type for standby QOS
 - **config** added options for afforestation assumptions and updated additional data to 4.38
-- **32_forestry** added switch `s32_aff_prot`
+- **32_forestry** added switch `s32_aff_prot` for protection of afforested areas (0=until end of planning horizon 1=forever)
 - **56_ghg_policy** added two scenarios for GHG emission pricing and options for afforestation
 
 ### removed
