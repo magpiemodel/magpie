@@ -37,7 +37,7 @@ cfg$recalibrate_landconversion_cost    <- TRUE
 cfg$calib_accuracy_landconversion_cost <- 0.05         # def = 0.05
 # What is the maximum number of iterations if the precision goal is not reached?
 cfg$calib_maxiter_landconversion_cost  <- 40           # def = 40
-cfg$best_calib_landconversion_cost     <- FALSE			# def = FALSE
+cfg$best_calib_landconversion_cost     <- FALSE      # def = FALSE
 
 # set upper limit for cropland calibration factor
 cfg$cost_calib_max_landconversion_cost <- 3           # def= 3
