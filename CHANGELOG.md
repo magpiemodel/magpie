@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** recalibrate.R and recalibrate_realization were modified to always use best_calib for the yield calibration.
 - **scripts** when manually running output scripts for multiple runs the lockfile is only created once
 - **config** input data revision to rev4.81 for trade margin bugfix
+- **config** changed order of output scripts. Some functions in rds_report require gridded outputs.
 
 ### added
 - **sticky_labor** `nl_fix`, `nl_relax` and `nl_release` added
