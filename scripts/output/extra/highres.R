@@ -116,10 +116,7 @@ highres <- function(cfg) {
   download_and_update(cfg)
 
   # set title
-  cfg$title          <- paste(paste0(unlist(strsplit(cfg$title, "_"))[1], "HR", res),
-                              paste0("FSEC", gsub(".*\\_FSEC", "", cfg$title)),
-                              sep = "_")
-
+  cfg$title          <- paste(cfg$title, paste0("HR", res), sep = "_")
   cfg$results_folder <- paste0("output/HR", res, "/:title:")
   cfg$force_replace  <- TRUE
   cfg$recalc_npi_ndc <- TRUE
