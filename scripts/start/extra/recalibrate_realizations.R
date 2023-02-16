@@ -7,7 +7,8 @@
 
 # --------------------------------------------------------
 # description: calculate and store new yield and
-# land conversion cost calib factors for realizations of factor costs
+#              land conversion cost calib factors
+#              for realizations of factor costs
 # --------------------------------------------------------
 
 library(magpie4)
