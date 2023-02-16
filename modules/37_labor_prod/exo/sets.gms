@@ -7,14 +7,14 @@
 
 sets
  rcp37 climate change impact sceanrios
- 		/ rcp119, rcp585 /
+    / rcp119, rcp585 /
 
  metric37 labor productivity impact metric
- 		/ ISO, HOTHAPS /
+    / ISO, HOTHAPS /
 
  intensity37 work intensity level
- 		/ 300W, 400W /
+    / 300W, 400W /
 
  uncertainty37 ESM uncertainty
- 		/ enslower,ensmean,ensupper /
+    / enslower,ensmean,ensupper /
 ;

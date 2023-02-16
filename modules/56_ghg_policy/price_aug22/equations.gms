@@ -13,11 +13,11 @@
 *' CO2 emission subject to emission pricing are calculated based on changes in carbon stocks between timesteps in the interface `vm_carbon_stock`, depending on `c56_carbon_stock_pricing`.
 
  q56_emis_pricing(i2,pollutants,emis_annual) ..
-	v56_emis_pricing(i2,emis_annual,pollutants) =e=
-		vm_emissions_reg(i2,emis_annual,pollutants);
+  v56_emis_pricing(i2,emis_annual,pollutants) =e=
+    vm_emissions_reg(i2,emis_annual,pollutants);
 
  q56_emis_pricing_co2(i2,emis_oneoff) ..
-	v56_emis_pricing(i2,emis_oneoff,"co2_c") =e=
+  v56_emis_pricing(i2,emis_oneoff,"co2_c") =e=
                  sum((cell(i2,j2),emis_land(emis_oneoff,land,c_pools)),
                  (vm_carbon_stock.l(j2,land,c_pools,"actual") - vm_carbon_stock(j2,land,c_pools,"%c56_carbon_stock_pricing%"))/m_timestep_length);
 
@@ -72,8 +72,8 @@
 
  q56_reward_cdr_aff(j2) ..
                  v56_reward_cdr_aff(j2) =e=
-            	 s56_c_price_induced_aff*
-            	 sum(ac,
-            	 (sum(aff_effect,(1-s56_buffer_aff)*vm_cdr_aff(j2,ac,aff_effect)) * sum((cell(i2,j2),ct), p56_c_price_aff(ct,i2,ac)))
-            	 / ((1+sum((cell(i2,j2),ct),pm_interest(ct,i2)))**(ac.off*5)))
+               s56_c_price_induced_aff*
+               sum(ac,
+               (sum(aff_effect,(1-s56_buffer_aff)*vm_cdr_aff(j2,ac,aff_effect)) * sum((cell(i2,j2),ct), p56_c_price_aff(ct,i2,ac)))
+               / ((1+sum((cell(i2,j2),ct),pm_interest(ct,i2)))**(ac.off*5)))
                  *sum((cell(i2,j2),ct),pm_interest(ct,i2)/(1+pm_interest(ct,i2)));

@@ -71,10 +71,10 @@ are multiplied with p57_maccs_costs_integral during optimization (see equations)
 Illustrative example for CH4: Abatement is 0.14 percent at 0$/tC, 0.15 percent at 5 and 10 $/tC, and 0.16 percent at 15 $/tC.
 Emissions before technical mitigation are assumed 1 t CH4.
 
-step 1											0 mio $		0 mio $
-step 2  (0.15-0.14) * 1 tCH4 * 5$/tC*12/44*28 	0.38 mio $	0.38 mio $
-step 3  (0.15-0.15) * 1 tCH4 * 10$/tC*12/44*28 	0 mio $		0.38 mio $
-step 4  (0.16-0.15) * 1 tCH4 * 15$/tC*12/44*28 	1.15 mio $	1.53 mio $
+step 1                      0 mio $   0 mio $
+step 2  (0.15-0.14) * 1 tCH4 * 5$/tC*12/44*28   0.38 mio $  0.38 mio $
+step 3  (0.15-0.15) * 1 tCH4 * 10$/tC*12/44*28  0 mio $   0.38 mio $
+step 4  (0.16-0.15) * 1 tCH4 * 15$/tC*12/44*28  1.15 mio $  1.53 mio $
 
 $offtext
 

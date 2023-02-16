@@ -5,12 +5,12 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-i39_cost_establish(t,i,land) = 0;
-i39_reward_reduction(t,i,land) = 0;
+* ### nl_fix ###
 
-i39_calib(t,i,type39) = f39_calib(t,i,type39);
-* set default values in case of missing input file or s39_ignore_calib = 1
-if(sum((t,i,type39),i39_calib(t,i,type39)) = 0 OR s39_ignore_calib = 1,
-  i39_calib(t,i,"cost") = 1;
-  i39_calib(t,i,"reward") = 0;
-);
+v38_laborhours_need.fx(j,kcr) =  v38_laborhours_need.l(j,kcr);
+v38_capital_need.fx(j,kcr,mobil38) =  v38_capital_need.l(j,kcr,mobil38);
+
+* release v38_relax_CES_lp for linear version of MAgPIE
+v38_relax_CES_lp.l(j,kcr) = 0;
+v38_relax_CES_lp.lo(j,kcr) = -Inf;
+v38_relax_CES_lp.up(j,kcr) = Inf;
