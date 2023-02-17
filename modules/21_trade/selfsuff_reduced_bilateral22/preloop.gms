@@ -23,11 +23,11 @@ elseif (s21_trade_tariff=0),
 
 if ((s21_trade_tariff_fadeout=1),
 loop(t_all,
-   i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) > s21_trade_tariff_startyear AND m_year(t_all) < s21_trade_tariff_targetyear) = ((((m_year(t_all)-s21_trade_tariff_startyear) /
-                                                                                                                                           (s21_trade_tariff_targetyear-s21_trade_tariff_startyear))) * (0-1) + 1) * 
-                                                                                                                                           i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) > s21_trade_tariff_startyear AND m_year(t_all)< s21_trade_tariff_targetyear);
-i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) <= s21_trade_tariff_startyear) = 1 * i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) <= s21_trade_tariff_startyear); 
-i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) >= s21_trade_tariff_targetyear) = 0 * i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) >= s21_trade_tariff_targetyear); 
+   i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) > s21_trade_tariff_startyear AND m_year(t_all) < s21_trade_tariff_targetyear) = (1-((m_year(t_all)-s21_trade_tariff_startyear) /
+                                                                                                                                           (s21_trade_tariff_targetyear-s21_trade_tariff_startyear)) * 
+                                                                                                                                           i21_trade_tariff(t_all,i_ex,i_im,k_trade));
+i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) <= s21_trade_tariff_startyear) = i21_trade_tariff(t_all,i_ex,i_im,k_trade); 
+i21_trade_tariff(t_all,i_ex,i_im,k_trade)$(m_year(t_all) >= s21_trade_tariff_targetyear) = 0 ; 
 );
 );
 
