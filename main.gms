@@ -249,7 +249,7 @@ $setglobal production  flexreg_apr16
 $setglobal residues  flexreg_apr16
 $setglobal processing  substitution_may21
 
-$setglobal trade  selfsuff_reduced_bilateral22
+$setglobal trade  selfsuff_reduced
 $setglobal land_conservation  area_based_apr22
 
 $setglobal ageclass  feb21

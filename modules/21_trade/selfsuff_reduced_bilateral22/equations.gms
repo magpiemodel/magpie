@@ -1,4 +1,4 @@
-*** |  (C) 2008-2021 Potsdam Institute for Climate Impact Research (PIK)
+*** |  (C) 2008-2023 Potsdam Institute for Climate Impact Research (PIK)
 *** |  authors, and contributors see CITATION.cff file. This file is part
 *** |  of MAgPIE and licensed under AGPL-3.0-or-later. Under Section 7 of
 *** |  AGPL-3.0, you are granted additional permissions described in the
@@ -65,22 +65,22 @@ q21_trade_bilat(h2,k_trade)..
  v21_excess_prod(h2,k_trade) =e=
  v21_excess_dem(k_trade)*sum(ct,f21_exp_shr(ct,h2,k_trade));
 
-* Trade tariffs are associated with exporting regions. They are dependent on net exports and tariff levels.
+*' Trade tariffs are associated with exporting regions. They are dependent on net exports and tariff levels.
  q21_costs_tariffs(i2,k_trade)..
  v21_cost_tariff_reg(i2,k_trade) =g=
   sum(i_im, sum(ct, i21_trade_tariff(ct, i2,i_im,k_trade)) * v21_trade(i2,i_im,k_trade));
  
-* Trade margins costs assigned currently to exporting region. Margins at region level 
+*' Trade margins costs assigned currently to exporting region. Margins at region level 
 q21_costs_margins(i2,k_trade)..
  v21_cost_margin_reg(i2,k_trade) =g=
   sum(i_im, i21_trade_margin(i2,i_im,k_trade) * v21_trade(i2,i_im,k_trade));
 
-* regional trade values are the sum of transport margin and tariff costs
+*' regional trade values are the sum of transport margin and tariff costs
 q21_cost_trade_reg(i2,k_trade)..
   v21_cost_trade_reg(i2,k_trade) =g=
   v21_cost_tariff_reg(i2,k_trade) + v21_cost_margin_reg(i2,k_trade);
 
 
-* Regional trade costs are the costs for each region aggregated over all the tradable commodities.
+*' Regional trade costs are the costs for each region aggregated over all the tradable commodities.
  q21_cost_trade(i2)..
  vm_cost_trade(i2) =e= sum(k_trade, v21_cost_trade_reg(i2,k_trade));
