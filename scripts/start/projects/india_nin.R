@@ -21,7 +21,7 @@ general_settings <- function(title) {
 
   ##Downloading new input data
   cfg$force_download <- TRUE
-  cfg$info$flag <- "1801"
+  cfg$info$flag <- "2002"
   cfg$title       <- paste(cfg$info$flag,title,sep="_")
   cfg$results_folder <- "output/:title:"
   cfg$recalibrate <- FALSE
@@ -56,7 +56,7 @@ general_settings2 <- function(title) {
 
   ##Downloading new input data
   cfg$force_download <- TRUE
-  cfg$info$flag <- "1801"
+  cfg$info$flag <- "2002"
   cfg$title       <- paste(cfg$info$flag,title,sep="_")
   cfg$results_folder <- "output/:title:"
   cfg$recalibrate <- FALSE
@@ -79,7 +79,8 @@ cfg <- general_settings(title = "NIN_India_EAT_others")
 #switch towards exogenous diet scenario
 cfg$gms$s15_exo_nin <- 1               # def = 0
 #ensuring EAT switch gets active for other regions
-cfg$gms$s15_exo_diet <- 1               # def = 0
+#Modeified on 1602 I think this setting of exo diet is not needed here when we want to implement NIN india eat others
+#cfg$gms$s15_exo_diet <- 1               # def = 0
 
 start_run(cfg, codeCheck=FALSE)
 
@@ -163,7 +164,7 @@ cfg <- general_settings(title = "NIN_India_EAT_others_High_lib_trade")
 cfg$gms$c21_trade_liberalization  <- "l908080r807070"     # def = l909090r808080
 cfg$gms$s15_exo_nin <- 1               # def = 0
 #ensuring EAT switch gets active for other regions
-cfg$gms$s15_exo_diet <- 1               # def = 0
+#cfg$gms$s15_exo_diet <- 1               # def = 0
 
 start_run(cfg, codeCheck=FALSE)
 
@@ -178,5 +179,50 @@ cfg$gms$c21_trade_liberalization  <- "l908080r807070"     # def = l909090r808080
 cfg$gms$s15_exo_nin <- 1               # def = 0
 #ensuring EAT switch gets active for other regions
 cfg$gms$scen_countries15  <- "IND"
+
+start_run(cfg, codeCheck=FALSE)
+
+
+
+
+###################################################################
+####regionalized####
+cfg <- general_settings(title = "NIN_India_SSP2_others_regionalized")
+
+cfg$gms$c21_trade_liberalization  <- "regionalized"     # def = l909090r808080
+
+cfg$gms$s15_exo_nin <- 1               # def = 0
+#ensuring EAT switch gets active for other regions
+cfg$gms$scen_countries15  <- "IND"
+
+start_run(cfg, codeCheck=FALSE)
+
+
+###################################################################
+#####globalized#############
+cfg <- general_settings(title = "NIN_India_SSP2_others_globalized")
+
+cfg$gms$c21_trade_liberalization  <- "globalized"     # def = l909090r808080
+
+cfg$gms$s15_exo_nin <- 1               # def = 0
+#ensuring EAT switch gets active for other regions
+cfg$gms$scen_countries15  <- "IND"
+
+start_run(cfg, codeCheck=FALSE)
+
+####################################################################333
+##BAU with different trade general_settings
+
+cfg <- general_settings(title = "BAU_globalized")
+cfg$gms$c21_trade_liberalization  <- "globalized"     # def = l909090r808080
+
+start_run(cfg, codeCheck=FALSE)
+
+
+####################################################################333
+##BAU with different trade general_settings
+
+cfg <- general_settings(title = "BAU_regionalized")
+cfg$gms$c21_trade_liberalization  <- "regionalized"     # def = l909090r808080
 
 start_run(cfg, codeCheck=FALSE)
