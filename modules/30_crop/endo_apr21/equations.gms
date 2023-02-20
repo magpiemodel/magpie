@@ -75,3 +75,4 @@
  q30_crop_reg(i2) .. v30_crop_area(i2)
    =e=
    sum(cell(i2,j2), vm_land(j2,"crop"));
+   

@@ -85,8 +85,8 @@ for (be in beV){
 
     for (g in gV){
 
-        cfg$gms$s56_ghgprice_startprice <- g / 40
-        cfg$gms$s56_ghgprice_endprice <- g
+        cfg$gms$s56_ghgprice_startprice <- g / 40 * us00_05
+        cfg$gms$s56_ghgprice_endprice <- g * us00_05
 
         ##############################################
         runflag <- "demand"
