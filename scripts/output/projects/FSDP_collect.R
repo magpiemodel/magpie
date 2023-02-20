@@ -31,8 +31,8 @@ if(!exists("source_include")) {
 ###############################################################################
 
 # For case of sub-folder structure write to the respective folder
-subfolder <- unlist(lapply(strsplit(x = outputdir, split = "/"), FUN = "[", 2))
-title <- basename(outputdir)
+subfolder <- unlist(lapply(strsplit(x = outputdir, split = "/"), FUN = "[", 3))
+title     <- basename(outputdir)
 
 if (all(subfolder == title)) {
   subfolder <- ""
@@ -120,6 +120,9 @@ indicators_main <- getVariables()
 names(indicators_main) <- NULL
 var_reg <- c(indicators_main,
              ### Validation
+             "Biodiversity|Agricultural landscape intactness",
+             "Biodiversity|Biodiversity hotspot intactness",
+             "Biodiversity|Biodiversity hotspot intactness (unitless)",
              "Population",
              "Income",
              "Nutrition|Calorie Supply|+|Crops",
@@ -266,9 +269,9 @@ var_reg <- c(indicators_main,
              "Income|Gini Coefficient",
              "Income|Average Income of Lower 40% of Population",
              "Income|Fraction of Population below half of Median Income",
-             "Income|Number of People Below 1.90$/Day",
-             "Income|Number of People Below 3.20$/Day",
-             "Income|Number of People Below 5.50$/Day"
+             "Income|Number of People Below 1p90 USDppp11/day",
+             "Income|Number of People Below 3p20 USDppp11/day",
+             "Income|Number of People Below 5p50 USDppp11/day"
              )
 var_reg <- unique(var_reg)
 
@@ -278,7 +281,8 @@ var_iso <- c("Population",
              "Nutrition|Anthropometrics|People underweight",
              "Nutrition|Anthropometrics|People obese",
              "Household Expenditure|Food|Expenditure",
-             "Income|Number of People Below 3.20$/Day")
+             "Income|Number of People Below 3p20 USDppp11/day",
+             "Income|Gini Coefficient")
 var_iso <- unique(var_iso)
 
 for (i in 1:length(outputdir)) {
@@ -324,7 +328,7 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing,nc_file)
 
     ## Gridded temperature data from ISIMIP archive for relevant SSP/RCP
-    rcp <- ifelse(thisScen == "BAU", "ssp245", "ssp119")
+    rcp     <- if (thisScen == "BAU") "ssp245" else "ssp119"
     nc_file <- "./input/FSEC_GlobalSurfaceTempPerRCP_v2_16-01-23/FSEC_GlobalSurfaceTempPerRCP_v2_16-01-23.mz"
     if (file.exists(nc_file)) {
       a <- read.magpie(nc_file)[, years, rcp]
@@ -335,7 +339,7 @@ for (i in 1:length(outputdir)) {
     } else missing <- c(missing, nc_file)
 
     ## Crop diversity
-    nc_file <- file.path(outputdir[i], paste0(cfg$title, "-CropDiversityGridded.nc"))
+    nc_file <- file.path(outputdir[i], paste0(cfg$title, "-CropDiversityGridded.mz"))
     if(file.exists(nc_file)) {
       a <- read.magpie(nc_file)[,years, "ShannonCropDiversity"]
       getNames(a) <- "Shannon crop diversity (index)"
@@ -453,7 +457,7 @@ saveRDS(val, file = file.path(unique("output", subfolder), paste0(rev, "_FSDP_va
 message("Plotting figures ...")
 #Add new plots here:
 #https://github.com/pik-piam/m4fsdp/blob/master/R/plotFSDP.R
-plotFSDP(outputfolder = file.path("output",unique(subfolder)),
+plotFSDP(outputfolder = file.path("output", unique(subfolder)),
          reg = reg,
          iso = iso,
          grid = grid,

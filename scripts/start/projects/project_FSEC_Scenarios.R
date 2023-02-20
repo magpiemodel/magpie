@@ -22,7 +22,7 @@ for (scenarioName in c(
   "a_DietMonogastrics", "a_DietRuminants", "a_DietEmptyCals", "a_LessFoodWaste",
   "a_ManureMngmt", "a_LivestockMngmt", "a_BiodivSparing",
   "a_NitrogenEff", "a_RiceMit", "a_CropeffTax",
-  "a_MinWage", "a_Bioplastics",
+  "a_CapitalSubst", "a_MinWage", "a_Bioplastics", "a_LandscapeElements",
   "a_LiberalizedTrade", "a_TimberCities", "a_REDDaff", "a_REDD", "a_CropRotations",
   "a_LandSparing", "a_WaterSparing", "a_PeatlandSparing", "a_AirPollution", "a_SoilCarbon",
   # Scenario combination runs

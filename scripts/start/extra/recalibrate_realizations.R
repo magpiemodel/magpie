@@ -6,7 +6,9 @@
 # |  Contact: magpie@pik-potsdam.de
 
 # --------------------------------------------------------
-# description: calculate and store new yield and land conversion cost calib factors for realizations of factor costs
+# description: calculate and store new yield and
+#              land conversion cost calib factors
+#              for realizations of factor costs
 # --------------------------------------------------------
 
 library(magpie4)
@@ -34,7 +36,6 @@ for (r in realizations) {
   cfg$gms$factor_costs <- r
 
   cfg$best_calib <- TRUE
-
 
   for (fac_req in c("reg", "glo")) {
     cfg$gms$c38_fac_req <- fac_req
