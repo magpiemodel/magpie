@@ -20,15 +20,18 @@
   i38_ces_scale(j2,kcr) *
   (i38_ces_shr(j2,kcr)*sum(mobil38, v38_capital_need(j2,kcr,mobil38))**(-s38_ces_elast_par) +
   (1 - i38_ces_shr(j2,kcr))*(sum(ct, pm_labor_prod(ct,j2) * sum(cell(i2,j2), pm_productivity_gain_from_wages(ct,i2))) * v38_laborhours_need(j2,kcr))**(-s38_ces_elast_par))**(-1/s38_ces_elast_par)
-  =e= 1 ;
+  =e= 1 + v38_relax_CES_lp(j2,kcr);
   
 *' As low labor shares can lead to low agricultural employment, which is not necessarily a desired output, a 
 *' minimum share of labor need can be set.
 
-q38_labor_capital_ratio(i2) .. 
-  sum(ct, p38_min_labor_share(ct,i2)) =l=  vm_cost_prod_crop(i2,"labor") * 
-    (vm_cost_prod_crop(i2,"labor") + sum((mobil38, kcr, cell(i2,j2)), vm_prod(j2,kcr) * v38_capital_need(j2,kcr,mobil38)) * 
-        sum(ct, pm_interest(ct,i2) + s38_depreciation_rate))**(-1);
+q38_labor_share_target(j2) .. 
+  sum(kcr, vm_prod(j2,kcr) * v38_laborhours_need(j2,kcr) * sum((ct, cell(i2,j2)), pm_hourly_costs(ct,i2,"scenario"))) =g=
+             sum(ct, p38_min_labor_share(ct,j2)) * 
+              (sum(kcr, vm_prod(j2,kcr) * v38_laborhours_need(j2,kcr) * 
+                          sum((ct, cell(i2,j2)), pm_hourly_costs(ct,i2,"scenario"))) + 
+               sum((mobil38, kcr), vm_prod(j2,kcr) * v38_capital_need(j2,kcr,mobil38)) *
+                sum((ct, cell(i2,j2)), pm_interest(ct,i2) + s38_depreciation_rate));
 
 *' Labor costs: The labor costs are calculated by multiplying regional aggregated production with labor requirements 
 *' (in hours) per output unit and wages from [36_employment].

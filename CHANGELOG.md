@@ -9,21 +9,66 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
-- **config** and **38_factor_costs** changed name of `s38_fix_capital_need` to `s38_startyear_labor_substitution`
-- **config** added `s38_target_labor_share`, `s38_targetyear_labor_share` and `s38_target_fulfillment` to define labor share target scnarios
-- **38_factor_costs** changed name of set `req` to `factors` (also used in 11_costs, 57_maccs, 70_livestock)
-- **38_factos_costs** sticky_labor realization: included option to set a labor share target
-- **15_food** changed `anthro_iso_jun22` realisation such that results in case of `exo_diet = 1/0` and `exo_waste = 1/0` are identical until 2020
-- **62_material** Bioplastic demand identical in all scenarios until 2020
+- **sticky_labor** changed labor cost share constraint from regional to cellular level
+- **sticky_labor** renamed equation `q38_labor_capital_ratio` to `q38_labor_share_target`
+- **15_food** Interpret EAT-Lancet guidelines not as target but as lower/upper limits
+- **config** scenario_fsec.csv updated input data tgz
+- **config** scenario_fsec.csv updated to new biodiversity scenario
+- **scripts** fsec.R and project_FSEC_Scenarios.R include capitalSubst and landscapeElements scenarios
+- **scripts** highres.R changed default resolution to c1000
+- **scripts** recalibrate.R and recalibrate_realization were modified to always use best_calib for the yield calibration.
+- **scripts** when manually running output scripts for multiple runs the lockfile is only created once
+- **config** input data revision to rev4.81 for trade margin bugfix
+- **config** changed order of output scripts. Some functions in rds_report require gridded outputs.
 
 ### added
-- **scripts** added start script which starts an empty model just regenerating a previous run
+- **21_trade** New Bilateral trade realization selfsuff_reduced_bilat22 for bilateral trade within selffsuff constraints
+- **sticky_labor** `nl_fix`, `nl_relax` and `nl_release` added
+- **15_food** half_overweight scenario added
+- **config** added setting cfg$keep_restarts which controls whether restart files should be kept after a run finished
+- **config** changed default for `s_use_gdx` from 2 to 0
+- **scripts** added restart points after each time step from which the model can now be restarted if the simulation aborts at some point
+- **scripts** added SLURM dayMax submission type for standby QOS
+- **config** added options for afforestation assumptions and updated additional data to 4.38
+- **32_forestry** added switch `s32_aff_prot` for protection of afforested areas (0=until end of planning horizon 1=forever)
+- **56_ghg_policy** added two scenarios for GHG emission pricing and options for afforestation
+
+### removed
+- **42_water_demand** removed fm_multicropping factor because of fallow inconsistency
+
+### fixed
+- **scripts** fixed a bug where renvs for high resolution runs were missing some packages
+- **44_biodiversity** added regional layer `i` in `bii_target` realisation to make it compatible with the high-resolution parallel optimization output script
+- **scripts** fixed in the calc_calib.R script the saving of calib_factors used in each iteration to ensure that they correspond to the divergence reported. Changed divergence from zero to NA for those iterations where calib_factors are above the limit. The best_calib selection criterion was changed from selecting the factors of the iteration with the lowest standard deviation to the selection, for each region, of the factor of the iteration with the lowest divergence. Also, factors from the first iteration are now not considered, and if two different factors had the same divergence for a region, the one of the latest iteration is picked.
+- **32_forestry** pm_land_conservation(t,j,"secdforest","restore") now accounts for the rotation length in timber plantations to avoid infeasibilities 
 
 ### removed
 -
 
 ### fixed
--
+- **59_som** division by zero prevented by if condition
+- **14_yields** nl_fix updated to current equation
+
+
+## [4.6.3] - 2023-01-19
+
+### changed
+- **15_food** changed `anthro_iso_jun22` realisation such that results in case of `exo_diet = 1/0` and `exo_waste = 1/0` are identical until 2020
+- **30_crop** identical assumptions for bioenergy until 2020
+- **38_factor_costs** changed name of set `req` to `factors` (also used in 11_costs, 57_maccs, 70_livestock)
+- **38_factos_costs** sticky_labor realization: included option to set a labor share target
+- **62_material** Bioplastic demand identical in all scenarios until 2020
+- **config** added `s38_target_labor_share`, `s38_targetyear_labor_share` and `s38_target_fulfillment` to define labor share target scnarios
+- **config** and **38_factor_costs** changed name of `s38_fix_capital_need` to `s38_startyear_labor_substitution`
+- **config** update input data to rev4.79
+
+### added
+- **31_past** added additional limitation (single climate scenario input) for **grasslands_apr22**
+- **59_som** added new **cellpool_jan23** realization with updated 2019 IPCC guidelines values
+- **scripts** added start script which starts an empty model just regenerating a previous run
+
+### fixed
+- **scripts** make sure that `c_title` in the GAMS code is not containing dots which otherwise could lead to compilation errors
 
 
 ## [4.6.2] - 2023-01-12
@@ -611,7 +656,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.2...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.3...develop
+[4.6.3]: https://github.com/magpiemodel/magpie/compare/v4.6.2...v4.6.3
 [4.6.2]: https://github.com/magpiemodel/magpie/compare/v4.6.1...v4.6.2
 [4.6.1]: https://github.com/magpiemodel/magpie/compare/v4.6.0...v4.6.1
 [4.6.0]: https://github.com/magpiemodel/magpie/compare/v4.5.0...v4.6.0

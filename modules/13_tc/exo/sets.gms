@@ -7,11 +7,11 @@
 
 sets
 
-	scen13 tc cost scenario
-  	  /low, medium, high/
+  scen13 tc cost scenario
+      /low, medium, high/
 
-	tautype tc type
-			/ pastr, crop /
+  tautype tc type
+      / pastr, crop /
 ;
 
 *** EOF sets.gms ***

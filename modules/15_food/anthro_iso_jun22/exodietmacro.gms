@@ -114,8 +114,8 @@ if (s15_run_diet_postprocessing = 1,
 * After the substitution of kfo_rd with SCP (1-i15_rumdairy_scp_fadeout), SCP is converted
 * back to kcal/cap/day using i15_protein_to_kcal_ratio(t,"scp").
   p15_kcal_pc_iso(t,iso,"scp") = p15_kcal_pc_iso(t,iso,"scp") +
-  	sum(kfo_rd, p15_kcal_pc_iso(t,iso,kfo_rd) * (1-i15_rumdairy_scp_fadeout(t,iso)) *
-  	i15_protein_to_kcal_ratio(t,kfo_rd)) / i15_protein_to_kcal_ratio(t,"scp");
+    sum(kfo_rd, p15_kcal_pc_iso(t,iso,kfo_rd) * (1-i15_rumdairy_scp_fadeout(t,iso)) *
+    i15_protein_to_kcal_ratio(t,kfo_rd)) / i15_protein_to_kcal_ratio(t,"scp");
   p15_kcal_pc_iso(t,iso,kfo_rd) = p15_kcal_pc_iso(t,iso,kfo_rd) * i15_rumdairy_scp_fadeout(t,iso);
 
 
@@ -140,9 +140,9 @@ if (s15_run_diet_postprocessing = 1,
                  * (p15_kcal_pc_livestock_supply_target(iso)*(1-i15_livestock_fadeout_threshold(t,iso))
                  + p15_kcal_pc_iso_livestock_orig(t,iso)*i15_livestock_fadeout_threshold(t,iso));
   p15_kcal_pc_iso(t,iso,kfo_pp) = p15_plant_kcal_structure_orig(t,iso,kfo_pp)
-  				* (p15_kcal_pc_iso_plant_orig(t,iso)
-  			    + (p15_kcal_pc_iso_livestock_orig(t,iso) -
-  			    sum(kfo_lp, p15_kcal_pc_iso(t,iso,kfo_lp))) * s15_livescen_target_subst);
+          * (p15_kcal_pc_iso_plant_orig(t,iso)
+            + (p15_kcal_pc_iso_livestock_orig(t,iso) -
+            sum(kfo_lp, p15_kcal_pc_iso(t,iso,kfo_lp))) * s15_livescen_target_subst);
   );
 
 
@@ -273,6 +273,40 @@ $elseif "%c15_kcal_scen%" == "no_overweight"
      im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
      + i15_kcal_pregnancy(t,iso))
      / sum((sex,age), im_demography(t,iso,sex,age));
+$elseif "%c15_kcal_scen%" == "half_overweight"
+          p15_bmi_shr_target(t,iso,sex,age,bmi_group15)=p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15);
+          p15_bmi_shr_target(t,iso,sex,age,"medium")=
+                    p15_bmi_shr_calibrated(t,iso,sex,age,"mediumhigh")/2
+                    + p15_bmi_shr_calibrated(t,iso,sex,age,"high")/2
+                    + p15_bmi_shr_calibrated(t,iso,sex,age,"veryhigh")/2
+                    + p15_bmi_shr_calibrated(t,iso,sex,age,"medium");
+          p15_bmi_shr_target(t,iso,sex,age,"mediumhigh")=p15_bmi_shr_calibrated(t,iso,sex,age,"mediumhigh")/2;
+          p15_bmi_shr_target(t,iso,sex,age,"high")=p15_bmi_shr_calibrated(t,iso,sex,age,"high")/2;
+          p15_bmi_shr_target(t,iso,sex,age,"veryhigh")=p15_bmi_shr_calibrated(t,iso,sex,age,"veryhigh")/2;
+          i15_intake_scen_target(t,iso)$(sum((sex,age), im_demography(t,iso,sex,age)) >0 ) =
+             (sum((sex, age, bmi_group15), p15_bmi_shr_target(t,iso,sex,age,bmi_group15)*
+             im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
+             + i15_kcal_pregnancy(t,iso))
+             / sum((sex,age), im_demography(t,iso,sex,age));
+$elseif "%c15_kcal_scen%" == "no_underweight_half_overweight"
+     p15_bmi_shr_target(t,iso,sex,age,bmi_group15)=p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15);
+     p15_bmi_shr_target(t,iso,sex,age,"medium") =
+              p15_bmi_shr_calibrated(t,iso,sex,age,"verylow")
+               + p15_bmi_shr_calibrated(t,iso,sex,age,"low")
+               + p15_bmi_shr_calibrated(t,iso,sex,age,"mediumhigh")/2
+               + p15_bmi_shr_calibrated(t,iso,sex,age,"high")/2
+               + p15_bmi_shr_calibrated(t,iso,sex,age,"veryhigh")/2
+               + p15_bmi_shr_calibrated(t,iso,sex,age,"medium");
+     p15_bmi_shr_target(t,iso,sex,age,"verylow")=0;
+     p15_bmi_shr_target(t,iso,sex,age,"low")=0;
+     p15_bmi_shr_target(t,iso,sex,age,"mediumhigh")=p15_bmi_shr_calibrated(t,iso,sex,age,"mediumhigh")/2;
+     p15_bmi_shr_target(t,iso,sex,age,"high")=p15_bmi_shr_calibrated(t,iso,sex,age,"high")/2;
+     p15_bmi_shr_target(t,iso,sex,age,"veryhigh")=p15_bmi_shr_calibrated(t,iso,sex,age,"veryhigh")/2;
+     i15_intake_scen_target(t,iso)$(sum((sex,age), im_demography(t,iso,sex,age)) >0 ) =
+        (sum((sex, age, bmi_group15), p15_bmi_shr_target(t,iso,sex,age,bmi_group15)*
+        im_demography(t,iso,sex,age)*p15_intake(t,iso,sex,age,bmi_group15) )
+        + i15_kcal_pregnancy(t,iso))
+        / sum((sex,age), im_demography(t,iso,sex,age));
 $elseif "%c15_kcal_scen%" == "endo"
   i15_intake_scen_target(t,iso) = p15_intake_total(t,iso);
   p15_bmi_shr_target(t,iso,sex,age,bmi_group15) = p15_bmi_shr_calibrated(t,iso,sex,age,bmi_group15);
@@ -298,27 +332,41 @@ $endif
     i15_intake_EATLancet(iso,kfo) =
           i15_intake_EATLancet_all(iso,"2100kcal","%c15_EAT_scen%",kfo);
 
-
+*' upper bound for monogastric meat
     if (s15_exo_monogastric=1,
-      i15_intake_detailed_scen_target(t,iso,EAT_monogastrics15) = i15_intake_EATLancet(iso,EAT_monogastrics15));
+      i15_intake_detailed_scen_target(t,iso,EAT_monogastrics15)$(i15_intake_detailed_scen_target(t,iso,EAT_monogastrics15) > i15_intake_EATLancet(iso,EAT_monogastrics15))
+        = i15_intake_EATLancet(iso,EAT_monogastrics15));
+*' upper bound for ruminant products
     if (s15_exo_ruminant=1,
-        i15_intake_detailed_scen_target(t,iso,EAT_ruminants15) = i15_intake_EATLancet(iso,EAT_ruminants15));
+      i15_intake_detailed_scen_target(t,iso,EAT_ruminants15)$(i15_intake_detailed_scen_target(t,iso,EAT_ruminants15) > i15_intake_EATLancet(iso,EAT_ruminants15))
+        = i15_intake_EATLancet(iso,EAT_ruminants15));
+*' target value for fish
     if (s15_exo_fish=1,
         i15_intake_detailed_scen_target(t,iso,"fish") = i15_intake_EATLancet(iso,"fish"));
+*' lower bound for fruits, veggies, nuts and seeds
     if (s15_exo_fruitvegnut=1,
-      i15_intake_detailed_scen_target(t,iso,EAT_fruitvegnutseed15) = i15_intake_EATLancet(iso,EAT_fruitvegnutseed15));
+      i15_intake_detailed_scen_target(t,iso,EAT_fruitvegnutseed15)$(i15_intake_detailed_scen_target(t,iso,EAT_fruitvegnutseed15) < i15_intake_EATLancet(iso,EAT_fruitvegnutseed15))
+      = i15_intake_EATLancet(iso,EAT_fruitvegnutseed15));
+*' lower bound for pulses
     if (s15_exo_pulses=1,
-      i15_intake_detailed_scen_target(t,iso,EAT_pulses15) = i15_intake_EATLancet(iso,EAT_pulses15));
+      i15_intake_detailed_scen_target(t,iso,EAT_pulses15)$(i15_intake_detailed_scen_target(t,iso,EAT_pulses15) < i15_intake_EATLancet(iso,EAT_pulses15))
+      = i15_intake_EATLancet(iso,EAT_pulses15));
+*' upper bound for sugar
     if (s15_exo_sugar=1,
-      i15_intake_detailed_scen_target(t,iso,EAT_sugar15) = i15_intake_EATLancet(iso,EAT_sugar15));
+      i15_intake_detailed_scen_target(t,iso,EAT_sugar15)$(i15_intake_detailed_scen_target(t,iso,EAT_sugar15) > i15_intake_EATLancet(iso,EAT_sugar15))
+        = i15_intake_EATLancet(iso,EAT_sugar15));
+*' target value for oils
     if (s15_exo_oils=1,
       i15_intake_detailed_scen_target(t,iso,"oils") = i15_intake_EATLancet(iso,"oils"));
+*' target value for brans
     if (s15_exo_brans=1,
       i15_intake_detailed_scen_target(t,iso,"brans") = i15_intake_EATLancet(iso,"brans"));
+*' target value for single cell protein
     if (s15_exo_scp=1,
       i15_intake_detailed_scen_target(t,iso,"scp") = i15_intake_EATLancet(iso,"scp"));
+*' upper bound for alcohol
+* alcohol target is not part of EAT Lancet recommendation. Upper boundary is therefore included as specific switch s15_alc_scen
     if (s15_exo_alcohol=1,
-* alcohol target is not part of EAT Lancet recommendation. Upper boundary is therefore included as specific swtich s15_alc_scen
       i15_intake_detailed_scen_target(t,iso,"alcohol")$(i15_intake_detailed_scen_target(t,iso,"alcohol") > s15_alc_scen*i15_intake_scen_target(t,iso))
         = s15_alc_scen*i15_intake_scen_target(t,iso);
     );

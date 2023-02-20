@@ -229,15 +229,15 @@ p32_aff_togo(t,i) = smax(t2, sum(cell(i,j), p32_aff_pol(t2,j))) - sum(cell(i,j),
 * Calculate the limit for endogenous afforestation
 * The global (`s32_max_aff_area`) and regional limit (`f32_max_aff_area`) for total afforestation (sum of endogenous and exogenous) is reduced by exogenous NPI/NDC afforestation (`p32_aff_pol`).
 if(s32_max_aff_area_glo = 1,
-	i32_max_aff_area_glo(t) = s32_max_aff_area - smax(t2, sum(j, p32_aff_pol(t2,j)));
-	i32_max_aff_area_glo(t)$(i32_max_aff_area_glo(t) < 0) = 0;
-	i32_max_aff_area_glo(t)$(m_year(t) <= sm_fix_SSP2) = Inf;
-	i32_max_aff_area_reg(t,i) = 0;
+  i32_max_aff_area_glo(t) = s32_max_aff_area - smax(t2, sum(j, p32_aff_pol(t2,j)));
+  i32_max_aff_area_glo(t)$(i32_max_aff_area_glo(t) < 0) = 0;
+  i32_max_aff_area_glo(t)$(m_year(t) <= sm_fix_SSP2) = Inf;
+  i32_max_aff_area_reg(t,i) = 0;
 elseif s32_max_aff_area_glo = 0,
-	i32_max_aff_area_reg(t,i) = f32_max_aff_area(i) - smax(t2, sum(cell(i,j), p32_aff_pol(t2,j)));
-	i32_max_aff_area_reg(t,i)$(i32_max_aff_area_reg(t,i) < 0) = 0;
-	i32_max_aff_area_reg(t,i)$(m_year(t) <= sm_fix_SSP2) = Inf;
-	i32_max_aff_area_glo(t) = 0;
+  i32_max_aff_area_reg(t,i) = f32_max_aff_area(i) - smax(t2, sum(cell(i,j), p32_aff_pol(t2,j)));
+  i32_max_aff_area_reg(t,i)$(i32_max_aff_area_reg(t,i) < 0) = 0;
+  i32_max_aff_area_reg(t,i)$(m_year(t) <= sm_fix_SSP2) = Inf;
+  i32_max_aff_area_glo(t) = 0;
 );
 
 *** NPI/NDC policies END
@@ -251,7 +251,7 @@ display ac_bph;
 p32_aff_bgp(j,ac) = 0;
 p32_tcre_glo(j) = 0;
 if(s32_tcre_local = 1,
-	p32_aff_bgp(j,ac_bph) = f32_aff_bgp(j,"%c32_aff_bgp%")/f32_tcre(j,"%c32_tcre_ctrl%")/card(ac_bph);
+  p32_aff_bgp(j,ac_bph) = f32_aff_bgp(j,"%c32_aff_bgp%")/f32_tcre(j,"%c32_tcre_ctrl%")/card(ac_bph);
 else
 *m_weightedmean returns a global value, which is then used assigned to all j. We use land area as weight.
   p32_tcre_glo(j2) = m_weightedmean(f32_tcre(j,"%c32_tcre_ctrl%"),sum(land, pcm_land(j,land)),j)

@@ -15,9 +15,9 @@ q71_feed_rum_liv(j2,kforage) ..
                  vm_prod(j2,kforage) =g=
                   sum(kli_rum, v71_prod_rum(j2,kli_rum,kforage)
                  * sum((ct,cell(i2,j2),kforage2),im_feed_baskets(ct,i2,kli_rum,kforage2))
-				 * (1 + v71_feed_balanceflow(j2,kli_rum,kforage)$(s71_lp_fix=0))
-				 + v71_feed_balanceflow(j2,kli_rum,kforage)$(s71_lp_fix=1))
-				 ;
+         * (1 + v71_feed_balanceflow(j2,kli_rum,kforage)$(s71_lp_fix=0))
+         + v71_feed_balanceflow(j2,kli_rum,kforage)$(s71_lp_fix=1))
+         ;
 
 
 *' The above equation contains a split of pasture and fodder fed ruminants, since we assume that depending
@@ -46,9 +46,9 @@ q71_balanceflow_constraint_lp(i2,kli_rum,kforage)$(s71_lp_fix=1) ..
 *' In each cluster the balance flow is constrained by its share of livestock production regarding the regional level by
 
 q71_balanceflow_constraint_nlp(j2,kli_rum,kforage)$(s71_lp_fix=0) ..
-		         v71_feed_balanceflow(j2,kli_rum,kforage) =e=
-		         sum((ct,cell(i2,j2)),fm_feed_balanceflow(ct,i2,kli_rum,kforage)
-				 /(im_feed_baskets(ct,i2,kli_rum,kforage)*vm_prod_reg(i2,kli_rum) + 10**(-6)))
+             v71_feed_balanceflow(j2,kli_rum,kforage) =e=
+             sum((ct,cell(i2,j2)),fm_feed_balanceflow(ct,i2,kli_rum,kforage)
+         /(im_feed_baskets(ct,i2,kli_rum,kforage)*vm_prod_reg(i2,kli_rum) + 10**(-6)))
                  ;
 
 *' Note that $10^{-6}$ is required to avoid division by zero.
