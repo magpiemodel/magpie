@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **config** changed order of output scripts. Some functions in rds_report require gridded outputs.
 
 ### added
+- **21_trade** New Bilateral trade realization selfsuff_reduced_bilat22 for bilateral trade within selffsuff constraints
 - **sticky_labor** `nl_fix`, `nl_relax` and `nl_release` added
 - **15_food** half_overweight scenario added
 - **config** added setting cfg$keep_restarts which controls whether restart files should be kept after a run finished
