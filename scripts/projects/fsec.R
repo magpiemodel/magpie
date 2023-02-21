@@ -14,7 +14,7 @@ fsecScenario <- function(scenario) {
   source("config/default.cfg")
 
   # Version number
-  v <- "v30_FSEC"
+  v <- "v34_FSEC"
 
   x <- list(c_BAU            = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = "FSEC"),
@@ -136,7 +136,7 @@ fsecScenario <- function(scenario) {
                         "airPollution", "soil", "allDietAndWaste", "allEnvPrice", "RCP19")),
             # Scenarios (combinations of transformation clusters)
             b_ExternalPressures   = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
-                                  fsec = c("FSEC", "population", "institutions", "energy", "bioplastics")),
+                                  fsec = c("FSEC", "population", "institutions", "energy", "bioplastics", "timberCities")),
             b_WaterSoil           = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
                                   fsec = c("FSEC", "waterSparing", "soil")),
             b_REDDaffRuminants    = list(standard = c("cc", "rcp7p0", "SSP2", "NDC", "ForestryEndo"),
@@ -216,16 +216,16 @@ fsecScenario <- function(scenario) {
   cfg$title       <- paste(v, scenario, sep = "")
   cfg$recalibrate <- FALSE
   cfg$qos         <- "standby_maxMem_dayMax"
-  cfg$output      <- c(cfg$output,
-                       "extra/highres",
-                       "rds_report_iso",
+  cfg$output      <- c("extra/highres",
+                       "extra/disaggregation",
                        "extra/disaggregation_BII",
+                       "projects/FSEC_nitrogenPollution",
+                       "projects/FSEC_cropDiversityGrid",
                        "projects/FSEC_dietaryIndicators",
                        "projects/FSEC_costs",
-                       "projects/FSEC_nitrogenPollution",
                        "projects/FSEC_water",
-                       "projects/FSEC_cropDiversityGrid"
-                       )
+                       "rds_report_iso",
+                       "rds_report")
   cfg$force_download  <- TRUE
   cfg$gms$s80_optfile <- 1
 

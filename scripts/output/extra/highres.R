@@ -100,8 +100,8 @@ highres <- function(cfg) {
   #copy gdx file for 1st time step from low resolution run for better starting point
   #note: using gdx files for more than the 1st time step sometimes pushes the model into corner solutions, which might result in infeasibilites.
   cfg$files2export$start <- c(cfg$files2export$start,
-                              paste0(cfg$results_folder,"/","magpie_y1995.gdx"))
-  cfg$gms$s_use_gdx <- 1
+                              paste0(cfg$results_folder, "/", "magpie_y1995.gdx"))
+  cfg$gms$s_use_gdx   <- 1
   cfg$gms$s80_optfile <- 1
 
   #max resources for parallel runs
@@ -116,16 +116,20 @@ highres <- function(cfg) {
   download_and_update(cfg)
 
   # set title
-  cfg$results_folder <- "output/HR/:title:"
-  cfg$force_replace <- TRUE
+  tmp       <- unlist(strsplit(cfg$title, "_"))
+  tmp[1]    <- paste0(tmp[1], paste0("HR", res))
+  cfg$title <- paste(tmp, collapse = "_")
+
+  cfg$results_folder <- paste0("output/HR", res, "/:title:")
+  cfg$force_replace  <- TRUE
   cfg$recalc_npi_ndc <- TRUE
 
   #get trade pattern from low resolution run with c200
-  ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
-  ov_supply <- readGDX(gdx,"ov_supply",select=list(type="level"))
-  supreg <- readGDX(gdx, "supreg")
+  ov_prod_reg <- readGDX(gdx, "ov_prod_reg", select = list(type = "level"))
+  ov_supply   <- readGDX(gdx, "ov_supply", select = list(type = "level"))
+  supreg      <- readGDX(gdx, "supreg")
   f21_trade_balance <- toolAggregate(ov_prod_reg - ov_supply, supreg)
-  write.magpie(f21_trade_balance,paste0("modules/21_trade/input/f21_trade_balance.cs3"))
+  write.magpie(f21_trade_balance, paste0("modules/21_trade/input/f21_trade_balance.cs3"))
 
   #get tau from low resolution run with c200
   ov_tau <- readGDX(gdx, "ov_tau",select=list(type="level"))
@@ -146,7 +150,7 @@ highres <- function(cfg) {
   for (r in getRegions(aff)) {
     aff_max[r,,] <- max(aff[r,,])
   }
-  aff_max[aff_max<0] <- 0
+  aff_max[aff_max < 0] <- 0
   write.magpie(aff_max,"modules/32_forestry/input/f32_max_aff_area.cs4")
   cfg$gms$s32_max_aff_area_glo <- 0
   #check
@@ -157,7 +161,7 @@ highres <- function(cfg) {
 
   Sys.sleep(2)
 
-  start_run(cfg,codeCheck=FALSE,lock_model=FALSE)
+  start_run(cfg, codeCheck = FALSE, lock_model = FALSE)
 
   Sys.sleep(1)
 

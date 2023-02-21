@@ -34,7 +34,7 @@ gms$c31_past_suit_scen;ssp245;ssp126;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;ssp126;ssp
 gms$c32_aff_policy;;;;;;;;;;;;;;;;;;;;;;;;;ndc;;;;;;;;;;;;;;;;;;;
 gms$c32_aff_mask;;;;;;;;;;;;;;;;;;;;;;;;;onlytropical;;;;;;;;;;;;;;;;;;;
 gms$s32_max_aff_area;;;;;;;;;;;;;;;;;;;;;;;;;500;;;;;;;;;;;;;;;;;;;
-gms$c34_urban_scenario;;;;SSP1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+gms$c34_urban_scenario;;;SSP1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$s35_forest_damage_end;2050;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2050;2050;2050;2050;2050;;
 gms$s36_minimum_wage;0;;;;;;3;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$factor_costs;sticky_labor;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -65,9 +65,9 @@ gms$s62_max_dem_bioplastic;0;;;;400;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c70_fac_req_regr;reg;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c70_feed_scen;;;;;;;;;;;;;;;;;;ssp1;;;;;;;;;;;;;;;;;;;;;;;;;;
 gms$c73_build_demand;;;;;;;;;;;;;;;;;;;;;;;;50pc;;;;;;;;;;;;;;;;;;;;
-input['cellular'];rev4.79FSECwageIndex_e2bdb6cd_1b5c3817_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;rev4.79FSECwageIndex_e2bdb6cd_0bd54110_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1.tgz;rev4.79FSECwageIndex_e2bdb6cd_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz
-input['regional'];rev4.79FSECwageIndex_e2bdb6cd_magpie.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-input['validation'];rev4.79FSECwageIndex_e2bdb6cd_validation.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+input['cellular'];rev4.81FSEC_e2bdb6cd_1b5c3817_cellularmagpie_c200_MRI-ESM2-0-ssp245_lpjml-8e6c5eb1.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;rev4.81FSEC_e2bdb6cd_0bd54110_cellularmagpie_c200_MRI-ESM2-0-ssp119_lpjml-8e6c5eb1.tgz;rev4.81FSEC_e2bdb6cd_6819938d_cellularmagpie_c200_MRI-ESM2-0-ssp126_lpjml-8e6c5eb1.tgz
+input['regional'];rev4.81FSEC_e2bdb6cd_magpie.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+input['validation'];rev4.81FSEC_e2bdb6cd_validation.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 input['additional'];additional_data_rev4.37.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-input['calibration'];calibration_FSEC_19Jan23.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+input['calibration'];calibration_FSEC_14Feb23.tgz;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 magicc_emis_scen;bjoernAR6_C_SSP2-NDC.mif;;;bjoernAR6_C_SSP2-PkBudg900.mif;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;bjoernAR6_C_SSP1-NDC.mif;;;;;;

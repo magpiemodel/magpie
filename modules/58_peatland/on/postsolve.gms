@@ -5,11 +5,11 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
-* Update of degraded peatland based on current managed land in the last time steps of fixed peatland area.  
+* Update of degraded peatland based on current managed land in the last time steps of fixed peatland area.
 if (m_year(t) = s58_fix_peatland,
-  p58_scaling_factor(j) = (sum((man58,land58), v58_peatland_man.l(j,man58,land58)) + v58_peatland_intact.l(j)) / sum(land, vm_land.l(j,land));
+  p58_scaling_factor(j)$(sum(land, vm_land.l(j,land)) > 1e-20) = (sum((man58,land58), v58_peatland_man.l(j,man58,land58)) + v58_peatland_intact.l(j)) / sum(land, vm_land.l(j,land));
   p58_calib_factor(j,land58) = 1;
-  p58_calib_factor(j,land58)$(vm_land.l(j,land58) * p58_scaling_factor(j) > 0) = (p58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58)) / (vm_land.l(j,land58)*p58_scaling_factor(j));
+  p58_calib_factor(j,land58)$(vm_land.l(j,land58) * p58_scaling_factor(j) > 1e-20) = (p58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58)) / (vm_land.l(j,land58) * p58_scaling_factor(j));
   p58_calib_factor(j,land58)$(p58_calib_factor(j,land58) > 1) = 1;
   pc58_peatland_man(j,"degrad",land58) = vm_land.l(j,land58) * p58_scaling_factor(j) * p58_calib_factor(j,land58);
   pc58_peatland_man(j,"unused",land58) = p58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58) - pc58_peatland_man(j,"degrad",land58);
