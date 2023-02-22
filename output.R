@@ -9,7 +9,7 @@
 #### MAgPIE output generation ####
 ##########################################################
 
-if (!is.null(renv::project()) && !exists("source_include")) {
+if (!is.null(renv::project()) && !exists("source_include") && Sys.getenv("SLURM_JOB_ID") == "") {
   ask <- function(question) {
     message(question, appendLF = FALSE)
     return(tolower(gms::getLine()) %in% c("", "y", "yes"))
@@ -161,9 +161,9 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
           log <- format(Sys.time(), paste0("logs/out-",rout_name,"-%Y-%H-%M-%S-%OS3.log"))
           system2("Rscript", r_command, stderr = log, stdout = log, wait=FALSE)
         } else if(submit=="slurm standby") {
-          system(paste(sbatch_command, "--qos=standby"))
+          system(paste(sbatch_command, "--qos=standby --time=24:00:00"))
         } else if(submit=="slurm standby maxMem") {
-          system(paste(sbatch_command, "--qos=standby --mem-per-cpu=0 --cpus-per-task=16"))
+          system(paste(sbatch_command, "--qos=standby --time=24:00:00 --mem-per-cpu=0 --cpus-per-task=16"))
         } else if(submit=="slurm priority") {
           system(paste(sbatch_command, "--qos=priority"))
         } else if(submit=="slurm priority maxMem") {
@@ -179,10 +179,10 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     }
   }
 
-  if(is.null(outputdir)) outputdir <- choose_folder("Choose runs")
-  if(is.null(output))     output     <- gms::selectScript("./scripts/output")
-  if(is.null(submit))     submit     <- choose_submit("Choose submission type")
-  if(is.null(output)) {
+  if (is.null(outputdir)) outputdir <- choose_folder("Choose runs")
+  if (is.null(output))     output   <- gms::selectScript("./scripts/output")
+  if (is.null(submit))     submit   <- choose_submit("Choose submission type")
+  if (is.null(output)) {
     message("No output script selected! Stop here.")
     return(invisible(NULL))
   }
@@ -194,22 +194,28 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
   # Write a separate lockfile called {datetime}_{outputscript}_renv.lock into outputdir
   # unless the renv from outputdir itself was used to run output.R
   if (!is.null(renv::project())) {
+    freshLockfile <- withr::local_tempfile()
+
+    message("Generating lockfile... ", appendLF = FALSE)
+    utils::capture.output({
+      utils::capture.output({
+        renv::snapshot(lockfile = freshLockfile, prompt = FALSE)
+      }, type = "message")
+    })
+    message("done.")
+
     datetime <- format(Sys.time(), "%Y-%m-%dT%H%M%S")
     scriptName <- gsub("/", "-", paste(sub("\\.R$", "", output), collapse = "--"))
+
     for (runFolder in setdiff(normalizePath(outputdir), normalizePath(renv::project()))) {
-      lockfile <- file.path(runFolder, "renv.lock")
-      newLockfile <- gsub("//", "/", file.path(runFolder, paste0(datetime, "__", scriptName, "__renv.lock")))
+      newLockfile <- file.path(runFolder, paste0(datetime, "__", scriptName, "__renv.lock"))
 
-      utils::capture.output({
-        utils::capture.output({
-          renv::snapshot(lockfile = newLockfile, prompt = FALSE)
-        }, type = "message")
-      })
+      file.copy(freshLockfile, newLockfile)
 
-      if (!file.exists(lockfile)) {
-        warning(normalizePath(lockfile), " does not exist.")
+      if (!file.exists(file.path(runFolder, "renv.lock"))) {
+        warning(normalizePath(runFolder), "/renv.lock does not exist.")
         message("Lockfile written to ", newLockfile)
-      } else if (identical(readLines(lockfile), readLines(newLockfile))) {
+      } else if (identical(readLines(file.path(runFolder, "renv.lock")), readLines(newLockfile))) {
         file.remove(newLockfile)
       } else {
         message("Lockfile written to ", newLockfile)

@@ -46,10 +46,10 @@ if (s15_elastic_demand = 1 AND m_year(t) > sm_fix_SSP2,
 
 * in case of problems try CONOPT3
   if(m15_food_demand.modelstat > 2,
-	   display "Modelstat > 2 | Retry solve with CONOPT3";
-	   option nlp = conopt;
-	   solve m15_food_demand USING nlp MAXIMIZING v15_objective;
-	   option nlp = conopt4;
+     display "Modelstat > 2 | Retry solve with CONOPT3";
+     option nlp = conopt;
+     solve m15_food_demand USING nlp MAXIMIZING v15_objective;
+     option nlp = conopt4;
   );
 
   p15_modelstat(t) = m15_food_demand.modelstat;
@@ -81,7 +81,7 @@ if (s15_elastic_demand = 1 AND m_year(t) > sm_fix_SSP2,
 
 
   p15_delta_income(t,i,curr_iter15) = p15_income_pc_real_ppp(t,i) /
-						( sum(i_to_iso(i,iso),
+            ( sum(i_to_iso(i,iso),
                                im_gdp_pc_ppp_iso(t,iso)
                                * im_pop_iso(t,iso)
                              ) / sum(i_to_iso(i,iso),

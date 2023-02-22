@@ -28,7 +28,7 @@ if(!exists("source_include")) {
 }
 
 cfg <- gms::loadConfig(file.path(outputdir, "config.yml"))
-gdx	<- file.path(outputdir,"fulldata.gdx")
+gdx <- file.path(outputdir,"fulldata.gdx")
 rds <- paste0(outputdir, "/report.rds")
 runstatistics <- paste0(outputdir,"/runstatistics.rda")
 resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
@@ -37,20 +37,17 @@ resultsarchive <- "/p/projects/rd3mod/models/results/magpie"
 # Load start_run(cfg) function which is needed to start MAgPIE runs
 source("scripts/start_functions.R")
 
-# wait some seconds (random between 5-30 sec) to avoid conflicts with locking the model folder (.lock file)
-Sys.sleep(runif(1, 5, 30))
-
 highres <- function(cfg) {
   #lock the model folder
-  lock_id <- gms::model_lock(timeout1=1,check_interval=runif(1, 10, 30))
-  on.exit(gms::model_unlock(lock_id), add=TRUE)
+  lockId <- gms::model_lock(timeout1 = 1)
+  withr::defer(gms::model_unlock(lockId))
 
   if(any(!(modelstat(gdx) %in% c(2,7)))) stop("Modelstat different from 2 or 7 detected")
 
   cfg$output <- cfg$output[cfg$output!="extra/highres"]
 
   # set high resolution, available options are c1000 and c2000
-  res <- "c2000"
+  res <- "c1000"
 
   # search for matching high resolution file in repositories
   # pattern: "rev4.65_h12_*_cellularmagpie_c2000_MRI-ESM2-0-ssp370_lpjml-3eb70376.tgz"
@@ -103,11 +100,12 @@ highres <- function(cfg) {
   #copy gdx file for 1st time step from low resolution run for better starting point
   #note: using gdx files for more than the 1st time step sometimes pushes the model into corner solutions, which might result in infeasibilites.
   cfg$files2export$start <- c(cfg$files2export$start,
-                              paste0(cfg$results_folder,"/","magpie_y1995.gdx"))
-  cfg$gms$s_use_gdx <- 1
+                              paste0(cfg$results_folder, "/", "magpie_y1995.gdx"))
+  cfg$gms$s_use_gdx   <- 1
+  cfg$gms$s80_optfile <- 1
 
   #max resources for parallel runs
-  cfg$qos <- "priority_maxMem"
+  cfg$qos <- "standby_maxMem_dayMax"
 
   # set force download to FALSE
   # otherwise data is download again when calling start_run(), which overwrites
@@ -118,16 +116,20 @@ highres <- function(cfg) {
   download_and_update(cfg)
 
   # set title
-  cfg$results_folder <- "output/HR/:title:"
-  cfg$force_replace <- TRUE
+  tmp       <- unlist(strsplit(cfg$title, "_"))
+  tmp[1]    <- paste0(tmp[1], paste0("HR", res))
+  cfg$title <- paste(tmp, collapse = "_")
+
+  cfg$results_folder <- paste0("output/HR", res, "/:title:")
+  cfg$force_replace  <- TRUE
   cfg$recalc_npi_ndc <- TRUE
 
   #get trade pattern from low resolution run with c200
-  ov_prod_reg <- readGDX(gdx,"ov_prod_reg",select=list(type="level"))
-  ov_supply <- readGDX(gdx,"ov_supply",select=list(type="level"))
-  supreg <- readGDX(gdx, "supreg")
+  ov_prod_reg <- readGDX(gdx, "ov_prod_reg", select = list(type = "level"))
+  ov_supply   <- readGDX(gdx, "ov_supply", select = list(type = "level"))
+  supreg      <- readGDX(gdx, "supreg")
   f21_trade_balance <- toolAggregate(ov_prod_reg - ov_supply, supreg)
-  write.magpie(f21_trade_balance,paste0("modules/21_trade/input/f21_trade_balance.cs3"))
+  write.magpie(f21_trade_balance, paste0("modules/21_trade/input/f21_trade_balance.cs3"))
 
   #get tau from low resolution run with c200
   ov_tau <- readGDX(gdx, "ov_tau",select=list(type="level"))
@@ -148,7 +150,7 @@ highres <- function(cfg) {
   for (r in getRegions(aff)) {
     aff_max[r,,] <- max(aff[r,,])
   }
-  aff_max[aff_max<0] <- 0
+  aff_max[aff_max < 0] <- 0
   write.magpie(aff_max,"modules/32_forestry/input/f32_max_aff_area.cs4")
   cfg$gms$s32_max_aff_area_glo <- 0
   #check
@@ -159,6 +161,11 @@ highres <- function(cfg) {
 
   Sys.sleep(2)
 
-  start_run(cfg,codeCheck=FALSE,lock_model=FALSE)
+  start_run(cfg, codeCheck = FALSE, lock_model = FALSE)
+
+  Sys.sleep(1)
+
+  if (file.exists("modules/32_forestry/input/f32_max_aff_area.cs4")) file.remove("modules/32_forestry/input/f32_max_aff_area.cs4")
+
 }
 highres(cfg)

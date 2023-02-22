@@ -6,23 +6,23 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- p44_price_bv_loss(t_all)			            Price (subsidy) for biodiversity stock loss (gain) (USD per ha)
+ p44_price_bv_loss(t_all)                 Price (subsidy) for biodiversity stock loss (gain) (USD per ha)
 ;
 
 variables
  v44_bv_loss(j)                                 Change in biodiversity stock (Mha per year)
- vm_cost_bv_loss(j)					            Biodiversity cost (mio USD)
+ vm_cost_bv_loss(j)                     Biodiversity cost (mio USD)
 ;
 
 positive variables
- vm_bv(j,landcover44,potnatveg)		            Biodiversity stock for all land cover classes (Mha)
- v44_bv_weighted(j)				 			    Range-rarity weighted biodiversity stock (Mha)
+ vm_bv(j,landcover44,potnatveg)               Biodiversity stock for all land cover classes (Mha)
+ v44_bv_weighted(j)                 Range-rarity weighted biodiversity stock (Mha)
 ;
 
 equations
  q44_bv_loss(j)                                 Change in biodiversity stock (Mha per year)
- q44_bv_weighted(j)		            			Range-rarity weighted biodiversity stock (Mha)
- q44_cost_bv_loss(j)			                Cost of biodiversity loss (mio USD)
+ q44_bv_weighted(j)                     Range-rarity weighted biodiversity stock (Mha)
+ q44_cost_bv_loss(j)                      Cost of biodiversity loss (mio USD)
 ;
 
 

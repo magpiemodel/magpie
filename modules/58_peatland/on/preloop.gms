@@ -29,7 +29,7 @@ p58_peatland_degrad_weight(j,land58) = 1/card(land58);
 p58_peatland_degrad_weight(j,land58)$(p58_man_land_area(j) > 0) = pcm_land(j,land58) / p58_man_land_area(j);
 * Calibration factor for alignment with historic levels of degraded peatland
 p58_calib_factor(j,land58) = 1;
-p58_calib_factor(j,land58)$(pcm_land(j,land58) * p58_scaling_factor(j) > 0) = (f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58)) / (pcm_land(j,land58)*p58_scaling_factor(j));
+p58_calib_factor(j,land58)$(pcm_land(j,land58) * p58_scaling_factor(j) > 1e-20) = (f58_peatland_degrad(j) * p58_peatland_degrad_weight(j,land58)) / (pcm_land(j,land58)*p58_scaling_factor(j));
 p58_calib_factor(j,land58)$(p58_calib_factor(j,land58) > 1) = 1;
 
 * Initialization of peatland

@@ -18,20 +18,20 @@ positive variables
  vm_land(j,land)                             Land area of the different land types (mio. ha)
  vm_landexpansion(j,land)                    Land expansion (mio. ha)
  vm_landreduction(j,land)                   Land reduction (mio. ha)
- vm_cost_land_transition(j)		               Costs for lu transitions (mio. USD05MER per yr)
+ vm_cost_land_transition(j)                  Costs for lu transitions (mio. USD05MER per yr)
  vm_lu_transitions(j,land_from,land_to) Land transitions between time steps (mio. ha)
- v10_balance_positive(j)					Balance variable for land transitions (mio. ha)
- v10_balance_negative(j)					Balance variable for land transitions (mio. ha)
+ v10_balance_positive(j)          Balance variable for land transitions (mio. ha)
+ v10_balance_negative(j)          Balance variable for land transitions (mio. ha)
 ;
 
 equations
- q10_transition_matrix(j)			        Land transition constraint cell area (mio. ha)
- q10_transition_to(j,land_to)		    Land transition constraint to (mio. ha)
- q10_transition_from(j,land_from)	  Land transition constraint from (mio. ha)
+ q10_transition_matrix(j)             Land transition constraint cell area (mio. ha)
+ q10_transition_to(j,land_to)       Land transition constraint to (mio. ha)
+ q10_transition_from(j,land_from)   Land transition constraint from (mio. ha)
  q10_landexpansion(j,land_to)       Land expansion constraint (mio. ha)
  q10_landreduction(j,land_from)     Land reduction constraint (mio. ha)
- q10_cost(j)                    	    Costs for lu transitions (mio. USD05MER per yr)
- q10_landdiff                        	Land difference constraint (mio. ha)
+ q10_cost(j)                          Costs for lu transitions (mio. USD05MER per yr)
+ q10_landdiff                         Land difference constraint (mio. ha)
 ;
 
 *#################### R SECTION START (OUTPUT DECLARATIONS) ####################

@@ -38,21 +38,21 @@ sets
     / rewet_crop, rewet_past, rewet_forestry /
 
   emis58 Wetland emission types
-	/ co2, doc, ch4, n2o /
+  / co2, doc, ch4, n2o /
 
   emisSub58(emis58) Wetland emission types
-	/ co2, ch4, n2o /
+  / co2, ch4, n2o /
 
   poll58(pollutants) Wetland emissions that can be taxed
-	/ co2_c, ch4, n2o_n_direct /
+  / co2_c, ch4, n2o_n_direct /
   
   emisSub58_to_poll58(emisSub58,poll58) Mapping
-  		/ co2 .(co2_c)		
-  		  ch4 .(ch4)  		
-  		  n2o .(n2o_n_direct) /
+      / co2 .(co2_c)    
+        ch4 .(ch4)      
+        n2o .(n2o_n_direct) /
   
   clcl58 simple climate classes
-	/ tropical, temperate, boreal /
+  / tropical, temperate, boreal /
            
   clcl_mapping(clcl,clcl58) Mapping between detailed and simple climate classes
            /

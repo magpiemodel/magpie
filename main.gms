@@ -5,6 +5,8 @@
 *** |  MAgPIE License Exception, version 1.0 (see LICENSE file).
 *** |  Contact: magpie@pik-potsdam.de
 
+$if set RESTARTPOINT $goto %RESTARTPOINT%
+
 $title magpie
 
 *' @title MAgPIE - Modelling Framework
@@ -146,25 +148,25 @@ $title magpie
 
 *##################### R SECTION START (VERSION INFO) ##########################
 * 
-* Used data set: rev4.79_h12_magpie.tgz
-* md5sum: 4f3f5fd72716fe371d646c69c30e6fd3
+* Used data set: rev4.81_h12_magpie.tgz
+* md5sum: 89bfe8e5c74dd8ba72c023a785d01989
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.79_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
-* md5sum: a18af444eb4a3d24956f66e31e8634d8
+* Used data set: rev4.81_h12_fd712c0b_cellularmagpie_c200_MRI-ESM2-0-ssp370_lpjml-8e6c5eb1.tgz
+* md5sum: 93fa9d97ad83b0bcc4e9ec8e9b741566
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
-* Used data set: rev4.79_h12_validation.tgz
-* md5sum: 0a617c2999127a50146ac106cd6ee4bf
+* Used data set: rev4.81_h12_validation.tgz
+* md5sum: 07eb91a745b1a176ac35cf0d6536d68a
 * Repository: /p/projects/rd3mod/inputdata/output
 * 
 * Used data set: additional_data_rev4.36.tgz
 * md5sum: e24c46872f77dc15ad8603bdac1e6065
 * Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_09Jan23.tgz
-* md5sum: 0fd18901ec047862918bf598ac126411
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: calibration_H12_per_ton_fao_may22_glo_13Feb23.tgz
+* md5sum: e771e9b6f2202124db3f3bc296596b17
+* Repository: /p/projects/landuse/data/input/calibration
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -177,11 +179,11 @@ $title magpie
 * 
 * Regionscode: 62eff8f7
 * 
-* Regions data revision: 4.79
+* Regions data revision: 4.81
 * 
 * lpj2magpie settings:
 * * LPJmL data: MRI-ESM2-0:ssp370
-* * Revision: 4.79
+* * Revision: 4.81
 * 
 * aggregation settings:
 * * Input resolution: 0.5
@@ -192,8 +194,13 @@ $title magpie
 *     6   23    7    6    1   43   27    7   11   12   37   20
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
+* Warning messages:
+* 1: In gms::update_modules_embedding() :
+*   ./modules/38_factor_costs/mixed_reg_feb17/realization.gms not found, this realization cannot be used!
+* 2: In gms::update_modules_embedding() :
+*   ./modules/51_nitrogen/ipcc2006_sep16/realization.gms not found, this realization cannot be used!
 * 
-* Last modification (input data): Tue Jan 17 11:25:32 2023
+* Last modification (input data): Wed Feb 15 19:04:47 2023
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -217,12 +224,12 @@ $offlisting
 **************************MODEL SPECIFIC SCALARS********************************
 *                    Key parameters during model runs
 
-$setglobal c_timesteps  coup2100
+$setglobal c_timesteps  calib
 $setglobal c_past  till_2010
-$setglobal c_title  default
+$setglobal c_title  BilatPRFade_ON_Nofadeout
 
 scalars
-s_use_gdx   use of gdx files                                       / 2 /
+s_use_gdx   use of gdx files                                       / 0 /
 ;
 ********************************************************************************
 
@@ -247,7 +254,7 @@ $setglobal land_conservation  area_based_apr22
 
 $setglobal ageclass  feb21
 
-$setglobal crop  endo_apr21
+$setglobal crop  penalty_apr22
 $setglobal past  endo_jun13
 
 $setglobal forestry  dynamic_feb21
@@ -257,7 +264,7 @@ $setglobal natveg  dynamic_feb21
 
 $setglobal employment  exo_may22
 $setglobal labor_prod  off
-$setglobal factor_costs  per_ton_fao_may22
+$setglobal factor_costs  sticky_feb18
 $setglobal landconversion  calib
 
 $setglobal transport  gtap_nov12

@@ -6,10 +6,10 @@
 *** |  Contact: magpie@pik-potsdam.de
 
 parameters
- i42_wat_req_k(t,j,k)       	      LPJmL annual water demand for irrigation per ha per year (m^3) + Livestock demand per ton (m^3)
- ic42_wat_req_k(j,k)        	      LPJmL annual water demand for irrigation per ha per year (m^3) + Livestock demand per ton (m^3)
+ i42_wat_req_k(t,j,k)               LPJmL annual water demand for irrigation per ha per year (m^3) + Livestock demand per ton (m^3)
+ ic42_wat_req_k(j,k)                LPJmL annual water demand for irrigation per ha per year (m^3) + Livestock demand per ton (m^3)
  i42_env_flows(t,j)                 Environmental flow requirements if a protection policy is in place (mio. m^3)
- i42_env_flows_base(t,j)    	      Environmental flow requirements if no protection policy is in place  (mio. m^3)
+ i42_env_flows_base(t,j)            Environmental flow requirements if no protection policy is in place  (mio. m^3)
  ic42_env_flow_policy(i)            Determines whether environmental flow protection is enforced in the current time step (1)
  i42_env_flow_policy(t,i)           Determines whether environmental flow protection is enforced (1)
  p42_efp(t_all,scen42)              Determines whether environmental flow protection is enforced and its fading in of environmental flow policy (1)

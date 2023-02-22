@@ -6,6 +6,46 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [4.6.4] - 2023-02-22
+
+### changed
+- **15_food** Interpret EAT-Lancet guidelines not as target but as lower/upper limits
+- **config** changed order of output scripts. Some functions in rds_report require gridded outputs.
+- **config** input data revision to rev4.81 for trade margin bugfix
+- **config** scenario_fsec.csv updated input data tgz
+- **config** scenario_fsec.csv updated to new biodiversity scenario
+- **scripts** fsec.R and project_FSEC_Scenarios.R include capitalSubst and landscapeElements scenarios
+- **scripts** highres.R changed default resolution to c1000
+- **scripts** recalibrate.R and recalibrate_realization were modified to always use best_calib for the yield calibration.
+- **scripts** updated FSEC scenario start and output scripts
+- **scripts** when manually running output scripts for multiple runs the lockfile is only created once
+- **sticky_labor** changed labor cost share constraint from regional to cellular level
+- **sticky_labor** renamed equation `q38_labor_capital_ratio` to `q38_labor_share_target`
+
+### added
+- **15_food** half_overweight scenario added
+- **21_trade** New Bilateral trade realization selfsuff_reduced_bilat22 for bilateral trade within selffsuff constraints
+- **32_forestry** added switch `s32_aff_prot` for protection of afforested areas (0=until end of planning horizon 1=forever)
+- **56_ghg_policy** added two scenarios for GHG emission pricing and options for afforestation
+- **config** added options for afforestation assumptions and updated additional data to 4.38
+- **config** added setting cfg$keep_restarts which controls whether restart files should be kept after a run finished
+- **config** changed default for `s_use_gdx` from 2 to 0
+- **scripts** added restart points after each time step from which the model can now be restarted if the simulation aborts at some point
+- **scripts** added SLURM dayMax submission type for standby QOS
+- **sticky_labor** `nl_fix`, `nl_relax` and `nl_release` added
+
+### removed
+- **42_water_demand** removed fm_multicropping factor because of fallow inconsistency
+
+### fixed
+- **14_yields** nl_fix updated to current equation
+- **32_forestry** pm_land_conservation(t,j,"secdforest","restore") now accounts for the rotation length in timber plantations to avoid infeasibilities
+- **44_biodiversity** added regional layer `i` in `bii_target` realisation to make it compatible with the high-resolution parallel optimization output script
+- **59_som** division by zero prevented by if condition
+- **scripts** fixed a bug where renvs for high resolution runs were missing some packages
+- **scripts** fixed in the calc_calib.R script the saving of calib_factors used in each iteration to ensure that they correspond to the divergence reported. Changed divergence from zero to NA for those iterations where calib_factors are above the limit. The best_calib selection criterion was changed from selecting the factors of the iteration with the lowest standard deviation to the selection, for each region, of the factor of the iteration with the lowest divergence. Also, factors from the first iteration are now not considered, and if two different factors had the same divergence for a region, the one of the latest iteration is picked.
+
+
 ## [4.6.3] - 2023-01-19
 
 ### changed
@@ -612,7 +652,8 @@ This release version is focussed on consistency between the MAgPIE setup and the
 First open source release of the framework. See [MAgPIE 4.0 paper](https://doi.org/10.5194/gmd-12-1299-2019) for more information.
 
 
-[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.3...develop
+[Unreleased]: https://github.com/magpiemodel/magpie/compare/v4.6.4...develop
+[4.6.4]: https://github.com/magpiemodel/magpie/compare/v4.6.3...v4.6.4
 [4.6.3]: https://github.com/magpiemodel/magpie/compare/v4.6.2...v4.6.3
 [4.6.2]: https://github.com/magpiemodel/magpie/compare/v4.6.1...v4.6.2
 [4.6.1]: https://github.com/magpiemodel/magpie/compare/v4.6.0...v4.6.1
