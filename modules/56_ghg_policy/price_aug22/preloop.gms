@@ -63,6 +63,11 @@ im_pollutant_prices(t_all,i,pollutants,emis_source)$(m_year(t_all) >= s56_ghgpri
 );
 ***multiply GHG prices with development state to account for institutional requirements needed for implementing a GHG pricing scheme
 im_pollutant_prices(t_all,i,pollutants,emis_source)$(s56_ghgprice_devstate_scaling = 1) = im_pollutant_prices(t_all,i,pollutants,emis_source)*im_development_state(t_all,i);
+im_pollutant_prices(t_all,i,pollutants,emis_source)$(s56_ghgprice_devstate_scaling = 2) = im_pollutant_prices(t_all,i,pollutants,emis_source)*im_development_state(t_all,i)**2;
+
+***multiply GHG prices with governance indicator to account for institutional requirements needed for implementing a GHG pricing scheme
+im_pollutant_prices(t_all,i,pollutants,emis_source)$(s56_ghgprice_devstate_scaling = 3) = im_pollutant_prices(t_all,i,pollutants,emis_source)*im_governance(t_all,i);
+im_pollutant_prices(t_all,i,pollutants,emis_source)$(s56_ghgprice_devstate_scaling = 4) = im_pollutant_prices(t_all,i,pollutants,emis_source)*im_governance(t_all,i)**2;
 
 ***GHG emission policy
 im_pollutant_prices(t_all,i,pollutants,emis_source) = im_pollutant_prices(t_all,i,pollutants,emis_source) * f56_emis_policy("%c56_emis_policy%",pollutants,emis_source);

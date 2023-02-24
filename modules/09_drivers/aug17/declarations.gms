@@ -30,6 +30,7 @@ parameters
 
 * Development State
   im_development_state(t_all,i)                Development state according to the World Bank definition where 0=low income country 1=high income country in high income level  (1)
+  im_governance(t_all,i)                       Governance Index in range from 0 to 1 (1)
   im_physical_inactivity(t_all,iso,sex,age)    Share of population which is physically inactive (1)
   im_demography(t_all,iso,sex,age)             Population by groups (mio. per yr)
 
