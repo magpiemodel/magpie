@@ -15,9 +15,10 @@ source("scripts/start_functions.R")
 # load config
 source("config/default.cfg")
 
-runID <- "v1"
+runID <- "v2"
 
-cfg$qos <- "priority"
+# cfg$sequential <- TRUE
+# cfg$qos <- "priority"
 
 cfg$force_download <- FALSE
 
@@ -29,8 +30,10 @@ cfg$gms$crop <- "endo_apr21"
 cfg$gms$c30_marginal_land <- "q33_marginal"
 
 consv_prio <- c(
-    "none", "30by30", "KBA", "GSN_DSA", "GSN_RarePhen", "GSN_AreaIntct", "GSN_ClimTier1", "GSN_ClimTier2", "BH", "IFL", "BH_IFL","CCA", "GSN_HalfEarth", "PBL_HalfEarth"
+    "none", "KBA", "GSN_DSA", "GSN_RarePhen", "GSN_AreaIntct", "GSN_ClimTier1", "GSN_ClimTier2", "BH", "IFL", "BH_IFL","CCA", "GSN_HalfEarth", "PBL_HalfEarth"
 )
+
+# consv_prio <- "30by30"
 
 for (cp in consv_prio) {
   cfg$gms$c22_protect_scenario <- cp

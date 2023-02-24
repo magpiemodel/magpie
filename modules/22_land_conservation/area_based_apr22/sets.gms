@@ -8,14 +8,14 @@
 sets
 
   consv22_all All conservation options
-  / none, 30by30, KBA, GSN_DSA, GSN_RarePhen, GSN_AreaIntct, GSN_ClimTier1, GSN_ClimTier2, BH,
-    IFL, BH_IFL, IrrC_30pc, IrrC_40pc, IrrC_50pc, IrrC_60pc, IrrC_70pc, IrrC_80pc, IrrC_90pc,
-    IrrC_100pc, CCA, GSN_HalfEarth, PBL_HalfEarth /
+  / none, 30by30, KBA, GSN_DSA, GSN_RarePhen, GSN_AreaIntct, GSN_ClimTier1, GSN_ClimTier2,
+    BH, IFL, BH_IFL, IrrC_50pc, IrrC_75pc, IrrC_95pc, IrrC_99pc, IrrC_75pc_30by30,
+    IrrC_95pc_30by30, IrrC_99pc_30by30, IrrC_100pc, CCA, GSN_HalfEarth, PBL_HalfEarth /
 
   consv_prio22(consv22_all) Conservation priority areas
-  / 30by30, KBA, GSN_DSA, GSN_RarePhen ,GSN_AreaIntct, GSN_ClimTier1, GSN_ClimTier2, BH,
-    IFL, BH_IFL, IrrC_30pc, IrrC_40pc, IrrC_50pc, IrrC_60pc, IrrC_70pc, IrrC_80pc, IrrC_90pc,
-    IrrC_100pc, CCA, GSN_HalfEarth, PBL_HalfEarth /
+  / 30by30, KBA, GSN_DSA, GSN_RarePhen, GSN_AreaIntct, GSN_ClimTier1, GSN_ClimTier2,
+    BH, IFL, BH_IFL, IrrC_50pc, IrrC_75pc, IrrC_95pc, IrrC_99pc, IrrC_75pc_30by30,
+    IrrC_95pc_30by30, IrrC_99pc_30by30, IrrC_100pc, CCA, GSN_HalfEarth, PBL_HalfEarth /
 
   consv_type Type of land conservation
   / protect, restore /

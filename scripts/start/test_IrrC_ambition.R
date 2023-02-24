@@ -15,9 +15,9 @@ source("scripts/start_functions.R")
 # load config
 source("config/default.cfg")
 
-runID <- "v1"
+runID <- "v2"
 
-cfg$qos <- "priority"
+# cfg$qos <- "priority"
 
 cfg$force_download <- FALSE
 
