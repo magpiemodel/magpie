@@ -164,9 +164,9 @@ $title magpie
 * md5sum: e24c46872f77dc15ad8603bdac1e6065
 * Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
 * 
-* Used data set: calibration_H12_09Jan23.tgz
-* md5sum: 0fd18901ec047862918bf598ac126411
-* Repository: /p/projects/rd3mod/mirror/rse.pik-potsdam.de/data/magpie/public
+* Used data set: calibration_H12_per_ton_fao_may22_glo_13Feb23.tgz
+* md5sum: e771e9b6f2202124db3f3bc296596b17
+* Repository: /p/projects/landuse/data/input/calibration
 * 
 * Low resolution: c200
 * High resolution: 0.5
@@ -194,8 +194,13 @@ $title magpie
 *     6   23    7    6    1   43   27    7   11   12   37   20
 * * Call: withCallingHandlers(expr, message = messageHandler, warning = warningHandler,     error = errorHandler)
 * 
+* Warning messages:
+* 1: In gms::update_modules_embedding() :
+*   ./modules/38_factor_costs/mixed_reg_feb17/realization.gms not found, this realization cannot be used!
+* 2: In gms::update_modules_embedding() :
+*   ./modules/51_nitrogen/ipcc2006_sep16/realization.gms not found, this realization cannot be used!
 * 
-* Last modification (input data): Mon Feb 13 21:28:57 2023
+* Last modification (input data): Wed Feb 15 19:04:47 2023
 * 
 *###################### R SECTION END (VERSION INFO) ###########################
 
@@ -221,7 +226,7 @@ $offlisting
 
 $setglobal c_timesteps  calib
 $setglobal c_past  till_2010
-$setglobal c_title  calib_run_sticky_feb18_glo
+$setglobal c_title  BilatPRFade_ON_Nofadeout
 
 scalars
 s_use_gdx   use of gdx files                                       / 0 /
@@ -249,7 +254,7 @@ $setglobal land_conservation  area_based_apr22
 
 $setglobal ageclass  feb21
 
-$setglobal crop  endo_apr21
+$setglobal crop  penalty_apr22
 $setglobal past  endo_jun13
 
 $setglobal forestry  dynamic_feb21

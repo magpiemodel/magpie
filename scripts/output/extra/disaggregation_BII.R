@@ -47,7 +47,7 @@ mapping <- readRDS(map_file)
 
 # Biodiversity intactness indicator (BII) at cluster level
 bii_lr <- BII(gdx, file = NULL, level = "cell", mode = "auto", landClass = "all",
-           bii_coeff = NULL, side_layers = NULL)
+           bii_coeff = NULL, side_layers = NULL, dir = outputdir)
 
 # add BII values for primary other land (BII = 1)
 bii_lr <- mbind(

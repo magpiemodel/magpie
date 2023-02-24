@@ -161,9 +161,9 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
           log <- format(Sys.time(), paste0("logs/out-",rout_name,"-%Y-%H-%M-%S-%OS3.log"))
           system2("Rscript", r_command, stderr = log, stdout = log, wait=FALSE)
         } else if(submit=="slurm standby") {
-          system(paste(sbatch_command, "--qos=standby"))
+          system(paste(sbatch_command, "--qos=standby --time=24:00:00"))
         } else if(submit=="slurm standby maxMem") {
-          system(paste(sbatch_command, "--qos=standby --mem-per-cpu=0 --cpus-per-task=16"))
+          system(paste(sbatch_command, "--qos=standby --time=24:00:00 --mem-per-cpu=0 --cpus-per-task=16"))
         } else if(submit=="slurm priority") {
           system(paste(sbatch_command, "--qos=priority"))
         } else if(submit=="slurm priority maxMem") {
@@ -179,10 +179,10 @@ runOutputs <- function(comp=NULL, output=NULL, outputdir=NULL, submit=NULL) {
     }
   }
 
-  if(is.null(outputdir)) outputdir <- choose_folder("Choose runs")
-  if(is.null(output))     output     <- gms::selectScript("./scripts/output")
-  if(is.null(submit))     submit     <- choose_submit("Choose submission type")
-  if(is.null(output)) {
+  if (is.null(outputdir)) outputdir <- choose_folder("Choose runs")
+  if (is.null(output))     output   <- gms::selectScript("./scripts/output")
+  if (is.null(submit))     submit   <- choose_submit("Choose submission type")
+  if (is.null(output)) {
     message("No output script selected! Stop here.")
     return(invisible(NULL))
   }
