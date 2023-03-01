@@ -114,6 +114,34 @@ getNames(urban_land_hr) <- "urban"
   urban_land_hr <- "static"
 }
 
+# get land conservation data
+wdpa_hr <- NULL
+if (file.exists(file.path(outputdir, "wdpa_baseline_0.5.mz"))){
+  wdpa_hr <- file.path(outputdir, "wdpa_baseline_0.5.mz")
+}
+consv_prio_hr <- NULL
+if (!all(c(cfg$gms$c22_protect_scenario, cfg$gms$c22_protect_scenario_noselect) %in% "none")){
+  if (file.exists(file.path(outputdir, "consv_prio_areas_0.5.mz"))){
+    consv_prio_all <- read.magpie(file.path(outputdir, "consv_prio_areas_0.5.mz"))
+    consv_prio_hr <- new.magpie(cells = getCells(consv_prio_all),
+                                names = getNames(consv_prio_all, dim = 2), fill = 0)
+    iso <- readGDX(gdx, "iso")
+    consv_iso <- readGDX(gdx, "policy_countries22")
+    consv_iso <- consv_iso[consv_iso %in% getItems(consv_prio_all, dim = 1.1)]
+    consv_select <- cfg$gms$c22_protect_scenario
+    consv_noselect <- cfg$gms$c22_protect_scenario_noselect
+
+    if (consv_noselect != "none"){
+      consv_prio_hr <- collapseDim(consv_prio_all[ , , consv_noselect], dim = 3.1)
+    }
+    if (consv_select != "none"){
+      consv_prio_hr[consv_iso, , ] <- collapseDim(consv_prio_all[consv_iso, , consv_select], dim = 3.1)
+    } else if (consv_select == "none"){
+      consv_prio_hr[consv_iso, , ] <- 0
+    }
+  }
+}
+
 # account for country-specific SNV shares in post-processing
 iso <- readGDX(gdx, "iso")
 snv_pol_iso <- readGDX(gdx,"policy_countries30")
@@ -132,7 +160,6 @@ if (is.null(snv_pol_fader)) {
   snv_pol_fader <- readGDX(gdx, "p30_snv_scenario_fader", format = "first_found")
 }
 
-
 # Start interpolation (use interpolateAvlCroplandWeighted from luscale)
 print("Disaggregation")
 land_hr <- interpolateAvlCroplandWeighted(x          = land_lr,
@@ -143,7 +170,9 @@ land_hr <- interpolateAvlCroplandWeighted(x          = land_lr,
                                           marginal_land = marginal_land,
                                           snv_pol_shr = snv_pol_shr,
                                           snv_pol_fader = snv_pol_fader,
-                                          urban_land_hr = urban_land_hr)
+                                          urban_land_hr = urban_land_hr,
+                                          wdpa_hr = wdpa_hr,
+                                          consv_prio_hr = consv_prio_hr)
 
 # Write outputs
 
