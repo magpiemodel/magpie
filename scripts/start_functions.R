@@ -531,14 +531,10 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
          call. = FALSE)
   }
 
-  .bioenergyDemand <- function(mag, mute_ghgprices_until){
+  .bioenergyDemand <- function(mag){
     notGLO <- getRegions(mag)[!(getRegions(mag)=="GLO")]
     out <- mag[,,"Primary Energy Production|Biomass|Energy Crops (EJ/yr)"]*10^3
     dimnames(out)[[3]] <- NULL
-    # Set prices to zero before and in the year given in mute_ghgprices_until
-    y_zeroprices <- getYears(mag) <= mute_ghgprices_until
-    out[,y_zeroprices,]<-0
-
     # delete old input file before updating it
     f <- "./modules/60_bioenergy/input/reg.2ndgen_bioenergy_demand.csv"
     suppressWarnings(unlink(f))
@@ -592,7 +588,7 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
   message("Reading bioenergy_demand from ", path_to_report_bioenergy)
   mag <- .readAndPrepare(path_to_report_bioenergy)
 
-  .bioenergyDemand(mag, mute_ghgprices_until)
+  .bioenergyDemand(mag)
 
   # write emission files, if specified use path_to_report_ghgprices instead of the bioenergy report
   if (is.na(path_to_report_ghgprices)) {

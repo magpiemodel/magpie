@@ -29,12 +29,12 @@ $elseif "%c56_pollutant_prices%" == "emulator"
 $else
  im_pollutant_prices(t_all,i,pollutants,emis_source) = f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices%") * p56_region_price_shr(t_all,i)
                                          + f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices_noselect%") * (1-p56_region_price_shr(t_all,i));
-** Harmonize till 2020 if not coupled or emulator
-loop(t_all$(m_year(t_all) <= sm_fix_SSP2),
-im_pollutant_prices(t_all,i,pollutants,emis_source) = f56_pollutant_prices(t_all,i,pollutants,"R21M42-SSP2-NPi") * p56_region_price_shr(t_all,i)
-                                        + f56_pollutant_prices(t_all,i,pollutants,"R21M42-SSP2-NPi") * (1-p56_region_price_shr(t_all,i));
-);
 $endif
+
+** Harmonize based on c56_mute_ghgprices_until
+loop(t_all$(m_year(t_all) <= m_year("%c56_mute_ghgprices_until%")),
+im_pollutant_prices(t_all,i,pollutants,emis_source) = 0;
+);
 
 
 ***save im_pollutant_prices to parameter
