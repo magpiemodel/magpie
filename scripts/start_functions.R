@@ -592,7 +592,7 @@ getReportData <- function(path_to_report_bioenergy, mute_ghgprices_until = "y201
   message("Reading bioenergy_demand from ", path_to_report_bioenergy)
   mag <- .readAndPrepare(path_to_report_bioenergy)
 
-  .bioenergyDemand(mag)
+  .bioenergyDemand(mag, mute_ghgprices_until)
 
   # write emission files, if specified use path_to_report_ghgprices instead of the bioenergy report
   if (is.na(path_to_report_ghgprices)) {
