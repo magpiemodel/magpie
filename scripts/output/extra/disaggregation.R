@@ -14,7 +14,6 @@ library(lucode2)
 library(magpie4)
 library(luscale)
 library(madrat)
-library(mrcommons)
 library(dplyr)
 library(gms)
 
@@ -100,10 +99,10 @@ if (length(map_file) > 1) {
   if (land == "land_lr") {
     grassland_areas <- readGDX(gdx, "ov31_grass_area")[, , "level"]
     grassland_areas <- collapseNames(grassland_areas)
-    grassland_areas <- setNames(grassland_areas, getNames(grassland_areas) %<>% gsub("range", "range", .) %>% gsub("pastr", "pastr", .))
     land_lr <- mbind(x, grassland_areas)
     drop_past <- !grepl("past$", getNames(land_lr))
     land_lr <- land_lr[, , drop_past]
+    getNames(land_lr) <- gsub("pastr", "past", getNames(land_lr))
     return(land_lr)
   }
 
@@ -113,6 +112,7 @@ if (length(map_file) > 1) {
     land_ini_lr <- mbind(x, grassland_areas)
     drop_past <- !grepl("past$", getNames(land_ini_lr))
     land_ini_lr <- land_ini_lr[, , drop_past]
+    getNames(land_ini_lr) <- gsub("pastr", "past", getNames(land_ini_lr))
     return(land_ini_lr)
   }
 }
@@ -334,7 +334,7 @@ message("Disaggregating BII values")
 
 # Load input data for BII disaggregation
 land_ini_hr <- read.magpie(land_hr_file)[, "y1995", ]
-side_layers_hr <- toolCell2isoCell(read.magpie(luh_side_layers))
+side_layers_hr <- read.magpie(luh_side_layers)
 landArea <- dimSums(land_ini_hr, dim = 3)
 side_layers_lr <- toolAggregate(x = side_layers_hr, rel = map_file, weight = landArea, from = "cell", to = "cluster")
 
