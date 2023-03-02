@@ -36,10 +36,11 @@ loop(t_all$(m_year(t_all) <= m_year("%c56_mute_ghgprices_until%")),
 im_pollutant_prices(t_all,i,pollutants,emis_source) = 0;
 );
 
-** 
-im_pollutant_prices("y2025",i,"co2_c",emis_source) = s56_cprice_ndc;
-im_pollutant_prices("y2030",i,"co2_c",emis_source) = s56_cprice_ndc;
-
+** low C price in case of NDC afforestation policy
+if(sm_ndc_aff_policy = 1,
+  im_pollutant_prices("y2025",i,"co2_c",emis_source) = s56_cprice_ndc;
+  im_pollutant_prices("y2030",i,"co2_c",emis_source) = s56_cprice_ndc;
+);
 ***save im_pollutant_prices to parameter
 p56_pollutant_prices_input(t_all,i,pollutants,emis_source) = im_pollutant_prices(t_all,i,pollutants,emis_source);
 

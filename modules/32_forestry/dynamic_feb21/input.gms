@@ -47,6 +47,7 @@ scalars
   s32_aff_bii_coeff               BII coefficent to be used for CO2 price driven afforestation 0=natural vegetation 1=plantation (1) / 0 /
   s32_max_aff_area_glo            Switch for global or regional afforestation constraint (1) / 1 /
   s32_aff_prot                    Switch for protection of afforested areas (0=until end of planning horizon 1=forever) / 0 /
+  sm_ndc_aff_policy               Interface for NDC afforestation policy / 0 /
 ;
 
 parameter f32_aff_mask(j) afforestation mask (binary)

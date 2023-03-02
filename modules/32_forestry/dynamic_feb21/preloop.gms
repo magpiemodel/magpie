@@ -219,6 +219,12 @@ loop(j,
 *p32_land_start_ac(j,type32,ac) = p32_land("y1995",j,type32,ac);
 
 *** NPI/NDC policies BEGIN
+$ifthen "%c32_aff_policy%" == "ndc"
+ sm_ndc_aff_policy = 1;
+$else
+ sm_ndc_aff_policy = 0;
+$endif
+
 ** Afforestation policies NPI and NDCs
 p32_aff_pol(t,j) = round(f32_aff_pol(t,j,"%c32_aff_policy%"),6);
 
