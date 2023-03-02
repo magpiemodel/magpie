@@ -1,12 +1,13 @@
 #!/usr/bin/env Rscript
 
-if (tryCatch(utils::packageVersion("gms") < "0.24.0", error = function(error) TRUE)) {
-  message("gms >= 0.24.0 is required, installing now...")
+gmsRequiredVersion <- "0.24.1"
+if (tryCatch(utils::packageVersion("gms") < gmsRequiredVersion, error = function(error) TRUE)) {
+  message("gms >= ", gmsRequiredVersion, " is required, installing now...")
   install.packages("gms")
 }
 
 message("Checking files for tabs... ", appendLF = FALSE)
-gms::checkNoTabs(pattern = "\\.(R|Rprofile|gms|cfg|bib)$", exclude = "output/|renv/")
+gms::checkNoTabs(pattern = "\\.(R|Rprofile|gms|cfg|bib)$", excludeFolders = c("output", "renv", ".git"))
 message("done.")
 
 # run codeCheck

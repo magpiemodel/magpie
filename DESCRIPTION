@@ -38,5 +38,6 @@ Imports:
     withr
 Suggests:
     goxygen,
+    languageserver,
     qgraph
 Encoding: UTF-8
