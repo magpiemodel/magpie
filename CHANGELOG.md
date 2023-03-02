@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### changed
 - **scripts** Disaggregation of land use to 0.5° now takes land conservation into account - i.e. cropland expansion is not mapped to areas that are subject to land conservation
-- **scripts** Disaggregation of BII merged into standard disaggregation script
+- **scripts** Disaggregation of BII merged into standard extra/disaggregation.R
 
 ### added
 -
