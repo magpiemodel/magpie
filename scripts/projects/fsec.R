@@ -218,7 +218,6 @@ fsecScenario <- function(scenario) {
   cfg$qos         <- "standby_maxMem_dayMax"
   cfg$output      <- c("extra/highres",
                        "extra/disaggregation",
-                       "extra/disaggregation_BII",
                        "projects/FSEC_nitrogenPollution",
                        "projects/FSEC_cropDiversityGrid",
                        "projects/FSEC_dietaryIndicators",
