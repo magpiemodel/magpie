@@ -100,7 +100,7 @@ $if "%c30_rotation_constraints%" == "off" f30_rotation_min_shr(crp30) = 0;
 
 ********* AVAILABLE CROPLAND *******************************************
 scalar
-s30_annual_max_growth Max annual cropland growth as share of previous cropland (%) / Inf /
+s30_annual_max_growth Max annual cropland growth as share of previous cropland (-) / Inf /
 ;
 
 table f30_avl_cropland(j,marginal_land30) Available land area for cropland (mio. ha)
