@@ -36,6 +36,9 @@ loop(t_all$(m_year(t_all) <= m_year("%c56_mute_ghgprices_until%")),
 im_pollutant_prices(t_all,i,pollutants,emis_source) = 0;
 );
 
+** 
+im_pollutant_prices("y2025",i,"co2_c",emis_source) = s56_cprice_ndc;
+im_pollutant_prices("y2030",i,"co2_c",emis_source) = s56_cprice_ndc;
 
 ***save im_pollutant_prices to parameter
 p56_pollutant_prices_input(t_all,i,pollutants,emis_source) = im_pollutant_prices(t_all,i,pollutants,emis_source);
@@ -54,11 +57,6 @@ im_pollutant_prices(t_all,i,"co2_c",emis_source) = im_pollutant_prices(t_all,i,"
 
 ***multiply GHG prices with development state to account for institutional requirements needed for implementing a GHG pricing scheme
 im_pollutant_prices(t_all,i,pollutants,emis_source)$(s56_ghgprice_devstate_scaling = 1) = im_pollutant_prices(t_all,i,pollutants,emis_source)*im_development_state(t_all,i);
-im_pollutant_prices(t_all,i,pollutants,emis_source)$(s56_ghgprice_devstate_scaling = 2) = im_pollutant_prices(t_all,i,pollutants,emis_source)*im_development_state(t_all,i)**2;
-
-***multiply GHG prices with governance indicator to account for institutional requirements needed for implementing a GHG pricing scheme
-im_pollutant_prices(t_all,i,pollutants,emis_source)$(s56_ghgprice_devstate_scaling = 3) = im_pollutant_prices(t_all,i,pollutants,emis_source)*im_governance(t_all,i);
-im_pollutant_prices(t_all,i,pollutants,emis_source)$(s56_ghgprice_devstate_scaling = 4) = im_pollutant_prices(t_all,i,pollutants,emis_source)*im_governance(t_all,i)**2;
 
 ***GHG emission policy
 im_pollutant_prices(t_all,i,pollutants,emis_source) = im_pollutant_prices(t_all,i,pollutants,emis_source) * f56_emis_policy("%c56_emis_policy%",pollutants,emis_source);

@@ -26,8 +26,6 @@ v32_land_reduction.fx(j,type32,ac_est) = 0;
    p32_aff_pot(t,j)$(p32_aff_pot(t,j) < 0) = 0;
 * Limit prescribed NPI/NDC afforestation in `p32_aff_pol_timestep` if not enough suitable area (`p32_aff_pot`) for afforestation is available
    p32_aff_pol_timestep(t,j)$(p32_aff_pol_timestep(t,j) > p32_aff_pot(t,j)) = p32_aff_pot(t,j);
-*' No afforestation is allowed if carbon density <= 20 tc/ha
-    p32_aff_pol_timestep(t,j)$(fm_carbon_density(t,j,"forestry","vegc") <= 20) = 0;
 ** END ndc **
 
 *' @code
