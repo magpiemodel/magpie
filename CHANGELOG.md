@@ -9,16 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
--
+- **56_ghg_policy** renamed `cfg$mute_ghgprices_until` to `cfg$gms$c56_mute_ghgprices_until`
 
 ### added
--
+- **32_forestry** added interface `sm_ndc_aff_policy`
 
 ### removed
--
+- **56_ghg_policy** removed `s56_ghgprice_phase_in` and `s56_ghgprice_start`
 
 ### fixed
--
+- **56_ghg_policy** the switch `c56_mute_ghgprices_until` is now always used for coupled as well as standalone runs. 
+- **56_ghg_policy** small CO2 price in 2025 and 2030 in case of NDC afforestation `sm_ndc_aff_policy` to guide land-use decisions
 
 
 ## [4.6.4] - 2023-02-22

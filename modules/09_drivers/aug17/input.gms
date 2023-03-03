@@ -39,11 +39,6 @@ $ondelim
 $include "./modules/09_drivers/input/f09_development_state.cs3"
 $offdelim;
 
-table f09_governance(t_all,i,pop_gdp_scen09) Governance Index in range from 0 to 1 (1)
-$ondelim
-$include "./modules/09_drivers/input/f09_governance_indicator.cs3"
-$offdelim;
-
 table f09_demography(t_all,iso,demography_scen09,sex,age) Population (mio. capita per yr)
 $ondelim
 $include "./modules/09_drivers/input/f09_demography.cs3"
