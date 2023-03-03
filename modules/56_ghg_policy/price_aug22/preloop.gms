@@ -31,18 +31,15 @@ $else
                                          + f56_pollutant_prices(t_all,i,pollutants,"%c56_pollutant_prices_noselect%") * (1-p56_region_price_shr(t_all,i));
 $endif
 
-** Harmonize based on c56_mute_ghgprices_until
-loop(t_all$(m_year(t_all) <= m_year("%c56_mute_ghgprices_until%")),
-im_pollutant_prices(t_all,i,pollutants,emis_source) = 0;
-);
-
-** low C price in case of NDC afforestation policy
-if(sm_ndc_aff_policy = 1,
-  im_pollutant_prices("y2025",i,"co2_c",emis_source) = s56_cprice_ndc;
-  im_pollutant_prices("y2030",i,"co2_c",emis_source) = s56_cprice_ndc;
-);
 ***save im_pollutant_prices to parameter
 p56_pollutant_prices_input(t_all,i,pollutants,emis_source) = im_pollutant_prices(t_all,i,pollutants,emis_source);
+
+** set GHG prices to zero for historic period
+im_pollutant_prices(t_all,i,pollutants,emis_source)$(m_year(t_all) <= sm_fix_SSP2) = 0;
+** set GHG prices to zero for all future time steps until the year defined by `c56_mute_ghgprices_until`
+im_pollutant_prices(t_all,i,pollutants,emis_source)$(m_year(t_all) > sm_fix_SSP2 AND m_year(t_all) <= m_year("%c56_mute_ghgprices_until%")) = 0;
+** Exception for C price, which can be set to a minium price for all future time steps until the year defined by `c56_mute_ghgprices_until`
+im_pollutant_prices(t_all,i,"co2_c",emis_source)$(m_year(t_all) > sm_fix_SSP2 AND m_year(t_all) <= m_year("%c56_mute_ghgprices_until%")) = s56_minimum_cprice;
 
 ***limit CH4 and N2O GHG prices based on s56_limit_ch4_n2o_price
 *12/44 conversion from USD per tC to USD per tCO2

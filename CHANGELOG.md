@@ -14,15 +14,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **scripts** Disaggregation of BII merged into standard extra/disaggregation.R
 
 ### added
-- **32_forestry** added interface `sm_ndc_aff_policy`
+- **56_ghg_policy** added switch `s56_minimum_cprice`
+- **config** minimum CO2 price (`s56_minimum_cprice`) of 5 USD per tCO2 (18 USD per tC) for all future time steps in case of NDC policy to guide land-use decisions
 
 ### removed
 - **56_ghg_policy** removed `s56_ghgprice_phase_in` and `s56_ghgprice_start`
 - **scripts** removed argument `mute_ghgprices_until`, now handeld in GAMS code
 
 ### fixed
-- **56_ghg_policy** the switch `c56_mute_ghgprices_until` is now always used for coupled as well as standalone runs. 
-- **56_ghg_policy** small CO2 price of 5 USD per tCO2 (18 USD per tC) in 2025 and 2030 in case of NDC afforestation `sm_ndc_aff_policy` to guide land-use decisions
+- **56_ghg_policy** the renamed switch `c56_mute_ghgprices_until` is now always used for coupled as well as standalone runs. 
 
 
 ## [4.6.4] - 2023-02-22

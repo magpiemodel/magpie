@@ -38,7 +38,7 @@ sets
 scalars
   s56_limit_ch4_n2o_price upper limit for CH4 and N2O GHG prices (USD05MER per tC) / 4000 /
   s56_cprice_red_factor reduction factor for CO2 price (-) / 1 /
-  s56_cprice_ndc C price for guiding NDC afforestation (USD per tC) / 18 /
+  s56_minimum_cprice Minium C price for future time steps (USD per tC) / 0 /
   s56_ghgprice_devstate_scaling Switch for scaling GHG price with development state (1=on 0=off) / 0 /
   s56_c_price_induced_aff Switch for C price driven afforestation (1=on 0=off) / 1 /
   s56_c_price_exp_aff c price expectation for afforestation (years) / 50 /
