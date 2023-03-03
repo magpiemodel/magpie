@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### changed
-- **56_ghg_policy** renamed `cfg$mute_ghgprices_until` to `cfg$gms$c56_mute_ghgprices_until`
+- **56_ghg_policy** renamed `cfg$mute_ghgprices_until` to `cfg$gms$c56_mute_ghgprices_until` and changed the default to `y2030`, i.e. no GHG emission pricing in the AFOLU sector before (and including) 2030. This setting will be also used in coupled REMIND-MAgPIE runs.
 
 ### added
 - **32_forestry** added interface `sm_ndc_aff_policy`
