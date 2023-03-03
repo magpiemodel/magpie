@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### removed
 - **56_ghg_policy** removed `s56_ghgprice_phase_in` and `s56_ghgprice_start`
+- **scripts** removed argument `mute_ghgprices_until`, now handeld in GAMS code
 
 ### fixed
 - **56_ghg_policy** the switch `c56_mute_ghgprices_until` is now always used for coupled as well as standalone runs. 
