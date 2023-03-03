@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### fixed
 - **56_ghg_policy** the switch `c56_mute_ghgprices_until` is now always used for coupled as well as standalone runs. 
-- **56_ghg_policy** small CO2 price in 2025 and 2030 in case of NDC afforestation `sm_ndc_aff_policy` to guide land-use decisions
+- **56_ghg_policy** small CO2 price of 5 USD per tCO2 (18 USD per tC) in 2025 and 2030 in case of NDC afforestation `sm_ndc_aff_policy` to guide land-use decisions
 
 
 ## [4.6.4] - 2023-02-22
