@@ -283,7 +283,11 @@ var_reg <- c(indicators_main,
              "Income|Fraction of Population below half of Median Income",
              "Income|Number of People Below 1p90 USDppp11/day",
              "Income|Number of People Below 3p20 USDppp11/day",
-             "Income|Number of People Below 5p50 USDppp11/day"
+             "Income|Number of People Below 5p50 USDppp11/day",
+             "Health|Attributable deaths|Risk|Diet and anthropometrics",
+             "Health|Percent change in Attributable deaths|Risk|Diet and anthropometrics",
+             "Health|Years of life lost|Risk|Diet and anthropometric",
+             "Health|Percent change in Years of life lost|Risk|Diet and anthropometrics"
              )
 var_reg <- unique(var_reg)
 
