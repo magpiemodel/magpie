@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### fixed
 - **56_ghg_policy** the renamed switch `c56_mute_ghgprices_until` is now always used for coupled as well as standalone runs. 
+- **31_past** fixed pasture suitability to SSP2 before and including 2020 (only relevant for grassland implementation)
 
 
 ## [4.6.4] - 2023-02-22
